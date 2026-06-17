@@ -1,0 +1,31 @@
+node_modules/
+*.log
+.DS_Store
+Thumbs.db
+_asar_extracted/
+*.bak-*
+
+# Large packaged runtime artifacts
+*.exe
+*.dll
+*.pak
+*.bin
+*.dat
+resources/app.asar
+resources/app.asar.unpacked/
+resources/server/deps.zip
+resources/settings.json
+resources/set.json
+resources/rules/
+resources/bundled-content/
+resources/app-update.yml
+
+# Local generated/cache data
+*.backup
+__pycache__/
+*.pyc
+.claude/
+LICENSE.electron.txt
+LICENSES.chromium.html
+uninstallerIcon.ico
+vk_swiftshader_icd.json

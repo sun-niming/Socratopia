@@ -1,0 +1,1 @@
+globalThis.__RSC_MANIFEST=(globalThis.__RSC_MANIFEST||{});globalThis.__RSC_MANIFEST["/api/tts-audio/route"]={"moduleLoading":{"prefix":"/_next/"},"ssrModuleMapping":{},"edgeSSRModuleMapping":{},"clientModules":{},"entryCSSFiles":{"/Users/leminwu/Documents/Github/socralab-app/v2/src/app/api/tts-audio/route":[]},"rscModuleMapping":{},"edgeRscModuleMapping":{}}
