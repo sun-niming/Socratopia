@@ -28,20 +28,44 @@
     return (prefix || "ev") + "_" + Date.now().toString(36) + "_" + crypto.randomBytes(3).toString("hex");
   }
 
+  function safeSegment(value, name) {
+    if (value === null || value === undefined || typeof value !== "string" || value.trim() === "")
+      throw new Error(name + " must be a non-empty string");
+    if (value.length > 128) throw new Error(name + " exceeds max length (128)");
+    if (value.indexOf("/") >= 0) throw new Error(name + " must not contain '/'");
+    if (value.indexOf("\\") >= 0) throw new Error(name + " must not contain '\\'");
+    if (value.indexOf("..") >= 0)
+      throw new Error(name + " must not contain '..'");
+    if (/[\x00-\x1f\x7f]/.test(value))
+      throw new Error(name + " must not contain control characters");
+    return value;
+  }
+
   function readJSON(filePath) {
     if (!fs.existsSync(filePath)) return null;
-    try { return JSON.parse(fs.readFileSync(filePath, "utf-8")); } catch (e) { return null; }
+    try { return JSON.parse(fs.readFileSync(filePath, "utf-8")); } catch (e) {
+      var corruptPath = filePath + ".corrupt-" + Date.now().toString(36);
+      try { fs.renameSync(filePath, corruptPath); } catch (e2) {}
+      return null;
+    }
   }
 
   function writeJSON(filePath, obj) {
     ensureDir(path.dirname(filePath));
-    fs.writeFileSync(filePath, JSON.stringify(obj, null, 2), "utf-8");
+    var tmp = filePath + ".tmp-" + process.pid + "-" + Math.random().toString(36).slice(2, 8);
+    try {
+      fs.writeFileSync(tmp, JSON.stringify(obj, null, 2), "utf-8");
+      fs.renameSync(tmp, filePath);
+    } catch (e) {
+      try { fs.unlinkSync(tmp); } catch (_) {}
+      throw e;
+    }
   }
 
   // ========== Learner Model ==========
 
   function learnerModelPath(profileId, worldId) {
-    return path.join(dataRoot(), "learner-models", profileId + "_" + worldId + ".json");
+    return path.join(dataRoot(), "learner-models", safeSegment(profileId, "profileId") + "_" + safeSegment(worldId, "worldId") + ".json");
   }
 
   function defaultLearnerModel(profileId, worldId) {
@@ -99,7 +123,7 @@
   // ========== Concept Graph ==========
 
   function conceptGraphPath(profileId, worldId, textbookId) {
-    return path.join(dataRoot(), "concept-graphs", profileId + "_" + worldId + "_" + textbookId + ".json");
+    return path.join(dataRoot(), "concept-graphs", safeSegment(profileId, "profileId") + "_" + safeSegment(worldId, "worldId") + "_" + safeSegment(textbookId, "textbookId") + ".json");
   }
 
   function defaultConceptGraph(profileId, worldId, textbookId) {
@@ -126,6 +150,15 @@
     return g;
   }
 
+  // Read-only query — returns null on miss (no auto-create). Used by GET endpoints.
+  function getConceptGraph(profileId, worldId, textbookId) {
+    if (!profileId || !worldId || !textbookId) return null;
+    var fp = conceptGraphPath(profileId, worldId, textbookId);
+    var g = readJSON(fp);
+    if (!g || !Array.isArray(g.concepts)) return null;
+    return g;
+  }
+
   function saveConceptGraph(profileId, worldId, textbookId, graph) {
     if (!profileId || !worldId || !textbookId) throw new Error("saveConceptGraph requires profileId, worldId, textbookId");
     if (!graph) throw new Error("graph is required");
@@ -141,7 +174,7 @@
   // ========== Teaching Session ==========
 
   function sessionPath(sessionId) {
-    return path.join(dataRoot(), "sessions", sessionId + ".json");
+    return path.join(dataRoot(), "sessions", safeSegment(sessionId, "sessionId") + ".json");
   }
 
   function defaultTeachingSession(sessionId, profileId, worldId, textbookId) {
@@ -198,7 +231,7 @@
   // ========== Teaching Events (append-only JSONL) ==========
 
   function eventsPath(sessionId) {
-    return path.join(dataRoot(), "events", sessionId + ".jsonl");
+    return path.join(dataRoot(), "events", safeSegment(sessionId, "sessionId") + ".jsonl");
   }
 
   function appendTeachingEvent(sessionId, event) {
@@ -255,19 +288,34 @@
     if (!model.reviewQueue) model.reviewQueue = [];
     var now = new Date().toISOString();
     var concepts = model.conceptMastery;
+    var nowDate = new Date();
+    // Remove mastered concepts that were recently reviewed
+    model.reviewQueue = model.reviewQueue.filter(function (r) {
+      var c = concepts[r.conceptId];
+      if (!c || typeof c.score !== "number") return false;
+      if (c.score >= 0.7 && c.lastReviewed && (nowDate - new Date(c.lastReviewed)) <= 7 * 86400000) return false;
+      return true;
+    });
+    // Add or update concepts that need review
     for (var cid in concepts) {
       if (!concepts.hasOwnProperty(cid)) continue;
       var c = concepts[cid];
       if (typeof c.score !== "number") continue;
-      // Concepts under 0.7 or not reviewed in 7 days go into review queue
-      if (c.score < 0.7 || !c.lastReviewed || (new Date() - new Date(c.lastReviewed)) > 7 * 86400000) {
-        var exists = model.reviewQueue.some(function (r) { return r.conceptId === cid; });
-        if (!exists) {
+      if (c.score < 0.7 || !c.lastReviewed || (nowDate - new Date(c.lastReviewed)) > 7 * 86400000) {
+        var found = -1;
+        for (var i = 0; i < model.reviewQueue.length; i++) {
+          if (model.reviewQueue[i].conceptId === cid) { found = i; break; }
+        }
+        var priority = Math.round((1 - c.score) * 10) / 10;
+        if (found >= 0) {
+          model.reviewQueue[found].score = c.score;
+          model.reviewQueue[found].priority = priority;
+        } else {
           model.reviewQueue.push({
             conceptId: cid,
             score: c.score,
             addedAt: now,
-            priority: Math.round((1 - c.score) * 10) / 10
+            priority: priority
           });
         }
       }
@@ -287,6 +335,7 @@
     learnerModelPath: learnerModelPath,
     // Concept Graph
     loadConceptGraph: loadConceptGraph,
+    getConceptGraph: getConceptGraph,
     saveConceptGraph: saveConceptGraph,
     conceptGraphPath: conceptGraphPath,
     // Teaching Session

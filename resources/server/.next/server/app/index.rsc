@@ -178,7 +178,7 @@
 a:I[4581,[],""]
 b:I[2984,["7177","static/chunks/app/layout-2ee9395c59630c5a.js"],"default"]
 c:I[1304,[],"ClientPageRoot"]
-d:I[5027,["7330","static/chunks/d3ac728e-7c3d15b5c35eb56c.js","6626","static/chunks/6626-94bd6b870272b92e.js","4137","static/chunks/4137-131d0676e3b5bef7.js","8974","static/chunks/app/page-3a1fef7566e26c43.js"],"default"]
+d:I[5027,["7330","static/chunks/d3ac728e-7c3d15b5c35eb56c.js","6626","static/chunks/6626-94bd6b870272b92e.js","4137","static/chunks/4137-131d0676e3b5bef7.js","8974","static/chunks/app/page-practice-ui-20260622.js"],"default"]
 10:I[484,[],"OutletBoundary"]
 11:"$Sreact.suspense"
 13:I[484,[],"ViewportBoundary"]

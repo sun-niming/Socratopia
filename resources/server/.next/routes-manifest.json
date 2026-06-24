@@ -213,6 +213,30 @@
       "regex": "^/api/adaptive\\-teaching(?:/)?$",
       "routeKeys": {},
       "namedRegex": "^/api/adaptive\\-teaching(?:/)?$"
+    },
+    {
+      "page": "/api/adaptive-concept-graph",
+      "regex": "^/api/adaptive\\-concept\\-graph(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/adaptive\\-concept\\-graph(?:/)?$"
+    },
+    {
+      "page": "/api/adaptive-diagnosis",
+      "regex": "^/api/adaptive\\-diagnosis(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/adaptive\\-diagnosis(?:/)?$"
+    },
+    {
+      "page": "/api/practice",
+      "regex": "^/api/practice(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/practice(?:/)?$"
+    },
+    {
+      "page": "/api/long-reasoning-demo",
+      "regex": "^/api/long\\-reasoning\\-demo(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/long\\-reasoning\\-demo(?:/)?$"
     }
   ],
   "dataRoutes": [],

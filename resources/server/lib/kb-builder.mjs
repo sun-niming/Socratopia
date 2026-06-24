@@ -1,0 +1,720 @@
+/**
+ * Standalone knowledge-base builder worker (pure JS, no Python).
+ *
+ * Spawned as a detached child process by the textbook upload route after a
+ * textbook is saved. Builds <textbookDir>/knowledge_base/{index.json, cards/,
+ * teaching_map.json} which the runtime __KB_DISTILL__ then consumes verbatim.
+ *
+ * Pipeline:
+ *   PDF  -> pdfjs text extract per page -> sparse image-dense pages rendered
+ *           to PNG -> chunks (text + images) -> multimodal card model (one
+ *           pass: transcribe images + produce structured cards) -> teaching map.
+ *           If card model rejects images -> auto-fall-back to text-only.
+ *           If set.json.vision exists -> optional third-level fallback.
+ *   MD   -> read + split into page-like blocks -> chunk -> card model -> cards.
+ *   PPTX -> extract slide text from OpenXML -> chunk -> card model -> cards.
+ *
+ * ZERO hardcoded config. Every model / apiKey / baseUrl arrives via env, which
+ * the parent fills from global.__SOCRATOPIA_SET__ (set.json + settings.json):
+ *   KB_CARD_BASEURL / KB_CARD_APIKEY / KB_CARD_MODEL / KB_CARD_MAXINPUT  (kb||strong)
+ *   KB_VISION_BASEURL / KB_VISION_APIKEY / KB_VISION_MODEL               (vision; optional fallback)
+ * Job inputs:
+ *   KB_TEXTBOOK_DIR  KB_SRC_PATH  KB_FORMAT(pdf|markdown|pptx)  KB_TITLE  KB_LANG
+ *   KB_START_PAGE  KB_END_PAGE  KB_PAGES_PER_CHUNK  KB_MAX_CHUNKS
+ *
+ * Usage: node kb-builder.mjs   (all input via env)
+ */
+import { readFileSync, writeFileSync, existsSync, mkdirSync } from "fs";
+import { fileURLToPath, pathToFileURL } from "url";
+import path from "path";
+import https from "https";
+import http from "http";
+import { inflateRawSync } from "zlib";
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
+// --- config from env (single source of truth = parent's __SOCRATOPIA_SET__) ---
+const ENV = process.env;
+const TEXTBOOK_DIR = ENV.KB_TEXTBOOK_DIR || "";
+const SRC_PATH = ENV.KB_SRC_PATH || "";
+const FORMAT = (ENV.KB_FORMAT || "pdf").toLowerCase();
+const TITLE = ENV.KB_TITLE || "";
+const LANG = ENV.KB_LANG || "chinese";
+const START_PAGE = parseInt(ENV.KB_START_PAGE || "1", 10);
+const END_PAGE = parseInt(ENV.KB_END_PAGE || "0", 10) || 0; // 0 = to end
+const PAGES_PER_CHUNK = parseInt(ENV.KB_PAGES_PER_CHUNK || "4", 10);
+const MAX_CHUNKS = parseInt(ENV.KB_MAX_CHUNKS || "0", 10); // 0 = no cap
+
+const CARD = {
+  baseUrl: (ENV.KB_CARD_BASEURL || "").replace(/\/$/, ""),
+  apiKey: ENV.KB_CARD_APIKEY || "",
+  model: ENV.KB_CARD_MODEL || "",
+  maxInput: parseInt(ENV.KB_CARD_MAXINPUT || "8000", 10),
+};
+// Premium (high-value) model — used only to escalate ONCE when the mini card
+// model returns 0 cards / unparseable JSON for a chunk. Optional: absent =>
+// no escalation (the existing text-only + vision fallbacks still apply).
+const PREMIUM = {
+  baseUrl: (ENV.KB_PREMIUM_BASEURL || "").replace(/\/$/, ""),
+  apiKey: ENV.KB_PREMIUM_APIKEY || "",
+  model: ENV.KB_PREMIUM_MODEL || "",
+};
+const PREMIUM_OK = !!(PREMIUM.baseUrl && PREMIUM.apiKey && PREMIUM.model);
+const VISION = {
+  baseUrl: (ENV.KB_VISION_BASEURL || "").replace(/\/$/, ""),
+  apiKey: ENV.KB_VISION_APIKEY || "",
+  model: ENV.KB_VISION_MODEL || "",
+};
+const VISION_OK = !!(VISION.baseUrl && VISION.apiKey && VISION.model);
+
+const SPARSE_TEXT_THRESHOLD = 80; // chars; below this a PDF page is "image-dense"
+const KB_DIR = path.join(TEXTBOOK_DIR, "knowledge_base");
+const STATUS_PATH = path.join(KB_DIR, "build_status.json");
+const BUILD_LOG = []; // per-chunk events, flushed into build_status.json
+
+function log(msg) { process.stdout.write("[kb-build] " + msg + "\n"); }
+
+function writeStatus(state, extra) {
+  try {
+    mkdirSync(KB_DIR, { recursive: true });
+    writeStatus._data = Object.assign(
+      { state, title: TITLE, format: FORMAT, updatedAt: new Date().toISOString() },
+      writeStatus._data || {}, extra || {}, { state, updatedAt: new Date().toISOString() },
+    );
+    if (BUILD_LOG.length) writeStatus._data.log = BUILD_LOG.slice();
+    writeFileSync(STATUS_PATH, JSON.stringify(writeStatus._data, null, 2), "utf-8");
+  } catch (e) { log("writeStatus failed: " + (e && e.message)); }
+}
+
+function appendBuildLog(entry) {
+  BUILD_LOG.push(Object.assign({ ts: new Date().toISOString() }, entry));
+}
+
+// ---------------------------------------------------------------------------
+// pdfjs + @napi-rs/canvas loader (resolve by absolute path; ESM ignores NODE_PATH)
+// Mirrors pdf-worker.mjs resolution: packaged (.next/node_modules) then dev.
+// ---------------------------------------------------------------------------
+function resolveDep(subpath) {
+  const prod = path.join(__dirname, "..", ".next", "node_modules", subpath);
+  if (existsSync(prod)) return pathToFileURL(prod).href;
+  const dev = path.join(__dirname, "..", "..", "node_modules", subpath);
+  if (existsSync(dev)) return pathToFileURL(dev).href;
+  for (const root of (process.env.NODE_PATH || "").split(path.delimiter).filter(Boolean)) {
+    const p = path.join(root, subpath);
+    if (existsSync(p)) return pathToFileURL(p).href;
+  }
+  throw new Error("dependency not found: " + subpath);
+}
+
+let _pdfjs = null, _canvas = null;
+async function loadPdfStack() {
+  if (_pdfjs) return;
+  _canvas = await import(resolveDep("@napi-rs/canvas/index.js"));
+  // pdfjs reads these globals at module-load time; provide the real ones.
+  globalThis.DOMMatrix ??= _canvas.DOMMatrix;
+  globalThis.ImageData ??= _canvas.ImageData;
+  globalThis.Path2D ??= _canvas.Path2D;
+  const pdfjs = await import(resolveDep("pdfjs-dist/legacy/build/pdf.mjs"));
+  pdfjs.GlobalWorkerOptions.workerSrc = resolveDep("pdfjs-dist/legacy/build/pdf.worker.mjs");
+  _pdfjs = pdfjs;
+}
+
+function canvasFactory() {
+  const { createCanvas } = _canvas;
+  return {
+    create(w, h) { const c = createCanvas(w, h); return { canvas: c, context: c.getContext("2d") }; },
+    reset(co, w, h) { co.canvas.width = w; co.canvas.height = h; },
+    destroy(co) { co.canvas.width = 0; co.canvas.height = 0; },
+  };
+}
+
+// ---------------------------------------------------------------------------
+// HTTP helpers — use raw http/https (Next patches global.fetch; avoid it), same
+// pattern as server.js __KB_DISTILL_IMPL__.
+// ---------------------------------------------------------------------------
+function postJSON(baseUrl, apiKey, payload, timeoutMs) {
+  return new Promise((resolve, reject) => {
+    const url = new URL(baseUrl.replace(/\/$/, "") + "/chat/completions");
+    const mod = url.protocol === "https:" ? https : http;
+    const body = JSON.stringify(payload);
+    const opts = {
+      method: "POST", agent: false,
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer " + apiKey,
+        "Content-Length": Buffer.byteLength(body),
+        "Connection": "close",
+      },
+    };
+    if (url.protocol === "https:") opts.ALPNProtocols = ["http/1.1"];
+    const to = setTimeout(() => { req.destroy(); reject(new Error("timeout " + timeoutMs + "ms")); }, timeoutMs);
+    const req = mod.request(url, opts, (res) => {
+      const chunks = [];
+      res.on("data", (c) => chunks.push(c));
+      res.on("end", () => {
+        clearTimeout(to);
+        const text = Buffer.concat(chunks).toString("utf-8");
+        if (res.statusCode !== 200) { reject(new Error("HTTP " + res.statusCode + ": " + text.slice(0, 200))); return; }
+        try {
+          const parsed = JSON.parse(text.trim());
+          const msg = parsed.choices && parsed.choices[0] && parsed.choices[0].message;
+          if (!msg) { reject(new Error("no choices[0].message")); return; }
+          resolve(msg.content || msg.reasoning_content || "");
+        } catch (e) { reject(new Error("JSON parse: " + e.message)); }
+      });
+    });
+    req.on("error", (e) => { clearTimeout(to); reject(e); });
+    req.write(body); req.end();
+  });
+}
+
+/**
+ * Call the card model. When images are provided, builds a multimodal content
+ * array (text + image_url data URLs). Falls back gracefully when images are
+ * rejected.
+ *
+ * @param {string} system
+ * @param {string} user
+ * @param {Array<{page:number, pngB64:string}>|null} images
+ * @param {number} maxTokens
+ * @param {boolean} forceJson  default true; set false to skip response_format
+ */
+async function callCardLLM(system, user, images, maxTokens, forceJson, modelBlock) {
+  const block = modelBlock || CARD;
+  const hasImages = images && images.length > 0;
+  let content;
+  if (hasImages) {
+    content = [
+      { type: "text", text: user },
+    ];
+    for (const img of images) {
+      content.push({
+        type: "image_url",
+        image_url: { url: "data:image/png;base64," + img.pngB64 },
+      });
+    }
+  } else {
+    content = user;
+  }
+  const payload = {
+    model: block.model, max_tokens: maxTokens || 8096, stream: false,
+    messages: [{ role: "system", content: system }, { role: "user", content }],
+  };
+  if (forceJson !== false) {
+    payload.response_format = { type: "json_object" };
+  }
+  return postJSON(block.baseUrl, block.apiKey, payload, 180000);
+}
+
+// Vision model call — used ONLY as optional fallback when the multimodal card
+// model cannot handle images and set.json.vision is configured.
+async function callVision(pngB64) {
+  return postJSON(VISION.baseUrl, VISION.apiKey, {
+    model: VISION.model, max_tokens: 4096, stream: false,
+    messages: [{
+      role: "user",
+      content: [
+        { type: "text", text: VISION_PROMPT },
+        { type: "image_url", image_url: { url: "data:image/png;base64," + pngB64 } },
+      ],
+    }],
+  }, 120000);
+}
+
+// Balanced-brace JSON extractor (reasoning models may wrap JSON in prose).
+function extractBalanced(str, from) {
+  let depth = 0, inStr = false, esc = false;
+  for (let i = from; i < str.length; i++) {
+    const ch = str[i];
+    if (inStr) {
+      if (esc) esc = false; else if (ch === "\\") esc = true; else if (ch === '"') inStr = false;
+    } else if (ch === '"') inStr = true;
+    else if (ch === "{") depth++;
+    else if (ch === "}") { depth--; if (depth === 0) return str.slice(from, i + 1); }
+  }
+  return null;
+}
+function parseLLMJson(content, anchorKey) {
+  try { return JSON.parse(content.trim()); } catch (e0) {
+    const re = new RegExp('\\{\\s*"' + anchorKey + '"', "g");
+    let best = null, bestN = -1, m;
+    while ((m = re.exec(content)) !== null) {
+      const blk = extractBalanced(content, m.index);
+      if (!blk) continue;
+      try {
+        const cand = JSON.parse(blk);
+        const n = (cand && cand[anchorKey] && cand[anchorKey].length) || 0;
+        if (n > bestN) { bestN = n; best = cand; }
+      } catch (eb) { /* keep scanning */ }
+    }
+    if (best) return best;
+    throw e0;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Prompts (simplified-Chinese; ported verbatim from the proven server.js path)
+// ---------------------------------------------------------------------------
+const VISION_PROMPT = "你是一名教材内容转录专家。请将这张教材页面图片中的所有文字和内容精确转录为纯文本。\n要求:\n- 保留原文的段落结构和层次\n- 代码/命令保持原格式\n- 表格用文本形式表示\n- 图表/流程图用简洁文字描述其内容和含义\n- 公式用文本表示\n- 忽略页眉、页脚、页码\n- 只输出转录文本,不加任何额外说明或标记\n- 只用简体中文输出(英文术语/代码保持原文)";
+
+const CARD_SYSTEM = "你是一名严谨的学科知识库构建专家,正在把一本教材的原文整理成\u201c已核实知识卡片\u201d。\n这些卡片将来会被一个能力较弱、较廉价的大模型直接用于教学,因此卡片必须:\n1. 准确——只依据给定原文,不臆造原文没有的内容;\n2. 自足——弱模型不读原文也能照卡片把这个知识点讲清楚;\n3. 可核实——凡是你对某条事实没有十足把握(可能是教材笔误、版本差异、记忆模糊),必须把该卡片的 needs_verification 置为 true,并在 verify_query 写出用于联网核实的检索式。\n\n只用简体中文输出。";
+
+function cardUserPrompt(title, start, end, body, hasImages) {
+  let extra = "";
+  if (hasImages) {
+    extra = "\n\n注：以上原文对应的教材页面截图已一并提供（image 格式），请结合图片中的完整内容（图表、公式、特殊排版等）进行抽取。";
+  }
+  return "下面是教材《" + title + "》第 " + start + "-" + end + " 页的原文(含页码标记)。\n请从中抽取**独立的知识点**,每个知识点产出一张卡片。忽略目录、页眉页脚、纯插图说明。\n\n严格输出如下 JSON(不要加 markdown 代码块标记,不要任何额外文字):\n" +
+    "{\"cards\":[{\"title\":\"知识点名称(简短)\",\"definition\":\"准确、自足的定义/说明,弱模型据此即可讲解\",\"key_points\":[\"要点1\",\"要点2\"],\"examples\":[\"来自或贴合原文的示例,代码用文本表示\"],\"misconceptions\":[\"学习者常见的错误理解(如能从原文推断)\"],\"qa_pairs\":[{\"q\":\"考察该点的问题\",\"a\":\"标准答案\"}],\"difficulty\":1,\"prerequisites\":[\"前置知识点名称\"],\"source_pages\":[" + start + "," + end + "],\"needs_verification\":false,\"verify_query\":\"\"}]}\n\n要求:\n- difficulty 取 1-3(1 入门 / 2 进阶 / 3 综合)。\n- source_pages 必须落在 " + start + "-" + end + " 范围内,指向该知识点实际出现的页。\n- 对任何你不确定的事实,把该卡片 needs_verification 设为 true,并写出 verify_query。\n- 没有内容可抽取时返回 {\"cards\":[]}。\n\n原文如下:\n----------------\n" + body + "\n----------------" + extra;
+}
+
+const MAP_SYSTEM = "你是课程设计专家。给定一组知识卡片(来自同一教材的连续页面),请将它们按教学逻辑组织为 2-5 个阶段(phase),使得前序阶段是后续阶段的前置知识。\n\n只用简体中文输出。";
+
+function mapUserPrompt(title, start, end, cardList) {
+  return "下面是从教材《" + title + "》第 " + start + "-" + end + " 页提取出的知识卡片列表(标题+难度):\n" + cardList + "\n\n请输出如下 JSON(不要 markdown 标记,不要额外文字):\n{\"teaching_sequence\":[{\"phase\":1,\"label\":\"阶段名(简短)\",\"card_ids\":[\"卡片title1\",\"卡片title2\"],\"teach_goal\":\"本阶段教学目标(一句话)\",\"branches\":[\"可延伸方向(选填)\"]}]}\n\n要求:\n- 所有卡片必须恰好出现一次,不遗漏不重复。\n- 前序阶段的知识是后续阶段的前置条件。\n- difficulty 低的卡片优先放前面。\n- card_ids 用卡片的 title 字段。";
+}
+
+function slugify(title, idx) {
+  let base = String(title || "").replace(/[^\w\u4e00-\u9fff]+/g, "_").replace(/^_+|_+$/g, "").toLowerCase();
+  base = base ? base.slice(0, 40) : "concept";
+  return String(idx).padStart(3, "0") + "_" + base;
+}
+
+// ---------------------------------------------------------------------------
+// Card normalization — sanitize LLM output so one bad card never drops a chunk.
+// ---------------------------------------------------------------------------
+function toArray(v) {
+  if (Array.isArray(v)) return v;
+  if (typeof v === "string" && v) return [v];
+  return [];
+}
+function toQAPairs(v) {
+  if (!Array.isArray(v)) return [];
+  return v.map(function (x) {
+    if (!x || typeof x !== "object") return { q: "", a: "" };
+    return { q: typeof x.q === "string" ? x.q : String(x.q || ""), a: typeof x.a === "string" ? x.a : String(x.a || "") };
+  }).filter(function (x) { return x.q || x.a; });
+}
+function normalizeCard(raw, chunkStart, chunkEnd) {
+  if (!raw || typeof raw !== "object") return null;
+  var title = typeof raw.title === "string" ? raw.title.trim() : "";
+  var definition = typeof raw.definition === "string" ? raw.definition.trim() : (typeof raw.definition === "object" ? JSON.stringify(raw.definition) : String(raw.definition || ""));
+  var keyPoints = toArray(raw.key_points || raw.keyPoints || raw.keypoints);
+  var examples = toArray(raw.examples);
+  var misconceptions = toArray(raw.misconceptions);
+  var prerequisites = toArray(raw.prerequisites);
+  var qaPairs = toQAPairs(raw.qa_pairs || raw.qaPairs);
+  var difficulty = (typeof raw.difficulty === "number" && raw.difficulty >= 1 && raw.difficulty <= 3) ? raw.difficulty : null;
+  var sourcePages = Array.isArray(raw.source_pages) && raw.source_pages.length >= 2 ? raw.source_pages : [chunkStart, chunkEnd];
+  var needsVerification = !!raw.needs_verification;
+  var verifyQuery = typeof raw.verify_query === "string" ? raw.verify_query.trim() : "";
+  // Reject cards with neither title nor definition (hallucinated empty object)
+  if (!title && !definition) return null;
+  return {
+    title: title,
+    definition: definition,
+    key_points: keyPoints,
+    examples: examples,
+    misconceptions: misconceptions,
+    qa_pairs: qaPairs,
+    difficulty: difficulty,
+    prerequisites: prerequisites,
+    source_pages: sourcePages,
+    needs_verification: needsVerification,
+    verify_query: verifyQuery,
+  };
+}
+
+// ---------------------------------------------------------------------------
+// Extraction
+// ---------------------------------------------------------------------------
+async function extractPdfPageText(page) {
+  const content = await page.getTextContent();
+  const lines = [];
+  let lastY = null;
+  for (const item of content.items) {
+    if (!("str" in item)) continue;
+    const y = item.transform[5];
+    if (lastY !== null && Math.abs(y - lastY) > 2) lines.push("\n");
+    lines.push(item.str);
+    lastY = y;
+  }
+  return lines.join("").trim();
+}
+
+async function renderPageToPngB64(page) {
+  const scale = 150 / 72; // 150 DPI, matches the old fitz pipeline
+  const vp = page.getViewport({ scale });
+  const { createCanvas } = _canvas;
+  const canvas = createCanvas(Math.ceil(vp.width), Math.ceil(vp.height));
+  const ctx = canvas.getContext("2d");
+  await page.render({ canvasContext: ctx, viewport: vp, canvasFactory: canvasFactory() }).promise;
+  return canvas.toBuffer("image/png").toString("base64");
+}
+
+// Extract text from every PDF page.  Image-dense pages (sparse text + visual
+// operators) are also rasterized to PNG and stored alongside the text, so the
+// multimodal card model can read them directly — no separate vision stage.
+//
+// Returns [{page, text, pngB64?}]
+async function extractPdf() {
+  await loadPdfStack();
+  const data = readFileSync(SRC_PATH);
+  const doc = await _pdfjs.getDocument({
+    data: new Uint8Array(data.buffer, data.byteOffset, data.byteLength),
+    useSystemFonts: true, disableAutoFetch: true, disableStream: true,
+  }).promise;
+  const total = doc.numPages;
+  const s = Math.max(1, START_PAGE);
+  const e = END_PAGE > 0 ? Math.min(total, END_PAGE) : total;
+  const pages = [];
+  let renderedCount = 0;
+  for (let pn = s; pn <= e; pn++) {
+    const page = await doc.getPage(pn);
+    const text = await extractPdfPageText(page);
+    let pngB64 = null;
+    if (text.length < SPARSE_TEXT_THRESHOLD) {
+      // Sparse text + has drawn/image ops => image-dense page; render it.
+      let hasVisual = false;
+      try {
+        const ops = await page.getOperatorList();
+        const OPS = _pdfjs.OPS || {};
+        for (const fn of ops.fnArray) {
+          if (fn === OPS.paintImageXObject || fn === OPS.paintInlineImageXObject ||
+              fn === OPS.paintJpegXObject || fn === OPS.paintImageMaskXObject ||
+              fn === OPS.constructPath || fn === OPS.fill || fn === OPS.stroke ||
+              fn === OPS.fillStroke) { hasVisual = true; break; }
+        }
+      } catch (e2) { hasVisual = true; }
+      if (hasVisual) {
+        try {
+          pngB64 = await renderPageToPngB64(page);
+          renderedCount++;
+          log("p." + pn + " text only " + text.length + " chars; rendered to PNG (" + (pngB64 ? Math.round(pngB64.length * 3 / 4 / 1024) + "KB" : "fail") + ")");
+        } catch (ev) { log("render failed p." + pn + ": " + (ev && ev.message)); }
+      }
+    }
+    // Always push — card model can extract text from images even if pdfjs got nothing.
+    pages.push({ page: pn, text: text || "", ...(pngB64 ? { pngB64 } : {}) });
+  }
+  await doc.destroy();
+  log("PDF pages " + s + "-" + e + " of " + total + "; extracted " + pages.length + " (rendered " + renderedCount + " image pages)");
+  return pages;
+}
+
+// Markdown: split into page-like blocks by top-level headings (no rendering).
+function extractMarkdown() {
+  const raw = readFileSync(SRC_PATH, "utf-8");
+  const lines = raw.split(/\r?\n/);
+  const blocks = [];
+  let cur = [];
+  for (const line of lines) {
+    if (/^#{1,2}\s+\S/.test(line) && cur.join("").trim()) { blocks.push(cur.join("\n")); cur = []; }
+    cur.push(line);
+  }
+  if (cur.join("").trim()) blocks.push(cur.join("\n"));
+  const pages = [];
+  blocks.forEach((b, i) => { const t = b.trim(); if (t) pages.push({ page: i + 1, text: t }); });
+  log("Markdown split into " + pages.length + " blocks");
+  return pages;
+}
+
+function readZipEntries(filePath) {
+  const buf = readFileSync(filePath);
+  let eocd = -1;
+  for (let i = buf.length - 22; i >= Math.max(0, buf.length - 0x10000 - 22); i--) {
+    if (buf.readUInt32LE(i) === 0x06054b50) { eocd = i; break; }
+  }
+  if (eocd < 0) throw new Error("invalid zip: end of central directory not found");
+  const total = buf.readUInt16LE(eocd + 10);
+  const cdOffset = buf.readUInt32LE(eocd + 16);
+  const entries = new Map();
+  let p = cdOffset;
+  for (let i = 0; i < total; i++) {
+    if (buf.readUInt32LE(p) !== 0x02014b50) throw new Error("invalid zip: central directory entry");
+    const method = buf.readUInt16LE(p + 10);
+    const compSize = buf.readUInt32LE(p + 20);
+    const nameLen = buf.readUInt16LE(p + 28);
+    const extraLen = buf.readUInt16LE(p + 30);
+    const commentLen = buf.readUInt16LE(p + 32);
+    const localOffset = buf.readUInt32LE(p + 42);
+    const name = buf.slice(p + 46, p + 46 + nameLen).toString("utf-8");
+    p += 46 + nameLen + extraLen + commentLen;
+    if (buf.readUInt32LE(localOffset) !== 0x04034b50) continue;
+    const localNameLen = buf.readUInt16LE(localOffset + 26);
+    const localExtraLen = buf.readUInt16LE(localOffset + 28);
+    const dataStart = localOffset + 30 + localNameLen + localExtraLen;
+    const data = buf.slice(dataStart, dataStart + compSize);
+    if (method === 0) entries.set(name, data);
+    else if (method === 8) entries.set(name, inflateRawSync(data));
+  }
+  return entries;
+}
+
+function xmlText(s) {
+  return String(s || "")
+    .replace(/<!\[CDATA\[([\s\S]*?)\]\]>/g, "$1")
+    .replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&amp;/g, "&")
+    .replace(/&quot;/g, '"').replace(/&apos;/g, "'");
+}
+
+function extractPptxSlideText(xml) {
+  const parts = [];
+  const re = /<a:t\b[^>]*>([\s\S]*?)<\/a:t>/g;
+  let m;
+  while ((m = re.exec(xml)) !== null) {
+    const t = xmlText(m[1]).replace(/\s+/g, " ").trim();
+    if (t) parts.push(t);
+  }
+  return parts.join("\n").trim();
+}
+
+function extractCoreProp(entries, tag) {
+  const core = entries.get("docProps/core.xml");
+  if (!core) return null;
+  const xml = core.toString("utf-8");
+  const m = xml.match(new RegExp("<(?:[^:>]+:)?" + tag + "\\b[^>]*>([\\s\\S]*?)</(?:[^:>]+:)?" + tag + ">"));
+  return m ? xmlText(m[1]).trim() || null : null;
+}
+
+function extractPptx() {
+  const entries = readZipEntries(SRC_PATH);
+  const slideNames = Array.from(entries.keys())
+    .filter((name) => /^ppt\/slides\/slide\d+\.xml$/i.test(name))
+    .sort((a, b) => Number((a.match(/slide(\d+)\.xml/i) || [0, 0])[1]) - Number((b.match(/slide(\d+)\.xml/i) || [0, 0])[1]));
+  const pages = [];
+  for (let i = 0; i < slideNames.length; i++) {
+    const text = extractPptxSlideText(entries.get(slideNames[i]).toString("utf-8"));
+    if (text) pages.push({ page: i + 1, text });
+  }
+  const metaTitle = extractCoreProp(entries, "title");
+  log("PPTX slides " + slideNames.length + "; extracted text from " + pages.length + (metaTitle ? "; title=" + metaTitle : ""));
+  return pages;
+}
+
+function chunkPages(pages, perChunk) {
+  const chunks = [];
+  for (let i = 0; i < pages.length; i += perChunk) {
+    const group = pages.slice(i, i + perChunk);
+    const body = group.map((p) => "[第" + p.page + "页]\n" + p.text).join("\n\n");
+    const images = group.filter((p) => p.pngB64).map((p) => ({ page: p.page, pngB64: p.pngB64 }));
+    chunks.push({ start_page: group[0].page, end_page: group[group.length - 1].page, text: body, images });
+  }
+  return chunks;
+}
+
+// ---------------------------------------------------------------------------
+// Fallback: transcribe rendered page images via the standalone vision model
+// (only used when multimodal card model rejects images AND set.json.vision exists).
+// ---------------------------------------------------------------------------
+async function transcribeImagesViaVision(chunk) {
+  if (!VISION_OK || !chunk.images || !chunk.images.length) return null;
+  log("fallback: transcribing " + chunk.images.length + " image(s) via vision model");
+  const transcribed = [];
+  for (const img of chunk.images) {
+    try {
+      const text = (await callVision(img.pngB64) || "").trim();
+      if (text) transcribed.push("[第" + img.page + "页 视觉转录]\n" + text);
+    } catch (e) { log("vision fallback failed p." + img.page + ": " + (e && e.message)); }
+  }
+  if (!transcribed.length) return null;
+  return transcribed.join("\n\n");
+}
+
+// ---------------------------------------------------------------------------
+// Teaching map: order all cards into staged sequence segments (~16 cards/seg).
+// ---------------------------------------------------------------------------
+async function buildTeachingMap(allCards) {
+  if (!allCards.length) return null;
+  const sorted = allCards.slice().sort((a, b) => (a.source_pages || [0])[0] - (b.source_pages || [0])[0]);
+  const segSize = 16;
+  const results = [];
+  for (let i = 0; i < sorted.length; i += segSize) {
+    const seg = sorted.slice(i, i + segSize);
+    const segStart = Math.min(...seg.map((c) => (c.source_pages || c._chunk_pages)[0]));
+    const segEnd = Math.max(...seg.map((c) => { const sp = c.source_pages || c._chunk_pages; return sp[sp.length - 1]; }));
+    const cardList = seg.map((c) => "- " + (c.title || "?") + " (difficulty=" + (c.difficulty || "?") + ", pages=" + JSON.stringify(c.source_pages || "?") + ")").join("\n");
+    try {
+      const raw = await callCardLLM(MAP_SYSTEM, mapUserPrompt(TITLE, segStart, segEnd, cardList), null, 2048);
+      const obj = parseLLMJson(raw, "teaching_sequence");
+      const seq = obj.teaching_sequence || [];
+      results.push({ page_range: [segStart, segEnd], sequence: seq });
+      log("teaching map segment p." + segStart + "-" + segEnd + ": " + seq.length + " phases");
+    } catch (e) { log("teaching map segment failed: " + (e && e.message)); }
+  }
+  return results.length ? { segments: results } : null;
+}
+
+// ---------------------------------------------------------------------------
+// Generate cards for a single chunk with fallback chain:
+//   1. multimodal (text + images) -> JSON mode
+//   2. text-only -> JSON mode
+//   3. (if vision available) vision transcription -> text-only -> JSON mode
+// ---------------------------------------------------------------------------
+async function generateCardsForChunk(c, ci, total) {
+  const hasImages = c.images && c.images.length > 0;
+  log("chunk " + (ci + 1) + "/" + total + " (p." + c.start_page + "-" + c.end_page + ")" +
+    (hasImages ? " +" + c.images.length + " image(s)" : ""));
+
+  let body = c.text;
+  if (body.length > CARD.maxInput) { body = body.slice(0, CARD.maxInput) + "\n[原文过长,已截断]"; }
+
+  appendBuildLog({
+    type: "chunk_start", chunk: ci + 1,
+    pages: [c.start_page, c.end_page],
+    imageCount: hasImages ? c.images.length : 0,
+  });
+
+  let cards = [];
+  let method = "none";
+
+  // --- Level 1: multimodal card model (text + images + JSON mode) ---
+  if (hasImages) {
+    try {
+      const raw = await callCardLLM(CARD_SYSTEM, cardUserPrompt(TITLE, c.start_page, c.end_page, body, true), c.images, 8096, true);
+      const obj = parseLLMJson(raw, "cards");
+      cards = obj.cards || [];
+      method = "multimodal";
+      appendBuildLog({ type: "card_multimodal_ok", chunk: ci + 1, cardCount: cards.length });
+    } catch (e1) {
+      appendBuildLog({ type: "card_multimodal_fail", chunk: ci + 1, error: (e1 && e1.message) || "unknown" });
+      log("chunk " + (ci + 1) + " multimodal failed: " + (e1 && e1.message) + "; falling back to text-only");
+      cards = []; method = "none";
+    }
+  }
+
+  // --- Level 2: text-only card model (JSON mode, no images) ---
+  if (!cards.length) {
+    try {
+      const raw = await callCardLLM(CARD_SYSTEM, cardUserPrompt(TITLE, c.start_page, c.end_page, body, false), null, 8096, true);
+      const obj = parseLLMJson(raw, "cards");
+      cards = obj.cards || [];
+      if (cards.length) method = method === "none" ? "text-only" : method;
+      appendBuildLog({ type: "card_text_ok", chunk: ci + 1, cardCount: cards.length });
+    } catch (e2) {
+      appendBuildLog({ type: "card_text_fail", chunk: ci + 1, error: (e2 && e2.message) || "unknown" });
+      log("chunk " + (ci + 1) + " text-only failed: " + (e2 && e2.message));
+      cards = [];
+    }
+  }
+
+  // --- Level 2.5: premium model escalation (mini produced 0 cards) ---
+  // Content failure only — postJSON throwing on HTTP errors (auth/429) is NOT
+  // retried here; those bubble up as a failed chunk. We escalate once when the
+  // cheap model simply couldn't produce usable cards for this chunk.
+  if (!cards.length && PREMIUM_OK) {
+    log("chunk " + (ci + 1) + ": escalating to premium model " + PREMIUM.model);
+    appendBuildLog({ type: "card_premium_escalate", chunk: ci + 1, model: PREMIUM.model, reason: "mini_zero_cards" });
+    try {
+      const raw = await callCardLLM(
+        CARD_SYSTEM, cardUserPrompt(TITLE, c.start_page, c.end_page, body, hasImages),
+        hasImages ? c.images : null, 8096, true, PREMIUM);
+      const obj = parseLLMJson(raw, "cards");
+      cards = obj.cards || [];
+      if (cards.length) method = "premium";
+      appendBuildLog({ type: "card_premium_ok", chunk: ci + 1, cardCount: cards.length });
+    } catch (ep) {
+      appendBuildLog({ type: "card_premium_fail", chunk: ci + 1, error: (ep && ep.message) || "unknown" });
+      log("chunk " + (ci + 1) + " premium escalation failed: " + (ep && ep.message));
+      cards = [];
+    }
+  }
+
+  // --- Level 3: vision transcription fallback (if vision config exists) ---
+  if (!cards.length && hasImages && VISION_OK) {
+    log("chunk " + (ci + 1) + ": attempting vision fallback");
+    try {
+      const visionText = await transcribeImagesViaVision(c);
+      if (visionText) {
+        const hybridBody = body + "\n\n" + visionText;
+        const raw = await callCardLLM(CARD_SYSTEM, cardUserPrompt(TITLE, c.start_page, c.end_page, hybridBody, false), null, 8096, true);
+        const obj = parseLLMJson(raw, "cards");
+        cards = obj.cards || [];
+        if (cards.length) method = "vision-fallback";
+        appendBuildLog({ type: "card_vision_fallback_ok", chunk: ci + 1, cardCount: cards.length });
+      }
+    } catch (e3) {
+      appendBuildLog({ type: "card_vision_fallback_fail", chunk: ci + 1, error: (e3 && e3.message) || "unknown" });
+      log("chunk " + (ci + 1) + " vision fallback failed: " + (e3 && e3.message));
+    }
+  }
+
+  appendBuildLog({ type: "chunk_done", chunk: ci + 1, cardCount: cards.length, method });
+  return cards;
+}
+
+// ---------------------------------------------------------------------------
+// Main
+// ---------------------------------------------------------------------------
+async function main() {
+  if (!TEXTBOOK_DIR || !SRC_PATH) throw new Error("KB_TEXTBOOK_DIR and KB_SRC_PATH required");
+  if (!CARD.baseUrl || !CARD.apiKey || !CARD.model) throw new Error("card model config incomplete (KB_CARD_*)");
+  if (!existsSync(SRC_PATH)) throw new Error("source file not found: " + SRC_PATH);
+
+  writeStatus("building", { startedAt: new Date().toISOString(), visionFallbackAvailable: VISION_OK, premiumEscalationAvailable: PREMIUM_OK });
+
+  let pages;
+  if (FORMAT === "pdf") pages = await extractPdf();
+  else if (FORMAT === "markdown" || FORMAT === "md") pages = extractMarkdown();
+  else if (FORMAT === "pptx") pages = extractPptx();
+  else throw new Error("unsupported KB_FORMAT: " + FORMAT);
+
+  if (!pages.length) { writeStatus("done", { cardCount: 0, note: "no extractable text" }); log("no pages; done"); return; }
+
+  let chunks = chunkPages(pages, PAGES_PER_CHUNK);
+  if (MAX_CHUNKS > 0) chunks = chunks.slice(0, MAX_CHUNKS);
+  log("chunked into " + chunks.length + " blocks (~" + PAGES_PER_CHUNK + " pages each)");
+
+  const cardsDir = path.join(KB_DIR, "cards");
+  mkdirSync(cardsDir, { recursive: true });
+
+  const allCards = [];
+  let idx = 0;
+  for (let ci = 0; ci < chunks.length; ci++) {
+    const cards = await generateCardsForChunk(chunks[ci], ci, chunks.length);
+    for (const raw of cards) {
+      const chunkStart = chunks[ci].start_page;
+      const chunkEnd = chunks[ci].end_page;
+      const card = normalizeCard(raw, chunkStart, chunkEnd);
+      if (!card) { log("  skip invalid card in chunk " + (ci + 1)); continue; }
+      idx++;
+      const cid = slugify(card.title, idx);
+      card.concept_id = cid;
+      card._chunk_pages = [chunkStart, chunkEnd];
+      writeFileSync(path.join(cardsDir, cid + ".json"), JSON.stringify(card, null, 2), "utf-8");
+      allCards.push(card);
+    }
+    writeStatus("building", { cardCount: allCards.length, chunksDone: ci + 1, chunksTotal: chunks.length });
+  }
+
+  const index = {
+    textbook: path.basename(SRC_PATH),
+    title: TITLE,
+    lang: "zh",
+    built_at: new Date().toISOString(),
+    model: CARD.model,
+    vision_fallback: VISION_OK ? VISION.model : null,
+    format: FORMAT,
+    card_count: allCards.length,
+    needs_verification_count: allCards.filter((c) => c.needs_verification).length,
+    cards: allCards.map((c) => ({
+      concept_id: c.concept_id, title: c.title || "",
+      difficulty: c.difficulty, source_pages: c.source_pages,
+      needs_verification: !!c.needs_verification,
+    })),
+  };
+  writeFileSync(path.join(KB_DIR, "index.json"), JSON.stringify(index, null, 2), "utf-8");
+  log("cards: " + allCards.length + " -> " + KB_DIR);
+
+  const tmap = await buildTeachingMap(allCards);
+  if (tmap) { writeFileSync(path.join(KB_DIR, "teaching_map.json"), JSON.stringify(tmap, null, 2), "utf-8"); log("teaching map: " + tmap.segments.length + " segments"); }
+
+  writeStatus("done", { cardCount: allCards.length, needsVerification: index.needs_verification_count, hasTeachingMap: !!tmap });
+  log("done");
+}
+
+main().catch((err) => {
+  log("FATAL: " + (err && err.message));
+  try { writeStatus("error", { error: err && err.message }); } catch (e) {}
+  process.exit(1);
+});

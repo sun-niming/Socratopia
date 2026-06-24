@@ -35,9 +35,8 @@ There is no build system, test suite, or linter in this directory. The root `pac
 | `npx asar extract resources/app.asar _asar_extracted/` | Extract ASAR to edit `main.js` / `preload.js` |
 | `npx asar pack _asar_extracted/ resources/app.asar` | Repack ASAR after edits |
 | `node fix-asar-integrity.js` | Recalculate and patch the `ELECTRONASAR` hash in `Socratopia.exe` after repacking |
-| `python tools/kb_builder.py --selftest` | Offline knowledge-base builder; verify LLM endpoint connectivity (see "Offline knowledge base") |
-
-Python tooling (`tools/kb_builder.py`) runs in the miniconda `code` env (`E:/Py/MiniConda/envs/code`, already has `pymupdf`/`requests`). Use a **PowerShell** terminal: `conda activate code` then `python tools/kb_builder.py ...`.
+| `node lib/kb-builder.mjs` | Standalone knowledge-base builder worker; tested via `KB_TEXTBOOK_DIR=... node lib/kb-builder.mjs` (see "Knowledge base auto-build on upload") |
+| `node tools/new-route.js <name> [--methods GET,POST] [--dry-run]` | Scaffold a new API route: allocates collision-free module IDs, writes route.js from test-key template, registers in 3 manifests, runs `node --check` |
 
 ## High-level architecture
 
@@ -69,7 +68,7 @@ Socratopia is an Electron + Next.js standalone app with three layers:
 | File | Purpose |
 |------|---------|
 | `resources/app.asar` | Electron ASAR archive containing `dist-electron/main.js` and `dist-electron/preload.js` |
-| `resources/server/server.js` | Next.js standalone bootstrap; loads `settings.json` + `set.json`, sets globals (`__FS__`, `__PATH__`, `__RULES_DIR__`, `__SOCRATOPIA_SETTINGS__`, `__SOCRATOPIA_SET__`, `__KB_DISTILL__`), hardcodes `nextConfig`, calls `startServer()` |
+| `resources/server/server.js` | Next.js standalone bootstrap; loads `settings.json` + `set.json`, sets globals (`__FS__`, `__PATH__`, `__RULES_DIR__`, `__SOCRATOPIA_SETTINGS__`, `__SOCRATOPIA_SET__`, `__KB_DISTILL__`, `__ADAPTIVE__`, `__ADAPTIVE_CONCEPT_GRAPH__`, `__ADAPTIVE_DIAGNOSTICIAN__`, `__PRACTICE__`, `__PRACTICE_SOURCE__`, `__PRACTICE_TUTOR__`, `__RESUME__`, `__LONG_REASONING__`), hardcodes `nextConfig`, calls `startServer()` |
 | `resources/server/.next/server/chunks/*.js` | Webpack-compiled server chunks containing shared logic (LLM calls, file I/O, data access) |
 | `resources/server/.next/server/app/api/*/route.js` | Individual API route handlers |
 | `resources/server/.next/server/app/page.js` | Main application page (React root) |
@@ -78,7 +77,28 @@ Socratopia is an Electron + Next.js standalone app with three layers:
 | `resources/rules/` | Seeded system rules cached locally (fetched from remote on first chat and auto-saved) |
 | `resources/settings.json` | Central API configuration loaded at startup by `server.js` (chat / group chat) |
 | `resources/set.json` | Teaching-pipeline model tiers (`strong`/`kb`/`weak`); loaded into `global.__SOCRATOPIA_SET__` |
-| `tools/kb_builder.py` | Offline knowledge-base builder (miniconda `code` env) |
+| `resources/server/lib/kb-builder.mjs` | JS knowledge-base builder worker; spawned on upload, writes `knowledge_base/` (cards + teaching map). Uses `pdfjs-dist` + `@napi-rs/canvas` to render image-dense PDF pages and sends them directly to the card model (currently gpt-5.4-mini for cost control). `set.json.vision` is an optional fallback — the default pipeline does not depend on it.
+| `resources/server/lib/pdf-worker.mjs` | Standalone PDF extraction worker (ESM); used by the textbook upload/extraction path. `kb-builder.mjs` loads `pdfjs-dist` directly for KB builds.
+| `resources/server/lib/adaptive/data-layer.js` | Adaptive teaching data layer (IIFE); loaded by `server.js` into `global.__ADAPTIVE__`. Stores LearnerModel, ConceptGraph, TeachingSession, TeachingEvents under `<PROJECT_ROOT>/adaptive-teaching/`
+| `resources/server/lib/adaptive/concept-graph-builder.js` | ConceptGraph generation (LLM + KB + dry-run paths); loaded by `server.js` into `global.__ADAPTIVE_CONCEPT_GRAPH__`. Exports buildConceptGraph, validateConceptGraph, normalizeConceptGraph.
+| `resources/server/lib/adaptive/diagnostician.js` | Structured diagnosis agent; loaded by `server.js` into `global.__ADAPTIVE_DIAGNOSTICIAN__`. Exports diagnose(), buildDiagnosisPrompt(), normalizeDiagnosis(), validateDiagnosis(), makeFallbackDiagnosis().
+| `resources/server/lib/adaptive/smoke-test.js` | Self-contained smoke test (69 assertions) for the adaptive data layer. Run: `node resources/server/lib/adaptive/smoke-test.js`
+| `resources/server/lib/adaptive/concept-graph-smoke-test.js` | Smoke test (144 assertions) for concept graph builder. Run: `node resources/server/lib/adaptive/concept-graph-smoke-test.js`
+| `resources/server/lib/adaptive/diagnostician-smoke-test.js` | Smoke test (83 assertions) for diagnostician. Run: `node resources/server/lib/adaptive/diagnostician-smoke-test.js`
+| `resources/server/lib/practice/data-layer.js` | Practice workbench data layer (IIFE); loaded by `server.js` into `global.__PRACTICE__`. Stores PracticeProblemSet, PracticeAnswerRecord, PracticeMistake under `<PROJECT_ROOT>/profiles/<pid>/worlds/<wid>/practice/` (problem_sets/, sessions/, mistakes/). NOT under adaptive-teaching/.
+| `resources/server/lib/practice/smoke-test.js` | Smoke test (56 assertions) for practice data layer. Run: `node resources/server/lib/practice/smoke-test.js`
+| `resources/server/lib/practice/source-adapter.js` | Practice source adapter (IIFE); loaded by `server.js` into `global.__PRACTICE_SOURCE__`. Resolves generate source text for sourceType manual/textbook-page/chapter/conversation (reads textbooks/<tid>/pages, current_reading.md, concept-summaries, lesson_summaries, chats). Read-only; never creates files. Optional ConceptGraph context via `global.__ADAPTIVE__`.
+| `resources/server/lib/practice/source-adapter-smoke-test.js` | Smoke test (43 assertions) for practice source adapter. Run: `node resources/server/lib/practice/source-adapter-smoke-test.js`
+| `resources/server/lib/resume/progress-resume.js` | Structured resume-state helper; loaded by `server.js` into `global.__RESUME__`. Reads/writes `textbooks/<tid>/progress_state.json` (merge-on-write, never drops fields), parses progress.md first line (zh `# 当前页码：第 N 页` / en `# Current Page: Page N`), resolves resume start page (progress_state → progress.md → currentPage), locates the KB teaching_map focus phase from resume state (by page coverage / title / explicit phaseIndex), and exposes a one-shot `setPending/takePending(convId)` stash so the chat first-turn can hand resumeState to the `read_textbook_pages` tool. Also `stateHash()` for cache keying.
+| `resources/server/lib/resume/smoke-test.js` | Smoke test (37 assertions) for progress-resume helper (zh/en page parse, state merge, focus-by-page, phase-2 directive, stateHash). Run: `node resources/server/lib/resume/smoke-test.js`
+| `resources/server/lib/practice/tutoring-session.js` | Tutoring session data layer (IIFE); loaded by `server.js` into `global.__PRACTICE_TUTOR__`. Per-problemSet AI讲题 chat sessions bound to a companion. Stores under `profiles/<pid>/worlds/<wid>/practice/tutoring_sessions/<problemSetId>.json` (atomic-write, corrupt-JSON tolerant). Exports `module.exports = api`.
+| `resources/server/lib/practice/tutoring-session-smoke-test.js` | Smoke test (46 assertions) for tutoring session layer. Run: `node resources/server/lib/practice/tutoring-session-smoke-test.js`
+| `resources/server/lib/reasoning/long-context.js` | Long-distance reasoning context (Graph-RAG prototype, **demo only**); loaded by `server.js` into `global.__LONG_REASONING__`. READ-ONLY — never touches the live classroom chain. Given a focus page/concept/query, recalls cross-page prerequisites, related cards and evidence from an existing ConceptGraph (saved → dry-run → KB fallback) and emits a hidden classroom-context `promptBlock`. Exports `buildLongReasoningContext(input)` plus `_`-prefixed test helpers.
+| `resources/server/lib/reasoning/long-context-smoke-test.js` | Smoke test (36 assertions) for long-context helper. Run: `node resources/server/lib/reasoning/long-context-smoke-test.js`
+| `resources/server/lib/practice/runtime-e2e-smoke.js` | Runtime E2E smoke: auto-detects the running Socratopia.exe HTTP port (Windows PowerShell, falls back to candidate ports) and exercises `/api/practice` generate/grade/hint/explain/variant against the live service using the built-in strong LLM chain (no external apiKey). Env: `PRACTICE_E2E_BASE_URL`, `PRACTICE_E2E_PROFILE_ID`, `PRACTICE_E2E_WORLD_ID`, `PRACTICE_E2E_ACCOUNT_ID`, `PRACTICE_E2E_TEXTBOOK_ID`. Run: `node resources/server/lib/practice/runtime-e2e-smoke.js`
+| `resources/server/lib/model-router.js` | Unified cost-aware model router (CommonJS); loaded by `server.js` into `global.__MODEL_ROUTER__`. Exports `resolveModelRoute`, `callRoutedLLM`, `shouldEscalateAfterFailure`, `validateRoutedOutput`, `classifyError`. mini-default + single premium escalation on content failures. See "Model router" section.
+| `resources/server/lib/model-router-smoke-test.js` | Smoke test (95 assertions) for the model router. Run: `node resources/server/lib/model-router-smoke-test.js`
+| `tools/new-route.js` | Route generator script; auto-allocates collision-free webpack module IDs by scanning all existing routes, then writes and registers a new API route
 | `resources/app-update.yml` | Auto-update config (disabled — points to `http://127.0.0.1:9`) |
 | `main.js` (repo root) | Working copy of the Electron main process bundle for editing |
 | `preload.js` (repo root) | Working copy of the preload script for editing |
@@ -118,9 +138,33 @@ All routes live under `resources/server/.next/server/app/api/`. The routes most 
 - `pdf-assets/route.js` — PDF asset serving
 - `system/route.js` — system operations
 - `account/init/route.js` — account initialization
+- `adaptive-teaching/route.js` — adaptive teaching mode (currently no-op echo route / placeholder for future orchestrator)
+- `adaptive-concept-graph/route.js` — ConceptGraph generation endpoint (POST build/dry-run, GET read)
+- `adaptive-diagnosis/route.js` — Diagnosis endpoint (POST); calls `global.__ADAPTIVE_DIAGNOSTICIAN__` for structured student diagnosis
+- `practice/route.js` — Practice workbench. **Workbench actions** (calls `global.__PRACTICE__` + `__PRACTICE_SOURCE__`): GET list/read; POST action=generate|grade|hint|explain|variant|saveMistake|listMistakes. Choice/fill grading is local (no LLM); subjective grading + generate/hint/explain/variant use the teaching-model LLM. `generate` source resolution is delegated to `global.__PRACTICE_SOURCE__` (manual/textbook-page/chapter/conversation, with concept-summary→lesson-summary→recent-messages fallback for conversation). **Tutoring actions** (AI讲题, calls `global.__PRACTICE_TUTOR__`): getProblemSet, getTutoringSession, listTutoringSessions, deleteTutoringSession, setTutoringCompanion, tutorExample, tutorExplain, tutorFreeChat, tutorFullAnswer, tutorHint, tutorRephrase, tutorVariant. Stores under `profiles/<pid>/worlds/<wid>/practice/` (problem_sets/, sessions/, mistakes/, tutoring_sessions/).
+- `long-reasoning-demo/route.js` — Graph-RAG long-distance reasoning demo (GET); calls `global.__LONG_REASONING__.buildLongReasoningContext` (read-only, never persists). Requires `profileId`/`worldId`/`textbookId` query params.
 - `test-key/route.js` — API key validation
 
 Voice/TTS synthesis APIs are disabled (URLs point to `http://127.0.0.1:9`), but the `tts-audio` endpoint remains active to serve cached audio used by group chat TTS.
+
+## Voice / TTS model mapping: distributed, not config-driven
+
+Like module 64092, voice selection is **duplicated across files** rather than driven by a single config table. See `VOICE_MODEL_MAPPING_REPORT.md` (repo root) for the authoritative breakdown. Key points when changing voices:
+
+- The `voiceKey -> GPT-SoVITS model` table is repeated in the frontend voice lib (`static/chunks/4137-*.js`), the server-side equivalent (`server/chunks/3461.js`), and the group-chat route's `_ttsV` table (`api/groupchat/route.js`).
+- Two **separate** default `candidateId -> voiceKey` maps exist and can drift out of sync: the classroom map (in `static/chunks/app/page-*.js` / `server/app/page.js`) and the group-chat map (`_cidToVk` in `api/groupchat/route.js`).
+- Classroom flow synthesizes/plays in the frontend; group-chat flow synthesizes server-side and writes to `tts-cache`. A voice change must usually be applied to all of these to stay consistent.
+
+## Planning & report documents (repo root)
+
+These Markdown files hold design intent and investigation notes that are **not** derivable from the compiled code. Read the relevant one before implementing the corresponding feature:
+
+| Document | Purpose |
+|----------|---------|
+| `ADAPTIVE_TEACHING_MODE_TECHNICAL_REPORT.md` | Design for a new self-contained adaptive teaching mode (learner model, multi-agent roles, teaching loop). Analysis only — explicitly says do not modify product code yet. Includes phased Claude Code prompts. |
+| `PRACTICE_FEATURE_TECHNICAL_PLAN_AND_CLAUDE_PROMPTS.md` | Plan for a new "generate / solve / explain problems" practice workbench reusing textbook, KB, flashcard, and dialogue capabilities. Includes phased Claude Code prompts. |
+| `VOICE_MODEL_MAPPING_REPORT.md` | Investigation of where voice selection lives (see section above). |
+| `TTS_OPTIMIZATION_CHANGELOG.md` | Record of GPT-SoVITS TTS latency optimizations, including changes in the external model-server repo (`D:\model_tts\...`) and the Socratopia call chain. |
 
 ## Module 64092: LLM core (`mx` / `callLLM` / `$b`)
 
@@ -249,65 +293,87 @@ Example structure:
 
 ```json
 {
-  "Base_API": "openai",
-  "apiType": "openai",
-  "deepseek": {
-    "baseUrl": "https://api.deepseek.com",
-    "apiKey": "...",
+  "endpoint": "https://api.nwafu-ai.cn/v1",
+  "apiKeys": {
+    "codex": "..."
+  },
+  "gpt": {
+    "apiKeyGroup": "codex",
     "models": {
-      "deepseek": "deepseek-v4-flash",
-      "openai": "gpt-4o-mini",
-      "anthropic": "claude-sonnet-4-20250514",
-      "gemini": "gemini-2.5-flash",
-      "qwen": "qwen-plus",
-      "moonshot": "moonshot-v1-auto",
-      "minimax": "MiniMax-M2.7-highspeed"
+      "gpt": "gpt-5.4-mini",
+      "openai": "gpt-5.4-mini",
+      "strong": "gpt-5.5",
+      "kb": "gpt-5.4-mini",
+      "weak": "gpt-5.4-mini"
     }
   },
-  "openai": {
-    "baseUrl": "https://api.nwafu-ai.cn/v1",
-    "apiKey": "...",
-    "models": { "openai": "gpt-5.5", "deepseek": "deepseek-v4-flash", "...": "..." }
-  },
-  "proxyUrl": "http://127.0.0.1:9",
-  "rulesUrl": "http://127.0.0.1:9"
+  "proxyUrl": "",
+  "rulesUrl": ""
 }
 ```
 
 ### API selection logic in `mx()`
 
-`Base_API` is present in `settings.json` for backwards compatibility but is not the primary runtime selector. The active provider and model are determined by `apiType` and the matching provider block (`openai`, `deepseek`, etc.).
-
-1. `apiType === "openai"` → OpenAI API (checked first)
-2. `apiType === "deepseek"` and `apiKey` is set → direct DeepSeek
-3. `accessMode === "hosted"` + session token → hosted mode (only when `apiType` is unset)
-4. Provider is `"openai"` → OpenAI API (fallback)
-5. `apiKey` argument provided → DeepSeek BYOK mode
-6. Otherwise → throws `BYOK_NOT_AVAILABLE`
+This deployment uses **codex-only** (GPT provider). Legacy `other`/`deepseek`/`gemini` are no longer configured — the `server.js` normalize function no longer auto-creates an `other` block with hardcoded `zanzhu` key. All fallback paths now resolve to `gpt`/`codex`.
 
 ## Teaching-model config (`resources/set.json`)
 
-Separate from `settings.json` (which still drives chat/group-chat via module 64092), `set.json` configures the **teaching pipeline** with three tiers, each a flat `{apiType, baseUrl, apiKey, model}` block:
+Separate from `settings.json` (which still drives chat/group-chat via module 64092), `set.json` configures the **teaching pipeline** with lightweight role blocks. Each role can be as small as `{apiType, model}`; `server.js` fills `baseUrl` and `apiKey` from `settings.json`.
 
-- **`strong`** — page-turn prep, flashcards, classroom/lesson summaries, concept summaries
-- **`kb`** — page-turn knowledge distillation (`__KB_DISTILL__`); cheaper "flash" model. Delete this block to auto-fall-back to `strong`.
+- **`strong`** — page-turn prep, flashcards, classroom/lesson summaries, concept summaries. **Now defaults to `gpt-5.4-mini` (mini) for cost control** — `strong` is a "strong-task role", not "always the expensive model". The high-value model lives in `premium`.
+- **`kb`** — page-turn knowledge distillation (`__KB_DISTILL__`) and KB auto-build card model. This role currently uses gpt-5.4-mini for cost control. If the configured model supports images, it can receive PDF page images directly for transcription + card generation in one pass; otherwise the builder falls back to text-only extraction. Delete this block to auto-fall-back to `strong`.
 - **`weak`** — teaching dialogue
+- **`premium`** — **high-value model** (`gpt-5.5`). Used only for inherently-complex tasks (concept graph, cross-chapter diagnosis), high input complexity, explicit user high-quality mode, or a single failure-escalation when a mini attempt returns empty/unparseable/schema-invalid output. **Optional**: if absent, the router silently never escalates (`reason=no_premium_config`). Mirrored in `settings.json.gpt.models.premium`.
+- **`routing`** — tunes `global.__MODEL_ROUTER__`: `defaultQualityMode` (`auto`/`fast`/`high`), `miniInputTokenLimit` (default 12000), `miniPageLimit` (default 12), `enableFailureEscalation`, `enableDirectHighForConceptGraph`.
+- **`vision`** — **optional fallback** for KB auto-build. Only used if the multimodal card model rejects images AND text-only card generation also fails. Not configured by default; add a `vision` block to `set.json` only if you want this third-level safety net.
 
-`server.js` loads `set.json` from `CONTENT_ROOT/../set.json` into `global.__SOCRATOPIA_SET__`. If the file is absent, it derives `strong` from the `openai` block and `weak` from the `deepseek` block of `settings.json`. Group chat does **not** use `set.json`; it stays on `settings.json`.
+### Model router (`lib/model-router.js`, `global.__MODEL_ROUTER__`)
+
+Unified, cost-aware model selection so routes don't each hand-pick a model. Exports `resolveModelRoute(input)`, `callRoutedLLM(input, caller)`, `shouldEscalateAfterFailure(input, failure)`, `validateRoutedOutput(task, rawOutput, parsedOutput)`, plus `classifyError`. Policy: `weak`/`kb`/`strong` default to mini; escalate to `premium` **once** only on inherently-complex tasks, high input complexity, explicit `userQualityMode:"high"`, or a content failure (empty / JSON parse / missing schema fields / 0 cards / abnormal graph / image rejected). Transport failures (auth/401, quota/402, 429, network/timeout) **never** escalate; `fast` mode never escalates. Every decision logs `task/role/tier/model/reason/fallbackAttempt` (never the apiKey). Wired into `server.js __KB_DISTILL__` (task `kb_distill`) and, via env (`KB_PREMIUM_*`), into `kb-builder.mjs` (escalates a chunk once when the mini card model yields 0 cards). Smoke test: `node resources/server/lib/model-router-smoke-test.js` (95 assertions).
+
+`server.js` loads `set.json` from `CONTENT_ROOT/../set.json` into `global.__SOCRATOPIA_SET__`. If the file is absent, it derives both `strong` and `weak` from the `gpt` block of `settings.json`. Group chat does **not** use `set.json`; it stays on `settings.json`.
 
 ### `__KB_DISTILL__` (server.js)
 
-`global.__KB_DISTILL__(rawText, startPage, endPage, textbookDir)` turns the current page window into a "verified knowledge" block before it reaches the weak teaching model. Resolution order:
+`global.__KB_DISTILL__(rawText, startPage, endPage, textbookDir, resumeState?)` turns the current page window into a "verified knowledge" block before it reaches the weak teaching model. The optional 5th arg `resumeState` (from `global.__RESUME__`) lets the renderer pick the **correct** teaching_map focus phase when resuming a previous lesson instead of always expanding phase 1; old callers that omit it behave exactly as before. Resolution order:
 
 1. Prefer a pre-built knowledge base: `<textbookDir>/knowledge_base/index.json` + `cards/`.
-2. Fallback: distill on the fly with `set.kb || set.strong` (result is **not** written to disk, to avoid polluting the KB with unverified content).
+2. Fallback: distill on the fly with `set.kb || set.strong` via `global.__MODEL_ROUTER__` (task `kb_distill`, mini-first; escalates to `premium` once if the mini output is empty/unparseable). Result is **not** written to disk, to avoid polluting the KB with unverified content. If the router is unavailable it falls back to a single direct call on `set.kb || set.strong` (legacy behavior).
 3. On any failure or missing strong model: return `null`, and callers fall back to the raw page text — the teaching path never breaks.
 
-An in-memory LRU cache (`__KB_CACHE__`) de-dupes identical windows and merges concurrent calls (chat page-turn + jump-page on the same window) into one. Consumers of `__KB_DISTILL__` / `__SOCRATOPIA_SET__`: `chat`, `jump-page`, `flashcard`, `concept-summary`, `lesson-summary` routes, plus `chunks/9654.js`.
+An in-memory LRU cache (`__KB_CACHE__`) de-dupes identical windows and merges concurrent calls (chat page-turn + jump-page on the same window) into one. Both the in-memory key and the on-disk `runtime_cache` key fold in `resumeState` (via `__RESUME__.stateHash`), and the disk cache hits **only on an exact `rawHash` match** — it never falls back to `sameRange`/`covered` entries, so a different lesson progress (or a changed page window) can never reuse another render's "current focus". Consumers of `__KB_DISTILL__` / `__SOCRATOPIA_SET__`: `chat`, `jump-page`, `flashcard`, `concept-summary`, `lesson-summary` routes, plus `chunks/9654.js`.
 
-### Offline knowledge base (`tools/kb_builder.py`)
+### Lesson resume: structured `progress_state.json` (`global.__RESUME__`)
 
-Standalone Python script (touches no compiled bundle, zero runtime risk) that pre-builds the `knowledge_base/` consumed above. It reads model/endpoint/key **dynamically** from `settings.json` (mirroring `mx()`: `apiType` selects the block, `models[apiType]` the model) — never hardcode credentials. Output is simplified-Chinese only. Uncertain cards get a `needs_verification` flag + `verify_query` for later human/WebSearch follow-up; the script itself does not go online. Common invocations: `--selftest` (connectivity), `--dry-run` (extract+chunk only), `--start-page/--end-page`, `--max-chunks N` (cost control), `--provider` (force a block).
+When a learner opens a new classroom and says "continue last lesson", the chat first turn must resume from where the previous lesson actually ended — not snap back to teaching_map phase 1. This is handled by `lib/resume/progress-resume.js` (loaded into `global.__RESUME__`):
+
+- **Source of truth**: `textbooks/<tid>/progress_state.json` (`schemaVersion`, `currentPage`/`lastTaughtPage`, `windowStartPage`/`windowEndPage`, `lastFocus`/`currentFocus`, optional `phaseIndex`/`title`/`conceptId`, `completedConceptIds`/`completedTitles`, `updatedAt`, `conversationId`). Written on `[下课]` alongside `progress.md` via `writeState` (merge — never drops existing fields; `completed*` arrays are unioned). Falls back to parsing `progress.md`'s first line, then `textbook.currentPage`.
+- **Init flow** (`chat/route.js` first turn): `resolveStartPage()` picks the start page and stashes the resolved `resumeState` via `setPending(convId, …)`. The `read_textbook_pages` tool handler (`chunks/9654.js`) calls `takePending(convId)` (one-shot) and passes it as the 5th arg to `__KB_DISTILL__`. Normal mid-lesson page turns carry no pending state, so they render with no resume bias.
+- **Focus rendering** (`server.js` `renderCards`): with a `resumeState`, the focus phase is located by `focusFromState()` (page coverage of `lastTaughtPage`, or explicit `title`/`conceptId`/`phaseIndex`). Earlier phases are collapsed and marked "已学过，除非学生主动要求不要重讲"; the focus phase is expanded; later phases stay collapsed. The `TEACHING_DIRECTIVE` no longer hardcodes "阶段 1". When the phase can't be pinned down it emits a soft directive ("从已记录掌握的内容之后继续").
+
+### Knowledge base auto-build on upload (`lib/kb-builder.mjs`)
+
+When a textbook is uploaded (PDF, Markdown, or PPTX), module **82751** (`chunks/2751.js`) automatically triggers a background knowledge-base build by spawning `node lib/kb-builder.mjs` as a detached child process. The worker writes `<textbookDir>/knowledge_base/{index.json, cards/*.json, teaching_map.json, build_status.json}` — exactly the format `__KB_DISTILL__` expects.
+
+**Pipeline (no Python; pure JS):**
+1. PDF: `pdfjs-dist` extracts text per page. Sparse-text pages (<80 chars + visual ops) are rasterized to PNG via `@napi-rs/canvas`.
+2. Markdown: split into heading-delimited blocks — no rendering.
+3. Pages are chunked (~4 pages per chunk). Each chunk carries both extracted text and rendered page images.
+5. Each chunk is sent to the **card model** (`set.json.kb || set.json.strong`) as a multimodal request (text + image data URLs). With gpt-5.4-mini this is the cost-controlled path; if images are rejected, the builder falls back to text-only generation.
+6. If the multimodal card model rejects images → auto-fall-back to text-only card generation (JSON mode).
+7. If `set.json.vision` is configured → used as a third-level fallback (vision transcription of images → text-only card generation).
+8. All cards are assembled into a teaching map via the card model (phased sequence, ~16 cards per segment).
+9. Output is written to `knowledge_base/` (including per-chunk build log in `build_status.json`); runtime `__KB_DISTILL__` consumes it on the next page-turn.
+
+**Config (zero hardcoding):** The upload route reads config from `global.__SOCRATOPIA_SET__` (resolved by `server.js` from `set.json` + `settings.json`). The card model is `set.json.kb || set.json.strong` (currently gpt-5.4-mini for cost control). **`set.json.vision` is an optional fallback** — the pipeline does not depend on it; it is only used as a last resort if the card model cannot handle images directly. All config is passed to the worker via environment variables — never hardcoded in code.
+
+**Dependency: `@napi-rs/canvas`** — bundled alongside `sharp` in `resources/server/.next/node_modules/@napi-rs/`. Ships with a prebuilt win32-x64-msvc binary (~27 MB). Included in `deps.zip` so `prepareServerDir` self-heal restores it.
+
+**Note on sentinels:** `main.js` `SERVER_NODE_MODULES_SENTINELS` checks `[next, react, react-dom, sharp]` only. A missing `@napi-rs/canvas` will not be caught by the integrity check. However, `deps.zip` now includes it, so a clean re-extract will restore both packages.
+
+**Limitations:**
+- `.pptx` files are supported for upload and KB auto-build via OpenXML slide text extraction. Legacy `.ppt` is still unsupported because it requires an external converter such as LibreOffice.
+- From-library Markdown: when a library Markdown is imported, it is encrypted to `.qbook` format and the original `.md` is deleted. A temporary `_kb_src.md` copy is saved before deletion so the KB builder can still process the raw markdown. If the copy fails (disk full, permission), the KB build is skipped silently.
 
 ## Localization
 
@@ -318,6 +384,6 @@ Supported languages: `en`, `zh`, `zh-TW`. Rules are cached per language: `rules_
 - `PORT`, `HOSTNAME`, `NODE_ENV` (always `"production"`)
 - `PROJECT_ROOT` — user data directory
 - `CONTENT_ROOT` — packaged content directory
-- `SOCRATOPIA_DEEPSEEK_API_KEY`, `SOCRATOPIA_OPENAI_API_KEY` — override `settings.json`
-- `SOCRATOPIA_API_TYPE` — force `"openai"` or `"deepseek"`
+- `SOCRATOPIA_OPENAI_API_KEY` — override the GPT/codex key from `settings.json`
+- `SOCRATOPIA_API_TYPE` — force `"gpt"` (`"openai"` remains a legacy alias)
 - `SOCRATOPIA_PROXY_URL` — override proxy / rules base URL

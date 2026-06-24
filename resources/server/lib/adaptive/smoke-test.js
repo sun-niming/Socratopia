@@ -191,6 +191,99 @@ var projectFiles = fs.readdirSync(TMP);
 assert(projectFiles.length === 1 && projectFiles[0] === "adaptive-teaching", "data isolated in adaptive-teaching/");
 console.log("  Isolation: PASS");
 
+// ---- Malicious ID validation (safeSegment) ----
+// Path traversal via ..
+var blocked = true;
+try { dl.loadLearnerModel("../etc", "passwd"); blocked = false; } catch (e) {}
+assert(blocked, "path traversal blocked: .. in profileId");
+
+blocked = true;
+try { dl.loadLearnerModel("user", "../../etc"); blocked = false; } catch (e) {}
+assert(blocked, "path traversal blocked: ../.. in worldId");
+
+// Backslash in ID
+blocked = true;
+try { dl.loadLearnerModel("user", "world\\hidden"); blocked = false; } catch (e) {}
+assert(blocked, "backslash in ID blocked");
+
+// Empty ID
+blocked = true;
+try { dl.loadLearnerModel("", "world"); blocked = false; } catch (e) {}
+assert(blocked, "empty profileId blocked");
+
+blocked = true;
+try { dl.loadLearnerModel("user", ""); blocked = false; } catch (e) {}
+assert(blocked, "empty worldId blocked");
+
+// Null ID
+blocked = true;
+try { dl.loadLearnerModel(null, "world"); blocked = false; } catch (e) {}
+assert(blocked, "null profileId blocked");
+
+// sessionId path traversal
+blocked = true;
+try { dl.getTeachingSession("../../etc/passwd"); blocked = false; } catch (e) {}
+assert(blocked, "sessionId path traversal blocked");
+
+// Verify no files written outside adaptive-teaching/
+var projectFiles2 = fs.readdirSync(TMP);
+assert(projectFiles2.length === 1 && projectFiles2[0] === "adaptive-teaching", "no files leaked outside adaptive-teaching/ after malicious ID attempts");
+console.log("  Malicious ID validation: PASS");
+
+// ---- Corrupt JSON handling ----
+var corruptLM = path.join(root, "learner-models", "corrupt_corruptWorld.json");
+fs.mkdirSync(path.dirname(corruptLM), { recursive: true });
+fs.writeFileSync(corruptLM, "this is { not @ valid ||| json }", "utf-8");
+// readJSON should rename corrupt file and trigger re-init
+var lmCorrupt = dl.loadLearnerModel("corrupt", "corruptWorld");
+assert(lmCorrupt.profileId === "corrupt", "corrupt JSON triggers safe re-init with correct profileId");
+assert(typeof lmCorrupt.conceptMastery === "object", "corrupt JSON re-init has empty mastery");
+
+// Verify corrupt backup exists
+var dirEntries = fs.readdirSync(path.dirname(corruptLM));
+var foundCorrupt = false;
+for (var di = 0; di < dirEntries.length; di++) {
+  if (dirEntries[di].indexOf("corrupt_corruptWorld.json.corrupt-") === 0) { foundCorrupt = true; break; }
+}
+assert(foundCorrupt, "corrupt backup file created (.corrupt-<timestamp>)");
+
+// Verify new default file was re-created
+var freshExists = fs.existsSync(corruptLM);
+assert(freshExists, "fresh default file re-created after corrupt rename");
+
+console.log("  Corrupt JSON: PASS");
+
+// ---- Review queue: remove mastered, update existing ----
+// Fresh model with 2 concepts
+var rqLm = dl.loadLearnerModel("rq_user", "rq_world");
+var yesterday = new Date(Date.now() - 86400000).toISOString();
+rqLm.conceptMastery["topic_a"] = { score: 0.3, lastReviewed: yesterday, history: [] };
+rqLm.conceptMastery["topic_b"] = { score: 0.9, lastReviewed: yesterday, history: [] };
+dl.saveLearnerModel("rq_user", "rq_world", rqLm);
+dl.updateReviewQueue(rqLm);
+// topic_a (score 0.3) should be in queue; topic_b (score 0.9, reviewed yesterday) should not
+assert(rqLm.reviewQueue.length === 1, "reviewQueue: only weak concept enqueued");
+assert(rqLm.reviewQueue[0].conceptId === "topic_a", "reviewQueue: weak concept is topic_a");
+assert(rqLm.reviewQueue[0].priority >= 0.7, "reviewQueue: priority matches low score");
+
+// Now "master" topic_a — raise score to 0.8 and set lastReviewed to now
+rqLm.conceptMastery["topic_a"].score = 0.85;
+rqLm.conceptMastery["topic_a"].lastReviewed = new Date().toISOString();
+dl.updateReviewQueue(rqLm);
+assert(rqLm.reviewQueue.length === 0, "reviewQueue: mastered concept removed");
+
+// Add back a weak topic, verify priority updates when score changes
+rqLm.conceptMastery["topic_c"] = { score: 0.5, lastReviewed: yesterday, history: [] };
+dl.updateReviewQueue(rqLm);
+assert(rqLm.reviewQueue.length === 1, "reviewQueue: topic_c enqueued");
+assert(rqLm.reviewQueue[0].priority === 0.5, "reviewQueue: topic_c initial priority 0.5");
+
+rqLm.conceptMastery["topic_c"].score = 0.2;
+dl.updateReviewQueue(rqLm);
+assert(rqLm.reviewQueue[0].priority === 0.8, "reviewQueue: priority updated when score drops");
+assert(rqLm.reviewQueue[0].score === 0.2, "reviewQueue: score updated in queue entry");
+console.log("  Review queue enhanced: PASS");
+
 // ---- Summary ----
 console.log("");
 console.log("Passed: " + passed + "  Failed: " + failed);
