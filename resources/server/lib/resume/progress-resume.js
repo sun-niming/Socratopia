@@ -288,11 +288,16 @@ function stateHash(resumeState) {
   try {
     var completedLen = (Array.isArray(resumeState.completedTitles) ? resumeState.completedTitles.length : 0)
                      + (Array.isArray(resumeState.completedConceptIds) ? resumeState.completedConceptIds.length : 0);
+    var taught = resumeState.taughtCursor || {};
+    var loaded = resumeState.loadedCursor || {};
     var key = [
       resumeState.lastTaughtPage || resumeState.currentPage || "",
       resumeState.phaseIndex != null ? resumeState.phaseIndex : "",
       resumeState.title || resumeState.conceptId || resumeState.currentFocus || "",
       completedLen || "",
+      taught.chunkId || "",
+      taught.status || "",
+      loaded.chunkId || "",
     ].join("|");
     if (!key.replace(/\|/g, "")) return "";
     return crypto.createHash("sha256").update(key).digest("hex").slice(0, 12);

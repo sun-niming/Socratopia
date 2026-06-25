@@ -259,7 +259,7 @@ async function __KB_DISTILL_IMPL__(rawText, startPage, endPage, textbookDir, res
         pageCount: pages.length
       };
     }
-    var KB_MAX_INPUT = (S.maxInputChars && +S.maxInputChars) || 8000;
+    var KB_MAX_INPUT = (S.maxInputChars && +S.maxInputChars) || 12000;
     var rawForLLM = rawText;
     var syntheticMarked = synthesizePageMarkers(rawForLLM, startPage);
     if (syntheticMarked) {
@@ -558,6 +558,7 @@ global.__KB_DISTILL__ = async function (rawText, startPage, endPage, textbookDir
   ["__PRACTICE_SOURCE__", "./lib/practice/source-adapter.js", "[practice] Source adapter"],
   ["__PRACTICE_TUTOR__", "./lib/practice/tutoring-session.js", "[practice] Tutoring session"],
   ["__RESUME__", "./lib/resume/progress-resume.js", "[resume] Progress-resume helper"],
+  ["__MD_CURSOR__", "./lib/markdown/progress-cursor.js", "[markdown] Progress cursor helper"],
   ["__LONG_REASONING__", "./lib/reasoning/long-context.js", "[long-reasoning] Long-context helper"],
   ["__MODEL_ROUTER__", "./lib/model-router.js", "[model-router]"]
 ].forEach(function (m) { __loadOptionalGlobal__(m[0], m[1], m[2], m[3]); })
