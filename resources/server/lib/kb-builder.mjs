@@ -24,7 +24,7 @@
  *
  * Usage: node kb-builder.mjs   (all input via env)
  */
-import { readFileSync, writeFileSync, existsSync, mkdirSync } from "fs";
+import { readFileSync, writeFileSync, existsSync, mkdirSync, readdirSync, renameSync } from "fs";
 import { fileURLToPath, pathToFileURL } from "url";
 import path from "path";
 import https from "https";
@@ -522,27 +522,226 @@ async function transcribeImagesViaVision(chunk) {
 }
 
 // ---------------------------------------------------------------------------
+// Durable KB artifacts. Cards are written chunk-by-chunk, so index/map creation
+// must tolerate partial runs and model-side map failures.
+// ---------------------------------------------------------------------------
+function writeJsonAtomic(filePath, data) {
+  mkdirSync(path.dirname(filePath), { recursive: true });
+  const tmp = filePath + ".tmp-" + process.pid + "-" + Date.now();
+  writeFileSync(tmp, JSON.stringify(data, null, 2), "utf-8");
+  renameSync(tmp, filePath);
+}
+
+function readJsonMaybe(filePath) {
+  try {
+    return JSON.parse(readFileSync(filePath, "utf-8").replace(/^\uFEFF/, ""));
+  } catch (e) {
+    return null;
+  }
+}
+
+function cleanPageRange(value, fallback) {
+  const nums = Array.isArray(value)
+    ? value.map((v) => Number(v)).filter((v) => Number.isFinite(v) && v > 0)
+    : [];
+  let start = nums.length ? Math.min(...nums) : Number(fallback && fallback[0]);
+  let end = nums.length ? Math.max(...nums) : Number(fallback && fallback[1]);
+  if (!Number.isFinite(start) || start <= 0) start = Math.max(1, START_PAGE || 1);
+  if (!Number.isFinite(end) || end <= 0) end = start;
+  if (end < start) { const t = start; start = end; end = t; }
+  return [start, end];
+}
+
+function normalizeCardPages(card) {
+  const fallback = cleanPageRange(card && card._chunk_pages, null);
+  const range = cleanPageRange(card && card.source_pages, fallback);
+  if (card) card.source_pages = range;
+  return range;
+}
+
+function cardOrderKey(card) {
+  const range = normalizeCardPages(card);
+  const id = String((card && card.concept_id) || "");
+  const m = id.match(/^(\d+)/);
+  return {
+    start: range[0],
+    end: range[1],
+    difficulty: Number(card && card.difficulty) || 9,
+    ordinal: m ? Number(m[1]) : 999999,
+    title: String((card && card.title) || id),
+  };
+}
+
+function sortCardsForTeaching(cards) {
+  return (cards || []).slice().sort((a, b) => {
+    const ka = cardOrderKey(a);
+    const kb = cardOrderKey(b);
+    return (ka.start - kb.start) ||
+      (ka.end - kb.end) ||
+      (ka.ordinal - kb.ordinal) ||
+      (ka.difficulty - kb.difficulty) ||
+      ka.title.localeCompare(kb.title);
+  });
+}
+
+function loadCardsFromDisk() {
+  const cardsDir = path.join(KB_DIR, "cards");
+  if (!existsSync(cardsDir)) return [];
+  const files = readdirSync(cardsDir).filter((name) => /\.json$/i.test(name)).sort();
+  const cards = [];
+  for (const file of files) {
+    const card = readJsonMaybe(path.join(cardsDir, file));
+    if (!card || typeof card !== "object") continue;
+    if (!card.concept_id) card.concept_id = file.replace(/\.json$/i, "");
+    normalizeCardPages(card);
+    cards.push(card);
+  }
+  return sortCardsForTeaching(cards);
+}
+
+function buildIndex(allCards, extra) {
+  const cards = sortCardsForTeaching(allCards).filter((c) => c && c.concept_id);
+  const builtAt = new Date().toISOString();
+  return Object.assign({
+    textbook: path.basename(SRC_PATH || ""),
+    title: TITLE,
+    lang: "zh",
+    built_at: builtAt,
+    updated_at: builtAt,
+    model: CARD.model,
+    vision_fallback: VISION_OK ? VISION.model : null,
+    premium_escalation: PREMIUM_OK ? PREMIUM.model : null,
+    format: FORMAT,
+    card_count: cards.length,
+    needs_verification_count: cards.filter((c) => c.needs_verification).length,
+    cards: cards.map((c) => ({
+      concept_id: c.concept_id,
+      title: c.title || "",
+      difficulty: c.difficulty,
+      source_pages: normalizeCardPages(c),
+      needs_verification: !!c.needs_verification,
+    })),
+  }, extra || {});
+}
+
+function makeFallbackSequence(segmentCards) {
+  const ordered = sortCardsForTeaching(segmentCards);
+  if (!ordered.length) return [];
+  const phaseCount = Math.max(1, Math.min(5, Math.ceil(ordered.length / 4)));
+  const phaseSize = Math.max(1, Math.ceil(ordered.length / phaseCount));
+  const sequence = [];
+  for (let i = 0; i < ordered.length; i += phaseSize) {
+    const group = ordered.slice(i, i + phaseSize);
+    const start = Math.min(...group.map((c) => normalizeCardPages(c)[0]));
+    const end = Math.max(...group.map((c) => normalizeCardPages(c)[1]));
+    sequence.push({
+      phase: sequence.length + 1,
+      label: "第 " + start + "-" + end + " 页",
+      card_ids: group.map((c) => c.concept_id),
+      teach_goal: "按教材页序讲清本阶段知识点。",
+      branches: [],
+    });
+  }
+  return sequence;
+}
+
+function makeFallbackTeachingSegment(segmentCards, segStart, segEnd, reason) {
+  return {
+    page_range: [segStart, segEnd],
+    sequence: makeFallbackSequence(segmentCards),
+    generated_by: "deterministic-page-order",
+    fallback_reason: reason || "llm_map_unavailable",
+  };
+}
+
+function normalizeTeachingSegment(sequence, segmentCards, segStart, segEnd) {
+  if (!Array.isArray(sequence) || !sequence.length) return null;
+  const byKey = new Map();
+  const expected = sortCardsForTeaching(segmentCards).filter((c) => c && c.concept_id);
+  expected.forEach((c) => {
+    byKey.set(String(c.concept_id), c);
+    if (c.title) byKey.set(String(c.title), c);
+    if (c.title) byKey.set(String(c.concept_id) + " | " + String(c.title), c);
+  });
+  const used = new Set();
+  const phases = [];
+  for (const rawPhase of sequence) {
+    const rawIds = toArray(rawPhase && rawPhase.card_ids).map((id) => String(id || "").trim()).filter(Boolean);
+    const phaseCards = [];
+    for (const id of rawIds) {
+      const card = byKey.get(id) || byKey.get(id.split("|")[0].trim());
+      if (!card || used.has(card.concept_id)) continue;
+      used.add(card.concept_id);
+      phaseCards.push(card);
+    }
+    if (!phaseCards.length) continue;
+    const ordered = sortCardsForTeaching(phaseCards);
+    phases.push({
+      phase: phases.length + 1,
+      label: String((rawPhase && rawPhase.label) || ("第 " + (phases.length + 1) + " 阶段")),
+      card_ids: ordered.map((c) => c.concept_id),
+      teach_goal: String((rawPhase && rawPhase.teach_goal) || ""),
+      branches: toArray(rawPhase && rawPhase.branches).map((b) => String(b || "").trim()).filter(Boolean),
+    });
+  }
+  if (used.size !== expected.length || !phases.length) return null;
+
+  let previousStart = 0;
+  for (const phase of phases) {
+    const phaseCards = phase.card_ids.map((id) => byKey.get(String(id))).filter(Boolean);
+    const phaseStart = Math.min(...phaseCards.map((c) => normalizeCardPages(c)[0]));
+    if (phaseStart < previousStart) return null;
+    previousStart = phaseStart;
+  }
+  return {
+    page_range: [segStart, segEnd],
+    sequence: phases,
+    generated_by: "llm-validated",
+  };
+}
+
+// ---------------------------------------------------------------------------
 // Teaching map: order all cards into staged sequence segments (~16 cards/seg).
 // ---------------------------------------------------------------------------
-async function buildTeachingMap(allCards) {
+async function buildTeachingMap(allCards, opts) {
   if (!allCards.length) return null;
-  const sorted = allCards.slice().sort((a, b) => (a.source_pages || [0])[0] - (b.source_pages || [0])[0]);
+  opts = opts || {};
+  const sorted = sortCardsForTeaching(allCards);
   const segSize = 16;
   const results = [];
   for (let i = 0; i < sorted.length; i += segSize) {
     const seg = sorted.slice(i, i + segSize);
-    const segStart = Math.min(...seg.map((c) => (c.source_pages || c._chunk_pages)[0]));
-    const segEnd = Math.max(...seg.map((c) => { const sp = c.source_pages || c._chunk_pages; return sp[sp.length - 1]; }));
-    const cardList = seg.map((c) => "- " + (c.title || "?") + " (difficulty=" + (c.difficulty || "?") + ", pages=" + JSON.stringify(c.source_pages || "?") + ")").join("\n");
+    const segStart = Math.min(...seg.map((c) => normalizeCardPages(c)[0]));
+    const segEnd = Math.max(...seg.map((c) => normalizeCardPages(c)[1]));
+    const fallback = makeFallbackTeachingSegment(seg, segStart, segEnd, opts.deterministicOnly ? "deterministic_only" : "llm_map_failed");
+    if (opts.deterministicOnly) {
+      results.push(fallback);
+      continue;
+    }
+    const cardList = seg.map((c) => "- " + c.concept_id + " | " + (c.title || "?") + " (difficulty=" + (c.difficulty || "?") + ", pages=" + JSON.stringify(c.source_pages || "?") + ")").join("\n");
     try {
       const raw = await callCardLLM(MAP_SYSTEM, mapUserPrompt(TITLE, segStart, segEnd, cardList), null, 2048);
       const obj = parseLLMJson(raw, "teaching_sequence");
       const seq = obj.teaching_sequence || [];
-      results.push({ page_range: [segStart, segEnd], sequence: seq });
-      log("teaching map segment p." + segStart + "-" + segEnd + ": " + seq.length + " phases");
-    } catch (e) { log("teaching map segment failed: " + (e && e.message)); }
+      const normalized = normalizeTeachingSegment(seq, seg, segStart, segEnd);
+      if (normalized) {
+        results.push(normalized);
+        log("teaching map segment p." + segStart + "-" + segEnd + ": " + normalized.sequence.length + " validated phases");
+      } else {
+        results.push(fallback);
+        log("teaching map segment p." + segStart + "-" + segEnd + ": invalid/incomplete LLM map; using page-order fallback");
+      }
+    } catch (e) {
+      results.push(fallback);
+      log("teaching map segment failed: " + (e && e.message) + "; using page-order fallback");
+    }
   }
-  return results.length ? { segments: results } : null;
+  return results.length ? {
+    version: 2,
+    generated_at: new Date().toISOString(),
+    segments: results,
+    fallback_segments: results.filter((seg) => seg.generated_by !== "llm-validated").length,
+  } : null;
 }
 
 // ---------------------------------------------------------------------------
@@ -643,6 +842,47 @@ async function generateCardsForChunk(c, ci, total) {
   return cards;
 }
 
+async function finalizeKnowledgeBase(allCards, opts) {
+  opts = opts || {};
+  const cards = sortCardsForTeaching(allCards).filter((c) => c && c.concept_id);
+  const index = buildIndex(cards, opts.indexExtra);
+  writeJsonAtomic(path.join(KB_DIR, "index.json"), index);
+  log("index: " + index.card_count + " cards -> " + KB_DIR);
+
+  const tmap = await buildTeachingMap(cards, { deterministicOnly: !!opts.deterministicMapOnly });
+  if (tmap) {
+    writeJsonAtomic(path.join(KB_DIR, "teaching_map.json"), tmap);
+    log("teaching map: " + tmap.segments.length + " segments" +
+      (tmap.fallback_segments ? " (" + tmap.fallback_segments + " fallback)" : ""));
+  }
+  return { index, tmap };
+}
+
+async function recoverPartialKnowledgeBase(err) {
+  const cards = loadCardsFromDisk();
+  if (!cards.length) return false;
+  const message = (err && err.message) || "unknown";
+  log("recovering usable KB artifacts from " + cards.length + " card file(s)");
+  appendBuildLog({ type: "partial_recovery", cardCount: cards.length, error: message });
+  const result = await finalizeKnowledgeBase(cards, {
+    deterministicMapOnly: true,
+    indexExtra: {
+      partial: true,
+      recovered_from_cards: true,
+      recovery_error: message,
+    },
+  });
+  writeStatus("done", {
+    cardCount: result.index.card_count,
+    needsVerification: result.index.needs_verification_count,
+    hasTeachingMap: !!result.tmap,
+    partial: true,
+    recoveredFromCards: true,
+    error: message,
+  });
+  return true;
+}
+
 // ---------------------------------------------------------------------------
 // Main
 // ---------------------------------------------------------------------------
@@ -681,40 +921,27 @@ async function main() {
       const cid = slugify(card.title, idx);
       card.concept_id = cid;
       card._chunk_pages = [chunkStart, chunkEnd];
-      writeFileSync(path.join(cardsDir, cid + ".json"), JSON.stringify(card, null, 2), "utf-8");
+      writeJsonAtomic(path.join(cardsDir, cid + ".json"), card);
       allCards.push(card);
     }
     writeStatus("building", { cardCount: allCards.length, chunksDone: ci + 1, chunksTotal: chunks.length });
   }
 
-  const index = {
-    textbook: path.basename(SRC_PATH),
-    title: TITLE,
-    lang: "zh",
-    built_at: new Date().toISOString(),
-    model: CARD.model,
-    vision_fallback: VISION_OK ? VISION.model : null,
-    format: FORMAT,
-    card_count: allCards.length,
-    needs_verification_count: allCards.filter((c) => c.needs_verification).length,
-    cards: allCards.map((c) => ({
-      concept_id: c.concept_id, title: c.title || "",
-      difficulty: c.difficulty, source_pages: c.source_pages,
-      needs_verification: !!c.needs_verification,
-    })),
-  };
-  writeFileSync(path.join(KB_DIR, "index.json"), JSON.stringify(index, null, 2), "utf-8");
-  log("cards: " + allCards.length + " -> " + KB_DIR);
-
-  const tmap = await buildTeachingMap(allCards);
-  if (tmap) { writeFileSync(path.join(KB_DIR, "teaching_map.json"), JSON.stringify(tmap, null, 2), "utf-8"); log("teaching map: " + tmap.segments.length + " segments"); }
+  const finalized = await finalizeKnowledgeBase(allCards);
+  const index = finalized.index;
+  const tmap = finalized.tmap;
 
   writeStatus("done", { cardCount: allCards.length, needsVerification: index.needs_verification_count, hasTeachingMap: !!tmap });
   log("done");
 }
 
-main().catch((err) => {
+main().catch(async (err) => {
   log("FATAL: " + (err && err.message));
-  try { writeStatus("error", { error: err && err.message }); } catch (e) {}
+  try {
+    const recovered = await recoverPartialKnowledgeBase(err);
+    if (!recovered) writeStatus("error", { error: err && err.message });
+  } catch (e) {
+    try { writeStatus("error", { error: err && err.message, recoveryError: e && e.message }); } catch (e2) {}
+  }
   process.exit(1);
 });
