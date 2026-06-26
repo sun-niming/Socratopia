@@ -79,11 +79,12 @@ function evaluateCommit(current, loadedRange, signal) {
   current = current || {};
   loadedRange = loadedRange || {};
   var trigger = signal.trigger || "";
+  var triggerBase = String(trigger).split(":")[0];
   var isMarkdownLike = !!signal.isMarkdownLike;
   var fromPrefetch = !!signal.fromPrefetch;
 
   // Direct user-initiated or stall signals always commit
-  if (trigger === "user_page_intent" || trigger === "weak_stall" || trigger === "markdown_ready_commit") {
+  if (triggerBase === "user_page_intent" || triggerBase === "weak_stall" || triggerBase === "markdown_ready_commit") {
     var checked = allowedNextStart(current, loadedRange.startPage, {});
     if (!checked.allowed) {
       return {
@@ -93,7 +94,7 @@ function evaluateCommit(current, loadedRange, signal) {
         correctedEnd: loadedRange.endPage,
       };
     }
-    return { allowed: true, reason: trigger, correctedStart: checked.corrected, correctedEnd: loadedRange.endPage };
+    return { allowed: true, reason: triggerBase, correctedStart: checked.corrected, correctedEnd: loadedRange.endPage };
   }
 
   // Cached prefetch or auto triggers: must be adjacent
@@ -112,7 +113,7 @@ function evaluateCommit(current, loadedRange, signal) {
 
   // Auto triggers (secondHalf, TAE, threshold, windowEnd, assistant): adjacency required
   var autoTriggers = { kb_second_half_prefetch: 1, tae_prefetch: 1, threshold_prefetch: 1, window_end_prefetch: 1, assistant_signal: 1, user_prefetch: 1, cached_prefetch_commit: 1 };
-  if (autoTriggers[trigger]) {
+  if (autoTriggers[triggerBase]) {
     var autoAdj = allowedNextStart(current, loadedRange.startPage, {});
     if (!autoAdj.allowed) {
       return {

@@ -75,6 +75,10 @@ var ec8 = g.evaluateCommit({ start: 1, end: 1 }, { startPage: 8, endPage: 10 }, 
 ok(ec8.allowed === false, "cached prefetch non-adjacent blocked");
 ok(ec8.reason === "cached_prefetch_non_adjacent", "cached prefetch reason");
 
+var ec9 = g.evaluateCommit({ start: 1, end: 1 }, { startPage: 8, endPage: 10 }, { trigger: "cached_prefetch_commit:user_prefetch", fromPrefetch: true });
+ok(ec9.allowed === false, "prefixed cached prefetch non-adjacent blocked");
+ok(ec9.reason === "cached_prefetch_non_adjacent", "prefixed cached prefetch reason");
+
 // -- endClassAnchor --
 var ea = g.endClassAnchor({
   state: { taughtCursor: { startPage: 12, endPage: 14, status: "complete" } },

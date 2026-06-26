@@ -428,8 +428,11 @@ function focusFromState(teachingMap, cardMap, resumeState) {
 
   // 3) page coverage: among phases whose card source_pages cover lastTaughtPage, pick the first
   //    not-yet-completed phase when completed* is known; otherwise keep the last covering phase.
+  //    Explicit page starts are different from resume anchors: if a learner asks to start at p.N,
+  //    begin with the earliest matching phase instead of the last broad/cross-page phase.
   var page = (resumeState.lastTaughtPage && resumeState.lastTaughtPage > 0) ? resumeState.lastTaughtPage
            : (resumeState.currentPage && resumeState.currentPage > 0) ? resumeState.currentPage : null;
+  var explicitStartPage = !!(resumeState.explicitStartPage || resumeState.requestedStartPage || resumeState.jumpLoaded);
   if (phaseIndex === null && page != null && cardMap) {
     var covering = [];
     for (var pi = 0; pi < seq.length; pi++) {
@@ -448,7 +451,7 @@ function focusFromState(teachingMap, cardMap, resumeState) {
         }
         phaseIndex = (picked !== null) ? picked : covering[covering.length - 1];
       } else {
-        phaseIndex = covering[covering.length - 1]; // no completed info: keep existing fallback (last covering)
+        phaseIndex = explicitStartPage ? covering[0] : covering[covering.length - 1]; // no completed info: keep legacy resume fallback
       }
     }
   }

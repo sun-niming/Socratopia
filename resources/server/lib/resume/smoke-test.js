@@ -235,6 +235,9 @@ var cardMap3 = {
 // no completed -> last covering phase (index 2), preserves legacy fallback
 var fNoComp = R.focusFromState(teachingMap3, cardMap3, { lastTaughtPage: 110 });
 eq(fNoComp.phaseIndex, 2, "no completed -> last covering phase (legacy fallback)");
+// explicit page starts (chat "start from page N" / jump page) must start at the earliest covering phase
+var fExplicitStart = R.focusFromState(teachingMap3, cardMap3, { lastTaughtPage: 110, explicitStartPage: true });
+eq(fExplicitStart.phaseIndex, 0, "explicit page start -> first covering phase");
 // completed A -> first uncompleted covering phase is B (index 1)
 var fComp = R.focusFromState(teachingMap3, cardMap3, { lastTaughtPage: 110, completedTitles: ["A"] });
 eq(fComp.phaseIndex, 1, "completed A -> skip to first uncompleted covering phase B (index 1)");
