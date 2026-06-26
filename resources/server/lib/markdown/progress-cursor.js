@@ -74,7 +74,9 @@ function mirrorLegacyPageFields(state) {
   state = state || {};
   var taught = state.taughtCursor;
   if (taught && taught.startPage > 0) {
-    var page = taught.endPage || taught.startPage;
+    // The cursor anchor is the first page of the committed teaching chunk.
+    // endPage is only the loaded window tail and must not become resume progress.
+    var page = taught.startPage;
     state.lastTaughtPage = page;
     state.currentPage = page;
   }
@@ -195,10 +197,18 @@ function commitTaughtChunk(textbookDir, marker, readingMeta, opts) {
     reason: opts && opts.reason || "markdown_commit",
   });
   if (!taught) return null;
-  return writeCursor(textbookDir, {
+  // Also write loadedCursor if missing so both cursors exist
+  var prev = readCursor(textbookDir) || {};
+  var partial = {
     taughtCursor: taught,
     lastCommittedChunkId: taught.chunkId,
-  });
+  };
+  if (!prev.loadedCursor || !prev.loadedCursor.startPage) {
+    partial.loadedCursor = cursorFromMeta(readingMeta, {
+      updatedAt: new Date().toISOString(),
+    });
+  }
+  return writeCursor(textbookDir, partial);
 }
 
 function stateHash(state) {

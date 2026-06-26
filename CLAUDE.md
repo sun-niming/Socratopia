@@ -24,19 +24,38 @@ For server/route changes, editing `resources/server/` is enough because `main.js
 
 ## Available commands
 
-There is no build system, test suite, or linter in this directory. The root `package.json` only declares `acorn` (for syntax checking); run `npm install` at the root if you need it. The actual app dependencies are already bundled inside `resources/server/.next/node_modules/`.
+There is no root build pipeline. The root `package.json` only declares `acorn` for syntax checking; run `npm install` once if `node_modules/acorn` is missing.
 
 | Command | Purpose |
 |---------|---------|
-| `npm install` | Install root dev dependency (`acorn`) — only needed once for syntax checking |
-| `./Socratopia.exe` | Launch the app |
+| `npm install` | Install root dev dependency (`acorn`) for precise syntax error location |
+| `./Socratopia.exe` | Launch the packaged desktop app |
 | `node --check <file>` | Validate JS syntax after editing a bundle |
 | `node -e "const acorn=require('acorn'); acorn.parse(require('fs').readFileSync('<file>','utf-8'),{ecmaVersion:2022})"` | Locate syntax errors precisely in long minified lines |
 | `npx asar extract resources/app.asar _asar_extracted/` | Extract ASAR to edit `main.js` / `preload.js` |
 | `npx asar pack _asar_extracted/ resources/app.asar` | Repack ASAR after edits |
 | `node fix-asar-integrity.js` | Recalculate and patch the `ELECTRONASAR` hash in `Socratopia.exe` after repacking |
-| `node lib/kb-builder.mjs` | Standalone knowledge-base builder worker; tested via `KB_TEXTBOOK_DIR=... node lib/kb-builder.mjs` (see "Knowledge base auto-build on upload") |
-| `node tools/new-route.js <name> [--methods GET,POST] [--dry-run]` | Scaffold a new API route: allocates collision-free module IDs, writes route.js from test-key template, registers in 3 manifests, runs `node --check` |
+| `node tools/new-route.js <name> [--methods GET,POST] [--dry-run]` | Scaffold a new API route: allocates collision-free module IDs, writes `route.js`, registers in manifests, runs `node --check` |
+
+## Smoke tests
+
+Most server helpers have a co-located smoke test. Each is self-contained, sets a temporary `PROJECT_ROOT`, and requires no running app, LLM, webpack, or Next.js. Run a single test with `node <path>`:
+
+| Test file | Command |
+|-----------|---------|
+| Adaptive data layer (69 assertions) | `node resources/server/lib/adaptive/smoke-test.js` |
+| Concept graph builder (144 assertions) | `node resources/server/lib/adaptive/concept-graph-smoke-test.js` |
+| Diagnostician (83 assertions) | `node resources/server/lib/adaptive/diagnostician-smoke-test.js` |
+| Practice data layer (56 assertions) | `node resources/server/lib/practice/smoke-test.js` |
+| Practice source adapter (43 assertions) | `node resources/server/lib/practice/source-adapter-smoke-test.js` |
+| Tutoring session layer (46 assertions) | `node resources/server/lib/practice/tutoring-session-smoke-test.js` |
+| Resume/progress helper (37 assertions) | `node resources/server/lib/resume/smoke-test.js` |
+| Long-context reasoning (36 assertions) | `node resources/server/lib/reasoning/long-context-smoke-test.js` |
+| Model router (95 assertions) | `node resources/server/lib/model-router-smoke-test.js` |
+
+Live runtime E2E for the practice endpoint: `node resources/server/lib/practice/runtime-e2e-smoke.js`. Requires a running `./Socratopia.exe`; set `PRACTICE_E2E_BASE_URL`, `PRACTICE_E2E_PROFILE_ID`, `PRACTICE_E2E_WORLD_ID`, `PRACTICE_E2E_ACCOUNT_ID`, and `PRACTICE_E2E_TEXTBOOK_ID` to override auto-detection.
+
+After any code change, also run `node --check` on every edited `.js` bundle.
 
 ## High-level architecture
 
@@ -68,7 +87,7 @@ Socratopia is an Electron + Next.js standalone app with three layers:
 | File | Purpose |
 |------|---------|
 | `resources/app.asar` | Electron ASAR archive containing `dist-electron/main.js` and `dist-electron/preload.js` |
-| `resources/server/server.js` | Next.js standalone bootstrap; loads `settings.json` + `set.json`, sets globals (`__FS__`, `__PATH__`, `__RULES_DIR__`, `__SOCRATOPIA_SETTINGS__`, `__SOCRATOPIA_SET__`, `__KB_DISTILL__`, `__ADAPTIVE__`, `__ADAPTIVE_CONCEPT_GRAPH__`, `__ADAPTIVE_DIAGNOSTICIAN__`, `__PRACTICE__`, `__PRACTICE_SOURCE__`, `__PRACTICE_TUTOR__`, `__RESUME__`, `__LONG_REASONING__`), hardcodes `nextConfig`, calls `startServer()` |
+| `resources/server/server.js` | Next.js standalone bootstrap; loads `settings.json` + `set.json`, sets globals (`__FS__`, `__PATH__`, `__RULES_DIR__`, `__SOCRATOPIA_SETTINGS__`, `__SOCRATOPIA_SET__`, `__KB_DISTILL__`, `__ADAPTIVE__`, `__ADAPTIVE_CONCEPT_GRAPH__`, `__ADAPTIVE_DIAGNOSTICIAN__`, `__PRACTICE__`, `__PRACTICE_SOURCE__`, `__PRACTICE_TUTOR__`, `__RESUME__`, `__LONG_REASONING__`, `__MODEL_ROUTER__`), hardcodes `nextConfig`, calls `startServer()` |
 | `resources/server/.next/server/chunks/*.js` | Webpack-compiled server chunks containing shared logic (LLM calls, file I/O, data access) |
 | `resources/server/.next/server/app/api/*/route.js` | Individual API route handlers |
 | `resources/server/.next/server/app/page.js` | Main application page (React root) |
@@ -76,33 +95,25 @@ Socratopia is an Electron + Next.js standalone app with three layers:
 | `resources/bundled-content/` | Packaged static initial content: `initial_world/` (with `candidates_pic/`), plus localized variants `en/`, `zh/`, `zh-TW/` (each containing `initial_world/candidates/`) |
 | `resources/rules/` | Seeded system rules cached locally (fetched from remote on first chat and auto-saved) |
 | `resources/settings.json` | Central API configuration loaded at startup by `server.js` (chat / group chat) |
-| `resources/set.json` | Teaching-pipeline model tiers (`strong`/`kb`/`weak`); loaded into `global.__SOCRATOPIA_SET__` |
-| `resources/server/lib/kb-builder.mjs` | JS knowledge-base builder worker; spawned on upload, writes `knowledge_base/` (cards + teaching map). Uses `pdfjs-dist` + `@napi-rs/canvas` to render image-dense PDF pages and sends them directly to the card model (currently gpt-5.4-mini for cost control). `set.json.vision` is an optional fallback — the default pipeline does not depend on it.
-| `resources/server/lib/pdf-worker.mjs` | Standalone PDF extraction worker (ESM); used by the textbook upload/extraction path. `kb-builder.mjs` loads `pdfjs-dist` directly for KB builds.
-| `resources/server/lib/adaptive/data-layer.js` | Adaptive teaching data layer (IIFE); loaded by `server.js` into `global.__ADAPTIVE__`. Stores LearnerModel, ConceptGraph, TeachingSession, TeachingEvents under `<PROJECT_ROOT>/adaptive-teaching/`
-| `resources/server/lib/adaptive/concept-graph-builder.js` | ConceptGraph generation (LLM + KB + dry-run paths); loaded by `server.js` into `global.__ADAPTIVE_CONCEPT_GRAPH__`. Exports buildConceptGraph, validateConceptGraph, normalizeConceptGraph.
-| `resources/server/lib/adaptive/diagnostician.js` | Structured diagnosis agent; loaded by `server.js` into `global.__ADAPTIVE_DIAGNOSTICIAN__`. Exports diagnose(), buildDiagnosisPrompt(), normalizeDiagnosis(), validateDiagnosis(), makeFallbackDiagnosis().
-| `resources/server/lib/adaptive/smoke-test.js` | Self-contained smoke test (69 assertions) for the adaptive data layer. Run: `node resources/server/lib/adaptive/smoke-test.js`
-| `resources/server/lib/adaptive/concept-graph-smoke-test.js` | Smoke test (144 assertions) for concept graph builder. Run: `node resources/server/lib/adaptive/concept-graph-smoke-test.js`
-| `resources/server/lib/adaptive/diagnostician-smoke-test.js` | Smoke test (83 assertions) for diagnostician. Run: `node resources/server/lib/adaptive/diagnostician-smoke-test.js`
-| `resources/server/lib/practice/data-layer.js` | Practice workbench data layer (IIFE); loaded by `server.js` into `global.__PRACTICE__`. Stores PracticeProblemSet, PracticeAnswerRecord, PracticeMistake under `<PROJECT_ROOT>/profiles/<pid>/worlds/<wid>/practice/` (problem_sets/, sessions/, mistakes/). NOT under adaptive-teaching/.
-| `resources/server/lib/practice/smoke-test.js` | Smoke test (56 assertions) for practice data layer. Run: `node resources/server/lib/practice/smoke-test.js`
-| `resources/server/lib/practice/source-adapter.js` | Practice source adapter (IIFE); loaded by `server.js` into `global.__PRACTICE_SOURCE__`. Resolves generate source text for sourceType manual/textbook-page/chapter/conversation (reads textbooks/<tid>/pages, current_reading.md, concept-summaries, lesson_summaries, chats). Read-only; never creates files. Optional ConceptGraph context via `global.__ADAPTIVE__`.
-| `resources/server/lib/practice/source-adapter-smoke-test.js` | Smoke test (43 assertions) for practice source adapter. Run: `node resources/server/lib/practice/source-adapter-smoke-test.js`
-| `resources/server/lib/resume/progress-resume.js` | Structured resume-state helper; loaded by `server.js` into `global.__RESUME__`. Reads/writes `textbooks/<tid>/progress_state.json` (merge-on-write, never drops fields), parses progress.md first line (zh `# 当前页码：第 N 页` / en `# Current Page: Page N`), resolves resume start page (progress_state → progress.md → currentPage), locates the KB teaching_map focus phase from resume state (by page coverage / title / explicit phaseIndex), and exposes a one-shot `setPending/takePending(convId)` stash so the chat first-turn can hand resumeState to the `read_textbook_pages` tool. Also `stateHash()` for cache keying.
-| `resources/server/lib/resume/smoke-test.js` | Smoke test (37 assertions) for progress-resume helper (zh/en page parse, state merge, focus-by-page, phase-2 directive, stateHash). Run: `node resources/server/lib/resume/smoke-test.js`
-| `resources/server/lib/practice/tutoring-session.js` | Tutoring session data layer (IIFE); loaded by `server.js` into `global.__PRACTICE_TUTOR__`. Per-problemSet AI讲题 chat sessions bound to a companion. Stores under `profiles/<pid>/worlds/<wid>/practice/tutoring_sessions/<problemSetId>.json` (atomic-write, corrupt-JSON tolerant). Exports `module.exports = api`.
-| `resources/server/lib/practice/tutoring-session-smoke-test.js` | Smoke test (46 assertions) for tutoring session layer. Run: `node resources/server/lib/practice/tutoring-session-smoke-test.js`
-| `resources/server/lib/reasoning/long-context.js` | Long-distance reasoning context (Graph-RAG prototype, **demo only**); loaded by `server.js` into `global.__LONG_REASONING__`. READ-ONLY — never touches the live classroom chain. Given a focus page/concept/query, recalls cross-page prerequisites, related cards and evidence from an existing ConceptGraph (saved → dry-run → KB fallback) and emits a hidden classroom-context `promptBlock`. Exports `buildLongReasoningContext(input)` plus `_`-prefixed test helpers.
-| `resources/server/lib/reasoning/long-context-smoke-test.js` | Smoke test (36 assertions) for long-context helper. Run: `node resources/server/lib/reasoning/long-context-smoke-test.js`
-| `resources/server/lib/practice/runtime-e2e-smoke.js` | Runtime E2E smoke: auto-detects the running Socratopia.exe HTTP port (Windows PowerShell, falls back to candidate ports) and exercises `/api/practice` generate/grade/hint/explain/variant against the live service using the built-in strong LLM chain (no external apiKey). Env: `PRACTICE_E2E_BASE_URL`, `PRACTICE_E2E_PROFILE_ID`, `PRACTICE_E2E_WORLD_ID`, `PRACTICE_E2E_ACCOUNT_ID`, `PRACTICE_E2E_TEXTBOOK_ID`. Run: `node resources/server/lib/practice/runtime-e2e-smoke.js`
-| `resources/server/lib/model-router.js` | Unified cost-aware model router (CommonJS); loaded by `server.js` into `global.__MODEL_ROUTER__`. Exports `resolveModelRoute`, `callRoutedLLM`, `shouldEscalateAfterFailure`, `validateRoutedOutput`, `classifyError`. mini-default + single premium escalation on content failures. See "Model router" section.
-| `resources/server/lib/model-router-smoke-test.js` | Smoke test (95 assertions) for the model router. Run: `node resources/server/lib/model-router-smoke-test.js`
-| `tools/new-route.js` | Route generator script; auto-allocates collision-free webpack module IDs by scanning all existing routes, then writes and registers a new API route
+| `resources/set.json` | Teaching-pipeline model tiers (`strong`/`kb`/`weak`/`premium`/`routing`/`vision`); loaded into `global.__SOCRATOPIA_SET__` |
+| `resources/server/lib/kb-builder.mjs` | JS knowledge-base builder worker; spawned on upload, writes `knowledge_base/` (cards + teaching map). Uses `pdfjs-dist` + `@napi-rs/canvas` to render image-dense PDF pages and sends them directly to the card model. `set.json.vision` is an optional fallback — the default pipeline does not depend on it. |
+| `resources/server/lib/pdf-worker.mjs` | Standalone PDF extraction worker (ESM); used by the textbook upload/extraction path. `kb-builder.mjs` loads `pdfjs-dist` directly for KB builds. |
+| `resources/server/lib/adaptive/data-layer.js` | Adaptive teaching data layer (IIFE); loaded by `server.js` into `global.__ADAPTIVE__`. Stores LearnerModel, ConceptGraph, TeachingSession, TeachingEvents under `<PROJECT_ROOT>/adaptive-teaching/` |
+| `resources/server/lib/adaptive/concept-graph-builder.js` | ConceptGraph generation (LLM + KB + dry-run paths); loaded by `server.js` into `global.__ADAPTIVE_CONCEPT_GRAPH__`. Exports buildConceptGraph, validateConceptGraph, normalizeConceptGraph. |
+| `resources/server/lib/adaptive/diagnostician.js` | Structured diagnosis agent; loaded by `server.js` into `global.__ADAPTIVE_DIAGNOSTICIAN__`. Exports diagnose(), buildDiagnosisPrompt(), normalizeDiagnosis(), validateDiagnosis(), makeFallbackDiagnosis(). |
+| `resources/server/lib/practice/data-layer.js` | Practice workbench data layer (IIFE); loaded by `server.js` into `global.__PRACTICE__`. Stores PracticeProblemSet, PracticeAnswerRecord, PracticeMistake under `<PROJECT_ROOT>/profiles/<pid>/worlds/<wid>/practice/` (problem_sets/, sessions/, mistakes/). NOT under adaptive-teaching/. |
+| `resources/server/lib/practice/source-adapter.js` | Practice source adapter (IIFE); loaded by `server.js` into `global.__PRACTICE_SOURCE__`. Resolves generate source text for sourceType manual/textbook-page/chapter/conversation (reads textbooks/<tid>/pages, current_reading.md, concept-summaries, lesson_summaries, chats). Read-only; never creates files. Optional ConceptGraph context via `global.__ADAPTIVE__`. |
+| `resources/server/lib/resume/progress-resume.js` | Structured resume-state helper; loaded by `server.js` into `global.__RESUME__`. Reads/writes `textbooks/<tid>/progress_state.json` (merge-on-write, never drops fields), parses progress.md first line (zh `# 当前页码：第 N 页` / en `# Current Page: Page N`), resolves resume start page (progress_state → progress.md → currentPage), locates the KB teaching_map focus phase from resume state (by page coverage / title / explicit phaseIndex), and exposes a one-shot `setPending/takePending(convId)` stash so the chat first-turn can hand resumeState to the `read_textbook_pages` tool. Also `stateHash()` for cache keying. |
+| `resources/server/lib/practice/tutoring-session.js` | Tutoring session data layer (IIFE); loaded by `server.js` into `global.__PRACTICE_TUTOR__`. Per-problemSet AI讲题 chat sessions bound to a companion. Stores under `profiles/<pid>/worlds/<wid>/practice/tutoring_sessions/<problemSetId>.json` (atomic-write, corrupt-JSON tolerant). Exports `module.exports = api`. |
+| `resources/server/lib/reasoning/long-context.js` | Long-distance reasoning context (Graph-RAG prototype, **demo only**); loaded by `server.js` into `global.__LONG_REASONING__`. READ-ONLY — never touches the live classroom chain. Given a focus page/concept/query, recalls cross-page prerequisites, related cards and evidence from an existing ConceptGraph (saved → dry-run → KB fallback) and emits a hidden classroom-context `promptBlock`. Exports `buildLongReasoningContext(input)` plus `_`-prefixed test helpers. |
+| `resources/server/lib/model-router.js` | Unified cost-aware model router (CommonJS); loaded by `server.js` into `global.__MODEL_ROUTER__`. Exports `resolveModelRoute`, `callRoutedLLM`, `shouldEscalateAfterFailure`, `validateRoutedOutput`, `classifyError`. mini-default + single premium escalation on content failures. See "Model router" section. |
+| `resources/server/lib/practice/runtime-e2e-smoke.js` | Runtime E2E smoke: auto-detects the running Socratopia.exe HTTP port (Windows PowerShell, falls back to candidate ports) and exercises `/api/practice` generate/grade/hint/explain/variant against the live service using the built-in strong LLM chain (no external apiKey). |
+| `tools/new-route.js` | Route generator script; auto-allocates collision-free webpack module IDs by scanning all existing routes, then writes and registers a new API route |
 | `resources/app-update.yml` | Auto-update config (disabled — points to `http://127.0.0.1:9`) |
 | `main.js` (repo root) | Working copy of the Electron main process bundle for editing |
 | `preload.js` (repo root) | Working copy of the preload script for editing |
 | `fix-asar-integrity.js` | Automates ELECTRONASAR hash repair in `Socratopia.exe` after repacking |
+| `AGENTS.md` | Companion guidelines for agent-based work in this repo (project structure, commands, style, commits) |
 
 **Note on `_asar_extracted/`**: This directory is gitignored. After pulling changes or switching branches, any extracted ASAR contents may be stale; re-extract from the current `resources/app.asar` before editing.
 
@@ -141,7 +152,7 @@ All routes live under `resources/server/.next/server/app/api/`. The routes most 
 - `adaptive-teaching/route.js` — adaptive teaching mode (currently no-op echo route / placeholder for future orchestrator)
 - `adaptive-concept-graph/route.js` — ConceptGraph generation endpoint (POST build/dry-run, GET read)
 - `adaptive-diagnosis/route.js` — Diagnosis endpoint (POST); calls `global.__ADAPTIVE_DIAGNOSTICIAN__` for structured student diagnosis
-- `practice/route.js` — Practice workbench. **Workbench actions** (calls `global.__PRACTICE__` + `__PRACTICE_SOURCE__`): GET list/read; POST action=generate|grade|hint|explain|variant|saveMistake|listMistakes. Choice/fill grading is local (no LLM); subjective grading + generate/hint/explain/variant use the teaching-model LLM. `generate` source resolution is delegated to `global.__PRACTICE_SOURCE__` (manual/textbook-page/chapter/conversation, with concept-summary→lesson-summary→recent-messages fallback for conversation). **Tutoring actions** (AI讲题, calls `global.__PRACTICE_TUTOR__`): getProblemSet, getTutoringSession, listTutoringSessions, deleteTutoringSession, setTutoringCompanion, tutorExample, tutorExplain, tutorFreeChat, tutorFullAnswer, tutorHint, tutorRephrase, tutorVariant. Stores under `profiles/<pid>/worlds/<wid>/practice/` (problem_sets/, sessions/, mistakes/, tutoring_sessions/).
+- `practice/route.js` — Practice workbench. **Workbench actions** (calls `global.__PRACTICE__` + `__PRACTICE_SOURCE__`): GET list/read; POST action=generate\|grade\|hint\|explain\|variant\|saveMistake\|listMistakes. Choice/fill grading is local (no LLM); subjective grading + generate/hint/explain/variant use the teaching-model LLM. `generate` source resolution is delegated to `global.__PRACTICE_SOURCE__` (manual/textbook-page/chapter/conversation, with concept-summary→lesson-summary→recent-messages fallback for conversation). **Tutoring actions** (AI讲题, calls `global.__PRACTICE_TUTOR__`): getProblemSet, getTutoringSession, listTutoringSessions, deleteTutoringSession, setTutoringCompanion, tutorExample, tutorExplain, tutorFreeChat, tutorFullAnswer, tutorHint, tutorRephrase, tutorVariant. Stores under `profiles/<pid>/worlds/<wid>/practice/` (problem_sets/, sessions/, mistakes/, tutoring_sessions/).
 - `long-reasoning-demo/route.js` — Graph-RAG long-distance reasoning demo (GET); calls `global.__LONG_REASONING__.buildLongReasoningContext` (read-only, never persists). Requires `profileId`/`worldId`/`textbookId` query params.
 - `test-key/route.js` — API key validation
 
@@ -320,7 +331,7 @@ This deployment uses **codex-only** (GPT provider). Legacy `other`/`deepseek`/`g
 
 Separate from `settings.json` (which still drives chat/group-chat via module 64092), `set.json` configures the **teaching pipeline** with lightweight role blocks. Each role can be as small as `{apiType, model}`; `server.js` fills `baseUrl` and `apiKey` from `settings.json`.
 
-- **`strong`** — page-turn prep, flashcards, classroom/lesson summaries, concept summaries. **Now defaults to `gpt-5.4-mini` (mini) for cost control** — `strong` is a "strong-task role", not "always the expensive model". The high-value model lives in `premium`.
+- **`strong`** — page-turn prep, flashcards, classroom/lesson summaries, concept summaries. **Defaults to `gpt-5.4-mini` (mini) for cost control** — `strong` is a "strong-task role", not "always the expensive model". The high-value model lives in `premium`.
 - **`kb`** — page-turn knowledge distillation (`__KB_DISTILL__`) and KB auto-build card model. This role currently uses gpt-5.4-mini for cost control. If the configured model supports images, it can receive PDF page images directly for transcription + card generation in one pass; otherwise the builder falls back to text-only extraction. Delete this block to auto-fall-back to `strong`.
 - **`weak`** — teaching dialogue
 - **`premium`** — **high-value model** (`gpt-5.5`). Used only for inherently-complex tasks (concept graph, cross-chapter diagnosis), high input complexity, explicit user high-quality mode, or a single failure-escalation when a mini attempt returns empty/unparseable/schema-invalid output. **Optional**: if absent, the router silently never escalates (`reason=no_premium_config`). Mirrored in `settings.json.gpt.models.premium`.

@@ -45,8 +45,9 @@ function main() {
     var meta10 = { startPage: 10, endPage: 12, chunkId: "md-0010", ordinal: 10 };
     var ready10 = cursor.parseProgressMarker("done\n<!-- mdProgress: chunk=md-0010 status=complete coverage=1 ready=true -->");
     state = cursor.commitTaughtChunk(dir, ready10, meta10);
-    assert.strictEqual(state.lastTaughtPage, 12);
-    assert.strictEqual(state.currentPage, 12);
+    assert.strictEqual(state.lastTaughtPage, 10);
+    assert.strictEqual(state.currentPage, 10);
+    assert.strictEqual(state.taughtCursor.endPage, 12);
 
     console.log("progress-cursor smoke ok");
   } finally {

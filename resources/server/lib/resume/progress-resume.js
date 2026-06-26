@@ -17,7 +17,7 @@ var fs = require("fs");
 var path = require("path");
 var crypto = require("crypto");
 
-var SCHEMA_VERSION = 1;
+var SCHEMA_VERSION = 2;
 var STATE_FILE = "progress_state.json";
 
 // Parse the page number from progress.md first line (or whole text). Handles zh/en variants:
@@ -76,6 +76,137 @@ function uniqMerge(oldArr, newArr) {
   return out;
 }
 
+function normalizePage(n) {
+  n = Number(n);
+  return Number.isFinite(n) && n > 0 ? Math.floor(n) : null;
+}
+
+function firstPage() {
+  for (var i = 0; i < arguments.length; i++) {
+    var p = normalizePage(arguments[i]);
+    if (p) return p;
+  }
+  return null;
+}
+
+function parseFirstProgressRange(text) {
+  if (!text || typeof text !== "string") return null;
+  var m = /\bp\.(\d+)\s*-\s*(\d+)/i.exec(text);
+  if (!m) return null;
+  var startPage = parseInt(m[1], 10);
+  var endPage = parseInt(m[2], 10);
+  if (!(startPage > 0 && endPage > 0)) return null;
+  return { startPage: startPage, endPage: endPage };
+}
+
+function readWindowBounds(state) {
+  state = state || {};
+  var loaded = state.loadedCursor || {};
+  var taught = state.taughtCursor || {};
+  return {
+    startPage: firstPage(state.windowStartPage, loaded.startPage, taught.startPage),
+    endPage: firstPage(state.windowEndPage, loaded.endPage, taught.endPage),
+  };
+}
+
+function looksLikeWindowTail(page, state) {
+  page = normalizePage(page);
+  if (!page) return false;
+  var w = readWindowBounds(state);
+  return !!(w.startPage && w.endPage && w.endPage > w.startPage && page === w.endPage);
+}
+
+function dewindowedPage(page, state) {
+  page = normalizePage(page);
+  if (!page) return null;
+  var w = readWindowBounds(state);
+  if (looksLikeWindowTail(page, state) && w.startPage) return w.startPage;
+  return page;
+}
+
+function looksLikeProgressRangeTail(page, progressMdText, currentPage) {
+  page = normalizePage(page);
+  var range = parseFirstProgressRange(progressMdText);
+  if (!page || !range || !(range.endPage > range.startPage)) return false;
+  if (page !== range.endPage) return false;
+  currentPage = normalizePage(currentPage);
+  return !currentPage || currentPage === range.startPage;
+}
+
+// End-class should persist the actual teaching anchor, not the tail of the
+// preloaded reading window. Prefer already-recorded teaching progress, then the
+// active window start. Use windowEndPage only as a last resort.
+// If global.__PROGRESS_GUARD__ is available, delegates to it; otherwise falls back
+// to the built-in logic.
+function resolveEndClassAnchor(opts) {
+  opts = opts || {};
+  // Use progress-guard if available
+  if (typeof global !== "undefined" && global.__PROGRESS_GUARD__ && global.__PROGRESS_GUARD__.endClassAnchor) {
+    try {
+      var state = opts.state || (opts.textbookDir ? readState(opts.textbookDir) : null) || {};
+      var fromMd = parseProgressPage(opts.progressMdText);
+      var result = global.__PROGRESS_GUARD__.endClassAnchor({
+        state: state,
+        progressMdPage: fromMd,
+        windowStartPage: opts.windowStartPage,
+        windowEndPage: opts.windowEndPage,
+        currentPage: opts.currentPage,
+      });
+      if (result) return result;
+    } catch (e) {
+      console.warn("[resume] progress-guard endClassAnchor failed, using fallback:", e.message);
+    }
+  }
+  // Fallback: original logic
+  var state = opts.state || (opts.textbookDir ? readState(opts.textbookDir) : null) || {};
+  var fromMd = parseProgressPage(opts.progressMdText);
+  var w = readWindowBounds({
+    windowStartPage: opts.windowStartPage,
+    windowEndPage: opts.windowEndPage,
+    loadedCursor: state.loadedCursor,
+    taughtCursor: state.taughtCursor,
+  });
+  var windowState = { windowStartPage: w.startPage, windowEndPage: w.endPage };
+  var mdPage = looksLikeWindowTail(fromMd, windowState) ? null : fromMd;
+  var rawStatePage = firstPage(state.lastTaughtPage, state.currentPage);
+  var statePage = dewindowedPage(rawStatePage, {
+    windowStartPage: w.startPage,
+    windowEndPage: w.endPage,
+    loadedCursor: state.loadedCursor,
+    taughtCursor: state.taughtCursor,
+  });
+  var page = firstPage(mdPage, statePage, w.startPage, opts.currentPage, w.endPage, 1);
+  var source = mdPage ? "progress.md"
+             : (rawStatePage && statePage && rawStatePage !== statePage) ? "progress_state_window_start"
+             : statePage ? "progress_state"
+             : w.startPage ? "windowStartPage"
+             : opts.currentPage ? "currentPage"
+             : "windowEndPage";
+  return { page: page, source: source, windowStartPage: w.startPage, windowEndPage: w.endPage };
+}
+
+function normalizeProgressMdPage(text, page, startPage) {
+  page = normalizePage(page);
+  if (!text || typeof text !== "string" || !page) return text;
+  startPage = normalizePage(startPage) || page;
+  var lines = text.split(/\r?\n/);
+  var firstHeading = -1;
+  for (var i = 0; i < lines.length; i++) {
+    if (/^\s*#/.test(lines[i])) { firstHeading = i; break; }
+  }
+  if (firstHeading < 0) {
+    lines.unshift("# Current Page: Page " + page);
+  } else if (/current\s*page/i.test(lines[firstHeading])) {
+    lines[firstHeading] = "# Current Page: Page " + page;
+  } else if (/\d+/.test(lines[firstHeading])) {
+    lines[firstHeading] = lines[firstHeading].replace(/\d+/, String(page));
+  } else {
+    lines.splice(firstHeading, 0, "# Current Page: Page " + page);
+  }
+  var out = lines.join("\n");
+  return out.replace(/\bp\.(\d+)\s*-\s*(\d+)/, "p." + startPage + "-" + page);
+}
+
 // Merge write: read old state -> shallow-merge partial (only fields explicitly present in partial)
 //   -> union completed* arrays -> write to disk. Missing fields in partial keep old values; never
 //   clears existing progress.
@@ -111,6 +242,43 @@ function writeState(textbookDir, partial) {
   }
 }
 
+// Convenience wrapper: update taughtCursor + mirror lastTaughtPage/currentPage.
+// Range must have { start, end }. Also writes loadedCursor from range if not already set.
+function updateTeachingRange(textbookDir, range, source) {
+  range = range || {};
+  var startPage = normalizePage(range.start);
+  var endPage = normalizePage(range.end);
+  if (!startPage || !endPage) return null;
+  var prev = readState(textbookDir) || {};
+  var taughtCursor = {
+    chunkId: "taught-" + String(startPage).padStart(4, "0"),
+    ordinal: startPage,
+    startPage: startPage,
+    endPage: endPage,
+    status: "complete",
+    coverage: 1,
+    ready: true,
+    committedAt: new Date().toISOString(),
+    reason: source || "teaching_range_update",
+  };
+  var partial = {
+    taughtCursor: taughtCursor,
+    lastTaughtPage: startPage,
+    currentPage: startPage,
+  };
+  // Also fill loadedCursor if missing
+  if (!prev.loadedCursor || !prev.loadedCursor.startPage) {
+    partial.loadedCursor = {
+      chunkId: "loaded-" + String(startPage).padStart(4, "0"),
+      ordinal: startPage,
+      startPage: startPage,
+      endPage: endPage,
+      updatedAt: new Date().toISOString(),
+    };
+  }
+  return writeState(textbookDir, partial);
+}
+
 // Resolve resume start page + resumeState. Priority: progress_state.json -> progress.md first line
 //   -> currentPage -> 1. Always returns a resumeState (at least lastTaughtPage) so KB can locate the
 //   focus phase by page; when there is no progress at all, resumeState=null.
@@ -123,9 +291,10 @@ function resolveStartPage(opts) {
 
   var state = textbookDir ? readState(textbookDir) : null;
   if (state) {
-    var statePage = (state.lastTaughtPage && state.lastTaughtPage > 0) ? state.lastTaughtPage
-                  : (state.currentPage && state.currentPage > 0) ? state.currentPage
-                  : null;
+    var rawStatePage = (state.lastTaughtPage && state.lastTaughtPage > 0) ? state.lastTaughtPage
+                     : (state.currentPage && state.currentPage > 0) ? state.currentPage
+                     : null;
+    var statePage = dewindowedPage(rawStatePage, state);
     var cp = (currentPage && currentPage > 0) ? currentPage : null;
     var sp = statePage || fromMd || cp || 1;
     var source = "progress_state";
@@ -134,12 +303,17 @@ function resolveStartPage(opts) {
     // human-readable teaching record and may be newer after older builds or a failed
     // structured write. textbook.currentPage can represent a preloaded/visible window,
     // so it must not leapfrog a real teaching-progress anchor.
-    if (fromMd && fromMd > (statePage || 0)) {
+    if (fromMd && fromMd > (statePage || 0)
+        && !looksLikeWindowTail(fromMd, state)
+        && !looksLikeProgressRangeTail(fromMd, progressMdText, statePage || cp)) {
       sp = fromMd;
       source = "progress.md+state";
     } else if (!statePage && cp) {
       sp = fromMd || cp;
       source = fromMd ? "progress.md+state" : "currentPage+state";
+    } else if (rawStatePage && statePage && rawStatePage !== statePage) {
+      sp = statePage;
+      source = "progress_state_window_start";
     }
 
     if (source !== "progress_state") {
@@ -155,6 +329,22 @@ function resolveStartPage(opts) {
   }
 
   if (fromMd && fromMd > 0) {
+    var range = parseFirstProgressRange(progressMdText);
+    var cpNoState = (currentPage && currentPage > 0) ? currentPage : null;
+    if (looksLikeProgressRangeTail(fromMd, progressMdText, cpNoState) && range) {
+      return {
+        startPage: range.startPage,
+        resumeState: {
+          schemaVersion: SCHEMA_VERSION,
+          lastTaughtPage: range.startPage,
+          currentPage: range.startPage,
+          windowStartPage: range.startPage,
+          windowEndPage: range.endPage,
+          source: "progress.md_window_start",
+        },
+        source: "progress.md_window_start",
+      };
+    }
     return {
       startPage: fromMd,
       resumeState: { schemaVersion: SCHEMA_VERSION, lastTaughtPage: fromMd, source: "progress.md" },
@@ -328,10 +518,14 @@ module.exports = {
   SCHEMA_VERSION: SCHEMA_VERSION,
   STATE_FILE: STATE_FILE,
   parseProgressPage: parseProgressPage,
+  parseFirstProgressRange: parseFirstProgressRange,
   statePath: statePath,
   readState: readState,
   writeState: writeState,
+  updateTeachingRange: updateTeachingRange,
   resolveStartPage: resolveStartPage,
+  resolveEndClassAnchor: resolveEndClassAnchor,
+  normalizeProgressMdPage: normalizeProgressMdPage,
   focusFromState: focusFromState,
   stateHash: stateHash,
   setPending: setPending,
