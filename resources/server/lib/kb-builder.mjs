@@ -255,9 +255,9 @@ function parseLLMJson(content, anchorKey) {
 // ---------------------------------------------------------------------------
 // Prompts (simplified-Chinese; ported verbatim from the proven server.js path)
 // ---------------------------------------------------------------------------
-const VISION_PROMPT = "你是一名教材内容转录专家。请将这张教材页面图片中的所有文字和内容精确转录为纯文本。\n要求:\n- 保留原文的段落结构和层次\n- 代码/命令保持原格式\n- 表格用文本形式表示\n- 图表/流程图用简洁文字描述其内容和含义\n- 公式用文本表示\n- 忽略页眉、页脚、页码\n- 只输出转录文本,不加任何额外说明或标记\n- 只用简体中文输出(英文术语/代码保持原文)";
+const VISION_PROMPT = "你是一名教材内容转录专家。请将这张教材页面图片中的所有文字和内容精确转录为纯文本。\n要求:\n- 保留原文的段落结构和层次\n- 代码/命令保持原格式\n- 表格用文本形式表示\n- 图表/流程图用简洁文字描述其内容和含义\n- 公式优先用 Markdown LaTeX 表示:行内 $...$,独立公式 $$...$$,矩阵/分段式用 bmatrix/cases/aligned 等环境\n- 忽略页眉、页脚、页码\n- 只输出转录文本,不加任何额外说明或标记\n- 只用简体中文输出(英文术语/代码保持原文)";
 
-const CARD_SYSTEM = "你是一名严谨的学科知识库构建专家,正在把一本教材的原文整理成\u201c已核实知识卡片\u201d。\n这些卡片将来会被一个能力较弱、较廉价的大模型直接用于教学,因此卡片必须:\n1. 准确——只依据给定原文,不臆造原文没有的内容;\n2. 自足——弱模型不读原文也能照卡片把这个知识点讲清楚;\n3. 可核实——凡是你对某条事实没有十足把握(可能是教材笔误、版本差异、记忆模糊),必须把该卡片的 needs_verification 置为 true,并在 verify_query 写出用于联网核实的检索式。\n\n只用简体中文输出。";
+const CARD_SYSTEM = "你是一名严谨的学科知识库构建专家,正在把一本教材的原文整理成\u201c已核实知识卡片\u201d。\n这些卡片将来会被一个能力较弱、较廉价的大模型直接用于教学,因此卡片必须:\n1. 准确——只依据给定原文,不臆造原文没有的内容;\n2. 自足——弱模型不读原文也能照卡片把这个知识点讲清楚;\n3. 可核实——凡是你对某条事实没有十足把握(可能是教材笔误、版本差异、记忆模糊),必须把该卡片的 needs_verification 置为 true,并在 verify_query 写出用于联网核实的检索式;\n4. 可渲染——涉及公式、矩阵、分段式、递推式、坐标、图形标注或表格化结构时,优先保留/改写为 Markdown LaTeX:行内用 $...$,独立公式用 $$...$$;矩阵用 \\begin{bmatrix}...\\end{bmatrix},对齐用 aligned/cases/array。不要用纯 ASCII 方框硬画数学结构,除非原文就是代码或命令。\n\n只用简体中文输出。";
 
 function cardUserPrompt(title, start, end, body, hasImages) {
   let extra = "";
@@ -265,7 +265,7 @@ function cardUserPrompt(title, start, end, body, hasImages) {
     extra = "\n\n注：以上原文对应的教材页面截图已一并提供（image 格式），请结合图片中的完整内容（图表、公式、特殊排版等）进行抽取。";
   }
   return "下面是教材《" + title + "》第 " + start + "-" + end + " 页的原文(含页码标记)。\n请从中抽取**独立的知识点**,每个知识点产出一张卡片。忽略目录、页眉页脚、纯插图说明。\n\n严格输出如下 JSON(不要加 markdown 代码块标记,不要任何额外文字):\n" +
-    "{\"cards\":[{\"title\":\"知识点名称(简短)\",\"definition\":\"准确、自足的定义/说明,弱模型据此即可讲解\",\"key_points\":[\"要点1\",\"要点2\"],\"examples\":[\"来自或贴合原文的示例,代码用文本表示\"],\"misconceptions\":[\"学习者常见的错误理解(如能从原文推断)\"],\"qa_pairs\":[{\"q\":\"考察该点的问题\",\"a\":\"标准答案\"}],\"difficulty\":1,\"prerequisites\":[\"前置知识点名称\"],\"source_pages\":[" + start + "," + end + "],\"needs_verification\":false,\"verify_query\":\"\"}]}\n\n要求:\n- difficulty 取 1-3(1 入门 / 2 进阶 / 3 综合)。\n- source_pages 必须落在 " + start + "-" + end + " 范围内,指向该知识点实际出现的页。\n- 对任何你不确定的事实,把该卡片 needs_verification 设为 true,并写出 verify_query。\n- 没有内容可抽取时返回 {\"cards\":[]}。\n\n原文如下:\n----------------\n" + body + "\n----------------" + extra;
+    "{\"cards\":[{\"title\":\"知识点名称(简短)\",\"definition\":\"准确、自足的定义/说明,弱模型据此即可讲解\",\"key_points\":[\"要点1\",\"要点2\"],\"examples\":[\"来自或贴合原文的示例;公式/矩阵/分段式优先用 Markdown LaTeX,代码用文本表示\"],\"misconceptions\":[\"学习者常见的错误理解(如能从原文推断)\"],\"qa_pairs\":[{\"q\":\"考察该点的问题\",\"a\":\"标准答案\"}],\"difficulty\":1,\"prerequisites\":[\"前置知识点名称\"],\"source_pages\":[" + start + "," + end + "],\"needs_verification\":false,\"verify_query\":\"\"}]}\n\n要求:\n- difficulty 取 1-3(1 入门 / 2 进阶 / 3 综合)。\n- source_pages 必须落在 " + start + "-" + end + " 范围内,指向该知识点实际出现的页。\n- 如果知识点包含数学表达、二维布局、表格关系、图形标注或递推/DP/矩阵等结构,请在 definition/key_points/examples/qa_pairs 中给出 weak 可直接照用的 LaTeX 写法,例如 $$\\begin{bmatrix} A & B \\\\ C & D \\end{bmatrix}$$、$$f(n)=\\begin{cases}1,&n=1\\\\f(n-1)+f(n-2),&n>1\\end{cases}$$。\n- 对任何你不确定的事实,把该卡片 needs_verification 设为 true,并写出 verify_query。\n- 没有内容可抽取时返回 {\"cards\":[]}。\n\n原文如下:\n----------------\n" + body + "\n----------------" + extra;
 }
 
 const MAP_SYSTEM = "你是课程设计专家。给定一组知识卡片(来自同一教材的连续页面),请将它们按教学逻辑组织为 2-5 个阶段(phase),使得前序阶段是后续阶段的前置知识。\n\n只用简体中文输出。";
