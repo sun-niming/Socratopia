@@ -221,10 +221,175 @@ assert(ctxNoTid === "", "conceptGraphContext: empty without textbookId");
 delete global.__ADAPTIVE__;
 console.log("  16. ConceptGraph optional context: PASS");
 
-// ========== Summary ==========
+// ========== 17. Async boundary never falls back to spawnSync ==========
 
-console.log("");
-console.log("Passed: " + passed + "  Failed: " + failed);
-if (failed > 0) { console.error("SOME TESTS FAILED"); process.exit(1); }
-console.log("All tests passed.");
-process.exit(0);
+(async function () {
+  var childProcess = require("child_process");
+  var EventEmitter = require("events");
+  var PassThrough = require("stream").PassThrough;
+  var originalSpawn = childProcess.spawn;
+  var originalSpawnSync = childProcess.spawnSync;
+  var spawnCalls = 0;
+  var syncCalls = 0;
+  var requestedBatches = [];
+  var TID4 = "tb_async_pdf";
+  var TID5 = "tb_async_partial";
+  var TID6 = "tb_current_only";
+  var TID7 = "tb_chapter_priority";
+  var TID8 = "tb_async_concurrent";
+  var TID9 = "tb_async_timeout";
+  var timeoutKilled = false;
+  var timeoutJobDir = null;
+
+  writeFile(path.join(worldRel, "textbooks", TID4, "scan.pdf"), "fake-pdf-for-mocked-child");
+  writeFile(path.join(worldRel, "textbooks", TID5, "pages", "1.txt"), "Already cached first page.");
+  writeFile(path.join(worldRel, "textbooks", TID5, "scan.pdf"), "fake-pdf-for-mocked-child");
+  writeFile(path.join(worldRel, "textbooks", TID6, "current_reading.md"), "Unrelated recently taught window.");
+  writeFile(path.join(worldRel, "textbooks", TID7, "current_reading.md"), "Unrelated current reading must lose.");
+  writeFile(path.join(worldRel, "textbooks", TID7, "chapters", "real-chapter.txt"), "Authoritative chapter file text.");
+  writeFile(path.join(worldRel, "textbooks", TID8, "scan.pdf"), "fake-pdf-for-mocked-child");
+  writeFile(path.join(worldRel, "textbooks", TID9, "scan.pdf"), "fake-pdf-for-mocked-child");
+  childProcess.spawnSync = function () {
+    syncCalls++;
+    throw new Error("async source resolution must not call spawnSync");
+  };
+  childProcess.spawn = function (_command, args, options) {
+    spawnCalls++;
+    var requested = JSON.parse(args[2]);
+    requestedBatches.push(requested);
+    var extractedPages = {};
+    requested.forEach(function (page) { extractedPages[String(page)] = "Asynchronously extracted page " + page + "."; });
+    var child = new EventEmitter();
+    child.stdout = new PassThrough();
+    child.stderr = new PassThrough();
+    child.kill = function () { timeoutKilled = true; };
+    if (requested.indexOf(88) >= 0) {
+      timeoutJobDir = options && options.env && options.env.SOCRATOPIA_OCR_JOB_DIR;
+      if (timeoutJobDir) fs.writeFileSync(path.join(timeoutJobDir, "partial.png"), "partial");
+      return child;
+    }
+    process.nextTick(function () {
+      child.stdout.end(JSON.stringify({ pages: extractedPages }));
+      child.stderr.end();
+      child.emit("close", 0);
+    });
+    return child;
+  };
+
+  try {
+    var asyncPdf = await SA.resolveSourceTextAsync({
+      profileId: PID,
+      worldId: WID,
+      sourceType: "textbook-page",
+      textbookId: TID4,
+      page: 42
+    });
+    assert(!asyncPdf.error, "async PDF extraction: no error");
+    assert(asyncPdf.kind === "textbook-page:pdf-extracted", "async PDF extraction: reports extracted kind");
+    assert(asyncPdf.text.indexOf("Asynchronously extracted page 42") >= 0, "async PDF extraction: caches and returns child output");
+    assert(spawnCalls === 1, "async PDF extraction: uses spawn exactly once");
+    assert(syncCalls === 0, "async PDF extraction: never calls spawnSync");
+
+    var asyncPartial = await SA.resolveSourceTextAsync({
+      profileId: PID,
+      worldId: WID,
+      sourceType: "textbook-page",
+      textbookId: TID5,
+      pageRange: [1, 2]
+    });
+    assert(!asyncPartial.error && asyncPartial.kind === "textbook-page:pdf-extracted", "async partial cache: extracts missing pages");
+    assert(requestedBatches.length === 2 && requestedBatches[1].length === 1 && requestedBatches[1][0] === 2,
+      "async partial cache: sends only missing pages to OCR");
+    assert(asyncPartial.text.indexOf("[p.1]") < asyncPartial.text.indexOf("[p.2]"),
+      "async partial cache: returns cached and extracted pages in requested order");
+
+    var syncMiss = SA.resolveSourceText({
+      profileId: PID,
+      worldId: WID,
+      sourceType: "textbook-page",
+      textbookId: TID4,
+      page: 43
+    });
+    assert(syncMiss.error === "no_source", "sync compatibility path: missing PDF page remains a cache miss");
+    assert(syncCalls === 0, "sync compatibility path: never calls spawnSync");
+
+    var chapterCurrentReading = await SA.resolveSourceTextAsync({
+      profileId: PID,
+      worldId: WID,
+      sourceType: "chapter",
+      textbookId: TID6,
+      pageRange: [10, 11]
+    });
+    assert(chapterCurrentReading.error === "no_source", "async chapter range: does not use unrelated current_reading fallback");
+    var textbookCurrentReading = await SA.resolveSourceTextAsync({
+      profileId: PID,
+      worldId: WID,
+      sourceType: "textbook-page",
+      textbookId: TID6,
+      pageRange: [10, 11]
+    });
+    assert(textbookCurrentReading.kind === "textbook-page:current_reading", "async textbook page: current_reading fallback remains available");
+
+    var chapterFilePriority = await SA.resolveSourceTextAsync({
+      profileId: PID,
+      worldId: WID,
+      sourceType: "chapter",
+      textbookId: TID7,
+      chapterId: "real-chapter",
+      pageRange: [20, 21]
+    });
+    assert(chapterFilePriority.kind === "chapter:chapter-file" && chapterFilePriority.text.indexOf("Authoritative") >= 0,
+      "async chapter range: chapter file wins over current_reading after page miss");
+
+    var spawnBeforeConcurrent = spawnCalls;
+    var concurrentResults = await Promise.all([
+      SA.resolveSourceTextAsync({ profileId: PID, worldId: WID, sourceType: "textbook-page", textbookId: TID8, page: 77 }),
+      SA.resolveSourceTextAsync({ profileId: PID, worldId: WID, sourceType: "textbook-page", textbookId: TID8, page: 77 })
+    ]);
+    assert(spawnCalls === spawnBeforeConcurrent + 1, "async PDF extraction: coalesces identical concurrent child processes");
+    assert(concurrentResults[0].text.indexOf("page 77") >= 0 && concurrentResults[1].text.indexOf("page 77") >= 0,
+      "async PDF extraction: all coalesced callers receive cached text");
+
+    var previousTimeout = process.env.PRACTICE_PDF_TIMEOUT_MS;
+    process.env.PRACTICE_PDF_TIMEOUT_MS = "100";
+    var timeoutResult = await SA.resolveSourceTextAsync({
+      profileId: PID, worldId: WID, sourceType: "textbook-page", textbookId: TID9, page: 88
+    });
+    if (previousTimeout === undefined) delete process.env.PRACTICE_PDF_TIMEOUT_MS;
+    else process.env.PRACTICE_PDF_TIMEOUT_MS = previousTimeout;
+    assert(timeoutResult.error === "no_source", "async PDF timeout: returns a source miss instead of hanging");
+    assert(timeoutKilled, "async PDF timeout: terminates the worker");
+    assert(timeoutJobDir && !fs.existsSync(timeoutJobDir), "async PDF timeout: removes the parent-owned OCR temp directory");
+
+    var asyncChapter = await SA.resolveSourceTextAsync({
+      profileId: PID,
+      worldId: WID,
+      sourceType: "chapter",
+      textbookId: TID,
+      pageRange: [5, 6]
+    });
+    assert(!asyncChapter.error && asyncChapter.kind === "chapter:pages", "async chapter: uses async page resolver");
+
+    var asyncConversation = await SA.resolveSourceTextAsync({
+      profileId: PID,
+      worldId: WID,
+      sourceType: "conversation",
+      conversationId: CID
+    });
+    assert(!asyncConversation.error && asyncConversation.kind === "conversation:concept-summary", "async dispatch: preserves non-PDF sources");
+  } finally {
+    childProcess.spawn = originalSpawn;
+    childProcess.spawnSync = originalSpawnSync;
+  }
+  console.log("  17. Async extraction boundary: PASS");
+
+  // ========== Summary ==========
+  console.log("");
+  console.log("Passed: " + passed + "  Failed: " + failed);
+  if (failed > 0) { console.error("SOME TESTS FAILED"); process.exitCode = 1; return; }
+  console.log("All tests passed.");
+})().catch(function (e) {
+  failed++;
+  console.error("FAIL: async smoke test crashed: " + (e && e.stack || e));
+  process.exitCode = 1;
+});

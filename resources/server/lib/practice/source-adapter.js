@@ -24,8 +24,10 @@
 
 (function () {
   var fs = require("fs");
+  var os = require("os");
   var path = require("path");
   var childProcess = require("child_process");
+  var pdfExtractionInflight = Object.create(null);
 
   function projectRoot() {
     return process.env.PROJECT_ROOT || "";
@@ -260,28 +262,29 @@
     }
   }
 
-  function extractPdfPagesToCache(profileId, worldId, textbookId, pages) {
-    if (!Array.isArray(pages) || !pages.length) return false;
-    if (pages.length > 80) pages = pages.slice(0, 80);
-    var pdfPath = resolveTextbookPdf(profileId, worldId, textbookId);
-    if (!pdfPath) return false;
-    var helper = path.join(__dirname, "pdf-page-extractor-child.mjs");
-    if (!fs.existsSync(helper)) return false;
-    var result;
-    try {
-      result = childProcess.spawnSync(process.execPath, [helper, pdfPath, JSON.stringify(pages)], {
-        cwd: path.join(__dirname, "..", ".."),
-        encoding: "utf8",
-        maxBuffer: 1024 * 1024 * 16,
-        timeout: 45000,
-        windowsHide: true
-      });
-    } catch (e) {
-      return false;
+  function expectedCjkForTextbook(profileId, worldId, textbookId) {
+    var tdir = textbookDir(profileId, worldId, textbookId);
+    if (!tdir) return false;
+    var index = readJSON(path.join(path.dirname(tdir), "textbook_index.json"));
+    var books = index && index.textbooks;
+    if (!Array.isArray(books)) return false;
+    for (var i = 0; i < books.length; i++) {
+      if (books[i] && String(books[i].id) === String(textbookId)) {
+        return /[\u3400-\u9fff]/.test(String(books[i].title || "") + String(books[i].fileName || ""));
+      }
     }
-    if (!result || result.status !== 0 || !result.stdout) return false;
+    return false;
+  }
+
+  function extractPdfPagesToCache(profileId, worldId, textbookId, pages) {
+    // Compatibility shim only. PDF/OCR extraction is intentionally async so
+    // no caller can accidentally block the shared Next.js process.
+    return false;
+  }
+
+  function cacheExtractedPdfPages(profileId, worldId, textbookId, pages, stdout) {
     var parsed = null;
-    try { parsed = JSON.parse(result.stdout); } catch (e) { parsed = null; }
+    try { parsed = JSON.parse(stdout); } catch (e) { parsed = null; }
     if (!parsed || !parsed.pages || typeof parsed.pages !== "object") return false;
     var wrote = false;
     for (var i = 0; i < pages.length; i++) {
@@ -292,6 +295,112 @@
       }
     }
     return wrote;
+  }
+
+  // Non-blocking production path. Keep the synchronous helper above for
+  // compatibility with callers that only read already-cached text.
+  function extractPdfPagesToCacheAsync(profileId, worldId, textbookId, pages) {
+    if (!Array.isArray(pages) || !pages.length) return Promise.resolve(false);
+    pages = pages.slice(0, 80);
+    var pdfPath = resolveTextbookPdf(profileId, worldId, textbookId);
+    if (!pdfPath) return Promise.resolve(false);
+    var helper = path.join(__dirname, "pdf-page-extractor-child.mjs");
+    if (!fs.existsSync(helper)) return Promise.resolve(false);
+    var expectedCjk = expectedCjkForTextbook(profileId, worldId, textbookId);
+    // Include the cache target: two profiles may reference the same PDF but
+    // still need their own page files populated.
+    var inflightKey = JSON.stringify([textbookDir(profileId, worldId, textbookId), pdfPath, pages, expectedCjk]);
+    if (pdfExtractionInflight[inflightKey]) return pdfExtractionInflight[inflightKey];
+    var timeoutMs = Math.max(100, Number(process.env.PRACTICE_PDF_TIMEOUT_MS) || 120000);
+
+    var work = new Promise(function (resolve) {
+      var child;
+      var stdout = "";
+      var stdoutBytes = 0;
+      var maxBuffer = 1024 * 1024 * 16;
+      var settled = false;
+      var timer = null;
+      var terminating = false;
+      var jobDir = null;
+      try { jobDir = fs.mkdtempSync(path.join(os.tmpdir(), "socratopia-ocr-job-")); } catch (e) {}
+
+      function cleanupJobDir() {
+        if (!jobDir) return;
+        try { fs.rmSync(jobDir, { recursive: true, force: true }); } catch (e) {
+          setTimeout(function () { try { fs.rmSync(jobDir, { recursive: true, force: true }); } catch (e2) {} }, 250);
+        }
+      }
+
+      function finish(value) {
+        if (settled) return;
+        settled = true;
+        if (timer) clearTimeout(timer);
+        cleanupJobDir();
+        resolve(value);
+      }
+
+      function terminateTree() {
+        if (settled || terminating) return;
+        terminating = true;
+        if (process.platform === "win32" && child && child.pid) {
+          var taskkill = path.join(process.env.SystemRoot || "C:\\Windows", "System32", "taskkill.exe");
+          var killer = null;
+          try { killer = childProcess.spawn(taskkill, ["/PID", String(child.pid), "/T", "/F"], { windowsHide: true, stdio: "ignore" }); } catch (e) {}
+          if (killer) {
+            var fallback = setTimeout(function () { try { child.kill(); } catch (e) {} finish(false); }, 5000);
+            killer.on("error", function () { clearTimeout(fallback); try { child.kill(); } catch (e) {} finish(false); });
+            killer.on("close", function () { clearTimeout(fallback); finish(false); });
+            return;
+          }
+        }
+        try { if (child) child.kill(); } catch (e) {}
+        finish(false);
+      }
+
+      try {
+        child = childProcess.spawn(process.execPath, [helper, pdfPath, JSON.stringify(pages), String(expectedCjk)], {
+          cwd: path.join(__dirname, "..", ".."),
+          env: Object.assign({}, process.env, jobDir ? { SOCRATOPIA_OCR_JOB_DIR: jobDir } : {}),
+          windowsHide: true,
+          stdio: ["ignore", "pipe", "pipe"]
+        });
+      } catch (e) {
+        finish(false);
+        return;
+      }
+
+      if (!child || !child.stdout) {
+        finish(false);
+        return;
+      }
+      child.stdout.setEncoding("utf8");
+      child.stdout.on("data", function (chunk) {
+        if (settled) return;
+        stdoutBytes += Buffer.byteLength(chunk, "utf8");
+        if (stdoutBytes > maxBuffer) {
+          terminateTree();
+          return;
+        }
+        stdout += chunk;
+      });
+      // Drain stderr so a noisy child cannot block on a full pipe.
+      if (child.stderr && typeof child.stderr.resume === "function") child.stderr.resume();
+      child.on("error", function () { finish(false); });
+      child.on("close", function (code) {
+        if (terminating) return;
+        if (code !== 0 || !stdout) {
+          finish(false);
+          return;
+        }
+        finish(cacheExtractedPdfPages(profileId, worldId, textbookId, pages, stdout));
+      });
+      timer = setTimeout(function () {
+        terminateTree();
+      }, timeoutMs);
+    });
+    pdfExtractionInflight[inflightKey] = work;
+    work.then(function () { delete pdfExtractionInflight[inflightKey]; }, function () { delete pdfExtractionInflight[inflightKey]; });
+    return work;
   }
 
   // Read a single page's text by trying the known file-name patterns.
@@ -321,47 +430,70 @@
     return (txt && txt.trim()) ? txt : null;
   }
 
-  // sourceType = "textbook-page"
-  function resolveTextbookPage(body) {
-    var tid = body.textbookId;
-    if (!tid) return { error: "no_source", message: "textbook-page source requires textbookId (or pass sourceText)." };
-    safeSegment(tid, "textbookId");
-
-    var pages = collectPages(body);
+  function readCachedTextbookPages(body, tid, pages, kind) {
     var collected = [];
     for (var i = 0; i < pages.length; i++) {
       var t = readPageText(body.profileId, body.worldId, tid, pages[i]);
       if (t && t.trim()) collected.push("[p." + pages[i] + "]\n" + t.trim());
     }
-    if (collected.length) {
-      return { text: collected.join("\n\n"), kind: "textbook-page:pages" };
-    }
-    if (pages.length && extractPdfPagesToCache(body.profileId, body.worldId, tid, pages)) {
-      collected = [];
-      for (var pi = 0; pi < pages.length; pi++) {
-        var pt = readPageText(body.profileId, body.worldId, tid, pages[pi]);
-        if (pt && pt.trim()) collected.push("[p." + pages[pi] + "]\n" + pt.trim());
-      }
-      if (collected.length) {
-        return { text: collected.join("\n\n"), kind: "textbook-page:pdf-extracted" };
-      }
-    }
-    // Fallback to current_reading.md (the most recently taught window).
-    var cr = readCurrentReading(body.profileId, body.worldId, tid);
-    if (cr) return { text: cr, kind: "textbook-page:current_reading" };
+    return collected.length ? { text: collected.join("\n\n"), kind: kind } : null;
+  }
 
+  function missingCachedTextbookPages(body, tid, pages) {
+    var missing = [];
+    for (var i = 0; i < pages.length; i++) {
+      var t = readPageText(body.profileId, body.worldId, tid, pages[i]);
+      if (!t || !t.trim()) missing.push(pages[i]);
+    }
+    return missing;
+  }
+
+  // sourceType = "textbook-page"
+  function resolveTextbookPage(body, options) {
+    var tid = body.textbookId;
+    if (!tid) return { error: "no_source", message: "textbook-page source requires textbookId (or pass sourceText)." };
+    safeSegment(tid, "textbookId");
+
+    var pages = collectPages(body);
+    var cached = readCachedTextbookPages(body, tid, pages, "textbook-page:pages");
+    if (cached) return cached;
+    // The synchronous compatibility path is cache-only. Expensive PDF/OCR
+    // extraction belongs exclusively to resolveTextbookPageAsync.
+    if (!options || options.allowCurrentReading !== false) {
+      var cr = readCurrentReading(body.profileId, body.worldId, tid);
+      if (cr) return { text: cr, kind: "textbook-page:current_reading" };
+    }
+
+    return { error: "no_source", message: "textbook-page source requires readable page text or sourceText." };
+  }
+
+  async function resolveTextbookPageAsync(body, options) {
+    var tid = body.textbookId;
+    if (!tid) return { error: "no_source", message: "textbook-page source requires textbookId (or pass sourceText)." };
+    safeSegment(tid, "textbookId");
+
+    var pages = collectPages(body);
+    var missingPages = missingCachedTextbookPages(body, tid, pages);
+    var extracted = false;
+    if (missingPages.length) {
+      extracted = await extractPdfPagesToCacheAsync(body.profileId, body.worldId, tid, missingPages);
+    }
+    // Always re-read the complete requested range after extraction so cached
+    // and newly OCRed pages retain the caller's original ordering.
+    var cached = readCachedTextbookPages(body, tid, pages, extracted ? "textbook-page:pdf-extracted" : "textbook-page:pages");
+    if (cached) return cached;
+
+    if (!options || options.allowCurrentReading !== false) {
+      var cr = readCurrentReading(body.profileId, body.worldId, tid);
+      if (cr) return { text: cr, kind: "textbook-page:current_reading" };
+    }
     return { error: "no_source", message: "textbook-page source requires readable page text or sourceText." };
   }
 
   // sourceType = "chapter"
   // First version: if a pageRange is given, read it like textbook-page. Else try
   // a chapter json/txt under textbooks/<tid>/chapters/. Otherwise no_source.
-  function resolveChapter(body) {
-    var tid = body.textbookId;
-    if (Array.isArray(body.pageRange) && body.pageRange.length) {
-      var byPage = resolveTextbookPage(body);
-      if (!byPage.error) return { text: byPage.text, kind: "chapter:pages" };
-    }
+  function resolveChapterFile(body, tid) {
     if (tid && (body.chapterId || body.chapterTitle)) {
       safeSegment(tid, "textbookId");
       var chId = body.chapterId || body.chapterTitle;
@@ -387,6 +519,24 @@
       }
     }
     return { error: "no_source", message: "chapter source requires sourceText, a pageRange, or a readable chapter file." };
+  }
+
+  function resolveChapter(body) {
+    var tid = body.textbookId;
+    if (Array.isArray(body.pageRange) && body.pageRange.length) {
+      var byPage = resolveTextbookPage(body, { allowCurrentReading: false });
+      if (!byPage.error) return { text: byPage.text, kind: "chapter:pages" };
+    }
+    return resolveChapterFile(body, tid);
+  }
+
+  async function resolveChapterAsync(body) {
+    var tid = body.textbookId;
+    if (Array.isArray(body.pageRange) && body.pageRange.length) {
+      var byPage = await resolveTextbookPageAsync(body, { allowCurrentReading: false });
+      if (!byPage.error) return { text: byPage.text, kind: "chapter:pages" };
+    }
+    return resolveChapterFile(body, tid);
   }
 
   // ===== Conversation: concept-summary -> lesson-summary -> recent messages =====
@@ -471,6 +621,27 @@
     }
   }
 
+  async function resolveSourceTextAsync(body) {
+    body = body || {};
+    if (!body.profileId || !body.worldId) {
+      return { error: "no_source", message: "profileId and worldId are required to resolve a source." };
+    }
+    if (body.sourceText && typeof body.sourceText === "string" && body.sourceText.trim()) {
+      var st = body.sourceType || "manual";
+      return { text: body.sourceText.trim(), kind: st + ":provided-sourceText" };
+    }
+    var type = body.sourceType || "manual";
+    try {
+      if (type === "manual") return { error: "no_source", message: "manual source requires sourceText." };
+      if (type === "textbook-page") return await resolveTextbookPageAsync(body);
+      if (type === "chapter") return await resolveChapterAsync(body);
+      if (type === "conversation") return resolveConversation(body);
+      return { error: "no_source", message: "Unknown sourceType '" + type + "'. Provide sourceText." };
+    } catch (e) {
+      return { error: "no_source", message: "Source resolution failed: " + (e && e.message) };
+    }
+  }
+
   // ===== Optional ConceptGraph context (never throws, never required) =====
   // Returns a compact string summary of related concepts, or "" when unavailable.
   function conceptGraphContext(body, maxConcepts) {
@@ -500,6 +671,7 @@
 
   var api = {
     resolveSourceText: resolveSourceText,
+    resolveSourceTextAsync: resolveSourceTextAsync,
     conceptGraphContext: conceptGraphContext,
     // internals exposed for tests
     collectPages: collectPages,
@@ -507,10 +679,13 @@
     readPageText: readPageText,
     resolveTextbookPdf: resolveTextbookPdf,
     extractPdfPagesToCache: extractPdfPagesToCache,
+    extractPdfPagesToCacheAsync: extractPdfPagesToCacheAsync,
     worldDirCandidates: worldDirCandidates,
     safeSegment: safeSegment,
     _resolveTextbookPage: resolveTextbookPage,
+    _resolveTextbookPageAsync: resolveTextbookPageAsync,
     _resolveChapter: resolveChapter,
+    _resolveChapterAsync: resolveChapterAsync,
     _resolveConversation: resolveConversation
   };
 

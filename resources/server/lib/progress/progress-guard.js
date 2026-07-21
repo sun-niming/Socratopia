@@ -82,6 +82,24 @@ function evaluateCommit(current, loadedRange, signal) {
   var triggerBase = String(trigger).split(":")[0];
   var isMarkdownLike = !!signal.isMarkdownLike;
   var fromPrefetch = !!signal.fromPrefetch;
+  var loadedStart = normalizePage(loadedRange.startPage);
+  var loadedEnd = normalizePage(loadedRange.endPage);
+  if (!loadedStart || !loadedEnd) {
+    return {
+      allowed: false,
+      reason: "invalid_loaded_range",
+      correctedStart: loadedStart || null,
+      correctedEnd: loadedEnd || null,
+    };
+  }
+  if (loadedEnd < loadedStart) {
+    return {
+      allowed: false,
+      reason: "inverted_loaded_range",
+      correctedStart: loadedStart,
+      correctedEnd: loadedStart,
+    };
+  }
 
   // Direct user-initiated or stall signals always commit
   if (triggerBase === "user_page_intent" || triggerBase === "weak_stall" || triggerBase === "markdown_ready_commit") {

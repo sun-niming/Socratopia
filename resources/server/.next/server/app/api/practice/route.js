@@ -81,23 +81,48 @@ function _jsonErr(code, message, status, headers) {
 // Delegate to the standalone source adapter (global.__PRACTICE_SOURCE__, loaded
 // by server.js). Falls back to a local require so the route still works if the
 // global was not set. Returns { text, kind } on success, or { error, message }.
-function _resolveSource(body) {
+async function _resolveAdapterSource(SA, body) {
+  if (SA && typeof SA.resolveSourceTextAsync === "function") return await SA.resolveSourceTextAsync(body);
+  if (SA && typeof SA.resolveSourceText === "function") return SA.resolveSourceText(body);
+  return null;
+}
+
+async function _resolveConversationSelection(SA, body, label) {
+  if (!Array.isArray(body && body.conversationIds) || !body.conversationIds.length) {
+    return await _resolveAdapterSource(SA, body);
+  }
+  var parts = [];
+  var errors = [];
+  for (var i = 0; i < body.conversationIds.length && i < 12; i++) {
+    var conversationId = body.conversationIds[i];
+    if (!conversationId || typeof conversationId !== "string") continue;
+    var single = Object.assign({}, body, { sourceType: "conversation", conversationId: conversationId });
+    delete single.conversationIds;
+    var resolved = await _resolveAdapterSource(SA, single);
+    if (resolved && resolved.text) parts.push("【" + (label || "课堂") + " " + (i + 1) + "】\n" + resolved.text);
+    else if (resolved && resolved.message) errors.push(resolved.message);
+  }
+  if (parts.length) return { text: parts.join("\n\n"), kind: "conversation:multiple" };
+  return { error: "no_source", message: errors.join("；") || "No readable conversation sources." };
+}
+
+async function _resolveSource(body) {
   var SA = global.__PRACTICE_SOURCE__;
   if (!SA) {
     try { SA = require("../../../../../lib/practice/source-adapter.js"); }
     catch (e) { SA = null; }
   }
-  if (SA && typeof SA.resolveSourceText === "function" && body && body.sourceType === "mixed") {
+  if (SA && (typeof SA.resolveSourceTextAsync === "function" || typeof SA.resolveSourceText === "function") && body && body.sourceType === "mixed") {
     var parts = [];
     var errors = [];
     var noFocusBody = Object.assign({}, body);
     delete noFocusBody.sourceText;
     var tb = Object.assign({}, noFocusBody, { sourceType: "textbook-page" });
     var cv = Object.assign({}, noFocusBody, { sourceType: "conversation" });
-    var r1 = SA.resolveSourceText(tb);
+    var r1 = await _resolveAdapterSource(SA, tb);
     if (r1 && r1.text) parts.push("【教材范围】\n" + r1.text);
     else if (r1 && r1.message) errors.push(r1.message);
-    var r2 = SA.resolveSourceText(cv);
+    var r2 = await _resolveConversationSelection(SA, cv, "课堂");
     if (r2 && r2.text) parts.push("【课堂范围】\n" + r2.text);
     else if (r2 && r2.message) errors.push(r2.message);
     if (parts.length) return { text: parts.join("\n\n"), kind: "mixed:textbook+conversation" };
@@ -106,37 +131,19 @@ function _resolveSource(body) {
     }
     return { error: "no_source", message: errors.join("；") || "No readable textbook or conversation source." };
   }
-  if (SA && typeof SA.resolveSourceText === "function" && body && body.sourceType === "conversation" && !body.sourceText && Array.isArray(body.conversationIds) && body.conversationIds.length) {
-    var convoParts = [];
-    var convoErrors = [];
-    for (var ci = 0; ci < body.conversationIds.length && ci < 12; ci++) {
-      var cid = body.conversationIds[ci];
-      if (!cid || typeof cid !== "string") continue;
-      var single = Object.assign({}, body, { sourceType: "conversation", conversationId: cid });
-      delete single.conversationIds;
-      var cr = SA.resolveSourceText(single);
-      if (cr && cr.text) convoParts.push("【课堂 " + (ci + 1) + "】\n" + cr.text);
-      else if (cr && cr.message) convoErrors.push(cr.message);
-    }
-    if (convoParts.length) return { text: convoParts.join("\n\n"), kind: "conversation:multiple" };
+  if (SA && (typeof SA.resolveSourceTextAsync === "function" || typeof SA.resolveSourceText === "function") && body && body.sourceType === "conversation" && !body.sourceText && Array.isArray(body.conversationIds) && body.conversationIds.length) {
+    var conversations = await _resolveConversationSelection(SA, body, "课堂");
+    if (conversations && conversations.text) return conversations;
     if (body.focusText && typeof body.focusText === "string" && body.focusText.trim()) {
       return { text: body.focusText.trim(), kind: "conversation:focusText-fallback" };
     }
-    return { error: "no_source", message: convoErrors.join("；") || "No readable conversation sources." };
+    return conversations;
   }
-  if (SA && typeof SA.resolveSourceText === "function") {
-    var resolved = SA.resolveSourceText(body);
+  if (SA && (typeof SA.resolveSourceTextAsync === "function" || typeof SA.resolveSourceText === "function")) {
+    var resolved = await _resolveAdapterSource(SA, body);
     if (resolved && resolved.error && body && body.sourceType === "textbook-page" && Array.isArray(body.conversationIds) && body.conversationIds.length) {
-      var fallbackParts = [];
-      for (var fi = 0; fi < body.conversationIds.length && fi < 12; fi++) {
-        var fcid = body.conversationIds[fi];
-        if (!fcid || typeof fcid !== "string") continue;
-        var fsingle = Object.assign({}, body, { sourceType: "conversation", conversationId: fcid });
-        delete fsingle.conversationIds;
-        var fr = SA.resolveSourceText(fsingle);
-        if (fr && fr.text) fallbackParts.push("【课堂范围 " + (fi + 1) + "】\n" + fr.text);
-      }
-      if (fallbackParts.length) return { text: fallbackParts.join("\n\n"), kind: "textbook-page:conversation-fallback" };
+      var fallback = await _resolveConversationSelection(SA, Object.assign({}, body, { sourceType: "conversation" }), "课堂范围");
+      if (fallback && fallback.text) return { text: fallback.text, kind: "textbook-page:conversation-fallback" };
     }
     if (resolved && resolved.error && body.focusText && typeof body.focusText === "string" && body.focusText.trim()) {
       return { text: body.focusText.trim(), kind: (body.sourceType || "manual") + ":focusText-fallback" };
@@ -169,7 +176,7 @@ async function _doGenerate(body, h) {
   var pid = body.profileId, wid = body.worldId;
   if (!pid || !wid) return _jsonErr("missing_params", "profileId and worldId required", 400, h);
 
-  var source = _resolveSource(body);
+  var source = await _resolveSource(body);
   if (!source || source.error) return _jsonErr("no_source", (source && source.message) || "No source text. Provide sourceText, a textbook page, a chapter, or a conversation summary.", 404, h);
 
   var callLLM = _resolveLLM(body);

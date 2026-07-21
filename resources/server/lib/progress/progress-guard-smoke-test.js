@@ -79,6 +79,16 @@ var ec9 = g.evaluateCommit({ start: 1, end: 1 }, { startPage: 8, endPage: 10 }, 
 ok(ec9.allowed === false, "prefixed cached prefetch non-adjacent blocked");
 ok(ec9.reason === "cached_prefetch_non_adjacent", "prefixed cached prefetch reason");
 
+var ec10 = g.evaluateCommit({ start: 119, end: 119 }, { startPage: 120, endPage: 119 }, { trigger: "user_page_intent" });
+ok(ec10.allowed === false, "inverted loaded range blocked");
+ok(ec10.reason === "inverted_loaded_range", "inverted loaded range reason");
+ok(ec10.correctedStart === 120, "inverted loaded range keeps next start");
+ok(ec10.correctedEnd === 120, "inverted loaded range clamps end to start");
+
+var ec11 = g.evaluateCommit({ start: 119, end: 119 }, { startPage: 120, endPage: null }, { trigger: "user_page_intent" });
+ok(ec11.allowed === false, "missing loaded range end blocked");
+ok(ec11.reason === "invalid_loaded_range", "missing loaded range reason");
+
 // -- endClassAnchor --
 var ea = g.endClassAnchor({
   state: { taughtCursor: { startPage: 12, endPage: 14, status: "complete" } },

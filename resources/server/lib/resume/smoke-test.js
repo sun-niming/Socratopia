@@ -120,6 +120,8 @@ var cardMap = {
 // lastTaughtPage 160 -> phase index 1 (P2)
 var f1 = R.focusFromState(teachingMap, cardMap, { lastTaughtPage: 160 });
 eq(f1.phaseIndex, 1, "page 160 -> phase 2 (index 1)");
+eq(f1.cardIndex, 0, "page resume identifies first uncompleted card in phase");
+eq(f1.queueIndex, 2, "page resume exposes global queue index");
 ok(f1.completedSet[0] === true && f1.completedSet[1] === undefined, "phase 1 completed, phase 2 not");
 
 // explicit title
@@ -206,6 +208,11 @@ var fTitle = R.focusFromState(teachingMap2, cardMap2, { title: "Body" });
 eq(fTitle.phaseIndex, 1, "title 'Body' matches card.title -> phase 1");
 var fConcept = R.focusFromState(teachingMap2, cardMap2, { conceptId: "concept-end" });
 eq(fConcept.phaseIndex, 2, "conceptId 'concept-end' matches card.concept_id -> phase 2");
+var fActive = R.focusFromState(teachingMap2, cardMap2, { activeConceptId: "concept-body", phaseIndex: 0, lastTaughtPage: 1 });
+eq(fActive.phaseIndex, 1, "schema-v3 activeConceptId beats legacy phase/page anchors");
+eq(fActive.cardIndex, 0, "activeConceptId exposes card index");
+eq(fActive.queueIndex, 1, "activeConceptId exposes queue index");
+eq(fActive.activeConceptId, "concept-body", "activeConceptId is canonicalized");
 var fCardId = R.focusFromState(teachingMap2, cardMap2, { title: "k1" });
 eq(fCardId.phaseIndex, 0, "title equal to card_id still matches -> phase 0");
 

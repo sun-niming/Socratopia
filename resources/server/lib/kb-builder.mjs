@@ -30,6 +30,9 @@ import path from "path";
 import https from "https";
 import http from "http";
 import { inflateRawSync } from "zlib";
+import KBQuality from "./kb-quality.js";
+import PdfJsPaths from "./pdfjs-paths.js";
+import KBPublisher from "./kb-publisher.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -44,6 +47,8 @@ const START_PAGE = parseInt(ENV.KB_START_PAGE || "1", 10);
 const END_PAGE = parseInt(ENV.KB_END_PAGE || "0", 10) || 0; // 0 = to end
 const PAGES_PER_CHUNK = parseInt(ENV.KB_PAGES_PER_CHUNK || "4", 10);
 const MAX_CHUNKS = parseInt(ENV.KB_MAX_CHUNKS || "0", 10); // 0 = no cap
+const BUILD_CONCURRENCY = Math.max(1, Math.min(4, parseInt(ENV.KB_CONCURRENCY || "1", 10) || 1));
+const CHUNK_RETRIES = Math.max(0, Math.min(4, parseInt(ENV.KB_CHUNK_RETRIES || "2", 10) || 0));
 
 const CARD = {
   baseUrl: (ENV.KB_CARD_BASEURL || "").replace(/\/$/, ""),
@@ -68,9 +73,11 @@ const VISION = {
 const VISION_OK = !!(VISION.baseUrl && VISION.apiKey && VISION.model);
 
 const SPARSE_TEXT_THRESHOLD = 80; // chars; below this a PDF page is "image-dense"
-const KB_DIR = path.join(TEXTBOOK_DIR, "knowledge_base");
+const KB_PATHS = KBPublisher.paths(TEXTBOOK_DIR);
+const KB_DIR = KB_PATHS.stageDir;
 const STATUS_PATH = path.join(KB_DIR, "build_status.json");
 const BUILD_LOG = []; // per-chunk events, flushed into build_status.json
+const EXTRACTION_STATS = { pages: 0, sparsePages: 0, garbledPages: 0, renderedPages: 0 };
 
 function log(msg) { process.stdout.write("[kb-build] " + msg + "\n"); }
 
@@ -104,6 +111,10 @@ function resolveDep(subpath) {
     if (existsSync(p)) return pathToFileURL(p).href;
   }
   throw new Error("dependency not found: " + subpath);
+}
+
+function resolveDepDir(subpath) {
+  return PdfJsPaths.resourceDir(fileURLToPath(resolveDep(subpath)));
 }
 
 let _pdfjs = null, _canvas = null;
@@ -203,7 +214,21 @@ async function callCardLLM(system, user, images, maxTokens, forceJson, modelBloc
   if (forceJson !== false) {
     payload.response_format = { type: "json_object" };
   }
-  return postJSON(block.baseUrl, block.apiKey, payload, 180000);
+  let lastError = null;
+  for (let attempt = 0; attempt < 3; attempt++) {
+    try {
+      return await postJSON(block.baseUrl, block.apiKey, payload, 180000);
+    } catch (error) {
+      lastError = error;
+      const message = String((error && error.message) || error || "");
+      const retryable = /ENOTFOUND|ECONNRESET|ETIMEDOUT|timeout|HTTP\s+(408|429|5\d\d)\b/i.test(message);
+      if (!retryable || attempt >= 2) throw error;
+      const delay = 750 * Math.pow(2, attempt);
+      appendBuildLog({ type: "model_retry", attempt: attempt + 1, delayMs: delay, error: message.slice(0, 300) });
+      await new Promise((resolve) => setTimeout(resolve, delay));
+    }
+  }
+  throw lastError || new Error("model request failed");
 }
 
 // Vision model call — used ONLY as optional fallback when the multimodal card
@@ -305,7 +330,14 @@ function normalizeCard(raw, chunkStart, chunkEnd) {
   var prerequisites = toArray(raw.prerequisites);
   var qaPairs = toQAPairs(raw.qa_pairs || raw.qaPairs);
   var difficulty = (typeof raw.difficulty === "number" && raw.difficulty >= 1 && raw.difficulty <= 3) ? raw.difficulty : null;
-  var sourcePages = Array.isArray(raw.source_pages) && raw.source_pages.length >= 2 ? raw.source_pages : [chunkStart, chunkEnd];
+  var sourceValues = Array.isArray(raw.source_pages)
+    ? raw.source_pages.map(function (value) { return Number(value); }).filter(function (value) {
+        return Number.isFinite(value) && value >= chunkStart && value <= chunkEnd;
+      })
+    : [];
+  var sourcePages = sourceValues.length
+    ? [Math.min.apply(Math, sourceValues), Math.max.apply(Math, sourceValues)]
+    : [chunkStart, chunkEnd];
   var needsVerification = !!raw.needs_verification;
   var verifyQuery = typeof raw.verify_query === "string" ? raw.verify_query.trim() : "";
   // Reject cards with neither title nor definition (hallucinated empty object)
@@ -363,6 +395,10 @@ async function extractPdf() {
   const doc = await _pdfjs.getDocument({
     data: new Uint8Array(data.buffer, data.byteOffset, data.byteLength),
     useSystemFonts: true, disableAutoFetch: true, disableStream: true,
+    cMapUrl: resolveDepDir("pdfjs-dist/cmaps"),
+    cMapPacked: true,
+    standardFontDataUrl: resolveDepDir("pdfjs-dist/standard_fonts"),
+    wasmUrl: resolveDepDir("pdfjs-dist/wasm"),
   }).promise;
   const total = doc.numPages;
   const s = Math.max(1, START_PAGE);
@@ -372,10 +408,14 @@ async function extractPdf() {
   for (let pn = s; pn <= e; pn++) {
     const page = await doc.getPage(pn);
     const text = await extractPdfPageText(page);
+    const quality = KBQuality.assessPdfText(text, { expectedCjk: /^chinese/.test(LANG) });
+    EXTRACTION_STATS.pages++;
+    if (quality.sparse) EXTRACTION_STATS.sparsePages++;
+    if (quality.garbled) EXTRACTION_STATS.garbledPages++;
     let pngB64 = null;
-    if (text.length < SPARSE_TEXT_THRESHOLD) {
+    if (quality.renderRecommended || text.length < SPARSE_TEXT_THRESHOLD) {
       // Sparse text + has drawn/image ops => image-dense page; render it.
-      let hasVisual = false;
+      let hasVisual = quality.garbled;
       try {
         const ops = await page.getOperatorList();
         const OPS = _pdfjs.OPS || {};
@@ -390,7 +430,10 @@ async function extractPdf() {
         try {
           pngB64 = await renderPageToPngB64(page);
           renderedCount++;
-          log("p." + pn + " text only " + text.length + " chars; rendered to PNG (" + (pngB64 ? Math.round(pngB64.length * 3 / 4 / 1024) + "KB" : "fail") + ")");
+          EXTRACTION_STATS.renderedPages++;
+          log("p." + pn + " text quality=" + (quality.garbled ? "garbled" : "sparse") +
+            " chars=" + quality.length + "; rendered to PNG (" +
+            (pngB64 ? Math.round(pngB64.length * 3 / 4 / 1024) + "KB" : "fail") + ")");
         } catch (ev) { log("render failed p." + pn + ": " + (ev && ev.message)); }
       }
     }
@@ -560,28 +603,13 @@ function normalizeCardPages(card) {
 }
 
 function cardOrderKey(card) {
-  const range = normalizeCardPages(card);
-  const id = String((card && card.concept_id) || "");
-  const m = id.match(/^(\d+)/);
-  return {
-    start: range[0],
-    end: range[1],
-    difficulty: Number(card && card.difficulty) || 9,
-    ordinal: m ? Number(m[1]) : 999999,
-    title: String((card && card.title) || id),
-  };
+  normalizeCardPages(card);
+  return KBQuality.cardOrderKey(card);
 }
 
 function sortCardsForTeaching(cards) {
-  return (cards || []).slice().sort((a, b) => {
-    const ka = cardOrderKey(a);
-    const kb = cardOrderKey(b);
-    return (ka.start - kb.start) ||
-      (ka.end - kb.end) ||
-      (ka.ordinal - kb.ordinal) ||
-      (ka.difficulty - kb.difficulty) ||
-      ka.title.localeCompare(kb.title);
-  });
+  (cards || []).forEach(function (card) { normalizeCardPages(card); });
+  return KBQuality.sortCards(cards);
 }
 
 function loadCardsFromDisk() {
@@ -686,13 +714,7 @@ function normalizeTeachingSegment(sequence, segmentCards, segStart, segEnd) {
   }
   if (used.size !== expected.length || !phases.length) return null;
 
-  let previousStart = 0;
-  for (const phase of phases) {
-    const phaseCards = phase.card_ids.map((id) => byKey.get(String(id))).filter(Boolean);
-    const phaseStart = Math.min(...phaseCards.map((c) => normalizeCardPages(c)[0]));
-    if (phaseStart < previousStart) return null;
-    previousStart = phaseStart;
-  }
+  if (!KBQuality.teachingPhasesPreserveOrder(expected, phases)) return null;
   return {
     page_range: [segStart, segEnd],
     sequence: phases,
@@ -737,7 +759,8 @@ async function buildTeachingMap(allCards, opts) {
     }
   }
   return results.length ? {
-    version: 2,
+    version: 3,
+    ordering: "chunk-ordinal-then-source-page",
     generated_at: new Date().toISOString(),
     segments: results,
     fallback_segments: results.filter((seg) => seg.generated_by !== "llm-validated").length,
@@ -766,6 +789,7 @@ async function generateCardsForChunk(c, ci, total) {
 
   let cards = [];
   let method = "none";
+  let hadRequestFailure = false;
 
   // --- Level 1: multimodal card model (text + images + JSON mode) ---
   if (hasImages) {
@@ -776,6 +800,7 @@ async function generateCardsForChunk(c, ci, total) {
       method = "multimodal";
       appendBuildLog({ type: "card_multimodal_ok", chunk: ci + 1, cardCount: cards.length });
     } catch (e1) {
+      hadRequestFailure = true;
       appendBuildLog({ type: "card_multimodal_fail", chunk: ci + 1, error: (e1 && e1.message) || "unknown" });
       log("chunk " + (ci + 1) + " multimodal failed: " + (e1 && e1.message) + "; falling back to text-only");
       cards = []; method = "none";
@@ -791,6 +816,7 @@ async function generateCardsForChunk(c, ci, total) {
       if (cards.length) method = method === "none" ? "text-only" : method;
       appendBuildLog({ type: "card_text_ok", chunk: ci + 1, cardCount: cards.length });
     } catch (e2) {
+      hadRequestFailure = true;
       appendBuildLog({ type: "card_text_fail", chunk: ci + 1, error: (e2 && e2.message) || "unknown" });
       log("chunk " + (ci + 1) + " text-only failed: " + (e2 && e2.message));
       cards = [];
@@ -813,6 +839,7 @@ async function generateCardsForChunk(c, ci, total) {
       if (cards.length) method = "premium";
       appendBuildLog({ type: "card_premium_ok", chunk: ci + 1, cardCount: cards.length });
     } catch (ep) {
+      hadRequestFailure = true;
       appendBuildLog({ type: "card_premium_fail", chunk: ci + 1, error: (ep && ep.message) || "unknown" });
       log("chunk " + (ci + 1) + " premium escalation failed: " + (ep && ep.message));
       cards = [];
@@ -833,12 +860,43 @@ async function generateCardsForChunk(c, ci, total) {
         appendBuildLog({ type: "card_vision_fallback_ok", chunk: ci + 1, cardCount: cards.length });
       }
     } catch (e3) {
+      hadRequestFailure = true;
       appendBuildLog({ type: "card_vision_fallback_fail", chunk: ci + 1, error: (e3 && e3.message) || "unknown" });
       log("chunk " + (ci + 1) + " vision fallback failed: " + (e3 && e3.message));
     }
   }
 
-  appendBuildLog({ type: "chunk_done", chunk: ci + 1, cardCount: cards.length, method });
+  const textQuality = KBQuality.assessPdfText(c.text, { expectedCjk: /^chinese/.test(LANG) });
+  const terminalFailure = !cards.length && KBQuality.likelyTeachableChunk(c.text, hasImages);
+  appendBuildLog({
+    type: "chunk_done",
+    chunk: ci + 1,
+    pages: [c.start_page, c.end_page],
+    cardCount: cards.length,
+    method,
+    sourceChars: textQuality.length,
+    sourceCjk: textQuality.cjk,
+    imageCount: hasImages ? c.images.length : 0,
+    hadRequestFailure,
+    terminalFailure,
+  });
+  return cards;
+}
+
+async function generateCardsWithRetries(c, ci, total) {
+  var cards = [];
+  for (let attempt = 0; attempt <= CHUNK_RETRIES; attempt++) {
+    cards = await generateCardsForChunk(c, ci, total);
+    const terminalEvent = BUILD_LOG.slice().reverse().find(function (event) {
+      return event && event.type === "chunk_done" && Number(event.chunk) === ci + 1;
+    });
+    if (!terminalEvent || !terminalEvent.terminalFailure) return cards;
+    if (attempt >= CHUNK_RETRIES) return cards;
+    const delay = 3000 * (attempt + 1);
+    appendBuildLog({ type: "chunk_retry", chunk: ci + 1, attempt: attempt + 1, delayMs: delay, reason: "terminal_failure" });
+    log("chunk " + (ci + 1) + " terminal failure; retrying whole chunk after " + delay + "ms");
+    await new Promise((resolve) => setTimeout(resolve, delay));
+  }
   return cards;
 }
 
@@ -872,7 +930,7 @@ async function recoverPartialKnowledgeBase(err) {
       recovery_error: message,
     },
   });
-  writeStatus("done", {
+  writeStatus("partial", {
     cardCount: result.index.card_count,
     needsVerification: result.index.needs_verification_count,
     hasTeachingMap: !!result.tmap,
@@ -891,7 +949,24 @@ async function main() {
   if (!CARD.baseUrl || !CARD.apiKey || !CARD.model) throw new Error("card model config incomplete (KB_CARD_*)");
   if (!existsSync(SRC_PATH)) throw new Error("source file not found: " + SRC_PATH);
 
-  writeStatus("building", { startedAt: new Date().toISOString(), visionFallbackAvailable: VISION_OK, premiumEscalationAvailable: PREMIUM_OK });
+  var resumeStatus = null;
+  if (ENV.KB_RESUME === "1" && existsSync(STATUS_PATH)) {
+    try {
+      resumeStatus = JSON.parse(readFileSync(STATUS_PATH, "utf-8"));
+      if (Array.isArray(resumeStatus.log)) BUILD_LOG.push.apply(BUILD_LOG, resumeStatus.log);
+      writeStatus._data = resumeStatus;
+    } catch (e) { resumeStatus = null; BUILD_LOG.length = 0; }
+  }
+  if (!resumeStatus) KBPublisher.prepare(TEXTBOOK_DIR);
+  writeStatus("building", resumeStatus ? {
+    resumedAt: new Date().toISOString(),
+    visionFallbackAvailable: VISION_OK,
+    premiumEscalationAvailable: PREMIUM_OK,
+  } : {
+    startedAt: new Date().toISOString(),
+    visionFallbackAvailable: VISION_OK,
+    premiumEscalationAvailable: PREMIUM_OK,
+  });
 
   let pages;
   if (FORMAT === "pdf") pages = await extractPdf();
@@ -899,47 +974,116 @@ async function main() {
   else if (FORMAT === "pptx") pages = extractPptx();
   else throw new Error("unsupported KB_FORMAT: " + FORMAT);
 
-  if (!pages.length) { writeStatus("done", { cardCount: 0, note: "no extractable text" }); log("no pages; done"); return; }
+  if (!pages.length) {
+    writeStatus("error", { cardCount: 0, note: "no extractable text", activationEligible: false });
+    KBPublisher.publishFailureIfNoFinal(TEXTBOOK_DIR);
+    log("no pages; error");
+    return;
+  }
 
   let chunks = chunkPages(pages, PAGES_PER_CHUNK);
   if (MAX_CHUNKS > 0) chunks = chunks.slice(0, MAX_CHUNKS);
-  log("chunked into " + chunks.length + " blocks (~" + PAGES_PER_CHUNK + " pages each)");
+  log("chunked into " + chunks.length + " blocks (~" + PAGES_PER_CHUNK + " pages each), concurrency=" + BUILD_CONCURRENCY);
 
   const cardsDir = path.join(KB_DIR, "cards");
   mkdirSync(cardsDir, { recursive: true });
 
-  const allCards = [];
-  let idx = 0;
-  for (let ci = 0; ci < chunks.length; ci++) {
-    const cards = await generateCardsForChunk(chunks[ci], ci, chunks.length);
-    for (const raw of cards) {
-      const chunkStart = chunks[ci].start_page;
-      const chunkEnd = chunks[ci].end_page;
-      const card = normalizeCard(raw, chunkStart, chunkEnd);
-      if (!card) { log("  skip invalid card in chunk " + (ci + 1)); continue; }
-      idx++;
-      const cid = slugify(card.title, idx);
-      card.concept_id = cid;
-      card._chunk_pages = [chunkStart, chunkEnd];
-      writeJsonAtomic(path.join(cardsDir, cid + ".json"), card);
-      allCards.push(card);
+  // A concurrent batch can append chunk_done events before its cards are
+  // committed in source order.  chunksDone is advanced only after each
+  // chunk's card files have been written, so it is the hard checkpoint cap.
+  const committedChunkCap = resumeStatus
+    ? Math.max(0, Math.min(chunks.length, Number(resumeStatus.chunksDone) || 0))
+    : 0;
+  const resumeFromChunk = resumeStatus
+    ? KBQuality.contiguousHealthyChunks(BUILD_LOG, committedChunkCap)
+    : 0;
+  const allCards = resumeFromChunk > 0 ? loadCardsFromDisk().filter(function (card) {
+    var range = KBQuality.cleanRange(card && card._chunk_pages, card && card.source_pages);
+    return range[0] <= chunks[resumeFromChunk - 1].end_page;
+  }) : [];
+  let idx = allCards.length;
+  let chunksProcessed = resumeFromChunk;
+  let consecutiveTerminalFailures = 0;
+  if (resumeFromChunk > 0) {
+    log("resuming from checkpoint after chunk " + resumeFromChunk + "/" + chunks.length + " with " + allCards.length + " card(s)");
+    writeStatus("building", { cardCount: allCards.length, chunksDone: resumeFromChunk, chunksTotal: chunks.length, resumedFromChunk: resumeFromChunk });
+  }
+  var aborted = false;
+  for (let batchStart = resumeFromChunk; batchStart < chunks.length && !aborted; batchStart += BUILD_CONCURRENCY) {
+    const batchEnd = Math.min(chunks.length, batchStart + BUILD_CONCURRENCY);
+    const batchResults = await Promise.all(chunks.slice(batchStart, batchEnd).map(function (chunk, offset) {
+      const ci = batchStart + offset;
+      return generateCardsWithRetries(chunk, ci, chunks.length);
+    }));
+    // Model calls may finish out of order; normalization, concept IDs, files,
+    // and progress are deliberately committed in source chunk order.
+    for (let offset = 0; offset < batchResults.length; offset++) {
+      const ci = batchStart + offset;
+      const cards = batchResults[offset];
+      for (const raw of cards) {
+        const chunkStart = chunks[ci].start_page;
+        const chunkEnd = chunks[ci].end_page;
+        const card = normalizeCard(raw, chunkStart, chunkEnd);
+        if (!card) { log("  skip invalid card in chunk " + (ci + 1)); continue; }
+        idx++;
+        const cid = slugify(card.title, idx);
+        card.concept_id = cid;
+        card._chunk_pages = [chunkStart, chunkEnd];
+        writeJsonAtomic(path.join(cardsDir, cid + ".json"), card);
+        allCards.push(card);
+      }
+      chunksProcessed = ci + 1;
+      const terminalEvent = BUILD_LOG.slice().reverse().find(function (event) {
+        return event && event.type === "chunk_done" && Number(event.chunk) === ci + 1;
+      });
+      consecutiveTerminalFailures = terminalEvent && terminalEvent.terminalFailure
+        ? consecutiveTerminalFailures + 1 : 0;
+      writeStatus("building", {
+        cardCount: allCards.length,
+        chunksDone: chunksProcessed,
+        chunksTotal: chunks.length,
+        consecutiveTerminalFailures,
+      });
+      if (consecutiveTerminalFailures >= 3) {
+        appendBuildLog({ type: "build_aborted", reason: "consecutive_terminal_failures", afterChunk: chunksProcessed });
+        log("aborting after 3 consecutive terminal chunk failures; build will remain partial");
+        aborted = true;
+        break;
+      }
     }
-    writeStatus("building", { cardCount: allCards.length, chunksDone: ci + 1, chunksTotal: chunks.length });
   }
 
   const finalized = await finalizeKnowledgeBase(allCards);
   const index = finalized.index;
   const tmap = finalized.tmap;
 
-  writeStatus("done", { cardCount: allCards.length, needsVerification: index.needs_verification_count, hasTeachingMap: !!tmap });
-  log("done");
+  const requestedEndPage = END_PAGE || (pages.length ? pages[pages.length - 1].page_no : START_PAGE);
+  const health = KBQuality.assessBuild(allCards, chunks, BUILD_LOG, START_PAGE, requestedEndPage, tmap);
+  writeStatus(health.state, Object.assign({
+    cardCount: allCards.length,
+    needsVerification: index.needs_verification_count,
+    hasTeachingMap: !!tmap,
+    extraction: EXTRACTION_STATS,
+    chunksProcessed,
+    activationEligible: health.state === "done",
+  }, health));
+  if (health.state === "done") {
+    KBPublisher.publish(TEXTBOOK_DIR);
+    log("published healthy KB -> " + KB_PATHS.finalDir);
+  } else {
+    KBPublisher.publishFailureIfNoFinal(TEXTBOOK_DIR);
+    process.exitCode = 2;
+  }
+  log(health.state + " coverage=" + Math.round(health.coverageRatio * 100) + "%" +
+    " terminalFailedChunks=" + health.terminalFailedChunks + " trailingEmpty=" + health.trailingEmptyChunks);
 }
 
 main().catch(async (err) => {
   log("FATAL: " + (err && err.message));
   try {
     const recovered = await recoverPartialKnowledgeBase(err);
-    if (!recovered) writeStatus("error", { error: err && err.message });
+    if (!recovered) writeStatus("error", { error: err && err.message, activationEligible: false });
+    KBPublisher.publishFailureIfNoFinal(TEXTBOOK_DIR);
   } catch (e) {
     try { writeStatus("error", { error: err && err.message, recoveryError: e && e.message }); } catch (e2) {}
   }

@@ -17,7 +17,7 @@ var fs = require("fs");
 var path = require("path");
 var crypto = require("crypto");
 
-var SCHEMA_VERSION = 2;
+var SCHEMA_VERSION = 3;
 var STATE_FILE = "progress_state.json";
 
 // Parse the page number from progress.md first line (or whole text). Handles zh/en variants:
@@ -220,11 +220,16 @@ function writeState(textbookDir, partial) {
       Object.keys(partial).forEach(function (k) {
         var v = partial[k];
         if (v === undefined) return; // missing field: do not overwrite
-        if (k === "completedConceptIds" || k === "completedTitles") return; // arrays handled by union below
+        if (k === "completedConceptIds" || k === "completedTitles" || k === "resetCompleted") return; // arrays handled below
         next[k] = v;
       });
-      next.completedConceptIds = uniqMerge(prev.completedConceptIds, partial.completedConceptIds);
-      next.completedTitles = uniqMerge(prev.completedTitles, partial.completedTitles);
+      if (partial.resetCompleted) {
+        next.completedConceptIds = uniqMerge([], partial.completedConceptIds);
+        next.completedTitles = uniqMerge([], partial.completedTitles);
+      } else {
+        next.completedConceptIds = uniqMerge(prev.completedConceptIds, partial.completedConceptIds);
+        next.completedTitles = uniqMerge(prev.completedTitles, partial.completedTitles);
+      }
     } else {
       next.completedConceptIds = uniqMerge(prev.completedConceptIds, null);
       next.completedTitles = uniqMerge(prev.completedTitles, null);
@@ -236,6 +241,30 @@ function writeState(textbookDir, partial) {
     var tmp = p + ".tmp";
     fs.writeFileSync(tmp, JSON.stringify(next, null, 2), "utf-8");
     try { fs.renameSync(tmp, p); } catch (e) { try { fs.unlinkSync(tmp); } catch (e2) {} throw e; }
+    return next;
+  } catch (e) {
+    return null;
+  }
+}
+
+// Administrative repair/migration helper. Unlike writeState(), this replaces
+// the whole document so contaminated legacy fields cannot survive a reset.
+function replaceState(textbookDir, value) {
+  try {
+    if (!textbookDir || !value || typeof value !== "object") return null;
+    var next = {};
+    Object.keys(value).forEach(function (key) {
+      if (value[key] !== undefined && key !== "resetCompleted") next[key] = value[key];
+    });
+    next.completedConceptIds = uniqMerge([], next.completedConceptIds);
+    next.completedTitles = uniqMerge([], next.completedTitles);
+    next.schemaVersion = SCHEMA_VERSION;
+    next.updatedAt = new Date().toISOString();
+    var p = statePath(textbookDir);
+    fs.mkdirSync(path.dirname(p), { recursive: true });
+    var tmp = p + ".tmp";
+    fs.writeFileSync(tmp, JSON.stringify(next, null, 2), "utf-8");
+    fs.renameSync(tmp, p);
     return next;
   } catch (e) {
     return null;
@@ -379,6 +408,31 @@ function focusFromState(teachingMap, cardMap, resumeState) {
   (resumeState.completedConceptIds || []).forEach(function (c) { if (c != null) completedConcepts[String(c)] = true; });
   var hasCompleted = Object.keys(completedTitles).length > 0 || Object.keys(completedConcepts).length > 0;
 
+  var queue = [];
+  for (var qi = 0; qi < seq.length; qi++) {
+    var qids = seq[qi].card_ids || [];
+    for (var qci = 0; qci < qids.length; qci++) {
+      var qid = qids[qci];
+      var qcard = cardMap[qid] || null;
+      queue.push({
+        phaseIndex: qi,
+        cardIndex: qci,
+        queueIndex: queue.length,
+        cardId: qid,
+        activeConceptId: String(qcard && qcard.concept_id || qid),
+        card: qcard,
+      });
+    }
+  }
+
+  function queueMatch(entry, want) {
+    if (!entry) return false;
+    want = String(want);
+    var c = entry.card;
+    return String(entry.cardId) === want || String(entry.activeConceptId) === want ||
+      !!(c && c.title != null && String(c.title) === want);
+  }
+
   // Does a phase contain a card matching `want` by card_id, card.title, or card.concept_id?
   function phaseMatchesId(phase, want) {
     var ids = phase.card_ids || [];
@@ -412,13 +466,25 @@ function focusFromState(teachingMap, cardMap, resumeState) {
   }
 
   var phaseIndex = null;
+  var activeEntry = null;
 
-  // 1) explicit phaseIndex
-  if (typeof resumeState.phaseIndex === "number" && resumeState.phaseIndex >= 0 && resumeState.phaseIndex < seq.length) {
-    phaseIndex = resumeState.phaseIndex;
+  // 1) schema-v3 exact active card. This is the strongest resume anchor.
+  if (resumeState.activeConceptId) {
+    for (var aq = 0; aq < queue.length; aq++) {
+      if (queueMatch(queue[aq], resumeState.activeConceptId)) {
+        activeEntry = queue[aq];
+        phaseIndex = activeEntry.phaseIndex;
+        break;
+      }
+    }
   }
 
-  // 2) explicit title / conceptId -> find owning phase (exact match, NOT currentFocus)
+  // 2) explicit legacy phaseIndex
+  if (typeof resumeState.phaseIndex === "number" && resumeState.phaseIndex >= 0 && resumeState.phaseIndex < seq.length) {
+    if (phaseIndex === null) phaseIndex = resumeState.phaseIndex;
+  }
+
+  // 3) explicit legacy title / conceptId -> find owning phase (exact match, NOT currentFocus)
   if (phaseIndex === null && (resumeState.title || resumeState.conceptId)) {
     var want = String(resumeState.title || resumeState.conceptId);
     for (var i = 0; i < seq.length; i++) {
@@ -426,7 +492,7 @@ function focusFromState(teachingMap, cardMap, resumeState) {
     }
   }
 
-  // 3) page coverage: among phases whose card source_pages cover lastTaughtPage, pick the first
+  // 4) page coverage: among phases whose card source_pages cover lastTaughtPage, pick the first
   //    not-yet-completed phase when completed* is known; otherwise keep the last covering phase.
   //    Explicit page starts are different from resume anchors: if a learner asks to start at p.N,
   //    begin with the earliest matching phase instead of the last broad/cross-page phase.
@@ -458,7 +524,27 @@ function focusFromState(teachingMap, cardMap, resumeState) {
 
   if (phaseIndex === null) {
     // Cannot pin a phase; still surface page/lastFocus so the caller can emit a soft-resume directive.
-    return { phaseIndex: null, completedSet: null, lastFocusText: resumeState.lastFocus || resumeState.currentFocus || null, lastTaughtPage: page };
+    return { phaseIndex: null, cardIndex: null, queueIndex: null, activeConceptId: null, completedSet: null, lastFocusText: resumeState.lastFocus || resumeState.currentFocus || null, lastTaughtPage: page };
+  }
+
+  if (!activeEntry) {
+    for (var qe = 0; qe < queue.length; qe++) {
+      var entry = queue[qe];
+      if (entry.phaseIndex !== phaseIndex) continue;
+      var ec = entry.card || {};
+      var eid = String(ec.concept_id || entry.cardId);
+      var etitle = ec.title != null ? String(ec.title) : String(entry.cardId);
+      if (!completedConcepts[eid] && !completedConcepts[String(entry.cardId)] &&
+          !completedTitles[etitle] && !completedTitles[String(entry.cardId)]) {
+        activeEntry = entry;
+        break;
+      }
+    }
+    if (!activeEntry) {
+      for (var qf = 0; qf < queue.length; qf++) {
+        if (queue[qf].phaseIndex === phaseIndex) { activeEntry = queue[qf]; break; }
+      }
+    }
   }
 
   // Mark phases before the focus as completed, plus any phase explicitly fully completed.
@@ -469,6 +555,9 @@ function focusFromState(teachingMap, cardMap, resumeState) {
   }
   return {
     phaseIndex: phaseIndex,
+    cardIndex: activeEntry ? activeEntry.cardIndex : null,
+    queueIndex: activeEntry ? activeEntry.queueIndex : null,
+    activeConceptId: activeEntry ? activeEntry.activeConceptId : null,
     completedSet: completed,
     lastFocusText: resumeState.lastFocus || resumeState.currentFocus || null,
     lastTaughtPage: page,
@@ -486,8 +575,10 @@ function stateHash(resumeState) {
     var key = [
       resumeState.lastTaughtPage || resumeState.currentPage || "",
       resumeState.phaseIndex != null ? resumeState.phaseIndex : "",
-      resumeState.title || resumeState.conceptId || resumeState.currentFocus || "",
+      resumeState.activeConceptId || resumeState.title || resumeState.conceptId || resumeState.currentFocus || "",
       completedLen || "",
+      resumeState.textbookId || "",
+      resumeState.sourceConversationId || "",
       taught.chunkId || "",
       taught.status || "",
       loaded.chunkId || "",
@@ -525,6 +616,7 @@ module.exports = {
   statePath: statePath,
   readState: readState,
   writeState: writeState,
+  replaceState: replaceState,
   updateTeachingRange: updateTeachingRange,
   resolveStartPage: resolveStartPage,
   resolveEndClassAnchor: resolveEndClassAnchor,
