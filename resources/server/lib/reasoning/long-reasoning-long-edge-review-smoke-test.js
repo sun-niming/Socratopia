@@ -14,6 +14,7 @@ var fs = require("fs");
 var os = require("os");
 var path = require("path");
 var cp = require("child_process");
+var review = require("./long-reasoning-long-edge-review.js");
 
 var SCRIPT = path.join(__dirname, "long-reasoning-long-edge-review.js");
 var fails = 0;
@@ -106,7 +107,7 @@ var outFile = path.join(tmp, "review.json");
 try {
   buildFakeKB(tmp);
   buildFakeCandidates(candFile);
-  var run = runCli(["--candidates", candFile, "--textbookDir", tmp, "--limit", "30", "--out", outFile]);
+  var run = runCli(["--candidates", candFile, "--textbookDir", tmp, "--out", outFile]);
   ok(run.code === 0, "normal run exits 0 (got " + run.code + ")");
 
   var j = parseJson(run.stdout);
@@ -114,6 +115,7 @@ try {
   if (j) {
     ok(j.type === "long_edge_review", "type is long_edge_review");
     ok(j.method === "rules_review_no_model", "method rules_review_no_model");
+    ok(j.limit === 30, "default limit is 30 (got " + j.limit + ")");
     ok(j.stats.total === 3, "stats.total === 3 (got " + j.stats.total + ")");
     ok(j.stats.likely === 1, "stats.likely === 1 (got " + j.stats.likely + ")");
     ok(j.stats.noisy === 1, "stats.noisy === 1 (got " + j.stats.noisy + ")");
@@ -124,6 +126,8 @@ try {
     ok(byId.le_001 && byId.le_001.status === "likely", "le_001 is likely (got " + (byId.le_001 && byId.le_001.status) + ")");
     ok(byId.le_002 && byId.le_002.status === "noisy", "le_002 is noisy (got " + (byId.le_002 && byId.le_002.status) + ")");
     ok(byId.le_003 && byId.le_003.status === "needs_human", "le_003 is needs_human (got " + (byId.le_003 && byId.le_003.status) + ")");
+    ok(j.items.map(function (it) { return it.status; }).join(",") === "likely,needs_human,noisy",
+      "items sorted likely, needs_human, noisy");
   }
 
   ok(fs.existsSync(outFile), "--out file written");
@@ -136,6 +140,43 @@ try {
 } finally {
   rmrf(tmp);
 }
+
+function strongCandidate(score, gap) {
+  return {
+    from: { title: "条件判断" },
+    to: { title: "命令返回结果" },
+    rawPrerequisite: "命令返回",
+    score: score,
+    absMaxGap: gap,
+    reasons: ["prior_pages", "unmapped_prereq_token_overlap"]
+  };
+}
+
+ok(review._classify(strongCandidate(0.8, 5)).status === "likely",
+  "score 0.8 and gap 5 meet likely thresholds");
+ok(review._classify(strongCandidate(0.799, 5)).status === "needs_human",
+  "score below 0.8 does not meet likely threshold");
+ok(review._classify(strongCandidate(0.8, 4)).status === "needs_human",
+  "gap below 5 does not meet likely threshold");
+
+var teachingMapBase = {
+  rawPrerequisite: "",
+  score: 0,
+  absMaxGap: 5,
+  reasons: ["prior_pages", "teaching_map_prior_phase"]
+};
+var weakTitle = Object.assign({}, teachingMapBase, {
+  from: { title: "甲乙丙" },
+  to: { title: "甲丁戊" }
+});
+var overlappingTitle = Object.assign({}, teachingMapBase, {
+  from: { title: "甲乙丙" },
+  to: { title: "甲乙丁" }
+});
+ok(review._classify(weakTitle).status === "noisy",
+  "title overlap below 0.34 is noisy");
+ok(review._classify(overlappingTitle).status === "needs_human",
+  "title overlap above 0.34 is not auto-noisy");
 
 if (fails === 0) {
   console.log("passed");

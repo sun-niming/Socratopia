@@ -29,6 +29,30 @@
   var childProcess = require("child_process");
   var pdfExtractionInflight = Object.create(null);
 
+  var PDF_RUNTIME_DEFAULTS = Object.freeze({
+    timeoutMs: 120000,
+    terminationGraceMs: 5000,
+    cleanupRetryDelayMs: 250,
+    maxStdoutBytes: 16 * 1024 * 1024
+  });
+
+  function numberSetting(env, name, fallback, minimum, zeroUsesFallback) {
+    var raw = env && env[name];
+    var value = raw === undefined || raw === null || String(raw).trim() === "" ? fallback : Number(raw);
+    if (!isFinite(value) || (zeroUsesFallback && value === 0)) value = fallback;
+    return Math.max(minimum, value);
+  }
+
+  function pdfRuntimeConfig(env) {
+    env = env || process.env;
+    return {
+      timeoutMs: numberSetting(env, "PRACTICE_PDF_TIMEOUT_MS", PDF_RUNTIME_DEFAULTS.timeoutMs, 100, true),
+      terminationGraceMs: numberSetting(env, "PRACTICE_PDF_TERMINATION_GRACE_MS", PDF_RUNTIME_DEFAULTS.terminationGraceMs, 100),
+      cleanupRetryDelayMs: numberSetting(env, "PRACTICE_PDF_CLEANUP_RETRY_MS", PDF_RUNTIME_DEFAULTS.cleanupRetryDelayMs, 0),
+      maxStdoutBytes: numberSetting(env, "PRACTICE_PDF_MAX_STDOUT_BYTES", PDF_RUNTIME_DEFAULTS.maxStdoutBytes, 1024)
+    };
+  }
+
   function projectRoot() {
     return process.env.PROJECT_ROOT || "";
   }
@@ -311,13 +335,12 @@
     // still need their own page files populated.
     var inflightKey = JSON.stringify([textbookDir(profileId, worldId, textbookId), pdfPath, pages, expectedCjk]);
     if (pdfExtractionInflight[inflightKey]) return pdfExtractionInflight[inflightKey];
-    var timeoutMs = Math.max(100, Number(process.env.PRACTICE_PDF_TIMEOUT_MS) || 120000);
+    var runtime = pdfRuntimeConfig();
 
     var work = new Promise(function (resolve) {
       var child;
       var stdout = "";
       var stdoutBytes = 0;
-      var maxBuffer = 1024 * 1024 * 16;
       var settled = false;
       var timer = null;
       var terminating = false;
@@ -327,7 +350,7 @@
       function cleanupJobDir() {
         if (!jobDir) return;
         try { fs.rmSync(jobDir, { recursive: true, force: true }); } catch (e) {
-          setTimeout(function () { try { fs.rmSync(jobDir, { recursive: true, force: true }); } catch (e2) {} }, 250);
+          setTimeout(function () { try { fs.rmSync(jobDir, { recursive: true, force: true }); } catch (e2) {} }, runtime.cleanupRetryDelayMs);
         }
       }
 
@@ -347,7 +370,7 @@
           var killer = null;
           try { killer = childProcess.spawn(taskkill, ["/PID", String(child.pid), "/T", "/F"], { windowsHide: true, stdio: "ignore" }); } catch (e) {}
           if (killer) {
-            var fallback = setTimeout(function () { try { child.kill(); } catch (e) {} finish(false); }, 5000);
+            var fallback = setTimeout(function () { try { child.kill(); } catch (e) {} finish(false); }, runtime.terminationGraceMs);
             killer.on("error", function () { clearTimeout(fallback); try { child.kill(); } catch (e) {} finish(false); });
             killer.on("close", function () { clearTimeout(fallback); finish(false); });
             return;
@@ -377,7 +400,7 @@
       child.stdout.on("data", function (chunk) {
         if (settled) return;
         stdoutBytes += Buffer.byteLength(chunk, "utf8");
-        if (stdoutBytes > maxBuffer) {
+        if (stdoutBytes > runtime.maxStdoutBytes) {
           terminateTree();
           return;
         }
@@ -396,7 +419,7 @@
       });
       timer = setTimeout(function () {
         terminateTree();
-      }, timeoutMs);
+      }, runtime.timeoutMs);
     });
     pdfExtractionInflight[inflightKey] = work;
     work.then(function () { delete pdfExtractionInflight[inflightKey]; }, function () { delete pdfExtractionInflight[inflightKey]; });
@@ -682,6 +705,7 @@
     extractPdfPagesToCacheAsync: extractPdfPagesToCacheAsync,
     worldDirCandidates: worldDirCandidates,
     safeSegment: safeSegment,
+    _pdfRuntimeConfig: pdfRuntimeConfig,
     _resolveTextbookPage: resolveTextbookPage,
     _resolveTextbookPageAsync: resolveTextbookPageAsync,
     _resolveChapter: resolveChapter,

@@ -7,6 +7,7 @@
  *   meta <filepath>                    — get metadata (JSON)
  *   extract <filepath> <start> <end>   — extract text from page range (JSON)
  *   scan <filepath>                    — detect scanned PDF (JSON)
+ *   render <filepath> <start> <end> [scale] — render pages as PNG base64 (JSON)
  */
 import { readFileSync, existsSync } from "fs";
 import { fileURLToPath, pathToFileURL } from "url";
@@ -44,20 +45,20 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
  * (silent reliance on NODE_PATH set elsewhere → "still works" until something
  * trivially strips that env var).
  */
-function findPdfjsPath(subpath) {
+function findDependencyPath(subpath) {
   // PRIMARY: packaged production placement (both Mac and Win).
-  const productionPath = path.join(__dirname, "..", ".next", "node_modules", "pdfjs-dist", subpath);
+  const productionPath = path.join(__dirname, "..", ".next", "node_modules", subpath);
   if (existsSync(productionPath)) return pathToFileURL(productionPath).href;
 
   // DEV: pdf-worker.mjs runs from its source location.
-  const devPath = path.join(__dirname, "..", "..", "node_modules", "pdfjs-dist", subpath);
+  const devPath = path.join(__dirname, "..", "..", "node_modules", subpath);
   if (existsSync(devPath)) return pathToFileURL(devPath).href;
 
   // Belt-and-suspenders — anomalous deployments where someone placed
   // pdfjs-dist elsewhere AND set NODE_PATH to point at it. Not load-bearing
   // in any known scenario, just a last-resort net.
   for (const root of (process.env.NODE_PATH || "").split(path.delimiter).filter(Boolean)) {
-    const fallbackPath = path.join(root, "pdfjs-dist", subpath);
+    const fallbackPath = path.join(root, subpath);
     if (existsSync(fallbackPath)) return pathToFileURL(fallbackPath).href;
   }
 
@@ -66,9 +67,28 @@ function findPdfjsPath(subpath) {
   );
 }
 
+function findPdfjsPath(subpath) {
+  return findDependencyPath(path.join("pdfjs-dist", subpath));
+}
+
+function pdfjsResourcePath(directory) {
+  const fsPath = fileURLToPath(findPdfjsPath(directory)).replace(/\\/g, "/");
+  return fsPath.endsWith("/") ? fsPath : fsPath + "/";
+}
+
+const [,, command, filePath, ...args] = process.argv;
+let canvasModule = null;
+if (command === "render") {
+  canvasModule = await import(findDependencyPath(path.join("@napi-rs", "canvas", "index.js")));
+}
+
 // Polyfill DOM globals required by pdfjs-dist at module load time.
 // We only use text extraction (getTextContent), not rendering, so stubs suffice.
-if (typeof globalThis.DOMMatrix === "undefined") {
+if (canvasModule) {
+  globalThis.DOMMatrix = canvasModule.DOMMatrix;
+  globalThis.ImageData = canvasModule.ImageData;
+  globalThis.Path2D = canvasModule.Path2D;
+} else if (typeof globalThis.DOMMatrix === "undefined") {
   globalThis.DOMMatrix = class DOMMatrix {
     constructor(init) {
       const v = init && Array.isArray(init) ? init : [1, 0, 0, 1, 0, 0];
@@ -101,12 +121,15 @@ const { getDocument, GlobalWorkerOptions } = await import(
 );
 GlobalWorkerOptions.workerSrc = findPdfjsPath("legacy/build/pdf.worker.mjs");
 
-const [,, command, filePath, ...args] = process.argv;
-
 async function loadDoc() {
   const data = readFileSync(filePath);
   return getDocument({
     data: new Uint8Array(data.buffer, data.byteOffset, data.byteLength),
+    cMapUrl: pdfjsResourcePath("cmaps"),
+    cMapPacked: true,
+    standardFontDataUrl: pdfjsResourcePath("standard_fonts"),
+    wasmUrl: pdfjsResourcePath("wasm"),
+    iccUrl: pdfjsResourcePath("iccs"),
     useSystemFonts: true,
     disableAutoFetch: true,
     disableStream: true,
@@ -130,6 +153,25 @@ async function extractPageText(doc, pageNum) {
     lastY = y;
   }
   return lines.join("").trim();
+}
+
+function canvasFactory() {
+  const { createCanvas } = canvasModule;
+  return {
+    create(w, h) { const canvas = createCanvas(w, h); return { canvas, context: canvas.getContext("2d") }; },
+    reset(holder, w, h) { holder.canvas.width = w; holder.canvas.height = h; },
+    destroy(holder) { holder.canvas.width = 0; holder.canvas.height = 0; },
+  };
+}
+
+async function renderPage(doc, pageNum, scale) {
+  if (!canvasModule) throw new Error("@napi-rs/canvas is required for PDF rendering");
+  const page = await doc.getPage(pageNum);
+  const viewport = page.getViewport({ scale });
+  const canvas = canvasModule.createCanvas(Math.ceil(viewport.width), Math.ceil(viewport.height));
+  const context = canvas.getContext("2d");
+  await page.render({ canvasContext: context, viewport, canvasFactory: canvasFactory() }).promise;
+  return canvas.toBuffer("image/png").toString("base64");
 }
 
 async function main() {
@@ -256,6 +298,18 @@ async function main() {
         avgChars,
         pagesChecked: sampleCount,
       }));
+      break;
+    }
+
+    case "render": {
+      const start = Math.max(1, parseInt(args[0] || "1", 10));
+      const end = Math.min(numPages, parseInt(args[1] || String(start), 10));
+      const scale = Math.min(3, Math.max(1, Number(args[2]) || 2));
+      const pages = [];
+      for (let i = start; i <= end; i++) {
+        pages.push({ page: i, pngB64: await renderPage(doc, i, scale) });
+      }
+      console.log(JSON.stringify({ pages, metadata: { numPages }, scale }));
       break;
     }
 

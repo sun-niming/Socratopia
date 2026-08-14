@@ -85,12 +85,13 @@ function assessPdfText(text, opts) {
   var wordishRatio = length ? (wordish + cjk) / length : 0;
   var sparse = length < 80;
   var brokenEncoding = bad > 0 || controls > 0;
-  var fragmented = length >= 120 && cjk < 4 && wordishRatio < 0.48 && singletonRatio > 0.42;
+  var substantialLowCjk = length >= 120 && cjk < 4;
+  var fragmented = substantialLowCjk && wordishRatio < 0.48 && singletonRatio > 0.42;
   // A broken Chinese CMap can leave apparently healthy C++ identifiers and
   // punctuation behind. The old generic fragmentation check missed those
   // pages because their ASCII ratio was high. Only enable this language-aware
   // signal for textbooks that are expected to contain Chinese.
-  var missingExpectedCjk = !!opts.expectedCjk && length >= 120 && cjk < 4 && wordish >= 60;
+  var missingExpectedCjk = !!opts.expectedCjk && substantialLowCjk && wordish >= 60;
   return {
     length: length,
     cjk: cjk,

@@ -237,6 +237,12 @@
       "regex": "^/api/long\\-reasoning\\-demo(?:/)?$",
       "routeKeys": {},
       "namedRegex": "^/api/long\\-reasoning\\-demo(?:/)?$"
+    },
+    {
+      "page": "/api/knowledge-source",
+      "regex": "^/api/knowledge\\-source(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/knowledge\\-source(?:/)?$"
     }
   ],
   "dataRoutes": [],

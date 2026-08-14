@@ -1,39 +1,64 @@
-# Repository Guidelines
+# AGENTS.md
 
-## Project Structure & Module Organization
-This repository is the packaged Windows build artifact for the Socratopia Electron app, not the original TypeScript/React source tree. Edit bundled files directly.
+This is a **packaged Windows build artifact** of Socratopia (Electron + Next.js). No build pipeline regenerates bundles from source. All edits are on compiled webpack/esbuild output.
 
-- `main.js` and `preload.js`: root working copies of Electron main/preload code.
-- `resources/server/server.js`: standalone Next.js server bootstrap.
-- `resources/server/lib/`: editable helpers for adaptive teaching, practice, resume, reasoning, PDF, and model routing.
-- `resources/server/.next/server/app/api/`: compiled API route bundles.
-- `resources/server/.next/static/chunks/`: compiled frontend bundles.
-- `resources/server/public/` and `resources/rules/`: static assets, avatars, metadata, and seeded rules.
-- `tools/`: patch and route-generation utilities.
+## Primary reference
+- This file (`AGENTS.md`) is the sole instruction file. The previously referenced `CLAUDE.md` is absent from this repo.
+- Source repo: `socralab-app/v2` (macOS). Sibling working copy: `E:\huanjing\sogeladi\Socratopia_2.0\Socratopia` — diff before editing.
 
-Temporary work belongs in `tmp/` or `outputs/`; avoid committing bulky runtime artifacts unless required for a patch.
+## Architecture (3 layers)
+1. **Electron main** (`main.js` in `resources/app.asar`) — starts Next.js, manages native APIs
+2. **Next.js server** (`resources/server/`) — forked child process on port 3000
+3. **React frontend** — rendered in BrowserWindow, IPC via `preload.js`
 
-## Build, Test, and Development Commands
-- `./Socratopia.exe`: launch the packaged desktop app.
-- `node --check <file>`: validate JavaScript syntax after editing compiled bundles.
-- `node resources/server/lib/adaptive/smoke-test.js`: run the adaptive data-layer smoke test.
-- `node resources/server/lib/practice/smoke-test.js`: run the practice data-layer smoke test.
-- `node resources/server/lib/model-router-smoke-test.js`: run model-router assertions.
-- `node tools/new-route.js <name> [--methods GET,POST] [--dry-run]`: scaffold and register a new API route.
-- `node fix-asar-integrity.js`: repair the ASAR hash after repacking Electron files.
+## Server-side code layout
+| Path | Role |
+|------|------|
+| `resources/server/.next/server/app/api/*/route.js` | API route handlers (28 routes) |
+| `resources/server/.next/server/chunks/*.js` | Shared webpack chunks (no `require("fs")`) |
+| `resources/server/lib/` | Shared server logic (model-router, adaptive, kb, reasoning, practice, resume) |
+| `resources/server/.next/static/chunks/**/*.js` | React frontend bundles |
+| `resources/server/server.js` | Server entrypoint (loads settings, forked by Electron) |
 
-There is no root build pipeline for regenerating bundles in this checkout.
+Dependencies: all real deps in `resources/server/package.json`; root `package.json` has only `acorn` (for syntax checks).
 
-## Coding Style & Naming Conventions
-Use the surrounding bundled style. Most server helpers are CommonJS IIFEs exporting plain objects; preserve that pattern. Use two-space indentation where files already do, `camelCase` for functions and variables, and `PascalCase` for data models such as `LearnerModel`. Keep comments short and reserved for non-obvious bundle or persistence behavior.
+## Critical constraints (miss these = breakage)
+- **No `require("fs")` in `chunks/*.js`** — webpack can't resolve it. Use `global.__FS__` instead. Route files (`app/api/*/route.js`) *can* use `require("fs")`.
+- **Module 64092** (LLM core: `mx`/`callLLM`/`$b`) is duplicated across **8 files** (2 chunks + 4 inlined routes + 2 dynamic consumers). Change all definers when editing LLM logic.
+- **Safe string editing in minified bundles**: escape `'` → `\'`, `"` → `\"`, `` ` `` → `` \` ``, `${` → `\${`. Use `acorn` for precise syntax error location: `node -e "const a=require('acorn'); a.parse(require('fs').readFileSync('<file>','utf-8'),{ecmaVersion:2022})"`
 
-## Testing Guidelines
-Prefer the nearest smoke test for the changed module, then run `node --check` on every edited `.js` file. Name new smoke tests as `<module>-smoke-test.js` beside the module. For runtime API behavior, launch `Socratopia.exe` and exercise the route or use `resources/server/lib/practice/runtime-e2e-smoke.js`.
+## Exact commands
+| Action | Command |
+|--------|---------|
+| Syntax check | `node --check <file>` |
+| Launch app | `./Socratopia.exe` |
+| ASAR extract | `npx asar extract resources/app.asar _asar_extracted/` |
+| ASAR repack | `npx asar pack _asar_extracted/ resources/app.asar` |
+| Fix hash after repack | `node fix-asar-integrity.js` |
+| Scaffold API route | `node tools/new-route.js <name> [--methods GET,POST] [--dry-run]` |
+| Smoke test (any) | `node <path-to-smoke-test>` (self-contained, no deps, no running app) |
 
-## Commit & Pull Request Guidelines
-Recent commits use concise imperative subjects, for example `Add adaptive teaching data layer (Prompt 2)`. Follow that style and keep the subject focused on shipped behavior.
+## Edit targets per change type
+| Change | Edit | Restart | Extra |
+|--------|------|---------|-------|
+| API route logic | `resources/server/.next/server/app/api/*/route.js` | app | `node --check`; include `*-manifest.json` in patches |
+| Shared server logic | `resources/server/.next/server/chunks/*.js` | app | No `require("fs")` |
+| React frontend | `resources/server/.next/static/chunks/**/*.js` | app | `node --check` |
+| Electron main/preload | Root `main.js` + `preload.js` **and** `_asar_extracted/dist-electron/` | app | Repack ASAR + `fix-asar-integrity.js` |
 
-Pull requests should include a short summary, subsystems touched, exact smoke tests or syntax checks run, and screenshots only for visible UI changes. Mention any ASAR repack or manifest updates.
+For server/route changes, editing `resources/server/` is enough (copied to `%APPDATA%` on launch). For Electron changes, the ASAR is the runtime source.
 
-## Security & Configuration Tips
-Do not commit real API keys, local project data, or user profile contents. When changing Electron `main.js` or `preload.js`, mirror edits into the ASAR workflow, repack, and run `node fix-asar-integrity.js` before distributing.
+## Smoke tests (20+)
+All co-located with their module, run with `node <path>`, require no running app. Always run relevant smoke test + `node --check` on edited files after changes.
+
+## Never commit
+- `resources/settings.json` — API keys
+- `resources/set.json` — teaching model config
+- `resources/app.asar` — built artifact
+- Real API keys or user data in any file
+
+## Style
+- Match surrounding bundled code (CommonJS IIFEs, 2-space indent, camelCase, PascalCase for models)
+- Put temp work in `tmp/` or `outputs/`
+- New smoke tests: `<module>-smoke-test.js` beside the module
+- Commit subjects: concise imperative, focused on shipped behavior

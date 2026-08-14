@@ -538,7 +538,7 @@ async function __KB_DISTILL_IMPL__(rawText, startPage, endPage, textbookDir, res
       var https = require("https"), http = require("http");
       var url = new URL(block.baseUrl.replace(/\/$/, "") + "/chat/completions");
       var mod = url.protocol === "https:" ? https : http;
-      var postBody = JSON.stringify({ model: block.model, max_tokens: 8096, stream: false, response_format: { type: "json_object" }, messages: [{ role: "system", content: sys }, { role: "user", content: usr }] });
+      var postBody = JSON.stringify({ model: block.model, ...(/^gpt-5\.6/i.test(String(block.model || "")) ? { prompt_cache_key: ("socratopia:kb-distill:" + block.model).toLowerCase().replace(/[^a-z0-9_.:-]/g, "-").slice(0, 64), prompt_cache_options: { mode: "implicit", ttl: "30m" } } : {}), max_tokens: 8096, stream: false, response_format: { type: "json_object" }, messages: [{ role: "system", content: sys }, { role: "user", content: usr }] });
       console.log("[kb] 发起提炼请求: " + url.href + " model=" + block.model + " bodyLen=" + postBody.length);
       return new Promise(function (resolve, reject) {
         var t0 = Date.now();
@@ -557,6 +557,10 @@ async function __KB_DISTILL_IMPL__(rawText, startPage, endPage, textbookDir, res
             if (res.statusCode !== 200) { reject(new Error("HTTP " + res.statusCode + ": " + body.slice(0, 200))); return; }
             try {
               var parsed = JSON.parse(body.trim());
+              if (parsed.usage) {
+                var cacheDetails = parsed.usage.prompt_tokens_details || {};
+                console.log("[direct-llm-cache]", { model: block.model, purpose: "kb-distill", promptTokens: parsed.usage.prompt_tokens, cachedTokens: cacheDetails.cached_tokens || 0, cacheWriteTokens: cacheDetails.cache_write_tokens || 0 });
+              }
               var m2 = parsed.choices && parsed.choices[0] && parsed.choices[0].message;
               if (!m2) { reject(new Error("响应格式错误：无 choices[0].message")); return; }
               var finalContent = m2.content || m2.reasoning_content || "";
@@ -887,7 +891,8 @@ global.__KB_DISTILL_PREFETCH__ = function (rawText, startPage, endPage, textbook
   ["__KB_PROGRESS__", "./lib/progress/kb-progress.js", "[kb-progress] Knowledge-card progress helper"],
   ["__LONG_REASONING__", "./lib/reasoning/long-context.js", "[long-reasoning] Long-context helper"],
   ["__MODEL_ROUTER__", "./lib/model-router.js", "[model-router]"],
-  ["__KNOWLEDGE_SOURCE__", "./lib/knowledge/source-router.js", "[knowledge] Source router"]
+  ["__KNOWLEDGE_SOURCE__", "./lib/knowledge/source-router.js", "[knowledge] Source router"],
+  ["__CLOSE_READING__", "./lib/close-reading/skill.js", "[close-reading] Isolated PDF close-reading skill"]
 ].forEach(function (m) { __loadOptionalGlobal__(m[0], m[1], m[2], m[3]); })
 ;if (global.__KB_PROGRESS__ && global.__KB_PROGRESS__.installRouteRequireHook) {
   global.__KB_PROGRESS__.installRouteRequireHook();

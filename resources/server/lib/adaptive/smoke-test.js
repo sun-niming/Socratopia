@@ -282,6 +282,19 @@ rqLm.conceptMastery["topic_c"].score = 0.2;
 dl.updateReviewQueue(rqLm);
 assert(rqLm.reviewQueue[0].priority === 0.8, "reviewQueue: priority updated when score drops");
 assert(rqLm.reviewQueue[0].score === 0.2, "reviewQueue: score updated in queue entry");
+
+var boundaryLm = dl.loadLearnerModel("rq_boundary_user", "rq_world");
+boundaryLm.reviewQueue = [];
+boundaryLm.conceptMastery = {
+  threshold_recent: { score: 0.7, lastReviewed: new Date(Date.now() - 6 * 86400000).toISOString(), history: [] },
+  weak_recent: { score: 0.69, lastReviewed: new Date(Date.now() - 6 * 86400000).toISOString(), history: [] },
+  mastered_overdue: { score: 0.9, lastReviewed: new Date(Date.now() - 8 * 86400000).toISOString(), history: [] }
+};
+dl.updateReviewQueue(boundaryLm);
+var boundaryIds = boundaryLm.reviewQueue.map(function (item) { return item.conceptId; });
+assert(boundaryIds.indexOf("threshold_recent") < 0, "reviewQueue: threshold score reviewed within interval is excluded");
+assert(boundaryIds.indexOf("weak_recent") >= 0, "reviewQueue: score below threshold is included");
+assert(boundaryIds.indexOf("mastered_overdue") >= 0, "reviewQueue: mastered concept past interval is included");
 console.log("  Review queue enhanced: PASS");
 
 // ---- Summary ----

@@ -41,6 +41,26 @@ console.log("");
 var PID = "u1", WID = "w1", TID = "tb1";
 var worldRel = path.join("profiles", PID, "worlds", WID);
 
+var pdfDefaults = SA._pdfRuntimeConfig({});
+assert(pdfDefaults.timeoutMs === 120000, "PDF runtime config: default extraction timeout");
+assert(pdfDefaults.terminationGraceMs === 5000, "PDF runtime config: default termination grace");
+assert(pdfDefaults.cleanupRetryDelayMs === 250, "PDF runtime config: default cleanup retry delay");
+assert(pdfDefaults.maxStdoutBytes === 16 * 1024 * 1024, "PDF runtime config: default stdout limit");
+var pdfOverrides = SA._pdfRuntimeConfig({
+  PRACTICE_PDF_TIMEOUT_MS: "10",
+  PRACTICE_PDF_TERMINATION_GRACE_MS: "250",
+  PRACTICE_PDF_CLEANUP_RETRY_MS: "0",
+  PRACTICE_PDF_MAX_STDOUT_BYTES: "512"
+});
+assert(pdfOverrides.timeoutMs === 100, "PDF runtime config: extraction timeout minimum");
+assert(pdfOverrides.terminationGraceMs === 250, "PDF runtime config: termination override");
+assert(pdfOverrides.cleanupRetryDelayMs === 0, "PDF runtime config: zero-delay cleanup override");
+assert(pdfOverrides.maxStdoutBytes === 1024, "PDF runtime config: stdout minimum");
+assert(SA._pdfRuntimeConfig({ PRACTICE_PDF_TIMEOUT_MS: "0" }).timeoutMs === 120000,
+  "PDF runtime config: zero extraction timeout preserves legacy default");
+assert(SA._pdfRuntimeConfig({ PRACTICE_PDF_TIMEOUT_MS: "invalid" }).timeoutMs === 120000,
+  "PDF runtime config: invalid extraction timeout uses default");
+
 // ========== 1. explicit sourceText wins over any sourceType ==========
 
 var r1 = SA.resolveSourceText({ profileId: PID, worldId: WID, sourceType: "textbook-page", sourceText: "  hello world  " });

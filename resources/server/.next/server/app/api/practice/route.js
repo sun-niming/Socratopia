@@ -6,6 +6,10 @@ function createPracticeLLMCaller(mc, model) {
       headers: { "Content-Type": "application/json", "Authorization": "Bearer " + mc.apiKey },
       body: JSON.stringify({
         model: model,
+        ...(/^gpt-5\.6/i.test(String(model || "")) ? {
+          prompt_cache_key: ("socratopia:practice-json:" + model).toLowerCase().replace(/[^a-z0-9_.:-]/g, "-").slice(0, 64),
+          prompt_cache_options: { mode: "implicit", ttl: "30m" }
+        } : {}),
         messages: [{ role: "system", content: p.system }, { role: "user", content: p.user }],
         temperature: typeof p.temperature === "number" ? p.temperature : 0.4,
         max_tokens: p.maxTokens || 4096,
@@ -14,6 +18,10 @@ function createPracticeLLMCaller(mc, model) {
     });
     if (!r.ok) { var t = await r.text(); throw new Error("LLM API " + r.status + ": " + t.slice(0, 200)); }
     var d = await r.json();
+    if (d.usage) {
+      var details = d.usage.prompt_tokens_details || {};
+      console.log("[direct-llm-cache]", { model: model, purpose: "practice-json", promptTokens: d.usage.prompt_tokens, cachedTokens: details.cached_tokens || 0, cacheWriteTokens: details.cache_write_tokens || 0 });
+    }
     return d.choices && d.choices[0] && d.choices[0].message ? d.choices[0].message.content : "";
   };
 }
@@ -722,7 +730,17 @@ function _streamingTutorResponse(mc, model, systemPrompt, messages) {
         var resp = await fetch(mc.baseUrl + "/chat/completions", {
           method: "POST",
           headers: { "Content-Type": "application/json", "Authorization": "Bearer " + mc.apiKey },
-          body: JSON.stringify({ model: model, messages: allMsgs, temperature: 0.6, max_tokens: 4096, stream: true })
+          body: JSON.stringify({
+            model: model,
+            ...(/^gpt-5\.6/i.test(String(model || "")) ? {
+              prompt_cache_key: ("socratopia:practice-tutor:" + model).toLowerCase().replace(/[^a-z0-9_.:-]/g, "-").slice(0, 64),
+              prompt_cache_options: { mode: "implicit", ttl: "30m" }
+            } : {}),
+            messages: allMsgs,
+            temperature: 0.6,
+            max_tokens: 4096,
+            stream: true
+          })
         });
         if (!resp.ok) {
           var errText = await resp.text().catch(function () { return ""; });

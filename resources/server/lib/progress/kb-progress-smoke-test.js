@@ -47,6 +47,20 @@ var wrongBook = P.validateProgressMarker({ textbookId: "OTHER", activeConceptId:
 assert.strictEqual(wrongBook.reason, "textbook_mismatch", "cross-textbook marker is rejected");
 var missingConversation = P.validateProgressMarker({ textbookId: "TB", activeConceptId: "c1", newlyCompletedConceptIds: [], lastTaughtPage: 10 }, base);
 assert.strictEqual(missingConversation.reason, "conversation_mismatch", "marker without sourceConversationId is rejected");
+assert.strictEqual(P.isRecoverableForcedReason("non_contiguous_active_concept"), true, "stale active marker can use the two-check recovery path");
+assert.strictEqual(P.isRecoverableForcedReason("missing_marker"), true, "missing weak-model marker can use the two-check recovery path");
+assert.strictEqual(P.isRecoverableForcedReason("textbook_mismatch"), false, "cross-textbook marker can never use forced recovery");
+assert.strictEqual(P.isRecoverableForcedReason("conversation_mismatch"), false, "cross-conversation marker can never use forced recovery");
+assert.strictEqual(P.isRecoverableForcedReason("taught_page_outside_loaded_range"), false, "out-of-window page can never use forced recovery");
+assert.strictEqual(P.isRecoverableForcedMarker("non_contiguous_active_concept", {
+  textbookId: "TB", sourceConversationId: "C1", lastTaughtPage: 11,
+}, { textbookId: "TB", conversationId: "C1" }, { startPage: 10, endPage: 14 }), true, "safe stale-active marker can recover at the hard cap");
+assert.strictEqual(P.isRecoverableForcedMarker("non_contiguous_active_concept", {
+  textbookId: "TB", sourceConversationId: "C1", lastTaughtPage: 99,
+}, { textbookId: "TB", conversationId: "C1" }, { startPage: 10, endPage: 14 }), false, "stale-active marker with an out-of-window page cannot recover");
+assert.strictEqual(P.isRecoverableForcedMarker("non_contiguous_active_concept", {
+  textbookId: "OTHER", sourceConversationId: "C1", lastTaughtPage: 11,
+}, { textbookId: "TB", conversationId: "C1" }, { startPage: 10, endPage: 14 }), false, "stale-active marker with a foreign textbook cannot recover");
 var tooFast = P.validateProgressMarker({ textbookId: "TB", sourceConversationId: "C1", activeConceptId: "c4", newlyCompletedConceptIds: ["c1", "c2", "c3", "c4"], lastTaughtPage: 14 }, base);
 assert.strictEqual(tooFast.reason, "pace_limit_exceeded", "more than three completed cards in one turn is rejected");
 var jumpedWindowQueue = [

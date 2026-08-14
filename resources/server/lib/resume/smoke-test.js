@@ -53,6 +53,7 @@ eq(r1TailOnly.source, "progress.md_window_start", "no-state window tail source m
 // ---- 4. writeState merge + readState + resolve from state ----
 var w1 = R.writeState(tbDir, { currentPage: 150, lastTaughtPage: 150, windowStartPage: 140, windowEndPage: 160, completedTitles: ["A", "B"], conversationId: "c1" });
 ok(w1 && w1.schemaVersion === R.SCHEMA_VERSION, "writeState returns state w/ schemaVersion");
+ok(w1 && !isNaN(Date.parse(w1.updatedAt)), "writeState returns an ISO updatedAt");
 eq(w1.lastTaughtPage, 150, "writeState lastTaughtPage");
 
 // merge: omit windowStartPage, add new completed title; old fields must survive
@@ -64,6 +65,12 @@ ok(w2.completedTitles.indexOf("A") >= 0 && w2.completedTitles.indexOf("C") >= 0,
 
 var rs = R.readState(tbDir);
 eq(rs.lastTaughtPage, 175, "readState reflects merged state");
+
+var replaceDir = path.join(tmp, "textbooks", "REPLACE_META");
+fs.mkdirSync(replaceDir, { recursive: true });
+var replaced = R.replaceState(replaceDir, { lastTaughtPage: 12, schemaVersion: 1, updatedAt: "stale" });
+eq(replaced.schemaVersion, R.SCHEMA_VERSION, "replaceState normalizes schemaVersion");
+ok(!isNaN(Date.parse(replaced.updatedAt)) && replaced.updatedAt !== "stale", "replaceState refreshes updatedAt");
 
 // state beats progress.md
 var r2 = R.resolveStartPage({ textbookDir: tbDir, progressMdText: "# 当前页码：第 148 页", currentPage: 12 });

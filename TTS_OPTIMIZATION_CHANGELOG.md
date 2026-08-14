@@ -86,3 +86,8 @@
 - Kept content-addressed TTS cache (`_ttsK(voiceKey, text)`) and single-flight TTS queue (`_ttsRN >= 1`).
 - Removed the effective `voiceKey` sorting dispatch so one character is no longer synthesized all the way through before later characters.
 - `lines_final` remains unchanged: `audioFiles[i]` still corresponds to `lines[i]`.
+
+## 2026-07-02 Group chat sentence-return TTS
+- `/api/groupchat` now emits `lines_final` before waiting for TTS, so the UI can show generated messages as soon as the text is ready.
+- Group-chat TTS then runs in original line order and emits one `tts_audio` SSE event per completed line, followed by `tts_done`.
+- The page bundle and server page bundle now display `lines_final` immediately and skip the later duplicate display when the stream finishes.

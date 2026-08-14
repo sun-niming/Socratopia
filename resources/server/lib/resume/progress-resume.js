@@ -20,6 +20,12 @@ var crypto = require("crypto");
 var SCHEMA_VERSION = 3;
 var STATE_FILE = "progress_state.json";
 
+function finalizeStateDocument(state) {
+  state.schemaVersion = SCHEMA_VERSION;
+  state.updatedAt = new Date().toISOString();
+  return state;
+}
+
 // Parse the page number from progress.md first line (or whole text). Handles zh/en variants:
 //   # 当前页码：第 148 页 / # 当前页：第 148 页 / 第 148 页
 //   # Current Page: Page 148 / Current Page: 148 / Page 148
@@ -234,8 +240,7 @@ function writeState(textbookDir, partial) {
       next.completedConceptIds = uniqMerge(prev.completedConceptIds, null);
       next.completedTitles = uniqMerge(prev.completedTitles, null);
     }
-    next.schemaVersion = SCHEMA_VERSION;
-    next.updatedAt = new Date().toISOString();
+    finalizeStateDocument(next);
     var p = statePath(textbookDir);
     fs.mkdirSync(path.dirname(p), { recursive: true });
     var tmp = p + ".tmp";
@@ -258,8 +263,7 @@ function replaceState(textbookDir, value) {
     });
     next.completedConceptIds = uniqMerge([], next.completedConceptIds);
     next.completedTitles = uniqMerge([], next.completedTitles);
-    next.schemaVersion = SCHEMA_VERSION;
-    next.updatedAt = new Date().toISOString();
+    finalizeStateDocument(next);
     var p = statePath(textbookDir);
     fs.mkdirSync(path.dirname(p), { recursive: true });
     var tmp = p + ".tmp";

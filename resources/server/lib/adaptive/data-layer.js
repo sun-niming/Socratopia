@@ -283,6 +283,25 @@
 
   // ========== Review Queue helpers ==========
 
+  var REVIEW_MASTERY_THRESHOLD = 0.7;
+  var REVIEW_INTERVAL_MS = 7 * 24 * 60 * 60 * 1000;
+
+  function reviewAgeMs(concept, nowDate) {
+    if (!concept || !concept.lastReviewed) return NaN;
+    return nowDate - new Date(concept.lastReviewed);
+  }
+
+  function wasRecentlyMastered(concept, nowDate) {
+    var ageMs = reviewAgeMs(concept, nowDate);
+    return concept.score >= REVIEW_MASTERY_THRESHOLD && isFinite(ageMs) && ageMs <= REVIEW_INTERVAL_MS;
+  }
+
+  function needsReview(concept, nowDate) {
+    if (concept.score < REVIEW_MASTERY_THRESHOLD || !concept.lastReviewed) return true;
+    var ageMs = reviewAgeMs(concept, nowDate);
+    return isFinite(ageMs) && ageMs > REVIEW_INTERVAL_MS;
+  }
+
   function updateReviewQueue(model) {
     if (!model || !model.conceptMastery) return model;
     if (!model.reviewQueue) model.reviewQueue = [];
@@ -293,15 +312,14 @@
     model.reviewQueue = model.reviewQueue.filter(function (r) {
       var c = concepts[r.conceptId];
       if (!c || typeof c.score !== "number") return false;
-      if (c.score >= 0.7 && c.lastReviewed && (nowDate - new Date(c.lastReviewed)) <= 7 * 86400000) return false;
-      return true;
+      return !wasRecentlyMastered(c, nowDate);
     });
     // Add or update concepts that need review
     for (var cid in concepts) {
       if (!concepts.hasOwnProperty(cid)) continue;
       var c = concepts[cid];
       if (typeof c.score !== "number") continue;
-      if (c.score < 0.7 || !c.lastReviewed || (nowDate - new Date(c.lastReviewed)) > 7 * 86400000) {
+      if (needsReview(c, nowDate)) {
         var found = -1;
         for (var i = 0; i < model.reviewQueue.length; i++) {
           if (model.reviewQueue[i].conceptId === cid) { found = i; break; }

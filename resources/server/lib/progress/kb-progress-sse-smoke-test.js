@@ -16,10 +16,12 @@ var R = require("../resume/progress-resume.js");
   var cards = [
     { concept_id: "c1", title: "One", source_pages: [10, 11], definition: "one" },
     { concept_id: "c2", title: "Two", source_pages: [11, 12], definition: "two" },
+    { concept_id: "c3", title: "Three", source_pages: [20, 21], definition: "three" },
+    { concept_id: "c4", title: "Four", source_pages: [21, 22], definition: "four" },
   ];
   fs.writeFileSync(path.join(kb, "index.json"), JSON.stringify({ cards: cards }));
   cards.forEach(function (card) { fs.writeFileSync(path.join(kb, "cards", card.concept_id + ".json"), JSON.stringify(card)); });
-  fs.writeFileSync(path.join(kb, "teaching_map.json"), JSON.stringify({ segments: [{ sequence: [{ card_ids: ["c1", "c2"] }] }] }));
+  fs.writeFileSync(path.join(kb, "teaching_map.json"), JSON.stringify({ segments: [{ sequence: [{ card_ids: ["c1", "c2", "c3", "c4"] }] }] }));
   fs.writeFileSync(path.join(kb, "build_status.json"), JSON.stringify({ state: "done", activationEligible: true }));
   fs.writeFileSync(path.join(world, "textbooks", "textbook_index.json"), JSON.stringify({ textbooks: [{ id: "TB", currentPage: 10 }] }));
   R.writeState(textbook, { textbookId: "TB", activeConceptId: "c1", lastTaughtPage: 10, loadedCursor: { startPage: 10, endPage: 12 } });
@@ -78,8 +80,80 @@ var R = require("../resume/progress-resume.js");
   assert.strictEqual(state.activeConceptId, "c2", "SSE completion commits the next active concept");
   assert.deepStrictEqual(state.completedConceptIds, ["c1"], "SSE completion commits contiguous completion");
   assert.strictEqual(state.lastTaughtPage, 11, "SSE completion commits actual page");
+  assert.deepStrictEqual([state.loadedCursor.startPage, state.loadedCursor.endPage], [10, 12], "accepted marker persists the authoritative loaded window");
   var index = JSON.parse(fs.readFileSync(path.join(world, "textbooks", "textbook_index.json"), "utf-8"));
   assert.strictEqual(index.textbooks[0].currentPage, 11, "textbook index syncs validated taught page");
+
+  var currentReadingDir = path.join(world, "conversations", "C2");
+  fs.mkdirSync(currentReadingDir, { recursive: true });
+  fs.writeFileSync(path.join(currentReadingDir, "current_reading.md"), "<!-- startPage: 20 endPage: 22 -->\nnew lesson window");
+  var stalePaths = Object.assign({}, directivePaths, { conversationId: "C2" });
+  var staleBody = { textbookId: "TB", conversationId: "C2", profileId: "p", worldId: "w", messages: [{ role: "user", content: "continue" }] };
+  var firstPrepared = P.prepareProgressContext(stalePaths);
+  assert.strictEqual(firstPrepared.loadedRange.source, "conversation_current_reading", "conversation current_reading is authoritative over stale textbook state");
+  assert.strictEqual(firstPrepared.activeConceptId, "c3", "old-conversation active concept rebases to the first card in the current window");
+  var rebasedState = R.readState(textbook);
+  assert.strictEqual(rebasedState.sourceConversationId, "C2", "rebased state binds the current conversation");
+  assert.deepStrictEqual([rebasedState.loadedCursor.startPage, rebasedState.loadedCursor.endPage], [20, 22], "rebased state persists the current conversation window");
+  var staleRequest = P.requestWithProgressDirective(
+    new Request("http://localhost/api/chat", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify(staleBody) }),
+    staleBody,
+    stalePaths,
+    firstPrepared,
+  );
+  var staleInjected = await staleRequest.json();
+  assert.ok(staleInjected.messages[0].content.includes('"activeConceptId":"c3"'), "new lesson directive never repeats the stale active concept");
+
+  async function rejectedCheckTurn(prepared, markerOverride) {
+    var invalidMarker = markerOverride || '{"schemaVersion":1,"textbookId":"TB","sourceConversationId":"C2","activeConceptId":"c1","newlyCompletedConceptIds":[],"lastTaughtPage":20}';
+    var response = new Response(
+      event({ type: "reading_range", startPage: 20, endPage: 22, loadedStartPage: 20, loadedEndPage: 22 }) +
+      event({ type: "text", text: "One more check?<!-- kbProgress:" + invalidMarker + " -->" }) +
+      event({ type: "done" }),
+      { headers: { "Content-Type": "text/event-stream" } }
+    );
+    await P.transformSseResponse(response, {
+      body: staleBody,
+      paths: stalePaths,
+      endClass: false,
+      trackProgress: true,
+      conversationMeta: { textbookId: "TB" },
+      progressContext: prepared,
+    }).text();
+  }
+
+  await rejectedCheckTurn(firstPrepared);
+  assert.strictEqual(R.readState(textbook).activeConceptCheckCount, 1, "first rejected check is counted without accepting its invalid marker");
+  var secondPrepared = P.prepareProgressContext(stalePaths);
+  await rejectedCheckTurn(secondPrepared);
+  assert.strictEqual(R.readState(textbook).activeConceptCheckCount, 2, "second rejected check reaches the hard cap");
+  R.writeState(textbook, { lastTaughtPage: 21, currentPage: 21 });
+  var forcedPrepared = P.prepareProgressContext(stalePaths);
+  assert.strictEqual(forcedPrepared.activeConceptId, "c4", "third turn deterministically advances to the adjacent card");
+  assert.strictEqual(forcedPrepared.forcedFrom.conceptId, "c3", "forced advance records which repeated concept was closed");
+  var forcedRequest = P.requestWithProgressDirective(
+    new Request("http://localhost/api/chat", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify(staleBody) }),
+    staleBody,
+    stalePaths,
+    forcedPrepared,
+  );
+  var forcedInjected = await forcedRequest.json();
+  assert.ok(forcedInjected.messages[0].content.includes("TWO_CHECK_LIMIT_REACHED"), "third-turn directive requires summary then advancement");
+  assert.ok(forcedInjected.messages[0].content.includes('"activeConceptId":"c4"'), "third-turn marker is anchored to the adjacent card");
+  assert.ok(forcedInjected.messages[0].content.includes('"newlyCompletedConceptIds":["c3"]'), "third-turn marker must close the capped concept");
+  assert.strictEqual(R.readState(textbook).activeConceptId, "c3", "forced advance remains pending until a successful assistant response");
+  var crossTextbookMarker = '{"schemaVersion":1,"textbookId":"OTHER","sourceConversationId":"C2","activeConceptId":"c4","newlyCompletedConceptIds":["c3"],"lastTaughtPage":21}';
+  await rejectedCheckTurn(forcedPrepared, crossTextbookMarker);
+  var unsafeState = R.readState(textbook);
+  assert.strictEqual(unsafeState.activeConceptId, "c3", "cross-textbook marker cannot trigger forced recovery");
+  assert.strictEqual(unsafeState.activeConceptCheckCount, 2, "unsafe rejection preserves the hard-cap state for retry");
+  assert.ok(!unsafeState.completedConceptIds.includes("c3"), "cross-textbook marker produces zero completion writes");
+  var recoveryPrepared = P.prepareProgressContext(stalePaths);
+  await rejectedCheckTurn(recoveryPrepared);
+  assert.strictEqual(R.readState(textbook).activeConceptId, "c4", "successful third response advances even when the weak model repeats an invalid marker");
+  assert.ok(R.readState(textbook).completedConceptIds.includes("c3"), "forced cap closes the repeated card exactly once");
+  assert.strictEqual(R.readState(textbook).activeConceptCheckCount, 0, "a repeated old-card question is not charged to the newly active card");
+  assert.strictEqual(R.readState(textbook).lastTaughtPage, 21, "forced recovery never moves the taught page backward");
 
   fs.rmSync(root, { recursive: true, force: true });
   console.log("kb progress SSE smoke: PASS");

@@ -143,8 +143,16 @@ function canvasFactory() {
 // HTTP helpers — use raw http/https (Next patches global.fetch; avoid it), same
 // pattern as server.js __KB_DISTILL_IMPL__.
 // ---------------------------------------------------------------------------
-function postJSON(baseUrl, apiKey, payload, timeoutMs) {
+function postJSON(baseUrl, apiKey, payload, timeoutMs, purpose) {
   return new Promise((resolve, reject) => {
+    const cachePurpose = purpose || "kb-builder";
+    const cacheModel = String((payload && payload.model) || "");
+    if (/^gpt-5\.6/i.test(cacheModel)) {
+      payload = Object.assign({}, payload, {
+        prompt_cache_key: ("socratopia:" + cachePurpose + ":" + cacheModel).toLowerCase().replace(/[^a-z0-9_.:-]/g, "-").slice(0, 64),
+        prompt_cache_options: { mode: "implicit", ttl: "30m" },
+      });
+    }
     const url = new URL(baseUrl.replace(/\/$/, "") + "/chat/completions");
     const mod = url.protocol === "https:" ? https : http;
     const body = JSON.stringify(payload);
@@ -168,6 +176,10 @@ function postJSON(baseUrl, apiKey, payload, timeoutMs) {
         if (res.statusCode !== 200) { reject(new Error("HTTP " + res.statusCode + ": " + text.slice(0, 200))); return; }
         try {
           const parsed = JSON.parse(text.trim());
+          if (parsed.usage) {
+            const details = parsed.usage.prompt_tokens_details || {};
+            console.log("[direct-llm-cache]", { model: cacheModel, purpose: cachePurpose, promptTokens: parsed.usage.prompt_tokens, cachedTokens: details.cached_tokens || 0, cacheWriteTokens: details.cache_write_tokens || 0 });
+          }
           const msg = parsed.choices && parsed.choices[0] && parsed.choices[0].message;
           if (!msg) { reject(new Error("no choices[0].message")); return; }
           resolve(msg.content || msg.reasoning_content || "");
@@ -217,7 +229,7 @@ async function callCardLLM(system, user, images, maxTokens, forceJson, modelBloc
   let lastError = null;
   for (let attempt = 0; attempt < 3; attempt++) {
     try {
-      return await postJSON(block.baseUrl, block.apiKey, payload, 180000);
+      return await postJSON(block.baseUrl, block.apiKey, payload, 180000, "kb-builder-cards");
     } catch (error) {
       lastError = error;
       const message = String((error && error.message) || error || "");
@@ -243,7 +255,7 @@ async function callVision(pngB64) {
         { type: "image_url", image_url: { url: "data:image/png;base64," + pngB64 } },
       ],
     }],
-  }, 120000);
+  }, 120000, "kb-builder-vision");
 }
 
 // Balanced-brace JSON extractor (reasoning models may wrap JSON in prose).

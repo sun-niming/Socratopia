@@ -17,6 +17,28 @@ assert.strictEqual(missingZh.renderRecommended, true, "Chinese textbook page wit
 var broken = Q.assessPdfText("C ++ • C ++ ( Standard Library ) • • • const ■ I • CM C ++ union volatile C — f");
 assert.strictEqual(broken.renderRecommended, true, "fragmented PDF text requests rendering");
 
+function fragmentedSample(asciiCount, cjkCount, punctuationCount) {
+  return new Array(asciiCount).fill("a")
+    .concat(new Array(cjkCount).fill("中"), new Array(punctuationCount).fill("•"))
+    .join(" ");
+}
+assert.strictEqual(Q.assessPdfText(fragmentedSample(55, 0, 64)).garbled, false,
+  "generic fragmentation excludes 119 compact characters");
+assert.strictEqual(Q.assessPdfText(fragmentedSample(55, 0, 65)).garbled, true,
+  "generic fragmentation includes 120 compact characters");
+assert.strictEqual(Q.assessPdfText(fragmentedSample(52, 3, 65)).garbled, true,
+  "generic fragmentation includes three CJK characters");
+assert.strictEqual(Q.assessPdfText(fragmentedSample(51, 4, 65)).garbled, false,
+  "generic fragmentation excludes four CJK characters");
+assert.strictEqual(Q.assessPdfText("a".repeat(119), { expectedCjk: true }).missingExpectedCjk, false,
+  "missing-CJK detection excludes 119 compact characters");
+assert.strictEqual(Q.assessPdfText("a".repeat(120), { expectedCjk: true }).missingExpectedCjk, true,
+  "missing-CJK detection includes 120 compact characters");
+assert.strictEqual(Q.assessPdfText("中".repeat(3) + "a".repeat(117), { expectedCjk: true }).missingExpectedCjk, true,
+  "missing-CJK detection includes three CJK characters");
+assert.strictEqual(Q.assessPdfText("中".repeat(4) + "a".repeat(116), { expectedCjk: true }).missingExpectedCjk, false,
+  "missing-CJK detection excludes four CJK characters");
+
 var toc = "目 录 9.3 与方法有关的更多内容 9.3.1 static 方法 9.3.2 const 方法 9.3.3 方法重载 9.3.4 内联方法 9.3.5 默认参数 9.4 数据成员 9.4.1 静态成员 9.4.2 const static 数据成员 9.5 嵌套类 9.6 本章小结 9.7 练习";
 assert.strictEqual(Q.likelyTeachableChunk(toc, true), false, "table-of-contents chunks stay legitimate zero-card chunks even with a sparse image page");
 

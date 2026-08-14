@@ -28,20 +28,35 @@
 var fs = require("fs");
 var path = require("path");
 
+var DEFAULT_LIMIT = 30;
+var WEAK_TITLE_OVERLAP_THRESHOLD = 0.34;
+var LIKELY_SCORE_THRESHOLD = 0.8;
+var LIKELY_MIN_GAP = 5;
+var STATUS_ORDER = Object.freeze({ likely: 0, needs_human: 1, noisy: 2 });
+var CONFIDENCE = Object.freeze({
+  aliasOnly: 0.1,
+  wildcardSink: 0.12,
+  weakTeachingMap: 0.15,
+  likelyBase: 0.7,
+  overlapBonus: 0.1,
+  aliasPenalty: 0.1,
+  needsHuman: 0.4
+});
+
 function usage(msg) {
   if (msg) console.error("ERROR: " + msg);
   console.error("Usage: node long-reasoning-long-edge-review.js --candidates <file> --textbookDir <dir> [--out <file>] [--limit <N>]");
 }
 
 function parseArgs(argv) {
-  var out = { limit: 30 };
+  var out = { limit: DEFAULT_LIMIT };
   for (var i = 0; i < argv.length; i++) {
     if (argv[i] === "--candidates") out.candidates = argv[++i];
     else if (argv[i] === "--textbookDir") out.textbookDir = argv[++i];
     else if (argv[i] === "--out") out.out = argv[++i];
     else if (argv[i] === "--limit") out.limit = parseInt(argv[++i], 10);
   }
-  if (!(out.limit >= 0)) out.limit = 30;
+  if (!(out.limit >= 0)) out.limit = DEFAULT_LIMIT;
   return out;
 }
 
@@ -147,41 +162,43 @@ function classify(cand) {
   if (aliasOnly) {
     decision.push("alias_only_match");
     if (isWildcardQuoteCard(toTitle)) decision.push("points_to_wildcard_quote_sink");
-    return { status: "noisy", confidence: 0.1, decisionReasons: decision, sig: sig };
+    return { status: "noisy", confidence: CONFIDENCE.aliasOnly, decisionReasons: decision, sig: sig };
   }
   // 2. points at the wildcard-quote sink with no significant token overlap.
   if (isWildcardQuoteCard(toTitle) && sig.length === 0) {
     decision.push("wildcard_quote_sink_no_significant_overlap");
-    return { status: "noisy", confidence: 0.12, decisionReasons: decision, sig: sig };
+    return { status: "noisy", confidence: CONFIDENCE.wildcardSink, decisionReasons: decision, sig: sig };
   }
   // 3. raw prereq empty + only teaching_map ordering + weak title overlap.
   if ((rawPrereq == null || String(rawPrereq).trim() === "") &&
       mr.length === 1 && mr[0] === "teaching_map_prior_phase" &&
-      titleOverlapRatio(fromTitle, toTitle) < 0.34) {
+      titleOverlapRatio(fromTitle, toTitle) < WEAK_TITLE_OVERLAP_THRESHOLD) {
     decision.push("teaching_map_only_weak_title_overlap");
-    return { status: "noisy", confidence: 0.15, decisionReasons: decision, sig: sig };
+    return { status: "noisy", confidence: CONFIDENCE.weakTeachingMap, decisionReasons: decision, sig: sig };
   }
 
   // ---- LIKELY ---------------------------------------------------------------
   // strong: high score + a real unmapped-prereq token match + semantic overlap.
-  if (score >= 0.8 &&
+  if (score >= LIKELY_SCORE_THRESHOLD &&
       mr.indexOf("unmapped_prereq_token_overlap") !== -1 &&
-      gap >= 5 && sig.length >= 1) {
+      gap >= LIKELY_MIN_GAP && sig.length >= 1) {
     decision.push("score>=0.8");
     decision.push("unmapped_prereq_token_overlap");
     decision.push("significant_overlap:" + sig.join("/"));
-    var conf = 0.7 + (sig.length >= 3 ? 0.1 : 0) - (reasons.indexOf("alias_match") !== -1 ? 0.1 : 0);
+    var conf = CONFIDENCE.likelyBase +
+      (sig.length >= 3 ? CONFIDENCE.overlapBonus : 0) -
+      (reasons.indexOf("alias_match") !== -1 ? CONFIDENCE.aliasPenalty : 0);
     if (reasons.indexOf("alias_match") !== -1) decision.push("alias_present_lowers_confidence");
     return { status: "likely", confidence: clamp01(conf), decisionReasons: decision, sig: sig };
   }
 
   // ---- NEEDS_HUMAN ----------------------------------------------------------
   if (sig.length >= 1) decision.push("some_overlap:" + sig.join("/"));
-  if (mr.indexOf("unmapped_prereq_token_overlap") !== -1 && score < 0.8) decision.push("unmapped_overlap_but_low_score");
+  if (mr.indexOf("unmapped_prereq_token_overlap") !== -1 && score < LIKELY_SCORE_THRESHOLD) decision.push("unmapped_overlap_but_low_score");
   if (mr.indexOf("title_overlap_prior_concept") !== -1) decision.push("title_ordering_heuristic_only");
   if (mr.indexOf("teaching_map_prior_phase") !== -1) decision.push("teaching_map_ordering");
   if (!decision.length) decision.push("rules_inconclusive");
-  return { status: "needs_human", confidence: 0.4, decisionReasons: decision, sig: sig };
+  return { status: "needs_human", confidence: CONFIDENCE.needsHuman, decisionReasons: decision, sig: sig };
 }
 
 function run(opts) {
@@ -223,9 +240,8 @@ function run(opts) {
   items.forEach(function (it) { if (stats[it.status] !== undefined) stats[it.status]++; });
 
   // Sort: likely (by confidence/score desc) → needs_human → noisy; then cap at limit.
-  var order = { likely: 0, needs_human: 1, noisy: 2 };
   items.sort(function (a, b) {
-    if (order[a.status] !== order[b.status]) return order[a.status] - order[b.status];
+    if (STATUS_ORDER[a.status] !== STATUS_ORDER[b.status]) return STATUS_ORDER[a.status] - STATUS_ORDER[b.status];
     if (b.confidence !== a.confidence) return b.confidence - a.confidence;
     return (b.score || 0) - (a.score || 0);
   });
