@@ -26,20 +26,21 @@ function latestKey(paths) {
 }
 
 function shortExcerpt(result) {
-  var text = (result.pages || []).map(function (page) { return "PDF 第 " + page.page + " 页：" + page.text; }).join("\n");
-  return Normalizer.cleanText(text).slice(0, 1200);
+  var text = result.evidence || (result.pages || []).map(function (page) { return "PDF 第 " + page.page + " 页：" + page.text; }).join("\n");
+  return Normalizer.normalizeText(text).replace(/<\/?PDF_EVIDENCE[^>]*>/g, "").trim().slice(0, 1200);
 }
 
 function buildCandidate(result, answer, command) {
+  var metadata = result.metadata || {};
   return {
     createdAt: new Date().toISOString(),
-    conclusion: Normalizer.cleanText(answer).slice(0, 2400),
+    conclusion: Normalizer.normalizeText(answer).slice(0, 2400),
     excerpt: shortExcerpt(result),
-    startPage: result.startPage,
-    endPage: result.endPage,
-    source: result.source,
+    startPage: result.startPage || metadata.startPage,
+    endPage: result.endPage || metadata.endPage,
+    source: result.source || metadata.source,
     query: command.query || null,
-    visionCaution: result.source === "vision-transcription",
+    visionCaution: ["vision-transcription", "ocr", "mixed"].indexOf(result.source || metadata.source) >= 0,
   };
 }
 

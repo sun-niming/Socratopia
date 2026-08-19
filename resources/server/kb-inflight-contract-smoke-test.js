@@ -15,6 +15,7 @@ const fs = require('fs');
 const path = require('path');
 
 var requestCount = 0;
+var responsesRequestCount = 0;
 var exitCode = 0;
 
 const mockResponse = JSON.stringify({
@@ -45,13 +46,19 @@ const mockResponse = JSON.stringify({
     }
   }]
 });
+const mockContent = JSON.parse(mockResponse).choices[0].message.content;
 
 const mockServer = http.createServer((req, res) => {
   if (req.url === '/v1/chat/completions' && req.method === 'POST') {
     requestCount++;
     console.log('[MOCK] Request #' + requestCount + ' received');
-    res.writeHead(200, { 'Content-Type': 'application/json' });
-    res.end(mockResponse);
+    res.writeHead(500, { 'Content-Type': 'application/json' });
+    res.end(JSON.stringify({ error: { message: 'codex channel: only /v1/responses are supported' } }));
+  } else if (req.url === '/v1/responses' && req.method === 'POST') {
+    responsesRequestCount++;
+    res.writeHead(200, { 'Content-Type': 'text/event-stream' });
+    res.write('data: ' + JSON.stringify({ type: 'response.output_text.delta', delta: mockContent }) + '\n\n');
+    res.end('data: ' + JSON.stringify({ type: 'response.completed', response: { usage: { input_tokens: 20, output_tokens: 10 } } }) + '\n\n');
   } else {
     res.writeHead(404);
     res.end('Not found');
@@ -221,6 +228,7 @@ mockServer.listen(0, '127.0.0.1', () => {
   child.on('exit', (code) => {
     console.log('\n=== Verification ===');
     console.log('Mock server total requests:', requestCount);
+    console.log('Mock Responses requests:', responsesRequestCount);
     console.log('Child exit code:', code);
 
     if (childOutput.includes('BLOCKED') || code !== 0) {
@@ -229,12 +237,19 @@ mockServer.listen(0, '127.0.0.1', () => {
     } else {
       // 断言 1: 3 个并发调用 = 1 个 HTTP 请求
       if (requestCount === 1) {
-        console.log('PASS: 3 concurrent calls resulted in exactly 1 HTTP request');
+        console.log('PASS: 3 concurrent calls resulted in exactly 1 Chat Completions request');
       } else if (requestCount > 1) {
         console.log('FAIL: expected 1 HTTP request, got', requestCount);
         exitCode = 1;
       } else {
         console.log('FAIL: no HTTP requests received (mock server not reached?)');
+        exitCode = 1;
+      }
+
+      if (responsesRequestCount === 1) {
+        console.log('PASS: the merged request retried exactly once through Responses');
+      } else {
+        console.log('FAIL: expected 1 Responses request, got', responsesRequestCount);
         exitCode = 1;
       }
 

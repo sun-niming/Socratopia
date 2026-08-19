@@ -725,6 +725,11 @@ function isEndClassRequest(body) {
 
 function shouldTrackTeachingProgress(body, endClass) {
   body = body || {};
+  var messages = Array.isArray(body.messages) ? body.messages : [];
+  var last = messages[messages.length - 1];
+  if (last && last.role === "user" && global.__CLOSE_READING__ &&
+      typeof global.__CLOSE_READING__.isCommand === "function" &&
+      global.__CLOSE_READING__.isCommand(last.content)) return false;
   return !endClass && !body.autoReply && !body.nuwaMode;
 }
 
@@ -893,6 +898,11 @@ function transformSseResponse(response, context) {
         if (flushed) controller.enqueue(encoder.encode(eventText({ type: "text", text: flushed })));
 
         if (!sawError) {
+          if (context.closeReadingMemory && context.paths && global.__CLOSE_READING__ &&
+              typeof global.__CLOSE_READING__.rememberResponse === "function") {
+            try { global.__CLOSE_READING__.rememberResponse(context.paths, rawAssistant); }
+            catch (closeReadingMemoryError) { console.warn("[close-reading] memory candidate save failed:", closeReadingMemoryError && closeReadingMemoryError.message); }
+          }
           if (context.endClass) {
             rewriteEndClassProgress(context, latestLoadedRange);
           } else if (context.paths && context.trackProgress !== false) {
@@ -960,6 +970,11 @@ function installRouteWrapper(exported) {
       try { body = await request.clone().json(); } catch (e) {}
       if (!body || typeof body !== "object") return originalPost.call(this, request, routeContext);
       var paths = requestPaths(request, body);
+      var closeReadingMemory = false;
+      if (paths && global.__CLOSE_READING__ && typeof global.__CLOSE_READING__.prepareMemoryRequest === "function") {
+        try { closeReadingMemory = global.__CLOSE_READING__.prepareMemoryRequest(body, paths); }
+        catch (closeReadingMemoryError) { console.warn("[close-reading] memory request preparation failed:", closeReadingMemoryError && closeReadingMemoryError.message); }
+      }
       if (global.__CLOSE_READING__ && typeof global.__CLOSE_READING__.interceptRequest === "function") {
         try {
           var closeReadingResponse = await global.__CLOSE_READING__.interceptRequest({ request: request, body: body, paths: paths });
@@ -982,7 +997,7 @@ function installRouteWrapper(exported) {
       }
       trackProgress = !!(trackProgress && textbookBinding && textbookBinding.ok);
       var progressContext = trackProgress && paths ? prepareProgressContext(paths) : null;
-      var context = { body: body, paths: paths, endClass: endClass, trackProgress: trackProgress, conversationMeta: conversationMeta, progressContext: progressContext };
+      var context = { body: body, paths: paths, endClass: endClass, trackProgress: trackProgress, closeReadingMemory: closeReadingMemory, conversationMeta: conversationMeta, progressContext: progressContext };
       if (endClass && paths) {
         context.preState = Resume.readState(paths.textbookDir) || null;
         try { context.previousProgress = fs.readFileSync(path.join(paths.textbookDir, "progress.md"), "utf-8"); } catch (e) { context.previousProgress = ""; }
@@ -993,7 +1008,10 @@ function installRouteWrapper(exported) {
         catch (closeReadingMemoryError) { console.warn("[close-reading] memory candidate injection failed:", closeReadingMemoryError && closeReadingMemoryError.message); }
       }
       if (trackProgress && paths) requestForRoute = requestWithProgressDirective(requestForRoute, body, paths, progressContext);
-      var response = await originalPost.call(this, requestForRoute, routeContext);
+      var invokeRoute = function () { return originalPost.call(this, requestForRoute, routeContext); }.bind(this);
+      var response = closeReadingMemory && global.__CLOSE_READING__ && typeof global.__CLOSE_READING__.runWithMemoryRequest === "function"
+        ? await global.__CLOSE_READING__.runWithMemoryRequest(closeReadingMemory, invokeRoute)
+        : await invokeRoute();
       return transformSseResponse(response, context);
     };
     Object.defineProperty(wrapped, "__kbProgressWrapped", { value: true });

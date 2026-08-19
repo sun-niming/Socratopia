@@ -6,6 +6,12 @@ const dir = path.join(__dirname)
 process.env.NODE_ENV = 'production'
 process.chdir(__dirname)
 
+// OpenAI-compatible gateways may route Codex models exclusively through the
+// Responses API. Keep existing Chat Completions consumers unchanged and retry
+// only when the upstream explicitly reports that protocol requirement.
+const responsesApiCompat = require('./lib/responses-api-compat.js')
+responsesApiCompat.installGlobalResponsesFallback()
+
 // Load settings.json for API configuration
 ;(function(){var f=require("fs");var p=require("path");var s=p.join(process.env.CONTENT_ROOT||"","..","settings.json");function norm(S){S=S||{};var endpoint=S.endpoint||S.baseUrl||"https://api.nwafu-ai.cn/v1";var keys=S.apiKeys||{};function fill(name,defKeyGroup){var b=S[name]||{};b.baseUrl=b.baseUrl||endpoint;b.apiKey=b.apiKey||keys[b.apiKeyGroup]||keys[defKeyGroup]||"";b.models=b.models||{};S[name]=b;return b}var gpt=fill("gpt","codex"),other=S.other;if(other){other.baseUrl=other.baseUrl||endpoint;other.apiKey=other.apiKey||keys[other.apiKeyGroup]||keys.codex||"";other.models=other.models||{}}S.openai=S.openai||gpt;S.deepseek=S.deepseek||gpt;return S}try{var r=f.readFileSync(s,"utf-8");global.__SOCRATOPIA_SETTINGS__=norm(JSON.parse(r));console.log("[settings] Loaded from "+s+" (normalized)") }catch(e){console.warn("[settings] Could not load "+s+": "+e.message+", using defaults");global.__SOCRATOPIA_SETTINGS__=norm({endpoint:"https://api.nwafu-ai.cn/v1",apiKeys:{codex:""},gpt:{models:{}},proxyUrl:"",rulesUrl:""})}})();
 // Load set.json for teaching model config (strong=切页/闪卡/总结, weak=教学对话). Falls back to settings.json blocks when absent.
@@ -533,47 +539,38 @@ async function __KB_DISTILL_IMPL__(rawText, startPage, endPage, textbookDir, res
     }
     var usr = "下面是教材第 " + pageRangeText() + " 页的原文(含页码标记)。\n请从中抽取**独立的知识点**,每个知识点产出一张卡片,并产出一个教学序列(teaching_sequence)指导弱模型按顺序教学。忽略目录、页眉页脚、纯插图说明。\n\n严格输出如下 JSON(不要加 markdown 代码块标记,不要任何额外文字):\n" +
       "{\"cards\":[{\"title\":\"知识点名称(简短)\",\"definition\":\"准确、自足的定义/说明,弱模型据此即可讲解\",\"key_points\":[\"要点1\",\"要点2\"],\"examples\":[\"来自或贴合原文的示例;公式/矩阵/分段式优先用 Markdown LaTeX,代码用文本表示\"],\"misconceptions\":[\"学习者常见的错误理解(如能从原文推断)\"],\"qa_pairs\":[{\"q\":\"考察该点的问题\",\"a\":\"标准答案\"}],\"difficulty\":1,\"prerequisites\":[\"前置知识点名称\"],\"source_pages\":[" + distillStartPage + "," + distillEndPage + "],\"needs_verification\":false,\"verify_query\":\"\"}],\"teaching_sequence\":[{\"phase\":1,\"label\":\"阶段标题\",\"card_ids\":[\"对应卡片title\"],\"teach_goal\":\"本阶段教学目标\",\"branches\":[\"可延伸方向\"]}]}\n\n要求:\n- difficulty 取 1-3(1 入门 / 2 进阶 / 3 综合)。\n- source_pages 必须落在 " + pageRangeText() + " 范围内。\n- teaching_sequence 将卡片按教学逻辑分为 2-5 个阶段,每阶段 2-4 张卡片,前序阶段是后续阶段的前置知识。card_ids 用卡片的 title 字段。\n- 如果知识点包含数学表达、二维布局、表格关系、图形标注或递推/DP/矩阵等结构,请在 definition/key_points/examples/qa_pairs 中给出 weak 可直接照用的 LaTeX 写法,例如 $$\\begin{bmatrix} A & B \\\\ C & D \\end{bmatrix}$$、$$f(n)=\\begin{cases}1,&n=1\\\\f(n-1)+f(n-2),&n>1\\end{cases}$$。\n- 对任何你不确定的事实,把该卡片 needs_verification 设为 true,并写出 verify_query。\n- 没有内容可抽取时返回 {\"cards\":[],\"teaching_sequence\":[]}。\n\n原文如下:\n----------------\n" + rawForLLM + "\n----------------";
-    // 单次 HTTP 提炼(给定模型块)。Use https module directly to avoid Next.js patched global.fetch hanging issue
-    function postOnce(block) {
-      var https = require("https"), http = require("http");
+    // 单次 HTTP 提炼(给定模型块)。Use the shared native transport to avoid Next.js patched global.fetch hangs.
+    async function postOnce(block) {
       var url = new URL(block.baseUrl.replace(/\/$/, "") + "/chat/completions");
-      var mod = url.protocol === "https:" ? https : http;
-      var postBody = JSON.stringify({ model: block.model, ...(/^gpt-5\.6/i.test(String(block.model || "")) ? { prompt_cache_key: ("socratopia:kb-distill:" + block.model).toLowerCase().replace(/[^a-z0-9_.:-]/g, "-").slice(0, 64), prompt_cache_options: { mode: "implicit", ttl: "30m" } } : {}), max_tokens: 8096, stream: false, response_format: { type: "json_object" }, messages: [{ role: "system", content: sys }, { role: "user", content: usr }] });
+      var payload = { model: block.model, ...(/^gpt-5\.6/i.test(String(block.model || "")) ? { prompt_cache_key: ("socratopia:kb-distill:" + block.model).toLowerCase().replace(/[^a-z0-9_.:-]/g, "-").slice(0, 64), prompt_cache_retention: "24h" } : {}), max_tokens: 8096, stream: false, response_format: { type: "json_object" }, messages: [{ role: "system", content: sys }, { role: "user", content: usr }] };
+      var postBody = JSON.stringify(payload);
       console.log("[kb] 发起提炼请求: " + url.href + " model=" + block.model + " bodyLen=" + postBody.length);
-      return new Promise(function (resolve, reject) {
-        var t0 = Date.now();
-        var timeoutMs = Math.max(180000, Number(process.env.SOCRATOPIA_KB_DISTILL_TIMEOUT_MS) || 360000);
-        var to = setTimeout(function () { req.destroy(); reject(new Error("KB timeout " + Math.round(timeoutMs / 1000) + "s")); }, timeoutMs);
-        var opts = { method: "POST", agent: false, headers: { "Content-Type": "application/json", "Authorization": "Bearer " + block.apiKey, "Content-Length": Buffer.byteLength(postBody), "Connection": "close" } };
-        if (url.protocol === "https:") opts.ALPNProtocols = ["http/1.1"];
-        var req = mod.request(url, opts, function (res) {
-          console.log("[kb] 收到响应 status=" + res.statusCode + " elapsed=" + (Date.now() - t0) + "ms");
-          var chunks = [];
-          res.on("data", function (c) { chunks.push(c); });
-          res.on("end", function () {
-            clearTimeout(to);
-            var body = Buffer.concat(chunks).toString("utf-8");
-            console.log("[kb] 响应完成 bodyLen=" + body.length + " elapsed=" + (Date.now() - t0) + "ms");
-            if (res.statusCode !== 200) { reject(new Error("HTTP " + res.statusCode + ": " + body.slice(0, 200))); return; }
-            try {
-              var parsed = JSON.parse(body.trim());
-              if (parsed.usage) {
-                var cacheDetails = parsed.usage.prompt_tokens_details || {};
-                console.log("[direct-llm-cache]", { model: block.model, purpose: "kb-distill", promptTokens: parsed.usage.prompt_tokens, cachedTokens: cacheDetails.cached_tokens || 0, cacheWriteTokens: cacheDetails.cache_write_tokens || 0 });
-              }
-              var m2 = parsed.choices && parsed.choices[0] && parsed.choices[0].message;
-              if (!m2) { reject(new Error("响应格式错误：无 choices[0].message")); return; }
-              var finalContent = m2.content || m2.reasoning_content || "";
-              if (!finalContent) { reject(new Error("LLM API empty response")); return; }
-              console.log("[kb] 提取内容长度=" + finalContent.length);
-              resolve(finalContent);
-            } catch (e) { reject(new Error("JSON parse: " + e.message)); }
-          });
+      var t0 = Date.now();
+      var timeoutMs = Math.max(180000, Number(process.env.SOCRATOPIA_KB_DISTILL_TIMEOUT_MS) || 360000);
+      try {
+        var parsed = await responsesApiCompat.postChatCompletionsJson(url, payload, {
+          headers: { "Content-Type": "application/json", "Authorization": "Bearer " + block.apiKey, "Connection": "close" },
+          timeoutMs: timeoutMs,
+          timeoutMessage: "KB timeout " + Math.round(timeoutMs / 1000) + "s",
+          onResponse: function (response) {
+            console.log("[kb] 收到响应 status=" + response.statusCode + " protocol=" + response.stage + " elapsed=" + (Date.now() - t0) + "ms");
+            console.log("[kb] 响应完成 bodyLen=" + response.raw.length + " elapsed=" + (Date.now() - t0) + "ms");
+          },
         });
-        req.on("error", function (e) { console.warn("[kb] req error: " + e.message + " elapsed=" + (Date.now() - t0) + "ms"); clearTimeout(to); reject(e); });
-        req.write(postBody);
-        req.end();
-      });
+        if (parsed.usage) {
+          var cacheDetails = parsed.usage.prompt_tokens_details || {};
+          console.log("[direct-llm-cache]", { model: block.model, purpose: "kb-distill", promptTokens: parsed.usage.prompt_tokens, cachedTokens: cacheDetails.cached_tokens || 0, cacheWriteTokens: cacheDetails.cache_write_tokens || 0 });
+        }
+        var m2 = parsed.choices && parsed.choices[0] && parsed.choices[0].message;
+        if (!m2) throw new Error("响应格式错误：无 choices[0].message");
+        var finalContent = m2.content || m2.reasoning_content || "";
+        if (!finalContent) throw new Error("LLM API empty response");
+        console.log("[kb] 提取内容长度=" + finalContent.length);
+        return finalContent;
+      } catch (e) {
+        console.warn("[kb] req error: " + e.message + " elapsed=" + (Date.now() - t0) + "ms");
+        throw e;
+      }
     }
     function extractBalanced(str, from) {
       var depth = 0, inStr = false, esc = false;

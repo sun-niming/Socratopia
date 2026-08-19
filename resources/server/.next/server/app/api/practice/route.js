@@ -8,7 +8,7 @@ function createPracticeLLMCaller(mc, model) {
         model: model,
         ...(/^gpt-5\.6/i.test(String(model || "")) ? {
           prompt_cache_key: ("socratopia:practice-json:" + model).toLowerCase().replace(/[^a-z0-9_.:-]/g, "-").slice(0, 64),
-          prompt_cache_options: { mode: "implicit", ttl: "30m" }
+          prompt_cache_retention: "24h"
         } : {}),
         messages: [{ role: "system", content: p.system }, { role: "user", content: p.user }],
         temperature: typeof p.temperature === "number" ? p.temperature : 0.4,
@@ -734,7 +734,7 @@ function _streamingTutorResponse(mc, model, systemPrompt, messages) {
             model: model,
             ...(/^gpt-5\.6/i.test(String(model || "")) ? {
               prompt_cache_key: ("socratopia:practice-tutor:" + model).toLowerCase().replace(/[^a-z0-9_.:-]/g, "-").slice(0, 64),
-              prompt_cache_options: { mode: "implicit", ttl: "30m" }
+              prompt_cache_retention: "24h"
             } : {}),
             messages: allMsgs,
             temperature: 0.6,

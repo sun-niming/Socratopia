@@ -82,7 +82,13 @@
     return d.toISOString().slice(0, 10); // YYYY-MM-DD
   }
 
+  function safeSegment(value) {
+    value = String(value || "");
+    return /^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$/.test(value) && value !== "." && value !== "..";
+  }
+
   function cacheFilePath(providerId, mode, stableHash, configHash, qHash, bucket) {
+    if (!safeSegment(providerId) || !safeSegment(mode) || !/^\d{4}-\d{2}-\d{2}$/.test(String(bucket || ""))) return null;
     var root = cacheRoot();
     if (!root) return null;
     var key = [mode, stableHash, configHash, qHash].join("_") + ".json";
@@ -101,21 +107,34 @@
       var sHash = stableContextHash(context);
       var cHash = providerConfigHash(providerConfig);
       var qHash = questionHash(question);
-      var bucket = dateBucket();
+      var now = new Date();
+      for (var offset = 0; offset <= 14; offset++) {
+        var candidateDate = new Date(Date.UTC(
+          now.getUTCFullYear(),
+          now.getUTCMonth(),
+          now.getUTCDate() - offset
+        ));
+        var bucket = dateBucket(candidateDate);
+        var file = cacheFilePath(providerId, mode, sHash, cHash, qHash, bucket);
+        if (!file || !fs.existsSync(file)) continue;
 
-      var file = cacheFilePath(providerId, mode, sHash, cHash, qHash, bucket);
-      if (!file || !fs.existsSync(file)) return null;
-
-      var raw = fs.readFileSync(file, "utf-8");
-      var entry = JSON.parse(raw);
-
-      // Check expiry
-      if (entry.expiresAt && new Date(entry.expiresAt) < new Date()) {
-        fs.unlinkSync(file); // clean up expired entry
-        return null;
+        try {
+          var raw = fs.readFileSync(file, "utf-8");
+          var entry = JSON.parse(raw);
+          if (entry.expiresAt && new Date(entry.expiresAt) < now) {
+            try { fs.unlinkSync(file); } catch (_) {}
+            try {
+              var bucketDir = path.dirname(file);
+              if (fs.readdirSync(bucketDir).length === 0) fs.rmdirSync(bucketDir);
+            } catch (_) {}
+            continue;
+          }
+          if (entry.response) return entry.response;
+        } catch (_) {
+          // A corrupt bucket must not hide an older valid entry.
+        }
       }
-
-      return entry.response || null;
+      return null;
     } catch (e) {
       return null;
     }

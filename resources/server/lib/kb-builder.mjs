@@ -27,12 +27,11 @@
 import { readFileSync, writeFileSync, existsSync, mkdirSync, readdirSync, renameSync } from "fs";
 import { fileURLToPath, pathToFileURL } from "url";
 import path from "path";
-import https from "https";
-import http from "http";
 import { inflateRawSync } from "zlib";
 import KBQuality from "./kb-quality.js";
 import PdfJsPaths from "./pdfjs-paths.js";
 import KBPublisher from "./kb-publisher.js";
+import ResponsesCompat from "./responses-api-compat.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -143,52 +142,32 @@ function canvasFactory() {
 // HTTP helpers — use raw http/https (Next patches global.fetch; avoid it), same
 // pattern as server.js __KB_DISTILL_IMPL__.
 // ---------------------------------------------------------------------------
-function postJSON(baseUrl, apiKey, payload, timeoutMs, purpose) {
-  return new Promise((resolve, reject) => {
-    const cachePurpose = purpose || "kb-builder";
-    const cacheModel = String((payload && payload.model) || "");
-    if (/^gpt-5\.6/i.test(cacheModel)) {
-      payload = Object.assign({}, payload, {
-        prompt_cache_key: ("socratopia:" + cachePurpose + ":" + cacheModel).toLowerCase().replace(/[^a-z0-9_.:-]/g, "-").slice(0, 64),
-        prompt_cache_options: { mode: "implicit", ttl: "30m" },
-      });
-    }
-    const url = new URL(baseUrl.replace(/\/$/, "") + "/chat/completions");
-    const mod = url.protocol === "https:" ? https : http;
-    const body = JSON.stringify(payload);
-    const opts = {
-      method: "POST", agent: false,
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": "Bearer " + apiKey,
-        "Content-Length": Buffer.byteLength(body),
-        "Connection": "close",
-      },
-    };
-    if (url.protocol === "https:") opts.ALPNProtocols = ["http/1.1"];
-    const to = setTimeout(() => { req.destroy(); reject(new Error("timeout " + timeoutMs + "ms")); }, timeoutMs);
-    const req = mod.request(url, opts, (res) => {
-      const chunks = [];
-      res.on("data", (c) => chunks.push(c));
-      res.on("end", () => {
-        clearTimeout(to);
-        const text = Buffer.concat(chunks).toString("utf-8");
-        if (res.statusCode !== 200) { reject(new Error("HTTP " + res.statusCode + ": " + text.slice(0, 200))); return; }
-        try {
-          const parsed = JSON.parse(text.trim());
-          if (parsed.usage) {
-            const details = parsed.usage.prompt_tokens_details || {};
-            console.log("[direct-llm-cache]", { model: cacheModel, purpose: cachePurpose, promptTokens: parsed.usage.prompt_tokens, cachedTokens: details.cached_tokens || 0, cacheWriteTokens: details.cache_write_tokens || 0 });
-          }
-          const msg = parsed.choices && parsed.choices[0] && parsed.choices[0].message;
-          if (!msg) { reject(new Error("no choices[0].message")); return; }
-          resolve(msg.content || msg.reasoning_content || "");
-        } catch (e) { reject(new Error("JSON parse: " + e.message)); }
-      });
+async function postJSON(baseUrl, apiKey, payload, timeoutMs, purpose) {
+  const cachePurpose = purpose || "kb-builder";
+  const cacheModel = String((payload && payload.model) || "");
+  if (/^gpt-5\.6/i.test(cacheModel)) {
+    payload = Object.assign({}, payload, {
+      prompt_cache_key: ("socratopia:" + cachePurpose + ":" + cacheModel).toLowerCase().replace(/[^a-z0-9_.:-]/g, "-").slice(0, 64),
+      prompt_cache_retention: "24h",
     });
-    req.on("error", (e) => { clearTimeout(to); reject(e); });
-    req.write(body); req.end();
+  }
+  const url = new URL(baseUrl.replace(/\/$/, "") + "/chat/completions");
+  const parsed = await ResponsesCompat.postChatCompletionsJson(url, payload, {
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": "Bearer " + apiKey,
+      "Connection": "close",
+    },
+    timeoutMs,
+    timeoutMessage: "timeout " + timeoutMs + "ms",
   });
+  if (parsed.usage) {
+    const details = parsed.usage.prompt_tokens_details || {};
+    console.log("[direct-llm-cache]", { model: cacheModel, purpose: cachePurpose, promptTokens: parsed.usage.prompt_tokens, cachedTokens: details.cached_tokens || 0, cacheWriteTokens: details.cache_write_tokens || 0 });
+  }
+  const msg = parsed.choices && parsed.choices[0] && parsed.choices[0].message;
+  if (!msg) throw new Error("no choices[0].message");
+  return msg.content || msg.reasoning_content || "";
 }
 
 /**

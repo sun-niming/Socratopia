@@ -59,6 +59,44 @@
   var DEFAULT_WS_TIMEOUT_MS = 10000;
   var DEFAULT_QUERY_TIMEOUT_MS = 45000;
 
+  function clipped(value, maxLength) {
+    if (value === null || value === undefined) return "";
+    return String(value).trim().slice(0, maxLength);
+  }
+
+  function buildConversationPrompt(questionText, context) {
+    context = context || {};
+    var title = clipped(context.textbookTitle || context.title, 200);
+    var pageValue = context.currentPage != null ? context.currentPage : context.page;
+    var page = clipped(pageValue, 40);
+    var selectedText = clipped(context.selectedText, 2000);
+    var pageText = clipped(context.pageText, 3000);
+    var question = clipped(questionText, 4000);
+
+    function render() {
+      var lines = [];
+      if (title) lines.push("教材标题：" + title);
+      if (page) lines.push("当前页：" + page);
+      if (selectedText) lines.push("选中文本：" + selectedText);
+      if (pageText) lines.push("页面正文：" + pageText);
+      lines.push("问题：" + question);
+      return lines.join("\n\n");
+    }
+
+    var prompt = render();
+    var overflow = Math.max(0, prompt.length - 9000);
+    if (overflow && pageText) {
+      pageText = pageText.slice(0, Math.max(0, pageText.length - overflow));
+      prompt = render();
+      overflow = Math.max(0, prompt.length - 9000);
+    }
+    if (overflow && selectedText) {
+      selectedText = selectedText.slice(0, Math.max(0, selectedText.length - overflow));
+      prompt = render();
+    }
+    return prompt;
+  }
+
   // ---- Path resolution ----
 
   function resolveKimiDesktopDir() {
@@ -488,6 +526,7 @@
   async function conversationQuery(questionText, context, queryTimeoutMs) {
     var startTime = Date.now();
     context = context || {};
+    var promptText = buildConversationPrompt(questionText, context);
     queryTimeoutMs = queryTimeoutMs || DEFAULT_QUERY_TIMEOUT_MS;
 
     // 1. Discover endpoint
@@ -535,7 +574,7 @@
         await sendJsonRpc(ws, "conversations.send", {
           agentId: AGENT_ID,
           conversationKey: conversationKey,
-          text: questionText,
+          text: promptText,
           source: "socratopia-external-knowledge-query",
         }, { timeout: 15000, id: nextId() });
       } catch (e) {
@@ -673,6 +712,7 @@
     sendJsonRpc: sendJsonRpc,
     simpleQuery: simpleQuery,
     conversationQuery: conversationQuery,
+    buildConversationPrompt: buildConversationPrompt,
     extractMessageText: extractMessageText,
     disconnect: disconnect,
   };

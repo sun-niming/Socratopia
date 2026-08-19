@@ -3,10 +3,9 @@
 var childProcess = require("child_process");
 var crypto = require("crypto");
 var fs = require("fs");
-var http = require("http");
-var https = require("https");
 var path = require("path");
 var normalizer = require("./text-normalizer.js");
+var responsesCompat = require("../responses-api-compat.js");
 
 var pageCache = new Map();
 var CACHE_MAX = 100;
@@ -119,52 +118,29 @@ function visionConfigs() {
 function visionConfig() {
   return visionConfigs()[0] || null;
 }
-function postJson(config, payload, timeoutMs) {
-  return new Promise(function (resolve, reject) {
-    var cacheModel = String(payload && payload.model || "");
-    if (/^gpt-5\.6/i.test(cacheModel)) {
-      payload = Object.assign({}, payload, {
-        prompt_cache_key: ("socratopia:close-reading-excerpt:" + cacheModel).toLowerCase().replace(/[^a-z0-9_.:-]/g, "-").slice(0, 64),
-        prompt_cache_options: { mode: "implicit", ttl: "30m" },
-      });
-    }
-    var url = new URL(config.baseUrl + "/chat/completions");
-    var transport = url.protocol === "https:" ? https : http;
-    var body = JSON.stringify(payload);
-    var request = transport.request(url, {
-      method: "POST",
-      agent: false,
-      headers: {
-        Authorization: "Bearer " + config.apiKey,
-        "Content-Type": "application/json; charset=utf-8",
-        "Content-Length": Buffer.byteLength(body),
-        Connection: "close",
-      },
-    }, function (response) {
-      var chunks = [];
-      response.on("data", function (chunk) { chunks.push(chunk); });
-      response.on("end", function () {
-        var raw = Buffer.concat(chunks).toString("utf8");
-        if (response.statusCode < 200 || response.statusCode >= 300) {
-          reject(new Error("vision HTTP " + response.statusCode + ": " + raw.slice(0, 300)));
-          return;
-        }
-        try {
-          var parsed = JSON.parse(raw);
-          if (parsed.usage) {
-            var details = parsed.usage.prompt_tokens_details || {};
-            console.log("[direct-llm-cache]", { model: cacheModel, purpose: "close-reading-excerpt", promptTokens: parsed.usage.prompt_tokens, cachedTokens: details.cached_tokens || 0, cacheWriteTokens: details.cache_write_tokens || 0 });
-          }
-          resolve(parsed);
-        } catch (error) { reject(new Error("vision JSON: " + error.message)); }
-      });
+async function postJson(config, payload, timeoutMs) {
+  var cacheModel = String(payload && payload.model || "");
+  if (/^gpt-5\.6/i.test(cacheModel)) {
+    payload = Object.assign({}, payload, {
+      prompt_cache_key: ("socratopia:close-reading-excerpt:" + cacheModel).toLowerCase().replace(/[^a-z0-9_.:-]/g, "-").slice(0, 64),
+      prompt_cache_retention: "24h",
     });
-    var timer = setTimeout(function () { request.destroy(new Error("vision timeout")); }, timeoutMs || 120000);
-    request.on("close", function () { clearTimeout(timer); });
-    request.on("error", reject);
-    request.write(body);
-    request.end();
+  }
+  var url = new URL(config.baseUrl + "/chat/completions");
+  var parsed = await responsesCompat.postChatCompletionsJson(url, payload, {
+    headers: {
+      Authorization: "Bearer " + config.apiKey,
+      "Content-Type": "application/json; charset=utf-8",
+      Connection: "close",
+    },
+    timeoutMs: timeoutMs || 120000,
+    timeoutMessage: "vision timeout",
   });
+  if (parsed.usage) {
+    var details = parsed.usage.prompt_tokens_details || {};
+    console.log("[direct-llm-cache]", { model: cacheModel, purpose: "close-reading-excerpt", promptTokens: parsed.usage.prompt_tokens, cachedTokens: details.cached_tokens || 0, cacheWriteTokens: details.cache_write_tokens || 0 });
+  }
+  return parsed;
 }
 
 async function transcribePage(filePath, pageNumber) {
@@ -310,5 +286,6 @@ module.exports = {
   visionConfig: visionConfig,
   visionConfigs: visionConfigs,
   queryMatches: queryMatches,
+  _postJson: postJson,
   _pageCache: pageCache,
 };

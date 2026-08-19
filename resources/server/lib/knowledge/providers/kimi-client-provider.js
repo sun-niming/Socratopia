@@ -245,6 +245,8 @@
       var context = {
         textbookTitle: request.context ? request.context.textbookTitle : "",
         currentPage: request.context ? request.context.currentPage : null,
+        selectedText: request.context ? request.context.selectedText : "",
+        pageText: request.context ? request.context.pageText : "",
       };
 
       queryTimeoutMs = queryTimeoutMs || BRIDGE_TIMEOUT_MS;

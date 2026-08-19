@@ -2,6 +2,49 @@
 
 var parser = require("./command-parser.js");
 var reader = require("./excerpt-reader.js");
+var memory = require("./memory-candidate.js");
+var AsyncLocalStorage = require("async_hooks").AsyncLocalStorage;
+var memoryRequestContext = new AsyncLocalStorage();
+var resultsByConversation = new Map();
+
+function memoryKey(paths) {
+  return [paths && paths.worldDir || "", paths && paths.conversationId || ""].join("|");
+}
+
+function prepareMemoryRequest(body, paths) {
+  var messages = body && Array.isArray(body.messages) ? body.messages : [];
+  var last = messages[messages.length - 1];
+  var commandText = last && last.role === "user" ? String(last.content || "") : "";
+  if (!paths || !parser.isCommand(commandText) || !/(?:记住|保存|笔记|remember|note)/i.test(commandText)) return false;
+  return { commandText: commandText, key: memoryKey(paths) };
+}
+
+function runWithMemoryRequest(pending, callback) {
+  if (!pending) return callback();
+  return memoryRequestContext.run(pending, callback);
+}
+
+function rememberResponse(paths, answer) {
+  var key = memoryKey(paths);
+  var seed = resultsByConversation.get(key);
+  resultsByConversation.delete(key);
+  if (!seed || !String(answer || "").trim()) return null;
+  var candidate = memory.buildCandidate(seed.result, answer, seed.parsed);
+  memory.saveLatest(paths, candidate);
+  return memory.rememberLatest(paths, candidate);
+}
+
+function augmentEndClassRequest(request, body, paths) {
+  var augmented = memory.augmentEndClassBody(body, paths);
+  if (!augmented) return request;
+  var headers = new Headers(request.headers);
+  headers.set("content-type", "application/json");
+  return new Request(request.url, {
+    method: request.method,
+    headers: headers,
+    body: JSON.stringify(augmented),
+  });
+}
 
 function failurePrompt(error, parsed) {
   var detail = error && error.message || String(error || "unknown_error");
@@ -31,6 +74,8 @@ async function execute(options) {
       metadata: { error: "page_required" },
     };
   }
+  var pending = memoryRequestContext.getStore();
+  if (pending && pending.commandText !== String(options.commandText || "")) pending = null;
   try {
     var result = await reader.readTextbookExcerpt({
       filePath: options.filePath,
@@ -58,6 +103,7 @@ async function execute(options) {
       "元数据：" + JSON.stringify(meta),
       result.evidence,
     ].join("\n");
+    if (pending) resultsByConversation.set(pending.key, { result: result, parsed: parsed });
     return { active: true, ok: true, parsed: parsed, prompt: prompt, metadata: meta };
   } catch (error) {
     return {
@@ -75,4 +121,8 @@ module.exports = {
   parseCommand: parser.parseCommand,
   execute: execute,
   readTextbookExcerpt: reader.readTextbookExcerpt,
+  prepareMemoryRequest: prepareMemoryRequest,
+  runWithMemoryRequest: runWithMemoryRequest,
+  rememberResponse: rememberResponse,
+  augmentEndClassRequest: augmentEndClassRequest,
 };

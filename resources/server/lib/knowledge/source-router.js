@@ -123,12 +123,25 @@
   /**
    * Create a timeout promise that rejects after ms milliseconds.
    */
-  function timeoutPromise(ms, label) {
-    return new Promise(function (_, reject) {
-      setTimeout(function () {
+  async function queryWithTimeout(provider, request, safeCtx, ms, label) {
+    var controller = typeof AbortController === "function" ? new AbortController() : null;
+    var attemptCtx = Object.assign({}, safeCtx || {});
+    if (controller) attemptCtx.signal = controller.signal;
+    var timer = null;
+    var timeout = new Promise(function (_, reject) {
+      timer = setTimeout(function () {
+        if (controller) controller.abort();
         reject(new Error("[" + label + "] query timed out after " + ms + "ms"));
       }, ms);
     });
+    try {
+      return await Promise.race([
+        Promise.resolve().then(function () { return provider.query(request, attemptCtx); }),
+        timeout,
+      ]);
+    } finally {
+      if (timer) clearTimeout(timer);
+    }
   }
 
   /**
@@ -221,10 +234,7 @@
 
       for (var attempt = 1; attempt <= maxAttempts; attempt++) {
         try {
-          var response = await Promise.race([
-            provider.query(request, safeCtx),
-            timeoutPromise(timeoutMs, providerId),
-          ]);
+          var response = await queryWithTimeout(provider, request, safeCtx, timeoutMs, providerId);
 
           var pkg = normalizer.normalizeResponse(response, providerId, request.mode);
 
@@ -422,6 +432,12 @@
       if (partialAnswers.length) {
         bestAnswer = { answer: partialAnswers.join("\n\n") };
       }
+    }
+    if (!bestAnswer) {
+      packages.forEach(function (pkg) {
+        if (!pkg || bestAnswer) return;
+        if (pkg.status === "partial" && pkg.answer) bestAnswer = pkg;
+      });
     }
 
     return {

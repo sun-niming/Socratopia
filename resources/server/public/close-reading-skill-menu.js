@@ -6,6 +6,7 @@
   var menu = null;
   var activeInput = null;
   var skillButton = null;
+  var syncScheduled = false;
 
   function isChinese() {
     return /^zh/i.test(document.documentElement.lang || navigator.language || "zh");
@@ -114,6 +115,20 @@
     if (shouldOpen(input)) openMenu(input); else closeMenu();
   }
 
+  function scheduleSyncUi() {
+    if (syncScheduled) return;
+    syncScheduled = true;
+    var run = function () {
+      syncScheduled = false;
+      syncUi();
+    };
+    if (typeof window.requestAnimationFrame === "function") {
+      window.requestAnimationFrame(run);
+    } else {
+      window.setTimeout(run, 16);
+    }
+  }
+
   function ensureButton(input) {
     if (!isUsableInput(input)) return removeUi();
     activeInput = input;
@@ -173,6 +188,6 @@
   window.addEventListener("resize", positionAll);
   window.addEventListener("scroll", positionAll, true);
 
-  new MutationObserver(syncUi).observe(document.documentElement, { childList: true, subtree: true });
+  new MutationObserver(scheduleSyncUi).observe(document.documentElement, { childList: true, subtree: true });
   syncUi();
 })();

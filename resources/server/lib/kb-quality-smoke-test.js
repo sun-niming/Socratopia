@@ -71,6 +71,12 @@ assert.strictEqual(Q.teachingPhasesPreserveOrder(parallelCards.slice().sort(Q.co
 var builderSource = fs.readFileSync(path.join(__dirname, "kb-builder.mjs"), "utf-8");
 assert.ok(builderSource.includes("KBQuality.assessPdfText(text, { expectedCjk: /^chinese/.test(LANG) })"),
   "the full KB builder enables missing-Chinese detection for Chinese textbooks");
+assert.ok(builderSource.includes('import ResponsesCompat from "./responses-api-compat.js"'),
+  "the standalone ESM builder imports the shared native Responses compatibility transport");
+assert.ok(builderSource.includes("ResponsesCompat.postChatCompletionsJson(url, payload"),
+  "the standalone builder routes model requests through the shared native fallback");
+assert.strictEqual(builderSource.includes("mod.request(url"), false,
+  "the standalone builder cannot bypass the Responses fallback with a raw request");
 
 var events = [];
 for (var i = 1; i <= 10; i++) {

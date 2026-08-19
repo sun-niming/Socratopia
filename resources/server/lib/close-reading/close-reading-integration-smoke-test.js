@@ -74,7 +74,12 @@ async function main() {
     assert.ok(closeRequest.messages[0].content.includes("void sort"));
     assert.strictEqual(fs.readFileSync(progressPath, "utf-8"), "# 当前页码：第 1 页\n\nbaseline progress");
     assert.strictEqual(fs.readFileSync(readingPath, "utf-8"), "<!-- startPage: 1 endPage: 1 -->\nbaseline reading");
-    assert.ok(fs.existsSync(path.join(worldDir, "conversations", conversationId, "close_reading_candidates.json")));
+    var candidatePath = path.join(worldDir, "conversations", conversationId, "close_reading_candidates.json");
+    assert.ok(fs.existsSync(candidatePath));
+    var candidates = JSON.parse(fs.readFileSync(candidatePath, "utf-8"));
+    assert.strictEqual(candidates.length, 1);
+    assert.ok(candidates[0].conclusion.includes("void sort"));
+    assert.ok(candidates[0].excerpt.includes("void sort"));
 
     var today = new Date();
     var date = today.getFullYear() + "-" + String(today.getMonth() + 1).padStart(2, "0") + "-" + String(today.getDate()).padStart(2, "0");
