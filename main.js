@@ -35051,6 +35051,120 @@ var mainWindow = null;
 var serverProcess = null;
 var serverPort = 3e3;
 var isDev = !import_electron5.app.isPackaged;
+var ADAPTIVE_AUTH_ACCOUNT_ID = "local";
+var adaptiveAuthGeneration = 0;
+var adaptiveAuthSequence = 0;
+var adaptiveAuthEpoch = 0;
+var adaptiveAuthSession = null;
+function adaptiveAuthError(code) {
+  const error = new Error(code);
+  error.code = code;
+  return error;
+}
+function resetAdaptiveAuthSession(expectedChild) {
+  const current = adaptiveAuthSession;
+  if (expectedChild && current?.child !== expectedChild) return;
+  if (current) {
+    current.ready = false;
+    try {
+      current.issuer?.setCurrentAuthState(null);
+    } catch {
+    }
+  }
+  adaptiveAuthSession = null;
+}
+function prepareAdaptiveAuthSession(serverDir) {
+  resetAdaptiveAuthSession();
+  const secret = import_crypto.default.randomBytes(32);
+  const state = Object.freeze({
+    type: "socratopia:auth-state:v1",
+    sequence: ++adaptiveAuthSequence,
+    active: true,
+    accountId: ADAPTIVE_AUTH_ACCOUNT_ID,
+    sessionEpoch: ++adaptiveAuthEpoch
+  });
+  try {
+    const auth = require(import_path4.default.join(serverDir, "lib", "local-request-auth.js"));
+    if (!auth || typeof auth.createCapabilityIssuer !== "function") throw adaptiveAuthError("adaptive_auth_unavailable");
+    const issuer = auth.createCapabilityIssuer({
+      secret,
+      issuer: "socratopia-electron",
+      audience: "adaptive-teaching",
+      currentAuthState: { accountId: state.accountId, sessionEpoch: state.sessionEpoch },
+      ttlSeconds: 30,
+      maxTtlSeconds: 60
+    });
+    const secretB64 = secret.toString("base64");
+    secret.fill(0);
+    return {
+      generation: ++adaptiveAuthGeneration,
+      child: null,
+      issuer,
+      state,
+      secretB64,
+      ready: false
+    };
+  } catch {
+    secret.fill(0);
+    log("[adaptive-auth] capability issuer unavailable");
+    return null;
+  }
+}
+function synchronizeAdaptiveAuthState(child, sessionState) {
+  return new Promise((resolve, reject) => {
+    let settled = false;
+    const timeout = setTimeout(() => finish(adaptiveAuthError("adaptive_auth_ack_timeout")), 5e3);
+    const cleanup = () => {
+      clearTimeout(timeout);
+      child.removeListener("message", onMessage);
+      child.removeListener("exit", onExit);
+    };
+    const finish = (error) => {
+      if (settled) return;
+      settled = true;
+      cleanup();
+      if (error) reject(error);
+      else resolve();
+    };
+    const onExit = () => finish(adaptiveAuthError("adaptive_auth_child_exited"));
+    const onMessage = (message) => {
+      if (!message || message.type !== "socratopia:auth-state-ack:v1") return;
+      const expected = sessionState.state;
+      if (message.sequence !== expected.sequence || message.active !== expected.active || message.accountId !== expected.accountId || message.sessionEpoch !== expected.sessionEpoch) return;
+      if (adaptiveAuthSession !== sessionState || serverProcess !== child) return;
+      sessionState.ready = true;
+      finish();
+    };
+    child.on("message", onMessage);
+    child.once("exit", onExit);
+    try {
+      child.send(sessionState.state, (error) => {
+        if (error) finish(adaptiveAuthError("adaptive_auth_send_failed"));
+      });
+    } catch {
+      finish(adaptiveAuthError("adaptive_auth_send_failed"));
+    }
+  });
+}
+function issueAdaptiveCapability(event, args) {
+  if (args.length !== 0) throw adaptiveAuthError("adaptive_auth_invalid_arguments");
+  const current = adaptiveAuthSession;
+  if (!current?.ready || current.child !== serverProcess || !serverProcess?.connected) throw adaptiveAuthError("adaptive_auth_unavailable");
+  if (!mainWindow || event.sender !== mainWindow.webContents) throw adaptiveAuthError("adaptive_auth_invalid_sender");
+  const frame = event.senderFrame;
+  if (!frame || frame !== event.sender.mainFrame) throw adaptiveAuthError("adaptive_auth_invalid_frame");
+  let origin;
+  try {
+    origin = new URL(frame.url);
+  } catch {
+    throw adaptiveAuthError("adaptive_auth_invalid_origin");
+  }
+  const hostname = origin.hostname.toLowerCase();
+  const loopback = hostname === "localhost" || hostname === "127.0.0.1" || hostname === "[::1]" || hostname === "::1";
+  const originPort = Number(origin.port || 80);
+  if (origin.protocol !== "http:" || !loopback || origin.username || origin.password || originPort !== serverPort) throw adaptiveAuthError("adaptive_auth_invalid_origin");
+  return current.issuer.issueCapability();
+}
 function log(msg) {
   const line = `[${(/* @__PURE__ */ new Date()).toISOString()}] ${msg}
 `;
@@ -35284,6 +35398,8 @@ async function startServerOnce(port) {
   if (isDev) return;
   const serverDir = await prepareServerDir();
   const nodePathRoots = [getServerNodeModulesPath(serverDir)];
+  const nextAdaptiveAuthSession = prepareAdaptiveAuthSession(serverDir);
+  let adaptiveSecretB64 = nextAdaptiveAuthSession?.secretB64 || "";
   serverProcess = (0, import_child_process3.fork)(import_path4.default.join(serverDir, "server.js"), [], {
     cwd: serverDir,
     env: {
@@ -35296,10 +35412,22 @@ async function startServerOnce(port) {
       NODE_ENV: "production",
       PROJECT_ROOT: getUserDataPath(),
       CONTENT_ROOT: getContentPath(),
-      NODE_PATH: nodePathRoots.join(import_path4.default.delimiter)
+      NODE_PATH: nodePathRoots.join(import_path4.default.delimiter),
+      ...nextAdaptiveAuthSession ? {
+        SOCRATOPIA_ADAPTIVE_AUTH_SECRET_B64: adaptiveSecretB64,
+        SOCRATOPIA_ADAPTIVE_AUTH_ISSUER: "socratopia-electron"
+      } : {}
     },
-    stdio: "pipe"
+    stdio: ["ignore", "pipe", "pipe", "ipc"]
   });
+  const child = serverProcess;
+  adaptiveSecretB64 = "";
+  if (nextAdaptiveAuthSession) {
+    nextAdaptiveAuthSession.secretB64 = null;
+    nextAdaptiveAuthSession.child = child;
+    adaptiveAuthSession = nextAdaptiveAuthSession;
+  }
+  child.once("exit", () => resetAdaptiveAuthSession(child));
   serverProcess.stdout?.on("data", (d) => log(`[Next] ${d.toString().trim()}`));
   let portConflictDetected = false;
   serverProcess.stderr?.on("data", (d) => {
@@ -35324,6 +35452,15 @@ async function startServerOnce(port) {
     };
     setTimeout(check, 500);
   });
+  if (nextAdaptiveAuthSession) {
+    try {
+      await synchronizeAdaptiveAuthState(child, nextAdaptiveAuthSession);
+      log("[adaptive-auth] verifier synchronized");
+    } catch {
+      nextAdaptiveAuthSession.ready = false;
+      log("[adaptive-auth] verifier synchronization unavailable");
+    }
+  }
 }
 async function startServer(port) {
   try {
@@ -35550,6 +35687,7 @@ import_electron5.app.whenReady().then(async () => {
   log("App ready. isDev=" + isDev);
   await initUserData();
   setupStore(import_electron5.ipcMain);
+  import_electron5.ipcMain.handle("adaptive:getCapability", (event, ...args) => issueAdaptiveCapability(event, args));
   createMenu();
   import_electron5.session.defaultSession.setPermissionRequestHandler((_webContents, permission, callback) => {
     if (permission === "media") return callback(true);

@@ -39,10 +39,17 @@
     return value;
   }
 
+  function profilesRoot() {
+    var context = global.__SOCRATOPIA_ACCOUNT_REQUEST_CONTEXT__;
+    var accountId = context && typeof context.getAccountId === "function" ? context.getAccountId() : null;
+    return accountId
+      ? path.join(projectRoot(), "accounts", safeSegment(accountId, "accountId"), "profiles")
+      : path.join(projectRoot(), "profiles");
+  }
+
   function worldDir(profileId, worldId) {
     return path.join(
-      projectRoot(),
-      "profiles",
+      profilesRoot(),
       safeSegment(profileId, "profileId"),
       "worlds",
       safeSegment(worldId, "worldId")
@@ -223,11 +230,12 @@
 
   // ========== Answer Record (append into problem.history) ==========
 
-  function appendAnswerRecord(profileId, worldId, problemSetId, problemId, record) {
+  function appendAnswerRecord(profileId, worldId, problemSetId, problemId, record, options) {
     if (!profileId || !worldId || !problemSetId || !problemId) {
       throw new Error("appendAnswerRecord requires profileId, worldId, problemSetId, problemId");
     }
     if (!record || typeof record !== "object") throw new Error("record is required");
+    options = options || {};
     var ps = readProblemSet(profileId, worldId, problemSetId);
     if (!ps) throw new Error("ProblemSet not found: " + problemSetId);
     var problem = null;
@@ -236,17 +244,137 @@
     }
     if (!problem) throw new Error("Problem not found: " + problemId + " in set " + problemSetId);
     if (!Array.isArray(problem.history)) problem.history = [];
+    var maxRevision = 0;
+    for (var h = 0; h < problem.history.length; h++) {
+      var priorRevision = problem.history[h] && problem.history[h].domainRevision;
+      if (Number.isSafeInteger(priorRevision) && priorRevision > maxRevision) maxRevision = priorRevision;
+    }
+    var domainRevision = maxRevision + 1;
+    var createdAt = record.timestamp || new Date().toISOString();
+    var answerRecordId = "answer_" + crypto.createHash("sha256").update(JSON.stringify([
+      profileId, worldId, problemSetId, problemId, domainRevision
+    ]), "utf8").digest("hex").slice(0, 32);
     var entry = {
-      timestamp: record.timestamp || new Date().toISOString(),
+      schemaVersion: 2,
+      answerRecordId: answerRecordId,
+      domainRevision: domainRevision,
+      timestamp: createdAt,
       userAnswer: record.userAnswer != null ? record.userAnswer : "",
       correct: record.correct === true,
       score: typeof record.score === "number" ? record.score : null,
       mistakeType: record.mistakeType || null,
       feedback: record.feedback || null
     };
+    var answerRecordHash = "sha256:" + crypto.createHash("sha256").update(JSON.stringify([
+      entry.schemaVersion, entry.answerRecordId, entry.domainRevision, entry.timestamp,
+      entry.userAnswer, entry.correct, entry.score, entry.mistakeType, entry.feedback
+    ]), "utf8").digest("hex");
+    if (typeof options.buildAdaptiveIntent === "function") {
+      try {
+        var intent = options.buildAdaptiveIntent({
+          domainRevision: domainRevision,
+          createdAt: createdAt,
+          businessReceipt: {
+            kind: "practice_answer",
+            problemSetId: problemSetId,
+            problemId: problemId,
+            domainRevision: domainRevision,
+            answerRecordId: answerRecordId,
+            answerRecordHash: answerRecordHash
+          }
+        });
+        if (intent && typeof intent === "object") entry.adaptiveEvidence = intent;
+      } catch (_) {
+        entry.adaptiveEvidenceBuildError = "intent_build_failed";
+      }
+    }
     problem.history.push(entry);
     writeProblemSet(profileId, worldId, ps);
     return entry;
+  }
+
+  function findAnswerEntry(problem, sourceEventId, observationInputHash) {
+    var history = Array.isArray(problem && problem.history) ? problem.history : [];
+    for (var i = 0; i < history.length; i++) {
+      var intent = history[i] && history[i].adaptiveEvidence;
+      if (!intent || intent.sourceEventId !== sourceEventId) continue;
+      if (observationInputHash && intent.observationInputHash !== observationInputHash) {
+        throw new Error("adaptive evidence observation hash mismatch");
+      }
+      return history[i];
+    }
+    return null;
+  }
+
+  function updateAnswerAdaptiveSync(profileId, worldId, problemSetId, problemId, sourceEventId, observationInputHash, transition) {
+    if (!profileId || !worldId || !problemSetId || !problemId || !sourceEventId) {
+      throw new Error("updateAnswerAdaptiveSync requires the complete answer identity");
+    }
+    if (!transition || typeof transition !== "object") throw new Error("adaptive sync transition is required");
+    var ps = readProblemSet(profileId, worldId, problemSetId);
+    if (!ps) throw new Error("ProblemSet not found: " + problemSetId);
+    var problem = null;
+    for (var i = 0; i < ps.problems.length; i++) {
+      if (ps.problems[i].id === problemId) { problem = ps.problems[i]; break; }
+    }
+    if (!problem) throw new Error("Problem not found: " + problemId + " in set " + problemSetId);
+    var entry = findAnswerEntry(problem, sourceEventId, observationInputHash);
+    if (!entry) throw new Error("Adaptive answer intent not found");
+    var intent = entry.adaptiveEvidence;
+    var patch = transition.intentPatch;
+    if (patch && typeof patch === "object") {
+      if (patch.conceptResolution && intent.conceptResolution && intent.conceptResolution.status !== "resolved") {
+        intent.conceptResolution = JSON.parse(JSON.stringify(patch.conceptResolution));
+      }
+      if (patch.eventInputHash) {
+        if (intent.eventInputHash && intent.eventInputHash !== patch.eventInputHash) {
+          throw new Error("adaptive evidence input hash mismatch");
+        }
+        if (!intent.eventInputHash) {
+          if (!patch.payload || patch.payload.eventInputHash !== patch.eventInputHash || patch.payload.sourceEventId !== intent.sourceEventId) {
+            throw new Error("adaptive evidence resolution patch is invalid");
+          }
+          intent.eventInputHash = patch.eventInputHash;
+          intent.payload = JSON.parse(JSON.stringify(patch.payload));
+        }
+      }
+    }
+    var terminal = { committed: true, duplicate: true, unverified: true, conflict: true };
+    var currentState = intent.sync && intent.sync.state || "pending";
+    var nextState = typeof transition.state === "string" ? transition.state : "retryable";
+    if (!intent.sync || typeof intent.sync !== "object") {
+      intent.sync = { state: "pending", attempts: 0, lastReasonCode: null, updatedAt: intent.createdAt };
+    }
+    if (!terminal[currentState] || currentState === nextState) intent.sync.state = nextState;
+    intent.sync.attempts = (Number.isSafeInteger(intent.sync.attempts) ? intent.sync.attempts : 0) + 1;
+    intent.sync.lastReasonCode = typeof transition.reasonCode === "string" ? transition.reasonCode : null;
+    intent.sync.updatedAt = transition.updatedAt || new Date().toISOString();
+    writeProblemSet(profileId, worldId, ps);
+    return entry;
+  }
+
+  function listPendingAnswerEvidence(profileId, worldId, problemSetId, problemId, accountBindingHash, limit) {
+    var ps = readProblemSet(profileId, worldId, problemSetId);
+    if (!ps) return [];
+    var problem = null;
+    for (var i = 0; i < ps.problems.length; i++) {
+      if (ps.problems[i].id === problemId) { problem = ps.problems[i]; break; }
+    }
+    if (!problem) return [];
+    var max = Number.isSafeInteger(limit) ? Math.max(1, Math.min(50, limit)) : 10;
+    return (Array.isArray(problem.history) ? problem.history : []).filter(function (entry) {
+      var intent = entry && entry.adaptiveEvidence;
+      var state = intent && intent.sync && intent.sync.state;
+      return intent && intent.accountBindingHash === accountBindingHash && (state === "pending" || state === "retryable");
+    }).sort(function (left, right) {
+      return (left.domainRevision || 0) - (right.domainRevision || 0);
+    }).slice(0, max).map(function (entry) {
+      return {
+        answerRecordId: entry.answerRecordId,
+        domainRevision: entry.domainRevision,
+        adaptiveEvidence: JSON.parse(JSON.stringify(entry.adaptiveEvidence))
+      };
+    });
   }
 
   // ========== Mistakes ==========
@@ -454,6 +582,8 @@
     defaultProblemSet: defaultProblemSet,
     // Answer records
     appendAnswerRecord: appendAnswerRecord,
+    updateAnswerAdaptiveSync: updateAnswerAdaptiveSync,
+    listPendingAnswerEvidence: listPendingAnswerEvidence,
     // Mistakes
     readMistake: readMistake,
     readMistakes: readMistakes,

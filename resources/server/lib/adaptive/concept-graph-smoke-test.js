@@ -13,6 +13,7 @@ var path = require("path");
 var fs = require("fs");
 
 var TMP = path.join(os.tmpdir(), "cg-smoke-" + Date.now());
+var OUTSIDE = TMP + "-outside";
 process.env.PROJECT_ROOT = TMP;
 
 // Load data layer first (creates global.__ADAPTIVE__)
@@ -28,6 +29,7 @@ function assert(cond, msg) {
 
 function cleanup() {
   try { fs.rmSync(TMP, { recursive: true, force: true }); } catch (e) {}
+  try { fs.rmSync(OUTSIDE, { recursive: true, force: true }); } catch (e) {}
 }
 process.on("exit", cleanup);
 
@@ -84,6 +86,50 @@ assert(srcKb !== null, "knowledge_base path returns source");
 assert(srcKb.type === "knowledge_base", "source type is knowledge_base");
 assert(srcKb.cards.length >= 2, "kb source has cards");
 console.log("  Source loading: PASS");
+// 1d. Account-scoped source lookup must never scan another account.
+var foreignCardsDir = path.join(TMP, "accounts", "foreign", "profiles", "sharedprofile", "worlds", "sharedworld", "textbooks", "sharedbook", "knowledge_base", "cards");
+fs.mkdirSync(foreignCardsDir, { recursive: true });
+fs.writeFileSync(path.join(path.dirname(foreignCardsDir), "index.json"), JSON.stringify({
+  title: "Foreign Account Textbook",
+  cards: [{ concept_id: "foreign_only", title: "Foreign concept" }]
+}));
+fs.writeFileSync(path.join(foreignCardsDir, "foreign_only.json"), JSON.stringify({
+  concept_id: "foreign_only", title: "Foreign concept", definition: "Must remain isolated",
+  key_points: [], examples: [], misconceptions: [], qa_pairs: [{ q: "Foreign?", a: "No" }],
+  difficulty: 1, prerequisites: [], source_pages: [1], needs_verification: false
+}));
+var targetTextbookDir = path.join(TMP, "accounts", "target", "profiles", "sharedprofile", "worlds", "sharedworld", "textbooks", "sharedbook");
+var foreignOnly = builder.loadTextbookSource({
+  accountId: "target", profileId: "sharedprofile", worldId: "sharedworld", textbookId: "sharedbook"
+});
+assert(foreignOnly === null, "account-scoped lookup must not read a matching textbook from another account");
+var missingExplicit = builder.loadTextbookSource({
+  accountId: "target", profileId: "sharedprofile", worldId: "sharedworld", textbookId: "sharedbook",
+  textbookDir: targetTextbookDir
+});
+assert(missingExplicit === null, "missing explicit textbookDir must fail closed without account scanning");
+var targetCardsDir = path.join(targetTextbookDir, "knowledge_base", "cards");
+fs.mkdirSync(targetCardsDir, { recursive: true });
+fs.writeFileSync(path.join(path.dirname(targetCardsDir), "index.json"), JSON.stringify({
+  title: "Target Account Textbook",
+  cards: [{ concept_id: "target_only", title: "Target concept" }]
+}));
+fs.writeFileSync(path.join(targetCardsDir, "target_only.json"), JSON.stringify({
+  concept_id: "target_only", title: "Target concept", definition: "Owned by target",
+  key_points: [], examples: [], misconceptions: [], qa_pairs: [{ q: "Target?", a: "Yes" }],
+  difficulty: 1, prerequisites: [], source_pages: [1], needs_verification: false
+}));
+var targetOnly = builder.loadTextbookSource({
+  accountId: "target", profileId: "sharedprofile", worldId: "sharedworld", textbookId: "sharedbook"
+});
+assert(targetOnly && targetOnly.title === "Target Account Textbook", "account-scoped lookup must select the exact account textbook");
+var outsidePagesDir = path.join(OUTSIDE, "pages");
+fs.mkdirSync(outsidePagesDir, { recursive: true });
+fs.writeFileSync(path.join(outsidePagesDir, "page_1.txt"), "Outside project root");
+var outsideExplicit = builder.loadTextbookSource({
+  profileId: "sharedprofile", worldId: "sharedworld", textbookId: "sharedbook", textbookDir: OUTSIDE
+});
+assert(outsideExplicit === null, "explicit textbookDir must reject a sibling path that only shares the PROJECT_ROOT prefix");console.log("  Account-scoped source isolation: PASS");
 
 // ========== 2. Dry-run graph generation (sourceText) ==========
 

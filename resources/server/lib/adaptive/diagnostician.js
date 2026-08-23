@@ -45,6 +45,7 @@ function resolveConceptGraph(input) {
   if (input.conceptGraph && isObject(input.conceptGraph) && Array.isArray(input.conceptGraph.concepts)) {
     return input.conceptGraph;
   }
+  if (input.persist === false) return null;
   var ad = getAdaptive();
   if (ad && ad.getConceptGraph && input.profileId && input.worldId && input.textbookId) {
     return ad.getConceptGraph(input.profileId, input.worldId, input.textbookId);
@@ -56,6 +57,7 @@ function resolveLearnerModel(input) {
   if (input.learnerModel && isObject(input.learnerModel) && isObject(input.learnerModel.conceptMastery)) {
     return input.learnerModel;
   }
+  if (input.persist === false) return null;
   var ad = getAdaptive();
   if (ad && ad.loadLearnerModel && input.profileId && input.worldId) {
     try { return ad.loadLearnerModel(input.profileId, input.worldId); } catch (e) { return null; }
@@ -65,6 +67,7 @@ function resolveLearnerModel(input) {
 
 function resolveRecentTurns(input) {
   if (Array.isArray(input.recentTurns)) return input.recentTurns;
+  if (input.persist === false) return [];
   if (!input.sessionId) return [];
   var ad = getAdaptive();
   if (ad && ad.getTeachingEvents) {
@@ -77,8 +80,9 @@ function resolveActiveConceptIds(input, conceptGraph) {
   if (Array.isArray(input.activeConceptIds) && input.activeConceptIds.length > 0) {
     return input.activeConceptIds.filter(function (id) { return typeof id === "string"; });
   }
-  // Infer from session
-  if (input.sessionId) {
+  // Infer from the legacy session only for existing callers. Stage A injects
+  // all v2 state and uses persist:false, which is a strict zero-read boundary.
+  if (input.persist !== false && input.sessionId) {
     var ad = getAdaptive();
     if (ad && ad.getTeachingSession) {
       try {
@@ -1015,7 +1019,7 @@ async function diagnose(input, callLLM) {
 
   // Optionally persist as teaching event
   var writeWarning = null;
-  if (input.sessionId && isNonEmptyString(input.sessionId)) {
+  if (input.persist !== false && input.sessionId && isNonEmptyString(input.sessionId)) {
     var ad = getAdaptive();
     if (ad && ad.appendTeachingEvent) {
       try {

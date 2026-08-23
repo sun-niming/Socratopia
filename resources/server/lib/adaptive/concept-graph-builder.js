@@ -53,6 +53,7 @@ function loadTextbookSource(input) {
   if (input.textbookDir && typeof input.textbookDir === "string" && input.textbookDir.trim()) {
     // explicit textbookDir: skip ID validation, use directory directly
   } else {
+    if (input.accountId) safeSegment(input.accountId, "accountId");
     if (input.textbookId) safeSegment(input.textbookId, "textbookId");
     if (input.profileId) safeSegment(input.profileId, "profileId");
     if (input.worldId) safeSegment(input.worldId, "worldId");
@@ -169,6 +170,29 @@ function tryLoadTextbook(input) {
   };
 }
 
+function pathInside(base, target) {
+  var relative = path.relative(base, target);
+  return relative === "" || (relative !== ".." && relative.indexOf(".." + path.sep) !== 0 && !path.isAbsolute(relative));
+}
+
+function existingTextbookDirectory(root, candidate) {
+  var resolvedRoot = path.resolve(root);
+  var resolvedCandidate = path.resolve(candidate);
+  if (!pathInside(resolvedRoot, resolvedCandidate) || !fs.existsSync(resolvedCandidate)) return null;
+  try {
+    var realRoot = fs.existsSync(resolvedRoot) ? fs.realpathSync(resolvedRoot) : resolvedRoot;
+    var realCandidate = fs.realpathSync(resolvedCandidate);
+    if (!pathInside(realRoot, realCandidate) || !fs.statSync(realCandidate).isDirectory()) return null;
+    return realCandidate;
+  } catch (error) {
+    return null;
+  }
+}
+
+function storagePathSegment(value, name) {
+  return safeSegment(value, name).normalize("NFC").toLowerCase();
+}
+
 function resolveTextbookDir(input) {
   var root = process.env.PROJECT_ROOT || "";
   if (!root) return null;
@@ -177,50 +201,47 @@ function resolveTextbookDir(input) {
   var wid = input.worldId || "";
   var tid = input.textbookId || "";
 
-  // 0. Explicit textbookDir override (takes precedence)
-  if (input.textbookDir && typeof input.textbookDir === "string") {
-    var d = input.textbookDir.trim();
-    if (d.length > 0) {
-      // Validate the explicit dir is under PROJECT_ROOT
-      if (d.indexOf(root) !== 0) return null;
-      if (fs.existsSync(d)) return d;
-    }
+  // An explicit server-selected directory is authoritative. Invalid or missing
+  // paths fail closed and must never fall back to scanning another account.
+  if (typeof input.textbookDir === "string") {
+    var explicit = input.textbookDir.trim();
+    if (!explicit) return null;
+    return existingTextbookDirectory(root, explicit);
   }
 
-  // Textbook directory candidates (real project layout)
-  var candidates = [
-    // Flat under project root
-    path.join(root, "textbooks", tid),
-    path.join(root, "textbook", tid),
-    // Accounts-based hierarchy (observed in production)
-    // <PROJECT_ROOT>/accounts/<aid>/profiles/<pid>/worlds/<wid>/textbooks/<tid>
-    // We need to search accounts/ for matching pid/wid
-  ];
+  // Authenticated callers are bound to one exact storage-v2 account scope.
+  if (input.accountId) {
+    if (!pid || !wid || !tid) return null;
+    return existingTextbookDirectory(root, path.join(
+      root,
+      "accounts", storagePathSegment(input.accountId, "accountId"),
+      "profiles", storagePathSegment(pid, "profileId"),
+      "worlds", storagePathSegment(wid, "worldId"),
+      "textbooks", storagePathSegment(tid, "textbookId")
+    ));
+  }
 
-  // Profile/world-scoped: direct under PROJECT_ROOT
+  // Legacy callers without account identity retain the historical layouts.
+  var candidates = [
+    path.join(root, "textbooks", tid),
+    path.join(root, "textbook", tid)
+  ];
   if (pid && wid) {
     candidates.push(path.join(root, pid, wid, "textbooks", tid));
     candidates.push(path.join(root, "profiles", pid, "worlds", wid, "textbooks", tid));
-  }
-
-  // Search accounts/ subdirectories for profile/world match
-  if (pid && wid) {
     try {
       var accountsDir = path.join(root, "accounts");
       if (fs.existsSync(accountsDir)) {
-        var aids = fs.readdirSync(accountsDir);
-        for (var a = 0; a < aids.length; a++) {
-          var candidate = path.join(accountsDir, aids[a], "profiles", pid, "worlds", wid, "textbooks", tid);
-          candidates.push(candidate);
-        }
+        fs.readdirSync(accountsDir).forEach(function (accountDirectory) {
+          candidates.push(path.join(accountsDir, accountDirectory, "profiles", pid, "worlds", wid, "textbooks", tid));
+        });
       }
-    } catch (e) {}
+    } catch (error) {}
   }
 
   for (var i = 0; i < candidates.length; i++) {
-    // Security: every candidate must start with root
-    if (candidates[i].indexOf(root) !== 0) continue;
-    if (fs.existsSync(candidates[i])) return candidates[i];
+    var existing = existingTextbookDirectory(root, candidates[i]);
+    if (existing) return existing;
   }
   return null;
 }
@@ -845,8 +866,12 @@ async function buildConceptGraph(input, callLLM) {
     graph = buildDryRunGraph(source, input);
   }
 
-  // 3. Inherit version from existing graph if present (don't reset to 1)
-  try {
+  // 3. An explicitly injected graph is authoritative for the v2 path. With
+  // persist:false we must not even read the legacy global data layer.
+  var explicitExisting = input.existingGraph;
+  if (explicitExisting && typeof explicitExisting.version === "number" && explicitExisting.version >= 1) {
+    graph.version = explicitExisting.version;
+  } else if (input.persist !== false) try {
     var ad = global.__ADAPTIVE__;
     if (!ad) { try { ad = require("./data-layer.js"); } catch (e) {} }
     if (ad && ad.getConceptGraph) {
@@ -874,7 +899,7 @@ async function buildConceptGraph(input, callLLM) {
   // 5. Persist
   //   - build action (non-dryRun): always save
   //   - dryRun: save only if dryRunSave=true
-  var shouldSave = !input.dryRun || input.dryRunSave;
+  var shouldSave = input.persist !== false && (!input.dryRun || input.dryRunSave);
   if (shouldSave) {
     try {
       var adSave = global.__ADAPTIVE__;

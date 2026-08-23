@@ -16,6 +16,7 @@ import_electron.contextBridge.exposeInMainWorld("electronAPI", {
   setSessionToken: (token) => import_electron.ipcRenderer.invoke("store:setSessionToken", token),
   getVersion: () => import_electron.ipcRenderer.invoke("app:getVersion"),
   getPlatform: () => process.platform,
+  getAdaptiveCapability: () => import_electron.ipcRenderer.invoke("adaptive:getCapability"),
   isPackaged: () => import_electron.ipcRenderer.invoke("app:isPackaged"),
   toggleMaximize: () => import_electron.ipcRenderer.send("window:toggleMaximize"),
   exportPdf: (html, defaultFilename, targetPath) => import_electron.ipcRenderer.invoke("pdf:export", html, defaultFilename, targetPath),

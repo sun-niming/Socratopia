@@ -895,8 +895,182 @@ global.__KB_DISTILL_PREFETCH__ = function (rawText, startPage, endPage, textbook
   global.__KB_PROGRESS__.installRouteRequireHook();
 }
 
+;(function registerAdaptiveTeachingRuntime() {
+  var crypto = require("crypto");
+  var auth = require("./lib/local-request-auth.js");
+  var accountRequestContext = require("./lib/account-request-context.js").createAccountRequestContext();
+  global.__SOCRATOPIA_ACCOUNT_REQUEST_CONTEXT__ = accountRequestContext;
+  var secret = null;
+  var encodedSecret = process.env.SOCRATOPIA_ADAPTIVE_AUTH_SECRET_B64 || "";
+  try { if (encodedSecret) secret = Buffer.from(encodedSecret, "base64"); } catch (_) {}
+  delete process.env.SOCRATOPIA_ADAPTIVE_AUTH_SECRET_B64;
+  var verifier = auth.createVerifier({
+    secret: secret,
+    issuer: process.env.SOCRATOPIA_ADAPTIVE_AUTH_ISSUER || "socratopia-electron",
+    audience: "adaptive-teaching",
+    currentAuthState: null
+  });
+  if (secret) secret.fill(0);
+  secret = null;
+  var orchestrator = null;
+  var readinessPromise;
+  try {
+    var gateway = require("./lib/llm-gateway.js").createGateway();
+    orchestrator = require("./lib/adaptive/orchestrator.js").createOrchestrator({
+      rootDir: process.env.PROJECT_ROOT,
+      serverInstanceId: "server_" + crypto.randomBytes(16).toString("hex"),
+      builderCallLLM: gateway.createPromptCaller({ task: "concept_graph", role: "strong", requiresJson: true }),
+      diagnosisCallLLM: gateway.createPromptCaller({ task: "diagnosis", role: "weak", requiresJson: true }),
+      validateTrustedContext: verifier.assertCurrentContext
+    });
+    readinessPromise = Promise.resolve().then(function () { return orchestrator.initialize(); });
+  } catch (error) {
+    readinessPromise = Promise.resolve({ ok: false, code: error && error.code || "adaptive_unavailable" });
+  }
+  readinessPromise = Promise.resolve(readinessPromise).catch(function (error) {
+    return { ok: false, code: error && error.code || "adaptive_unavailable" };
+  });
+
+  var adaptiveEnabled = /^(?:1|true|yes|on)$/i.test(process.env.SOCRATOPIA_ADAPTIVE_ENABLED || "");
+  var adaptiveProfiles = new Set(String(process.env.SOCRATOPIA_ADAPTIVE_PROFILE_ALLOWLIST || "").split(",").map(function (value) {
+    return value.normalize("NFC").trim();
+  }).filter(function (value) {
+    return value === "*" || !!value && value.length <= 512 && !/[\x00-\x1F\x7F]/.test(value);
+  }));
+  function eligibilityError() {
+    var error = new Error("Adaptive teaching is not enabled for this profile");
+    error.code = "adaptive_not_eligible";
+    error.status = 403;
+    error.statusCode = 403;
+    error.safeToFallback = true;
+    return error;
+  }
+  function assertEligible(requestContext, input) {
+    verifier.assertCurrentContext(requestContext);
+    var profileId = input && input.profileId;
+    if (typeof profileId !== "string" || !profileId || profileId.length > 512) throw eligibilityError();
+    if (!adaptiveEnabled || !adaptiveProfiles.size || !adaptiveProfiles.has("*") && !adaptiveProfiles.has(profileId.normalize("NFC"))) throw eligibilityError();
+    return Object.freeze({ eligible: true, profileId: profileId });
+  }
+
+  var lastSequence = -1;
+  var lastState = null;
+  var chatService = null;
+  var externalEvidenceService = null;
+  try {
+    if (orchestrator) chatService = require("./lib/adaptive/chat-service.js").createChatService({
+      verifier: verifier,
+      orchestrator: orchestrator,
+      readinessPromise: readinessPromise,
+      accountRequestContext: accountRequestContext,
+      getAccountContext: function () {
+        return lastState && lastState.active ? {
+          active: true,
+          accountId: lastState.accountId,
+          sessionEpoch: lastState.sessionEpoch
+        } : null;
+      },
+      isEligible: function (context) {
+        return assertEligible(context.requestContext, context.input);
+      }
+    });
+  } catch (_) {
+    chatService = null;
+  }
+  try {
+    externalEvidenceService = require("./lib/adaptive/external-evidence-service.js").createExternalEvidenceService({
+      verifier: verifier,
+      orchestrator: orchestrator,
+      readinessPromise: readinessPromise,
+      accountRequestContext: accountRequestContext,
+      getAccountContext: function () {
+        return lastState && lastState.active ? {
+          active: true,
+          accountId: lastState.accountId,
+          sessionEpoch: lastState.sessionEpoch
+        } : null;
+      },
+      isEligible: function (context) {
+        return assertEligible(context.requestContext, context.input);
+      }
+    });
+  } catch (_) {
+    externalEvidenceService = null;
+  }
+  function normalizeAuthStateMessage(message) {
+    if (!message || message.type !== "socratopia:auth-state:v1") return null;
+    if (!Number.isSafeInteger(message.sequence) || message.sequence < 0 || !Number.isSafeInteger(message.sessionEpoch) || message.sessionEpoch < 0) return null;
+    if (message.active !== undefined && typeof message.active !== "boolean") return null;
+    var active = message.active !== false;
+    var accountId = null;
+    if (active) {
+      if (typeof message.accountId !== "string" || !message.accountId.trim() || message.accountId.length > 512) return null;
+      accountId = message.accountId;
+    } else if (message.accountId !== undefined && message.accountId !== null && message.accountId !== "") return null;
+    return { sequence: message.sequence, active: active, accountId: accountId, sessionEpoch: message.sessionEpoch };
+  }
+  function sameAuthState(left, right) {
+    return !!left && !!right && left.active === right.active && left.accountId === right.accountId && left.sessionEpoch === right.sessionEpoch;
+  }
+  function acknowledge(state) {
+    if (typeof process.send !== "function" || !process.connected) return;
+    try { process.send({ type: "socratopia:auth-state-ack:v1", sequence: state.sequence, active: state.active, accountId: state.accountId, sessionEpoch: state.sessionEpoch }); } catch (_) {}
+  }
+  process.on("message", function (message) {
+    var nextState = normalizeAuthStateMessage(message);
+    if (!nextState || nextState.sequence < lastSequence) return;
+    if (nextState.sequence === lastSequence) {
+      if (sameAuthState(lastState, nextState)) acknowledge(nextState);
+      return;
+    }
+    if (lastState) {
+      if (nextState.sessionEpoch < lastState.sessionEpoch) return;
+      var identityChanged = nextState.active !== lastState.active || nextState.active && nextState.accountId !== lastState.accountId;
+      if (identityChanged && nextState.sessionEpoch <= lastState.sessionEpoch) return;
+    }
+    lastSequence = nextState.sequence;
+    lastState = nextState;
+    verifier.setCurrentAuthState(nextState.active ? { accountId: nextState.accountId, sessionEpoch: nextState.sessionEpoch } : null);
+    acknowledge(nextState);
+  });
+  process.on("disconnect", function () {
+    lastState = null;
+    verifier.setCurrentAuthState(null);
+  });
+
+  global.__ADAPTIVE_TEACHING_RUNTIME__ = Object.freeze({
+    version: 1,
+    auth: Object.freeze({
+      verifyRequest: function (request, body) { return verifier.verifyRequest(request, body); },
+      assertNoRawAccountSelectors: auth.assertNoRawAccountSelectors,
+      assertAccountScope: auth.assertAccountScope,
+      assertEligible: assertEligible
+    }),
+    chat: chatService ? Object.freeze({
+      begin: function (request, body, input) { return chatService.begin(request, body, input); },
+      run: function (handle, callback) { return chatService.run(handle, callback); },
+      dispatch: function (request, core) { return chatService.dispatch(request, core); },
+      wrapResponse: function (handle, response) { return chatService.wrapResponse(handle, response); },
+      fail: function (handle, input) { return chatService.fail(handle, input); }
+    }) : null,
+    externalEvidence: externalEvidenceService,
+    readinessPromise: readinessPromise,
+    handlePublicRequest: function (context, method, action, payload) {
+      if (!orchestrator) {
+        var unavailable = new Error("Adaptive teaching is unavailable");
+        unavailable.code = "adaptive_unavailable";
+        unavailable.status = 503;
+        throw unavailable;
+      }
+      return accountRequestContext.run(context.accountId, function () {
+        return orchestrator.handlePublicRequest(context, method, action, payload);
+      });
+    },
+    newTraceId: function () { return "adaptive_" + crypto.randomBytes(12).toString("hex"); }
+  });
+})();
 const currentPort = parseInt(process.env.PORT, 10) || 3000
-const hostname = process.env.HOSTNAME || '0.0.0.0'
+const hostname = process.env.HOSTNAME || '127.0.0.1'
 
 let keepAliveTimeout = parseInt(process.env.KEEP_ALIVE_TIMEOUT, 10)
 const nextConfig = {"env":{},"typescript":{"ignoreBuildErrors":false},"typedRoutes":false,"distDir":"./.next","cleanDistDir":true,"assetPrefix":"","cacheMaxMemorySize":52428800,"configOrigin":"next.config.ts","useFileSystemPublicRoutes":true,"generateEtags":true,"pageExtensions":["tsx","ts","jsx","js"],"poweredByHeader":true,"compress":true,"images":{"deviceSizes":[640,750,828,1080,1200,1920,2048,3840],"imageSizes":[32,48,64,96,128,256,384],"path":"/_next/image","loader":"default","loaderFile":"","domains":[],"disableStaticImages":false,"minimumCacheTTL":14400,"formats":["image/webp"],"maximumRedirects":3,"maximumResponseBody":50000000,"dangerouslyAllowLocalIP":false,"dangerouslyAllowSVG":false,"contentSecurityPolicy":"script-src 'none'; frame-src 'none'; sandbox;","contentDispositionType":"attachment","localPatterns":[{"pathname":"**","search":""}],"remotePatterns":[],"qualities":[75],"unoptimized":false},"devIndicators":{"position":"bottom-left"},"onDemandEntries":{"maxInactiveAge":60000,"pagesBufferLength":5},"basePath":"","sassOptions":{},"trailingSlash":false,"i18n":null,"productionBrowserSourceMaps":false,"excludeDefaultMomentLocales":true,"reactProductionProfiling":false,"reactStrictMode":null,"reactMaxHeadersLength":6000,"httpAgentOptions":{"keepAlive":true},"logging":{},"compiler":{},"expireTime":31536000,"staticPageGenerationTimeout":60,"output":"standalone","modularizeImports":{"@mui/icons-material":{"transform":"@mui/icons-material/{{member}}"},"lodash":{"transform":"lodash/{{member}}"}},"outputFileTracingRoot":"/Users/leminwu/Documents/Github/socralab-app/v2","cacheComponents":false,"cacheLife":{"default":{"stale":300,"revalidate":900,"expire":4294967294},"seconds":{"stale":30,"revalidate":1,"expire":60},"minutes":{"stale":300,"revalidate":60,"expire":3600},"hours":{"stale":300,"revalidate":3600,"expire":86400},"days":{"stale":300,"revalidate":86400,"expire":604800},"weeks":{"stale":300,"revalidate":604800,"expire":2592000},"max":{"stale":300,"revalidate":2592000,"expire":31536000}},"cacheHandlers":{},"experimental":{"useSkewCookie":false,"cssChunking":true,"multiZoneDraftMode":false,"appNavFailHandling":false,"prerenderEarlyExit":true,"serverMinification":true,"linkNoTouchStart":false,"caseSensitiveRoutes":false,"dynamicOnHover":false,"preloadEntriesOnStart":true,"clientRouterFilter":true,"clientRouterFilterRedirects":false,"fetchCacheKeyPrefix":"","proxyPrefetch":"flexible","optimisticClientCache":true,"manualClientBasePath":false,"cpus":13,"memoryBasedWorkersCount":false,"imgOptConcurrency":null,"imgOptTimeoutInSeconds":7,"imgOptMaxInputPixels":268402689,"imgOptSequentialRead":null,"imgOptSkipMetadata":null,"isrFlushToDisk":true,"workerThreads":false,"optimizeCss":false,"nextScriptWorkers":false,"scrollRestoration":false,"externalDir":false,"disableOptimizedLoading":false,"gzipSize":true,"craCompat":false,"esmExternals":true,"fullySpecified":false,"swcTraceProfiling":false,"forceSwcTransforms":false,"largePageDataBytes":128000,"typedEnv":false,"parallelServerCompiles":false,"parallelServerBuildTraces":false,"ppr":false,"authInterrupts":false,"webpackMemoryOptimizations":false,"optimizeServerReact":true,"viewTransition":false,"removeUncaughtErrorAndRejectionListeners":false,"validateRSCRequestHeaders":false,"staleTimes":{"dynamic":0,"static":300},"reactDebugChannel":false,"serverComponentsHmrCache":true,"staticGenerationMaxConcurrency":8,"staticGenerationMinPagesPerWorker":25,"transitionIndicator":false,"inlineCss":false,"useCache":false,"globalNotFound":false,"browserDebugInfoInTerminal":false,"lockDistDir":true,"isolatedDevBuild":true,"proxyClientMaxBodySize":10485760,"hideLogsAfterAbort":false,"mcpServer":true,"turbopackFileSystemCacheForDev":true,"turbopackFileSystemCacheForBuild":false,"turbopackInferModuleSideEffects":false,"optimizePackageImports":["lucide-react","date-fns","lodash-es","ramda","antd","react-bootstrap","ahooks","@ant-design/icons","@headlessui/react","@headlessui-float/react","@heroicons/react/20/solid","@heroicons/react/24/solid","@heroicons/react/24/outline","@visx/visx","@tremor/react","rxjs","@mui/material","@mui/icons-material","recharts","react-use","effect","@effect/schema","@effect/platform","@effect/platform-node","@effect/platform-browser","@effect/platform-bun","@effect/sql","@effect/sql-mssql","@effect/sql-mysql2","@effect/sql-pg","@effect/sql-sqlite-node","@effect/sql-sqlite-bun","@effect/sql-sqlite-wasm","@effect/sql-sqlite-react-native","@effect/rpc","@effect/rpc-http","@effect/typeclass","@effect/experimental","@effect/opentelemetry","@material-ui/core","@material-ui/icons","@tabler/icons-react","mui-core","react-icons/ai","react-icons/bi","react-icons/bs","react-icons/cg","react-icons/ci","react-icons/di","react-icons/fa","react-icons/fa6","react-icons/fc","react-icons/fi","react-icons/gi","react-icons/go","react-icons/gr","react-icons/hi","react-icons/hi2","react-icons/im","react-icons/io","react-icons/io5","react-icons/lia","react-icons/lib","react-icons/lu","react-icons/md","react-icons/pi","react-icons/ri","react-icons/rx","react-icons/si","react-icons/sl","react-icons/tb","react-icons/tfi","react-icons/ti","react-icons/vsc","react-icons/wi"],"trustHostHeader":false,"isExperimentalCompile":false},"htmlLimitedBots":"[\\w-]+-Google|Google-[\\w-]+|Chrome-Lighthouse|Slurp|DuckDuckBot|baiduspider|yandex|sogou|bitlybot|tumblr|vkShare|quora link preview|redditbot|ia_archiver|Bingbot|BingPreview|applebot|facebookexternalhit|facebookcatalog|Twitterbot|LinkedInBot|Slackbot|Discordbot|WhatsApp|SkypeUriPreview|Yeti|googleweblight","bundlePagesRouterDependencies":false,"configFileName":"next.config.ts","serverExternalPackages":["openai"],"turbopack":{"root":"/Users/leminwu/Documents/Github/socralab-app/v2"},"distDirRoot":".next"}

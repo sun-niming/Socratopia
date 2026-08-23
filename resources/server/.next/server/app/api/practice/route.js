@@ -85,6 +85,63 @@ function _jsonErr(code, message, status, headers) {
   return v.NextResponse.json({ error: code, message: message }, { status: status, headers: headers });
 }
 
+function _stageCService() {
+  var runtime = global.__ADAPTIVE_TEACHING_RUNTIME__;
+  return runtime && runtime.externalEvidence || null;
+}
+
+function _stageCAuthError(error, h) {
+  var status = Number(error && (error.status || error.statusCode));
+  if ([400, 401, 403, 409, 503].indexOf(status) < 0) status = 503;
+  var code = error && typeof error.code === "string" && /^[a-z0-9_]{1,64}$/.test(error.code)
+    ? error.code : "adaptive_auth_unavailable";
+  return v.NextResponse.json({ error: code, safeToFallback: true }, { status: status, headers: h });
+}
+
+function _practiceSyncTransition(P, ids, intent, syncResult) {
+  try {
+    P.updateAnswerAdaptiveSync(
+      ids.profileId, ids.worldId, ids.problemSetId, ids.problemId,
+      intent.sourceEventId, intent.observationInputHash, {
+        state: syncResult.state,
+        reasonCode: syncResult.reasonCode,
+        intentPatch: syncResult.intentPatch,
+        updatedAt: new Date().toISOString()
+      }
+    );
+    return syncResult;
+  } catch (_) {
+    return { state: "retryable", reasonCode: "sync_marker_failed" };
+  }
+}
+
+async function _commitPracticeEvidence(P, service, handle, ids, record, draft) {
+  var binding = service.bindingForHandle(handle);
+  return service.withSourceLock(handle, {
+    profileId: ids.profileId,
+    worldId: ids.worldId,
+    textbookId: ids.textbookId,
+    source: "practice",
+    itemId: ids.problemSetId + ":" + ids.problemId
+  }, async function () {
+    var oldPending = P.listPendingAnswerEvidence(
+      ids.profileId, ids.worldId, ids.problemSetId, ids.problemId, binding, 10
+    );
+    for (var i = 0; i < oldPending.length; i++) {
+      try {
+        var replay = await service.retryPending(handle, oldPending[i].adaptiveEvidence);
+        _practiceSyncTransition(P, ids, oldPending[i].adaptiveEvidence, replay);
+      } catch (_) {}
+    }
+    var entry = P.appendAnswerRecord(ids.profileId, ids.worldId, ids.problemSetId, ids.problemId, record, {
+      buildAdaptiveIntent: function (meta) { return service.finalizeObservation(handle, draft, meta); }
+    });
+    if (!entry.adaptiveEvidence) return { state: "retryable", reasonCode: "intent_build_failed" };
+    var synced = await service.recordPending(handle, entry.adaptiveEvidence);
+    return _practiceSyncTransition(P, ids, entry.adaptiveEvidence, synced);
+  });
+}
+
 // ===== Source resolution for generate =====
 // Delegate to the standalone source adapter (global.__PRACTICE_SOURCE__, loaded
 // by server.js). Falls back to a local require so the route still works if the
@@ -292,7 +349,7 @@ async function _doGenerate(body, h) {
   return v.NextResponse.json({ problemSet: ps }, { headers: h });
 }
 
-async function _doGrade(body, h) {
+async function _doGrade(body, h, stageCService, stageCHandle) {
   var P = global.__PRACTICE__;
   if (!P) return _jsonErr("practice_unavailable", "practice data layer not loaded", 500, h);
   var pid = body.profileId, wid = body.worldId, psid = body.problemSetId, pbid = body.problemId;
@@ -306,6 +363,7 @@ async function _doGrade(body, h) {
   if (!problem) return _jsonErr("not_found", "Problem not found", 404, h);
 
   var result = null;
+  var gradingMode = "deterministic";
 
   if (problem.type === "choice") {
     // Local grading — no LLM. Accept index (number-like) or choice text.
@@ -339,6 +397,7 @@ async function _doGrade(body, h) {
       var callLLMf = _resolveLLM(body);
       if (callLLMf) {
         result = await _llmGrade(callLLMf, problem, userAnswer);
+        if (result) gradingMode = "llm_assisted";
       }
       if (!result) {
         result = { correct: false, score: 0, normalizedUserAnswer: _norm(userAnswer), normalizedCorrectAnswer: _norm(problem.correctAnswer), feedback: "回答与参考答案不一致。参考答案: " + problem.correctAnswer, mistakeType: "concept", missingPoints: problem.knowledgePoints, nextAction: "explain" };
@@ -346,6 +405,7 @@ async function _doGrade(body, h) {
     }
   } else {
     // short-answer / step → LLM grading
+    gradingMode = "llm_assisted";
     var callLLM = _resolveLLM(body);
     if (!callLLM) return _jsonErr("no_llm", "Subjective grading requires an LLM. Provide apiKey or configure set.json.", 400, h);
     result = await _llmGrade(callLLM, problem, userAnswer);
@@ -353,12 +413,76 @@ async function _doGrade(body, h) {
   }
 
   // Write into problem.history
-  try {
-    P.appendAnswerRecord(pid, wid, psid, pbid, {
-      userAnswer: userAnswer, correct: result.correct, score: result.score,
-      mistakeType: result.mistakeType || null, feedback: result.feedback || null
-    });
-  } catch (e) { result._warning = "Failed to persist answer record: " + (e && e.message); }
+  var answerRecord = {
+    userAnswer: userAnswer, correct: result.correct, score: result.score,
+    mistakeType: result.mistakeType || null, feedback: result.feedback || null
+  };
+  var appendAttempted = false;
+  var syncPublic = null;
+  if (stageCService && stageCHandle) {
+    var handleStatus = stageCService.statusForHandle(stageCHandle);
+    var textbookId = ps.source && ps.source.textbookId;
+    if (!handleStatus.active) {
+      syncPublic = { adaptiveSyncStatus: "disabled", adaptiveSyncReason: handleStatus.reasonCode || "adaptive_unavailable" };
+    } else if (typeof textbookId !== "string" || !textbookId) {
+      syncPublic = { adaptiveSyncStatus: "disabled", adaptiveSyncReason: "textbook_scope_missing" };
+    } else {
+      var sourceMeta = problem.source && typeof problem.source === "object" ? problem.source : {};
+      var answerKey = problem.type === "choice" && Number.isInteger(problem.correctIndex)
+        ? problem.correctIndex : problem.correctAnswer;
+      var draft = null;
+      try {
+        draft = stageCService.prepareObservation(stageCHandle, {
+          source: "practice",
+          profileId: pid,
+          worldId: wid,
+          textbookId: textbookId,
+          itemId: psid,
+          subItemId: pbid,
+          conceptId: sourceMeta.conceptId || problem.conceptId || null,
+          conceptCandidates: problem.knowledgePoints || [],
+          gradingMode: gradingMode,
+          outcome: result.correct === true ? "correct" : "incorrect",
+          questionType: problem.type === "choice" ? "choice" : "short_answer",
+          answerKey: answerKey,
+          answerKeyProvenance: sourceMeta.answerKeyProvenance || "llm_generated",
+          answerKeyValidationStatus: sourceMeta.answerKeyValidationStatus || "unverified",
+          validatorType: sourceMeta.validatorType || "none",
+          validatorVersion: sourceMeta.validatorVersion || "none",
+          assessmentVersion: sourceMeta.assessmentVersion || "practice-assessment-v1",
+          graderVersion: gradingMode === "llm_assisted" ? "practice-llm-grade-v1" : "practice-server-grade-v1",
+          externalContract: sourceMeta.externalContract,
+          contractVerified: sourceMeta.contractVerified === true,
+          sourceRefs: sourceMeta.sourceRefs,
+          assistanceLevel: "heavy",
+          evidenceType: "basic"
+        });
+      } catch (_) {
+        syncPublic = { adaptiveSyncStatus: "retryable", adaptiveSyncReason: "intent_prepare_failed" };
+      }
+      if (draft) {
+        appendAttempted = true;
+        try {
+          var syncResult = await _commitPracticeEvidence(P, stageCService, stageCHandle, {
+            profileId: pid, worldId: wid, textbookId: textbookId,
+            problemSetId: psid, problemId: pbid
+          }, answerRecord, draft);
+          syncPublic = stageCService.publicSyncResult(syncResult);
+        } catch (e) {
+          result._warning = "Failed to persist answer record: " + (e && e.message);
+          syncPublic = { adaptiveSyncStatus: "retryable", adaptiveSyncReason: "business_commit_failed" };
+        }
+      }
+    }
+  }
+  if (!appendAttempted) {
+    try { P.appendAnswerRecord(pid, wid, psid, pbid, answerRecord); }
+    catch (e) { result._warning = "Failed to persist answer record: " + (e && e.message); }
+  }
+  if (syncPublic) {
+    result.adaptiveSyncStatus = syncPublic.adaptiveSyncStatus;
+    result.adaptiveSyncReason = syncPublic.adaptiveSyncReason;
+  }
 
   // Suggest (but do not force) saving a mistake when incorrect
   if (!result.correct) {
@@ -1001,7 +1125,27 @@ async function wPOST(a) {
   var action = b.action || "";
   try {
     if (action === "generate") return await _doGenerate(b, h);
-    if (action === "grade") return await _doGrade(b, h);
+    if (action === "grade") {
+      var service = _stageCService();
+      var hasAuthorization = false;
+      try { hasAuthorization = !!(a.headers && a.headers.get("Authorization")); } catch (_) {}
+      if (hasAuthorization) {
+        if (!service || typeof service.authorizeRequest !== "function") {
+          return _stageCAuthError({ code: "adaptive_auth_unavailable", status: 503 }, h);
+        }
+        var handle;
+        try { handle = await service.authorizeRequest(a, b); }
+        catch (authError) { return _stageCAuthError(authError, h); }
+        try {
+          return await service.runAuthorized(handle, function () {
+            return _doGrade(b, h, service, handle);
+          });
+        } catch (gradeError) {
+          return _jsonErr("practice_failed", gradeError && gradeError.message, 500, h);
+        }
+      }
+      return await _doGrade(b, h, null, null);
+    }
     if (action === "hint") return await _doHint(b, h);
     if (action === "explain") return await _doExplain(b, h);
     if (action === "variant") return await _doVariant(b, h);
