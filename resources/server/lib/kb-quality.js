@@ -138,7 +138,7 @@ function contiguousHealthyChunks(events, total) {
   return count;
 }
 
-function assessBuild(cards, chunks, events, startPage, endPage, teachingMap) {
+function assessBuild(cards, chunks, events, startPage, endPage, teachingMap, extraction) {
   cards = cards || [];
   chunks = chunks || [];
   events = events || [];
@@ -170,8 +170,11 @@ function assessBuild(cards, chunks, events, startPage, endPage, teachingMap) {
   var chunksProcessed = Object.keys(processedIds).length;
   var chunksExpected = chunks.length;
   var incomplete = chunksProcessed < chunksExpected;
+  var failedPages = extraction && Array.isArray(extraction.failedPages) ? extraction.failedPages : [];
+  var transcriptionTracked = !!(extraction && (extraction.processingComplete === true || failedPages.length));
+  var transcriptionIncomplete = transcriptionTracked && (failedPages.length > 0 || extraction.transcriptionComplete !== true);
   var partial = !cards.length || incomplete || terminal.length > 0 || trailingEmpty >= 3 ||
-    coverageRatio < 0.9 || noneRatio >= 0.25 || mapDegraded;
+    coverageRatio < 0.9 || noneRatio >= 0.25 || mapDegraded || transcriptionIncomplete;
   return {
     state: partial ? "partial" : "done",
     requestedPageRange: [startPage, endPage],
@@ -186,6 +189,8 @@ function assessBuild(cards, chunks, events, startPage, endPage, teachingMap) {
     teachingMapDegraded: mapDegraded,
     chunksProcessed: chunksProcessed,
     chunksExpected: chunksExpected,
+    failedPages: failedPages.map(function (item) { return { page: Number(item.page), reason: String(item.reason || "unresolved") }; }),
+    transcriptionComplete: !transcriptionIncomplete,
     activationEligible: !partial,
   };
 }

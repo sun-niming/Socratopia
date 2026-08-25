@@ -1,7 +1,7 @@
 /**
  * model-router-premium-config-smoke-test.js
  *
- * Verifies that the set.json + settings.json normalization (mirrored from
+ * Verifies that synthetic set/settings normalization (mirrored from
  * server.js) yields a fully-resolved `premium` block (baseUrl + apiKey + model),
  * and that the model-router escalates kb_distill to premium on a content failure
  * while keeping chat on mini. Never prints the API key.
@@ -64,10 +64,26 @@ function normalize(raw, modelKey) {
   return out;
 }
 
-// ---- load real config files ----------------------------------------------
-var root = path.join(__dirname, "..", "..");
-var settingsRaw = JSON.parse(fs.readFileSync(path.join(root, "settings.json"), "utf-8"));
-var setRaw = JSON.parse(fs.readFileSync(path.join(root, "set.json"), "utf-8"));
+// ---- isolated config fixture (never reads user keys or mutable settings) --
+var settingsRaw = {
+  endpoint: "https://example.invalid/v1",
+  apiKeys: { smoke: "test-only" },
+  gpt: {
+    apiKeyGroup: "smoke",
+    models: {
+      weak: "gpt-5.4-mini",
+      strong: "gpt-5.4-mini",
+      kb: "gpt-5.4-mini",
+      premium: "gpt-5.5",
+    },
+  },
+};
+var setRaw = {
+  weak: { group: "gpt" },
+  strong: { group: "gpt" },
+  kb: { group: "gpt" },
+  premium: { group: "gpt" },
+};
 SETTINGS = normSettings(settingsRaw);
 
 var SET = {};

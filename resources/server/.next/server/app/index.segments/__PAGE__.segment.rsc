@@ -1,6 +1,6 @@
 1:"$Sreact.fragment"
 2:I[1304,[],"ClientPageRoot"]
-3:I[5027,["7330","static/chunks/d3ac728e-7c3d15b5c35eb56c.js","6626","static/chunks/6626-94bd6b870272b92e.js","4137","static/chunks/4137-131d0676e3b5bef7.js","8974","static/chunks/app/page-practice-ui-20260626-postclass-notes.js"],"default"]
+3:I[5027,["7330","static/chunks/d3ac728e-7c3d15b5c35eb56c.js","6626","static/chunks/6626-94bd6b870272b92e.js","4137","static/chunks/4137-131d0676e3b5bef7.js","8974","static/chunks/app/page-87daa6ca210ab9dc.js"],"default"]
 6:I[484,[],"OutletBoundary"]
 7:"$Sreact.suspense"
 0:{"buildId":"njVXGb7usguW54RCIuA0Z","rsc":["$","$1","c",{"children":[["$","$L2",null,{"Component":"$3","serverProvidedParams":{"searchParams":{},"params":{},"promises":["$@4","$@5"]}}],null,["$","$L6",null,{"children":["$","$7",null,{"name":"Next.MetadataOutlet","children":"$@8"}]}]]}],"loading":null,"isPartial":false}

@@ -9,7 +9,9 @@
  *   scan <filepath>                    — detect scanned PDF (JSON)
  *   render <filepath> <start> <end> [scale] — render pages as PNG base64 (JSON)
  */
-import { readFileSync, existsSync } from "fs";
+import { readFileSync, existsSync, statSync } from "fs";
+import fsPromises from "node:fs/promises";
+import os from "node:os";
 import { fileURLToPath, pathToFileURL } from "url";
 import path from "path";
 
@@ -76,9 +78,26 @@ function pdfjsResourcePath(directory) {
   return fsPath.endsWith("/") ? fsPath : fsPath + "/";
 }
 
-const [,, command, filePath, ...args] = process.argv;
+let [,, command, filePath, ...args] = process.argv;
+let coordinatorRequest = null;
+if (command === "--coordinator-ipc") {
+  const chunks = [];
+  let total = 0;
+  for await (const chunk of process.stdin) {
+    total += chunk.length;
+    if (total > 64 * 1024) throw new Error("pdf_worker_request_too_large");
+    chunks.push(chunk);
+  }
+  coordinatorRequest = JSON.parse(Buffer.concat(chunks).toString("utf8"));
+  command = String(coordinatorRequest.command || "");
+  filePath = String(coordinatorRequest.filePath || "");
+  if (command === "extract") args = [coordinatorRequest.startPage, coordinatorRequest.endPage].map(String);
+  else if (command === "extract_adaptive") args = [coordinatorRequest.startPage, coordinatorRequest.targetChars, coordinatorRequest.maxPages].map(String);
+  else if (command === "render") args = [coordinatorRequest.startPage, coordinatorRequest.endPage, coordinatorRequest.scale].map(String);
+  else args = [];
+}
 let canvasModule = null;
-if (command === "render") {
+if (command === "render" || command === "ocr_pages") {
   canvasModule = await import(findDependencyPath(path.join("@napi-rs", "canvas", "index.js")));
 }
 
@@ -122,6 +141,9 @@ const { getDocument, GlobalWorkerOptions } = await import(
 GlobalWorkerOptions.workerSrc = findPdfjsPath("legacy/build/pdf.worker.mjs");
 
 async function loadDoc() {
+  const inputStat = statSync(filePath);
+  if (!inputStat.isFile()) throw new Error("pdf_path_invalid");
+  if (inputStat.size > 256 * 1024 * 1024) throw new Error("pdf_file_too_large");
   const data = readFileSync(filePath);
   return getDocument({
     data: new Uint8Array(data.buffer, data.byteOffset, data.byteLength),
@@ -133,6 +155,9 @@ async function loadDoc() {
     useSystemFonts: true,
     disableAutoFetch: true,
     disableStream: true,
+    isEvalSupported: false,
+    maxImageSize: 16 * 1024 * 1024,
+    canvasMaxAreaInBytes: 64 * 1024 * 1024,
   }).promise;
 }
 
@@ -164,19 +189,38 @@ function canvasFactory() {
   };
 }
 
-async function renderPage(doc, pageNum, scale) {
+async function renderPageBuffer(doc, pageNum, scale) {
   if (!canvasModule) throw new Error("@napi-rs/canvas is required for PDF rendering");
   const page = await doc.getPage(pageNum);
-  const viewport = page.getViewport({ scale });
-  const canvas = canvasModule.createCanvas(Math.ceil(viewport.width), Math.ceil(viewport.height));
+  let viewport = page.getViewport({ scale });
+  const longest = Math.max(viewport.width, viewport.height);
+  if (longest > 2600) {
+    scale = scale * 2600 / longest;
+    viewport = page.getViewport({ scale });
+  }
+  const width = Math.ceil(viewport.width);
+  const height = Math.ceil(viewport.height);
+  if (width <= 0 || height <= 0 || width * height > 16 * 1024 * 1024 || width * height * 4 > 64 * 1024 * 1024) {
+    throw new Error("pdf_page_pixel_limit");
+  }
+  const canvas = canvasModule.createCanvas(width, height);
   const context = canvas.getContext("2d");
   await page.render({ canvasContext: context, viewport, canvasFactory: canvasFactory() }).promise;
-  return canvas.toBuffer("image/png").toString("base64");
+  const png = canvas.toBuffer("image/png");
+  canvas.width = 0;
+  canvas.height = 0;
+  if (png.length > 12 * 1024 * 1024) throw new Error("pdf_page_png_limit");
+  return png;
+}
+
+async function renderPage(doc, pageNum, scale) {
+  return (await renderPageBuffer(doc, pageNum, scale)).toString("base64");
 }
 
 async function main() {
   const doc = await loadDoc();
   const numPages = doc.numPages;
+  if (!Number.isInteger(numPages) || numPages < 1 || numPages > 5000) throw new Error("pdf_page_count_limit");
 
   switch (command) {
 
@@ -310,6 +354,37 @@ async function main() {
         pages.push({ page: i, pngB64: await renderPage(doc, i, scale) });
       }
       console.log(JSON.stringify({ pages, metadata: { numPages }, scale }));
+      break;
+    }
+
+    case "ocr_pages": {
+      if (!coordinatorRequest) throw new Error("ocr_coordinator_request_required");
+      const requested = Array.isArray(coordinatorRequest.pages) ? coordinatorRequest.pages : [];
+      const pageNumbers = requested.map(Number).filter((page, index, list) => Number.isInteger(page) && page >= 1 && page <= numPages && list.indexOf(page) === index).slice(0, 6);
+      if (!pageNumbers.length) throw new Error("ocr_pages_empty");
+      const tempDir = await fsPromises.mkdtemp(path.join(os.tmpdir(), "socratopia-pdf-ocr-"));
+      let totalBytes = 0;
+      try {
+        const items = [];
+        for (const pageNumber of pageNumbers) {
+          const png = await renderPageBuffer(doc, pageNumber, 225 / 72);
+          totalBytes += png.length;
+          if (totalBytes > 64 * 1024 * 1024) throw new Error("ocr_temp_limit");
+          const imagePath = path.join(tempDir, "page-" + pageNumber + ".png");
+          await fsPromises.writeFile(imagePath, png, { flag: "wx", mode: 0o600 });
+          items.push({ page: pageNumber, path: imagePath });
+        }
+        const runner = await import(pathToFileURL(path.join(__dirname, "ocr", "local-ocr-runner.mjs")).href);
+        const result = await runner.runLocalOcr({
+          tempDir,
+          items,
+          language: String(coordinatorRequest.expectedLanguage || "zh-Hans-CN"),
+          timeoutMs: coordinatorRequest.timeoutMs,
+        });
+        console.log(JSON.stringify(result));
+      } finally {
+        await fsPromises.rm(tempDir, { recursive: true, force: true }).catch(() => {});
+      }
       break;
     }
 

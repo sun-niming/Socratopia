@@ -79,12 +79,21 @@ async function execute(options) {
   try {
     var result = await reader.readTextbookExcerpt({
       filePath: options.filePath,
+      profileId: options.profileId,
+      worldId: options.worldId,
+      textbookId: options.textbookId,
+      accountId: options.accountId,
+      sessionEpoch: options.sessionEpoch,
+      expectedLanguage: options.expectedLanguage || (options.teachingLanguage === "english" ? "en-US" : options.teachingLanguage === "chinese-traditional" ? "zh-Hant-TW" : "zh-Hans-CN"),
       startPage: parsed.startPage,
       query: parsed.query,
       visualHint: parsed.request,
       maxPages: parsed.maxPages,
       allowOcr: parsed.allowOcr,
+      allowRemoteVision: parsed.allowRemoteVision,
       maxChars: 24000,
+      signal: options.signal,
+      deadlineAt: options.deadlineAt,
     });
     var meta = result.metadata;
     var prompt = [
@@ -96,8 +105,12 @@ async function execute(options) {
       "- 不调用 read_textbook_pages，不改变课堂进度，不把精读页视为已学习页。",
       "- queryFound=false 时，只能说在已检查的页码范围内未找到；不得扩张为整本教材不存在。",
       "- source=text-layer 时，说明证据来自 PDF 内嵌文字层/可复制文本，不是本轮视觉 OCR；若代码、公式或页码明显错位，表述为 PDF 文字层可能有误，并建议对照页面图像核验。",
-      "- source=ocr 时，说明证据来自本轮视觉转录，提示符号、大小写、下划线和代码换行可能有误，不得静默修正不确定代码字符。",
-      "- source=mixed 时，分别说明文字层页和视觉转录页；不要把所有问题笼统说成 OCR 转录问题。",
+      "- source=windows-ocr 时，说明证据来自本机 Windows OCR；提示公式、表格、符号、大小写、下划线和代码换行可能有误。",
+      "- source=rapidocr-v5 时，说明证据来自随软件离线运行的 PP-OCRv5；提示公式、表格、符号、大小写、下划线和代码换行可能有误。",
+      "- source=vision-transcription 时，说明证据来自本轮远程视觉转录；提示符号、大小写、下划线和代码换行可能有误，不得静默修正不确定代码字符。",
+      "- source=unresolved 时，明确该页没有取得可靠正文，不得用相邻页或常识补写。",
+      "- source=mixed 时，按 sourcesByPage 分别说明文字层、Windows OCR、离线 PP-OCRv5 或远程视觉转录；不要把所有问题笼统说成同一种 OCR 转录问题。",
+      "- 必须按 sourcesByPage 逐页描述来源，并只把 successfulPages 视为可引用页；failedPages 始终保持失败语义。",
       "- ocrErrors 非空时，明确说明视觉转录未配置或执行失败，不能把文字层未命中表述为页面视觉层也不存在。",
       "- 原文证据与常识性补充要明确区分；证据不完整时不得续写或猜测。",
       "元数据：" + JSON.stringify(meta),

@@ -100,6 +100,19 @@ assert.strictEqual(failed.state, "partial", "terminal chunk or fully degraded ma
 assert.strictEqual(failed.terminalFailedChunks, 1, "terminal failures are reported separately");
 assert.strictEqual(failed.activationEligible, false, "partial build is not activation eligible");
 
+var missingMiddlePage = Q.assessBuild(
+  [{ source_pages: [1, 4] }],
+  [{ start_page: 1, end_page: 4 }],
+  [{ type: "chunk_done", chunk: 1, cardCount: 1, method: "text-only", terminalFailure: false }],
+  1, 4,
+  { segments: [{ generated_by: "llm-validated" }], fallback_segments: 0 },
+  { requestedPages: 4, successfulPages: [1, 3, 4], failedPages: [{ page: 2, reason: "windows_ocr_failed" }], transcriptionComplete: false }
+);
+assert.strictEqual(missingMiddlePage.coverageRatio, 1, "span coverage alone would otherwise hide a missing middle page");
+assert.strictEqual(missingMiddlePage.state, "partial", "any unresolved OCR page must prevent a done KB");
+assert.strictEqual(missingMiddlePage.activationEligible, false);
+assert.deepStrictEqual(missingMiddlePage.failedPages, [{ page: 2, reason: "windows_ocr_failed" }]);
+
 var recoveredRetry = Q.assessBuild(
   [{ source_pages: [1, 40] }],
   [{}, {}],

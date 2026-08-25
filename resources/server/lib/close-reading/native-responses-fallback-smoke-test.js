@@ -31,6 +31,14 @@ function close(server) {
 
 async function main() {
   var calls = [];
+  var budgetCalls = [];
+  var previousBudget = global.__OCR_VISION_BUDGET__;
+  global.__OCR_VISION_BUDGET__ = {
+    run: function (request) {
+      budgetCalls.push(request);
+      return request.execute(new AbortController().signal);
+    }
+  };
   var server = await listen(async function (request, response) {
     var body = await readJson(request);
     calls.push({ path: request.url, authorization: request.headers.authorization, body: body });
@@ -66,8 +74,12 @@ async function main() {
     assert(calls.every(function (call) { return call.authorization === "Bearer test-key"; }));
     assert.strictEqual(calls[1].body.stream, true);
     assert.strictEqual(calls[3].body.stream, true);
+    assert.deepStrictEqual(budgetCalls.map(function (call) { return call.purpose; }), ["close-reading", "close-reading"]);
+    assert(budgetCalls.every(function (call) { return call.imageCount === 1 && call.maxOutputTokens > 0 && call.inputBytes > 0; }));
     console.log("close-reading native Responses fallback smoke: PASS");
   } finally {
+    if (previousBudget === undefined) delete global.__OCR_VISION_BUDGET__;
+    else global.__OCR_VISION_BUDGET__ = previousBudget;
     await close(server);
   }
 }

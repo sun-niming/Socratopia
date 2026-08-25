@@ -35269,24 +35269,50 @@ async function extractDepsZip(zipPath, target) {
   }
   (0, import_child_process3.execFileSync)("unzip", ["-q", "-o", zipPath, "-d", target], { stdio: "ignore" });
 }
-var SERVER_NODE_MODULES_SENTINELS = [
-  // Next.js framework + a deep file that's actually loaded at runtime
-  "next/package.json",
-  "next/dist/server/next-server.js",
-  // React runtime (Next.js SSR depends on these)
-  "react/package.json",
-  "react-dom/package.json",
-  // sharp: ships native binaries; the most AV-prone package in the bundle
-  "sharp/package.json"
-  // Note: @anthropic-ai/sdk and @google/generative-ai removed from sentinels —
-  // v103 BYOK build-strip moved them to providers.byok.ts which DCE removes
-  // from prod bundles. They're no longer in resources/server/ in production.
-];
-function nodeModulesIntact(nodeModulesDir) {
-  for (const rel of SERVER_NODE_MODULES_SENTINELS) {
-    if (!import_fs5.default.existsSync(import_path4.default.join(nodeModulesDir, rel))) return false;
+var RUNTIME_MANIFEST_SHA256 = "a4173fa88bcdb2d56f263aab24271bc273c6e02368404d15176593c1e4354e6e";
+function runtimeSha256(filePath) {
+  return import_crypto.default.createHash("sha256").update(import_fs5.default.readFileSync(filePath)).digest("hex");
+}
+function runtimeEntryPath(root, relative) {
+  if (typeof relative !== "string" || !relative || relative.includes("\\") || relative.startsWith("/") || relative.split("/").some((part) => !part || part === "." || part === "..")) throw new Error(`Invalid runtime manifest path: ${relative}`);
+  const rootPath = import_path4.default.resolve(root);
+  const resolved = import_path4.default.resolve(rootPath, ...relative.split("/"));
+  if (!resolved.startsWith(rootPath + import_path4.default.sep)) throw new Error(`Runtime manifest path escapes root: ${relative}`);
+  return resolved;
+}
+function loadRuntimeManifest(serverDir) {
+  const manifestPath = import_path4.default.join(serverDir, "release-runtime-manifest.json");
+  const stat = import_fs5.default.lstatSync(manifestPath);
+  if (!stat.isFile() || stat.isSymbolicLink()) throw new Error("Runtime manifest is not a regular file");
+  if (runtimeSha256(manifestPath) !== RUNTIME_MANIFEST_SHA256) throw new Error("Runtime manifest integrity check failed");
+  const manifest = JSON.parse(import_fs5.default.readFileSync(manifestPath, "utf8"));
+  if (!manifest || manifest.version !== 1 || !manifest.archive || !Array.isArray(manifest.nodeModules) || !Array.isArray(manifest.server)) throw new Error("Runtime manifest format is invalid");
+  return manifest;
+}
+function verifyRuntimeEntry(root, entry) {
+  if (!entry || !Number.isSafeInteger(entry.bytes) || entry.bytes < 0 || !/^[a-f0-9]{64}$/.test(entry.sha256 || "")) throw new Error("Runtime manifest entry is invalid");
+  const filePath = runtimeEntryPath(root, entry.path);
+  const stat = import_fs5.default.lstatSync(filePath);
+  if (!stat.isFile() || stat.isSymbolicLink() || stat.size !== entry.bytes || runtimeSha256(filePath) !== entry.sha256) throw new Error(`Runtime integrity check failed: ${entry.path}`);
+}
+function verifyRuntimeManifest(serverDir, nodeModulesDir) {
+  const manifest = loadRuntimeManifest(serverDir);
+  verifyRuntimeEntry(serverDir, manifest.archive);
+  for (const entry of manifest.server) verifyRuntimeEntry(serverDir, entry);
+  if (nodeModulesDir) for (const entry of manifest.nodeModules) verifyRuntimeEntry(nodeModulesDir, entry);
+  return manifest;
+}
+function nodeModulesIntact(nodeModulesDir, bundled) {
+  try {
+    const manifest = loadRuntimeManifest(bundled);
+    const rootStat = import_fs5.default.lstatSync(nodeModulesDir);
+    if (!rootStat.isDirectory() || rootStat.isSymbolicLink()) return false;
+    for (const entry of manifest.nodeModules) verifyRuntimeEntry(nodeModulesDir, entry);
+    return true;
+  } catch (error) {
+    log(`Runtime node_modules integrity check failed: ${error?.message || error}`);
+    return false;
   }
-  return true;
 }
 function getServerNodeModulesPath(serverDir) {
   return import_path4.default.join(serverDir, ".next", "node_modules");
@@ -35297,49 +35323,66 @@ function getBundledServerDir() {
 function getServerVersionMarkerDir() {
   return import_path4.default.join(import_electron5.app.getPath("userData"), "server");
 }
-async function ensureNodeModules(zipPath, target) {
-  if (nodeModulesIntact(target)) return;
+async function ensureNodeModules(zipPath, target, bundled) {
+  if (nodeModulesIntact(target, bundled)) return;
+  const parent = import_path4.default.dirname(target);
+  import_fs5.default.mkdirSync(parent, { recursive: true });
+  const suffix = `${process.pid}-${Date.now()}`;
+  const repair = import_path4.default.join(parent, `.node_modules-repair-${suffix}`);
+  const backup = import_path4.default.join(parent, `.node_modules-backup-${suffix}`);
+  const failed = import_path4.default.join(parent, `.node_modules-failed-${suffix}`);
+  let movedOld = false;
   try {
-    import_fs5.default.rmSync(target, { recursive: true, force: true });
-  } catch {
-  }
-  import_fs5.default.mkdirSync(target, { recursive: true });
-  await extractDepsZip(zipPath, target);
-  if (!nodeModulesIntact(target)) {
-    throw new Error(`Bundle damaged \u2014 deps.zip extracted to ${target} but required modules are missing. Reinstall Socratopia.`);
+    import_fs5.default.mkdirSync(repair, { recursive: false });
+    await extractDepsZip(zipPath, repair);
+    if (!nodeModulesIntact(repair, bundled)) throw new Error("deps.zip failed runtime manifest verification");
+    if (import_fs5.default.existsSync(target)) {
+      import_fs5.default.renameSync(target, backup);
+      movedOld = true;
+    }
+    try {
+      import_fs5.default.renameSync(repair, target);
+    } catch (error) {
+      if (movedOld && !import_fs5.default.existsSync(target)) import_fs5.default.renameSync(backup, target);
+      throw error;
+    }
+    if (!nodeModulesIntact(target, bundled)) throw new Error("repaired runtime failed final verification");
+    if (movedOld) {
+      try { import_fs5.default.rmSync(backup, { recursive: true, force: true }); } catch (error) { log(`Runtime repair backup cleanup deferred: ${error?.message || error}`); }
+    }
+  } catch (error) {
+    if (movedOld && import_fs5.default.existsSync(backup)) {
+      try {
+        if (import_fs5.default.existsSync(target)) import_fs5.default.renameSync(target, failed);
+        if (!import_fs5.default.existsSync(target)) import_fs5.default.renameSync(backup, target);
+      } catch (rollbackError) {
+        log(`Runtime repair rollback failed: ${rollbackError?.message || rollbackError}`);
+      }
+    }
+    throw new Error(`Bundle damaged \u2014 runtime repair failed (${error?.message || error}). Reinstall or repair Socratopia.`);
+  } finally {
+    try { if (import_fs5.default.existsSync(repair)) import_fs5.default.rmSync(repair, { recursive: true, force: true }); } catch {}
+    try { if (import_fs5.default.existsSync(failed)) import_fs5.default.rmSync(failed, { recursive: true, force: true }); } catch {}
   }
 }
 async function prepareServerDir() {
   const bundled = getBundledServerDir();
   const depsZip = import_path4.default.join(bundled, "deps.zip");
   const bundledNodeModules = getServerNodeModulesPath(bundled);
-  if (!import_fs5.default.existsSync(depsZip)) {
-    if (!import_fs5.default.existsSync(bundledNodeModules)) {
-      throw new Error(
-        `Bundled deps missing \u2014 neither ${depsZip} nor ${bundledNodeModules} found. Reinstall Socratopia.`
-      );
-    }
-    return bundled;
-  }
+  verifyRuntimeManifest(bundled);
   const nmLink = bundledNodeModules;
   const versionDir = getServerVersionMarkerDir();
   const vFile = import_path4.default.join(versionDir, ".version");
   const ver = import_electron5.app.getVersion();
   const cur = import_fs5.default.existsSync(vFile) ? import_fs5.default.readFileSync(vFile, "utf-8").trim() : "";
-  const intact = nodeModulesIntact(nmLink);
-  if (cur !== ver || !intact) {
-    if (cur === ver && import_fs5.default.existsSync(nmLink)) {
-      log(`Self-heal: server node_modules failed integrity check, wiping ${nmLink} for re-extract`);
-    }
-    try {
-      import_fs5.default.rmSync(nmLink, { recursive: true, force: true });
-    } catch {
-    }
-  }
-  if (!nodeModulesIntact(nmLink)) {
-    import_fs5.default.mkdirSync(import_path4.default.dirname(nmLink), { recursive: true });
+  const intact = nodeModulesIntact(nmLink, bundled);
+  if (!intact) {
+    log(`Self-heal: server node_modules failed runtime manifest verification; preparing verified replacement for ${nmLink}`);
     import_fs5.default.mkdirSync(versionDir, { recursive: true });
-    await ensureNodeModules(depsZip, nmLink);
+    await ensureNodeModules(depsZip, nmLink, bundled);
+  }
+  if (cur !== ver || !intact) {
+    import_fs5.default.mkdirSync(versionDir, { recursive: true });
     import_fs5.default.writeFileSync(vFile, ver);
   }
   return bundled;

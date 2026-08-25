@@ -32,11 +32,29 @@ function response(content) {
   return { choices: [{ message: { content: content } }], usage: { prompt_tokens: 20, completion_tokens: 10 } };
 }
 
+function authenticateServer(env, accountId, sessionEpoch) {
+  return new Promise(function (resolve, reject) {
+    var timer = setTimeout(function () {
+      env.serverProcess.removeListener("message", onMessage);
+      reject(new Error("auth-state ACK timeout"));
+    }, 5000);
+    function onMessage(message) {
+      if (!message || message.type !== "socratopia:auth-state-ack:v1" || message.sequence !== 1) return;
+      clearTimeout(timer);
+      env.serverProcess.removeListener("message", onMessage);
+      resolve();
+    }
+    env.serverProcess.on("message", onMessage);
+    env.serverProcess.send({ type: "socratopia:auth-state:v1", sequence: 1, active: true, accountId: accountId, sessionEpoch: sessionEpoch });
+  });
+}
+
 async function main() {
   var env = new TestEnvironment();
   try {
     await env.setup();
     var accountId = "local";
+    await authenticateServer(env, accountId, 1);
     var profileId = "test";
     var worldId = "test";
     var textbookId = "math";
@@ -58,7 +76,7 @@ async function main() {
 
     env.mockLLM.setResponse(response("PDF 第 1 页：void sort 的注释说明。"));
     var body = {
-      conversationId: conversationId, profileId: profileId, worldId: worldId, textbookId: textbookId,
+      conversationId: conversationId, profileId: profileId, worldId: worldId, textbookId: textbookId, sessionEpoch: 1,
       messages: [{ role: "user", content: "/Close_Reading 第1页 void sort，解释并记住这次精读" }],
       apiKey: "mock-key", provider: "openai", model: "mock-strong", teachingLanguage: "chinese", character: "npc_a",
     };

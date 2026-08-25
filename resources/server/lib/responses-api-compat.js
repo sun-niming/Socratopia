@@ -449,14 +449,18 @@ function nativePost(urlValue, rawBody, options, stage) {
   options = options || {};
   var url = urlValue instanceof URL ? urlValue : new URL(urlValue);
   var transport = url.protocol === "https:" ? https : http;
+  var signal = options.signal;
+  if (signal && signal.aborted) return Promise.reject(signal.reason instanceof Error ? signal.reason : Object.assign(new Error("request aborted"), { code: "ABORT_ERR" }));
   var headers = headerObject(options.headers);
   setHeader(headers, "Content-Type", headers["Content-Type"] || "application/json; charset=utf-8");
   setHeader(headers, "Content-Length", Buffer.byteLength(rawBody));
   if (!Object.keys(headers).some(function (key) { return key.toLowerCase() === "connection"; })) headers.Connection = "close";
   var timeoutMs = Math.max(1, Number(options.timeoutMs) || 120000);
+  var maxResponseBytes = Math.min(32 * 1024 * 1024, Math.max(1024, Number(options.maxResponseBytes) || 8 * 1024 * 1024));
   return new Promise(function (resolve, reject) {
     var settled = false;
     var timer;
+    var abortRequest;
     var requestOptions = { method: "POST", agent: false, headers: headers };
     if (url.protocol === "https:") requestOptions.ALPNProtocols = ["http/1.1"];
     var startedAt = Date.now();
@@ -464,16 +468,28 @@ function nativePost(urlValue, rawBody, options, stage) {
       if (settled) return;
       settled = true;
       clearTimeout(timer);
+      if (signal && abortRequest) signal.removeEventListener("abort", abortRequest);
       reject(error);
     }
     var request = transport.request(url, requestOptions, function (response) {
       var chunks = [];
+      var responseBytes = 0;
       function truncatedResponseError(event) {
         var error = new Error("native " + stage + " response " + event + " before completion");
         error.code = "ECONNRESET";
         return error;
       }
-      response.on("data", function (chunk) { chunks.push(chunk); });
+      response.on("data", function (chunk) {
+        responseBytes += chunk.length;
+        if (responseBytes > maxResponseBytes) {
+          var error = new Error("native response body too large");
+          error.code = "response_body_too_large";
+          rejectOnce(error);
+          response.destroy(error);
+          return;
+        }
+        chunks.push(chunk);
+      });
       response.on("error", rejectOnce);
       response.on("aborted", function () { rejectOnce(truncatedResponseError("aborted")); });
       response.on("close", function () {
@@ -487,6 +503,7 @@ function nativePost(urlValue, rawBody, options, stage) {
         }
         settled = true;
         clearTimeout(timer);
+        if (signal && abortRequest) signal.removeEventListener("abort", abortRequest);
         var result = {
           statusCode: response.statusCode || 0,
           statusMessage: response.statusMessage || "",
@@ -506,6 +523,18 @@ function nativePost(urlValue, rawBody, options, stage) {
       rejectOnce(error);
       request.destroy(error);
     }, timeoutMs);
+    if (signal) {
+      abortRequest = function () {
+        var error = signal.reason instanceof Error ? signal.reason : Object.assign(new Error("request aborted"), { code: "ABORT_ERR" });
+        rejectOnce(error);
+        request.destroy(error);
+      };
+      signal.addEventListener("abort", abortRequest, { once: true });
+      if (signal.aborted) {
+        abortRequest();
+        return;
+      }
+    }
     request.on("error", rejectOnce);
     request.write(rawBody);
     request.end();

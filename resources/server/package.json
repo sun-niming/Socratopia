@@ -18,6 +18,8 @@
     "package:win": "set -a && . ./.env.local && set +a && NEXT_PUBLIC_ALLOW_BYOK=false npm run build && bash scripts/verify-byok-stripped.sh && BUILD_TARGET=win bash scripts/prepare-build.sh && node scripts/verify-server-sentinels.mjs && NEXT_PUBLIC_ALLOW_BYOK=false node scripts/build-electron.mjs && npx electron-builder --win --x64 && bash scripts/verify-package-clean.sh release/win-unpacked/resources && node scripts/verify-release-yml.mjs && bash scripts/verify-no-sourcemaps.sh && node scripts/smoke-test-bundle.mjs"
   },
   "dependencies": {
+    "@napi-rs/canvas": "0.1.100",
+    "@napi-rs/canvas-win32-x64-msvc": "0.1.100",
     "@anthropic-ai/sdk": "^0.78.0",
     "@google/generative-ai": "^0.24.1",
     "@tailwindcss/postcss": "^4.2.1",

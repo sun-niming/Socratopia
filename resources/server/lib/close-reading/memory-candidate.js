@@ -40,7 +40,7 @@ function buildCandidate(result, answer, command) {
     endPage: result.endPage || metadata.endPage,
     source: result.source || metadata.source,
     query: command.query || null,
-    visionCaution: ["vision-transcription", "ocr", "mixed"].indexOf(result.source || metadata.source) >= 0,
+    visionCaution: ["vision-transcription", "windows-ocr", "rapidocr-v5", "ocr", "mixed"].indexOf(result.source || metadata.source) >= 0,
   };
 }
 

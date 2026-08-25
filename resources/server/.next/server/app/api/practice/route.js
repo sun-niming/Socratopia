@@ -1,7 +1,14 @@
 (()=>{var a={};a.id=59005,a.ids=[59005],a.modules={261:a=>{"use strict";a.exports=require("next/dist/shared/lib/router/utils/app-paths")},3295:a=>{"use strict";a.exports=require("next/dist/server/app-render/after-task-async-storage.external.js")},10846:a=>{"use strict";a.exports=require("next/dist/compiled/next-server/app-page.runtime.prod.js")},29294:a=>{"use strict";a.exports=require("next/dist/server/app-render/work-async-storage.external.js")},59006:(a,b,c)=>{"use strict";c.r(b),c.d(b,{handler:()=>C,patchFetch:()=>B,routeModule:()=>x,serverHooks:()=>A,workAsyncStorage:()=>y,workUnitAsyncStorage:()=>z});var d={};c.r(d),c.d(d,{GET:()=>wGET,POST:()=>wPOST});var e=c(19225),f=c(84006),g=c(8317),h=c(99373),i=c(34775),j=c(24235),k=c(261),l=c(54365),m=c(90771),n=c(73461),o=c(67798),p=c(92280),q=c(62018),r=c(45696),s=c(47929),t=c(86439),u=c(37527),v=c(45592);/* TEMPORARY: createPracticeLLMCaller - inline LLM caller for the practice workbench. Replace with proper abstraction once practice stabilizes. */
 function createPracticeLLMCaller(mc, model) {
   return async function (p) {
-    var r = await fetch(mc.baseUrl + "/chat/completions", {
+    var requestController = new AbortController();
+    var sourceSignal = p.signal;
+    var onAbort = function () { requestController.abort(sourceSignal && sourceSignal.reason); };
+    if (sourceSignal) sourceSignal.addEventListener("abort", onAbort, { once: true });
+    var remainingMs = Number.isFinite(Number(p.deadlineAt)) ? Number(p.deadlineAt) - Date.now() : 180000;
+    var requestTimer = setTimeout(function () { requestController.abort(new Error("practice_request_deadline")); }, Math.max(1, Math.min(180000, remainingMs)));
+    var r;
+    try { r = await fetch(mc.baseUrl + "/chat/completions", {
       method: "POST",
       headers: { "Content-Type": "application/json", "Authorization": "Bearer " + mc.apiKey },
       body: JSON.stringify({
@@ -14,8 +21,12 @@ function createPracticeLLMCaller(mc, model) {
         temperature: typeof p.temperature === "number" ? p.temperature : 0.4,
         max_tokens: p.maxTokens || 4096,
         response_format: { type: "json_object" }
-      })
-    });
+      }),
+      signal: requestController.signal
+    }); } finally {
+      clearTimeout(requestTimer);
+      if (sourceSignal) sourceSignal.removeEventListener("abort", onAbort);
+    }
     if (!r.ok) { var t = await r.text(); throw new Error("LLM API " + r.status + ": " + t.slice(0, 200)); }
     var d = await r.json();
     if (d.usage) {
@@ -81,8 +92,8 @@ function _norm(s) {
   return String(s == null ? "" : s).trim().toLowerCase().replace(/[\s。.!！？?，,;；:：、]+$/g, "").replace(/\s+/g, " ");
 }
 
-function _jsonErr(code, message, status, headers) {
-  return v.NextResponse.json({ error: code, message: message }, { status: status, headers: headers });
+function _jsonErr(code, message, status, headers, details) {
+  return v.NextResponse.json(Object.assign({ error: code, message: message }, details || {}), { status: status, headers: headers });
 }
 
 function _stageCService() {
@@ -146,8 +157,8 @@ async function _commitPracticeEvidence(P, service, handle, ids, record, draft) {
 // Delegate to the standalone source adapter (global.__PRACTICE_SOURCE__, loaded
 // by server.js). Falls back to a local require so the route still works if the
 // global was not set. Returns { text, kind } on success, or { error, message }.
-async function _resolveAdapterSource(SA, body) {
-  if (SA && typeof SA.resolveSourceTextAsync === "function") return await SA.resolveSourceTextAsync(body);
+async function _resolveAdapterSource(SA, body, options) {
+  if (SA && typeof SA.resolveSourceTextAsync === "function") return await SA.resolveSourceTextAsync(body, options);
   if (SA && typeof SA.resolveSourceText === "function") return SA.resolveSourceText(body);
   return null;
 }
@@ -171,7 +182,7 @@ async function _resolveConversationSelection(SA, body, label) {
   return { error: "no_source", message: errors.join("；") || "No readable conversation sources." };
 }
 
-async function _resolveSource(body) {
+async function _resolveSource(body, options) {
   var SA = global.__PRACTICE_SOURCE__;
   if (!SA) {
     try { SA = require("../../../../../lib/practice/source-adapter.js"); }
@@ -184,7 +195,8 @@ async function _resolveSource(body) {
     delete noFocusBody.sourceText;
     var tb = Object.assign({}, noFocusBody, { sourceType: "textbook-page" });
     var cv = Object.assign({}, noFocusBody, { sourceType: "conversation" });
-    var r1 = await _resolveAdapterSource(SA, tb);
+    var r1 = await _resolveAdapterSource(SA, tb, options);
+    if (r1 && r1.error === "source_incomplete") return r1;
     if (r1 && r1.text) parts.push("【教材范围】\n" + r1.text);
     else if (r1 && r1.message) errors.push(r1.message);
     var r2 = await _resolveConversationSelection(SA, cv, "课堂");
@@ -205,12 +217,12 @@ async function _resolveSource(body) {
     return conversations;
   }
   if (SA && (typeof SA.resolveSourceTextAsync === "function" || typeof SA.resolveSourceText === "function")) {
-    var resolved = await _resolveAdapterSource(SA, body);
-    if (resolved && resolved.error && body && body.sourceType === "textbook-page" && Array.isArray(body.conversationIds) && body.conversationIds.length) {
+    var resolved = await _resolveAdapterSource(SA, body, options);
+    if (resolved && resolved.error === "no_source" && body && body.sourceType === "textbook-page" && Array.isArray(body.conversationIds) && body.conversationIds.length) {
       var fallback = await _resolveConversationSelection(SA, Object.assign({}, body, { sourceType: "conversation" }), "课堂范围");
       if (fallback && fallback.text) return { text: fallback.text, kind: "textbook-page:conversation-fallback" };
     }
-    if (resolved && resolved.error && body.focusText && typeof body.focusText === "string" && body.focusText.trim()) {
+    if (resolved && resolved.error === "no_source" && body.focusText && typeof body.focusText === "string" && body.focusText.trim()) {
       return { text: body.focusText.trim(), kind: (body.sourceType || "manual") + ":focusText-fallback" };
     }
     return resolved;
@@ -235,14 +247,25 @@ function _conceptGraphContext(body) {
 
 // ===== Action handlers =====
 
-async function _doGenerate(body, h) {
+async function _doGenerate(body, h, signal, requestContext, deadlineAt) {
   var P = global.__PRACTICE__;
   if (!P) return _jsonErr("practice_unavailable", "practice data layer not loaded", 500, h);
   var pid = body.profileId, wid = body.worldId;
   if (!pid || !wid) return _jsonErr("missing_params", "profileId and worldId required", 400, h);
 
-  var source = await _resolveSource(body);
-  if (!source || source.error) return _jsonErr("no_source", (source && source.message) || "No source text. Provide sourceText, a textbook page, a chapter, or a conversation summary.", 404, h);
+  var source = await _resolveSource(body, { signal: signal, deadlineAt: deadlineAt, accountContext: requestContext && { active: true, accountId: requestContext.accountId, sessionEpoch:requestContext.sessionEpoch } });
+  if (!source || source.error) {
+    var sourceError = source && source.error || "no_source";
+    var sourceDetails = source && source.requestedPages ? {
+      requestedPages: source.requestedPages,
+      successfulPages: source.successfulPages,
+      failedPages: source.failedPages,
+      status: source.status,
+      processingComplete: source.processingComplete,
+      transcriptionComplete: source.transcriptionComplete
+    } : undefined;
+    return _jsonErr(sourceError, (source && source.message) || "No source text. Provide sourceText, a textbook page, a chapter, or a conversation summary.", sourceError === "source_incomplete" ? 422 : 404, h, sourceDetails);
+  }
 
   var callLLM = _resolveLLM(body);
   if (!callLLM) return _jsonErr("no_llm", "No LLM available. Provide apiKey or configure set.json strong model.", 400, h);
@@ -299,7 +322,7 @@ async function _doGenerate(body, h) {
     (zh ? "要求: choice 题必须有 choices 和 correctIndex; fill/short-answer/step 必须有 correctAnswer 和 solution; 每题至少一个 knowledgePoint; 不要把题型集中成单一类型,必须按结构分配。" : "Rules: choice needs choices+correctIndex; others need correctAnswer+solution; each problem >= 1 knowledgePoint; do not collapse into one type, follow the structure exactly.");
 
   var raw;
-  try { raw = await callLLM({ system: sys, user: user, temperature: 0.5, maxTokens: 6000 }); }
+  try { raw = await callLLM({ system: sys, user: user, temperature: 0.5, maxTokens: 6000, signal: signal, deadlineAt: deadlineAt }); }
   catch (e) { return _jsonErr("llm_error", "LLM call failed: " + (e && e.message), 502, h); }
   var parsed = _extractJson(raw);
   if (!parsed) return _jsonErr("parse_error", "Failed to parse LLM JSON", 502, h);
@@ -310,7 +333,13 @@ async function _doGenerate(body, h) {
     profileId: pid, worldId: wid,
     textbookId: body.textbookId || undefined,
     textbookTitle: body.textbookTitle || undefined,
-    pages: Array.isArray(body.pageRange) ? body.pageRange : undefined,
+    pages: Array.isArray(source.successfulPages) ? source.successfulPages : (Array.isArray(body.pageRange) ? body.pageRange : undefined),
+    requestedPages: Array.isArray(source.requestedPages) ? source.requestedPages : undefined,
+    successfulPages: Array.isArray(source.successfulPages) ? source.successfulPages : undefined,
+    failedPages: Array.isArray(source.failedPages) ? source.failedPages : undefined,
+    status: source.status || undefined,
+    processingComplete: typeof source.processingComplete === "boolean" ? source.processingComplete : undefined,
+    transcriptionComplete: typeof source.transcriptionComplete === "boolean" ? source.transcriptionComplete : undefined,
     conversationId: body.conversationId || undefined,
     conversationIds: Array.isArray(body.conversationIds) ? body.conversationIds.slice(0, 12) : undefined,
     sourceType: body.sourceType || source.kind,
@@ -1120,11 +1149,13 @@ async function wGET(a) {
 
 async function wPOST(a) {
   var h = { "Cache-Control": "private, no-store" };
+  var requestContext = typeof global.__SOCRATOPIA_ACCOUNT_CONTEXT__ === "function" ? global.__SOCRATOPIA_ACCOUNT_CONTEXT__() : null;
+  var requestDeadlineAt = Date.now() + 60000;
   var b = {};
   try { b = await a.json(); } catch (e) { return _jsonErr("invalid_json", "Request body must be valid JSON", 400, h); }
   var action = b.action || "";
   try {
-    if (action === "generate") return await _doGenerate(b, h);
+    if (action === "generate") return await _doGenerate(b,h,a.signal,requestContext,requestDeadlineAt);
     if (action === "grade") {
       var service = _stageCService();
       var hasAuthorization = false;

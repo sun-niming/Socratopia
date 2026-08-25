@@ -213,7 +213,9 @@ console.log("  14. Path traversal blocked: PASS");
 var ACC = "acc1";
 var accWorldRel = path.join("accounts", ACC, "profiles", PID, "worlds", WID);
 writeFile(path.join(accWorldRel, "textbooks", "tb_acc", "pages", "1.txt"), "Account-scoped page one.");
+global.__SOCRATOPIA_ACCOUNT_CONTEXT__ = function () { return { active: true, accountId: ACC, sessionEpoch: 1 }; };
 var r15 = SA.resolveSourceText({ profileId: PID, worldId: WID, sourceType: "textbook-page", textbookId: "tb_acc", page: 1 });
+delete global.__SOCRATOPIA_ACCOUNT_CONTEXT__;
 assert(!r15.error, "account-scoped: no error");
 assert(r15.text.indexOf("Account-scoped page one") >= 0, "account-scoped: reads under accounts/<id>/profiles/...");
 console.log("  15. Account-scoped layout: PASS");
@@ -295,6 +297,21 @@ console.log("  16. ConceptGraph optional context: PASS");
     });
     return child;
   };
+  global.__PDF_OCR_COORDINATOR__ = {
+    run: async function (request) {
+      spawnCalls++;
+      var requested = [];
+      for (var page = request.startPage; page <= request.endPage; page++) requested.push(page);
+      requestedBatches.push(requested);
+      if (requested.indexOf(88) >= 0) {
+        timeoutKilled = true;
+        timeoutJobDir = path.join(TMP, "coordinator-owned-cleaned-job");
+        throw new Error("pdf_worker_timeout");
+      }
+      await new Promise(function (resolve) { process.nextTick(resolve); });
+      return { pageResults: requested.map(function (page) { return { page: page, text: "Asynchronously extracted page " + page + ".", source: "windows-ocr" }; }) };
+    }
+  };
 
   try {
     var asyncPdf = await SA.resolveSourceTextAsync({
@@ -348,7 +365,7 @@ console.log("  16. ConceptGraph optional context: PASS");
       textbookId: TID6,
       pageRange: [10, 11]
     });
-    assert(textbookCurrentReading.kind === "textbook-page:current_reading", "async textbook page: current_reading fallback remains available");
+    assert(textbookCurrentReading.kind === "textbook-page:current_reading", "async textbook page: current_reading fallback remains available when no PDF OCR was attempted");
 
     var chapterFilePriority = await SA.resolveSourceTextAsync({
       profileId: PID,
@@ -359,7 +376,7 @@ console.log("  16. ConceptGraph optional context: PASS");
       pageRange: [20, 21]
     });
     assert(chapterFilePriority.kind === "chapter:chapter-file" && chapterFilePriority.text.indexOf("Authoritative") >= 0,
-      "async chapter range: chapter file wins over current_reading after page miss");
+      "async chapter range: chapter file wins over current_reading when no PDF OCR was attempted");
 
     var spawnBeforeConcurrent = spawnCalls;
     var concurrentResults = await Promise.all([
@@ -377,7 +394,7 @@ console.log("  16. ConceptGraph optional context: PASS");
     });
     if (previousTimeout === undefined) delete process.env.PRACTICE_PDF_TIMEOUT_MS;
     else process.env.PRACTICE_PDF_TIMEOUT_MS = previousTimeout;
-    assert(timeoutResult.error === "no_source", "async PDF timeout: returns a source miss instead of hanging");
+    assert(timeoutResult.error === "source_incomplete" && timeoutResult.status === "processed_with_failures", "async PDF timeout: returns explicit failed-page metadata instead of hanging");
     assert(timeoutKilled, "async PDF timeout: terminates the worker");
     assert(timeoutJobDir && !fs.existsSync(timeoutJobDir), "async PDF timeout: removes the parent-owned OCR temp directory");
 
@@ -400,6 +417,7 @@ console.log("  16. ConceptGraph optional context: PASS");
   } finally {
     childProcess.spawn = originalSpawn;
     childProcess.spawnSync = originalSpawnSync;
+    delete global.__PDF_OCR_COORDINATOR__;
   }
   console.log("  17. Async extraction boundary: PASS");
 

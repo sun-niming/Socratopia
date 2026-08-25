@@ -161,7 +161,7 @@ async function frontendChecks() {
     "page-3a1fef7566e26c43.js",
     "page-practice-ui-20260622.js",
     "page-practice-ui-20260625-jyfix.js",
-    "page-practice-ui-20260626-postclass-notes.js"
+    "page-87daa6ca210ab9dc.js"
   ].map(function (name) { return path.join(__dirname, "../../../../static/chunks/app", name); });
   var modules = files.map(function (file) { return extractModule(fs.readFileSync(file, "utf8")); });
   modules.slice(1).forEach(function (value) { assert.strictEqual(value, modules[0], "signed helper semantics must match across bundles"); });

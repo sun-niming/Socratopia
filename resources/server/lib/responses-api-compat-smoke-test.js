@@ -171,6 +171,24 @@ async function testNativeRetriesShareTimeoutBudget() {
   }
 }
 
+async function testNativeResponseLimit() {
+  var server = await listen(async function (request, response) {
+    await readRequest(request);
+    response.writeHead(200, { "Content-Type": "application/json" });
+    response.end(JSON.stringify({ choices: [{ message: { content: "x".repeat(4096) } }] }));
+  });
+  try {
+    var url = "http://127.0.0.1:" + server.address().port + "/v1/chat/completions";
+    await assert.rejects(compat.postChatCompletionsJson(url, {
+      model: "test", messages: [], stream: false
+    }, { timeoutMs: 5000, maxResponseBytes: 1024, logger: { warn: function () {} } }), function (error) {
+      return error && error.code === "response_body_too_large";
+    });
+  } finally {
+    await close(server);
+  }
+}
+
 async function main() {
   assert.strictEqual(
     compat.responsesUrl("https://example.test/v1/chat/completions"),
@@ -352,6 +370,7 @@ async function main() {
   await testNativeHttpFallback();
   await testNativeTruncatedResponseRejects();
   await testNativeRetriesShareTimeoutBudget();
+  await testNativeResponseLimit();
 
   console.log("responses-api-compat smoke test: PASS");
 }

@@ -7,24 +7,24 @@
  *
  * Pipeline:
  *   PDF  -> pdfjs text extract per page -> sparse image-dense pages rendered
- *           to PNG -> chunks (text + images) -> multimodal card model (one
- *           pass: transcribe images + produce structured cards) -> teaching map.
- *           If card model rejects images -> auto-fall-back to text-only.
- *           If set.json.vision exists -> optional third-level fallback.
+ *           to PNG -> local OCR text -> text-only card model -> teaching map.
+ *           Page images are never sent to card/premium teaching models.
+ *           Independent ocrVision is optional only after explicit job consent.
  *   MD   -> read + split into page-like blocks -> chunk -> card model -> cards.
  *   PPTX -> extract slide text from OpenXML -> chunk -> card model -> cards.
  *
  * ZERO hardcoded config. Every model / apiKey / baseUrl arrives via env, which
  * the parent fills from global.__SOCRATOPIA_SET__ (set.json + settings.json):
  *   KB_CARD_BASEURL / KB_CARD_APIKEY / KB_CARD_MODEL / KB_CARD_MAXINPUT  (kb||strong)
- *   KB_VISION_BASEURL / KB_VISION_APIKEY / KB_VISION_MODEL               (vision; optional fallback)
+ *   KB_ALLOW_REMOTE_VISION + KB_VISION_*  (independent ocrVision; explicit opt-in only)
  * Job inputs:
  *   KB_TEXTBOOK_DIR  KB_SRC_PATH  KB_FORMAT(pdf|markdown|pptx)  KB_TITLE  KB_LANG
  *   KB_START_PAGE  KB_END_PAGE  KB_PAGES_PER_CHUNK  KB_MAX_CHUNKS
  *
  * Usage: node kb-builder.mjs   (all input via env)
  */
-import { readFileSync, writeFileSync, existsSync, mkdirSync, readdirSync, renameSync } from "fs";
+import { readFileSync, writeFileSync, existsSync, mkdirSync, readdirSync, renameSync, createReadStream, createWriteStream } from "fs";
+import readline from "readline";
 import { fileURLToPath, pathToFileURL } from "url";
 import path from "path";
 import { inflateRawSync } from "zlib";
@@ -34,6 +34,77 @@ import KBPublisher from "./kb-publisher.js";
 import ResponsesCompat from "./responses-api-compat.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const SUPERVISED = process.env.KB_SUPERVISED === "1";
+let supervisorSequence = 0;
+let supervisorRequests = null;
+let supervisorWriter = null;
+let supervisorResponses = null;
+
+if (SUPERVISED) {
+  supervisorRequests = new Map();
+  supervisorWriter = createWriteStream(null, { fd: 3, autoClose: false });
+  supervisorResponses = readline.createInterface({ input: createReadStream(null, { fd: 4, autoClose: false }), crlfDelay: Infinity });
+  supervisorResponses.on("line", function (line) {
+    let message;
+    try { message = JSON.parse(line); } catch { return; }
+    const pending = supervisorRequests.get(message && message.id);
+    if (!pending) return;
+    supervisorRequests.delete(message.id);
+    if (message.ok) pending.resolve(message.value);
+    else {
+      const error = new Error(String(message.error || "builder_request_failed"));
+      error.code = String(message.error || "builder_request_failed");
+      pending.reject(error);
+    }
+  });
+}
+
+function closeSupervisor(reason) {
+  if (!SUPERVISED) return;
+  const error = reason instanceof Error ? reason : new Error(String(reason || "builder_supervisor_closed"));
+  if (supervisorRequests) {
+    supervisorRequests.forEach(function (pending) { pending.reject(error); });
+    supervisorRequests.clear();
+  }
+  if (supervisorResponses) {
+    try { if (supervisorResponses.input) supervisorResponses.input.destroy(); } catch (_) {}
+    try { supervisorResponses.close(); } catch (_) {}
+    supervisorResponses = null;
+  }
+  if (supervisorWriter) {
+    try { supervisorWriter.end(); } catch (_) {}
+    supervisorWriter = null;
+  }
+}
+
+function supervisorCall(message) {
+  if (!SUPERVISED || !supervisorWriter) return Promise.reject(new Error("builder_protocol_unavailable"));
+  const id = "rpc-" + process.pid + "-" + (++supervisorSequence);
+  return new Promise(function (resolve, reject) {
+    supervisorRequests.set(id, { resolve, reject });
+    supervisorWriter.write(JSON.stringify(Object.assign({ v: 1, id }, message)) + "\n", function (error) {
+      if (!error) return;
+      supervisorRequests.delete(id);
+      reject(error);
+    });
+  });
+}
+
+function requestPublish() {
+  if (!SUPERVISED) return Promise.resolve({ published: false });
+  return new Promise(function (resolve, reject) {
+    const writer = createWriteStream(null, { fd: 5, autoClose: false });
+    const responses = readline.createInterface({ input: createReadStream(null, { fd: 6, autoClose: false }), crlfDelay: Infinity });
+    responses.once("line", function (line) {
+      let message;
+      try { message = JSON.parse(line); } catch { message = null; }
+      responses.close();
+      if (message && message.ok) resolve(message.value);
+      else reject(Object.assign(new Error(message && message.error || "builder_commit_failed"), { code: message && message.error || "builder_commit_failed" }));
+    });
+    writer.end(JSON.stringify({ v: 1, type: "publish" }) + "\n");
+  });
+}
 
 // --- config from env (single source of truth = parent's __SOCRATOPIA_SET__) ---
 const ENV = process.env;
@@ -44,8 +115,8 @@ const TITLE = ENV.KB_TITLE || "";
 const LANG = ENV.KB_LANG || "chinese";
 const START_PAGE = parseInt(ENV.KB_START_PAGE || "1", 10);
 const END_PAGE = parseInt(ENV.KB_END_PAGE || "0", 10) || 0; // 0 = to end
-const PAGES_PER_CHUNK = parseInt(ENV.KB_PAGES_PER_CHUNK || "4", 10);
-const MAX_CHUNKS = parseInt(ENV.KB_MAX_CHUNKS || "0", 10); // 0 = no cap
+const PAGES_PER_CHUNK = Math.max(1, Math.min(6, parseInt(ENV.KB_PAGES_PER_CHUNK || "4", 10) || 4));
+const MAX_CHUNKS = Math.max(1, Math.min(50, parseInt(ENV.KB_MAX_CHUNKS || "50", 10) || 50));
 const BUILD_CONCURRENCY = Math.max(1, Math.min(4, parseInt(ENV.KB_CONCURRENCY || "1", 10) || 1));
 const CHUNK_RETRIES = Math.max(0, Math.min(4, parseInt(ENV.KB_CHUNK_RETRIES || "2", 10) || 0));
 
@@ -63,22 +134,51 @@ const PREMIUM = {
   apiKey: ENV.KB_PREMIUM_APIKEY || "",
   model: ENV.KB_PREMIUM_MODEL || "",
 };
-const PREMIUM_OK = !!(PREMIUM.baseUrl && PREMIUM.apiKey && PREMIUM.model);
+const PREMIUM_OK = SUPERVISED ? !!PREMIUM.model : !!(PREMIUM.baseUrl && PREMIUM.apiKey && PREMIUM.model);
+const REMOTE_VISION_ALLOWED = ENV.KB_ALLOW_REMOTE_VISION === "1";
 const VISION = {
   baseUrl: (ENV.KB_VISION_BASEURL || "").replace(/\/$/, ""),
   apiKey: ENV.KB_VISION_APIKEY || "",
   model: ENV.KB_VISION_MODEL || "",
 };
-const VISION_OK = !!(VISION.baseUrl && VISION.apiKey && VISION.model);
+const VISION_OK = REMOTE_VISION_ALLOWED && (SUPERVISED ? !!VISION.model : !!(VISION.baseUrl && VISION.apiKey && VISION.model));
 
 const SPARSE_TEXT_THRESHOLD = 80; // chars; below this a PDF page is "image-dense"
+const MAX_SOURCE_PAGES = 200;
+const MAX_RENDERED_IMAGES = 5;
+const MAX_CANVAS_PIXELS = 16 * 1024 * 1024;
+const MAX_CANVAS_SIDE = 2600;
+const MAX_PNG_BYTES = 12 * 1024 * 1024;
+const MAX_RETAINED_IMAGE_BYTES = 64 * 1024 * 1024;
 const KB_PATHS = KBPublisher.paths(TEXTBOOK_DIR);
 const KB_DIR = KB_PATHS.stageDir;
 const STATUS_PATH = path.join(KB_DIR, "build_status.json");
 const BUILD_LOG = []; // per-chunk events, flushed into build_status.json
-const EXTRACTION_STATS = { pages: 0, sparsePages: 0, garbledPages: 0, renderedPages: 0 };
+const EXTRACTION_STATS = { sourcePages: 0, requestedPages: 0, sourceChunks: 0, pages: 0, sparsePages: 0, garbledPages: 0, renderedPages: 0, successfulPages: [], failedPages: [], sourcesByPage: {}, processingComplete: false, transcriptionComplete: false };
 
 function log(msg) { process.stdout.write("[kb-build] " + msg + "\n"); }
+
+function sourceLimitError(code, actual, limit, unit) {
+  const error = new Error(code);
+  error.code = code;
+  error.actual = actual;
+  error.limit = limit;
+  error.unit = unit;
+  return error;
+}
+
+function assertSourceWithinLimit(code, actual, limit, unit) {
+  if (actual > limit) throw sourceLimitError(code, actual, limit, unit);
+}
+
+function failureStatus(error) {
+  const message = String(error && (error.code || error.message) || "builder_failed");
+  const status = { error: message, errorCode: message, activationEligible: false, extraction: Object.assign({}, EXTRACTION_STATS) };
+  if (Number.isSafeInteger(error && error.actual)) status.actual = error.actual;
+  if (Number.isSafeInteger(error && error.limit)) status.limit = error.limit;
+  if (error && error.unit) status.unit = String(error.unit);
+  return status;
+}
 
 function writeStatus(state, extra) {
   try {
@@ -93,7 +193,9 @@ function writeStatus(state, extra) {
 }
 
 function appendBuildLog(entry) {
-  BUILD_LOG.push(Object.assign({ ts: new Date().toISOString() }, entry));
+  if (BUILD_LOG.length >= 2000) return;
+  var next = Object.assign({ ts: new Date().toISOString() }, entry);
+  if (Buffer.byteLength(JSON.stringify(next), "utf8") <= 16 * 1024) BUILD_LOG.push(next);
 }
 
 // ---------------------------------------------------------------------------
@@ -142,7 +244,7 @@ function canvasFactory() {
 // HTTP helpers — use raw http/https (Next patches global.fetch; avoid it), same
 // pattern as server.js __KB_DISTILL_IMPL__.
 // ---------------------------------------------------------------------------
-async function postJSON(baseUrl, apiKey, payload, timeoutMs, purpose) {
+async function postJSON(baseUrl, apiKey, payload, timeoutMs, purpose, page) {
   const cachePurpose = purpose || "kb-builder";
   const cacheModel = String((payload && payload.model) || "");
   if (/^gpt-5\.6/i.test(cacheModel)) {
@@ -150,6 +252,10 @@ async function postJSON(baseUrl, apiKey, payload, timeoutMs, purpose) {
       prompt_cache_key: ("socratopia:" + cachePurpose + ":" + cacheModel).toLowerCase().replace(/[^a-z0-9_.:-]/g, "-").slice(0, 64),
       prompt_cache_retention: "24h",
     });
+  }
+  if (SUPERVISED) {
+    const result = await supervisorCall({ type: "model", purpose: purpose || "kb-builder-cards", page: Number(page) || 1, payload });
+    return String(result && result.content || "");
   }
   const url = new URL(baseUrl.replace(/\/$/, "") + "/chat/completions");
   const parsed = await ResponsesCompat.postChatCompletionsJson(url, payload, {
@@ -208,7 +314,7 @@ async function callCardLLM(system, user, images, maxTokens, forceJson, modelBloc
   let lastError = null;
   for (let attempt = 0; attempt < 3; attempt++) {
     try {
-      return await postJSON(block.baseUrl, block.apiKey, payload, 180000, "kb-builder-cards");
+      return await postJSON(block.baseUrl, block.apiKey, payload, 180000, "kb-builder-cards", hasImages && images[0] && images[0].page);
     } catch (error) {
       lastError = error;
       const message = String((error && error.message) || error || "");
@@ -222,9 +328,9 @@ async function callCardLLM(system, user, images, maxTokens, forceJson, modelBloc
   throw lastError || new Error("model request failed");
 }
 
-// Vision model call — used ONLY as optional fallback when the multimodal card
-// model cannot handle images and set.json.vision is configured.
-async function callVision(pngB64) {
+// Independent OCR vision call. The supervisor exposes it only when both the
+// ocrVision configuration and this individual Builder job are explicitly authorized.
+async function callVision(pngB64, page) {
   return postJSON(VISION.baseUrl, VISION.apiKey, {
     model: VISION.model, max_tokens: 4096, stream: false,
     messages: [{
@@ -234,7 +340,7 @@ async function callVision(pngB64) {
         { type: "image_url", image_url: { url: "data:image/png;base64," + pngB64 } },
       ],
     }],
-  }, 120000, "kb-builder-vision");
+  }, 120000, "kb-builder-vision", page);
 }
 
 // Balanced-brace JSON extractor (reasoning models may wrap JSON in prose).
@@ -366,13 +472,21 @@ async function extractPdfPageText(page) {
 }
 
 async function renderPageToPngB64(page) {
-  const scale = 150 / 72; // 150 DPI, matches the old fitz pipeline
+  const base = page.getViewport({ scale: 1 });
+  const requestedScale = 150 / 72;
+  const sideScale = Math.min(1, MAX_CANVAS_SIDE / Math.max(base.width, base.height));
+  const pixelScale = Math.min(1, Math.sqrt(MAX_CANVAS_PIXELS / Math.max(1, base.width * base.height)));
+  const scale = Math.min(requestedScale, sideScale, pixelScale);
   const vp = page.getViewport({ scale });
+  const width = Math.ceil(vp.width), height = Math.ceil(vp.height);
+  if (width < 1 || height < 1 || width > MAX_CANVAS_SIDE || height > MAX_CANVAS_SIDE || width * height > MAX_CANVAS_PIXELS) throw new Error("builder_canvas_limit");
   const { createCanvas } = _canvas;
-  const canvas = createCanvas(Math.ceil(vp.width), Math.ceil(vp.height));
+  const canvas = createCanvas(width, height);
   const ctx = canvas.getContext("2d");
   await page.render({ canvasContext: ctx, viewport: vp, canvasFactory: canvasFactory() }).promise;
-  return canvas.toBuffer("image/png").toString("base64");
+  const png = canvas.toBuffer("image/png");
+  if (png.length > MAX_PNG_BYTES) throw new Error("builder_png_limit");
+  return png.toString("base64");
 }
 
 // Extract text from every PDF page.  Image-dense pages (sparse text + visual
@@ -394,15 +508,46 @@ async function extractPdf() {
   const total = doc.numPages;
   const s = Math.max(1, START_PAGE);
   const e = END_PAGE > 0 ? Math.min(total, END_PAGE) : total;
+  const requestedPages = Math.max(0, e - s + 1);
+  EXTRACTION_STATS.sourcePages = total;
+  EXTRACTION_STATS.requestedPages = requestedPages;
+  if (requestedPages > MAX_SOURCE_PAGES) {
+    try { await doc.destroy(); } catch (_) {}
+    throw sourceLimitError("builder_source_page_limit", requestedPages, MAX_SOURCE_PAGES, "pages");
+  }
   const pages = [];
   let renderedCount = 0;
+  let retainedImageBytes = 0;
   for (let pn = s; pn <= e; pn++) {
     const page = await doc.getPage(pn);
-    const text = await extractPdfPageText(page);
-    const quality = KBQuality.assessPdfText(text, { expectedCjk: /^chinese/.test(LANG) });
+    let text = await extractPdfPageText(page);
+    let quality = KBQuality.assessPdfText(text, { expectedCjk: /^chinese/.test(LANG) });
+    let pageResolved = !quality.renderRecommended;
+    let pageSource = pageResolved ? "text-layer" : "unresolved";
+    let pageError = null;
     EXTRACTION_STATS.pages++;
     if (quality.sparse) EXTRACTION_STATS.sparsePages++;
     if (quality.garbled) EXTRACTION_STATS.garbledPages++;
+    if (SUPERVISED && (quality.renderRecommended || text.length < SPARSE_TEXT_THRESHOLD)) {
+      try {
+        const local = await supervisorCall({ type: "ocr-page", page: pn });
+        if (local && local.text && !local.error && local.source !== "unresolved") {
+          text = String(local.text);
+          quality = KBQuality.assessPdfText(text, { expectedCjk: /^chinese/.test(LANG) });
+          pageResolved = true;
+          pageSource = String(local.source || "local-ocr");
+          log("p." + pn + " recovered by supervised local OCR source=" + String(local.source || "unknown"));
+        } else { pageResolved = false; pageSource = "unresolved"; pageError = String(local && local.error || "builder_ocr_unresolved"); }
+      } catch (ocrError) {
+        pageResolved = false;
+        pageSource = "unresolved";
+        pageError = String(ocrError && ocrError.code || "builder_ocr_failed");
+        log("p." + pn + " supervised local OCR failed: " + String(ocrError && ocrError.code || "builder_ocr_failed"));
+      }
+    }
+    if (pageResolved && text.trim()) EXTRACTION_STATS.successfulPages.push(pn);
+    else EXTRACTION_STATS.failedPages.push({ page: pn, reason: pageError || "unresolved" });
+    EXTRACTION_STATS.sourcesByPage[String(pn)] = pageResolved && text.trim() ? pageSource : "unresolved";
     let pngB64 = null;
     if (quality.renderRecommended || text.length < SPARSE_TEXT_THRESHOLD) {
       // Sparse text + has drawn/image ops => image-dense page; render it.
@@ -417,9 +562,13 @@ async function extractPdf() {
               fn === OPS.fillStroke) { hasVisual = true; break; }
         }
       } catch (e2) { hasVisual = true; }
-      if (hasVisual) {
+      if (hasVisual && renderedCount < MAX_RENDERED_IMAGES) {
         try {
-          pngB64 = await renderPageToPngB64(page);
+          const rendered = await renderPageToPngB64(page);
+          const renderedBytes = Buffer.byteLength(rendered, "base64");
+          if (retainedImageBytes + renderedBytes > MAX_RETAINED_IMAGE_BYTES) throw new Error("builder_image_budget_exhausted");
+          pngB64 = rendered;
+          retainedImageBytes += renderedBytes;
           renderedCount++;
           EXTRACTION_STATS.renderedPages++;
           log("p." + pn + " text quality=" + (quality.garbled ? "garbled" : "sparse") +
@@ -432,6 +581,8 @@ async function extractPdf() {
     pages.push({ page: pn, text: text || "", ...(pngB64 ? { pngB64 } : {}) });
   }
   await doc.destroy();
+  EXTRACTION_STATS.processingComplete = true;
+  EXTRACTION_STATS.transcriptionComplete = EXTRACTION_STATS.failedPages.length === 0 && EXTRACTION_STATS.successfulPages.length === requestedPages;
   log("PDF pages " + s + "-" + e + " of " + total + "; extracted " + pages.length + " (rendered " + renderedCount + " image pages)");
   return pages;
 }
@@ -447,6 +598,9 @@ function extractMarkdown() {
     cur.push(line);
   }
   if (cur.join("").trim()) blocks.push(cur.join("\n"));
+  EXTRACTION_STATS.sourcePages = blocks.length;
+  EXTRACTION_STATS.requestedPages = blocks.length;
+  assertSourceWithinLimit("builder_source_page_limit", blocks.length, MAX_SOURCE_PAGES, "markdown_blocks");
   const pages = [];
   blocks.forEach((b, i) => { const t = b.trim(); if (t) pages.push({ page: i + 1, text: t }); });
   log("Markdown split into " + pages.length + " blocks");
@@ -516,6 +670,9 @@ function extractPptx() {
   const slideNames = Array.from(entries.keys())
     .filter((name) => /^ppt\/slides\/slide\d+\.xml$/i.test(name))
     .sort((a, b) => Number((a.match(/slide(\d+)\.xml/i) || [0, 0])[1]) - Number((b.match(/slide(\d+)\.xml/i) || [0, 0])[1]));
+  EXTRACTION_STATS.sourcePages = slideNames.length;
+  EXTRACTION_STATS.requestedPages = slideNames.length;
+  assertSourceWithinLimit("builder_source_page_limit", slideNames.length, MAX_SOURCE_PAGES, "slides");
   const pages = [];
   for (let i = 0; i < slideNames.length; i++) {
     const text = extractPptxSlideText(entries.get(slideNames[i]).toString("utf-8"));
@@ -531,15 +688,15 @@ function chunkPages(pages, perChunk) {
   for (let i = 0; i < pages.length; i += perChunk) {
     const group = pages.slice(i, i + perChunk);
     const body = group.map((p) => "[第" + p.page + "页]\n" + p.text).join("\n\n");
-    const images = group.filter((p) => p.pngB64).map((p) => ({ page: p.page, pngB64: p.pngB64 }));
+    const images = group.filter((p) => p.pngB64).slice(0, 1).map((p) => ({ page: p.page, pngB64: p.pngB64 }));
     chunks.push({ start_page: group[0].page, end_page: group[group.length - 1].page, text: body, images });
   }
   return chunks;
 }
 
 // ---------------------------------------------------------------------------
-// Fallback: transcribe rendered page images via the standalone vision model
-// (only used when multimodal card model rejects images AND set.json.vision exists).
+// Optional final fallback: transcribe rendered images with independent ocrVision.
+// Card and premium teaching models never receive page images.
 // ---------------------------------------------------------------------------
 async function transcribeImagesViaVision(chunk) {
   if (!VISION_OK || !chunk.images || !chunk.images.length) return null;
@@ -547,7 +704,7 @@ async function transcribeImagesViaVision(chunk) {
   const transcribed = [];
   for (const img of chunk.images) {
     try {
-      const text = (await callVision(img.pngB64) || "").trim();
+      const text = (await callVision(img.pngB64, img.page) || "").trim();
       if (text) transcribed.push("[第" + img.page + "页 视觉转录]\n" + text);
     } catch (e) { log("vision fallback failed p." + img.page + ": " + (e && e.message)); }
   }
@@ -760,9 +917,9 @@ async function buildTeachingMap(allCards, opts) {
 
 // ---------------------------------------------------------------------------
 // Generate cards for a single chunk with fallback chain:
-//   1. multimodal (text + images) -> JSON mode
-//   2. text-only -> JSON mode
-//   3. (if vision available) vision transcription -> text-only -> JSON mode
+//   1. local OCR/text -> text-only card model
+//   2. optional premium text-only escalation
+//   3. explicit-consent independent ocrVision -> text-only card model
 // ---------------------------------------------------------------------------
 async function generateCardsForChunk(c, ci, total) {
   const hasImages = c.images && c.images.length > 0;
@@ -782,23 +939,7 @@ async function generateCardsForChunk(c, ci, total) {
   let method = "none";
   let hadRequestFailure = false;
 
-  // --- Level 1: multimodal card model (text + images + JSON mode) ---
-  if (hasImages) {
-    try {
-      const raw = await callCardLLM(CARD_SYSTEM, cardUserPrompt(TITLE, c.start_page, c.end_page, body, true), c.images, 8096, true);
-      const obj = parseLLMJson(raw, "cards");
-      cards = obj.cards || [];
-      method = "multimodal";
-      appendBuildLog({ type: "card_multimodal_ok", chunk: ci + 1, cardCount: cards.length });
-    } catch (e1) {
-      hadRequestFailure = true;
-      appendBuildLog({ type: "card_multimodal_fail", chunk: ci + 1, error: (e1 && e1.message) || "unknown" });
-      log("chunk " + (ci + 1) + " multimodal failed: " + (e1 && e1.message) + "; falling back to text-only");
-      cards = []; method = "none";
-    }
-  }
-
-  // --- Level 2: text-only card model (JSON mode, no images) ---
+  // --- Level 1: text-only card model (local OCR/text; no page upload) ---
   if (!cards.length) {
     try {
       const raw = await callCardLLM(CARD_SYSTEM, cardUserPrompt(TITLE, c.start_page, c.end_page, body, false), null, 8096, true);
@@ -823,8 +964,8 @@ async function generateCardsForChunk(c, ci, total) {
     appendBuildLog({ type: "card_premium_escalate", chunk: ci + 1, model: PREMIUM.model, reason: "mini_zero_cards" });
     try {
       const raw = await callCardLLM(
-        CARD_SYSTEM, cardUserPrompt(TITLE, c.start_page, c.end_page, body, hasImages),
-        hasImages ? c.images : null, 8096, true, PREMIUM);
+        CARD_SYSTEM, cardUserPrompt(TITLE, c.start_page, c.end_page, body, false),
+        null, 8096, true, PREMIUM);
       const obj = parseLLMJson(raw, "cards");
       cards = obj.cards || [];
       if (cards.length) method = "premium";
@@ -837,7 +978,7 @@ async function generateCardsForChunk(c, ci, total) {
     }
   }
 
-  // --- Level 3: vision transcription fallback (if vision config exists) ---
+  // --- Level 3: independent vision transcription (configuration + job consent) ---
   if (!cards.length && hasImages && VISION_OK) {
     log("chunk " + (ci + 1) + ": attempting vision fallback");
     try {
@@ -911,6 +1052,7 @@ async function recoverPartialKnowledgeBase(err) {
   const cards = loadCardsFromDisk();
   if (!cards.length) return false;
   const message = (err && err.message) || "unknown";
+  const failure = failureStatus(err);
   log("recovering usable KB artifacts from " + cards.length + " card file(s)");
   appendBuildLog({ type: "partial_recovery", cardCount: cards.length, error: message });
   const result = await finalizeKnowledgeBase(cards, {
@@ -921,14 +1063,13 @@ async function recoverPartialKnowledgeBase(err) {
       recovery_error: message,
     },
   });
-  writeStatus("partial", {
+  writeStatus("partial", Object.assign({
     cardCount: result.index.card_count,
     needsVerification: result.index.needs_verification_count,
     hasTeachingMap: !!result.tmap,
     partial: true,
     recoveredFromCards: true,
-    error: message,
-  });
+  }, failure));
   return true;
 }
 
@@ -937,7 +1078,7 @@ async function recoverPartialKnowledgeBase(err) {
 // ---------------------------------------------------------------------------
 async function main() {
   if (!TEXTBOOK_DIR || !SRC_PATH) throw new Error("KB_TEXTBOOK_DIR and KB_SRC_PATH required");
-  if (!CARD.baseUrl || !CARD.apiKey || !CARD.model) throw new Error("card model config incomplete (KB_CARD_*)");
+  if (!CARD.model || !SUPERVISED && (!CARD.baseUrl || !CARD.apiKey)) throw new Error("card model config incomplete (KB_CARD_*)");
   if (!existsSync(SRC_PATH)) throw new Error("source file not found: " + SRC_PATH);
 
   var resumeStatus = null;
@@ -964,6 +1105,7 @@ async function main() {
   else if (FORMAT === "markdown" || FORMAT === "md") pages = extractMarkdown();
   else if (FORMAT === "pptx") pages = extractPptx();
   else throw new Error("unsupported KB_FORMAT: " + FORMAT);
+  assertSourceWithinLimit("builder_source_page_limit", pages.length, MAX_SOURCE_PAGES, "pages");
 
   if (!pages.length) {
     writeStatus("error", { cardCount: 0, note: "no extractable text", activationEligible: false });
@@ -973,7 +1115,8 @@ async function main() {
   }
 
   let chunks = chunkPages(pages, PAGES_PER_CHUNK);
-  if (MAX_CHUNKS > 0) chunks = chunks.slice(0, MAX_CHUNKS);
+  EXTRACTION_STATS.sourceChunks = chunks.length;
+  assertSourceWithinLimit("builder_source_chunk_limit", chunks.length, MAX_CHUNKS, "chunks");
   log("chunked into " + chunks.length + " blocks (~" + PAGES_PER_CHUNK + " pages each), concurrency=" + BUILD_CONCURRENCY);
 
   const cardsDir = path.join(KB_DIR, "cards");
@@ -1048,8 +1191,8 @@ async function main() {
   const index = finalized.index;
   const tmap = finalized.tmap;
 
-  const requestedEndPage = END_PAGE || (pages.length ? pages[pages.length - 1].page_no : START_PAGE);
-  const health = KBQuality.assessBuild(allCards, chunks, BUILD_LOG, START_PAGE, requestedEndPage, tmap);
+  const requestedEndPage = END_PAGE || (pages.length ? pages[pages.length - 1].page : START_PAGE);
+  const health = KBQuality.assessBuild(allCards, chunks, BUILD_LOG, START_PAGE, requestedEndPage, tmap, EXTRACTION_STATS);
   writeStatus(health.state, Object.assign({
     cardCount: allCards.length,
     needsVerification: index.needs_verification_count,
@@ -1059,8 +1202,14 @@ async function main() {
     activationEligible: health.state === "done",
   }, health));
   if (health.state === "done") {
-    KBPublisher.publish(TEXTBOOK_DIR);
-    log("published healthy KB -> " + KB_PATHS.finalDir);
+    if (SUPERVISED) {
+      await requestPublish();
+      closeSupervisor("builder_seal_accepted");
+      log("parent accepted healthy KB seal; awaiting exit-fenced publish");
+    } else {
+      KBPublisher.publish(TEXTBOOK_DIR);
+      log("published healthy KB -> " + KB_PATHS.finalDir);
+    }
   } else {
     KBPublisher.publishFailureIfNoFinal(TEXTBOOK_DIR);
     process.exitCode = 2;
@@ -1073,7 +1222,7 @@ main().catch(async (err) => {
   log("FATAL: " + (err && err.message));
   try {
     const recovered = await recoverPartialKnowledgeBase(err);
-    if (!recovered) writeStatus("error", { error: err && err.message, activationEligible: false });
+    if (!recovered) writeStatus("error", failureStatus(err));
     KBPublisher.publishFailureIfNoFinal(TEXTBOOK_DIR);
   } catch (e) {
     try { writeStatus("error", { error: err && err.message, recoveryError: e && e.message }); } catch (e2) {}

@@ -15,7 +15,7 @@ responsesApiCompat.installGlobalResponsesFallback()
 // Load settings.json for API configuration
 ;(function(){var f=require("fs");var p=require("path");var s=p.join(process.env.CONTENT_ROOT||"","..","settings.json");function norm(S){S=S||{};var endpoint=S.endpoint||S.baseUrl||"https://api.nwafu-ai.cn/v1";var keys=S.apiKeys||{};function fill(name,defKeyGroup){var b=S[name]||{};b.baseUrl=b.baseUrl||endpoint;b.apiKey=b.apiKey||keys[b.apiKeyGroup]||keys[defKeyGroup]||"";b.models=b.models||{};S[name]=b;return b}var gpt=fill("gpt","codex"),other=S.other;if(other){other.baseUrl=other.baseUrl||endpoint;other.apiKey=other.apiKey||keys[other.apiKeyGroup]||keys.codex||"";other.models=other.models||{}}S.openai=S.openai||gpt;S.deepseek=S.deepseek||gpt;return S}try{var r=f.readFileSync(s,"utf-8");global.__SOCRATOPIA_SETTINGS__=norm(JSON.parse(r));console.log("[settings] Loaded from "+s+" (normalized)") }catch(e){console.warn("[settings] Could not load "+s+": "+e.message+", using defaults");global.__SOCRATOPIA_SETTINGS__=norm({endpoint:"https://api.nwafu-ai.cn/v1",apiKeys:{codex:""},gpt:{models:{}},proxyUrl:"",rulesUrl:""})}})();
 // Load set.json for teaching model config (strong=切页/闪卡/总结, weak=教学对话). Falls back to settings.json blocks when absent.
-;(function(){var f=require("fs");var p=require("path");var s=p.join(process.env.CONTENT_ROOT||"","..","set.json");function pickProvider(S,preferred){var n=(preferred||"gpt").toLowerCase();if(S[n])return n;if(("openai"===n||"gpt"===n)&&S.gpt)return"gpt";if(("deepseek"===n||"gemini"===n||"other"===n)&&S.other)return"other";if(S.gpt)return"gpt";if(S.other)return"other";return n}function apiTypeForProvider(provider){return provider==="gpt"?"openai":provider}function firstModel(m){if(!m)return"";var v=Object.values(m);return v&&v.length?v[0]:""}function pickModel(block,key){var m=block&&block.models||{};return key&&m[key]||m.gpt||m.openai||m.deepseek||m.gemini||firstModel(m)}function normalize(raw,modelKey){raw=raw||{};var S=global.__SOCRATOPIA_SETTINGS__||{};var provider=pickProvider(S,raw.group||raw.provider);var block=S[provider]||{};var envKey=process.env.SOCRATOPIA_OPENAI_API_KEY||"";var out={};Object.keys(raw).forEach(function(k){out[k]=raw[k]});out.group=out.group||provider;out.apiType=out.apiType||apiTypeForProvider(out.group);out.baseUrl=out.baseUrl||block.baseUrl||S.endpoint||"";out.apiKey=out.apiKey||envKey||block.apiKey||"";out.model=out.model||pickModel(block,modelKey||provider)||"";return out}try{var r=f.readFileSync(s,"utf-8");var cfg=JSON.parse(r);global.__SOCRATOPIA_SET__={};Object.keys(cfg).forEach(function(k){global.__SOCRATOPIA_SET__[k]=cfg[k]});global.__SOCRATOPIA_SET__.strong=normalize(cfg.strong,"strong");cfg.kb&&(global.__SOCRATOPIA_SET__.kb=normalize(cfg.kb,"kb"));global.__SOCRATOPIA_SET__.weak=normalize(cfg.weak,"weak");cfg.vision&&(global.__SOCRATOPIA_SET__.vision=normalize(cfg.vision,"gemini"));cfg.premium&&(global.__SOCRATOPIA_SET__.premium=normalize(cfg.premium,"premium"));console.log("[set] Loaded from "+s+" (normalized)")}catch(e){global.__SOCRATOPIA_SET__={strong:normalize({group:"gpt"},"strong"),weak:normalize({group:"gpt"},"weak")};console.warn("[set] Could not load "+s+": "+e.message+", derived from settings.json")}})();
+;(function(){var f=require("fs");var p=require("path");var s=p.join(process.env.CONTENT_ROOT||"","..","set.json");function pickProvider(S,preferred){var n=(preferred||"gpt").toLowerCase();if(S[n])return n;if(("openai"===n||"gpt"===n)&&S.gpt)return"gpt";if(("deepseek"===n||"gemini"===n||"other"===n)&&S.other)return"other";if(S.gpt)return"gpt";if(S.other)return"other";return n}function apiTypeForProvider(provider){return provider==="gpt"?"openai":provider}function firstModel(m){if(!m)return"";var v=Object.values(m);return v&&v.length?v[0]:""}function pickModel(block,key){var m=block&&block.models||{};return key&&m[key]||m.gpt||m.openai||m.deepseek||m.gemini||firstModel(m)}function normalize(raw,modelKey){raw=raw||{};var S=global.__SOCRATOPIA_SETTINGS__||{};var provider=pickProvider(S,raw.group||raw.provider);var block=S[provider]||{};var envKey=process.env.SOCRATOPIA_OPENAI_API_KEY||"";var out={};Object.keys(raw).forEach(function(k){out[k]=raw[k]});out.group=out.group||provider;out.apiType=out.apiType||apiTypeForProvider(out.group);out.baseUrl=out.baseUrl||block.baseUrl||S.endpoint||"";out.apiKey=out.apiKey||envKey||block.apiKey||"";out.model=out.model||pickModel(block,modelKey||provider)||"";return out}function normalizeOcrVision(raw){raw=raw||{};var out={};Object.keys(raw).forEach(function(k){out[k]=raw[k]});out.baseUrl=raw.baseUrl||raw.baseURL||"";out.apiKey=raw.apiKey||"";out.model=raw.model||"";return out}try{var r=f.readFileSync(s,"utf-8");var cfg=JSON.parse(r);global.__SOCRATOPIA_SET__={};Object.keys(cfg).forEach(function(k){global.__SOCRATOPIA_SET__[k]=cfg[k]});global.__SOCRATOPIA_SET__.strong=normalize(cfg.strong,"strong");cfg.kb&&(global.__SOCRATOPIA_SET__.kb=normalize(cfg.kb,"kb"));global.__SOCRATOPIA_SET__.weak=normalize(cfg.weak,"weak");cfg.vision&&(global.__SOCRATOPIA_SET__.vision=normalize(cfg.vision,"gemini"));cfg.premium&&(global.__SOCRATOPIA_SET__.premium=normalize(cfg.premium,"premium"));cfg.ocrVision&&(global.__SOCRATOPIA_SET__.ocrVision=normalizeOcrVision(cfg.ocrVision));console.log("[set] Loaded from "+s+" (normalized)")}catch(e){global.__SOCRATOPIA_SET__={strong:normalize({group:"gpt"},"strong"),weak:normalize({group:"gpt"},"weak")};console.warn("[set] Could not load "+s+": "+e.message+", derived from settings.json")}})();
 // __KB_DISTILL__: 切页时把窗口原文提炼成"已核实知识"块。
 // 优先用教材已建知识库(knowledge_base/index.json + cards/),否则用 set.strong 现场提炼。
 // 任意失败都回退返回原文,保证教学链路绝不中断。失败/无强模型时返回 null,调用方用原文。
@@ -955,6 +955,119 @@ global.__KB_DISTILL_PREFETCH__ = function (rawText, startPage, endPage, textbook
 
   var lastSequence = -1;
   var lastState = null;
+  global.__SOCRATOPIA_ACCOUNT_CONTEXT__ = function () {
+    return lastState && lastState.active ? { active: true, accountId: lastState.accountId, sessionEpoch: lastState.sessionEpoch } : null;
+  };
+  var autoAdvance = require("./lib/reading/auto-advance.js").createAutoAdvance({
+    projectRoot: process.env.PROJECT_ROOT,
+    bootId: "advance_" + crypto.randomBytes(16).toString("hex"),
+    getAccountContext: function () {
+      return lastState && lastState.active ? {
+        active: true,
+        accountId: lastState.accountId,
+        sessionEpoch: lastState.sessionEpoch
+      } : null;
+    }
+  });
+  if (!autoAdvance || autoAdvance.version !== 2) throw new Error("auto_advance_runtime_version_mismatch");
+  global.__AUTO_ADVANCE__ = autoAdvance;
+  var localOcrEnabled = !/^(?:0|false|no|off)$/i.test(process.env.SOCRATOPIA_LOCAL_OCR || "");
+  var pdfOcrCoordinator = null;
+  var visionBudget = null;
+  var builderCoordinator = null;
+  var pdfOcrReadinessPromise = Promise.resolve({ ok: true, disabled: true });
+  if (localOcrEnabled) {
+    try {
+      pdfOcrCoordinator = require("./lib/pdf-ocr-coordinator.js").createCoordinator({
+        projectRoot: process.env.PROJECT_ROOT,
+        getAccountContext: function () {
+          return lastState && lastState.active ? {
+            active: true,
+            accountId: lastState.accountId,
+            sessionEpoch: lastState.sessionEpoch
+          } : null;
+        }
+      });
+      pdfOcrReadinessPromise = Promise.resolve().then(function () { return pdfOcrCoordinator.initialize(); });
+      global.__PDF_OCR_COORDINATOR__ = Object.freeze({
+        version: 1,
+        enabled: true,
+        readinessPromise: pdfOcrReadinessPromise,
+        run: function (request) {
+          return pdfOcrReadinessPromise.then(function () { return pdfOcrCoordinator.run(request); });
+        },
+        readVisionCache: function (request) {
+          return pdfOcrReadinessPromise.then(function () { return pdfOcrCoordinator.readVisionCache(request); });
+        },
+        writeVisionCache: function (request) {
+          return pdfOcrReadinessPromise.then(function () { return pdfOcrCoordinator.writeVisionCache(request); });
+        },
+        purgeScope: function (scope) {
+          return pdfOcrReadinessPromise.then(async function () { if (visionBudget && typeof visionBudget.cancelScope === "function") await visionBudget.cancelScope(scope); return pdfOcrCoordinator.purgeScope(scope); });
+        },
+        activateScope: function (scope) {
+          return pdfOcrReadinessPromise.then(function () { return pdfOcrCoordinator.activateScope(scope); });
+        },
+        purgeTree: function (scope) {
+          return pdfOcrReadinessPromise.then(async function () { if (visionBudget && typeof visionBudget.cancelTree === "function") await visionBudget.cancelTree(scope); return pdfOcrCoordinator.purgeTree(scope); });
+        },
+        activateTree: function (scope) {
+          return pdfOcrReadinessPromise.then(function () { return pdfOcrCoordinator.activateTree(scope); });
+        },
+        shutdown: function () { return pdfOcrCoordinator.shutdown(); }
+      });
+    } catch (ocrError) {
+      pdfOcrReadinessPromise = Promise.reject(ocrError);
+      global.__PDF_OCR_COORDINATOR__ = null;
+    }
+  } else {
+    global.__PDF_OCR_COORDINATOR__ = null;
+  }
+  try {
+    visionBudget = require("./lib/ocr/vision-budget.js").createVisionBudget({
+      getAccountContext: function () {
+        return lastState && lastState.active ? {
+          active: true,
+          accountId: lastState.accountId,
+          sessionEpoch: lastState.sessionEpoch
+        } : null;
+      },
+      maxConcurrent: 1,
+      maxQueued: 4,
+      maxQueueWaitMs: 15000,
+      maxRuntimeMs: 125000,
+      maxDailyAttempts: 20,
+      maxPagesPerOperation: 5,
+      projectRoot: process.env.PROJECT_ROOT
+    });
+    global.__OCR_VISION_BUDGET__ = visionBudget;
+  } catch (visionBudgetError) {
+    console.warn("[ocr-vision] Budget failed to load: " + (visionBudgetError && visionBudgetError.message));
+    global.__OCR_VISION_BUDGET__ = null;
+  }
+  if (pdfOcrCoordinator) {
+    try {
+      builderCoordinator = require("./lib/kb-builder-coordinator.js").createBuilderCoordinator({
+        projectRoot: process.env.PROJECT_ROOT,
+        getAccountContext: function () {
+          return lastState && lastState.active ? {
+            active: true,
+            accountId: lastState.accountId,
+            sessionEpoch: lastState.sessionEpoch
+          } : null;
+        },
+        getModelSet: function () { return global.__SOCRATOPIA_SET__ || {}; },
+        pdfOcrCoordinator: pdfOcrCoordinator,
+        visionBudget: visionBudget
+      });
+      global.__KB_BUILDER_COORDINATOR__ = builderCoordinator;
+    } catch (builderCoordinatorError) {
+      console.warn("[kb-build] Coordinator failed to load: " + (builderCoordinatorError && builderCoordinatorError.message));
+      global.__KB_BUILDER_COORDINATOR__ = null;
+    }
+  } else {
+    global.__KB_BUILDER_COORDINATOR__ = null;
+  }
   var chatService = null;
   var externalEvidenceService = null;
   try {
@@ -1016,7 +1129,7 @@ global.__KB_DISTILL_PREFETCH__ = function (rawText, startPage, endPage, textbook
     if (typeof process.send !== "function" || !process.connected) return;
     try { process.send({ type: "socratopia:auth-state-ack:v1", sequence: state.sequence, active: state.active, accountId: state.accountId, sessionEpoch: state.sessionEpoch }); } catch (_) {}
   }
-  process.on("message", function (message) {
+  process.on("message", async function (message) {
     var nextState = normalizeAuthStateMessage(message);
     if (!nextState || nextState.sequence < lastSequence) return;
     if (nextState.sequence === lastSequence) {
@@ -1031,11 +1144,18 @@ global.__KB_DISTILL_PREFETCH__ = function (rawText, startPage, endPage, textbook
     lastSequence = nextState.sequence;
     lastState = nextState;
     verifier.setCurrentAuthState(nextState.active ? { accountId: nextState.accountId, sessionEpoch: nextState.sessionEpoch } : null);
+    if (autoAdvance) autoAdvance.syncAccount(nextState.active ? nextState : null);
+    if (visionBudget) visionBudget.syncAccount(nextState.active ? nextState : null);
+    if (builderCoordinator) await builderCoordinator.syncAccount(nextState.active ? nextState : null).catch(function () {});
     acknowledge(nextState);
   });
   process.on("disconnect", function () {
     lastState = null;
     verifier.setCurrentAuthState(null);
+    if (autoAdvance) autoAdvance.shutdown();
+    if (visionBudget) visionBudget.shutdown().catch(function () {});
+    if (builderCoordinator) builderCoordinator.shutdown().catch(function () {});
+    if (pdfOcrCoordinator) pdfOcrCoordinator.shutdown().catch(function () {});
   });
 
   global.__ADAPTIVE_TEACHING_RUNTIME__ = Object.freeze({
@@ -1088,7 +1208,7 @@ if (
   keepAliveTimeout = undefined
 }
 
-startServer({
+Promise.resolve(global.__PDF_OCR_COORDINATOR__ && global.__PDF_OCR_COORDINATOR__.readinessPromise).then(function () { return startServer({
   dir,
   isDev: false,
   config: nextConfig,
@@ -1096,7 +1216,7 @@ startServer({
   port: currentPort,
   allowRetry: false,
   keepAliveTimeout,
-}).catch((err) => {
+}); }).catch((err) => {
   console.error(err);
   process.exit(1);
 });

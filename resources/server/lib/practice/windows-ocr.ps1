@@ -26,13 +26,16 @@ function Await-Operation($Operation, [Type]$ResultType) {
 
 $available = @([Windows.Media.Ocr.OcrEngine]::AvailableRecognizerLanguages)
 $language = $available | Where-Object { $_.LanguageTag -eq $LanguageTag } | Select-Object -First 1
-if (-not $language -and $LanguageTag -like "zh-*") {
+if (-not $language -and $LanguageTag -like "zh-Hant*") {
+  $language = $available | Where-Object { $_.LanguageTag -like "zh-Hant*" } | Select-Object -First 1
+}
+if (-not $language -and ($LanguageTag -like "zh-Hans*" -or $LanguageTag -eq "zh")) {
   $language = $available | Where-Object { $_.LanguageTag -like "zh-Hans*" } | Select-Object -First 1
 }
-if (-not $language) {
+if (-not $language -and $LanguageTag -notlike "zh-*") {
   $language = $available | Where-Object { $_.LanguageTag -like "en-*" } | Select-Object -First 1
 }
-if (-not $language) { throw "No Windows OCR language is installed" }
+if (-not $language) { throw "ocr_language_unavailable:$LanguageTag" }
 
 $engine = [Windows.Media.Ocr.OcrEngine]::TryCreateFromLanguage($language)
 if (-not $engine) { throw "Unable to create Windows OCR engine for $($language.LanguageTag)" }

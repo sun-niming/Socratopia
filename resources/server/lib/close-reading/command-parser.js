@@ -1,6 +1,9 @@
 "use strict";
 
 var COMMAND_RE = /^\s*\/(?:close[_-]?reading|closereading|精读)(?=\s|$)/i;
+var REMOTE_VISION_CONSENT_RE = /(?:允许|同意|授权)(?:本次|本轮)?(?:使用|进行)?(?:远程|云端)(?:视觉)?(?:\s*OCR|转录)|\b(?:allow|consent\s+to|authorize)\s+(?:remote|cloud)\s+(?:vision\s+)?(?:ocr|transcription)\b/i;
+var REMOTE_VISION_DENIAL_RE = /(?:不|未|勿|不要|禁止|拒绝|撤销)(?:允许|同意|授权|使用|进行)?(?:本次|本轮)?(?:使用|进行)?(?:远程|云端)(?:视觉)?(?:\s*OCR|转录)|\b(?:do\s+not|don['’]?t|never|deny|refuse|revoke|without)\s+(?:allow(?:ing)?\s+|consent(?:ing)?\s+to\s+|authoriz(?:e|ing)\s+)?(?:remote|cloud)\s+(?:vision\s+)?(?:ocr|transcription)\b/i;
+var REMOTE_VISION_NEGATION_RE = /(?:不|未|勿|不要|禁止|拒绝|撤销)|\b(?:do\s+not|don['’]?t|never|deny|refuse|revoke|without)\b/i;
 var PAGE_PATTERNS = [
   /第\s*(\d{1,6})\s*页/i,
   /(?:^|\s)(\d{1,6})\s*页/i,
@@ -28,7 +31,7 @@ function pageFromText(text) {
 }
 
 function queryFromText(text) {
-  var body = String(text || "").replace(COMMAND_RE, "").trim();
+  var body = String(text || "").replace(COMMAND_RE, "").replace(REMOTE_VISION_DENIAL_RE, " ").replace(REMOTE_VISION_CONSENT_RE, " ").trim();
   var quoted = body.match(/[`“”"']([^`“”"']{2,160})[`“”"']/);
   if (quoted) return quoted[1].trim();
   var signature = body.match(/\b(?:void|int|long|double|float|char|bool|string|class|struct|def|function|func)\s+[A-Za-z_$][\w$]*(?:\s*\([^)]*\))?/i);
@@ -74,11 +77,15 @@ function parseCommand(text, options) {
     query: query,
     maxPages: complete ? 3 : 3,
     allowOcr: true,
+    allowRemoteVision: !REMOTE_VISION_NEGATION_RE.test(current) && !REMOTE_VISION_DENIAL_RE.test(current) && REMOTE_VISION_CONSENT_RE.test(current),
   };
 }
 
 module.exports = {
   COMMAND_RE: COMMAND_RE,
+  REMOTE_VISION_CONSENT_RE: REMOTE_VISION_CONSENT_RE,
+  REMOTE_VISION_DENIAL_RE: REMOTE_VISION_DENIAL_RE,
+  REMOTE_VISION_NEGATION_RE: REMOTE_VISION_NEGATION_RE,
   isCommand: isCommand,
   parseCommand: parseCommand,
   pageFromText: pageFromText,

@@ -1,5 +1,6 @@
 "use strict";
 
+var crypto = require("crypto");
 var Normalizer = require("./text-normalizer.js");
 var ResponsesCompat = require("../responses-api-compat.js");
 
@@ -21,14 +22,34 @@ async function postJSON(baseUrl, apiKey, payload, options) {
     });
   }
   var url = new URL(String(baseUrl || "").replace(/\/$/, "") + "/chat/completions");
-  var parsed = await ResponsesCompat.postChatCompletionsJson(url, payload, {
-    headers: Object.assign({
-      "Content-Type": "application/json",
-      "Authorization": "Bearer " + (apiKey || ""),
-      "Connection": "close",
-    }, options.headers || {}),
-    timeoutMs: options.timeoutMs || 120000,
-    timeoutMessage: "timeout",
+  var budget = global.__OCR_VISION_BUDGET__;
+  if (!budget || typeof budget.run !== "function") {
+    var unavailable = new Error("vision_budget_unavailable");
+    unavailable.code = "vision_budget_unavailable";
+    throw unavailable;
+  }
+  var rawPayload = JSON.stringify(payload);
+  var parsed = await budget.run({
+    purpose: "close-reading",
+    imageCount: 1,
+    inputBytes: Buffer.byteLength(rawPayload, "utf8"),
+    maxOutputTokens: Math.max(1, Number(payload.max_tokens) || 4096),
+    operationId: options.operationId || crypto.randomBytes(16).toString("hex"),
+    page: Number.isInteger(options.page) && options.page > 0 ? options.page : 1,
+    deadlineAt: Date.now() + Math.min(120000, Math.max(1, Number(options.timeoutMs) || 120000)),
+    signal: options.signal,
+    execute: function (signal) {
+      return ResponsesCompat.postChatCompletionsJson(url, payload, {
+        headers: Object.assign({
+          "Content-Type": "application/json",
+          "Authorization": "Bearer " + (apiKey || ""),
+          "Connection": "close",
+        }, options.headers || {}),
+        timeoutMs: options.timeoutMs || 120000,
+        timeoutMessage: "timeout",
+        signal: signal,
+      });
+    },
   });
   if (parsed.usage) {
     var details = parsed.usage.prompt_tokens_details || {};
@@ -40,12 +61,14 @@ async function postJSON(baseUrl, apiKey, payload, options) {
 }
 
 function visionConfig(override) {
-  var block = override || (global.__SOCRATOPIA_SET__ && global.__SOCRATOPIA_SET__.vision) || {};
+  var block = override || (global.__SOCRATOPIA_SET__ && global.__SOCRATOPIA_SET__.ocrVision) || {};
+  if (block.enabled !== true || block.userConsent !== true) return { baseUrl: "", apiKey: "", model: "" };
   return { baseUrl: block.baseUrl || block.baseURL || "", apiKey: block.apiKey || "", model: block.model || "" };
 }
 
 async function transcribePage(pngB64, options) {
   options = options || {};
+  if (options.allowRemoteVision !== true) return { ok: false, reason: "vision_not_authorized", text: "" };
   var config = visionConfig(options.config);
   if (!config.baseUrl || !config.apiKey || !config.model) return { ok: false, reason: "vision_not_configured", text: "" };
   try {
@@ -62,7 +85,7 @@ async function transcribePage(pngB64, options) {
     if (!assessed.text.trim()) return { ok: false, reason: "vision_empty", text: "" };
     return { ok: true, text: assessed.text, encodingQuality: assessed.encodingQuality };
   } catch (error) {
-    return { ok: false, reason: "vision_failed", error: error.message, text: "" };
+    return { ok: false, reason: "vision_failed", text: "" };
   }
 }
 

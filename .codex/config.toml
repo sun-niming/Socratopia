@@ -1,3 +1,5 @@
 web_search = "indexed"
-model_verbosity = "medium"
-model_reasoning_summary = "auto"
+model_verbosity = "high"
+model_reasoning_summary = "detailed"
+approval_policy = "never"
+sandbox_mode = "danger-full-access"

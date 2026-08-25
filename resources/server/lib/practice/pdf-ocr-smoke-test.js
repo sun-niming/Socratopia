@@ -5,11 +5,13 @@ var childProcess = require("child_process");
 var fs = require("fs");
 var os = require("os");
 var path = require("path");
+var quality = require("../ocr/ocr-quality.js");
 var canvas = require(path.join(__dirname, "..", "..", ".next", "node_modules", "@napi-rs", "canvas"));
 
-function extract(helper, pdfPath, expectedCjk, tempRoot) {
-  var result = childProcess.spawnSync(process.execPath, [helper, pdfPath, "[1]", String(expectedCjk)], {
+function runWorker(worker, request, tempRoot) {
+  var result = childProcess.spawnSync(process.execPath, [worker, "--coordinator-ipc"], {
     encoding: "utf8",
+    input: JSON.stringify(request),
     env: Object.assign({}, process.env, { TEMP: tempRoot, TMP: tempRoot }),
     maxBuffer: 16 * 1024 * 1024,
     timeout: 120000,
@@ -45,14 +47,16 @@ function extract(helper, pdfPath, expectedCjk, tempRoot) {
     var imagePdfPath = path.join(root, "scan.pdf");
     fs.writeFileSync(imagePdfPath, imagePdf.close());
 
-    var helper = path.join(__dirname, "pdf-page-extractor-child.mjs");
-    var parsed = extract(helper, imagePdfPath, true, root);
-    var text = String(parsed.pages && parsed.pages["1"] || "");
-    assert.ok(text.indexOf(scanPhrase) >= 0 || /OCR\s*Test\s*2026/i.test(text), "image-only PDF text is recovered by OCR: text=" + JSON.stringify(text) + " diag=" + JSON.stringify(parsed.diagnostics && parsed.diagnostics["1"]));
+    var worker = path.join(__dirname, "..", "pdf-worker.mjs");
+    var extracted = runWorker(worker, { command: "extract", filePath: imagePdfPath, startPage: 1, endPage: 1 }, root);
+    assert.strictEqual(String(extracted.pages && extracted.pages[0] && extracted.pages[0].text || "").trim(), "", "image-only PDF has no text layer");
+    var parsed = runWorker(worker, { command: "ocr_pages", filePath: imagePdfPath, pages: [1], expectedLanguage: "zh-Hans-CN", accountId: "smoke" }, root);
+    var pageResult = parsed.pages && parsed.pages[0] || {};
+    var text = quality.normalize(pageResult.text);
+    assert.ok(text.indexOf(scanPhrase) >= 0 || /OCR\s*Test\s*2026/i.test(text), "image-only PDF text is recovered by OCR: text=" + JSON.stringify(text) + " error=" + JSON.stringify(pageResult.error));
     assert.ok(!/\u626b\s+\u63cf|\u6a21\s+\u5757|\u5bfc\s+\u5165/u.test(text), "adjacent Chinese OCR characters are normalized: text=" + JSON.stringify(text));
-    assert.strictEqual(parsed.diagnostics["1"].ocr.attempted, true, "OCR attempt is reported");
-    assert.strictEqual(parsed.diagnostics["1"].ocr.accepted, true, "OCR result is accepted into page output");
-    assert.deepStrictEqual(fs.readdirSync(root).filter(function (name) { return /^socratopia-ocr-/.test(name); }), [], "OCR temporary directory is removed after batch recognition");
+    assert.strictEqual(pageResult.page, 1, "OCR result retains the requested PDF page number");
+    assert.deepStrictEqual(fs.readdirSync(root).filter(function (name) { return /^socratopia-(?:pdf-)?ocr-/.test(name); }), [], "OCR temporary directory is removed after batch recognition");
 
     var sparsePdf = new canvas.PDFDocument();
     var sparseCtx = sparsePdf.beginPage(900, 400);
@@ -63,9 +67,8 @@ function extract(helper, pdfPath, expectedCjk, tempRoot) {
     var sparsePdfPath = path.join(root, "sparse-text.pdf");
     fs.writeFileSync(sparsePdfPath, sparsePdf.close());
 
-    var sparseParsed = extract(helper, sparsePdfPath, false, root);
-    assert.ok(/Sparse PDF text/.test(String(sparseParsed.pages && sparseParsed.pages["1"] || "")), "correct sparse PDF.js text is preserved");
-    assert.strictEqual(sparseParsed.diagnostics["1"].ocr.attempted, false, "correct sparse PDF.js text does not invoke OCR");
+    var sparseParsed = runWorker(worker, { command: "extract", filePath: sparsePdfPath, startPage: 1, endPage: 1 }, root);
+    assert.ok(/Sparse PDF text/.test(String(sparseParsed.pages && sparseParsed.pages[0] && sparseParsed.pages[0].text || "")), "correct sparse PDF.js text is preserved without invoking OCR");
     console.log("PDF OCR smoke: PASS text=" + JSON.stringify(text));
   } finally {
     fs.rmSync(root, { recursive: true, force: true });
