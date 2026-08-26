@@ -199,9 +199,10 @@ async function frontendChecks() {
 
   var fallbackCalls = [];
   loaded = await load({}, async function (url, init) { fallbackCalls.push(init); return { ok: true, status: 200 }; });
-  await loaded.signed("/api/practice", { method: "POST" });
+  await loaded.signed("/api/practice", { method: "POST", headers: { Authorization: "spoofed-fallback-token", "X-Account-Id": "spoof" } });
   assert.strictEqual(fallbackCalls.length, 1, "preflight capability absence must fall back exactly once");
   assert.strictEqual(fallbackCalls[0].headers.get("X-Account-Id"), "raw-account", "legacy fallback should retain ordinary account selector");
+  assert.strictEqual(fallbackCalls[0].headers.get("Authorization"), null, "legacy fallback must strip caller Authorization");
 
   var uncertainCalls = 0, uncertain = null;
   loaded = await load({ getAdaptiveCapability: async function () { return "valid-capability-token-000"; } }, async function () { uncertainCalls += 1; throw new Error("network includes secret"); });

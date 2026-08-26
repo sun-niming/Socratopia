@@ -228,6 +228,40 @@ class TestEnvironment {
         }
       });
     });
+
+    // The packaged Electron parent sends this authenticated account-state
+    // handshake before ordinary routes can use the request fence.  Synthetic
+    // HTTP smoke tests do not have the parent process, so install the same
+    // deterministic fixture state and wait for the child ACK before issuing
+    // requests.  This keeps the production fence strict instead of weakening
+    // it just for tests.
+    const sendAuthState = (sequence, sessionEpoch) => new Promise((resolve, reject) => {
+      const timeout = setTimeout(() => reject(new Error('Auth-state ACK timeout')), 5000);
+      const onMessage = (message) => {
+        if (!message || message.type !== 'socratopia:auth-state-ack:v1') return;
+        if (message.sequence !== sequence || message.accountId !== 'test' || message.sessionEpoch !== sessionEpoch || message.active !== true) {
+          clearTimeout(timeout);
+          reject(new Error('Auth-state ACK mismatch'));
+          return;
+        }
+        clearTimeout(timeout);
+        this.serverProcess.off('message', onMessage);
+        resolve();
+      };
+      this.serverProcess.on('message', onMessage);
+      this.serverProcess.send({
+        type: 'socratopia:auth-state:v1',
+        sequence: sequence,
+        active: true,
+        accountId: 'test',
+        sessionEpoch: sessionEpoch
+      });
+    });
+    await sendAuthState(1, 2);
+    await sendAuthState(2, 3);
+    // A duplicate ACK gives async account-bound coordinators one event-loop
+    // turn to finish before the first HTTP request is issued.
+    await sendAuthState(2, 3);
   }
 
   async teardown() {

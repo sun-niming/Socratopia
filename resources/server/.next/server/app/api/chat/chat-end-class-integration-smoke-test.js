@@ -194,6 +194,18 @@ async function runTests() {
       choices: [{ message: { content: endClassFull } }]
     });
 
+    await new Promise((resolve, reject) => {
+      const timeout = setTimeout(() => reject(new Error('auth refresh timeout')), 5000);
+      const onMessage = (message) => {
+        if (!message || message.type !== 'socratopia:auth-state-ack:v1' || message.sequence !== 3) return;
+        clearTimeout(timeout);
+        env.serverProcess.off('message', onMessage);
+        resolve();
+      };
+      env.serverProcess.on('message', onMessage);
+      env.serverProcess.send({ type: 'socratopia:auth-state:v1', sequence: 3, active: true, accountId: accountId, sessionEpoch: 4 });
+    });
+
     const res1 = await env.postSSE('/api/chat', body, { 'X-Account-Id': accountId });
     log(`[success-end-class] status=${res1.status}, raw events=${res1.raw.split('data:').length - 1}`);
     log(`[success-end-class] text preview: ${res1.text.slice(0, 120)}`);
