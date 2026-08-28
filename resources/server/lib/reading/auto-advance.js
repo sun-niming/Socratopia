@@ -122,6 +122,11 @@ function fileHash(filePath) {
   catch (_) { return null; }
 }
 
+function projectionFileMissing(filePath) {
+  try { return !fs.statSync(filePath).isFile(); }
+  catch (error) { return !!error && error.code === "ENOENT"; }
+}
+
 function createAutoAdvance(options) {
   options = options || {};
   var projectRoot = path.resolve(options.projectRoot || process.env.PROJECT_ROOT || "");
@@ -484,22 +489,40 @@ function createAutoAdvance(options) {
     var conversationId = state.owner && state.owner.conversationId || scope.conversationId;
     var conversation = state.conversations[conversationId];
     if (!conversation) return state;
-    var actualHash = fileHash(path.join(paths.worldDir, "conversations", conversationId, "current_reading.md"));
     if (conversation.projectionStatus === "pending") {
+      // A pending projection may belong to the previous conversation. Do not
+      // recreate that conversation's legacy file while opening a new one (the
+      // end-class flow intentionally removes it); activation will publish the
+      // requested conversation's projection instead.
+      if (scope.conversationId !== conversationId) return state;
       var ownerPaths = pathsFor(Object.assign({}, scope, { conversationId: conversationId }));
       projectConversation(ownerPaths, state, conversationId);
       markProjectionClean(ownerPaths, state, conversationId);
       return commitManifest(paths, state);
     }
-    var signature = projectionSignature(pathsFor(Object.assign({}, scope, { conversationId: conversationId })), state, conversationId);
-    if (conversation.projectionReadingHash !== signature.readingHash ||
-        conversation.projectionProgress && canonicalize(conversation.projectionProgress) !== canonicalize(signature.progress) ||
-        conversation.projectionIndex && canonicalize(conversation.projectionIndex) !== canonicalize(signature.index)) {
+    var ownerPaths = pathsFor(Object.assign({}, scope, { conversationId: conversationId }));
+    var signature = projectionSignature(ownerPaths, state, conversationId);
+    var readingMissing = !!conversation.projectionReadingHash && !signature.readingHash && projectionFileMissing(ownerPaths.readingPath);
+    var progressMissing = !!conversation.projectionProgress && !signature.progress.present && projectionFileMissing(ownerPaths.progressPath);
+    var indexMissing = !!conversation.projectionIndex && !signature.index.present && projectionFileMissing(ownerPaths.indexPath);
+    var readingChanged = !!conversation.projectionReadingHash && (!signature.readingHash ? !readingMissing : conversation.projectionReadingHash !== signature.readingHash);
+    var progressChanged = !!conversation.projectionProgress && (!signature.progress.present ? !progressMissing : canonicalize(conversation.projectionProgress) !== canonicalize(signature.progress));
+    var indexChanged = !!conversation.projectionIndex && (!signature.index.present ? !indexMissing : canonicalize(conversation.projectionIndex) !== canonicalize(signature.index));
+    if (readingChanged || progressChanged || indexChanged) {
       throw codedError("EXTERNAL_LEGACY_MUTATION_DETECTED", "Legacy reading projection changed outside the authoritative state", 409);
     }
-    if (!conversation.projectionProgress || !conversation.projectionIndex) {
-      projectConversation(pathsFor(Object.assign({}, scope, { conversationId: conversationId })), state, conversationId);
-      markProjectionClean(pathsFor(Object.assign({}, scope, { conversationId: conversationId })), state, conversationId);
+    // Missing legacy files are recoverable: they are projections, and the
+    // authoritative state can recreate them. Keep an inactive conversation
+    // pending so opening it later repairs the projection without resurrecting
+    // stale files during a different conversation's bootstrap.
+    var projectionMissing = readingMissing || progressMissing || indexMissing ||
+      !conversation.projectionProgress || !conversation.projectionIndex;
+    if (projectionMissing) {
+      conversation.projectionStatus = "pending";
+      if (scope.conversationId === conversationId) {
+        projectConversation(ownerPaths, state, conversationId);
+        markProjectionClean(ownerPaths, state, conversationId);
+      }
       return commitManifest(paths, state);
     }
     return state;
@@ -548,7 +571,8 @@ function createAutoAdvance(options) {
       var targetConversation = state.conversations[scope.conversationId];
       if (targetConversation.projectionStatus === "clean") {
         var targetPaths = pathsFor(scope);
-        if (targetConversation.projectionReadingHash !== fileHash(targetPaths.readingPath)) {
+        var targetReadingHash = fileHash(targetPaths.readingPath);
+        if (targetConversation.projectionReadingHash && targetReadingHash && targetConversation.projectionReadingHash !== targetReadingHash) {
           throw codedError("EXTERNAL_LEGACY_MUTATION_DETECTED", "Inactive conversation reading projection changed outside the authoritative state", 409);
         }
       }
@@ -611,7 +635,8 @@ function createAutoAdvance(options) {
       if (scope.sessionEpoch < state.scope.sessionEpoch) throw codedError("SCOPE_STALE", "Account session epoch is stale", 409);
       var conversation = state.conversations && state.conversations[scope.conversationId];
       if (!conversation) return null;
-      if (conversation.projectionStatus === "clean" && conversation.projectionReadingHash !== fileHash(paths.readingPath)) {
+      var readingHash = fileHash(paths.readingPath);
+      if (conversation.projectionStatus === "clean" && conversation.projectionReadingHash && readingHash && conversation.projectionReadingHash !== readingHash) {
         throw codedError("EXTERNAL_LEGACY_MUTATION_DETECTED", "Conversation reading projection changed outside the authoritative state", 409);
       }
       return publicSnapshot(state, conversation);
@@ -631,7 +656,8 @@ function createAutoAdvance(options) {
       if (scope.sessionEpoch < state.scope.sessionEpoch) throw codedError("SCOPE_STALE", "Account session epoch is stale", 409);
       var conversation = state.conversations && state.conversations[scope.conversationId];
       if (!conversation) return null;
-      if (conversation.projectionStatus === "clean" && conversation.projectionReadingHash !== fileHash(paths.readingPath)) {
+      var readingHash = fileHash(paths.readingPath);
+      if (conversation.projectionStatus === "clean" && conversation.projectionReadingHash && readingHash && conversation.projectionReadingHash !== readingHash) {
         throw codedError("EXTERNAL_LEGACY_MUTATION_DETECTED", "Conversation reading projection changed outside the authoritative state", 409);
       }
       return publicSnapshot(state, conversation);

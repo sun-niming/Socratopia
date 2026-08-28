@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "functions": {
+    "/api/chat": {
+      "maxDuration": 120
+    },
+    "/api/companion/reconcile-persona": {
+      "maxDuration": 120
+    },
+    "/api/custom-companions/merge-persona": {
+      "maxDuration": 60
+    },
+    "/api/groupchat": {
+      "maxDuration": 120
+    }
+  }
+}
