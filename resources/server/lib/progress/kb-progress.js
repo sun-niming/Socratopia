@@ -3,6 +3,7 @@
 var fs = require("fs");
 var path = require("path");
 var Resume = require("../resume/progress-resume.js");
+var localAuth = require("../local-request-auth.js");
 
 var MARKER_OPEN = "<!-- kbProgress:";
 var MARKER_RE = /<!--\s*kbProgress\s*:(\{[\s\S]*?\})\s*-->/g;
@@ -675,7 +676,7 @@ function findConcept(textbookDir, patterns, startPage, endPage) {
 
 function safeSegment(value) {
   value = String(value || "");
-  if (!value || value.length > 128 || value.indexOf("..") >= 0 || /[\\/\x00-\x1f]/.test(value)) return null;
+  if (!localAuth.validIdentifier(value)) return null;
   return value;
 }
 
@@ -687,10 +688,13 @@ function requestPaths(request, body) {
   if (!profileId || !worldId || !textbookId || !conversationId) return null;
   var root = path.resolve(process.env.PROJECT_ROOT || "");
   if (!root) return null;
-  var accountId = safeSegment(request && request.headers && request.headers.get("X-Account-Id") || "local") || "local";
-  var accountWorld = path.join(root, "accounts", accountId, "profiles", profileId, "worlds", worldId);
-  var legacyWorld = path.join(root, "profiles", profileId, "worlds", worldId);
-  var worldDir = fs.existsSync(accountWorld) || !fs.existsSync(legacyWorld) ? accountWorld : legacyWorld;
+  var contextStore = global.__SOCRATOPIA_ACCOUNT_REQUEST_CONTEXT__;
+  var accountId = contextStore && typeof contextStore.getAccountId === "function" ? safeSegment(contextStore.getAccountId()) : null;
+  // A missing trusted context is not an invitation to use the old shared
+  // `profiles/` tree. Legacy files are projections and are reachable only
+  // after a capability-authenticated request has established this account.
+  if (!accountId) return null;
+  var worldDir = path.join(root, "accounts", accountId, "profiles", profileId, "worlds", worldId);
   return {
     root: root,
     worldDir: worldDir,
@@ -965,7 +969,21 @@ function installRouteWrapper(exported) {
     var methods = routeModule && routeModule.methods;
     if (!methods || typeof methods.POST !== "function" || methods.POST.__kbProgressWrapped) return;
     var originalPost = methods.POST;
+    var routeAuthRequests = new WeakSet();
     var wrapped = async function (request, routeContext) {
+      // The progress hook runs outside the compiled route's pW decorator. Put
+      // it under the same verified capability/ALS first, otherwise path
+      // helpers would fall back to the bootstrap account while an SSE request
+      // is still in flight. The WeakSet prevents recursion when dispatch calls
+      // this wrapper again.
+      if (request && (typeof request.url === "string" || request.nextUrl) && !routeAuthRequests.has(request) && global.__SOCRATOPIA_ROUTE_AUTH__ && typeof global.__SOCRATOPIA_ROUTE_AUTH__.dispatch === "function") {
+        routeAuthRequests.add(request);
+        try {
+          return await global.__SOCRATOPIA_ROUTE_AUTH__.dispatch(wrapped, request, [routeContext], "/api/chat");
+        } finally {
+          routeAuthRequests.delete(request);
+        }
+      }
       var body = null;
       try { body = await request.clone().json(); } catch (e) {}
       if (!body || typeof body !== "object") return originalPost.call(this, request, routeContext);

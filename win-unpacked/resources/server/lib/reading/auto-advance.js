@@ -105,9 +105,38 @@ function readJson(filePath) {
   catch (_) { return null; }
 }
 
+function readProjectionJson(filePath, label) {
+  var text;
+  try { text = fs.readFileSync(filePath, "utf8").replace(/^\uFEFF/, ""); }
+  catch (error) {
+    if (error && error.code === "ENOENT") return null;
+    throw codedError("EXTERNAL_LEGACY_MUTATION_DETECTED", "Legacy " + (label || "projection") + " is unavailable", 409);
+  }
+  if (!text.trim()) throw codedError("EXTERNAL_LEGACY_MUTATION_DETECTED", "Legacy " + (label || "projection") + " is empty", 409);
+  try { return JSON.parse(text); }
+  catch (_) { throw codedError("EXTERNAL_LEGACY_MUTATION_DETECTED", "Legacy " + (label || "projection") + " is corrupt", 409); }
+}
+
+function readJsonStrict(filePath, code, message) {
+  var text;
+  try { text = fs.readFileSync(filePath, "utf8").replace(/^\uFEFF/, ""); }
+  catch (error) {
+    if (error && error.code === "ENOENT") return null;
+    throw codedError(code, message, 500);
+  }
+  if (!text.trim()) throw codedError(code, message, 500);
+  try { return JSON.parse(text); }
+  catch (_) { throw codedError(code, message, 500); }
+}
+
 function fileHash(filePath) {
   try { return sha256(fs.readFileSync(filePath)); }
   catch (_) { return null; }
+}
+
+function projectionFileMissing(filePath) {
+  try { return !fs.statSync(filePath).isFile(); }
+  catch (error) { return !!error && error.code === "ENOENT"; }
 }
 
 function createAutoAdvance(options) {
@@ -116,6 +145,8 @@ function createAutoAdvance(options) {
   if (!projectRoot) throw codedError("advance_project_root_missing", "PROJECT_ROOT is required", 500);
   var getAccountContext = options.getAccountContext || function () { return null; };
   var bootId = options.bootId || "advance_" + crypto.randomBytes(16).toString("hex");
+  var now = typeof options.now === "function" ? options.now : Date.now;
+  var leaseMs = Math.max(100, Number(options.leaseMs) || 5 * 60 * 1000);
   var lockTails = new Map();
   var taskRegistry = new Map();
   var closed = false;
@@ -126,6 +157,7 @@ function createAutoAdvance(options) {
       throw codedError("advance_account_state_unavailable", "No active account", 409);
     }
     if (scope && scope.accountId && scope.accountId !== context.accountId) throw codedError("advance_scope_stale", "Account changed", 409);
+    if (scope && Number.isSafeInteger(scope.sessionEpoch) && scope.sessionEpoch !== context.sessionEpoch) throw codedError("SCOPE_STALE", "Account session changed", 409);
     return context;
   }
 
@@ -201,30 +233,78 @@ function createAutoAdvance(options) {
     return "generation-" + String(generation).padStart(12, "0") + "-" + hash.slice(0, 12) + ".json";
   }
 
+  function acquireCommitLock(paths) {
+    ensureDir(paths.stateDir);
+    var lockPath = path.join(paths.stateDir, "commit.lock");
+    var lockId = bootId + "_" + crypto.randomBytes(12).toString("hex");
+    var deadline = Date.now() + 15000;
+    for (;;) {
+      try {
+        var fd = fs.openSync(lockPath, "wx", 384);
+        fs.writeFileSync(fd, JSON.stringify({ bootId: bootId, lockId: lockId, pid: process.pid, expiresAt: Date.now() + 10000 }), "utf8");
+        fs.fsyncSync(fd);
+        return function release() {
+          try { fs.closeSync(fd); } catch (_) {}
+          try {
+            var current = readJsonStrict(lockPath, "advance_commit_lock_invalid", "Reading-state commit lock is invalid");
+            if (current && current.lockId === lockId) fs.unlinkSync(lockPath);
+          } catch (_) {}
+        };
+      } catch (error) {
+        if (!error || error.code !== "EEXIST") throw error;
+        var existing = null;
+        try { existing = readJsonStrict(lockPath, "advance_commit_lock_invalid", "Reading-state commit lock is invalid"); } catch (_) {}
+        if (!existing) {
+          try {
+            var invalidStat = fs.lstatSync(lockPath);
+            if (Date.now() - invalidStat.mtimeMs >= 1000) {
+              fs.unlinkSync(lockPath);
+              continue;
+            }
+          } catch (_) {}
+        }
+        var alive = false;
+        if (existing && Number.isInteger(Number(existing.pid)) && Number(existing.pid) > 0) {
+          try { process.kill(Number(existing.pid), 0); alive = true; }
+          catch (probeError) { alive = !!probeError && probeError.code === "EPERM"; }
+        }
+        if (existing && (Number(existing.expiresAt) <= Date.now() || !alive)) {
+          try { fs.unlinkSync(lockPath); continue; } catch (_) {}
+        }
+        if (Date.now() >= deadline) throw codedError("advance_commit_lock_timeout", "Reading-state commit lock timed out", 503);
+        Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, 10);
+      }
+    }
+  }
+
   function commitManifest(paths, state) {
-    state = clone(state);
-    state.schemaVersion = SCHEMA_VERSION;
-    state.stateGeneration = Math.max(0, Number(state.stateGeneration) || 0) + 1;
-    state.updatedAt = nowIso();
-    var serialized = JSON.stringify(state, null, 2);
-    var manifestHash = sha256(serialized);
-    var fileName = generationName(state.stateGeneration, manifestHash);
-    ensureDir(paths.generationsDir);
-    var manifestPath = path.join(paths.generationsDir, fileName);
-    if (!fs.existsSync(manifestPath)) atomicWrite(manifestPath, serialized);
-    var pointer = {
-      schemaVersion: SCHEMA_VERSION,
-      stateGeneration: state.stateGeneration,
-      manifest: fileName,
-      manifestHash: manifestHash,
-      committedAt: nowIso()
-    };
-    atomicWrite(paths.pointerPath, JSON.stringify(pointer, null, 2));
-    return state;
+    var expectedGeneration = Math.max(0, Number(state.stateGeneration) || 0);
+    var expectedManifestHash = state._pointerManifestHash || null;
+    var release = acquireCommitLock(paths);
+    try {
+      var currentPointer = readJsonStrict(paths.pointerPath, "advance_pointer_invalid", "Reading-state pointer is invalid");
+      if (currentPointer) {
+        if (currentPointer.stateGeneration !== expectedGeneration || expectedManifestHash && currentPointer.manifestHash !== expectedManifestHash) throw codedError("SCOPE_STALE", "Reading-state generation changed before commit", 409);
+      } else if (expectedGeneration !== 0 || expectedManifestHash) throw codedError("advance_pointer_missing", "Reading-state pointer disappeared", 500);
+      state = clone(state);
+      state.schemaVersion = SCHEMA_VERSION;
+      state.stateGeneration = expectedGeneration + 1;
+      state.updatedAt = nowIso();
+      var serialized = JSON.stringify(state, null, 2);
+      var manifestHash = sha256(serialized);
+      var fileName = generationName(state.stateGeneration, manifestHash);
+      ensureDir(paths.generationsDir);
+      var manifestPath = path.join(paths.generationsDir, fileName);
+      if (!fs.existsSync(manifestPath)) atomicWrite(manifestPath, serialized);
+      var pointer = { schemaVersion: SCHEMA_VERSION, stateGeneration: state.stateGeneration, manifest: fileName, manifestHash: manifestHash, committedAt: nowIso() };
+      atomicWrite(paths.pointerPath, JSON.stringify(pointer, null, 2));
+      Object.defineProperty(state, "_pointerManifestHash", { value: manifestHash, enumerable: false, configurable: true });
+      return state;
+    } finally { release(); }
   }
 
   function readCommitted(paths) {
-    var pointer = readJson(paths.pointerPath);
+    var pointer = readJsonStrict(paths.pointerPath, "advance_pointer_invalid", "Reading-state pointer is invalid");
     if (!pointer) return null;
     if (pointer.schemaVersion !== SCHEMA_VERSION || !Number.isSafeInteger(pointer.stateGeneration) || !pointer.manifest || !pointer.manifestHash) {
       throw codedError("advance_pointer_invalid", "Reading-state pointer is invalid", 500);
@@ -232,15 +312,18 @@ function createAutoAdvance(options) {
     var manifestPath = path.join(paths.generationsDir, path.basename(pointer.manifest));
     var serialized = readText(manifestPath);
     if (!serialized || sha256(serialized) !== pointer.manifestHash) throw codedError("advance_manifest_invalid", "Reading-state manifest is missing or corrupt", 500);
-    var state = JSON.parse(serialized);
+    var state;
+    try { state = JSON.parse(serialized); }
+    catch (_) { throw codedError("advance_manifest_invalid", "Reading-state manifest is missing or corrupt", 500); }
     if (state.schemaVersion !== SCHEMA_VERSION || state.stateGeneration !== pointer.stateGeneration) throw codedError("advance_generation_mismatch", "Pointer generation mismatch", 500);
+    Object.defineProperty(state, "_pointerManifestHash", { value: pointer.manifestHash, enumerable: false, configurable: true });
     return state;
   }
 
   function legacyRange(paths) {
     var reading = readText(paths.readingPath);
     var readingRange = parseRange(reading);
-    var progress = readJson(paths.progressPath) || {};
+    var progress = readProjectionJson(paths.progressPath, "progress") || {};
     var progressRange = progress.loadedCursor && Number.isInteger(progress.loadedCursor.startPage) && Number.isInteger(progress.loadedCursor.endPage)
       ? { startPage: progress.loadedCursor.startPage, endPage: progress.loadedCursor.endPage }
       : null;
@@ -300,7 +383,9 @@ function createAutoAdvance(options) {
       candidate: null,
       turns: {},
       projectionStatus: "pending",
-      projectionReadingHash: null
+      projectionReadingHash: null,
+      projectionProgress: null,
+      projectionIndex: null
     };
   }
 
@@ -326,15 +411,14 @@ function createAutoAdvance(options) {
     state.conversations[scope.conversationId] = conversation;
     state = commitManifest(paths, state);
     projectConversation(paths, state, scope.conversationId);
-    state.conversations[scope.conversationId].projectionStatus = "clean";
-    state.conversations[scope.conversationId].projectionReadingHash = fileHash(paths.readingPath);
+    markProjectionClean(paths, state, scope.conversationId);
     state = commitManifest(paths, state);
     atomicWrite(paths.upgradePath, JSON.stringify({ schemaVersion: SCHEMA_VERSION, phase: "complete", stateGeneration: state.stateGeneration, completedAt: nowIso() }, null, 2));
     return state;
   }
 
   function updateIndexCurrentPage(paths, textbookId, currentPage) {
-    var index = readJson(paths.indexPath);
+    var index = readProjectionJson(paths.indexPath, "textbook index");
     if (!index || !Array.isArray(index.textbooks)) return;
     var changed = false;
     index.textbooks = index.textbooks.map(function (entry) {
@@ -354,37 +438,104 @@ function createAutoAdvance(options) {
     if (!conversation) throw codedError("advance_conversation_missing", "Conversation state missing", 500);
     var content = readBlob(paths, conversation.loadedContent.ref, conversation.loadedContent.hash).toString("utf8");
     atomicWrite(paths.readingPath, content);
-    var progress = readJson(paths.progressPath) || {};
+    var progress = readProjectionJson(paths.progressPath, "progress") || {};
+    var projectedRange = conversation.loadedRange || {};
     progress.schemaVersion = Math.max(3, Number(progress.schemaVersion) || 0);
     progress.textbookId = state.scope.textbookId;
     progress.sourceConversationId = conversationId;
     progress.loadedCursor = {
-      chunkId: "loaded-" + String(conversation.loadedRange.startPage).padStart(4, "0"),
-      ordinal: conversation.loadedRange.startPage,
-      startPage: conversation.loadedRange.startPage,
-      endPage: conversation.loadedRange.endPage,
+      chunkId: projectedRange.chunkId || "loaded-" + String(projectedRange.startPage).padStart(4, "0"),
+      ordinal: Number.isInteger(projectedRange.ordinal) ? projectedRange.ordinal : projectedRange.startPage,
+      startPage: projectedRange.startPage,
+      endPage: projectedRange.endPage,
       updatedAt: nowIso()
     };
-    progress.currentPage = conversation.loadedRange.startPage;
+    if (projectedRange.loadedOnly === true) progress.loadedCursor.loadedOnly = true;
+    if (projectedRange.jumpLoaded === true) progress.loadedCursor.jumpLoaded = true;
+    var taughtStartPage = Number(progress.taughtCursor && progress.taughtCursor.startPage);
+    if (projectedRange.loadedOnly === true && Number.isInteger(taughtStartPage) && taughtStartPage > 0) {
+      progress.lastTaughtPage = taughtStartPage;
+      progress.currentPage = taughtStartPage;
+    } else {
+      progress.currentPage = projectedRange.startPage;
+    }
     progress.updatedAt = nowIso();
     atomicWrite(paths.progressPath, JSON.stringify(progress, null, 2));
-    updateIndexCurrentPage(paths, state.scope.textbookId, conversation.loadedRange.startPage);
+    updateIndexCurrentPage(paths, state.scope.textbookId, projectedRange.startPage);
+  }
+
+  function projectionSignature(paths, state, conversationId) {
+    var conversation = state.conversations[conversationId];
+    var progress = readProjectionJson(paths.progressPath, "progress");
+    var index = readProjectionJson(paths.indexPath, "textbook index");
+    var entry = index && Array.isArray(index.textbooks) ? index.textbooks.find(function (item) { return item && item.id === state.scope.textbookId; }) : null;
+    var progressSignature = progress ? {
+      present: true,
+      sourceConversationId: progress.sourceConversationId || null,
+      startPage: Number(progress.loadedCursor && progress.loadedCursor.startPage) || null,
+      endPage: Number(progress.loadedCursor && progress.loadedCursor.endPage) || null,
+      currentPage: Number(progress.currentPage) || null
+    } : { present: false };
+    var authoritativeRange = conversation && conversation.loadedRange || {};
+    if (authoritativeRange.chunkId) progressSignature.chunkId = progress && progress.loadedCursor && progress.loadedCursor.chunkId || null;
+    if (Number.isInteger(authoritativeRange.ordinal)) progressSignature.ordinal = Number(progress && progress.loadedCursor && progress.loadedCursor.ordinal) || null;
+    if (authoritativeRange.loadedOnly === true) progressSignature.loadedOnly = !!(progress && progress.loadedCursor && progress.loadedCursor.loadedOnly);
+    if (authoritativeRange.jumpLoaded === true) progressSignature.jumpLoaded = !!(progress && progress.loadedCursor && progress.loadedCursor.jumpLoaded);
+    return {
+      readingHash: fileHash(paths.readingPath),
+      progress: progressSignature,
+      index: entry ? { present: true, currentPage: Number(entry.currentPage) || null } : { present: false }
+    };
+  }
+
+  function markProjectionClean(paths, state, conversationId) {
+    var conversation = state.conversations[conversationId];
+    var signature = projectionSignature(paths, state, conversationId);
+    conversation.projectionStatus = "clean";
+    conversation.projectionReadingHash = signature.readingHash;
+    conversation.projectionProgress = signature.progress;
+    conversation.projectionIndex = signature.index;
   }
 
   function recover(paths, scope, state) {
     var conversationId = state.owner && state.owner.conversationId || scope.conversationId;
     var conversation = state.conversations[conversationId];
     if (!conversation) return state;
-    var actualHash = fileHash(path.join(paths.worldDir, "conversations", conversationId, "current_reading.md"));
     if (conversation.projectionStatus === "pending") {
+      // A pending projection may belong to the previous conversation. Do not
+      // recreate that conversation's legacy file while opening a new one (the
+      // end-class flow intentionally removes it); activation will publish the
+      // requested conversation's projection instead.
+      if (scope.conversationId !== conversationId) return state;
       var ownerPaths = pathsFor(Object.assign({}, scope, { conversationId: conversationId }));
       projectConversation(ownerPaths, state, conversationId);
-      conversation.projectionStatus = "clean";
-      conversation.projectionReadingHash = fileHash(ownerPaths.readingPath);
+      markProjectionClean(ownerPaths, state, conversationId);
       return commitManifest(paths, state);
     }
-    if (conversation.projectionReadingHash && actualHash && actualHash !== conversation.projectionReadingHash) {
+    var ownerPaths = pathsFor(Object.assign({}, scope, { conversationId: conversationId }));
+    var signature = projectionSignature(ownerPaths, state, conversationId);
+    var readingMissing = !!conversation.projectionReadingHash && !signature.readingHash && projectionFileMissing(ownerPaths.readingPath);
+    var progressMissing = !!conversation.projectionProgress && !signature.progress.present && projectionFileMissing(ownerPaths.progressPath);
+    var indexMissing = !!conversation.projectionIndex && !signature.index.present && projectionFileMissing(ownerPaths.indexPath);
+    var readingChanged = !!conversation.projectionReadingHash && (!signature.readingHash ? !readingMissing : conversation.projectionReadingHash !== signature.readingHash);
+    var progressChanged = !!conversation.projectionProgress && (!signature.progress.present ? !progressMissing : canonicalize(conversation.projectionProgress) !== canonicalize(signature.progress));
+    var indexChanged = !!conversation.projectionIndex && (!signature.index.present ? !indexMissing : canonicalize(conversation.projectionIndex) !== canonicalize(signature.index));
+    if (readingChanged || progressChanged || indexChanged) {
       throw codedError("EXTERNAL_LEGACY_MUTATION_DETECTED", "Legacy reading projection changed outside the authoritative state", 409);
+    }
+    // Missing legacy files are recoverable: they are projections, and the
+    // authoritative state can recreate them. Keep an inactive conversation
+    // pending so opening it later repairs the projection without resurrecting
+    // stale files during a different conversation's bootstrap.
+    var projectionMissing = readingMissing || progressMissing || indexMissing ||
+      !conversation.projectionProgress || !conversation.projectionIndex;
+    if (projectionMissing) {
+      conversation.projectionStatus = "pending";
+      if (scope.conversationId === conversationId) {
+        projectConversation(ownerPaths, state, conversationId);
+        markProjectionClean(ownerPaths, state, conversationId);
+      }
+      return commitManifest(paths, state);
     }
     return state;
   }
@@ -394,6 +545,27 @@ function createAutoAdvance(options) {
     if (!state) return migrate(paths, scope);
     if (!state.scope || state.scope.accountId !== scope.accountId || state.scope.profileId !== scope.profileId || state.scope.worldId !== scope.worldId || state.scope.textbookId !== scope.textbookId) {
       throw codedError("advance_scope_mismatch", "Authoritative state belongs to another scope", 409);
+    }
+    if (scope.sessionEpoch < state.scope.sessionEpoch) {
+      throw codedError("SCOPE_STALE", "Account session epoch is stale", 409);
+    }
+    if (state.scope.sessionEpoch !== scope.sessionEpoch) {
+      state.scope.sessionEpoch = scope.sessionEpoch;
+      state.scope.scopeGeneration = Math.max(0, Number(state.scope.scopeGeneration) || 0) + 1;
+      Object.keys(state.conversations || {}).forEach(function (conversationId) {
+        var turns = state.conversations[conversationId].turns || {};
+        Object.keys(turns).forEach(function (turnId) {
+          var turn = turns[turnId];
+          if (turn.turnState !== "MODEL_RUNNING") return;
+          turn.lastAttemptId = Math.max(Number(turn.lastAttemptId) || 0, Number(turn.executor && turn.executor.attemptId) || 0);
+          turn.turnState = "CANCELLED_RETRYABLE";
+          turn.terminalResult = "error";
+          turn.errorCode = "advance_session_changed";
+          turn.executor = null;
+          turn.updatedAt = nowIso();
+        });
+      });
+      state = commitManifest(paths, state);
     }
     return recover(paths, scope, state);
   }
@@ -408,6 +580,14 @@ function createAutoAdvance(options) {
   function activateOwner(paths, state, scope) {
     ensureConversation(paths, state, scope);
     if (!state.owner || state.owner.conversationId !== scope.conversationId) {
+      var targetConversation = state.conversations[scope.conversationId];
+      if (targetConversation.projectionStatus === "clean") {
+        var targetPaths = pathsFor(scope);
+        var targetReadingHash = fileHash(targetPaths.readingPath);
+        if (targetConversation.projectionReadingHash && targetReadingHash && targetConversation.projectionReadingHash !== targetReadingHash) {
+          throw codedError("EXTERNAL_LEGACY_MUTATION_DETECTED", "Inactive conversation reading projection changed outside the authoritative state", 409);
+        }
+      }
       var previousKey = lockKey(scope);
       var task = taskRegistry.get(previousKey);
       if (task && task.controller) task.controller.abort(codedError("advance_scope_stale"));
@@ -415,14 +595,24 @@ function createAutoAdvance(options) {
       state.conversations[scope.conversationId].projectionStatus = "pending";
       state = commitManifest(paths, state);
       projectConversation(paths, state, scope.conversationId);
-      state.conversations[scope.conversationId].projectionStatus = "clean";
-      state.conversations[scope.conversationId].projectionReadingHash = fileHash(paths.readingPath);
+      markProjectionClean(paths, state, scope.conversationId);
       state = commitManifest(paths, state);
     }
     return state;
   }
 
   function publicSnapshot(state, conversation) {
+    var readingRange = {
+      startPage: conversation.loadedRange.startPage,
+      endPage: conversation.loadedRange.endPage,
+      readingVersion: conversation.readingVersion,
+      stateGeneration: state.stateGeneration,
+      conversationId: conversation.conversationId
+    };
+    if (conversation.loadedRange.chunkId) readingRange.chunkId = conversation.loadedRange.chunkId;
+    if (Number.isInteger(conversation.loadedRange.ordinal)) readingRange.ordinal = conversation.loadedRange.ordinal;
+    if (conversation.loadedRange.loadedOnly === true) readingRange.loadedOnly = true;
+    if (conversation.loadedRange.jumpLoaded === true) readingRange.jumpLoaded = true;
     return {
       advanceProtocolVersion: API_VERSION,
       causalConversationRevision: conversation.causalConversationRevision,
@@ -430,13 +620,7 @@ function createAutoAdvance(options) {
       stateGeneration: state.stateGeneration,
       ownerGeneration: state.owner.ownerGeneration,
       parentAssistantMessageId: conversation.lastAssistantMessageId || null,
-      readingRange: {
-        startPage: conversation.loadedRange.startPage,
-        endPage: conversation.loadedRange.endPage,
-        readingVersion: conversation.readingVersion,
-        stateGeneration: state.stateGeneration,
-        conversationId: conversation.conversationId
-      }
+      readingRange: readingRange
     };
   }
 
@@ -444,8 +628,31 @@ function createAutoAdvance(options) {
     var scope = normalizeScope(input);
     var paths = pathsFor(scope);
     return withLock(scope, function () {
+      contextFor(scope);
       var state = activateOwner(paths, loadOrMigrate(paths, scope), scope);
       return publicSnapshot(state, state.conversations[scope.conversationId]);
+    });
+  }
+
+  function readSnapshot(input) {
+    var scope = normalizeScope(input);
+    var paths = pathsFor(scope);
+    return withLock(scope, function () {
+      contextFor(scope);
+      var state = readCommitted(paths);
+      if (!state) return null;
+      if (!state.scope || state.scope.accountId !== scope.accountId || state.scope.profileId !== scope.profileId || state.scope.worldId !== scope.worldId || state.scope.textbookId !== scope.textbookId) {
+        throw codedError("advance_scope_mismatch", "Authoritative state belongs to another scope", 409);
+      }
+      if (scope.sessionEpoch < state.scope.sessionEpoch) throw codedError("SCOPE_STALE", "Account session epoch is stale", 409);
+      state = recover(paths, scope, state);
+      var conversation = state.conversations && state.conversations[scope.conversationId];
+      if (!conversation) return null;
+      var readingHash = fileHash(paths.readingPath);
+      if (conversation.projectionStatus === "clean" && conversation.projectionReadingHash && readingHash && conversation.projectionReadingHash !== readingHash) {
+        throw codedError("EXTERNAL_LEGACY_MUTATION_DETECTED", "Conversation reading projection changed outside the authoritative state", 409);
+      }
+      return publicSnapshot(state, conversation);
     });
   }
 
@@ -484,7 +691,7 @@ function createAutoAdvance(options) {
       bootId: bootId,
       leaseId: crypto.randomBytes(16).toString("hex"),
       attemptId: attemptId,
-      expiresAt: Date.now() + 5 * 60 * 1000
+      expiresAt: now() + leaseMs
     };
   }
 
@@ -492,12 +699,40 @@ function createAutoAdvance(options) {
     return !!left && !!right && left.bootId === right.bootId && left.leaseId === right.leaseId && left.attemptId === right.attemptId;
   }
 
+  function cancelAcceptedExecutor(paths, scope, clientTurnId, executor, errorCode) {
+    for (var attempt = 0; attempt < 8; attempt += 1) {
+      var state = readCommitted(paths);
+      if (!state || !state.scope ||
+          state.scope.accountId !== scope.accountId ||
+          state.scope.profileId !== scope.profileId ||
+          state.scope.worldId !== scope.worldId ||
+          state.scope.textbookId !== scope.textbookId) return false;
+      var conversation = state.conversations && state.conversations[scope.conversationId];
+      var turn = conversation && conversation.turns && conversation.turns[clientTurnId];
+      if (!turn || turn.turnState !== "MODEL_RUNNING" || !sameExecutor(turn.executor, executor)) return false;
+      turn.lastAttemptId = Math.max(Number(turn.lastAttemptId) || 0, Number(turn.executor && turn.executor.attemptId) || 0);
+      turn.turnState = "CANCELLED_RETRYABLE";
+      turn.terminalResult = "error";
+      turn.errorCode = String(errorCode || "begin_turn_failed").slice(0, 128);
+      turn.executor = null;
+      turn.updatedAt = nowIso();
+      try {
+        commitManifest(paths, state);
+        return true;
+      } catch (error) {
+        if (!error || error.code !== "SCOPE_STALE") throw error;
+      }
+    }
+    return false;
+  }
+
   async function beginTurn(input) {
     var scope = normalizeScope(input);
     var paths = pathsFor(scope);
     var normalized = normalizeEnvelope(input, scope);
     return withLock(scope, async function () {
-      var state = activateOwner(paths, loadOrMigrate(paths, scope), scope);
+      contextFor(scope);
+      var state = loadOrMigrate(paths, scope);
       var conversation = ensureConversation(paths, state, scope);
       var existing = conversation.turns[input.clientTurnId];
       if (existing) {
@@ -506,22 +741,31 @@ function createAutoAdvance(options) {
           var replay = existing.responseBlobRef ? readBlob(paths, existing.responseBlobRef, existing.responseHash).toString("utf8") : "";
           return Object.assign({ replay: true, responseText: replay, envelopeHash: existing.envelopeHash, executorKey: null }, publicSnapshot(state, conversation));
         }
-        if (existing.turnState === "MODEL_RUNNING" && existing.executor && existing.executor.expiresAt > Date.now()) throw codedError("TURN_IN_PROGRESS", "This turn is already running", 409);
-        var nextAttempt = Math.max(0, Number(existing.executor && existing.executor.attemptId) || 0) + 1;
+        if (!state.owner || state.owner.conversationId !== scope.conversationId) throw codedError("SCOPE_STALE", "Conversation is no longer active", 409);
+        if (existing.turnState === "MODEL_RUNNING" && existing.executor && existing.executor.expiresAt > now()) throw codedError("TURN_IN_PROGRESS", "This turn is already running", 409);
+        var retrySnapshot = existing.promptSnapshot;
+        if (!retrySnapshot || !retrySnapshot.blobRef || !retrySnapshot.contentHash) throw codedError("advance_prompt_snapshot_missing", "Accepted turn prompt snapshot is unavailable", 500);
+        if (retrySnapshot.readingVersion !== conversation.readingVersion || retrySnapshot.ownerGeneration !== state.owner.ownerGeneration || retrySnapshot.scopeGeneration !== state.scope.scopeGeneration || retrySnapshot.causalConversationRevision !== conversation.causalConversationRevision) {
+          var staleRetry = codedError("SCOPE_STALE", "Accepted turn prompt snapshot is stale", 409);
+          staleRetry.snapshot = publicSnapshot(state, conversation);
+          throw staleRetry;
+        }
+        var retryContent = readBlob(paths, retrySnapshot.blobRef, retrySnapshot.contentHash).toString("utf8");
+        var nextAttempt = Math.max(0, Number(existing.lastAttemptId) || 0, Number(existing.executor && existing.executor.attemptId) || 0) + 1;
+        existing.lastAttemptId = nextAttempt;
         existing.turnState = "MODEL_RUNNING";
         existing.executor = newExecutor(existing, nextAttempt);
         existing.updatedAt = nowIso();
         state = commitManifest(paths, state);
-        var retryContent = readBlob(paths, conversation.loadedContent.ref, conversation.loadedContent.hash).toString("utf8");
         return Object.assign({ replay: false, retry: true, envelopeHash: existing.envelopeHash, executorKey: clone(existing.executor), promptSnapshot: {
-          blobRef: conversation.loadedContent.ref,
-          contentHash: conversation.loadedContent.hash,
+          blobRef: retrySnapshot.blobRef,
+          contentHash: retrySnapshot.contentHash,
           content: retryContent,
-          readingVersion: conversation.readingVersion,
+          readingVersion: retrySnapshot.readingVersion,
           stateGenerationAtStart: state.stateGeneration,
-          causalConversationRevision: conversation.causalConversationRevision,
-          scopeGeneration: state.scope.scopeGeneration,
-          ownerGeneration: state.owner.ownerGeneration
+          causalConversationRevision: retrySnapshot.causalConversationRevision,
+          scopeGeneration: retrySnapshot.scopeGeneration,
+          ownerGeneration: retrySnapshot.ownerGeneration
         } }, publicSnapshot(state, conversation));
       }
 
@@ -535,6 +779,8 @@ function createAutoAdvance(options) {
         staleParent.snapshot = publicSnapshot(state, conversation);
         throw staleParent;
       }
+      state = activateOwner(paths, state, scope);
+      conversation = state.conversations[scope.conversationId];
 
       var ordinal = conversation.serverTurnOrdinal + 1;
       var intent = explicitIntent(normalized.envelope);
@@ -561,6 +807,7 @@ function createAutoAdvance(options) {
         }
         if (transition.type !== "page" && Number(loaded.startPage) !== conversation.loadedRange.endPage + 1) throw codedError("advance_non_adjacent", "Automatic advance must be adjacent", 409);
       }
+      contextFor(scope);
 
       conversation.serverTurnOrdinal = ordinal;
       conversation.causalConversationRevision += 1;
@@ -577,6 +824,14 @@ function createAutoAdvance(options) {
       if (hold) conversation.pendingAdvance = null;
 
       var executor = newExecutor(null, 1);
+      var immutablePromptSnapshot = {
+        blobRef: conversation.loadedContent.ref,
+        contentHash: conversation.loadedContent.hash,
+        readingVersion: conversation.readingVersion,
+        causalConversationRevision: conversation.causalConversationRevision,
+        scopeGeneration: state.scope.scopeGeneration,
+        ownerGeneration: state.owner.ownerGeneration
+      };
       conversation.turns[input.clientTurnId] = {
         clientTurnId: input.clientTurnId,
         serverTurnOrdinal: ordinal,
@@ -586,29 +841,39 @@ function createAutoAdvance(options) {
         effectTxId: "tx_" + crypto.randomBytes(16).toString("hex"),
         rangeEffectReadingVersion: conversation.readingVersion,
         executor: executor,
+        lastAttemptId: 1,
+        promptSnapshot: immutablePromptSnapshot,
         createdAt: nowIso(),
         updatedAt: nowIso()
       };
       if (Object.keys(conversation.turns).length > MAX_TURNS_PER_CONVERSATION) throw codedError("advance_turn_ledger_limit", "Turn ledger limit reached; archive this lesson", 409);
-      state = commitManifest(paths, state);
-      conversation = state.conversations[scope.conversationId];
-      if (conversation.projectionStatus === "pending") {
-        projectConversation(paths, state, scope.conversationId);
-        conversation.projectionStatus = "clean";
-        conversation.projectionReadingHash = fileHash(paths.readingPath);
-        state = commitManifest(paths, state);
-      }
       var promptContent = readBlob(paths, conversation.loadedContent.ref, conversation.loadedContent.hash).toString("utf8");
-      return Object.assign({ replay: false, retry: false, envelopeHash: normalized.hash, rangeChanged: !!loaded, rangeReason: transition && transition.reason || null, executorKey: clone(executor), promptSnapshot: {
-        blobRef: conversation.loadedContent.ref,
-        contentHash: conversation.loadedContent.hash,
-        content: promptContent,
-        readingVersion: conversation.readingVersion,
-        stateGenerationAtStart: state.stateGeneration,
-        causalConversationRevision: conversation.causalConversationRevision,
-        scopeGeneration: state.scope.scopeGeneration,
-        ownerGeneration: state.owner.ownerGeneration
-      } }, publicSnapshot(state, conversation));
+      try {
+        state = commitManifest(paths, state);
+        conversation = state.conversations[scope.conversationId];
+        if (conversation.projectionStatus === "pending") {
+          projectConversation(paths, state, scope.conversationId);
+          markProjectionClean(paths, state, scope.conversationId);
+          state = commitManifest(paths, state);
+        }
+        return Object.assign({ replay: false, retry: false, envelopeHash: normalized.hash, rangeChanged: !!loaded, rangeReason: transition && transition.reason || null, executorKey: clone(executor), promptSnapshot: {
+          blobRef: immutablePromptSnapshot.blobRef,
+          contentHash: immutablePromptSnapshot.contentHash,
+          content: promptContent,
+          readingVersion: immutablePromptSnapshot.readingVersion,
+          stateGenerationAtStart: state.stateGeneration,
+          causalConversationRevision: immutablePromptSnapshot.causalConversationRevision,
+          scopeGeneration: immutablePromptSnapshot.scopeGeneration,
+          ownerGeneration: immutablePromptSnapshot.ownerGeneration
+        } }, publicSnapshot(state, conversation));
+      } catch (beginError) {
+        try {
+          cancelAcceptedExecutor(paths, scope, input.clientTurnId, executor, beginError && (beginError.code || beginError.message));
+        } catch (cleanupError) {
+          beginError.cleanupErrorCode = cleanupError && (cleanupError.code || cleanupError.message) || "begin_turn_cleanup_failed";
+        }
+        throw beginError;
+      }
     });
   }
 
@@ -622,6 +887,7 @@ function createAutoAdvance(options) {
     var scope = normalizeScope(input);
     var paths = pathsFor(scope);
     return withLock(scope, function () {
+      contextFor(scope);
       var state = loadOrMigrate(paths, scope);
       if (!state.owner || state.owner.conversationId !== scope.conversationId) throw codedError("SCOPE_STALE", "Conversation is no longer active", 409);
       var conversation = ensureConversation(paths, state, scope);
@@ -630,7 +896,8 @@ function createAutoAdvance(options) {
       if (turn.envelopeHash !== input.envelopeHash) throw codedError("TURN_CONFLICT", "Turn envelope hash changed", 409);
       if (turn.turnState === "COMPLETED") return publicSnapshot(state, conversation);
       if (turn.turnState !== "MODEL_RUNNING" || !sameExecutor(turn.executor, input.executorKey)) throw codedError("SCOPE_STALE", "Model attempt lost its execution lease", 409);
-      if (!input.promptSnapshot || input.promptSnapshot.readingVersion !== conversation.readingVersion || input.promptSnapshot.ownerGeneration !== state.owner.ownerGeneration || input.promptSnapshot.scopeGeneration !== state.scope.scopeGeneration || input.promptSnapshot.causalConversationRevision !== conversation.causalConversationRevision) {
+      if (!Number.isFinite(Number(turn.executor.expiresAt)) || Number(turn.executor.expiresAt) <= now()) throw codedError("SCOPE_STALE", "Model attempt execution lease expired", 409);
+      if (!input.promptSnapshot || !turn.promptSnapshot || input.promptSnapshot.blobRef !== turn.promptSnapshot.blobRef || input.promptSnapshot.contentHash !== turn.promptSnapshot.contentHash || input.promptSnapshot.readingVersion !== turn.promptSnapshot.readingVersion || input.promptSnapshot.ownerGeneration !== turn.promptSnapshot.ownerGeneration || input.promptSnapshot.scopeGeneration !== turn.promptSnapshot.scopeGeneration || input.promptSnapshot.causalConversationRevision !== turn.promptSnapshot.causalConversationRevision || input.promptSnapshot.readingVersion !== conversation.readingVersion || input.promptSnapshot.ownerGeneration !== state.owner.ownerGeneration || input.promptSnapshot.scopeGeneration !== state.scope.scopeGeneration || input.promptSnapshot.causalConversationRevision !== conversation.causalConversationRevision) {
         throw codedError("SCOPE_STALE", "Prompt snapshot is stale", 409);
       }
       var result = writeBlob(paths, String(input.responseText || ""), "response");
@@ -657,11 +924,14 @@ function createAutoAdvance(options) {
     var scope = normalizeScope(input);
     var paths = pathsFor(scope);
     return withLock(scope, function () {
+      contextFor(scope);
       var state = loadOrMigrate(paths, scope);
       var conversation = ensureConversation(paths, state, scope);
       var turn = conversation.turns[input.clientTurnId];
       if (!turn || turn.turnState === "COMPLETED") return publicSnapshot(state, conversation);
-      if (input.executorKey && turn.executor && !sameExecutor(turn.executor, input.executorKey)) return publicSnapshot(state, conversation);
+      if (turn.turnState !== "MODEL_RUNNING") return publicSnapshot(state, conversation);
+      if (!sameExecutor(turn.executor, input.executorKey) || !Number.isFinite(Number(turn.executor.expiresAt)) || Number(turn.executor.expiresAt) <= now()) throw codedError("SCOPE_STALE", "Model attempt lost its execution lease", 409);
+      turn.lastAttemptId = Math.max(Number(turn.lastAttemptId) || 0, Number(turn.executor.attemptId) || 0);
       turn.turnState = input.retryable === false ? "FAILED" : "CANCELLED_RETRYABLE";
       turn.terminalResult = "error";
       turn.errorCode = String(input.errorCode || "turn_failed").slice(0, 128);
@@ -675,17 +945,53 @@ function createAutoAdvance(options) {
   function commitRange(input) {
     var scope = normalizeScope(input);
     var paths = pathsFor(scope);
+    var startPage = Number(input.startPage);
+    var endPage = Number(input.endPage);
+    var expected = input && input.expectedSnapshot;
+    var metadata = input && input.rangeMetadata;
+    var committedRange = { startPage: startPage, endPage: endPage };
+    if (!Number.isInteger(startPage) || startPage < 1 || !Number.isInteger(endPage) || endPage < startPage || !String(input.content || "").trim()) {
+      throw codedError("advance_range_invalid", "Invalid committed reading range", 400);
+    }
+    if (!expected ||
+        !Number.isSafeInteger(expected.ownerGeneration) ||
+        !Number.isSafeInteger(expected.readingVersion) ||
+        !Number.isSafeInteger(expected.causalConversationRevision)) {
+      throw codedError("advance_commit_fence_required", "Authoritative jump snapshot is required", 409);
+    }
+    if (metadata !== undefined && (!metadata || typeof metadata !== "object" || Array.isArray(metadata))) {
+      throw codedError("advance_range_metadata_invalid", "Invalid reading range metadata", 400);
+    }
+    if (metadata) {
+      if (metadata.chunkId !== undefined) {
+        if (!validSegment(metadata.chunkId)) throw codedError("advance_range_metadata_invalid", "Invalid reading chunk ID", 400);
+        committedRange.chunkId = metadata.chunkId;
+      }
+      if (metadata.ordinal !== undefined) {
+        if (!Number.isSafeInteger(metadata.ordinal) || metadata.ordinal < 1) throw codedError("advance_range_metadata_invalid", "Invalid reading range ordinal", 400);
+        committedRange.ordinal = metadata.ordinal;
+      }
+      if (metadata.loadedOnly === true) committedRange.loadedOnly = true;
+      if (metadata.jumpLoaded === true) committedRange.jumpLoaded = true;
+    }
     return withLock(scope, function () {
-      var state = activateOwner(paths, loadOrMigrate(paths, scope), scope);
-      var conversation = ensureConversation(paths, state, scope);
-      var startPage = Number(input.startPage);
-      var endPage = Number(input.endPage);
-      if (!Number.isInteger(startPage) || startPage < 1 || !Number.isInteger(endPage) || endPage < startPage || !String(input.content || "").trim()) {
-        throw codedError("advance_range_invalid", "Invalid committed reading range", 400);
+      contextFor(scope);
+      var state = loadOrMigrate(paths, scope);
+      var conversation = state.conversations && state.conversations[scope.conversationId];
+      if (!conversation ||
+          !state.owner ||
+          state.owner.conversationId !== scope.conversationId ||
+          state.owner.ownerGeneration !== expected.ownerGeneration ||
+          conversation.readingVersion !== expected.readingVersion ||
+          conversation.causalConversationRevision !== expected.causalConversationRevision ||
+          (expected.readingRange && expected.readingRange.conversationId && expected.readingRange.conversationId !== scope.conversationId)) {
+        var stale = codedError("SCOPE_STALE", "Jump request snapshot is stale", 409);
+        if (conversation) stale.snapshot = publicSnapshot(state, conversation);
+        throw stale;
       }
       var wrapped = wrapRange(input.content, startPage, endPage);
       conversation.loadedContent = writeBlob(paths, wrapped, "reading");
-      conversation.loadedRange = { startPage: startPage, endPage: endPage };
+      conversation.loadedRange = committedRange;
       conversation.readingVersion += 1;
       conversation.lastAdvanceServerOrdinal = conversation.serverTurnOrdinal;
       conversation.pendingAdvance = null;
@@ -693,8 +999,7 @@ function createAutoAdvance(options) {
       conversation.projectionStatus = "pending";
       state = commitManifest(paths, state);
       projectConversation(paths, state, scope.conversationId);
-      state.conversations[scope.conversationId].projectionStatus = "clean";
-      state.conversations[scope.conversationId].projectionReadingHash = fileHash(paths.readingPath);
+      markProjectionClean(paths, state, scope.conversationId);
       state = commitManifest(paths, state);
       return Object.assign({ reason: String(input.reason || "explicit_page_jump") }, publicSnapshot(state, state.conversations[scope.conversationId]));
     });
@@ -704,14 +1009,20 @@ function createAutoAdvance(options) {
     var scope = normalizeScope(input);
     var paths = pathsFor(scope);
     if (typeof input.loadRange !== "function") return { skipped: true, reason: "loader_unavailable" };
-    var taskKey = lockKey(scope);
-    var existing = taskRegistry.get(taskKey);
-    if (existing) return existing.promise;
-    var controller = new AbortController();
-    var deadlineAt = Date.now() + Math.max(1000, Math.min(120000, Number(input.timeoutMs) || 30000));
     var captured = await withLock(scope, function () {
-      var state = activateOwner(paths, loadOrMigrate(paths, scope), scope);
-      var conversation = state.conversations[scope.conversationId];
+      contextFor(scope);
+      var state = readCommitted(paths);
+      if (!state) return { skipped: true, reason: "state_unavailable" };
+      if (!state.scope ||
+          state.scope.accountId !== scope.accountId ||
+          state.scope.profileId !== scope.profileId ||
+          state.scope.worldId !== scope.worldId ||
+          state.scope.textbookId !== scope.textbookId) {
+        throw codedError("advance_scope_mismatch", "Authoritative state belongs to another scope", 409);
+      }
+      if (state.scope.sessionEpoch !== scope.sessionEpoch) return { skipped: true, reason: "stale_scope" };
+      var conversation = state.conversations && state.conversations[scope.conversationId];
+      if (!state.owner || state.owner.conversationId !== scope.conversationId || !conversation) return { skipped: true, reason: "inactive_owner" };
       return {
         scopeGeneration: state.scope.scopeGeneration,
         ownerGeneration: state.owner.ownerGeneration,
@@ -720,14 +1031,39 @@ function createAutoAdvance(options) {
         startPage: conversation.loadedRange.endPage + 1
       };
     });
+    if (captured.skipped) return captured;
+    var taskKey = lockKey(scope);
+    var existing = taskRegistry.get(taskKey);
+    if (existing) {
+      if (existing.scope &&
+          existing.scope.conversationId === scope.conversationId &&
+          existing.scope.sessionEpoch === scope.sessionEpoch) return existing.promise;
+      return { skipped: true, reason: "prefetch_in_flight" };
+    }
+    var controller = new AbortController();
+    var deadlineAt = Date.now() + Math.max(1000, Math.min(120000, Number(input.timeoutMs) || 30000));
     var promise = Promise.resolve().then(function () {
       return input.loadRange({ startPage: captured.startPage, explicitPage: false, reason: "background_prefetch", scope: clone(scope), signal: controller.signal, deadlineAt: deadlineAt });
     }).then(function (loaded) {
       if (!loaded || !String(loaded.content || "").trim()) return { skipped: true, reason: "empty" };
       return withLock(scope, function () {
-        var state = loadOrMigrate(paths, scope);
-        var conversation = state.conversations[scope.conversationId];
-        if (!state.owner || state.owner.conversationId !== scope.conversationId || state.scope.scopeGeneration !== captured.scopeGeneration || state.owner.ownerGeneration !== captured.ownerGeneration || conversation.causalConversationRevision !== captured.causalConversationRevision || conversation.readingVersion !== captured.baseReadingVersion || Number(loaded.startPage) !== captured.startPage) {
+        contextFor(scope);
+        var state = readCommitted(paths);
+        var conversation = state && state.conversations && state.conversations[scope.conversationId];
+        if (!state || !state.scope ||
+            state.scope.accountId !== scope.accountId ||
+            state.scope.profileId !== scope.profileId ||
+            state.scope.worldId !== scope.worldId ||
+            state.scope.textbookId !== scope.textbookId ||
+            state.scope.sessionEpoch !== scope.sessionEpoch ||
+            !state.owner ||
+            state.owner.conversationId !== scope.conversationId ||
+            !conversation ||
+            state.scope.scopeGeneration !== captured.scopeGeneration ||
+            state.owner.ownerGeneration !== captured.ownerGeneration ||
+            conversation.causalConversationRevision !== captured.causalConversationRevision ||
+            conversation.readingVersion !== captured.baseReadingVersion ||
+            Number(loaded.startPage) !== captured.startPage) {
           return { skipped: true, reason: "stale" };
         }
         var blob = writeBlob(paths, wrapRange(loaded.content, Number(loaded.startPage), Number(loaded.endPage)), "candidate");
@@ -766,6 +1102,8 @@ function createAutoAdvance(options) {
     version: API_VERSION,
     schemaVersion: SCHEMA_VERSION,
     bootstrap: bootstrap,
+    readSnapshot: readSnapshot,
+    readSnapshot: readSnapshot,
     beginTurn: beginTurn,
     completeTurn: completeTurn,
     failTurn: failTurn,

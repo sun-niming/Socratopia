@@ -103,6 +103,11 @@ function minimalWorkerEnvironment(nodePath) {
     if (process.env[name]) env[name] = process.env[name];
   });
   env.NODE_PATH = nodePath || "";
+  // The packaged server itself runs under Socratopia.exe with Electron's
+  // Node mode enabled. Preserve that mode for PDF worker children; otherwise
+  // spawning process.execPath opens another Electron app instead of running
+  // pdf-worker.mjs, and every page is reported as an OCR failure.
+  if (/\.exe$/i.test(process.execPath)) env.ELECTRON_RUN_AS_NODE = "1";
   return env;
 }
 
@@ -349,18 +354,20 @@ function createCoordinator(options) {
       var index = queue.findIndex(function (job) { return (activeAccounts.get(job.accountId) || 0) < 1; });
       if (index < 0) return;
       let job = queue.splice(index, 1)[0];
-      if (job.abortCleanup) job.abortCleanup();
-      if (job.deadlineTimer) { clearTimeout(job.deadlineTimer); job.deadlineTimer = null; }
       queuedAccounts.set(job.accountId, Math.max(0, (queuedAccounts.get(job.accountId) || 1) - 1));
       if (job.deadlineAt <= Date.now()) {
         job.state = "settled";
-        job.reject(codedError("ocr_request_deadline"));
+        job.settle(codedError("ocr_request_deadline"));
         continue;
       }
       job.state = "running";
       activeGlobal += 1;
       activeAccounts.set(job.accountId, (activeAccounts.get(job.accountId) || 0) + 1);
-      Promise.resolve().then(job.work).then(job.resolve, job.reject).finally(function () {
+      Promise.resolve().then(job.work).then(function (value) {
+        job.settle(null, value);
+      }, function (error) {
+        job.settle(error);
+      }).finally(function () {
         job.state = "settled";
         activeGlobal -= 1;
         activeAccounts.set(job.accountId, Math.max(0, (activeAccounts.get(job.accountId) || 1) - 1));
@@ -376,7 +383,16 @@ function createCoordinator(options) {
     if (deadlineAt <= Date.now()) return Promise.reject(codedError("ocr_request_deadline"));
     if (queue.length >= 6 || (queuedAccounts.get(accountId) || 0) >= 2) return Promise.reject(codedError("pdf_busy"));
     return new Promise(function (resolve, reject) {
-      var job = { accountId: accountId, work: work, resolve: resolve, reject: reject, abortCleanup: null, deadlineTimer: null, deadlineAt: deadlineAt, state: "queued" };
+      var job = { accountId: accountId, work: work, resolve: resolve, reject: reject, abortCleanup: null, deadlineTimer: null, deadlineAt: deadlineAt, state: "queued", outwardSettled: false };
+      job.settle = function (error, value) {
+        if (job.outwardSettled) return false;
+        job.outwardSettled = true;
+        if (job.abortCleanup) job.abortCleanup();
+        if (job.deadlineTimer) { clearTimeout(job.deadlineTimer); job.deadlineTimer = null; }
+        if (error) reject(error);
+        else resolve(value);
+        return true;
+      };
       function removeQueued(error) {
         if (job.state !== "queued") return false;
         var index = queue.indexOf(job);
@@ -384,23 +400,64 @@ function createCoordinator(options) {
         job.state = "settled";
         queue.splice(index, 1);
         queuedAccounts.set(accountId, Math.max(0, (queuedAccounts.get(accountId) || 1) - 1));
-        if (job.abortCleanup) job.abortCleanup();
-        if (job.deadlineTimer) { clearTimeout(job.deadlineTimer); job.deadlineTimer = null; }
-        reject(error);
+        job.settle(error);
         pump();
         return true;
       }
       if (signal) {
         var onAbort = function () {
-          removeQueued(requestAbortError(signal));
+          var error = requestAbortError(signal);
+          if (!removeQueued(error) && job.state === "running") job.settle(error);
         };
         signal.addEventListener("abort", onAbort, { once: true });
         job.abortCleanup = function () { signal.removeEventListener("abort", onAbort); job.abortCleanup = null; };
       }
-      job.deadlineTimer = setTimeout(function () { removeQueued(codedError("ocr_request_deadline")); }, Math.max(1, deadlineAt - Date.now()));
+      job.deadlineTimer = setTimeout(function () {
+        var error = codedError("ocr_request_deadline");
+        if (!removeQueued(error) && job.state === "running") job.settle(error);
+      }, Math.max(1, deadlineAt - Date.now()));
       queue.push(job);
       queuedAccounts.set(accountId, (queuedAccounts.get(accountId) || 0) + 1);
       pump();
+    });
+  }
+
+  function observeInFlight(promise, deadlineAt, signal) {
+    if (signal && signal.aborted) return Promise.reject(requestAbortError(signal));
+    var hasDeadline = Number.isFinite(Number(deadlineAt));
+    if (!hasDeadline && !signal) return promise;
+    var remaining = hasDeadline ? Number(deadlineAt) - Date.now() : 0;
+    if (hasDeadline && remaining <= 0) return Promise.reject(codedError("ocr_request_deadline"));
+    return new Promise(function (resolve, reject) {
+      var settled = false;
+      var timer = hasDeadline ? setTimeout(function () {
+        if (settled) return;
+        settled = true;
+        cleanup();
+        reject(codedError("ocr_request_deadline"));
+      }, remaining) : null;
+      function onAbort() {
+        if (settled) return;
+        settled = true;
+        cleanup();
+        reject(requestAbortError(signal));
+      }
+      function cleanup() {
+        if (timer) clearTimeout(timer);
+        if (signal) signal.removeEventListener("abort", onAbort);
+      }
+      if (signal) signal.addEventListener("abort", onAbort, { once: true });
+      promise.then(function (value) {
+        if (settled) return;
+        settled = true;
+        cleanup();
+        resolve(value);
+      }, function (error) {
+        if (settled) return;
+        settled = true;
+        cleanup();
+        reject(error);
+      });
     });
   }
 
@@ -673,11 +730,11 @@ function createCoordinator(options) {
     var context;
     var lifecycle;
     try { assertRequestActive(request); context = currentContext(request.scope); lifecycle = captureLifecycle(context, request.scope); } catch (error) { return Promise.reject(error); }
-    return resolveAuthorizedPath(context, request.scope, request.filePath).then(async function (authorized) {
+    var operation = resolveAuthorizedPath(context, request.scope, request.filePath).then(async function (authorized) {
       var pdfHash = await digestFile(authorized.path);
-      var singleKey = crypto.createHash("sha256").update(JSON.stringify([context.accountId, request.scope, lifecycle.generation, pdfHash, request.command, request.startPage, request.endPage, request.targetChars, request.maxPages, request.expectedLanguage])).digest("hex");
+      var singleKey = crypto.createHash("sha256").update(JSON.stringify([context.accountId, request.scope, lifecycle.generation, pdfHash, request.command, request.startPage, request.endPage, request.targetChars, request.maxPages, request.expectedLanguage, Number.isFinite(Number(request.deadlineAt)) ? Number(request.deadlineAt) : null])).digest("hex");
       var useSingleFlight = request.cachePolicy !== "bypass" && !request.signal;
-      if (useSingleFlight && inFlight.has(singleKey)) return inFlight.get(singleKey);
+      if (useSingleFlight && inFlight.has(singleKey)) return observeInFlight(inFlight.get(singleKey), request.deadlineAt);
       var promise = schedule(context.accountId, function () { return execute(request, context, authorized, pdfHash, lifecycle); }, request.signal, request.deadlineAt);
       if (useSingleFlight) {
         inFlight.set(singleKey, promise);
@@ -685,6 +742,7 @@ function createCoordinator(options) {
       }
       return promise;
     });
+    return observeInFlight(operation, request.deadlineAt, request.signal);
   }
 
   function purgeScope(scope) {
@@ -745,7 +803,11 @@ function createCoordinator(options) {
   async function shutdown() {
     closed = true;
     var pending = queue.splice(0);
-    pending.forEach(function (job) { if (job.abortCleanup) job.abortCleanup(); job.reject(codedError("ocr_coordinator_closed")); });
+    pending.forEach(function (job) {
+      job.state = "settled";
+      queuedAccounts.set(job.accountId, Math.max(0, (queuedAccounts.get(job.accountId) || 1) - 1));
+      job.settle(codedError("ocr_coordinator_closed"));
+    });
   }
 
   return Object.freeze({ initialize: initialize, run: run, readVisionCache: readVisionCache, writeVisionCache: writeVisionCache, purgeScope: purgeScope, activateScope: activateScope, purgeTree: purgeTree, activateTree: activateTree, shutdown: shutdown, resolveAuthorizedPath: resolveAuthorizedPath, _cache: cache });

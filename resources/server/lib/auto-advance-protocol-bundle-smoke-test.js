@@ -32,6 +32,8 @@ assert.ok(!send.includes('let e=W.find(e=>e.id===r),s=!("assistant"'), "assistan
 
 assert.ok(page.includes("let s=await ec(q,e);await r7(t,{retryEnvelope:a,retryAssistantMessageId:n,retryConversationBase:s})"), "failed-tail deletion must finish before retry");
 assert.ok(page.includes("_advanceNotAccepted=!1===t.accepted||"), "client must honor explicit server non-acceptance");
+assert.ok(page.includes("retryEnvelope:_advanceNotAccepted?null:n.turnEnvelope"), "stale/unaccepted turns must discard the old retry envelope");
+assert.ok(page.includes("retryAssistantMessageId:_advanceNotAccepted?null:s.id"), "stale/unaccepted turns must generate a new assistant message id");
 assert.ok(page.includes("n>=Number(a.stateGeneration||0)"), "stream snapshots must merge monotonically");
 assert.ok(page.includes('e.ok?e.json():Promise.reject(Error("reading_context_failed"))'), "reading-context HTTP errors must not overwrite state");
 assert.ok(page.includes("t.advance&&s>=Number(n.stateGeneration||0))&&(rr(t.readingRange||null)"), "stale reading-context responses must not roll back the displayed range");

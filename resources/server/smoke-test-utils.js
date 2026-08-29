@@ -7,6 +7,7 @@ const http = require('http');
 const { fork } = require('child_process');
 const fs = require('fs');
 const path = require('path');
+const localAuth = require('./lib/local-request-auth.js');
 
 class MockLLM {
   constructor() {
@@ -130,6 +131,7 @@ class TestEnvironment {
     this.options = options || {};
     this.serverStdout = '';
     this.serverStderr = '';
+    this.capabilityIssuer = null;
   }
 
   async setup() {
@@ -163,7 +165,7 @@ class TestEnvironment {
     fs.writeFileSync(path.join(this.tmpDir, 'settings.json'), JSON.stringify(settingsCfg, null, 2));
     fs.writeFileSync(path.join(this.tmpDir, 'set.json'), JSON.stringify(setCfg, null, 2));
 
-    const textbookDir = path.join(contentDir, 'profiles', 'test', 'worlds', 'test', 'textbooks', 'math');
+    const textbookDir = path.join(contentDir, 'accounts', 'test', 'profiles', 'test', 'worlds', 'test', 'textbooks', 'math');
     fs.mkdirSync(textbookDir, { recursive: true });
     fs.writeFileSync(path.join(textbookDir, 'pages.json'), JSON.stringify({
       format: 'markdown',
@@ -173,10 +175,24 @@ class TestEnvironment {
       ]
     }, null, 2));
 
-    const practiceDir = path.join(contentDir, 'profiles', 'test', 'worlds', 'test', 'practice');
+    const practiceDir = path.join(contentDir, 'accounts', 'test', 'profiles', 'test', 'worlds', 'test', 'practice');
     fs.mkdirSync(practiceDir, { recursive: true });
 
     this.serverPort = await this.findFreePort();
+
+    // The production Electron parent creates the secret and hands it to the
+    // forked server.  Black-box tests create an equivalent test-only issuer so
+    // requests exercise the real Authorization/capability path instead of the
+    // removed X-Account-Id fallback.
+    const capabilitySecret = Buffer.alloc(32, 0x5a);
+    this.capabilityIssuer = localAuth.createInMemoryIssuer({
+      testOnly: true,
+      issuer: 'socratopia-electron',
+      audience: 'adaptive-teaching',
+      secret: capabilitySecret,
+      currentAuthState: { accountId: 'test', sessionEpoch: 3 },
+      scope: { accountId: 'test', profileId: '*', worldId: '*', textbookId: '*', conversationId: '*' }
+    });
 
     const serverScript = path.join(__dirname, 'server.js');
     const silent = this.options.silent !== false;
@@ -186,7 +202,9 @@ class TestEnvironment {
         PORT: String(this.serverPort),
         HOSTNAME: '127.0.0.1',
         CONTENT_ROOT: contentDir,
-        PROJECT_ROOT: this.tmpDir
+        PROJECT_ROOT: this.tmpDir,
+        SOCRATOPIA_ADAPTIVE_AUTH_SECRET_B64: capabilitySecret.toString('base64'),
+        SOCRATOPIA_ADAPTIVE_AUTH_ISSUER: 'socratopia-electron'
       },
       silent: silent
     });
@@ -200,7 +218,7 @@ class TestEnvironment {
       });
     }
 
-    return new Promise((resolve, reject) => {
+    await new Promise((resolve, reject) => {
       const timeout = setTimeout(() => {
         reject(new Error('Server start timeout after 30s'));
       }, 30000);
@@ -262,6 +280,11 @@ class TestEnvironment {
     // A duplicate ACK gives async account-bound coordinators one event-loop
     // turn to finish before the first HTTP request is issued.
     await sendAuthState(2, 3);
+  }
+
+  capabilityHeader() {
+    if (!this.capabilityIssuer) throw new Error('capability issuer is not ready');
+    return this.capabilityIssuer.authorizationHeader();
   }
 
   async teardown() {

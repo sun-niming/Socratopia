@@ -24,8 +24,9 @@ function extractDefinition(source, file) {
 var definitions = files.map(function (file) {
   var source = fs.readFileSync(path.join(__dirname, file), "utf8");
   assert.strictEqual((source.match(/function _accountContext\(\)/g) || []).length, 1, file + " must define one adapter");
-  assert(source.indexOf("let d=_accountContext(),e=d&&d.getAccountId();if(e)return a(b,c)") >= 0, file + " must trust only an existing async context before raw header parsing");
-  assert(source.indexOf("d?d.run(f,()=>a(b,c)):(l(f),a(b,c))") >= 0, file + " must enter context for ordinary requests and retain the compatibility fallback");
+  assert(source.indexOf("global.__SOCRATOPIA_ROUTE_AUTH__") >= 0, file + " must delegate HTTP requests to the capability gate");
+  assert.strictEqual(source.indexOf("X-Account-Id"), -1, file + " must not contain a raw account selector fallback");
+  assert.strictEqual(source.indexOf("Missing or invalid X-Account-Id"), -1, file + " must not expose the legacy selector error");
   return extractDefinition(source, file);
 });
 

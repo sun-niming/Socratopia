@@ -3,12 +3,23 @@
 var parser = require("./command-parser.js");
 var reader = require("./excerpt-reader.js");
 var memory = require("./memory-candidate.js");
+var path = require("path");
 var AsyncLocalStorage = require("async_hooks").AsyncLocalStorage;
 var memoryRequestContext = new AsyncLocalStorage();
 var resultsByConversation = new Map();
 
 function memoryKey(paths) {
   return [paths && paths.worldDir || "", paths && paths.conversationId || ""].join("|");
+}
+
+function normalizeWorldDir(value) {
+  if (typeof value !== "string" || !value) return value || "";
+  // The compiled route naturally has the textbook directory from its path
+  // helper. Candidate memory is rooted one level higher at the world scope.
+  try {
+    if (path.basename(path.dirname(value)) === "textbooks") return path.dirname(path.dirname(value));
+  } catch (_) {}
+  return value;
 }
 
 function prepareMemoryRequest(body, paths) {
@@ -25,9 +36,22 @@ function runWithMemoryRequest(pending, callback) {
 }
 
 function rememberResponse(paths, answer) {
+  paths = paths || {};
   var key = memoryKey(paths);
   var seed = resultsByConversation.get(key);
+  // A streamed response may be observed a second time after the request ALS
+  // scope has ended. Recover only a unique same-account/same-conversation
+  // seed, and use the immutable paths captured when the excerpt was read.
+  if (!seed && paths.conversationId) {
+    var matches = [];
+    resultsByConversation.forEach(function (value) {
+      if (value && value.paths && value.paths.conversationId === paths.conversationId && (!paths.accountId || value.accountId === paths.accountId)) matches.push(value);
+    });
+    if (matches.length === 1) seed = matches[0];
+  }
+  if (seed && seed.paths) paths = seed.paths;
   resultsByConversation.delete(key);
+  if (seed && seed.paths) resultsByConversation.delete(memoryKey(seed.paths));
   if (!seed || !String(answer || "").trim()) return null;
   var candidate = memory.buildCandidate(seed.result, answer, seed.parsed);
   memory.saveLatest(paths, candidate);
@@ -76,6 +100,17 @@ async function execute(options) {
   }
   var pending = memoryRequestContext.getStore();
   if (pending && pending.commandText !== String(options.commandText || "")) pending = null;
+  // The compiled /api/chat route invokes this skill directly (without the
+  // optional memory AsyncLocalStorage wrapper).  Preserve the same explicit
+  // "remember" intent in that path so a successful Close Reading can be
+  // materialized exactly once after the assistant response arrives.
+  var memoryWorldDir = normalizeWorldDir(options.worldDir || (options.filePath ? path.dirname(path.dirname(path.dirname(options.filePath))) : ""));
+  if (!pending && options.conversationId && memoryWorldDir && prepareMemoryRequest({ messages: options.messages }, { worldDir: memoryWorldDir, conversationId: options.conversationId })) {
+    pending = {
+      commandText: String(options.commandText || ""),
+      key: memoryKey({ worldDir: memoryWorldDir, conversationId: options.conversationId }),
+    };
+  }
   try {
     var result = await reader.readTextbookExcerpt({
       filePath: options.filePath,
@@ -116,7 +151,12 @@ async function execute(options) {
       "元数据：" + JSON.stringify(meta),
       result.evidence,
     ].join("\n");
-    if (pending) resultsByConversation.set(pending.key, { result: result, parsed: parsed });
+    if (pending) resultsByConversation.set(pending.key, {
+      result: result,
+      parsed: parsed,
+      accountId: options.accountId || null,
+      paths: memoryWorldDir && options.conversationId ? { worldDir: memoryWorldDir, conversationId: options.conversationId } : null,
+    });
     return { active: true, ok: true, parsed: parsed, prompt: prompt, metadata: meta };
   } catch (error) {
     return {

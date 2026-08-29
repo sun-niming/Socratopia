@@ -35090,6 +35090,10 @@ function prepareAdaptiveAuthSession(serverDir) {
       secret,
       issuer: "socratopia-electron",
       audience: "adaptive-teaching",
+      // The desktop token is account-bound and carries an explicit scope
+      // envelope. Child resources still perform per-route ownership checks;
+      // wildcards here mean the current local account, never another account.
+      scope: { accountId: state.accountId, profileId: "*", worldId: "*", textbookId: "*", conversationId: "*" },
       currentAuthState: { accountId: state.accountId, sessionEpoch: state.sessionEpoch },
       ttlSeconds: 30,
       maxTtlSeconds: 60
@@ -35164,6 +35168,44 @@ function issueAdaptiveCapability(event, args) {
   const originPort = Number(origin.port || 80);
   if (origin.protocol !== "http:" || !loopback || origin.username || origin.password || originPort !== serverPort) throw adaptiveAuthError("adaptive_auth_invalid_origin");
   return current.issuer.issueCapability();
+}
+var ADAPTIVE_IMAGE_PATHS = /* @__PURE__ */ new Set([
+  "/api/profile/avatar",
+  "/api/companion/avatar",
+  "/api/custom-companions/avatar"
+]);
+function issueAdaptiveImageCapability(details) {
+  if (!details || details.method !== "GET" || details.resourceType !== "image") return null;
+  const current = adaptiveAuthSession;
+  if (!current?.ready || current.child !== serverProcess || !serverProcess?.connected) return null;
+  if (!mainWindow || details.webContentsId !== mainWindow.webContents.id) return null;
+  let origin;
+  try {
+    origin = new URL(details.url);
+  } catch {
+    return null;
+  }
+  const hostname = origin.hostname.toLowerCase();
+  const loopback = hostname === "localhost" || hostname === "127.0.0.1" || hostname === "[::1]" || hostname === "::1";
+  const originPort = Number(origin.port || 80);
+  if (origin.protocol !== "http:" || !loopback || origin.username || origin.password || originPort !== serverPort) return null;
+  if (!ADAPTIVE_IMAGE_PATHS.has(origin.pathname)) return null;
+  return current.issuer.issueCapability();
+}
+function installAdaptiveImageAuthHeaders() {
+  import_electron5.session.defaultSession.webRequest.onBeforeSendHeaders(
+    { urls: ["http://localhost:*/*", "http://127.0.0.1:*/*", "http://[::1]:*/*"] },
+    (details, callback) => {
+      const requestHeaders = { ...details.requestHeaders };
+      try {
+        const token = issueAdaptiveImageCapability(details);
+        const hasAuthorization = Object.keys(requestHeaders).some((name) => name.toLowerCase() === "authorization");
+        if (token && !hasAuthorization) requestHeaders.Authorization = `Socratopia ${token}`;
+      } catch {
+      }
+      callback({ requestHeaders });
+    }
+  );
 }
 function log(msg) {
   const line = `[${(/* @__PURE__ */ new Date()).toISOString()}] ${msg}
@@ -35269,7 +35311,7 @@ async function extractDepsZip(zipPath, target) {
   }
   (0, import_child_process3.execFileSync)("unzip", ["-q", "-o", zipPath, "-d", target], { stdio: "ignore" });
 }
-var RUNTIME_MANIFEST_SHA256 = "a4173fa88bcdb2d56f263aab24271bc273c6e02368404d15176593c1e4354e6e";
+var RUNTIME_MANIFEST_SHA256 = "d01275c8a4df8209d7900b28d8232ff0efeb68348fcfb14c301dbd3c10223d2b";
 function runtimeSha256(filePath) {
   return import_crypto.default.createHash("sha256").update(import_fs5.default.readFileSync(filePath)).digest("hex");
 }
@@ -35731,6 +35773,7 @@ import_electron5.app.whenReady().then(async () => {
   await initUserData();
   setupStore(import_electron5.ipcMain);
   import_electron5.ipcMain.handle("adaptive:getCapability", (event, ...args) => issueAdaptiveCapability(event, args));
+  installAdaptiveImageAuthHeaders();
   createMenu();
   import_electron5.session.defaultSession.setPermissionRequestHandler((_webContents, permission, callback) => {
     if (permission === "media") return callback(true);
@@ -35857,6 +35900,12 @@ import_electron5.app.on("window-all-closed", () => {
   if (process.platform !== "darwin") import_electron5.app.quit();
 });
 import_electron5.app.on("before-quit", () => {
+  if (false) { try {
+    const ttsCacheDir = import_path4.default.join(import_electron5.app.getPath("userData"), "project-data", "tts-cache");
+    if (import_fs5.default.existsSync(ttsCacheDir)) {
+      import_fs5.default.rmSync(ttsCacheDir, {recursive: true, force: true});
+    }
+  } catch {} }
   if (serverProcess) {
     serverProcess.kill();
     serverProcess = null;

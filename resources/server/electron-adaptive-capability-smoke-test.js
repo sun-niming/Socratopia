@@ -35,6 +35,15 @@ var blocks = mainFiles.map(function (file) {
   assert(block.indexOf("frame !== event.sender.mainFrame") >= 0, file + " must bind the main frame");
   assert(block.indexOf('origin.protocol !== "http:" || !loopback') >= 0, file + " must require loopback HTTP");
   assert(block.indexOf("originPort !== serverPort") >= 0, file + " must bind the active port");
+  assert(block.indexOf('details.method !== "GET" || details.resourceType !== "image"') >= 0, file + " must restrict automatic capabilities to image GETs");
+  assert(block.indexOf("details.webContentsId !== mainWindow.webContents.id") >= 0, file + " must bind image capabilities to the main window");
+  assert(block.indexOf('"/api/profile/avatar"') >= 0, file + " must allow the profile avatar route");
+  assert(block.indexOf('"/api/companion/avatar"') >= 0, file + " must allow the world companion avatar route");
+  assert(block.indexOf('"/api/custom-companions/avatar"') >= 0, file + " must allow the custom companion avatar route");
+  assert(block.indexOf("ADAPTIVE_IMAGE_PATHS.has(origin.pathname)") >= 0, file + " must use an exact image route allowlist");
+  assert(block.indexOf("requestHeaders.Authorization = `Socratopia ${token}`") >= 0, file + " must inject capabilities through the Authorization header");
+  assert.strictEqual(block.indexOf("searchParams.set"), -1, file + " must not place capabilities in URLs");
+  assert.strictEqual(count(source, "installAdaptiveImageAuthHeaders();"), 1, file + " must install one image authorization hook");
   assert.strictEqual(count(source, 'stdio: ["ignore", "pipe", "pipe", "ipc"]'), 1, file + " must fork one IPC child");
   assert(source.indexOf("await waitForPort(serverPort)") < source.indexOf("await synchronizeAdaptiveAuthState(child, nextAdaptiveAuthSession)"), file + " must synchronize only after HTTP readiness");
   assert.strictEqual(source.indexOf("log(secret"), -1, file + " must not log the secret");

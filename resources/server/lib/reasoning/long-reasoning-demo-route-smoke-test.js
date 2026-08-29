@@ -17,6 +17,8 @@ var fs = require("fs");
 var os = require("os");
 var path = require("path");
 var Module = require("module");
+var auth = require("../local-request-auth.js");
+var routeAuth = require("../route-auth.js");
 
 // ---- make the compiled Next route's `next` import resolvable ----
 var SERVER_DIR = path.resolve(__dirname, "..", "..");            // resources/server
@@ -33,6 +35,16 @@ function eq(a, b, msg) { assert.strictEqual(a, b, msg + " (got " + JSON.stringif
 // ---- temp PROJECT_ROOT + fake textbookDir/knowledge_base (inside root) ----
 var tmp = fs.mkdtempSync(path.join(os.tmpdir(), "lrd-route-smoke-"));
 process.env.PROJECT_ROOT = tmp;
+var capabilityIssuer = auth.createInMemoryIssuer({
+  testOnly: true,
+  issuer: "long-reasoning-smoke",
+  audience: "adaptive-teaching",
+  currentAuthState: { accountId: "local", sessionEpoch: 1 },
+  scope: { accountId: "local", profileId: "*", worldId: "*", textbookId: "*", conversationId: "*" }
+});
+global.__SOCRATOPIA_ROUTE_AUTH__ = routeAuth.createRouteAuth({
+  verifier: capabilityIssuer.verifier,
+});
 
 var PID = "p1", WID = "w1", TID = "tb1";
 var tbDir = path.join(tmp, "profiles", PID, "worlds", WID, "textbooks", TID);
@@ -63,7 +75,7 @@ ok(typeof GET === "function", "route exposes routeModule.userland.GET");
 
 function call(qs) {
   var url = "http://localhost/api/long-reasoning-demo" + (qs ? "?" + qs : "");
-  return Promise.resolve(GET(new Request(url, { method: "GET" }))).then(function (res) {
+  return Promise.resolve(GET(new Request(url, { method: "GET", headers: { Authorization: capabilityIssuer.authorizationHeader() } }))).then(function (res) {
     return Promise.resolve(res.json()).then(function (body) { return { status: res.status, body: body }; });
   });
 }
@@ -77,6 +89,7 @@ var outsideDir = fs.mkdtempSync(path.join(os.tmpdir(), "lrd-outside-"));
 function cleanup() {
   try { fs.rmSync(tmp, { recursive: true, force: true }); } catch (e) {}
   try { fs.rmSync(outsideDir, { recursive: true, force: true }); } catch (e) {}
+  delete global.__SOCRATOPIA_ROUTE_AUTH__;
 }
 
 // Tests run SERIALLY (awaited one at a time). Several cases temporarily set

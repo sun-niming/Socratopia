@@ -105,6 +105,18 @@ function readJson(filePath) {
   catch (_) { return null; }
 }
 
+function readProjectionJson(filePath, label) {
+  var text;
+  try { text = fs.readFileSync(filePath, "utf8").replace(/^\uFEFF/, ""); }
+  catch (error) {
+    if (error && error.code === "ENOENT") return null;
+    throw codedError("EXTERNAL_LEGACY_MUTATION_DETECTED", "Legacy " + (label || "projection") + " is unavailable", 409);
+  }
+  if (!text.trim()) throw codedError("EXTERNAL_LEGACY_MUTATION_DETECTED", "Legacy " + (label || "projection") + " is empty", 409);
+  try { return JSON.parse(text); }
+  catch (_) { throw codedError("EXTERNAL_LEGACY_MUTATION_DETECTED", "Legacy " + (label || "projection") + " is corrupt", 409); }
+}
+
 function readJsonStrict(filePath, code, message) {
   var text;
   try { text = fs.readFileSync(filePath, "utf8").replace(/^\uFEFF/, ""); }
@@ -311,7 +323,7 @@ function createAutoAdvance(options) {
   function legacyRange(paths) {
     var reading = readText(paths.readingPath);
     var readingRange = parseRange(reading);
-    var progress = readJson(paths.progressPath) || {};
+    var progress = readProjectionJson(paths.progressPath, "progress") || {};
     var progressRange = progress.loadedCursor && Number.isInteger(progress.loadedCursor.startPage) && Number.isInteger(progress.loadedCursor.endPage)
       ? { startPage: progress.loadedCursor.startPage, endPage: progress.loadedCursor.endPage }
       : null;
@@ -406,7 +418,7 @@ function createAutoAdvance(options) {
   }
 
   function updateIndexCurrentPage(paths, textbookId, currentPage) {
-    var index = readJson(paths.indexPath);
+    var index = readProjectionJson(paths.indexPath, "textbook index");
     if (!index || !Array.isArray(index.textbooks)) return;
     var changed = false;
     index.textbooks = index.textbooks.map(function (entry) {
@@ -426,7 +438,7 @@ function createAutoAdvance(options) {
     if (!conversation) throw codedError("advance_conversation_missing", "Conversation state missing", 500);
     var content = readBlob(paths, conversation.loadedContent.ref, conversation.loadedContent.hash).toString("utf8");
     atomicWrite(paths.readingPath, content);
-    var progress = readJson(paths.progressPath) || {};
+    var progress = readProjectionJson(paths.progressPath, "progress") || {};
     var projectedRange = conversation.loadedRange || {};
     progress.schemaVersion = Math.max(3, Number(progress.schemaVersion) || 0);
     progress.textbookId = state.scope.textbookId;
@@ -454,8 +466,8 @@ function createAutoAdvance(options) {
 
   function projectionSignature(paths, state, conversationId) {
     var conversation = state.conversations[conversationId];
-    var progress = readJson(paths.progressPath);
-    var index = readJson(paths.indexPath);
+    var progress = readProjectionJson(paths.progressPath, "progress");
+    var index = readProjectionJson(paths.indexPath, "textbook index");
     var entry = index && Array.isArray(index.textbooks) ? index.textbooks.find(function (item) { return item && item.id === state.scope.textbookId; }) : null;
     var progressSignature = progress ? {
       present: true,
@@ -633,27 +645,7 @@ function createAutoAdvance(options) {
         throw codedError("advance_scope_mismatch", "Authoritative state belongs to another scope", 409);
       }
       if (scope.sessionEpoch < state.scope.sessionEpoch) throw codedError("SCOPE_STALE", "Account session epoch is stale", 409);
-      var conversation = state.conversations && state.conversations[scope.conversationId];
-      if (!conversation) return null;
-      var readingHash = fileHash(paths.readingPath);
-      if (conversation.projectionStatus === "clean" && conversation.projectionReadingHash && readingHash && conversation.projectionReadingHash !== readingHash) {
-        throw codedError("EXTERNAL_LEGACY_MUTATION_DETECTED", "Conversation reading projection changed outside the authoritative state", 409);
-      }
-      return publicSnapshot(state, conversation);
-    });
-  }
-
-  function readSnapshot(input) {
-    var scope = normalizeScope(input);
-    var paths = pathsFor(scope);
-    return withLock(scope, function () {
-      contextFor(scope);
-      var state = readCommitted(paths);
-      if (!state) return null;
-      if (!state.scope || state.scope.accountId !== scope.accountId || state.scope.profileId !== scope.profileId || state.scope.worldId !== scope.worldId || state.scope.textbookId !== scope.textbookId) {
-        throw codedError("advance_scope_mismatch", "Authoritative state belongs to another scope", 409);
-      }
-      if (scope.sessionEpoch < state.scope.sessionEpoch) throw codedError("SCOPE_STALE", "Account session epoch is stale", 409);
+      state = recover(paths, scope, state);
       var conversation = state.conversations && state.conversations[scope.conversationId];
       if (!conversation) return null;
       var readingHash = fileHash(paths.readingPath);

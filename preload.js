@@ -17,6 +17,9 @@ import_electron.contextBridge.exposeInMainWorld("electronAPI", {
   getVersion: () => import_electron.ipcRenderer.invoke("app:getVersion"),
   getPlatform: () => process.platform,
   getAdaptiveCapability: () => import_electron.ipcRenderer.invoke("adaptive:getCapability"),
+  // Generic account API callers share the same short-lived desktop
+  // capability; no account/profile selector is accepted over IPC.
+  getCapability: () => import_electron.ipcRenderer.invoke("adaptive:getCapability"),
   isPackaged: () => import_electron.ipcRenderer.invoke("app:isPackaged"),
   toggleMaximize: () => import_electron.ipcRenderer.send("window:toggleMaximize"),
   exportPdf: (html, defaultFilename, targetPath) => import_electron.ipcRenderer.invoke("pdf:export", html, defaultFilename, targetPath),

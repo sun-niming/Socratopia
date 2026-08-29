@@ -13,8 +13,10 @@ var crypto = require('crypto');
 var path = require('path');
 
 var BASE = __dirname;
-var EXE_PATH = path.join(BASE, 'Socratopia.exe');
-var ASAR_PATH = path.join(BASE, 'resources', 'app.asar');
+var EXE_PATH = process.argv[2] ? path.resolve(process.argv[2]) : (fs.existsSync(path.join(BASE, 'Socratopia.exe'))
+  ? path.join(BASE, 'Socratopia.exe')
+  : path.join(BASE, 'win-unpacked', 'Socratopia.exe'));
+var ASAR_PATH = process.argv[3] ? path.resolve(process.argv[3]) : path.join(BASE, 'resources', 'app.asar');
 
 // ---- 1. Compute ASAR header hash ----
 var asarBuf = fs.readFileSync(ASAR_PATH);

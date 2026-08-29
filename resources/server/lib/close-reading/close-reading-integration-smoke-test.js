@@ -53,8 +53,9 @@ async function main() {
   var env = new TestEnvironment();
   try {
     await env.setup();
-    var accountId = "local";
-    await authenticateServer(env, accountId, 1);
+    // TestEnvironment completes the same signed capability/epoch handshake as
+    // the Electron parent before returning from setup.
+    var accountId = "test";
     var profileId = "test";
     var worldId = "test";
     var textbookId = "math";
@@ -76,11 +77,11 @@ async function main() {
 
     env.mockLLM.setResponse(response("PDF 第 1 页：void sort 的注释说明。"));
     var body = {
-      conversationId: conversationId, profileId: profileId, worldId: worldId, textbookId: textbookId, sessionEpoch: 1,
+      conversationId: conversationId, profileId: profileId, worldId: worldId, textbookId: textbookId, sessionEpoch: 3,
       messages: [{ role: "user", content: "/Close_Reading 第1页 void sort，解释并记住这次精读" }],
       apiKey: "mock-key", provider: "openai", model: "mock-strong", teachingLanguage: "chinese", character: "npc_a",
     };
-    var close = await env.postSSE("/api/chat", body, { "X-Account-Id": accountId });
+    var close = await env.postSSE("/api/chat", body, { Authorization: env.capabilityHeader() });
     assert.strictEqual(close.status, 200);
     assert.ok(close.raw.includes('"name":"read_textbook_excerpt"'));
     assert.ok(close.text.includes("void sort"));
@@ -105,7 +106,7 @@ async function main() {
     env.mockLLM.resetRequests();
     env.mockLLM.setResponse(response(endClass));
     var endBody = Object.assign({}, body, { messages: [{ role: "user", content: "[下课]" }] });
-    var ended = await env.postSSE("/api/chat", endBody, { "X-Account-Id": accountId });
+    var ended = await env.postSSE("/api/chat", endBody, { Authorization: env.capabilityHeader() });
     assert.strictEqual(ended.status, 200);
     assert.ok(ended.raw.includes('"type":"done"'));
     assert.strictEqual(env.mockLLM.requests.length, 1);

@@ -912,6 +912,15 @@ global.__KB_DISTILL_PREFETCH__ = function (rawText, startPage, endPage, textbook
   });
   if (secret) secret.fill(0);
   secret = null;
+  // All account-sensitive compiled routes use this one fail-closed facade.
+  // It is installed before Next starts so a request can never race a lazy
+  // route import and fall back to X-Account-Id/query account selection.
+  var routeAuth = require("./lib/route-auth.js").createRouteAuth({
+    verifier: verifier,
+    accountRequestContext: accountRequestContext
+  });
+  global.__SOCRATOPIA_ROUTE_AUTH__ = routeAuth;
+  global.__SOCRATOPIA_REQUEST_AUTH__ = routeAuth;
   var orchestrator = null;
   var readinessPromise;
   try {
