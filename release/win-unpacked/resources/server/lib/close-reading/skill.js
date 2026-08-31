@@ -1,0 +1,181 @@
+"use strict";
+
+var parser = require("./command-parser.js");
+var reader = require("./excerpt-reader.js");
+var memory = require("./memory-candidate.js");
+var path = require("path");
+var AsyncLocalStorage = require("async_hooks").AsyncLocalStorage;
+var memoryRequestContext = new AsyncLocalStorage();
+var resultsByConversation = new Map();
+
+function memoryKey(paths) {
+  return [paths && paths.worldDir || "", paths && paths.conversationId || ""].join("|");
+}
+
+function normalizeWorldDir(value) {
+  if (typeof value !== "string" || !value) return value || "";
+  // The compiled route naturally has the textbook directory from its path
+  // helper. Candidate memory is rooted one level higher at the world scope.
+  try {
+    if (path.basename(path.dirname(value)) === "textbooks") return path.dirname(path.dirname(value));
+  } catch (_) {}
+  return value;
+}
+
+function prepareMemoryRequest(body, paths) {
+  var messages = body && Array.isArray(body.messages) ? body.messages : [];
+  var last = messages[messages.length - 1];
+  var commandText = last && last.role === "user" ? String(last.content || "") : "";
+  if (!paths || !parser.isCommand(commandText) || !/(?:记住|保存|笔记|remember|note)/i.test(commandText)) return false;
+  return { commandText: commandText, key: memoryKey(paths) };
+}
+
+function runWithMemoryRequest(pending, callback) {
+  if (!pending) return callback();
+  return memoryRequestContext.run(pending, callback);
+}
+
+function rememberResponse(paths, answer) {
+  paths = paths || {};
+  var key = memoryKey(paths);
+  var seed = resultsByConversation.get(key);
+  // A streamed response may be observed a second time after the request ALS
+  // scope has ended. Recover only a unique same-account/same-conversation
+  // seed, and use the immutable paths captured when the excerpt was read.
+  if (!seed && paths.conversationId) {
+    var matches = [];
+    resultsByConversation.forEach(function (value) {
+      if (value && value.paths && value.paths.conversationId === paths.conversationId && (!paths.accountId || value.accountId === paths.accountId)) matches.push(value);
+    });
+    if (matches.length === 1) seed = matches[0];
+  }
+  if (seed && seed.paths) paths = seed.paths;
+  resultsByConversation.delete(key);
+  if (seed && seed.paths) resultsByConversation.delete(memoryKey(seed.paths));
+  if (!seed || !String(answer || "").trim()) return null;
+  var candidate = memory.buildCandidate(seed.result, answer, seed.parsed);
+  memory.saveLatest(paths, candidate);
+  return memory.rememberLatest(paths, candidate);
+}
+
+function augmentEndClassRequest(request, body, paths) {
+  var augmented = memory.augmentEndClassBody(body, paths);
+  if (!augmented) return request;
+  var headers = new Headers(request.headers);
+  headers.set("content-type", "application/json");
+  return new Request(request.url, {
+    method: request.method,
+    headers: headers,
+    body: JSON.stringify(augmented),
+  });
+}
+
+function failurePrompt(error, parsed) {
+  var detail = error && error.message || String(error || "unknown_error");
+  if (detail === "page_out_of_range") detail += " (totalPages=" + (error.totalPages || "unknown") + ")";
+  return [
+    "## /Close_Reading Skill（本轮临时规则）",
+    "精读工具未能取得可靠原文。请简短说明失败原因，不得猜写教材内容，也不要宣称整本教材不存在目标。",
+    "请求页码：" + (parsed.startPage || "未能确定"),
+    "失败代码：" + detail,
+  ].join("\n");
+}
+
+async function execute(options) {
+  options = options || {};
+  var parsed = parser.parseCommand(options.commandText, {
+    messages: options.messages,
+    currentPage: options.currentPage,
+    windowStartPage: options.windowStartPage,
+  });
+  if (!parsed) return { active: false };
+  if (!parsed.startPage) {
+    return {
+      active: true,
+      ok: false,
+      parsed: parsed,
+      prompt: failurePrompt(new Error("page_required"), parsed),
+      metadata: { error: "page_required" },
+    };
+  }
+  var pending = memoryRequestContext.getStore();
+  if (pending && pending.commandText !== String(options.commandText || "")) pending = null;
+  // The compiled /api/chat route invokes this skill directly (without the
+  // optional memory AsyncLocalStorage wrapper).  Preserve the same explicit
+  // "remember" intent in that path so a successful Close Reading can be
+  // materialized exactly once after the assistant response arrives.
+  var memoryWorldDir = normalizeWorldDir(options.worldDir || (options.filePath ? path.dirname(path.dirname(path.dirname(options.filePath))) : ""));
+  if (!pending && options.conversationId && memoryWorldDir && prepareMemoryRequest({ messages: options.messages }, { worldDir: memoryWorldDir, conversationId: options.conversationId })) {
+    pending = {
+      commandText: String(options.commandText || ""),
+      key: memoryKey({ worldDir: memoryWorldDir, conversationId: options.conversationId }),
+    };
+  }
+  try {
+    var result = await reader.readTextbookExcerpt({
+      filePath: options.filePath,
+      profileId: options.profileId,
+      worldId: options.worldId,
+      textbookId: options.textbookId,
+      accountId: options.accountId,
+      sessionEpoch: options.sessionEpoch,
+      expectedLanguage: options.expectedLanguage || (options.teachingLanguage === "english" ? "en-US" : options.teachingLanguage === "chinese-traditional" ? "zh-Hant-TW" : "zh-Hans-CN"),
+      startPage: parsed.startPage,
+      query: parsed.query,
+      visualHint: parsed.request,
+      maxPages: parsed.maxPages,
+      allowOcr: parsed.allowOcr,
+      allowRemoteVision: parsed.allowRemoteVision,
+      maxChars: 24000,
+      signal: options.signal,
+      deadlineAt: options.deadlineAt,
+    });
+    var meta = result.metadata;
+    var prompt = [
+      "## /Close_Reading Skill（仅本轮生效）",
+      "你正在执行 PDF 精读辅助任务。下面的 PDF_EVIDENCE 是本轮唯一可当作教材原文的证据；知识卡片只是摘要。",
+      "严格要求：",
+      "- 直接完成用户在 /Close_Reading 后提出的解释、翻译或逐行分析，不要讨论指令本身。",
+      "- 引用、翻译和代码解释必须以证据为准，并标注 PDF 实际页码。",
+      "- 不调用 read_textbook_pages，不改变课堂进度，不把精读页视为已学习页。",
+      "- queryFound=false 时，只能说在已检查的页码范围内未找到；不得扩张为整本教材不存在。",
+      "- source=text-layer 时，说明证据来自 PDF 内嵌文字层/可复制文本，不是本轮视觉 OCR；若代码、公式或页码明显错位，表述为 PDF 文字层可能有误，并建议对照页面图像核验。",
+      "- source=windows-ocr 时，说明证据来自本机 Windows OCR；提示公式、表格、符号、大小写、下划线和代码换行可能有误。",
+      "- source=rapidocr-v5 时，说明证据来自随软件离线运行的 PP-OCRv5；提示公式、表格、符号、大小写、下划线和代码换行可能有误。",
+      "- source=vision-transcription 时，说明证据来自本轮远程视觉转录；提示符号、大小写、下划线和代码换行可能有误，不得静默修正不确定代码字符。",
+      "- source=unresolved 时，明确该页没有取得可靠正文，不得用相邻页或常识补写。",
+      "- source=mixed 时，按 sourcesByPage 分别说明文字层、Windows OCR、离线 PP-OCRv5 或远程视觉转录；不要把所有问题笼统说成同一种 OCR 转录问题。",
+      "- 必须按 sourcesByPage 逐页描述来源，并只把 successfulPages 视为可引用页；failedPages 始终保持失败语义。",
+      "- ocrErrors 非空时，明确说明视觉转录未配置或执行失败，不能把文字层未命中表述为页面视觉层也不存在。",
+      "- 原文证据与常识性补充要明确区分；证据不完整时不得续写或猜测。",
+      "元数据：" + JSON.stringify(meta),
+      result.evidence,
+    ].join("\n");
+    if (pending) resultsByConversation.set(pending.key, {
+      result: result,
+      parsed: parsed,
+      accountId: options.accountId || null,
+      paths: memoryWorldDir && options.conversationId ? { worldDir: memoryWorldDir, conversationId: options.conversationId } : null,
+    });
+    return { active: true, ok: true, parsed: parsed, prompt: prompt, metadata: meta };
+  } catch (error) {
+    return {
+      active: true,
+      ok: false,
+      parsed: parsed,
+      prompt: failurePrompt(error, parsed),
+      metadata: { error: error && error.message || String(error), totalPages: error && error.totalPages },
+    };
+  }
+}
+
+module.exports = {
+  isCommand: parser.isCommand,
+  parseCommand: parser.parseCommand,
+  execute: execute,
+  readTextbookExcerpt: reader.readTextbookExcerpt,
+  prepareMemoryRequest: prepareMemoryRequest,
+  runWithMemoryRequest: runWithMemoryRequest,
+  rememberResponse: rememberResponse,
+  augmentEndClassRequest: augmentEndClassRequest,
+};

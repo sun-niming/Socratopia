@@ -28,6 +28,14 @@
     return process.env.PROJECT_ROOT || "";
   }
 
+  function profilesRoot() {
+    var context = global.__SOCRATOPIA_ACCOUNT_REQUEST_CONTEXT__;
+    var accountId = context && typeof context.getAccountId === "function" ? context.getAccountId() : null;
+    return accountId
+      ? path.join(projectRoot(), "accounts", safeSegment(accountId, "accountId"), "profiles")
+      : path.join(projectRoot(), "profiles");
+  }
+
   function safeSegment(value, name) {
     if (value === null || value === undefined || typeof value !== "string" || value.trim() === "")
       throw new Error(name + " must be a non-empty string");
@@ -41,8 +49,7 @@
 
   function worldDir(profileId, worldId) {
     return path.join(
-      projectRoot(),
-      "profiles",
+      profilesRoot(),
       safeSegment(profileId, "profileId"),
       "worlds",
       safeSegment(worldId, "worldId")

@@ -1,0 +1,44 @@
+{
+  "profileId": "demo-profile",
+  "worldId": "demo-world",
+  "textbookId": "demo-textbook",
+  "textbookDir": "C:/path/to/textbook-dir",
+  "cases": [
+    {
+      "id": "case-001",
+      "name": "等价关系需要回看集合划分",
+      "focusPage": 80,
+      "focusConceptId": "",
+      "query": "",
+      "maxDepth": 2,
+      "expectedFocusAny": ["等价关系", "等价类"],
+      "expectedDependenciesAny": ["集合", "二元关系", "自反", "对称", "传递"],
+      "forbiddenDependencies": ["商空间高级应用"],
+      "notes": "当前页定理应召回前置定义，但不要展开后续高级应用"
+    },
+    {
+      "id": "case-002",
+      "name": "按概念ID定位中值定理需要回看连续与可导",
+      "focusPage": 0,
+      "focusConceptId": "c_mean_value_theorem",
+      "query": "",
+      "maxDepth": 2,
+      "expectedFocusAny": ["中值定理", "c_mean_value_theorem"],
+      "expectedDependenciesAny": ["连续", "可导", "极限"],
+      "forbiddenDependencies": ["泰勒展开应用"],
+      "notes": "焦点用 conceptId 精确定位，前置应包含连续/可导/极限"
+    },
+    {
+      "id": "case-003",
+      "name": "按关键词查询定位线性相关",
+      "focusPage": 0,
+      "focusConceptId": "",
+      "query": "线性相关",
+      "maxDepth": 1,
+      "expectedFocusAny": ["线性相关", "线性无关"],
+      "expectedDependenciesAny": ["向量", "线性组合"],
+      "forbiddenDependencies": [],
+      "notes": "用 query 命中标题或定义，maxDepth=1 只看直接前置"
+    }
+  ]
+}

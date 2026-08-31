@@ -1,0 +1,1 @@
+"use strict";exports.id=664,exports.ids=[664],exports.modules={50664:(a,b,c)=>{c.r(b),c.d(b,{default:()=>f.A,defaultFootnoteBackContent:()=>d.yJ,defaultFootnoteBackLabel:()=>d.hk,defaultHandlers:()=>e.Y});var d=c(75802),e=c(26829),f=c(68634)}};

@@ -1,0 +1,266 @@
+{
+  "version": 3,
+  "pages404": true,
+  "appType": "app",
+  "caseSensitive": false,
+  "basePath": "",
+  "redirects": [
+    {
+      "source": "/:path+/",
+      "destination": "/:path+",
+      "internal": true,
+      "priority": true,
+      "statusCode": 308,
+      "regex": "^(?:/((?:[^/]+?)(?:/(?:[^/]+?))*))/$"
+    }
+  ],
+  "headers": [],
+  "rewrites": {
+    "beforeFiles": [],
+    "afterFiles": [],
+    "fallback": []
+  },
+  "dynamicRoutes": [],
+  "staticRoutes": [
+    {
+      "page": "/",
+      "regex": "^/(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/(?:/)?$"
+    },
+    {
+      "page": "/_global-error",
+      "regex": "^/_global\\-error(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/_global\\-error(?:/)?$"
+    },
+    {
+      "page": "/_not-found",
+      "regex": "^/_not\\-found(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/_not\\-found(?:/)?$"
+    },
+    {
+      "page": "/api/account/init",
+      "regex": "^/api/account/init(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/account/init(?:/)?$"
+    },
+    {
+      "page": "/api/chat",
+      "regex": "^/api/chat(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/chat(?:/)?$"
+    },
+    {
+      "page": "/api/companion/avatar",
+      "regex": "^/api/companion/avatar(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/companion/avatar(?:/)?$"
+    },
+    {
+      "page": "/api/companion/reconcile-persona",
+      "regex": "^/api/companion/reconcile\\-persona(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/companion/reconcile\\-persona(?:/)?$"
+    },
+    {
+      "page": "/api/concept-summary",
+      "regex": "^/api/concept\\-summary(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/concept\\-summary(?:/)?$"
+    },
+    {
+      "page": "/api/conversations",
+      "regex": "^/api/conversations(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/conversations(?:/)?$"
+    },
+    {
+      "page": "/api/custom-companions",
+      "regex": "^/api/custom\\-companions(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/custom\\-companions(?:/)?$"
+    },
+    {
+      "page": "/api/custom-companions/avatar",
+      "regex": "^/api/custom\\-companions/avatar(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/custom\\-companions/avatar(?:/)?$"
+    },
+    {
+      "page": "/api/custom-companions/merge-persona",
+      "regex": "^/api/custom\\-companions/merge\\-persona(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/custom\\-companions/merge\\-persona(?:/)?$"
+    },
+    {
+      "page": "/api/diary",
+      "regex": "^/api/diary(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/diary(?:/)?$"
+    },
+    {
+      "page": "/api/flashcard",
+      "regex": "^/api/flashcard(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/flashcard(?:/)?$"
+    },
+    {
+      "page": "/api/forum",
+      "regex": "^/api/forum(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/forum(?:/)?$"
+    },
+    {
+      "page": "/api/groupchat",
+      "regex": "^/api/groupchat(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/groupchat(?:/)?$"
+    },
+    {
+      "page": "/api/jump-page",
+      "regex": "^/api/jump\\-page(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/jump\\-page(?:/)?$"
+    },
+    {
+      "page": "/api/lesson-summary",
+      "regex": "^/api/lesson\\-summary(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/lesson\\-summary(?:/)?$"
+    },
+    {
+      "page": "/api/pdf-assets",
+      "regex": "^/api/pdf\\-assets(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/pdf\\-assets(?:/)?$"
+    },
+    {
+      "page": "/api/profile",
+      "regex": "^/api/profile(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/profile(?:/)?$"
+    },
+    {
+      "page": "/api/profile/avatar",
+      "regex": "^/api/profile/avatar(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/profile/avatar(?:/)?$"
+    },
+    {
+      "page": "/api/profile/reset",
+      "regex": "^/api/profile/reset(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/profile/reset(?:/)?$"
+    },
+    {
+      "page": "/api/reading-context",
+      "regex": "^/api/reading\\-context(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/reading\\-context(?:/)?$"
+    },
+    {
+      "page": "/api/search",
+      "regex": "^/api/search(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/search(?:/)?$"
+    },
+    {
+      "page": "/api/stats",
+      "regex": "^/api/stats(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/stats(?:/)?$"
+    },
+    {
+      "page": "/api/system",
+      "regex": "^/api/system(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/system(?:/)?$"
+    },
+    {
+      "page": "/api/test-key",
+      "regex": "^/api/test\\-key(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/test\\-key(?:/)?$"
+    },
+    {
+      "page": "/api/tts-audio",
+      "regex": "^/api/tts\\-audio(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/tts\\-audio(?:/)?$"
+    },
+    {
+      "page": "/api/textbook",
+      "regex": "^/api/textbook(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/textbook(?:/)?$"
+    },
+    {
+      "page": "/api/world",
+      "regex": "^/api/world(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/world(?:/)?$"
+    },
+    {
+      "page": "/voice-test",
+      "regex": "^/voice\\-test(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/voice\\-test(?:/)?$"
+    },
+    {
+      "page": "/api/adaptive-teaching",
+      "regex": "^/api/adaptive\\-teaching(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/adaptive\\-teaching(?:/)?$"
+    },
+    {
+      "page": "/api/adaptive-concept-graph",
+      "regex": "^/api/adaptive\\-concept\\-graph(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/adaptive\\-concept\\-graph(?:/)?$"
+    },
+    {
+      "page": "/api/adaptive-diagnosis",
+      "regex": "^/api/adaptive\\-diagnosis(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/adaptive\\-diagnosis(?:/)?$"
+    },
+    {
+      "page": "/api/practice",
+      "regex": "^/api/practice(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/practice(?:/)?$"
+    },
+    {
+      "page": "/api/long-reasoning-demo",
+      "regex": "^/api/long\\-reasoning\\-demo(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/long\\-reasoning\\-demo(?:/)?$"
+    },
+    {
+      "page": "/api/knowledge-source",
+      "regex": "^/api/knowledge\\-source(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/knowledge\\-source(?:/)?$"
+    }
+  ],
+  "dataRoutes": [],
+  "rsc": {
+    "header": "rsc",
+    "varyHeader": "rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch",
+    "prefetchHeader": "next-router-prefetch",
+    "didPostponeHeader": "x-nextjs-postponed",
+    "contentTypeHeader": "text/x-component",
+    "suffix": ".rsc",
+    "prefetchSegmentHeader": "next-router-segment-prefetch",
+    "prefetchSegmentSuffix": ".segment.rsc",
+    "prefetchSegmentDirSuffix": ".segments",
+    "clientParamParsing": false,
+    "dynamicRSCPrerender": false
+  },
+  "rewriteHeaders": {
+    "pathHeader": "x-nextjs-rewritten-path",
+    "queryHeader": "x-nextjs-rewritten-query"
+  }
+}
