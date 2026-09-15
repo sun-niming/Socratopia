@@ -144,7 +144,7 @@ Server-layer edits need only an app restart; the ASAR is the runtime source for 
 
 `resources/settings.json` and `resources/set.json` (API keys, teaching-model config), `resources/app.asar`, `resources/rules/*` (except `rules_zh_classroom_compact.md`), `resources/bundled-content/`, or user data. See `.gitignore`.
 
-Caveat: those ignore rules are anchored to the repo root, so the snapshot's own copies under `win-unpacked/resources/` **are** tracked — including a `settings.json` with a live API key (see the release section above). This repo currently has no git remote, so nothing has been published; scrub that key before adding one.
+Caveat: those rules only name the root paths, so the snapshot's own copies under `win-unpacked/resources/` have their own explicit entries. They are deliberately **untracked but present on disk** — the snapshot needs a config to run, and that config holds a live API key. Ad-hoc copies at the repo root (`settings*.json`, `set*.json`) are covered by pattern for the same reason. That key is still in history from before these rules landed, and this repo has no git remote, so nothing has been published; scrub it before adding one.
 
 ## Working conventions
 
