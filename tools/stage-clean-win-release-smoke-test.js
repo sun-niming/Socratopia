@@ -64,6 +64,10 @@ try {
   var canary = "REAL_KEY_MUST_NOT_COPY";
   write(source, "resources/settings.json", canary);
   write(source, "resources/set.json", canary);
+  write(source, "resources/settings_dp.json", canary);
+  write(source, "resources/settings__.json", canary);
+  write(source, "resources/settings - copy.json", canary);
+  write(source, "resources/setup.json", "legitimate-resource");
   write(source, "resources/server/node_modules/dev-only/index.js", canary);
   write(source, "resources/server/lib/feature-smoke-test.js", canary);
   write(source, "resources/server/lib/feature.test.js", canary);
@@ -91,6 +95,11 @@ try {
   assert(!exists(destination, "stale.txt"));
   assert(!exists(destination, "resources/settings.json"));
   assert(!exists(destination, "resources/set.json"));
+  // Ad-hoc variants of the same local config are excluded too; a similarly-named real resource is not.
+  assert(!exists(destination, "resources/settings_dp.json"));
+  assert(!exists(destination, "resources/settings__.json"));
+  assert(!exists(destination, "resources/settings - copy.json"));
+  assert(exists(destination, "resources/setup.json"));
   assert(!exists(destination, "resources/server/node_modules"));
   assert(!exists(destination, "resources/server/lib/feature-smoke-test.js"));
   assert(!exists(destination, "resources/server/lib/feature.test.js"));
@@ -119,9 +128,24 @@ try {
   assert.strictEqual(verifyCli.status, 0, verifyCli.stderr || verifyCli.stdout);
   assert(verifyCli.stdout.includes("clean Windows release verified"));
 
+  // Local config is skipped by the copy (asserted above) but must be tolerated by verify: the packaged
+  // server reads resources/settings.json at runtime, so a finished release carries it by hand.
+  assert.strictEqual(staging.allowedReleasePath("resources/settings.json"), false, "copy skips local config");
+  assert.strictEqual(staging.allowedStagedPath("resources/settings.json"), true, "finished release may carry local config");
+  assert.strictEqual(staging.allowedReleasePath("resources/set.json"), false);
+  assert.strictEqual(staging.allowedStagedPath("resources/set.json"), true);
   write(destination, "resources/settings.json", canary);
+  staging.verifyCleanWinRelease(destination);
+  write(destination, "resources/set.json", canary);
+  staging.verifyCleanWinRelease(destination);
+
+  // The exemption is narrow - everything else still fails verification.
+  write(destination, "resources/server/lib/leftover-smoke-test.js", canary);
   assert.throws(function () { staging.verifyCleanWinRelease(destination); }, /forbidden release artifact/);
-  fs.rmSync(path.join(destination, "resources", "settings.json"), { force: true });
+  fs.rmSync(path.join(destination, "resources", "server", "lib", "leftover-smoke-test.js"), { force: true });
+  write(destination, "resources/server/node_modules/dev-only/index.js", canary);
+  assert.throws(function () { staging.verifyCleanWinRelease(destination); }, /forbidden release artifact/);
+  fs.rmSync(path.join(destination, "resources", "server", "node_modules"), { recursive: true, force: true });
   staging.verifyCleanWinRelease(destination);
   fs.writeFileSync(path.join(destination, "resources", "server", ".next", "node_modules", "next", "dist", "cli", "next-test.js"), "tampered");
   assert.throws(function () { staging.verifyCleanWinRelease(destination); }, /runtime manifest (size|hash) mismatch/);

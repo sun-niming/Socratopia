@@ -62,21 +62,54 @@ function manifestRuntimePath(relative) {
   return rel === "resources/server/.next/node_modules" || rel.startsWith("resources/server/.next/node_modules/");
 }
 
+// Locally-owned config: never copied out of the working tree (so a staged release carries no live
+// API key), but legitimately hand-copied into a finished release because the packaged server reads
+// it at `CONTENT_ROOT/../settings.json`. See allowedStagedPath below.
+// Covers the base names and their ad-hoc variants - "settings - 副本.json", "settings_dp.json",
+// "settings__.json" - which real working trees accumulate next to the real file.
+function localConfigPath(relative) {
+  var parts = normalized(relative).toLowerCase().split("/");
+  if (parts.length !== 2 || parts[0] !== "resources") return false;
+  var name = parts[1];
+  if (!/\.json$/.test(name)) return false;
+  return /^(settings|set)([^a-z0-9]|$)/.test(name);
+}
+
 function forbiddenReleasePath(relative) {
   var rel = normalized(relative).toLowerCase();
   if (!rel) return false;
-  if (rel === "resources/settings.json" || rel === "resources/set.json") return true;
+  if (localConfigPath(rel)) return true;
   if (rel === "resources/server/node_modules" || rel.startsWith("resources/server/node_modules/")) return true;
   if (manifestRuntimePath(rel)) return false;
   return testOrSourceMap(rel);
 }
 
+// What a finished release may contain: everything above except the hand-copied local config.
+function forbiddenStagedPath(relative) {
+  var rel = normalized(relative);
+  if (!rel) return false;
+  if (localConfigPath(rel)) return false;
+  return forbiddenReleasePath(rel);
+}
+
+function topLevelAllowed(relative) {
+  var parts = normalized(relative).split("/");
+  if (parts.length === 1) return ROOT_RUNTIME_DIRECTORIES.has(parts[0]) || ROOT_RUNTIME_FILES.has(parts[0]);
+  return ROOT_RUNTIME_DIRECTORIES.has(parts[0]);
+}
+
+// Used while copying: decides what leaves the working tree.
 function allowedReleasePath(relative) {
   var rel = normalized(relative);
   if (!rel || forbiddenReleasePath(rel)) return false;
-  var parts = rel.split("/");
-  if (parts.length === 1) return ROOT_RUNTIME_DIRECTORIES.has(parts[0]) || ROOT_RUNTIME_FILES.has(parts[0]);
-  return ROOT_RUNTIME_DIRECTORIES.has(parts[0]);
+  return topLevelAllowed(rel);
+}
+
+// Used while verifying: decides what a completed release may hold.
+function allowedStagedPath(relative) {
+  var rel = normalized(relative);
+  if (!rel || forbiddenStagedPath(rel)) return false;
+  return topLevelAllowed(rel);
 }
 
 function assertDirectory(root, label) {
@@ -216,7 +249,7 @@ function verifyCleanWinRelease(root) {
   function inspect(directory, relativeDirectory) {
     fs.readdirSync(directory, { withFileTypes: true }).forEach(function (entry) {
       var relative = relativeDirectory ? path.join(relativeDirectory, entry.name) : entry.name;
-      if (!allowedReleasePath(relative)) throw new Error("forbidden release artifact: " + normalized(relative));
+      if (!allowedStagedPath(relative)) throw new Error("forbidden release artifact: " + normalized(relative));
       var target = path.join(directory, entry.name);
       var stat = fs.lstatSync(target);
       if (stat.isSymbolicLink()) throw new Error("symlink refused in release: " + normalized(relative));
@@ -326,7 +359,9 @@ if (require.main === module) main(process.argv);
 
 module.exports = {
   allowedReleasePath: allowedReleasePath,
+  allowedStagedPath: allowedStagedPath,
   forbiddenReleasePath: forbiddenReleasePath,
+  forbiddenStagedPath: forbiddenStagedPath,
   stageCleanWinRelease: stageCleanWinRelease,
   verifyCleanWinRelease: verifyCleanWinRelease,
 };
