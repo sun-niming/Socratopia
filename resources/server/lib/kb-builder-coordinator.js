@@ -250,6 +250,8 @@ function createBuilderCoordinator(options) {
 
   async function providerCall(config, payload, signal) {
     payload = Object.assign({}, payload, { model: config.model, stream: false });
+    // deepseek 默认开启思考,会把 max_tokens 烧在 reasoning_content 上、content 返回空串。按最终 model 兜一层。
+    if (/^deepseek/i.test(String(config.model || ""))) payload.thinking = { type: "disabled" };
     return responsesCompat.postChatCompletionsJson(new URL(config.baseUrl + "/chat/completions"), payload, {
       headers: { "Content-Type": "application/json", Authorization: "Bearer " + config.apiKey, Connection: "close" },
       timeoutMs: 180000,

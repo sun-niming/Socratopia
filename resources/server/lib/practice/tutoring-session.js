@@ -23,6 +23,38 @@
     return process.env.PROJECT_ROOT || "";
   }
 
+  function accountError(code, message) {
+    var error = new Error(message || code); error.code = code; error.status = 409; error.statusCode = 409; return error;
+  }
+
+  function readCurrentAccountContext() {
+    try { return typeof global.__SOCRATOPIA_ACCOUNT_CONTEXT__ === "function" ? global.__SOCRATOPIA_ACCOUNT_CONTEXT__() : null; } catch (_) { return null; }
+  }
+
+  function normalizeAccountContext(value) {
+    if (!value || !value.active) return null;
+    var accountId = safeSegment(value.accountId, "accountId");
+    if (!Number.isSafeInteger(value.sessionEpoch) || value.sessionEpoch < 0) throw accountError("TUTORING_SESSION_EPOCH_INVALID", "sessionEpoch must be a non-negative integer");
+    return { active: true, accountId: accountId, sessionEpoch: value.sessionEpoch };
+  }
+
+  function requestContext(value) {
+    var current = normalizeAccountContext(readCurrentAccountContext());
+    var context = normalizeAccountContext(value === undefined ? current : value);
+    // An active server account is authoritative.  A missing or stale caller
+    // context must never downgrade this operation to the legacy profiles root.
+    if (current) {
+      if (!context || current.accountId !== context.accountId || current.sessionEpoch !== context.sessionEpoch) throw accountError("TUTORING_SESSION_EPOCH_STALE", "Tutoring request account session changed");
+      return context;
+    }
+    if (context) throw accountError("TUTORING_SESSION_EPOCH_STALE", "Tutoring request account is no longer active");
+    return null;
+  }
+
+  function profilesRoot(context) {
+    return context ? path.join(projectRoot(), "accounts", context.accountId, "profiles") : path.join(projectRoot(), "profiles");
+  }
+
   function safeSegment(value, name) {
     if (value === null || value === undefined || typeof value !== "string" || value.trim() === "")
       throw new Error(name + " must be a non-empty string");
@@ -34,22 +66,17 @@
     return value;
   }
 
-  function worldDir(profileId, worldId) {
-    return path.join(
-      projectRoot(),
-      "profiles",
-      safeSegment(profileId, "profileId"),
-      "worlds",
-      safeSegment(worldId, "worldId")
-    );
+  function worldDir(profileId, worldId, context) {
+    context = requestContext(context);
+    return path.join(profilesRoot(context), safeSegment(profileId, "profileId"), "worlds", safeSegment(worldId, "worldId"));
   }
 
-  function tutoringSessionsDir(profileId, worldId) {
-    return path.join(worldDir(profileId, worldId), "practice", "tutoring_sessions");
+  function tutoringSessionsDir(profileId, worldId, context) {
+    return path.join(worldDir(profileId, worldId, context), "practice", "tutoring_sessions");
   }
 
-  function sessionFilePath(profileId, worldId, problemSetId) {
-    return path.join(tutoringSessionsDir(profileId, worldId), safeSegment(problemSetId, "problemSetId") + ".json");
+  function sessionFilePath(profileId, worldId, problemSetId, context) {
+    return path.join(tutoringSessionsDir(profileId, worldId, context), safeSegment(problemSetId, "problemSetId") + ".json");
   }
 
   // ========== Low-level IO ==========
@@ -87,11 +114,17 @@
 
   // ========== Default session ==========
 
-  function defaultSession(problemSetId) {
+  function defaultSession(problemSetId, context) {
+    context = requestContext(context);
     return {
       problemSetId: problemSetId,
       companionId: null,
       companionName: null,
+      companionSlotId: null,
+      companionInstanceId: null,
+      candidateId: null,
+      accountId: context ? context.accountId : null,
+      sessionEpoch: context ? context.sessionEpoch : null,
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),
       messages: [],
@@ -100,37 +133,54 @@
     };
   }
 
-  // ========== CRUD ==========
-
-  function readTutoringSession(profileId, worldId, problemSetId) {
-    if (!profileId || !worldId || !problemSetId) return null;
-    var fp = sessionFilePath(profileId, worldId, problemSetId);
-    var sess = readJSON(fp);
-    if (!sess || !Array.isArray(sess.messages)) return null;
-    return sess;
-  }
-
-  function writeTutoringSession(profileId, worldId, session) {
-    if (!profileId || !worldId) throw new Error("writeTutoringSession requires profileId and worldId");
-    if (!session || typeof session !== "object") throw new Error("session is required");
-    if (!session.problemSetId) throw new Error("session.problemSetId is required");
-    safeSegment(session.problemSetId, "problemSetId");
-    if (!Array.isArray(session.messages)) session.messages = [];
-    if (!session.createdAt) session.createdAt = new Date().toISOString();
-    session.updatedAt = new Date().toISOString();
-    writeJSON(sessionFilePath(profileId, worldId, session.problemSetId), session);
+  function assertSessionOwnership(session, context) {
+    if (!context || !session) return session;
+    if (session.accountId && session.accountId !== context.accountId) throw accountError("TUTORING_ACCOUNT_MISMATCH", "Tutoring session belongs to another account");
+    if (!session.accountId) session.accountId = context.accountId;
     return session;
   }
 
-  function appendMessage(profileId, worldId, problemSetId, message) {
+  function stampSessionContext(session, context) {
+    if (context) { session.accountId = context.accountId; session.sessionEpoch = context.sessionEpoch; }
+    return session;
+  }
+
+  // ========== CRUD ==========
+
+  function readTutoringSession(profileId, worldId, problemSetId, context) {
+    if (!profileId || !worldId || !problemSetId) return null;
+    context = requestContext(context);
+    var fp = sessionFilePath(profileId, worldId, problemSetId, context);
+    var sess = readJSON(fp);
+    if (!sess || !Array.isArray(sess.messages)) return null;
+    return assertSessionOwnership(sess, context);
+  }
+
+  function writeTutoringSession(profileId, worldId, session, context) {
+    if (!profileId || !worldId) throw new Error("writeTutoringSession requires profileId and worldId");
+    if (!session || typeof session !== "object") throw new Error("session is required");
+    if (!session.problemSetId) throw new Error("session.problemSetId is required");
+    context = requestContext(context);
+    safeSegment(session.problemSetId, "problemSetId");
+    if (!Array.isArray(session.messages)) session.messages = [];
+    assertSessionOwnership(session, context);
+    stampSessionContext(session, context);
+    if (!session.createdAt) session.createdAt = new Date().toISOString();
+    session.updatedAt = new Date().toISOString();
+    writeJSON(sessionFilePath(profileId, worldId, session.problemSetId, context), session);
+    return session;
+  }
+
+  function appendMessage(profileId, worldId, problemSetId, message, context) {
     if (!profileId || !worldId || !problemSetId) {
       throw new Error("appendMessage requires profileId, worldId, problemSetId");
     }
     if (!message || typeof message !== "object") throw new Error("message is required");
 
-    var sess = readTutoringSession(profileId, worldId, problemSetId);
+    context = requestContext(context);
+    var sess = readTutoringSession(profileId, worldId, problemSetId, context);
     if (!sess) {
-      sess = defaultSession(problemSetId);
+      sess = defaultSession(problemSetId, context);
     }
 
     var entry = {
@@ -143,43 +193,52 @@
 
     sess.messages.push(entry);
     sess.updatedAt = new Date().toISOString();
-    writeJSON(sessionFilePath(profileId, worldId, problemSetId), sess);
+    writeTutoringSession(profileId, worldId, sess, context);
     return entry;
   }
 
-  function updateContext(profileId, worldId, problemSetId, context) {
+  function updateContext(profileId, worldId, problemSetId, context, requestCtx) {
     if (!profileId || !worldId || !problemSetId) {
       throw new Error("updateContext requires profileId, worldId, problemSetId");
     }
-    var sess = readTutoringSession(profileId, worldId, problemSetId);
+    requestCtx = requestContext(requestCtx);
+    var sess = readTutoringSession(profileId, worldId, problemSetId, requestCtx);
     if (!sess) {
-      sess = defaultSession(problemSetId);
+      sess = defaultSession(problemSetId, requestCtx);
     }
     sess.context = context && typeof context === "object" ? context : null;
     if (context && context.problemId) sess.activeProblemId = context.problemId;
     sess.updatedAt = new Date().toISOString();
-    writeJSON(sessionFilePath(profileId, worldId, problemSetId), sess);
+    writeTutoringSession(profileId, worldId, sess, requestCtx);
     return sess;
   }
 
-  function setCompanion(profileId, worldId, problemSetId, companionId, companionName) {
+  function setCompanion(profileId, worldId, problemSetId, companionId, companionName, identity, context) {
     if (!profileId || !worldId || !problemSetId) {
       throw new Error("setCompanion requires profileId, worldId, problemSetId");
     }
-    var sess = readTutoringSession(profileId, worldId, problemSetId);
+    if (identity && identity.active !== undefined && context === undefined) { context = identity; identity = null; }
+    context = requestContext(context);
+    var sess = readTutoringSession(profileId, worldId, problemSetId, context);
     if (!sess) {
-      sess = defaultSession(problemSetId);
+      sess = defaultSession(problemSetId, context);
     }
     sess.companionId = companionId || null;
     sess.companionName = companionName || null;
+    if (identity && typeof identity === "object") {
+      sess.companionSlotId = identity.slotId || null;
+      sess.companionInstanceId = identity.companionInstanceId || companionId || null;
+      sess.candidateId = identity.candidateId || null;
+    }
     sess.updatedAt = new Date().toISOString();
-    writeJSON(sessionFilePath(profileId, worldId, problemSetId), sess);
+    writeTutoringSession(profileId, worldId, sess, context);
     return sess;
   }
 
-  function listTutoringSessions(profileId, worldId) {
+  function listTutoringSessions(profileId, worldId, context) {
     if (!profileId || !worldId) return [];
-    var dir = tutoringSessionsDir(profileId, worldId);
+    context = requestContext(context);
+    var dir = tutoringSessionsDir(profileId, worldId, context);
     if (!fs.existsSync(dir)) return [];
     var out = [];
     var entries;
@@ -188,10 +247,14 @@
       if (!/\.json$/.test(entries[i])) continue;
       var sess = readJSON(path.join(dir, entries[i]));
       if (!sess || !Array.isArray(sess.messages)) continue;
+      try { assertSessionOwnership(sess, context); } catch (_) { continue; }
       out.push({
         problemSetId: sess.problemSetId || entries[i].replace(/\.json$/, ""),
         companionId: sess.companionId || null,
         companionName: sess.companionName || null,
+        companionSlotId: sess.companionSlotId || null,
+        companionInstanceId: sess.companionInstanceId || null,
+        candidateId: sess.candidateId || null,
         messageCount: sess.messages.length,
         createdAt: sess.createdAt || null,
         updatedAt: sess.updatedAt || null
@@ -203,9 +266,10 @@
     return out;
   }
 
-  function deleteTutoringSession(profileId, worldId, problemSetId) {
+  function deleteTutoringSession(profileId, worldId, problemSetId, context) {
     if (!profileId || !worldId || !problemSetId) return false;
-    var fp = sessionFilePath(profileId, worldId, problemSetId);
+    context = requestContext(context);
+    var fp = sessionFilePath(profileId, worldId, problemSetId, context);
     if (!fs.existsSync(fp)) return false;
     try { fs.unlinkSync(fp); return true; } catch (e) { return false; }
   }
@@ -216,6 +280,8 @@
     tutoringSessionsDir: tutoringSessionsDir,
     sessionFilePath: sessionFilePath,
     safeSegment: safeSegment,
+    requestContext: requestContext,
+    profilesRoot: profilesRoot,
     readTutoringSession: readTutoringSession,
     writeTutoringSession: writeTutoringSession,
     appendMessage: appendMessage,

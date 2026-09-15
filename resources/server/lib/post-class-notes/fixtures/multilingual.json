@@ -1,0 +1,55 @@
+{
+  "name": "multilingual",
+  "note": "英文与繁体中文混排，验证语言分支",
+  "language": "english",
+  "messages": [
+    {
+      "role": "user",
+      "content": "I keep mixing up patterns and lexemes. Isn't a pattern just the string we matched?"
+    },
+    {
+      "role": "assistant",
+      "content": "Close but one level off. A lexeme is the concrete string; a pattern is the rule describing the set of lexemes, e.g. \\(letter(letter|digit)^{*}\\)."
+    },
+    {
+      "role": "user",
+      "content": "Ok so the pattern is the description and the lexeme is the instance."
+    },
+    {
+      "role": "assistant",
+      "content": "Exactly. And the token is the syntactic category those lexemes belong to."
+    },
+    {
+      "role": "user",
+      "content": "那 \\(\\epsilon\\) 轉移在這裡算不算一個字元？"
+    },
+    {
+      "role": "assistant",
+      "content": "不算，\\(\\epsilon\\) 是空串，因此 \\(\\epsilon\\)-closure 可以在不消耗輸入的情況下擴張狀態集合。"
+    },
+    {
+      "role": "user",
+      "content": "所以子集構造是把「可能同時在的多個狀態」變成一個 DFA 狀態。"
+    },
+    {
+      "role": "assistant",
+      "content": "對，這正是它保證確定性的原因；代價是最壞情況下的狀態爆炸。"
+    },
+    {
+      "role": "user",
+      "content": "Why does minimization matter if the DFA already works?"
+    },
+    {
+      "role": "assistant",
+      "content": "It shrinks the table and makes the machine unique, which helps table-driven scanners and verification."
+    },
+    {
+      "role": "user",
+      "content": "Got it — it's about cost and canonical form, not correctness."
+    },
+    {
+      "role": "assistant",
+      "content": "Right. Correctness came from the subset construction; minimization is a separate optimization."
+    }
+  ]
+}

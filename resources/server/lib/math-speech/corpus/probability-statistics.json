@@ -1,0 +1,272 @@
+[
+  {
+    "id": "probability-statistics-001",
+    "latex": "P(A)",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "A 的概率"
+    }
+  },
+  {
+    "id": "probability-statistics-002",
+    "latex": "P(X\\mid Y)",
+    "expected": {
+      "ok": true,
+      "mode": "structural",
+      "speech": "P 左圆括号 X 竖线 Y 右圆括号",
+      "unresolvedAmbiguities": [
+        "conditional-probability-role"
+      ]
+    }
+  },
+  {
+    "id": "probability-statistics-003",
+    "latex": "\\Pr(A)",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "A 的概率"
+    }
+  },
+  {
+    "id": "probability-statistics-004",
+    "latex": "\\Pr(A\\mid B)",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "A 在 B 条件下的概率"
+    }
+  },
+  {
+    "id": "probability-statistics-005",
+    "latex": "\\mathbb{E}[X]",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "期望 X"
+    }
+  },
+  {
+    "id": "probability-statistics-006",
+    "latex": "E(X)",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "期望 X"
+    }
+  },
+  {
+    "id": "probability-statistics-007",
+    "latex": "\\operatorname{Var}(X)",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "方差 X"
+    }
+  },
+  {
+    "id": "probability-statistics-008",
+    "latex": "\\operatorname{Cov}(X,Y)",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "协方差（X，Y）"
+    }
+  },
+  {
+    "id": "probability-statistics-009",
+    "latex": "\\operatorname{SD}(X)",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "标准差 X"
+    }
+  },
+  {
+    "id": "probability-statistics-010",
+    "latex": "\\binom{n}{k}",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "n 选 k"
+    }
+  },
+  {
+    "id": "probability-statistics-011",
+    "latex": "P(A\\cup B)",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "（A 与 B 的并集） 的概率"
+    }
+  },
+  {
+    "id": "probability-statistics-012",
+    "latex": "P(A\\cap B)",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "（A 与 B 的交集） 的概率"
+    }
+  },
+  {
+    "id": "probability-statistics-013",
+    "latex": "P(A\\mid B)=\\frac{P(A\\cap B)}{P(B)}",
+    "context": {
+      "symbolFacts": {
+        "P": {
+          "type": "probability",
+          "evidence": "explicit",
+          "sourceText": "设 P 表示概率",
+          "scopeId": "current"
+        }
+      }
+    },
+    "expected": {
+      "ok": true,
+      "mode": "detailed",
+      "speech": "A 在 B 条件下的概率，等于一个分数，分子是（A 与 B 的交集） 的概率，分母是B 的概率，分数结束"
+    }
+  },
+  {
+    "id": "probability-statistics-014",
+    "latex": "50\\%",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "百分之五十"
+    }
+  },
+  {
+    "id": "probability-statistics-015",
+    "latex": "\\frac{1}{n}",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "一 除以 n"
+    }
+  },
+  {
+    "id": "probability-statistics-016",
+    "latex": "p=0.5",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "p，等于零点五"
+    }
+  },
+  {
+    "id": "probability-statistics-017",
+    "latex": "\\frac{n!}{k!(n-k)!}",
+    "expected": {
+      "ok": true,
+      "mode": "detailed",
+      "speech": "一个分数，分子是n 阶乘，分母是k 阶乘 n 减 k 阶乘，分数结束"
+    }
+  },
+  {
+    "id": "probability-statistics-018",
+    "latex": "E[X]",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "期望 X"
+    }
+  },
+  {
+    "id": "probability-statistics-019",
+    "latex": "X\\sim N(0,1)",
+    "expected": {
+      "ok": true,
+      "mode": "structural",
+      "speech": "X，相似于 N 左圆括号 零 逗号 一 右圆括号",
+      "unresolvedAmbiguities": [
+        "unknown-function-role"
+      ]
+    }
+  },
+  {
+    "id": "probability-statistics-020",
+    "latex": "P(X=x)",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "（X，等于 x） 的概率"
+    }
+  },
+  {
+    "id": "probability-statistics-021",
+    "latex": "P(J\\mid K)",
+    "context": {
+      "symbolFacts": {
+        "P": {
+          "type": "probability",
+          "evidence": "explicit",
+          "sourceText": "设 P 表示概率",
+          "scopeId": "current"
+        }
+      }
+    },
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "J 在 K 条件下的概率"
+    }
+  },
+  {
+    "id": "probability-statistics-022",
+    "latex": "P(L\\mid M)",
+    "context": {
+      "domainHints": ["probability"]
+    },
+    "expected": {
+      "ok": true,
+      "mode": "structural",
+      "speech": "P 左圆括号 L 竖线 M 右圆括号",
+      "unresolvedAmbiguities": [
+        "conditional-probability-role"
+      ]
+    }
+  },
+  {
+    "id": "probability-statistics-023",
+    "latex": "P(E\\mid F)",
+    "context": {
+      "symbolFacts": {
+        "P": [
+          {
+            "type": "probability",
+            "evidence": "explicit",
+            "scopeId": "current"
+          },
+          {
+            "type": "function",
+            "evidence": "explicit",
+            "scopeId": "current"
+          }
+        ]
+      }
+    },
+    "expected": {
+      "ok": true,
+      "mode": "structural",
+      "speech": "P 左圆括号 E 竖线 F 右圆括号",
+      "unresolvedAmbiguities": [
+        "conditional-probability-role"
+      ]
+    }
+  },
+  {
+    "id": "probability-statistics-024",
+    "latex": "P(G\\mid H)",
+    "context": {
+      "currentSentence": "设 P 表示概率。"
+    },
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "G 在 H 条件下的概率"
+    }
+  }
+]

@@ -1,0 +1,326 @@
+[
+  {
+    "id": "calculus-001",
+    "latex": "\\sum_{i=1}^{n} i",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "从 i 等于一到 n，对 i 求和"
+    }
+  },
+  {
+    "id": "calculus-002",
+    "latex": "\\sum_{i=1}^{n} a_i",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "从 i 等于一到 n，对 a 下标 i 求和"
+    }
+  },
+  {
+    "id": "calculus-003",
+    "latex": "\\sum_{k=0}^{n} k^2",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "从 k 等于零到 n，对 k 的平方 求和"
+    }
+  },
+  {
+    "id": "calculus-004",
+    "latex": "\\sum_{j=1}^{m} j",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "从 j 等于一到 m，对 j 求和"
+    }
+  },
+  {
+    "id": "calculus-005",
+    "latex": "\\prod_{i=1}^{n} i",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "从 i 等于一到 n，对 i 求积"
+    }
+  },
+  {
+    "id": "calculus-006",
+    "latex": "\\prod_{k=1}^{n} k^2",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "从 k 等于一到 n，对 k 的平方 求积"
+    }
+  },
+  {
+    "id": "calculus-007",
+    "latex": "\\prod_{j=0}^{m} a_j",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "从 j 等于零到 m，对 a 下标 j 求积"
+    }
+  },
+  {
+    "id": "calculus-008",
+    "latex": "\\int_0^1 x\\,dx",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "从零到一，x 关于 x 的积分"
+    }
+  },
+  {
+    "id": "calculus-009",
+    "latex": "\\int_0^1 x^2\\,dx",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "从零到一，x 的平方关于 x 的积分"
+    }
+  },
+  {
+    "id": "calculus-010",
+    "latex": "\\int_a^b f(x)\\,dx",
+    "expected": {
+      "ok": true,
+      "mode": "structural",
+      "speech": "从 a到 b，f 左圆括号 x 右圆括号关于 x 的积分",
+      "unresolvedAmbiguities": [
+        "unknown-function-role"
+      ]
+    }
+  },
+  {
+    "id": "calculus-011",
+    "latex": "\\int_0^\\infty e^{-x}\\,dx",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "从零到无穷大，自然常数 e 的负 x 次方关于 x 的积分"
+    }
+  },
+  {
+    "id": "calculus-012",
+    "latex": "\\int x\\,dx",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "x 关于 x 的积分"
+    }
+  },
+  {
+    "id": "calculus-013",
+    "latex": "\\int_a^b \\sin x\\,dx",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "从 a到 b，正弦 x 关于 x 的积分"
+    }
+  },
+  {
+    "id": "calculus-014",
+    "latex": "\\int_0^1 (x+1)\\,dx",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "从零到一，x 加一关于 x 的积分"
+    }
+  },
+  {
+    "id": "calculus-015",
+    "latex": "\\lim_{x\\to 0}x",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "当 x 趋近于零时，x 的极限"
+    }
+  },
+  {
+    "id": "calculus-016",
+    "latex": "\\lim_{x\\to 0}\\frac{\\sin x}{x}",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "当 x 趋近于零时，正弦 x 除以 x 的极限"
+    }
+  },
+  {
+    "id": "calculus-017",
+    "latex": "\\lim_{x\\to \\infty}\\frac{1}{x}",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "当 x 趋近于无穷大时，一 除以 x 的极限"
+    }
+  },
+  {
+    "id": "calculus-018",
+    "latex": "\\lim_{n\\to\\infty}\\left(1+\\frac{1}{n}\\right)^n",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "当 n 趋近于无穷大时，（一加一 除以 n）的 n 次方的极限"
+    }
+  },
+  {
+    "id": "calculus-019",
+    "latex": "\\partial f/\\partial x",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "偏导 f 除以偏导 x"
+    }
+  },
+  {
+    "id": "calculus-020",
+    "latex": "\\partial^2 f/\\partial x^2",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "偏导的平方 f 除以偏导 x 的平方"
+    }
+  },
+  {
+    "id": "calculus-021",
+    "latex": "\\nabla f",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "梯度 f"
+    }
+  },
+  {
+    "id": "calculus-022",
+    "latex": "\\nabla\\cdot\\vec{F}",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "梯度点乘向量 F"
+    }
+  },
+  {
+    "id": "calculus-023",
+    "latex": "\\frac{d}{dx}x^2",
+    "expected": {
+      "ok": true,
+      "mode": "structural",
+      "speech": "一个分数，分子是d，分母是d x，分数结束 x 的平方",
+      "unresolvedAmbiguities": [
+        "differential-or-product"
+      ]
+    }
+  },
+  {
+    "id": "calculus-024",
+    "latex": "\\frac{d}{dt}t^3",
+    "expected": {
+      "ok": true,
+      "mode": "structural",
+      "speech": "一个分数，分子是d，分母是d t，分数结束 t 的立方",
+      "unresolvedAmbiguities": [
+        "differential-or-product"
+      ]
+    }
+  },
+  {
+    "id": "calculus-025",
+    "latex": "\\sum_{i=1}^{n} (i+1)",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "从 i 等于一到 n，对 i 加一 求和"
+    }
+  },
+  {
+    "id": "calculus-026",
+    "latex": "\\prod_{i=1}^{n} (1+i)",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "从 i 等于一到 n，对 一加 i 求积"
+    }
+  },
+  {
+    "id": "calculus-027",
+    "latex": "\\int_{-1}^{1}x^3\\,dx",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "从负一到一，x 的立方关于 x 的积分"
+    }
+  },
+  {
+    "id": "calculus-028",
+    "latex": "\\lim_{h\\to 0}\\frac{f(x+h)-f(x)}{h}",
+    "expected": {
+      "ok": true,
+      "mode": "structural",
+      "speech": "当 h 趋近于零时，一个分数，分子是f 左圆括号 x 加 h 右圆括号减 f 左圆括号 x 右圆括号，分母是h，分数结束的极限",
+      "unresolvedAmbiguities": [
+        "unknown-function-role"
+      ]
+    }
+  },
+  {
+    "id": "calculus-029",
+    "latex": "\\int_0^1 \\cos x\\,dx",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "从零到一，余弦 x 关于 x 的积分"
+    }
+  },
+  {
+    "id": "calculus-030",
+    "latex": "\\sum_{r=0}^{4} r",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "从 r 等于零到四，对 r 求和"
+    }
+  },
+  {
+    "id": "calculus-031",
+    "latex": "\\int_0^1 t^2",
+    "expected": {
+      "ok": true,
+      "mode": "structural",
+      "speech": "从零到一，t 的平方，积分",
+      "unresolvedAmbiguities": [
+        "missing-integral-variable"
+      ]
+    }
+  },
+  {
+    "id": "calculus-032",
+    "latex": "\\int_0^1 t^2\\,dt",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "从零到一，t 的平方关于 t 的积分"
+    }
+  },
+  {
+    "id": "calculus-033",
+    "latex": "\\int_0^1 t^2\\,d\\theta",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "从零到一，t 的平方关于 西塔 的积分"
+    }
+  },
+  {
+    "id": "calculus-034",
+    "latex": "\\iint_0^1 f(x,y)\\,dx\\,dy",
+    "expected": {
+      "ok": true,
+      "mode": "structural",
+      "speech": "从零到一，f 左圆括号 x 逗号 y 右圆括号关于 x 和 y 的二重积分",
+      "unresolvedAmbiguities": [
+        "unknown-function-role"
+      ]
+    }
+  }
+]

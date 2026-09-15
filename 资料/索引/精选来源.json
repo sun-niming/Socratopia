@@ -1,0 +1,749 @@
+{
+  "updatedAt": "2026-09-15",
+  "scope": "已有来源的模板用途筛选；非全文语料包",
+  "sources": [
+    {
+      "id": "S001",
+      "world": "翁法罗斯",
+      "title": "翁法罗斯世界设定",
+      "url": "https://wiki.biligame.com/sr/翁法罗斯",
+      "templateTargets": [
+        "世界"
+      ],
+      "fields": [
+        "世界规则",
+        "泰坦",
+        "地理与城邦",
+        "组织",
+        "社会生活"
+      ],
+      "priority": "核心",
+      "verification": "已读取页面",
+      "note": "社区汇总；沿参考资料回查原文。"
+    },
+    {
+      "id": "S002",
+      "world": "翁法罗斯",
+      "title": "翁法罗斯编年史",
+      "url": "https://wiki.biligame.com/sr/翁法罗斯编年史",
+      "templateTargets": [
+        "世界",
+        "人物"
+      ],
+      "fields": [
+        "历史事件",
+        "剧情截止点",
+        "人物经历"
+      ],
+      "priority": "核心",
+      "verification": "已读取页面",
+      "note": "区分不同阶段、循环和人物当时的认知。"
+    },
+    {
+      "id": "S003",
+      "world": "翁法罗斯",
+      "title": "角色图鉴",
+      "url": "https://wiki.biligame.com/sr/角色图鉴",
+      "templateTargets": [
+        "人物"
+      ],
+      "fields": [
+        "人物检索"
+      ],
+      "priority": "核心",
+      "verification": "已读取页面",
+      "note": "导航入口；进入角色资料与语音页后再提取。"
+    },
+    {
+      "id": "S004",
+      "world": "翁法罗斯",
+      "title": "白厄／资料",
+      "url": "https://wiki.biligame.com/sr/白厄/资料",
+      "templateTargets": [
+        "人物"
+      ],
+      "fields": [
+        "身份与别名",
+        "经历",
+        "动机",
+        "关系"
+      ],
+      "priority": "核心",
+      "verification": "已读取页面",
+      "note": ""
+    },
+    {
+      "id": "S005",
+      "world": "翁法罗斯",
+      "title": "白厄／语音",
+      "url": "https://wiki.biligame.com/sr/白厄/语音",
+      "templateTargets": [
+        "人物"
+      ],
+      "fields": [
+        "语气",
+        "自我评价",
+        "对他人的态度"
+      ],
+      "priority": "核心",
+      "verification": "已从页面发现链接，正文待核验",
+      "note": ""
+    },
+    {
+      "id": "S006",
+      "world": "翁法罗斯",
+      "title": "阿格莱雅／资料",
+      "url": "https://wiki.biligame.com/sr/阿格莱雅/资料",
+      "templateTargets": [
+        "人物"
+      ],
+      "fields": [
+        "身份",
+        "经历",
+        "动机",
+        "关系"
+      ],
+      "priority": "核心",
+      "verification": "已从页面发现链接，正文待核验",
+      "note": ""
+    },
+    {
+      "id": "S007",
+      "world": "翁法罗斯",
+      "title": "阿格莱雅／语音",
+      "url": "https://wiki.biligame.com/sr/阿格莱雅/语音",
+      "templateTargets": [
+        "人物"
+      ],
+      "fields": [
+        "语气",
+        "称谓",
+        "关系"
+      ],
+      "priority": "核心",
+      "verification": "已从页面发现链接，正文待核验",
+      "note": ""
+    },
+    {
+      "id": "S008",
+      "world": "翁法罗斯",
+      "title": "开拓任务",
+      "url": "https://wiki.biligame.com/sr/开拓任务",
+      "templateTargets": [
+        "人物",
+        "世界"
+      ],
+      "fields": [
+        "关键行为",
+        "关系变化",
+        "事件因果"
+      ],
+      "priority": "核心",
+      "verification": "已读取页面",
+      "note": "限定第四幕·翁法罗斯；索引本身不等于全部对话。"
+    },
+    {
+      "id": "S009",
+      "world": "翁法罗斯",
+      "title": "NPC图鉴",
+      "url": "https://wiki.biligame.com/sr/NPC",
+      "templateTargets": [
+        "人物",
+        "世界"
+      ],
+      "fields": [
+        "非可玩人物",
+        "地方关系",
+        "职业与生活"
+      ],
+      "priority": "补充",
+      "verification": "已确认非空页面，具体条目待核验",
+      "note": ""
+    },
+    {
+      "id": "S010",
+      "world": "翁法罗斯",
+      "title": "翁法罗斯剧情阅读物",
+      "url": "https://wiki.biligame.com/sr/翁法罗斯剧情阅读物",
+      "templateTargets": [
+        "人物",
+        "世界"
+      ],
+      "fields": [
+        "私人留言",
+        "文书",
+        "事件证据"
+      ],
+      "priority": "补充",
+      "verification": "已读取页面",
+      "note": "聚合页；每段文书分别记录叙述者和出现阶段。"
+    },
+    {
+      "id": "S011",
+      "world": "提瓦特",
+      "title": "北陆图书馆",
+      "url": "https://wiki.biligame.com/ys/北陆图书馆",
+      "templateTargets": [
+        "世界"
+      ],
+      "fields": [
+        "世界规则",
+        "文明",
+        "组织",
+        "地区设定"
+      ],
+      "priority": "核心",
+      "verification": "已读取页面",
+      "note": "社区汇总；不把推断与引用原文混写。"
+    },
+    {
+      "id": "S012",
+      "world": "提瓦特",
+      "title": "提瓦特编年史",
+      "url": "https://wiki.biligame.com/ys/提瓦特编年史",
+      "templateTargets": [
+        "世界",
+        "人物"
+      ],
+      "fields": [
+        "全局时间线",
+        "国家历史",
+        "人物经历"
+      ],
+      "priority": "核心",
+      "verification": "已读取页面",
+      "note": "各国细节沿页内地区链接查找；争议年份保留不确定性。"
+    },
+    {
+      "id": "S013",
+      "world": "提瓦特",
+      "title": "角色一览",
+      "url": "https://wiki.biligame.com/ys/角色",
+      "templateTargets": [
+        "人物"
+      ],
+      "fields": [
+        "人物检索"
+      ],
+      "priority": "核心",
+      "verification": "已读取页面",
+      "note": "按国家筛选，角色页面提取故事和语音。"
+    },
+    {
+      "id": "S014",
+      "world": "提瓦特",
+      "title": "钟离",
+      "url": "https://wiki.biligame.com/ys/钟离",
+      "templateTargets": [
+        "人物"
+      ],
+      "fields": [
+        "身份与别名",
+        "角色故事",
+        "经历",
+        "性格证据"
+      ],
+      "priority": "核心",
+      "verification": "已读取页面",
+      "note": ""
+    },
+    {
+      "id": "S015",
+      "world": "提瓦特",
+      "title": "钟离语音",
+      "url": "https://wiki.biligame.com/ys/钟离语音",
+      "templateTargets": [
+        "人物"
+      ],
+      "fields": [
+        "语气",
+        "价值观",
+        "人际关系"
+      ],
+      "priority": "核心",
+      "verification": "已从页面发现链接，正文待核验",
+      "note": ""
+    },
+    {
+      "id": "S016",
+      "world": "提瓦特",
+      "title": "传说／邀约任务入口",
+      "url": "https://wiki.biligame.com/ys/传说任务",
+      "templateTargets": [
+        "人物"
+      ],
+      "fields": [
+        "行为选择",
+        "动机",
+        "关系变化"
+      ],
+      "priority": "核心",
+      "verification": "已从页面发现链接，正文待核验",
+      "note": "在导航中继续查具体传说任务和邀约；避免把分支情节拼成同一次经历。"
+    },
+    {
+      "id": "S017",
+      "world": "提瓦特",
+      "title": "魔神任务",
+      "url": "https://wiki.biligame.com/ys/魔神任务",
+      "templateTargets": [
+        "人物",
+        "世界"
+      ],
+      "fields": [
+        "主线事件",
+        "阵营变化",
+        "人物认知"
+      ],
+      "priority": "核心",
+      "verification": "已读取页面",
+      "note": "按选定剧情进度提取。"
+    },
+    {
+      "id": "S018",
+      "world": "提瓦特",
+      "title": "世界任务",
+      "url": "https://wiki.biligame.com/ys/世界任务",
+      "templateTargets": [
+        "人物",
+        "世界"
+      ],
+      "fields": [
+        "地方历史",
+        "古文明",
+        "NPC经历"
+      ],
+      "priority": "核心",
+      "verification": "已确认非空页面，具体条目待核验",
+      "note": ""
+    },
+    {
+      "id": "S019",
+      "world": "提瓦特",
+      "title": "NPC图鉴",
+      "url": "https://wiki.biligame.com/ys/NPC图鉴",
+      "templateTargets": [
+        "人物",
+        "世界"
+      ],
+      "fields": [
+        "非可玩人物",
+        "职业",
+        "地方关系"
+      ],
+      "priority": "补充",
+      "verification": "已确认非空页面，具体条目待核验",
+      "note": ""
+    },
+    {
+      "id": "S020",
+      "world": "翁法罗斯",
+      "title": "翁法罗斯的历法",
+      "url": "https://wiki.biligame.com/sr/%E7%BF%81%E6%B3%95%E7%BD%97%E6%96%AF%E7%9A%84%E5%8E%86%E6%B3%95",
+      "templateTargets": [
+        "世界"
+      ],
+      "fields": [
+        "历法",
+        "节令",
+        "时间表达"
+      ],
+      "priority": "定向候选",
+      "verification": "目录已提取，正文待核验",
+      "note": "校准世界中人物使用的日期与时间。"
+    },
+    {
+      "id": "S021",
+      "world": "翁法罗斯",
+      "title": "第一次逐火之旅史（残卷）",
+      "url": "https://wiki.biligame.com/sr/%E7%AC%AC%E4%B8%80%E6%AC%A1%E9%80%90%E7%81%AB%E4%B9%8B%E6%97%85%E5%8F%B2%EF%BC%88%E6%AE%8B%E5%8D%B7%EF%BC%89",
+      "templateTargets": [
+        "世界"
+      ],
+      "fields": [
+        "历史",
+        "逐火事件"
+      ],
+      "priority": "定向候选",
+      "verification": "目录已提取，正文待核验",
+      "note": "史书存在残卷与叙述视角；核验后进入历史事件表。"
+    },
+    {
+      "id": "S022",
+      "world": "翁法罗斯",
+      "title": "翁法罗斯开拓日志",
+      "url": "https://wiki.biligame.com/sr/%E7%BF%81%E6%B3%95%E7%BD%97%E6%96%AF%E5%BC%80%E6%8B%93%E6%97%A5%E5%BF%97",
+      "templateTargets": [
+        "世界"
+      ],
+      "fields": [
+        "观察记录",
+        "世界状态"
+      ],
+      "priority": "定向候选",
+      "verification": "目录已提取，正文待核验",
+      "note": "区分开拓者观察与当地居民知识。"
+    },
+    {
+      "id": "S023",
+      "world": "翁法罗斯",
+      "title": "悬锋诸王通鉴",
+      "url": "https://wiki.biligame.com/sr/%E6%82%AC%E9%94%8B%E8%AF%B8%E7%8E%8B%E9%80%9A%E9%89%B4",
+      "templateTargets": [
+        "世界"
+      ],
+      "fields": [
+        "悬锋城历史",
+        "统治者"
+      ],
+      "priority": "定向候选",
+      "verification": "目录已提取，正文待核验",
+      "note": "按标题初筛的历史候选。"
+    },
+    {
+      "id": "S024",
+      "world": "翁法罗斯",
+      "title": "七贤议定书",
+      "url": "https://wiki.biligame.com/sr/%E4%B8%83%E8%B4%A4%E8%AE%AE%E5%AE%9A%E4%B9%A6",
+      "templateTargets": [
+        "世界"
+      ],
+      "fields": [
+        "学派",
+        "制度"
+      ],
+      "priority": "定向候选",
+      "verification": "目录已提取，正文待核验",
+      "note": "按标题初筛的组织制度候选。"
+    },
+    {
+      "id": "S025",
+      "world": "翁法罗斯",
+      "title": "关于「公民大会」的考察",
+      "url": "https://wiki.biligame.com/sr/%E5%85%B3%E4%BA%8E%E3%80%8C%E5%85%AC%E6%B0%91%E5%A4%A7%E4%BC%9A%E3%80%8D%E7%9A%84%E8%80%83%E5%AF%9F",
+      "templateTargets": [
+        "世界"
+      ],
+      "fields": [
+        "政治制度",
+        "社会结构"
+      ],
+      "priority": "定向候选",
+      "verification": "目录已提取，正文待核验",
+      "note": "按标题初筛的政治制度候选。"
+    },
+    {
+      "id": "S026",
+      "world": "翁法罗斯",
+      "title": "利衡币——世界的脉搏",
+      "url": "https://wiki.biligame.com/sr/%E5%88%A9%E8%A1%A1%E5%B8%81%E2%80%94%E2%80%94%E4%B8%96%E7%95%8C%E7%9A%84%E8%84%89%E6%90%8F",
+      "templateTargets": [
+        "世界"
+      ],
+      "fields": [
+        "货币",
+        "经济"
+      ],
+      "priority": "定向候选",
+      "verification": "目录已提取，正文待核验",
+      "note": "按标题初筛的日常运行规则候选。"
+    },
+    {
+      "id": "S027",
+      "world": "翁法罗斯",
+      "title": "吉奥里亚节日仪典",
+      "url": "https://wiki.biligame.com/sr/%E5%90%89%E5%A5%A5%E9%87%8C%E4%BA%9A%E8%8A%82%E6%97%A5%E4%BB%AA%E5%85%B8",
+      "templateTargets": [
+        "世界"
+      ],
+      "fields": [
+        "仪式",
+        "节庆"
+      ],
+      "priority": "定向候选",
+      "verification": "目录已提取，正文待核验",
+      "note": "按标题初筛的民俗候选。"
+    },
+    {
+      "id": "S028",
+      "world": "翁法罗斯",
+      "title": "哀丽秘榭农事历",
+      "url": "https://wiki.biligame.com/sr/%E5%93%80%E4%B8%BD%E7%A7%98%E6%A6%AD%E5%86%9C%E4%BA%8B%E5%8E%86",
+      "templateTargets": [
+        "世界"
+      ],
+      "fields": [
+        "地方生活",
+        "农业"
+      ],
+      "priority": "定向候选",
+      "verification": "目录已提取，正文待核验",
+      "note": "按标题初筛的地方生活候选。"
+    },
+    {
+      "id": "S029",
+      "world": "翁法罗斯",
+      "title": "万敌之母，歌耳戈的遗信",
+      "url": "https://wiki.biligame.com/sr/%E4%B8%87%E6%95%8C%E4%B9%8B%E6%AF%8D%EF%BC%8C%E6%AD%8C%E8%80%B3%E6%88%88%E7%9A%84%E9%81%97%E4%BF%A1",
+      "templateTargets": [
+        "人物"
+      ],
+      "fields": [
+        "情感表达",
+        "动机与关系",
+        "语气线索"
+      ],
+      "priority": "定向候选",
+      "verification": "目录已提取，正文待核验",
+      "note": "按标题定向筛选；核验作者、收件人和剧情阶段后再归入人物，不能仅凭标题认定作者。"
+    },
+    {
+      "id": "S030",
+      "world": "翁法罗斯",
+      "title": "白厄的留言",
+      "url": "https://wiki.biligame.com/sr/%E7%99%BD%E5%8E%84%E7%9A%84%E7%95%99%E8%A8%80",
+      "templateTargets": [
+        "人物"
+      ],
+      "fields": [
+        "情感表达",
+        "动机与关系",
+        "语气线索"
+      ],
+      "priority": "定向候选",
+      "verification": "目录已提取，正文待核验",
+      "note": "按标题定向筛选；核验作者、收件人和剧情阶段后再归入人物，不能仅凭标题认定作者。"
+    },
+    {
+      "id": "S031",
+      "world": "翁法罗斯",
+      "title": "命运织者的密函",
+      "url": "https://wiki.biligame.com/sr/%E5%91%BD%E8%BF%90%E7%BB%87%E8%80%85%E7%9A%84%E5%AF%86%E5%87%BD",
+      "templateTargets": [
+        "人物"
+      ],
+      "fields": [
+        "情感表达",
+        "动机与关系",
+        "语气线索"
+      ],
+      "priority": "定向候选",
+      "verification": "目录已提取，正文待核验",
+      "note": "按标题定向筛选；核验作者、收件人和剧情阶段后再归入人物，不能仅凭标题认定作者。"
+    },
+    {
+      "id": "S032",
+      "world": "翁法罗斯",
+      "title": "一页寄语：白厄",
+      "url": "https://wiki.biligame.com/sr/%E4%B8%80%E9%A1%B5%E5%AF%84%E8%AF%AD%EF%BC%9A%E7%99%BD%E5%8E%84",
+      "templateTargets": [
+        "人物"
+      ],
+      "fields": [
+        "情感表达",
+        "动机与关系",
+        "语气线索"
+      ],
+      "priority": "定向候选",
+      "verification": "目录已提取，正文待核验",
+      "note": "按标题定向筛选；核验作者、收件人和剧情阶段后再归入人物，不能仅凭标题认定作者。"
+    },
+    {
+      "id": "S033",
+      "world": "翁法罗斯",
+      "title": "一页寄语：阿格莱雅",
+      "url": "https://wiki.biligame.com/sr/%E4%B8%80%E9%A1%B5%E5%AF%84%E8%AF%AD%EF%BC%9A%E9%98%BF%E6%A0%BC%E8%8E%B1%E9%9B%85",
+      "templateTargets": [
+        "人物"
+      ],
+      "fields": [
+        "情感表达",
+        "动机与关系",
+        "语气线索"
+      ],
+      "priority": "定向候选",
+      "verification": "目录已提取，正文待核验",
+      "note": "按标题定向筛选；核验作者、收件人和剧情阶段后再归入人物，不能仅凭标题认定作者。"
+    },
+    {
+      "id": "S034",
+      "world": "翁法罗斯",
+      "title": "一页寄语：那刻夏",
+      "url": "https://wiki.biligame.com/sr/%E4%B8%80%E9%A1%B5%E5%AF%84%E8%AF%AD%EF%BC%9A%E9%82%A3%E5%88%BB%E5%A4%8F",
+      "templateTargets": [
+        "人物"
+      ],
+      "fields": [
+        "情感表达",
+        "动机与关系",
+        "语气线索"
+      ],
+      "priority": "定向候选",
+      "verification": "目录已提取，正文待核验",
+      "note": "按标题定向筛选；核验作者、收件人和剧情阶段后再归入人物，不能仅凭标题认定作者。"
+    },
+    {
+      "id": "S035",
+      "world": "提瓦特",
+      "title": "白夜国馆藏",
+      "url": "https://wiki.biligame.com/ys/%E7%99%BD%E5%A4%9C%E5%9B%BD%E9%A6%86%E8%97%8F",
+      "templateTargets": [
+        "世界"
+      ],
+      "fields": [
+        "古文明",
+        "世界起源"
+      ],
+      "priority": "定向候选",
+      "verification": "目录已提取，正文待核验",
+      "note": "沿馆藏查具体卷目和《日月前事》；保留书中叙述视角。"
+    },
+    {
+      "id": "S036",
+      "world": "提瓦特",
+      "title": "雷穆利亚衰亡史",
+      "url": "https://wiki.biligame.com/ys/%E9%9B%B7%E7%A9%86%E5%88%A9%E4%BA%9A%E8%A1%B0%E4%BA%A1%E5%8F%B2",
+      "templateTargets": [
+        "世界"
+      ],
+      "fields": [
+        "枫丹历史",
+        "古文明"
+      ],
+      "priority": "定向候选",
+      "verification": "目录已提取，正文待核验",
+      "note": "作为历史候选，交叉核对任务。"
+    },
+    {
+      "id": "S037",
+      "world": "提瓦特",
+      "title": "阿赫玛尔的故事",
+      "url": "https://wiki.biligame.com/ys/%E9%98%BF%E8%B5%AB%E7%8E%9B%E5%B0%94%E7%9A%84%E6%95%85%E4%BA%8B",
+      "templateTargets": [
+        "世界"
+      ],
+      "fields": [
+        "须弥历史",
+        "文化记忆"
+      ],
+      "priority": "定向候选",
+      "verification": "目录已提取，正文待核验",
+      "note": "书名为故事，不能直接等同于客观年表。"
+    },
+    {
+      "id": "S038",
+      "world": "提瓦特",
+      "title": "浮槃歌卷",
+      "url": "https://wiki.biligame.com/ys/%E6%B5%AE%E6%A7%83%E6%AD%8C%E5%8D%B7",
+      "templateTargets": [
+        "世界"
+      ],
+      "fields": [
+        "须弥文化",
+        "历史叙述"
+      ],
+      "priority": "定向候选",
+      "verification": "目录已提取，正文待核验",
+      "note": "保留文体和叙述者。"
+    },
+    {
+      "id": "S039",
+      "world": "提瓦特",
+      "title": "珊瑚宫记",
+      "url": "https://wiki.biligame.com/ys/%E7%8F%8A%E7%91%9A%E5%AE%AB%E8%AE%B0",
+      "templateTargets": [
+        "世界"
+      ],
+      "fields": [
+        "稻妻历史",
+        "海祇文化"
+      ],
+      "priority": "定向候选",
+      "verification": "目录已提取，正文待核验",
+      "note": "核对地方叙事与其他来源。"
+    },
+    {
+      "id": "S040",
+      "world": "提瓦特",
+      "title": "璃月风土志",
+      "url": "https://wiki.biligame.com/ys/%E7%92%83%E6%9C%88%E9%A3%8E%E5%9C%9F%E5%BF%97",
+      "templateTargets": [
+        "世界"
+      ],
+      "fields": [
+        "地理",
+        "社会风俗"
+      ],
+      "priority": "定向候选",
+      "verification": "目录已提取，正文待核验",
+      "note": "用于地方生活而非角色人格。"
+    },
+    {
+      "id": "S041",
+      "world": "提瓦特",
+      "title": "提瓦特游览指南",
+      "url": "https://wiki.biligame.com/ys/%E6%8F%90%E7%93%A6%E7%89%B9%E6%B8%B8%E8%A7%88%E6%8C%87%E5%8D%97",
+      "templateTargets": [
+        "世界"
+      ],
+      "fields": [
+        "地理",
+        "旅行视角"
+      ],
+      "priority": "定向候选",
+      "verification": "目录已提取，正文待核验",
+      "note": "保留作者立场和时效。"
+    },
+    {
+      "id": "S042",
+      "world": "提瓦特",
+      "title": "骑士团指导手册·第五版",
+      "url": "https://wiki.biligame.com/ys/%E9%AA%91%E5%A3%AB%E5%9B%A2%E6%8C%87%E5%AF%BC%E6%89%8B%E5%86%8C%C2%B7%E7%AC%AC%E4%BA%94%E7%89%88",
+      "templateTargets": [
+        "人物",
+        "世界"
+      ],
+      "fields": [
+        "组织规范",
+        "职业行为"
+      ],
+      "priority": "定向候选",
+      "verification": "目录已提取，正文待核验",
+      "note": "用于组织规则及相关角色职责，不能推定所有成员性格相同。"
+    },
+    {
+      "id": "S043",
+      "world": "提瓦特",
+      "title": "古恩希尔德小传",
+      "url": "https://wiki.biligame.com/ys/%E5%8F%A4%E6%81%A9%E5%B8%8C%E5%B0%94%E5%BE%B7%E5%B0%8F%E4%BC%A0",
+      "templateTargets": [
+        "人物",
+        "世界"
+      ],
+      "fields": [
+        "人物背景",
+        "家族历史"
+      ],
+      "priority": "定向候选",
+      "verification": "目录已提取，正文待核验",
+      "note": "只能用于文本实际涉及的人物与家族。"
+    },
+    {
+      "id": "S044",
+      "world": "提瓦特",
+      "title": "护法仙众夜叉录",
+      "url": "https://wiki.biligame.com/ys/%E6%8A%A4%E6%B3%95%E4%BB%99%E4%BC%97%E5%A4%9C%E5%8F%89%E5%BD%95",
+      "templateTargets": [
+        "人物",
+        "世界"
+      ],
+      "fields": [
+        "人物群体",
+        "历史关系"
+      ],
+      "priority": "定向候选",
+      "verification": "目录已提取，正文待核验",
+      "note": "区分传说叙事与已核实经历。"
+    }
+  ]
+}

@@ -243,6 +243,12 @@
       "regex": "^/api/knowledge\\-source(?:/)?$",
       "routeKeys": {},
       "namedRegex": "^/api/knowledge\\-source(?:/)?$"
+    },
+    {
+      "page": "/api/math-speech",
+      "regex": "^/api/math\\-speech(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/math\\-speech(?:/)?$"
     }
   ],
   "dataRoutes": [],

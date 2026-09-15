@@ -84,13 +84,80 @@ function wrapRange(content, startPage, endPage) {
   return "<!-- startPage: " + startPage + " endPage: " + endPage + " -->\r\n" + content;
 }
 
+// Body of a wrapped window without its leading range comment. Used to tell an
+// empty seed (header only) apart from a window that actually carries pages.
+function rangeBody(content) {
+  return String(content || "").replace(/^<!--[^>]*-->\r?\n?/, "");
+}
+
+// A legacy projection file is adopted as a page window only when it parses as a
+// valid wrapped range with a non-empty body. Anything else keeps the historic
+// quarantine/repair path so damaged files are never promoted to authoritative.
+function adoptableExternalReading(content) {
+  var text = String(content || "");
+  var range = parseRange(text);
+  if (!range) return null;
+  var startPage = Number(range.startPage);
+  var endPage = Number(range.endPage);
+  if (!Number.isInteger(startPage) || startPage < 1 || !Number.isInteger(endPage) || endPage < startPage) return null;
+  if (!rangeBody(text).trim()) return null;
+  return { startPage: startPage, endPage: endPage, content: text };
+}
+
+function pendingAdvanceVerified(pendingAdvance, conversation) {
+  if (!pendingAdvance || pendingAdvance.teachingProgressVerified !== true) return false;
+  if (!conversation) return true;
+  if (pendingAdvance.conversationId !== conversation.conversationId) return false;
+  if (typeof pendingAdvance.turnId !== "string" || !pendingAdvance.turnId) return false;
+  var turn = conversation.turns && conversation.turns[pendingAdvance.turnId];
+  if (!turn || turn.turnState !== "COMPLETED") return false;
+  if (turn.clientTurnId !== pendingAdvance.turnId) return false;
+  if (!Number.isSafeInteger(Number(pendingAdvance.serverTurnOrdinal)) || Number(pendingAdvance.serverTurnOrdinal) !== Number(turn.serverTurnOrdinal)) return false;
+  if (!Number.isSafeInteger(Number(pendingAdvance.baseReadingVersion)) || Number(pendingAdvance.baseReadingVersion) !== Number(conversation.readingVersion)) return false;
+  return true;
+}
+
+function normalizeAdvanceIntentText(text) {
+  return String(text || "").replace(/[\u200B-\u200D\uFEFF]/g, "").replace(/\s+/g, " ").trim();
+}
+
+function hasAdvanceHoldIntent(text) {
+  var value = normalizeAdvanceIntentText(text);
+  if (!value) return false;
+  var chineseBoundary = "(?:^|[。.!！?？,，；;：:\\s])";
+  var advanceTarget = "(?:继续(?:进入下一)?|翻页|往下|跳到|翻到|进入下一(?:个|页|节|部分|知识点)?|下一(?:个|页|节|部分|知识点))";
+  var chineseNegative = new RegExp("(?:先\\s*)?(?:别|不要|暂时(?:不要|别)|还\\s*不能)\\s*(?:再\\s*)?" + advanceTarget, "i");
+  var englishNegative = /(?:^|[.!?;,：，。！？；])\s*(?:don['’]?t|do\s+not|should\s+not|must\s+not)\s+(?:continue|move\s+on|(?:jump|go)\s+to\s+page\s+\d+|go\s+to\s+the\s+next(?:\s+page|\s+section|\s+point)?)/i;
+  var chinesePause = new RegExp(chineseBoundary + "(?:请\\s*)?(?:暂停(?:一下|一会儿|在这里)?|等(?:一下|一会儿)|先停(?:在这里|一下))(?=$|[。.!！?？,，；;：:\\s])", "i");
+  var englishPause = /(?:^|[.!?;,])\s*(?:please\s+)?(?:not\s+yet|wait(?:\s+(?:a\s+moment|a\s+second|here))?|pause(?:\s+here)?)(?=$|[.!?;,\s])/i;
+  return chineseNegative.test(value) || englishNegative.test(value) || chinesePause.test(value) || englishPause.test(value);
+}
+
 function ensureDir(directory) {
   fs.mkdirSync(directory, { recursive: true });
 }
 
 function atomicWrite(filePath, content) {
   ensureDir(path.dirname(filePath));
-  writeFileAtomic.sync(filePath, content, { encoding: "utf8", fsync: true });
+  for (var attempt = 0; ; attempt++) {
+    try {
+      writeFileAtomic.sync(filePath, content, { encoding: "utf8", fsync: true });
+      return;
+    } catch (error) {
+      // Windows can briefly deny replacement while another reader holds the file.
+      // Keep atomic replacement: never unlink or truncate the committed file.
+      //
+      // BUG-0012 (2026-09-14): chat/route.js fires prefetchCandidate() WITHOUT awaiting
+      // it, so this writer races the foreground post-response save on the very same
+      // textbook_index.json. kb-progress.js writes it too and protects itself with a
+      // 10-attempt budget (~1.1s); this one only had 5 (~375ms) and therefore kept
+      // losing, killing the whole turn's progress save 3~5 times a day. Budgets must
+      // stay at least this wide: attempt 0..9 with a 25ms..250ms backoff (~1.4s).
+      if (process.platform !== "win32" || attempt >= 9 || !error || error.syscall !== "rename" ||
+          ["EPERM", "EACCES", "EBUSY"].indexOf(error.code) < 0) throw error;
+      Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, 25 * (attempt + 1));
+    }
+  }
 }
 
 function readText(filePath) {
@@ -183,7 +250,7 @@ function createAutoAdvance(options) {
       textbookDir: textbookDir,
       conversationDir: path.join(worldDir, "conversations", scope.conversationId),
       chatPath: path.join(worldDir, "chats", scope.conversationId + ".json"),
-      indexPath: path.join(worldDir, "textbook_index.json"),
+      indexPath: path.join(worldDir, "textbooks", "textbook_index.json"),
       progressPath: path.join(textbookDir, "progress_state.json"),
       stateDir: stateDir,
       generationsDir: path.join(stateDir, "generations"),
@@ -354,20 +421,46 @@ function createAutoAdvance(options) {
     atomicWrite(paths.upgradePath, JSON.stringify({ schemaVersion: SCHEMA_VERSION, phase: "legacy_backed_up", backupManifestHash: sha256(JSON.stringify(manifest)), updatedAt: nowIso() }, null, 2));
   }
 
+  function textbookTotalPages(paths, textbookId) {
+    var index = readJson(paths.indexPath);
+    if (!index || !Array.isArray(index.textbooks)) return null;
+    var entry = index.textbooks.find(function (item) { return item && String(item.id) === String(textbookId); });
+    var totalPages = Number(entry && (entry.numPages || entry.totalPages));
+    return Number.isSafeInteger(totalPages) && totalPages > 0 ? totalPages : null;
+  }
+
+  function normalizeTotalPages(value) {
+    var totalPages = Number(value);
+    return Number.isSafeInteger(totalPages) && totalPages > 0 ? totalPages : null;
+  }
+
+  function durableAssistantMessageId(paths) {
+    var chat = readJson(paths.chatPath) || {};
+    if (!Array.isArray(chat.messages)) return null;
+    for (var index = chat.messages.length - 1; index >= 0; index -= 1) {
+      var message = chat.messages[index];
+      if (!message || message.role !== "assistant") continue;
+      if (message.failed === true || message.notAccepted === true || message.aborted === true) continue;
+      if (typeof message.id !== "string" || !message.id) continue;
+      if (typeof message.content !== "string" || !message.content.trim()) continue;
+      return message.id;
+    }
+    return null;
+  }
+
+  function hasCompletedTurn(conversation) {
+    var turns = conversation && conversation.turns || {};
+    return Object.keys(turns).some(function (turnId) {
+      return turns[turnId] && turns[turnId].turnState === "COMPLETED";
+    });
+  }
+
   function conversationSeed(paths, scope, legacy) {
     var range = legacy.range || { startPage: 1, endPage: 1 };
     var content = legacy.reading || wrapRange("", range.startPage, range.endPage);
     var blob = writeBlob(paths, content, "reading");
-    var chat = readJson(paths.chatPath) || {};
-    var lastAssistantMessageId = null;
-    if (Array.isArray(chat.messages)) {
-      for (var index = chat.messages.length - 1; index >= 0; index--) {
-        if (chat.messages[index] && chat.messages[index].role === "assistant") {
-          lastAssistantMessageId = chat.messages[index].id || null;
-          break;
-        }
-      }
-    }
+    var lastAssistantMessageId = durableAssistantMessageId(paths);
+    var totalPages = normalizeTotalPages(legacy.progress.totalPages || legacy.progress.numPages) || textbookTotalPages(paths, scope.textbookId);
     return {
       conversationId: scope.conversationId,
       causalConversationRevision: 0,
@@ -377,10 +470,23 @@ function createAutoAdvance(options) {
       lastAssistantMessageId: lastAssistantMessageId,
       loadedRange: range,
       loadedContent: blob,
+      totalPages: totalPages,
+      atEndOfTextbook: legacy.progress.atEndOfTextbook === true,
+      textbookComplete: legacy.progress.textbookComplete === true,
+      textbookCompletionReason: typeof legacy.progress.textbookCompletionReason === "string" ? legacy.progress.textbookCompletionReason : null,
+      activeConceptId: legacy.progress.activeConceptId || null,
+      nextConceptId: legacy.progress.nextConceptId || null,
+      structuredTeachingProgress: legacy.progress.structuredTeachingProgress === true,
       taughtCursor: legacy.progress.taughtCursor || null,
       completedConceptIds: Array.isArray(legacy.progress.completedConceptIds) ? legacy.progress.completedConceptIds.slice() : [],
+      completedTitles: Array.isArray(legacy.progress.completedTitles) ? legacy.progress.completedTitles.slice() : [],
+      pageOnlyTeachingProgress: legacy.progress.progressMode === "page_only",
+      lessonStartPage: Number(legacy.progress.lessonStartPage) || null,
+      lastTaughtPage: Number(legacy.progress.lastTaughtPage) || null,
       pendingAdvance: null,
       candidate: null,
+      pendingExternalReading: null,
+      structuredStallWarned: false,
       turns: {},
       projectionStatus: "pending",
       projectionReadingHash: null,
@@ -443,6 +549,20 @@ function createAutoAdvance(options) {
     progress.schemaVersion = Math.max(3, Number(progress.schemaVersion) || 0);
     progress.textbookId = state.scope.textbookId;
     progress.sourceConversationId = conversationId;
+    if (conversation.totalPages) progress.totalPages = conversation.totalPages;
+    progress.atEndOfTextbook = conversation.atEndOfTextbook === true;
+    progress.textbookComplete = conversation.textbookComplete === true;
+    progress.textbookCompletionReason = conversation.textbookCompletionReason || null;
+    progress.activeConceptId = conversation.activeConceptId || null;
+    progress.nextConceptId = conversation.nextConceptId || null;
+    progress.structuredTeachingProgress = conversation.structuredTeachingProgress === true;
+    if (conversation.pageOnlyTeachingProgress === true) progress.progressMode = "page_only";
+    else if (progress.progressMode === "page_only") delete progress.progressMode;
+    progress.taughtCursor = conversation.taughtCursor ? clone(conversation.taughtCursor) : null;
+    progress.completedConceptIds = Array.isArray(conversation.completedConceptIds) ? conversation.completedConceptIds.slice() : [];
+    progress.completedTitles = Array.isArray(conversation.completedTitles) ? conversation.completedTitles.slice() : [];
+    if (Number.isInteger(Number(conversation.lessonStartPage)) && Number(conversation.lessonStartPage) > 0) progress.lessonStartPage = Number(conversation.lessonStartPage);
+    if (Number.isInteger(Number(conversation.lastTaughtPage)) && Number(conversation.lastTaughtPage) > 0) progress.lastTaughtPage = Number(conversation.lastTaughtPage);
     progress.loadedCursor = {
       chunkId: projectedRange.chunkId || "loaded-" + String(projectedRange.startPage).padStart(4, "0"),
       ordinal: Number.isInteger(projectedRange.ordinal) ? projectedRange.ordinal : projectedRange.startPage,
@@ -452,16 +572,183 @@ function createAutoAdvance(options) {
     };
     if (projectedRange.loadedOnly === true) progress.loadedCursor.loadedOnly = true;
     if (projectedRange.jumpLoaded === true) progress.loadedCursor.jumpLoaded = true;
-    var taughtStartPage = Number(progress.taughtCursor && progress.taughtCursor.startPage);
-    if (projectedRange.loadedOnly === true && Number.isInteger(taughtStartPage) && taughtStartPage > 0) {
-      progress.lastTaughtPage = taughtStartPage;
-      progress.currentPage = taughtStartPage;
-    } else {
-      progress.currentPage = projectedRange.startPage;
-    }
+    var taughtStartPage = Number(conversation.lastTaughtPage || conversation.taughtCursor && conversation.taughtCursor.startPage);
+    var taughtInRange = Number.isInteger(taughtStartPage) && taughtStartPage >= Number(projectedRange.startPage) && taughtStartPage <= Number(projectedRange.endPage);
+    var projectedCurrentPage = projectedRange.loadedOnly === true && Number.isInteger(taughtStartPage) && taughtStartPage > 0 || taughtInRange
+      ? taughtStartPage
+      : projectedRange.startPage;
+    progress.currentPage = projectedCurrentPage;
     progress.updatedAt = nowIso();
     atomicWrite(paths.progressPath, JSON.stringify(progress, null, 2));
-    updateIndexCurrentPage(paths, state.scope.textbookId, projectedRange.startPage);
+    updateIndexCurrentPage(paths, state.scope.textbookId, projectedCurrentPage);
+  }
+
+  function backupRepairState(paths, state, conversationId) {
+    var stamp = nowIso().replace(/[:.]/g, "-") + "-" + crypto.randomBytes(4).toString("hex");
+    var backupDir = path.join(paths.stateDir, "repair-backups", stamp);
+    ensureDir(backupDir);
+    var pointer = readJsonStrict(paths.pointerPath, "advance_pointer_invalid", "Reading-state pointer is invalid");
+    var files = [
+      { name: "current-pointer.json", source: paths.pointerPath },
+      { name: "current-generation.json", source: pointer && path.join(paths.generationsDir, path.basename(pointer.manifest)) },
+      { name: "current_reading.md", source: paths.readingPath },
+      { name: "progress_state.json", source: paths.progressPath },
+      { name: "textbook_index.json", source: paths.indexPath }
+    ];
+    var manifest = { schemaVersion: 1, createdAt: nowIso(), stateGeneration: state.stateGeneration, conversationId: conversationId, files: [] };
+    files.forEach(function (entry) {
+      if (!entry.source || !fs.existsSync(entry.source) || !fs.statSync(entry.source).isFile()) return;
+      var buffer = fs.readFileSync(entry.source);
+      atomicWrite(path.join(backupDir, entry.name), buffer);
+      manifest.files.push({ name: entry.name, source: entry.source, hash: sha256(buffer), size: buffer.length });
+    });
+    atomicWrite(path.join(backupDir, "manifest.json"), JSON.stringify(manifest, null, 2));
+    return backupDir;
+  }
+
+  function uniqueStrings(left, right) {
+    var seen = new Set();
+    return [].concat(left || [], right || []).map(function (value) { return String(value || ""); }).filter(function (value) {
+      if (!value || value.length > 512 || seen.has(value)) return false;
+      seen.add(value);
+      return true;
+    });
+  }
+
+  function mergeLegacyTeachingProgress(conversation, progress, conversationId) {
+    var sourceMatches = String(progress.sourceConversationId || "") === conversationId;
+    if (!sourceMatches) return false;
+    var totalPages = normalizeTotalPages(progress.totalPages || progress.numPages);
+    if (totalPages) conversation.totalPages = totalPages;
+    if (progress.atEndOfTextbook === true) conversation.atEndOfTextbook = true;
+    if (progress.textbookComplete === true) conversation.textbookComplete = true;
+    if (typeof progress.textbookCompletionReason === "string" && progress.textbookCompletionReason) conversation.textbookCompletionReason = progress.textbookCompletionReason;
+    if (progress.structuredTeachingProgress === true) conversation.structuredTeachingProgress = true;
+    if (progress.progressMode === "page_only") conversation.pageOnlyTeachingProgress = true;
+    if (typeof progress.activeConceptId === "string" && progress.activeConceptId && progress.activeConceptId.length <= 512) conversation.activeConceptId = progress.activeConceptId;
+    if (typeof progress.nextConceptId === "string" && progress.nextConceptId && progress.nextConceptId.length <= 512) conversation.nextConceptId = progress.nextConceptId;
+    if (progress.taughtCursor && typeof progress.taughtCursor === "object" && !Array.isArray(progress.taughtCursor)) conversation.taughtCursor = clone(progress.taughtCursor);
+    conversation.completedConceptIds = uniqueStrings(conversation.completedConceptIds, progress.completedConceptIds);
+    conversation.completedTitles = uniqueStrings(conversation.completedTitles, progress.completedTitles);
+    var taughtPage = Number(progress.lastTaughtPage || progress.taughtCursor && progress.taughtCursor.startPage);
+    var loadedRange = conversation.loadedRange || {};
+    if (Number.isInteger(taughtPage) && taughtPage >= Number(loadedRange.startPage) && taughtPage <= Number(loadedRange.endPage)) conversation.lastTaughtPage = taughtPage;
+    var lessonStartPage = Number(progress.lessonStartPage);
+    if (Number.isInteger(lessonStartPage) && lessonStartPage > 0) conversation.lessonStartPage = lessonStartPage;
+    return true;
+  }
+
+  function repairProjectionState(paths, state, conversationId, reason) {
+    var conversation = state.conversations && state.conversations[conversationId];
+    if (!conversation) throw codedError("advance_conversation_missing", "Conversation state missing", 500);
+    var previousGeneration = state.stateGeneration;
+    var progress = readProjectionJson(paths.progressPath, "progress") || {};
+    var backupDir = backupRepairState(paths, state, conversationId);
+    var sourceMatches = mergeLegacyTeachingProgress(conversation, progress, conversationId);
+    conversation.projectionStatus = "pending";
+    state = commitManifest(paths, state);
+    projectConversation(paths, state, conversationId);
+    markProjectionClean(paths, state, conversationId);
+    state = commitManifest(paths, state);
+    var result = {
+      schemaVersion: 1,
+      repairedAt: nowIso(),
+      reason: String(reason || "manual_repair"),
+      sourceConversationMatched: sourceMatches,
+      previousGeneration: previousGeneration,
+      stateGeneration: state.stateGeneration,
+      textbookId: state.scope.textbookId,
+      conversationId: conversationId
+    };
+    atomicWrite(path.join(backupDir, "repair-result.json"), JSON.stringify(result, null, 2));
+    console.warn("[auto-advance] legacy projection repaired", result);
+    return { state: state, result: result, backupDir: backupDir };
+  }
+
+  function normalizeTeachingProgress(input, conversation) {
+    input = input || {};
+    var page = Number(input.lastTaughtPage);
+    var range = conversation.loadedRange || {};
+    var claimedRange = input.loadedRange || {};
+    if (!Number.isInteger(page) || page < Number(range.startPage) || page > Number(range.endPage)) {
+      throw codedError("teaching_progress_outside_loaded_range", "Teaching progress is outside the authoritative reading range", 409);
+    }
+    if (Number(claimedRange.startPage) !== Number(range.startPage) || Number(claimedRange.endPage) !== Number(range.endPage)) {
+      throw codedError("SCOPE_STALE", "Teaching progress reading range is stale", 409);
+    }
+    // C3: textbooks without a concept-card queue report page-level progress.
+    // There is no concept id to validate, and none may be invented — concept
+    // state is left untouched by applyTeachingProgress in this mode.
+    var progressMode = input.progressMode === "page_only" ? "page_only" : "kb";
+    var activeConceptId = String(input.activeConceptId || "");
+    var nextConceptId = input.nextConceptId == null ? null : String(input.nextConceptId || "");
+    if (progressMode === "kb") {
+      if (!activeConceptId || activeConceptId.length > 512) throw codedError("teaching_progress_concept_invalid", "Invalid active concept", 400);
+      if (nextConceptId && nextConceptId.length > 512) throw codedError("teaching_progress_concept_invalid", "Invalid next concept", 400);
+    } else {
+      activeConceptId = "";
+      nextConceptId = null;
+    }
+    var activeIndex = Number(input.activeIndex);
+    var totalPages = normalizeTotalPages(conversation.totalPages);
+    var atKnownEnd = !!(totalPages && Number(range.endPage) >= totalPages);
+    return {
+      progressMode: progressMode,
+      activeConceptId: activeConceptId,
+      nextConceptId: nextConceptId || null,
+      activeIndex: Number.isSafeInteger(activeIndex) && activeIndex >= 0 ? activeIndex : 0,
+      newlyCompletedConceptIds: progressMode === "kb" ? uniqueStrings([], input.newlyCompletedConceptIds) : [],
+      newlyCompletedTitles: progressMode === "kb" ? uniqueStrings([], input.newlyCompletedTitles) : [],
+      lastTaughtPage: page,
+      loadedRange: { startPage: Number(range.startPage), endPage: Number(range.endPage) },
+      windowComplete: input.windowComplete === true,
+      textbookComplete: input.windowComplete === true && (input.textbookComplete === true || atKnownEnd)
+    };
+  }
+
+  function applyTeachingProgress(conversation, progress) {
+    var wasAtEndOfTextbook = conversation.atEndOfTextbook === true;
+    var wasTextbookComplete = conversation.textbookComplete === true;
+    conversation.lessonStartPage = Number(conversation.lessonStartPage) || progress.loadedRange.startPage;
+    conversation.lastTaughtPage = progress.lastTaughtPage;
+    conversation.windowComplete = progress.windowComplete;
+    conversation.atEndOfTextbook = wasAtEndOfTextbook || progress.textbookComplete === true;
+    conversation.textbookComplete = wasTextbookComplete || progress.textbookComplete === true;
+    if (progress.progressMode === "page_only") {
+      // Positioning only: no concept ids, no completed-concept bookkeeping, and
+      // structuredTeachingProgress is deliberately left as-is so the C5 gate
+      // keeps its current meaning.
+      conversation.pageOnlyTeachingProgress = true;
+      conversation.taughtCursor = {
+        chunkId: "page-" + progress.lastTaughtPage,
+        ordinal: progress.lastTaughtPage,
+        startPage: progress.lastTaughtPage,
+        endPage: progress.lastTaughtPage,
+        status: "active",
+        ready: true,
+        committedAt: nowIso(),
+        reason: "validated_page_marker"
+      };
+      conversation.projectionStatus = "pending";
+      return;
+    }
+    conversation.activeConceptId = progress.activeConceptId;
+    conversation.nextConceptId = progress.nextConceptId;
+    conversation.pageOnlyTeachingProgress = false;
+    conversation.completedConceptIds = uniqueStrings(conversation.completedConceptIds, progress.newlyCompletedConceptIds);
+    conversation.completedTitles = uniqueStrings(conversation.completedTitles, progress.newlyCompletedTitles);
+    conversation.structuredTeachingProgress = true;
+    conversation.taughtCursor = {
+      chunkId: "concept-" + progress.activeConceptId,
+      ordinal: progress.activeIndex,
+      startPage: progress.lastTaughtPage,
+      endPage: progress.lastTaughtPage,
+      status: "active",
+      ready: true,
+      committedAt: nowIso(),
+      reason: "validated_kb_marker"
+    };
+    conversation.projectionStatus = "pending";
   }
 
   function projectionSignature(paths, state, conversationId) {
@@ -497,6 +784,83 @@ function createAutoAdvance(options) {
     conversation.projectionIndex = signature.index;
   }
 
+  // The chat reading tool (read_textbook_pages) still writes the legacy
+  // projection file when the learner asks to jump. Under the v2 state machine
+  // that write must not move the window mid-turn (the running turn's prompt
+  // snapshot is immutable), so instead of discarding it we stash the content
+  // as a blob and apply it at the next beginTurn.
+  function stashExternalReading(paths, state, conversationId, ownerPaths) {
+    var conversation = state.conversations[conversationId];
+    if (!conversation) return;
+    var external = adoptableExternalReading(readText(ownerPaths.readingPath));
+    if (!external) return;
+    var blob = writeBlob(paths, external.content, "external");
+    conversation.pendingExternalReading = {
+      blobRef: blob.ref,
+      contentHash: blob.hash,
+      startPage: external.startPage,
+      endPage: external.endPage,
+      detectedAt: nowIso()
+    };
+    console.warn("[auto-advance] external reading window stashed for the next turn", {
+      conversationId: conversationId,
+      range: external.startPage + "-" + external.endPage,
+      bytes: blob.size,
+      note: "a page window written to the legacy projection file is applied at the next beginTurn instead of being reverted"
+    });
+  }
+
+  function readPendingExternalReading(paths, conversation) {
+    var pending = conversation && conversation.pendingExternalReading;
+    if (!pending || typeof pending.blobRef !== "string") return null;
+    var startPage = Number(pending.startPage);
+    var endPage = Number(pending.endPage);
+    if (!Number.isInteger(startPage) || startPage < 1 || !Number.isInteger(endPage) || endPage < startPage) return null;
+    try {
+      var content = readBlob(paths, pending.blobRef, pending.contentHash).toString("utf8");
+      if (!rangeBody(content).trim()) return null;
+      return { startPage: startPage, endPage: endPage, content: content };
+    } catch (error) {
+      console.warn("[auto-advance] stashed external reading is unreadable; falling back to the range loader", {
+        conversationId: conversation.conversationId,
+        code: error && error.code || null
+      });
+      return null;
+    }
+  }
+
+  function conversationWindowEmpty(paths, conversation) {
+    if (!conversation || !conversation.loadedContent) return true;
+    try {
+      var content = readBlob(paths, conversation.loadedContent.ref, conversation.loadedContent.hash).toString("utf8");
+      return !rangeBody(content).trim();
+    } catch (error) {
+      console.warn("[auto-advance] authoritative window is unreadable; scheduling a reload", {
+        conversationId: conversation.conversationId,
+        code: error && error.code || null
+      });
+      return true;
+    }
+  }
+
+  // C5 (deliberately not fixed here): shouldForce is the only automatic advance
+  // trigger and it is permanently disabled once structuredTeachingProgress is
+  // true — even when no structured marker can ever be committed. Keep the
+  // phenomenon in the log with cause/background/harm so it stays visible.
+  function warnStructuredTeachingStall(conversation, delta) {
+    if (conversation.structuredStallWarned === true) return;
+    conversation.structuredStallWarned = true;
+    console.warn("[auto-advance][C5-未修复] 阈值自动推进被结构化进度开关屏蔽（仅记录，本次不修复）", {
+      conversationId: conversation.conversationId,
+      turnsSinceLastAdvance: delta,
+      structuredTeachingProgress: conversation.structuredTeachingProgress === true,
+      cause: "beginTurn 中 shouldForce 要求 structuredTeachingProgress !== true 且 delta >= 12；条件不满足时没有任何兜底换窗触发器",
+      background: "structuredTeachingProgress 由历史 progress_state.json 播种，或由 requiresTeachingProgress 的回合置位；教材无知识库时它无法被真实标记推进",
+      harm: "窗口可无限期停在同一段教材；当页面定位缺失时模型会自行跳读（2026-09-11 KUym 第 13 章跳读事件的成因之一）",
+      workaround: "用户显式跳页或 pendingAdvance 通过验证仍可换窗；C1 的窗口定位头可缓解定位缺失"
+    });
+  }
+
   function recover(paths, scope, state) {
     var conversationId = state.owner && state.owner.conversationId || scope.conversationId;
     var conversation = state.conversations[conversationId];
@@ -521,7 +885,8 @@ function createAutoAdvance(options) {
     var progressChanged = !!conversation.projectionProgress && (!signature.progress.present ? !progressMissing : canonicalize(conversation.projectionProgress) !== canonicalize(signature.progress));
     var indexChanged = !!conversation.projectionIndex && (!signature.index.present ? !indexMissing : canonicalize(conversation.projectionIndex) !== canonicalize(signature.index));
     if (readingChanged || progressChanged || indexChanged) {
-      throw codedError("EXTERNAL_LEGACY_MUTATION_DETECTED", "Legacy reading projection changed outside the authoritative state", 409);
+      if (readingChanged) stashExternalReading(paths, state, conversationId, ownerPaths);
+      return repairProjectionState(ownerPaths, state, conversationId, "external_legacy_mutation").state;
     }
     // Missing legacy files are recoverable: they are projections, and the
     // authoritative state can recreate them. Keep an inactive conversation
@@ -567,6 +932,18 @@ function createAutoAdvance(options) {
       });
       state = commitManifest(paths, state);
     }
+    var metadataTotalPages = textbookTotalPages(paths, scope.textbookId);
+    if (metadataTotalPages) {
+      var totalPagesChanged = false;
+      Object.keys(state.conversations || {}).forEach(function (conversationId) {
+        var conversation = state.conversations[conversationId];
+        if (conversation && !normalizeTotalPages(conversation.totalPages)) {
+          conversation.totalPages = metadataTotalPages;
+          totalPagesChanged = true;
+        }
+      });
+      if (totalPagesChanged) state = commitManifest(paths, state);
+    }
     return recover(paths, scope, state);
   }
 
@@ -585,7 +962,8 @@ function createAutoAdvance(options) {
         var targetPaths = pathsFor(scope);
         var targetReadingHash = fileHash(targetPaths.readingPath);
         if (targetConversation.projectionReadingHash && targetReadingHash && targetConversation.projectionReadingHash !== targetReadingHash) {
-          throw codedError("EXTERNAL_LEGACY_MUTATION_DETECTED", "Inactive conversation reading projection changed outside the authoritative state", 409);
+          var backupDir = backupRepairState(targetPaths, state, scope.conversationId);
+          console.warn("[auto-advance] inactive legacy reading projection quarantined", { conversationId: scope.conversationId, backupDir: backupDir });
         }
       }
       var previousKey = lockKey(scope);
@@ -602,12 +980,29 @@ function createAutoAdvance(options) {
   }
 
   function publicSnapshot(state, conversation) {
+    // Reported position mirrors projectConversation(): a stale lastTaughtPage
+    // that is outside the loaded window must not masquerade as the position.
+    var committedTaughtPage = Number(conversation.lastTaughtPage || conversation.taughtCursor && conversation.taughtCursor.startPage);
+    var committedTaughtInRange = Number.isInteger(committedTaughtPage) &&
+      committedTaughtPage >= Number(conversation.loadedRange.startPage) &&
+      committedTaughtPage <= Number(conversation.loadedRange.endPage);
+    var reportedTaughtPage = conversation.loadedRange.loadedOnly === true && Number.isInteger(committedTaughtPage) && committedTaughtPage > 0 || committedTaughtInRange
+      ? committedTaughtPage
+      : null;
     var readingRange = {
       startPage: conversation.loadedRange.startPage,
       endPage: conversation.loadedRange.endPage,
       readingVersion: conversation.readingVersion,
       stateGeneration: state.stateGeneration,
-      conversationId: conversation.conversationId
+      conversationId: conversation.conversationId,
+      activeConceptId: conversation.activeConceptId || null,
+      nextConceptId: conversation.nextConceptId || null,
+      windowComplete: conversation.windowComplete === true,
+      lastTaughtPage: reportedTaughtPage,
+      totalPages: normalizeTotalPages(conversation.totalPages),
+      atEndOfTextbook: conversation.atEndOfTextbook === true,
+      textbookComplete: conversation.textbookComplete === true,
+      textbookCompletionReason: conversation.textbookCompletionReason || null
     };
     if (conversation.loadedRange.chunkId) readingRange.chunkId = conversation.loadedRange.chunkId;
     if (Number.isInteger(conversation.loadedRange.ordinal)) readingRange.ordinal = conversation.loadedRange.ordinal;
@@ -619,6 +1014,13 @@ function createAutoAdvance(options) {
       readingVersion: conversation.readingVersion,
       stateGeneration: state.stateGeneration,
       ownerGeneration: state.owner.ownerGeneration,
+      activeConceptId: conversation.activeConceptId || null,
+      nextConceptId: conversation.nextConceptId || null,
+      windowComplete: conversation.windowComplete === true,
+      totalPages: normalizeTotalPages(conversation.totalPages),
+      atEndOfTextbook: conversation.atEndOfTextbook === true,
+      textbookComplete: conversation.textbookComplete === true,
+      textbookCompletionReason: conversation.textbookCompletionReason || null,
       parentAssistantMessageId: conversation.lastAssistantMessageId || null,
       readingRange: readingRange
     };
@@ -648,10 +1050,6 @@ function createAutoAdvance(options) {
       state = recover(paths, scope, state);
       var conversation = state.conversations && state.conversations[scope.conversationId];
       if (!conversation) return null;
-      var readingHash = fileHash(paths.readingPath);
-      if (conversation.projectionStatus === "clean" && conversation.projectionReadingHash && readingHash && conversation.projectionReadingHash !== readingHash) {
-        throw codedError("EXTERNAL_LEGACY_MUTATION_DETECTED", "Conversation reading projection changed outside the authoritative state", 409);
-      }
       return publicSnapshot(state, conversation);
     });
   }
@@ -676,14 +1074,19 @@ function createAutoAdvance(options) {
     if (action && action.type === "page" && Number.isInteger(Number(action.page)) && Number(action.page) >= 1) return { type: "page", page: Number(action.page), reason: "explicit_page_jump" };
     if (action && action.type === "next") return { type: "next", reason: "explicit_next_page" };
     var text = String(envelope.sanitizedUserContent || "").trim();
-    var page = text.match(/(?:请\s*)?(?:跳到|翻到|从)(?:\s*PDF)?\s*第?\s*(\d+)\s*页(?:开始|看起|继续)?/i);
-    if (page) return { type: "page", page: Number(page[1]), reason: "explicit_page_jump" };
+    var page = text.match(/(?:请\s*)?(?:跳到|翻到|从)(?:\s*PDF)?\s*第?\s*(\d+)\s*页(?:开始|看起|继续)?|(?:please\s+)?(?:go|jump|move)\s+to\s+page\s+(\d+)/i);
+    var requestedPage = page && (page[1] || page[2]);
+    if (requestedPage) return { type: "page", page: Number(requestedPage), reason: "explicit_page_jump" };
     if (/^(?:请\s*)?(?:下一页|翻页|翻到下一页|请看下一页|next\s+page)[。.!！]?$/i.test(text)) return { type: "next", reason: "explicit_next_page" };
     return null;
   }
 
+  function isAdvanceBlockedText(text) {
+    return hasAdvanceHoldIntent(text);
+  }
+
   function isHoldIntent(text) {
-    return /(先别|不要|暂时不|别急着)(?:翻页|下一页|往下|继续下一)/.test(String(text || ""));
+    return hasAdvanceHoldIntent(text);
   }
 
   function newExecutor(turn, attemptId) {
@@ -697,6 +1100,37 @@ function createAutoAdvance(options) {
 
   function sameExecutor(left, right) {
     return !!left && !!right && left.bootId === right.bootId && left.leaseId === right.leaseId && left.attemptId === right.attemptId;
+  }
+
+  function markTextbookComplete(conversation, totalPages, serverTurnOrdinal, completionReason) {
+    var normalizedTotalPages = normalizeTotalPages(totalPages) || normalizeTotalPages(conversation.totalPages);
+    if (normalizedTotalPages) conversation.totalPages = normalizedTotalPages;
+    conversation.atEndOfTextbook = true;
+    conversation.textbookComplete = true;
+    conversation.textbookCompletionReason = String(completionReason || conversation.textbookCompletionReason || "eof");
+    conversation.nextConceptId = null;
+    conversation.pendingAdvance = null;
+    conversation.candidate = null;
+    conversation.pendingExternalReading = null;
+    conversation.projectionStatus = "pending";
+    if (Number.isSafeInteger(serverTurnOrdinal)) conversation.lastAdvanceServerOrdinal = serverTurnOrdinal;
+  }
+
+  function readLoadedTotalPages(loaded) {
+    return normalizeTotalPages(loaded && loaded.totalPages) ||
+      normalizeTotalPages(loaded && loaded.metadata && (loaded.metadata.totalPages || loaded.metadata.numPages));
+  }
+
+  function trustedEof(loaded, requestedStart, currentEnd) {
+    if (!loaded || loaded.eof !== true || Number(requestedStart) <= Number(currentEnd)) return null;
+    var totalPages = readLoadedTotalPages(loaded);
+    if (totalPages && (Number(requestedStart) <= totalPages || totalPages < Number(currentEnd))) return null;
+    return { totalPages: totalPages, reason: totalPages ? "eof" : "eof_metadata_missing" };
+  }
+
+  function conversationAtKnownEnd(conversation) {
+    var totalPages = normalizeTotalPages(conversation && conversation.totalPages);
+    return !!(conversation && (conversation.atEndOfTextbook === true || conversation.textbookComplete === true || totalPages && conversation.loadedRange && conversation.loadedRange.endPage >= totalPages));
   }
 
   function cancelAcceptedExecutor(paths, scope, clientTurnId, executor, errorCode) {
@@ -734,6 +1168,14 @@ function createAutoAdvance(options) {
       contextFor(scope);
       var state = loadOrMigrate(paths, scope);
       var conversation = ensureConversation(paths, state, scope);
+      if (!hasCompletedTurn(conversation)) {
+        var durableParent = durableAssistantMessageId(paths);
+        if (conversation.lastAssistantMessageId !== durableParent) {
+          conversation.lastAssistantMessageId = durableParent;
+          state = commitManifest(paths, state);
+          conversation = state.conversations[scope.conversationId];
+        }
+      }
       var existing = conversation.turns[input.clientTurnId];
       if (existing) {
         if (existing.envelopeHash !== normalized.hash) throw codedError("TURN_CONFLICT", "Turn ID was reused with a different envelope", 409);
@@ -783,17 +1225,39 @@ function createAutoAdvance(options) {
       conversation = state.conversations[scope.conversationId];
 
       var ordinal = conversation.serverTurnOrdinal + 1;
-      var intent = explicitIntent(normalized.envelope);
       var hold = isHoldIntent(normalized.envelope.sanitizedUserContent);
+      var intent = hold ? null : explicitIntent(normalized.envelope);
       var delta = Math.max(0, ordinal - conversation.lastAdvanceServerOrdinal);
-      var shouldCommitPending = !hold && !intent && !!conversation.pendingAdvance && delta >= 1;
-      var shouldForce = !hold && !intent && delta >= 12;
-      var transition = intent || (shouldCommitPending || shouldForce ? { type: "next", reason: shouldForce ? "threshold_pre_turn" : "pending_pre_turn" } : null);
+      var pendingVerified = pendingAdvanceVerified(conversation.pendingAdvance, conversation);
+      var shouldCommitPending = !hold && !intent && pendingVerified && delta >= 1;
+      var shouldForce = !hold && !intent && conversation.structuredTeachingProgress !== true && delta >= 12;
+      if (!shouldForce && !hold && !intent && conversation.structuredTeachingProgress === true && delta >= 12) warnStructuredTeachingStall(conversation, delta);
+      var pendingExternal = readPendingExternalReading(paths, conversation);
+      var transition = intent;
+      if (!transition && pendingExternal) transition = { type: "page", page: pendingExternal.startPage, reason: "external_window_adopted" };
+      if (!transition && (shouldCommitPending || shouldForce)) transition = { type: "next", reason: shouldForce ? "threshold_pre_turn" : "pending_pre_turn" };
       var loaded = null;
+      var canFinalizeTextbook = !!transition && transition.type !== "page" &&
+        (transition.reason === "explicit_next_page" || shouldCommitPending || pendingVerified);
+      if (canFinalizeTextbook && conversationAtKnownEnd(conversation)) {
+        markTextbookComplete(conversation, conversation.totalPages, ordinal, "known_end");
+        transition = null;
+      }
+      if (!transition && typeof input.loadRange === "function" && conversationWindowEmpty(paths, conversation)) {
+        var emptyStartPage = Number(conversation.loadedRange && conversation.loadedRange.startPage) || 1;
+        transition = { type: "page", page: emptyStartPage, reason: "empty_window_reload" };
+        console.warn("[auto-advance] authoritative window is empty; reloading the current range", {
+          conversationId: conversation.conversationId,
+          startPage: emptyStartPage,
+          note: "conversationSeed seeded a header-only window from an empty current_reading.md projection"
+        });
+      }
       if (transition) {
         if (typeof input.loadRange !== "function") throw codedError("advance_loader_unavailable", "Range loader is unavailable", 503);
         var targetStart = transition.type === "page" ? transition.page : conversation.loadedRange.endPage + 1;
-        if (transition.type !== "page" && conversation.candidate && conversation.candidate.baseReadingVersion === conversation.readingVersion && conversation.candidate.startPage === targetStart) {
+        if (transition.reason === "external_window_adopted" && pendingExternal && pendingExternal.startPage === targetStart) {
+          loaded = { content: pendingExternal.content, startPage: pendingExternal.startPage, endPage: pendingExternal.endPage };
+        } else if (transition.type !== "page" && conversation.candidate && conversation.candidate.baseReadingVersion === conversation.readingVersion && conversation.candidate.startPage === targetStart) {
           loaded = {
             content: readBlob(paths, conversation.candidate.blobRef, conversation.candidate.contentHash).toString("utf8"),
             startPage: conversation.candidate.startPage,
@@ -802,10 +1266,18 @@ function createAutoAdvance(options) {
         } else {
           loaded = await input.loadRange({ startPage: targetStart, explicitPage: transition.type === "page", reason: transition.reason, scope: clone(scope), signal: input.signal, deadlineAt: input.deadlineAt });
         }
-        if (!loaded || !String(loaded.content || "").trim() || !Number.isInteger(Number(loaded.startPage)) || !Number.isInteger(Number(loaded.endPage)) || Number(loaded.endPage) < Number(loaded.startPage)) {
+        var eofInfo = trustedEof(loaded, targetStart, conversation.loadedRange.endPage);
+        if (eofInfo) {
+          markTextbookComplete(conversation, eofInfo.totalPages, ordinal, eofInfo.reason);
+          loaded = null;
+          transition = null;
+        }
+        if (!loaded) {
+          // A trusted EOF is a terminal state, not a failed range load.
+        } else if (!String(loaded.content || "").trim() || !Number.isInteger(Number(loaded.startPage)) || !Number.isInteger(Number(loaded.endPage)) || Number(loaded.endPage) < Number(loaded.startPage)) {
           throw codedError("advance_load_failed", "无法加载目标教材页面", 409);
         }
-        if (transition.type !== "page" && Number(loaded.startPage) !== conversation.loadedRange.endPage + 1) throw codedError("advance_non_adjacent", "Automatic advance must be adjacent", 409);
+        if (loaded && transition.type !== "page" && Number(loaded.startPage) !== conversation.loadedRange.endPage + 1) throw codedError("advance_non_adjacent", "Automatic advance must be adjacent", 409);
       }
       contextFor(scope);
 
@@ -815,14 +1287,28 @@ function createAutoAdvance(options) {
         var wrapped = wrapRange(loaded.content, Number(loaded.startPage), Number(loaded.endPage));
         conversation.loadedContent = writeBlob(paths, wrapped, "reading");
         conversation.loadedRange = { startPage: Number(loaded.startPage), endPage: Number(loaded.endPage) };
+        var loadedTotalPages = readLoadedTotalPages(loaded);
+        if (loadedTotalPages) conversation.totalPages = loadedTotalPages;
+        conversation.atEndOfTextbook = false;
+        conversation.textbookComplete = false;
+        if (transition.type !== "page") {
+          conversation.windowComplete = false;
+          if (conversation.nextConceptId) {
+            conversation.activeConceptId = conversation.nextConceptId;
+            conversation.nextConceptId = null;
+          }
+        } else {
+          conversation.nextConceptId = null;
+          conversation.windowComplete = false;
+        }
         conversation.readingVersion += 1;
         conversation.lastAdvanceServerOrdinal = ordinal;
         conversation.pendingAdvance = null;
         conversation.candidate = null;
+        conversation.pendingExternalReading = null;
+        conversation.structuredStallWarned = false;
         conversation.projectionStatus = "pending";
       }
-      if (hold) conversation.pendingAdvance = null;
-
       var executor = newExecutor(null, 1);
       var immutablePromptSnapshot = {
         blobRef: conversation.loadedContent.ref,
@@ -842,6 +1328,7 @@ function createAutoAdvance(options) {
         rangeEffectReadingVersion: conversation.readingVersion,
         executor: executor,
         lastAttemptId: 1,
+        holdIntent: hold,
         promptSnapshot: immutablePromptSnapshot,
         createdAt: nowIso(),
         updatedAt: nowIso()
@@ -879,6 +1366,7 @@ function createAutoAdvance(options) {
 
   function completionSignal(text, decision) {
     text = String(text || "");
+    if (isAdvanceBlockedText(text)) return false;
     if (decision && (decision.contentProgress === "second_half" || decision.recommendedAction === "advance")) return true;
     return /(这一部分(?:已经)?讲完|当前(?:窗口|部分|小节)(?:已经)?讲完|进入下一(?:节|部分|知识点)|move on to the next|next section|next point)/i.test(text);
   }
@@ -908,15 +1396,107 @@ function createAutoAdvance(options) {
       turn.updatedAt = nowIso();
       turn.executor = null;
       turn.assistantMessageId = input.assistantMessageId || null;
-      turn.completionDecision = completionSignal(input.responseText, input.decision) ? "pending_advance" : "stay";
+      turn.requiresTeachingProgress = input.requiresTeachingProgress === true;
+      turn.advanceBlocked = turn.holdIntent === true || isAdvanceBlockedText(input.responseText);
+      var alreadyAtTextbookEnd = conversation.atEndOfTextbook === true || conversation.textbookComplete === true;
+      turn.completionDecision = !alreadyAtTextbookEnd && !turn.advanceBlocked && completionSignal(input.responseText, input.decision) ? "pending_advance" : "stay";
       conversation.lastAssistantMessageId = input.assistantMessageId || conversation.lastAssistantMessageId;
       conversation.causalConversationRevision += 1;
-      if (turn.completionDecision === "pending_advance") {
-        conversation.pendingAdvance = { reason: "assistant_completion", turnId: input.clientTurnId, serverTurnOrdinal: turn.serverTurnOrdinal, baseReadingVersion: conversation.readingVersion, createdAt: nowIso() };
+      if (alreadyAtTextbookEnd) {
+        conversation.pendingAdvance = null;
+      } else if (turn.completionDecision === "pending_advance") {
+        conversation.pendingAdvance = {
+          reason: "assistant_completion",
+          turnId: input.clientTurnId,
+          conversationId: conversation.conversationId,
+          serverTurnOrdinal: turn.serverTurnOrdinal,
+          baseReadingVersion: conversation.readingVersion,
+          requiresTeachingProgress: input.requiresTeachingProgress === true,
+          teachingProgressVerified: input.requiresTeachingProgress === true ? false : true,
+          createdAt: nowIso()
+        };
       }
+      if (input.requiresTeachingProgress === true) conversation.structuredTeachingProgress = true;
       var delta = Math.max(0, conversation.serverTurnOrdinal - conversation.lastAdvanceServerOrdinal);
       state = commitManifest(paths, state);
       return Object.assign({ shouldPrefetch: delta >= 6 || !!conversation.pendingAdvance, envelopeHash: turn.envelopeHash }, publicSnapshot(state, conversation));
+    });
+  }
+
+  function commitTeachingProgress(input) {
+    var scope = normalizeScope(input);
+    var paths = pathsFor(scope);
+    return withLock(scope, function () {
+      contextFor(scope);
+      var state = loadOrMigrate(paths, scope);
+      if (!state.owner || state.owner.conversationId !== scope.conversationId) throw codedError("SCOPE_STALE", "Conversation is no longer active", 409);
+      var conversation = state.conversations && state.conversations[scope.conversationId];
+      var turn = conversation && conversation.turns && conversation.turns[input.clientTurnId];
+      if (!turn || turn.turnState !== "COMPLETED") throw codedError("turn_not_completed", "Teaching progress requires a completed turn", 409);
+      var progress = normalizeTeachingProgress(input, conversation);
+      var progressHash = sha256(canonicalize(progress));
+      if (turn.teachingProgressHash) {
+        if (turn.teachingProgressHash !== progressHash) throw codedError("TURN_CONFLICT", "Teaching progress changed for a completed turn", 409);
+        return publicSnapshot(state, conversation);
+      }
+      applyTeachingProgress(conversation, progress);
+      turn.teachingProgressHash = progressHash;
+      turn.teachingProgressAppliedAt = nowIso();
+      turn.teachingWindowComplete = progress.windowComplete;
+      var terminalBeforeProgress = conversation.atEndOfTextbook === true || conversation.textbookComplete === true;
+      if (terminalBeforeProgress || progress.textbookComplete === true) {
+        markTextbookComplete(conversation, conversation.totalPages, turn.serverTurnOrdinal, conversation.textbookCompletionReason || "validated_textbook_complete");
+        turn.completionDecision = "textbook_complete";
+      } else if (turn.requiresTeachingProgress === true && progress.windowComplete === true && turn.advanceBlocked !== true) {
+        if (conversation.pendingAdvance && conversation.pendingAdvance.turnId !== input.clientTurnId) {
+          throw codedError("TURN_CONFLICT", "Another turn already owns the pending advance", 409);
+        }
+        if (!conversation.pendingAdvance) {
+          conversation.pendingAdvance = {
+            reason: "assistant_completion",
+            turnId: input.clientTurnId,
+            conversationId: conversation.conversationId,
+            serverTurnOrdinal: turn.serverTurnOrdinal,
+            baseReadingVersion: conversation.readingVersion,
+            requiresTeachingProgress: true,
+            teachingProgressVerified: true,
+            createdAt: nowIso()
+          };
+        } else {
+          conversation.pendingAdvance.conversationId = conversation.conversationId;
+          conversation.pendingAdvance.turnId = input.clientTurnId;
+          conversation.pendingAdvance.serverTurnOrdinal = turn.serverTurnOrdinal;
+          conversation.pendingAdvance.baseReadingVersion = conversation.readingVersion;
+          conversation.pendingAdvance.requiresTeachingProgress = true;
+          conversation.pendingAdvance.teachingProgressVerified = true;
+        }
+        turn.completionDecision = "pending_advance";
+      } else if (conversation.pendingAdvance && conversation.pendingAdvance.turnId === input.clientTurnId && conversation.pendingAdvance.requiresTeachingProgress === true) {
+        conversation.pendingAdvance.teachingProgressVerified = progress.windowComplete;
+      }
+      state = commitManifest(paths, state);
+      projectConversation(paths, state, scope.conversationId);
+      markProjectionClean(paths, state, scope.conversationId);
+      state = commitManifest(paths, state);
+      return publicSnapshot(state, state.conversations[scope.conversationId]);
+    });
+  }
+
+  function repairLegacyProjection(input) {
+    var scope = normalizeScope(input);
+    var paths = pathsFor(scope);
+    return withLock(scope, function () {
+      contextFor(scope);
+      var state = readCommitted(paths);
+      if (!state) throw codedError("advance_state_missing", "Authoritative reading state is missing", 409);
+      if (!state.scope || state.scope.accountId !== scope.accountId || state.scope.profileId !== scope.profileId || state.scope.worldId !== scope.worldId || state.scope.textbookId !== scope.textbookId) {
+        throw codedError("advance_scope_mismatch", "Authoritative state belongs to another scope", 409);
+      }
+      if (!state.owner || state.owner.conversationId !== scope.conversationId) throw codedError("SCOPE_STALE", "Conversation is no longer active", 409);
+      var conversation = state.conversations && state.conversations[scope.conversationId];
+      if (!conversation) throw codedError("advance_conversation_missing", "Conversation state missing", 500);
+      var repaired = repairProjectionState(paths, state, scope.conversationId, "manual_repair");
+      return Object.assign({ backupDir: repaired.backupDir }, repaired.result, { snapshot: publicSnapshot(repaired.state, repaired.state.conversations[scope.conversationId]) });
     });
   }
 
@@ -996,6 +1576,10 @@ function createAutoAdvance(options) {
       conversation.lastAdvanceServerOrdinal = conversation.serverTurnOrdinal;
       conversation.pendingAdvance = null;
       conversation.candidate = null;
+      conversation.atEndOfTextbook = false;
+      conversation.textbookComplete = false;
+      conversation.nextConceptId = null;
+      conversation.windowComplete = false;
       conversation.projectionStatus = "pending";
       state = commitManifest(paths, state);
       projectConversation(paths, state, scope.conversationId);
@@ -1023,11 +1607,16 @@ function createAutoAdvance(options) {
       if (state.scope.sessionEpoch !== scope.sessionEpoch) return { skipped: true, reason: "stale_scope" };
       var conversation = state.conversations && state.conversations[scope.conversationId];
       if (!state.owner || state.owner.conversationId !== scope.conversationId || !conversation) return { skipped: true, reason: "inactive_owner" };
+      var totalPages = normalizeTotalPages(conversation.totalPages);
+      if (conversation.atEndOfTextbook === true || conversation.textbookComplete === true || totalPages && conversation.loadedRange.endPage >= totalPages) {
+        return { skipped: true, reason: "textbook_complete" };
+      }
       return {
         scopeGeneration: state.scope.scopeGeneration,
         ownerGeneration: state.owner.ownerGeneration,
         causalConversationRevision: conversation.causalConversationRevision,
         baseReadingVersion: conversation.readingVersion,
+        currentEnd: conversation.loadedRange.endPage,
         startPage: conversation.loadedRange.endPage + 1
       };
     });
@@ -1045,6 +1634,35 @@ function createAutoAdvance(options) {
     var promise = Promise.resolve().then(function () {
       return input.loadRange({ startPage: captured.startPage, explicitPage: false, reason: "background_prefetch", scope: clone(scope), signal: controller.signal, deadlineAt: deadlineAt });
     }).then(function (loaded) {
+      var eofInfo = trustedEof(loaded, captured.startPage, captured.currentEnd);
+      if (eofInfo) {
+        return withLock(scope, function () {
+          contextFor(scope);
+          var state = readCommitted(paths);
+          var conversation = state && state.conversations && state.conversations[scope.conversationId];
+          if (!state || !state.scope ||
+              state.scope.accountId !== scope.accountId ||
+              state.scope.profileId !== scope.profileId ||
+              state.scope.worldId !== scope.worldId ||
+              state.scope.textbookId !== scope.textbookId ||
+              state.scope.sessionEpoch !== scope.sessionEpoch ||
+              !state.owner ||
+              state.owner.conversationId !== scope.conversationId ||
+              !conversation ||
+              state.scope.scopeGeneration !== captured.scopeGeneration ||
+              state.owner.ownerGeneration !== captured.ownerGeneration ||
+              conversation.causalConversationRevision !== captured.causalConversationRevision ||
+              conversation.readingVersion !== captured.baseReadingVersion) {
+            return { skipped: true, reason: "stale" };
+          }
+          markTextbookComplete(conversation, eofInfo.totalPages, conversation.serverTurnOrdinal, eofInfo.reason);
+          state = commitManifest(paths, state);
+          projectConversation(paths, state, scope.conversationId);
+          markProjectionClean(paths, state, scope.conversationId);
+          state = commitManifest(paths, state);
+          return { skipped: true, reason: "textbook_complete", stateGeneration: state.stateGeneration };
+        });
+      }
       if (!loaded || !String(loaded.content || "").trim()) return { skipped: true, reason: "empty" };
       return withLock(scope, function () {
         contextFor(scope);
@@ -1067,6 +1685,8 @@ function createAutoAdvance(options) {
           return { skipped: true, reason: "stale" };
         }
         var blob = writeBlob(paths, wrapRange(loaded.content, Number(loaded.startPage), Number(loaded.endPage)), "candidate");
+        var candidateTotalPages = readLoadedTotalPages(loaded);
+        if (candidateTotalPages) conversation.totalPages = candidateTotalPages;
         conversation.candidate = {
           baseReadingVersion: captured.baseReadingVersion,
           startPage: Number(loaded.startPage),
@@ -1106,6 +1726,8 @@ function createAutoAdvance(options) {
     readSnapshot: readSnapshot,
     beginTurn: beginTurn,
     completeTurn: completeTurn,
+    commitTeachingProgress: commitTeachingProgress,
+    repairLegacyProjection: repairLegacyProjection,
     failTurn: failTurn,
     commitRange: commitRange,
     prefetchCandidate: prefetchCandidate,
@@ -1122,6 +1744,7 @@ module.exports = {
   SCHEMA_VERSION: SCHEMA_VERSION,
   canonicalize: canonicalize,
   createAutoAdvance: createAutoAdvance,
+  pendingAdvanceVerified: pendingAdvanceVerified,
   parseRange: parseRange,
   wrapRange: wrapRange
 };

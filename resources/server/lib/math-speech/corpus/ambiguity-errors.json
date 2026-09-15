@@ -1,0 +1,554 @@
+[
+  {
+    "id": "ambiguity-errors-001",
+    "latex": "|A|",
+    "expected": {
+      "ok": true,
+      "mode": "structural",
+      "speech": "左竖线 A 右竖线",
+      "unresolvedAmbiguities": [
+        "vertical-bar-meaning"
+      ]
+    }
+  },
+  {
+    "id": "ambiguity-errors-002",
+    "latex": "|A|=5",
+    "expected": {
+      "ok": true,
+      "mode": "structural",
+      "speech": "左竖线 A 右竖线，等于五",
+      "unresolvedAmbiguities": [
+        "vertical-bar-meaning"
+      ]
+    }
+  },
+  {
+    "id": "ambiguity-errors-003",
+    "latex": "\\left|A\\right|",
+    "expected": {
+      "ok": true,
+      "mode": "structural",
+      "speech": "左竖线 A 右竖线",
+      "unresolvedAmbiguities": [
+        "vertical-bar-meaning"
+      ]
+    }
+  },
+  {
+    "id": "ambiguity-errors-004",
+    "latex": "\\left|A\\right|=5",
+    "expected": {
+      "ok": true,
+      "mode": "structural",
+      "speech": "左竖线 A 右竖线，等于五",
+      "unresolvedAmbiguities": [
+        "vertical-bar-meaning"
+      ]
+    }
+  },
+  {
+    "id": "ambiguity-errors-005",
+    "latex": "AB",
+    "expected": {
+      "ok": true,
+      "mode": "structural",
+      "speech": "A B",
+      "unresolvedAmbiguities": [
+        "implicit-product-meaning"
+      ]
+    }
+  },
+  {
+    "id": "ambiguity-errors-006",
+    "latex": "A-B",
+    "expected": {
+      "ok": true,
+      "mode": "structural",
+      "speech": "A 减 B",
+      "unresolvedAmbiguities": [
+        "set-or-arithmetic-difference"
+      ]
+    }
+  },
+  {
+    "id": "ambiguity-errors-007",
+    "latex": "(a,b)",
+    "expected": {
+      "ok": true,
+      "mode": "structural",
+      "speech": "左圆括号 a 逗号 b 右圆括号",
+      "unresolvedAmbiguities": [
+        "tuple-or-interval"
+      ]
+    }
+  },
+  {
+    "id": "ambiguity-errors-008",
+    "latex": "[a,b]",
+    "expected": {
+      "ok": true,
+      "mode": "structural",
+      "speech": "左方括号 a 逗号 b 右方括号",
+      "unresolvedAmbiguities": [
+        "bracket-role"
+      ]
+    }
+  },
+  {
+    "id": "ambiguity-errors-009",
+    "latex": "\\left(a,b\\right)",
+    "expected": {
+      "ok": true,
+      "mode": "structural",
+      "speech": "左圆括号 a 逗号 b 右圆括号",
+      "unresolvedAmbiguities": [
+        "tuple-or-interval"
+      ]
+    }
+  },
+  {
+    "id": "ambiguity-errors-010",
+    "latex": "dx",
+    "expected": {
+      "ok": true,
+      "mode": "structural",
+      "speech": "d x",
+      "unresolvedAmbiguities": [
+        "differential-or-product"
+      ]
+    }
+  },
+  {
+    "id": "ambiguity-errors-011",
+    "latex": "\\mathrm{d}x",
+    "expected": {
+      "ok": true,
+      "mode": "structural",
+      "speech": "d x",
+      "unresolvedAmbiguities": [
+        "differential-or-product"
+      ]
+    }
+  },
+  {
+    "id": "ambiguity-errors-012",
+    "latex": "f^{-1}",
+    "expected": {
+      "ok": true,
+      "mode": "structural",
+      "speech": "f 上标负一",
+      "unresolvedAmbiguities": [
+        "inverse-power-meaning"
+      ]
+    }
+  },
+  {
+    "id": "ambiguity-errors-013",
+    "latex": "f^{-1}(x)",
+    "expected": {
+      "ok": true,
+      "mode": "structural",
+      "speech": "f 上标负一 左圆括号 x 右圆括号",
+      "unresolvedAmbiguities": [
+        "inverse-power-meaning"
+      ]
+    }
+  },
+  {
+    "id": "ambiguity-errors-014",
+    "latex": "P(A|B)",
+    "expected": {
+      "ok": true,
+      "mode": "structural",
+      "speech": "P 左圆括号 A 竖线 B 右圆括号",
+      "unresolvedAmbiguities": [
+        "conditional-probability-role"
+      ]
+    }
+  },
+  {
+    "id": "ambiguity-errors-015",
+    "latex": "P(A\\mid B)",
+    "expected": {
+      "ok": true,
+      "mode": "structural",
+      "speech": "P 左圆括号 A 竖线 B 右圆括号",
+      "unresolvedAmbiguities": [
+        "conditional-probability-role"
+      ]
+    }
+  },
+  {
+    "id": "ambiguity-errors-016",
+    "latex": "|S|",
+    "context": {
+      "symbolFacts": {
+        "S": {
+          "type": "set",
+          "evidence": "explicit"
+        }
+      }
+    },
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "集合 S 的基数"
+    }
+  },
+  {
+    "id": "ambiguity-errors-017",
+    "latex": "|A|+1",
+    "context": {
+      "symbolFacts": {
+        "A": {
+          "type": "set",
+          "evidence": "explicit"
+        }
+      }
+    },
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "集合 A 的基数加一"
+    }
+  },
+  {
+    "id": "ambiguity-errors-018",
+    "latex": "C-D",
+    "context": {
+      "symbolFacts": {
+        "C": {
+          "type": "set",
+          "evidence": "explicit"
+        },
+        "D": {
+          "type": "set",
+          "evidence": "explicit"
+        }
+      }
+    },
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "C 与 D 的集合差"
+    }
+  },
+  {
+    "id": "ambiguity-errors-019",
+    "latex": "|T|",
+    "context": {
+      "domainHints": [
+        "set"
+      ]
+    },
+    "expected": {
+      "ok": true,
+      "mode": "structural",
+      "speech": "左竖线 T 右竖线",
+      "unresolvedAmbiguities": [
+        "vertical-bar-meaning"
+      ]
+    }
+  },
+  {
+    "id": "ambiguity-errors-020",
+    "latex": "\\frac{",
+    "expected": {
+      "ok": false,
+      "mode": "skip",
+      "speech": "",
+      "reason": "parse-failed"
+    }
+  },
+  {
+    "id": "ambiguity-errors-021",
+    "latex": "\\sqrt{",
+    "expected": {
+      "ok": false,
+      "mode": "skip",
+      "speech": "",
+      "reason": "parse-failed"
+    }
+  },
+  {
+    "id": "ambiguity-errors-022",
+    "latex": "\\unknowncommand{x}",
+    "expected": {
+      "ok": false,
+      "mode": "skip",
+      "speech": "",
+      "reason": "parse-failed"
+    }
+  },
+  {
+    "id": "ambiguity-errors-023",
+    "latex": "\\begin{matrix}1&2",
+    "expected": {
+      "ok": false,
+      "mode": "skip",
+      "speech": "",
+      "reason": "parse-failed"
+    }
+  },
+  {
+    "id": "ambiguity-errors-024",
+    "latex": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+    "limits": {
+      "maxInputChars": 8
+    },
+    "expected": {
+      "ok": false,
+      "mode": "skip",
+      "speech": "",
+      "reason": "input-too-long"
+    }
+  },
+  {
+    "id": "ambiguity-errors-025",
+    "latex": "\\text{xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx}",
+    "limits": {
+      "maxOutputChars": 10
+    },
+    "expected": {
+      "ok": false,
+      "mode": "skip",
+      "speech": "",
+      "reason": "output-too-long"
+    }
+  },
+  {
+    "id": "ambiguity-errors-026",
+    "mathml": "<math><mrow><mi>x</mi></math>",
+    "expected": {
+      "ok": false,
+      "mode": "skip",
+      "speech": "",
+      "reason": "parse-failed"
+    }
+  },
+  {
+    "id": "ambiguity-errors-027",
+    "mathml": "<math><mystery/></math>",
+    "expected": {
+      "ok": false,
+      "mode": "skip",
+      "speech": "",
+      "reason": "unsupported-node"
+    }
+  },
+  {
+    "id": "ambiguity-errors-028",
+    "mathml": "<math><mo>⨂</mo></math>",
+    "expected": {
+      "ok": false,
+      "mode": "skip",
+      "speech": "",
+      "reason": "unsupported-symbol"
+    }
+  },
+  {
+    "id": "ambiguity-errors-029",
+    "latex": "\\htmlClass{foo}{x}",
+    "expected": {
+      "ok": false,
+      "mode": "skip",
+      "speech": "",
+      "reason": "unknown-semantic-macro"
+    }
+  },
+  {
+    "id": "ambiguity-errors-030",
+    "mathml": "<!DOCTYPE math [<!ENTITY x SYSTEM 'file:///sensitive'>]><math><mi>x</mi></math>",
+    "expected": {
+      "ok": false,
+      "mode": "skip",
+      "speech": "",
+      "reason": "parse-failed"
+    }
+  },
+  {
+    "id": "ambiguity-errors-031",
+    "latex": "P(C\\mid D)",
+    "expected": {
+      "ok": true,
+      "mode": "structural",
+      "speech": "P 左圆括号 C 竖线 D 右圆括号",
+      "unresolvedAmbiguities": [
+        "conditional-probability-role"
+      ]
+    }
+  },
+  {
+    "id": "ambiguity-errors-032",
+    "latex": "1.2e-3",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "一点二乘以十的负三次方"
+    }
+  },
+  {
+    "id": "ambiguity-errors-033",
+    "latex": "\\int_0^2 u^3",
+    "expected": {
+      "ok": true,
+      "mode": "structural",
+      "speech": "从零到二，u 的立方，积分",
+      "unresolvedAmbiguities": [
+        "missing-integral-variable"
+      ]
+    }
+  },
+  {
+    "id": "ambiguity-errors-034",
+    "latex": "\\neg(P\\land Q)",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "非（P 且 Q）"
+    }
+  },
+  {
+    "id": "ambiguity-errors-035",
+    "latex": "\\frac{\\sqrt{z^2+2}}{c-d}",
+    "expected": {
+      "ok": true,
+      "mode": "detailed",
+      "speech": "一个分数，分子是z 的平方加二的平方根，分母是c 减 d，分数结束"
+    }
+  },
+  {
+    "id": "ambiguity-errors-036",
+    "mathml": "<math><mtext>A\u0000B</mtext></math>",
+    "expected": {
+      "ok": false,
+      "mode": "skip",
+      "speech": "",
+      "reason": "invalid-input"
+    }
+  },
+  {
+    "id": "ambiguity-errors-037",
+    "mathml": "<math><mtext>A‮B</mtext><mystery/></math>",
+    "expected": {
+      "ok": false,
+      "mode": "skip",
+      "speech": "",
+      "reason": "invalid-input"
+    }
+  },
+  {
+    "id": "ambiguity-errors-038",
+    "latex": "23,45",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "二十三，四十五"
+    }
+  },
+  {
+    "id": "ambiguity-errors-039",
+    "latex": "D-E",
+    "context": {
+      "currentSentence": "设 D 为有限集合。",
+      "symbolFacts": {
+        "E": {
+          "type": "set",
+          "evidence": "explicit",
+          "scopeId": "classroom"
+        }
+      }
+    },
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "D 与 E 的集合差"
+    }
+  },
+  {
+    "id": "ambiguity-errors-040",
+    "latex": "|V|",
+    "context": {
+      "symbolFacts": {
+        "V": [
+          {
+            "type": "set",
+            "evidence": "explicit",
+            "scopeId": "current"
+          },
+          {
+            "type": "matrix",
+            "evidence": "explicit",
+            "scopeId": "current"
+          }
+        ]
+      }
+    },
+    "expected": {
+      "ok": true,
+      "mode": "structural",
+      "speech": "左竖线 V 右竖线",
+      "unresolvedAmbiguities": [
+        "conflicting-symbol-fact"
+      ]
+    }
+  },
+  {
+    "id": "ambiguity-errors-041",
+    "latex": "q+1",
+    "mathml": "<math><mi>q</mi></math>",
+    "expected": {
+      "ok": false,
+      "mode": "skip",
+      "speech": "",
+      "reason": "invalid-input"
+    }
+  },
+  {
+    "id": "ambiguity-errors-042",
+    "latex": "\\int_0^2 u^3\\,du",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "从零到二，u 的立方关于 u 的积分"
+    }
+  },
+  {
+    "id": "ambiguity-errors-043",
+    "latex": "P(T)",
+    "context": {
+      "symbolFacts": {
+        "P": {
+          "type": "function",
+          "evidence": "explicit",
+          "scopeId": "current",
+          "sourceText": "设 P 是普通函数"
+        }
+      }
+    },
+    "expected": {
+      "ok": true,
+      "mode": "structural",
+      "speech": "P 左圆括号 T 右圆括号",
+      "unresolvedAmbiguities": [
+        "probability-function-role"
+      ]
+    }
+  },
+  {
+    "id": "ambiguity-errors-044",
+    "latex": "\\Pr(U)",
+    "context": {
+      "currentSentence": "令 Pr 是函数。"
+    },
+    "expected": {
+      "ok": true,
+      "mode": "structural",
+      "speech": "Pr 左圆括号 U 右圆括号",
+      "unresolvedAmbiguities": [
+        "probability-function-role"
+      ]
+    }
+  }
+]

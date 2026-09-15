@@ -35207,28 +35207,61 @@ function installAdaptiveImageAuthHeaders() {
     }
   );
 }
-function log(msg) {
-  const line = `[${(/* @__PURE__ */ new Date()).toISOString()}] ${msg}
-`;
+const LOG_MAX_BYTES = 20 * 1024 * 1024;
+const LOG_ROTATIONS = 3;
+let logWriteInProgress = false;
+let stdoutBroken = false;
+let stderrBroken = false;
+process.stdout?.on?.("error", (err) => {
+  stdoutBroken = true;
+  if (err?.code !== "EPIPE") appendLogLine("[stdout-error] " + (err?.code || err?.message || "unknown"));
+});
+process.stderr?.on?.("error", (err) => {
+  stderrBroken = true;
+  if (err?.code !== "EPIPE") appendLogLine("[stderr-error] " + (err?.code || err?.message || "unknown"));
+});
+function rotateLogFile(logPath) {
+  try {
+    if (!import_fs5.default.existsSync(logPath) || import_fs5.default.statSync(logPath).size < LOG_MAX_BYTES) return;
+    const oldest = logPath + "." + LOG_ROTATIONS;
+    if (import_fs5.default.existsSync(oldest)) import_fs5.default.unlinkSync(oldest);
+    for (let index = LOG_ROTATIONS - 1; index >= 1; index--) {
+      const source = logPath + "." + index;
+      const destination = logPath + "." + (index + 1);
+      if (import_fs5.default.existsSync(source)) import_fs5.default.renameSync(source, destination);
+    }
+    import_fs5.default.renameSync(logPath, logPath + ".1");
+  } catch {
+  }
+}
+function appendLogLine(msg) {
+  if (logWriteInProgress) return;
+  logWriteInProgress = true;
+  const line = "[" + (/* @__PURE__ */ new Date()).toISOString() + "] " + msg + "\n";
   try {
     const logPath = import_path4.default.join(import_electron5.app.getPath("logs"), "socralab_debug.log");
     import_fs5.default.mkdirSync(import_path4.default.dirname(logPath), { recursive: true });
+    rotateLogFile(logPath);
     import_fs5.default.appendFileSync(logPath, line);
   } catch {
+  } finally {
+    logWriteInProgress = false;
   }
-  console.log(msg);
+}
+function log(msg) {
+  appendLogLine(msg);
+  if (stdoutBroken) return;
+  try {
+    console.log(msg);
+  } catch (err) {
+    if (err?.code === "EPIPE") stdoutBroken = true;
+  }
 }
 process.on("uncaughtException", (err) => {
-  try {
-    log(`[uncaughtException] ${err?.stack || err?.message || String(err)}`);
-  } catch {
-  }
+  appendLogLine("[uncaughtException] " + (err?.stack || err?.message || String(err)));
 });
 process.on("unhandledRejection", (reason) => {
-  try {
-    log(`[unhandledRejection] ${reason instanceof Error ? reason.stack || reason.message : String(reason)}`);
-  } catch {
-  }
+  appendLogLine("[unhandledRejection] " + (reason instanceof Error ? reason.stack || reason.message : String(reason)));
 });
 function resolveSystemTool(toolRelPath) {
   const candidates = [

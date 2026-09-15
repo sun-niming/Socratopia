@@ -74,6 +74,8 @@ function createGateway(options) {
       ),
     };
     if (input.requiresJson !== false) payload.response_format = { type: "json_object" };
+    // deepseek 默认开启思考,会把 max_tokens 烧在 reasoning_content 上、content 返回空串,JSON 任务随之失败。
+    if (/^deepseek/i.test(String(route.model || ""))) payload.thinking = { type: "disabled" };
     var result = await ResponsesCompat.postChatCompletionsJson(
       String(route.baseUrl).replace(/\/$/, "") + "/chat/completions",
       payload,

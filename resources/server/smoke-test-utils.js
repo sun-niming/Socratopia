@@ -16,6 +16,17 @@ class MockLLM {
     this.requests = [];
     this.server = null;
     this.port = 0;
+    // 0 = emit the whole content in one SSE frame (default).  A positive value splits the
+    // content into that many characters per frame, so a caller can drive the route's
+    // incremental text handler across frame boundaries.
+    this.streamFrameSize = 0;
+    // Raw (non-JSON) responses let a test reproduce a gateway interception page,
+    // which is otherwise indistinguishable from a normal provider envelope.
+    this.rawResponse = null;
+  }
+
+  setStreamFrameSize(size) {
+    this.streamFrameSize = Number(size) > 0 ? Math.floor(Number(size)) : 0;
   }
 
   setResponse(body, status = 200) {
@@ -24,6 +35,15 @@ class MockLLM {
     this.responseSequence = null;
     this.responseIndex = 0;
     this.responseGenerator = null;
+    this.rawResponse = null;
+  }
+
+  // Sends `text` verbatim with `contentType`, bypassing JSON.stringify entirely.
+  setRawResponse(text, status = 200, contentType = 'text/html') {
+    this.rawResponse = { text, status, contentType };
+    this.responseBody = null;
+    this.responseSequence = null;
+    this.responseGenerator = null;
   }
 
   setResponseSequence(responses) {
@@ -31,22 +51,29 @@ class MockLLM {
     this.responseIndex = 0;
     this.responseBody = null;
     this.responseGenerator = null;
+    this.rawResponse = null;
   }
 
   setResponseGenerator(fn) {
     this.responseGenerator = fn;
     this.responseBody = null;
     this.responseSequence = null;
+    this.rawResponse = null;
   }
 
-  getResponse(data) {
+  // A generator may be async; the handler awaits it so a test can simulate a
+  // slow provider and drive the client timeout path.
+  async getResponse(data) {
     if (this.responseGenerator) {
-      const r = this.responseGenerator(data, this.requests.length);
-      return { body: r.body, status: r.status || 200 };
+      const r = await this.responseGenerator(data, this.requests.length);
+      return { body: r.body, status: r.status || 200, raw: r.raw || null };
     }
     if (this.responseSequence && this.responseIndex < this.responseSequence.length) {
       const entry = this.responseSequence[this.responseIndex++];
-      return { body: entry.body, status: entry.status || 200 };
+      return { body: entry.body, status: entry.status || 200, raw: entry.raw || null };
+    }
+    if (this.rawResponse) {
+      return { body: this.rawResponse.text, status: this.rawResponse.status, raw: this.rawResponse.contentType };
     }
     return { body: this.responseBody, status: this.responseStatus };
   }
@@ -55,19 +82,31 @@ class MockLLM {
     return new Promise((resolve) => {
       this.server = http.createServer((req, res) => {
         if (req.url === '/v1/chat/completions' && req.method === 'POST') {
+          // Decode UTF-8 across TCP chunks without corrupting Chinese prompts.
+          req.setEncoding('utf8');
           let body = '';
           req.on('data', chunk => body += chunk);
-          req.on('end', () => {
+          req.on('end', async () => {
             try {
               const data = JSON.parse(body);
               this.requests.push({
                 model: data.model,
                 messages: data.messages,
                 response_format: data.response_format,
-                stream: data.stream
+                stream: data.stream,
+                max_tokens: data.max_tokens,
+                thinking: data.thinking,
+                temperature: data.temperature,
+                headers: req.headers
               });
 
-              const { body: respBody, status: respStatus } = this.getResponse(data);
+              const { body: respBody, status: respStatus, raw: respContentType } = await this.getResponse(data);
+
+              if (respContentType) {
+                res.writeHead(respStatus, { 'Content-Type': respContentType });
+                res.end(String(respBody));
+                return;
+              }
 
               if (data.stream) {
                 res.writeHead(respStatus, {
@@ -85,7 +124,15 @@ class MockLLM {
                 if (!content) {
                   content = JSON.stringify(respBody);
                 }
-                res.write('data: {"choices":[{"delta":{"content":' + JSON.stringify(content) + '}}]}\n\n');
+                const frameSize = this.streamFrameSize;
+                if (frameSize > 0 && content.length > frameSize) {
+                  for (let at = 0; at < content.length; at += frameSize) {
+                    const piece = content.slice(at, at + frameSize);
+                    res.write('data: {"choices":[{"delta":{"content":' + JSON.stringify(piece) + '}}]}\n\n');
+                  }
+                } else {
+                  res.write('data: {"choices":[{"delta":{"content":' + JSON.stringify(content) + '}}]}\n\n');
+                }
                 res.write('data: [DONE]\n\n');
                 res.end();
               } else {
@@ -138,6 +185,13 @@ class TestEnvironment {
     fs.mkdirSync(this.tmpDir, { recursive: true });
     const contentDir = path.join(this.tmpDir, 'content');
     fs.mkdirSync(contentDir, { recursive: true });
+    if (this.options.rules && typeof this.options.rules === 'object') {
+      const rulesDir = path.join(this.tmpDir, 'rules');
+      fs.mkdirSync(rulesDir, { recursive: true });
+      Object.keys(this.options.rules).forEach((name) => {
+        fs.writeFileSync(path.join(rulesDir, name), String(this.options.rules[name]), 'utf8');
+      });
+    }
 
     await this.mockLLM.start();
     const mockUrl = `http://127.0.0.1:${this.mockLLM.port}/v1`;

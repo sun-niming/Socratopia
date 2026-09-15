@@ -53,13 +53,13 @@ function rememberResponse(paths, answer) {
   resultsByConversation.delete(key);
   if (seed && seed.paths) resultsByConversation.delete(memoryKey(seed.paths));
   if (!seed || !String(answer || "").trim()) return null;
-  var candidate = memory.buildCandidate(seed.result, answer, seed.parsed);
+  var candidate = memory.buildCandidate(seed.result, answer, seed.parsed, paths);
   memory.saveLatest(paths, candidate);
   return memory.rememberLatest(paths, candidate);
 }
 
-function augmentEndClassRequest(request, body, paths) {
-  var augmented = memory.augmentEndClassBody(body, paths);
+function augmentEndClassRequest(request, body, paths, scope) {
+  var augmented = memory.augmentEndClassBody(body, paths, scope);
   if (!augmented) return request;
   var headers = new Headers(request.headers);
   headers.set("content-type", "application/json");
@@ -105,10 +105,11 @@ async function execute(options) {
   // "remember" intent in that path so a successful Close Reading can be
   // materialized exactly once after the assistant response arrives.
   var memoryWorldDir = normalizeWorldDir(options.worldDir || (options.filePath ? path.dirname(path.dirname(path.dirname(options.filePath))) : ""));
-  if (!pending && options.conversationId && memoryWorldDir && prepareMemoryRequest({ messages: options.messages }, { worldDir: memoryWorldDir, conversationId: options.conversationId })) {
+  var memoryPaths = { worldDir: memoryWorldDir, conversationId: options.conversationId, accountId: options.accountId || null, profileId: options.profileId || null, worldId: options.worldId || null, companionInstanceId: options.companionInstanceId || null };
+  if (!pending && options.conversationId && memoryWorldDir && prepareMemoryRequest({ messages: options.messages }, memoryPaths)) {
     pending = {
       commandText: String(options.commandText || ""),
-      key: memoryKey({ worldDir: memoryWorldDir, conversationId: options.conversationId }),
+      key: memoryKey(memoryPaths),
     };
   }
   try {
@@ -155,7 +156,7 @@ async function execute(options) {
       result: result,
       parsed: parsed,
       accountId: options.accountId || null,
-      paths: memoryWorldDir && options.conversationId ? { worldDir: memoryWorldDir, conversationId: options.conversationId } : null,
+      paths: memoryWorldDir && options.conversationId ? memoryPaths : null,
     });
     return { active: true, ok: true, parsed: parsed, prompt: prompt, metadata: meta };
   } catch (error) {
@@ -178,4 +179,6 @@ module.exports = {
   runWithMemoryRequest: runWithMemoryRequest,
   rememberResponse: rememberResponse,
   augmentEndClassRequest: augmentEndClassRequest,
+  loadPendingCandidates: memory.loadPendingCandidates,
+  formatEndClassCandidates: memory.formatEndClassCandidates,
 };
