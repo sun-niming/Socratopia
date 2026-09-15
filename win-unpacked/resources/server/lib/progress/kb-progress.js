@@ -4,9 +4,74 @@ var fs = require("fs");
 var path = require("path");
 var Resume = require("../resume/progress-resume.js");
 var localAuth = require("../local-request-auth.js");
+var ClassroomTask = (function () {
+  try { return require("./classroom-task.js"); } catch (e) { return null; }
+})();
 
 var MARKER_OPEN = "<!-- kbProgress:";
 var MARKER_RE = /<!--\s*kbProgress\s*:(\{[\s\S]*?\})\s*-->/g;
+var pageModeNotices = new Set();
+var kbUnavailableWarnings = new Set();
+var pageWindowCompleteObservations = new Set();
+
+// C3 stage 2 gate (default OFF). Stage 1, shipped, records the model-reported
+// page for textbooks with no concept-card queue so positioning and delta logic
+// have a real anchor; "this window is finished" still requires a knowledge base.
+// Stage 2 would accept a page-only windowComplete once the taught page reaches
+// the end of the loaded window, which lets those textbooks pass the
+// pendingAdvance verification. Flip to true only after the observation logs
+// below show the reported pages are trustworthy. See
+// AUTO_ADVANCE_WINDOW_REPAIR_CHANGELOG.md.
+var PAGE_LEVEL_WINDOW_COMPLETE_ENABLED = false;
+
+function warnOnce(bucket, key, message, detail) {
+  if (bucket.has(key)) return;
+  bucket.add(key);
+  if (bucket.size > 500) bucket.clear();
+  console.warn(message, detail);
+}
+
+// C3 stage 1: no usable concept-card queue (never built, or build not done)
+// switches to page-level progress instead of dropping every marker.
+function warnPageOnlyMode(textbookId, conversationId, mode) {
+  warnOnce(pageModeNotices, String(textbookId || "") + "\u001f" + String(conversationId || ""),
+    "[kb-progress][C3] 教材没有可用的概念卡队列，已切换为页级进度模式（只记录位置，不判定窗口完成）", {
+      textbookId: textbookId,
+      conversationId: conversationId,
+      mode: mode,
+      cause: "loadQueue 找不到可用的 knowledge_base（未构建，或 build_status.state !== done）",
+      effect: "lastTaughtPage / currentPage 现在可以提交，窗口定位头会显示真实页码；windowComplete 仍为 false",
+      stage2: "阶段二（默认关闭）才允许 lastTaughtPage >= 窗口末页时提交 windowComplete；启用前先看观测日志",
+    });
+}
+
+// Data exists but cannot be used: a real failure, keep rejecting loudly.
+function warnKbUnavailable(textbookId, conversationId) {
+  warnOnce(kbUnavailableWarnings, String(textbookId || "") + "\u001f" + String(conversationId || ""),
+    "[kb-progress] 知识库数据存在但不可用（empty_queue / kb_broken）：进度标记继续拒签", {
+      textbookId: textbookId,
+      conversationId: conversationId,
+      cause: "knowledge_base/ 目录存在，但 index.json / teaching_map.json 读不出来，或卡片全部对不上（loadQueue 判定 kb_broken）",
+      background: "这是知识库构建或蒸馏损坏，不是「从未构建」；按页级降级会掩盖真实故障，因此保持拒签",
+      harm: "该教材的 lastTaughtPage / windowComplete 无法提交，PDF 的 pendingAdvance 无法通过验证",
+      workaround: "重建知识库；期间可依赖显式跳页（/api/jump-page）与窗口定位头",
+    });
+}
+
+// Stage 2 observation: the model claims it finished the whole loaded window.
+// Logged once per (textbook, conversation, range) so the decision to enable
+// stage 2 has data instead of guesswork.
+function notePageWindowCompleteCandidate(textbookId, conversationId, loadedRange) {
+  loadedRange = loadedRange || {};
+  var range = String(loadedRange.startPage) + "-" + String(loadedRange.endPage);
+  warnOnce(pageWindowCompleteObservations, String(textbookId || "") + "\u001f" + String(conversationId || "") + "\u001f" + range,
+    "[kb-progress][C3] 页级进度已讲到窗口末页（阶段二未启用，仅观测）", {
+      textbookId: textbookId,
+      conversationId: conversationId,
+      loadedRange: range,
+      meaning: "若启用 PAGE_LEVEL_WINDOW_COMPLETE_ENABLED，本轮即可提交 windowComplete 并通过 pendingAdvance 验证",
+    });
+}
 
 function normalizePage(value) {
   var page = Number(value);
@@ -159,15 +224,22 @@ function createStreamStripper() {
   };
 }
 
+// mode:
+//   "kb"        — a usable concept-card queue was built
+//   "page_only" — no knowledge base was ever built (or the build is not done);
+//                 page-level progress is legitimate, see validatePageMarker
+//   "kb_broken" — knowledge-base data exists but cannot be used; keep rejecting
 function loadQueue(textbookDir) {
   var kbDir = path.join(String(textbookDir || ""), "knowledge_base");
   var status = readJson(path.join(kbDir, "build_status.json"));
   if (status && (status.state !== "done" || status.activationEligible === false)) {
-    return { queue: [], cardMap: {}, teachingMap: null };
+    return { mode: "page_only", queue: [], cardMap: {}, teachingMap: null };
   }
   var teachingMap = readJson(path.join(kbDir, "teaching_map.json"));
   var index = readJson(path.join(kbDir, "index.json"));
-  if (!teachingMap || !index) return { queue: [], cardMap: {}, teachingMap: teachingMap };
+  if (!teachingMap || !index) {
+    return { mode: status && status.state === "done" ? "kb_broken" : "page_only", queue: [], cardMap: {}, teachingMap: teachingMap };
+  }
   var summaries = Array.isArray(index.cards) ? index.cards : [];
   var cardMap = {};
   summaries.forEach(function (summary) {
@@ -208,7 +280,7 @@ function loadQueue(textbookDir) {
       globalPhase++;
     });
   });
-  return { queue: queue, cardMap: cardMap, teachingMap: teachingMap };
+  return { mode: queue.length ? "kb" : "kb_broken", queue: queue, cardMap: cardMap, teachingMap: teachingMap };
 }
 
 function queueAliases(queue) {
@@ -239,6 +311,10 @@ function initialQueueIndex(queue, state, loadedRange) {
   var aliases = queueAliases(queue);
   var loadedStart = normalizePage(loadedRange && loadedRange.startPage);
   var loadedEnd = normalizePage(loadedRange && loadedRange.endPage);
+  if (state.nextConceptId && aliases[String(state.nextConceptId)] !== undefined) {
+    var deferredIndex = aliases[String(state.nextConceptId)];
+    if (!loadedStart || !loadedEnd || entryIntersectsRange(queue[deferredIndex], loadedStart, loadedEnd)) return deferredIndex;
+  }
   if (state.activeConceptId && aliases[String(state.activeConceptId)] !== undefined) {
     var activeIndex = aliases[String(state.activeConceptId)];
     if (!loadedStart || !loadedEnd || entryIntersectsRange(queue[activeIndex], loadedStart, loadedEnd)) return activeIndex;
@@ -275,16 +351,37 @@ function loadedCursor(range, previous) {
   };
 }
 
-function prepareProgressContext(paths, overrideRange) {
+function prepareProgressContext(paths, overrideRange, opts) {
+  opts = opts || {};
   if (!paths || !paths.textbookDir) return null;
   var loaded = loadQueue(paths.textbookDir);
   var queue = loaded.queue;
   var state = Resume.readState(paths.textbookDir) || {};
   var range = resolveLoadedRange(paths, state, overrideRange);
-  if (!range || !queue.length) return { state: state, loadedRange: range, queue: queue, currentIndex: null, visible: [] };
+  if (!range || !queue.length) return { progressMode: loaded.mode, state: state, loadedRange: range, queue: queue, currentIndex: null, visible: [], exerciseMode: !!opts.exerciseMode };
+
+  if (opts.exerciseMode) {
+    // Exercise training (2026-09-13): the learner's exercise queue, not the
+    // concept queue, decides the teaching direction. The KB stays searchable
+    // as evidence for the current exercise, so this path is read-only: no
+    // rebase, no check-counter reset, and no forced next card.
+    var exerciseIndex = initialQueueIndex(queue, state, range);
+    return {
+      progressMode: loaded.mode,
+      state: state,
+      loadedRange: range,
+      queue: queue,
+      currentIndex: null,
+      activeConceptId: null,
+      visible: exerciseIndex === null ? [] : [queue[exerciseIndex]],
+      nextConceptId: null,
+      forcedFrom: null,
+      exerciseMode: true,
+    };
+  }
 
   var currentIndex = initialQueueIndex(queue, state, range);
-  if (currentIndex === null) return { state: state, loadedRange: range, queue: queue, currentIndex: null, visible: [] };
+  if (currentIndex === null) return { progressMode: loaded.mode, state: state, loadedRange: range, queue: queue, currentIndex: null, visible: [], exerciseMode: false };
   var current = queue[currentIndex];
   var aliases = queueAliases(queue);
   var oldActiveIndex = state.activeConceptId ? aliases[String(state.activeConceptId)] : undefined;
@@ -309,6 +406,8 @@ function prepareProgressContext(paths, overrideRange) {
       sourceConversationId: paths.conversationId,
       lessonStartPage: sameLesson ? state.lessonStartPage : range.startPage,
       activeConceptId: needsRebase ? current.conceptId : state.activeConceptId,
+      nextConceptId: needsRebase ? null : state.nextConceptId,
+      windowComplete: needsRebase ? false : state.windowComplete,
       loadedCursor: loadedCursor(range, cursorChanged ? null : cursor),
       activeConceptCheckId: needsRebase ? current.conceptId : state.activeConceptCheckId,
       activeConceptCheckCount: needsRebase ? 0 : Number(state.activeConceptCheckCount || 0),
@@ -346,6 +445,10 @@ function prepareProgressContext(paths, overrideRange) {
       visible.push(queue[i]);
     }
   }
+  var nextConceptIndex = currentIndex === null ? null : currentIndex + visible.length;
+  var nextConcept = nextConceptIndex !== null && nextConceptIndex < queue.length &&
+    !entryIntersectsRange(queue[nextConceptIndex], range.startPage, range.endPage)
+    ? queue[nextConceptIndex] : null;
   return {
     state: state,
     loadedRange: range,
@@ -353,7 +456,10 @@ function prepareProgressContext(paths, overrideRange) {
     currentIndex: currentIndex,
     activeConceptId: current ? current.conceptId : null,
     visible: visible,
+    nextConceptId: nextConcept ? nextConcept.conceptId : null,
     forcedFrom: forcedFrom,
+    progressMode: loaded.mode,
+    exerciseMode: false,
   };
 }
 
@@ -371,7 +477,11 @@ function validateProgressMarker(marker, opts) {
   if (!textbookId || String(marker.textbookId || "") !== textbookId) return reject("textbook_mismatch");
   if (!conversationId || String(marker.sourceConversationId || "") !== conversationId) return reject("conversation_mismatch");
   if (!loadedStart || !loadedEnd || loadedEnd < loadedStart) return reject("invalid_loaded_range");
-  if (!queue.length) return reject("empty_queue");
+  if (!queue.length) {
+    if (opts.mode === "page_only") return validatePageMarker(marker, opts);
+    warnKbUnavailable(textbookId, conversationId);
+    return reject("empty_queue");
+  }
 
   var aliases = queueAliases(queue);
   var currentIndex = initialQueueIndex(queue, state, opts.loadedRange);
@@ -402,8 +512,6 @@ function validateProgressMarker(marker, opts) {
   if (activeIndex === undefined) return reject("unknown_active_concept");
   var expectedIndex = Math.min(queue.length - 1, currentIndex + novel.length);
   if (activeIndex !== currentIndex && activeIndex !== expectedIndex) return reject("non_contiguous_active_concept");
-  if (novel.length && activeIndex === currentIndex && currentIndex < queue.length - 1) return reject("completed_card_still_active");
-  if (!entryIntersectsRange(queue[activeIndex], loadedStart, loadedEnd)) return reject("active_concept_outside_loaded_range");
 
   var lastPage = normalizePage(marker.lastTaughtPage);
   if (!lastPage || lastPage < loadedStart || lastPage > loadedEnd) return reject("taught_page_outside_loaded_range");
@@ -412,16 +520,84 @@ function validateProgressMarker(marker, opts) {
       return reject("completed_concept_outside_loaded_range");
     }
   }
+  var lastLoadedIndex = currentIndex;
+  for (var li = currentIndex; li < queue.length; li++) {
+    if (entryIntersectsRange(queue[li], loadedStart, loadedEnd)) lastLoadedIndex = li;
+  }
+  var completedThroughIndex = novel.length ? currentIndex + novel.length - 1 : currentIndex - 1;
+  var windowComplete = novel.length > 0 && completedThroughIndex >= lastLoadedIndex;
+  var boundaryCompletion = windowComplete && activeIndex === completedThroughIndex && currentIndex < queue.length - 1;
+  if (novel.length && activeIndex === currentIndex && currentIndex < queue.length - 1 && !boundaryCompletion) {
+    return reject("completed_card_still_active");
+  }
+  var deferredNext = windowComplete &&
+    activeIndex === completedThroughIndex + 1 && activeIndex < queue.length &&
+    !entryIntersectsRange(queue[activeIndex], loadedStart, loadedEnd);
+  if (!entryIntersectsRange(queue[activeIndex], loadedStart, loadedEnd) && !deferredNext) {
+    return reject("active_concept_outside_loaded_range");
+  }
+  var effectiveActiveIndex = deferredNext ? completedThroughIndex : activeIndex;
+  var nextIndex = boundaryCompletion ? completedThroughIndex + 1 : deferredNext ? activeIndex : null;
 
   return {
     ok: true,
     reason: "accepted",
     currentIndex: currentIndex,
-    activeIndex: activeIndex,
-    activeConceptId: queue[activeIndex].conceptId,
+    activeIndex: effectiveActiveIndex,
+    activeConceptId: queue[effectiveActiveIndex].conceptId,
+    nextConceptId: nextIndex !== null && nextIndex < queue.length ? queue[nextIndex].conceptId : null,
     newlyCompletedConceptIds: novel.map(function (item) { return item.id; }),
     newlyCompletedTitles: novel.map(function (item) { return queue[item.index].title; }),
     lastTaughtPage: lastPage,
+    windowComplete: windowComplete,
+    textbookComplete: windowComplete && completedThroughIndex >= queue.length - 1,
+  };
+}
+
+// C3 stage 1: page-level marker for textbooks without a concept-card queue.
+// Concept fields in the marker (activeConceptId and friends, possibly left over
+// from earlier prompts) are ignored — they cannot be validated without a queue
+// and must not leak back into the concept state. Only the position is trusted.
+function validatePageMarker(marker, opts) {
+  opts = opts || {};
+  var textbookId = String(opts.textbookId || "");
+  var conversationId = String(opts.conversationId || "");
+  var state = opts.state || {};
+  var loadedStart = normalizePage(opts.loadedRange && opts.loadedRange.startPage);
+  var loadedEnd = normalizePage(opts.loadedRange && opts.loadedRange.endPage);
+  function reject(reason) { return { ok: false, reason: reason, progressMode: "page_only" }; }
+
+  if (!marker || typeof marker !== "object") return reject("missing_marker");
+  if (!textbookId || String(marker.textbookId || "") !== textbookId) return reject("textbook_mismatch");
+  if (!conversationId || String(marker.sourceConversationId || "") !== conversationId) return reject("conversation_mismatch");
+  if (!loadedStart || !loadedEnd || loadedEnd < loadedStart) return reject("invalid_loaded_range");
+
+  var lastPage = normalizePage(marker.lastTaughtPage);
+  if (!lastPage || lastPage < loadedStart || lastPage > loadedEnd) return reject("taught_page_outside_loaded_range");
+
+  // Within one lesson window the reported position may not walk backwards; a
+  // moved window (explicit jump) resets the constraint.
+  var previousPage = String(state.sourceConversationId || "") === conversationId ? normalizePage(state.lastTaughtPage) : null;
+  if (previousPage && previousPage >= loadedStart && previousPage <= loadedEnd && lastPage < previousPage) {
+    return reject("taught_page_regressed");
+  }
+
+  var reachedWindowEnd = lastPage >= loadedEnd;
+  var windowComplete = reachedWindowEnd && opts.allowWindowComplete === true;
+  if (reachedWindowEnd && !windowComplete) notePageWindowCompleteCandidate(textbookId, conversationId, opts.loadedRange);
+
+  return {
+    ok: true,
+    reason: "accepted",
+    progressMode: "page_only",
+    activeConceptId: null,
+    nextConceptId: null,
+    activeIndex: 0,
+    newlyCompletedConceptIds: [],
+    newlyCompletedTitles: [],
+    lastTaughtPage: lastPage,
+    windowComplete: windowComplete,
+    textbookComplete: false,
   };
 }
 
@@ -430,29 +606,63 @@ function commitAssistantProgress(textbookDir, opts) {
   var marker = opts.marker || parseProgressMarker(opts.responseText);
   if (!marker) return { ok: false, reason: "missing_marker", unchanged: true };
   var loaded = loadQueue(textbookDir);
+  if (loaded.mode === "page_only") warnPageOnlyMode(opts.textbookId, opts.conversationId, loaded.mode);
   var state = Resume.readState(textbookDir) || {};
   var decision = validateProgressMarker(marker, {
     queue: loaded.queue,
+    mode: loaded.mode,
     state: state,
     textbookId: opts.textbookId,
     conversationId: opts.conversationId,
     loadedRange: opts.loadedRange,
+    allowWindowComplete: loaded.mode === "page_only" && PAGE_LEVEL_WINDOW_COMPLETE_ENABLED,
   });
   if (!decision.ok) return Object.assign({ unchanged: true }, decision);
+  if (opts.write === false) return Object.assign({ unchanged: true, validatedOnly: true }, decision);
   var now = new Date().toISOString();
   var sameLesson = String(state.sourceConversationId || "") === String(opts.conversationId || "");
   var lessonStartPage = sameLesson
     ? normalizePage(state.lessonStartPage) || normalizePage(opts.loadedRange && opts.loadedRange.startPage) || decision.lastTaughtPage
     : normalizePage(opts.loadedRange && opts.loadedRange.startPage) || decision.lastTaughtPage;
+  var loadedStartPage = normalizePage(opts.loadedRange && opts.loadedRange.startPage) || decision.lastTaughtPage;
+  var loadedEndPage = normalizePage(opts.loadedRange && opts.loadedRange.endPage) || decision.lastTaughtPage;
+  if (decision.progressMode === "page_only") {
+    var pageState = Resume.writeState(textbookDir, {
+      textbookId: String(opts.textbookId || ""),
+      sourceConversationId: String(opts.conversationId || ""),
+      progressMode: "page_only",
+      lessonStartPage: lessonStartPage,
+      lastTaughtPage: decision.lastTaughtPage,
+      currentPage: decision.lastTaughtPage,
+      windowComplete: decision.windowComplete,
+      taughtCursor: {
+        chunkId: "page-" + decision.lastTaughtPage,
+        ordinal: decision.lastTaughtPage,
+        startPage: decision.lastTaughtPage,
+        endPage: decision.lastTaughtPage,
+        status: "active",
+        ready: true,
+        committedAt: now,
+        reason: "validated_page_marker",
+      },
+      loadedCursor: loadedCursor({ startPage: loadedStartPage, endPage: loadedEndPage }, state.loadedCursor),
+    });
+    if (!pageState) return { ok: false, reason: "state_write_failed", unchanged: true };
+    return Object.assign({ state: pageState }, decision);
+  }
   var next = Resume.writeState(textbookDir, {
     textbookId: String(opts.textbookId || ""),
     sourceConversationId: String(opts.conversationId || ""),
+    progressMode: "kb",
     lessonStartPage: lessonStartPage,
     activeConceptId: decision.activeConceptId,
+    nextConceptId: decision.nextConceptId,
     completedConceptIds: decision.newlyCompletedConceptIds,
     completedTitles: decision.newlyCompletedTitles,
     lastTaughtPage: decision.lastTaughtPage,
     currentPage: decision.lastTaughtPage,
+    windowComplete: decision.windowComplete,
+    textbookComplete: decision.textbookComplete,
     loadedCursor: loadedCursor({
       startPage: normalizePage(opts.loadedRange && opts.loadedRange.startPage) || decision.lastTaughtPage,
       endPage: normalizePage(opts.loadedRange && opts.loadedRange.endPage) || decision.lastTaughtPage,
@@ -472,12 +682,85 @@ function commitAssistantProgress(textbookDir, opts) {
   return Object.assign({ state: next }, decision);
 }
 
-function markerDirective(opts) {
+// Exercise training (2026-09-13): the exercise marker carries a page and an
+// exercise id, never a concept completion. KB card state is left untouched, so
+// answering one exercise question cannot mark an unrelated card as learned.
+// Position may revisit earlier exercises inside the window, so this path does
+// not enforce the page-monotonic guard used for lecture progress.
+function commitExerciseProgress(textbookDir, opts) {
   opts = opts || {};
-  var visible = (opts.visibleConceptIds || []).map(String).filter(Boolean).slice(0, 3);
-  var active = String(opts.activeConceptId || visible[0] || "");
+  var marker = opts.marker || parseProgressMarker(opts.responseText);
+  var exerciseId = marker ? String(marker.exerciseId || "").trim() : "";
+  var exerciseComplete = !!(marker && marker.exerciseComplete === true);
+  if (!marker) return { ok: false, reason: "missing_marker", unchanged: true, exerciseMode: true };
   var textbookId = String(opts.textbookId || "");
   var conversationId = String(opts.conversationId || "");
+  if (!textbookId || String(marker.textbookId || "") !== textbookId) {
+    return { ok: false, reason: "textbook_mismatch", unchanged: true, exerciseMode: true };
+  }
+  if (!conversationId || String(marker.sourceConversationId || "") !== conversationId) {
+    return { ok: false, reason: "conversation_mismatch", unchanged: true, exerciseMode: true };
+  }
+  var loadedStart = normalizePage(opts.loadedRange && opts.loadedRange.startPage);
+  var loadedEnd = normalizePage(opts.loadedRange && opts.loadedRange.endPage);
+  if (!loadedStart || !loadedEnd || loadedEnd < loadedStart) {
+    return { ok: false, reason: "invalid_loaded_range", unchanged: true, exerciseMode: true };
+  }
+  var lastPage = normalizePage(marker.lastTaughtPage);
+  if (!lastPage || lastPage < loadedStart || lastPage > loadedEnd) {
+    return { ok: false, reason: "taught_page_outside_loaded_range", unchanged: true, exerciseMode: true };
+  }
+  var decision = {
+    ok: true,
+    reason: "accepted",
+    exerciseMode: true,
+    exerciseId: exerciseId,
+    exerciseComplete: exerciseComplete,
+    newlyCompletedConceptIds: [],
+    newlyCompletedTitles: [],
+    lastTaughtPage: lastPage,
+    windowComplete: false,
+    textbookComplete: false,
+  };
+  if (opts.write === false) return Object.assign({ unchanged: true, validatedOnly: true }, decision);
+  var state = Resume.readState(textbookDir) || {};
+  var next = Resume.writeState(textbookDir, {
+    textbookId: textbookId,
+    sourceConversationId: conversationId,
+    lastTaughtPage: lastPage,
+    currentPage: lastPage,
+    loadedCursor: loadedCursor({ startPage: loadedStart, endPage: loadedEnd }, state.loadedCursor),
+    taughtCursor: {
+      chunkId: "exercise-" + (exerciseId || "page-" + lastPage),
+      ordinal: lastPage,
+      startPage: lastPage,
+      endPage: lastPage,
+      status: "active",
+      ready: true,
+      committedAt: new Date().toISOString(),
+      reason: "exercise_training_marker",
+    },
+  });
+  if (!next) return { ok: false, reason: "state_write_failed", unchanged: true, exerciseMode: true };
+  return Object.assign({ state: next }, decision);
+}
+
+function markerDirective(opts) {
+  opts = opts || {};
+  var textbookId = String(opts.textbookId || "");
+  var conversationId = String(opts.conversationId || "");
+  if (opts.progressMode === "page_only") {
+    return "This textbook has no concept-card knowledge base, so there is no concept queue to follow. " +
+      "At the very end of every teaching reply, append exactly one hidden progress line: <!-- kbProgress:{\"schemaVersion\":1,\"textbookId\":\"" +
+      textbookId + "\",\"sourceConversationId\":\"" + conversationId +
+      "\",\"lastTaughtPage\":ACTUAL_PAGE_NUMBER,\"windowComplete\":true|false} -->. " +
+      "lastTaughtPage must be the last page you actually taught and must fall inside the loaded window. " +
+      "Set windowComplete to true only when you have finished all the content in the current window; otherwise use false. " +
+      "Do not invent concept ids or report a page outside the loaded window.";
+  }
+  var visible = (opts.visibleConceptIds || []).map(String).filter(Boolean).slice(0, 3);
+  var active = String(opts.activeConceptId || visible[0] || "");
+  var nextConcept = opts.nextConceptId ? JSON.stringify(String(opts.nextConceptId)) : "null";
   var completedTemplate = opts.forcedFrom ? JSON.stringify([String(opts.forcedFrom.conceptId)]) : "[]";
   var forced = opts.forcedFrom
     ? "TWO_CHECK_LIMIT_REACHED: briefly summarize \"" + String(opts.forcedFrom.title || opts.forcedFrom.conceptId) +
@@ -487,23 +770,30 @@ function markerDirective(opts) {
   return forced + "At the very end of every teaching reply, append exactly one hidden progress line: <!-- kbProgress:{\"schemaVersion\":1,\"textbookId\":\"" +
     textbookId + "\",\"sourceConversationId\":\"" + conversationId +
     "\",\"activeConceptId\":\"" + active +
-    "\",\"newlyCompletedConceptIds\":" + completedTemplate + ",\"lastTaughtPage\":ACTUAL_PAGE_NUMBER} -->. " +
+    "\",\"nextConceptId\":" + nextConcept + ",\"newlyCompletedConceptIds\":" + completedTemplate + ",\"lastTaughtPage\":ACTUAL_PAGE_NUMBER} -->. " +
     "The allowed contiguous concept order for this turn is [" + visible.join(", ") + "]. " +
     "activeConceptId must remain the current concept, or move only to the immediately following concept after listing the completed contiguous prefix in newlyCompletedConceptIds. " +
+    (opts.nextConceptId ? "If the current concept is the last loaded concept, complete it once, keep activeConceptId at \"" + active + "\", set nextConceptId to \"" + String(opts.nextConceptId) + "\", and do not claim the next concept was taught; the server will relocate it after the next window is loaded. " : "") +
     "Complete at most three concepts. Never skip, reverse, invent an id, or report a page outside the loaded window.";
 }
 
-function requestWithProgressDirective(request, body, paths, prepared) {
+function requestWithProgressDirective(request, body, paths, prepared, classroomTask) {
   if (!request || !body || !paths || !Array.isArray(body.messages) || !body.messages.length) return request;
   prepared = prepared || prepareProgressContext(paths);
   var visible = prepared && prepared.visible || [];
-  var directive = markerDirective({
-    textbookId: paths.textbookId,
-    conversationId: paths.conversationId,
-    activeConceptId: prepared && prepared.activeConceptId || "",
-    visibleConceptIds: visible.map(function (entry) { return entry.conceptId; }),
-    forcedFrom: prepared && prepared.forcedFrom,
-  });
+  if (prepared && prepared.progressMode === "page_only") warnPageOnlyMode(paths.textbookId, paths.conversationId, "page_only");
+  var exerciseMode = !!(ClassroomTask && classroomTask && classroomTask.mode === ClassroomTask.MODE_EXERCISE);
+  var directive = exerciseMode
+    ? ClassroomTask.buildExerciseDirective(classroomTask, { textbookId: paths.textbookId, conversationId: paths.conversationId })
+    : markerDirective({
+      progressMode: prepared && prepared.progressMode,
+      textbookId: paths.textbookId,
+      conversationId: paths.conversationId,
+      activeConceptId: prepared && prepared.activeConceptId || "",
+      visibleConceptIds: visible.map(function (entry) { return entry.conceptId; }),
+      nextConceptId: prepared && prepared.nextConceptId || null,
+      forcedFrom: prepared && prepared.forcedFrom,
+    });
   var augmentedMessages = body.messages.map(function (message) {
     return Object.assign({}, message);
   });
@@ -526,9 +816,69 @@ function requestWithProgressDirective(request, body, paths, prepared) {
   });
 }
 
-function responseHasCheckQuestion(text) {
-  var visible = stripProgressMarkers(text).trim();
+var SHORT_ANSWER_RE = /^(?:嗯+|哦+|噢+|好|好的|行|可以|懂了|明白了?|知道了|收到|谢谢|继续|接着|不会|不懂|不会做|不知道|不清楚|不明白|没听懂|没思路|不确定|想不起来|忘记了?|太难了|没想法|没有思路|ok|okay|yes|yep|no|thanks)[\s。，,.!！?？~～…]*$/i;
+
+function isSubstantiveAnswer(value) {
+  var trimmed = String(value == null ? "" : value).trim();
+  if (!trimmed) return false;
+  var shortAck = ClassroomTask && typeof ClassroomTask.isShortAck === "function"
+    ? ClassroomTask.isShortAck(trimmed)
+    : SHORT_ANSWER_RE.test(trimmed);
+  if (shortAck) return false;
+  var stripped = trimmed.replace(/[\s。，,.!！?？~～…、；;:：'"`*_\-—–]/g, "");
+  return stripped.length >= 2;
+}
+
+function endsWithCheckQuestion(value) {
+  var visible = stripProgressMarkers(value).trim();
   return /[?？][\s*_`\])】）.!。]*$/.test(visible);
+}
+
+// The tail of the reply around the closing question: a long explanation must
+// not smuggle the concept name in from a paragraph the question is unrelated to.
+function finalQuestionTail(value) {
+  var visible = stripProgressMarkers(value).trim();
+  function tailFrom(cut) {
+    return cut >= 0 ? visible.slice(cut + 1) : visible;
+  }
+  var cut = Math.max(
+    visible.lastIndexOf("。"), visible.lastIndexOf("！"), visible.lastIndexOf("!"),
+    visible.lastIndexOf("？"), visible.lastIndexOf("?"), visible.lastIndexOf("\n")
+  );
+  var tail = tailFrom(cut);
+  if (tail.replace(/[\s?？。.!！*_`\])】）]/g, "").length < 2) {
+    // A short tail like "分几步？" carries no concept name: widen to the
+    // previous sentence, excluding the closing question mark itself.
+    var before = visible.slice(0, Math.max(0, cut));
+    var cut2 = Math.max(before.lastIndexOf("。"), before.lastIndexOf("\n"), before.lastIndexOf("？"), before.lastIndexOf("?"));
+    tail = tailFrom(cut2);
+  }
+  return tail.slice(-240);
+}
+
+// Evidence that a real concept check happened. A trailing question mark alone is
+// NOT evidence — on 2026-09-13 that inference capped a concept the exercise turn
+// never touched and forced the model onto the next card mid-exercise. A check
+// counts only when the closing question is bound to this concept (its id, card
+// id or title appears in the question tail) AND the learner actually answered it.
+function checkEvidence(opts) {
+  opts = opts || {};
+  var visible = stripProgressMarkers(opts.responseText).trim();
+  var question = endsWithCheckQuestion(visible);
+  var tail = question ? finalQuestionTail(visible) : "";
+  var haystack = tail.toLowerCase();
+  var aliases = [opts.conceptId, opts.cardId, opts.title].map(function (value) {
+    return String(value == null ? "" : value).trim();
+  }).filter(function (value) { return value.length >= 2; });
+  var bound = question && aliases.some(function (alias) { return haystack.indexOf(alias.toLowerCase()) >= 0; });
+  var answered = isSubstantiveAnswer(opts.userText);
+  return {
+    question: question,
+    conceptBound: bound,
+    studentAnswered: answered,
+    counted: bound && answered,
+    tail: tail,
+  };
 }
 
 function recordConceptCheck(textbookDir, opts) {
@@ -546,7 +896,14 @@ function recordConceptCheck(textbookDir, opts) {
   var previous = String(state.activeConceptCheckId || "") === expected
     ? Number(state.activeConceptCheckCount || 0)
     : 0;
-  var nextCount = responseHasCheckQuestion(opts.responseText) ? Math.min(2, previous + 1) : previous;
+  var evidence = opts.evidence || checkEvidence({
+    responseText: opts.responseText,
+    userText: opts.userText,
+    conceptId: expected,
+    cardId: opts.cardId,
+    title: opts.conceptTitle,
+  });
+  var nextCount = evidence && evidence.counted ? Math.min(2, previous + 1) : previous;
   return Resume.writeState(textbookDir, {
     activeConceptCheckId: expected,
     activeConceptCheckCount: nextCount,
@@ -727,6 +1084,14 @@ function isEndClassRequest(body) {
   return /^\[(?:下课|下課|结束课程|結束課程|end\s*(?:class|lesson))\]/i.test(content) || /^\/end[-_ ]?(?:class|lesson)(?:\s|$)/i.test(content);
 }
 
+function lastUserText(body) {
+  var messages = body && Array.isArray(body.messages) ? body.messages : [];
+  for (var i = messages.length - 1; i >= 0; i--) {
+    if (messages[i] && messages[i].role === "user") return String(messages[i].content == null ? "" : messages[i].content);
+  }
+  return "";
+}
+
 function shouldTrackTeachingProgress(body, endClass) {
   body = body || {};
   var messages = Array.isArray(body.messages) ? body.messages : [];
@@ -741,7 +1106,21 @@ function atomicWrite(file, content) {
   fs.mkdirSync(path.dirname(file), { recursive: true });
   var tmp = file + ".tmp";
   fs.writeFileSync(tmp, content, "utf-8");
-  fs.renameSync(tmp, file);
+  for (var attempt = 0; ; attempt += 1) {
+    try {
+      fs.renameSync(tmp, file);
+      return;
+    } catch (error) {
+      var code = error && error.code;
+      // Windows: renaming onto a file that another handle currently has open
+      // throws EPERM/EACCES/EBUSY. progress_state.json is also written by the
+      // auto-advance runtime, so this contention is expected; retry briefly
+      // instead of losing the post-response progress save.
+      if (code !== "EPERM" && code !== "EACCES" && code !== "EBUSY") throw error;
+      if (attempt >= 9) throw error;
+      Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, 20 * (attempt + 1));
+    }
+  }
 }
 
 function syncTextbookCurrentPage(paths, page) {
@@ -852,6 +1231,7 @@ function transformSseResponse(response, context) {
   var pending = "";
   var pendingDone = null;
   var sawError = false;
+  var upstreamComplete = false;
   var firstLoadedRange = null;
   var latestLoadedRange = null;
 
@@ -900,6 +1280,7 @@ function transformSseResponse(response, context) {
         }
         var flushed = stripper.flush();
         if (flushed) controller.enqueue(encoder.encode(eventText({ type: "text", text: flushed })));
+        upstreamComplete = true;
 
         if (!sawError) {
           if (context.closeReadingMemory && context.paths && global.__CLOSE_READING__ &&
@@ -912,14 +1293,52 @@ function transformSseResponse(response, context) {
           } else if (context.paths && context.trackProgress !== false) {
             var meta = context.conversationMeta || loadConversationMeta(context.paths);
             var binding = validateTextbookBinding(context.body.textbookId, context.paths.textbookId, meta);
-            if (binding.ok) {
+            if (binding.ok && context.exerciseMode && ClassroomTask) {
+              // Exercise training: page position moves, the KB concept queue does
+              // not. Concept completions reported in this mode are ignored, and
+              // the learner's exercise queue advances only on an explicit
+              // completion report for the current exercise.
+              var exerciseState = Resume.readState(context.paths.textbookDir) || {};
+              var exerciseRange = firstLoadedRange || latestLoadedRange || context.progressContext && context.progressContext.loadedRange || exerciseState.loadedCursor;
+              var exerciseCommitted = commitExerciseProgress(context.paths.textbookDir, {
+                responseText: rawAssistant,
+                textbookId: context.paths.textbookId,
+                conversationId: context.paths.conversationId,
+                loadedRange: exerciseRange,
+              });
+              if (exerciseCommitted.ok) {
+                syncTextbookCurrentPage(context.paths, exerciseCommitted.lastTaughtPage);
+                context.classroomTask = ClassroomTask.commitResponse({
+                  paths: context.paths,
+                  task: context.classroomTask && context.classroomTask.task,
+                  responseText: rawAssistant,
+                });
+              } else if (exerciseCommitted.reason !== "missing_marker") {
+                console.warn("[classroom-task] exercise marker rejected:", exerciseCommitted.reason);
+              }
+            } else if (binding.ok) {
+              var authoritativeProgress = Number(context.body.advanceProtocolVersion) === 2 && global.__AUTO_ADVANCE__ && global.__AUTO_ADVANCE__.version === 2 && typeof global.__AUTO_ADVANCE__.commitTeachingProgress === "function";
               var existingState = Resume.readState(context.paths.textbookDir) || {};
-              var range = context.progressContext && context.progressContext.loadedRange || firstLoadedRange || latestLoadedRange || existingState.loadedCursor;
+              var range = firstLoadedRange || latestLoadedRange || context.progressContext && context.progressContext.loadedRange || existingState.loadedCursor;
+              if (authoritativeProgress && typeof global.__AUTO_ADVANCE__.readSnapshot === "function") {
+                try {
+                  var authoritativeSnapshot = await global.__AUTO_ADVANCE__.readSnapshot({
+                    profileId: context.body.profileId,
+                    worldId: context.body.worldId,
+                    textbookId: context.paths.textbookId,
+                    conversationId: context.paths.conversationId,
+                  });
+                  if (authoritativeSnapshot && authoritativeSnapshot.readingRange) range = authoritativeSnapshot.readingRange;
+                } catch (snapshotError) {
+                  console.warn("[kb-progress] authoritative range refresh failed:", snapshotError && snapshotError.code || snapshotError && snapshotError.message || snapshotError);
+                }
+              }
               var committed = commitAssistantProgress(context.paths.textbookDir, {
                 responseText: rawAssistant,
                 textbookId: context.paths.textbookId,
                 conversationId: context.paths.conversationId,
                 loadedRange: range,
+                write: !authoritativeProgress,
               });
               var forcedRecovered = false;
               var rawMarker = parseProgressMarker(rawAssistant);
@@ -932,6 +1351,7 @@ function transformSseResponse(response, context) {
                     textbookId: context.paths.textbookId,
                     conversationId: context.paths.conversationId,
                     loadedRange: range,
+                    write: !authoritativeProgress,
                   });
                   if (committed.ok) {
                     forcedRecovered = true;
@@ -939,12 +1359,34 @@ function transformSseResponse(response, context) {
                   }
                 }
               }
-              if (committed.ok) syncTextbookCurrentPage(context.paths, committed.lastTaughtPage);
+              if (committed.ok && authoritativeProgress) {
+                await global.__AUTO_ADVANCE__.commitTeachingProgress({
+                  profileId: context.body.profileId,
+                  worldId: context.body.worldId,
+                  textbookId: context.paths.textbookId,
+                  conversationId: context.paths.conversationId,
+                  clientTurnId: context.body.clientTurnId,
+                  progressMode: committed.progressMode || "kb",
+                  activeConceptId: committed.activeConceptId,
+                  activeIndex: committed.activeIndex,
+                  nextConceptId: committed.nextConceptId,
+                  newlyCompletedConceptIds: committed.newlyCompletedConceptIds,
+                  newlyCompletedTitles: committed.newlyCompletedTitles,
+                  lastTaughtPage: committed.lastTaughtPage,
+                  loadedRange: range,
+                  windowComplete: committed.windowComplete,
+                  textbookComplete: committed.textbookComplete,
+                });
+              } else if (committed.ok) syncTextbookCurrentPage(context.paths, committed.lastTaughtPage);
               else if (committed.reason !== "missing_marker") console.warn("[kb-progress] marker rejected:", committed.reason);
               if (!context.progressContext || !context.progressContext.forcedFrom || committed.ok) {
+                var progressEntry = context.progressContext && context.progressContext.visible && context.progressContext.visible[0] || null;
                 recordConceptCheck(context.paths.textbookDir, {
                   expectedConceptId: context.progressContext && context.progressContext.activeConceptId,
                   responseText: forcedRecovered ? "" : rawAssistant,
+                  userText: lastUserText(context.body),
+                  cardId: progressEntry && progressEntry.cardId,
+                  conceptTitle: progressEntry && progressEntry.title,
                 });
               }
             }
@@ -953,7 +1395,22 @@ function transformSseResponse(response, context) {
         if (pendingDone) controller.enqueue(encoder.encode(eventText(pendingDone)));
         controller.close();
       } catch (error) {
-        controller.error(error);
+        if (!upstreamComplete) {
+          controller.error(error);
+          return;
+        }
+        // Progress is post-processing; the answer has already been delivered.
+        // Erroring the stream here discards queued text and appears as a network failure.
+        console.warn("[kb-progress] post-response progress save failed:", error && error.code || "unknown", error && error.message);
+        try {
+          controller.enqueue(encoder.encode(eventText({
+            type: "warning",
+            code: "PROGRESS_SAVE_FAILED",
+            message: "回答已生成，但学习进度暂未同步。",
+          })));
+          if (pendingDone) controller.enqueue(encoder.encode(eventText(pendingDone)));
+          controller.close();
+        } catch (_) { /* The client may have cancelled after receiving the answer. */ }
       }
     },
     cancel(reason) { try { return reader.cancel(reason); } catch (e) {} },
@@ -1014,8 +1471,15 @@ function installRouteWrapper(exported) {
         }
       }
       trackProgress = !!(trackProgress && textbookBinding && textbookBinding.ok);
-      var progressContext = trackProgress && paths ? prepareProgressContext(paths) : null;
-      var context = { body: body, paths: paths, endClass: endClass, trackProgress: trackProgress, closeReadingMemory: closeReadingMemory, conversationMeta: conversationMeta, progressContext: progressContext };
+      // The classroom task (lecture vs. chapter-end exercise practice) is read
+      // before progress planning: in exercise mode the KB queue must not choose
+      // the teaching direction for this turn.
+      var classroomTask = trackProgress && paths && ClassroomTask
+        ? ClassroomTask.resolveForRequest({ paths: paths, body: body })
+        : null;
+      var exerciseMode = !!(classroomTask && classroomTask.task && classroomTask.task.mode === ClassroomTask.MODE_EXERCISE);
+      var progressContext = trackProgress && paths ? prepareProgressContext(paths, undefined, { exerciseMode: exerciseMode }) : null;
+      var context = { body: body, paths: paths, endClass: endClass, trackProgress: trackProgress, closeReadingMemory: closeReadingMemory, conversationMeta: conversationMeta, progressContext: progressContext, classroomTask: classroomTask, exerciseMode: exerciseMode };
       if (endClass && paths) {
         context.preState = Resume.readState(paths.textbookDir) || null;
         try { context.previousProgress = fs.readFileSync(path.join(paths.textbookDir, "progress.md"), "utf-8"); } catch (e) { context.previousProgress = ""; }
@@ -1025,7 +1489,7 @@ function installRouteWrapper(exported) {
         try { requestForRoute = global.__CLOSE_READING__.augmentEndClassRequest(requestForRoute, body, paths); }
         catch (closeReadingMemoryError) { console.warn("[close-reading] memory candidate injection failed:", closeReadingMemoryError && closeReadingMemoryError.message); }
       }
-      if (trackProgress && paths) requestForRoute = requestWithProgressDirective(requestForRoute, body, paths, progressContext);
+      if (trackProgress && paths) requestForRoute = requestWithProgressDirective(requestForRoute, body, paths, progressContext, classroomTask && classroomTask.task);
       var invokeRoute = function () { return originalPost.call(this, requestForRoute, routeContext); }.bind(this);
       var response = closeReadingMemory && global.__CLOSE_READING__ && typeof global.__CLOSE_READING__.runWithMemoryRequest === "function"
         ? await global.__CLOSE_READING__.runWithMemoryRequest(closeReadingMemory, invokeRoute)
@@ -1065,11 +1529,16 @@ module.exports = {
   initialQueueIndex: initialQueueIndex,
   prepareProgressContext: prepareProgressContext,
   validateProgressMarker: validateProgressMarker,
+  validatePageMarker: validatePageMarker,
   commitAssistantProgress: commitAssistantProgress,
   markerDirective: markerDirective,
   requestWithProgressDirective: requestWithProgressDirective,
-  responseHasCheckQuestion: responseHasCheckQuestion,
+  endsWithCheckQuestion: endsWithCheckQuestion,
+  finalQuestionTail: finalQuestionTail,
+  isSubstantiveAnswer: isSubstantiveAnswer,
+  checkEvidence: checkEvidence,
   recordConceptCheck: recordConceptCheck,
+  commitExerciseProgress: commitExerciseProgress,
   isRecoverableForcedReason: isRecoverableForcedReason,
   isRecoverableForcedMarker: isRecoverableForcedMarker,
   validateTextbookBinding: validateTextbookBinding,

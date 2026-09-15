@@ -25,14 +25,33 @@ function latestKey(paths) {
   return [paths && paths.worldDir || "", paths && paths.conversationId || ""].join("|");
 }
 
+function normalizeScope(paths) {
+  var source = paths || {};
+  var scope = {};
+  ["accountId", "profileId", "worldId", "conversationId", "companionInstanceId"].forEach(function (key) {
+    if (typeof source[key] === "string" && source[key]) scope[key] = source[key];
+  });
+  return scope;
+}
+
+function candidateMatchesScope(candidate, scope) {
+  if (!candidate || typeof candidate !== "object" || candidate.consumedByOperationId) return false;
+  var stored = candidate.scope || {};
+  return ["accountId", "profileId", "worldId", "conversationId", "companionInstanceId"].every(function (key) {
+    return !stored[key] || !scope[key] || stored[key] === scope[key];
+  });
+}
+
 function shortExcerpt(result) {
   var text = result.evidence || (result.pages || []).map(function (page) { return "PDF 第 " + page.page + " 页：" + page.text; }).join("\n");
   return Normalizer.normalizeText(text).replace(/<\/?PDF_EVIDENCE[^>]*>/g, "").trim().slice(0, 1200);
 }
 
-function buildCandidate(result, answer, command) {
+function buildCandidate(result, answer, command, paths) {
   var metadata = result.metadata || {};
   return {
+    schemaVersion: 1,
+    scope: normalizeScope(paths),
     createdAt: new Date().toISOString(),
     conclusion: Normalizer.normalizeText(answer).slice(0, 2400),
     excerpt: shortExcerpt(result),
@@ -70,8 +89,22 @@ function loadCandidates(paths) {
   return Array.isArray(value) ? value : [];
 }
 
-function augmentEndClassBody(body, paths) {
-  var candidates = loadCandidates(paths);
+function loadPendingCandidates(paths, scope) {
+  var expected = Object.assign({}, normalizeScope(paths), scope || {});
+  return loadCandidates(paths).filter(function (candidate) { return candidateMatchesScope(candidate, expected); });
+}
+
+function formatEndClassCandidates(paths, scope) {
+  var candidates = loadPendingCandidates(paths, scope);
+  if (!candidates.length) return null;
+  return [
+    "[系统提供的课后笔记候选：这些内容仅来自学习者明确要求记住的 PDF 精读。可将 grounded 结论、短摘、PDF 页码和来源类型纳入本次 DIARY_ENTRY 或 PAL_MOMENTS_MD；绝不能据此改变 PROGRESS_MD 的页码或已学范围。]",
+    JSON.stringify(candidates),
+  ].join("\n");
+}
+
+function augmentEndClassBody(body, paths, scope) {
+  var candidates = loadPendingCandidates(paths, scope);
   if (!candidates.length) return null;
   var note = [
     "[系统提供的课后笔记候选：这些内容来自学习者明确要求记住的 PDF 精读。请把结论、短摘、PDF 页码和来源类型纳入本次 DIARY_ENTRY 或其他既有课后记忆；不要据此改变 PROGRESS_MD 的页码或已学范围。]",
@@ -84,10 +117,14 @@ function augmentEndClassBody(body, paths) {
 
 module.exports = {
   candidatesPath: candidatesPath,
+  normalizeScope: normalizeScope,
+  candidateMatchesScope: candidateMatchesScope,
   buildCandidate: buildCandidate,
   saveLatest: saveLatest,
   hasLatest: hasLatest,
   rememberLatest: rememberLatest,
   loadCandidates: loadCandidates,
+  loadPendingCandidates: loadPendingCandidates,
+  formatEndClassCandidates: formatEndClassCandidates,
   augmentEndClassBody: augmentEndClassBody,
 };

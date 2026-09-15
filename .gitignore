@@ -16,6 +16,12 @@ resources/app.asar.unpacked/
 resources/server/deps.zip
 resources/settings.json
 resources/set.json
+# Ad-hoc copies/backups of the same config, which carry the same live API keys
+resources/settings*.json
+resources/set*.json
+# The release snapshot keeps a hand-copied config on disk to stay runnable; never track it
+win-unpacked/resources/settings.json
+win-unpacked/resources/set.json
 resources/rules/*
 !resources/rules/
 !resources/rules/rules_zh_classroom_compact.md

@@ -1,0 +1,398 @@
+[
+  {
+    "id": "numbers-001",
+    "latex": "0",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "零"
+    }
+  },
+  {
+    "id": "numbers-002",
+    "latex": "10",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "十"
+    }
+  },
+  {
+    "id": "numbers-003",
+    "latex": "11",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "十一"
+    }
+  },
+  {
+    "id": "numbers-004",
+    "latex": "20",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "二十"
+    }
+  },
+  {
+    "id": "numbers-005",
+    "latex": "101",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "一百零一"
+    }
+  },
+  {
+    "id": "numbers-006",
+    "latex": "1001",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "一千零一"
+    }
+  },
+  {
+    "id": "numbers-007",
+    "latex": "10000",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "一万"
+    }
+  },
+  {
+    "id": "numbers-008",
+    "latex": "10001",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "一万零一"
+    }
+  },
+  {
+    "id": "numbers-009",
+    "latex": "2026",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "二千零二十六"
+    }
+  },
+  {
+    "id": "numbers-010",
+    "latex": "3.14",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "三点一四"
+    }
+  },
+  {
+    "id": "numbers-011",
+    "latex": "-2",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "负二"
+    }
+  },
+  {
+    "id": "numbers-012",
+    "latex": "0012",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "零零一二"
+    }
+  },
+  {
+    "id": "numbers-013",
+    "latex": "0\\%",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "百分之零"
+    }
+  },
+  {
+    "id": "numbers-014",
+    "latex": "1.2",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "一点二"
+    }
+  },
+  {
+    "id": "numbers-015",
+    "latex": "0.05",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "零点零五"
+    }
+  },
+  {
+    "id": "numbers-016",
+    "latex": "-0.125",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "负零点一二五"
+    }
+  },
+  {
+    "id": "numbers-017",
+    "latex": "123456789",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "一亿二千三百四十五万六千七百八十九"
+    }
+  },
+  {
+    "id": "numbers-018",
+    "latex": "9007199254740993",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "九千零七兆一千九百九十二亿五千四百七十四万零九百九十三"
+    }
+  },
+  {
+    "id": "numbers-019",
+    "latex": "1000000000000",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "一兆"
+    }
+  },
+  {
+    "id": "numbers-020",
+    "latex": "100010001",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "一亿零一万零一"
+    }
+  },
+  {
+    "id": "numbers-021",
+    "latex": "1e9",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "一乘以十的九次方"
+    }
+  },
+  {
+    "id": "numbers-022",
+    "latex": "6.02e23",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "六点零二乘以十的二十三次方"
+    }
+  },
+  {
+    "id": "numbers-023",
+    "latex": "1.2\\times10^{-3}",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "一点二乘以十的负三次方"
+    }
+  },
+  {
+    "id": "numbers-024",
+    "latex": "3.1415926",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "三点一四一五九二六"
+    }
+  },
+  {
+    "id": "numbers-025",
+    "latex": "\\text{HTTP/1.1 GPT-5.6 v4 2026 年 第 12 页 模型 64092}",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "HTTP/1.1 GPT-5.6 v4 2026 年 第 12 页 模型 64092"
+    }
+  },
+  {
+    "id": "numbers-026",
+    "latex": "1E+6",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "一乘以十的六次方"
+    }
+  },
+  {
+    "id": "numbers-027",
+    "latex": "-2.5e-4",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "负二点五乘以十的负四次方"
+    }
+  },
+  {
+    "id": "numbers-028",
+    "latex": "0e0",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "零乘以十的零次方"
+    }
+  },
+  {
+    "id": "numbers-029",
+    "latex": "1,234",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "一千二百三十四"
+    }
+  },
+  {
+    "id": "numbers-030",
+    "latex": "12,345",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "一万二千三百四十五"
+    }
+  },
+  {
+    "id": "numbers-031",
+    "latex": "1,234,567",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "一百二十三万四千五百六十七"
+    }
+  },
+  {
+    "id": "numbers-032",
+    "latex": "1,234.56",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "一千二百三十四点五六"
+    }
+  },
+  {
+    "id": "numbers-033",
+    "latex": "-1,234",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "负一千二百三十四"
+    }
+  },
+  {
+    "id": "numbers-034",
+    "latex": "12,34",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "十二，三十四"
+    }
+  },
+  {
+    "id": "numbers-035",
+    "latex": "100",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "一百"
+    }
+  },
+  {
+    "id": "numbers-036",
+    "latex": "110",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "一百一十"
+    }
+  },
+  {
+    "id": "numbers-037",
+    "latex": "1000",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "一千"
+    }
+  },
+  {
+    "id": "numbers-038",
+    "latex": "1010",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "一千零一十"
+    }
+  },
+  {
+    "id": "numbers-039",
+    "latex": "100000001",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "一亿零一"
+    }
+  },
+  {
+    "id": "numbers-040",
+    "latex": "0.001",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "零点零零一"
+    }
+  },
+  {
+    "id": "numbers-041",
+    "latex": "-0.5",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "负零点五"
+    }
+  },
+  {
+    "id": "numbers-042",
+    "latex": "0000",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "零零零零"
+    }
+  },
+  {
+    "id": "numbers-043",
+    "latex": "0007",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "零零零七"
+    }
+  },
+  {
+    "id": "numbers-044",
+    "latex": "100\\%",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "百分之一百"
+    }
+  }
+]

@@ -1,0 +1,272 @@
+[
+  {
+    "id": "fractions-roots-powers-001",
+    "latex": "\\frac{1}{2}",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "二分之一"
+    }
+  },
+  {
+    "id": "fractions-roots-powers-002",
+    "latex": "\\frac{2}{3}",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "三分之二"
+    }
+  },
+  {
+    "id": "fractions-roots-powers-003",
+    "latex": "\\frac{3}{4}",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "四分之三"
+    }
+  },
+  {
+    "id": "fractions-roots-powers-004",
+    "latex": "\\frac{7}{10}",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "十分之七"
+    }
+  },
+  {
+    "id": "fractions-roots-powers-005",
+    "latex": "\\frac{a}{b}",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "a 除以 b"
+    }
+  },
+  {
+    "id": "fractions-roots-powers-006",
+    "latex": "\\frac{u}{v}",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "u 除以 v"
+    }
+  },
+  {
+    "id": "fractions-roots-powers-007",
+    "latex": "\\frac{x+1}{y}",
+    "expected": {
+      "ok": true,
+      "mode": "detailed",
+      "speech": "一个分数，分子是x 加一，分母是y，分数结束"
+    }
+  },
+  {
+    "id": "fractions-roots-powers-008",
+    "latex": "\\frac{a}{b+c}",
+    "expected": {
+      "ok": true,
+      "mode": "detailed",
+      "speech": "一个分数，分子是a，分母是b 加 c，分数结束"
+    }
+  },
+  {
+    "id": "fractions-roots-powers-009",
+    "latex": "\\frac{a+b}{c+d}",
+    "expected": {
+      "ok": true,
+      "mode": "detailed",
+      "speech": "一个分数，分子是a 加 b，分母是c 加 d，分数结束"
+    }
+  },
+  {
+    "id": "fractions-roots-powers-010",
+    "latex": "\\frac{\\sqrt{x}}{y}",
+    "expected": {
+      "ok": true,
+      "mode": "detailed",
+      "speech": "一个分数，分子是x 的平方根，分母是y，分数结束"
+    }
+  },
+  {
+    "id": "fractions-roots-powers-011",
+    "latex": "\\frac{x}{\\sqrt{y}}",
+    "expected": {
+      "ok": true,
+      "mode": "detailed",
+      "speech": "一个分数，分子是x，分母是y 的平方根，分数结束"
+    }
+  },
+  {
+    "id": "fractions-roots-powers-012",
+    "latex": "\\frac{\\sqrt{x^2+1}}{a-b}",
+    "expected": {
+      "ok": true,
+      "mode": "detailed",
+      "speech": "一个分数，分子是x 的平方加一的平方根，分母是a 减 b，分数结束"
+    }
+  },
+  {
+    "id": "fractions-roots-powers-013",
+    "latex": "\\dfrac{1}{3}",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "三分之一"
+    }
+  },
+  {
+    "id": "fractions-roots-powers-014",
+    "latex": "\\tfrac{x}{2}",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "x 除以 二"
+    }
+  },
+  {
+    "id": "fractions-roots-powers-015",
+    "latex": "\\binom{n+1}{k}",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "n 加一 选 k"
+    }
+  },
+  {
+    "id": "fractions-roots-powers-016",
+    "latex": "\\binom{10}{3}",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "十 选 三"
+    }
+  },
+  {
+    "id": "fractions-roots-powers-017",
+    "latex": "\\sqrt{z+1}",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "z 加一的平方根"
+    }
+  },
+  {
+    "id": "fractions-roots-powers-018",
+    "latex": "\\sqrt{x+1}",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "x 加一的平方根"
+    }
+  },
+  {
+    "id": "fractions-roots-powers-019",
+    "latex": "\\sqrt{x^2+y^2}",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "x 的平方加 y 的平方的平方根"
+    }
+  },
+  {
+    "id": "fractions-roots-powers-020",
+    "latex": "\\sqrt[3]{x}",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "x 的立方根"
+    }
+  },
+  {
+    "id": "fractions-roots-powers-021",
+    "latex": "\\sqrt[4]{y}",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "y 的四次方根"
+    }
+  },
+  {
+    "id": "fractions-roots-powers-022",
+    "latex": "\\sqrt[n]{a}",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "a 的 n 次方根"
+    }
+  },
+  {
+    "id": "fractions-roots-powers-023",
+    "latex": "y^2",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "y 的平方"
+    }
+  },
+  {
+    "id": "fractions-roots-powers-024",
+    "latex": "x^3",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "x 的立方"
+    }
+  },
+  {
+    "id": "fractions-roots-powers-025",
+    "latex": "z^m",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "z 的 m 次方"
+    }
+  },
+  {
+    "id": "fractions-roots-powers-026",
+    "latex": "10^9",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "十的九次方"
+    }
+  },
+  {
+    "id": "fractions-roots-powers-027",
+    "latex": "10^{-4}",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "十的负四次方"
+    }
+  },
+  {
+    "id": "fractions-roots-powers-028",
+    "latex": "(x+y)^2",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "（x 加 y）的平方"
+    }
+  },
+  {
+    "id": "fractions-roots-powers-029",
+    "latex": "x^{n+1}",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "x 的 n 加一次方"
+    }
+  },
+  {
+    "id": "fractions-roots-powers-030",
+    "latex": "a_i^2",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "a 下标 i 上标二"
+    }
+  }
+]

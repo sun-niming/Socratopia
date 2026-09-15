@@ -1,0 +1,203 @@
+[
+  {
+    "id": "linear-algebra-001",
+    "latex": "\\begin{pmatrix}1&2\\\\3&4\\end{pmatrix}",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "二行二列矩阵，第一行 一、二；第二行 三、四"
+    }
+  },
+  {
+    "id": "linear-algebra-002",
+    "latex": "\\begin{bmatrix}1&2&3\\\\4&5&6\\end{bmatrix}",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "二行三列矩阵，第一行 一、二、三；第二行 四、五、六"
+    }
+  },
+  {
+    "id": "linear-algebra-003",
+    "latex": "\\begin{pmatrix}a&b\\\\c&d\\end{pmatrix}",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "二行二列矩阵，第一行 a、b；第二行 c、d"
+    }
+  },
+  {
+    "id": "linear-algebra-004",
+    "latex": "\\begin{array}{cc}a&b\\\\c&d\\end{array}",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "二行二列矩阵，第一行 a、b；第二行 c、d"
+    }
+  },
+  {
+    "id": "linear-algebra-005",
+    "latex": "\\det(A)",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "A 的行列式"
+    }
+  },
+  {
+    "id": "linear-algebra-006",
+    "latex": "\\det\\begin{pmatrix}1&0\\\\0&1\\end{pmatrix}",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "二行二列矩阵，第一行 一、零；第二行 零、一 的行列式"
+    }
+  },
+  {
+    "id": "linear-algebra-007",
+    "latex": "\\operatorname{rank}(A)",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "秩 A"
+    }
+  },
+  {
+    "id": "linear-algebra-008",
+    "latex": "\\operatorname{tr}(A)",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "迹 A"
+    }
+  },
+  {
+    "id": "linear-algebra-009",
+    "latex": "\\vec{v}",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "向量 v"
+    }
+  },
+  {
+    "id": "linear-algebra-010",
+    "latex": "\\vec{u}\\cdot\\vec{v}",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "向量 u 点乘向量 v"
+    }
+  },
+  {
+    "id": "linear-algebra-011",
+    "latex": "\\hat{x}",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "x 上加帽"
+    }
+  },
+  {
+    "id": "linear-algebra-012",
+    "latex": "\\bar{x}",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "x 上横线"
+    }
+  },
+  {
+    "id": "linear-algebra-013",
+    "latex": "\\overline{AB}",
+    "expected": {
+      "ok": true,
+      "mode": "structural",
+      "speech": "A B 上横线",
+      "unresolvedAmbiguities": [
+        "implicit-product-meaning"
+      ]
+    }
+  },
+  {
+    "id": "linear-algebra-014",
+    "latex": "A\\mathbf{x}=\\mathbf{b}",
+    "expected": {
+      "ok": true,
+      "mode": "structural",
+      "speech": "A x 等于 b",
+      "unresolvedAmbiguities": [
+        "implicit-product-meaning"
+      ]
+    }
+  },
+  {
+    "id": "linear-algebra-015",
+    "latex": "A+B",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "A 加 B"
+    }
+  },
+  {
+    "id": "linear-algebra-016",
+    "latex": "A^{-1}",
+    "expected": {
+      "ok": true,
+      "mode": "structural",
+      "speech": "A 上标负一",
+      "unresolvedAmbiguities": [
+        "inverse-power-meaning"
+      ]
+    }
+  },
+  {
+    "id": "linear-algebra-017",
+    "latex": "Av=\\lambda v",
+    "expected": {
+      "ok": true,
+      "mode": "structural",
+      "speech": "A v 等于兰姆达 v",
+      "unresolvedAmbiguities": [
+        "implicit-product-meaning"
+      ]
+    }
+  },
+  {
+    "id": "linear-algebra-018",
+    "latex": "\\begin{pmatrix}1\\\\2\\\\3\\end{pmatrix}",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "三行一列矩阵，第一行 一；第二行 二；第三行 三"
+    }
+  },
+  {
+    "id": "linear-algebra-019",
+    "latex": "\\mathbb{R}^n",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "实数集的 n 次方"
+    }
+  },
+  {
+    "id": "linear-algebra-020",
+    "latex": "\\lambda_1,\\lambda_2,\\lambda_3",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "兰姆达 下标一，兰姆达 下标二，兰姆达 下标三"
+    }
+  },
+  {
+    "id": "linear-algebra-021",
+    "latex": "\\begin{pmatrix}1e9&2\\\\3&4\\end{pmatrix}",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "二行二列矩阵，第一行 一乘以十的九次方、二；第二行 三、四"
+    }
+  }
+]
