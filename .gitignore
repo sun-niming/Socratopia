@@ -25,7 +25,9 @@ win-unpacked/resources/set.json
 resources/rules/*
 !resources/rules/
 !resources/rules/rules_zh_classroom_compact.md
-resources/bundled-content/
+# bundled-content 是随应用分发的只读种子内容，必须受版本控制：
+# 它是阶段 A 基础世界 lore 卡片的发布落点（resources/bundled-content/<lang>/world-lore/<canon>/）。
+# 注意这条规则只匹配仓库根的 resources/bundled-content/；win-unpacked/ 下的同名副本另有独立追踪。
 resources/app-update.yml
 release/
 release-final/
