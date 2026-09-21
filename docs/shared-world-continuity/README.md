@@ -30,6 +30,7 @@
 | [04-minimal-verification.md](04-minimal-verification.md) | 最小充分测试集和阶段验证命令 | 编写测试与验收时 |
 | [05-canon-cutoff-schemes.md](05-canon-cutoff-schemes.md) | 两世界剧情截止点的表达体系与比较契约 | 选定 cutoff 或设计检索过滤时 |
 | [06-unverified-sources.md](06-unverified-sources.md) | 阶段 A 前必须读过正文的来源路径 | 写知识卡之前 |
+| [07-pilot-roster.md](07-pilot-roster.md) | 两世界各 4 名试点角色、判据、落选理由与待抓证据缺口 | 写角色模板或补抓资料时 |
 | [DEVELOPER_MODEL_PROTOCOL.md](DEVELOPER_MODEL_PROTOCOL.md) | 开发模型必须执行的读写节奏 | 每个开发会话开始时 |
 | [WORKSTATE.md](WORKSTATE.md) | 唯一持续维护的目标、进度、证据与下一步 | 每个开发回合开始、切换和结束时 |
 
