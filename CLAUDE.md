@@ -11,6 +11,7 @@ Hand-written files that are safe to edit as ordinary source: **`resources/server
 - Source repo (macOS): `socralab-app/v2`
 - Sibling working copy: `E:\huanjing\sogeladi\Socratopia_2.0\Socratopia` — diff against it before editing unfamiliar code
 - `AGENTS.md` covers the same ground for other agents
+- `资料/` — world-lore source archive (see `资料/README.md`); `docs/shared-world-continuity/` — the world-continuity design set, anchored on its `WORKSTATE.md`
 
 ## Architecture
 
@@ -142,9 +143,14 @@ Server-layer edits need only an app restart; the ASAR is the runtime source for 
 
 ## Never commit
 
-`resources/settings.json` and `resources/set.json` (API keys, teaching-model config), `resources/app.asar`, `resources/rules/*` (except `rules_zh_classroom_compact.md`), `resources/bundled-content/`, or user data. See `.gitignore`.
+`resources/settings.json` and `resources/set.json` (API keys, teaching-model config), `resources/app.asar`, `resources/rules/*` (except `rules_zh_classroom_compact.md`), or user data. See `.gitignore`.
 
-Caveat: those rules only name the root paths, so the snapshot's own copies under `win-unpacked/resources/` have their own explicit entries. They are deliberately **untracked but present on disk** — the snapshot needs a config to run, and that config holds a live API key. Ad-hoc copies at the repo root (`settings*.json`, `set*.json`) are covered by pattern for the same reason. That key is still in history from before these rules landed, and this repo has no git remote, so nothing has been published; scrub it before adding one.
+Two trees are tracked on purpose and look like they shouldn't be:
+
+- `resources/bundled-content/` — read-only seed content that ships with the app. It is also the publishing home for world-lore card bundles (`resources/bundled-content/<lang>/world-lore/<canon>/`); `getContentDir(name, language)` in `.next/server/chunks/829.js` resolves that language level with an `en/` fallback, which is why lore goes under a language directory rather than at the top.
+- `资料/` — the world-lore evidence archive (44 curated sources, raw HTML + extracted Markdown + indexes). It is an **evidence** archive: runtime reads derived cards, never these pages directly. `资料/索引/下载清单.json` pins each source's `rawSha256`/`textSha256` computed over LF bytes, and the repo runs `core.autocrlf=true`, so `.gitattributes` disables line-ending conversion (`-text`) on `资料/来源原文/**` and `资料/可用文本/**`. Do not "fix" those line endings.
+
+Caveat: the ignore rules only name the root paths, so the snapshot's own copies under `win-unpacked/resources/` have their own explicit entries. `win-unpacked/resources/settings.json` and `set.json` are deliberately **untracked but present on disk** — the snapshot needs a config to run, and that config holds a live API key. Ad-hoc copies at the repo root (`settings*.json`, `set*.json`) are covered by pattern for the same reason. That key is still in history from before these rules landed, and this repo has no git remote, so nothing has been published; scrub it before adding one.
 
 ## Working conventions
 

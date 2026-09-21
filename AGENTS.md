@@ -57,7 +57,9 @@ Server changes need only a restart (the server runs in place from `resources/ser
 
 ## Never commit
 
-`resources/settings.json` (API keys), `resources/set.json` (teaching-model config), `resources/app.asar`, `resources/rules/*` (except `rules_zh_classroom_compact.md`), `resources/bundled-content/`, or user data.
+`resources/settings.json` (API keys), `resources/set.json` (teaching-model config), `resources/app.asar`, `resources/rules/*` (except `rules_zh_classroom_compact.md`), or user data.
+
+Tracked on purpose: `resources/bundled-content/` (read-only seed content, and the publishing home for world-lore card bundles at `<lang>/world-lore/<canon>/`) and `资料/` (world-lore evidence archive). `.gitattributes` disables line-ending conversion under `资料/来源原文/**` and `资料/可用文本/**` because `资料/索引/下载清单.json` pins LF-based SHA-256 values and the repo runs `core.autocrlf=true`.
 
 ## Style
 
