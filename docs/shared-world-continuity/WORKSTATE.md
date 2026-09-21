@@ -29,7 +29,7 @@
 - [x] `SWC-000-D` 将新增测试限制为四个行为测试，并定义阶段门。
 - [x] `SWC-000-E` 建立开发模型持续读写协议。
 - [~] `SWC-001` 阶段 A：内容契约和最小样本。
-  - [x] `SWC-001-P` 前置：证据入库（`资料/`、`bundled-content/` 纳入追踪）、两世界 cut-off 表达梳理、版本比较原语。已提交 `e7520d1`。
+  - [x] `SWC-001-P` 前置：证据入库（`资料/`、`bundled-content/` 纳入追踪）、两世界 cut-off 表达梳理、版本比较原语。已提交，见 `8aa7d8e`／`1373e3e`。
   - [~] `SWC-001-A` 两世界 canon cutoff 与各四名试点角色选定。
     - [x] 翁法罗斯 cutoff = `3.7`；提瓦特 cutoff 轴 = 章·幕为主 + 版本下界；试点角色策略 = 证据优先（使用者 2026-09-20 下达）。
     - [x] `chapter-act` 轴已实现并测试，`canonCutoff` 契约改为带轴对象。
@@ -112,12 +112,12 @@ git status --porcelain -- docs resources/server/lib/world-lore
 
 - **提瓦特的章·幕编码里有一处是推断。** `间章第K幕` 锚到第 K 章对 K=1、2、3 都有直接解锁前置佐证，K=4 的前置写的是"间章第三幕"而不是第四章末幕；代码取章 4，理由是它是唯一既不与间章第三幕同槽又排在其后的取值。已记入 D013 与 `05` 5.1。
 - **测试期望串曾排错一次（非代码错）。** 首轮新增断言把 `间章第四幕` 写在 `第五章第六幕` 之后，而章 4 锚必然让它排在第五章之前；失败记录保留。已修正期望并加注说明 K=4 的推断来源。
-- ~~**`docs/` 整个目录仍未跟踪。**~~ → 已由提交 `e7520d1` 一并入库。
+- ~~**`docs/` 整个目录仍未跟踪。**~~ → 已由提交 `3018a62` 一并入库。
 - **chat 与 groupchat 的上下文预算已经不对等。** `chat/route.js` 有 `[ctx-budget]`，但只 `console.error` 报警、不裁剪；`groupchat/route.js` 连核算和资源边界标记都没有。阶段 D 的"统一 compiler"因此不是把两份逻辑合一，而是先把 groupchat 从零补齐。已记入 `02`。
 - **教材段的既有实际上限是 28000 字符**（`resource` 检查），远大于方案原表里所有新增段之和（13000）。若按原表字面实现预算，会误缩教材。已在 `02` 增补既有段表和"教材不享有预算豁免"的规则。
 - **资料来源里 `\d+\.\d+` 大面积是目录编号而非版本号。** 例如提瓦特文本能扫出 `9.4`、`8.2`、`1.7`；翁法罗斯编年史目录自带一节 `3.4 第二次逐火之旅`。任何基于正则的版本抽取都必须附带来源与轴。已记入 `05`。
 - `version-order.js` 目前**仍没有任何调用方**，尚未挂进 `server.js` 的 `global.*` 表。挂载点应与 compiler／retriever 一起做。
-- **本批次按用途切分提交，不再由单个大提交承载。** `e7520d1` 曾把证据入库、方案文档与模块实现并成一个提交；已 `git reset --soft 18b360e` 后重切为四个提交：①证据入库（`资料/`＋`bundled-content/`＋`.gitattributes`＋`.gitignore`）、②方案文档集（`docs/shared-world-continuity/`）、③`version-order` 两轴实现（`resources/server/lib/world-lore/`）、④tools 清理与 agent 文档同步。回溯时注意"方案"与"实现"分属不同提交，`e7520d1` 仅存在于 reflog。
+- **本批次按用途切分提交，不再由单个大提交承载。** `e7520d1` 曾把证据入库、方案文档与模块实现并成一个提交；已 `git reset --soft 18b360e` 后重切为四个提交：①证据入库 `8aa7d8e`（`资料/`＋`bundled-content/`＋`.gitattributes`＋`.gitignore`）、②方案文档集 `3018a62`（`docs/shared-world-continuity/`）、③`version-order` 两轴实现 `1373e3e`（`resources/server/lib/world-lore/`）、④tools 清理与 agent 文档同步 `e92b04f`。回溯时注意"方案"与"实现"分属不同提交，`e7520d1` 仅存在于 reflog。
 
 ## 验证证据日志
 
@@ -163,7 +163,12 @@ git status --porcelain -- docs resources/server/lib/world-lore
 
 - 范围：使用者三项决定落成契约与实现；`SWC-001-P` 批次入库。
 - 前置核对（会话恢复时重跑 `SWC-001-P` 的最小验证，确认旧记录仍成立）：`node --check version-order.js` 退出码 `0`；`version-order-smoke-test.js` 退出码 `0`（当时 60 passed / 0 failed）；`git check-ignore` 退出码 `1`；`git status --porcelain -- 资料` 101 行 `A`、0 行 `??`。
-- 提交：`e7520d1`，164 个文件（`资料/` 101、`bundled-content/` 43、其余 20）。
+- 提交：本切片与 `SWC-001-P` 的产出按用途切为四个提交，均已落地。
+  - `8aa7d8e` Track 资料/ and bundled-content/, pin evidence line endings（146 文件）
+  - `3018a62` Add the shared-world-continuity design set（10 文件，含本切片修改的 `02`／`05`／`WORKSTATE`）
+  - `1373e3e` Add canon-scoped cut-off ordering for world-lore cards（`version-order.js` 至 355 行、smoke 240 行）
+  - `e92b04f` Drop dead tool scripts and sync agent docs with tracked trees（7 文件）
+  - 先前的单一大提交 `e7520d1` 已被 `git reset --soft 18b360e` 作废，只存在于 reflog。
 - 本切片命令与退出码：
 
   | # | 命令 | 退出码 | 期望 |
@@ -171,7 +176,8 @@ git status --porcelain -- docs resources/server/lib/world-lore
   | 1 | `node --check resources/server/lib/world-lore/version-order.js` | `0` | 0 |
   | 2 | `node --check resources/server/lib/world-lore/version-order-smoke-test.js` | `0` | 0 |
   | 3 | `node resources/server/lib/world-lore/version-order-smoke-test.js` | `0` | 0（116 passed / 0 failed） |
-  | 4 | `git status --porcelain -- docs resources/server/lib/world-lore` | `0` | 5 个 `M`（本切片修改）+ 1 个既有 `?? docs/project-reconstruction/` |
+  | 4 | `git status --porcelain -- docs resources/server/lib/world-lore` | `0` | 提交后无输出 |
+  | 5 | `git show HEAD~1:resources/server/lib/world-lore/version-order.js \| grep -c 'parseChapterAct\|genshin-chapter-act'` | `0` | `8`（证明 chapter-act 已进提交而非只在工作树） |
 
 - 结果：
   - `chapter-act` 轴覆盖：`S017` 真实标题解析（`第六章·第九幕`、`第七章 第一幕死魂灵的夜曲`、`空月之歌·第九幕身土坏空`、`第六章 空月之歌`、`空月之歌·序奏归途`、`序章·第三幕…`、`第三章第五幕`）、中文数字过十、间章四条锚定断言、完整章·幕线排序、空值即无界、六类非法输入抛错、`axisOfValue` 路由、同 canon 跨轴不可比、显式轴名、章·幕轴上的可见性。
