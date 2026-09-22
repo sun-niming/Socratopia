@@ -238,6 +238,7 @@ function createCoordinator(options) {
   var queue = [];
   var activeGlobal = 0;
   var activeAccounts = new Map();
+  var runningJobs = [];
   var queuedAccounts = new Map();
   var closed = false;
   var initialized = false;
@@ -348,10 +349,25 @@ function createCoordinator(options) {
     return running;
   }
 
+  function jobPriority(job) {
+    return job && job.priority === "background" ? "background" : "interactive";
+  }
+
+  function schedulable(job) {
+    if ((activeAccounts.get(job.accountId) || 0) < 1) return true;
+    if (jobPriority(job) !== "interactive") return false;
+    // An interactive read may bypass the per-account cap only when every
+    // running same-account job is background work (e.g. auto-advance
+    // prefetch); the global cap of 2 and the per-batch runOcrExclusive lock
+    // still bound real engine contention.
+    return runningJobs.every(function (running) { return running.accountId !== job.accountId || running.priority === "background"; });
+  }
+
   function pump() {
     if (closed) return;
     while (activeGlobal < 2) {
-      var index = queue.findIndex(function (job) { return (activeAccounts.get(job.accountId) || 0) < 1; });
+      var index = queue.findIndex(function (job) { return jobPriority(job) === "interactive" && schedulable(job); });
+      if (index < 0) index = queue.findIndex(function (job) { return schedulable(job); });
       if (index < 0) return;
       let job = queue.splice(index, 1)[0];
       queuedAccounts.set(job.accountId, Math.max(0, (queuedAccounts.get(job.accountId) || 1) - 1));
@@ -363,6 +379,7 @@ function createCoordinator(options) {
       job.state = "running";
       activeGlobal += 1;
       activeAccounts.set(job.accountId, (activeAccounts.get(job.accountId) || 0) + 1);
+      runningJobs.push(job);
       Promise.resolve().then(job.work).then(function (value) {
         job.settle(null, value);
       }, function (error) {
@@ -371,19 +388,21 @@ function createCoordinator(options) {
         job.state = "settled";
         activeGlobal -= 1;
         activeAccounts.set(job.accountId, Math.max(0, (activeAccounts.get(job.accountId) || 1) - 1));
+        var runningIndex = runningJobs.indexOf(job);
+        if (runningIndex >= 0) runningJobs.splice(runningIndex, 1);
         pump();
       });
     }
   }
 
-  function schedule(accountId, work, signal, deadlineAt) {
+  function schedule(accountId, work, signal, deadlineAt, priority) {
     if (closed) return Promise.reject(codedError("ocr_coordinator_closed"));
     if (signal && signal.aborted) return Promise.reject(requestAbortError(signal));
     deadlineAt = Number.isFinite(Number(deadlineAt)) ? Number(deadlineAt) : Date.now() + 120000;
     if (deadlineAt <= Date.now()) return Promise.reject(codedError("ocr_request_deadline"));
     if (queue.length >= 6 || (queuedAccounts.get(accountId) || 0) >= 2) return Promise.reject(codedError("pdf_busy"));
     return new Promise(function (resolve, reject) {
-      var job = { accountId: accountId, work: work, resolve: resolve, reject: reject, abortCleanup: null, deadlineTimer: null, deadlineAt: deadlineAt, state: "queued", outwardSettled: false };
+      var job = { accountId: accountId, work: work, resolve: resolve, reject: reject, abortCleanup: null, deadlineTimer: null, deadlineAt: deadlineAt, state: "queued", outwardSettled: false, priority: priority === "background" ? "background" : "interactive" };
       job.settle = function (error, value) {
         if (job.outwardSettled) return false;
         job.outwardSettled = true;
@@ -735,7 +754,7 @@ function createCoordinator(options) {
       var singleKey = crypto.createHash("sha256").update(JSON.stringify([context.accountId, request.scope, lifecycle.generation, pdfHash, request.command, request.startPage, request.endPage, request.targetChars, request.maxPages, request.expectedLanguage, Number.isFinite(Number(request.deadlineAt)) ? Number(request.deadlineAt) : null])).digest("hex");
       var useSingleFlight = request.cachePolicy !== "bypass" && !request.signal;
       if (useSingleFlight && inFlight.has(singleKey)) return observeInFlight(inFlight.get(singleKey), request.deadlineAt);
-      var promise = schedule(context.accountId, function () { return execute(request, context, authorized, pdfHash, lifecycle); }, request.signal, request.deadlineAt);
+      var promise = schedule(context.accountId, function () { return execute(request, context, authorized, pdfHash, lifecycle); }, request.signal, request.deadlineAt, request.priority === "background" ? "background" : "interactive");
       if (useSingleFlight) {
         inFlight.set(singleKey, promise);
         promise.finally(function () { if (inFlight.get(singleKey) === promise) inFlight.delete(singleKey); }).catch(function () {});
