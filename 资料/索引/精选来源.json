@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-15",
+  "updatedAt": "2026-09-21",
   "scope": "已有来源的模板用途筛选；非全文语料包",
   "sources": [
     {
@@ -86,7 +86,7 @@
         "对他人的态度"
       ],
       "priority": "核心",
-      "verification": "已从页面发现链接，正文待核验",
+      "verification": "已读取页面",
       "note": ""
     },
     {
@@ -121,7 +121,7 @@
         "关系"
       ],
       "priority": "核心",
-      "verification": "已从页面发现链接，正文待核验",
+      "verification": "已读取页面",
       "note": ""
     },
     {
@@ -261,7 +261,7 @@
         "人际关系"
       ],
       "priority": "核心",
-      "verification": "已从页面发现链接，正文待核验",
+      "verification": "已读取页面",
       "note": ""
     },
     {
@@ -744,6 +744,181 @@
       "priority": "定向候选",
       "verification": "目录已提取，正文待核验",
       "note": "区分传说叙事与已核实经历。"
+    },
+    {
+      "id": "S045",
+      "world": "翁法罗斯",
+      "title": "那刻夏／资料",
+      "url": "https://wiki.biligame.com/sr/那刻夏/资料",
+      "templateTargets": [
+        "人物"
+      ],
+      "fields": [
+        "身份与别名",
+        "经历",
+        "动机",
+        "关系"
+      ],
+      "priority": "核心",
+      "verification": "已读取页面",
+      "note": "智种学派；与 S024 七贤议定书交叉核对，勿只凭标题认定立场。"
+    },
+    {
+      "id": "S046",
+      "world": "翁法罗斯",
+      "title": "那刻夏／语音",
+      "url": "https://wiki.biligame.com/sr/那刻夏/语音",
+      "templateTargets": [
+        "人物"
+      ],
+      "fields": [
+        "语气",
+        "自我评价",
+        "对他人的态度"
+      ],
+      "priority": "核心",
+      "verification": "已读取页面",
+      "note": "提炼自称与对同僚的称谓。"
+    },
+    {
+      "id": "S047",
+      "world": "翁法罗斯",
+      "title": "万敌／资料",
+      "url": "https://wiki.biligame.com/sr/万敌/资料",
+      "templateTargets": [
+        "人物"
+      ],
+      "fields": [
+        "身份与别名",
+        "经历",
+        "动机",
+        "关系"
+      ],
+      "priority": "核心",
+      "verification": "已读取页面",
+      "note": "与 S029 歌耳戈遗信、S023 悬锋诸王通鉴交叉核对。"
+    },
+    {
+      "id": "S048",
+      "world": "翁法罗斯",
+      "title": "万敌／语音",
+      "url": "https://wiki.biligame.com/sr/万敌/语音",
+      "templateTargets": [
+        "人物"
+      ],
+      "fields": [
+        "语气",
+        "自我评价",
+        "对他人的态度"
+      ],
+      "priority": "核心",
+      "verification": "已读取页面",
+      "note": "语气偏硬；注意与书信文体的差别。"
+    },
+    {
+      "id": "S049",
+      "world": "提瓦特",
+      "title": "纳西妲",
+      "url": "https://wiki.biligame.com/ys/纳西妲",
+      "templateTargets": [
+        "人物"
+      ],
+      "fields": [
+        "身份与别名",
+        "角色故事",
+        "经历",
+        "性格证据"
+      ],
+      "priority": "核心",
+      "verification": "已读取页面",
+      "note": "原神裸页即档案；与 S012 编年史须弥段交叉核对。"
+    },
+    {
+      "id": "S050",
+      "world": "提瓦特",
+      "title": "纳西妲语音",
+      "url": "https://wiki.biligame.com/ys/纳西妲语音",
+      "templateTargets": [
+        "人物"
+      ],
+      "fields": [
+        "语气",
+        "价值观",
+        "人际关系"
+      ],
+      "priority": "核心",
+      "verification": "已读取页面",
+      "note": "注意其知识范围与长生种身份的关系。"
+    },
+    {
+      "id": "S051",
+      "world": "提瓦特",
+      "title": "芙宁娜",
+      "url": "https://wiki.biligame.com/ys/芙宁娜",
+      "templateTargets": [
+        "人物"
+      ],
+      "fields": [
+        "身份与别名",
+        "角色故事",
+        "经历",
+        "性格证据"
+      ],
+      "priority": "核心",
+      "verification": "已读取页面",
+      "note": "与 S012 编年史枫丹段交叉核对；注意扮演身份与真实身份分层。"
+    },
+    {
+      "id": "S052",
+      "world": "提瓦特",
+      "title": "芙宁娜语音",
+      "url": "https://wiki.biligame.com/ys/芙宁娜语音",
+      "templateTargets": [
+        "人物"
+      ],
+      "fields": [
+        "语气",
+        "价值观",
+        "人际关系"
+      ],
+      "priority": "核心",
+      "verification": "已读取页面",
+      "note": "注意公开表演语气与私下语气的差别。"
+    },
+    {
+      "id": "S053",
+      "world": "提瓦特",
+      "title": "雷电将军",
+      "url": "https://wiki.biligame.com/ys/雷电将军",
+      "templateTargets": [
+        "人物"
+      ],
+      "fields": [
+        "身份与别名",
+        "角色故事",
+        "经历",
+        "性格证据"
+      ],
+      "priority": "核心",
+      "verification": "已读取页面",
+      "note": "与 S011 雷神沿革交叉核对；巴尔／巴尔泽布／人偶三名共用称号。"
+    },
+    {
+      "id": "S054",
+      "world": "提瓦特",
+      "title": "雷电将军语音",
+      "url": "https://wiki.biligame.com/ys/雷电将军语音",
+      "templateTargets": [
+        "人物"
+      ],
+      "fields": [
+        "语气",
+        "价值观",
+        "人际关系"
+      ],
+      "priority": "核心",
+      "verification": "已读取页面",
+      "note": "核对说话主体是人偶还是神明。"
     }
   ]
 }

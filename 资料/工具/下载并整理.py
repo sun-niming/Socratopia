@@ -24,6 +24,10 @@ INDEX_ROOT = DATA_ROOT / "索引"
 MANIFEST_PATH = INDEX_ROOT / "精选来源.json"
 DOWNLOAD_MANIFEST_PATH = INDEX_ROOT / "下载清单.json"
 
+# 星铁用 `<角色>/资料` 作档案页，原神用裸角色页；这些裸页要归到 人物档案，
+# 否则会落进兜底的 世界文献/。标题用全角 `／` 与文件名保持一致。
+BARE_CHARACTER_PAGES = frozenset({"钟离", "纳西妲", "芙宁娜", "雷电将军"})
+
 
 def safe_name(value: str) -> str:
     value = value.replace("/", "／").replace("\\", "＼")
@@ -52,7 +56,7 @@ def material_type(title: str) -> str:
         return "历史编年"
     if "任务" in title:
         return "剧情任务"
-    if title.endswith("／资料") or title == "钟离":
+    if title.endswith("／资料") or title in BARE_CHARACTER_PAGES:
         return "人物档案"
     if title in {"翁法罗斯世界设定", "北陆图书馆"}:
         return "世界设定"
@@ -211,6 +215,10 @@ def yaml_string(value: str) -> str:
     return json.dumps(value, ensure_ascii=False)
 
 
+# 本模块写出的每个文件都必须用 LF：`下载清单.json` 记录 textSha256，且 仓库
+# 运行 core.autocrlf=true 并用 .gitattributes 对 来源原文/可用文本 关闭行尾转换。
+# Path.write_text 默认 newline=None 会跟随 os.linesep（Windows 上是 CRLF），
+# 一次重跑就会把已记录哈希的全部文件改写掉，所以每处 write_text 都显式 newline="\n"。
 def write_text_copy(entry: dict) -> dict:
     raw_path = DATA_ROOT / entry["rawPath"]
     text_path = DATA_ROOT / entry["textPath"]
@@ -257,7 +265,7 @@ def write_text_copy(entry: dict) -> dict:
         "## 网页正文（自动提取）",
         "",
     ]
-    text_path.write_text("\n".join(frontmatter) + body, encoding="utf-8")
+    text_path.write_text("\n".join(frontmatter) + body, encoding="utf-8", newline="\n")
     return {
         **entry,
         "downloaded": True,
@@ -314,7 +322,9 @@ def build_indexes(entries: list[dict]) -> None:
 同一来源只保存一份原文和一份提取文本。表格同时提供本地 Markdown、本地 HTML 和原始网页地址。
 
 """
-    total_path.write_text(total_intro + index_table(total_path, entries) + "\n", encoding="utf-8")
+    total_path.write_text(
+        total_intro + index_table(total_path, entries) + "\n", encoding="utf-8", newline="\n"
+    )
 
     for target, filename, description in [
         ("人物", "人物模板索引.md", "用于身份、性格、动机、语气、关系、经历及知识边界。"),
@@ -327,6 +337,7 @@ def build_indexes(entries: list[dict]) -> None:
             + index_table(path, chosen)
             + "\n",
             encoding="utf-8",
+            newline="\n",
         )
 
     origin_path = INDEX_ROOT / "来源索引-BWIKI.md"
@@ -346,7 +357,7 @@ def build_indexes(entries: list[dict]) -> None:
             ]
             lines.append(index_table(origin_path, subset))
             lines.append("")
-    origin_path.write_text("\n".join(lines), encoding="utf-8")
+    origin_path.write_text("\n".join(lines), encoding="utf-8", newline="\n")
 
     DOWNLOAD_MANIFEST_PATH.write_text(
         json.dumps(
@@ -363,6 +374,7 @@ def build_indexes(entries: list[dict]) -> None:
         )
         + "\n",
         encoding="utf-8",
+        newline="\n",
     )
 
 

@@ -1,9 +1,9 @@
 {
-  "generatedAt": "2026-09-15T09:55:36.788833+00:00",
-  "downloadedCount": 44,
+  "generatedAt": "2026-09-21T10:15:34.483654+00:00",
+  "downloadedCount": 54,
   "failedCount": 0,
-  "rawBytes": 11445966,
-  "textBytes": 987044,
+  "rawBytes": 16117220,
+  "textBytes": 1587137,
   "sources": [
     {
       "id": "S001",
@@ -149,7 +149,7 @@
         "对他人的态度"
       ],
       "priority": "核心",
-      "verification": "已从页面发现链接，正文待核验",
+      "verification": "已读取页面",
       "note": "",
       "game": "崩坏·星穹铁道",
       "materialType": "人物语音",
@@ -163,9 +163,9 @@
       "cached": true,
       "downloaded": true,
       "rawBytes": 488120,
-      "textBytes": 71754,
+      "textBytes": 71700,
       "rawSha256": "a4bf7eb3681611ed8676e7de3198c424fcf106ec529d25c1904d1bc28f0b761b",
-      "textSha256": "1e2d92e4d474fa5c366570727328c0c8fd403618515c927144968d8086cd0977"
+      "textSha256": "69ebae6c6f5f2cf02975d458802fe11447df8544daf49ea9953638ed80dd1e98"
     },
     {
       "id": "S006",
@@ -214,7 +214,7 @@
         "关系"
       ],
       "priority": "核心",
-      "verification": "已从页面发现链接，正文待核验",
+      "verification": "已读取页面",
       "note": "",
       "game": "崩坏·星穹铁道",
       "materialType": "人物语音",
@@ -228,9 +228,9 @@
       "cached": true,
       "downloaded": true,
       "rawBytes": 449582,
-      "textBytes": 57958,
+      "textBytes": 57904,
       "rawSha256": "62676bfe34e8cf424d2110bc8a3c0168dfa395c336fc64844a65287a09db0128",
-      "textSha256": "21e703b6ffac5a860fbd578e5d45217163939e38e3d7438632a62baf22768ee4"
+      "textSha256": "d72bcea64e68fc8ba06dbd2740eb150331638feec5778e14cb71ec3e1cb2837f"
     },
     {
       "id": "S008",
@@ -474,7 +474,7 @@
         "人际关系"
       ],
       "priority": "核心",
-      "verification": "已从页面发现链接，正文待核验",
+      "verification": "已读取页面",
       "note": "",
       "game": "原神",
       "materialType": "人物语音",
@@ -488,9 +488,9 @@
       "cached": true,
       "downloaded": true,
       "rawBytes": 492849,
-      "textBytes": 92338,
+      "textBytes": 92284,
       "rawSha256": "a1ccf2a5a9a5c1f82bbeb8772352fadf3798476cc1cdc3f0b83fe8b4c9e99149",
-      "textSha256": "9f4a5239abdb91b635c0dedc121a8e279239e226e8454484577b27ae0e49ed87"
+      "textSha256": "c8075daf9cfb5470e8e3029232d4c151f91ee88b522013d5996d6007a4de11a4"
     },
     {
       "id": "S016",
@@ -1407,6 +1407,331 @@
       "textBytes": 5801,
       "rawSha256": "0df7ad33174de7402bcf43d9a78a29895fcd3a453f2d6c27f1adca2e6748034d",
       "textSha256": "f7c35c89c7ca1cb7b966deae7081136995214ad418aeb1c0a0c445b24641da66"
+    },
+    {
+      "id": "S045",
+      "world": "翁法罗斯",
+      "title": "那刻夏／资料",
+      "url": "https://wiki.biligame.com/sr/那刻夏/资料",
+      "templateTargets": [
+        "人物"
+      ],
+      "fields": [
+        "身份与别名",
+        "经历",
+        "动机",
+        "关系"
+      ],
+      "priority": "核心",
+      "verification": "已读取页面",
+      "note": "智种学派；与 S024 七贤议定书交叉核对，勿只凭标题认定立场。",
+      "game": "崩坏·星穹铁道",
+      "materialType": "人物档案",
+      "sourceNature": "游戏内人物资料（BWIKI镜像）",
+      "rawPath": "来源原文/BWIKI/崩坏·星穹铁道/人物档案/S045_那刻夏／资料.html",
+      "textPath": "可用文本/崩坏·星穹铁道/人物档案/S045_那刻夏／资料.md",
+      "curlExit": 0,
+      "httpStatus": 200,
+      "effectiveUrl": "https://wiki.biligame.com/sr/那刻夏/资料",
+      "retrievedAt": "2026-09-21T09:36:42.950936+00:00",
+      "cached": true,
+      "downloaded": true,
+      "rawBytes": 179158,
+      "textBytes": 7132,
+      "rawSha256": "1317fe8ab911c210cd973dfdb6388edf31807011cf11d5a7e9554f8a6f5767e7",
+      "textSha256": "d4a9d246b43cb9e4177297b605dae3f02d575ecb94375b97eec53bef64edcf19"
+    },
+    {
+      "id": "S046",
+      "world": "翁法罗斯",
+      "title": "那刻夏／语音",
+      "url": "https://wiki.biligame.com/sr/那刻夏/语音",
+      "templateTargets": [
+        "人物"
+      ],
+      "fields": [
+        "语气",
+        "自我评价",
+        "对他人的态度"
+      ],
+      "priority": "核心",
+      "verification": "已读取页面",
+      "note": "提炼自称与对同僚的称谓。",
+      "game": "崩坏·星穹铁道",
+      "materialType": "人物语音",
+      "sourceNature": "游戏内人物资料（BWIKI镜像）",
+      "rawPath": "来源原文/BWIKI/崩坏·星穹铁道/人物语音/S046_那刻夏／语音.html",
+      "textPath": "可用文本/崩坏·星穹铁道/人物语音/S046_那刻夏／语音.md",
+      "curlExit": 0,
+      "httpStatus": 200,
+      "effectiveUrl": "https://wiki.biligame.com/sr/那刻夏/语音",
+      "retrievedAt": "2026-09-21T09:36:43.028888+00:00",
+      "cached": true,
+      "downloaded": true,
+      "rawBytes": 455343,
+      "textBytes": 61227,
+      "rawSha256": "f46e2811c5790639709595357c8011871ed1c576567da238d47dd3976475d21a",
+      "textSha256": "6e6f60518320d232c96226d95edc2720b9bc685dcb9a3fcab06fcf4e3fc63740"
+    },
+    {
+      "id": "S047",
+      "world": "翁法罗斯",
+      "title": "万敌／资料",
+      "url": "https://wiki.biligame.com/sr/万敌/资料",
+      "templateTargets": [
+        "人物"
+      ],
+      "fields": [
+        "身份与别名",
+        "经历",
+        "动机",
+        "关系"
+      ],
+      "priority": "核心",
+      "verification": "已读取页面",
+      "note": "与 S029 歌耳戈遗信、S023 悬锋诸王通鉴交叉核对。",
+      "game": "崩坏·星穹铁道",
+      "materialType": "人物档案",
+      "sourceNature": "游戏内人物资料（BWIKI镜像）",
+      "rawPath": "来源原文/BWIKI/崩坏·星穹铁道/人物档案/S047_万敌／资料.html",
+      "textPath": "可用文本/崩坏·星穹铁道/人物档案/S047_万敌／资料.md",
+      "curlExit": 0,
+      "httpStatus": 200,
+      "effectiveUrl": "https://wiki.biligame.com/sr/万敌/资料",
+      "retrievedAt": "2026-09-21T09:36:42.982852+00:00",
+      "cached": true,
+      "downloaded": true,
+      "rawBytes": 237303,
+      "textBytes": 18977,
+      "rawSha256": "68b096bca10af17d9dc60a7d4d61ef6a241d11c3a7691d11d0c8c6b33112b586",
+      "textSha256": "aae7f99c2325cec19451de20c368c1d534c5d0bed5328b49c7b8cc6031e3163e"
+    },
+    {
+      "id": "S048",
+      "world": "翁法罗斯",
+      "title": "万敌／语音",
+      "url": "https://wiki.biligame.com/sr/万敌/语音",
+      "templateTargets": [
+        "人物"
+      ],
+      "fields": [
+        "语气",
+        "自我评价",
+        "对他人的态度"
+      ],
+      "priority": "核心",
+      "verification": "已读取页面",
+      "note": "语气偏硬；注意与书信文体的差别。",
+      "game": "崩坏·星穹铁道",
+      "materialType": "人物语音",
+      "sourceNature": "游戏内人物资料（BWIKI镜像）",
+      "rawPath": "来源原文/BWIKI/崩坏·星穹铁道/人物语音/S048_万敌／语音.html",
+      "textPath": "可用文本/崩坏·星穹铁道/人物语音/S048_万敌／语音.md",
+      "curlExit": 0,
+      "httpStatus": 200,
+      "effectiveUrl": "https://wiki.biligame.com/sr/万敌/语音",
+      "retrievedAt": "2026-09-21T09:36:43.086972+00:00",
+      "cached": true,
+      "downloaded": true,
+      "rawBytes": 452030,
+      "textBytes": 56798,
+      "rawSha256": "f54a0e124f1e7dbe189232021f97a76a005146314df28c2577a7b2069165d1f2",
+      "textSha256": "73f3f39e3dd71d5a8ada0d9cb44c693dc656d2f826fe20165ea3c779b3a0e0dd"
+    },
+    {
+      "id": "S049",
+      "world": "提瓦特",
+      "title": "纳西妲",
+      "url": "https://wiki.biligame.com/ys/纳西妲",
+      "templateTargets": [
+        "人物"
+      ],
+      "fields": [
+        "身份与别名",
+        "角色故事",
+        "经历",
+        "性格证据"
+      ],
+      "priority": "核心",
+      "verification": "已读取页面",
+      "note": "原神裸页即档案；与 S012 编年史须弥段交叉核对。",
+      "game": "原神",
+      "materialType": "人物档案",
+      "sourceNature": "游戏内人物资料（BWIKI镜像）",
+      "rawPath": "来源原文/BWIKI/原神/人物档案/S049_纳西妲.html",
+      "textPath": "可用文本/原神/人物档案/S049_纳西妲.md",
+      "curlExit": 0,
+      "httpStatus": 200,
+      "effectiveUrl": "https://wiki.biligame.com/ys/纳西妲",
+      "retrievedAt": "2026-09-21T09:36:43.230807+00:00",
+      "cached": true,
+      "downloaded": true,
+      "rawBytes": 614591,
+      "textBytes": 48390,
+      "rawSha256": "61c84578e5fc8e6eb6057800426291d87f89cb194ba592664482bd378f2dfeb5",
+      "textSha256": "9a21730529609ed265ec5d3e5ff51321489ce6ac2c082a605611ff918684d590"
+    },
+    {
+      "id": "S050",
+      "world": "提瓦特",
+      "title": "纳西妲语音",
+      "url": "https://wiki.biligame.com/ys/纳西妲语音",
+      "templateTargets": [
+        "人物"
+      ],
+      "fields": [
+        "语气",
+        "价值观",
+        "人际关系"
+      ],
+      "priority": "核心",
+      "verification": "已读取页面",
+      "note": "注意其知识范围与长生种身份的关系。",
+      "game": "原神",
+      "materialType": "人物语音",
+      "sourceNature": "游戏内人物资料（BWIKI镜像）",
+      "rawPath": "来源原文/BWIKI/原神/人物语音/S050_纳西妲语音.html",
+      "textPath": "可用文本/原神/人物语音/S050_纳西妲语音.md",
+      "curlExit": 0,
+      "httpStatus": 200,
+      "effectiveUrl": "https://wiki.biligame.com/ys/纳西妲语音",
+      "retrievedAt": "2026-09-21T09:36:43.223258+00:00",
+      "cached": true,
+      "downloaded": true,
+      "rawBytes": 499056,
+      "textBytes": 104688,
+      "rawSha256": "c023cac43b24754fd760f91d9d7e010277088b1616fa4e355c1e568a2f639de6",
+      "textSha256": "6c43408bf015bfbb330c4314f781f9217125adca004a55a0338d550af1a03857"
+    },
+    {
+      "id": "S051",
+      "world": "提瓦特",
+      "title": "芙宁娜",
+      "url": "https://wiki.biligame.com/ys/芙宁娜",
+      "templateTargets": [
+        "人物"
+      ],
+      "fields": [
+        "身份与别名",
+        "角色故事",
+        "经历",
+        "性格证据"
+      ],
+      "priority": "核心",
+      "verification": "已读取页面",
+      "note": "与 S012 编年史枫丹段交叉核对；注意扮演身份与真实身份分层。",
+      "game": "原神",
+      "materialType": "人物档案",
+      "sourceNature": "游戏内人物资料（BWIKI镜像）",
+      "rawPath": "来源原文/BWIKI/原神/人物档案/S051_芙宁娜.html",
+      "textPath": "可用文本/原神/人物档案/S051_芙宁娜.md",
+      "curlExit": 0,
+      "httpStatus": 200,
+      "effectiveUrl": "https://wiki.biligame.com/ys/芙宁娜",
+      "retrievedAt": "2026-09-21T09:36:43.341838+00:00",
+      "cached": true,
+      "downloaded": true,
+      "rawBytes": 631198,
+      "textBytes": 54170,
+      "rawSha256": "ce286c422f29211e43e81d65d2dc45c2484337e286213cb72e596426764a7120",
+      "textSha256": "63ab28feee1d468c98f3ef0c58a0ee0e16bc5fcbb1f6593af51a6fa88d25a584"
+    },
+    {
+      "id": "S052",
+      "world": "提瓦特",
+      "title": "芙宁娜语音",
+      "url": "https://wiki.biligame.com/ys/芙宁娜语音",
+      "templateTargets": [
+        "人物"
+      ],
+      "fields": [
+        "语气",
+        "价值观",
+        "人际关系"
+      ],
+      "priority": "核心",
+      "verification": "已读取页面",
+      "note": "注意公开表演语气与私下语气的差别。",
+      "game": "原神",
+      "materialType": "人物语音",
+      "sourceNature": "游戏内人物资料（BWIKI镜像）",
+      "rawPath": "来源原文/BWIKI/原神/人物语音/S052_芙宁娜语音.html",
+      "textPath": "可用文本/原神/人物语音/S052_芙宁娜语音.md",
+      "curlExit": 0,
+      "httpStatus": 200,
+      "effectiveUrl": "https://wiki.biligame.com/ys/芙宁娜语音",
+      "retrievedAt": "2026-09-21T09:36:43.369031+00:00",
+      "cached": true,
+      "downloaded": true,
+      "rawBytes": 490317,
+      "textBytes": 111817,
+      "rawSha256": "6e2fbfd34cb7c352b4511a77bad84d890f46ea7b0da63dd53792fd122a08e159",
+      "textSha256": "7d8084b1ff30e20990a7ca45ee20de1c8f71344ef20ca7042481181a858a4c3b"
+    },
+    {
+      "id": "S053",
+      "world": "提瓦特",
+      "title": "雷电将军",
+      "url": "https://wiki.biligame.com/ys/雷电将军",
+      "templateTargets": [
+        "人物"
+      ],
+      "fields": [
+        "身份与别名",
+        "角色故事",
+        "经历",
+        "性格证据"
+      ],
+      "priority": "核心",
+      "verification": "已读取页面",
+      "note": "与 S011 雷神沿革交叉核对；巴尔／巴尔泽布／人偶三名共用称号。",
+      "game": "原神",
+      "materialType": "人物档案",
+      "sourceNature": "游戏内人物资料（BWIKI镜像）",
+      "rawPath": "来源原文/BWIKI/原神/人物档案/S053_雷电将军.html",
+      "textPath": "可用文本/原神/人物档案/S053_雷电将军.md",
+      "curlExit": 0,
+      "httpStatus": 200,
+      "effectiveUrl": "https://wiki.biligame.com/ys/雷电将军",
+      "retrievedAt": "2026-09-21T09:36:43.515448+00:00",
+      "cached": true,
+      "downloaded": true,
+      "rawBytes": 610346,
+      "textBytes": 41437,
+      "rawSha256": "124e7112c358f02fcd1ac5b69fc8c036acdb688cc1be99704b810aa1853c3e97",
+      "textSha256": "e0d6a01ef42415a2731a4bb0efe79b797e50ee6e7622e5bbbcbedb1948287511"
+    },
+    {
+      "id": "S054",
+      "world": "提瓦特",
+      "title": "雷电将军语音",
+      "url": "https://wiki.biligame.com/ys/雷电将军语音",
+      "templateTargets": [
+        "人物"
+      ],
+      "fields": [
+        "语气",
+        "价值观",
+        "人际关系"
+      ],
+      "priority": "核心",
+      "verification": "已读取页面",
+      "note": "核对说话主体是人偶还是神明。",
+      "game": "原神",
+      "materialType": "人物语音",
+      "sourceNature": "游戏内人物资料（BWIKI镜像）",
+      "rawPath": "来源原文/BWIKI/原神/人物语音/S054_雷电将军语音.html",
+      "textPath": "可用文本/原神/人物语音/S054_雷电将军语音.md",
+      "curlExit": 0,
+      "httpStatus": 200,
+      "effectiveUrl": "https://wiki.biligame.com/ys/雷电将军语音",
+      "retrievedAt": "2026-09-21T09:36:43.547671+00:00",
+      "cached": true,
+      "downloaded": true,
+      "rawBytes": 501912,
+      "textBytes": 95619,
+      "rawSha256": "292468a24397045d9761ea224090ead65b99921d64c7cfeb54184c01c15031ae",
+      "textSha256": "fb10dcb9dd968c601f41c23db5d3dc99a62ff910dcaf091b49a5012d88d5eee9"
     }
   ]
 }
