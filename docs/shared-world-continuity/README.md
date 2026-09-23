@@ -31,6 +31,7 @@
 | [05-canon-cutoff-schemes.md](05-canon-cutoff-schemes.md) | 两世界剧情截止点的表达体系与比较契约 | 选定 cutoff 或设计检索过滤时 |
 | [06-unverified-sources.md](06-unverified-sources.md) | 阶段 A 前必须读过正文的来源路径 | 写知识卡之前 |
 | [07-pilot-roster.md](07-pilot-roster.md) | 两世界各 4 名试点角色、判据、落选理由与待抓证据缺口 | 写角色模板或补抓资料时 |
+| [08-supplement-checklist.md](08-supplement-checklist.md) | 待使用者讲明的版本取值（V1–V7）与待补充的取材面 | 定 cutoff、补资料、写世界核心之前 |
 | [DEVELOPER_MODEL_PROTOCOL.md](DEVELOPER_MODEL_PROTOCOL.md) | 开发模型必须执行的读写节奏 | 每个开发会话开始时 |
 | [WORKSTATE.md](WORKSTATE.md) | 唯一持续维护的目标、进度、证据与下一步 | 每个开发回合开始、切换和结束时 |
 
