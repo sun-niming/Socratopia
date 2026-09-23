@@ -37,6 +37,7 @@ A **packaged Windows build artifact** of Socratopia (Electron + Next.js Socratic
 | Stage a clean release tree | `node tools/stage-clean-win-release.js stage [src] [dst]` |
 | Smoke test (any) | `node <path-to-smoke-test>` (self-contained, no deps, no running app) |
 | All smoke tests | `node tools/run-smoke-matrix.js` |
+| Gateway probe | `node tools/gateway-monitor/probe-agent-gw.js` (`--report` for stats) — permanent monitor for `agent-gw.kimi.com` (diagnoses `Model attempt execution lease expired`); see `tools/gateway-monitor/README.md`, do NOT delete in cleanups |
 
 `tools/new-route.js` was removed; scaffold routes by hand and keep the 3 route manifests consistent.
 
