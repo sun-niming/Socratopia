@@ -45,7 +45,11 @@ def game_name(url: str) -> str:
     return "其他"
 
 
-def material_type(title: str) -> str:
+def material_type(source: dict) -> str:
+    # 清单可用 "category" 显式指定资料类型（B 类条目页与主线章节正文页使用）
+    if source.get("category"):
+        return source["category"]
+    title = source["title"]
     if "语音" in title:
         return "人物语音"
     if "NPC" in title:
@@ -63,9 +67,10 @@ def material_type(title: str) -> str:
     return "世界文献"
 
 
-def source_nature(title: str) -> str:
-    kind = material_type(title)
-    if kind in {"世界设定", "历史编年"}:
+def source_nature(source: dict) -> str:
+    kind = material_type(source)
+    title = source["title"]
+    if kind in {"世界设定", "历史编年", "地点条目", "组织条目", "信仰神系"}:
         return "社区设定汇总（引用游戏内容）"
     if kind in {"人物目录", "NPC目录"}:
         return "社区资料索引"
@@ -73,6 +78,10 @@ def source_nature(title: str) -> str:
         return "游戏内人物资料（BWIKI镜像）"
     if kind == "剧情任务":
         return "游戏内任务资料（BWIKI整理／镜像）"
+    if kind == "剧情任务正文":
+        return "游戏内任务正文（BWIKI整理／镜像）"
+    if kind == "节庆民俗":
+        return "游戏内节庆资料（BWIKI整理）"
     if title == "翁法罗斯剧情阅读物":
         return "游戏内文献聚合（BWIKI整理）"
     return "游戏内文献（BWIKI镜像）"
@@ -80,7 +89,7 @@ def source_nature(title: str) -> str:
 
 def local_paths(source: dict) -> tuple[Path, Path]:
     game = game_name(source["url"])
-    kind = material_type(source["title"])
+    kind = material_type(source)
     stem = safe_name(f'{source["id"]}_{source["title"]}')
     raw = DATA_ROOT / "来源原文" / "BWIKI" / game / kind / f"{stem}.html"
     text = DATA_ROOT / "可用文本" / game / kind / f"{stem}.md"
@@ -96,8 +105,8 @@ def fetch_one(source: dict, refresh: bool) -> dict:
         return {
             **source,
             "game": game_name(source["url"]),
-            "materialType": material_type(source["title"]),
-            "sourceNature": source_nature(source["title"]),
+            "materialType": material_type(source),
+            "sourceNature": source_nature(source),
             "rawPath": raw_path.relative_to(DATA_ROOT).as_posix(),
             "textPath": text_path.relative_to(DATA_ROOT).as_posix(),
             "curlExit": 0,
@@ -143,8 +152,8 @@ def fetch_one(source: dict, refresh: bool) -> dict:
     return {
         **source,
         "game": game_name(source["url"]),
-        "materialType": material_type(source["title"]),
-        "sourceNature": source_nature(source["title"]),
+        "materialType": material_type(source),
+        "sourceNature": source_nature(source),
         "rawPath": raw_path.relative_to(DATA_ROOT).as_posix(),
         "textPath": text_path.relative_to(DATA_ROOT).as_posix(),
         "curlExit": result.returncode,
