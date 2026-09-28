@@ -69,8 +69,9 @@ console.log("== chapter-act parses the real S017 headings ==");
   eq(nine.chapter, 6, "空月之歌 arc resolves to chapter 6");
   eq(nine.act, 9, "第九幕 is act 9");
 
-  // S017 headings append the act name; it carries no order so it is dropped.
-  eq(V.parseChapterAct("第七章 第一幕死魂灵的夜曲").act, 1, "trailing act name ignored");
+  // S133/S134 headings append the act name; it carries no order so it is dropped.
+  eq(V.parseChapterAct("第七章 第二幕死魂灵的夜曲").act, 2, "trailing act name ignored");
+  eq(V.parseChapterAct("第七章 第一幕无神怜爱的雪国").chapter, 7, "chapter-name suffix ignored too");
   eq(V.parseChapterAct("空月之歌·第九幕身土坏空").act, 9, "named 空月之歌 act");
   eq(V.parseChapterAct("第六章 空月之歌").act, 0, "bare chapter means chapter start");
   eq(V.parseChapterAct("空月之歌·序奏归途").act, 0, "序奏 is act 0");
