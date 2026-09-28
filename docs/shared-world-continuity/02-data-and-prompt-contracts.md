@@ -59,7 +59,7 @@ worlds/<worldId>/
 {"axis": "genshin-chapter-act", "value": "<章·幕>", "versionFloor": "<版本>"}
 ```
 
-`versionFloor` 只用于版本轴上的过滤，不参与章·幕比较；轴语义、编码规则与取舍理由见 `05-canon-cutoff-schemes.md` 第 5 节。提瓦特的 `value` 与 `versionFloor` 仍待使用者选定。
+`versionFloor` 只用于版本轴上的过滤，不参与章·幕比较；**两轴冲突时以版本轴裁决**。轴语义、编码规则与取舍理由见 `05-canon-cutoff-schemes.md` 第 5 节。两世界的取值已定（D015／D016）：翁法罗斯 `3.7`，提瓦特 `第七章·第二幕`／`7.0`。
 
 ## 3. 知识卡契约
 
