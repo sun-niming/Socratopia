@@ -92,7 +92,7 @@
 
 | 阶段 | 必跑 | 不在该阶段运行 |
 |---|---|---|
-| A 内容契约 | schema/data audit；知识卡来源完整性 | 全矩阵、路由测试、UI 测试 |
+| A 内容契约 | `python3 tools/audit-lore-cards.py`；`python3 tools/audit-lore-package.py` | 全矩阵、路由测试、UI 测试 |
 | B 检索 | T1；编辑文件 `node --check` | 事务、前端、Electron 测试 |
 | C 状态 | T2；现有 transaction test | 知识源全套测试、UI 测试 |
 | D 路由集成 | T3；相关 chat/groupchat test；acorn | OCR、TTS、数学朗读等无关测试 |

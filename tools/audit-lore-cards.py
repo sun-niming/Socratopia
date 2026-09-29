@@ -193,6 +193,16 @@ def main():
         for cid in CHAR_IDS[canon]:
             check(cid in chars_used, f"{canon}: 角色 {cid} 至少出现在一张卡上")
 
+        # conflictsWith 必须对称、同 canon、且指向存在的卡——单向声明会让冲突
+        # 只在一半场景被看到（02：不静默合并，但也不许只连一头）。
+        for c in cards:
+            for t in c.get("conflictsWith") or []:
+                check(t in seen, f"{canon}/{c['cardId']}: conflictsWith 指向存在的卡 ({t})")
+                other = next((x for x in cards if x["cardId"] == t), None)
+                if other is not None:
+                    check(c["cardId"] in (other.get("conflictsWith") or []),
+                          f"{canon}/{c['cardId']}: conflictsWith 与 {t} 对称")
+
         # 别名表必须与卡片双向自洽：无空别名、不指向不存在的卡、卡片别名全被聚合。
         amap = aliases.get("aliases") or {}
         check(bool(amap), f"{canon}: aliases.json 非空")

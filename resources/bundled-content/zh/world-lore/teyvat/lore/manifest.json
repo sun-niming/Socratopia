@@ -2,10 +2,32 @@
   "schemaVersion": 1,
   "worldId": "teyvat",
   "canon": "teyvat",
-  "canonCutoff": {"axis": "genshin-chapter-act", "value": "第七章·第二幕", "versionFloor": "7.0"},
+  "canonCutoff": {
+    "axis": "genshin-chapter-act",
+    "value": "第七章·第二幕",
+    "versionFloor": "7.0"
+  },
   "defaultLocation": "璃月",
   "language": "zh-Hans",
   "sourceBundleVersion": "2026-09-29",
   "cardCount": 34,
-  "generatedAt": "2026-09-29T00:00:00.000Z"
+  "generatedAt": "2026-09-29T00:00:00.000Z",
+  "pilotSlots": {
+    "npc_a": {
+      "id": "zhongli",
+      "name": "钟离"
+    },
+    "npc_b": {
+      "id": "nahida",
+      "name": "纳西妲"
+    },
+    "npc_c": {
+      "id": "furina",
+      "name": "芙宁娜"
+    },
+    "npc_d": {
+      "id": "raiden_shogun",
+      "name": "雷电将军"
+    }
+  }
 }

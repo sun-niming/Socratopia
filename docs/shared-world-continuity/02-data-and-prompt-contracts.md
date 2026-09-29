@@ -46,9 +46,15 @@ worlds/<worldId>/
   "language": "zh-Hans",
   "sourceBundleVersion": "2026-09-15",
   "cardCount": 40,
-  "generatedAt": "2026-09-15T00:00:00.000Z"
+  "generatedAt": "2026-09-15T00:00:00.000Z",
+  "pilotSlots": {
+    "npc_a": {"id": "phainon", "name": "白厄"},
+    "npc_b": {"id": "aglaea", "name": "阿格莱雅"}
+  }
 }
 ```
+
+`pilotSlots` 把槽位文件名（`npc_a.md`）与卡片里用的角色 id、模板 H1 用的人名绑定起来。没有它，这层绑定只存在于散文里，卡片与模板会对不上而无人察觉。
 
 `worldId` 必须以服务器解析出的世界为准，不能信任导入文件中的 worldId。导入时若不一致，使用服务器作用域覆盖并记录审计信息。
 
