@@ -102,7 +102,7 @@ worlds/<worldId>/
 
 - `cardId` 在同一 source bundle 内唯一且稳定；
 - `summary` 只放可直接支持的结论，可以是概括；
-- `evidence` 是**逐字引文**，不是概括——只能用 `…` 省略中间内容（`…` 两侧各自成段，每段都必须逐字）。引文必须能在**该卡自己引的来源**里逐字查到，`tmp/audit-lore-cards.py` 会强制；概括写进 `summary`。
+- `evidence` 是**逐字引文**，不是概括——只能用 `…` 省略中间内容（`…` 两侧各自成段，每段都必须逐字）。引文必须能在**该卡自己引的来源**里逐字查到，`tools/audit-lore-cards.py` 会强制；概括写进 `summary`。
 - 每张卡至少一个来源，`local_canon` 事件卡除外；
 - `hypothesis` 默认不得进入角色陈述，只能在明确讨论推测时返回；
 - 冲突资料分别建卡并通过 `conflictsWith` 关联，不静默合并；

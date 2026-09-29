@@ -135,14 +135,14 @@ checkpoint ID：`SWC-001-B2`。日期：2026-09-29。
 
 1. 卡契约补齐两个未命名处：提瓦特卡片的版本过滤字段命名为 `versionRange`（与 `timeRange` 对称）；`type` 值域固定为 `world/location/faction/history/person/relation/secret/culture/document`；
 2. 写 `resources/bundled-content/zh/world-lore/<canon>/lore/{manifest.json,cards.jsonl,aliases.json}`；
-3. 新增 `tmp/audit-lore-cards.py`：JSONL 可解析、必填字段与值域、`cardId` 唯一且前缀=canon、来源可追溯到 `资料/索引/下载清单.json`（sourceId 存在、url 相符、来源 world 与 canon 相符）、`spoilerLevel ≤ cutoff`（**复用 `version-order.js` 做轴比较**）、类别覆盖下限。
+3. 新增 `tools/audit-lore-cards.py`：JSONL 可解析、必填字段与值域、`cardId` 唯一且前缀=canon、来源可追溯到 `资料/索引/下载清单.json`（sourceId 存在、url 相符、来源 world 与 canon 相符）、`spoilerLevel ≤ cutoff`（**复用 `version-order.js` 做轴比较**）、类别覆盖下限。
 
 明确不做：不写 `retriever.js`（T1 属阶段 B）；不挂 `global.*`；不改 chat／groupchat；不改 `go:template` 三个模板文件；不新增依赖。
 
 预计修改的文件：
 
 - `resources/bundled-content/zh/world-lore/{amphoreus,teyvat}/lore/{manifest.json,cards.jsonl,aliases.json}`（6 个新文件）
-- `tmp/audit-lore-cards.py`
+- `tools/audit-lore-cards.py`
 - `docs/shared-world-continuity/{02,WORKSTATE}.md`
 
 必须保持的三个关键不变量：同"关键不变量"，重点是**世界知识必须经过 cutoff 过滤**与**私密知识默认拒绝**，二者要在卡字段上可表达。
@@ -150,7 +150,7 @@ checkpoint ID：`SWC-001-B2`。日期：2026-09-29。
 最小验证：
 
 ```bash
-python3 tmp/audit-lore-cards.py            # 期望 exit 0，fail=0
+python3 tools/audit-lore-cards.py            # 期望 exit 0，fail=0
 node --check resources/server/lib/world-lore/version-order.js
 python3 tmp/check-doc-links.py
 ```
@@ -510,7 +510,7 @@ python tmp/check-disk-hashes.py                                  # 期望 ok=98 
   | # | 命令 | 退出码 | 期望 |
   |---|---|---|---|
   | 1 | `python tmp/spot-fetch-genre.py`（17 篇题名不可判的歧义条目慢速抽查，15s 间隔） | `0` | 全部 HTTP 200 未触限流；抽查件仅落 `tmp/genre-spotcheck/`，不入库、不进清单 |
-  | 2 | `python tmp/apply-genre-column.py`（md＋json 同步加列，断言 153 行全映射无遗漏） | `0` | 分布：书信 28／诗歌 24／记录 24／论著 17／公文 16／工具书 13／史书 7／仪典宗教 5／铭文 5／故事传说 4／寓言童话 3／小说 3／人物传记 2／戏剧 1／聚合入口 1 |
+  | 2 | `python 资料/工具/apply-genre-column.py`（md＋json 同步加列，断言 153 行全映射无遗漏） | `0` | 分布：书信 28／诗歌 24／记录 24／论著 17／公文 16／工具书 13／史书 7／仪典宗教 5／铭文 5／故事传说 4／寓言童话 3／小说 3／人物传记 2／戏剧 1／聚合入口 1 |
 
 - 关键事实：星铁 BWIKI 书架页**无**体裁字段（信息框仅卷数／所属／实装版本／相关角色／相关任务／获取方式，wiki 分类只有「书籍」），故体裁列是整理方判定、非 wiki 原数据；63 条正文确认（46 篇归档正文 S020–S034、S219–S251＋17 篇抽查）、90 条题名推断。
 - 抽查修正的反直觉判定（只看书名会判错的）：`不死的弥卡斯王`=戏剧（带歌队的演出剧本）、`阳雷骑士真传`=人物传记（匿名考辨体）、`「富家翁」维奥提斯的生意经`=人物传记（语录体生平）、`海渊中的密语`=书信、焚风等四篇「箴言」=诗歌（韵文宣告）。
@@ -524,7 +524,7 @@ python tmp/check-disk-hashes.py                                  # 期望 ok=98 
 
   | # | 命令 | 退出码 | 期望 |
   |---|---|---|---|
-  | 1 | `python3 tmp/add-genre-basis.py` | `0` | rows 153／正文 64／题名 89；正文来源拆分 归档 47＋抽查 17 |
+  | 1 | `python3 资料/工具/add-genre-basis.py` | `0` | rows 153／正文 64／题名 89；正文来源拆分 归档 47＋抽查 17 |
   | 2 | 独立校验：列数、值域、md↔json 三元组、json 补齐率 | `0` | 列数异常 0、依据域外空集、不一致 0、缺 `basis` 0 |
   | 3 | 再跑一次脚本（幂等） | `0` | 输出与首次一致 |
   | 4 | 行尾检查 | `0` | md/json 全 CRLF 不变（索引树不受 `-text` 约束，沿用 `write_text` 默认） |
@@ -539,18 +539,18 @@ python tmp/check-disk-hashes.py                                  # 期望 ok=98 
   2. `add-genre-basis.py` 改为**以 json 为唯一真源**重建 md 行，不再依赖 md 的输入状态；
   3. 前言改由 `add-genre-basis.py` 独占，`apply` 只在缺前言时补占位，两者遂各自幂等且与先后顺序无关。
   - 复核：两种顺序各跑一轮，`git diff` 全程 clean；153 行 4 列 0 异常；md↔json 三元组 0 不一致。
-  - 两个脚本都在 `tmp/`（gitignored），故生成方式已写进索引前言，否则新克隆无法重建。
+  - 两个脚本现已移入 `资料/工具/` 随资料入库（原先只在 gitignored 的 `tmp/`），生成方式同时写进索引前言。
 - 影响下一步：`08` 第二部分 C 关闭；写卡时可用「依据」列一条命令筛出需先复核的 89 条。
 - 影响下一步：`08` 第二部分 C 随之关闭（决定＋数据面均就绪）。
 
 ### 2026-09-29｜SWC-001-B2（知识卡 68 张 + 审计脚本）
 
-- 范围：两世界各 34 张知识卡、`lore/manifest.json`、`lore/aliases.json`；新增 `tmp/audit-lore-cards.py`。卡片由两个子代理按固定规格并行产出，本会话逐项复核并修正。
+- 范围：两世界各 34 张知识卡、`lore/manifest.json`、`lore/aliases.json`；新增 `tools/audit-lore-cards.py`。卡片由两个子代理按固定规格并行产出，本会话逐项复核并修正。
 - 命令与退出码：
 
   | # | 命令 | 退出码 | 期望 |
   |---|---|---|---|
-  | 1 | `python3 tmp/audit-lore-cards.py` | `0` | PASS，3073 passed / 0 failed |
+  | 1 | `python3 tools/audit-lore-cards.py` | `0` | PASS，3073 passed / 0 failed |
   | 2 | `python3 tmp/patch-card-evidence.py`（重跑） | `0` | 各世界 0 处编辑＝幂等 |
   | 3 | `node --check resources/server/lib/world-lore/version-order.js` | `0` | 0（审计经它做轴比较） |
   | 4 | cutoff 越界扫描（二相乐园／4.x；往冥府／7.x） | `0` | 0 命中 |
