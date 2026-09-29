@@ -4,13 +4,13 @@
 
 ## 快速恢复区
 
-最后更新：2026-09-28。  
-当前 checkpoint：`SWC-001-B1`（10 份模板初稿已完成，下一片为知识卡）。  
-当前阶段：阶段 A——内容契约与最小样本（模板已完成；知识卡未产出）。  
+最后更新：2026-09-29。  
+当前 checkpoint：`SWC-001-B2`（知识卡已完成，阶段 A 内容齐备）。  
+当前阶段：阶段 A——内容契约与最小样本（两世界核心、8 份模板、68 张知识卡均已产出并过审计）。  
 当前分支：`codex/push`。  
 设计前备份：`codex/stage-backup-20260915-world-lore-plan`，提交 `b8d171de0ab207e422d37a7d2b7e7b2123a8bf15`。  
 当前唯一目标：`SWC-001-B`——产出两世界核心 ×2、角色模板 ×8、知识卡 30–50 张／世界。  
-唯一下一步：写知识卡 30–50 张／世界，覆盖公共常识、地点、两段历史、四人关系、至少两项秘密（阶段 A 完成定义，见 `01`）；每张卡须可追溯到 `资料/` 的来源 ID 与 URL。  
+唯一下一步：阶段 A 完成定义的最后一项是"同一秘密不会被无权限角色检索到"——静态数据已能表达（`knowledgeScope` 经审计），但**检索尚未实现**（`retriever.js` 属阶段 B）。故下一步是阶段 A 收尾复核，或直接进 `SWC-002`。  
 待使用者回话：无阻塞。
 
 ## 关键不变量
@@ -40,7 +40,7 @@
     - [x] 提瓦特 `canonCutoff.value`=`第七章·第二幕`、`versionFloor`=`7.0`（2026-09-27 回填，D015）。
   - [~] `SWC-001-B` 世界核心 ×2、角色模板 ×8、知识卡 30–50 张／世界。
     - [x] 两世界核心 `story.md` ×2 与角色模板 `npc_*.md` ×8 初稿（2026-09-28，`B1`）。落点 `resources/bundled-content/zh/world-lore/<canon>/`。
-    - [ ] 知识卡 30–50 张／世界。
+    - [x] 知识卡各 34 张 + `lore/manifest.json` + `lore/aliases.json`（2026-09-29，`B2`）。审计 3073 项 0 失败。
 - [ ] `SWC-002` 阶段 B：本地世界知识检索。
 - [ ] `SWC-003` 阶段 C：动态世界状态和事件提交。
 - [ ] `SWC-004` 阶段 D：chat／groupchat 统一上下文。
@@ -123,6 +123,40 @@ grep -L 'S0[0-9][0-9]\|S1[0-9][0-9]\|S2[0-9][0-9]' resources/bundled-content/zh/
 
 完成判据：10 个文件落盘；`story.md` 正文 ≤4000 字符、`npc_*.md` 正文 ≤1800 字符（`02` 的注入预算）；每个事实带出处或标推断；两世界内容不互相串用；四条验证命令通过并写入日志。
 
+## 本回合执行契约（当前）
+
+checkpoint ID：`SWC-001-B2`。日期：2026-09-29。
+
+背景：`B1` 的 10 份模板已完成。本切片是阶段 A 的最后一项内容产出——知识卡。阶段门（`04` §4）只要求 **schema/data audit ＋ 来源完整性**，不要求 T1–T4 行为测试。
+
+唯一目标：两世界各 30–50 张知识卡与 `lore/manifest.json`，并通过审计。
+
+范围：
+
+1. 卡契约补齐两个未命名处：提瓦特卡片的版本过滤字段命名为 `versionRange`（与 `timeRange` 对称）；`type` 值域固定为 `world/location/faction/history/person/relation/secret/culture/document`；
+2. 写 `resources/bundled-content/zh/world-lore/<canon>/lore/{manifest.json,cards.jsonl,aliases.json}`；
+3. 新增 `tmp/audit-lore-cards.py`：JSONL 可解析、必填字段与值域、`cardId` 唯一且前缀=canon、来源可追溯到 `资料/索引/下载清单.json`（sourceId 存在、url 相符、来源 world 与 canon 相符）、`spoilerLevel ≤ cutoff`（**复用 `version-order.js` 做轴比较**）、类别覆盖下限。
+
+明确不做：不写 `retriever.js`（T1 属阶段 B）；不挂 `global.*`；不改 chat／groupchat；不改 `go:template` 三个模板文件；不新增依赖。
+
+预计修改的文件：
+
+- `resources/bundled-content/zh/world-lore/{amphoreus,teyvat}/lore/{manifest.json,cards.jsonl,aliases.json}`（6 个新文件）
+- `tmp/audit-lore-cards.py`
+- `docs/shared-world-continuity/{02,WORKSTATE}.md`
+
+必须保持的三个关键不变量：同"关键不变量"，重点是**世界知识必须经过 cutoff 过滤**与**私密知识默认拒绝**，二者要在卡字段上可表达。
+
+最小验证：
+
+```bash
+python3 tmp/audit-lore-cards.py            # 期望 exit 0，fail=0
+node --check resources/server/lib/world-lore/version-order.js
+python3 tmp/check-doc-links.py
+```
+
+完成判据：两世界各 ≥30 卡；类别覆盖达下限（每世界 world≥1、location≥4、history≥2、relation≥2、secret≥2、culture≥1、faction≥1、person≥1）；审计 0 fail；每卡可追溯到 `资料/` 的真实来源 ID 与 URL。
+
 ---（以下为上回合记录，保留）---
 
 目标：把 `07-pilot-roster.md` §3 的待抓页面真正抓进 `资料/` 并读正文核验，使名单里缺 A 级证据的 5 人（那刻夏、万敌、纳西妲、芙宁娜、雷电将军）各自具备专属档案与语音页。
@@ -196,6 +230,9 @@ python tmp/check-disk-hashes.py                                  # 期望 ok=98 
 - [!] 语音页有已知提取噪声：每条语音按「标题 + 中/日/英/韩四语正文」展开，随后同名标题会随语言切换标签重复一次；`S053` 的「官方贺图」段混入其他角色贺词。写语气基线时以原始 HTML 为准，不要统计标题重复数。
 - [!] 背景角色采用临时场景 NPC 时，身份和记忆隔离的最终接口尚待阶段 E 设计。
 - [x] ~~`间章第K幕` 的章节锚在 K=4 处是推断而非直接证据~~ → 由 D019 处置：冲突以版本轴裁决，`D013` 锚不再需要人工校正。
+- [!] 提瓦特的秘密卡**没有用 `deny`**（amphoreus 用了 5 张）。teyvat 的五张 secret 卡只靠 `allow` 表达"谁知道"，没有"谁被逐出"。机制上够用（私密默认拒绝），但两世界口径不一致，阶段 B 写检索前应统一或明确接受差异。
+- [!] 空月之歌各幕的版本名是「月之N」，版本轴解析不了。teyvat 落在该区间的卡片 `versionRange` 统一取 `5.8`（V3 表里该区间唯一的数字版本）作为上界——它是**保守下界**而非真实版本，故该区间内的版本轴排序会失真；章·幕轴不受影响。见 `05` §6。
+- [!] 部分卡片的 `locator` 是「网页正文（自动提取）」这类泛值，复核时定位不到具体段落；其余多数已写到章节／卷名级别。
 - [!] `D013` 的 K=4 锚仍是推断（实测版本 5.6 显示真实位置在第五章后段），仅在**纯章·幕比较**且无版本字段时才暴露错序。
 - [ ] 是否允许玩家主动进入 AU 分支及其 UI 表达尚未决定；首版按显式标记处理。
 - [x] ~~`资料/` 未受版本控制~~ → 已由 D008 处置。
@@ -505,6 +542,30 @@ python tmp/check-disk-hashes.py                                  # 期望 ok=98 
   - 两个脚本都在 `tmp/`（gitignored），故生成方式已写进索引前言，否则新克隆无法重建。
 - 影响下一步：`08` 第二部分 C 关闭；写卡时可用「依据」列一条命令筛出需先复核的 89 条。
 - 影响下一步：`08` 第二部分 C 随之关闭（决定＋数据面均就绪）。
+
+### 2026-09-29｜SWC-001-B2（知识卡 68 张 + 审计脚本）
+
+- 范围：两世界各 34 张知识卡、`lore/manifest.json`、`lore/aliases.json`；新增 `tmp/audit-lore-cards.py`。卡片由两个子代理按固定规格并行产出，本会话逐项复核并修正。
+- 命令与退出码：
+
+  | # | 命令 | 退出码 | 期望 |
+  |---|---|---|---|
+  | 1 | `python3 tmp/audit-lore-cards.py` | `0` | PASS，3073 passed / 0 failed |
+  | 2 | `python3 tmp/patch-card-evidence.py`（重跑） | `0` | 各世界 0 处编辑＝幂等 |
+  | 3 | `node --check resources/server/lib/world-lore/version-order.js` | `0` | 0（审计经它做轴比较） |
+  | 4 | cutoff 越界扫描（二相乐园／4.x；往冥府／7.x） | `0` | 0 命中 |
+
+- 结果：
+  - 覆盖达标：两世界各 world≥4、location≥7、history 3、relation≥3、secret 5、culture≥2、faction≥3、person 4、document 1；四名角色各自出现。
+  - 卡契约补两处未命名处并写入 `02`：`evidence` 收严为**逐字引文**（只允许 `…` 省略，且必须能在被引来源里逐字查到）；提瓦特卡的版本过滤字段定名 `versionRange`。
+  - 审计新增两条实质检查，都抓到真问题：①引文逐字在**被引来源**中（不是"在资料某处"）；②非 public 卡必须有非空 `allow`。
+- **子代理产出的真实缺陷（复核才发现，子代理报"0 FAIL"因当时审计还没这两条）**：
+  1. 20 条引文用概括冒充引文，其中 4 条是换词（`直至`/`直到`、`我曾`/`我还`、`我对`/`纳西妲对`、`神性已经消散`/`神性的部分已经消散`）；
+  2. 16 条引文其实在被引来源**之外**（补来源即可，非错引）；
+  3. teyvat 一张 secret 卡 `allow` 为空 → 谁都检索不到（死卡）；
+  4. teyvat 一张卡的 `allow` 漏掉引用其原话的角色（钟离的话在证据里却不许钟离检索到）。
+- 本会话自身也踩一坑：`patch-card-evidence.py` 的 `EDITS` 里**同名 key 写了两遍**，后者整个覆盖前者，导致 4 张卡的来源没被补上而表面"通过"。已修并在脚本内注明。
+- 影响下一步：阶段 A 内容齐备，阶段门（`04` §4）要求的两项（schema/data audit、来源完整性）均达成。检索行为验证属阶段 B。
 
 ## 交接说明
 

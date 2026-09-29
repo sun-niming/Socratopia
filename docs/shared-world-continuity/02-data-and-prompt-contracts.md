@@ -101,13 +101,14 @@ worlds/<worldId>/
 约束：
 
 - `cardId` 在同一 source bundle 内唯一且稳定；
-- `summary` 只放可直接支持的结论；
-- `evidence` 是短证据，不复制大段原文；
+- `summary` 只放可直接支持的结论，可以是概括；
+- `evidence` 是**逐字引文**，不是概括——只能用 `…` 省略中间内容（`…` 两侧各自成段，每段都必须逐字）。引文必须能在**该卡自己引的来源**里逐字查到，`tmp/audit-lore-cards.py` 会强制；概括写进 `summary`。
 - 每张卡至少一个来源，`local_canon` 事件卡除外；
 - `hypothesis` 默认不得进入角色陈述，只能在明确讨论推测时返回；
 - 冲突资料分别建卡并通过 `conflictsWith` 关联，不静默合并；
 - `spoilerLevel` 和 `timeRange` 双重约束当前剧情截止点，两者取值必须落在**同一轴**上（该轴由 manifest 的 `canonCutoff.axis` 决定）；
-- 私密资料默认拒绝，只有显式 allow 才可返回。
+- 提瓦特卡额外带 `versionRange`（形状同 `timeRange`），取值是**版本号**，只与 `canonCutoff.versionFloor` 同轴比较、供版本轴过滤（D018）；章·幕仍是 `timeRange`／`spoilerLevel`。两轴冲突时以版本轴裁决（D019）。
+- 私密资料默认拒绝，只有显式 allow 才可返回。因此**非 `public` 卡必须写出非空 `allow`**，否则谁都检索不到（死卡）；`deny` 用于在 allow 之外再逐出具体角色。
 
 ## 4. 动态状态契约
 

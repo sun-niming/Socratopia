@@ -1,0 +1,233 @@
+{
+  "schemaVersion": 1,
+  "aliases": {
+    "提瓦特大陆": [
+      "teyvat.world.overview.001"
+    ],
+    "七国": [
+      "teyvat.world.overview.001"
+    ],
+    "七元素": [
+      "teyvat.world.elements.002"
+    ],
+    "元素力": [
+      "teyvat.world.elements.002"
+    ],
+    "神之眼": [
+      "teyvat.world.vision.003"
+    ],
+    "原神": [
+      "teyvat.world.vision.003"
+    ],
+    "月之轮": [
+      "teyvat.world.vision.003"
+    ],
+    "神之心": [
+      "teyvat.world.gnosis.004"
+    ],
+    "神座": [
+      "teyvat.world.gnosis.004"
+    ],
+    "风之国": [
+      "teyvat.location.mondstadt.001"
+    ],
+    "自由之都": [
+      "teyvat.location.mondstadt.001"
+    ],
+    "蒙德城": [
+      "teyvat.location.mondstadt.001"
+    ],
+    "璃月港": [
+      "teyvat.location.liyue.002"
+    ],
+    "岩之国": [
+      "teyvat.location.liyue.002"
+    ],
+    "雷之国": [
+      "teyvat.location.inazuma.003"
+    ],
+    "鸣神岛": [
+      "teyvat.location.inazuma.003"
+    ],
+    "稻妻城": [
+      "teyvat.location.inazuma.003"
+    ],
+    "草之国": [
+      "teyvat.location.sumeru.004"
+    ],
+    "须弥城": [
+      "teyvat.location.sumeru.004"
+    ],
+    "水之国": [
+      "teyvat.location.fontaine.005"
+    ],
+    "枫丹廷": [
+      "teyvat.location.fontaine.005"
+    ],
+    "火之国": [
+      "teyvat.location.natlan.006"
+    ],
+    "冰之国": [
+      "teyvat.location.snezhnaya.007"
+    ],
+    "至冬堡": [
+      "teyvat.location.snezhnaya.007"
+    ],
+    "十一执行官": [
+      "teyvat.faction.fatui.001"
+    ],
+    "Fatui": [
+      "teyvat.faction.fatui.001"
+    ],
+    "骑士团": [
+      "teyvat.faction.knights.002"
+    ],
+    "教令院": [
+      "teyvat.faction.akademiya.003"
+    ],
+    "大贤者": [
+      "teyvat.faction.akademiya.003"
+    ],
+    "社奉行": [
+      "teyvat.faction.tri_commission.004"
+    ],
+    "天领奉行": [
+      "teyvat.faction.tri_commission.004"
+    ],
+    "勘定奉行": [
+      "teyvat.faction.tri_commission.004"
+    ],
+    "葬火之战": [
+      "teyvat.history.ancient.001"
+    ],
+    "降下天钉": [
+      "teyvat.history.ancient.001"
+    ],
+    "天钉": [
+      "teyvat.history.ancient.001"
+    ],
+    "魔神战争": [
+      "teyvat.history.archon_war.002"
+    ],
+    "坎瑞亚": [
+      "teyvat.history.khaenriah.003"
+    ],
+    "摩拉": [
+      "teyvat.culture.mora.001"
+    ],
+    "黄金屋": [
+      "teyvat.culture.mora.001"
+    ],
+    "海灯节": [
+      "teyvat.culture.lantern_rite.002"
+    ],
+    "霄灯": [
+      "teyvat.culture.lantern_rite.002"
+    ],
+    "明霄灯": [
+      "teyvat.culture.lantern_rite.002"
+    ],
+    "逐月节": [
+      "teyvat.culture.lantern_rite.002"
+    ],
+    "风花节": [
+      "teyvat.culture.windblume.003"
+    ],
+    "风之花": [
+      "teyvat.culture.windblume.003"
+    ],
+    "羽球节": [
+      "teyvat.culture.windblume.003"
+    ],
+    "归风佳酿节": [
+      "teyvat.culture.windblume.003"
+    ],
+    "钟离": [
+      "teyvat.relation.zhongli_raiden.001",
+      "teyvat.relation.zhongli_furina.002",
+      "teyvat.person.zhongli.001"
+    ],
+    "摩拉克斯": [
+      "teyvat.relation.zhongli_raiden.001",
+      "teyvat.secret.zhongli_archon.001"
+    ],
+    "雷电影": [
+      "teyvat.relation.zhongli_raiden.001",
+      "teyvat.secret.raiden_puppet.002"
+    ],
+    "巴尔泽布": [
+      "teyvat.relation.zhongli_raiden.001"
+    ],
+    "芙宁娜": [
+      "teyvat.relation.zhongli_furina.002",
+      "teyvat.relation.nahida_furina.003",
+      "teyvat.secret.furina_human.004",
+      "teyvat.person.furina.003"
+    ],
+    "纳西妲": [
+      "teyvat.relation.nahida_furina.003",
+      "teyvat.person.nahida.002"
+    ],
+    "布耶尔": [
+      "teyvat.relation.nahida_furina.003"
+    ],
+    "岩王帝君": [
+      "teyvat.secret.zhongli_archon.001"
+    ],
+    "送仙典仪": [
+      "teyvat.secret.zhongli_archon.001"
+    ],
+    "巴尔": [
+      "teyvat.secret.raiden_puppet.002"
+    ],
+    "一心净土": [
+      "teyvat.secret.raiden_puppet.002"
+    ],
+    "雷电将军": [
+      "teyvat.secret.raiden_puppet.002",
+      "teyvat.person.raiden.004"
+    ],
+    "大慈树王": [
+      "teyvat.secret.nahida_tree.003"
+    ],
+    "世界树": [
+      "teyvat.secret.nahida_tree.003"
+    ],
+    "芙卡洛斯": [
+      "teyvat.secret.furina_human.004"
+    ],
+    "三月女神": [
+      "teyvat.secret.columbia_moon.005"
+    ],
+    "哥伦比娅": [
+      "teyvat.secret.columbia_moon.005"
+    ],
+    "空月之歌": [
+      "teyvat.secret.columbia_moon.005"
+    ],
+    "往生堂客卿": [
+      "teyvat.person.zhongli.001"
+    ],
+    "小吉祥草王": [
+      "teyvat.person.nahida.002"
+    ],
+    "水神": [
+      "teyvat.person.furina.003"
+    ],
+    "不休独舞": [
+      "teyvat.person.furina.003"
+    ],
+    "御建鸣神主尊大御所": [
+      "teyvat.person.raiden.004"
+    ],
+    "永恒之神": [
+      "teyvat.person.raiden.004"
+    ],
+    "提瓦特游览指南": [
+      "teyvat.document.travel_guide.001"
+    ],
+    "冒险家协会": [
+      "teyvat.document.travel_guide.001"
+    ]
+  }
+}
