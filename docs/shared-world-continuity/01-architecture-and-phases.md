@@ -45,11 +45,13 @@
 
 建议在 `resources/server/lib/` 下新增手写模块，避免把核心逻辑直接写进编译 bundle：
 
-| 模块 | 单一职责 |
-|---|---|
-| `world-lore/card-schema.js` | 校验与规范化知识卡，不负责检索 |
-| `world-lore/index-store.js` | 读取本地索引，管理缓存与版本，不生成内容 |
-| `world-lore/retriever.js` | 根据场景和角色权限返回少量证据卡 |
+| 模块 | 单一职责 | 状态 |
+|---|---|---|
+| `world-lore/card-schema.js` | 校验与规范化知识卡，不负责检索 | 待写（当下由 `tools/audit-lore-cards.py` 离线兜住） |
+| `world-lore/index-store.js` | 读取本地索引，管理缓存与版本，不生成内容 | 待写（当下 `retriever.loadIndexFromDir` 一次性读，够阶段 B） |
+| `world-lore/retriever.js` | 根据场景和角色权限返回少量证据卡 | **已实现（阶段 B）** |
+| `world-lore/version-order.js` | 版本／章·幕轴的可见性比较 | **已实现** |
+| `world-lore/conflict-order.js` | 冲突组的主副排序与「另说」文案 | **已实现** |
 | `world-state/store.js` | 读取世界、角色和关系快照 |
 | `world-state/event-commit.js` | 通过现有事务层原子提交事件及派生状态 |
 | `world-context/compiler.js` | 把模板、状态、记忆和知识证据编译成受限上下文 |
