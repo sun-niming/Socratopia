@@ -898,7 +898,6 @@ global.__KB_DISTILL_PREFETCH__ = function (rawText, startPage, endPage, textbook
   ["__VOICE_CATALOG__", "./lib/voice-catalog.js", "[voice] Emotion voice catalog", function (m) { return "voices: " + Object.keys(m.load().voices).length; }],
   ["__VOICE_EMOTION__", "./lib/voice-emotion-protocol.js", "[voice] Emotion segment protocol"],
   ["__SAY_SPEECH__", "./lib/say-speech-protocol.js", "[voice] Inline <say> speech annotation protocol"],
-  ["__WORLD_LORE__", "./lib/world-context/lore-context.js", "[world-lore] Retrieved world-knowledge segment"],
   ["__POST_CLASS_NOTES__", "./lib/post-class-notes/orchestrator.js", "[post-class-notes] Orchestrator", function (m) { return "pipeline: " + m.PIPELINE_VERSION; }]
 ].forEach(function (m) { __loadOptionalGlobal__(m[0], m[1], m[2], m[3]); })
 ;if (global.__KB_PROGRESS__ && global.__KB_PROGRESS__.installRouteRequireHook) {
