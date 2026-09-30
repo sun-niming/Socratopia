@@ -5,12 +5,12 @@
 ## 快速恢复区
 
 最后更新：2026-09-30。  
-当前 checkpoint：阶段 A 已关闭（`SWC-001`）。  
+当前 checkpoint：`SWC-002-P`（阶段 B 前置策略已落地，T1 未开始）。  
 当前阶段：阶段 B——本地世界知识检索，尚未开始。  
 当前分支：`codex/push`。  
 设计前备份：`codex/stage-backup-20260915-world-lore-plan`，提交 `b8d171de0ab207e422d37a7d2b7e7b2123a8bf15`。  
 当前唯一目标：进入 `SWC-002`——本地确定性检索（标签、别名、人物、地点、关键词评分），首版不引入向量库或外部服务。  
-唯一下一步：写 `resources/server/lib/world-lore/retriever.js` 并配 `world-lore-smoke-test.js`（`04` 的 T1：同 world 可命中、跨 world／跨账户不可命中、超 cutoff 不可命中、私密卡只对 allow 角色可见、低相关返回空、结果不超预算、同输入稳定）。资料与卡片侧已无阻塞。  
+唯一下一步：写 `resources/server/lib/world-lore/retriever.js`（冲突排序直接 `require` `conflict-order.js`） 并配 `world-lore-smoke-test.js`（`04` 的 T1：同 world 可命中、跨 world／跨账户不可命中、超 cutoff 不可命中、私密卡只对 allow 角色可见、低相关返回空、结果不超预算、同输入稳定）。资料与卡片侧已无阻塞。  
 待使用者回话：无阻塞。
 
 ## 关键不变量
@@ -157,6 +157,45 @@ python3 tmp/check-doc-links.py
 ```
 
 完成判据：两世界各 ≥30 卡；类别覆盖达下限（每世界 world≥1、location≥4、history≥2、relation≥2、secret≥2、culture≥1、faction≥1、person≥1）；审计 0 fail；每卡可追溯到 `资料/` 的真实来源 ID 与 URL。
+
+## 本回合执行契约（当前）
+
+checkpoint ID：`SWC-002-P`（阶段 B 前置：冲突卡呈现策略）。日期：2026-09-30。
+
+背景：`SWC-001` 关闭时留了一项明确未定——"冲突卡的呈现策略：数据与对称链接已就绪，何时两条都给、何时只给一条未定"。使用者裁定**先定策略再开 T1**，理由是策略会决定检索器输出的形状，倒过来做会返工。
+
+使用者 2026-09-30 裁定：默认**主卡 + 一行「另说」附注**；主副用**机械顺序 + 当事人优先**（在机械顺序之上，若说话人恰是冲突一侧的当事角色则该侧为主）。
+
+唯一目标：把该策略落成可执行的确定性规则并加测试，使 T1 直接调用而不是重新实现。
+
+范围：
+
+1. `resources/server/lib/world-lore/conflict-order.js`：来源层级判定、四级排序、`rankGroup`、固定「另说」格式；
+2. 配 co-located smoke test，夹具用真实那一对冲突卡；
+3. `tools/audit-lore-cards.py` 增检：冲突对必须同 `type`、必须可被 `conflict-order.js` 排出严格顺序（复用同一实现）；
+4. `02` §6 增「冲突组的呈现」小节；`03` §2 增一条"冲突必须显式标注、不得合并"。
+
+明确不做：不写 `retriever.js`（T1 下一切片）；不挂 `global.*`；不改路由；不改卡片内容（除非审计暴露数据缺陷）；不新增依赖。
+
+预计修改的文件：
+
+- `resources/server/lib/world-lore/{conflict-order.js,conflict-order-smoke-test.js}`（新增）
+- `tools/audit-lore-cards.py`
+- `docs/shared-world-continuity/{02,03,WORKSTATE}.md`
+
+必须保持的三个关键不变量：三条同"关键不变量"；本切片重点是**冲突不得被静默合并**（既是数据要求，也是呈现要求）。
+
+最小验证：
+
+```bash
+node --check resources/server/lib/world-lore/conflict-order.js
+node resources/server/lib/world-lore/conflict-order-smoke-test.js       # 期望 PASS
+python3 tools/audit-lore-cards.py                                      # 期望 PASS
+python3 tools/audit-lore-package.py
+python3 tmp/check-doc-links.py
+```
+
+完成判据：五条命令退出码 0；`conflict-order` 的当事人并列、层级并列、全并列三条回退路径各有断言；审计对现存唯一冲突对报出主副归属且顺序与输入顺序无关。
 
 ---（以下为上回合记录，保留）---
 
@@ -606,9 +645,33 @@ python tmp/check-disk-hashes.py                                  # 期望 ok=98 
 **未在阶段 A 确立、明确留给后续**：
 
 - **检索器本身**：过滤语义已按同一规则写进审计，但运行时 `retriever.js` 属阶段 B（T1）。
-- **冲突卡的呈现策略**：数据与对称链接已就绪，"何时两条都给、何时只给一条"未定。
+- [x] ~~冲突卡的呈现策略~~：2026-09-30 使用者裁定并落地（`conflict-order.js` ＋ `02` §6），卡片数改 36。
 - **不变量②**（只有已持久化事件才更新状态）在阶段 A 无处体现——尚无 `world_state.json` 等文件，属阶段 C。
 - 三条已记风险：teyvat 未用 `deny`；空月之歌 `versionRange` 取保守值 `5.8`；部分 `locator` 仍是「网页正文（自动提取）」这类泛值。
+
+### 2026-09-30｜SWC-002-P（冲突卡呈现策略落地）
+
+- 范围：把使用者裁定的呈现策略落成可执行规则并加测试，供 T1 直接调用而不是重新实现。
+- 命令与退出码：
+
+  | # | 命令 | 退出码 | 期望 |
+  |---|---|---|---|
+  | 1 | `node --check resources/server/lib/world-lore/conflict-order.js` | `0` | 0 |
+  | 2 | `node resources/server/lib/world-lore/conflict-order-smoke-test.js` | `0` | 0（39 passed / 0 failed） |
+  | 3 | `python3 tools/audit-lore-cards.py` | `0` | PASS，含新增的冲突对检查 |
+  | 4 | `python3 tools/audit-lore-package.py` | `0` | PASS |
+  | 5 | `python3 tmp/check-doc-links.py` | `0` | 0 断链 |
+  | 6 | `python3 tools/add-conflict-pair.py`（重跑） | `0` | 本次改动 0 处＝幂等 |
+
+- 结果：
+  - 新增 `conflict-order.js`：来源层级三档（`游戏内` / `社区` / `未定`）、四级排序、`rankGroup`、固定「另说」格式。决定性顺序与输入顺序无关，有 200 次重复断言。
+  - 审计新增三条：冲突对必须同 `type`、必须对称、必须能由层级或 `reliability` 分出主副（**不许只靠 `cardId` 兜底**——那等于"哪一说更接近原著"没记下来）。审计直接 `require` 该模块，排序只有一份实现。
+  - `02` §6 增「冲突组的呈现」五条；`03` §2 增一条守卫。
+- **写模块时抓到两个真问题**：
+  1. `sourceLayer` 先认「游戏内」，但「社区设定汇总（引用游戏**内容**）」里恰好含「游戏内」子串，社区来源被误判成原著 → 改为先认「社区」（更保守，且社区汇总本就两头都沾）。测试加了对该串的专门断言。
+  2. 测试首版期望写错：拿两张层级相同的卡去验"当事人并列后落回层级"，实际落到 `cardId`。是夹具没有区分度而非实现错，已改为有区分度的夹具，并单列一条"全对称时以 cardId 定序"。
+- **顺带修掉一处数据形状问题**：第一版把冲突挂在「第一次逐火之旅」整卡上，宽窄不对等——那一对里"另说"首句讲的是逐火之旅而非她的结局。改为同 slug 的 `kelvdeleijieju.001`（残卷，主）／`.002`（编年史，另说）两张窄卡成对；叙述卡退出冲突组并摘掉重复引文。卡片数 35→36。
+- 影响下一步：T1 直接 `require` 该模块；呈现时机（何时附副卡）属 compiler，阶段 D 再落。
 
 ## 交接说明
 

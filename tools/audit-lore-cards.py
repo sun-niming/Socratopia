@@ -79,6 +79,23 @@ def visible_at(axis, cutoff, values):
     return json.loads(out.stdout)
 
 
+CONFLICT_ORDER = ROOT / "resources" / "server" / "lib" / "world-lore" / "conflict-order.js"
+
+
+def conflict_rank(cards, sources):
+    """问 conflict-order.js 要主副归属——排序只有一份实现，审计跟着它走。"""
+    natures = {sid: s.get("sourceNature", "") for sid, s in sources.items()}
+    code = ("const C=require(process.argv[1]);const a=JSON.parse(process.argv[2]);"
+            "const g=C.rankGroup(a.cards,{sourceNatures:a.natures});"
+            "console.log(JSON.stringify({primary:g.primary.cardId,reason:g.reason}));")
+    out = subprocess.run(["node", "-e", code, str(CONFLICT_ORDER),
+                          json.dumps({"cards": cards, "natures": natures})],
+                         capture_output=True, text=True)
+    if out.returncode != 0:
+        raise RuntimeError("conflict-order.js 调用失败: " + out.stderr.strip())
+    return json.loads(out.stdout)
+
+
 def main():
     sources = {s["id"]: s for s in json.loads(MANIFEST.read_text(encoding="utf-8"))["sources"]}
 
@@ -202,6 +219,27 @@ def main():
                 if other is not None:
                     check(c["cardId"] in (other.get("conflictsWith") or []),
                           f"{canon}/{c['cardId']}: conflictsWith 与 {t} 对称")
+                    # 同 type：否则"另说"会跨层（拿地点卡去补充历史卡）。
+                    check(c["type"] == other["type"],
+                          f"{canon}/{c['cardId']}: conflictsWith 两侧 type 相同")
+
+        # 每个冲突对必须能被 conflict-order.js 排出**有意义**的主副（复用同一实现，
+        # 不另写排序）。只落到 cardId 兜底说明两侧在来源层级与 reliability 上无从分辨，
+        # 即"哪一说更接近原著"没被记下来。
+        pairs = {}
+        for c in cards:
+            for t in c.get("conflictsWith") or []:
+                key = tuple(sorted([c["cardId"], t]))
+                pairs[key] = (c, next((x for x in cards if x["cardId"] == t), None))
+        for key, (a, b) in sorted(pairs.items()):
+            if b is None:
+                continue
+            got = conflict_rank([a, b], sources)
+            check(got["reason"] != "cardId",
+                  f"{canon}/{key[0]} <-> {key[1]}: 主副可由层级或 reliability 判定（实际 {got['reason']}）")
+            check(got["primary"] in key,
+                  f"{canon}/{key[0]} <-> {key[1]}: 主卡出自本对（实际 {got['primary']}）")
+            print(f"  冲突对 {key[0]} <-> {key[1]}: 主={got['primary']} 依据={got['reason']}")
 
         # 别名表必须与卡片双向自洽：无空别名、不指向不存在的卡、卡片别名全被聚合。
         amap = aliases.get("aliases") or {}
