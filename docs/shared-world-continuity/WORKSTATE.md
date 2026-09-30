@@ -800,6 +800,8 @@ python tmp/check-disk-hashes.py                                  # 期望 ok=98 
 
 "` 时，经 heredoc 后落进文件的成了**真实换行**（JS 双引号串不许真换行），acorn 报 `Unterminated string constant`。改用 `chr(92)` 显式拼转义序列后落盘为 `
 ` 转义，acorn 通过。这条坑以后改 route 都要注意。
+- **真集成验证**（无需启动 app，仓库自带会真起服务器的 smoke test）：`chat-say-protocol-integration-smoke-test.js` PASS 13/0、`chat-classroom-context-governance-smoke-test.js` PASS（含"未知小节默认归 stable band"与本段不破坏 band 哈希）、`chat-voice-emotion-protocol-integration-smoke-test.js` PASS 0 failed。
+- **读码确认的位置后果**：chat 的系统提示由 band 系统组装，本段追加在最后一个 `</CLASSROOM_RECENT_MEMORY>` 之后，**不参与 band 组装**——故既不进 `_bhs` 前缀哈希（主要动机），也不进任何 band 预算。已按此改写真 `02`；阶段 D 注册为 band 内小节时要同时补 `_mk` 与预算。既有 `## 世界背景` 已在 `_mk`（rank 2），故本段标题用 `## 世界知识（检索所得）` 以免撞名。
 - 影响下一步：需**重启 app** 才生效（服务端改动）。groupchat 复用同一模块属下一片；统一 compiler 与预算并入属阶段 D 主体。
 
 ## 交接说明

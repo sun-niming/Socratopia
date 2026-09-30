@@ -252,7 +252,12 @@ worlds/<worldId>/
 
 ### 注入位置与时机（2026-09-30 接入）
 
-`lore-context.js` 负责取输入、定路径、渲染；chat 路由在既有 `[ctx-budget]` 校验**之后**把整段追加到系统提示末尾。放在校验之后是有意的：lore 随查询变化，若进 `_bhs` 覆盖的前缀会让缓存前缀随每次提问抖动。代价是既有预算检查**暂不覆盖本段**，等阶段 D 的统一 compiler 落地时并入。
+`lore-context.js` 负责取输入、定路径、渲染；chat 路由把整段追加到系统提示**最末尾**。位置是刻意的，且经读码确认了后果：
+
+- chat 的系统提示由 band 系统组装（`_mk` 把已知小节标题映到 stable／resource／live／memory 四档，未知标题默认 stable，再套 `<CLASSROOM_STABLE_RULES>` 等标签）。本段是**追加在最后那个 `</CLASSROOM_RECENT_MEMORY>` 之后**的纯文本，不参与 band 组装。
+- 因此它**不进 `_bhs` 覆盖的前缀哈希**：lore 随查询变化，若进前缀会让缓存前缀逐次抖动。这是主要动机。
+- 同时也**不进任何 band 的预算检查**——现有 `[ctx-budget]` 量的是各 band 的跨度，本段在所有 band 之外。阶段 D 把它注册成 band 内的小节时，要同时补 `_mk` 条目与对应预算，别只加 `_mk`。
+- 标题用 `## 世界知识（检索所得）`，与既有的 `## 世界背景`（已在 `_mk` 里，rank 2）区分开，避免被 band 系统当成同一节。
 
 - **canon 解析**：先读 `world_meta.json.canon`；运行时世界原本没有 canon 概念，故缺省时拿 `worldId`／世界名去比 canon 别名（`翁法罗斯`／`提瓦特`）兜底；认不出就整段跳过。
 - **路径**：`CONTENT_ROOT/<lang>/world-lore/<canon>/lore`，语言映射与编译产物里的 `getContentDir` 同一套（`chinese→zh`／`chinese-traditional→zh-TW`，再回退 zh、en）。
