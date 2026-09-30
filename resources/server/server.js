@@ -6,9 +6,9 @@ const dir = path.join(__dirname)
 process.env.NODE_ENV = 'production'
 process.chdir(__dirname)
 
-// OpenAI-compatible gateways may route Codex models exclusively through the
-// Responses API. Keep existing Chat Completions consumers unchanged and retry
-// only when the upstream explicitly reports that protocol requirement.
+// Route GPT-5.6/Codex models directly through the Responses API while keeping
+// the existing Chat Completions-shaped internal consumers unchanged. Other
+// providers retain the legacy path and the explicit Responses-only fallback.
 const responsesApiCompat = require('./lib/responses-api-compat.js')
 responsesApiCompat.installGlobalResponsesFallback()
 
@@ -542,7 +542,10 @@ async function __KB_DISTILL_IMPL__(rawText, startPage, endPage, textbookDir, res
     // 单次 HTTP 提炼(给定模型块)。Use the shared native transport to avoid Next.js patched global.fetch hangs.
     async function postOnce(block) {
       var url = new URL(block.baseUrl.replace(/\/$/, "") + "/chat/completions");
-      var payload = { model: block.model, ...(/^gpt-5\.6/i.test(String(block.model || "")) ? { prompt_cache_key: ("socratopia:kb-distill:" + block.model).toLowerCase().replace(/[^a-z0-9_.:-]/g, "-").slice(0, 64), prompt_cache_retention: "24h" } : {}), max_tokens: 8096, stream: false, response_format: { type: "json_object" }, messages: [{ role: "system", content: sys }, { role: "user", content: usr }] };
+      // deepseek 系模型默认开启思考,会把 max_tokens 全部烧在 reasoning_content 上、content 返回空串,
+      // 于是 m2.content 兜底拿到的是 CoT 文本、parseContent 必然抛错(实测 8096 tokens 全为 reasoning)。与 callLLM 保持一致显式关闭。
+      var deepseekNoThink = /^deepseek/i.test(String(block.model || "")) ? { thinking: { type: "disabled" } } : {};
+      var payload = { model: block.model, ...deepseekNoThink, ...(/^gpt-5\.6/i.test(String(block.model || "")) ? { prompt_cache_key: ("socratopia:kb-distill:" + block.model).toLowerCase().replace(/[^a-z0-9_.:-]/g, "-").slice(0, 64), prompt_cache_retention: "24h" } : {}), max_tokens: 16384, stream: false, response_format: { type: "json_object" }, messages: [{ role: "system", content: sys }, { role: "user", content: usr }] };
       var postBody = JSON.stringify(payload);
       console.log("[kb] 发起提炼请求: " + url.href + " model=" + block.model + " bodyLen=" + postBody.length);
       var t0 = Date.now();
@@ -565,7 +568,7 @@ async function __KB_DISTILL_IMPL__(rawText, startPage, endPage, textbookDir, res
         if (!m2) throw new Error("响应格式错误：无 choices[0].message");
         var finalContent = m2.content || m2.reasoning_content || "";
         if (!finalContent) throw new Error("LLM API empty response");
-        console.log("[kb] 提取内容长度=" + finalContent.length);
+        console.log("[kb] 提取内容长度=" + finalContent.length + " 来源=" + (m2.content ? "content" : "reasoning_content(兜底,通常非 JSON)") + " reasoning长度=" + String(m2.reasoning_content || "").length + " finish_reason=" + ((parsed.choices && parsed.choices[0] && parsed.choices[0].finish_reason) || ""));
         return finalContent;
       } catch (e) {
         console.warn("[kb] req error: " + e.message + " elapsed=" + (Date.now() - t0) + "ms");
@@ -885,11 +888,18 @@ global.__KB_DISTILL_PREFETCH__ = function (rawText, startPage, endPage, textbook
   ["__RESUME__", "./lib/resume/progress-resume.js", "[resume] Progress-resume helper"],
   ["__MD_CURSOR__", "./lib/markdown/progress-cursor.js", "[markdown] Progress cursor helper"],
   ["__PROGRESS_GUARD__", "./lib/progress/progress-guard.js", "[progress-guard] Progress guard helper"],
+  ["__CLASSROOM_TASK__", "./lib/progress/classroom-task.js", "[classroom-task] Persistent exercise/lecture task state"],
+  ["__EXERCISE_CONTEXT__", "./lib/progress/exercise-context.js", "[exercise-context] Chapter-end exercise prompt compaction"],
   ["__KB_PROGRESS__", "./lib/progress/kb-progress.js", "[kb-progress] Knowledge-card progress helper"],
   ["__LONG_REASONING__", "./lib/reasoning/long-context.js", "[long-reasoning] Long-context helper"],
   ["__MODEL_ROUTER__", "./lib/model-router.js", "[model-router]"],
   ["__KNOWLEDGE_SOURCE__", "./lib/knowledge/source-router.js", "[knowledge] Source router"],
-  ["__CLOSE_READING__", "./lib/close-reading/skill.js", "[close-reading] Isolated PDF close-reading skill"]
+  ["__CLOSE_READING__", "./lib/close-reading/skill.js", "[close-reading] Isolated PDF close-reading skill"],
+  ["__VOICE_CATALOG__", "./lib/voice-catalog.js", "[voice] Emotion voice catalog", function (m) { return "voices: " + Object.keys(m.load().voices).length; }],
+  ["__VOICE_EMOTION__", "./lib/voice-emotion-protocol.js", "[voice] Emotion segment protocol"],
+  ["__SAY_SPEECH__", "./lib/say-speech-protocol.js", "[voice] Inline <say> speech annotation protocol"],
+  ["__WORLD_LORE__", "./lib/world-context/lore-context.js", "[world-lore] Retrieved world-knowledge segment"],
+  ["__POST_CLASS_NOTES__", "./lib/post-class-notes/orchestrator.js", "[post-class-notes] Orchestrator", function (m) { return "pipeline: " + m.PIPELINE_VERSION; }]
 ].forEach(function (m) { __loadOptionalGlobal__(m[0], m[1], m[2], m[3]); })
 ;if (global.__KB_PROGRESS__ && global.__KB_PROGRESS__.installRouteRequireHook) {
   global.__KB_PROGRESS__.installRouteRequireHook();
@@ -967,6 +977,108 @@ global.__KB_DISTILL_PREFETCH__ = function (rawText, startPage, endPage, textbook
   global.__SOCRATOPIA_ACCOUNT_CONTEXT__ = function () {
     return lastState && lastState.active ? { active: true, accountId: lastState.accountId, sessionEpoch: lastState.sessionEpoch } : null;
   };
+  (function registerCompanionContinuityRuntime() {
+    var continuityEnabled = !/^(?:0|false|no|off)$/i.test(process.env.SOCRATOPIA_COMPANION_CONTINUITY_V1 || "1");
+    var continuityPath = require("path");
+    var continuityFs = require("fs");
+    function continuityScopePart(value, name) {
+      if (typeof value !== "string" || !/^[a-zA-Z0-9_-]{1,160}$/.test(value)) {
+        var error = new Error("Invalid continuity " + name); error.code = "CONTINUITY_SCOPE_INVALID"; error.status = 400; throw error;
+      }
+      return value;
+    }
+    function trustedWorldDir(scope) {
+      var profileId = continuityScopePart(scope && scope.profileId, "profile id");
+      var worldId = continuityScopePart(scope && scope.worldId, "world id");
+      var account = global.__SOCRATOPIA_ACCOUNT_CONTEXT__ && global.__SOCRATOPIA_ACCOUNT_CONTEXT__();
+      var profiles = account && account.active ? continuityPath.join(process.env.PROJECT_ROOT || "", "accounts", continuityScopePart(account.accountId, "account id"), "profiles") : continuityPath.join(process.env.PROJECT_ROOT || "", "profiles");
+      return { worldDir: continuityPath.join(profiles, profileId, "worlds", worldId), accountId: account && account.active ? account.accountId : "legacy", sessionEpoch: account && account.active ? account.sessionEpoch : null };
+    }
+    function createInstanceId() { return "ci_" + crypto.randomBytes(12).toString("hex"); }
+    try {
+      var resolverModule = require("./lib/companion-continuity/resolver.js");
+      var createResolver = resolverModule.createCompanionResolver || resolverModule.createResolver;
+      if (typeof createResolver !== "function") throw new Error("companion continuity resolver factory missing");
+      var resolver = createResolver({
+        projectRoot: process.env.PROJECT_ROOT || "",
+        getAccountContext: function () { return global.__SOCRATOPIA_ACCOUNT_CONTEXT__ && global.__SOCRATOPIA_ACCOUNT_CONTEXT__(); },
+        newCompanionInstanceId: createInstanceId
+      });
+      var transaction = require("./lib/companion-continuity/transaction.js");
+      var endClass = require("./lib/companion-continuity/end-class-commit.js");
+      function staleContinuityScope() {
+        var error = new Error("Account session changed");
+        error.code = "SCOPE_STALE";
+        error.status = 409;
+        error.statusCode = 409;
+        return error;
+      }
+      function assertContinuityAccount(scope) {
+        scope = scope || {};
+        var current = global.__SOCRATOPIA_ACCOUNT_CONTEXT__ && global.__SOCRATOPIA_ACCOUNT_CONTEXT__();
+        if (scope.accountId === "legacy") {
+          if (current && current.active) throw staleContinuityScope();
+          return;
+        }
+        if (!current || !current.active || current.accountId !== scope.accountId || !Number.isSafeInteger(scope.sessionEpoch) || current.sessionEpoch !== scope.sessionEpoch) {
+          throw staleContinuityScope();
+        }
+      }
+      function bindContinuityAccount(input) {
+        input = Object.assign({}, input || {});
+        input.scope = Object.assign({}, input.scope || {});
+        input.assertAccountContext = function () { return assertContinuityAccount(input.scope); };
+        return input;
+      }
+      function candidatePrompt(input) {
+        var closeReading = global.__CLOSE_READING__;
+        if (!closeReading || typeof closeReading.formatEndClassCandidates !== "function") return null;
+        var snapshot = input && input.companion || {};
+        var scope = Object.assign({}, input && input.scope || {}, { companionInstanceId: snapshot.companionInstanceId || null });
+        return closeReading.formatEndClassCandidates(Object.assign({ worldDir: input.worldDir }, scope), scope);
+      }
+      async function writeManualDiary(input) {
+        input = input || {};
+        var scope = Object.assign({}, input.scope || {});
+        var trusted = trustedWorldDir(scope);
+        scope.accountId = trusted.accountId;
+        var month = continuityScopePart(input.month, "diary month");
+        if (!/^\d{4}-\d{2}$/.test(month)) { var invalid = new Error("Invalid month format"); invalid.code = "DIARY_MONTH_INVALID"; invalid.status = 400; throw invalid; }
+        var relativePath = "diary/" + month + ".md";
+        var filePath = continuityPath.join(trusted.worldDir, "diary", month + ".md");
+        var previous = ""; try { previous = await continuityFs.promises.readFile(filePath, "utf8"); } catch (error) { if (!error || error.code !== "ENOENT") throw error; }
+        var actualHash = transaction.sha256(previous);
+        var expectedHash = input.expectedHash || null;
+        if (expectedHash && expectedHash !== actualHash) { var conflict = new Error("Diary changed since it was loaded"); conflict.code = "DIARY_CONFLICT"; conflict.status = 409; conflict.actualHash = actualHash; throw conflict; }
+        var content = String(input.content == null ? "" : input.content);
+        var operationId = "manual-diary:v1:" + transaction.sha256(JSON.stringify(scope) + "|" + month + "|" + actualHash + "|" + transaction.sha256(content));
+        var result;
+        try {
+          result = await transaction.commit({ worldDir: trusted.worldDir, operationId: operationId, scope: scope, targets: [{ relativePath: relativePath, content: content }], receiptPayload: { contentHash: transaction.sha256(content) } });
+        } catch (writeError) {
+          if (writeError && writeError.code === "CONTINUITY_PRECONDITION_FAILED") {
+            var fresh = ""; try { fresh = await continuityFs.promises.readFile(filePath, "utf8"); } catch (_) {}
+            var conflictAfterLock = new Error("Diary changed during save"); conflictAfterLock.code = "DIARY_CONFLICT"; conflictAfterLock.status = 409; conflictAfterLock.actualHash = transaction.sha256(fresh); throw conflictAfterLock;
+          }
+          throw writeError;
+        }
+        return { contentHash: result.receipt && result.receipt.payload && result.receipt.payload.contentHash || transaction.sha256(content), replayed: !!result.replayed };
+      }
+      global.__COMPANION_CONTINUITY__ = Object.freeze({
+        version: 1, enabled: continuityEnabled, newCompanionInstanceId: createInstanceId, trustedWorldDir: trustedWorldDir,
+        resolveCompanion: function (input) { return resolver.resolveCompanion(input); },
+        loadContext: function (snapshot, budget) { return resolver.loadContext(snapshot, budget); },
+        recoverWorld: transaction.recoverWorld,
+        getEndClassReceipt: function (input) { return endClass.getEndClassReceipt(bindContinuityAccount(input)); },
+        commitEndClass: function (input) { return endClass.commitEndClass(bindContinuityAccount(input)); },
+        getEndClassCandidatePrompt: candidatePrompt, writeManualDiary: writeManualDiary
+      });
+      console.log("[continuity] Runtime loaded, enabled=" + continuityEnabled);
+    } catch (continuityError) {
+      console.warn("[continuity] Runtime failed to load: " + (continuityError && continuityError.message));
+      global.__COMPANION_CONTINUITY__ = Object.freeze({ version: 1, enabled: false, newCompanionInstanceId: createInstanceId });
+    }
+  })();
   var autoAdvance = require("./lib/reading/auto-advance.js").createAutoAdvance({
     projectRoot: process.env.PROJECT_ROOT,
     bootId: "advance_" + crypto.randomBytes(16).toString("hex"),
@@ -1205,6 +1317,28 @@ let keepAliveTimeout = parseInt(process.env.KEEP_ALIVE_TIMEOUT, 10)
 const nextConfig = {"env":{},"typescript":{"ignoreBuildErrors":false},"typedRoutes":false,"distDir":"./.next","cleanDistDir":true,"assetPrefix":"","cacheMaxMemorySize":52428800,"configOrigin":"next.config.ts","useFileSystemPublicRoutes":true,"generateEtags":true,"pageExtensions":["tsx","ts","jsx","js"],"poweredByHeader":true,"compress":true,"images":{"deviceSizes":[640,750,828,1080,1200,1920,2048,3840],"imageSizes":[32,48,64,96,128,256,384],"path":"/_next/image","loader":"default","loaderFile":"","domains":[],"disableStaticImages":false,"minimumCacheTTL":14400,"formats":["image/webp"],"maximumRedirects":3,"maximumResponseBody":50000000,"dangerouslyAllowLocalIP":false,"dangerouslyAllowSVG":false,"contentSecurityPolicy":"script-src 'none'; frame-src 'none'; sandbox;","contentDispositionType":"attachment","localPatterns":[{"pathname":"**","search":""}],"remotePatterns":[],"qualities":[75],"unoptimized":false},"devIndicators":{"position":"bottom-left"},"onDemandEntries":{"maxInactiveAge":60000,"pagesBufferLength":5},"basePath":"","sassOptions":{},"trailingSlash":false,"i18n":null,"productionBrowserSourceMaps":false,"excludeDefaultMomentLocales":true,"reactProductionProfiling":false,"reactStrictMode":null,"reactMaxHeadersLength":6000,"httpAgentOptions":{"keepAlive":true},"logging":{},"compiler":{},"expireTime":31536000,"staticPageGenerationTimeout":60,"output":"standalone","modularizeImports":{"@mui/icons-material":{"transform":"@mui/icons-material/{{member}}"},"lodash":{"transform":"lodash/{{member}}"}},"outputFileTracingRoot":"/Users/leminwu/Documents/Github/socralab-app/v2","cacheComponents":false,"cacheLife":{"default":{"stale":300,"revalidate":900,"expire":4294967294},"seconds":{"stale":30,"revalidate":1,"expire":60},"minutes":{"stale":300,"revalidate":60,"expire":3600},"hours":{"stale":300,"revalidate":3600,"expire":86400},"days":{"stale":300,"revalidate":86400,"expire":604800},"weeks":{"stale":300,"revalidate":604800,"expire":2592000},"max":{"stale":300,"revalidate":2592000,"expire":31536000}},"cacheHandlers":{},"experimental":{"useSkewCookie":false,"cssChunking":true,"multiZoneDraftMode":false,"appNavFailHandling":false,"prerenderEarlyExit":true,"serverMinification":true,"linkNoTouchStart":false,"caseSensitiveRoutes":false,"dynamicOnHover":false,"preloadEntriesOnStart":true,"clientRouterFilter":true,"clientRouterFilterRedirects":false,"fetchCacheKeyPrefix":"","proxyPrefetch":"flexible","optimisticClientCache":true,"manualClientBasePath":false,"cpus":13,"memoryBasedWorkersCount":false,"imgOptConcurrency":null,"imgOptTimeoutInSeconds":7,"imgOptMaxInputPixels":268402689,"imgOptSequentialRead":null,"imgOptSkipMetadata":null,"isrFlushToDisk":true,"workerThreads":false,"optimizeCss":false,"nextScriptWorkers":false,"scrollRestoration":false,"externalDir":false,"disableOptimizedLoading":false,"gzipSize":true,"craCompat":false,"esmExternals":true,"fullySpecified":false,"swcTraceProfiling":false,"forceSwcTransforms":false,"largePageDataBytes":128000,"typedEnv":false,"parallelServerCompiles":false,"parallelServerBuildTraces":false,"ppr":false,"authInterrupts":false,"webpackMemoryOptimizations":false,"optimizeServerReact":true,"viewTransition":false,"removeUncaughtErrorAndRejectionListeners":false,"validateRSCRequestHeaders":false,"staleTimes":{"dynamic":0,"static":300},"reactDebugChannel":false,"serverComponentsHmrCache":true,"staticGenerationMaxConcurrency":8,"staticGenerationMinPagesPerWorker":25,"transitionIndicator":false,"inlineCss":false,"useCache":false,"globalNotFound":false,"browserDebugInfoInTerminal":false,"lockDistDir":true,"isolatedDevBuild":true,"proxyClientMaxBodySize":10485760,"hideLogsAfterAbort":false,"mcpServer":true,"turbopackFileSystemCacheForDev":true,"turbopackFileSystemCacheForBuild":false,"turbopackInferModuleSideEffects":false,"optimizePackageImports":["lucide-react","date-fns","lodash-es","ramda","antd","react-bootstrap","ahooks","@ant-design/icons","@headlessui/react","@headlessui-float/react","@heroicons/react/20/solid","@heroicons/react/24/solid","@heroicons/react/24/outline","@visx/visx","@tremor/react","rxjs","@mui/material","@mui/icons-material","recharts","react-use","effect","@effect/schema","@effect/platform","@effect/platform-node","@effect/platform-browser","@effect/platform-bun","@effect/sql","@effect/sql-mssql","@effect/sql-mysql2","@effect/sql-pg","@effect/sql-sqlite-node","@effect/sql-sqlite-bun","@effect/sql-sqlite-wasm","@effect/sql-sqlite-react-native","@effect/rpc","@effect/rpc-http","@effect/typeclass","@effect/experimental","@effect/opentelemetry","@material-ui/core","@material-ui/icons","@tabler/icons-react","mui-core","react-icons/ai","react-icons/bi","react-icons/bs","react-icons/cg","react-icons/ci","react-icons/di","react-icons/fa","react-icons/fa6","react-icons/fc","react-icons/fi","react-icons/gi","react-icons/go","react-icons/gr","react-icons/hi","react-icons/hi2","react-icons/im","react-icons/io","react-icons/io5","react-icons/lia","react-icons/lib","react-icons/lu","react-icons/md","react-icons/pi","react-icons/ri","react-icons/rx","react-icons/si","react-icons/sl","react-icons/tb","react-icons/tfi","react-icons/ti","react-icons/vsc","react-icons/wi"],"trustHostHeader":false,"isExperimentalCompile":false},"htmlLimitedBots":"[\\w-]+-Google|Google-[\\w-]+|Chrome-Lighthouse|Slurp|DuckDuckBot|baiduspider|yandex|sogou|bitlybot|tumblr|vkShare|quora link preview|redditbot|ia_archiver|Bingbot|BingPreview|applebot|facebookexternalhit|facebookcatalog|Twitterbot|LinkedInBot|Slackbot|Discordbot|WhatsApp|SkypeUriPreview|Yeti|googleweblight","bundlePagesRouterDependencies":false,"configFileName":"next.config.ts","serverExternalPackages":["openai"],"turbopack":{"root":"/Users/leminwu/Documents/Github/socralab-app/v2"},"distDirRoot":".next"}
 
 process.env.__NEXT_PRIVATE_STANDALONE_CONFIG = JSON.stringify(nextConfig)
+
+// ---------------------------------------------------------------------------
+// Static assets must be revalidated, not assumed immutable.
+//
+// Next serves /_next/static/** with `public, max-age=31536000, immutable` because the file
+// names carry a content hash from the ORIGINAL build.  This repo patches those bundles by hand
+// and never renames them, so the name stops matching the bytes — and the Electron window keeps
+// a year-long disk cache, quietly running the frontend from before the patch while the server
+// (read from disk on every launch) has already moved on.  Rewriting the header for that folder
+// only: revalidation on localhost costs a 304, and an edited bundle is picked up immediately.
+;(function () {
+  const http = require("http");
+  const setHeader = http.ServerResponse.prototype.setHeader;
+  const IMMUTABLE = "public, max-age=31536000, immutable";
+  http.ServerResponse.prototype.setHeader = function (name, value) {
+    if (value === IMMUTABLE && typeof name === "string" && name.toLowerCase() === "cache-control") {
+      const url = (this.req && this.req.url) || "";
+      if (url.indexOf("/_next/static/") === 0) value = "public, max-age=0, must-revalidate";
+    }
+    return setHeader.call(this, name, value);
+  };
+})();
 
 require('next')
 const { startServer } = require('next/dist/server/lib/start-server')

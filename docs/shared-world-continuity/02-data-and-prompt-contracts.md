@@ -250,6 +250,16 @@ worlds/<worldId>/
 
 `hypothesis` 与冲突正交：它按既有规则默认不进角色陈述，只在明确讨论推测时返回。
 
+### 注入位置与时机（2026-09-30 接入）
+
+`lore-context.js` 负责取输入、定路径、渲染；chat 路由在既有 `[ctx-budget]` 校验**之后**把整段追加到系统提示末尾。放在校验之后是有意的：lore 随查询变化，若进 `_bhs` 覆盖的前缀会让缓存前缀随每次提问抖动。代价是既有预算检查**暂不覆盖本段**，等阶段 D 的统一 compiler 落地时并入。
+
+- **canon 解析**：先读 `world_meta.json.canon`；运行时世界原本没有 canon 概念，故缺省时拿 `worldId`／世界名去比 canon 别名（`翁法罗斯`／`提瓦特`）兜底；认不出就整段跳过。
+- **路径**：`CONTENT_ROOT/<lang>/world-lore/<canon>/lore`，语言映射与编译产物里的 `getContentDir` 同一套（`chinese→zh`／`chinese-traditional→zh-TW`，再回退 zh、en）。
+- **说话人**：由槽位经 manifest 的 `pilotSlots` 映射成角色 id。
+- **没有 lore 的世界行为不变**：无 canon、无目录、无命中、任何异常都返回空段，注入点只 `console.warn`，绝不弄坏 chat。
+- **单条装不下时仍返回它**（标 `overBudget`）——返回一条超一点比整段空空如也更接近"角色知道这件事"。
+
 首版最多 6 张卡、3200 字符；没有相关证据时返回空集合，不用低分卡填满配额。
 
 ## 7. 提示上下文契约

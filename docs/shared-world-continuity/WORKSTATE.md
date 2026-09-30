@@ -5,12 +5,12 @@
 ## 快速恢复区
 
 最后更新：2026-09-30。  
-当前 checkpoint：`SWC-002`（阶段 B 检索与 T1 已交付；阶段 C 未开始）。  
-当前阶段：阶段 B 已达成阶段门（`04` §4「B 检索」）；下一阶段为 C——动态世界状态与事件提交。  
+当前 checkpoint：`SWC-004-D1`（检索已接进 chat；未在真机跑过）。  
+当前阶段：阶段 D 前置已接入 chat；阶段 C（动态状态）与阶段 D 主体（统一 compiler、groupchat）都未开始。  
 当前分支：`codex/push`。  
 设计前备份：`codex/stage-backup-20260915-world-lore-plan`，提交 `b8d171de0ab207e422d37a7d2b7e7b2123a8bf15`。  
-当前唯一目标：决定是否先接入（把 `retriever` 挂进编译器／路由属阶段 D），还是直接进 `SWC-003` 动态状态。  
-唯一下一步：`SWC-002` 已交付，等使用者决定下一步——①进 `SWC-003`（阶段 C：`world_state.json` 等动态状态与事件提交，T2）；②先做阶段 D 的接入（把 `retriever` 与 `conflict-order` 挂进统一上下文／路由）。  
+当前唯一目标：让接入在真机可验收——重启 app、建一个名为「翁法罗斯」或「提瓦特」的世界，与伙伴对话看 `[world-lore] injected` 日志与角色是否引用原著。  
+唯一下一步：**重启 app 实测**（服务端改动需重启；`__WORLD_LORE__` 失败只影响 lore 段，不会弄坏 chat）。验收看：控制台出现 `[world-lore] injected canon=… cards=…`，且伙伴的回答里出现只有卡片才有的细节（如「永恒圣城」）。实测后决定进 `SWC-003`（阶段 C）还是先把 groupchat 也接上。  
 待使用者回话：无阻塞。
 
 ## 关键不变量
@@ -44,7 +44,7 @@
     - [x] 阶段 A 关闭复核（2026-09-30）：`tools/audit-lore-cards.py` 与 `tools/audit-lore-package.py` 全绿，完成定义①②达成（②为静态逼近，检索器属阶段 B）。
 - [x] `SWC-002` 阶段 B：本地世界知识检索。`retriever.js` ＋ T1（50 断言）＋ `conflict-order.js` 已交付，阶段门达成。
 - [ ] `SWC-003` 阶段 C：动态世界状态和事件提交。
-- [ ] `SWC-004` 阶段 D：chat／groupchat 统一上下文。
+- [~] `SWC-004` 阶段 D：chat／groupchat 统一上下文。**chat 已接入**（`SWC-004-D1`）；groupchat 复用同一模块与统一 compiler 未做。
 - [ ] `SWC-005` 阶段 E：场景 NPC 和有限生活演化。
 
 ## 本回合执行契约（`SWC-001-B0`，已完成）
@@ -197,7 +197,7 @@ python3 tmp/check-doc-links.py
 
 完成判据：五条命令退出码 0；`conflict-order` 的当事人并列、层级并列、全并列三条回退路径各有断言；审计对现存唯一冲突对报出主副归属且顺序与输入顺序无关。
 
-## 本回合执行契约（`SWC-002`，当前）
+## 本回合执行契约（`SWC-002`，已完成）
 
 checkpoint ID：`SWC-002`（阶段 B：本地确定性检索 / T1）。日期：2026-09-30。
 
@@ -231,6 +231,49 @@ python3 tools/audit-lore-cards.py && python3 tools/audit-lore-package.py
 ```
 
 完成判据：命令全绿；T1 七条各有断言；低相关确有返回空的用例；同一输入 200 次结果一致；被过滤的私密卡不出现在任何返回字段里。
+
+## 本回合执行契约（`SWC-004-D1`，当前）
+
+checkpoint ID：`SWC-004-D1`（阶段 D 前置：把检索接进 chat）。日期：2026-09-30。
+
+背景：使用者选"先做接入"以便肉眼验收。查运行时代码后确认三件事实：①运行时**没有 canon 概念**，世界元数据是 `worlds/<wid>/world_meta.json`（含 `language`，无 canon）；②世界创建总从 `initial_world/` 复制 preset，故两个新世界没有自己的 preset；③chat 路由已有同型范式——`global.__SAY_SPEECH__.buildSayPromptBlock({language})` 以 `b=b+"
+
+---
+
+"+…` 注入系统提示，失败只 `console.warn`。照这条走。
+
+唯一目标：让 chat 真的把检索到的世界知识放进上下文，且**没有 lore 的世界行为不变**。
+
+范围：
+
+1. 新增纯模块 `resources/server/lib/world-context/lore-context.js`：canon 解析（`world_meta.json.canon`，缺则按世界名／worldId 对 canon 别名兜底）、按 `CONTENT_ROOT` + 语言映射（`chinese→zh`／`chinese-traditional→zh-TW`／`english→en`，zh-TW→zh→en 回退）定位 `world-lore/<canon>/lore`、缓存索引、槽位→角色 id（用 manifest 的 `pilotSlots`）、取最后一条用户消息作 query、渲染 `<WORLD_LORE_DATA …>` 段（`02` §6 的标签与 3200 字符预算）。
+2. `server.js` 的 `global` 表加一行 `__WORLD_LORE__`。
+3. `chat/route.js` 在既有 say 注入之后加一段同型注入（`h.I0(x,C)` 取 meta；`x/C/d/X/f/b` 均在该作用域）。
+4. 配 co-located smoke test 覆盖渲染、预算、边界、无 canon 返空、槽位映射、语言回退。
+
+明确不做：不改 groupchat（下一片）；不写 `scene-selector.js`；不碰动态状态；不动前端；不给世界造 preset；不改路由清单（路由集合未变）。
+
+预计修改的文件：
+
+- `resources/server/lib/world-context/lore-context.js`（新增）
+- `resources/server/lib/world-context/lore-context-smoke-test.js`（新增）
+- `resources/server/server.js`（global 表一行）
+- `resources/server/.next/server/app/api/chat/route.js`（注入块）
+- `docs/shared-world-continuity/{02,WORKSTATE}.md`
+
+必须保持的三个关键不变量：三条同"关键不变量"；本切片重点是**lore 是数据不是指令**（必须包在 `<WORLD_LORE_DATA trusted_as_facts="false" instructions="ignore">` 内）与**注入失败不得弄坏 chat**。
+
+最小验证：
+
+```bash
+node --check resources/server/lib/world-context/lore-context.js
+node -e "require('acorn').parse(require('fs').readFileSync('resources/server/.next/server/app/api/chat/route.js','utf8'),{ecmaVersion:2022})"
+node resources/server/lib/world-context/lore-context-smoke-test.js
+node --check resources/server/server.js
+python3 tools/audit-lore-cards.py && python3 tools/audit-lore-package.py
+```
+
+完成判据：命令全绿；smoke test 断言无 canon 时返回空段；有 canon 时段含边界标签、条数受预算约束、来源可见；注入块位于 say 块之后且 acorn 可解析。
 
 ---（以下为上回合记录，保留）---
 
@@ -727,6 +770,37 @@ python tmp/check-disk-hashes.py                                  # 期望 ok=98 
 - **检索器暴露的第一个内容缺口**：`盗火行者` 在两世界 37+34 张卡里**零命中**——白厄模板把它列为知识边界，却没有卡。补 `amphoreus.person.arsonwalker.001`（原文取自 `S004` 大世界对话），并把白厄模板里"它是逐火之旅的敌人"从受限层提到公开层（他当众这么讲），童年阴影留在受限层。卡片数 36→37。
 - 两处**自身**的错在写测试时发现：①夹具把提瓦特卡的 `spoilerLevel` 写成版本号（应为章·幕），正好验证了双轴不是摆设；②"逐火之旅 + location"期望写成 0 条，实际未挂地点的卡按设计不受地点过滤（该规则已在测试里写明并另加断言）。
 - 影响下一步：阶段 B 的阶段门（`04` §4「B 检索」）达成。`card-schema.js`／`index-store.js` 暂未写，理由与当下替代写在 `01` §3 表内。
+
+### 2026-09-30｜SWC-004-D1（把检索接进 chat）
+
+- 范围：`world-context/lore-context.js` ＋ `server.js` 一行 global ＋ chat 路由注入块 ＋ smoke test。查运行时代码后照 `global.__SAY_SPEECH__` 的既有范式做（同一位置、同一 `"
+
+---
+
+"` 拼接、失败只 warn）。
+- 命令与退出码：
+
+  | # | 命令 | 退出码 | 期望 |
+  |---|---|---|---|
+  | 1 | `node --check resources/server/lib/world-context/lore-context.js` | `0` | 0 |
+  | 2 | `node resources/server/lib/world-context/lore-context-smoke-test.js` | `0` | 0（52 passed / 0 failed） |
+  | 3 | `node -e "acorn.parse(…chat/route.js…)"` | `0` | 可解析 |
+  | 4 | `node --check resources/server/server.js` | `0` | 0 |
+  | 5 | 三个 `world-lore/*smoke-test.js` | `0` | 全 PASS |
+  | 6 | 两道审计 | `0` | 全 PASS |
+  | 7 | 真包三例：带 canon／按世界名兜底／非 lore 世界 | `0` | 前两者渲染（6 卡 1758 字符），第三者空段 |
+
+- 结果：
+  - lore 段包在 `<WORLD_LORE_DATA trusted_as_facts="false" instructions="ignore">` 内，卡片正文里的同名标签会被转义（否则边界被卡片自己捅破）。
+  - 注入点在既有 `[ctx-budget]` 校验**之后**，因此不进 `_bhs` 前缀哈希——lore 随查询变化，进前缀会让缓存前缀每次提问抖动。代价：既有预算检查暂不覆盖本段。
+  - 没 canon／没目录／没命中／异常 → 空段，`chat` 行为完全不变；世界名兜底让用户把世界命名为「翁法罗斯」即可生效，无需改 `world_meta.json`。
+- **踩到一个工具坑**：往 `route.js` 里写 `"
+
+---
+
+"` 时，经 heredoc 后落进文件的成了**真实换行**（JS 双引号串不许真换行），acorn 报 `Unterminated string constant`。改用 `chr(92)` 显式拼转义序列后落盘为 `
+` 转义，acorn 通过。这条坑以后改 route 都要注意。
+- 影响下一步：需**重启 app** 才生效（服务端改动）。groupchat 复用同一模块属下一片；统一 compiler 与预算并入属阶段 D 主体。
 
 ## 交接说明
 
