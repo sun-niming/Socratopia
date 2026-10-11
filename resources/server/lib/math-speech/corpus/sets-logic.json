@@ -1,0 +1,292 @@
+[
+  {
+    "id": "sets-logic-001",
+    "latex": "A\\in B",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "A，属于 B"
+    }
+  },
+  {
+    "id": "sets-logic-002",
+    "latex": "A\\notin B",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "A，不属于 B"
+    }
+  },
+  {
+    "id": "sets-logic-003",
+    "latex": "A\\subset B",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "A，真包含于 B"
+    }
+  },
+  {
+    "id": "sets-logic-004",
+    "latex": "A\\subseteq B",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "A，包含于 B"
+    }
+  },
+  {
+    "id": "sets-logic-005",
+    "latex": "A\\supset B",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "A，真包含 B"
+    }
+  },
+  {
+    "id": "sets-logic-006",
+    "latex": "A\\supseteq B",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "A，包含 B"
+    }
+  },
+  {
+    "id": "sets-logic-007",
+    "latex": "A\\cup B",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "A 与 B 的并集"
+    }
+  },
+  {
+    "id": "sets-logic-008",
+    "latex": "A\\cap B",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "A 与 B 的交集"
+    }
+  },
+  {
+    "id": "sets-logic-009",
+    "latex": "A\\setminus B",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "A 与 B 的集合差"
+    }
+  },
+  {
+    "id": "sets-logic-010",
+    "latex": "\\emptyset",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "空集"
+    }
+  },
+  {
+    "id": "sets-logic-011",
+    "latex": "\\mathbb{R}",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "实数集"
+    }
+  },
+  {
+    "id": "sets-logic-012",
+    "latex": "\\mathbb{Z}",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "整数集"
+    }
+  },
+  {
+    "id": "sets-logic-013",
+    "latex": "\\forall x",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "任意 x"
+    }
+  },
+  {
+    "id": "sets-logic-014",
+    "latex": "\\exists y",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "存在 y"
+    }
+  },
+  {
+    "id": "sets-logic-015",
+    "latex": "\\neg P",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "非 P"
+    }
+  },
+  {
+    "id": "sets-logic-016",
+    "latex": "P\\land Q",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "P 且 Q"
+    }
+  },
+  {
+    "id": "sets-logic-017",
+    "latex": "P\\lor Q",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "P 或 Q"
+    }
+  },
+  {
+    "id": "sets-logic-018",
+    "latex": "P\\Rightarrow Q",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "P，推出 Q"
+    }
+  },
+  {
+    "id": "sets-logic-019",
+    "latex": "P\\Leftrightarrow Q",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "P，当且仅当 Q"
+    }
+  },
+  {
+    "id": "sets-logic-020",
+    "latex": "P\\vdash Q",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "P，推出 Q"
+    }
+  },
+  {
+    "id": "sets-logic-021",
+    "latex": "P\\models Q",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "P，满足 Q"
+    }
+  },
+  {
+    "id": "sets-logic-022",
+    "latex": "x\\to y",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "x，趋近于 y"
+    }
+  },
+  {
+    "id": "sets-logic-023",
+    "latex": "x\\leftarrow y",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "x，左向 y"
+    }
+  },
+  {
+    "id": "sets-logic-024",
+    "latex": "x\\leftrightarrow y",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "x，双向对应 y"
+    }
+  },
+  {
+    "id": "sets-logic-025",
+    "latex": "\\{a,b\\}",
+    "expected": {
+      "ok": true,
+      "mode": "structural",
+      "speech": "左大括号 a 逗号 b 右大括号",
+      "unresolvedAmbiguities": [
+        "bracket-role"
+      ]
+    }
+  },
+  {
+    "id": "sets-logic-026",
+    "latex": "|U|",
+    "context": {
+      "symbolFacts": {
+        "U": {
+          "type": "set",
+          "evidence": "explicit"
+        }
+      }
+    },
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "集合 U 的基数"
+    }
+  },
+  {
+    "id": "sets-logic-027",
+    "latex": "\\neg(R\\land S)",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "非（R 且 S）"
+    }
+  },
+  {
+    "id": "sets-logic-028",
+    "latex": "\\neg(P\\lor Q)",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "非（P 或 Q）"
+    }
+  },
+  {
+    "id": "sets-logic-029",
+    "latex": "\\neg\\forall x\\,P(x)",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "非（任意 x，P 左圆括号 x 右圆括号）"
+    }
+  },
+  {
+    "id": "sets-logic-030",
+    "latex": "\\neg\\exists x\\,P(x)",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "非（存在 x，P 左圆括号 x 右圆括号）"
+    }
+  },
+  {
+    "id": "sets-logic-031",
+    "latex": "\\neg\\neg P",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "非（非 P）"
+    }
+  }
+]

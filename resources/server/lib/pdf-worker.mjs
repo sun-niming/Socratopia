@@ -372,7 +372,9 @@ async function main() {
           if (totalBytes > 64 * 1024 * 1024) throw new Error("ocr_temp_limit");
           const imagePath = path.join(tempDir, "page-" + pageNumber + ".png");
           await fsPromises.writeFile(imagePath, png, { flag: "wx", mode: 0o600 });
-          items.push({ page: pageNumber, path: imagePath });
+          const sizedPage = await doc.getPage(pageNumber);
+          const sizedViewport = sizedPage.getViewport({ scale: 225 / 72 });
+          items.push({ page: pageNumber, path: imagePath, width: sizedViewport.width, height: sizedViewport.height });
         }
         const runner = await import(pathToFileURL(path.join(__dirname, "ocr", "local-ocr-runner.mjs")).href);
         const result = await runner.runLocalOcr({

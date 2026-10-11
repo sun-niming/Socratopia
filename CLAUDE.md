@@ -50,6 +50,8 @@ cp resources/settings.json resources/set.json win-unpacked/resources/   # requir
 | `__SOCRATOPIA_ROUTE_AUTH__`, `__SOCRATOPIA_REQUEST_AUTH__`, `__SOCRATOPIA_ACCOUNT_REQUEST_CONTEXT__` | `lib/route-auth.js`, `lib/local-request-auth.js`, `lib/account-request-context.js` |
 | `__MODEL_ROUTER__`, `__ADAPTIVE_TEACHING_RUNTIME__`, `__ADAPTIVE__`, `__ADAPTIVE_CONCEPT_GRAPH__`, `__ADAPTIVE_DIAGNOSTICIAN__`, `__PRACTICE__`, `__PRACTICE_SOURCE__`, `__PRACTICE_TUTOR__`, `__RESUME__`, `__MD_CURSOR__`, `__PROGRESS_GUARD__`, `__CLASSROOM_TASK__`, `__EXERCISE_CONTEXT__`, `__KB_PROGRESS__`, `__LONG_REASONING__`, `__KNOWLEDGE_SOURCE__`, `__CLOSE_READING__`, `__VOICE_CATALOG__`, `__VOICE_EMOTION__` | matching `lib/` subsystem (all in the `server.js` table) |
 | `__KB_DISTILL__` / `__KB_DISTILL_PREFETCH__`, `__KB_BUILDER_COORDINATOR__`, `__AUTO_ADVANCE__`, `__COMPANION_CONTINUITY__`, `__PDF_OCR_COORDINATOR__`, `__OCR_VISION_BUDGET__` | installed inline by the corresponding installer block in `server.js` |
+| `__ASSETS__`, `__ASSETS_INDEX__`, `__ASSETS_SERIALIZE__` (`figureOrderGuide`), `__ASSETS_INTENTS__`, `__ASSETS_PREFETCH__` | `lib/assets/{store,index,serialize,intents,prefetch}.js` — `intents.js` materializes `book://` crops and svg fences into `asset://` anchors on the conversation write path; `prefetch.js` warms the page raster cache ahead of the reading window. `figureOrderGuide` is injected every turn and is the **single source** for *when* to order a figure — `resources/rules/rules_zh*.md` / `rules_en_classroom_compact.md` only point at it |
+| `__CHAT_TRASH__` | `lib/chat-trash.js` — `DELETE /api/conversations` moves the chat file into `chats/.trash/` instead of unlinking (soft delete; the old unlink stays as the fallback). Inspect with `GET /api/conversations?trash=1` |
 | `global.fetch` | patched by `lib/responses-api-compat.js` |
 
 To add a module compiled code needs, add a row to that `server.js` table (or another `global.x =` installer) — a chunk cannot reach it otherwise.
@@ -90,6 +92,7 @@ Every API route except `/api/account/init` (`lib/route-auth.js:9`) requires a sh
 | Extract ASAR | `npx asar extract resources/app.asar _asar_extracted/` |
 | Repack ASAR | `npx asar pack _asar_extracted/ resources/app.asar` |
 | Re-embed EXE integrity hash after repack | `node tools/patch-asar-integrity.js` (add `--check` to verify only) |
+| Repack + re-embed in one step, aborting safely while the EXE is locked | `node tools/finish-asar-repack.js` (`--check` report only; `--copy` keeps the new asar and emits a patched `Socratopia.patched.exe`) |
 | Stage a clean release tree | `node tools/stage-clean-win-release.js stage [src] [dst]` |
 | Regenerate runtime manifest | `node tools/generate-release-runtime-manifest.js` |
 | Launch app | `./Socratopia.exe` |
@@ -115,6 +118,8 @@ node tools/patch-asar-integrity.js <exe> <asar>        # e.g. the win-unpacked p
 
 Two traps it handles that a naive script gets wrong: the `ELECTRONASAR` resource *name* is UTF-16LE while its payload JSON is plain ASCII, and other embedded resources also contain `"value":"` — patch only the entry following this marker. `--check` reads the EXE, so it works even while the app is running; writing does not.
 
+`tools/finish-asar-repack.js` wraps the whole sequence (copy root files into `_asar_extracted/`, pack, re-embed) with the failure mode that actually bites: `npx asar pack` succeeds while the EXE is locked, so an aborted run would leave a repacked asar against a stale hash. The tool always keeps a pre-run copy and restores it on EBUSY, so it is safe to run at any time; `--copy` instead keeps the new asar and writes a correctly paired `Socratopia.patched.exe` to launch in the meantime.
+
 ## Edit targets
 
 | Change | Edit | Then |
@@ -132,7 +137,7 @@ Server-layer edits need only an app restart; the ASAR is the runtime source for 
 
 - **`tools/run-smoke-matrix.js` only walks `resources/server/` minus `node_modules` and `.next`**, so it reaches about four fifths of them (126 of 158, with 124 actually executed: `pdf-cmap-real` / `pdf-render-real` are auto-skipped because they need fixtures — exit code 2 means skipped and the matrix normalizes it to PASS, capping each test at 120s). The blind spots are structural and few:
   - **under `.next/` (26 today)** — run by hand, e.g. `node resources/server/.next/server/app/api/chat/chat-end-class-integration-smoke-test.js` after touching `chat/route.js`.
-  - **under `tools/` (5 today)** — `node tools/<name>-smoke-test.js`.
+  - **under `tools/` (6 today)** — `node tools/<name>-smoke-test.js`.
 
   So a clean matrix run is not proof your module is covered: check whether the thing you touched has a test inside one of those two trees.
 - `resources/server/smoke-test-utils.js` supplies shared HTTP + `MockLLM` helpers; several tests boot a real server against a mock provider.

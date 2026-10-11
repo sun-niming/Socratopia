@@ -63,6 +63,9 @@ async function main() {
     var worldDir = path.join(env.tmpDir, "accounts", accountId, "profiles", profileId, "worlds", worldId);
     var textbookDir = path.join(worldDir, "textbooks", textbookId);
     fs.mkdirSync(path.join(worldDir, "chats"), { recursive: true });
+    fs.writeFileSync(path.join(worldDir, "world_meta.json"), JSON.stringify({ worldId: worldId, language: "chinese", companions: [{ candidateId: "fixture_a", name: "学习伙伴", companionInstanceId: "ci_aaaaaaaaaaaaaaaa" }, null, null, null] }, null, 2), "utf-8");
+    fs.writeFileSync(path.join(worldDir, "npc_a.md"), "# 学习伙伴\n\n可靠、耐心。", "utf-8");
+    fs.writeFileSync(path.join(worldDir, "relation_npc_a.md"), "初始关系。", "utf-8");
     fs.mkdirSync(textbookDir, { recursive: true });
     writeMinimalPdf(path.join(textbookDir, "fixture.pdf"), "void sort complete function comment alpha beta gamma delta epsilon zeta eta theta iota kappa lambda");
     fs.writeFileSync(path.join(worldDir, "textbooks", "textbook_index.json"), JSON.stringify({
@@ -115,6 +118,14 @@ async function main() {
     var diary = fs.readFileSync(path.join(worldDir, "diary", month + ".md"), "utf-8");
     assert.ok(diary.includes("void sort"));
     assert.ok(fs.readFileSync(progressPath, "utf-8").includes("# 当前页码：第 1 页"));
+    var consumed = JSON.parse(fs.readFileSync(candidatePath, "utf-8"));
+    assert.ok(consumed[0].consumedByOperationId, "remembered close-reading candidate must be consumed by the committed end-class operation");
+    var diaryBeforeReplay = fs.readFileSync(path.join(worldDir, "diary", month + ".md"), "utf-8");
+    var replay = await env.postSSE("/api/chat", endBody, { Authorization: env.capabilityHeader() });
+    assert.strictEqual(replay.status, 200);
+    assert.ok(replay.raw.includes("\"type\":\"done\""));
+    assert.strictEqual(env.mockLLM.requests.length, 1, "receipt replay must not call the LLM again");
+    assert.strictEqual(fs.readFileSync(path.join(worldDir, "diary", month + ".md"), "utf-8"), diaryBeforeReplay, "receipt replay must not append diary twice");
     console.log("Close Reading route integration smoke: PASS");
   } finally {
     await env.teardown();

@@ -68,6 +68,76 @@
   function readAutolinkAt(value,index){
     const match=value.slice(index).match(/^<https?:\/\/[^>\n]+>/i);return match?{kind:"protected",protectedKind:"url",tts:true,ttsValue:match[0].slice(1,-1),end:index+match[0].length}:null;
   }
+  // 【表格播报 v1】: a markdown table is announced instead of read cell by cell.  The reading
+  // budget comes from the table's own shape — cells, not rows, because a wide table costs more
+  // eye travel than a tall one — and is quantised into buckets so the spoken number and the real
+  // pause can never disagree.  Nothing inside the table reaches /api/math-speech: the whole block
+  // is one protected segment, so its formulas never enter a request body.
+  const TABLE_DELIMITER_CELL=/^\s*:?-{2,}:?\s*$/;
+  const TABLE_SECONDS_BY_CELLS=[{maxCells:6,seconds:0},{maxCells:12,seconds:10},{maxCells:24,seconds:15},{maxCells:Infinity,seconds:20}];
+  const TABLE_SECONDS_CN={10:"\u5341",15:"\u5341\u4e94",20:"\u4e8c\u5341"};
+  function splitTableRow(line){
+    let text=line.trim();
+    if(text[0]==="|")text=text.slice(1);
+    if(text[text.length-1]==="|"&&text[text.length-2]!=="\\")text=text.slice(0,-1);
+    const cells=[];let current="",escaped=false;
+    for(const character of text){
+      if(escaped){current+=character;escaped=false;continue}
+      if(character==="\\"){current+=character;escaped=true;continue}
+      if(character==="|"){cells.push(current);current="";continue}
+      current+=character;
+    }
+    cells.push(current);
+    return cells;
+  }
+  function readTableAt(value,index){
+    if(index>0&&value[index-1]!=="\n")return null;
+    const headerEnd=lineEndAt(value,index);
+    if(headerEnd>=value.length)return null;
+    const header=value.slice(index,headerEnd).replace(/\r$/,"");
+    if(header.indexOf("|")<0||/^ {0,3}(`{3,}|~{3,})/.test(header))return null;
+    const headerCells=splitTableRow(header);
+    if(headerCells.length<2)return null;
+    const delimiterStart=headerEnd+1,delimiterEnd=lineEndAt(value,delimiterStart);
+    const delimiter=value.slice(delimiterStart,delimiterEnd).replace(/\r$/,"");
+    if(delimiter.indexOf("|")<0)return null;
+    const delimiterCells=splitTableRow(delimiter);
+    if(delimiterCells.length!==headerCells.length)return null;
+    if(!delimiterCells.every(function(cell){return TABLE_DELIMITER_CELL.test(cell)}))return null;
+    let cursor=delimiterEnd<value.length?delimiterEnd+1:value.length,end=cursor,rows=1,columns=headerCells.length;
+    while(cursor<value.length){
+      const nextEnd=lineEndAt(value,cursor),line=value.slice(cursor,nextEnd).replace(/\r$/,"");
+      if(!line.trim()||line.indexOf("|")<0)break;
+      if(/^ {0,3}(`{3,}|~{3,})/.test(line))break;
+      const cells=splitTableRow(line);
+      if(cells.length<2)break;
+      rows++;if(cells.length>columns)columns=cells.length;
+      end=nextEnd<value.length?nextEnd+1:nextEnd;cursor=end;
+    }
+    return{kind:"table",protectedKind:"markdown-table",tts:true,table:{rows:rows,cols:columns,cells:rows*columns},end:end};
+  }
+  function tableReadingSeconds(table,repeatIndex){
+    let seconds=20;
+    for(const bucket of TABLE_SECONDS_BY_CELLS){if(table.cells<=bucket.maxCells){seconds=bucket.seconds;break}}
+    if(seconds>0&&table.cols>=5&&seconds<20)seconds=seconds===10?15:20;
+    if(seconds>0&&repeatIndex>0)seconds=Math.max(10,seconds-5);
+    return seconds;
+  }
+  function precedingLineTail(value,start){
+    let cursor=start;
+    while(cursor>0&&/\s/.test(value[cursor-1]))cursor--;
+    const lineStart=value.lastIndexOf("\n",Math.max(0,cursor-1))+1;
+    return value.slice(lineStart,cursor).slice(-24);
+  }
+  function tableAnnouncement(source,start,table,repeatIndex){
+    const seconds=tableReadingSeconds(table,repeatIndex);
+    if(seconds<=0)return{speech:"",pauseMs:0,seconds:0};
+    // A lead-in that already named the table ("如下表所示：") must not be answered with
+    // "先看这张表" again; the sentence shrinks to the time alone.
+    const alreadyNamed=/(?:\u8868|\u5982\u4e0b)/.test(precedingLineTail(source,start));
+    const number=TABLE_SECONDS_CN[seconds]||String(seconds);
+    return{speech:alreadyNamed?"\u7ed9\u4f60"+number+"\u79d2\u3002":"\u7ed9\u4f60"+number+"\u79d2\uff0c\u5148\u770b\u8fd9\u5f20\u8868\u3002",pauseMs:seconds*1000,seconds:seconds};
+  }
   function findSingleDollar(value,from,limit){
     let index=value.indexOf("$",from);
     while(index>=0&&index<limit){if(!isEscapedAt(value,index)&&value[index-1]!=="$"&&value[index+1]!=="$")return index;index=value.indexOf("$",index+1)}
@@ -106,7 +176,21 @@
   function appendText(segments,value,start,end,extra){
     if(!value)return;const segment={type:"text",value:value,source:value,start:start,end:end,tts:true};if(extra)Object.assign(segment,extra);segments.push(segment);
   }
-  function isWrappedStage(text,marker){return text.length>=3&&text[0]===marker&&text[text.length-1]===marker&&text[1]!==marker&&text[text.length-2]!==marker&&text.slice(1,-1).trim()&&!text.slice(1,-1).includes(marker)}
+  function isWrappedStage(text,marker){
+    if(text.length<3||text[0]!==marker||text[text.length-1]!==marker||text[1]===marker||text[text.length-2]===marker)return false;
+    const inner=text.slice(1,-1);if(!inner.trim())return false;
+    // Nested emphasis inside the span is the normal way to stress a word in a stage direction
+    // ("*宵宫把纸条转过来，指尖点在那个 **else** 上。*").  A doubled marker belongs to the inner
+    // text, so only an odd bare marker would end the span before the line does.
+    let bare=0;
+    for(let index=0;index<inner.length;index++){
+      const character=inner[index];
+      if(character!==marker||isEscapedAt(inner,index))continue;
+      if(character===inner[index+1]||character===inner[index-1])continue;
+      bare++;
+    }
+    return bare%2===0;
+  }
   function narrationReason(value,index){
     const start=value.lastIndexOf("\n",Math.max(0,index-1))+1,end=lineEndAt(value,index),line=value.slice(start,end).trim();
     if(!line)return null;
@@ -133,18 +217,25 @@
   function parseMarkdownMath(input){
     if(typeof input!=="string")return{ok:false,version:ADAPTER_VERSION,reason:"invalid-input",segments:[],text:"",mathCount:0};
     if(input.length>LIMITS.maxInputChars)return{ok:false,version:ADAPTER_VERSION,reason:"input-too-long",segments:[{type:"text",value:input,source:input,start:0,end:input.length,tts:true,index:0}],text:sanitizeOverflow(input),mathCount:0};
-    const segments=[],length=input.length;let cursor=0,index=0;
+    const segments=[],length=input.length;let cursor=0,index=0,tableCount=0;
     while(index<length){
       let token=readFenceAt(input,index);
       if(!token&&input[index]==="`")token=readInlineCodeAt(input,index);
       if(!token&&(input[index]==="["||(input[index]==="!"&&input[index+1]==="[")))token=readLinkAt(input,index);
       if(!token&&input[index]==="<")token=readAutolinkAt(input,index);
       if(!token&&(input.startsWith("http://",index)||input.startsWith("https://",index)||input.startsWith("www.",index)))token=readUrlAt(input,index);
+      // A table has to win over inline math: the first cell of a real table is often a formula,
+      // and a math match at the line start would hide the header/delimiter pair from this reader.
+      if(!token)token=readTableAt(input,index);
       if(!token)token=readMathAt(input,index);
       if(!token){index++;continue}
       if(index>cursor)appendText(segments,input.slice(cursor,index),cursor,index);
       const raw=input.slice(index,token.end);
       if(token.kind==="math")segments.push({type:"math",latex:token.latex,source:raw,delimiter:token.delimiter,block:token.block,start:index,end:token.end,tts:true});
+      else if(token.kind==="table"){
+        const announcement=tableAnnouncement(input,index,token.table,tableCount++);
+        appendText(segments,raw,index,token.end,{protected:token.protectedKind,tts:true,ttsValue:raw,table:token.table,tableSpeech:announcement.speech,tablePauseMs:announcement.pauseMs});
+      }
       else appendText(segments,raw,index,token.end,{protected:token.protectedKind,tts:token.tts!==false,ttsValue:typeof token.ttsValue==="string"?token.ttsValue:raw,skipReason:token.skipReason});
       index=token.end;cursor=index;
     }
@@ -200,7 +291,7 @@
   function requestSegments(parsed,source,options){
     const segments=[],map=[],localStates=[];let limitReason=null;
     parsed.segments.forEach(function(segment,index){
-      if(segment.tts===false)return;
+      if(segment.tts===false||segment.table)return;
       if(segment.type==="math"){
         if(segment.latex.length>LIMITS.maxLatexChars){localStates[index]={ok:false,speech:safeMathFallback(segment.latex),reason:"formula-too-long"};limitReason=limitReason||"formula-too-long";return}
         const responseIndex=segments.length;segments.push({type:"math",latex:segment.latex,locale:options.locale,style:options.style,context:contextFor(segment,source,options)});map.push({parsedIndex:index,responseIndex:responseIndex});return;
@@ -215,9 +306,18 @@
     return{segments:segments,map:map,localStates:localStates,limitReason:limitReason};
   }
   function assemble(parsed,mathStates,globalFallback){
-    const outputSegments=[],parts=[],diagnostics={fallbackReason:globalFallback||null,convertedMath:0,fallbackMath:0,skipped:[]};
+    const outputSegments=[],parts=[],diagnostics={fallbackReason:globalFallback||null,convertedMath:0,fallbackMath:0,tables:0,skipped:[]};
+    let pauseAfterMs=0;
     parsed.segments.forEach(function(segment,index){
       const copy=Object.assign({},segment);delete copy.start;delete copy.end;
+      if(segment.tableSpeech!==void 0){
+        // A table is announced, never read out.  Its reading budget rides on the result so the
+        // page can hold the next fragment back for exactly the announced number of seconds.
+        copy.speech=segment.tableSpeech;copy.pauseAfterMs=segment.tablePauseMs||0;
+        pauseAfterMs=Math.max(pauseAfterMs,copy.pauseAfterMs);
+        if(copy.speech)diagnostics.tables++;
+        parts.push(copy.speech);outputSegments.push(copy);return;
+      }
       if(segment.tts===false){copy.speech="";diagnostics.skipped.push({index:index,reason:segment.skipReason||"tts-skipped"});outputSegments.push(copy);return}
       if(segment.type==="math"){
         const state=mathStates[index]||{ok:false,speech:safeMathFallback(segment.latex),reason:globalFallback||"conversion-failed"};
@@ -228,7 +328,7 @@
       const speech=cleanMarkdownText(typeof segment.ttsValue==="string"?segment.ttsValue:segment.value);copy.speech=speech;parts.push(speech);outputSegments.push(copy);
     });
     const text=parts.join("").replace(/\n{3,}/g,"\n\n").trim();
-    return{ok:true,version:ADAPTER_VERSION,adapterVersion:ADAPTER_VERSION,text:text,segments:outputSegments,stats:{total:parsed.segments.length,math:parsed.mathCount,convertedMath:diagnostics.convertedMath,fallbackMath:diagnostics.fallbackMath,skipped:diagnostics.skipped.length},diagnostics:diagnostics};
+    return{ok:true,version:ADAPTER_VERSION,adapterVersion:ADAPTER_VERSION,text:text,pauseAfterMs:pauseAfterMs,segments:outputSegments,stats:{total:parsed.segments.length,math:parsed.mathCount,convertedMath:diagnostics.convertedMath,fallbackMath:diagnostics.fallbackMath,tables:diagnostics.tables,skipped:diagnostics.skipped.length},diagnostics:diagnostics};
   }
   function cancelledResult(parsed){return{ok:false,version:ADAPTER_VERSION,adapterVersion:ADAPTER_VERSION,cancelled:true,reason:"cancelled",text:"",segments:parsed.segments,stats:{total:parsed.segments.length,math:parsed.mathCount,convertedMath:0,fallbackMath:0,skipped:0},diagnostics:{fallbackReason:"cancelled",convertedMath:0,fallbackMath:0,skipped:[]}}}
   async function requestApi(body,options){

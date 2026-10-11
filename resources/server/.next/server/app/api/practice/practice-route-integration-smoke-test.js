@@ -4,11 +4,19 @@
 
 const path = require('path');
 const fs = require('fs');
+const http = require('http');
 const workspaceRoot = path.resolve(__dirname, '..', '..', '..', '..', '..', '..', '..');
 const { TestEnvironment } = require(path.join(workspaceRoot, 'resources/server/smoke-test-utils'));
 
 const profileId = 'test_profile';
 const worldId = 'test_world';
+const accountId = 'test';
+const companion = {
+  slotId: 'npc_a',
+  companionInstanceId: 'ci_0123456789abcdef',
+  candidateId: 'candidate_math',
+  displayName: 'Avery'
+};
 
 const OUTPUT_DIR = path.join(workspaceRoot, 'tmp/test-results');
 if (!fs.existsSync(OUTPUT_DIR)) fs.mkdirSync(OUTPUT_DIR, { recursive: true });
@@ -21,6 +29,100 @@ let stderr = '';
 function log(msg) { stdout += msg + '\n'; console.log(msg); }
 function err(msg) { stderr += msg + '\n'; console.error(msg); }
 
+// TestEnvironment intentionally leaves ordinary POST requests unsigned so
+// auth-contract tests can exercise the fail-closed path. This business-route
+// smoke needs the production-equivalent capability fixture instead.
+function postWithCapability(env, url, body, extraHeaders) {
+  return new Promise((resolve, reject) => {
+    const data = JSON.stringify(body);
+    const req = http.request({
+      hostname: '127.0.0.1',
+      port: env.serverPort,
+      path: url,
+      method: 'POST',
+      headers: Object.assign({
+        'Content-Type': 'application/json',
+        'Content-Length': Buffer.byteLength(data),
+        Authorization: env.capabilityHeader()
+      }, extraHeaders || {})
+    }, (res) => {
+      let responseBody = '';
+      res.on('data', (chunk) => { responseBody += chunk; });
+      res.on('end', () => resolve({ status: res.statusCode, headers: res.headers, body: responseBody }));
+    });
+    req.on('error', reject);
+    req.write(data);
+    req.end();
+  });
+}
+
+function installPracticeCapability(env) {
+  env.post = function (url, body) { return postWithCapability(env, url, body); };
+}
+
+function accountWorldDir(env) {
+  return path.join(env.tmpDir, 'accounts', accountId, 'profiles', profileId, 'worlds', worldId);
+}
+
+function seedCompanionWorld(env) {
+  const worldDir = accountWorldDir(env);
+  const textbookDir = path.join(worldDir, 'textbooks', 'math');
+  const diaryDir = path.join(worldDir, 'diary');
+  fs.mkdirSync(textbookDir, { recursive: true });
+  fs.mkdirSync(diaryDir, { recursive: true });
+  fs.writeFileSync(path.join(worldDir, 'world_meta.json'), JSON.stringify({
+    worldId,
+    language: 'chinese',
+    companions: [{
+      candidateId: companion.candidateId,
+      name: companion.displayName,
+      companionInstanceId: companion.companionInstanceId
+    }, null, null, null]
+  }, null, 2));
+  fs.writeFileSync(path.join(worldDir, 'npc_a.md'), 'PERSONA_TOKEN: patient algebra companion');
+  fs.writeFileSync(path.join(worldDir, 'relation_npc_a.md'), 'RELATION_TOKEN: Avery knows the learner benefits from checking units.');
+  fs.writeFileSync(path.join(worldDir, 'learner_profile.md'), 'LEARNER_TOKEN: prefers short Socratic hints.');
+  fs.writeFileSync(path.join(worldDir, 'pal_moments.md'), [
+    '## 2026-08-31 | Avery',
+    'PERSONAL_TOKEN: we used a number line together.',
+    '<!-- continuityEvent:practice-personal companion:' + companion.companionInstanceId + ' mode:classroom -->',
+    '',
+    '## 2026-08-30 | Other',
+    'SHARED_TOKEN: another companion celebrated a careful proof.',
+    '<!-- continuityEvent:practice-shared companion:ci_fedcba9876543210 mode:classroom -->'
+  ].join('\n'));
+
+  const normalFiles = {
+    progress: path.join(textbookDir, 'progress.md'),
+    diary: path.join(diaryDir, '2026-08.md'),
+    relation: path.join(worldDir, 'relation_npc_a.md'),
+    story: path.join(worldDir, 'story.md')
+  };
+  fs.writeFileSync(normalFiles.progress, 'NORMAL_PROGRESS_SENTINEL');
+  fs.writeFileSync(normalFiles.diary, 'NORMAL_DIARY_SENTINEL');
+  fs.writeFileSync(normalFiles.story, 'NORMAL_STORY_SENTINEL');
+  return { worldDir, normalFiles };
+}
+
+function responseErrorCode(response) {
+  try {
+    const payload = JSON.parse(response.body || response.raw || '{}');
+    if (typeof payload.error === 'string') return payload.error;
+    if (payload.error && typeof payload.error.code === 'string') return payload.error.code;
+    return payload.code || null;
+  } catch (_) {
+    return null;
+  }
+}
+
+function parseSseEvents(raw) {
+  return String(raw || '').split(/\r?\n\r?\n/).map((block) => {
+    const line = block.split(/\r?\n/).find((entry) => entry.startsWith('data:'));
+    if (!line) return null;
+    try { return JSON.parse(line.slice(5).trim()); } catch (_) { return null; }
+  }).filter(Boolean);
+}
+
 async function runTests() {
   const env = new TestEnvironment();
   let passed = true;
@@ -30,6 +132,8 @@ async function runTests() {
   let subjPbId = null;
   try {
     await env.setup();
+    installPracticeCapability(env);
+    const continuity = seedCompanionWorld(env);
     log('[INFO] Server started on port ' + env.serverPort);
     log('[INFO] Mock LLM on port ' + env.mockLLM.port);
 
@@ -137,7 +241,7 @@ async function runTests() {
     }
 
     // --- async source resolution: mixed and textbook fallback keep all conversations ---
-    const conceptDir = path.join(env.tmpDir, 'profiles', profileId, 'worlds', worldId, 'concept-summaries');
+    const conceptDir = path.join(continuity.worldDir, 'concept-summaries');
     fs.mkdirSync(conceptDir, { recursive: true });
     fs.writeFileSync(path.join(conceptDir, 'conv_a.json'), JSON.stringify({ sections: [{ content: 'Conversation alpha recursion evidence.' }] }));
     fs.writeFileSync(path.join(conceptDir, 'conv_b.json'), JSON.stringify({ sections: [{ content: 'Conversation beta pointer evidence.' }] }));
@@ -381,6 +485,174 @@ async function runTests() {
       }
     }
 
+    // --- tutoring companion continuity ---
+    // A legacy candidate/name assertion alone must never select a world
+    // companion. Binding is authoritative only with slotId + instanceId.
+    const tutorProblemSetId = 'continuity_tutor_ps';
+    const legacyBindRes = await env.post('/api/practice', {
+      action: 'setTutoringCompanion',
+      profileId, worldId, problemSetId: tutorProblemSetId,
+      companionId: companion.candidateId,
+      companionName: 'UNTRUSTED_CLIENT_NAME'
+    });
+    if (legacyBindRes.status !== 400 || responseErrorCode(legacyBindRes) !== 'COMPANION_IDENTITY_REQUIRED') {
+      err('FAIL [tutor-identity-required]: candidate/name-only companion binding must be rejected explicitly');
+      passed = false;
+    } else log('PASS [tutor-identity-required]');
+
+    const staleInstanceBindRes = await env.post('/api/practice', {
+      action: 'setTutoringCompanion',
+      profileId, worldId, problemSetId: tutorProblemSetId,
+      slotId: companion.slotId,
+      companionInstanceId: 'ci_abcdef0123456789',
+      candidateId: companion.candidateId
+    });
+    if (staleInstanceBindRes.status !== 409 || responseErrorCode(staleInstanceBindRes) !== 'COMPANION_CONTEXT_MISMATCH') {
+      err('FAIL [tutor-bind-instance-mismatch]: resolver must reject a stale instance assertion before creating a tutoring binding');
+      passed = false;
+    } else log('PASS [tutor-bind-instance-mismatch]');
+
+    const candidateMismatchBindRes = await env.post('/api/practice', {
+      action: 'setTutoringCompanion',
+      profileId, worldId, problemSetId: tutorProblemSetId,
+      slotId: companion.slotId,
+      companionInstanceId: companion.companionInstanceId,
+      candidateId: 'candidate_spoof'
+    });
+    if (candidateMismatchBindRes.status !== 409 || responseErrorCode(candidateMismatchBindRes) !== 'COMPANION_CONTEXT_MISMATCH') {
+      err('FAIL [tutor-bind-candidate-mismatch]: resolver must reject a candidate assertion that disagrees with the current slot');
+      passed = false;
+    } else log('PASS [tutor-bind-candidate-mismatch]');
+
+    // Practice is a separate artifact mode. A caller cannot label this request
+    // as classroom work to gain normal classroom write privileges.
+    const wrongModeRes = await env.post('/api/practice', {
+      action: 'setTutoringCompanion', mode: 'classroom',
+      profileId, worldId, problemSetId: tutorProblemSetId,
+      slotId: companion.slotId,
+      companionInstanceId: companion.companionInstanceId,
+      companionId: 'UNTRUSTED_CLIENT_ID'
+    });
+    if (wrongModeRes.status !== 403 || responseErrorCode(wrongModeRes) !== 'PRACTICE_MODE_FORBIDDEN') {
+      err('FAIL [practice-mode-guard]: classroom mode must be rejected by the practice server guard; status=' + wrongModeRes.status + ', code=' + responseErrorCode(wrongModeRes) + ', body=' + wrongModeRes.body.slice(0, 300));
+      passed = false;
+    } else log('PASS [practice-mode-guard]');
+
+    const bindRes = await env.post('/api/practice', {
+      action: 'setTutoringCompanion',
+      profileId, worldId, problemSetId: tutorProblemSetId,
+      slotId: companion.slotId,
+      companionInstanceId: companion.companionInstanceId,
+      candidateId: companion.candidateId,
+      companionName: 'UNTRUSTED_CLIENT_NAME'
+    });
+    let boundSession = null;
+    try { boundSession = JSON.parse(bindRes.body).session; } catch (_) {}
+    if (bindRes.status !== 200 || !boundSession ||
+      boundSession.companionSlotId !== companion.slotId ||
+      boundSession.companionInstanceId !== companion.companionInstanceId ||
+      boundSession.candidateId !== companion.candidateId ||
+      boundSession.companionName !== companion.displayName) {
+      err('FAIL [tutor-bind-snapshot]: binding must persist resolver-derived slot/instance/candidate/name, not client display values');
+      passed = false;
+    } else log('PASS [tutor-bind-snapshot]');
+
+    env.mockLLM.setResponse({ choices: [{ message: { content: 'Tutor response token.' } }] });
+    env.mockLLM.resetRequests();
+    const tutorRes = await env.postSSE('/api/practice', {
+      action: 'tutorExplain',
+      profileId, worldId, problemSetId: tutorProblemSetId,
+      slotId: companion.slotId,
+      companionInstanceId: companion.companionInstanceId,
+      candidateId: companion.candidateId,
+      companionName: 'UNTRUSTED_CLIENT_NAME',
+      message: 'Please help me reason through this.',
+      context: { question: 'Why is 1 + 1 = 2?', correctAnswer: '2' }
+    }, { Authorization: env.capabilityHeader() });
+    const tutorPrompt = String(env.mockLLM.requests[0] && env.mockLLM.requests[0].messages && env.mockLLM.requests[0].messages[0] && env.mockLLM.requests[0].messages[0].content || '');
+    const continuityTokens = ['PERSONA_TOKEN', 'RELATION_TOKEN', 'LEARNER_TOKEN', 'PERSONAL_TOKEN', 'SHARED_TOKEN'];
+    const missingContinuity = continuityTokens.filter((token) => !tutorPrompt.includes(token));
+    if (tutorRes.status !== 200 || missingContinuity.length || !/practice mode|练习模式/i.test(tutorPrompt)) {
+      err('FAIL [tutor-prompt-continuity]: resolver persona/relation/learner/personal+shared moments and practice-mode guard must reach the tutor prompt; missing=' + missingContinuity.join(','));
+      passed = false;
+    } else log('PASS [tutor-prompt-continuity]');
+    const tutorEvents = parseSseEvents(tutorRes.raw);
+    const tutorDoneIndex = tutorEvents.findIndex((event) => event.type === 'done');
+    const tutorDone = tutorDoneIndex >= 0 ? tutorEvents[tutorDoneIndex] : null;
+    const tutorSessionFile = path.join(continuity.worldDir, 'practice', 'tutoring_sessions', tutorProblemSetId + '.json');
+    const persistedTutor = fs.existsSync(tutorSessionFile) ? JSON.parse(fs.readFileSync(tutorSessionFile, 'utf8')) : null;
+    const persistedAssistant = persistedTutor && persistedTutor.messages && persistedTutor.messages.some((message) => message.role === 'assistant' && message.content === 'Tutor response token.');
+    if (!tutorDone || tutorDoneIndex !== tutorEvents.length - 1 || tutorDone.persisted !== true || !persistedAssistant) {
+      err('FAIL [tutor-persist-before-done]: public done must be final, report persisted=true, and follow an on-disk assistant message');
+      passed = false;
+    } else log('PASS [tutor-persist-before-done]');
+
+    const normalExpected = {
+      progress: 'NORMAL_PROGRESS_SENTINEL',
+      diary: 'NORMAL_DIARY_SENTINEL',
+      relation: 'RELATION_TOKEN: Avery knows the learner benefits from checking units.',
+      story: 'NORMAL_STORY_SENTINEL'
+    };
+    let normalArtifactsUnchanged = true;
+    for (const key of Object.keys(normalExpected)) {
+      const actual = fs.readFileSync(continuity.normalFiles[key], 'utf8');
+      if (actual !== normalExpected[key]) {
+        err('FAIL [practice-no-classroom-write]: tutor changed normal ' + key + ' artifact');
+        passed = false;
+        normalArtifactsUnchanged = false;
+      }
+    }
+    if (normalArtifactsUnchanged) log('PASS [practice-no-classroom-write]');
+
+    // Old sessions remain readable, but their untrusted candidate/name fields
+    // require one explicit authoritative rebind before they can stream again.
+    const legacyProblemSetId = 'legacy_tutor_ps';
+    const legacyDir = path.join(continuity.worldDir, 'practice', 'tutoring_sessions');
+    fs.mkdirSync(legacyDir, { recursive: true });
+    fs.writeFileSync(path.join(legacyDir, legacyProblemSetId + '.json'), JSON.stringify({
+      problemSetId: legacyProblemSetId,
+      companionId: companion.candidateId,
+      companionName: 'Old display name',
+      messages: []
+    }, null, 2));
+    env.mockLLM.resetRequests();
+    const legacyStreamRes = await env.postSSE('/api/practice', {
+      action: 'tutorHint', profileId, worldId, problemSetId: legacyProblemSetId,
+      message: 'A legacy session should request rebind.'
+    }, { Authorization: env.capabilityHeader() });
+    if (legacyStreamRes.status !== 409 || responseErrorCode(legacyStreamRes) !== 'COMPANION_REBIND_REQUIRED' || env.mockLLM.requests.length !== 0) {
+      err('FAIL [legacy-tutor-session]: a historical session without a snapshot must require explicit rebind and must not call the LLM');
+      passed = false;
+    } else log('PASS [legacy-tutor-session]');
+
+    const legacyRebindRes = await env.post('/api/practice', {
+      action: 'setTutoringCompanion', profileId, worldId, problemSetId: legacyProblemSetId,
+      slotId: companion.slotId,
+      companionInstanceId: companion.companionInstanceId,
+      candidateId: companion.candidateId
+    });
+    if (legacyRebindRes.status !== 200) {
+      err('FAIL [legacy-tutor-rebind]: an explicit slot/instance rebind must upgrade a historical session');
+      passed = false;
+    } else log('PASS [legacy-tutor-rebind]');
+
+    // A slot occupant may change after binding. The saved instance snapshot is
+    // authoritative, so a later stream must return an explicit conflict rather
+    // than speaking as the replacement companion.
+    const metaPath = path.join(continuity.worldDir, 'world_meta.json');
+    const driftedMeta = JSON.parse(fs.readFileSync(metaPath, 'utf8'));
+    driftedMeta.companions[0].companionInstanceId = 'ci_abcdef0123456789';
+    fs.writeFileSync(metaPath, JSON.stringify(driftedMeta, null, 2));
+    env.mockLLM.resetRequests();
+    const driftRes = await env.postSSE('/api/practice', {
+      action: 'tutorHint', profileId, worldId, problemSetId: tutorProblemSetId,
+      message: 'This must not stream after occupant drift.'
+    }, { Authorization: env.capabilityHeader() });
+    if (driftRes.status !== 409 || responseErrorCode(driftRes) !== 'COMPANION_CONTEXT_MISMATCH' || env.mockLLM.requests.length !== 0) {
+      err('FAIL [tutor-occupant-drift]: changed slot occupant must return COMPANION_CONTEXT_MISMATCH before LLM streaming');
+      passed = false;
+    } else log('PASS [tutor-occupant-drift]');
+
     // --- mock LLM 500 ---
     env.mockLLM.setResponse({ error: 'Internal Server Error' }, 500);
     env.mockLLM.resetRequests();
@@ -431,6 +703,7 @@ async function runMissingApiKeyTest() {
   let passed = true;
   try {
     await env.setup();
+    installPracticeCapability(env);
     log('[INFO] Started server with empty apiKey');
 
     env.mockLLM.resetRequests();

@@ -788,8 +788,159 @@ function _resolveTutor() {
   return T;
 }
 
-function _buildTutorSystemPrompt(session, body) {
-  var companionName = session.companionName || body.companionName || "学习伙伴";
+// Practice is an artifact mode of its own.  This route may write only practice
+// records, tutoring sessions, and adaptive evidence; normal classroom files
+// (progress, diary, relation, story) are intentionally not routable here.
+function _practiceModeError(code, message, status) {
+  var error = new Error(message || code);
+  error.code = code;
+  error.status = status || 403;
+  error.statusCode = error.status;
+  return error;
+}
+
+function _assertPracticeMode(body) {
+  var requested = body && body.mode;
+  if (requested != null && String(requested).trim() && String(requested).trim() !== "practice") {
+    throw _practiceModeError("PRACTICE_MODE_FORBIDDEN", "Practice API cannot run in " + String(requested).trim() + " mode", 403);
+  }
+  return "practice";
+}
+
+function _assertPracticeWriteTarget(target) {
+  if (target === "practice" || target === "tutoring" || target === "adaptive") return target;
+  throw _practiceModeError("PRACTICE_MODE_WRITE_FORBIDDEN", "Practice mode cannot write " + String(target || "normal classroom") + " artifacts", 403);
+}
+
+function _companionRouteError(code, message, status) {
+  var error = new Error(message || code);
+  error.code = code;
+  error.status = status || 400;
+  error.statusCode = error.status;
+  return error;
+}
+
+function _continuityErrorResponse(error, h) {
+  var status = Number(error && (error.status || error.statusCode));
+  if ([400, 403, 404, 409, 500, 503].indexOf(status) < 0) status = 500;
+  var code = error && typeof error.code === "string" ? error.code : "COMPANION_CONTINUITY_FAILED";
+  var message = error && error.message ? error.message : "Could not resolve the tutoring companion";
+  return _jsonErr(code, message, status, h);
+}
+
+function _requireCompanionContinuity() {
+  var continuity = global.__COMPANION_CONTINUITY__;
+  if (!continuity || continuity.enabled === false || typeof continuity.resolveCompanion !== "function" || typeof continuity.loadContext !== "function") {
+    throw _companionRouteError("COMPANION_CONTINUITY_UNAVAILABLE", "Companion continuity is not available", 503);
+  }
+  return continuity;
+}
+
+function _identityText(value) {
+  return typeof value === "string" && value.trim() ? value.trim() : null;
+}
+
+function _requestedCompanionIdentity(body) {
+  var slotId = _identityText(body && body.slotId);
+  var companionInstanceId = _identityText(body && body.companionInstanceId);
+  if (!slotId || !companionInstanceId) {
+    throw _companionRouteError("COMPANION_IDENTITY_REQUIRED", "slotId and companionInstanceId are required", 400);
+  }
+  return {
+    slotId: slotId,
+    companionInstanceId: companionInstanceId,
+    candidateId: _identityText(body && body.candidateId)
+  };
+}
+
+function _storedCompanionIdentity(session) {
+  if (!session || typeof session !== "object") return null;
+  var slotId = _identityText(session.companionSlotId);
+  var companionInstanceId = _identityText(session.companionInstanceId);
+  if (!slotId && !companionInstanceId) return null;
+  if (!slotId || !companionInstanceId) {
+    throw _companionRouteError("COMPANION_REBIND_REQUIRED", "This tutoring session has a partial legacy companion identity; select the companion again", 409);
+  }
+  return {
+    slotId: slotId,
+    companionInstanceId: companionInstanceId,
+    candidateId: _identityText(session.candidateId)
+  };
+}
+
+async function _resolveTutorSnapshot(body, session) {
+  var continuity = _requireCompanionContinuity();
+  var hasRequestSlot = _identityText(body && body.slotId);
+  var hasRequestInstance = _identityText(body && body.companionInstanceId);
+  var hasAnyRequestedIdentity = !!hasRequestSlot || !!hasRequestInstance;
+  if (hasAnyRequestedIdentity && (!hasRequestSlot || !hasRequestInstance)) {
+    throw _companionRouteError("COMPANION_IDENTITY_REQUIRED", "slotId and companionInstanceId must be supplied together", 400);
+  }
+
+  var stored = _storedCompanionIdentity(session);
+  var requestedCandidateId = _identityText(body && body.candidateId);
+  var identity;
+  if (stored) {
+    if (hasAnyRequestedIdentity && (stored.slotId !== hasRequestSlot || stored.companionInstanceId !== hasRequestInstance)) {
+      throw _companionRouteError("COMPANION_CONTEXT_MISMATCH", "Requested companion does not match this tutoring session", 409);
+    }
+    if (stored.candidateId && requestedCandidateId && stored.candidateId !== requestedCandidateId) {
+      throw _companionRouteError("COMPANION_CONTEXT_MISMATCH", "Requested companion candidate does not match this tutoring session", 409);
+    }
+    identity = {
+      slotId: stored.slotId,
+      companionInstanceId: stored.companionInstanceId,
+      candidateId: stored.candidateId || requestedCandidateId
+    };
+  } else {
+    if (!hasAnyRequestedIdentity) {
+      if (session) throw _companionRouteError("COMPANION_REBIND_REQUIRED", "This historical tutoring session needs an explicit slotId and companionInstanceId rebind", 409);
+      identity = _requestedCompanionIdentity(body);
+    } else {
+      identity = { slotId: hasRequestSlot, companionInstanceId: hasRequestInstance, candidateId: requestedCandidateId };
+    }
+  }
+
+  var snapshot = await continuity.resolveCompanion({
+    profileId: body.profileId,
+    worldId: body.worldId,
+    slotId: identity.slotId,
+    companionInstanceId: identity.companionInstanceId,
+    candidateId: identity.candidateId || undefined,
+    mode: "practice"
+  });
+  return { continuity: continuity, snapshot: snapshot, stored: stored };
+}
+
+function _sessionNeedsCompanionSnapshot(session, snapshot) {
+  return !session || session.companionId !== snapshot.companionInstanceId ||
+    session.companionName !== snapshot.displayName || session.companionSlotId !== snapshot.slotId ||
+    session.companionInstanceId !== snapshot.companionInstanceId || session.candidateId !== snapshot.candidateId;
+}
+
+function _appendTutorContinuityPrompt(lines, continuityContext, zh) {
+  var snapshot = continuityContext && continuityContext.snapshot || {};
+  if (zh) {
+    lines.push("练习模式边界（服务端强制）：本次仅能进行讲题、练习记录和 tutoring session 更新；绝不能写入或声称更新正常课堂的教材 progress、diary、relation 或 story。");
+    lines.push("当前伙伴身份：" + (snapshot.displayName || "学习伙伴") + "（slot " + (snapshot.slotId || "") + "，instance " + (snapshot.companionInstanceId || "") + "）。");
+    if (continuityContext.persona) lines.push("伙伴人设：\n" + continuityContext.persona);
+    if (continuityContext.relation) lines.push("与学生的关系：\n" + continuityContext.relation);
+    if (continuityContext.learnerProfile) lines.push("学习者画像：\n" + continuityContext.learnerProfile);
+    if (continuityContext.personalMoments) lines.push("这位伙伴亲历的近期互动：\n" + continuityContext.personalMoments);
+    if (continuityContext.sharedMoments) lines.push("其他伙伴共享的近期互动（不得冒认是自己的经历）：\n" + continuityContext.sharedMoments);
+  } else {
+    lines.push("Practice mode boundary (server-enforced): this turn may only tutor and update practice records/tutoring sessions. Never write or claim to update normal classroom textbook progress, diary, relation, or story artifacts.");
+    lines.push("Current companion identity: " + (snapshot.displayName || "learning companion") + " (slot " + (snapshot.slotId || "") + ", instance " + (snapshot.companionInstanceId || "") + ").");
+    if (continuityContext.persona) lines.push("Companion persona:\n" + continuityContext.persona);
+    if (continuityContext.relation) lines.push("Relationship with the learner:\n" + continuityContext.relation);
+    if (continuityContext.learnerProfile) lines.push("Learner profile:\n" + continuityContext.learnerProfile);
+    if (continuityContext.personalMoments) lines.push("This companion's recent personal moments:\n" + continuityContext.personalMoments);
+    if (continuityContext.sharedMoments) lines.push("Recent moments shared by other companions (do not claim them as your own):\n" + continuityContext.sharedMoments);
+  }
+}
+
+function _buildTutorSystemPrompt(session, body, continuityContext) {
+  var companionName = continuityContext && continuityContext.snapshot && continuityContext.snapshot.displayName || session.companionName || "学习伙伴";
   var ctx = session.context || body.context || null;
   var zh = !(body.teachingLanguage && body.teachingLanguage.indexOf("english") >= 0);
   var lines = [];
@@ -819,6 +970,7 @@ function _buildTutorSystemPrompt(session, body) {
         if (ctx.grading && ctx.grading.feedback) lines.push("批改反馈：" + ctx.grading.feedback);
       }
     }
+    _appendTutorContinuityPrompt(lines, continuityContext, true);
     lines.push("");
     lines.push("先概览整卷表现，再按学生最需要的题目讲。用苏格拉底式提问引导学生理解，允许在交卷后给出完整解法，但仍要先诊断思路。回复自然流畅，像课堂上一对一讲卷。");
   } else {
@@ -847,6 +999,7 @@ function _buildTutorSystemPrompt(session, body) {
         if (ctx.grading && ctx.grading.feedback) lines.push("Grading feedback: " + ctx.grading.feedback);
       }
     }
+    _appendTutorContinuityPrompt(lines, continuityContext, false);
     lines.push("");
     lines.push("Start with an overview of the paper, then focus on the problems the student needs most. Since the paper has already been submitted, you may provide full solutions, but diagnose their reasoning first. Be conversational and friendly.");
   }
@@ -897,8 +1050,8 @@ function _streamingTutorResponse(mc, model, systemPrompt, messages) {
         });
         if (!resp.ok) {
           var errText = await resp.text().catch(function () { return ""; });
-          send({ type: "error", error: "LLM API " + resp.status + ": " + errText.slice(0, 200) });
-          send({ type: "done" });
+          send({ type: "tutor_error", error: "LLM API " + resp.status + ": " + errText.slice(0, 200) });
+          send({ type: "tutor_complete", fullText: "", ok: false });
           controller.close();
           return;
         }
@@ -927,10 +1080,10 @@ function _streamingTutorResponse(mc, model, systemPrompt, messages) {
             } catch (e) {}
           }
         }
-        send({ type: "done", fullText: fullText });
+        send({ type: "tutor_complete", fullText: fullText, ok: true });
       } catch (e) {
-        send({ type: "error", error: e && e.message ? e.message : "Stream failed" });
-        send({ type: "done" });
+        send({ type: "tutor_error", error: e && e.message ? e.message : "Stream failed" });
+        send({ type: "tutor_complete", fullText: "", ok: false });
       }
       controller.close();
     }
@@ -947,11 +1100,40 @@ var _tutorActionHints = {
   tutorVariant: { zh: "能出一道类似的题让我练习吗？", en: "Can you give me a similar problem to practice?" }
 };
 
-async function _doTutorStream(body, h, actionKey) {
+async function _doTutorStream(body, h, actionKey, requestContext) {
   var T = _resolveTutor();
   if (!T) return _jsonErr("tutor_unavailable", "Tutoring session module not loaded", 500, h);
   var pid = body.profileId, wid = body.worldId, psid = body.problemSetId;
   if (!pid || !wid || !psid) return _jsonErr("missing_params", "profileId, worldId, problemSetId required", 400, h);
+
+  var sess, snapshot, continuityContext;
+  try {
+    _assertPracticeMode(body);
+    _assertPracticeWriteTarget("tutoring");
+    sess = T.readTutoringSession(pid, wid, psid, requestContext);
+    var resolved = await _resolveTutorSnapshot(body, sess);
+    snapshot = resolved.snapshot;
+    if (_sessionNeedsCompanionSnapshot(sess, snapshot)) {
+      sess = T.setCompanion(pid, wid, psid, snapshot.companionInstanceId, snapshot.displayName, snapshot, requestContext);
+    }
+    continuityContext = await resolved.continuity.loadContext(snapshot, {
+      persona: 2600,
+      relation: 1200,
+      learnerProfile: 1200,
+      personalMoments: 1400,
+      sharedMoments: 700
+    });
+    snapshot = continuityContext && continuityContext.snapshot || snapshot;
+    if (_sessionNeedsCompanionSnapshot(sess, snapshot)) {
+      sess = T.setCompanion(pid, wid, psid, snapshot.companionInstanceId, snapshot.displayName, snapshot, requestContext);
+    }
+    if (body.context && typeof body.context === "object") {
+      T.updateContext(pid, wid, psid, body.context, requestContext);
+      sess = T.readTutoringSession(pid, wid, psid, requestContext);
+    }
+  } catch (e) {
+    return _continuityErrorResponse(e, h);
+  }
 
   var set = global.__SOCRATOPIA_SET__ || {};
   var mc = set.strong || set.kb || set.weak || null;
@@ -961,27 +1143,13 @@ async function _doTutorStream(body, h, actionKey) {
   var model = body.model || mc.model;
   if (!model) return _jsonErr("no_llm", "No model configured", 400, h);
 
-  // Ensure session exists
-  var sess = T.readTutoringSession(pid, wid, psid);
-  if (!sess) {
-    sess = T.defaultSession(psid);
-    if (body.companionId) { sess.companionId = body.companionId; sess.companionName = body.companionName || null; }
-    if (body.context) { sess.context = body.context; if (body.context.problemId) sess.activeProblemId = body.context.problemId; }
-    T.writeTutoringSession(pid, wid, sess);
-  }
-  // Update context if provided
-  if (body.context && typeof body.context === "object") {
-    T.updateContext(pid, wid, psid, body.context);
-    sess = T.readTutoringSession(pid, wid, psid);
-  }
-
   var zh = !(body.teachingLanguage && body.teachingLanguage.indexOf("english") >= 0);
   var userContent = body.message || body.content || "";
   var hint = _tutorActionHints[actionKey];
   var actionHintText = hint ? (zh ? hint.zh : hint.en) : "";
 
-  // For tutorFullAnswer, override the system prompt to allow giving the full answer
-  var sysPrompt = _buildTutorSystemPrompt(sess, body);
+  // For tutorFullAnswer, override the system prompt to allow giving the full answer.
+  var sysPrompt = _buildTutorSystemPrompt(sess, body, continuityContext);
   if (actionKey === "tutorFullAnswer") {
     sysPrompt += zh ? "\n\n学生明确要求了完整答案,请给出详细的解题过程和最终答案。" : "\n\nThe student has explicitly asked for the full answer. Provide a detailed solution process and final answer.";
   }
@@ -989,18 +1157,24 @@ async function _doTutorStream(body, h, actionKey) {
     sysPrompt += zh ? "\n\n学生要求出一道变式题。请出一道相似知识点但不同情境/数值的题目,给出题面,先不给答案,等学生作答。" : "\n\nThe student wants a variant problem. Create a similar problem with different context/values. Present the problem only, wait for the student to answer.";
   }
 
-  // Append user message to session
+  // Append user message to the account/epoch-bound session.
   var finalUserContent = userContent || actionHintText;
   if (finalUserContent) {
-    T.appendMessage(pid, wid, psid, { role: "user", content: finalUserContent, metadata: { action: actionKey } });
-    sess = T.readTutoringSession(pid, wid, psid);
+    try {
+      _assertPracticeWriteTarget("tutoring");
+      T.appendMessage(pid, wid, psid, { role: "user", content: finalUserContent, metadata: { action: actionKey } }, requestContext);
+      sess = T.readTutoringSession(pid, wid, psid, requestContext);
+    } catch (e) {
+      return _continuityErrorResponse(e, h);
+    }
   }
 
   var llmMessages = _buildTutorMessages(sess, null, null);
-  // Stream the response
   var streamResp = _streamingTutorResponse({ baseUrl: mc.baseUrl, apiKey: apiKey }, model, sysPrompt, llmMessages);
 
-  // We need to capture the full text to save it. Use a wrapper stream.
+  // The upstream tutor stream uses internal completion/error events. The public
+  // done event is sent only after the account-scoped assistant persistence has
+  // completed, so the client never treats an unsaved answer as successful.
   var origStream = streamResp.body;
   var fullText = "";
   var passEnc = new TextEncoder();
@@ -1008,44 +1182,83 @@ async function _doTutorStream(body, h, actionKey) {
     async start(ctrl) {
       var reader = origStream.getReader();
       var dec = new TextDecoder();
+      var pending = "";
+      var upstreamDone = false;
+      var upstreamError = null;
+      function send(event) {
+        ctrl.enqueue(passEnc.encode("data: " + JSON.stringify(event) + "\n\n"));
+      }
+      function processBlock(block) {
+        block.split(/\r?\n/).forEach(function (line) {
+          if (!line.startsWith("data:")) return;
+          var event;
+          try { event = JSON.parse(line.slice(5).trim()); } catch (_) { return; }
+          if (event.type === "text") {
+            fullText += String(event.text || "");
+            send(event);
+          } else if (event.type === "tutor_error") {
+            upstreamError = event.error || "Tutor stream failed";
+          } else if (event.type === "tutor_complete") {
+            upstreamDone = event.ok !== false;
+            if (typeof event.fullText === "string") fullText = event.fullText;
+          }
+        });
+      }
       try {
         while (true) {
           var r = await reader.read();
           if (r.done) break;
-          ctrl.enqueue(r.value);
-          // Parse for fullText capture
-          var chunk = dec.decode(r.value, { stream: true });
-          var clines = chunk.split("\n");
-          for (var ci = 0; ci < clines.length; ci++) {
-            var cl = clines[ci].trim();
-            if (!cl.startsWith("data:")) continue;
-            try {
-              var cp = JSON.parse(cl.slice(5).trim());
-              if (cp.type === "text" && cp.text) fullText += cp.text;
-              if (cp.type === "done" && cp.fullText) fullText = cp.fullText;
-            } catch (e) {}
-          }
+          pending += dec.decode(r.value, { stream: true });
+          var blocks = pending.split(/\r?\n\r?\n/);
+          pending = blocks.pop() || "";
+          blocks.forEach(processBlock);
         }
-      } catch (e) {}
-      // Save assistant message after stream ends
+        pending += dec.decode();
+        if (pending.trim()) processBlock(pending);
+      } catch (e) {
+        upstreamError = e && e.message ? e.message : "Tutor stream failed";
+      } finally {
+        try { reader.releaseLock(); } catch (_) {}
+      }
+
+      if (upstreamError || !upstreamDone) {
+        send({ type: "error", error: upstreamError || "Tutor stream ended before completion", code: "TUTORING_STREAM_FAILED" });
+        send({ type: "done", ok: false, persisted: false });
+        ctrl.close();
+        return;
+      }
+
       if (fullText) {
-        try { T.appendMessage(pid, wid, psid, { role: "assistant", content: fullText, metadata: { action: actionKey } }); } catch (e) {}
         try {
+          _assertPracticeWriteTarget("tutoring");
+          T.appendMessage(pid, wid, psid, { role: "assistant", content: fullText, metadata: { action: actionKey } }, requestContext);
+        } catch (e) {
+          send({ type: "error", error: e && e.message || "Tutoring session could not be saved", code: e && e.code || "TUTORING_SESSION_SAVE_FAILED" });
+          send({ type: "done", ok: false, persisted: false });
+          ctrl.close();
+          return;
+        }
+        try {
+          _assertPracticeWriteTarget("practice");
           var P = global.__PRACTICE__;
           if (P && typeof P.savePracticeRecord === "function") {
-            var latest = T.readTutoringSession(pid, wid, psid);
+            var latest = T.readTutoringSession(pid, wid, psid, requestContext);
             P.savePracticeRecord(pid, wid, {
               problemSetId: psid,
               status: "tutoring",
               tutoringStartedAt: new Date().toISOString(),
-              companionId: sess.companionId || body.companionId || null,
-              companionName: sess.companionName || body.companionName || null,
+              companionId: snapshot.companionInstanceId,
+              companionName: snapshot.displayName,
+              companionSlotId: snapshot.slotId,
+              companionInstanceId: snapshot.companionInstanceId,
+              candidateId: snapshot.candidateId,
               messageCount: latest && Array.isArray(latest.messages) ? latest.messages.length : undefined,
               tutoringSessionId: psid
             });
           }
         } catch (e) {}
       }
+      send({ type: "done", fullText: fullText, ok: true, persisted: true });
       ctrl.close();
     }
   });
@@ -1053,52 +1266,80 @@ async function _doTutorStream(body, h, actionKey) {
   return new Response(wrapStream, { headers: { "Content-Type": "text/event-stream", "Cache-Control": "no-cache", "Connection": "keep-alive" } });
 }
 
-async function _doTutorFreeChat(body, h) {
-  return _doTutorStream(body, h, "tutorFreeChat");
+async function _doTutorFreeChat(body, h, requestContext) {
+  return _doTutorStream(body, h, "tutorFreeChat", requestContext);
 }
 
 // --- Management actions (non-streaming) ---
 
-async function _doGetTutoringSession(body, h) {
+async function _doGetTutoringSession(body, h, requestContext) {
   var T = _resolveTutor();
   if (!T) return _jsonErr("tutor_unavailable", "Tutoring session module not loaded", 500, h);
   var pid = body.profileId, wid = body.worldId, psid = body.problemSetId;
   if (!pid || !wid || !psid) return _jsonErr("missing_params", "profileId, worldId, problemSetId required", 400, h);
-  var sess = T.readTutoringSession(pid, wid, psid);
-  return v.NextResponse.json({ session: sess }, { headers: h });
+  try {
+    var sess = T.readTutoringSession(pid, wid, psid, requestContext);
+    return v.NextResponse.json({ session: sess }, { headers: h });
+  } catch (e) {
+    return _continuityErrorResponse(e, h);
+  }
 }
 
-async function _doListTutoringSessions(body, h) {
+async function _doListTutoringSessions(body, h, requestContext) {
   var T = _resolveTutor();
   if (!T) return _jsonErr("tutor_unavailable", "Tutoring session module not loaded", 500, h);
   var pid = body.profileId, wid = body.worldId;
   if (!pid || !wid) return _jsonErr("missing_params", "profileId and worldId required", 400, h);
-  var list = T.listTutoringSessions(pid, wid);
-  return v.NextResponse.json({ sessions: list }, { headers: h });
+  try {
+    var list = T.listTutoringSessions(pid, wid, requestContext);
+    return v.NextResponse.json({ sessions: list }, { headers: h });
+  } catch (e) {
+    return _continuityErrorResponse(e, h);
+  }
 }
 
-async function _doDeleteTutoringSession(body, h) {
+async function _doDeleteTutoringSession(body, h, requestContext) {
   var T = _resolveTutor();
   if (!T) return _jsonErr("tutor_unavailable", "Tutoring session module not loaded", 500, h);
   var pid = body.profileId, wid = body.worldId, psid = body.problemSetId;
   if (!pid || !wid || !psid) return _jsonErr("missing_params", "profileId, worldId, problemSetId required", 400, h);
-  var ok = T.deleteTutoringSession(pid, wid, psid);
-  return v.NextResponse.json({ deleted: ok }, { headers: h });
+  try {
+    _assertPracticeWriteTarget("tutoring");
+    var ok = T.deleteTutoringSession(pid, wid, psid, requestContext);
+    return v.NextResponse.json({ deleted: ok }, { headers: h });
+  } catch (e) {
+    return _continuityErrorResponse(e, h);
+  }
 }
 
-async function _doSetTutoringCompanion(body, h) {
+async function _doSetTutoringCompanion(body, h, requestContext) {
   var T = _resolveTutor();
   if (!T) return _jsonErr("tutor_unavailable", "Tutoring session module not loaded", 500, h);
   var pid = body.profileId, wid = body.worldId, psid = body.problemSetId;
   if (!pid || !wid || !psid) return _jsonErr("missing_params", "profileId, worldId, problemSetId required", 400, h);
-  var cid = body.companionId || null, cname = body.companionName || null;
-  if (!cid) return _jsonErr("missing_params", "companionId required", 400, h);
-  var sess = T.setCompanion(pid, wid, psid, cid, cname);
-  return v.NextResponse.json({ session: sess }, { headers: h });
+  try {
+    _assertPracticeMode(body);
+    _assertPracticeWriteTarget("tutoring");
+    var identity = _requestedCompanionIdentity(body);
+    var continuity = _requireCompanionContinuity();
+    var snapshot = await continuity.resolveCompanion({
+      profileId: pid,
+      worldId: wid,
+      slotId: identity.slotId,
+      companionInstanceId: identity.companionInstanceId,
+      candidateId: identity.candidateId || undefined,
+      mode: "practice"
+    });
+    var sess = T.setCompanion(pid, wid, psid, snapshot.companionInstanceId, snapshot.displayName, snapshot, requestContext);
+    return v.NextResponse.json({ session: sess }, { headers: h });
+  } catch (e) {
+    return _continuityErrorResponse(e, h);
+  }
 }
 
 async function wGET(a) {
   var h = { "Cache-Control": "private, no-store" };
+  var requestContext = typeof global.__SOCRATOPIA_ACCOUNT_CONTEXT__ === "function" ? global.__SOCRATOPIA_ACCOUNT_CONTEXT__() : null;
   try {
     var u = a.nextUrl ? a.nextUrl : new URL(a.url || "");
     var sp = u.searchParams;
@@ -1128,13 +1369,13 @@ async function wGET(a) {
       if (!T) return _jsonErr("tutor_unavailable", "Tutoring session module not loaded", 500, h);
       var tpsid = sp.get("problemSetId") || "";
       if (!tpsid) return _jsonErr("missing_params", "problemSetId required", 400, h);
-      var tsess = T.readTutoringSession(pid, wid, tpsid);
+      var tsess = T.readTutoringSession(pid, wid, tpsid, requestContext);
       return v.NextResponse.json({ session: tsess }, { headers: h });
     }
     if (action === "listTutoringSessions") {
       var T2 = _resolveTutor();
       if (!T2) return _jsonErr("tutor_unavailable", "Tutoring session module not loaded", 500, h);
-      var tlist = T2.listTutoringSessions(pid, wid);
+      var tlist = T2.listTutoringSessions(pid, wid, requestContext);
       return v.NextResponse.json({ sessions: tlist }, { headers: h });
     }
     if (action === "listPracticeRecords") {
@@ -1155,6 +1396,7 @@ async function wPOST(a) {
   try { b = await a.json(); } catch (e) { return _jsonErr("invalid_json", "Request body must be valid JSON", 400, h); }
   var action = b.action || "";
   try {
+    _assertPracticeMode(b);
     if (action === "generate") return await _doGenerate(b,h,a.signal,requestContext,requestDeadlineAt);
     if (action === "grade") {
       var service = _stageCService();
@@ -1184,19 +1426,20 @@ async function wPOST(a) {
     if (action === "listMistakes") return await _doListMistakes(b, h);
     if (action === "savePracticeRecord") return await _doSavePracticeRecord(b, h);
     if (action === "listPracticeRecords") return await _doListPracticeRecords(b, h);
-    if (action === "tutorExplain") return await _doTutorStream(b, h, "tutorExplain");
-    if (action === "tutorHint") return await _doTutorStream(b, h, "tutorHint");
-    if (action === "tutorRephrase") return await _doTutorStream(b, h, "tutorRephrase");
-    if (action === "tutorExample") return await _doTutorStream(b, h, "tutorExample");
-    if (action === "tutorFullAnswer") return await _doTutorStream(b, h, "tutorFullAnswer");
-    if (action === "tutorVariant") return await _doTutorStream(b, h, "tutorVariant");
-    if (action === "tutorFreeChat") return await _doTutorFreeChat(b, h);
-    if (action === "getTutoringSession") return await _doGetTutoringSession(b, h);
-    if (action === "listTutoringSessions") return await _doListTutoringSessions(b, h);
-    if (action === "deleteTutoringSession") return await _doDeleteTutoringSession(b, h);
-    if (action === "setTutoringCompanion") return await _doSetTutoringCompanion(b, h);
+    if (action === "tutorExplain") return await _doTutorStream(b, h, "tutorExplain", requestContext);
+    if (action === "tutorHint") return await _doTutorStream(b, h, "tutorHint", requestContext);
+    if (action === "tutorRephrase") return await _doTutorStream(b, h, "tutorRephrase", requestContext);
+    if (action === "tutorExample") return await _doTutorStream(b, h, "tutorExample", requestContext);
+    if (action === "tutorFullAnswer") return await _doTutorStream(b, h, "tutorFullAnswer", requestContext);
+    if (action === "tutorVariant") return await _doTutorStream(b, h, "tutorVariant", requestContext);
+    if (action === "tutorFreeChat") return await _doTutorFreeChat(b, h, requestContext);
+    if (action === "getTutoringSession") return await _doGetTutoringSession(b, h, requestContext);
+    if (action === "listTutoringSessions") return await _doListTutoringSessions(b, h, requestContext);
+    if (action === "deleteTutoringSession") return await _doDeleteTutoringSession(b, h, requestContext);
+    if (action === "setTutoringCompanion") return await _doSetTutoringCompanion(b, h, requestContext);
     return _jsonErr("unknown_action", "Unknown action: " + action, 400, h);
   } catch (e) {
+    if (e && typeof e.code === "string" && e.code.indexOf("PRACTICE_MODE_") === 0) return _continuityErrorResponse(e, h);
     return _jsonErr("practice_failed", e && e.message, 500, h);
   }
 };(()=>{let __ra=global.__SOCRATOPIA_ROUTE_AUTH__,__err=()=>new Response(JSON.stringify({error:{code:"auth_unavailable",message:"Local request authentication is unavailable",status:503},code:"auth_unavailable"}),{status:503,headers:{"Content-Type":"application/json; charset=utf-8","Cache-Control":"private, no-store"}});if(typeof wGET==="function"){let __f0=wGET;wGET=function(a,...b){let __http=!!a&&(typeof a.url==="string"||a.nextUrl);return __ra&&typeof __ra.dispatch==="function"?__ra.dispatch(__f0,a,b,"/api/practice"):__http?__err():__f0(a,...b)}}if(typeof wPOST==="function"){let __f1=wPOST;wPOST=function(a,...b){let __http=!!a&&(typeof a.url==="string"||a.nextUrl);return __ra&&typeof __ra.dispatch==="function"?__ra.dispatch(__f1,a,b,"/api/practice"):__http?__err():__f1(a,...b)}}})();let x=new e.AppRouteRouteModule({definition:{kind:f.RouteKind.APP_ROUTE,page:"/api/practice/route",pathname:"/api/practice",filename:"route",bundlePath:"app/api/practice/route"},distDir:".next",relativeProjectDir:"",resolvedPagePath:"/Users/leminwu/Documents/Github/socralab-app/v2/src/app/api/practice/route.ts",nextConfigOutput:"standalone",userland:d}),{workAsyncStorage:y,workUnitAsyncStorage:z,serverHooks:A}=x;function B(){return(0,g.patchFetch)({workAsyncStorage:y,workUnitAsyncStorage:z})}async function C(a,b,c){x.isDev&&(0,h.addRequestMeta)(a,"devRequestTimingInternalsEnd",process.hrtime.bigint());let d="/api/practice/route";"/index"===d&&(d="/");let e=await x.prepare(a,b,{srcPage:d,multiZoneDraftMode:!1});if(!e)return b.statusCode=400,b.end("Bad Request"),null==c.waitUntil||c.waitUntil.call(c,Promise.resolve()),null;let{buildId:g,params:v,nextConfig:w,parsedUrl:y,isDraftMode:z,prerenderManifest:A,routerServerContext:B,isOnDemandRevalidate:C,revalidateOnlyGenerated:D,resolvedPathname:E,clientReferenceManifest:F,serverActionsManifest:G}=e,H=(0,k.normalizeAppPath)(d),I=!!(A.dynamicRoutes[H]||A.routes[E]),J=async()=>((null==B?void 0:B.render404)?await B.render404(a,b,y,!1):b.end("This page could not be found"),null);if(I&&!z){let a=!!A.routes[E],b=A.dynamicRoutes[H];if(b&&!1===b.fallback&&!a){if(w.experimental.adapterPath)return await J();throw new t.NoFallbackError}}let K=null;!I||x.isDev||z||(K="/index"===(K=E)?"/":K);let L=!0===x.isDev||!I,M=I&&!L;G&&F&&(0,j.setManifestsSingleton)({page:d,clientReferenceManifest:F,serverActionsManifest:G});let N=a.method||"GET",O=(0,i.getTracer)(),P=O.getActiveScopeSpan(),Q={params:v,prerenderManifest:A,renderOpts:{experimental:{authInterrupts:!!w.experimental.authInterrupts},cacheComponents:!!w.cacheComponents,supportsDynamicResponse:L,incrementalCache:(0,h.getRequestMeta)(a,"incrementalCache"),cacheLifeProfiles:w.cacheLife,waitUntil:c.waitUntil,onClose:a=>{b.on("close",a)},onAfterTaskError:void 0,onInstrumentationRequestError:(b,c,d,e)=>x.onRequestError(a,b,d,e,B)},sharedContext:{buildId:g}},R=new l.NodeNextRequest(a),S=new l.NodeNextResponse(b),T=m.NextRequestAdapter.fromNodeNextRequest(R,(0,m.signalFromNodeResponse)(b));try{let e=async a=>x.handle(T,Q).finally(()=>{if(!a)return;a.setAttributes({"http.status_code":b.statusCode,"next.rsc":!1});let c=O.getRootSpanAttributes();if(!c)return;if(c.get("next.span_type")!==n.BaseServerSpan.handleRequest)return void console.warn(`Unexpected root span type '${c.get("next.span_type")}'. Please report this Next.js issue https://github.com/vercel/next.js`);let e=c.get("next.route");if(e){let b=`${N} ${e}`;a.setAttributes({"next.route":e,"http.route":e,"next.span_name":b}),a.updateName(b)}else a.updateName(`${N} ${d}`)}),g=!!(0,h.getRequestMeta)(a,"minimalMode"),j=async h=>{var i,j;let k=async({previousCacheEntry:f})=>{try{if(!g&&C&&D&&!f)return b.statusCode=404,b.setHeader("x-nextjs-cache","REVALIDATED"),b.end("This page could not be found"),null;let d=await e(h);a.fetchMetrics=Q.renderOpts.fetchMetrics;let i=Q.renderOpts.pendingWaitUntil;i&&c.waitUntil&&(c.waitUntil(i),i=void 0);let j=Q.renderOpts.collectedTags;if(!I)return await (0,p.I)(R,S,d,Q.renderOpts.pendingWaitUntil),null;{let a=await d.blob(),b=(0,q.toNodeOutgoingHttpHeaders)(d.headers);j&&(b[s.NEXT_CACHE_TAGS_HEADER]=j),!b["content-type"]&&a.type&&(b["content-type"]=a.type);let c=void 0!==Q.renderOpts.collectedRevalidate&&!(Q.renderOpts.collectedRevalidate>=s.INFINITE_CACHE)&&Q.renderOpts.collectedRevalidate,e=void 0===Q.renderOpts.collectedExpire||Q.renderOpts.collectedExpire>=s.INFINITE_CACHE?void 0:Q.renderOpts.collectedExpire;return{value:{kind:u.CachedRouteKind.APP_ROUTE,status:d.status,body:Buffer.from(await a.arrayBuffer()),headers:b},cacheControl:{revalidate:c,expire:e}}}}catch(b){throw(null==f?void 0:f.isStale)&&await x.onRequestError(a,b,{routerKind:"App Router",routePath:d,routeType:"route",revalidateReason:(0,o.c)({isStaticGeneration:M,isOnDemandRevalidate:C})},!1,B),b}},l=await x.handleResponse({req:a,nextConfig:w,cacheKey:K,routeKind:f.RouteKind.APP_ROUTE,isFallback:!1,prerenderManifest:A,isRoutePPREnabled:!1,isOnDemandRevalidate:C,revalidateOnlyGenerated:D,responseGenerator:k,waitUntil:c.waitUntil,isMinimalMode:g});if(!I)return null;if((null==l||null==(i=l.value)?void 0:i.kind)!==u.CachedRouteKind.APP_ROUTE)throw Object.defineProperty(Error(`Invariant: app-route received invalid cache entry ${null==l||null==(j=l.value)?void 0:j.kind}`),"__NEXT_ERROR_CODE",{value:"E701",enumerable:!1,configurable:!0});g||b.setHeader("x-nextjs-cache",C?"REVALIDATED":l.isMiss?"MISS":l.isStale?"STALE":"HIT"),z&&b.setHeader("Cache-Control","private, no-cache, no-store, max-age=0, must-revalidate");let m=(0,q.fromNodeOutgoingHttpHeaders)(l.value.headers);return g&&I||m.delete(s.NEXT_CACHE_TAGS_HEADER),!l.cacheControl||b.getHeader("Cache-Control")||m.get("Cache-Control")||m.set("Cache-Control",(0,r.getCacheControlHeader)(l.cacheControl)),await (0,p.I)(R,S,new Response(l.value.body,{headers:m,status:l.value.status||200})),null};P?await j(P):await O.withPropagatedContext(a.headers,()=>O.trace(n.BaseServerSpan.handleRequest,{spanName:`${N} ${d}`,kind:i.SpanKind.SERVER,attributes:{"http.method":N,"http.target":a.url}},j))}catch(b){if(b instanceof t.NoFallbackError||await x.onRequestError(a,b,{routerKind:"App Router",routePath:H,routeType:"route",revalidateReason:(0,o.c)({isStaticGeneration:M,isOnDemandRevalidate:C})},!1,B),I)throw b;return await (0,p.I)(R,S,new Response(null,{status:500})),null}}},44870:a=>{"use strict";a.exports=require("next/dist/compiled/next-server/app-route.runtime.prod.js")},63033:a=>{"use strict";a.exports=require("next/dist/server/app-render/work-unit-async-storage.external.js")},78335:()=>{},86439:a=>{"use strict";a.exports=require("next/dist/shared/lib/no-fallback-error.external")},96487:()=>{}};var b=require("../../../webpack-runtime.js");b.C(a);var c=b.X(0,[3445,1813],()=>b(b.s=59006));module.exports=c})();

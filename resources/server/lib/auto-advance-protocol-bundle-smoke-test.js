@@ -37,6 +37,8 @@ assert.ok(page.includes("retryAssistantMessageId:_advanceNotAccepted?null:s.id")
 assert.ok(page.includes("n>=Number(a.stateGeneration||0)"), "stream snapshots must merge monotonically");
 assert.ok(page.includes('e.ok?e.json():Promise.reject(Error("reading_context_failed"))'), "reading-context HTTP errors must not overwrite state");
 assert.ok(page.includes("t.advance&&s>=Number(n.stateGeneration||0))&&(rr(t.readingRange||null)"), "stale reading-context responses must not roll back the displayed range");
+assert.ok(page.includes("textbookComplete:t.textbookComplete===undefined?a?.textbookComplete===true:t.textbookComplete===true"), "the classroom client must retain terminal textbook state from the done event");
+assert.ok(page.includes("windowComplete:t.windowComplete===undefined?a?.windowComplete===true:t.windowComplete===true"), "the classroom client must retain window-complete state from the done event");
 
 assert.ok(chat.includes('if(_advanceError){await _advanceOuterCleanup?.(_advanceError),d({type:"error",accepted:!1'), "beginTurn rejection must be explicitly unaccepted after cleanup");
 assert.ok(chat.includes('else if("error"===a.type)throw Object.assign(Error(a.error||"model_stream_error")'), "model error events must enter the failure path");
@@ -46,7 +48,19 @@ assert.ok(beginTurnAnchor >= 0 && acceptedCleanupAnchor > beginTurnAnchor, "acce
 assert.ok(chat.includes("else try{var _advanceOuterCleanup=null;_advanceTurn=await"), "outer cleanup must be function-scoped and visible to adaptiveCore's catch");
 assert.ok(chat.includes('if(_advanceError){await _advanceOuterCleanup?.(_advanceError),d('), "accepted turns rejected before stream startup must be cleaned up");
 assert.ok(chat.includes("}catch(a){await _advanceOuterCleanup?.(a);return new Response"), "pre-stream failures after beginTurn must fail the accepted turn");
-assert.ok(chat.includes("decision:K.get(O)||null});_advanceOuterCleanup=null;_advanceComplete.shouldPrefetch"), "completed turns must disarm failure cleanup");
+var formatScopeAnchor = chat.indexOf("_advanceTextbookFormat=null,_advanceIsMarkdownLike=null,_advanceResolveFormat=async()=>");
+var completionAnchor = chat.indexOf("requiresTeachingProgress:!_advanceIsMarkdownLike");
+assert.ok(formatScopeAnchor >= 0 && completionAnchor > formatScopeAnchor, "v2 completion must use a request-scoped format value defined before use");
+assert.ok(chat.includes("_format=await _advanceResolveFormat()"), "the range loader must use the request-scoped format resolver");
+assert.ok(chat.includes("_pdf.metadata&&(_pdf.metadata.totalPages||_pdf.metadata.numPages)"), "the compiled range loader must consume PDF page-count metadata");
+assert.ok(chat.includes("eof:!0") && chat.includes("advance_pdf_range_unavailable"), "the compiled PDF loader must convert metadata-confirmed EOF into a terminal load result");
+assert.ok(chat.includes("readingRange:_advanceTurn.readingRange||null") && chat.includes("textbookComplete:_advanceTurn.textbookComplete===true"), "the replay done event must carry the authoritative terminal snapshot");
+assert.ok(chat.includes("textbookComplete:_advanceComplete?.textbookComplete"), "ordinary chat done events must omit terminal fields when no authoritative auto-advance result exists");
+assert.ok(chat.includes("await _advanceResolveFormat(),_advanceComplete=await global.__AUTO_ADVANCE__.completeTurn("), "completeTurn must resolve the textbook format when the loader did not need it");
+assert.ok(chat.includes('"pdf"!==_format&&"markdown"!==_format&&"qbook"!==_format'), "unsupported textbook formats must fail explicitly instead of guessing");
+assert.ok(chat.includes('requiresTeachingProgress:!_advanceIsMarkdownLike});_advanceOuterCleanup=null;_advanceComplete.shouldPrefetch'), "completed turns must require verified teaching progress only for PDF");
+assert.ok(!chat.includes("requiresTeachingProgress:!isMarkdownLike"), "completeTurn must never reference the legacy branch-local format variable");
+assert.ok(chat.includes("if(!_advanceTurn&&(commitAdvance||prefetchAdvance)&&!b._advanceInFlight)"), "v2 turns must never enter the legacy chat auto-advance writer");
 assert.ok(reading.includes("global.__AUTO_ADVANCE__.readSnapshot("), "reading-context GET must use the owner-neutral snapshot API");
 assert.ok(!reading.includes("global.__AUTO_ADVANCE__.bootstrap("), "reading-context GET must never activate an owner");
 

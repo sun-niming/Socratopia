@@ -54,7 +54,7 @@ assertOrdered(reading, ["_captureOcrRequestFence(a,3e4)", "_assertOcrRequestFenc
 assert(reading.includes("function _isOcrFenceError("), "reading-context must classify fence failures");
 assert(reading.includes("catch(_ocrTocError){if(_isOcrFenceError(_ocrTocError))throw _ocrTocError}"), "reading-context must rethrow fence failures instead of returning a stale 200 response");
 
-assertOrdered(chat, ["_captureOcrRequestFence(a,12e4)", "await a.json()", "(0,l.o8)(\"read_textbook_pages\"", "O,!1,_ocrFence", "ocrOperation:_ocrFence"], "chat OCR propagation");
+assertOrdered(chat, ["_captureOcrRequestFence(a,18e4)", "await a.json()", "(0,l.o8)(\"read_textbook_pages\"", "O,!1,_ocrFence", "ocrOperation:_ocrFence"], "chat OCR propagation");
 assert(chat.includes("function _isOcrFenceError("), "chat must classify fence failures");
 assert(chat.includes("catch(_ocrPreloadError){if(_isOcrFenceError(_ocrPreloadError))throw _ocrPreloadError}"), "chat automatic preload must rethrow fence failures");
 assert(chat.includes("j.conversationId,j.nuwaMode,j.ocrOperation"), "chat streaming tool caller must forward the OCR operation in the ninth argument");

@@ -24,6 +24,21 @@ function sseResponse(events) {
   }), { status: 200, headers: { "Content-Type": "text/event-stream" } });
 }
 
+function sseResponseThenError(events, error, delayMs) {
+  var encoder = new TextEncoder();
+  return new Response(new ReadableStream({
+    start(controller) {
+      events.forEach(function (event) {
+        controller.enqueue(encoder.encode("event: " + event.type + "\n"));
+        controller.enqueue(encoder.encode("data: " + JSON.stringify(event) + "\n\n"));
+      });
+      setTimeout(function () {
+        controller.error(error);
+      }, delayMs || 10);
+    }
+  }), { status: 200, headers: { "Content-Type": "text/event-stream" } });
+}
+
 async function collectSse(response) {
   var text = await response.text();
   return text.split(/\r?\n/).filter(function (line) {
@@ -107,13 +122,13 @@ async function testNativeHttpFallback() {
     }, { headers: { Authorization: "Bearer native-test" }, timeoutMs: 5000, logger: { warn: function () {} } });
     assert.strictEqual(fallback.choices[0].message.content, "native fallback");
     assert.strictEqual(fallback.usage.prompt_tokens, 5);
-    assert.deepStrictEqual(calls.map(function (call) { return call.path; }), ["/codex/v1/chat/completions", "/codex/v1/responses", "/codex/v1/responses", "/codex/v1/responses"]);
+    assert.deepStrictEqual(calls.map(function (call) { return call.path; }), ["/codex/v1/responses", "/codex/v1/responses", "/codex/v1/responses"]);
     assert(calls.every(function (call) { return call.authorization === "Bearer native-test"; }));
-    assert.strictEqual(calls[1].body.stream, true);
-    assert.strictEqual(calls[1].body.max_output_tokens, 19);
-    assert.strictEqual(calls[2].body.max_output_tokens, undefined);
-    assert.strictEqual(calls[2].body.prompt_cache_retention, "24h");
-    assert.strictEqual(calls[3].body.prompt_cache_retention, undefined);
+    assert.strictEqual(calls[0].body.stream, true);
+    assert.strictEqual(calls[0].body.max_output_tokens, 19);
+    assert.strictEqual(calls[1].body.max_output_tokens, undefined);
+    assert.strictEqual(calls[1].body.prompt_cache_retention, "24h");
+    assert.strictEqual(calls[2].body.prompt_cache_retention, undefined);
   } finally {
     await close(server);
   }
@@ -189,6 +204,24 @@ async function testNativeResponseLimit() {
   }
 }
 
+async function testCompletedStreamIgnoresTransportTailError() {
+  var translated = new Response(compat.responsesStreamToChat(sseResponseThenError([
+    { type: "response.output_text.delta", delta: "complete answer" },
+    { type: "response.completed", response: { usage: { input_tokens: 7, output_tokens: 2 } } }
+  ], new TypeError("terminated"))));
+  var events = await collectSse(translated);
+  assert.strictEqual(events[0].choices[0].delta.content, "complete answer");
+  assert.strictEqual(events[1].usage.prompt_tokens, 7);
+  assert.strictEqual(events[1].usage.completion_tokens, 2);
+}
+
+async function testIncompleteStreamStillPropagatesTransportError() {
+  var translated = new Response(compat.responsesStreamToChat(sseResponseThenError([
+    { type: "response.output_text.delta", delta: "partial answer" }
+  ], new TypeError("terminated"))));
+  await assert.rejects(translated.text(), /terminated/);
+}
+
 async function main() {
   assert.strictEqual(
     compat.responsesUrl("https://example.test/v1/chat/completions"),
@@ -227,10 +260,52 @@ async function main() {
   assert.strictEqual(converted.prompt_cache_options, undefined);
   assert.strictEqual(converted.prompt_cache_retention, "24h");
 
+  // ---- thinking -> reasoning on the Responses path (BUG-0017 / FIX-0017) ----
+  // A /chat/completions caller says "no reasoning" with `thinking`, which the
+  // Responses API does not know. Without a mapping the field is dropped and the
+  // model reasons anyway, which is what pushed every slice into the 90s timeout.
+  assert.deepStrictEqual(
+    compat.chatRequestToResponses({ model: "gpt-5.6-sol", messages: [{ role: "user", content: "x" }], thinking: { type: "disabled" } }).reasoning,
+    { effort: "none" },
+    "thinking.disabled must turn reasoning off"
+  );
+  assert.deepStrictEqual(
+    compat.chatRequestToResponses({ model: "gpt-5.6-sol", messages: [{ role: "user", content: "x" }], thinking: { type: "enabled" } }).reasoning,
+    { effort: "medium" },
+    "thinking.enabled must keep reasoning on"
+  );
+  assert.deepStrictEqual(
+    compat.chatRequestToResponses({ model: "gpt-5.6-sol", messages: [], thinking: false }).reasoning,
+    { effort: "none" },
+    "a bare boolean false is accepted too"
+  );
+  assert.deepStrictEqual(
+    compat.chatRequestToResponses({ model: "gpt-5.6-sol", messages: [], thinking: true }).reasoning,
+    { effort: "medium" },
+    "a bare boolean true is accepted too"
+  );
+
+  // An explicit reasoning field always wins; `thinking` is only the fallback.
+  assert.deepStrictEqual(
+    compat.chatRequestToResponses({ model: "gpt-5.6-sol", messages: [], thinking: { type: "disabled" }, reasoning: { effort: "high" } }).reasoning,
+    { effort: "high" },
+    "explicit reasoning wins over thinking"
+  );
+  assert.deepStrictEqual(
+    compat.chatRequestToResponses({ model: "gpt-5.6-sol", messages: [], thinking: { type: "disabled" }, reasoning_effort: "low" }).reasoning,
+    { effort: "low" },
+    "reasoning_effort also wins over thinking"
+  );
+
+  assert.strictEqual(
+    compat.chatRequestToResponses({ model: "gpt-5.6-sol", messages: [] }).reasoning,
+    undefined,
+    "with no signal the reasoning field stays absent, so callers that never set it are unaffected"
+  );
+
   var calls = [];
   var wrapped = compat.createResponsesFallbackFetch(async function (url, init) {
     calls.push({ url: String(url), body: JSON.parse(init.body) });
-    if (calls.length === 1) return jsonResponse({ error: { message: "codex channel: only /v1/responses, /v1/responses/compact and /v1/alpha/search are supported" } }, 500);
     return jsonResponse({
       id: "resp_1",
       model: "gpt-5.6-sol",
@@ -244,15 +319,14 @@ async function main() {
     body: JSON.stringify({ model: "gpt-5.6-sol", messages: [{ role: "user", content: "Hi" }], stream: false })
   });
   var nonStreamBody = await nonStream.json();
-  assert.strictEqual(calls.length, 2);
-  assert.strictEqual(calls[1].url, "https://example.test/v1/responses");
+  assert.strictEqual(calls.length, 1);
+  assert.strictEqual(calls[0].url, "https://example.test/v1/responses");
   assert.strictEqual(nonStreamBody.choices[0].message.content, "Hello back");
   assert.strictEqual(nonStreamBody.usage.prompt_tokens_details.cached_tokens, 4);
 
   calls = [];
   wrapped = compat.createResponsesFallbackFetch(async function (url, init) {
     calls.push({ url: String(url), body: JSON.parse(init.body) });
-    if (calls.length === 1) return jsonResponse({ error: { message: "codex channel: only /v1/responses are supported" } }, 500);
     return sseResponse([
       { type: "response.output_text.delta", delta: "Collected" },
       { type: "response.completed", response: { id: "resp_collected", usage: { input_tokens: 7, output_tokens: 1 } } }
@@ -263,16 +337,15 @@ async function main() {
     body: JSON.stringify({ model: "gpt-5.6-sol", messages: [{ role: "user", content: "Hi" }], stream: false })
   });
   var collectedBody = await collected.json();
-  assert.strictEqual(calls[1].body.stream, true);
+  assert.strictEqual(calls[0].body.stream, true);
   assert.strictEqual(collectedBody.choices[0].message.content, "Collected");
   assert.strictEqual(collectedBody.usage.prompt_tokens, 7);
 
   calls = [];
   wrapped = compat.createResponsesFallbackFetch(async function (url, init) {
     calls.push({ url: String(url), body: JSON.parse(init.body) });
-    if (calls.length === 1) return jsonResponse({ error: { message: "codex channel: only /v1/responses are supported" } }, 500);
-    if (calls.length === 2) return jsonResponse({ error: { message: "Unsupported parameter: max_output_tokens" } }, 400);
-    if (calls.length === 3) return jsonResponse({ error: { message: "Unsupported parameter: prompt_cache_retention" } }, 400);
+    if (calls.length === 1) return jsonResponse({ error: { message: "Unsupported parameter: max_output_tokens" } }, 400);
+    if (calls.length === 2) return jsonResponse({ error: { message: "Unsupported parameter: prompt_cache_retention" } }, 400);
     return sseResponse([
       { type: "response.output_text.delta", delta: "Gateway fallback" },
       { type: "response.completed", response: { id: "resp_unlimited", usage: { input_tokens: 4, output_tokens: 2 } } }
@@ -283,17 +356,16 @@ async function main() {
     body: JSON.stringify({ model: "gpt-5.6-sol", max_completion_tokens: 17, prompt_cache_retention: "24h", messages: [{ role: "user", content: "Hi" }], stream: false })
   });
   var unsupportedLimitBody = await unsupportedLimit.json();
-  assert.strictEqual(calls.length, 4);
-  assert.strictEqual(calls[1].body.max_output_tokens, 17);
-  assert.strictEqual(calls[2].body.max_output_tokens, undefined);
-  assert.strictEqual(calls[2].body.prompt_cache_retention, "24h");
-  assert.strictEqual(calls[3].body.prompt_cache_retention, undefined);
+  assert.strictEqual(calls.length, 3);
+  assert.strictEqual(calls[0].body.max_output_tokens, 17);
+  assert.strictEqual(calls[1].body.max_output_tokens, undefined);
+  assert.strictEqual(calls[1].body.prompt_cache_retention, "24h");
+  assert.strictEqual(calls[2].body.prompt_cache_retention, undefined);
   assert.strictEqual(unsupportedLimitBody.choices[0].message.content, "Gateway fallback");
 
   calls = [];
   wrapped = compat.createResponsesFallbackFetch(async function (url, init) {
     calls.push({ url: String(url), body: JSON.parse(init.body) });
-    if (calls.length === 1) return jsonResponse({ error: { message: "codex channel: only /v1/responses are supported" } }, 500);
     return sseResponse([
       { type: "response.created", response: { id: "resp_stream" } },
       { type: "response.output_text.delta", delta: "Hel" },
@@ -313,7 +385,6 @@ async function main() {
   calls = [];
   wrapped = compat.createResponsesFallbackFetch(async function (url, init) {
     calls.push({ url: String(url), body: JSON.parse(init.body) });
-    if (calls.length === 1) return jsonResponse({ error: { message: "codex channel: only /v1/responses are supported" } }, 500);
     return sseResponse([
       { type: "response.output_item.added", output_index: 0, item: { id: "fc_1", call_id: "call_1", type: "function_call", name: "read_page", arguments: "" } },
       { type: "response.function_call_arguments.delta", item_id: "fc_1", output_index: 0, delta: "{\"page\":" },
@@ -349,7 +420,6 @@ async function main() {
     var bodyText = init && init.body;
     if (input instanceof Request && !bodyText) bodyText = await input.text();
     calls.push({ url: String(input.url || input), body: JSON.parse(bodyText || "{}"), signal: init && init.signal });
-    if (calls.length === 1) return jsonResponse({ error: { message: "codex channel: only /v1/responses are supported" } }, 500);
     return sseResponse([
       { type: "response.output_text.delta", delta: "Request fallback" },
       { type: "response.completed", response: { usage: { input_tokens: 3, output_tokens: 2 } } }
@@ -364,9 +434,11 @@ async function main() {
   });
   var requestFallback = await wrapped(requestInput);
   assert.strictEqual((await requestFallback.json()).choices[0].message.content, "Request fallback");
-  assert.strictEqual(calls.length, 2);
-  assert.strictEqual(calls[1].signal, requestInput.signal);
+  assert.strictEqual(calls.length, 1);
+  assert.strictEqual(calls[0].signal, requestInput.signal);
 
+  await testCompletedStreamIgnoresTransportTailError();
+  await testIncompleteStreamStillPropagatesTransportError();
   await testNativeHttpFallback();
   await testNativeTruncatedResponseRejects();
   await testNativeRetriesShareTimeoutBudget();

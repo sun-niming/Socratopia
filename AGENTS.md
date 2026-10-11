@@ -18,6 +18,10 @@ A **packaged Windows build artifact** of Socratopia (Electron + Next.js Socratic
 
 `server.js` installs config and `global.*` module handles before Next starts (table at `server.js:881-900`); compiled chunks that cannot `require()` read from there. Adding a module compiled code needs means adding a row to that table.
 
+**Figure orders**: the tutor may order a figure inline with `![alt](book://<textbookId>/p<page>#x0,y0,x1,y1)` (crop the PDF) or a ```svg fence (draw it). `lib/assets/intents.js` (`global.__ASSETS_INTENTS__`) materializes both into `asset://` anchors on the `POST /api/conversations` write path; the client renders live fences through the markdown `pre` override, and `lib/assets/prefetch.js` (`global.__ASSETS_PREFETCH__`) warms the pages just past the reading window. Provenance shows as a corner badge driven by `GET /api/assets/<id>?meta=1`. **When** to order a figure (as opposed to the syntax) lives only in `figureOrderGuide`, which is injected every turn; the three `resources/rules/*` files just point at it — keep the policy in the guide, not duplicated into rules. See `IMAGE_ASSET_LAYER_T13_COMPLETION_REPORT.md` §13-§14, §16.
+
+**Chat deletes are soft.** The only path that removes a conversation is the sidebar's confirm-free trash button → `DELETE /api/conversations`. That route now moves `chats/<id>.json` into `chats/.trash/` via `lib/chat-trash.js` (`global.__CHAT_TRASH__`, old unlink kept as fallback), so a misclick is recoverable; `GET /api/conversations?trash=1` lists the trash.
+
 ## Critical constraints (miss these = breakage)
 
 - **No `require("fs")` in `.next/server/chunks/*.js`** — webpack can't resolve it. Use `global.__FS__`. Route files (`app/api/*/route.js`) *can* use `require("fs")`.
@@ -34,10 +38,12 @@ A **packaged Windows build artifact** of Socratopia (Electron + Next.js Socratic
 | Launch app | `./Socratopia.exe` |
 | ASAR extract / repack | `npx asar extract resources/app.asar _asar_extracted/` / `npx asar pack _asar_extracted/ resources/app.asar` |
 | Re-embed EXE integrity hash | `node tools/patch-asar-integrity.js` (`--check` to verify only) |
+| Repack + re-embed in one go, or safe-abort when the EXE is locked | `node tools/finish-asar-repack.js` (`--check` report only; `--copy` keeps the new asar and emits a patched `Socratopia.patched.exe`) |
 | Stage a clean release tree | `node tools/stage-clean-win-release.js stage [src] [dst]` |
 | Smoke test (any) | `node <path-to-smoke-test>` (self-contained, no deps, no running app) |
 | All smoke tests | `node tools/run-smoke-matrix.js` |
 | Gateway probe | `node tools/gateway-monitor/probe-agent-gw.js` (`--report` for stats) — permanent monitor for `agent-gw.kimi.com` (diagnoses `Model attempt execution lease expired`); see `tools/gateway-monitor/README.md`, do NOT delete in cleanups |
+| Figure adoption over N days | `node tools/figure-adoption-report.js [--days=7] [--since=ISO] [--world=KU]` — turns vs. replies that ordered a figure vs. dead `[图片: …]` leftovers; test: `node tools/figure-adoption-report-smoke-test.js` (the matrix skips `tools/`) |
 
 `tools/new-route.js` was removed; scaffold routes by hand and keep the 3 route manifests consistent.
 

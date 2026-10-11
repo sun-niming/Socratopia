@@ -91,3 +91,79 @@
 - `/api/groupchat` now emits `lines_final` before waiting for TTS, so the UI can show generated messages as soon as the text is ready.
 - Group-chat TTS then runs in original line order and emits one `tts_audio` SSE event per completed line, followed by `tts_done`.
 - The page bundle and server page bundle now display `lines_final` immediately and skip the later duplicate display when the stream finishes.
+
+## 2026-08-31 Classic voice true-stream transport
+
+- Added `POST /infer_classic_stream` in the local GPT-SoVITS service. It accepts the same classic voice contract as `/infer_classic` (`gpt_model_name`, `sovits_model_name`, `ref_audio_path`, and `prompt_text`) and does not write a completed audio file to `outputs/`.
+- The endpoint wraps each self-contained generated audio fragment as an `application/x-ndjson` event. Each `audio` event carries an explicit `seq`, MIME type, and Base64 payload; `start`, `end`, and in-stream `error` events make frame boundaries and failure handling unambiguous.
+- `tools/my_infer.py` now exposes `classic_infer_stream()` and guarantees CUDA cleanup for normal completion, errors, and generator cancellation. Existing inference entry points share a process lock so a concurrent request cannot change the global GPT-SoVITS weights while a stream is still producing audio.
+- The default service host is now `127.0.0.1`, matching Socratopia's localhost caller and preventing an unauthenticated default listener on the LAN. `/capabilities` exposes the classic stream protocol for diagnostics.
+- The shared frontend voice chunk consumes the NDJSON response with `response.body.getReader()`, decodes each complete WAV frame into a `Blob`, and preserves the existing `voicePlayer` and IndexedDB replay cache. The stream path uses `batch_size: 1` so a multi-sentence utterance can produce early fragments; the old `/infer_classic` path keeps its original batch behavior.
+- The frontend preserves an `off` transport switch through `localStorage.socratopia_tts_stream_mode`; with the default mode it requests the new endpoint directly and falls back to `/infer_classic` only when an older service explicitly returns 404/405/501 before streaming begins.
+- The pre-existing recorder initialization fix remains required: it starts from `isStreaming` even while `streamContent` is still empty, so fast LLM SSE replies still cache audio and keep the replay button visible after playback ends.
+
+Validation:
+
+1. `node resources/server/lib/tts-classic-stream-contract-smoke-test.js`
+2. `node resources/server/lib/tts-classic-stream-live-smoke-test.js`
+3. `node resources/server/lib/tts-classic-stream-frontend-live-smoke-test.js`
+4. `node resources/server/.next/static/chunks/app/voice-replay-smoke-test.js`
+5. `node --check` and acorn parsing for all changed browser bundles
+
+## 2026-09-12 Fix silent playback loss in the streamed chunk chain
+
+- Root cause: in the page bundles' streamed voice consumer, `let{stream:e,error:n}=await s;` declared `e` inside the same block that reads the chunk array as `e[r]`. Block scope put that array in TDZ, so `let s=e[r],l=0===r;` threw `ReferenceError: Cannot access 'e' before initialization`. The chain's trailing `.catch(()=>{})` swallowed the throw after `a.hasPlayedAny=!0` had already run, so the player stayed on `loading` forever: TTS frames were synthesised (Blobs, `audio/wav`) but `URL.createObjectURL` / `new Audio` / `play()` were never reached and nothing surfaced as an error.
+- Fixed by renaming the destructured stream binding to `i` in all five page bundles (`page-87daa6ca210ab9dc.js`, `page-3a1fef7566e26c43.js`, `page-practice-ui-20260622.js`, `page-practice-ui-20260625-jyfix.js`, `page-practice-ui-20260626-postclass-notes.js`) and in the six `win-unpacked/` copies. That build carries a second, inlined form of the same collision (`let e=await s;` in the same block, bundle `page-f5f46cb5daf146a1.js` included) and was fixed the same way. Copies of each variant stay byte-identical.
+- `voice-runtime-invariants-smoke-test.js` now also rejects any destructured stream binding that shadows the iterated chunk array, and executes the real compiled consumer against stubs requiring one `play()` per synthesised frame. The previous assertions were structural only and could not see a runtime throw.
+
+Validation:
+
+1. `node resources/server/.next/static/chunks/app/voice-runtime-invariants-smoke-test.js` → PASS with `runtime.play: 3/3` on all five bundles
+2. `node tmp/tdz-repro.js <bundle>` → the consumer resolves and reaches `play` on all eleven bundles (five live + six `win-unpacked/`)
+3. `node --check` and acorn parsing for every edited bundle and the smoke test
+4. Live Electron run against the local TTS service: 12 `play()` calls, 11 resolved (1 `AbortError` on a track cancelled by the next message), 9 elements reached `ended` with `currentTime == duration`, WAV headers `52 49 46 46 … 57 41 56 45` (`RIFF….WAVE`), every element `volume 1` / `muted false`, Blob URLs revoked only after `ended` (or by `_stopAudio` for a cancelled track)
+
+## 2026-09-12 Keep action narration out of the speech queue
+
+- Root cause: the page bundles' streaming voice effect split the accumulated assistant text into sentences *before* the narration filter ran. The narration contract writes action lines as a single-asterisk italic paragraph (`*青衣把那杯茶抿了一口。*`), so the first split point after `。` produced the fragment `*青衣把那杯茶抿了一口。` — an emphasis span whose closing marker had not arrived yet. The filter recognises narration by a closed `*…*` pair, so the fragment and the leftover `*` were both posted to `/infer_classic_stream` verbatim.
+- Fixed by making the sentence segmentation emphasis-aware: `__socratopiaSpeechFragments(text, splitRegex)` holds a fragment back while the current paragraph still has an emphasis span open at the start of a line (`*`/`_` whose next character is neither blank nor the same marker). Both call sites consume the helper — the streaming release (`__socratopiaSpeechFragments(l,…),r=Math.max(0,t.length-1)`) and the completion flush (`__socratopiaSpeechFragments(t,…)`) — so auto-speak and the final flush hand the filter the same whole paragraph. Inline emphasis (`**词**`, mid-line `*词*`) and markdown bullets (`* 项`) never hold the split back, and an unclosed span is released at the next paragraph break so the hold is bounded.
+- Applied to the five page bundles (`page-87daa6ca210ab9dc.js`, `page-3a1fef7566e26c43.js`, `page-practice-ui-20260622.js`, `page-practice-ui-20260625-jyfix.js`, `page-practice-ui-20260626-postclass-notes.js`) plus the five `win-unpacked/` copies. Chat display is untouched: markdown still renders `*…*` as `<span class="tutor-action">`.
+- Measured live before the fix: narration prompt → adapter calls `"*青衣…。"`, `"*"` returned unchanged → 4 TTS requests including `text="*青衣…。"`. After: 1 adapter call → `""` → narration and marker requests both gone. Forced pure-narration reply → 0 TTS requests, player not on `loading`, no error state; mixed narration + dialogue → dialogue only.
+- Replay is unfiltered by design: the replay button reads IndexedDB `socratopia-voice-cache` (`${conversationId}:${trackId}`) and never re-runs the filter, so audio cached before this fix still replays the old narration. Invalidate by clearing that store or versioning the cache key.
+
+Validation:
+
+1. `node resources/server/.next/static/chunks/app/voice-early-stream-smoke-test.js` → PASS (shipped fragmenter + shipped filter: `narrationSynthesis: 0`, `mixedDialogueSpoken: true`, `emphasisSpoken: true`)
+2. `node resources/server/.next/static/chunks/app/voice-runtime-invariants-smoke-test.js` → PASS, cross-bundle regions unchanged
+3. `node resources/server/.next/static/chunks/app/voice-replay-smoke-test.js`, `voice-stream-backpressure-smoke-test.js`, `voice-stream-error-containment-smoke-test.js` → PASS
+4. `node --check` and acorn parsing for every edited bundle
+
+## 2026-10-11 Announce a table instead of reading it cell by cell
+
+- A markdown table in a tutor reply used to be spoken cell by cell, and every `$id_1 * id_2$` cell inside it was a separate math segment, so the whole table cost an `/api/math-speech` round trip (8s timeout) on top of ugly audio. It is now one protected segment that the speech adapter replaces with a single sentence, and its formulas never enter a request body.
+- The sentence is generated by the reading layer, never written by the model — otherwise the model's number and the real pause would disagree. `lib/voice-emotion-protocol.js`'s prompt block now tells the model what happens and forbids it from writing "给你N秒" itself.
+- Wording and timing are fixed together: `给你十五秒，先看这张表。`, shrinking to `给你十五秒。` when the lead-in already said 表/如下 (so "如下表所示：" is not answered with "先看这张表" again). Chinese numerals only, because GPT-SoVITS occasionally reads `15秒` as "一五秒".
+- The wait comes from the table's own shape, in cells rather than rows (a wide table costs more eye travel than a tall one), quantised so code and prose cannot drift: ≤6 cells → not announced at all (read aloud as before), 7–12 → 10s, 13–24 → 15s, ≥25 → 20s; ≥5 columns steps one bucket up, a second table in the same message steps one bucket down (floor 10s), cap 20s. The reported compiler table (6 rows × 3 columns = 18 cells) announces fifteen seconds.
+- `adaptMarkdownForSpeech` publishes the budget as `pauseAfterMs`. The page waits it out *after* the announcement: each batch stores its own pause (`a.batchPauseMs`) and installs the previous batch's, so the gap lands between the sentence and the next fragment and never in front of the announcement. A table closing the message has no later fragment to consume the pause, so the completion path appends one more chain step for it. The existing `isCancelled` check around the `setTimeout` means a user reply still cuts the wait short.
+- Reading and synthesis overlap: the next fragment's preparation already runs during the wait, so the 15s costs no extra latency. The adapter's own detection is unchanged for prose, lists, fenced code and inline math (a table must win over inline math at a line start, or a first cell like `$id_1 * id_2$` would hide the header from the reader).
+- Files: `resources/server/.next/static/chunks/math-speech-adapter.js` + chunk `4137-131d0676e3b5bef7.js` head (kept byte-identical, spliced) in both the live tree and `win-unpacked` (a separate build variant — its adapter has no say-hint feature and was patched on its own), plus the five live page bundles and their five `win-unpacked` copies, plus `resources/server/lib/voice-emotion-protocol.js`. Live and snapshot page bundles differ only in the `hints:` argument of the pre-patch call site, so the call conversion is per-variant.
+- Known limitation: replaying a cached message (the speaker button, which reads IndexedDB chunks) plays the recorded audio back-to-back and therefore drops the silent wait — the announcement is still heard, only the gap is missing. Recording the pause as silence would need a generated silent frame in `recordedChunks`.
+
+Validation:
+
+1. `node resources/server/.next/static/chunks/app/voice-table-announcement-smoke-test.js` → PASS (18 cells → 15000ms, `mathRoundTripsForTable: 0`, pause ordering `[0, 1500, 15000]`, trailing-table wait, snapshot drift guard)
+2. `node resources/server/lib/voice-emotion-protocol-smoke-test.js`, `groupchat-emotion-smoke-test.js`, `say-speech-protocol-smoke-test.js` → PASS
+3. `node resources/server/.next/server/app/api/chat/chat-voice-emotion-protocol-integration-smoke-test.js` → PASS
+4. `node tools/run-smoke-matrix.js` → no failures
+5. `node --check` and acorn parsing for all 14 edited bundles
+
+## 2026-10-11 A stage direction may stress a word
+
+- Reported shape: `*宵宫把纸条转过来，指尖点在那个 **else** 上。*` — the narration was spoken **and** the sentence was cut in two, sending the narration fragment plus a lone `"*"` to the synthesiser. Plain narration (`*…*` with no inner marker) was already filtered, so the trigger is specifically a nested span.
+- Two independent causes, both pre-existing; the table change above only added the plumbing, it did not cause this:
+  1. `isWrappedStage()` rejected any line whose inner text contained the marker (`!inner.includes(marker)`), so `**else**` inside the span made the whole line "not a stage direction".
+  2. `__socratopiaSpeechFragments()`'s scanner only opened a span at a paragraph start and treated *any* later marker as its close, so the first `*` of `**else**` closed the hold and the splitter cut at the `。` inside the narration.
+- Both now apply one balance rule: a marker whose neighbour is the same marker belongs to the inner text, so only an odd bare marker ends the span early. This also covers a bare `*else*` and `__else__`, i.e. the model forgetting the doubling rule.
+- Guarded against over-filtering in the same test: a whole-line `**bold**` stays speech, `*重点*在这里。` (span closes inside the line) stays speech, `*青衣点头。*后面还有话。` stays speech, and bullets stay speech. Narration alone still reaches synthesis zero times.
+- Files: `resources/server/.next/static/chunks/math-speech-adapter.js` + chunk `4137` head (spliced, both trees) and the same five live + five `win-unpacked` page bundles.
+- Validation: `node resources/server/.next/static/chunks/app/voice-early-stream-smoke-test.js` → PASS (three nested-marker variants × whole-delta/character-by-character streaming, plus the over-filter guards); `tmp/narration-check.js` sweep → 20/20; `node tools/run-smoke-matrix.js` → no failures.

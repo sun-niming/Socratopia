@@ -253,6 +253,11 @@ async function postJSON(baseUrl, apiKey, payload, timeoutMs, purpose, page) {
       prompt_cache_retention: "24h",
     });
   }
+  // deepseek 与 gpt-5.6 默认开启思考,会把 max_tokens 烧在 reasoning_content 上、content 返回空串,
+  // 卡片 JSON 随之解析失败。与 callLLM 的处理保持一致显式关闭。
+  if (/^(?:deepseek|gpt-5\.6)/i.test(cacheModel)) {
+    payload = Object.assign({}, payload, { thinking: { type: "disabled" } });
+  }
   if (SUPERVISED) {
     const result = await supervisorCall({ type: "model", purpose: purpose || "kb-builder-cards", page: Number(page) || 1, payload });
     return String(result && result.content || "");

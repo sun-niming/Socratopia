@@ -1,0 +1,455 @@
+[
+  {
+    "id": "algebra-001",
+    "latex": "x+1",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "x 加一"
+    }
+  },
+  {
+    "id": "algebra-002",
+    "latex": "x+2",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "x 加二"
+    }
+  },
+  {
+    "id": "algebra-003",
+    "latex": "x+3",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "x 加三"
+    }
+  },
+  {
+    "id": "algebra-004",
+    "latex": "a+b",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "a 加 b"
+    }
+  },
+  {
+    "id": "algebra-005",
+    "latex": "c+d",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "c 加 d"
+    }
+  },
+  {
+    "id": "algebra-006",
+    "latex": "x-y",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "x 减 y"
+    }
+  },
+  {
+    "id": "algebra-007",
+    "latex": "a-b",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "a 减 b"
+    }
+  },
+  {
+    "id": "algebra-008",
+    "latex": "m+n",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "m 加 n"
+    }
+  },
+  {
+    "id": "algebra-009",
+    "latex": "p-q",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "p 减 q"
+    }
+  },
+  {
+    "id": "algebra-010",
+    "latex": "u+v",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "u 加 v"
+    }
+  },
+  {
+    "id": "algebra-011",
+    "latex": "x\\times y",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "x 乘以 y"
+    }
+  },
+  {
+    "id": "algebra-012",
+    "latex": "a\\times b",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "a 乘以 b"
+    }
+  },
+  {
+    "id": "algebra-013",
+    "latex": "m\\times n",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "m 乘以 n"
+    }
+  },
+  {
+    "id": "algebra-014",
+    "latex": "x\\div y",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "x 除以 y"
+    }
+  },
+  {
+    "id": "algebra-015",
+    "latex": "a\\cdot b",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "a 点乘 b"
+    }
+  },
+  {
+    "id": "algebra-016",
+    "latex": "2+3",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "二加三"
+    }
+  },
+  {
+    "id": "algebra-017",
+    "latex": "4-1",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "四减一"
+    }
+  },
+  {
+    "id": "algebra-018",
+    "latex": "2\\times3",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "二乘以三"
+    }
+  },
+  {
+    "id": "algebra-019",
+    "latex": "8\\div4",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "八除以四"
+    }
+  },
+  {
+    "id": "algebra-020",
+    "latex": "x=y",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "x，等于 y"
+    }
+  },
+  {
+    "id": "algebra-021",
+    "latex": "x\\ne y",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "x，不等于 y"
+    }
+  },
+  {
+    "id": "algebra-022",
+    "latex": "x<y",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "x，小于 y"
+    }
+  },
+  {
+    "id": "algebra-023",
+    "latex": "x>y",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "x，大于 y"
+    }
+  },
+  {
+    "id": "algebra-024",
+    "latex": "x\\le y",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "x，小于等于 y"
+    }
+  },
+  {
+    "id": "algebra-025",
+    "latex": "x\\ge y",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "x，大于等于 y"
+    }
+  },
+  {
+    "id": "algebra-026",
+    "latex": "x\\approx y",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "x，约等于 y"
+    }
+  },
+  {
+    "id": "algebra-027",
+    "latex": "x\\equiv y",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "x，恒等于 y"
+    }
+  },
+  {
+    "id": "algebra-028",
+    "latex": "x\\propto y",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "x，正比于 y"
+    }
+  },
+  {
+    "id": "algebra-029",
+    "latex": "(x+2)^2",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "（x 加二）的平方"
+    }
+  },
+  {
+    "id": "algebra-030",
+    "latex": "y^3",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "y 的立方"
+    }
+  },
+  {
+    "id": "algebra-031",
+    "latex": "z^4",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "z 的四次方"
+    }
+  },
+  {
+    "id": "algebra-032",
+    "latex": "y^m",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "y 的 m 次方"
+    }
+  },
+  {
+    "id": "algebra-033",
+    "latex": "a_i",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "a 下标 i"
+    }
+  },
+  {
+    "id": "algebra-034",
+    "latex": "b_j",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "b 下标 j"
+    }
+  },
+  {
+    "id": "algebra-035",
+    "latex": "x_1",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "x 下标一"
+    }
+  },
+  {
+    "id": "algebra-036",
+    "latex": "y_2",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "y 下标二"
+    }
+  },
+  {
+    "id": "algebra-037",
+    "latex": "x_1^2",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "x 下标一 上标二"
+    }
+  },
+  {
+    "id": "algebra-038",
+    "latex": "a_i^n",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "a 下标 i 上标 n"
+    }
+  },
+  {
+    "id": "algebra-039",
+    "latex": "(x+1)",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "x 加一"
+    }
+  },
+  {
+    "id": "algebra-040",
+    "latex": "(a-b)",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "a 减 b"
+    }
+  },
+  {
+    "id": "algebra-041",
+    "latex": "[x+1]",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "x 加一"
+    }
+  },
+  {
+    "id": "algebra-042",
+    "latex": "\\left\\{x+1\\right\\}",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "x 加一"
+    }
+  },
+  {
+    "id": "algebra-043",
+    "latex": "\\alpha+\\beta",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "阿尔法加贝塔"
+    }
+  },
+  {
+    "id": "algebra-044",
+    "latex": "\\gamma-\\delta",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "伽马减德尔塔"
+    }
+  },
+  {
+    "id": "algebra-045",
+    "latex": "\\sqrt{y+2}",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "y 加二的平方根"
+    }
+  },
+  {
+    "id": "algebra-046",
+    "latex": "\\frac{x+2}{y+3}",
+    "expected": {
+      "ok": true,
+      "mode": "detailed",
+      "speech": "一个分数，分子是x 加二，分母是y 加三，分数结束"
+    }
+  },
+  {
+    "id": "algebra-047",
+    "latex": "x+1=2",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "x 加一，等于二"
+    }
+  },
+  {
+    "id": "algebra-048",
+    "latex": "2x+3=7",
+    "expected": {
+      "ok": true,
+      "mode": "structural",
+      "speech": "二 x 加三等于七",
+      "unresolvedAmbiguities": [
+        "implicit-product-meaning"
+      ]
+    }
+  },
+  {
+    "id": "algebra-049",
+    "latex": "a\\pm b",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "a 正负 b"
+    }
+  },
+  {
+    "id": "algebra-050",
+    "latex": "x^2+y^2=z^2",
+    "expected": {
+      "ok": true,
+      "mode": "semantic",
+      "speech": "x 的平方加 y 的平方，等于 z 的平方"
+    }
+  }
+]

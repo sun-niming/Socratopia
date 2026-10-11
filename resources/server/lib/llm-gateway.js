@@ -74,6 +74,10 @@ function createGateway(options) {
       ),
     };
     if (input.requiresJson !== false) payload.response_format = { type: "json_object" };
+    // deepseek 与 gpt-5.6 默认开启思考,会把 max_tokens 烧在 reasoning_content 上、content 返回空串,JSON 任务随之失败。
+    // BUG-0014: gpt-5.6 走 /responses,由 responses-api-compat 把 thinking 映射成 reasoning;
+    // 若这里不发 thinking,兼容层没有可映射的东西,@responses 上的推理就永远关不掉。
+    if (/^(?:deepseek|gpt-5\.6)/i.test(String(route.model || ""))) payload.thinking = { type: "disabled" };
     var result = await ResponsesCompat.postChatCompletionsJson(
       String(route.baseUrl).replace(/\/$/, "") + "/chat/completions",
       payload,

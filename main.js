@@ -35189,7 +35189,7 @@ function issueAdaptiveImageCapability(details) {
   const loopback = hostname === "localhost" || hostname === "127.0.0.1" || hostname === "[::1]" || hostname === "::1";
   const originPort = Number(origin.port || 80);
   if (origin.protocol !== "http:" || !loopback || origin.username || origin.password || originPort !== serverPort) return null;
-  if (!ADAPTIVE_IMAGE_PATHS.has(origin.pathname)) return null;
+  if (!ADAPTIVE_IMAGE_PATHS.has(origin.pathname) && origin.pathname.indexOf("/api/assets/") !== 0 && origin.pathname !== "/api/assets") return null;
   return current.issuer.issueCapability();
 }
 function installAdaptiveImageAuthHeaders() {
@@ -35207,28 +35207,61 @@ function installAdaptiveImageAuthHeaders() {
     }
   );
 }
-function log(msg) {
-  const line = `[${(/* @__PURE__ */ new Date()).toISOString()}] ${msg}
-`;
+const LOG_MAX_BYTES = 20 * 1024 * 1024;
+const LOG_ROTATIONS = 3;
+let logWriteInProgress = false;
+let stdoutBroken = false;
+let stderrBroken = false;
+process.stdout?.on?.("error", (err) => {
+  stdoutBroken = true;
+  if (err?.code !== "EPIPE") appendLogLine("[stdout-error] " + (err?.code || err?.message || "unknown"));
+});
+process.stderr?.on?.("error", (err) => {
+  stderrBroken = true;
+  if (err?.code !== "EPIPE") appendLogLine("[stderr-error] " + (err?.code || err?.message || "unknown"));
+});
+function rotateLogFile(logPath) {
+  try {
+    if (!import_fs5.default.existsSync(logPath) || import_fs5.default.statSync(logPath).size < LOG_MAX_BYTES) return;
+    const oldest = logPath + "." + LOG_ROTATIONS;
+    if (import_fs5.default.existsSync(oldest)) import_fs5.default.unlinkSync(oldest);
+    for (let index = LOG_ROTATIONS - 1; index >= 1; index--) {
+      const source = logPath + "." + index;
+      const destination = logPath + "." + (index + 1);
+      if (import_fs5.default.existsSync(source)) import_fs5.default.renameSync(source, destination);
+    }
+    import_fs5.default.renameSync(logPath, logPath + ".1");
+  } catch {
+  }
+}
+function appendLogLine(msg) {
+  if (logWriteInProgress) return;
+  logWriteInProgress = true;
+  const line = "[" + (/* @__PURE__ */ new Date()).toISOString() + "] " + msg + "\n";
   try {
     const logPath = import_path4.default.join(import_electron5.app.getPath("logs"), "socralab_debug.log");
     import_fs5.default.mkdirSync(import_path4.default.dirname(logPath), { recursive: true });
+    rotateLogFile(logPath);
     import_fs5.default.appendFileSync(logPath, line);
   } catch {
+  } finally {
+    logWriteInProgress = false;
   }
-  console.log(msg);
+}
+function log(msg) {
+  appendLogLine(msg);
+  if (stdoutBroken) return;
+  try {
+    console.log(msg);
+  } catch (err) {
+    if (err?.code === "EPIPE") stdoutBroken = true;
+  }
 }
 process.on("uncaughtException", (err) => {
-  try {
-    log(`[uncaughtException] ${err?.stack || err?.message || String(err)}`);
-  } catch {
-  }
+  appendLogLine("[uncaughtException] " + (err?.stack || err?.message || String(err)));
 });
 process.on("unhandledRejection", (reason) => {
-  try {
-    log(`[unhandledRejection] ${reason instanceof Error ? reason.stack || reason.message : String(reason)}`);
-  } catch {
-  }
+  appendLogLine("[unhandledRejection] " + (reason instanceof Error ? reason.stack || reason.message : String(reason)));
 });
 function resolveSystemTool(toolRelPath) {
   const candidates = [
@@ -35882,6 +35915,55 @@ import_electron5.app.whenReady().then(async () => {
     const url = `https://socratopia.app${path9}`;
     await import_electron5.shell.openExternal(url);
     return { ok: true };
+  });
+  import_electron5.ipcMain.handle("asset:captureRegion", async (event, rect) => {
+    try {
+      let captureRect = null;
+      if (rect && typeof rect === "object") {
+        const x = Number(rect.x);
+        const y = Number(rect.y);
+        const width = Number(rect.width);
+        const height = Number(rect.height);
+        if (Number.isFinite(x) && Number.isFinite(y) && Number.isFinite(width) && Number.isFinite(height) && width >= 1 && height >= 1) {
+          captureRect = { x: Math.round(x), y: Math.round(y), width: Math.round(width), height: Math.round(height) };
+        }
+      }
+      const image = captureRect ? await event.sender.capturePage(captureRect) : await event.sender.capturePage();
+      if (!image || image.isEmpty()) return { ok: false, code: "capture_empty", message: "Empty capture" };
+      const size = image.getSize();
+      return { ok: true, pngBase64: image.toPNG().toString("base64"), width: size.width, height: size.height };
+    } catch (e) {
+      return { ok: false, code: "capture_failed", message: String(e && e.message || e) };
+    }
+  });
+  import_electron5.ipcMain.handle("asset:captureScreen", async (event) => {
+    // Freezes the WHOLE screen, not just the app window: the window hides first
+    // so Socratopia itself is not in the shot, then desktopCapturer grabs the
+    // display at device pixels. The renderer draws the marquee on this frozen
+    // frame and crops locally, so PDF readers / browsers / any window can be
+    // captured (plan revision: in-app-only capture is useless for textbooks).
+    const win = import_electron5.BrowserWindow.fromWebContents(event.sender);
+    try {
+      const display = win ? import_electron5.screen.getDisplayMatching(win.getBounds()) : import_electron5.screen.getPrimaryDisplay();
+      const scale = display.scaleFactor || 1;
+      const pixelWidth = Math.max(1, Math.round(display.size.width * scale));
+      const pixelHeight = Math.max(1, Math.round(display.size.height * scale));
+      if (win) win.hide();
+      await new Promise((resolve) => setTimeout(resolve, 320));
+      const sources = await import_electron5.desktopCapturer.getSources({
+        types: ["screen"],
+        thumbnailSize: { width: pixelWidth, height: pixelHeight }
+      });
+      const source = sources.find((s) => String(s.display_id) === String(display.id)) || sources[0];
+      const image = source && source.thumbnail;
+      if (!image || image.isEmpty()) return { ok: false, code: "capture_empty", message: "Empty capture" };
+      const size = image.getSize();
+      return { ok: true, pngBase64: image.toPNG().toString("base64"), width: size.width, height: size.height };
+    } catch (e) {
+      return { ok: false, code: "capture_failed", message: String(e && e.message || e) };
+    } finally {
+      if (win && !win.isDestroyed()) win.show();
+    }
   });
   initAutoUpdater(isDev);
   try {

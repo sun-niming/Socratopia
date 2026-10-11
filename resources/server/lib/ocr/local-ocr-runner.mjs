@@ -119,6 +119,7 @@ export async function runWindowsOcr(options = {}) {
             text: String(item && item.text || ""),
             language: String(item && item.language || language),
             error: item && item.error ? "windows_ocr_page_failed" : null,
+            lines: [],
           })) });
         } catch {
           reject(codedError("ocr_invalid_json"));
@@ -197,6 +198,7 @@ export async function runLocalOcr(options = {}) {
       confidence,
       engine: normalizedEngine(recognized && recognized.engine),
       error,
+      lines: Array.isArray(recognized && recognized.lines) ? recognized.lines : [],
     });
     if (error) fallbackItems.push(item);
   }

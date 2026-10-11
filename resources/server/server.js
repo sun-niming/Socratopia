@@ -898,7 +898,14 @@ global.__KB_DISTILL_PREFETCH__ = function (rawText, startPage, endPage, textbook
   ["__VOICE_CATALOG__", "./lib/voice-catalog.js", "[voice] Emotion voice catalog", function (m) { return "voices: " + Object.keys(m.load().voices).length; }],
   ["__VOICE_EMOTION__", "./lib/voice-emotion-protocol.js", "[voice] Emotion segment protocol"],
   ["__SAY_SPEECH__", "./lib/say-speech-protocol.js", "[voice] Inline <say> speech annotation protocol"],
-  ["__POST_CLASS_NOTES__", "./lib/post-class-notes/orchestrator.js", "[post-class-notes] Orchestrator", function (m) { return "pipeline: " + m.PIPELINE_VERSION; }]
+  ["__POST_CLASS_NOTES__", "./lib/post-class-notes/orchestrator.js", "[post-class-notes] Orchestrator", function (m) { return "pipeline: " + m.PIPELINE_VERSION; }],
+  ["__ASSETS__", "./lib/assets/store.js", "[assets] Store"],
+  ["__ASSETS_INDEX__", "./lib/assets/index.js", "[assets] Memory index"],
+  ["__ASSETS_SERIALIZE__", "./lib/assets/serialize.js", "[assets] LLM input serializer"],
+  ["__ASSETS_INTENTS__", "./lib/assets/intents.js", "[assets] Figure-order materializer"],
+  ["__ASSETS_PREFETCH__", "./lib/assets/prefetch.js", "[assets] Page raster prefetch"],
+  ["__CHAT_TRASH__", "./lib/chat-trash.js", "[chat-trash] Conversation trash (soft delete)"],
+  ["__SHARP__", "sharp", "[assets] sharp thumbnails"]
 ].forEach(function (m) { __loadOptionalGlobal__(m[0], m[1], m[2], m[3]); })
 ;if (global.__KB_PROGRESS__ && global.__KB_PROGRESS__.installRouteRequireHook) {
   global.__KB_PROGRESS__.installRouteRequireHook();

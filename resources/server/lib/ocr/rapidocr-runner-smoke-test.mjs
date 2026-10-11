@@ -23,6 +23,13 @@ try {
   assert(result.pages[0].text.includes("扫描页面模块导入"), result.pages[0].text);
   assert(/Test\s+2026/i.test(result.pages[0].text), result.pages[0].text);
   assert(!/[□▯\uFFFD]/.test(result.pages[0].text), "OCR output must not contain missing-glyph boxes or replacement characters");
+// Line boxes are what lets a figure be located geometrically; they must survive the run.
+assert(Array.isArray(result.pages[0].lines) && result.pages[0].lines.length > 0, "boxes must survive");
+const firstBox = result.pages[0].lines[0].box;
+assert.strictEqual(firstBox.length, 4, "box has four numbers");
+firstBox.forEach((value) => assert(value >= 0 && value <= 1, "normalized: " + value));
+assert(firstBox[2] > firstBox[0] && firstBox[3] > firstBox[1], "box is well formed");
+assert(result.pages[0].lines[0].text.length > 0, "each box carries its text");
   assert(!/(?:锟斤拷|Ã[\u0080-\u00FF]|Â[\u0080-\u00FF]|â[\u0080-\u00BF]{1,2})/.test(result.pages[0].text), "OCR output must not contain known mojibake");
   console.log('RapidOCR smoke: PASS text="' + result.pages[0].text.replace(/\s+/g, " ").trim() + '"');
 } finally {

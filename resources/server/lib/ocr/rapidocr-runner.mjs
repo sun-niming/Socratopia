@@ -119,7 +119,28 @@ function linePosition(item) {
   return { y: ys.length ? Math.min(...ys) : 0, x: xs.length ? Math.min(...xs) : 0 };
 }
 
-function pageResult(page, response) {
+// Boxes arrive in rendered-image pixels; store them page-relative (0..1) so the
+// geometry survives a different render scale.
+function readPngSize(imagePath) {
+  try {
+    const head = Buffer.alloc(24);
+    const fd = fs.openSync(imagePath, "r");
+    try { fs.readSync(fd, head, 0, 24, 0); } finally { fs.closeSync(fd); }
+    if (head.readUInt32BE(0) !== 0x89504e47) return null;
+    return { width: head.readUInt32BE(16), height: head.readUInt32BE(20) };
+  } catch { return null; }
+}
+
+function normalBox(item, size) {
+  const points = Array.isArray(item && item.box) ? item.box : [];
+  if (!points.length || !size || !(size.width > 0) || !(size.height > 0)) return null;
+  const xs = points.map((point) => Number(point && point[0]) || 0);
+  const ys = points.map((point) => Number(point && point[1]) || 0);
+  const round = (value) => Math.round(value * 10000) / 10000;
+  return [round(Math.min(...xs) / size.width), round(Math.min(...ys) / size.height), round(Math.max(...xs) / size.width), round(Math.max(...ys) / size.height)];
+}
+
+function pageResult(page, response, size) {
   if (!response || response.code !== 100 || !Array.isArray(response.data)) {
     return { page, text: "", confidence: 0, engine: "rapidocr-v5", error: response && response.code === 101 ? "rapidocr_empty" : "rapidocr_failed" };
   }
@@ -133,6 +154,7 @@ function pageResult(page, response) {
   return {
     page,
     text: lines.map((item) => item.text.trim()).join("\n"),
+    lines: lines.map((item) => ({ text: item.text.trim(), box: normalBox(item, size), score: Number(item.score) || 0 })).filter((line) => line.box),
     confidence,
     minimumConfidence: scores.length ? Math.min(...scores) : 0,
     engine: "rapidocr-v5",
@@ -156,7 +178,9 @@ export async function runRapidOcr(options = {}) {
     if (!Number.isInteger(page) || page < 1 || !contained(tempDir, imagePath)) throw codedError("rapidocr_manifest_invalid");
     const stat = await fsPromises.lstat(imagePath);
     if (!stat.isFile() || stat.isSymbolicLink() || stat.size <= 0 || stat.size > MAX_IMAGE_BYTES) throw codedError("rapidocr_image_invalid");
-    items.push({ page, path: imagePath });
+    const declared = { width: Number(item && item.width) || 0, height: Number(item && item.height) || 0 };
+    const size = declared.width > 0 && declared.height > 0 ? declared : readPngSize(imagePath) || declared;
+    items.push({ page, path: imagePath, width: size.width, height: size.height });
   }
   // Image validation performs asynchronous filesystem work. Re-check the
   // engine immediately before constructing the child so mutations in that
@@ -206,7 +230,7 @@ export async function runRapidOcr(options = {}) {
       let parsed;
       try { parsed = JSON.parse(line); } catch { return; }
       if (!parsed || !Number.isInteger(parsed.code) || results.length >= items.length) return;
-      results.push(pageResult(items[results.length].page, parsed));
+      results.push(pageResult(items[results.length].page, parsed, items[results.length]));
       if (results.length === items.length) stop(null);
     });
     child.stderr.on("data", (chunk) => {

@@ -84,11 +84,61 @@ var R = require("../resume/progress-resume.js");
   var index = JSON.parse(fs.readFileSync(path.join(world, "textbooks", "textbook_index.json"), "utf-8"));
   assert.strictEqual(index.textbooks[0].currentPage, 11, "textbook index syncs validated taught page");
 
+  R.replaceState(textbook, { textbookId: "TB", sourceConversationId: "C1", activeConceptId: "c1", completedConceptIds: [], completedTitles: [], lastTaughtPage: 10, currentPage: 10, loadedCursor: { startPage: 10, endPage: 12 } });
+  var authoritativeCalls = [];
+  global.__AUTO_ADVANCE__ = {
+    version: 2,
+    commitTeachingProgress: async function (input) { authoritativeCalls.push(input); return { ok: true }; }
+  };
+  var v2Response = new Response(
+    event({ type: "reading_range", startPage: 10, endPage: 12, loadedStartPage: 10, loadedEndPage: 12 }) +
+    event({ type: "text", text: "V2 answer<!-- kbProgress:" + markerJson + " -->" }) +
+    event({ type: "done" }),
+    { headers: { "Content-Type": "text/event-stream" } }
+  );
+  await P.transformSseResponse(v2Response, {
+    body: { textbookId: "TB", conversationId: "C1", profileId: "p", worldId: "w", clientTurnId: "v2-turn", advanceProtocolVersion: 2 },
+    paths: directivePaths,
+    endClass: false,
+    trackProgress: true,
+    conversationMeta: { textbookId: "TB" },
+  }).text();
+  delete global.__AUTO_ADVANCE__;
+  assert.strictEqual(authoritativeCalls.length, 1, "v2 SSE completion delegates teaching progress to the authoritative runtime");
+  assert.strictEqual(authoritativeCalls[0].clientTurnId, "v2-turn", "authoritative progress is fenced to the completed client turn");
+  assert.strictEqual(authoritativeCalls[0].activeConceptId, "c2", "validated active concept is forwarded to the authoritative runtime");
+  assert.deepStrictEqual(authoritativeCalls[0].newlyCompletedConceptIds, ["c1"], "validated completions are forwarded to the authoritative runtime");
+  assert.strictEqual(authoritativeCalls[0].windowComplete, false, "an unfinished validated window is forwarded as non-advancing");
+  assert.strictEqual(R.readState(textbook).activeConceptId, "c1", "v2 bridge does not directly mutate the legacy progress state");
+
+  R.replaceState(textbook, { textbookId: "TB", sourceConversationId: "C2", activeConceptId: "c3", completedConceptIds: [], completedTitles: [], lastTaughtPage: 20, currentPage: 20, loadedCursor: { startPage: 20, endPage: 22 } });
+  var refreshedCalls = [];
+  global.__AUTO_ADVANCE__ = {
+    version: 2,
+    readSnapshot: async function () { return { readingRange: { startPage: 20, endPage: 22 } }; },
+    commitTeachingProgress: async function (input) { refreshedCalls.push(input); return { ok: true }; },
+  };
+  var refreshedMarker = { schemaVersion: 1, textbookId: "TB", sourceConversationId: "C2", activeConceptId: "c4", newlyCompletedConceptIds: ["c3"], lastTaughtPage: 21 };
+  await P.transformSseResponse(new Response(
+    event({ type: "text", text: "Fresh window<!-- kbProgress:" + JSON.stringify(refreshedMarker) + " -->" }) + event({ type: "done" }),
+    { headers: { "Content-Type": "text/event-stream" } },
+  ), {
+    body: { textbookId: "TB", conversationId: "C2", profileId: "p", worldId: "w", clientTurnId: "refresh-turn", advanceProtocolVersion: 2 },
+    paths: Object.assign({}, directivePaths, { conversationId: "C2" }),
+    endClass: false,
+    trackProgress: true,
+    conversationMeta: { textbookId: "TB" },
+    progressContext: { loadedRange: { startPage: 10, endPage: 12 }, activeConceptId: "c2" },
+  }).text();
+  delete global.__AUTO_ADVANCE__;
+  assert.strictEqual(refreshedCalls.length, 1, "v2 progress refresh accepts a marker from the range committed earlier in the same request");
+  assert.deepStrictEqual([refreshedCalls[0].loadedRange.startPage, refreshedCalls[0].loadedRange.endPage], [20, 22], "v2 progress uses the authoritative post-begin range instead of the stale wrapper context");
+
   var currentReadingDir = path.join(world, "conversations", "C2");
   fs.mkdirSync(currentReadingDir, { recursive: true });
   fs.writeFileSync(path.join(currentReadingDir, "current_reading.md"), "<!-- startPage: 20 endPage: 22 -->\nnew lesson window");
   var stalePaths = Object.assign({}, directivePaths, { conversationId: "C2" });
-  var staleBody = { textbookId: "TB", conversationId: "C2", profileId: "p", worldId: "w", messages: [{ role: "user", content: "continue" }] };
+  var staleBody = { textbookId: "TB", conversationId: "C2", profileId: "p", worldId: "w", messages: [{ role: "user", content: "我先说我的判断：Three 的连接过程是先建立连接，再传输数据。" }] };
   var firstPrepared = P.prepareProgressContext(stalePaths);
   assert.strictEqual(firstPrepared.loadedRange.source, "conversation_current_reading", "conversation current_reading is authoritative over stale textbook state");
   assert.strictEqual(firstPrepared.activeConceptId, "c3", "old-conversation active concept rebases to the first card in the current window");
@@ -104,16 +154,16 @@ var R = require("../resume/progress-resume.js");
   var staleInjected = await staleRequest.json();
   assert.ok(staleInjected.messages[0].content.includes('"activeConceptId":"c3"'), "new lesson directive never repeats the stale active concept");
 
-  async function rejectedCheckTurn(prepared, markerOverride) {
+  async function rejectedCheckTurn(prepared, markerOverride, replyText, bodyOverride) {
     var invalidMarker = markerOverride || '{"schemaVersion":1,"textbookId":"TB","sourceConversationId":"C2","activeConceptId":"c1","newlyCompletedConceptIds":[],"lastTaughtPage":20}';
     var response = new Response(
       event({ type: "reading_range", startPage: 20, endPage: 22, loadedStartPage: 20, loadedEndPage: 22 }) +
-      event({ type: "text", text: "One more check?<!-- kbProgress:" + invalidMarker + " -->" }) +
+      event({ type: "text", text: (replyText || "那么 Three 的连接过程分几步？") + "<!-- kbProgress:" + invalidMarker + " -->" }) +
       event({ type: "done" }),
       { headers: { "Content-Type": "text/event-stream" } }
     );
     await P.transformSseResponse(response, {
-      body: staleBody,
+      body: bodyOverride || staleBody,
       paths: stalePaths,
       endClass: false,
       trackProgress: true,
@@ -123,7 +173,13 @@ var R = require("../resume/progress-resume.js");
   }
 
   await rejectedCheckTurn(firstPrepared);
-  assert.strictEqual(R.readState(textbook).activeConceptCheckCount, 1, "first rejected check is counted without accepting its invalid marker");
+  assert.strictEqual(R.readState(textbook).activeConceptCheckCount, 1, "a concept-bound question answered by the learner counts as one check");
+  await rejectedCheckTurn(firstPrepared, null, "这个概念还有别的说法吗？");
+  assert.strictEqual(R.readState(textbook).activeConceptCheckCount, 1, "a trailing question mark alone never increments the check counter");
+  await rejectedCheckTurn(firstPrepared, null, "那么 Three 的连接过程分几步？", {
+    textbookId: "TB", conversationId: "C2", profileId: "p", worldId: "w", messages: [{ role: "user", content: "继续" }],
+  });
+  assert.strictEqual(R.readState(textbook).activeConceptCheckCount, 1, "a short ack is not a valid answer and cannot reach the two-check cap");
   var secondPrepared = P.prepareProgressContext(stalePaths);
   await rejectedCheckTurn(secondPrepared);
   assert.strictEqual(R.readState(textbook).activeConceptCheckCount, 2, "second rejected check reaches the hard cap");

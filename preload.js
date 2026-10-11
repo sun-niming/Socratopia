@@ -31,6 +31,8 @@ import_electron.contextBridge.exposeInMainWorld("electronAPI", {
   openSocratopia: (path) => import_electron.ipcRenderer.invoke("shell:openSocratopia", path),
   getDeviceId: () => import_electron.ipcRenderer.invoke("device:getId"),
   getDeviceInfo: () => import_electron.ipcRenderer.invoke("device:getInfo"),
+    captureRegion: (rect) => import_electron.ipcRenderer.invoke("asset:captureRegion", rect),
+    captureScreen: () => import_electron.ipcRenderer.invoke("asset:captureScreen"),
   // Auto-update (disabled for local deployment)
   checkForUpdate: () => Promise.resolve({ ok: false, error: "Auto-update disabled" }),
   downloadUpdate: () => Promise.resolve({ ok: false, error: "Auto-update disabled" }),

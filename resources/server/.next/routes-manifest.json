@@ -20,7 +20,24 @@
     "afterFiles": [],
     "fallback": []
   },
-  "dynamicRoutes": [],
+  "dynamicRoutes": [
+    {
+      "page": "/api/assets/[id]",
+      "regex": "^/api/assets/([^/]+?)(?:/)?$",
+      "routeKeys": {
+        "id": "id"
+      },
+      "namedRegex": "^/api/assets/(?<id>[^/]+?)(?:/)?$"
+    },
+    {
+      "page": "/api/assets/[id]/meta",
+      "regex": "^/api/assets/([^/]+?)/meta(?:/)?$",
+      "routeKeys": {
+        "id": "id"
+      },
+      "namedRegex": "^/api/assets/(?<id>[^/]+?)/meta(?:/)?$"
+    }
+  ],
   "staticRoutes": [
     {
       "page": "/",
@@ -243,6 +260,18 @@
       "regex": "^/api/knowledge\\-source(?:/)?$",
       "routeKeys": {},
       "namedRegex": "^/api/knowledge\\-source(?:/)?$"
+    },
+    {
+      "page": "/api/math-speech",
+      "regex": "^/api/math\\-speech(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/math\\-speech(?:/)?$"
+    },
+    {
+      "page": "/api/assets",
+      "regex": "^/api/assets(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/assets(?:/)?$"
     }
   ],
   "dataRoutes": [],

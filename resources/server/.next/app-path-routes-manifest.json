@@ -35,5 +35,9 @@
   "/api/adaptive-diagnosis/route": "/api/adaptive-diagnosis",
   "/api/practice/route": "/api/practice",
   "/api/long-reasoning-demo/route": "/api/long-reasoning-demo",
-  "/api/knowledge-source/route": "/api/knowledge-source"
+  "/api/knowledge-source/route": "/api/knowledge-source",
+  "/api/math-speech/route": "/api/math-speech",
+  "/api/assets/route": "/api/assets",
+  "/api/assets/[id]/route": "/api/assets/[id]",
+  "/api/assets/[id]/meta/route": "/api/assets/[id]/meta"
 }

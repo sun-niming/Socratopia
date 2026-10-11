@@ -34,6 +34,26 @@ var base = { queue: queue, state: { activeConceptId: "c1" }, textbookId: "TB", c
 var accepted = P.validateProgressMarker(P.parseProgressMarker(marker), base);
 assert.strictEqual(accepted.ok, true, "contiguous current-card completion is accepted");
 assert.strictEqual(accepted.activeConceptId, "c2", "cursor advances to immediate next card");
+assert.strictEqual(accepted.windowComplete, false, "an intermediate card cannot complete the loaded window");
+var finalCard = P.validateProgressMarker({ textbookId: "TB", sourceConversationId: "C1", activeConceptId: "c4", newlyCompletedConceptIds: ["c4"], lastTaughtPage: 14 }, {
+  queue: queue, state: { activeConceptId: "c4", completedConceptIds: ["c1", "c2", "c3"] }, textbookId: "TB", conversationId: "C1", loadedRange: { startPage: 10, endPage: 14 }
+});
+assert.strictEqual(finalCard.ok, true, "the final loaded card can be completed");
+assert.strictEqual(finalCard.windowComplete, true, "completing the final loaded card completes the window");
+assert.strictEqual(finalCard.textbookComplete, true, "completing the final global card reports textbook completion");
+var middleWindowQueue = [
+  { cardId: "m1", conceptId: "m1", title: "Middle one", sourcePages: [10, 10] },
+  { cardId: "m2", conceptId: "m2", title: "Middle two", sourcePages: [20, 20] },
+];
+var middleWindowState = P.validateProgressMarker({
+  textbookId: "TB", sourceConversationId: "C1", activeConceptId: "m2", newlyCompletedConceptIds: ["m1"], lastTaughtPage: 10,
+}, {
+  queue: middleWindowQueue, state: { activeConceptId: "m1" }, textbookId: "TB", conversationId: "C1", loadedRange: { startPage: 10, endPage: 10 },
+});
+assert.strictEqual(middleWindowState.ok, true, "a window-tail card can complete before the next card is loaded");
+assert.strictEqual(middleWindowState.activeConceptId, "m1", "the unloaded next card is not written as the active concept");
+assert.strictEqual(middleWindowState.nextConceptId, "m2", "the next unloaded card is serialized as a deferred target");
+assert.strictEqual(middleWindowState.windowComplete, true, "window-tail completion is explicit");
 
 var skip = P.validateProgressMarker({ textbookId: "TB", sourceConversationId: "C1", activeConceptId: "c3", newlyCompletedConceptIds: ["c1"], lastTaughtPage: 11 }, base);
 assert.strictEqual(skip.ok, false, "skipping c2 is rejected");
@@ -116,9 +136,14 @@ queue.forEach(function (entry) {
 fs.writeFileSync(path.join(kb, "teaching_map.json"), JSON.stringify({ segments: [{ sequence: [{ card_ids: ["c1", "c2", "c3", "c4"] }] }] }));
 fs.writeFileSync(path.join(kb, "build_status.json"), JSON.stringify({ state: "partial", activationEligible: false }));
 assert.deepStrictEqual(P.loadQueue(root).queue, [], "partial KB is unavailable to the progress protocol");
+assert.strictEqual(P.loadQueue(root).mode, "page_only", "an unfinished KB build degrades to page-level progress");
 fs.writeFileSync(path.join(kb, "build_status.json"), JSON.stringify({ state: "done", activationEligible: true }));
 assert.strictEqual(P.loadQueue(root).queue.length, 4, "healthy KB remains available to the progress protocol");
+assert.strictEqual(P.loadQueue(root).mode, "kb", "a built queue reports concept mode");
 R.writeState(root, { textbookId: "TB", activeConceptId: "c1", lastTaughtPage: 10, loadedCursor: { startPage: 10, endPage: 14 } });
+var validatedOnly = P.commitAssistantProgress(root, { responseText: marker, textbookId: "TB", conversationId: "C1", loadedRange: { startPage: 10, endPage: 14 }, write: false });
+assert.strictEqual(validatedOnly.ok, true, "valid marker can be validated for an authoritative commit");
+assert.strictEqual(R.readState(root).activeConceptId, "c1", "validation-only mode does not mutate legacy state");
 var committed = P.commitAssistantProgress(root, { responseText: marker, textbookId: "TB", conversationId: "C1", loadedRange: { startPage: 10, endPage: 14 } });
 assert.strictEqual(committed.ok, true, "valid marker commits structured state");
 var state = R.readState(root);
@@ -132,4 +157,138 @@ assert.strictEqual(missing.unchanged, true, "missing marker is a no-op");
 assert.strictEqual(JSON.stringify(R.readState(root)), before, "missing marker does not mutate state");
 
 fs.rmSync(root, { recursive: true, force: true });
+
+// C3 stage 1: textbooks without a concept-card queue keep page-level position.
+var bare = fs.mkdtempSync(path.join(os.tmpdir(), "kb-progress-page-only-"));
+assert.strictEqual(P.loadQueue(bare).mode, "page_only", "a textbook without knowledge_base/ is page-only");
+var pageMarker = { schemaVersion: 1, textbookId: "TB", sourceConversationId: "C1", lastTaughtPage: 12 };
+assert.strictEqual(P.validateProgressMarker(pageMarker, {
+  queue: [], textbookId: "TB", conversationId: "C1", loadedRange: { startPage: 10, endPage: 14 },
+}).reason, "empty_queue", "a queue-less marker is still rejected when no mode is supplied");
+var pageDecision = P.validateProgressMarker(pageMarker, {
+  queue: [], mode: "page_only", state: { sourceConversationId: "C1", lastTaughtPage: 11 },
+  textbookId: "TB", conversationId: "C1", loadedRange: { startPage: 10, endPage: 14 },
+});
+assert.strictEqual(pageDecision.ok, true, "page-only mode accepts a page inside the loaded window");
+assert.strictEqual(pageDecision.progressMode, "page_only", "the decision is labelled page-only");
+assert.strictEqual(pageDecision.activeConceptId, null, "page-only progress never invents a concept id");
+assert.strictEqual(pageDecision.windowComplete, false, "stage 1 never reports window completion");
+assert.strictEqual(pageDecision.lastTaughtPage, 12, "the reported page is carried through");
+var regressed = P.validatePageMarker({ textbookId: "TB", sourceConversationId: "C1", lastTaughtPage: 10 }, {
+  state: { sourceConversationId: "C1", lastTaughtPage: 12 },
+  textbookId: "TB", conversationId: "C1", loadedRange: { startPage: 10, endPage: 14 },
+});
+assert.strictEqual(regressed.reason, "taught_page_regressed", "position may not walk backwards inside one window");
+// BUG-0016 (2026-09-25 live): a 6-turn page regression was unroot-causable because
+// the log carried only the bare reason. The rejection must name both sides.
+assert.strictEqual(regressed.detail.reportedPage, 10, "rejection names the page the model reported");
+assert.strictEqual(regressed.detail.recordedPage, 12, "rejection names the page already recorded");
+assert.strictEqual(regressed.detail.loadedRange, "10-14", "rejection names the loaded range");
+var movedBack = P.validatePageMarker({ textbookId: "TB", sourceConversationId: "C1", lastTaughtPage: 10 }, {
+  state: { sourceConversationId: "C1", lastTaughtPage: 12 },
+  textbookId: "TB", conversationId: "C1", loadedRange: { startPage: 8, endPage: 14 },
+});
+assert.strictEqual(movedBack.ok, false, "a moved window still rejects a page behind the old reported position in the same range");
+var jumpWindow = P.validatePageMarker({ textbookId: "TB", sourceConversationId: "C1", lastTaughtPage: 10 }, {
+  state: { sourceConversationId: "C1", lastTaughtPage: 40 },
+  textbookId: "TB", conversationId: "C1", loadedRange: { startPage: 8, endPage: 14 },
+});
+assert.strictEqual(jumpWindow.ok, true, "a jump window resets the regression guard");
+var staleConcept = P.validatePageMarker({ textbookId: "TB", sourceConversationId: "C1", lastTaughtPage: 12, activeConceptId: "ghost-card" }, {
+  state: {}, textbookId: "TB", conversationId: "C1", loadedRange: { startPage: 10, endPage: 14 },
+});
+assert.strictEqual(staleConcept.ok, true, "leftover concept fields are ignored, not rejected");
+var outOfWindow = P.validatePageMarker({ textbookId: "TB", sourceConversationId: "C1", lastTaughtPage: 99 }, {
+  state: {}, textbookId: "TB", conversationId: "C1", loadedRange: { startPage: 10, endPage: 14 },
+});
+assert.strictEqual(outOfWindow.reason, "taught_page_outside_loaded_range", "pages outside the loaded window stay invalid");
+assert.strictEqual(outOfWindow.detail.reportedPage, 99, "out-of-window rejection names the reported page too");
+assert.strictEqual(outOfWindow.detail.loadedRange, "10-14", "out-of-window rejection names the loaded range");
+var stageTwo = P.validatePageMarker({ textbookId: "TB", sourceConversationId: "C1", lastTaughtPage: 14 }, {
+  state: {}, textbookId: "TB", conversationId: "C1", loadedRange: { startPage: 10, endPage: 14 }, allowWindowComplete: true,
+});
+assert.strictEqual(stageTwo.windowComplete, true, "stage 2 accepts window completion at the last loaded page");
+var partialWindow = P.validatePageMarker({ textbookId: "TB", sourceConversationId: "C1", lastTaughtPage: 13 }, {
+  state: {}, textbookId: "TB", conversationId: "C1", loadedRange: { startPage: 10, endPage: 14 }, allowWindowComplete: true,
+});
+assert.strictEqual(partialWindow.windowComplete, false, "stage 2 still requires reaching the last loaded page");
+var pageCommitted = P.commitAssistantProgress(bare, {
+  responseText: "讲完了这一页。<!-- kbProgress:" + JSON.stringify(pageMarker) + " -->",
+  textbookId: "TB", conversationId: "C1", loadedRange: { startPage: 10, endPage: 14 },
+});
+assert.strictEqual(pageCommitted.ok, true, "page-only progress commits without a knowledge base");
+assert.strictEqual(pageCommitted.progressMode, "page_only", "the commit is labelled page-only");
+var bareState = R.readState(bare);
+assert.strictEqual(bareState.lastTaughtPage, 12, "page-only progress persists the taught page");
+assert.strictEqual(bareState.currentPage, 12, "page-only progress mirrors the legacy current page");
+assert.strictEqual(bareState.windowComplete, false, "page-only state never claims window completion in stage 1");
+assert.strictEqual(bareState.progressMode, "page_only", "page-only state is labelled for downstream readers");
+assert.ok(!bareState.activeConceptId, "page-only commits do not write a concept id");
+var validatedPage = P.commitAssistantProgress(bare, {
+  responseText: "讲完了这一页。<!-- kbProgress:" + JSON.stringify(pageMarker) + " -->",
+  textbookId: "TB", conversationId: "C1", loadedRange: { startPage: 10, endPage: 14 }, write: false,
+});
+assert.strictEqual(validatedPage.ok, true, "page-only markers validate for the authoritative commit path");
+assert.strictEqual(validatedPage.validatedOnly, true, "validation-only page markers do not write state");
+var pageDirective = P.markerDirective({ progressMode: "page_only", textbookId: "TB", conversationId: "C1" });
+assert.ok(pageDirective.indexOf('"lastTaughtPage":ACTUAL_PAGE_NUMBER') >= 0, "the page-only directive asks for an actual page");
+assert.ok(pageDirective.indexOf('"windowComplete":true|false') >= 0, "the page-only directive names the completion flag");
+assert.strictEqual(pageDirective.indexOf("activeConceptId"), -1, "the page-only directive never mentions concept ids");
+assert.ok(P.markerDirective({ textbookId: "TB", conversationId: "C1", activeConceptId: "c1" }).indexOf("activeConceptId") >= 0, "the concept directive is unchanged for knowledge-base textbooks");
+
+// BUG-0017 (2026-09-26 live): in page_only mode the page number is the only
+// carrier for "this window is done", and a model that has taught the last loaded
+// page reports the following one. That report used to be rejected whole, taking
+// its windowComplete claim with it — so a page-only window could never finish and
+// the session stalled. Only the exact end+1 report, with an explicit claim, is
+// clamped into the window.
+var endSignal = P.validatePageMarker({ textbookId: "TB", sourceConversationId: "C1", lastTaughtPage: 15, windowComplete: true }, {
+  state: { sourceConversationId: "C1", lastTaughtPage: 14 },
+  textbookId: "TB", conversationId: "C1", loadedRange: { startPage: 10, endPage: 14 },
+});
+assert.strictEqual(endSignal.ok, true, "a window-end+1 report with a completion claim is accepted");
+assert.strictEqual(endSignal.lastTaughtPage, 14, "the accepted report is clamped onto the last loaded page");
+assert.strictEqual(endSignal.normalizedFromPage, 15, "the decision records the page the model actually wrote");
+assert.strictEqual(endSignal.windowComplete, false, "with stage 2 off the clamped signal is still observation-only");
+var endSignalStageTwo = P.validatePageMarker({ textbookId: "TB", sourceConversationId: "C1", lastTaughtPage: 15, windowComplete: true }, {
+  state: { sourceConversationId: "C1", lastTaughtPage: 14 },
+  textbookId: "TB", conversationId: "C1", loadedRange: { startPage: 10, endPage: 14 }, allowWindowComplete: true,
+});
+assert.strictEqual(endSignalStageTwo.ok, true, "the clamped signal survives the stage 2 path");
+assert.strictEqual(endSignalStageTwo.windowComplete, true, "with stage 2 on the clamped signal completes the window");
+assert.strictEqual(endSignalStageTwo.lastTaughtPage, 14, "stage 2 still records the last loaded page");
+var unclaimedEndSignal = P.validatePageMarker({ textbookId: "TB", sourceConversationId: "C1", lastTaughtPage: 15 }, {
+  state: { sourceConversationId: "C1", lastTaughtPage: 14 },
+  textbookId: "TB", conversationId: "C1", loadedRange: { startPage: 10, endPage: 14 },
+});
+assert.strictEqual(unclaimedEndSignal.reason, "taught_page_outside_loaded_range", "end+1 without a completion claim stays a rejection");
+assert.strictEqual(unclaimedEndSignal.detail.reportedPage, 15, "the unclaimed rejection still names the reported page");
+assert.strictEqual(unclaimedEndSignal.detail.normalizedFromPage, null, "an unclamped rejection carries no normalization source");
+var overshootEndSignal = P.validatePageMarker({ textbookId: "TB", sourceConversationId: "C1", lastTaughtPage: 16, windowComplete: true }, {
+  state: { sourceConversationId: "C1", lastTaughtPage: 14 },
+  textbookId: "TB", conversationId: "C1", loadedRange: { startPage: 10, endPage: 14 },
+});
+assert.strictEqual(overshootEndSignal.reason, "taught_page_outside_loaded_range", "end+2 and beyond are still rejected so a silent page skip stays visible");
+var midWindowReport = P.validatePageMarker({ textbookId: "TB", sourceConversationId: "C1", lastTaughtPage: 15, windowComplete: true }, {
+  state: { sourceConversationId: "C1", lastTaughtPage: 11 },
+  textbookId: "TB", conversationId: "C1", loadedRange: { startPage: 10, endPage: 14 },
+});
+assert.strictEqual(midWindowReport.ok, true, "the end+1 claim is clamped even when the recorded page is mid-window");
+assert.strictEqual(midWindowReport.lastTaughtPage, 14, "clamping never lands the position before the recorded page");
+var clampedCommitted = P.commitAssistantProgress(bare, {
+  responseText: "这一屏到这儿就讲完了。<!-- kbProgress:" + JSON.stringify({ schemaVersion: 1, textbookId: "TB", sourceConversationId: "C1", lastTaughtPage: 15, windowComplete: true }) + " -->",
+  textbookId: "TB", conversationId: "C1", loadedRange: { startPage: 10, endPage: 14 },
+});
+assert.strictEqual(clampedCommitted.ok, true, "the end+1 signal commits through the production path");
+assert.strictEqual(clampedCommitted.normalizedFromPage, 15, "the production commit exposes the normalization for observation");
+assert.strictEqual(R.readState(bare).lastTaughtPage, 14, "the clamped page is what reaches the persisted state");
+var brokenDir = fs.mkdtempSync(path.join(os.tmpdir(), "kb-progress-broken-"));
+fs.mkdirSync(path.join(brokenDir, "knowledge_base"), { recursive: true });
+fs.writeFileSync(path.join(brokenDir, "knowledge_base", "build_status.json"), JSON.stringify({ state: "done", activationEligible: true }));
+assert.strictEqual(P.loadQueue(brokenDir).mode, "kb_broken", "a done build without index data is kb_broken, not page-only");
+assert.strictEqual(P.validateProgressMarker(pageMarker, {
+  queue: [], mode: "kb_broken", textbookId: "TB", conversationId: "C1", loadedRange: { startPage: 10, endPage: 14 },
+}).reason, "empty_queue", "broken KB data keeps rejecting markers loudly");
+fs.rmSync(bare, { recursive: true, force: true });
+fs.rmSync(brokenDir, { recursive: true, force: true });
 console.log("kb progress smoke: PASS");

@@ -9,7 +9,7 @@ var quality = require("./ocr/ocr-quality.js");
 var cacheModule = require("./ocr/ocr-cache.js");
 
 var PDF_COMMANDS = new Set(["meta", "extract", "extract_adaptive", "scan", "render", "toc"]);
-var OCR_SCHEMA = "local-ocr-v2";
+var OCR_SCHEMA = "local-ocr-v3";
 var RAPID_OCR_FINGERPRINT = [
   "RapidOcrOnnx.exe:115e34764b0ef9660e75c4c8b0b3ee70d92acbfaa652798f640783d7cfc0f8e6",
   "ch_PP-LCNet_x0_25_textline_ori_cls_mobile.onnx:54379ae5174d026780215fc748a7f31910dee36818e63d49e17dc598ecc82df7",
@@ -642,13 +642,67 @@ function createCoordinator(options) {
         var hitQuality = hitSource ? quality.assess(hit.text, { expectedCjk: expectedCjk, source: hitSource }) : null;
         if (hitQuality && hitSource === "rapidocr-v5" && !(ocrConfidence(hit.confidence) >= 0.55)) hitQuality = Object.assign({}, hitQuality, { usable: false, score: 0, reason: "rapidocr_low_confidence" });
         if (hit && hitSource && hitQuality.usable) {
-          pages[i] = { page: pages[i].page, text: quality.normalize(hit.text), source: hitSource, quality: hitQuality, confidence: ocrConfidence(hit.confidence), error: null, cached: true, language: hit.language || request.expectedLanguage || "zh-Hans-CN" };
+          pages[i] = { page: pages[i].page, text: quality.normalize(hit.text), source: hitSource, quality: hitQuality, confidence: ocrConfidence(hit.confidence), error: null, cached: true, language: hit.language || request.expectedLanguage || "zh-Hans-CN", lines: Array.isArray(hit.lines) ? hit.lines : [] };
         } else missing.push(pages[i].page);
       }
     } else missing = pages.filter(function (page) { return page.source === "unresolved"; }).map(function (page) { return page.page; });
     if (missing.length) {
       var ocrPages = [];
+      var appliedOcrCount = 0;
       var ocrDeadline = Date.now() + Math.min(180000, Math.max(1000, Number(request.timeoutMs) || 120000));
+      // BUG-0021: fold every finished OCR batch into `pages` and persist it to the
+      // OCR cache *immediately*. Previously the whole call's OCR output was only
+      // cached after the batch loop (`withLifecycleMutation`), so a deadline or
+      // abort in a later batch discarded every completed page. A conversation whose
+      // textbook window needs more than the request fence to load then retried from
+      // a cold cache and died at the same point every turn: the window never
+      // committed, so `empty_window_reload` re-ran forever with `ocr_request_deadline`
+      // surfaced as the assistant reply. Flushing per batch makes retries converge.
+      var mergeRecognizedPages = async function () {
+        if (appliedOcrCount >= ocrPages.length) return;
+        var fresh = ocrPages.slice(appliedOcrCount);
+        appliedOcrCount = ocrPages.length;
+        var freshByPage = new Map(fresh.map(function (item) { return [Number(item.page), item]; }));
+        var flushed = [];
+        for (var index = 0; index < pages.length; index++) {
+          if (pages[index].source !== "unresolved") continue;
+          if (!freshByPage.has(pages[index].page)) continue;
+          var recognized = freshByPage.get(pages[index].page);
+          var recognizedText = quality.normalize(recognized.text);
+          var recognizedSource = ocrSource(recognized.engine || recognized.source) || "windows-ocr";
+          var recognizedQuality = quality.assess(recognizedText, { expectedCjk: expectedCjk, source: recognizedSource });
+          if (recognizedSource === "rapidocr-v5" && !(ocrConfidence(recognized.confidence) >= 0.55)) recognizedQuality = Object.assign({}, recognizedQuality, { usable: false, score: 0, reason: "rapidocr_low_confidence" });
+          if (recognizedQuality.usable && !recognized.error) {
+            pages[index] = { page: pages[index].page, text: recognizedText, source: recognizedSource, quality: recognizedQuality, confidence: ocrConfidence(recognized.confidence), error: null, cached: false, language: recognized.language || request.expectedLanguage || "zh-Hans-CN", lines: Array.isArray(recognized.lines) ? recognized.lines : [] };
+            if (request.cachePolicy !== "bypass") {
+              var entry = { key: cacheKey(context, request.scope, pdfHash, pages[index].page, request.expectedLanguage || "zh-Hans-CN"), value: pages[index] };
+              pendingCacheWrites.push(entry);
+              flushed.push(entry);
+            }
+          } else {
+            pages[index].quality = recognizedQuality;
+            pages[index].error = recognized.error || recognizedQuality.reason || "windows_ocr_failed";
+          }
+        }
+        for (var cursor = 0; cursor < flushed.length; cursor++) {
+          var landed = false;
+          try {
+            await withLifecycleMutation(lifecycle.key, async function () {
+              // Deliberately no assertRequestActive(): a flushed batch is exactly the
+              // work a later deadline would otherwise destroy, so it must still land
+              // once the caller's fence has already expired. Lifecycle/scope staleness
+              // still vetoes the write, so a tombstone never repopulates a purged cache.
+              assertLifecycle(lifecycle);
+              currentContext(request.scope);
+              await cache.write(flushed[cursor].key, flushed[cursor].value);
+              landed = true;
+            });
+          } catch (_) { landed = false; }
+          if (!landed) continue;
+          var at = pendingCacheWrites.indexOf(flushed[cursor]);
+          if (at >= 0) pendingCacheWrites.splice(at, 1);
+        }
+      };
       for (var batchOffset = 0; batchOffset < missing.length; batchOffset += 6) {
         assertRequestActive(request);
         var batch = missing.slice(batchOffset, batchOffset + 6);
@@ -666,27 +720,20 @@ function createCoordinator(options) {
           assertRequestActive(request);
           ocrPages.push.apply(ocrPages, batchResult.pages || []);
         } catch (error) {
-          assertRequestActive(request);
-          if (error && (error.code === "ocr_request_aborted" || error.code === "ocr_request_deadline")) throw error;
+          var fenceError = null;
+          try { assertRequestActive(request); } catch (pending) { fenceError = pending; }
+          if (fenceError || error && (error.code === "ocr_request_aborted" || error.code === "ocr_request_deadline")) {
+            await mergeRecognizedPages();
+            throw fenceError || error;
+          }
           ocrPages.push.apply(ocrPages, batch.map(function (page) { return { page: page, text: "", error: error && error.code || "windows_ocr_failed" }; }));
         }
+        await mergeRecognizedPages();
       }
-      var ocrResult = { pages: ocrPages };
-      var byPage = new Map((ocrResult.pages || []).map(function (item) { return [Number(item.page), item]; }));
-      for (var j = 0; j < pages.length; j++) {
-        if (pages[j].source !== "unresolved") continue;
-        var recognized = byPage.get(pages[j].page) || { text: "", error: "windows_ocr_failed" };
-        var recognizedText = quality.normalize(recognized.text);
-        var recognizedSource = ocrSource(recognized.engine || recognized.source) || "windows-ocr";
-        var recognizedQuality = quality.assess(recognizedText, { expectedCjk: expectedCjk, source: recognizedSource });
-        if (recognizedSource === "rapidocr-v5" && !(ocrConfidence(recognized.confidence) >= 0.55)) recognizedQuality = Object.assign({}, recognizedQuality, { usable: false, score: 0, reason: "rapidocr_low_confidence" });
-        if (recognizedQuality.usable && !recognized.error) {
-          pages[j] = { page: pages[j].page, text: recognizedText, source: recognizedSource, quality: recognizedQuality, confidence: ocrConfidence(recognized.confidence), error: null, cached: false, language: recognized.language || request.expectedLanguage || "zh-Hans-CN" };
-          if (request.cachePolicy !== "bypass") pendingCacheWrites.push({ key: cacheKey(context, request.scope, pdfHash, pages[j].page, request.expectedLanguage || "zh-Hans-CN"), value: pages[j] });
-        } else {
-          pages[j].quality = recognizedQuality;
-          pages[j].error = recognized.error || recognizedQuality.reason || "windows_ocr_failed";
-        }
+      await mergeRecognizedPages();
+      for (var leftover = 0; leftover < pages.length; leftover++) {
+        if (pages[leftover].source !== "unresolved" || pages[leftover].error) continue;
+        pages[leftover].error = "windows_ocr_failed";
       }
     }
     assertRequestActive(request);
@@ -704,18 +751,27 @@ function createCoordinator(options) {
     var start = workerRequest.startPage;
     var contiguousEnd = start - 1;
     var contiguous = [];
+    var contiguousChars = 0;
+    var charBudget = Math.max(1, Number(workerRequest.targetChars) || 15000);
+    var budgetCapped = false;
     var blocked = false;
     var supplemental = [];
     for (var k = 0; k < pages.length; k++) {
       var usable = pages[k].quality && pages[k].quality.usable && !!pages[k].text;
-      if (!blocked && pages[k].page === contiguousEnd + 1 && usable) {
+      // OCR 回填会显著放大单页字符数，worker 端的 targetChars 在拼接处必须再把守一次；
+      // 至少保留第一页，达到预算后停止扩展连续窗口（语义与 pdf-worker 的 push-then-break 一致）。
+      var withinBudget = contiguous.length === 0 || contiguousChars < charBudget;
+      if (!blocked && withinBudget && pages[k].page === contiguousEnd + 1 && usable) {
         contiguousEnd = pages[k].page;
         contiguous.push(pages[k]);
+        contiguousChars += pages[k].text.length;
       } else {
-        if (pages[k].page === contiguousEnd + 1 && !usable) blocked = true;
+        if (!blocked && withinBudget && pages[k].page === contiguousEnd + 1 && !usable) blocked = true;
+        if (!withinBudget && usable) budgetCapped = true;
         if (usable) supplemental.push(pages[k]);
       }
     }
+    if (budgetCapped) console.warn("[pdf-ocr] contiguous window capped at targetChars", { targetChars: charBudget, contiguousChars: contiguousChars, contiguousEnd: contiguousEnd });
     var failedPages = pages.filter(function (page) { return !(page.quality && page.quality.usable && page.text); }).map(function (page) { return { page: page.page, reason: page.error || "unresolved" }; });
     var requestedPages = pages.map(function (page) { return page.page; });
     var sourcesByPage = {};

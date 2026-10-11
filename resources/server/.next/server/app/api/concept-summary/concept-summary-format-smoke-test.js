@@ -7,9 +7,15 @@ var path = require("path");
 var routePath = path.join(__dirname, "route.js");
 var source = fs.readFileSync(routePath, "utf-8");
 var start = source.indexOf("function ab(a){");
-var end = source.indexOf("let K=", start);
+// The route is minified onto one line, so the formatter is sliced out by string
+// offset. Anchor on the GET handler that follows, then back up to the
+// formatter's own closing brace — stepping over whatever `let Q=` keyword the
+// deletion of the old `let K=` prompt constants may have left behind.
+var sentinel = source.indexOf("Q=(0,y.pW)(async function(a){", start);
+var end = sentinel < 0 ? -1 : source.lastIndexOf("}", sentinel);
 assert.ok(start >= 0 && end > start, "summary formatter is discoverable");
-var formatterSource = source.slice(start, end);
+assert.strictEqual(source[end], "}", "the formatter slice must end on a closing brace");
+var formatterSource = source.slice(start, end + 1);
 var format = Function(formatterSource + ";return ab;")();
 
 var cpp = 'std::cout << "line\\n";\\nstd::string tab = "\\t";';

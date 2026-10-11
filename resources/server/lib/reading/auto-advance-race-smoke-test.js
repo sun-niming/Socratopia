@@ -41,7 +41,7 @@ function seed(root, scope) {
   var conversation = path.join(world, "conversations", scope.conversationId);
   write(path.join(conversation, "current_reading.md"), "<!-- startPage: 1 endPage: 3 -->\ninitial");
   write(path.join(textbook, "progress_state.json"), JSON.stringify({ schemaVersion: 3, textbookId: scope.textbookId, sourceConversationId: scope.conversationId, loadedCursor: { startPage: 1, endPage: 3 }, currentPage: 1 }));
-  write(path.join(world, "textbook_index.json"), JSON.stringify({ textbooks: [{ id: scope.textbookId, currentPage: 1 }] }));
+  write(path.join(world, "textbooks", "textbook_index.json"), JSON.stringify({ textbooks: [{ id: scope.textbookId, currentPage: 1 }] }));
   write(path.join(world, "chats", scope.conversationId + ".json"), JSON.stringify({ messages: [{ id: "a0", role: "assistant", content: "ready" }] }));
   return { world: world, textbook: textbook, conversation: conversation };
 }
@@ -143,14 +143,65 @@ async function main() {
     }));
   }, function (error) { return error && error.code === "SCOPE_STALE"; });
 
+  var authoritativeBeforeDrift = runtime._readCommitted(scope).conversations.c1.loadedRange.startPage;
   write(path.join(files.textbook, "progress_state.json"), JSON.stringify({ schemaVersion: 3, textbookId: "t", sourceConversationId: "c1", loadedCursor: { startPage: 99, endPage: 100 }, currentPage: 99 }));
-  await assert.rejects(function () { return runtime.bootstrap(scope); }, function (error) {
-    return error && error.code === "EXTERNAL_LEGACY_MUTATION_DETECTED";
-  });
+  var healedProgress = await runtime.bootstrap(scope);
+  assert.strictEqual(healedProgress.readingRange.startPage, authoritativeBeforeDrift, "legacy progress drift must preserve the authoritative range");
+  assert.strictEqual(JSON.parse(fs.readFileSync(path.join(files.textbook, "progress_state.json"), "utf8")).loadedCursor.startPage, authoritativeBeforeDrift, "legacy progress drift is overwritten by the authoritative projection");
 
   assert.strictEqual(Auto.canonicalize({ z: 1, a: [true, null, "中"] }), '{"a":[true,null,"中"],"z":1}');
   assert.strictEqual(runtime.hashEnvelope({ b: 2, a: 1 }), runtime.hashEnvelope({ a: 1, b: 2 }));
   runtime.shutdown();
+
+  var optimisticRoot = fs.mkdtempSync(path.join(os.tmpdir(), "auto-advance-optimistic-parent-"));
+  try {
+    var optimisticFiles = seed(optimisticRoot, scope);
+    write(path.join(optimisticFiles.world, "chats", "c1.json"), JSON.stringify({ messages: [
+      { id: "optimistic-u1", role: "user", content: "我们继续吧" },
+      { id: "optimistic-a1", role: "assistant", content: "" }
+    ] }));
+    var optimisticRuntime = Auto.createAutoAdvance({ bootId: "optimistic", projectRoot: optimisticRoot, getAccountContext: function () { return { active: true, accountId: "local", sessionEpoch: 1 }; } });
+    var optimisticSnapshot = await optimisticRuntime.bootstrap(scope);
+    assert.strictEqual(optimisticSnapshot.parentAssistantMessageId, null, "an empty optimistic assistant must never become the authoritative parent");
+    var optimisticEnvelope = turnEnvelope(scope, "optimistic-u1", optimisticSnapshot, "我们继续吧", null);
+    var optimisticTurn = await optimisticRuntime.beginTurn(Object.assign({}, scope, {
+      advanceProtocolVersion: 2,
+      clientTurnId: "optimistic-u1",
+      envelope: optimisticEnvelope,
+      loadRange: async function () { throw new Error("first ordinary turn must not load"); }
+    }));
+    assert.strictEqual(optimisticTurn.replay, false, "the first turn must be accepted after optimistic persistence");
+    optimisticRuntime.shutdown();
+  } finally {
+    fs.rmSync(optimisticRoot, { recursive: true, force: true });
+  }
+
+  var poisonedParentRoot = fs.mkdtempSync(path.join(os.tmpdir(), "auto-advance-poisoned-parent-"));
+  try {
+    var poisonedFiles = seed(poisonedParentRoot, scope);
+    write(path.join(poisonedFiles.world, "chats", "c1.json"), JSON.stringify({ messages: [
+      { id: "poison-u1", role: "user", content: "我们继续吧" },
+      { id: "poison-a1", role: "assistant", content: "Parent assistant message is stale" }
+    ] }));
+    var poisonedRuntime = Auto.createAutoAdvance({ bootId: "poisoned", projectRoot: poisonedParentRoot, getAccountContext: function () { return { active: true, accountId: "local", sessionEpoch: 1 }; } });
+    var poisonedSnapshot = await poisonedRuntime.bootstrap(scope);
+    assert.strictEqual(poisonedSnapshot.parentAssistantMessageId, "poison-a1", "fixture must first reproduce a polluted authoritative parent");
+    write(path.join(poisonedFiles.world, "chats", "c1.json"), JSON.stringify({ messages: [
+      { id: "poison-u1", role: "user", content: "我们继续吧" },
+      { id: "poison-a1", role: "assistant", content: "Parent assistant message is stale", failed: true, notAccepted: true }
+    ] }));
+    var recoveredEnvelope = turnEnvelope(scope, "recovered-u1", Object.assign({}, poisonedSnapshot, { parentAssistantMessageId: null }), "重新发送", null);
+    var recoveredTurn = await poisonedRuntime.beginTurn(Object.assign({}, scope, {
+      advanceProtocolVersion: 2,
+      clientTurnId: "recovered-u1",
+      envelope: recoveredEnvelope,
+      loadRange: async function () { throw new Error("recovered ordinary turn must not load"); }
+    }));
+    assert.strictEqual(recoveredTurn.parentAssistantMessageId, null, "a rejected stale card must be removed from the authoritative parent chain");
+    poisonedRuntime.shutdown();
+  } finally {
+    fs.rmSync(poisonedParentRoot, { recursive: true, force: true });
+  }
 
   var conflictRoot = fs.mkdtempSync(path.join(os.tmpdir(), "auto-advance-migration-conflict-"));
   var conflictFiles = seed(conflictRoot, scope);
@@ -344,10 +395,10 @@ async function main() {
   assert.deepStrictEqual(afterLateJump.conversations.c1.loadedRange, c1BeforeLateJump.loadedRange, "late jump must not overwrite the inactive range");
   assert.strictEqual(afterLateJump.conversations.c1.readingVersion, c1BeforeLateJump.readingVersion, "late jump must not advance the inactive reading version");
   write(path.join(ownerFiles.world, "conversations", "c1", "current_reading.md"), "<!-- startPage: 99 endPage: 99 -->\nexternal inactive mutation");
-  await assert.rejects(function () { return ownerRuntime.bootstrap(scope); }, function (error) {
-    return error && error.code === "EXTERNAL_LEGACY_MUTATION_DETECTED";
-  });
-  assert.strictEqual(ownerRuntime._readCommitted(scope2).owner.conversationId, "c2", "mutated inactive conversation must not become owner");
+  var healedInactive = await ownerRuntime.bootstrap(scope);
+  assert.strictEqual(healedInactive.readingRange.startPage, c1BeforeLateJump.loadedRange.startPage, "activating a mutated inactive conversation restores its authoritative range");
+  assert.strictEqual(ownerRuntime._readCommitted(scope).owner.conversationId, "c1", "successful bootstrap activates the requested conversation after quarantining its stale projection");
+  assert.notStrictEqual(Auto.parseRange(fs.readFileSync(path.join(ownerFiles.world, "conversations", "c1", "current_reading.md"), "utf8")).startPage, 99, "inactive reading drift is overwritten on activation");
   ownerRuntime.shutdown();
 
   var fenceRoot = fs.mkdtempSync(path.join(os.tmpdir(), "auto-advance-jump-fence-"));
@@ -422,9 +473,9 @@ async function main() {
   var tamperedProjection = JSON.parse(fs.readFileSync(path.join(fenceFiles.textbook, "progress_state.json"), "utf8"));
   tamperedProjection.loadedCursor.chunkId = "md-tampered";
   write(path.join(fenceFiles.textbook, "progress_state.json"), JSON.stringify(tamperedProjection));
-  await assert.rejects(function () { return fenceRuntime.bootstrap(scope); }, function (error) {
-    return error && error.code === "EXTERNAL_LEGACY_MUTATION_DETECTED";
-  });
+  var healedChunk = await fenceRuntime.bootstrap(scope);
+  assert.strictEqual(healedChunk.readingRange.chunkId, "md-0004", "tampered markdown chunk identity must self-heal from authoritative state");
+  assert.strictEqual(JSON.parse(fs.readFileSync(path.join(fenceFiles.textbook, "progress_state.json"), "utf8")).loadedCursor.chunkId, "md-0004", "self-healing republishes the authoritative markdown chunk identity");
   fenceRuntime.shutdown();
 
   var epochRoot = fs.mkdtempSync(path.join(os.tmpdir(), "auto-advance-epoch-rollback-"));
