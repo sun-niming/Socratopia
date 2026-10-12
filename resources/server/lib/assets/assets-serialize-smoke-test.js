@@ -449,10 +449,10 @@ function fakeIndex(records) {
 
 test("catalogue 1: no index global still ships the ordering guide", function () {
   var block = serialize.figureCatalogue({ conversationId: "c1" });
-  assert.ok(block.indexOf("## 插图下单") === 0, block);
+  assert.ok(block.indexOf("## 插图（配角：主体是知识点）") === 0, block);
   assert.ok(block.indexOf("book://") > 0, "the crop form must be taught: " + block);
   assert.ok(block.indexOf("```svg") > 0, "the draw form must be taught: " + block);
-  assert.ok(block.indexOf("## 可用插图") < 0, "no list when there is nothing to cite");
+  assert.ok(block.indexOf("## 可引用的现成图（复用清单，不是待办）") < 0, "no list when there is nothing to cite");
   assert.ok(block.indexOf("<!-- title:") > 0, "the svg title convention must be taught");
   assert.ok(block.indexOf("viewBox") > 0);
   assert.ok(block.indexOf("96KB") > 0 || block.indexOf("96 KB") > 0, "the size ceiling must be taught");
@@ -472,9 +472,9 @@ test("catalogue 2: a conversation without figures falls back to the world, an em
   });
   withIndex(fakeIndex([{ id: ANCHOR_ID, kind: "screenshot", conversationId: null }]), function () {
     var screenshotsOnly = serialize.figureCatalogue({ conversationId: "c1" });
-    assert.ok(screenshotsOnly.indexOf("## 可用插图") < 0, "screenshots are not figures");
-    assert.ok(screenshotsOnly.indexOf("## 插图下单") === 0);
-    assert.ok(serialize.figureCatalogue({}).indexOf("## 插图下单") === 0);
+    assert.ok(screenshotsOnly.indexOf("## 可引用的现成图（复用清单，不是待办）") < 0, "screenshots are not figures");
+    assert.ok(screenshotsOnly.indexOf("## 插图（配角：主体是知识点）") === 0);
+    assert.ok(serialize.figureCatalogue({}).indexOf("## 插图（配角：主体是知识点）") === 0);
 
   // The guide must carry the *timing* policy, not only the syntax: the model was
   // never told when to reach for a figure, which is why figures stayed rare.
@@ -501,7 +501,7 @@ test("catalogue 2: a conversation without figures falls back to the world, an em
 test("catalogue 3: figures become ready-to-copy anchors with their page", function () {
   withIndex(fakeIndex([{ id: ANCHOR_ID, kind: "textbook-figure", conversationId: "c1", ref: { bookId: "b", page: 174 } }]), function () {
     var block = serialize.figureCatalogue({ conversationId: "c1", profileId: "p", worldId: "w" });
-    assert.ok(block.indexOf("## 可用插图") === 0, block);
+    assert.ok(block.indexOf("## 可引用的现成图（复用清单，不是待办）") === 0, block);
     assert.ok(block.indexOf("![图 p.174](asset://" + ANCHOR_ID + ")") > 0, block);
     assert.ok(block.indexOf("asset://") > 0);
     assert.ok(block.indexOf("不要每轮都贴") > 0);
@@ -511,7 +511,7 @@ test("catalogue 3: figures become ready-to-copy anchors with their page", functi
 test("catalogue 4: english gets the english header and page wording", function () {
   withIndex(fakeIndex([{ id: ANCHOR_ID, kind: "textbook-figure", conversationId: "c1", ref: { page: 7 } }]), function () {
     var block = serialize.figureCatalogue({ conversationId: "c1", lang: "english" });
-    assert.ok(block.indexOf("## Figures you can cite") === 0, block);
+    assert.ok(block.indexOf("## Figures you may cite (reusable, not a to-do)") === 0, block);
     assert.ok(block.indexOf("page 7: ![figure p.7](asset://" + ANCHOR_ID + ")") > 0, block);
   });
 });
@@ -541,11 +541,11 @@ test("catalogue 6: conversation figures first, world fallback second, hard cap",
     assert.strictEqual(index.calls.length, 1, "a full conversation list needs no fallback query");
     assert.strictEqual(index.calls[0].filter.kind, "textbook-figure");
     assert.strictEqual(index.calls[0].filter.conversationId, "c1");
-    assert.strictEqual(index.calls[0].filter.limit, 12);
+    assert.strictEqual(index.calls[0].filter.limit, 6);
     assert.strictEqual(index.calls[0].scope.profileId, "p1");
     assert.strictEqual(index.calls[0].scope.worldId, "w1");
     // Count real anchors only: the guide itself shows the `asset://ast_…` placeholder.
-    assert.strictEqual((block.match(/asset:\/\/ast_[0-9a-f]{16}/g) || []).length, 12, "the block never exceeds the cap");
+    assert.strictEqual((block.match(/asset:\/\/ast_[0-9a-f]{16}/g) || []).length, 6, "the block never exceeds the cap");
   });
 
   // a conversation with one figure still gets the world's newest as filler, once each
@@ -565,7 +565,7 @@ test("catalogue 6: conversation figures first, world fallback second, hard cap",
 
 test("catalogue 7: a throwing index degrades to the ordering guide", function () {
   withIndex({ list: function () { throw new Error("boom"); } }, function () {
-    assert.ok(serialize.figureCatalogue({ conversationId: "c1" }).indexOf("## 插图下单") === 0);
+    assert.ok(serialize.figureCatalogue({ conversationId: "c1" }).indexOf("## 插图（配角：主体是知识点）") === 0);
   });
 });
 

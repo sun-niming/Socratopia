@@ -426,7 +426,7 @@ function createGlobalRecordResolver(options) {
 // rest of the world's newest fill the remaining slots, because a figure captured
 // in an earlier chat is just as citable and an id resolves world-wide.
 // Returns "" when the world has no figure at all.
-var CATALOGUE_MAX = 12;
+var CATALOGUE_MAX = 6;
 function figureCatalogue(input) {
   input = isRecord(input) ? input : {};
   var currentBook = textOf(input.textbookId, 60);
@@ -482,10 +482,10 @@ function figureCatalogue(input) {
   }
   if (!records.length) return figureOrderGuide(input);
   var en = "english" === input.lang;
-  var lines = [en ? "## Figures you can cite" : "## 可用插图"];
+  var lines = [en ? "## Figures you may cite (reusable, not a to-do)" : "## 可引用的现成图（复用清单，不是待办）"];
   lines.push(en
-    ? "You may put these pictures into your reply by copying the anchor exactly; the client renders it as a click-to-zoom thumbnail. Pictures in the transcript appear in the same form, so you can reuse their ids too. Cite one only when it belongs to what you are explaining."
-    : "可以把这些图放进回复里：原样复制下面的锚点即可，客户端会渲染成可点开放的缩略图；对话里出现的图也是同样的写法，可以照样回引。只在插图确实对应当前讲解时才引用，不要每轮都贴。");
+    ? "Copy an anchor to reuse that picture. Cite one only when it belongs to what you are explaining; a reply does not have to use any."
+    : "要用哪张就原样复制它的锚点。只引用确实对应当前讲解的；不必每条回复都用。");
   records.forEach(function (record) {
     var page = record.ref && Number(record.ref.page);
     var hasPage = Number.isFinite(page) && page > 0;
@@ -509,31 +509,26 @@ function figureOrderGuide(input) {
   var textbookId = textOf(input.textbookId, 60);
   if (en) {
     return [
-      "## Ordering a figure (when + how)",
-      "Do order one: when explaining a sequence, a state machine, a hierarchy, a flow or axes — something that reads badly as prose — lead with the figure instead of waiting to be asked.",
-      "Whenever you mention a figure or table from the book, crop it inline right there (`book://p<page>` is enough — drop the rect and the server boxes the figure for you; add `#x0,y0,x1,y1` only when you know roughly where it sits) — do not just write \"see figure X\".",
-      "Do not: plain definitions, formula derivations, things one sentence settles; and not on every single turn.",
-      "1. The textbook already shows it → crop it (a real figure beats a redrawn one): \`![figure 12-7a call/return](book://p174#0.08,0.12,0.46,0.55)\`",
-      "   - the rect is page-relative 0..1 corners (x0,y0,x1,y1, origin top-left); omit \`#…\` and the server boxes the figure for you; " +
-        (textbookId ? "\`book://" + textbookId + "/p174\` names the current book explicitly" : "the current book is the default"),
-      "2. It is not in the book, or it is abstract (UML, sequence, state machine, flow, axes) → draw it: a fenced \`\`\`svg block, first line \`<!-- title: … -->\`, a \`viewBox\`, no \`<script>\`, under 96 KB.",
-      "3. If the catalogue below already carries the id, cite it (\`![alt](asset://ast_…)\`) instead of ordering a duplicate; at most 4 new figures per turn.",
-      "Note: a figure already shown in your history appears as \`![alt](asset://ast_…)\` — copy that anchor to show it again; the bare \`[图片: …]\` text is only for the case with no id.",
-      "Self-check: whenever your reply says \"figure X-Y\" or \"table X-Y\", that same passage must carry a \`book://\` or \`asset://\`; the only exception is a figure outside the window whose page you do not know — call read_textbook_pages first, then crop.",
+      "## Figures (supporting cast — the knowledge point leads)",
+      "Explain first, illustrate where it actually helps. **Do order one** for structure that reads badly as prose (sequence, state machine, hierarchy, flow, axes) without waiting to be asked; **Do not:** illustrate dense definitions, derivations or one-liners. Do not plaster every turn.",
+      "**Do not turn the reply into a figure tour**: no page-order walkthrough, no figure-only section; put the picture right after the sentence that needs it. One new figure per turn is the target (at most 4 new figures per turn, the server cap) unless the learner asks for more.",
+      "Mentioning a book figure/table? Crop it (`book://p<page>`; the rect is optional — the server boxes it for you; `book://<book>/p174` names the current book explicitly) do not just write \"see figure X\"; no need to mention extra figures just to justify a crop.",
+      "1. The window already has it → crop the book original: `![figure 12-7a call/return](book://p174)` (add `#x0,y0,x1,y1` page-relative only when you know roughly where it is).",
+      "2. Not in the book, or abstract by nature (UML, sequence, state machine, flow, axes) → draw it: a ```svg fence, first line `<!-- title: … -->`, a `viewBox`, no `<script>`, <=96KB.",
+      "3. If the catalogue already carries the id, cite it (`![alt](asset://ast_…)`); a figure already shown in your history uses that same form — copy that anchor to show it again. The `[图片: …]` shorthand is only for a missing id.",
+      "Self-check: when the reply says \"figure X-Y\"/\"table X-Y\", that passage should carry a `book://` or `asset://`; for a figure outside the window call read_textbook_pages first.",
     ].join("\n");
   }
   return [
-    "## 插图下单（什么时候配 + 怎么下单）",
-    "该配：讲时序、状态机、层次、流程、坐标这类“光靠说说不清”的结构时，主动配一张，不必等学习者开口。",
-    "提到教材上的某张图/表时，顺手把它裁出来贴进正文（`book://p<页>` 即可，矩形拿不准就省略——服务器会用视觉自动框到那张图；只有知道大致位置时才写 `#x0,y0,x1,y1`），不要只写「见图 X」。",
-    "不必配：纯定义、公式推导、一句话讲得清的，保持文字；也不要每轮都配。",
-    "1. 教材这一窗口本来就有对应插图 → 裁它（教材原图比自绘可信）：\`![图 12-7a 调用/返回模式](book://p174#0.08,0.12,0.46,0.55)\`",
-    "   - 坐标是页内比例 0..1 的左上/右下角（x0,y0,x1,y1，左上原点）；拿不准就省略 \`#…\`，服务器会自动框到那张图；" +
-      (textbookId ? "要指名当前书可写 \`book://" + textbookId + "/p174\`" : "不写书名则默认当前教材"),
-    "2. 教材没有、或本来就是抽象结构（UML、时序、状态机、流程、坐标轴）→ 自己画：用 \`\`\`svg 围栏，首行写 \`<!-- title: … -->\`，必须带 \`viewBox\`、不用 \`<script>\`、不超过 96KB。",
-    "3. 下面的目录里已有现成 id 就直接引用 \`![alt](asset://ast_…)\`，不要重复下单；每轮最多 4 张新图。",
-    "注意：历史里出现过的图，本来就是 `![标题](asset://ast_…)` 这个形式——要重现某张图，直接照抄那个锚点；只有取不到 id 时才写成 `[图片: …]` 的简写，别把简写当正式写法。",
-    "自查：只要正文写了「图 X-Y」或「表 X-Y」，同一处附近就必须跟一个 `book://` 或 `asset://`；唯一例外是那张图在窗口外、你也不知道页码——那就先 read_textbook_pages 定位，再裁。",
+    "## 插图（配角：主体是知识点）",
+    "先把知识点讲清楚，只在需要处补一张图：**该配**“光靠说说不清”的结构（时序、状态机、层次、流程、坐标），遇到这类结构主动配一张，不必等学习者开口；**不必配**纯定义、公式推导、一句话讲得清的。不要每轮都贴。",
+    "**别把回复写成图目录**：不要按页码一张张巡礼、不要为插图另起小节；图紧跟在讲到它的那句话后面。一轮最多 1 张新图（学习者点名可多；硬上限每轮最多 4 张新图）。",
+    "提到教材上的某张图/表时顺手裁它（`book://p<页>` 即可，矩形可省——服务器会自动框到那张图）；" +
+      (textbookId ? "要指名当前书可写 `book://" + textbookId + "/p174`" : "不写书名则默认当前教材") + "，不要只写「见图 X」；也不用为了配图而多提图。",
+    "1. 窗口里本来就有对应插图 → 裁教材原图：`![图 12-7a 调用/返回](book://p174)`（知道大致位置才写 `#x0,y0,x1,y1`，页内比例 0..1）。",
+    "2. 教材没有、或本来抽象（UML、时序、状态机、流程、坐标轴）→ 自己画：```svg 围栏，首行 `<!-- title: … -->`，带 `viewBox`、不用 `<script>`、≤96KB。",
+    "3. 目录里已有 id 就直接引用 `![alt](asset://ast_…)`；历史里出现过的图本来就是这个写法，照样回引；只有取不到 id 时才写 `[图片: …]` 简写。",
+    "自查：正文写了「图 X-Y」/「表 X-Y」时，同处应有一个 `book://` 或 `asset://`；图在窗口外且不知页码时先 read_textbook_pages 定位。",
   ].join("\n");
 }
 
