@@ -3,6 +3,8 @@
 "use strict";
 
 var assert = require("assert");
+
+// The per-turn figure block is on by default; the one switch below silences it.
 var fs = require("fs");
 var path = require("path");
 
@@ -465,8 +467,13 @@ test("catalogue 1b: the guide names the current textbook when known", function (
   assert.ok(unnamed.indexOf("默认当前教材") > 0, unnamed);
 });
 
-test("catalogue 1c: assets.figureLayer=false silences the whole block", function () {
-  global.__SOCRATOPIA_SET__ = { assets: { figureLayer: false } };
+test("catalogue 1c: the block is on by default and assets.figureLayer=false silences it", function () {
+  delete global.__SOCRATOPIA_SET__;
+  try {
+    assert.ok(serialize.figureCatalogue({ conversationId: "c1", textbookId: "KUbm" }).length > 0, "on by default");
+  } finally {
+    global.__SOCRATOPIA_SET__ = { assets: { figureLayer: false } };
+  }
   try {
     assert.strictEqual(serialize.figureCatalogue({ conversationId: "c1", textbookId: "KUbm" }), "");
   } finally {

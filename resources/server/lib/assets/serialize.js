@@ -429,8 +429,8 @@ function createGlobalRecordResolver(options) {
 var CATALOGUE_MAX = 6;
 function figureCatalogue(input) {
   input = isRecord(input) ? input : {};
-  // assets.figureLayer === false: no figure block at all (the anchor syntax still works if the
-  // tutor happens to remember it, but nothing is injected per turn).
+  // ON by default; `assets.figureLayer: false` in set.json silences the whole block (kept as the
+  // user switch after the 2026-10-12 rollback round-trip).
   var assets = (global.__SOCRATOPIA_SET__ || {}).assets || (global.__SOCRATOPIA_SETTINGS__ || {}).assets || {};
   if (assets.figureLayer === false || assets.figureLayer === "false") return "";
   var currentBook = textOf(input.textbookId, 60);
@@ -516,9 +516,8 @@ function figureOrderGuide(input) {
       "## Figures (supporting cast — the knowledge point leads)",
       "Explain first, illustrate where it actually helps. **Do order one** for structure that reads badly as prose (sequence, state machine, hierarchy, flow, axes) without waiting to be asked; **Do not:** illustrate dense definitions, derivations or one-liners. Do not plaster every turn.",
       "**Do not turn the reply into a figure tour**: no page-order walkthrough, no figure-only section; put the picture right after the sentence that needs it. One new figure per turn is the target (at most 4 new figures per turn, the server cap) unless the learner asks for more.",
-      "Mentioning a book figure/table? Crop it (`book://p<page>`; the rect is optional — the server boxes it for you; `book://<book>/p174` names the current book explicitly) do not just write \"see figure X\"; no need to mention extra figures just to justify a crop.",
-      "1. The window already has it → crop the book original: `![figure 12-7a call/return](book://p174)` (add `#x0,y0,x1,y1` page-relative only when you know roughly where it is).",
-      "2. Not in the book, or abstract by nature (UML, sequence, state machine, flow, axes) → draw it: a ```svg fence, first line `<!-- title: … -->`, a `viewBox`, no `<script>`, <=96KB.",
+      "Draw the figure by default: a ```svg fence, first line `<!-- title: … -->`, a `viewBox`, no `<script>`, <=96KB. (Textbook crops are optional now — if you do crop, write `book://p<page>`; `book://<book>/p174` names the current book explicitly — and do not just write \"see figure X\".)",
+      "1. Abstract structure (UML, sequence, state machine, flow, axes) is exactly what to draw: title comment first, then the diagram.",
       "3. If the catalogue already carries the id, cite it (`![alt](asset://ast_…)`); a figure already shown in your history uses that same form — copy that anchor to show it again. The `[图片: …]` shorthand is only for a missing id.",
     ].join("\n");
   }
@@ -526,10 +525,9 @@ function figureOrderGuide(input) {
     "## 插图（配角：主体是知识点）",
     "先把知识点讲清楚，只在需要处补一张图：**该配**“光靠说说不清”的结构（时序、状态机、层次、流程、坐标），遇到这类结构主动配一张，不必等学习者开口；**不必配**纯定义、公式推导、一句话讲得清的。不要每轮都贴。",
     "**别把回复写成图目录**：不要按页码一张张巡礼、不要为插图另起小节；图紧跟在讲到它的那句话后面。一轮最多 1 张新图（学习者点名可多；硬上限每轮最多 4 张新图）。",
-    "提到教材上的某张图/表时顺手裁它（`book://p<页>` 即可，矩形可省——服务器会自动框到那张图）；" +
-      (textbookId ? "要指名当前书可写 `book://" + textbookId + "/p174`" : "不写书名则默认当前教材") + "，不要只写「见图 X」；也不用为了配图而多提图。",
-    "1. 窗口里本来就有对应插图 → 裁教材原图：`![图 12-7a 调用/返回](book://p174)`（知道大致位置才写 `#x0,y0,x1,y1`，页内比例 0..1）。",
-    "2. 教材没有、或本来抽象（UML、时序、状态机、流程、坐标轴）→ 自己画：```svg 围栏，首行 `<!-- title: … -->`，带 `viewBox`、不用 `<script>`、≤96KB。",
+    "插画默认**自绘**：` ```svg ` 围栏，首行 `<!-- title: … -->`，必须带 `viewBox`、不用 `<script>`、≤96KB。" +
+      "（教材裁剪先不必用——真要裁就写 `book://p<页>`；" + (textbookId ? "指名当前书可写 `book://" + textbookId + "/p174`" : "不写书名则默认当前教材") + "，不要只写「见图 X」。）",
+    "1. 抽象结构（UML、时序、状态机、流程、坐标轴）正是自绘的用武之地：先写清 `<!-- title: … -->` 再画。",
     "3. 目录里已有 id 就直接引用 `![alt](asset://ast_…)`；历史里出现过的图本来就是这个写法，照样回引；只有取不到 id 时才写 `[图片: …]` 简写。",
   ].join("\n");
 }

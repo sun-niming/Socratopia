@@ -43,7 +43,7 @@ A **packaged Windows build artifact** of Socratopia (Electron + Next.js Socratic
 | Smoke test (any) | `node <path-to-smoke-test>` (self-contained, no deps, no running app) |
 | All smoke tests | `node tools/run-smoke-matrix.js` |
 | Gateway probe | `node tools/gateway-monitor/probe-agent-gw.js` (`--report` for stats) — permanent monitor for `agent-gw.kimi.com` (diagnoses `Model attempt execution lease expired`); see `tools/gateway-monitor/README.md`, do NOT delete in cleanups |
-| Figure layer | `assets.figureLayer=false` silences the whole per-turn figure block; `assets.boxMode` (`geometry` default, `vision`, `off`) only controls how a crop gets its rect. Passive mention-cropping is OFF (reverted); the tutor orders a figure or it does not appear. Logged as `box snapped … via geometry` |
+| Figure layer | ON by default; `assets.figureLayer: false` in set.json silences the per-turn guide + catalogue. `assets.boxMode` (`geometry` default, `vision`, `off`) only controls how a crop gets its rect |
 | Figure adoption over N days | `node tools/figure-adoption-report.js [--days=7] [--since=ISO] [--world=KU]` — turns vs. replies that ordered a figure vs. dead `[图片: …]` leftovers; test: `node tools/figure-adoption-report-smoke-test.js` (the matrix skips `tools/`) |
 
 `tools/new-route.js` was removed; scaffold routes by hand and keep the 3 route manifests consistent.
