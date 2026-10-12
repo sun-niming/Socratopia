@@ -361,3 +361,31 @@ node tools/figure-adoption-report.js --since=2026-10-11T06:40:00Z --world=KU
 
 **真机验证**（同一会话，问"图 4-34 裁一张"）：14s、回复带锚点 → 日志 `box located: [0.548,0.573,0.962,0.815]` → 资产 `ast_8d9aa14543e1f282`（`KUyw` p173、**面积 10%**、52KB、444×368，对照整页 100%/424KB），肉眼确认就是「图 4-34 id*id 的语法分析」那张表连同图注。定位结果写进 `ref.rect`，所以再次引用同一张图会直接命中同一条记录、不必重定位。
 
+
+### 16.8 几何定位取代视觉回归（`2026-10-12T00:0x`，commit 89d1f4f）
+
+用户口径："裁剪定位能高一点…需要精确位置"。视觉回归天生只有 ±5–10%：p173 实测框左边切进邻栏文字、下边多吃 4 行正文。
+
+事实基础：这本教材**没有文字层**（`getTextContent()` 在 p168 返回 0 项），但**本地 rapidocr 每条都返回 `box`**（`rapidocr-runner.mjs:116` 只用它排序、随后丢掉）。
+
+实现（可回退：`assets.boxMode=geometry|vision|off`，默认 geometry；`assets.locateFigures=false` 是老写法）：
+- `lib/ocr/rapidocr-runner.mjs` 输出归一化行框 `lines:[{text,box,score}]`（缺尺寸时读 PNG 头兜底）；`local-ocr-runner` / `pdf-ocr-coordinator` 透传；`ocr-cache-v2.js` 落盘 `lines`；OCR schema `v2→v4`（v4 让旧条目本地重扫一次，无 API 成本）。
+- 新 `lib/assets/page-lines.js`（递归找缓存条目、按 `pdfHash` 校验、书级图注索引 `allCaptions`）、`lib/assets/figure-ink.js`（sharp 降采样 96×132 墨迹网格，**阈值取页面中位数**——扫描件纸底是灰的，固定阈值会把整页判成墨）、`lib/assets/figure-box.js`（**吸附**：下边贴图注、左右按列覆盖裁剪、上边沿"紧邻行 + 有墨空行"上探；跨栏行只有很紧才算图内）。
+- `intents.js`：命中图注即用几何框，失败才回落视觉。
+
+真机两轮：p202「图 4-59」先 `[0.286,0.238,0.97,0.649]`（左边切在代码上），修掉墨迹阈值与默认横向范围后 `[0.05,0.125,0.96,0.649]`，肉眼确认整段 Yacc 规约连同图注完整无裁切。单测 `figure-box 7/7`、`figure-geometry 4/4`。
+
+### 16.9 被动补图：提到就配，不用开口（`2026-10-12T00:1x`，commit a7540c8）
+
+用户口径："都需要用户主动要求，我希望这个过程是被动的…提到就补、补在首次提到那句之后、每轮上限 1 张、记得保留回退历史"。
+
+实现：`intents.autoCropMentions`（`assets.autoCropMentions=false` 可关）在会话写盘时运行——扫「图 X-Y / 表 X-Y」，用 `page-lines.allCaptions` 把标签映射到页码，在该**句末**插入 `![<图注>](book://<书>/p<页>)`，随后走同一条物化链路（因此自动带几何定位）。护栏：仅 assistant 消息、正文已有 `book://`/`asset://` 时不动手（模型自己配过就不重复）、每轮 1 张、按 `ref` 去重、写盘幂等（第二次看见锚点即跳过）。
+
+真机验证（真实缓存，40 个图注、202–231 页）：正文「这一段的关键在于图5-28给出的过程…」→ 插入 `![图5-28 while语句的SDT](book://KUyw/p231)` 于句号之后，日志 `auto-crop mention 图 5-28 -> p231`。单测 `auto-crop 5/5`。
+
+### 16.10 回退档案
+
+- `git revert a7540c8` → 关掉被动补图；`git revert 89d1f4f` → 关掉几何定位（回到视觉回归）。两步互相独立。
+- 运行期不必回退整个提交：`assets.autoCropMentions=false`、`assets.boxMode="vision"`（或 `"off"`）。
+- 每轮上限 1→2 张只改 `autoCropMentions` 里"命中即 return"那一处；表现不好整体删掉时，先关开关观察，再 revert。
+- baseline 提交 `09b3d1d` 记录了这一轮改造前的完整状态。
