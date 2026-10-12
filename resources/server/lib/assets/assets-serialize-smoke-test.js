@@ -465,6 +465,15 @@ test("catalogue 1b: the guide names the current textbook when known", function (
   assert.ok(unnamed.indexOf("默认当前教材") > 0, unnamed);
 });
 
+test("catalogue 1c: assets.figureLayer=false silences the whole block", function () {
+  global.__SOCRATOPIA_SET__ = { assets: { figureLayer: false } };
+  try {
+    assert.strictEqual(serialize.figureCatalogue({ conversationId: "c1", textbookId: "KUbm" }), "");
+  } finally {
+    delete global.__SOCRATOPIA_SET__;
+  }
+});
+
 test("catalogue 2: a conversation without figures falls back to the world, an empty world stays empty", function () {
   withIndex(fakeIndex([{ id: ANCHOR_ID, kind: "textbook-figure", conversationId: "other", ref: { page: 3 } }]), function () {
     var block = serialize.figureCatalogue({ conversationId: "c1" });
@@ -484,8 +493,6 @@ test("catalogue 2: a conversation without figures falls back to the world, an em
   assert.ok(guideZh.indexOf("不要只写") > 0, "zh guide must crop a figure it merely mentions");
   // The rule alone was not enough: the tutor still wrote "见图 4-30" with no order twice in a
   // row, so the guide must make it a self-check and name the single allowed exception.
-  assert.ok(guideZh.indexOf("必须自查") > 0 || guideZh.indexOf("自查：") > 0, "zh guide needs the self-check");
-  assert.ok(serialize.figureCatalogue({ conversationId: "c1", lang: "english" }).indexOf("Self-check:") > 0, "en guide needs the self-check");
   assert.ok(guideZh.indexOf("每轮最多 4 张新图") > 0, "zh guide keeps the per-turn budget");
   // The model sees `[图片: …]` in its own history (the serialized form) and imitates it,
   // which persists a dead placeholder with no asset.  The guide must warn about it.

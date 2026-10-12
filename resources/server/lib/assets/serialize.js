@@ -429,6 +429,10 @@ function createGlobalRecordResolver(options) {
 var CATALOGUE_MAX = 6;
 function figureCatalogue(input) {
   input = isRecord(input) ? input : {};
+  // assets.figureLayer === false: no figure block at all (the anchor syntax still works if the
+  // tutor happens to remember it, but nothing is injected per turn).
+  var assets = (global.__SOCRATOPIA_SET__ || {}).assets || (global.__SOCRATOPIA_SETTINGS__ || {}).assets || {};
+  if (assets.figureLayer === false || assets.figureLayer === "false") return "";
   var currentBook = textOf(input.textbookId, 60);
   // A record from a different textbook than the chat's own: still citable, but labelled.
   function foreignBook(record) {
@@ -516,7 +520,6 @@ function figureOrderGuide(input) {
       "1. The window already has it → crop the book original: `![figure 12-7a call/return](book://p174)` (add `#x0,y0,x1,y1` page-relative only when you know roughly where it is).",
       "2. Not in the book, or abstract by nature (UML, sequence, state machine, flow, axes) → draw it: a ```svg fence, first line `<!-- title: … -->`, a `viewBox`, no `<script>`, <=96KB.",
       "3. If the catalogue already carries the id, cite it (`![alt](asset://ast_…)`); a figure already shown in your history uses that same form — copy that anchor to show it again. The `[图片: …]` shorthand is only for a missing id.",
-      "Self-check: when the reply says \"figure X-Y\"/\"table X-Y\", that passage should carry a `book://` or `asset://`; for a figure outside the window call read_textbook_pages first.",
     ].join("\n");
   }
   return [
@@ -528,7 +531,6 @@ function figureOrderGuide(input) {
     "1. 窗口里本来就有对应插图 → 裁教材原图：`![图 12-7a 调用/返回](book://p174)`（知道大致位置才写 `#x0,y0,x1,y1`，页内比例 0..1）。",
     "2. 教材没有、或本来抽象（UML、时序、状态机、流程、坐标轴）→ 自己画：```svg 围栏，首行 `<!-- title: … -->`，带 `viewBox`、不用 `<script>`、≤96KB。",
     "3. 目录里已有 id 就直接引用 `![alt](asset://ast_…)`；历史里出现过的图本来就是这个写法，照样回引；只有取不到 id 时才写 `[图片: …]` 简写。",
-    "自查：正文写了「图 X-Y」/「表 X-Y」时，同处应有一个 `book://` 或 `asset://`；图在窗口外且不知页码时先 read_textbook_pages 定位。",
   ].join("\n");
 }
 
