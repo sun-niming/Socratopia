@@ -10,6 +10,13 @@ async function main() {
   var root = fs.mkdtempSync(path.join(os.tmpdir(), "socratopia-ocr-cache-"));
   var cache = cacheModule.createCache({ root: root, maxTextbookBytes: 600 * 1024, maxProfileBytes: 800 * 1024, maxGlobalBytes: 1024 * 1024, ttlMs: 60000 });
   await cache.initialize();
+  // line boxes are what figure location is built on: they must survive the cache
+  var lineKey = key(4242);
+  await cache.write(lineKey, { text: "图 4-34 语法分析", source: "rapidocr-v5", language: "zh-Hans-CN", confidence: 0.9, lines: [{ text: "图 4-34", box: [0.55, 0.735, 0.75, 0.753] }, { text: "bad", box: [0, 0] }] });
+  var lineHit = await cache.read(lineKey);
+  assert.ok(lineHit && Array.isArray(lineHit.lines), "lines survive a cache round trip");
+  assert.strictEqual(lineHit.lines.length, 1, "malformed boxes are dropped");
+  assert.deepStrictEqual(lineHit.lines[0].box, [0.55, 0.735, 0.75, 0.753]);
 
   var commitStartedResolve;
   var commitReleaseResolve;

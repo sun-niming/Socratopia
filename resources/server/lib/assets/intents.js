@@ -25,10 +25,37 @@ var MAX_SVG_BYTES = 96 * 1024;
 var CROP_MAX_WIDTH = 1400;
 var locate = require("./locate-figure.js");
 
-// Operator switch: assets.locateFigures === false turns the vision locate off.
-function figureLocateEnabled() {
+// Operator switches.  assets.boxMode: "geometry" (default) snaps the box to the caption and the
+// ink; "vision" keeps the old model-regression path; "off" trusts whatever the model wrote.
+// assets.locateFigures === false is the older spelling of "no vision locate".
+function boxMode() {
   var block = (global.__SOCRATOPIA_SET__ || {}).assets || (global.__SOCRATOPIA_SETTINGS__ || {}).assets || {};
-  return block.locateFigures !== false && block.locateFigures !== "false";
+  if (block.locateFigures === false || block.locateFigures === "false") return "off";
+  var mode = String(block.boxMode || "geometry").toLowerCase();
+  return mode === "vision" || mode === "off" || mode === "geometry" ? mode : "geometry";
+}
+function figureLocateEnabled() {
+  return boxMode() !== "off";
+}
+function figureGeometryEnabled() {
+  return boxMode() === "geometry";
+}
+
+// The cached OCR lines for the page plus an ink profile; null when the page has no boxes yet.
+async function geometryBox(pdfPath, page, hint, rough, pageRender) {
+  var lines = await require("./page-lines.js").pageLines({ pdfPath: pdfPath, page: page });
+  if (!lines || !lines.lines.length) return null;
+  var figureBox = require("./figure-box.js");
+  var ink = null;
+  try {
+    // Render big enough that ink columns are meaningful; renderPageRegion caches the raster.
+    var rendered = await pageRender.renderPageRegion(pdfPath, page, null, { maxWidth: 1100 });
+    var made = await require("./figure-ink.js").createInk(rendered.png);
+    ink = made ? made.ink : null;
+  } catch (error) {
+    ink = null;
+  }
+  return figureBox.snapBox({ lines: lines.lines, hint: hint, rough: rough, ink: ink });
 }
 var MIN_SIDE = 0.03;
 var MAX_AREA = 0.6;
@@ -143,12 +170,29 @@ async function resolveBookOrder(order, ctx) {
   // The tutor usually knows *that* a figure is there but not its box; a whole-page crop of a
   // dense scan is unreadable.  Ask the vision locator for a tight box (one small call, cached,
   // and only when the model did not pin one).  Any failure keeps the whole page.
-  if (figureLocateEnabled() && locate.isWholePage(box)) {
+  var boxSource = "model";
+  if (figureGeometryEnabled()) {
+    try {
+      var snapped = await geometryBox(pdfPath, page, alt, rect ? box : null, pageRender);
+      if (snapped && snapped.rect) {
+        box = snapped.rect;
+        rect = { value: box };
+        boxSource = "geometry:" + snapped.reason + (snapped.caption ? "/" + snapped.caption : "");
+        warn("book order p" + page + " box snapped " + JSON.stringify(box) + " via " + boxSource + (alt ? " (" + String(alt).slice(0, 24) + ")" : ""));
+      } else if (snapped) {
+        warn("book order p" + page + " geometry skipped: " + snapped.reason);
+      }
+    } catch (error) {
+      warn("book order p" + page + " geometry threw: " + ((error && error.message) || error));
+    }
+  }
+  if (boxSource === "model" && figureLocateEnabled() && locate.isWholePage(box)) {
     try {
       var found = await locate.locateFigure(null, { pdfPath: pdfPath, page: page, hint: alt, timeoutMs: 12000 });
       if (found && found.rect) {
         box = found.rect;
         rect = { value: box };
+        boxSource = "vision";
         warn("book order p" + page + " box located: " + JSON.stringify(box) + (alt ? " (" + String(alt).slice(0, 30) + ")" : ""));
       } else {
         warn("book order p" + page + " locate skipped: " + ((found && found.reason) || "unknown"));
@@ -165,6 +209,7 @@ async function resolveBookOrder(order, ctx) {
   var rendered = await pageRender.renderPageRegion(pdfPath, page, box, { maxWidth: CROP_MAX_WIDTH });  var created = await store.createAsset({
     kind: "textbook-figure",
     ref: refKeyed,
+    boxSource: boxSource,
     pngBuffer: rendered.png,
     caption: alt || null,
     scope: ctx.scope,

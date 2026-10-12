@@ -149,7 +149,20 @@ function createCache(options) {
     } catch (_) { return null; }
   }
 
-  async function write(key, value, writeOptions) {
+  function compactLines(value) {
+  if (!Array.isArray(value) || !value.length) return undefined;
+  var out = [];
+  for (var i = 0; i < value.length && i < 400; i += 1) {
+    var line = value[i];
+    if (!line || !Array.isArray(line.box) || line.box.length !== 4) continue;
+    var box = line.box.map(function (v) { var n = Number(v); return Number.isFinite(n) ? Math.round(n * 10000) / 10000 : null; });
+    if (box.some(function (v) { return v === null; })) continue;
+    out.push({ text: String(line.text || "").slice(0, 200), box: box });
+  }
+  return out.length ? out : undefined;
+}
+
+async function write(key, value, writeOptions) {
     var guard = writeOptions && typeof writeOptions.guard === "function" ? writeOptions.guard : function () {};
     guard();
     var text = String(value && value.text || "");
@@ -167,6 +180,7 @@ function createCache(options) {
       quality: value.quality || null,
       confidence: Number.isFinite(Number(value && value.confidence)) ? Math.max(0, Math.min(1, Number(value.confidence))) : null,
       createdAt: new Date().toISOString(),
+      lines: compactLines(value && value.lines),
     };
     var payload = JSON.stringify(record);
     var payloadBytes = Buffer.byteLength(payload, "utf8");

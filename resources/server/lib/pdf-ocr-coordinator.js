@@ -9,7 +9,7 @@ var quality = require("./ocr/ocr-quality.js");
 var cacheModule = require("./ocr/ocr-cache.js");
 
 var PDF_COMMANDS = new Set(["meta", "extract", "extract_adaptive", "scan", "render", "toc"]);
-var OCR_SCHEMA = "local-ocr-v3";
+var OCR_SCHEMA = "local-ocr-v4";
 var RAPID_OCR_FINGERPRINT = [
   "RapidOcrOnnx.exe:115e34764b0ef9660e75c4c8b0b3ee70d92acbfaa652798f640783d7cfc0f8e6",
   "ch_PP-LCNet_x0_25_textline_ori_cls_mobile.onnx:54379ae5174d026780215fc748a7f31910dee36818e63d49e17dc598ecc82df7",
