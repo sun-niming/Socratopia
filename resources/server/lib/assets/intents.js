@@ -234,10 +234,71 @@ async function resolveSvgOrder(order, ctx) {
   return anchorMarkdown(order.title || "示意图", created.assetId);
 }
 
+
+// ── passive figure: a mentioned 「图 X-Y」 becomes a crop with no model compliance needed ──────
+var MENTION_RE = /([图表])\s*(\d+)\s*[-–—.．]\s*(\d+)/g;
+
+function autoCropEnabled() {
+  var block = (global.__SOCRATOPIA_SET__ || {}).assets || (global.__SOCRATOPIA_SETTINGS__ || {}).assets || {};
+  return block.autoCropMentions !== false && block.autoCropMentions !== "false";
+}
+
+function sentenceEnd(text, from) {
+  for (var i = from; i < text.length && i < from + 220; i += 1) {
+    var ch = text[i];
+    if (ch === "\n") return i;
+    if ("。！？!?；;".indexOf(ch) >= 0) return i + 1;
+  }
+  return Math.min(text.length, from);
+}
+
+async function autoCropMentions(text, ctx) {
+  if (ctx.autoCrop !== true || !ctx.textbookId || !autoCropEnabled()) return text;
+  // the model already illustrated this message
+  if (text.indexOf("book://") >= 0 || /asset:\/\/ast_[0-9a-f]{16}/.test(text)) return text;
+
+  var mentions = [];
+  MENTION_RE.lastIndex = 0;
+  var match;
+  while ((match = MENTION_RE.exec(text)) !== null) {
+    mentions.push({ label: match[1] + " " + match[2] + "-" + match[3], end: MENTION_RE.lastIndex });
+  }
+  if (!mentions.length) return text;
+
+  var worldDir = worldDirOf(ctx.scope);
+  if (!worldDir) return text;
+  var pageRender = require("../pdf-page-render.js");
+  var target = pageRender.resolveTextbookPdf(worldDir, ctx.textbookId);
+  var pdfPath = typeof target === "string" ? target : target && (target.path || target.pdfPath);
+  if (!pdfPath) return text;
+
+  var captions = await require("./page-lines.js").allCaptions({ pdfPath: pdfPath });
+  if (!captions.length) return text;
+
+  for (var i = 0; i < mentions.length; i += 1) {
+    var wanted = mentions[i].label;
+    var hit = null;
+    for (var j = 0; j < captions.length; j += 1) {
+      if (captions[j].label === wanted) { hit = captions[j]; break; }
+    }
+    if (!hit || !Number.isInteger(hit.page) || hit.page < 1) continue;
+    var alt = hit.text || (wanted + "（教材插图）");
+    var order = "![" + alt + "](book://" + ctx.textbookId + "/p" + hit.page + ")";
+    var at = sentenceEnd(text, mentions[i].end);
+    warn("auto-crop mention " + wanted + " -> p" + hit.page);
+    return text.slice(0, at) + "\n\n" + order + "\n\n" + text.slice(at);
+  }
+  return text;
+}
+
 // Rewrites every order in one message body.  Never throws.
 async function materializeText(text, ctx) {
-  if (typeof text !== "string" || text.indexOf("book://") < 0 && text.indexOf("```svg") < 0) return text;
+  if (typeof text !== "string") return text;
   ctx = ctx || {};
+  if (ctx.autoCrop === true) {
+    try { text = await autoCropMentions(text, ctx); } catch (error) { warn("auto-crop failed: " + ((error && error.message) || error)); }
+  }
+  if (text.indexOf("book://") < 0 && text.indexOf("```svg") < 0) return text;
   ctx.scope = ctx.scope || { profileId: ctx.profileId, worldId: ctx.worldId, projectRoot: ctx.projectRoot };
   ctx.attempted = ctx.attempted || { count: 0 };
 
@@ -305,9 +366,8 @@ async function materializeConversation(conversation, ctx) {
   for (var i = 0; i < conversation.messages.length; i += 1) {
     var message = conversation.messages[i];
     if (!message || message.role !== "assistant" || typeof message.content !== "string") continue;
-    if (message.content.indexOf("book://") < 0 && message.content.indexOf("```svg") < 0) continue;
     var before = message.content;
-    message.content = await materializeText(before, messageCtx);
+    message.content = await materializeText(before, Object.assign({}, messageCtx, { autoCrop: true }));
     if (message.content !== before) rewritten += 1;
   }
   if (rewritten) log("materialized figure orders in " + rewritten + " message(s)");
@@ -325,6 +385,7 @@ module.exports = {
   materializeText: materializeText,
   materializeConversation: materializeConversation,
   parseRect: parseRect,
+  autoCropMentions: autoCropMentions,
   validateSvgSource: validateSvgSource,
   MAX_ORDERS_PER_MESSAGE: MAX_ORDERS_PER_MESSAGE,
   BOOK_ORDER_RE: BOOK_ORDER_RE,
