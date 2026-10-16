@@ -416,3 +416,27 @@ node tools/figure-adoption-report.js --since=2026-10-11T06:40:00Z --world=KU
 真机验证（问"GOTO 的状态转移图画一下"）：assistant 引用了一张已有自绘（badge「AI 自绘」）、`new assets: 0`、正文只把图 4-31 当文字引用、**0 张教材裁剪**。`assets-serialize 46/46`。
 
 回退档案（本主题全部提交，按时间）：`09b3d1d` baseline → `89d1f4f` 几何定位 → `a7540c8` 被动补图（后被 `8ed398f` 撤销）→ `0f7ede1` 注意力回摆 → `a940afe`/`d974891` 记录与静音 → 本条定稿。
+
+## 17. 修 bug：`advance_pdf_range_unavailable`（教材停在窗末推不动）（`2026-10-16`，commit cf3bb8f）
+
+用户报障：「advance_pdf_range_unavailable 这是什么bug，检查一下」。真机现场是聊天 `h8tM2csXVvjbQzKiGudI4`（world=KU，book=KUyw，window 174–181）连着三条 assistant 显示 `**advance_pdf_range_unavailable**` + 「重试发送」，窗口再也推不动。
+
+### 17.1 根因：教材的版式方框被当成缺字
+- 抛错点：`resources/server/.next/server/app/api/chat/route.js` 的 `_advanceLoadRange`：`if(_end<_start||!String(_pdf.text||"").trim())throw Error("advance_pdf_range_unavailable")`，其中 `_end` 取自 coordinator 返回的 `contiguousUsableEndPage`。
+- coordinator（`resources/server/lib/pdf-ocr-coordinator.js:760-771`）从 `startPage` 起逐页推进，**遇到第一页 unusable 就 `blocked=true` 停下**，并把 `text` 也置空 → 前台 advance 必然抛错。
+- 而 `resources/server/lib/ocr/ocr-quality.js` 的旧规则里有一句 `if(... || placeholders >= 2 || ...) garbled = true`；`placeholders` 数的是 U+25A1/U+25AF（□）。快速扫描把《编译原理》例/证明末尾那个版式方框渲染成了 □，**第 182、185 页各恰好 2 个**，于是这两页被判 garbled → contiguous 停在 181 → `_end(181) < _start(182)`。
+- 复现（直接打 coordinator，`tmp/repro-advance.js`）：`startPage=182 → contiguous 181, text 空, failed=[{page:182,reason:"garbled_text"},{page:185,reason:"garbled_text"}]`。worker 本身没问题：单独跑 `pdf-worker.mjs --coordinator-ipc` 的 `ocr_pages` 对 182/185 8.4 秒即成功。
+
+### 17.2 修法：成串的 □ 才算缺字
+`ocr-quality.js` 改为先单独统计**连续**的 □ 串（`boxedCharacters`）：串仍是硬伤（`boxedCharacters > 0` 直接 garbled），而零星孤立的 □ 只按密度计入 suspicious（`strayBoxSuspect`，占比 ≥2% 才计入）。孤立符号不再一票否决整页。
+
+### 17.3 验证
+- `tmp/prove-advance.js` 用真实缓存重放 coordinator 的窗口逻辑：p182/183/184/185 全部 usable=true，`contiguousUsableEndPage = 185`，不再 `end < start`。
+- `tmp/prove-fix.js` 全缓存 old-vs-new 逐条比对：全库只有 6 页的判定被翻转，全部是「含恰好 2 个孤立 □」的页（152/159/182/185/216/217），原本全 unusable → 现在全 usable；没有一页从 usable 变 unusable。
+- `tmp/census-unusable.js`：新规则下 394 条缓存记录里**无一条** unusable。
+- 新增断言 4 条（`ocr-quality-smoke-test.js`）：孤立 □ 可用、一页两个孤立 □ 仍可用、**□□ 连串仍不可用**（`□□□□□□□ Socratopia…` 那条老断言保持通过）。
+- 真机：原卡死聊天把三条 `advance_pdf_range_unavailable` 留在历史里（旧回复不回溯），发一条新消息即恢复，窗口 174–181 → 182–197；日志 `advance_pdf_range_unavailable` 停在修复前的 34 次、不再新增。
+- `node tools/run-smoke-matrix.js --json tmp/matrix.json`：146 total / 143 passed / 1 failed（已知环境性 flake `tts-classic-stream-zero-audio-live`）/ 2 skipped。
+
+### 17.4 顺带
+同日另有两处未随本次提交的改动（会话首轮无 advance 快照被误判 stale 的 `auto-advance.js` 修补、课后笔记 `post-class-v3` 的预算与提示词收紧），与本品无关，见各自小节/提交。
