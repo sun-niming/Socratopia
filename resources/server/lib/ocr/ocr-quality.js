@@ -23,6 +23,13 @@ function assess(input, options) {
   var replacement = countMatches(text, /\uFFFD/g);
   var controls = countMatches(text, /[\u0000-\u0008\u000B\u000C\u000E-\u001F\u007F]/g);
   var placeholders = countMatches(text, /[\u25A1\u25AF]/g);
+  var boxRuns = text.match(/[\u25A1\u25AF]{2,}/g) || [];
+  var boxedCharacters = boxRuns.reduce(function (total, run) { return total + run.length; }, 0);
+  var strayBoxes = placeholders - boxedCharacters;
+  // 中文教材（如《编译原理》例/证明末）用**孤立**的 □ 当版式结束符，一页 1~2 个，
+  // 那不是缺字；只有成串的 □（□□□□）或高密度的孤立 □ 才说明字形渲染失败。
+  // 旧规则把 placeholders >= 2 一律判为 garbled，于是整页被拒。
+  var strayBoxSuspect = strayBoxes / Math.max(1, length) >= 0.02 ? strayBoxes : 0;
   var cjk = countMatches(text, /\p{Script=Han}/gu);
   var visible = countMatches(text, /[\p{L}\p{N}\p{Script=Han}]/gu);
   var mojibake = countMatches(text, /(?:锟斤拷|Ã[\u0080-\u00FF]|Â[\u0080-\u00FF]|â[\u0080-\u00BF]{1,2})/g);
@@ -33,9 +40,9 @@ function assess(input, options) {
   var maximumFrequency = 0;
   frequencies.forEach(function (value) { maximumFrequency = Math.max(maximumFrequency, value); });
   var repetitive = visible >= 8 && maximumFrequency / Math.max(1, visible) >= 0.7;
-  var suspicious = replacement + controls + mojibake + placeholders;
+  var suspicious = replacement + controls + mojibake + strayBoxSuspect + boxedCharacters;
   var garbled = suspicious > 0 && suspicious / Math.max(1, length) >= 0.05;
-  if (replacement >= 2 || controls >= 2 || placeholders >= 2 || mojibake > 0 || repetitive) garbled = true;
+  if (replacement >= 2 || controls >= 2 || boxedCharacters > 0 || mojibake > 0 || repetitive) garbled = true;
   var minimumVisible = options.source === "windows-ocr" || options.source === "rapidocr-v5" ? 3 : 1;
   var visibleRatio = visible / Math.max(1, length);
   var usable = length > 0 && visible >= minimumVisible && visibleRatio >= 0.2 && !garbled;
