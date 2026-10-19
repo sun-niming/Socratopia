@@ -1,0 +1,43 @@
+{
+  "title": "transform-origin",
+  "definition": "transform-origin 表示变换的起始点，默认是元素中心点。它通常写成 transform-origin: x y，其中 x、y 可以取 px、%、left、right、top、bottom、center 等值。该属性会影响旋转、缩放等变换围绕哪个点进行。",
+  "key_points": [
+    "默认起始点是元素中心点。",
+    "可以通过 x、y 指定变换基点。",
+    "x、y 的可取值包括 px、%、left、right、top、bottom、center 等。",
+    "变换基点不同，会导致同一变换出现不同视觉效果。"
+  ],
+  "examples": [
+    "transform-origin: 50%;",
+    "transform-origin: left;"
+  ],
+  "misconceptions": [
+    "transform-origin 的默认值不是左上角，而是元素中心点。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "transform-origin 的作用是什么？",
+      "a": "它用来指定变换的起始点，也就是变换围绕哪个点发生。"
+    },
+    {
+      "q": "transform-origin 的默认位置是什么？",
+      "a": "默认是元素中心点。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "transform属性"
+  ],
+  "source_pages": [
+    201,
+    202,
+    204
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "283_transform_origin",
+  "_chunk_pages": [
+    201,
+    204
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "title": "本地 DNS 服务器",
+  "definition": "本地 DNS 服务器也称默认名字服务器。严格来说，它不属于根、顶级域和权威 DNS 服务器组成的层次结构，但它是主机访问该层次结构的关键入口。每个 ISP 都有本地 DNS 服务器；主机连接 ISP 时，会获得一台或多台本地 DNS 服务器的 IP 地址，通常由 DHCP 提供。主机发出的 DNS 请求首先送到本地 DNS 服务器，由它作为代理把请求转发到 DNS 层次结构。",
+  "key_points": [
+    "本地 DNS 服务器不属于 DNS 服务器层次结构，但对 DNS 名字解析至关重要。",
+    "本地 DNS 服务器通常在网络上邻近使用它的主机：机构 ISP 的本地 DNS 服务器可能与主机位于同一局域网，居民区 ISP 的本地 DNS 服务器通常只相隔少量路由器。",
+    "本地 DNS 服务器的地址通常通过 DHCP 提供给主机。",
+    "本地 DNS 服务器可代理主机访问根、TLD 和权威 DNS 服务器。"
+  ],
+  "examples": [
+    "主机 cse.nyu.edu 将查询先发送给其本地 DNS 服务器 dns.nyu.edu，而不是直接联系根 DNS 服务器。",
+    "用户可以通过 Windows 或 UNIX 的网络状态窗口查看本地 DNS 服务器的 IP 地址。"
+  ],
+  "misconceptions": [
+    "误以为本地 DNS 服务器是 DNS 层次结构中的一级；严格来说它不属于该层次结构。",
+    "误以为主机通常直接向根 DNS 服务器查询；实际上主机通常先查询本地 DNS 服务器。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "主机的 DNS 查询通常首先发送给谁？",
+      "a": "首先发送给该主机所使用的本地 DNS 服务器。"
+    },
+    {
+      "q": "本地 DNS 服务器是否属于根、TLD 和权威服务器组成的 DNS 层次结构？",
+      "a": "严格来说不属于，但它是主机访问 DNS 层次结构的关键代理。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "DNS 服务器层次结构",
+    "ISP",
+    "DHCP"
+  ],
+  "source_pages": [
+    105,
+    108
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "262_本地_dns_服务器",
+  "_chunk_pages": [
+    105,
+    108
+  ]
+}

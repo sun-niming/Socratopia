@@ -1,0 +1,50 @@
+{
+  "title": "chrono预定义duration类型",
+  "definition": "`std::chrono`提供了许多常用时间单位的duration类型别名，包括纳秒、微秒、毫秒、秒、分钟、小时，以及C++20增加的天、周、年和月。这些别名可以避免手动书写`duration`及其`ratio`参数。",
+  "key_points": [
+    "常用别名包括`nanoseconds`、`microseconds`、`milliseconds`、`seconds`、`minutes`和`hours`。",
+    "C++20增加了`days`、`weeks`、`years`和`months`等类型。",
+    "这些预定义duration使用标准规定的整数表示类型；具体底层类型由实现决定，但必须满足标准规定的最小范围。",
+    "由于使用整数表示类型，把duration转换为可能产生非整数结果的单位可能导致编译错误。"
+  ],
+  "examples": [
+    "`std::chrono::minutes d9{10};`等价于使用60秒周期的整数duration表示10分钟。",
+    "`auto t{std::chrono::hours{1} + std::chrono::minutes{23} + std::chrono::seconds{45}};`表示1小时23分45秒。",
+    "`std::chrono::seconds{t}.count()`可以把`t`转换为秒并取得滴答数；该例结果为5025秒。"
+  ],
+  "misconceptions": [
+    "预定义的`seconds`等类型不一定使用`long`作为底层表示类型；具体类型由标准库实现决定。",
+    "预定义duration使用整数表示，并不意味着所有不同单位之间的转换都能直接进行。",
+    "`months`和`years`在chrono中依据标准规定的ratio定义，并不等同于任意日历月份或年份的动态长度。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何用预定义类型表示10分钟？",
+      "a": "使用`std::chrono::minutes d9{10};`。"
+    },
+    {
+      "q": "1小时23分45秒转换为秒是多少？",
+      "a": "$1\\times3600+23\\times60+45=5025$秒。"
+    },
+    {
+      "q": "为什么`seconds{90}`不能直接初始化整数`minutes`？",
+      "a": "因为90秒等于1.5分钟，会产生非整数结果，而预定义的`minutes`使用整数表示类型。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "duration的时间周期表示与基本构造",
+    "duration的隐式转换与duration_cast"
+  ],
+  "source_pages": [
+    687,
+    688
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1433_chrono预定义duration类型",
+  "_chunk_pages": [
+    685,
+    688
+  ]
+}

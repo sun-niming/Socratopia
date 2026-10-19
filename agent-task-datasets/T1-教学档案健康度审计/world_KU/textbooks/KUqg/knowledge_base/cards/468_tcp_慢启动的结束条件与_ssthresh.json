@@ -1,0 +1,50 @@
+{
+  "title": "TCP 慢启动的结束条件与 ssthresh",
+  "definition": "TCP 慢启动有三种主要结束方式。第一，发生由超时指示的丢包事件时，TCP 将 $cwnd$ 设置为 $1$ 个 MSS，并重新开始慢启动，同时将慢启动阈值 $ssthresh$ 设置为检测到拥塞时拥塞窗口值的一半：$$ssthresh\\leftarrow \\frac{cwnd}{2}.$$第二，当 $cwnd$ 达到或超过 $ssthresh$ 时，TCP 结束慢启动并转入拥塞避免。第三，检测到 3 个冗余 ACK 时，TCP 执行快速重传并进入快速恢复状态。",
+  "key_points": [
+    "$ssthresh$ 是“慢启动阈值”，用于限制慢启动的指数增长阶段。",
+    "超时后的典型处理是：$$cwnd\\leftarrow1\\ \\text{MSS},\\qquad ssthresh\\leftarrow\\frac{cwnd_{\\text{检测拥塞前}}}{2}.$$",
+    "当 $cwnd\\geq ssthresh$ 时，TCP 从慢启动转入拥塞避免，并更加谨慎地增加 $cwnd$。",
+    "3 个冗余 ACK 导致快速重传并进入快速恢复，而不是按超时方式重新开始慢启动。"
+  ],
+  "examples": [
+    "若检测到超时前 $cwnd=16\\ \\text{MSS}$，则可设置：$$ssthresh=8\\ \\text{MSS},\\qquad cwnd=1\\ \\text{MSS},$$然后重新进入慢启动；当 $cwnd$ 增长到 $8\\ \\text{MSS}$ 时转入拥塞避免。",
+    "若检测到 3 个冗余 ACK，TCP 执行快速重传并进入快速恢复状态。"
+  ],
+  "misconceptions": [
+    "$ssthresh$ 不是固定不变的常数；检测到拥塞时，教材说明将其设置为检测到拥塞时 $cwnd$ 的一半。",
+    "达到 $ssthresh$ 后不是停止发送，而是从慢启动转为增长更谨慎的拥塞避免。",
+    "超时和 3 个冗余 ACK 的处理路径不同：超时会将 $cwnd$ 设为 $1$ 个 MSS 并重新慢启动，而 3 个冗余 ACK 会进入快速恢复。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "TCP 在超时后如何设置 $cwnd$ 和 $ssthresh$？",
+      "a": "TCP 将 $cwnd$ 设置为 $1$ 个 MSS，并将 $ssthresh$ 设置为检测到拥塞时拥塞窗口值的一半。"
+    },
+    {
+      "q": "什么时候慢启动转入拥塞避免？",
+      "a": "当 $cwnd$ 达到或超过 $ssthresh$ 时，TCP 结束慢启动并转入拥塞避免。"
+    },
+    {
+      "q": "收到 3 个冗余 ACK 时，TCP 是否一定重新开始慢启动？",
+      "a": "不是。教材描述的是：TCP 执行快速重传并进入快速恢复状态。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "TCP 慢启动",
+    "TCP 拥塞窗口",
+    "超时与冗余 ACK"
+  ],
+  "source_pages": [
+    193,
+    196
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "468_tcp_慢启动的结束条件与_ssthresh",
+  "_chunk_pages": [
+    193,
+    196
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "title": "宽字符标准流",
+  "definition": "标准流还存在宽字符版本，名称以w开头：wcin、wcout、wcerr和wclog。教材指出，宽字符可用于字符数多于英语的语言，并将在后续关于字符串本地化与正则表达式的内容中进一步讨论。",
+  "key_points": [
+    "wcin、wcout、wcerr和wclog分别对应cin、cout、cerr和clog的宽字符版本。",
+    "宽字符版本的名称以字母w开头。",
+    "教材将宽字符与中文等字符数多于英语的语言联系起来。"
+  ],
+  "examples": [
+    "宽字符输出流名称：wcout。",
+    "宽字符输入流名称：wcin。",
+    "宽字符错误输出流名称：wcerr；宽字符缓冲错误输出流名称：wclog。"
+  ],
+  "misconceptions": [
+    "宽字符流不是普通字符流简单改名后的同一个对象，而是对应的宽字符版本。",
+    "不能因为使用了wcout就认为程序自动完成了全部语言本地化工作。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "C++标准流的宽字符版本有哪些？",
+      "a": "有wcin、wcout、wcerr和wclog。"
+    },
+    {
+      "q": "宽字符标准流的名称有什么共同特征？",
+      "a": "名称都以字母w开头。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++预定义标准流"
+  ],
+  "source_pages": [
+    411,
+    411
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 wcin wcout wcerr wclog 宽字符标准流 中文 本地化",
+  "concept_id": "834_宽字符标准流",
+  "_chunk_pages": [
+    409,
+    412
+  ]
+}

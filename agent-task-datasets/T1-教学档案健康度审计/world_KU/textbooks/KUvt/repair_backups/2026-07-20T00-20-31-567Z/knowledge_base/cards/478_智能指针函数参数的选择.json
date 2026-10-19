@@ -1,0 +1,45 @@
+{
+  "title": "智能指针函数参数的选择",
+  "definition": "函数参数类型应根据所有权语义选择：如果函数需要接收并转移对象所有权，可以按值接收 unique_ptr，并通过移动语义传入；如果函数既不涉及所有权转移，也不涉及所有权共享，应使用 non-const 引用或 const 引用；如果 nullptr 是参数的有效值，则可以使用原始指针。通常没有必要使用 const shared_ptr<T>& 或 const unique_ptr<T>& 作为参数类型。",
+  "key_points": [
+    "按值接收 unique_ptr 表示函数可能接收其所有权，调用时需要使用移动语义。",
+    "不涉及所有权时，优先使用引用；需要允许 nullptr 时可以使用原始指针。",
+    "const shared_ptr<T>& 和 const unique_ptr<T>& 通常不能表达有意义的所有权操作。"
+  ],
+  "examples": [
+    "所有权转移：函数参数可写为 unique_ptr<Simple> ptr，并使用 std::move 将智能指针传入。",
+    "不取得所有权且不允许空值：使用 const T& 作为参数。",
+    "允许空值且函数不负责释放对象：使用 T* 作为参数。"
+  ],
+  "misconceptions": [
+    "使用 const unique_ptr<T>& 并不表示函数取得了 unique_ptr 的所有权。",
+    "使用原始指针作为参数不等于函数拥有该对象；这里的原始指针可用于表示允许 nullptr 的非所有权参数。",
+    "所有智能指针参数都使用 const 引用并不是通用的最佳实践。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如果函数需要接收并转移一个 unique_ptr 的所有权，参数应如何设计？",
+      "a": "可以按值接收 unique_ptr，并在调用时使用移动语义传入。"
+    },
+    {
+      "q": "如果函数既不转移也不共享所有权，通常应使用什么参数形式？",
+      "a": "应使用 non-const 引用或 const 引用；如果 nullptr 是有效值，则可以使用原始指针。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "unique_ptr 的基本概念",
+    "C++引用与移动语义的基本概念"
+  ],
+  "source_pages": [
+    225,
+    225
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "478_智能指针函数参数的选择",
+  "_chunk_pages": [
+    225,
+    228
+  ]
+}

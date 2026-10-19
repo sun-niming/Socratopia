@@ -1,0 +1,36 @@
+{
+  "title": "screen对象",
+  "definition": "screen对象用于返回当前渲染窗口中与屏幕有关的属性，主要用来获取用户电脑的屏幕信息，例如屏幕分辨率、颜色位数以及窗口可显示的最大尺寸。",
+  "key_points": [
+    "返回当前渲染窗口的屏幕相关属性",
+    "可用于获取屏幕分辨率、颜色位数等信息",
+    "也可了解窗口可显示的最大尺寸"
+  ],
+  "examples": [
+    "获取用户电脑的屏幕分辨率、颜色位数、窗口可显示的最大尺寸"
+  ],
+  "misconceptions": [
+    "screen对象不是用来操作网页内容的，它关注的是屏幕属性而不是文档结构。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "screen对象主要用于获取什么信息？",
+      "a": "用于获取当前渲染窗口中和屏幕有关的属性，主要是用户电脑的屏幕信息。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "BOM基础"
+  ],
+  "source_pages": [
+    341,
+    344
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "486_screen对象",
+  "_chunk_pages": [
+    341,
+    344
+  ]
+}

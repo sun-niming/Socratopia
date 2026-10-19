@@ -1,0 +1,44 @@
+{
+  "title": "recursive_directory_iterator 递归遍历目录",
+  "definition": "`std::filesystem::recursive_directory_iterator` 是用于递归遍历目录层次结构的迭代器。原文在文件系统章节中列出该迭代器，并将其与 `directory_entry` 和目录迭代相关内容并列介绍。",
+  "key_points": [
+    "`recursive_directory_iterator` 用于遍历目录及其子目录中的目录项。",
+    "递归遍历得到的目录项与 `directory_entry` 相关，可对遍历结果进行文件类型、大小等属性查询。",
+    "它与普通的目录迭代概念不同：递归迭代会继续进入子目录层次。"
+  ],
+  "examples": [
+    "可用如下形式声明递归目录迭代器：`recursive_directory_iterator it{somePath};`。",
+    "遍历关系可抽象表示为：$$directory\\rightarrow subdirectory_1\\rightarrow subdirectory_2\\rightarrow\\cdots$$"
+  ],
+  "misconceptions": [
+    "`recursive_directory_iterator` 不是只遍历当前目录第一层的普通迭代器。",
+    "递归遍历目录不等于递归读取每个文件的内容；它主要遍历目录项。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`recursive_directory_iterator` 的主要用途是什么？",
+      "a": "递归遍历一个目录及其子目录中的目录项。"
+    },
+    {
+      "q": "递归目录迭代器遍历的对象主要是什么？",
+      "a": "目录项，通常可表示为 `directory_entry`，而不是文件内容本身。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "目录与子目录概念",
+    "C++ 迭代器基本概念",
+    "std::filesystem::directory_entry"
+  ],
+  "source_pages": [
+    429,
+    432
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 std::filesystem recursive_directory_iterator directory_entry recursive traversal",
+  "concept_id": "567_recursive_directory_iterator_递归遍历目录",
+  "_chunk_pages": [
+    429,
+    432
+  ]
+}

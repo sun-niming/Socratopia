@@ -1,0 +1,39 @@
+{
+  "title": "开启严格模式",
+  "definition": "为整个脚本文件开启严格模式时，必须在所有语句之前放置特定语句\"use strict\";或'use strict';。为某个函数开启严格模式时，必须把这句放在函数体所有语句之前。",
+  "key_points": [
+    "脚本级严格模式必须写在所有语句之前",
+    "函数级严格模式必须写在函数体所有语句之前",
+    "语句形式可以是双引号或单引号"
+  ],
+  "examples": [
+    "\"use strict\";\nvar x = 1;",
+    "function f(){ 'use strict'; var x = 1; }"
+  ],
+  "misconceptions": [
+    "use strict可以写在任意位置",
+    "函数里写了use strict就会自动影响整个脚本",
+    "严格模式声明后可以放在代码末尾"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何为整个脚本开启严格模式？",
+      "a": "在所有语句之前放置\"use strict\";或'use strict';。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "ECMAScript 5严格模式"
+  ],
+  "source_pages": [
+    260,
+    260
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "361_开启严格模式",
+  "_chunk_pages": [
+    257,
+    260
+  ]
+}

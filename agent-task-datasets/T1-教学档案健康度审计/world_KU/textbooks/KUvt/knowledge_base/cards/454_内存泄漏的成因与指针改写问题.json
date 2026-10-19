@@ -1,0 +1,52 @@
+{
+  "title": "内存泄漏的成因与指针改写问题",
+  "definition": "内存泄漏是指程序分配了动态内存，却没有在适当时候释放该内存，导致程序运行期间可用内存不断减少。一个常见原因是：指向动态对象的唯一指针被改写为指向另一个对象，原对象失去可达指针，从而几乎无法再删除。",
+  "key_points": [
+    "每个类内部的 \\texttt{new} 对应一个 \\texttt{delete}，并不能保证整个程序没有内存泄漏。",
+    "如果保存动态对象地址的指针被重新赋值，而旧对象没有先释放，旧对象就会泄漏。",
+    "通过引用传递指针，例如 \\texttt{Simple*&}，允许函数修改调用者的指针；调用者如果不了解这一行为，就可能造成泄漏。",
+    "原文示例中，\\texttt{doSomething(Simple*& outSimplePtr)} 将指针改为指向新的 \\texttt{Simple} 对象，却没有删除旧对象；\\texttt{main()} 最后的 \\texttt{delete simplePtr} 只能释放第二个对象。",
+    "教材建议生产代码中使用智能指针，而不是原始指针。"
+  ],
+  "examples": [
+    "原文逻辑可概括为：\n\\texttt{Simple* simplePtr \\{ new Simple\\{\\} \\};}\n\\texttt{doSomething(simplePtr);}\n\\texttt{delete simplePtr;}\n如果 \\texttt{doSomething} 内部把 \\texttt{simplePtr} 改为指向新对象，却没有释放旧对象，那么最后的 \\texttt{delete} 只释放新对象，旧对象发生泄漏。",
+    "若指针 $p$ 先指向对象 $A$，再执行使其指向对象 $B$ 的赋值，而没有先执行对 $A$ 的释放，则对象 $A$ 可能成为无法访问的泄漏对象：\n$$p\\colon A\\ \\longrightarrow\\ B$$"
+  ],
+  "misconceptions": [
+    "函数中的每个 \\texttt{new} 都对应一个 \\texttt{delete}，不代表被其他函数遗失的对象一定会被释放。",
+    "函数参数写成指针引用并不只是传递一个地址；函数可以通过它修改调用者保存的指针。",
+    "删除当前指针指向的新对象不能补救已经失去指针的旧对象。",
+    "内存泄漏不一定会立刻导致错误，程序可能先正常运行，随后占用的内存越来越多。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "什么是内存泄漏？",
+      "a": "程序分配了动态内存，但没有释放它，导致这部分内存持续被占用并逐渐减少可用内存，这种情况称为内存泄漏。"
+    },
+    {
+      "q": "为什么原文示例中的最后一个 \\texttt{delete simplePtr} 不能释放所有内存？",
+      "a": "因为函数已经把 \\texttt{simplePtr} 改为指向第二个对象，原来的第一个对象失去了指针；最后的 \\texttt{delete} 只能释放第二个对象。"
+    },
+    {
+      "q": "为什么指针的非 const 引用参数值得警惕？",
+      "a": "因为函数可以通过该引用重新赋值调用者的指针。如果旧对象没有先释放，就可能产生内存泄漏。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "动态内存与 \\texttt{new}/\\texttt{delete}",
+    "指针引用",
+    "智能指针"
+  ],
+  "source_pages": [
+    214,
+    215
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "454_内存泄漏的成因与指针改写问题",
+  "_chunk_pages": [
+    213,
+    216
+  ]
+}

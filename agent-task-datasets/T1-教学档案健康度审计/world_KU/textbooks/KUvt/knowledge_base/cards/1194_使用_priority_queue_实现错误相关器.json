@@ -1,0 +1,50 @@
+{
+  "title": "使用 priority_queue 实现错误相关器",
+  "definition": "错误相关器可以使用 priority_queue 按错误事件的优先级处理错误，使优先级最高的错误总是最先被处理。Error 类保存优先级和错误描述，并通过比较运算符按优先级进行比较；ErrorCorrelator 使用 priority_queue<Error> 保存错误。添加错误时调用 push()，获取下一个错误时先检查队列是否为空，再通过 top() 保存队首错误并调用 pop() 删除它；队列为空时抛出 out_of_range 异常。",
+  "key_points": [
+    "Error 至少包含错误优先级和错误描述。",
+    "Error 的比较操作根据 getPriority() 比较优先级。",
+    "ErrorCorrelator::addError() 将错误加入 priority_queue。",
+    "ErrorCorrelator::getError() 返回当前优先级最高的错误。",
+    "没有更多错误时，getError() 抛出 out_of_range 异常。"
+  ],
+  "examples": [
+    "错误事件优先级为 $3$、$1$、$10$ 时，处理顺序为 $10 \\rightarrow 3 \\rightarrow 1$。",
+    "典型处理流程：try { Error e { ec.getError() }; } catch (const out_of_range&) { /* 已处理完所有错误 */ }"
+  ],
+  "misconceptions": [
+    "误以为错误会按加入顺序处理；实际按优先级处理。",
+    "误以为 priority_queue 的 pop() 可以直接得到被删除的 Error；实际必须先用 top() 保存。",
+    "误以为 getError() 在没有错误时返回一个空 Error；教材示例中它会抛出 out_of_range。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "ErrorCorrelator 为什么使用 priority_queue 而不是普通 queue？",
+      "a": "因为它需要优先处理优先级最高的错误，而普通 queue 只能保证先进先出。"
+    },
+    {
+      "q": "当 ErrorCorrelator 中没有待处理错误时，getError() 做什么？",
+      "a": "抛出 out_of_range 异常。"
+    },
+    {
+      "q": "优先级为 3、1、10 的三个错误将按什么顺序处理？",
+      "a": "按优先级 10、3、1 的顺序处理。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "priority_queue 的优先级语义",
+    "异常处理"
+  ],
+  "source_pages": [
+    578,
+    579
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1194_使用_priority_queue_实现错误相关器",
+  "_chunk_pages": [
+    577,
+    580
+  ]
+}

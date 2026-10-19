@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "pipelineVersion": "post-class-v2",
+  "sourceHash": "sha256:7f76bedc65df95c7b7e736274969d0e13dc92e8e60aeacec0f11442daf211f36",
+  "sourceMessageCount": 70,
+  "chunkCount": 5,
+  "score": 0.6066,
+  "metrics": {
+    "topicCoverage": 1,
+    "learnerEvidenceCoverage": 0.95,
+    "explanationCoverage": 0.07692307692307693,
+    "sourceIntegrity": 1,
+    "reviewQuestionDiversity": 1,
+    "structureValidity": 1,
+    "lengthFitness": 0.9546666666666667,
+    "duplicationRatio": 0,
+    "unsupportedTopicRatio": 0,
+    "lengthChars": 2864,
+    "conceptCount": 26,
+    "evidenceTopicCount": 27,
+    "chunkCompleteness": 0.7142857142857143
+  },
+  "warnings": [
+    "scored against 71% of the lesson's slices"
+  ],
+  "decision": "degraded"
+}

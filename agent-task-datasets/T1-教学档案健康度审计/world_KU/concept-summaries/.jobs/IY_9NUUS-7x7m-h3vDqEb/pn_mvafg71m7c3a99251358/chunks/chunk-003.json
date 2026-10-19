@@ -1,0 +1,190 @@
+{
+  "chunkId": "chunk-003",
+  "messageRange": [
+    28,
+    37
+  ],
+  "topics": [
+    {
+      "name": "= 属于 FOLLOW(R) 的两条推导",
+      "facts": [
+        "由推导 S⇒L=R⇒*R=R 可知句型 *R=R 中开头的 R 后面紧跟 =，所以 =∈FOLLOW(R)。",
+        "由 S→L=R 得 =∈FOLLOW(L)。",
+        "由 S→L=R 中 R 在末尾，得 $∈FOLLOW(R)。",
+        "由 L→*R 中 R 在右部末尾，得 FOLLOW(L)⊆FOLLOW(R)，因此 =∈FOLLOW(R)。"
+      ],
+      "examples": [
+        "S⇒L=R⇒*R=R",
+        "S→L=R→*R=R"
+      ],
+      "sourceMessageIndexes": [
+        29
+      ]
+    },
+    {
+      "name": "I_2 中的移入-归约冲突",
+      "facts": [
+        "I_2={S→L·=R, R→L·}。",
+        "S→L·=R 主张在 = 上移入。",
+        "R→L· 主张在 FOLLOW(R) 上归约，而 =∈FOLLOW(R)。",
+        "同一个 = 上移入与归约冲突，但教材说该文法无二义。",
+        "SLR 只根据当前状态 I_2 和静态集 FOLLOW(R) 做决定。",
+        "FOLLOW(R)={=,$} 是全文法近似，眼前这个 R 后面真正能跟的只有 $。"
+      ],
+      "examples": [
+        "I_2={S→L·=R, R→L·}",
+        "S→L·=R（点后是 =）↔ R→L·（体已完成）"
+      ],
+      "sourceMessageIndexes": [
+        29,
+        31
+      ]
+    },
+    {
+      "name": "规范 LR(1) 项的向前看符号",
+      "facts": [
+        "规范 LR(1) 项写成 [A→α·β, a]，a 是终结符或 $。",
+        "a 意为在这个项所处的上下文里 A 后面可能紧跟 a。",
+        "同样的项在不同上下文可以配不同的 a。",
+        "LR(1) 把全局近似的 FOLLOW 换成每个项各自的精确向前看符号。",
+        "在 I_2 的 LR(1) 写法下，[S→L·=R, $] 与 [R→L·, $]，捣乱的 = 不在归约项中。"
+      ],
+      "examples": [
+        "[A→α·β, a]",
+        "[S→L·=R, $]",
+        "[R→L·, $]"
+      ],
+      "sourceMessageIndexes": [
+        31,
+        33
+      ]
+    },
+    {
+      "name": "LR(1) 闭包规则与 FIRST 计算",
+      "facts": [
+        "LR(1) 闭包规则：项 [A→α·Bβ, a] ⇒ 对每个 B→γ、每个 b∈FIRST(βa)，加入 [B→·γ, b]。",
+        "新项的向前看符号不是照抄原来的 a，而是算 FIRST(βa)。",
+        "只有 β 能推空时，a 才露出来接手。",
+        "开始增广项是 [S'→·S, $]，闭包要展开 S 的两条产生式 S→L=R、S→R。",
+        "对 [S→·L=R, $] 展开 L，β==R，FIRST(=R $)={=}。",
+        "因为 β 推不出空，两个新项都带 =： [L→·*R, =] 和 [L→·id, =]。",
+        "从 [S→·R, $] 展开 R 得 [R→·L, $]，其中 L 在产生式末尾，即 β=ε。"
+      ],
+      "examples": [
+        "[A→α·Bβ, a] ⇒ [B→·γ, b], b∈FIRST(βa)",
+        "[S'→·S, $]",
+        "[S→·L=R, $]",
+        "FIRST(=R $)={=}",
+        "[L→·*R, =]",
+        "[L→·id, =]",
+        "[R→·L, $]",
+        "β=ε"
+      ],
+      "sourceMessageIndexes": [
+        33,
+        35
+      ]
+    }
+  ],
+  "learnerEvidence": [
+    {
+      "kind": "confusion",
+      "content": "学习者问：从哪里看出 = 落在 FOLLOW(R) 中。",
+      "sourceMessageIndexes": [
+        28
+      ]
+    },
+    {
+      "kind": "correct",
+      "content": "学习者答：分不清栈上的 L 是走在 S→L=R 半路上，还是孤零零一个 R→L，需要上下文。",
+      "sourceMessageIndexes": [
+        30
+      ]
+    },
+    {
+      "kind": "correct",
+      "content": "学习者在 LR(1) 新写法下判断输入 = 撞上该状态时是移入，冲突不在。",
+      "sourceMessageIndexes": [
+        32
+      ]
+    },
+    {
+      "kind": "misconception",
+      "content": "学习者对两个 [L→⋯] 新项的向前看符号答为 = 和 $，多给了 $。",
+      "sourceMessageIndexes": [
+        34
+      ]
+    }
+  ],
+  "keyInsights": [
+    {
+      "content": "学习者把 SLR 冲突的病因概括为“上下文”，阿格莱雅确认这正点在病因上。",
+      "sourceMessageIndexes": [
+        30,
+        37
+      ]
+    },
+    {
+      "content": "学习者判断在规范 LR(1) 下输入 = 只触发移入，冲突消失。",
+      "sourceMessageIndexes": [
+        32
+      ]
+    }
+  ],
+  "openQuestions": [
+    {
+      "content": "从 [S→·R, $] 来的两个 [L→⋯] 项该带什么向前看符号？为什么换了个来源，凭证就变了？",
+      "sourceMessageIndexes": [
+        35,
+        37
+      ]
+    }
+  ],
+  "reviewCandidates": [
+    {
+      "question": "为什么 =∈FOLLOW(R)？",
+      "answer": "一方面由推导 S⇒L=R⇒*R=R，句型 *R=R 中开头的 R 后紧跟 =；另一方面由 S→L=R 得 =∈FOLLOW(L)，由 L→*R 得 FOLLOW(L)⊆FOLLOW(R)，所以 =∈FOLLOW(R)。",
+      "sourceMessageIndexes": [
+        29
+      ]
+    },
+    {
+      "question": "I_2={S→L·=R, R→L·} 中的移入-归约冲突是如何产生的？",
+      "answer": "S→L·=R 主张在 = 上移入；R→L· 主张在 FOLLOW(R) 上归约，而 =∈FOLLOW(R)，于是同一个 = 上移入与归约冲突。",
+      "sourceMessageIndexes": [
+        29,
+        31
+      ]
+    },
+    {
+      "question": "规范 LR(1) 项 [A→α·β, a] 中的 a 表示什么？",
+      "answer": "a 是终结符或 $，表示在这个项所处的上下文里，A 后面可能紧跟 a。",
+      "sourceMessageIndexes": [
+        31
+      ]
+    },
+    {
+      "question": "在 I_2 的 LR(1) 写法下，为什么输入 = 时冲突消失？",
+      "answer": "两项变为 [S→L·=R, $] 和 [R→L·, $]，只有点正指着 = 的移入项管 =，揣 $ 的归约项够不着 =，因此只做移入，冲突不在。",
+      "sourceMessageIndexes": [
+        31,
+        33
+      ]
+    },
+    {
+      "question": "LR(1) 闭包规则中，新项 [B→·γ, b] 的 b 如何确定？",
+      "answer": "对每个 b∈FIRST(βa) 加入新项；不是照抄 a，而是先算 FIRST(βa)，只有 β 能推空时 a 才露出来接手。",
+      "sourceMessageIndexes": [
+        33
+      ]
+    },
+    {
+      "question": "对 [S→·L=R, $] 展开 L，两个新项各带什么向前看符号？",
+      "answer": "都带 =。因为 β==R，FIRST(=R $)={=}，且 β 推不出空，所以 [L→·*R, =] 和 [L→·id, =]。",
+      "sourceMessageIndexes": [
+        33,
+        35
+      ]
+    }
+  ]
+}

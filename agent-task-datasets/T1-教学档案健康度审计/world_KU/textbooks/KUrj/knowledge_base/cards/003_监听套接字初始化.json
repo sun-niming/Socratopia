@@ -1,0 +1,45 @@
+{
+  "title": "监听套接字初始化",
+  "definition": "创建 TCP 监听 socket 的基本流程是：先调用 `socket(AF_INET, SOCK_STREAM, 0)` 创建套接字，再设置 `SO_REUSEADDR`，然后填充 `sockaddr_in`，最后执行 `bind()` 和 `listen()`，成功后返回监听 fd。",
+  "key_points": [
+    "`socket(AF_INET, SOCK_STREAM, 0)` 创建 IPv4 TCP 套接字。",
+    "`setsockopt(..., SO_REUSEADDR, ...)` 可减少端口占用带来的调试麻烦。",
+    "`bind()` 把监听 fd 绑定到本机地址和端口。",
+    "`listen(listen_fd, 64)` 让套接字进入监听状态。",
+    "函数返回值应是监听 fd。"
+  ],
+  "examples": [
+    "`int listen_fd = socket(AF_INET, SOCK_STREAM, 0);`",
+    "`bind(listen_fd, (struct sockaddr *)&addr, sizeof(addr))`",
+    "`listen(listen_fd, 64)`"
+  ],
+  "misconceptions": [
+    "`listen()` 不是接收客户端数据，而是把套接字变成监听状态。",
+    "函数最终返回的应该是监听 fd，不是某个客户端连接 fd。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "监听 socket 初始化后，返回的是什么？",
+      "a": "返回监听 fd。"
+    },
+    {
+      "q": "`SO_REUSEADDR` 的作用是什么？",
+      "a": "减少端口被占用时带来的调试痛苦。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "TCP 连接常用系统调用"
+  ],
+  "source_pages": [
+    13,
+    16
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "003_监听套接字初始化",
+  "_chunk_pages": [
+    13,
+    16
+  ]
+}

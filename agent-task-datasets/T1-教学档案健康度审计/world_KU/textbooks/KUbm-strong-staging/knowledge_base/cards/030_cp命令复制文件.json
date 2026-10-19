@@ -1,0 +1,40 @@
+{
+  "title": "cp命令复制文件",
+  "definition": "cp 用于复制文件或目录，教材给出的基本格式是：cp 源文件（列表） 目标文件（目录）。其中源位置可以是一个文件列表，目标可以是目标文件或目标目录。",
+  "key_points": [
+    "基本形式：cp 源文件（列表） 目标文件（目录）",
+    "可一次复制多个源文件到目标目录",
+    "这是目录操作中的文件复制命令"
+  ],
+  "examples": [
+    "cp file1.txt backup/",
+    "cp a.txt b.txt docs/"
+  ],
+  "misconceptions": [
+    "把 cp 只理解为“只能复制单个文件”是不对的，教材明确写了“源文件（列表）”",
+    "忽略目标位置类型容易出错，目标既可能是文件也可能是目录"
+  ],
+  "qa_pairs": [
+    {
+      "q": "cp 命令在教材中的作用是什么？",
+      "a": "用于文件复制。"
+    },
+    {
+      "q": "教材给出的 cp 基本格式是什么？",
+      "a": "cp 源文件（列表） 目标文件（目录）。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [],
+  "source_pages": [
+    17,
+    20
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "030_cp命令复制文件",
+  "_chunk_pages": [
+    17,
+    20
+  ]
+}

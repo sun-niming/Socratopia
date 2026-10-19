@@ -1,0 +1,44 @@
+{
+  "title": "经典C locale与用户界面locale的选择",
+  "definition": "C++的默认locale通常是经典locale，而不是用户当前的locale。经典locale使用ANSI C风格的约定，类似于U.S. English但存在细微差异；例如输出数字时通常不添加标点。向文件写入并由程序再次读取的数据，教材建议使用中性的C locale，以便稳定解析；面向用户界面显示的数据，则建议使用用户locale进行格式化。",
+  "key_points": [
+    "经典locale通常写作 `locale { \"C\" }`。",
+    "使用C locale输出数字时，教材示例中的 `32767` 显示为 `32767`，不带千位分隔符。",
+    "文件中供程序重新读取的数据应尽量采用中性、稳定的C locale格式。",
+    "用户界面中的数据应根据用户locale显示，以符合用户习惯。"
+  ],
+  "examples": [
+    "`wcout.imbue(locale { \"C\" });`",
+    "在C locale下：`wcout << 32767 << endl;` 输出 `32767`。"
+  ],
+  "misconceptions": [
+    "经典C locale不等于用户当前所在地区的locale。",
+    "用于机器读写的文件格式与用于用户界面显示的格式，选择locale的目标不同。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么程序写入后还要自行读取的文件通常应使用C locale？",
+      "a": "因为C locale较中性且格式稳定；若使用用户locale，数字等数据可能包含本地化标点，增加后续解析困难。"
+    },
+    {
+      "q": "用户界面显示数字时应使用哪种locale？",
+      "a": "应根据用户的locale进行格式化，以符合用户的地区和语言习惯。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "locale与facet",
+    "将locale关联到I/O流"
+  ],
+  "source_pages": [
+    664,
+    664
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1389_经典c_locale与用户界面locale的选择",
+  "_chunk_pages": [
+    661,
+    664
+  ]
+}

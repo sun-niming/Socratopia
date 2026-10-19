@@ -1,0 +1,51 @@
+{
+  "title": "Math对象提供数学常量和函数",
+  "definition": "JavaScript 的 Math 对象提供数学常量和数学函数。原文列出的成员包括 Math.PI 圆周率，以及用于三角函数、平方根、幂、绝对值、随机数和取整等计算的方法。",
+  "key_points": [
+    "Math.PI 表示圆周率。",
+    "Math.tan(n) 计算 n 的正切值。",
+    "Math.sin(n) 计算 n 的正弦值。",
+    "Math.sqrt(n) 计算 n 的平方根。",
+    "Math.pow(n, m) 计算 n 的 m 次方。",
+    "Math.abs(n) 计算 n 的绝对值。",
+    "Math.random() 产生一个 [0,1) 的随机数。",
+    "Math.ceil(n)、Math.floor(n)、Math.round(n) 用于不同方式的取整。"
+  ],
+  "examples": [
+    "Math.PI // 圆周率\nMath.sqrt(9) // 计算 9 的平方根\nMath.pow(2, 3) // 计算 2 的 3 次方\nMath.abs(-5) // 计算 -5 的绝对值\nMath.random() // 产生一个 [0,1) 的随机数"
+  ],
+  "misconceptions": [
+    "误以为 Math 是通过 new Math() 创建的普通对象；原文只说明 Math 对象直接提供常量与函数，使用形式如 Math.PI、Math.sqrt(n)。",
+    "误以为 Math.random() 会产生包含 1 的随机数；原文说明范围是 [0,1)，即包含 0、不包含 1。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "Math.PI 表示什么？",
+      "a": "表示圆周率。"
+    },
+    {
+      "q": "Math.pow(n, m) 的作用是什么？",
+      "a": "计算 n 的 m 次方。"
+    },
+    {
+      "q": "Math.random() 产生的随机数范围是什么？",
+      "a": "产生一个 [0,1) 的随机数。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "JavaScript对象",
+    "基本数学运算"
+  ],
+  "source_pages": [
+    325,
+    328
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "438_math对象提供数学常量和函数",
+  "_chunk_pages": [
+    325,
+    328
+  ]
+}

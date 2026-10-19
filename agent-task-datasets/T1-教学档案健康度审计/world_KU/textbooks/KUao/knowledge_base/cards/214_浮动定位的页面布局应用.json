@@ -1,0 +1,44 @@
+{
+  "title": "浮动定位的页面布局应用",
+  "definition": "浮动定位可用于页面布局。教材图示展示了一个典型页面结构：顶部为header，其下为nav，中间区域包含左侧menu、中间main、右侧aside，底部为footer。该布局体现了浮动可用于让多个区域在水平方向并列排列。",
+  "key_points": [
+    "浮动定位可用于布局应用。",
+    "图示页面包含header、nav、menu、main、aside、footer等区域。",
+    "中间区域的menu、main、aside呈水平并列布局。",
+    "底部footer位于页面底部，header和nav位于页面顶部。"
+  ],
+  "examples": [
+    "页面结构示意：header在最上方，nav在header下方；主体部分从左到右依次为menu、main、aside；footer在最下方。"
+  ],
+  "misconceptions": [
+    "误以为浮动只能用于文字环绕图片；教材图示表明浮动也可用于页面区域布局。",
+    "误以为所有页面区域都必须垂直排列；图示中的menu、main、aside可以横向并列。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "第148页图示中的页面主体部分包含哪些并列区域？",
+      "a": "左侧menu、中间main、右侧aside。"
+    },
+    {
+      "q": "浮动定位在第148页被展示为哪类应用？",
+      "a": "布局应用。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "浮动定位",
+    "CSS盒模型",
+    "页面布局基本结构"
+  ],
+  "source_pages": [
+    145,
+    148
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "214_浮动定位的页面布局应用",
+  "_chunk_pages": [
+    145,
+    148
+  ]
+}

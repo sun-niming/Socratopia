@@ -1,0 +1,38 @@
+{
+  "title": "send_error错误响应",
+  "definition": "`send_error` 用于构造并发送 HTTP 错误响应。它会把状态码、原因短语和错误信息放入 HTML body，再发送包含状态行、`Content-Type: text/html; charset=utf-8`、`Content-Length` 和 `Connection: close` 等字段的响应头。",
+  "key_points": [
+    "错误响应也要有完整的状态行、响应头和正文",
+    "`Content-Type` 设为 `text/html; charset=utf-8`",
+    "`Content-Length` 需要与 body 长度一致，连接通常关闭"
+  ],
+  "examples": [
+    "`snprintf(body, sizeof(body), \"<html><body><h1>%d %s</h1><p>%s</p></body></html>\", status, reason, message);`",
+    "`snprintf(header, sizeof(header), \"HTTP/1.1 %d %s\\r\\nContent-Type: text/html; charset=utf-8\\r\\nContent-Length: %zu\\r\\nConnection: close\\r\\n\\r\\n\", status, reason, strlen(body));`"
+  ],
+  "misconceptions": [
+    "认为错误页只要返回文本就行，不需要 HTTP 头",
+    "认为 `Content-Length` 可以随便写"
+  ],
+  "qa_pairs": [
+    {
+      "q": "send_error 里为什么要同时发送 body 和 header？",
+      "a": "因为 HTTP 错误响应也必须遵循响应格式：状态行、响应头、空行和正文都要完整。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "HTTP响应"
+  ],
+  "source_pages": [
+    53,
+    56
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "089_send_error错误响应",
+  "_chunk_pages": [
+    53,
+    56
+  ]
+}

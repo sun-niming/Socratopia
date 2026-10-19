@@ -1,0 +1,40 @@
+{
+  "title": "userdel 删除用户",
+  "definition": "教材在“用户管理”中给出删除用户命令：userdel [-r] 用户名。按教材内容，userdel 用于删除指定用户，命令格式中可带 -r 选项。教材未进一步解释 -r 的作用。",
+  "key_points": [
+    "用途：删除用户",
+    "命令格式：userdel [-r] 用户名",
+    "教材给出可选项 -r，但未说明其含义"
+  ],
+  "examples": [
+    "命令格式示例：userdel 用户名",
+    "命令格式示例：userdel [-r] 用户名"
+  ],
+  "misconceptions": [
+    "不要把 userdel 与 useradd 混淆；前者删除用户，后者添加用户",
+    "不要自行补充 -r 的作用为教材原文结论；原文未解释"
+  ],
+  "qa_pairs": [
+    {
+      "q": "教材中删除用户使用什么命令？",
+      "a": "userdel。"
+    },
+    {
+      "q": "教材给出的 userdel 使用格式是什么？",
+      "a": "userdel [-r] 用户名。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [],
+  "source_pages": [
+    25,
+    28
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "054_userdel_删除用户",
+  "_chunk_pages": [
+    25,
+    28
+  ]
+}

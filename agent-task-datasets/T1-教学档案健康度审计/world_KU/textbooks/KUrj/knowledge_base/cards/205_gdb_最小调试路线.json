@@ -1,0 +1,55 @@
+{
+  "title": "GDB 最小调试路线",
+  "definition": "调试该项目时，至少要会用 `gdb` 在关键函数上打断点并运行程序。典型流程是启动 `gdb ./webserver`，在 `main`、`create_listen_socket`、`handle_client` 等函数处设置断点，然后用带参数的 `run` 命令启动程序，必要时用 `print` 查看变量，再用 `continue` 继续执行。根据故障位置不同，应在不同函数处打断点排查。",
+  "key_points": [
+    "先用 `gdb ./webserver` 启动调试。",
+    "可在 `main`、`create_listen_socket`、`handle_client` 等关键函数打断点。",
+    "可用 `run -p 8080 -r ./www -i index.html` 传入运行参数。",
+    "可用 `print config.port` 查看变量值。",
+    "若“请求来了但没有响应”，优先在 `handle_client` 打断点；若“文件打不开”，在 `send_static_file` 打断点；若“路径安全判断不对”，在 `validate_path` 或 `is_under_root` 打断点。"
+  ],
+  "examples": [
+    "`gdb ./webserver`",
+    "`(gdb) break main`",
+    "`(gdb) break create_listen_socket`",
+    "`(gdb) break handle_client`",
+    "`(gdb) run -p 8080 -r ./www -i index.html`",
+    "`(gdb) print config.port`",
+    "`(gdb) continue`"
+  ],
+  "misconceptions": [
+    "调试时只要在 `main` 打一个断点就够了。",
+    "`gdb` 只能看崩溃，不能用来排查请求处理流程。",
+    "断点必须打在函数入口以外的位置。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如果请求来了但没有响应，应该优先在哪个函数打断点？",
+      "a": "`handle_client`。"
+    },
+    {
+      "q": "如果文件打不开，应该在哪个函数打断点？",
+      "a": "`send_static_file`。"
+    },
+    {
+      "q": "如果路径安全判断不对，应检查哪些函数？",
+      "a": "`validate_path` 或 `is_under_root`。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "GDB基础",
+    "函数调用与调试基础"
+  ],
+  "source_pages": [
+    125,
+    128
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "205_gdb_最小调试路线",
+  "_chunk_pages": [
+    125,
+    128
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "title": "variant 的默认构造与 std::monostate",
+  "definition": "默认构造 std::variant 时，它包含第一个候选类型的默认构造值。因此，第一个候选类型必须是默认可构造的；如果第一个类型不能默认构造，variant 本身也不能按这种方式默认构造。可以把 std::monostate 放在候选类型首位，作为一个可默认构造的空替代类型。",
+  "key_points": [
+    "默认构造的 variant 保存第一个候选类型的默认构造值。",
+    "如果第一个候选类型没有默认构造函数，直接默认构造 variant 会编译失败。",
+    "std::monostate 是适合作为首个候选类型的空类型，可用于使 variant 能够默认构造。"
+  ],
+  "examples": [
+    "class Foo { public: Foo() = delete; Foo(int) {} };",
+    "variant<Foo, Bar> v; 无法编译，因为 Foo 不是默认可构造的。",
+    "variant<monostate, Foo, Bar> v; 可用于默认构造 variant。"
+  ],
+  "misconceptions": [
+    "只要候选类型中有一个类型可默认构造，variant 就一定能默认构造；实际上默认构造主要要求第一个候选类型可默认构造。",
+    "std::monostate 不是要存储的业务数据，而是表示空替代状态的类型。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "默认构造 variant<int, string, float> v; 后，v 保存哪种类型的值？",
+      "a": "它保存第一个候选类型 int 的默认构造值，即整数 0。"
+    },
+    {
+      "q": "为什么 variant<Foo, Bar> 在 Foo 和 Bar 都删除默认构造函数时无法默认构造？",
+      "a": "因为默认构造 variant 会尝试构造第一个类型 Foo 的默认值，而 Foo 不可默认构造。"
+    },
+    {
+      "q": "如何让包含不可默认构造类型的 variant 仍能默认构造？",
+      "a": "将 std::monostate 放在第一个候选类型的位置，例如 variant<monostate, Foo, Bar>。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "std::variant 的含义与类型集合"
+  ],
+  "source_pages": [
+    706,
+    706
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1466_variant_的默认构造与_std_monostate",
+  "_chunk_pages": [
+    705,
+    708
+  ]
+}

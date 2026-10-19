@@ -1,0 +1,51 @@
+{
+  "title": "throw 与 throw e 的重新抛出区别",
+  "definition": "在异常处理器中，单独写 throw; 表示重新抛出当前正在处理的原异常，而写 throw e; 则会根据表达式 e 创建并抛出一个新的异常对象。示例使用 throw; 将同一个 invalid_argument 异常从 f() 继续传递到 main()。",
+  "key_points": [
+    "函数 g() 抛出 std::invalid_argument。",
+    "函数 f() 捕获 const std::invalid_argument& e 后输出消息，再执行 throw;。",
+    "throw; 不需要写异常对象，表示重新抛出当前异常。",
+    "main() 再次捕获该异常，并输出相同的异常消息。",
+    "教材同时列出 throw e;，用于说明它与单独的 throw; 不同；不能把二者当作同一种写法。"
+  ],
+  "examples": [
+    "原文示例：void g() { throw std::invalid_argument{\"Some exception\"}; }",
+    "函数 f() 的重新抛出：void f() { try { g(); } catch (const std::invalid_argument& e) { std::cout << \"caught in f: \" << e.what() << std::endl; throw; } }",
+    "main() 捕获后输出：caught in f: Some exception；caught in main: Some exception。"
+  ],
+  "misconceptions": [
+    "throw; 不是抛出一个空异常，而是重新抛出当前正在处理的异常。",
+    "在 catch 中写 throw e; 并不等同于单独写 throw;；前者是用 e 作为表达式重新抛出一个异常对象，后者才是原异常的直接重新抛出。",
+    "异常被 f() 重新抛出后，main() 仍然可以继续捕获它。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "在 catch 块中单独写 throw; 的作用是什么？",
+      "a": "重新抛出当前正在处理的原异常，使异常继续向调用者传播。"
+    },
+    {
+      "q": "示例中 g()、f() 和 main() 的异常传播过程是什么？",
+      "a": "g() 抛出 invalid_argument，f() 捕获并输出后用 throw; 重新抛出，main() 再捕获并输出该异常消息。"
+    },
+    {
+      "q": "throw; 与 throw e; 是否完全相同？",
+      "a": "不完全相同。throw; 表示直接重新抛出当前原异常，而 throw e; 是使用 e 表达式重新抛出一个异常对象。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++ try/catch异常处理",
+    "异常对象与引用捕获"
+  ],
+  "source_pages": [
+    453,
+    456
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "596_throw_与_throw_e_的重新抛出区别",
+  "_chunk_pages": [
+    453,
+    456
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "title": "继承层次中的同级类",
+  "definition": "同一个基类可以有多个直接派生类。具有共同基类的派生类彼此称为同级类（sibling）。例如 `Derived1` 和 `Derived2` 都继承自 `Base`，因此二者是同级类。",
+  "key_points": [
+    "同级类共享同一个基类，但它们彼此不是继承关系。",
+    "一个派生类不一定是某个基类唯一的派生类。",
+    "继承层次可以表示为树状结构：一个基类下可以有多个派生分支。"
+  ],
+  "examples": [
+    "`class Derived1 : public Base { };` 与 `class Derived2 : public Base { };` 中，`Derived1` 和 `Derived2` 是同级类。"
+  ],
+  "misconceptions": [
+    "同级类之间不是父子关系，`Derived1` 不会因为与 `Derived2` 共享基类而继承 `Derived2` 的成员。",
+    "同一个基类可以拥有多个派生类，不存在一个基类只能有一个子类的限制。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "什么是继承中的同级类？",
+      "a": "同级类是继承自同一个基类的多个派生类，例如共同继承自 `Base` 的 `Derived1` 和 `Derived2`。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "继承声明语法",
+    "基类与派生类"
+  ],
+  "source_pages": [
+    303,
+    304
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "623_继承层次中的同级类",
+  "_chunk_pages": [
+    301,
+    304
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "title": "函数模板参数顺序与默认模板实参",
+  "definition": "函数模板的模板参数可以重新排列，以便在调用时显式指定某个参数而让其他参数继续推导。例如，将返回类型参数放在能够推导的参数之间时，可以通过位置显式指定返回类型，并由函数实参推导其余类型。模板类型参数还可以设置默认类型，使调用时可以省略该模板实参。",
+  "key_points": [
+    "模板实参按位置匹配，因此模板参数的声明顺序会影响调用写法。",
+    "模板参数可以设置默认类型，例如 $typename\\ RetType = long\\ long$。",
+    "当模板参数具有默认值且其他参数可以从函数实参推导时，可以省略模板实参列表。"
+  ],
+  "examples": [
+    "template<typename T1, typename RetType, typename T2>\\nRetType add(const T1& t1, const T2& t2) { return t1 + t2; }\\n\\nauto result { add<int, long long>(1, 2) };",
+    "设置返回类型默认值：\\ntemplate<typename RetType = long long, typename T1, typename T2>\\nRetType add(const T1& t1, const T2& t2) { return t1 + t2; }\\n\\nauto result { add(1, 2) };"
+  ],
+  "misconceptions": [
+    "默认模板实参只在调用者省略相应模板实参时生效；如果显式提供了该位置的模板实参，就会使用显式值。",
+    "模板参数的顺序不能随意忽略，因为显式模板实参始终按声明顺序对应。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么改变模板参数顺序可能改变函数模板的调用形式？",
+      "a": "因为显式模板实参按模板参数声明顺序匹配；改变顺序后，同一个显式实参可能对应不同的模板参数。"
+    },
+    {
+      "q": "如果 RetType 的默认值是 long long，并且 T1、T2 可由函数实参推导，调用 add(1, 2) 时返回类型是什么？",
+      "a": "返回类型使用 RetType 的默认值，即 long long。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "函数模板显式指定模板实参"
+  ],
+  "source_pages": [
+    397,
+    398
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "513_函数模板参数顺序与默认模板实参",
+  "_chunk_pages": [
+    397,
+    400
+  ]
+}

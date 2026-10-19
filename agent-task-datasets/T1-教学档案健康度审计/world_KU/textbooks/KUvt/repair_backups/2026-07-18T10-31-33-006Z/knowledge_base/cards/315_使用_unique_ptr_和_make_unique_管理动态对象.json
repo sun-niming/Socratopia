@@ -1,0 +1,53 @@
+{
+  "title": "使用 unique_ptr 和 make_unique 管理动态对象",
+  "definition": "可以使用 std::unique_ptr<SpreadsheetCell> 管理动态创建的 SpreadsheetCell，从而用自动资源管理替代手动 delete。原文示例使用 auto myCellp { make_unique<SpreadsheetCell>() }; 创建 unique_ptr，并通过 -> 访问所管理对象的成员。原文还指出，它等价于显式写出 unique_ptr<SpreadsheetCell> myCellp { new SpreadsheetCell { } };。",
+  "key_points": [
+    "make_unique<SpreadsheetCell>() 创建 SpreadsheetCell，并返回管理它的 unique_ptr。",
+    "使用 auto 可以让编译器推导 myCellp 的类型。",
+    "unique_ptr 所管理的对象使用 -> 访问成员，例如 myCellp->setValue(3.7)。",
+    "原文将 make_unique 写法与 unique_ptr 包装 new 的写法列为等价形式。",
+    "与裸指针示例不同，原文的 unique_ptr 示例没有手动调用 delete。"
+  ],
+  "examples": [
+    "代码示例：auto myCellp { std::make_unique<SpreadsheetCell>() }; myCellp->setValue(3.7);",
+    "原文给出的等价关系：$$\\texttt{auto myCellp \\{ make\\_unique<SpreadsheetCell>() \\}}$$ $$\\equiv\\quad \\texttt{unique\\_ptr<SpreadsheetCell> myCellp \\{ new SpreadsheetCell\\{\\} \\}}$$",
+    "读取示例：std::cout << \"cell 1: \" << myCellp->getValue() << \" \" << myCellp->getString() << std::endl;"
+  ],
+  "misconceptions": [
+    "unique_ptr 不是 SpreadsheetCell 对象本身，而是负责管理该对象的智能指针。",
+    "使用 make_unique 后不能再对同一个裸指针重复 delete。",
+    "通过 unique_ptr 访问对象时仍使用 ->，不是点运算符。",
+    "原文示例中的 make_unique 调用没有传入初始数值参数，使用的是默认构造形式。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何使用 make_unique 创建由 unique_ptr 管理的 SpreadsheetCell？",
+      "a": "可以写 auto myCellp { std::make_unique<SpreadsheetCell>() };。"
+    },
+    {
+      "q": "unique_ptr 管理的 SpreadsheetCell 如何调用 setValue？",
+      "a": "使用 myCellp->setValue(3.7)。"
+    },
+    {
+      "q": "unique_ptr 示例为什么不需要像裸指针示例那样显式调用 delete？",
+      "a": "因为对象由 unique_ptr 管理，原文用它替代了手动 delete 的资源管理方式。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++智能指针",
+    "C++模板类",
+    "new与delete"
+  ],
+  "source_pages": [
+    233,
+    236
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "315_使用_unique_ptr_和_make_unique_管理动态对象",
+  "_chunk_pages": [
+    233,
+    236
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "title": "std::string的定义与优势",
+  "definition": "`std::string` 是C++标准库提供的字符串类，实际上是 `basic_string` 模板类的一个实例，定义在 `std` 名称空间中，并通过 `<string>` 头文件提供。它支持许多 `<cstring>` 中的字符串功能，并能自动管理内存分配。",
+  "key_points": [
+    "使用 `std::string` 前通常应包含 `<string>`，并通过 `std::string` 或适当的名称空间访问它。",
+    "`std::string` 是类，但通常可以像内建类型一样使用。",
+    "它通过运算符重载提供更自然的字符串操作。",
+    "它自动处理字符串存储所需的内存分配。"
+  ],
+  "examples": [
+    "`std::string text { \"hello\" };`",
+    "在适当使用 `using namespace std;` 或名称空间限定时，也可写作 `string text { \"hello\" };`。"
+  ],
+  "misconceptions": [
+    "误以为 `std::string` 只是字符指针的别名。",
+    "误以为使用 `std::string` 时必须手动分配和释放字符串存储空间。",
+    "误以为类对象不能像简单类型一样进行字符串拼接或比较。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`std::string` 是什么？它解决了什么问题？",
+      "a": "它是标准库中的字符串类，实际上是 `basic_string` 的一个实例，能够自动管理内存，并通过类和运算符重载提供比C风格字符串更方便的字符串操作。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++类与对象",
+    "C风格字符串"
+  ],
+  "source_pages": [
+    106,
+    106
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "197_std_string的定义与优势",
+  "_chunk_pages": [
+    105,
+    108
+  ]
+}

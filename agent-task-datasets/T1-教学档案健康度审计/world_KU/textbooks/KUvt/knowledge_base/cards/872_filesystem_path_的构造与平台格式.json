@@ -1,0 +1,54 @@
+{
+  "title": "filesystem::path 的构造与平台格式",
+  "definition": "std::filesystem::path 是文件系统库的基本类型，用于表示绝对路径或相对路径，并且可以包含文件名。路径可以使用带反斜杠的原始字符串、正斜杠字符串等形式构造；通过 native 方法或插入流，可以按运行平台的本机格式表示路径。",
+  "key_points": [
+    "路径可以是绝对路径，也可以是相对路径，还可以包含文件名。",
+    "原始字符串适合表示包含反斜杠的 Windows 路径，例如 path p{R\"(D:\\Foo\\Bar)\"};。",
+    "路径的输出格式可能与运行平台有关。",
+    "path 可以使用范围 for 循环逐个访问其路径组件。"
+  ],
+  "examples": [
+    "path p1{R\"(D:\\Foo\\Bar)\"};",
+    "path p2{\"D:/Foo/Bar\"};",
+    "path p3{\"D:/Foo/Bar/MyFile.txt\"};",
+    "for (const auto& component : p1) {",
+    "    cout << component << endl;",
+    "}"
+  ],
+  "misconceptions": [
+    "正斜杠和反斜杠写法都能构造 path，并不表示它们在所有平台上的输出形式完全相同。",
+    "path 对象本身不会验证目标文件或目录是否存在。",
+    "路径的组件不是简单按普通字符串字符逐个拆分，而是由 filesystem 根据平台路径规则识别。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "std::filesystem::path 可以表示哪些类型的路径？",
+      "a": "可以表示绝对路径或相对路径，并且路径中可以包含文件名。"
+    },
+    {
+      "q": "为什么 Windows 路径常使用原始字符串字面量？",
+      "a": "原始字符串可以减少反斜杠转义的麻烦，例如 R\"(D:\\Foo\\Bar)\"。"
+    },
+    {
+      "q": "如何遍历 path 的各个组件？",
+      "a": "可以使用基于范围的 for 循环，例如 for (const auto& component : p)。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "std::filesystem 基础",
+    "C++ 原始字符串字面量",
+    "基于范围的 for 循环"
+  ],
+  "source_pages": [
+    430,
+    431
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "872_filesystem_path_的构造与平台格式",
+  "_chunk_pages": [
+    429,
+    432
+  ]
+}

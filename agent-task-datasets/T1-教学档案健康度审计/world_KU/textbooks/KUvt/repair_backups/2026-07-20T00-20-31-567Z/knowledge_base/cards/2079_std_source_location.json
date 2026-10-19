@@ -1,0 +1,37 @@
+{
+  "title": "std::source_location",
+  "definition": "`std::source_location` 是 C++ 中用于获取源代码位置信息的类。教材将其列为某些 C 风格预处理宏的替代品，并认为掌握其知识和重要使用场景会为面试加分。",
+  "key_points": [
+    "`std::source_location` 可用于获取调用位置等源代码位置信息。",
+    "教材将其与某些 C 风格预处理宏进行比较。",
+    "原文未列出具体 API 调用或完整示例。"
+  ],
+  "examples": [
+    "原文只说明 `std::source_location` 可作为某些 C 风格预处理宏的替代品，未给出代码。"
+  ],
+  "misconceptions": [
+    "`std::source_location` 不是异常机制本身；它主要提供源代码位置相关信息。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "教材如何定位 `std::source_location`？",
+      "a": "教材将它视为某些 C 风格预处理宏的替代品，并认为了解其重要使用情况会为面试加分。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++标准库",
+    "预处理宏"
+  ],
+  "source_pages": [
+    1004,
+    1004
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "2079_std_source_location",
+  "_chunk_pages": [
+    1001,
+    1004
+  ]
+}

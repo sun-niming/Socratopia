@@ -1,0 +1,54 @@
+{
+  "title": "类模板的显式特化",
+  "definition": "类模板特化允许针对某个特定模板实参提供完全不同的类实现。原始Grid模板适用于一般类型；对于const char*，可以定义Grid<const char*>的显式特化，使网格内部存储std::optional<std::string>，从而避免直接复制C风格字符串指针所产生的浅层复制问题。显式特化使用template <> class Grid<const char*>语法。",
+  "key_points": [
+    "显式特化的声明形式是：\n```cpp\ntemplate <>\nclass Grid<const char*> { /* 特化实现 */ };\n```",
+    "特化实现中不再声明通用的类型参数T，而是直接针对const char*编写成员和数据结构。",
+    "原始模板可以使用例如std::optional<T>的存储；const char*特化则可以使用std::optional<std::string>。",
+    "用户使用Grid<int>或Grid<SpreadsheetCell>时，编译器根据原始模板生成代码；使用Grid<const char*>时，编译器自动选择const char*特化版本。",
+    "特化不是继承，也不会自动继承原始模板的代码；特化必须重新编写整个类的实现。",
+    "特化类的方法不必与原始模板具有完全相同的行为。例如原始Grid的at()可能返回std::optional<const char*>&，而特化版本可以返回std::optional<std::string>&。"
+  ],
+  "examples": [
+    "特化类可以将单元格声明为：\n```cpp\nstd::vector<std::vector<std::optional<std::string>>> m_cells;\n```",
+    "使用特化的示例：\n```cpp\nGrid<const char*> stringGrid1 { 2, 2 };\nstringGrid1.at(0, 0) = \"hello\";\nconst char* dummy { \"dummy\" };\nstringGrid1.at(0, 1) = dummy;\nGrid<const char*> stringGrid2 { stringGrid1 };\n```",
+    "选择关系可以表示为：\n$$\nGrid<T)=\n\\begin{cases}\n\\text{原始Grid模板的实例化},&T\\ne const\\ char^*\\\\\n\\text{Grid<const char*>显式特化},&T=const\\ char^*\n\\end{cases}\n$$"
+  ],
+  "misconceptions": [
+    "显式特化不是从原始模板派生出来的类。",
+    "特化不会自动复用原始模板的成员实现，通常需要重新实现整个类。",
+    "特化仍然使用Grid这个名称，是因为template<>告诉编译器它是Grid模板的特定特化；不能简单地再声明一个同名的普通Grid类。",
+    "特化并不要求必须与原始模板提供相同的方法或相同的返回类型，但随意改变行为会滥用特化机制。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "Grid<const char*>的显式特化使用什么语法？",
+      "a": "使用template <> class Grid<const char*> { ... };。"
+    },
+    {
+      "q": "为什么要为const char*提供Grid特化？",
+      "a": "因为通用Grid直接存储const char*时，拷贝通常只是复制指针，即浅层复制；特化可以把字符串存储为std::string，从而实现更适合字符串对象的复制语义。"
+    },
+    {
+      "q": "类模板显式特化是否继承原始模板的代码？",
+      "a": "不继承。显式特化是针对特定模板实参的独立实现，必须重新编写其实现。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "类模板",
+    "模板实例化",
+    "拷贝语义与浅层复制"
+  ],
+  "source_pages": [
+    390,
+    392
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "792_类模板的显式特化",
+  "_chunk_pages": [
+    389,
+    392
+  ]
+}

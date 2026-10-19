@@ -1,0 +1,41 @@
+{
+  "title": "JavaScript运行环境",
+  "definition": "JavaScript可以在不同运行环境中执行。教材把它概括为浏览器引擎和Node.js运行时两类场景：浏览器侧通过核心引擎与Web API协同工作，Node.js则提供独立的JavaScript运行时环境。",
+  "key_points": [
+    "JavaScript有浏览器和Node.js等运行环境",
+    "浏览器环境包含核心引擎和Web API",
+    "Node.js是独立的JavaScript运行时环境"
+  ],
+  "examples": [
+    "在浏览器中运行JS处理网页交互；在Node.js中运行JS编写服务器程序"
+  ],
+  "misconceptions": [
+    "JavaScript只能在浏览器中运行",
+    "Web API属于ECMAScript语法的一部分"
+  ],
+  "qa_pairs": [
+    {
+      "q": "教材中提到的JavaScript两类运行环境是什么？",
+      "a": "浏览器引擎和Node.js运行时。"
+    },
+    {
+      "q": "Node.js在这里被描述成什么？",
+      "a": "一个JavaScript运行时环境。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "JavaScript的诞生"
+  ],
+  "source_pages": [
+    233,
+    236
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "325_javascript运行环境",
+  "_chunk_pages": [
+    233,
+    236
+  ]
+}

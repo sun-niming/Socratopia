@@ -1,0 +1,45 @@
+{
+  "title": "std::string_view 的用途与特性",
+  "definition": "std::string_view 是在 C++17 中引入、定义于 `<string_view>` 的类模板实例化。它提供一个字符串的只读视图，本质上保存指向字符序列的指针和字符串长度，不复制字符串，通常可作为 `const std::string&` 的高效替代品。",
+  "key_points": [
+    "std::string_view 支持与 `std::string` 类似的接口，但不提供 `c_str()`；需要访问底层字符数据时可使用 `data()`。",
+    "复制 `std::string_view` 的成本很低，因为它只包含指针和长度。",
+    "通常按值传递 `std::string_view`，适合作为函数的只读字符串参数。",
+    "`std::string_view` 本身不拥有所引用的字符存储空间，因此被引用的字符串必须在视图使用期间保持有效。"
+  ],
+  "examples": [
+    "函数可以按值接收字符串视图：`std::string_view extractExtension(std::string_view filename)`。",
+    "同一个函数可以接收 `std::string`、C 风格字符串和字符串字面量，例如：`extractExtension(filename)`、`extractExtension(cString)`、`extractExtension(R\"(c:\\temp\\my file.ext)\")`。",
+    "`std::string_view` 的对象可抽象表示为：`{ const char* data; std::size_t size; }`。"
+  ],
+  "misconceptions": [
+    "`std::string_view` 不是字符串的拥有者，不会自动复制或延长底层字符串的生命周期。",
+    "使用 `std::string_view` 不等于底层字符序列一定以 NUL 结尾，因此不能把它无条件当作 C 风格字符串使用。",
+    "`std::string_view` 不是 `std::string` 的隐式可替代对象；需要 `std::string` 时通常必须显式转换。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么通常按值传递 `std::string_view`？",
+      "a": "因为 `std::string_view` 只包含指向字符序列的指针和长度，复制成本很低；按值传递可以高效地传递只读字符串视图。"
+    },
+    {
+      "q": "`std::string_view` 与 `std::string` 的主要区别是什么？",
+      "a": "`std::string` 拥有并管理字符串存储，`std::string_view` 只保存对已有字符序列的非拥有视图，不复制字符串。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++字符串类型的基本概念"
+  ],
+  "source_pages": [
+    113,
+    113
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "214_std_string_view_的用途与特性",
+  "_chunk_pages": [
+    113,
+    116
+  ]
+}

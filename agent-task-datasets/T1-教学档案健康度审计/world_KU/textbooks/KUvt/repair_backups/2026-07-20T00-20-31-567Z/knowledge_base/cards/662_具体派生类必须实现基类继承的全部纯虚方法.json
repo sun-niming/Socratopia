@@ -1,0 +1,45 @@
+{
+  "title": "具体派生类必须实现基类继承的全部纯虚方法",
+  "definition": "SpreadsheetCell 将公共操作声明为纯虚方法后，StringSpreadsheetCell 和 DoubleSpreadsheetCell 作为面向客户使用的具体单元格类型，必须实现从 SpreadsheetCell 继承的全部纯虚方法。只要有一个纯虚方法未实现，该派生类仍是抽象类，客户就不能创建它的对象。",
+  "key_points": [
+    "具体派生类需要实现基类定义的所有纯虚接口。",
+    "实现继承的虚方法时，应使用 `override` 明确表示正在重写基类方法。",
+    "未实现全部纯虚方法的派生类仍不能实例化。",
+    "实现全部纯虚方法后，派生类才可作为具体单元格类型被创建和使用。"
+  ],
+  "examples": [
+    "StringSpreadsheetCell 的声明中，两个继承的纯虚方法都被实现为普通虚方法重写：\n\n```cpp\nvoid set(std::string_view value) override;\nstd::string getString() const override;\n```",
+    "若某个派生类只实现 `set` 而没有实现 `getString`，则该派生类仍为抽象类，下面的创建操作会失败：\n\n```cpp\nstd::unique_ptr<SpreadsheetCell> cell{new IncompleteCell{}}; // 错误\n```"
+  ],
+  "misconceptions": [
+    "继承纯虚方法不会自动获得可用实现；派生类必须自行实现。",
+    "只要派生自抽象类就不能实例化的说法不准确；实现全部纯虚方法的具体派生类可以实例化。",
+    "使用基类指针保存对象不会绕过派生类必须实现纯虚方法的要求。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如果派生类没有实现 SpreadsheetCell 的全部纯虚方法，会发生什么？",
+      "a": "该派生类仍是抽象类，客户不能实例化它的对象。"
+    },
+    {
+      "q": "`override` 在 StringSpreadsheetCell 的方法声明中起什么作用？",
+      "a": "它表明该方法重写了基类中的虚方法，并可帮助编译器检查签名是否确实匹配。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "纯虚方法与抽象基类",
+    "继承中的方法重写"
+  ],
+  "source_pages": [
+    324,
+    324
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "662_具体派生类必须实现基类继承的全部纯虚方法",
+  "_chunk_pages": [
+    321,
+    324
+  ]
+}

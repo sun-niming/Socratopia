@@ -1,0 +1,42 @@
+{
+  "title": "if语句初始化器及其作用域",
+  "definition": "C++允许在if语句的条件表达式之前使用初始化器，语法形式为：$$\\text{if }(\\text{initializer};\\ \\text{conditional\\_expression})\\ \\{\\ \\text{if\\_body}\\ \\}$$初始化器中声明或定义的变量，其作用域覆盖条件表达式以及该if语句的各个分支语句体，但不能在整个if语句之外使用。",
+  "key_points": [
+    "初始化器与条件表达式之间用分号分隔，而不是用逗号。",
+    "初始化器先执行，然后使用其中引入的变量计算条件。",
+    "初始化器中的变量可用于if条件、else if条件及相关分支体。",
+    "原文示例使用初始化器获取Employee对象，再检查employee.salary是否大于1000。"
+  ],
+  "examples": [
+    "if (Employee employee { getEmployee() }; employee.salary > 1000) { /* 薪水超过1000时执行 */ }"
+  ],
+  "misconceptions": [
+    "初始化器中声明的变量不是整个外层代码块都可见；它只在该if语句的条件和分支范围内可见。",
+    "if初始化器不是先执行一个独立的普通语句再执行if，而是if语句语法的一部分。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "if语句初始化器与条件表达式之间使用什么分隔符？",
+      "a": "使用分号分隔，例如if (Employee employee { getEmployee() }; employee.salary > 1000)。"
+    },
+    {
+      "q": "在if初始化器中声明的employee能否在整个if语句之后继续使用？",
+      "a": "不能；它的作用域仅限于该if语句的条件表达式和各个分支体。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "if语句条件表达式的布尔求值"
+  ],
+  "source_pages": [
+    49,
+    49
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 if statement initializer syntax scope cppreference",
+  "concept_id": "074_if语句初始化器及其作用域",
+  "_chunk_pages": [
+    49,
+    52
+  ]
+}

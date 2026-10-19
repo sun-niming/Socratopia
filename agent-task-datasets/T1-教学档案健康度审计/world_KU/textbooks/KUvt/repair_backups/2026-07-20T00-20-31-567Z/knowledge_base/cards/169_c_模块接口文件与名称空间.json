@@ -1,0 +1,49 @@
+{
+  "title": "C++ 模块接口文件与名称空间",
+  "definition": "Employee.cppm 是 Employee 类的模块接口文件。文件以 export module employee; 声明并导出名为 employee 的模块，以 import <string>; 导入字符串功能，并将后续花括号中的代码放在 Records 名称空间中。程序中使用相关代码时会使用 Records 名称空间。",
+  "key_points": [
+    "模块声明语句是：export module employee;。",
+    "模块接口文件可以导入字符串功能：import <string>;。",
+    "Records 名称空间用于包含后续相关代码。",
+    "使用 Records 名称空间中的代码时，需要通过该名称空间访问，教材示例使用 Records:: 前缀。"
+  ],
+  "examples": [
+    "模块接口文件的开头可写为：export module employee;",
+    "导入字符串功能可写为：import <string>;",
+    "访问 Records 名称空间中的常量可写为：Records::DefaultStartingSalary。"
+  ],
+  "misconceptions": [
+    "export module employee; 只是普通的类声明，不涉及模块。",
+    "Records 是一个类名，而不是名称空间。",
+    "导入 <string> 后，所有 Records 名称空间中的内容都会自动导出。模块导出与名称空间归属是不同概念。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "Employee.cppm 的模块声明是什么？",
+      "a": "export module employee;，它声明并导出名为 employee 的模块。"
+    },
+    {
+      "q": "教材中代码位于哪个名称空间？",
+      "a": "Records 名称空间。"
+    },
+    {
+      "q": "如何访问 Records 名称空间中的 DefaultStartingSalary？",
+      "a": "使用 Records::DefaultStartingSalary。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++ 名称空间的基本概念"
+  ],
+  "source_pages": [
+    92,
+    92
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 模块接口文件 export module employee import <string> 名称空间语法",
+  "concept_id": "169_c_模块接口文件与名称空间",
+  "_chunk_pages": [
+    89,
+    92
+  ]
+}

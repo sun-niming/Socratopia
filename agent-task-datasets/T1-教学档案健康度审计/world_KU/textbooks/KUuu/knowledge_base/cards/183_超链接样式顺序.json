@@ -1,0 +1,37 @@
+{
+  "title": "超链接样式顺序",
+  "definition": "超链接有四种不同状态，可用伪类选择器分别设置样式。设置顺序要遵守 love&hate 原则：先写未访问，再写已访问，再写悬停，最后写激活。",
+  "key_points": [
+    "四种状态分别是 a:link、a:visited、a:hover、a:active。",
+    "教材要求的顺序是 a:link → a:visited → a:hover → a:active。",
+    "这种固定顺序称为 love&hate 原则。"
+  ],
+  "examples": [
+    "a:link {} a:visited {} a:hover {} a:active {}"
+  ],
+  "misconceptions": [
+    "四种超链接状态的书写顺序可以随意调换。",
+    "hover 和 active 没有区别。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "love&hate 原则对应的超链接伪类顺序是什么？",
+      "a": "a:link → a:visited → a:hover → a:active。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "伪类选择器"
+  ],
+  "source_pages": [
+    113,
+    116
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "183_超链接样式顺序",
+  "_chunk_pages": [
+    113,
+    116
+  ]
+}

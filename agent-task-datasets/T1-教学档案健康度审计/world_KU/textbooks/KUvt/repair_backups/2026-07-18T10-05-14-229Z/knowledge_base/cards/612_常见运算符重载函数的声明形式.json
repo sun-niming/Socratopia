@@ -1,0 +1,52 @@
+{
+  "title": "常见运算符重载函数的声明形式",
+  "definition": "原文第472页集中列出了多种运算符重载函数的声明形式，包括算术运算符、复合赋值运算符、移位运算符、按位运算符、比较运算符以及C++20的三路比较运算符`<=>`。其中，二元算术运算符通常接收两个操作数，复合赋值运算符通常返回`T&`，比较运算符通常返回`bool`。由于原文扫描文本存在大量字符识别错误，以下声明按可辨认内容整理，具体符号和参数类型需核对教材原页。",
+  "key_points": [
+    "原文列出了`operator+`、`operator-`、`operator*`、`operator/`和`operator%`等算术运算符。",
+    "原文列出了`operator+=`、`operator-=`、`operator*=`、`operator/=`和`operator%=`等复合赋值运算符。",
+    "原文列出了`operator<<`、`operator>>`及其复合赋值形式，以及`operator&`、`operator|`、`operator^`等按位运算符。",
+    "原文列出了关系比较相关的运算符，并出现了C++20的`operator<=>`。",
+    "原文中的典型形式包括：`T operator+(const T&, const T&);`、`T& operator+=(const T&);`以及`auto operator<=>(const T&) const;`。"
+  ],
+  "examples": [
+    "二元加法运算符的典型声明：`T operator+(const T& lhs, const T& rhs);`",
+    "复合赋值运算符的典型成员函数声明：`T& operator+=(const T& rhs);`",
+    "C++20三路比较运算符的典型声明：`auto operator<=>(const T& rhs) const;`",
+    "若运算符函数是成员函数，调用对象通常隐含为左操作数，例如：`T& operator+=(const T& rhs);`对应对象执行`obj += rhs`。"
+  ],
+  "misconceptions": [
+    "所有运算符重载函数都返回同一种类型；实际上算术运算符、复合赋值运算符和比较运算符常见的返回类型不同。",
+    "`operator<=>`只是普通的小于运算符；实际上它是C++20引入的三路比较运算符。",
+    "看到一个运算符出现在表中，就意味着它可以任意改变操作数数量或语义；运算符重载仍受C++语言规则约束。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "原文列出了哪些主要类别的运算符重载？",
+      "a": "包括算术运算符、复合赋值运算符、移位运算符、按位运算符、比较运算符，以及C++20的三路比较运算符`<=>`。"
+    },
+    {
+      "q": "复合赋值运算符如`operator+=`通常返回什么类型？",
+      "a": "原文给出的典型形式返回`T&`，例如`T& operator+=(const T&);`。"
+    },
+    {
+      "q": "C++20中的三路比较运算符如何表示？",
+      "a": "使用`operator<=>`表示，例如`auto operator<=>(const T&) const;`。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "运算符重载函数的基本形式",
+    "C++引用和const限定"
+  ],
+  "source_pages": [
+    469,
+    472
+  ],
+  "needs_verification": true,
+  "verify_query": "《C++20高级编程》第5版 第472页 operator+ operator- operator+= operator<< operator<=> 运算符重载声明表",
+  "concept_id": "612_常见运算符重载函数的声明形式",
+  "_chunk_pages": [
+    469,
+    472
+  ]
+}

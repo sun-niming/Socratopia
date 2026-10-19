@@ -1,0 +1,48 @@
+{
+  "title": "C++模块子模块",
+  "definition": "C++标准没有单独规定名为“子模块”的机制，但允许在模块名中使用点号 `.`，因此可以用层次化模块名组织代码，例如 `datamodel.person` 和 `datamodel.address`。子模块可以分别提供模块的一部分内容；上层模块可以导入并重新导出这些子模块，使用户既可以只导入某个子模块，也可以导入整个上层模块。",
+  "key_points": [
+    "子模块名称可以使用点号表示层次关系，例如 `datamodel.person`。",
+    "子模块接口可以声明并导出特定类，例如 `datamodel.person` 导出 `DataModel::Person`，`datamodel.address` 导出 `DataModel::Address`。",
+    "上层模块可以使用 `export import` 导入并立即重新导出子模块。",
+    "用户只需要 `Address` 时可以导入 `datamodel.address`；需要整个数据模型时可以导入 `datamodel`。"
+  ],
+  "examples": [
+    "人员子模块接口的形式：\n`export module datamodel.person;`\n`export namespace DataModel { class Person { /* ... */ }; }`",
+    "地址子模块接口的形式：\n`export module datamodel.address;`\n`export namespace DataModel { class Address { /* ... */ }; }`",
+    "上层模块重新导出子模块：\n`export module datamodel;`\n`export import datamodel.person;`\n`export import datamodel.address;`",
+    "按需导入：\n`import datamodel.address;`",
+    "导入全部内容：\n`import datamodel;`"
+  ],
+  "misconceptions": [
+    "子模块是 C++标准明确定义的一种独立语言机制。原文的准确说法是：标准允许模块名使用点号，从而可以组织出类似子模块的层次结构。",
+    "导入上层模块后，用户必须再分别导入每个子模块。若上层模块使用 `export import` 重新导出子模块，则导入上层模块即可使用其导出内容。",
+    "子模块只能声明接口，不能把成员函数实现放入对应的实现文件。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何让用户只导入 `Address` 所在的模块部分？",
+      "a": "使用 `import datamodel.address;`。"
+    },
+    {
+      "q": "如何让 `datamodel` 模块向用户提供两个子模块的内容？",
+      "a": "在 `datamodel` 的模块接口中使用 `export import datamodel.person;` 和 `export import datamodel.address;`。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++模块接口与模块实现",
+    "C++命名空间"
+  ],
+  "source_pages": [
+    357,
+    358
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "720_c_模块子模块",
+  "_chunk_pages": [
+    357,
+    360
+  ]
+}

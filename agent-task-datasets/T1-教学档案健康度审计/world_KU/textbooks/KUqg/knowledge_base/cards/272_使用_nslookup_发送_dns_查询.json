@@ -1,0 +1,40 @@
+{
+  "title": "使用 nslookup 发送 DNS 查询",
+  "definition": "nslookup 是可用于直接向 DNS 服务器发送查询的程序，在多数 Windows 和 UNIX 平台上可用。在 Windows 主机上，可以打开命令提示符并输入文本命令“nslookup”来调用该程序。",
+  "key_points": [
+    "nslookup 可用于从正在工作的主机直接进行 DNS 查询。",
+    "该程序可用于多数 Windows 和 UNIX 平台。",
+    "在 Windows 命令提示符中输入“nslookup”即可调用程序。"
+  ],
+  "examples": [
+    "Windows 命令提示符调用命令：nslookup"
+  ],
+  "misconceptions": [
+    "误以为只能由应用程序在后台发起 DNS 查询；用户也可以通过 nslookup 手动查询。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "哪个程序可以用来从主机直接发送 DNS 查询？",
+      "a": "nslookup。"
+    },
+    {
+      "q": "在 Windows 命令提示符中如何调用 nslookup？",
+      "a": "直接输入“nslookup”。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "DNS 查询报文"
+  ],
+  "source_pages": [
+    105,
+    108
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "272_使用_nslookup_发送_dns_查询",
+  "_chunk_pages": [
+    105,
+    108
+  ]
+}

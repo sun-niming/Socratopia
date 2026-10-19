@@ -1,0 +1,44 @@
+{
+  "title": "类模板实参推导（CTAD）",
+  "definition": "类模板实参推导（Class Template Argument Deduction，CTAD）允许编译器根据传递给类模板构造函数的初始化实参，自动推导类模板的类型参数。使用 CTAD 时，必须提供初始化式；如果没有初始化式，编译器无法进行这种推导。",
+  "key_points": [
+    "例如，std::pair 可以根据构造函数实参推导出模板参数：$\\texttt{std::pair pair3\\{1, 2.3\\}}$ 的类型为 $\\texttt{std::pair<int, double>}$。",
+    "CTAD 的前提是类模板的模板参数要么具有默认值，要么能够从构造函数参数中推导出来。",
+    "没有初始化式时不能使用 CTAD，例如 $\\texttt{std::pair pair4;}$ 非法。",
+    "许多标准库类支持 CTAD，例如 std::vector 和 std::array。"
+  ],
+  "examples": [
+    "显式指定模板参数：$\\texttt{std::pair<int, double> pair1\\{1, 2.3\\};}$",
+    "使用函数模板辅助推导：$\\texttt{auto pair2\\{std::make\\_pair(1, 2.3)\\};}$",
+    "使用 CTAD：$\\texttt{std::pair pair3\\{1, 2.3\\};}$，推导结果为 $\\texttt{std::pair<int, double>}$。"
+  ],
+  "misconceptions": [
+    "CTAD 不是在没有任何实参时自动猜测模板参数；$\\texttt{std::pair pair4;}$ 不能编译。",
+    "CTAD 不等同于所有类模板都可以省略模板参数；只有满足推导条件并提供相应构造函数或推导规则的类模板才可以。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "使用 CTAD 时，为什么 $\\texttt{std::pair pair4;}$ 非法？",
+      "a": "因为 CTAD 需要初始化式，编译器必须根据构造函数实参推导模板参数；没有初始化式时无法推导。"
+    },
+    {
+      "q": "$\\texttt{std::pair pair3\\{1, 2.3\\};}$ 推导出的类型是什么？",
+      "a": "推导为 $\\texttt{std::pair<int, double>}$。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "类模板和模板参数"
+  ],
+  "source_pages": [
+    385,
+    385
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "781_类模板实参推导_ctad",
+  "_chunk_pages": [
+    385,
+    388
+  ]
+}

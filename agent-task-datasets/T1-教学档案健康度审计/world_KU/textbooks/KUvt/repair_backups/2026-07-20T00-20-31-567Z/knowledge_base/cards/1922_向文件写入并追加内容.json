@@ -1,0 +1,45 @@
+{
+  "title": "向文件写入并追加内容",
+  "definition": "C++ 可以使用 `std::ofstream` 向文件写入内容。打开文件后，应先检查流是否打开失败；写入完成后可以关闭文件。若使用 `ios_base::app` 作为打开模式，则会以追加方式打开文件，新内容写在原有内容末尾，而不是覆盖原内容。",
+  "key_points": [
+    "使用 `ofstream outputFile { \"FileWrite.out\" };` 打开文件进行写入。",
+    "通过 `outputFile.fail()` 检查文件是否打开失败。",
+    "写入可使用流插入运算符 `<<`，例如 `outputFile << \"Hello!\" << endl;`。",
+    "使用 `ofstream appendFile { \"FileWrite.out\", ios_base::app };` 可以追加写入。",
+    "文件操作失败时可以向 `cerr` 输出错误信息并返回非零状态码。"
+  ],
+  "examples": [
+    "写入文件：`ofstream outputFile { \"FileWrite.out\" };`，然后执行 `outputFile << \"Hello!\" << endl;`。",
+    "追加写入：`ofstream appendFile { \"FileWrite.out\", ios_base::app };`，然后执行 `appendFile << \"World!\" << endl;`。"
+  ],
+  "misconceptions": [
+    "`ios_base::app` 不是覆盖写入模式，而是追加写入模式。",
+    "成功创建 `ofstream` 后仍应检查 `fail()`，不能假定文件一定打开成功。",
+    "追加写入不会清空文件原有内容。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何以追加方式打开文件？",
+      "a": "使用 `ofstream` 并指定 `ios_base::app`，例如 `ofstream appendFile { \"FileWrite.out\", ios_base::app };`。"
+    },
+    {
+      "q": "向文件写入前为什么要检查 `fail()`？",
+      "a": "因为文件可能无法打开；检查 `fail()` 可以及时发现错误并进行处理。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++流输入输出基础"
+  ],
+  "source_pages": [
+    929,
+    929
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1922_向文件写入并追加内容",
+  "_chunk_pages": [
+    929,
+    932
+  ]
+}

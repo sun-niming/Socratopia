@@ -1,0 +1,44 @@
+{
+  "title": "operator bool 与 nullptr 比较",
+  "definition": "类也可以通过重载 `operator bool()`，直接把对象转换为布尔值，例如 `operator bool() const { return m_ptr != nullptr; }`。但仅有这种转换时，与 `nullptr` 的比较可能无法编译，因为 `nullptr` 的类型是 `std::nullptr_t`，它不会自动转换为整数 0 或 `false`，编译器可能找不到同时接受该类对象和 `std::nullptr_t` 的 `operator!=`。",
+  "key_points": [
+    "`operator bool()` 适合支持 `if (p)` 和 `if (!p)`。",
+    "根据原文，使用 `operator bool()` 时，`p != NULL` 仍可运行，因为 `NULL` 通常表现为整数零。",
+    "使用 `operator bool()` 时，`p != nullptr` 可能编译失败，需要为类提供匹配的比较运算符。"
+  ],
+  "examples": [
+    "转换运算符：`operator bool() const { return m_ptr != nullptr; }`",
+    "可正常使用的判断：`if (p) { cout << \"not nullptr\" << endl; }`、`if (!p) { cout << \"nullptr\" << endl; }`。",
+    "可能出错的判断：`if (p != nullptr) { cout << \"not nullptr\" << endl; }`。"
+  ],
+  "misconceptions": [
+    "`nullptr` 不是整数常量 0，而是具有独立类型 `std::nullptr_t` 的空指针字面量。",
+    "定义了 `operator bool()` 不等于自动获得了所有与 `nullptr` 比较的重载。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么只有 `operator bool()` 时，`p != nullptr` 可能无法编译？",
+      "a": "因为 `nullptr` 的类型是 `std::nullptr_t`，它不会自动转换为整数 0 或 `false`；如果没有匹配的 `operator!=`，编译器就找不到可用的比较运算符。"
+    },
+    {
+      "q": "`operator bool()` 主要支持哪两种条件判断？",
+      "a": "`if (p)` 和 `if (!p)`，分别表示对象转换后的布尔值为真或为假。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "类类型转换运算符",
+    "nullptr 与 std::nullptr_t"
+  ],
+  "source_pages": [
+    489,
+    489
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "981_operator_bool_与_nullptr_比较",
+  "_chunk_pages": [
+    489,
+    492
+  ]
+}

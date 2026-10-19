@@ -1,0 +1,47 @@
+{
+  "title": "使用结构化绑定分解tuple",
+  "definition": "C++17引入的结构化绑定可以把tuple中的多个元素一次性绑定到多个变量。例如`auto [i, str, b] = t1;`会把tuple的三个元素分别绑定到变量i、str和b。也可以使用引用结构化绑定，让绑定变量直接引用tuple中的元素，从而修改tuple内容。结构化绑定分解时必须提供与元素数量对应的变量，不能直接忽略某个元素。",
+  "key_points": [
+    "结构化绑定语法为`auto [变量1, 变量2, ...] = tuple对象;`。",
+    "绑定变量的数量必须与tuple元素数量匹配。",
+    "使用引用形式可以通过绑定变量修改tuple元素，例如`auto& [i, str, b] = t1;`。",
+    "不能在结构化绑定中省略某个位置；需要忽略元素时应使用`std::tie`和`std::ignore`。"
+  ],
+  "examples": [
+    "`std::tuple t1 { 16, \"Test\"s, true }; auto [i, str, b] = t1;`将三个元素绑定到`i`、`str`和`b`。",
+    "引用绑定示例：`auto& [i2, str2, b2] = t1; i2 *= 2; b2 = !b2;`，会修改`t1`中的整数和布尔元素。"
+  ],
+  "misconceptions": [
+    "`auto [i, str, b] = t1`不表示可以只绑定其中两个元素；tuple有几个元素就需要对应数量的绑定变量。",
+    "如果希望修改原tuple，必须使用引用绑定；普通值绑定得到的是独立变量。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何把包含整数、字符串和布尔值的tuple分解为三个变量？",
+      "a": "使用`auto [i, str, b] = t1;`。"
+    },
+    {
+      "q": "如何通过结构化绑定修改tuple中的元素？",
+      "a": "使用引用结构化绑定，例如`auto& [i2, str2, b2] = t1;`，再修改`i2`或`b2`。"
+    },
+    {
+      "q": "结构化绑定能否只绑定tuple中的部分元素？",
+      "a": "不能；绑定变量数量必须与tuple元素数量对应。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "使用std::get按索引访问tuple元素"
+  ],
+  "source_pages": [
+    711,
+    711
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1479_使用结构化绑定分解tuple",
+  "_chunk_pages": [
+    709,
+    712
+  ]
+}

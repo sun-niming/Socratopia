@@ -1,0 +1,40 @@
+{
+  "title": "strlen计算字符串长度",
+  "definition": "`strlen` 用来计算以 `0` 结尾字符串的字节长度，原型是 `size_t strlen(const char *s);`。它返回的是字符串内容在遇到结尾 `0` 之前的字节数，不适合直接用于任意二进制数据。",
+  "key_points": [
+    "头文件是 `<string.h>`。",
+    "本项目中用于计算固定 HTML 字符串或错误页面 body 的 `Content-Length`。",
+    "对图片、CSS 文件块、任意二进制 buffer 不能直接用 `strlen`，因为遇到 `0` 字节会截断。",
+    "文件内容长度应使用 `read` 的返回值或 `stat.st_size`。"
+  ],
+  "examples": [
+    "`size_t len = strlen(\"<html>...</html>\");`",
+    "`Content-Length` 计算字符串 body 时可以用 `strlen(body)`。"
+  ],
+  "misconceptions": [
+    "`strlen` 可以正确计算所有内存块的长度。",
+    "字符串长度包括结尾的 `0`。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么不能对图片或其他二进制 buffer 直接使用 `strlen`？",
+      "a": "因为二进制数据中可能包含 `0` 字节，`strlen` 遇到 `0` 会提前结束，导致长度被截断。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C语言基础",
+    "字符串基础"
+  ],
+  "source_pages": [
+    98,
+    99
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "150_strlen计算字符串长度",
+  "_chunk_pages": [
+    97,
+    100
+  ]
+}

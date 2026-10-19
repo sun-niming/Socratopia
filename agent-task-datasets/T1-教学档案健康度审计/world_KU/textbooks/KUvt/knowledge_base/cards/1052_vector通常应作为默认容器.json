@@ -1,0 +1,38 @@
+{
+  "title": "vector通常应作为默认容器",
+  "definition": "教材建议在没有特殊需求时优先使用 vector。原因是现代 CPU 的内存和缓存工作方式通常使 vector 的访问、插入和删除表现良好；相比之下，list 或 forward_list 的内存可能碎片化，迭代器移动还可能需要跳转到不同内存位置。",
+  "key_points": [
+    "vector通常是默认容器选择。",
+    "list和forward_list的节点可能分散在内存中，导致缓存利用率较低。",
+    "容器操作的实际性能不仅取决于渐近复杂度，还取决于现代硬件的内存和缓存行为。"
+  ],
+  "examples": [
+    "在没有明确需要链式结构特性的情况下，可优先考虑 vector，而不是直接选择 list 或 forward_list。"
+  ],
+  "misconceptions": [
+    "不能简单认为 list 或 forward_list 的插入、删除在所有实际场景中都比 vector 快。",
+    "不能只根据理论上的插入或删除复杂度判断实际运行速度，还要考虑缓存和内存局部性。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么教材建议 vector 应是默认使用的容器？",
+      "a": "因为现代 CPU 的内存和缓存工作方式通常有利于 vector；list 和 forward_list 的内存可能碎片化，迭代器移动还可能需要跳转到不同内存位置，因此 vector 的实际性能常常更好。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++标准容器",
+    "时间复杂度与缓存局部性"
+  ],
+  "source_pages": [
+    513,
+    513
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1052_vector通常应作为默认容器",
+  "_chunk_pages": [
+    513,
+    516
+  ]
+}

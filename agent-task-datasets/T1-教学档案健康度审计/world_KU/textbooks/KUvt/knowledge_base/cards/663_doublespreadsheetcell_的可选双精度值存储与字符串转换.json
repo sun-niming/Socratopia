@@ -1,0 +1,49 @@
+{
+  "title": "DoubleSpreadsheetCell 的可选双精度值存储与字符串转换",
+  "definition": "DoubleSpreadsheetCell 是 SpreadsheetCell 的派生类，用于存储双精度值。它使用 std::optional<double> 类型的数据成员 m_value 表示“可能尚未存储值”的状态，并通过重载的 set() 接口接受 double 或 std::string_view，通过 getString() 将存储的双精度值转换为字符串；如果没有存储值，则返回空字符串。",
+  "key_points": [
+    "m_value 的类型是 std::optional<double>，因此既可以表示一个 double 值，也可以表示没有值。",
+    "getString() 可先用 m_value.has_value() 判断是否有值；有值时用 m_value.value() 取出 double，再调用 doubleToString() 转为字符串；无值时返回空字符串。",
+    "接受 std::string_view 的 set() 通常通过 private static 方法 stringToDouble() 将字符串转换为 double。",
+    "doubleToString() 和 stringToDouble() 的具体实现原文省略，并说明与第 8 章相同。"
+  ],
+  "examples": [
+    "核心逻辑可表示为：\n$$\n\\text{getString()}=\\begin{cases}\n\\text{doubleToString}(m\\_value.value()),&m\\_value.has\\_value()\\\\\n\"\",&\\text{否则}\n\\end{cases}\n$$",
+    "示例接口：\n```cpp\nvoid set(double value);\nvoid set(std::string_view value) override;\nstd::string getString() const override;\nstd::optional<double> m_value;\n```"
+  ],
+  "misconceptions": [
+    "std::optional<double> 不等同于普通 double；它还能够表示“没有值”。",
+    "getString() 返回的是字符串表示，不是直接返回 double。",
+    "DoubleSpreadsheetCell 与 StringSpreadsheetCell 的转换逻辑不同：前者需要把数值转换成字符串，后者可以直接返回其字符串值。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "DoubleSpreadsheetCell 为什么使用 std::optional<double> 而不是直接使用 double？",
+      "a": "因为单元格可能尚未存储任何值，std::optional<double> 可以区分“存储了一个 double”和“没有存储值”两种状态。"
+    },
+    {
+      "q": "DoubleSpreadsheetCell 在没有存储值时，getString() 返回什么？",
+      "a": "返回空字符串。"
+    },
+    {
+      "q": "DoubleSpreadsheetCell 的 getString() 在有值时如何工作？",
+      "a": "先通过 has_value() 判断有值，再通过 value() 取得 double，最后调用 doubleToString() 将其转换为字符串。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "std::optional 的基本用法",
+    "虚函数与函数重载"
+  ],
+  "source_pages": [
+    325,
+    325
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "663_doublespreadsheetcell_的可选双精度值存储与字符串转换",
+  "_chunk_pages": [
+    325,
+    328
+  ]
+}

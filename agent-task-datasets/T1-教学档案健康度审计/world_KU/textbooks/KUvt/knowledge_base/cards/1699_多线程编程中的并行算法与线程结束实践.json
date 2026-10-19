@@ -1,0 +1,43 @@
+{
+  "title": "多线程编程中的并行算法与线程结束实践",
+  "definition": "多线程编程应优先复用标准库提供的并行算法，而不是自行编写多线程实现；程序终止前必须确保所有thread对象都不再处于可结合状态，即对它们调用$join()$或$detach()$。C++20引入的$jthread$会在析构函数中自动调用$join()$。",
+  "key_points": [
+    "原文建议尽量使用标准库并行算法，并通过并行选项指定执行方式。",
+    "程序结束前，所有thread对象都应调用$join()$或$detach()$。",
+    "仍可结合的thread对象析构时会调用$std::terminate()$，导致线程和应用程序突然终止。",
+    "C++20的$jthread$在析构时自动$join()$，可减少忘记等待线程的问题。"
+  ],
+  "examples": [
+    "线程结束前应保证：$$\\forall t\\in\\text{thread对象},\\quad t.joinable()=false$$通常通过对每个线程调用`join()`或`detach()`实现。"
+  ],
+  "misconceptions": [
+    "调用$detach()$不是等待线程完成，而是让线程与thread对象分离；它与$join()$的语义不同。",
+    "使用$jthread$并不意味着可以忽略线程生命周期设计，只是其析构函数会自动执行$join()$。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "程序终止前如何避免thread析构导致$std::terminate()$？",
+      "a": "对每个thread对象调用$join()$或$detach()$，确保其不再是可结合状态。"
+    },
+    {
+      "q": "C++20的$jthread$有什么相关特点？",
+      "a": "它会在析构函数中自动调用$join()$。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++线程的join与detach",
+    "C++20的jthread"
+  ],
+  "source_pages": [
+    828,
+    828
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1699_多线程编程中的并行算法与线程结束实践",
+  "_chunk_pages": [
+    825,
+    828
+  ]
+}

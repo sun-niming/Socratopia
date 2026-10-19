@@ -1,0 +1,59 @@
+{
+  "title": "针对所有指针类型的 Grid 部分特例化与深拷贝",
+  "definition": "可以使用 `template <typename T> class Grid<T*>` 为所有指针类型提供 `Grid` 的部分特例化。实例化为 `Grid<int*>` 时，特例化中的 `T` 实际表示 `int`，而模板实参 `int*` 才是网格元素的指针类型。该特例化使用 `std::unique_ptr<T>` 管理指向的对象，并通过拷贝构造和拷贝赋值实现指针所指对象的深拷贝。",
+  "key_points": [
+    "`class Grid<T*>` 表示只在 `Grid` 的模板实参是某种指针类型时使用该特例化。",
+    "在 `Grid<int*>` 中，特例化参数 `T` 为 `int`，因此单元格类型为 `std::unique_ptr<int>`。",
+    "网格拥有这些指针指向的对象，并在需要时自动释放内存。",
+    "拷贝构造函数和拷贝赋值运算符对每个指针所指对象进行深拷贝，而不是只复制指针地址。",
+    "示例中修改 `psGrid2` 的元素不会修改原网格 `psGrid` 中对应的元素。"
+  ],
+  "examples": [
+    "特例化声明：`template <typename T> class Grid<T*>`。",
+    "实例化：`Grid<int*> psGrid{2, 2};`。此时特例化中的 `T` 是 `int`，单元格访问结果可视为 `std::unique_ptr<int>&`。",
+    "示例行为：原网格中某元素值为 3；复制为 `Grid<int*> psGrid2{psGrid};` 后，将 `*psGrid2.at(1, 0)` 改为 6，输出原网格和复制网格对应元素分别为 `3` 和 `6`。",
+    "访问指针元素可写为：`auto& element{psGrid2.at(1, 0)}; if (element) { std::cout << *element << std::endl; }`。"
+  ],
+  "misconceptions": [
+    "`Grid<int*>` 中的 `T` 不是 `int*`，而是从模式 `T*` 中匹配出的 `int`。",
+    "拷贝 `Grid<int*>` 不等于复制指针地址；原文说明该特例化执行深层复制。",
+    "`std::unique_ptr<T>` 不允许简单的指针共享；每个网格对象拥有自己的动态对象副本。",
+    "只有指针类型的 `Grid` 使用该部分特例化，`Grid<int>` 仍使用非特例化版本。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`template <typename T> class Grid<T*>` 匹配哪些实例？",
+      "a": "它匹配 `Grid` 的模板实参为任意指针类型的实例，例如 `Grid<int*>`。"
+    },
+    {
+      "q": "在 `Grid<int*>` 中，特例化模板参数 `T` 是什么？",
+      "a": "`T` 是 `int`，而不是 `int*`。"
+    },
+    {
+      "q": "为什么修改 `psGrid2` 的元素不会修改 `psGrid`？",
+      "a": "因为该指针类型特例化执行深拷贝，`psGrid2` 中的 `unique_ptr` 指向所指对象的独立副本。"
+    },
+    {
+      "q": "指针特例化使用什么类型管理网格中的动态对象？",
+      "a": "使用 `std::unique_ptr<T>` 管理。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "类模板部分特例化",
+    "指针类型",
+    "std::unique_ptr",
+    "深拷贝与浅拷贝"
+  ],
+  "source_pages": [
+    763,
+    764
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1578_针对所有指针类型的_grid_部分特例化与深拷贝",
+  "_chunk_pages": [
+    761,
+    764
+  ]
+}

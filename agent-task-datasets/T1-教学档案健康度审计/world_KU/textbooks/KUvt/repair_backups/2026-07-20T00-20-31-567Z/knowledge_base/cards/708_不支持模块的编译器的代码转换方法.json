@@ -1,0 +1,43 @@
+{
+  "title": "不支持模块的编译器的代码转换方法",
+  "definition": "如果编译器尚不支持 C++ 模块，可以将模块化代码转换为传统的头文件和源文件形式，以便继续编译示例代码。",
+  "key_points": [
+    "将模块接口文件的 .cppm 扩展名改为 .h，并在文件顶部添加 #pragma once。",
+    "删除 export module xyz 声明，并用相应的 #include 替换 module xyz、import 和 export import 声明。",
+    "删除所有 export 关键字以及表示全局模块片段开始的 module;。",
+    "如果函数或变量定义位于 .h 头文件中，应在定义前添加 inline 关键字。"
+  ],
+  "examples": [
+    "模块形式：文本中的 module xyz、import xyz 和 export module xyz；转换后分别使用传统的 #include 和头文件形式。",
+    "头文件中定义函数时可写为：inline int getValue() { return 42; }"
+  ],
+  "misconceptions": [
+    "转换为传统头文件形式并不是模块语法的另一种写法，而是为了兼容不支持模块的编译器。",
+    "不能只把 .cppm 改名为 .h，还必须同步处理 module、import、export 等声明。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何把一个 .cppm 模块接口文件转换为传统头文件？",
+      "a": "将 .cppm 改名为 .h，在顶部添加 #pragma once，删除 export module 声明和 export 关键字，并将相关 module、import、export import 声明改为适当的 #include。"
+    },
+    {
+      "q": "为什么转换后头文件中的函数或变量定义可能需要添加 inline？",
+      "a": "因为它们可能被多个源文件包含；添加 inline 可避免同一定义在多个翻译单元中产生重复定义问题。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++头文件与#include的基本用法"
+  ],
+  "source_pages": [
+    353,
+    353
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "708_不支持模块的编译器的代码转换方法",
+  "_chunk_pages": [
+    353,
+    356
+  ]
+}

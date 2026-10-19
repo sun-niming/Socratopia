@@ -1,0 +1,43 @@
+{
+  "title": "const 不影响异常类型匹配",
+  "definition": "对于要捕获的异常类型，捕获参数是否带有 const 属性不影响类型匹配。例如，catch (const runtime_error& e) 和 catch (runtime_error& e) 都可以匹配 runtime_error 类型的异常。const 主要限制处理程序通过该引用修改异常对象，而不是改变异常类型匹配规则。",
+  "key_points": [
+    "const runtime_error& 可以匹配 runtime_error 异常。",
+    "runtime_error& 也可以匹配 runtime_error 异常。",
+    "const 属性不改变异常类型匹配的目的。",
+    "教材整体仍建议使用 const 引用捕获异常。"
+  ],
+  "examples": [
+    "以下两种形式都能匹配 runtime_error：\ncatch (const runtime_error& e) {\n    // 处理异常\n}\n\ncatch (runtime_error& e) {\n    // 处理异常\n}"
+  ],
+  "misconceptions": [
+    "错误地认为只有非 const 引用才能捕获非 const 异常对象。",
+    "错误地认为增加 const 会使 catch 无法匹配原异常类型。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "catch (const runtime_error& e) 能匹配 runtime_error 类型的异常吗？",
+      "a": "能。增加 const 不影响异常类型匹配。"
+    },
+    {
+      "q": "教材更推荐 const 引用还是非 const 引用？",
+      "a": "推荐 const 引用，例如 catch (const runtime_error& e)。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++ const 引用",
+    "异常类型匹配"
+  ],
+  "source_pages": [
+    444,
+    444
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "902_const_不影响异常类型匹配",
+  "_chunk_pages": [
+    441,
+    444
+  ]
+}

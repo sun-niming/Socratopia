@@ -1,0 +1,42 @@
+{
+  "title": "strcpy() 不检查目标缓冲区容量",
+  "definition": "C 字符串函数 strcpy() 将源字符串复制到目标字符串，但不会检查目标缓冲区是否足以容纳源字符串及其结尾 NUL。因此，调用者必须确保目标空间足够，否则可能发生缓冲区溢出。",
+  "key_points": [
+    "strcpy()接收目标字符串和源字符串。",
+    "目标缓冲区至少应能容纳源字符串的全部字符以及结尾的 $\\texttt{\\\\0}$。",
+    "教材指出，strcpy()通常不负责内存分配，也不负责确认目标空间是否足够。"
+  ],
+  "examples": [
+    "若源字符串为\"hello\"，目标空间至少需要 6 个 char：$\\texttt{'h', 'e', 'l', 'l', 'o', '\\\\0'}$。",
+    "先分配足够空间，再复制：$\\texttt{char* result \\{ new char[strlen(str) + 1] \\};}$，然后调用 $\\texttt{strcpy(result, str)}$。"
+  ],
+  "misconceptions": [
+    "调用 strcpy() 会自动扩大目标缓冲区。",
+    "只要目标指针不为空，strcpy() 就能安全复制任意长度的字符串。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "strcpy()是否会检查目标缓冲区是否足够？",
+      "a": "不会。调用者必须预先保证目标缓冲区足够大，否则可能发生缓冲区溢出。"
+    },
+    {
+      "q": "使用 strcpy() 复制字符串前，目标空间至少应容纳什么？",
+      "a": "应容纳源字符串的全部实际字符以及末尾的 NUL 字符。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C 风格字符串以 NUL 字符结尾"
+  ],
+  "source_pages": [
+    103,
+    103
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "188_strcpy_不检查目标缓冲区容量",
+  "_chunk_pages": [
+    101,
+    104
+  ]
+}

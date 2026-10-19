@@ -1,0 +1,39 @@
+{
+  "title": "函数对象的动态调用",
+  "definition": "除了直接通过函数名()调用函数外，函数对象还可以通过apply和call这两个方法属性进行动态调用。它们都可以指定this参数，并传入函数所需的实参。",
+  "key_points": [
+    "函数除了能用函数名()直接调用，还能用对象方法apply和call调用",
+    "apply和call都是函数对象的方法属性",
+    "两者都可以传入this参数和函数实参"
+  ],
+  "examples": [
+    "func.apply(this参数, [a, b])",
+    "func.call(this参数, a, b)"
+  ],
+  "misconceptions": [
+    "只有函数名()才能调用函数",
+    "apply和call不是调用函数的方法",
+    "动态调用不能传入this参数"
+  ],
+  "qa_pairs": [
+    {
+      "q": "除了函数名()之外，函数对象还可以怎样被调用？",
+      "a": "可以通过apply或call进行动态调用。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "函数基础"
+  ],
+  "source_pages": [
+    258,
+    258
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "358_函数对象的动态调用",
+  "_chunk_pages": [
+    257,
+    260
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "title": "装饰器的使用方式与透明性",
+  "definition": "使用装饰器时，客户端可以把装饰器对象当作原始段落对象一样调用 `getHTML()`。装饰器的应用对客户端是透明的：客户端只需组合对象，不必知道内部已经应用了哪些装饰器。",
+  "key_points": [
+    "单独加粗可使用 `BoldParagraph{p}.getHTML()`。",
+    "组合粗体和斜体可使用 `ItalicParagraph{BoldParagraph{p}}.getHTML()`。",
+    "装饰器保持与基础组件相同的接口，因此客户端调用方式不因是否装饰而改变。"
+  ],
+  "examples": [
+    "示例调用：`Paragraph p { \"A party? For me? Thanks!\" };`。",
+    "粗体：`std::cout << BoldParagraph{p}.getHTML() << std::endl;`。",
+    "粗体加斜体：`std::cout << ItalicParagraph{BoldParagraph{p}}.getHTML() << std::endl;`。"
+  ],
+  "misconceptions": [
+    "装饰器并不要求客户端直接调用装饰器特有的方法；客户端主要依赖共同的 IParagraph 接口。",
+    "嵌套装饰器的顺序不能随意忽略，因为它会影响生成结果的标签嵌套顺序。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么说装饰器对用户是透明的？",
+      "a": "因为装饰器和 Paragraph 都提供相同的 `getHTML()` 接口，用户可以用相同方式调用它们，不必知道对象是否已被装饰。"
+    },
+    {
+      "q": "如何构造一个先加粗、再加斜体的段落？",
+      "a": "使用 `ItalicParagraph{BoldParagraph{p}}`，其中 `p` 是基础 Paragraph 对象。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "装饰器模式解决样式组合问题",
+    "BoldParagraph 和 ItalicParagraph 装饰器的实现"
+  ],
+  "source_pages": [
+    962,
+    962
+  ],
+  "needs_verification": true,
+  "verify_query": "《C++20高级编程》第5版 第962页 装饰器使用示例 BoldParagraph ItalicParagraph 输出",
+  "concept_id": "1975_装饰器的使用方式与透明性",
+  "_chunk_pages": [
+    961,
+    964
+  ]
+}

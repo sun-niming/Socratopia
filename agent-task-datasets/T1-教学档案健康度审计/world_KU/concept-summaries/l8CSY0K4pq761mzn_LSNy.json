@@ -1,0 +1,225 @@
+{
+  "conversationId": "l8CSY0K4pq761mzn_LSNy",
+  "generatedAt": 1790417663395,
+  "pagesRange": null,
+  "sections": [
+    {
+      "type": "tldr",
+      "content": "本节课围绕「符号表出块的恢复操作」展开，漏掉出块的 top = saved，内层表压根不弹出，top 还赖在内层表上。"
+    },
+    {
+      "type": "concepts",
+      "items": [
+        {
+          "name": "符号表出块的恢复操作",
+          "body": "- 漏掉出块的 top = saved，内层表压根不弹出，top 还赖在内层表上\n- 后果是块内声明溢到块外，块外一查先撞上本该消失的内层条目\n- top = saved 干的是弹出并恢复\n- 缺了它，压进去的层就退不回来\n\n**例子**\n- top = saved",
+          "sourceMessageIndexes": [
+            42,
+            43
+          ]
+        },
+        {
+          "name": "符号表的作用",
+          "body": "- 符号表把信息从声明的地方传递到使用的地方\n- 声明处 put 进去，使用处 get 取出来\n- 表达式的翻译只依赖子表达式、不直接依赖符号表，所以运算符堆多少都不影响这条信息流",
+          "sourceMessageIndexes": [
+            43
+          ]
+        },
+        {
+          "name": "中间表示的分类",
+          "body": "- 前端造出源程序的中间表示，后端照它生成目标程序\n- 最重要的中间表示有两类：树型结构和线性表示\n- 树型结构包括语法分析树和抽象语法树，有层次\n- 线性表示特别是三地址代码，是一串基本步骤，没有层次结构\n- 想做真正的优化，就得用三地址代码这种线性表示\n- 基本块指总是一路顺序执行、中途不跳转的语句序列",
+          "sourceMessageIndexes": [
+            43
+          ]
+        },
+        {
+          "name": "三地址代码的形态",
+          "body": "- 三地址就是每一步里最多三个地址：两个操作数、一个结果\n- 三地址代码平铺成一行一行，没有层次\n- 谁先谁后靠语句顺序排，不靠嵌套\n- 树型结构运算符套着子表达式，层次本身就是它表达谁先算的方式\n\n**例子**\n- x = y + z\n- (a+b)*c 得拆成 t1=a+b 再 t2=t1*c",
+          "sourceMessageIndexes": [
+            44,
+            45
+          ]
+        },
+        {
+          "name": "抽象语法树的构造（语句）",
+          "body": "- 抽象语法树每个构造用一个结点表示，结点的子结点是该构造里有语义含义的组成部分\n- while(expr) stmt 中有语义含义的成分只有 expr 和 stmt，括号没含义\n- 结点是 Node 类的对象，Node 有两个直接子类 Expr 和 Stmt\n- 每种语句对应 Stmt 一个子类，类名首字母大写\n- 构造函数名对应运算符，参数对应运算分量\n- 以关键字开头的语句拿关键字当运算符，每个运算符配一个同名类、首字母大写\n\n**例子**\n- new While(x, y)\n- stmt → if(expr) stmt1 { stmt.n = new If(expr.n, stmt1.n); }\n- stmt → block { stmt.n = block.n; }",
+          "sourceMessageIndexes": [
+            45,
+            47,
+            48,
+            49
+          ]
+        },
+        {
+          "name": "括号与声明不入抽象语法树的原因",
+          "body": "- 括号是 while 构造固定带的部分，结点标着 While 就知道 expr 一定包在括号里\n- 括号在语义上什么都不携带，只是分隔符\n- 右括号的唯一作用是把 expr 和 stmt 隔开，左括号纯为配平\n- 抽象语法树只留有语义含义的成分，成对分隔符、分号这类纯装饰丢给语法分析器消化\n- 声明的信息已经进了符号表，树里再挂一份就是重复\n- 语句的语义没别的地方存，只能靠树来承载",
+          "sourceMessageIndexes": [
+            46,
+            47,
+            48,
+            49,
+            55
+          ]
+        },
+        {
+          "name": "seq 嵌套形状的成因",
+          "body": "- 序列的层层嵌套是语句序列的累积，不是块嵌套\n- 推手是文法形状：规则是二元的而且左递归\n- 每归约一步就把前面攒好的全串当左孩子、这一条新语句当右孩子挂上去\n- 最深那个左叶子 null 专门标记空序列\n- 若改用一个结点装一排子结点，就得给 Seq 造变长孩子列表，文法里没这么写\n\n**例子**\n- stmts → stmts1 stmt\n- new Seq(stmts1.n, stmt.n)",
+          "sourceMessageIndexes": [
+            50,
+            51
+          ]
+        },
+        {
+          "name": "表达式抽象语法树的构造",
+          "body": "- 图 2-39 给表达式构造树，套路和语句一样，每类运算配一个运算符、一个类\n- expr → rel 直接透传 expr.n = rel.n，add → term、term → factor 同理，不额外造结点\n- factor → ( expr ) 括号又不入树，直接把里面 expr.n 提上来当自己的结点\n\n**例子**\n- expr → rel = expr { expr.n = new Assign('=', rel.n, expr1.n); }\n- rel → rel1 < add { rel.n = new Rel('<', rel1.n, add.n); }\n- add → add1 + term { add.n = new Op('+', add1.n, term.n); }",
+          "sourceMessageIndexes": [
+            56,
+            57
+          ]
+        }
+      ]
+    },
+    {
+      "type": "notes",
+      "title": "学习轨迹",
+      "content": "- **答对**：栈顶错序，导致旧块不退，块外能查到块内声明\n- **答对**：三地址代码是三个地址，没有层次化结构\n- **困惑**：认为那对括号属于 while 性质的一部分\n- **答对**：声明中信息已加入符号表，入树并无意义\n- **误区**：认为需要用块的嵌套思维来构造语句序列的树\n- **答对**：因为各自的条件和子语句还可以继续展开，而不是直接消费，所以画成三角形\n- **答对**：类型信息从语法分析器中获得，放到了符号表中，因为不需要重复的数据类型声明\n- **答对**：指出 2.8.3 和 2.8.2 表达式的语法树部分还没看"
+    },
+    {
+      "type": "key-insight",
+      "content": "类型信息走声明→符号表→使用这条独立通道，不经过抽象语法树，所以声明能整批从树里剔掉",
+      "sourceMessageIndexes": [
+        54,
+        55
+      ]
+    },
+    {
+      "type": "open-question",
+      "content": "教材 2.8.4 要修改翻译方案在造抽象语法树的同时吐出三地址代码，代码该在归约的哪个时机、按什么顺序吐出来，才能保证 t1=a+b 排在 t2=t1*c 前面"
+    },
+    {
+      "type": "review-questions",
+      "items": [
+        {
+          "question": "出块时漏掉 top = saved 会有什么后果？",
+          "answer": "内层表压根不弹出，top 还赖在内层表上，块内声明溢到块外，块外或下一个块一查先撞上本该消失的内层条目。"
+        },
+        {
+          "question": "抽象语法树为什么丢掉 while 语句的括号和块里的声明？",
+          "answer": "括号只是分隔符、语义上什么都不携带；声明信息已进了符号表，树里再挂一份就是重复。抽象语法树只留有语义含义的成分。"
+        },
+        {
+          "question": "语句序列为什么用 seq(seq(null, …), …) 层层往左嵌套，而不是一个结点装一排子结点？",
+          "answer": "因为文法 stmts → stmts1 stmt 是二元且左递归的，每归约一步把已攒好的全串当左孩子、新语句当右孩子，树自然二元左深；改用一排子结点需要另造变长孩子列表。"
+        },
+        {
+          "question": "factor → num 把数值存进叶子，factor → ( expr ) 却只透传结点，为什么？",
+          "answer": "数值本身是语义内容、必须存；括号是纯分隔符、语义上不携带信息，所以直接透传 expr.n。"
+        },
+        {
+          "question": "三地址代码与树型中间表示在形态上差在哪？",
+          "answer": "三地址代码是线性的一行一行，每步最多三个地址（两操作数一结果），没有层次；树型结构运算符套子表达式，用层次表达谁先算。"
+        }
+      ]
+    }
+  ],
+  "generationMeta": {
+    "pipelineVersion": "post-class-v2",
+    "mode": "chunked",
+    "jobId": "pn_mui899ew3f043404498a",
+    "traceId": "tr_mui899ew06781b7882e9",
+    "sourceHash": "sha256:e0adce2ce308d31db1fb3e3a26eb8c3dfc1f52e65b75cab8dd62ac4aa31e5b0c",
+    "sourceMessageCount": 93,
+    "chunkCount": 1,
+    "generatedAt": 1790417663396,
+    "decision": "degraded",
+    "quality": {
+      "score": 0.1955,
+      "metrics": {
+        "topicCoverage": 1,
+        "learnerEvidenceCoverage": 1,
+        "explanationCoverage": 1,
+        "sourceIntegrity": 1,
+        "reviewQuestionDiversity": 0.9436619718309859,
+        "structureValidity": 1,
+        "lengthFitness": 0.66325,
+        "duplicationRatio": 0,
+        "unsupportedTopicRatio": 0,
+        "lengthChars": 2653,
+        "conceptCount": 8,
+        "evidenceTopicCount": 8,
+        "chunkCompleteness": 0.2
+      }
+    },
+    "warnings": [
+      "assembled within the 4000-5000 target at full detail",
+      "slice chunk-002 missing (upstream_timeout)",
+      "slice chunk-001 missing (upstream_timeout)",
+      "slice chunk-005 missing (schema_invalid)",
+      "slice chunk-004 missing (output_truncated)",
+      "note covers 1 of 5 slices",
+      "scored against 20% of the lesson's slices"
+    ],
+    "evidenceIndex": [
+      {
+        "name": "符号表出块的恢复操作",
+        "sourceMessageIndexes": [
+          42,
+          43
+        ]
+      },
+      {
+        "name": "符号表的作用",
+        "sourceMessageIndexes": [
+          43
+        ]
+      },
+      {
+        "name": "中间表示的分类",
+        "sourceMessageIndexes": [
+          43
+        ]
+      },
+      {
+        "name": "三地址代码的形态",
+        "sourceMessageIndexes": [
+          44,
+          45
+        ]
+      },
+      {
+        "name": "抽象语法树的构造（语句）",
+        "sourceMessageIndexes": [
+          45,
+          47,
+          48,
+          49
+        ]
+      },
+      {
+        "name": "括号与声明不入抽象语法树的原因",
+        "sourceMessageIndexes": [
+          46,
+          47,
+          48,
+          49,
+          55
+        ]
+      },
+      {
+        "name": "seq 嵌套形状的成因",
+        "sourceMessageIndexes": [
+          50,
+          51
+        ]
+      },
+      {
+        "name": "表达式抽象语法树的构造",
+        "sourceMessageIndexes": [
+          56,
+          57
+        ]
+      }
+    ],
+    "degradedReason": "chunk_failures"
+  }
+}

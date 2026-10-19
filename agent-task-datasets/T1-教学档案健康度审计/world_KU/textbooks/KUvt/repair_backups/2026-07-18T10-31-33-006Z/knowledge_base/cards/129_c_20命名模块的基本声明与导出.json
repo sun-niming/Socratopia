@@ -1,0 +1,47 @@
+{
+  "title": "C++20命名模块的基本声明与导出",
+  "definition": "C++20模块可以把程序组织成命名模块。`export module employee;`用于声明名为`employee`的模块；模块接口中可以使用`export`导出常量、类型或其他声明，供导入该模块的代码使用。模块还可以使用`import`引入所需的库或其他模块。",
+  "key_points": [
+    "`export module employee;`是命名模块`employee`的模块声明。",
+    "`import <string>;`表示引入字符串相关内容；原文将其放在模块声明之后。",
+    "带有`export`的声明可以成为模块的对外接口，例如原文中的`export const int DefaultRaiseAndDemeritAmount { 1'000 };`。",
+    "模块可以用于组织诸如Employee Database和User Interface等程序组成部分，减少传统头文件组织带来的耦合。"
+  ],
+  "examples": [
+    "模块声明：`export module employee;`。",
+    "导入内容：`import <string>;`。",
+    "导出常量：`export const int DefaultRaiseAndDemeritAmount { 1'000 };`。",
+    "原文还给出了默认起始工资常量的形式：`const int DefaultStartingSalary { 30'000 };`。"
+  ],
+  "misconceptions": [
+    "`export module employee;`不是普通变量声明，而是模块接口单元的模块声明。",
+    "只有写在模块中的声明并不自动全部成为外部接口；需要使用`export`导出相应声明。",
+    "模块名`employee`与类名、命名空间名或文件名不是同一个概念。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`export module employee;`表示什么？",
+      "a": "它声明了一个名为`employee`的C++命名模块，并表明当前单元是该模块的接口单元。"
+    },
+    {
+      "q": "如何把一个常量导出为模块接口的一部分？",
+      "a": "在声明前使用`export`，例如`export const int DefaultRaiseAndDemeritAmount { 1'000 };`。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++头文件与编译单元",
+    "C++变量声明"
+  ],
+  "source_pages": [
+    89,
+    92
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 modules export module employee import <string> module interface unit export const syntax",
+  "concept_id": "129_c_20命名模块的基本声明与导出",
+  "_chunk_pages": [
+    89,
+    92
+  ]
+}

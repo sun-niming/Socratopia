@@ -1,0 +1,55 @@
+{
+  "title": "C++常见逻辑与比较运算符",
+  "definition": "逻辑比较运算符用于比较值或组合布尔表达式，结果为true或false。常见运算符包括小于$<$、小于等于$\\leq$对应的C++写法$<=$、大于$>$、大于等于$\\geq$对应的C++写法$>=$、等于$==$、不等于$!=$、逻辑非$!$、逻辑与$&&$和逻辑或$||$。",
+  "key_points": [
+    "$==$用于判断两个值是否相等，不能与赋值运算符$=$混淆。",
+    "$!$是一元逻辑非运算符，会改变布尔表达式的true或false状态。",
+    "$&&$只有在两边都为true时结果才为true。",
+    "$||$只要两边至少有一边为true，结果就是true。",
+    "比较运算符可以直接用于if条件，例如if (i < 0)。",
+    "<=>是三向比较运算符，其详细语义与普通布尔比较不同。"
+  ],
+  "examples": [
+    "if (i < 0) { cout << \"i is negative\"; }",
+    "if (i == 3) { cout << \"i is 3\"; }",
+    "if (i != 3) { cout << \"i is not 3\"; }",
+    "if (!someBoolean) { cout << \"someBoolean is false\"; }",
+    "if (someBoolean && someOtherBoolean) { cout << \"both are true\"; }",
+    "if (someBoolean || someOtherBoolean) { cout << \"at least one is true\"; }"
+  ],
+  "misconceptions": [
+    "$==$是相等比较，$=$是赋值；二者用途不同。",
+    "$&&$要求两边都为true，而不是任意一边为true。",
+    "$||$表示至少一边为true，不要求两边都为true。",
+    "$!$只接受一个操作数，是一元运算符。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "C++中判断i是否等于3应使用哪个运算符？",
+      "a": "使用相等比较运算符==，例如if (i == 3)。"
+    },
+    {
+      "q": "逻辑与&&何时为true？",
+      "a": "只有左右两个操作数都为true时才为true。"
+    },
+    {
+      "q": "逻辑或||何时为true？",
+      "a": "左右两个操作数中至少有一个为true时为true。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "if语句条件表达式的布尔求值"
+  ],
+  "source_pages": [
+    51,
+    51
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 logical operators comparison operators == != && || ! <=> reference",
+  "concept_id": "079_c_常见逻辑与比较运算符",
+  "_chunk_pages": [
+    49,
+    52
+  ]
+}

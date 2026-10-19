@@ -1,0 +1,37 @@
+{
+  "title": "层定位",
+  "definition": "CSS 定位可以通过 position 等属性实现层定位，也就是让一个元素与另一个元素像图层一样层叠在一起。层定位通常分三步：先用 position 确定定位方式，再用 left、right、top、bottom 确定元素位置，最后用 z-index 确定上下层叠顺序。",
+  "key_points": [
+    "position 属性用于决定定位方式",
+    "left、right、top、bottom 属性用于确定元素位置",
+    "z-index 属性用于决定层叠顺序"
+  ],
+  "examples": [
+    ".box { position: absolute; top: 20px; left: 10px; z-index: 2; }"
+  ],
+  "misconceptions": [
+    "层定位只是改变元素外观，并不会影响位置",
+    "只设置 position 就已经同时完成了位置和层叠顺序的控制"
+  ],
+  "qa_pairs": [
+    {
+      "q": "层定位一般分哪三个步骤？",
+      "a": "先确定定位方式，再确定元素位置，最后确定元素的层叠顺序。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "CSS定位"
+  ],
+  "source_pages": [
+    137,
+    140
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "195_层定位",
+  "_chunk_pages": [
+    137,
+    140
+  ]
+}

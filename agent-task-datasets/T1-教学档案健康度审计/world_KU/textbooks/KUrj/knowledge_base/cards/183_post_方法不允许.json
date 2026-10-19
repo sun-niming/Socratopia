@@ -1,0 +1,38 @@
+{
+  "title": "POST 方法不允许",
+  "definition": "对根路径发送 `POST /` 时，服务器应返回 `405 Method Not Allowed`，表示这个资源存在，但该方法不被允许。",
+  "key_points": [
+    "POST 请求被明确拒绝。",
+    "返回状态码是 405。",
+    "405 表示方法不允许，不是资源不存在。"
+  ],
+  "examples": [
+    "`curl -i -X POST http://127.0.0.1:8080/`"
+  ],
+  "misconceptions": [
+    "POST 被拒绝时应该返回 404。",
+    "405 和 404 是同一种错误。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "对根路径发送 POST 请求应返回什么状态码？",
+      "a": "应返回 405 Method Not Allowed。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "HTTP 方法",
+    "HTTP 状态码"
+  ],
+  "source_pages": [
+    113,
+    116
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "183_post_方法不允许",
+  "_chunk_pages": [
+    113,
+    116
+  ]
+}

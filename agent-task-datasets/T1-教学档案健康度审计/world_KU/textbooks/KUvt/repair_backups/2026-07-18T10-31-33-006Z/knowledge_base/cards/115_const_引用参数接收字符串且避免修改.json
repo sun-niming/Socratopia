@@ -1,0 +1,45 @@
+{
+  "title": "const 引用参数接收字符串且避免修改",
+  "definition": "以 `const std::string&` 形式声明的参数是指向字符串对象的只读引用。函数可以读取该字符串而不能通过该参数修改它；由于是引用，不需要复制整个字符串。`const` 引用还可以绑定到字符串字面量产生的临时字符串对象，因此字符串字面量可以传给该参数。",
+  "key_points": [
+    "典型声明为 `void printString(const std::string& myString)`。",
+    "函数内可以读取 `myString`，例如使用 `std::cout << myString << std::endl;`，但不能通过 `myString` 修改字符串。",
+    "调用 `printString(someString);` 和 `printString(\"Hello World\");` 都可以，其中后者利用了 `const` 引用可绑定临时对象的特性。"
+  ],
+  "examples": [
+    "`void printString(const std::string& myString) { std::cout << myString << std::endl; }`。",
+    "`std::string someString{\"Hello World\"}; printString(someString);`。",
+    "`printString(\"Hello World\");` 可以传递字符串字面量。"
+  ],
+  "misconceptions": [
+    "`const` 引用并不表示函数一定复制字符串；它仍然是引用。",
+    "可以通过 `const std::string&` 读取实参，但不能通过该参数直接修改实参。",
+    "普通的非 `const` 引用不能像 `const` 引用一样直接绑定字符串字面量临时对象。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么 `printString(\"Hello World\")` 可以调用 `void printString(const std::string& myString)`？",
+      "a": "因为 `const` 引用可以绑定到由字符串字面量构造出的临时 `std::string` 对象。"
+    },
+    {
+      "q": "在 `printString` 函数中，能否通过 `myString` 修改传入的字符串？",
+      "a": "不能。`myString` 是 `const std::string&`，只能读取，不能通过它修改字符串。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "引用参数实现交换两个整数",
+    "const 限定符"
+  ],
+  "source_pages": [
+    81,
+    84
+  ],
+  "needs_verification": true,
+  "verify_query": "马克·格雷戈勒 C++20高级编程 第5版 第82页 void printString const std::string& 字符串字面量",
+  "concept_id": "115_const_引用参数接收字符串且避免修改",
+  "_chunk_pages": [
+    81,
+    84
+  ]
+}

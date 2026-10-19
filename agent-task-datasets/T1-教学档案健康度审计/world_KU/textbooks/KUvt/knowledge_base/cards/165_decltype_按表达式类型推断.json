@@ -1,0 +1,49 @@
+{
+  "title": "decltype 按表达式类型推断",
+  "definition": "decltype 是 C++ 的类型推断关键字，它把一个表达式作为操作数，并计算该表达式的类型。与 auto 不同，decltype 不会去除表达式类型中的引用和 const 限定符，因此可用于保留精确的表达式类型。",
+  "key_points": [
+    "decltype 的操作数是表达式。",
+    "decltype(x) 的结果通常与表达式 x 的类型相关。",
+    "decltype 不会像 auto 那样自动去除引用和 const 限定符。",
+    "对于返回 const string& 的 foo()，decltype(foo()) 的类型为 const string&，因此用它声明变量可以避免复制。",
+    "教材指出 decltype 在模板环境中尤其强大。"
+  ],
+  "examples": [
+    "如果 x 的类型是 int，可写为：decltype(x) y { 456 };，此时 y 的类型为 int。",
+    "假设 foo() 返回 const string&，可写为：decltype(foo()) f2 { foo() };，此时 f2 的类型为 const string&，不会生成副本。"
+  ],
+  "misconceptions": [
+    "decltype 和 auto 的行为完全相同。",
+    "decltype 会去除引用和 const 限定符。教材明确指出 decltype 不会去除它们。",
+    "decltype(foo()) f2 { foo() }; 一定会创建 string 副本。若 foo() 返回 const string&，教材指出 f2 也是 const string&。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "decltype(x) 的作用是什么？",
+      "a": "它根据表达式 x 计算出该表达式的类型。"
+    },
+    {
+      "q": "auto 与 decltype 在引用和 const 限定符处理上有什么区别？",
+      "a": "auto 会去除引用和 const 限定符，而 decltype 不会去除它们。"
+    },
+    {
+      "q": "如果 foo() 返回 const string&，decltype(foo()) 的类型是什么？",
+      "a": "类型是 const string&。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "auto 的基本作用与用途"
+  ],
+  "source_pages": [
+    91,
+    91
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "165_decltype_按表达式类型推断",
+  "_chunk_pages": [
+    89,
+    92
+  ]
+}

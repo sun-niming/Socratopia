@@ -1,0 +1,51 @@
+{
+  "title": "nullptr是真正的空指针常量",
+  "definition": "nullptr是C++11引入的真正空指针常量，用于表示空指针。C++11之前常用的NULL通常等价于整数0，因此在函数重载或参数匹配时可能被当作int，而不是指针。使用nullptr可以明确表达“这是一个空指针”。",
+  "key_points": [
+    "NULL通常被定义为整数0，不是具有指针类型的空指针常量。",
+    "调用`func(NULL)`时，如果存在`void func(int)`，NULL可能匹配int版本。",
+    "nullptr可以转换为指针类型，但不能按普通整数0使用，因此能减少NULL造成的歧义。",
+    "如果只有`void func(int)`而调用`func(nullptr)`，通常会编译错误，因为nullptr不能隐式转换为int。"
+  ],
+  "examples": [
+    "`void func(int i) { cout << \"func(int)\" << endl; }`",
+    "`func(NULL);`可能调用`func(int)`。",
+    "若函数声明为`void func(int* p);`，则`func(nullptr);`可以表示传入空指针。",
+    "如果没有指针参数版本，调用`func(nullptr);`会导致编译错误。"
+  ],
+  "misconceptions": [
+    "NULL和nullptr完全等价；实际上NULL通常是整数0，而nullptr是专门的空指针常量。",
+    "nullptr表示一个有效对象；实际上它表示不指向任何对象的空指针值。",
+    "调用nullptr指针指向的对象是安全的；对空指针解引用会导致未定义行为。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "NULL在函数重载中可能产生什么问题？",
+      "a": "NULL通常等价于整数0，可能匹配整数参数版本，而不是指针参数版本。"
+    },
+    {
+      "q": "nullptr的主要作用是什么？",
+      "a": "明确表示空指针，避免NULL作为整数0参与参数匹配而产生歧义。"
+    },
+    {
+      "q": "只有`void func(int)`时，调用`func(nullptr)`会怎样？",
+      "a": "会导致编译错误，因为nullptr不能隐式转换为int。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++函数参数与类型转换",
+    "C++指针基础"
+  ],
+  "source_pages": [
+    73,
+    74
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "132_nullptr是真正的空指针常量",
+  "_chunk_pages": [
+    73,
+    76
+  ]
+}

@@ -1,0 +1,304 @@
+{
+  "textbookId": "KUfp",
+  "updatedAt": "2026-06-05T09:49:16.492Z",
+  "cards": [
+    {
+      "id": "fc_1780635244766_000_0647f71502ca",
+      "question": "在无向连通图中，判断是否存在欧拉路径时，最关键应先考察什么？",
+      "choices": [
+        "图中顶点总数是否为偶数",
+        "奇度顶点的个数",
+        "是否存在经过所有顶点的路径",
+        "边数是否大于顶点数"
+      ],
+      "correctIndex": 1,
+      "explanation": "欧拉路径要求每条边恰好经过一次。对无向连通图，是否存在欧拉路径主要由奇度顶点个数决定：0 个奇度顶点有欧拉回路，2 个奇度顶点有欧拉路径，超过 2 个则没有欧拉路径。",
+      "source": {
+        "textbook": "离散数学 第四部分 图论 — 精炼版",
+        "chapter": "",
+        "textbookSlug": "KUfp"
+      },
+      "created": "2026-06-05T04:54:04.766Z",
+      "conversationId": "AEEN2zgcUL8rDZ_L8w6IZ",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-06-05T04:54:30.625Z",
+          "chosen": 1,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-06-05T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1780635244766_001_bf85726dbc21",
+      "question": "下列关于欧拉路径和哈密尔顿路径的说法，哪一项最准确？",
+      "choices": [
+        "欧拉路径只适用于赋权图，哈密尔顿路径只适用于无权图",
+        "欧拉路径看边是否每条经过一次，哈密尔顿路径看点是否每个经过一次",
+        "欧拉路径要求回到起点，哈密尔顿路径一定不能回到起点",
+        "欧拉路径和哈密尔顿路径都要求每条边和每个点都恰好经过一次"
+      ],
+      "correctIndex": 1,
+      "explanation": "欧拉路径关注的是边，要求每条边一次且仅一次；哈密尔顿路径关注的是顶点，要求每个顶点一次且仅一次。二者都涉及“一次且仅一次”，但对象不同。",
+      "source": {
+        "textbook": "离散数学 第四部分 图论 — 精炼版",
+        "chapter": "",
+        "textbookSlug": "KUfp"
+      },
+      "created": "2026-06-05T04:54:04.766Z",
+      "conversationId": "AEEN2zgcUL8rDZ_L8w6IZ",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-06-05T04:54:38.037Z",
+          "chosen": 1,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-06-05T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1780635244766_002_d9c67fd10d66",
+      "question": "如果一个图存在哈密尔顿回路，为什么它一定存在哈密尔顿路径？",
+      "choices": [
+        "把哈密尔顿回路中的所有边都走两遍即可得到哈密尔顿路径",
+        "从哈密尔顿回路中删除一个顶点即可得到哈密尔顿路径",
+        "从哈密尔顿回路中断开一条边即可得到哈密尔顿路径",
+        "只要图中顶点度数都是偶数，就能把哈密尔顿回路改成路径"
+      ],
+      "correctIndex": 2,
+      "explanation": "哈密尔顿回路已经经过每个顶点一次且仅一次，并回到起点。只要从这个回路中断开一条边，就得到一条仍经过所有顶点一次且仅一次的哈密尔顿路径。",
+      "source": {
+        "textbook": "离散数学 第四部分 图论 — 精炼版",
+        "chapter": "",
+        "textbookSlug": "KUfp"
+      },
+      "created": "2026-06-05T04:54:04.766Z",
+      "conversationId": "AEEN2zgcUL8rDZ_L8w6IZ",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-06-05T04:54:48.110Z",
+          "chosen": 2,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-06-05T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1780635244766_003_319fa7d0fe3c",
+      "question": "关于巡回售货员问题中的最邻近算法，下列哪一项理解是正确的？",
+      "choices": [
+        "它只适用于没有边权的图，因为边权会影响局部选择",
+        "它每一步选当前最近的未访问城市，但不保证总路线最短",
+        "它保证最后一条返回起点的边一定也是最便宜的",
+        "它会枚举所有哈密尔顿回路，因此一定得到最优解"
+      ],
+      "correctIndex": 1,
+      "explanation": "最邻近算法是一种贪心近似算法，每一步选择当前城市到未访问城市中距离或费用最小的一个。但局部最优不一定带来全局最优，所以它不保证得到最短哈密尔顿回路。",
+      "source": {
+        "textbook": "离散数学 第四部分 图论 — 精炼版",
+        "chapter": "",
+        "textbookSlug": "KUfp"
+      },
+      "created": "2026-06-05T04:54:04.766Z",
+      "conversationId": "AEEN2zgcUL8rDZ_L8w6IZ",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-06-05T04:54:53.735Z",
+          "chosen": 1,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-06-05T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1780635244766_004_939dada5edca",
+      "question": "在有向图的邻接矩阵 $A=(a_{ij})$ 中，$a_{ij}=1$ 通常表示什么？",
+      "choices": [
+        "$v_i$ 和 $v_j$ 在同一个连通分量中",
+        "存在一条从 $v_i$ 指向 $v_j$ 的有向边",
+        "存在一条从 $v_j$ 指向 $v_i$ 的有向边",
+        "$v_i$ 和 $v_j$ 之间至少存在一条无向边，方向不重要"
+      ],
+      "correctIndex": 1,
+      "explanation": "有向图邻接矩阵的第 $i$ 行第 $j$ 列表示是否存在从 $v_i$ 指向 $v_j$ 的边。行代表出发顶点，列代表到达顶点，方向不能反过来读。",
+      "source": {
+        "textbook": "离散数学 第四部分 图论 — 精炼版",
+        "chapter": "",
+        "textbookSlug": "KUfp"
+      },
+      "created": "2026-06-05T04:54:04.766Z",
+      "conversationId": "AEEN2zgcUL8rDZ_L8w6IZ",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-06-05T04:55:05.302Z",
+          "chosen": 1,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-06-05T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1780635560386_000_df2cc07249a6",
+      "question": "在无向连通图中，判断是否存在欧拉路径时，最关键应先检查什么？",
+      "choices": [
+        "图中顶点总数是否为偶数",
+        "奇度顶点的个数",
+        "是否能经过每个顶点一次且仅一次",
+        "边的权值之和是否最小"
+      ],
+      "correctIndex": 1,
+      "explanation": "欧拉路径要求每条边恰好走一次。对无向连通图，奇度顶点数决定是否存在欧拉路径：0 个奇度顶点有欧拉回路，2 个奇度顶点有欧拉路径但不一定有回路，超过 2 个则没有欧拉路径。",
+      "source": {
+        "textbook": "离散数学 第四部分 图论 — 精炼版",
+        "chapter": "",
+        "textbookSlug": "KUfp"
+      },
+      "created": "2026-06-05T04:59:20.386Z",
+      "conversationId": "AEEN2zgcUL8rDZ_L8w6IZ",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-06-05T09:49:03.688Z",
+          "chosen": 1,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-06-05T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1780635560386_001_20479572d520",
+      "question": "关于欧拉路径和哈密尔顿路径，下列说法哪一项最准确？",
+      "choices": [
+        "欧拉路径要求回到起点，哈密尔顿路径一定不能回到起点",
+        "欧拉路径和哈密尔顿路径都要求每条边和每个顶点都恰好经过一次",
+        "欧拉路径看边是否都走一次，哈密尔顿路径看顶点是否都访问一次",
+        "欧拉路径只适用于赋权图，哈密尔顿路径只适用于无权图"
+      ],
+      "correctIndex": 2,
+      "explanation": "欧拉路径关注的是“每条边一次且仅一次”，哈密尔顿路径关注的是“每个顶点一次且仅一次”。两者都含有“一次且仅一次”，但对象不同，因此很容易混淆。",
+      "source": {
+        "textbook": "离散数学 第四部分 图论 — 精炼版",
+        "chapter": "",
+        "textbookSlug": "KUfp"
+      },
+      "created": "2026-06-05T04:59:20.386Z",
+      "conversationId": "AEEN2zgcUL8rDZ_L8w6IZ",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-06-05T09:49:07.473Z",
+          "chosen": 2,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-06-05T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1780635560386_002_ae3d1d7d4c68",
+      "question": "如果一个图存在哈密尔顿回路，为什么它一定存在哈密尔顿路径？",
+      "choices": [
+        "把哈密尔顿回路中的所有边都走两遍即可得到哈密尔顿路径",
+        "只要图中所有顶点度数都是偶数，就一定有哈密尔顿路径",
+        "从哈密尔顿回路中删去一个顶点即可得到哈密尔顿路径",
+        "从哈密尔顿回路中断开一条边即可得到哈密尔顿路径"
+      ],
+      "correctIndex": 3,
+      "explanation": "哈密尔顿回路已经经过所有顶点一次且仅一次，并回到起点。只要从回路中断开一条边，就得到一条仍然经过所有顶点一次且仅一次、但不回到起点的哈密尔顿路径。",
+      "source": {
+        "textbook": "离散数学 第四部分 图论 — 精炼版",
+        "chapter": "",
+        "textbookSlug": "KUfp"
+      },
+      "created": "2026-06-05T04:59:20.386Z",
+      "conversationId": "AEEN2zgcUL8rDZ_L8w6IZ",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-06-05T09:49:16.491Z",
+          "chosen": 3,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-06-05T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1780635560386_003_2e9d925e2231",
+      "question": "在巡回售货员问题中，最邻近算法为什么不能保证得到最短哈密尔顿回路？",
+      "choices": [
+        "它无法形成回路，因为最后一定不能回到起点",
+        "它要求图中所有边权都相等，因此不能处理机票价格问题",
+        "它每步只考虑当前最近的未访问点，可能牺牲整体最优",
+        "它会访问某些城市多次，所以不满足哈密尔顿回路定义"
+      ],
+      "correctIndex": 2,
+      "explanation": "最邻近算法每一步都选择当前未访问城市中距离最近的城市，这是一种贪心策略。它只保证当前一步看起来最便宜，却可能导致后面被迫走很贵的边，因此局部最优不一定推出全局最优。",
+      "source": {
+        "textbook": "离散数学 第四部分 图论 — 精炼版",
+        "chapter": "",
+        "textbookSlug": "KUfp"
+      },
+      "created": "2026-06-05T04:59:20.386Z",
+      "conversationId": "AEEN2zgcUL8rDZ_L8w6IZ",
+      "status": "active",
+      "history": [],
+      "nextReview": "2026-06-05T04:59:20.386Z",
+      "interval": 0,
+      "ease": 2.5,
+      "repetitions": 0
+    },
+    {
+      "id": "fc_1780635560386_004_6114047ab4e4",
+      "question": "计算赋权图中某条哈密尔顿回路的总费用时，最容易导致错误的做法是什么？",
+      "choices": [
+        "把所有城市名称按字母顺序排列后再求和",
+        "没有按路线中相邻城市逐段对应边权，而是把边权配错",
+        "只计算顶点个数，而不计算边的条数",
+        "只看起点和终点之间的票价，而忽略是否访问所有城市"
+      ],
+      "correctIndex": 1,
+      "explanation": "哈密尔顿回路的总费用必须按照路线中相邻两个顶点之间的边权逐段相加。若把某条边的权值看成另一对城市之间的权值，即使加法本身正确，最终结果也会错误。",
+      "source": {
+        "textbook": "离散数学 第四部分 图论 — 精炼版",
+        "chapter": "",
+        "textbookSlug": "KUfp"
+      },
+      "created": "2026-06-05T04:59:20.386Z",
+      "conversationId": "AEEN2zgcUL8rDZ_L8w6IZ",
+      "status": "active",
+      "history": [],
+      "nextReview": "2026-06-05T04:59:20.386Z",
+      "interval": 0,
+      "ease": 2.5,
+      "repetitions": 0
+    }
+  ]
+}

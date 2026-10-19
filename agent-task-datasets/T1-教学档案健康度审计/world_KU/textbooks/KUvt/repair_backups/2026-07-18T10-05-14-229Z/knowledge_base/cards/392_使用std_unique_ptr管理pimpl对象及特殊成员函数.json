@@ -1,0 +1,54 @@
+{
+  "title": "使用std::unique_ptr管理Pimpl对象及特殊成员函数",
+  "definition": "在Pimpl设计中，`Spreadsheet`通过`std::unique_ptr<Impl>`独占管理实现对象。构造函数使用`std::make_unique<Impl>`创建实现对象；复制构造函数通过复制底层`Impl`创建独立副本；移动构造函数可以默认化；复制赋值时把右侧对象的底层实现复制到当前对象。",
+  "key_points": [
+    "带参数构造函数通过`std::make_unique<Impl>(theApp, width, height)`创建实现对象。",
+    "复制构造函数通过复制源对象的`Impl`创建新的实现对象，避免两个`Spreadsheet`对象共享同一个Pimpl对象。",
+    "移动构造函数原文声明为`Spreadsheet(Spreadsheet&&) noexcept;`，实现部分显示其默认化。",
+    "复制赋值的核心操作是把右侧对象的实现复制给当前对象，原文实现片段为`*m_impl = *rhs.m_impl;`，然后返回当前对象。",
+    "`std::unique_ptr`表示独占所有权，因此对象销毁时会负责释放所管理的`Impl`对象。"
+  ],
+  "examples": [
+    "构造实现对象：`m_impl = std::make_unique<Impl>(theApp, width, height);`",
+    "复制构造的核心形式：`m_impl = std::make_unique<Impl>(*src.m_impl);`",
+    "移动构造声明：`Spreadsheet(Spreadsheet&&) noexcept;`",
+    "复制赋值的核心形式：`*m_impl = *rhs.m_impl;`"
+  ],
+  "misconceptions": [
+    "误以为复制`std::unique_ptr`本身就能完成深复制；`unique_ptr`不能直接复制，复制构造需要显式复制其指向的`Impl`对象。",
+    "误以为两个复制得到的`Spreadsheet`对象共享同一个`Impl`；原文通过`make_unique<Impl>(*src.m_impl)`创建新的实现对象。",
+    "误以为移动构造会复制底层实现；移动操作的目标是转移资源所有权，原文将移动构造声明为`noexcept`并显示默认化。",
+    "误以为复制赋值只需替换指针；原文展示的是复制底层实现对象的内容。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "Pimpl形式的复制构造函数为什么使用`std::make_unique<Impl>(*src.m_impl)`？",
+      "a": "为了根据源对象的`Impl`创建一个新的实现对象，从而实现深复制而不是共享同一个实现对象。"
+    },
+    {
+      "q": "原文中移动构造函数具有什么异常说明？",
+      "a": "它声明为`Spreadsheet(Spreadsheet&&) noexcept`，表示移动构造函数承诺不抛出异常。"
+    },
+    {
+      "q": "复制赋值时，原文展示的底层复制操作是什么？",
+      "a": "`*m_impl = *rhs.m_impl;`，即把右侧对象所指向的`Impl`对象内容赋给当前对象的`Impl`对象。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "std::unique_ptr",
+    "复制构造函数与复制赋值运算符",
+    "移动构造函数"
+  ],
+  "source_pages": [
+    299,
+    300
+  ],
+  "needs_verification": true,
+  "verify_query": "Marc Gregoire C++20 Advanced Programming Spreadsheet pimpl std::unique_ptr copy constructor move constructor operator= pages 297 300",
+  "concept_id": "392_使用std_unique_ptr管理pimpl对象及特殊成员函数",
+  "_chunk_pages": [
+    297,
+    300
+  ]
+}

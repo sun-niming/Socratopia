@@ -1,0 +1,56 @@
+{
+  "title": "C风格变长参数列表的基本用法",
+  "definition": "C风格变长参数列表允许函数接收数量和类型都可变的参数。函数声明中至少要有一个命名参数，随后使用省略号`...`表示任意数量和类型的额外参数。访问这些参数需要使用`<cstdarg>`提供的`va_list`、`va_start`、`va_arg`和`va_end`等设施。",
+  "key_points": [
+    "函数原型可以写成`void debugOut(const char* str, ...);`，其中`str`是命名参数，`...`表示后续参数可变。",
+    "必须先声明`va_list`变量，并使用`va_start`初始化它。`va_start`的第二个参数必须是参数列表中最右边的命名参数。",
+    "使用`va_arg`按指定类型依次取得参数。",
+    "使用完变长参数列表后，必须调用`va_end`结束访问。",
+    "`printf`和`vfprintf`是教材中展示的典型应用；新代码更推荐使用类型安全的变参模板。"
+  ],
+  "examples": [
+    "调试输出函数的基本结构：\n```cpp\n#include <cstdarg>\n\nvoid debugOut(const char* str, ...)\n{\n    va_list ap;\n    va_start(ap, str);\n    vfprintf(stderr, str, ap);\n    va_end(ap);\n}\n```",
+    "调用示例：`debugOut(\"int %d\\n\", 5);`以及`debugOut(\"String %s and int %d\\n\", \"hello\", 5);`。",
+    "调用`printf(\"Many ints: %d, %d, %d, %d, %d\\n\", 1, 2, 3, 4, 5);`时，可以提供多个与格式字符串匹配的参数。"
+  ],
+  "misconceptions": [
+    "省略号`...`并不提供参数数量和类型信息；函数本身不能自动知道后面有多少参数。",
+    "`va_start`的第二个参数必须是最后一个命名参数，不能随意填写。",
+    "调用`va_start`后不能省略`va_end`。",
+    "C风格变长参数列表不是类型安全的变参模板。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "C风格变长参数函数的声明中为什么需要至少一个命名参数？",
+      "a": "`va_start`需要使用最后一个命名参数来初始化参数访问状态，因此函数不能只有省略号而没有命名参数。"
+    },
+    {
+      "q": "访问C风格变长参数通常需要哪些设施？",
+      "a": "需要`va_list`、`va_start`、`va_arg`和`va_end`。"
+    },
+    {
+      "q": "使用`va_start`后必须做什么？",
+      "a": "在结束对变长参数的访问时必须调用`va_end`。"
+    },
+    {
+      "q": "新代码为什么不推荐C风格变长参数列表？",
+      "a": "因为它缺乏类型安全，参数数量和类型都需要调用者与被调用者自行约定。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "函数参数",
+    "格式化输出"
+  ],
+  "source_pages": [
+    367,
+    367
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "744_c风格变长参数列表的基本用法",
+  "_chunk_pages": [
+    365,
+    368
+  ]
+}

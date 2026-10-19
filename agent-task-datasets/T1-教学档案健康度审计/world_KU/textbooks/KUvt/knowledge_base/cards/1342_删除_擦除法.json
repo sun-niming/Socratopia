@@ -1,0 +1,51 @@
+{
+  "title": "删除-擦除法",
+  "definition": "删除-擦除法用于在不支持 C++20 std::erase_if 的情况下从容器中删除满足条件的元素。先调用 std::remove 或 std::remove_if 将需要保留的元素移动到范围开头，并获得删除区域起始迭代器；再调用容器的 erase，将该迭代器到容器尾部的区间真正删除。",
+  "key_points": [
+    "remove 和 remove_if 只能访问迭代器范围，不能直接缩短底层容器。",
+    "删除算法执行后，范围被分成保留元素区和待删除元素区。",
+    "remove_if 返回待删除元素区的第一个元素的迭代器。",
+    "真正删除元素必须调用 strings.erase(it, end(strings))。",
+    "删除-擦除法的典型实现为：auto it = remove_if(begin(strings), end(strings), predicate); strings.erase(it, end(strings));"
+  ],
+  "examples": [
+    "void removeEmptyStrings(vector<string>& strings) { auto it = remove_if(begin(strings), end(strings), [](const string& str) { return str.empty(); }); strings.erase(it, end(strings)); }",
+    "对于 vector<string> { \"one\", \"\", \"two\", \"\", \"three\" }，remove_if 先把非空字符串移动到范围开头，erase(it, end(strings)) 再删除尾部待删除区域。"
+  ],
+  "misconceptions": [
+    "remove_if 不会真正减少容器的 size。",
+    "只调用 remove_if 而不调用 erase，待删除元素仍然属于容器。",
+    "调用 erase 时不能只传一个参数；erase(it) 只删除单个元素，而不是从 it 删除到容器尾部。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "删除-擦除法包含哪两个步骤？",
+      "a": "先用 remove 或 remove_if 移动并筛选元素，再用容器的 erase 删除返回迭代器到范围末尾的元素。"
+    },
+    {
+      "q": "为什么 remove_if 后还需要调用 erase？",
+      "a": "因为 remove_if 只能重排和移动范围中的元素，不能真正从底层容器中删除元素。"
+    },
+    {
+      "q": "删除-擦除法中正确的 erase 调用是什么？",
+      "a": "strings.erase(it, end(strings))，即删除从 it 到容器尾部的整个待删除区间。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "remove与remove_if",
+    "迭代器范围",
+    "vector"
+  ],
+  "source_pages": [
+    643,
+    643
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1342_删除_擦除法",
+  "_chunk_pages": [
+    641,
+    644
+  ]
+}

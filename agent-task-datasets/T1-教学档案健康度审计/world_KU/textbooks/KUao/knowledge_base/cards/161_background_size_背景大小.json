@@ -1,0 +1,37 @@
+{
+  "title": "background-size 背景大小",
+  "definition": "background-size 用于设置背景图片大小。教材给出的取值有 cover 和 contain：cover 表示放大图像、铺满元素；contain 表示缩小图像、铺满元素。",
+  "key_points": [
+    "cover 表示放大图像并铺满元素。",
+    "contain 表示缩小图像并铺满元素。"
+  ],
+  "examples": [
+    "background-size: cover;",
+    "background-size: contain;"
+  ],
+  "misconceptions": [
+    "cover 和 contain 是同一个意思。",
+    "background-size 只能写像素宽高。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "background-size 的 cover 和 contain 分别表示什么？",
+      "a": "cover 表示放大图像、铺满元素；contain 表示缩小图像、铺满元素。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "background-image 背景图片"
+  ],
+  "source_pages": [
+    113,
+    116
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "161_background_size_背景大小",
+  "_chunk_pages": [
+    113,
+    116
+  ]
+}

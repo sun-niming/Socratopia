@@ -1,0 +1,42 @@
+{
+  "title": "使用getline从控制台读取一整行字符串",
+  "definition": "可以使用getline从控制台输入流中读取一整行文本，并将读取结果存入std::string对象。用户输入一行内容后按Enter键结束该行输入。",
+  "key_points": [
+    "目标变量通常声明为std::string。",
+    "getline会读取一整行，而不是只读取一个不含空格的单词。",
+    "按Enter键可以结束当前行的输入。"
+  ],
+  "examples": [
+    "std::string s;\\ngetline(cin, s);"
+  ],
+  "misconceptions": [
+    "不能把读取整行的getline与只读取空白分隔单词的输入方式混为一谈。",
+    "结束输入行需要按Enter键，而不是必须输入特殊的字符串结束标记。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何读取用户输入的一整行字符串？",
+      "a": "声明一个std::string变量，并调用getline(cin, s)将整行输入读入该变量。"
+    },
+    {
+      "q": "使用getline读取一行后，用户如何表示这一行输入结束？",
+      "a": "按Enter键。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "std::string基础",
+    "输入流基础"
+  ],
+  "source_pages": [
+    121,
+    121
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "236_使用getline从控制台读取一整行字符串",
+  "_chunk_pages": [
+    121,
+    124
+  ]
+}

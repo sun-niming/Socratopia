@@ -1,0 +1,54 @@
+{
+  "title": "转换运算符的声明与定义",
+  "definition": "转换运算符是类成员函数，用于定义从该类对象到另一种类型的隐式或显式转换。其函数名写成 operator 目标类型，例如 operator double()，不写返回类型，因为目标类型已经包含在运算符名称中。",
+  "key_points": [
+    "从 SpreadsheetCell 转换为 double 的声明为：$operator\\ double()\\ const;$。",
+    "转换运算符通常应声明为 const，因为转换过程不修改被转换的对象。",
+    "转换运算符的实现可以直接返回对象内部表示值，例如：$SpreadsheetCell::operator\\ double()\\ const\\ \\{\\ return\\ getValue();\\ \\}$。",
+    "可以用同样语法定义转换为其他类型的运算符，例如 $operator\\ std::string()\\ const$。"
+  ],
+  "examples": [
+    "SpreadsheetCell cell { 1.23 };",
+    "double d = cell;",
+    "SpreadsheetCell::operator double() const { return getValue(); }",
+    "SpreadsheetCell::operator std::string() const { return doubleToString(getValue()); }",
+    "std::string str = cell;",
+    "std::string str2 { static_cast<std::string>(cell) };"
+  ],
+  "misconceptions": [
+    "转换运算符应写成带返回类型的普通成员函数，例如 double operator double()。实际上转换运算符不写返回类型。",
+    "写出 static_cast<double>(cell) 就能在没有转换运算符时自动让编译器知道转换规则；static_cast 只能要求使用已有的合法转换。",
+    "转换运算符一定会修改对象，因此不能声明为 const。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何声明从 SpreadsheetCell 到 double 的转换运算符？",
+      "a": "写作 $operator\\ double()\\ const;$，不需要单独写返回类型。"
+    },
+    {
+      "q": "转换运算符为什么通常声明为 const？",
+      "a": "因为类型转换通常只读取对象的值，不修改被转换的对象。"
+    },
+    {
+      "q": "如何显式地把 cell 转换为 std::string？",
+      "a": "可以写作 $static\\_cast<std::string>(cell)$。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "类成员函数",
+    "const 成员函数",
+    "类型转换"
+  ],
+  "source_pages": [
+    487,
+    487
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "976_转换运算符的声明与定义",
+  "_chunk_pages": [
+    485,
+    488
+  ]
+}

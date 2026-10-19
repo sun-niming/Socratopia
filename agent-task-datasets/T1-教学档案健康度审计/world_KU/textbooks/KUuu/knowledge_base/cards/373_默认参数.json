@@ -1,0 +1,37 @@
+{
+  "title": "默认参数",
+  "definition": "函数参数可以在形参列表里用赋值的方式设置默认值。",
+  "key_points": [
+    "默认值写在形参列表中",
+    "通过赋值设置默认参数",
+    "当调用时未传入对应实参时，可使用默认值"
+  ],
+  "examples": [
+    "function add(a=0,b=0){\n  return a+b;\n}"
+  ],
+  "misconceptions": [
+    "默认参数不是写在函数体内再补值",
+    "默认值是形参定义时直接写出来的"
+  ],
+  "qa_pairs": [
+    {
+      "q": "默认参数怎么设置？",
+      "a": "在形参列表里用赋值的方式设置默认值。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "形参与实参"
+  ],
+  "source_pages": [
+    253,
+    256
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "373_默认参数",
+  "_chunk_pages": [
+    253,
+    256
+  ]
+}

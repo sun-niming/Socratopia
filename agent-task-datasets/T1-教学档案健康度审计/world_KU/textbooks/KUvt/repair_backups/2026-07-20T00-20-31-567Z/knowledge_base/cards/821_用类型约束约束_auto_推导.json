@@ -1,0 +1,45 @@
+{
+  "title": "用类型约束约束 auto 推导",
+  "definition": "类型约束可以用于限制由 `auto` 推导出的变量类型。变量初始化时先进行类型推导，再检查推导出的类型是否满足指定概念；若不满足，程序编译失败。",
+  "key_points": [
+    "语法示例为 `Incrementable auto value{1};`。",
+    "初始化值 `1` 推导出 `int`，而 `int` 满足 `Incrementable`，因此代码可以编译。",
+    "用户定义字面量形成的 `std::string` 不满足 `Incrementable`，因此相应声明会导致编译错误。",
+    "类型约束还可用于约束函数返回类型推导、简化函数模板参数和泛型 lambda 参数。"
+  ],
+  "examples": [
+    "成功示例：`Incrementable auto value{1};`，推导类型为 `int`。",
+    "失败示例：`Incrementable auto value{ \"abc\"s };`，推导类型为字符串类型，而该类型不满足 `Incrementable`。"
+  ],
+  "misconceptions": [
+    "`Incrementable auto` 不是把变量类型固定为某个概念名称；实际类型仍由初始化器推导。",
+    "类型约束不是在推导前忽略初始化值，而是在推导结果上进行约束检查。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么 `Incrementable auto value{1};` 可以编译？",
+      "a": "初始化值使类型推导为 `int`，而 `int` 支持前缀和后缀自增，满足 `Incrementable`。"
+    },
+    {
+      "q": "为什么 `Incrementable auto value{ \"abc\"s };` 会编译失败？",
+      "a": "该初始化器推导出字符串类型，而字符串类型不满足 `Incrementable` 概念。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "概念与 requires 表达式",
+    "auto 类型推导",
+    "用户定义字面量"
+  ],
+  "source_pages": [
+    403,
+    404
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 constrained placeholder type Incrementable auto value std::string user-defined literal example",
+  "concept_id": "821_用类型约束约束_auto_推导",
+  "_chunk_pages": [
+    401,
+    404
+  ]
+}

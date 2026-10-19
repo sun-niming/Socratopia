@@ -1,0 +1,45 @@
+{
+  "title": "emplace 与可变参数模板接口",
+  "definition": "emplace 操作用于在适当位置直接构造对象。directed_graph 的接口包括 `emplace` 和带提示位置的 `emplace_hint`，它们通过可变数量的模板参数和函数参数接收构造对象所需的参数。原文指出该 directed_graph 实现忽略了 emplace 操作，即只给出接口而未实现其功能。",
+  "key_points": [
+    "接口可写为：`template <typename... Args> std::pair<iterator, bool> emplace(Args&&... args);`。",
+    "带提示位置的接口可写为：`template <typename... Args> iterator emplace_hint(iterator hint, Args&&... args);`。",
+    "`typename... Args` 表示模板参数包；`Args&&... args` 表示函数参数包。",
+    "原文中的 `...` 是可变参数模板语法，不是排版错误。"
+  ],
+  "examples": [
+    "```cpp\ntemplate <typename... Args>\nstd::pair<iterator, bool> emplace(Args&&... args);\n```",
+    "```cpp\ntemplate <typename... Args>\niterator emplace_hint(iterator hint, Args&&... args);\n```"
+  ],
+  "misconceptions": [
+    "可变参数模板不表示只能接收一个参数，而是可以接收数量可变的参数。",
+    "emplace 通常用于直接构造元素，但本页所述 directed_graph 实现并没有真正实现 emplace 操作。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`typename... Args` 和 `Args&&... args` 分别表示什么？",
+      "a": "前者表示可变数量的模板类型参数组成的参数包，后者表示与之对应的可变数量函数参数组成的参数包。"
+    },
+    {
+      "q": "原文中的 directed_graph 是否实现了 emplace？",
+      "a": "没有。原文说明该 directed_graph 的实现忽略了 emplace 操作。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "完美转发",
+    "函数模板",
+    "参数包"
+  ],
+  "source_pages": [
+    754,
+    754
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1562_emplace_与可变参数模板接口",
+  "_chunk_pages": [
+    753,
+    756
+  ]
+}

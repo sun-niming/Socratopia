@@ -1,0 +1,45 @@
+{
+  "title": "unordered_map的模板参数与初始化遍历",
+  "definition": "unordered_map 是定义在 <unordered_map> 头文件中的类模板。它共有五个模板参数：键类型、值类型、哈希类型、判等比较类型和分配器类型。后面三个参数分别用于自定义哈希函数、键相等比较函数和分配器，通常可以使用默认值。",
+  "key_points": [
+    "unordered_map 最重要的前两个模板参数是键类型和值类型。",
+    "可以使用统一初始化语法，通过多个键值对初始化 unordered_map。",
+    "C++17 结构化绑定可以在范围 for 中直接取得键和值。",
+    "不使用结构化绑定时，可以通过元素的 first 和 second 成员访问键和值。"
+  ],
+  "examples": [
+    "统一初始化：\nunordered_map<int, string> m {\n    {1, \"Item 1\"},\n    {2, \"Item 2\"},\n    {3, \"Item 3\"},\n    {4, \"Item 4\"}\n};\n\n使用结构化绑定：\nfor (const auto& [key, value] : m) {\n    cout << format(\"{} = {}\", key, value) << endl;\n}\n\n不使用结构化绑定：\nfor (const auto& p : m) {\n    cout << format(\"{} = {}\", p.first, p.second) << endl;\n}"
+  ],
+  "misconceptions": [
+    "unordered_map 的模板参数不只有键类型和值类型，还包括哈希、判等比较和分配器类型。",
+    "使用范围 for 遍历 unordered_map 时，不应假定输出顺序等于插入顺序或键的排序顺序。",
+    "结构化绑定只是访问键和值的语法方式，不会把 unordered_map 转换成有序容器。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "unordered_map 有哪五个模板参数？",
+      "a": "键类型、值类型、哈希类型、判等比较类型和分配器类型；后面三个参数通常可以使用默认值。"
+    },
+    {
+      "q": "遍历 unordered_map 的元素时，结构化绑定和普通写法分别如何访问键和值？",
+      "a": "结构化绑定使用 for (const auto& [key, value] : m)，普通写法使用 p.first 访问键、p.second 访问值。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "模板参数",
+    "统一初始化",
+    "范围 for 与结构化绑定"
+  ],
+  "source_pages": [
+    595,
+    596
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1230_unordered_map的模板参数与初始化遍历",
+  "_chunk_pages": [
+    593,
+    596
+  ]
+}

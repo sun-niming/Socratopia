@@ -1,0 +1,46 @@
+{
+  "title": "访问日志",
+  "definition": "访问日志用于记录每次请求的时间、客户端 IP、方法、路径、状态码和返回字节数。通过固定格式写入日志文件，可以方便排查问题、证明功能正确性，并在答辩中展示测试结果。",
+  "key_points": [
+    "日志建议字段：时间、客户端 IP、方法、路径、状态码、返回字节数。",
+    "时间可用 `time()`、`localtime_r()`、`strftime()` 格式化为 `%Y-%m-%d %H:%M:%S`。",
+    "写日志时可用 `fprintf(fp, ...)` 输出一行记录，再 `fflush(fp)` 及时刷新。",
+    "如果不是多线程，`fprintf()` 暂时不需要加锁；fork 并发时每个进程追加日志通常可用。",
+    "更严谨的做法是每次打开、追加、关闭日志文件。"
+  ],
+  "examples": [
+    "日志格式示例：`2026-06-29 08:30:01 127.0.0.1 GET /index.html 200 1024`",
+    "写日志示例：\n```c\nvoid write_access_log(FILE *fp,\nconst char *ip,\nconst char *method,\nconst char *path,\nint status,\nsize_t bytes) {\n    char time_buf[64];\n    time_t now = time(NULL);\n    struct tm tm_info;\n    localtime_r(&now, &tm_info);\n    strftime(time_buf, sizeof(time_buf), \"%Y-%m-%d %H:%M:%S\", &tm_info);\n\n    fprintf(fp, \"%s %s %s %s %d %zu\\n\",\n            time_buf, ip, method, path, status, bytes);\n    fflush(fp);\n}\n```"
+  ],
+  "misconceptions": [
+    "日志只是附加功能，可有可无。",
+    "只要打印了路径就算完成访问日志。",
+    "日志一定要在多线程场景下才能写。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "一条访问日志至少应包含哪些信息？",
+      "a": "时间、客户端 IP、方法、路径、状态码和返回字节数。"
+    },
+    {
+      "q": "为什么日志对答辩有帮助？",
+      "a": "因为它能证明程序实际处理了哪些请求、返回了什么状态码、是否拒绝了目录穿越。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "文件 I/O 基础",
+    "时间函数基础"
+  ],
+  "source_pages": [
+    35,
+    36
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "046_访问日志",
+  "_chunk_pages": [
+    33,
+    36
+  ]
+}

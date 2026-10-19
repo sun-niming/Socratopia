@@ -1,0 +1,53 @@
+{
+  "title": "unique_lock 的延迟、尝试与定时加锁",
+  "definition": "std::unique_lock 定义在 <mutex> 中，是比 std::lock_guard 更灵活的 RAII 锁类。它支持立即加锁、延迟加锁、尝试加锁、接管已有锁以及按绝对时间或相对时间加锁，并提供 owns_lock() 和 bool 转换运算符来检查当前是否拥有锁。",
+  "key_points": [
+    "std::unique_lock<std::mutex> lock(m) 会在构造时尝试加锁并在必要时阻塞。",
+    "std::unique_lock<std::mutex> lock(m, std::defer_lock) 只保存互斥体引用，不立即加锁，之后可调用 lock() 等方法加锁。",
+    "std::unique_lock<std::mutex> lock(m, std::try_to_lock) 会立即尝试加锁，即使失败也不会阻塞；之后仍可再尝试获取。",
+    "std::unique_lock<std::mutex> lock(m, std::adopt_lock) 假定当前线程已经持有锁，并接管该锁。",
+    "unique_lock 还支持以 std::chrono::time_point 指定绝对超时，或以 std::chrono::duration 指定相对超时。",
+    "unique_lock 提供 lock()、try_lock()、try_lock_for()、try_lock_until() 和 unlock()，其行为与相应互斥体操作一致。"
+  ],
+  "examples": [
+    "延迟加锁：\n代码：std::unique_lock<std::mutex> lock(m, std::defer_lock);\n代码：/* 其他计算 */\n代码：lock.lock();",
+    "检查是否持有锁：\n代码：std::unique_lock<std::mutex> lock(m, std::try_to_lock);\n代码：if (lock.owns_lock()) { /* 已获得锁 */ }",
+    "也可以使用布尔转换检查：\n代码：if (lock) { /* unique_lock 当前拥有锁 */ }"
+  ],
+  "misconceptions": [
+    "std::defer_lock 不会立即获得锁；它只延迟加锁。",
+    "std::try_to_lock 失败时不会阻塞，但这不表示 unique_lock 一定拥有锁，必须检查 owns_lock() 或布尔转换结果。",
+    "std::adopt_lock 与 std::defer_lock 不同：前者接管已经获得的锁，后者是不立即加锁。",
+    "unique_lock 的存在不代表始终持有锁；调用 unlock() 后可以暂时不持有锁。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "std::defer_lock 的作用是什么？",
+      "a": "让 unique_lock 保存互斥体引用但暂不获取锁，之后可以在需要时再调用 lock() 或其他加锁方法。"
+    },
+    {
+      "q": "如何判断 unique_lock 是否成功获得了锁？",
+      "a": "可以调用 owns_lock()，也可以使用 unique_lock 的 bool 转换运算符进行判断。"
+    },
+    {
+      "q": "std::try_to_lock 构造 unique_lock 时，如果加锁失败会怎样？",
+      "a": "构造不会因为获取失败而阻塞；随后应通过 owns_lock() 或布尔转换检查是否获得了锁。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "锁类与 RAII 自动解锁",
+    "定时互斥体与超时加锁"
+  ],
+  "source_pages": [
+    808,
+    808
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1660_unique_lock_的延迟_尝试与定时加锁",
+  "_chunk_pages": [
+    805,
+    808
+  ]
+}

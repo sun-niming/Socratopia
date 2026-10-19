@@ -1,0 +1,42 @@
+{
+  "title": "无序关联容器的四种类型",
+  "definition": "C++标准库提供四种无序关联容器：unordered_map、unordered_multimap、unordered_set 和 unordered_multiset。它们使用哈希表组织元素，与基于排序的 map、multimap、set 和 multiset 相区别。",
+  "key_points": [
+    "unordered_map 保存键和值，键通常唯一。",
+    "unordered_multimap 保存键和值，但允许多个等价键。",
+    "unordered_set 保存元素本身，元素通常唯一；unordered_multiset 允许多个等价元素。",
+    "无序关联容器的查找基于哈希函数和桶，而不是普通有序关联容器的排序结构。"
+  ],
+  "examples": [
+    "四种容器名称：std::unordered_map<Key, Value>、std::unordered_multimap<Key, Value>、std::unordered_set<Key>、std::unordered_multiset<Key>。"
+  ],
+  "misconceptions": [
+    "“无序”不表示元素没有任何内部组织，而是指容器不按键的排序顺序提供元素。",
+    "unordered_map 不应被理解为 map 的自动排序版本；其核心组织方式是哈希表。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "标准库提供哪四种无序关联容器？",
+      "a": "unordered_map、unordered_multimap、unordered_set 和 unordered_multiset。"
+    },
+    {
+      "q": "无序关联容器与 map、set 等有序关联容器的主要区别是什么？",
+      "a": "有序关联容器按元素进行排序；无序关联容器使用哈希函数和桶组织元素，查找主要依赖哈希值和桶内比较。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "关联容器的基本分类"
+  ],
+  "source_pages": [
+    593,
+    594
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 unordered_map unordered_set 是否保持元素排序 无序关联容器 标准定义",
+  "concept_id": "1226_无序关联容器的四种类型",
+  "_chunk_pages": [
+    593,
+    596
+  ]
+}

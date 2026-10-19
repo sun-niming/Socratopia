@@ -1,0 +1,53 @@
+{
+  "title": "static_cast的数值转换与继承层次转换",
+  "definition": "`static_cast` 用于执行编译器允许的显式类型转换。原文示例包括将整数转换为 `double`，以及在基类和派生类之间进行指针、引用转换。向上转换，即从派生类指针转换为基类指针，可以直接进行；从基类指针或引用转换为派生类指针或引用，可以使用 `static_cast`，但必须由程序员确保实际对象确实是目标派生类型。",
+  "key_points": [
+    "数值转换示例：`double result { static_cast<double>(i) / j };`，先把 `i` 转换为 `double`，再进行除法。",
+    "派生类指针可以转换为基类指针，例如 `Base* b { d };`。",
+    "基类指针可以显式转换为派生类指针，例如 `Derived* d = static_cast<Derived*>(b);`。",
+    "基类引用可以显式转换为派生类引用，例如 `Derived& dr { static_cast<Derived&>(br) };`。",
+    "如果基类指针实际指向的对象不是目标派生类对象，向下转换可能导致未定义行为；原文示例展示了这种不安全情形。"
+  ],
+  "examples": [
+    "数值转换：\n```cpp\ndouble result { static_cast<double>(i) / j };\n```",
+    "继承层次中的转换：\n```cpp\nBase* b { nullptr };\nb = d; // Derived* 到 Base* 的向上转换\n\nd = static_cast<Derived*>(b); // Base* 到 Derived* 的显式向下转换\n```",
+    "引用向下转换：\n```cpp\nDerived& dr { static_cast<Derived&>(br) };\n```",
+    "原文还给出了风险示例：\n```cpp\nBase* b { new Base{} };\nDerived* d { static_cast<Derived*>(b) }; // 实际对象不是 Derived\n```"
+  ],
+  "misconceptions": [
+    "`static_cast<Derived*>(b)` 不会检查 `b` 是否真的指向 `Derived` 对象。",
+    "能通过编译的向下转换不等于运行时一定安全。",
+    "向上转换通常不需要显式写 `static_cast`，而向下转换通常需要显式转换。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何使用 `static_cast` 将整数 `i` 转换为 `double` 后参与除法？",
+      "a": "可以写成 `double result { static_cast<double>(i) / j };`。"
+    },
+    {
+      "q": "`Derived*` 到 `Base*` 的转换属于什么转换？",
+      "a": "属于向上转换，原文示例中可以直接写 `Base* b { d };`。"
+    },
+    {
+      "q": "使用 `static_cast<Derived*>(b)` 将基类指针向下转换时需要满足什么条件？",
+      "a": "`b` 实际上应当指向一个 `Derived` 对象或其适当派生对象；否则转换可能不安全。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++继承与多态",
+    "指针与引用",
+    "显式类型转换"
+  ],
+  "source_pages": [
+    347,
+    348
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "449_static_cast的数值转换与继承层次转换",
+  "_chunk_pages": [
+    345,
+    348
+  ]
+}

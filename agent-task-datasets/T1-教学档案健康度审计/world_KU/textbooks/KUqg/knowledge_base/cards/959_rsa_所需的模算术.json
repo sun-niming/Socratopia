@@ -1,0 +1,50 @@
+{
+  "title": "RSA 所需的模算术",
+  "definition": "对于整数 $x$ 和正整数 $n$，$x\\bmod n$ 表示 $x$ 除以 $n$ 后的余数。模算术执行普通的加法、减法、乘法和指数运算，但每步结果可用除以 $n$ 后的余数代替。常用恒等式包括：$$\\begin{aligned}\\bigl[(a\\bmod n)+(b\\bmod n)\\bigr]\\bmod n&=(a+b)\\bmod n,\\\\\\bigl[(a\\bmod n)-(b\\bmod n)\\bigr]\\bmod n&=(a-b)\\bmod n,\\\\\\bigl[(a\\bmod n)(b\\bmod n)\\bigr]\\bmod n&=(ab)\\bmod n.\\end{aligned}$$由乘法性质可推广得到：$$(a\\bmod n)^d\\bmod n=a^d\\bmod n.$$",
+  "key_points": [
+    "$x\\bmod n$ 是 $x$ 被 $n$ 除后的余数。",
+    "可先对操作数取模，再执行加法、减法或乘法，最后再次取模。",
+    "模运算恒等式可以限制中间数值的大小，便于执行 RSA 中的大整数指数运算。",
+    "教材给出的简单示例是 $19\\bmod 5=4$。"
+  ],
+  "examples": [
+    "$$19\\bmod 5=4.$$",
+    "以 $a=19$、$b=8$、$n=5$ 为例：$$\\bigl[(19\\bmod5)+(8\\bmod5)\\bigr]\\bmod5=(4+3)\\bmod5=2,$$并且 $$(19+8)\\bmod5=27\\bmod5=2.$$"
+  ],
+  "misconceptions": [
+    "误以为“mod”表示普通除法；它表示除法所得的余数。",
+    "误以为模运算只能用于加法；教材同时列出了加法、减法、乘法和指数运算相关性质。",
+    "误以为必须先算出完整的巨大幂再取模；可在运算过程中反复取模以简化计算。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "$19\\bmod5$ 等于多少？",
+      "a": "等于 $4$。"
+    },
+    {
+      "q": "模乘法的基本恒等式是什么？",
+      "a": "$$\\bigl[(a\\bmod n)(b\\bmod n)\\bigr]\\bmod n=(ab)\\bmod n.$$"
+    },
+    {
+      "q": "由模乘法性质可得到什么指数恒等式？",
+      "a": "$$(a\\bmod n)^d\\bmod n=a^d\\bmod n.$$"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "整数除法",
+    "余数",
+    "指数运算"
+  ],
+  "source_pages": [
+    409,
+    412
+  ],
+  "needs_verification": true,
+  "verify_query": "《计算机网络 自顶向下方法》第7版 第412页 RSA 模算术 三个恒等式 乘法公式 勘误",
+  "concept_id": "959_rsa_所需的模算术",
+  "_chunk_pages": [
+    409,
+    412
+  ]
+}

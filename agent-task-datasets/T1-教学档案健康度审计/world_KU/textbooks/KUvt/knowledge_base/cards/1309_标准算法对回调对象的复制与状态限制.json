@@ -1,0 +1,50 @@
+{
+  "title": "标准算法对回调对象的复制与状态限制",
+  "definition": "标准算法可能会多次复制传入的回调对象，并对不同元素调用回调的不同副本。因此，通常不能依赖普通仿函数或 lambda 对象的内部状态在多次调用之间保持一致。对于仿函数，函数调用运算符通常应为 const；对于 lambda，不能依赖 `mutable` 状态在算法调用结束后保持可访问的一致结果。",
+  "key_points": [
+    "算法复制回调会导致不同元素可能由不同的回调副本处理。",
+    "普通回调应尽量设计为无状态。",
+    "仿函数的函数调用运算符通常应声明为 const。",
+    "lambda 默认不能修改按值捕获的成员；即使使用 `mutable`，其状态也可能存在于回调副本中，不能据此可靠地观察最终状态。",
+    "generate() 和 generate_n() 可以接收有状态回调，但算法完成后不会返回其内部使用的回调副本。"
+  ],
+  "examples": [
+    "有状态 lambda 示例：`auto isPerfectScore = [tally = 0](int i) mutable { cout << ++tally << endl; return i >= 100; };`。将它传给 `find_if()` 时，算法可能调用其副本，因此外部对象的计数不应被当作算法内部调用次数的可靠记录。",
+    "如果一个仿函数依赖内部状态在调用之间连续变化，就不应假设标准算法会始终调用同一个对象实例。"
+  ],
+  "misconceptions": [
+    "把回调传入算法后，不代表算法一定只保存并使用这一份对象。",
+    "lambda 使用 `mutable` 不代表算法结束后可以从外部 lambda 对象获得算法内部副本的最终状态。",
+    "所有算法都完全禁止有状态回调；原文明确指出 generate() 和 generate_n() 是例外，但它们仍会产生回调副本。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么标准算法中的普通回调通常应设计为无状态？",
+      "a": "因为算法可能复制回调，并使用不同副本处理不同元素，依赖单个对象内部状态连续变化会导致结果不可预测。"
+    },
+    {
+      "q": "仿函数的函数调用运算符通常应具有什么限定？",
+      "a": "通常应声明为 `const`。"
+    },
+    {
+      "q": "generate() 和 generate_n() 使用有状态回调时，为什么算法结束后不能直接访问算法修改的状态？",
+      "a": "因为算法可能使用回调的副本，而且不会返回它所使用的那份副本。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "函数对象与 lambda 表达式",
+    "对象拷贝"
+  ],
+  "source_pages": [
+    632,
+    632
+  ],
+  "needs_verification": true,
+  "verify_query": "C++ standard algorithms copy function objects callback state generate generate_n official reference",
+  "concept_id": "1309_标准算法对回调对象的复制与状态限制",
+  "_chunk_pages": [
+    629,
+    632
+  ]
+}

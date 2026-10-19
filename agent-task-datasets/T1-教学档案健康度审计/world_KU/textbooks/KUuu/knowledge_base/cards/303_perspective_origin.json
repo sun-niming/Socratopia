@@ -1,0 +1,37 @@
+{
+  "title": "perspective-origin",
+  "definition": "perspective-origin 是视线关注的起始点，默认值为舞台或者元素中心点。",
+  "key_points": [
+    "它描述视线关注的起始点。",
+    "默认位置是舞台或者元素中心点。"
+  ],
+  "examples": [
+    "perspective-origin: center;",
+    "perspective-origin: left top;"
+  ],
+  "misconceptions": [
+    "把它和 perspective 混为一谈。",
+    "以为它控制的是元素本身的旋转中心。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "perspective-origin 表示什么？",
+      "a": "表示视线关注的起始点，默认是舞台或者元素中心点。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "perspective"
+  ],
+  "source_pages": [
+    201,
+    202
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "303_perspective_origin",
+  "_chunk_pages": [
+    201,
+    204
+  ]
+}

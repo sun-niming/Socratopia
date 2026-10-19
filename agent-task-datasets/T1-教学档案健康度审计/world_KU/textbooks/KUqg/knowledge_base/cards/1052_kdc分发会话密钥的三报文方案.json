@@ -1,0 +1,42 @@
+{
+  "title": "KDC分发会话密钥的三报文方案",
+  "definition": "密钥分发中心（KDC）是与每个注册用户共享一个独特秘密对称密钥的服务器。题设要求在不使用公开密钥密码的情况下，由KDC为Alice和Bob分发会话密钥，并且只使用三种报文：Alice到KDC、KDC到Alice、Alice到Bob。",
+  "key_points": [
+    "Alice与KDC共享秘密密钥，Bob与KDC共享另一把秘密密钥。原文中的记号因扫描存在乱码，分别类似于 $K_{Alice-KDC}$ 和 $K_{Bob-KDC}$。",
+    "待分发的会话密钥记为 $K_s$，用于Alice和Bob后续的对称加密通信。",
+    "三种报文的方向固定为：Alice $\\rightarrow$ KDC、KDC $\\rightarrow$ Alice、Alice $\\rightarrow$ Bob。"
+  ],
+  "examples": [
+    "第一种报文在原文中给出为类似 $K_{A-KDC}(A,B)$ 的形式，表示Alice使用她与KDC共享的密钥保护包含Alice和Bob标识的信息。"
+  ],
+  "misconceptions": [
+    "KDC不是直接替代会话通信双方进行加密的第三方；它的作用是帮助双方获得会话密钥。",
+    "题设中的三种报文不包括Bob主动向KDC发送报文。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "题设中的KDC是什么？",
+      "a": "KDC是与每个注册用户共享独特秘密对称密钥的服务器，用于为通信双方分发会话密钥。"
+    },
+    {
+      "q": "该方案要求使用哪三种方向的报文？",
+      "a": "Alice到KDC、KDC到Alice、Alice到Bob。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "对称密钥密码体制",
+    "会话密钥"
+  ],
+  "source_pages": [
+    453,
+    456
+  ],
+  "needs_verification": true,
+  "verify_query": "《计算机网络 自顶向下方法》第7版 习题 P10 KDC Alice Bob 三种报文 K_s 原文答案",
+  "concept_id": "1052_kdc分发会话密钥的三报文方案",
+  "_chunk_pages": [
+    453,
+    456
+  ]
+}

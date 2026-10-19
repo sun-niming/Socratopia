@@ -1,0 +1,44 @@
+{
+  "title": "exception_ptr 保存和传递当前异常",
+  "definition": "std::exception_ptr 是一种类似指针的类型，用于保存通过 std::current_exception() 获取的异常对象指针。std::nested_exception 的默认构造过程会调用 std::current_exception()，自动捕获当前正在处理的异常并将其保存到 exception_ptr 中。exception_ptr 的实例可以在线程之间传递，通常按值传递。",
+  "key_points": [
+    "std::current_exception() 可以获取当前正在处理的异常，并生成一个 std::exception_ptr。",
+    "std::exception_ptr 可以为空，也可以指向由 current_exception() 获取的异常对象。",
+    "嵌套异常机制使用 exception_ptr 保存内部异常。",
+    "exception_ptr 可以在不同线程之间传递，通常通过值传递。"
+  ],
+  "examples": [
+    "概念关系：\n当前 catch 块中的异常\n    \\rightarrow std::current_exception()\n    \\rightarrow std::exception_ptr\n    \\rightarrow std::nested_exception 保存内部异常\n\n当嵌套异常被重新抛出时，保存于 exception_ptr 中的内部异常可以再次进入异常处理流程。"
+  ],
+  "misconceptions": [
+    "错误理解：exception_ptr 只保存异常的文本消息。实际它保存的是异常对象的指针式引用，因此可以保留异常对象本身。",
+    "错误理解：exception_ptr 一定非空。实际它可以为空，也可以保存由 current_exception() 获取的异常对象。",
+    "错误理解：exception_ptr 只能在创建它的线程内使用。原文说明它的实例可以在线程之间传递。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "std::exception_ptr 的用途是什么？",
+      "a": "它用于保存当前异常对象的指针式引用，使异常可以被延后处理或在不同线程之间传递。"
+    },
+    {
+      "q": "nested_exception 如何保存当前正在处理的异常？",
+      "a": "其默认构造过程调用 std::current_exception()，并将得到的异常信息保存到 std::exception_ptr 中。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "C++异常处理",
+    "异常对象与std::current_exception"
+  ],
+  "source_pages": [
+    455,
+    456
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "922_exception_ptr_保存和传递当前异常",
+  "_chunk_pages": [
+    453,
+    456
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "title": "整数的进制表示",
+  "definition": "JavaScript中的整数可以用十进制、二进制、八进制和十六进制表示。二进制整数以0b开头；八进制整数以0o或0开头；十六进制整数以0x开头。",
+  "key_points": [
+    "整数支持十进制、二进制、八进制、十六进制",
+    "二进制前缀是0b",
+    "八进制前缀是0o或0，十六进制前缀是0x"
+  ],
+  "examples": [
+    "0b1101",
+    "017",
+    "-035",
+    "0x16",
+    "0X3A8"
+  ],
+  "misconceptions": [
+    "只有十进制能写整数",
+    "0X3A8不是十六进制，因为X必须小写"
+  ],
+  "qa_pairs": [
+    {
+      "q": "0b1101和0x16分别是什么进制的整数？",
+      "a": "0b1101是二进制整数，0x16是十六进制整数。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "Number类型"
+  ],
+  "source_pages": [
+    241,
+    244
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "337_整数的进制表示",
+  "_chunk_pages": [
+    241,
+    244
+  ]
+}

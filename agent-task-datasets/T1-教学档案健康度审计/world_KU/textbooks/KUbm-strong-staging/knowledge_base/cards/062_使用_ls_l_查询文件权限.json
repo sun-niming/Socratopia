@@ -1,0 +1,35 @@
+{
+  "title": "使用 ls -l 查询文件权限",
+  "definition": "在 Linux 中，可使用命令“ls -l”查询文件权限。教材将其列为“查询文件权限”的命令，用于查看文件的权限相关信息。",
+  "key_points": [
+    "查询文件权限使用“ls -l”",
+    "该命令属于文件权限相关的基础操作"
+  ],
+  "examples": [
+    "ls -l"
+  ],
+  "misconceptions": [
+    "把“ls -l”误认为是修改权限的命令；实际上教材将其用于查询文件权限"
+  ],
+  "qa_pairs": [
+    {
+      "q": "在教材中，查询文件权限使用什么命令？",
+      "a": "使用“ls -l”查询文件权限。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "Linux 基本命令"
+  ],
+  "source_pages": [
+    33,
+    36
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "062_使用_ls_l_查询文件权限",
+  "_chunk_pages": [
+    33,
+    36
+  ]
+}

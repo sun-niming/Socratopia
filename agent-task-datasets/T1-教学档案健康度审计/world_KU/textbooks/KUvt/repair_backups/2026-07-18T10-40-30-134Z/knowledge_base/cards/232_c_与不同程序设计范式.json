@@ -1,0 +1,42 @@
+{
+  "title": "C++与不同程序设计范式",
+  "definition": "原文将 C++ 放在多种程序设计范式的背景下讨论，并提到函数式程序设计（functional programming）、过程式程序设计（procedural programming）和面向对象程序设计（OOP）等术语。该页的核心语境是：C++相关内容将从面向对象程序设计角度展开。由于提供的文字识别不完整，不能仅据此确定原文对这些范式关系的完整表述。",
+  "key_points": [
+    "原文出现 functional、procedural 和 OOP 等程序设计范式术语。",
+    "原文还提到 Lisp 与函数式程序设计的关联。",
+    "提供的 OCR 文本不完整，不能据此补充 C++ 对各范式的具体支持程度或历史结论。"
+  ],
+  "examples": [
+    "范式名称的英文对照：函数式程序设计为 functional programming，过程式程序设计为 procedural programming，面向对象程序设计为 Object-Oriented Programming（OOP）。",
+    "不要把“出现这些范式术语”扩展解释为“原文已经完整比较了它们的优缺点”；当前材料不足以支持这一结论。"
+  ],
+  "misconceptions": [
+    "不能仅凭该页残缺 OCR 断定 C++ 只支持某一种程序设计范式。",
+    "不能把 Lisp 与 OOP 直接等同；原文片段只明确出现了 Lisp 和 functional 等词，完整关系需要核对页面。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "该页出现了哪些程序设计范式术语？",
+      "a": "出现了 functional（函数式）、procedural（过程式）和 OOP（面向对象程序设计）等术语。"
+    },
+    {
+      "q": "能否仅依据当前 OCR 断定原文对 C++ 各范式的完整观点？",
+      "a": "不能。当前 OCR 不完整，应核对原书页面后再确定具体表述。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "程序设计范式的基本概念"
+  ],
+  "source_pages": [
+    165,
+    168
+  ],
+  "needs_verification": true,
+  "verify_query": "《C++20高级编程》第5版 第167页 functional procedural Lisp OOP C++ 程序设计范式 原文",
+  "concept_id": "232_c_与不同程序设计范式",
+  "_chunk_pages": [
+    165,
+    168
+  ]
+}

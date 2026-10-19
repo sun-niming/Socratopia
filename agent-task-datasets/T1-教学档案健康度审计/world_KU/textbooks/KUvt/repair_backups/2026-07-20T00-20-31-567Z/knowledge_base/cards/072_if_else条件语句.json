@@ -1,0 +1,48 @@
+{
+  "title": "if/else条件语句",
+  "definition": "`if/else` 是C++中根据条件真假选择执行路径的条件语句。当 `if` 后的条件为 `true` 时，执行对应的语句或代码块；当条件为 `false` 时，如果存在 `else`，则执行 `else` 对应的语句或代码块，否则继续执行条件语句之后的代码。多个分支可以通过 `else if` 级联。",
+  "key_points": [
+    "基本形式是 `if (条件) { ... } else { ... }`。",
+    "条件为真时执行 `if` 分支，条件为假时执行 `else` 分支（如果存在）。",
+    "可以使用 `else if` 添加多个按顺序检查的条件。",
+    "每个分支可以包含一条语句或一个由花括号包围的代码块。"
+  ],
+  "examples": [
+    "`if (i > 4) { /* Do something. */ } else if (i > 2) { /* Do something else. */ } else { /* Do something else. */ }`",
+    "当 `i > 4` 为真时执行第一个分支；否则检查 `i > 2`；如果仍为假则执行最后的 `else` 分支。"
+  ],
+  "misconceptions": [
+    "`else if` 不是独立于 `if` 的另一种主要语句，而是 `if` 与 `else` 组合形成的级联分支。",
+    "条件为假时，只有在存在 `else` 的情况下才会执行替代代码块；否则直接跳过整个 `if` 语句。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`if/else` 语句在条件为真时执行哪一部分？",
+      "a": "执行 `if` 后面对应的语句或代码块。"
+    },
+    {
+      "q": "如果 `if` 条件为假且没有 `else`，程序会怎样？",
+      "a": "跳过整个条件语句，继续执行其后的代码。"
+    },
+    {
+      "q": "如何在一个 `if/else` 结构中检查多个条件？",
+      "a": "使用 `else if` 级联，例如先写 `if (i > 4)`，再写 `else if (i > 2)`，最后可添加 `else`。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "布尔条件",
+    "比较运算符"
+  ],
+  "source_pages": [
+    48,
+    48
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "072_if_else条件语句",
+  "_chunk_pages": [
+    45,
+    48
+  ]
+}

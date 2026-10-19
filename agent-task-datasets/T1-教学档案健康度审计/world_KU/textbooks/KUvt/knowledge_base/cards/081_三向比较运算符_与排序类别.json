@@ -1,0 +1,58 @@
+{
+  "title": "三向比较运算符<=>与排序类别",
+  "definition": "三向比较运算符<=>又称太空船运算符，用一个表达式确定两个操作数的相对顺序。它不能只返回true或false，而是返回标准库中的类枚举排序类型。整数操作数通常产生强排序std::strong_ordering；浮点操作数产生偏序std::partial_ordering；自定义类型还可以选择弱排序std::weak_ordering。",
+  "key_points": [
+    "强排序的典型结果包括std::strong_ordering::less、std::strong_ordering::greater和std::strong_ordering::equal，分别表示小于、大于和相等。",
+    "偏序的典型结果包括std::partial_ordering::less、std::partial_ordering::greater、std::partial_ordering::equivalent和std::partial_ordering::unordered。",
+    "浮点比较出现NaN等无序情况时，可以得到std::partial_ordering::unordered。",
+    "弱排序的典型结果包括std::weak_ordering::less、std::weak_ordering::greater和std::weak_ordering::equivalent，可用于自定义类型的三向比较。",
+    "三向比较结果不是普通布尔值，通常需要与具体排序值比较。",
+    "对于原生类型，三向比较相较于分别使用==、<和>进行一次比较，收益通常不大；对比较代价高的对象更有用。",
+    "这些排序类型是类枚举类型，不是真正的枚举类型，因此不能用于switch，也不能使用using enum声明。"
+  ],
+  "examples": [
+    "auto result { i <=> 0 };",
+    "if (result == std::strong_ordering::less) { cout << \"less\" << endl; }",
+    "if (result == std::strong_ordering::greater) { cout << \"greater\" << endl; }",
+    "if (result == std::strong_ordering::equal) { cout << \"equal\" << endl; }"
+  ],
+  "misconceptions": [
+    "<=>的结果不是简单的true或false，而是一个排序类别值。",
+    "std::strong_ordering、std::partial_ordering和std::weak_ordering不能当作普通枚举类型用于switch。",
+    "浮点数的三向比较不一定能把两个值归为小于、大于或相等；还可能得到unordered。",
+    "<=>并不意味着所有对象比较都会更快；原文特别指出它对比较昂贵的对象更有用。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "整数进行<=>比较时，结果通常属于哪种排序类别？",
+      "a": "通常属于强排序std::strong_ordering。"
+    },
+    {
+      "q": "浮点数进行<=>比较时，为什么可能得到unordered？",
+      "a": "因为浮点比较可能遇到NaN等无序情况，此时无法确定小于、大于或等价关系。"
+    },
+    {
+      "q": "如何判断result表示第一个操作数小于第二个操作数？",
+      "a": "将result与相应排序值比较，例如result == std::strong_ordering::less。"
+    },
+    {
+      "q": "三向比较运算符的结果能否直接用于switch？",
+      "a": "不能；这些排序类型是类枚举类型，不是真正的枚举类型。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "C++常见逻辑与比较运算符"
+  ],
+  "source_pages": [
+    52,
+    52
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 operator<=> strong_ordering partial_ordering weak_ordering unordered cppreference",
+  "concept_id": "081_三向比较运算符_与排序类别",
+  "_chunk_pages": [
+    49,
+    52
+  ]
+}

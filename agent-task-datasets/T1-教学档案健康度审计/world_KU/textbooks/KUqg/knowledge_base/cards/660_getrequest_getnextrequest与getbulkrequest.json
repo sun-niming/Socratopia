@@ -1,0 +1,46 @@
+{
+  "title": "GetRequest、GetNextRequest与GetBulkRequest的区别",
+  "definition": "GetRequest、GetNextRequest和GetBulkRequest都是管理服务器发送给代理、用于请求一个或多个MIB对象值的PDU。三者的主要区别在于数据请求粒度：GetRequest可请求任意集合的MIB值；多个GetNextRequest可按顺序读取MIB对象列表或表格；GetBulkRequest可一次读取大块数据，以减少发送多个请求产生的额外开销。",
+  "key_points": [
+    "被请求的MIB对象由PDU变量绑定部分中的对象标识符定义。",
+    "GetRequest适合请求任意集合的MIB对象值。",
+    "多个GetNextRequest适合顺序读取MIB对象列表或表格。",
+    "GetBulkRequest适合读取大表等大块数据，可避免大量GetRequest或GetNextRequest带来的额外报文开销。",
+    "三种请求通常都由代理通过包含对象标识符及其相关值的Response PDU进行响应。"
+  ],
+  "examples": [
+    "读取一个或多个不连续的MIB对象实例，可以使用GetRequest。",
+    "顺序遍历一个MIB表格，可以连续发送多个GetNextRequest。",
+    "读取大型MIB表格时，可以使用GetBulkRequest减少请求次数。"
+  ],
+  "misconceptions": [
+    "GetNextRequest与GetRequest完全相同；实际上，GetNextRequest强调按顺序取得列表或表格中的下一个对象实例。",
+    "GetBulkRequest改变了MIB对象的内容；实际上，它只是以更大数据块读取值。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "GetRequest、GetNextRequest和GetBulkRequest的共同用途是什么？",
+      "a": "它们都由管理服务器发送给代理，用于请求被管设备中的一个或多个MIB对象值。"
+    },
+    {
+      "q": "三者的主要区别是什么？",
+      "a": "GetRequest可请求任意集合；GetNextRequest用于顺序读取列表或表格中的下一个对象；GetBulkRequest用于高效读取大块数据。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "SNMPv2的七种PDU类型",
+    "被管对象与MIB"
+  ],
+  "source_pages": [
+    293,
+    296
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "660_getrequest_getnextrequest与getbulkrequest",
+  "_chunk_pages": [
+    293,
+    296
+  ]
+}

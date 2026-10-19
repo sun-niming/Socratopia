@@ -1,0 +1,42 @@
+{
+  "title": "类与结构体的默认访问权限",
+  "definition": "教材指出，类和结构体都可以包含方法和数据成员；二者在默认访问说明符上不同：类默认是private，结构体默认是public。若只需要一组公共数据成员，且没有方法或方法很少，通常习惯上使用结构体。",
+  "key_points": [
+    "class的默认成员访问权限是private。",
+    "struct的默认成员访问权限是public。",
+    "通过显式写public或private，可以在struct中使用与类类似的访问控制。",
+    "二维点坐标可以用包含x和y两个公共数据成员的结构体表示。"
+  ],
+  "examples": [
+    "struct Point {\n    double x;\n    double y;\n};"
+  ],
+  "misconceptions": [
+    "class和struct并不是只能分别用于复杂对象和简单数据；二者都可以拥有方法和数据成员。",
+    "使用struct并不意味着所有成员永远都必须公开；仍然可以显式写private。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "class和struct在默认成员访问权限上有什么区别？",
+      "a": "class默认是private，struct默认是public。"
+    },
+    {
+      "q": "什么情况下通常使用结构体？",
+      "a": "只需要一组公共数据成员，且没有方法或方法数量很少时。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "访问说明符"
+  ],
+  "source_pages": [
+    230,
+    230
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 class struct 默认访问说明符 成员访问权限 基类访问权限 教材原文",
+  "concept_id": "489_类与结构体的默认访问权限",
+  "_chunk_pages": [
+    229,
+    232
+  ]
+}

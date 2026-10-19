@@ -1,0 +1,43 @@
+{
+  "title": "为Person类添加字符串转换运算符",
+  "definition": "练习15-3要求为Person类添加字符串转换运算符。该运算符返回一个字符串，这个字符串根据Person对象的名字和姓氏构造而成。",
+  "key_points": [
+    "转换运算符的目标类型是字符串。",
+    "返回的字符串由Person对象的名字和姓氏构造。",
+    "该功能建立在练习15-2中的Person类实现基础上。"
+  ],
+  "examples": [
+    "可以设计为：Person person{\"Peter\", \"Van Weert\"}; std::string text = static_cast<std::string>(person);",
+    "转换结果应包含该Person对象的名字和姓氏。"
+  ],
+  "misconceptions": [
+    "字符串转换运算符不是把任意对象都转换成字符串，而是为Person类型定义特定的字符串表示。",
+    "转换结果的内容应来自Person对象的名字和姓氏，而不是与对象无关的固定字符串。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "Person类的字符串转换运算符返回什么？",
+      "a": "返回一个根据Person对象的名字和姓氏构造的字符串。"
+    },
+    {
+      "q": "该转换运算符的目标类型是什么？",
+      "a": "字符串类型，即std::string。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++类型转换运算符",
+    "C++类成员函数"
+  ],
+  "source_pages": [
+    498,
+    498
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1001_为person类添加字符串转换运算符",
+  "_chunk_pages": [
+    497,
+    500
+  ]
+}

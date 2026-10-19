@@ -1,0 +1,52 @@
+{
+  "title": "用 std::source_location 改造可变参数日志接口",
+  "definition": "原文练习提出使用 C++20 的 std::source_location 改造 start-time 调试模式，以摆脱旧的日志宏。难点是 Logger::log() 是可变参数模板，不能简单地在可变参数包之后添加一个需要正常推导的命名 source_location 参数。原文建议引入辅助类 Log：其构造函数接收可变参数包和 source_location，再将实际工作转发给 Logger::log()，并为辅助类提供类模板实参推导指引。",
+  "key_points": [
+    "std::source_location 用于取得调用位置相关信息，从而减少对旧式日志宏的依赖。",
+    "问题来自可变参数模板接口与 source_location 参数的组合。",
+    "解决思路是使用辅助类，让构造函数负责接收参数并转发给 Logger::log()。",
+    "原文给出的推导指引形式为：template <typename... Ts> Log(Ts&&...) -> Log<Ts...>;，但教材扫描文本中的标识符大小写和拼写存在 OCR 不确定性。"
+  ],
+  "examples": [
+    "推导指引可写为：template <typename... Ts> Log(Ts&&...) -> Log<Ts...>;。其作用是根据传给 Log 构造函数的参数推导 Log 的模板实参。",
+    "调用日志辅助对象时，由辅助类构造函数取得 source_location，并把日志参数及位置信息转发给 Logger::log()。"
+  ],
+  "misconceptions": [
+    "认为可以无条件地把一个普通命名参数放在可变参数包之后，并期望模板实参推导与默认实参始终按预期工作。",
+    "认为 std::source_location 必须与宏配合，不能用于减少日志宏。",
+    "遗漏辅助类的类模板实参推导指引，导致预期的简洁调用形式无法完成推导。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么原文不直接在 Logger::log() 的可变参数包之后添加 source_location 参数？",
+      "a": "因为 Logger::log() 是可变参数模板，在可变参数包之后添加命名的 source_location 参数会带来模板参数推导问题。"
+    },
+    {
+      "q": "原文建议使用什么结构解决该问题？",
+      "a": "使用辅助类 Log；其构造函数接收可变参数包和 source_location，并将工作转发给 Logger::log()。"
+    },
+    {
+      "q": "辅助类为什么需要推导指引？",
+      "a": "为了根据构造函数调用中的参数推导辅助类的模板实参，从而支持简洁的类模板实参推导调用形式。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "可变参数模板",
+    "完美转发",
+    "类模板实参推导",
+    "std::source_location",
+    "日志接口"
+  ],
+  "source_pages": [
+    923,
+    923
+  ],
+  "needs_verification": true,
+  "verify_query": "Marc Gregoire Professional C++ 5th edition exercise 31-4 source_location Logger log helper class Log deduction guide",
+  "concept_id": "1912_用_std_source_location_改造可变参数日志接口",
+  "_chunk_pages": [
+    921,
+    924
+  ]
+}

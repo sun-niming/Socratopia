@@ -1,0 +1,36 @@
+{
+  "title": "backface-visibility",
+  "definition": "backface-visibility 用于控制元素背对屏幕时是否可见；取值 hidden 表示隐藏背面。",
+  "key_points": [
+    "它控制元素背面朝向屏幕时是否显示。",
+    "hidden 表示隐藏背面。",
+    "该属性常用于 3D 旋转时避免看到背面内容。"
+  ],
+  "examples": [
+    "backface-visibility: hidden;"
+  ],
+  "misconceptions": [
+    "hidden 不是隐藏整个元素，而是隐藏元素背对屏幕时的那一面。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "backface-visibility 的 hidden 表示什么？",
+      "a": "表示元素背对屏幕时隐藏。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "3D变换"
+  ],
+  "source_pages": [
+    201,
+    202
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "286_backface_visibility",
+  "_chunk_pages": [
+    201,
+    204
+  ]
+}

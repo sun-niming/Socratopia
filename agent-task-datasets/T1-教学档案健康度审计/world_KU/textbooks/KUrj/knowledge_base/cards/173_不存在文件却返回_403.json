@@ -1,0 +1,37 @@
+{
+  "title": "不存在文件却返回 403",
+  "definition": "如果访问不存在的文件却返回 403，通常是因为在 stat 之前就调用了 realpath，导致 realpath 失败后被误判为 Forbidden。正确流程是先做基础路径检查，再 stat；stat 发现不存在时返回 404，文件存在后再做 realpath 安全检查。",
+  "key_points": [
+    "realpath 失败不等于 403。",
+    "不存在文件应返回 404。",
+    "应先基础路径检查，再 stat，之后再做 realpath 安全检查。"
+  ],
+  "examples": [
+    "curl -i http://127.0.0.1:8080/no-file.html"
+  ],
+  "misconceptions": [
+    "把所有 realpath 失败都当成 Forbidden。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么不存在文件时不应该直接返回 403？",
+      "a": "因为可能是先调用 realpath 导致失败；正确做法是先 stat，不存在返回 404，存在后再做 realpath 安全检查。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "文件存在性检查",
+    "路径安全检查"
+  ],
+  "source_pages": [
+    110,
+    111
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "173_不存在文件却返回_403",
+  "_chunk_pages": [
+    109,
+    112
+  ]
+}

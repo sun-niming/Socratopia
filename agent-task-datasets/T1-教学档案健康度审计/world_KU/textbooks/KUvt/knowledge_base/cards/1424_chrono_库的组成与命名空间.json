@@ -1,0 +1,41 @@
+{
+  "title": "chrono 库的组成与命名空间",
+  "definition": "C++ 标准库中的 chrono 库是一组用于处理时间和日期的类与函数，相关内容定义在 `std::chrono` 命名空间中，并通过 `<chrono>` 头文件提供。教材列出的组件包括持续时间、时钟、时间点、C++20 日期和 C++20 时区。",
+  "key_points": [
+    "持续时间（Duration）表示时间间隔。",
+    "时钟（Clock）用于提供时间基准或获取时间。",
+    "时间点（Time point）表示时间轴上的一个点。",
+    "日期（Date）和时区（Time zone）是 C++20 相关功能。",
+    "chrono 相关内容定义在 `std::chrono` 中，使用时涉及 `<chrono>`。"
+  ],
+  "examples": [
+    "可以按类别理解 chrono 库：持续时间表示两个时间点之间的间隔，时间点表示某个时刻，时钟用于提供时间测量依据。"
+  ],
+  "misconceptions": [
+    "chrono 库不只包含持续时间，还包括时钟、时间点，以及教材列出的 C++20 日期和时区功能。",
+    "chrono 相关类型和函数不属于全局命名空间，而是位于 `std::chrono` 命名空间中。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "C++ 标准库中的 chrono 库主要用于什么？",
+      "a": "用于处理时间和日期，包含持续时间、时钟、时间点、日期及时区等相关类和函数。"
+    },
+    {
+      "q": "chrono 库的内容定义在哪个命名空间和头文件中？",
+      "a": "定义在 `std::chrono` 命名空间中，相关内容通过 `<chrono>` 头文件提供。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [],
+  "source_pages": [
+    682,
+    682
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1424_chrono_库的组成与命名空间",
+  "_chunk_pages": [
+    681,
+    684
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "title": "grid-column-start 与 grid-column-end",
+  "definition": "grid-column-start 用于指定元素左边框所在的垂直网格线；grid-column-end 用于指定元素右边框所在的垂直网格线。",
+  "key_points": [
+    "grid-column-start 对应元素左边框所在的垂直网格线。",
+    "grid-column-end 对应元素右边框所在的垂直网格线。",
+    "这两个属性用于控制元素在水平方向跨越的范围。"
+  ],
+  "examples": [
+    "grid-column-start: 2;",
+    "grid-column-end: 4;"
+  ],
+  "misconceptions": [
+    "容易把它们理解为列本身的编号，实际上描述的是网格线位置。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "grid-column-start 和 grid-column-end 分别表示什么？",
+      "a": "grid-column-start 表示元素左边框所在的垂直网格线，grid-column-end 表示元素右边框所在的垂直网格线。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "网格线编号与元素定位"
+  ],
+  "source_pages": [
+    181,
+    184
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "275_grid_column_start_与_grid_column_end",
+  "_chunk_pages": [
+    181,
+    184
+  ]
+}

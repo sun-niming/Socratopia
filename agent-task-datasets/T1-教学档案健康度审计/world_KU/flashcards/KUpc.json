@@ -1,0 +1,295 @@
+{
+  "textbookId": "KUpc",
+  "updatedAt": "2026-06-24T15:50:13.999Z",
+  "cards": [
+    {
+      "id": "fc_1782228011266_000_a37049c4f701",
+      "question": "在 HTML 中，如果一段文字在语义上是“网页标题”，更合适的写法是哪一种？",
+      "choices": [
+        "标题只要字体更大就行，不需要特定标签",
+        "用 `<p>` 表示标题，用 `<h1>` 表示普通正文",
+        "用 `<h1>` 到 `<h6>` 表示标题，用 `<p>` 表示段落",
+        "标题必须写在 `<head>` 里，正文必须写在 `<title>` 里"
+      ],
+      "correctIndex": 2,
+      "explanation": "HTML 强调的是语义结构，而不是单纯把字做大。标题通常用 `<h1>` 到 `<h6>` 表示，`<p>` 则用于正文段落。",
+      "source": {
+        "textbook": "Web",
+        "chapter": "",
+        "textbookSlug": "KUpc"
+      },
+      "created": "2026-06-23T15:20:11.266Z",
+      "conversationId": "vYfrY5BzO-1hHtNMze4Fd",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-06-23T15:20:19.548Z",
+          "chosen": 2,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-06-23T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1782228011267_001_073c16962ac0",
+      "question": "如果要在网页中插入一张图片，并且让浏览器知道图片地址和替代文字，最合适的写法是哪一种？",
+      "choices": [
+        "使用 `<image>` 标签，并通过 `href` 指定图片地址、`title` 提供替代文字",
+        "使用 `<img>` 标签，并通过 `src` 指定图片地址、`alt` 提供替代文字",
+        "使用 `<p>` 标签，并通过 `style` 指定图片地址、`text` 提供替代文字",
+        "使用 `<a>` 标签，并通过 `src` 指定图片地址、`alt` 提供替代文字"
+      ],
+      "correctIndex": 1,
+      "explanation": "插入图片通常使用 `<img>` 标签，它是一个自闭合风格的标签。`src` 用来指定图片地址，`alt` 用来提供图片加载失败时的替代文字。",
+      "source": {
+        "textbook": "Web",
+        "chapter": "",
+        "textbookSlug": "KUpc"
+      },
+      "created": "2026-06-23T15:20:11.267Z",
+      "conversationId": "vYfrY5BzO-1hHtNMze4Fd",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-06-23T15:20:55.121Z",
+          "chosen": 1,
+          "correct": true
+        },
+        {
+          "time": "2026-06-23T15:21:05.883Z",
+          "chosen": 1,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-06-25T16:00:00.000Z",
+      "interval": 3,
+      "ease": 2.7,
+      "repetitions": 2
+    },
+    {
+      "id": "fc_1782228011267_002_08fc5048b0f9",
+      "question": "关于 HTML 页面结构，下面哪种说法最准确？",
+      "choices": [
+        "`<body>` 放元信息，`<head>` 放可见内容，`<title>` 负责页面正文标题",
+        "`<html>` 只能放文字内容，不能再分成其他部分",
+        "`<head>` 放元信息，`<body>` 放可见内容，`<title>` 负责浏览器标签页标题",
+        "`<title>` 必须写在 `<body>` 里，才能显示在页面上"
+      ],
+      "correctIndex": 2,
+      "explanation": "HTML 页面通常以 `<html>` 作为最外层容器，`<head>` 放元信息，`<body>` 放页面上真正可见的内容。浏览器标签页上显示的页面标题一般写在 `<title>` 中。",
+      "source": {
+        "textbook": "Web",
+        "chapter": "",
+        "textbookSlug": "KUpc"
+      },
+      "created": "2026-06-23T15:20:11.267Z",
+      "conversationId": "vYfrY5BzO-1hHtNMze4Fd",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-06-23T15:21:02.271Z",
+          "chosen": 3,
+          "correct": false
+        },
+        {
+          "time": "2026-06-23T15:21:11.999Z",
+          "chosen": 2,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-06-23T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.4,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1782228011267_003_740ce8647fb0",
+      "question": "在 HTML 中，`href` 属性最主要的作用是什么？",
+      "choices": [
+        "指定链接文字的字体大小和颜色",
+        "指定链接点击后要跳转到的地址",
+        "指定网页字符编码格式",
+        "指定图片无法加载时显示的文字"
+      ],
+      "correctIndex": 1,
+      "explanation": "`href` 是超链接中用来指定跳转目标地址的属性。它告诉浏览器点击链接后要前往哪个 URL，而不是决定链接文字长什么样。",
+      "source": {
+        "textbook": "Web",
+        "chapter": "",
+        "textbookSlug": "KUpc"
+      },
+      "created": "2026-06-23T15:20:11.267Z",
+      "conversationId": "vYfrY5BzO-1hHtNMze4Fd",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-06-23T15:21:18.503Z",
+          "chosen": 1,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-06-23T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1782316172547_000_eb815cb7c901",
+      "question": "在 `p { color: red; }` 这段 CSS 里，哪一部分是“声明”而不是“规则”？",
+      "choices": [
+        "color: red;",
+        "p { color: red; }",
+        "p",
+        "{ color: red; }"
+      ],
+      "correctIndex": 0,
+      "explanation": "CSS 规则由“选择器 + 声明块”组成，而声明是“属性 + 值”组成的。`color: red;` 正是一条声明，`p { ... }` 才是整条规则。",
+      "source": {
+        "textbook": "Web",
+        "chapter": "",
+        "textbookSlug": "KUpc"
+      },
+      "created": "2026-06-24T15:49:32.547Z",
+      "conversationId": "9iMjKwGN1op6Jr5Jo5cl2",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-06-24T15:49:53.129Z",
+          "chosen": 0,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-06-24T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1782316172548_001_cff54c8fe97a",
+      "question": "如果两个 CSS 规则同时选中同一个元素，而且写了同一个属性但值不同，最终主要看什么来决定谁生效？",
+      "choices": [
+        "层叠性",
+        "绝对单位",
+        "继承性",
+        "特殊性"
+      ],
+      "correctIndex": 3,
+      "explanation": "这属于层叠中的冲突问题。此时要比较的是特殊性，也就是谁的选择器更具体，谁更可能胜出。",
+      "source": {
+        "textbook": "Web",
+        "chapter": "",
+        "textbookSlug": "KUpc"
+      },
+      "created": "2026-06-24T15:49:32.548Z",
+      "conversationId": "9iMjKwGN1op6Jr5Jo5cl2",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-06-24T15:50:01.991Z",
+          "chosen": 3,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-06-24T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1782316172548_002_a64fb0aec5ed",
+      "question": "在 `<link href=\"your-stylesheet.css\" rel=\"stylesheet\" />` 中，`rel=\"stylesheet\"` 里的 `rel` 表示什么？",
+      "choices": [
+        "关系",
+        "选择器",
+        "路径",
+        "地址"
+      ],
+      "correctIndex": 0,
+      "explanation": "`rel` 用来说明当前文档和被链接资源之间的关系，而不是地址本身。`stylesheet` 表示这个资源是样式表。",
+      "source": {
+        "textbook": "Web",
+        "chapter": "",
+        "textbookSlug": "KUpc"
+      },
+      "created": "2026-06-24T15:49:32.548Z",
+      "conversationId": "9iMjKwGN1op6Jr5Jo5cl2",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-06-24T15:50:05.013Z",
+          "chosen": 0,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-06-24T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1782316172548_003_53c05cc71c83",
+      "question": "下面哪句话最准确地描述了 CSS 的继承性？",
+      "choices": [
+        "只有写了 `!important` 的样式才能继承给子元素",
+        "继承性就是多个规则同时作用时比较谁更具体",
+        "子元素在没有冲突时可以继承父元素的一些样式风格，但不是所有属性都能继承。",
+        "子元素一定会继承父元素的所有样式"
+      ],
+      "correctIndex": 2,
+      "explanation": "继承性说的是父元素的一些样式可以传给子元素，但前提是不冲突，而且并不是所有属性都能继承。它和层叠性不是一回事。",
+      "source": {
+        "textbook": "Web",
+        "chapter": "",
+        "textbookSlug": "KUpc"
+      },
+      "created": "2026-06-24T15:49:32.548Z",
+      "conversationId": "9iMjKwGN1op6Jr5Jo5cl2",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-06-24T15:50:08.800Z",
+          "chosen": 2,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-06-24T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1782316172548_004_bd14b7bbbe29",
+      "question": "相对单位和绝对单位的核心区别是什么？",
+      "choices": [
+        "绝对单位会随着父元素变化，而相对单位不会",
+        "相对单位只能用于字体大小，绝对单位只能用于宽高",
+        "相对单位会相对于其他长度或元素来计算，并且会随着参照对象变化；绝对单位是固定的。",
+        "两者没有本质区别，只是写法不同"
+      ],
+      "correctIndex": 2,
+      "explanation": "绝对单位的长度是固定的，不会跟着别的元素变化；相对单位则会相对于某个参考对象来计算，因此会随着参照物变化。",
+      "source": {
+        "textbook": "Web",
+        "chapter": "",
+        "textbookSlug": "KUpc"
+      },
+      "created": "2026-06-24T15:49:32.548Z",
+      "conversationId": "9iMjKwGN1op6Jr5Jo5cl2",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-06-24T15:50:13.998Z",
+          "chosen": 2,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-06-24T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    }
+  ]
+}

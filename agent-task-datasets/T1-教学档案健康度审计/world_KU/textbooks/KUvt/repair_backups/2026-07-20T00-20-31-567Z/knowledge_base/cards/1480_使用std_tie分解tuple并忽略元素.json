@@ -1,0 +1,43 @@
+{
+  "title": "使用std::tie分解tuple并忽略元素",
+  "definition": "`std::tie`是一个工具函数，用给定变量创建一个由引用组成的tuple。将一个tuple赋值给`std::tie`的结果时，赋值会把源tuple中的元素写入这些变量。`std::tie`还可以与`std::ignore`配合，忽略不想接收的元素。",
+  "key_points": [
+    "`std::tie(i, str, b)`创建包含i、str、b引用的tuple。",
+    "执行`std::tie(i, str, b) = t1;`会把`t1`的三个元素分别赋值给三个变量。",
+    "使用`std::ignore`可以忽略对应位置的tuple元素。",
+    "`std::tie`适合在分解tuple时只接收部分元素。"
+  ],
+  "examples": [
+    "`int i; std::string str; bool b; std::tie(i, str, b) = t1;`会把`t1`的值写入三个独立变量。",
+    "忽略字符串元素：`std::tie(i, std::ignore, b) = t1;`。"
+  ],
+  "misconceptions": [
+    "`std::tie`不是把tuple复制到另一个普通变量，而是创建引用tuple并通过赋值更新目标变量。",
+    "`std::ignore`只能忽略对应位置的赋值，不会改变源tuple中的元素。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何用std::tie把tuple的三个元素写入i、str和b？",
+      "a": "使用`std::tie(i, str, b) = t1;`。"
+    },
+    {
+      "q": "如何在分解tuple时忽略第二个元素？",
+      "a": "使用`std::tie(第一个变量, std::ignore, 第三个变量) = tuple对象;`。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "使用结构化绑定分解tuple"
+  ],
+  "source_pages": [
+    711,
+    711
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1480_使用std_tie分解tuple并忽略元素",
+  "_chunk_pages": [
+    709,
+    712
+  ]
+}

@@ -1,0 +1,54 @@
+{
+  "title": "标准用户定义字面量及其命名空间",
+  "definition": "C++标准定义了一组标准用户定义字面量，用于把字面量直接转换为标准库类型的对象。这些标准用户定义字面量的后缀不以下画线开头。它们在std::literals的相关内联子命名空间中定义，因此也可以通过适当的using指令使用。",
+  "key_points": [
+    "字符串字面量后缀s创建std::string对象，相关命名空间是std::literals::string_literals。",
+    "字符串视图字面量后缀sv创建std::string_view对象，相关命名空间是std::literals::string_view_literals。",
+    "时间字面量后缀h、min、s、ms、us、ns创建相应的std::chrono::duration对象，相关命名空间是std::literals::chrono_literals。",
+    "日期字面量后缀y和d分别用于std::chrono::year和std::chrono::day，相关命名空间是std::literals::chrono_literals。",
+    "复数字面量用于创建std::complex<T>对象，其中T可以是double、long double或float。",
+    "可以使用using namespace std;、using namespace std::literals;、using namespace std::literals::string_literals;或using namespace std::literals::string_view_literals;等方式引入相关字面量。"
+  ],
+  "examples": [
+    "auto myString{\"Hello\"s};",
+    "auto myStringView{\"Hello\"sv};",
+    "auto myDuration{42min};",
+    "auto thisYear{2020y};",
+    "例如：using namespace std::literals::string_literals; 然后可以使用\"Hello\"s。"
+  ],
+  "misconceptions": [
+    "标准用户定义字面量不一定以下画线开头；标准库提供的这些后缀本身不以下画线开头。",
+    "后缀s在不同命名空间中可能表示不同类型，不能只根据后缀而忽略其命名空间。",
+    "使用用户定义字面量时，不是任意后缀都能直接使用，必须有相应的字面量运算符和命名空间可见性。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "\"Hello\"s通常创建什么类型的对象？",
+      "a": "创建std::string对象。"
+    },
+    {
+      "q": "42min表示什么？",
+      "a": "它是一个标准用户定义字面量，用于创建表示42分钟的std::chrono::duration对象。"
+    },
+    {
+      "q": "怎样引入字符串字面量后缀s？",
+      "a": "可以使用using namespace std::literals::string_literals;，也可以使用能够使该内联命名空间内容可见的相关using指令。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++用户定义字面量",
+    "C++命名空间与using指令"
+  ],
+  "source_pages": [
+    497,
+    497
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "997_标准用户定义字面量及其命名空间",
+  "_chunk_pages": [
+    497,
+    500
+  ]
+}

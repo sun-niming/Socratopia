@@ -1,0 +1,44 @@
+{
+  "title": "工厂方法可以作为 Pimpl 习惯用法的替代方案",
+  "definition": "工厂方法还可以用来隔离公共接口与具体实现，作为 Pimpl 习惯用法的一种替代方案。公共类只暴露稳定的接口和用于创建对象的静态工厂方法，具体实现则隐藏在接口之后，从而在公共接口与实现之间形成隔离。",
+  "key_points": [
+    "工厂方法可以在公共接口和具体实现之间建立一堵隔离墙。",
+    "示例中的公共接口包含虚析构函数和静态创建函数：`static std::unique_ptr<Foo> create();`。",
+    "调用者通过 `Foo::create()` 获得对象，而不必直接知道具体实现类。",
+    "这种做法有助于隐藏实现细节，并减少公共接口对具体实现的直接暴露。"
+  ],
+  "examples": [
+    "公共接口可写为：`class Foo { public: virtual ~Foo() = default; static std::unique_ptr<Foo> create(); };`；调用者使用 `auto object = Foo::create();`，不直接构造具体实现类。"
+  ],
+  "misconceptions": [
+    "Pimpl 和工厂方法都能隐藏实现，但二者不是完全相同的机制；教材将工厂方法作为 Pimpl 的替代方案，而不是说二者等价。",
+    "静态 create() 负责创建对象，并不意味着 Foo 必须暴露具体实现类的构造函数。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "工厂方法为什么能替代 Pimpl 习惯用法？",
+      "a": "因为它让公共接口只暴露抽象能力和创建入口，具体实现类被隐藏在工厂方法内部，从而隔离接口与实现。"
+    },
+    {
+      "q": "调用者如何获得 Foo 的实例？",
+      "a": "调用静态工厂方法 `Foo::create()`，它返回一个指向 Foo 的 `std::unique_ptr`，调用者无需直接知道具体实现类。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "工厂方法通过虚函数创建不同类型的对象",
+    "Pimpl 习惯用法",
+    "std::unique_ptr"
+  ],
+  "source_pages": [
+    952,
+    952
+  ],
+  "needs_verification": true,
+  "verify_query": "《C++20高级编程》第5版 工厂方法 Pimpl static unique_ptr<Foo> create 原文",
+  "concept_id": "1959_工厂方法可以作为_pimpl_习惯用法的替代方案",
+  "_chunk_pages": [
+    949,
+    952
+  ]
+}

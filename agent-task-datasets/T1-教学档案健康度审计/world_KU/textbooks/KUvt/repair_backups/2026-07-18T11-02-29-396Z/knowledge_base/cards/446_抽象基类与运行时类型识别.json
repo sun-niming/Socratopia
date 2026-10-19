@@ -1,0 +1,49 @@
+{
+  "title": "抽象基类与运行时类型识别",
+  "definition": "`Loggable` 是一个抽象基类：它声明了虚析构函数 `virtual ~Loggable() = default;`，并声明纯虚函数 `virtual std::string getLogMessage() const = 0;`。派生类 `Foo` 通过 `override` 实现该函数。函数 `logObject(const Loggable& loggableObject)` 接受基类的常量引用，可以调用虚函数 `getLogMessage()`，并通过 `typeid(loggableObject).name()` 获取对象的运行时类型名称。",
+  "key_points": [
+    "含有纯虚函数的类不能直接创建对象，必须由派生类实现纯虚函数后才能实例化派生类。",
+    "`Foo::getLogMessage() const override` 表示 `Foo` 重写了基类的虚函数，并且函数签名必须匹配。",
+    "通过基类引用调用虚函数时，会根据实际对象类型进行动态派发。",
+    "`typeid(loggableObject).name()` 用于获取表达式所表示对象的运行时类型名称。"
+  ],
+  "examples": [
+    "代码结构可表示为：\n```cpp\nclass Loggable {\npublic:\n    virtual ~Loggable() = default;\n    virtual std::string getLogMessage() const = 0;\n};\n\nclass Foo : public Loggable {\npublic:\n    std::string getLogMessage() const override {\n        return \"Hello logger.\";\n    }\n};\n\nvoid logObject(const Loggable& loggableObject) {\n    std::cout << typeid(loggableObject).name() << \":\\n\";\n    std::cout << loggableObject.getLogMessage() << std::endl;\n}\n```",
+    "`logObject(Foo{})` 中，`loggableObject.getLogMessage()` 调用的是 `Foo` 的实现，而不是抽象基类中不存在函数体的纯虚函数实现。"
+  ],
+  "misconceptions": [
+    "抽象基类不能直接实例化，但可以用来声明指针或引用。",
+    "`override` 不是新定义一种独立的虚函数，而是要求编译器检查派生类是否正确重写基类虚函数。",
+    "`typeid(...).name()` 返回的类型名称格式并不一定是人类可读的标准名称。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么 `Loggable` 不能直接创建对象？",
+      "a": "因为它包含纯虚函数 `getLogMessage() const = 0`，因此是抽象类。"
+    },
+    {
+      "q": "通过 `const Loggable&` 调用 `getLogMessage()` 时，若传入的是 `Foo` 对象，会调用哪个版本？",
+      "a": "会调用 `Foo::getLogMessage() const`，因为该函数是虚函数并且通过基类引用进行动态派发。"
+    },
+    {
+      "q": "`typeid(loggableObject).name()` 在示例中用于做什么？",
+      "a": "用于获取 `loggableObject` 所表示对象的运行时类型名称。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++类继承",
+    "虚函数与纯虚函数"
+  ],
+  "source_pages": [
+    345,
+    348
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 typeid polymorphic object reference typeid(expr).name() compiler-specific output MSVC GCC",
+  "concept_id": "446_抽象基类与运行时类型识别",
+  "_chunk_pages": [
+    345,
+    348
+  ]
+}

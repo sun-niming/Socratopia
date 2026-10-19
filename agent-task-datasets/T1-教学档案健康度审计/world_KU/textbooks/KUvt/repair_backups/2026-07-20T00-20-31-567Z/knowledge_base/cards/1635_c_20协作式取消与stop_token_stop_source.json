@@ -1,0 +1,43 @@
+{
+  "title": "C++20协作式取消与stop_token、stop_source",
+  "definition": "协作式取消是一种线程取消机制：请求取消的线程通过std::stop_source发出停止请求，而执行任务的线程通过std::stop_token定期检查stop_requested()，自行决定是否停止工作。取消请求不会强制终止线程。",
+  "key_points": [
+    "std::stop_token用于在线程内部主动检查是否已经请求停止；可取消线程需要定期调用token.stop_requested()。",
+    "std::stop_source用于请求取消，通过调用request_stop()发出停止请求。停止请求对相关的stop_source和stop_token可见。",
+    "传给std::jthread的可调用对象可以把std::stop_token作为第一个参数。",
+    "std::jthread可通过get_stop_token()和get_stop_source()分别直接访问其停止令牌和停止源。",
+    "std::stop_token可以与std::condition_variable_any一起使用，使线程在需要停止时能够被唤醒。"
+  ],
+  "examples": [
+    "可取消任务的基本结构：\n```cpp\nstd::jthread job{[](std::stop_token token) {\n    while (!token.stop_requested()) {\n        // 执行一小段工作\n    }\n}};\n```\n另一个线程可以请求取消：\n```cpp\njob.request_stop();\n```"
+  ],
+  "misconceptions": [
+    "协作式取消不是强制杀死线程；线程必须主动检查stop_requested()并自行结束工作。",
+    "调用request_stop()只是发出取消请求，并不表示线程已经立即停止。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "std::stop_token和std::stop_source分别用于什么？",
+      "a": "std::stop_token用于在线程内部检查取消请求，std::stop_source用于通过request_stop()发出取消请求。"
+    },
+    {
+      "q": "为什么这种机制称为协作式取消？",
+      "a": "因为请求取消的一方只发出请求，执行线程必须定期检查stop_requested()并自行决定停止工作。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++线程与std::jthread基础"
+  ],
+  "source_pages": [
+    797,
+    797
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1635_c_20协作式取消与stop_token_stop_source",
+  "_chunk_pages": [
+    797,
+    800
+  ]
+}

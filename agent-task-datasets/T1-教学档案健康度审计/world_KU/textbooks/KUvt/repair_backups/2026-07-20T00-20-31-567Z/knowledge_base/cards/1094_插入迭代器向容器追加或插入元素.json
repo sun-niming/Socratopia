@@ -1,0 +1,43 @@
+{
+  "title": "插入迭代器向容器追加或插入元素",
+  "definition": "insert_iterator、back_insert_iterator 和 front_insert_iterator 是三种插入迭代器适配器。它们在构造时保存目标容器的引用，并提供算法所需的迭代器接口，因此可以作为 myCopy() 等算法的目标迭代器。与普通输出迭代器覆盖目标范围中的已有元素不同，插入迭代器会调用容器的插入成员函数，将新元素插入容器。",
+  "key_points": [
+    "insert_iterator 调用容器的 insert(position, element)。",
+    "back_insert_iterator 调用容器的 push_back(element)。",
+    "front_insert_iterator 调用容器的 push_front(element)。",
+    "使用插入迭代器时，目标容器不需要预先调整大小来容纳新元素。"
+  ],
+  "examples": [
+    "vector<int> vectorOne{1, 2, 3, 4, 5};\nvector<int> vectorTwo;\nmyCopy(cbegin(vectorOne), cend(vectorOne), back_inserter(vectorTwo));"
+  ],
+  "misconceptions": [
+    "把插入迭代器作为算法目标时，算法不是替换目标容器中的已有元素，而是通过容器操作插入新元素。",
+    "目标 vector 为空并不会导致上述复制失败，因为 back_insert_iterator 会在复制过程中逐个调用 push_back()。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "插入迭代器与普通输出迭代器写入目标范围的主要区别是什么？",
+      "a": "普通输出迭代器通常写入并替换目标范围中的已有元素；插入迭代器会调用目标容器的插入成员函数，增加新元素。"
+    },
+    {
+      "q": "使用 back_insert_iterator 复制元素到一个空 vector 前，是否必须先调整 vector 的大小？",
+      "a": "不需要。back_insert_iterator 会通过 push_back() 正确插入元素。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "输出迭代器",
+    "容器成员函数 push_back、push_front 和 insert"
+  ],
+  "source_pages": [
+    533,
+    534
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1094_插入迭代器向容器追加或插入元素",
+  "_chunk_pages": [
+    533,
+    536
+  ]
+}

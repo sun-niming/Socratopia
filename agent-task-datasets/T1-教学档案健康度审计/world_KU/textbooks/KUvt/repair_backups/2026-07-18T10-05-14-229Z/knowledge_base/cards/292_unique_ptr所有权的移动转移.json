@@ -1,0 +1,45 @@
+{
+  "title": "unique_ptr所有权的移动转移",
+  "definition": "std::unique_ptr具有独占所有权，因此不能通过普通复制把一个unique_ptr赋给另一个unique_ptr。若要把资源所有权转移给另一个unique_ptr或按值传递给函数、构造函数，应使用std::move()。移动后，原unique_ptr不再拥有该资源。",
+  "key_points": [
+    "将unique_ptr作为函数参数按值传递时，需要使用std::move()转移所有权。",
+    "类的构造函数可以接收unique_ptr参数，并在成员初始化列表中使用std::move(data)把资源移动到成员变量。",
+    "移动操作转移的是资源所有权，而不是复制被管理对象。",
+    "原unique_ptr在移动后仍然是一个有效的unique_ptr对象，但不再拥有原来的资源。"
+  ],
+  "examples": [
+    "类Foo接收并保存整数资源：代码形式为Foo(std::unique_ptr<int> data) : m_data { std::move(data) } {}，其中成员变量m_data的类型为std::unique_ptr<int>。",
+    "创建并移动资源：代码形式为auto myIntSmartPtr { std::make_unique<int>(42) }; Foo f { std::move(myIntSmartPtr) };。"
+  ],
+  "misconceptions": [
+    "unique_ptr不能像普通值类型那样复制；应使用std::move()进行所有权转移。",
+    "std::move()本身不负责释放资源，它只是允许执行移动操作；资源的新所有者负责后续生命周期管理。",
+    "移动后不能继续把原unique_ptr当作仍然拥有原对象的指针使用。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何把myIntSmartPtr中的资源转移给Foo对象？",
+      "a": "先创建auto myIntSmartPtr { std::make_unique<int>(42) };，再调用Foo f { std::move(myIntSmartPtr) };。"
+    },
+    {
+      "q": "为什么Foo构造函数初始化m_data时要使用std::move(data)？",
+      "a": "因为unique_ptr具有独占所有权，不能复制；使用std::move(data)可以把data拥有的资源所有权转移给成员m_data。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "std::unique_ptr与RAII",
+    "C++移动语义"
+  ],
+  "source_pages": [
+    217,
+    220
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "292_unique_ptr所有权的移动转移",
+  "_chunk_pages": [
+    217,
+    220
+  ]
+}

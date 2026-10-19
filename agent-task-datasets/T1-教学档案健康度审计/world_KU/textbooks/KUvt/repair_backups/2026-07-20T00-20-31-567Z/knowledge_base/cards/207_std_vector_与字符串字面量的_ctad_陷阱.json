@@ -1,0 +1,45 @@
+{
+  "title": "std::vector 与字符串字面量的 CTAD 陷阱",
+  "definition": "使用类模板参数推导（CTAD）初始化保存字符串的 std::vector 时，如果初始化列表中的元素是不带 s 的字符串字面量，编译器会根据元素类型推导出 vector<const char*>，而不是 vector<string>。如果需要 vector<string>，应在每个字符串字面量后添加 s。",
+  "key_points": [
+    "vector names { \"John\", \"Sam\", \"Joe\" }; 推导出的类型是 vector<const char*>。",
+    "vector names { \"John\"s, \"Sam\"s, \"Joe\"s }; 推导出的类型是 vector<string>。",
+    "错误的元素类型可能导致后续处理出现不符合预期的行为，原文提到甚至可能崩溃。"
+  ],
+  "examples": [
+    "vector names1 { \"John\", \"Sam\", \"Joe\" }; // vector<const char*>",
+    "vector names2 { \"John\"s, \"Sam\"s, \"Joe\"s }; // vector<string>"
+  ],
+  "misconceptions": [
+    "vector 的变量名中含有 names，并不意味着元素类型会自动推导为 string。",
+    "CTAD 只根据初始化表达式的实际类型推导；不带 s 的字符串字面量实际对应 const char*。",
+    "只给部分字符串添加 s 不能可靠地表达所需的 vector<string>，应使初始化元素类型一致。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "以下声明推导出的类型是什么：vector names { \"John\", \"Sam\", \"Joe\" };",
+      "a": "推导为 vector<const char*>，不是 vector<string>。"
+    },
+    {
+      "q": "如何利用 CTAD 得到 vector<string>？",
+      "a": "在每个字符串字面量后添加 s，例如 vector names { \"John\"s, \"Sam\"s, \"Joe\"s };。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "std::vector",
+    "类模板参数推导 CTAD",
+    "std::string 用户定义字面量 s"
+  ],
+  "source_pages": [
+    109,
+    109
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "207_std_vector_与字符串字面量的_ctad_陷阱",
+  "_chunk_pages": [
+    109,
+    112
+  ]
+}

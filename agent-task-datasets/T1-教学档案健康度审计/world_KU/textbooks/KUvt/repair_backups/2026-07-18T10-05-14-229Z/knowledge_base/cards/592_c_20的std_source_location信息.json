@@ -1,0 +1,38 @@
+{
+  "title": "C++20的std::source_location信息",
+  "definition": "教材在本节引出C++20的std::source_location，用于表示源代码位置相关信息。原文列出了current()以及file_name()、function_name()、line()和column()等接口名称，分别对应当前位置、文件名、函数名、行号和列号。",
+  "key_points": [
+    "std::source_location属于C++20相关功能。",
+    "current()用于取得当前位置信息。",
+    "file_name()、function_name()、line()和column()分别用于获得文件名、函数名、行号和列号等源代码位置信息。"
+  ],
+  "examples": [
+    "源代码位置对象可表示为：$$\\mathrm{source\\_location}=\\{\\text{file name},\\text{function name},\\text{line},\\text{column}\\}$$",
+    "原文列出的相关接口名称包括：current()、file_name()、function_name()、line()、column()。"
+  ],
+  "misconceptions": [
+    "std::source_location描述的是源代码位置元数据，不是文件流中的文件内容位置或读取行号。",
+    "line()和column()表示源代码中的行列位置，不应与readIntegerFile读取的输入文件行号混淆。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "教材在C++20部分引出的std::source_location可以提供哪些信息？",
+      "a": "可以提供源文件名、函数名、源代码行号和列号等信息，并可通过current()获得当前位置。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++20标准库概念"
+  ],
+  "source_pages": [
+    449,
+    452
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 std::source_location current file_name function_name line column 官方文档",
+  "concept_id": "592_c_20的std_source_location信息",
+  "_chunk_pages": [
+    449,
+    452
+  ]
+}

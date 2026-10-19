@@ -1,0 +1,44 @@
+{
+  "title": "不要从同一个原始指针重复构造 shared_ptr",
+  "definition": "同一个原始指针只能安全地用于构造一个 shared_ptr，然后应通过复制该 shared_ptr 来获得其他共享所有者。如果使用同一个原始指针分别构造两个 shared_ptr，它们通常会建立彼此独立的控制关系，并在销毁时都尝试释放同一对象，从而导致重复释放，程序可能崩溃。",
+  "key_points": [
+    "正确方式是先创建一个 shared_ptr，再复制它：auto smartPtr2 { smartPtr1 };。",
+    "错误方式是从同一个原始指针分别构造多个 shared_ptr。",
+    "引用计数只对同一个 shared_ptr 共享体系有效；多个独立构造的 shared_ptr 不会自动识别它们管理的是同一原始指针。",
+    "原文指出，只有在没有原始指针参与所有权管理时，引用计数机制才能正常工作。"
+  ],
+  "examples": [
+    "错误示例：Simple* mySimple { new Simple{} }; shared_ptr<Simple> smartPtr1 { mySimple }; shared_ptr<Simple> smartPtr2 { mySimple };",
+    "正确示例：auto smartPtr1 { make_shared<Simple>() }; auto smartPtr2 { smartPtr1 };"
+  ],
+  "misconceptions": [
+    "只要两个 shared_ptr 保存的地址相同，它们就会自动共享引用计数；实际上分别从同一原始指针构造时，它们可能属于不同的管理体系。",
+    "把原始指针交给多个 shared_ptr 是共享所有权的正常写法；正确方式是复制已经创建好的 shared_ptr。",
+    "shared_ptr 能自动防止任何形式的重复释放；从同一原始指针重复构造 shared_ptr 仍可能导致重复释放。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何安全地创建多个指向同一对象的 shared_ptr？",
+      "a": "先创建一个 shared_ptr，再复制该 shared_ptr，例如 auto p2 { p1 };。不要从同一个原始指针分别构造多个 shared_ptr。"
+    },
+    {
+      "q": "从同一个原始指针构造两个 shared_ptr 可能产生什么后果？",
+      "a": "两个 shared_ptr 可能分别尝试释放同一对象，造成重复释放，程序可能崩溃。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "shared_ptr 的引用计数机制"
+  ],
+  "source_pages": [
+    222,
+    223
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "472_不要从同一个原始指针重复构造_shared_ptr",
+  "_chunk_pages": [
+    221,
+    224
+  ]
+}

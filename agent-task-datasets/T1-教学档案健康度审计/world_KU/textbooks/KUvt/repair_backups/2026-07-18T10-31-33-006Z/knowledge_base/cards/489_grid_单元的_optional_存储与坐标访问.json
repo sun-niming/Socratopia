@@ -1,0 +1,50 @@
+{
+  "title": "Grid 单元的 optional 存储与坐标访问",
+  "definition": "Grid 使用 `std::optional<T>` 表示每个网格单元，因此每个单元可以存放一个 T 值，也可以处于没有值的状态。成员函数 at(x, y) 返回对应单元的 optional 引用；访问前会检查坐标是否合法。",
+  "key_points": [
+    "网格存储成员声明为：\n\n```cpp\nstd::optional<T> m_cells[WIDTH][HEIGHT];\n```",
+    "`at(size_t x, size_t y)` 的非 const 重载返回 `std::optional<T>&`。",
+    "const 对象的 at 重载返回 `const std::optional<T>&`。",
+    "当 x >= WIDTH 或 y >= HEIGHT 时，verifyCoordinate 会抛出 std::out_of_range。",
+    "原文示例通过 `myGrid.at(2, 3) = 42;` 给坐标 `(2, 3)` 的单元赋值。"
+  ],
+  "examples": [
+    "```cpp\nGrid<int, 10, 10> myGrid;\nmyGrid.at(2, 3) = 42;\n```",
+    "单元类型和网格存储结构可表示为：\n\n$$\\text{cell type}=\\mathrm{std::optional}<T>$$\n\n$$m\\_cells[WIDTH][HEIGHT]$$"
+  ],
+  "misconceptions": [
+    "at 返回的不是 T&，而是 std::optional<T>&；单元可能没有值。",
+    "坐标越界不会静默访问数组外部；verifyCoordinate 会在越界时抛出 std::out_of_range。",
+    "`at(2, 3)` 中的两个参数分别是 x 和 y 坐标，不是元素值。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "Grid 为什么使用 std::optional<T> 作为单元类型？",
+      "a": "因为每个单元不仅可以保存一个 T 值，还可以表示当前没有值的状态。"
+    },
+    {
+      "q": "调用 `myGrid.at(2, 3) = 42;` 的效果是什么？",
+      "a": "它把值 42 赋给 Grid 中坐标 x=2、y=3 的 optional 单元。"
+    },
+    {
+      "q": "当 x >= WIDTH 或 y >= HEIGHT 时会发生什么？",
+      "a": "verifyCoordinate 会抛出 std::out_of_range 异常。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "std::optional",
+    "C++ 数组下标与异常"
+  ],
+  "source_pages": [
+    383,
+    384
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "489_grid_单元的_optional_存储与坐标访问",
+  "_chunk_pages": [
+    381,
+    384
+  ]
+}

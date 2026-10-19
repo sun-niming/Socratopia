@@ -1,0 +1,45 @@
+{
+  "title": "Spreadsheet 的 copy-and-swap 拷贝赋值惯用法",
+  "definition": "copy-and-swap 是一种实现拷贝赋值运算符的方式：先利用右侧对象创建一个临时副本，再将当前对象与临时副本交换。赋值操作的提交阶段只进行不会抛出异常的交换操作；临时对象在函数结束时析构，从而自动释放当前对象原来的资源。",
+  "key_points": [
+    "先执行 `Spreadsheet temp{rhs};`，通过拷贝构造创建 rhs 的独立副本。",
+    "再执行 `swap(temp);`，将当前对象的数据与临时副本的数据交换。",
+    "交换完成后，临时对象持有当前对象原来的资源，并在离开作用域时释放这些资源。",
+    "copy-and-swap 将资源复制和状态提交分离，能够避免在直接修改当前对象过程中留下不完整状态。"
+  ],
+  "examples": [
+    "典型结构：`Spreadsheet& Spreadsheet::operator=(const Spreadsheet& rhs) { Spreadsheet temp{rhs}; swap(temp); return *this; }`。",
+    "状态交换可抽象为：$$\\text{当前对象} \\xleftrightarrow{\\mathrm{swap}} \\text{rhs 的临时副本}$$"
+  ],
+  "misconceptions": [
+    "copy-and-swap 不是只交换指针而不复制数据；临时副本首先必须由 rhs 拷贝构造得到。",
+    "swap 完成后，临时对象不是多余对象；它负责在析构时释放当前对象原先持有的资源。",
+    "copy-and-swap 不能替代拷贝构造函数；它通常依赖已经正确实现的拷贝构造函数。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "copy-and-swap 拷贝赋值运算符的核心步骤是什么？",
+      "a": "先用 rhs 创建临时副本，再将当前对象与临时副本交换，最后让临时对象析构并释放原有资源。"
+    },
+    {
+      "q": "为什么 copy-and-swap 有助于保证赋值操作的安全性？",
+      "a": "因为对象先在临时副本中完成复制，真正修改当前对象时只进行交换；如果复制过程失败，当前对象通常仍保持原状。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "拷贝构造函数",
+    "异常安全的基本概念"
+  ],
+  "source_pages": [
+    265,
+    268
+  ],
+  "needs_verification": true,
+  "verify_query": "\"Spreadsheet temp\" \"swap(temp)\" \"Commit the work\" C++ copy assignment",
+  "concept_id": "348_spreadsheet_的_copy_and_swap_拷贝赋值惯用法",
+  "_chunk_pages": [
+    265,
+    268
+  ]
+}

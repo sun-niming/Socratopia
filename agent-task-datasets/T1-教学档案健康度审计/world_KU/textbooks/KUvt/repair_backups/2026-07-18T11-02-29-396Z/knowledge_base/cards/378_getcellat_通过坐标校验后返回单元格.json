@@ -1,0 +1,45 @@
+{
+  "title": "getCellAt 通过坐标校验后返回单元格",
+  "definition": "Spreadsheet 的 `getCellAt(size_t x, size_t y)` 函数先调用 `verifyCoordinate(x, y)` 检查坐标，然后返回二维单元格容器中位置 `[x][y]` 的元素，即 `m_cells[x][y]`。",
+  "key_points": [
+    "函数参数 `x` 和 `y` 的类型都是 `size_t`。",
+    "函数先执行 `verifyCoordinate(x, y)`，再访问单元格。",
+    "返回表达式为 `m_cells[x][y]`，表示按两个坐标索引二维单元格存储结构。"
+  ],
+  "examples": [
+    "函数结构：`Spreadsheet::Cell& Spreadsheet::getCellAt(size_t x, size_t y) { verifyCoordinate(x, y); return m_cells[x][y]; }`。",
+    "访问关系可表示为：$$\\text{getCellAt}(x,y)\\rightarrow\\text{verifyCoordinate}(x,y)\\rightarrow m_{\\text{cells}}[x][y]$$。"
+  ],
+  "misconceptions": [
+    "函数不是先直接访问 `m_cells[x][y]` 再校验；原文顺序是先调用 `verifyCoordinate(x, y)`。",
+    "`x` 和 `y` 是两个坐标索引，不是一个一维数组下标。",
+    "仅根据该片段不能推断坐标非法时 `verifyCoordinate` 的具体处理方式，因为其实现未给出。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "getCellAt 在返回单元格前做什么？",
+      "a": "先调用 `verifyCoordinate(x, y)` 校验坐标。"
+    },
+    {
+      "q": "getCellAt 返回二维单元格容器中的哪个元素？",
+      "a": "返回 `m_cells[x][y]`，即坐标 `(x, y)` 对应的单元格。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "二维容器索引",
+    "成员函数",
+    "引用返回值"
+  ],
+  "source_pages": [
+    285,
+    288
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "378_getcellat_通过坐标校验后返回单元格",
+  "_chunk_pages": [
+    285,
+    288
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "title": "伪元素选择器",
+  "definition": "伪元素用于选择或创建不存在于 DOM 树中的元素。伪元素选择器以双冒号“::”开头；在原文中，::before 和 ::after 都通过 content 属性设置内容，并且默认是行级元素。",
+  "key_points": [
+    "伪元素用于选择或创建不存在于 DOM 树中的元素。",
+    "伪元素选择器开头是双冒号“::”。",
+    "::before 创建一个伪元素，成为匹配元素 E 的第一个子元素。",
+    "::after 创建一个伪元素，成为匹配元素 E 的最后一个子元素。",
+    "使用 content 属性为伪元素设置内容。",
+    "::before 和 ::after 默认都是行级元素。"
+  ],
+  "examples": [
+    "E::before",
+    "E::after",
+    "content: \"\";"
+  ],
+  "misconceptions": [
+    "伪元素不是实际存在于 DOM 树中的真实节点。",
+    "::before 和 ::after 不是给元素本身加内容，而是在元素前后生成伪元素。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "伪元素选择器的前缀是什么？",
+      "a": "双冒号“::”。"
+    },
+    {
+      "q": "::before 和 ::after 的内容如何设置？",
+      "a": "通过 content 属性设置。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "伪类选择器"
+  ],
+  "source_pages": [
+    97,
+    100
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "131_伪元素选择器",
+  "_chunk_pages": [
+    97,
+    100
+  ]
+}

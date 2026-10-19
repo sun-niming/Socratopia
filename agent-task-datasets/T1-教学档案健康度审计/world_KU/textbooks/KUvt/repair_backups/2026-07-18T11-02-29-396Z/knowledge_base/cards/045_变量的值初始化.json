@@ -1,0 +1,41 @@
+{
+  "title": "变量的值初始化",
+  "definition": "在C++中，使用空的花括号初始化变量会进行值初始化。例如`float myFloat{};`和`int myInt{};`分别将变量初始化为`0.0`和`0`。原文还列举了空初始化值`{0}`以及`0.0`、`nullptr`等初始化形式。",
+  "key_points": [
+    "`T variable{};`是使用空花括号进行值初始化的写法。",
+    "`float myFloat{};`初始化为浮点零，`int myInt{};`初始化为整数零。",
+    "列表初始化使用花括号，例如`int i{3};`。"
+  ],
+  "examples": [
+    "`float myFloat{};`",
+    "`int myInt{};`",
+    "`int i{3};`"
+  ],
+  "misconceptions": [
+    "局部变量不应被误认为在未显式初始化时自动具有可靠的零值；这里的零值来自明确写出的`{}`值初始化。",
+    "`float myFloat{};`初始化为`0.0`，不是未定义的任意浮点值。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`int myInt{};`的初始值是什么？",
+      "a": "它进行值初始化，初始值为`0`。"
+    },
+    {
+      "q": "`float myFloat{};`的初始值是什么？",
+      "a": "它进行值初始化，初始值为`0.0`。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [],
+  "source_pages": [
+    41,
+    44
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "045_变量的值初始化",
+  "_chunk_pages": [
+    41,
+    44
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "title": "clear属性",
+  "definition": "clear 属性用于清除浮动元素的影响。",
+  "key_points": [
+    "clear 的作用是消除浮动对后续元素布局的影响",
+    "它与 float 一起构成浮动定位相关的两个主要属性之一"
+  ],
+  "examples": [
+    "clear:both;"
+  ],
+  "misconceptions": [
+    "clear 是设置浮动方向的属性",
+    "clear 和 float 是同一个作用"
+  ],
+  "qa_pairs": [
+    {
+      "q": "clear 属性的作用是什么？",
+      "a": "清除浮动元素的影响。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "浮动定位",
+    "float属性"
+  ],
+  "source_pages": [
+    141,
+    144
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "231_clear属性",
+  "_chunk_pages": [
+    141,
+    144
+  ]
+}

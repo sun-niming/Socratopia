@@ -1,0 +1,38 @@
+{
+  "title": "float与clear的影响范围区别",
+  "definition": "float会影响其他相邻元素；clear只会影响设置了clear属性的元素自身，不会对其他相邻元素造成影响。",
+  "key_points": [
+    "float会影响其他相邻元素的布局。",
+    "clear只影响自身。",
+    "clear不会主动对其他相邻元素造成影响。"
+  ],
+  "examples": [
+    "如果一个元素设置float后，它可能影响旁边未浮动元素的排列；如果某元素设置clear:both，则是该元素自身避开左右浮动元素。"
+  ],
+  "misconceptions": [
+    "误认为clear可以像float一样影响周围所有元素。",
+    "误认为清除浮动就是取消前面元素的float属性；实际上clear处理的是自身与前面浮动元素的相邻关系。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "float和clear对元素影响范围有什么区别？",
+      "a": "float会影响其他相邻元素；clear只影响自身，不会对其他相邻元素造成影响。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "CSS浮动",
+    "clear属性的作用与语法"
+  ],
+  "source_pages": [
+    145,
+    148
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "209_float与clear的影响范围区别",
+  "_chunk_pages": [
+    145,
+    148
+  ]
+}

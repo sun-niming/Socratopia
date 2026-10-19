@@ -1,0 +1,36 @@
+{
+  "title": "十六进制颜色值",
+  "definition": "#rrggbb 是用十六进制数表示颜色值的写法，其中每两位表示一个颜色分量。",
+  "key_points": [
+    "采用十六进制形式表示颜色。",
+    "每两位表示一个颜色分量。",
+    "原文示例包括 #ff0000。"
+  ],
+  "examples": [
+    "#ff0000"
+  ],
+  "misconceptions": [
+    "十六进制颜色值不是把十进制数字直接写成六位，而是按十六进制方式表示颜色分量。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "#ff0000 表示什么颜色？",
+      "a": "红色。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "rgb整数颜色值"
+  ],
+  "source_pages": [
+    109,
+    112
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "168_十六进制颜色值",
+  "_chunk_pages": [
+    109,
+    112
+  ]
+}

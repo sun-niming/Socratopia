@@ -1,0 +1,41 @@
+{
+  "title": "echo 中的常见特殊字符",
+  "definition": "在教材给出的 echo -e 用法中，特殊字符可以被翻译后输出。教材列出的示例特殊字符有：\\n 表示换行，\\t 表示跳格。",
+  "key_points": [
+    "这些特殊字符需结合 echo 的 -e 选项理解",
+    "\\n 表示换行",
+    "\\t 表示跳格"
+  ],
+  "examples": [
+    "echo -e \"hello\\nworld\"",
+    "echo -e \"a\\tb\""
+  ],
+  "misconceptions": [
+    "把 \\n、\\t 当成普通文本输出；在教材语境下，配合 -e 时它们表示控制效果"
+  ],
+  "qa_pairs": [
+    {
+      "q": "在教材中，\\n 表示什么？",
+      "a": "表示换行。"
+    },
+    {
+      "q": "在教材中，\\t 表示什么？",
+      "a": "表示跳格。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "echo 显示命令"
+  ],
+  "source_pages": [
+    69,
+    72
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "122_echo_中的常见特殊字符",
+  "_chunk_pages": [
+    69,
+    72
+  ]
+}

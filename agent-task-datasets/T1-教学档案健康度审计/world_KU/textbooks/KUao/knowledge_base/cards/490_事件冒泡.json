@@ -1,0 +1,37 @@
+{
+  "title": "事件冒泡",
+  "definition": "事件从最具体的元素开始接收，然后逐级向上传播到最不具体的节点，也就是 document 节点。",
+  "key_points": [
+    "从文档中嵌套层次最深的、当前绑定事件的那个元素开始接收。",
+    "然后逐级向上传播。",
+    "最终到达 document 节点。"
+  ],
+  "examples": [
+    "点击内层 div 后，事件依次向外层祖先节点传播"
+  ],
+  "misconceptions": [
+    "冒泡不是从 document 开始。",
+    "冒泡方向是向上，不是向下。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "冒泡型事件的传播方向是什么？",
+      "a": "从最具体的元素向上到 document。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "DOM事件流"
+  ],
+  "source_pages": [
+    361,
+    364
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "490_事件冒泡",
+  "_chunk_pages": [
+    361,
+    364
+  ]
+}

@@ -1,0 +1,50 @@
+{
+  "title": "C++多线程基础库",
+  "definition": "C++标准库提供了编写多线程程序的基本构件。<thread>头文件中的thread类可用于创建线程；C++20增加了jthread，它是支持取消的线程类型，并且在线程对象销毁时自动执行联结操作。多线程程序还可以使用原子操作、互斥量、条件变量以及C++20新增的信号量、锁存和屏障等同步机制。",
+  "key_points": [
+    "thread用于创建单个线程。",
+    "C++20的jthread支持取消，并在线程对象销毁时自动join。",
+    "多个线程不能同时读写同一份数据，否则可能产生数据竞争。",
+    "<atomic>提供线程安全的原子访问；<mutex>和<condition_variable>提供其他同步机制。",
+    "C++20增加了<semaphore>、<latch>和<barrier>等同步原语。",
+    "如果只需要异步计算并取得结果、同时处理异常，可以使用<future>中的async和future。"
+  ],
+  "examples": [
+    "代码示例：\nstd::jthread worker{[] {\n    // 执行线程任务\n}};\n// worker销毁时自动执行联结操作。"
+  ],
+  "misconceptions": [
+    "创建多个线程并不能自动保证共享数据安全；同时读写同一份数据可能产生数据竞争。",
+    "jthread的特点不只是创建线程，还包括可取消以及销毁时自动联结。",
+    "async和future并不是所有多线程任务的唯一方案；教材强调它们适合只需计算结果并处理异常的场景。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "什么是数据竞争？",
+      "a": "多个线程同时读写同一份数据，从而引发未定义的竞争问题，称为数据竞争。"
+    },
+    {
+      "q": "jthread相较于thread有什么特点？",
+      "a": "jthread是C++20加入的可取消线程，并在线程对象销毁时自动执行join操作。"
+    },
+    {
+      "q": "哪些工具可用于线程同步？",
+      "a": "可以使用原子操作、mutex、condition_variable，以及C++20的semaphore、latch和barrier等。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "线程和并发的基本概念",
+    "共享数据与同步"
+  ],
+  "source_pages": [
+    506,
+    506
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1027_c_多线程基础库",
+  "_chunk_pages": [
+    505,
+    508
+  ]
+}

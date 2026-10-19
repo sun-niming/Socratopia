@@ -1,0 +1,43 @@
+{
+  "title": "换行符与std::endl",
+  "definition": "输出时可以使用转义序列 `\\n` 产生换行，也可以把 `std::endl` 插入输出流。二者都能使后续输出从新的一行开始，但 `std::endl` 除了换行之外还会刷新输出缓冲区。",
+  "key_points": [
+    "`\\n` 是字符串或字符中的换行转义序列。",
+    "`std::endl` 是可插入输出流的操纵符。",
+    "`std::endl` 会换行并刷新输出缓冲区，而 `\\n` 只表示换行。"
+  ],
+  "examples": [
+    "std::cout << \"第一行\\n第二行\";",
+    "std::cout << \"一行内容\" << std::endl;"
+  ],
+  "misconceptions": [
+    "误以为 `\\n` 和 `std::endl` 在所有方面完全相同；后者还会刷新输出缓冲区。",
+    "把换行写成普通字符 `/n`，而不是反斜杠形式 `\\n`。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`\\n` 与 `std::endl` 的共同作用是什么？",
+      "a": "都可以使输出换行。"
+    },
+    {
+      "q": "`std::endl` 与 `\\n` 的主要区别是什么？",
+      "a": "`std::endl` 在换行之外还会刷新输出缓冲区。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "使用std::cout输出",
+    "转义序列"
+  ],
+  "source_pages": [
+    37,
+    38
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "031_换行符与std_endl",
+  "_chunk_pages": [
+    37,
+    40
+  ]
+}

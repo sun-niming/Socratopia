@@ -1,0 +1,50 @@
+{
+  "title": "WEP的目标、鉴别流程与密钥组成",
+  "definition": "WEP（Wired Equivalent Privacy，有线等效保密）是IEEE 802.11最初标准化的无线安全机制，设计于1999年，目标是在无线主机与无线接入点之间提供鉴别和数据加密。WEP不规定密钥管理算法，假定主机和接入点通过带外方式预先共享密钥。",
+  "key_points": [
+    "WEP鉴别流程为：主机请求鉴别；接入点发送随机数（nonce）；主机用共享密钥加密该随机数；接入点解密并比较结果；若一致，则鉴别该主机。",
+    "数据加密使用主机和接入点共享的40比特对称密钥$K_s$，并将每帧不同的24比特初始向量（IV）附加到$K_s$后，形成用于该帧的64比特密钥。",
+    "每个数据载荷先计算4字节CRC，然后使用RC4流密码加密“数据载荷+CRC”。",
+    "IV以明文形式出现在每个WEP加密802.11帧的首部中。"
+  ],
+  "examples": [
+    "WEP单帧密钥的组成可写为：$$K_{\\text{frame}}=K_s\\;||\\;IV$$其中$K_s$为40比特，$IV$为24比特，因此原文所述组合长度为64比特。",
+    "鉴别流程：$$\\text{请求鉴别}\\rightarrow\\text{AP发送随机数}\\rightarrow\\text{主机加密随机数}\\rightarrow\\text{AP解密比较}\\rightarrow\\text{鉴别结果}$$"
+  ],
+  "misconceptions": [
+    "WEP并没有自动的密钥管理或密钥分发机制；主机与接入点之间的密钥需要通过带外方式达成一致。",
+    "IV不是秘密信息，原文明确说明它以明文形式传输。",
+    "WEP鉴别流程中的随机数用于挑战—响应，并不等同于长期共享密钥。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "WEP是否规定了密钥管理算法？",
+      "a": "没有。WEP假定主机和无线接入点通过带外方式预先就密钥达成一致。"
+    },
+    {
+      "q": "WEP如何鉴别无线主机？",
+      "a": "接入点发送一个随机数，主机用共享密钥加密后返回；接入点解密并比较随机数，若与原值一致，则鉴别该主机。"
+    },
+    {
+      "q": "WEP每帧使用的64比特密钥如何形成？",
+      "a": "将共享的40比特对称密钥$K_s$与该帧的24比特IV连接，形成64比特的帧密钥。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "对称加密",
+    "挑战—响应鉴别",
+    "流密码"
+  ],
+  "source_pages": [
+    437,
+    440
+  ],
+  "needs_verification": true,
+  "verify_query": "IEEE 802.11 WEP authentication challenge nonce length 128 bits or 128 bytes 40-bit key 24-bit IV RC4 CRC textbook Kurose Ross 7th edition",
+  "concept_id": "1018_wep的目标_鉴别流程与密钥组成",
+  "_chunk_pages": [
+    437,
+    440
+  ]
+}

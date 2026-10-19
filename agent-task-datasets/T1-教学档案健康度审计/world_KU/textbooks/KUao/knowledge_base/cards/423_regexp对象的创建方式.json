@@ -1,0 +1,40 @@
+{
+  "title": "RegExp对象的创建方式",
+  "definition": "正则表达式对象可以通过两种方式创建：一种是正则表达式字面量形式，写作 /表达式/[flags]；另一种是使用构造函数 new RegExp(表达式)。当表达式需要由变量拼接得到时，只能使用 RegExp 构造函数。",
+  "key_points": [
+    "字面量形式：var 对象名 = /表达式/[flags]。",
+    "构造函数形式：var 对象名 = new RegExp(表达式)。",
+    "当正则表达式要通过变量动态组成时，必须使用 RegExp 构造函数。"
+  ],
+  "examples": [
+    "var regExp=/^http[s]?:\\/\\//;",
+    "regExp=new RegExp(\"^http[s]?:\\\\/\\\\/\");",
+    "var p = \"http\"; var reg = new RegExp(\"^\" + p + \"s?:\\\\/\\\\/\");"
+  ],
+  "misconceptions": [
+    "不是所有正则都只能写成 /.../ 的字面量形式。",
+    "当正则内容来自变量拼接时，不能直接用字面量形式完成。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "当正则表达式需要由变量拼接时，应该用什么方式创建？",
+      "a": "使用 RegExp 构造函数。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "JavaScript对象基础",
+    "字符串基础"
+  ],
+  "source_pages": [
+    314,
+    314
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "423_regexp对象的创建方式",
+  "_chunk_pages": [
+    313,
+    316
+  ]
+}

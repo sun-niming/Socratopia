@@ -1,0 +1,45 @@
+{
+  "title": "test 的字符串比较",
+  "definition": "使用 test 或 [ ] 可以对字符串进行比较。教材列出四种常见条件：-z str 表示字符串长度等于 0，-n str 表示字符串长度不等于 0，str1 = str2 表示两个字符串相等，str1 != str2 表示两个字符串不相等。",
+  "key_points": [
+    "-z str：字符串长度等于 0",
+    "-n str：字符串长度不等于 0",
+    "str1 = str2：两个字符串相等",
+    "str1 != str2：两个字符串不相等"
+  ],
+  "examples": [
+    "[ -z \"$s\" ]",
+    "[ -n \"$name\" ]",
+    "[ \"$a\" = \"$b\" ]",
+    "[ \"$x\" != \"$y\" ]"
+  ],
+  "misconceptions": [
+    "把 -z 和 -n 的含义记反",
+    "把 = 和 != 当成整数比较符，而忽略这里比较的是字符串"
+  ],
+  "qa_pairs": [
+    {
+      "q": "哪个条件用于判断字符串长度是否为 0？",
+      "a": "-z str。"
+    },
+    {
+      "q": "如何判断两个字符串不相等？",
+      "a": "使用 str1 != str2，例如 [ \"$a\" != \"$b\" ]。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "test 与 [ ] 的基本用途和格式"
+  ],
+  "source_pages": [
+    73,
+    76
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "126_test_的字符串比较",
+  "_chunk_pages": [
+    73,
+    76
+  ]
+}

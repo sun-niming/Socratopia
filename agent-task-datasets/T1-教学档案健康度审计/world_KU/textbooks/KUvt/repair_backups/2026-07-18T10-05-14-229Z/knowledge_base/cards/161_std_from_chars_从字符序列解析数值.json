@@ -1,0 +1,52 @@
+{
+  "title": "std::from_chars：从字符序列解析数值",
+  "definition": "std::from_chars 从字符缓冲区范围 [first, last) 中解析整数或浮点数，并把结果写入调用者提供的 value 变量。它返回 std::from_chars_result，其中 ptr 表示解析停止位置，ec 表示错误状态。",
+  "key_points": [
+    "整数重载的一般形式为 $$\\text{from\\_chars\\_result from\\_chars(const char* first, const char* last, IntegerT\\& value, int base = 10)}$$。",
+    "浮点重载的一般形式为 $$\\text{from\\_chars\\_result from\\_chars(const char* first, const char* last, FloatT\\& value, chars\\_format format = chars\\_format::general)}$$。",
+    "返回结构可表示为：$$\\begin{bmatrix}\\text{const char* ptr}\\\\\\text{errc ec}\\end{bmatrix}$$。",
+    "当 ec == std::errc{} 时，通常表示解析成功；原文列出了 std::errc::invalid_argument 和 std::errc::result_out_of_range 等错误状态。",
+    "std::from_chars 常与 std::to_chars 配合，用于数值与字符序列之间的转换和往返测试。"
+  ],
+  "examples": [
+    "double value2;",
+    "auto [ptr2, error2] { from_chars(out.data(), out.data() + out.size(), value2) };",
+    "if (error2 == errc{}) { /* 解析成功 */ }"
+  ],
+  "misconceptions": [
+    "from_chars 的输入是字符范围，不是必须以空字符结尾的 C 风格字符串。",
+    "from_chars 不负责创建目标变量；调用者需要先声明 value，例如 double value2;。",
+    "解析成功不能只看 value 是否改变，还应检查返回结果中的 ec。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "std::from_chars 的 ptr 成员表示什么？",
+      "a": "ptr 是 const char*，表示解析停止的位置。"
+    },
+    {
+      "q": "如何判断 from_chars 是否解析成功？",
+      "a": "检查返回结果的 ec 是否等于 std::errc{}。"
+    },
+    {
+      "q": "to_chars 和 from_chars 如何配合？",
+      "a": "to_chars 把数值写入字符缓冲区，from_chars 再从该字符范围解析出数值；原文示例用它们测试浮点数的往返转换。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "std::to_chars",
+    "指针范围",
+    "错误码 std::errc"
+  ],
+  "source_pages": [
+    109,
+    112
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 std::from_chars from_chars_result ptr invalid_argument result_out_of_range chars_format general to_chars roundtrip",
+  "concept_id": "161_std_from_chars_从字符序列解析数值",
+  "_chunk_pages": [
+    109,
+    112
+  ]
+}

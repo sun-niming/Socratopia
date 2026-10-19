@@ -1,0 +1,42 @@
+{
+  "title": "范围的哨兵与common_view",
+  "definition": "根据范围的类型，`begin()` 和 `end()` 可能返回不同类型：`begin()` 返回迭代器，而 `end()` 可能返回哨兵（sentinel）。因此，这样的 begin/end 不能直接传给要求二者类型相同的函数。`common_view`（通过 `views::common` 使用）可以把这种范围转换为普通范围，使 `begin()` 和 `end()` 返回相同类型。",
+  "key_points": [
+    "迭代器负责遍历元素，哨兵用于表示范围结束；二者不一定是同一种类型。",
+    "要求迭代器对类型相同的函数不能直接接收这种迭代器与哨兵组合。",
+    "`std::views::common` 可将范围转换为 begin/end 类型相同的范围。"
+  ],
+  "examples": [
+    "转换形式：`auto common = range | std::views::common;`。转换后，`std::ranges::begin(common)` 与 `std::ranges::end(common)` 返回相同类型。"
+  ],
+  "misconceptions": [
+    "`end()` 并不总是返回与 `begin()` 相同类型的迭代器。",
+    "哨兵不是错误或无效的 end；它是范围库允许使用的结束标记类型。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么某些范围的 begin 和 end 不能传给要求同类型迭代器对的函数？",
+      "a": "因为 begin 可能返回迭代器，而 end 可能返回不同类型的哨兵。"
+    },
+    {
+      "q": "如何使这类范围的 begin 和 end 返回相同类型？",
+      "a": "使用 `std::views::common`，它返回一个 `common_view`。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "范围的基本概念",
+    "迭代器与哨兵"
+  ],
+  "source_pages": [
+    540,
+    540
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1108_范围的哨兵与common_view",
+  "_chunk_pages": [
+    537,
+    540
+  ]
+}

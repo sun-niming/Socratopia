@@ -1,0 +1,33 @@
+{
+  "jobId": "pn_mv263n53f0d9b070e1b5",
+  "traceId": "tr_mv263n53c191253c0b55",
+  "conversationId": "nxptfPVfsNLM-pi5X9tHt",
+  "accountId": "local",
+  "profileId": "uolmzgq8",
+  "worldId": "KU",
+  "idempotencyKey": "local|uolmzgq8|KU|nxptfPVfsNLM-pi5X9tHt|sha256:7d0767c89a3f8d6016fd0ba5347408184bbf3c33662b3ebe4e950178b7ee1aa5|post-class-v2",
+  "sourceHash": "sha256:7d0767c89a3f8d6016fd0ba5347408184bbf3c33662b3ebe4e950178b7ee1aa5",
+  "pipelineVersion": "post-class-v2",
+  "status": "ready",
+  "stage": "ready",
+  "createdAt": 1791623042535,
+  "updatedAt": 1791623056266,
+  "mode": "short",
+  "language": "chinese",
+  "companionName": "薇薇安",
+  "textbookTitle": "编译原理 第二版",
+  "substantiveUserTurns": 13,
+  "estimatedTokens": 7368,
+  "modelCalls": 1,
+  "quality": {
+    "score": 0.5147
+  },
+  "error": null,
+  "degradedReason": null,
+  "sourceMessageCount": 27,
+  "conversationHash": "sha256:ec46487444ea728c",
+  "completedChunks": 1,
+  "runToken": {},
+  "progress": 1,
+  "totalChunks": 1
+}

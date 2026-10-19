@@ -1,0 +1,53 @@
+{
+  "title": "JNI 从 Java 调用 C++代码的基本流程",
+  "definition": "JNI（Java Native Interface，Java 本地接口）是 Java 提供的本地接口，允许 Java 程序访问用 Java 以外的语言（例如 C++）编写的库。基本流程是：在 Java 中用 `native` 声明本地方法，加载包含本地实现的共享库，然后像调用普通 Java 方法一样调用该本地方法。",
+  "key_points": [
+    "JNI 适合调用性能关键、计算昂贵或遗留代码中的本地功能。",
+    "Java 端使用 `native` 关键字声明方法，但不在 Java 中提供方法体。",
+    "共享库可在 Java 静态代码块中通过 `System.loadLibrary` 加载。",
+    "Linux 示例库名为 `hellocpp.so`，Windows 示例库名为 `hellocpp.dll`；调用 `System.loadLibrary(\"hellocpp\")` 时通常省略平台相关的前缀和扩展名。",
+    "Java 端调用本地方法时，调用形式与普通静态方法类似。"
+  ],
+  "examples": [
+    "Java 声明本地方法：`public static native void callCpp();`",
+    "Java 加载本地库：`static { System.loadLibrary(\"hellocpp\"); }`",
+    "Java 主程序调用：`System.out.println(\"Hello from Java!\"); callCpp();`",
+    "对应的本地库可以在 Linux 上命名为 `hellocpp.so`，在 Windows 上命名为 `hellocpp.dll`。"
+  ],
+  "misconceptions": [
+    "`native` 声明本身不提供 C++实现；真正的实现位于动态库中。",
+    "Java 程序不能只声明 `native` 方法而不提供对应本地库，否则运行时调用会失败。",
+    "JNI 不只用于 C++，它的目标是让 Java 访问 Java 之外的本地代码；原文主要以 C++为例。",
+    "`System.loadLibrary` 的参数通常是逻辑库名，不应简单写成所有平台都相同的完整文件名。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "JNI 中 Java 端如何声明一个由 C++实现的方法？",
+      "a": "使用 `native` 关键字声明，例如 `public static native void callCpp();`，并省略方法体。"
+    },
+    {
+      "q": "Java 程序如何加载包含 JNI 实现的共享库？",
+      "a": "通常在静态代码块中调用 `System.loadLibrary(\"hellocpp\");`。"
+    },
+    {
+      "q": "JNI 适合解决哪些问题？",
+      "a": "可以用于调用性能关键或计算昂贵的本地代码，也可以访问已有的遗留库。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "Java 类和静态代码块基础",
+    "动态链接库的基本概念"
+  ],
+  "source_pages": [
+    983,
+    984
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "2020_jni_从_java_调用_c_代码的基本流程",
+  "_chunk_pages": [
+    981,
+    984
+  ]
+}

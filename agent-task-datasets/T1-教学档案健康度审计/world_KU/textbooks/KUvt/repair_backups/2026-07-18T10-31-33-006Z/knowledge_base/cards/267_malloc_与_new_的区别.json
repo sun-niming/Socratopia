@@ -1,0 +1,43 @@
+{
+  "title": "malloc() 与 new 的区别",
+  "definition": "在 C++ 中，malloc() 是 C 风格的动态内存分配函数，按指定字节数分配原始内存；new 是 C++ 的动态对象创建表达式。对于类对象，使用 new 创建对象时会进行对象初始化，而 malloc() 只分配内存，不负责调用构造函数。使用 malloc() 获得的内存应使用 free() 释放，使用 new 获得的对象应使用 delete 释放，不能混用这两组操作。",
+  "key_points": [
+    "malloc() 按字节数分配原始内存，典型写法为 Foo* myFoo { (Foo*)malloc(sizeof(Foo)) };。",
+    "new 用于 C++ 对象的动态创建；对于类类型对象，new 会按照 C++ 对象创建规则进行初始化。",
+    "malloc() 与 free() 配对使用，new 与 delete 配对使用。"
+  ],
+  "examples": [
+    "C 风格分配原始内存：Foo* myFoo { (Foo*)malloc(sizeof(Foo)) };",
+    "C++ 中应使用 new 创建对象，并使用 delete 释放：Foo* myFoo { new Foo{} }; delete myFoo;"
+  ],
+  "misconceptions": [
+    "不能因为 malloc() 返回了指针，就认为它已经构造了对应的 C++ 类对象。",
+    "不能使用 free() 释放由 new 创建的对象，也不能使用 delete 释放由 malloc() 分配的内存。",
+    "malloc() 的参数是字节数，例如 sizeof(Foo)，而不是对象个数。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "malloc() 与 new 在 C++ 中有什么主要区别？",
+      "a": "malloc() 是 C 风格的原始内存分配函数，按字节数分配内存；new 是 C++ 的对象创建表达式，会进行相应的对象初始化。二者还必须分别与 free() 和 delete 配对使用。"
+    },
+    {
+      "q": "由 malloc() 分配的内存应该用什么释放？由 new 创建的对象应该用什么释放？",
+      "a": "malloc() 分配的内存使用 free() 释放；new 创建的对象使用 delete 释放。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "指针与动态内存"
+  ],
+  "source_pages": [
+    201,
+    204
+  ],
+  "needs_verification": true,
+  "verify_query": "《C++20高级编程》第5版 第201页 malloc new Foo malloc sizeof Foo 构造函数 free delete 原文",
+  "concept_id": "267_malloc_与_new_的区别",
+  "_chunk_pages": [
+    201,
+    204
+  ]
+}

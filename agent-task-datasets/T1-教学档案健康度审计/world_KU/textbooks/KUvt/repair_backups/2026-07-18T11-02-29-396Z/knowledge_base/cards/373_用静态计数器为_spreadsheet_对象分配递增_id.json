@@ -1,0 +1,44 @@
+{
+  "title": "用静态计数器为 Spreadsheet 对象分配递增 ID",
+  "definition": "Spreadsheet 可以使用静态成员 `ms_counter` 作为全体 Spreadsheet 对象共享的计数器，并使用实例成员 `m_id` 保存当前对象的 ID。构造函数初始化 `m_id { ms_counter++ }` 时，当前计数器值先赋给 `m_id`，随后计数器递增。",
+  "key_points": [
+    "`ms_counter` 是静态成员，供所有 Spreadsheet 实例共享。",
+    "`m_id` 是对象自己的 ID 成员，原文中声明为 `const size_t m_id`。",
+    "构造函数初始化器中使用 `m_id { ms_counter++ }`，因此不同对象可获得连续递增的 ID。"
+  ],
+  "examples": [
+    "构造函数初始化器示例：`Spreadsheet::Spreadsheet(size_t width, size_t height) : m_id { ms_counter++ }, m_width { std::min(width, MaxWidth) }, m_height { std::min(height, MaxHeight) } { }`。",
+    "若构造前 `ms_counter` 为 0，则第一个对象的 `m_id` 为 0，之后计数器递增为 1；下一个对象会获得下一个计数值。"
+  ],
+  "misconceptions": [
+    "`m_id` 不是所有对象共享的计数器；共享的是静态成员 `ms_counter`，`m_id` 保存每个对象自己的编号。",
+    "后缀自增 `ms_counter++` 是先取当前值再递增，不是先递增后赋值。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`m_id { ms_counter++ }` 的作用是什么？",
+      "a": "把当前 `ms_counter` 的值赋给新对象的 `m_id`，然后将 `ms_counter` 加 1。"
+    },
+    {
+      "q": "为什么 `ms_counter` 适合用于生成对象 ID？",
+      "a": "因为它是静态成员，所有 Spreadsheet 对象共享同一个计数器，可以在构造对象时连续分配编号。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++ 静态数据成员",
+    "构造函数成员初始化器",
+    "后缀自增运算符"
+  ],
+  "source_pages": [
+    285,
+    286
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "373_用静态计数器为_spreadsheet_对象分配递增_id",
+  "_chunk_pages": [
+    285,
+    288
+  ]
+}

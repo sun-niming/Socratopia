@@ -1,0 +1,41 @@
+{
+  "title": "分组选择器",
+  "definition": "分组选择器是把多个共享相同声明的选择器用逗号连接成一个列表来写，从而让同一组样式同时应用到多个选择器。",
+  "key_points": [
+    "选择器之间用逗号连接",
+    "选择器可以是标签名、id或class名称",
+    "选择器列表也可以作为参数传递给一些函数式CSS伪类"
+  ],
+  "examples": [
+    "h1,h2 { color:red; }",
+    "选择器1,选择器2,...{ 属性:值; }"
+  ],
+  "misconceptions": [
+    "分组选择器不是把多个选择器写成一个选择器名",
+    "逗号前后可以有空白"
+  ],
+  "qa_pairs": [
+    {
+      "q": "分组选择器的连接符是什么？",
+      "a": "逗号（,）。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "CSS选择器",
+    "元素选择器",
+    "id选择器",
+    "class选择器"
+  ],
+  "source_pages": [
+    89,
+    92
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "119_分组选择器",
+  "_chunk_pages": [
+    89,
+    92
+  ]
+}

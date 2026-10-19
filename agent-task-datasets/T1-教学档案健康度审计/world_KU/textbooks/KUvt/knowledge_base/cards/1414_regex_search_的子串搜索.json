@@ -1,0 +1,51 @@
+{
+  "title": "regex_search()的子串搜索",
+  "definition": "`regex_search()`用于在输入序列中搜索是否存在与正则表达式匹配的子字符串。只要找到一个匹配就返回true，否则返回false；它的参数形式与regex_match()类似，也可以接收输入序列、可选的MatchResults、正则表达式和Flags。",
+  "key_points": [
+    "函数的一般形式为：`template<...> bool regex_search(InputSequence[, MatchResults], RegEx[, Flags]);`",
+    "regex_search()成功时，match_results中的`m[0]`表示搜索到的匹配子字符串，而不是整个源字符串。",
+    "示例正则表达式`//\\s*(.+)$`用于匹配以`//`开头、后面跟可选空白并包含至少一个字符的行尾注释。",
+    "在该示例中，`m[1]`保存捕获到的注释文本；`m[1].first`和`m[1].second`可用于确定注释在源字符串中的位置。",
+    "match_results还提供prefix()和suffix()，分别返回匹配之前和匹配之后的字符串。"
+  ],
+  "examples": [
+    "搜索代码行末尾的注释：`regex r(\"//\\\\s*(.+)$\");`，成功后可通过`m[1].str()`输出注释内容。",
+    "对于输入`std::string str; // Our string`，搜索结果中的捕获组可以得到注释文本`Our string`。"
+  ],
+  "misconceptions": [
+    "regex_search()不要求整个源字符串匹配，只要求其中存在匹配子字符串。",
+    "在regex_search()中，`m[0]`表示找到的匹配子字符串，而不是必然表示整个输入。",
+    "`prefix()`和`suffix()`不是捕获组，它们分别表示匹配前后的文本。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "什么时候应使用regex_search()而不是regex_match()？",
+      "a": "当只需要在输入字符串中查找某个匹配子字符串，而不要求整个字符串符合模式时，应使用regex_search()。"
+    },
+    {
+      "q": "regex_search()成功后，m[1]通常表示什么？",
+      "a": "它表示正则表达式中第一个捕获组匹配到的子字符串；在代码注释示例中就是注释文本。"
+    },
+    {
+      "q": "如何获得匹配之前和之后的字符串？",
+      "a": "使用match_results对象的prefix()和suffix()方法。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "regex_match()的整体匹配语义",
+    "正则表达式捕获组",
+    "C++迭代器基础"
+  ],
+  "source_pages": [
+    675,
+    676
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1414_regex_search_的子串搜索",
+  "_chunk_pages": [
+    673,
+    676
+  ]
+}

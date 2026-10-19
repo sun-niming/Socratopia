@@ -1,0 +1,39 @@
+{
+  "title": "fork 并发服务器骨架",
+  "definition": "讲义给出的 fork 并发服务器模型是：父进程在循环中 accept 新连接；accept 成功后 fork；子进程关闭 listen_fd，处理当前客户端，关闭 client_fd，然后 _exit(0)；父进程关闭 client_fd，继续接收新连接；fork 失败时打印错误并关闭 client_fd。",
+  "key_points": [
+    "父进程负责监听和 accept",
+    "子进程只处理一个客户端请求",
+    "父子进程分别关闭各自不需要的 fd",
+    "fork 失败时也要清理 client_fd"
+  ],
+  "examples": [
+    "while (1) {\n    int client_fd = accept(listen_fd, (struct sockaddr *)&client_addr, &len);\n    pid_t pid = fork();\n    if (pid == 0) {\n        close(listen_fd);\n        handle_client(client_fd, &client_addr);\n        close(client_fd);\n        _exit(0);\n    } else if (pid > 0) {\n        close(client_fd);\n    } else {\n        perror(\"fork\");\n        close(client_fd);\n    }\n}"
+  ],
+  "misconceptions": [
+    "fork 服务器要让子进程继续 accept",
+    "fork 失败时可以不处理 client_fd"
+  ],
+  "qa_pairs": [
+    {
+      "q": "在 fork 并发骨架里，子进程完成请求后要做哪两件事？",
+      "a": "关闭 client_fd，然后调用 _exit(0)。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "父子进程的 fd 关闭规则",
+    "子进程用 _exit"
+  ],
+  "source_pages": [
+    37,
+    40
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "053_fork_并发服务器骨架",
+  "_chunk_pages": [
+    37,
+    40
+  ]
+}

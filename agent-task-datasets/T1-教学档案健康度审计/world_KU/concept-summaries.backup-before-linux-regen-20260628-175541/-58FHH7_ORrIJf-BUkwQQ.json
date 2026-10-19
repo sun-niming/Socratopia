@@ -1,0 +1,171 @@
+{
+  "conversationId": "-58FHH7_ORrIJf-BUkwQQ",
+  "generatedAt": 1782295646703,
+  "pagesRange": "p.4-9",
+  "sections": [
+    {
+      "type": "tldr",
+      "content": "这节课主要把 Web 里最常见的三块串起来了：表格怎么写、表单怎么收，以及 CSS 的层叠/盒子模型/标准文档流这些基础规则。"
+    },
+    {
+      "type": "narrative",
+      "content": "一开始先从表格结构入手，分清了 `table`、`tr`、`td`、`th` 以及 `thead`/`tbody`/`tfoot` 的分工。接着把表单标签一层层补齐：`form`、`input`、`textarea`、`select`、`option`、`label`，再区分单选/复选、默认选中、禁用和只读。后面又往 CSS 的层叠性、特殊性、继承性，以及盒子模型、标准文档流推进了一步。"
+    },
+    {
+      "type": "concepts",
+      "items": [
+        {
+          "name": "表格结构",
+          "body": "- `table`：整张表\n- `tr`：一行\n- `th`：表头单元格\n- `td`：普通数据单元格\n- `thead`：表头区域\n- `tbody`：表格主体\n- `tfoot`：表格底部\n\n补充记忆：`caption` 是表格标题，`border` 是边框；`colspan` 表示跨列合并，`rowspan` 表示跨行合并。"
+        },
+        {
+          "name": "表单基础标签",
+          "body": "- `form`：表单容器，负责把一组输入控件包起来\n- `input`：最常见的单行输入控件，靠 `type` 变成不同功能\n- `textarea`：多行文本框\n- `select`：下拉框外层容器\n- `option`：下拉框里的每一项\n- `label`：说明文字，负责告诉用户这个输入框是干什么的\n\n可以先按这个顺序记：`form` 里放各种控件；`label` 负责说明；`input` 和 `textarea` 负责输入；`select` 和 `option` 负责选择。"
+        },
+        {
+          "name": "单选、复选与默认选中",
+          "body": "- `radio`：单选框，同组里通常只能选一个\n- `checkbox`：复选框，可以同时选多个\n- `name`：决定 `radio` 是否属于同一组，`name` 相同才算同组\n- `value`：提交时真正带出去的值\n- `checked`：默认选中，常用于 `radio` 和 `checkbox`\n- `selected`：默认选中，常用于 `option`\n\n一句话：`radio` 管“只能选一个”，`checkbox` 管“可以选多个”，而 `checked` / `selected` 管默认选中。"
+        },
+        {
+          "name": "表单提交与控件状态",
+          "body": "- `action`：表单提交到哪里\n- `method`：表单怎么提交\n- `submit`：提交表单\n- `reset`：把表单内容恢复到初始状态\n- `button`：普通按钮，本身不自动提交\n- `disabled`：禁用，不能操作\n- `readonly`：只读，能看不能改\n\n记法：`action` 是目的地，`method` 是运输方式；`disabled` 是彻底不能动，`readonly` 是还能看但改不了。"
+        },
+        {
+          "name": "CSS 层叠性、特殊性、继承性",
+          "body": "- **层叠性**：多个样式同时作用时，浏览器要决定谁生效\n- **特殊性**：比较选择器的优先级，教材里主要看 `ID`、`类`、`元素` 这三类\n- **继承性**：子元素在自己没写冲突样式时，可能继承父元素的样式\n\n优先级顺序可以先粗略记成：`!important` 最高，其次看选择器特殊性；如果还一样，后写的生效。"
+        },
+        {
+          "name": "盒子模型",
+          "body": "- `content`：内容区\n- `padding`：内边距\n- `border`：边框\n- `margin`：外边距\n\n`content-box` 是默认盒子模型，`width` / `height` 只算内容区；`border-box` 则把边框和内边距也算进 `width` / `height` 里。可以把 `margin` 理解成盒子外面占的地，不算盒子本体，但会影响页面布局。"
+        },
+        {
+          "name": "标准文档流",
+          "body": "标准文档流就是浏览器按 HTML 出现顺序来排版的默认方式。课上先点到了两类最基础的元素：\n- 块元素：通常独占一行\n- 行内元素：通常在一行内排列\n\n这一块是后面布局的起点。"
+        }
+      ]
+    },
+    {
+      "type": "key-terms",
+      "items": [
+        {
+          "term": "table",
+          "definition": "表格容器。"
+        },
+        {
+          "term": "tr",
+          "definition": "表格中的一行。"
+        },
+        {
+          "term": "th",
+          "definition": "表头单元格。"
+        },
+        {
+          "term": "td",
+          "definition": "普通数据单元格。"
+        },
+        {
+          "term": "caption",
+          "definition": "表格标题。"
+        },
+        {
+          "term": "colspan",
+          "definition": "跨列合并。"
+        },
+        {
+          "term": "rowspan",
+          "definition": "跨行合并。"
+        },
+        {
+          "term": "form",
+          "definition": "表单容器。"
+        },
+        {
+          "term": "input",
+          "definition": "基础输入控件，靠 `type` 变化功能。"
+        },
+        {
+          "term": "textarea",
+          "definition": "多行文本框。"
+        },
+        {
+          "term": "select",
+          "definition": "下拉框。"
+        },
+        {
+          "term": "option",
+          "definition": "下拉框中的选项。"
+        },
+        {
+          "term": "label",
+          "definition": "表单说明文字。"
+        },
+        {
+          "term": "radio",
+          "definition": "单选框。"
+        },
+        {
+          "term": "checkbox",
+          "definition": "复选框。"
+        },
+        {
+          "term": "checked",
+          "definition": "默认选中。"
+        },
+        {
+          "term": "selected",
+          "definition": "下拉选项默认选中。"
+        },
+        {
+          "term": "disabled",
+          "definition": "禁用，不能操作。"
+        },
+        {
+          "term": "readonly",
+          "definition": "只读，能看不能改。"
+        },
+        {
+          "term": "action",
+          "definition": "表单提交目标地址。"
+        },
+        {
+          "term": "method",
+          "definition": "表单提交方式。"
+        }
+      ]
+    },
+    {
+      "type": "review-questions",
+      "items": [
+        {
+          "question": "`th` 和 `td` 的区别是什么？",
+          "hint": "先想一想它们在表格里的角色。",
+          "answer": "`th` 是表头单元格，`td` 是普通数据单元格。"
+        },
+        {
+          "question": "`thead`、`tbody`、`tfoot` 分别表示什么？",
+          "hint": "把它们想成表格的三层区域。",
+          "answer": "`thead` 是表头区域，`tbody` 是表格主体，`tfoot` 是表格底部。"
+        },
+        {
+          "question": "`colspan` 和 `rowspan` 分别表示什么？",
+          "hint": "一个看横向，一个看纵向。",
+          "answer": "`colspan` 是跨列合并，`rowspan` 是跨行合并。"
+        },
+        {
+          "question": "`radio` 和 `checkbox` 的核心区别是什么？",
+          "hint": "一个限制只能选一个，另一个允许多选。",
+          "answer": "`radio` 是单选，通常同组只能选一个；`checkbox` 是复选，可以同时选多个。"
+        },
+        {
+          "question": "`action` 和 `method` 分别控制什么？",
+          "hint": "一个管去哪里，一个管怎么去。",
+          "answer": "`action` 表示表单提交到哪里，`method` 表示表单怎么提交。"
+        }
+      ]
+    },
+    {
+      "type": "open-question",
+      "content": "`ul`、`ol`、`dl` 在实际页面里分别适合什么内容场景？以及标准文档流里块元素和行内元素在布局中的边界，后面还可以继续展开。"
+    }
+  ]
+}

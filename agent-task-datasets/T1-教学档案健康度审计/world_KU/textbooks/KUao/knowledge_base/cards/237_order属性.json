@@ -1,0 +1,38 @@
+{
+  "title": "order属性",
+  "definition": "order属性用于定义弹性项目的排列顺序。数值越小，项目排列越靠前；默认值为0。",
+  "key_points": [
+    "order决定项目在弹性容器中的先后顺序",
+    "数值越小，排列越靠前",
+    "默认值是0"
+  ],
+  "examples": [
+    "order: <integer>;",
+    "示例中项目值为-1、1、2、5时，-1最靠前，5相对靠后"
+  ],
+  "misconceptions": [
+    "不要以为order数值越大越靠前，实际相反",
+    "不要把默认值理解成非0，原文明确给出默认值为0"
+  ],
+  "qa_pairs": [
+    {
+      "q": "order属性的数值大小规律如何影响排列？",
+      "a": "数值越小，排列越靠前，默认值为0。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "弹性布局基础"
+  ],
+  "source_pages": [
+    165,
+    168
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "237_order属性",
+  "_chunk_pages": [
+    165,
+    168
+  ]
+}

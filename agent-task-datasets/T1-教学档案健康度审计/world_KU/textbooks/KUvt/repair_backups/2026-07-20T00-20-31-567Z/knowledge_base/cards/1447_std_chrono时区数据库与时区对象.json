@@ -1,0 +1,44 @@
+{
+  "title": "std::chrono时区数据库与时区对象",
+  "definition": "C++标准库提供IANA时区数据库的副本，可通过`std::chrono::get_tzdb()`访问。该函数返回一个已有`std::chrono::tzdb`实例的`const`引用。数据库的公有`zones`集合包含可用时区，每个时区条目是一个`time_zone`对象，可以通过`name()`获取名称，并通过`to_sys()`和`to_local()`在本地时间与系统时间之间转换。",
+  "key_points": [
+    "访问数据库：`const auto& database{get_tzdb()};`。",
+    "遍历所有时区：`for (const auto& timezone : database.zones) { cout << timezone.name() << endl; }`。",
+    "每个时区对象有名称，并提供本地时间与系统时间之间的转换方法。",
+    "时区数据库使用IANA时区标识符，例如`Europe/Brussels`、`America/New_York`和`GMT`。"
+  ],
+  "examples": [
+    "`const auto& database{std::chrono::get_tzdb()};`",
+    "`for (const auto& timezone : database.zones) { std::cout << timezone.name() << std::endl; }`"
+  ],
+  "misconceptions": [
+    "`get_tzdb()`返回的不是每次调用都新建的普通数据库对象，而是对一个已有`tzdb`实例的`const`引用。",
+    "时区名称不是任意自定义字符串，应使用时区数据库中的名称。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何访问C++标准库中的时区数据库？",
+      "a": "调用`std::chrono::get_tzdb()`，它返回对一个已有`std::chrono::tzdb`实例的`const`引用。"
+    },
+    {
+      "q": "如何列出数据库中的所有可用时区名称？",
+      "a": "遍历`get_tzdb().zones`，对每个时区调用`name()`并输出。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++范围for循环",
+    "std::chrono时间类型"
+  ],
+  "source_pages": [
+    694,
+    694
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1447_std_chrono时区数据库与时区对象",
+  "_chunk_pages": [
+    693,
+    696
+  ]
+}

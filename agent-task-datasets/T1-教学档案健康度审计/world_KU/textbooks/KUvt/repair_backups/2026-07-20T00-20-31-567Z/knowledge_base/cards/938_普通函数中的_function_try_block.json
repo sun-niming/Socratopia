@@ -1,0 +1,44 @@
+{
+  "title": "普通函数中的 function-try-block",
+  "definition": "function-try-block 不仅可以用于构造函数，也可以用于普通函数。但对普通函数而言，function-try-block 通常没有必要，因为同样的异常处理可以直接写成函数体内部的普通 try/catch。与构造函数不同，普通函数的 function-try-block 中的 catch 不要求重新抛出异常，函数执行也不会因为 catch 正常结束而由运行时自动重新抛出当前异常。",
+  "key_points": [
+    "普通函数的 function-try-block 可以捕获函数体中抛出的异常。",
+    "普通函数通常直接在函数体内使用 try/catch，代码更直观。",
+    "普通函数的 catch 语句不必重新抛出当前异常或新异常。",
+    "如果普通函数的 catch 正常执行完毕，C++ 运行时不会像构造函数 function-try-block 那样自动重新抛出异常。"
+  ],
+  "examples": [
+    "普通函数可以写成：`void f() try { /* 函数体 */ } catch (const std::exception& e) { /* 处理异常 */ }`。",
+    "通常更适合改写为：`void f() { try { /* 函数体 */ } catch (const std::exception& e) { /* 处理异常 */ } }`。"
+  ],
+  "misconceptions": [
+    "普通函数和构造函数使用 function-try-block 时的异常传播规则相同；实际上，只有构造函数的 function-try-block 在 catch 结束后会自动重新抛出异常。",
+    "普通函数必须使用 function-try-block 才能捕获异常；实际上，函数体内部的普通 try/catch 通常就足够了。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "普通函数使用 function-try-block 时，catch 语句是否必须重新抛出异常？",
+      "a": "不必须。普通函数的 catch 可以处理异常并正常结束，C++ 运行时不会自动重新抛出当前异常。"
+    },
+    {
+      "q": "为什么通常不建议在普通函数中使用 function-try-block？",
+      "a": "因为普通函数可以方便地在函数体内部使用普通 try/catch，实现相同的异常捕获效果，通常更清晰。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++异常处理基础",
+    "try/catch语句"
+  ],
+  "source_pages": [
+    465,
+    465
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "938_普通函数中的_function_try_block",
+  "_chunk_pages": [
+    465,
+    468
+  ]
+}

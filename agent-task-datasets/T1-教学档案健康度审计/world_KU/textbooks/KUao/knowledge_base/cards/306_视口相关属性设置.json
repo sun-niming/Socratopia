@@ -1,0 +1,47 @@
+{
+  "title": "视口相关属性设置",
+  "definition": "用于设置页面视口参数的一组属性。它们分别控制布局视口的宽度和高度、页面的初始缩放值、允许的最小与最大缩放值，以及是否允许用户缩放。",
+  "key_points": [
+    "width：设置 layout viewport 的宽度，为一个正整数或字符串“width-device”。",
+    "height：设置 layout viewport 的高度，为一个正整数或字符串“height-device”。",
+    "initial-scale：设置页面的初始缩放值，可带小数。",
+    "minimum-scale / maximum-scale：分别设置允许用户的最小/最大缩放值，可带小数。",
+    "user-scalable：是否允许用户缩放，值为“no”或“yes”。"
+  ],
+  "examples": [
+    "width=320",
+    "initial-scale=1.0",
+    "minimum-scale=0.5",
+    "maximum-scale=2",
+    "user-scalable=no"
+  ],
+  "misconceptions": [
+    "这些属性不是用来直接写 CSS 布局规则的，而是用来控制视口和缩放行为。",
+    "user-scalable 不是数字，而是 yes/no。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "width 属性的作用是什么？",
+      "a": "设置 layout viewport 的宽度。"
+    },
+    {
+      "q": "user-scalable 的可选值是什么？",
+      "a": "no 或 yes。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "视口"
+  ],
+  "source_pages": [
+    221,
+    224
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "306_视口相关属性设置",
+  "_chunk_pages": [
+    221,
+    224
+  ]
+}

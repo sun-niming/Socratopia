@@ -1,0 +1,50 @@
+{
+  "title": "std::vector 动态容器",
+  "definition": "std::vector 是 C++ 标准库提供的动态序列容器，用于存储类型相同的多个元素。它会自动管理存储元素所需的内存，能够在运行时通过添加或删除元素改变大小。元素类型在模板参数中指定，可以使用 push_back 添加元素，并可用类似数组下标的语法访问元素。",
+  "key_points": [
+    "std::vector 的模板参数指定元素类型，例如 std::vector<int>。",
+    "vector 中所有元素必须是同一类型。",
+    "push_back() 用于向 vector 末尾添加元素。",
+    "vector 的大小可以在运行时增长或缩小，区别于 C 风格数组和 std::array。",
+    "vector 也支持 CTAD，但需要初始化器才能让编译器推导类型；没有初始化器的 vector myVector; 是非法的。"
+  ],
+  "examples": [
+    "std::vector<int> myVector;",
+    "myVector.push_back(33);",
+    "myVector.push_back(44);",
+    "myVector[0] // 使用类似数组的下标语法访问元素",
+    "std::vector myVector { 33, 44 }; // 通过初始化器使用 CTAD"
+  ],
+  "misconceptions": [
+    "std::vector 中的元素不必是不同类型；同一个 vector 的元素必须是同一类型。",
+    "vector 不是固定大小数组，添加元素时可以自动增加大小。",
+    "vector myVector; 不能在没有足够信息时依靠 CTAD 推导类型。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "std::vector 与 std::array 的主要区别是什么？",
+      "a": "std::array 的大小固定且必须在编译期确定；std::vector 的大小可在运行时改变，并能通过 push_back 等操作添加元素。"
+    },
+    {
+      "q": "如何向 std::vector<int> myVector 的末尾添加整数 33？",
+      "a": "调用 myVector.push_back(33);。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "类模板",
+    "数组下标",
+    "动态内存的基本概念"
+  ],
+  "source_pages": [
+    59,
+    59
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "100_std_vector_动态容器",
+  "_chunk_pages": [
+    57,
+    60
+  ]
+}

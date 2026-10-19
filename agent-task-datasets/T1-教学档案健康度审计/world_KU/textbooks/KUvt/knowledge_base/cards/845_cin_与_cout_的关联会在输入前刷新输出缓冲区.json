@@ -1,0 +1,37 @@
+{
+  "title": "cin 与 cout 的关联会在输入前刷新输出缓冲区",
+  "definition": "`cin` 和 `cout` 以关联方式协同工作。通常在使用 `cin` 读取输入时，即使此前的 `cout` 没有显式调用 `endl` 或 `flush()`，待显示的输出也会被刷新到控制台。",
+  "key_points": [
+    "输出提示语可以先通过 `cout` 写入，再使用 `cin` 等待用户输入。",
+    "使用 `cin` 会立即刷新 `cout` 的缓冲区，因此提示语通常能够在输入等待前显示出来。",
+    "显式使用 `endl` 或 `flush()` 仍然是另一种刷新输出的方式。"
+  ],
+  "examples": [
+    "`cout << \"Name: \"; cin >> guestName;` 中，读取姓名时此前的提示文本会被刷新到控制台。"
+  ],
+  "misconceptions": [
+    "不应认为所有输出都会无条件立即显示；教材这里强调的是 `cin` 与 `cout` 的关联导致输入前刷新。",
+    "`endl` 不只是换行，还会刷新输出流。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么 `cout << \"Name: \"; cin >> guestName;` 通常能在用户输入前显示提示语？",
+      "a": "因为 `cin` 与 `cout` 关联，使用 `cin` 读取输入时会刷新 `cout` 的缓冲区。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "输入流运算符读取数据并按空白分词"
+  ],
+  "source_pages": [
+    417,
+    417
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "845_cin_与_cout_的关联会在输入前刷新输出缓冲区",
+  "_chunk_pages": [
+    417,
+    420
+  ]
+}

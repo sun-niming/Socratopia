@@ -1,0 +1,52 @@
+{
+  "title": "引用数据成员必须在初始化器中初始化",
+  "definition": "引用可以作为类的数据成员，用来表示对象始终引用某个已有对象的关系。引用数据成员必须在构造函数初始化器中绑定到一个对象，因为引用不能独立存在，也不能在初始化后改为引用另一个对象。",
+  "key_points": [
+    "引用数据成员必须在构造函数初始化器中初始化。",
+    "引用必须指向某个对象，不能为空；这也是原文建议在该场景使用引用而不是指针的原因。",
+    "引用一旦初始化，就不能改变其指向的对象。",
+    "由于引用数据成员不能在赋值运算符中重新绑定，具有引用数据成员的类可能无法提供普通赋值运算符；必要时通常将赋值运算符标记为删除。"
+  ],
+  "examples": [
+    "成员声明：`SpreadsheetApplication& m_theApp;`",
+    "构造函数声明：`Spreadsheet(size_t width, size_t height, SpreadsheetApplication& theApp);`",
+    "构造函数初始化器：`Spreadsheet::Spreadsheet(size_t width, size_t height, SpreadsheetApplication& theApp) : m_id { ms_counter++ }, m_height { std::min(height, MaxHeight) }, m_theApp { theApp } {}`",
+    "如果只允许引用一个 const 应用程序对象，可以声明为：`const SpreadsheetApplication& m_theApp;`。"
+  ],
+  "misconceptions": [
+    "引用数据成员不是可以为空的指针；它必须在初始化时绑定到某个对象。",
+    "对引用数据成员赋值不会让引用改为绑定另一个对象；引用本身不能重新绑定。",
+    "有引用数据成员的类并非绝对不能赋值，但如果赋值语义无法合理实现，通常应删除赋值运算符。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么 m_theApp 必须在构造函数初始化器中初始化？",
+      "a": "因为引用不能不指向对象而存在，且引用数据成员必须在对象构造时完成绑定。"
+    },
+    {
+      "q": "引用数据成员初始化后能否在赋值运算符中改为引用另一个对象？",
+      "a": "不能。引用初始化后不能改变其指向，因此该赋值操作无法重新绑定引用。"
+    },
+    {
+      "q": "为什么原文在该示例中建议使用引用而不是指针？",
+      "a": "因为每个 Spreadsheet 都必须指向一个 SpreadsheetApplication，而引用能够保证这一点；指针不能保证非空。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++引用",
+    "构造函数初始化器",
+    "C++赋值运算符"
+  ],
+  "source_pages": [
+    286,
+    287
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "597_引用数据成员必须在初始化器中初始化",
+  "_chunk_pages": [
+    285,
+    288
+  ]
+}

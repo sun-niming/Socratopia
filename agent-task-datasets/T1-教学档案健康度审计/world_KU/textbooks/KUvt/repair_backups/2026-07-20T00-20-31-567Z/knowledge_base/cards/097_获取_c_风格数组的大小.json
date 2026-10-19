@@ -1,0 +1,45 @@
+{
+  "title": "获取 C 风格数组的大小",
+  "definition": "对于基于栈的 C 风格数组，可以使用 std::size 获取数组中的元素数量，也可以使用 sizeof 运算符计算元素数量。sizeof 返回对象或表达式占用的字节数，因此数组元素数量可以通过整个数组的字节数除以第一个元素的字节数得到。",
+  "key_points": [
+    "std::size(myArray) 返回数组元素数量，返回类型为 size_t。",
+    "sizeof(myArray) / sizeof(myArray[0]) 可计算基于栈的数组元素数量。",
+    "这里计算的是数组本身的大小，而不是指针的大小。"
+  ],
+  "examples": [
+    "size_t arraySize { std::size(myArray) };",
+    "size_t arraySize { sizeof(myArray) / sizeof(myArray[0]) };"
+  ],
+  "misconceptions": [
+    "sizeof(myArray) 返回的是字节数，不是数组元素个数。",
+    "不能把 sizeof(myArray[0]) 忽略，否则无法得到元素数量。",
+    "把数组传递或转换为指针后，sizeof 指针通常不能用于得到原数组的元素数量。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何使用 sizeof 计算 C 风格数组的元素数量？",
+      "a": "用整个数组的字节数除以第一个元素的字节数：$\\text{元素数量}=\\frac{\\text{sizeof(myArray)}}{\\text{sizeof(myArray[0])}}$。"
+    },
+    {
+      "q": "std::size(myArray) 返回什么？",
+      "a": "它返回数组中的元素数量，返回类型为 size_t。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C 风格数组",
+    "sizeof 运算符",
+    "size_t"
+  ],
+  "source_pages": [
+    58,
+    58
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 std::size C风格数组 定义头文件 返回类型 size_t sizeof 数组元素数量",
+  "concept_id": "097_获取_c_风格数组的大小",
+  "_chunk_pages": [
+    57,
+    60
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "title": "requires 表达式中的类型要求",
+  "definition": "类型要求用于检查某个类型名称是否有效，常见形式是 `typename 类型名;`。它只验证该名称能否作为类型使用，不要求构造该类型或检查其具体对象操作。",
+  "key_points": [
+    "检查嵌套类型时，可以写 `requires { typename T::value_type; }`。",
+    "也可以检查依赖模板实例化后的类型是否有效，例如 `requires { typename SomeTemplate<T>; }`。",
+    "类型要求通常放在 `requires { ... }` 的花括号内。"
+  ],
+  "examples": [
+    "`template <typename T> concept C = requires { typename T::value_type; };`",
+    "`template <typename T> concept C = requires { typename SomeTemplate<T>; };`"
+  ],
+  "misconceptions": [
+    "`typename T::value_type;` 在类型要求中不是声明一个变量，而是检查 `T::value_type` 是否为有效类型。",
+    "类型要求成立并不表示该类型具有特定构造函数、成员函数或运算符；这些需要额外的要求进行检查。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何检查模板参数 `T` 是否包含嵌套类型 `value_type`？",
+      "a": "使用 `requires { typename T::value_type; }`。"
+    },
+    {
+      "q": "类型要求能否仅凭 `typename T::value_type;` 证明该类型可默认构造？",
+      "a": "不能。它只检查 `T::value_type` 是否是有效类型。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "requires 表达式",
+    "依赖名称与typename"
+  ],
+  "source_pages": [
+    401,
+    404
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "522_requires_表达式中的类型要求",
+  "_chunk_pages": [
+    401,
+    404
+  ]
+}

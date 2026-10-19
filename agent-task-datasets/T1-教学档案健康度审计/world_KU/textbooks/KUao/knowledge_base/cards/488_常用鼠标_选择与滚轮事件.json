@@ -1,0 +1,41 @@
+{
+  "title": "常用鼠标、选择与滚轮事件",
+  "definition": "用户在元素上点击、双击、按下或释放鼠标按钮、移动指针、打开右键菜单、选中文本或滚动滚轮时触发的事件。",
+  "key_points": [
+    "click：在元素上按下并释放任意鼠标按键。",
+    "contextmenu：右键点击，在右键菜单显示前触发。",
+    "dblclick：在元素上双击鼠标按钮。",
+    "mousedown / mouseup：在元素上按下 / 释放任意鼠标按键。",
+    "mouseenter / mouseleave / mousemove / mouseover / mouseout：分别对应指针移到有事件监听的元素内、移出元素范围外（mouseleave 不冒泡）、在元素内移动时持续触发、移到元素或者它的子元素内、移出元素或者移到它的子元素上。",
+    "select：有文本被选中时触发。",
+    "wheel：滚轮向任意方向滚动时触发。"
+  ],
+  "examples": [
+    "在按钮上按下并释放鼠标左键触发 click",
+    "右键点击元素触发 contextmenu",
+    "指针在元素内移动时持续触发 mousemove"
+  ],
+  "misconceptions": [
+    "mouseover 与 mouseenter 不完全一样，mouseover 还会在指针移到子元素时触发。",
+    "不要把所有鼠标事件都默认看作同样的传播方式，原文明确说明 mouseleave 不冒泡。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "指针移出元素范围外时触发哪个事件？",
+      "a": "mouseleave"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [],
+  "source_pages": [
+    361,
+    364
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "488_常用鼠标_选择与滚轮事件",
+  "_chunk_pages": [
+    361,
+    364
+  ]
+}

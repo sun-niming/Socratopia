@@ -1,0 +1,44 @@
+{
+  "title": "C++词汇类型optional、variant和any",
+  "definition": "C++支持几种用于表达常见数据语义的词汇类型。optional定义在<optional>中，可以存储指定类型的值，也可以不存储任何值；variant定义在<variant>中，可以存储一组指定类型中的某一种类型的单个值；any定义在<any>中，可以存储任意类型的单个值。",
+  "key_points": [
+    "optional适合表示“可能有值，也可能没有值”。",
+    "variant适合表示“值属于编译期已知的一组类型中的一种”。",
+    "any适合表示“值可以是任意类型”，但具体类型在运行时确定。",
+    "这些类型可以用于类数据成员、函数参数或函数返回值等场景。"
+  ],
+  "examples": [
+    "代码示例：\nstd::optional<int> age{};\nstd::variant<int, std::string> value{42};\nstd::any data{3.14};"
+  ],
+  "misconceptions": [
+    "optional不是存储多种候选类型的工具；它只表示某一种指定类型的值或无值。",
+    "variant不是可以同时保存多个候选类型的容器；它一次只保存其中一种类型的值。",
+    "any虽然可以保存任意类型，但它一次也只保存一个值。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "optional表达什么语义？",
+      "a": "它表示要么存储指定类型的值，要么什么都不存储。"
+    },
+    {
+      "q": "variant与any的主要区别是什么？",
+      "a": "variant只能存储预先指定的一组类型中的一种，any可以存储任意类型的单个值。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "模板类型",
+    "运行时类型与编译期类型的基本概念"
+  ],
+  "source_pages": [
+    505,
+    507
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1024_c_词汇类型optional_variant和any",
+  "_chunk_pages": [
+    505,
+    508
+  ]
+}

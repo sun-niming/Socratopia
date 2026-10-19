@@ -1,0 +1,44 @@
+{
+  "title": "HTML5新增结构语义元素",
+  "definition": "HTML5新增了一组用于表达页面结构语义的元素，主要包括<header>、<hgroup>、<footer>、<nav>。它们不是为了改变样式，而是为了更清楚地描述页面中不同区域的含义：头部、标题组、脚注和导航链接区。",
+  "key_points": [
+    "<header>表示页面中一个内容区域或整个页面的标题，常见内容可包含Logo、导航、搜索框等。",
+    "<hgroup>用于对整个页面或某个内容区块的标题进行组合。",
+    "<footer>表示整个页面或页面中一个内容区块的脚注，常包含作者信息、日期、联系信息、版权信息等。",
+    "<nav>表示页面中的导航链接部分。"
+  ],
+  "examples": [
+    "<header>...</header>",
+    "<hgroup>...</hgroup>",
+    "<footer>...</footer>",
+    "<nav>...</nav>"
+  ],
+  "misconceptions": [
+    "这些元素的主要作用不是直接决定页面外观，而是提供结构和语义。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "<nav>元素表示什么？",
+      "a": "表示页面中导航链接的部分。"
+    },
+    {
+      "q": "<footer>通常包含哪些信息？",
+      "a": "通常包含作者信息、创建日期、联系信息、版权信息、底部链接等。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "HTML基础标签"
+  ],
+  "source_pages": [
+    41,
+    42
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "054_html5新增结构语义元素",
+  "_chunk_pages": [
+    41,
+    44
+  ]
+}

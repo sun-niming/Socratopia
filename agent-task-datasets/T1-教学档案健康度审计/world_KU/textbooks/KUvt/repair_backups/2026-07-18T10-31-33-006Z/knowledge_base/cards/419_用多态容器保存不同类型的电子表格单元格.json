@@ -1,0 +1,47 @@
+{
+  "title": "用多态容器保存不同类型的电子表格单元格",
+  "definition": "可以声明std::vector<std::unique_ptr<SpreadsheetCell>>，并在其中存放不同派生类型的电子表格单元格，例如StringSpreadsheetCell和DoubleSpreadsheetCell。通过基类指针调用虚函数时，会根据对象的实际派生类型执行相应的重写版本。",
+  "key_points": [
+    "容器元素类型是std::unique_ptr<SpreadsheetCell>，因此可以统一管理SpreadsheetCell派生类对象。",
+    "使用std::make_unique<StringSpreadsheetCell>()或std::make_unique<DoubleSpreadsheetCell>()创建对象，并通过push_back加入容器。",
+    "对cellArray[i]调用set或getString时，基类指针指向的实际对象类型决定具体函数行为。",
+    "使用std::unique_ptr可以自动管理动态对象的生命周期，避免手动delete。"
+  ],
+  "examples": [
+    "示例结构：\nstd::vector<std::unique_ptr<SpreadsheetCell>> cellArray;\ncellArray.push_back(std::make_unique<StringSpreadsheetCell>());\ncellArray.push_back(std::make_unique<StringSpreadsheetCell>());\ncellArray.push_back(std::make_unique<DoubleSpreadsheetCell>());",
+    "随后可以通过基类指针调用：\ncellArray[0]->set(\"hello\");\ncellArray[1]->set(\"10\");\ncellArray[2]->getString();",
+    "原文输出使用三个单元格的getString()结果格式化输出，形式类似：Vector: [{},{},{}]。"
+  ],
+  "misconceptions": [
+    "vector的元素类型不是StringSpreadsheetCell或DoubleSpreadsheetCell，而是指向共同基类SpreadsheetCell的智能指针。",
+    "使用基类指针并不意味着所有对象都执行同一份实现；虚函数会进行动态分派。",
+    "std::unique_ptr不能被复制，但可以移动；原文示例通过make_unique创建后加入容器。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么std::vector<std::unique_ptr<SpreadsheetCell>>可以同时存放StringSpreadsheetCell和DoubleSpreadsheetCell？",
+      "a": "因为这两个类都派生自SpreadsheetCell，指向它们的std::unique_ptr可以转换为指向SpreadsheetCell的智能指针，并统一存入容器。"
+    },
+    {
+      "q": "通过cellArray[2]->getString()调用函数时，实际执行哪个类的实现？",
+      "a": "如果cellArray[2]实际指向DoubleSpreadsheetCell对象，并且getString是虚函数，就执行DoubleSpreadsheetCell重写的实现。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++继承与虚函数",
+    "std::vector",
+    "std::unique_ptr与std::make_unique"
+  ],
+  "source_pages": [
+    325,
+    326
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "419_用多态容器保存不同类型的电子表格单元格",
+  "_chunk_pages": [
+    325,
+    328
+  ]
+}

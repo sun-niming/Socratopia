@@ -1,0 +1,46 @@
+{
+  "title": "使用公有接口和私有辅助函数封装字符串转换",
+  "definition": "SpreadsheetCell可以把对外使用的操作放在public区域，把实现细节放在private区域。原文示例在public区域声明数值读写函数setValue和getValue，以及字符串读写函数setString和getString；在private区域声明doubleToString和stringToDouble等辅助函数，用于数值与字符串之间的转换。",
+  "key_points": [
+    "public区域构成类的外部接口，包括setValue、getValue、setString和getString。",
+    "private区域可以放置不希望类外直接调用的辅助函数。",
+    "doubleToString(double value) const表示将double转换为字符串，并且不修改对象状态。",
+    "stringToDouble(std::string_view value) const表示根据字符串视图转换出double，并且不修改对象状态。",
+    "原文还声明了std::string和std::string_view相关类型，并通过import <string>;和import <string_view>;引入它们。"
+  ],
+  "examples": [
+    "import <string>;\nimport <string_view>;\n\nexport class SpreadsheetCell {\npublic:\n    void setValue(double value);\n    double getValue() const;\n    void setString(std::string_view value);\n    std::string getString() const;\nprivate:\n    doubleToString(double value) const;\n    stringToDouble(std::string_view value) const;\n    double value;\n};"
+  ],
+  "misconceptions": [
+    "private辅助函数不是类外部接口，类外代码不能像调用public成员那样直接调用它们。",
+    "std::string_view通常表示对字符序列的视图，不等同于拥有独立字符存储的std::string；本页原文只展示了相关声明，未在此处说明具体转换实现。",
+    "原文片段中的函数返回类型和成员变量声明受到识别文本排版影响，若按可编译C++代码使用，应结合教材原版核对。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么把doubleToString和stringToDouble放在private区域？",
+      "a": "它们是实现字符串与数值转换的内部辅助函数，不属于希望类外直接使用的公有接口。"
+    },
+    {
+      "q": "SpreadsheetCell的字符串接口包含哪些函数？",
+      "a": "原文声明了void setString(std::string_view value)和std::string getString() const。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "C++访问控制",
+    "C++成员函数声明",
+    "std::string与std::string_view基础"
+  ],
+  "source_pages": [
+    229,
+    232
+  ],
+  "needs_verification": true,
+  "verify_query": "马克·格雷戈勒 C++20高级编程 第5版 第232页 SpreadsheetCell setString getString doubleToString stringToDouble 原文",
+  "concept_id": "309_使用公有接口和私有辅助函数封装字符串转换",
+  "_chunk_pages": [
+    229,
+    232
+  ]
+}

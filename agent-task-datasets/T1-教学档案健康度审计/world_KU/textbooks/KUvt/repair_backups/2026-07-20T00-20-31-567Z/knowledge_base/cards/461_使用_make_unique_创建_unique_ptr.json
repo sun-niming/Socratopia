@@ -1,0 +1,46 @@
+{
+  "title": "使用 make_unique 创建 unique_ptr",
+  "definition": "`std::make_unique<T>(构造参数...)` 是创建 `std::unique_ptr<T>` 的函数模板。它负责分配并构造类型为 T 的对象，并把资源立即交给 unique_ptr 管理。教材建议始终使用 make_unique 创建 unique_ptr，因为代码更易读，并能避免某些复杂表达式中的异常安全问题。",
+  "key_points": [
+    "创建 Simple 对象的典型写法是 `auto p { std::make_unique<Simple>() };`。",
+    "如果构造函数需要参数，应把参数传给 make_unique，例如 `std::make_unique<Simple>(arg1, arg2)`。",
+    "使用 make_unique 后通常不需要显式调用 delete。",
+    "直接写 `std::unique_ptr<Simple> p { new Simple{} };` 虽然可以创建 unique_ptr，但类型名需要重复书写。",
+    "在复杂函数调用中，直接把 new 表达式传入多个智能指针构造过程，可能产生异常安全问题；使用 make_unique 可以避免这类泄漏风险。"
+  ],
+  "examples": [
+    "`auto mySimpleSmartPtr { std::make_unique<Simple>() };`",
+    "`foo(std::make_unique<Simple>(), std::make_unique<Bar>(data()));`",
+    "不推荐的直接写法：`std::unique_ptr<Simple> p { new Simple{} };`"
+  ],
+  "misconceptions": [
+    "make_unique 创建的对象仍然是动态分配的，只是其所有权会立即由 unique_ptr 管理。",
+    "使用 make_unique 后也不能复制所得的 unique_ptr。",
+    "make_unique 不表示对象永远不销毁；unique_ptr 离开作用域或被重置时，资源仍会自动释放。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么教材建议始终使用 make_unique 创建 unique_ptr？",
+      "a": "因为它避免重复书写类型、可读性更好，并能在复杂表达式中更好地避免异常导致的资源泄漏。"
+    },
+    {
+      "q": "如何创建一个由 unique_ptr 管理的 Simple 对象？",
+      "a": "可以写成 `auto p { std::make_unique<Simple>() };`。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "unique_ptr 的唯一所有权与自动释放"
+  ],
+  "source_pages": [
+    218,
+    219
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "461_使用_make_unique_创建_unique_ptr",
+  "_chunk_pages": [
+    217,
+    220
+  ]
+}

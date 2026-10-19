@@ -1,0 +1,45 @@
+{
+  "title": "GBN中的累计确认",
+  "definition": "GBN 使用累计确认（cumulative acknowledgment）。对序号为 $n$ 的分组进行确认，表示接收方已经正确接收到序号为 $n$ 的分组以及此前所有序号的分组。发送方可利用该 ACK 将发送窗口的基序号推进到 $n+1$。",
+  "key_points": [
+    "累计 ACK 一次确认一个连续的分组序列，而不只确认单个分组。",
+    "对序号为 $n$ 的分组的 ACK 表示序号不大于 $n$ 的相关分组都已被正确接收。",
+    "在 GBN 发送方中，收到 ACK 后通常执行 $base=getacknum(rcvpkt)+1$，使窗口向前滑动。",
+    "累计确认有助于发送方一次性确认多个连续分组，并据此释放窗口空间。"
+  ],
+  "examples": [
+    "若接收方发送对序号 $5$ 的累计 ACK，则该 ACK 表示序号为 $0$ 到 $5$ 的分组都已正确接收；发送方可以把 $base$ 更新为 $6$。",
+    "若当前 $base=3$，收到表示序号 $5$ 的 ACK，则更新为 $base=5+1=6$。"
+  ],
+  "misconceptions": [
+    "累计 ACK 不是只表示序号为 $n$ 的一个分组正确到达。",
+    "收到 ACK 后，发送方不能把 $base$ 设置为 $n$，而应按照教材中的规则设置为 $getacknum(rcvpkt)+1$。",
+    "GBN 的累计确认并不等同于选择性确认；它不逐个报告任意分组的独立接收状态。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "GBN 中对序号为 $n$ 的分组发送累计 ACK 表示什么？",
+      "a": "表示接收方已经正确接收到序号为 $n$ 的分组以及此前所有相关分组。"
+    },
+    {
+      "q": "GBN 发送方收到序号为 $n$ 的累计 ACK 后，$base$ 如何更新？",
+      "a": "按照教材中的规则更新为 $base=n+1$，即 $base=getacknum(rcvpkt)+1$。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "GBN协议的滑动窗口与发送方序号范围",
+    "ACK确认机制"
+  ],
+  "source_pages": [
+    161,
+    164
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "398_gbn中的累计确认",
+  "_chunk_pages": [
+    161,
+    164
+  ]
+}

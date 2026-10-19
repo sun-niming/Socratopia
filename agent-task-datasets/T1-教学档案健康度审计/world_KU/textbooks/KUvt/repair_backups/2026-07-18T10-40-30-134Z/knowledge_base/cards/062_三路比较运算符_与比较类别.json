@@ -1,0 +1,52 @@
+{
+  "title": "三路比较运算符<=>与比较类别",
+  "definition": "C++20的三路比较运算符<=>用于比较两个值，并返回一个比较类别类型的结果，而不只是简单的true或false。教材列出了强排序、部分排序和弱排序相关的结果枚举值：强排序包含less、greater、equal；部分排序包含less、greater、equivalent、unordered；弱排序包含less、greater、equivalent。",
+  "key_points": [
+    "强排序结果包括strong_ordering::less、strong_ordering::greater和strong_ordering::equal。",
+    "部分排序结果包括partial_ordering::less、partial_ordering::greater、partial_ordering::equivalent和partial_ordering::unordered。",
+    "弱排序结果包括weak_ordering::less、weak_ordering::greater和weak_ordering::equivalent。",
+    "比较结果可以与相应的枚举值比较，例如result == strong_ordering::equal。",
+    "教材给出result = i <=> 0以及根据结果判断less、greater、equal的示例。"
+  ],
+  "examples": [
+    "strong_ordering result { i <=> 0 };",
+    "if (result == strong_ordering::less) { cout << \"less\" << endl; }",
+    "if (result == strong_ordering::greater) { cout << \"greater\" << endl; }",
+    "if (result == strong_ordering::equal) { cout << \"equal\" << endl; }"
+  ],
+  "misconceptions": [
+    "<=>的结果不是普通的布尔值true或false，而是某种比较类别结果。",
+    "strong_ordering::equal与partial_ordering::equivalent、weak_ordering::equivalent属于不同比较类别中的结果名称，不能仅因含义相近就混用。",
+    "partial_ordering可以表示unordered，这是强排序和弱排序列表中没有的结果。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "strong_ordering包含哪些结果？",
+      "a": "strong_ordering::less、strong_ordering::greater和strong_ordering::equal。"
+    },
+    {
+      "q": "partial_ordering比strong_ordering多表示什么情况？",
+      "a": "partial_ordering还可以表示partial_ordering::unordered，即两个值无法建立有序关系的情况。"
+    },
+    {
+      "q": "如何判断三路比较结果是否相等？",
+      "a": "将结果与相应比较类别的相等结果进行比较，例如result == strong_ordering::equal。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "布尔条件表达式",
+    "运算符与表达式结果"
+  ],
+  "source_pages": [
+    49,
+    52
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 std::strong_ordering std::partial_ordering std::weak_ordering 枚举值 equal equivalent unordered 教材 第52页 <=>",
+  "concept_id": "062_三路比较运算符_与比较类别",
+  "_chunk_pages": [
+    49,
+    52
+  ]
+}

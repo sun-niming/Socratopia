@@ -1,0 +1,46 @@
+{
+  "title": "拷贝构造、拷贝初始化与拷贝赋值的区别",
+  "definition": "拷贝构造函数用于创建新对象时从已有对象取得初始值；拷贝初始化也是初始化新对象，因此会调用拷贝构造函数。拷贝赋值运算符用于两个已经构造完成的对象之间进行赋值。",
+  "key_points": [
+    "`SpreadsheetCell anotherCell{myCell};` 创建新对象，调用拷贝构造函数。",
+    "`SpreadsheetCell aThirdCell = myCell;` 虽然使用等号，但它是声明和初始化，因此调用拷贝构造函数，而不是赋值运算符。",
+    "`anotherCell = myCell;` 中 `anotherCell` 已经构造完成，因此调用拷贝赋值运算符。"
+  ],
+  "examples": [
+    "`SpreadsheetCell myCell{5}; SpreadsheetCell anotherCell{myCell};`：`anotherCell` 由拷贝构造函数创建。",
+    "`SpreadsheetCell aThirdCell = myCell;`：这是拷贝初始化，效果类似于 `SpreadsheetCell aThirdCell(myCell);`。",
+    "`anotherCell = myCell;`：这是对已有对象进行赋值，调用 `operator=`。"
+  ],
+  "misconceptions": [
+    "看到等号就一定调用赋值运算符；声明中的 `T b = a` 是初始化，调用的是拷贝构造函数。",
+    "拷贝构造函数和拷贝赋值运算符只是写法不同、功能相同；实际上前者创建新对象，后者修改已有对象。",
+    "对象已经存在但重新写出声明时，不能因此把该操作当成普通赋值。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`SpreadsheetCell aThirdCell = myCell;` 调用拷贝构造函数还是拷贝赋值运算符？",
+      "a": "调用拷贝构造函数，因为这是一条声明语句，`aThirdCell` 正在被创建和初始化。"
+    },
+    {
+      "q": "`anotherCell = myCell;` 为什么调用拷贝赋值运算符？",
+      "a": "因为 `anotherCell` 在赋值前已经构造完成，这条语句是在改写已有对象的值。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "构造函数",
+    "拷贝构造函数",
+    "拷贝赋值运算符"
+  ],
+  "source_pages": [
+    254,
+    254
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "542_拷贝构造_拷贝初始化与拷贝赋值的区别",
+  "_chunk_pages": [
+    253,
+    256
+  ]
+}

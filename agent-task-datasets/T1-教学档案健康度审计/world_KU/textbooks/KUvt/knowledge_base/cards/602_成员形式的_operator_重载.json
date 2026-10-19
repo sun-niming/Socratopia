@@ -1,0 +1,48 @@
+{
+  "title": "成员形式的 operator+ 重载",
+  "definition": "C++允许类通过名为 `operator+` 的成员函数定义加法行为。对于 SpreadsheetCell，成员 `operator+` 可以把当前对象的值与另一个 SpreadsheetCell 的值相加，并返回一个保存结果的新对象，因此可以使用 `myCell + anotherCell` 这样的自然语法。",
+  "key_points": [
+    "典型声明为 `SpreadsheetCell operator+(const SpreadsheetCell& cell) const;`。",
+    "典型实现为 `return SpreadsheetCell { getValue() + cell.getValue() };`。",
+    "表达式 `myCell + anotherCell` 可理解为调用 `myCell.operator+(anotherCell)`。",
+    "成员 operator+ 不应修改任一参与加法的原始单元格，通常返回新的 SpreadsheetCell。",
+    "operator 与运算符之间可以有空格，但本书采用无空格形式 `operator+`。"
+  ],
+  "examples": [
+    "声明：`SpreadsheetCell operator+(const SpreadsheetCell& cell) const;`",
+    "使用：`SpreadsheetCell aThirdCell { myCell + anotherCell };`",
+    "等价理解：`SpreadsheetCell aThirdCell { myCell.operator+(anotherCell) };`"
+  ],
+  "misconceptions": [
+    "`operator+` 不是特殊关键字之外的另一种语法，它是一个具有特殊命名规则的函数或成员函数。",
+    "重载 operator+ 不会改变加号本身的数学优先级。",
+    "成员 operator+ 的左操作数必须能够作为该成员函数的调用对象；因此它不能自然处理 `double + SpreadsheetCell` 这种左侧不是 SpreadsheetCell 的情况。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`myCell + anotherCell` 在成员运算符重载下可以如何理解？",
+      "a": "可以理解为调用 `myCell.operator+(anotherCell)`。"
+    },
+    {
+      "q": "SpreadsheetCell 的成员 operator+ 通常应返回什么？",
+      "a": "返回一个新的 SpreadsheetCell，其值为两个操作数单元格值之和。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++成员函数",
+    "运算符重载基本概念",
+    "SpreadsheetCell 的 add 方法"
+  ],
+  "source_pages": [
+    290,
+    290
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "602_成员形式的_operator_重载",
+  "_chunk_pages": [
+    289,
+    292
+  ]
+}

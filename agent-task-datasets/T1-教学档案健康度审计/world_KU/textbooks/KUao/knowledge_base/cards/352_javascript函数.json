@@ -1,0 +1,42 @@
+{
+  "title": "JavaScript函数",
+  "definition": "函数是一个可重用的代码块，可以用来完成某个特定的功能。",
+  "key_points": [
+    "函数的作用是把一段可重复使用的代码封装起来。",
+    "函数可以接收参数，也可以在内部执行语句并返回结果。",
+    "教材给出的基本形式包含函数名、参数列表、函数体和可选的 return 语句。"
+  ],
+  "examples": [
+    "function functionName(arg1,arg2,...,argn)\n{\n[statements]\n[return [expression]]\n}"
+  ],
+  "misconceptions": [
+    "函数一定必须有 return 语句。",
+    "函数不能接收参数。",
+    "函数名可以省略但仍然与普通函数声明完全相同。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "JavaScript中的函数是什么？",
+      "a": "函数是一个可重用的代码块，可以用来完成某个特定的功能。"
+    },
+    {
+      "q": "函数的基本语法结构包含哪些部分？",
+      "a": "包含函数名、参数列表、函数体，以及可选的 return [expression]。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "JavaScript基本语法"
+  ],
+  "source_pages": [
+    253,
+    256
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "352_javascript函数",
+  "_chunk_pages": [
+    253,
+    256
+  ]
+}

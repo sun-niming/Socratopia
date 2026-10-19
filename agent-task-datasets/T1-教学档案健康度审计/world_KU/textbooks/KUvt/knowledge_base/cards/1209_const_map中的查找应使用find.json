@@ -1,0 +1,45 @@
+{
+  "title": "const map中的查找应使用find",
+  "definition": "对于const map，不能使用operator[]进行只读访问，因为operator[]在键不存在时可能创建新元素，不是const成员函数。要在不修改map的前提下查找键，应使用find方法。",
+  "key_points": [
+    "const map只能调用适用于const对象的成员函数。",
+    "operator[]可能插入缺失键，因此不能用于const map。",
+    "find用于查找元素，不会因为键不存在而创建元素。"
+  ],
+  "examples": [
+    "void func(const map<int, int>& m) {",
+    "    // cout << m[1] << endl; // 错误：operator[]不是const成员函数",
+    "    auto iter = m.find(1);",
+    "}"
+  ],
+  "misconceptions": [
+    "即使代码看起来只是读取m[1]，operator[]仍可能产生插入行为。",
+    "const map不是完全不能查找元素，而是应使用find等不修改容器的查找方法。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么下面的代码无法编译：void func(const map<int, int>& m) { cout << m[1] << endl; }？",
+      "a": "因为m是const map的引用，而operator[]不是const成员函数；它可能在键不存在时插入元素。"
+    },
+    {
+      "q": "const map中应使用什么方法查找键？",
+      "a": "应使用find方法。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "map的operator[]插入与赋值行为",
+    "const对象与const成员函数"
+  ],
+  "source_pages": [
+    584,
+    584
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1209_const_map中的查找应使用find",
+  "_chunk_pages": [
+    581,
+    584
+  ]
+}

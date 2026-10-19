@@ -1,0 +1,45 @@
+{
+  "title": "通过共同抽象基类设计电子表格单元格层次结构",
+  "definition": "当电子表格单元格可能存储字符串、双精度值、公式或日期等不同类型时，可以让 SpreadsheetCell 作为共同父类，只声明所有单元格都应支持的公共行为，例如将值设置为字符串以及将当前值作为字符串获取；StringSpreadsheetCell 和 DoubleSpreadsheetCell 分别继承该基类并实现具体逻辑。",
+  "key_points": [
+    "把不同单元格共有的行为提取到 SpreadsheetCell 中，而不是让一种单元格继承另一种不完全相同的单元格。",
+    "SpreadsheetCell 只规定统一接口，例如 `set(std::string_view)` 和 `getString() const`。",
+    "不同派生类可以有不同的内部数据成员和实现方式。",
+    "这种设计让各派生类地位等同，并为多态使用提供基础。"
+  ],
+  "examples": [
+    "不合理的思路是让 `DoubleSpreadsheetCell` 继承 `StringSpreadsheetCell`，因为双精度值和字符串的处理方式大部分不同，派生类可能需要重写基类的大多数功能。",
+    "更合理的层次结构是：\n\n```text\nSpreadsheetCell\n├── StringSpreadsheetCell\n└── DoubleSpreadsheetCell\n```"
+  ],
+  "misconceptions": [
+    "共同父类不应为了复用代码而强行表示某个派生类是另一个派生类；继承关系应反映合理的抽象关系。",
+    "基类不必包含所有派生类的具体数据成员；它可以只定义公共行为。",
+    "支持多种单元格类型不意味着 SpreadsheetCell 本身必须知道每个派生类的内部表示。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么不推荐让 DoubleSpreadsheetCell 继承 StringSpreadsheetCell？",
+      "a": "因为双精度值与字符串的处理方式几乎完全不同，双精度派生类会重写基类的大多数功能；让两者作为 SpreadsheetCell 的平等派生类更合理。"
+    },
+    {
+      "q": "SpreadsheetCell 基类应当提取哪些内容？",
+      "a": "应提取所有单元格共有的行为，例如设置单元格值以及以字符串形式获取当前值。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "继承关系设计",
+    "多态性"
+  ],
+  "source_pages": [
+    322,
+    323
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "659_通过共同抽象基类设计电子表格单元格层次结构",
+  "_chunk_pages": [
+    321,
+    324
+  ]
+}

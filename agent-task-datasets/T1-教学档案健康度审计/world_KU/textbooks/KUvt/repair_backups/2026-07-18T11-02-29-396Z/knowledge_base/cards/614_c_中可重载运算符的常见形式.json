@@ -1,0 +1,46 @@
+{
+  "title": "C++中可重载运算符的常见形式",
+  "definition": "C++允许为自定义类型定义运算符函数，使对象能够使用特定运算符进行比较、输入输出、下标访问、类型转换、字面量构造以及动态内存分配等操作。原文列举了多种运算符函数声明形式，包括一元和二元运算符、流运算符、下标运算符、类型转换运算符、用户定义字面量以及 new/delete 运算符。",
+  "key_points": [
+    "比较运算符的示例包括 $operator!$、$operator!=$、$operator<$、$operator<=$ 和 $operator>=$。",
+    "输入输出运算符可以采用类似 `istream& operator>>(istream&, T&)` 和 `ostream& operator<<(ostream&, const T&)` 的形式。",
+    "下标运算符通常返回元素引用，例如 `E& operator[](size_t)` 与 `const E& operator[](size_t) const`。",
+    "用户定义转换和用户定义字面量可以分别通过 `operator type()` 与 `operator\"\"_suffix(...)` 等形式声明。",
+    "动态内存分配相关的运算符包括 `operator new`、`operator new[]`、`operator delete` 和 `operator delete[]`。"
+  ],
+  "examples": [
+    "下标运算符可以有适用于可修改对象和只读对象的两个重载：`E& operator[](size_t);` 与 `const E& operator[](size_t) const;`。",
+    "用户定义字面量示例：`T operator\"\"_i(long double d);`。",
+    "动态内存分配运算符示例：`void* operator new(size_t size);`。"
+  ],
+  "misconceptions": [
+    "运算符重载并不意味着可以创造新的运算符符号；只能为语言已有的运算符提供自定义类型的行为。",
+    "同一个运算符可能根据操作数类型、参数个数以及对象是否为 const 而存在多个重载。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "原文列举的下标运算符重载可以分别返回什么？",
+      "a": "可修改对象的重载可以返回 `E&`，只读对象的 const 重载可以返回 `const E&`。"
+    },
+    {
+      "q": "原文列举了哪些与动态内存分配有关的运算符？",
+      "a": "`operator new`、`operator new[]`、`operator delete` 和 `operator delete[]`。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++函数重载",
+    "类成员函数与const成员函数"
+  ],
+  "source_pages": [
+    473,
+    474
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 可重载运算符完整列表 operator[] operator() operator new operator delete 用户定义字面量 官方文档",
+  "concept_id": "614_c_中可重载运算符的常见形式",
+  "_chunk_pages": [
+    473,
+    476
+  ]
+}

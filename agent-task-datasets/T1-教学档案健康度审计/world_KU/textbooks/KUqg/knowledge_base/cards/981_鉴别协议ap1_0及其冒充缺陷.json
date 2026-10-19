@@ -1,0 +1,37 @@
+{
+  "title": "鉴别协议ap1.0及其冒充缺陷",
+  "definition": "鉴别协议ap1.0是最简单的身份鉴别方案：Alice直接向Bob发送“我是Alice”的报文。然而，Bob无法仅凭该报文判断发送者确实是Alice，因为Trudy也可以发送完全相同的报文冒充Alice。",
+  "key_points": [
+    "ap1.0没有使用共享秘密、密码或其他能够证明身份的凭据。",
+    "报文内容中的自我声明不能证明报文发送者的真实身份。",
+    "攻击者可以复制“我是Alice”的内容并直接发送给Bob。"
+  ],
+  "examples": [
+    "ap1.0的消息流程可以表示为：$$Alice\\rightarrow Bob:\\ \\text{“我是Alice”}$$Trudy也可以伪造同样的消息：$$Trudy\\rightarrow Bob:\\ \\text{“我是Alice”}$$因此Bob无法区分Alice和Trudy。"
+  ],
+  "misconceptions": [
+    "发送者在报文中写出自己的身份，并不等于完成了身份认证。",
+    "只要报文格式正确，Bob就能确认发送者是Alice，这种理解是错误的。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么ap1.0不能鉴别Alice？",
+      "a": "因为任何人，包括Trudy，都可以发送“我是Alice”的报文，Bob没有依据判断该报文是否真的由Alice发送。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "端点鉴别与鉴别协议"
+  ],
+  "source_pages": [
+    422,
+    423
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "981_鉴别协议ap1_0及其冒充缺陷",
+  "_chunk_pages": [
+    421,
+    424
+  ]
+}

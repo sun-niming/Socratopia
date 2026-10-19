@@ -1,0 +1,46 @@
+{
+  "title": "现代 C++ 中智能指针的选择原则",
+  "definition": "在现代 C++ 中，原始指针不应承担所有权管理；只有不涉及所有权时才适合使用原始指针。涉及独占所有权时，默认使用 unique_ptr；需要共享所有权时，使用 shared_ptr；通常分别使用 make_unique() 和 make_shared() 创建它们，以减少直接调用 new 和 delete 的需要。",
+  "key_points": [
+    "不涉及所有权时，可以使用原始指针表示非拥有关系。",
+    "涉及独占所有权时，默认选择 unique_ptr。",
+    "需要多个所有者共享资源时，选择 shared_ptr。",
+    "优先使用 make_unique() 和 make_shared() 创建智能指针，通常不必直接调用 new 或 delete。"
+  ],
+  "examples": [
+    "独占所有权：auto p { make_unique<Simple>() };",
+    "共享所有权：auto p { make_shared<Simple>() };",
+    "不涉及所有权的观察或访问关系可以使用原始指针，但原始指针不负责释放资源。"
+  ],
+  "misconceptions": [
+    "原始指针只要指向动态对象就自动拥有该对象；原始指针本身不表示所有权。",
+    "所有场景都应该使用 shared_ptr；如果只有一个所有者，原文建议默认使用 unique_ptr。",
+    "直接调用 new 和 delete 是现代 C++ 管理资源的首选方式；原文建议优先使用 make_unique() 和 make_shared()。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "什么时候使用 unique_ptr，什么时候使用 shared_ptr？",
+      "a": "涉及独占所有权时默认使用 unique_ptr；需要共享所有权时使用 shared_ptr。"
+    },
+    {
+      "q": "现代 C++ 为什么推荐使用 make_unique() 和 make_shared()？",
+      "a": "它们用于创建智能指针，可以减少直接调用 new 和 delete 的需要。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "unique_ptr 的基本用法",
+    "shared_ptr 的共享所有权与基本用法"
+  ],
+  "source_pages": [
+    223,
+    223
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "475_现代_c_中智能指针的选择原则",
+  "_chunk_pages": [
+    221,
+    224
+  ]
+}

@@ -1,0 +1,48 @@
+{
+  "title": "本书提供的参考资料与在线资源",
+  "definition": "本书不列出C++中每个类、方法和函数的完整参考，而是建议读者使用标准库参考资料和其他在线资源。正文提到的标准库参考资料包括cppreference.com和cplusplus.com/reference/；其他资源包括C++核心指南、微软指南支持库GSL以及isocpp.org/faq。",
+  "key_points": [
+    "cppreference.com提供在线参考资料，也可下载离线版本。",
+    "cplusplus.com/reference/是本书正文所指的另一项C++参考资料。",
+    "C++核心指南关注接口、资源管理、内存管理和并发等较高级问题。",
+    "Microsoft/GSL是微软的指南支持库实现，包含C++核心指南使用的函数和类型，并且是只有头文件的库。",
+    "isocpp.org/faq提供大量常见C++问题及答案。"
+  ],
+  "examples": [
+    "需要查询标准库数据结构、算法或函数时，可使用cppreference.com或cplusplus.com/reference/。",
+    "需要了解接口、资源管理、内存管理和并发方面的现代C++建议时，可参考C++核心指南。"
+  ],
+  "misconceptions": [
+    "本书正文提到的“标准库参考资料”不是指本书自身，而是指cppreference.com和cplusplus.com/reference/。",
+    "C++核心指南并不只讨论语法，还关注接口、资源管理、内存管理和并发等工程问题。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "本书正文中提到的标准库参考资料有哪些？",
+      "a": "cppreference.com和cplusplus.com/reference/。"
+    },
+    {
+      "q": "C++核心指南主要关注哪些问题？",
+      "a": "主要关注接口、资源管理、内存管理和并发等相对高级的问题。"
+    },
+    {
+      "q": "Microsoft/GSL是什么？",
+      "a": "它是微软对指南支持库（GSL）的一个实现，包含C++核心指南使用的函数和类型，并且是一个只有头文件的库。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "阅读本书所需的基础知识"
+  ],
+  "source_pages": [
+    16,
+    16
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "024_本书提供的参考资料与在线资源",
+  "_chunk_pages": [
+    13,
+    16
+  ]
+}

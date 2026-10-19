@@ -1,0 +1,41 @@
+{
+  "title": "element.style 与内联样式",
+  "definition": "element.style 用于访问元素的内联样式（inline style）。通过它只能修改内联样式；CSS 属性名需要转换成驼峰式命名，并且设置的值是字符串。",
+  "key_points": [
+    "element.style 访问的是元素的内联样式",
+    "CSS 属性名要写成驼峰式命名，例如 background-color -> backgroundColor",
+    "设置的值必须是字符串",
+    "这种方式只修改内联样式，通常不如直接修改 CSS 类灵活和易维护"
+  ],
+  "examples": [
+    "element.style.color = 'blue';",
+    "element.style.marginTop = '10px';",
+    "element.style.display = 'none';"
+  ],
+  "misconceptions": [
+    "可以直接写成 background-color 这种连字符形式；实际上要写成 backgroundColor",
+    "element.style 会修改外部样式表；实际上它修改的是内联样式"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么 background-color 在 JavaScript 中要写成 backgroundColor？",
+      "a": "因为 element.style 使用的是驼峰式命名。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "DOM元素",
+    "CSS样式"
+  ],
+  "source_pages": [
+    353,
+    356
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "477_element_style_与内联样式",
+  "_chunk_pages": [
+    353,
+    356
+  ]
+}

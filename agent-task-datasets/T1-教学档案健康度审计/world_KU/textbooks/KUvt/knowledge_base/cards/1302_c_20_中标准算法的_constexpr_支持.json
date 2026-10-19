@@ -1,0 +1,36 @@
+{
+  "title": "C++20 中标准算法的 constexpr 支持",
+  "definition": "从 C++20 开始，大多数标准库算法是 constexpr 的，因此可以在 constexpr 函数的实现中使用这些算法。但具体哪些算法支持 constexpr，需要以对应版本的标准库文档为准。",
+  "key_points": [
+    "constexpr 算法可以参与编译期求值，也可以像普通函数一样在运行时使用。",
+    "并非所有标准库算法都必然支持 constexpr，使用前应核对标准库文档。"
+  ],
+  "examples": [
+    "可将支持 constexpr 的标准算法用于 constexpr 函数的实现；具体算法是否支持 constexpr，应查询对应标准库指南。"
+  ],
+  "misconceptions": [
+    "不能认为 C++20 中所有标准算法都无条件支持 constexpr。",
+    "constexpr 算法并不意味着每次调用都会在编译期执行。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "C++20 中标准算法支持 constexpr 意味着什么？",
+      "a": "意味着大多数标准算法可以用于 constexpr 函数的实现，并可能参与编译期求值；但具体支持情况仍需查阅标准库文档。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "constexpr 函数"
+  ],
+  "source_pages": [
+    629,
+    629
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 standard library algorithms constexpr which algorithms are constexpr official reference",
+  "concept_id": "1302_c_20_中标准算法的_constexpr_支持",
+  "_chunk_pages": [
+    629,
+    632
+  ]
+}

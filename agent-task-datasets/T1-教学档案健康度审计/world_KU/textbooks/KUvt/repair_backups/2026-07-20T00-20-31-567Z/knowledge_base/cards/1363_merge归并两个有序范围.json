@@ -1,0 +1,47 @@
+{
+  "title": "merge归并两个有序范围",
+  "definition": "merge()将两个已经排好序的范围归并到目标范围中，并保持结果有序。结果包含两个源范围内的所有元素。它需要两个源范围的首尾迭代器、目标范围的起始迭代器，以及可选的比较回调。",
+  "key_points": [
+    "merge()要求两个输入范围已经排序。",
+    "目标范围必须足够大，以保存两个输入范围中的全部元素。",
+    "merge()按教材说明使用线性时间完成归并。",
+    "也可以先串联两个范围再调用sort()，但教材指出这种方式效率较低，复杂度为$O(N\\log N)$，而merge()为线性复杂度。"
+  ],
+  "examples": [
+    "vector<int> vectorOne, vectorTwo, vectorMerged; vectorMerged.resize(size(vectorOne) + size(vectorTwo)); merge(cbegin(vectorOne), cend(vectorOne), cbegin(vectorTwo), cend(vectorTwo), begin(vectorMerged));"
+  ],
+  "misconceptions": [
+    "merge()不会自动为目标容器分配空间。",
+    "merge()不是把两个未排序范围直接变成有序结果；输入范围必须已经有序。",
+    "merge()的目标范围不是第二个输入范围，而是单独提供的输出位置。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "merge()需要哪些主要参数？",
+      "a": "第一个源范围的首尾迭代器、第二个源范围的首尾迭代器、目标范围的起始迭代器，以及可选比较回调。"
+    },
+    {
+      "q": "为什么不能直接把未排序的两个范围交给merge()？",
+      "a": "因为merge()依赖输入范围已有序，只有这样才能正确地产生有序归并结果。"
+    },
+    {
+      "q": "如果不用merge()，如何实现类似效果？",
+      "a": "先串联两个范围，再对串联结果调用sort()；但教材指出其效率低于线性时间的merge()。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "通用排序算法的适用范围"
+  ],
+  "source_pages": [
+    652,
+    652
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 std::merge complexity linear time sorted input ranges output requirements",
+  "concept_id": "1363_merge归并两个有序范围",
+  "_chunk_pages": [
+    649,
+    652
+  ]
+}

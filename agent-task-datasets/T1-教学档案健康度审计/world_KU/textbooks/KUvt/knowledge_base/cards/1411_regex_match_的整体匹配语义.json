@@ -1,0 +1,46 @@
+{
+  "title": "regex_match()的整体匹配语义",
+  "definition": "`regex_match()`用于比较给定的输入序列与正则表达式模式；只有当正则表达式匹配整个源字符串时才返回true，否则返回false。输入序列可以由源字符串的首尾迭代器、std::string或C风格字符串表示。",
+  "key_points": [
+    "函数的一般形式为：`template<...> bool regex_match(InputSequence[, MatchResults], RegEx[, Flags]);`",
+    "InputSequence可以是首尾迭代器、std::string或C风格字符串。",
+    "RegEx参数是要匹配的正则表达式，Flags参数用于指定匹配选项，通常可以使用默认值。",
+    "如果regex_match()返回false，MatchResults对象只能安全地调用empty()或size()；其他内容未定义。",
+    "如果返回true，可以通过match_results对象查看完整匹配和各捕获组的内容。"
+  ],
+  "examples": [
+    "判断字符串是否完全符合模式：`if (regex_match(str, r)) { /* 整个str匹配成功 */ }`",
+    "输入字符串`2011/12/01`可以匹配“4位年份/月/日”的日期模式；输入字符串`11/12/01`不能通过要求年份为4位的模式。"
+  ],
+  "misconceptions": [
+    "regex_match()不是只要找到一个匹配子串就返回true；它要求整个源字符串都匹配。",
+    "regex_match()返回false时，不能继续读取MatchResults中的捕获内容。",
+    "Flags不是正则表达式本身，而是控制匹配算法行为的可选参数。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "regex_match()与“在字符串中找到一个匹配子串”有什么区别？",
+      "a": "regex_match()要求正则表达式匹配整个源字符串；只查找某个匹配子串应使用regex_search()。"
+    },
+    {
+      "q": "regex_match()返回false后，match_results对象中的捕获组是否可以读取？",
+      "a": "不可以。此时只能安全调用empty()或size()，其余内容未定义。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "正则表达式基本语法",
+    "C++函数调用"
+  ],
+  "source_pages": [
+    673,
+    674
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1411_regex_match_的整体匹配语义",
+  "_chunk_pages": [
+    673,
+    676
+  ]
+}

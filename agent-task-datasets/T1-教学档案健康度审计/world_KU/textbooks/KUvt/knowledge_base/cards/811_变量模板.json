@@ -1,0 +1,44 @@
+{
+  "title": "变量模板",
+  "definition": "变量模板是以模板参数为参数的变量定义。通过为变量模板指定具体模板实参，可以获得某种类型的变量模板实例。教材用变量模板定义不同类型的 pi 值。",
+  "key_points": [
+    "变量模板使用 template<typename T> 声明，并可结合 constexpr 定义编译期常量。",
+    "访问变量模板实例时使用类似类模板的语法，例如 pi<float> 和 pi<long double>。",
+    "请求某种类型的 pi 时，得到该类型能够表示的 pi 近似值。",
+    "变量模板也可以进行特化。",
+    "C++20 的标准库在 std::numbers 中定义了常用数学常量，包括 std::numbers::pi。"
+  ],
+  "examples": [
+    "template <typename T>\nconstexpr T pi { T { 3.141592653589793238462643383279502884 } };\n\nfloat piFloat { pi<float> };\nauto piLongDouble { pi<long double> };"
+  ],
+  "misconceptions": [
+    "pi<float> 和 pi<long double> 不是函数调用，而是变量模板的不同特化或实例。",
+    "不同类型的 pi 实例表示的是同一个数学常量在相应类型中的近似值，并不保证所有数字都能被该类型精确表示。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何获取 float 类型的 pi 变量模板实例？",
+      "a": "使用 pi<float>。"
+    },
+    {
+      "q": "变量模板是否只能定义常量？",
+      "a": "不是。教材示例使用 constexpr 定义常量变量模板，但变量模板本质上是变量模板机制，也可以进行特化。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "模板基础",
+    "constexpr"
+  ],
+  "source_pages": [
+    400,
+    400
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "811_变量模板",
+  "_chunk_pages": [
+    397,
+    400
+  ]
+}

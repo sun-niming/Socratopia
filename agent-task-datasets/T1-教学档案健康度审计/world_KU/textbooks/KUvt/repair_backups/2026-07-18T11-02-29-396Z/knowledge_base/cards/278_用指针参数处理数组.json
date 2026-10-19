@@ -1,0 +1,41 @@
+{
+  "title": "用指针参数处理数组",
+  "definition": "函数可以接收指向数组元素的指针和数组长度，并通过下标访问数组元素。由于函数参数中的数组通常按指针处理，函数不能仅凭数组指针自动知道数组长度，因此通常需要额外传入 `size`。",
+  "key_points": [
+    "`doublelnts(int* theArray, size_t size)` 接收数组首元素指针和元素个数。",
+    "循环条件通常写成 `i < size`，以遍历下标 `0` 到 `size - 1`。",
+    "函数对数组元素执行的修改会作用于调用者提供的原数组。"
+  ],
+  "examples": [
+    "```cpp\nvoid doublelnts(int* theArray, size_t size)\n{\n    for (size_t i { 0 }; i < size; i++) {\n        theArray[i] *= 2;\n    }\n}\n```"
+  ],
+  "misconceptions": [
+    "把数组传给此类函数时，函数不会自动获得数组长度。",
+    "函数参数中的 `int*` 只表示元素地址，不包含数组元素个数。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么 `doublelnts` 需要接收 `size` 参数？",
+      "a": "因为传入函数的数组信息按指针处理，指针本身不提供数组长度；函数需要 `size` 才能确定遍历范围。"
+    },
+    {
+      "q": "调用 `doublelnts` 后，原数组会不会被修改？",
+      "a": "会。函数通过指针直接修改原数组中的元素。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "使用指针访问数组元素"
+  ],
+  "source_pages": [
+    209,
+    210
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "278_用指针参数处理数组",
+  "_chunk_pages": [
+    209,
+    212
+  ]
+}

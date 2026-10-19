@@ -1,0 +1,44 @@
+{
+  "title": "auto与指针、const的组合声明",
+  "definition": "`auto`可以与指针符号和`const`组合，用于分别表达“指向常量对象的指针”“指针本身为常量”等不同类型。声明中`const`的位置决定它修饰的是所指对象还是指针本身。",
+  "key_points": [
+    "`const auto p { &i };`推导结果相当于`int* const`：指针本身是常量，但指向的`int`对象不是常量。",
+    "`const auto* const p5 { &i };`相当于`const int* const`：指针本身和所指对象都具有常量属性。",
+    "`auto*`表示推导一个指针类型；在其后再写`const`，可以声明常量指针。",
+    "应区分`const int*`、`int* const`和`const int* const`三种类型。"
+  ],
+  "examples": [
+    "设`int i {};`，则`const auto p { &i };`的类型可理解为`int* const`。",
+    "设`int i {};`，则`const auto* const p5 { &i };`的类型可理解为`const int* const`。"
+  ],
+  "misconceptions": [
+    "`int* const`表示“指向常量整数的指针”是错误的；它表示“不可改变的指针，指向可修改的整数”。",
+    "写出`const auto* const`后，只有指针本身为常量而所指对象不变的说法不完整；该声明中所指对象也为常量。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`int* const`中哪个部分是常量？",
+      "a": "指针本身是常量，不能改为指向其他地址；它指向的`int`对象不是常量。"
+    },
+    {
+      "q": "`const auto* const p5 { &i };`可等价理解为什么类型？",
+      "a": "可等价理解为`const int* const`。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "auto类型推导的基本规则",
+    "C++指针与const"
+  ],
+  "source_pages": [
+    89,
+    92
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "126_auto与指针_const的组合声明",
+  "_chunk_pages": [
+    89,
+    92
+  ]
+}

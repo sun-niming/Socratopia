@@ -1,0 +1,43 @@
+{
+  "title": "const的多层次面试考察点",
+  "definition": "解释 `const` 时，基础回答通常说明它可以修饰变量，使变量不能通过该名称被修改；更深入的回答还应涉及 `const` 成员方法、`const` 成员变量，以及 `const` 与引用结合时的语义。原文还指出，在适当情况下，使用 `const` 引用传递可能比值传递更高效。",
+  "key_points": [
+    "`const` 可以用于修饰变量。",
+    "较深入的回答还应覆盖 `const` 成员方法和 `const` 成员变量。",
+    "`const` 引用可以表达只读引用传递语义；原文指出在某些情况下这可能比值传递更高效。"
+  ],
+  "examples": [
+    "只读引用参数：`void process(const std::string& text);`。",
+    "面试回答可按层次展开：先解释变量上的 `const`，再说明成员方法、成员变量，以及 `const` 引用传递。"
+  ],
+  "misconceptions": [
+    "认为解释 `const` 只需要说明它能修饰变量。",
+    "认为使用 `const` 引用在所有场景下都一定比值传递高效。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "较完整地解释 `const` 时，至少应涉及哪些方面？",
+      "a": "应涉及 `const` 修饰变量的用法；较好的回答还应涉及 `const` 成员方法、`const` 成员变量，以及 `const` 与引用结合的语义。"
+    },
+    {
+      "q": "`const` 引用传递表达什么语义？",
+      "a": "它表达对所引用对象的只读访问语义；原文指出在某些情况下它可能比值传递更高效。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++引用",
+    "C++类的成员函数和成员变量"
+  ],
+  "source_pages": [
+    993,
+    993
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "2037_const的多层次面试考察点",
+  "_chunk_pages": [
+    993,
+    996
+  ]
+}

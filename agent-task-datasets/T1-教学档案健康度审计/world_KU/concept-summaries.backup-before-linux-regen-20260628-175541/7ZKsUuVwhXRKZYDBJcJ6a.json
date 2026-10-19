@@ -1,0 +1,158 @@
+{
+  "conversationId": "7ZKsUuVwhXRKZYDBJcJ6a",
+  "generatedAt": 1781060302971,
+  "pagesRange": null,
+  "sections": [
+    {
+      "type": "tldr",
+      "content": "本节核心是把 Linux 的“查找文件 → 筛选内容 → 统计/保存结果”串起来：用 `find -exec` 执行动作，用 `grep` 正则筛行，用管道 `|`、`wc -l` 和重定向 `>`/`>>` 组合成完整数据流。"
+    },
+    {
+      "type": "narrative",
+      "content": "一开始从 `find -exec` 的结尾语法 `\\;` 纠错进入，先把“找目录/文件并执行命令”的结构跑顺。随后转到 `grep`，逐步掌握匹配、反向匹配、行号、正则元字符，最后把 `grep` 和管道、计数、重定向连起来，形成可实际使用的命令组合。"
+    },
+    {
+      "type": "concepts",
+      "items": [
+        {
+          "name": "`find ... -exec ... {} \\;` 的结构",
+          "body": "`find` 可以按条件查找文件/目录，并对每个结果执行命令。\n\n典型结构：\n\n```bash\\nfind ./ -type d -name \"backup\" -exec ls -ld {} \\;\n```\n\n拆开看：\n\n- `./`：从当前目录开始找。\n- `-type d`：只找目录；`-type f` 表示只找普通文件。\n- `-name \"backup\"`：按名字匹配。\n- `-exec ls -ld {} \\;`：对每个找到的结果执行 `ls -ld`。\n\n关键语法：\n\n- `{}` 代表当前找到的那个文件/目录。\n- `\\;` 是 `-exec` 的结束符，**反斜杠在前，分号在后**。\n- `{}` 和 `\\;` 之间要有空格。\n\n例子：\n\n```bash\\nfind ./ -type f -exec cat {} \\;\n```\n\n表示找当前目录下所有普通文件，并把每个文件内容用 `cat` 打出来。\n\n只打印所有 `.txt` 普通文件内容：\n\n```bash\\nfind ./ -type f -name \"*.txt\" -exec cat {} \\;\n```"
+        },
+        {
+          "name": "`grep`：从文件内容中筛选匹配的行",
+          "body": "`grep` 用来从文本中筛出匹配某个模式的行。\n\n基本形式：\n\n```bash\\ngrep \"love\" a.txt\n```\n\n表示在 `a.txt` 中找所有包含 `love` 的行。\n\n常用选项：\n\n- `-n`：显示行号。\n- `-v`：反向匹配，显示**不匹配**的行。\n- 选项可以合并，如 `-vn` 等价于 `-v -n`。\n\n例子：\n\n```bash\\ngrep -n \"love\" a.txt\n```\n\n显示包含 `love` 的行，并带行号。\n\n```bash\\ngrep -v \"love\" a.txt\n```\n\n显示不包含 `love` 的行。\n\n```bash\\ngrep -vn \"love\" a.txt\n```\n\n显示不包含 `love` 的行，并带行号。\n\n注意：命令行中建议使用英文直引号 `\"`，不要混入中文弯引号。"
+        },
+        {
+          "name": "正则锚点：`^` 和 `$`",
+          "body": "在 `grep` 的模式里：\n\n- `^` 表示行开头。\n- `$` 表示行结尾。\n\n三种常见限制：\n\n```bash\\ngrep \"love\" a.txt\n```\n\n匹配：行内包含 `love`。\n\n```bash\\ngrep \"love$\" a.txt\n```\n\n匹配：以 `love` 结尾的行。\n\n```bash\\ngrep \"^love$\" a.txt\n```\n\n匹配：整行正好等于 `love`。\n\n所以：\n\n- `love` 可以匹配 `I love you`、`lovely`、`love`。\n- `love$` 可以匹配 `I love`，但不能匹配 `I love you`。\n- `^love$` 只能匹配整行就是 `love`，不能匹配 `I love`、`love you`、`lovely`。\n\n反向组合例子：\n\n```bash\\ngrep -vn \"^love$\" a.txt\n```\n\n表示显示所有**不等于整行 `love`** 的行，并带行号。"
+        },
+        {
+          "name": "`.` 和 `*`：任意字符与重复前一个元素",
+          "body": "`.` 表示**任意一个字符**。\n\n```bash\\ngrep \"l..e\" a.txt\n```\n\n`l..e` 的结构是：`l` + 两个任意字符 + `e`。\n\n能匹配：`love`、`like`、`lA3e`。\n\n不能匹配：`loe`，因为中间只有一个字符。\n\n---\n\n`*` 表示：**前一个字符或元素重复零次或多次**。\n\n注意：`*` 不是“任意字符串”，它必须依附在前一个元素上。\n\n例子：\n\n```bash\\ngrep \"lo*ve\" a.txt\n```\n\n`lo*ve` 表示：`l` + 零个或多个 `o` + `v` + `e`。\n\n能匹配：\n\n- `lve`\n- `love`\n- `loove`\n\n不能匹配：`lvve`，因为固定骨架里只有一个 `v`，多出来的 `v` 没位置放。\n\n---\n\n当 `*` 作用在 `.` 上时：\n\n```bash\\ngrep \".*love\" a.txt\n```\n\n`.*` 表示任意字符重复零次或多次，所以 `.*love` 可以匹配 `love`、`I love` 等。\n\n```bash\\ngrep \"^.*love$\" a.txt\n```\n\n表示从行头开始，任意内容若干，最后以 `love` 结尾。"
+        },
+        {
+          "name": "字符集合 `[ ]` 与反向字符集合 `[^ ]`",
+          "body": "`[ ]` 表示这一位可以从集合里任选一个字符。\n\n```bash\\ngrep \"[Ll]ove\" a.txt\n```\n\n表示第一位可以是 `L` 或 `l`，后面固定是 `ove`。\n\n能匹配：`Love`、`love`。\n\n不能匹配：`LOVE`，因为后面的 `ove` 是固定小写。\n\n多个字符集合可以连续使用：\n\n```bash\\ngrep \"[Ll][oa]ve\" a.txt\n```\n\n匹配：`love`、`Love`、`lave`、`Lave`。\n\n范围写法：\n\n```bash\\ngrep \"[A-Z]ove\" a.txt\n```\n\n表示第一位是任意大写字母，后面固定 `ove`。\n\n---\n\n`[^A-Z]` 表示这一位是**非大写字母**。\n\n注意：方括号里的 `^` 不是行开头，而是“取反”。\n\n```bash\\ngrep \"[^A-Z]ove\" a.txt\n```\n\n含义：第一位必须存在，且不能是大写字母，后面固定 `ove`。\n\n所以：\n\n- `love` 可以匹配，因为 `l` 不是大写字母。\n- `1ove` 可以匹配，因为 `1` 是字符且不是大写字母。\n- `Love` 不匹配，因为 `L` 是大写字母。\n- `ove` 不匹配，因为缺少给 `[^A-Z]` 消耗的那一位字符。"
+        },
+        {
+          "name": "反斜杠 `\\`：转义元字符",
+          "body": "反斜杠 `\\` 用来把元字符变成普通字符。\n\n`.` 本来表示任意一个字符。\n\n```bash\\ngrep \"love.\" a.txt\n```\n\n可以匹配 `love?`，因为 `.` 可以吃掉 `?`。\n\n如果要匹配普通句点 `.`，需要写成 `\\.`：\n\n```bash\\ngrep \"love\\.\" a.txt\n```\n\n只匹配含有字面量 `love.` 的行。\n\n如果要整行正好是 `love.`：\n\n```bash\\ngrep \"^love\\.$\" a.txt\n```\n\n含义：\n\n- `^` 锁行头。\n- `love` 是固定文本。\n- `\\.` 是普通句点。\n- `$` 锁行尾。\n\n反向并显示行号：\n\n```bash\\ngrep -vn \"^love\\.$\" a.txt\n```\n\n表示显示所有**不等于整行 `love.`** 的行，并带行号。"
+        },
+        {
+          "name": "管道 `|`、`wc -l` 与输出重定向",
+          "body": "管道 `|` 的作用：把左边命令的输出交给右边命令继续处理。\n\n统计包含 `love` 的行数：\n\n```bash\\ngrep \"love\" a.txt | wc -l\n```\n\n数据流：\n\n1. `grep \"love\" a.txt` 先筛出包含 `love` 的行。\n2. `wc -l` 统计传过来的行数。\n\n统计不包含 `love` 的行数：\n\n```bash\\ngrep -v \"love\" a.txt | wc -l\n```\n\n统计整行正好是 `love` 的行数：\n\n```bash\\ngrep \"^love$\" a.txt | wc -l\n```\n\n---\n\n输出重定向：\n\n```bash\\ngrep \"love\" a.txt > result.txt\n```\n\n`>` 表示覆盖写入。如果 `result.txt` 原来有内容，会被替换。\n\n```bash\\ngrep \"love\" a.txt >> result.txt\n```\n\n`>>` 表示追加写入，保留原内容，把新结果接到末尾。\n\n管道和重定向可以合体：\n\n```bash\\ngrep \"love\" a.txt | wc -l > count.txt\n```\n\n表示把包含 `love` 的行数覆盖保存到 `count.txt`。\n\n统计包含普通句点 `.` 的行数，并覆盖保存：\n\n```bash\\ngrep \"\\.\" a.txt | wc -l > dot_count.txt\n```"
+        }
+      ]
+    },
+    {
+      "type": "key-insight",
+      "content": "“`lo*ve` 匹配的是 `o` 字符重复零次至多次，所以框架匹配的是 `l[o...]ve`，`lvve` 对应的框架是 `l[o...]vve`，多了一个 `v`。”",
+      "attribution": "学习者"
+    },
+    {
+      "type": "key-terms",
+      "items": [
+        {
+          "term": "`-exec`",
+          "definition": "`find` 的动作参数，用来对每个查找结果执行指定命令。"
+        },
+        {
+          "term": "`{}`",
+          "definition": "在 `find -exec` 中代表当前找到的文件或目录。"
+        },
+        {
+          "term": "`\\;`",
+          "definition": "`find -exec` 的结束符，反斜杠在前、分号在后。"
+        },
+        {
+          "term": "`grep`",
+          "definition": "按模式从文本中筛选匹配行的命令。"
+        },
+        {
+          "term": "`-n`",
+          "definition": "`grep` 选项，显示匹配结果的行号。"
+        },
+        {
+          "term": "`-v`",
+          "definition": "`grep` 选项，反向匹配，显示不匹配模式的行。"
+        },
+        {
+          "term": "`^`",
+          "definition": "在普通正则位置表示行开头；在字符集合开头如 `[^A-Z]` 中表示取反。"
+        },
+        {
+          "term": "`$`",
+          "definition": "正则中表示行结尾。"
+        },
+        {
+          "term": "`.`",
+          "definition": "正则中表示任意一个字符。"
+        },
+        {
+          "term": "`*`",
+          "definition": "正则中表示前一个元素重复零次或多次。"
+        },
+        {
+          "term": "`[ ]`",
+          "definition": "字符集合，表示某一位可以是集合中的任意一个字符。"
+        },
+        {
+          "term": "`[^ ]`",
+          "definition": "反向字符集合，表示某一位必须不是集合中的字符。"
+        },
+        {
+          "term": "`\\`",
+          "definition": "转义符，用来把元字符变成普通字符。"
+        },
+        {
+          "term": "`|`",
+          "definition": "管道，把前一个命令的输出交给后一个命令处理。"
+        },
+        {
+          "term": "`wc -l`",
+          "definition": "统计输入内容的行数。"
+        },
+        {
+          "term": "`>`",
+          "definition": "输出重定向，覆盖写入文件。"
+        },
+        {
+          "term": "`>>`",
+          "definition": "输出重定向，追加写入文件。"
+        }
+      ]
+    },
+    {
+      "type": "open-question",
+      "content": "下次从“符号链接”继续：如果 `link.txt` 是 `a.txt` 的符号链接，它更像复制品，还是指向原文件的快捷方式？"
+    },
+    {
+      "type": "review-questions",
+      "items": [
+        {
+          "question": "找当前目录下所有名为 `backup` 的目录，并对每个结果执行 `ls -ld`，命令怎么写？",
+          "hint": "注意 `-exec` 的结束符是 `\\;`。",
+          "answer": "```bash\\nfind ./ -type d -name \"backup\" -exec ls -ld {} \\;\n```"
+        },
+        {
+          "question": "在 `a.txt` 中显示所有不包含 `love` 的行，并显示行号，命令怎么写？",
+          "hint": "`-v` 反向匹配，`-n` 显示行号。",
+          "answer": "```bash\\ngrep -vn \"love\" a.txt\n```\n\n也可以写成：\n\n```bash\\ngrep -v -n \"love\" a.txt\n```"
+        },
+        {
+          "question": "`grep \"love\" a.txt`、`grep \"love$\" a.txt`、`grep \"^love$\" a.txt` 分别匹配什么？",
+          "answer": "- `grep \"love\" a.txt`：匹配包含 `love` 的行。\n- `grep \"love$\" a.txt`：匹配以 `love` 结尾的行。\n- `grep \"^love$\" a.txt`：匹配整行正好等于 `love` 的行。"
+        },
+        {
+          "question": "为什么 `grep \"love.\" a.txt` 会匹配 `love?`，但 `grep \"love\\.\" a.txt` 不会？",
+          "answer": "因为未转义的 `.` 是正则元字符，表示任意一个字符，所以可以匹配 `?`。而 `\\.` 把句点转义成普通字符 `.`，只能匹配真正的句点。"
+        },
+        {
+          "question": "把 `a.txt` 中不等于整行 `love.` 的行数覆盖保存到 `count.txt`，命令怎么写？",
+          "hint": "需要 `-v`，需要 `^love\\.$`，最后用覆盖重定向。",
+          "answer": "```bash\\ngrep -v \"^love\\.$\" a.txt | wc -l > count.txt\n```\n\n这里不需要 `-n`，因为最终只是统计行数。"
+        }
+      ]
+    }
+  ]
+}

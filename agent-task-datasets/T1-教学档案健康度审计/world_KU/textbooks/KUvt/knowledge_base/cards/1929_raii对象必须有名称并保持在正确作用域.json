@@ -1,0 +1,47 @@
+{
+  "title": "RAII对象必须有名称并保持在正确作用域",
+  "definition": "使用 RAII 时，如果只写出一个未命名的临时对象，而没有把它绑定到具有名称的局部变量，该临时对象可能在创建表达式完成后立即销毁，导致资源没有按预期持续到作用域结束。教材用 `std::unique_lock` 说明：正确做法是声明命名的锁对象；错误写法 `unique_lock<mutex>(m_mutex);` 会被解释为声明一个名为 `m_mutex` 的局部变量，并对它进行默认构造，从而没有锁定类的数据成员。",
+  "key_points": [
+    "正确写法是声明一个有名称的局部锁对象，例如 `unique_lock<mutex> lock(m_mutex);`。",
+    "命名的 `lock` 对象会在方法结束时析构，从而自动解锁互斥体。",
+    "错误写法 `unique_lock<mutex>(m_mutex);` 没有给 RAII 对象指定预期的变量名。",
+    "该错误写法会声明一个局部变量 `m_mutex`，隐藏同名的类成员，并调用 `unique_lock` 的默认构造函数。",
+    "因此类的 `m_mutex` 数据成员实际上没有被锁定；较高警告级别可能报告变量隐藏类成员的警告。"
+  ],
+  "examples": [
+    "正确用法：`unique_lock<mutex> lock(m_mutex);`；`lock` 是本地 RAII 对象，在 `setData()` 结束时自动解锁 `m_mutex`。",
+    "错误用法：`unique_lock<mutex>(m_mutex);`；它可能被解析为声明名为 `m_mutex` 的局部变量，而不是创建一个名为 `lock`、并锁定成员 `m_mutex` 的对象。"
+  ],
+  "misconceptions": [
+    "看起来像构造临时对象的表达式，不一定会按照直觉创建并持续存在的临时 RAII 对象。",
+    "RAII 只有在对象生命周期覆盖资源使用范围时才有效；对象立即销毁会立即释放或撤销资源。",
+    "错误写法中的 `m_mutex` 不一定指向类成员，因为局部声明可能隐藏同名成员。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`unique_lock<mutex>` 的正确局部变量声明是什么？",
+      "a": "例如 `unique_lock<mutex> lock(m_mutex);`，使用变量名 `lock` 保存锁对象。"
+    },
+    {
+      "q": "为什么 `unique_lock<mutex>(m_mutex);` 不能达到预期的加锁效果？",
+      "a": "它会被解释为声明一个名为 `m_mutex` 的局部变量，并默认构造该锁对象；这会隐藏类成员，类成员 `m_mutex` 实际上没有被锁定。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "RAII资源管理思想",
+    "C++对象生命周期",
+    "C++互斥体与锁"
+  ],
+  "source_pages": [
+    932,
+    932
+  ],
+  "needs_verification": true,
+  "verify_query": "C++ unique_lock<mutex>(m_mutex) most vexing parse local variable hides class member C4458",
+  "concept_id": "1929_raii对象必须有名称并保持在正确作用域",
+  "_chunk_pages": [
+    929,
+    932
+  ]
+}

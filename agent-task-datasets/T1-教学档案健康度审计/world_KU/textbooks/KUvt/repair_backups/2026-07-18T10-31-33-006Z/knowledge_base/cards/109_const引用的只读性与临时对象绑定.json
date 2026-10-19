@@ -1,0 +1,54 @@
+{
+  "title": "const引用的只读性与临时对象绑定",
+  "definition": "`const T&`是指向常量对象的引用。通过它不能修改所引用对象；同时，const左值引用可以绑定到临时对象。相比之下，普通的非const左值引用不能直接绑定到原文示例中的整数常量临时值或函数返回的临时字符串对象。",
+  "key_points": [
+    "`const int& zRef { z };`可以引用整数对象，但不能通过`zRef`修改对象。",
+    "`zRef = 4;`不能编译，因为`zRef`引用的是const对象视图。",
+    "原文用`int& unnamedRef1 { 5 };`标示不能编译，用`const int& unnamedRef2 { 5 };`标示可以正常工作。",
+    "原文还通过返回`std::string`的函数说明：普通非const引用不能绑定函数返回的临时字符串，而const引用可以。"
+  ],
+  "examples": [
+    "`const int z { 3 };`",
+    "`const int& zRef { z };`",
+    "`zRef = 4; // DOES NOT COMPILE`",
+    "`int& unnamedRef1 { 5 }; // DOES NOT COMPILE`",
+    "`const int& unnamedRef2 { 5 }; // Works as expected`",
+    "`std::string getString() { return \"Hello world!\"; }`",
+    "可绑定临时对象的形式：`const std::string& string2 { getString() };`"
+  ],
+  "misconceptions": [
+    "`const`引用并不表示引用本身可以重新绑定；引用初始化后仍不能改绑。",
+    "const引用可以延长临时对象的生命周期，但这不意味着可以通过该引用修改临时对象。",
+    "普通`int&`不能直接绑定整数常量临时值。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么`zRef = 4`不能编译？",
+      "a": "因为`zRef`是`const int&`，不能通过它修改所引用对象。"
+    },
+    {
+      "q": "`int&`和`const int&`都能绑定到整数常量`5`吗？",
+      "a": "不能。普通`int&`不能直接绑定到该临时值，而`const int&`可以。"
+    },
+    {
+      "q": "为什么函数返回的临时`std::string`可以绑定到const引用？",
+      "a": "因为const左值引用可以绑定到临时对象。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "左值引用",
+    "const对象与只读访问"
+  ],
+  "source_pages": [
+    77,
+    80
+  ],
+  "needs_verification": true,
+  "verify_query": "C++ const 左值引用 绑定临时对象 非const左值引用 函数返回 std::string 示例",
+  "concept_id": "109_const引用的只读性与临时对象绑定",
+  "_chunk_pages": [
+    77,
+    80
+  ]
+}

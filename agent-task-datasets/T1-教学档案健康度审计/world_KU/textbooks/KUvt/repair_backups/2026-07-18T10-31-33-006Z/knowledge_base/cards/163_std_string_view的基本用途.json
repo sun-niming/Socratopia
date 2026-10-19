@@ -1,0 +1,42 @@
+{
+  "title": "std::string_view的基本用途",
+  "definition": "std::string_view是C++17引入的字符串视图类型，用于表示一段字符串内容。它可以与std::string、C风格字符串以及字符串字面量配合使用。与std::string相比，string_view本身表示的是对字符序列的视图，不负责拥有字符串内容。",
+  "key_points": [
+    "原文将std::string_view与std::string、const char*并列比较，说明字符串视图可用于统一处理多种字符串来源。",
+    "std::string_view提供c_str()、data()、substr()、remove_prefix(size_t)和remove_suffix(size_t)等相关操作。",
+    "原文示例中的extractExtension(string_view filename)可以接收std::string、C风格字符串和字符串字面量。"
+  ],
+  "examples": [
+    "函数可以采用字符串视图参数：`extractExtension(string_view filename)`。",
+    "同一个extractExtension函数可处理以下输入：`std::string filename{ R\"(c:\\temp\\my file.ext)\" };`、`const char* cString{ R\"(c:\\temp\\my file.ext)\" };`以及原始字符串字面量`R\"(c:\\temp\\my file.ext)\"`。"
+  ],
+  "misconceptions": [
+    "std::string_view不是std::string的同义词；它表示字符串视图，不等同于创建并拥有一份新的字符串副本。",
+    "能传入std::string_view并不意味着string_view会自动延长底层字符串的生命周期。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "std::string_view可以处理哪些字符串来源？",
+      "a": "原文示例表明，它可以处理std::string、const char*表示的C风格字符串以及字符串字面量。"
+    },
+    {
+      "q": "原文列举了哪些std::string_view相关操作？",
+      "a": "原文列举了c_str()、data()、substr()、remove_prefix(size_t)和remove_suffix(size_t)等操作。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++字符串的基本概念"
+  ],
+  "source_pages": [
+    113,
+    116
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "163_std_string_view的基本用途",
+  "_chunk_pages": [
+    113,
+    116
+  ]
+}

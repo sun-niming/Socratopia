@@ -1,0 +1,45 @@
+{
+  "title": "case多分支结构",
+  "definition": "Shell中的 case 结构用于多分支选择。教材给出的形式是：case word in pattern1） command_list;; pattern2） command_list;; [*） command_list;; ] esac。这里用 word 与各个模式进行匹配，匹配成功后执行对应的命令列表。教材还说明，pattern 可以用竖线分隔多个模式，并且模式使用 shell 的文件名匹配规则。",
+  "key_points": [
+    "case 后面跟要匹配的 word",
+    "每个分支由 pattern 和命令列表组成",
+    "每个分支后用 ;; 结束",
+    "可选的 * 分支可作为默认情况",
+    "整个结构以 esac 结束",
+    "pattern 可用 | 分隔多个模式",
+    "模式遵循 shell 文件名匹配规则"
+  ],
+  "examples": [
+    "case word in\npattern1） command_list;;\npattern2） command_list;;\n[*） command_list;; ]\nesac"
+  ],
+  "misconceptions": [
+    "不要把 case 结构的结束关键字写成 fi；它应以 esac 结束",
+    "不要认为一个分支只能写一个模式；教材明确说 pattern 可以用竖线分隔多个模式"
+  ],
+  "qa_pairs": [
+    {
+      "q": "case 结构以什么关键字结束？",
+      "a": "esac。"
+    },
+    {
+      "q": "教材中 pattern 支持怎样表示多个模式？",
+      "a": "可以用竖线分隔多个模式。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "Shell文件名匹配规则"
+  ],
+  "source_pages": [
+    77,
+    80
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "132_case多分支结构",
+  "_chunk_pages": [
+    77,
+    80
+  ]
+}

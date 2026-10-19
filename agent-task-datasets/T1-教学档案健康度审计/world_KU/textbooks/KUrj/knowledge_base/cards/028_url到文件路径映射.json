@@ -1,0 +1,40 @@
+{
+  "title": "URL到文件路径映射",
+  "definition": "静态服务器需要把 URL 映射到网站根目录下的文件路径。原文给出的根目录是假设为 `./www`，例如根路径通常映射到首页文件。",
+  "key_points": [
+    "`/` -> `./www/index.html`。",
+    "`/index.html` -> `./www/index.html`。",
+    "`/css/style.css` -> `./www/css/style.css`。",
+    "不要把用户输入直接拼到系统路径里；第 3 天先做基本映射，第 4 天补完整安全检查。"
+  ],
+  "examples": [
+    "$$\\begin{aligned}/ &\\to ./www/index.html\\\\/index.html &\\to ./www/index.html\\\\/css/style.css &\\to ./www/css/style.css\\end{aligned}$$"
+  ],
+  "misconceptions": [
+    "URL 就等于文件路径。",
+    "只要把 URL 直接拼接到磁盘路径后面就安全。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "网站根目录假设为 `./www` 时，`/css/style.css` 应映射到哪里？",
+      "a": "`./www/css/style.css`。"
+    },
+    {
+      "q": "`/` 通常应映射到哪个文件？",
+      "a": "`./www/index.html`。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [],
+  "source_pages": [
+    25,
+    28
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "028_url到文件路径映射",
+  "_chunk_pages": [
+    25,
+    28
+  ]
+}

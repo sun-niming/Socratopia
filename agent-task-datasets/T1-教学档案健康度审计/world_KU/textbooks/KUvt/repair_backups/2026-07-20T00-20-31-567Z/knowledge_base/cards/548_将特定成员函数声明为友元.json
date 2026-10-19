@@ -1,0 +1,43 @@
+{
+  "title": "将特定成员函数声明为友元",
+  "definition": "类不仅可以把整个类声明为友元，还可以只把另一个类中的某个成员函数声明为友元。这样，只有指定的成员函数能够访问当前类的 private 和 protected 成员，而不是让该成员函数所属类的所有成员都获得访问权限。",
+  "key_points": [
+    "友元声明需要写出被授权成员函数所属的类名、函数名和参数列表。",
+    "原文示例为：`friend void Bar::processFoo(const Foo&);`。",
+    "这种方式比将整个 Bar 类声明为 Foo 的友元具有更小的授权范围。",
+    "在能够正确声明该成员函数为友元之前，通常需要让编译器知道相关类和成员函数的声明。"
+  ],
+  "examples": [
+    "在 Foo 类中声明 Bar 的特定成员函数：`friend void Bar::processFoo(const Foo&);`。这表示 Bar::processFoo 可以访问 Foo 的 private 和 protected 成员，但 Bar 的其他成员函数不因此获得该权限。"
+  ],
+  "misconceptions": [
+    "声明某个成员函数为友元，不等于声明它所属的整个类为友元。",
+    "友元声明中的函数签名必须与实际成员函数匹配，不能只写函数名。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何只允许 Bar::processFoo 访问 Foo 的非公有成员？",
+      "a": "在 Foo 类中写出类似 `friend void Bar::processFoo(const Foo&);` 的友元声明。"
+    },
+    {
+      "q": "将 Bar::processFoo 声明为 Foo 的友元后，Bar 的所有成员都能访问 Foo 吗？",
+      "a": "不能，只有 Bar::processFoo 获得该访问权限。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "友元的访问权限与适用对象",
+    "成员函数声明"
+  ],
+  "source_pages": [
+    259,
+    259
+  ],
+  "needs_verification": true,
+  "verify_query": "C++ friend declaration specific member function friend void Bar::processFoo(const Foo&) syntax forward declaration",
+  "concept_id": "548_将特定成员函数声明为友元",
+  "_chunk_pages": [
+    257,
+    260
+  ]
+}

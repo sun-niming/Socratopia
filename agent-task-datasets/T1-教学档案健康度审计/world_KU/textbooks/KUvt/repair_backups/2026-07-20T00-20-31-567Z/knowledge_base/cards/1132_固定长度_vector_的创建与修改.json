@@ -1,0 +1,45 @@
+{
+  "title": "固定长度 vector 的创建与修改",
+  "definition": "vector 可以通过指定元素数量创建为具有固定初始长度的容器，并通过 `operator[]` 访问和修改已有元素。创建后 vector 仍然具有动态增长能力，因此“固定长度”在这里主要表示创建时指定了初始元素数量，而不是不能改变长度。",
+  "key_points": [
+    "`vector<T> values(n)` 创建包含 $n$ 个元素的 vector。",
+    "可以通过下标修改已有元素，例如 `values[i] = newValue;`。",
+    "`size()` 返回当前元素数量，适合用于普通下标循环的边界条件。",
+    "对非常量 vector 使用 `operator[]` 通常得到元素的引用，可作为赋值语句的目标；对 const vector 使用时得到不能修改元素的 const 引用。"
+  ],
+  "examples": [
+    "`vector<double> doubleVector(10);` 创建包含 10 个 `double` 元素的 vector。",
+    "`for (size_t i{0}; i < doubleVector.size(); ++i) { cin >> doubleVector[i]; }` 可以逐个读取并修改元素。",
+    "基于范围的循环中使用 `auto&` 可以修改元素：`for (auto& element : doubleVector) { element /= max; }`。"
+  ],
+  "misconceptions": [
+    "指定初始大小并不意味着 vector 永远不能增加或减少元素。",
+    "范围 for 循环使用 `auto` 会复制元素，不能通过该变量修改原 vector；需要修改元素时应使用 `auto&`。",
+    "const vector 的元素访问结果不能作为赋值目标。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么示例中的范围 for 循环使用 `auto&` 而不是 `auto`？",
+      "a": "因为需要通过引用直接修改 vector 中的元素；使用 `auto` 会得到元素副本。"
+    },
+    {
+      "q": "`vector<double> values(10)` 创建了什么？",
+      "a": "创建一个包含 10 个 double 元素的 vector。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "vector 的元素访问与边界检查"
+  ],
+  "source_pages": [
+    549,
+    550
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1132_固定长度_vector_的创建与修改",
+  "_chunk_pages": [
+    549,
+    552
+  ]
+}

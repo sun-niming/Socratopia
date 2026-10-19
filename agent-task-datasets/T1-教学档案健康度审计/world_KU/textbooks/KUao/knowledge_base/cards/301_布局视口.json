@@ -1,0 +1,35 @@
+{
+  "title": "布局视口",
+  "definition": "布局视口是用于文档布局的逻辑尺寸，单位是逻辑像素（CSS像素）。",
+  "key_points": [
+    "它描述的是页面排版时使用的逻辑宽度。",
+    "用户缩放网页时，不会影响布局视口的宽度。"
+  ],
+  "examples": [
+    "移动设备默认布局视口一般是980px。"
+  ],
+  "misconceptions": [
+    "误以为缩放页面会改变布局视口宽度；原文说明缩放不影响它的宽度。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "布局视口的作用和单位是什么？",
+      "a": "它用于文档布局，单位是逻辑像素（CSS像素）。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "视口"
+  ],
+  "source_pages": [
+    217,
+    220
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "301_布局视口",
+  "_chunk_pages": [
+    217,
+    220
+  ]
+}

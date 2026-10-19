@@ -1,0 +1,42 @@
+{
+  "title": "TCP 与 HTTP 的分层关系",
+  "definition": "TCP 负责可靠传输字节流，HTTP 负责规定这些字节应该按什么文本格式解释。服务器不是直接“发网页”，而是先建立 TCP 连接，再在连接上发送 HTTP 格式的数据。",
+  "key_points": [
+    "socket 层只关心字节，不关心 HTML。",
+    "HTTP 层要自己解析请求文本。",
+    "HTML 只是 HTTP 响应体的一种内容。",
+    "CSS、JS、图片也都可以是响应体，只是 MIME 不同。"
+  ],
+  "examples": [
+    "先建立 TCP 连接，再发送类似 `GET /index.html HTTP/1.1` 的 HTTP 文本。"
+  ],
+  "misconceptions": [
+    "TCP 和 HTTP 不是同一层的东西。",
+    "“发网页”本质上是通过 HTTP 在 TCP 连接上传输字节。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "TCP 和 HTTP 分别负责什么？",
+      "a": "TCP 负责可靠传输字节流，HTTP 负责规定这些字节的文本格式和语义。"
+    },
+    {
+      "q": "HTML 在这里是什么角色？",
+      "a": "HTML 只是 HTTP 响应体的一种内容。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "TCP 连接常用系统调用"
+  ],
+  "source_pages": [
+    13,
+    16
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "006_tcp_与_http_的分层关系",
+  "_chunk_pages": [
+    13,
+    16
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "title": "带初始化器的switch语句",
+  "definition": "C++允许在switch的括号中先执行初始化，再使用分号后的表达式作为switch控制表达式。初始化得到的变量可供控制表达式和switch主体使用，其作用域限于该switch语句。",
+  "key_points": [
+    "形式为：$$\\text{switch }(\\text{初始化器};\\ \\text{表达式})\\{\\text{主体}\\}$$",
+    "初始化器与控制表达式之间使用分号分隔。",
+    "这种写法适合只在switch判断过程中需要的临时变量。"
+  ],
+  "examples": [
+    "switch (initializer; expression) { /* switch主体 */ }"
+  ],
+  "misconceptions": [
+    "带初始化器的switch不是把初始化器当作case条件；初始化器先执行，分号后的表达式才是用于选择case的控制表达式。",
+    "初始化变量的作用域不会扩展到switch语句之外。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "带初始化器的switch语句的基本形式是什么？",
+      "a": "基本形式是switch (初始化器; 表达式) { 主体 }；先执行初始化器，再根据表达式的值选择case。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "switch语句按case选择分支"
+  ],
+  "source_pages": [
+    49,
+    52
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "059_带初始化器的switch语句",
+  "_chunk_pages": [
+    49,
+    52
+  ]
+}

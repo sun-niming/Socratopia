@@ -1,0 +1,41 @@
+{
+  "title": "new分配失败时的异常与nothrow版本",
+  "definition": "C++普通形式的new在无法满足内存分配请求时会抛出异常；如果该异常没有被处理，程序通常会终止。使用带std::nothrow参数的new可以改变这一行为：分配失败时不抛出异常，而是返回nullptr。使用nothrow版本时，程序必须检查返回值是否为nullptr，否则可能解引用空指针并产生错误。",
+  "key_points": [
+    "普通new分配失败时会抛出异常。",
+    "未捕获的内存分配异常会导致程序终止。",
+    "nothrow版本的语法示例为：$\\text{new(std::nothrow) T}$。",
+    "nothrow版本分配失败时返回nullptr，而不是抛出异常。",
+    "使用nothrow版本后必须检查结果是否为nullptr。"
+  ],
+  "examples": [
+    "int* ptr { new(std::nothrow) int };",
+    "检查nothrow结果：int* ptr { new(std::nothrow) int }; if (ptr == nullptr) { /* 处理分配失败 */ }"
+  ],
+  "misconceptions": [
+    "认为所有形式的new分配失败都会返回nullptr。",
+    "认为使用nothrow后就不需要处理内存不足。",
+    "认为编译器会强制检查nothrow new返回的指针是否为nullptr。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "普通new与new(std::nothrow)在分配失败时有什么区别？",
+      "a": "普通new会抛出异常；new(std::nothrow)不会抛出异常，而是返回nullptr，因此调用者必须检查返回值。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++动态内存分配"
+  ],
+  "source_pages": [
+    201,
+    201
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "422_new分配失败时的异常与nothrow版本",
+  "_chunk_pages": [
+    201,
+    204
+  ]
+}

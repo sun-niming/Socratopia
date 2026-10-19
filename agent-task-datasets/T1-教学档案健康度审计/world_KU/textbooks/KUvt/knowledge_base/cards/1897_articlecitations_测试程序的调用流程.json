@@ -1,0 +1,45 @@
+{
+  "title": "ArticleCitations 测试程序的调用流程",
+  "definition": "测试程序循环读取用户输入的文件名；当用户输入 STOP 时结束循环，否则用文件名构造 ArticleCitations 对象，再将该对象按值传递给 processCitations()。processCitations() 先输出文章信息，再根据 getNumCitations() 返回的数量，逐条输出 getCitation(i) 返回的引文。",
+  "key_points": [
+    "主循环提示用户输入文件名，并使用 STOP 作为终止标记。",
+    "构造 ArticleCitations 对象时，会读取指定文件中的文章信息和引文信息。",
+    "processCitations(ArticleCitations cit) 接收 ArticleCitations 对象的值传递副本。",
+    "输出循环的索引范围是 $0 \\le i < \\text{cit.getNumCitations()}$。"
+  ],
+  "examples": [
+    "调用流程可表示为：输入 paper1.txt → 构造 ArticleCitations cit → processCitations(cit) → 输出文章信息和每条引文 → 再次提示文件名 → 输入 STOP 后退出。",
+    "输出循环可写成：for (int i { 0 }; i < cit.getNumCitations(); i++) { cout << cit.getCitation(i) << endl; }"
+  ],
+  "misconceptions": [
+    "输入文件名并成功构造对象，不代表对象中的每条引文都已经正确读取；仍需检查输出结果。",
+    "STOP 是用户输入的控制命令，不是要被当作文件名打开的文件。",
+    "getNumCitations() 返回的是引文数量，最后一个有效索引是 $\\text{getNumCitations()}-1$。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "测试程序何时结束主循环？",
+      "a": "当用户输入字符串 STOP 时，程序执行 break，结束主循环。"
+    },
+    {
+      "q": "processCitations() 如何输出所有引文？",
+      "a": "它先输出文章信息，然后从索引 0 遍历到 getNumCitations()-1，并调用 getCitation(i) 输出每条引文。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++类对象构造与成员函数调用",
+    "for循环"
+  ],
+  "source_pages": [
+    914,
+    914
+  ],
+  "needs_verification": true,
+  "verify_query": "Marc Gregoire Professional C++ 5th edition ArticleCitations processCitations STOP paper1.txt",
+  "concept_id": "1897_articlecitations_测试程序的调用流程",
+  "_chunk_pages": [
+    913,
+    916
+  ]
+}

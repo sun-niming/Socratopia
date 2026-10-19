@@ -1,0 +1,44 @@
+{
+  "title": "const 引用参数",
+  "definition": "`const` 引用参数以引用方式接收对象，不创建完整副本，同时禁止函数通过该参数修改原对象。它适合传递不需要修改、但复制成本可能较高的对象，也允许传入字面量或临时值。",
+  "key_points": [
+    "const 引用兼具引用传递和只读保护的特点：避免复制，并且函数不能通过该参数改变实参。",
+    "对于大型对象，复制可能耗时或产生副作用，因此通常优先考虑 `const T&`。",
+    "const 引用可以绑定到字面量；例如 `printString(\"Hello World\")`可以调用接受 `const std::string&`的函数。"
+  ],
+  "examples": [
+    "`void printString(const std::string& myString) { std::cout << myString << std::endl; }`。",
+    "调用示例：`std::string someString{\"Hello World\"}; printString(someString);`以及`printString(\"Hello World\");`。",
+    "如果函数不需要修改对象，应使用类似`const std::string&`的参数，而不是按值接收整个对象。"
+  ],
+  "misconceptions": [
+    "const 引用并不表示会复制对象；它的目的之一正是避免复制。",
+    "const 引用不能通过参数修改原对象，但这不代表对象在程序其他位置绝对不可修改。",
+    "引用传递不只适用于需要修改实参的情况；只读的 const 引用也可用于提高传递大型对象的效率。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么给大型对象使用`const`引用参数通常比值传递更合适？",
+      "a": "const 引用不需要复制整个对象，同时禁止函数修改原对象，因此兼顾了效率和安全性。"
+    },
+    {
+      "q": "`printString(\"Hello World\")`为什么可以调用接受`const std::string&`的函数？",
+      "a": "const 引用可以绑定到字面量转换产生的临时字符串对象。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "值传递与非 const 引用传递"
+  ],
+  "source_pages": [
+    82,
+    82
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "148_const_引用参数",
+  "_chunk_pages": [
+    81,
+    84
+  ]
+}

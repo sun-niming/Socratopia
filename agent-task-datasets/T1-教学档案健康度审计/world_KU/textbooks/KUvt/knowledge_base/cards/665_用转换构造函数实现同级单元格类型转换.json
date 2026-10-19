@@ -1,0 +1,50 @@
+{
+  "title": "用转换构造函数实现同级单元格类型转换",
+  "definition": "转换构造函数是一个构造函数，其参数可以是另一种类型的对象，用于根据该对象创建当前类型的新对象。在电子表格单元格层次结构中，StringSpreadsheetCell 可以提供接受 const DoubleSpreadsheetCell& 的构造函数，从而根据 DoubleSpreadsheetCell 的 getString() 结果构造字符串单元格。",
+  "key_points": [
+    "转换构造函数的参数不是同类对象引用，而可以是另一个相关类型对象的引用。",
+    "StringSpreadsheetCell 可以通过 `StringSpreadsheetCell(const DoubleSpreadsheetCell& cell)` 从 DoubleSpreadsheetCell 构造。",
+    "如果类中自行声明了构造函数，编译器将不再自动生成默认构造函数，因此需要显式声明 `StringSpreadsheetCell() = default;`。",
+    "这种转换是对象到对象的转换，不等同于把一个同级类的指针或引用直接转换成另一个同级类的指针或引用。"
+  ],
+  "examples": [
+    "示例接口：\n```cpp\nclass StringSpreadsheetCell : public SpreadsheetCell {\npublic:\n    StringSpreadsheetCell() = default;\n    StringSpreadsheetCell(const DoubleSpreadsheetCell& cell) {\n        set(cell.getString());\n    }\n};\n```",
+    "该构造函数允许使用 DoubleSpreadsheetCell 创建 StringSpreadsheetCell：\n```cpp\nDoubleSpreadsheetCell source;\nsource.set(8.4);\nStringSpreadsheetCell target{source};\n```"
+  ],
+  "misconceptions": [
+    "转换构造函数会创建一个新的目标类型对象，不是把原对象本身改变成另一种类型。",
+    "两个同级派生类的指针或引用不能仅凭普通类型转换直接互相转换。",
+    "声明了其他构造函数后，默认构造函数不会继续由编译器自动生成；如需默认构造，应显式写出 `= default`。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "StringSpreadsheetCell 的转换构造函数可以接受什么参数？",
+      "a": "可以接受 `const DoubleSpreadsheetCell&`，并据此创建 StringSpreadsheetCell。"
+    },
+    {
+      "q": "为什么需要显式声明 StringSpreadsheetCell() = default？",
+      "a": "因为一旦类自行声明了构造函数，编译器就不会再自动生成默认构造函数。"
+    },
+    {
+      "q": "转换构造函数是否等同于同级派生类指针之间的类型转换？",
+      "a": "不等同。转换构造函数用于创建目标类型的新对象；同级派生类的指针或引用不能因此直接互相转换。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "构造函数",
+    "继承层次结构",
+    "引用参数"
+  ],
+  "source_pages": [
+    326,
+    326
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "665_用转换构造函数实现同级单元格类型转换",
+  "_chunk_pages": [
+    325,
+    328
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "title": "rest参数",
+  "definition": "函数可以接收任意个实参，多余的实参会以数组的形式传递给 rest；在形参列表中用 ...rest 的形式书写。",
+  "key_points": [
+    "rest 用于接收多余的实参",
+    "rest 以数组形式保存这些多余实参",
+    "写法为 function 函数名(参数列表, ...rest){...}"
+  ],
+  "examples": [
+    "function f(a,...rest){\n  // rest 接收多余的实参\n}"
+  ],
+  "misconceptions": [
+    "rest 只接收多余的实参，不是所有实参",
+    "rest 前面要写 ..."
+  ],
+  "qa_pairs": [
+    {
+      "q": "rest 参数的作用是什么？",
+      "a": "它用于接收多余的实参，并把这些实参以数组形式保存。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "形参与实参"
+  ],
+  "source_pages": [
+    253,
+    256
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "372_rest参数",
+  "_chunk_pages": [
+    253,
+    256
+  ]
+}

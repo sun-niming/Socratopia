@@ -1,0 +1,47 @@
+{
+  "title": "未捕获异常与 terminate",
+  "definition": "如果异常没有被任何匹配的 catch 处理，C++ 会调用 std::terminate()。std::terminate() 会调用当前的 terminate_handler；如果没有设置自定义处理函数，默认处理函数会调用 abort() 终止程序。",
+  "key_points": [
+    "可通过 std::set_terminate() 安装自定义 terminate_handler。相关声明位于 <exception>。",
+    "terminate_handler 通常应执行终止程序的操作；示例中的自定义处理函数输出提示后调用 _Exit(1)。",
+    "abort() 和 _Exit() 都会终止程序；_Exit() 直接结束进程，不执行通常的正常退出清理流程。相关函数位于 <cstdlib>。"
+  ],
+  "examples": [
+    "自定义终止处理函数可写成：\nvoid terminateHandler() {\n    std::cout << \"Uncaught exception!\" << std::endl;\n    std::_Exit(1);\n}\n然后通过 std::set_terminate(terminateHandler) 安装它。",
+    "当 main() 或其调用函数抛出的异常没有被捕获时，控制流最终会进入 std::terminate()，再进入已安装的 terminate_handler。"
+  ],
+  "misconceptions": [
+    "std::terminate() 不是用来捕获异常的；它是在异常未被处理等情况下执行终止处理的函数。",
+    "安装 terminate_handler 不会让程序继续正常执行；处理函数通常必须终止程序。",
+    "std::terminate() 与 std::abort() 不是同一个函数：前者先调用 terminate_handler，后者直接异常终止。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "未捕获异常时通常会发生什么？",
+      "a": "如果异常没有被任何 catch 处理，C++ 会调用 std::terminate()；它随后调用当前的 terminate_handler。"
+    },
+    {
+      "q": "如何设置自定义的终止处理函数？",
+      "a": "调用 std::set_terminate(handler)，其中 handler 是自定义的 terminate_handler。"
+    },
+    {
+      "q": "示例中的 terminateHandler 如何结束程序？",
+      "a": "它先输出“Uncaught exception!”，然后调用 std::_Exit(1)。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++异常的抛出与捕获"
+  ],
+  "source_pages": [
+    445,
+    446
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "581_未捕获异常与_terminate",
+  "_chunk_pages": [
+    445,
+    448
+  ]
+}

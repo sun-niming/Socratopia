@@ -1,0 +1,43 @@
+{
+  "title": "关联容器中的擦除选择",
+  "definition": "对于有序和无序关联容器，按键调用容器自身的 erase(key) 通常具有更好的性能，因此应优先使用该成员函数；std::erase_if 仍然适用于所有容器。",
+  "key_points": [
+    "关联容器通常提供 erase(key)，可以按照键删除元素。",
+    "教材建议在关联容器中优先使用 erase(key)，因为性能更好。",
+    "std::erase_if 适用于所有容器，适合按谓词删除。"
+  ],
+  "examples": [
+    "std::map<int, string> values; values.erase(42);",
+    "当删除条件是一个复杂谓词而不是单一键值时，可以使用 std::erase_if(values, predicate)。"
+  ],
+  "misconceptions": [
+    "std::erase_if 不是不能用于关联容器，而是按键删除时通常不如 erase(key) 合适。",
+    "erase(key) 与 erase_if(predicate) 的删除条件不同，前者按键匹配，后者按谓词判断。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "在关联容器中按键删除元素时，教材建议优先使用什么？",
+      "a": "优先使用关联容器的 erase(key) 成员函数，因为性能更好。"
+    },
+    {
+      "q": "std::erase_if 是否适用于关联容器？",
+      "a": "适用；它适用于所有容器。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "关联容器",
+    "容器erase成员函数"
+  ],
+  "source_pages": [
+    643,
+    643
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1340_关联容器中的擦除选择",
+  "_chunk_pages": [
+    641,
+    644
+  ]
+}

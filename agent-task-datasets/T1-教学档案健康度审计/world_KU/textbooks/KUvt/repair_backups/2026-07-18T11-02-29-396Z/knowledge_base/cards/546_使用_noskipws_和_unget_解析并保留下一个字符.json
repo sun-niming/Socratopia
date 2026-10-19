@@ -1,0 +1,51 @@
+{
+  "title": "使用 noskipws 和 unget 解析并保留下一个字符",
+  "definition": "默认格式化输入通常会跳过空白字符；使用 `cin >> noskipws` 后，字符提取会保留空白字符。`unget()` 可以将最近读取的一个字符退回输入流，使该字符成为下一次读取时得到的字符。",
+  "key_points": [
+    "`cin >> noskipws` 设置输入流，使后续字符读取不跳过空白字符。",
+    "原文示例逐字符读取输入：`while (cin >> ch)`。",
+    "当读取到数字字符时，示例调用 `cin.unget()`，把这个数字退回流中。",
+    "退回数字后，后续的 `cin >> partySize` 可以从该数字开始读取人数。",
+    "如果 `unget()` 失败，流会进入失败状态；原文通过 `cin.fail()` 检查并输出错误信息。",
+    "示例先把非数字字符追加到 `guestName`，再读取数字形式的 `partySize`。"
+  ],
+  "examples": [
+    "文本示例：`char ch; cin >> noskipws; while (cin >> ch) { if (isdigit(ch)) { cin.unget(); if (cin.fail()) cout << \"unget() failed\" << endl; break; } guestName += ch; } if (cin) cin >> partySize;`",
+    "解析逻辑：输入中的字符先被逐个读取并加入 `guestName`；遇到第一个数字时将其退回，然后使用 `cin >> partySize` 读取人数。"
+  ],
+  "misconceptions": [
+    "`noskipws` 不会把字符转换成数字；它只改变字符提取时是否跳过空白字符。",
+    "`unget()` 不是删除字符，而是把最近读取的字符放回输入流。",
+    "调用 `unget()` 后，数字仍然留在流中，后续输入操作可以再次读取它。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`cin >> noskipws` 的作用是什么？",
+      "a": "使后续字符提取不跳过空白字符。"
+    },
+    {
+      "q": "原文为什么在读到数字字符后调用 `cin.unget()`？",
+      "a": "因为数字字符标志着姓名读取结束；将该数字退回后，后续的 `cin >> partySize` 可以从这个数字开始读取人数。"
+    },
+    {
+      "q": "如何检查 `unget()` 是否失败？",
+      "a": "调用后使用 `cin.fail()` 检查流状态；如果为真，输出 `unget() failed`。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "使用 istream::get() 逐字符读取输入",
+    "检查和处理 istream 的输入状态"
+  ],
+  "source_pages": [
+    417,
+    420
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "546_使用_noskipws_和_unget_解析并保留下一个字符",
+  "_chunk_pages": [
+    417,
+    420
+  ]
+}

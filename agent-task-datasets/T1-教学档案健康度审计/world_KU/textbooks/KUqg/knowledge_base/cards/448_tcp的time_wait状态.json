@@ -1,0 +1,43 @@
+{
+  "title": "TCP的TIME_WAIT状态",
+  "definition": "TIME_WAIT是TCP主动关闭连接的一方在确认对端FIN之后进入的临时状态。客户在该状态中等待一段时间，以便在最后的ACK丢失时能够重传最后的确认报文。等待时间与具体实现有关，原文给出的典型值为30秒、1分钟或2分钟；等待结束后连接正式关闭，相关资源包括端口号被释放。",
+  "key_points": [
+    "进入TIME_WAIT前，客户已经收到服务器FIN并发送了ACK。",
+    "如果最后的ACK丢失，服务器可能重传FIN，TIME_WAIT使客户能够重传最后的ACK。",
+    "TIME_WAIT持续时间依具体实现而定，原文列举的典型值是30秒、1分钟或2分钟。",
+    "TIME_WAIT结束后，客户端用于该连接的资源被释放。"
+  ],
+  "examples": [
+    "若客户发送的最后ACK丢失，服务器重传FIN；处于TIME_WAIT的客户可以再次发送ACK。"
+  ],
+  "misconceptions": [
+    "TIME_WAIT不是永久状态，也不表示连接仍可正常传输应用数据。",
+    "TIME_WAIT的目的不只是等待资源释放，还包括应对最后确认报文丢失导致的FIN重传。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "TCP为什么需要TIME_WAIT状态？",
+      "a": "因为最后的ACK可能丢失，TIME_WAIT使客户能够对服务器重传的FIN再次发送最后的确认报文。"
+    },
+    {
+      "q": "原文列举的TIME_WAIT典型持续时间有哪些？",
+      "a": "30秒、1分钟或2分钟，具体时间取决于实现。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "TCP连接的四次挥手",
+    "TCP确认与重传"
+  ],
+  "source_pages": [
+    185,
+    188
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "448_tcp的time_wait状态",
+  "_chunk_pages": [
+    185,
+    188
+  ]
+}

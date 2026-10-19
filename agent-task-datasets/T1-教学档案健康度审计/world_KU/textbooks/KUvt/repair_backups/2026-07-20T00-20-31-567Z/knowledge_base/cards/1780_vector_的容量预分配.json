@@ -1,0 +1,48 @@
+{
+  "title": "vector 的容量预分配",
+  "definition": "`std::vector` 在内存中连续存储元素。当元素数量超过当前容量时，vector 可能重新分配更大的连续内存，并将原有元素移动或复制到新内存中。若事先知道或能够大致估计需要添加的元素数量，可以在添加元素前使用 `reserve()` 预分配容量，以减少扩容和元素搬移带来的性能开销。",
+  "key_points": [
+    "`size` 表示容器中当前实际元素的数量。",
+    "`capacity` 表示在不重新分配内存的情况下，容器能够容纳的元素数量。",
+    "`reserve()` 用于调整容量，适合在预先知道元素数量时减少重新分配。",
+    "`resize()` 用于重新设置 vector 的实际大小，不应简单等同于只预留容量。"
+  ],
+  "examples": [
+    "如果循环中要向 vector 添加数百万个元素，可以先写成：`std::vector<T> values; values.reserve(expectedCount);`，再调用 `push_back()`。",
+    "`reserve(n)` 主要改变容量；`resize(n)` 改变的是 `size`，即容器中实际元素的数量。"
+  ],
+  "misconceptions": [
+    "`reserve()` 不会把 vector 的实际元素数量增加到指定值；它主要预留容量。",
+    "`capacity` 不等于当前元素个数，当前元素个数由 `size` 表示。",
+    "vector 扩容并非只增加一个元素的空间，扩容时可能需要分配新的内存块并移动或复制全部已有元素。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么在大量 `push_back()` 前调用 `reserve()` 可能提升性能？",
+      "a": "因为它可以预先分配足够容量，减少 vector 扩容时重新分配内存以及移动或复制已有元素的次数。"
+    },
+    {
+      "q": "`size` 和 `capacity` 有什么区别？",
+      "a": "`size` 是当前实际元素数量；`capacity` 是在不重新分配内存的情况下可以容纳的元素数量。"
+    },
+    {
+      "q": "`reserve()` 和 `resize()` 的主要区别是什么？",
+      "a": "`reserve()` 主要调整容量，不改变实际元素数量；`resize()` 重新设置实际元素数量。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "std::vector 基本用法"
+  ],
+  "source_pages": [
+    858,
+    858
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1780_vector_的容量预分配",
+  "_chunk_pages": [
+    857,
+    860
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "title": "用 std::bind 绑定成员函数",
+  "definition": "成员函数调用隐含一个对象实例参数，即 this 指针。将成员函数作为回调传递时，需要使用 std::bind 显式绑定对象实例，再用占位符表示成员函数的显式参数，以解决可调用对象签名不匹配的问题。",
+  "key_points": [
+    "类成员函数调用时存在隐式的对象参数，可在成员函数体内通过 this 访问。",
+    "示例 Handler::handleMatch 有三个显式参数：size_t position、int value1 和 int value2。",
+    "绑定成员函数时，通常先传入成员函数地址，再传入对象实例地址，之后传入占位符。",
+    "绑定后的对象可以作为需要回调函数的算法参数。"
+  ],
+  "examples": [
+    "成员函数形式：void Handler::handleMatch(size_t position, int value1, int value2)。",
+    "绑定结构：Handler handler; findMatches(values1, values2, intEqual, bind(&Handler::handleMatch, &handler, placeholders::_1, placeholders::_2, placeholders::_3));",
+    "其中 &handler 绑定隐含的对象参数，三个占位符对应 position、value1、value2。"
+  ],
+  "misconceptions": [
+    "成员函数不是只由其显式参数决定的可调用对象；调用它还需要一个对象实例。",
+    "&Handler::handleMatch 只是成员函数地址，不能脱离对象实例直接按普通函数调用。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "使用 bind 传递 Handler::handleMatch 作为回调时，为什么需要绑定 &handler？",
+      "a": "因为成员函数调用需要一个隐含的对象实例参数，&handler 用于提供该实例。"
+    },
+    {
+      "q": "三个占位符在绑定 handleMatch 时分别对应什么？",
+      "a": "分别对应成员函数的三个显式参数 position、value1 和 value2。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "std::bind 绑定固定参数",
+    "成员函数与 this 指针",
+    "回调函数"
+  ],
+  "source_pages": [
+    616,
+    616
+  ],
+  "needs_verification": true,
+  "verify_query": "C++ std::bind member function pointer object pointer placeholders callback syntax Handler::handleMatch",
+  "concept_id": "1269_用_std_bind_绑定成员函数",
+  "_chunk_pages": [
+    613,
+    616
+  ]
+}

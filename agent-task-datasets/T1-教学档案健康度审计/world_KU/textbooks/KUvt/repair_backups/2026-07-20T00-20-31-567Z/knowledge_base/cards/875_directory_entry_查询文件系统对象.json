@@ -1,0 +1,53 @@
+{
+  "title": "directory_entry 查询文件系统对象",
+  "definition": "path 只表示一个路径，若要查询该路径在实际文件系统中对应的对象，可以用 path 构造 std::filesystem::directory_entry。directory_entry 支持 exists、is_directory、is_regular_file、file_size 和 last_write_time 等操作，用于判断对象是否存在、是目录还是普通文件，并获取相关信息。",
+  "key_points": [
+    "directory_entry 可以从 path 构造。",
+    "exists 用于判断路径对应的文件系统对象是否存在。",
+    "is_directory 判断对象是否为目录，is_regular_file 判断对象是否为普通文件。",
+    "file_size 可以获取文件大小，last_write_time 可以获取最后修改时间。",
+    "查询文件大小前，应先确认条目存在并且是普通文件。"
+  ],
+  "examples": [
+    "path myPath{\"c:/windows/win.ini\"};",
+    "directory_entry dirEntry{myPath};",
+    "if (dirEntry.exists() && dirEntry.is_regular_file()) {",
+    "    auto size = dirEntry.file_size();",
+    "}"
+  ],
+  "misconceptions": [
+    "构造 directory_entry 不代表目标一定存在；仍需调用 exists 检查。",
+    "目录不能按普通文件一样直接使用 file_size 查询其文件内容大小。",
+    "directory_entry 描述实际文件系统条目，而 path 仅描述路径文本。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何从一个路径创建可查询实际文件系统对象的 directory_entry？",
+      "a": "使用 directory_entry entry{myPath};。"
+    },
+    {
+      "q": "如何判断 directory_entry 对应的是普通文件？",
+      "a": "调用 entry.is_regular_file()。"
+    },
+    {
+      "q": "为什么示例在调用 file_size 前要检查 exists 和 is_regular_file？",
+      "a": "因为路径可能不存在，或者可能指向目录而不是普通文件。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "std::filesystem::path",
+    "文件与目录的区别"
+  ],
+  "source_pages": [
+    432,
+    432
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "875_directory_entry_查询文件系统对象",
+  "_chunk_pages": [
+    429,
+    432
+  ]
+}

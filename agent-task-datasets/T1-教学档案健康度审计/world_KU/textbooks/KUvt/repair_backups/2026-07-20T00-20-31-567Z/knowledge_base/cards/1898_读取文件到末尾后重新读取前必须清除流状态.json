@@ -1,0 +1,43 @@
+{
+  "title": "读取文件到末尾后重新读取前必须清除流状态",
+  "definition": "当输入流读取到文件末尾或发生读取失败时，流会保留相应的错误状态。即使随后使用 seekg() 将文件指针移动到其他位置，seekg() 也不会自动清除已有的 fail 状态。因此，若要在同一个输入流上重新读取数据，必须先调用 inputFile.clear() 清除流状态，再调用 seekg() 定位读取位置。",
+  "key_points": [
+    "读取文件末尾的空行时，inputFile >> ws 可能使流进入 eof 状态；随后继续调用 getline() 会使流同时处于 fail 和 eof 状态。",
+    "处于错误状态的流无法正确读取数据。",
+    "正确的顺序是先调用 inputFile.clear()，再调用 inputFile.seekg(citationsStart)。"
+  ],
+  "examples": [
+    "正确的重新读取代码：\ninputFile.clear();\ninputFile.seekg(citationsStart);",
+    "如果第一次读取结束后流状态为 eof 或 fail，直接调用 seekg(citationsStart) 后再次 getline()，读取仍会失败；必须先 clear()。"
+  ],
+  "misconceptions": [
+    "误以为 seekg() 会自动清除 eof 或 fail 状态。",
+    "误以为文件指针已经回到正确位置就一定可以重新读取数据。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么第二次读取引文时每次读取都会失败？",
+      "a": "第一次读取到文件末尾后，输入流保留了 eof 和 fail 状态。虽然代码通过 seekg() 将文件指针移回引文起始位置，但 seekg() 不会自动清除流状态，因此流仍处于错误状态，无法正确读取。"
+    },
+    {
+      "q": "在使用 seekg() 重新读取文件前应做什么？",
+      "a": "先调用 inputFile.clear() 清除流的错误状态，再调用 inputFile.seekg(citationsStart) 将文件指针定位到需要的位置。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++输入文件流的状态标志",
+    "istream的seekg()和clear()成员函数"
+  ],
+  "source_pages": [
+    917,
+    918
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1898_读取文件到末尾后重新读取前必须清除流状态",
+  "_chunk_pages": [
+    917,
+    920
+  ]
+}

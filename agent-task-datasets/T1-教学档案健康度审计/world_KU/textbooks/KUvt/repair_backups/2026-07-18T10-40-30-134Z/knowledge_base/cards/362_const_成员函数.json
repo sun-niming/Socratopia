@@ -1,0 +1,47 @@
+{
+  "title": "const 成员函数",
+  "definition": "在成员函数参数列表末尾添加 const，例如 double getValue() const，表示该成员函数承诺不修改调用对象的可观察状态。const 成员函数可以由普通对象和 const 对象调用；而未声明为 const 的成员函数不能通过 const 对象调用。",
+  "key_points": [
+    "const 是成员函数类型的一部分，声明和类外定义都必须在参数列表末尾写 const。",
+    "例如：double SpreadsheetCell::getValue() const { return m_value; }。",
+    "const 对象或 const 对象引用只能调用 const 成员函数；因此 const SpreadsheetCell& 可以调用 getValue()，但不能调用 setString() 这类非 const 成员函数。"
+  ],
+  "examples": [
+    "声明：double getValue() const;",
+    "声明：std::string getString() const;",
+    "定义：double SpreadsheetCell::getValue() const { return m_value; }",
+    "普通对象可以调用 const 和非 const 成员函数：SpreadsheetCell myCell{5}; myCell.getValue(); myCell.setString(\"6\");",
+    "const 引用可以调用 const 成员函数，但调用非 const 函数会编译错误：const SpreadsheetCell& myCellConstRef{myCell}; myCellConstRef.getValue(); // 可以；myCellConstRef.setString(\"6\"); // 编译错误"
+  ],
+  "misconceptions": [
+    "const 成员函数并不表示返回值一定是 const；const 修饰的是隐含的调用对象。",
+    "const 对象不是完全不能读取成员，而是只能调用适用于 const 对象的成员函数。",
+    "普通对象也可以调用 const 成员函数；const 成员函数不是只能由 const 对象调用。",
+    "仅在函数声明处写 const、定义处遗漏 const，会导致声明和定义不匹配。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么 const SpreadsheetCell& 可以调用 getValue()，却不能调用 setString(\"6\")？",
+      "a": "因为 getValue() 声明为 const 成员函数，承诺不修改对象；setString() 是非 const 成员函数，可能修改对象，因此不能通过 const 引用调用。"
+    },
+    {
+      "q": "const 成员函数的 const 应写在什么位置？",
+      "a": "应写在成员函数参数列表之后，例如 double getValue() const。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "引用与 const 限定"
+  ],
+  "source_pages": [
+    277,
+    280
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "362_const_成员函数",
+  "_chunk_pages": [
+    277,
+    280
+  ]
+}

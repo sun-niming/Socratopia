@@ -1,0 +1,42 @@
+{
+  "title": "标准容器中的 Allocator 参数",
+  "definition": "每个标准库容器都接收一个 Allocator 类型作为模板参数，用于控制容器内存的分配和释放。大多数情况下，容器使用默认分配器即可。例如，vector 的模板形式可以表示为：$\\texttt{template <class T, class Allocator = allocator<T>> class vector;}$。容器构造函数还可以接收 Allocator 对象，从而自定义内存管理方式。",
+  "key_points": [
+    "Allocator 是标准容器的模板参数，通常具有默认值。",
+    "容器构造时可以指定 Allocator 类型的对象。",
+    "自定义 Allocator 可以改变容器分配和释放内存的方式，而不必改变容器本身的主要接口。"
+  ],
+  "examples": [
+    "典型模板声明：$\\texttt{template <class T, class Allocator = allocator<T>> class vector;}$",
+    "使用默认分配器时，通常可以直接使用类似 $\\texttt{std::vector<int>}$ 的容器类型，而不需要显式指定 Allocator。"
+  ],
+  "misconceptions": [
+    "Allocator 不是容器中存储的元素类型；它负责内存管理。",
+    "使用自定义 Allocator 并不等于自动改变元素的构造和析构语义。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "标准库容器的 Allocator 模板参数有什么作用？",
+      "a": "它用于控制容器内存的分配和释放方式，并且通常有一个默认分配器类型。"
+    },
+    {
+      "q": "vector 的 Allocator 参数是否必须显式指定？",
+      "a": "不必须。大多数情况下使用默认值即可；只有需要自定义内存管理方案时才需要指定。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++类模板与标准库容器"
+  ],
+  "source_pages": [
+    718,
+    718
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1491_标准容器中的_allocator_参数",
+  "_chunk_pages": [
+    717,
+    720
+  ]
+}

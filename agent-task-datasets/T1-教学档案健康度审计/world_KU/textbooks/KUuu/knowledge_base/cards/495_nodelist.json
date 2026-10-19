@@ -1,0 +1,36 @@
+{
+  "title": "NodeList",
+  "definition": "NodeList 是一种类数组的节点集合对象，用来保存一组 DOM 节点；教材示例中，querySelectorAll 的返回值就是 NodeList。",
+  "key_points": [
+    "它是类数组对象",
+    "可用于保存一组 DOM 节点",
+    "可以直接进行遍历"
+  ],
+  "examples": [
+    "let allLinksInNav = document.querySelectorAll('nav a');"
+  ],
+  "misconceptions": [
+    "NodeList 不是普通数组，不能想当然地使用所有数组方法。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "NodeList 在教材中的作用是什么？",
+      "a": "用于表示一组 DOM 节点的类数组集合，常见于 querySelectorAll 的返回结果。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "document.querySelectorAll"
+  ],
+  "source_pages": [
+    349,
+    352
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "495_nodelist",
+  "_chunk_pages": [
+    349,
+    352
+  ]
+}

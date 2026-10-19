@@ -1,0 +1,45 @@
+{
+  "title": "DNS 的分布式层次结构",
+  "definition": "为解决集中式设计的扩展性问题，DNS 使用分布在全球各地的大量服务器，并以层次结构组织这些服务器。教材概括了三类主要 DNS 服务器：根 DNS 服务器、顶级域（TLD）DNS 服务器和权威 DNS 服务器；不同服务器分别保存或提供不同层次的域名信息。",
+  "key_points": [
+    "没有一台 DNS 服务器拥有因特网上所有主机的完整映射，映射分布在多台服务器上。",
+    "根 DNS 服务器向客户提供相应 TLD 服务器的 IP 地址。",
+    "TLD DNS 服务器向客户提供目标域的权威 DNS 服务器 IP 地址。",
+    "权威 DNS 服务器为具体主机名提供最终的 IP 地址映射。",
+    "查询 $\\texttt{www.amazon.com}$ 时，粗略过程为：根服务器 $\\rightarrow$ $\\texttt{.com}$ TLD 服务器 $\\rightarrow$ $\\texttt{amazon.com}$ 权威服务器 $\\rightarrow$ 目标 IP 地址。"
+  ],
+  "examples": [
+    "$$\\text{查询 }\\texttt{www.amazon.com}:\\quad \\text{根 DNS}\\rightarrow\\texttt{.com}\\text{ TLD DNS}\\rightarrow\\texttt{amazon.com}\\text{ 权威 DNS}\\rightarrow\\text{IP 地址}$$"
+  ],
+  "misconceptions": [
+    "DNS 的分布式结构不是任意地把服务器分散开，而是按照根、顶级域和权威域等层次组织。",
+    "根 DNS 服务器通常不直接提供每台具体主机的最终 IP 地址，而是提供相应 TLD 服务器的信息。",
+    "TLD DNS 服务器和权威 DNS 服务器承担的查询层次不同。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "DNS 为什么采用分布式层次结构？",
+      "a": "因为集中式 DNS 无法应对因特网规模增长，分布式层次结构可以分散数据、查询和维护压力，提高可扩展性。"
+    },
+    {
+      "q": "查询 $\\texttt{www.amazon.com}$ 时，三类 DNS 服务器大致如何协作？",
+      "a": "客户先联系根 DNS 获取 $\\texttt{.com}$ TLD 服务器地址，再联系 TLD 服务器获取 $\\texttt{amazon.com}$ 权威服务器地址，最后从权威服务器获得目标主机的 IP 地址。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "DNS 的定义与基本通信参数",
+    "集中式 DNS 设计的不可扩展性"
+  ],
+  "source_pages": [
+    101,
+    104
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "259_dns_的分布式层次结构",
+  "_chunk_pages": [
+    101,
+    104
+  ]
+}

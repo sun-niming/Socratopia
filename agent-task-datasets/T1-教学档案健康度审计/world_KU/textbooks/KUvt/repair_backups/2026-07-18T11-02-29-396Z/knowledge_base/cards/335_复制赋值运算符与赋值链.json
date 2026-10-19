@@ -1,0 +1,58 @@
+{
+  "title": "复制赋值运算符与赋值链",
+  "definition": "赋值运算符用于把一个已存在对象的值赋给另一个已存在对象。SpreadsheetCell 可以声明复制赋值运算符：SpreadsheetCell& operator=(const SpreadsheetCell& rhs); 其中 rhs 是赋值源对象，返回类型为 SpreadsheetCell&，表示返回被赋值的左侧对象引用。赋值运算符通常从右向左结合，因此多个赋值可以形成链式表达式。",
+  "key_points": [
+    "对象赋值的基本形式是 anotherCell = myCell;，它把 myCell 的值赋给已经存在的 anotherCell。",
+    "复制赋值运算符的典型声明为：SpreadsheetCell& operator=(const SpreadsheetCell& rhs);",
+    "参数 rhs 通常以 const 引用接收右侧对象，避免不必要的复制并保证不修改源对象。",
+    "赋值运算符返回左侧对象的引用，因此可以连续赋值。原文将 myCell = anotherCell = aThirdCell; 展开为 myCell.operator=(anotherCell.operator=(aThirdCell));。",
+    "赋值与初始化不同：SpreadsheetCell anotherCell; 是默认初始化，anotherCell = myCell; 是对已有对象执行赋值。"
+  ],
+  "examples": [
+    "SpreadsheetCell myCell{5}, anotherCell;\nanotherCell = myCell;",
+    "SpreadsheetCell& operator=(const SpreadsheetCell& rhs);",
+    "SpreadsheetCell myCell;\nSpreadsheetCell anotherCell;\nSpreadsheetCell aThirdCell;\nmyCell = anotherCell = aThirdCell;",
+    "上述链式赋值可理解为：myCell.operator=(anotherCell.operator=(aThirdCell));"
+  ],
+  "misconceptions": [
+    "anotherCell = myCell; 不是调用构造函数来初始化 anotherCell，而是对已经存在的对象执行赋值。",
+    "链式赋值不是从左到右执行；赋值表达式通常从右侧开始处理。",
+    "operator= 的返回值不是必须为 void；原文声明返回 SpreadsheetCell&，这是支持链式赋值的重要原因。",
+    "复制赋值运算符处理的是已有对象之间的赋值，不等同于复制构造函数。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "SpreadsheetCell& operator=(const SpreadsheetCell& rhs) 中 rhs 表示什么？",
+      "a": "rhs 表示赋值运算符右侧的源对象。"
+    },
+    {
+      "q": "anotherCell = myCell; 的作用是什么？",
+      "a": "把已存在对象 myCell 的值赋给已存在对象 anotherCell。"
+    },
+    {
+      "q": "myCell = anotherCell = aThirdCell; 的执行方向是什么？",
+      "a": "先执行 anotherCell = aThirdCell，再把赋值结果赋给 myCell；赋值链按从右向左的方式处理。"
+    },
+    {
+      "q": "为什么赋值运算符通常返回 SpreadsheetCell&？",
+      "a": "因为返回左侧对象的引用可以让赋值表达式继续作为另一个赋值的右侧操作数，从而支持链式赋值。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "类的成员函数",
+    "引用",
+    "运算符重载"
+  ],
+  "source_pages": [
+    251,
+    252
+  ],
+  "needs_verification": true,
+  "verify_query": "C++ SpreadsheetCell operator=(const SpreadsheetCell& rhs) 链式赋值 myCell anotherCell aThirdCell 第252页",
+  "concept_id": "335_复制赋值运算符与赋值链",
+  "_chunk_pages": [
+    249,
+    252
+  ]
+}

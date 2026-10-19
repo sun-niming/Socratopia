@@ -1,0 +1,55 @@
+{
+  "title": "partition_copy 按谓词复制到两个目标范围",
+  "definition": "partition_copy() 从源范围读取元素，根据谓词返回的 true 或 false，将元素分别复制到两个不同的目标范围。谓词为 true 的元素复制到第一个目标范围，谓词为 false 的元素复制到第二个目标范围。算法返回一对迭代器，用于表示两个目标范围中复制结果的边界；目标容器通常需要先预留足够空间，再根据返回迭代器擦除多余空间。",
+  "key_points": [
+    "参数包括源范围首尾迭代器、两个目标范围的起始迭代器和谓词。",
+    "谓词结果为 true 的元素进入第一个目标范围，结果为 false 的元素进入第二个目标范围。",
+    "教材示例先将 vecEven 和 vecOdd 调整为与源容器相同的大小。",
+    "处理后使用 pairIters.first 和 pairIters.second 分别擦除两个目标 vector 中未使用的尾部元素。",
+    "示例谓词为偶数判断：$(i \\bmod 2)==0$。"
+  ],
+  "examples": [
+    "vector<int> vecOdd, vecEven;",
+    "vecOdd.resize(size(vec1));",
+    "vecEven.resize(size(vec1));",
+    "auto pairIters { partition_copy(cbegin(vec1), cend(vec1), begin(vecEven), begin(vecOdd), [](int i){ return i % 2 == 0; }) };",
+    "vecEven.erase(pairIters.first, end(vecEven));",
+    "vecOdd.erase(pairIters.second, end(vecOdd));",
+    "源数据 $[11,22,33,44]$ 分区复制后，偶数目标为 $[22,44]$，奇数目标为 $[11,33]$。"
+  ],
+  "misconceptions": [
+    "partition_copy() 不会把元素重新排列到源容器中，而是复制到两个目标范围。",
+    "两个目标范围的容量必须足够，否则不能安全保存所有复制结果。",
+    "谓词为 true 的元素进入哪个目标范围，取决于参数中两个目标起始迭代器的顺序；示例中第一个目标是 vecEven。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "partition_copy() 如何决定元素复制到哪个目标范围？",
+      "a": "根据谓词结果决定：true 复制到第一个目标范围，false 复制到第二个目标范围。"
+    },
+    {
+      "q": "如何用 partition_copy() 将整数分为偶数和奇数？",
+      "a": "使用谓词 [](int i){ return i % 2 == 0; }，把第一个目标指定为偶数容器，第二个目标指定为奇数容器。"
+    },
+    {
+      "q": "为什么示例要在 partition_copy() 后调用 erase()？",
+      "a": "因为目标 vector 预先调整到了源范围大小，实际复制元素通常更少，需要用返回迭代器删除未使用的尾部元素。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "谓词函数",
+    "vector 的 resize 与 erase"
+  ],
+  "source_pages": [
+    648,
+    648
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 std::partition_copy 返回值 pair 迭代器 是最后元素还是尾后迭代器",
+  "concept_id": "1353_partition_copy_按谓词复制到两个目标范围",
+  "_chunk_pages": [
+    645,
+    648
+  ]
+}

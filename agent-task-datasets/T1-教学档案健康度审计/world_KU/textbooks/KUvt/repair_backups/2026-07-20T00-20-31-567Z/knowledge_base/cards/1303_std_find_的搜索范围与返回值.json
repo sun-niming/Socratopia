@@ -1,0 +1,49 @@
+{
+  "title": "std::find() 的搜索范围与返回值",
+  "definition": "std::find() 在由两个迭代器限定的半开区间 $[first,last)$ 中查找与给定值相等的元素，并返回指向第一个匹配元素的迭代器。如果找不到匹配元素，则返回调用时指定的尾迭代器 $last$。",
+  "key_points": [
+    "搜索范围是 $[first,last)$：包含 first 指向的元素，不包含 last 指向的位置。",
+    "搜索范围可以是整个容器，也可以只是容器中的一个子范围。",
+    "未找到元素时，返回的是本次调用指定的 last，而不一定是底层容器的 end()。",
+    "对一般范围使用泛型 std::find() 时，搜索复杂度是线性的。"
+  ],
+  "examples": [
+    "搜索 vector 的全部元素：`auto endIt = cend(myVector); auto it = find(cbegin(myVector), endIt, number);`",
+    "搜索子范围时，只需将 `cbegin(myVector)` 和 `endIt` 替换为子范围对应的起止迭代器。",
+    "判断查找结果：`if (it == endIt) { /* 未找到 */ } else { /* *it 是找到的元素 */ }`"
+  ],
+  "misconceptions": [
+    "find() 未找到元素时不返回一个空迭代器，而是返回指定范围的尾迭代器。",
+    "find() 的范围不一定是整个容器。",
+    "未找到时不能总是把返回值与容器的 `end()` 比较；如果传入的是子范围，应与本次调用传入的 last 比较。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "std::find() 未找到目标元素时返回什么？",
+      "a": "返回本次调用指定的尾迭代器 last。"
+    },
+    {
+      "q": "如何让 std::find() 只搜索容器中的一个子范围？",
+      "a": "把表示该子范围起点和终点的两个迭代器作为 find() 的前两个参数。"
+    },
+    {
+      "q": "使用泛型 std::find() 搜索一般范围的复杂度是什么？",
+      "a": "线性时间复杂度。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "迭代器范围 $[first,last)$"
+  ],
+  "source_pages": [
+    629,
+    630
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1303_std_find_的搜索范围与返回值",
+  "_chunk_pages": [
+    629,
+    632
+  ]
+}

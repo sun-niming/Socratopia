@@ -1,0 +1,36 @@
+{
+  "title": "transition-duration 必须设置",
+  "definition": "使用过渡效果时，必须设置 transition-duration 属性；如果没有设置，它的时长就是0，因此不会产生过渡效果。",
+  "key_points": [
+    "transition-duration 决定过渡持续时间",
+    "不设置该属性时，过渡时长为0，效果不会出现"
+  ],
+  "examples": [
+    "transition-duration: 1s;"
+  ],
+  "misconceptions": [
+    "只写过渡相关属性就一定会出现动画效果",
+    "过渡时长可以省略"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么有时设置了过渡却看不到效果？",
+      "a": "因为必须设置 transition-duration 属性；如果时长为0，就不会产生过渡效果。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "CSS3过渡"
+  ],
+  "source_pages": [
+    205,
+    208
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "289_transition_duration_必须设置",
+  "_chunk_pages": [
+    205,
+    208
+  ]
+}

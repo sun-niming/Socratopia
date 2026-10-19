@@ -1,0 +1,43 @@
+{
+  "title": "Global对象",
+  "definition": "Global对象是 ECMAScript 对象模型中的最高级对象，拥有最大的执行环境。一切声明的变量和函数都会成为它的属性，因此它及其所有属性都可以在程序的任何地方访问。",
+  "key_points": [
+    "Global对象是全局作用域中的最高级对象。",
+    "在程序中声明的变量和函数都会成为它的属性。",
+    "它的属性和方法在程序任何位置都可访问。"
+  ],
+  "examples": [
+    "在浏览器中，Global对象就是 window 对象。",
+    "parseInt 等函数可以在程序中直接使用。"
+  ],
+  "misconceptions": [
+    "误以为全局对象只是某个普通对象，而不是全局执行环境的承载者。",
+    "误以为全局变量和全局函数不会成为全局对象的属性。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "Global对象在 JavaScript 中有什么特点？",
+      "a": "它是 ECMAScript 对象模型中的最高级对象，拥有最大的执行环境，声明的变量和函数都会成为它的属性。"
+    },
+    {
+      "q": "浏览器中的 Global 对象是什么？",
+      "a": "window 对象。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "JavaScript 对象基础",
+    "变量与函数声明"
+  ],
+  "source_pages": [
+    301,
+    302
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "395_global对象",
+  "_chunk_pages": [
+    301,
+    304
+  ]
+}

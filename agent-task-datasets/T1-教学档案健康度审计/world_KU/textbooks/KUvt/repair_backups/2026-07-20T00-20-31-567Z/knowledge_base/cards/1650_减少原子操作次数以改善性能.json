@@ -1,0 +1,44 @@
+{
+  "title": "减少原子操作次数以改善性能",
+  "definition": "原子操作和显式同步通常会带来性能开销，因此应尽量减少同步次数。对于每个线程都需要执行固定次数递增的示例，可以让线程先在本地变量 result 中完成计算，循环结束后再将 result 一次性原子地加到共享 counter 中。由于多个线程仍会写入 counter，counter 仍必须使用原子类型。",
+  "key_points": [
+    "同步次数包括原子操作次数和显式同步次数，应尽量减少。",
+    "每个线程先对本地变量 result 执行 100 次递增。",
+    "循环结束后执行一次 counter += result，将本地结果合并到共享原子计数器。",
+    "共享 counter 仍需使用 std::atomic<int>，因为多个线程会并发写入它。"
+  ],
+  "examples": [
+    "代码结构：\nvoid increment(std::atomic<int>& counter) {\n    int result { 0 };\n    for (int i { 0 }; i < 100; ++i) {\n        ++result;\n    }\n    counter += result;\n}\n每个线程只需对共享 counter 执行一次原子合并。"
+  ],
+  "misconceptions": [
+    "减少原子操作次数不等于完全删除原子操作；多个线程仍然写入共享 counter 时，counter 仍需是原子类型。",
+    "本地变量 result 只能保存当前线程自己的中间结果，不能直接替代共享计数器。",
+    "原子操作线程安全，但不一定没有性能成本。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么示例推荐先在本地变量 result 中计算，再一次性更新 counter？",
+      "a": "因为原子操作和显式同步会降低性能；先在本地计算可以减少对共享原子变量的访问次数。"
+    },
+    {
+      "q": "采用本地 result 后，counter 还能声明为普通 int 吗？",
+      "a": "不能。多个线程仍会并发写入 counter，因此 counter 仍需使用原子类型或其他同步机制。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "原子计数器",
+    "线程局部计算"
+  ],
+  "source_pages": [
+    804,
+    804
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1650_减少原子操作次数以改善性能",
+  "_chunk_pages": [
+    801,
+    804
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "title": "用tuple替换pair保存解析结果",
+  "definition": "练习24-4要求在练习24-2的基础上，用`tuple`替换`pair`来保存命令行参数解析结果。也就是说，仍然解析`name=value`参数并保存参数名称及其variant值，但结果容器改为`tuple`。",
+  "key_points": [
+    "该练习以练习24-2的解析逻辑为基础。",
+    "主要修改是使用`tuple`替换`pair`。",
+    "variant中布尔值、整数和字符串的解析规则保持不变。",
+    "练习24-3要求使用访问者输出；练习24-4的核心要求是改用tuple表示结果。"
+  ],
+  "examples": [
+    "结果类型可以抽象表示为：`std::tuple<std::string, std::variant<bool, int, std::string>>`。",
+    "例如，参数`count=42`可以表示为：`std::tuple{\"count\", std::variant<bool, int, std::string>{42}}`。"
+  ],
+  "misconceptions": [
+    "替换`pair`为`tuple`并不意味着要改变参数解析规则。",
+    "`tuple`可以有多个元素，但本练习中的结果仍然只需要表达参数名称和解析后的variant值。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "练习24-4要求相对于练习24-2做什么修改？",
+      "a": "使用`tuple`替换`pair`来保存参数名称和解析后的variant值。"
+    },
+    {
+      "q": "练习24-4是否要求改变布尔值、整数和字符串的解析优先级？",
+      "a": "不要求；它主要要求改变结果容器的类型。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "tuple",
+    "pair",
+    "variant",
+    "练习24-2的命令行参数解析"
+  ],
+  "source_pages": [
+    714,
+    714
+  ],
+  "needs_verification": true,
+  "verify_query": "《C++20高级编程》第5版 练习24-4 tuple 替换 pair 原文",
+  "concept_id": "1489_用tuple替换pair保存解析结果",
+  "_chunk_pages": [
+    713,
+    716
+  ]
+}

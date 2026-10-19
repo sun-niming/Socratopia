@@ -1,0 +1,42 @@
+{
+  "title": "函数模板显式指定模板实参",
+  "definition": "调用函数模板时，可以在函数名后使用尖括号显式指定模板实参，例如 $add<long\\ long, int, int>(1, 2)$。模板实参按照模板参数声明顺序依次匹配；未显式指定且能够从函数实参推导出的类型，可以由编译器自动推导。",
+  "key_points": [
+    "函数模板可以同时包含返回类型模板参数和函数参数类型模板参数。",
+    "显式模板实参按模板参数列表的顺序匹配。",
+    "如果所有模板参数都能从函数实参推导，通常可以直接调用函数模板而不写模板实参。"
+  ],
+  "examples": [
+    "template<typename RetType, typename T1, typename T2>\\nRetType add(const T1& t1, const T2& t2) { return t1 + t2; }\\n\\nauto result { add<long long, int, int>(1, 2) };",
+    "当模板参数能够从实参推导时，可以写成：\\nauto result { add<long long>(1, 2) };"
+  ],
+  "misconceptions": [
+    "显式指定一个模板实参并不表示后续模板参数都必须显式指定；后续参数如果可以推导，仍可能由编译器推导。",
+    "模板实参不是按照函数实参的值来指定，而是按照模板参数列表中的位置匹配。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何显式调用返回类型为 long long、两个参数类型为 int 的 add 函数模板？",
+      "a": "可以写为 $add<long\\ long, int, int>(1, 2)$。"
+    },
+    {
+      "q": "调用 add<long long>(1, 2) 时，哪些类型通常可以由编译器推导？",
+      "a": "返回类型已显式指定为 long long，两个参数类型可以根据实参 1 和 2 推导为 int。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "函数模板基础"
+  ],
+  "source_pages": [
+    397,
+    400
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "512_函数模板显式指定模板实参",
+  "_chunk_pages": [
+    397,
+    400
+  ]
+}

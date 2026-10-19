@@ -1,0 +1,44 @@
+{
+  "title": "Wireshark及其基本实验流程",
+  "definition": "Wireshark 是一种免费的分组嗅探器，可运行在 Windows、Linux/Unix 和 Mac 计算机上。教材中的第一个 Wireshark 实验要求获得并安装 Wireshark，访问一个 Web 站点，捕获并检查 Web 浏览器与 Web 服务器之间交换的协议报文。",
+  "key_points": [
+    "Wireshark 可以捕获网络分组并显示捕获分组的列表。",
+    "选定某个分组后，可以查看该分组首部的详细信息。",
+    "Wireshark 还可以查看分组内容的十六进制和 ASCII 表示。",
+    "该工具适合通过真实网络环境观察网络协议的实际行为。"
+  ],
+  "examples": [
+    "基本实验流程可以概括为：安装 Wireshark → 访问 Web 站点 → 捕获通信分组 → 选择分组 → 查看分组列表、首部细节以及十六进制和 ASCII 格式的内容。"
+  ],
+  "misconceptions": [
+    "Wireshark 不只是抓取数据包的工具，还能解析并展示协议字段。",
+    "Wireshark 实验观察的是实际网络通信，不等同于只在仿真环境中运行程序。",
+    "查看十六进制内容与查看协议首部字段是不同层次的观察方式。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "Wireshark 可以查看哪些类型的信息？",
+      "a": "可以查看捕获分组的列表、选定分组的首部细节，以及分组内容的十六进制和 ASCII 表示。"
+    },
+    {
+      "q": "教材中的第一个 Wireshark 实验主要做什么？",
+      "a": "安装 Wireshark，访问 Web 站点，捕获浏览器和 Web 服务器之间交换的协议报文，并检查这些报文。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "分组嗅探器",
+    "网络协议报文"
+  ],
+  "source_pages": [
+    69,
+    72
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "180_wireshark及其基本实验流程",
+  "_chunk_pages": [
+    69,
+    72
+  ]
+}

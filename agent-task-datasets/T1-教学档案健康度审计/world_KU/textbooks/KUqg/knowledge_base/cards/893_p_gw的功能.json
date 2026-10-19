@@ -1,0 +1,41 @@
+{
+  "title": "P-GW的功能",
+  "definition": "分组数据网络网关（Packet Data Network Gateway，P-GW）是4G网络连接外部分组数据网络的重要网关。它为UE分配IP地址，并在向UE或从UE转发数据报时执行隧道封装与解封装，同时参与QoS实施。",
+  "key_points": [
+    "P-GW位于4G边缘网络与其他网络之间。",
+    "P-GW是UE数据隧道的端点之一。",
+    "P-GW负责UE的IP地址分配，并在数据报转发过程中进行封装或解封装。"
+  ],
+  "examples": [
+    "UE的数据报可以经过eNodeB与P-GW之间的隧道到达P-GW；P-GW再将数据报转发到外部因特网。"
+  ],
+  "misconceptions": [
+    "P-GW不是仅负责把无线信号转换成有线信号；它还负责IP地址分配、隧道处理和QoS实施。",
+    "UE的IP地址分配不是由eNodeB完成，而是P-GW的职责之一。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "P-GW为UE提供什么重要网络功能？",
+      "a": "P-GW为UE分配IP地址，并负责连接4G边缘网络与其他分组数据网络。"
+    },
+    {
+      "q": "P-GW在隧道中承担什么作用？",
+      "a": "P-GW作为隧道端点，在转发数据报时执行封装和解封装。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "4G网络体系结构的总体特征"
+  ],
+  "source_pages": [
+    381,
+    384
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "893_p_gw的功能",
+  "_chunk_pages": [
+    381,
+    384
+  ]
+}

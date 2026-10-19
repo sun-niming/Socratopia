@@ -123,6 +123,9 @@ var REDUCE_ZH = [
   "硬性规则：",
   "- **主题只能来自证据 JSON**。证据里没有的主题一律不许出现。",
   "- **合并重复概念**：同一个概念在不同片段里出现多次也只写一次，不要按片段机械堆叠。",
+  "- **控制体量**：concepts 总共 10～16 条——证据里同族或相邻的 topic 合成一条；每条 body 2～5 行、不超过 200 字；`key-terms` 不超过 10 条。正文总长以上面的目标篇幅为准，宁可精炼。证据超过 6 个片段时可放宽到 20 条。",
+  "- **概念名沿用证据里的 topic 名**（合并时保留各自的关键词），不要改写成证据里没有的新说法。",
+  "- **`notes` 逐条落实 `learnerEvidence`**：学习者的误区/困惑/理解转变要按原话或忠实概括一条一条写出来（带 kind 标签），不要压缩成三言两语。",
   "- 优先保留学习者的误区、困惑与理解转变，以及伙伴给出的关键解释、例子、公式和边界条件。",
   "- 证据里的 `learnerEvidence` 应体现在 `notes` 或相应概念正文中，不要丢掉。",
   SHARED_RULES_ZH
@@ -145,6 +148,9 @@ var REDUCE_EN = [
   "Hard rules:",
   "- **Topics may only come from the evidence JSON.** Never introduce a topic it does not contain.",
   "- **Merge duplicate concepts** — one concept appears once, never once per slice.",
+  "- **Keep it compact**: 10-16 concepts in total — merge same-family or neighbouring topics; each body 2-5 lines and under ~200 characters; at most 10 `key-terms`. Respect the target length above; prefer concise. With more than six slices you may go up to 20.",
+  "- **Reuse the evidence topic names** as concept names (keep their keywords when merging) instead of inventing wording the evidence does not use.",
+  "- **Put every `learnerEvidence` item into `notes`**, one line each, quoting or faithfully paraphrasing the learner (keep the kind label). Do not compress it into two sentences.",
   "- Prioritise the learner's misconceptions, confusion and shifts, plus the companion's key explanations, examples, formulas and edge cases.",
   "- Fold `learnerEvidence` into a `notes` section or the relevant concept body; do not drop it.",
   SHARED_RULES_EN

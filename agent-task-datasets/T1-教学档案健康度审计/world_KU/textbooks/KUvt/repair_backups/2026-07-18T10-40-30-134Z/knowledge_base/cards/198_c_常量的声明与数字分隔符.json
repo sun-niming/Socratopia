@@ -1,0 +1,44 @@
+{
+  "title": "C++常量的声明与数字分隔符",
+  "definition": "C++ 可以使用 const 声明不可通过该名称修改的常量，并可用列表初始化形式写出常量值。C++14 起可在整数或浮点数字中使用单引号作为数字分隔符，以提高长数字的可读性；例如 3'600 表示 3600。",
+  "key_points": [
+    "常量示例：`const double ApproximationForE { 2.71828182845904523536 };`。",
+    "整数常量示例：`const int HoursPerDay { 24 };`。",
+    "使用数字分隔符时，`3'600` 的数值等于 3600。",
+    "数字分隔符只改善书写可读性，不改变数值。"
+  ],
+  "examples": [
+    "$$\\texttt{const\\ double\\ ApproximationForE\\ \\{\\ 2.71828182845904523536\\ \\};}$$",
+    "$$\\texttt{const\\ int\\ HoursPerDay\\ \\{\\ 24\\ \\};}$$",
+    "$$\\texttt{const\\ int\\ SecondsPerHour\\ \\{\\ 3'600\\ \\};}$$"
+  ],
+  "misconceptions": [
+    "const 不表示编译期一定可用的常量表达式；需要编译期求值时通常还要考虑 constexpr 等要求。",
+    "3'600 不是字符常量，也不是字符串；它是数值字面量 3600。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "原文给出的每天小时数常量声明是什么？",
+      "a": "`const int HoursPerDay { 24 };`。"
+    },
+    {
+      "q": "C++ 中的 3'600 表示什么？",
+      "a": "它表示整数 3600，单引号只是数字分隔符。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++变量声明和初始化"
+  ],
+  "source_pages": [
+    133,
+    136
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "198_c_常量的声明与数字分隔符",
+  "_chunk_pages": [
+    133,
+    136
+  ]
+}

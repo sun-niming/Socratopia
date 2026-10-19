@@ -1,0 +1,47 @@
+{
+  "title": "echo 显示命令",
+  "definition": "echo 是显示命令，格式为 echo [option] [string]。它将 string 的内容按照 option 指定的方法输出到屏幕上显示。教材列出的常用选项包括：-n，表示输出后不换行；-e，表示对字符串中的特殊字符进行翻译。",
+  "key_points": [
+    "基本格式：echo [option] [string]",
+    "作用：将字符串内容显示到屏幕上",
+    "-n：输出后不换行",
+    "-e：翻译字符串中的特殊字符"
+  ],
+  "examples": [
+    "echo -n hello",
+    "echo -e \"a\\nb\""
+  ],
+  "misconceptions": [
+    "认为 echo 输出后一定换行；使用 -n 时输出后不换行",
+    "认为特殊字符总会自动生效；原文给出 -e 用于翻译特殊字符"
+  ],
+  "qa_pairs": [
+    {
+      "q": "echo 命令的基本作用是什么？",
+      "a": "将字符串内容按照指定方式输出到屏幕上显示。"
+    },
+    {
+      "q": "echo 的 -n 选项有什么作用？",
+      "a": "输出后不换行。"
+    },
+    {
+      "q": "echo 的 -e 选项有什么作用？",
+      "a": "对字符串中的特殊字符进行翻译。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "Shell 命令基础"
+  ],
+  "source_pages": [
+    69,
+    72
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "121_echo_显示命令",
+  "_chunk_pages": [
+    69,
+    72
+  ]
+}

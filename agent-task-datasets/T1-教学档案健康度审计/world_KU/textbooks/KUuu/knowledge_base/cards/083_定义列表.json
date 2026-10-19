@@ -1,0 +1,36 @@
+{
+  "title": "定义列表",
+  "definition": "定义列表是HTML中的一种列表标记，英文写作 Defined List，常用标记为 <dl>、<dt>、<dd>。",
+  "key_points": [
+    "英文写作 Defined List",
+    "常用标签是 <dl>、<dt>、<dd>"
+  ],
+  "examples": [
+    "<dl><dt>术语</dt><dd>术语解释</dd></dl>"
+  ],
+  "misconceptions": [
+    "定义列表不只是普通项目列表，而是更适合“术语—解释”这类结构"
+  ],
+  "qa_pairs": [
+    {
+      "q": "定义列表在HTML中常用哪些标签？",
+      "a": "<dl>、<dt>、<dd>。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "HTML基础",
+    "HTML列表标记"
+  ],
+  "source_pages": [
+    49,
+    52
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "083_定义列表",
+  "_chunk_pages": [
+    49,
+    52
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "title": "grid-template-columns 与 grid-template-rows",
+  "definition": "在 CSS 网格布局中，grid-template-columns 和 grid-template-rows 是网格容器属性，用于定义网格的列和行，也就是定义网格轨道。grid-template-columns 定义列轨道，grid-template-rows 定义行轨道。轨道尺寸可以使用固定长度单位、百分比、fr、auto，也可以配合 repeat()、minmax() 等函数书写。",
+  "key_points": [
+    "grid-template-columns 用于定义网格的列。",
+    "grid-template-rows 用于定义网格的行。",
+    "二者的作用可概括为“定义轨道”。",
+    "可用的轨道尺寸写法包括固定单位 px、em、rem，百分比 %，fr 单位，auto，repeat() 函数和 minmax() 函数。"
+  ],
+  "examples": [
+    ".container {\n  /* 创建三列，第一列 100px，第二列占剩余空间的 1 份，第三列占 2 份 */\n  grid-template-columns: 100px 1fr 2fr;\n\n  /* 创建两行，高度都为 50px */\n  grid-template-rows: 50px 50px;\n}"
+  ],
+  "misconceptions": [
+    "不要把 grid-template-columns 和 grid-template-rows 理解为定义网格项内容；它们定义的是网格容器中的列轨道和行轨道。",
+    "不要认为轨道尺寸只能写 px；原文列出的写法还包括 em、rem、%、fr、auto、repeat() 和 minmax()。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "grid-template-columns 和 grid-template-rows 的主要作用是什么？",
+      "a": "用于定义网格的列和行，即定义网格轨道。"
+    },
+    {
+      "q": "在网格布局中，定义列轨道应使用哪个属性？",
+      "a": "使用 grid-template-columns。"
+    },
+    {
+      "q": "在网格布局中，定义行轨道应使用哪个属性？",
+      "a": "使用 grid-template-rows。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "CSS 网格布局",
+    "网格容器"
+  ],
+  "source_pages": [
+    173,
+    174
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "246_grid_template_columns_与_grid_template_ro",
+  "_chunk_pages": [
+    173,
+    176
+  ]
+}

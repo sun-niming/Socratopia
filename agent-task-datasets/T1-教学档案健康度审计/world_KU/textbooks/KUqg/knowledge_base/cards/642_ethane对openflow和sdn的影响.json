@@ -1,0 +1,48 @@
+{
+  "title": "Ethane对OpenFlow和SDN的影响",
+  "definition": "Ethane项目提出了基于流的多台以太网交换机与一台集中式控制器组成的网络概念。交换机具有匹配加动作流表，控制器负责流准入和路由选择；当分组不能匹配流表项时，交换机会将分组转发给控制器。原文指出，Ethane网络在2007年已有超过300台交换机投入运行，并迅速演化为OpenFlow项目。",
+  "key_points": [
+    "Ethane采用集中式控制器管理多台基于流的以太网交换机。",
+    "交换机使用匹配加动作流表执行数据平面转发。",
+    "控制器管理流准入和路由选择。",
+    "未匹配的分组会从交换机转发到控制器。",
+    "原文将Ethane描述为OpenFlow项目的重要前身。"
+  ],
+  "examples": [
+    "一个到达交换机的分组若没有匹配任何流表项，交换机会把它发送到集中式控制器，由控制器决定流准入或路由选择。"
+  ],
+  "misconceptions": [
+    "集中式控制器并不意味着所有分组都必须经过控制器转发；原文强调的是未匹配分组转发给控制器，已有流表匹配的分组可由交换机直接处理。",
+    "Ethane不是OpenFlow协议本身，而是促成OpenFlow发展的早期项目。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "Ethane中的控制器主要管理什么？",
+      "a": "主要管理流准入和路由选择。"
+    },
+    {
+      "q": "Ethane交换机遇到不能匹配流表项的分组时如何处理？",
+      "a": "将该分组从交换机转发给控制器。"
+    },
+    {
+      "q": "原文如何描述Ethane与OpenFlow的关系？",
+      "a": "Ethane迅速演化为OpenFlow项目。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "交换机流表与匹配加动作机制",
+    "SDN控制器"
+  ],
+  "source_pages": [
+    285,
+    288
+  ],
+  "needs_verification": true,
+  "verify_query": "Ethane project 300 switches 2007 OpenFlow predecessor flow-based Ethernet centralized controller",
+  "concept_id": "642_ethane对openflow和sdn的影响",
+  "_chunk_pages": [
+    285,
+    288
+  ]
+}

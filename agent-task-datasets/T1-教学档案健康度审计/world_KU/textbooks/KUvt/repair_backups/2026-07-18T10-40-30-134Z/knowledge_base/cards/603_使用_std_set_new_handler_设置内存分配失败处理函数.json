@@ -1,0 +1,44 @@
+{
+  "title": "使用 std::set_new_handler 设置内存分配失败处理函数",
+  "definition": "C++ 可通过 <new> 中的 std::set_new_handler() 设置全局的 new-handler。当普通的 new 或 new[] 无法分配内存时，运行库会调用当前的 new-handler；如果处理函数不能解决问题，通常应抛出 std::bad_alloc 或其派生异常，使分配表达式失败。set_new_handler() 返回设置之前的处理函数，因此可以保存并在适当时恢复旧处理函数。",
+  "key_points": [
+    "使用 std::set_new_handler(myNewHandler) 安装处理函数，并可用 auto oldHandler 保存原处理函数。",
+    "分配失败处理函数可以输出错误信息并抛出 std::bad_alloc 的派生异常，例如 please_terminate_me。",
+    "使用 set_new_handler(oldHandler) 可以恢复之前的 new-handler。",
+    "如果分配失败后 new-handler 抛出异常，异常可以在调用方的 try-catch 中捕获。"
+  ],
+  "examples": [
+    "示例：\n```cpp\n#include <new>\n#include <iostream>\n\nclass please_terminate_me : public std::bad_alloc {};\n\nvoid myNewHandler()\n{\n    std::cerr << \"Unable to allocate memory.\" << std::endl;\n    throw please_terminate_me();\n}\n\nint main()\n{\n    try {\n        std::new_handler oldHandler{std::set_new_handler(myNewHandler)};\n        std::size_t numInts{std::numeric_limits<std::size_t>::max()};\n        int* ptr{new int[numInts]};\n        std::set_new_handler(oldHandler);\n    } catch (const please_terminate_me&) {\n        return 1;\n    }\n}\n```"
+  ],
+  "misconceptions": [
+    "std::set_new_handler() 不是只为某一次 new 设置处理函数，而是设置当前的全局 new-handler，直到被替换或恢复。",
+    "new-handler 不等同于 catch 块；它是在分配失败时由 new 机制调用的处理函数。",
+    "处理函数只打印错误而不释放内存、不抛出异常或不采取其他措施，并不能自动让原来的分配成功。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何安装一个新的 new-handler，并在之后恢复旧的处理函数？",
+      "a": "先执行 `std::new_handler oldHandler{std::set_new_handler(myNewHandler)};` 保存旧处理函数；需要恢复时执行 `std::set_new_handler(oldHandler);`。"
+    },
+    {
+      "q": "new 分配失败时，myNewHandler 示例做了什么？",
+      "a": "它向标准错误输出 `Unable to allocate memory.`，然后抛出 `please_terminate_me`，该类型继承自 `std::bad_alloc`。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "异常处理",
+    "动态内存分配与 std::bad_alloc"
+  ],
+  "source_pages": [
+    461,
+    464
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "603_使用_std_set_new_handler_设置内存分配失败处理函数",
+  "_chunk_pages": [
+    461,
+    464
+  ]
+}

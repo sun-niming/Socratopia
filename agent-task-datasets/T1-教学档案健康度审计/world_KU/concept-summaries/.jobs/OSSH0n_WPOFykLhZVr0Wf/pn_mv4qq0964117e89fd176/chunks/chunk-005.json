@@ -1,0 +1,216 @@
+{
+  "chunkId": "chunk-005",
+  "messageRange": [
+    44,
+    53
+  ],
+  "topics": [
+    {
+      "name": "LR(0) 项的定义与点的含义",
+      "facts": [
+        "一个文法 G 的 LR(0) 项就是 G 的一条产生式再加上一个点，点插在产生式体里的某个位置。",
+        "点左边是已经拿到手的，点右边是还盼着的。",
+        "点在最右端的项表示可以归约的信号。",
+        "产生式 A→ε 体是空的，只有一个项 A→·。"
+      ],
+      "examples": [
+        "A→XYZ 可以生出四个项：A→·XYZ、A→X·YZ、A→XY·Z、A→XYZ·。",
+        "T→T*F 可以生出若干项。"
+      ],
+      "sourceMessageIndexes": [
+        47
+      ]
+    },
+    {
+      "name": "增广文法",
+      "facts": [
+        "给文法 G 添一个新开始符号 S' 和产生式 S'→S，目的是告诉分析器什么时候该停。",
+        "当分析器要用 S'→S 归约时，输入串就被接受了。"
+      ],
+      "examples": [
+        "起手项集用 CLOSURE({[S'→·S]})。"
+      ],
+      "sourceMessageIndexes": [
+        45,
+        47,
+        49
+      ]
+    },
+    {
+      "name": "项集的紧凑表示",
+      "facts": [
+        "项能用两个整数紧凑表示：第一个是产生式编号，第二个是点的位置。",
+        "一个项集就是一串整数对。"
+      ],
+      "examples": [],
+      "sourceMessageIndexes": [
+        47
+      ]
+    },
+    {
+      "name": "CLOSURE 闭包计算",
+      "facts": [
+        "CLOSURE(I) 规则一：把 I 里每个项原样放进去。",
+        "CLOSURE(I) 规则二：如果 A→α·Bβ 已经在里面，而 B→γ 是任一产生式，那就在点最左端补一项 B→·γ，反复做直到不再冒出新的项。",
+        "补全的理由：A→α·Bβ 的意思是接下来盼一个能从 Bβ 推出来的串，这个串的头一定是某个 B 产生式伸出来的。"
+      ],
+      "examples": [
+        "I0 = CLOSURE({[E'→·E]}) 包含 E→·E+T、E→·T、T→·T*F、T→·F、F→·(E)、F→·id。"
+      ],
+      "sourceMessageIndexes": [
+        45,
+        49
+      ]
+    },
+    {
+      "name": "GOTO 函数",
+      "facts": [
+        "GOTO(I, X) 把 I 里所有点在 X 之前的项 A→α·Xβ 的点跨过 X，得到 A→αX·β，再求闭包。",
+        "GOTO 描述自动机里一条标着 X 的箭头通向哪。"
+      ],
+      "examples": [
+        "GOTO(I0, '(') 的完整结果是 I4={F→(·E), E→·E+T, E→·T, T→·T*F, T→·F, F→·(E), F→·id}。"
+      ],
+      "sourceMessageIndexes": [
+        45,
+        49,
+        51
+      ]
+    },
+    {
+      "name": "items(G) 主程序与规范 LR(0) 项集族",
+      "facts": [
+        "起手 C = { CLOSURE({[S'→·S]}) }。",
+        "循环：对 C 里每个项集 I、每个文法符号 X，算 GOTO(I,X)，只要它非空且没在 C 里，就收进 C。",
+        "一直到某轮再也长不出新项集，收工。",
+        "跑完 C 就是规范 LR(0) 项集族，每个项集当一个状态，每个 GOTO 当一条转换，画出来就是 LR(0) 自动机。"
+      ],
+      "examples": [
+        "图 4-33 是 items(G) 主程序，图 4-31 是成品自动机。"
+      ],
+      "sourceMessageIndexes": [
+        45,
+        49
+      ]
+    },
+    {
+      "name": "LR(0) 自动机的用法",
+      "facts": [
+        "假设符号串 γ 让自动机从状态 0 走到状态 j，下一个输入符号是 a。",
+        "状态 j 上有标 a 的箭头则移入。",
+        "状态 j 上没有 a 的箭头则归约，用状态 j 里的项来决定归约哪条产生式。",
+        "有路走就移入，没路走就归约。"
+      ],
+      "examples": [
+        "栈顶状态 j 的项集里有 F→id·，下一输入符号是 *，状态 j 上没有标 * 的箭头，所以按 F→id 归约。"
+      ],
+      "sourceMessageIndexes": [
+        51,
+        53
+      ]
+    },
+    {
+      "name": "LR 语法分析器的构成与 LR 分析算法",
+      "facts": [
+        "一个 LR 分析器由输入、输出、栈、驱动程序、语法分析表五样东西拼成。",
+        "所有 LR 分析器的驱动程序都是一模一样的，区别全在那张表上。",
+        "表分 ACTION 和 GOTO 两块。",
+        "ACTION[i,a] 管终结符号这一侧，取值有移入 j、归约 A→β、接受、报错四种。",
+        "GOTO[i,A] 管非终结符号这一侧，配合归约才用得上。",
+        "栈里存的是一个状态序列 s0s1…sm，sm 在栈顶。",
+        "分析器每步看栈顶状态 sm 和当前输入符号 a，查 ACTION[sm,a]。"
+      ],
+      "examples": [],
+      "sourceMessageIndexes": [
+        53
+      ]
+    },
+    {
+      "name": "符号可从状态复原",
+      "facts": [
+        "移入动作发生时，栈里压进去的不是输入符号 a 本身，而是一个状态 j。",
+        "后面归约要弹产生式体对应的那串符号，符号可以从对应的状态里复原出来。"
+      ],
+      "examples": [
+        "靠哪条约定做到？（片段中未给出答案）"
+      ],
+      "sourceMessageIndexes": [
+        53
+      ]
+    }
+  ],
+  "learnerEvidence": [
+    {
+      "kind": "correct",
+      "content": "学习者准确挑出了 I0 里点在 ( 前面的项是 F→·(E)。",
+      "sourceMessageIndexes": [
+        50,
+        51
+      ]
+    },
+    {
+      "kind": "confusion",
+      "content": "学习者只写回 F→·(E)，没有把点跨过 (，忘了 GOTO 还要点跨过 X 并求闭包。",
+      "sourceMessageIndexes": [
+        50,
+        51
+      ]
+    },
+    {
+      "kind": "correct",
+      "content": "学习者回答栈顶状态 j 有 F→id· 且没有标 * 的箭头时，应归约，并指出靠 id 后的点。",
+      "sourceMessageIndexes": [
+        52,
+        53
+      ]
+    }
+  ],
+  "keyInsights": [
+    {
+      "content": "学习者答出栈顶状态有 F→id· 且下一输入符号无对应箭头时做归约动作，并指明依据是 id 后的点。",
+      "sourceMessageIndexes": [
+        52
+      ]
+    }
+  ],
+  "openQuestions": [
+    {
+      "content": "归约时符号已不存栈中，靠哪条约定从状态复原出产生式体对应的那串符号？",
+      "sourceMessageIndexes": [
+        53
+      ]
+    }
+  ],
+  "reviewCandidates": [
+    {
+      "question": "GOTO(I, X) 的定义是什么？",
+      "answer": "把 I 里所有点在 X 之前的项 A→α·Xβ 的点跨过 X，得到 A→αX·β；这些新项凑成集合，再求它的闭包。",
+      "sourceMessageIndexes": [
+        49
+      ]
+    },
+    {
+      "question": "CLOSURE(I) 的两条规则是什么？",
+      "answer": "1. 把 I 里每个项原样放进去；2. 如果 A→α·Bβ 已经在里面，而 B→γ 是任一产生式，那就在点最左端补一项 B→·γ；反复做直到不再冒出新的项。",
+      "sourceMessageIndexes": [
+        45,
+        49
+      ]
+    },
+    {
+      "question": "LR(0) 自动机的用法中，什么情况下移入、什么情况下归约？",
+      "answer": "假设符号串 γ 让自动机从状态 0 走到状态 j，下一个输入符号是 a；状态 j 上有标 a 的箭头则移入，没有 a 的箭头则归约，用状态 j 里的项决定归约哪条产生式。",
+      "sourceMessageIndexes": [
+        51,
+        53
+      ]
+    },
+    {
+      "question": "计算 GOTO(I0, '(') 的完整结果。",
+      "answer": "I4 = { F→(·E), E→·E+T, E→·T, T→·T*F, T→·F, F→·(E), F→·id }。",
+      "sourceMessageIndexes": [
+        51
+      ]
+    }
+  ]
+}

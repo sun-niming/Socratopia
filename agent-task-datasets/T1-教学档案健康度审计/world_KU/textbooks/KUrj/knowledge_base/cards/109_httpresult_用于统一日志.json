@@ -1,0 +1,41 @@
+{
+  "title": "HttpResult 用于统一日志",
+  "definition": "`HttpResult` 看起来不是必需的，但它能让 `handle_client` 在发送响应后统一写访问日志。若没有它，每个错误分支都要手动记录状态码和字节数，代码会变得杂乱。",
+  "key_points": [
+    "`HttpResult` 的作用是承载响应结果信息。",
+    "它的价值在于让发送响应与写日志解耦。",
+    "没有它时，每个错误分支都要重复处理状态码和字节数。"
+  ],
+  "examples": [
+    "`handle_client` 发送完响应后，统一调用 `write_access_log(...)`。"
+  ],
+  "misconceptions": [
+    "只要能返回响应，`HttpResult` 就没有用。",
+    "日志记录可以随便散落在各个错误分支里，不会影响维护性。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么说 HttpResult 虽然不是必需，但仍然有用？",
+      "a": "因为它可以把响应结果统一交给后续日志记录，避免在多个分支里重复维护状态码和字节数。"
+    },
+    {
+      "q": "如果没有 HttpResult，会出现什么问题？",
+      "a": "每个错误分支都要手动记录响应信息，代码会更乱。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "头文件只放声明"
+  ],
+  "source_pages": [
+    69,
+    72
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "109_httpresult_用于统一日志",
+  "_chunk_pages": [
+    69,
+    72
+  ]
+}

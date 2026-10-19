@@ -1,0 +1,47 @@
+{
+  "title": "验收测试要覆盖错误路径",
+  "definition": "Web Server 的验收不能只测成功访问，还必须覆盖错误路径。原文列出的重点包括不存在文件、非法方法、目录穿越、端口占用、并发访问以及日志检查。",
+  "key_points": [
+    "基础测试要覆盖首页、静态页面和 CSS。",
+    "错误测试要覆盖 404、405、目录穿越和非法路径。",
+    "并发测试要验证多个请求同时到来时服务器仍能工作。",
+    "还要检查端口监听和访问日志，不能只看浏览器能否打开页面。"
+  ],
+  "examples": [
+    "curl -i http://127.0.0.1:8080/not-found.html",
+    "curl -i -X POST http://127.0.0.1:8080/",
+    "curl -i http://127.0.0.1:8080/../../etc/passwd",
+    "for i in $(seq 1 20); do curl -s http://127.0.0.1:8080/ > /dev/null & done; wait",
+    "ss -lntp | grep 8080",
+    "tail -n 20 logs/access.log"
+  ],
+  "misconceptions": [
+    "误以为首页能打开就说明 Web Server 已经合格。",
+    "误以为测试只要覆盖成功路径，不必检查错误响应。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么要测试目录穿越？",
+      "a": "因为它能检验服务器是否正确做了路径安全检查，防止访问根目录之外的敏感文件。"
+    },
+    {
+      "q": "验收时为什么还要看日志和端口？",
+      "a": "日志能验证请求处理是否正确，端口检查能确认服务器是否真正监听在目标端口上。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "HTTP 基础"
+  ],
+  "source_pages": [
+    41,
+    44
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "060_验收测试要覆盖错误路径",
+  "_chunk_pages": [
+    41,
+    44
+  ]
+}

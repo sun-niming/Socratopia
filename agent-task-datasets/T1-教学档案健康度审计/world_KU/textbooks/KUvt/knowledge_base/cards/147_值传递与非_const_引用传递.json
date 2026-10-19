@@ -1,0 +1,42 @@
+{
+  "title": "值传递与非 const 引用传递",
+  "definition": "值传递会把实参的值复制给形参，函数修改形参不会影响原变量；非 const 引用传递会让形参直接引用调用方的原变量，函数对形参的修改会作用于原变量。两种方式的调用语法通常相同。",
+  "key_points": [
+    "值传递的形参是实参的副本，因此修改形参不会改变原变量。",
+    "非 const 引用参数使用 `T&` 声明，例如 `void addOne(int& i)`；修改 `i` 就是在修改调用方的变量。",
+    "非 const 引用必须绑定到可修改的对象，不能直接绑定字面量；例如 `addOne(3)`可用于值传递版本，但不能用于 `void addOne(int&)`。"
+  ],
+  "examples": [
+    "值传递：`void addOne(int i) { ++i; }`，调用 `addOne(myInt);` 后，`myInt`不变。",
+    "引用传递：`void addOne(int& i) { ++i; }`，调用 `addOne(myInt);` 后，`myInt`增加 1。",
+    "交换两个整数：`void swap(int& first, int& second) { int temp{first}; first = second; second = temp; }`，调用 `swap(x, y);` 会直接交换 `x`和`y`的值。"
+  ],
+  "misconceptions": [
+    "引用参数并不意味着调用时要写特殊语法；`swap(x, y)`与普通值参数函数的调用形式相同。",
+    "非 const 引用不是实参副本的别名，而是直接引用调用方对象，因此修改它会修改原对象。",
+    "不能因为函数参数写成引用，就认为字面量一定可以传入；非 const 引用不能直接绑定字面量。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`void addOne(int&)`与`void addOne(int)`的主要区别是什么？",
+      "a": "前者通过非 const 引用直接修改调用方的原变量，后者接收实参副本，修改形参不会影响原变量。"
+    },
+    {
+      "q": "为什么`addOne(3)`可以调用值传递版本，却不能调用非 const 引用版本？",
+      "a": "值传递可以复制字面量的值；非 const 引用必须绑定到可修改的对象，字面量不是可修改的对象。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [],
+  "source_pages": [
+    81,
+    81
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "147_值传递与非_const_引用传递",
+  "_chunk_pages": [
+    81,
+    84
+  ]
+}

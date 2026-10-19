@@ -1,0 +1,43 @@
+{
+  "title": "函数返回值",
+  "definition": "函数可以通过返回类型向调用者提供一个结果。函数体使用 return 语句返回表达式的值；返回表达式的类型应与函数声明或定义指定的返回类型相匹配。",
+  "key_points": [
+    "返回类型写在函数名之前。",
+    "返回类型为 void 的函数不向调用者提供结果。",
+    "非 void 函数通常需要通过 return 返回一个值。",
+    "调用有返回值的函数时，可以直接使用其结果，也可以将结果保存到变量中。"
+  ],
+  "examples": [
+    "int addNumbers(int number1, int number2) { return number1 + number2; }",
+    "调用并保存结果：int result { addNumbers(5, 3) };"
+  ],
+  "misconceptions": [
+    "函数返回值不是函数的参数；参数是传入函数的数据，返回值是函数交给调用者的结果。",
+    "返回类型为 int 的函数不能只执行操作而始终不返回整数结果。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "addNumbers(5, 3) 的返回值是什么？",
+      "a": "返回 8。"
+    },
+    {
+      "q": "void 函数能否向调用者提供普通返回结果？",
+      "a": "不能；void 表示该函数不向调用者提供返回值。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "函数声明、定义与调用"
+  ],
+  "source_pages": [
+    54,
+    54
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "084_函数返回值",
+  "_chunk_pages": [
+    53,
+    56
+  ]
+}

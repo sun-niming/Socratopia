@@ -1,0 +1,51 @@
+{
+  "title": "利用gprof定位NameDB的性能瓶颈",
+  "definition": "对初次vector设计的gprof结果显示，NameDB构造函数几乎消耗了程序的全部执行时间；进一步查看其调用图可见，构造过程中`nameExists`和`incrementNameCount`消耗了最多时间。这是因为它们都对vector执行线性搜索，而且输入文件中的大部分名字是重复的，所以大多数`nameExists`调用之后还会执行一次`incrementNameCount`。",
+  "key_points": [
+    "教材示例中，`main`及其后代占总执行时间的100%，NameDB构造函数约占14.06秒中的14.00秒。",
+    "示例调用图中，`nameExists`约耗时6.14秒，`incrementNameCount`约耗时5.24秒。",
+    "示例中`nameExists`被调用500500次，`incrementNameCount`被调用499500次，说明大多数输入名字已经存在。",
+    "两个函数代码相近且都主要搜索vector，因此教材提出可考虑合并相关工作。",
+    "性能改进方向是使用有序数据结构缩短查找时间，下一次设计改用map。"
+  ],
+  "examples": [
+    "初次设计的主要代价可概括为：对每个输入名字执行一次查找；若名字已存在，还要再次执行一次查找并递增计数。",
+    "第二次设计用map替代vector：标准库map保持元素顺序，并提供$O(\\log n)$查找时间，而vector方案的查找时间为$O(n)$。"
+  ],
+  "misconceptions": [
+    "程序慢的主要原因不是文件打开操作，而是填充数据库时反复进行的大量线性搜索。",
+    "调用次数接近并不表示两个函数执行逻辑完全相同；`nameExists`负责判断存在性，`incrementNameCount`负责递增计数。",
+    "改用map改善的是查找数据结构的复杂度，不是简单地让原有vector循环执行得更快。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么`nameExists`和`incrementNameCount`在示例中耗时接近？",
+      "a": "因为输入名字大多重复，大多数`nameExists`调用后都会跟随一次`incrementNameCount`调用，而且两者都要搜索vector。"
+    },
+    {
+      "q": "gprof结果首先把性能问题定位到了哪里？",
+      "a": "NameDB构造函数，因为它消耗了程序几乎全部的执行时间。"
+    },
+    {
+      "q": "第二次设计为什么用map替代vector？",
+      "a": "因为map的查找时间为$O(\\log n)$，比vector线性查找的$O(n)$更适合大量名字的查找。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "vector线性搜索",
+    "gprof报告的主要列与调用图",
+    "渐进时间复杂度"
+  ],
+  "source_pages": [
+    868,
+    868
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1798_利用gprof定位namedb的性能瓶颈",
+  "_chunk_pages": [
+    865,
+    868
+  ]
+}

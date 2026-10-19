@@ -1,0 +1,42 @@
+{
+  "title": "std::string_view 不能引用临时字符串",
+  "definition": "`std::string_view` 不拥有字符串存储空间，因此不能用于保存临时字符串的视图。若视图初始化表达式产生了临时 `std::string`，临时字符串会在完整表达式结束时销毁，随后视图将成为悬空视图；继续使用它属于未定义行为。",
+  "key_points": [
+    "临时字符串销毁后，指向它的 `std::string_view` 仍保存原地址，但该地址已无效。",
+    "使用悬空 `std::string_view` 的结果未定义，可能崩溃，也可能输出看似正常但错误的内容。",
+    "应让视图引用具有足够生命周期的字符串对象，而不是临时 `std::string`。"
+  ],
+  "examples": [
+    "错误模式：`std::string_view sv = std::string{\"Hello World!\"};`。临时 `std::string` 在初始化语句结束后销毁，之后使用 `sv` 是未定义行为。",
+    "安全方向：先创建具有足够生命周期的字符串对象，再让视图引用它：`std::string text{\"Hello World!\"}; std::string_view sv{text};`。"
+  ],
+  "misconceptions": [
+    "只要 `std::string_view` 变量本身还存在，底层字符串就会继续存在，这是错误的。",
+    "未定义行为不等于必然崩溃；它也可能暂时打印出部分或全部预期内容，但程序仍不正确。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "下面这种写法为什么危险：`std::string_view sv = std::string{\"Hello World!\"};`？",
+      "a": "初始化过程中创建的临时字符串在完整表达式结束时销毁，`sv` 随后指向已销毁的存储，继续使用它会产生未定义行为。"
+    },
+    {
+      "q": "使用 `std::string_view` 时应避免引用哪类对象？",
+      "a": "应避免引用生命周期不足的临时字符串或其他即将销毁的字符存储。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "std::string_view 的生命周期"
+  ],
+  "source_pages": [
+    114,
+    114
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "218_std_string_view_不能引用临时字符串",
+  "_chunk_pages": [
+    113,
+    116
+  ]
+}

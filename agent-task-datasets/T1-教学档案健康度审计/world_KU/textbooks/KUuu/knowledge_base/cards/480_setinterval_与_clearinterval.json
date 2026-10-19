@@ -1,0 +1,43 @@
+{
+  "title": "setInterval 与 clearInterval",
+  "definition": "setInterval 用于设置每隔一段时间重复执行代码；clearInterval 用于终止对应的定时器。教材给出的格式分别是 [定时器名=] setInterval(<表达式或函数对象>，毫秒) 和 clearInterval(定时器名)。",
+  "key_points": [
+    "setInterval：每隔一段时间重复执行代码",
+    "格式： [定时器名=] setInterval(<表达式或函数对象>，毫秒)",
+    "clearInterval：终止定时器",
+    "格式： clearInterval(定时器名)"
+  ],
+  "examples": [
+    "var timer = setInterval(showTime, 1000);",
+    "clearInterval(timer);"
+  ],
+  "misconceptions": [
+    "setInterval 不是执行一次，而是重复执行",
+    "clearInterval 不是设置间隔，而是停止重复执行"
+  ],
+  "qa_pairs": [
+    {
+      "q": "setInterval 的作用是什么？",
+      "a": "设置每隔一段时间就重复执行代码。"
+    },
+    {
+      "q": "clearInterval 的作用是什么？",
+      "a": "终止定时器。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "定时操作函数的用途"
+  ],
+  "source_pages": [
+    333,
+    336
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "480_setinterval_与_clearinterval",
+  "_chunk_pages": [
+    333,
+    336
+  ]
+}

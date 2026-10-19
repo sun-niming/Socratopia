@@ -1,0 +1,39 @@
+{
+  "title": "unshift()",
+  "definition": "`unshift()` 方法向数组开头添加一个或多个元素，并返回该数组的新长度；该方法会修改原有数组。",
+  "key_points": [
+    "添加位置是数组开头",
+    "可以一次添加一个或多个元素",
+    "返回值是添加后的新长度"
+  ],
+  "examples": [
+    "var arr = [2, 3];",
+    "var len = arr.unshift(0, 1); // len 为 4，arr 为 [0, 1, 2, 3]"
+  ],
+  "misconceptions": [
+    "以为 `unshift()` 是删除开头元素",
+    "以为 `unshift()` 返回的是数组本身",
+    "以为 `unshift()` 不会修改原数组"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`unshift()` 的作用是什么？",
+      "a": "在数组开头添加一个或多个元素，并返回新长度。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "Array对象与创建方式"
+  ],
+  "source_pages": [
+    305,
+    308
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "405_unshift",
+  "_chunk_pages": [
+    305,
+    308
+  ]
+}

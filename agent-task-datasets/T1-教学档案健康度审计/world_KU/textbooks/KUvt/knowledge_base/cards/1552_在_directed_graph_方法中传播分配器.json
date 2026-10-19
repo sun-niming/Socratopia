@@ -1,0 +1,46 @@
+{
+  "title": "在 directed_graph 方法中传播分配器",
+  "definition": "directed_graph 使用自定义分配器后，创建节点或关联容器时必须把保存的 $m_allocator$ 传递进去，以保证这些对象使用同一个分配器。",
+  "key_points": [
+    "insert(T&&) 中调用节点容器的 $\\texttt{emplace_back}$ 时，应传入 $m_allocator$。",
+    "get_adjacent_nodes_values() 中创建 set 时，应使用分配器模板实参 $A$，并用 $m_allocator$ 构造该 set。",
+    "swap() 除了交换节点容器，还必须交换两个 directed_graph 对象的分配器成员。",
+    "由于 set 的第三个模板参数是分配器，因此其类型可写为 $\\texttt{std::set<T, std::less<>, A>}$。"
+  ],
+  "examples": [
+    "插入节点时：$\\texttt{m_nodes.emplace_back(this, std::move(node_value), m_allocator);}$。",
+    "关联节点集合：$\\texttt{std::set<T, std::less<>, A> values(m_allocator);}$。",
+    "交换分配器：$\\texttt{using std::swap; swap(m_allocator, other_graph.m_allocator);}$。"
+  ],
+  "misconceptions": [
+    "只把分配器传给节点容器而不交换 $m_allocator$，会导致 swap 后对象保存的分配器状态不匹配。",
+    "对于 $\\texttt{std::set}$，$A$ 是第三个模板参数，不是第二个比较器参数。",
+    "使用自定义分配器时，相关临时容器也不能继续无条件使用默认分配器。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么 directed_graph::swap() 还必须交换 m_allocator？",
+      "a": "因为 $m_allocator$ 表示对象及其内部节点所使用的分配器状态。交换节点容器后也交换分配器，才能保持对象内部容器与分配器之间的一致性。"
+    },
+    {
+      "q": "使用自定义分配器时，get_adjacent_nodes_values() 中的 set 类型应如何写？",
+      "a": "应显式指定分配器类型，例如 $\\texttt{std::set<T, std::less<>, A>}$，并用 $m_allocator$ 构造它。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++标准容器模板参数",
+    "C++分配器传递与容器构造"
+  ],
+  "source_pages": [
+    749,
+    750
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1552_在_directed_graph_方法中传播分配器",
+  "_chunk_pages": [
+    749,
+    752
+  ]
+}

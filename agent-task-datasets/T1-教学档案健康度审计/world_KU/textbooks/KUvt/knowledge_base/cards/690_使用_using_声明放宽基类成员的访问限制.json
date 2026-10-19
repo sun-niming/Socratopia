@@ -1,0 +1,46 @@
+{
+  "title": "使用 using 声明放宽基类成员的访问限制",
+  "definition": "如果派生类只想改变继承成员的访问级别，而不想重写或修改其实现，可以在派生类的目标访问区域中使用 using 声明。例如，在 public 区域写 using Secret::dontTell;，可以使派生类对象能够以 public 方式调用基类原本为 protected 的 dontTell()，但不会改变基类接口中 dontTell() 的保护级别。",
+  "key_points": [
+    "using 声明适合只改变访问级别、不改变实现的场景。",
+    "把基类 protected 成员引入派生类的 public 区域后，可以通过派生类对象调用。",
+    "基类指针或引用仍按基类的访问控制检查，因此不能通过 Secret 指针或引用访问原本 protected 的成员。",
+    "如果还要改变实现，应在派生类中显式重写方法，而不是只使用 using。"
+  ],
+  "examples": [
+    "class Blabber : public Secret { public: using Secret::dontTell; };",
+    "Blabber myBlabber; myBlabber.dontTell(); // 合法，使用 Secret::dontTell() 的实现并输出“I’ll never tell”",
+    "Secret& ref = myBlabber; ref.dontTell(); // 编译错误：基类中的 dontTell() 仍为 protected",
+    "Secret* ptr = &myBlabber; ptr->dontTell(); // 编译错误"
+  ],
+  "misconceptions": [
+    "误以为 using 会把基类成员在所有类型视角下都改成 public。",
+    "误以为 using 声明会生成一个新的实现或自动重写虚函数。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "只想改变基类 protected 方法的访问级别而不改变实现，应如何做？",
+      "a": "在派生类所需的访问区域中写 using 基类名::方法名;，例如 public: using Secret::dontTell;。"
+    },
+    {
+      "q": "通过 Secret 指针调用 dontTell() 为什么仍然失败？",
+      "a": "因为访问权限按指针的静态类型 Secret 检查，Secret::dontTell() 仍然是 protected。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "继承中的访问控制",
+    "using 声明"
+  ],
+  "source_pages": [
+    342,
+    343
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "690_使用_using_声明放宽基类成员的访问限制",
+  "_chunk_pages": [
+    341,
+    344
+  ]
+}

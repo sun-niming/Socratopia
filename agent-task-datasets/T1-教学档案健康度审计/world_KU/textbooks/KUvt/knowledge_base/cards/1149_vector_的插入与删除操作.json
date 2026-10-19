@@ -1,0 +1,47 @@
+{
+  "title": "vector 的插入与删除操作",
+  "definition": "std::vector 支持在指定位置插入元素，也支持删除单个元素、删除一个迭代器范围内的元素以及清空全部元素。插入位置由迭代器指定，插入操作会把新元素放在该迭代器所引用的元素之前。",
+  "key_points": [
+    "push_back() 用于在 vector 尾部添加一个元素。",
+    "insert() 可在指定位置插入单个值、重复插入多个相同值，或插入另一个迭代器范围内的元素。",
+    "erase(pos) 删除位置 pos 的单个元素；erase(first,last) 删除半开区间 [first,last) 内的元素。",
+    "clear() 删除 vector 中的全部元素，但不等同于销毁 vector 对象。",
+    "insert() 和 push_back() 都有接收左值和右值的版本；左值版本保存元素副本，右值版本可以使用移动语义。"
+  ],
+  "examples": [
+    "vector<int> v{1, 2, 3, 5};\nv.insert(cbegin(v) + 3, 4); // 在元素 5 之前插入 4",
+    "vector<int> v{1, 2, 3};\nv.insert(cend(v), 2, 9); // 在尾部插入两个 9",
+    "vector<int> v{1, 2, 3, 4, 5};\nv.erase(cbegin(v) + 1, cbegin(v) + 4); // 删除元素 2、3、4",
+    "v.clear(); // 删除所有元素"
+  ],
+  "misconceptions": [
+    "insert(pos,x) 不是把元素放在 pos 所指元素之后，而是放在它之前。",
+    "erase(first,last) 的末尾迭代器 last 不指向要删除的元素，因此不会删除 last 所指元素。",
+    "clear() 删除的是元素，不是 vector 对象本身。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "erase(cbegin(v) + 1, cbegin(v) + 4) 删除哪些元素？",
+      "a": "删除下标 1、2、3 对应的元素，即半开区间 [cbegin(v)+1, cbegin(v)+4) 内的元素。"
+    },
+    {
+      "q": "如何把 vectorTwo 的全部元素追加到 vectorOne 尾部？",
+      "a": "使用 vectorOne.insert(cend(vectorOne), cbegin(vectorTwo), cend(vectorTwo));"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "迭代器与半开区间"
+  ],
+  "source_pages": [
+    557,
+    558
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1149_vector_的插入与删除操作",
+  "_chunk_pages": [
+    557,
+    560
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "title": "caption-side",
+  "definition": "caption-side 用来设置表格标题的位置。top 表示标题在表格上方，bottom 表示标题在表格下方。",
+  "key_points": [
+    "用于控制表格标题的位置",
+    "top 表示标题在表格上方",
+    "bottom 表示标题在表格下方"
+  ],
+  "examples": [
+    "caption-side: top;",
+    "caption-side: bottom;"
+  ],
+  "misconceptions": [
+    "误以为标题一定在表格上方",
+    "误以为它控制的是表格单元格内容位置"
+  ],
+  "qa_pairs": [
+    {
+      "q": "caption-side 的 top 表示什么？",
+      "a": "标题位于表格上方。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [],
+  "source_pages": [
+    117,
+    120
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "198_caption_side",
+  "_chunk_pages": [
+    117,
+    120
+  ]
+}

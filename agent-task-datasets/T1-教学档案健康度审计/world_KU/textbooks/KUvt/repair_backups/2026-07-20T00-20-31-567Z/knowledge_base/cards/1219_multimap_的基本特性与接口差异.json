@@ -1,0 +1,49 @@
+{
+  "title": "multimap 的基本特性与接口差异",
+  "definition": "`multimap` 是一种允许多个元素使用同一个键的关联容器。它与 `map` 的接口几乎相同，但由于同一个键可以对应多个元素，`multimap` 不提供 `operator[]` 和 `at()`；单元素 `insert()` 只返回迭代器；此外不支持 `insert_or_assign()` 和 `try_emplace()`。",
+  "key_points": [
+    "`multimap` 允许多个元素具有相同的键，因此同一个键可以映射到多个值。",
+    "`multimap` 不提供 `operator[]` 和 `at()`，因为它们无法明确应访问同一键对应的哪一个元素。",
+    "在 `multimap` 上插入单个元素总是会成功，因此 `multimap::insert()` 只返回迭代器，而不是 `map::insert()` 返回的键值对结果。",
+    "`multimap` 不支持 `insert_or_assign()` 和 `try_emplace()`。",
+    "允许插入完全相同的键值对；如果要避免重复，必须在插入前显式检查。"
+  ],
+  "examples": [
+    "可以使用 `std::multimap<std::string, std::string>` 表示用户与好友之间的关系：键为用户名，值为好友名。",
+    "例如，Harry Potter 和 Ron Weasley 互为好友时，应保存两项：`{\"Harry Potter\", \"Ron Weasley\"}` 和 `{\"Ron Weasley\", \"Harry Potter\"}`。"
+  ],
+  "misconceptions": [
+    "不能把 `multimap` 当作一个键只能对应一个值的 `map` 使用。",
+    "插入相同键并不会覆盖原有元素；相同键的元素会同时保留。",
+    "不能使用 `operator[]` 直接访问 `multimap` 中某个键对应的值。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "multimap 与 map 的关键区别是什么？",
+      "a": "multimap 允许多个元素使用同一个键，而 map 不允许多个元素具有同一个键。"
+    },
+    {
+      "q": "为什么 multimap 不提供 operator[] 和 at()？",
+      "a": "因为一个键可能对应多个元素，无法确定这两个操作应返回哪一个元素。"
+    },
+    {
+      "q": "multimap 是否会自动拒绝重复的键值对？",
+      "a": "不会。multimap 允许插入相同的键值对；若要避免重复，必须在插入前显式检查。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "map 的基本概念"
+  ],
+  "source_pages": [
+    589,
+    589
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1219_multimap_的基本特性与接口差异",
+  "_chunk_pages": [
+    589,
+    592
+  ]
+}

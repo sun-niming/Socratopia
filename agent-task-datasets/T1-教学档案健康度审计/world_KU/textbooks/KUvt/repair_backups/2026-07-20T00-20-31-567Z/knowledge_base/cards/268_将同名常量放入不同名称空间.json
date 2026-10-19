@@ -1,0 +1,42 @@
+{
+  "title": "将同名常量放入不同名称空间",
+  "definition": "当不同类别的对象需要使用相同的常量名称时，可以把常量放入不同的名称空间，以避免名称冲突。例如，菜单和按钮都可能有名为 Help 的 ID，可以分别放在 Menu 和 Button 名称空间中，并通过 Menu::Help 和 Button::Help 访问。教材还指出，使用枚举类型也是一种推荐方法。",
+  "key_points": [
+    "名称空间可以把相同名称隔离在不同作用域中。",
+    "不同名称空间中的同名常量通过作用域解析运算符访问。",
+    "示例访问形式为 Menu::Help 和 Button::Help。",
+    "枚举类型也可以用于表示这类具有分类含义的常量。"
+  ],
+  "examples": [
+    "namespace Menu { constexpr int Help{1}; }",
+    "namespace Button { constexpr int Help{2}; }",
+    "使用：Menu::Help；Button::Help。"
+  ],
+  "misconceptions": [
+    "名称空间并不会让两个同名常量变成同一个对象；它们仍属于不同作用域。",
+    "直接使用 Help 可能产生冲突或歧义，使用 Menu::Help、Button::Help 可以明确其类别。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "菜单和按钮都需要名为 Help 的 ID 时，如何避免名称冲突？",
+      "a": "可以把它们放在不同名称空间中，例如使用 Menu::Help 表示菜单 ID，使用 Button::Help 表示按钮 ID。"
+    },
+    {
+      "q": "访问名称空间中的 Help 常量需要使用什么语法？",
+      "a": "使用作用域解析运算符，例如 Menu::Help 或 Button::Help。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [],
+  "source_pages": [
+    134,
+    134
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "268_将同名常量放入不同名称空间",
+  "_chunk_pages": [
+    133,
+    136
+  ]
+}

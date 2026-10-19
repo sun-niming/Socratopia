@@ -1,0 +1,41 @@
+{
+  "title": "umount 卸载分区",
+  "definition": "教材在“磁盘操作”中给出卸载分区命令：umount 安装点。按教材内容，umount 用于从指定安装点卸载已装载的分区。",
+  "key_points": [
+    "用途：卸载分区",
+    "命令格式：umount 安装点",
+    "教材以安装点作为操作对象给出"
+  ],
+  "examples": [
+    "命令格式示例：umount 安装点"
+  ],
+  "misconceptions": [
+    "不要把 umount 误写成 unmount；教材给出的命令是 umount",
+    "不要把它与 mount 混淆，umount 是卸载"
+  ],
+  "qa_pairs": [
+    {
+      "q": "教材中卸载分区使用什么命令？",
+      "a": "umount。"
+    },
+    {
+      "q": "教材给出的 umount 使用格式是什么？",
+      "a": "umount 安装点。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "mount 装载分区"
+  ],
+  "source_pages": [
+    25,
+    28
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "051_umount_卸载分区",
+  "_chunk_pages": [
+    25,
+    28
+  ]
+}

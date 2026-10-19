@@ -1,0 +1,51 @@
+{
+  "title": "棋类游戏的一次回合处理流程",
+  "definition": "教材第162页的时序图展示了 GamePlay、Player、ChessBoard、ChessPiece 和视图对象参与的一次回合处理：GamePlay 请求 Player 执行 TakeTurn；处理过程中根据 source 获取源位置的棋子，检查移动是否合法，再根据 target 获取目标位置，执行 Move，并通过 SetPieceAt 更新棋盘；随后判断 IsGameOver。",
+  "key_points": [
+    "回合由 GamePlay 发起，并通过 Player 的 TakeTurn 处理。",
+    "移动至少涉及 source（源位置）和 target（目标位置）。",
+    "移动前要进行 CheckMove，合法性检查结果以 true 或 false 分支表示。",
+    "合法移动后执行 Move，并使用 SetPieceAt 更新棋盘。",
+    "更新后检查 IsGameOver，以判断游戏是否结束。"
+  ],
+  "examples": [
+    "流程可抽象为：$$\\text{TakeTurn}\\rightarrow\\text{GetPieceAt(source)}\\rightarrow\\text{CheckMove}\\rightarrow\\text{GetPieceAt(target)}\\rightarrow\\text{Move}\\rightarrow\\text{SetPieceAt}\\rightarrow\\text{IsGameOver}$$",
+    "若 CheckMove 返回 false，则不应继续执行合法移动步骤；若返回 true，则继续执行 Move 和 SetPieceAt。"
+  ],
+  "misconceptions": [
+    "GetPieceAt(source) 与 GetPieceAt(target) 查询的是源位置和目标位置，不是同一个位置。",
+    "CheckMove 通过并不等于游戏结束；游戏结束还需要单独进行 IsGameOver 判断。",
+    "TakeTurn 是一次回合处理操作，不是棋盘本身的类型。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "一次回合中为什么要先调用 CheckMove？",
+      "a": "因为需要先判断从 source 到 target 的移动是否合法，只有合法时才应执行移动和棋盘更新。"
+    },
+    {
+      "q": "合法移动后棋盘如何更新？",
+      "a": "执行 Move，然后通过 SetPieceAt 更新棋盘中的棋子位置。"
+    },
+    {
+      "q": "GamePlay 在回合流程中的作用是什么？",
+      "a": "GamePlay 发起或协调回合处理，并在移动后检查游戏是否结束。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "棋盘与棋子模型",
+    "时序图基础",
+    "面向对象协作"
+  ],
+  "source_pages": [
+    161,
+    164
+  ],
+  "needs_verification": true,
+  "verify_query": "《C++20高级编程》第5版 第162页 GamePlay Player TakeTurn GetPieceAt CheckMove SetPieceAt IsGameOver",
+  "concept_id": "228_棋类游戏的一次回合处理流程",
+  "_chunk_pages": [
+    161,
+    164
+  ]
+}

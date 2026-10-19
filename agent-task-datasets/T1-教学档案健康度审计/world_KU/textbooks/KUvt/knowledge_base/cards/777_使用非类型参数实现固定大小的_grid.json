@@ -1,0 +1,52 @@
+{
+  "title": "使用非类型参数实现固定大小的 Grid",
+  "definition": "将元素类型、宽度和高度都作为模板参数后，Grid 可以表示为 Grid<T, WIDTH, HEIGHT>。其中 T 是网格元素类型，WIDTH 和 HEIGHT 是编译期确定的网格尺寸；网格内部使用固定大小的二维数组 std::optional<T> m_cells[WIDTH][HEIGHT] 保存元素。",
+  "key_points": [
+    "模板声明包含三个参数：元素类型 T、宽度 WIDTH 和高度 HEIGHT。",
+    "getWidth() 返回 WIDTH，getHeight() 返回 HEIGHT。",
+    "at(x, y) 在访问前检查坐标；当 x >= WIDTH 或 y >= HEIGHT 时抛出 std::out_of_range。",
+    "原文说明没有显式默认移动构造函数和移动赋值运算符，因为 C 风格数组不支持移动语义。",
+    "const 版本的 at() 返回 const std::optional<T>&；非 const 版本返回 std::optional<T>&，并可通过 const_cast 复用 const 版本的检查和访问逻辑。"
+  ],
+  "examples": [
+    "核心成员可概括为：\n\n```cpp\ntemplate <typename T, size_t WIDTH, size_t HEIGHT>\nclass Grid {\nprivate:\n    std::optional<T> m_cells[WIDTH][HEIGHT];\n};\n```",
+    "边界检查逻辑：\n\n```cpp\nif (x >= WIDTH) {\n    throw std::out_of_range(/* x 必须小于 WIDTH */);\n}\nif (y >= HEIGHT) {\n    throw std::out_of_range(/* y 必须小于 HEIGHT */);\n}\n```",
+    "访问示例：\n\n```cpp\nGrid<int, 10, 10> myGrid;\nmyGrid.at(2, 3) = 42;\n```"
+  ],
+  "misconceptions": [
+    "WIDTH 和 HEIGHT 是运行期变量，可以在对象创建后任意修改。",
+    "固定大小二维数组中的每个元素都必须直接存放 T，不能使用 std::optional<T>。",
+    "Grid 的 const at() 和非 const at() 必须各自重复实现边界检查。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "Grid<T, WIDTH, HEIGHT> 的三个模板参数分别表示什么？",
+      "a": "T 表示网格保存的对象类型，WIDTH 表示网格宽度，HEIGHT 表示网格高度。"
+    },
+    {
+      "q": "固定大小 Grid 的底层存储结构是什么？",
+      "a": "是固定大小的二维数组：\n\n```cpp\nstd::optional<T> m_cells[WIDTH][HEIGHT];\n```"
+    },
+    {
+      "q": "当访问坐标 x 等于 WIDTH 时会发生什么？",
+      "a": "因为 x >= WIDTH，坐标越界检查会抛出 std::out_of_range。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "非类型模板参数",
+    "std::optional",
+    "数组与边界检查"
+  ],
+  "source_pages": [
+    383,
+    383
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 std::optional array move semantics C-style array defaulted move constructor Grid template const_cast at implementation",
+  "concept_id": "777_使用非类型参数实现固定大小的_grid",
+  "_chunk_pages": [
+    381,
+    384
+  ]
+}

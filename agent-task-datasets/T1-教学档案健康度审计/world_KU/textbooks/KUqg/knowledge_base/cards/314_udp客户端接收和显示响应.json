@@ -1,0 +1,46 @@
+{
+  "title": "UDP客户端接收和显示响应",
+  "definition": "UDP客户端使用 `recvfrom(2048)` 等待并接收服务器返回的 UDP 分组。该方法返回分组数据和分组源地址：数据保存为字节，源地址包含服务器 IP 地址和服务器端口号。客户端随后使用 `decode()` 将收到的字节转换为字符串并显示，最后调用 `close()` 关闭套接字。参数 2048 是接收缓存长度。",
+  "key_points": [
+    "`recvfrom(2048)` 会阻塞等待分组到达客户端套接字。",
+    "返回结果可拆分为 `modifiedMessage` 和 `serverAddress`。",
+    "`serverAddress` 包含服务器的 IP 地址和端口号，虽然该客户端事先已经知道服务器地址，方法仍会返回它。",
+    "收到的数据是字节，需通过 `decode()` 转换为字符串。",
+    "完成通信后调用 `clientSocket.close()` 关闭客户端套接字。"
+  ],
+  "examples": [
+    "modifiedMessage, serverAddress = clientSocket.recvfrom(2048)\nprint(modifiedMessage.decode())\nclientSocket.close()",
+    "接收结果可抽象为：$$(\\text{报文数据},\\ \\text{源IP地址与源端口号})$$"
+  ],
+  "misconceptions": [
+    "误以为 `recvfrom()` 只返回报文数据；它还返回发送方的地址。",
+    "误以为 `recvfrom(2048)` 中的 2048 是服务器端口号；它是接收缓存长度。",
+    "误以为接收到的数据已经是字符串；原文示例需要调用 `decode()`。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "UDP客户端调用 `recvfrom(2048)` 得到哪两类信息？",
+      "a": "得到分组中的报文数据以及发送该分组的服务器地址；服务器地址包含服务器 IP 地址和端口号。"
+    },
+    {
+      "q": "客户端为什么对 `modifiedMessage` 调用 `decode()`？",
+      "a": "因为从套接字接收到的是字节，需要将其转换为字符串后再显示。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "UDP客户端发送报文",
+    "字符串与字节"
+  ],
+  "source_pages": [
+    125,
+    128
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "314_udp客户端接收和显示响应",
+  "_chunk_pages": [
+    125,
+    128
+  ]
+}

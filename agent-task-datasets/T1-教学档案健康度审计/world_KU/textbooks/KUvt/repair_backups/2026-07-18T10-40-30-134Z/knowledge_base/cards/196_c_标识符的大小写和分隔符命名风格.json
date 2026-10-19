@@ -1,0 +1,46 @@
+{
+  "title": "C++标识符的大小写和分隔符命名风格",
+  "definition": "原文通过 priority_queue、PriorityQueue、my_queue 和 myQueue 等示例，对比了下划线命名与大小写分隔命名方式；还通过 Menu::Help、Button::HelpMenu 等名称展示了类型名、成员名或菜单项名称中的大小写形式。",
+  "key_points": [
+    "priority_queue 使用小写字母和下划线分隔单词。",
+    "PriorityQueue 使用首字母大写的单词连接形式。",
+    "my_queue 使用下划线分隔，myQueue 使用小驼峰形式。",
+    "Menu::Help 和 Button::HelpMenu 展示了作用域运算符 :: 连接类型或命名空间与成员名称。"
+  ],
+  "examples": [
+    "下划线形式：priority_queue、my_queue。",
+    "单词连接形式：PriorityQueue。",
+    "小驼峰形式：myQueue。",
+    "作用域限定形式：Menu::Help、Button::HelpMenu。"
+  ],
+  "misconceptions": [
+    "priority_queue、PriorityQueue、my_queue 和 myQueue 并不一定表示同一个实体；它们是不同的标识符。",
+    "大小写风格是命名约定，不会改变 C++ 标识符的语法含义。",
+    ":: 不是单词分隔符，而是作用域解析运算符。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "my_queue 和 myQueue 分别体现了什么命名风格？",
+      "a": "my_queue 使用下划线分隔单词，myQueue 使用小驼峰形式。"
+    },
+    {
+      "q": "Menu::Help 中的 :: 表示什么？",
+      "a": "它是作用域解析运算符，用于指定 Help 属于 Menu 这一作用域。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++标识符和作用域解析运算符"
+  ],
+  "source_pages": [
+    133,
+    136
+  ],
+  "needs_verification": true,
+  "verify_query": "《C++20高级编程》第5版 第134页 priority_queue PriorityQueue my_queue myQueue Menu::Help Button::HelpMenu 命名风格",
+  "concept_id": "196_c_标识符的大小写和分隔符命名风格",
+  "_chunk_pages": [
+    133,
+    136
+  ]
+}

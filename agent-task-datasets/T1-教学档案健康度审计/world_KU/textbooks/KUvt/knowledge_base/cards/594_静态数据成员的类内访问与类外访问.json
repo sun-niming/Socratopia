@@ -1,0 +1,43 @@
+{
+  "title": "静态数据成员的类内访问与类外访问",
+  "definition": "静态数据成员属于类，而不是某个对象实例；类的所有对象共享同一个静态数据成员。类的方法可以像访问普通成员一样访问它。若要在类的方法之外访问它，必须满足访问控制要求，并使用作用域解析运算符指定其属于哪个类，例如 Spreadsheet::ms_counter。",
+  "key_points": [
+    "静态数据成员仍然受 public、protected、private 访问控制限定符约束。",
+    "private 静态数据成员不能在类外直接访问；如果需要类外访问，应提供 public 的 get/set 方法，或者提供 static 的 get/set 方法。",
+    "类外引用可访问的静态数据成员时，应使用 ClassName::memberName 形式。"
+  ],
+  "examples": [
+    "类外访问 public 静态数据成员：`int c { Spreadsheet::ms_counter };`",
+    "如果 `ms_counter` 是 private，应通过类似 `Spreadsheet::getCounter()` 的 public 静态成员函数访问，而不能直接写 `Spreadsheet::ms_counter`。"
+  ],
+  "misconceptions": [
+    "静态数据成员并不因为是 static 就自动变成 public；它仍受所在访问区域控制。",
+    "静态数据成员不是每个对象各有一份，而是同一个类的对象共享一份。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "在类的方法之外访问可访问的静态数据成员，应使用什么语法？",
+      "a": "使用类名和作用域解析运算符，例如 `Spreadsheet::ms_counter`。"
+    },
+    {
+      "q": "private 静态数据成员能否在类外直接访问？",
+      "a": "不能。应通过类提供的 public 访问函数，例如 get/set 方法或 static get/set 方法访问。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++类的访问控制限定符",
+    "C++作用域解析运算符"
+  ],
+  "source_pages": [
+    285,
+    285
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "594_静态数据成员的类内访问与类外访问",
+  "_chunk_pages": [
+    285,
+    288
+  ]
+}

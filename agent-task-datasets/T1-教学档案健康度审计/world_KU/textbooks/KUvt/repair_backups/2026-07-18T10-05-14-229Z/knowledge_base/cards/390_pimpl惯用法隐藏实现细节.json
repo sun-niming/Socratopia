@@ -1,0 +1,47 @@
+{
+  "title": "Pimpl惯用法隐藏实现细节",
+  "definition": "Pimpl（Pointer to Implementation，指向实现的指针）惯用法把类的具体实现放入一个单独的实现类`Impl`中，公开类只保存指向该实现对象的指针。这样，公共接口与私有实现相分离；原文中的`Spreadsheet`在私有区域声明`class Impl;`，并通过`std::unique_ptr<Impl> m_impl;`保存实现对象。",
+  "key_points": [
+    "公开类`Spreadsheet`只在私有区域前置声明内部实现类：`class Impl;`。",
+    "真正的数据成员和具体操作放在`Spreadsheet::Impl`中，原文在模块实现文件中定义`class Spreadsheet::Impl { /* Omitted for brevity */ };`。",
+    "公开类通过`m_impl`把操作转发给实现对象，例如`setCellAt()`调用`m_impl->setCellAt(x, y, cell)`，`getCellAt()`调用`m_impl->getCellAt(x, y)`。",
+    "Pimpl的核心关系可以表示为：`Spreadsheet`（公开接口）$\rightarrow$ `std::unique_ptr<Impl>` $\rightarrow$ `Spreadsheet::Impl`（隐藏实现）。"
+  ],
+  "examples": [
+    "接口类中的典型声明：`private: class Impl; std::unique_ptr<Impl> m_impl;`",
+    "转发成员函数：`void Spreadsheet::setCellAt(size_t x, size_t y, const SpreadsheetCell& cell) { m_impl->setCellAt(x, y, cell); }`",
+    "返回实现对象结果：`SpreadsheetCell& Spreadsheet::getCellAt(size_t x, size_t y) { return m_impl->getCellAt(x, y); }`"
+  ],
+  "misconceptions": [
+    "误以为`class Impl;`已经定义了实现类；它只是前置声明，具体定义仍在实现部分。",
+    "误以为Pimpl会把所有功能都移除；公开类仍然提供完整的公共接口，只是把实现委托给`Impl`。",
+    "误以为用户必须直接访问`Impl`；Pimpl的目的正是让用户通常只接触公开的`Spreadsheet`类。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "Pimpl惯用法在原文的`Spreadsheet`类中如何实现？",
+      "a": "在私有区域前置声明`class Impl;`，并保存`std::unique_ptr<Impl> m_impl;`；具体实现放在`Spreadsheet::Impl`中。"
+    },
+    {
+      "q": "`Spreadsheet::setCellAt()`如何把操作交给隐藏实现？",
+      "a": "它调用`m_impl->setCellAt(x, y, cell)`。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++类的访问控制",
+    "C++智能指针"
+  ],
+  "source_pages": [
+    298,
+    299,
+    300
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "390_pimpl惯用法隐藏实现细节",
+  "_chunk_pages": [
+    297,
+    300
+  ]
+}

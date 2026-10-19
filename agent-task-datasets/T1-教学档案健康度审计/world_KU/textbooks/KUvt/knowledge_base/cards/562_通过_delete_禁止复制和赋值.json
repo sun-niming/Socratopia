@@ -1,0 +1,51 @@
+{
+  "title": "通过 delete 禁止复制和赋值",
+  "definition": "如果一个动态分配内存的类不允许对象被复制或赋值，可以在类定义中将拷贝构造函数和拷贝赋值运算符显式声明为 delete。这样，编译器会拒绝调用这些操作；相关的删除函数不需要提供实现，因为合法代码不会调用它们，链接器也不会查看其实现。",
+  "key_points": [
+    "使用 `Spreadsheet(const Spreadsheet& src) = delete;` 禁止拷贝构造。",
+    "使用 `Spreadsheet& operator=(const Spreadsheet& rhs) = delete;` 禁止拷贝赋值。",
+    "禁止拷贝构造会影响对象复制、按值传递以及按值返回等需要复制对象的场景。",
+    "禁止赋值会使对 Spreadsheet 对象进行赋值的代码在编译阶段报错。",
+    "`= delete` 是编译期接口约束，不是运行时错误处理。"
+  ],
+  "examples": [
+    "类定义的核心形式为：\n```cpp\nclass Spreadsheet {\npublic:\n    Spreadsheet(const Spreadsheet& src) = delete;\n    Spreadsheet& operator=(const Spreadsheet& rhs) = delete;\n};\n```",
+    "以下类别的操作会被编译器拒绝：按值复制 Spreadsheet、将 Spreadsheet 按值传递给函数、从函数按值返回 Spreadsheet，或将一个 Spreadsheet 赋给另一个 Spreadsheet。"
+  ],
+  "misconceptions": [
+    "将函数声明为 delete 不是仅仅隐藏函数；任何匹配调用都会在编译阶段报错。",
+    "删除拷贝构造函数与删除赋值运算符是两个独立的限制，通常需要分别声明。",
+    "删除函数不需要提供函数体，也不会等到链接阶段才发现错误。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何禁止 Spreadsheet 对象被复制？",
+      "a": "将拷贝构造函数显式声明为 delete，例如 `Spreadsheet(const Spreadsheet& src) = delete;`。"
+    },
+    {
+      "q": "如何禁止 Spreadsheet 对象之间的赋值？",
+      "a": "将拷贝赋值运算符显式声明为 delete，例如 `Spreadsheet& operator=(const Spreadsheet& rhs) = delete;`。"
+    },
+    {
+      "q": "为什么删除函数不需要实现？",
+      "a": "因为编译器会阻止合法代码调用它们，因此链接器不会查看这些函数的实现。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "拷贝构造函数",
+    "赋值运算符",
+    "类成员函数声明"
+  ],
+  "source_pages": [
+    267,
+    268
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "562_通过_delete_禁止复制和赋值",
+  "_chunk_pages": [
+    265,
+    268
+  ]
+}

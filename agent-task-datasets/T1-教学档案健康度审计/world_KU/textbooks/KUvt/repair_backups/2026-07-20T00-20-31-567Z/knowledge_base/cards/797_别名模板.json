@@ -1,0 +1,45 @@
+{
+  "title": "别名模板",
+  "definition": "别名模板是使用using为模板实例化结果创建别名，并保留一个或多个模板参数的机制。它可以把固定的模板参数预先指定，同时让其他参数继续由使用者提供。别名模板不能用typedef完成。",
+  "key_points": [
+    "完整类型别名可以为某个确定的模板实例化指定新名称。",
+    "别名模板的形式为：template <typename T> using Alias = SomeTemplate<T, FixedType>;",
+    "使用别名模板时，仍需为保留下来的模板参数提供类型。",
+    "using和typedef都可以定义普通类型别名，但只有using可以方便地定义别名模板。"
+  ],
+  "examples": [
+    "给确定的模板实例化取别名：using OtherName = MyTemplateClass<int, double>;",
+    "定义别名模板：template <typename T> using OtherName = MyTemplateClass<T, double>;",
+    "使用时：OtherName<float> object; 等价于MyTemplateClass<float, double> object;"
+  ],
+  "misconceptions": [
+    "using OtherName = MyTemplateClass<int, double>是普通类型别名，不是仍可接收模板参数的别名模板。",
+    "typedef不能完成原文所示的别名模板定义。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "什么是别名模板？",
+      "a": "别名模板是使用using定义的、保留部分模板参数的类型别名，例如template <typename T> using OtherName = MyTemplateClass<T, double>;。"
+    },
+    {
+      "q": "为什么下面的写法是别名模板而不是普通类型别名：template <typename T> using OtherName = MyTemplateClass<T, double>;？",
+      "a": "因为它保留了模板参数T，使用OtherName时还可以指定T；它等价于MyTemplateClass<T, double>。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "类模板",
+    "using类型别名"
+  ],
+  "source_pages": [
+    393,
+    394
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "797_别名模板",
+  "_chunk_pages": [
+    393,
+    396
+  ]
+}

@@ -1,0 +1,50 @@
+{
+  "title": "ratio 会标准化并支持编译期算术与比较",
+  "definition": "`std::ratio` 表示的有理数会自动标准化。对于原始有理数 $\\frac{n}{d}$，先计算 $gcd=\\gcd(|n|,|d|)$，标准化后的分子和分母为：$$\\mathrm{num}=\\mathrm{sign}(n)\\times\\mathrm{sign}(d)\\times\\frac{|n|}{gcd}$$ $$\\mathrm{den}=\\frac{|d|}{gcd}$$教材还介绍了在编译期进行有理数加、减、乘、除和比较的专用模板。",
+  "key_points": [
+    "标准化会约去分子和分母的最大公约数。",
+    "`ratio_add`、`ratio_subtract`、`ratio_multiply` 和 `ratio_divide` 分别用于编译期加、减、乘、除。",
+    "算术模板产生新的 ratio 类型，通过内嵌类型别名 `type` 访问结果。",
+    "比较模板包括 `ratio_equal`、`ratio_not_equal`、`ratio_less`、`ratio_less_equal`、`ratio_greater` 和 `ratio_greater_equal`。",
+    "比较结果是 `std::bool_constant<true>` 或 `std::bool_constant<false>`，其布尔值通过 `value` 成员访问。"
+  ],
+  "examples": [
+    "编译期相加：`using r1 = std::ratio<1, 60>; using r2 = std::ratio<1, 30>; using result = std::ratio_add<r1, r2>::type;`，结果表示 $\\frac{1}{20}$。",
+    "编译期比较：`using res = std::ratio_less<r2, r1>;`，然后用 `res::value` 获取比较结果。由于 $\\frac{1}{30}<\\frac{1}{60}$ 不成立，`res::value` 为 `false`。",
+    "结果的分子和分母可用 `result::num` 与 `result::den` 获取。"
+  ],
+  "misconceptions": [
+    "ratio 的算术不能按普通运行时对象那样直接使用标准算术运算符；教材要求使用专用 ratio 模板。",
+    "比较模板的结果不是普通运行时 `bool` 变量，而是保存编译期布尔值的类型，其值通过 `value` 访问。",
+    "标准化后结果可能与输入的分子、分母不同，例如 $\\frac{1}{60}+\\frac{1}{30}$ 的结果是化简后的 $\\frac{1}{20}$。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`std::ratio_add<r1, r2>` 的结果如何访问？",
+      "a": "通过其内嵌类型别名 `type`，例如 `using result = std::ratio_add<r1, r2>::type;`。"
+    },
+    {
+      "q": "如何获取 ratio 比较模板的结果？",
+      "a": "先得到比较结果类型，再访问其 `value` 数据成员，例如 `using res = std::ratio_less<r2, r1>;`，使用 `res::value`。"
+    },
+    {
+      "q": "`std::ratio<1, 60>` 与 `std::ratio<1, 30>` 相加的结果是什么？",
+      "a": "结果是表示 $\\frac{1}{20}$ 的 ratio 类型。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "std::ratio 表示编译期有理数"
+  ],
+  "source_pages": [
+    683,
+    684
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1426_ratio_会标准化并支持编译期算术与比较",
+  "_chunk_pages": [
+    681,
+    684
+  ]
+}

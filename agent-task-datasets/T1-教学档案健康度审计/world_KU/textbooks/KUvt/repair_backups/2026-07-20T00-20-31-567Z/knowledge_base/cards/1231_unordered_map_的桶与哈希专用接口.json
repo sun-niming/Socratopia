@@ -1,0 +1,44 @@
+{
+  "title": "unordered_map 的桶与哈希专用接口",
+  "definition": "unordered_map 是基于哈希表的关联容器。除了一般的键值操作外，还提供用于观察和遍历哈希桶的接口：load_factor() 返回每个桶的平均元素数，用于反映冲突程度；bucket_count() 返回桶的数量；bucket(key) 返回指定键所在的桶索引；bucket_size(n) 返回第 n 个桶中的元素数量；local_iterator 和 const_local_iterator 用于遍历单个桶中的元素。",
+  "key_points": [
+    "unordered_map 中的所有键都应当唯一。",
+    "local_iterator 和 const_local_iterator 只能遍历一个指定桶，不能直接遍历多个桶。",
+    "cbegin(n) 或 begin(n) 返回第 n 个桶的起始局部迭代器；cend(n) 或 end(n) 返回该桶最后一个元素之后的位置。",
+    "load_factor() 表示平均每桶元素数，桶中冲突越多通常会影响这一指标。"
+  ],
+  "examples": [
+    "使用指定键定位桶并遍历该桶：\n```text\nconst size_t bucket = phoneBook.bucket(\"Marc G.\");\nauto localBegin = phoneBook.cbegin(bucket);\nauto localEnd = phoneBook.cend(bucket);\nfor (auto iter = localBegin; iter != localEnd; ++iter) {\n    // iter->first 是键，iter->second 是值\n}\n```",
+    "输出桶统计信息：\n```text\nphoneBook.bucket_count();\nphoneBook.load_factor();\n```"
+  ],
+  "misconceptions": [
+    "local_iterator 不是用于遍历整个 unordered_map 的普通迭代器，而是用于遍历单个桶。",
+    "load_factor() 不是某个元素所在桶的元素数量，而是整个容器的平均每桶元素数。",
+    "unordered_map 的元素输出顺序不应被视为固定顺序。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "unordered_map::bucket(key) 和 bucket_count() 分别返回什么？",
+      "a": "bucket(key) 返回指定键所在的桶索引；bucket_count() 返回容器中桶的总数。"
+    },
+    {
+      "q": "local_iterator 的用途是什么？",
+      "a": "local_iterator 用于遍历指定哈希桶中的元素，不能用来直接遍历多个桶。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "哈希表和迭代器的基本概念"
+  ],
+  "source_pages": [
+    597,
+    597
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1231_unordered_map_的桶与哈希专用接口",
+  "_chunk_pages": [
+    597,
+    600
+  ]
+}

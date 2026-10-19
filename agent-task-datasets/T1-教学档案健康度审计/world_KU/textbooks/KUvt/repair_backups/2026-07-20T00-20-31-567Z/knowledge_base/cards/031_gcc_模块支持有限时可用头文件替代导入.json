@@ -1,0 +1,44 @@
+{
+  "title": "GCC 模块支持有限时可用头文件替代导入",
+  "definition": "原文说明，在其所述时期，GCC 对 C++ 模块只有实验性支持，并且标准库头文件的导入声明（例如 `import <iostream>;`）支持不完善。遇到这种情况，可以将标准库头文件的 `import` 声明替换为对应的 `#include` 指令，以便编译示例代码。",
+  "key_points": [
+    "当时 GCC 的模块支持属于实验性支持。",
+    "标准库头文件的导入声明可能无法正常工作。",
+    "替代方式是把 `import <头文件>;` 改为 `#include <头文件>`。",
+    "这种替换适用于原文所述标准库头文件导入不受支持的情况。"
+  ],
+  "examples": [
+    "将：`import <iostream>;` 替换为：`#include <iostream>`。",
+    "AirlineTicket 示例使用模块时，可以将其中的标准库头文件导入替换为相应的 `#include` 指令。"
+  ],
+  "misconceptions": [
+    "使用 `#include` 替代标准库头文件的 `import` 是原文针对兼容性问题给出的临时办法，不表示二者在语言机制上完全相同。",
+    "GCC 能够编译普通 C++20 代码，不代表它同时完整支持 C++ 模块。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "GCC 无法良好支持 `import <iostream>;` 时，原文建议如何修改？",
+      "a": "将该导入声明替换为对应的 `#include <iostream>` 指令。"
+    },
+    {
+      "q": "为什么需要用 `#include` 替代标准库头文件的 `import`？",
+      "a": "因为原文所述时期 GCC 的模块支持是实验性的，对标准库头文件导入声明的支持还不完善。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++ 预处理器 `#include` 的基本概念",
+    "C++ 模块的基本概念"
+  ],
+  "source_pages": [
+    18,
+    18
+  ],
+  "needs_verification": true,
+  "verify_query": "GCC experimental C++ modules standard library header import iostream include workaround historical",
+  "concept_id": "031_gcc_模块支持有限时可用头文件替代导入",
+  "_chunk_pages": [
+    17,
+    20
+  ]
+}

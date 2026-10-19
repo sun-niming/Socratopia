@@ -1,0 +1,49 @@
+{
+  "title": "AAA与IF-WHEN-THEN测试结构",
+  "definition": "单元测试可以按照 AAA 原则组织为三个阶段：Arrange（安排）用于准备测试所需对象和数据，Act（行动）用于执行被测试的操作，Assert（断言）用于验证预期结果。教材还将其称为 IF-WHEN-THEN 结构：IF 表示测试前提，WHEN 表示执行动作，THEN 表示预期结果。",
+  "key_points": [
+    "Arrange/IF 阶段设置测试环境，例如创建对象池。",
+    "Act/WHEN 阶段调用被测试功能，例如从对象池获取对象。",
+    "Assert/THEN 阶段检查结果是否符合预期。",
+    "在测试代码中用以 `IF`、`WHEN`、`THEN` 开头的注释标出三个阶段，有助于阅读和维护。",
+    "创建 ObjectPool 的初始完整性测试可以只断言创建过程没有抛出异常。"
+  ],
+  "examples": [
+    "`// IF nothing`；`// WHEN creating an ObjectPool`；`ObjectPool<Serial> myPool;`；`// THEN no exception is thrown`。",
+    "结构化表示为：$$\\text{Arrange} \\rightarrow \\text{Act} \\rightarrow \\text{Assert}$$"
+  ],
+  "misconceptions": [
+    "AAA 不是三个必须调用的库函数，而是组织测试代码的设计原则。",
+    "Assert 阶段不能替代 Act 阶段；必须先执行被测操作，再验证结果。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "AAA 原则的三个阶段分别是什么？",
+      "a": "Arrange（安排）、Act（行动）、Assert（断言）。"
+    },
+    {
+      "q": "在 ObjectPool 创建测试中，Act 阶段是什么？",
+      "a": "执行 `ObjectPool<Serial> myPool;`，即创建对象池。"
+    },
+    {
+      "q": "IF-WHEN-THEN 与 AAA 的对应关系是什么？",
+      "a": "IF 对应 Arrange，WHEN 对应 Act，THEN 对应 Assert。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "单元测试基本结构",
+    "异常测试基本概念"
+  ],
+  "source_pages": [
+    887,
+    887
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1835_aaa与if_when_then测试结构",
+  "_chunk_pages": [
+    885,
+    888
+  ]
+}

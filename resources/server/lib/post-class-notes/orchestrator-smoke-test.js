@@ -333,7 +333,7 @@ async function happyShort() {
 
   var onDisk = await run.harness.store.readFinal(run.scope.conversationId);
   assert.strictEqual(onDisk.sections.length, run.view.summary.sections.length, "the note is on disk");
-  assert.strictEqual(onDisk.generationMeta.pipelineVersion, "post-class-v2");
+  assert.strictEqual(onDisk.generationMeta.pipelineVersion, "post-class-v3");
   assert.strictEqual(schema.validateSummary(onDisk).ok, true, "the persisted note renders");
 }
 
@@ -1000,8 +1000,22 @@ async function aFailingCleanupDoesNotBreakTheJob() {
   assert.strictEqual((await h.orchestrator.status({ conversationId: scope.conversationId, jobId: start.jobId })).status, "ready");
 }
 
+async function reemittersGetMoreRoomThanTheDirectPass() {
+  var limits = orchestration.DEFAULT_LIMITS;
+  // A merge and a repair both rewrite a complete note; at 4096 they ran out of
+  // room and the job degraded to the skeleton, so both must out-budget a
+  // from-scratch direct write.
+  assert.ok(limits.reduceMaxTokens > limits.directMaxTokens,
+    "reduce must out-budget direct (" + limits.reduceMaxTokens + " vs " + limits.directMaxTokens + ")");
+  assert.ok(limits.repairMaxTokens > limits.directMaxTokens,
+    "repair must out-budget direct (" + limits.repairMaxTokens + " vs " + limits.directMaxTokens + ")");
+  assert.ok(limits.tokenScaleOnShorten > 0.7 && limits.tokenScaleOnShorten <= 1,
+    "the shortened retry keeps most of the budget, got " + limits.tokenScaleOnShorten);
+}
+
 async function main() {
   console.log("orchestrator smoke:");
+  await scenario("re-emitters get more output room than the direct pass", reemittersGetMoreRoomThanTheDirectPass);
   await scenario("a short lesson takes one call and ends ready", happyShort);
   await scenario("a long lesson maps each slice then merges once", happyLong);
   await scenario("traces carry counters, never classroom text", traceHygiene);

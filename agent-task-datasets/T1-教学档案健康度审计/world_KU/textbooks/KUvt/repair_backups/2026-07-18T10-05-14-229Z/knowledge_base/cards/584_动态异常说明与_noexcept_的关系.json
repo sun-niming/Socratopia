@@ -1,0 +1,42 @@
+{
+  "title": "动态异常说明与 noexcept 的关系",
+  "definition": "C++ 的旧式动态异常说明使用 throw(...) 形式列出函数可能抛出的异常类型；现代 C++ 使用 noexcept 表示函数是否允许异常逃逸。教材指出，C++17 以后应使用 noexcept，而不是旧式 throw 异常说明。",
+  "key_points": [
+    "noexcept 是现代 C++ 的异常说明机制。",
+    "旧式动态异常说明与 noexcept 的语义和语法不同，不能简单视为同一个关键字。",
+    "阅读或维护旧代码时，遇到 throw(...) 异常说明，应结合代码所使用的 C++ 标准版本判断其含义和可用性。"
+  ],
+  "examples": [
+    "现代写法：\nvoid f() noexcept;",
+    "条件式现代写法：\nvoid f() noexcept(condition);"
+  ],
+  "misconceptions": [
+    "throw(...) 异常说明不是用来主动抛出异常的 throw 表达式。",
+    "noexcept 不用于列出异常类型；它主要表达函数是否保证不让异常逃逸。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "现代 C++ 中通常用什么替代旧式动态异常说明？",
+      "a": "使用 noexcept。"
+    },
+    {
+      "q": "throw 异常说明和函数体中的 throw 表达式是否相同？",
+      "a": "不同；throw 异常说明用于描述异常规范，函数体中的 throw 表达式用于实际抛出异常。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "noexcept函数说明符"
+  ],
+  "source_pages": [
+    445,
+    448
+  ],
+  "needs_verification": true,
+  "verify_query": "C++17 C++20 dynamic exception specification throw(...) removed noexcept standard",
+  "concept_id": "584_动态异常说明与_noexcept_的关系",
+  "_chunk_pages": [
+    445,
+    448
+  ]
+}

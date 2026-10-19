@@ -1,0 +1,45 @@
+{
+  "title": "原子变量的 wait、notify_one 和 notify_all",
+  "definition": "C++20 为 std::atomic 和 std::atomic_ref 提供了用于等待原子变量变化的方法。wait(oldValue) 会阻塞线程，直到其他线程调用 notify_one() 或 notify_all() 且原子变量的值已经发生变化，即不再等于 oldValue。notify_one() 唤醒一个阻塞在 wait() 上的线程，notify_all() 唤醒所有阻塞在 wait() 上的线程。",
+  "key_points": [
+    "wait(oldValue) 使用调用时提供的旧值作为等待条件。",
+    "只有原子变量值发生变化并收到相应通知后，等待线程才会被唤醒并继续执行。",
+    "notify_one() 只唤醒一个等待线程。",
+    "notify_all() 唤醒所有等待线程。",
+    "这些方法用于高效等待原子变量变化，避免单纯反复轮询。"
+  ],
+  "examples": [
+    "代码结构：\nstd::atomic<int> value { 0 };\nstd::thread job { [&value] {\n    std::cout << \"Thread starts waiting.\" << std::endl;\n    value.wait(0);\n    std::cout << \"Thread wakes up, value = \" << value << std::endl;\n} };\n其他线程应在修改 value 后调用 value.notify_one() 或 value.notify_all()。"
+  ],
+  "misconceptions": [
+    "notify_one() 不会唤醒所有等待线程；唤醒所有线程应使用 notify_all()。",
+    "wait(0) 不是永久等待，它等待的是原子值不再等于 0 并收到通知。",
+    "这些方法是原子变量的方法，不是普通 int 的成员函数。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "atomic<int> value{0}; value.wait(0) 的含义是什么？",
+      "a": "阻塞当前线程，直到其他线程通知并且 value 的值已经改变为不等于 0。"
+    },
+    {
+      "q": "notify_one() 与 notify_all() 有什么区别？",
+      "a": "notify_one() 唤醒一个阻塞在 wait() 上的线程；notify_all() 唤醒所有阻塞在 wait() 上的线程。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "原子类型",
+    "线程阻塞与唤醒"
+  ],
+  "source_pages": [
+    804,
+    804
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 std::atomic wait old value notify_one notify_all semantics",
+  "concept_id": "1651_原子变量的_wait_notify_one_和_notify_all",
+  "_chunk_pages": [
+    801,
+    804
+  ]
+}

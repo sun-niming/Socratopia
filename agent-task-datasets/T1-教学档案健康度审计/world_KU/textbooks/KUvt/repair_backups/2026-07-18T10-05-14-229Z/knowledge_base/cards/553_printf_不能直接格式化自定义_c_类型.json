@@ -1,0 +1,45 @@
+{
+  "title": "printf 不能直接格式化自定义 C++ 类型",
+  "definition": "C 风格的 printf 根据格式字符串中的格式说明符读取对应的基本类型参数，并不理解自定义 C++ 类的结构。直接使用类似 printf(\"Muffin: %m\\n\", myMuffin) 的方式输出 Muffin 对象是错误的，因为 printf 不知道如何解释 Muffin 类型及其成员。",
+  "key_points": [
+    "printf 的格式字符串必须与传入参数的类型和格式说明符匹配。",
+    "自定义类型 Muffin 不能直接作为普通格式参数交给 printf 进行结构化输出。",
+    "原文将 printf(\"Muffin: %m\\n\", myMuffin) 标记为 BUG，并说明 printf 不理解 Muffin。",
+    "要输出自定义类型，应由该类型提供专门的输出成员函数，或先提取其成员数据，再使用与基本类型匹配的 printf 格式说明符。"
+  ],
+  "examples": [
+    "错误示意：\n```cpp\nprintf(\"Muffin: %m\\n\", myMuffin); // BUG：printf 不理解 Muffin\n```",
+    "Muffin 类可提供 const 成员函数 output()，在函数内部提取成员信息并调用：\n```cpp\nvoid Muffin::output() const {\n    printf(\"%s. Size is %d, %s\\n\",\n           getDescription().data(),\n           getSize(),\n           hasChocolateChips() ? \"has chips\" : \"no chips\");\n}\nmyMuffin.output();\nprintf(\" -- yummy!\\n\");\n```"
+  ],
+  "misconceptions": [
+    "printf 不会自动调用自定义类的输出函数，也不会自动检查类中有哪些成员。",
+    "不能因为对象可以通过 cout 输出，就认为它可以直接作为 printf 的格式参数。",
+    "格式字符串中的说明符必须与实际参数类型匹配；错误匹配可能导致未定义行为或错误输出。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么不能直接用 printf 输出 Muffin 对象？",
+      "a": "因为 printf 只按格式字符串处理其支持的参数类型，不理解 Muffin 自定义类型的成员结构。"
+    },
+    {
+      "q": "原文采用什么方式输出 Muffin？",
+      "a": "在 Muffin 中定义 const 成员函数 output()，由它提取描述、尺寸和是否含巧克力片等信息，并用 printf 输出基本类型和字符串。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++类与成员函数",
+    "printf 基本用法"
+  ],
+  "source_pages": [
+    423,
+    424
+  ],
+  "needs_verification": true,
+  "verify_query": "C++ printf custom class object format specifier does not understand user-defined type Muffin output member function",
+  "concept_id": "553_printf_不能直接格式化自定义_c_类型",
+  "_chunk_pages": [
+    421,
+    424
+  ]
+}

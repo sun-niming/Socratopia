@@ -1,0 +1,42 @@
+{
+  "title": "动物类层次结构示例",
+  "definition": "原文用一个名为 Animal 的类型层次结构示例展示动物及其分类。图中可见 Animal 与 Monkey、Giraffe、Marsupial、BigCat、WaterAnimal 等类型相关，并进一步出现 Panther、Lion、Penguin、Koala、Kangaroo 等具体类型；图中还列出 Mover、Eater、Walker、Swimmer、Carnivore、FishEater、BigAnimal、SmallAnimal 和 Jumper 等行为或分类名称。该示例同时标注了 C++、C# 和 Java。",
+  "key_points": [
+    "层次结构的根类型显示为 Animal。",
+    "图中同时出现动物类别名称和行为/能力名称，例如 Mover、Eater、Walker、Swimmer、Jumper。",
+    "原文页面将该示例与 C++、C#、Java 并列展示。"
+  ],
+  "examples": [
+    "可按图中名称抽象出如下类型关系示意：$$Animal\\rightarrow\\{Monkey,Giraffe,Marsupial,BigCat,WaterAnimal\\}$$",
+    "图中还出现能力或特征名称：$$\\{Mover,Eater,Walker,Swimmer,Carnivore,FishEater,BigAnimal,SmallAnimal,Jumper\\}$$"
+  ],
+  "misconceptions": [
+    "不要把图中所有名称都理解为同一层级的具体动物；原文同时列出了动物类别、具体动物以及行为或能力名称。",
+    "仅凭该页片段不能确定每一条继承边或组合边的精确方向。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "该示例中的根类型名称是什么？",
+      "a": "根类型名称是 Animal。"
+    },
+    {
+      "q": "图中列举了哪些行为或能力名称？",
+      "a": "可见的名称包括 Mover、Eater、Walker、Swimmer、Carnivore、FishEater、BigAnimal、SmallAnimal 和 Jumper。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "面向对象类型与继承层次的基本概念"
+  ],
+  "source_pages": [
+    177,
+    180
+  ],
+  "needs_verification": true,
+  "verify_query": "《C++20高级编程》第5版 第177页 Animal Monkey Giraffe Marsupial BigCat WaterAnimal Mover Eater Walker Swimmer Carnivore FishEater Jumper 图",
+  "concept_id": "245_动物类层次结构示例",
+  "_chunk_pages": [
+    177,
+    180
+  ]
+}

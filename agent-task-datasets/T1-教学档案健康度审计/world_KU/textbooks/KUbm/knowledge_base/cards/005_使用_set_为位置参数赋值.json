@@ -1,0 +1,40 @@
+{
+  "title": "使用 set 为位置参数赋值",
+  "definition": "可以使用 set 命令为位置参数赋值，原文给出的形式为“set 参数值列表”。这表示通过 set 后跟一组参数值，可以为位置参数建立对应内容。",
+  "key_points": [
+    "set 可用于为位置参数赋值",
+    "命令形式：set 参数值列表",
+    "赋值对象是位置参数"
+  ],
+  "examples": [
+    "set 参数值列表"
+  ],
+  "misconceptions": [
+    "误以为位置参数只能在执行脚本时由命令行传入，原文说明也可以通过 set 赋值"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何为位置参数赋值？",
+      "a": "使用 set 参数值列表。"
+    },
+    {
+      "q": "set 在这里的作用是什么？",
+      "a": "用于为位置参数赋值。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "位置参数及其引用"
+  ],
+  "source_pages": [
+    69,
+    69
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "005_使用_set_为位置参数赋值",
+  "_chunk_pages": [
+    66,
+    69
+  ]
+}

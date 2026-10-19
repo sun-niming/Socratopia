@@ -1,0 +1,42 @@
+{
+  "title": "递归委托构造函数的风险",
+  "definition": "如果一个构造函数委托给第二个构造函数，而第二个构造函数又委托回第一个构造函数，就形成构造函数递归委托。原文指出，这种代码不应使用，因为构造过程会在构造函数之间循环。",
+  "key_points": [
+    "示例中 MyClass(char) 委托给 MyClass(double)，MyClass(double) 又委托给 MyClass(char)。",
+    "编写委托构造函数时，应确保委托关系最终能够到达不再委托的目标构造函数。",
+    "原文关于此类代码由C++标准如何规定的表述可能需要依据标准进一步核实。"
+  ],
+  "examples": [
+    "递归委托示例：MyClass(char c) : MyClass{1.2} {}；MyClass(double d) : MyClass{'m'} {}。两个构造函数互相委托，形成循环。"
+  ],
+  "misconceptions": [
+    "委托构造函数不能任意互相调用；互相委托会形成递归构造过程。",
+    "只要构造函数参数类型不同，就不代表委托关系一定安全；仍需检查委托链是否形成循环。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "什么是递归委托构造函数？",
+      "a": "一个构造函数委托给另一个构造函数，而后者又直接或间接委托回前者，从而形成循环。"
+    },
+    {
+      "q": "使用委托构造函数时应如何避免递归？",
+      "a": "应确保委托链最终到达一个不再委托其他构造函数的目标构造函数。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "委托构造函数",
+    "构造函数重载"
+  ],
+  "source_pages": [
+    248,
+    248
+  ],
+  "needs_verification": true,
+  "verify_query": "C++标准 recursive delegating constructors mutually delegating constructors ill-formed behavior",
+  "concept_id": "525_递归委托构造函数的风险",
+  "_chunk_pages": [
+    245,
+    248
+  ]
+}

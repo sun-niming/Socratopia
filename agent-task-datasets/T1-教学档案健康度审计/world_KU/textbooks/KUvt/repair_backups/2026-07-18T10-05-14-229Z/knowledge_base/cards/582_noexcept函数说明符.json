@@ -1,0 +1,43 @@
+{
+  "title": "noexcept函数说明符",
+  "definition": "noexcept 是函数声明或定义中的说明符，用来表示该函数不应抛出异常。例如：\nvoid printValues(const std::vector<int>& values) noexcept;\n如果 noexcept 函数在运行时让异常逃逸，程序将调用 std::terminate()。",
+  "key_points": [
+    "noexcept 可以写在函数参数列表之后，例如 void f() noexcept。",
+    "noexcept 表示函数的异常保证，而不是 catch 语句，也不会自动处理异常。",
+    "若 noexcept 函数中抛出的异常没有在函数内部处理，异常不能继续向调用者传播，程序会终止。"
+  ],
+  "examples": [
+    "void printValues(const std::vector<int>& values) noexcept;",
+    "void f() noexcept {\n    // 函数声明为不抛出异常\n}"
+  ],
+  "misconceptions": [
+    "noexcept 不表示函数体内绝对不能出现 throw；如果异常在函数内部被捕获，可以不导致终止。",
+    "noexcept 不是返回值类型，也不是异常对象类型。",
+    "把函数声明为 noexcept 不会把异常转换成返回值。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "noexcept 的基本作用是什么？",
+      "a": "它声明函数不应让异常逃逸；若异常从 noexcept 函数中逃逸，程序会调用 std::terminate()。"
+    },
+    {
+      "q": "下列声明表示什么：void printValues(const std::vector<int>& values) noexcept;？",
+      "a": "它声明 printValues 接受一个 const vector<int> 引用参数，并保证不让异常从函数中逃逸。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++异常的抛出与捕获"
+  ],
+  "source_pages": [
+    446,
+    447
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "582_noexcept函数说明符",
+  "_chunk_pages": [
+    445,
+    448
+  ]
+}

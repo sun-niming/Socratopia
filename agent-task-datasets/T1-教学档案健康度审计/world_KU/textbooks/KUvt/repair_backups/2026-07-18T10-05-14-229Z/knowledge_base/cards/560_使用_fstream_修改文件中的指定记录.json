@@ -1,0 +1,48 @@
+{
+  "title": "使用 fstream 修改文件中的指定记录",
+  "definition": "std::fstream 可以同时进行文件读取和写入。原文示例定义函数 `changeNumberForID`，打开包含 ID 和电话号码的文件，逐条读取记录；当读到目标 ID 时，利用当前读取位置确定写入位置，然后把电话号码改写为新的号码。",
+  "key_points": [
+    "`fstream` 用于同一个文件的读写，示例通过 `fstream ioData{filename.data()}` 打开文件。",
+    "打开失败时应检查流状态；原文示例输出错误信息并返回 `false`。",
+    "循环读取每条记录：先读取整数 ID；如果读取失败，则退出循环。",
+    "找到目标 ID 后，需要利用 `tellg()` 获取当前位置，并用 `seekp()` 设置写入位置，再输出空格和新的电话号码。",
+    "读取当前电话号码可以推进读取流位置，使读写位置与记录结构相匹配；原文示例随后返回 `true`。"
+  ],
+  "examples": [
+    "文件记录示例：`ID` 与电话号码组成多条记录，例如 `123 408-555-0394`。",
+    "函数结构可概括为：`bool changeNumberForID(string_view filename, int id, string_view newNumber)`。",
+    "相关定位操作的形式为：`ioData.seekp(ioData.tellg());`，随后写入类似 `ioData << \" \" << newNumber;` 的新号码。"
+  ],
+  "misconceptions": [
+    "`tellg()` 和 `seekp()` 不是同一个概念：前者获取输入位置，后者设置输出位置。",
+    "不能只检查文件是否成功打开而不检查每次读取是否成功；原文在读取 ID 后检查流状态，失败时退出循环。",
+    "找到目标 ID 后不是简单追加新号码，而是定位到记录中的写入位置进行修改。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "原文示例中为什么同时使用 `tellg()` 和 `seekp()`？",
+      "a": "`tellg()` 用于获取当前读取位置，`seekp()` 用于把写入位置设置到该位置，从而在文件中改写目标记录。"
+    },
+    {
+      "q": "打开待修改文件失败时，函数应如何处理？",
+      "a": "输出错误信息并返回 `false`。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "C++ 文件流",
+    "流状态检查",
+    "文件读写位置"
+  ],
+  "source_pages": [
+    429,
+    432
+  ],
+  "needs_verification": true,
+  "verify_query": "Marc Gregoire C++20 Advanced Programming changeNumberForID fstream tellg seekp example",
+  "concept_id": "560_使用_fstream_修改文件中的指定记录",
+  "_chunk_pages": [
+    429,
+    432
+  ]
+}

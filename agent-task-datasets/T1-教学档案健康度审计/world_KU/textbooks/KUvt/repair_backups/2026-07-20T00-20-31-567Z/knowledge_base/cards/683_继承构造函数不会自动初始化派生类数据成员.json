@@ -1,0 +1,52 @@
+{
+  "title": "继承构造函数不会自动初始化派生类数据成员",
+  "definition": "当Derived通过using Base::Base;继承Base的构造函数时，继承的构造函数只负责初始化Base子对象及其成员；Derived新增的数据成员不会被该继承构造函数通过参数自动初始化。如果新增成员没有类内初始化器或其他有效初始化方式，可能处于未初始化状态。",
+  "key_points": [
+    "显式定义的Derived(int i)可以在构造函数初始化器中调用Base构造函数，并初始化Derived自己的m_int成员。",
+    "调用继承的Base构造函数时，Base::m_str等基类成员会被初始化，但Derived::m_int不会因Base构造函数的参数而自动获得值。",
+    "推荐为派生类数据成员提供类内成员初始化器，例如int m_int{0};。",
+    "派生类自己的构造函数仍可覆盖类内成员初始化器，例如Derived(int i) : Base{}, m_int{i} {}。"
+  ],
+  "examples": [
+    "class Base { public: Base(std::string_view str) : m_str{str} {} private: std::string m_str; }; class Derived : public Base { public: using Base::Base; Derived(int i) : Base{\"\"}, m_int{i} {} private: int m_int{0}; };",
+    "Derived d1{1}; // 调用Derived(int)，m_int初始化为1，Base的m_str初始化为空字符串",
+    "Derived d2{\"Hello\"}; // 调用继承的Base(std::string_view)形式；Base的m_str初始化为\"Hello\"，而Derived的m_int使用类内初始化器初始化为0",
+    "如果Derived的m_int没有类内初始化器，调用继承的Base构造函数时，m_int可能保持未初始化状态。"
+  ],
+  "misconceptions": [
+    "继承Base构造函数并不会把Base构造函数的参数自动传给Derived新增成员。",
+    "基类成员初始化正确，不代表派生类新增成员也已经初始化。",
+    "类内成员初始化器提供默认初始化值，但派生类显式构造函数仍可在初始化列表中为该成员指定其他值。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "调用继承的Base(std::string_view)构造函数创建Derived对象时，Derived新增的int成员会自动由字符串参数初始化吗？",
+      "a": "不会。继承构造函数只初始化Base子对象；Derived新增的int成员需要依靠类内成员初始化器或其他初始化方式。"
+    },
+    {
+      "q": "如何避免继承构造函数导致Derived的m_int未初始化？",
+      "a": "为m_int提供类内成员初始化器，例如int m_int{0};。"
+    },
+    {
+      "q": "Derived(int i)如何让m_int取参数i，同时初始化Base？",
+      "a": "在构造函数初始化器中分别初始化，例如Derived(int i) : Base{\"\"}, m_int{i} {}。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "成员初始化列表",
+    "类内成员初始化器",
+    "使用using声明继承构造函数"
+  ],
+  "source_pages": [
+    336,
+    336
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "683_继承构造函数不会自动初始化派生类数据成员",
+  "_chunk_pages": [
+    333,
+    336
+  ]
+}

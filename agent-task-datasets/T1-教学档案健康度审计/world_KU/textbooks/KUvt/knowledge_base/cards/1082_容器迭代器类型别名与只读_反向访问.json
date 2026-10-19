@@ -1,0 +1,40 @@
+{
+  "title": "容器迭代器类型别名与只读、反向访问",
+  "definition": "支持迭代器的标准容器会为迭代器类型提供公共类型别名。常用别名包括 iterator、const_iterator、reverse_iterator 和 const_reverse_iterator。const_iterator 与 const_reverse_iterator 只能只读访问容器元素；reverse_iterator 与 const_reverse_iterator 用于反向遍历。使用这些别名可以避免直接关心迭代器的实际类型。",
+  "key_points": [
+    "例如，元素类型为 int 的 vector，其常量迭代器类型可写为 $\\text{std::vector<int>::const_iterator}$。",
+    "const_iterator 和 const_reverse_iterator 提供容器元素的只读访问。",
+    "反向迭代器通常从容器末尾方向向容器开头方向遍历。"
+  ],
+  "examples": [
+    "声明迭代器类型：`std::vector<int>::const_iterator iter;`",
+    "使用类型别名遍历：`for (auto iter { cbegin(values) }; iter != cend(values); ++iter) { cout << *iter; }`"
+  ],
+  "misconceptions": [
+    "const_iterator 不表示迭代器对象本身一定不能移动，而是表示不能通过该迭代器修改所指向的元素。",
+    "reverse_iterator 不是普通迭代器的同义词，它具有与正向迭代相反的遍历方向。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "const_iterator 的主要作用是什么？",
+      "a": "它提供对容器元素的只读访问，不能通过它修改所指向的元素。"
+    },
+    {
+      "q": "容器为什么提供 reverse_iterator？",
+      "a": "为了支持从容器末尾向容器开头方向反向遍历元素。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [],
+  "source_pages": [
+    529,
+    529
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1082_容器迭代器类型别名与只读_反向访问",
+  "_chunk_pages": [
+    529,
+    532
+  ]
+}

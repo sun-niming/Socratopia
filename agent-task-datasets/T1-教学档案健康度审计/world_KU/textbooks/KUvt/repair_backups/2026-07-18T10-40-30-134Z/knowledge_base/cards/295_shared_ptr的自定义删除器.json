@@ -1,0 +1,43 @@
+{
+  "title": "shared_ptr的自定义删除器",
+  "definition": "`shared_ptr`可以在构造时接收一个自定义删除器。资源最后一个拥有者被释放时，`shared_ptr`调用该删除器，而不一定使用默认的`delete`。这使得`shared_ptr`能够管理不适合用`delete`释放的资源，例如C语言文件句柄。",
+  "key_points": [
+    "自定义删除器必须能够接收被管理资源的指针。",
+    "对使用`fopen()`获得的`FILE*`，可以使用调用`fclose()`的函数作为删除器。",
+    "使用自定义删除器时，`shared_ptr`仍然负责共享所有权和在最后一个所有者消失时调用删除器。"
+  ],
+  "examples": [
+    "`void close(FILE* filePtr) { if (filePtr == nullptr) { return; } fclose(filePtr); cout << \"File closed.\" << endl; }`",
+    "`FILE* f { fopen(\"data.txt\", \"w\") }; shared_ptr<FILE> filePtr { f, close };`",
+    "文件打开失败时可以检查`if (filePtr == nullptr)`；打开成功时则使用`filePtr`管理该文件。"
+  ],
+  "misconceptions": [
+    "自定义删除器不是在每次`shared_ptr`复制时调用，而是在该资源的最后一个共享所有者释放资源时调用。",
+    "管理`FILE*`时不能简单地依赖默认的`delete`，因为`fopen()`获得的文件资源应使用`fclose()`关闭。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么用`shared_ptr<FILE>`管理`fopen()`返回的文件指针时需要自定义删除器？",
+      "a": "因为该资源应通过`fclose()`关闭，而不是使用默认的`delete`。"
+    },
+    {
+      "q": "下面构造的`shared_ptr`在资源最终释放时会调用什么？`shared_ptr<FILE> filePtr { f, close };`",
+      "a": "会调用自定义删除器`close`，由它执行`fclose(filePtr)`。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "shared_ptr的基本用途与创建方式"
+  ],
+  "source_pages": [
+    221,
+    222
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "295_shared_ptr的自定义删除器",
+  "_chunk_pages": [
+    221,
+    224
+  ]
+}

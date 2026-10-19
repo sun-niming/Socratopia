@@ -1,0 +1,44 @@
+{
+  "title": "Grid 的值语义与 std::optional",
+  "definition": "教材中的 `Grid<T>` 使用值语义保存网格元素：容器中直接存储 `T` 对象或可选值，而不是存储指向对象的多态指针。使用值语义时，网格元素通常必须有值，不能自然表示空网格单元；将元素存储为 `std::optional<T>` 后，每个单元既可以包含一个 `T` 值，也可以为空，从而弥补这一限制。",
+  "key_points": [
+    "值语义的容器存储真实对象，而不是对象指针。",
+    "与指针语义相比，单纯的值语义不便于表示空单元。",
+    "`std::optional<T>` 可以表示“有一个 `T` 值”或“没有值”两种状态。",
+    "`Grid<T>::at()` 返回 `std::optional<T>` 的引用，使调用者能够读取或修改单元中的可选值。"
+  ],
+  "examples": [
+    "成员数据可以抽象表示为：`std::vector<std::vector<std::optional<T>>> m_cells;`",
+    "读取可能为空的单元：`int value { myIntGrid.at(0, 0).value_or(0) };`"
+  ],
+  "misconceptions": [
+    "值语义并不表示网格永远不能有空单元；使用 `std::optional<T>` 后可以表示空单元。",
+    "`std::optional<T>` 不是指针，它表示一个可选的值对象。",
+    "`at()` 返回的是 optional 引用，不是必然存在的 `T&`。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么 `Grid<T>` 使用 `std::optional<T>`？",
+      "a": "因为值语义直接保存对象，单纯值语义不便于表示空单元；`std::optional<T>` 可以同时表示有值和无值。"
+    },
+    {
+      "q": "`std::optional<T>` 可以处于哪两种状态？",
+      "a": "它可以包含一个 `T` 类型的值，也可以不包含值。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "类模板与类型模板参数"
+  ],
+  "source_pages": [
+    377,
+    379
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "764_grid_的值语义与_std_optional",
+  "_chunk_pages": [
+    377,
+    380
+  ]
+}

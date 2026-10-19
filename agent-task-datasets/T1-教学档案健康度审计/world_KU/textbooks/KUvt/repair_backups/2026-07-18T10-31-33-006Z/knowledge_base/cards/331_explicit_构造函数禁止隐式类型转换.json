@@ -1,0 +1,51 @@
+{
+  "title": "explicit 构造函数禁止隐式类型转换",
+  "definition": "在构造函数前加 explicit，可以禁止该构造函数参与不需要显式转换语法的隐式类型转换。教材将 SpreadsheetCell(std::string_view initialValue) 改为 explicit SpreadsheetCell(std::string_view initialValue)，因此 std::string_view 不会被自动隐式转换为 SpreadsheetCell。显式构造仍可使用直接初始化，例如 SpreadsheetCell cell{\"6\"sv};。",
+  "key_points": [
+    "没有 explicit 时，单参数构造函数可能被用于从 std::string_view 到 SpreadsheetCell 的隐式转换。",
+    "加上 explicit 后，必须明确写出 SpreadsheetCell 的构造过程。",
+    "教材示例中的 myCell = \"6\"sv; 依赖从字符串视图到 SpreadsheetCell 的隐式转换；当该构造函数声明为 explicit 时，这种写法不再可用。",
+    "double 构造函数和 std::string_view 构造函数可以同时存在，例如 SpreadsheetCell myCell { 4 };。"
+  ],
+  "examples": [
+    "显式构造：SpreadsheetCell myCell { 4 };",
+    "字符串视图字面量示例：myCell = \"6\"sv;",
+    "加 explicit 后可改用直接初始化：SpreadsheetCell anotherCell { \"6\"sv };"
+  ],
+  "misconceptions": [
+    "explicit 并不是禁止构造对象，而是禁止该构造函数用于某些隐式转换场景。",
+    "explicit 构造函数仍然可以通过直接初始化调用。",
+    "myCell = \"6\"sv; 中的左值对象赋值并不会因为存在字符串视图构造函数就必然合法；若该构造函数为 explicit，不能依赖它进行隐式转换。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么把 SpreadsheetCell(std::string_view initialValue) 声明为 explicit？",
+      "a": "为了禁止 std::string_view 到 SpreadsheetCell 的隐式类型转换，要求调用者明确写出构造过程。"
+    },
+    {
+      "q": "explicit SpreadsheetCell(std::string_view initialValue) 能否用于直接初始化？",
+      "a": "可以，例如 SpreadsheetCell anotherCell { \"6\"sv };。"
+    },
+    {
+      "q": "当字符串视图构造函数是 explicit 时，myCell = \"6\"sv; 是否能依赖该构造函数完成赋值？",
+      "a": "不能依赖隐式转换完成；应先显式构造 SpreadsheetCell 对象，再进行赋值。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "构造函数",
+    "隐式类型转换",
+    "std::string_view"
+  ],
+  "source_pages": [
+    245,
+    248
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "331_explicit_构造函数禁止隐式类型转换",
+  "_chunk_pages": [
+    245,
+    248
+  ]
+}

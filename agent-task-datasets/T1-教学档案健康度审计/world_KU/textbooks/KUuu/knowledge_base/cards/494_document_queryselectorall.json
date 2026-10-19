@@ -1,0 +1,38 @@
+{
+  "title": "document.querySelectorAll",
+  "definition": "document.querySelectorAll(cssSelector) 用 CSS 选择器语法在文档中查找所有匹配的元素，并返回这些匹配结果。",
+  "key_points": [
+    "参数使用 CSS 选择器语法",
+    "返回的是所有匹配的元素，而不是单个元素",
+    "返回值是一个 NodeList"
+  ],
+  "examples": [
+    "document.querySelectorAll('nav a')"
+  ],
+  "misconceptions": [
+    "它不会只返回第一个匹配元素；第一个匹配元素通常应使用其他单元素选择方法。",
+    "它返回的不是普通数组。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "document.querySelectorAll('nav a') 的作用是什么？",
+      "a": "在文档中查找所有位于 nav 内的 a 元素，并返回这些匹配元素组成的 NodeList。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "CSS选择器",
+    "DOM元素"
+  ],
+  "source_pages": [
+    349,
+    352
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "494_document_queryselectorall",
+  "_chunk_pages": [
+    349,
+    352
+  ]
+}

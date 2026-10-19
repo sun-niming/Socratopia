@@ -1,0 +1,46 @@
+{
+  "title": "directory_entry 的文件系统属性查询",
+  "definition": "`std::filesystem::directory_entry` 表示一个目录项，并可以查询该目录项对应路径的文件系统属性。原文示例用路径 `c:/windows/win.ini` 构造 `directory_entry`，再通过 `exists()` 和 `is_regular_file()` 判断该目录项是否存在且是否为普通文件。",
+  "key_points": [
+    "可用一个路径构造目录项对象：`directory_entry dirEntry{myPath};`。",
+    "`exists()` 用于判断目录项是否存在。",
+    "`is_regular_file()` 用于判断目录项是否为普通文件。",
+    "原文使用逻辑与进行联合判断：`if (dirEntry.exists() && dirEntry.is_regular_file())`。",
+    "原文还列出 `file_size()` 与 `last_write_time()` 等目录项属性查询接口。"
+  ],
+  "examples": [
+    "`path myPath{\"c:/windows/win.ini\"}; directory_entry dirEntry{myPath}; if (dirEntry.exists() && dirEntry.is_regular_file()) { ... }`。",
+    "判断关系可写为：$$exists(dirEntry)\\land is\\_regular\\_file(dirEntry)\\Longrightarrow\\text{该目录项存在且为普通文件}$$"
+  ],
+  "misconceptions": [
+    "`directory_entry` 是目录项信息对象，不等于目录本身；它也可以表示普通文件。",
+    "`exists()` 为真并不意味着该路径一定是普通文件，还需要进一步调用 `is_regular_file()` 等属性查询。",
+    "构造 `directory_entry` 对象不等于读取或修改文件内容。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "原文示例如何判断 `win.ini` 对应的目录项是否存在且为普通文件？",
+      "a": "使用 `if (dirEntry.exists() && dirEntry.is_regular_file())`。"
+    },
+    {
+      "q": "`directory_entry` 可以查询哪些文件属性？",
+      "a": "原文列出 `exists()`、`is_directory()`、`is_regular_file()`、`file_size()` 和 `last_write_time()` 等。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "std::filesystem::path",
+    "文件和目录的基本概念"
+  ],
+  "source_pages": [
+    429,
+    432
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "565_directory_entry_的文件系统属性查询",
+  "_chunk_pages": [
+    429,
+    432
+  ]
+}

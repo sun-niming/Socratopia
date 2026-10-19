@@ -1,0 +1,44 @@
+{
+  "title": "单选框与复选框",
+  "definition": "单选框和复选框都属于选择类控件。单选框（Radio）用于一组选项中只能选择一个；复选框（Checkbox）允许同时选择多个选项。它们常用的属性包括 value、checked 和 name，其中 checked=\"checked\" 表示默认选中状态，name 值相同通常表示属于同一组。",
+  "key_points": [
+    "单选框用于“只能选一个”的场景。",
+    "复选框用于“可以同时选多个”的场景，适合兴趣、爱好等。",
+    "checked=\"checked\" 表示默认选中。",
+    "name 值相同的一组控件通常属于同一组。"
+  ],
+  "examples": [
+    "<input type=\"radio\" name=\"gender\" value=\"male\" checked=\"checked\"> 男",
+    "<input type=\"checkbox\" name=\"hobby\" value=\"music\" checked=\"checked\"> 音乐"
+  ],
+  "misconceptions": [
+    "单选框和复选框都能多选，这是错误的。",
+    "checked 表示“当前可点击”，实际上它表示默认选中状态。",
+    "name 相同只是写法相同，没有分组意义，这是错误的。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "单选框和复选框最核心的区别是什么？",
+      "a": "单选框在一组选项中只能选择一个，复选框允许同时选择多个。"
+    },
+    {
+      "q": "checked=\"checked\" 表示什么？",
+      "a": "表示该控件的默认选中状态。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "HTML input标签"
+  ],
+  "source_pages": [
+    69,
+    72
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "104_单选框与复选框",
+  "_chunk_pages": [
+    69,
+    72
+  ]
+}

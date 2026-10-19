@@ -1,0 +1,196 @@
+{
+  "conversationId": "ZBHon9ia438meGWxKCc_6",
+  "generatedAt": 1781342520479,
+  "pagesRange": "p.66",
+  "sections": [
+    {
+      "type": "tldr",
+      "content": "本节课把 Shell 条件判断、循环读文件、IFS 拆字段规则复习了一遍，并回到第 66 页重点记忆常用环境变量：$HOME、$USER、$PWD、$PATH、$SHELL、$PS1、$PS2、$IFS。"
+    },
+    {
+      "type": "narrative",
+      "content": "一开始从 test 条件里的 `-o`、`!`、权限判断和整数比较出发，练习“先判断真假，再判断走 then 还是 else”。随后通过 `while` 和 `while read` 理解循环执行顺序、逐行读取文件、变量接收字段的规则。中途发现跳过了第 66 页环境变量，于是回到 `$HOME`、`$PWD`、`$PATH`、`$PS1`、`$PS2` 等常用变量，按“命令行里能不能用出来”的方式记忆。"
+    },
+    {
+      "type": "concepts",
+      "items": [
+        {
+          "name": "Shell 条件判断：`-a`、`-o`、`!`",
+          "body": "在 `[ ... ]` 条件测试中：\n\n- `-a` 表示 AND：两边都成立，整体才成立。\n- `-o` 表示 OR：两边只要有一个成立，整体就成立。\n- `!` 表示取反：原来成功变失败，原来失败变成功。\n\n例子：\n\n```bash\\nif [ -f a.txt -o -d a.txt ]\\nthen\n    echo ok\\nelse\n    echo bad\\nfi\n```\n\n意思是：`a.txt` 是普通文件，或者是目录，满足一个就输出 `ok`。\n\n```bash\\nif [ ! -d backup ]\\nthen\n    echo create\\nelse\n    echo exists\\nfi\n```\n\n如果 `backup` 已经是目录，`[ -d backup ]` 成功；前面加 `!` 后整体失败，所以走 `else`，输出 `exists`。"
+        },
+        {
+          "name": "文件类型与权限测试",
+          "body": "常见文件测试：\n\n- `-f file`：判断是不是普通文件。\n- `-d dir`：判断是不是目录。\n- `-r file`：判断是否可读。\n- `-w file`：判断是否可写。\n- `-x file`：判断是否可执行。\n\n例子：\n\n```bash\\nif [ -r a.txt -a -w a.txt ]\\nthen\n    echo edit\\nelse\n    echo readonly\\nfi\n```\n\n如果 `a.txt` 可读但不可写，则 `-r a.txt` 成功、`-w a.txt` 失败；`-a` 要两边都成功，所以整体失败，输出 `readonly`。"
+        },
+        {
+          "name": "整数比较：`-gt` 与 `-eq`",
+          "body": "Shell 的 `[ ... ]` 里做整数比较时，常用：\n\n- `-gt`：大于。\n- `-eq`：等于。\n\n例子：\n\n```bash\\ncount=3\\nif [ $count -gt 0 ]\\nthen\n    echo continue\\nelse\n    echo stop\\nfi\n```\n\n`count` 是 `3`，大于 `0`，所以输出 `continue`。\n\n```bash\\ncount=0\\nif [ $count -eq 0 ]\\nthen\n    echo empty\\nelse\n    echo nonempty\\nfi\n```\n\n`count` 等于 `0`，所以输出 `empty`。\n\n注意：Shell 里的 `$0` 是脚本名；“数字零”应写作 `0`，不要混成 `$0`。"
+        },
+        {
+          "name": "`while` 循环中的执行顺序",
+          "body": "`while` 的核心顺序是：\n\n1. 先判断条件。\n2. 条件成立才进入循环体。\n3. 执行完循环体后，回到开头继续判断。\n\n例子一：先输出，再递减。\n\n```bash\\ncount=3\\nwhile [ $count -gt 0 ]\\ndo\n    echo $count\n    let count=count-1\\ndone\n```\n\n输出：\n\n```bash\n3\n2\n1\n```\n\n当 `count` 变成 `0` 后，再判断 `[ $count -gt 0 ]` 失败，所以不会输出 `0`。\n\n例子二：先递减，再输出。\n\n```bash\\ncount=3\\nwhile [ $count -gt 0 ]\\ndo\n    let count=count-1\n    echo $count\\ndone\n```\n\n输出：\n\n```bash\n2\n1\n0\n```\n\n关键区别：同样的条件，循环体里语句顺序不同，输出结果就不同。"
+        },
+        {
+          "name": "`while read`：逐行读取文件",
+          "body": "`while read` 常用于一行一行读文件：\n\n```bash\\nwhile read line\\ndo\n    echo \"[$line]\"\\ndone < a.txt\n```\n\n如果 `a.txt` 内容是：\n\n```text\\nhello\\nworld\n```\n\n输出是：\n\n```bash\n[hello]\n[world]\n```\n\n这里 `done < a.txt` 表示把文件内容喂给 `read`；每一轮读一行，放进变量 `line`。变量名可以换成 `name`、`first`、`rest` 等，本质不变。"
+        },
+        {
+          "name": "`read` 多变量接收字段的规则",
+          "body": "`read` 后面可以跟多个变量，默认按 `$IFS` 拆字段。\n\n规则：\n\n- 字段够用时，按顺序分给变量。\n- 变量少于字段时，**最后一个变量接住剩下全部内容**。\n- 变量多于字段时，多出来的变量为空字符串。\n\n例子：\n\n```bash\\nwhile read first last\\ndo\n    echo \"$last, $first\"\\ndone < names.txt\n```\n\n文件：\n\n```text\\nAlice Smith\\nBob Lee\n```\n\n输出：\n\n```bash\\nSmith, Alice\\nLee, Bob\n```\n\n再看“最后一个变量兜底”：\n\n```bash\\nwhile read first rest\\ndo\n    echo \"$first | $rest\"\\ndone < names.txt\n```\n\n文件：\n\n```text\\nAlice Mary Smith\\nBob K Lee\n```\n\n输出：\n\n```bash\\nAlice | Mary Smith\\nBob | K Lee\n```\n\n如果变量比词多：\n\n```bash\\nread a b c\n```\n\n输入：\n\n```text\\none two\n```\n\n结果：\n\n```bash\\na=one\\nb=two\\nc=\n```"
+        },
+        {
+          "name": "`IFS`：字段分隔符",
+          "body": "`IFS` 是字段分隔符，默认包含空格、Tab、换行。`read` 拆字段时会参考它。\n\n默认空白分隔：\n\n```bash\\nread a b c\n```\n\n输入：\n\n```text\\nred   green\n```\n\n结果是：\n\n```bash\\na=red\\nb=green\\nc=\n```\n\n原因：默认空白分隔符比较“软”，连续多个空格通常会被折叠，不会产生中间空字段。\n\n逗号分隔：\n\n```bash\\nIFS=,\\nread a b c\n```\n\n输入：\n\n```text\\nred,,green\n```\n\n结果是：\n\n```bash\\na=red\\nb=\\nc=green\n```\n\n原因：逗号这种非空白分隔符比较“硬”，两个逗号中间没东西，就真的表示一个空字段。"
+        },
+        {
+          "name": "常用环境变量：第 66 页主线",
+          "body": "第 66 页重点变量：\n\n```bash\n$HOME   用户主目录\n$SHELL  当前用户使用的 shell 类型\n$USER   当前用户名\n$PATH   查找命令的目录列表\n$PWD    当前所在目录\n$PS1    主提示符\n$PS2    副提示符\n$IFS    字段分隔符\n```\n\n可以按问题记：\n\n- `$USER`：我是谁？\n- `$HOME`：家在哪？\n- `$PWD`：现在在哪？\n- `$SHELL`：用哪个 shell？\n- `$PATH`：命令去哪找？\n- `$PS1`：正常等输入时的提示符长什么样？\n- `$PS2`：命令没写完，继续输入时的提示符长什么样？\n- `$IFS`：拆字段时用什么分隔？"
+        },
+        {
+          "name": "`$HOME` 与 `$PWD` 的区别",
+          "body": "`$HOME` 是用户主目录，像“家”。\n\n`$PWD` 是当前所在目录，像“现在站在哪里”。\n\n家可以不等于当前位置：\n\n```bash\\ncd /var/log\\necho $HOME\\necho $PWD\n```\n\n第二个 `echo $PWD` 会输出当前目录：\n\n```bash\n/var/log\n```\n\n但 `$HOME` 不会因为 `cd /var/log` 就改变。"
+        },
+        {
+          "name": "`$PATH`：按优先级排列的命令搜索清单",
+          "body": "`$PATH` 不是“所有命令的位置”，而是 Shell 查找命令时使用的目录清单。\n\n例如：\n\n```bash\n/usr/local/bin:/usr/bin:/bin\n```\n\n冒号 `:` 用来分隔目录，查找顺序是从左到右：\n\n```text\n先 /usr/local/bin\n再 /usr/bin\n最后 /bin\n```\n\n如果同名命令在多个目录里，Shell 会执行最先找到的那个。\n\n例如：\n\n```bash\\nPATH=/tmp:/usr/bin:/bin\n```\n\n如果 `/tmp` 里有可执行文件 `ls`，输入：\n\n```bash\\nls\n```\n\n会优先执行 `/tmp/ls`。\n\n这也说明：随便把陌生目录放到 `$PATH` 前面有风险，因为它可能抢在系统命令前面被执行。"
+        },
+        {
+          "name": "`$PS1` 与 `$PS2`",
+          "body": "`$PS1` 是主提示符：正常等待输入命令时显示的提示符。\n\n例如：\n\n```bash\\nPS1=\"hello> \"\n```\n\n之后提示符可能变成：\n\n```bash\\nhello>\n```\n\n这只改变命令输入前的提示符样子，不改变命令执行结果。\n\n`$PS2` 是副提示符：命令还没写完，Shell 等你继续输入时显示。\n\n例如输入了没闭合的引号：\n\n```bash\\necho \"abc\n```\n\n下一行出现的 `>` 更可能来自 `$PS2`，表示 Shell 还在等你补完命令。"
+        }
+      ]
+    },
+    {
+      "type": "key-insight",
+      "content": "“默认空格分隔时，连续空格会被折叠，但是指定为 `,` 等字符时，不会自动折叠。”",
+      "attribution": "学习者"
+    },
+    {
+      "type": "key-insight",
+      "content": "学习者提醒：“IFS 我们已经讨论了很久了在前面，不是吗？”——这说明已经意识到复习要回到教材主线，不要在已掌握的点上反复绕圈。",
+      "attribution": "学习者"
+    },
+    {
+      "type": "key-terms",
+      "items": [
+        {
+          "term": "`-o`",
+          "definition": "Shell 条件测试中的 OR，两边满足一个即可。"
+        },
+        {
+          "term": "`-a`",
+          "definition": "Shell 条件测试中的 AND，两边都满足才成立。"
+        },
+        {
+          "term": "`!`",
+          "definition": "条件取反，把成功变失败，把失败变成功。"
+        },
+        {
+          "term": "`-f`",
+          "definition": "判断路径是否为普通文件。"
+        },
+        {
+          "term": "`-d`",
+          "definition": "判断路径是否为目录。"
+        },
+        {
+          "term": "`-r`",
+          "definition": "判断文件是否可读。"
+        },
+        {
+          "term": "`-w`",
+          "definition": "判断文件是否可写。"
+        },
+        {
+          "term": "`-x`",
+          "definition": "判断文件是否可执行。"
+        },
+        {
+          "term": "`-gt`",
+          "definition": "整数比较：大于。"
+        },
+        {
+          "term": "`-eq`",
+          "definition": "整数比较：等于。"
+        },
+        {
+          "term": "`read`",
+          "definition": "从输入中读取一行，并按分隔规则赋值给变量。"
+        },
+        {
+          "term": "`IFS`",
+          "definition": "字段分隔符，决定 `read` 等操作如何拆分输入字段。"
+        },
+        {
+          "term": "`$HOME`",
+          "definition": "当前用户的主目录。"
+        },
+        {
+          "term": "`$USER`",
+          "definition": "当前用户名。"
+        },
+        {
+          "term": "`$PWD`",
+          "definition": "当前所在目录。"
+        },
+        {
+          "term": "`$PATH`",
+          "definition": "Shell 查找命令时使用的目录列表，按从左到右的优先级搜索。"
+        },
+        {
+          "term": "`$SHELL`",
+          "definition": "当前用户默认 shell 程序的路径。"
+        },
+        {
+          "term": "`$PS1`",
+          "definition": "主提示符，正常等待输入命令时显示。"
+        },
+        {
+          "term": "`$PS2`",
+          "definition": "副提示符，命令未结束、等待继续输入时显示。"
+        },
+        {
+          "term": "`export`",
+          "definition": "把普通变量导出为环境变量，使其能传给子进程；本节只开了头，尚未展开。"
+        }
+      ]
+    },
+    {
+      "type": "open-question",
+      "content": "下次从 `export` 继续：普通变量只在当前 Shell 中可见；使用 `export` 后，变量如何传给子进程？例如 `name=Alice; export name; bash` 进入新的 `bash` 后还能不能看到 `name`？"
+    },
+    {
+      "type": "review-questions",
+      "items": [
+        {
+          "question": "如果当前目录下已经有 `backup` 目录，下面脚本输出什么？\n\n```bash\\nif [ ! -d backup ]\\nthen\n    echo create\\nelse\n    echo exists\\nfi\n```",
+          "answer": "输出：\n\n```bash\\nexists\n```\n\n因为 `[ -d backup ]` 成功，加上 `!` 后整体失败，所以走 `else`。"
+        },
+        {
+          "question": "下面循环依次输出什么？\n\n```bash\\ncount=3\\nwhile [ $count -gt 0 ]\\ndo\n    let count=count-1\n    echo $count\\ndone\n```",
+          "answer": "输出：\n\n```bash\n2\n1\n0\n```\n\n原因是每轮先减一，再输出；最后一次是 `count=1` 通过判断，进入循环后减成 `0` 并输出。"
+        },
+        {
+          "question": "文件 `names.txt` 内容为：\n\n```text\\nAlice Mary Smith\\nBob K Lee\n```\n\n脚本如下，输出什么？\n\n```bash\\nwhile read first rest\\ndo\n    echo \"$first | $rest\"\\ndone < names.txt\n```",
+          "answer": "输出：\n\n```bash\\nAlice | Mary Smith\\nBob | K Lee\n```\n\n`first` 拿第一个词，`rest` 作为最后一个变量，接住剩下全部内容。"
+        },
+        {
+          "question": "执行：\n\n```bash\\nIFS=,\\nread a b c\n```\n\n输入：\n\n```text\\nred,,green\n```\n\n`a`、`b`、`c` 分别是什么？为什么？",
+          "answer": "结果：\n\n```bash\\na=red\\nb=\\nc=green\n```\n\n因为逗号是非空白分隔符，连续两个逗号中间的空字段会被保留，所以 `b` 是空字符串。"
+        },
+        {
+          "question": "`$HOME` 和 `$PWD` 的区别是什么？如果执行 `cd /var/log` 后 `echo $PWD`，会输出什么类型的内容？",
+          "answer": "`$HOME` 是用户主目录，表示“家在哪”；`$PWD` 是当前所在目录，表示“现在在哪”。\n\n执行 `cd /var/log` 后，`echo $PWD` 会输出当前目录：\n\n```bash\n/var/log\n```"
+        },
+        {
+          "question": "如果：\n\n```bash\\nPATH=/tmp:/usr/bin:/bin\n```\n\n并且 `/tmp` 里有可执行文件 `ls`，输入 `ls` 会优先执行哪里的命令？",
+          "answer": "会优先执行：\n\n```bash\n/tmp/ls\n```\n\n因为 `$PATH` 从左到右查找，`/tmp` 排在最前面。"
+        },
+        {
+          "question": "`$PS1` 和 `$PS2` 分别控制什么？",
+          "answer": "`$PS1` 控制主提示符：正常等待输入命令时显示。\n\n`$PS2` 控制副提示符：命令没写完，Shell 等你继续输入时显示，例如没闭合引号、反斜杠续行、多行结构未结束等情况。"
+        }
+      ]
+    }
+  ]
+}

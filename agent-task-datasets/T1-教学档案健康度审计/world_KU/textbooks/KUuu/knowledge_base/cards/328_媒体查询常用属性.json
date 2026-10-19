@@ -1,0 +1,47 @@
+{
+  "title": "媒体查询常用属性",
+  "definition": "媒体查询可以通过一组属性来描述输出设备或视口的特征，从而决定是否匹配某个样式规则。教材列出的属性包括宽度、高度、设备宽度、设备高度、宽高比、设备宽高比、颜色位数和分辨率等。",
+  "key_points": [
+    "width：输出设备中的页面可见区域宽度",
+    "height：输出设备中的页面可见区域高度",
+    "device-width：输出设备的屏幕可见宽度",
+    "device-height：输出设备的屏幕可见高度",
+    "aspect-ratio：视口的宽高比",
+    "device-aspect-ratio：device-width 与 device-height 的比率",
+    "color：输出设备每个颜色分量的比特值；若不支持彩色则为 0",
+    "resolution：输出设备的像素密度（分辨率）"
+  ],
+  "examples": [
+    "@media all and (max-width: 1024px) { ... }",
+    "@media all and (max-width: 768px) { ... }"
+  ],
+  "misconceptions": [
+    "媒体查询只判断屏幕宽度；实际上还可以判断高度、颜色能力、分辨率等多种特征。",
+    "device-width 和 width 是同一个概念；实际上一个更偏向设备屏幕可见宽度，一个更偏向页面可见区域宽度。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "教材中列出的媒体查询属性里，哪个表示输出设备每个颜色分量的比特值？",
+      "a": "color。"
+    },
+    {
+      "q": "aspect-ratio 表示什么？",
+      "a": "视口（viewport）的宽高比。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "CSS基础"
+  ],
+  "source_pages": [
+    225,
+    225
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "328_媒体查询常用属性",
+  "_chunk_pages": [
+    225,
+    228
+  ]
+}

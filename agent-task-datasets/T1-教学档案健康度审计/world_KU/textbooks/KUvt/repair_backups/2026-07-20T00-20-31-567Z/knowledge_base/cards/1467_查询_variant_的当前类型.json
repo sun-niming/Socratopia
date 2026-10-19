@@ -1,0 +1,44 @@
+{
+  "title": "查询 variant 的当前类型",
+  "definition": "std::variant::index() 返回当前存储值对应的候选类型索引，索引从 0 开始。std::holds_alternative<T>(v) 是函数模板，用于判断 v 当前是否保存类型 T 的值，结果为布尔值。",
+  "key_points": [
+    "index() 的索引顺序与 variant 模板参数顺序一致，并从 0 开始。",
+    "holds_alternative<T>(v) 只能用于判断指定候选类型是否为当前活动类型。",
+    "查询当前类型不会取出值；取出值应使用 std::get 或 std::get_if。"
+  ],
+  "examples": [
+    "variant<int, string, float> v; v = \"An std::string.\"s;",
+    "此时 v.index() 返回 1，因为 string 是第二个候选类型。",
+    "holds_alternative<int>(v) 返回 false。",
+    "输出可以写为：cout << \"Type index: \" << v.index() << endl;"
+  ],
+  "misconceptions": [
+    "index() 返回的不是类型编号的固定语言级编号，而是该类型在当前 variant 候选列表中的位置。",
+    "holds_alternative<int>(v) 返回 true 只表示当前值的类型是 int，不表示 variant 曾经存储过 int。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "variant<int, string, float> v; v = \"x\"s; 时，v.index() 返回多少？",
+      "a": "返回 1，因为 string 是候选类型列表中的第 2 个类型，索引从 0 开始。"
+    },
+    {
+      "q": "如何判断 variant v 当前是否保存 int？",
+      "a": "调用 holds_alternative<int>(v)。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "std::variant 的含义与类型集合"
+  ],
+  "source_pages": [
+    707,
+    707
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1467_查询_variant_的当前类型",
+  "_chunk_pages": [
+    705,
+    708
+  ]
+}

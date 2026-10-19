@@ -1,0 +1,42 @@
+{
+  "title": "Spreadsheet 析构函数释放动态数组",
+  "definition": "Spreadsheet 的析构函数负责释放成员 m_cells 所指向的动态数组。原文给出的析构函数使用 delete[] m_cells;，释放后再将 m_cells 置为 nullptr。",
+  "key_points": [
+    "m_cells 是需要由 Spreadsheet 析构函数释放的动态数组指针。",
+    "释放数组必须使用 delete[]，不能使用只适用于单个对象的 delete。",
+    "析构函数释放 m_cells 后，将 m_cells 设为 nullptr。"
+  ],
+  "examples": [
+    "原文中的析构函数结构：\nSpreadsheet::~Spreadsheet() {\n    delete[] m_cells;\n    m_cells = nullptr;\n}"
+  ],
+  "misconceptions": [
+    "动态数组不能用普通 delete 释放，应使用 delete[]。",
+    "析构函数不是用来释放单个单元格对象的；原文这里释放的是 m_cells 指向的数组。",
+    "将指针设为 nullptr 不会重新分配数组，也不会恢复已经释放的数据。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "Spreadsheet 析构时如何释放 m_cells？",
+      "a": "使用 delete[] m_cells; 释放动态数组，然后将 m_cells 设为 nullptr。"
+    },
+    {
+      "q": "为什么这里使用 delete[] 而不是 delete？",
+      "a": "因为 m_cells 指向的是动态数组，数组必须使用 delete[] 释放。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++ 动态数组与析构函数"
+  ],
+  "source_pages": [
+    261,
+    264
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "345_spreadsheet_析构函数释放动态数组",
+  "_chunk_pages": [
+    261,
+    264
+  ]
+}

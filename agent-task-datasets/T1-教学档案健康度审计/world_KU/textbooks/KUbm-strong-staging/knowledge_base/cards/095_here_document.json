@@ -1,0 +1,35 @@
+{
+  "title": "Here Document",
+  "definition": "Here Document 是教材列出的输入输出重定向相关功能之一。教材给出的基本形式是：命令 <<定界符。也就是说，在命令后使用 << 和一个定界符来配合输入内容。",
+  "key_points": [
+    "属于输入输出重定向相关内容",
+    "基本形式：命令 <<定界符"
+  ],
+  "examples": [
+    "命令 <<定界符"
+  ],
+  "misconceptions": [
+    "不要把 << 与单纯的小于号重复使用混为一谈，教材把它单独列为 Here Document"
+  ],
+  "qa_pairs": [
+    {
+      "q": "教材中 Here Document 的基本形式是什么？",
+      "a": "命令 <<定界符。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "输入重定向"
+  ],
+  "source_pages": [
+    49,
+    52
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "095_here_document",
+  "_chunk_pages": [
+    49,
+    52
+  ]
+}

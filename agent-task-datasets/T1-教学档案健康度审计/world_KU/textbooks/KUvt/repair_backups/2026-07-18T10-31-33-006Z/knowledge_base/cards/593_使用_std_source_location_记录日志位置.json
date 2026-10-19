@@ -1,0 +1,44 @@
+{
+  "title": "使用 std::source_location 记录日志位置",
+  "definition": "C++20 的 std::source_location 可以保存源代码位置相关信息，例如文件名、行号和函数名。函数可以把 std::source_location 参数设置为 std::source_location::current()，从而在调用日志函数时自动获得调用位置，并将这些信息格式化输出。",
+  "key_points": [
+    "示例中的 logMessage 接受一个 string_view 类型的消息和一个 source_location 参数。",
+    "source_location 参数的默认值是 std::source_location::current()。",
+    "可以通过 location.file_name()、location.line() 和 location.function_name() 获取文件名、行号和函数名。",
+    "示例中 foo() 调用 logMessage 后，输出包含调用位置、函数名 foo 和日志消息。"
+  ],
+  "examples": [
+    "代码示例：void logMessage(std::string_view message, const std::source_location& location = std::source_location::current()) { std::cout << std::format(\"{}({}): {}: {}\", location.file_name(), location.line(), location.function_name(), message) << std::endl; }",
+    "调用 foo() 中的 logMessage(\"Starting execution of foo().\")，示例输出类似：Logging.cpp(17): foo: Starting execution of foo()。"
+  ],
+  "misconceptions": [
+    "std::source_location 不只是保存文件名；它还可以提供行号和函数名等源代码位置信息。",
+    "日志函数不需要由调用者手动传入文件名、行号和函数名；示例通过默认参数自动获取这些信息。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "示例中的 logMessage 如何获得调用位置的文件名、行号和函数名？",
+      "a": "它把 std::source_location 参数的默认值设为 std::source_location::current()，然后通过 location.file_name()、location.line() 和 location.function_name() 获取相应信息。"
+    },
+    {
+      "q": "foo() 调用 logMessage 后，日志中可能包含哪些信息？",
+      "a": "可能包含源文件名、行号、函数名 foo 以及日志消息，例如 Logging.cpp(17): foo: Starting execution of foo()。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++函数参数默认值",
+    "C++20标准库基础"
+  ],
+  "source_pages": [
+    453,
+    456
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "593_使用_std_source_location_记录日志位置",
+  "_chunk_pages": [
+    453,
+    456
+  ]
+}

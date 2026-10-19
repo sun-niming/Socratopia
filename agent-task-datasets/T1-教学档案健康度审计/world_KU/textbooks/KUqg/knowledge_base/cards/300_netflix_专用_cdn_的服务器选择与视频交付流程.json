@@ -1,0 +1,41 @@
+{
+  "title": "Netflix 专用 CDN 的服务器选择与视频交付流程",
+  "definition": "当用户选择 Netflix 电影后，运行在亚马逊云中的 Netflix 软件先确定哪些 CDN 服务器拥有该电影副本，再从中选择一台“最佳”服务器。若用户所在住宅 ISP 内部署了 Netflix CDN 机架且该机架有该电影，通常选择其中一台服务器；否则通常选择邻近 IXP 的服务器。随后 Netflix 将该 CDN 服务器的 IP 地址和资源配置文件发送给客户，客户据此向指定服务器请求视频。",
+  "key_points": [
+    "Netflix 的 Web 页面由亚马逊云中的服务器提供，而视频内容由 Netflix CDN 服务器交付。",
+    "服务器选择优先考虑用户所在 ISP 内的 Netflix CDN 机架；没有合适机架时，通常选择邻近 IXP 的服务器。",
+    "Netflix 软件直接向客户告知指定 CDN 服务器的 IP 地址，不需要通过 DNS 重定向选择 CDN 服务器。"
+  ],
+  "examples": [
+    "用户选择一部电影后，Netflix 软件先查找拥有该电影副本的 CDN 服务器，再将所选服务器的 IP 地址发送给客户。"
+  ],
+  "misconceptions": [
+    "Netflix 的网页服务器和视频交付服务器必然是同一台服务器；实际上网页由亚马逊云服务器提供，视频通常由 Netflix CDN 服务器交付。",
+    "Netflix 一定使用距离客户地理位置最近的服务器；原文描述的是优先选择用户 ISP 内的机架，否则通常选择邻近 IXP 的服务器。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "Netflix 如何为客户选择视频交付服务器？",
+      "a": "Netflix 软件先确定拥有所请求电影副本的 CDN 服务器，再优先选择用户所在 ISP 内的 Netflix CDN 机架中的服务器；若没有合适机架，通常选择邻近 IXP 的服务器。"
+    },
+    {
+      "q": "Netflix 如何把客户连接到选定的 CDN 服务器？",
+      "a": "Netflix 软件直接向客户发送该 CDN 服务器的 IP 地址以及包含不同电影版本 URL 的资源配置文件。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "内容分发网络（CDN）的基本概念"
+  ],
+  "source_pages": [
+    121,
+    124
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "300_netflix_专用_cdn_的服务器选择与视频交付流程",
+  "_chunk_pages": [
+    121,
+    124
+  ]
+}

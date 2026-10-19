@@ -1,0 +1,42 @@
+{
+  "title": "非静态成员函数访问对象数据",
+  "definition": "非静态成员函数总是在某个具体对象上执行。在成员函数体内，可以访问该对象所属类的所有数据成员。因此，成员函数对数据成员的读写作用于调用该函数的那个对象；不同对象调用同一成员函数时，会分别修改各自的数据成员。",
+  "key_points": [
+    "setValue通过给m_value赋值，修改调用者对象中的数据。",
+    "同一个成员函数实现可以被多个对象调用。",
+    "不同对象拥有各自独立的非静态数据成员，因此调用setValue不会让不同对象共享同一个m_value。"
+  ],
+  "examples": [
+    "SpreadsheetCell cell1;\nSpreadsheetCell cell2;\ncell1.setValue(10.0);\ncell2.setValue(20.0);\n\n此时cell1和cell2分别保存自己的数值：cell1的m_value为10.0，cell2的m_value为20.0。"
+  ],
+  "misconceptions": [
+    "成员函数中直接写m_value并不表示访问某个全局变量，而是访问当前调用对象的数据成员。",
+    "多个对象共享成员函数代码，不等于它们共享普通数据成员的值。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "两个不同的SpreadsheetCell对象分别调用setValue时，会修改哪一个m_value？",
+      "a": "每次调用都修改调用该函数的那个对象自己的m_value。"
+    },
+    {
+      "q": "非静态成员函数是在什么对象上执行的？",
+      "a": "总是在某个具体的对象上执行。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "对象与数据成员",
+    "成员函数"
+  ],
+  "source_pages": [
+    232,
+    232
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "494_非静态成员函数访问对象数据",
+  "_chunk_pages": [
+    229,
+    232
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "title": "auto 轨道尺寸",
+  "definition": "在 CSS 网格布局中，auto 可用于定义网格轨道尺寸，表示由内容决定轨道的尺寸。",
+  "key_points": [
+    "auto 表示轨道尺寸由内容决定。",
+    "auto 可出现在 grid-template-columns 或 grid-template-rows 的轨道尺寸定义中。",
+    "原文示例中还将 auto 用作 minmax() 的最大值，使行可以自动伸展。"
+  ],
+  "examples": [
+    ".container {\n  /* 创建一个至少 100px 高，但可以自动伸展的行 */\n  grid-template-rows: minmax(100px, auto);\n}"
+  ],
+  "misconceptions": [
+    "不要把 auto 理解为固定数值；它表示由内容决定轨道尺寸。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "网格轨道尺寸中的 auto 表示什么？",
+      "a": "表示由内容决定轨道的尺寸。"
+    },
+    {
+      "q": "minmax(100px, auto) 在原文示例中用于创建怎样的行？",
+      "a": "创建一个至少 100px 高、但可以自动伸展的行。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "CSS 网格布局",
+    "grid-template-columns 与 grid-template-rows"
+  ],
+  "source_pages": [
+    173,
+    175
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "249_auto_轨道尺寸",
+  "_chunk_pages": [
+    173,
+    176
+  ]
+}

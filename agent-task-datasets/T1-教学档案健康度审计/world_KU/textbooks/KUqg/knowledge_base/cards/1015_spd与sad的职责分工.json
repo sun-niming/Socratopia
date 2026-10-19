@@ -1,0 +1,44 @@
+{
+  "title": "SPD与SAD的职责分工",
+  "definition": "IPsec实体除安全关联数据库（SAD）外，还维护安全策略数据库（SPD）。SPD根据源IP地址、目的IP地址和协议类型等条件，规定哪些数据报需要进行IPsec处理以及应使用哪个SA；SAD则记录执行该处理的具体方法，例如鉴别算法、加密算法和密钥。简言之，SPD决定“做什么”，SAD决定“怎样做”。",
+  "key_points": [
+    "当路由器从内部网络收到一个未加密、目的地在外部的数据报时，SPD用于判断该数据报是否需要转换为IPsec数据报。",
+    "SPD中的匹配条件包括源IP地址、目的IP地址和协议类型等。",
+    "SPD可以为需要IPsec处理的数据报指定应使用的SA。",
+    "SAD保存SA的具体参数，例如加密算法、鉴别算法、密钥和SPI。"
+  ],
+  "examples": [
+    "可以把发送方的决策抽象为：$$\\text{数据报的源地址、目的地址、协议类型}\\xrightarrow{\\text{查询SPD}}\\text{是否进行IPsec处理及使用哪个SA}$$然后再查询SAD获得具体的算法和密钥。",
+    "记忆方式：SPD回答“这个数据报要不要保护、用哪个SA”；SAD回答“这个SA具体使用什么算法和密钥”。"
+  ],
+  "misconceptions": [
+    "SPD和SAD不是同一个数据库：SPD负责策略和选择，SAD负责已选SA的具体参数。",
+    "SAD本身通常不负责根据普通数据报的地址和协议类型决定是否保护；这种策略判断由SPD完成。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "SPD和SAD的核心区别是什么？",
+      "a": "SPD规定哪些数据报需要IPsec处理以及应使用哪个SA；SAD保存该SA的具体处理参数，如算法、密钥和SPI。"
+    },
+    {
+      "q": "路由器如何决定把一个未加密数据报转换为IPsec数据报？",
+      "a": "它根据该数据报的源IP地址、目的IP地址和协议类型等信息查询SPD，由SPD决定是否进行IPsec处理以及使用哪个SA。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "IPsec安全关联SA",
+    "IPsec安全关联数据库SAD"
+  ],
+  "source_pages": [
+    437,
+    440
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1015_spd与sad的职责分工",
+  "_chunk_pages": [
+    437,
+    440
+  ]
+}

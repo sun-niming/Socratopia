@@ -1,0 +1,39 @@
+{
+  "title": "块元素",
+  "definition": "块元素（block element）一般是其他元素的容器元素。它在标准文档流中通常表现为独占一行的块级布局形式。",
+  "key_points": [
+    "块元素通常用来作为其他元素的容器。",
+    "div 是常见的块元素。",
+    "p、h 等也是常见块元素。"
+  ],
+  "examples": [
+    "div",
+    "p",
+    "h"
+  ],
+  "misconceptions": [
+    "块元素不一定只用于布局，也可以承载语义内容。",
+    "块元素不是内联元素，通常不与其他块元素共享同一行的默认排列。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "块元素在教材中是怎样描述的？",
+      "a": "块元素一般是其他元素的容器元素，div 是常见块元素，p、h 等也属于块元素。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "标准文档流"
+  ],
+  "source_pages": [
+    129,
+    132
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "212_块元素",
+  "_chunk_pages": [
+    129,
+    132
+  ]
+}

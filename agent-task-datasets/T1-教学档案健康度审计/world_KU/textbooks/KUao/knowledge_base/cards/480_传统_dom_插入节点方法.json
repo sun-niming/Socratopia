@@ -1,0 +1,37 @@
+{
+  "title": "传统 DOM 插入节点方法",
+  "definition": "传统的 DOM 插入主要依靠父节点方法把新节点放入文档树中：appendChild 用于把新节点追加到父节点末尾，insertBefore 用于把新节点插入到指定参考节点之前。",
+  "key_points": [
+    "parentNode.appendChild(newNode) 把 newNode 加到 parentNode 的最后一个子节点位置",
+    "parentNode.insertBefore(newNode, referenceNode) 把 newNode 插到 referenceNode 之前",
+    "如果 referenceNode 为 null，则 insertBefore 的效果与 appendChild 相同"
+  ],
+  "examples": [
+    "parentNode.appendChild(newNode)",
+    "parentNode.insertBefore(newNode, referenceNode)"
+  ],
+  "misconceptions": [
+    "以为 insertBefore 只能插入到中间，不能用于追加；实际上 referenceNode 为 null 时效果同 appendChild。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "appendChild 和 insertBefore 的区别是什么？",
+      "a": "appendChild 追加到末尾，insertBefore 插到指定参考节点之前。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "创建元素节点与文本节点"
+  ],
+  "source_pages": [
+    357,
+    358
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "480_传统_dom_插入节点方法",
+  "_chunk_pages": [
+    357,
+    360
+  ]
+}

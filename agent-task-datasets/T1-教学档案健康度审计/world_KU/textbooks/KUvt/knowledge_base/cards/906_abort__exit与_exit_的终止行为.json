@@ -1,0 +1,45 @@
+{
+  "title": "abort、_Exit与 exit 的终止行为",
+  "definition": "abort() 和 _Exit() 都可以终止进程，并且不会执行资源清理，例如不会调用对象的析构函数。_Exit() 接收一个整型退出状态并返回给操作系统；退出状态为 0 或 EXIT_SUCCESS 通常表示成功，否则表示异常终止。abort() 不接收参数。原文还提到 exit() 接收退出状态并进行资源清理，但不建议在 terminate_handler 中调用 exit()。",
+  "key_points": [
+    "abort()：无参数，直接异常终止进程。",
+    "_Exit(status)：使用整型 status 作为进程退出状态，并且不进行常规资源清理。",
+    "在 terminate_handler 中通常使用 abort() 或 _Exit()，而不是 exit()。"
+  ],
+  "examples": [
+    "std::_Exit(1); 表示以非零状态终止进程，通常表示异常退出。std::_Exit(0); 或 std::_Exit(EXIT_SUCCESS); 表示成功退出。"
+  ],
+  "misconceptions": [
+    "调用 _Exit() 或 abort() 不会像正常作用域结束那样自动调用局部对象析构函数。",
+    "terminate_handler 不能通过调用 exit() 来把未捕获异常当作正常流程继续处理。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "abort() 和 _Exit() 的共同特点是什么？",
+      "a": "它们都会终止进程，并且不会进行常规资源清理，例如不会调用对象析构函数。"
+    },
+    {
+      "q": "_Exit(0) 的退出状态通常表示什么？",
+      "a": "通常表示程序成功退出；非零状态通常表示异常终止。"
+    },
+    {
+      "q": "原文是否建议在 terminate_handler 中调用 exit()？",
+      "a": "不建议。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "terminate_handler与 set_terminate"
+  ],
+  "source_pages": [
+    445,
+    445
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 abort _Exit exit 析构函数 资源清理 terminate_handler 标准行为",
+  "concept_id": "906_abort__exit与_exit_的终止行为",
+  "_chunk_pages": [
+    445,
+    448
+  ]
+}

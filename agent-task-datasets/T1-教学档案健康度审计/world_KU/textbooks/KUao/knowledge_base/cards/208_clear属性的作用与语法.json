@@ -1,0 +1,47 @@
+{
+  "title": "clear属性的作用与语法",
+  "definition": "clear属性用于清除前面的浮动元素对当前元素自身布局的影响。其基本语法为clear:left|right|both|none。教材引用的解释是：“元素盒子的边不能和前面的浮动元素相邻”。",
+  "key_points": [
+    "clear:left表示不允许在某元素的左边有浮动元素。",
+    "clear:right表示不允许在某元素的右边有浮动元素。",
+    "clear:both表示在某元素左右两边都不允许有浮动元素。",
+    "clear:none表示在某元素左右两边都允许有浮动元素。",
+    "clear用于处理浮动元素对当前元素自身的影响。"
+  ],
+  "examples": [
+    "clear:left;",
+    "clear:right;",
+    "clear:both;",
+    "clear:none;"
+  ],
+  "misconceptions": [
+    "误以为clear会改变其他相邻元素的位置；教材强调clear只影响自身。",
+    "误以为clear和float作用相同；float用于使元素浮动，clear用于清除浮动对自身的影响。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "clear:both表示什么含义？",
+      "a": "表示在某元素左右两边都不允许有浮动元素。"
+    },
+    {
+      "q": "clear属性主要用于解决什么问题？",
+      "a": "用于清除浮动元素对当前元素自身的影响。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "CSS基本语法",
+    "浮动定位"
+  ],
+  "source_pages": [
+    145,
+    148
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "208_clear属性的作用与语法",
+  "_chunk_pages": [
+    145,
+    148
+  ]
+}

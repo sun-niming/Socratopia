@@ -1,0 +1,44 @@
+{
+  "title": "用 printStreamState 检查输入流状态",
+  "definition": "可以通过检查输入流的状态成员函数来诊断文件读取问题。对一个 istream 对象，good() 用于判断流是否处于正常状态，bad() 用于判断是否发生严重输入输出错误，fail() 用于判断最近的输入操作是否失败，eof() 用于判断是否到达文件末尾。多个状态可能同时为真，因此这些判断不是互斥分支。",
+  "key_points": [
+    "printStreamState(const istream& inputStream) 可以依次调用 good()、bad()、fail() 和 eof()，并输出对应的状态消息。",
+    "应在关键读取操作前后检查状态，例如在 inputFile >> ws 之后和 getline(inputFile, temp) 之后检查。",
+    "通过比较读取前后的状态，可以确定是跳过空白、getline()，还是后续文件定位导致了异常。",
+    "good() 表示当前没有错误状态；fail() 或 bad() 表示存在错误状态；eof() 表示流已经检测到文件末尾。"
+  ],
+  "examples": [
+    "可用如下形式输出流状态：if (inputStream.good()) cout << \"stream state is good\" << endl;；if (inputStream.bad()) cout << \"stream state is bad\" << endl;；if (inputStream.fail()) cout << \"stream state is fail\" << endl;；if (inputStream.eof()) cout << \"stream state is eof\" << endl;。",
+    "调试时可在 getline(inputFile, temp) 前后调用 printStreamState(inputFile)，再观察状态变化。"
+  ],
+  "misconceptions": [
+    "eof() 为真表示此前某次读取已经检测到文件末尾，不等于每次调用读取函数都能成功返回空字符串。",
+    "good()、bad()、fail() 和 eof() 可能同时出现多个为真，不能简单认为它们一定互斥。",
+    "只打印最终结果无法判断读取过程中哪一步改变了流状态。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "printStreamState() 中四个状态检查函数分别表示什么？",
+      "a": "good() 表示流状态正常；bad() 表示发生严重输入输出错误；fail() 表示输入操作失败；eof() 表示已经到达文件末尾。"
+    },
+    {
+      "q": "为什么要在 getline() 前后分别调用 printStreamState()？",
+      "a": "这样可以比较读取操作前后的流状态，判断 getline() 是否使流进入 eof 或 fail 状态，从而定位文件读取失败发生的具体位置。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++输入输出流状态的基本概念"
+  ],
+  "source_pages": [
+    916,
+    916
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1896_用_printstreamstate_检查输入流状态",
+  "_chunk_pages": [
+    913,
+    916
+  ]
+}

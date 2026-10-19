@@ -1,0 +1,42 @@
+{
+  "title": "聚合（Aggregation）关系",
+  "definition": "原文第184页在 `SelfDrivable`、`Car`、`Truck` 等内容附近标注了“Aggregation”，即“聚合”。这表明该处讨论对象或类之间的聚合关系；但给定片段没有完整定义聚合，也没有恢复对应的完整图示。",
+  "key_points": [
+    "Aggregation 的中文通常译为“聚合”。",
+    "聚合用于表示整体与组成部分之间的关系。",
+    "原文没有提供足够信息来确定该页具体哪些类型构成整体、哪些类型是组成部分。"
+  ],
+  "examples": [
+    "原文相关标注：`Aggregation`。"
+  ],
+  "misconceptions": [
+    "聚合不等同于公开继承；继承表示“是一个”关系，聚合通常表示“拥有”或“由……组成”的关系。",
+    "不能仅凭片段确定 `SelfDrivable` 与 `Car`、`Truck` 的具体聚合方向。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "原文第184页出现的 `Aggregation` 通常译为什么？",
+      "a": "聚合。"
+    },
+    {
+      "q": "聚合与继承是否是同一种关系？",
+      "a": "不是；原文只标出了聚合，不能将其直接等同于继承。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "面向对象关系",
+    "C++ 类与继承"
+  ],
+  "source_pages": [
+    181,
+    184
+  ],
+  "needs_verification": true,
+  "verify_query": "《C++20高级编程》第5版 第184页 Aggregation SelfDrivable Car Truck 聚合图",
+  "concept_id": "255_聚合_aggregation_关系",
+  "_chunk_pages": [
+    181,
+    184
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "title": "C++字符类型与Unicode字符类型",
+  "definition": "C++支持多种字符类型。`char`、`signed char`和`unsigned char`是字符相关类型；C++20还提供面向不同Unicode编码宽度的`char8_t`、`char16_t`和`char32_t`。`wchar_t`是宽字符类型。字符字面量需要使用与目标类型匹配的前缀，例如`u8`、`u`、`U`和`L`。",
+  "key_points": [
+    "`char8_t`用于8位Unicode字符字面量，字面量使用`u8`前缀。",
+    "`char16_t`用于16位Unicode字符字面量，字面量使用`u`前缀。",
+    "`char32_t`用于32位Unicode字符字面量，字面量使用`U`前缀。",
+    "`wchar_t`对应宽字符字面量，字面量使用`L`前缀。",
+    "字符字面量示例包括`u8'm'`、`u'm'`、`U'm'`和`L'm'`。"
+  ],
+  "examples": [
+    "`char8_t c8{u8'm'};`",
+    "`char16_t c16{u'm'};`",
+    "`char32_t c32{U'm'};`",
+    "`wchar_t w{L'm'};`"
+  ],
+  "misconceptions": [
+    "`char8_t`、`char16_t`和`char32_t`不是同一个类型的不同变量声明，而是针对不同编码宽度的不同字符类型。",
+    "Unicode字符字面量的前缀不能随意省略或互换；`u8`、`u`、`U`和`L`分别对应不同字符类型。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "声明一个由`u8`字符字面量初始化的字符变量，应使用什么类型？",
+      "a": "应使用`char8_t`，例如`char8_t c8{u8'm'};`。"
+    },
+    {
+      "q": "`L'm'`应初始化哪种字符类型？",
+      "a": "它用于初始化`wchar_t`，例如`wchar_t w{L'm'};`。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [],
+  "source_pages": [
+    41,
+    44
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "042_c_字符类型与unicode字符类型",
+  "_chunk_pages": [
+    41,
+    44
+  ]
+}

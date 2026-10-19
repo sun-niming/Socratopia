@@ -1,0 +1,52 @@
+{
+  "title": "脚本与 C++ 协作处理日志的示例",
+  "definition": "原文示例使用 Perl 脚本遍历 userlog.txt 的每一行，查找包含 Password: 提示符的行；对于匹配行，脚本调用 C++ 程序 encryptString 加密密码，将程序输出作为加密结果写入 userlog.out，同时保留其他文本行不变。",
+  "key_points": [
+    "脚本首先打开输入文件 userlog.txt 和输出文件 userlog.out。",
+    "脚本逐行读取输入文件，并使用正则表达式查找密码行。",
+    "匹配到密码后，脚本将密码作为参数传给 encryptString，并保存该程序的输出。",
+    "脚本检查外部程序的返回状态；如果失败，则立即退出。",
+    "未匹配到 Password: 的行会原样写入输出文件。",
+    "该方案适合密码行数量较少的示例，但频繁启动外部进程会产生较大性能开销。"
+  ],
+  "examples": [
+    "处理流程可概括为：\n$$\n\\text{读取一行}\\rightarrow\\text{匹配 Password:}\\rightarrow\\text{调用 encryptString}\\rightarrow\\text{检查状态}\\rightarrow\\text{写入加密结果}\n$$",
+    "原文中的 Perl 正则表达式意图是匹配包含密码提示符的行，例如：m/Password: (.*)/。匹配到的密码由变量 $1 保存。"
+  ],
+  "misconceptions": [
+    "脚本不是把整个日志文件一次性传给 C++ 程序，而是逐行查找并处理密码行。",
+    "调用外部程序的输出不等于调用成功；还必须检查返回状态码。",
+    "该示例的重点是跨语言协作机制，不是加密算法的实现。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "日志处理脚本对不包含 Password: 的行如何处理？",
+      "a": "将该行原样写入输出文件。"
+    },
+    {
+      "q": "日志处理脚本如何获得加密后的密码？",
+      "a": "将匹配到的密码传给 C++ 程序 encryptString，并把该程序的输出保存为加密结果。"
+    },
+    {
+      "q": "为什么该示例可以接受启动外部进程的性能开销？",
+      "a": "因为示例假设日志文件只包含少数几个密码行，外部进程启动次数较少。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "正则表达式基础",
+    "文件读写",
+    "命令行参数"
+  ],
+  "source_pages": [
+    986,
+    987
+  ],
+  "needs_verification": true,
+  "verify_query": "Marc Gregoire C++20高级编程 第5版 Perl encryptString userlog.txt Password system argv 示例 原文",
+  "concept_id": "2024_脚本与_c_协作处理日志的示例",
+  "_chunk_pages": [
+    985,
+    988
+  ]
+}

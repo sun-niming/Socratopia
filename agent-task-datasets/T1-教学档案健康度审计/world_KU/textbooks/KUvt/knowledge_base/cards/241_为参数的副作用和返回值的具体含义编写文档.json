@@ -1,0 +1,42 @@
+{
+  "title": "为参数的副作用和返回值的具体含义编写文档",
+  "definition": "当函数通过参数修改调用者提供的对象，或者使用泛型返回类型传递特定语义时，应在注释中说明这些信息。文档应明确参数是否可能被修改、返回值实际表示什么，以及相关异常条件。",
+  "key_points": [
+    "如果参数是非const引用并可能被函数修改，应说明修改发生的条件和结果。",
+    "通用类型如int可能无法表达返回值的业务含义，应在注释中解释其具体含义。",
+    "saveRecord的示例中，若传入的记录尚无数据库ID，函数会修改记录对象以保存数据库分配的ID。"
+  ],
+  "examples": [
+    "// Parameters:\\n// record: If the given record does not yet have a database ID, then the method\\n// modifies the record object to store the ID assigned by the database.\\n// Returns: int\\n// An integer representing the ID of the saved record."
+  ],
+  "misconceptions": [
+    "非const引用并不自动意味着调用者一定能知道对象会如何变化；具体副作用仍应记录。",
+    "看到返回类型为int，不能据此确定它代表普通整数、数据库ID还是其他业务概念。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如果saveRecord的record参数可能被修改，注释应说明什么？",
+      "a": "应说明：当记录还没有数据库ID时，函数会修改record对象，将数据库分配的ID存入其中。"
+    },
+    {
+      "q": "为什么需要解释saveRecord返回的int代表什么？",
+      "a": "因为int是通用类型，函数声明无法直接表达它的业务含义；注释应说明该整数表示已保存记录的ID。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "函数参数与引用",
+    "接口文档基础"
+  ],
+  "source_pages": [
+    124,
+    124
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "241_为参数的副作用和返回值的具体含义编写文档",
+  "_chunk_pages": [
+    121,
+    124
+  ]
+}

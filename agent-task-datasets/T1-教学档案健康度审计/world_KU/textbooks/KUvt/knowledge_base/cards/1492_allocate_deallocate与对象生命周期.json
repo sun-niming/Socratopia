@@ -1,0 +1,54 @@
+{
+  "title": "allocate、deallocate与对象生命周期",
+  "definition": "Allocator 的 $\\texttt{allocate(n)}$ 负责分配一块足以容纳 $n$ 个对象的、尚未初始化的内存，但不会调用对象构造函数；$\\texttt{deallocate(pointer,n)}$ 负责释放此前分配的内存块，但不会调用对象析构函数。因此，使用分配器时，必须分别管理内存的分配、对象的构造、对象的析构和内存的释放。对象可以通过 placement new 在已分配内存的指定位置构造，并在销毁对象后再释放内存。",
+  "key_points": [
+    "$\\texttt{allocate}$ 只获得未初始化内存，不构造对象。",
+    "placement new 可以在分配好的内存地址上构造对象。",
+    "销毁对象和释放内存是两个不同步骤，应先销毁对象，再释放内存。",
+    "$\\texttt{deallocate}$ 只释放内存，不调用析构函数。"
+  ],
+  "examples": [
+    "示例流程：$\\texttt{allocator<MyClass> alloc;}$",
+    "分配内存：$\\texttt{auto* memory = alloc.allocate(1);}$",
+    "构造对象：$\\texttt{new (memory) MyClass\\{\\};}$",
+    "销毁对象：对位于 $\\texttt{memory}$ 的对象调用销毁操作，例如 $\\texttt{destroy_at(memory);}$",
+    "释放内存：$\\texttt{alloc.deallocate(memory, 1);}$",
+    "正确的生命周期顺序是：分配原始内存 $\\rightarrow$ 构造对象 $\\rightarrow$ 使用对象 $\\rightarrow$ 销毁对象 $\\rightarrow$ 释放内存。"
+  ],
+  "misconceptions": [
+    "调用 $\\texttt{allocate}$ 不会自动调用元素的构造函数。",
+    "调用 $\\texttt{deallocate}$ 不会自动调用元素的析构函数。",
+    "对象已经构造完成并不表示其占用的原始内存已经可以直接释放；应先销毁对象。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "$\\texttt{allocate(1)}$ 是否会构造一个对象？",
+      "a": "不会。它只分配一块足以容纳一个对象的未初始化内存。"
+    },
+    {
+      "q": "使用 placement new 构造对象后，释放内存前需要做什么？",
+      "a": "需要先销毁该对象，然后再调用分配器的 $\\texttt{deallocate}$ 释放内存。"
+    },
+    {
+      "q": "$\\texttt{deallocate}$ 是否负责调用析构函数？",
+      "a": "不负责。$\\texttt{deallocate}$ 只释放内存块。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "对象构造与析构",
+    "动态内存管理",
+    "placement new"
+  ],
+  "source_pages": [
+    718,
+    719
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1492_allocate_deallocate与对象生命周期",
+  "_chunk_pages": [
+    717,
+    720
+  ]
+}

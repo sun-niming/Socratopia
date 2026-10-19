@@ -1,0 +1,45 @@
+{
+  "title": "UCS、Unicode与Unicode编码",
+  "definition": "宽字符集使用码点表示字符。ISO 10646 定义的 Universal Character Set（UCS）和 Unicode 都是标准化字符集，其中每个抽象字符具有唯一的名称和码点。UTF-8、UTF-16 和 UTF-32 是对 Unicode 码点进行编码的不同方式。",
+  "key_points": [
+    "码点是用于标识字符的编号。",
+    "UTF-8 使用 1 到 4 个 8 位字节编码一个 Unicode 字符。",
+    "UTF-16 使用一个或两个 16 位值编码一个 Unicode 字符。",
+    "UTF-32 使用正好 32 位编码一个 Unicode 字符。",
+    "字符集规定字符及其码点，编码规定如何用字节或固定宽度的值表示这些码点。"
+  ],
+  "examples": [
+    "UTF-8：一个 Unicode 字符编码为 1 到 4 个 8 位字节。",
+    "UTF-16：一个 Unicode 字符编码为一个或两个 16 位值。",
+    "UTF-32：一个 Unicode 字符编码为正好 32 位。"
+  ],
+  "misconceptions": [
+    "UTF-8、UTF-16 和 UTF-32 不是三个互不相干的字符集，而是 Unicode 的不同编码方式。",
+    "一个 Unicode 字符不一定对应一个字节；在 UTF-8 中可能需要 1 到 4 个字节。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "UTF-8、UTF-16 和 UTF-32 的主要区别是什么？",
+      "a": "它们使用不同的编码单位和长度表示 Unicode 字符：UTF-8 使用 1 到 4 个 8 位字节，UTF-16 使用一个或两个 16 位值，UTF-32 使用正好 32 位。"
+    },
+    {
+      "q": "什么是码点？",
+      "a": "码点是用于唯一标识字符的编号。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "字符集与字符编码"
+  ],
+  "source_pages": [
+    661,
+    662
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1382_ucs_unicode与unicode编码",
+  "_chunk_pages": [
+    661,
+    664
+  ]
+}

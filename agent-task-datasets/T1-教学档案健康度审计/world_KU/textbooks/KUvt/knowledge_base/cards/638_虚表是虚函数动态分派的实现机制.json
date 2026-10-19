@@ -1,0 +1,45 @@
+{
+  "title": "虚表是虚函数动态分派的实现机制",
+  "definition": "教材将虚表（vtable）描述为用于调用虚函数实现的一块特定内存区域。具有一个或多个虚函数的类通常会关联一张虚表，每个对象通常包含一个指向相应虚表的指针；虚表中的各项指向虚函数实现。调用虚函数时，程序通过该机制在运行时选择正确的函数版本。",
+  "key_points": [
+    "基类和派生类可以具有各自的虚表布局。",
+    "如果派生类没有重写某个虚函数，派生类虚表中对应项仍指向基类实现。",
+    "如果派生类重写了某个虚函数，派生类虚表中对应项指向派生类实现。",
+    "非虚函数不参与虚表，因此不会在虚表中占有对应项。",
+    "虚表和对象中用于指向虚表的指针属于常见实现模型；C++ 标准规定的是虚函数语义，不强制具体实现必须使用名为 vtable 的结构。"
+  ],
+  "examples": [
+    "设 `Base` 声明 `virtual void func1();`、`virtual void func2();`，`Derived` 只重写 `func2()`。教材所示的高级视图可写成：\n$$\\begin{array}{c|cc}\n & func1 & func2\\\\\n\\hline\nBase\\text{ 的虚表} & Base::func1 & Base::func2\\\\\nDerived\\text{ 的虚表} & Base::func1 & Derived::func2\n\\end{array}$$\n`nonVirtualFunc()` 不会出现在这两张虚表中。"
+  ],
+  "misconceptions": [
+    "虚表不是 C++ 源代码中必须显式声明的对象，而是编译器实现虚函数动态分派时常用的内部机制。",
+    "派生类虚表并不一定把所有函数都指向派生类；未重写的虚函数仍可指向基类实现。",
+    "非虚函数不会因为出现在派生类中就自动加入虚表。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如果 Derived 没有重写 Base 的 func1()，Derived 虚表中 func1 项通常指向哪里？",
+      "a": "通常仍指向 `Base::func1()` 的实现。"
+    },
+    {
+      "q": "为什么 nonVirtualFunc() 不出现在教材示意的虚表中？",
+      "a": "因为它没有声明为 virtual，不参与虚函数动态分派。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "虚函数",
+    "动态绑定"
+  ],
+  "source_pages": [
+    310,
+    311
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "638_虚表是虚函数动态分派的实现机制",
+  "_chunk_pages": [
+    309,
+    312
+  ]
+}

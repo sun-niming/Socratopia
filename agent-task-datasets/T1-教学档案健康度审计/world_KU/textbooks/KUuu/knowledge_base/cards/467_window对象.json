@@ -1,0 +1,37 @@
+{
+  "title": "window对象",
+  "definition": "window对象位于BOM的顶层，由浏览器创建，并对应JavaScript本地对象Global。",
+  "key_points": [
+    "window是BOM的顶层对象",
+    "window由浏览器创建",
+    "window对应JavaScript本地对象Global"
+  ],
+  "examples": [
+    "在浏览器中访问window对象"
+  ],
+  "misconceptions": [
+    "window不是用户手动创建的对象",
+    "window不是普通的局部对象，而是BOM的顶层对象"
+  ],
+  "qa_pairs": [
+    {
+      "q": "window对象在BOM中的地位是什么？",
+      "a": "window对象位于BOM的顶层，并由浏览器创建。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "BOM"
+  ],
+  "source_pages": [
+    329,
+    332
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "467_window对象",
+  "_chunk_pages": [
+    329,
+    332
+  ]
+}

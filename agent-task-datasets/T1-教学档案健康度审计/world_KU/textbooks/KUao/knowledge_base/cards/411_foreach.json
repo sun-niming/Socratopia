@@ -1,0 +1,38 @@
+{
+  "title": "forEach()",
+  "definition": "`forEach()` 用于遍历数组；教材表格说明它没有返回值，回调函数也不需要 `return`。",
+  "key_points": [
+    "主要用途是遍历",
+    "没有返回值",
+    "回调函数不需要 `return`"
+  ],
+  "examples": [
+    "[1, 2, 3].forEach(function (item) { console.log(item); })"
+  ],
+  "misconceptions": [
+    "以为 `forEach()` 会返回新数组",
+    "以为 `forEach()` 的回调必须返回值",
+    "以为 `forEach()` 能像 `map()` 一样做映射"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`forEach()` 的返回值是什么？",
+      "a": "无返回值。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "Array对象与创建方式"
+  ],
+  "source_pages": [
+    307,
+    308
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "411_foreach",
+  "_chunk_pages": [
+    305,
+    308
+  ]
+}

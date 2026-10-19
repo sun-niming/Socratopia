@@ -1,0 +1,38 @@
+{
+  "title": "最终回归测试",
+  "definition": "`bash tests/curl_test.sh` 是最终全量测试脚本，用于检查关键状态码是否都符合预期。",
+  "key_points": [
+    "这是最终回归测试。",
+    "脚本会检查关键状态码。",
+    "通过它可以快速确认主要功能是否正确。"
+  ],
+  "examples": [
+    "`bash tests/curl_test.sh`"
+  ],
+  "misconceptions": [
+    "只做手工单项测试就等于完成验证。",
+    "回归测试只检查页面内容，不检查状态码。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "最终全测使用什么命令？",
+      "a": "`bash tests/curl_test.sh`。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "shell 基础",
+    "HTTP 状态码"
+  ],
+  "source_pages": [
+    113,
+    116
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "193_最终回归测试",
+  "_chunk_pages": [
+    113,
+    116
+  ]
+}

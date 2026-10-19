@@ -1,0 +1,49 @@
+{
+  "title": "开放/封闭原则（OCP）",
+  "definition": "开放/封闭原则（Open/Closed Principle，OCP）要求软件实体应当对扩展开放、对修改封闭。原文通过 Renderer 处理 Square 和 Circle 的例子说明：如果 Renderer 为每种具体形状分别增加参数和循环，就需要修改 Renderer；将形状抽象为共同的 Shape 接口后，可以通过增加新的 Shape 派生类来扩展功能，而不必按每种形状修改 Renderer 的核心遍历逻辑。",
+  "key_points": [
+    "直接为 Renderer 增加 Square、Circle 等具体类型的参数，会使 Renderer 随新形状增加而修改。",
+    "可以定义共同的抽象基类 Shape，并声明纯虚函数 render()。",
+    "Square 和 Circle 分别继承 Shape，并重写 render()。",
+    "Renderer 只接收 Shape 指针集合并调用每个对象的 render()，从而依赖抽象接口而不是具体形状类型。"
+  ],
+  "examples": [
+    "直接按具体类型设计：文本先给出 `void render(const vector<Square>& squares)`；加入 Circle 后变为 `void Renderer::render(const vector<Square>& squares, const vector<Circle>& circles)`，并分别遍历两个集合。",
+    "使用多态改进设计：`class Shape { public: virtual void render() = 0; };`，`Square` 和 `Circle` 都继承 `Shape` 并实现 `render()`；Renderer 中遍历 `vector<Shape*>`：`for (auto* object : objects) { object->render(); }`。"
+  ],
+  "misconceptions": [
+    "开放/封闭原则不是要求代码永远不能修改，而是尽量通过新增扩展代码来增加功能，减少对已有稳定代码的修改。",
+    "使用 Shape 基类并不意味着所有形状必须共享完全相同的实现；每个派生类可以提供自己的 render() 实现。",
+    "Renderer 接收 Shape 指针集合后，调用的是对象实际类型对应的重写版本，而不是固定调用 Shape 的统一具体实现。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "原文中直接增加 Circle 类型会导致 Renderer 发生什么变化？",
+      "a": "Renderer 需要增加 Circle 集合参数，并增加遍历 circles 的代码。"
+    },
+    {
+      "q": "如何使用多态使 Renderer 更符合开放/封闭原则？",
+      "a": "定义具有纯虚函数 render() 的 Shape 基类，让 Square 和 Circle 继承 Shape 并重写 render()；Renderer 遍历 vector<Shape*> 并调用 object->render()。"
+    },
+    {
+      "q": "Shape 中的 `virtual void render() = 0;` 表示什么？",
+      "a": "它声明了一个纯虚函数，Shape 是抽象基类，派生类需要提供 render() 的实现才能实例化。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++继承与虚函数",
+    "运行时多态"
+  ],
+  "source_pages": [
+    186,
+    187
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "260_开放_封闭原则_ocp",
+  "_chunk_pages": [
+    185,
+    188
+  ]
+}

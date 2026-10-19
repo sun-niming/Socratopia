@@ -1,0 +1,48 @@
+{
+  "title": "一元正负运算符重载",
+  "definition": "一元正号和一元负号只作用于一个操作数。内置类型中，一元正号通常保留数值，一元负号将数值取反；对自定义类型，可以通过成员函数或非成员函数重载它们，以定义对象的正负操作。",
+  "key_points": [
+    "一元正号可以作用于表达式结果，例如 `j = +(-i);`，表示先对 `i` 应用一元负号，再对结果应用一元正号。",
+    "一元负号可以嵌套使用，例如 `j = -(-i);`。",
+    "原文中的 `SpreadsheetCell` 通过成员函数 `SpreadsheetCell SpreadsheetCell::operator-() const` 重载一元负号。",
+    "该成员函数返回一个新的 `SpreadsheetCell`，其值由 `-getValue()` 得到。",
+    "使用对象 `cl` 构造负值对象的示例为 `SpreadsheetCell c3 { -cl };`。"
+  ],
+  "examples": [
+    "内置整数示例：`int i, j { 4 };`、`i = +i;`、`j = +(-i);` 和 `j = -(-i);`。",
+    "自定义类型示例：`SpreadsheetCell SpreadsheetCell::operator-() const { return SpreadsheetCell { -getValue() }; }`。",
+    "调用示例：`SpreadsheetCell cl { 4 };`，随后使用 `SpreadsheetCell c3 { -cl };` 创建值为负数的新单元格。"
+  ],
+  "misconceptions": [
+    "一元负号不是减法运算符的二元形式；它只接受一个操作数。",
+    "对自定义类型重载一元负号时，通常应根据类型语义返回新的结果对象，而不是默认修改原对象；原文示例返回新的 `SpreadsheetCell`。",
+    "一元正号并不表示把数值变成正数；对已经为负的数，一元正号通常不会改变其符号。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`j = +(-i);` 的运算顺序是什么？",
+      "a": "先对 `i` 应用一元负号，再对所得结果应用一元正号，最后将结果赋给 `j`。"
+    },
+    {
+      "q": "原文中的 `SpreadsheetCell::operator-() const` 返回什么？",
+      "a": "它返回 `SpreadsheetCell { -getValue() }`，即用当前单元格数值的相反数构造一个新的单元格对象。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "类成员函数",
+    "const成员函数",
+    "函数返回对象"
+  ],
+  "source_pages": [
+    473,
+    476
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "618_一元正负运算符重载",
+  "_chunk_pages": [
+    473,
+    476
+  ]
+}

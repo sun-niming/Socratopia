@@ -1,0 +1,43 @@
+{
+  "title": "使用 Database 基本功能进行测试",
+  "definition": "DatabaseTest.cpp 通过创建 Database 对象、添加多个雇员、修改雇员状态或薪资，然后分别调用 displayAll()、displayCurrent() 和 displayFormer()，测试数据库的基本功能。",
+  "key_points": [
+    "先创建 Database 对象，例如 Database myDB。",
+    "通过 addEmployee(firstName, lastName) 添加雇员，并保存返回的雇员对象引用或句柄。",
+    "可以调用 fire() 改变雇员的在职状态，调用 setSalary() 设置薪资，调用 promote() 进行晋升。",
+    "测试程序分别输出全部雇员、当前雇员和已离职雇员。"
+  ],
+  "examples": [
+    "测试流程的概念性代码如下：\n```cpp\nDatabase myDB;\nauto& emp1 = myDB.addEmployee(\"Greg\", \"Wallis\");\nemp1.fire();\nauto& emp2 = myDB.addEmployee(\"Marc\", \"White\");\nemp2.setSalary(100'000);\nauto& emp3 = myDB.addEmployee(\"John\", \"Doe\");\nemp3.setSalary(10'000);\nemp3.promote();\n\nmyDB.displayAll();\nmyDB.displayCurrent();\nmyDB.displayFormer();\n```"
+  ],
+  "misconceptions": [
+    "调用 fire() 并不是删除雇员记录，而是改变雇员的雇佣状态，使其可以被归入 former employees。",
+    "displayAll()、displayCurrent() 和 displayFormer() 是三种不同的查询显示，不是同一个结果的重复输出。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "测试程序如何验证 Database 的三种显示功能？",
+      "a": "添加若干雇员并改变其中一些雇员的状态或薪资，然后依次调用 displayAll()、displayCurrent() 和 displayFormer() 观察输出。"
+    },
+    {
+      "q": "测试程序中 fire() 的作用是什么？",
+      "a": "将对应雇员设为离职状态，以便测试已离职雇员的显示功能。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "Database 的添加雇员功能",
+    "Employee 的状态修改方法"
+  ],
+  "source_pages": [
+    97,
+    97
+  ],
+  "needs_verification": true,
+  "verify_query": "\"C++20高级编程\" \"DatabaseTest.cpp\" \"Greg\" \"Wallis\" displayFormer",
+  "concept_id": "180_使用_database_基本功能进行测试",
+  "_chunk_pages": [
+    97,
+    100
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "title": "lock_guard 的构造方式",
+  "definition": "std::lock_guard 定义在 <mutex> 中，是一种简单的 RAII 锁类。其普通构造函数接收互斥体引用并立即尝试加锁，获取不到时阻塞；其 adopt_lock 构造函数假定当前线程已经获得该互斥体的锁，并由 lock_guard 接管管理，析构时自动释放锁。",
+  "key_points": [
+    "普通形式为 std::lock_guard<Mutex> guard(m)，构造时立即调用互斥体的加锁操作。",
+    "使用 std::adopt_lock 时，调用线程必须已经持有对应互斥体的锁。",
+    "adopt_lock 只表示接管已有锁，不负责在构造时先获取锁。",
+    "lock_guard 离开作用域时自动释放互斥体，不能复制以转移锁所有权。"
+  ],
+  "examples": [
+    "立即加锁：\n代码：std::lock_guard<std::mutex> guard(m);",
+    "接管已获得的锁：\n代码：m.lock();\n代码：std::lock_guard<std::mutex> guard(m, std::adopt_lock);\n代码：/* guard 析构时自动调用 m.unlock() */"
+  ],
+  "misconceptions": [
+    "std::adopt_lock 不会替线程加锁；使用它前必须已经成功获得对应互斥体的锁。",
+    "使用 adopt_lock 时如果线程并未持有该锁，锁对象的管理前提就不成立，可能导致错误行为。",
+    "lock_guard 不能用于延迟到之后再加锁；它的普通构造函数会立即尝试加锁。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "std::lock_guard 的普通构造函数何时获取锁？",
+      "a": "在构造 lock_guard 对象时立即尝试获取锁，获取不到则阻塞。"
+    },
+    {
+      "q": "使用 std::adopt_lock 构造 lock_guard 的前提是什么？",
+      "a": "调用线程已经获得传入互斥体的锁，lock_guard 只接管该锁并在析构时释放它。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "锁类与 RAII 自动解锁",
+    "非定时互斥体的通用操作"
+  ],
+  "source_pages": [
+    807,
+    808
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1659_lock_guard_的构造方式",
+  "_chunk_pages": [
+    805,
+    808
+  ]
+}

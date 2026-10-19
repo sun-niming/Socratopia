@@ -1,0 +1,52 @@
+{
+  "title": "SMTP 会话命令、响应码与邮件结束标记",
+  "definition": "SMTP 客户端和服务器通过 TCP 连接交换 ASCII 文本行。客户端使用 HELO、MAIL FROM、RCPT TO、DATA 和 QUIT 等命令完成身份介绍、指定发件人、指定收件人、发送邮件内容和关闭连接；服务器对每条命令返回包含回答码及可选英文解释的响应。客户端通过发送一行只包含一个句点的行，表示邮件内容结束。",
+  "key_points": [
+    "服务器建立连接后可先发送 $220$ 回答码，客户端发送 HELO 进行问候和介绍。",
+    "MAIL FROM 指定产生报文的发送方地址，RCPT TO 指定接收方地址。",
+    "DATA 告知服务器随后开始传送邮件内容。",
+    "邮件内容结束的标记是单独一行的句点，即文本行 \".\"。",
+    "QUIT 用于请求结束 SMTP 会话；原文示例中的服务器响应码为 $221$。",
+    "SMTP 使用持续连接；同一连接中发送多封邮件时，每封邮件重新使用 MAIL FROM 开始，并用独立的句点标记该邮件结束，全部邮件发送完后才发送 QUIT。",
+    "原文说明报文结束表示为 CRLF.CRLF，其中 CR 表示回车，LF 表示换行。"
+  ],
+  "examples": [
+    "原文中的 SMTP 会话命令顺序可概括为：\n$$\\text{HELO}\\rightarrow\\text{MAIL FROM}\\rightarrow\\text{RCPT TO}\\rightarrow\\text{DATA}\\rightarrow\\text{邮件内容}\\rightarrow .\\rightarrow\\text{QUIT}$$\n示例邮件内容为两行：\"Do you like ketchup?\" 和 \"How about pickles?\"。"
+  ],
+  "misconceptions": [
+    "HELO 不是邮件内容，而是 SMTP 客户端与服务器建立会话时使用的问候命令。",
+    "DATA 不是邮件正文本身，而是表示接下来要传送邮件内容。",
+    "邮件结束标记不是任意包含句点的文本，而是只包含一个句点的独立一行。",
+    "发送多封邮件时，不必为每封邮件重新建立 TCP 连接；SMTP 可以使用持续连接。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "SMTP 中 MAIL FROM、RCPT TO、DATA 和 QUIT 分别起什么作用？",
+      "a": "MAIL FROM 指定发送方地址；RCPT TO 指定接收方地址；DATA 表示开始传输邮件内容；QUIT 表示结束 SMTP 会话。"
+    },
+    {
+      "q": "SMTP 客户端如何告诉服务器邮件正文已经结束？",
+      "a": "发送一行只包含一个句点的行；按 ASCII 表示，邮件结束序列为 CRLF.CRLF。"
+    },
+    {
+      "q": "SMTP 服务器对客户端命令的响应通常包含什么？",
+      "a": "包含一个回答码和一些可选的英文解释。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "SMTP 发送邮件的基本流程与直接连接",
+    "TCP 字节流与文本协议"
+  ],
+  "source_pages": [
+    93,
+    96
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "241_smtp_会话命令_响应码与邮件结束标记",
+  "_chunk_pages": [
+    93,
+    96
+  ]
+}

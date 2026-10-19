@@ -1,0 +1,49 @@
+{
+  "title": "C++常见基本变量类型",
+  "definition": "C++变量是强类型的，即每个变量始终具有明确的类型。常见基本类型包括有符号整数类型、无符号整数类型、浮点类型、字符类型和布尔类型。不同整数类型的取值范围和大小取决于实现；教材列出的通常大小包括 `short` 通常为 2 字节、`int` 和 `long` 通常为 4 字节、`long long` 通常为 8 字节。",
+  "key_points": [
+    "有符号整数类型包括 `signed int`、`short`、`long` 和 `long long`，可以表示正数和负数。",
+    "无符号整数类型包括 `unsigned int`、`unsigned short`、`unsigned long` 和 `unsigned long long`，用于限制为非负值。",
+    "浮点类型包括 `float`、`double` 和 `long double`，后者的精度不低于前者。",
+    "`bool` 的值只有 `true` 和 `false`。"
+  ],
+  "examples": [
+    "`signed int i {-7};`",
+    "`short s {13};`",
+    "`long long value {14LL};`",
+    "`unsigned int count {2U};`",
+    "`float f {7.2f};`",
+    "`double d {7.2};`",
+    "`long double ld {16.98L};`",
+    "`bool enabled {true};`"
+  ],
+  "misconceptions": [
+    "所有平台上的整数类型大小和取值范围都完全相同；实际上教材明确指出范围取决于编译器，部分类型的通常大小也只是常见情况。",
+    "`unsigned` 类型不是表示正负数，而是限制为非负值。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "C++变量为什么被称为强类型变量？",
+      "a": "因为每个变量始终具有一个特定且明确的类型。"
+    },
+    {
+      "q": "`long long` 与 `long` 的关系是什么？",
+      "a": "`long long` 是超长整型，取值范围取决于编译器，但不低于 `long`，通常为 8 字节；`long` 通常为 4 字节。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "统一初始化与未初始化变量"
+  ],
+  "source_pages": [
+    41,
+    41
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "057_c_常见基本变量类型",
+  "_chunk_pages": [
+    41,
+    44
+  ]
+}

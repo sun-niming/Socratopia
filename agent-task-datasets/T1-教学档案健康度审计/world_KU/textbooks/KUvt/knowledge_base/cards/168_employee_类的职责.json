@@ -1,0 +1,44 @@
+{
+  "title": "Employee 类的职责",
+  "definition": "Employee 类维护某个雇员的全部信息，并通过成员方法提供查询和修改这些信息的途径。该类还能够在控制台显示自身，并提供调整雇员薪水和雇佣状态的方法。",
+  "key_points": [
+    "Employee 类封装单个雇员的完整信息。",
+    "Employee 的方法可以查询雇员信息。",
+    "Employee 的方法可以修改雇员信息。",
+    "Employee 能够将自身显示到控制台。",
+    "Employee 提供调整薪水和雇佣状态的方法。"
+  ],
+  "examples": [
+    "Employee 类可以提供查询雇员信息、修改雇员信息、调整薪水、调整雇佣状态以及在控制台显示自身的成员方法。"
+  ],
+  "misconceptions": [
+    "Employee 类只保存数据，不提供任何操作。",
+    "调整公司所有雇员的集合属于 Employee 类的职责。教材将所有雇员的管理交给 Database 类。",
+    "Employee 的显示功能只能由 UserInterface 实现，Employee 自身不能显示。教材指出 Employee 知道如何在控制台显示自身。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "Employee 类维护什么内容？",
+      "a": "维护某个雇员的全部信息。"
+    },
+    {
+      "q": "Employee 类提供哪些类型的操作？",
+      "a": "提供查询和修改信息、在控制台显示自身，以及调整薪水和雇佣状态的操作。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++ 类的基本概念"
+  ],
+  "source_pages": [
+    92,
+    92
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "168_employee_类的职责",
+  "_chunk_pages": [
+    89,
+    92
+  ]
+}

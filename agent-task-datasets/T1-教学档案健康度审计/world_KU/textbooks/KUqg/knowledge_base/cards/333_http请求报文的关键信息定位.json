@@ -1,0 +1,56 @@
+{
+  "title": "HTTP请求报文的关键信息定位",
+  "definition": "HTTP请求报文的请求行给出方法、请求目标和HTTP版本；Host首部给出目标主机名。将Host首部与请求目标组合，可得到所请求资源的完整URL。Connection首部可用于判断客户是否希望保持连接。User-Agent首部标识发起请求的浏览器或用户代理。",
+  "key_points": [
+    "请求行“GET /cs453/index.html HTTP/1.1”表示使用GET方法，请求路径为“/cs453/index.html”，HTTP版本为HTTP/1.1。",
+    "Host首部为“gaia.cs.umass.edu”，因此完整URL为“http://gaia.cs.umass.edu/cs453/index.html”。",
+    "“Connection: keep-alive”表示浏览器请求使用持续连接。",
+    "User-Agent首部表明发起请求的浏览器是Netscape 7.2，并包含操作系统和浏览器引擎等信息。",
+    "HTTP请求报文本身没有给出客户主机的IP地址，因此不能仅由该报文文本确定客户IP地址。"
+  ],
+  "examples": [
+    "请求行：GET /cs453/index.html HTTP/1.1",
+    "主机首部：Host: gaia.cs.umass.edu",
+    "由二者组合得到URL：http://gaia.cs.umass.edu/cs453/index.html",
+    "连接首部：Connection: keep-alive"
+  ],
+  "misconceptions": [
+    "不能把Host首部中的gaia.cs.umass.edu误认为发起请求的客户主机，它是目标服务器的主机名。",
+    "不能仅根据HTTP请求报文推断客户主机的IP地址；IP地址通常位于网络层数据报首部，而不是这里展示的HTTP文本中。",
+    "“HTTP/1.1”表示报文使用的HTTP版本，不是浏览器版本。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "请求报文“GET /cs453/index.html HTTP/1.1”中的三个主要部分分别表示什么？",
+      "a": "GET是请求方法，/cs453/index.html是请求目标路径，HTTP/1.1是HTTP版本。"
+    },
+    {
+      "q": "该请求所对应的完整URL是什么？",
+      "a": "http://gaia.cs.umass.edu/cs453/index.html"
+    },
+    {
+      "q": "该请求希望使用持续连接还是非持续连接？依据是什么？",
+      "a": "希望使用持续连接，依据是首部“Connection: keep-alive”。"
+    },
+    {
+      "q": "能否仅从展示的HTTP请求文本中确定客户主机的IP地址？",
+      "a": "不能。该HTTP请求文本没有给出客户主机的IP地址。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "HTTP请求报文",
+    "URL的组成"
+  ],
+  "source_pages": [
+    133,
+    136
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "333_http请求报文的关键信息定位",
+  "_chunk_pages": [
+    133,
+    136
+  ]
+}

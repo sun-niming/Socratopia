@@ -1,0 +1,43 @@
+{
+  "title": "根 DNS 服务器与顶级域 DNS 服务器",
+  "definition": "根 DNS 服务器位于 DNS 层次结构的顶层，负责提供顶级域（TLD）DNS 服务器的 IP 地址。对于各个通用顶级域（如 $\\texttt{com}$、$\\texttt{org}$、$\\texttt{net}$、$\\texttt{edu}$、$\\texttt{gov}$）以及国家顶级域（如 $\\texttt{uk}$、$\\texttt{fr}$、$\\texttt{ca}$、$\\texttt{jp}$），都设有相应的 TLD DNS 服务器或服务器集群。",
+  "key_points": [
+    "教材指出，全世界有 400 多个根名字服务器，由 13 个不同的组织管理。",
+    "根名字服务器提供 TLD 服务器的 IP 地址。",
+    "TLD DNS 服务器负责相应顶级域下的域名层次查询，并向客户提供相应权威服务器的信息。",
+    "TLD 可以是通用顶级域，也可以是国家顶级域。"
+  ],
+  "examples": [
+    "查询以 $\\texttt{.com}$ 结尾的域名时，根 DNS 服务器提供 $\\texttt{.com}$ TLD DNS 服务器的 IP 地址。",
+    "$\\texttt{.com}$、$\\texttt{.org}$、$\\texttt{.edu}$ 是通用顶级域示例；$\\texttt{.uk}$、$\\texttt{.fr}$、$\\texttt{.jp}$ 是国家顶级域示例。"
+  ],
+  "misconceptions": [
+    "根 DNS 服务器不等于所有域名的最终权威服务器；它主要提供顶级域服务器的信息。",
+    "TLD DNS 服务器也不是具体主机的最终地址记录所在位置；具体域名的权威 DNS 服务器通常负责最终映射。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "根 DNS 服务器的主要作用是什么？",
+      "a": "提供相应顶级域 DNS 服务器的 IP 地址。"
+    },
+    {
+      "q": "什么是 TLD DNS 服务器？",
+      "a": "TLD DNS 服务器是负责某个顶级域（如 $\\texttt{.com}$ 或某个国家顶级域）查询的 DNS 服务器或服务器集群。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "DNS 的分布式层次结构"
+  ],
+  "source_pages": [
+    101,
+    104
+  ],
+  "needs_verification": true,
+  "verify_query": "site:root-servers.org root name servers more than 400 13 organizations DNS textbook Kurose Ross 7th edition",
+  "concept_id": "260_根_dns_服务器与顶级域_dns_服务器",
+  "_chunk_pages": [
+    101,
+    104
+  ]
+}

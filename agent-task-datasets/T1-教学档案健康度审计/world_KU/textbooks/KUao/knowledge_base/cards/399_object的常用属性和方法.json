@@ -1,0 +1,43 @@
+{
+  "title": "Object的常用属性和方法",
+  "definition": "Object 具有 constructor、prototype、toString、valueOf 等属性或方法。constructor 引用创建对象的构造函数；prototype 是对该对象原型的引用；toString 返回代表对象值的字符串；valueOf 在需要把对象转换为某种基本数据类型时调用（非字符串）。",
+  "key_points": [
+    "constructor 属性引用创建对象的构造函数。",
+    "prototype 属性引用该对象的原型。",
+    "toString 方法返回代表对象值的字符串。",
+    "valueOf 方法在对象需要转换为基本数据类型时调用。"
+  ],
+  "examples": [
+    "Object.prototype.toString() 可用于得到对象的字符串表示。",
+    "对象在需要转换为基本数据类型时会调用 valueOf。"
+  ],
+  "misconceptions": [
+    "误以为 prototype 是对象实例自己的普通数据属性。",
+    "误以为 valueOf 只在转换为字符串时调用。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "Object 的 constructor 属性表示什么？",
+      "a": "它引用创建对象的构造函数。"
+    },
+    {
+      "q": "Object 的 toString 方法有什么作用？",
+      "a": "返回一个代表对象值的字符串。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "Object对象"
+  ],
+  "source_pages": [
+    301,
+    304
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "399_object的常用属性和方法",
+  "_chunk_pages": [
+    301,
+    304
+  ]
+}

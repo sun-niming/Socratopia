@@ -1,0 +1,49 @@
+{
+  "title": "std::move 与返回值优化 RVO/NRVO",
+  "definition": "`std::move` 本身不移动对象，而是将表达式转换为右值类别，以便调用移动构造函数或移动赋值运算符。函数返回局部对象时，编译器可能进行返回值优化：RVO 通常指返回临时对象时省略拷贝或移动，NRVO 通常指返回具名局部对象时省略拷贝或移动。直接写 `return object;` 往往有利于返回值优化；写成 `return std::move(object);` 可能阻碍 NRVO。",
+  "key_points": [
+    "`return object;` 可以触发或允许编译器执行返回值优化，尤其是在 `object` 是函数内具名局部对象时。",
+    "`return std::move(object);` 会把返回表达式明确变成右值，但可能使编译器无法执行 NRVO，因此不应为了“强制移动”而随意添加。",
+    "条件表达式或多个不同的返回对象通常使编译器难以对某个具名对象执行 NRVO。",
+    "即使没有执行 RVO 或 NRVO，返回右值仍可能匹配移动构造；但优化是否发生取决于语言规则和编译器实现。"
+  ],
+  "examples": [
+    "更适合返回值优化的写法：`return object;`。",
+    "可能阻碍 NRVO 的写法：`return std::move(object);`。",
+    "存在多个候选返回对象时：`return condition ? object1 : object2;`，通常不能像直接返回单个具名对象那样进行 NRVO。",
+    "示例形式：`if (condition) { return object1; }`；存在多个返回路径时，NRVO 是否发生需要依据具体代码和编译器判断。"
+  ],
+  "misconceptions": [
+    "`std::move` 不是立即执行移动的函数，也不会把对象本身变成“移动状态”。",
+    "给所有 `return` 的局部对象加上 `std::move` 通常不是优化，反而可能阻碍 NRVO。",
+    "RVO 和 NRVO 是返回值优化类别，不应简单理解为普通的移动构造。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`std::move(object)` 的作用是什么？",
+      "a": "它将 `object` 转换为右值表达式，使后续操作有机会匹配移动构造函数或移动赋值运算符；它本身不执行资源移动。"
+    },
+    {
+      "q": "为什么通常推荐写 `return object;`，而不是 `return std::move(object);`？",
+      "a": "因为直接返回具名局部对象可能触发 NRVO，而 `return std::move(object);` 可能阻碍 NRVO。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "值类别",
+    "右值引用",
+    "移动构造函数",
+    "函数返回对象"
+  ],
+  "source_pages": [
+    273,
+    276
+  ],
+  "needs_verification": true,
+  "verify_query": "《C++20高级编程》第5版 第275页 std::move RVO NRVO return object return std::move(object)",
+  "concept_id": "359_std_move_与返回值优化_rvo_nrvo",
+  "_chunk_pages": [
+    273,
+    276
+  ]
+}

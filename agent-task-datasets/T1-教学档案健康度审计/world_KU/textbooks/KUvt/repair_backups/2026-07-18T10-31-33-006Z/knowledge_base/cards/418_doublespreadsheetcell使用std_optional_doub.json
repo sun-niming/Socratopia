@@ -1,0 +1,45 @@
+{
+  "title": "DoubleSpreadsheetCell使用std::optional<double>保存数值",
+  "definition": "DoubleSpreadsheetCell是SpreadsheetCell的派生类，用成员变量std::optional<double>保存单元格中的可选浮点数值。它提供set(double)设置数值，并重写接受std::string_view的set函数，以便从字符串设置数值；getString()用于把当前数值转换为字符串。",
+  "key_points": [
+    "成员变量m_value的类型为std::optional<double>，表示单元格可能有数值，也可能没有数值。",
+    "getString()会先检查m_value.has_value()；有值时取出m_value.value()并调用doubleToString转换为std::string。",
+    "doubleToString(double)和stringToDouble(std::string_view)被声明为private static辅助函数，用于数值与字符串之间的转换。",
+    "原文代码经过OCR后部分语法不完整，因此getString()在m_value无值时返回什么内容，需要结合教材原版核实。"
+  ],
+  "examples": [
+    "核心逻辑可表示为：$$\\text{getString()}=\\begin{cases}\\text{doubleToString}(m\\_value.value()),&m\\_value.has\\_value()\\\\\\text{无值时的默认结果},&\\neg m\\_value.has\\_value()\\end{cases}$$",
+    "典型使用方式：先调用set(8.4)，再调用getString()获得该数值的字符串表示。"
+  ],
+  "misconceptions": [
+    "std::optional<double>不等同于double；它还能够表示“没有值”的状态。",
+    "getString()不是直接返回double，而是返回std::string。",
+    "static辅助函数属于类而不是某个具体对象，但仍可访问类的相关转换逻辑。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "DoubleSpreadsheetCell为什么使用std::optional<double>而不是直接使用double？",
+      "a": "因为std::optional<double>既能保存一个double值，也能表示当前单元格没有数值。"
+    },
+    {
+      "q": "DoubleSpreadsheetCell中的doubleToString和stringToDouble用于什么？",
+      "a": "doubleToString用于把double转换为std::string，stringToDouble用于把std::string_view表示的内容转换为double。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++类与继承",
+    "std::optional的基本用法"
+  ],
+  "source_pages": [
+    325,
+    328
+  ],
+  "needs_verification": true,
+  "verify_query": "《C++20高级编程》第5版 第325页 DoubleSpreadsheetCell m_value optional<double> getString doubleToString 原文",
+  "concept_id": "418_doublespreadsheetcell使用std_optional_doub",
+  "_chunk_pages": [
+    325,
+    328
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "title": "Web Storage 的安全性注意事项",
+  "definition": "Web Storage 存在于客户端，容易被访问，因此不能把密码、完整 API 密钥、用户私密数据等敏感信息存入 localStorage 或 sessionStorage。",
+  "key_points": [
+    "Web Storage 存储在客户端，容易被访问。",
+    "绝对不要在 localStorage 或 sessionStorage 中存储敏感信息。",
+    "敏感信息示例包括密码、完整的 API 密钥和用户私密数据。"
+  ],
+  "examples": [
+    "不要存储密码",
+    "不要存储完整的 API 密钥",
+    "不要存储用户私密数据"
+  ],
+  "misconceptions": [
+    "只要是 sessionStorage 就可以安全保存所有敏感信息。",
+    "localStorage/ sessionStorage 比服务器端存储更安全。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么不能在 Web Storage 中存储敏感信息？",
+      "a": "因为它们存储在客户端，容易被访问，因此不应保存密码、完整 API 密钥或用户私密数据。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "localStorage 的使用场景",
+    "sessionStorage 的使用场景"
+  ],
+  "source_pages": [
+    385,
+    387
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "512_web_storage_的安全性注意事项",
+  "_chunk_pages": [
+    385,
+    387
+  ]
+}

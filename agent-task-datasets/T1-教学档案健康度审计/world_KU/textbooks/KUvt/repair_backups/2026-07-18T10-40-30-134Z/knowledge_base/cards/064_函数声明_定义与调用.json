@@ -1,0 +1,47 @@
+{
+  "title": "函数声明、定义与调用",
+  "definition": "函数声明用于说明函数的返回类型、名称和参数类型；函数定义还需要提供函数体。调用函数时，实参必须能够与函数声明或定义中的形参相匹配。",
+  "key_points": [
+    "函数声明示例为 `void myFunction(int i, char c);`，表示函数名为 `myFunction`，返回类型为 `void`，接收一个 `int` 参数和一个 `char` 参数。",
+    "函数定义需要在函数头后提供函数体，例如 `void myFunction(int i, char c) { ... }`。",
+    "调用函数时可以传入字面量或变量，例如 `myFunction(8, 'a');`、`myFunction(someInt, 'b');` 和 `myFunction(5, someChar);`。"
+  ],
+  "examples": [
+    "`void myFunction(int i, char c);`",
+    "`void myFunction(int i, char c) { }`",
+    "`myFunction(8, 'a');`",
+    "`myFunction(someInt, 'b');`",
+    "`myFunction(5, someChar);`"
+  ],
+  "misconceptions": [
+    "函数声明不是函数调用；声明只描述接口，不会执行函数体。",
+    "参数类型和实参类型需要匹配或能够进行允许的类型转换，不能任意传入完全不相关的类型。",
+    "返回类型为 `void` 的函数不返回一个可供调用者使用的值。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`void myFunction(int i, char c);` 表示什么？",
+      "a": "它声明了一个名为 `myFunction` 的函数，该函数返回 `void`，并接收一个 `int` 参数和一个 `char` 参数。"
+    },
+    {
+      "q": "下面哪个是函数调用：`void myFunction(int, char);` 还是 `myFunction(8, 'a');`？",
+      "a": "`myFunction(8, 'a');` 是函数调用；前者是函数声明。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++基本类型",
+    "C++语句与表达式"
+  ],
+  "source_pages": [
+    53,
+    56
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "064_函数声明_定义与调用",
+  "_chunk_pages": [
+    53,
+    56
+  ]
+}

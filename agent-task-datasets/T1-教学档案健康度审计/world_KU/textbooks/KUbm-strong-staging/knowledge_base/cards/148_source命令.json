@@ -1,0 +1,43 @@
+{
+  "title": "source命令",
+  "definition": "source 是 shell 内置命令，写法为“source 脚本名”或“. 脚本名”。它的功能是将指定脚本在当前 Shell 中执行，而不是另外启动一个新的 Shell 来运行脚本。",
+  "key_points": [
+    "两种写法等价：source 脚本名 和 . 脚本名",
+    "功能：将指定脚本在当前 Shell 中执行",
+    "属于 shell 内置命令"
+  ],
+  "examples": [
+    "source 脚本名",
+    ". 脚本名"
+  ],
+  "misconceptions": [
+    "误以为 source 会新开一个独立 Shell 执行脚本；原文明确说明是在当前 Shell 中执行",
+    "误以为只有 source 一种写法；原文给出了 source 和 . 两种形式"
+  ],
+  "qa_pairs": [
+    {
+      "q": "source 命令的两种写法是什么？",
+      "a": "可以写成“source 脚本名”或“. 脚本名”。"
+    },
+    {
+      "q": "source 执行脚本时，是在当前 Shell 还是新 Shell 中执行？",
+      "a": "是在当前 Shell 中执行。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "Shell内置命令",
+    "Shell脚本基础"
+  ],
+  "source_pages": [
+    89,
+    92
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "148_source命令",
+  "_chunk_pages": [
+    89,
+    92
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "title": "NP-hard与NP-complete区别",
+  "definition": "NP-hard表示至少和NP中所有问题一样难，但不要求自身属于NP；NP-complete表示既属于NP，又是NP-hard。NP完全问题可理解为NP中最难的一类问题。",
+  "key_points": [
+    "NP-hard只强调“难”，不要求能在多项式时间内验证解",
+    "NP-complete必须同时满足“属于NP”和“NP-hard”"
+  ],
+  "examples": [
+    "如果某问题只证明了能从已知NP完全问题归约到它，但没有证明它属于NP，只能称NP-hard，不能称NP-complete"
+  ],
+  "misconceptions": [
+    "把NP-hard和NP-complete当成同义词",
+    "认为只要问题看起来很难就能直接称为NP-complete"
+  ],
+  "qa_pairs": [
+    {
+      "q": "NP-hard和NP-complete有什么区别？",
+      "a": "NP-hard只要求至少和NP中所有问题一样难，不要求属于NP；NP-complete则既属于NP，又是NP-hard。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "NP",
+    "判定问题",
+    "多项式时间"
+  ],
+  "source_pages": [
+    77,
+    80
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "081_np_hard与np_complete区别",
+  "_chunk_pages": [
+    77,
+    80
+  ]
+}

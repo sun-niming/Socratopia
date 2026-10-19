@@ -1,0 +1,42 @@
+{
+  "title": "shift 移动位置参数",
+  "definition": "shift 用于移动位置参数。教材说明：shift [n] 将位置参数（除 $0）左移 n 个位置，默认左移 1 个位置。也就是说，移动时不包含 $0，主要影响 $1、$2 等参数。",
+  "key_points": [
+    "命令格式为 shift [n]",
+    "左移对象是位置参数，但不包括 $0",
+    "n 省略时默认为 1"
+  ],
+  "examples": [
+    "shift",
+    "shift 2"
+  ],
+  "misconceptions": [
+    "误以为 shift 会移动 $0；原文明确说明除 $0 外的位置参数左移",
+    "误以为必须写 n；实际上默认值为 1"
+  ],
+  "qa_pairs": [
+    {
+      "q": "shift [n] 的作用是什么？",
+      "a": "将位置参数（除 $0）左移 n 个位置。"
+    },
+    {
+      "q": "省略 n 时，shift 默认移动几个位置？",
+      "a": "默认左移 1 个位置。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "位置参数的含义与引用"
+  ],
+  "source_pages": [
+    69,
+    72
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "119_shift_移动位置参数",
+  "_chunk_pages": [
+    69,
+    72
+  ]
+}

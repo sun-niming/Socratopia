@@ -1,0 +1,44 @@
+{
+  "title": "拷贝构造函数中的深层复制",
+  "definition": "对于包含动态分配二维数组的 Spreadsheet 类，拷贝构造函数可以先通过委托构造函数创建与源对象相同宽度和高度的存储空间，再逐个复制源对象中的单元格值。这样复制的是数组中的实际数据，而不是仅复制数组指针，因此形成深层复制。拷贝构造函数处理的是正在创建的新对象，该对象此前没有可释放的 m_cells。",
+  "key_points": [
+    "拷贝构造函数的初始化器可以委托给非拷贝构造函数，以分配适当大小的内存。",
+    "构造函数体再逐个复制元素，例如对所有 $i$ 和 $j$ 执行 $m\\_cells[i][j] = src.m\\_cells[i][j]$。",
+    "深层复制需要同时创建新的动态存储并复制其中的数据，不能只复制指针。",
+    "由于新对象尚未拥有旧的 m_cells，因此拷贝构造函数中不需要先释放 m_cells。"
+  ],
+  "examples": [
+    "概念上的实现结构为：\n```cpp\nSpreadsheet::Spreadsheet(const Spreadsheet& src)\n    : Spreadsheet{src.m_width, src.m_height}\n{\n    for (size_t i{0}; i < m_width; ++i) {\n        for (size_t j{0}; j < m_height; ++j) {\n            m_cells[i][j] = src.m_cells[i][j];\n        }\n    }\n}\n```",
+    "二维数组中的每个元素都满足：$$m\\_cells[i][j] \\leftarrow src.m\\_cells[i][j]$$"
+  ],
+  "misconceptions": [
+    "拷贝构造函数不是简单复制 m_cells 指针；简单复制指针会导致两个对象共享同一块动态内存。",
+    "拷贝构造函数中不需要像赋值运算符那样先删除目标对象已有资源，因为目标对象正在构造。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "Spreadsheet 的拷贝构造函数为什么可以实现深层复制？",
+      "a": "它先通过委托构造函数分配新的二维数组，再逐个复制源对象中的单元格值，因此目标对象拥有独立的动态内存和数据。"
+    },
+    {
+      "q": "为什么拷贝构造函数中不需要先删除 m_cells？",
+      "a": "因为拷贝构造函数用于创建新对象，新对象此前尚未拥有可释放的 m_cells。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "构造函数与拷贝构造函数",
+    "动态内存管理"
+  ],
+  "source_pages": [
+    265,
+    265
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "558_拷贝构造函数中的深层复制",
+  "_chunk_pages": [
+    265,
+    268
+  ]
+}

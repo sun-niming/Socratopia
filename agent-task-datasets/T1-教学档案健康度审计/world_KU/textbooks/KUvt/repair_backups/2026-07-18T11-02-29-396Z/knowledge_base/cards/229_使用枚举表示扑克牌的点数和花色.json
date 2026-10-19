@@ -1,0 +1,51 @@
+{
+  "title": "使用枚举表示扑克牌的点数和花色",
+  "definition": "教材第164页用 Card 类表示一张扑克牌。Card 内部定义 Number 枚举类表示牌面数字或字面值，包括 Ace、Two、Three、Four、Five、Six、Seven、Eight、Nine、Ten、Jack、Queen、King；另定义 Figure 枚举表示 Diamond、Heart、Spade、Club 四种花色。Card 保存一个 Number 成员和一个 Figure 成员，并提供默认构造函数及接收点数和花色的构造函数。",
+  "key_points": [
+    "Number 使用 enum class，枚举值包括 Ace 到 King。",
+    "Figure 表示四种花色：Diamond、Heart、Spade、Club。",
+    "Card 的构造函数可以用一个 Number 和一个 Figure 初始化牌面。",
+    "示例中的成员默认值是 Number::Ace 和 Figure::Diamond。"
+  ],
+  "examples": [
+    "牌面可写作：$\\text{Card}(\\text{Number::Ace},\\text{Figure::Diamond})$。",
+    "一个牌堆可声明为：`Card deck[52];`，表示包含 52 个 Card 元素的数组。",
+    "枚举类的限定写法示例：`Number::Ace`、`Figure::Diamond`。"
+  ],
+  "misconceptions": [
+    "Number 表示牌面数字或人物牌名称，不表示花色。",
+    "Figure 表示花色，不是几何图形对象。",
+    "使用 enum class 时，枚举值通常需要通过枚举类型限定名访问，例如 `Number::Ace`，而不是直接写 `Ace`。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "Card 类中的 Number 和 Figure 分别表示什么？",
+      "a": "Number 表示牌面值，包括 Ace 到 King；Figure 表示花色，包括 Diamond、Heart、Spade 和 Club。"
+    },
+    {
+      "q": "如何构造一张方块 A？",
+      "a": "可写作 `Card(Number::Ace, Figure::Diamond)`。"
+    },
+    {
+      "q": "`Card deck[52];` 表示什么？",
+      "a": "它声明了一个含有 52 个 Card 元素的数组，通常可作为牌堆。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++类与构造函数",
+    "C++枚举类 enum class",
+    "C++数组"
+  ],
+  "source_pages": [
+    161,
+    164
+  ],
+  "needs_verification": true,
+  "verify_query": "《C++20高级编程》第5版 第164页 Card enum class Number Figure Diamond Heart Spade Club deck[52]",
+  "concept_id": "229_使用枚举表示扑克牌的点数和花色",
+  "_chunk_pages": [
+    161,
+    164
+  ]
+}

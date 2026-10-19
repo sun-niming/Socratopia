@@ -1,0 +1,44 @@
+{
+  "title": "子节点集合访问",
+  "definition": "教材介绍了两种获取子节点集合的方法：`childNodes` 和 `children`。`childNodes` 返回一个动态的 `NodeList`，包含所有类型的子节点，例如元素、文本、注释；`children` 返回一个动态的 `HTMLCollection`，只包含元素类型的子节点。",
+  "key_points": [
+    "`childNodes` 包含所有类型的子节点。",
+    "`children` 只包含元素类型的子节点。",
+    "`childNodes` 的返回类型是 `NodeList`。",
+    "`children` 的返回类型是 `HTMLCollection`。",
+    "教材说明这两者都是动态的。"
+  ],
+  "examples": [
+    "element.childNodes\nelement.children"
+  ],
+  "misconceptions": [
+    "把 `childNodes` 和 `children` 当成同一个东西。",
+    "认为 `children` 也会把文本节点、注释节点算进去。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`childNodes` 和 `children` 的核心区别是什么？",
+      "a": "`childNodes` 包含所有类型子节点，`children` 只包含元素子节点。"
+    },
+    {
+      "q": "`children` 返回的是什么类型？",
+      "a": "返回动态的 `HTMLCollection`。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "DOM树",
+    "节点类型"
+  ],
+  "source_pages": [
+    349,
+    352
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "469_子节点集合访问",
+  "_chunk_pages": [
+    349,
+    352
+  ]
+}

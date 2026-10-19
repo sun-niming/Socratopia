@@ -1,0 +1,48 @@
+{
+  "title": "RTTI 提供运行时类型信息",
+  "definition": "C++ 的运行时类型信息（RTTI，Run-Time Type Information）是一组能够在运行时判断对象所属类的特性。教材列举的 RTTI 特性包括 dynamic_cast 和 typeid。dynamic_cast 可在具有多态关系的对象层次结构中进行安全类型转换；typeid 运算符可在运行时查询对象的类型。",
+  "key_points": [
+    "dynamic_cast 用于对象层次结构中的安全类型转换。",
+    "对类使用 dynamic_cast 时，相关多态类需要具有虚函数；没有虚表、即没有虚方法时会导致编译错误。",
+    "typeid 可以在运行时获取对象的类型信息。",
+    "教材指出，大多数情况下不应优先使用 typeid，而应使用虚方法实现基于对象类型的行为。"
+  ],
+  "examples": [
+    "RTTI 的两个主要工具可概括为：$$\\text{RTTI}=\\{\\text{dynamic\\_cast},\\ \\text{typeid}\\}$$",
+    "若 Animal 是具有虚方法的多态基类，则可用 typeid(animal) 与 typeid(Dog) 比较，以判断对象的实际类型。"
+  ],
+  "misconceptions": [
+    "误以为所有类都可以无条件使用 dynamic_cast 和 typeid 进行多态类型判断。",
+    "误以为 typeid 总是比虚函数更适合实现基于对象类型的行为。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "RTTI 的主要作用是什么？",
+      "a": "在运行时获取或判断对象的类型信息，并支持对象层次结构中的安全类型转换。"
+    },
+    {
+      "q": "对没有虚函数的类使用 dynamic_cast 会怎样？",
+      "a": "教材指出，这种情况下会导致编译错误，因为该类没有虚表。"
+    },
+    {
+      "q": "实现基于对象实际类型的行为时，教材通常建议优先使用什么？",
+      "a": "优先使用虚方法，而不是在外部通过 typeid 判断类型。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "虚函数与多态",
+    "继承层次结构"
+  ],
+  "source_pages": [
+    344,
+    344
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "694_rtti_提供运行时类型信息",
+  "_chunk_pages": [
+    341,
+    344
+  ]
+}

@@ -1,0 +1,49 @@
+{
+  "title": "强类型枚举enum class",
+  "definition": "强类型枚举（`enum class`）是一种由程序员定义的枚举类型。它限制变量只能取该枚举声明的成员值，并要求通过枚举类型名访问枚举成员，例如 `PieceType::King`，从而减少整数随意运算和不同枚举类型之间误用的问题。",
+  "key_points": [
+    "声明示例：`enum class PieceType { King, Queen, Rook, Pawn };`。",
+    "使用枚举成员时通常必须写完整限定名，例如 `PieceType piece { PieceType::King };`。",
+    "枚举成员默认从 `0` 开始，后续未显式赋值的成员在前一个成员值基础上递增 `1`。",
+    "强类型枚举值虽然内部由整型值表示，但不会自动转换为整数。"
+  ],
+  "examples": [
+    "`enum class PieceType { King, Queen, Rook, Pawn };`",
+    "`PieceType piece { PieceType::King };`",
+    "默认情况下，`King`、`Queen`、`Rook`、`Pawn` 的底层整数值依次为 `0`、`1`、`2`、`3`。"
+  ],
+  "misconceptions": [
+    "`enum class` 的枚举成员不能像普通整数一样自动参与所有整数运算或比较。",
+    "声明了 `enum class PieceType` 后，不能直接写 `King` 来代替 `PieceType::King`，除非使用适当的 `using` 声明。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何声明一个包含四种棋子类型的强类型枚举？",
+      "a": "可以写：`enum class PieceType { King, Queen, Rook, Pawn };`。"
+    },
+    {
+      "q": "如何定义一个 `PieceType` 类型的王棋子变量？",
+      "a": "写作：`PieceType piece { PieceType::King };`。"
+    },
+    {
+      "q": "强类型枚举值能否自动转换为整数？",
+      "a": "不能。`enum class` 的枚举值不会自动转换为整数。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++变量声明",
+    "整数类型"
+  ],
+  "source_pages": [
+    46,
+    46
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "066_强类型枚举enum_class",
+  "_chunk_pages": [
+    45,
+    48
+  ]
+}

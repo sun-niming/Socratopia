@@ -1,0 +1,52 @@
+{
+  "title": "利用右值引用优化字符串连接",
+  "definition": "字符串连接运算符operator+可以根据参数是左值还是右值引用，选择是否重用某个参数的内存。若某个参数是右值引用，它通常表示操作完成后即将销毁的临时对象，因此实现可以直接重用该对象的内部缓冲区，减少不必要的内存分配。标准库std::string为operator+提供了多种左值引用和右值引用组合的重载。",
+  "key_points": [
+    "两个普通字符串参数进行连接时，通常不能直接重用参数内存，可能需要重新分配内存。",
+    "当左操作数以右值引用传入时，可以通过在其后追加右操作数来重用左操作数的内存，例如概念上可实现为`return std::move(lhs.append(rhs));`。",
+    "当右操作数以右值引用传入时，可以在其开头插入左操作数，从而重用右操作数的内存，例如概念上可实现为`return std::move(rhs.insert(0, lhs));`。",
+    "实际是否能够重用内存取决于操作数的大小、容量以及具体实现。",
+    "这种优化的基本思想与移动赋值运算符相同：利用即将销毁对象的资源，而不是重新分配资源。"
+  ],
+  "examples": [
+    "概念上的左值加右值重载：`string operator+(const string& lhs, string&& rhs);`。",
+    "当右操作数是可复用的右值时，可采用：`return std::move(rhs.insert(0, lhs));`。",
+    "当左操作数是可复用的右值时，可采用：`return std::move(lhs.append(rhs));`。"
+  ],
+  "misconceptions": [
+    "右值引用并不保证一定发生内存重用；是否重用仍取决于字符串容量、大小和具体标准库实现。",
+    "std::move本身不移动数据，它只是把表达式转换为可用于移动的右值类别。",
+    "所有operator+重载都能重用内存是错误的；只有合适的左值/右值引用组合才可能实现这种优化。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么字符串operator+接收右值引用时可能减少内存分配？",
+      "a": "右值引用通常绑定到操作完成后即将销毁的临时对象，因此可以直接重用该对象的内部缓冲区。"
+    },
+    {
+      "q": "当rhs是右值引用时，字符串连接可以采用哪种实现思路？",
+      "a": "可以把lhs插入rhs的开头，并返回移动后的rhs，例如`return std::move(rhs.insert(0, lhs));`。"
+    },
+    {
+      "q": "右值引用是否保证字符串连接一定重用内存？",
+      "a": "不保证。实际效果取决于操作数的大小、容量以及具体标准库实现。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "右值引用",
+    "移动语义",
+    "std::string基本操作"
+  ],
+  "source_pages": [
+    474,
+    474
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 std::string operator+ rvalue reference overload memory reuse lhs rhs append insert standard library implementation",
+  "concept_id": "952_利用右值引用优化字符串连接",
+  "_chunk_pages": [
+    473,
+    476
+  ]
+}

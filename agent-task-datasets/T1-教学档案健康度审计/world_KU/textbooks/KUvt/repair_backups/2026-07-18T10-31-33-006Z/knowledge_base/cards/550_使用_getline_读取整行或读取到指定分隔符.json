@@ -1,0 +1,51 @@
+{
+  "title": "使用 getline 读取整行或读取到指定分隔符",
+  "definition": "C++ 提供两种常见的 getline 输入方式：cin.getline(buffer, size) 将字符读入固定大小的字符数组；std::getline(cin, string) 将一整行读入 std::string，通常在遇到换行符时结束。std::getline 还可以接收第三个参数作为自定义终止分隔符，读取到该字符为止。",
+  "key_points": [
+    "字符数组版本的 cin.getline(buffer, kBufferSize) 需要提供缓冲区和最大读取长度。",
+    "std::getline(cin, myString) 读取一行文本，并将结果保存到 std::string。",
+    "std::getline(cin, myString, '@') 使用 '@' 作为终止字符，而不是默认的换行符。",
+    "原文示例使用 '@' 结束多行文本输入，因此可以把多行内容读入同一个字符串。",
+    "使用字符数组版本时必须考虑缓冲区容量；原文示例声明 char buffer[kBufferSize]{0}。"
+  ],
+  "examples": [
+    "固定字符数组：\n```cpp\nconst int kBufferSize = /* 缓冲区大小 */;\nchar buffer[kBufferSize]{0};\ncin.getline(buffer, kBufferSize);\n```",
+    "读取一整行：\n```cpp\nstring myString;\ngetline(cin, myString);\n```",
+    "读取到自定义分隔符 '@'：\n```cpp\nstring myString;\ngetline(cin, myString, '@');\n```",
+    "原文示例提示用户输入多行文本，并用 '@' 表示结束；读取结果可能包含换行，例如：\"This is some\\ntext on multiple\\nlines.\"。"
+  ],
+  "misconceptions": [
+    "std::getline(cin, string) 不只读取一个单词，而是读取直到终止换行符的整行内容。",
+    "第三个参数是终止字符，不是要保存到字符串中的普通内容；读取通常在遇到该字符时停止。",
+    "cin.getline 与 std::getline 的目标类型不同：前者写入字符数组，后者写入 std::string。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何把整行输入读入 std::string？",
+      "a": "声明字符串后调用 getline(cin, myString)。"
+    },
+    {
+      "q": "如何让 getline 读取多行内容直到遇到 '@'？",
+      "a": "调用 getline(cin, myString, '@')，把 '@' 指定为自定义终止分隔符。"
+    },
+    {
+      "q": "cin.getline(buffer, kBufferSize) 的两个参数分别表示什么？",
+      "a": "第一个参数是目标字符数组，第二个参数是缓冲区容量或最大读取长度参数。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++标准输入流和流状态"
+  ],
+  "source_pages": [
+    421,
+    424
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "550_使用_getline_读取整行或读取到指定分隔符",
+  "_chunk_pages": [
+    421,
+    424
+  ]
+}

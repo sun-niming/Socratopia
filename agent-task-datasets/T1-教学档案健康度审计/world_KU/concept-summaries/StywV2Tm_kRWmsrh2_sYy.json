@@ -1,0 +1,128 @@
+{
+  "conversationId": "StywV2Tm_kRWmsrh2_sYy",
+  "generatedAt": 1782641327964,
+  "pagesRange": null,
+  "sections": [
+    {
+      "type": "tldr",
+      "content": "本节把 Linux 里的三块内容串起来了：**守护进程怎么脱离终端并写日志**、**Linux 常见 IPC 方式有哪些**、以及**信号如何产生、传递和处理**。"
+    },
+    {
+      "type": "narrative",
+      "content": "一开始先从守护进程的创建步骤切入，逐步对齐 `setsid()`、`syslog()` 这些关键函数。接着转到 IPC，总结出管道、System V IPC、套接字三大类，并澄清“信号不算真正意义上的 IPC”。最后进入信号专题，把产生原因、处理方式和常见函数（`kill()`、`raise()`、`alarm()`、`pause()`、`sleep()`）连成一条完整链路。"
+    },
+    {
+      "type": "concepts",
+      "items": [
+        {
+          "name": "守护进程（daemon）创建流程",
+          "body": "教材把守护进程的要点概括成 5 步：\n\n1. **创建子进程，终止父进程**\n2. **子进程创建新的会话**：对应 `setsid()`\n3. **改变工作目录**：常见对应是 `chdir()`\n4. **重设文件创建掩码**：常见对应是 `umask()`\n5. **关闭文件描述符**：常见对应是 `close()`\n\n核心直觉：守护进程要尽量**脱离原来的终端和控制环境**，安静地在后台运行。"
+        },
+        {
+          "name": "系统日志与 `syslog()`",
+          "body": "守护进程通常把运行信息写入系统日志，而不是直接面对终端。\n\n函数形式：\n```c\\nvoid syslog(int priority, char *format, ...);\n```\n\n- `priority`：日志信息或等级\n- `format`：格式字符串，像 `printf` 一样\n- `...`：可变参数\n\n教材提到的常见等级：\n- `LOG_INFO`\n- `LOG_ERR`\n- `LOG_DEBUG`\n\n`closelog()` 的作用是关闭日志，但**是可选的，不必须调用**。"
+        },
+        {
+          "name": "Linux 中主要的 IPC 技术",
+          "body": "教材把 Linux 常见 IPC 先归纳成三类：\n\n- **管道**\n- **System V IPC**\n- **套接字**\n\n其中，**信号不算真正意义上的 IPC**，因为它更偏向**事件通知**，不能完成真正的数据传输。"
+        },
+        {
+          "name": "管道：匿名管道与命名管道",
+          "body": "### 匿名管道\n- **半双工**\n- **只能单向传送数据**\n- **只能用于有亲缘关系的进程**（同源进程）\n\n### 命名管道\n- 也叫 **FIFO**\n- 借助**外存**\n- 能突破“必须有亲缘关系”的限制\n\n记忆法：\n- 匿名管道靠**亲缘关系**\n- 命名管道靠**名字和文件系统**"
+        },
+        {
+          "name": "System V IPC",
+          "body": "教材把 System V IPC 归为三种：\n\n- **消息队列**\n- **信号量**\n- **共享内存**\n\n它们被放在一起，是因为实现上有相似性，而且都和 System V 体系有关。\n\n直观记忆：\n- **消息队列**：传消息\n- **信号量**：管同步\n- **共享内存**：最快"
+        },
+        {
+          "name": "信号（signal）",
+          "body": "信号是一种**软中断**，是 Linux/Unix 响应某些条件而产生的事件。它的作用主要是**处理异步事件**，也常被当作一种进程间通信机制，但教材强调：**它不算真正意义上的 IPC**。\n\n### 信号产生的常见情况\n- 用户在终端按下组合键\n- 硬件异常\n- 进程调用 `kill` 函数发送信号\n- 检测到某软件异常\n\n### 信号到来后的处理方式\n- **阻塞**：先拦住，暂时不处理\n- **捕获**：注册处理函数，按自定义方式处理\n- **忽略**：来了也不理\n- **默认动作**：按系统预先规定的方式处理"
+        },
+        {
+          "name": "信号相关函数",
+          "body": "教材里出现了几个常用函数：\n\n- `kill(pid, sig)`：发送信号\n- `raise(sig)`：给进程自己发送信号，等价于 `kill(getpid(), sig)`\n- `alarm(int second)`：设定定时器，指定秒数后向自身发送 `SIGALRM`\n- `pause()`：挂起进程，直到有信号到达\n- `sleep(int sec)`：最多睡眠 `sec` 秒，时间到或收到信号后返回\n- `signal(signum, handler)`：注册信号处理方式\n\n### `kill(pid, sig)` 的 `pid` 含义\n- `pid > 0`：发给指定 PID\n- `pid = 0`：发给当前进程组\n- `pid = -1`：广播给系统内所有进程\n- `pid < -1`：发给 PID 为其绝对值的进程\n\n### `alarm()` 的补充\n- `second = 0` 可取消闹钟\n- 新的 `alarm()` 会覆盖前一个闹钟\n- 返回值为 `0` 或剩余秒数"
+        },
+        {
+          "name": "信号生命周期的理解",
+          "body": "更贴近教材图示的流程可以记成：\n\n**信号产生 → 信号传递 → 信号处理**\n\n其中“注册”更像是为将来的处理预先做准备，不是这条生命周期里的核心环节。"
+        }
+      ]
+    },
+    {
+      "type": "key-terms",
+      "items": [
+        {
+          "term": "setsid()",
+          "definition": "创建新的会话，并设置进程组 ID；教材明确展开的守护进程关键函数。"
+        },
+        {
+          "term": "syslog()",
+          "definition": "向系统日志写信息的函数，`priority` 表示日志等级，`format` 像 `printf`。"
+        },
+        {
+          "term": "closelog()",
+          "definition": "关闭日志的函数；可选，不必须调用。"
+        },
+        {
+          "term": "IPC",
+          "definition": "进程间通信；教材中主要包括管道、System V IPC、套接字。"
+        },
+        {
+          "term": "FIFO",
+          "definition": "命名管道；借助外存，突破匿名管道只能用于同源进程的限制。"
+        },
+        {
+          "term": "System V IPC",
+          "definition": "包括消息队列、信号量、共享内存三种机制。"
+        },
+        {
+          "term": "软中断",
+          "definition": "信号的特征之一；更像事件通知，而不是完整的数据传输。"
+        },
+        {
+          "term": "SIGALRM",
+          "definition": "`alarm()` 到期后向进程自身发送的信号。"
+        }
+      ]
+    },
+    {
+      "type": "review-questions",
+      "items": [
+        {
+          "question": "守护进程创建的 5 个步骤是什么？",
+          "hint": "按教材顺序回忆。",
+          "answer": "1. 创建子进程，终止父进程；2. 子进程创建新的会话；3. 改变工作目录；4. 重设文件创建掩码；5. 关闭文件描述符。"
+        },
+        {
+          "question": "`setsid()` 的作用是什么？返回值是什么？",
+          "hint": "把“创建新会话”和“脱离终端”联系起来。",
+          "answer": "`setsid()` 用来**创建新的会话，并设置进程组 ID**；教材里说它返回**新进程组的 PID**。"
+        },
+        {
+          "question": "`syslog()` 的函数形式是什么？`priority` 和 `format` 分别表示什么？",
+          "hint": "想想它像谁。",
+          "answer": "函数形式是 `void syslog(int priority, char *format, ...);`。`priority` 表示日志信息或等级，`format` 像 `printf` 的格式字符串。"
+        },
+        {
+          "question": "Linux 主要的三种 IPC 技术是什么？为什么信号不算真正意义上的 IPC？",
+          "hint": "先列三类，再说边界。",
+          "answer": "三种是**管道、System V IPC、套接字**。信号不算真正意义上的 IPC，因为它是**软中断**，更像**事件通知**，不能完成真正的数据传输。"
+        },
+        {
+          "question": "`kill(pid, sig)` 在 `pid > 0`、`pid = 0`、`pid = -1`、`pid < -1` 时分别表示什么？",
+          "hint": "分别对应指定进程、进程组、广播、绝对值。",
+          "answer": "- `pid > 0`：发给指定 PID\\n- `pid = 0`：发给当前进程组\\n- `pid = -1`：广播给系统内所有进程\\n- `pid < -1`：发给 PID 为其绝对值的进程"
+        },
+        {
+          "question": "`raise(sig)` 和 `kill(getpid(), sig)` 的关系是什么？",
+          "hint": "是等价关系。",
+          "answer": "二者等价；`raise(sig)` 就是给进程自己发送一个信号，可以看作 `kill(getpid(), sig)`。"
+        }
+      ]
+    },
+    {
+      "type": "open-question",
+      "content": "教材已经讲到了信号的基本处理方式，但没有展开每一种信号的具体默认动作。下一步可以继续补：**不同信号的默认行为分别是什么，以及什么时候更适合用 `signal()` 而不是 `kill()`/`raise()`/`alarm()`**。"
+    }
+  ]
+}

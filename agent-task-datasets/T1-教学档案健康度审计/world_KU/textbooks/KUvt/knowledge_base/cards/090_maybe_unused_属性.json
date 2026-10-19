@@ -1,0 +1,47 @@
+{
+  "title": "[[maybe_unused]] 属性",
+  "definition": "[[maybe_unused]] 属性用于标记可能有意不被使用的实体，使编译器在该实体未被使用时不发出相应的未使用警告。它可以用于函数参数等多种声明对象。",
+  "key_points": [
+    "当编译器警告级别较高时，未使用的函数参数可能触发警告。",
+    "可以只给确实可能未使用的参数添加 [[maybe_unused]]。",
+    "原文列出的适用对象包括类和结构体、非静态数据成员、联合、typedef、类型别名、变量、函数、枚举以及枚举值。"
+  ],
+  "examples": [
+    "int func(int param1, [[maybe_unused]] int param2) { return 42; }",
+    "在该示例中，param2 被标记为可能未使用，因此编译器不应因 param2 未被使用而发出相应警告；param1 仍可能产生未使用警告。"
+  ],
+  "misconceptions": [
+    "[[maybe_unused]] 不会让变量自动参与计算，也不会改变变量的值。",
+    "该属性通常只抑制未使用警告，并不表示该实体一定会被使用。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "[[maybe_unused]] 的主要用途是什么？",
+      "a": "在某个实体有意可能未被使用时，抑制编译器针对未使用情况发出的警告。"
+    },
+    {
+      "q": "示例中为什么给 param2 添加 [[maybe_unused]]？",
+      "a": "因为 param2 没有在函数体中使用，添加该属性可以抑制针对它的未使用参数警告。"
+    },
+    {
+      "q": "[[maybe_unused]] 只能用于函数参数吗？",
+      "a": "不是；原文还列出类、结构体、非静态数据成员、联合、类型别名、变量、函数、枚举和枚举值等对象。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++ 属性的标准化语法",
+    "函数参数"
+  ],
+  "source_pages": [
+    55,
+    56
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "090_maybe_unused_属性",
+  "_chunk_pages": [
+    53,
+    56
+  ]
+}

@@ -1,0 +1,53 @@
+{
+  "title": "const指针与指向const对象的指针",
+  "definition": "当const与指针结合时，必须区分“指针指向的对象不能修改”和“指针自身不能修改”。`const int*`或`int const*`表示指向const int的指针，不能通过该指针修改所指对象，但指针本身可以改指向；`int* const`表示const指针，指针本身不能改指向，但可以通过它修改所指的int；`int const* const`或`const int* const`同时限制指针和所指对象。",
+  "key_points": [
+    "`const int* ip`与`int const* ip`等价：所指的int不能通过ip修改。",
+    "`int* const ip`表示ip本身是const指针，声明时必须初始化，之后不能改为指向其他地址。",
+    "`int const* const ip`与`const int* const ip`等价：ip不能改指向，所指对象也不能通过ip修改。",
+    "理解复杂声明时，可以从右向左读：先读变量名，再判断它是指针、const指针以及指向什么类型。",
+    "const通常作用于其直接左侧内容；若const位于类型最左侧，则与写在类型右侧的效果等价。"
+  ],
+  "examples": [
+    "指向const int的指针：`const int* ip { nullptr };`或`int const* ip { nullptr };`。",
+    "const指针：`int* const ip { new int[10] };`；ip不能再指向其他地址，但可写`ip[4] = 5;`。",
+    "指针和所指对象都为const：`int const* const ip { nullptr };`或`const int* const ip { nullptr };`。",
+    "从右向左读：`int* const ip`可读作“ip是指向int的const指针”；`int const* ip`可读作“ip是指向const int的指针”。"
+  ],
+  "misconceptions": [
+    "`const int*`表示指针本身不能改变；实际上它限制的是通过该指针修改所指int，指针本身仍可改指向。",
+    "`int* const`表示所指对象不能改变；实际上它限制的是指针本身不能改指向，所指的int仍可修改。",
+    "把const写在int前后一定会改变含义；对于`const int*`和`int const*`，两种写法功能等效。",
+    "const指针声明时可以不初始化；const指针本身必须在声明时初始化。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`const int* ip`和`int const* ip`限制的是什么？",
+      "a": "它们都表示ip指向const int，不能通过ip修改所指的int，但ip本身可以改指向。"
+    },
+    {
+      "q": "`int* const ip`限制的是什么？",
+      "a": "ip本身不能改指向，因此必须初始化；但如果所指对象是普通int，则可以通过ip修改该对象。"
+    },
+    {
+      "q": "如何声明一个既不能改指向、又不能修改所指int的指针？",
+      "a": "使用`const int* const ip`或等价写法`int const* const ip`。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++指针基础",
+    "C++const变量"
+  ],
+  "source_pages": [
+    74,
+    75
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "134_const指针与指向const对象的指针",
+  "_chunk_pages": [
+    73,
+    76
+  ]
+}

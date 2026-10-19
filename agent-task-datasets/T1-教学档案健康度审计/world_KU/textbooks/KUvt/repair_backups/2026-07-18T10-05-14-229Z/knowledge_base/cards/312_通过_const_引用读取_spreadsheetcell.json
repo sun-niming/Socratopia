@@ -1,0 +1,44 @@
+{
+  "title": "通过 const 引用读取 SpreadsheetCell",
+  "definition": "可以把 SpreadsheetCell 对象以 const 引用传递给只需要读取它的函数，例如 void printCell(const SpreadsheetCell& cell)。函数通过 cell.getString() 获取字符串表示并输出。由于参数是 const 引用，被调用的成员函数必须能够在 const 对象上调用，因此 getString() 被声明为 const。",
+  "key_points": [
+    "const SpreadsheetCell& 避免复制对象，同时保证 printCell 不修改传入对象。",
+    "printCell 的示例实现是输出 cell.getString() 并换行。",
+    "getString() 声明为 const，表示该成员函数不修改对象状态，可以通过 const 引用调用。"
+  ],
+  "examples": [
+    "代码示例：void printCell(const SpreadsheetCell& cell) { std::cout << cell.getString() << std::endl; }",
+    "调用示例：SpreadsheetCell cell; cell.setValue(6); printCell(cell);"
+  ],
+  "misconceptions": [
+    "const 引用不是把对象复制成一个新的 const 对象，而是以只读方式引用原对象。",
+    "const 成员函数并不表示返回值必须是 const；它表示成员函数不能修改当前对象的状态。",
+    "printCell 只读对象，因此不能在其中调用需要修改对象的 setValue。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么 printCell 的参数写成 const SpreadsheetCell&？",
+      "a": "这样既可以避免复制 SpreadsheetCell，又能保证 printCell 不修改传入对象。"
+    },
+    {
+      "q": "为什么 printCell 中可以调用 cell.getString()？",
+      "a": "因为 getString() 被声明为 const，可以在 const SpreadsheetCell 对象上调用。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++引用",
+    "const成员函数"
+  ],
+  "source_pages": [
+    233,
+    236
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "312_通过_const_引用读取_spreadsheetcell",
+  "_chunk_pages": [
+    233,
+    236
+  ]
+}

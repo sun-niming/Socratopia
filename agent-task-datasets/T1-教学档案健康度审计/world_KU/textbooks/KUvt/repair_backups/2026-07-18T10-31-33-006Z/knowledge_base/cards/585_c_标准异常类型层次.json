@@ -1,0 +1,52 @@
+{
+  "title": "C++标准异常类型层次",
+  "definition": "C++ 标准库提供了以 std::exception 为基础的异常类型体系。异常类型按用途分布在 <exception>、<stdexcept>、<typeinfo>、<any>、<variant>、<optional>、<memory>、<functional>、<future>、<ios>、<system_error>、<filesystem> 等头文件中。",
+  "key_points": [
+    "std::logic_error 和 std::runtime_error 是常用的逻辑错误与运行时错误基类。",
+    "logic_error 的常见派生类型包括 invalid_argument、domain_error、length_error 和 out_of_range。",
+    "runtime_error 的常见派生类型包括 range_error、overflow_error、underflow_error、regex_error、system_error 和 filesystem::filesystem_error。",
+    "其他标准异常类型包括 bad_alloc、bad_array_new_length、bad_cast、bad_typeid、bad_any_cast、bad_variant_access、bad_optional_access、bad_weak_ptr、bad_function_call、future_error、ios_base::failure 等。"
+  ],
+  "examples": [
+    "典型层次可概括为：\n$$\\text{std::exception}\\rightarrow\\begin{cases}\n\\text{std::logic_error}\\rightarrow\\{\\text{invalid_argument},\\text{domain_error},\\text{length_error},\\text{out_of_range}\\}\\\\\n\\text{std::runtime_error}\\rightarrow\\{\\text{range_error},\\text{overflow_error},\\text{underflow_error},\\text{regex_error},\\text{system_error}\\}\n\\end{cases}$$",
+    "文件系统操作失败可使用 std::filesystem::filesystem_error；动态内存分配失败可使用 std::bad_alloc。"
+  ],
+  "misconceptions": [
+    "所有标准异常都直接继承自 std::exception；实际上一些异常通过中间基类继承。",
+    "logic_error 不表示程序一定不会在运行时遇到它；它是标准库对错误性质的分类。",
+    "异常类型的头文件不同，使用某个异常类时应包含其对应的标准库头文件。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "std::invalid_argument 属于哪一类异常？",
+      "a": "它是 std::logic_error 的派生异常，用于表示参数无效。"
+    },
+    {
+      "q": "std::overflow_error 和 std::underflow_error 属于哪一类？",
+      "a": "它们属于 std::runtime_error。"
+    },
+    {
+      "q": "表示动态内存分配失败的标准异常是什么？",
+      "a": "std::bad_alloc。"
+    },
+    {
+      "q": "标准异常体系的常见根类型是什么？",
+      "a": "std::exception。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++异常的抛出与捕获"
+  ],
+  "source_pages": [
+    447,
+    448
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 standard exception class hierarchy std::exception logic_error runtime_error bad_alloc filesystem_error",
+  "concept_id": "585_c_标准异常类型层次",
+  "_chunk_pages": [
+    445,
+    448
+  ]
+}

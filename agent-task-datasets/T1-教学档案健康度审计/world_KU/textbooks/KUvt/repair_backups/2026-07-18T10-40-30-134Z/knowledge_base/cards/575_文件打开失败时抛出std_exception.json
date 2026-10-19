@@ -1,0 +1,43 @@
+{
+  "title": "文件打开失败时抛出std::exception",
+  "definition": "readIntegerFile示例在检测到输入文件流失败时抛出std::exception。调用方可以把readIntegerFile放在try语句块中，并用catch捕获异常，从而处理文件读取失败。",
+  "key_points": [
+    "原文示例先通过inputStream.fail()检查输入流是否失败。",
+    "如果inputStream.fail()为真，则执行throw exception{}。",
+    "调用readIntegerFile的代码可以使用try/catch捕获该异常。",
+    "文件读取成功时，函数继续读取整数并返回vector<int>。"
+  ],
+  "examples": [
+    "原文示例的异常检查逻辑：\nvector<int> readIntegerFile(string_view filename) {\n    ifstream inputStream{filename.data()};\n    if (inputStream.fail()) {\n        throw std::exception{};\n    }\n    // 继续读取整数并返回vector<int>\n}"
+  ],
+  "misconceptions": [
+    "检测到文件流失败后，函数不会继续正常读取，而是先抛出异常。",
+    "catch必须捕获与抛出对象类型匹配的异常类型；用更具体的异常类型捕获时，需要依据实际抛出的类型判断是否匹配。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "readIntegerFile如何处理输入文件流失败？",
+      "a": "调用inputStream.fail()检查流状态；如果结果为真，就执行throw std::exception{}抛出异常。"
+    },
+    {
+      "q": "调用readIntegerFile时如何处理它可能抛出的异常？",
+      "a": "将调用放在try语句块中，并使用匹配的catch处理程序捕获异常。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++异常处理的基本机制",
+    "使用ifstream读取整数文件"
+  ],
+  "source_pages": [
+    437,
+    440
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 std::ifstream fail() 文件打开失败 throw std::exception{} readIntegerFile 教材 C++20高级编程 第5版",
+  "concept_id": "575_文件打开失败时抛出std_exception",
+  "_chunk_pages": [
+    437,
+    440
+  ]
+}

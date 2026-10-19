@@ -1,0 +1,41 @@
+{
+  "title": "ECMAScript标准",
+  "definition": "ECMAScript是ECMA在1997年基于JavaScript 1.5制定的脚本程序语言规范（ECMA-262）。它规定了脚本语言的基本语法，但不与任何浏览器绑定。",
+  "key_points": [
+    "由ECMA制定，规范编号为ECMA-262",
+    "基于JavaScript 1.5",
+    "只定义基本语法，不绑定具体浏览器"
+  ],
+  "examples": [
+    "ECMAScript定义变量、运算符等基本语法规则"
+  ],
+  "misconceptions": [
+    "ECMAScript就是某个浏览器中的JavaScript实现",
+    "ECMAScript只是一套浏览器API"
+  ],
+  "qa_pairs": [
+    {
+      "q": "ECMAScript的主要作用是什么？",
+      "a": "定义脚本语言的基本语法。"
+    },
+    {
+      "q": "ECMAScript是否与某个浏览器绑定？",
+      "a": "不与任何浏览器绑定。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "JavaScript的诞生"
+  ],
+  "source_pages": [
+    233,
+    234
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "322_ecmascript标准",
+  "_chunk_pages": [
+    233,
+    236
+  ]
+}

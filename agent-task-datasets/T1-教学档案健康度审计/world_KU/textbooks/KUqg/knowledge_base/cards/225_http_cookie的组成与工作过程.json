@@ -1,0 +1,51 @@
+{
+  "title": "HTTP Cookie的组成与工作过程",
+  "definition": "Cookie是HTTP用于让网站识别和跟踪用户的一种机制。教材指出，Cookie技术包含四个组件：HTTP响应报文中的Set-cookie首部行、HTTP请求报文中的Cookie首部行、由浏览器管理并保存在用户端系统中的Cookie文件，以及网站后端用于保存相关信息的数据库。",
+  "key_points": [
+    "HTTP服务器本身是无状态的；Cookie为网站关联用户身份提供了机制。",
+    "网站首次识别用户时，可以生成唯一识别码，并以该识别码作为后端数据库表项的索引。",
+    "服务器在响应中发送Set-cookie首部，例如：$$\\texttt{Set-Cookie: 1678}$$。",
+    "浏览器收到Set-cookie后，把服务器主机名和识别码写入其管理的Cookie文件。",
+    "用户以后访问同一网站时，浏览器查询Cookie文件，并在请求报文的Cookie首部中携带该网站的识别码。",
+    "不同网站可以在同一个Cookie文件中拥有各自的表项。"
+  ],
+  "examples": [
+    "Susan首次访问Amazon.com时，Amazon服务器生成识别码1678，并返回Set-Cookie: 1678；浏览器保存Amazon主机名与1678。之后Susan请求Amazon页面时，浏览器把该识别码放入HTTP请求的Cookie首部。"
+  ],
+  "misconceptions": [
+    "Cookie不是只有服务器端数据库或只有浏览器文件，而是由响应首部、请求首部、浏览器端文件和网站后端数据库共同构成的机制。",
+    "HTTP服务器无状态并不意味着网站不能识别用户；Cookie可以提供这种识别能力。",
+    "Cookie识别码通常与特定网站主机名关联，不是所有网站共享同一个表项。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "教材列出的Cookie技术四个组件是什么？",
+      "a": "HTTP响应中的Set-cookie首部行、HTTP请求中的Cookie首部行、用户端由浏览器管理的Cookie文件，以及Web站点后端数据库。"
+    },
+    {
+      "q": "浏览器收到Set-Cookie后会做什么？",
+      "a": "浏览器在其管理的Cookie文件中添加包含服务器主机名和识别码的一行。"
+    },
+    {
+      "q": "用户之后再次访问同一网站时，Cookie如何发送？",
+      "a": "浏览器查询Cookie文件，取出该网站的识别码，并将其放入HTTP请求报文的Cookie首部中。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "HTTP请求报文",
+    "HTTP响应报文",
+    "HTTP无状态性"
+  ],
+  "source_pages": [
+    85,
+    88
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "225_http_cookie的组成与工作过程",
+  "_chunk_pages": [
+    85,
+    88
+  ]
+}

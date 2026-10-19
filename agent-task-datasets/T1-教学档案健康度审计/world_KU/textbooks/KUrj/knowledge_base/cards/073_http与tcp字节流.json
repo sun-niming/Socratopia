@@ -1,0 +1,39 @@
+{
+  "title": "HTTP与TCP字节流",
+  "definition": "HTTP/1.1 的请求和响应是按规则排列的文本，但它运行在 TCP 字节流之上。TCP 不认识请求行、Header 或 Body，只负责传输字节；因此服务器必须自己在字节流中识别 `\\r\\n`、空行、方法、路径和版本。",
+  "key_points": [
+    "HTTP 是文本协议，但底层传输依赖 TCP 字节流。",
+    "TCP 不会自动区分请求行、Header、Body。",
+    "服务器必须在收到的字节流中自行识别 `\\r\\n`、空行、方法、路径和版本。",
+    "本项目只实现静态服务器所需的最小子集。"
+  ],
+  "examples": [
+    "把收到的 TCP 字节流当作文本去解析，例如识别 `GET /index.html HTTP/1.1` 这一类请求。"
+  ],
+  "misconceptions": [
+    "以为 TCP 会自动帮服务器识别 HTTP 结构。",
+    "以为只要拿到字符串就自然知道哪里是请求行、Header 和 Body。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么说 HTTP 是文本协议但跑在 TCP 字节流上？",
+      "a": "因为 HTTP 的语法是文本规则，但真正传输时由 TCP 只负责搬运字节，协议结构要由应用层自己解析。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "TCP 字节流基础",
+    "HTTP 基本概念"
+  ],
+  "source_pages": [
+    49,
+    52
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "073_http与tcp字节流",
+  "_chunk_pages": [
+    49,
+    52
+  ]
+}

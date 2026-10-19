@@ -1,0 +1,50 @@
+{
+  "title": "用 concept 约束容器类型参数",
+  "definition": "可以定义一个 concept，要求作为 Grid 的 Container 类型必须支持指定的操作和类型别名。原文中的 `ContainerType` 要求 Container 对象能够调用 `resize(1)`，并且存在 `Container::value_type` 类型别名；只有满足这些要求的类型才能作为 Grid 的容器类型参数。",
+  "key_points": [
+    "约束的核心形式是：\n```cpp\ntemplate <typename Container>\nconcept ContainerType = requires(Container c) {\n    c.resize(1);\n    typename Container::value_type;\n};\n```",
+    "Grid 可以在模板参数列表中写成 `template <typename T, ContainerType Container>`，从而限制 Container 必须满足该 concept。",
+    "如果把不满足要求的类型（例如 `double`）作为 Container 参数，模板实例化会因 concept 约束不满足而编译失败。",
+    "`verifyCoordinate` 检查坐标是否越界；当 `x >= m_width` 或 `y >= m_height` 时抛出 `std::out_of_range`。"
+  ],
+  "examples": [
+    "合法示例：`Grid<int, std::vector<std::optional<int>>> grid;`，因为 vector 支持 `resize` 并提供 `value_type`。",
+    "非法示例：`Grid<int, double> test;`。`double` 既不提供所需的 `resize` 操作，也没有容器形式的 `value_type`，因此不能满足 `ContainerType`。",
+    "坐标检查的逻辑可表示为：\n$$\n\\begin{cases}\n\\text{若 }x\\ge m\\_width\\text{，抛出 }std::out\\_of\\_range\\\\\n\\text{若 }y\\ge m\\_height\\text{，抛出 }std::out\\_of\\_range\\\\\n\\text{否则允许访问 }m\\_cells[x][y]\n\\end{cases}\n$$"
+  ],
+  "misconceptions": [
+    "concept 不是在运行时检查容器，而是在模板实例化和编译阶段约束模板参数。",
+    "只要一个类型名叫 Container，就不代表它满足 `ContainerType`；它必须实际提供所要求的表达式和类型。",
+    "`value_type` 是容器提供的类型别名，用于表示容器元素类型，不是一个运行时成员变量。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`ContainerType` concept 要求 Container 具备哪些能力？",
+      "a": "要求 Container 对象支持 `resize(1)` 调用，并且存在 `Container::value_type` 类型别名。"
+    },
+    {
+      "q": "为什么 `Grid<int, double>` 不能编译？",
+      "a": "因为 `double` 不满足 `ContainerType` concept 的约束，缺少所要求的容器操作和类型别名。"
+    },
+    {
+      "q": "`typename Container::value_type&` 表示什么？",
+      "a": "它表示对 Container 元素类型的可写引用；`Container::value_type` 是该容器元素的类型。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++20 concept 与 requires 表达式",
+    "容器的 value_type 类型别名"
+  ],
+  "source_pages": [
+    757,
+    758
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1570_用_concept_约束容器类型参数",
+  "_chunk_pages": [
+    757,
+    760
+  ]
+}

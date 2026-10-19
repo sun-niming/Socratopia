@@ -1,0 +1,49 @@
+{
+  "title": "Math对象常用属性和方法",
+  "definition": "Math 对象提供了丰富的数学常量与函数。教材列出了 Math.PI 以及 tan、sin、sqrt、pow、abs、random、ceil、floor、round 等成员。",
+  "key_points": [
+    "Math.PI 表示圆周率。",
+    "Math.random() 产生 [0,1) 的随机数。",
+    "Math.ceil(n) 返回大于 n 的最小整数。",
+    "Math.floor(n) 返回小于 n 的最大整数。",
+    "Math.round(n) 把 n 四舍五入到最接近的整数。",
+    "Math.tan、Math.sin、Math.sqrt、Math.pow、Math.abs 分别用于正切、正弦、平方根、幂、绝对值计算。"
+  ],
+  "examples": [
+    "Math.PI",
+    "Math.sqrt(9)  // 3",
+    "Math.pow(2, 3)  // 8",
+    "Math.abs(-5)  // 5",
+    "Math.ceil(3.2)  // 4",
+    "Math.floor(3.8)  // 3",
+    "Math.round(3.5)  // 4",
+    "Math.random()  // 0 到 1 之间的随机数"
+  ],
+  "misconceptions": [
+    "Math.random() 会返回 1；教材给出的范围是 [0,1)，不包含 1。",
+    "Math.ceil 是向下取整，Math.floor 是向上取整；二者正好相反。",
+    "Math 对象用于数学常量和函数，不是普通数组或字符串对象。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "Math.random() 的取值范围是什么？",
+      "a": "[0,1)，即包含 0，不包含 1。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "JavaScript 基本语法",
+    "数字运算"
+  ],
+  "source_pages": [
+    325,
+    328
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "465_math对象常用属性和方法",
+  "_chunk_pages": [
+    325,
+    328
+  ]
+}

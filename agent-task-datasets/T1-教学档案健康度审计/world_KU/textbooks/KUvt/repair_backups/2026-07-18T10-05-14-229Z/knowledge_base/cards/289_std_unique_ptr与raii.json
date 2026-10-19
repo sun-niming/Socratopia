@@ -1,0 +1,43 @@
+{
+  "title": "std::unique_ptr与RAII",
+  "definition": "std::unique_ptr是一种智能指针，用于独占地管理动态创建的对象资源。对象由std::unique_ptr持有时，离开其作用域后会自动释放所管理的资源，从而避免手动管理资源时可能发生的内存泄漏。RAII是“资源获取即初始化”（Resource Acquisition Is Initialization）的资源管理思想。",
+  "key_points": [
+    "使用裸指针new创建对象后，必须在适当位置调用delete，否则可能造成资源泄漏。",
+    "使用std::unique_ptr管理对象时，通常不需要显式调用delete；智能指针销毁时会自动释放所管理的对象。",
+    "可以通过箭头运算符访问所管理对象的成员，例如mySimpleSmartPtr->go()。",
+    "std::unique_ptr表示独占式所有权，资源不能同时由多个std::unique_ptr共同拥有。"
+  ],
+  "examples": [
+    "可能发生资源泄漏的形式：代码中使用Simple*指针创建对象并调用mySimplePtr->go()，但没有执行delete mySimplePtr。",
+    "使用智能指针管理资源：代码形式为auto mySimpleSmartPtr { std::make_unique<Simple>() };，随后可调用mySimpleSmartPtr->go()。"
+  ],
+  "misconceptions": [
+    "std::unique_ptr不是普通裸指针，通常不应对其所管理的对象再次手动调用delete。",
+    "使用std::unique_ptr并不表示对象永远不会被释放；当智能指针销毁、重置或转移所有权后，资源可能被自动释放或交由新的所有者管理。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "std::unique_ptr主要解决什么问题？",
+      "a": "它通过独占式所有权和自动释放资源来管理动态对象，减少手动delete导致的内存泄漏问题。"
+    },
+    {
+      "q": "RAII的含义是什么？",
+      "a": "RAII是“资源获取即初始化”，即把资源的生命周期绑定到对象生命周期，通过对象的构造和销毁管理资源。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++动态内存分配与delete"
+  ],
+  "source_pages": [
+    218,
+    219
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "289_std_unique_ptr与raii",
+  "_chunk_pages": [
+    217,
+    220
+  ]
+}

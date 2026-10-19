@@ -1,0 +1,43 @@
+{
+  "title": "派生类构造函数初始化基类子对象和派生类成员",
+  "definition": "派生类构造函数可以使用构造函数初始化器明确初始化基类子对象和派生类数据成员。初始化器中应先指定基类构造方式，再指定派生类成员的初值，例如 `Derived(int i) : Base{...}, m_int{i} {}`。这样可以在构造 `Derived` 时同时完成 `Base` 部分和 `Derived` 自身成员的初始化。",
+  "key_points": [
+    "派生类对象包含一个基类子对象，派生类构造函数必须选择合适的基类构造函数来初始化它。",
+    "派生类数据成员可以在同一个构造函数初始化器中初始化，例如 `m_int{i}`。",
+    "构造函数初始化器的结构可写为：`Derived(int i) : Base{基类参数}, m_int{i} {}`。",
+    "基类子对象和数据成员的初始化应通过构造函数初始化器完成，而不是等对象构造完成后再替代初始化。"
+  ],
+  "examples": [
+    "class Base {\npublic:\n    Base(std::string_view str);\nprivate:\n    std::string m_str;\n};\n\nclass Derived : public Base {\npublic:\n    Derived(int i) : Base{\"示例字符串\"}, m_int{i} {}\nprivate:\n    int m_int;\n};"
+  ],
+  "misconceptions": [
+    "派生类构造函数不会自动把任意参数传给基类构造函数；需要在初始化器中明确调用合适的基类构造函数。",
+    "`m_int{i}` 初始化的是派生类成员，`Base{...}` 初始化的是基类子对象，两者作用不同。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "派生类构造函数如何显式初始化基类子对象？",
+      "a": "在构造函数初始化器中写基类名称及参数，例如 `Derived(int i) : Base{...}, m_int{i} {}`。"
+    },
+    {
+      "q": "`m_int{i}` 和 `Base{...}` 分别初始化什么？",
+      "a": "`m_int{i}` 初始化派生类的数据成员 `m_int`；`Base{...}` 初始化基类子对象。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++构造函数初始化器",
+    "C++继承"
+  ],
+  "source_pages": [
+    333,
+    336
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 derived constructor initializer list initialize base class subobject and data members exact textbook example",
+  "concept_id": "436_派生类构造函数初始化基类子对象和派生类成员",
+  "_chunk_pages": [
+    333,
+    336
+  ]
+}

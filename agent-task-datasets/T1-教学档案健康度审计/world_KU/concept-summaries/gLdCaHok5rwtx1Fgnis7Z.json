@@ -1,0 +1,140 @@
+{
+  "conversationId": "gLdCaHok5rwtx1Fgnis7Z",
+  "generatedAt": 1782641732907,
+  "pagesRange": "p.135-138",
+  "sections": [
+    {
+      "type": "tldr",
+      "content": "这几页把 Linux 文件 I/O 的主线串起来了：先用 inode 和硬链接理解“文件本体”，再区分文件描述符和流，接着看标准 I/O 的缓存、定位函数，以及系统调用层面的 `system()`、权限、`stat` 家族、`access()` 和 `read`/`write`/`lseek` 这些接口。"
+    },
+    {
+      "type": "narrative",
+      "content": "课堂一开始从 `ls -i` 和 inode 入手，先把“名字”和“本体”的关系讲清楚，再顺势把文件描述符、流、标准 I/O 这两层分开。随后一路推进到文件定位、`system()`、权限与属性获取，最后落在 `access()` 上，完成了“先检查、再打开、再读写”的底层 I/O 思路。"
+    },
+    {
+      "type": "concepts",
+      "items": [
+        {
+          "name": "inode 与硬链接",
+          "body": "`ls -i` 会把文件的 **inode 号** 显示出来。\n\n- **inode** 可以理解成文件的“本体编号”\n- **目录项** 更像是“名字”\n- 两个不同文件名如果 inode 一样，说明它们其实指向**同一个文件本体**，也就是硬链接关系\n\n课堂里最核心的一句话就是：**目录管名字，inode 管本体。**"
+        },
+        {
+          "name": "文件描述符 vs 流",
+          "body": "- **文件描述符** 是底层的整数编号，类型上就是 `int`\n- **流** 是建立在文件描述符之上的更高层抽象\n- `stdin`、`stdout`、`stderr` 都是**流**，不是那个 `int` 号码本身\n- 它们分别对应的文件描述符常量是 `STDIN_FILENO`、`STDOUT_FILENO`、`STDERR_FILENO`\n\n可以把它记成两层：\n\n1. 底层：文件描述符\n2. 上层：流\n\n课堂里反复强调的区别是：**流通常带缓存**，所以比直接操作文件描述符更方便。"
+        },
+        {
+          "name": "标准 I/O",
+          "body": "标准 I/O 是围绕**流**的一整套工具，特点是**带缓存**，并且属于 ANSI C 标准，所以通常更便于移植。\n\n常见函数按功能记就行：\n\n- 打开/关闭：`fopen`、`fclose`\n- 字符读写：`fgetc`、`fputc`\n- 字符串读写：`fgets`、`fputs`\n- 块读写：`fread`、`fwrite`\n- 位置控制：`fseek`、`rewind`、`ftell`\n\n`stdin`、`stdout`、`stderr` 是程序一开始就自带的**特殊流**。"
+        },
+        {
+          "name": "文件定位",
+          "body": "文件定位分成两套思路：\n\n- **系统调用层**：`lseek(int fd, off_t offset, int whence)`\n- **标准 I/O 层**：`fseek`、`ftell`、`rewind`\n\n课堂里最重要的定位关系是：\n\n- `SEEK_SET`：从文件开头算\n- `SEEK_CUR`：从当前位置算\n- `SEEK_END`：从文件末尾算\n\n`lseek()` 只是**调整文件偏移位置**，不负责真正读写数据。它返回的是调整后的当前偏移；如果失败，返回 `-1`。"
+        },
+        {
+          "name": "system() 与系统调用层",
+          "body": "`system(char *cmdStr)` 的作用是：**起一个子进程，然后调用 `/bin/sh -c cmdStr` 执行命令**。\n\n课堂里抓住的重点是：\n\n- 它不是自己直接“执行字符串”\n- 而是把命令交给 shell 去跑\n- `/bin/sh` 调用失败时返回 `127`\n- 其他失败返回 `-1`\n- 成功返回 `0`\n\n这也顺带说明了：**标准 I/O 是在系统调用外面又包了一层，更好用，也带缓存。**"
+        },
+        {
+          "name": "权限与掩码：`chmod()` 和 `umask()`",
+          "body": "`chmod(char *path, mode_t mode)` 用来**修改文件权限**。\n\n权限位按三组记：\n\n- 所有者：`S_IRUSR`、`S_IWUSR`、`S_IXUSR`\n- 组成员：`S_IRGRP`、`S_IWGRP`、`S_IXGRP`\n- 其他人：`S_IROTH`、`S_IWOTH`、`S_IXOTH`\n\n`umask(mode_t cmask)` 不是直接改某个文件，而是改**进程的权限掩码**，也就是新建文件时会先被挡掉哪些权限。\n\n课堂里强调的两个点：\n\n- `cmask` 是**八进制值**\n- `umask()` 返回的是**修改之前的掩码**"
+        },
+        {
+          "name": "`stat` 家族与 `struct stat`",
+          "body": "这组函数都是拿文件属性：\n\n- `fstat(int fd, struct stat *buf)`：根据 **fd** 取属性\n- `stat(const char *path, struct stat *buf)`：根据 **路径** 取属性\n- `lstat(const char *path, struct stat *buf)`：如果路径是符号链接，取的是**链接本身**的信息\n\n最容易混的地方是 `stat` 和 `lstat`：\n\n- `stat()`：看**链接指向的目标**\n- `lstat()`：看**链接自己**\n\n`struct stat` 里课堂里重点提到的字段：\n\n- `st_mode`：**文件类型 + 权限信息**\n- `st_size`：**文件实际大小**\n- `st_blksize`：文件系统建议的**块大小**，更像读写参考值\n\n所以如果问“文件有多大”，看的是 `st_size`，不是 `st_blksize`。"
+        },
+        {
+          "name": "创建、打开、关闭与底层读写",
+          "body": "这组函数都是围着 **fd** 转的：\n\n- `creat()`：创建文件，教材里的直觉可以理解成“创建并打开”\n- `open()`：打开文件，成功后返回 **fd**\n- `close()`：关闭的是 **fd**，不是把文件本体直接抹掉\n- `read()` / `write()`：直接操作 **fd**\n\n课堂里把几个返回值也讲得很清楚：\n\n- `read()` 返回实际读到的字节数\n- `read()` 返回 `0`：通常表示到达文件末尾 `EOF`，或者请求读的字节数本来就是 `0`\n- `read()` 返回 `-1`：出错\n- `write()` 返回实际写入的字节数\n- `write()` 返回小于 `count`：表示**部分写入**\n- `write()` 返回 `-1`：出错\n\n还有一个很重要的直觉：\n\n- 一个文件可以被多个 `fd` 同时引用\n- 关掉其中一个 `fd`，不代表文件本体就没了\n- 只要别的 `fd` 还在，文件仍然可以继续读写"
+        },
+        {
+          "name": "`access()`：先检查再说",
+          "body": "`access()` 不是读写文件，而是**检查文件是否存在、以及当前进程有没有访问权限**。\n\n常见参数：\n\n- `F_OK`：检查文件是否存在\n- `R_OK`：检查可读\n- `W_OK`：检查可写\n- `X_OK`：检查可执行\n\n这些标志可以按位或组合，比如 `R_OK | W_OK` 表示同时检查读和写。\n\n返回值规则：\n\n- 返回 `0`：检查通过\n- 返回 `-1`：检查不通过\n\n课堂里还专门区分了它和 `open()`：\n\n- `access()`：只是查一查，不打开文件，也不写入\n- `open()`：是真正把文件打开，拿到 fd\n\n所以 `access()` 通过，不代表 `open()` 一定成功。"
+        }
+      ]
+    },
+    {
+      "type": "key-insight",
+      "content": "两个不同的文件名如果 inode 一样，就是同一文件的两个别名。",
+      "attribution": "学习者"
+    },
+    {
+      "type": "key-terms",
+      "items": [
+        {
+          "term": "inode",
+          "definition": "文件的本体编号，目录名指向它，文件内容和属性也和它绑定。"
+        },
+        {
+          "term": "硬链接",
+          "definition": "多个目录项指向同一个 inode，所以看起来是不同名字，实际上是同一文件。"
+        },
+        {
+          "term": "文件描述符",
+          "definition": "内核给程序的整数编号，`open()` 之后用于 `read()`、`write()`、`close()`。"
+        },
+        {
+          "term": "流",
+          "definition": "建立在文件描述符之上的上层抽象，`stdin`、`stdout`、`stderr` 都是流。"
+        },
+        {
+          "term": "标准 I/O",
+          "definition": "围绕流的 C 标准库 I/O，带缓存，常见函数有 `fopen`、`fread`、`fseek` 等。"
+        },
+        {
+          "term": "系统调用",
+          "definition": "程序直接向操作系统内核请求服务的接口，比标准 I/O 更底层。"
+        },
+        {
+          "term": "符号链接",
+          "definition": "一个指向另一个文件路径的链接；`lstat()` 看它本身，`stat()` 看它指向的目标。"
+        },
+        {
+          "term": "EOF",
+          "definition": "文件末尾；`read()` 返回 `0` 时常表示已经读到这里了。"
+        },
+        {
+          "term": "权限掩码",
+          "definition": "`umask()` 设置的默认过滤规则，新建文件权限会先被它挡掉一部分。"
+        },
+        {
+          "term": "部分写入",
+          "definition": "`write()` 返回值小于请求写入的 `count`，说明本次只写出了一部分数据。"
+        }
+      ]
+    },
+    {
+      "type": "review-questions",
+      "items": [
+        {
+          "question": "`ls -i` 的输出在看什么？",
+          "hint": "想一想它和文件“本体”的关系。",
+          "answer": "它显示的是文件的 inode 号，也就是文件本体的编号。"
+        },
+        {
+          "question": "`stat()` 和 `lstat()` 有什么区别？",
+          "hint": "重点看它们遇到符号链接时会不会“顺着走”。",
+          "answer": "`stat()` 会顺着符号链接去看目标文件；`lstat()` 看的是链接本身。"
+        },
+        {
+          "question": "`read()` 返回 `0` 和返回 `-1` 分别通常表示什么？",
+          "hint": "一个是正常情况，一个是错误情况。",
+          "answer": "返回 `0` 通常表示已经到达文件末尾 `EOF`，或者请求读的字节数本来就是 `0`；返回 `-1` 表示出错。"
+        },
+        {
+          "question": "`access()` 里 `F_OK`、`R_OK`、`W_OK`、`X_OK` 分别查什么？",
+          "hint": "先记“存在”，再记“读写执行”。",
+          "answer": "`F_OK` 查文件是否存在；`R_OK` 查可读；`W_OK` 查可写；`X_OK` 查可执行。"
+        },
+        {
+          "question": "如果想同时检查“可读且可写”，`access()` 的参数怎么写？",
+          "hint": "把两个标志按位或起来。",
+          "answer": "写成 `R_OK | W_OK`。"
+        }
+      ]
+    },
+    {
+      "type": "open-question",
+      "content": "`access()` 通过以后，`open()` 仍然可能失败；真正写代码时，应该怎么设计这两步之间的错误处理，才能避免路径变化或权限变化带来的竞态问题？"
+    }
+  ]
+}

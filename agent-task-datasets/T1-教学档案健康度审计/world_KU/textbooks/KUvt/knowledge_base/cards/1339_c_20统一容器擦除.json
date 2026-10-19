@@ -1,0 +1,45 @@
+{
+  "title": "C++20统一容器擦除",
+  "definition": "C++20 为几乎所有标准库容器提供了 std::erase 和 std::erase_if。std::erase 删除容器中所有与指定值匹配的元素；std::erase_if 删除所有满足给定谓词的元素。这些函数接收容器引用，而不是迭代器范围，是 C++20 中删除容器元素的首选方式。",
+  "key_points": [
+    "std::erase 的参数包括容器和要匹配的值。",
+    "std::erase_if 的参数包括容器和谓词。",
+    "两者直接从底层容器中删除元素。",
+    "与 remove 和 remove_if 不同，它们接收容器引用而不是迭代器范围。"
+  ],
+  "examples": [
+    "void removeEmptyStrings(vector<string>& strings) { erase_if(strings, [](const string& str) { return str.empty(); }); }",
+    "对 vector<string> myVector { \"one\", \"\", \"two\", \"three\", \"four\" } 调用 removeEmptyStrings 后，容器中保留 \"one\"、\"two\"、\"three\"、\"four\"。"
+  ],
+  "misconceptions": [
+    "std::erase_if 不是只能处理 vector；它适用于所有容器。",
+    "std::erase 和 std::erase_if 不需要手动再调用容器的 erase。",
+    "它们的参数不是 begin/end 迭代器范围，而是容器引用。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "std::erase_if 与 std::remove_if 的主要区别是什么？",
+      "a": "std::erase_if 接收容器引用并直接删除满足谓词的元素；std::remove_if 只处理迭代器范围，不能真正缩短底层容器。"
+    },
+    {
+      "q": "C++20 中如何删除 vector 中的所有空字符串？",
+      "a": "调用 erase_if(strings, [](const string& str) { return str.empty(); });。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "容器",
+    "谓词与Lambda表达式"
+  ],
+  "source_pages": [
+    642,
+    643
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1339_c_20统一容器擦除",
+  "_chunk_pages": [
+    641,
+    644
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "title": "justify-content",
+  "definition": "justify-content 是 Grid 容器的对齐属性，用于水平对齐整个网格内容，而不是单个网格项。",
+  "key_points": [
+    "它作用于整个网格内容的水平位置。",
+    "页面示例展示了 `space-evenly`、`space-between`、`space-around` 等写法。"
+  ],
+  "examples": [
+    "justify-content: space-evenly;",
+    "justify-content: space-between;",
+    "justify-content: space-around;"
+  ],
+  "misconceptions": [
+    "它不是用来对齐单个网格项的，单个网格项的对齐由 `justify-items` 处理。",
+    "不要把它和 `align-content` 混淆；后者用于垂直对齐整个网格内容。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "justify-content 的作用是什么？",
+      "a": "用于水平对齐整个网格内容。"
+    },
+    {
+      "q": "justify-content 和 justify-items 有什么区别？",
+      "a": "justify-content 对齐的是整个网格内容；justify-items 对齐的是单元格内的 Grid 项。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "Grid 容器"
+  ],
+  "source_pages": [
+    178,
+    180
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "268_justify_content",
+  "_chunk_pages": [
+    177,
+    180
+  ]
+}

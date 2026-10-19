@@ -1,0 +1,46 @@
+{
+  "title": "QUIC在UDP之上实现多种运输功能",
+  "definition": "教材将QUIC（Quick UDP Internet Connections）描述为在UDP之上作为应用层协议实现的协议。它通过重传和差错检测提供可靠性，通过快速连接建立降低连接建立开销，并采用以TCP友好性为目标的基于速率的拥塞控制算法。",
+  "key_points": [
+    "QUIC建立在UDP之上，而不是直接作为传统TCP运输协议实现。",
+    "QUIC通过重传以及差错检测提供可靠性。",
+    "QUIC支持快速连接建立。",
+    "QUIC采用基于速率的拥塞控制算法，并以TCP友好特性为目标。",
+    "教材还提到，2015年年初谷歌报告称，从Chrome浏览器到谷歌服务器的大约一半请求运行在QUIC之上；该历史比例可能随时间和统计口径变化。"
+  ],
+  "examples": [
+    "应用可以使用QUIC获得可靠传输、快速连接建立和拥塞控制，而底层仍使用UDP。"
+  ],
+  "misconceptions": [
+    "QUIC并不是没有可靠性的UDP；教材明确提到它通过重传和差错检测提供可靠性。",
+    "QUIC的拥塞控制并不意味着它可以无视网络拥塞；教材称其目标是具备TCP友好特性。",
+    "QUIC不是简单地把TCP原样封装在UDP中，而是在UDP之上的应用层协议中实现相关机制。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "QUIC在UDP之上提供了哪些主要功能？",
+      "a": "通过重传和差错检测提供可靠性，通过快速连接建立减少连接建立开销，并通过基于速率且以TCP友好为目标的算法进行拥塞控制。"
+    },
+    {
+      "q": "QUIC与TCP的关系是什么？",
+      "a": "QUIC在UDP之上实现，但其基于速率的拥塞控制算法以TCP友好特性为目标。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "UDP",
+    "可靠数据传输",
+    "拥塞控制"
+  ],
+  "source_pages": [
+    201,
+    204
+  ],
+  "needs_verification": true,
+  "verify_query": "Kurose Ross Computer Networking 7th edition page 204 QUIC Chrome 2015 half requests Google servers retransmission error detection rate-based congestion control",
+  "concept_id": "488_quic在udp之上实现多种运输功能",
+  "_chunk_pages": [
+    201,
+    204
+  ]
+}

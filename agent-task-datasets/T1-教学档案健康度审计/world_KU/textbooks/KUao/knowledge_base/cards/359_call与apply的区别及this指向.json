@@ -1,0 +1,39 @@
+{
+  "title": "call与apply的区别及this指向",
+  "definition": "call与apply的区别只在于传递参数的形式不同：call是把参数逐个传入，apply是把参数放在数组中传入。教材还指出，当this参数不是一个有效对象时，非严格模式下函数中的this会指向Global对象。",
+  "key_points": [
+    "call和apply的核心区别是参数传递形式不同",
+    "call使用逐个参数传递，apply使用参数数组传递",
+    "非严格模式下，当this参数不是有效对象时，函数内this指向Global对象"
+  ],
+  "examples": [
+    "func.apply(obj, [a, b])",
+    "func.call(obj, a, b, c)"
+  ],
+  "misconceptions": [
+    "call和apply除了名字不同没有任何区别",
+    "apply和call传参形式完全相同",
+    "this参数无效时，函数内this仍然一定指向原对象"
+  ],
+  "qa_pairs": [
+    {
+      "q": "call与apply最主要的区别是什么？",
+      "a": "传递函数参数的形式不同：call逐个传参，apply用数组传参。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "函数对象的动态调用"
+  ],
+  "source_pages": [
+    258,
+    258
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "359_call与apply的区别及this指向",
+  "_chunk_pages": [
+    257,
+    260
+  ]
+}

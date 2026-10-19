@@ -1,0 +1,44 @@
+{
+  "title": "unordered_multimap 中使用 equal_range 查找同键元素",
+  "definition": "在 unordered_multimap 中，find(key) 可以使用，但它只返回具有指定键的任意一个元素的迭代器，不保证是该键对应元素中的第一个。要遍历某个键对应的全部元素，最好使用 equal_range(key)。该方法返回一个 pair，包含指向第一个匹配元素的迭代器，以及指向最后一个匹配元素之后位置的迭代器。",
+  "key_points": [
+    "unordered_multimap 没有 operator[]，不能用下标运算符查找元素。",
+    "find(key) 返回任意一个匹配元素，不保证返回第一个匹配元素。",
+    "equal_range(key) 返回一对迭代器，表示所有匹配元素构成的半开区间 $[first,last)$。",
+    "遍历时从 first 开始，直到但不包括 last。"
+  ],
+  "examples": [
+    "使用 equal_range 遍历某个键的所有元素：\n```text\nauto [first, last] = phoneBook.equal_range(\"Marc G.\");\nfor (auto iter = first; iter != last; ++iter) {\n    // iter->first 是 \"Marc G.\"\n    // iter->second 是该姓名对应的一个电话号码\n}\n```"
+  ],
+  "misconceptions": [
+    "find() 返回的是任意一个匹配元素，不一定是第一个匹配元素。",
+    "equal_range() 返回的第二个迭代器不指向最后一个匹配元素，而是指向最后一个匹配元素之后的位置。",
+    "unordered_multimap 中不能用 operator[] 替代 equal_range() 来获得同一键的全部元素。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何获得 unordered_multimap 中某个键对应的全部元素？",
+      "a": "使用 equal_range(key)，它返回表示所有匹配元素范围的一对迭代器。"
+    },
+    {
+      "q": "equal_range(key) 返回的两个迭代器分别指向哪里？",
+      "a": "第一个迭代器指向第一个匹配元素；第二个迭代器指向最后一个匹配元素之后的位置。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "迭代器范围 $[first,last)$",
+    "multimap 的 equal_range()"
+  ],
+  "source_pages": [
+    599,
+    599
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1234_unordered_multimap_中使用_equal_range_查找同键元",
+  "_chunk_pages": [
+    597,
+    600
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "title": "网格轨道尺寸写法",
+  "definition": "在网格容器中，轨道尺寸可以用固定长度、百分比、fr、auto 等方式表示。固定长度表示明确大小；百分比表示相对容器比例；fr 表示可用空间的份额；auto 表示由内容决定轨道尺寸。",
+  "key_points": [
+    "固定单位包括 px、em、rem。",
+    "百分比用 % 表示。",
+    "fr 是 fraction，表示网格容器中可用空间的一等份。",
+    "auto 表示轨道尺寸由内容决定。"
+  ],
+  "examples": [
+    "grid-template-columns: 100px 1fr 2fr;",
+    "grid-template-rows: 50px 50px;",
+    "grid-template-columns: repeat(4, 1fr);"
+  ],
+  "misconceptions": [
+    "fr 不是固定像素，也不是百分比。",
+    "auto 不是固定值，而是由内容来决定轨道大小。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "fr 单位在网格布局中表示什么？",
+      "a": "表示网格容器中可用空间的一等份。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "grid-template-columns 和 grid-template-rows"
+  ],
+  "source_pages": [
+    173,
+    176
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "263_网格轨道尺寸写法",
+  "_chunk_pages": [
+    173,
+    176
+  ]
+}

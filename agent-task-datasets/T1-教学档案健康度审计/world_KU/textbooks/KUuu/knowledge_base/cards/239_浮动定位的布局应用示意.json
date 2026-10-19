@@ -1,0 +1,42 @@
+{
+  "title": "浮动定位的布局应用示意",
+  "definition": "教材用一个典型页面结构示意浮动定位的布局应用：顶部有 header 和 nav，中间区域由 menu、main、aside 组成，底部是 footer。",
+  "key_points": [
+    "该页展示的是浮动定位的布局应用示意。",
+    "页面结构包含 header、nav、menu、main、aside、footer。",
+    "中间主体区域由左侧 menu、中间 main、右侧 aside 构成。"
+  ],
+  "examples": [
+    "header / nav / menu / main / aside / footer 的页面布局示意。"
+  ],
+  "misconceptions": [
+    "以为浮动定位只用于单个小盒子的排列；实际上也可用于页面布局。",
+    "以为图中的各块是独立无关的元素；实际上它们共同构成一个页面布局示意。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "该页图示展示了哪些主要区域？",
+      "a": "header、nav、menu、main、aside、footer。"
+    },
+    {
+      "q": "该图示属于什么内容？",
+      "a": "浮动定位的布局应用示意。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "浮动盒子脱离标准流",
+    "多个浮动元素不相互覆盖"
+  ],
+  "source_pages": [
+    145,
+    148
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "239_浮动定位的布局应用示意",
+  "_chunk_pages": [
+    145,
+    148
+  ]
+}

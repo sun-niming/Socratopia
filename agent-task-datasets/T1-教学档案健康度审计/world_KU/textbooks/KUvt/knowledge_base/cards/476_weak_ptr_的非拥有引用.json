@@ -1,0 +1,53 @@
+{
+  "title": "weak_ptr 的非拥有引用",
+  "definition": "std::weak_ptr 可以保存由 shared_ptr 管理的资源的引用，但不拥有该资源，因此不会阻止资源被 shared_ptr 释放。weak_ptr 自身被销毁时不会销毁资源；它可以用于判断关联的 shared_ptr 是否仍然管理着资源。",
+  "key_points": [
+    "weak_ptr 不增加 shared_ptr 的所有权计数，因此不会延长资源生命周期。",
+    "weak_ptr 可以由 shared_ptr 或另一个 weak_ptr 构造。",
+    "要访问 weak_ptr 保存的资源，需要先把它转换为 shared_ptr。",
+    "使用 weak_ptr 的 lock() 方法时，如果资源仍然存在，返回指向资源的 shared_ptr；如果资源已经释放，返回 nullptr。",
+    "用 weak_ptr 作为 shared_ptr 构造函数参数时，如果关联资源已经释放，会抛出 std::bad_weak_ptr 异常。",
+    "从 C++17 起，weak_ptr 可以像 shared_ptr 一样支持 C 风格数组。"
+  ],
+  "examples": [
+    "auto sharedSimple { make_shared<Simple>() }; weak_ptr<Simple> weakSimple { sharedSimple };",
+    "auto resource { weakSimple.lock() }; if (resource) { cout << \"Resource still alive.\" << endl; } else { cout << \"Resource has been freed!\" << endl; }",
+    "sharedSimple.reset(); // 当它是唯一的 shared_ptr 所有者时，Simple 被释放；weakSimple 仍然存在，但不拥有资源。"
+  ],
+  "misconceptions": [
+    "weak_ptr 会延长资源生命周期；实际上 weak_ptr 不拥有资源，也不能阻止 shared_ptr 释放资源。",
+    "只要 weak_ptr 仍存在，资源就一定存在；资源可能已经被最后一个 shared_ptr 释放。",
+    "可以直接解引用 weak_ptr；访问资源前必须使用 lock() 或通过 shared_ptr 构造方式获得 shared_ptr。",
+    "lock() 在资源已释放时抛出异常；原文指出 lock() 返回 nullptr，而用 weak_ptr 构造 shared_ptr 才会抛出 std::bad_weak_ptr。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "weak_ptr 与 shared_ptr 的核心区别是什么？",
+      "a": "shared_ptr 拥有资源并参与共享所有权；weak_ptr 只保存非拥有引用，不会阻止资源被释放。"
+    },
+    {
+      "q": "weak_ptr.lock() 在资源已释放时返回什么？",
+      "a": "返回空的 shared_ptr，即 nullptr。"
+    },
+    {
+      "q": "用已经失效的 weak_ptr 构造 shared_ptr 会怎样？",
+      "a": "会抛出 std::bad_weak_ptr 异常。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "shared_ptr 的共享所有权与基本用法",
+    "shared_ptr 的引用计数机制"
+  ],
+  "source_pages": [
+    224,
+    224
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "476_weak_ptr_的非拥有引用",
+  "_chunk_pages": [
+    221,
+    224
+  ]
+}

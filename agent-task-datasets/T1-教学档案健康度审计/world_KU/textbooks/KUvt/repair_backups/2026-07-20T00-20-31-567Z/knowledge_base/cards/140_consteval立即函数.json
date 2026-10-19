@@ -1,0 +1,43 @@
+{
+  "title": "consteval立即函数",
+  "definition": "consteval是C++20引入的关键字，用于声明立即函数。立即函数的每次调用都必须能够在编译期求值；如果调用时无法在编译期求值，则程序编译失败。",
+  "key_points": [
+    "constexpr函数允许编译期求值，但不保证一定在编译期求值。",
+    "consteval函数强制调用发生在编译期。",
+    "使用运行期才能确定的变量调用consteval函数会导致编译错误。",
+    "教材以inchToMm函数说明：使用编译期常量调用可以正常编译，使用运行期变量调用则不能编译。"
+  ],
+  "examples": [
+    "可以将单位换算函数声明为立即函数：\nconsteval double inchToMm(double inch) {\n    return inch * 25.4;\n}\n\nconstexpr double inch { 6.0 };\nconstexpr double mm1 { inchToMm(inch) }; // OK，编译期调用\n\ndouble dynamicInch { 8.0 };\ndouble mm2 { inchToMm(dynamicInch) }; // 编译错误，无法编译期求值"
+  ],
+  "misconceptions": [
+    "consteval不是“更快的constexpr”；它的核心区别是强制所有调用都在编译期完成。",
+    "consteval函数不能接受运行期才确定的实参进行普通运行期调用。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "constexpr与consteval的关键区别是什么？",
+      "a": "constexpr函数可以在编译期或运行期执行；consteval声明立即函数，要求每次调用都必须在编译期求值。"
+    },
+    {
+      "q": "用运行期变量dynamicInch调用consteval的inchToMm会发生什么？",
+      "a": "会导致编译错误，因为该调用无法在编译期求值。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "constexpr函数",
+    "编译期求值"
+  ],
+  "source_pages": [
+    77,
+    78
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "140_consteval立即函数",
+  "_chunk_pages": [
+    77,
+    80
+  ]
+}

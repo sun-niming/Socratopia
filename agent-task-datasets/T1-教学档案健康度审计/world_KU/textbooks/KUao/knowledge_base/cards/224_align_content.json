@@ -1,0 +1,40 @@
+{
+  "title": "align-content",
+  "definition": "align-content 属性只适用于多行的 flex 容器；当容器在交叉轴上有多余空间时，它用于把项目作为一个整体进行对齐。",
+  "key_points": [
+    "只对多行 flex 容器有效",
+    "作用对象是“项目整体”而不是单个项目",
+    "有多余交叉轴空间时才体现效果",
+    "取值包括 flex-start、flex-end、center、space-between、space-around、stretch"
+  ],
+  "examples": [
+    "align-content: space-between;",
+    "align-content: stretch;"
+  ],
+  "misconceptions": [
+    "它对单行 flex 容器也有效；原文说明只有多行容器才有效",
+    "它是在单个项目之间分配空间；原文强调是把项目作为一个整体对齐"
+  ],
+  "qa_pairs": [
+    {
+      "q": "align-content 什么时候才有效？",
+      "a": "只适用于多行的 flex 容器。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "弹性盒布局基础",
+    "交叉轴"
+  ],
+  "source_pages": [
+    157,
+    160
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "224_align_content",
+  "_chunk_pages": [
+    157,
+    160
+  ]
+}

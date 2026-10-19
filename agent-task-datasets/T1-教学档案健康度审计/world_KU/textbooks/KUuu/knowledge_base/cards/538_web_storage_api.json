@@ -1,0 +1,44 @@
+{
+  "title": "Web Storage API",
+  "definition": "Web Storage API 提供了一种机制，允许浏览器在用户本地存储键值对数据；它比使用 cookie 更安全、更高效，并且可以存储更多的数据。Web Storage 主要分为 localStorage 和 sessionStorage，两者都可以存储和访问数据，但在数据的生命周期和作用域方面有所不同。",
+  "key_points": [
+    "用于在浏览器本地存储键值对数据",
+    "比 cookie 更安全、更高效，而且能存更多数据",
+    "主要分为 localStorage 和 sessionStorage 两种类型",
+    "两种类型都能存储和访问数据，但生命周期和作用域不同"
+  ],
+  "examples": [
+    "localStorage",
+    "sessionStorage"
+  ],
+  "misconceptions": [
+    "误以为 Web Storage 只能存储一种类型的数据",
+    "误以为 localStorage 和 sessionStorage 没有区别"
+  ],
+  "qa_pairs": [
+    {
+      "q": "Web Storage API 的作用是什么？",
+      "a": "它允许浏览器在用户本地存储键值对数据。"
+    },
+    {
+      "q": "Web Storage 主要分为哪两种类型？",
+      "a": "localStorage 和 sessionStorage。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "键值对",
+    "浏览器本地存储"
+  ],
+  "source_pages": [
+    377,
+    380
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "538_web_storage_api",
+  "_chunk_pages": [
+    377,
+    380
+  ]
+}

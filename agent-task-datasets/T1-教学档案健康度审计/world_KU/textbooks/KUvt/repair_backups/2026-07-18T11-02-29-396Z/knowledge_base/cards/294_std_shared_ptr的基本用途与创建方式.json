@@ -1,0 +1,44 @@
+{
+  "title": "std::shared_ptr的基本用途与创建方式",
+  "definition": "`std::shared_ptr<T>`是一种共享所有权的智能指针。多个`shared_ptr`对象可以共同管理同一个动态资源；当最后一个拥有该资源的`shared_ptr`被销毁或重置后，资源才会被释放。创建对象时，优先使用`std::make_shared<T>(构造参数...)`，而不是直接使用`new`构造`shared_ptr`。",
+  "key_points": [
+    "可以用复制`shared_ptr`的方式创建多个共享所有者，例如`auto smartPtr2 { smartPtr1 };`。",
+    "`std::make_shared<T>()`用于创建对象并返回管理该对象的`shared_ptr<T>`。",
+    "`shared_ptr`通常会记录共享所有者数量；最后一个`shared_ptr`释放后，所管理对象的析构函数会被调用。",
+    "C++20还提供`make_shared_for_overwrite()`；原文将其与`make_unique_for_overwrite()`并列介绍。"
+  ],
+  "examples": [
+    "`auto mySimpleSmartPtr { std::make_shared<Simple>() };`",
+    "`auto smartPtr1 { std::make_shared<Simple>() }; auto smartPtr2 { smartPtr1 };`"
+  ],
+  "misconceptions": [
+    "复制`shared_ptr`不会复制它所管理的对象，而是增加一个共同管理同一对象的智能指针。",
+    "只要仍有一个`shared_ptr`拥有资源，资源就不会因为另一个`shared_ptr`被销毁而释放。",
+    "`shared_ptr`与`unique_ptr`不同：`unique_ptr`表示独占所有权，而`shared_ptr`允许多个所有者。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何优先创建一个由`shared_ptr`管理的`Simple`对象？",
+      "a": "使用`auto p { std::make_shared<Simple>() };`。"
+    },
+    {
+      "q": "复制一个`shared_ptr`会发生什么？",
+      "a": "会产生另一个共同拥有同一资源的`shared_ptr`，而不是复制被管理的对象。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "智能指针的基本概念"
+  ],
+  "source_pages": [
+    221,
+    222
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "294_std_shared_ptr的基本用途与创建方式",
+  "_chunk_pages": [
+    221,
+    224
+  ]
+}

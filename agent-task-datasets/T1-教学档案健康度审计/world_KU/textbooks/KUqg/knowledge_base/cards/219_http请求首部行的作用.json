@@ -1,0 +1,45 @@
+{
+  "title": "HTTP请求首部行的作用",
+  "definition": "HTTP请求首部行向服务器提供请求对象、连接处理、客户软件类型和语言偏好等信息。教材示例中的Host首部指出对象所在主机，Connection: close要求服务器发送对象后关闭连接，User-agent指出浏览器类型，Accept-language表示用户希望获得的语言版本。",
+  "key_points": [
+    "Host首部指出对象所在的主机，并且是Web代理高速缓存所需要的信息。",
+    "Connection: close要求服务器在发送完请求对象后关闭TCP连接。",
+    "User-agent标识发送请求的浏览器或用户代理，服务器可据此发送适合不同用户代理的对象版本。",
+    "Accept-language表示用户偏好的语言；若服务器没有该语言版本，则发送默认版本。"
+  ],
+  "examples": [
+    "Connection: close表示本次请求不要求服务器保持持续连接。",
+    "Accept-language: fr表示用户希望获得法语版本；若没有法语版本，服务器发送默认版本。"
+  ],
+  "misconceptions": [
+    "Host首部并非因为没有TCP连接才存在；即使TCP连接已经建立，Host信息仍可能被代理缓存使用。",
+    "User-agent不是用户本人身份，而是发送请求的浏览器或其他用户代理类型。",
+    "Accept-language表达的是语言偏好，不保证服务器一定能提供该语言版本。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "Connection: close首部行表示什么？",
+      "a": "它告诉服务器不要使用持续连接，在发送完被请求的对象后关闭TCP连接。"
+    },
+    {
+      "q": "Accept-language: fr的含义是什么？",
+      "a": "用户希望获得对象的法语版本；如果服务器没有法语版本，则发送默认版本。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "HTTP请求报文格式",
+    "持续TCP连接"
+  ],
+  "source_pages": [
+    85,
+    88
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "219_http请求首部行的作用",
+  "_chunk_pages": [
+    85,
+    88
+  ]
+}

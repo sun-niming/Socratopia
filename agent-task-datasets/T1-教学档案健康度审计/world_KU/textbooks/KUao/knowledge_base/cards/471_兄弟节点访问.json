@@ -1,0 +1,43 @@
+{
+  "title": "兄弟节点访问",
+  "definition": "获取到一个元素节点后，可以根据它在树中的位置访问相邻兄弟节点。教材给出了四个属性：`previousSibling`、`nextSibling`、`previousElementSibling`、`nextElementSibling`。其中，前两个返回前/后一个兄弟节点，类型不限；后两个只返回前/后一个兄弟元素节点。",
+  "key_points": [
+    "`previousSibling` 返回前一个兄弟节点，类型不限。",
+    "`nextSibling` 返回后一个兄弟节点，类型不限。",
+    "`previousElementSibling` 返回前一个兄弟元素节点。",
+    "`nextElementSibling` 返回后一个兄弟元素节点。"
+  ],
+  "examples": [
+    "let nextItem = middleItem.nextElementSibling;\nlet prevItem = middleItem.previousElementSibling;\nconsole.log('Next:', nextItem);\nconsole.log('Previous:', prevItem);"
+  ],
+  "misconceptions": [
+    "认为兄弟节点一定都是元素。",
+    "认为 `previousSibling` 和 `previousElementSibling` 没有区别。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`previousSibling` 和 `previousElementSibling` 有什么不同？",
+      "a": "`previousSibling` 返回前一个兄弟节点，类型不限；`previousElementSibling` 只返回前一个兄弟元素节点。"
+    },
+    {
+      "q": "如果要找当前元素的下一个元素兄弟，应使用哪个属性？",
+      "a": "`nextElementSibling`。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "DOM树",
+    "元素节点"
+  ],
+  "source_pages": [
+    351,
+    352
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "471_兄弟节点访问",
+  "_chunk_pages": [
+    349,
+    352
+  ]
+}

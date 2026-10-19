@@ -1,0 +1,55 @@
+{
+  "title": "工厂方法模式",
+  "definition": "工厂方法模式把“创建哪一种对象”的决定交给具体工厂。抽象工厂基类提供公有的 requestCar() 方法，该方法把请求转发给受保护的虚 createCar() 方法；ToyotaFactory 和 FordFactory 分别重写 createCar()，构建 Toyota 或 Ford。调用方只请求一辆抽象的汽车，不必直接调用具体汽车的构造函数。",
+  "key_points": [
+    "抽象工厂基类 CarFactory 对外提供 requestCar()。",
+    "createCar() 是受保护的虚方法，由具体工厂重写。",
+    "ToyotaFactory 的 createCar() 创建 Toyota，FordFactory 的 createCar() 创建 Ford。",
+    "调用 requestCar() 获得的具体汽车取决于当前 CarFactory 对象的动态类型。",
+    "该模式与抽象工厂模式的区别是：抽象工厂示例通过多个创建方法区分轿车和 SUV；工厂方法示例只请求一辆汽车，具体工厂决定具体产品。"
+  ],
+  "examples": [
+    "结构可表示为：$$\\begin{aligned}\\text{CarFactory}&\\rightarrow \\text{requestCar()}\\\\\\text{CarFactory}&\\rightarrow \\text{protected virtual createCar()}\\\\\\text{ToyotaFactory}&\\xrightarrow{\\text{createCar()}}\\text{Toyota}\\\\\\text{FordFactory}&\\xrightarrow{\\text{createCar()}}\\text{Ford}\\end{aligned}$$",
+    "调用方只需执行类似 requestCar() 的请求；如果实际工厂对象是 ToyotaFactory，就得到 Toyota；如果实际工厂对象是 FordFactory，就得到 Ford。"
+  ],
+  "misconceptions": [
+    "工厂方法模式不是要求调用方明确指定 Toyota 或 Ford；调用方只请求一般的汽车。",
+    "requestCar() 和 createCar() 不是必须都由调用方直接调用：原文中 requestCar() 是公有接口，而 createCar() 是受保护的虚拟实现点。",
+    "工厂方法模式的核心不是创建多个产品族，而是让具体工厂决定单个请求对应的具体产品。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "工厂方法模式中，哪个方法是对外的请求接口？",
+      "a": "是 CarFactory 提供的公有 requestCar() 方法。"
+    },
+    {
+      "q": "requestCar() 如何获得具体汽车？",
+      "a": "requestCar() 将工作转发给受保护的虚拟 createCar()；运行时由具体工厂重写的 createCar() 创建 Toyota 或 Ford。"
+    },
+    {
+      "q": "ToyotaFactory 和 FordFactory 分别创建什么？",
+      "a": "ToyotaFactory 创建 Toyota，FordFactory 创建 Ford。"
+    },
+    {
+      "q": "工厂方法模式与前述抽象工厂模式有什么主要区别？",
+      "a": "抽象工厂通过多个创建方法创建相关产品，例如轿车和 SUV；工厂方法模式通常只提供一个请求汽车的接口，由具体工厂决定创建哪一种具体汽车。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "抽象工厂模式",
+    "继承与运行时多态",
+    "虚函数重写"
+  ],
+  "source_pages": [
+    948,
+    948
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1953_工厂方法模式",
+  "_chunk_pages": [
+    945,
+    948
+  ]
+}

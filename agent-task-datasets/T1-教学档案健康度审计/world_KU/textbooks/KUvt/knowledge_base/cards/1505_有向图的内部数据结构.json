@@ -1,0 +1,43 @@
+{
+  "title": "有向图的内部数据结构",
+  "definition": "该有向图将所有节点存储在一个 vector 中。每个节点是一个 graph_node<T> 实例，包含节点值以及邻接节点索引集合；因此 directed_graph 的核心数据成员是 graph_node<T> 的 vector。",
+  "key_points": [
+    "节点按其索引访问，所以使用 vector 存储节点。",
+    "节点容器的类型别名可表示为 $\\texttt{std::vector<details::graph_node<T>>}$。",
+    "每条有向边不直接存储目标节点对象，而是存储目标节点在节点 vector 中的索引。"
+  ],
+  "examples": [
+    "核心成员可概括为：\n```cpp\nusing nodes_container_type = std::vector<details::graph_node<T>>;\nnodes_container_type m_nodes;\n```",
+    "若某节点的邻接索引集合包含 $3$，表示该节点存在一条指向节点 vector 中索引为 $3$ 的节点的有向边。"
+  ],
+  "misconceptions": [
+    "邻接表存储的是目标节点值，而不是目标节点索引；原文明确说明邻接节点列表包含其他节点的索引。",
+    "节点删除后，剩余节点的索引可能发生变化，因此邻接索引也必须更新。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么 directed_graph 使用 vector 存储节点？",
+      "a": "因为节点通过索引访问，而 vector 适合按索引访问；最终数据结构是 graph_node<T> 的 vector。"
+    },
+    {
+      "q": "邻接节点列表中保存的是什么？",
+      "a": "保存其他节点在节点 vector 中的索引。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++ vector",
+    "有向图与邻接表"
+  ],
+  "source_pages": [
+    725,
+    725
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1505_有向图的内部数据结构",
+  "_chunk_pages": [
+    725,
+    728
+  ]
+}

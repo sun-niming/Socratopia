@@ -1,0 +1,42 @@
+{
+  "title": "使用 RAII 锁对象自动释放锁",
+  "definition": "应使用基于 RAII 的锁对象，例如 `lock_guard`、`unique_lock`、`shared_lock` 或 `scoped_lock`，让锁对象在合适的生命周期内管理锁的获取与释放，并在离开作用域时自动释放锁。",
+  "key_points": [
+    "RAII 锁对象把锁的生命周期与对象生命周期关联起来。",
+    "离开作用域时，锁对象的析构过程会自动释放锁。",
+    "教材列举的 RAII 锁对象包括 `lock_guard`、`unique_lock`、`shared_lock` 和 `scoped_lock`。"
+  ],
+  "examples": [
+    "可以在临界区创建一个锁对象，使其管理某个互斥量；当执行流程离开该作用域时，锁对象自动释放互斥量，即使作用域因异常退出也能避免忘记解锁。"
+  ],
+  "misconceptions": [
+    "RAII 锁对象并不是让数据自动变成线程安全；它仍需正确选择并使用要保护的互斥量。",
+    "使用 RAII 并不意味着锁会一直持有到线程结束，锁通常在锁对象离开其作用域时释放。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么推荐使用 RAII 锁对象？",
+      "a": "因为它能自动管理锁的生命周期，在正确的时间获取并释放锁，减少手动解锁遗漏的风险。"
+    },
+    {
+      "q": "教材列举了哪些 RAII 锁对象？",
+      "a": "`lock_guard`、`unique_lock`、`shared_lock` 和 `scoped_lock`。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "互斥量与锁",
+    "C++ RAII"
+  ],
+  "source_pages": [
+    829,
+    829
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1707_使用_raii_锁对象自动释放锁",
+  "_chunk_pages": [
+    829,
+    832
+  ]
+}

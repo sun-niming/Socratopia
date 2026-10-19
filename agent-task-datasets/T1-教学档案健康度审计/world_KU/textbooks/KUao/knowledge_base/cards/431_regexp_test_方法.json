@@ -1,0 +1,37 @@
+{
+  "title": "RegExp.test 方法",
+  "definition": "RegExp 对象的 test 方法用于检查指定字符串中是否存在与正则表达式匹配的内容；返回值通常为布尔值，存在匹配则为 true，否则为 false。",
+  "key_points": [
+    "test 用来判断字符串中是否存在匹配项。",
+    "示例中 reCat.test(data) 的结果为 true。"
+  ],
+  "examples": [
+    "var data = \"123123\";\nvar reCat = /123/gi;\nalert(reCat.test(data)); // true"
+  ],
+  "misconceptions": [
+    "把 test 当成返回匹配文本本身的方法。",
+    "认为 test 只能用于带 g 标志的正则表达式。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "RegExp 的 test 方法有什么作用？",
+      "a": "检查指定的字符串是否存在与正则表达式匹配的内容。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "正则表达式基础",
+    "匹配参数"
+  ],
+  "source_pages": [
+    317,
+    320
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "431_regexp_test_方法",
+  "_chunk_pages": [
+    317,
+    320
+  ]
+}

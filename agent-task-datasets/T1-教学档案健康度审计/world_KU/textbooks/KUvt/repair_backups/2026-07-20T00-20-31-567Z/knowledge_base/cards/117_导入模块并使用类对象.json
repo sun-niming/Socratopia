@@ -1,0 +1,44 @@
+{
+  "title": "导入模块并使用类对象",
+  "definition": "要使用定义在模块中的 AirlineTicket 类，需要先导入其模块，然后声明该类的对象，并通过成员函数设置数据、查询数据或执行计算。访问对象的成员函数使用点运算符 $.$。",
+  "key_points": [
+    "使用模块中的类前，需要使用 import 导入对应模块。",
+    "对象声明可使用类名直接定义，例如 AirlineTicket myTicket;",
+    "通过对象调用成员函数，例如 myTicket.setPassengerName(...)。",
+    "成员函数可以组合使用：先设置里程和乘客姓名，再调用 calculatePriceInDollars() 计算票价。"
+  ],
+  "examples": [
+    "import airline_ticket;\nAirlineTicket myTicket;\nmyTicket.setPassengerName(\"Sherman T. Socketwrench\");\nmyTicket.setNumberOfMiles(700);\ndouble cost { myTicket.calculatePriceInDollars() };"
+  ],
+  "misconceptions": [
+    "声明对象后，不能把成员函数当作全局函数直接调用；通常应通过对象名和点运算符调用。",
+    "导入模块只是让程序能够使用模块中的声明，不等于已经自动创建了 AirlineTicket 对象。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "使用 AirlineTicket 类前需要做什么？",
+      "a": "需要先导入定义该类的模块。"
+    },
+    {
+      "q": "如何调用 myTicket 的 calculatePriceInDollars() 成员函数？",
+      "a": "使用 myTicket.calculatePriceInDollars()。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++类和对象",
+    "成员函数调用",
+    "C++模块导入"
+  ],
+  "source_pages": [
+    66,
+    66
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 模块 import airline_ticket AirlineTicket 示例 模块名和标准语法",
+  "concept_id": "117_导入模块并使用类对象",
+  "_chunk_pages": [
+    65,
+    68
+  ]
+}

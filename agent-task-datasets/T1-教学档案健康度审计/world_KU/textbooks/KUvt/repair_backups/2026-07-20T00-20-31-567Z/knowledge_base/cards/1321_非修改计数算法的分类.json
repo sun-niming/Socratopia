@@ -1,0 +1,46 @@
+{
+  "title": "非修改计数算法的分类",
+  "definition": "C++标准库中的非修改计数算法用于检查范围内元素是否满足条件，或统计满足条件的元素数量。原文列举了all_of、any_of、none_of、count和count_if。它们只读取元素，不修改范围中的元素。",
+  "key_points": [
+    "all_of：判断范围内是否所有元素都满足谓词。",
+    "any_of：判断范围内是否至少有一个元素满足谓词。",
+    "none_of：判断范围内是否没有元素满足谓词。",
+    "count和count_if用于计数，其中count按相等关系计数，count_if按谓词计数。"
+  ],
+  "examples": [
+    "对于范围内元素是否都等于1，可使用：all_of(cbegin(vec), cend(vec), [](int i){ return i == 1; })。",
+    "对于范围内是否至少有一个元素等于1，可使用：any_of(cbegin(vec), cend(vec), [](int i){ return i == 1; })。",
+    "对于范围内是否所有元素都不等于1，可使用：none_of(cbegin(vec), cend(vec), [](int i){ return i == 1; })。"
+  ],
+  "misconceptions": [
+    "这些算法不会修改容器中的元素。",
+    "any_of不是要求所有元素满足条件，而是只要求至少一个元素满足条件。",
+    "none_of表示没有元素满足谓词，不是表示范围为空。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "all_of、any_of和none_of分别判断什么？",
+      "a": "all_of判断所有元素是否满足谓词，any_of判断至少一个元素是否满足谓词，none_of判断是否没有元素满足谓词。"
+    },
+    {
+      "q": "这些算法是否会修改输入范围？",
+      "a": "不会，它们是非修改算法，只读取输入范围。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "迭代器范围",
+    "Lambda表达式和谓词"
+  ],
+  "source_pages": [
+    637,
+    637
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1321_非修改计数算法的分类",
+  "_chunk_pages": [
+    637,
+    640
+  ]
+}

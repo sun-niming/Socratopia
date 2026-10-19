@@ -1,0 +1,42 @@
+{
+  "title": "模板参数的三种类型",
+  "definition": "第 26 章开头指出，模板参数实际上有三种类型：类型参数、非类型参数和 template template 参数。类型参数表示类型，非类型参数表示编译期值，template template 参数表示作为模板参数传入的模板。",
+  "key_points": [
+    "类型参数是模板中最常见、最核心的一类参数。",
+    "非类型参数不是类型，而是作为模板参数传入的编译期值。",
+    "template template 参数的名称本身就是 C++ 语法中的术语，表示模板参数可以是另一个模板。",
+    "模板可以声明任意数量的类型参数。"
+  ],
+  "examples": [
+    "概念性形式：\n```cpp\ntemplate <typename T> class TypeParam;\ntemplate <int N> class NonTypeParam;\ntemplate <template <typename> class Container> class TemplateTemplateParam;\n```"
+  ],
+  "misconceptions": [
+    "template template 参数不是笔误，也不是普通类型参数；它表示传入一个模板。",
+    "非类型模板参数与类型模板参数不同，前者传入的是满足要求的编译期值。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "C++ 模板参数有哪三种主要类型？",
+      "a": "类型参数、非类型参数和 template template 参数。"
+    },
+    {
+      "q": "template template 参数表示什么？",
+      "a": "它表示模板参数本身可以是另一个模板。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "类模板和函数模板基础"
+  ],
+  "source_pages": [
+    756,
+    756
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1568_模板参数的三种类型",
+  "_chunk_pages": [
+    753,
+    756
+  ]
+}

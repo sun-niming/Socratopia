@@ -1,0 +1,43 @@
+{
+  "title": "最终验收命令组",
+  "definition": "验收时不能只在浏览器里打开首页，而要用 `curl` 和日志共同证明：成功路径、失败路径、安全路径、并发路径都被覆盖。重点是看状态码、响应头和访问日志，而不是只看页面是否“能打开”。",
+  "key_points": [
+    "必须覆盖成功、失败、安全、并发四类测试。",
+    "`curl -i` 可以直接查看状态码和响应头。",
+    "还要用日志（如 `tail`）证明请求被正确处理。"
+  ],
+  "examples": [
+    "示例命令：`curl -i http://127.0.0.1:8080/`",
+    "示例命令：`curl -i http://127.0.0.1:8080/not-found.html`",
+    "示例命令：`curl -i -X POST http://127.0.0.1:8080/`",
+    "示例命令：`curl -i http://127.0.0.1:8080/../../etc/passwd`",
+    "示例命令：`for i in $(seq 1 20); do curl -s http://127.0.0.1:8080/ > /dev/null & done; wait`",
+    "示例命令：`tail -n 20 logs/access.log`"
+  ],
+  "misconceptions": [
+    "误以为只要浏览器首页能打开，项目就算验收完成。",
+    "误以为只测 200 响应就足够。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "验收时为什么要用 `curl` 而不是只用浏览器？",
+      "a": "因为 `curl` 能直接看到状态码和响应头，便于验证 200、404、405、403/400 等不同结果。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "HTTP状态码",
+    "命令行工具"
+  ],
+  "source_pages": [
+    63,
+    64
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "106_最终验收命令组",
+  "_chunk_pages": [
+    61,
+    64
+  ]
+}

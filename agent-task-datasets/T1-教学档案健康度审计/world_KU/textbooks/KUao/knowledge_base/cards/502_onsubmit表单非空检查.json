@@ -1,0 +1,45 @@
+{
+  "title": "onsubmit表单非空检查",
+  "definition": "可以把表单提交检查写在 onsubmit 事件处理程序里：提交时先判断文本字段是否为空，如果为空就调用 preventDefault() 阻止表单提交，并在页面上给出提示信息。",
+  "key_points": [
+    "onsubmit 事件可用于在表单提交前做检查",
+    "通过 fname.value === '' 或 lname.value === '' 判断输入框是否为空",
+    "当检查不通过时调用 e.preventDefault() 阻止提交",
+    "可以用 paragraph 的 textContent 显示提示信息"
+  ],
+  "examples": [
+    "form.onsubmit = function(e) {\n  if (fname.value === '' || lname.value === '') {\n    e.preventDefault();\n    para.textContent = 'You need to fill in both names!';\n  }\n};"
+  ],
+  "misconceptions": [
+    "以为点击提交按钮后一定会把表单发出去，不能在前端拦截",
+    "以为 onsubmit 只能提交成功后再执行",
+    "以为空值检查只能放到服务器端做"
+  ],
+  "qa_pairs": [
+    {
+      "q": "onsubmit 事件处理程序在这个例子中做什么？",
+      "a": "在表单提交前检查输入框是否为空，若为空则阻止提交并提示用户。"
+    },
+    {
+      "q": "为什么要在空值时调用 preventDefault()？",
+      "a": "为了阻止表单继续提交。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "阻止默认行为",
+    "表单元素",
+    "事件对象"
+  ],
+  "source_pages": [
+    373,
+    376
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "502_onsubmit表单非空检查",
+  "_chunk_pages": [
+    373,
+    376
+  ]
+}

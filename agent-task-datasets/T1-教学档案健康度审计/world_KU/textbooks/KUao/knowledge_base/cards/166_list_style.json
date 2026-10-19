@@ -1,0 +1,43 @@
+{
+  "title": "list-style",
+  "definition": "CSS 的列表样式简写属性，用来统一设置列表项标号类型、标号位置和标号图像。教材给出的示例写法为 list-style: square inside url(\"bullet.gif\");",
+  "key_points": [
+    "可一次设置标号类型、标号位置、标号图像",
+    "是列表相关属性的简写形式",
+    "教材示例同时包含 square、inside 和 url(\"bullet.gif\")"
+  ],
+  "examples": [
+    "list-style: square inside url(\"bullet.gif\");"
+  ],
+  "misconceptions": [
+    "它不是单独只设置某一个列表属性。",
+    "简写属性可以同时表达多个列表样式信息。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "list-style 可以统一设置哪些内容？",
+      "a": "标号类型、标号位置、标号图像。"
+    },
+    {
+      "q": "教材中的 list-style 示例是什么？",
+      "a": "list-style: square inside url(\"bullet.gif\");"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "list-style-type",
+    "list-style-position",
+    "list-style-image"
+  ],
+  "source_pages": [
+    117,
+    120
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "166_list_style",
+  "_chunk_pages": [
+    117,
+    120
+  ]
+}

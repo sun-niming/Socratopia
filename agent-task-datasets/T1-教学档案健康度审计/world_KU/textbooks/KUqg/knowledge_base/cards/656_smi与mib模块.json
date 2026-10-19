@@ -1,0 +1,42 @@
+{
+  "title": "SMI与MIB模块",
+  "definition": "SMI（Structure of Management Information，管理信息结构）是一种定义MIB对象的数据描述语言。它以形式化方式规定网络管理数据的语法和语义，使这些数据的定义明确且没有二义性。相关的MIB对象会被组织到MIB模块中。",
+  "key_points": [
+    "SMI用于定义MIB对象，而不是直接执行网络管理操作。",
+    "使用形式化定义语言可以保证网络管理数据的语法和语义定义良好、无二义性。",
+    "相关MIB对象被收集在MIB模块中。",
+    "原文指出，截至2015年年中，RFC定义了大约400个MIB模块，此外还有大量厂商专用MIB模块。"
+  ],
+  "examples": [
+    "一个MIB模块可以集中定义与某类网络设备或某项网络功能相关的一组MIB对象。"
+  ],
+  "misconceptions": [
+    "SMI就是MIB本身；实际上，SMI是定义MIB对象的数据描述语言，MIB是被定义和组织起来的管理信息集合。",
+    "MIB模块只由RFC定义；原文还指出存在大量厂商特定的MIB模块。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "SMI的作用是什么？",
+      "a": "SMI是一种定义MIB对象的数据描述语言，用于确保网络管理数据的语法和语义定义良好且无二义性。"
+    },
+    {
+      "q": "MIB模块是什么？",
+      "a": "MIB模块是收集相关MIB对象的模块化组织形式。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "被管对象与MIB"
+  ],
+  "source_pages": [
+    293,
+    296
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "656_smi与mib模块",
+  "_chunk_pages": [
+    293,
+    296
+  ]
+}

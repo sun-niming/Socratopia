@@ -1,0 +1,43 @@
+{
+  "title": "FileOpenError与FileReadError的专用信息",
+  "definition": "FileOpenError表示文件打开失败。它接收文件名，将其传给FileError，并设置类似“Unable to open <filename>.”的错误消息。FileReadError表示文件读取失败，除文件名外还保存发生错误的行号，并设置类似“Error reading <filename>, line <lineNumber>.”的消息。",
+  "key_points": [
+    "FileOpenError不需要额外保存行号，因为打开失败发生在读取具体行之前。",
+    "FileReadError额外保存size_t类型的行号，并提供getLineNumber()读取该行号。",
+    "FileReadError的行号由readIntegerFile在读取每一行后递增并传入异常对象。"
+  ],
+  "examples": [
+    "FileOpenError的构造逻辑：FileOpenError(string filename) : FileError(move(filename)) { setMessage(format(\"Unable to open {}.\", getFilename())); }",
+    "FileReadError的构造逻辑：FileReadError(string filename, size_t lineNumber) : FileError(move(filename)), m_lineNumber{lineNumber} { setMessage(format(\"Error reading {}, line {}.\", getFilename(), lineNumber)); }"
+  ],
+  "misconceptions": [
+    "FileReadError中的行号不是文件大小或字符位置，而是发生读取错误的输入行编号。",
+    "FileOpenError和FileReadError虽然都属于FileError，但它们携带的附加信息不同：后者额外携带行号。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "FileReadError比FileOpenError多保存了什么信息？",
+      "a": "FileReadError额外保存发生读取错误的行号，并通过getLineNumber()提供访问。"
+    },
+    {
+      "q": "文件无法打开时应抛出哪一种异常？",
+      "a": "应抛出FileOpenError，并将文件名传入其构造函数。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "自定义异常类层次",
+    "std::string与size_t"
+  ],
+  "source_pages": [
+    450,
+    451
+  ],
+  "needs_verification": true,
+  "verify_query": "Marc Gregoire C++20高级编程 第5版 FileOpenError FileReadError getLineNumber 构造函数 原文",
+  "concept_id": "590_fileopenerror与filereaderror的专用信息",
+  "_chunk_pages": [
+    449,
+    452
+  ]
+}

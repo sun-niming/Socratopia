@@ -1,0 +1,43 @@
+{
+  "title": "用状态类表示棋子的不同状态",
+  "definition": "原文在 Piece 示例中出现了 State、StateEmpty、StateX 和 StateO。这表示一个 Piece 的不同状态可以通过状态类分别表示，例如空状态、X 状态和 O 状态。给定原文没有完整展示这些类之间的继承或关联箭头，因此只能确认这些名称及其状态建模意图，不能确定完整设计结构。",
+  "key_points": [
+    "原文出现 State、StateEmpty、StateX 和 StateO。",
+    "StateEmpty、StateX、StateO 的名称分别暗示空、X 和 O 三种棋子状态。",
+    "这种设计把状态差异表示为不同的类，而不是只在一个类中保存一个字符。",
+    "原文未完整给出状态转换规则或类图关系。"
+  ],
+  "examples": [
+    "可按原文名称表示状态集合：\n$$State \\in \\{StateEmpty,\\ StateX,\\ StateO\\}$$",
+    "其中 StateEmpty、StateX、StateO 分别对应空、X、O 状态；这只是根据类名进行的直接整理，具体接口需以完整教材图示为准。"
+  ],
+  "misconceptions": [
+    "不能根据类名断定 StateEmpty、StateX、StateO 一定是 State 的公有派生类。",
+    "原文没有给出状态转换方法，因此不能臆造“落子”“清空”等具体操作。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "原文中 Piece 示例出现了哪些状态相关名称？",
+      "a": "State、StateEmpty、StateX 和 StateO。"
+    },
+    {
+      "q": "StateEmpty、StateX、StateO 可能分别表示什么？",
+      "a": "从名称看，分别表示空状态、X 状态和 O 状态；完整关系需要核实。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "UML类图中的类、属性与操作"
+  ],
+  "source_pages": [
+    169,
+    170
+  ],
+  "needs_verification": true,
+  "verify_query": "《C++20高级编程》第5版 第169-170页 StateEmpty StateX StateO Piece 状态模式",
+  "concept_id": "236_用状态类表示棋子的不同状态",
+  "_chunk_pages": [
+    169,
+    172
+  ]
+}

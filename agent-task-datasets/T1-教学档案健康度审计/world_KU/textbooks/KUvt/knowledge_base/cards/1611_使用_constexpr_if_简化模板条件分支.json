@@ -1,0 +1,45 @@
+{
+  "title": "使用 constexpr if 简化模板条件分支",
+  "definition": "`constexpr if` 是 C++17 引入的编译期条件语句。条件为真时，只有 then 分支参与当前模板实例化；条件为假时，只有 else 分支参与实例化。因此，它可以把原本需要多个 `enable_if` 重载的实现合并为一个函数模板，并避免不适用分支中的代码导致编译错误。",
+  "key_points": [
+    "`constexpr if` 的条件必须能够在编译期求值，常与类型 trait 一起使用。",
+    "普通 `if` 的两个分支通常都需要编译；`constexpr if` 会丢弃不满足条件的分支。",
+    "示例中可通过 `is_base_of_v<IsDoable, T>` 判断类型 `T` 是否派生自 `IsDoable`。"
+  ],
+  "examples": [
+    "示例：```cpp\nclass IsDoable {\npublic:\n    void doit() const { std::cout << \"IsDoable::doit()\" << std::endl; }\n};\nclass Derived : public IsDoable {};\n\ntemplate <typename T>\nvoid callDoit(const T& t) {\n    if constexpr (std::is_base_of_v<IsDoable, T>) {\n        t.doit();\n    } else {\n        std::cout << \"Cannot call doit()!\" << std::endl;\n    }\n}\n\nDerived d;\ncallDoit(d);   // IsDoable::doit()\ncallDoit(123); // Cannot call doit()!\n```",
+    "如果改用普通 `if`，即使条件最终为假，`t.doit()` 仍可能因 `T` 没有 `doit()` 成员而导致编译失败。"
+  ],
+  "misconceptions": [
+    "`constexpr if` 不是运行时条件判断；它决定的是模板实例化时哪些代码参与编译。",
+    "不是所有普通 `if` 都要求两个分支都能通过模板语义检查，但本例中普通 `if` 无法避免 `t.doit()` 对不适用类型的编译检查。",
+    "使用 `constexpr if` 并不意味着所有类型都能调用 `doit()`；只有满足条件的分支才会调用它。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么本例不能简单地把两个 `enable_if` 重载改成普通 `if`？",
+      "a": "因为普通 `if` 的两个分支都需要进行编译检查。对于不派生自 `IsDoable` 的类型，`t.doit()` 不存在，会导致编译失败；`constexpr if` 则会在编译期丢弃不适用的分支。"
+    },
+    {
+      "q": "`callDoit(123)` 的输出是什么？",
+      "a": "输出 `Cannot call doit()!`，因为 `int` 不派生自 `IsDoable`。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "类型 trait",
+    "函数模板",
+    "SFINAE 与 enable_if"
+  ],
+  "source_pages": [
+    785,
+    786
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1611_使用_constexpr_if_简化模板条件分支",
+  "_chunk_pages": [
+    785,
+    788
+  ]
+}

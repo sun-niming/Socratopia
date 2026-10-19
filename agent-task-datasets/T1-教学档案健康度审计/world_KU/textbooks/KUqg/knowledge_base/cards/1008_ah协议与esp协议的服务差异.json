@@ -1,0 +1,44 @@
+{
+  "title": "AH协议与ESP协议的服务差异",
+  "definition": "IPsec协议族中有两个主要协议：鉴别首部（AH，Authentication Header）协议和封装安全性载荷（ESP，Encapsulation Security Payload）协议。AH提供源鉴别和数据完整性，但不提供机密性；ESP提供源鉴别、数据完整性和机密性。由于VPN等应用通常非常重视机密性，ESP的使用比AH更广泛。",
+  "key_points": [
+    "AH：源鉴别 + 数据完整性，不提供机密性。",
+    "ESP：源鉴别 + 数据完整性 + 机密性。",
+    "发送安全数据报的源IPsec实体可以是主机或路由器，目的实体通常也是主机或路由器。",
+    "原文后续重点讨论ESP协议。"
+  ],
+  "examples": [
+    "如果应用只需要验证数据来源并检测篡改、但不要求隐藏数据内容，可以考虑AH所提供的服务。",
+    "VPN通常需要隐藏机构流量内容，因此更常使用能够提供机密性的ESP。"
+  ],
+  "misconceptions": [
+    "AH提供加密机密性；原文明确指出AH不提供机密性。",
+    "ESP只负责加密；原文明确指出ESP还提供源鉴别和数据完整性。",
+    "AH和ESP必须同时使用；原文说发送安全数据报时可以使用AH或ESP。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "AH和ESP在安全服务上有什么区别？",
+      "a": "AH提供源鉴别和数据完整性，但不提供机密性；ESP提供源鉴别、数据完整性和机密性。"
+    },
+    {
+      "q": "为什么ESP比AH更广泛地用于VPN？",
+      "a": "因为VPN和许多其他IPsec应用通常需要机密性，而ESP能够提供机密性。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "IPsec提供的网络层安全服务"
+  ],
+  "source_pages": [
+    433,
+    436
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1008_ah协议与esp协议的服务差异",
+  "_chunk_pages": [
+    433,
+    436
+  ]
+}

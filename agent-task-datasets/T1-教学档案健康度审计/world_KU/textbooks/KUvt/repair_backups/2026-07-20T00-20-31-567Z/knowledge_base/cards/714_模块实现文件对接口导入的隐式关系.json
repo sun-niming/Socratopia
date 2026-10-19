@@ -1,0 +1,47 @@
+{
+  "title": "模块实现文件对接口导入的隐式关系",
+  "definition": "模块实现文件通过不带 export 的命名模块声明指定其所属模块。原文说明，该声明隐式包含对相应模块接口的导入，因此实现文件可以使用接口文件中导入的内容；但模块外部的用户文件仅导入该模块时，不会因此自动继承接口文件的导入声明。",
+  "key_points": [
+    "模块实现文件写出类似 module person; 的声明即可表明它属于 person 模块。",
+    "实现文件不需要再写 import person;，因为命名模块声明已经隐式包含了这一关系。",
+    "同一模块的实现文件可以利用模块接口文件导入的 <string> 等内容。",
+    "不属于该模块的用户文件，即使写 import person，也不会隐式继承 person 接口文件中的导入声明。"
+  ],
+  "examples": [
+    "实现文件可写：\nmodule person;\n\n// 这里使用接口文件已经导入的内容\nPerson::Person(std::string firstName, std::string lastName) { /* ... */ }"
+  ],
+  "misconceptions": [
+    "用户代码 import person; 并不意味着用户代码自动获得 person 模块接口文件中所有 import 的头文件。",
+    "模块实现文件与普通导入模块的用户文件在导入可见性方面并不相同。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "模块实现文件是否需要显式写 import person;？",
+      "a": "不需要；module person; 的命名模块声明隐式包含了对 person 模块接口的导入。"
+    },
+    {
+      "q": "为什么实现文件可以使用接口文件已经导入的 <string>？",
+      "a": "因为实现文件属于同一个 person 模块，其命名模块声明隐式关联并继承模块接口中的导入。"
+    },
+    {
+      "q": "test.cpp import person; 后是否会自动获得 person 接口文件导入的 <string>？",
+      "a": "不会，因为 test.cpp 不属于 person 模块的一部分。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "模块接口与实现文件的拆分",
+    "模块导入声明"
+  ],
+  "source_pages": [
+    355,
+    355
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 named module implementation unit implicit import module interface imports transitive visibility",
+  "concept_id": "714_模块实现文件对接口导入的隐式关系",
+  "_chunk_pages": [
+    353,
+    356
+  ]
+}

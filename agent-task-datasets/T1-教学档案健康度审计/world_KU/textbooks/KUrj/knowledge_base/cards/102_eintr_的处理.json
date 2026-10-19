@@ -1,0 +1,38 @@
+{
+  "title": "EINTR 的处理",
+  "definition": "信号可能打断正在进行的系统调用，例如 `accept`。当系统调用因为信号中断而返回，并且 `errno == EINTR` 时，应该把它看成可恢复情况，继续循环重试，而不是当作服务器致命错误。",
+  "key_points": [
+    "信号会打断阻塞中的系统调用。",
+    "遇到 `errno == EINTR` 时应重新进入循环。",
+    "不要把 `EINTR` 直接当作程序崩溃或服务器致命故障。"
+  ],
+  "examples": [
+    "原文提示：信号可能打断 `accept`。遇到 `errno == EINTR` 时继续循环，不要把它当成服务器致命错误。"
+  ],
+  "misconceptions": [
+    "误以为 `accept` 返回错误就一定是不可恢复的严重故障。",
+    "误以为只要安装了信号处理函数，系统调用就不会被中断。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`accept` 被信号打断并返回 `EINTR` 时应该怎么做？",
+      "a": "继续循环重试，不要把它当成致命错误。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "系统调用",
+    "信号"
+  ],
+  "source_pages": [
+    61,
+    64
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "102_eintr_的处理",
+  "_chunk_pages": [
+    61,
+    64
+  ]
+}

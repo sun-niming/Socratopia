@@ -1,0 +1,53 @@
+{
+  "title": "std::async 的执行策略与结果获取",
+  "definition": "std::async 用于启动一个异步任务，并返回一个可用于获取任务结果的 std::future。任务可以由 C++ 运行时在新线程中异步执行，也可以在调用返回 future 的 get() 时由调用线程延迟执行。未指定策略时，运行时可根据系统处理器数量等因素在这两种方式之间选择。",
+  "key_points": [
+    "std::async 接收要执行的函数及其参数，并返回关联的 future。",
+    "launch::async 强制运行时在另一个线程中异步执行函数。",
+    "launch::deferred 强制函数延迟执行，直到对返回的 future 调用 get()，并在调用 get() 的线程中同步执行。",
+    "launch::async | launch::deferred 允许运行时自行选择，是默认行为。",
+    "调用 future.get() 可以取得任务结果；如果任务尚未完成或采用 deferred 策略，get() 可能等待或触发任务执行。"
+  ],
+  "examples": [
+    "默认策略：auto myFuture{async(calculate)}; int result{myFuture.get()};",
+    "强制异步执行：auto myFuture{async(launch::async, calculate)};",
+    "强制延迟执行：auto myFuture{async(launch::deferred, calculate)};",
+    "若 calculate() 返回 123，则调用 myFuture.get() 后可将结果保存为 int result。"
+  ],
+  "misconceptions": [
+    "std::async 默认不保证一定创建新线程；默认策略允许运行时选择异步执行或延迟执行。",
+    "launch::deferred 并不是立即在新线程中执行，而是在调用 get() 时由调用线程执行。",
+    "std::async 返回的是 future，不是线程对象；结果通过 future.get() 获取。",
+    "指定 launch::async 后，任务才被强制要求在不同线程中异步执行。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "std::async 默认采用什么执行策略？",
+      "a": "默认允许运行时在异步执行和延迟执行之间选择，即等价于 launch::async | launch::deferred。"
+    },
+    {
+      "q": "launch::async 和 launch::deferred 有什么区别？",
+      "a": "launch::async 强制在不同线程中异步执行；launch::deferred 延迟到调用 future.get() 时执行，并在调用 get() 的线程中同步执行。"
+    },
+    {
+      "q": "如何使用 std::async 获取函数 calculate() 的返回值？",
+      "a": "调用 auto myFuture{std::async(calculate)};，之后调用 int result{myFuture.get()}; 获取结果。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "std::future 获取异步计算结果",
+    "C++线程基础"
+  ],
+  "source_pages": [
+    820,
+    820
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1682_std_async_的执行策略与结果获取",
+  "_chunk_pages": [
+    817,
+    820
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "title": "Employee 类的独立测试",
+  "definition": "编写类时可以创建单独的测试源文件，在 main 函数中构造对象并调用其方法，以验证类是否正常工作。当类测试完成后，应删除或注释该测试文件，否则项目中可能出现多个 main 函数并导致编译问题。",
+  "key_points": [
+    "测试文件可以导入 Employee 模块，并在 main 中执行构造、设置数据、加薪、雇用和显示等操作。",
+    "原文示例先创建 Jane Doe，再修改名字、设置编号和薪资，执行两次 promote，最后 hire 并 display。",
+    "独立测试完成后应移除或注释测试文件，避免编译多个 main 函数。",
+    "另一种测试类的方法是使用单元测试，教材指出相关内容见第 30 章。"
+  ],
+  "examples": [
+    "测试流程：`Employee emp { \"Jane\", \"Doe\" }; emp.setFirstName(\"John\"); emp.setLastName(\"Doe\"); emp.setEmployeeNumber(71); emp.setSalary(501000); emp.promote(); emp.promote(50); emp.hire(); emp.display();`"
+  ],
+  "misconceptions": [
+    "独立测试文件不是应用程序永久必须保留的业务代码；教材建议测试完成后删除或注释它。",
+    "调用 `emp.promote()` 与 `emp.promote(50)` 并不相同，前者使用默认参数，后者使用显式参数。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么完成 Employee 测试后要删除或注释测试文件？",
+      "a": "因为测试文件包含 main 函数；如果项目中同时编译多个包含 main 的文件，可能导致编译问题。"
+    },
+    {
+      "q": "原文测试代码对 Employee 执行了哪些主要操作？",
+      "a": "构造对象、修改姓名、设置雇员编号和薪资、调用默认和显式参数的 promote、雇用雇员并显示信息。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "main函数",
+    "模块导入",
+    "类的基本使用"
+  ],
+  "source_pages": [
+    95,
+    95
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "175_employee_类的独立测试",
+  "_chunk_pages": [
+    93,
+    96
+  ]
+}

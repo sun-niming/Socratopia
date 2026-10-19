@@ -1,0 +1,37 @@
+{
+  "title": "a命令进入输入模式",
+  "definition": "在命令模式下按 a，会在光标所在字母之后插入内容，并进入输入模式。",
+  "key_points": [
+    "a 只能从命令模式进入输入模式",
+    "插入位置在光标所在字母之后",
+    "执行后进入输入模式"
+  ],
+  "examples": [
+    "光标停在某个字母上时按 a，然后从该字母后开始输入"
+  ],
+  "misconceptions": [
+    "认为 a 与 i 的插入位置相同",
+    "认为 a 会新建一行再输入"
+  ],
+  "qa_pairs": [
+    {
+      "q": "在 Vim 中，a 的作用是什么？",
+      "a": "在光标所在字母之后插入，并进入输入模式。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "Vim的工作模式"
+  ],
+  "source_pages": [
+    37,
+    40
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "073_a命令进入输入模式",
+  "_chunk_pages": [
+    37,
+    40
+  ]
+}

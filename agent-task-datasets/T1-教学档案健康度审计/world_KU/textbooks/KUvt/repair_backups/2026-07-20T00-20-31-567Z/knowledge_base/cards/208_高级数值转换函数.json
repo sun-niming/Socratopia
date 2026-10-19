@@ -1,0 +1,54 @@
+{
+  "title": "高级数值转换函数",
+  "definition": "C++ 标准库在 std 名称空间中提供了高级数值转换函数，用于在数值和字符串之间进行转换。这些函数定义在 <string> 中；数值转字符串的函数会分配内存、创建新的 string 对象并返回。",
+  "key_points": [
+    "to_string 可将整数类型、浮点类型转换为 string。支持的类型包括 unsigned int、int、unsigned long、long、unsigned long long、long long、float、double 和 long double。",
+    "字符串转数值的函数包括 stoi、stol、stoul、stoll、stoull、stof 和 stold。",
+    "字符串转数值时，idx 用于接收第一个未转换字符的索引；idx 可以为空指针。",
+    "如果无法执行任何转换，抛出 invalid_argument；如果转换结果超出返回类型范围，抛出 out_of_range。"
+  ],
+  "examples": [
+    "long double d { 3.14L };",
+    "string s { to_string(d) };",
+    "const string toParse { \"123USD\" };",
+    "size_t index {};",
+    "int value { stoi(toParse, &index) }; // value 为 123，index 指向 U",
+    "toParse[index] // 第一个未转换字符为 'U'"
+  ],
+  "misconceptions": [
+    "stoi 等函数并不要求整个字符串都由数字组成；它们可以在解析出前缀数字后停止，并通过 idx 报告第一个未转换字符。",
+    "idx 是索引的输出参数，不是输入的进制参数。",
+    "to_string 返回的是新建的 string，而不是对原有字符串的视图。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "stoi(\"123USD\", &index) 的解析结果是什么？",
+      "a": "解析出整数 123，index 指向第一个未转换字符 U 的位置，因此 toParse[index] 为 'U'。"
+    },
+    {
+      "q": "高级字符串转数值函数在什么情况下抛出 invalid_argument？",
+      "a": "当不能执行任何转换时抛出 invalid_argument。"
+    },
+    {
+      "q": "高级字符串转数值函数在什么情况下抛出 out_of_range？",
+      "a": "当转换出的值超出返回类型可以表示的范围时抛出 out_of_range。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "std::string",
+    "C++ 异常基本概念",
+    "整数与浮点数类型"
+  ],
+  "source_pages": [
+    110,
+    110
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "208_高级数值转换函数",
+  "_chunk_pages": [
+    109,
+    112
+  ]
+}

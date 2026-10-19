@@ -1,0 +1,50 @@
+{
+  "title": "std::initializer_list 初始化列表",
+  "definition": "`std::initializer_list<T>` 是在 `<initializer_list>` 中定义的模板类型，用于表示一组类型为 `T` 的初始化元素。函数可以把它作为参数，从而方便地接收数量可变的一组同类型参数。",
+  "key_points": [
+    "使用 `std::initializer_list` 时，需要在尖括号中指定元素类型，例如 `std::initializer_list<int>`。",
+    "函数可以使用基于范围的 for 循环遍历初始化列表中的元素。",
+    "初始化列表具有类型安全性：列表中的所有元素必须是同一类型；元素类型不匹配可能导致编译器错误或警告。"
+  ],
+  "examples": [
+    "求和函数可以声明为 `int makeSum(std::initializer_list<int> values) { int total { 0 }; for (int value : values) { total += value; } return total; }`。",
+    "调用示例：`int a { makeSum({ 1, 2, 3 }) };`。",
+    "调用 `makeSum({ 10, 20, 30, 40, 50, 60 })` 可以传入数量更多的整数。",
+    "`makeSum({ 1, 2, 3.0 })` 中同时包含整数和 `double`，与 `std::initializer_list<int>` 的元素类型要求不一致，可能产生编译器错误或警告。"
+  ],
+  "misconceptions": [
+    "初始化列表不是可以任意混合类型的容器；同一个 `std::initializer_list<T>` 中的元素必须符合同一元素类型 `T`。",
+    "`std::initializer_list` 不等同于 `std::vector`；原文强调的是它用于接收一组初始化元素，且其类型由模板参数指定。",
+    "能传入多个参数并不表示函数使用了 C 风格的可变参数；这里使用的是类型安全的 `std::initializer_list<T>`。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`std::initializer_list<int>` 对列表元素有什么要求？",
+      "a": "列表中的所有元素都必须是整数类型并符合指定的元素类型。"
+    },
+    {
+      "q": "为什么 `makeSum({ 1, 2, 3.0 })` 可能报错或警告？",
+      "a": "因为 `makeSum` 接收 `std::initializer_list<int>`，而列表中包含 `double` 值 `3.0`，元素类型不一致。"
+    },
+    {
+      "q": "初始化列表定义在哪个头文件中？",
+      "a": "定义在 `<initializer_list>` 头文件中。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "基于范围的 for 循环",
+    "模板类型"
+  ],
+  "source_pages": [
+    62,
+    63
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "109_std_initializer_list_初始化列表",
+  "_chunk_pages": [
+    61,
+    64
+  ]
+}

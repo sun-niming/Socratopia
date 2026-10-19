@@ -1,0 +1,45 @@
+{
+  "title": "函数返回字符串时应谨慎选择string_view",
+  "definition": "原文建议：函数返回字符串时，尽量使用 `const std::string&` 或 `std::string`，而不是 `std::string_view`。这是因为返回的字符串视图只提供对字符序列的非拥有访问，使用时必须确保其所引用的字符数据仍然有效。",
+  "key_points": [
+    "原文明确建议函数返回类型尽量选择 `const std::string&` 或 `std::string`。",
+    "原文不建议把 `std::string_view` 作为函数返回类型的首选。",
+    "返回字符串相关对象时，必须考虑字符数据的所有权和生命周期。"
+  ],
+  "examples": [
+    "返回字符串值：`std::string get_name();`。",
+    "返回已有字符串的只读引用：`const std::string& get_name(const std::string& name);`。",
+    "不应简单地从局部字符串构造并返回视图：`std::string_view get_name() { std::string local = \"name\"; return local; }`。"
+  ],
+  "misconceptions": [
+    "认为 `std::string_view` 总是比 `std::string` 更适合作为返回类型。",
+    "认为返回 `std::string_view` 会自动延长被引用字符数据的生命周期。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "原文对函数返回类型中的 `std::string_view` 有什么建议？",
+      "a": "尽量使用 `const std::string&` 或 `std::string`，而不是把 `std::string_view` 作为函数返回类型。"
+    },
+    {
+      "q": "使用字符串视图作为返回值时需要特别注意什么？",
+      "a": "需要确保视图引用的字符数据在调用者使用该返回值期间仍然有效。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "std::string",
+    "引用",
+    "对象生命周期"
+  ],
+  "source_pages": [
+    994,
+    994
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "2040_函数返回字符串时应谨慎选择string_view",
+  "_chunk_pages": [
+    993,
+    996
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "title": "this 指针的作用",
+  "definition": "在 C++ 中，每个非静态成员函数调用都隐含传递一个指向当前对象的指针，这个指针名为 `this`。成员函数可以使用 `this` 访问当前对象的数据成员、调用当前对象的方法，也可以把当前对象传递给需要对象引用或指针的其他函数。",
+  "key_points": [
+    "`this` 指向调用当前成员函数的对象。",
+    "可以使用 `this->成员名` 访问当前对象的成员。",
+    "当成员函数参数名与数据成员名相同时，可以用 `this->` 消除名称歧义。",
+    "`*this` 表示当前对象本身，可用于向需要对象引用的函数传递当前对象。"
+  ],
+  "examples": [
+    "若类的数据成员也命名为 `value`，可以写成：\n`void SpreadsheetCell::setValue(double value) { this->value = value; }`",
+    "独立函数 `printCell` 接受 `const SpreadsheetCell&` 参数时，成员函数可以这样传递当前对象：\n`void SpreadsheetCell::setValue(double value) { printCell(*this); }`"
+  ],
+  "misconceptions": [
+    "`value = value;` 不会自动表示“把参数 value 赋给成员 value”；如果两者同名，这种写法存在名称歧义，不能达到清晰表达赋值目标的目的。",
+    "`this` 不是另一个独立创建的对象，而是指向当前对象的指针。",
+    "只有非静态成员函数具有隐含的 `this` 指针；原文讨论的是普通成员函数调用。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何在成员函数中明确表示把参数 `value` 赋给同名的数据成员？",
+      "a": "使用 `this->value = value;`，左侧的 `this->value` 是当前对象的数据成员，右侧的 `value` 是函数参数。"
+    },
+    {
+      "q": "成员函数如何把当前对象作为引用传递给 `printCell(const SpreadsheetCell&)`？",
+      "a": "使用 `printCell(*this);`，因为 `this` 是指针，`*this` 是当前对象本身。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "类的成员函数与数据成员"
+  ],
+  "source_pages": [
+    233,
+    234
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "496_this_指针的作用",
+  "_chunk_pages": [
+    233,
+    236
+  ]
+}

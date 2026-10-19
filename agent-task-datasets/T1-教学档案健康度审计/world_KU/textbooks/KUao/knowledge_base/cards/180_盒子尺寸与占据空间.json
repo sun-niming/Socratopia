@@ -1,0 +1,37 @@
+{
+  "title": "盒子尺寸与占据空间",
+  "definition": "在盒子模型中，元素在页面上可见并占据的区域称为盒子的大小或尺寸，这个区域可以有背景色、边框等。盒子的尺寸由 Content + Padding + Border 决定，Margin 不包含在这个可见区域内；但元素在页面布局中总共占据的空间还要把 Margin 算进去，即 Content + Padding + Border + Margin。",
+  "key_points": [
+    "可见尺寸只包含 Content、Padding、Border，不包含 Margin。",
+    "Margin 位于盒子外部，负责给元素周围留空并推开其他元素。",
+    "元素布局中总占据的空间 = Content + Padding + Border + Margin。"
+  ],
+  "examples": [
+    "例如一个 div 的内容区加上内边距和边框后，形成它可见的盒子；再加上外边距，才是它在页面中真正占用的总空间。"
+  ],
+  "misconceptions": [
+    "误以为 margin 也是盒子可见尺寸的一部分。",
+    "误以为元素占据的空间只看内容区大小。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "盒子模型中，元素的可见尺寸和总占据空间分别由哪些部分组成？",
+      "a": "可见尺寸由 Content + Padding + Border 组成；总占据空间还要加上 Margin，即 Content + Padding + Border + Margin。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "盒子模型"
+  ],
+  "source_pages": [
+    125,
+    128
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "180_盒子尺寸与占据空间",
+  "_chunk_pages": [
+    125,
+    128
+  ]
+}

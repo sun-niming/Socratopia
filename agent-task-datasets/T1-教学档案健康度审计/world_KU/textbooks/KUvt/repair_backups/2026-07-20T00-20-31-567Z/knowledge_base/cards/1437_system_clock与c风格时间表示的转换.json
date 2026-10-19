@@ -1,0 +1,46 @@
+{
+  "title": "system_clock与C风格时间表示的转换",
+  "definition": "每个时钟类型都提供静态的now()方法，用于获取当前时间并返回对应的time_point。system_clock还提供to_time_t()和from_time_t()两个静态辅助函数，分别用于在time_point与C风格的time_t时间表示之间转换。获得time_t后，可使用localtime()转换为本地时间结构tm，再用put_time()或strftime()输出为可读格式。",
+  "key_points": [
+    "system_clock::now()返回system_clock关联的time_point。",
+    "system_clock::to_time_t(tpoint)把time_point转换为time_t；system_clock::from_time_t(tt)执行反向转换。",
+    "localtime(&tt)可把time_t转换为本地时间表示；put_time()定义在<iomanip>中，strftime()是C风格的格式化函数。",
+    "使用strftime()时必须提供足够大的字符缓冲区，以容纳格式化后的时间字符串。"
+  ],
+  "examples": [
+    "获取当前时间并输出时分秒：\n```text\nsystem_clock::time_point tpoint{system_clock::now()};\ntime_t tt{system_clock::to_time_t(tpoint)};\ntm* t{localtime(&tt)};\ncout << put_time(t, \"%H:%M:%S\") << endl;\n```",
+    "使用stringstream把时间转换为字符串：\n```text\nstringstream ss;\nss << put_time(t, \"%H:%M:%S\");\nstring stringTime{ss.str()};\n```",
+    "使用strftime()格式化时间：\n```text\nchar buffer[80]{0};\nstrftime(buffer, sizeof(buffer), \"%H:%M:%S\", t);\ncout << buffer << endl;\n```"
+  ],
+  "misconceptions": [
+    "system_clock::now()直接返回字符串；实际上它返回time_point。",
+    "to_time_t()和from_time_t()是全局函数；原文将它们作为system_clock的静态辅助函数介绍。",
+    "strftime()不需要考虑缓冲区大小；实际上必须提供足够大的缓冲区。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何把system_clock获得的当前时间输出为本地的“时:分:秒”？",
+      "a": "先调用system_clock::now()获得time_point，再用system_clock::to_time_t()转换为time_t，调用localtime()得到本地tm指针，最后用put_time(t, \"%H:%M:%S\")输出。"
+    },
+    {
+      "q": "put_time()和strftime()分别适合什么用途？",
+      "a": "put_time()是C++流操作算子，可直接写入输出流或stringstream；strftime()是C风格函数，把格式化结果写入字符缓冲区。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++标准库输入输出流",
+    "C++时间类型基础"
+  ],
+  "source_pages": [
+    689,
+    689
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1437_system_clock与c风格时间表示的转换",
+  "_chunk_pages": [
+    689,
+    692
+  ]
+}

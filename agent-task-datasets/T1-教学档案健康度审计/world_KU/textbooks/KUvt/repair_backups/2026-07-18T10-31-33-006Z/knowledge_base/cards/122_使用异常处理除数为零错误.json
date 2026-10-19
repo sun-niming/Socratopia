@@ -1,0 +1,47 @@
+{
+  "title": "使用异常处理除数为零错误",
+  "definition": "C++可以使用 `throw` 抛出异常，并用 `try` 包围可能出错的代码、用 `catch` 捕获异常。原文的 `divideNumbers` 函数在除数为 0 时抛出 `std::invalid_argument`，调用方捕获 `const invalid_argument&`，并通过 `what()` 获取错误信息。",
+  "key_points": [
+    "需要包含 `<stdexcept>` 以使用 `std::invalid_argument`。",
+    "当 `denominator` 为 0 时抛出：`throw invalid_argument{ \"Denominator cannot be 0.\" };`。",
+    "可能抛出异常的调用放在 `try { ... }` 中。",
+    "捕获形式为 `catch (const invalid_argument& exception)`，错误文本通过 `exception.what()` 获取。"
+  ],
+  "examples": [
+    "示意函数：`double divideNumbers(double numerator, double denominator) { if (denominator == 0) { throw invalid_argument{\"Denominator cannot be 0.\"}; } return numerator / denominator; }`。",
+    "示意调用：`try { cout << divideNumbers(2.5, 0.5) << endl; cout << divideNumbers(2.3, 0) << endl; } catch (const invalid_argument& exception) { cout << format(\"Exception caught: {}\", exception.what()); }`。",
+    "除数为 0 时，原文示例输出的错误信息为：`Denominator cannot be 0.`。"
+  ],
+  "misconceptions": [
+    "`throw` 不是普通的返回值；抛出异常后，当前正常执行路径会转移到匹配的 `catch`。",
+    "`catch` 中的 `exception.what()` 返回异常描述文本，不是异常类型名称。",
+    "除数为 0 的检查应在执行除法前完成。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`divideNumbers` 在除数为 0 时抛出什么异常？",
+      "a": "抛出 `std::invalid_argument`，错误信息为 `Denominator cannot be 0.`。"
+    },
+    {
+      "q": "如何在 catch 中取得异常描述？",
+      "a": "通过捕获对象的 `exception.what()` 获取描述字符串。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "函数",
+    "条件判断",
+    "引用与标准库异常类"
+  ],
+  "source_pages": [
+    85,
+    88
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "122_使用异常处理除数为零错误",
+  "_chunk_pages": [
+    85,
+    88
+  ]
+}

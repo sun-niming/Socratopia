@@ -1,0 +1,40 @@
+{
+  "title": "C++及其标准库",
+  "definition": "C++是一种编程语言；C++标准库是与C++配套的标准组件集合。教材页面列举了C++标准库中的一些类型或组件名称，例如vector、optional和string，并同时提到const、union、volatile等C++语言相关关键词或特性。",
+  "key_points": [
+    "C++语言本身与C++标准库是相关但不同的概念：前者规定语言语法和语义，后者提供可复用的标准组件。",
+    "教材列举的标准库名称包括vector、optional和string。",
+    "教材还列举了const、union、volatile等C++相关内容。"
+  ],
+  "examples": [
+    "标准库类型名称示例：vector、optional、string。",
+    "语言关键词或特性名称示例：const、union、volatile。"
+  ],
+  "misconceptions": [
+    "不能把vector、optional、string等标准库组件误认为C++语言的基本语法关键词。",
+    "教材页面列举名称不等于这些名称的完整功能说明。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "教材页面列举了哪些C++标准库组件名称？",
+      "a": "列举了vector、optional和string。"
+    },
+    {
+      "q": "C++语言与C++标准库是否是同一个概念？",
+      "a": "不是。C++是编程语言，C++标准库是与该语言配套的标准组件集合。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [],
+  "source_pages": [
+    33,
+    36
+  ],
+  "needs_verification": true,
+  "verify_query": "《C++20高级编程》第5版第34页 C++ Standard Library vector optional string const union volatile 原文",
+  "concept_id": "018_c_及其标准库",
+  "_chunk_pages": [
+    33,
+    36
+  ]
+}

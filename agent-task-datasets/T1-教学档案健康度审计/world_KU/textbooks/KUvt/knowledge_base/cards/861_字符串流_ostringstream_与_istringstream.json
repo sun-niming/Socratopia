@@ -1,0 +1,53 @@
+{
+  "title": "字符串流 ostringstream 与 istringstream",
+  "definition": "字符串流把流的语义应用于内存中的字符串，使程序可以像操作文件流或控制台流一样读写文本。`std::ostringstream` 用于把数据写入字符串，`std::istringstream` 用于从字符串中读取数据；二者定义在 `<sstream>` 头文件中，并分别继承自 `ostream` 和 `istream` 的相应行为。",
+  "key_points": [
+    "`ostringstream` 中的 `o` 表示输出，用于构建字符串。",
+    "`istringstream` 中的 `i` 表示输入，用于解析字符串中的数据。",
+    "字符串流可用于在内存中构建 GUI 要显示的文本，而不是直接输出到控制台或文件。",
+    "字符串流也适合文本解析，因为流本身提供标记化功能。",
+    "可以把同一个字符串流传给多个函数，并保留当前读取位置，使每个函数继续处理流的下一部分。",
+    "两种字符串流都定义在 `<sstream>` 头文件中。"
+  ],
+  "examples": [
+    "```cpp\n#include <sstream>\n\nstd::ostringstream outStream;\noutStream << nextToken << \"\\\\t\";\nstd::string result = outStream.str();\n```\n`str()` 可把整个输出流转换为 `std::string`。",
+    "可以从用户输入单词后写入 `ostringstream`，使用制表符分隔各个单词，最后调用 `str()` 得到完整字符串并输出到控制台。",
+    "`istringstream` 可用于从已有字符串中按流提取数据，例如把字符串中的多个标记依次读出。"
+  ],
+  "misconceptions": [
+    "`ostringstream` 不是直接写入控制台的流；它把内容写入内存中的字符串，需通过 `str()` 获取结果。",
+    "`istringstream` 的输入来源是字符串，而不是键盘控制台。",
+    "字符串流不仅用于字符串拼接，也可利用输入流的标记化能力解析文本。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`ostringstream` 和 `istringstream` 分别用于什么？",
+      "a": "`ostringstream` 用于将数据写入字符串；`istringstream` 用于从字符串中读取数据。"
+    },
+    {
+      "q": "如何取得 `ostringstream` 当前积累的完整字符串？",
+      "a": "调用它的 `str()` 方法，结果是一个 `std::string`。"
+    },
+    {
+      "q": "字符串流为什么适合文本解析？",
+      "a": "因为它具有输入流的标记化功能，可以像从其他输入流读取数据一样从字符串中提取各个标记。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "std::string",
+    "输入输出流",
+    "流运算符"
+  ],
+  "source_pages": [
+    424,
+    424
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "861_字符串流_ostringstream_与_istringstream",
+  "_chunk_pages": [
+    421,
+    424
+  ]
+}

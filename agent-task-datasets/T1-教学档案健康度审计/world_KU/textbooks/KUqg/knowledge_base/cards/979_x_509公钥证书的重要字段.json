@@ -1,0 +1,47 @@
+{
+  "title": "X.509公钥证书的重要字段",
+  "definition": "X.509及RFC 1422公钥证书包含用于标识证书、说明签发者、规定有效范围并携带主题公钥的重要字段。教材列出的字段包括版本、序列号、签名、颁发者名称、有效期、主题名和主题公钥。",
+  "key_points": [
+    "版本（Version）表示X.509规范的版本号。",
+    "序列号（Serial number）是CA发布的该证书的独特标识符。",
+    "签名（Signature）规定CA对该证书进行签名时使用的算法。",
+    "颁发者名称（Issuer name）标识签发该证书的CA，采用区别名（DN）格式。",
+    "有效期（Validity period）规定证书合法性的开始时间和结束时间。",
+    "主题名（Subject name）标识与该公钥相联系的实体，采用区别名（DN）格式。",
+    "主题公钥（Subject public key）包含主题的公钥，以及该公钥所使用的公钥算法及其参数的指示。"
+  ],
+  "examples": [
+    "可以把教材列出的证书结构抽象表示为：$$\\mathrm{Certificate}=\\{\\mathrm{Version},\\mathrm{SerialNumber},\\mathrm{Signature},\\mathrm{Issuer},\\mathrm{Validity},\\mathrm{Subject},\\mathrm{SubjectPublicKey}\\}$$"
+  ],
+  "misconceptions": [
+    "序列号不是主题实体的身份标识，而是CA为证书分配的独特标识符。",
+    "颁发者名称标识CA，主题名标识证书中公钥所属的实体，二者不是同一个字段。",
+    "有效期描述的是证书的合法时间范围，不是公钥算法的有效时间。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "X.509证书中的Issuer和Subject分别表示什么？",
+      "a": "Issuer表示签发证书的CA，Subject表示与该证书中公钥相联系的实体。"
+    },
+    {
+      "q": "X.509证书中的Subject public key字段包含哪些内容？",
+      "a": "包含主题实体的公钥，以及该公钥使用的公钥算法及其参数的指示。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "公钥证书",
+    "区别名（DN）"
+  ],
+  "source_pages": [
+    421,
+    424
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "979_x_509公钥证书的重要字段",
+  "_chunk_pages": [
+    421,
+    424
+  ]
+}

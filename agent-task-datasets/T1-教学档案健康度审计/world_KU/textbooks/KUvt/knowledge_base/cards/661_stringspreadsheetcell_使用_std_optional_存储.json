@@ -1,0 +1,45 @@
+{
+  "title": "StringSpreadsheetCell 使用 std::optional 存储可选字符串值",
+  "definition": "StringSpreadsheetCell 是 SpreadsheetCell 的具体派生类，用私有数据成员 `std::optional<std::string> m_value` 保存单元格内容。optional 可以区分单元格没有设置值和单元格的值是空字符串；`getString()` 在没有值时返回默认的空字符串，在有值时返回实际字符串。",
+  "key_points": [
+    "StringSpreadsheetCell 需要重写基类的纯虚方法，并且不能再把这些方法声明为纯虚方法。",
+    "`set(std::string_view value)` 可以把传入的字符串保存到 `m_value` 中。",
+    "`std::optional<std::string>` 能表示“没有值”状态，也能表示“有值且该值为空字符串”。",
+    "读取 optional 时可以使用 `value_or(\"\")`：有值时返回实际值，没有值时返回空字符串。"
+  ],
+  "examples": [
+    "```cpp\nexport class StringSpreadsheetCell : public SpreadsheetCell {\npublic:\n    void set(std::string_view value) override;\n    std::string getString() const override;\nprivate:\n    std::optional<std::string> m_value;\n};\n```",
+    "```cpp\nvoid StringSpreadsheetCell::set(std::string_view value) {\n    m_value = value;\n}\n\nstd::string StringSpreadsheetCell::getString() const {\n    return m_value.value_or(\"\");\n}\n```"
+  ],
+  "misconceptions": [
+    "`std::optional<std::string>` 不只是为了存储字符串；它还记录了该字符串是否存在。",
+    "没有值和空字符串不是同一状态：前者表示未设置，后者表示已设置但内容为空。",
+    "派生类重写纯虚方法时，应使用具体实现，不能继续写 `= 0`，否则派生类仍是抽象类。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "StringSpreadsheetCell 为什么使用 std::optional<std::string>？",
+      "a": "为了区分单元格尚未设置值与单元格已设置为空字符串这两种状态。"
+    },
+    {
+      "q": "当 StringSpreadsheetCell 的 m_value 没有值时，getString() 返回什么？",
+      "a": "返回默认空字符串，通常通过 `m_value.value_or(\"\")` 实现。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "抽象基类与纯虚方法",
+    "std::optional"
+  ],
+  "source_pages": [
+    324,
+    324
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "661_stringspreadsheetcell_使用_std_optional_存储",
+  "_chunk_pages": [
+    321,
+    324
+  ]
+}

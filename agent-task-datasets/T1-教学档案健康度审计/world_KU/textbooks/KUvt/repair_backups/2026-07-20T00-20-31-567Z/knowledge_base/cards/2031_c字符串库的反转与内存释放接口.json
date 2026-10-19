@@ -1,0 +1,50 @@
+{
+  "title": "C字符串库的反转与内存释放接口",
+  "definition": "教材给出一个由两个函数组成的C库接口：reverseString用于分配一块新的字符串内存，并用给定源字符串的反转内容初始化该内存；freeString用于释放由reverseString分配的内存。调用者在使用完reverseString返回的字符串后，必须通过freeString释放它。",
+  "key_points": [
+    "reverseString的参数是字符串指针，返回一个新分配的字符串缓冲区。",
+    "返回的字符串内容是给定源字符串的反转。",
+    "reverseString返回的内存需要由freeString释放。",
+    "freeString接收待释放的字符串指针。"
+  ],
+  "examples": [
+    "接口声明可表示为：`char* reverseString(char* string);`",
+    "释放接口可表示为：`void freeString(char* string);`",
+    "典型使用顺序是：调用`reverseString`获得新字符串；读取或使用该字符串；调用`freeString`释放其内存。"
+  ],
+  "misconceptions": [
+    "reverseString返回的是新分配的字符串，不是对原字符串进行原地反转。",
+    "不能把reverseString返回的内存当作不需要释放的静态字符串。",
+    "释放由reverseString分配的内存时，应使用配套的freeString，而不是忽略释放操作。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "reverseString函数完成什么工作？",
+      "a": "它分配一个新的字符串缓冲区，并用给定源字符串的反转内容初始化该缓冲区。"
+    },
+    {
+      "q": "为什么需要调用freeString？",
+      "a": "因为reverseString分配了新的内存；使用完返回的字符串后，需要调用freeString释放这块内存。"
+    },
+    {
+      "q": "这两个函数的声明是什么？",
+      "a": "`char* reverseString(char* string);`和`void freeString(char* string);`。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C字符串与字符指针",
+    "动态内存分配与释放"
+  ],
+  "source_pages": [
+    989,
+    989
+  ],
+  "needs_verification": true,
+  "verify_query": "\"reverseString\" \"freeString\" char* C library reverse string allocated memory",
+  "concept_id": "2031_c字符串库的反转与内存释放接口",
+  "_chunk_pages": [
+    989,
+    992
+  ]
+}

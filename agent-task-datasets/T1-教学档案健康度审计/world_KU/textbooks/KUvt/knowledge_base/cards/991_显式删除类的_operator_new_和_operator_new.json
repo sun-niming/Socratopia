@@ -1,0 +1,43 @@
+{
+  "title": "显式删除类的 operator new 和 operator new[]",
+  "definition": "可以使用 =delete 显式删除类的 operator new 或 operator new[]，从而禁止通过 new 表达式动态创建该类的对象或对象数组。被删除的函数参与重载决议后，如果被选中，程序会产生编译错误。",
+  "key_points": [
+    "显式删除 operator new 可以禁止单个对象的动态创建。",
+    "若要同时禁止动态创建数组，还需要显式删除 operator new[]。",
+    "删除这些函数不会禁止在自动存储期或其他允许的方式下创建对象；原文只说明禁止通过 new 或 new[] 动态创建。"
+  ],
+  "examples": [
+    "示例形式：\\n\\texttt{class MyClass \\\\{\\\\npublic:\\\\n    void* operator new(std::size\\_t size) = delete;\\\\n\\\\};}",
+    "使用以下代码会产生编译错误：\\n\\texttt{MyClass* p1\\\\{ new MyClass \\\\};}\\n\\texttt{MyClass* pArray\\\\{ new MyClass[2] \\\\};}"
+  ],
+  "misconceptions": [
+    "=delete 不是让函数成为空实现，而是明确禁止调用该函数并导致编译错误。",
+    "只删除 operator new 不等于一定显式删除了 operator new[]；数组形式应单独处理。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何禁止通过 new 动态创建 MyClass 对象？",
+      "a": "在类中将相应的 operator new 声明为 =delete。"
+    },
+    {
+      "q": "如何禁止通过 new[] 动态创建 MyClass 数组？",
+      "a": "需要将对应的 operator new[] 也显式声明为 =delete。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "operator new 与 operator new[]",
+    "=delete函数"
+  ],
+  "source_pages": [
+    494,
+    494
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "991_显式删除类的_operator_new_和_operator_new",
+  "_chunk_pages": [
+    493,
+    496
+  ]
+}

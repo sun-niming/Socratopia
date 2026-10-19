@@ -1,0 +1,43 @@
+{
+  "title": "最小值、最大值与范围限制算法",
+  "definition": "最小/最大算法用于查找最小元素、最大元素、同时查找最小值和最大值，或者把一个值限制在给定的闭区间 $[lo,hi]$ 内。教材列出的算法包括 $\\text{clamp()}$、$\\text{min()}$、$\\text{max()}$、$\\text{minmax()}$、$\\text{min_element()}$、$\\text{max_element()}$ 和 $\\text{minmax_element()}$。",
+  "key_points": [
+    "$\\text{clamp}(v,lo,hi)$ 的结果为 $\\begin{cases}lo,&v<lo\\\\hi,&v>hi\\\\v,&lo\\leq v\\leq hi\\end{cases}$。教材表述为返回相应边界值或对 $v$ 的引用。",
+    "$\\text{min()}$ 和 $\\text{max()}$ 返回两个或多个值中的最小值或最大值。",
+    "$\\text{minmax()}$ 以 pair 形式返回两个或多个值中的最小值和最大值。",
+    "$\\text{min_element()}$ 和 $\\text{max_element()}$ 查找序列中的最小或最大元素；$\\text{minmax_element()}$ 同时查找二者并以 pair 形式返回结果。"
+  ],
+  "examples": [
+    "若 $lo=0$、$hi=100$，则 $\\text{clamp}(-5,0,100)=0$，$\\text{clamp}(50,0,100)=50$，$\\text{clamp}(120,0,100)=100$。"
+  ],
+  "misconceptions": [
+    "clamp() 不是把所有值都改成同一个边界值；位于 $[lo,hi]$ 内的值保持不变。",
+    "minmax() 返回的是值组成的 pair；minmax_element() 返回的是指向序列中相应元素的位置组成的 pair。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "clamp(v, lo, hi) 在什么情况下返回 lo？",
+      "a": "当 $v<lo$ 时返回 lo；当 $v>hi$ 时返回 hi；否则返回 v。"
+    },
+    {
+      "q": "minmax_element() 的作用是什么？",
+      "a": "它在序列中同时寻找最小元素和最大元素，并以 pair 形式返回结果。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "比较运算",
+    "迭代器范围"
+  ],
+  "source_pages": [
+    518,
+    518
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1066_最小值_最大值与范围限制算法",
+  "_chunk_pages": [
+    517,
+    520
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "title": "C++开发环境与编译器",
+  "definition": "原文列出了Windows和Linux两类操作系统环境，以及Microsoft Visual Studio Community Edition、Visual C++、GCC和Clang等C++开发或编译工具。",
+  "key_points": [
+    "Windows环境中原文列出了Microsoft Visual Studio Community Edition和Visual C++。",
+    "Linux环境中原文列出了GCC和Clang。",
+    "Visual C++、GCC和Clang属于C++开发中常见的编译器或编译工具名称。"
+  ],
+  "examples": [
+    "环境与工具对应关系：\n- Windows：Microsoft Visual Studio Community Edition、Visual C++\n- Linux：GCC、Clang"
+  ],
+  "misconceptions": [
+    "Windows和Linux是操作系统，不是C++编译器。",
+    "GCC和Clang不是操作系统，而是可用于C++编译的工具链或编译器。",
+    "Visual Studio Community Edition与Visual C++不是完全同义的名称：前者是开发环境版本名称，后者是微软的C++工具名称。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "原文列出了哪些操作系统环境？",
+      "a": "Windows和Linux。"
+    },
+    {
+      "q": "原文在Linux环境下列出了哪些C++工具？",
+      "a": "GCC和Clang。"
+    },
+    {
+      "q": "原文在Windows环境下列出了哪些工具？",
+      "a": "Microsoft Visual Studio Community Edition和Visual C++。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [],
+  "source_pages": [
+    13,
+    16
+  ],
+  "needs_verification": true,
+  "verify_query": "《C++20高级编程 第5版》第16页 Windows Linux Visual Studio Community Edition Visual C++ GCC Clang 原文",
+  "concept_id": "013_c_开发环境与编译器",
+  "_chunk_pages": [
+    13,
+    16
+  ]
+}

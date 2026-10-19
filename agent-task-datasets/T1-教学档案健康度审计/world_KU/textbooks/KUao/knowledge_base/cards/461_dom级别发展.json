@@ -1,0 +1,46 @@
+{
+  "title": "DOM级别发展",
+  "definition": "教材中将最初用于处理事件和文档的有限功能称为“DOM 0级”。随后，DOM 1级于1998年10月成为W3C推荐标准；DOM 2级于2000年发布，增加了包括DOM事件、样式等内容；DOM 3级于2004年新增了XPath等内容。",
+  "key_points": [
+    "DOM 0级指最初JavaScript中用于处理事件和文档的有限功能。",
+    "DOM 1级在1998年10月成为W3C推荐标准。",
+    "DOM 2级在2000年发布，增加了DOM事件、样式等内容。",
+    "DOM 3级在2004年新增了XPath等内容。"
+  ],
+  "examples": [
+    "例如：DOM 2级包含事件处理和样式相关内容。",
+    "例如：DOM 3级新增XPath。"
+  ],
+  "misconceptions": [
+    "误以为DOM从一开始就有统一的标准；教材说明最初并没有独立的DOM标准。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "教材中所说的DOM 0级指什么？",
+      "a": "指最初JavaScript语言中用于处理事件和文档的有限功能。"
+    },
+    {
+      "q": "DOM 2级新增了哪些内容？",
+      "a": "包括DOM事件、样式等内容。"
+    },
+    {
+      "q": "DOM 3级新增了什么内容？",
+      "a": "新增了XPath等内容。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "DOM简介"
+  ],
+  "source_pages": [
+    341,
+    344
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "461_dom级别发展",
+  "_chunk_pages": [
+    341,
+    344
+  ]
+}

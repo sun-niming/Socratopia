@@ -1,0 +1,42 @@
+{
+  "title": "浏览器内核与渲染差异",
+  "definition": "浏览器的核心是渲染引擎，负责对网页语法进行解释并渲染网页。不同内核的浏览器对同一网页的显示效果可能不同。",
+  "key_points": [
+    "浏览器核心是渲染引擎。",
+    "渲染引擎负责解释网页语法并显示网页。",
+    "不同内核可能导致同一网页显示效果不同。",
+    "原文列出的内核有 Trident、Gecko、webkit、Blink。"
+  ],
+  "examples": [
+    "Trident（微软）、Gecko（FireFox开源）、webkit（苹果开源）、Blink（谷歌开源，在Webkit基础上开发）。"
+  ],
+  "misconceptions": [
+    "同一个网页在所有浏览器中的显示效果一定完全相同。",
+    "内核只是浏览器的名字，不影响渲染。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "浏览器的核心是什么？",
+      "a": "渲染引擎。"
+    },
+    {
+      "q": "为什么同一网页在不同浏览器里显示效果可能不同？",
+      "a": "因为不同浏览器可能使用不同的内核。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "浏览器"
+  ],
+  "source_pages": [
+    17,
+    20
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "028_浏览器内核与渲染差异",
+  "_chunk_pages": [
+    17,
+    20
+  ]
+}

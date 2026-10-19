@@ -1,0 +1,45 @@
+{
+  "title": "编译器生成拷贝构造函数和拷贝赋值运算符的条件",
+  "definition": "原文说明：在 C++11 中，如果类具有用户声明的拷贝赋值运算符或析构函数，编译器不会生成拷贝构造函数；如果类具有用户声明的拷贝构造函数或析构函数，编译器不会生成拷贝赋值运算符。如果仍需要相应的编译器生成版本，可以显式写 `= default`。",
+  "key_points": [
+    "显式要求编译器生成拷贝构造函数：`MyClass(const MyClass& src) = default;`。",
+    "显式要求编译器生成拷贝赋值运算符：`MyClass& operator=(const MyClass& rhs) = default;`。",
+    "这类规则与用户声明的特殊成员函数有关；对于具体标准版本和完整规则，应结合 C++标准进行核实。"
+  ],
+  "examples": [
+    "`MyClass(const MyClass& src) = default;`",
+    "`MyClass& operator=(const MyClass& rhs) = default;`"
+  ],
+  "misconceptions": [
+    "用户声明了一个特殊成员函数，并不意味着所有其他特殊成员函数都会自动生成。",
+    "想要编译器生成版本时，不能把 `= default` 写成函数体为空的普通函数。",
+    "拷贝构造函数和拷贝赋值运算符是不同的特殊成员函数，触发条件也不能混为一谈。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如果类中已经用户声明了拷贝构造函数，但仍想使用编译器生成的拷贝赋值运算符，应如何写？",
+      "a": "可以显式声明：`MyClass& operator=(const MyClass& rhs) = default;`。"
+    },
+    {
+      "q": "如果类中已经用户声明了拷贝赋值运算符，但仍想使用编译器生成的拷贝构造函数，应如何写？",
+      "a": "可以显式声明：`MyClass(const MyClass& src) = default;`。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "特殊成员函数",
+    "拷贝构造函数",
+    "拷贝赋值运算符"
+  ],
+  "source_pages": [
+    254,
+    254
+  ],
+  "needs_verification": true,
+  "verify_query": "C++11 C++20 用户声明拷贝构造函数 拷贝赋值运算符 析构函数 隐式生成规则 copy constructor copy assignment operator destructor",
+  "concept_id": "541_编译器生成拷贝构造函数和拷贝赋值运算符的条件",
+  "_chunk_pages": [
+    253,
+    256
+  ]
+}

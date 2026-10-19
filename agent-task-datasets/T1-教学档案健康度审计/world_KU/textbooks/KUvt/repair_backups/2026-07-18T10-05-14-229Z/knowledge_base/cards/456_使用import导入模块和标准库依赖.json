@@ -1,0 +1,51 @@
+{
+  "title": "使用import导入模块和标准库依赖",
+  "definition": "C++20中可以使用`import`声明导入模块或可导入的标准库头文件，使当前源文件能够使用被导入内容。原文示例在测试文件中使用`import <iostream>;`和`import <string>;`，并通过`import person;`使用`person`模块。",
+  "key_points": [
+    "导入命名模块的形式是`import person;`。",
+    "原文示例使用`import <iostream>;`导入输入输出相关内容。",
+    "原文示例使用`import <string>;`，并注明它用于`std::string`相关操作。",
+    "模块导入语句用于替代部分传统的`#include`用法，但原文同时指出C++代码中仍存在`include`和legacy include（传统包含）的场景。"
+  ],
+  "examples": [
+    "测试代码中的导入：`import <iostream>;`、`import <string>;`。",
+    "导入自定义模块：`import person;`。",
+    "使用导入内容创建对象并输出：`Person person { \"Kole\", \"Webb\" };`；`person.getLastName() << \", \" << person.getFirstName() << endl;`"
+  ],
+  "misconceptions": [
+    "`import person;`不是包含名为`person`的传统头文件，而是导入名为`person`的模块。",
+    "使用模块并不意味着所有传统头文件都立即消失；原文仍区分了模块导入与legacy include。",
+    "是否可以直接写`import <string>;`取决于编译器和标准库对标准库头文件导入方式的支持，不能仅凭该示例断言所有环境都支持。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何在测试源文件中导入`person`模块？",
+      "a": "使用`import person;`。"
+    },
+    {
+      "q": "原文中为什么导入`<string>`？",
+      "a": "为了使用`std::string`及其相关操作；原文还将其标注为用于`std::string`的运算符。"
+    },
+    {
+      "q": "模块导入语句与传统`#include`的关系是什么？",
+      "a": "`import`用于导入模块或可导入的头文件，传统`#include`仍可能用于legacy代码，二者在C++代码中都可能出现。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++头文件包含与命名空间",
+    "C++类的声明和使用"
+  ],
+  "source_pages": [
+    353,
+    354,
+    355
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 import module standard library header units import <iostream> import <string> versus include official documentation",
+  "concept_id": "456_使用import导入模块和标准库依赖",
+  "_chunk_pages": [
+    353,
+    356
+  ]
+}

@@ -1,0 +1,50 @@
+{
+  "title": "基于迭代器范围实现通用函数",
+  "definition": "只要函数接收表示范围起点和终点的迭代器，就可以对不同容器或不同迭代器类型实现通用操作。教材示例包括：用 `myPrint` 遍历并输出范围内元素；用 `myFind` 查找给定值，找到时返回指向该值的迭代器，找不到时返回传入的 end 迭代器。",
+  "key_points": [
+    "通用范围通常由半开区间 $[begin,end)$ 表示。",
+    "遍历范围时从 begin 开始，每次递增迭代器，直到 `iter == end`。",
+    "`myFind` 的 value 参数使用 `typename iterator_traits<Iter>::value_type`，确保参数类型与迭代器指向的元素类型对应。",
+    "调用方通过比较返回值与 end 迭代器判断是否找到元素。"
+  ],
+  "examples": [
+    "打印函数：`template <typename Iter> void myPrint(Iter begin, Iter end) { for (auto iter { begin }; iter != end; ++iter) { cout << *iter; } }`",
+    "查找调用：`auto result { myFind(cbegin(values), cend(values), 22) };`",
+    "判断查找结果：`if (result != cend(values)) { cout << format(\"Found value at position {}\", distance(cbegin(values), result)); }`"
+  ],
+  "misconceptions": [
+    "查找失败时不应把返回值当作有效元素解引用，因为返回的是 end 迭代器。",
+    "泛型迭代器函数不能随意使用迭代器不支持的操作，例如对所有迭代器使用 `<` 或随机访问运算。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "myFind 查找失败时返回什么？",
+      "a": "返回传入的 end 迭代器。"
+    },
+    {
+      "q": "如何判断 myFind 是否找到目标值？",
+      "a": "将返回的迭代器与同一范围的 end 迭代器比较；若 `result != end`，则表示找到。"
+    },
+    {
+      "q": "为什么 myFind 的 value 参数使用 iterator_traits？",
+      "a": "为了获得 Iter 所指元素的类型，使查找值的参数类型与元素类型相匹配。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "半开区间与容器迭代器函数",
+    "iterator_traits 迭代器萃取",
+    "使用 != 判断迭代器范围结束"
+  ],
+  "source_pages": [
+    531,
+    531
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1088_基于迭代器范围实现通用函数",
+  "_chunk_pages": [
+    529,
+    532
+  ]
+}

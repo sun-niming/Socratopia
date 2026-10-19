@@ -1,0 +1,44 @@
+{
+  "title": "shared_ptr 的引用计数机制",
+  "definition": "引用计数用于跟踪当前拥有同一资源的 shared_ptr 实例数量。复制一个 shared_ptr 会创建指向同一资源的新 shared_ptr，并使引用计数增加；某个 shared_ptr 被销毁或重置时，引用计数减少；当计数降为零时，说明资源没有其他所有者，shared_ptr 会释放该资源。",
+  "key_points": [
+    "引用计数记录的是共享同一资源的智能指针所有者数量。",
+    "复制 shared_ptr 不会复制被管理对象，而是增加同一资源的共享所有者数量。",
+    "当引用计数降为零时，资源被释放。",
+    "引用计数可以避免多个共享所有者分别释放同一资源造成的双重释放。"
+  ],
+  "examples": [
+    "auto smartPtr1 { make_shared<Simple>() }; auto smartPtr2 { smartPtr1 }; // 两个 shared_ptr 共享同一个 Simple 对象。",
+    "在 smartPtr1 和 smartPtr2 都离开作用域或被重置后，Simple 实例只会被释放一次。"
+  ],
+  "misconceptions": [
+    "引用计数会复制资源对象；实际上 shared_ptr 的复制只增加共享所有者，资源对象仍然只有一个。",
+    "只要某一个 shared_ptr 被重置，资源就一定释放；只有引用计数降为零时才会释放。",
+    "引用计数能修复所有由原始指针造成的所有权问题；如果错误地从同一个原始指针分别构造多个 shared_ptr，仍可能发生重复释放。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "复制一个 shared_ptr 会发生什么？",
+      "a": "会创建一个指向同一资源的新 shared_ptr，并使该资源的引用计数增加。"
+    },
+    {
+      "q": "引用计数降为零意味着什么？",
+      "a": "没有其他 shared_ptr 拥有该资源，因此智能指针会释放该资源。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "shared_ptr 的共享所有权与基本用法"
+  ],
+  "source_pages": [
+    222,
+    222
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "471_shared_ptr_的引用计数机制",
+  "_chunk_pages": [
+    221,
+    224
+  ]
+}

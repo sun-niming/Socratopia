@@ -1,0 +1,50 @@
+{
+  "title": "vector 的比较与字典序",
+  "definition": "标准库为 vector 提供 `==`、`!=`、`<`、`>`、`<=` 和 `>=` 六个比较运算符。相等比较要求两个 vector 的元素数量相等，并且每个对应位置的元素都相等。大小比较采用字典序：从第一个元素开始比较，遇到第一对不相等的元素时，以该位置元素的大小决定两个 vector 的顺序；如果一个 vector 是另一个 vector 的相同前缀，则较短的 vector 更小。",
+  "key_points": [
+    "两个 vector 相等的条件是：长度相等且对应元素全部相等。",
+    "字典序比较从下标 0 开始逐项进行。",
+    "若第一个不同位置为 $i$，则比较 `first[i]` 和 `second[i]` 的大小。",
+    "若较短 vector 的所有元素都是较长 vector 的对应前缀，则较短 vector 小于较长 vector。",
+    "比较两个 vector 时，最多涉及较小 vector 的元素数量；教材用两个 vector 中较小者的 `size()` 表述比较范围。"
+  ],
+  "examples": [
+    "`vector<int>{1, 2, 3} < vector<int>{1, 2, 4}`，因为前两个元素相等，而第三个元素满足 $3<4$。",
+    "`vector<int>{1, 2} < vector<int>{1, 2, 0}`，因为前者是后者的相同前缀且长度更短。",
+    "`vector<int>{1, 2} == vector<int>{1, 2}`，因为长度相等且对应元素都相等。"
+  ],
+  "misconceptions": [
+    "vector 的比较不是只比较元素数量。",
+    "字典序比较不要求所有元素都比较到末尾；遇到第一对不同元素即可决定顺序。",
+    "相同前缀时，较短的 vector 小于较长的 vector。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "两个 vector 什么时候相等？",
+      "a": "当它们的元素数量相等，并且每个对应位置的元素都相等时相等。"
+    },
+    {
+      "q": "按字典序比较 `vector<int>{1, 5}` 和 `vector<int>{2, 0}`，哪个更小？",
+      "a": "`vector<int>{1, 5}` 更小，因为第一个元素就是第一处不同点，且 $1<2$。"
+    },
+    {
+      "q": "`vector<int>{1, 2}` 与 `vector<int>{1, 2, 0}` 的大小关系是什么？",
+      "a": "前者更小，因为它是后者的相同前缀且长度更短。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "顺序容器与 vector 的基本特性"
+  ],
+  "source_pages": [
+    552,
+    552
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1137_vector_的比较与字典序",
+  "_chunk_pages": [
+    549,
+    552
+  ]
+}

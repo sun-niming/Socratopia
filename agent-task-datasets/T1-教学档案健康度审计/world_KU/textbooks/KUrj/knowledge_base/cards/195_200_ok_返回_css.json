@@ -1,0 +1,42 @@
+{
+  "title": "200 OK 返回 CSS",
+  "definition": "当浏览器请求 CSS 文件时，服务器应返回 HTTP/1.1 200 OK，并使用 `Content-Type: text/css; charset=utf-8`。如果 MIME 类型写错，浏览器可能拒绝应用样式。",
+  "key_points": [
+    "CSS 的正确 MIME 类型是 `text/css; charset=utf-8`。",
+    "浏览器是否应用样式，和 `Content-Type` 是否正确直接相关。",
+    "`curl` 可能能看到文本内容，但浏览器页面未必会显示样式。"
+  ],
+  "examples": [
+    "HTTP/1.1 200 OK\nContent-Type: text/css; charset=utf-8\nContent-Length: 256\nConnection: close\n\nbody { font-family: sans-serif; }",
+    "浏览器请求 `/css/style.css`。"
+  ],
+  "misconceptions": [
+    "认为只要文件内容是 CSS，浏览器就一定会当成样式文件处理。",
+    "以为 `curl` 里能看到文本就说明浏览器也一定正常应用样式。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "CSS 响应的 `Content-Type` 应该写成什么？",
+      "a": "`text/css; charset=utf-8`。"
+    },
+    {
+      "q": "如果 CSS 的 `Content-Type` 写错，可能出现什么现象？",
+      "a": "浏览器可能拒绝应用样式，但 `curl` 仍可能显示出文本内容。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "HTTP 响应基础"
+  ],
+  "source_pages": [
+    117,
+    120
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "195_200_ok_返回_css",
+  "_chunk_pages": [
+    117,
+    120
+  ]
+}

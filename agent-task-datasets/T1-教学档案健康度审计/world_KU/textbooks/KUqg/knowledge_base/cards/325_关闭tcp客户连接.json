@@ -1,0 +1,43 @@
+{
+  "title": "关闭TCP客户连接",
+  "definition": "客户完成数据交换后调用 `clientSocket.close()` 关闭套接字，并启动该端 TCP 连接的关闭过程。关闭客户套接字意味着客户不再继续使用这条连接；TCP会通过相应的连接终止报文段与对端协调关闭。",
+  "key_points": [
+    "示例代码为 `clientSocket.close()`。",
+    "关闭套接字发生在客户完成接收和输出服务器响应之后。",
+    "关闭套接字会触发底层 TCP 的连接终止过程。",
+    "应用程序关闭套接字与底层 TCP 立即完全终止连接并不一定是完全相同的时刻。"
+  ],
+  "examples": [
+    "客户打印 `modifiedSentence.decode()` 后执行 `clientSocket.close()`，不再使用该连接。"
+  ],
+  "misconceptions": [
+    "误以为 `close()` 只释放 Python 对象，与 TCP 连接状态无关。",
+    "误以为调用 `close()` 后双方的所有 TCP 状态必然在同一瞬间消失。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "TCP客户程序通常在什么时候调用 `close()`？",
+      "a": "在完成所需的数据发送、接收和处理后调用，用于关闭客户套接字并启动 TCP 连接终止过程。"
+    },
+    {
+      "q": "调用 `clientSocket.close()` 会对底层TCP产生什么影响？",
+      "a": "它会使客户不再使用该套接字，并触发底层 TCP 与服务器端协调终止连接。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "TCP按字节流发送和接收数据",
+    "TCP连接基本概念"
+  ],
+  "source_pages": [
+    129,
+    132
+  ],
+  "needs_verification": true,
+  "verify_query": "Python TCP socket close behavior FIN connection termination close sends TCP segment",
+  "concept_id": "325_关闭tcp客户连接",
+  "_chunk_pages": [
+    129,
+    132
+  ]
+}

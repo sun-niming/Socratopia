@@ -1,0 +1,52 @@
+{
+  "title": "array 是固定大小的连续容器",
+  "definition": "std::array 定义在 `<array>` 头文件中，类似于 vector，但大小在编译期固定，不能增加或收缩。array 的模板参数包括元素类型和固定元素个数，例如 `std::array<int, 3>` 表示包含 3 个 int 元素的 array。原文说明，array 的用途是让数组可以分配在栈上，而 vector 通常需要访问自由存储区。",
+  "key_points": [
+    "array 的声明需要两个模板参数：第一个指定元素类型，第二个指定固定元素数量。",
+    "array 的元素保存在连续内存中，并支持随机访问迭代器。",
+    "array 有固定大小，因此不支持 push_back()、pop_back()、insert()、erase()、clear()、resize()、reserve() 和 capacity() 等改变或管理动态容量的操作。",
+    "array 提供 size()，这是相较于 C 风格数组的便利之处。",
+    "array 支持 front()、back()、at()、operator[] 和 fill()。"
+  ],
+  "examples": [
+    "声明包含 3 个整数的 array：`std::array<int, 3> arr{9, 8, 7};`",
+    "使用范围 for 循环输出元素：`for (const auto& value : arr) { std::cout << value << std::endl; }`",
+    "获取大小：`arr.size()` 或 `std::size(arr)`。",
+    "将所有元素改为 3：`arr.fill(3);`"
+  ],
+  "misconceptions": [
+    "array 可以像 vector 一样通过 push_back() 自动扩容；array 大小固定，不支持 push_back()。",
+    "array 没有 size()；实际上 array 提供 size()，而 C 风格数组通常没有成员函数 size()。",
+    "array 的第二个模板参数是运行时容量；它表示固定的元素数量，属于模板参数。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`std::array<int, 3>` 中的两个模板参数分别表示什么？",
+      "a": "第一个参数 `int` 表示元素类型，第二个参数 `3` 表示 array 的固定元素数量。"
+    },
+    {
+      "q": "array 与 vector 在大小方面有什么区别？",
+      "a": "array 的大小固定，不能增加或收缩；vector 的大小可以动态变化。"
+    },
+    {
+      "q": "array 如何把所有元素设置为同一个值？",
+      "a": "调用 `fill()`，例如 `arr.fill(3);`。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "模板类",
+    "连续内存容器"
+  ],
+  "source_pages": [
+    572,
+    572
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1178_array_是固定大小的连续容器",
+  "_chunk_pages": [
+    569,
+    572
+  ]
+}

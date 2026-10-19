@@ -1,0 +1,49 @@
+{
+  "title": "使用 is_same、is_base_of 和 is_convertible 判断类型关系",
+  "definition": "C++ 类型 trait 提供了用于判断类型关系的工具，其中包括 is_same、is_base_of 和 is_convertible。is_same 用于判断两个类型是否完全相同；示例中的 same() 函数通过 is_same_v<T1, T2> 判断两个参数的类型是否相同，并输出相应信息。",
+  "key_points": [
+    "`std::is_same_v<T1, T2>` 在 T1 与 T2 相同时时为 true，否则为 false。",
+    "`std::is_base_of` 用于判断一个类是否为另一个类的基类；`std::is_convertible` 用于判断一种类型是否可转换为另一种类型。",
+    "same() 可以声明两个类型模板参数，并通过 `is_same_v<T1, T2>` 保存类型是否相同的布尔结果。",
+    "示例中 `same(1, 32)` 的两个参数推导为相同的整数类型；`same(1, 3.01)` 推导为 int 和 double，类型不同。"
+  ],
+  "examples": [
+    "示意代码：\n```cpp\ntemplate <typename T1, typename T2>\nvoid same(const T1& t1, const T2& t2) {\n    bool areTypesTheSame = std::is_same_v<T1, T2>;\n    std::cout << (areTypesTheSame ? \"the same types\" : \"different types\")\n              << std::endl;\n}\n```",
+    "`same(1, 32);` 判断结果为相同类型；`same(1, 3.01);` 判断结果为不同类型；`same(3.01, \"Test\");` 也判断为不同类型。"
+  ],
+  "misconceptions": [
+    "is_same 判断的是类型是否相同，不是判断两个值是否相等。",
+    "数值可以相互转换，并不表示它们的类型相同；例如 int 和 double 通常是不同类型。",
+    "is_base_of 和 is_convertible 与 is_same 的判断目标不同，不能把三者混为一谈。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`std::is_same_v<int, int>` 的结果是什么？",
+      "a": "结果为 true，因为两个类型完全相同。"
+    },
+    {
+      "q": "为什么 `same(1, 3.01)` 判断为不同类型？",
+      "a": "第一个参数的类型推导为 int，第二个参数的类型推导为 double，int 和 double 不是同一种类型。"
+    },
+    {
+      "q": "is_same、is_base_of 和 is_convertible 分别用于判断什么？",
+      "a": "is_same 判断两个类型是否相同；is_base_of 判断类之间是否存在基类关系；is_convertible 判断一种类型是否可转换为另一种类型。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "函数模板与模板参数类型推导",
+    "类型 trait 基础"
+  ],
+  "source_pages": [
+    782,
+    782
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1607_使用_is_same_is_base_of_和_is_convertible_判",
+  "_chunk_pages": [
+    781,
+    784
+  ]
+}

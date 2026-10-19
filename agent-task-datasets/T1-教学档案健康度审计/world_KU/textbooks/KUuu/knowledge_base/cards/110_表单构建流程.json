@@ -1,0 +1,39 @@
+{
+  "title": "表单构建流程",
+  "definition": "教材给出的表单流程是：先建立表单域 form，再添加各种控件（如 input 等），再通过 label 增强交互，最后用 submit 触发后端逻辑。",
+  "key_points": [
+    "先有 form 表单域",
+    "再添加输入控件等表单元素",
+    "再用 label 增强交互",
+    "最后通过 submit 触发后端逻辑"
+  ],
+  "examples": [
+    "form → input → label → submit"
+  ],
+  "misconceptions": [
+    "以为只要有输入框就算完整表单",
+    "以为label只是纯装饰文字",
+    "以为表单流程不需要提交按钮"
+  ],
+  "qa_pairs": [
+    {
+      "q": "教材中的表单流程顺序是什么？",
+      "a": "建立表单域 form → 添加控件 → 增强交互 label → 触发后端逻辑 submit。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "HTML表单基础"
+  ],
+  "source_pages": [
+    73,
+    76
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "110_表单构建流程",
+  "_chunk_pages": [
+    73,
+    76
+  ]
+}

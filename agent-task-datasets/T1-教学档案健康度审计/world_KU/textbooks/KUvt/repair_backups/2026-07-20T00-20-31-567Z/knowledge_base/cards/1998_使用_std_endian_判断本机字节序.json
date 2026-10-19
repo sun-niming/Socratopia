@@ -1,0 +1,43 @@
+{
+  "title": "使用 std::endian 判断本机字节序",
+  "definition": "C++20 标准库提供了 std::endian 枚举类型，用于表示和判断当前系统的本地字节序。程序可以检查 std::endian::native，并根据结果判断本机是小端系统还是大端系统。",
+  "key_points": [
+    "std::endian 用于描述字节序。",
+    "std::endian::native 表示当前系统的本地字节序。",
+    "可以通过 switch 检查 std::endian::native，并分别输出本机是 little-endian 还是 big-endian。",
+    "原文中该功能的头文件名称因 OCR 排版损坏，需核实具体写法。"
+  ],
+  "examples": [
+    "可按以下逻辑判断本机字节序：\\n```cpp\\nswitch (std::endian::native) {\\n    case std::endian::little:\\n        std::cout << \"Native ordering is little-endian.\" << std::endl;\\n        break;\\n    case std::endian::big:\\n        std::cout << \"Native ordering is big-endian.\" << std::endl;\\n        break;\\n}\\n```"
+  ],
+  "misconceptions": [
+    "std::endian::native 表示本机字节序，不表示网络字节序。",
+    "std::endian 只能帮助程序识别字节序，不能自动把任意数据转换为网络字节序。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "C++20 中可以用什么类型判断本机字节序？",
+      "a": "可以使用标准库中的 std::endian 枚举类型，并检查 std::endian::native。"
+    },
+    {
+      "q": "检查 std::endian::native 时通常要区分哪些结果？",
+      "a": "通常区分 std::endian::little 和 std::endian::big，分别表示小端序和大端序。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "大端序与小端序",
+    "C++枚举类型"
+  ],
+  "source_pages": [
+    973,
+    973
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 std::endian 头文件 <bit> std::endian::native 官方文档",
+  "concept_id": "1998_使用_std_endian_判断本机字节序",
+  "_chunk_pages": [
+    973,
+    976
+  ]
+}

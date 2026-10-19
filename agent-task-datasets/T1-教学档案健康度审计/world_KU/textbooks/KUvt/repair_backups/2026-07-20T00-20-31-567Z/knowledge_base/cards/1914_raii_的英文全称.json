@@ -1,0 +1,41 @@
+{
+  "title": "RAII 的英文全称",
+  "definition": "RAII 是 Resource Acquisition Is Initialization 的缩写，原文译为“资源获得即初始化”。它被列为 C++高级设计技术中的重要主题；本页仅给出了名称，并指出后续将讨论其含义以及它为何是一个强大的概念。",
+  "key_points": [
+    "RAII 的全称是 Resource Acquisition Is Initialization。",
+    "原文使用的中文表述是“资源获得即初始化”。",
+    "本页只引入该主题，尚未展开其具体机制和用法。"
+  ],
+  "examples": [
+    "术语写法：RAII（Resource Acquisition Is Initialization，资源获得即初始化）。"
+  ],
+  "misconceptions": [
+    "仅根据名称自行扩展出本页没有讲述的具体实现规则。",
+    "把 RAII 误认为某个单独的 C++关键字或标准库类型。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "RAII 的英文全称是什么？",
+      "a": "Resource Acquisition Is Initialization。"
+    },
+    {
+      "q": "原文如何翻译 RAII？",
+      "a": "资源获得即初始化。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "资源管理的基本概念"
+  ],
+  "source_pages": [
+    924,
+    924
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1914_raii_的英文全称",
+  "_chunk_pages": [
+    921,
+    924
+  ]
+}

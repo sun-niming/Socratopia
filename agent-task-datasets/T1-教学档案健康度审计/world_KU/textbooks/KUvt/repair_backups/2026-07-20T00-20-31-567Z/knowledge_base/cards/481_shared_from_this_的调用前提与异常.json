@@ -1,0 +1,43 @@
+{
+  "title": "shared_from_this 的调用前提与异常",
+  "definition": "只有当对象已经被存储在 shared_ptr 中时，才能在该对象上使用 shared_from_this()。如果对象尚未由 shared_ptr 管理，调用 shared_from_this() 会抛出 bad_weak_ptr 异常。weak_from_this() 则始终可以调用；在对象尚未由 shared_ptr 管理时，它返回空的 weak_ptr。",
+  "key_points": [
+    "shared_from_this() 依赖对象已经建立 shared_ptr 所有权管理关系。",
+    "前提不满足时，shared_from_this() 会抛出 bad_weak_ptr。",
+    "weak_from_this() 不会因对象尚未被 shared_ptr 管理而抛出该异常，但会返回空 weak_ptr。"
+  ],
+  "examples": [
+    "错误使用场景：直接创建一个未被 shared_ptr 管理的 Foo 对象，然后调用其 shared_from_this()，会抛出 bad_weak_ptr。",
+    "正确使用场景：auto ptr1 { make_shared<Foo>() }; 之后通过 Foo 成员函数调用 shared_from_this()。"
+  ],
+  "misconceptions": [
+    "只要类继承了 enable_shared_from_this，就可以在任何时刻调用 shared_from_this()。",
+    "weak_from_this() 在所有情况下都返回指向有效对象的 weak_ptr。",
+    "shared_from_this() 返回的 shared_ptr 不会创建一个新的独立控制关系。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "对象尚未存储在 shared_ptr 中时调用 shared_from_this() 的结果是什么？",
+      "a": "会抛出 bad_weak_ptr 异常。"
+    },
+    {
+      "q": "对象尚未存储在 shared_ptr 中时调用 weak_from_this() 的结果是什么？",
+      "a": "调用是允许的，但会返回一个空的 weak_ptr。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "enable_shared_from_this 安全获取指向自身的智能指针"
+  ],
+  "source_pages": [
+    226,
+    226
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "481_shared_from_this_的调用前提与异常",
+  "_chunk_pages": [
+    225,
+    228
+  ]
+}

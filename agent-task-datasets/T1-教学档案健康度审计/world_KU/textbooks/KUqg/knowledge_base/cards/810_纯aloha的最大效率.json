@@ -1,0 +1,41 @@
+{
+  "title": "纯ALOHA的最大效率",
+  "definition": "原文指出，纯ALOHA的最大效率为 $$\\frac{1}{2e}.$$ 这表示在理想参数下，纯ALOHA成功传输的数据时间最多约占信道时间的 $1/(2e)$。",
+  "key_points": [
+    "纯ALOHA的最大效率是 $$\\frac{1}{2e}.$$",
+    "该效率低于时隙ALOHA的极限效率 $$1/e$$。"
+  ],
+  "examples": [
+    "纯ALOHA的最大效率可直接写为 $$S_{\\max}=\\frac{1}{2e}.$$"
+  ],
+  "misconceptions": [
+    "误以为纯ALOHA的最大效率是 $1/e$；$1/e$ 是原文中时隙ALOHA在节点数趋于无穷时的极限效率。",
+    "误以为ALOHA协议能够在高负载下保持接近100%的效率。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "纯ALOHA的最大效率是多少？",
+      "a": "$$\\frac{1}{2e}.$$"
+    },
+    {
+      "q": "纯ALOHA与时隙ALOHA的极限效率哪个更高？",
+      "a": "时隙ALOHA的极限效率更高；原文给出的两个值分别为 $$1/(2e)$$ 和 $$1/e$$。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "纯ALOHA",
+    "时隙ALOHA效率"
+  ],
+  "source_pages": [
+    349,
+    352
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "810_纯aloha的最大效率",
+  "_chunk_pages": [
+    349,
+    352
+  ]
+}

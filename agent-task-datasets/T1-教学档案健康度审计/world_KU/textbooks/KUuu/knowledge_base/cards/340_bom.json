@@ -1,0 +1,38 @@
+{
+  "title": "BOM",
+  "definition": "BOM是浏览器对象模型（Browser Object Model），通过BOM可以操作浏览器窗口，例如控制浏览器跳转、获取分辨率等。",
+  "key_points": [
+    "BOM关注浏览器窗口",
+    "可用于控制浏览器跳转",
+    "可用于获取分辨率"
+  ],
+  "examples": [
+    "控制浏览器跳转",
+    "获取分辨率"
+  ],
+  "misconceptions": [
+    "BOM用于操作HTML标签结构",
+    "BOM只用于修改页面文字"
+  ],
+  "qa_pairs": [
+    {
+      "q": "BOM主要操作什么对象？",
+      "a": "浏览器窗口。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "浏览器端JavaScript的组成"
+  ],
+  "source_pages": [
+    233,
+    236
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "340_bom",
+  "_chunk_pages": [
+    233,
+    236
+  ]
+}

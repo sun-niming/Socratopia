@@ -1,0 +1,46 @@
+{
+  "title": "工厂返回类型与 Liskov 替换原则",
+  "definition": "原文将 BingCherryTree::pick() 返回 BingCherry*、CherryTree::pick() 返回 Cherry* 的设计与 Liskov Substitution Principle（LSP，里氏替换原则）联系起来：派生类型应能够在需要基类类型的场景中使用。",
+  "key_points": [
+    "CherryTree 是基类树类型，BingCherryTree 是派生树类型。",
+    "BingCherry 是 Cherry 的派生类型，因此 BingCherry* 可以用于需要 Cherry* 的位置。",
+    "调用者可以使用 unique_ptr<Cherry> 持有并通过 Cherry 接口操作由 BingCherryTree 创建的对象。"
+  ],
+  "examples": [
+    "CherryTree* baseTree;",
+    "BingCherryTree derivedTree;",
+    "unique_ptr<Cherry> theCherry { derivedTree.pick() };",
+    "theCherry->printType();"
+  ],
+  "misconceptions": [
+    "LSP 不是指所有派生类都能无条件替代基类；替换必须满足基类接口所要求的行为契约。",
+    "仅仅存在指针类型的向上转换，不足以单独证明完整满足 LSP；原文片段主要展示类型替换关系。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "原文中哪个例子体现了 LSP？",
+      "a": "BingCherryTree::pick() 返回 BingCherry*，而调用方用 unique_ptr<Cherry> 接收并通过 Cherry 接口调用 printType()。"
+    },
+    {
+      "q": "为什么 BingCherry* 能在需要 Cherry* 的场景中使用？",
+      "a": "因为 BingCherry 是 Cherry 的派生类，派生类指针可以向上转换为基类指针。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "继承中的向上转换",
+    "协变返回类型",
+    "多态"
+  ],
+  "source_pages": [
+    329,
+    332
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 Liskov Substitution Principle 协变返回类型 BingCherryTree CherryTree pick unique_ptr Cherry 示例",
+  "concept_id": "431_工厂返回类型与_liskov_替换原则",
+  "_chunk_pages": [
+    329,
+    332
+  ]
+}

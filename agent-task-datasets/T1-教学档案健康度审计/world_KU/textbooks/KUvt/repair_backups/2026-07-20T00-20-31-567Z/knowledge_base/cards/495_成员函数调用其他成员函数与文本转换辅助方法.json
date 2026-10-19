@@ -1,0 +1,49 @@
+{
+  "title": "成员函数调用其他成员函数与文本转换辅助方法",
+  "definition": "类内部的一个成员函数可以调用同一个类的其他成员函数。教材扩展SpreadsheetCell，使其能够接受文本和数字：设置文本时，将文本转换为double；如果文本不是有效数字，则把double值设置为0。为实现这种转换，类声明了用于设置和获取文本表示的公共方法，以及用于double与string相互转换的private辅助方法。",
+  "key_points": [
+    "扩展后的类声明了setValue(double)、getValue()、setString(std::string_view)和getString()等接口。",
+    "private辅助方法doubleToString和stringToDouble用于内部转换，不直接作为客户接口。",
+    "文本不能表示有效数字时，单元格的double值按教材描述设置为0。",
+    "该版本的SpreadsheetCell只能存储double数据；字符串只是输入或输出的文本表示。"
+  ],
+  "examples": [
+    "import <string>;\nimport <string_view>;\n\nclass SpreadsheetCell {\npublic:\n    void setValue(double value);\n    double getValue() const;\n    void setString(std::string_view value);\n    std::string getString() const;\nprivate:\n    std::string doubleToString(double value) const;\n    double stringToDouble(std::string_view value) const;\n    double m_value{0};\n};"
+  ],
+  "misconceptions": [
+    "声明了setString并不表示对象同时保存一个独立的string和double；教材明确说该版本只能存储double数据。",
+    "private辅助方法是类的内部实现细节，不应被类外客户直接调用。",
+    "无效数字字符串不会保留为某个数值；按教材描述会使double值变为0。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "扩展后的SpreadsheetCell接收字符串时，最终存储什么类型的数据？",
+      "a": "最终存储double数据。"
+    },
+    {
+      "q": "如果字符串不能表示有效数字，单元格的double值如何处理？",
+      "a": "按教材描述，将其设置为0。"
+    },
+    {
+      "q": "doubleToString和stringToDouble为什么声明为private？",
+      "a": "它们是供类内部实现使用的辅助方法，不属于客户直接使用的公共接口。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "成员函数",
+    "private访问控制",
+    "std::string与std::string_view基础"
+  ],
+  "source_pages": [
+    232,
+    232
+  ],
+  "needs_verification": true,
+  "verify_query": "Marc Gregoire C++20高级编程 第5版 SpreadsheetCell setString stringToDouble 无效数字 0 原文",
+  "concept_id": "495_成员函数调用其他成员函数与文本转换辅助方法",
+  "_chunk_pages": [
+    229,
+    232
+  ]
+}

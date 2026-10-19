@@ -1,0 +1,54 @@
+{
+  "title": "map的键查找：operator[]、find、count与contains",
+  "definition": "`std::map`提供多种按键查找元素的方法。`operator[]`适用于已确定键存在且需要直接访问或修改值的情况；如果键不存在，`operator[]`会插入一个具有该键的新元素。`find`在找到元素时返回指向该元素的迭代器，找不到时返回`end()`。`count`返回指定键的元素数量；由于`map`不允许重复键，其结果只能是`0`或`1`。从C++20开始，可以使用`contains`直接判断是否存在指定键。",
+  "key_points": [
+    "`dataMap[key]`返回对应值的引用，可直接读取或修改。",
+    "对不存在的键使用`operator[]`会插入新元素，因此不能把它仅用于无副作用的存在性检查。",
+    "`find(key) != dataMap.end()`表示找到了元素，找到后可通过`it->second`访问值。",
+    "`count(key)`对`map`返回`0`或`1`；C++20的`contains(key)`直接返回`bool`。",
+    "原文关于按键查找的复杂度记载为“指数时间”，但这与标准有序`std::map`通常采用的对数时间查找不一致，需核实教材原版或译本。"
+  ],
+  "examples": [
+    "已知键存在时直接修改：`dataMap[1].setValue(100);`。",
+    "使用`find`安全查找：`auto it = dataMap.find(1); if (it != dataMap.end()) { it->second.setValue(100); }`。",
+    "使用`count`判断：`if (dataMap.count(1) != 0) { /* 键1存在 */ }`。",
+    "C++20使用`contains`：`bool isKeyInMap = dataMap.contains(1);`。",
+    "标准库中有序`map`按键查找通常写作$O(\\log n)$；原文 OCR 文本写成“指数时间”，该处应联网核实。"
+  ],
+  "misconceptions": [
+    "`operator[]`只负责查找，不会改变`map`；实际上键不存在时会插入新元素。",
+    "`find`找不到元素会返回一个空指针；实际上返回的是`end()`迭代器。",
+    "`count`对`map`可以返回任意大于1的数量；实际上`map`不允许重复键，所以只能返回0或1。",
+    "`contains`可用于C++17；原文明确将其归于C++20。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "当不确定某个键是否存在时，为什么不应直接使用`dataMap[key]`进行检查？",
+      "a": "因为如果键不存在，`operator[]`会插入一个具有该键的新元素。"
+    },
+    {
+      "q": "`map.find(1)`找不到键1时返回什么？",
+      "a": "返回`map`的`end()`迭代器。"
+    },
+    {
+      "q": "在C++20中，如何直接判断`map`是否包含键1？",
+      "a": "使用`dataMap.contains(1)`，它返回`true`或`false`。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "std::map的键值对结构",
+    "C++迭代器"
+  ],
+  "source_pages": [
+    585,
+    585
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 std::map operator[] find count contains 查找复杂度 标准文档；教材《C++20高级编程》第18章第585页 map 查找复杂度 原文",
+  "concept_id": "1213_map的键查找_operator_find_count与contains",
+  "_chunk_pages": [
+    585,
+    588
+  ]
+}

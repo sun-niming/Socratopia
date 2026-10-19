@@ -1,0 +1,50 @@
+{
+  "title": "TCP服务器的欢迎套接字",
+  "definition": "TCP服务器首先创建一个 `SOCK_STREAM` 套接字，将其绑定到服务器端口，然后调用 `listen()` 使其成为用于接收连接请求的欢迎套接字。欢迎套接字主要负责等待新客户的连接请求，而不是专门承担某个客户连接上的数据交换。",
+  "key_points": [
+    "创建代码为 `serverSocket = socket(AF_INET, SOCK_STREAM)`。",
+    "绑定代码为 `serverSocket.bind(('', serverPort))`，空字符串表示绑定本机适用的网络接口地址。",
+    "调用 `serverSocket.listen(1)` 后，服务器开始监听 TCP 连接请求。",
+    "原文把 `serverSocket` 称为欢迎套接字。",
+    "`listen()` 的参数与尚未被应用程序接受的待处理连接队列有关。"
+  ],
+  "examples": [
+    "服务器将 `serverPort` 设为 `12000`，依次执行 `serverSocket = socket(AF_INET, SOCK_STREAM)`、`serverSocket.bind(('', 12000))` 和 `serverSocket.listen(1)`。"
+  ],
+  "misconceptions": [
+    "误以为创建 `serverSocket` 后，不绑定端口也能让客户稳定地找到服务器。",
+    "误以为 `listen(1)` 会立即创建一个与特定客户通信的连接套接字。",
+    "误以为 `listen()` 的参数严格等于服务器一生中能够服务的客户总数。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "TCP服务器为什么要将欢迎套接字绑定到一个已知端口？",
+      "a": "客户需要使用该服务器端口向服务器发起连接；绑定操作把服务器套接字与该端口关联起来。"
+    },
+    {
+      "q": "欢迎套接字的主要作用是什么？",
+      "a": "监听并接收来自客户的 TCP 连接请求，为后续创建客户专用的连接套接字提供入口。"
+    },
+    {
+      "q": "`listen()` 参数表示什么？",
+      "a": "它与操作系统为尚未被应用程序接受的连接请求维护的待处理队列上限有关，具体语义可能受实现影响。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "创建TCP客户套接字",
+    "服务器端口",
+    "套接字绑定"
+  ],
+  "source_pages": [
+    129,
+    132
+  ],
+  "needs_verification": true,
+  "verify_query": "Python socket listen backlog parameter exact semantics maximum pending connections",
+  "concept_id": "326_tcp服务器的欢迎套接字",
+  "_chunk_pages": [
+    129,
+    132
+  ]
+}

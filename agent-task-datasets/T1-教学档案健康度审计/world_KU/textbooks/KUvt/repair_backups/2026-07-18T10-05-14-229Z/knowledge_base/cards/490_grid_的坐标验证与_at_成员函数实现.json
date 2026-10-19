@@ -1,0 +1,50 @@
+{
+  "title": "Grid 的坐标验证与 at 成员函数实现",
+  "definition": "Grid 将坐标范围检查封装在私有成员函数 verifyCoordinate 中。非 const 版本和 const 版本的 at 都先调用 verifyCoordinate(x, y)，确认坐标有效后再返回 m_cells[x][y]。",
+  "key_points": [
+    "verifyCoordinate 的核心检查为：\n\n$$x \\ge WIDTH \\Rightarrow \\text{抛出 }\\mathrm{std::out\\_of\\_range}$$\n\n$$y \\ge HEIGHT \\Rightarrow \\text{抛出 }\\mathrm{std::out\\_of\\_range}$$",
+    "const at 的实现逻辑是先验证坐标，再返回 `m_cells[x][y]` 的 const 引用。",
+    "非 const at 也先验证坐标，再返回可修改的 `std::optional<T>&`。",
+    "原文展示了非 const at 可以通过调用 const at，再使用 const_cast 转回可修改引用的实现方式。"
+  ],
+  "examples": [
+    "const at 的逻辑可写成：\n\n```cpp\nconst std::optional<T>& at(size_t x, size_t y) const {\n    verifyCoordinate(x, y);\n    return m_cells[x][y];\n}\n```",
+    "非 const at 的原文实现意图可概括为：\n\n```cpp\nstd::optional<T>& at(size_t x, size_t y) {\n    return const_cast<std::optional<T>&>(\n        std::as_const(*this).at(x, y)\n    );\n}\n```"
+  ],
+  "misconceptions": [
+    "只有非 const at 才需要检查越界；实际上 const 和非 const 两个重载都要调用 verifyCoordinate。",
+    "const at 返回的是 const 引用，不能通过它修改网格单元。",
+    "坐标合法并不表示单元一定包含 T 值，因为单元类型是 std::optional<T>。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "at 函数为什么要先调用 verifyCoordinate？",
+      "a": "为了在访问数组前检查 x 和 y 是否越界，避免访问 m_cells 范围之外的元素。"
+    },
+    {
+      "q": "const Grid 对象调用 at 时返回什么？",
+      "a": "返回 `const std::optional<T>&`，只能读取对应单元，不能通过该引用修改它。"
+    },
+    {
+      "q": "非 const at 与 const at 的主要区别是什么？",
+      "a": "非 const at 返回 `std::optional<T>&`，允许修改单元；const at 返回 `const std::optional<T>&`，只能读取单元。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "const 成员函数重载",
+    "引用与 const_cast",
+    "std::optional"
+  ],
+  "source_pages": [
+    383,
+    384
+  ],
+  "needs_verification": true,
+  "verify_query": "Marc Gregoire C++20 Advanced Programming 5th edition Grid verifyCoordinate const_cast std::optional at WIDTH HEIGHT",
+  "concept_id": "490_grid_的坐标验证与_at_成员函数实现",
+  "_chunk_pages": [
+    381,
+    384
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "title": "使用if初始化器和结构化绑定检查insert结果",
+  "definition": "从C++17开始，可以在if语句中声明并初始化变量，再根据条件判断。map的insert返回pair<iterator, bool>，因此可以使用if初始化器保存返回值，也可以用结构化绑定直接把返回的迭代器和布尔值绑定到两个变量。",
+  "key_points": [
+    "if初始化器允许在if条件前初始化insert的返回结果，并在if和else分支中使用。",
+    "结构化绑定可以把insert返回的pair拆分为iter和success等变量。",
+    "success为true表示插入成功，为false表示键已经存在、插入失败。"
+  ],
+  "examples": [
+    "if (auto result{dataMap.insert({1, Data{4}})}; result.second) { /* 插入成功 */ } else { /* 插入失败 */ }",
+    "if (auto [iter, success]{dataMap.insert({1, Data{4}})}; success) { /* 插入成功 */ } else { /* 插入失败 */ }"
+  ],
+  "misconceptions": [
+    "结构化绑定不会改变insert的返回类型；insert仍然返回包含迭代器和bool的pair。",
+    "if初始化器中声明的变量主要在该if语句及其else分支范围内可用。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何用结构化绑定检查map::insert是否成功？",
+      "a": "写成if (auto [iter, success]{dataMap.insert({1, Data{4}})}; success) { /* 成功 */ } else { /* 失败 */ }。"
+    },
+    {
+      "q": "结构化绑定后的success为false通常说明什么？",
+      "a": "说明指定键已经存在，insert没有插入新的键/值对。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "map的insert方法与返回值",
+    "C++17结构化绑定",
+    "C++17 if初始化器"
+  ],
+  "source_pages": [
+    583,
+    583
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1206_使用if初始化器和结构化绑定检查insert结果",
+  "_chunk_pages": [
+    581,
+    584
+  ]
+}

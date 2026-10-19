@@ -1,0 +1,40 @@
+{
+  "title": "请求行三个字段",
+  "definition": "HTTP 请求行的格式是 `METHOD SP REQUEST_TARGET SP VERSION`。例如 `GET /index.html HTTP/1.1`。其中 `METHOD` 决定动作，本项目只接受 `GET`；`REQUEST_TARGET` 在本项目中当作 URL 路径；`VERSION` 可以只接受 `HTTP/1.0` 或 `HTTP/1.1`，遇到其他版本可返回 `400` 或继续兼容处理。",
+  "key_points": [
+    "请求行由三部分组成：方法、目标、版本。",
+    "格式为 `METHOD SP REQUEST_TARGET SP VERSION`。",
+    "本项目只接受 `GET`。",
+    "`REQUEST_TARGET` 在本项目中按 URL 路径处理。",
+    "`VERSION` 可只接受 `HTTP/1.0` 或 `HTTP/1.1`。"
+  ],
+  "examples": [
+    "示例请求行：`GET /index.html HTTP/1.1`。"
+  ],
+  "misconceptions": [
+    "把 `REQUEST_TARGET` 当成完整 URL 来解析。",
+    "以为项目必须支持所有 HTTP 方法。",
+    "忽略版本字段或把错误版本也当成合法请求。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "HTTP 请求行的三个字段分别是什么？",
+      "a": "`METHOD`、`REQUEST_TARGET`、`VERSION`。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "HTTP 请求基本结构"
+  ],
+  "source_pages": [
+    51,
+    52
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "074_请求行三个字段",
+  "_chunk_pages": [
+    49,
+    52
+  ]
+}

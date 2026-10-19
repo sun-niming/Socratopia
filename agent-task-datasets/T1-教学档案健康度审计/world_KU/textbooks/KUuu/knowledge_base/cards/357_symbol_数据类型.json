@@ -1,0 +1,41 @@
+{
+  "title": "Symbol 数据类型",
+  "definition": "symbol 是一种基本数据类型。Symbol() 函数会返回 symbol 类型的值。每个从 Symbol() 返回的 symbol 值都是唯一的。一个 symbol 值可以作为对象属性的标识符，这是该数据类型仅有的目的。",
+  "key_points": [
+    "symbol 是一种基本数据类型。",
+    "Symbol() 会返回 symbol 类型的值。",
+    "每次调用 Symbol() 得到的值都唯一。",
+    "symbol 值可以作为对象属性的标识符。",
+    "原文强调 symbol 的用途仅是作为对象属性的标识符。"
+  ],
+  "examples": [
+    "let s1 = Symbol(\"foo\")",
+    "let s2 = Symbol(\"foo\")",
+    "// s1 和 s2 是两个不同的 symbol 值"
+  ],
+  "misconceptions": [
+    "以为 Symbol(\"foo\") 和另一个 Symbol(\"foo\") 会得到相同值。",
+    "以为 symbol 的主要用途是存储普通文本。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么两个 Symbol(\"foo\") 不是同一个值？",
+      "a": "因为每个从 Symbol() 返回的 symbol 值都是唯一的。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "JavaScript 基本数据类型"
+  ],
+  "source_pages": [
+    245,
+    248
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "357_symbol_数据类型",
+  "_chunk_pages": [
+    245,
+    248
+  ]
+}

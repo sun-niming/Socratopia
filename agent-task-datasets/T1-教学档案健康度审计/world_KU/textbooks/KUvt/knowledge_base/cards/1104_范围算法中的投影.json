@@ -1,0 +1,45 @@
+{
+  "title": "范围算法中的投影",
+  "definition": "投影（projection）是许多范围算法接受的回调函数。算法处理范围中的每个元素之前，先调用投影函数把元素转换为另一个值，再使用转换后的值执行比较或其他算法操作。",
+  "key_points": [
+    "投影用于指定算法应依据元素的哪个属性进行处理。",
+    "在 `std::ranges::sort` 的调用中，投影参数位于比较器参数之后，因此如果使用默认比较器，通常需要先传入 `{}`，再传入投影。",
+    "投影可以写成 lambda，也可以写成成员函数指针。"
+  ],
+  "examples": [
+    "按 `Person` 对象的名排序：`std::ranges::sort(persons, {}, [](const Person& person) { return person.getFirstName(); });`。",
+    "使用成员函数指针作为投影：`std::ranges::sort(persons, {}, &Person::getFirstName);`。",
+    "如果 `Person` 没有定义可用于比较的运算符，直接调用 `std::sort(std::begin(persons), std::end(persons));` 或 `std::ranges::sort(persons);` 都不能确定如何比较元素；指定名字投影后即可按名字排序。"
+  ],
+  "misconceptions": [
+    "投影不是排序比较器本身；它先把元素映射为比较值，比较器再比较这些值。",
+    "使用范围算法并不会自动知道 `Person` 应按哪个成员排序，仍需提供比较方式或投影。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何使用范围排序算法按 Person 的 first name 排序？",
+      "a": "可以写成 `std::ranges::sort(persons, {}, &Person::getFirstName);`，其中 `{}` 使用默认比较器，成员函数指针是投影。"
+    },
+    {
+      "q": "为什么 `std::ranges::sort(persons)` 不能直接排序没有比较运算符的 Person？",
+      "a": "因为算法不知道如何比较两个 Person 对象；需要提供比较器或投影，例如投影到 `getFirstName()` 的返回值。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "基于范围的算法",
+    "函数对象或回调函数",
+    "成员函数指针"
+  ],
+  "source_pages": [
+    538,
+    538
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 std::ranges::sort projection parameter order comparator projection member pointer example",
+  "concept_id": "1104_范围算法中的投影",
+  "_chunk_pages": [
+    537,
+    540
+  ]
+}

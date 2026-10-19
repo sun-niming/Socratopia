@@ -1,0 +1,46 @@
+{
+  "title": "类型安全的变长参数列表",
+  "definition": "可变参数模板可以实现编译期类型安全的变长参数列表。函数模板接收不同数量、不同类型的参数，并根据每个参数的静态类型选择相应的 `handleValue` 重载；如果某种类型没有可匹配的处理函数，编译器会报错。",
+  "key_points": [
+    "可以为不同类型分别定义重载，例如 `handleValue(int)`、`handleValue(double)` 和 `handleValue(std::string_view)`。",
+    "`processValues` 对参数包中的每个参数调用 `handleValue`，因此参数类型在编译期参与重载决议。",
+    "原文示例中，`float` 参数可以调用 `handleValue(double)`，因为 `float` 到 `double` 的转换没有精度损失。",
+    "如果传入的类型没有对应的 `handleValue` 重载或可行转换，程序会产生编译错误。",
+    "与接受无类型指针或运行时类型标签的接口相比，这种方式保留了编译期类型检查。"
+  ],
+  "examples": [
+    "可处理不同类型的调用：`processValues(1, 2, 3.56, \"test\", 1.0f);`。",
+    "处理函数示意：`void handleValue(int value);`、`void handleValue(double value);`、`void handleValue(std::string_view value);`。"
+  ],
+  "misconceptions": [
+    "“可变长度”不表示放弃类型安全；每个参数仍然具有明确的静态类型。",
+    "没有对应 `handleValue` 的类型不一定会在运行时才发现，通常会在模板实例化阶段导致编译错误。",
+    "`float` 调用 `handleValue(double)` 是重载决议和标准类型转换的结果，不是把所有参数都强制转换成 `double`。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "可变参数模板为什么能够实现类型安全的变长参数列表？",
+      "a": "因为每个参数的类型在编译期已知，编译器会为每个参数选择匹配的 `handleValue` 重载；没有可行重载时直接编译失败。"
+    },
+    {
+      "q": "如果传入一个没有对应 `handleValue` 的类型，会发生什么？",
+      "a": "如果不存在可行的重载或转换，编译器会在实例化模板时报告错误。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "函数重载",
+    "可变参数模板与参数包扩展"
+  ],
+  "source_pages": [
+    769,
+    770
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1587_类型安全的变长参数列表",
+  "_chunk_pages": [
+    769,
+    772
+  ]
+}

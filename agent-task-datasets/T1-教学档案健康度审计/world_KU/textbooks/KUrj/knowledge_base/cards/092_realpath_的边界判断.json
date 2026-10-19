@@ -1,0 +1,39 @@
+{
+  "title": "realpath 的边界判断",
+  "definition": "`realpath`能够解析符号链接和`..`，得到规范化后的路径，但如果路径不存在就会失败。做 root 边界判断时，不能只做前缀匹配，还必须检查匹配部分后面的下一个字符是否是`/`或字符串结束，否则像`/www2`会被误判为位于`/www`之下。",
+  "key_points": [
+    "`realpath`可以消除`..`并解析符号链接。",
+    "路径不存在时，`realpath`会失败。",
+    "前缀判断必须检查后继字符是否为`/`或字符串结束，避免把`/www2`误判成`/www`的子路径。"
+  ],
+  "examples": [
+    "例如 root 为`/www`时，`/www2/index.html`不能算作在 root 内；判断时必须检查前缀后面的字符。"
+  ],
+  "misconceptions": [
+    "以为字符串前缀相同就一定属于同一目录。",
+    "以为`realpath`对任何路径都会成功。",
+    "以为只要比较前几位字符就能完成根目录边界校验。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么 root 边界判断不能只做字符串前缀比较？",
+      "a": "因为`/www2`会以`/www`开头，但它并不在`/www`目录下；必须检查前缀后的字符是不是`/`或字符串结束。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "目录穿越攻击路径",
+    "安全检查顺序"
+  ],
+  "source_pages": [
+    57,
+    58
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "092_realpath_的边界判断",
+  "_chunk_pages": [
+    57,
+    60
+  ]
+}

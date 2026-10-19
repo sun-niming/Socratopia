@@ -1,0 +1,38 @@
+{
+  "title": "父节点访问",
+  "definition": "获取到一个元素节点后，可以通过 parentNode 或 parentElement 访问它的直接父节点。parentNode 返回直接父节点，通常是元素节点，但也可能是文档节点；parentElement 返回直接父元素节点，如果父节点不是元素则返回 null。",
+  "key_points": [
+    "parentNode 取直接父节点",
+    "parentElement 取直接父元素节点",
+    "parentElement 在父节点不是元素时返回 null"
+  ],
+  "examples": [
+    "element.parentNode",
+    "element.parentElement",
+    "let parentList = middleItem.parentElement;"
+  ],
+  "misconceptions": [
+    "parentNode 和 parentElement 总是等价。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "parentNode 和 parentElement 的区别是什么？",
+      "a": "parentNode 返回直接父节点，parentElement 返回直接父元素节点；如果父节点不是元素，parentElement 会返回 null。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "DOM树"
+  ],
+  "source_pages": [
+    350,
+    352
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "498_父节点访问",
+  "_chunk_pages": [
+    349,
+    352
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "title": "YouTube 视频上传后的处理流程",
+  "definition": "YouTube 既通过 HTTP 将视频从服务器流式传输给客户，也允许上传者通过 HTTP 从客户向服务器上传视频。YouTube 收到每个视频后，会在 Google 数据中心完成处理：将视频转换为 YouTube 视频格式，并创建具有不同比特率的多个版本。",
+  "key_points": [
+    "视频观看是服务器到客户的 HTTP 流式传输。",
+    "视频上传是上传者客户到 YouTube 服务器的 HTTP 传输。",
+    "视频格式转换和多比特率版本生成全部在 Google 数据中心完成。"
+  ],
+  "examples": [
+    "上传者提交一个视频后，Google 数据中心将其转换为 YouTube 格式，并生成多个不同比特率的版本，供后续播放选择。"
+  ],
+  "misconceptions": [
+    "上传者的设备负责生成所有播放版本；原文说格式转换和多版本创建完全发生在 Google 数据中心。",
+    "YouTube 只提供服务器到客户的下载；实际上上传者也通过 HTTP 将视频上传到服务器。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "YouTube 在收到上传视频后会做什么？",
+      "a": "YouTube 在 Google 数据中心将视频转换为 YouTube 视频格式，并创建多个具有不同比特率的版本。"
+    },
+    {
+      "q": "YouTube 的视频上传和视频观看分别使用什么方向的 HTTP 传输？",
+      "a": "上传是从客户到服务器，观看是从服务器到客户的 HTTP 流式传输。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "HTTP 的客户—服务器通信"
+  ],
+  "source_pages": [
+    121,
+    124
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "304_youtube_视频上传后的处理流程",
+  "_chunk_pages": [
+    121,
+    124
+  ]
+}

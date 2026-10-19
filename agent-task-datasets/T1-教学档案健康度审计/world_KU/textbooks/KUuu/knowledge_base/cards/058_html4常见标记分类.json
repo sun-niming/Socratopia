@@ -1,0 +1,45 @@
+{
+  "title": "HTML4常见标记分类",
+  "definition": "教材把HTML4常见标记分为结构、头部、文本、段落及标题、列表、超链接、图像及媒体、表格、表单和容器等类别。",
+  "key_points": [
+    "结构标记：html、head、body",
+    "头部标记：title、meta、link、style",
+    "文本标记：strong、em、ruby、rp、rt",
+    "段落及标题标记：p、h1~h6、br",
+    "列表标记：ul、ol、li、dl、dt、dd",
+    "超链接标记：a、map、area",
+    "图像及媒体元素标记：img、embed、object",
+    "表格标记：table、tr、td、th、thead、tbody、tfoot",
+    "表单标记：form、input、textarea、select、option、label",
+    "容器标记：div、span"
+  ],
+  "examples": [
+    "结构标记：html、head、body",
+    "表单标记：form、input、textarea、select、option、label"
+  ],
+  "misconceptions": [
+    "所有HTML标记都只有一种用途",
+    "表格标记只包括table一个标签"
+  ],
+  "qa_pairs": [
+    {
+      "q": "教材中HTML4常见标记分为哪些类别？",
+      "a": "分为结构、头部、文本、段落及标题、列表、超链接、图像及媒体、表格、表单和容器等类别。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "HTML元素"
+  ],
+  "source_pages": [
+    37,
+    40
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "058_html4常见标记分类",
+  "_chunk_pages": [
+    37,
+    40
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "title": "duration的时间周期表示与基本构造",
+  "definition": "`duration`通过“滴答数”和“滴答周期”共同表示时间。若对象保存的滴答数为$n$，单个滴答周期为由`Period`表示的时间，则总时间等于$n$个该周期。对象可以由滴答数直接构造，也可以由另一个时间周期不同的`duration`构造。",
+  "key_points": [
+    "`duration<long, ratio<60>>{10}`表示10个60秒滴答，即10分钟。",
+    "`duration<long>{14}`表示14个1秒滴答，即14秒。",
+    "`duration<double>::max()`可以得到该表示类型能够表示的最大duration值，但具体输出值可能因编译器而异。",
+    "周期可以使用`std::ratio`直接指定，也可以使用预定义的SI比例类型，如`std::milli`。"
+  ],
+  "examples": [
+    "`std::chrono::duration<long, std::ratio<60>> d1{123};`表示123分钟。",
+    "`std::chrono::duration<long, std::milli> d2;`表示每个滴答为1毫秒。",
+    "`auto d3{std::chrono::duration<double>::max()};`得到表示类型为`double`的最大duration。"
+  ],
+  "misconceptions": [
+    "duration对象中的数值本身不能脱离周期解释；数值10可能表示10秒、10分钟或其他时间。",
+    "`duration<long, ratio<60>>{10}`不是60秒，而是10个60秒滴答，即600秒。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何表示每个滴答为1/60秒的duration？",
+      "a": "可以使用`std::chrono::duration<double, std::ratio<1, 60>>`。"
+    },
+    {
+      "q": "为什么`duration<double>::max()`的实际输出可能不同？",
+      "a": "因为具体的表示范围和输出值取决于编译器及其对`double`等类型的实现。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "std::chrono::duration的模板参数与基本功能"
+  ],
+  "source_pages": [
+    685,
+    686
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1430_duration的时间周期表示与基本构造",
+  "_chunk_pages": [
+    685,
+    688
+  ]
+}

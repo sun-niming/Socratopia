@@ -1,0 +1,37 @@
+{
+  "title": "CSS 不生效",
+  "definition": "当 HTML 能显示但样式没有生效时，通常是 CSS 请求没有正确返回：可能是路径错误、服务器没有处理 /css/style.css、CSS 的 MIME 类型返回错误，或者 CSS 文件直接返回了 404。",
+  "key_points": [
+    "先确认 CSS 请求是否真正成功返回。",
+    "状态码应为 200，Content-Type 应为 text/css。",
+    "浏览器开发者工具的 Network 面板可以帮助定位失败原因。"
+  ],
+  "examples": [
+    "curl -i http://127.0.0.1:8080/css/style.css"
+  ],
+  "misconceptions": [
+    "以为 HTML 能显示就表示 CSS 也一定会自动生效。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "CSS 不生效时，应该重点检查哪些返回信息？",
+      "a": "检查状态码是否为 200，Content-Type 是否为 text/css，以及路径和服务器是否正确处理了 /css/style.css。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "HTTP 响应头",
+    "静态资源请求"
+  ],
+  "source_pages": [
+    109,
+    110
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "170_css_不生效",
+  "_chunk_pages": [
+    109,
+    112
+  ]
+}

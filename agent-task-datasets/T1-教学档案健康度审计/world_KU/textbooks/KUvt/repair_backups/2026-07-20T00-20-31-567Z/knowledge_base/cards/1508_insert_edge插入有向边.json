@@ -1,0 +1,46 @@
+{
+  "title": "insert_edge插入有向边",
+  "definition": "insert_edge(from_node_value, to_node_value) 在图中建立从起始节点值 from_node_value 指向目标节点值 to_node_value 的有向边。它先查找两个节点；只要任一节点不存在，就返回 false。两个节点都存在时，取得目标节点索引，并将该索引插入起始节点的邻接索引集合。",
+  "key_points": [
+    "边的方向是从 from_node_value 指向 to_node_value。",
+    "from 或 to 任一节点不存在时，方法返回 false。",
+    "目标节点索引通过 get_index_of_node(to) 获得。",
+    "邻接索引集合是 set，insert 的返回值包含迭代器和 bool；使用 .second 判断是否成功插入。"
+  ],
+  "examples": [
+    "核心逻辑可表示为：\n```cpp\nconst auto from{findNode(from_node_value)};\nconst auto to{findNode(to_node_value)};\nif (from == std::end(m_nodes) || to == std::end(m_nodes)) {\n    return false;\n}\nconst std::size_t to_index{get_index_of_node(to)};\nreturn from->get_adjacent_nodes_indices().insert(to_index).second;\n```",
+    "若 from 节点的邻接集合为 $\\{1,4\\}$，目标节点索引为 $4$，插入后集合仍为 $\\{1,4\\}$，因为 set 不保存重复索引。"
+  ],
+  "misconceptions": [
+    "insert_edge 不会自动创建不存在的节点；起点和终点必须先存在于图中。",
+    "邻接集合中加入的是目标节点索引，而不是目标节点值。",
+    "有向边只表示 from 到 to 的方向，不会自动建立 to 到 from 的反向边。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "insert_edge 在什么情况下返回 false？",
+      "a": "当起始节点或目标节点至少有一个不在图中时返回 false；如果目标索引已经存在，set 的插入结果也会反映未插入。"
+    },
+    {
+      "q": "insert_edge 将什么内容加入起始节点的邻接表？",
+      "a": "将目标节点在节点 vector 中的索引加入起始节点的邻接索引集合。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "有向图的边",
+    "set::insert返回值",
+    "迭代器"
+  ],
+  "source_pages": [
+    726,
+    726
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1508_insert_edge插入有向边",
+  "_chunk_pages": [
+    725,
+    728
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "title": "名称空间别名",
+  "definition": "名称空间别名用于为已有名称空间指定一个更短的新名称，以便在代码中使用简短名称引用原名称空间。语法为 namespace 别名 = 原名称空间;。",
+  "key_points": [
+    "名称空间别名不会创建新的独立名称空间，只是为已有名称空间提供另一个名称。",
+    "别名特别适合缩短层级较深的嵌套名称空间名称。"
+  ],
+  "examples": [
+    "namespace MyFTP = MyLibraries::Networking::FTP;"
+  ],
+  "misconceptions": [
+    "名称空间别名不是把名称空间中的内容复制出来。",
+    "定义别名后，原名称空间仍然存在，别名只是另一种引用方式。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何为 MyLibraries::Networking::FTP 创建名为 MyFTP 的别名？",
+      "a": "写成 namespace MyFTP = MyLibraries::Networking::FTP;。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "嵌套名称空间"
+  ],
+  "source_pages": [
+    40,
+    40
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "053_名称空间别名",
+  "_chunk_pages": [
+    37,
+    40
+  ]
+}

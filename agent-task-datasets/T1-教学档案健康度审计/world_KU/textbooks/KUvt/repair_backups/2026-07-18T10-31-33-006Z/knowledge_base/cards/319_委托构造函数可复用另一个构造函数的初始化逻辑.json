@@ -1,0 +1,40 @@
+{
+  "title": "委托构造函数可复用另一个构造函数的初始化逻辑",
+  "definition": "委托构造函数是指一个构造函数不直接完成全部初始化，而是在构造函数体中调用同一个类的另一个构造函数，从而复用初始化逻辑。原文中，接受 string_view 的 SpreadsheetCell 构造函数把字符串转换为 double 后，委托给 double 参数构造函数。",
+  "key_points": [
+    "double 参数构造函数负责用数值初始化单元格。",
+    "string_view 参数构造函数先通过 `stringToDouble(initialValue)` 将字符串转换为 double。",
+    "随后可写成 `SpreadsheetCell(stringToDouble(initialValue));`，将初始化委托给 double 参数构造函数。",
+    "委托构造可以避免多个构造函数重复编写相同的初始化代码。"
+  ],
+  "examples": [
+    "```cpp\nSpreadsheetCell::SpreadsheetCell(std::string_view initialValue)\n    : SpreadsheetCell(stringToDouble(initialValue))\n{\n}\n```",
+    "其中 `stringToDouble(initialValue)` 的结果作为 double 构造函数的参数。"
+  ],
+  "misconceptions": [
+    "把另一个构造函数写在构造函数体中并不会创建一个新的当前对象；委托构造应使用构造函数初始化器语法。",
+    "委托构造函数仍然属于同一个类，不能委托给其他无关类的构造函数。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "字符串版本的 SpreadsheetCell 构造函数如何复用 double 版本的初始化逻辑？",
+      "a": "先调用 `stringToDouble(initialValue)` 将字符串转换为 double，再通过构造函数初始化器 `: SpreadsheetCell(stringToDouble(initialValue))` 委托给 double 参数构造函数。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "构造函数重载",
+    "构造函数初始化器"
+  ],
+  "source_pages": [
+    237,
+    240
+  ],
+  "needs_verification": true,
+  "verify_query": "Marc Gregoire Professional C++ 5th edition SpreadsheetCell delegating constructor stringToDouble string_view page 238",
+  "concept_id": "319_委托构造函数可复用另一个构造函数的初始化逻辑",
+  "_chunk_pages": [
+    237,
+    240
+  ]
+}

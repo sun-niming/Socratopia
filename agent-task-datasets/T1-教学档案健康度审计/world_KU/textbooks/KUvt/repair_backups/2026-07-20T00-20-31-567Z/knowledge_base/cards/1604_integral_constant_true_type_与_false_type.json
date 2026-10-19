@@ -1,0 +1,51 @@
+{
+  "title": "integral_constant、true_type 与 false_type",
+  "definition": "std::integral_constant 是一个以类型 T 和值 v 为模板参数的类模板，提供静态 constexpr 数据成员 value，并提供 value_type 和 type 类型别名以及到 value_type 的 constexpr 转换和函数调用运算符。bool_constant 是 integral_constant<bool, B> 的别名；true_type 和 false_type 分别是 bool_constant<true> 与 bool_constant<false> 的别名。像 is_integral 和 is_class 这样的类型 trait 可以继承 true_type 或 false_type，以表示判断结果。",
+  "key_points": [
+    "integral_constant<T, v>::value 的值为模板参数 v。",
+    "integral_constant<T, v>::value_type 是 T，type 是 integral_constant<T, v>。",
+    "true_type::value 为 true，false_type::value 为 false。",
+    "类型 trait 可以通过继承 true_type 或 false_type 提供统一的 value 接口。"
+  ],
+  "examples": [
+    "核心定义可概括为：\n\n```cpp\ntemplate <class T, T v>\nstruct integral_constant {\n    static constexpr T value{v};\n    using value_type = T;\n    using type = integral_constant<T, v>;\n};\n\ntemplate <bool B>\nusing bool_constant = integral_constant<bool, B>;\n\nusing true_type = bool_constant<true>;\nusing false_type = bool_constant<false>;\n```",
+    "例如，标准库可以将 bool 的 is_integral 特例化为：\n\n```cpp\ntemplate<>\nstruct is_integral<bool> : public true_type { };\n```\n因此 is_integral<bool>::value 为 true。"
+  ],
+  "misconceptions": [
+    "true_type 和 false_type 是类型别名，不是两个运行时布尔变量。",
+    "访问 trait 的判断结果通常使用 ::value，而不是把 trait 类型本身当作 bool。",
+    "用户通常不需要自行编写标准库 trait 的特例化。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "true_type::value 和 false_type::value 分别是什么？",
+      "a": "true_type::value 为 true，false_type::value 为 false。"
+    },
+    {
+      "q": "is_integral<bool>::value 为什么可以返回 true？",
+      "a": "因为 is_integral<bool> 继承自 true_type，而 true_type::value 为 true。"
+    },
+    {
+      "q": "integral_constant<T, v> 的 value 成员表示什么？",
+      "a": "它是一个静态 constexpr 成员，值等于模板参数 v。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "类模板",
+    "类型别名",
+    "继承",
+    "编译期常量"
+  ],
+  "source_pages": [
+    780,
+    780
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1604_integral_constant_true_type_与_false_type",
+  "_chunk_pages": [
+    777,
+    780
+  ]
+}

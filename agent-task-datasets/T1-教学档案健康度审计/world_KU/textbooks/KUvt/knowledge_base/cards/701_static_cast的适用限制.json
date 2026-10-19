@@ -1,0 +1,45 @@
+{
+  "title": "static_cast的适用限制",
+  "definition": "`static_cast`只能执行符合 C++ 类型规则、有语言直接支持或有可用用户定义转换的转换。它不能完成任意无意义的转换，例如不相关类型指针之间的转换、没有转换构造函数时不相关对象之间的转换、去除常量性的转换，以及指针到整数的转换。",
+  "key_points": [
+    "没有可用的转换构造函数或转换例程时，不能把一种对象类型直接 `static_cast` 成另一种对象类型。",
+    "不能使用 `static_cast` 把不相关类型的指针相互转换。",
+    "不能使用 `static_cast` 把常量类型转换为非常量类型。",
+    "不能使用 `static_cast` 把指针转换为整数。"
+  ],
+  "examples": [
+    "不支持的方向包括：`static_cast<Unrelated*>(someOtherPointer)`，其中两个指针类型不相关。",
+    "不能通过 `static_cast` 去除对象或指针的常量性；涉及常量性的专门转换应使用相应的转换工具。"
+  ],
+  "misconceptions": [
+    "误以为 `static_cast` 是一种可以绕过所有类型检查的万能转换。",
+    "误以为只要写出目标类型，就能把任意指针转成该类型。",
+    "误以为 `static_cast` 可以直接去除 `const`。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`static_cast`能否把指针转换为整数？",
+      "a": "不能，原文明确将指针到整数列为 `static_cast` 不支持的转换。"
+    },
+    {
+      "q": "没有转换构造函数时，能否用 `static_cast` 将一种对象直接转换为另一种对象？",
+      "a": "不能；只有存在可用的转换构造函数或转换例程时，才可能进行这种用户定义转换。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "static_cast的主要用途",
+    "const限定与类型转换"
+  ],
+  "source_pages": [
+    348,
+    348
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "701_static_cast的适用限制",
+  "_chunk_pages": [
+    345,
+    348
+  ]
+}

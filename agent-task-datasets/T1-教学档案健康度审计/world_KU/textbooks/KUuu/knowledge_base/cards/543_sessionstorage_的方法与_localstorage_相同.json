@@ -1,0 +1,47 @@
+{
+  "title": "sessionStorage 的方法与 localStorage 相同",
+  "definition": "sessionStorage 的 API 与 localStorage 完全相同，只是操作的对象从 localStorage 换成 sessionStorage。它同样可以使用 setItem、getItem、removeItem、clear、key 和 length。",
+  "key_points": [
+    "方法名和 localStorage 一致。",
+    "只是操作对象不同：localStorage 改为 sessionStorage。",
+    "适合保存当前会话中的临时数据。"
+  ],
+  "examples": [
+    "sessionStorage.setItem('currentTabId', 'tab-123');",
+    "const tabId = sessionStorage.getItem('currentTabId');",
+    "sessionStorage.removeItem('userAction');",
+    "sessionStorage.clear();",
+    "console.log(sessionStorage.length);"
+  ],
+  "misconceptions": [
+    "以为 sessionStorage 需要另一套完全不同的方法名。",
+    "以为只能读取不能删除或清空。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "sessionStorage 和 localStorage 的方法有什么关系？",
+      "a": "两者的方法完全相同，只是操作对象不同。"
+    },
+    {
+      "q": "sessionStorage 可用哪些常用方法？",
+      "a": "setItem、getItem、removeItem、clear、key、length。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "localStorage 基本读写",
+    "sessionStorage 的会话隔离"
+  ],
+  "source_pages": [
+    382,
+    383,
+    384
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "543_sessionstorage_的方法与_localstorage_相同",
+  "_chunk_pages": [
+    381,
+    384
+  ]
+}

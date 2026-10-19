@@ -1,0 +1,44 @@
+{
+  "title": "vector设计中的线性搜索",
+  "definition": "在使用vector保存名字计数时，`nameExists`和`incrementNameCount`都从vector的第一个元素开始，依次检查每个条目，直到找到目标名字或遍历结束。因此，查找一个名字需要进行线性搜索，单次查找时间复杂度为$O(n)$，其中$n$是当前数据库中的条目数。",
+  "key_points": [
+    "`nameExists`比较每个条目的`entry.first`与目标名字；找到相等项返回`true`，遍历结束仍未找到则返回`false`。",
+    "`incrementNameCount`找到目标条目后将其`entry.second`递增，然后返回。",
+    "随着数据库中不同名字数量增加，线性搜索的平均成本会增加。",
+    "教材指出可以使用标准库算法完成类似循环，但这里显式写出循环是为了突出性能问题。"
+  ],
+  "examples": [
+    "`nameExists`的核心逻辑可表示为：`for (auto& entry : m_names) { if (entry.first == name) return true; } return false;`。",
+    "若vector中有$n$个不同名字，而目标名字位于最后一个位置，则一次搜索可能需要检查全部$n$个条目。"
+  ],
+  "misconceptions": [
+    "使用vector并不意味着查找自动是常数时间；未建立额外索引时，按名字查找仍是线性搜索。",
+    "`incrementNameCount`并不是只修改一次固定位置，它必须先搜索目标名字。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么初次NameDB设计在名字很多时可能变慢？",
+      "a": "因为`nameExists`和`incrementNameCount`都遍历vector进行线性搜索，数据库越大，搜索可能检查的条目越多。"
+    },
+    {
+      "q": "`nameExists`找到目标名字后是否还会继续遍历？",
+      "a": "不会；找到后立即返回`true`。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "用vector和pair表示数据",
+    "C++循环与线性搜索"
+  ],
+  "source_pages": [
+    865,
+    866
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1794_vector设计中的线性搜索",
+  "_chunk_pages": [
+    865,
+    868
+  ]
+}

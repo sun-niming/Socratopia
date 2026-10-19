@@ -1,0 +1,47 @@
+{
+  "title": "根目录边界判断",
+  "definition": "`is_under_root(const char *root, const char *path)` 用来判断某个路径是否位于指定根目录下。它不能只做“前缀相同”判断，而必须在前缀相同后继续检查边界：要么 `path` 正好在 `root` 处结束，要么 `root` 后面紧跟 `/`。只有这样，`root` 才能被视为 `path` 的真实父目录。",
+  "key_points": [
+    "先比较 `path` 的前缀是否与 `root` 相同。",
+    "前缀相同后，还必须检查边界字符，不能只看字符串开头。",
+    "合法情况：`path` 等于 `root`，或 `path` 以 `root/` 开头。",
+    "该检查可防止把 `root` 的“同前缀但非同目录”路径误判为目录内。"
+  ],
+  "examples": [
+    "若 `root = /home/me/www`，则 `/home/me/www/index.html` 应判定为在根目录下。",
+    "若 `root = /home/me/www`，则 `/home/me/www2/a.html` 不应判定为在根目录下。"
+  ],
+  "misconceptions": [
+    "只要 `strncmp(path, root, n) == 0` 就一定安全。",
+    "忽略边界会把 `/home/me/www2` 误认为 `/home/me/www` 的子目录。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`is_under_root` 为什么不能只做前缀匹配？",
+      "a": "因为前缀相同不代表同一目录层级，必须检查边界，否则会把 `root2` 误判成 `root` 的内部路径。"
+    },
+    {
+      "q": "`/home/me/www2/a.html` 会不会被误判为 `/home/me/www` 下的文件？",
+      "a": "如果只做前缀匹配会误判；正确实现应判定为不在根目录下。"
+    },
+    {
+      "q": "什么情况下应判定为在根目录下？",
+      "a": "当 `path` 等于 `root`，或 `path` 以 `root/` 开头时。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "字符串比较基础"
+  ],
+  "source_pages": [
+    83,
+    84
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "127_根目录边界判断",
+  "_chunk_pages": [
+    81,
+    84
+  ]
+}

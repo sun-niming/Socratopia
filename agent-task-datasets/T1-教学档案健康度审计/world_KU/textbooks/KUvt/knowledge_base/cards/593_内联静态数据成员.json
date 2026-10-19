@@ -1,0 +1,43 @@
+{
+  "title": "内联静态数据成员",
+  "definition": "从 C++17 开始，静态数据成员可以声明为 `inline`。内联静态数据成员可以直接在类定义中定义和初始化，因此不必再在源文件中单独提供类外定义。",
+  "key_points": [
+    "声明形式是在 `static` 后或相关声明中加入 `inline`，例如 `static inline std::size_t ms_counter{0};`。",
+    "内联静态数据成员仍然是由该类所有对象共享的一份类级数据。",
+    "使用内联静态数据成员后，可以删除源文件中的 `std::size_t Spreadsheet::ms_counter;` 类外定义。"
+  ],
+  "examples": [
+    "```cpp\nexport class Spreadsheet {\nprivate:\n    static inline std::size_t ms_counter{0};\n};\n```\n采用这种写法后，不再需要：\n```cpp\nstd::size_t Spreadsheet::ms_counter;\n```"
+  ],
+  "misconceptions": [
+    "`inline` 不会把静态数据成员变成每个对象独有的成员；它仍然由整个类共享。",
+    "内联静态数据成员不是普通的非静态成员，不能因为写在类定义中就理解为每个对象都有一份。",
+    "使用 `inline` 的主要效果之一是允许在类定义中完成定义，从而免去单独的类外定义；它不表示该变量会被复制到每个调用位置。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "内联静态数据成员有什么主要作用？",
+      "a": "可以在类定义中直接定义和初始化静态数据成员，从而不必在源文件中单独为它分配空间。"
+    },
+    {
+      "q": "`static inline std::size_t ms_counter{0};` 是否仍由所有 `Spreadsheet` 对象共享？",
+      "a": "是。`inline` 改变的是定义方式，不改变静态数据成员属于类并由所有对象共享的性质。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "静态数据成员",
+    "C++17内联变量"
+  ],
+  "source_pages": [
+    284,
+    284
+  ],
+  "needs_verification": true,
+  "verify_query": "C++17 inline static data member 类内定义初始化 标准规则",
+  "concept_id": "593_内联静态数据成员",
+  "_chunk_pages": [
+    281,
+    284
+  ]
+}

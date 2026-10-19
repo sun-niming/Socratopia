@@ -1,0 +1,41 @@
+{
+  "title": "简单 requirement",
+  "definition": "简单 requirement 是 requires 表达式主体中的一个任意表达式语句，但该语句不能以 `requires` 开头。它用于检查表达式能否通过编译；编译器只验证其有效性，不会计算该表达式。",
+  "key_points": [
+    "简单 requirement 可以检查运算符、函数调用等表达式是否有效。",
+    "不能在简单 requirement 中使用变量声明、循环或条件语句。",
+    "表达式语句必须以分号结束。"
+  ],
+  "examples": [
+    "下面的概念要求类型 `T` 支持前缀和后缀自增：`template <typename T> concept Incrementable = requires(T x) { x++; ++x; };`"
+  ],
+  "misconceptions": [
+    "写出 `x++` 和 `++x` 只表示检查这两个表达式是否合法，并不表示运行时会执行自增。",
+    "简单 requirement 不是要求某个表达式返回特定值；它主要检查表达式是否有效。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何定义一个要求类型支持前缀和后缀自增的概念？",
+      "a": "`template <typename T> concept Incrementable = requires(T x) { x++; ++x; };`"
+    },
+    {
+      "q": "简单 requirement 会在运行时执行吗？",
+      "a": "不会。编译器只检查该表达式是否能够通过编译。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "requires 表达式的基本结构"
+  ],
+  "source_pages": [
+    401,
+    401
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "815_简单_requirement",
+  "_chunk_pages": [
+    401,
+    404
+  ]
+}

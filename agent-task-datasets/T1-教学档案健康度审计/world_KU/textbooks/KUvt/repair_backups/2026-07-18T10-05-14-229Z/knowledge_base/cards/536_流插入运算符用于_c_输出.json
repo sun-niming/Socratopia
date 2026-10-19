@@ -1,0 +1,48 @@
+{
+  "title": "流插入运算符用于 C++ 输出",
+  "definition": "C++ 流式输出使用流插入运算符 `<<`，把要输出的值插入到输出流对象（如 `cout`）中；多个值可以连续使用 `<<` 连接。`endl` 可作为输出流中的换行操控符使用。",
+  "key_points": [
+    "基本形式是 `cout << expression;`。",
+    "多个数据可以连续写成 `cout << value1 << value2;`。",
+    "原文示例使用 `endl` 结束输出行：`cout << i << endl;` 和 `cout << myString << endl;`。"
+  ],
+  "examples": [
+    "$$\\text{cout} \\;<<\\; i \\;<<\\; \\text{endl};$$",
+    "代码示例：`cout << myString << endl;`",
+    "连续输出示例：`cout << \"value: \" << i << endl;`"
+  ],
+  "misconceptions": [
+    "`<<` 在这里不是数学上的左移运算，而是用于把数据写入输出流的流插入运算符。",
+    "`endl` 不是普通字符串；它是用于换行并处理输出流的流操控符。",
+    "输出字符串、整数和浮点数时，仍然使用同一个 `<<` 流式语法。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "C++ 中如何把变量 `i` 输出到 `cout` 并换行？",
+      "a": "写作 `cout << i << endl;`。"
+    },
+    {
+      "q": "如何连续输出一个字符串变量和换行？",
+      "a": "写作 `cout << myString << endl;`。"
+    },
+    {
+      "q": "C++ 流式输出使用哪个运算符？",
+      "a": "使用流插入运算符 `<<`。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++ 标准输入输出流对象"
+  ],
+  "source_pages": [
+    409,
+    412
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "536_流插入运算符用于_c_输出",
+  "_chunk_pages": [
+    409,
+    412
+  ]
+}

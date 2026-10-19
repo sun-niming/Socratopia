@@ -1,0 +1,41 @@
+{
+  "title": "std::numeric_limits查询数值类型边界",
+  "definition": "`std::numeric_limits<T>`提供类型`T`的数值范围信息，定义在`<limits>`中。常用成员函数包括`max()`、`min()`和`lowest()`：对`int`，`max()`是最大值，`min()`和`lowest()`都是最小负值；对`double`，`min()`表示最小的正数，而`lowest()`表示最小的负数，`max()`表示最大正数。",
+  "key_points": [
+    "使用形式为`std::numeric_limits<T>::max()`、`std::numeric_limits<T>::min()`和`std::numeric_limits<T>::lowest()`。",
+    "原文示例中，`int`的最大值为`2147483647`，最小值和最低值为`-2147483648`。",
+    "原文示例中，`double`的最大值约为`1.79769e+308`，`min()`约为`2.22507e-308`，`lowest()`约为`-1.79769e+308`。",
+    "对于浮点类型，不应把`min()`误解为最负值；最负值由`lowest()`表示。"
+  ],
+  "examples": [
+    "```cpp\nstd::cout << std::format(\"Max int value: {}\\n\", std::numeric_limits<int>::max());\nstd::cout << std::format(\"Min int value: {}\\n\", std::numeric_limits<int>::min());\nstd::cout << std::format(\"Lowest int value: {}\\n\", std::numeric_limits<int>::lowest());\n```",
+    "$$\\begin{array}{c|c|c|c}\n\\text{类型} & \\text{max()} & \\text{min()} & \\text{lowest()}\\\\\n\\hline\n\\text{int} & 2147483647 & -2147483648 & -2147483648\\\\\n\\text{double} & 1.79769\\times10^{308} & 2.22507\\times10^{-308} & -1.79769\\times10^{308}\n\\end{array}$$"
+  ],
+  "misconceptions": [
+    "对`double`而言，`min()`不是最小负数，而是最小的正数。",
+    "`max()`、`min()`和`lowest()`不是变量，而是`std::numeric_limits<T>`提供的查询函数。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何查询`int`的最大值？",
+      "a": "使用`std::numeric_limits<int>::max()`。"
+    },
+    {
+      "q": "为什么对`double`来说，`min()`和`lowest()`的结果符号不同？",
+      "a": "`double`的`min()`表示最小正数，而`lowest()`表示最小负数。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [],
+  "source_pages": [
+    41,
+    44
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "044_std_numeric_limits查询数值类型边界",
+  "_chunk_pages": [
+    41,
+    44
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "title": "使用移动捕获把只能移动的对象带入 lambda",
+  "definition": "默认按值捕获采用复制语义，因此不能直接按值捕获只能移动、不能复制的对象，例如 `std::unique_ptr`。通过捕获初始化表达式配合 `std::move`，可以把对象移动到 lambda 的闭包对象中。",
+  "key_points": [
+    "默认值捕获要求被捕获对象可复制。",
+    "只能移动的对象可以使用 `[p = std::move(myPtr)]` 移动捕获。",
+    "移动捕获后，lambda 内部通过捕获变量 `p` 访问移动得到的对象，外部原对象通常处于已移 moved 状态。"
+  ],
+  "examples": [
+    "`auto myPtr = std::make_unique<double>(3.1415);`。",
+    "移动捕获：`auto myLambda = [p = std::move(myPtr)] { std::cout << *p; };`。",
+    "教材还给出同名写法：`auto myLambda = [myPtr = std::move(myPtr)] { std::cout << *myPtr; };`，但不推荐使用同名捕获。"
+  ],
+  "misconceptions": [
+    "误以为 `[myPtr]` 总能按值捕获 `std::unique_ptr`；默认按值捕获需要复制，而 `std::unique_ptr` 不能复制。",
+    "误以为移动捕获会复制对象；`std::move` 使对象的所有权或资源被移动到闭包对象中的捕获变量。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何在 lambda 中捕获一个不能复制、只能移动的 `std::unique_ptr`？",
+      "a": "使用捕获初始化和 `std::move`，例如 `[p = std::move(myPtr)]`。"
+    },
+    {
+      "q": "为什么不能直接使用默认按值捕获捕获 `std::unique_ptr`？",
+      "a": "因为默认按值捕获使用复制语义，而 `std::unique_ptr` 不能复制。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "lambda 捕获初始化",
+    "std::move",
+    "std::unique_ptr"
+  ],
+  "source_pages": [
+    622,
+    623
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1289_使用移动捕获把只能移动的对象带入_lambda",
+  "_chunk_pages": [
+    621,
+    624
+  ]
+}

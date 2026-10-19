@@ -1,0 +1,45 @@
+{
+  "title": "结构化绑定分解对象成员或 pair",
+  "definition": "C++ 可以使用结构化绑定把对象或类似 tuple 的对象中的多个元素，直接绑定到多个局部名称。声明形式可写为 auto [变量1, 变量2, 变量3] {对象};。原文示例中，point 的成员被绑定到 x、y、z，std::pair 的两个元素被绑定到 theString 和 theInt。",
+  "key_points": [
+    "结构化绑定的基本写法是 auto [x, y, z] { point };，绑定变量的数量应与可分解对象中的元素数量相匹配。",
+    "示例：pair myPair { \"hello\", 5 }; auto [theString, theInt] { myPair };，其中 theString 对应字符串元素，theInt 对应整数元素。",
+    "结构化绑定还可以与引用或 const 组合使用；原文列出了 auto&、const auto& 等形式，但未给出完整示例。"
+  ],
+  "examples": [
+    "point.m_x = 1.0; point.m_y = 2.0; point.m_z = 3.0;",
+    "auto [x, y, z] { point };",
+    "pair myPair { \"hello\", 5 }; auto [theString, theInt] { myPair };",
+    "cout << format(\"theString: {}\", theString) << endl;"
+  ],
+  "misconceptions": [
+    "结构化绑定不是把对象复制成一个数组，而是为对象的各个元素分别建立绑定名称。",
+    "结构化绑定中的名称顺序不是任意的，必须按照对象可分解元素的顺序对应。",
+    "结构化绑定不只适用于 pair，原文还展示了对 point 这类具有多个成员的对象进行绑定。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何使用结构化绑定分解一个包含两个元素的 pair？",
+      "a": "例如：pair myPair { \"hello\", 5 }; auto [theString, theInt] { myPair };。此后 theString 对应 \"hello\"，theInt 对应 5。"
+    },
+    {
+      "q": "原文中 point 的结构化绑定写法是什么？",
+      "a": "auto [x, y, z] { point };"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++变量声明与初始化"
+  ],
+  "source_pages": [
+    61,
+    64
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "083_结构化绑定分解对象成员或_pair",
+  "_chunk_pages": [
+    61,
+    64
+  ]
+}

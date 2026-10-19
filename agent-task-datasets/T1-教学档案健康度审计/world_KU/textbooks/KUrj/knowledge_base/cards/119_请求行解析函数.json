@@ -1,0 +1,53 @@
+{
+  "title": "请求行解析函数",
+  "definition": "在五天版本的 `request.c` 中，`parse_request_line` 只负责解析 HTTP 请求行，而不是完整的 HTTP 报文。它把请求行拆成方法、路径和版本三部分，写入 `HttpRequest`；只有当三部分都成功解析、方法为 `GET`、路径以 `/` 开头、版本为 `HTTP/1.0` 或 `HTTP/1.1` 时才算成功。",
+  "key_points": [
+    "先用 `memset(req, 0, sizeof(*req))` 清空结构体，避免残留数据。",
+    "`sscanf(buf, \"%15s %1023s %15s\", req->method, req->path, req->version)` 要求恰好匹配 3 项。",
+    "方法只接受 `GET`。",
+    "路径必须以 `/` 开头。",
+    "版本只接受 `HTTP/1.0` 和 `HTTP/1.1`。",
+    "解析失败通常返回 `-1`，方法不支持返回 `405`。"
+  ],
+  "examples": [
+    "`GET / HTTP/1.1`：成功。",
+    "`POST / HTTP/1.1`：返回 `405`。",
+    "`BADREQUEST`：返回 `-1`。",
+    "`path` 不以 `/` 开头：返回 `-1`。"
+  ],
+  "misconceptions": [
+    "以为这里要解析完整 HTTP 协议，其实这里只处理请求行。",
+    "以为除了 `GET` 之外的其他方法也应该放行。",
+    "以为只要格式像三段字符串就一定成功，实际上还要检查路径和版本。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`parse_request_line` 主要做什么？",
+      "a": "它只解析 HTTP 请求行，提取方法、路径和版本，并检查是否满足五天版本的基本合法性要求。"
+    },
+    {
+      "q": "`GET / HTTP/1.1` 在这个实现里会怎样？",
+      "a": "会解析成功，返回 `0`。"
+    },
+    {
+      "q": "`POST / HTTP/1.1` 为什么会失败？",
+      "a": "因为该版本只接受 `GET`，所以返回 `405`。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "HTTP请求行",
+    "C语言字符串处理"
+  ],
+  "source_pages": [
+    77,
+    78
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "119_请求行解析函数",
+  "_chunk_pages": [
+    77,
+    80
+  ]
+}

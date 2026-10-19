@@ -1,0 +1,37 @@
+{
+  "title": "BOM",
+  "definition": "BOM（Browser Object Model，浏览器对象模型）是JavaScript在浏览器环境中提供的一组用于与浏览器窗口进行交互的对象的统称，主要包括window、document、location、navigator和screen等。",
+  "key_points": [
+    "JavaScript运行在浏览器中，因此需要通过这些对象与浏览器窗口交互",
+    "BOM不是单个对象，而是一组对象的集合",
+    "常见对象包括window、document、location、navigator、screen等"
+  ],
+  "examples": [
+    "window、document、location、navigator、screen"
+  ],
+  "misconceptions": [
+    "BOM不是DOM",
+    "BOM不是一个具体的单一对象，而是对象集合的统称"
+  ],
+  "qa_pairs": [
+    {
+      "q": "什么是BOM？",
+      "a": "BOM是Browser Object Model，指JavaScript用于与浏览器窗口交互的一组对象。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "JavaScript基本语法"
+  ],
+  "source_pages": [
+    329,
+    332
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "466_bom",
+  "_chunk_pages": [
+    329,
+    332
+  ]
+}

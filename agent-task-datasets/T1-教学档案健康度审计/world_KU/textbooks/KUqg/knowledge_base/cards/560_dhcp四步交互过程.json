@@ -1,0 +1,50 @@
+{
+  "title": "DHCP四步交互过程",
+  "definition": "新主机获得DHCP配置通常经过四个步骤：DHCP发现（DHCPDISCOVER）、DHCP提供（DHCPOFFER）、DHCP请求（DHCPREQUEST）和DHCP确认（DHCPACK）。客户先广播发现报文寻找服务器，服务器广播提供报文，客户选择一个提供并广播请求报文，选中的服务器最后发送确认报文。收到DHCPACK后，客户即可在租用期内使用分配的IP地址。",
+  "key_points": [
+    "DHCPDISCOVER：客户在不知道自身IP地址和DHCP服务器地址时，使用源IP地址$0.0.0.0$、目的IP广播地址$255.255.255.255$，从UDP源端口$68$发送到目的端口$67$。",
+    "DHCPOFFER：DHCP服务器向客户广播提供报文，通常包含事务ID、推荐的IP地址、网络掩码和租用期；多个服务器可能同时提供地址。",
+    "DHCPREQUEST：客户从一个或多个提供中选择一个，并发送请求报文，回显所选择的配置参数。",
+    "DHCPACK：服务器确认客户请求的参数；客户收到该报文后，交互完成。",
+    "图示示例中，服务器$223.1.2.5$向客户提供地址$223.1.2.4$，租用期为$3600$秒。"
+  ],
+  "examples": [
+    "发现报文的关键字段可表示为：$$\\text{src IP}=0.0.0.0,\\quad \\text{dest IP}=255.255.255.255,\\quad \\text{src port}=68,\\quad \\text{dest port}=67$$",
+    "图示的提供和确认信息包括：$$\\text{yiaddr}=223.1.2.4,\\quad \\text{DHCP server ID}=223.1.2.5,\\quad \\text{Lifetime}=3600\\ \\text{秒}$$"
+  ],
+  "misconceptions": [
+    "DHCP四步不是客户直接单播给已知服务器的过程；在最初阶段客户不知道可用服务器，因此使用广播。",
+    "DHCPOFFER不是最终确认，客户还要发送DHCPREQUEST并收到DHCPACK后才能完成配置。",
+    "DHCP客户不一定只有一个可选服务器；多个DHCP服务器可能返回提供报文，客户需要选择其中一个。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "DHCP获得地址的四个步骤依次是什么？",
+      "a": "依次是DHCPDISCOVER、DHCPOFFER、DHCPREQUEST和DHCPACK，即发现、提供、请求和确认。"
+    },
+    {
+      "q": "新主机为什么在DHCPDISCOVER中使用源地址$0.0.0.0$和目的广播地址$255.255.255.255$？",
+      "a": "因为新主机尚未知道自己的IP地址，也不知道DHCP服务器的地址，所以使用$0.0.0.0$表示本主机，并通过$255.255.255.255$广播寻找服务器。"
+    },
+    {
+      "q": "客户收到DHCPACK后意味着什么？",
+      "a": "意味着DHCP交互完成，客户可以在租用期内使用服务器分配的IP地址和相关配置。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "DHCP的用途与适用场景",
+    "UDP端口与IP广播的基本概念"
+  ],
+  "source_pages": [
+    241,
+    242
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "560_dhcp四步交互过程",
+  "_chunk_pages": [
+    241,
+    244
+  ]
+}

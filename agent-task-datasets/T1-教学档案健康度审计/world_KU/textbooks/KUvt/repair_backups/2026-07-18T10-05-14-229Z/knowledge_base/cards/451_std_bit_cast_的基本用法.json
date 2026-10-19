@@ -1,0 +1,42 @@
+{
+  "title": "std::bit_cast() 的基本用法",
+  "definition": "C++20 提供的 `std::bit_cast()` 可用于把一个对象的位表示转换为另一种类型的对象。原文将它与 `reinterpret_cast()` 并列介绍，并给出了把浮点数转换为无符号整数的示例。",
+  "key_points": [
+    "示例形式为 `auto asUint { std::bit_cast<unsigned int>(asFloat) };`，表示把 `asFloat` 的位表示转换为 `unsigned int`。",
+    "原文还出现了 `Roundtrip success.` 输出，说明示例检查了转换后的往返结果。",
+    "`std::bit_cast()` 与 `reinterpret_cast()` 都涉及类型表示层面的转换，但原文片段没有完整说明二者的适用条件和差异。"
+  ],
+  "examples": [
+    "`auto asUint { std::bit_cast<unsigned int>(asFloat) };`",
+    "可将示例概括为：先把浮点对象 `asFloat` 转换成 `unsigned int`，再检查是否能够成功往返，并输出 `Roundtrip success.`。"
+  ],
+  "misconceptions": [
+    "不能仅根据该片段认为 `std::bit_cast()` 会执行数值意义上的常规类型转换；原文示例强调的是从 `asFloat` 到 `unsigned int` 的转换。",
+    "不能把 `std::bit_cast()` 与 `reinterpret_cast()` 简单视为完全相同的语法或语义。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "原文中把 `asFloat` 转换为 `unsigned int` 使用了什么函数？",
+      "a": "使用 `std::bit_cast<unsigned int>(asFloat)`。"
+    },
+    {
+      "q": "原文把 `std::bit_cast()` 与哪个转换运算符并列介绍？",
+      "a": "与 `reinterpret_cast()` 并列介绍。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++类型转换的基本概念"
+  ],
+  "source_pages": [
+    349,
+    352
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 std::bit_cast reinterpret_cast asFloat unsigned int Roundtrip success 教材示例",
+  "concept_id": "451_std_bit_cast_的基本用法",
+  "_chunk_pages": [
+    349,
+    352
+  ]
+}

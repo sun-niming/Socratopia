@@ -1,0 +1,42 @@
+{
+  "title": "nullptr作为空指针常量",
+  "definition": "原文在 C++ 类型和指针相关内容中列出了 nullptr。`nullptr` 是 C++11 引入的空指针常量，用于表示不指向对象或函数的指针值；相比整数 0 或 NULL，它具有专门的空指针类型语义。",
+  "key_points": [
+    "nullptr 用于初始化或赋值为空的指针。",
+    "nullptr 不是整数 0，也不是字符串。",
+    "它可以转换为各种指针类型的空指针值。"
+  ],
+  "examples": [
+    "$$\\texttt{int*\\ p\\ =\\ nullptr;}$$",
+    "$$\\texttt{if\\ (p\\ ==\\ nullptr)\\ \\{\\ \\ldots\\ \\}}$$"
+  ],
+  "misconceptions": [
+    "nullptr 不表示地址 0 这个可供程序访问的内存位置；它表示空指针值。",
+    "不能通过 nullptr 解引用；对空指针解引用会导致未定义行为。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "C++ 中如何表示一个空的 int 指针？",
+      "a": "可以写作 `int* p = nullptr;`。"
+    },
+    {
+      "q": "nullptr 是整数 0 吗？",
+      "a": "不是；nullptr 是专门的空指针常量。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++指针"
+  ],
+  "source_pages": [
+    133,
+    136
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "200_nullptr作为空指针常量",
+  "_chunk_pages": [
+    133,
+    136
+  ]
+}

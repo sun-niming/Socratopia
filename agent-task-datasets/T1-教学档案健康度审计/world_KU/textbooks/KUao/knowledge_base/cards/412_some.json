@@ -1,0 +1,38 @@
+{
+  "title": "some()",
+  "definition": "`some()` 用于判断数组中是否存在符合条件的元素；教材表格给出的返回值类型是布尔类型，并说明当回调返回 `true` 时循环结束。",
+  "key_points": [
+    "返回值是布尔类型",
+    "用于判断是否“有一个”元素符合条件",
+    "回调返回 `true` 时循环结束"
+  ],
+  "examples": [
+    "[1, 2, 3].some(x => x > 2) // true"
+  ],
+  "misconceptions": [
+    "以为 `some()` 返回符合条件的元素本身",
+    "以为必须所有元素都满足条件才返回 `true`",
+    "以为 `some()` 会返回数组"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`some()` 的返回类型是什么？",
+      "a": "布尔类型。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "Array对象与创建方式"
+  ],
+  "source_pages": [
+    307,
+    308
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "412_some",
+  "_chunk_pages": [
+    305,
+    308
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "title": "类成员声明顺序与分组",
+  "definition": "C++允许以任意顺序声明类成员和访问说明符，也允许重复使用访问说明符。成员函数可以写在数据成员之前或之后，public、protected和private也没有强制的先后顺序。为了提高可读性，通常应将访问说明符分组，并在每组中进一步组织成员函数和数据成员。",
+  "key_points": [
+    "成员函数可以在数据成员之前声明，也可以在之后声明。",
+    "访问说明符可以重复出现。",
+    "声明顺序通常不影响类的基本语义，但清晰的组织方式有助于阅读和维护。"
+  ],
+  "examples": [
+    "class SpreadsheetCell {\npublic:\n    void setValue(double value);\nprivate:\n    double m_value;\npublic:\n    double getValue() const;\n};"
+  ],
+  "misconceptions": [
+    "public必须位于private之前并不是C++语法要求。",
+    "访问说明符重复出现并不表示前一个访问说明符失效后所有成员都恢复默认权限；每个说明符会对其后成员重新设定权限。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "C++是否要求先声明成员函数，再声明数据成员？",
+      "a": "不要求，成员可以按任意顺序声明。"
+    },
+    {
+      "q": "为什么通常建议对访问说明符和成员进行分组？",
+      "a": "主要是为了提高代码清晰度和可读性。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "访问说明符"
+  ],
+  "source_pages": [
+    230,
+    231
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "490_类成员声明顺序与分组",
+  "_chunk_pages": [
+    229,
+    232
+  ]
+}

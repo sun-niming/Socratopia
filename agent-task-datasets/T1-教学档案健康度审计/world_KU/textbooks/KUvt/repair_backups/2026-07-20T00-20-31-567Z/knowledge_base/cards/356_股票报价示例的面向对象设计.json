@@ -1,0 +1,51 @@
+{
+  "title": "股票报价示例的面向对象设计",
+  "definition": "股票选择程序可以围绕两个主要对象建模：代表单个股价的 `StockQuote` 类，以及代表股价集合的 `StockQuoteCollection` 类。集合对象保存报价表并负责获取和排序报价；单个股价对象保存自身信息并负责分析，还可以提供买入和卖出等行为。",
+  "key_points": [
+    "`StockQuoteCollection` 由代表单个 `StockQuote` 的小组件组成。",
+    "股价集合的属性至少包括实际接收到的报价表，还可以包括最近检索的确切日期和时间。",
+    "股价集合的行为包括从服务器获取报价和提供有序报价表。",
+    "单个股价对象的属性包括名称、代码、当前价格等。",
+    "单个股价对象的行为包括分析，还可以包括买入和卖出股票。"
+  ],
+  "examples": [
+    "可以用如下方式概括设计：`StockQuoteCollection`：属性为 `m_stockQuotes`、`m_timestamp`；行为为 `retrieveQuotes()`、`sortQuotes()`。`StockQuote`：属性为 `m_companyName`、`m_tickerSymbol`、`m_currentPrice`；行为为 `analyze()`、`buyShares()`、`sellShares()`。",
+    "对象关系可表述为：一个 `StockQuoteCollection` 包含零个或多个 `StockQuote` 对象；每个 `StockQuote` 对象属于一个 `StockQuoteCollection`。"
+  ],
+  "misconceptions": [
+    "`StockQuoteCollection` 不是单个股价，而是股价对象的集合。",
+    "获取报价和排序报价属于股价集合的行为；分析、买入和卖出属于单个股价对象可以具有的行为。",
+    "集合的属性不只包括报价表，教材还提到可以记录最近检索的确切日期和时间。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么股票选择程序需要 `StockQuoteCollection` 类？",
+      "a": "因为程序需要表示一组股价的集合，该集合由代表单个股价的 `StockQuote` 对象组成。"
+    },
+    {
+      "q": "`StockQuoteCollection` 的主要属性和行为是什么？",
+      "a": "主要属性是实际接收到的报价表，还可以有最近检索时间；主要行为是从服务器获取报价并提供有序报价表。"
+    },
+    {
+      "q": "`StockQuote` 的主要属性和行为是什么？",
+      "a": "主要属性包括公司名称、股票代码和当前价格等；主要行为包括分析，还可以包括买入和卖出股票。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "类与对象",
+    "属性及其层次",
+    "对象行为与类方法"
+  ],
+  "source_pages": [
+    168,
+    168
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "356_股票报价示例的面向对象设计",
+  "_chunk_pages": [
+    165,
+    168
+  ]
+}

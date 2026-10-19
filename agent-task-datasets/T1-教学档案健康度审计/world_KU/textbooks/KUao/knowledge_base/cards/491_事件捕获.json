@@ -1,0 +1,37 @@
+{
+  "title": "事件捕获",
+  "definition": "事件从最不具体的节点 document 开始接收，然后逐级向下捕获，直到到达最深层、当前绑定事件的那个元素。",
+  "key_points": [
+    "从 document 先接收到事件。",
+    "然后再向下逐一捕获。",
+    "最终到达目标元素。"
+  ],
+  "examples": [
+    "点击内层元素时，事件可先经过 document 再向下传递到目标元素"
+  ],
+  "misconceptions": [
+    "捕获不是从目标元素向上走。",
+    "捕获方向与冒泡刚好相反。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "捕获型事件通常先从哪个节点开始？",
+      "a": "document。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "DOM事件流"
+  ],
+  "source_pages": [
+    361,
+    364
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "491_事件捕获",
+  "_chunk_pages": [
+    361,
+    364
+  ]
+}

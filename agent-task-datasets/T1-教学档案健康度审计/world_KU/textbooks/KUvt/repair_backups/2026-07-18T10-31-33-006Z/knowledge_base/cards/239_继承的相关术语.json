@@ -1,0 +1,49 @@
+{
+  "title": "继承的相关术语",
+  "definition": "原文第171页列出了 deriving、subclass、extending 和 inheriting 等术语，并展示了 Animal 与其他动物类型的关系。它们都用于描述从已有类型构造更具体类型的过程或结果：已有类型可称为基类，新类型可称为派生类或子类。原文未给出完整C++代码，因此这里只确认术语及其一般对应关系。",
+  "key_points": [
+    "base class 表示基类，即被其他类作为基础的类。",
+    "subclass 表示子类，通常指从另一个类派生出来的类。",
+    "deriving 和 inheriting 表示派生、继承这一过程。",
+    "extending 表示在已有类型基础上扩展出更具体的类型或能力。",
+    "原文动物示例中出现了 Animal、Monkey、Kangaroo 和 Penguin。"
+  ],
+  "examples": [
+    "可用类层次表示原文动物示例：\n$$Animal\\ \\rightarrow\\ \\{Monkey,\\ Kangaroo,\\ Penguin\\}$$",
+    "其中 Animal 可作为 base class，Monkey、Kangaroo、Penguin 可作为更具体的子类；由于原文图示不完整，箭头的精确含义需核实。"
+  ],
+  "misconceptions": [
+    "子类不是基类的同义词；子类是从基类派生出的更具体类型。",
+    "继承关系不等于对象之间的拥有关系；后者属于 has-a 风格。",
+    "仅凭一个类名出现在另一个类名旁边，不能确定它们一定存在继承关系。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "什么是base class？",
+      "a": "base class 是基类，即作为其他类基础的类。"
+    },
+    {
+      "q": "什么是subclass？",
+      "a": "subclass 是子类，通常指从另一个类派生出来的类。"
+    },
+    {
+      "q": "原文动物示例中出现了哪些类型名称？",
+      "a": "Animal、Monkey、Kangaroo 和 Penguin。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "is-a关系与has-a关系"
+  ],
+  "source_pages": [
+    171,
+    172
+  ],
+  "needs_verification": true,
+  "verify_query": "《C++20高级编程》第5版 第171-172页 deriving subclass extending inheriting Animal Monkey Kangaroo Penguin",
+  "concept_id": "239_继承的相关术语",
+  "_chunk_pages": [
+    169,
+    172
+  ]
+}

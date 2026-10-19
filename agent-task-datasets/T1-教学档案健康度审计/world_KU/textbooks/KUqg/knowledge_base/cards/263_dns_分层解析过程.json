@@ -1,0 +1,46 @@
+{
+  "title": "DNS 分层解析过程",
+  "definition": "当本地 DNS 服务器没有所需映射时，它可以沿 DNS 层次结构查询。典型过程是：请求主机把待解析主机名交给本地 DNS 服务器；本地服务器查询根 DNS 服务器；根服务器返回相应顶级域 DNS 服务器的信息；本地服务器再查询 TLD 服务器；TLD 服务器返回权威 DNS 服务器的信息；本地服务器最后向权威 DNS 服务器查询并取得目标主机的 IP 地址，再把结果返回请求主机。",
+  "key_points": [
+    "根 DNS 服务器根据顶级域后缀引导查询到相应的 TLD DNS 服务器。",
+    "TLD DNS 服务器根据域名引导查询到负责该域的权威 DNS 服务器。",
+    "权威 DNS 服务器返回目标主机名对应的 IP 地址。",
+    "如果 TLD 服务器只知道某个中间 DNS 服务器，则还需要继续查询中间服务器，直到找到真正负责目标主机名的权威服务器。"
+  ],
+  "examples": [
+    "解析 gaia.cs.umass.edu 时，cse.nyu.edu 先查询 dns.nyu.edu；dns.nyu.edu 查询根服务器并获得 edu TLD 服务器信息，再从 TLD 服务器获得 dns.umass.edu 的信息，最后查询权威服务器并取得 gaia.cs.umass.edu 的 IP 地址。",
+    "在不经过额外中间服务器的示例中，共发送 8 份 DNS 报文，即 4 份查询和 4 份回答。若还需经过中间 DNS 服务器 dns.umass.edu，再转向系级权威服务器 dns.cs.umass.edu，则共发送 10 份 DNS 报文。"
+  ],
+  "misconceptions": [
+    "误以为 TLD DNS 服务器一定直接知道目标主机的权威 DNS 服务器；它也可能只知道一个中间 DNS 服务器。",
+    "误以为一次域名解析只交换一份查询和一份回答；未命中缓存时，分层查询可能产生多轮报文交换。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "在典型的分层 DNS 解析中，本地 DNS 服务器依次可能联系哪些服务器？",
+      "a": "根 DNS 服务器、相应的 TLD DNS 服务器以及目标域的权威 DNS 服务器；必要时还会经过中间 DNS 服务器。"
+    },
+    {
+      "q": "原文的基本解析示例为什么产生 8 份 DNS 报文？",
+      "a": "因为解析过程共有 4 次查询，每次查询对应一份回答，所以共 4 份查询报文和 4 份回答报文。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "本地 DNS 服务器",
+    "权威 DNS 服务器",
+    "根 DNS 服务器",
+    "TLD DNS 服务器"
+  ],
+  "source_pages": [
+    105,
+    106
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "263_dns_分层解析过程",
+  "_chunk_pages": [
+    105,
+    108
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "title": "自定义 formatter 的 format 方法",
+  "definition": "自定义 formatter 的 `format()` 方法接收待格式化对象和格式上下文，根据 `parse()` 保存的格式状态生成输出。结果应写入 `context.out()` 所表示的输出位置，并返回指向输出末尾的迭代器。教材示例通过调用 `std::format_to()` 完成实际写入。",
+  "key_points": [
+    "第一个实参是待格式化的自定义类型对象。",
+    "格式化策略由 `parse()` 保存的状态决定。",
+    "`context.out()` 提供输出位置。",
+    "`format()` 必须返回输出结束位置的迭代器。",
+    "可以把具体格式化工作转发给 `std::format_to(context.out(), ...)`。"
+  ],
+  "examples": [
+    "只输出键时，可采用类似 `return format_to(context.out(), \"{}\", kv.getKey());` 的写法。",
+    "只输出值时，可采用类似 `return format_to(context.out(), \"{}\", kv.getValue());` 的写法。",
+    "同时输出键和值时，可采用类似 `return format_to(context.out(), \"{} - {}\", kv.getKey(), kv.getValue());` 的写法。"
+  ],
+  "misconceptions": [
+    "误以为 `format()` 应返回一个新字符串；作为 formatter 成员时，它应写入格式上下文并返回输出迭代器。",
+    "误以为 `format()` 还应重新解析说明符；说明符应由 `parse()` 预先解析并保存。",
+    "误以为必须手工拼接每个字符；可以转发给 `std::format_to()`。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "自定义 formatter 的 `format()` 应把结果写到哪里？",
+      "a": "写到 `context.out()` 所表示的输出位置。"
+    },
+    {
+      "q": "`format()` 应返回什么？",
+      "a": "返回一个指向格式化输出末尾的迭代器。"
+    },
+    {
+      "q": "教材示例如何复用标准格式化功能？",
+      "a": "将实际工作转发给 `std::format_to()`。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "通过 std::formatter 支持自定义类型",
+    "自定义 formatter 的 parse 方法",
+    "C++输出迭代器"
+  ],
+  "source_pages": [
+    120,
+    120
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "232_自定义_formatter_的_format_方法",
+  "_chunk_pages": [
+    117,
+    120
+  ]
+}

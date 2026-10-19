@@ -1,0 +1,41 @@
+{
+  "title": "命名空间别名",
+  "definition": "命名空间别名为已有命名空间指定一个较短或更方便的替代名称。语法为 `namespace 别名 = 完整命名空间名;`。之后可以使用别名限定该命名空间中的成员。",
+  "key_points": [
+    "命名空间别名不会创建新的独立命名空间。",
+    "别名和原完整名称指向同一个命名空间。",
+    "别名适合简化较长的嵌套命名空间名称。"
+  ],
+  "examples": [
+    "namespace MyFTP = MyLibraries::Networking::FTP;"
+  ],
+  "misconceptions": [
+    "误以为命名空间别名会复制原命名空间中的成员。",
+    "误以为别名定义使用 `using`；教材给出的命名空间别名语法使用 `namespace` 和 `=`。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何给 `MyLibraries::Networking::FTP` 定义别名 `MyFTP`？",
+      "a": "写成 `namespace MyFTP = MyLibraries::Networking::FTP;`。"
+    },
+    {
+      "q": "命名空间别名是否创建了一个新的独立命名空间？",
+      "a": "不是，它只是为已有命名空间提供另一个名称。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "嵌套命名空间的简写语法"
+  ],
+  "source_pages": [
+    37,
+    40
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "037_命名空间别名",
+  "_chunk_pages": [
+    37,
+    40
+  ]
+}

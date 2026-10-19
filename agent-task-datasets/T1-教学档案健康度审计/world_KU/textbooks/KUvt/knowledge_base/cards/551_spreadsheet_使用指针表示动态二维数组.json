@@ -1,0 +1,52 @@
+{
+  "title": "Spreadsheet 使用指针表示动态二维数组",
+  "definition": "原文中的 Spreadsheet 类不保存固定大小的 SpreadsheetCell 二维数组，而是使用 `SpreadsheetCell** m_cells` 表示动态二维结构。构造函数根据指定的宽度和高度，先动态分配指针数组，再为每个宽度位置分配一个 SpreadsheetCell 数组。其结构可抽象表示为：先分配 `m_cells` 的行（或列）指针，再对每个 `m_cells[i]` 分配长度为 `m_height` 的单元格数组。",
+  "key_points": [
+    "成员变量示意为：`SpreadsheetCell** m_cells{ nullptr };`。",
+    "构造函数接收 `size_t width` 和 `size_t height`，根据这两个参数决定存储空间。",
+    "动态二维数组的分配逻辑可写为：`m_cells = new SpreadsheetCell*[m_width];`，然后对每个 `i` 执行 `m_cells[i] = new SpreadsheetCell[m_height];`。",
+    "这种结构不是一次性分配一个规则的二维对象数组，而是先分配一级指针数组，再分别分配多个一维数组。",
+    "原文强调，C++ 不能像示意代码 `new SpreadsheetCell[m_width][m_height]` 那样直接用运行时的两个维度完成这种二维动态分配。"
+  ],
+  "examples": [
+    "二维结构的抽象布局：$$\\begin{bmatrix} \\text{m\\_cells[0]} & \\text{m\\_cells[1]} & \\cdots & \\text{m\\_cells[width-1]} \\end{bmatrix}$$其中每个 `m_cells[i]` 指向一个包含 `height` 个 `SpreadsheetCell` 的数组。",
+    "分配过程的示意代码：`m_cells = new SpreadsheetCell*[m_width];`；`for (size_t i = 0; i < m_width; ++i) { m_cells[i] = new SpreadsheetCell[m_height]; }`。"
+  ],
+  "misconceptions": [
+    "`SpreadsheetCell**` 本身不是一个已经分配好的二维数组，它只是指向指针的指针。",
+    "只分配 `new SpreadsheetCell*[m_width]` 还不够；每个 `m_cells[i]` 仍需单独分配单元格数组。",
+    "动态二维数组的宽度和高度含义取决于实现约定，不能仅凭 `**` 推断行列方向。",
+    "原文给出的片段只展示了分配思路，完整类还必须处理相应资源的释放、复制和赋值。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "Spreadsheet 为什么使用 `SpreadsheetCell**` 而不是固定二维数组？",
+      "a": "因为不同 Spreadsheet 对象的宽度和高度可能不同，需要在构造时按参数动态分配。"
+    },
+    {
+      "q": "动态二维数组的两步分配是什么？",
+      "a": "先分配指针数组：`m_cells = new SpreadsheetCell*[m_width];`；再为每个指针分配单元格数组：`m_cells[i] = new SpreadsheetCell[m_height];`。"
+    },
+    {
+      "q": "`SpreadsheetCell** m_cells` 声明后是否已经拥有二维数组存储空间？",
+      "a": "没有。它只是初始化为空指针，必须进一步执行动态分配。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "类中动态内存分配的原因与挑战",
+    "C++指针与动态内存",
+    "一维数组动态分配"
+  ],
+  "source_pages": [
+    260,
+    260
+  ],
+  "needs_verification": true,
+  "verify_query": "Marc Gregoire Professional C++ 5th edition SpreadsheetCell** m_cells new SpreadsheetCell*[m_width] dynamic two dimensional array",
+  "concept_id": "551_spreadsheet_使用指针表示动态二维数组",
+  "_chunk_pages": [
+    257,
+    260
+  ]
+}

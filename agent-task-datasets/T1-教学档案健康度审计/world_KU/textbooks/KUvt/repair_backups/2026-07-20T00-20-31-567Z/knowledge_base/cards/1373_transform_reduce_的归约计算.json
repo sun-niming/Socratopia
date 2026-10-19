@@ -1,0 +1,44 @@
+{
+  "title": "transform_reduce() 的归约计算",
+  "definition": "std::transform_reduce() 定义在 <numeric> 中，用于对一个元素范围或两个元素范围执行归约计算，并支持并行执行。在一个范围的版本中，它先对元素应用一元函数，再使用二元运算符组合结果；可理解为从初始值 Init 开始，依次累积变换后的元素。",
+  "key_points": [
+    "单范围版本处理一个元素范围，并使用一元函数和二元运算符进行归约。",
+    "双范围版本的行为类似于 std::inner_product()，对两个范围中对应元素进行组合后再归约。",
+    "默认情况下，transform_reduce() 使用 std::plus 作为归约运算符、std::multiplies 作为对应元素的组合运算符；这不同于 inner_product() 默认使用 operator+ 和 operator* 的方式。",
+    "该算法支持并行执行。"
+  ],
+  "examples": [
+    "单范围归约的概念形式为：$$\\mathrm{Init}\\ \\oplus\\ f(x_0)\\ \\oplus\\ f(x_1)\\ \\oplus\\cdots\\oplus\\ f(x_{n-1})$$",
+    "双范围版本可以概念化为：$$\\mathrm{Init}\\ \\oplus\\ g(x_0,y_0)\\ \\oplus\\ g(x_1,y_1)\\ \\oplus\\cdots$$"
+  ],
+  "misconceptions": [
+    "transform_reduce() 不只是简单求和；它还可以先通过一元函数变换元素，并且可以指定归约运算符。",
+    "双范围版本虽然行为类似于 inner_product()，但两者的默认运算符并不完全相同。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "transform_reduce() 可以处理哪些范围？",
+      "a": "它可以处理一个元素范围，也可以同时处理两个元素范围。"
+    },
+    {
+      "q": "transform_reduce() 默认使用哪些运算？",
+      "a": "默认使用 std::plus 进行归约，使用 std::multiplies 组合两个范围中的对应元素。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++ 标准库算法",
+    "二元运算符与一元函数"
+  ],
+  "source_pages": [
+    657,
+    657
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1373_transform_reduce_的归约计算",
+  "_chunk_pages": [
+    657,
+    660
+  ]
+}

@@ -1,0 +1,53 @@
+{
+  "title": "循环上界错误导致数组越界",
+  "definition": "当数组包含 count 个元素时，其有效下标是从 0 到 count-1。若循环条件写成 i <= count，循环会访问 values[count]，即数组末尾之后的元素，造成越界访问和未定义行为。正确的遍历条件应为 i < count。",
+  "key_points": [
+    "对于 count 个元素，有效下标范围为 $0\\le i<count$。",
+    "size(values) 对原文中的数组 values 返回元素个数 3。",
+    "循环 i <= count 会依次访问 values[0]、values[1]、values[2] 和越界的 values[3]。",
+    "越界读取会产生未定义行为，因此不能依赖某个固定错误结果。",
+    "符号调试器的单步执行可以显示循环最后一次迭代访问了无效下标。"
+  ],
+  "examples": [
+    "对于 int values[] { 1, 2, 3 };，正确求和应满足 $$\\text{total}=\\sum_{i=0}^{2}\\text{values}[i]=1+2+3=6.$$",
+    "错误循环：for (int i { 0 }; i <= count; ++i) { total += values[i]; }。正确循环条件应改为 i < count。"
+  ],
+  "misconceptions": [
+    "认为数组有 count 个元素，所以最后一个有效下标也是 count。",
+    "认为 Debug 版本出现的某个特定错误数值是 C++标准规定的结果。",
+    "认为越界读取只会多加一个 0，不会产生严重问题。",
+    "只根据最终 total 的值猜测错误，而不单步检查 i 和 values[i]。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么使用 i <= count 会导致错误？",
+      "a": "因为 count 是元素个数，最后一个有效下标是 count-1；当 i 等于 count 时会访问数组边界之外的 values[count]。"
+    },
+    {
+      "q": "遍历 count 个数组元素时，循环条件应如何写？",
+      "a": "应写成 i < count，使下标范围为 $0\\le i<count$。"
+    },
+    {
+      "q": "为什么越界后的结果不一定每次都相同？",
+      "a": "因为数组越界访问属于未定义行为，C++不规定其具体结果。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "数组下标",
+    "for 循环",
+    "未定义行为",
+    "符号调试器单步执行"
+  ],
+  "source_pages": [
+    923,
+    923
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1911_循环上界错误导致数组越界",
+  "_chunk_pages": [
+    921,
+    924
+  ]
+}

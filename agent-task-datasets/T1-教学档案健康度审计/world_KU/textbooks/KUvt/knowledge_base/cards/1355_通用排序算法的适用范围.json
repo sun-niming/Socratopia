@@ -1,0 +1,41 @@
+{
+  "title": "通用排序算法的适用范围",
+  "definition": "C++标准库的通用排序算法用于重新排列一个范围内元素的顺序，使其按照指定比较规则排列。它们最适合用于vector、deque、array和C风格数组等顺序容器或数组；有序关联容器已经维护元素顺序，无序关联容器没有排序概念，list和forward_list通常应使用自身提供的排序方法。",
+  "key_points": [
+    "sort()默认依据operator<将范围按非递减顺序排列，即从较小值到较大值。",
+    "可以向sort()传入比较器，例如greater<>，使元素按降序排列。",
+    "排序算法只能作用于能够按顺序访问并重新排列元素的范围。"
+  ],
+  "examples": [
+    "vector<int> values; populateContainer(values); sort(begin(values), end(values), greater<>());"
+  ],
+  "misconceptions": [
+    "不能认为所有标准容器都应该使用通用sort()排序。",
+    "sort()默认不是降序排列，而是按非递减顺序排列。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "哪些容器最适合使用通用排序算法？",
+      "a": "vector、deque、array和C风格数组等顺序容器或数组。"
+    },
+    {
+      "q": "如何让sort()按降序排列？",
+      "a": "传入greater<>比较器，例如sort(begin(values), end(values), greater<>());"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++标准库算法的迭代器范围"
+  ],
+  "source_pages": [
+    649,
+    649
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1355_通用排序算法的适用范围",
+  "_chunk_pages": [
+    649,
+    652
+  ]
+}

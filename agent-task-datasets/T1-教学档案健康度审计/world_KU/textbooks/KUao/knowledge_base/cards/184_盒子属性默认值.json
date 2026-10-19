@@ -1,0 +1,39 @@
+{
+  "title": "盒子属性默认值",
+  "definition": "大多数 HTML 元素的盒子属性默认值为 0，包括 margin、padding、border-width。也有少数元素的 margin 和 padding 默认值不为 0，例如 body、p、ul、li 等；另外，表单元素中大部分 input 元素的边框属性默认值也不为 0。",
+  "key_points": [
+    "大多数元素的 margin、padding、border-width 默认值是 0。",
+    "body、p、ul、li 等元素的 margin 和 padding 常常有非 0 默认值。",
+    "大部分 input 元素的 border 默认值不是 0。"
+  ],
+  "examples": [
+    "body、p、ul、li",
+    "input"
+  ],
+  "misconceptions": [
+    "误以为所有 HTML 元素的外边距、内边距、边框默认值都为 0。",
+    "误以为 input 的边框默认一定和普通块元素一样为 0。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "哪些盒子属性通常默认值为 0？",
+      "a": "大多数 HTML 元素的 margin、padding、border-width 默认值为 0。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "盒子模型",
+    "边框属性"
+  ],
+  "source_pages": [
+    125,
+    128
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "184_盒子属性默认值",
+  "_chunk_pages": [
+    125,
+    128
+  ]
+}

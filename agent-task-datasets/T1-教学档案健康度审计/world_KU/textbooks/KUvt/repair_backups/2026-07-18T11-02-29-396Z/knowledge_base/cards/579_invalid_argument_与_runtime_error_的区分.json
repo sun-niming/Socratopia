@@ -1,0 +1,47 @@
+{
+  "title": "invalid_argument 与 runtime_error 的区分",
+  "definition": "原文使用 `<stdexcept>` 中的 `invalid_argument` 和 `runtime_error` 表示不同类型的错误：文件名导致文件无法打开时抛出 `invalid_argument`，读取过程中发生错误时抛出 `runtime_error`。调用方可以分别捕获这两种异常并采取不同处理方式。",
+  "key_points": [
+    "文件无法打开的示例：`throw invalid_argument(\"Unable to open the file.\");`。",
+    "文件读取错误的示例：`throw runtime_error(\"Error reading the file.\");`。",
+    "`invalid_argument` 和 `runtime_error` 都可以通过 `e.what()` 获得文本错误信息。",
+    "示例对两种异常分别处理：捕获 `invalid_argument` 后返回 `1`，捕获 `runtime_error` 后返回 `2`。"
+  ],
+  "examples": [
+    "`try { myInts = readIntegerFile(fileName); } catch (const invalid_argument& e) { cerr << e.what() << endl; return 1; } catch (const runtime_error& e) { cerr << e.what() << endl; return 2; }`。"
+  ],
+  "misconceptions": [
+    "不能因为两者都属于标准异常就认为它们必须使用同一个 `catch`；原文展示了分别捕获。",
+    "文件打开失败和文件读取失败在示例中不是同一种异常：前者是 `invalid_argument`，后者是 `runtime_error`。",
+    "捕获异常时不需要丢弃错误信息；示例通过 `e.what()` 输出信息。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "原文用哪种异常表示文件名导致的文件打开失败？",
+      "a": "使用 `invalid_argument`，例如 `throw invalid_argument(\"Unable to open the file.\");`。"
+    },
+    {
+      "q": "原文用哪种异常表示读取文件时发生错误？",
+      "a": "使用 `runtime_error`，例如 `throw runtime_error(\"Error reading the file.\");`。"
+    },
+    {
+      "q": "分别捕获两种异常时，示例返回值是什么？",
+      "a": "捕获 `invalid_argument` 后返回 `1`，捕获 `runtime_error` 后返回 `2`。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "使用标准运行时异常表示文件错误"
+  ],
+  "source_pages": [
+    443,
+    444
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "579_invalid_argument_与_runtime_error_的区分",
+  "_chunk_pages": [
+    441,
+    444
+  ]
+}

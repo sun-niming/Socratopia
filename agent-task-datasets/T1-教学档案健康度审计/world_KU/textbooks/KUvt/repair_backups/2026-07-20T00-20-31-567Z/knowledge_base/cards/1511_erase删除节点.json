@@ -1,0 +1,44 @@
+{
+  "title": "erase删除节点",
+  "definition": "erase(node_value) 先通过 findNode 查找给定值的节点。若节点不存在，返回 false 且不执行删除；若节点存在，则先调用 remove_all_links_to 清理并更新所有邻接索引，再从 m_nodes 中擦除该节点，最后返回 true。",
+  "key_points": [
+    "删除节点分为两步：清理其他节点邻接表中的引用并更新索引；从节点 vector 中删除实际节点。",
+    "节点不存在时返回 false。",
+    "节点删除成功时返回 true。",
+    "必须先更新邻接索引，再从 m_nodes 擦除节点。"
+  ],
+  "examples": [
+    "核心逻辑：\n```cpp\nauto iter{findNode(node_value)};\nif (iter == std::end(m_nodes)) {\n    return false;\n}\nremove_all_links_to(iter);\nm_nodes.erase(iter);\nreturn true;\n```"
+  ],
+  "misconceptions": [
+    "erase 删除节点时不会保留指向该节点的边；这些引用会先从邻接表中移除。",
+    "不能只调用 m_nodes.erase(iter)，否则其他节点中的索引可能失效。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "erase 找不到指定节点时做什么？",
+      "a": "返回 false，不修改图。"
+    },
+    {
+      "q": "erase 删除节点的正确顺序是什么？",
+      "a": "先调用 remove_all_links_to 清理引用并更新索引，再从 m_nodes 中擦除节点，成功后返回 true。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "findNode辅助方法",
+    "vector::erase",
+    "有向图邻接索引"
+  ],
+  "source_pages": [
+    727,
+    728
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1511_erase删除节点",
+  "_chunk_pages": [
+    725,
+    728
+  ]
+}

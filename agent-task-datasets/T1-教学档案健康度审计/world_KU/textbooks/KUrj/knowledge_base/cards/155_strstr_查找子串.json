@@ -1,0 +1,38 @@
+{
+  "title": "strstr 查找子串",
+  "definition": "strstr(const char *haystack, const char *needle) 用来在字符串 haystack 中查找子串 needle。找到时返回指向首次匹配处的指针，找不到时返回 NULL。",
+  "key_points": [
+    "在项目中可用于检查 URL 是否包含 \"..\"。",
+    "如果输入经过 URL 编码，先解码再查找，否则可能漏检。"
+  ],
+  "examples": [
+    "char *decoded = url_decode(url); if (strstr(decoded, \"..\") != NULL) { /* 拒绝请求 */ }"
+  ],
+  "misconceptions": [
+    "只检查原始 URL，不检查 URL 解码后的结果。",
+    "以为 strstr 会返回匹配长度。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么检查 \"..\" 前要先对 URL 解码？",
+      "a": "因为攻击者可能把 \"..\" 做 URL 编码，直接对原始 URL 查找会漏掉。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "字符串",
+    "指针",
+    "URL 编码"
+  ],
+  "source_pages": [
+    101,
+    102
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "155_strstr_查找子串",
+  "_chunk_pages": [
+    101,
+    104
+  ]
+}

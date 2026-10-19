@@ -1,0 +1,36 @@
+{
+  "title": "计数器的描述性命名",
+  "definition": "用于循环计数的变量应尽量使用能够表达用途的名称，而不应机械地使用 i、j 等缺乏语义的单字母名称。对于二维数据或嵌套循环，使用 outerLoopIndex、innerLoopIndex，或 row、column 等名称，可以减少把外层索引和内层索引混淆的错误。",
+  "key_points": [
+    "i 和 j 是传统的循环计数器名称，但在嵌套循环中容易误用。",
+    "描述性名称能够明确索引的层次或方向，例如 outerLoopIndex、innerLoopIndex、row、column。",
+    "命名的目标是传递用途信息，而不是单纯追求简短。"
+  ],
+  "examples": [
+    "使用 outerLoopIndex 和 innerLoopIndex 表示嵌套循环的外层、内层索引。",
+    "使用 row 和 column 表示二维数据的行索引和列索引。"
+  ],
+  "misconceptions": [
+    "并非所有循环计数器都必须命名为 i 或 j。",
+    "名称越短不一定越好；在嵌套循环中，描述性名称通常更安全。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么二维数据或嵌套循环中不推荐只使用 i 和 j？",
+      "a": "因为 i 和 j 缺少语义，容易把外层索引、内层索引或行列索引混淆；使用 outerLoopIndex、innerLoopIndex、row、column 等名称更清晰。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [],
+  "source_pages": [
+    133,
+    133
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "263_计数器的描述性命名",
+  "_chunk_pages": [
+    133,
+    136
+  ]
+}

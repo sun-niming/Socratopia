@@ -1,0 +1,42 @@
+{
+  "title": "显式默认的默认构造函数",
+  "definition": "C++支持使用 `= default` 显式要求编译器生成默认构造函数。这样，类即使已经声明了其他定制构造函数，也可以保留一个由编译器生成的标准默认构造函数，而不必手动编写空的构造函数体。",
+  "key_points": [
+    "典型声明形式是 `ClassName() = default;`。",
+    "`= default` 可以直接写在类定义中，也可以写在类外的实现位置。",
+    "显式默认的构造函数仍然由编译器按默认构造规则生成。"
+  ],
+  "examples": [
+    "```cpp\nclass SpreadsheetCell {\npublic:\n    SpreadsheetCell(double initialValue);\n    SpreadsheetCell() = default;\n    SpreadsheetCell(std::string_view initialValue);\n};\n```",
+    "类中同时存在 `SpreadsheetCell(double)`、`SpreadsheetCell(std::string_view)` 和 `SpreadsheetCell() = default` 时，仍然可以使用 `SpreadsheetCell cell{};` 创建默认构造的对象。"
+  ],
+  "misconceptions": [
+    "误以为 `= default` 会调用某个用户自己编写的空函数体；它表示要求编译器生成默认实现。",
+    "误以为只能在类定义中使用 `= default`，不能放在实现文件中。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么需要显式默认的默认构造函数？",
+      "a": "当类已经声明了带参数的构造函数，但仍希望拥有编译器生成的默认构造函数时，可以使用 `ClassName() = default;`，避免手写空的默认构造函数。"
+    },
+    {
+      "q": "`SpreadsheetCell() = default;` 的作用是什么？",
+      "a": "要求编译器为 `SpreadsheetCell` 生成标准的默认构造函数。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "默认构造函数的含义"
+  ],
+  "source_pages": [
+    241,
+    241
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "511_显式默认的默认构造函数",
+  "_chunk_pages": [
+    241,
+    244
+  ]
+}

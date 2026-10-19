@@ -1,0 +1,39 @@
+{
+  "title": "transform属性",
+  "definition": "CSS 的 transform 属性用于对元素进行 2D 或 3D 变换；教材中说明它的取值为各种变换方法。它常见的三维能力包括旋转、移动和缩放。",
+  "key_points": [
+    "transform 属性可以用于 2D 或 3D 变换。",
+    "它的取值是具体的变换方法。",
+    "常见的三维效果包括旋转、移动和缩放。"
+  ],
+  "examples": [
+    "transform: rotateY(45deg);",
+    "transform: translate3d(10px, 20px, 30px);",
+    "transform: scale3d(1.2, 1.2, 1.2);"
+  ],
+  "misconceptions": [
+    "把 transform 只理解为 2D 变换。",
+    "认为 transform 只能旋转，不能移动或缩放。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "transform 属性主要用于什么？",
+      "a": "用于对元素进行 2D 或 3D 变换，取值为变换方法。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "CSS属性基础"
+  ],
+  "source_pages": [
+    201,
+    202
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "299_transform属性",
+  "_chunk_pages": [
+    201,
+    204
+  ]
+}

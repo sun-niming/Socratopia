@@ -1,0 +1,47 @@
+{
+  "title": "使用 fmt 库替代尚不支持的 std::format",
+  "definition": "本书的许多示例使用 C++20 的 `std::format`。在原文所述时期，由于还没有编译器支持 `std::format`，可以使用免费的 fmt 库作为替代。基本做法是下载并解压 fmt 库，将其必要的头文件和源文件加入项目，创建一个名为 `format` 的无扩展名文件，在其中启用头文件单独模式并转出 `fmt` 命名空间中的格式化相关名称，然后把项目根目录加入附加 include 目录。",
+  "key_points": [
+    "替代库是 fmt 库，原文用于替代 `std::format`。",
+    "需要将 fmt 的相关目录和文件复制或添加到项目中。",
+    "原文要求将 `format.h`、`include/fmt` 和 `src` 等内容放入项目相应目录，并将 `fmt/core.h`、`fmt/format-inl.h` 和 `src/format.cc` 添加到项目中。",
+    "需要创建名为 `format` 的无扩展名文件，并写入类似以下内容：`#define FMT_HEADER_ONLY`、`#include \"fmt/format.h\"`、`using fmt::format;`、`using fmt::format_error;`、`using fmt::formatter;`。",
+    "需要把包含该 `format` 文件的项目根目录加入 Additional Include Directories。",
+    "当编译器开始支持标准库的 `std::format` 后，应取消这些替代配置。"
+  ],
+  "examples": [
+    "替代接口文件 `format` 的核心内容可写为：\n```text\n#define FMT_HEADER_ONLY\n#include \"fmt/format.h\"\nusing fmt::format;\nusing fmt::format_error;\nusing fmt::formatter;\n```",
+    "在 Visual C++ 中，项目根目录的设置路径为：Properties → Configuration Properties → C/C++ → General → Additional Include Directories。"
+  ],
+  "misconceptions": [
+    "fmt 库是原文给出的 `std::format` 临时替代方案，不是 `std::format` 本身。",
+    "编译器支持 `std::format` 后，仍保留 fmt 的替代配置可能造成不必要的冲突或混淆。",
+    "仅下载 fmt 库而不把相关文件加入项目和 include 路径，不能保证示例能够编译。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "编译器不支持 `std::format` 时，原文建议使用什么替代？",
+      "a": "使用免费的 fmt 库作为替代。"
+    },
+    {
+      "q": "开始支持 `std::format` 后应如何处理 fmt 替代配置？",
+      "a": "应取消此前为 fmt 所做的复制文件、添加源文件、创建 `format` 文件和设置附加 include 目录等操作。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++ 头文件和源文件的基本组织方式",
+    "项目附加 include 目录的概念"
+  ],
+  "source_pages": [
+    19,
+    19
+  ],
+  "needs_verification": true,
+  "verify_query": "fmt library replacing std::format FMT_HEADER_ONLY format-inl.h format.cc Visual C++ project setup",
+  "concept_id": "032_使用_fmt_库替代尚不支持的_std_format",
+  "_chunk_pages": [
+    17,
+    20
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "title": "派生类声明与 override",
+  "definition": "C++派生类可以在已有基类的基础上扩展功能。使用 class Derived : public Base 的形式表示公有继承。派生类可以定义自己的构造函数、增加新成员函数，并使用 override 明确表示某个成员函数重写基类的虚函数。需要调用基类版本时，可以使用 Base::function()。",
+  "key_points": [
+    "公有继承表示派生类是基类的一种更具体的类型，并继承基类的公有接口。",
+    "派生类构造函数可以在初始化列表中调用基类构造函数，例如 Derived() : Base() {}。",
+    "override 用于标记重写基类虚函数；如果函数签名不匹配，编译器应报告错误。",
+    "派生类可以增加基类没有的新成员函数。"
+  ],
+  "examples": [
+    "典型结构：\n```text\nclass DerivedSimple : public Simple {\npublic:\n    DerivedSimple() : Simple() {}\n    void publicMethod() override {\n        Simple::publicMethod();\n    }\n    void anotherMethod();\n};\n```"
+  ],
+  "misconceptions": [
+    "override 不是定义新虚函数的关键字，而是用于检查和标记对基类虚函数的重写。",
+    "派生类并不会自动获得基类的 private 成员的直接访问权限。",
+    "调用 Simple::publicMethod() 是显式调用基类版本，不是递归调用派生类重写版本。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何声明一个公有继承自 Simple 的 DerivedSimple？",
+      "a": "使用 class DerivedSimple : public Simple { ... }。"
+    },
+    {
+      "q": "派生类重写基类虚函数时使用 override 有什么好处？",
+      "a": "它让代码明确表达重写意图，并使编译器检查函数签名是否确实匹配基类虚函数。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "继承与多态",
+    "构造函数初始化列表"
+  ],
+  "source_pages": [
+    926,
+    927
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 派生类 public inheritance override 基类构造函数 教材《C++20高级编程》第5版 第926-927页",
+  "concept_id": "1918_派生类声明与_override",
+  "_chunk_pages": [
+    925,
+    928
+  ]
+}

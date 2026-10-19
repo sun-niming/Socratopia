@@ -1,0 +1,45 @@
+{
+  "title": "HTTP 响应最小格式",
+  "definition": "一个最小的 HTTP 响应由状态行、若干 Header 和 Body 组成。状态行必须在第一行；Header 和 Body 之间必须有一个空行；HTTP 的换行建议使用 `\\r\\n`。响应中通常要写明 `Content-Length`，表示响应体字节数；`Connection: close` 表示本次响应发送完后关闭连接。",
+  "key_points": [
+    "状态行必须在第一行。",
+    "Header 和 Body 之间必须有空行。",
+    "HTTP 换行建议使用 `\\r\\n`。",
+    "`Content-Length` 是响应体字节数。",
+    "`Connection: close` 表示发送完后关闭连接。"
+  ],
+  "examples": [
+    "HTTP/1.1 200 OK\r\nContent-Type: text/html; charset=utf-8\r\nContent-Length: 123\r\nConnection: close\r\n\r\n<html>...</html>"
+  ],
+  "misconceptions": [
+    "Header 和 Body 可以直接连在一起，不需要空行。",
+    "HTTP 换行只要 `\\n` 就一定是标准写法。",
+    "Content-Length 统计的是字符数。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "HTTP 响应中 Header 和 Body 之间需要什么？",
+      "a": "需要一个空行。"
+    },
+    {
+      "q": "Connection: close 的作用是什么？",
+      "a": "告诉客户端本次响应结束后关闭连接。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "HTTP 请求最小格式",
+    "Content-Length 的含义"
+  ],
+  "source_pages": [
+    18,
+    19
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "013_http_响应最小格式",
+  "_chunk_pages": [
+    17,
+    20
+  ]
+}

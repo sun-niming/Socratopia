@@ -1,0 +1,42 @@
+{
+  "title": "variant 对数组、引用和指针的支持限制",
+  "definition": "std::variant 不能直接存储数组，也不能直接存储引用。若需要在 variant 中间接表示这些对象，可以存储指针、std::reference_wrapper<const T> 或 std::reference_wrapper<T> 实例。",
+  "key_points": [
+    "数组不能作为 variant 的直接存储类型。",
+    "引用不能作为 variant 的直接存储类型。",
+    "指针和 reference_wrapper 可以作为候选类型，用于间接引用对象。"
+  ],
+  "examples": [
+    "variant<int*, string> v; 可让 variant 保存指向 int 的指针。",
+    "variant<reference_wrapper<int>, string> v; 可让 variant 保存对 int 对象的引用包装器。"
+  ],
+  "misconceptions": [
+    "variant 可以像普通模板参数一样直接写入任意数组或引用类型；原文明确指出数组和引用不能直接存储。",
+    "存储 reference_wrapper 不等于 variant 直接存储 C++ 引用；它存储的是引用包装对象。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "std::variant 能否直接存储引用？",
+      "a": "不能，但可以存储 std::reference_wrapper<T> 或 std::reference_wrapper<const T>。"
+    },
+    {
+      "q": "std::variant 能否直接存储数组？",
+      "a": "不能；可以考虑存储指针等间接表示。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "std::variant 的含义与类型集合"
+  ],
+  "source_pages": [
+    708,
+    708
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1470_variant_对数组_引用和指针的支持限制",
+  "_chunk_pages": [
+    705,
+    708
+  ]
+}

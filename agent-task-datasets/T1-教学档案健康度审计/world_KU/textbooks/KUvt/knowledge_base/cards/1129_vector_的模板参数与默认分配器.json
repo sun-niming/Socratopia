@@ -1,0 +1,36 @@
+{
+  "title": "vector 的模板参数与默认分配器",
+  "definition": "`std::vector` 是定义在 `<vector>` 头文件中的类模板，具有两个类型参数：第一个参数是元素类型，第二个参数是分配器类型。分配器类型决定 vector 如何分配内存，第二个模板参数具有默认值，通常应用程序直接使用默认分配器即可。",
+  "key_points": [
+    "vector 的基本形式可以表示为 `std::vector<ElementType, AllocatorType>`。",
+    "元素类型决定 vector 中保存的对象类型。",
+    "分配器参数允许客户使用自定义内存分配器，但通常使用默认分配器。"
+  ],
+  "examples": [
+    "`vector<int>` 表示保存 `int` 元素并使用默认分配器的 vector。",
+    "`vector<string>` 表示保存 `string` 对象的 vector。"
+  ],
+  "misconceptions": [
+    "vector 的第二个模板参数不是另一个元素类型，而是分配器类型。",
+    "使用 vector 时通常不需要显式指定分配器类型。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "vector 类模板的两个类型参数分别是什么？",
+      "a": "第一个是元素类型，第二个是分配器类型；分配器参数具有默认值。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [],
+  "source_pages": [
+    549,
+    549
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1129_vector_的模板参数与默认分配器",
+  "_chunk_pages": [
+    549,
+    552
+  ]
+}

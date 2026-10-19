@@ -1,0 +1,44 @@
+{
+  "title": "字符串字面量应通过只读字符指针访问",
+  "definition": "字符串字面量如 `\"hello\"` 是由编译器提供的字符序列。原文使用 `const char*` 指向字符串字面量，并强调通过该指针修改字符串字面量中的字符是错误的，因为字符串字面量所在存储区域可能是只读的。",
+  "key_points": [
+    "指向字符串字面量的指针应使用 `const char*`，例如 `const char* ptr { \"hello\" };`。",
+    "通过 `const char*` 修改字符本身会被编译器拒绝。",
+    "即使绕过类型限制尝试修改字符串字面量，也是不允许的行为；原文说明其会尝试写入只读内存。",
+    "原文还提到相同字符串字面量可能进行 literal pooling，即共享存储。"
+  ],
+  "examples": [
+    "```cpp\nconst char* ptr { \"hello\" };\nptr[1] = 'a'; // Error：试图写入只读内存\n```",
+    "字符串字面量示例：`\"hello\"`。"
+  ],
+  "misconceptions": [
+    "把字符串字面量赋给 `char*` 并不意味着可以安全修改它。",
+    "`const char*` 中的 `const` 约束的是指针所指向的字符，不能通过该指针修改字符内容。",
+    "字符串字面量不是用于存放可变字符数组的普通变量。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么应使用 `const char*` 指向字符串字面量？",
+      "a": "因为字符串字面量不应被修改，`const char*` 可以禁止通过该指针修改其字符内容。"
+    },
+    {
+      "q": "`const char* ptr { \"hello\" }; ptr[1] = 'a';` 有什么问题？",
+      "a": "该语句试图修改字符串字面量，属于错误操作；原文说明这会尝试写入只读内存。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C 风格字符串以 NUL 字符结尾"
+  ],
+  "source_pages": [
+    101,
+    104
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 字符串字面量 const char* 修改字符串字面量 literal pooling 标准行为",
+  "concept_id": "148_字符串字面量应通过只读字符指针访问",
+  "_chunk_pages": [
+    101,
+    104
+  ]
+}

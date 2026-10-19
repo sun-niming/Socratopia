@@ -1,0 +1,43 @@
+{
+  "title": "ServerConfig 保存 root 与 root_real",
+  "definition": "ServerConfig 同时保存用户配置的站点根目录 `root` 和启动时通过 `realpath` 得到的真实绝对路径 `root_real`。这样做是为了进行路径安全检查：网站根目录只在启动时转换一次，避免每次请求都重复计算，也减少出错机会。",
+  "key_points": [
+    "`root` 保存配置中的原始根目录。",
+    "`root_real` 保存启动时计算出的真实绝对路径。",
+    "路径安全检查需要依赖 `root_real`。",
+    "启动时处理一次 `realpath` 比每次请求重复处理更稳妥。"
+  ],
+  "examples": [
+    "启动时执行：`realpath(config.root, config.root_real)`。",
+    "配置中同时保存：`root` 与 `root_real`。"
+  ],
+  "misconceptions": [
+    "`root_real` 是多余字段。",
+    "路径转换可以放到每次请求处理时再做。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么要同时保存 root 和 root_real？",
+      "a": "因为路径安全检查需要真实绝对路径；同时启动时算好 root_real，可以避免重复 realpath 并减少错误。"
+    },
+    {
+      "q": "root_real 什么时候确定？",
+      "a": "在程序启动时通过 realpath 确定。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "头文件只放声明"
+  ],
+  "source_pages": [
+    69,
+    72
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "108_serverconfig_保存_root_与_root_real",
+  "_chunk_pages": [
+    69,
+    72
+  ]
+}

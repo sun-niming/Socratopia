@@ -1,0 +1,51 @@
+{
+  "title": "static 成员函数",
+  "definition": "static 成员函数属于类本身，而不是某个特定对象。它没有 this 指针，因此不能直接访问特定对象的非 static 数据成员；它可以访问类的 private 和 protected static 成员。static 成员函数的访问控制仍然适用。",
+  "key_points": [
+    "static 成员函数不属于某个对象，因此没有 this 指针。",
+    "static 成员函数可以直接访问类的 static 成员。",
+    "static 成员函数不能直接访问调用对象的非 static 数据成员。",
+    "如果 static 成员函数获得了其他对象的指针或引用，则可以通过该对象访问其 private 和 protected 非 static 数据成员。",
+    "在类外调用 public static 成员函数时，应使用类名和作用域解析运算符。"
+  ],
+  "examples": [
+    "SpreadsheetCell 中的 doubleToString(double) 和 stringToDouble(...) 不依赖特定对象的信息，因此可以声明为 static。",
+    "类外调用示例：Foo::bar();"
+  ],
+  "misconceptions": [
+    "static 成员函数不是某个对象的普通成员函数，因此不能使用 this 指针。",
+    "static 成员函数并非只能访问 public 成员；在类的访问权限允许的情况下，它也能访问 private 和 protected 的 static 成员。",
+    "static 成员函数不能直接读取当前对象的非 static 成员。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "static 成员函数是否具有 this 指针？",
+      "a": "没有，因为 static 成员函数不属于任何特定对象。"
+    },
+    {
+      "q": "如何在类外调用 Foo 类的 public static 成员函数 bar？",
+      "a": "使用 Foo::bar();"
+    },
+    {
+      "q": "static 成员函数能否直接访问对象的非 static 数据成员？",
+      "a": "不能，因为它没有代表特定对象的 this 指针。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "类成员函数",
+    "static 数据成员",
+    "访问控制"
+  ],
+  "source_pages": [
+    277,
+    278
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "582_static_成员函数",
+  "_chunk_pages": [
+    277,
+    280
+  ]
+}

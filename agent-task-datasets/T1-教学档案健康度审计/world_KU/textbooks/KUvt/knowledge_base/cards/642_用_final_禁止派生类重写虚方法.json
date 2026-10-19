@@ -1,0 +1,39 @@
+{
+  "title": "用 final 禁止派生类重写虚方法",
+  "definition": "C++允许把虚方法标记为 final。某个派生类中的方法一旦声明为 final，任何进一步派生类都不能再重写该方法；如果尝试重写，会导致编译错误。",
+  "key_points": [
+    "final可以用于方法，作用是禁止后续派生类重写该方法。",
+    "final方法通常是在派生类中对基类虚方法进行重写时使用的。",
+    "如果更深层的派生类再次声明同名重写方法，程序无法通过编译。"
+  ],
+  "examples": [
+    "class Derived : public Base { void someMethod() override final; };",
+    "class DerivedDerived : public Derived { void someMethod() override; }; // 编译错误"
+  ],
+  "misconceptions": [
+    "final用于方法时，并不表示整个类不能被继承；它只禁止该方法继续被重写。",
+    "final不是运行时检查，而是在编译阶段阻止非法重写。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "把虚方法声明为 final 有什么作用？",
+      "a": "禁止任何进一步的派生类重写该方法；如果进一步派生类尝试重写，会产生编译错误。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++继承",
+    "C++虚函数和方法重写"
+  ],
+  "source_pages": [
+    313,
+    313
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "642_用_final_禁止派生类重写虚方法",
+  "_chunk_pages": [
+    313,
+    316
+  ]
+}

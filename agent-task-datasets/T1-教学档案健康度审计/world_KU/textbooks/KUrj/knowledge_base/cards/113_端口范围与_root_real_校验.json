@@ -1,0 +1,42 @@
+{
+  "title": "端口范围与 root_real 校验",
+  "definition": "`load_config` 在完成参数解析后，还要检查端口是否合法：必须满足 `1 <= port <= 65535`。随后调用 `realpath(config.root, config.root_real)` 计算真实根目录；如果失败，就输出错误并返回 `-1`。",
+  "key_points": [
+    "端口必须在 `1` 到 `65535` 之间。",
+    "`realpath` 成功后才能得到 `root_real`。",
+    "`realpath` 失败时应返回错误，不应继续启动。",
+    "`perror(\"realpath root\")` 用于输出失败原因。"
+  ],
+  "examples": [
+    "```c\nif (config->port <= 0 || config->port > 65535) {\n    return -1;\n}\nif (realpath(config->root, config->root_real) == NULL) {\n    perror(\"realpath root\");\n    return -1;\n}\n```"
+  ],
+  "misconceptions": [
+    "端口只要是整数就可以。",
+    "`realpath` 失败后还可以继续启动服务器。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "端口校验的合法范围是什么？",
+      "a": "`1` 到 `65535`。"
+    },
+    {
+      "q": "为什么要在启动时计算 root_real？",
+      "a": "因为它是路径安全检查的基础，且启动时计算一次即可。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "load_config 负责默认值与命令行覆盖"
+  ],
+  "source_pages": [
+    69,
+    72
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "113_端口范围与_root_real_校验",
+  "_chunk_pages": [
+    69,
+    72
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "title": "范围 for 循环",
+  "definition": "范围 for 循环用于依次访问一个范围或容器中的元素，不需要显式使用下标。原文给出的形式为 $$\\text{for (范围声明 : 范围初始值) \\{ 循环体 \\}}$$，示例是 for (int i : arr) { cout << i << endl; }。",
+  "key_points": [
+    "范围 for 循环会依次取得范围中的元素，并将当前元素绑定到循环变量。",
+    "原文示例使用 array arr { 1, 2, 3, 4 };，随后输出其中的元素。",
+    "原文指出范围 for 循环可用于 std::array、vector 等容器。",
+    "原文还展示了带初始化器的形式：for (array arr { 1, 2, 3, 4 }; int i : arr) { ... }；该语法的具体标准适用性需核实。"
+  ],
+  "examples": [
+    "array arr { 1, 2, 3, 4 }; for (int i : arr) { cout << i << endl; }",
+    "原文给出的扩展形式：for (array arr { 1, 2, 3, 4 }; int i : arr) { cout << i << endl; }"
+  ],
+  "misconceptions": [
+    "范围 for 循环不是按照整数下标遍历；循环变量直接表示当前元素。",
+    "范围 for 循环的冒号两侧分别是元素声明和被遍历的范围。",
+    "若循环变量按值声明，修改该变量不等同于修改容器中的原元素；原文未展开引用形式。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何使用范围 for 循环输出 arr 中的元素？",
+      "a": "array arr { 1, 2, 3, 4 }; for (int i : arr) { cout << i << endl; }。"
+    },
+    {
+      "q": "范围 for 循环的基本语法是什么？",
+      "a": "for (范围声明 : 范围初始值) { 循环体 }。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "传统 for 循环",
+    "C++容器基础"
+  ],
+  "source_pages": [
+    61,
+    64
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 range-based for loop init-statement syntax for (array arr{1,2,3,4}; int i : arr) standard",
+  "concept_id": "087_范围_for_循环",
+  "_chunk_pages": [
+    61,
+    64
+  ]
+}

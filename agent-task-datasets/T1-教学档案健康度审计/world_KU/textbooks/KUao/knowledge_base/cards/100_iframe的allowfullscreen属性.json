@@ -1,0 +1,40 @@
+{
+  "title": "iframe的allowfullscreen属性",
+  "definition": "allowfullscreen 是一个布尔属性，用于允许 iframe 内容以全屏方式显示。",
+  "key_points": [
+    "这是布尔属性",
+    "作用是允许全屏显示"
+  ],
+  "examples": [
+    "<iframe allowfullscreen></iframe>"
+  ],
+  "misconceptions": [
+    "allowfullscreen 不是设置尺寸的属性",
+    "布尔属性通常不需要写具体取值"
+  ],
+  "qa_pairs": [
+    {
+      "q": "allowfullscreen 属性的作用是什么？",
+      "a": "允许全屏显示。"
+    },
+    {
+      "q": "allowfullscreen 属于什么类型的属性？",
+      "a": "布尔属性。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "iframe标记"
+  ],
+  "source_pages": [
+    77,
+    80
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "100_iframe的allowfullscreen属性",
+  "_chunk_pages": [
+    77,
+    80
+  ]
+}

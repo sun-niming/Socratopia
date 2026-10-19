@@ -1,0 +1,42 @@
+{
+  "title": "首尾子节点访问",
+  "definition": "教材还给出了四个用于访问首尾子节点的属性：`firstChild`、`lastChild`、`firstElementChild`、`lastElementChild`。其中，`firstChild` 和 `lastChild` 获取的是第一个/最后一个子节点，类型不限；`firstElementChild` 和 `lastElementChild` 获取的是第一个/最后一个元素子节点。",
+  "key_points": [
+    "`firstChild` 返回第一个子节点，类型不限。",
+    "`lastChild` 返回最后一个子节点，类型不限。",
+    "`firstElementChild` 返回第一个元素子节点。",
+    "`lastElementChild` 返回最后一个元素子节点。"
+  ],
+  "examples": [
+    "element.firstChild\nelement.lastChild\nelement.firstElementChild\nelement.lastElementChild"
+  ],
+  "misconceptions": [
+    "把 `firstChild` 误认为一定返回元素。",
+    "把 `firstElementChild` 误认为会包含文本节点。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`firstChild` 和 `firstElementChild` 的区别是什么？",
+      "a": "`firstChild` 返回第一个子节点，类型不限；`firstElementChild` 只返回第一个元素子节点。"
+    },
+    {
+      "q": "`lastChild` 和 `lastElementChild` 的区别是什么？",
+      "a": "`lastChild` 返回最后一个子节点，类型不限；`lastElementChild` 只返回最后一个元素子节点。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "子节点集合访问"
+  ],
+  "source_pages": [
+    349,
+    352
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "470_首尾子节点访问",
+  "_chunk_pages": [
+    349,
+    352
+  ]
+}

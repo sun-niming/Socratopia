@@ -1,0 +1,51 @@
+{
+  "title": "C++20的using enum与枚举项引入",
+  "definition": "C++20提供`using enum`语句，可以把指定枚举类型的枚举项引入当前作用域，使代码在该作用域内可以直接使用枚举项名称，而不必每次都写枚举类型限定名。也可以只引入某一个枚举项，例如`using PieceType::King;`。",
+  "key_points": [
+    "引入整个枚举的语法是：`using enum PieceType;`。",
+    "引入后可以直接写`King`，而不是`PieceType::King`。",
+    "也可以只引入一个枚举项：`using PieceType::King;`。",
+    "直接引入枚举项时必须注意名称冲突；如果当前作用域已有同名名称，可能产生重定义或冲突错误。"
+  ],
+  "examples": [
+    "`using enum PieceType;`",
+    "`PieceType piece { King };`",
+    "`using PieceType::King;`",
+    "`PieceType piece { King };`"
+  ],
+  "misconceptions": [
+    "`using enum`不会改变枚举项所属的枚举类型；它只是提供了更短的名称访问方式。",
+    "`using enum`不是把枚举项转换成整数。",
+    "引入枚举项后，如果同一作用域中存在同名标识符，仍可能发生名称冲突。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "使用`using enum PieceType;`后，如何初始化一个`PieceType`变量为`King`？",
+      "a": "可以写成`PieceType piece { King };`。"
+    },
+    {
+      "q": "只引入`PieceType`中的`King`应如何写？",
+      "a": "写成`using PieceType::King;`。"
+    },
+    {
+      "q": "使用`using enum`时需要注意什么？",
+      "a": "需要注意枚举项名称与当前作用域已有名称发生冲突。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "enum class作用域枚举",
+    "C++名称作用域"
+  ],
+  "source_pages": [
+    46,
+    47
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 using enum PieceType using PieceType::King 名称冲突 Marc Gregoire C++20高级编程 第5版",
+  "concept_id": "053_c_20的using_enum与枚举项引入",
+  "_chunk_pages": [
+    45,
+    48
+  ]
+}

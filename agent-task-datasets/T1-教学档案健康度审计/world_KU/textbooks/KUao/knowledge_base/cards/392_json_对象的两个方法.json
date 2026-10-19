@@ -1,0 +1,43 @@
+{
+  "title": "JSON 对象的两个方法",
+  "definition": "JSON 对象包含两个方法：parse() 用于解析 JSON，stringify() 用于把对象或值转换为 JSON 字符串。",
+  "key_points": [
+    "parse() 负责解析 JSON",
+    "stringify() 负责把对象/值转换成 JSON 字符串",
+    "这两个方法都属于 JSON 对象"
+  ],
+  "examples": [
+    "JSON.parse('{\"a\":1}')",
+    "JSON.stringify({a:1})"
+  ],
+  "misconceptions": [
+    "parse() 是把对象转成字符串",
+    "stringify() 是把 JSON 字符串解析成对象"
+  ],
+  "qa_pairs": [
+    {
+      "q": "JSON 对象有哪些常用方法？",
+      "a": "parse() 和 stringify()。"
+    },
+    {
+      "q": "stringify() 的作用是什么？",
+      "a": "把对象或值转换为 JSON 字符串。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "对象",
+    "字符串"
+  ],
+  "source_pages": [
+    297,
+    300
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "392_json_对象的两个方法",
+  "_chunk_pages": [
+    297,
+    300
+  ]
+}

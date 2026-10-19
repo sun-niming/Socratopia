@@ -1,0 +1,44 @@
+{
+  "title": "静态成员函数",
+  "definition": "静态成员函数使用 static 声明，属于类本身而不是某个具体对象。它可以通过类名和作用域运算符调用，例如 SpreadsheetCell::doubleToString(value)。静态成员函数没有隐含的 this 指针，因此不能直接访问某个对象的非静态非静态成员，也不能使用 this。",
+  "key_points": [
+    "静态成员函数通常用于不依赖具体对象状态的辅助操作。原文中的 doubleToString(double value) 被声明为 SpreadsheetCell 的 private static 成员函数。",
+    "静态成员函数可以使用类名调用：SpreadsheetCell::doubleToString(value)。",
+    "静态成员函数不能直接访问非静态数据成员，因为调用时不对应某个具体对象。"
+  ],
+  "examples": [
+    "类内声明：static std::string doubleToString(double value);",
+    "类外定义：std::string SpreadsheetCell::doubleToString(double value) { /* 将 double 转为字符串 */ }",
+    "调用形式：SpreadsheetCell::doubleToString(3.14);"
+  ],
+  "misconceptions": [
+    "静态成员函数不是每个对象各自拥有一份的普通成员函数，而是属于类的成员函数。",
+    "声明为 static 并不表示函数只能在类内部使用；访问权限仍由 public、protected 或 private 决定。",
+    "静态成员函数不能直接使用 this，也不能直接读取某个对象的非静态成员。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何调用 SpreadsheetCell 的静态成员函数 doubleToString？",
+      "a": "可以使用类名和作用域运算符调用：SpreadsheetCell::doubleToString(value)。"
+    },
+    {
+      "q": "静态成员函数能否直接访问对象的非静态数据成员？",
+      "a": "不能，因为静态成员函数没有隐含的 this 指针，调用时不绑定到某个具体对象。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "类的成员函数与访问控制"
+  ],
+  "source_pages": [
+    277,
+    280
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "361_静态成员函数",
+  "_chunk_pages": [
+    277,
+    280
+  ]
+}

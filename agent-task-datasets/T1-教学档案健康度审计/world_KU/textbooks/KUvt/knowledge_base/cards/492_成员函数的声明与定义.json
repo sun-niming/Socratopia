@@ -1,0 +1,43 @@
+{
+  "title": "成员函数的声明与定义",
+  "definition": "类定义中的成员函数声明只说明函数的名称、参数和返回类型等接口信息，不包含实现。若调用了只有声明而没有定义的成员函数，链接阶段通常会报告该函数没有定义。成员函数可以直接定义在类定义中，也可以在模块实现文件中定义。",
+  "key_points": [
+    "类定义中的void setValue(double value);是成员函数声明，不是实现。",
+    "在类内定义的函数包含函数体，例如void setValue(double value) { m_value = value; }。",
+    "在C++20模块中，方法实现可以放在模块接口文件中；教材通常为了保持接口文件整洁，将实现放在模块实现文件中。",
+    "在模块实现文件中，第一行指定该实现属于哪个模块，例如module spreadsheet_cell;。"
+  ],
+  "examples": [
+    "module spreadsheet_cell;\n\nvoid SpreadsheetCell::setValue(double value)\n{\n    m_value = value;\n}\n\ndouble SpreadsheetCell::getValue() const\n{\n    return m_value;\n}"
+  ],
+  "misconceptions": [
+    "编译器接受类定义中的函数声明，不代表链接时一定能找到函数实现。",
+    "把方法声明写进类定义后，不需要再次写实现这一理解是错误的；除非该声明同时包含函数体。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "类定义中的成员函数原型和成员函数定义有什么区别？",
+      "a": "原型只声明接口，定义还要提供函数体实现。"
+    },
+    {
+      "q": "如果调用了只有声明没有定义的成员函数，通常在哪个阶段出现问题？",
+      "a": "链接阶段通常会报告函数没有定义。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++成员函数",
+    "C++20模块基础"
+  ],
+  "source_pages": [
+    231,
+    232
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "492_成员函数的声明与定义",
+  "_chunk_pages": [
+    229,
+    232
+  ]
+}

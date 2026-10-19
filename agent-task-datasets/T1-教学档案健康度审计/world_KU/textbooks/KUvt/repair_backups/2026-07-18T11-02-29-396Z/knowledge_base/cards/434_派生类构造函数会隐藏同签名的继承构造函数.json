@@ -1,0 +1,42 @@
+{
+  "title": "派生类构造函数会隐藏同签名的继承构造函数",
+  "definition": "当派生类使用 `using Base::Base;` 继承基类构造函数后，如果派生类又声明了与某个基类构造函数具有相同参数列表的构造函数，派生类自己的构造函数会隐藏该继承来的基类构造函数。其他参数列表不同的基类构造函数仍可被继承和使用。",
+  "key_points": [
+    "派生类自己的构造函数优先于同参数列表的继承构造函数。",
+    "被隐藏的是同一参数列表对应的继承构造函数，不是所有继承构造函数。",
+    "原文中 `Derived(float f);` 隐藏继承来的 `Base(float f)`。",
+    "字符串构造函数和默认构造形式仍可继续使用。"
+  ],
+  "examples": [
+    "class Base {\npublic:\n    Base() = default;\n    Base(std::string_view str);\n    Base(float f);\n};\n\nclass Derived : public Base {\npublic:\n    using Base::Base;\n    Derived(float f); // 隐藏继承来的 Base(float)\n};\n\nDerived derived1{\"Hello\"};\nDerived derived2{1.23f};\nDerived derived3;"
+  ],
+  "misconceptions": [
+    "声明 `Derived(float)` 不会禁止所有基类构造函数；例如原文中字符串构造形式和默认构造形式仍然可用。",
+    "调用 `Derived{1.23f}` 时调用的是 `Derived(float)`，而不是被继承的 `Base(float)`。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`Derived(float f)` 对继承来的 `Base(float f)` 有什么影响？",
+      "a": "它隐藏同参数列表的继承构造函数，因此 `Derived{1.23f}` 调用 `Derived(float)`。"
+    },
+    {
+      "q": "声明 `Derived(float)` 后，`Derived{\"Hello\"}` 是否仍可能可用？",
+      "a": "可以；原文示例中它调用继承来的 `Base(std::string_view)` 构造函数。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "继承基类构造函数"
+  ],
+  "source_pages": [
+    334,
+    335
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 inherited constructors derived constructor same signature hides inherited constructor",
+  "concept_id": "434_派生类构造函数会隐藏同签名的继承构造函数",
+  "_chunk_pages": [
+    333,
+    336
+  ]
+}

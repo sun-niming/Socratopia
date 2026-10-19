@@ -1,0 +1,42 @@
+{
+  "title": "eval命令",
+  "definition": "eval 是 shell 内置命令，基本形式为“eval 命令字符串”。它会先对给定的“命令字符串”做 shell 替换，然后再执行替换后的命令。因此，eval 的特点是把一段字符串再当作命令重新分析并执行一次。",
+  "key_points": [
+    "语法形式：eval 命令字符串",
+    "执行顺序：先进行 shell 替换，再执行结果命令",
+    "属于 shell 内置命令"
+  ],
+  "examples": [
+    "for((i=1;i<=$#;i++))\ndo\neval echo $i. \\$$i\ndone"
+  ],
+  "misconceptions": [
+    "误以为 eval 只是直接执行后面的文本；实际上它会先对命令字符串进行 shell 替换后再执行",
+    "误以为 eval 是外部程序；原文明确将其归为 shell 内置命令"
+  ],
+  "qa_pairs": [
+    {
+      "q": "eval 命令在执行前会先做什么？",
+      "a": "会先对“命令字符串”进行 shell 替换，然后再执行该命令。"
+    },
+    {
+      "q": "eval 属于哪一类命令？",
+      "a": "属于 shell 内置命令。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "Shell内置命令",
+    "Shell替换"
+  ],
+  "source_pages": [
+    89,
+    92
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "146_eval命令",
+  "_chunk_pages": [
+    89,
+    92
+  ]
+}

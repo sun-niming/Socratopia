@@ -1,0 +1,40 @@
+{
+  "title": "aside元素",
+  "definition": "aside元素表示article元素内容之外、与article内容相关的辅助信息。",
+  "key_points": [
+    "aside位于article内容之外。",
+    "aside提供与article内容相关的辅助信息。"
+  ],
+  "examples": [
+    "<article>正文内容<aside>相关文章推荐</aside></article>"
+  ],
+  "misconceptions": [
+    "aside不是article的主要正文内容。",
+    "aside虽然是辅助信息，但应与主体内容有关联。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "aside元素表示什么内容？",
+      "a": "表示article元素内容之外、与article内容相关的辅助信息。"
+    },
+    {
+      "q": "aside与article内容之间是什么关系？",
+      "a": "aside内容在article之外，但与article内容相关。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "HTML5新增元素"
+  ],
+  "source_pages": [
+    40,
+    40
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "053_aside元素",
+  "_chunk_pages": [
+    37,
+    40
+  ]
+}

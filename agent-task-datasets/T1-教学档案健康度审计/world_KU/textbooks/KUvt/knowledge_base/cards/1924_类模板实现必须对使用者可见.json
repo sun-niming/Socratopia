@@ -1,0 +1,46 @@
+{
+  "title": "类模板实现必须对使用者可见",
+  "definition": "使用类模板的代码必须能够看到类模板的定义以及其方法实现；函数模板也有同样要求。一种做法是把类模板的方法实现直接放在包含类定义的接口文件中，并将该模板从模块接口中导出。",
+  "key_points": [
+    "模板的定义和方法实现需要对实例化模板的代码可见。",
+    "可以在模块接口文件中同时放置并导出类模板的定义和方法实现。",
+    "示例中的 `SimpleWrapper<T>` 保存一个对象的引用，并提供 `get()` 返回该引用。",
+    "`SimpleWrapper(T& object) : m_object { object } {}` 使用传入对象初始化成员引用。",
+    "`T& get() { return m_object; }` 返回被包装对象的引用，因此对原对象的修改可以通过包装器观察到。"
+  ],
+  "examples": [
+    "模板接口示例：`export template <typename T> class SimpleWrapper { public: SimpleWrapper(T& object) : m_object { object } {} T& get() { return m_object; } private: T& m_object; };`。",
+    "若 `int i { 7 };`，创建 `SimpleWrapper intWrapper { i };` 后执行 `i = 2;`，通过 `intWrapper.get()` 取得的是更新后的值 `2`。"
+  ],
+  "misconceptions": [
+    "模板不是只需要让调用者看到类名；实例化所需的定义和方法实现也必须可见。",
+    "`SimpleWrapper` 保存的是对象引用，不是对象副本；它不会独立拥有被包装对象。",
+    "修改原对象后，包装器通过 `get()` 取得的值也会反映这种修改。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么类模板的方法实现通常也要放在接口文件中？",
+      "a": "因为使用类模板的代码在实例化模板时必须能够看到类模板的定义和方法实现。"
+    },
+    {
+      "q": "`SimpleWrapper<T>::get()` 返回什么？",
+      "a": "返回被包装对象的 `T&` 引用。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++类模板基础",
+    "C++引用基础"
+  ],
+  "source_pages": [
+    930,
+    930
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1924_类模板实现必须对使用者可见",
+  "_chunk_pages": [
+    929,
+    932
+  ]
+}

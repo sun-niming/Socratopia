@@ -1,0 +1,42 @@
+{
+  "title": "match方法",
+  "definition": "字符串对象的 match 方法用于根据正则表达式查找字符串中的匹配项，并返回匹配结果。原文示例中，data.match(reCat) 用来提取 data 中所有符合 /[cCdD][ao]t/gi 的字符串，再通过循环逐个输出。",
+  "key_points": [
+    "match 是字符串对象的方法。",
+    "参数通常是正则表达式。",
+    "可用于得到字符串中符合条件的匹配结果，并对结果数组进行遍历。"
+  ],
+  "examples": [
+    "let data = \"123123,dot,12312,312,3,Cat,cat,dsfsdfs,\";\nlet reCat = /[cCdD][ao]t/gi;\nlet arrMactches = data.match(reCat)\nfor (let i=0;i < arrMactches.length ;i++){\n    console.log(arrMactches[i]);\n}"
+  ],
+  "misconceptions": [
+    "match 不只是做判断，它会返回匹配结果。",
+    "不要把 match 和 exec 混淆：二者都能做匹配，但用法和返回结果形式不同。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "match 方法在原文示例中的作用是什么？",
+      "a": "根据正则表达式从字符串中找出所有匹配的子串，并返回匹配结果供遍历输出。"
+    },
+    {
+      "q": "match 方法属于哪类对象的方法？",
+      "a": "字符串对象的方法。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "正则表达式基础",
+    "字符串对象"
+  ],
+  "source_pages": [
+    321,
+    324
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "433_match方法",
+  "_chunk_pages": [
+    321,
+    324
+  ]
+}

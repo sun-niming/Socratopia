@@ -1,0 +1,39 @@
+{
+  "title": "设备像素比（DPR）",
+  "definition": "设备像素比（DPR）是物理像素与CSS像素的比例，用于解决高清屏幕显示问题。高DPR意味着更多物理像素渲染同一CSS像素，从而提升图像清晰度。",
+  "key_points": [
+    "DPR表示物理像素与CSS像素的比例",
+    "用于解决高清屏幕显示问题",
+    "DPR越高，同一CSS像素可由更多物理像素渲染"
+  ],
+  "examples": [
+    "iPhone 4 图中标注 DPR=2"
+  ],
+  "misconceptions": [
+    "DPR不是屏幕尺寸，也不是分辨率本身",
+    "DPR高不等于CSS尺寸变大，而是同一CSS像素会被更多物理像素绘制"
+  ],
+  "qa_pairs": [
+    {
+      "q": "DPR表示什么？",
+      "a": "物理像素与CSS像素的比例。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "物理像素",
+    "CSS像素"
+  ],
+  "source_pages": [
+    213,
+    215,
+    216
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "298_设备像素比_dpr",
+  "_chunk_pages": [
+    213,
+    216
+  ]
+}

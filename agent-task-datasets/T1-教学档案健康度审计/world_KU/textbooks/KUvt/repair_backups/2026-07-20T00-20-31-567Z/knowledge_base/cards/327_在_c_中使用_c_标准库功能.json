@@ -1,0 +1,46 @@
+{
+  "title": "在 C++ 中使用 C 标准库功能",
+  "definition": "C++ 提供了对大量 C 标准库功能的支持，包括数学、诊断、字符数组处理和 C 风格输入输出等设施。教材举例包括 abs()、sqrt()、pow()、assert、errno、strlen()、strcpy()、printf() 和 scanf()。不过，在 C++ 程序中通常应优先使用 C++ 字符串和 I/O 流，而不是 C 风格字符串和输入输出例程。",
+  "key_points": [
+    "数学功能示例包括 abs()、sqrt() 和 pow()。",
+    "诊断或错误处理相关设施示例包括 assert 和 errno。",
+    "C 风格字符数组操作示例包括 strlen() 和 strcpy()。",
+    "C 风格输入输出示例包括 printf() 和 scanf()。",
+    "这些设施在 C++ 中仍可使用，但教材建议优先采用 C++ 字符串和 I/O 流。"
+  ],
+  "examples": [
+    "C 风格代码可能使用 printf(\"%d\", value); 输出整数；C++ 风格通常使用 std::cout << value;。",
+    "C 风格字符串通常以字符数组表示并使用 strlen() 等函数；C++ 程序通常优先使用 std::string。"
+  ],
+  "misconceptions": [
+    "认为 C++ 中完全不能使用 C 标准库功能。",
+    "认为 C 风格字符串和 I/O 在 C++ 中仍然有效，就意味着它们总是最佳选择。",
+    "把 errno 当作普通函数调用；它是错误状态相关设施，而不是教材列举的数学函数。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "教材对 C++ 程序中的 C 风格字符串和 I/O 有何建议？",
+      "a": "它们仍然可以使用，但应尽量避免，优先使用 C++ 字符串和 I/O 流。"
+    },
+    {
+      "q": "教材列举了哪些 C 风格字符串处理函数？",
+      "a": "strlen() 和 strcpy()。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++ 标准库的地位与组成",
+    "C 语言基础"
+  ],
+  "source_pages": [
+    157,
+    158
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 与 C 标准库兼容关系 C++ 是否严格为 C 的超集 assert errno strlen strcpy printf scanf 标准头文件",
+  "concept_id": "327_在_c_中使用_c_标准库功能",
+  "_chunk_pages": [
+    157,
+    160
+  ]
+}

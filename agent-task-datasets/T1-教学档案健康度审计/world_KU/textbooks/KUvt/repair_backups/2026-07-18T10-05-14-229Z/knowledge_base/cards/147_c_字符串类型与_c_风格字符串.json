@@ -1,0 +1,42 @@
+{
+  "title": "C++ 字符串类型与 C 风格字符串",
+  "definition": "原文将 C 风格字符串、C++ 的 `std::string` 和 `std::string_view` 并列介绍，并指出 C++ 中存在以 NUL 结尾的 C 风格字符串表示。C 风格字符串通常通过字符数组或字符指针表示，而 `std::string` 是 C++ 标准库提供的字符串类型。",
+  "key_points": [
+    "C 风格字符串依赖结尾的 NUL 字符来确定字符串结束位置。",
+    "原文将 `std::string` 和 `std::string_view` 作为 C++ 字符串相关类型列出。",
+    "不能仅根据类型名称把 `std::string`、`std::string_view` 和 C 风格字符串视为完全相同的类型。"
+  ],
+  "examples": [
+    "C 风格字符串示例：`const char* text { \"hello\" };`。",
+    "C++ 字符串类型名称：`std::string`、`std::string_view`。"
+  ],
+  "misconceptions": [
+    "`std::string`、`std::string_view` 和 `const char*` 不是同一种类型。",
+    "C 风格字符串的结束依赖 NUL 字符，而不能只依赖调用者记录的字符数量。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "原文列出了哪些与字符串相关的 C++ 类型或表示？",
+      "a": "原文列出了 C 风格字符串、`std::string` 和 `std::string_view`。"
+    },
+    {
+      "q": "C 风格字符串与 C++ 字符串类型的一个基本区别是什么？",
+      "a": "C 风格字符串通常依赖结尾的 NUL 字符表示结束，而 `std::string` 和 `std::string_view` 是 C++ 中的字符串相关类型。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C 风格字符串以 NUL 字符结尾"
+  ],
+  "source_pages": [
+    102,
+    104
+  ],
+  "needs_verification": true,
+  "verify_query": "《C++20高级编程》第5版 第102页 std::string std::string_view C 风格字符串 原文",
+  "concept_id": "147_c_字符串类型与_c_风格字符串",
+  "_chunk_pages": [
+    101,
+    104
+  ]
+}

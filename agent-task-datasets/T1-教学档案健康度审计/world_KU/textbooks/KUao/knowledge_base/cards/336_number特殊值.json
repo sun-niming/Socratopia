@@ -1,0 +1,39 @@
+{
+  "title": "Number特殊值",
+  "definition": "JavaScript的Number类型包含一些特殊值：NaN、Infinity和-Infinity。NaN表示不是数；当数据进行数学运算时，参与运算的数据不符合条件，会返回NaN。NaN与任何数都不相等，也与自己不相等。Infinity表示正无穷大，用来表示过大的正数；-Infinity表示负无穷大，用来表示过大的负数。",
+  "key_points": [
+    "NaN表示不是数",
+    "NaN与任何数都不相等，也不与自己相等",
+    "Infinity表示正无穷大，-Infinity表示负无穷大"
+  ],
+  "examples": [
+    "NaN",
+    "Infinity",
+    "-Infinity"
+  ],
+  "misconceptions": [
+    "NaN等于NaN",
+    "Infinity表示错误提示文本而不是数值特殊值"
+  ],
+  "qa_pairs": [
+    {
+      "q": "NaN的一个重要特点是什么？",
+      "a": "NaN与任何数都不相等，也与自己不相等。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "Number类型"
+  ],
+  "source_pages": [
+    241,
+    244
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "336_number特殊值",
+  "_chunk_pages": [
+    241,
+    244
+  ]
+}

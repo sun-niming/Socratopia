@@ -1,0 +1,45 @@
+{
+  "title": "使用 strcat 拼接动态字符串可能导致缓冲区溢出",
+  "definition": "将多个动态分配的字符数组片段依次追加到固定大小的字符数组时，如果没有检查总长度是否超过目标数组容量，就可能发生缓冲区溢出。原文示例使用 char buffer[1024] {0}; 接收 getMoreData() 返回的片段，并通过 strcat(buffer, nextChunk) 追加；该代码没有防止 buffer overrun 的保证。每次使用完由 new[] 分配的 nextChunk 后，应使用 delete[] 释放。",
+  "key_points": [
+    "char buffer[1024] 的容量固定为 1024 个字符，strcat 不会自动确保追加结果适合目标缓冲区。",
+    "循环中 getMoreData() 返回 nullptr 时结束。",
+    "由 new[] 分配的字符数组必须使用 delete[] 释放，而不是 delete。",
+    "原文明确将 strcat(buffer, nextChunk) 标记为存在缓冲区溢出风险。"
+  ],
+  "examples": [
+    "示例结构：char buffer[1024] {0}; while (true) { char* nextChunk { getMoreData() }; if (nextChunk == nullptr) { break; } strcat(buffer, nextChunk); delete [] nextChunk; }",
+    "上述代码虽然释放了 nextChunk，但没有检查 buffer 剩余空间，因此拼接过长内容时可能越界。"
+  ],
+  "misconceptions": [
+    "误以为目标数组足够大就一定安全；只要输入片段总长度可能超过 1023 个字符，仍然可能溢出。",
+    "误以为 delete 和 delete[] 可以互换；new[] 必须对应 delete[]。",
+    "误以为释放 nextChunk 可以消除所有内存问题；释放内存不能修复已经发生的缓冲区越界。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "原文示例中 strcat(buffer, nextChunk) 的主要问题是什么？",
+      "a": "它没有检查追加后的字符串长度是否超出 char buffer[1024] 的容量，因此不能保证不会发生缓冲区溢出。"
+    },
+    {
+      "q": "如果 nextChunk 是通过 new[] 分配的字符数组，应使用什么释放？",
+      "a": "应使用 delete[] nextChunk。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++ 动态内存分配与释放",
+    "C 风格字符串"
+  ],
+  "source_pages": [
+    213,
+    216
+  ],
+  "needs_verification": true,
+  "verify_query": "《C++20高级编程》第5版 第213页 strcat buffer overrun getMoreData delete[] 原文",
+  "concept_id": "285_使用_strcat_拼接动态字符串可能导致缓冲区溢出",
+  "_chunk_pages": [
+    213,
+    216
+  ]
+}

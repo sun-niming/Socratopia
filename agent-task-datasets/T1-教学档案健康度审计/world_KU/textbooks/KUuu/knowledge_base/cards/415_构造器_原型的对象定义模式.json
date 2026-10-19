@@ -1,0 +1,44 @@
+{
+  "title": "构造器+原型的对象定义模式",
+  "definition": "常见的对象定义模式是：在构造器函数体中用 this 定义实例属性，在构造器的 prototype 属性上定义共享方法。这样做时，构造器主要负责属性初始化，方法单独放在原型上，代码更清晰、更具可读性。",
+  "key_points": [
+    "构造器函数体里用 this 定义属性",
+    "方法定义在 prototype 属性上",
+    "这种分离方式让属性和方法职责更清楚"
+  ],
+  "examples": [
+    "function Person(name, age) { this.name = name; this.age = age; }",
+    "Person.prototype.say = function(){...}"
+  ],
+  "misconceptions": [
+    "误以为方法必须写在构造器内部",
+    "误以为每个实例都要单独保存一份相同的方法"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么常见对象定义模式把属性和方法分开写？",
+      "a": "因为构造器主要负责属性定义，方法放到 prototype 上，代码更有条理，也更易读。"
+    },
+    {
+      "q": "构造器函数体里通常用什么来定义属性？",
+      "a": "使用 this 对象来定义属性。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "构造器函数",
+    "对象",
+    "prototype"
+  ],
+  "source_pages": [
+    289,
+    292
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "415_构造器_原型的对象定义模式",
+  "_chunk_pages": [
+    289,
+    292
+  ]
+}

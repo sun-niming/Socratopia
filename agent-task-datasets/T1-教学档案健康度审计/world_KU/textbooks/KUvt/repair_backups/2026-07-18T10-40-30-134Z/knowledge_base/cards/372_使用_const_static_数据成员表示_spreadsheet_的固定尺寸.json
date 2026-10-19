@@ -1,0 +1,43 @@
+{
+  "title": "使用 const static 数据成员表示 Spreadsheet 的固定尺寸上限",
+  "definition": "在 Spreadsheet 类中，可以声明公开的常量静态数据成员，为所有 Spreadsheet 对象提供统一的固定限制。原文示例定义了最大高度和最大宽度：$\\text{MaxHeight}=100$、$\\text{MaxWidth}=100$。它们属于类本身，而不是某一个实例。",
+  "key_points": [
+    "声明形式为 `static const size_t MaxHeight { 100 };` 和 `static const size_t MaxWidth { 100 };`。",
+    "`MaxHeight` 与 `MaxWidth` 分别表示 Spreadsheet 的最大高度和最大宽度。",
+    "构造 Spreadsheet 时，可以使用这些类常量限制传入的宽度和高度。"
+  ],
+  "examples": [
+    "代码示例：`export class Spreadsheet { public: static const size_t MaxHeight { 100 }; static const size_t MaxWidth { 100 }; };`",
+    "当传入 `width` 和 `height` 时，可按以下规则限制尺寸：$\\text{实际宽度}=\\min(\\text{width},\\text{MaxWidth})$，$\\text{实际高度}=\\min(\\text{height},\\text{MaxHeight})$。"
+  ],
+  "misconceptions": [
+    "`static` 并不表示每个 Spreadsheet 对象都有一份独立的 MaxWidth 和 MaxHeight；静态数据成员属于类。",
+    "最大值常量不是说构造函数只能接收不超过 100 的参数；原文示例是使用 `std::min()` 将传入值限制到上限。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "原文中 Spreadsheet 的最大高度和最大宽度分别是多少？",
+      "a": "最大高度和最大宽度都为 100，即 `MaxHeight { 100 }` 和 `MaxWidth { 100 }`。"
+    },
+    {
+      "q": "Spreadsheet 构造函数如何限制传入的宽度和高度？",
+      "a": "使用 `std::min()`：宽度取 `std::min(width, MaxWidth)`，高度取 `std::min(height, MaxHeight)`。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++ 类的静态数据成员",
+    "const 常量"
+  ],
+  "source_pages": [
+    285,
+    288
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "372_使用_const_static_数据成员表示_spreadsheet_的固定尺寸",
+  "_chunk_pages": [
+    285,
+    288
+  ]
+}

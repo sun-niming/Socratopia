@@ -1,0 +1,48 @@
+{
+  "title": "可导入头文件与全局模块片段",
+  "definition": "C++标准库头文件，如 <iostream>、<vector> 和 <string>，可以通过 import 声明导入；C 语言头文件不保证可导入。使用 C 头文件时，应在命名模块声明之前的全局模块片段中使用 #include。",
+  "key_points": [
+    "全局模块片段以单独的 module; 开始，并且必须位于任何命名模块声明之前。",
+    "全局模块片段只能包含预处理指令，例如 #include。",
+    "注释和全局模块片段是命名模块声明之前允许出现的内容。",
+    "使用 C 头文件时，应采用类似下面的结构：\nmodule;\n#include <cstddef>\nexport module person;"
+  ],
+  "examples": [
+    "导入标准库头文件：import <string>;",
+    "使用 C 头文件：\nmodule;\n#include <cstddef>\nexport module person;"
+  ],
+  "misconceptions": [
+    "所有 C 语言头文件都可以安全地用 import 导入；原文明确指出这并不能保证。",
+    "全局模块片段不能放在命名模块声明之后，也不能在其中随意编写普通声明或定义。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么 C 头文件通常使用 #include 而不是 import？",
+      "a": "因为 C++中可用的 C 头文件不保证是可导入头文件，为了安全起见应使用 #include。"
+    },
+    {
+      "q": "全局模块片段应放在哪里？",
+      "a": "它必须放在任何命名模块声明之前，并以 module; 开始。"
+    },
+    {
+      "q": "全局模块片段可以包含什么？",
+      "a": "只能包含预处理指令，例如 #include；在命名模块声明之前，注释也是允许的。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "预处理器与#include",
+    "C++模块声明"
+  ],
+  "source_pages": [
+    354,
+    354
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "711_可导入头文件与全局模块片段",
+  "_chunk_pages": [
+    353,
+    356
+  ]
+}

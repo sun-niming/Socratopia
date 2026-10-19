@@ -1,0 +1,42 @@
+{
+  "title": "函数名与函数地址作为函数指针实参",
+  "definition": "将普通函数传给函数指针参数时，可以直接写函数名，也可以显式写取地址运算符 &。函数名在此语境下会被编译器识别为该函数的地址，因此 $\\texttt{intEqual}$ 与 $\\texttt{\\&intEqual}$ 都可以作为 Matcher 实参，前提是函数签名兼容。",
+  "key_points": [
+    "函数指针实参必须指向与目标函数指针类型兼容的函数。",
+    "原文示例中，intEqual 用作 Matcher，printMatch 用作 MatchHandler。",
+    "显式写 & 不是必需的，但可以更直观地表明传递的是函数地址。"
+  ],
+  "examples": [
+    "两种等价的调用形式：$\\texttt{findMatches(values1, values2, intEqual, printMatch);}$ 和 $\\texttt{findMatches(values1, values2, \\&intEqual, \\&printMatch);}$。",
+    "$\\texttt{void printMatch(size\\_t position, int value1, int value2)}$ 可以接收匹配位置及两个匹配值并打印结果。"
+  ],
+  "misconceptions": [
+    "直接传递函数名并不表示立即调用函数；调用函数需要写参数列表，例如 intEqual(a, b)。",
+    "& 运算符在这里取得函数地址，不是引用传递语法。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "调用 findMatches 时必须为函数名写 & 吗？",
+      "a": "不必须。直接写函数名时，编译器会将其识别为函数地址；因此 intEqual 和 &intEqual 都可以使用。"
+    },
+    {
+      "q": "printMatch 在示例中接收哪些参数？",
+      "a": "它接收一个 size_t 类型的位置参数和两个 int 类型的值参数，并且没有返回值。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "函数指针类型别名"
+  ],
+  "source_pages": [
+    607,
+    607
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1248_函数名与函数地址作为函数指针实参",
+  "_chunk_pages": [
+    605,
+    608
+  ]
+}

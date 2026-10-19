@@ -1,0 +1,43 @@
+{
+  "title": "Boyer–Moore 与 Boyer–Moore–Horspool 的取舍",
+  "definition": "Boyer–Moore 和 Boyer–Moore–Horspool 都是用于搜索模式字符串的专用搜索算法。原文指出，Boyer–Moore–Horspool 在初始化和每次循环迭代中的固定开销较小，但其最坏情况复杂度明显高于 Boyer–Moore，因此应依据具体搜索场景选择。",
+  "key_points": [
+    "Boyer–Moore–Horspool 的初始化固定开销较小。",
+    "Boyer–Moore–Horspool 每次循环迭代的固定开销也较小。",
+    "Boyer–Moore–Horspool 的最坏情况复杂度高于 Boyer–Moore。",
+    "不能只根据平均或常见情况下的速度选择算法，还要考虑最坏情况保证。"
+  ],
+  "examples": [
+    "需要较低的初始化和循环固定开销时，可以考虑 Boyer–Moore–Horspool；需要更好的最坏情况复杂度时，可以考虑 Boyer–Moore。最终选择取决于具体情况。"
+  ],
+  "misconceptions": [
+    "固定开销更小意味着 Boyer–Moore–Horspool 在所有情况下都更快。",
+    "两种算法的最坏情况复杂度相同。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "Boyer–Moore–Horspool 相比 Boyer–Moore 的主要优点是什么？",
+      "a": "它在初始化以及算法每次循环迭代中的固定开销较小。"
+    },
+    {
+      "q": "Boyer–Moore–Horspool 的主要代价是什么？",
+      "a": "它的最坏情况复杂度明显高于 Boyer–Moore，因此需要根据具体情况选择。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "专用字符串搜索器",
+    "算法复杂度"
+  ],
+  "source_pages": [
+    635,
+    635
+  ],
+  "needs_verification": true,
+  "verify_query": "Boyer-Moore 与 Boyer-Moore-Horspool 最坏情况时间复杂度及 std::boyer_moore_searcher 标准资料",
+  "concept_id": "1317_boyer_moore_与_boyer_moore_horspool_的取舍",
+  "_chunk_pages": [
+    633,
+    636
+  ]
+}

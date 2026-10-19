@@ -1,0 +1,43 @@
+{
+  "title": "项目分层结构",
+  "definition": "在这个静态 Web Server 项目里，建议按职责分层：`server` 负责 socket，`request` 负责解析 HTTP，`response` 负责构造 HTTP，`file_server` 负责文件。",
+  "key_points": [
+    "分层的目标是让职责清晰，便于排错和扩展。",
+    "`server` 只处理网络连接相关逻辑。",
+    "`request` 只处理 HTTP 请求解析。",
+    "`response` 只处理 HTTP 响应构造。",
+    "`file_server` 只处理文件读取。"
+  ],
+  "examples": [
+    "收到请求后，`request` 先解析请求行，`file_server` 再根据路径读取资源，`response` 负责组织返回格式。"
+  ],
+  "misconceptions": [
+    "不要把所有逻辑都堆到一个函数里。",
+    "socket 处理和 HTTP 解析不是同一层职责。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么要把项目分层？",
+      "a": "因为不同模块各司其职，便于排错和维护。"
+    },
+    {
+      "q": "哪一层负责解析 HTTP 请求？",
+      "a": "`request` 层。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "TCP 与 HTTP 的分层关系"
+  ],
+  "source_pages": [
+    13,
+    16
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "007_项目分层结构",
+  "_chunk_pages": [
+    13,
+    16
+  ]
+}

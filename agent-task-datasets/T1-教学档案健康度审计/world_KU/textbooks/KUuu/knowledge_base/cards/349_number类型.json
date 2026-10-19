@@ -1,0 +1,39 @@
+{
+  "title": "Number类型",
+  "definition": "Number是JavaScript中的基本数值类型，按64位、IEEE 754方式存储。Number还包含一些特殊数值，如NaN、Infinity和-Infinity。",
+  "key_points": [
+    "Number是基本数据类型中的数值类型",
+    "教材说明它以64位、IEEE 754方式存储",
+    "Number包含NaN、Infinity、-Infinity等特殊值"
+  ],
+  "examples": [
+    "100",
+    "-3500",
+    "0"
+  ],
+  "misconceptions": [
+    "以为JavaScript的数字只有普通整数和小数",
+    "以为NaN、Infinity不是Number相关的值"
+  ],
+  "qa_pairs": [
+    {
+      "q": "JavaScript中的数值型数据属于什么类型？",
+      "a": "Number类型。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "JavaScript数据类型分类"
+  ],
+  "source_pages": [
+    243,
+    244
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "349_number类型",
+  "_chunk_pages": [
+    241,
+    244
+  ]
+}

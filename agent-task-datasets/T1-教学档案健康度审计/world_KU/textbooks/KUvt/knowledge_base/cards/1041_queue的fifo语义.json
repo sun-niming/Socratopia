@@ -1,0 +1,43 @@
+{
+  "title": "queue的FIFO语义",
+  "definition": "`queue`定义在`<queue>`头文件中，提供先进先出（First In First Out，FIFO）语义：元素从一端插入，从另一端取出，最先进入队列的元素最先被移除。",
+  "key_points": [
+    "`queue`用于建模现实中的排队行为。",
+    "插入元素的复杂度为摊还常量时间，删除元素的复杂度为常量时间。",
+    "新元素添加到队列尾部，服务或取出元素时从队列头部开始。"
+  ],
+  "examples": [
+    "银行排队模拟中，顾客到达时加入`queue`的尾部，柜员服务时从队列头部取出顾客。",
+    "若依次加入$A$、$B$、$C$，取出顺序为$A\\rightarrow B\\rightarrow C$。"
+  ],
+  "misconceptions": [
+    "`queue`不是后进先出；后进先出应使用`stack`。",
+    "新元素不是从队列头部插入，而是从尾部插入。",
+    "FIFO表示最早进入的元素最先离开，而不是优先级最高的元素最先离开。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`queue`采用哪种元素处理顺序？",
+      "a": "先进先出（FIFO）：最先插入的元素最先被移除。"
+    },
+    {
+      "q": "银行排队为什么适合用`queue`建模？",
+      "a": "顾客从队尾进入，柜员从队头开始服务，符合先来先服务的FIFO行为。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "顺序容器的基本概念"
+  ],
+  "source_pages": [
+    509,
+    509
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1041_queue的fifo语义",
+  "_chunk_pages": [
+    509,
+    512
+  ]
+}

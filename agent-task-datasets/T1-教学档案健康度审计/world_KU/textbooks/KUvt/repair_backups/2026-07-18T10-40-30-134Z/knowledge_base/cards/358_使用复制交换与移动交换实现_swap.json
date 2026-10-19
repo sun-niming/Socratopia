@@ -1,0 +1,47 @@
+{
+  "title": "使用复制交换与移动交换实现 swap",
+  "definition": "复制交换和移动交换都是通过临时对象交换两个对象内容的实现方式。复制交换先复制构造临时对象，再依次执行赋值：`T temp{a}; a = b; b = temp;`。移动交换则用 `std::move(a)` 构造临时对象，再把对象内容移动给另一方，从而减少资源的深拷贝。",
+  "key_points": [
+    "复制交换的基本步骤是：复制 `a` 到临时对象 `temp`，将 `b` 赋给 `a`，再将 `temp` 赋给 `b`。",
+    "移动交换的第一步是 `T temp{std::move(a)};`，表示将 `a` 的资源移动到临时对象。",
+    "移动交换后，源对象 `a` 仍然存在，但其内部资源可能已经被转移。",
+    "只有在类型提供正确的移动构造和移动赋值操作时，移动交换才能真正避免深拷贝。"
+  ],
+  "examples": [
+    "复制交换：`template <typename T> void swapCopy(T& a, T& b) { T temp{a}; a = b; b = temp; }`。",
+    "移动交换的核心形式：`template <typename T> void swapMove(T& a, T& b) { T temp{std::move(a)}; a = std::move(b); b = std::move(temp); }`。"
+  ],
+  "misconceptions": [
+    "`std::move(a)` 不会自动执行移动操作，它只是把 `a` 转换为可用于匹配右值引用的表达式；实际是否移动由构造函数或赋值运算符决定。",
+    "移动交换并不表示交换后 `a` 或 `b` 被销毁。",
+    "如果类型没有高效的移动操作，所谓移动交换可能退化为复制或无法按预期工作。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "复制交换的第一步是什么？",
+      "a": "用 `a` 复制构造临时对象：`T temp{a};`。"
+    },
+    {
+      "q": "移动交换为什么使用 `std::move(a)`？",
+      "a": "为了把 `a` 转换成右值表达式，使移动构造函数或移动赋值运算符能够接管其资源。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "复制构造函数",
+    "移动构造函数",
+    "右值引用",
+    "std::move"
+  ],
+  "source_pages": [
+    274,
+    275
+  ],
+  "needs_verification": true,
+  "verify_query": "《C++20高级编程》第5版 第274-275页 swapCopy swapMove std::move 模板代码",
+  "concept_id": "358_使用复制交换与移动交换实现_swap",
+  "_chunk_pages": [
+    273,
+    276
+  ]
+}

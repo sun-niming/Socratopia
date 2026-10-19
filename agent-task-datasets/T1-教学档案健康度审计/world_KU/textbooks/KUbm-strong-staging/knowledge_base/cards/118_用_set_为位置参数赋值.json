@@ -1,0 +1,36 @@
+{
+  "title": "用 set 为位置参数赋值",
+  "definition": "Shell 中可以使用 set 命令为位置参数赋值，教材给出的格式是：set 参数值列表。执行后，位置参数会按给出的参数值列表进行设置，供脚本后续通过 $1、$2 等引用。",
+  "key_points": [
+    "set 可用于为位置参数赋值",
+    "教材给出的格式是 set 参数值列表",
+    "赋值后可再用 $1、$2… 访问"
+  ],
+  "examples": [
+    "set 参数值列表"
+  ],
+  "misconceptions": [
+    "把 set 仅理解为普通变量赋值命令；在这里它用于为位置参数赋值"
+  ],
+  "qa_pairs": [
+    {
+      "q": "教材中用什么方式为位置参数赋值？",
+      "a": "使用 set 参数值列表。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "位置参数的含义与引用"
+  ],
+  "source_pages": [
+    69,
+    72
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "118_用_set_为位置参数赋值",
+  "_chunk_pages": [
+    69,
+    72
+  ]
+}

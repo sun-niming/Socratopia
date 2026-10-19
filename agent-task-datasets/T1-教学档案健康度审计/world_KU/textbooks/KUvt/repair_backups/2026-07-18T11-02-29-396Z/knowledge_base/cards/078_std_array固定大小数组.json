@@ -1,0 +1,44 @@
+{
+  "title": "std::array固定大小数组",
+  "definition": "`std::array`是C++标准库提供的固定大小数组容器。它保存的元素数量在类型中确定，使用下标可以访问元素，例如`arr[1]`访问第二个元素。",
+  "key_points": [
+    "`std::array`的大小是类型的一部分，创建后不能像动态数组那样通过添加元素改变大小。",
+    "可以使用下标表达式访问元素，例如`arr[1]`。",
+    "原文将`std::array`与C风格数组、`std::vector`进行对比，并介绍了`std::array`的类模板参数推导（CTAD）。"
+  ],
+  "examples": [
+    "典型声明：`std::array<int, 3> arr { 10, 20, 30 };`",
+    "访问第二个元素：`arr[1]`。",
+    "输出示例：`cout << format(\"2nd element = {}\", arr[1]) << endl;`"
+  ],
+  "misconceptions": [
+    "`std::array`不是可以自动扩容的容器；它的元素数量固定。",
+    "`std::array`的下标从0开始，因此`arr[1]`表示第二个元素。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`std::array`与动态数组容器相比最重要的特点是什么？",
+      "a": "`std::array`的大小固定，并且大小属于其类型的一部分，不能通过添加元素动态改变。"
+    },
+    {
+      "q": "如何访问`std::array`的第二个元素？",
+      "a": "使用`arr[1]`。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++类模板",
+    "数组下标访问"
+  ],
+  "source_pages": [
+    58,
+    59
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "078_std_array固定大小数组",
+  "_chunk_pages": [
+    57,
+    60
+  ]
+}

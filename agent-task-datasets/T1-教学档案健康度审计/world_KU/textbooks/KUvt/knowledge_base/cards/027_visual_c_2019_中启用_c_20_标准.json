@@ -1,0 +1,43 @@
+{
+  "title": "Visual C++ 2019 中启用 C++20 标准",
+  "definition": "在原文所述的 Visual C++ 2019 环境中，C++20 特性不会自动启用。需要在项目属性中设置语言标准：在 Solution Explorer 中右击项目，选择 Properties，进入 Configuration Properties | C/C++ | Language，将 C++ Language Standard 设置为 ISO C++20 或 Preview - Features from the Latest C++ Working Draft，然后应用设置。",
+  "key_points": [
+    "C++20 语言标准设置位于项目属性的 Configuration Properties | C/C++ | Language。",
+    "可选择 ISO C++20，或选择包含最新 C++ 工作草案特性的预览选项。",
+    "完成设置后，可以使用 Build | Build Solution 编译项目。",
+    "只有项目至少包含一个 .cpp 文件时，相关语言标准选项才可访问。"
+  ],
+  "examples": [
+    "操作路径：Solution Explorer → 项目名右键 → Properties → Configuration Properties → C/C++ → Language → C++ Language Standard → ISO C++20。",
+    "编译操作：Build → Build Solution。"
+  ],
+  "misconceptions": [
+    "安装了 Visual C++ 2019 并不表示项目会自动使用 C++20。",
+    "设置了 C++20 语言标准不等于 Visual C++ 2019 已经完整支持 C++20 的所有特性。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "在 Visual C++ 2019 项目中如何启用 C++20 语言标准？",
+      "a": "打开项目 Properties，进入 Configuration Properties | C/C++ | Language，将 C++ Language Standard 设置为 ISO C++20，或者选择包含最新 C++ 工作草案特性的预览选项。"
+    },
+    {
+      "q": "设置 C++20 语言标准后如何编译项目？",
+      "a": "使用 Build | Build Solution 命令进行编译。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "Visual Studio 项目和项目属性的基本操作"
+  ],
+  "source_pages": [
+    17,
+    17
+  ],
+  "needs_verification": true,
+  "verify_query": "Visual Studio 2019 C++ Language Standard ISO C++20 project properties option Preview Features from the Latest C++ Working Draft",
+  "concept_id": "027_visual_c_2019_中启用_c_20_标准",
+  "_chunk_pages": [
+    17,
+    20
+  ]
+}

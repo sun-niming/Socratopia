@@ -1,0 +1,51 @@
+{
+  "title": "函数重载",
+  "definition": "函数重载允许在同一作用域中定义多个同名函数，只要它们的参数列表不同。调用时，编译器根据传入实参的类型和数量选择匹配的重载版本。",
+  "key_points": [
+    "原文定义了两个同名的 `addNumbers` 函数：一个接收两个 `int` 参数，另一个接收两个 `double` 参数。",
+    "调用 `addNumbers(1, 2)` 时选择整数版本。",
+    "调用 `addNumbers(1.11, 2.22)` 时选择 `double` 版本。",
+    "函数重载不能只依靠返回类型不同来区分；区分重载的关键是参数列表。"
+  ],
+  "examples": [
+    "`int addNumbers(int a, int b) { return a + b; }`",
+    "`double addNumbers(double a, double b) { return a + b; }`",
+    "`cout << addNumbers(1, 2) << endl;`",
+    "`cout << addNumbers(1.11, 2.22);`"
+  ],
+  "misconceptions": [
+    "同名函数并不意味着只能有一个定义；只要参数列表不同，就可能构成重载。",
+    "仅改变返回类型不能构成函数重载。",
+    "调用 `addNumbers(1, 2)` 时，参数是整数，因此优先匹配接收两个 `int` 的版本。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "原文中 `addNumbers(1, 2)` 调用哪个重载版本？",
+      "a": "调用接收两个 `int` 参数的版本。"
+    },
+    {
+      "q": "原文中 `addNumbers(1.11, 2.22)` 调用哪个重载版本？",
+      "a": "调用接收两个 `double` 参数的版本。"
+    },
+    {
+      "q": "函数重载主要依据什么区分函数？",
+      "a": "依据函数名相同但参数列表不同来区分，包括参数数量、类型或顺序；仅返回类型不同不能区分重载。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "函数声明、定义与调用",
+    "C++基本类型"
+  ],
+  "source_pages": [
+    53,
+    56
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "067_函数重载",
+  "_chunk_pages": [
+    53,
+    56
+  ]
+}

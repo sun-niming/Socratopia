@@ -1,0 +1,55 @@
+{
+  "title": "用可变参数 Event 模板实现观察者注册与注销",
+  "definition": "原文使用可变参数类模板 `Event<Args...>` 表示事件。它内部保存观察者函数的映射，并通过重载运算符注册和注销观察者：`operator+=` 注册一个观察者并返回一个 `EventHandle`，`operator-=` 根据句柄注销对应观察者，`raise(Args... args)` 向所有已注册观察者传递参数并触发它们。",
+  "key_points": [
+    "事件句柄可定义为 `using EventHandle = size_t;`，用于唯一标识一次注册。",
+    "注册观察者时生成递增的句柄，并把观察者函数保存到映射中。",
+    "注销时根据 `EventHandle` 从观察者映射中删除对应项。",
+    "`raise` 遍历所有已注册观察者，并使用事件参数调用它们。",
+    "可变参数模板使不同事件可以携带不同数量和类型的参数。"
+  ],
+  "examples": [
+    "事件接口的抽象用法可以写成：`Event<int, double> event;`，然后注册一个形如 `void(int, double)` 的观察者：`auto handle = event += observer;`；触发事件：`event.raise(1, 2.3);`；注销观察者：`event -= handle;`。",
+    "一个事件内部可以抽象表示为：$$\\text{观察者映射}:\\ \\text{EventHandle}\\mapsto\\text{function<void(Args...)>}$$"
+  ],
+  "misconceptions": [
+    "`EventHandle` 不是观察者函数本身，而是用于定位某次注册的标识。",
+    "调用 `raise` 只会通知当前仍注册的观察者；已经通过 `operator-=` 注销的观察者不会再收到通知。",
+    "可变参数模板并不表示每次触发都可以随意改变参数类型；同一个 `Event<Args...>` 的注册函数和 `raise` 参数必须符合其模板参数约定。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`operator+=` 在原文的 Event 模板中承担什么作用？",
+      "a": "它注册一个观察者函数，保存该函数，并返回一个可用于之后注销该观察者的 `EventHandle`。"
+    },
+    {
+      "q": "如何注销一个已经注册的观察者？",
+      "a": "保存注册时返回的 `EventHandle`，然后将该句柄传给事件的 `operator-=`，例如 `event -= handle;`。"
+    },
+    {
+      "q": "`raise(Args... args)` 做什么？",
+      "a": "它遍历所有已注册观察者，并把传入的事件参数转发给每个观察者函数。"
+    },
+    {
+      "q": "为什么 Event 使用可变参数类模板？",
+      "a": "因为不同事件可能需要携带不同数量和类型的信息；可变参数模板允许创建具有不同参数列表的 Event 实例。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "函数对象与回调",
+    "C++可变参数模板",
+    "关联容器"
+  ],
+  "source_pages": [
+    958,
+    959
+  ],
+  "needs_verification": true,
+  "verify_query": "\"C++20高级编程\" \"EventHandle\" \"operator+=\" \"raise\" 观察者模式",
+  "concept_id": "1969_用可变参数_event_模板实现观察者注册与注销",
+  "_chunk_pages": [
+    957,
+    960
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "title": "dynamic_cast() 的指针转换",
+  "definition": "`dynamic_cast()` 可用于在具有继承关系的类型之间进行运行时类型转换。原文给出了将 `Base*` 转换为 `Derived*` 的形式：`dynamic_cast<Derived*>(b)`。",
+  "key_points": [
+    "原文示例中的目标类型是 `Derived*`，源表达式是指向基类的指针 `b`。",
+    "这种转换用于检查对象的实际类型是否适合转换为目标派生类型。",
+    "原文同时展示了 `Base` 和 `Derived` 类，以及通过 `dynamic_cast()` 进行转换的代码。"
+  ],
+  "examples": [
+    "`Derived* d = dynamic_cast<Derived*>(b);`",
+    "其中 `b` 是基类指针，目标类型为 `Derived*`。"
+  ],
+  "misconceptions": [
+    "`dynamic_cast<Derived*>(b)` 的结果类型是 `Derived*`，不是 `Derived` 对象本身。",
+    "不能仅凭静态声明为 `Base*` 就断定对象一定可以转换为 `Derived*`；`dynamic_cast()` 用于运行时检查。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "原文将基类指针 `b` 转换为派生类指针时使用了什么表达式？",
+      "a": "`dynamic_cast<Derived*>(b)`。"
+    },
+    {
+      "q": "原文示例中 `dynamic_cast()` 的目标类型是什么？",
+      "a": "`Derived*`。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++继承与基类指针",
+    "C++指针类型转换"
+  ],
+  "source_pages": [
+    349,
+    352
+  ],
+  "needs_verification": true,
+  "verify_query": "C++ dynamic_cast Derived* Base* example runtime type check polymorphic type",
+  "concept_id": "452_dynamic_cast_的指针转换",
+  "_chunk_pages": [
+    349,
+    352
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "title": "普通文件判断与文件体发送",
+  "definition": "当候选路径存在且解析后仍在根目录内时，还要检查 `S_ISREG(st.st_mode)`，只有普通文件才允许发送；如果不是普通文件，返回 `403 Forbidden`，错误信息为 `not a regular file`。随后用 `open(resolved, O_RDONLY)` 打开文件，失败则返回 `403 Forbidden`，错误信息为 `open failed`。打开成功后，获取 MIME 类型，构造 HTTP 200 响应头，再用 `read` 循环读取文件内容并通过 `send_all` 发送，最后把 `result->status` 设为 200，`result->bytes` 设为 `st.st_size`。",
+  "key_points": [
+    "只有 `S_ISREG(st.st_mode)` 为真时才允许发送。",
+    "`get_mime_type(resolved)` 决定 `Content-Type`。",
+    "响应头包含 `Content-Length: st.st_size` 和 `Connection: close`。",
+    "文件体必须用 `read` 循环发送，不能用 `strlen`。",
+    "成功后设置 `result->status = 200`、`result->bytes = (size_t)st.st_size`。"
+  ],
+  "examples": [
+    "响应头格式可写成：`HTTP/1.1 200 OK\\r\\nContent-Type: %s\\r\\nContent-Length: %ld\\r\\nConnection: close\\r\\n\\r\\n`。",
+    "文件体发送逻辑可概括为：`while ((r = read(file_fd, buf, sizeof(buf))) > 0) send_all(fd, buf, (size_t)r);`"
+  ],
+  "misconceptions": [
+    "文件体可以用 `strlen` 计算长度。对于二进制文件，这是错误的。",
+    "`open` 失败时应该当作 404；原文给出的实现是返回 403 `open failed`。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么文件体不能用 `strlen` 发送？",
+      "a": "因为文件内容可能包含二进制数据或 `\\0` 字节，`strlen` 会提前截断；原实现使用 `read` 循环和 `send_all` 发送整份文件。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "文件状态信息",
+    "HTTP 响应头基础"
+  ],
+  "source_pages": [
+    85,
+    86,
+    87
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "132_普通文件判断与文件体发送",
+  "_chunk_pages": [
+    85,
+    88
+  ]
+}

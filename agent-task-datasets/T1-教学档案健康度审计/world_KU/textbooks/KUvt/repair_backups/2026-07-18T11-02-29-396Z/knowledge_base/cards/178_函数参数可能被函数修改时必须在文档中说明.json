@@ -1,0 +1,43 @@
+{
+  "title": "函数参数可能被函数修改时必须在文档中说明",
+  "definition": "如果函数会通过参数对象向调用者传回信息，接口文档应明确说明这种副作用。原文说明：当传入的 `record` 尚未具有数据库 ID 时，`saveRecord` 会修改该记录对象，把数据库分配的 ID 存入其中。",
+  "key_points": [
+    "参数 `record` 不仅是输入数据，还可能在函数执行后被修改。",
+    "只有当记录原本没有数据库 ID 时，原文明确说明函数会为其保存数据库分配的 ID。",
+    "参数文档应直接写出对象会被修改，以及修改后新增或更新的内容。"
+  ],
+  "examples": [
+    "```cpp\n// record: If the given record does not yet have a database ID,\n//         then the method modifies the record object to store\n//         the ID assigned by the database.\nRecordID saveRecord(Records record);\n```",
+    "可将行为概括为：若 `record` 没有数据库 ID，则调用 `saveRecord(record)` 后，`record` 对象中会保存数据库分配的 ID。"
+  ],
+  "misconceptions": [
+    "把参数声明为按值传递就一定意味着函数不会影响调用者看到的对象状态。",
+    "函数返回了记录 ID，因此参数对象不可能同时被修改。",
+    "只有修改基本类型参数时才需要在接口文档中说明副作用。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`saveRecord` 可能对 `record` 参数做什么修改？",
+      "a": "如果 `record` 尚未有数据库 ID，函数会把数据库分配的 ID 写入该记录对象。"
+    },
+    {
+      "q": "为什么应在参数文档中说明 `record` 会被修改？",
+      "a": "因为这属于调用者需要知道的函数副作用，否则调用者可能误以为参数对象保持不变。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "用文档注释说明函数的功能、参数、返回值和异常"
+  ],
+  "source_pages": [
+    121,
+    124
+  ],
+  "needs_verification": true,
+  "verify_query": "\"If the given record does not yet have a database ID\" \"saveRecord\"",
+  "concept_id": "178_函数参数可能被函数修改时必须在文档中说明",
+  "_chunk_pages": [
+    121,
+    124
+  ]
+}

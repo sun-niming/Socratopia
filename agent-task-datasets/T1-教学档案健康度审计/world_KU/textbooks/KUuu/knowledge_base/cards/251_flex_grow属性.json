@@ -1,0 +1,42 @@
+{
+  "title": "flex-grow属性",
+  "definition": "flex-grow属性用于控制弹性项目在容器有剩余空间时的放大比例。它的默认值是0，表示即使容器有剩余空间，项目也不会放大。",
+  "key_points": [
+    "控制项目在有剩余空间时的放大比例",
+    "默认值为0，表示不放大",
+    "如果所有项目的flex-grow都为1，则剩余空间会被等分；某个项目值更大时，会分得更多剩余空间"
+  ],
+  "examples": [
+    "如果所有项目的flex-grow属性都为1，则它们将等分剩余空间。",
+    "如果一个项目的flex-grow属性为2，其他项目都为1，则前者占据的剩余空间将比其它项多一倍。"
+  ],
+  "misconceptions": [
+    "flex-grow越大，项目本身的基础大小越大；实际上它控制的是有剩余空间时的放大分配比例。",
+    "flex-grow默认值是1；原文明确给出默认值为0。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "flex-grow属性的作用是什么？",
+      "a": "它控制弹性项目在容器有剩余空间时的放大比例。"
+    },
+    {
+      "q": "flex-grow的默认值是多少？",
+      "a": "默认值是0。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "弹性项目基础"
+  ],
+  "source_pages": [
+    161,
+    164
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "251_flex_grow属性",
+  "_chunk_pages": [
+    161,
+    164
+  ]
+}

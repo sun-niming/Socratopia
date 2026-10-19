@@ -1,0 +1,52 @@
+{
+  "title": "declare 变量声明",
+  "definition": "declare 用于声明变量，基本格式为“declare [选项] 变量名”。原文列出的选项有：-a 声明变量为数组，-i 声明为整型，-x 声明为环境变量，-r 声明为只读变量。",
+  "key_points": [
+    "基本格式：declare [选项] 变量名",
+    "-a：声明变量为数组",
+    "-i：声明变量为整型",
+    "-x：声明为环境变量",
+    "-r：声明为只读变量"
+  ],
+  "examples": [
+    "declare -a arr",
+    "declare -i num",
+    "declare -x var",
+    "declare -r name"
+  ],
+  "misconceptions": [
+    "误以为 declare 只能创建普通变量，实际上可结合选项声明不同类型或属性",
+    "误以为 -x 只是普通赋值选项，原文说明它用于声明为环境变量",
+    "误以为 -r 与环境变量有关，实际上 -r 表示只读变量"
+  ],
+  "qa_pairs": [
+    {
+      "q": "declare 的基本用法是什么？",
+      "a": "declare [选项] 变量名。"
+    },
+    {
+      "q": "哪个选项用于把变量声明为数组？",
+      "a": "-a。"
+    },
+    {
+      "q": "哪个选项表示只读变量？",
+      "a": "-r。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "变量的基本概念",
+    "环境变量"
+  ],
+  "source_pages": [
+    68,
+    68
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "003_declare_变量声明",
+  "_chunk_pages": [
+    66,
+    69
+  ]
+}

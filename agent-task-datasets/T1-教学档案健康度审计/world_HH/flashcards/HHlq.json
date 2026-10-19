@@ -1,0 +1,161 @@
+{
+  "textbookId": "HHlq",
+  "updatedAt": "2026-06-04T00:56:38.795Z",
+  "cards": [
+    {
+      "id": "fc_1780534363377_000_f0af26fe0019",
+      "question": "无向连通图的点连通度 κ(G)、边连通度 λ(G) 和最小度 δ(G) 之间的大小关系是什么？",
+      "choices": [
+        "κ(G) ≥ λ(G) ≤ δ(G)",
+        "κ(G) = λ(G) = δ(G) 对所有图成立",
+        "κ(G) ≤ λ(G) ≤ δ(G)",
+        "κ(G) ≥ λ(G) ≥ δ(G)"
+      ],
+      "correctIndex": 2,
+      "explanation": "这是一个经典的不等式链：κ(G) ≤ λ(G) ≤ δ(G)，其中点连通度最小，边连通度居中，最小度是上界。这是因为去掉一个顶点可以破坏所有与之相连的边，所以κ(G) ≤ λ(G)；而最小度顶点关联的边数决定了至少需要多少刀才能孤立它，所以λ(G) ≤ δ(G)。",
+      "source": {
+        "textbook": "离散数学 第四部分 图论 — 精炼版",
+        "chapter": "",
+        "textbookSlug": "HHlq"
+      },
+      "created": "2026-06-04T00:52:43.377Z",
+      "conversationId": "vfzw4ShI2SkWP3bnC98Vo",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-06-04T00:52:51.969Z",
+          "chosen": 2,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-06-04T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1780534363377_001_571ec6a32edf",
+      "question": "完全图 K_n 的点连通度和边连通度分别是多少？",
+      "choices": [
+        "点连通度 = n，边连通度 = n",
+        "点连通度 = n-1，边连通度 = (n-1)/2",
+        "点连通度 = n-1，边连通度 = n-1",
+        "点连通度 = n，边连通度 = n-1"
+      ],
+      "correctIndex": 2,
+      "explanation": "完全图K_n的点连通度和边连通度都是n-1。因为要断开它，最经济的方式是孤立一个顶点：需要删除与该顶点相连的所有n-1条边（边连通度），或删除n-1个顶点只剩一个孤立点（点连通度）。两者在此相等。",
+      "source": {
+        "textbook": "离散数学 第四部分 图论 — 精炼版",
+        "chapter": "",
+        "textbookSlug": "HHlq"
+      },
+      "created": "2026-06-04T00:52:43.377Z",
+      "conversationId": "vfzw4ShI2SkWP3bnC98Vo",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-06-04T00:52:56.986Z",
+          "chosen": 2,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-06-04T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1780534363377_002_879e8220e106",
+      "question": "在一个由两个三角形仅通过一条边连接而成的哑铃图中（每个三角形顶点间全连接，中间一条边连接两个三角形的各一个顶点），最小度 δ(G) 和边连通度 λ(G) 分别是多少？",
+      "choices": [
+        "δ(G)=2，λ(G)=2",
+        "δ(G)=2，λ(G)=1",
+        "δ(G)=3，λ(G)=3",
+        "δ(G)=3，λ(G)=1"
+      ],
+      "correctIndex": 1,
+      "explanation": "哑铃图中，三角形的每个顶点连接2条边（三角形内），中间连接点（如C和D）各有3条边（三角形内2条加中间1条），所以最小度δ(G)=2。但中间那条桥边一旦被删，图就断开，所以边连通度λ(G)=1。这体现了λ(G)可以严格小于δ(G)。",
+      "source": {
+        "textbook": "离散数学 第四部分 图论 — 精炼版",
+        "chapter": "",
+        "textbookSlug": "HHlq"
+      },
+      "created": "2026-06-04T00:52:43.377Z",
+      "conversationId": "vfzw4ShI2SkWP3bnC98Vo",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-06-04T00:53:16.092Z",
+          "chosen": 1,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-06-04T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1780534363377_003_a4c661d83488",
+      "question": "证明点连通度 κ(G) ≤ 边连通度 λ(G) 的关键直觉是什么？",
+      "choices": [
+        "每条边依赖于两个端点存在，删除一侧端点即可消除所有割边，且点数不超过边数",
+        "因为最小度顶点可能不是割点，所以点连通度更大",
+        "点连通度总是等于最小度，而边连通度总是小于最小度，所以κ(G) ≤ λ(G)",
+        "边连通度衡量的是图的最大抗破坏性，所以总是大于点连通度"
+      ],
+      "correctIndex": 0,
+      "explanation": "因为一组割边把图分成两部分时，每条割边连接两侧，我们只需从每侧取一个端点（如取自同一侧），删除这些端点后所有割边消失，且端点数量不超过割边数。从而 κ(G) ≤ λ(G)。",
+      "source": {
+        "textbook": "离散数学 第四部分 图论 — 精炼版",
+        "chapter": "",
+        "textbookSlug": "HHlq"
+      },
+      "created": "2026-06-04T00:52:43.377Z",
+      "conversationId": "vfzw4ShI2SkWP3bnC98Vo",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-06-04T00:53:24.217Z",
+          "chosen": 0,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-06-04T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1780534363377_004_5d8beec7c133",
+      "question": "在六边形加隔顶点对角线（即 K_{3,3}）的图中，最小点割集的大小是多少？",
+      "choices": [
+        "2",
+        "3",
+        "1",
+        "4"
+      ],
+      "correctIndex": 1,
+      "explanation": "该图是二分图K_{3,3}，顶点分为奇偶两组各3个，所有奇顶点连接所有偶顶点。要断开图，需要删除一整组（3个顶点），因为删掉2个同组顶点后，剩下的一个顶点仍能通过另一组保持连通；删掉2个不同组顶点也不能完全断开。因此最小点割大小为3。",
+      "source": {
+        "textbook": "离散数学 第四部分 图论 — 精炼版",
+        "chapter": "",
+        "textbookSlug": "HHlq"
+      },
+      "created": "2026-06-04T00:52:43.377Z",
+      "conversationId": "vfzw4ShI2SkWP3bnC98Vo",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-06-04T00:56:38.794Z",
+          "chosen": 1,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-06-04T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    }
+  ]
+}

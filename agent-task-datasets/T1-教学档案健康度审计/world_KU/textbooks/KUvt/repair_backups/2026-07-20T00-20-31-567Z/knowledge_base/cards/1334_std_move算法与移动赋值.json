@@ -1,0 +1,46 @@
+{
+  "title": "std::move算法与移动赋值",
+  "definition": "标准库提供两个与移动相关的工具：单参数的 std::move 将左值转换为右值引用，以便触发移动语义；三个参数的 std::move 是算法，将源范围中的元素逐个移动赋值到目标范围。若容器元素是自定义类型，该类型需要提供可用的移动赋值运算符。",
+  "key_points": [
+    "单参数 std::move 位于 <utility> 中，作用是将 lvalue 转换为 rvalue，并不执行实际的数据移动。",
+    "三个参数的 std::move 算法执行范围移动：std::move(first, last, destination)。",
+    "自定义类型应提供移动赋值运算符，例如 MyClass& operator=(MyClass&& rhs) noexcept。",
+    "移动后的源对象仍处于有效但未指定状态。"
+  ],
+  "examples": [
+    "MyClass& operator=(MyClass&& rhs) noexcept { if (this == &rhs) { return *this; } m_str = std::move(rhs.m_str); return *this; }",
+    "vector<MyClass> vecSrc { MyClass { \"a\" }, MyClass { \"b\" }, MyClass { \"c\" } }; vector<MyClass> vecDst(vecSrc.size()); std::move(begin(vecSrc), end(vecSrc), begin(vecDst));",
+    "上述示例中，vecDst 中的元素可输出为 a、b、c。"
+  ],
+  "misconceptions": [
+    "单参数 std::move 不会自行移动对象，只是进行类型转换。",
+    "三个参数的 std::move 算法不是把整个容器对象移动构造到另一个容器，而是移动范围内的元素。",
+    "移动源对象不是被销毁或变成无效对象，而是处于有效但未指定状态。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "单参数 std::move 与三个参数的 std::move 有什么区别？",
+      "a": "单参数 std::move 将左值转换为右值引用，用于启用移动语义；三个参数的 std::move 是标准库算法，将一个范围内的元素移动到目标范围。"
+    },
+    {
+      "q": "使用 std::move 算法移动自定义类型元素时，元素类型通常需要提供什么？",
+      "a": "需要提供可用的移动赋值运算符。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "左值与右值引用",
+    "移动语义"
+  ],
+  "source_pages": [
+    641,
+    641
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1334_std_move算法与移动赋值",
+  "_chunk_pages": [
+    641,
+    644
+  ]
+}

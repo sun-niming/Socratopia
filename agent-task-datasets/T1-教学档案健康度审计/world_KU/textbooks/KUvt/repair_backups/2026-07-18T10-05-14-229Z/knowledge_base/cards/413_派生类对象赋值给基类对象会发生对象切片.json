@@ -1,0 +1,50 @@
+{
+  "title": "派生类对象赋值给基类对象会发生对象切片",
+  "definition": "将派生类对象按值初始化或赋值给基类对象时，只会复制其中的基类子对象部分，派生类新增的数据和派生类特性不会被保留，这种现象称为对象切片（slicing）。将派生类对象绑定到基类引用则不会复制对象，因此不会发生切片；这属于向上转型（upcasting）。",
+  "key_points": [
+    "按值初始化会切片：Base myBase{myDerived};。",
+    "绑定基类引用不会切片：Base& myBase{myDerived};。",
+    "切片发生在生成独立的 Base 对象时；基类引用只是引用原来的 Derived 对象。",
+    "原文同时列出了 upcasting 和 downcasting 术语，但给出的具体代码示例是派生类到基类的向上转型。"
+  ],
+  "examples": [
+    "Base myBase{myDerived}; // Slicing!",
+    "Base& myBase{myDerived}; // No slicing!，这是 upcasting"
+  ],
+  "misconceptions": [
+    "Base myBase{myDerived}; 只是保存了一个指向 myDerived 的引用；实际上，它创建了新的 Base 对象并丢失派生类部分。",
+    "使用 Base& 引用会把对象转换成新的 Base 对象；实际上，引用仍绑定到原来的 Derived 对象，因此不会切片。",
+    "所有从 Derived 到 Base 的使用都会发生切片；实际上，按值复制会切片，而通过基类引用或指针访问通常不会因绑定本身而切片。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "下面哪条语句会发生对象切片：Base myBase{myDerived}; 还是 Base& myBase{myDerived};？",
+      "a": "Base myBase{myDerived}; 会发生对象切片；Base& myBase{myDerived}; 绑定基类引用，不会发生切片。"
+    },
+    {
+      "q": "为什么 Base& myBase{myDerived}; 不会切片？",
+      "a": "因为它没有创建新的 Base 对象，只是让基类引用绑定到原来的 Derived 对象。"
+    },
+    {
+      "q": "原文给出的 Base& myBase{myDerived}; 属于哪种转型？",
+      "a": "属于向上转型（upcasting）。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "继承",
+    "对象和值语义",
+    "引用"
+  ],
+  "source_pages": [
+    317,
+    320
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "413_派生类对象赋值给基类对象会发生对象切片",
+  "_chunk_pages": [
+    317,
+    320
+  ]
+}

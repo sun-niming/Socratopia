@@ -1,0 +1,42 @@
+{
+  "title": ":not伪类",
+  "definition": ":not(selector) 用于在祖先元素 PE 中匹配非指定选择器的每个元素。它的作用是做“排除式筛选”，把不符合指定选择器的元素选出来。",
+  "key_points": [
+    "语法形式是 :not(selector)。",
+    "作用是在祖先元素 PE 中匹配非指定选择器的每个元素。",
+    "它体现的是“排除”，不是“添加样式类”。"
+  ],
+  "examples": [
+    ":not(.active)",
+    ":not(span)"
+  ],
+  "misconceptions": [
+    ":not 不是把元素从 DOM 中删除，只是选择时排除某些元素。",
+    ":not 后面需要写一个选择器，而不是随便写文本。"
+  ],
+  "qa_pairs": [
+    {
+      "q": ":not(selector) 的作用是什么？",
+      "a": "匹配非指定选择器的每个元素。"
+    },
+    {
+      "q": ":not(.active) 表示什么？",
+      "a": "匹配不带 active 这个选择条件的元素。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "伪类选择器"
+  ],
+  "source_pages": [
+    97,
+    100
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "128_not伪类",
+  "_chunk_pages": [
+    97,
+    100
+  ]
+}

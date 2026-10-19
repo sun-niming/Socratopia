@@ -1,0 +1,51 @@
+{
+  "title": "使用using声明继承基类构造函数",
+  "definition": "在派生类中声明using Base::Base;，可以使派生类能够使用基类提供的构造函数形式来构造对象。继承的构造函数会负责初始化基类子对象；派生类还可以定义自己的构造函数。若没有继承基类构造函数，派生类对象不能直接使用基类中仅接受特定参数的构造函数。",
+  "key_points": [
+    "如果Derived没有声明using Base::Base;，Base(std::string_view)不能直接用来构造Derived对象。",
+    "声明using Base::Base;后，Derived可以使用基类的string_view、float等构造函数形式，也可以使用默认构造方式。",
+    "Derived仍可定义自己的构造函数；继承基类构造函数不会阻止派生类拥有额外构造函数。",
+    "示例中，Derived对象可由整数构造函数、继承的string_view构造函数或继承的默认构造方式创建。"
+  ],
+  "examples": [
+    "class Base { public: Base() = default; Base(std::string_view str); }; class Derived : public Base { public: using Base::Base; Derived(int i); };",
+    "Derived d1{1}; // 调用Derived(int)",
+    "Derived d2{\"Hello\"}; // 调用继承的Base(std::string_view)形式",
+    "Derived d3; // 使用默认构造方式"
+  ],
+  "misconceptions": [
+    "仅仅因为Derived继承自Base，并不意味着Base的所有构造函数都自动可用于构造Derived。",
+    "using Base::Base;不是把Base对象转换成Derived对象，而是让Derived获得基于Base构造函数的构造方式。",
+    "继承构造函数只解决构造函数调用形式的问题，不代表派生类新增的数据成员已经被正确初始化。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何让Derived能够使用Base(std::string_view)构造函数形式？",
+      "a": "在Derived类中声明using Base::Base;。"
+    },
+    {
+      "q": "没有using Base::Base;时，Derived derived{\"Hello\"};通常会发生什么？",
+      "a": "如果Derived没有接受字符串视图参数的构造函数，该语句会编译错误，因为基类构造函数不会自动成为派生类构造函数。"
+    },
+    {
+      "q": "using Base::Base;之后，Derived还能定义自己的构造函数吗？",
+      "a": "可以。Derived可以同时拥有继承的基类构造函数和自己显式定义的构造函数。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "基类与派生类",
+    "构造函数"
+  ],
+  "source_pages": [
+    333,
+    334
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "679_使用using声明继承基类构造函数",
+  "_chunk_pages": [
+    333,
+    336
+  ]
+}

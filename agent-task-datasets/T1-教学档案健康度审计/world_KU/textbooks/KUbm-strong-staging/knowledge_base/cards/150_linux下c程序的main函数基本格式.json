@@ -1,0 +1,41 @@
+{
+  "title": "Linux下C程序的main函数基本格式",
+  "definition": "教材给出了 Linux 下 C 程序的基本入口函数格式：int main(int argc,char *argv[]){ … return 0; }。其中 main 是程序入口，函数体中书写程序语句，最后使用 return 0; 结束。原文只展示了这种基本书写格式，没有进一步解释参数含义。",
+  "key_points": [
+    "基本格式为：int main(int argc,char *argv[]){ … return 0; }",
+    "main 函数是教材中展示的 Linux 下 C 程序入口形式",
+    "函数末尾包含 return 0;"
+  ],
+  "examples": [
+    "int main(int argc,char *argv[]){\n    …\n    return 0;\n}"
+  ],
+  "misconceptions": [
+    "不要把教材给出的 main 函数格式遗漏末尾的 return 0;",
+    "不要把该页内容误解为已经详细讲解了 argc 和 argv 的含义，原文并未展开说明"
+  ],
+  "qa_pairs": [
+    {
+      "q": "教材给出的 Linux 下 C 程序基本入口函数格式是什么？",
+      "a": "int main(int argc,char *argv[]){ … return 0; }"
+    },
+    {
+      "q": "教材示例中的 main 函数最后返回什么？",
+      "a": "return 0;"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C语言函数基本概念"
+  ],
+  "source_pages": [
+    93,
+    95
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "150_linux下c程序的main函数基本格式",
+  "_chunk_pages": [
+    93,
+    95
+  ]
+}

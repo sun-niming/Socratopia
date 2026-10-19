@@ -1,0 +1,44 @@
+{
+  "title": "枚举成员的显式赋值与底层类型",
+  "definition": "在枚举声明中，可以为枚举成员指定整型值。若某个成员没有显式赋值，编译器会将前一个枚举成员的值加 `1` 作为它的值；如果第一个成员没有赋值，则默认值为 `0`。默认情况下，`enum class` 的底层类型是整型，也可以显式指定其他整型底层类型。",
+  "key_points": [
+    "未显式赋值的第一个枚举成员默认值为 `0`。",
+    "未显式赋值的后续枚举成员取前一个成员值加 `1`。",
+    "可以使用 `enum class PieceType : unsigned long` 的形式指定底层类型。",
+    "显式赋值不会要求后续成员连续递增；后续成员只会从紧邻的前一个成员值继续递增。"
+  ],
+  "examples": [
+    "`enum class PieceType { King = 1, Queen, Rook = 10, Pawn };`",
+    "上述声明中，`King` 的值为 `1`，`Queen` 的值为 `2`，`Rook` 的值为 `10`，`Pawn` 的值为 `11`。",
+    "指定底层类型的写法：`enum class PieceType : unsigned long { King = 1, Queen, Rook = 10, Pawn };`"
+  ],
+  "misconceptions": [
+    "没有显式赋值的枚举成员并不总是从 `0` 开始；只有第一个成员未赋值时才默认为 `0`。",
+    "显式把某个成员设为 `10` 后，后续成员不会回到连续序列起点，而是通常从 `11` 开始递增。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "在 `enum class PieceType { King = 1, Queen, Rook = 10, Pawn };` 中，四个成员的值分别是多少？",
+      "a": "`King` 为 `1`，`Queen` 为 `2`，`Rook` 为 `10`，`Pawn` 为 `11`。"
+    },
+    {
+      "q": "如何把强类型枚举的底层类型指定为 `unsigned long`？",
+      "a": "在枚举名称后写 `: unsigned long`，例如 `enum class PieceType : unsigned long { King, Queen };`。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "强类型枚举enum class"
+  ],
+  "source_pages": [
+    46,
+    46
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "067_枚举成员的显式赋值与底层类型",
+  "_chunk_pages": [
+    45,
+    48
+  ]
+}

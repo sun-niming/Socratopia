@@ -1,0 +1,292 @@
+{
+  "textbookId": "KUzu",
+  "updatedAt": "2026-10-13T12:11:50.822Z",
+  "cards": [
+    {
+      "id": "fc_1791217445944_000_15bc3a2ba616",
+      "question": "Spring Boot DevTools 能自动重启应用代码的改动，但为什么新增依赖后必须手动重启应用？",
+      "choices": [
+        "自动重启只对模板和静态资源有用，对 Java 代码的任何改动都需要手动重启",
+        "新增依赖会改变应用的启动参数，必须手动重启才能生效",
+        "DevTools 无法感知 pom.xml 的变化，所以自动重启根本不会触发",
+        "新依赖会被装进依赖类加载器，而自动重启只重载项目代码的类加载器，不碰依赖类加载器"
+      ],
+      "correctIndex": 3,
+      "explanation": "DevTools 用两个类加载器分工：项目代码放在轻量类加载器中，改了就重载；依赖库放在另一个类加载器中，基本不动。新依赖装入的是依赖类加载器，而自动重启不碰它，所以必须手动重启。",
+      "source": {
+        "textbook": "Spring In Action",
+        "chapter": "",
+        "textbookSlug": "KUzu"
+      },
+      "created": "2026-10-05T16:24:05.944Z",
+      "conversationId": "nUtjMBmtqzUJQ6YiLBJ-P",
+      "status": "active",
+      "history": [
+        {
+          "schemaVersion": 2,
+          "time": "2026-10-05T16:24:13.846Z",
+          "chosen": 3,
+          "correct": true,
+          "domainRevision": 1,
+          "answerRecordId": "flashcard:fc_1791217445944_000_15bc3a2ba616:1"
+        }
+      ],
+      "nextReview": "2026-10-06T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1791217445944_001_f5bbd9e4da68",
+      "question": "教材说 Spring 是“无框架的框架”。这句话想表达的核心含义是什么？",
+      "choices": [
+        "Spring 不强制开发者使用它的任何 API，连 Spring 自己的类都可以完全不写",
+        "Spring 不属于任何 Web 框架类别，因此可以完全脱离 Servlet 容器运行",
+        "Spring 通过自动配置等方式在幕后承担搭建工作，让开发者专注于业务需求，而无需迁就框架本身的繁文缛节",
+        "Spring 不需要任何框架配置文件，因为注解完全取代了 XML"
+      ],
+      "correctIndex": 2,
+      "explanation": "Taco Cloud 项目中几乎每行代码都冲着“做出主页”这个目标，控制器里的 Spring 代码只有两行，模板里一行 Spring 都没有。Spring 通过自动配置把搭建框架的重活全干了，开发者能把精力放在业务需求上，而不是满足框架的要求。",
+      "source": {
+        "textbook": "Spring In Action",
+        "chapter": "",
+        "textbookSlug": "KUzu"
+      },
+      "created": "2026-10-05T16:24:05.944Z",
+      "conversationId": "nUtjMBmtqzUJQ6YiLBJ-P",
+      "status": "active",
+      "history": [
+        {
+          "schemaVersion": 2,
+          "time": "2026-10-05T16:24:25.676Z",
+          "chosen": 2,
+          "correct": true,
+          "domainRevision": 1,
+          "answerRecordId": "flashcard:fc_1791217445944_001_f5bbd9e4da68:1"
+        },
+        {
+          "schemaVersion": 2,
+          "time": "2026-10-05T16:24:49.237Z",
+          "chosen": 2,
+          "correct": true,
+          "domainRevision": 2,
+          "answerRecordId": "flashcard:fc_1791217445944_001_f5bbd9e4da68:2"
+        }
+      ],
+      "nextReview": "2026-10-08T16:00:00.000Z",
+      "interval": 3,
+      "ease": 2.7,
+      "repetitions": 2
+    },
+    {
+      "id": "fc_1791217445944_002_5d5e6647890e",
+      "question": "Spring Data 让你只写一个接口、不写实现类，就能得到能干活的对象。这个对象最终是怎么到你手里的？",
+      "choices": [
+        "Spring Data 在运行时生成接口实现，该实现作为 bean 进入 Spring 容器，再通过依赖注入交给需要它的代码",
+        "Spring Data 只提供查询方法的元数据，真正干活的对象由调用方自己用反射创建",
+        "Spring Data 在编译时通过注解处理器生成实现类的 .class 文件，打包进最终产物",
+        "接口的实现由底层数据库驱动直接提供，Spring 只负责建立连接"
+      ],
+      "correctIndex": 0,
+      "explanation": "Spring Data 在运行时为接口补出实现，生成的实现作为一个 bean 注册进 Spring 容器，再由依赖注入把它交给需要它的代码，因此只需声明接口即可使用。",
+      "source": {
+        "textbook": "Spring In Action",
+        "chapter": "",
+        "textbookSlug": "KUzu"
+      },
+      "created": "2026-10-05T16:24:05.944Z",
+      "conversationId": "nUtjMBmtqzUJQ6YiLBJ-P",
+      "status": "active",
+      "history": [
+        {
+          "schemaVersion": 2,
+          "time": "2026-10-05T16:24:45.258Z",
+          "chosen": 3,
+          "correct": false,
+          "domainRevision": 1,
+          "answerRecordId": "flashcard:fc_1791217445944_002_5d5e6647890e:1"
+        },
+        {
+          "schemaVersion": 2,
+          "time": "2026-10-05T16:24:57.004Z",
+          "chosen": 0,
+          "correct": true,
+          "domainRevision": 2,
+          "answerRecordId": "flashcard:fc_1791217445944_002_5d5e6647890e:2"
+        }
+      ],
+      "nextReview": "2026-10-06T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.4,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1791217445944_003_568c4534fb8f",
+      "question": "第 2 章设计玉米卷的页面为什么不能像第 1 章主页那样用静态 HTML 实现？",
+      "choices": [
+        "因为第 1 章的主页也是 Thymeleaf 模板，第 2 章必须保持技术一致",
+        "静态 HTML 不能通过 Servlet 容器对外提供服务，必须用 JSP 才行",
+        "静态 HTML 无法包含 CSS 和 JavaScript，样式和交互无法实现",
+        "配料数据会变化，页面必须根据控制器提供的动态数据在每次请求时生成，而不是固定写死在 HTML 里"
+      ],
+      "correctIndex": 3,
+      "explanation": "配料是随时可能变化的，不能硬编码进 HTML。页面必须根据从数据库取出、并交给视图的配料数据动态生成，因此需要控制器获取数据、视图渲染数据这整套动态流程。",
+      "source": {
+        "textbook": "Spring In Action",
+        "chapter": "",
+        "textbookSlug": "KUzu"
+      },
+      "created": "2026-10-05T16:24:05.944Z",
+      "conversationId": "nUtjMBmtqzUJQ6YiLBJ-P",
+      "status": "active",
+      "history": [
+        {
+          "schemaVersion": 2,
+          "time": "2026-10-05T16:25:05.529Z",
+          "chosen": 3,
+          "correct": true,
+          "domainRevision": 1,
+          "answerRecordId": "flashcard:fc_1791217445944_003_568c4534fb8f:1"
+        }
+      ],
+      "nextReview": "2026-10-06T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1791217445944_004_6fe34775476f",
+      "question": "Thymeleaf 等视图库通常与具体 Web 框架解耦，不认识 Spring 的 Model 抽象。那么 Spring 在把请求交给 Thymeleaf 视图之前做了什么？",
+      "choices": [
+        "Spring 让控制器直接调用视图模板的 Java API，把数据作为方法参数传入",
+        "Spring 先把 Model 序列化成 JSON 字符串，作为单个请求属性传给视图",
+        "Spring 把 Model 中的数据写入 session 作用域，因为视图只能访问 session",
+        "Spring 先把 Model 中的数据复制到 Servlet 请求属性中，这样 Thymeleaf 就能按请求属性取到数据"
+      ],
+      "correctIndex": 3,
+      "explanation": "Thymeleaf 不认 Spring 的 Model，但认得 Servlet 请求属性。所以 Spring 在把请求提交给视图之前，先把 Model 中的数据复制到请求属性中，让 Thymeleaf 等模板技术能够拿到这些数据。",
+      "source": {
+        "textbook": "Spring In Action",
+        "chapter": "",
+        "textbookSlug": "KUzu"
+      },
+      "created": "2026-10-05T16:24:05.944Z",
+      "conversationId": "nUtjMBmtqzUJQ6YiLBJ-P",
+      "status": "active",
+      "history": [
+        {
+          "schemaVersion": 2,
+          "time": "2026-10-05T16:25:24.447Z",
+          "chosen": 3,
+          "correct": true,
+          "domainRevision": 1,
+          "answerRecordId": "flashcard:fc_1791217445944_004_6fe34775476f:1"
+        }
+      ],
+      "nextReview": "2026-10-06T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1791893510821_000_f4b30056da4a",
+      "question": "在清单 2.14 的方法签名 `public String processOrder(@Valid TacoOrder order, Errors errors)` 中，Spring 是根据什么把 `Errors` 对象与被校验的对象配对的？",
+      "choices": [
+        "因为 Errors 参数紧跟在被校验对象之后，Spring 靠这个相邻位置来配对",
+        "因为 Spring 会遍历所有参数，把 Errors 自动绑定到表单中字段最多的那个对象",
+        "因为 @Valid 注解在编译期记录了它要绑定的字段名",
+        "因为 Errors 参数的名称必须与被校验对象的首字母大写形式一致"
+      ],
+      "correctIndex": 0,
+      "explanation": "`Errors` 参数没有显式指定它属于哪个对象，Spring 依赖的位置规则是\"`Errors` 必须紧跟在被校验对象之后\"。`@Valid` 只负责触发校验，并不指明配对对象。",
+      "source": {
+        "textbook": "Spring In Action",
+        "chapter": "",
+        "textbookSlug": "KUzu"
+      },
+      "created": "2026-10-13T12:11:50.821Z",
+      "conversationId": "KfG43v-cJLlvThdB6I4bv",
+      "status": "active",
+      "history": [],
+      "nextReview": "2026-10-13T12:11:50.821Z",
+      "interval": 0,
+      "ease": 2.5,
+      "repetitions": 0
+    },
+    {
+      "id": "fc_1791893510821_001_e85ab4243dc9",
+      "question": "关于 Thymeleaf 中 `#fields.hasErrors()` 的用法，下列哪项描述是正确的？",
+      "choices": [
+        "带字段名时判断的是整个表单是否有错，不带字段名时才只判断单个字段",
+        "无论是否带字段名，hasErrors() 都只检查与该 span 所在表单绑定的主对象",
+        "不带字段名时判断整个表单是否有任何错误，带字段名时只判断该特定字段是否有错",
+        "不带字段名时会抛异常，必须传入具体字段名才能正常工作"
+      ],
+      "correctIndex": 2,
+      "explanation": "`hasErrors()` 不带字段名时询问整个表单是否有任意错误，带上字段名时只针对该字段判断。城市为空、卡号正确时，总提示 div 显示，而 ccNumber 的 span 不显示。",
+      "source": {
+        "textbook": "Spring In Action",
+        "chapter": "",
+        "textbookSlug": "KUzu"
+      },
+      "created": "2026-10-13T12:11:50.821Z",
+      "conversationId": "KfG43v-cJLlvThdB6I4bv",
+      "status": "active",
+      "history": [],
+      "nextReview": "2026-10-13T12:11:50.821Z",
+      "interval": 0,
+      "ease": 2.5,
+      "repetitions": 0
+    },
+    {
+      "id": "fc_1791893510821_002_424b34010d82",
+      "question": "为什么 Spring Boot 中 JSP 不需要任何 starter 依赖，而其他模板引擎都需要？",
+      "choices": [
+        "因为 JSP 规范由 servlet 容器（如内嵌 Tomcat）自己实现，容器已经自带支持",
+        "因为 JSP 是 Java 标准库的一部分，随 JDK 一起打包进项目",
+        "因为 JSP 模板会被编译成 HTML 静态文件，运行时不再需要任何模板引擎",
+        "因为 Spring Boot 把 JSP 引擎的依赖声明成了可选项，不指定版本时自动跳过"
+      ],
+      "correctIndex": 0,
+      "explanation": "JSP 规范由 servlet 容器（如内嵌的 Tomcat）自身实现并提供支持，所以构建里不需要额外补依赖；其他模板引擎则需要通过对应的 starter 引入。",
+      "source": {
+        "textbook": "Spring In Action",
+        "chapter": "",
+        "textbookSlug": "KUzu"
+      },
+      "created": "2026-10-13T12:11:50.821Z",
+      "conversationId": "KfG43v-cJLlvThdB6I4bv",
+      "status": "active",
+      "history": [],
+      "nextReview": "2026-10-13T12:11:50.821Z",
+      "interval": 0,
+      "ease": 2.5,
+      "repetitions": 0
+    },
+    {
+      "id": "fc_1791893510821_003_21d5571d1279",
+      "question": "为什么在 `Taco` 和 `Ingredient` 之间要额外建一张 `Ingredient_Ref` 中间表，而不是在 `Taco` 表里直接加一列存配料？",
+      "choices": [
+        "因为 Ingredient 是聚合根，必须通过一张独立的表来引用，不能与 Taco 同表",
+        "因为把配料存进 Taco 表会破坏 Taco_Order 与 Taco 之间的聚合关系",
+        "因为 Taco 表已经有很多列了，再加列会超过数据库对单表列数的上限",
+        "因为 Taco 和 Ingredient 是多对多关系，一列无法存放多个配料值，中间表把它拆成两组一对多"
+      ],
+      "correctIndex": 3,
+      "explanation": "一个 Taco 可以包含多种配料，同一种配料又会出现在多个 Taco 中，这是多对多关系。用一列无法存储多个配料值，中间表把多对多拆成两组一对多。",
+      "source": {
+        "textbook": "Spring In Action",
+        "chapter": "",
+        "textbookSlug": "KUzu"
+      },
+      "created": "2026-10-13T12:11:50.821Z",
+      "conversationId": "KfG43v-cJLlvThdB6I4bv",
+      "status": "active",
+      "history": [],
+      "nextReview": "2026-10-13T12:11:50.821Z",
+      "interval": 0,
+      "ease": 2.5,
+      "repetitions": 0
+    }
+  ]
+}

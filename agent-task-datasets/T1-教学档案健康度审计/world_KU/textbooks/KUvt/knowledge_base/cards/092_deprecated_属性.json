@@ -1,0 +1,46 @@
+{
+  "title": "[[deprecated]] 属性",
+  "definition": "[[deprecated]] 属性用于把某个实体标记为已弃用。已弃用的实体通常仍然可以使用，但不鼓励继续使用。该属性可以带一个可选的字符串参数，用于说明弃用原因或推荐的替代方案。",
+  "key_points": [
+    "被标记为 [[deprecated]] 的实体仍可能可用，但使用它会得到编译器诊断。",
+    "可以通过字符串参数解释弃用原因。",
+    "原文示例把 func() 标记为弃用，并建议使用 xyz。"
+  ],
+  "examples": [
+    "[[deprecated(\"Unsafe method, please use xyz\")]] void func();"
+  ],
+  "misconceptions": [
+    "deprecated 不等于实体立即从语言中删除；原文说明它仍可以使用，但不鼓励使用。",
+    "弃用说明文字不会自动创建或检查替代函数 xyz。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "[[deprecated]] 的含义是什么？",
+      "a": "表示某个实体已弃用，通常仍可使用，但不建议继续使用。"
+    },
+    {
+      "q": "如何为弃用声明附加原因？",
+      "a": "在属性后提供字符串参数，例如 [[deprecated(\"Unsafe method, please use xyz\")]]。"
+    },
+    {
+      "q": "使用已弃用函数时可能发生什么？",
+      "a": "编译器可能发出警告或诊断信息，具体表现取决于编译器。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++ 属性的标准化语法",
+    "编译器警告"
+  ],
+  "source_pages": [
+    56,
+    56
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "092_deprecated_属性",
+  "_chunk_pages": [
+    53,
+    56
+  ]
+}

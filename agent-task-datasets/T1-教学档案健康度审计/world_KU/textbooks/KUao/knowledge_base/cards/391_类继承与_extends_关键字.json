@@ -1,0 +1,39 @@
+{
+  "title": "类继承与 extends 关键字",
+  "definition": "在 JavaScript 的类中，继承是类的一个关键特性（除了私有字段）。extends 关键字可用于类声明或类表达式中，用来创建一个类，使其成为另一个构造函数（类或函数）的子类。",
+  "key_points": [
+    "继承是类的重要特性之一",
+    "extends 可以写在类声明或类表达式中",
+    "使用 extends 后，当前类会成为另一个构造函数的子类"
+  ],
+  "examples": [
+    "class Dog extends Animal {}",
+    "const MyArray = class extends Array {}"
+  ],
+  "misconceptions": [
+    "extends 只能用于类声明，不能用于类表达式",
+    "extends 只能继承类，不能继承函数"
+  ],
+  "qa_pairs": [
+    {
+      "q": "extends 关键字的作用是什么？",
+      "a": "它用于类声明或类表达式中，把一个类创建为另一个构造函数（类或函数）的子类。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "类",
+    "构造函数"
+  ],
+  "source_pages": [
+    297,
+    300
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "391_类继承与_extends_关键字",
+  "_chunk_pages": [
+    297,
+    300
+  ]
+}

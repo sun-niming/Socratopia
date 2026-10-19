@@ -1,0 +1,42 @@
+{
+  "title": "cp的-r或-R递归复制选项",
+  "definition": "在 cp 命令中，-r 或 -R 表示递归复制子目录。也就是说，当复制对象中包含目录及其下级内容时，可以使用该选项把子目录中的内容一并复制。",
+  "key_points": [
+    "-r 和 -R 都表示递归复制",
+    "作用对象是子目录及其内容",
+    "常用于复制目录结构"
+  ],
+  "examples": [
+    "cp -r dir1 backup/",
+    "cp -R project/ project_bak/"
+  ],
+  "misconceptions": [
+    "不加 -r/-R 时，不能按教材所述实现对子目录的递归复制",
+    "把“递归复制”误解成只复制目录本身而不复制其中内容是错误的"
+  ],
+  "qa_pairs": [
+    {
+      "q": "cp 的 -r/-R 选项有什么作用？",
+      "a": "递归复制子目录。"
+    },
+    {
+      "q": "复制目录及其下级内容时应使用什么选项？",
+      "a": "使用 cp 的 -r 或 -R 选项。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "cp命令复制文件"
+  ],
+  "source_pages": [
+    17,
+    20
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "031_cp的_r或_r递归复制选项",
+  "_chunk_pages": [
+    17,
+    20
+  ]
+}

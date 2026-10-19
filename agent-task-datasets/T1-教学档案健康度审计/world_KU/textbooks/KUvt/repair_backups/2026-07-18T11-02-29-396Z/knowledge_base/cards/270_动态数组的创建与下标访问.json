@@ -1,0 +1,52 @@
+{
+  "title": "动态数组的创建与下标访问",
+  "definition": "使用 new[] 可以在动态存储区创建数组，并返回指向第一个元素的指针。例如 int* myArrayPtr { new int[5] }; 会创建包含 5 个 int 元素的动态数组，返回的指针可以使用下标形式访问，如 myArrayPtr[0] 到 myArrayPtr[4]。动态数组使用完毕后必须使用 delete[] 释放。",
+  "key_points": [
+    "new int[5] 创建包含 5 个 int 元素的动态数组，并返回 int*。",
+    "动态数组指针可以像数组名一样使用下标访问。",
+    "动态数组的下标从 0 开始，5 个元素的有效下标为 0 到 4。",
+    "使用 new[] 分配的数组必须使用 delete[] 释放。",
+    "动态数组也可以使用初始化列表，例如 new int[] { 1, 2, 3, 4, 5 }。"
+  ],
+  "examples": [
+    "创建动态数组：int* myArrayPtr { new int[5] };",
+    "访问元素：myArrayPtr[0]、myArrayPtr[1]、myArrayPtr[2]、myArrayPtr[3]、myArrayPtr[4]。",
+    "带初始化列表创建：int* myArrayPtr { new int[] { 1, 2, 3, 4, 5 } };",
+    "释放数组：delete[] myArrayPtr; myArrayPtr = nullptr;"
+  ],
+  "misconceptions": [
+    "动态数组虽然可以使用下标访问，但它的类型是指针，不是固定长度的数组对象。",
+    "使用 new[] 分配的数组不能用单对象形式的 delete 释放。",
+    "释放动态数组后，原指针不会自动变成 nullptr；可以显式执行 myArrayPtr = nullptr。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何动态创建包含 5 个 int 元素的数组？",
+      "a": "使用 int* myArrayPtr { new int[5] };。"
+    },
+    {
+      "q": "new int[5] 返回的指针可以访问哪些下标？",
+      "a": "可以访问 myArrayPtr[0] 到 myArrayPtr[4]。"
+    },
+    {
+      "q": "如何正确释放由 new int[5] 创建的数组？",
+      "a": "使用 delete[] myArrayPtr;，释放后可以将指针设为 nullptr。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "指针与动态内存",
+    "数组下标"
+  ],
+  "source_pages": [
+    202,
+    203
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 new int[] 初始化列表 new int[] {1,2,3,4,5} 语法及 delete[] 教材第202至203页",
+  "concept_id": "270_动态数组的创建与下标访问",
+  "_chunk_pages": [
+    201,
+    204
+  ]
+}

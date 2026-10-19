@@ -1,0 +1,52 @@
+{
+  "title": "复合 requirement与返回类型约束",
+  "definition": "复合 requirement 用于同时验证一个表达式是否有效、是否声明为 `noexcept`，以及其结果类型是否满足指定的类型约束。其语法为 `{ expression } noexcept -> type-constraint;`，其中 `noexcept` 和 `-> type-constraint` 都是可选的。箭头左侧表达式的类型会自动作为类型约束的第一个模板类型参数传入。",
+  "key_points": [
+    "`noexcept` 用于要求表达式不会抛出异常。",
+    "`-> type-constraint` 用于约束表达式的结果类型。",
+    "类型约束是概念名称，可带零个或多个显式模板类型参数。",
+    "由于表达式类型自动作为第一个模板类型参数传入，类型约束所需显式参数通常比概念定义的模板参数少一个。",
+    "标准库中的 `convertible_to` 有两个模板类型参数；在 `{ x.size() } -> convertible_to<size_t>;` 中，表达式类型自动作为第一个参数，只需显式指定目标类型 `size_t`。"
+  ],
+  "examples": [
+    "要求 `swap` 表达式标记为 `noexcept`：`template <typename T> concept C = requires (T x, T y) { swap(x, y) noexcept; };`",
+    "要求 `x.size()` 的结果可转换为 `size_t`：`template <typename T> concept C = requires (const T x) { { x.size() } -> convertible_to<size_t>; };`",
+    "比较概念可以写成：`{ a == b } -> convertible_to<bool>;`"
+  ],
+  "misconceptions": [
+    "箭头右侧的类型约束不是普通返回类型声明，而是一个概念约束。",
+    "`convertible_to<size_t>` 中没有显式写出源类型，是因为源类型由箭头左侧表达式的类型自动传入。",
+    "仅写表达式有效并不等于表达式不会抛出异常；若要检查异常保证，必须使用 `noexcept`。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "复合 requirement 的一般语法是什么？",
+      "a": "`{ expression } noexcept -> type-constraint;`，其中 `noexcept` 和 `-> type-constraint` 可以省略。"
+    },
+    {
+      "q": "为什么 `convertible_to` 只需要写一个显式模板实参？",
+      "a": "`convertible_to` 有两个模板类型参数，而箭头左侧表达式的类型会自动作为第一个参数传入，因此只需指定目标类型，例如 `convertible_to<size_t>`。"
+    },
+    {
+      "q": "如何要求比较表达式的结果可转换为 `bool`？",
+      "a": "可以写 `{ a == b } -> convertible_to<bool>;`。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "requires 表达式的基本结构",
+    "概念表达式与概念约束",
+    "异常规范 noexcept"
+  ],
+  "source_pages": [
+    402,
+    402
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 requires expression compound requirement syntax convertible_to expression type automatically first template argument noexcept swap example",
+  "concept_id": "817_复合_requirement与返回类型约束",
+  "_chunk_pages": [
+    401,
+    404
+  ]
+}

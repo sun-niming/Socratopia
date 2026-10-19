@@ -1,0 +1,45 @@
+{
+  "title": "用不同 Matcher 定制同一个查找函数",
+  "definition": "函数指针使同一个 findMatches 函数可以使用不同的匹配策略。只要新的 Matcher 满足“接收两个 int 参数并返回 bool”的函数签名，就可以替换原来的相等比较函数。",
+  "key_points": [
+    "intEqual 只在两个元素相等时返回 true。",
+    "原文还给出 bothOdd，用于判断两个元素是否都为奇数。",
+    "MatchHandler 可以保持不变，因此匹配规则和匹配结果处理可以分别定制。"
+  ],
+  "examples": [
+    "相等匹配：$\\texttt{bool intEqual(int item1, int item2) \\{ return item1 == item2; \\}}$。",
+    "根据原文意图，bothOdd 的逻辑应为：$$\\texttt{return (item1 \\% 2 == 1) \\&\\& (item2 \\% 2 == 1);}$$",
+    "使用另一种策略：$\\texttt{findMatches(values1, values2, bothOdd, printMatch);}$。对于示例数据，两个序列在位置 6 的元素都是 1，因此会报告该位置。"
+  ],
+  "misconceptions": [
+    "替换 Matcher 不需要修改 findMatches 的遍历和处理逻辑。",
+    "bothOdd 判断的是两个值是否都为奇数，不是判断两个值是否相等。",
+    "Matcher 返回 true 只表示匹配成功；具体如何输出或处理，仍由 MatchHandler 决定。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何让 findMatches 按“两个元素都为奇数”进行匹配？",
+      "a": "定义一个签名兼容 Matcher 的函数，例如 $\\texttt{return (item1 \\% 2 == 1) \\&\\& (item2 \\% 2 == 1);}$，然后将 bothOdd 传给 findMatches。"
+    },
+    {
+      "q": "使用 bothOdd 时是否必须重新编写 printMatch？",
+      "a": "不必须。只要仍然希望以相同方式处理匹配结果，就可以继续使用原来的 printMatch。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "高阶函数与 findMatches",
+    "函数名与函数地址作为函数指针实参"
+  ],
+  "source_pages": [
+    607,
+    608
+  ],
+  "needs_verification": true,
+  "verify_query": "\"C++20高级编程\" \"bothOdd\" \"findMatches\"",
+  "concept_id": "1249_用不同_matcher_定制同一个查找函数",
+  "_chunk_pages": [
+    605,
+    608
+  ]
+}

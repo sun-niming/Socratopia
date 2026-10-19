@@ -1,0 +1,43 @@
+{
+  "title": "类型 requirement",
+  "definition": "类型 requirement 用于在编译期验证某个类型名称是否有效，例如验证类型是否存在某个成员类型，或验证某个类模板能否使用给定类型进行实例化。类型名称前通常写 `typename`。",
+  "key_points": [
+    "验证成员类型是否存在的形式是 `typename T::value_type;`。",
+    "验证模板实例化是否有效的形式可以是 `typename SomeTemplate<T>;`。",
+    "类型 requirement 只验证类型名称的有效性，不会创建对象或执行运行时操作。"
+  ],
+  "examples": [
+    "`template <typename T> concept C = requires { typename T::value_type; };`",
+    "`template <typename T> concept C = requires { typename SomeTemplate<T>; };`"
+  ],
+  "misconceptions": [
+    "`typename T::value_type;` 不是变量声明，而是对成员类型存在性的编译期检查。",
+    "类型 requirement 不能保证该类型满足所有行为要求；它只检查指定类型名称是否有效。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何检查类型 `T` 是否具有 `value_type` 成员类型？",
+      "a": "`template <typename T> concept C = requires { typename T::value_type; };`"
+    },
+    {
+      "q": "类型 requirement 可以检查什么？",
+      "a": "它可以检查某个类型名称是否有效，例如成员类型是否存在，或某个模板能否用给定类型实例化。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "requires 表达式的基本结构",
+    "C++类型与模板实例化"
+  ],
+  "source_pages": [
+    401,
+    401
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "816_类型_requirement",
+  "_chunk_pages": [
+    401,
+    404
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "title": "静态服务器先支持 GET",
+  "definition": "第一版只支持 GET，是因为静态 Web 服务器的核心需求就是根据路径获取资源，GET 正好对应这个需求。POST 涉及请求体、Content-Length、表单或 JSON 解析，属于动态接口范围；先把静态服务、状态码、MIME、安全和日志做稳，比提前做半成品 POST 更合适。",
+  "key_points": [
+    "GET 直接对应“按路径取资源”的静态服务需求。",
+    "POST 需要处理请求体和解析，复杂度更高，偏动态接口。",
+    "先完成静态服务和基础能力，再扩展其他方法更稳妥。"
+  ],
+  "examples": [
+    "静态服务器先实现对某个路径的文件读取和返回。",
+    "POST 需要额外处理 Content-Length、表单或 JSON 解析。"
+  ],
+  "misconceptions": [
+    "第一版只支持 GET 不是功能弱，而是开发顺序更合理。",
+    "POST 不是“更高级就应该先做”，它对解析和状态管理要求更高。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么第一版只支持 GET？",
+      "a": "因为静态服务器核心就是按路径获取资源，GET 正好满足；POST 涉及请求体和解析，属于更复杂的动态接口。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "HTTP 通用协议"
+  ],
+  "source_pages": [
+    129,
+    132
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "209_静态服务器先支持_get",
+  "_chunk_pages": [
+    129,
+    132
+  ]
+}

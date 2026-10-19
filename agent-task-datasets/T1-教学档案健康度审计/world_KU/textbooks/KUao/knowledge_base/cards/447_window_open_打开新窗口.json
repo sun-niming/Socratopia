@@ -1,0 +1,38 @@
+{
+  "title": "window.open 打开新窗口",
+  "definition": "window.open 用于打开新窗口。其基本用法为 window.open([url] [, name] [, options])，其中可以指定打开的地址、窗口名称以及窗口参数。",
+  "key_points": [
+    "基本格式：window.open([url] [, name] [, options])",
+    "options 可设置窗口高度 height、宽度 width、左边缘位置 left、上边缘位置 top，单位均为像素"
+  ],
+  "examples": [
+    "window.open('http://example.com','win1','height=400,width=600,left=100,top=50')"
+  ],
+  "misconceptions": [
+    "不是所有参数都必须提供；url、name、options 都是可选的。",
+    "options 中的 height、width 等参数单位是像素，不是百分比。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "window.open 的作用是什么？",
+      "a": "打开新窗口。"
+    },
+    {
+      "q": "window.open 的 options 参数可设置哪些窗口位置或尺寸属性？",
+      "a": "height、width、left、top。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [],
+  "source_pages": [
+    333,
+    336
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "447_window_open_打开新窗口",
+  "_chunk_pages": [
+    333,
+    336
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "title": "泛型 Array 类的接口设计",
+  "definition": "原文定义了一个类模板 `Array<T>`，用于管理可动态扩展的数组。该类默认创建一个初始大小的数组，并在需要时扩大容量；通过 `getElementAt` 读取元素，通过 `setElementAt` 设置指定下标的元素，通过 `getSize` 获取当前数组元素数量。类删除了拷贝构造函数和拷贝赋值运算符，并提供移动构造函数和移动赋值运算符。",
+  "key_points": [
+    "类模板形式为 `template <typename T> class Array`，因此数组元素类型由模板参数 `T` 决定。",
+    "默认构造函数创建一个默认大小的数组；原文给出的初始分配常量是 `AllocSize{4}`。",
+    "`const T& getElementAt(size_t x) const` 返回下标 `x` 处元素的常量引用；如果下标不存在，则抛出 `std::out_of_range`。",
+    "`void setElementAt(size_t x, const T& value)` 设置下标 `x` 处的值；如果下标超出当前范围，则分配空间使该下标有效。",
+    "`size_t getSize() const noexcept` 返回数组当前元素数量，并承诺不抛出异常。",
+    "拷贝构造和拷贝赋值被删除，移动构造和移动赋值被提供，用于避免不安全或不必要的底层数组复制。"
+  ],
+  "examples": [
+    "典型接口结构：`template <typename T> class Array { public: Array(); ~Array(); Array(const Array&) = delete; Array& operator=(const Array&) = delete; Array(Array&&) noexcept; Array& operator=(Array&&) noexcept; const T& getElementAt(size_t x) const; void setElementAt(size_t x, const T& value); size_t getSize() const noexcept; };`。",
+    "如果当前数组大小不足以包含下标 `x`，调用 `setElementAt(x, value)` 应先扩容，再写入 `value`。"
+  ],
+  "misconceptions": [
+    "`getSize()` 返回的是当前数组的元素数量或容量大小，不是某个元素的值。",
+    "删除拷贝构造和拷贝赋值并不表示对象不能转移，而是要求使用移动构造或移动赋值转移底层资源。",
+    "`getElementAt` 返回常量引用意味着调用者不能通过该返回值直接修改元素。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`Array<T>` 为什么需要模板参数 `T`？",
+      "a": "模板参数 `T` 用于指定数组中元素的类型，使同一个 Array 类模板能够管理不同类型的元素。"
+    },
+    {
+      "q": "当 `getElementAt(x)` 中的 `x` 超出数组范围时会发生什么？",
+      "a": "函数会抛出类型为 `std::out_of_range` 的异常。"
+    },
+    {
+      "q": "`setElementAt` 在下标超出当前范围时如何处理？",
+      "a": "它会分配更大的空间，使下标 `x` 进入有效范围，然后设置该位置的值。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++ 类模板",
+    "异常处理",
+    "拷贝与移动语义"
+  ],
+  "source_pages": [
+    477,
+    480
+  ],
+  "needs_verification": true,
+  "verify_query": "《C++20高级编程》第5版 第479页 Array<T> 类模板完整声明 AllocSize getElementAt setElementAt 移动构造函数",
+  "concept_id": "621_泛型_array_类的接口设计",
+  "_chunk_pages": [
+    477,
+    480
+  ]
+}

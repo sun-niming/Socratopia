@@ -1,0 +1,45 @@
+{
+  "title": "std::exchange的替换并返回旧值语义",
+  "definition": "`std::exchange()` 定义在 `<utility>` 中，用新值替换对象原来的值，并返回被替换前的旧值。它可以把“读取源成员、再将源成员重置为默认状态”合并为一个表达式。",
+  "key_points": [
+    "调用形式是 `std::exchange(object, new_value)`。",
+    "调用后对象变为 `new_value`，表达式结果是对象原来的值。",
+    "它适用于基本类型、指针等可赋值成员。",
+    "在移动实现中，`std::exchange` 可简洁地完成资源转移后的源对象重置。"
+  ],
+  "examples": [
+    "```text\nint a { 11 }, b { 22 };\nauto returnedValue = std::exchange(a, b);\n```\n执行后：\n$$a=22,\\quad b=22,\\quad returnedValue=11$$",
+    "移动 `Spreadsheet` 的基本数据成员时：\n```text\nm_width = std::exchange(src.m_width, 0);\nm_height = std::exchange(src.m_height, 0);\nm_cells = std::exchange(src.m_cells, nullptr);\n```"
+  ],
+  "misconceptions": [
+    "`std::exchange(a, b)` 不会交换两个对象的值；它把 `a` 设置为 `b` 的值，并返回原来的 `a`。",
+    "第二个参数是替换值，不是被交换对象的引用。",
+    "对于拥有资源的指针成员，使用 `std::exchange` 只完成指针值的转移与源指针重置，资源释放责任仍由新的拥有者承担。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`std::exchange(a, b)` 执行后，返回什么？",
+      "a": "返回 `a` 在调用前的旧值，同时将 `a` 替换为 `b` 的值。"
+    },
+    {
+      "q": "为什么 `std::exchange` 适合实现移动操作？",
+      "a": "因为它可以在读取源成员旧值的同时，将源成员设置为 `0` 或 `nullptr`，从而简洁地完成所有权转移后的源对象重置。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "赋值表达式",
+    "移动语义"
+  ],
+  "source_pages": [
+    271,
+    272
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "572_std_exchange的替换并返回旧值语义",
+  "_chunk_pages": [
+    269,
+    272
+  ]
+}

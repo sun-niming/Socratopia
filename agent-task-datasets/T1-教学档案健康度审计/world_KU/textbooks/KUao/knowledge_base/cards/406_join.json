@@ -1,0 +1,39 @@
+{
+  "title": "join()",
+  "definition": "`join()` 方法把数组（或类数组对象）的所有元素连接成一个字符串并返回该字符串；如果数组只有一个项目，则直接返回该项目而不使用分隔符。",
+  "key_points": [
+    "返回值是字符串",
+    "默认作用是把所有元素连接起来",
+    "只有一个元素时，不使用分隔符直接返回该元素"
+  ],
+  "examples": [
+    "['a', 'b', 'c'].join('-') // 'a-b-c'",
+    "['x'].join('-') // 'x'"
+  ],
+  "misconceptions": [
+    "以为 `join()` 会修改原数组",
+    "以为 `join()` 返回的是数组",
+    "以为数组只有一个元素时仍然一定会出现分隔符"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`join()` 的返回类型是什么？",
+      "a": "字符串。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "Array对象与创建方式"
+  ],
+  "source_pages": [
+    305,
+    308
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "406_join",
+  "_chunk_pages": [
+    305,
+    308
+  ]
+}

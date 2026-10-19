@@ -1,0 +1,45 @@
+{
+  "title": "从文件读取标记",
+  "definition": "C++ 可以使用 `std::ifstream` 从文件读取数据。将文件流放在 `while` 条件中时，流会反复尝试读取下一个数据项；读取成功则循环继续，读取失败或到达文件末尾时循环结束。示例程序使用字符串变量逐个读取文件中的标记并输出。",
+  "key_points": [
+    "使用 `ifstream inputFile { \"FileWrite.out\" };` 打开文件进行读取。",
+    "打开后可以使用 `inputFile.fail()` 检查是否失败。",
+    "`while (inputFile >> nextToken)` 会逐个读取由空白分隔的数据项。",
+    "读取结果可以通过 `cout << \"Token: \" << nextToken << endl;` 输出。",
+    "循环会在读取失败或到达文件末尾时结束。"
+  ],
+  "examples": [
+    "核心读取循环：`string nextToken; while (inputFile >> nextToken) { cout << \"Token: \" << nextToken << endl; }`。",
+    "如果文件中依次写入 `Hello!` 和 `World!`，读取循环会依次得到这两个标记。"
+  ],
+  "misconceptions": [
+    "`operator>>` 读取字符串时通常按空白分隔，而不是一次读取整行。",
+    "循环结束并不表示一定读到了一个特殊的结束字符，而通常表示下一次读取失败或到达文件末尾。",
+    "打开输入文件失败时不应继续执行读取循环。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`while (inputFile >> nextToken)` 的作用是什么？",
+      "a": "它尝试从文件流中读取下一个字符串标记；读取成功时执行循环体，读取失败或到达文件末尾时结束循环。"
+    },
+    {
+      "q": "示例程序使用什么类型保存每次读取的标记？",
+      "a": "使用 `string` 类型变量 `nextToken`。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++流输入输出基础"
+  ],
+  "source_pages": [
+    929,
+    929
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1923_从文件读取标记",
+  "_chunk_pages": [
+    929,
+    932
+  ]
+}

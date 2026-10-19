@@ -1,0 +1,44 @@
+{
+  "title": "C++ 默认参数只能在函数声明中指定",
+  "definition": "Employee 的 promote 和 demote 方法分别接受加薪额和扣薪额参数，并将 DefaultRaiseAndDemeritAmount 声明为默认值。调用者可以省略该参数，此时使用默认值。默认参数应写在函数声明中，不能重复写在函数定义中。",
+  "key_points": [
+    "调用 `promote()` 或 `demote()` 时会自动使用 DefaultRaiseAndDemeritAmount。",
+    "调用 `promote(50)` 或 `demote(50)` 时使用调用处明确提供的参数。",
+    "函数实现中的参数列表只写参数类型和名称，不再写默认值。"
+  ],
+  "examples": [
+    "声明：`void promote(int raiseAmount = DefaultRaiseAndDemeritAmount);`",
+    "定义：`void Employee::promote(int raiseAmount) { setSalary(getSalary() + raiseAmount); }`",
+    "测试代码中的 `emp.promote();` 使用默认加薪额，`emp.promote(50);` 使用显式指定的 50。"
+  ],
+  "misconceptions": [
+    "默认参数不是必须由每次调用者显式传入的值；调用时可以省略。",
+    "不能在函数声明和函数定义中都重复写默认参数。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "调用 `emp.promote()` 时 raiseAmount 取什么值？",
+      "a": "取函数声明中指定的默认值 DefaultRaiseAndDemeritAmount。"
+    },
+    {
+      "q": "为什么 `Employee::promote` 的函数定义中不写默认值？",
+      "a": "因为默认值只能出现在函数声明中，函数定义中只写 `int raiseAmount`。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "函数声明与函数定义",
+    "函数参数"
+  ],
+  "source_pages": [
+    93,
+    94
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "172_c_默认参数只能在函数声明中指定",
+  "_chunk_pages": [
+    93,
+    96
+  ]
+}

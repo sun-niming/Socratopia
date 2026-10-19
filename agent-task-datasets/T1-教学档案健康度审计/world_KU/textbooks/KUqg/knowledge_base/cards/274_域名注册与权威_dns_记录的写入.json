@@ -1,0 +1,48 @@
+{
+  "title": "域名注册与权威 DNS 记录的写入",
+  "definition": "注册一个域名时，注册登记机构会验证域名的唯一性，并将域名及其权威 DNS 服务器信息纳入 DNS 系统。域名所有者需要向注册登记机构提供基本权威 DNS 服务器和辅助权威 DNS 服务器的名称与 IP 地址。注册登记机构会在相应 TLD 服务器中写入 NS 记录以及权威服务器的 A 记录。",
+  "key_points": [
+    "注册登记机构是负责域名注册的商业实体，并由 ICANN 授权。",
+    "对于域名 $networkutopia.com$ 的基本权威服务器 $dns1.networkutopia.com$，TLD 服务器中可以有如下资源记录：\n$$\n(networkutopia.com,\\ dns1.networkutopia.com,\\ NS)\n$$\n$$\n(dns1.networkutopia.com,\\ 212.212.212.1,\\ A)\n$$",
+    "辅助权威 DNS 服务器也需要在 TLD DNS 系统中配置相应的 NS 和 A 记录。",
+    "Web 服务器的 A 记录和邮件服务器的 MX 记录需要写入该域名的权威 DNS 服务器。"
+  ],
+  "examples": [
+    "若域名所有者提供 $dns1.networkutopia.com$ 和 $dns2.networkutopia.com$ 作为权威服务器，并提供 IP 地址 $212.212.212.1$ 和 $212.212.212.2$，注册登记机构会在 $com$ TLD DNS 系统中配置相应的 NS/A 记录。",
+    "权威 DNS 服务器中还需要配置类似下面的记录：\n$$\n(www.networkutopia.com,\\ \\text{Web服务器IP},\\ A)\n$$\n$$\n(mail.networkutopia.com,\\ \\text{邮件服务器主机名},\\ MX)\n$$"
+  ],
+  "misconceptions": [
+    "注册登记机构不会替代域名所有者管理所有主机记录；Web 和邮件服务器的具体记录需要配置在该域名的权威 DNS 服务器中。",
+    "NS 记录用于指出权威 DNS 服务器，A 记录用于把主机名映射到 IPv4 地址；二者作用不同。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "注册域名时，域名所有者通常需要向注册登记机构提供什么信息？",
+      "a": "需要提供基本和辅助权威 DNS 服务器的名称及 IP 地址。"
+    },
+    {
+      "q": "注册登记机构为什么要在 TLD 服务器中写入 NS 和 A 记录？",
+      "a": "NS 记录指出该域名的权威 DNS 服务器，A 记录把权威服务器主机名映射到其 IP 地址，从而使 DNS 查询能够找到该权威服务器。"
+    },
+    {
+      "q": "Web 服务器和邮件服务器的 DNS 记录通常配置在哪里？",
+      "a": "Web 服务器的 A 记录和邮件服务器的 MX 记录配置在该域名的权威 DNS 服务器中。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "DNS 层次结构",
+    "DNS 资源记录"
+  ],
+  "source_pages": [
+    109,
+    112
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "274_域名注册与权威_dns_记录的写入",
+  "_chunk_pages": [
+    109,
+    112
+  ]
+}

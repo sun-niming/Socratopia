@@ -1,0 +1,45 @@
+{
+  "title": "按索引查询tuple元素类型和tuple大小",
+  "definition": "`std::tuple_element<I, TupleType>::type`可以在编译期获取tuple类型TupleType中索引为I的元素类型；`std::tuple_size<TupleType>::value`可以在编译期获取tuple类型的元素数量。它们要求传入tuple的类型，而不是某个具体tuple对象。若对象类型不容易直接写出，可以用`decltype(对象)`获得其类型。",
+  "key_points": [
+    "`std::tuple_element<I, TupleType>::type`返回第I个元素的类型。",
+    "`std::tuple_size<TupleType>::value`返回tuple包含的元素数量。",
+    "查询时使用的是tuple类型，例如`MyTuple`，不是实例`t1`本身。",
+    "`decltype(t1)`可以获得实例`t1`的类型。"
+  ],
+  "examples": [
+    "`using MyTuple = std::tuple<int, std::string, bool>;`",
+    "`std::tuple_element<2, MyTuple>::type`的类型是`bool`。",
+    "`std::tuple_size<MyTuple>::value`的结果是`3`。",
+    "对于对象`t1`，可以使用`std::tuple_size<decltype(t1)>::value`查询其大小。"
+  ],
+  "misconceptions": [
+    "`std::tuple_element`和`std::tuple_size`的模板参数不是普通运行时参数。",
+    "查询tuple大小时，应传入类型而不是对象，例如使用`decltype(t1)`而不是直接把`t1`写成模板参数。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何获得MyTuple中索引2的元素类型？",
+      "a": "使用`std::tuple_element<2, MyTuple>::type`，本例结果为`bool`。"
+    },
+    {
+      "q": "如何查询MyTuple有多少个元素？",
+      "a": "使用`std::tuple_size<MyTuple>::value`，本例结果为3。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "使用std::get按索引访问tuple元素"
+  ],
+  "source_pages": [
+    710,
+    710
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1476_按索引查询tuple元素类型和tuple大小",
+  "_chunk_pages": [
+    709,
+    712
+  ]
+}

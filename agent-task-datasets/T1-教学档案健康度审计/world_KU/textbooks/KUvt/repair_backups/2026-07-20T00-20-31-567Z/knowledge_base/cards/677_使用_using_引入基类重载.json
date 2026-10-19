@@ -1,0 +1,43 @@
+{
+  "title": "使用 using 引入基类重载",
+  "definition": "派生类可以使用 using 声明显式把基类中某个方法名引入派生类作用域，从而在派生类中添加该方法的新重载，同时继续保留和继承基类版本。教材指出，这种技术可用于向派生类添加虚基类方法的新原型，而不使基类原有版本因名称隐藏而无法使用。",
+  "key_points": [
+    "派生类可以定义与基类同名但参数列表不同的新方法，形成重载。",
+    "派生类声明同名方法可能隐藏基类同名方法；using 基类名::方法名可以将基类版本重新引入派生类作用域。",
+    "例如 using Base::func; 表示把 Base 中的 func 引入当前派生类作用域。",
+    "原文在本页只介绍该技术，未提供完整代码示例。"
+  ],
+  "examples": [
+    "class Derived : public Base {\npublic:\n    using Base::func;\n    void func(int value); // 在保留 Base::func 的同时添加新重载\n};"
+  ],
+  "misconceptions": [
+    "在派生类中添加同名新重载后，基类同名方法不一定会自动参与重载；通常需要 using 声明解除名称隐藏。",
+    "using Base::func; 不是调用基类函数，而是把基类中该名称的成员引入派生类作用域。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何在派生类中添加同名新重载，同时保留基类版本？",
+      "a": "在派生类中写 using Base::func;，然后定义新的 func 重载。"
+    },
+    {
+      "q": "using Base::func; 的主要作用是什么？",
+      "a": "将基类的 func 定义显式引入派生类作用域，使基类版本继续参与名称查找和重载。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "函数重载",
+    "继承中的名称隐藏"
+  ],
+  "source_pages": [
+    332,
+    332
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "677_使用_using_引入基类重载",
+  "_chunk_pages": [
+    329,
+    332
+  ]
+}

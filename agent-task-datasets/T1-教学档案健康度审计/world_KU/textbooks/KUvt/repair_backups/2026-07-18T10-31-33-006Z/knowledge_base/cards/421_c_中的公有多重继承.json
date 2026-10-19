@@ -1,0 +1,50 @@
+{
+  "title": "C++中的公有多重继承",
+  "definition": "公有多重继承是指一个派生类同时以public方式继承多个基类。例如class DogBird : public Dog, public Bird表示DogBird同时继承Dog和Bird，因此DogBird对象可以使用两个基类中可访问的公有成员。",
+  "key_points": [
+    "DogBird的声明形式为class DogBird : public Dog, public Bird。",
+    "Dog提供公有虚函数bark()，Bird提供公有虚函数chirp()。",
+    "DogBird对象可以直接调用继承自Dog的bark()和继承自Bird的chirp()。",
+    "原文示例调用myConfusedAnimal.bark()和myConfusedAnimal.chirp()，输出分别为Woof!和Chirp!。"
+  ],
+  "examples": [
+    "代码结构：\nclass Dog {\npublic:\n    virtual void bark() { cout << \"Woof!\" << endl; }\n};\nclass Bird {\npublic:\n    virtual void chirp() { cout << \"Chirp!\" << endl; }\n};\nclass DogBird : public Dog, public Bird { };",
+    "调用：\nDogBird myConfusedAnimal;\nmyConfusedAnimal.bark();\nmyConfusedAnimal.chirp();\n输出：\nWoof!\nChirp!"
+  ],
+  "misconceptions": [
+    "多重继承不是把两个基类合并成一个类，而是让派生类包含来自多个基类的继承关系。",
+    "DogBird同时继承Dog和Bird，并不表示Dog和Bird之间存在继承关系。",
+    "只有基类中可访问的成员才能被派生类直接使用；private成员不能直接访问。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "DogBird继承了哪些类？",
+      "a": "DogBird以public方式同时继承Dog和Bird。"
+    },
+    {
+      "q": "myConfusedAnimal.bark()和myConfusedAnimal.chirp()分别调用哪个基类的成员函数？",
+      "a": "bark()来自Dog，chirp()来自Bird。"
+    },
+    {
+      "q": "原文示例中这两个调用的输出是什么？",
+      "a": "bark()输出Woof!，chirp()输出Chirp!。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++类继承",
+    "public访问控制",
+    "虚函数基础"
+  ],
+  "source_pages": [
+    327,
+    328
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "421_c_中的公有多重继承",
+  "_chunk_pages": [
+    325,
+    328
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "title": "C++20模块导入",
+  "definition": "模块导入是 C++20 引入的一种使用模块功能的方式。程序如果要使用某个模块中提供的功能，需要使用 `import` 声明导入该模块。例如，`import <iostream>;` 用于导入与 C++ 输入输出机制相关的内容。",
+  "key_points": [
+    "使用模块中功能前，需要先导入相应模块。",
+    "模块导入通过 `import` 声明完成。",
+    "原文以 `import <iostream>;` 作为输入输出相关功能的导入示例。",
+    "如果编译器尚不支持模块，可以用 `#include` 预处理指令替代相应的导入写法。"
+  ],
+  "examples": [
+    "导入输入输出相关模块：`import <iostream>;`。",
+    "使用模块的基本形式：`import <模块名>;`。"
+  ],
+  "misconceptions": [
+    "误以为只要安装 C++20 编译器，就一定能以完全相同的方式使用所有标准库模块。",
+    "误以为 `import` 和 `#include` 在编译过程中的机制完全相同。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "C++ 中如何导入一个模块？",
+      "a": "使用 `import` 声明，例如 `import <iostream>;`。"
+    },
+    {
+      "q": "编译器不支持 C++20 模块时怎么办？",
+      "a": "按照原文说明，用包含头文件的 `#include` 预处理指令替代 `import` 声明。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "Hello World程序展示的基本概念"
+  ],
+  "source_pages": [
+    35,
+    36
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 import <iostream> 标准库模块 header unit 与 #include 的关系",
+  "concept_id": "038_c_20模块导入",
+  "_chunk_pages": [
+    33,
+    36
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "title": "通过 const 与非 const operator[] 区分读写访问",
+  "definition": "为了同时支持可修改访问和只读访问，数组类通常提供两个下标运算符重载：非 const 对象调用返回 `T&` 的版本，const 对象调用返回 `const T&` 的版本。两个重载不能仅靠返回类型区分，因此 const 版本必须在成员函数声明末尾标记 `const`。",
+  "key_points": [
+    "非 const 版本：`T& operator[](size_t x);`。",
+    "const 版本：`const T& operator[](size_t x) const;`。",
+    "对 const 对象调用下标运算符时，编译器选择 const 版本，从而不能通过返回值修改元素。",
+    "`printArray(const Array<int>& arr)` 中的 `arr[i]` 会调用 const 版本，即使函数体只是读取元素。"
+  ],
+  "examples": [
+    "```cpp\nT& operator[](size_t x);\nconst T& operator[](size_t x) const;\n```",
+    "```cpp\nvoid printArray(const Array<int>& arr) {\n    for (size_t i = 0; i < arr.getSize(); ++i) {\n        std::cout << arr[i]; // 调用 const operator[]\n    }\n}\n```"
+  ],
+  "misconceptions": [
+    "不能仅根据返回类型重载函数或运算符；例如不能只用 `T& operator[](...)` 和 `const T& operator[](...)` 区分。",
+    "调用 const operator[] 的条件不是调用者是否修改结果，而是被调用对象是否为 const。",
+    "const operator[] 不能因为索引越界就扩容，因为 const 对象不能通过这种访问改变数组状态。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "const 和非 const 的 `operator[]` 如何区分？",
+      "a": "它们分别通过成员函数是否带末尾 `const` 来区分：`T& operator[](size_t);` 与 `const T& operator[](size_t) const;`。不能仅靠返回类型区分。"
+    },
+    {
+      "q": "为什么 `const Array<int>& arr` 中的 `arr[i]` 调用 const 版本？",
+      "a": "因为 arr 是 const 对象，只有保证不修改对象的 const 成员函数版本可以被调用。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "成员函数的 const 限定",
+    "C++引用"
+  ],
+  "source_pages": [
+    482,
+    483
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "965_通过_const_与非_const_operator_区分读写访问",
+  "_chunk_pages": [
+    481,
+    484
+  ]
+}

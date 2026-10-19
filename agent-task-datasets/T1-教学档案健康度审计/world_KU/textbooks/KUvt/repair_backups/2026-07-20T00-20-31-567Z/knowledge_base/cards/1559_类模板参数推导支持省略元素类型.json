@@ -1,0 +1,38 @@
+{
+  "title": "类模板参数推导支持省略元素类型",
+  "definition": "当 directed_graph 提供合适的 initializer_list 构造函数并支持类模板参数推导（CTAD）时，构造对象时可以省略模板元素类型，让编译器根据初始化列表中的元素推导类型。",
+  "key_points": [
+    "显式指定类型的写法是：`directed_graph<int> graph{11, 22, 33};`。",
+    "使用 CTAD 后可以写成：`directed_graph graph{11, 22, 33};`。",
+    "这种用法与 `vector` 等标准库容器的类模板参数推导用法类似。"
+  ],
+  "examples": [
+    "```cpp\ndirected_graph graph{11, 22, 33};\n```"
+  ],
+  "misconceptions": [
+    "CTAD 只能在编译器能够根据构造函数参数推导出模板参数时使用。",
+    "省略模板参数并不意味着 directed_graph 失去了元素类型；元素类型仍由初始化列表推导得到。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "使用 CTAD 构造包含整数节点的 directed_graph 时，如何省略元素类型？",
+      "a": "可以写 `directed_graph graph{11, 22, 33};`，编译器根据初始化列表推导元素类型为整数类型。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "类模板参数推导（CTAD）",
+    "initializer_list 构造函数"
+  ],
+  "source_pages": [
+    753,
+    753
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1559_类模板参数推导支持省略元素类型",
+  "_chunk_pages": [
+    753,
+    756
+  ]
+}

@@ -1,0 +1,50 @@
+{
+  "title": "自由存储区对象的访问与释放",
+  "definition": "可以使用 `new` 在自由存储区中动态创建对象，并通过指针访问该对象。指针访问对象成员时使用箭头运算符 `->`；对象使用完毕后，使用 `delete` 释放由 `new` 分配的对象内存。",
+  "key_points": [
+    "动态分配对象会返回指向该对象的指针。",
+    "指针访问对象成员使用 `->`。",
+    "箭头运算符可理解为解引用运算符 `*` 与点运算符 `.` 的组合：`ptr->member` 等价于 `(*ptr).member`。",
+    "使用 `new` 分配的对象必须在使用完毕后调用 `delete`，否则可能造成内存泄漏。",
+    "手动 `delete` 后，原指针最好重置为 `nullptr`，以降低误用已删除对象指针的风险。"
+  ],
+  "examples": [
+    "动态创建并使用对象的典型形式：\n`SpreadsheetCell* myCellp{ new SpreadsheetCell{} };`\n`myCellp->setValue(3.7);`\n`std::cout << myCellp->getValue() << std::endl;`\n`delete myCellp;`\n`myCellp = nullptr;`",
+    "箭头运算符与显式解引用加点运算符等价：\n`myCellp->setValue(3.7);`\n等价于\n`(*myCellp).setValue(3.7);`"
+  ],
+  "misconceptions": [
+    "`new` 创建的对象不能因为指针变量离开当前代码块就自动释放；使用裸指针时需要调用 `delete`。",
+    "`delete` 释放对象后，原指针变量不会自动变成 `nullptr`，因此可以手动将其重置为 `nullptr`。",
+    "箭头运算符不是只能用于结构体；它同样用于通过指针访问类对象的成员。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何通过指针 `myCellp` 调用 `SpreadsheetCell` 对象的成员函数？",
+      "a": "使用箭头运算符，例如 `myCellp->setValue(3.7);`。"
+    },
+    {
+      "q": "`ptr->member` 与哪种写法等价？",
+      "a": "与 `(*ptr).member` 等价。"
+    },
+    {
+      "q": "使用 `new` 创建对象后，如何释放它？",
+      "a": "对象使用完毕后调用 `delete ptr;`，并建议随后写 `ptr = nullptr;`。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "指针与解引用",
+    "类对象的成员访问"
+  ],
+  "source_pages": [
+    235,
+    235
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "499_自由存储区对象的访问与释放",
+  "_chunk_pages": [
+    233,
+    236
+  ]
+}

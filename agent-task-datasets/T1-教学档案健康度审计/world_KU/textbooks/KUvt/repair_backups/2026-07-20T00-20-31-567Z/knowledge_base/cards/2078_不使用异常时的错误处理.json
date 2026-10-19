@@ -1,0 +1,39 @@
+{
+  "title": "不使用异常时的错误处理",
+  "definition": "如果被要求不使用异常实现功能，教材建议使用传统的 `nullptr` 检查和错误代码，并指出这是展示 `nothrow new` 知识的机会。",
+  "key_points": [
+    "不使用异常时，需要显式检查可能失败的操作结果。",
+    "空指针结果应通过 `nullptr` 检查处理。",
+    "错误代码可以用于向调用方报告失败。",
+    "`nothrow new` 与不通过异常报告内存分配失败的方式相关。"
+  ],
+  "examples": [
+    "错误处理形式可概括为：先检查指针是否为 `nullptr`，失败时返回或传播错误代码；原文未提供完整代码。"
+  ],
+  "misconceptions": [
+    "禁止异常不等于可以忽略错误；必须改用显式的返回值或指针检查。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如果不能使用异常，教材建议采用什么错误处理方式？",
+      "a": "使用 `nullptr` 检查和错误代码，并可结合 `nothrow new` 处理内存分配失败。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "指针",
+    "错误代码",
+    "动态内存分配"
+  ],
+  "source_pages": [
+    1004,
+    1004
+  ],
+  "needs_verification": true,
+  "verify_query": "C++ nothrow new allocation failure returns nullptr does not throw standard documentation",
+  "concept_id": "2078_不使用异常时的错误处理",
+  "_chunk_pages": [
+    1001,
+    1004
+  ]
+}

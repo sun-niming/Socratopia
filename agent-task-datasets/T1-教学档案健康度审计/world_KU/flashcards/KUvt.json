@@ -1,0 +1,1139 @@
+{
+  "textbookId": "KUvt",
+  "updatedAt": "2026-08-18T08:42:41.222Z",
+  "cards": [
+    {
+      "id": "fc_1784280106430_000_e60ac5219543",
+      "question": "下面两句代码中，哪一句声明了一个 `std::initializer_list<int>` 对象，而不是单纯使用花括号初始化语法？",
+      "choices": [
+        "`int a = {1, 2, 3};`",
+        "`std::initializer_list<int> b{1, 2, 3};`",
+        "`std::array<int, 3> b{1, 2, 3};`",
+        "`int a{1, 2, 3};`"
+      ],
+      "correctIndex": 1,
+      "explanation": "`std::initializer_list<int> b{1, 2, 3};` 的声明类型明确是 `std::initializer_list<int>`，因此 `b` 保存多个 `int` 元素；花括号本身只是初始化语法，不等同于 `std::initializer_list` 类型。",
+      "source": {
+        "textbook": "C++20高级编程(第5版)(上下册） ([比]马克·格雷戈勒（Marc Gregoire）) ",
+        "chapter": "",
+        "textbookSlug": "KUvt"
+      },
+      "created": "2026-07-17T09:21:46.430Z",
+      "conversationId": "qwgqEFbXqeVZJLRcwXXRd",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-07-17T09:22:02.397Z",
+          "chosen": 1,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-07-17T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1784280106430_001_521b99679b88",
+      "question": "为什么 `double value{3};` 可以通过编译，而 `int number{3.5};` 会被花括号初始化拒绝？",
+      "choices": [
+        "因为 `3` 可被 `double` 精确表示，而 `3.5` 转为 `int` 会丢失小数部分",
+        "因为 `double` 的精度一定高于 `int`，所以两者之间的转换都安全",
+        "因为花括号初始化只允许整数转换为浮点数，不允许任何浮点数转换",
+        "因为只有字面量带小数点时才会触发窄化检查，`3.5` 恰好不满足其他初始化规则"
+      ],
+      "correctIndex": 0,
+      "explanation": "`3` 可以被 `double` 精确表示，不会造成信息丢失；而将 `3.5` 转换为 `int` 会丢弃小数部分，属于花括号初始化禁止的窄化转换。",
+      "source": {
+        "textbook": "C++20高级编程(第5版)(上下册） ([比]马克·格雷戈勒（Marc Gregoire）) ",
+        "chapter": "",
+        "textbookSlug": "KUvt"
+      },
+      "created": "2026-07-17T09:21:46.430Z",
+      "conversationId": "qwgqEFbXqeVZJLRcwXXRd",
+      "status": "active",
+      "history": [],
+      "nextReview": "2026-07-17T09:21:46.430Z",
+      "interval": 0,
+      "ease": 2.5,
+      "repetitions": 0
+    },
+    {
+      "id": "fc_1784280106430_002_1ea99e08fe43",
+      "question": "下面代码为什么不能通过编译？\n\n```cpp\nstd::initializer_list<int> numbers{1, 2.5, 3};\n```",
+      "choices": [
+        "`std::initializer_list<int>` 只能保存整数变量，不能保存任何经过转换的值",
+        "`std::initializer_list` 只能包含两个元素，不能包含三个元素",
+        "初始化列表中的元素必须全部写成变量，不能直接使用字面量",
+        "`2.5` 转换为 `int` 会丢失小数部分，构成被禁止的窄化转换"
+      ],
+      "correctIndex": 3,
+      "explanation": "`numbers` 的元素类型要求为 `int`，但 `2.5` 是 `double`，转换为 `int` 会丢失小数部分，因此被判定为窄化转换并拒绝。",
+      "source": {
+        "textbook": "C++20高级编程(第5版)(上下册） ([比]马克·格雷戈勒（Marc Gregoire）) ",
+        "chapter": "",
+        "textbookSlug": "KUvt"
+      },
+      "created": "2026-07-17T09:21:46.430Z",
+      "conversationId": "qwgqEFbXqeVZJLRcwXXRd",
+      "status": "active",
+      "history": [],
+      "nextReview": "2026-07-17T09:21:46.430Z",
+      "interval": 0,
+      "ease": 2.5,
+      "repetitions": 0
+    },
+    {
+      "id": "fc_1784280106430_003_62b7777db9b2",
+      "question": "比较下面两个循环，哪项准确描述了它们在初始条件为假时的行为？\n\n```cpp\nwhile (i < 3) {\n    // 循环体\n}\n```\n\n```cpp\ndo {\n    // 循环体\n} while (i < 3);\n```",
+      "choices": [
+        "`while` 至少执行一次，而 `do/while` 可能执行零次",
+        "`while` 可能执行零次，而 `do/while` 至少执行一次",
+        "两者都会执行一次，但 `do/while` 会额外进行一次条件判断",
+        "两者都会先判断条件，因此都可能执行零次"
+      ],
+      "correctIndex": 1,
+      "explanation": "`while` 会先判断条件，因此初始条件为假时循环体执行零次；`do/while` 会先执行循环体，再判断条件，因此至少执行一次。",
+      "source": {
+        "textbook": "C++20高级编程(第5版)(上下册） ([比]马克·格雷戈勒（Marc Gregoire）) ",
+        "chapter": "",
+        "textbookSlug": "KUvt"
+      },
+      "created": "2026-07-17T09:21:46.430Z",
+      "conversationId": "qwgqEFbXqeVZJLRcwXXRd",
+      "status": "active",
+      "history": [],
+      "nextReview": "2026-07-17T09:21:46.430Z",
+      "interval": 0,
+      "ease": 2.5,
+      "repetitions": 0
+    },
+    {
+      "id": "fc_1784280106430_004_a48897b291ac",
+      "question": "执行下面代码后，`arr` 的内容是什么？\n\n```cpp\nstd::array arr{1, 2, 3, 4};\n\nfor (int i : arr) {\n    i *= 2;\n}\n```",
+      "choices": [
+        "`2, 4, 6, 8`，因为范围 `for` 默认通过引用访问元素",
+        "代码无法编译，因为 `std::array` 不能用于范围 `for`",
+        "`1, 2, 3, 4`，因为 `i` 按值取得元素副本",
+        "`1, 4, 9, 16`，因为 `*=` 会把每个元素替换为其平方"
+      ],
+      "correctIndex": 2,
+      "explanation": "范围 `for` 中的 `int i` 按值接收每个元素，因此 `i` 是原元素的副本；修改副本不会改变 `arr`。若使用 `int& i`，才会直接修改数组元素。",
+      "source": {
+        "textbook": "C++20高级编程(第5版)(上下册） ([比]马克·格雷戈勒（Marc Gregoire）) ",
+        "chapter": "",
+        "textbookSlug": "KUvt"
+      },
+      "created": "2026-07-17T09:21:46.430Z",
+      "conversationId": "qwgqEFbXqeVZJLRcwXXRd",
+      "status": "active",
+      "history": [],
+      "nextReview": "2026-07-17T09:21:46.430Z",
+      "interval": 0,
+      "ease": 2.5,
+      "repetitions": 0
+    },
+    {
+      "id": "fc_1784629287929_000_8eac9c45ab5b",
+      "question": "对于下面的代码，`n` 的最终值是多少？循环体执行了几次？\n\n```cpp\nint n { 5 };\n\ndo {\n    ++n;\n} while (n < 5);\n```",
+      "choices": [
+        "最终值为 6，循环体执行 1 次",
+        "最终值为 5，循环体执行 0 次",
+        "最终值为 7，循环体执行 2 次",
+        "最终值为 6，循环体执行 0 次"
+      ],
+      "correctIndex": 0,
+      "explanation": "`do/while` 会先执行循环体，再判断条件。因此 `n` 先从 5 增加到 6，随后判断 `6 < 5` 为假，循环结束。",
+      "source": {
+        "textbook": "C++20高级编程(第5版)(上下册） ([比]马克·格雷戈勒（Marc Gregoire）) ",
+        "chapter": "",
+        "textbookSlug": "KUvt"
+      },
+      "created": "2026-07-21T10:21:27.929Z",
+      "conversationId": "upYFmgJ4qRaJoYA8jkgCN",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-07-21T16:15:24.973Z",
+          "chosen": 0,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-07-22T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1784629287929_001_c0efc18e1e2a",
+      "question": "在 `AirlineTicket` 类中，如果 `ticket1` 和 `ticket2` 属于同一个类，但分别拥有不同的目的地，这最能说明类和对象之间的什么关系？",
+      "choices": [
+        "对象负责定义所有机票共有的结构，类只负责保存某一张机票的数据",
+        "同一个类创建的对象必须拥有完全相同的目的地和其他数据",
+        "类描述共同的数据和行为，对象保存各自具体的状态",
+        "类是具体机票对象的名称，对象只是类中某个行为的别名"
+      ],
+      "correctIndex": 2,
+      "explanation": "类是对一类事物共同数据和行为的抽象描述，而对象是根据类创建的具体实例；同类对象可以具有不同的具体状态数据。",
+      "source": {
+        "textbook": "C++20高级编程(第5版)(上下册） ([比]马克·格雷戈勒（Marc Gregoire）) ",
+        "chapter": "",
+        "textbookSlug": "KUvt"
+      },
+      "created": "2026-07-21T10:21:27.929Z",
+      "conversationId": "upYFmgJ4qRaJoYA8jkgCN",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-07-21T18:07:23.852Z",
+          "chosen": 3,
+          "correct": false
+        }
+      ],
+      "nextReview": "2026-07-21T16:00:00.000Z",
+      "interval": 0,
+      "ease": 2.3,
+      "repetitions": 0
+    },
+    {
+      "id": "fc_1785130882441_000_32dbc023ad04",
+      "question": "下面哪个 `Box` 构造函数定义是合法的？",
+      "choices": [
+        "Box(int& value) { m_value = value; }",
+        "Box(int value) : m_value{value} {}",
+        "Box(int& value) : m_value{value} {}",
+        "Box(int& value) { &m_value = &value; }"
+      ],
+      "correctIndex": 2,
+      "explanation": "引用成员必须在构造函数初始化器中完成绑定，因为进入构造函数体时它已经必须指向某个对象。构造函数体中的 `m_value = value` 只是给已绑定对象赋值，而不是建立引用绑定。",
+      "source": {
+        "textbook": "C++20高级编程(第5版)(上下册） ([比]马克·格雷戈勒（Marc Gregoire）) ",
+        "chapter": "",
+        "textbookSlug": "KUvt"
+      },
+      "created": "2026-07-27T05:41:22.441Z",
+      "conversationId": "emvKV3r9rpvEQX3EGZYlr",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-07-27T06:38:32.898Z",
+          "chosen": 1,
+          "correct": false
+        },
+        {
+          "time": "2026-07-27T06:38:46.889Z",
+          "chosen": 0,
+          "correct": false
+        },
+        {
+          "time": "2026-07-27T06:38:56.551Z",
+          "chosen": 2,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-07-27T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.1999999999999997,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1785130882441_001_94f7cbd3ad39",
+      "question": "已知 `Image` 是一个可能包含大量数据的类，函数只需要读取图像、不修改它。下面哪种参数形式最合适？",
+      "choices": [
+        "const Image image&",
+        "Image image",
+        "Image& image",
+        "const Image& image"
+      ],
+      "correctIndex": 3,
+      "explanation": "`const Image&` 既避免按值传递时复制整个对象，又阻止函数通过该参数修改原对象。普通值传递可能产生昂贵复制，而非 `const` 引用会允许不必要的修改。",
+      "source": {
+        "textbook": "C++20高级编程(第5版)(上下册） ([比]马克·格雷戈勒（Marc Gregoire）) ",
+        "chapter": "",
+        "textbookSlug": "KUvt"
+      },
+      "created": "2026-07-27T05:41:22.441Z",
+      "conversationId": "emvKV3r9rpvEQX3EGZYlr",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-07-27T06:38:41.260Z",
+          "chosen": 3,
+          "correct": true
+        },
+        {
+          "time": "2026-07-27T06:38:50.800Z",
+          "chosen": 3,
+          "correct": true
+        },
+        {
+          "time": "2026-07-27T07:01:12.369Z",
+          "chosen": 3,
+          "correct": true
+        },
+        {
+          "time": "2026-07-27T07:01:46.912Z",
+          "chosen": 3,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-08-17T16:00:00.000Z",
+      "interval": 22,
+      "ease": 2.9000000000000004,
+      "repetitions": 4
+    },
+    {
+      "id": "fc_1785130882441_002_1a2bcf261ffd",
+      "question": "为什么下面的函数可以安全地返回引用，而返回普通局部变量的引用通常不安全？\n\n```cpp\nint& getGlobal()\n{\n    static int value{42};\n    return value;\n}\n```",
+      "choices": [
+        "`value` 的生命周期持续到程序结束，函数返回后对象仍然存在",
+        "`static` 只保证函数每次调用都重新创建一个有效对象",
+        "`static` 使 `value` 成为真正的全局变量",
+        "引用返回值会自动复制局部变量，因此不会悬空"
+      ],
+      "correctIndex": 0,
+      "explanation": "函数局部的 `static` 变量在函数返回后不会销毁，其生命周期持续到程序结束，因此返回它的引用仍指向有效对象。它的作用域仍限于函数内部，并不会因此变成全局变量。",
+      "source": {
+        "textbook": "C++20高级编程(第5版)(上下册） ([比]马克·格雷戈勒（Marc Gregoire）) ",
+        "chapter": "",
+        "textbookSlug": "KUvt"
+      },
+      "created": "2026-07-27T05:41:22.441Z",
+      "conversationId": "emvKV3r9rpvEQX3EGZYlr",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-07-27T07:01:34.019Z",
+          "chosen": 2,
+          "correct": false
+        },
+        {
+          "time": "2026-07-27T07:01:49.661Z",
+          "chosen": 0,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-07-27T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.4,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1785130882441_003_0320c237a0f9",
+      "question": "执行下面代码后，哪一项描述正确？\n\n```cpp\nint number{10};\nint other{20};\n\nint* ptr{&number};\nptr = &other;\n*ptr = 99;\n```",
+      "choices": [
+        "`number` 的值为 10，`other` 的值为 99",
+        "代码无法编译，因为指针初始化后不能改变指向",
+        "`number` 的值为 99，`other` 的值为 20",
+        "`number` 和 `other` 的值都为 99"
+      ],
+      "correctIndex": 0,
+      "explanation": "指针最初指向 `number`，但随后通过 `ptr = &other` 改为指向 `other`。因此 `*ptr = 99` 修改的是当前指向的 `other`，而不是原先的 `number`。",
+      "source": {
+        "textbook": "C++20高级编程(第5版)(上下册） ([比]马克·格雷戈勒（Marc Gregoire）) ",
+        "chapter": "",
+        "textbookSlug": "KUvt"
+      },
+      "created": "2026-07-27T05:41:22.441Z",
+      "conversationId": "emvKV3r9rpvEQX3EGZYlr",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-07-27T07:02:13.974Z",
+          "chosen": 0,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-07-27T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1785130882441_004_c362f1e4bcaf",
+      "question": "对于下面两行声明，哪一项正确描述了 `x` 和 `y` 的类型？\n\n```cpp\nint i{};\n\nconst auto* x{&i};\nconst auto* const y{&i};\n```",
+      "choices": [
+        "`x` 是 `const int*`，`y` 是 `const int* const`",
+        "`x` 和 `y` 都是 `int*`，因为 `auto` 会忽略所有 `const`",
+        "`x` 是 `const int* const`，`y` 是 `const int*`",
+        "`x` 是 `int* const`，`y` 是 `const int*`"
+      ],
+      "correctIndex": 0,
+      "explanation": "`const auto*` 推导为 `const int*`，表示不能通过指针修改 `i`，但指针本身可以改指向。再增加右侧的 `const` 后，`y` 为 `const int* const`，指向对象和指针本身都不能修改。",
+      "source": {
+        "textbook": "C++20高级编程(第5版)(上下册） ([比]马克·格雷戈勒（Marc Gregoire）) ",
+        "chapter": "",
+        "textbookSlug": "KUvt"
+      },
+      "created": "2026-07-27T05:41:22.441Z",
+      "conversationId": "emvKV3r9rpvEQX3EGZYlr",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-07-27T07:02:25.629Z",
+          "chosen": 0,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-07-27T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1785692171625_000_22557ab68fce",
+      "question": "下面哪种说法正确解释了为什么代码 `R\"ABC(内容)XYZ\"` 不合法？",
+      "choices": [
+        "分隔符只能由数字组成，ABC 不符合语法",
+        "原始字符串不能使用任何自定义分隔符",
+        "原始字符串中不能出现中文内容",
+        "开头使用了分隔符 ABC，因此结尾必须是 )ABC\"，而不是 )XYZ\""
+      ],
+      "correctIndex": 3,
+      "explanation": "原始字符串的自定义分隔符必须成对出现，开头的 `ABC` 必须由结尾的 `)ABC\"` 完全匹配；`XYZ` 不能作为替代分隔符。",
+      "source": {
+        "textbook": "C++20高级编程(第5版)(上下册） ([比]马克·格雷戈勒（Marc Gregoire）) ",
+        "chapter": "",
+        "textbookSlug": "KUvt"
+      },
+      "created": "2026-08-02T17:36:11.625Z",
+      "conversationId": "dchK-NZeud4y4TUCWrkeN",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-08-02T17:37:24.959Z",
+          "chosen": 3,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-08-03T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1785692171626_001_f45f8ac85a86",
+      "question": "执行下面代码后，关于 `text` 的内容和 `std::string::size()`，哪项描述正确？\n\n```cpp\nstd::string text{\"hello\"};\ntext += \" world\";\n```",
+      "choices": [
+        "text 保存 \"hello world\"，其 size() 为 11",
+        "text 保存 \"hello world\\0\"，其 size() 为 12",
+        "text 仍保存 \"hello\"，因为 += 只能用于字符而不能用于字符串字面量",
+        "text 保存的是两个彼此独立的字符串对象，size() 只计算原来的 \"hello\""
+      ],
+      "correctIndex": 0,
+      "explanation": "`+=` 会把右侧字符串追加到原有内容之后，因此 `text` 保存 `\"hello world\"`；长度为 11，不需要把结尾的 `\\0` 作为字符串内容手动计算。",
+      "source": {
+        "textbook": "C++20高级编程(第5版)(上下册） ([比]马克·格雷戈勒（Marc Gregoire）) ",
+        "chapter": "",
+        "textbookSlug": "KUvt"
+      },
+      "created": "2026-08-02T17:36:11.626Z",
+      "conversationId": "dchK-NZeud4y4TUCWrkeN",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-08-02T17:37:58.752Z",
+          "chosen": 0,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-08-03T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1785692171626_002_2108dce14e12",
+      "question": "下面代码执行后，`text` 的值是什么？\n\n```cpp\nstd::string text{\"hello world\"};\ntext.replace(6, 5, \"C++\");\n```",
+      "choices": [
+        "hello C++",
+        "hello worldC++",
+        "C++ hello world",
+        "hello C"
+      ],
+      "correctIndex": 0,
+      "explanation": "`replace(6, 5, \"C++\")` 从下标 6 开始替换长度为 5 的子串，即替换 `world`，所以结果是 `hello C++`。",
+      "source": {
+        "textbook": "C++20高级编程(第5版)(上下册） ([比]马克·格雷戈勒（Marc Gregoire）) ",
+        "chapter": "",
+        "textbookSlug": "KUvt"
+      },
+      "created": "2026-08-02T17:36:11.626Z",
+      "conversationId": "dchK-NZeud4y4TUCWrkeN",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-08-02T17:41:38.797Z",
+          "chosen": 0,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-08-03T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1785692171626_003_2ceaa989be28",
+      "question": "对字符区间 `\"123abc\"` 调用 `std::from_chars()` 解析整数时，哪项描述正确？",
+      "choices": [
+        "value 为 123，ptr 等于区间末尾，表示 abc 也被当作整数的一部分解析",
+        "from_chars() 会跳过 abc 并继续寻找后面的数字，因此 ptr 指向字符串末尾",
+        "由于输入中含有字母，ec 一定是 invalid_argument，value 不会得到任何结果",
+        "value 为 123，ec 表示成功，ptr 指向第一个未转换的字符 'a'"
+      ],
+      "correctIndex": 3,
+      "explanation": "`from_chars()` 会解析连续的数字 `123`，并在遇到第一个无法继续转换的字符 `a` 时停止；此时转换成功，但并不代表整个输入区间都已解析完。",
+      "source": {
+        "textbook": "C++20高级编程(第5版)(上下册） ([比]马克·格雷戈勒（Marc Gregoire）) ",
+        "chapter": "",
+        "textbookSlug": "KUvt"
+      },
+      "created": "2026-08-02T17:36:11.626Z",
+      "conversationId": "dchK-NZeud4y4TUCWrkeN",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-08-02T17:44:16.734Z",
+          "chosen": 3,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-08-03T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1785692171626_004_83f592710981",
+      "question": "下面代码返回后，调用者得到的 `std::string_view` 处于什么状态？\n\n```cpp\nstd::string_view getText()\n{\n    std::string text{\"hello\"};\n    return text;\n}\n```",
+      "choices": [
+        "返回的 string_view 会延长局部 string 的生命周期，因此可以安全使用",
+        "返回的 string_view 会自动转换为拥有数据的 std::string，因此不会失效",
+        "返回的 string_view 会自动复制 text 的内容，因此始终有效",
+        "返回的 string_view 是悬空视图，因为它指向的局部 string 已经销毁"
+      ],
+      "correctIndex": 3,
+      "explanation": "`string_view` 只保存字符区域的地址和长度，不拥有字符存储；函数返回时局部变量 `text` 已销毁，因此返回的视图成为悬空视图，不能安全使用。",
+      "source": {
+        "textbook": "C++20高级编程(第5版)(上下册） ([比]马克·格雷戈勒（Marc Gregoire）) ",
+        "chapter": "",
+        "textbookSlug": "KUvt"
+      },
+      "created": "2026-08-02T17:36:11.626Z",
+      "conversationId": "dchK-NZeud4y4TUCWrkeN",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-08-02T17:44:25.263Z",
+          "chosen": 3,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-08-03T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1786012705379_000_750e32bd0971",
+      "question": "在 `std::format(\"{:.3}\", \"C++20\")` 中，`.3` 对字符串的主要作用是什么？",
+      "choices": [
+        "把字符串补齐到 3 个字符，长度不足时用空格填充",
+        "把字符串中的每个字符重复 3 次",
+        "最多输出前 3 个字符，不足 3 个字符也不会补空格",
+        "只输出字符串的最后 3 个字符"
+      ],
+      "correctIndex": 2,
+      "explanation": "对字符串而言，precision 表示最多输出多少个字符，而不是要求字符串达到某个最小长度。因此结果只包含前 3 个字符，不会用空格补足。",
+      "source": {
+        "textbook": "C++20高级编程(第5版)(上下册） ([比]马克·格雷戈勒（Marc Gregoire）) ",
+        "chapter": "",
+        "textbookSlug": "KUvt"
+      },
+      "created": "2026-08-06T10:38:25.379Z",
+      "conversationId": "3rs62cdWxw4G16EwBzlQo",
+      "status": "active",
+      "history": [],
+      "nextReview": "2026-08-06T10:38:25.379Z",
+      "interval": 0,
+      "ease": 2.5,
+      "repetitions": 0
+    },
+    {
+      "id": "fc_1786012705379_001_79bfa1d6fbd1",
+      "question": "为什么 `std::format(\"{:06d}\", -42)` 的结果是 `\"-00042\"`，而不是 `\"-000042\"`？",
+      "choices": [
+        "字段宽度 6 只计算数字，不计算负号",
+        "字段宽度 6 包含负号，因此只需补 3 个零",
+        "负数不能使用零填充，所以实际结果会自动缩短",
+        "格式说明符会把负号当作一个需要额外补齐的数字字符"
+      ],
+      "correctIndex": 1,
+      "explanation": "字段宽度 6 包含负号本身：负号占 1 位，数字占 2 位，还需补 3 个零，合计正好 6 位。零填充位于符号之后。",
+      "source": {
+        "textbook": "C++20高级编程(第5版)(上下册） ([比]马克·格雷戈勒（Marc Gregoire）) ",
+        "chapter": "",
+        "textbookSlug": "KUvt"
+      },
+      "created": "2026-08-06T10:38:25.379Z",
+      "conversationId": "3rs62cdWxw4G16EwBzlQo",
+      "status": "active",
+      "history": [],
+      "nextReview": "2026-08-06T10:38:25.379Z",
+      "interval": 0,
+      "ease": 2.5,
+      "repetitions": 0
+    },
+    {
+      "id": "fc_1786012705379_002_8211ef1ca60b",
+      "question": "在为 `Point` 编写 `std::formatter<Point>` 时，用户写入 `std::format(\"{:p}\", point)`，`parse()` 和 `format()` 的正确分工是什么？",
+      "choices": [
+        "parse() 直接生成最终字符串，format() 只检查 Point 是否有效",
+        "parse() 解析并保存 p，format() 根据该设置输出 Point",
+        "format() 解析 p，parse() 负责把 x 和 y 拼接成字符串",
+        "parse() 和 format() 都负责解析格式说明符，二者没有明确分工"
+      ],
+      "correctIndex": 1,
+      "explanation": "`parse()` 负责读取并验证冒号后的格式选项，例如 `p`；`format()` 则根据解析结果读取 `Point` 的成员并生成最终文本。",
+      "source": {
+        "textbook": "C++20高级编程(第5版)(上下册） ([比]马克·格雷戈勒（Marc Gregoire）) ",
+        "chapter": "",
+        "textbookSlug": "KUvt"
+      },
+      "created": "2026-08-06T10:38:25.379Z",
+      "conversationId": "3rs62cdWxw4G16EwBzlQo",
+      "status": "active",
+      "history": [],
+      "nextReview": "2026-08-06T10:38:25.379Z",
+      "interval": 0,
+      "ease": 2.5,
+      "repetitions": 0
+    },
+    {
+      "id": "fc_1786012705379_003_7587432e34e1",
+      "question": "下面哪种情况最容易导致 `std::string_view` 悬空？",
+      "choices": [
+        "让 string_view 指向一个在当前作用域内仍然存活的 string",
+        "把 string_view 显式转换为独立拥有数据的 string",
+        "让 string_view 指向函数内的局部 string，或指向表达式结束后即销毁的临时 string",
+        "使用 string_view 查看字符串字面量，因为字面量不拥有字符数据"
+      ],
+      "correctIndex": 2,
+      "explanation": "`std::string_view` 不拥有字符数据；当它指向的局部或临时 `std::string` 被销毁后，视图仍保留旧地址，但已没有有效对象可供访问。",
+      "source": {
+        "textbook": "C++20高级编程(第5版)(上下册） ([比]马克·格雷戈勒（Marc Gregoire）) ",
+        "chapter": "",
+        "textbookSlug": "KUvt"
+      },
+      "created": "2026-08-06T10:38:25.379Z",
+      "conversationId": "3rs62cdWxw4G16EwBzlQo",
+      "status": "active",
+      "history": [],
+      "nextReview": "2026-08-06T10:38:25.379Z",
+      "interval": 0,
+      "ease": 2.5,
+      "repetitions": 0
+    },
+    {
+      "id": "fc_1786012705379_004_32cf27e25d75",
+      "question": "为什么公开接口文档更适合写“返回购物车中所有商品的总价格”，而不是“遍历 vector，然后把每个元素的 price 相加”？",
+      "choices": [
+        "后者不能说明函数返回值的类型，所以不适合出现在函数声明旁",
+        "前者说明稳定的接口行为，不会把实现细节写死在文档中",
+        "前者的文字更短，因此任何公开文档都应尽量省略技术细节",
+        "公开接口文档不应描述函数功能，只应记录作者和修改日期"
+      ],
+      "correctIndex": 1,
+      "explanation": "前者描述函数对外承诺的行为，和具体实现解耦；后者把当前数据结构和算法写进文档，未来更换实现后就可能变得不准确。",
+      "source": {
+        "textbook": "C++20高级编程(第5版)(上下册） ([比]马克·格雷戈勒（Marc Gregoire）) ",
+        "chapter": "",
+        "textbookSlug": "KUvt"
+      },
+      "created": "2026-08-06T10:38:25.379Z",
+      "conversationId": "3rs62cdWxw4G16EwBzlQo",
+      "status": "active",
+      "history": [],
+      "nextReview": "2026-08-06T10:38:25.379Z",
+      "interval": 0,
+      "ease": 2.5,
+      "repetitions": 0
+    },
+    {
+      "id": "fc_1786469952239_000_19f83f45dbdb",
+      "question": "在重构后的订单处理代码中，`processOrder()` 主要负责什么？",
+      "choices": [
+        "负责把订单数据直接转换成数据库记录",
+        "负责完成订单验证、计算、保存和通知的所有具体实现",
+        "只负责计算订单总价并返回结果",
+        "组织订单处理的整体流程"
+      ],
+      "correctIndex": 3,
+      "explanation": "提取验证、计算、保存和通知逻辑后，`processOrder()` 不再亲自处理细节，而是按正确顺序调用辅助函数来表达整体流程。",
+      "source": {
+        "textbook": "C++20高级编程(第5版)(上下册） ([比]马克·格雷戈勒（Marc Gregoire）) ",
+        "chapter": "第2部分:专业的 C++软件设计",
+        "textbookSlug": "KUvt"
+      },
+      "created": "2026-08-11T17:39:12.239Z",
+      "conversationId": "1ZUKO7165vGWAB8os_3en",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-08-11T17:39:21.032Z",
+          "chosen": 3,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-08-12T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1786469952241_001_a122ad11d68c",
+      "question": "如果一个类同时负责订单数据管理、数据库存储和邮件发送，为什么“提取类”比“提取方法”更合适？",
+      "choices": [
+        "因为一个类中不能同时包含多个公共方法",
+        "因为提取方法只能用于处理数据库相关代码",
+        "因为问题在于类承担了过多职责，需要把部分职责移到新类",
+        "因为提取类通常比提取方法生成更少的代码"
+      ],
+      "correctIndex": 2,
+      "explanation": "提取方法主要用于拆分一个方法内部过多的逻辑；当问题是整个类承担了彼此独立的多项职责时，应把部分职责移动到新类中。",
+      "source": {
+        "textbook": "C++20高级编程(第5版)(上下册） ([比]马克·格雷戈勒（Marc Gregoire）) ",
+        "chapter": "第2部分:专业的 C++软件设计",
+        "textbookSlug": "KUvt"
+      },
+      "created": "2026-08-11T17:39:12.241Z",
+      "conversationId": "1ZUKO7165vGWAB8os_3en",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-08-11T17:39:27.600Z",
+          "chosen": 2,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-08-12T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1786469952241_002_4bf9f5b95a6e",
+      "question": "菜单和按钮都定义了名为 `Help` 的常量时，为什么应使用 `Menu::Help` 或 `Button::Help`，而不是直接写 `Help`？",
+      "choices": [
+        "防止名称空间中的常量被其他函数修改",
+        "明确指定常量所属的名称空间，避免同名标识符产生歧义",
+        "让常量从运行时变量变成编译期变量",
+        "使两个名称相同的常量自动获得相同的数值"
+      ],
+      "correctIndex": 1,
+      "explanation": "同名标识符位于不同名称空间中，作用域解析运算符能够明确指定要访问的名称空间，从而避免歧义或查找失败。",
+      "source": {
+        "textbook": "C++20高级编程(第5版)(上下册） ([比]马克·格雷戈勒（Marc Gregoire）) ",
+        "chapter": "第2部分:专业的 C++软件设计",
+        "textbookSlug": "KUvt"
+      },
+      "created": "2026-08-11T17:39:12.241Z",
+      "conversationId": "1ZUKO7165vGWAB8os_3en",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-08-11T17:39:38.026Z",
+          "chosen": 1,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-08-12T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1786469952241_003_f65e4fc0ecb9",
+      "question": "为什么不应为了调用旧接口而简单地把 `const char*` 强制转换成 `char*`？",
+      "choices": [
+        "它会使所有使用该指针的代码都无法通过编译",
+        "它会把指针本身转换成引用并改变函数调用约定",
+        "它可能让函数修改原本不可修改的数据，从而导致未定义行为",
+        "它会自动复制字符串并造成额外的内存泄漏"
+      ],
+      "correctIndex": 2,
+      "explanation": "强制转换不会真正移除原对象的只读性质，却会让旧函数获得修改数据的可能；如果对象本来不可修改，这种写入可能导致未定义行为。",
+      "source": {
+        "textbook": "C++20高级编程(第5版)(上下册） ([比]马克·格雷戈勒（Marc Gregoire）) ",
+        "chapter": "第2部分:专业的 C++软件设计",
+        "textbookSlug": "KUvt"
+      },
+      "created": "2026-08-11T17:39:12.241Z",
+      "conversationId": "1ZUKO7165vGWAB8os_3en",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-08-11T17:39:58.015Z",
+          "chosen": 2,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-08-12T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1786469952241_004_95324a0b0899",
+      "question": "在复杂表达式中同时读取和修改同一个变量，例如 `numbers[i++] + numbers[i++]`，为什么拆成多条语句通常更安全、更易维护？",
+      "choices": [
+        "拆分后每一步的读取和修改顺序清晰，避免依赖复杂的求值顺序",
+        "拆分后变量 `i` 会自动变成线程安全变量",
+        "拆分后数组访问就不再需要检查下标是否越界",
+        "拆分后编译器一定会生成运行速度更快的机器码"
+      ],
+      "correctIndex": 0,
+      "explanation": "拆分后每次读取和递增的先后关系明确，读者不必推断求值顺序，也能避免某些表达式因未明确的求值顺序而产生未定义行为。",
+      "source": {
+        "textbook": "C++20高级编程(第5版)(上下册） ([比]马克·格雷戈勒（Marc Gregoire）) ",
+        "chapter": "第2部分:专业的 C++软件设计",
+        "textbookSlug": "KUvt"
+      },
+      "created": "2026-08-11T17:39:12.241Z",
+      "conversationId": "1ZUKO7165vGWAB8os_3en",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-08-11T17:40:18.810Z",
+          "chosen": 0,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-08-12T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1786507927769_000_ba5ea5cffa23",
+      "question": "一个类同时负责订单数据管理、数据库存储和邮件发送，哪种重构方式最适合解决这一问题？",
+      "choices": [
+        "封装字段，因为将字段设为 private 就能自动分离不同职责",
+        "提取方法，因为可以把数据库操作和邮件发送分别写成方法",
+        "提取类，因为它能把类承担的部分职责转移到新类中",
+        "上移，因为订单、数据库和邮件功能通常都应放到基类中"
+      ],
+      "correctIndex": 2,
+      "explanation": "问题的根源是一个类承担了过多职责，因此应把其中一部分职责转移到新的类中。提取方法主要用于拆分单个方法内部过于复杂的逻辑。",
+      "source": {
+        "textbook": "C++20高级编程(第5版)(上下册） ([比]马克·格雷戈勒（Marc Gregoire）) ",
+        "chapter": "",
+        "textbookSlug": "KUvt"
+      },
+      "created": "2026-08-12T04:12:07.769Z",
+      "conversationId": "1ZUKO7165vGWAB8os_3en",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-08-12T04:13:52.487Z",
+          "chosen": 2,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-08-12T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1786507927770_001_58ff417d255a",
+      "question": "对于保存当前活动用户数量的变量，为什么 `numberOfActiveUsers` 通常比 `n` 更合适？",
+      "choices": [
+        "它明确说明了这是活动用户的数量，减少读者猜测",
+        "它的字符数更多，因此编译器能更准确地推断变量类型",
+        "它遵循匈牙利表示法，把整数类型编码进了变量名",
+        "它能保证变量只在当前函数中使用，不会产生作用域问题"
+      ],
+      "correctIndex": 0,
+      "explanation": "`numberOfActiveUsers` 同时表达了数据的类型语义——数量，以及数量所对应的对象和状态——活动用户。`n` 虽然简短，但缺少足够上下文，读者难以确认它代表什么。",
+      "source": {
+        "textbook": "C++20高级编程(第5版)(上下册） ([比]马克·格雷戈勒（Marc Gregoire）) ",
+        "chapter": "",
+        "textbookSlug": "KUvt"
+      },
+      "created": "2026-08-12T04:12:07.770Z",
+      "conversationId": "1ZUKO7165vGWAB8os_3en",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-08-12T04:14:01.283Z",
+          "chosen": 0,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-08-12T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1786507927770_002_cbf9c08f4950",
+      "question": "如果菜单和按钮都定义了名为 `Help` 的常量，为什么应使用 `Menu::Help` 和 `Button::Help`，而不能直接写 `Help`？",
+      "choices": [
+        "直接写 `Help` 会导致常量被自动修改，而使用 `::` 才能保持其不可变",
+        "作用域解析运算符明确指定了 `Help` 所属的名称空间",
+        "名称空间中的常量不能直接使用，必须通过 `::` 转换为全局变量",
+        "`::` 会把两个同名常量合并成一个值，避免重复定义"
+      ],
+      "correctIndex": 1,
+      "explanation": "名称空间允许不同作用域中存在同名标识符，而 `::` 明确指定要访问的名称空间。直接写 `Help` 没有提供足够的作用域信息，可能导致歧义或查找失败。",
+      "source": {
+        "textbook": "C++20高级编程(第5版)(上下册） ([比]马克·格雷戈勒（Marc Gregoire）) ",
+        "chapter": "",
+        "textbookSlug": "KUvt"
+      },
+      "created": "2026-08-12T04:12:07.770Z",
+      "conversationId": "1ZUKO7165vGWAB8os_3en",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-08-12T04:14:09.366Z",
+          "chosen": 1,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-08-12T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1786507927770_003_4daddb352dc8",
+      "question": "为什么应避免在复杂表达式中同时读取并修改同一个变量，例如 `numbers[i++] + numbers[i++]`？",
+      "choices": [
+        "自增运算符不能用于数组下标，只能用于独立的计数语句",
+        "编译器会禁止同一个表达式中出现两个相同的变量名",
+        "它使变量的读取与修改顺序难以判断，可能导致不明确或未定义的行为",
+        "拆成多条语句后，编译器一定能生成运行速度更快的代码"
+      ],
+      "correctIndex": 2,
+      "explanation": "这种写法使每次使用 `i` 时取修改前还是修改后的值变得难以判断，类似表达式还可能涉及求值顺序问题甚至未定义行为。拆成多条语句可以明确每一步的状态变化。",
+      "source": {
+        "textbook": "C++20高级编程(第5版)(上下册） ([比]马克·格雷戈勒（Marc Gregoire）) ",
+        "chapter": "",
+        "textbookSlug": "KUvt"
+      },
+      "created": "2026-08-12T04:12:07.770Z",
+      "conversationId": "1ZUKO7165vGWAB8os_3en",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-08-12T04:14:14.156Z",
+          "chosen": 2,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-08-12T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1786507927770_004_0b082cc42649",
+      "question": "为什么不能为了调用 `void process(char* text)`，就把 `const char* text` 直接强制转换为 `char*`？",
+      "choices": [
+        "因为强制转换只是伪装出可写指针，旧函数若修改数据可能导致未定义行为",
+        "因为转换会把字符串复制到新的可写缓冲区，反而造成额外性能开销",
+        "因为任何带有 `const` 的变量都不能作为函数参数传递",
+        "因为 `const char*` 与 `char*` 的大小不同，转换后会破坏指针地址"
+      ],
+      "correctIndex": 0,
+      "explanation": "强制转换不会真正移除原对象的只读性质，却会让函数获得修改该对象的权限。如果对象本身是常量或字符串字面量，函数写入它可能导致未定义行为，因此应先确认接口是否会修改数据。",
+      "source": {
+        "textbook": "C++20高级编程(第5版)(上下册） ([比]马克·格雷戈勒（Marc Gregoire）) ",
+        "chapter": "",
+        "textbookSlug": "KUvt"
+      },
+      "created": "2026-08-12T04:12:07.770Z",
+      "conversationId": "1ZUKO7165vGWAB8os_3en",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-08-12T04:14:19.870Z",
+          "chosen": 0,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-08-12T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1787042411363_000_ea8d5bc5b3a3",
+      "question": "一个项目将采用 MIT 许可证的开源库集成到闭源商业软件中。下列做法最符合许可证审查原则的是哪一项？",
+      "choices": [
+        "只要库能免费下载，就可以直接集成而无需查看许可证",
+        "因为使用了开源库，所以必须公开整个商业软件的全部源代码",
+        "确认允许闭源商用，并在发布时保留许可证要求的版权声明和许可文本",
+        "只要产品没有修改库的源代码，就不需要履行任何许可证义务"
+      ],
+      "correctIndex": 2,
+      "explanation": "MIT 许可证通常允许用于闭源商业产品，但这并不意味着可以忽略附带条件。发布软件时仍应检查并履行保留版权声明和许可证文本等义务。",
+      "source": {
+        "textbook": "C++20高级编程(第5版)(上下册） ([比]马克·格雷戈勒（Marc Gregoire）) ",
+        "chapter": "",
+        "textbookSlug": "KUvt"
+      },
+      "created": "2026-08-18T08:40:11.363Z",
+      "conversationId": "D2cvKmVFeOquWvrUojSSX",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-08-18T08:41:28.028Z",
+          "chosen": 2,
+          "correct": true
+        },
+        {
+          "time": "2026-08-18T08:42:05.934Z",
+          "chosen": 2,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-08-20T16:00:00.000Z",
+      "interval": 3,
+      "ease": 2.7,
+      "repetitions": 2
+    },
+    {
+      "id": "fc_1787042411363_001_bd34fd6afe86",
+      "question": "“开放源代码库”这一称呼本身，为什么不能推出使用者可以任意修改并重新分发该库？",
+      "choices": [
+        "因为开放源代码只允许个人使用，不允许任何商业用途",
+        "因为只有购买商业授权后才能修改开放源代码",
+        "因为所有开放源代码库都必须采用 GPL 许可证",
+        "因为源代码是否可获取与使用者拥有的具体权利不同，后者要由许可证决定"
+      ],
+      "correctIndex": 3,
+      "explanation": "开放源代码主要说明源代码可以获取，但具体的使用、修改和再分发权利由许可证规定。源代码可见并不等于没有法律或许可限制。",
+      "source": {
+        "textbook": "C++20高级编程(第5版)(上下册） ([比]马克·格雷戈勒（Marc Gregoire）) ",
+        "chapter": "",
+        "textbookSlug": "KUvt"
+      },
+      "created": "2026-08-18T08:40:11.363Z",
+      "conversationId": "D2cvKmVFeOquWvrUojSSX",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-08-18T08:41:36.184Z",
+          "chosen": 3,
+          "correct": true
+        },
+        {
+          "time": "2026-08-18T08:42:08.970Z",
+          "chosen": 3,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-08-20T16:00:00.000Z",
+      "interval": 3,
+      "ease": 2.7,
+      "repetitions": 2
+    },
+    {
+      "id": "fc_1787042411363_002_19ab1ff314b0",
+      "question": "在 C++ 中使用传统 C 数学库功能时，采用 `#include <cmath>` 并通常通过 `std::` 使用相关函数，主要体现了什么？",
+      "choices": [
+        "C++ 已经删除了 C 数学库，因此必须改用完全不同的算法",
+        "使用 `<cmath>` 的唯一原因是 C 风格的 `<math.h>` 在 C++ 中一定无法编译",
+        "只要把 `.h` 删除，所有函数就会自动获得更高的运行效率",
+        "使用 C++ 规定的头文件形式和命名空间，使 C 库功能更符合 C++ 的规范"
+      ],
+      "correctIndex": 3,
+      "explanation": "`<cmath>` 是 C 标准头文件 `<math.h>` 对应的 C++ 形式，通常配合 `std::` 命名空间使用。这样更符合 C++ 标准和命名空间习惯，也能减少名称暴露到全局命名空间的问题。",
+      "source": {
+        "textbook": "C++20高级编程(第5版)(上下册） ([比]马克·格雷戈勒（Marc Gregoire）) ",
+        "chapter": "",
+        "textbookSlug": "KUvt"
+      },
+      "created": "2026-08-18T08:40:11.363Z",
+      "conversationId": "D2cvKmVFeOquWvrUojSSX",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-08-18T08:42:14.598Z",
+          "chosen": 3,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-08-18T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1787042411363_003_db203f33da6f",
+      "question": "设计待办事项程序时，为什么应先明确“用户需要哪些功能”，再决定使用 `std::vector` 还是数据库？",
+      "choices": [
+        "因为使用数据库会自动满足所有待办事项功能",
+        "因为 C++ 标准禁止在需求分析阶段讨论数据结构",
+        "功能需求决定程序要做什么，数据结构和数据库只是实现这些功能的具体方案",
+        "因为数据结构只能在程序完成后由编译器自动选择"
+      ],
+      "correctIndex": 2,
+      "explanation": "功能需求描述程序要为用户提供什么能力，而数据结构或数据库属于实现细节。先明确需求可以避免被某个熟悉的技术方案限制，并使后续设计真正服务于目标。",
+      "source": {
+        "textbook": "C++20高级编程(第5版)(上下册） ([比]马克·格雷戈勒（Marc Gregoire）) ",
+        "chapter": "",
+        "textbookSlug": "KUvt"
+      },
+      "created": "2026-08-18T08:40:11.363Z",
+      "conversationId": "D2cvKmVFeOquWvrUojSSX",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-08-18T08:42:27.562Z",
+          "chosen": 2,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-08-18T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1787042411363_004_5573b96d964c",
+      "question": "在设计国际象棋程序时，先划分棋盘管理、棋子管理、玩家操作和界面显示等职责，主要是为了什么？",
+      "choices": [
+        "优先选择二维数组，因为棋盘程序必须使用固定的数据结构",
+        "先明确系统的职责和协作关系，再将职责落实为具体的子系统和类",
+        "先确定每个类的成员变量类型，以便之后自动生成需求",
+        "把所有走法判断集中到棋盘类中，以减少类的数量"
+      ],
+      "correctIndex": 1,
+      "explanation": "先划分职责有助于明确各子系统负责什么以及它们如何协作，再进一步决定具体类、数据结构和算法。这体现了从一般设计逐步细化到特殊实现的过程。",
+      "source": {
+        "textbook": "C++20高级编程(第5版)(上下册） ([比]马克·格雷戈勒（Marc Gregoire）) ",
+        "chapter": "",
+        "textbookSlug": "KUvt"
+      },
+      "created": "2026-08-18T08:40:11.363Z",
+      "conversationId": "D2cvKmVFeOquWvrUojSSX",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-08-18T08:42:41.221Z",
+          "chosen": 1,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-08-18T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    }
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "title": "通过继承添加摄氏温度功能",
+  "definition": "MyWeatherPrediction 公有继承 WeatherPrediction，在保留基类功能的基础上增加摄氏温度接口。它通过摄氏温度与华氏温度之间的转换，把用户使用的摄氏温度转换为基类能够理解的华氏温度，再调用基类功能。",
+  "key_points": [
+    "MyWeatherPrediction 可以替代 WeatherPrediction 使用，并继承基类定义的功能。",
+    "派生类新增 setCurrentTempCelsius(int)，让客户可以用摄氏温度设置当前温度。",
+    "派生类新增 getTomorrowTempCelsius() const，让客户可以用摄氏温度获取明日温度。",
+    "转换函数可以设计为 private static，因为转换规则对所有对象实例相同。",
+    "派生类在用户和只理解华氏温度的基类之间起适配作用。"
+  ],
+  "examples": [
+    "class MyWeatherPrediction : public WeatherPrediction { public: virtual void setCurrentTempCelsius(int temp); virtual int getTomorrowTempCelsius() const; private: static int convertCelsiusToFahrenheit(int celsius); static int convertFahrenheitToCelsius(int fahrenheit); };"
+  ],
+  "misconceptions": [
+    "增加摄氏温度功能不一定需要修改 WeatherPrediction 的源代码；可以在派生类中增加新接口。",
+    "派生类新增摄氏温度接口并不意味着基类内部计算改成了摄氏温度；原文的做法是转换后继续调用基类的华氏温度接口。",
+    "private static 转换函数不是每个对象各自保存一份状态；它们不依赖对象实例数据。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "MyWeatherPrediction 如何支持用摄氏温度设置当前温度？",
+      "a": "先调用 convertCelsiusToFahrenheit(temp) 将摄氏温度转换为华氏温度，再调用继承来的 setCurrentTempFahrenheit(fahrenheitTemp)。"
+    },
+    {
+      "q": "MyWeatherPrediction 如何获取摄氏温度形式的天气预报？",
+      "a": "先调用继承来的 getTomorrowTempFahrenheit() 获取华氏温度，再调用 convertFahrenheitToCelsius() 转换后返回。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++公有继承",
+    "基类功能复用",
+    "摄氏温度与华氏温度转换"
+  ],
+  "source_pages": [
+    314,
+    315
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "644_通过继承添加摄氏温度功能",
+  "_chunk_pages": [
+    313,
+    316
+  ]
+}

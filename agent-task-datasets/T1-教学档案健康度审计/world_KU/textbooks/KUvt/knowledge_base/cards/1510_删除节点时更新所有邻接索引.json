@@ -1,0 +1,46 @@
+{
+  "title": "删除节点时更新所有邻接索引",
+  "definition": "删除节点需要先从所有其他节点的邻接索引集合中移除对该节点的引用，并把所有大于被删节点索引的邻接索引减一，以反映 vector 删除元素后后续节点的索引变化。由于 set 中的元素不能直接修改，辅助方法 remove_all_links_to 先将 set 转换为 vector，修改索引后清空 set，再重新插入更新后的索引。",
+  "key_points": [
+    "设被删除节点的索引为 $k$，邻接索引的更新规则为：\n$$i' = \\begin{cases}i-1,& i>k\\\\i,& i\\le k\\end{cases}$$",
+    "处理顺序是：从每个邻接集合删除 $k$；复制剩余索引到 vector；更新大于 $k$ 的索引；清空原 set；重新插入更新后的索引。",
+    "该方法遍历所有节点的邻接表，而不是只处理直接指向待删节点的节点。",
+    "原文指出这种实现可能不是性能最佳，但重点不在性能。"
+  ],
+  "examples": [
+    "索引更新逻辑可概括为：\n```cpp\nadjacencyIndices.erase(node_index);\nstd::vector<std::size_t> indices(\n    std::begin(adjacencyIndices), std::end(adjacencyIndices));\nstd::for_each(std::begin(indices), std::end(indices),\n    [node_index](std::size_t& index) {\n        if (index > node_index) {\n            --index;\n        }\n    });\nadjacencyIndices.clear();\nadjacencyIndices.insert(std::begin(indices), std::end(indices));\n```",
+    "例如删除索引 $2$ 的节点时，邻接集合中的 $2$ 被删除，$3$ 变为 $2$，$4$ 变为 $3$，小于 $2$ 的索引不变。"
+  ],
+  "misconceptions": [
+    "删除节点只移除节点对象是不够的，还必须清理和调整所有邻接索引。",
+    "只有大于被删索引的索引需要减一；小于或等于被删索引的其他索引不减一，其中等于被删索引的引用会先被删除。",
+    "set 的元素不能像 vector 元素那样直接通过引用修改，因此需要转换后重建。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "删除索引为 k 的节点时，邻接索引 i 如何更新？",
+      "a": "如果 $i>k$，则更新为 $i-1$；如果 $i\\le k$，则保持不变，但等于 k 的引用会先被删除。"
+    },
+    {
+      "q": "为什么 remove_all_links_to 要先把 set 转换为 vector？",
+      "a": "因为 set 不允许直接修改其元素值；转换为 vector 后可以更新索引，再清空 set 并重新插入。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "vector元素删除后的索引变化",
+    "set",
+    "迭代器算法"
+  ],
+  "source_pages": [
+    727,
+    727
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1510_删除节点时更新所有邻接索引",
+  "_chunk_pages": [
+    725,
+    728
+  ]
+}

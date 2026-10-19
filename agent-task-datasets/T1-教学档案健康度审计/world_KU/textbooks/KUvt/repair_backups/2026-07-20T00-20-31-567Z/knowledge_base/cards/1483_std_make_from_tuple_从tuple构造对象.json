@@ -1,0 +1,43 @@
+{
+  "title": "std::make_from_tuple()从tuple构造对象",
+  "definition": "`std::make_from_tuple<T>(t)`可以构造一个`T`类型的对象，并把给定对象`t`中的元素按顺序作为参数传递给`T`的构造函数。传入的对象不一定必须是`std::tuple`，但必须支持`std::get<>`和`tuple_size`操作；`std::array`和`std::pair`也满足这些要求。该函数在日常代码中通常不常用，但在泛型代码和模板元编程中可以提供便利。",
+  "key_points": [
+    "目标类型`T`的构造函数参数个数和类型应与输入对象中的元素相匹配。",
+    "输入对象需要支持`std::get<>`和`tuple_size`，因此`std::tuple`、`std::array`和`std::pair`都可以作为输入。",
+    "典型调用形式为：`auto object = std::make_from_tuple<T>(tuple_object);`"
+  ],
+  "examples": [
+    "如果存在构造函数`Foo(std::string str, int i)`，则可以把包含字符串和整数的tuple传给`std::make_from_tuple<Foo>(...)`，以构造`Foo`对象。",
+    "示意代码：`auto args = std::tuple{\"Hello world.\", 42}; auto foo = std::make_from_tuple<Foo>(args);`"
+  ],
+  "misconceptions": [
+    "`make_from_tuple()`并不是只能接受`std::tuple`，满足相应接口的`std::array`和`std::pair`也可以接受。",
+    "它不是把tuple转换成某种通用对象，而是使用tuple元素调用目标类型的构造函数。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`std::make_from_tuple<T>()`的作用是什么？",
+      "a": "它从输入对象中取得各个元素，并将这些元素按顺序作为构造函数参数，构造一个`T`类型的对象。"
+    },
+    {
+      "q": "`std::make_from_tuple()`的输入是否必须是`std::tuple`？",
+      "a": "不必须。输入对象需要支持`std::get<>`和`tuple_size`；`std::array`和`std::pair`也满足要求。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "tuple、pair和array的基本用法",
+    "类构造函数"
+  ],
+  "source_pages": [
+    713,
+    713
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 std::make_from_tuple 要求 std::get tuple_size std::array std::pair 官方文档",
+  "concept_id": "1483_std_make_from_tuple_从tuple构造对象",
+  "_chunk_pages": [
+    713,
+    716
+  ]
+}

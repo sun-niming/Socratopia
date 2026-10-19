@@ -1,0 +1,47 @@
+{
+  "title": "为 SpreadsheetCell 重载基本算术运算符并处理除零",
+  "definition": "在理解 operator+ 后，可以用类似方式为 SpreadsheetCell 提供 `operator-`、`operator*` 和 `operator/` 等基本算术运算。除法运算必须检查除数是否为 0；若除数为 0，运算符实现应抛出异常，而不是继续执行除法。",
+  "key_points": [
+    "`operator-`、`operator*` 和 `operator/` 的声明形式与 `operator+` 类似，只需替换运算符符号。",
+    "对于保存 double 值的 SpreadsheetCell，教材指出重载 `%` 没有意义。",
+    "除法实现应先检查 `rhs.getValue() == 0`。",
+    "除数为 0 时可以抛出 `invalid_argument` 异常；否则返回 `SpreadsheetCell { lhs.getValue() / rhs.getValue() }`。",
+    "运算符实现应尽量符合用户对该运算符的常见理解。"
+  ],
+  "examples": [
+    "通用声明形式：`export SpreadsheetCell operator<op>(const SpreadsheetCell& lhs, const SpreadsheetCell& rhs);`，其中 `<op>` 替换为 `-`、`*` 或 `/`。",
+    "除法核心逻辑：`if (rhs.getValue() == 0) { throw invalid_argument { \"Divide by zero\" }; } return SpreadsheetCell { lhs.getValue() / rhs.getValue() };`"
+  ],
+  "misconceptions": [
+    "重载 operator/ 并不自动处理除数为 0；检查和抛出异常必须写在实现中。",
+    "虽然 C++允许把任意实现放进已重载的运算符函数，但不应让 `operator/` 实际执行乘法等与常见含义不符的操作。",
+    "不是所有算术运算符都适合所有底层类型；教材认为对 double 值重载 `%` 没有意义。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "SpreadsheetCell 的 operator/ 在除数为 0 时应如何处理？",
+      "a": "先检测 `rhs.getValue() == 0`，若成立则抛出 `invalid_argument` 异常；否则执行除法并返回新的 SpreadsheetCell。"
+    },
+    {
+      "q": "为什么教材没有为 double 型 SpreadsheetCell 强调重载 `%`？",
+      "a": "因为 `%` 对存储 double 值的 SpreadsheetCell 没有意义。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++异常处理",
+    "C++函数重载",
+    "运算符重载"
+  ],
+  "source_pages": [
+    292,
+    292
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "606_为_spreadsheetcell_重载基本算术运算符并处理除零",
+  "_chunk_pages": [
+    289,
+    292
+  ]
+}

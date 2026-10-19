@@ -1,0 +1,47 @@
+{
+  "title": "左值引用与右值引用重载的选择",
+  "definition": "当函数分别提供 `std::string&` 和 `std::string&&` 重载时，左值实参通常调用 `std::string&` 重载，右值实参通常调用 `std::string&&` 重载。命名对象即使其声明类型是右值引用，在表达式中通常也按左值处理。",
+  "key_points": [
+    "普通具名对象（如 `b`）是左值，通常匹配 `void handleMessage(std::string& message)`。",
+    "临时对象或表达式结果（如 `a + b`）是右值，通常匹配 `void handleMessage(std::string&& message)`。",
+    "对左值使用 `std::move(b)`，可以将其转换为可匹配右值引用重载的表达式；`std::move()` 本身不执行数据移动。",
+    "原文中的部分函数签名和注释因 OCR 排版存在冲突，应以可编译的 C++20 代码和教材原版图文为准。"
+  ],
+  "examples": [
+    "`handleMessage(b);` 通常调用 `handleMessage(std::string& message)`。",
+    "`handleMessage(a + b);` 通常调用 `handleMessage(std::string&& message)`。",
+    "`handleMessage(std::move(b));` 通常调用 `handleMessage(std::string&& message)`。",
+    "两个重载的典型形式：`void handleMessage(std::string& message);` 与 `void handleMessage(std::string&& message);`。"
+  ],
+  "misconceptions": [
+    "右值引用类型的变量并不意味着每次使用该变量时表达式都是右值；只要它有名字，直接使用它通常就是左值。",
+    "调用 `std::move(b)` 不保证一定发生移动，它只是把表达式转换为右值类别，实际是否移动取决于被调用函数或类型的实现。",
+    "临时对象不能绑定到普通的非常量左值引用 `T&`，但通常可以绑定到右值引用 `T&&`。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "当同时存在 `void f(std::string&)` 和 `void f(std::string&&)` 时，`std::move(s)` 通常调用哪个重载？",
+      "a": "通常调用 `void f(std::string&&)`，因为 `std::move(s)` 产生一个将 `s` 转换为右值类别的表达式。"
+    },
+    {
+      "q": "`a + b` 作为函数实参通常属于左值还是右值？",
+      "a": "通常属于右值，因此通常匹配右值引用重载 `std::string&&`。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++对象和值类别",
+    "C++引用"
+  ],
+  "source_pages": [
+    269,
+    272
+  ],
+  "needs_verification": true,
+  "verify_query": "《C++20高级编程》第5版 第269页 handleMessage std::string& std::string&& std::move 原文",
+  "concept_id": "352_左值引用与右值引用重载的选择",
+  "_chunk_pages": [
+    269,
+    272
+  ]
+}

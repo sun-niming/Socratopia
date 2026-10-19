@@ -1,0 +1,44 @@
+{
+  "title": "使用__has_include检测头文件是否存在",
+  "definition": "__has_include是预处理阶段使用的头文件存在性检测机制，可在条件编译中判断某个头文件是否能够被包含。它可以使用带尖括号的形式__has_include(<filename>)，也可以使用带引号的形式__has_include(\"filename\")。",
+  "key_points": [
+    "典型形式为：#if __has_include(<optional>)。",
+    "检测成功后可以使用#include <optional>。",
+    "若标准库头文件不存在，可以在条件分支中尝试包含替代头文件，例如<experimental/optional>。",
+    "该机制用于编写能够适应不同编译器、标准库或库版本的源代码。"
+  ],
+  "examples": [
+    "#if __has_include(<optional>)\n#include <optional>\n#elif __has_include(<experimental/optional>)\n#include <experimental/optional>\n#endif"
+  ],
+  "misconceptions": [
+    "__has_include只是检测头文件是否可用，不会自动包含该头文件。",
+    "检测到头文件存在不等于其中一定包含所需的全部类型或功能。",
+    "<optional>和<experimental/optional>是不同的头文件，不能因为名称相近就认为二者完全等价。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何检测<optional>是否存在？",
+      "a": "使用#if __has_include(<optional>)进行条件检测。"
+    },
+    {
+      "q": "如果<optional>不存在，示例中可以采取什么替代措施？",
+      "a": "可以继续使用#elif __has_include(<experimental/optional>)检测实验性头文件，并在存在时包含它。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "预处理器条件编译",
+    "C++头文件包含"
+  ],
+  "source_pages": [
+    361,
+    364
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 __has_include <optional> <experimental/optional> 教材第362页",
+  "concept_id": "462_使用__has_include检测头文件是否存在",
+  "_chunk_pages": [
+    361,
+    364
+  ]
+}

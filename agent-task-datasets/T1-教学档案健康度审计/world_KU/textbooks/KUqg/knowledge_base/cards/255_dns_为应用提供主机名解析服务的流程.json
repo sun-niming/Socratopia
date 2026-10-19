@@ -1,0 +1,46 @@
+{
+  "title": "DNS 为应用提供主机名解析服务的流程",
+  "definition": "当浏览器或其他应用需要连接某个主机名时，应用调用本机 DNS 客户端进行解析。本机 DNS 客户端向 DNS 服务器发送查询，收到包含 IP 地址的回答后，将结果交给应用；应用再使用该 IP 地址与目标服务器建立连接。",
+  "key_points": [
+    "浏览器从 URL 中抽取主机名，并将主机名传给 DNS 应用客户端。",
+    "DNS 客户端向 DNS 服务器发送包含该主机名的查询报文。",
+    "DNS 客户端收到包含对应 IP 地址的回答报文。",
+    "浏览器获得 IP 地址后，可以向目标 Web 服务器的端口 80 发起 TCP 连接。",
+    "DNS 解析会增加额外时延，但附近 DNS 服务器中的缓存通常有助于降低流量和平均时延。"
+  ],
+  "examples": [
+    "访问 $\\texttt{http://www.someschool.edu/index.html}$ 时，过程可表示为：\n$$\\text{URL}\\rightarrow\\text{抽取主机名}\\rightarrow\\text{DNS 查询}\\rightarrow\\text{获得 IP 地址}\\rightarrow\\text{向端口 80 建立 TCP 连接}$$"
+  ],
+  "misconceptions": [
+    "浏览器通常不能仅凭主机名直接发送 HTTP 报文，而需要先获得目标主机的 IP 地址。",
+    "DNS 查询得到 IP 地址后，浏览器才向 Web 服务器建立 TCP 连接；DNS 本身不等于 HTTP 连接。",
+    "DNS 解析可能产生额外时延，但缓存可以减少这种时延。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "浏览器访问某个 URL 时，为什么需要 DNS？",
+      "a": "因为浏览器需要先把 URL 中的主机名解析为 IP 地址，才能向目标 Web 服务器发送 HTTP 请求。"
+    },
+    {
+      "q": "DNS 返回 IP 地址后，浏览器下一步可以做什么？",
+      "a": "向该 IP 地址对应的端口 80 上的 HTTP 服务器进程发起 TCP 连接。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "DNS 的定义与基本通信参数",
+    "HTTP",
+    "TCP 连接"
+  ],
+  "source_pages": [
+    102,
+    103
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "255_dns_为应用提供主机名解析服务的流程",
+  "_chunk_pages": [
+    101,
+    104
+  ]
+}

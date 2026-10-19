@@ -1,0 +1,47 @@
+{
+  "title": "使用 derived_from 约束类模板",
+  "definition": "类模板可以通过 `std::derived_from<T, Base>` 约束模板类型，使其只能接受派生自指定基类的类型。教材中的 `GameBoard` 使用 `std::derived_from<GamePiece> T` 约束模板参数 `T`，因此 `GameBoard<T>` 要求 `T` 是 `GamePiece` 的派生类。",
+  "key_points": [
+    "类模板可以写成 `template <std::derived_from<GamePiece> T> class GameBoard : public Grid<T> { ... };`。",
+    "同样的约束也可以用 requires 子句表达：`template <typename T> requires std::derived_from<T, GamePiece> class GameBoard : public Grid<T> { ... };`。",
+    "`GameBoard` 继承自 `Grid<T>`，并提供带有宽度、高度默认值的构造函数以及 `move` 成员函数。",
+    "类模板约束会限制整个类模板的实例化，而不是只限制某一次成员函数调用。"
+  ],
+  "examples": [
+    "受约束的类模板形式：`template <std::derived_from<GamePiece> T> class GameBoard : public Grid<T> { ... };`",
+    "requires 子句形式：`template <typename T> requires std::derived_from<T, GamePiece> class GameBoard : public Grid<T> { ... };`",
+    "教材中的类接口包含：`explicit GameBoard(size_t width = Grid<T>::DefaultWidth, size_t height = Grid<T>::DefaultHeight);` 和 `void move(size_t xSrc, size_t ySrc, size_t xDest, size_t yDest);`。"
+  ],
+  "misconceptions": [
+    "`std::derived_from<T, GamePiece>` 要求的是 `T` 派生自 `GamePiece`，不是 `GamePiece` 派生自 `T`。",
+    "受约束的类模板不是对任意类型都可实例化；不满足约束的类型会被排除并导致实例化失败。",
+    "使用受约束模板参数和使用 requires 子句是两种表达同一类约束的写法，不是两个额外的继承关系。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何限制 `GameBoard<T>` 只能接受 `GamePiece` 的派生类？",
+      "a": "可以写 `template <std::derived_from<GamePiece> T> class GameBoard : public Grid<T> { ... };`，也可以写 `template <typename T> requires std::derived_from<T, GamePiece> class GameBoard : public Grid<T> { ... };`。"
+    },
+    {
+      "q": "`std::derived_from<T, GamePiece>` 表示什么？",
+      "a": "表示类型 `T` 必须派生自 `GamePiece`，或者满足标准库 `derived_from` 概念定义的派生关系。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "类模板",
+    "继承与派生类",
+    "C++20 概念（concept）基础"
+  ],
+  "source_pages": [
+    406,
+    406
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 std::derived_from constrained class template GameBoard GamePiece Grid example",
+  "concept_id": "530_使用_derived_from_约束类模板",
+  "_chunk_pages": [
+    405,
+    408
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "title": "浏览器开发者工具（Chrome示例）",
+  "definition": "以Chrome为例，按功能键F12可以打开浏览器开发者工具。它可用于查看和分析页面元素及CSS样式，测试CSS样式效果，检查资源是否加载成功，以及查看JavaScript脚本在Console控制台中的输出。",
+  "key_points": [
+    "F12可打开开发者工具",
+    "Elements相关功能可查看页面元素和CSS样式，并测试样式效果",
+    "Network可查看图像文件、CSS样式文件和JavaScript文件等是否加载成功",
+    "Console可查看JavaScript脚本实现的浏览器控制台输出"
+  ],
+  "examples": [
+    "按F12打开开发者工具",
+    "在Network选项中查看CSS文件和JavaScript文件是否加载成功"
+  ],
+  "misconceptions": [
+    "开发者工具只能看页面源码，不能测试CSS样式",
+    "Console只是普通文本窗口，不能查看JavaScript输出"
+  ],
+  "qa_pairs": [
+    {
+      "q": "在教材中，如何打开Chrome的开发者工具？",
+      "a": "按功能键F12。"
+    },
+    {
+      "q": "开发者工具中的Network选项主要用来做什么？",
+      "a": "查看图像文件、CSS样式文件和JavaScript文件等是否加载成功。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "常见浏览器"
+  ],
+  "source_pages": [
+    21,
+    24
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "029_浏览器开发者工具_chrome示例",
+  "_chunk_pages": [
+    21,
+    24
+  ]
+}

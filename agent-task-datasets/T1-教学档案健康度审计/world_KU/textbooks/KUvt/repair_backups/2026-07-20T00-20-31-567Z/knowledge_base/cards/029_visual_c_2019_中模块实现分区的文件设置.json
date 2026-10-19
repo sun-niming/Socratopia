@@ -1,0 +1,39 @@
+{
+  "title": "Visual C++ 2019 中模块实现分区的文件设置",
+  "definition": "如果使用 C++ 模块实现分区（原文也称内部分区），需要对包含这些实现分区的文件设置专用的编译方式：在文件属性的 Configuration Properties | C/C++ | Advanced 中，将 Compile As 设置为 Compile as C++ Module Internal Partition（`/internalPartition`）。",
+  "key_points": [
+    "模块实现分区也称为内部分区。",
+    "设置对象是包含模块实现分区的所有相关文件。",
+    "设置路径为 Configuration Properties | C/C++ | Advanced。",
+    "Compile As 的目标选项是 Compile as C++ Module Internal Partition（`/internalPartition`）。"
+  ],
+  "examples": [
+    "文件属性设置示例：\n```text\nConfiguration Properties | C/C++ | Advanced\nCompile As = Compile as C++ Module Internal Partition (/internalPartition)\n```"
+  ],
+  "misconceptions": [
+    "模块实现分区文件不能按普通 C++ 源文件的编译方式处理。",
+    "该设置针对包含实现分区的文件，而不是任意项目文件。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "Visual C++ 2019 中如何设置模块实现分区文件？",
+      "a": "右击相关文件打开 Properties，进入 Configuration Properties | C/C++ | Advanced，将 Compile As 设置为 Compile as C++ Module Internal Partition（`/internalPartition`）。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++ 模块的基本概念",
+    "Visual Studio 文件属性的基本操作"
+  ],
+  "source_pages": [
+    18,
+    18
+  ],
+  "needs_verification": true,
+  "verify_query": "Visual Studio C++ module internal partition /internalPartition Compile As option",
+  "concept_id": "029_visual_c_2019_中模块实现分区的文件设置",
+  "_chunk_pages": [
+    17,
+    20
+  ]
+}

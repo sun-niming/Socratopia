@@ -1,0 +1,43 @@
+{
+  "title": "WeatherPrediction 类的接口特点",
+  "definition": "WeatherPrediction 是一个用于根据当前温度以及木星到火星的距离预测天气的类。该类以华氏温度为主要温度单位，并提供设置当前温度、设置行星距离、获取明日温度、获取降雨概率、获取温度字符串以及显示结果等功能。原文将其设计为可被派生类重写的类。",
+  "key_points": [
+    "WeatherPrediction 的温度接口使用华氏温度。",
+    "类中多个操作被声明为 virtual，表示这些操作可能在派生类中重写。",
+    "类的内部数据成员保存当前华氏温度，默认值为 $0$。",
+    "原有类不能完全满足需求：程序还需要摄氏温度，而且原有 showResult() 的显示方式可能不符合需要。"
+  ],
+  "examples": [
+    "典型接口包括：setCurrentTempFahrenheit(int)、setPositionOfJupiter(int)、getTomorrowTempFahrenheit() const、getChanceOfRain() const、getTemperature() const 和 showResult() const。"
+  ],
+  "misconceptions": [
+    "WeatherPrediction 同时原生支持摄氏温度和华氏温度；原文明确指出它的温度接口以华氏温度为单位。",
+    "基类的所有实现都必须被重新编写；实际上，派生类可以直接重用基类已有功能。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么需要从 WeatherPrediction 派生新的类？",
+      "a": "因为 WeatherPrediction 主要使用华氏温度，且其 showResult() 的输出方式可能不符合实际需求；派生类可以增加摄氏温度支持并替换显示行为。"
+    },
+    {
+      "q": "WeatherPrediction 中为什么把多个方法声明为 virtual？",
+      "a": "因为该类假定这些方法可能在派生类中被重写。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++继承",
+    "C++虚函数"
+  ],
+  "source_pages": [
+    313,
+    314
+  ],
+  "needs_verification": true,
+  "verify_query": "\"C++20高级编程\" \"WeatherPrediction\" \"setCurrentTempFahrenheit\"",
+  "concept_id": "643_weatherprediction_类的接口特点",
+  "_chunk_pages": [
+    313,
+    316
+  ]
+}

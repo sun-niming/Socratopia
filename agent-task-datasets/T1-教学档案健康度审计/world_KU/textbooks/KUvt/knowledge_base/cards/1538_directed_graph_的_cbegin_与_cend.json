@@ -1,0 +1,42 @@
+{
+  "title": "directed_graph 的 cbegin() 与 cend()",
+  "definition": "当 directed_graph 支持迭代器后，cbegin() 和 cend() 用于获取容器的常量迭代器，分别指向第一个元素和尾后位置。它们将请求转发给 begin() 和 end() 的 const 版本，因此只能通过返回的迭代器读取元素，不能修改元素。",
+  "key_points": [
+    "cbegin() 的返回类型是 directed_graph<T>::const_iterator，并且是 const 成员函数。",
+    "cend() 的返回类型也是 directed_graph<T>::const_iterator，并且是 const 成员函数。",
+    "这两个方法声明为 noexcept。",
+    "典型实现可以直接返回 begin() 和 end() 的 const 版本：`const_iterator cbegin() const noexcept { return begin(); }`、`const_iterator cend() const noexcept { return end(); }`"
+  ],
+  "examples": [
+    "使用 cbegin() 和 cend() 遍历图中的节点：`for (auto iter { graph.cbegin() }; iter != graph.cend(); ++iter) { std::cout << *iter << std::endl; }`"
+  ],
+  "misconceptions": [
+    "cbegin() 返回的不是普通可写迭代器，而是 const_iterator。",
+    "cend() 不指向最后一个元素，而是指向尾后位置，不能解引用。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "cbegin() 和 cend() 分别返回什么？",
+      "a": "它们分别返回指向第一个元素和尾后位置的 const_iterator，用于只读遍历 directed_graph。"
+    },
+    {
+      "q": "为什么 cbegin() 返回的迭代器不能修改节点？",
+      "a": "因为它返回的是 const_iterator，解引用后得到的是不可修改的常量引用。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++迭代器的基本概念"
+  ],
+  "source_pages": [
+    741,
+    741
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1538_directed_graph_的_cbegin_与_cend",
+  "_chunk_pages": [
+    741,
+    744
+  ]
+}

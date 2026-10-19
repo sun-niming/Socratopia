@@ -1,0 +1,46 @@
+{
+  "title": "C++ 字符串与下标访问",
+  "definition": "C++ 提供 std::string 类型表示字符串。可以使用字符串字面量初始化 std::string 对象，并使用下标运算符访问字符串中的字符。原文示例中，myString 被初始化为 \"Hello, World\"，myString[1] 用于访问第二个字符。",
+  "key_points": [
+    "原文使用 string myString { \"Hello, World\" }; 声明并初始化字符串。",
+    "字符串下标从 0 开始，因此 myString[1] 表示字符串中的第二个字符。",
+    "原文将 myString 和 myString[1] 传给 format 后输出。",
+    "原文将 C++ 的 string 与 C 风格字符串进行了区分，但该页没有完整展开二者的具体差异。"
+  ],
+  "examples": [
+    "string myString { \"Hello, World\" };",
+    "cout << format(\"The value of myString is {}\", myString) << endl;",
+    "cout << format(\"The second letter is {}\", myString[1]) << endl;"
+  ],
+  "misconceptions": [
+    "myString[1] 不是第一个字符，而是第二个字符，因为下标从 0 开始。",
+    "std::string 对象不是单个字符，而是可以包含多个字符的字符串对象。",
+    "原文示例使用的是字符串下标访问，不是按单词或按人类语言字符位置进行访问。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "myString 被初始化为什么内容？",
+      "a": "myString 被初始化为 \"Hello, World\"。"
+    },
+    {
+      "q": "myString[1] 表示什么？",
+      "a": "它表示 myString 的第二个字符；字符串下标从 0 开始。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "变量初始化",
+    "数组或序列下标"
+  ],
+  "source_pages": [
+    61,
+    64
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "089_c_字符串与下标访问",
+  "_chunk_pages": [
+    61,
+    64
+  ]
+}

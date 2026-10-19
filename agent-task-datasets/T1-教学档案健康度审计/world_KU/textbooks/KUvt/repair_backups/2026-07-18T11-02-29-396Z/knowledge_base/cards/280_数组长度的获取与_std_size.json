@@ -1,0 +1,41 @@
+{
+  "title": "数组长度的获取与 std::size",
+  "definition": "对于仍保留为真正数组类型的数组，可以使用 `std::size(array)` 获取元素个数。教材同时列出了通过 `sizeof(array) / sizeof(array[0])` 计算数组长度的写法；但这类写法只适用于数组本身，不能直接用于已经退化为指针的函数参数。",
+  "key_points": [
+    "示例中的栈数组为 `int stackArray[] { 5, 7, 9, 11 };`，其元素个数为 4。",
+    "原文提到使用 `std::size(stackArray)` 获取数组长度，并标注与 C++17 相关。",
+    "数组传入普通函数参数后通常按指针处理，函数内部不能依赖 `sizeof` 得到原数组长度。"
+  ],
+  "examples": [
+    "```cpp\nint stackArray[] { 5, 7, 9, 11 };\nauto arrSize = std::size(stackArray);\n\nauto count = sizeof(stackArray) / sizeof(stackArray[0]);\n```"
+  ],
+  "misconceptions": [
+    "`sizeof(pointer) / sizeof(pointer[0])` 不能得到原数组的元素个数。",
+    "数组长度信息不会自动随普通数组指针一起传入函数。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何获取 `stackArray` 的元素个数？",
+      "a": "可以使用 `std::size(stackArray)`；在数组本身仍可见时，也可以使用 `sizeof(stackArray) / sizeof(stackArray[0])`。"
+    },
+    {
+      "q": "为什么不能在接收 `int*` 的函数中用 `sizeof` 自动得到数组长度？",
+      "a": "因为函数参数中的数组通常已经按指针处理，`sizeof` 得到的是指针类型的大小，而不是原数组的总大小。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++数组与指针基础"
+  ],
+  "source_pages": [
+    209,
+    212
+  ],
+  "needs_verification": true,
+  "verify_query": "C++17 std::size 头文件要求 <iterator> 还是 <array> 教材原文",
+  "concept_id": "280_数组长度的获取与_std_size",
+  "_chunk_pages": [
+    209,
+    212
+  ]
+}

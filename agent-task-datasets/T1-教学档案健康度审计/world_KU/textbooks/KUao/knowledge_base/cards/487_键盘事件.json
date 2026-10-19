@@ -1,0 +1,37 @@
+{
+  "title": "键盘事件",
+  "definition": "当按下、持续按住或释放按键时触发的一组事件。",
+  "key_points": [
+    "keydown：按下任意按键时触发。",
+    "keypress：除 Shift、Fn、CapsLock 外的任意键被按住时触发，并且会连续触发。",
+    "keyup：释放任意按键时触发。"
+  ],
+  "examples": [
+    "按下 A 键触发 keydown",
+    "按住 A 键时持续触发 keypress",
+    "松开 A 键触发 keyup"
+  ],
+  "misconceptions": [
+    "keypress 不是只触发一次，原文说明它会连续触发。",
+    "keydown 与 keypress 不是同一个事件。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "释放任意按键时触发哪个事件？",
+      "a": "keyup"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [],
+  "source_pages": [
+    361,
+    364
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "487_键盘事件",
+  "_chunk_pages": [
+    361,
+    364
+  ]
+}

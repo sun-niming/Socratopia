@@ -1,0 +1,42 @@
+{
+  "title": "DCTCP：面向数据中心的 TCP 版本",
+  "definition": "DCTCP（数据中心 TCP）是一种专门为数据中心网络设计的 TCP 版本。它使用显式拥塞通知（ECN），以更好地支持短流和长流共存的混合流量；这种混合流量是数据中心负载的特征。",
+  "key_points": [
+    "DCTCP 的应用场景是数据中心网络。",
+    "DCTCP 使用 ECN 来改进对拥塞的支持。",
+    "DCTCP 面向短流和长流混合存在的网络负载。"
+  ],
+  "examples": [
+    "数据中心中同时存在短流和长流时，DCTCP 使用 ECN 来更好地支持这种混合流量。"
+  ],
+  "misconceptions": [
+    "DCTCP 不是一种完全独立于 TCP 的应用层协议，而是 TCP 的一个面向数据中心的版本。",
+    "DCTCP 并不是只适用于短流或只适用于长流，而是针对两者混合的负载特征。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "DCTCP 是什么协议，主要为哪类网络设计？",
+      "a": "DCTCP 是一种使用 ECN、专门为数据中心网络设计的 TCP 版本，旨在更好地支持短流和长流的混合流量。"
+    },
+    {
+      "q": "DCTCP 使用 ECN 的目的是什么？",
+      "a": "目的是更好地支持数据中心中短流和长流共存的混合流量。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "TCP 的基本概念",
+    "显式拥塞通知（ECN）"
+  ],
+  "source_pages": [
+    205,
+    208
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "489_dctcp_面向数据中心的_tcp_版本",
+  "_chunk_pages": [
+    205,
+    208
+  ]
+}

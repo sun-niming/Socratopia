@@ -1,0 +1,46 @@
+{
+  "title": "复制和交换惯用法",
+  "definition": "复制和交换惯用法用于实现具有较强异常安全保证的操作，尤其适合拷贝赋值运算符。其核心步骤是：先创建原对象的副本，在副本上完成可能抛出异常的工作；如果这些工作成功，再通过标记为 noexcept 的 swap 将副本与当前对象交换。这样，异常发生时原对象通常保持不变，实现“要么成功，要么什么都不做”的效果。",
+  "key_points": [
+    "复制步骤可能执行资源分配和数据复制，因此可能抛出异常。",
+    "修改工作在临时副本上完成，不直接破坏原对象。",
+    "最后使用不抛出异常的 swap 完成提交。",
+    "拷贝赋值运算符可以先按值或显式创建副本，再调用 swap(*this, copy)，最后返回 *this。"
+  ],
+  "examples": [
+    "典型拷贝赋值实现：\n```text\nCopyAndSwap& CopyAndSwap::operator=(const CopyAndSwap& rhs) {\n    auto copy{rhs};\n    swap(copy);\n    return *this;\n}\n```\n其中 auto copy{rhs}; 创建副本；swap(copy); 将副本与当前对象交换；如果复制阶段抛出异常，交换不会发生，当前对象保持原状。"
+  ],
+  "misconceptions": [
+    "复制和交换并不是先修改原对象再恢复，而是始终先在临时副本上完成操作。",
+    "swap 被标记为 noexcept 很重要；如果提交阶段的 swap 也可能抛出异常，异常安全保证会减弱。",
+    "复制和交换主要解决异常安全和赋值实现问题，并不意味着复制操作本身没有开销。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "复制和交换惯用法为什么能够提供“要么成功，要么什么都不做”的保证？",
+      "a": "因为可能抛出异常的复制和修改都在副本上进行，只有全部成功后才通过不抛异常的 swap 修改原对象；若前面失败，原对象未被交换。"
+    },
+    {
+      "q": "使用复制和交换实现拷贝赋值通常包含哪些步骤？",
+      "a": "创建 rhs 的副本，调用 noexcept 的 swap 将副本与当前对象交换，然后返回 *this。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "拷贝构造函数",
+    "拷贝赋值运算符",
+    "异常安全保证",
+    "swap与noexcept"
+  ],
+  "source_pages": [
+    927,
+    928
+  ],
+  "needs_verification": true,
+  "verify_query": "C++ copy-and-swap idiom noexcept swap strong exception guarantee 拷贝赋值 教材《C++20高级编程》第5版 第927-928页",
+  "concept_id": "1920_复制和交换惯用法",
+  "_chunk_pages": [
+    925,
+    928
+  ]
+}

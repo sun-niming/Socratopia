@@ -1,0 +1,54 @@
+{
+  "title": "静态文件的 MIME 类型映射",
+  "definition": "在静态文件服务中，服务器通常会根据文件扩展名返回对应的 HTTP 响应头 `Content-Type`。原文给出的常见映射包括：`.json` 对应 `application/json; charset=utf-8`，`.txt` 对应 `text/plain; charset=utf-8`，`.png` 对应 `image/png`，`.jpg` 和 `.jpeg` 对应 `image/jpeg`，`.gif` 对应 `image/gif`，其他未知二进制文件对应 `application/octet-stream`。",
+  "key_points": [
+    "服务器应为不同扩展名设置合适的 `Content-Type`。",
+    ".json、.txt 这类文本资源通常会带上 `charset=utf-8`。",
+    ".png、.jpg、.jpeg、.gif 分别对应图片类型 MIME。",
+    "未知二进制文件使用 `application/octet-stream`。"
+  ],
+  "examples": [
+    "`curl -i http://127.0.0.1:8080/test.json | head -n 10`，应看到 `Content-Type: application/json; charset=utf-8`。",
+    "`curl -i http://127.0.0.1:8080/test.txt | head -n 10`，应看到 `Content-Type: text/plain; charset=utf-8`。",
+    "`curl -i http://127.0.0.1:8080/test.png | head -n 10`，应看到 `Content-Type: image/png`。",
+    "`curl -i http://127.0.0.1:8080/test.jpg | head -n 10` 或 `curl -i http://127.0.0.1:8080/test.jpeg | head -n 10`，应看到 `Content-Type: image/jpeg`。",
+    "`curl -i http://127.0.0.1:8080/test.gif | head -n 10`，应看到 `Content-Type: image/gif`。",
+    "`curl -i http://127.0.0.1:8080/test.bin | head -n 10`，应看到 `Content-Type: application/octet-stream`。"
+  ],
+  "misconceptions": [
+    "看到文件是文本或图片，就以为 `Content-Type` 可以随便写；实际上响应头应与资源类型匹配。",
+    "把所有文本资源都返回成同一个 MIME，而忽略字符集信息。",
+    "把未知二进制文件误当作普通文本返回。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`.jpeg` 文件应返回什么 `Content-Type`？",
+      "a": "`image/jpeg`。"
+    },
+    {
+      "q": "未知二进制文件应使用什么 MIME 类型？",
+      "a": "`application/octet-stream`。"
+    },
+    {
+      "q": "`.txt` 文件应返回什么 `Content-Type`？",
+      "a": "`text/plain; charset=utf-8`。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "HTTP 响应头",
+    "文件扩展名"
+  ],
+  "source_pages": [
+    121,
+    122,
+    123
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "199_静态文件的_mime_类型映射",
+  "_chunk_pages": [
+    121,
+    124
+  ]
+}

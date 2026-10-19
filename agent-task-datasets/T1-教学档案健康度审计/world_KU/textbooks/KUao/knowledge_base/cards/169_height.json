@@ -1,0 +1,42 @@
+{
+  "title": "height",
+  "definition": "CSS 的高度属性，用来设置元素的高度。教材给出的示例值包括 500px 和 100%。",
+  "key_points": [
+    "用于控制元素高度",
+    "可以使用像素值",
+    "也可以使用百分比"
+  ],
+  "examples": [
+    "height: 500px;",
+    "height: 100%;"
+  ],
+  "misconceptions": [
+    "height 不是只能写固定像素。",
+    "百分比高度通常与父元素高度有关。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "height 属性表示什么？",
+      "a": "高度。"
+    },
+    {
+      "q": "教材给出的 height 示例值有哪些？",
+      "a": "500px 和 100%。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "CSS基础"
+  ],
+  "source_pages": [
+    117,
+    120
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "169_height",
+  "_chunk_pages": [
+    117,
+    120
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "title": "DOM的版本演进",
+  "definition": "教材中将早期 JavaScript 中用于处理事件和文档的有限功能称为“DOM 0级”；1998年10月，DOM 1级成为 W3C 推荐标准；DOM 2级在2000年发布，增加了 DOM 事件、样式等内容；2004年 DOM 3级新增了 XPath 等内容。",
+  "key_points": [
+    "早期 JavaScript 中处理事件和文档的有限功能被称为 DOM 0级",
+    "1998年10月，DOM 1级成为 W3C 推荐标准",
+    "DOM 2级于2000年发布，包含 DOM 事件、样式等更新",
+    "DOM 3级于2004年发布，新增 XPath 等内容"
+  ],
+  "examples": [
+    "DOM 1级、DOM 2级、DOM 3级",
+    "DOM 2级涉及事件和样式，DOM 3级涉及 XPath"
+  ],
+  "misconceptions": [
+    "DOM 0级不是教材中说的正式 W3C 推荐标准，而是早期 JavaScript 对文档和事件处理功能的称呼。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "DOM 2级在哪一年发布？",
+      "a": "2000年。"
+    },
+    {
+      "q": "DOM 3级新增了什么内容？",
+      "a": "新增了 XPath 等内容。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "DOM（文档对象模型）"
+  ],
+  "source_pages": [
+    341,
+    344
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "488_dom的版本演进",
+  "_chunk_pages": [
+    341,
+    344
+  ]
+}

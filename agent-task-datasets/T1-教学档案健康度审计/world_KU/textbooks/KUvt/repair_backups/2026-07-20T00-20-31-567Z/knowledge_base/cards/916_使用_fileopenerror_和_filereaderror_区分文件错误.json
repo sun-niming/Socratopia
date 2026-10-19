@@ -1,0 +1,51 @@
+{
+  "title": "使用 FileOpenError 和 FileReadError 区分文件错误",
+  "definition": "在读取整数文件的示例中，文件错误被细分为两类：如果输入文件无法打开，则抛出 FileOpenError；如果文件已打开但某一行无法正确解析为整数，则抛出 FileReadError，并携带发生错误的行号。为得到准确行号，读取函数需要逐行读取文件、递增行号，并在每行中逐个解析整数。",
+  "key_points": [
+    "打开文件失败时抛出 FileOpenError(filename)。",
+    "FileReadError(filename, lineNumber) 表示读取指定文件的指定行时发生错误。",
+    "读取函数通过 getline() 逐行读取，并在读取每行后递增 lineNumber。",
+    "使用 istringstream 逐个读取当前行中的整数；如果尚未到达该行末尾就无法继续读取，说明该行存在读取错误。",
+    "FileReadError 可以通过 getLineNumber() 提供错误行号。"
+  ],
+  "examples": [
+    "vector<int> readIntegerFile(std::string_view filename) {\n    std::ifstream inputStream{filename.data()};\n    if (inputStream.fail()) {\n        throw FileOpenError{std::string(filename)};\n    }\n\n    vector<int> integers;\n    std::size_t lineNumber{0};\n    while (!inputStream.eof()) {\n        std::string line;\n        std::getline(inputStream, line);\n        ++lineNumber;\n\n        std::istringstream lineStream{line};\n        int temp;\n        while (lineStream >> temp) {\n            integers.push_back(temp);\n            if (!lineStream.eof()) {\n                throw FileReadError{std::string(filename), lineNumber};\n            }\n        }\n    }\n    return integers;\n}",
+    "错误分类关系：\n$$\n\\text{文件错误} = \\begin{cases}\n\\text{FileOpenError}, & \\text{文件无法打开}\\\\\n\\text{FileReadError}, & \\text{文件已打开但某行无法正确读取}\n\\end{cases}\n$$"
+  ],
+  "misconceptions": [
+    "认为文件打开失败和文件内容格式错误必须使用同一个异常类型。",
+    "认为只要调用一次输入运算符就能知道错误发生在哪一行；要报告行号，需要逐行读取并跟踪行号。",
+    "认为 FileReadError 只能说明读取失败，不能携带发生错误的行号。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "文件无法打开时应抛出哪种异常？",
+      "a": "抛出 FileOpenError，并将文件名传入其构造函数。"
+    },
+    {
+      "q": "如何让 FileReadError 获得出错行号？",
+      "a": "读取函数应使用 getline() 逐行读取文件，每读取一行就递增 lineNumber，并在当前行解析失败时用该行号构造 FileReadError。"
+    },
+    {
+      "q": "FileOpenError 和 FileReadError 的区别是什么？",
+      "a": "FileOpenError 表示文件无法打开；FileReadError 表示文件打开后，某一行内容无法正确读取为整数。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "自定义异常类与异常层次结构",
+    "文件输入流",
+    "字符串流"
+  ],
+  "source_pages": [
+    450,
+    452
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "916_使用_fileopenerror_和_filereaderror_区分文件错误",
+  "_chunk_pages": [
+    449,
+    452
+  ]
+}

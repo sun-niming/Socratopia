@@ -1,0 +1,42 @@
+{
+  "title": ":active伪类",
+  "definition": "E:active 表示元素 E 处于活动状态时的选择条件。原文对其状态的描述是“元素E获得焦点，处于活动状态时”。",
+  "key_points": [
+    "语法形式是 E:active。",
+    "原文将其描述为元素 E 获得焦点、处于活动状态时。",
+    "它也是伪类选择器的一种。"
+  ],
+  "examples": [
+    "a:active",
+    "button:active"
+  ],
+  "misconceptions": [
+    ":active 不是伪元素。",
+    "不要把 :active 与普通 class 选择器混淆。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "E:active 的含义是什么？",
+      "a": "原文描述为元素 E 获得焦点，处于活动状态时。"
+    },
+    {
+      "q": ":active 属于哪类选择器？",
+      "a": "伪类选择器。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "伪类选择器"
+  ],
+  "source_pages": [
+    97,
+    100
+  ],
+  "needs_verification": true,
+  "verify_query": "CSS :active 伪类 官方定义 元素处于活动状态 获得焦点 站点:developer.mozilla.org",
+  "concept_id": "130_active伪类",
+  "_chunk_pages": [
+    97,
+    100
+  ]
+}

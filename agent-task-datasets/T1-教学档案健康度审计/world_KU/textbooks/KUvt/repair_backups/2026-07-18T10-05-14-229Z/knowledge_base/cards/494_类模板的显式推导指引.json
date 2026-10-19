@@ -1,0 +1,46 @@
+{
+  "title": "类模板的显式推导指引",
+  "definition": "类模板的显式推导指引（deduction guide）用于告诉编译器：当使用某种构造函数实参创建类模板对象、但模板实参未直接写出时，应推导出哪一种类模板特化。原文中的 `SpreadsheetCell` 使用 `const char*` 构造时，通过显式推导指引推导为 `SpreadsheetCell<std::string>`。",
+  "key_points": [
+    "类模板可以定义类似 `SpreadsheetCell(const char*) -> SpreadsheetCell<std::string>;` 的显式推导指引。",
+    "该指引的左侧描述构造时的参数形式，右侧指定推导出的类模板特化。",
+    "原文中的类模板包含构造函数 `SpreadsheetCell(const T& t)`、成员函数 `const T& getContent() const` 和成员变量 `T m_content`。",
+    "示例中 `std::string myString{\"Hello World!\"}; SpreadsheetCell cell{myString};` 可根据构造实参推导出相应的 `SpreadsheetCell` 特化；`const char*` 到 `SpreadsheetCell<std::string>` 的显式推导指引是原文明确展示的规则。"
+  ],
+  "examples": [
+    "类模板定义的核心形式：`template<typename T> class SpreadsheetCell { public: SpreadsheetCell(const T& t) : m_content{t} {} const T& getContent() const { return m_content; } private: T m_content; };`",
+    "显式推导指引：`SpreadsheetCell(const char*) -> SpreadsheetCell<std::string>;`",
+    "使用字符串对象：`std::string myString{\"Hello World!\"}; SpreadsheetCell cell{myString};`。"
+  ],
+  "misconceptions": [
+    "显式推导指引不是一个普通构造函数，也不负责真正执行对象初始化；它只告诉编译器应选择哪种模板特化。",
+    "推导出 `SpreadsheetCell<std::string>` 不等于所有字符指针都自动永久保存为字符串；对象实际保存和初始化仍由类模板的构造函数及成员类型决定。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "显式推导指引 `SpreadsheetCell(const char*) -> SpreadsheetCell<std::string>;` 表示什么？",
+      "a": "它表示当根据 `const char*` 形式的实参推导 `SpreadsheetCell` 时，应推导为 `SpreadsheetCell<std::string>`。"
+    },
+    {
+      "q": "`SpreadsheetCell` 模板类中 `m_content` 的类型是什么？",
+      "a": "`m_content` 的类型是模板参数 `T`。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "类模板",
+    "构造函数模板实参推导",
+    "std::string"
+  ],
+  "source_pages": [
+    385,
+    388
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 explicit deduction guide SpreadsheetCell const char* SpreadsheetCell<std::string> 示例",
+  "concept_id": "494_类模板的显式推导指引",
+  "_chunk_pages": [
+    385,
+    388
+  ]
+}

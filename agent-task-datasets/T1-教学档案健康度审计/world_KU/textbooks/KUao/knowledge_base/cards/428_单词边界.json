@@ -1,0 +1,37 @@
+{
+  "title": "单词边界",
+  "definition": "\\b 和 \\B 是用于匹配位置的元字符。\\b 匹配一个单词边界，也就是单词和空格之间的位置；\\B 匹配非单词边界。",
+  "key_points": [
+    "\\b 不是字符，而是位置。",
+    "\\B 表示不在单词边界上的位置。"
+  ],
+  "examples": [
+    "\\bword\\b",
+    "\\Bing"
+  ],
+  "misconceptions": [
+    "把 \\b 理解成字母 b。",
+    "以为 \\b 会匹配一个空格字符本身。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "\\b 和 \\B 的区别是什么？",
+      "a": "\\b 匹配单词边界，\\B 匹配非单词边界。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "正则表达式基础"
+  ],
+  "source_pages": [
+    317,
+    320
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "428_单词边界",
+  "_chunk_pages": [
+    317,
+    320
+  ]
+}

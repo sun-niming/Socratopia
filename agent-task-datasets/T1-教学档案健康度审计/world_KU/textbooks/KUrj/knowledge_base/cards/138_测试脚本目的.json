@@ -1,0 +1,35 @@
+{
+  "title": "测试脚本目的",
+  "definition": "测试脚本的目的不是替代人工演示，而是保证每次修改后核心行为没有坏。教材建议把脚本放在 tests/curl_test.sh 中，用 curl 对服务器做快速回归检查。",
+  "key_points": [
+    "脚本用于修改后的回归测试。",
+    "脚本重点是核心行为，不是完整压力测试。",
+    "BASE 参数允许切换测试地址和端口。"
+  ],
+  "examples": [
+    "例如可以把 BASE 设为 http://127.0.0.1:8080，也可以传入其他端口进行测试。"
+  ],
+  "misconceptions": [
+    "测试脚本可以完全替代人工验证",
+    "测试脚本的目标是做全面压力测试"
+  ],
+  "qa_pairs": [
+    {
+      "q": "测试脚本主要解决什么问题？",
+      "a": "保证每次修改后核心行为没有坏。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [],
+  "source_pages": [
+    89,
+    92
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "138_测试脚本目的",
+  "_chunk_pages": [
+    89,
+    92
+  ]
+}

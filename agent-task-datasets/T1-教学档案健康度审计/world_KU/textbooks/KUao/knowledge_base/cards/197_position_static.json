@@ -1,0 +1,37 @@
+{
+  "title": "position: static",
+  "definition": "static 是 position 的默认值，表示元素没有定位，仍然出现在正常的文档流中；此时 top、bottom、left、right、z-index 等属性无效。",
+  "key_points": [
+    "static 是默认值",
+    "元素仍处于正常文档流中",
+    "top、bottom、left、right、z-index 等属性无效"
+  ],
+  "examples": [
+    ".box { position: static; top: 10px; z-index: 1; }"
+  ],
+  "misconceptions": [
+    "static 也能通过 top 或 left 改变位置",
+    "默认值表示元素脱离了文档流"
+  ],
+  "qa_pairs": [
+    {
+      "q": "static 定位的特点是什么？",
+      "a": "它是默认值，元素没有定位，仍在正常文档流中，相关偏移和层叠属性无效。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "position属性"
+  ],
+  "source_pages": [
+    137,
+    140
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "197_position_static",
+  "_chunk_pages": [
+    137,
+    140
+  ]
+}

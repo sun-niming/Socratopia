@@ -1,0 +1,35 @@
+{
+  "title": "rgb整数颜色值",
+  "definition": "rgb(x,x,x) 用红、绿、蓝三个基本颜色分量的数值混合表示颜色，每个分量取值范围是 0 到 255。",
+  "key_points": [
+    "格式为 rgb(红,绿,蓝)。",
+    "每个分量的取值范围是 0-255。",
+    "原文示例包括红色 rgb(255,0,0) 和灰色 rgb(66,66,66)。"
+  ],
+  "examples": [
+    "rgb(255,0,0)",
+    "rgb(66,66,66)"
+  ],
+  "misconceptions": [
+    "rgb() 不只是“颜色名的替代写法”，它是通过三个分量数值来合成颜色。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "rgb(255,0,0) 表示什么颜色？",
+      "a": "表示红色。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [],
+  "source_pages": [
+    109,
+    112
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "164_rgb整数颜色值",
+  "_chunk_pages": [
+    109,
+    112
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "title": "__has_include检查头文件是否存在",
+  "definition": "__has_include(\"filename\")或__has_include(<filename>)是预处理器常量表达式，用于检查指定头文件是否存在。如果头文件可用，结果为1；如果不存在，结果为0。它可以用于在多个候选头文件之间选择当前编译环境支持的版本。",
+  "key_points": [
+    "双引号形式和尖括号形式都可以用于__has_include检查。",
+    "检查结果为1表示头文件存在，为0表示头文件不存在。",
+    "它适合处理不同编译器或不同标准库环境中头文件名称不同的情况。"
+  ],
+  "examples": [
+    "检查标准头文件或实验性头文件：\n#if __has_include(<optional>)\n#include <optional>\n#else\n#include <experimental/optional>\n#endif"
+  ],
+  "misconceptions": [
+    "__has_include只检查头文件是否可用，不会自动包含该头文件。",
+    "检查结果为1不代表头文件中的每个特性都可用，只表示该头文件存在或可被找到。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何判断<optional>头文件是否存在？",
+      "a": "使用#if __has_include(<optional>)进行预处理器检查。"
+    },
+    {
+      "q": "__has_include返回0表示什么？",
+      "a": "表示指定的头文件不存在或当前编译环境无法找到它。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "预处理器条件编译",
+    "头文件包含"
+  ],
+  "source_pages": [
+    362,
+    362
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "731_has_include检查头文件是否存在",
+  "_chunk_pages": [
+    361,
+    364
+  ]
+}

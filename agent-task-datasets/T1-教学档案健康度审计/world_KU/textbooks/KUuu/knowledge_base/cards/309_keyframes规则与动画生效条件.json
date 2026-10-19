@@ -1,0 +1,41 @@
+{
+  "title": "@keyframes规则与动画生效条件",
+  "definition": "@keyframes 规则用于定义关键帧；如果在 @keyframes 规则中指定了 CSS 样式，动画将在特定时间逐渐从当前样式更改为新样式。要使动画生效，必须将动画绑定到某个元素。",
+  "key_points": [
+    "@keyframes 规则用于定义关键帧。",
+    "在 @keyframes 中指定 CSS 样式后，动画会在特定时间逐渐改变样式。",
+    "动画要生效，必须绑定到某个元素。"
+  ],
+  "examples": [
+    "定义 @keyframes 后，还需要把动画绑定到某个元素，动画才会生效。"
+  ],
+  "misconceptions": [
+    "写了 @keyframes 规则后动画就一定会自动生效。",
+    "只定义关键帧而不绑定元素也能看到动画效果。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "@keyframes 规则的作用是什么？",
+      "a": "用于定义关键帧。"
+    },
+    {
+      "q": "让动画生效还需要什么条件？",
+      "a": "必须将动画绑定到某个元素。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "CSS3动画的设计步骤"
+  ],
+  "source_pages": [
+    205,
+    208
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "309_keyframes规则与动画生效条件",
+  "_chunk_pages": [
+    205,
+    208
+  ]
+}

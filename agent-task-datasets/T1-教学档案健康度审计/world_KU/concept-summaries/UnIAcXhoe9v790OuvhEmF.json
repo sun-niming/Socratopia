@@ -1,0 +1,337 @@
+{
+  "conversationId": "UnIAcXhoe9v790OuvhEmF",
+  "generatedAt": 1790161858729,
+  "pagesRange": null,
+  "sections": [
+    {
+      "type": "tldr",
+      "content": "本节课围绕「重要状态与直接构造 DFA」展开，有标号非 $\\epsilon$ 离开转换的 NFA 状态称为重要状态。。"
+    },
+    {
+      "type": "concepts",
+      "items": [
+        {
+          "name": "重要状态与直接构造 DFA",
+          "body": "- 有标号非 $\\epsilon$ 离开转换的 NFA 状态称为重要状态。\n- $move(T,a)$ 非空，当且仅当集合 $T$ 中存在重要状态。\n- 两个 NFA 状态集合的重要状态完全相同，且接受状态包含情况相同，则对任何输入符号具有相同的后续行为。\n- 只含 $\\epsilon$ 出边的非重要状态不会直接参与字符读取，其作用可由 $\\epsilon$-closure 处理。\n- 算法 3.23 生成的重要状态对应正则表达式中具体符号出现的位置。\n- Thompson NFA 的接受状态没有离开转换；在正则表达式右端追加结束标记 $\\#$，可使接受状态成为重要状态。\n\n**例子**\n- $move(T,a)\\neq\\varnothing\\Longleftrightarrow T$ 中存在重要状态。\n- 正则表达式右端追加结束标记 $\\#$。",
+          "sourceMessageIndexes": [
+            13,
+            15
+          ]
+        },
+        {
+          "name": "位置与 followpos",
+          "body": "- 抽象语法树的叶子表示运算分量，内部结点表示 cat、or、star 运算符。\n- 每个非 $\\epsilon$ 叶子分配一个独有整数，称为位置。\n- 同一个符号的不同出现必须分配不同位置，因为它们后面可能跟随的符号不同。\n- 位置 1 和位置 3 都是符号 $a$，但其后继位置集合不同。\n- followpos$(p)$ 表示紧跟在位置 $p$ 后面的位置集合。\n\n**例子**\n- $followpos(1)=\\{1,2,3\\}$。\n- $followpos(3)=\\{4\\}$。\n- 在 $(a|b)^*abb\\#$ 中，叶子从左到右编号为位置 1 到 6，两个 $a$ 分别占据位置 1 和位置 3。",
+          "sourceMessageIndexes": [
+            15,
+            17
+          ]
+        },
+        {
+          "name": "nullable、firstpos 与 lastpos",
+          "body": "- nullable$(n)$ 判断以结点 $n$ 为根的子表达式是否能生成空串 $\\epsilon$。\n- firstpos$(n)$ 是子表达式生成的字符串中第一个符号可能来自的位置集合。\n- lastpos$(n)$ 是子表达式生成的字符串中最后一个符号可能来自的位置集合。\n- or 结点的 nullable 取两个子结点 nullable 的逻辑或，firstpos 取两个子结点 firstpos 的并集。\n- cat 结点的 nullable 取两个子结点 nullable 的逻辑与。\n- cat 结点的 firstpos 取决于左孩子是否可空；若左孩子可空，则取两个孩子 firstpos 的并集，否则只取左孩子的 firstpos。\n\n**例子**\n- $firstpos((a|b)^*)=\\{1,2\\}$。\n- $firstpos((a|b)^*a)=\\{1,2\\}\\cup\\{3\\}=\\{1,2,3\\}$。\n- $lastpos(n)=lastpos(c_1)\\cup lastpos(c_2)$ 的条件是 $nullable(c_2)$。",
+          "sourceMessageIndexes": [
+            17,
+            19,
+            21
+          ]
+        },
+        {
+          "name": "followpos 的两条计算规则",
+          "body": "- cat 结点 $n=c_1c_2$ 为 $lastpos(c_1)$ 中的每个位置加入 $firstpos(c_2)$ 中的所有位置。\n- star 结点 $n=c_1^*$ 为 $lastpos(c_1)$ 中的每个位置加入 $firstpos(c_1)$ 中的所有位置。\n- cat 规则表示相邻子表达式之间的接缝连接。\n- star 规则表示循环尾部回到循环头部的连接。\n\n**例子**\n- $followpos(1)=\\{1,2,3\\}$。\n- $followpos(2)=\\{1,2,3\\}=\\{1,2\\}\\cup\\{3\\}$，其中 $\\{1,2\\}$ 来自绕圈规则，$\\{3\\}$ 来自接缝规则。\n- $followpos(3)=\\{4\\}$、$followpos(4)=\\{5\\}$、$followpos(5)=\\{6\\}$、$followpos(6)=\\varnothing$。",
+          "sourceMessageIndexes": [
+            21,
+            23
+          ]
+        },
+        {
+          "name": "位置集合直接生成 DFA",
+          "body": "- 直接构造 DFA 的起始状态是语法树根的 firstpos。\n- 对状态集合 $S$ 读入符号 $a$ 时，把集合中所有标号为 $a$ 的位置的 followpos 全部取并集。\n- 包含结束标记 $\\#$ 对应位置的状态集合是接受状态。\n- 示例中直接构造得到四个状态集合：$\\{1,2,3\\}$、$\\{1,2,3,4\\}$、$\\{1,2,3,5\\}$、$\\{1,2,3,6\\}$。\n- 含位置 6 的状态是接受状态。\n\n**例子**\n- $Dtran[S,a]=\\bigcup_{\\substack{p\\in S\\\\\\text{符号}(p)=a}}followpos(p)$。\n- $A=\\{1,2,3\\}$，且 $A\\xrightarrow{a}\\{1,2,3,4\\}$、$A\\xrightarrow{b}\\{1,2,3\\}$。\n- $B=\\{1,2,3,4\\}$，且 $B\\xrightarrow{a}B$、$B\\xrightarrow{b}\\{1,2,3,5\\}$。",
+          "sourceMessageIndexes": [
+            23
+          ]
+        },
+        {
+          "name": "followpos 的来源与 DFA 直接构造",
+          "body": "- $followpos(2)$ 由绕圈和接缝两部分组成。\n- 绕圈部分把 $firstpos(c_1)$ 加入 $lastpos(c_1)$ 中每个位置的后继。\n- 接缝部分把星号结点的 $lastpos$ 与后继连接结点的 $firstpos$ 对接。\n- 算法 3.30 直接从正则表达式构造 DFA，中间不经过 NFA。\n- DFA 直接构造的步骤是建立抽象语法树、计算 nullable、firstpos、lastpos、followpos，再按位置集合构造状态和转换。\n- 起始状态是根结点的 $firstpos$。\n\n**例子**\n- $followpos(2)=\\{1,2\\}\\cup\\{3\\}=\\{1,2,3\\}$。\n- $Dtran[C,b]=followpos(2)\\cup followpos(5)=\\{1,2,3\\}\\cup\\{6\\}=\\{1,2,3,6\\}$。\n- 例 3.37 的状态为 $\\{1,2,3\\}$、$\\{1,2,3,4\\}$、$\\{1,2,3,5\\}$、$\\{1,2,3,6\\}$。",
+          "sourceMessageIndexes": [
+            22,
+            23,
+            25,
+            27,
+            31
+          ]
+        },
+        {
+          "name": "结束标记与接受状态",
+          "body": "- $\\#$ 是拼接在正则表达式末尾的结束标记，不属于输入字母表。\n- 输入中不需要读入 $\\#$。\n- 接受条件是当前状态集合中包含 $\\#$ 对应的位置，而不是实际读到了 $\\#$。\n- 例 3.37 中位置 $6$ 对应 $\\#$，含位置 $6$ 的状态是接受状态。\n\n**例子**\n- 路径 $A\\xrightarrow{a}B\\xrightarrow{b}C\\xrightarrow{b}D$，其中 $D=\\{1,2,3,6\\}$ 是接受状态。\n- 输入 `ab` 停在 $C=\\{1,2,3,5\\}$，不含位置 $6$，因此不接受。\n- 输入 `abb` 到达 $D=\\{1,2,3,6\\}$，因此接受。",
+          "sourceMessageIndexes": [
+            25,
+            27
+          ]
+        },
+        {
+          "name": "状态名称与输入串的区别",
+          "body": "- 状态名 $123$、$1234$ 等表示状态中的位置集合，不表示已经读入的输入串。\n- 输入串 `ab` 的状态路径是 $A\\xrightarrow{a}B\\xrightarrow{b}C$。\n- 状态 $B$ 读 `b` 时，要合并位置 $2$ 和位置 $4$ 的 $followpos$。\n\n**例子**\n- $Dtran[B,b]=followpos(2)\\cup followpos(4)=\\{1,2,3\\}\\cup\\{5\\}=\\{1,2,3,5\\}=C$。\n- $Dtran[C,a]=followpos(1)\\cup followpos(3)=\\{1,2,3\\}\\cup\\{4\\}=B$。",
+          "sourceMessageIndexes": [
+            25,
+            27,
+            31
+          ]
+        },
+        {
+          "name": "位置的定义与编号",
+          "body": "- 位置是语法树上一个非 $\\epsilon$ 叶子结点的编号。\n- 位置编号按照叶子从左到右的顺序分配。\n- 每个真字符叶子都有独有的位置编号。\n- 标号为 $\\epsilon$ 的叶子不分配位置编号。\n- 同一个符号出现多次时，每次出现占据不同的位置。\n- 位置用于区分同一符号的不同出现，从而计算对应的 $followpos$。\n\n**例子**\n- 在 $(a|b)^*abb\\#$ 中，位置 $1$ 是星号里的 `a`，位置 $2$ 是星号里的 `b`，位置 $3$ 是星号后的 `a`，位置 $4$ 和 $5$ 是两个 `b`，位置 $6$ 是 $\\#$。\n- 在 $(a|b)^*a$ 中共有三个位置：位置 $1$ 是星号里的 `a`，位置 $2$ 是星号里的 `b`，位置 $3$ 是星号后的 `a`。",
+          "sourceMessageIndexes": [
+            29,
+            30,
+            31
+          ]
+        },
+        {
+          "name": "DFA 最小化与可区分状态",
+          "body": "- 同一个语言可以由多台不同的 DFA 识别。\n- 只靠改名即可互相转换的两台机器称为同构。\n- 任何正则语言都有一台唯一的、除同构外状态数最少的 DFA。\n- 从任意等价 DFA 出发，可以通过合并等价状态得到最小 DFA。\n- 如果存在字符串 $x$，使得从状态 $s$ 和 $t$ 沿同一字符串到达的两个状态中恰好一个是接受状态，则 $x$ 区分 $s$ 和 $t$。\n- 初始分划先把状态分为接受状态组和非接受状态组。\n\n**例子**\n- $\\epsilon$ 可以区分任意一个接受状态和一个非接受状态。\n- 串 `bb` 可以区分 $A$ 和 $B$：$A\\xrightarrow{b}C\\xrightarrow{b}C$，而 $B\\xrightarrow{b}D\\xrightarrow{b}E$，最终一个落在非接受状态、一个落在接受状态。\n- 图 3-63 的初始分划是 $\\{\\{123,1234,1235\\},\\{1236\\}\\}$。",
+          "sourceMessageIndexes": [
+            31,
+            33
+          ]
+        },
+        {
+          "name": "分划细化中的旧分划与停机",
+          "body": "- 每轮撕分划时使用上一轮的 $\\Pi$，而不是正在构造的 $\\Pi_{new}$。\n- $\\Pi_{new}$ 是本轮攒出来的结果，不能同时作为本轮验收尺子。\n- 使用正在修改的分划可能导致结果依赖组的遍历顺序。\n- 使用旧分划可以保证一轮内各组互不影响，并使每轮结果与处理顺序无关。\n- 若存在某个符号 $a$，使两个状态的 $a$-落点属于不同组，就应将这两个状态分开。\n- 整轮没有任何状态对可以被撕开时停止，此时满足 $\\Pi_{new}=\\Pi$。\n\n**例子**\n- 如果组 $G$ 先被撕、组 $H$ 后处理时使用撕完的 $\\Pi_{new}$，结果可能取决于 $G$ 是否恰好排在前面。",
+          "sourceMessageIndexes": [
+            44,
+            45
+          ]
+        },
+        {
+          "name": "最小化正确性的归纳证明",
+          "body": "- 同组推出不可区分的证明使用归纳法。\n- 不同组推出可区分的证明也使用归纳法。\n- 初始分划中同组状态要么都接受、要么都不接受，因此空串 $\\epsilon$ 不能区分它们。\n- 若某轮后两个状态仍在同组，则对每个符号 $a$，它们的落点也在同一组。\n- 若两个状态在某轮被撕开，则存在符号 $a$，使它们落入已经分开的两个组。\n- 若字符串 $x$ 可以区分两个落点，则字符串 $ax$ 可以区分原来的两个状态。\n\n**例子**\n- 归纳结论：第 $i$ 轮后同组的状态，对长度不超过 $i$ 的字符串都不可区分。\n- 若 $x$ 区分落点，则 $ax$ 区分原状态。",
+          "sourceMessageIndexes": [
+            46,
+            47
+          ]
+        },
+        {
+          "name": "最小化算法的复杂度与用途",
+          "body": "- 算法 3.39 的复杂度是 $O(n\\log n)$。\n- 这里的 $n$ 是 DFA 的状态数，不是输入串长度。\n- 最小化在建表之后、运行输入串之前进行，一次计算后可以反复使用。\n- 相关优化包括直接构造 DFA、合并等价状态，以及使用紧凑的转换表表示。\n\n**例子**\n- 直接构造是从正则表达式直接构造 DFA，不经过 NFA。\n- 最小化对应合并等价状态。",
+          "sourceMessageIndexes": [
+            45
+          ]
+        },
+        {
+          "name": "词法分析器的状态最小化",
+          "body": "- 词法分析器需要同时识别多个词法单元，而不是只识别一个语言。\n- 只按接受状态和非接受状态划分，会把识别不同词法单元的接受状态放进同一组。\n- 识别不同词法单元的接受状态不能合并，因为合并后无法确定应向上层返回哪个词法单元。\n- 词法分析器最小化的初始分划按所识别的词法单元划分。\n- 每个词法单元对应一个组，所有识别该词法单元的状态放入该组。\n- 不识别任何词法单元的状态放入同一个组。\n\n**例子**\n- 初始分划为 $P_0=\\{\\{0137,7\\},\\{247\\},\\{8,58\\},\\{68\\}\\}$。\n- $0137$ 和 $7$ 都不识别任何词法单元，因此处于同一组。\n- $8$ 和 $58$ 都识别同一个词法单元 $a^*b^+$，因此处于同一组。",
+          "sourceMessageIndexes": [
+            49,
+            53
+          ]
+        },
+        {
+          "name": "死状态的消除",
+          "body": "- 死状态是所有输入都转回自身且非接受的状态。\n- 死状态可以因满足 DFA 每个状态和输入都必须有转换而存在。\n- 词法分析器有时会去掉死状态，得到缺少部分转换的机器。\n- 去掉死状态后状态数减少一个，但严格来说机器不再是完整 DFA。\n- 缺失的转换可以作为词素读完的信号。\n\n**例子**\n- 图 3-54 被描述为去掉死状态 $0$ 后的机器。",
+          "sourceMessageIndexes": [
+            49
+          ]
+        },
+        {
+          "name": "紧凑的转换表表示",
+          "body": "- 标准二维转换表以状态为行、字符为列，每格存储下一状态。\n- 一种压缩方式是为每个状态保存一条字符到状态的转换链表，并在链表末尾保存默认状态。\n- 未在链表中单独列出的字符都转到该状态的默认状态。\n- 另一种表示使用四个数组：$`default`、\\(`base`、\\(`next`、\\(`check`$。\n- $`base[s]` 用于定位状态 \\(s$ 的条目基准位置。\n- $`next` 和 \\(`check`$ 存储条目及其归属校验。\n\n**例子**\n- 转换查找规则：$nextState(s,a)$ 在 $`check[base[s]+a]==s`$ 时返回 $`next[base[s]+a]`$，否则递归调用 $nextState(default[s],a)$。\n- 状态 $s$ 表示读过 `th` 的位置时，读 `e` 可能需要单独记录，其他字符可以沿用正在收集标识符的默认状态。\n- 默认状态的例子是图 3-14 中正在收集标识符的状态 $10$。",
+          "sourceMessageIndexes": [
+            46,
+            47,
+            53
+          ]
+        }
+      ]
+    },
+    {
+      "type": "notes",
+      "title": "学习轨迹",
+      "content": "- **答对**：学习者指出两个集合对任何输入符号都会产生一模一样的后续行为。\n- **困惑**：学习者认为两个相同符号应分开是因为它们是不同的运算分量，但没有说明它们后续可连接的位置不同。\n- **困惑**：学习者理解左孩子不可空时取 firstpos$(c_1)$，可空时需要考虑 firstpos$(c_2)$，但不清楚为什么要取并集。\n- **答对**：学习者正确回答 cat 结点的 lastpos 需要在 nullable$(c_2)$ 时取两个孩子 lastpos 的并集。\n- **答对**：学习者正确区分了 followpos$(2)$ 中来自绕圈规则的位置 1、2，以及来自接缝规则的位置 3。\n- **答对**：学习者正确指出 $\\{1,2\\}$ 来自绕圈，$\\{3\\}$ 来自接缝。\n- **困惑**：学习者不理解为什么读到三个符号后到达含位置 $6$ 的接受状态，并把树尾的两个 `b` 加 $\\#$ 与实际接受过程混淆。\n- **误区**：学习者把状态名称写成“状态 1 a”“状态 2 ab”，将状态名称与已经读入的输入串混为一谈，并错误判断 `ab` 被接受。\n- **困惑**：学习者表示自己对位置的基础不太好，并询问位置是什么。\n- **答对**：学习者正确编出三个位置，并正确对应到星号里的 `a`、星号里的 `b` 和星号后的 `a`。\n- **答对**：学习者正确指出初始分划凭空串，并说明同组状态尚未找到满足可区分定义的字符串。\n- **困惑**：学习者把用于区分 $A$ 和 $B$ 的串 `bb` 与空串混淆，询问为什么 `bb` 也是空串。\n- **答对**：学习者指出应使用撕之前的 $\\Pi$，因为 $\\Pi_{new}$ 是结果保留项，不是过程中用于验收的分划。\n- **困惑**：学习者最初把“撕不动就停”理解为路径或字符串可能已经被穷举。\n- **理解转变**：在解释后，学习者接受了继续学习转换表表示的方向，并请求进入 3.9.7 查看示例。\n- **误区**：学习者认为不识别任何词法单元的状态没有价值，可以作为垃圾合并回收。\n- **答对**：学习者认识到识别不同词法单元的状态需要分开。\n- **误区**：学习者认为 $`check`$ 用于校验状态是否为例外，并会导致公共状态都被单独列出。"
+    },
+    {
+      "type": "key-insight",
+      "content": "$\\{1,2\\}$ 来自绕圈，$\\{3\\}$ 来自接缝。",
+      "sourceMessageIndexes": [
+        22
+      ]
+    },
+    {
+      "type": "open-question",
+      "content": "状态 $C=\\{1,2,3,5\\}$ 读取符号 $b$ 后，$Dtran[C,b]$ 落到哪个集合？"
+    },
+    {
+      "type": "review-questions",
+      "items": [
+        {
+          "question": "什么是重要状态？",
+          "answer": "有标号非 $\\epsilon$ 离开转换的 NFA 状态。"
+        },
+        {
+          "question": "为什么可以丢掉没有非 $\\epsilon$ 出边的状态而不改变语言？",
+          "answer": "这类状态不能直接读出任何输入字符；集合的字符读取能力完全由重要状态决定，而它们的 $\\epsilon$ 边已经由 $\\epsilon$-closure 处理。"
+        },
+        {
+          "question": "为什么正则表达式中两次出现的同一个符号必须分配不同位置？",
+          "answer": "因为两次出现的符号后面能跟的位置可能不同；若共用一个位置，会把不同的 followpos 集合混在一起，导致 DFA 转换错误。"
+        },
+        {
+          "question": "cat 结点的 firstpos 为什么在左孩子可空时取两个孩子 firstpos 的并集？",
+          "answer": "左孩子可空表示它既能生成 $\\epsilon$，也能生成非空串。生成非空串时首符号来自左孩子，生成 $\\epsilon$ 时首符号来自右孩子，因此两者都要纳入。"
+        },
+        {
+          "question": "followpos 的两种规则分别处理什么情况？",
+          "answer": "cat 规则处理相邻子表达式之间的接缝，star 规则处理循环尾部回到循环头部。"
+        }
+      ]
+    }
+  ],
+  "generationMeta": {
+    "pipelineVersion": "post-class-v2",
+    "mode": "chunked",
+    "jobId": "pn_mudzx7vv1a1a73eb64ea",
+    "traceId": "tr_mudzx7vv4df0bd417c16",
+    "sourceHash": "sha256:4d8e03f405733fbbd3bb0e4226d44d65fd33ae508641feebc07de3e96263d946",
+    "sourceMessageCount": 91,
+    "chunkCount": 3,
+    "generatedAt": 1790161858729,
+    "decision": "degraded",
+    "quality": {
+      "score": 0.8904,
+      "metrics": {
+        "topicCoverage": 1,
+        "learnerEvidenceCoverage": 0.6111111111111112,
+        "explanationCoverage": 1,
+        "sourceIntegrity": 1,
+        "reviewQuestionDiversity": 0.92,
+        "structureValidity": 1,
+        "lengthFitness": 0.5234,
+        "duplicationRatio": 0,
+        "unsupportedTopicRatio": 0,
+        "lengthChars": 7383,
+        "conceptCount": 16,
+        "evidenceTopicCount": 16
+      }
+    },
+    "warnings": [],
+    "evidenceIndex": [
+      {
+        "name": "重要状态与直接构造 DFA",
+        "sourceMessageIndexes": [
+          13,
+          15
+        ]
+      },
+      {
+        "name": "位置与 followpos",
+        "sourceMessageIndexes": [
+          15,
+          17
+        ]
+      },
+      {
+        "name": "nullable、firstpos 与 lastpos",
+        "sourceMessageIndexes": [
+          17,
+          19,
+          21
+        ]
+      },
+      {
+        "name": "followpos 的两条计算规则",
+        "sourceMessageIndexes": [
+          21,
+          23
+        ]
+      },
+      {
+        "name": "位置集合直接生成 DFA",
+        "sourceMessageIndexes": [
+          23
+        ]
+      },
+      {
+        "name": "followpos 的来源与 DFA 直接构造",
+        "sourceMessageIndexes": [
+          22,
+          23,
+          25,
+          27,
+          31
+        ]
+      },
+      {
+        "name": "结束标记与接受状态",
+        "sourceMessageIndexes": [
+          25,
+          27
+        ]
+      },
+      {
+        "name": "状态名称与输入串的区别",
+        "sourceMessageIndexes": [
+          25,
+          27,
+          31
+        ]
+      },
+      {
+        "name": "位置的定义与编号",
+        "sourceMessageIndexes": [
+          29,
+          30,
+          31
+        ]
+      },
+      {
+        "name": "DFA 最小化与可区分状态",
+        "sourceMessageIndexes": [
+          31,
+          33
+        ]
+      },
+      {
+        "name": "分划细化中的旧分划与停机",
+        "sourceMessageIndexes": [
+          44,
+          45
+        ]
+      },
+      {
+        "name": "最小化正确性的归纳证明",
+        "sourceMessageIndexes": [
+          46,
+          47
+        ]
+      },
+      {
+        "name": "最小化算法的复杂度与用途",
+        "sourceMessageIndexes": [
+          45
+        ]
+      },
+      {
+        "name": "词法分析器的状态最小化",
+        "sourceMessageIndexes": [
+          49,
+          53
+        ]
+      },
+      {
+        "name": "死状态的消除",
+        "sourceMessageIndexes": [
+          49
+        ]
+      },
+      {
+        "name": "紧凑的转换表表示",
+        "sourceMessageIndexes": [
+          46,
+          47,
+          53
+        ]
+      }
+    ],
+    "degradedReason": "chunk_failures"
+  }
+}

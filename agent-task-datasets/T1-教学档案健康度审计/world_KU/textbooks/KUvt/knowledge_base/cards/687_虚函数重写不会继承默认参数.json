@@ -1,0 +1,46 @@
+{
+  "title": "虚函数重写不会继承默认参数",
+  "definition": "当基类和派生类的重写函数分别声明了不同的默认参数时，调用时使用哪个默认参数取决于调用表达式中声明的静态类型，而不是对象的实际动态类型。虚函数本体的选择与默认参数的选择是两个独立过程。",
+  "key_points": [
+    "如果直接通过 `Derived` 类型对象调用重写函数，使用 `Derived` 声明中的默认参数，并执行 `Derived` 的函数体。",
+    "如果直接通过 `Base` 类型对象调用，使用 `Base` 声明中的默认参数，并执行 `Base` 的函数体。",
+    "如果 `Base*` 或 `Base&` 指向 `Derived` 对象，默认参数仍从 `Base` 声明取得，但虚函数体会动态分派到 `Derived` 版本。",
+    "可概括为：默认参数静态绑定，虚函数体动态绑定。"
+  ],
+  "examples": [
+    "可表示为：\n```cpp\nclass Base {\npublic:\n    virtual void go(int value = 2);\n};\n\nclass Derived : public Base {\npublic:\n    void go(int value = 7) override;\n};\n\nBase b;\nDerived d;\nBase& ref = d;\n\nb.go();    // 使用默认参数 2，执行 Base::go(2)\nd.go();    // 使用默认参数 7，执行 Derived::go(7)\nref.go();  // 使用默认参数 2，但执行 Derived::go(2)\n```",
+    "对 `ref.go()` 的解析可以拆成两步：\n$$\\text{参数默认值}=\\text{由 }Base\\&\\text{ 的声明决定}=2$$\n$$\\text{函数体}=\\text{由虚函数动态分派决定}=Derived::go$$"
+  ],
+  "misconceptions": [
+    "重写函数不会自动继承或替换基类函数的默认参数。",
+    "基类引用指向派生对象时，不是所有行为都动态绑定；默认参数仍按基类静态类型确定。",
+    "`ref.go()` 在示例中执行派生类函数体，但传入的默认值仍然是基类声明的值 2，而不是派生类声明的 7。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "当 `Base& ref` 引用一个 `Derived` 对象，并执行 `ref.go()` 时，默认参数来自哪里？",
+      "a": "来自 `Base` 的声明，因此使用基类默认参数 2；但函数体会动态分派到 `Derived::go()`。"
+    },
+    {
+      "q": "C++ 中虚函数的默认参数和函数体分别如何绑定？",
+      "a": "默认参数按调用表达式的静态类型绑定；虚函数体按对象的动态类型进行动态分派。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++虚函数与动态分派",
+    "C++默认参数",
+    "基类指针与引用"
+  ],
+  "source_pages": [
+    340,
+    340
+  ],
+  "needs_verification": true,
+  "verify_query": "C++ 虚函数 默认参数 静态绑定 动态绑定 基类引用 派生类重写",
+  "concept_id": "687_虚函数重写不会继承默认参数",
+  "_chunk_pages": [
+    337,
+    340
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "title": "二元左折叠计算参数总和",
+  "definition": "二元左折叠使用一个初始值 `Init` 和一个参数包，将所有值按从左到右的顺序进行运算。教材中的 `sumValues` 使用加法进行二元左折叠，表达式 `(init + ... + values)` 会展开为 `(((init + v1) + v2) + v3)`。由于 `Init` 是普通函数参数，因此该函数至少需要一个实参；参数包本身可以为空。",
+  "key_points": [
+    "二元左折叠的形式为 `(init op ... op pack)`。",
+    "对加法而言，三个参数 `v1`、`v2`、`v3` 的展开形式为：$$((init+v_1)+v_2)+v_3$$。",
+    "`sumValues(1, 2, 3.3)` 可以计算并输出 $1+2+3.3$ 的结果。",
+    "`sumValues(1)` 合法，此时参数包为空，结果就是初始值 `1`。",
+    "`sumValues()` 不合法，因为函数至少需要用于指定 `Init` 的第一个参数。"
+  ],
+  "examples": [
+    "代码形式：`template<typename T, typename... Values> double sumValues(const T& init, const Values&... values) { return (init + ... + values); }`",
+    "`sumValues(1, 2, 3.3)` 的展开形式为：$$((1+2)+3.3)$$",
+    "`sumValues(1)` 中没有额外参数，折叠结果为 `1`。"
+  ],
+  "misconceptions": [
+    "二元左折叠中的 `Init` 不是可有可无的；本例的函数接口要求调用者至少提供一个实参作为初始值。",
+    "`sumValues(1)` 并不表示调用失败；它表示参数包为空，返回初始值。",
+    "左折叠和右折叠的结合方向不同，不能把 `((init+v1)+v2)+v3` 写成 `init+(v1+(v2+v3))` 而认为完全等价。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`(init + ... + values)` 对 `v1`、`v2`、`v3` 如何展开？",
+      "a": "展开为 `(((init + v1) + v2) + v3)`。"
+    },
+    {
+      "q": "为什么 `sumValues()` 无法编译，而 `sumValues(1)`可以编译？",
+      "a": "因为 `sumValues` 至少需要一个普通参数 `init`；`sumValues(1)`提供了 `init`，并允许参数包为空。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "可变参数模板",
+    "折叠表达式"
+  ],
+  "source_pages": [
+    773,
+    774
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1594_二元左折叠计算参数总和",
+  "_chunk_pages": [
+    773,
+    776
+  ]
+}

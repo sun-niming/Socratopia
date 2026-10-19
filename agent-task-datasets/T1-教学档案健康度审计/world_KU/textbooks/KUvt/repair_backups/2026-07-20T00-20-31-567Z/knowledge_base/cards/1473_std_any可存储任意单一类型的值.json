@@ -1,0 +1,40 @@
+{
+  "title": "std::any可存储任意单一类型的值",
+  "definition": "std::any是一个类型安全的容器，可以在同一个实例中先后存储不同类型的值。给any实例赋予新值时，原来存储的值会被替换。std::any也可以作为标准库容器的元素，从而在一个容器中存放异构数据。读取其中的具体值时，必须显式使用std::any_cast指定目标类型。",
+  "key_points": [
+    "同一个std::any实例可以先存储整数，再改为存储std::string。",
+    "std::vector<std::any>可以存放不同类型的元素。",
+    "通过std::any_cast<T>检索值时，T必须与实际存储类型匹配，否则不能按目标类型正确提取。"
+  ],
+  "examples": [
+    "代码示例：`std::any something { 3 }; something = \"An std::string\"s;`，此时同一个实例改为存储字符串。",
+    "代码示例：`std::vector<std::any> v; v.push_back(42); v.push_back(\"An std::string\"s); std::cout << std::any_cast<std::string>(v[1]) << std::endl;`"
+  ],
+  "misconceptions": [
+    "std::any不是可以自动转换为任意类型的普通变量；读取时仍需使用std::any_cast。",
+    "std::vector<std::any>虽然能存放异构数据，但不能像同一类型容器那样直接用统一的元素类型接口访问所有值。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何从std::any中取出一个std::string？",
+      "a": "使用`std::any_cast<std::string>(any对象)`，例如`std::any_cast<std::string>(v[1])`。"
+    },
+    {
+      "q": "std::any存储新值后，原来的值是否仍保留？",
+      "a": "不保留；赋予新值会使同一个std::any实例改为存储新类型的新值。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [],
+  "source_pages": [
+    709,
+    709
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1473_std_any可存储任意单一类型的值",
+  "_chunk_pages": [
+    709,
+    712
+  ]
+}

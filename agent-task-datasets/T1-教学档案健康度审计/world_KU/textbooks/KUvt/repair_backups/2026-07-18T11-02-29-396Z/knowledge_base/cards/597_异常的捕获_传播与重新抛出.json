@@ -1,0 +1,44 @@
+{
+  "title": "异常的捕获、传播与重新抛出",
+  "definition": "C++中，函数内部抛出的异常可以沿调用栈向外传播，直到遇到能够匹配该异常类型的catch处理器。catch块中使用不带表达式的throw;可以重新抛出当前正在处理的原异常；使用throw e;则是再次抛出表达式e所表示的异常对象。",
+  "key_points": [
+    "异常可以从被调用函数传播到调用者，例如funcTwo()抛出的异常可以由main()或funcOne()外层的catch处理。",
+    "catch处理器可以按异常类型匹配，例如invalid_argument异常可以由能够接收该异常类型的处理器捕获。",
+    "在catch块中，throw;表示重新抛出当前异常，常用于先记录或处理异常，再交给外层继续处理。",
+    "throw e;与throw;不是同一写法；前者重新抛出e表达式，后者重新抛出当前原异常。"
+  ],
+  "examples": [
+    "函数调用可以采用如下结构：try { funcOne(); } catch (const exception& e) { cerr << \"Exception caught!\" << endl; }",
+    "在处理器中重新抛出当前异常：catch (...) { /* 记录异常 */ throw; }"
+  ],
+  "misconceptions": [
+    "认为异常只能在抛出它的函数内部处理；实际上异常可以沿调用栈向外传播。",
+    "认为throw e;和throw;完全等价；教材明确区分了这两种写法。",
+    "认为catch捕获异常后异常一定不会继续传播；如果catch中再次使用throw，异常仍会继续向外传播。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "C++中catch块里的throw;表示什么？",
+      "a": "表示不带表达式地重新抛出当前正在处理的原异常。"
+    },
+    {
+      "q": "异常在函数funcTwo()中抛出后，能否由外层的main()捕获？",
+      "a": "可以，只要main()中的catch处理器能够匹配该异常类型，异常就可以沿调用栈传播到main()并被捕获。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++异常处理基础"
+  ],
+  "source_pages": [
+    457,
+    460
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "597_异常的捕获_传播与重新抛出",
+  "_chunk_pages": [
+    457,
+    460
+  ]
+}

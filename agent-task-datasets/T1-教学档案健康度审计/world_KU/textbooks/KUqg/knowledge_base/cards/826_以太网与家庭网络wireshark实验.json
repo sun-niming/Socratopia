@@ -1,0 +1,42 @@
+{
+  "title": "以太网与家庭网络Wireshark实验",
+  "definition": "教材配套网站提供两个 Wireshark 实验：一个研究 IEEE 802.3 协议的操作和以太网帧格式，另一个研究家庭网络场景下获取的分组踪迹。",
+  "key_points": [
+    "第一个实验的研究对象是 IEEE 802.3 协议及以太网帧格式。",
+    "第二个实验的研究对象是家庭网络场景中的分组踪迹。",
+    "实验资源位于教材配套 Web 站点。"
+  ],
+  "examples": [
+    "可以使用 Wireshark 观察以太网帧格式，并分析家庭网络场景中捕获的分组踪迹。"
+  ],
+  "misconceptions": [
+    "这两个实验的研究对象不同：第一个侧重 IEEE 802.3 和帧格式，第二个侧重家庭网络中的分组踪迹。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "教材配套的第一个 Wireshark 实验研究什么？",
+      "a": "研究 IEEE 802.3 协议的操作和以太网帧格式。"
+    },
+    {
+      "q": "教材配套的第二个 Wireshark 实验研究什么？",
+      "a": "研究家庭网络场景下获取的分组踪迹。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "以太网",
+    "IEEE 802.3",
+    "Wireshark"
+  ],
+  "source_pages": [
+    353,
+    356
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "826_以太网与家庭网络wireshark实验",
+  "_chunk_pages": [
+    353,
+    356
+  ]
+}

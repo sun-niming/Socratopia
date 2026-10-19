@@ -1,0 +1,54 @@
+{
+  "title": "pimpl类的构造、拷贝赋值与交换",
+  "definition": "采用 pimpl 的接口类需要显式创建、复制和交换底层实现对象。构造函数通过 `std::make_unique<Impl>` 创建实现对象；拷贝构造函数复制源对象所指向的 Impl；拷贝赋值运算符对两个 Impl 对象本身进行赋值；swap 函数交换两个接口类中的实现指针。",
+  "key_points": [
+    "接口类构造函数必须创建新的 Impl 实例。",
+    "拷贝构造函数需要复制源对象的底层 Impl，而不是只复制指针，否则会造成两个接口对象共享同一个实现对象。",
+    "拷贝赋值时要先对 `m_impl` 解引用，再执行 Impl 对象的赋值。",
+    "swap 只需交换两个接口对象的 `m_impl` 指针即可。",
+    "对指针解引用的目的，是让操作作用于 Impl 对象本身，而不是让指针重新指向某个对象。"
+  ],
+  "examples": [
+    "构造底层实现对象：`m_impl = std::make_unique<Impl>(theApp, width, height);`。",
+    "拷贝构造的核心形式：`m_impl = std::make_unique<Impl>(*src.m_impl);`。",
+    "拷贝赋值的核心形式：`*m_impl = *rhs.m_impl; return *this;`。",
+    "交换实现指针：`std::swap(m_impl, other.m_impl);`。"
+  ],
+  "misconceptions": [
+    "直接复制 `m_impl` 指针不是深拷贝，而可能导致两个接口对象指向同一个 Impl。",
+    "拷贝赋值中写 `m_impl = rhs.m_impl` 与写 `*m_impl = *rhs.m_impl` 含义不同：前者涉及指针所有权，后者才是对底层 Impl 对象进行赋值。",
+    "swap 不需要逐个交换 Impl 的所有数据成员；交换接口类持有的实现指针即可。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "pimpl 接口类的拷贝构造函数为什么使用 `*src.m_impl`？",
+      "a": "因为需要复制源对象指向的 Impl 对象本身，而不是复制指针；解引用后才能把底层实现对象传给 Impl 的拷贝构造函数。"
+    },
+    {
+      "q": "为什么拷贝赋值写成 `*m_impl = *rhs.m_impl`？",
+      "a": "因为接口类的赋值操作需要调用底层 Impl 对象的赋值运算符；对两个 unique_ptr 解引用后，赋值才作用于对象本身。"
+    },
+    {
+      "q": "pimpl 接口类的 swap 如何实现？",
+      "a": "使用 `std::swap(m_impl, other.m_impl)` 交换两个接口类保存的实现指针。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "pimpl惯用法",
+    "拷贝构造函数",
+    "拷贝赋值运算符",
+    "std::unique_ptr"
+  ],
+  "source_pages": [
+    300,
+    300
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "618_pimpl类的构造_拷贝赋值与交换",
+  "_chunk_pages": [
+    297,
+    300
+  ]
+}

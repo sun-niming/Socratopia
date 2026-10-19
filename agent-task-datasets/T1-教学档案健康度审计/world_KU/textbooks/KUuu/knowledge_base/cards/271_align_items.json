@@ -1,0 +1,44 @@
+{
+  "title": "align-items",
+  "definition": "align-items 是 Grid 容器属性，用于垂直对齐单元格内的 Grid 项。",
+  "key_points": [
+    "它作用于单元格内部的 Grid 项，而不是整个网格内容。",
+    "原文给出的可选值有 `start`、`end`、`center`、`stretch`。"
+  ],
+  "examples": [
+    "align-items: center;",
+    "align-items: end;",
+    "align-items: start;",
+    "align-items: stretch;"
+  ],
+  "misconceptions": [
+    "它不是用来控制整个网格内容的垂直位置，那是 `align-content` 的作用。",
+    "不要把它和 `justify-items` 混淆；后者是水平对齐单元格内的 Grid 项。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "align-items 的作用是什么？",
+      "a": "垂直对齐单元格内的 Grid 项。"
+    },
+    {
+      "q": "align-items 的可选值有哪些？",
+      "a": "start、end、center、stretch。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "Grid 容器",
+    "Grid 项"
+  ],
+  "source_pages": [
+    178,
+    179
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "271_align_items",
+  "_chunk_pages": [
+    177,
+    180
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "title": "用unique_ptr管理动态数组",
+  "definition": "std::unique_ptr也可以管理动态数组。使用std::make_unique<int[]>(10)可以创建一个包含10个int元素的动态数组，并返回相应的unique_ptr。获得该智能指针后，可以使用下标运算符访问数组元素。",
+  "key_points": [
+    "动态数组的unique_ptr类型写作std::unique_ptr<T[]>，例如std::unique_ptr<int[]>。",
+    "使用std::make_unique<int[]>(10)创建包含10个int元素的动态数组。",
+    "数组元素可通过下标访问，例如myVariableSizedArray[1] = 123;。",
+    "原文将unique_ptr动态数组与std::vector、std::array并列提及，说明它们都是C++中可用于表示数组或序列数据的方式，但本段重点是unique_ptr对动态数组的管理。"
+  ],
+  "examples": [
+    "创建动态数组：代码形式为auto myVariableSizedArray { std::make_unique<int[]>(10) };。",
+    "修改第二个元素：代码形式为myVariableSizedArray[1] = 123;。"
+  ],
+  "misconceptions": [
+    "std::make_unique<int[]>(10)创建的是包含10个int元素的数组，不是单个int对象。",
+    "数组下标从0开始，因此myVariableSizedArray[1]表示第2个元素。",
+    "动态数组由unique_ptr管理时通常不需要手动调用delete[]；不应把它当作普通裸数组指针处理。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何创建一个由unique_ptr管理的、包含10个int元素的动态数组？",
+      "a": "可写为：auto myVariableSizedArray { std::make_unique<int[]>(10) };。"
+    },
+    {
+      "q": "如何把该数组的第2个元素设为123？",
+      "a": "可写为：myVariableSizedArray[1] = 123;。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "std::unique_ptr与RAII",
+    "C++动态数组与下标访问"
+  ],
+  "source_pages": [
+    217,
+    220
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "293_用unique_ptr管理动态数组",
+  "_chunk_pages": [
+    217,
+    220
+  ]
+}

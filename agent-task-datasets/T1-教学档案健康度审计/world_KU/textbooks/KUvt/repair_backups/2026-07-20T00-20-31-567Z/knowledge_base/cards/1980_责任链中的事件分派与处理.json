@@ -1,0 +1,43 @@
+{
+  "title": "责任链中的事件分派与处理",
+  "definition": "责任链式处理允许事件沿着对象层次或处理者链逐级传递。事件分派器先确定事件对应的对象，并在该对象上调用处理方法；对象处理完后，还可以继续调用链中的上级处理者。",
+  "key_points": [
+    "真实应用需要额外的分派类，将事件发送到正确对象，并在正确对象上调用 handleMessage。",
+    "示例流程是：获取鼠标位置，找到该位置的 Shape；如果找到，就向 Shape 发送鼠标按下事件；随后再向 Window 发送同类事件。",
+    "责任链具有灵活、面向对象层次清晰的优点，但实现时需要较多程序员工作。",
+    "如果派生类忘记继续向基类传递事件，事件可能丢失；如果传递到错误的类，可能形成无限循环。"
+  ],
+  "examples": [
+    "伪代码：\n```text\ndown 事件\nMouseLocation location { getMouseLocation() };\nShape* clickedShape { findShapeAtLocation(location) };\nif (clickedShape) {\n    clickedShape->handleMessage(Event::LeftMouseButtonDown);\n}\nwindow.handleMessage(Event::LeftMouseButtonDown);\n```",
+    "事件处理输出体现了逐级调用：Shape::handleMessage()、Window::handleMessage()、Application::handleMessage()，然后处理具体的鼠标事件。"
+  ],
+  "misconceptions": [
+    "责任链不是自动把事件准确分派给任意对象；程序仍需要分派逻辑确定起始对象。",
+    "事件沿链传递并不意味着一定会到达所有对象，具体取决于各处理者是否继续传递。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "责任链式事件处理的两个主要缺点是什么？",
+      "a": "实现需要较多程序员工作；忘记从派生类向基类传递会导致事件丢失，传递到错误的类则可能导致无限循环。"
+    },
+    {
+      "q": "处理鼠标按下事件时，伪代码首先做什么？",
+      "a": "先获取鼠标位置，再查找该位置上的 Shape；如果找到，就在该 Shape 上调用 handleMessage。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "面向对象的继承与多态"
+  ],
+  "source_pages": [
+    965,
+    965
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1980_责任链中的事件分派与处理",
+  "_chunk_pages": [
+    965,
+    968
+  ]
+}

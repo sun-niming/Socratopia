@@ -1,0 +1,42 @@
+{
+  "title": "文件读取结束时流状态变化的原因",
+  "definition": "读取文件时，输入流的状态会根据读取操作的结果变化。示例中，paper1.txt 的最后一行为空行：读取该空行后，while 循环还会继续执行一次；在这次循环中，inputFile >> ws 读取文件末尾的空白并使流进入 eof 状态，之后继续调用 getline() 又使流进入 fail 和 eof 状态。这种状态变化是正常且符合预期的。",
+  "key_points": [
+    "文件最后的空行可能导致循环多执行一次。",
+    "读取到文件末尾时，流可能设置 eof 状态。",
+    "在流已经无法提供有效输入时继续调用 getline()，会进一步设置 fail 状态。"
+  ],
+  "examples": [
+    "示例状态变化：\n有效读取：stream state is good\n读取文件末尾空白后：stream state is eof\n随后继续 getline()：stream state is fail 和 eof"
+  ],
+  "misconceptions": [
+    "误以为读取到 eof 只表示文件指针到达末尾，不会影响后续输入操作。",
+    "误以为最后一次 getline() 失败说明文件内容本身损坏；在该示例中，这是因为代码在到达文件末尾后仍继续读取。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么读取最后一条引文后还会多执行一次 while 循环？",
+      "a": "因为 paper1.txt 的最后一行是空行，读取最后一条引文后，循环条件仍允许进入下一次循环。"
+    },
+    {
+      "q": "为什么在最后一次循环中流状态先变为 eof，随后变为 fail？",
+      "a": "inputFile >> ws 读取文件末尾的空白后到达文件尾，因此设置 eof；代码随后仍调用 getline()，由于没有可读取的数据，进一步设置 fail。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++输入文件流的状态标志",
+    "while循环读取文件的基本方式"
+  ],
+  "source_pages": [
+    917,
+    917
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1899_文件读取结束时流状态变化的原因",
+  "_chunk_pages": [
+    917,
+    920
+  ]
+}

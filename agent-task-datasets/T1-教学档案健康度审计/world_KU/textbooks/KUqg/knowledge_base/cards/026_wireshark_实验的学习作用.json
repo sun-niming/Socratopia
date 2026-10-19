@@ -1,0 +1,43 @@
+{
+  "title": "Wireshark 实验的学习作用",
+  "definition": "Wireshark 实验通过观察网络协议实际运行时的报文交换，帮助读者加深对协议的理解。实验可以展示两个协议实体之间报文交换的顺序，并覆盖多个常见协议和网络技术。",
+  "key_points": [
+    "Wireshark 实验的核心方法是观察协议实际运行中的报文交换。",
+    "实验能够帮助读者理解两个协议实体之间报文的交换顺序。",
+    "网站列举的实验涉及 HTTP、DNS、TCP、UDP、IP、ICMP、以太网、ARP、WiFi 和 SSL。",
+    "网站还提供跟踪获取 Web 网页请求过程中所涉及的全部协议的实验。"
+  ],
+  "examples": [
+    "通过 Wireshark 观察一次 HTTP 请求获取 Web 网页时涉及的协议和报文交换顺序。",
+    "分别进行 TCP、UDP、DNS 或 ARP 的 Wireshark 实验。"
+  ],
+  "misconceptions": [
+    "Wireshark 实验不只是查看单个报文内容，还关注协议实体之间的报文交换过程和顺序。",
+    "Wireshark 实验既可用于应用层协议，也可用于运输层、网络层和链路层相关协议。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "Wireshark 实验为什么能加深协议理解？",
+      "a": "因为读者可以直接观察网络协议实际运行时两个协议实体之间报文的交换过程和顺序。"
+    },
+    {
+      "q": "教材列举了哪些 Wireshark 实验主题？",
+      "a": "包括 HTTP、DNS、TCP、UDP、IP、ICMP、以太网、ARP、WiFi、SSL，以及获取 Web 网页请求所涉及的全部协议。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "以因特网为研究目标"
+  ],
+  "source_pages": [
+    9,
+    12
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "026_wireshark_实验的学习作用",
+  "_chunk_pages": [
+    9,
+    12
+  ]
+}

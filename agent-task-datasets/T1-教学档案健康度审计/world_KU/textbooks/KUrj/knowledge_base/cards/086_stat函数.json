@@ -1,0 +1,37 @@
+{
+  "title": "stat函数",
+  "definition": "`stat(const char *path, struct stat *buf)` 用于读取文件元信息。它不打开文件，只获取文件状态信息；成功返回 0，失败返回 -1。本项目中它主要用来判断文件是否存在、是否普通文件以及文件大小。",
+  "key_points": [
+    "`stat` 读取的是元信息，不打开文件",
+    "`path` 是候选文件路径，`buf` 输出文件状态",
+    "成功返回 0，失败返回 -1"
+  ],
+  "examples": [
+    "`struct stat st; if (stat(path, &st) < 0) { send_error(fd, 404, \"Not Found\", \"file not found\"); return; }`"
+  ],
+  "misconceptions": [
+    "以为 `stat` 会把文件内容读出来",
+    "以为 `stat` 失败后还能继续按成功处理"
+  ],
+  "qa_pairs": [
+    {
+      "q": "stat 的主要作用是什么？",
+      "a": "它用于读取文件元信息，例如是否存在、是否普通文件以及文件大小。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "文件路径基础"
+  ],
+  "source_pages": [
+    54,
+    55
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "086_stat函数",
+  "_chunk_pages": [
+    53,
+    56
+  ]
+}

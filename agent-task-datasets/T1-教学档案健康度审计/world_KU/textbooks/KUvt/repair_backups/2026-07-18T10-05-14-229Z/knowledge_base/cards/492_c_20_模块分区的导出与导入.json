@@ -1,0 +1,43 @@
+{
+  "title": "C++20 模块分区的导出与导入",
+  "definition": "原文介绍了名为 grid 的模块及其模块分区。模块接口可以导出模块声明和需要对模块用户公开的内容；模块分区使用带冒号的名称，例如 `grid:definition` 和 `grid:implementation`，并可通过 `import :definition;` 导入同一模块的分区。",
+  "key_points": [
+    "主模块接口示例为：\n\n```cpp\nexport module grid;\n```",
+    "模块分区名称采用 `模块名:分区名` 的形式，例如：\n\n```cpp\nexport module grid:definition;\nexport module grid:implementation;\n```",
+    "实现分区可以导入定义分区：\n\n```cpp\nimport :definition;\n```",
+    "原文区分了 definition 和 implementation 分区，并展示了使用 `export`、`import` 组织 Grid 模板代码。"
+  ],
+  "examples": [
+    "模块接口及分区的原文形式可整理为：\n\n```cpp\nexport module grid;\nexport module grid:definition;\nexport module grid:implementation;\n\nimport :definition;\nimport <vector>;\n```"
+  ],
+  "misconceptions": [
+    "模块分区名中的冒号不是 C++ 命名空间运算符，而是模块分区的语法组成部分。",
+    "`import :definition;` 表示导入当前模块的 definition 分区，不是导入一个普通头文件。",
+    "并非模块中的每个实现细节都必须导出；只有导出的内容才供模块外部使用。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "模块分区名称通常采用什么形式？",
+      "a": "采用 `模块名:分区名` 的形式，例如 `grid:definition` 和 `grid:implementation`。"
+    },
+    {
+      "q": "实现分区如何导入同一模块的定义分区？",
+      "a": "使用 `import :definition;`。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "C++20 模块基础"
+  ],
+  "source_pages": [
+    381,
+    384
+  ],
+  "needs_verification": true,
+  "verify_query": "Marc Gregoire C++20 Advanced Programming 5th edition module partitions export module grid definition implementation import :definition Grid",
+  "concept_id": "492_c_20_模块分区的导出与导入",
+  "_chunk_pages": [
+    381,
+    384
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "title": "转换构造函数与 explicit",
+  "definition": "能够使用单个参数调用的构造函数可以把该参数类型的值转换为类对象，这类构造函数称为转换构造函数。编译器可能使用它执行隐式转换；将构造函数声明为 explicit 可以禁止这种隐式转换。",
+  "key_points": [
+    "SpreadsheetCell(double) 和 SpreadsheetCell(string_view) 都可用于把相应类型转换为 SpreadsheetCell。",
+    "隐式转换示例包括先构造 SpreadsheetCell，再执行对象赋值，例如 myCell = 5;。",
+    "在类定义中给构造函数加上 explicit，例如 explicit SpreadsheetCell(string_view initialValue);，可禁止从 string_view 到 SpreadsheetCell 的隐式转换。",
+    "explicit 关键字只出现在类定义中的构造函数声明上。",
+    "原文建议：凡是可以使用单个参数调用的构造函数，除非这种转换确实有用，否则应标记为 explicit，以避免意外隐式转换。"
+  ],
+  "examples": [
+    "SpreadsheetCell myCell{4}; 使用 double 值4直接构造对象。",
+    "若存在 SpreadsheetCell(double)，则 myCell = 5; 可以先将整数5转换为 double，再隐式转换为 SpreadsheetCell。",
+    "若 string_view 构造函数声明为 explicit SpreadsheetCell(string_view initialValue);，则 myCell = \"6\"sv; 将无法编译。"
+  ],
+  "misconceptions": [
+    "explicit 不会禁止直接初始化，例如 SpreadsheetCell cell{\"6\"sv}; 仍可使用；它主要禁止相关隐式转换。",
+    "转换构造函数的作用不只是显式创建对象，也可能被编译器自动用于类型转换。",
+    "并非所有单参数构造函数都必须标记为 explicit；如果从参数类型到类类型的转换是设计上有用的，可以保留隐式转换。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "什么是转换构造函数？",
+      "a": "能够使用单个参数调用，并可将该参数类型的值转换为类对象的构造函数称为转换构造函数。"
+    },
+    {
+      "q": "explicit 的作用是什么？",
+      "a": "它可以禁止编译器使用该构造函数执行相应的隐式类型转换。"
+    },
+    {
+      "q": "为什么 explicit SpreadsheetCell(string_view initialValue) 会使 myCell = \"6\"sv; 无法编译？",
+      "a": "因为 explicit 禁止从 string_view 到 SpreadsheetCell 的隐式转换，而赋值语句需要这种隐式转换。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "构造函数重载",
+    "隐式类型转换",
+    "类对象初始化"
+  ],
+  "source_pages": [
+    248,
+    248
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "524_转换构造函数与_explicit",
+  "_chunk_pages": [
+    245,
+    248
+  ]
+}

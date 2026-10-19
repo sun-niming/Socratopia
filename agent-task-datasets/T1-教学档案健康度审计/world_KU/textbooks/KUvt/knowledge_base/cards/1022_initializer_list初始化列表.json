@@ -1,0 +1,42 @@
+{
+  "title": "initializer_list初始化列表",
+  "definition": "initializer_list定义在<initializer_list>头文件中，表示由同一种类型元素组成的初始化列表。它适合用于编写能够接收可变数量参数的函数。函数可以通过范围for遍历initializer_list中的元素。",
+  "key_points": [
+    "initializer_list便于编写参数数目可变的函数。",
+    "示例函数可以接收initializer_list<int>参数，并遍历其中的每个int元素。",
+    "调用时可以使用花括号列表直接构造参数，例如{10, 20, 30}。"
+  ],
+  "examples": [
+    "代码示例：\nint makeSum(std::initializer_list<int> values) {\n    int total{};\n    for (int value : values) {\n        total += value;\n    }\n    return total;\n}\nint b{makeSum({10, 20, 30, 40, 50, 60})};"
+  ],
+  "misconceptions": [
+    "initializer_list不是任意类型元素混合组成的列表；同一个initializer_list中的元素类型必须一致或可统一转换为指定类型。",
+    "使用initializer_list并不意味着函数可以自动接收任意类型的参数。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "initializer_list主要用于解决什么问题？",
+      "a": "它便于编写能够接收可变数量参数的函数。"
+    },
+    {
+      "q": "如何调用接收initializer_list<int>的makeSum函数？",
+      "a": "可以写成makeSum({10, 20, 30, 40, 50, 60})。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "范围for循环",
+    "函数参数类型"
+  ],
+  "source_pages": [
+    505,
+    505
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1022_initializer_list初始化列表",
+  "_chunk_pages": [
+    505,
+    508
+  ]
+}

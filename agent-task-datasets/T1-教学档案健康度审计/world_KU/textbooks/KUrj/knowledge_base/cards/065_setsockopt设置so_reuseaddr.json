@@ -1,0 +1,43 @@
+{
+  "title": "setsockopt设置SO_REUSEADDR",
+  "definition": "`setsockopt` 用于给 socket 设置选项。在本项目中最常用的是在 `bind` 之前设置 `SOL_SOCKET` 层的 `SO_REUSEADDR`，以减少服务器刚退出后端口暂时不可复用的问题。",
+  "key_points": [
+    "原型是 `int setsockopt(int sockfd, int level, int optname, const void *optval, socklen_t optlen);`。",
+    "本项目中 `level` 用 `SOL_SOCKET`，`optname` 用 `SO_REUSEADDR`。",
+    "通常在 `bind` 之前设置；设置后便于调试时快速重启服务器。",
+    "它不是抢占已被其他进程监听端口的万能办法。"
+  ],
+  "examples": [
+    "```c\nint opt = 1;\nif (setsockopt(listen_fd, SOL_SOCKET, SO_REUSEADDR, &opt, sizeof(opt)) < 0) {\nperror(\"setsockopt\");\nclose(listen_fd);\nreturn -1;\n}\n```"
+  ],
+  "misconceptions": [
+    "以为 `SO_REUSEADDR` 能让进程抢占别人已经监听的端口。",
+    "把设置时机放到 `bind` 之后。",
+    "以为它可以彻底消除所有端口冲突问题。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`SO_REUSEADDR` 在本项目里通常什么时候设置？",
+      "a": "在 `bind` 之前设置。"
+    },
+    {
+      "q": "`setsockopt` 的返回值含义是什么？",
+      "a": "成功返回 0，失败返回 -1。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "socket创建监听端点"
+  ],
+  "source_pages": [
+    45,
+    48
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "065_setsockopt设置so_reuseaddr",
+  "_chunk_pages": [
+    45,
+    48
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "title": "while 循环",
+  "definition": "while 循环在每次执行循环体之前求值条件表达式；只要条件表达式的结果为 true，就重复执行循环体。条件一开始为 false 时，循环体一次也不会执行。",
+  "key_points": [
+    "while 循环的基本结构是 `while (条件表达式) { 循环体 }`。",
+    "`break` 会立即跳出循环并继续执行循环之后的程序。",
+    "`continue` 会返回循环顶部，重新求值 while 条件；原文建议谨慎使用 continue，因为它可能使程序执行流程难以理解。"
+  ],
+  "examples": [
+    "`int i { 0 }; while (i < 5) { cout << \"This is silly.\" << endl; ++i; }` 会重复输出 5 次。"
+  ],
+  "misconceptions": [
+    "while 循环不是至少执行一次；只有条件为 true 时才执行，条件初始为 false 时执行零次。",
+    "`break` 不是结束整个程序，而是跳出当前循环。",
+    "`continue` 不会跳出循环，而是开始下一轮条件判断。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "while 循环何时执行循环体？",
+      "a": "每次先求值条件表达式，只有条件结果为 true 时才执行循环体。"
+    },
+    {
+      "q": "break 和 continue 的区别是什么？",
+      "a": "`break` 立即跳出循环；`continue` 返回循环顶部并重新求值循环条件。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [],
+  "source_pages": [
+    61,
+    61
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "104_while_循环",
+  "_chunk_pages": [
+    61,
+    64
+  ]
+}

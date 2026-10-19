@@ -1,0 +1,45 @@
+{
+  "title": "自定义智能指针的解引用运算符 operator*",
+  "definition": "类可以通过定义成员函数 `operator*`，使其对象支持一元解引用运算符 `*`。对于保存对象指针的智能指针，`operator*` 通常返回被指向对象本身的引用，因此表达式 `*smartInt` 可以像普通对象一样使用被管理对象。原文示例中的实现为 `T& operator*() const { return *m_ptr; }`。",
+  "key_points": [
+    "`operator*` 是用于重载一元解引用运算符 `*` 的成员函数。",
+    "返回类型为 `T&` 时，解引用结果是被管理对象的引用，可以读取或修改该对象。",
+    "成员函数末尾的 `const` 表示解引用操作不会修改智能指针对象本身。",
+    "示例：`cout << *smartInt << endl;` 表示对智能指针解引用后输出所指向的整数。"
+  ],
+  "examples": [
+    "```cpp\nT& operator*() const { return *m_ptr; }\n\nPointer<int> smartInt{new int};\n*smartInt = 5;\ncout << *smartInt << endl;\n```",
+    "如果 `smartCell` 管理一个 `SpreadsheetCell` 对象，则 `*smartCell` 表示该 `SpreadsheetCell` 对象本身，而不是指针地址。"
+  ],
+  "misconceptions": [
+    "`operator*` 返回的是被管理对象，而不是另一个智能指针。",
+    "`const` 修饰该成员函数并不意味着返回的 `T&` 一定是常量引用；原文给出的返回类型是 `T&`。",
+    "定义了 `operator*` 后，并不自动获得成员访问运算符 `->` 的重载能力，二者需要分别定义。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "自定义智能指针中的 `operator*() const { return *m_ptr; }` 的作用是什么？",
+      "a": "它重载一元解引用运算符 `*`，返回内部指针 `m_ptr` 所指向对象的引用，使得 `*smartInt` 可以直接访问被管理对象。"
+    },
+    {
+      "q": "为什么 `operator*` 常返回 `T&` 而不是 `T`？",
+      "a": "返回 `T&` 可以避免复制被管理对象，并允许调用者通过解引用结果访问或修改原对象。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++成员函数运算符重载",
+    "指针与引用"
+  ],
+  "source_pages": [
+    485,
+    486
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "627_自定义智能指针的解引用运算符_operator",
+  "_chunk_pages": [
+    485,
+    488
+  ]
+}

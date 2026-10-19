@@ -1,0 +1,37 @@
+{
+  "title": "CSS概述",
+  "definition": "层叠样式表（Cascading Style Sheets，缩写为 CSS）是一种样式表语言，用来描述 HTML 文档的呈现方式。它负责规定网页元素在屏幕、纸质（打印）等媒体上的渲染效果，并体现 HTML 负责内容、CSS 负责形式的分离思想。",
+  "key_points": [
+    "CSS 用来描述 HTML 文档的呈现方式。",
+    "CSS 不只用于屏幕，也可用于打印等媒体。",
+    "HTML 组织结构和内容，CSS 决定表现形式，二者分离。"
+  ],
+  "examples": [
+    "HTML 负责网页内容，CSS 负责页面样式。"
+  ],
+  "misconceptions": [
+    "CSS 不是用来组织网页结构或存放内容的。",
+    "CSS 的作用不只限于屏幕显示，也包括打印等媒体。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "CSS 的主要作用是什么？",
+      "a": "CSS 用来描述 HTML 文档的呈现方式，决定元素如何被渲染。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "HTML基础"
+  ],
+  "source_pages": [
+    85,
+    88
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "107_css概述",
+  "_chunk_pages": [
+    85,
+    88
+  ]
+}

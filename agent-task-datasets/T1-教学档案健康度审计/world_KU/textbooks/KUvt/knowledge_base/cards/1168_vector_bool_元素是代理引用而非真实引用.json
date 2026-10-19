@@ -1,0 +1,44 @@
+{
+  "title": "vector<bool>元素是代理引用而非真实引用",
+  "definition": "vector<bool>的operator[]、at()等访问操作返回的不是实际bool对象的普通引用，而是vector<bool>特化中名为reference的代理类对象。该代理对象代表底层存储的某一位，并负责对该位进行读取或修改。",
+  "key_points": [
+    "vector<bool>::reference是底层布尔位的代理。",
+    "访问vector<bool>元素时，得到的是代理对象，而不是普通bool&。",
+    "由于不存在可直接指向实际布尔元素的普通对象地址，不能像普通vector元素那样取得容器中实际元素的指针。",
+    "代理机制是vector<bool>按位存储的结果。"
+  ],
+  "examples": [
+    "普通vector<int>通常可以使用auto p = &values[0]取得元素地址；但不能据此对vector<bool>的元素使用同样的理解，因为flags[0]返回的是代理引用。",
+    "将vector<bool>元素用于读取或赋值时，代理对象会表现得类似bool，但它并不是真实的bool引用。"
+  ],
+  "misconceptions": [
+    "vector<bool>::reference不是bool&的别名。",
+    "虽然vector<bool>元素在表达式中通常表现得像bool，但不能据此推断其具有普通bool对象的地址。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "vector<bool>的operator[]返回什么？",
+      "a": "返回vector<bool>特化定义的reference代理对象，该对象代表底层的一个布尔位。"
+    },
+    {
+      "q": "为什么不能获取vector<bool>中实际元素的指针？",
+      "a": "因为元素按位打包存储，访问结果是代理对象，并不存在可供普通指针直接指向的独立bool元素对象。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "vector<bool>的空间优化特化",
+    "C++引用与指针"
+  ],
+  "source_pages": [
+    566,
+    566
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1168_vector_bool_元素是代理引用而非真实引用",
+  "_chunk_pages": [
+    565,
+    568
+  ]
+}

@@ -1,0 +1,53 @@
+{
+  "title": "CableCompany中通过重载和辅助函数复用实现",
+  "definition": "CableCompany的实现通过重载函数和辅助函数减少重复代码：字符串形式的套餐会被转换为 `bitset` 后转发给 `bitset` 形式的重载；使用套餐创建客户时先查询套餐，再转发给接收 `bitset` 的客户创建函数；客户频道查询则通过一个非 `const` 辅助函数复用 `const` 查询函数的查找逻辑。",
+  "key_points": [
+    "字符串套餐接口可以构造 `bitset<NumChannels>`，再调用接收 `bitset` 的 `addPackage` 重载。",
+    "使用套餐创建客户时，先调用 `getPackage(package)` 获取套餐频道，再调用 `newCustomer(name, packageChannels)`。",
+    "使用 `map::emplace` 插入客户时，可以通过返回的结构化绑定判断插入是否成功。",
+    "客户已存在时，`emplace` 返回的成功标志为假；此时抛出 `invalid_argument`。",
+    "非 `const` 的客户频道辅助函数可以转发到 `const` 版本，以复用查找和异常处理逻辑，然后通过 `const_cast` 返回可修改引用。",
+    "`set`、`reset` 和 `|=` 分别用于客户频道的增加、删除和套餐合并。"
+  ],
+  "examples": [
+    "插入客户并检查结果的核心逻辑可表示为：`auto [iter, success] = m_customers.emplace(name, channels); if (!success) { throw std::invalid_argument{\"Duplicate customer\"}; }`。",
+    "添加套餐到客户的核心逻辑为：`auto& packageChannels = getPackage(package); auto& customerChannels = getCustomerChannelsHelper(name); customerChannels |= packageChannels;`。"
+  ],
+  "misconceptions": [
+    "`emplace` 遇到重复键时不会自动覆盖原有客户记录；原文实现通过成功标志判断重复并抛出异常。",
+    "`const_cast` 在这里不是为了绕过任意对象的常量限制，而是让非 `const` 查询复用 `const` 查询逻辑；这种写法要求实际对象本身不是 `const`。",
+    "字符串重载的作用是转换输入形式并复用已有实现，不是重新实现一套独立的套餐逻辑。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么字符串版本的 `addPackage` 可以调用 `bitset` 版本的 `addPackage`？",
+      "a": "因为它先用字符串构造 `bitset<NumChannels>`，再将该 `bitset` 传给另一个重载，从而复用实现。"
+    },
+    {
+      "q": "如何通过 `emplace` 判断客户是否已存在？",
+      "a": "检查 `emplace` 返回结果中的成功标志；成功标志为假表示键已存在，此时抛出 `invalid_argument`。"
+    },
+    {
+      "q": "`addPackageToCustomer` 如何实现套餐与客户频道的合并？",
+      "a": "先分别获取套餐和客户的 `bitset`，然后执行 `customerChannels |= packageChannels`。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "CableCompany类的套餐和客户管理接口",
+    "函数重载",
+    "std::map::emplace",
+    "const与非const成员函数"
+  ],
+  "source_pages": [
+    603,
+    604
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1244_cablecompany中通过重载和辅助函数复用实现",
+  "_chunk_pages": [
+    601,
+    604
+  ]
+}

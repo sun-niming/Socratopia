@@ -1,0 +1,42 @@
+{
+  "title": "TCP重传超时间隔的计算",
+  "definition": "TCP将重传超时间隔设置为预计往返时间与波动余量之和：$$\\text{TimeoutInterval}=\\text{EstimatedRTT}+4\\cdot\\text{DevRTT}$$其中，EstimatedRTT反映往返时延的估计值，DevRTT反映往返时延的波动程度。超时间隔应略大于EstimatedRTT，以避免不必要的重传；但也不应过大，以便报文段丢失后能及时重传。",
+  "key_points": [
+    "当往返时延波动较大时，DevRTT较大，超时间隔中的余量也较大。",
+    "推荐的初始TimeoutInterval值为1秒。",
+    "发生超时后，TCP会将超时间隔加倍；但收到报文段并更新EstimatedRTT后，会重新使用上述公式计算超时间隔。"
+  ],
+  "examples": [
+    "若$\\text{EstimatedRTT}=0.5$秒、$\\text{DevRTT}=0.1$秒，则$$\\text{TimeoutInterval}=0.5+4\\times0.1=0.9\\text{秒}.$$"
+  ],
+  "misconceptions": [
+    "超时间隔不是简单地等于EstimatedRTT。",
+    "超时后并非永久使用加倍后的值；在更新EstimatedRTT和DevRTT后，会重新按公式计算。",
+    "DevRTT越大并不表示网络一定发生了丢包，它表示往返时延波动较大。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "TCP如何根据EstimatedRTT和DevRTT计算重传超时间隔？",
+      "a": "使用公式$$\\text{TimeoutInterval}=\\text{EstimatedRTT}+4\\cdot\\text{DevRTT}.$$"
+    },
+    {
+      "q": "为什么往返时延波动较大时要设置更大的超时间隔余量？",
+      "a": "因为时延波动较大时，实际往返时间更可能明显高于EstimatedRTT；增大余量可以减少不必要的过早重传。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "TCP往返时间估计"
+  ],
+  "source_pages": [
+    177,
+    180
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "430_tcp重传超时间隔的计算",
+  "_chunk_pages": [
+    177,
+    180
+  ]
+}

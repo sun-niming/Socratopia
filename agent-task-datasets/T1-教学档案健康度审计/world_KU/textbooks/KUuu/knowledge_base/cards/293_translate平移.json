@@ -1,0 +1,41 @@
+{
+  "title": "translate平移",
+  "definition": "translate是2D变换中的平移方法，用于沿X轴和Y轴移动元素。",
+  "key_points": [
+    "第一个参数表示X轴方向的位移",
+    "第二个参数表示Y轴方向的位移",
+    "参数可以写成长度值"
+  ],
+  "examples": [
+    "transform:translate(50px,50px); /*沿X轴移动50px，Y轴移动50px*/"
+  ],
+  "misconceptions": [
+    "translate只会沿一个方向移动。",
+    "translate的两个参数顺序可以随意交换。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "transform:translate(50px,50px)表示什么？",
+      "a": "沿X轴移动50px，沿Y轴移动50px。"
+    },
+    {
+      "q": "translate主要用于什么操作？",
+      "a": "用于移动元素。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "2D变换"
+  ],
+  "source_pages": [
+    197,
+    200
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "293_translate平移",
+  "_chunk_pages": [
+    197,
+    200
+  ]
+}

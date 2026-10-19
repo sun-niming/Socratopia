@@ -1,0 +1,45 @@
+{
+  "title": "filesystem 文件系统操作与空间信息",
+  "definition": "`std::filesystem` 提供文件系统操作函数，包括复制、创建目录、判断存在性、获取文件大小、获取最后写入时间、删除文件或目录、获取临时目录路径以及查询磁盘空间。原文还展示了通过 `space()` 获取指定路径的空间信息，并读取 `space_info.capacity` 输出容量。",
+  "key_points": [
+    "原文列出的文件系统函数包括 `copy()`、`create_directory()`、`exists()`、`file_size()`、`last_write_time()`、`remove()` 和 `temp_directory_path()`。",
+    "`space()` 用于查询指定路径对应文件系统的空间信息。",
+    "`space_info` 对象包含 `capacity` 等空间字段；原文示例输出 `s.capacity`。",
+    "示例形式为：`space_info s{space(\"c:\\\\\")}; cout << \"Capacity: \" << s.capacity << endl;`。"
+  ],
+  "examples": [
+    "查询 Windows `C:\\` 所在文件系统的容量：`space_info s{space(\"c:\\\\\")}; cout << \"Capacity: \" << s.capacity << endl;`。",
+    "文件系统操作可按功能分类：$$\\{copy,create\\_directory,remove\\}\\rightarrow\\text{修改文件系统}$$ $$\\{exists,file\\_size,last\\_write\\_time\\}\\rightarrow\\text{查询目录项属性}$$"
+  ],
+  "misconceptions": [
+    "`file_size()` 查询的是文件大小，不是磁盘总容量。",
+    "`space()` 返回的是文件系统空间信息，不是单个文件的内容。",
+    "`remove()` 与 `copy()` 会影响文件系统对象，应区分查询函数和修改函数。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何使用 `space()` 输出指定磁盘的容量？",
+      "a": "先构造 `space_info`：`space_info s{space(\"c:\\\\\")};`，再输出 `s.capacity`。"
+    },
+    {
+      "q": "原文列出了哪些文件系统操作函数？",
+      "a": "包括 `copy()`、`create_directory()`、`exists()`、`file_size()`、`last_write_time()`、`remove()` 和 `temp_directory_path()`。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "std::filesystem::path",
+    "文件系统基本概念"
+  ],
+  "source_pages": [
+    429,
+    432
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 std::filesystem space_info capacity space c drive example copy create_directory file_size last_write_time remove temp_directory_path",
+  "concept_id": "566_filesystem_文件系统操作与空间信息",
+  "_chunk_pages": [
+    429,
+    432
+  ]
+}

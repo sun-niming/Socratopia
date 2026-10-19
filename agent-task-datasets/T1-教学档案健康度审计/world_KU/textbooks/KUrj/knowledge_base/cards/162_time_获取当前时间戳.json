@@ -1,0 +1,44 @@
+{
+  "title": "time 获取当前时间戳",
+  "definition": "`time` 函数用于获取当前时间戳。其原型为 `time_t time(time_t *tloc);`，成功时返回秒级时间，失败时返回 `-1`。在该项目中，它用于生成日志时间。",
+  "key_points": [
+    "头文件是 `<time.h>`。",
+    "原型是 `time_t time(time_t *tloc);`。",
+    "成功返回秒级时间，失败返回 `-1`。",
+    "项目里应在每次写日志时获取当前时间，避免日志没有时间戳。"
+  ],
+  "examples": [
+    "`time_t now = time(NULL);`"
+  ],
+  "misconceptions": [
+    "误以为时间戳一定是毫秒级。",
+    "误以为只在程序启动时取一次时间就够了。",
+    "误以为 `time` 只能用于业务逻辑，不能用于日志。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`time` 函数在这个项目中的作用是什么？",
+      "a": "用于获取当前时间戳，生成日志时间。"
+    },
+    {
+      "q": "`time` 成功和失败分别返回什么？",
+      "a": "成功返回秒级时间，失败返回 `-1`。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C 语言基础",
+    "时间戳概念"
+  ],
+  "source_pages": [
+    105,
+    108
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "162_time_获取当前时间戳",
+  "_chunk_pages": [
+    105,
+    108
+  ]
+}

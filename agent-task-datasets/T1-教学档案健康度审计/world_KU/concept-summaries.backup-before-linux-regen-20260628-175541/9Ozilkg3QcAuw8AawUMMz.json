@@ -1,0 +1,125 @@
+{
+  "conversationId": "9Ozilkg3QcAuw8AawUMMz",
+  "generatedAt": 1781081613153,
+  "pagesRange": null,
+  "sections": [
+    {
+      "type": "tldr",
+      "content": "本节课把 Linux 中“压缩 vs 归档”、磁盘挂载、用户/进程管理和文件权限的基础命令串起来，重点是分清命令动作、参数位置和是否会改变系统状态。"
+    },
+    {
+      "type": "narrative",
+      "content": "一开始从 `gzip`、`bzip2` 的默认行为切入，理解压缩会替换原文件，而 `tar` 的核心是先“打包”。随后练习了磁盘、用户、进程相关命令，几次把参数位置或拼写纠正回来，最后进入 `ls -l` 权限字符串的阅读。"
+    },
+    {
+      "type": "concepts",
+      "items": [
+        {
+          "name": "压缩：`gzip` / `bzip2`",
+          "body": "- `gzip a.txt`：默认生成 `a.txt.gz`，原来的 `a.txt` 通常不保留。\n- `bzip2 a.txt`：默认生成 `a.txt.bz2`，原来的 `a.txt` 通常不保留。\n- `bunzip2 a.txt.bz2`：解压后恢复成 `a.txt`，默认不保留原来的 `.bz2` 文件。\n- 如果想保留原文件，可以先用 `cp` 复制一份，再压缩副本：\n\n```bash\\ncp a.txt a_copy.txt\\ngzip a_copy.txt\n```\n\n结果是 `a.txt` 仍在，另外得到 `a_copy.txt.gz`。"
+        },
+        {
+          "name": "归档：`tar` 是打包，不只是变小",
+          "body": "`tar` 的核心动作是把多个文件或目录收进一个归档文件里，像“装进袋子”。压缩只是可以额外叠加的一层。\n\n常见选项：\n\n- `c`：create，创建归档\n- `x`：extract，展开/解包归档\n- `z`：配合 `gzip`\n- `j`：配合 `bzip2`\n- `v`：verbose，显示过程\n- `f`：后面跟归档文件名\n\n例子：\n\n```bash\\ntar cf files.tar a.txt b.txt c.txt\n```\n\n表示创建 `files.tar`，里面装入三个文件。\n\n```bash\\ntar xf files.tar\n```\n\n表示把 `files.tar` 解包到当前目录。"
+        },
+        {
+          "name": "`tar` 中的 `v`：只影响显示，不影响结果",
+          "body": "`v` 表示 verbose，会把正在打包或解包的文件名打印出来。\n\n```bash\\ntar cvf files.tar a.txt b.txt\\ntar cf files.tar a.txt b.txt\n```\n\n这两条命令最后生成的归档内容一样；区别只是第一条会显示正在处理哪些文件，第二条更安静。\n\n解包时也是一样：\n\n```bash\\ntar xvf files.tar\n```\n\n会一边解包，一边显示正在取出的文件名。"
+        },
+        {
+          "name": "创建与解开压缩归档",
+          "body": "创建归档时，需要写明要装进去的文件或目录；解包时，通常只需要写归档文件名，因为里面包含了文件清单。\n\n`gzip` 版本：\n\n```bash\\ntar czf project.tar.gz project/\\ntar xzf project.tar.gz\n```\n\n`bzip2` 版本：\n\n```bash\\ntar cjf project.tar.bz2 project/\\ntar xjf project.tar.bz2\n```\n\n记忆：`.tar.gz` 对应 `z`，`.tar.bz2` 对应 `j`。"
+        },
+        {
+          "name": "磁盘操作：查看、格式化、挂载、卸载",
+          "body": "这一组命令要特别注意危险程度：\n\n```bash\\nfdisk -l\n```\n\n查看磁盘和分区信息，偏“只读查看”。\n\n```bash\\nmkfs /dev/sdb1\n```\n\n给分区创建文件系统，效果接近“格式化”，会改动分区内容，要小心。\n\n```bash\\nmount /dev/sdb1 /mnt\n```\n\n把 `/dev/sdb1` 挂载到 `/mnt`，之后访问 `/mnt` 就像访问这个分区里的内容。\n\n```bash\\numount /mnt\n```\n\n把分区从 `/mnt` 这个目录上卸下来。注意命令是 `umount`，不是 `unmount`，也不是 `umouunt`。\n\n完整顺序示例：\n\n```bash\\nmkfs /dev/sdb1\\nmount /dev/sdb1 /mnt\\numount /mnt\n```\n\n这里不能用管道 `|`，因为 `mount` 需要设备名参数，不是 `mkfs` 的输出文本。"
+        },
+        {
+          "name": "用户管理与切换身份",
+          "body": "基础用户管理命令：\n\n```bash\\nuseradd alice\\npasswd alice\\nuserdel alice\n```\n\n含义分别是添加用户、设置或修改密码、删除用户。\n\n补充：\n\n```bash\\nuserdel -r alice\n```\n\n通常表示连同用户主目录等相关文件一起删除，更彻底，也更危险。\n\n切换身份：\n\n```bash\\nsu\n```\n\n不写用户名时，默认切换到 `root`。\n\n```bash\\nsu alice\n```\n\n临时切换到 `alice`。\n\n```bash\\nsu - alice\n```\n\n更像完整登录成 `alice`，会连同登录 shell 环境一起切换，例如工作目录、环境变量等。"
+        },
+        {
+          "name": "查看在线用户：`who` 和 `w`",
+          "body": "```bash\\nwho\n```\n\n简洁查看当前有哪些用户在线。\n\n```bash\\nw\n```\n\n显示更多信息，通常包括用户在做什么、系统负载等。\n\n如果只是简单看谁在线，优先用 `who`。"
+        },
+        {
+          "name": "进程管理：`ps`、`top`、`kill`、`&`",
+          "body": "进程可以先理解成“正在运行的程序或任务”。\n\n```bash\\nps -aux\n```\n\n像拍一张“进程照片”，查看当前系统中的进程。\n\n```bash\\ntop\n```\n\n像实时监控屏，动态查看进程和系统状态。\n\n```bash\\nkill -9 5678\n```\n\n用强制结束信号杀死 PID 为 `5678` 的进程。注意：`-9` 是信号，后面的 `5678` 才是 PID；不要写成把 PID 放到横杠后面。\n\n后台执行：\n\n```bash\\nsleep 100 &\n```\n\n`&` 放在命令后面，会让前面的命令进入后台执行，终端提示符很快回来，可以继续输入别的命令。后台命令不一定完全“静默”，如果它有输出，仍可能打印到终端。"
+        },
+        {
+          "name": "文件权限字符串：`ls -l` 与 `drwxr-xr-x`",
+          "body": "```bash\\nls -l\n```\n\n用于查看文件或目录的详细信息，其中很重要的一段是权限字符串，例如：\n\n```bash\\ndrwxr-xr-x\n```\n\n含义：\n\n- 第一位 `d`：表示这是目录。\n- 后面九位分三组：所有者、所属组、其他人。\n- 每组三位对应 `rwx`：读、写、执行。\n- `-` 表示没有对应权限。\n\n在 `drwxr-xr-x` 中：\n\n- 所有者权限：`rwx`\n- 所属组权限：`r-x`\n- 其他人权限：`r-x`\n\n其中 `r-x` 缺少的是写权限 `w`。"
+        }
+      ]
+    },
+    {
+      "type": "key-insight",
+      "content": "“直接 `sleep 100` 会直接睡眠 100 秒，我明白了，`&` 放在后面对前面的命令生效，让其以后台进程执行，不占用命令行。”",
+      "attribution": "学习者"
+    },
+    {
+      "type": "key-terms",
+      "items": [
+        {
+          "term": "压缩",
+          "definition": "把文件内容变小；如 `gzip`、`bzip2` 默认会生成压缩文件并替换原文件。"
+        },
+        {
+          "term": "归档",
+          "definition": "把多个文件或目录打包进一个归档文件；`tar` 的核心动作就是归档。"
+        },
+        {
+          "term": "挂载",
+          "definition": "把分区设备连接到某个目录上，使访问该目录时进入该分区内容。"
+        },
+        {
+          "term": "卸载",
+          "definition": "把已经挂到目录上的分区分离下来；命令是 `umount`。"
+        },
+        {
+          "term": "PID",
+          "definition": "进程编号，用来唯一定位某个正在运行的进程。"
+        },
+        {
+          "term": "后台执行",
+          "definition": "命令继续运行，但不占住当前终端输入；常用 `&` 放在命令末尾。"
+        },
+        {
+          "term": "权限字符串",
+          "definition": "`ls -l` 中类似 `drwxr-xr-x` 的字段，用来表示文件类型及所有者、所属组、其他人的权限。"
+        }
+      ]
+    },
+    {
+      "type": "review-questions",
+      "items": [
+        {
+          "question": "执行 `bzip2 a.txt` 后，默认会留下什么文件？原来的 `a.txt` 还在吗？",
+          "hint": "想想 `gzip` 和 `bzip2` 的默认习惯。",
+          "answer": "默认留下 `a.txt.bz2`，原来的 `a.txt` 通常不保留。"
+        },
+        {
+          "question": "把目录 `project/` 打包并用 `gzip` 压缩成 `project.tar.gz`，命令怎么写？",
+          "answer": "```bash\\ntar czf project.tar.gz project/\n```"
+        },
+        {
+          "question": "解开 `files.tar.bz2` 应该使用 `z` 还是 `j`？完整命令是什么？",
+          "hint": "`.tar.gz` 对应 `z`，`.tar.bz2` 对应另一个。",
+          "answer": "使用 `j`，因为它对应 `bzip2`：\n\n```bash\\ntar xjf files.tar.bz2\n```"
+        },
+        {
+          "question": "为什么 `mkfs /dev/sdb1 | mount {} /mnt` 不合适？正确的三步是什么？",
+          "answer": "管道 `|` 是把前一个命令的输出文本交给后一个命令，但 `mount` 需要明确的设备名和挂载点，不是 `mkfs` 输出的文字；`{}` 也不是这里使用的占位符。\n\n正确写法：\n\n```bash\\nmkfs /dev/sdb1\\nmount /dev/sdb1 /mnt\\numount /mnt\n```"
+        },
+        {
+          "question": "如果 PID 是 `8888`，强制杀死它的命令是什么？",
+          "answer": "```bash\\nkill -9 8888\n```\n\n其中 `-9` 是强制结束信号，`8888` 是目标进程的 PID。"
+        },
+        {
+          "question": "在权限字符串 `drwxr-xr-x` 中，`r-x` 缺少哪个权限？",
+          "answer": "缺少写权限 `w`。`r-x` 表示有读权限 `r` 和执行权限 `x`，没有写权限。"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "title": "标准库算法所在的头文件和命名空间",
+  "definition": "标准库算法主要定义在 `<algorithm>` 头文件中，少数算法定义在 `<numeric>` 头文件中；这些算法位于 `std` 命名空间中。",
+  "key_points": [
+    "使用一般算法时通常需要包含 `<algorithm>`。",
+    "少数数值相关算法定义在 `<numeric>`。",
+    "这些标准库算法使用 `std::` 命名空间限定。"
+  ],
+  "examples": [
+    "```cpp\n#include <algorithm>\n#include <numeric>\n\nstd::sort(values.begin(), values.end());\n```\n其中 `std::sort` 来自 `std` 命名空间；数值算法则可能需要包含 `<numeric>`。"
+  ],
+  "misconceptions": [
+    "并非所有标准库算法都定义在同一个头文件中，少数算法位于 `<numeric>`。",
+    "算法位于 `std` 命名空间，通常应写作 `std::算法名`，除非使用了适当的 using 声明。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "大多数标准库算法定义在哪个头文件中？",
+      "a": "大多数定义在 `<algorithm>` 中。"
+    },
+    {
+      "q": "少数标准库算法定义在哪个头文件中？",
+      "a": "少数算法定义在 `<numeric>` 中。"
+    },
+    {
+      "q": "标准库算法位于哪个命名空间？",
+      "a": "位于 `std` 命名空间。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++头文件",
+    "命名空间"
+  ],
+  "source_pages": [
+    628,
+    628
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1301_标准库算法所在的头文件和命名空间",
+  "_chunk_pages": [
+    625,
+    628
+  ]
+}

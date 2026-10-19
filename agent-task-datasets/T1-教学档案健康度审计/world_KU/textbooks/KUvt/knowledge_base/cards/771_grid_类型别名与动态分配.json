@@ -1,0 +1,45 @@
+{
+  "title": "Grid 类型别名与动态分配",
+  "definition": "可以使用 `using` 为具体的 `Grid` 实例化类型定义更短的别名，例如 `using IntGrid = Grid<int>;`。此外，`Grid<T>` 实例也可以在自由存储区上动态分配，并通过智能指针访问。",
+  "key_points": [
+    "类型别名只提供另一个名称，不会创建新的独立类型。",
+    "`using IntGrid = Grid<int>;` 可以简化函数参数和变量声明。",
+    "动态分配时可以使用 `std::make_unique<Grid<int>>(2, 2)`。",
+    "通过 `unique_ptr` 访问网格对象时使用 `->`。"
+  ],
+  "examples": [
+    "类型别名：`using IntGrid = Grid<int>;`。",
+    "使用别名声明函数：`void processIntGrid(IntGrid& grid) { }`。",
+    "动态分配 2×2 网格：`auto myGridOnHeap { std::make_unique<Grid<int>>(2, 2) };`。",
+    "访问动态分配的网格：`myGridOnHeap->at(0, 0) = 10;`。"
+  ],
+  "misconceptions": [
+    "类型别名不会把 `Grid<int>` 变成另一种元素类型；`IntGrid` 仍然就是 `Grid<int>`。",
+    "动态分配不是使用 `new` 后手动管理内存的唯一方式；教材示例使用 `std::make_unique` 管理对象生命周期。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何为 `Grid<int>` 定义更短的名称？",
+      "a": "使用 `using IntGrid = Grid<int>;`。"
+    },
+    {
+      "q": "如何动态创建一个 2×2 的 `Grid<int>`？",
+      "a": "使用 `auto myGridOnHeap { std::make_unique<Grid<int>>(2, 2) };`。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "类模板的实例化与类型限制"
+  ],
+  "source_pages": [
+    380,
+    380
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "771_grid_类型别名与动态分配",
+  "_chunk_pages": [
+    377,
+    380
+  ]
+}

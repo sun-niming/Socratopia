@@ -1,0 +1,50 @@
+{
+  "title": "for_each 对范围内每个元素执行回调",
+  "definition": "for_each() 对给定范围内的每个元素调用一次指定的函数或 lambda 回调。如果传入的迭代器允许修改元素，并且回调参数使用非 const 引用，则回调可以修改范围中的实际元素。使用 const 迭代器或 const 引用时，只能读取元素。",
+  "key_points": [
+    "基本形式为 for_each(首迭代器, 尾迭代器, 回调)。",
+    "回调会依次处理范围内的每个元素。",
+    "回调参数使用非 const 引用，例如 [](auto& value){ value *= 2; }，可以修改容器元素。",
+    "基于范围的 for 循环通常比 for_each() 更简单、更容易理解，但已有代码中仍可能使用 for_each()。"
+  ],
+  "examples": [
+    "for_each(cbegin(myMap), cend(myMap), [](const auto& p){ cout << p.first << \"->\" << p.second << endl; });",
+    "for_each(begin(values), end(values), [](auto& value) { value *= 2; });",
+    "for_each(cbegin(values), cend(values), [](const auto& value) { cout << value << endl; });"
+  ],
+  "misconceptions": [
+    "for_each() 默认不会改变元素；只有回调通过可修改的引用访问元素时才会修改。",
+    "使用 cbegin() 和 cend() 时，回调不能通过非 const 引用修改元素。",
+    "for_each() 不是专门用于求和或求积的算法，求和、求积逻辑需要由回调或其他对象自行实现。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "for_each() 对范围做什么？",
+      "a": "对范围内的每个元素执行一次指定回调。"
+    },
+    {
+      "q": "如何用 for_each() 将 vector 中每个元素翻倍？",
+      "a": "使用可修改引用作为回调参数，例如 for_each(begin(values), end(values), [](auto& value){ value *= 2; });。"
+    },
+    {
+      "q": "为什么示例打印 map 元素时使用 const auto&？",
+      "a": "因为示例只读取 map 元素，并且通过 cbegin()/cend() 获得的是常量迭代器。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "lambda 表达式",
+    "迭代器范围表示法"
+  ],
+  "source_pages": [
+    646,
+    647
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1349_for_each_对范围内每个元素执行回调",
+  "_chunk_pages": [
+    645,
+    648
+  ]
+}

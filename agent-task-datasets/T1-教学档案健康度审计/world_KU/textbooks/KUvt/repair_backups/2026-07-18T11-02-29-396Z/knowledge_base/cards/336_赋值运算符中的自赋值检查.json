@@ -1,0 +1,43 @@
+{
+  "title": "赋值运算符中的自赋值检查",
+  "definition": "当类对象执行赋值操作时，可能出现对象给自身赋值的情况，例如 `cell = cell;`。自定义赋值运算符通常先比较当前对象地址 `this` 与右侧参数地址 `&rhs`；如果二者相同，说明发生了自赋值，应直接返回当前对象，避免不必要的成员复制或潜在的数据破坏。",
+  "key_points": [
+    "自赋值示例为 `SpreadsheetCell cell{4}; cell = cell;`。",
+    "自定义赋值运算符可以使用 `if (this == &rhs)` 判断左右两侧是否为同一个对象。",
+    "赋值运算符通常返回 `*this`，即当前对象本身，以支持连续赋值等用法。"
+  ],
+  "examples": [
+    "典型实现：\n```cpp\nSpreadsheetCell& SpreadsheetCell::operator=(const SpreadsheetCell& rhs)\n{\n    if (this == &rhs) {\n        return *this;\n    }\n    m_value = rhs.m_value;\n    return *this;\n}\n```"
+  ],
+  "misconceptions": [
+    "`this` 是当前对象的指针，而 `*this` 才是当前对象本身。",
+    "自赋值不是把对象复制给另一个对象，而是同一个对象同时出现在赋值运算符的左右两侧。",
+    "判断自赋值时比较的是地址，即 `this == &rhs`，而不是简单比较两个对象的值。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何判断 `SpreadsheetCell` 的赋值操作是否为自赋值？",
+      "a": "在赋值运算符中判断 `this == &rhs`；成立时表示当前对象与右侧源对象是同一个对象。"
+    },
+    {
+      "q": "自定义赋值运算符在完成赋值后通常返回什么？",
+      "a": "返回 `*this`，即当前对象本身。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++类的成员函数",
+    "C++指针与引用"
+  ],
+  "source_pages": [
+    253,
+    256
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "336_赋值运算符中的自赋值检查",
+  "_chunk_pages": [
+    253,
+    256
+  ]
+}

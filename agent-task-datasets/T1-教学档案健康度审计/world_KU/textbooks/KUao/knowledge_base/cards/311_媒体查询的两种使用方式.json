@@ -1,0 +1,40 @@
+{
+  "title": "媒体查询的两种使用方式",
+  "definition": "在网页中使用媒体查询有两种方式：一种是在样式表中内嵌 @media 规则；另一种是在 link 标签中使用 media 属性。",
+  "key_points": [
+    "方式一：在样式表中使用 @media 编写条件样式。",
+    "方式二：在 <link> 中通过 media 属性指定适用条件。",
+    "同一页面可以针对不同屏幕宽度加载或应用不同样式。"
+  ],
+  "examples": [
+    "@media all and (max-width: 1024px) { /* 适合低分辨率桌面浏览器和横屏iPad */ }",
+    "@media all and (max-width: 768px) { /* 适合很低分辨率桌面浏览器和竖屏iPad */ }",
+    "<link rel=\"stylesheet\" type=\"text/css\" media=\"all and (max-width: 768px)\" href=\"ipad.css\"/>"
+  ],
+  "misconceptions": [
+    "媒体查询只能写在 CSS 文件里，不能写在 link 标签上。",
+    "media 属性只能用于屏幕，不能按条件关联样式表。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "媒体查询在网页中通常有哪两种使用方式？",
+      "a": "可以在样式表中内嵌 @media，也可以在 link 中使用 media 属性。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "CSS基础",
+    "媒体查询常用属性"
+  ],
+  "source_pages": [
+    225,
+    228
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "311_媒体查询的两种使用方式",
+  "_chunk_pages": [
+    225,
+    228
+  ]
+}

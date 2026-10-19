@@ -1,0 +1,39 @@
+{
+  "title": "call/apply显式绑定this",
+  "definition": "函数对象的call方法和apply方法可以在调用函数时显式指定this，使函数内部的this指向你传入的对象，而不是依赖默认的调用形式。",
+  "key_points": [
+    "call/apply都能改变函数调用时的this",
+    "它们适合把同一个函数临时借给别的对象使用",
+    "函数体不变，改变的是调用时的上下文"
+  ],
+  "examples": [
+    "sayHello.call(obj1)",
+    "sayHello.apply(obj1)"
+  ],
+  "misconceptions": [
+    "call/apply会修改函数源码",
+    "call和apply不能改变this"
+  ],
+  "qa_pairs": [
+    {
+      "q": "call和apply的作用是什么？",
+      "a": "它们可以在调用函数时显式指定this。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "this的基本含义",
+    "函数调用"
+  ],
+  "source_pages": [
+    262,
+    264
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "381_call_apply显式绑定this",
+  "_chunk_pages": [
+    261,
+    264
+  ]
+}

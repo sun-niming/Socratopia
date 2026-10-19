@@ -1,0 +1,44 @@
+{
+  "title": "命令行输入中的文件结束标记与 eof",
+  "definition": "输入流可能在没有更多数据可读时到达流尾，也称为文件结束（EOF）。在交互式命令行环境中，用户需要输入由操作系统规定的特殊组合来表示输入结束；原文列举 UNIX/Linux 中的 Control+D，以及 Windows 中的 Control+Z。",
+  "key_points": [
+    "EOF 不只适用于实际文件流，即使是标准输入流也可能到达流尾。",
+    "到达流尾后，通常通过 `eof()` 检测。",
+    "命令行中表示 EOF 的按键组合与操作系统有关。",
+    "程序应在读取后检查状态，而不是假设输入一定会持续成功。"
+  ],
+  "examples": [
+    "原文示例中，UNIX/Linux 使用 Control+D 表示结束；Windows 使用 Control+Z。",
+    "读取数字直到 EOF：`while (!cin.bad()) { cin >> number; if (cin.good()) { sum += number; } else if (cin.eof()) { break; } }`。"
+  ],
+  "misconceptions": [
+    "EOF 不是一个普通的数字或字符值，而是输入结束状态的概念。",
+    "不同操作系统表示交互式 EOF 的方式可能不同。",
+    "到达 EOF 后，不能继续把流当作正常输入流无条件读取。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "原文列举的 UNIX/Linux 和 Windows 命令行 EOF 组合分别是什么？",
+      "a": "UNIX/Linux 为 Control+D；Windows 为 Control+Z。具体操作还可能需要按回车，取决于环境。"
+    },
+    {
+      "q": "程序如何判断标准输入是否已经到达流尾？",
+      "a": "可以调用 `cin.eof()`，或者检查读取操作是否失败后再区分 `eof()` 与其他失败原因。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "通过输入流状态判断读取是否成功"
+  ],
+  "source_pages": [
+    418,
+    419
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "848_命令行输入中的文件结束标记与_eof",
+  "_chunk_pages": [
+    417,
+    420
+  ]
+}

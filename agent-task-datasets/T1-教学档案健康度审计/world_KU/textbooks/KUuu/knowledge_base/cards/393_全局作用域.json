@@ -1,0 +1,36 @@
+{
+  "title": "全局作用域",
+  "definition": "全局作用域是由整个 JavaScript 执行环境构成的作用域。",
+  "key_points": [
+    "全局作用域覆盖整个 JavaScript 执行环境。",
+    "处于全局作用域中的标识符在整个执行环境中都可被引用。"
+  ],
+  "examples": [
+    "由整个 JavaScript 执行环境构成的作用域就是全局作用域。"
+  ],
+  "misconceptions": [
+    "全局作用域不是某个函数内部的作用域。",
+    "全局作用域的范围最大，不局限于某个函数或某个代码块。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "全局作用域是什么？",
+      "a": "由整个 JavaScript 执行环境构成的作用域。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "变量作用域"
+  ],
+  "source_pages": [
+    269,
+    272
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "393_全局作用域",
+  "_chunk_pages": [
+    269,
+    272
+  ]
+}

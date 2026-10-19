@@ -1,0 +1,45 @@
+{
+  "title": "map元素访问、遍历与键不可修改",
+  "definition": "对于`std::map<Key, T>`，每个元素都是由键和值组成的键值对。通过迭代器访问时，`it->first`表示键，`it->second`表示值；使用结构化绑定或基于范围的`for`循环可以更直观地遍历元素。通过非`const`迭代器可以修改元素的值，但不能修改键，因为修改键会破坏`map`按键维护的排序结构。",
+  "key_points": [
+    "迭代器解引用后得到键值对，可以使用`(*it).second`或`it->second`访问值。",
+    "基于范围的`for`循环和结构化绑定可以简化遍历，例如`for (auto& [key, value] : dataMap)`。",
+    "可以修改`value`，但不能修改`key`；键在`map`中不能被改变。"
+  ],
+  "examples": [
+    "使用迭代器访问值：`(*iter).second.getValue()`，等价于`iter->second.getValue()`。",
+    "使用结构化绑定遍历：`for (auto& [key, data] : dataMap) { cout << data.getValue() << endl; }`。",
+    "在非`const`遍历中可以执行`data.setValue(100)`，但不能执行`key = 2`来修改键。"
+  ],
+  "misconceptions": [
+    "`map`元素的键和值都可以像普通变量一样修改；实际上键不能修改。",
+    "`(*iter).second`和`iter->second`访问的是不同对象；实际上二者等价。",
+    "结构化绑定会自动复制所有值；使用`auto&`时可以绑定到原元素并修改值。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "通过`map`迭代器访问元素时，`it->first`和`it->second`分别表示什么？",
+      "a": "`it->first`表示键，`it->second`表示值。"
+    },
+    {
+      "q": "为什么不能通过非`const`迭代器修改`map`元素的键？",
+      "a": "因为修改键会破坏`map`按键维护的排序结构。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "std::map的键值对结构",
+    "C++迭代器"
+  ],
+  "source_pages": [
+    585,
+    585
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1212_map元素访问_遍历与键不可修改",
+  "_chunk_pages": [
+    585,
+    588
+  ]
+}

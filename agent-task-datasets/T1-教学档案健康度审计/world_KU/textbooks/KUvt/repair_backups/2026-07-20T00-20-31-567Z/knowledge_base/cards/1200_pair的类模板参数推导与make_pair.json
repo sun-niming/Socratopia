@@ -1,0 +1,47 @@
+{
+  "title": "pair的类模板参数推导与make_pair",
+  "definition": "在支持类模板参数推导（CTAD）的C++17及以后版本中，可以根据初始化器推导pair的模板类型，从而省略键入的类型参数。也可以使用make_pair函数模板，根据传入的两个值构造pair。使用字符串字面量初始化string时，原文示例使用标准用户自定义字符串字面量后缀s。",
+  "key_points": [
+    "CTAD允许直接写pair myPair{\"hello\"s, 5};，其类型推导为pair<string, int>。",
+    "make_pair(5, 10.10)可以构造包含int和double的pair。",
+    "C++17引入CTAD支持之前，通常使用make_pair构造pair。",
+    "使用s后缀需要相应的标准字符串字面量支持，原文强调了该后缀。"
+  ],
+  "examples": [
+    "pair myPair{\"hello\"s, 5}; // 类型为pair<string, int>",
+    "pair<int, double> aPair = make_pair(5, 10.10);",
+    "auto pair2{make_pair(5, 10.10)};",
+    "pair pair3{5, 10.10}; // 使用CTAD"
+  ],
+  "misconceptions": [
+    "CTAD并不是所有版本的C++都支持；原文明确将其与C++17联系起来。",
+    "make_pair不是pair对象的成员函数，而是用于构造pair的函数模板。",
+    "省略模板参数并不意味着pair失去类型；编译器仍会根据初始化器推导出具体类型。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何使用CTAD构造一个pair<string, int>？",
+      "a": "可以写成pair myPair{\"hello\"s, 5};，编译器将类型推导为pair<string, int>。"
+    },
+    {
+      "q": "如何构造一个包含int和double的pair？",
+      "a": "可以写成pair<int, double> aPair = make_pair(5, 10.10);，也可以使用CTAD写成pair pair3{5, 10.10};。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "pair的基本使用",
+    "C++17类模板参数推导"
+  ],
+  "source_pages": [
+    581,
+    581
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1200_pair的类模板参数推导与make_pair",
+  "_chunk_pages": [
+    581,
+    584
+  ]
+}

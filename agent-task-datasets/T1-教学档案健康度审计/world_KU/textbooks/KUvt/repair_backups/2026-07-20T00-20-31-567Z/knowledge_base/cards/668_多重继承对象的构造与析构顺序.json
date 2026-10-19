@@ -1,0 +1,43 @@
+{
+  "title": "多重继承对象的构造与析构顺序",
+  "definition": "在多重继承中，创建派生类对象时，会按照类声明中基类出现的顺序自动调用各基类的默认构造函数；销毁派生类对象时，会按照该顺序的相反顺序自动调用各基类的析构函数。",
+  "key_points": [
+    "基类构造顺序由类定义中的基类列表顺序决定，而不是由构造函数初始化列表中的书写顺序决定。",
+    "例如 `class Baz : public Foo, public Bar` 创建对象时先构造 Foo，再构造 Bar。",
+    "销毁对象时先析构派生类自身部分，然后按基类声明顺序的逆序析构基类部分，即先 Bar，再 Foo。"
+  ],
+  "examples": [
+    "对于：\n```cpp\nclass Baz : public Foo, public Bar {};\n```\n基类部分的构造顺序是：\n$$Foo \\rightarrow Bar$$\n基类部分的析构顺序是：\n$$Bar \\rightarrow Foo$$"
+  ],
+  "misconceptions": [
+    "析构顺序不是与构造顺序相同，而是相反。",
+    "基类的构造顺序不是由基类名称的字母顺序决定，而是由类定义中列出的顺序决定。",
+    "多重继承中的每个基类子对象都会参与相应的构造和析构过程。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`class Baz : public Foo, public Bar` 创建对象时先调用哪个基类的默认构造函数？",
+      "a": "先调用 Foo 的默认构造函数，再调用 Bar 的默认构造函数。"
+    },
+    {
+      "q": "同一个 Baz 对象销毁时，Foo 和 Bar 的析构顺序是什么？",
+      "a": "先调用 Bar 的析构函数，再调用 Foo 的析构函数。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "构造函数与析构函数",
+    "多重继承"
+  ],
+  "source_pages": [
+    327,
+    327
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "668_多重继承对象的构造与析构顺序",
+  "_chunk_pages": [
+    325,
+    328
+  ]
+}

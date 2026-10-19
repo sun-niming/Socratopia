@@ -1,0 +1,43 @@
+{
+  "title": "C++继承中的基类与派生类",
+  "definition": "C++面向对象编程中，继承允许一个类基于另一个类构建。被继承的类称为基类（base class，也称父类或超类），继承基类的类称为派生类（derived class，也称子类）。例如，声明 `class Derived : public Base` 表示 `Derived` 以公有继承方式继承 `Base`。",
+  "key_points": [
+    "派生类可以获得基类中可继承的成员，并在此基础上增加自己的成员。",
+    "基类与派生类构成继承关系；同一个基类可以有多个派生类。",
+    "多个派生类都继承自同一个基类时，这些派生类彼此称为兄弟类（sibling classes），它们之间通常没有直接的继承关系。"
+  ],
+  "examples": [
+    "基类和派生类的声明：\n`class Base { /* ... */ };`\n`class Derived : public Base { /* ... */ };`",
+    "如果 `Derived1` 和 `Derived2` 都继承自 `Base`，则继承关系可表示为：\n$$\\begin{array}{c}\nBase\\\\\n/\\quad \\\\\nDerived1\\quad Derived2\n\\end{array}$$"
+  ],
+  "misconceptions": [
+    "派生类不是基类的别名，而是一个独立的类类型。",
+    "兄弟类之间不会因为共享同一个基类就自动互相继承成员。",
+    "继承并不意味着基类的所有成员都能被派生类直接访问，成员访问权限仍然受到 `public`、`protected` 和 `private` 的限制。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "在 `class Derived : public Base` 中，`Base` 和 `Derived` 分别是什么？",
+      "a": "`Base` 是基类，`Derived` 是以公有方式继承 `Base` 的派生类。"
+    },
+    {
+      "q": "如果 `Derived1` 和 `Derived2` 都继承自 `Base`，它们之间是什么关系？",
+      "a": "它们是兄弟类，二者都直接继承自 `Base`，但彼此不是直接的基类和派生类关系。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++类的基本声明"
+  ],
+  "source_pages": [
+    303,
+    304
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "393_c_继承中的基类与派生类",
+  "_chunk_pages": [
+    301,
+    304
+  ]
+}

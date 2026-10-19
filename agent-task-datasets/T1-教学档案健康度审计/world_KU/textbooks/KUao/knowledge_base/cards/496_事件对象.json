@@ -1,0 +1,41 @@
+{
+  "title": "事件对象",
+  "definition": "在 DOM 中发生事件时，相关信息会被收集并存储到一个名为 event 的对象中。事件处理函数通常会自动接收到这个对象，参数名常写作 event、evt 或 e。教材中强调：事件对象是传给事件处理程序的唯一参数。",
+  "key_points": [
+    "事件对象保存与事件有关的基本信息，例如触发事件的元素、事件类型以及其他相关数据。",
+    "事件处理函数中常见的参数名有 event、evt、e，这些只是习惯写法。",
+    "事件对象会自动传入事件处理函数，无需手动创建。"
+  ],
+  "examples": [
+    "button.addEventListener('click', function(event) { console.log(event.type); });"
+  ],
+  "misconceptions": [
+    "误以为事件处理函数可以随意接收多个事件对象参数；教材中说明事件对象是唯一参数。",
+    "误以为 event 只是变量名而不是事件对象本身。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "什么是事件对象？",
+      "a": "它是在 DOM 事件发生时保存相关信息的对象，事件处理函数会自动接收到它。"
+    },
+    {
+      "q": "事件处理函数中的 event、evt、e 分别表示什么？",
+      "a": "它们通常都是事件对象的参数名。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "DOM 事件基础"
+  ],
+  "source_pages": [
+    369,
+    372
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "496_事件对象",
+  "_chunk_pages": [
+    369,
+    372
+  ]
+}

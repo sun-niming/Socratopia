@@ -1,0 +1,45 @@
+{
+  "title": "vector迭代器的随机访问操作",
+  "definition": "vector迭代器是随机访问迭代器，可以向前或向后移动，也可以一次跳跃多个位置。常见操作包括使用it += n向后移动n个位置、使用--it向前移动一个位置，以及通过解引用表达式修改当前元素。",
+  "key_points": [
+    "随机访问迭代器支持加减偏移，不必逐步递增。",
+    "it += n会使迭代器向后移动n个元素位置。",
+    "要修改当前元素，应使用*it = value，而不是给迭代器对象本身赋值。"
+  ],
+  "examples": [
+    "一般形式：\n文本代码：auto it { begin(intVector) }; it += 5; --it; *it = 4;",
+    "上述操作中，若初始it指向索引0的元素，则it += 5后指向索引5，--it后指向索引4，最后将第5个元素（索引为4）的值设为4。"
+  ],
+  "misconceptions": [
+    "it += 5表示将当前元素的值增加5；实际上它移动的是迭代器位置。",
+    "给迭代器写it = 4就能修改当前元素；应通过解引用写成*it = 4。",
+    "所有容器的迭代器都支持随机跳跃；教材这里只明确说明vector迭代器具有随机访问能力。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何使用vector迭代器跳到索引为4的元素并将其设为4？",
+      "a": "可以写：auto it { begin(intVector) }; it += 5; --it; *it = 4。"
+    },
+    {
+      "q": "vector迭代器为什么称为随机访问迭代器？",
+      "a": "因为它不仅能逐步前进或后退，还能通过加减偏移量直接跳到任意位置。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "vector迭代器",
+    "迭代器算术运算",
+    "数组索引"
+  ],
+  "source_pages": [
+    556,
+    556
+  ],
+  "needs_verification": true,
+  "verify_query": "C++ vector random access iterator example it += 5 --it *it = 4 fifth element index 4",
+  "concept_id": "1144_vector迭代器的随机访问操作",
+  "_chunk_pages": [
+    553,
+    556
+  ]
+}

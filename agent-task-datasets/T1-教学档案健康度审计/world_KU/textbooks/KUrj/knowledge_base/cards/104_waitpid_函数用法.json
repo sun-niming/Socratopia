@@ -1,0 +1,38 @@
+{
+  "title": "waitpid 函数用法",
+  "definition": "`waitpid(pid_t pid, int *status, int options)` 用于等待或回收子进程。本讲义中常用 `pid=-1` 表示任意子进程，`status=NULL` 表示不关心退出状态，`options=WNOHANG` 表示非阻塞。返回值为：回收到的子进程 `pid`，`0` 表示当前没有已退出子进程，`-1` 表示出错。",
+  "key_points": [
+    "原型：`pid_t waitpid(pid_t pid, int *status, int options);`",
+    "`pid=-1` 表示等待任意子进程。",
+    "`WNOHANG` 让等待变成非阻塞，适合在信号处理函数中使用。"
+  ],
+  "examples": [
+    "示例：`while (waitpid(-1, NULL, WNOHANG) > 0) { }`"
+  ],
+  "misconceptions": [
+    "误以为 `waitpid` 一定会阻塞到子进程退出。",
+    "误以为一次 `waitpid` 就能回收所有已退出子进程。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`waitpid(-1, NULL, WNOHANG)` 的含义是什么？",
+      "a": "等待任意子进程，但不阻塞；如果没有已退出的子进程，就返回 `0`。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "子进程",
+    "信号"
+  ],
+  "source_pages": [
+    61,
+    64
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "104_waitpid_函数用法",
+  "_chunk_pages": [
+    61,
+    64
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "title": "用适配器简化 Logger 接口",
+  "definition": "Logger 适配器通过实现一个新的抽象接口，把客户端对简化日志接口的调用转发给原有 Logger。示例中的新接口只提供 log(std::string_view message)，不要求客户端指定日志级别；适配器内部将日志级别固定为 Info，并把消息转换后传给 Logger。",
+  "key_points": [
+    "原有 Logger 的 log 方法需要日志级别和字符串消息。",
+    "新的 NewLoggerInterface 只声明一个抽象方法：log(std::string_view message)。",
+    "NewLoggerAdapter 继承新接口，并通过组合持有一个 Logger 实例。",
+    "适配器的 log 方法将 std::string_view 消息转换为字符串，并调用 m_logger.log(Logger::LogLevel::Info, ...)。",
+    "这种设计改变了客户端接口，同时复用了原 Logger 的实现。"
+  ],
+  "examples": [
+    "接口形式：NewLoggerInterface::log(std::string_view message)。",
+    "适配器转发逻辑：m_logger.log(Logger::LogLevel::Info, message.data());",
+    "客户端只需调用：NewLoggerAdapter logger; logger.log(\"Testing the logger.\");"
+  ],
+  "misconceptions": [
+    "新接口并没有让 Logger 本身失去日志级别功能；只是适配器对客户端隐藏了日志级别，并统一使用 Info。",
+    "适配器与 Logger 是组合关系，不是通过继承 Logger 来修改其接口。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "Logger 适配器如何把新接口转换为旧接口？",
+      "a": "它接收客户端传入的 std::string_view 消息，将其转换为字符串，并以 Logger::LogLevel::Info 作为固定日志级别调用原 Logger 的 log 方法。"
+    },
+    {
+      "q": "为什么 NewLoggerAdapter 使用组合？",
+      "a": "因为适配器需要持有并调用已有 Logger 实例，以复用 Logger 的实现，同时向外部暴露不同的新接口。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "适配器模式的概念与两类用途"
+  ],
+  "source_pages": [
+    954,
+    955
+  ],
+  "needs_verification": true,
+  "verify_query": "《C++20高级编程》第5版 NewLoggerInterface NewLoggerAdapter Logger LogLevel Info message.data 适配器",
+  "concept_id": "1961_用适配器简化_logger_接口",
+  "_chunk_pages": [
+    953,
+    956
+  ]
+}

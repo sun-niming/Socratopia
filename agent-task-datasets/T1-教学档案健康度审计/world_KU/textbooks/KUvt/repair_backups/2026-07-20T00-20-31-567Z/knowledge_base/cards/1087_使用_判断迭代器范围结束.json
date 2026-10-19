@@ -1,0 +1,37 @@
+{
+  "title": "使用 != 判断迭代器范围结束",
+  "definition": "使用迭代器遍历范围时，规范的结束条件是将当前迭代器与 end 迭代器进行不等比较，即 `iter != end`。不应普遍使用 `iter < end` 判断结束，因为前向迭代器和双向迭代器不支持小于运算符，而不等比较适用于各种类型的迭代器。",
+  "key_points": [
+    "典型循环形式为：`for (auto iter { begin }; iter != end; ++iter) { ... }`。",
+    "`!=` 适用于教材讨论的各种迭代器类型。",
+    "前向迭代器和双向迭代器不支持 `<`，因此 `<` 不能作为通用迭代器遍历条件。"
+  ],
+  "examples": [
+    "`for (auto iter { cbegin(values) }; iter != cend(values); ++iter) { cout << *iter; }`"
+  ],
+  "misconceptions": [
+    "只有随机访问迭代器才支持 `<` 等顺序比较，不能假设所有迭代器都支持。",
+    "`iter != end` 并不意味着 end 指向最后一个元素，而是表示当前迭代器尚未到达范围终点。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么迭代器循环通常使用 `iter != end` 而不是 `iter < end`？",
+      "a": "因为 `!=` 适用于各种迭代器，而前向迭代器和双向迭代器不支持 `<`。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "半开区间与容器迭代器函数"
+  ],
+  "source_pages": [
+    531,
+    531
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1087_使用_判断迭代器范围结束",
+  "_chunk_pages": [
+    529,
+    532
+  ]
+}

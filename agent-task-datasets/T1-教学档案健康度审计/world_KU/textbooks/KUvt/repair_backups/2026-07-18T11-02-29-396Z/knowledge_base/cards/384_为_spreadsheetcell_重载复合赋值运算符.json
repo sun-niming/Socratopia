@@ -1,0 +1,45 @@
+{
+  "title": "为 SpreadsheetCell 重载复合赋值运算符",
+  "definition": "可以在 SpreadsheetCell 类中把 +=、-=、*=、/= 声明为成员运算符，使一个 SpreadsheetCell 对象能够与另一个 SpreadsheetCell 对象进行复合赋值。成员运算符通常修改左操作数，并返回 SpreadsheetCell&，从而支持连续使用或与内置类型转换配合使用。",
+  "key_points": [
+    "典型声明形式为：`SpreadsheetCell& operator+=(const SpreadsheetCell& rhs);`，其他复合赋值运算符同理。",
+    "实现 `operator+=` 时，可以读取右操作数的值，更新当前对象，再返回 `*this`。",
+    "原文中的实现结构可概括为：`set(getValue() + rhs.getValue()); return *this;`。",
+    "`[[nodiscard]]` 可用于提醒调用者不要忽略比较运算符的返回值，但原文主要将其用于比较运算符。"
+  ],
+  "examples": [
+    "`SpreadsheetCell myCell{4}, aThirdCell{2};`",
+    "`aThirdCell += myCell;`",
+    "成员实现示意：`SpreadsheetCell& SpreadsheetCell::operator+=(const SpreadsheetCell& rhs) { set(getValue() + rhs.getValue()); return *this; }`"
+  ],
+  "misconceptions": [
+    "复合赋值运算符的返回值不是新的独立对象，而通常是当前对象的引用 `*this`。",
+    "声明了 `operator+=` 并不等于自动声明了普通的 `operator+`；普通加法运算符仍需单独提供实现或重载。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "SpreadsheetCell 的 `operator+=` 通常应返回什么？",
+      "a": "通常返回当前对象的引用，即 `SpreadsheetCell&`，并在函数末尾返回 `*this`。"
+    },
+    {
+      "q": "`operator+=` 的实现为什么要返回 `*this`？",
+      "a": "因为复合赋值会修改左操作数，返回 `*this` 可以返回修改后的当前对象，并支持连续运算。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++类的成员函数与引用返回值",
+    "运算符重载基础"
+  ],
+  "source_pages": [
+    293,
+    296
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "384_为_spreadsheetcell_重载复合赋值运算符",
+  "_chunk_pages": [
+    293,
+    296
+  ]
+}

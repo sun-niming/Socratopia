@@ -1,0 +1,48 @@
+{
+  "title": "使用 export 导出变量",
+  "definition": "export 用于将用户变量导出为环境变量。其基本形式为“export 变量列表”。原文给出的示例包括同时导出多个变量，以及在导出时直接赋值。",
+  "key_points": [
+    "命令格式：export 变量列表",
+    "作用：将用户变量导出为环境变量",
+    "可以一次导出多个变量",
+    "可以在导出时直接赋值"
+  ],
+  "examples": [
+    "export var1 var2",
+    "export var=abc"
+  ],
+  "misconceptions": [
+    "误以为 export 只能导出一个变量，实际上可以导出变量列表",
+    "误以为 export 只能导出已有变量，原文示例表明也可以在导出时赋值"
+  ],
+  "qa_pairs": [
+    {
+      "q": "export 的作用是什么？",
+      "a": "将用户变量导出为环境变量。"
+    },
+    {
+      "q": "如何一次导出多个变量？",
+      "a": "使用 export 后跟变量列表，例如：export var1 var2。"
+    },
+    {
+      "q": "如何在导出变量时同时赋值？",
+      "a": "例如：export var=abc。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "变量的基本概念",
+    "环境变量"
+  ],
+  "source_pages": [
+    67,
+    67
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "002_使用_export_导出变量",
+  "_chunk_pages": [
+    66,
+    69
+  ]
+}

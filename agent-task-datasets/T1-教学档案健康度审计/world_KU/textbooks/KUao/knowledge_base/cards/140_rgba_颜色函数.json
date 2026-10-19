@@ -1,0 +1,38 @@
+{
+  "title": "rgba()颜色函数",
+  "definition": "rgba() 在 rgb() 的基础上增加了透明度参数 a。教材说明 a 的取值范围是 0.0 到 1.0，其中 0.0 表示完全透明，1.0 表示完全不透明。",
+  "key_points": [
+    "rgba() 由 RGB 三个颜色分量和一个 alpha 透明度分量组成。",
+    "a=0.0 表示完全透明，a=1.0 表示完全不透明。",
+    "它可用于表示半透明颜色。"
+  ],
+  "examples": [
+    "rgba(255,0,0,.8)",
+    "rgba(255,0,0,0.5)"
+  ],
+  "misconceptions": [
+    "a 不是 0-255 的整数范围。",
+    "rgba() 不等于 rgb()，它多了透明度控制。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "rgba() 中的 a 表示什么？",
+      "a": "表示透明度，取值从 0.0 到 1.0。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "rgb()颜色函数"
+  ],
+  "source_pages": [
+    109,
+    112
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "140_rgba_颜色函数",
+  "_chunk_pages": [
+    109,
+    112
+  ]
+}

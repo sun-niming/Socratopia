@@ -1,0 +1,38 @@
+{
+  "title": "不能用 strlen 统计文件长度",
+  "definition": "`strlen` 只能用于以 `0` 结尾的字符串，不能用于二进制文件。图片、压缩文件等内容中可能包含 `0` 字节，`strlen` 会提前停止，导致文件被截断。文件发送时应使用 `read` 的返回值，或用 `stat.st_size` 设置 Content-Length。",
+  "key_points": [
+    "`strlen` 只适合以 `0` 结尾的字符串。",
+    "二进制文件可能包含 `0` 字节，不能用 `strlen` 统计。",
+    "发送文件长度应依据 `read` 返回值或 `stat.st_size`。"
+  ],
+  "examples": [
+    "图片文件中间可能出现 `0` 字节，`strlen` 会误判长度。",
+    "可用 `stat.st_size` 填写 `Content-Length`。"
+  ],
+  "misconceptions": [
+    "文件不是字符串，不能默认按字符串规则处理。",
+    "长度统计错误会导致文件被截断，而不是“只是少一点点”。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么不能用 strlen 发送文件？",
+      "a": "因为 `strlen` 只适合以 `0` 结尾的字符串，二进制文件中可能含有 `0` 字节，会被提前截断；应使用 `read` 返回值或 `stat.st_size`。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "Content-Length 的作用"
+  ],
+  "source_pages": [
+    129,
+    132
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "211_不能用_strlen_统计文件长度",
+  "_chunk_pages": [
+    129,
+    132
+  ]
+}

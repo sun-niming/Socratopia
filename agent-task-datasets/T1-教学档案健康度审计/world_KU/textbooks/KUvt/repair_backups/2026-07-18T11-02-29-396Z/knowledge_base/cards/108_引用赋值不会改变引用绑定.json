@@ -1,0 +1,44 @@
+{
+  "title": "引用赋值不会改变引用绑定",
+  "definition": "引用在初始化后绑定到某个对象，不能再改为绑定到另一个对象。对引用进行赋值时，赋值的是它所引用对象的值，而不是改变引用的绑定关系。",
+  "key_points": [
+    "`int& xRef { x };`使`xRef`绑定到`x`。",
+    "`int& zRef { z };`使`zRef`绑定到`z`。",
+    "执行`zRef = xRef;`时，是把`x`的值赋给`z`，不是让`zRef`改为引用`x`。"
+  ],
+  "examples": [
+    "`int x { 3 }, z { 5 };`",
+    "`int& xRef { x };`",
+    "`int& zRef { z };`",
+    "`zRef = xRef;`执行后，`z`的值为3，`xRef`仍然引用`x`，`zRef`仍然引用`z`。"
+  ],
+  "misconceptions": [
+    "引用不是可以重新绑定的别名变量；初始化后不能通过赋值改变其绑定对象。",
+    "`zRef = xRef`不是引用之间的绑定操作，而是通过引用访问对象并进行普通赋值。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "执行`zRef = xRef`后，`zRef`引用哪个对象？",
+      "a": "仍然引用`z`；该语句只是把`x`的值赋给`z`。"
+    },
+    {
+      "q": "若初始时`x`为3、`z`为5，执行`zRef = xRef`后`z`是多少？",
+      "a": "`z`变为3。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "左值引用"
+  ],
+  "source_pages": [
+    78,
+    79
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "108_引用赋值不会改变引用绑定",
+  "_chunk_pages": [
+    77,
+    80
+  ]
+}

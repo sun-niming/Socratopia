@@ -1,0 +1,40 @@
+{
+  "title": "事件源、事件类型与事件监听程序",
+  "definition": "教材图示把 DOM 事件过程概括为三部分：事件源/事件目标、事件类型、事件监听程序。事件源/目标可以是 window、document、element；事件类型可以是 load、click、mousedown、keypress 等；事件监听程序是编写的函数代码，用来处理事件，并通过事件注册/处理/绑定与事件关联。",
+  "key_points": [
+    "事件源/事件目标可能是 window、document 或某个 element",
+    "事件类型决定发生了什么事件，如 load、click、mousedown、keypress",
+    "事件监听程序是实际执行的函数代码",
+    "事件需要通过注册、处理或绑定与监听程序建立联系"
+  ],
+  "examples": [
+    "window 的 load 事件",
+    "element 的 click 事件",
+    "document 的 DOMContentLoaded 事件"
+  ],
+  "misconceptions": [
+    "事件监听程序不是事件源本身",
+    "事件类型和事件监听程序不是同一个概念"
+  ],
+  "qa_pairs": [
+    {
+      "q": "DOM 事件图中的三部分是什么？",
+      "a": "事件源/事件目标、事件类型、事件监听程序。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "DOM事件"
+  ],
+  "source_pages": [
+    357,
+    360
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "517_事件源_事件类型与事件监听程序",
+  "_chunk_pages": [
+    357,
+    360
+  ]
+}

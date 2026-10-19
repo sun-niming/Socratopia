@@ -1,0 +1,52 @@
+{
+  "title": "使用 locale 和专用操纵器格式化本地化数据",
+  "definition": "输出流可以使用 `imbue(locale {})` 按当前区域设置格式化数字。原文还列举了 `put_money`、`put_time` 和 `quoted`：它们分别用于货币值、日期时间和带引号字符串的格式化输出。",
+  "key_points": [
+    "`cout.imbue(locale {})` 用于指示 `cout` 按当前区域设置格式化数字。",
+    "`put_money(\"120000\")` 用于把货币值按区域设置格式化；具体显示形式取决于区域设置。",
+    "`time_t t_t { time(nullptr) };` 获取当前系统时间，`localtime(&t_t)` 将其转换为本地时间结构，再用 `put_time(t, \"%c\")` 格式化输出。",
+    "`quoted(...)` 用于输出带引号的字符串，并处理字符串中的嵌入引号。",
+    "原文列出的相关操纵器来自 `<iomanip>`；`endl` 来自输入输出流相关头文件。"
+  ],
+  "examples": [
+    "```text\ncout.imbue(locale {});\ncout << \"This is 1234567 formatted according to your location: \"\n     << 1234567 << endl;\n```",
+    "```text\ntime_t t_t { time(nullptr) };\ntm* t { localtime(&t_t) };\ncout << put_time(t, \"%c\") << endl;\n```",
+    "```text\ncout << quoted(\"Quoted string with \\\"embedded quotes\\\".\") << endl;\n```"
+  ],
+  "misconceptions": [
+    "货币值的具体显示形式不是固定的，而是取决于所使用的区域设置。",
+    "`put_time` 需要先取得时间值并转换为本地时间结构，不能脱离时间对象直接表示当前时间。",
+    "`quoted` 不只是普通字符串输出；它用于带引号字符串的格式化表示。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何让 `cout` 按当前区域设置格式化数字？",
+      "a": "调用 `cout.imbue(locale {});`。"
+    },
+    {
+      "q": "如何使用流格式化当前本地日期和时间？",
+      "a": "先用 `time(nullptr)` 获取当前系统时间，再用 `localtime` 转换，最后使用 `put_time(t, \"%c\")` 输出。"
+    },
+    {
+      "q": "`put_money` 的具体显示形式由什么决定？",
+      "a": "由当前区域设置决定。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++输入输出流",
+    "C++时间类型",
+    "locale 基础"
+  ],
+  "source_pages": [
+    413,
+    416
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 std::put_money locale 120000 example imbue locale put_time quoted setw setprecision 教材原文",
+  "concept_id": "542_使用_locale_和专用操纵器格式化本地化数据",
+  "_chunk_pages": [
+    413,
+    416
+  ]
+}

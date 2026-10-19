@@ -1,0 +1,42 @@
+{
+  "title": "嵌套命名空间的简写语法",
+  "definition": "从 C++17 开始，可以用连续的限定名一次定义多层嵌套命名空间。例如，`namespace MyLibraries::Networking::FTP { ... }` 是多层 `namespace` 块嵌套写法的简写。",
+  "key_points": [
+    "简写形式使用 `::` 连接各层命名空间名称。",
+    "该嵌套命名空间定义语法从 C++17 开始提供。",
+    "简写形式可以减少多层大括号和重复的 `namespace` 关键字。"
+  ],
+  "examples": [
+    "namespace MyLibraries::Networking::FTP {\n    // 声明或定义\n}",
+    "上述写法对应传统嵌套结构：\nnamespace MyLibraries {\n    namespace Networking {\n        namespace FTP {\n            // 声明或定义\n        }\n    }\n}"
+  ],
+  "misconceptions": [
+    "不要把嵌套命名空间定义误认为命名空间别名；它实际定义或打开对应的多层命名空间。",
+    "不能用成员访问符 `.` 连接命名空间层级，应使用 `::`。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`namespace MyLibraries::Networking::FTP { ... }` 表示什么？",
+      "a": "它定义或打开 `MyLibraries` 中的 `Networking`，以及其中的 `FTP` 嵌套命名空间。"
+    },
+    {
+      "q": "嵌套命名空间的这种简写语法从哪个 C++ 标准版本开始提供？",
+      "a": "C++17。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "命名空间的定义与限定名调用"
+  ],
+  "source_pages": [
+    37,
+    40
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "036_嵌套命名空间的简写语法",
+  "_chunk_pages": [
+    37,
+    40
+  ]
+}

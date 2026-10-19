@@ -1,0 +1,42 @@
+{
+  "title": "vector<bool>的flip()操作",
+  "definition": "vector<bool>提供flip()操作，用于对布尔位取反。对整个vector<bool>调用flip()会将所有元素取反；对operator[]、at()等操作返回的单个代理引用调用flip()，则只取反对应的一个元素。",
+  "key_points": [
+    "容器级flip()会把每个true变为false、每个false变为true。",
+    "单个元素的flip()只影响该元素。",
+    "vector<bool>的flip()是为其位字段表示提供的额外操作。"
+  ],
+  "examples": [
+    "若vector<bool> flags的值为$[true,false,true]$，调用flags.flip()后变为$[false,true,false]$。",
+    "对flags[1].flip()调用时，只会取反下标1的元素。"
+  ],
+  "misconceptions": [
+    "flip()不是交换元素顺序，而是对布尔值逐个取反。",
+    "调用单个元素的flip()不会影响vector<bool>中的其他元素。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "对vector<bool>对象调用flip()有什么效果？",
+      "a": "将容器中的所有布尔元素取反。"
+    },
+    {
+      "q": "如何只取反vector<bool>中的一个元素？",
+      "a": "对operator[]或at()等返回的单个代理引用调用flip()。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "vector<bool>的空间优化特化"
+  ],
+  "source_pages": [
+    566,
+    566
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1167_vector_bool_的flip_操作",
+  "_chunk_pages": [
+    565,
+    568
+  ]
+}

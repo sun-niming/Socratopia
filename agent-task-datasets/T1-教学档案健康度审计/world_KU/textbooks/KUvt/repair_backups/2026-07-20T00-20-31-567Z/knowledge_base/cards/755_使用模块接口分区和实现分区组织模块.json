@@ -1,0 +1,59 @@
+{
+  "title": "使用模块接口分区和实现分区组织模块",
+  "definition": "教材练习进一步要求将模块拆分方案改为一个主模块接口文件和两个模块接口分区文件，并增加一个名为 `internals` 的实现分区。接口分区分别用于 `Simulator:car` 和 `Simulator:bike`，实现分区用于隐藏内部辅助功能。",
+  "key_points": [
+    "主模块接口文件仍然是模块的主要接口入口。",
+    "两个模块接口分区分别包含 `CarSimulator` 类和 `BikeSimulator` 类。",
+    "接口分区名称分别为模拟器的 `car` 分区和 `bike` 分区，可表示为 `Simulator:car` 与 `Simulator:bike`。",
+    "`internals` 是实现分区，不应作为公开接口使用。",
+    "`internals` 分区中的辅助方法为 `convertMilesToKm(double miles)`，换算关系是 $1$ 英里等于 $1.6$ 公里。",
+    "`CarSimulator` 和 `BikeSimulator` 都增加 `setOdometer(double miles)`；该方法调用辅助方法把英里转换为公里，并将结果输出到标准输出。",
+    "`main()` 应验证两个类的 `setOdometer()` 都有效，并确认不能调用 `convertMilesToKm()`。"
+  ],
+  "examples": [
+    "辅助函数的换算关系可写为：$$\\operatorname{convertMilesToKm}(miles)=1.6\\times miles$$。",
+    "接口分区关系：`Simulator:car` 包含 `CarSimulator`，`Simulator:bike` 包含 `BikeSimulator`；实现分区 `Simulator:internals` 包含内部辅助方法。",
+    "访问性测试：`CarSimulator car; car.setOdometer(10.0);` 和 `BikeSimulator bike; bike.setOdometer(10.0);` 应能输出换算后的公里数；`convertMilesToKm(10.0)` 不应能从 `main()` 直接调用。"
+  ],
+  "misconceptions": [
+    "认为实现分区中的辅助方法会自动成为模块的公开接口。",
+    "认为只有 `CarSimulator` 需要增加 `setOdometer()`，而 `BikeSimulator` 不需要。",
+    "认为 `setOdometer(double miles)` 应直接把英里数原样输出，而不是先转换为公里。",
+    "认为 `main()` 可以直接调用实现分区中的内部辅助方法。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`internals` 实现分区中的辅助方法是什么？",
+      "a": "是 `convertMilesToKm(double miles)`，用于把英里转换为公里。"
+    },
+    {
+      "q": "英里到公里的换算关系是什么？",
+      "a": "教材练习规定 $1$ 英里等于 $1.6$ 公里，因此换算公式为 $km=1.6\\times miles$。"
+    },
+    {
+      "q": "`setOdometer(double miles)` 应如何工作？",
+      "a": "在 `CarSimulator` 和 `BikeSimulator` 中，该方法使用 `convertMilesToKm()` 将给定英里数转换为公里数，然后把结果输出到标准输出。"
+    },
+    {
+      "q": "为什么 `main()` 不能调用 `convertMilesToKm()`？",
+      "a": "因为该方法位于名为 `internals` 的实现分区中，属于内部辅助功能而不是公开模块接口。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "C++20模块接口分区与实现分区",
+    "C++名称空间和类成员函数",
+    "基本单位换算"
+  ],
+  "source_pages": [
+    369,
+    370
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "755_使用模块接口分区和实现分区组织模块",
+  "_chunk_pages": [
+    369,
+    372
+  ]
+}

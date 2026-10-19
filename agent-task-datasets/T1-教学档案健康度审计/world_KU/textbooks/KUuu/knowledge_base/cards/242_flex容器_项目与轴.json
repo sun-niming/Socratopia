@@ -1,0 +1,43 @@
+{
+  "title": "Flex容器、项目与轴",
+  "definition": "采用 Flex 布局的元素称为 Flex 容器，简称容器；它的所有子元素自动成为 Flex 项目，简称项目。容器默认存在两根轴：水平的主轴（main axis）和垂直的交叉轴（cross axis）。主轴的开始位置叫 main start，结束位置叫 main end；交叉轴的开始位置叫 cross start，结束位置叫 cross end。项目默认沿主轴排列，单个项目占据的主轴空间叫 main size，占据的交叉轴空间叫 cross size。",
+  "key_points": [
+    "Flex容器是使用 Flex 布局的元素，Flex项目是其所有子元素",
+    "默认有主轴和交叉轴两根轴，分别是水平和垂直方向",
+    "方向术语包括 main start、main end、cross start、cross end",
+    "项目默认沿主轴排列",
+    "main size 表示主轴空间，cross size 表示交叉轴空间"
+  ],
+  "examples": [
+    "在 flex 容器中，子元素会自动成为 flex item。"
+  ],
+  "misconceptions": [
+    "Flex项目不是单独设置出来的，而是容器的子元素自动变成的",
+    "项目默认不是沿交叉轴排列，而是沿主轴排列"
+  ],
+  "qa_pairs": [
+    {
+      "q": "Flex项目默认沿哪条轴排列？",
+      "a": "沿主轴排列。"
+    },
+    {
+      "q": "Flex容器默认有几根轴？",
+      "a": "两根：主轴和交叉轴。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "设置Flex容器"
+  ],
+  "source_pages": [
+    149,
+    152
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "242_flex容器_项目与轴",
+  "_chunk_pages": [
+    149,
+    152
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "title": "C++20 中 vector 的 constexpr 支持",
+  "definition": "教材指出，从 C++20 开始，`std::vector` 是 `constexpr`，因此 vector 可以用于编译期执行的操作，也可以用于 `constexpr` 函数和类的实现。教材同时指出，vector 和 string 是当时唯一的 `constexpr` 标准库容器。",
+  "key_points": [
+    "`constexpr` 支持表示相关操作可以在满足条件时用于编译期求值。",
+    "教材将 C++20 中 vector 的 constexpr 支持与 `std::string` 的支持相提并论。",
+    "教材关于“vector 和 string 是唯一的 constexpr 标准库容器”的表述涉及具体标准版本和实现状态。"
+  ],
+  "examples": [
+    "教材概念性示例：vector 可以作为 `constexpr` 函数或类实现的一部分；实际能否在编译期完成求值还取决于所使用的操作以及编译器和标准库实现。"
+  ],
+  "misconceptions": [
+    "vector 获得 constexpr 支持并不意味着任何 vector 程序都必然在编译期执行。",
+    "是否能够编译期求值还取决于表达式是否满足 constexpr 求值要求。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "教材对 C++20 中 vector 的 constexpr 支持作了什么说明？",
+      "a": "教材指出，从 C++20 开始，std::vector 是 constexpr，可以用于编译期执行的操作以及 constexpr 函数和类的实现。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "vector 的模板参数与默认分配器"
+  ],
+  "source_pages": [
+    549,
+    549
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 std::vector constexpr 标准库容器 vector string 唯一 constexpr 容器",
+  "concept_id": "1130_c_20_中_vector_的_constexpr_支持",
+  "_chunk_pages": [
+    549,
+    552
+  ]
+}

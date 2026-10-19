@@ -1,0 +1,37 @@
+{
+  "title": "后续 AI 出题判题讲题扩展",
+  "definition": "当前版本虽然只返回静态文件，但已经具备在线服务基础，可以在此基础上扩展出题、提交、判题和讲题功能。讲义给出的示例接口包括 /questions.json、/submit、/judge、/explain。报告中应表述为“本项目为后续 AI 出题、判题、讲题提供 HTTP 服务原型”，而不是声称已经实现了这些 AI 功能。",
+  "key_points": [
+    "当前功能是静态文件服务，但可扩展为在线服务",
+    "可以设计多个接口分别承担题库、提交、判题和讲解功能",
+    "报告表述要准确，不能夸大为已实现 AI 判题"
+  ],
+  "examples": [
+    "/questions.json 返回题库 JSON；/submit 接收答案提交；/judge 返回判题结果；/explain 接入 AI 模型生成错题讲解。"
+  ],
+  "misconceptions": [
+    "静态文件服务器已经实现了 AI 判题",
+    "报告里可以直接说已经完成 AI 出题判题讲题"
+  ],
+  "qa_pairs": [
+    {
+      "q": "报告中应该如何描述 AI 功能？",
+      "a": "应说明本项目为后续 AI 出题、判题、讲题提供 HTTP 服务原型，而不是说已经实现了 AI 功能。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "多端访问与 HTTP 后端底座"
+  ],
+  "source_pages": [
+    37,
+    40
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "056_后续_ai_出题判题讲题扩展",
+  "_chunk_pages": [
+    37,
+    40
+  ]
+}

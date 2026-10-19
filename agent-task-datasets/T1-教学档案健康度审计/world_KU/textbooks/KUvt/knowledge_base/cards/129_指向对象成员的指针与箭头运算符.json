@@ -1,0 +1,51 @@
+{
+  "title": "指向对象成员的指针与箭头运算符",
+  "definition": "当指针指向结构体或类对象时，可以先解引用指针再使用点运算符访问成员，即 `(*p).member`；也可以使用箭头运算符 `p->member`，它等价于“解引用 `p` 后访问成员”。在解引用前，必须保证对象指针有效。",
+  "key_points": [
+    "`(*anEmployee).salary` 和 `anEmployee->salary` 等价。",
+    "箭头运算符把解引用和成员访问合并为一个更易读的表达式。",
+    "如果指针可能为空，应先判断指针是否有效，再访问成员。",
+    "利用 `&&` 的短路求值，可以保证只有在指针非空时才执行成员访问。"
+  ],
+  "examples": [
+    "`Employee* anEmployee { getEmployee() };`",
+    "`cout << (*anEmployee).salary << endl;`",
+    "`cout << anEmployee->salary << endl;`",
+    "`bool isValidSalary { (anEmployee != nullptr && anEmployee->salary > 0) };`"
+  ],
+  "misconceptions": [
+    "`p->member` 不能安全地处理空指针；对空指针使用箭头运算符仍然是无效解引用。",
+    "`(*p).member` 中的括号不能省略为 `*p.member`，因为成员访问运算符的优先级更高。",
+    "短路保护只有在指针判断位于 `&&` 左侧时才成立，例如 `p != nullptr && p->member > 0`。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`p->salary` 与哪种写法等价？",
+      "a": "与 `(*p).salary` 等价。"
+    },
+    {
+      "q": "如何使用短路逻辑避免对空的 `Employee*` 解引用？",
+      "a": "写成 `p != nullptr && p->salary > 0`，因为只有左侧为真时才计算右侧。"
+    },
+    {
+      "q": "如果 `p` 是空指针，表达式 `p->salary` 是否安全？",
+      "a": "不安全，会对无效指针进行解引用，导致未定义行为。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "指针解引用",
+    "逻辑运算符短路求值"
+  ],
+  "source_pages": [
+    72,
+    72
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "129_指向对象成员的指针与箭头运算符",
+  "_chunk_pages": [
+    69,
+    72
+  ]
+}

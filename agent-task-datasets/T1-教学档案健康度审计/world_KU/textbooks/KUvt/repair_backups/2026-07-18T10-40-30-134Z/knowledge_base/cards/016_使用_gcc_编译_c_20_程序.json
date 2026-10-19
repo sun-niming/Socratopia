@@ -1,0 +1,49 @@
+{
+  "title": "使用 GCC 编译 C++20 程序",
+  "definition": "原文给出了 GCC 编译 C++20 程序的命令行形式，包含指定 C++20 标准的选项 -std=c++2a 和 -std=c++20，并展示了由可执行文件名、一个或多个源文件组成的命令结构。",
+  "key_points": [
+    "原文出现的命令结构为：<executable_name> <source1.cpp> [source2.cpp ...]。",
+    "原文列出了 GCC 的 C++20 标准选项 -std=c++2a 和 -std=c++20。",
+    "原文还出现了与 GCC modules 相关的文本，但具体选项在给定摘录中存在 OCR 不清，不能据此确定完整命令。"
+  ],
+  "examples": [
+    "命令结构：<executable_name> <source1.cpp> [source2.cpp ...]",
+    "原文列出的标准选项：-std=c++2a",
+    "原文列出的标准选项：-std=c++20"
+  ],
+  "misconceptions": [
+    "-std=c++20 是编译器选项，不是 C++ 源代码中的语句。",
+    "仅指定 -std=c++20 只表示选择语言标准，不能据此断定 GCC 的所有 C++20 库特性都可用。",
+    "原文中与 modules 相关的 OCR 文本不完整，不应把它直接还原成未经核实的具体 GCC 参数。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "原文列出了哪些 GCC C++20 标准选项？",
+      "a": "原文列出了 -std=c++2a 和 -std=c++20。"
+    },
+    {
+      "q": "原文给出的 GCC 命令结构是什么？",
+      "a": "<executable_name> <source1.cpp> [source2.cpp ...]。"
+    },
+    {
+      "q": "能否仅根据该摘录确定 GCC modules 的完整编译参数？",
+      "a": "不能，因为原文该部分存在 OCR 或排版缺失，完整参数需要核实。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "命令行编译",
+    "GCC 基础"
+  ],
+  "source_pages": [
+    17,
+    20
+  ],
+  "needs_verification": true,
+  "verify_query": "GCC C++20 compile command -std=c++20 -std=c++2a executable source1.cpp source2.cpp modules option",
+  "concept_id": "016_使用_gcc_编译_c_20_程序",
+  "_chunk_pages": [
+    17,
+    20
+  ]
+}

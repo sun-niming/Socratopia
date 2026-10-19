@@ -1,0 +1,43 @@
+{
+  "title": "模块练习中的单文件模块结构",
+  "definition": "教材练习要求在 `Simulator` 名称空间中编写名为 `Simulator` 的单文件模块。该模块包含 `CarSimulator` 和 `BikeSimulator` 两个类；两个类只需提供一个将消息输出到标准输出的默认构造函数，并在 `main()` 函数中测试。",
+  "key_points": [
+    "模块名称为 `Simulator`。",
+    "模块中包含 `CarSimulator` 和 `BikeSimulator` 两个类，二者位于 `Simulator` 名称空间中。",
+    "每个类需要提供默认构造函数，构造函数将消息输出到标准输出。",
+    "应在 `main()` 中创建或使用这些类，以确认模块代码有效。"
+  ],
+  "examples": [
+    "结构示意：`module Simulator;`；在 `namespace Simulator` 中定义 `CarSimulator` 和 `BikeSimulator`，并为每个类提供输出消息的默认构造函数；在 `main()` 中测试。"
+  ],
+  "misconceptions": [
+    "认为练习要求实现完整的汽车或自行车模拟逻辑。教材明确说练习的课程内容不重要，只需提供输出消息的默认构造函数。",
+    "认为类必须放在全局名称空间，而不是 `Simulator` 名称空间。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "单文件模块练习要求包含哪些类？",
+      "a": "在 `Simulator` 名称空间中包含 `CarSimulator` 和 `BikeSimulator` 两个类。"
+    },
+    {
+      "q": "这两个类的默认构造函数需要完成什么功能？",
+      "a": "将消息输出到标准输出；不要求实现复杂的模拟功能。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++20模块基础",
+    "C++名称空间和类的基础"
+  ],
+  "source_pages": [
+    369,
+    369
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "753_模块练习中的单文件模块结构",
+  "_chunk_pages": [
+    369,
+    372
+  ]
+}

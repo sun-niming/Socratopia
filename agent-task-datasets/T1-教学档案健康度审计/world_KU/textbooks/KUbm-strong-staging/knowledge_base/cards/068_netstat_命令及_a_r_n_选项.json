@@ -1,0 +1,49 @@
+{
+  "title": "netstat 命令及 -a -r -n 选项",
+  "definition": "教材给出“netstat –[anr]”这一写法，并说明其常见选项含义：“-a”表示显示所有连接，“-r”表示显示路由表，“-n”表示以数字显示连接端口。该命令用于查看网络监听或连接状态。",
+  "key_points": [
+    "教材给出的写法是：netstat –[anr]",
+    "-a：显示所有连接",
+    "-r：显示路由表",
+    "-n：以数字显示连接端口"
+  ],
+  "examples": [
+    "netstat -a",
+    "netstat -r",
+    "netstat -n",
+    "netstat -anr"
+  ],
+  "misconceptions": [
+    "认为 netstat 只能看连接；教材还指出“-r”可用于显示路由表",
+    "忽略选项含义，只记命令名而不区分用途"
+  ],
+  "qa_pairs": [
+    {
+      "q": "netstat 的“-a”选项表示什么？",
+      "a": "显示所有连接。"
+    },
+    {
+      "q": "netstat 的“-r”选项表示什么？",
+      "a": "显示路由表。"
+    },
+    {
+      "q": "netstat 的“-n”选项表示什么？",
+      "a": "以数字显示连接端口。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "Linux 常见网络命令分类"
+  ],
+  "source_pages": [
+    33,
+    36
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "068_netstat_命令及_a_r_n_选项",
+  "_chunk_pages": [
+    33,
+    36
+  ]
+}

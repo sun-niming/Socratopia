@@ -1,0 +1,42 @@
+{
+  "title": "new_handler与动态内存分配失败处理机制",
+  "definition": "教材在介绍new和new[]分配失败后，进一步引出C++的new_handler机制。该机制与bad_alloc以及内存分配失败处理相关，可用于在动态内存分配无法满足时指定处理函数。",
+  "key_points": [
+    "new_handler是C++标准库中与动态内存分配失败处理相关的机制。",
+    "教材将new_handler与new、new[]以及bad_alloc放在同一节讨论。",
+    "new_handler的具体调用时机、设置方式以及处理函数应以所使用的C++标准库和教材版本说明为准。"
+  ],
+  "examples": [
+    "教材本页仅列出new_handler、new handler与new分配失败相关的主题，未给出完整的设置和处理函数代码。"
+  ],
+  "misconceptions": [
+    "认为new_handler与nothrow是同一种机制；教材将它们作为不同的内存分配失败处理方式讨论。",
+    "认为只要设置new_handler就一定能让new分配成功；new_handler只是失败处理机制，不能保证存在足够内存。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "new_handler与哪类问题相关？",
+      "a": "它与new或new[]无法满足内存分配请求时的处理相关。"
+    },
+    {
+      "q": "本页是否给出了new_handler的完整使用代码？",
+      "a": "原文片段只列出了new_handler相关主题，没有给出完整的设置和处理函数代码。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "普通new与new[]的异常处理",
+    "bad_alloc"
+  ],
+  "source_pages": [
+    457,
+    460
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 new_handler 机制 设置函数 调用时机 bad_alloc 标准库",
+  "concept_id": "602_new_handler与动态内存分配失败处理机制",
+  "_chunk_pages": [
+    457,
+    460
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "title": "vector 的统一初始化与构造歧义",
+  "definition": "vector 可以使用 initializer list 和统一初始化语法构造。需要注意，圆括号和花括号可能调用不同的构造方式：`vector<int>(10, 100)` 调用“数量加初始值”的构造函数，创建 10 个值为 100 的元素；`vector<int>{10, 100}` 使用 initializer list，创建两个元素，值分别为 10 和 100。",
+  "key_points": [
+    "可以使用 `vector<int> v({1, 2, 3});` 通过 initializer list 构造 vector。",
+    "也可以使用 `vector<int> v = {1, 2, 3};` 或 `vector<int> v{1, 2, 3};`。",
+    "花括号初始化优先匹配 initializer-list 构造，因此 `v{10, 100}` 表示两个元素，而不是数量和值。",
+    "教材提到类模板实参推导可以在适用时省略模板类型参数，但原文给出的相关代码仍显式写出了 `vector<int>`。"
+  ],
+  "examples": [
+    "`vector<int> a(10, 100);` 创建 10 个值为 100 的元素。",
+    "`vector<int> b{10, 100};` 创建 2 个元素：$[10,100]$。",
+    "`vector<int> c = {1, 2, 3, 4, 5, 6};` 和 `vector<int> d{1, 2, 3, 4, 5, 6};` 都使用给定初始元素构造 vector。"
+  ],
+  "misconceptions": [
+    "花括号中的第一个数字不一定表示元素数量；在 `vector<int>{10, 100}` 中，10 和 100 都是元素值。",
+    "`vector<int>(10, 100)` 与 `vector<int>{10, 100}` 的含义不同。",
+    "统一初始化语法虽然通用，但在 vector 中可能与数量和值构造产生不同结果。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`vector<int> v{10, 100}` 有几个元素？",
+      "a": "有两个元素，分别为 10 和 100。"
+    },
+    {
+      "q": "如何创建 10 个值为 100 的 int 元素？",
+      "a": "使用 `vector<int> v(10, 100);`。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "vector 构造函数与元素初始化"
+  ],
+  "source_pages": [
+    551,
+    552
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1135_vector_的统一初始化与构造歧义",
+  "_chunk_pages": [
+    549,
+    552
+  ]
+}

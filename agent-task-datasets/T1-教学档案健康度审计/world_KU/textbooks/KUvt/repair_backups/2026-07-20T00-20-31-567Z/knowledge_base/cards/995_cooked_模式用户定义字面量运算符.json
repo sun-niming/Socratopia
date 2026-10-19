@@ -1,0 +1,51 @@
+{
+  "title": "cooked 模式用户定义字面量运算符",
+  "definition": "cooked 模式的字面量运算符可以处理数值或字符串。处理数值时，运算符接收一个特定类型的参数，例如 unsigned long long、long double、char、wchar_t、char8_t、char16_t 或 char32_t。处理字符串时，运算符接收两个参数：指向字符数组的指针和字符数组长度。",
+  "key_points": [
+    "处理浮点数的 cooked 字面量运算符可接收 long double 参数。",
+    "处理字符串的 cooked 字面量运算符通常接收 const char* 和 std::size_t 两个参数。",
+    "用户可以用 cooked 字面量运算符把数值字面量转换为自定义类型。"
+  ],
+  "examples": [
+    "定义复数字面量 _i：\\n\\texttt{std::complex<long double> operator\"\"\\_i(long double d) \\\\{\\\\n    return std::complex<long double>\\\\{0, d\\\\};\\\\n\\\\}}",
+    "使用复数字面量：\\n\\texttt{std::complex<long double> c\\\\{9.634\\_i\\\\};}",
+    "定义字符串字面量 _s：\\n\\texttt{std::string operator\"\"\\_s(const char* str, std::size\\_t len) \\\\{\\\\n    return std::string(str, len);\\\\n\\\\}}",
+    "如果没有 _s 字面量运算符，字符串字面量的类型推导结果为：\\n\\texttt{const char*}。"
+  ],
+  "misconceptions": [
+    "cooked 字符串字面量运算符不仅接收字符串指针，还接收字符串长度。",
+    "_i 示例把浮点数作为复数的虚部，返回的是 \\texttt{std::complex<long double>}，不是普通浮点数。",
+    "用户定义字面量运算符必须使用 operator\"\" 后跟用户定义后缀，不能写成普通函数调用。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "处理字符串的 cooked 字面量运算符需要哪些参数？",
+      "a": "需要两个参数：字符数组指针和字符数组长度，例如 \\texttt{const char* str, std::size\\_t len}。"
+    },
+    {
+      "q": "示例中的 9.634_i 返回什么类型？",
+      "a": "返回 \\texttt{std::complex<long double>}，其中实部为 0，虚部为 9.634。"
+    },
+    {
+      "q": "如果没有 _s 字面量运算符，相关字符串字面量通常会被推导为什么类型？",
+      "a": "原文给出的类型是 \\texttt{const char*}。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "用户定义字面量的基本规则及 raw/cooked 模式",
+    "std::complex",
+    "std::string"
+  ],
+  "source_pages": [
+    496,
+    496
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "995_cooked_模式用户定义字面量运算符",
+  "_chunk_pages": [
+    493,
+    496
+  ]
+}

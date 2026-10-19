@@ -1,0 +1,137 @@
+{
+  "conversationId": "ptzS6vQIgPgAsgDLZaPH-",
+  "generatedAt": 1781342531842,
+  "pagesRange": null,
+  "sections": [
+    {
+      "type": "tldr",
+      "content": "本节课把 Linux Shell 里的变量属性、位置参数与结构控制串起来了：重点是理解“属性会改变变量行为”、`if/case/while/for` 都依赖命令执行结果或参数列表来控制流程。"
+    },
+    {
+      "type": "narrative",
+      "content": "一开始从 `declare` 的 `-r`、`-i`、`-x` 复习变量属性，接着回到位置参数、`shift` 和 `$?`。后半节重点转入结构控制：先用 `if` 理解“成功/失败决定分支”，再通过 `case`、`while read`、两种 `for` 写法，把 Shell 脚本的分支和循环基本框架串了起来。"
+    },
+    {
+      "type": "concepts",
+      "items": [
+        {
+          "name": "`declare` 的变量属性",
+          "body": "`declare` 可以给 Shell 变量加属性，本节重点抓住四个：\n\n```bash\n-a  数组\n-i  整型\n-x  环境变量\n-r  只读\n```\n\n要点：\n- `declare -r pi=3`：把 `pi` 声明为只读，之后不能再修改。\n- `declare -i n=1`：把 `n` 声明为整数变量，赋值时会按整数表达式求值。\n\n例：\n```bash\\ndeclare -i n=1\\nn=n+2\\necho $n\n```\n输出：\n```text\n3\n```\n\n如果没有 `-i`，普通变量更可能把 `n+2` 当成文本，而不是计算结果。"
+        },
+        {
+          "name": "`declare -x` 与 `export`",
+          "body": "`declare -x name=Alice` 相当于：\n\n1. 创建或设置变量 `name`；\n2. 把它标记为环境变量，让子 Shell / 子进程能继承。\n\n例如：\n```bash\\ndeclare -x city=Paris\\nbash\\necho $city\n```\n进入子 Shell 后仍能输出：\n```text\\nParis\n```\n\n如果先写：\n```bash\\nname=Alice\\ndeclare -x name\n```\n后面的 `declare -x name` 不会改值，只是给已有变量加“导出”属性，所以子 Shell 里仍能看到 `Alice`。"
+        },
+        {
+          "name": "位置参数与 `shift`",
+          "body": "运行脚本：\n```bash\\nbash test.sh apple banana\n```\n脚本内部：\n\n```bash\n$0  # test.sh，脚本名\n$1  # apple，第一个参数\n$2  # banana，第二个参数\n$#  # 2，参数个数，不包括 $0\n```\n\n`shift` 会丢掉前面的参数，让后面的参数整体左移，但通常不动 `$0`。\n\n例：原来有：\n```bash\n$1=apple\n$2=banana\n$3=cherry\n$#=3\n```\n执行：\n```bash\\nshift\n```\n之后变成：\n```bash\n$1=banana\n$2=cherry\n$#=2\n```\n\n执行 `shift 2` 则一次丢掉前两个参数。比如 `apple banana cherry grape` 经过 `shift 2` 后：\n```bash\n$1=cherry\n$2=grape\n$#=2\n```"
+        },
+        {
+          "name": "`$?`：上一条命令的返回码",
+          "body": "`$?` 表示**最后一条命令**的返回码：\n\n- 返回 `0`：通常表示成功；\n- 非 `0`：通常表示失败或条件不成立。\n\n例：\n```bash\\ngrep \"love\" a.txt\\necho $?\n```\n如果 `grep` 找到了匹配内容，`$?` 是 `0`；如果文件存在但没找到匹配，通常是非 `0`。\n\n关键提醒：`$?` 要立刻看，因为每执行一条新命令，它都会被覆盖。\n\n```bash\\ngrep \"love\" a.txt\\necho hello\\necho $?\n```\n最后看到的是 `echo hello` 的返回码，不是 `grep` 的返回码。"
+        },
+        {
+          "name": "`if`：看命令是否成功",
+          "body": "Shell 里的 `if` 不只是在判断“数学条件”，更准确地说，它看的是中间那条命令或测试是否执行成功。\n\n基本结构：\n```bash\\nif 条件或命令\\nthen\n  命令列表\\nelse\n  命令列表\\nfi\n```\n\n例：\n```bash\\nif [ -d logs ]\\nthen\n  echo yes\\nelse\n  echo no\\nfi\n```\n如果 `logs` 确实是目录，`[ -d logs ]` 成功，于是输出：\n```text\\nyes\n```\n\n本节还提到：\n- `[ -f a.txt ]`：判断是否普通文件；\n- `[ -d logs ]`：判断是否目录。"
+        },
+        {
+          "name": "`case`：一个值对应多个分支",
+          "body": "`case` 适合做菜单选择或多分支匹配。\n\n基本结构：\n```bash\\ncase $choice in\n  start) echo starting;;\n  stop) echo stopping;;\n  *) echo unknown;;\\nesac\n```\n\n要点：\n- `模式) 命令 ;;` 是一个分支；\n- `;;` 表示结束当前分支；\n- `*)` 是兜底分支；\n- `esac` 是整个 `case` 的结束标记。\n\n如果：\n```bash\\nchoice=stop\n```\n会匹配：\n```bash\\nstop) echo stopping;;\n```\n输出：\n```text\\nstopping\n```\n\n多模式可以用 `|`：\n```bash\\ncase $cmd in\n  start|run) echo \"启动\";;\n  stop|quit) echo \"停止\";;\n  *) echo \"未知命令\";;\\nesac\n```\n`cmd=run` 时输出 `启动`。\n\n模式也可以用通配符：\n```bash\\ncase $file in\n  *.c) echo \"C源文件\";;\n  *.txt) echo \"文本文件\";;\n  *) echo \"其他\";;\\nesac\n```\n`file=main.c` 时输出 `C源文件`。\n\n注意：`case` 默认区分大小写。比如：\n```bash\\ncase $ans in\n  y|Y|yes|YES) echo \"同意\";;\n  n|N|no|NO) echo \"拒绝\";;\n  *) echo \"输入无效\";;\\nesac\n```\n如果 `ans=Yes`，不会匹配 `yes` 或 `YES`，会走兜底。"
+        },
+        {
+          "name": "`while`：先判断，再循环",
+          "body": "`while` 的核心是：**只要条件或命令成功，就反复执行循环体**。\n\n例：\n```bash\\ncount=3\\nwhile [ $count -gt 0 ]\\ndo\n  echo $count\n  let count=count-1\\ndone\n```\n输出：\n```text\n3\n2\n1\n```\n\n当 `count` 变成 `0` 后，`[ $count -gt 0 ]` 失败，循环结束。\n\n重要边界：`while` 是先判断、再执行。若一开始：\n```bash\\ncount=0\n```\n循环体执行零次。"
+        },
+        {
+          "name": "`while read`：逐行读取文件",
+          "body": "`while read` 常用于按行处理文件。\n\n```bash\\nwhile read line\\ndo\n  echo \"$line\"\\ndone < names.txt\n```\n\n含义：\n- `< names.txt` 把文件内容送给整个 `while`；\n- `read line` 每次读一行；\n- 只要还能读到内容，循环就继续。\n\n如果 `names.txt` 有三行：\n```text\\nAlice\\nBob\\nCindy\n```\n会依次输出这三行。\n\n如果一行是：\n```text\\nAlice Smith\n```\n使用：\n```bash\\nread line\n```\n则 `line` 会拿到完整的 `Alice Smith`。\n\n如果写成：\n```bash\\nread first last\n```\n并且一行是：\n```text\\nAlice Smith Cooper\n```\n则：\n```bash\\nfirst=Alice\\nlast=\"Smith Cooper\"\n```\n因为变量数量少于字段数量时，最后一个变量会接住剩余内容。"
+        },
+        {
+          "name": "`for var in ...`：从列表逐个取值",
+          "body": "第一种 `for` 是明确列清单：\n\n```bash\\nfor var in red green blue\\ndo\n  echo \"$var\"\\ndone\n```\n\n含义：让 `var` 依次取 `red`、`green`、`blue`，每取一次执行一次循环体。\n\n输出：\n```text\\nred\\ngreen\\nblue\n```"
+        },
+        {
+          "name": "省略 `in` 的 `for var`：默认遍历位置参数",
+          "body": "第二种写法：\n\n```bash\\nfor var\\ndo\n  echo \"$var\"\\ndone\n```\n\n没有写 `in word_list` 时，它默认遍历脚本的位置参数，也就是 `$1`、`$2`、`$3`……，不包括 `$0`，也不会把 `$#` 当作循环值。\n\n例如运行：\n```bash\\nbash show.sh apple banana\n```\n`var` 依次取：\n```text\\napple\\nbanana\n```\n\n如果没有传任何参数：\n```bash\\nbash show.sh\n```\n循环体执行零次。"
+        },
+        {
+          "name": "Shell 参数中的空格与引号",
+          "body": "Shell 中空格会分词，引号会把带空格的内容保护成一个整体参数。\n\n脚本：\n```bash\\nfor var\\ndo\n  echo \"[$var]\"\\ndone\n```\n\n运行：\n```bash\\nbash show.sh \"red green\" blue\n```\n输出两行：\n```text\n[red green]\n[blue]\n```\n因为 `\"red green\"` 是一个整体参数。\n\n运行：\n```bash\\nbash show.sh red green blue\n```\n输出三行：\n```text\n[red]\n[green]\n[blue]\n```\n\n运行：\n```bash\\nbash show.sh \"red green blue\"\n```\n输出一行：\n```text\n[red green blue]\n```"
+        },
+        {
+          "name": "C 风格 `for`：计数循环",
+          "body": "C 风格 `for` 更像计数器循环：\n\n```bash\\nfor ((i=1; i<=3; i++))\\ndo\n  echo \"$i\"\\ndone\n```\n\n三段含义：\n```bash\\nfor ((初始值; 继续条件; 每轮结束后更新))\n```\n\n上例中：\n- `i=1`：起点；\n- `i<=3`：继续循环的条件；\n- `i++`：每轮结束后让 `i` 加一。\n\n输出：\n```text\n1\n2\n3\n```\n\n再例：\n```bash\\nfor ((i=2; i<=6; i=i+2))\\ndo\n  echo \"$i\"\\ndone\n```\n输出：\n```text\n2\n4\n6\n```\n因为起点是 `2`，每轮加 `2`，到 `6` 仍满足条件，下一次变成 `8` 才停止。"
+        }
+      ]
+    },
+    {
+      "type": "key-insight",
+      "attribution": "学习者",
+      "content": "在 `case` 里追问“`;;` 属于 case 结构内？”并意识到它是用来结束当前分支的语法，这是理解 `case` 不会继续往后混着执行的关键。"
+    },
+    {
+      "type": "key-terms",
+      "items": [
+        {
+          "term": "只读变量",
+          "definition": "用 `declare -r` 声明后不能再修改值的变量。"
+        },
+        {
+          "term": "整型变量",
+          "definition": "用 `declare -i` 声明后，赋值时会按整数表达式处理的变量。"
+        },
+        {
+          "term": "环境变量",
+          "definition": "可以被子 Shell 或子进程继承的变量，常用 `export` 或 `declare -x` 标记。"
+        },
+        {
+          "term": "位置参数",
+          "definition": "脚本接收的命令行参数，如 `$1`、`$2`；`$0` 是脚本名，`$#` 是参数个数。"
+        },
+        {
+          "term": "返回码",
+          "definition": "上一条命令执行后的状态码，可用 `$?` 查看；通常 `0` 表示成功，非 `0` 表示失败或条件不成立。"
+        },
+        {
+          "term": "兜底分支",
+          "definition": "`case` 中的 `*)` 分支，用来处理前面模式都没有匹配到的情况。"
+        },
+        {
+          "term": "`shift`",
+          "definition": "丢弃前面的一个或多个位置参数，并让后面的参数左移；通常不改变 `$0`。"
+        }
+      ]
+    },
+    {
+      "type": "open-question",
+      "content": "下次可以从最后的问题继续：C 风格 `for` 里的更新表达式，如 `i=i+2`，是在循环体执行完之后再执行；可以进一步比较它和 `while` 写计数循环时的对应关系。"
+    },
+    {
+      "type": "review-questions",
+      "items": [
+        {
+          "question": "执行下面代码会输出什么？为什么？\n\n```bash\\ndeclare -i n=1\\nn=n+2\\necho $n\n```",
+          "hint": "注意 `declare -i` 会改变赋值时的处理方式。",
+          "answer": "输出：\n```text\n3\n```\n因为 `n` 被声明为整型变量，`n=n+2` 会按整数表达式计算，而不是把 `n+2` 当普通字符串保存。"
+        },
+        {
+          "question": "运行：\n\n```bash\\nbash test.sh apple banana cherry\n```\n脚本中执行一次 `shift` 后，`$1`、`$2`、`$#` 分别是什么？",
+          "answer": "执行 `shift` 前：`$1=apple`，`$2=banana`，`$3=cherry`，`$#=3`。\n\n执行一次后：\n```bash\n$1=banana\n$2=cherry\n$#=2\n```\n`$0` 不参与左移。"
+        },
+        {
+          "question": "下面的 `case` 中，如果 `ans=Yes`，会输出什么？\n\n```bash\\ncase $ans in\n  y|Y|yes|YES) echo \"同意\";;\n  n|N|no|NO) echo \"拒绝\";;\n  *) echo \"输入无效\";;\\nesac\n```",
+          "hint": "`case` 默认区分大小写。",
+          "answer": "输出：\n```text\n输入无效\n```\n因为 `Yes` 既不是 `yes`，也不是 `YES`，没有匹配到前两个分支，所以走 `*)` 兜底。"
+        },
+        {
+          "question": "下面脚本在 `names.txt` 第一行是 `Alice Smith Cooper` 时，第一轮循环中 `first` 和 `last` 分别是什么？\n\n```bash\\nwhile read first last\\ndo\n  echo \"$first\"\n  echo \"$last\"\\ndone < names.txt\n```",
+          "answer": "第一轮中：\n```bash\\nfirst=Alice\\nlast=\"Smith Cooper\"\n```\n因为 `read` 的变量数量少于字段数量时，最后一个变量会接住剩下的内容。"
+        },
+        {
+          "question": "脚本如下：\n\n```bash\\nfor var\\ndo\n  echo \"[$var]\"\\ndone\n```\n运行：\n\n```bash\\nbash show.sh \"red green\" blue\n```\n会输出几行？分别是什么？",
+          "answer": "输出两行：\n```text\n[red green]\n[blue]\n```\n因为 `\"red green\"` 被引号保护成一个整体参数，`blue` 是第二个参数。"
+        }
+      ]
+    }
+  ]
+}

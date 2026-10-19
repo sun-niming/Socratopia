@@ -1,0 +1,44 @@
+{
+  "title": "不能用 shared_ptr(this) 返回自身指针",
+  "definition": "在继承了 enable_shared_from_this 的类中，不能通过 shared_ptr<Foo>(this) 创建指向自身的新 shared_ptr。如果对象已经由另一个 shared_ptr 管理，这样做会产生两个彼此独立的 shared_ptr 控制关系，它们都会尝试释放同一个对象，从而导致双重释放。",
+  "key_points": [
+    "shared_ptr<Foo>(this) 不会自动加入现有 shared_ptr 的所有权控制关系。",
+    "两个独立的 shared_ptr 指向同一对象时，可能各自尝试释放该对象。",
+    "在成员函数中返回自身的 shared_ptr，应使用 shared_from_this()。"
+  ],
+  "examples": [
+    "错误实现：shared_ptr<Foo> getPointer() { return shared_ptr<Foo>(this); }",
+    "正确思路：在继承 std::enable_shared_from_this<Foo> 后，getPointer() 返回 shared_from_this()。"
+  ],
+  "misconceptions": [
+    "shared_ptr<Foo>(this) 不等价于 shared_from_this()。",
+    "两个 shared_ptr 指向同一地址，并不意味着它们共享同一个控制块。",
+    "双重释放不是 shared_ptr 本身失效，而是因为错误地为同一对象建立了独立的所有权管理关系。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么 shared_ptr<Foo>(this) 可能导致双重释放？",
+      "a": "因为它会创建一个与已有 shared_ptr 相互独立的 shared_ptr；两个独立的 shared_ptr 在销毁时都会尝试释放同一个对象。"
+    },
+    {
+      "q": "如何安全地从成员函数返回指向自身的 shared_ptr？",
+      "a": "让类继承 std::enable_shared_from_this，并返回 shared_from_this()。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "shared_ptr 的控制块与所有权概念",
+    "enable_shared_from_this 安全获取指向自身的智能指针"
+  ],
+  "source_pages": [
+    226,
+    226
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "482_不能用_shared_ptr_this_返回自身指针",
+  "_chunk_pages": [
+    225,
+    228
+  ]
+}

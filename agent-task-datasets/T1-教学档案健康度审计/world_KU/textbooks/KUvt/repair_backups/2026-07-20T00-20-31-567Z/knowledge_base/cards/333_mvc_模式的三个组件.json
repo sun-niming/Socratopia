@@ -1,0 +1,50 @@
+{
+  "title": "MVC 模式的三个组件",
+  "definition": "模型—视图—控制器（MVC）模式用于分离数据存储、数据显示和用户操作。模型（Model）表示应用程序处理的数据；视图（View）是模型的特定显示界面；控制器（Controller）处理事件并修改模型，也可以直接修改视图中的界面元素。",
+  "key_points": [
+    "模型负责数据及其相关逻辑。",
+    "视图负责以特定界面展示模型。",
+    "控制器响应动作或事件，并据此调整模型。",
+    "MVC 的三个组件形成反馈循环：动作由控制器处理，控制器修改模型，模型的变化再反映到视图。",
+    "控制器也可以直接修改视图，例如调整 UI 元素。"
+  ],
+  "examples": [
+    "MVC 的基本交互可表示为：$$\\text{用户动作}\\rightarrow\\text{Controller}\\rightarrow\\text{Model}\\rightarrow\\text{View}$$",
+    "在国际象棋程序中，ChessBoard 和 ChessPiece 属于模型；ChessBoardView 和 ChessPieceView 属于视图；Player 属于控制器。"
+  ],
+  "misconceptions": [
+    "认为视图负责存储全部业务数据。",
+    "认为控制器只能修改模型，绝对不能直接调整视图。",
+    "认为 MVC 只是把代码分成三个文件，而不涉及职责分离和交互关系。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "MVC 中模型、视图和控制器分别负责什么？",
+      "a": "模型负责数据，视图负责展示模型，控制器负责响应事件并修改模型，必要时也可直接修改视图。"
+    },
+    {
+      "q": "国际象棋示例中的 Player 属于 MVC 的哪一部分？",
+      "a": "属于控制器。"
+    },
+    {
+      "q": "国际象棋示例中的 ChessBoardView 属于 MVC 的哪一部分？",
+      "a": "属于视图。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "将程序划分为子系统",
+    "软件组件职责"
+  ],
+  "source_pages": [
+    159,
+    160
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "333_mvc_模式的三个组件",
+  "_chunk_pages": [
+    157,
+    160
+  ]
+}

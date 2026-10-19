@@ -1,0 +1,49 @@
+{
+  "title": "C++类型别名 using",
+  "definition": "类型别名是为现有类型声明提供一个新名称的语法。它不会创建新类型，只是为原有类型引入一个同义名称，因此别名与原类型完全兼容。C++11 引入了使用 using 声明类型别名的写法。",
+  "key_points": [
+    "基本语法是 using 别名 = 原类型;。",
+    "类型别名不会创建独立的新类型，使用别名声明的对象与使用原类型声明的对象具有相同类型。",
+    "类型别名可以简化复杂、冗长的类型声明。",
+    "标准库使用类型别名将 basic_string<char> 简化为 string。"
+  ],
+  "examples": [
+    "为 int* 创建别名：\nusing IntPtr = int*;\n\nint* pi;\nIntPtr p2;\npi = p2;\np2 = pi;",
+    "使用 string 别名简化模板类型：\nusing string = basic_string<char>;\nvoid processVector(const vector<string>& vec) { /* omitted */ }\nvector<string> myVector;\nprocessVector(myVector);"
+  ],
+  "misconceptions": [
+    "类型别名不会创建新类、新类型或新的运行时对象。",
+    "IntPtr p2; 与 int* p2; 声明的是相同类型的对象。",
+    "类型别名只改变书写名称，不会改变原类型的语义或兼容性。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "using IntPtr = int*; 表示什么？",
+      "a": "它为现有类型 int* 创建名为 IntPtr 的类型别名，不会创建新类型。"
+    },
+    {
+      "q": "IntPtr 与 int* 是否是兼容类型？",
+      "a": "是。它们实际上表示完全相同的类型，因此 int* 和 IntPtr 声明的指针可以相互赋值。"
+    },
+    {
+      "q": "为什么标准库使用 string 作为 basic_string<char> 的别名？",
+      "a": "因为 basic_string<char> 使用频率很高，string 更短、更有意义，也更便于书写。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "指针",
+    "类模板基础"
+  ],
+  "source_pages": [
+    88,
+    88
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "158_c_类型别名_using",
+  "_chunk_pages": [
+    85,
+    88
+  ]
+}

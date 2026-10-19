@@ -1,0 +1,45 @@
+{
+  "title": "vector 扩容时优先使用 noexcept 移动构造函数",
+  "definition": "当 vector 因容量不足而扩容时，需要把旧存储区中的元素转移到新的存储区。如果元素类型具有 noexcept 的移动构造函数，编译器和标准库可以移动元素而不是复制元素，从而避免深度复制并提高效率。C++ 标准不规定 vector 的初始容量和具体增长策略，因此不同编译器的构造、移动和复制调用次数可能不同。",
+  "key_points": [
+    "vector 扩容通常需要把旧元素转移到更大的存储区。",
+    "元素类型的移动构造函数声明为 noexcept 时，vector 可以安全地优先采用移动构造。",
+    "移动通常只需转移资源所有权，不需要对资源进行深度复制，因此可能比复制高效。",
+    "vector 的初始容量和增长策略由具体实现决定，不能根据某个编译器的输出推断所有实现都会产生相同结果。"
+  ],
+  "examples": [
+    "示例：\nstd::vector<Spreadsheet> vec;\nvec.push_back(Spreadsheet{100, 100});\n当 vector 扩容时，已有 Spreadsheet 元素可能通过移动构造函数转移到新的存储区。"
+  ],
+  "misconceptions": [
+    "vector 扩容时不一定总是调用移动构造函数；如果移动构造函数不是 noexcept，标准库实现可能选择复制，以保证异常安全。",
+    "不同编译器或不同构建配置下，构造函数和移动构造函数的调用次数可能不同。",
+    "声明 noexcept 不会让所有复制自动变成移动；类型仍需提供可用的移动构造函数。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么 vector 扩容时希望元素具有 noexcept 的移动构造函数？",
+      "a": "因为 vector 可以在扩容迁移旧元素时使用移动而不是复制，从而避免深度复制并提高效率。"
+    },
+    {
+      "q": "为什么教材示例的 vector 调用次数不能适用于所有编译器？",
+      "a": "因为 C++ 标准没有规定 vector 的初始容量和增长策略，不同实现可能采用不同的扩容方式。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "std::vector 的动态扩容",
+    "移动构造函数",
+    "noexcept"
+  ],
+  "source_pages": [
+    273,
+    274
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "575_vector_扩容时优先使用_noexcept_移动构造函数",
+  "_chunk_pages": [
+    273,
+    276
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "title": "return语句与函数返回值",
+  "definition": "函数可以使用return语句把一个任意值返回给调用代码，作为函数的结果。函数在执行过程中一旦执行到return语句就会立即退出。没有return语句，或者使用不带返回值的return语句时，函数的返回值为undefined。",
+  "key_points": [
+    "return可以把任意值作为函数结果返回",
+    "执行到return后函数立即结束",
+    "无return或无参return时，返回值是undefined"
+  ],
+  "examples": [
+    "function func(x, y) { return x + y; }",
+    "return;"
+  ],
+  "misconceptions": [
+    "return只是返回值，不会影响函数执行流程",
+    "没有写return时函数一定会返回某个默认数字",
+    "return后面的语句还会继续执行"
+  ],
+  "qa_pairs": [
+    {
+      "q": "执行return语句后，函数会怎样？",
+      "a": "函数会立即退出，不再继续执行后面的语句。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "函数"
+  ],
+  "source_pages": [
+    257,
+    260
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "374_return语句与函数返回值",
+  "_chunk_pages": [
+    257,
+    260
+  ]
+}

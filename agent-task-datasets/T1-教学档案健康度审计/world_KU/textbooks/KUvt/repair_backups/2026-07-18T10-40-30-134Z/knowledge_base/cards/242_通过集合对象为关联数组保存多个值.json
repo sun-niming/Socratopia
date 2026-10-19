@@ -1,0 +1,46 @@
+{
+  "title": "通过集合对象为关联数组保存多个值",
+  "definition": "原文示例展示了一种为同一个键保存多个元素的做法：先创建 `Collection`，向其中加入字符串，再将该集合插入键为 `14534` 的关联数组；也可以先通过 `get(14534)` 取得已有集合，向集合加入新元素，再把更新后的集合重新插回关联数组。示例最终得到键 `14534` 对应包含两个姓名的集合。",
+  "key_points": [
+    "新建集合的步骤是：创建 `Collection`，加入 `\"Kleper, Scott\"`，再执行 `myArray.insert(14534, collection)`。",
+    "更新已有集合的步骤是：通过 `myArray.get(14534)` 取得集合，加入 `\"Kleper, Marni\"`，再执行 `myArray.insert(14534, collection)`。",
+    "原文注释说明第二种写法会取得已有集合，并用更新后的集合替换原集合。",
+    "最终集合内容为 `{\"Kleper, Scott\", \"Kleper, Marni\"}`。"
+  ],
+  "examples": [
+    "新建集合并插入：`Collection collection; collection.insert(\"Kleper, Scott\"); myArray.insert(14534, collection);`",
+    "取得并更新已有集合：`Collection collection { myArray.get(14534) }; collection.insert(\"Kleper, Marni\"); myArray.insert(14534, collection);`",
+    "最终结果可表示为：$$myArray[14534]=\\{\\text{\"Kleper, Scott\"},\\text{\"Kleper, Marni\"}\\}$$"
+  ],
+  "misconceptions": [
+    "不要把第二次 `insert` 误解为一定自动向原集合追加元素；原文明确展示的是先取出集合、修改集合，再将更新后的集合插回去。",
+    "原文中的 `Collection` 是示例中的集合类型；仅凭页面片段无法确定它的具体 C++ 类型或完整接口。",
+    "示例展示的是一种实现多值关联的方式，不等同于已经给出了 MultiAssociativeArray 的完整实现。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何在原有关联数组示例中让键 `14534` 关联两个姓名？",
+      "a": "先创建包含 `\"Kleper, Scott\"` 的 `Collection` 并插入键 `14534`；然后取出该集合，加入 `\"Kleper, Marni\"`，再把更新后的集合插回键 `14534`。"
+    },
+    {
+      "q": "原文示例中更新已有集合后，键 `14534` 对应的集合是什么？",
+      "a": "是 `{\"Kleper, Scott\", \"Kleper, Marni\"}`。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "集合的基本概念",
+    "关联数组的键值关系"
+  ],
+  "source_pages": [
+    173,
+    174
+  ],
+  "needs_verification": true,
+  "verify_query": "《C++20高级编程》第5版 第173页 Collection myArray.insert 14534 Kleper Scott Kleper Marni 原文",
+  "concept_id": "242_通过集合对象为关联数组保存多个值",
+  "_chunk_pages": [
+    173,
+    176
+  ]
+}

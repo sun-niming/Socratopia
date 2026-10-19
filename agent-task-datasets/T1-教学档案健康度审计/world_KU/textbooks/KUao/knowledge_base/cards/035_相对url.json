@@ -1,0 +1,40 @@
+{
+  "title": "相对URL",
+  "definition": "URL分为绝对URL和相对URL。相对URL使用的是不完整的URL，必须结合参考地址（当前资源的位置）才能确定其实际指向。",
+  "key_points": [
+    "相对URL不是完整地址，不能脱离上下文独立确定",
+    "\"./\"开头表示当前所在目录，且\"./\"可以省略",
+    "\"../\"开头表示当前目录的上一层目录",
+    "\"/\"开头表示网站根目录"
+  ],
+  "examples": [
+    "./index.html",
+    "../images/logo.png",
+    "/css/style.css"
+  ],
+  "misconceptions": [
+    "把相对URL当作可以脱离当前页面直接唯一确定的地址",
+    "认为\"./\"、\"../\"、\"/\"三者含义相同"
+  ],
+  "qa_pairs": [
+    {
+      "q": "相对URL为什么不能单独确定路径？",
+      "a": "因为它是不完整的URL，必须结合参考地址（当前资源的位置）才能确定。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "URL"
+  ],
+  "source_pages": [
+    25,
+    28
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "035_相对url",
+  "_chunk_pages": [
+    25,
+    28
+  ]
+}

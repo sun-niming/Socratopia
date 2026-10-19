@@ -1,0 +1,45 @@
+{
+  "title": "unordered_multimap 与 unordered_map 的区别",
+  "definition": "unordered_multimap 是允许多个元素具有相同键的无序关联容器。它与 unordered_map 的接口大体相同，但由于同一个键可能对应多个元素，unordered_multimap 不提供 operator[] 和 at()；其单元素 insert() 操作只返回迭代器，而不是 unordered_map 中可能返回的 pair。unordered_multimap 也不支持 insert_or_assign() 和 try_emplace()。",
+  "key_points": [
+    "unordered_multimap 允许多个元素使用相同的键。",
+    "unordered_multimap 没有 operator[] 和 at()，因为在一个键对应多个元素时，这些接口的语义不明确。",
+    "在 unordered_multimap 上插入单个元素总是成功，因此 insert() 只返回迭代器。",
+    "unordered_multimap 允许插入完全相同的键值对；若要避免重复，必须在插入前显式检查。"
+  ],
+  "examples": [
+    "允许同一个姓名对应多个电话号码：\n```text\nunordered_multimap<string, string> phoneBook{\n    {\"Marc G.\", \"123-456789\"},\n    {\"Marc G.\", \"987-654321\"}\n};\n```",
+    "如果需要避免重复的键值对，应在插入前执行显式检查，而不能依赖 unordered_multimap 自动去重。"
+  ],
+  "misconceptions": [
+    "unordered_multimap 并不会自动拒绝重复键或重复的完整键值对。",
+    "不能因为 unordered_multimap 支持 find()，就认为 find() 会返回某个键对应的第一个元素。",
+    "unordered_multimap 不是有序的 multimap，它使用哈希函数而不是按键排序。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "unordered_multimap 为什么不提供 operator[] 和 at()？",
+      "a": "因为同一个键可以对应多个元素，operator[] 和 at() 无法明确表示应访问哪一个元素。"
+    },
+    {
+      "q": "unordered_multimap 的 insert() 与 unordered_map 的插入返回结果有什么区别？",
+      "a": "unordered_multimap 插入单个元素总是成功，因此 insert() 只返回迭代器，而 unordered_map 的相应插入操作可能返回包含迭代器和成功状态的 pair。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "unordered_map 的基本用法",
+    "multimap 允许重复键的概念"
+  ],
+  "source_pages": [
+    598,
+    599
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1233_unordered_multimap_与_unordered_map_的区别",
+  "_chunk_pages": [
+    597,
+    600
+  ]
+}

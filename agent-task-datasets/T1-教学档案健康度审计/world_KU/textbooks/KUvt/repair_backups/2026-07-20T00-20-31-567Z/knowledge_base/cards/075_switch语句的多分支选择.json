@@ -1,0 +1,49 @@
+{
+  "title": "switch语句的多分支选择",
+  "definition": "switch语句根据一个表达式的值，在多个case常量标签中选择匹配项并执行相应代码。switch表达式必须是整型、可转换为整型的类型、枚举类型或强类型枚举。还可以提供default标签，在没有任何case匹配时执行default分支。",
+  "key_points": [
+    "每个case标签代表一个常量值，switch表达式与该值匹配时从该标签处开始执行。",
+    "通常使用break结束当前case的执行，避免继续执行后续标签中的语句。",
+    "switch适合根据一个表达式的多个离散值执行不同操作。",
+    "switch语句在逻辑上可以改写为一组if、else if和else判断。",
+    "如果只需要检查一个值或进行一般条件测试，通常使用if或if-else更合适。"
+  ],
+  "examples": [
+    "switch (menuItem) { case OpenMenuItem: /* 打开文件 */ break; case SaveMenuItem: /* 保存文件 */ break; default: /* 输出错误信息 */ break; }",
+    "等价的条件判断形式：if (menuItem == OpenMenuItem) { /* 打开文件 */ } else if (menuItem == SaveMenuItem) { /* 保存文件 */ } else { /* 输出错误信息 */ }"
+  ],
+  "misconceptions": [
+    "switch不是只能处理整数变量；枚举和可转换为整型的类型也可以作为表达式类型。",
+    "case标签不是独立的隐式代码块；如果没有break，执行可能继续到后续case的代码。",
+    "default不是必须的，但它可以处理所有case都不匹配的情况。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "switch语句中的case标签必须与什么进行匹配？",
+      "a": "与switch表达式的值进行匹配，并且case标签表示常量值。"
+    },
+    {
+      "q": "switch没有匹配的case时，哪个分支会执行？",
+      "a": "如果存在default分支，则执行default分支。"
+    },
+    {
+      "q": "什么时候通常优先使用switch而不是级联的if-else？",
+      "a": "当需要根据同一个表达式的多个离散值执行不同操作时。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "if语句条件表达式的布尔求值"
+  ],
+  "source_pages": [
+    49,
+    50
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "075_switch语句的多分支选择",
+  "_chunk_pages": [
+    49,
+    52
+  ]
+}

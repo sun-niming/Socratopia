@@ -1,0 +1,43 @@
+{
+  "title": "IP任播在CDN和DNS中的适用性",
+  "definition": "IP任播可以用于把用户请求引向分布在不同地点的相同服务实例。教材指出，CDN实践中通常不使用IP任播，因为BGP路由变化可能使同一个TCP连接的不同分组到达不同的Web服务器实例；相比之下，IP任播被DNS系统广泛用于把DNS请求指向较近的根DNS服务器。",
+  "key_points": [
+    "CDN使用IP任播时，BGP路径变化可能改变后续分组的到达服务器，从而使同一TCP连接的不同分组到达不同实例。",
+    "DNS请求通常是面向单次请求的，教材指出IP任播被DNS系统广泛采用。",
+    "教材说明当前根DNS服务器有13个IP地址；每个地址背后可以对应多个分散在世界各地的DNS根服务器。",
+    "发送到这些根DNS IP地址的请求可由IP任播路由到负责该地址的较近根DNS服务器。"
+  ],
+  "examples": [
+    "用户向某个根DNS服务器IP地址发送DNS请求时，网络通过IP任播将请求转发到负责该IP地址、且由BGP判定为较近的根DNS服务器实例。"
+  ],
+  "misconceptions": [
+    "IP任播并不一定适合保持有状态的长连接；教材给出的CDN问题正是同一TCP连接可能跨不同服务器实例。",
+    "一个根DNS IP地址不等于只有一台物理根DNS服务器；同一地址可以由多个分散实例提供服务。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么CDN通常不使用IP任播？",
+      "a": "因为BGP路由变化可能导致同一TCP连接的不同分组到达不同Web服务器实例。"
+    },
+    {
+      "q": "DNS为什么适合使用IP任播？",
+      "a": "IP任播可以把发往同一根DNS IP地址的请求路由到负责该地址的较近根DNS服务器实例。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "IP任播的工作机制",
+    "BGP路由变化"
+  ],
+  "source_pages": [
+    279,
+    280
+  ],
+  "needs_verification": true,
+  "verify_query": "Kurose Ross Computer Networking 7th edition IP anycast CDN TCP connection DNS root servers 13 IP addresses",
+  "concept_id": "624_ip任播在cdn和dns中的适用性",
+  "_chunk_pages": [
+    277,
+    280
+  ]
+}

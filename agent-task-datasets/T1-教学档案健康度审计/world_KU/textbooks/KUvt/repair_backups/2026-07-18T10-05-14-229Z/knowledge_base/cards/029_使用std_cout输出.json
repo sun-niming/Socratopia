@@ -1,0 +1,42 @@
+{
+  "title": "使用std::cout输出",
+  "definition": "`std::cout` 是标准输出流对象，可以使用插入运算符 `<<` 把文本、数值等内容依次写入标准输出。多个输出项可以连续使用 `<<` 连接。",
+  "key_points": [
+    "`std::cout` 位于 `std` 命名空间中。",
+    "输出运算符为 `<<`。",
+    "可以在同一条语句中依次输出字符串、数值和换行控制项。"
+  ],
+  "examples": [
+    "std::cout << \"There are \" << 219 << \" ways I love you.\" << std::endl;"
+  ],
+  "misconceptions": [
+    "不要把输出运算符写成输入运算符 `>>`。",
+    "在未引入相应名称的情况下，不能随意省略 `std::`。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何使用标准输出流依次输出字符串和整数？",
+      "a": "使用 `std::cout` 和连续的 `<<`，例如 `std::cout << \"Value: \" << 7;`。"
+    },
+    {
+      "q": "`std::cout` 中的 `std` 表示什么？",
+      "a": "它是标准库名称所在的 `std` 命名空间。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "表达式",
+    "命名空间基础"
+  ],
+  "source_pages": [
+    37,
+    40
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "029_使用std_cout输出",
+  "_chunk_pages": [
+    37,
+    40
+  ]
+}

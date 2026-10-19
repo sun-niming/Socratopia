@@ -1,0 +1,47 @@
+{
+  "title": "模块中的内联方法与头文件中的隐式内联方法",
+  "definition": "在传统头文件中，如果类定义内直接包含方法实现，这些方法会隐式成为内联方法；但在模块接口文件的类定义中，方法即使直接写出实现，也不会因此自动成为内联方法，需要显式使用 inline 关键字。",
+  "key_points": [
+    "传统头文件的类定义中直接写出的成员函数实现是隐式内联的。",
+    "模块接口文件的类定义中直接写出的成员函数实现，不会按原文所述自动成为内联方法。",
+    "若要使模块接口文件中的这类方法成为内联方法，应显式添加 inline 关键字。"
+  ],
+  "examples": [
+    "显式声明为内联方法：\nexport class Person {\npublic:\n    inline std::string getName() const { return m_name; }\n};"
+  ],
+  "misconceptions": [
+    "“类内定义的方法总是隐式 inline”这一经验不能直接套用于模块接口文件。",
+    "inline 关键字不仅是性能优化提示；在本节语境中，它还关系到实现是否需要对使用者可见以及重新编译范围。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "传统头文件中，类定义内实现的方法具有什么性质？",
+      "a": "它们是隐式内联的，即使没有显式写 inline。"
+    },
+    {
+      "q": "模块接口文件中的类内方法实现是否自动内联？",
+      "a": "按原文，不会自动内联；如果要成为内联方法，需要显式写 inline。"
+    },
+    {
+      "q": "如何显式声明模块接口中的内联方法？",
+      "a": "在方法声明或定义前添加 inline 关键字，例如 inline std::string getName() const { return m_name; }。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "inline函数",
+    "模块接口文件",
+    "类成员函数定义"
+  ],
+  "source_pages": [
+    356,
+    356
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 modules class member function defined inside module interface inline implicit or explicit inline",
+  "concept_id": "717_模块中的内联方法与头文件中的隐式内联方法",
+  "_chunk_pages": [
+    353,
+    356
+  ]
+}

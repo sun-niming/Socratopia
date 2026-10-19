@@ -1,0 +1,45 @@
+{
+  "title": "默认生成三路比较运算符",
+  "definition": "如果类的三路比较运算符 operator<=> 可以显式声明为默认运算符，通常应优先使用编译器生成的实现，而不是手写比较逻辑。编译器生成的比较会随着类中数据成员的新增或修改自动保持同步，减少遗漏更新的风险。",
+  "key_points": [
+    "默认化 operator<=> 可以让编译器根据数据成员生成比较逻辑。",
+    "如果手写比较运算符，新增、删除或修改数据成员后必须同步修改比较实现。",
+    "在 C++20 中，适当默认化 operator<=> 后，通常不需要手动分别实现其他比较运算符；某些情况下还需要显式默认化 operator==。",
+    "原文指出，默认化的 operator<=> 和 operator= 对参数形式有要求；具体声明应遵循 C++20 对默认运算符的语法规则。"
+  ],
+  "examples": [
+    "推荐思路：在类定义中使用类似 `[[nodiscard]] auto operator<=>(const SpreadsheetCell&) const = default;` 的声明，让编译器生成比较逻辑。",
+    "原文给出的反例是将不同于类本身的类型作为默认比较运算符参数，例如 `operator<=>(double) const = default`，这种写法不能使用默认实现。"
+  ],
+  "misconceptions": [
+    "默认化 operator<=> 并不意味着可以为任意参数类型生成比较运算符；原文特别指出参数应与定义该运算符的类类型相匹配。",
+    "不能因为 operator<=> 已默认化，就认为所有相等性比较场景都一定自动满足；原文提示某些情况下还需要显式默认化 operator==。",
+    "手写一个比较运算符后，新增数据成员不会自动加入比较逻辑。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么通常建议将 operator<=> 设置为 default，而不是手写？",
+      "a": "因为编译器会根据当前数据成员生成比较逻辑，并在数据成员新增或修改时自动保持同步；手写实现则容易遗漏更新。"
+    },
+    {
+      "q": "原文给出的 `operator<=>(double) const = default` 为什么不能使用默认实现？",
+      "a": "因为默认化的比较运算符要求满足规定的参数形式，不能任意使用与定义该运算符的类类型不同的参数类型。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++运算符重载",
+    "C++20三路比较运算符"
+  ],
+  "source_pages": [
+    297,
+    297
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 defaulted operator<=> defaulted operator= parameter const class reference requirements operator== six comparison operators",
+  "concept_id": "613_默认生成三路比较运算符",
+  "_chunk_pages": [
+    297,
+    300
+  ]
+}

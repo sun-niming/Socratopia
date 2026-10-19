@@ -1,0 +1,45 @@
+{
+  "title": "vector 的元素访问与边界检查",
+  "definition": "vector 可以通过 `operator[]`、`at()`、`front()` 和 `back()` 访问元素。`operator[]` 不进行边界检查，访问越界会产生未定义行为；`at()` 会进行边界检查，索引越界时抛出 `std::out_of_range` 异常。`front()` 返回第一个元素的引用，`back()` 返回最后一个元素的引用；对空 vector 调用它们会产生未定义行为。",
+  "key_points": [
+    "`operator[]` 的访问形式类似 C 风格数组下标，但不检查边界。",
+    "`at(index)` 在索引越界时抛出 `std::out_of_range`。",
+    "`front()` 返回第一个元素的引用，`back()` 返回最后一个元素的引用。",
+    "对空 vector 调用 `front()` 或 `back()` 是未定义行为。",
+    "教材指出，所有 vector 元素访问操作的复杂度都是常量时间，即 $O(1)$。"
+  ],
+  "examples": [
+    "`vector<int> values{10, 20, 30};` 中，`values[1]` 和 `values.at(1)` 都访问第二个元素。",
+    "若 `values` 有 3 个元素，`values.at(3)` 会抛出 `std::out_of_range`；而 `values[3]` 的结果是未定义的。"
+  ],
+  "misconceptions": [
+    "`operator[]` 不会自动进行越界检查。",
+    "调试模式下可能出现运行时错误，并不代表 C++ 标准为 `operator[]` 提供了边界检查。",
+    "`front()` 和 `back()` 不能安全地用于空 vector。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`operator[]` 与 `at()` 访问 vector 元素的主要区别是什么？",
+      "a": "`operator[]` 不进行边界检查，越界访问是未定义行为；`at()` 会进行边界检查，越界时抛出 `std::out_of_range`。"
+    },
+    {
+      "q": "对空 vector 调用 `front()` 会怎样？",
+      "a": "会产生未定义行为。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "顺序容器与 vector 的基本特性"
+  ],
+  "source_pages": [
+    549,
+    550
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1131_vector_的元素访问与边界检查",
+  "_chunk_pages": [
+    549,
+    552
+  ]
+}

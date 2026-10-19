@@ -1,0 +1,45 @@
+{
+  "title": "范围管道处理 pair 向量中的人员年龄",
+  "definition": "可以创建一个元素类型为 pair 的 vector，其中每个 pair 包含一个 Person 对象及其年龄。使用范围库构建单一管道，从每个 pair 中提取年龄，并过滤掉年龄小于 12 岁或大于 65 岁的人员；随后使用本章介绍的 sumO 算法计算剩余年龄的平均值。将范围传递给 sumO 算法时，必须使用普通范围。",
+  "key_points": [
+    "每个元素是一个包含 Person 实例和年龄的 pair。",
+    "管道依次完成年龄提取和条件过滤：保留满足 $12\\leq\\text{age}\\leq 65$ 的元素。",
+    "对范围调用 sumO 时，教材要求传入普通范围。",
+    "平均年龄应由过滤后剩余人员的年龄总和除以剩余人数得到；原文未规定空结果时的处理方式。"
+  ],
+  "examples": [
+    "过滤条件可表示为：$$12\\leq\\text{age}\\leq 65$$",
+    "处理流程：$$\\text{pair 向量}\\rightarrow\\text{提取年龄}\\rightarrow\\text{过滤年龄}\\rightarrow\\text{sumO 求平均值}$$"
+  ],
+  "misconceptions": [
+    "不是删除年龄在 12 岁到 65 岁之间的人，而是删除小于 12 岁和大于 65 岁的人。",
+    "sumO 处理的是过滤后的年龄范围，而不是原始向量中的所有年龄。",
+    "原文没有说明没有剩余人员时平均值应如何计算，不能自行假定结果。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "练习 17-2 要求从 Person 与年龄组成的 pair 向量中保留哪些年龄？",
+      "a": "保留年龄在 12 岁到 65 岁之间（含 12 和 65）的人员，删除年龄小于 12 岁或大于 65 岁的人员。"
+    },
+    {
+      "q": "练习 17-2 中范围管道的主要处理顺序是什么？",
+      "a": "先从 pair 中提取年龄，再过滤年龄，最后对剩余年龄使用 sumO 计算平均值。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++标准库容器",
+    "C++范围库管道"
+  ],
+  "source_pages": [
+    545,
+    545
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 ranges sumO algorithm common range textbook Marc Gregoire Advanced C++20 Programming exercise 17-2",
+  "concept_id": "1116_范围管道处理_pair_向量中的人员年龄",
+  "_chunk_pages": [
+    545,
+    548
+  ]
+}

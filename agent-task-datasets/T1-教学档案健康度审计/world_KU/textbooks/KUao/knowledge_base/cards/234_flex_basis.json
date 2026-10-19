@@ -1,0 +1,45 @@
+{
+  "title": "flex-basis",
+  "definition": "flex-basis 属性定义弹性项目在分配空间前的初始大小，也就是项目占据的主轴空间大小（main size）。浏览器会先根据它判断主轴上是否有多余空间。",
+  "key_points": [
+    "默认值为 auto，表示项目按本来大小作为初始大小。",
+    "它描述的是分配空间前的基础尺寸。",
+    "当 flex-basis 与 width 或 height 同时设置时，flex-basis 生效。",
+    "主轴方向为行时，flex-basis 影响宽度；主轴方向为列时，flex-basis 影响高度。"
+  ],
+  "examples": [
+    "flex-basis: auto; 表示项目使用本来大小。",
+    "在主轴方向为行时，设置 flex-basis: 200px; 会影响项目宽度。",
+    "同时设置 flex-basis 和 width 时，以 flex-basis 为准。"
+  ],
+  "misconceptions": [
+    "flex-basis 不是最终所有情况下都等同于 width 或 height，它取决于主轴方向。",
+    "flex-basis 的默认值不是 0，而是 auto。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "flex-basis 的作用是什么？",
+      "a": "定义项目在分配空间前的初始大小，也就是主轴空间大小。"
+    },
+    {
+      "q": "flex-basis 和 width 或 height 同时存在时，谁生效？",
+      "a": "flex-basis 生效。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "Flex 布局基础",
+    "主轴与交叉轴"
+  ],
+  "source_pages": [
+    161,
+    164
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "234_flex_basis",
+  "_chunk_pages": [
+    161,
+    164
+  ]
+}

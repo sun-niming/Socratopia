@@ -1,0 +1,43 @@
+{
+  "title": "lambda 捕获初始化表达式",
+  "definition": "lambda 捕获初始化表达式允许使用任意表达式初始化捕获变量，从而把不直接来自闭包作用域的值或对象引入 lambda。使用这种方式初始化的非引用捕获变量会被拷贝构造，拷贝构造可能移除原类型的 `const` 限定。",
+  "key_points": [
+    "捕获初始化的形式是 `[name = expression]`。",
+    "初始化表达式可以是字符串、变量、函数调用或其他任意表达式。",
+    "捕获变量名可以与外部变量名相同，但教材不推荐这样做，因为可读性较差。"
+  ],
+  "examples": [
+    "初始化一个字符串捕获变量并按值捕获 `pi`：`auto myLambda = [myCapture = \"Pi: \", pi] { std::cout << myCapture << pi; };`。",
+    "同名捕获的形式是 `[myPtr = std::move(myPtr)]`，左侧是 lambda 内部使用的捕获变量名，右侧是外部变量。"
+  ],
+  "misconceptions": [
+    "误以为捕获列表中的每个名称都必须是闭包作用域中已经存在的变量；捕获初始化允许左侧名称对应一个新捕获变量。",
+    "误以为捕获初始化一定保留原对象的 `const` 限定；教材指出非引用捕获变量通过拷贝构造初始化时会移除 `const` 限定。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "捕获初始化表达式的基本语法是什么？",
+      "a": "`[capture_name = expression]`，例如 `[myCapture = \"Pi: \"]`。"
+    },
+    {
+      "q": "捕获初始化表达式能否引入一个不直接存在于外部作用域的值？",
+      "a": "可以，它可以使用任意表达式初始化捕获变量。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "lambda 捕获方式",
+    "拷贝构造"
+  ],
+  "source_pages": [
+    622,
+    622
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1288_lambda_捕获初始化表达式",
+  "_chunk_pages": [
+    621,
+    624
+  ]
+}

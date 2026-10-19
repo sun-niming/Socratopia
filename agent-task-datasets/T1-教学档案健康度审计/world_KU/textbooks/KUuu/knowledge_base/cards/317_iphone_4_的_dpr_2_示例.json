@@ -1,0 +1,39 @@
+{
+  "title": "iPhone 4 的 DPR=2 示例",
+  "definition": "原文用 iPhone 4 说明高 DPR 设备的显示关系：其 CSS 像素为 480×320，DPR=2，因此对应的物理分辨率为 960×640。该示例用来说明同一 CSS 尺寸在高 DPR 屏幕上会由更多物理像素渲染。",
+  "key_points": [
+    "iPhone 4 是一个 DPR=2 的示例。",
+    "480×320 是它对应的 CSS 像素大小。",
+    "960×640 是它的物理像素分辨率。",
+    "这个例子用于说明高 DPR 屏幕的高清显示效果。"
+  ],
+  "examples": [
+    "iPhone 4：DPR=2，CSS像素 480×320，对应物理像素 960×640。"
+  ],
+  "misconceptions": [
+    "480×320 不是 iPhone 4 的物理分辨率，而是 CSS 像素尺寸。",
+    "DPR=2 表示每个 CSS 像素由 2×2 个物理像素渲染。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "原文中的 iPhone 4 示例说明了什么？",
+      "a": "它说明 iPhone 4 的 DPR=2，CSS像素为 480×320，对应物理分辨率为 960×640。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "设备像素比（DPR）",
+    "CSS像素"
+  ],
+  "source_pages": [
+    213,
+    216
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "317_iphone_4_的_dpr_2_示例",
+  "_chunk_pages": [
+    213,
+    216
+  ]
+}

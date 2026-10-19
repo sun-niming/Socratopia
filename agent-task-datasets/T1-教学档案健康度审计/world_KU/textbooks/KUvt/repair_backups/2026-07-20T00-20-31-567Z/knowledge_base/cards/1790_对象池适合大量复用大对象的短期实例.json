@@ -1,0 +1,50 @@
+{
+  "title": "对象池适合大量复用大对象的短期实例",
+  "definition": "当程序频繁创建和销毁具有较大数据成员的短期对象时，可以使用对象池复用内存，减少反复进行动态内存分配和释放的开销。对象池仍会在取得对象时构造对象、归还对象时调用析构函数，但底层内存块可以重复使用。",
+  "key_points": [
+    "教材示例中的 ExpensiveObject 含有一个数组成员：\n$$\\text{std::array<double,\\ 4\\times1024\\times1024>\\ m\\_data};$$",
+    "示例通过 getExpensiveObject() 从对象池获取对象，并返回 std::shared_ptr<ExpensiveObject>。",
+    "对象使用完毕后，shared_ptr 离开作用域，将对象归还池中。",
+    "基准测试将对象池方案与每次执行 new ExpensiveObject{}、使用后 delete 的方案进行比较。",
+    "教材报告的测试中，对象池循环约耗时 54.526 ms，new/delete 循环约耗时 9463.2393 ms，约快 170 倍；该结果与机器、编译器、优化选项和实现细节有关。"
+  ],
+  "examples": [
+    "对象池使用模式：\n```cpp\nusing MyPool = ObjectPool<ExpensiveObject>;\nstd::shared_ptr<ExpensiveObject> getExpensiveObject(MyPool& pool) {\n    auto object { pool.acquireObject() };\n    // 填充 object 中的数据\n    return object;\n}\n```\n对照方式：\n```cpp\nauto object { new ExpensiveObject{} };\nprocessExpensiveObject(object);\ndelete object;\n```"
+  ],
+  "misconceptions": [
+    "对象池并不意味着完全不执行构造函数和析构函数；它主要复用底层存储。",
+    "对象池并非对所有类型和所有工作负载都必然更快；教材明确将其定制用于具有大数据成员的短期对象。",
+    "教材给出的约 170 倍加速是特定测试环境下的结果，不能当作普遍固定的性能比例。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "对象池为什么可能适合 ExpensiveObject？",
+      "a": "因为 ExpensiveObject 包含约 4 MB 的数组，频繁进行 new/delete 的内存分配和释放代价较高，而对象池可以复用已经分配的内存块。"
+    },
+    {
+      "q": "对象池是否会跳过 ExpensiveObject 的构造和析构？",
+      "a": "不会。获取对象时通过 placement new 构造对象，归还对象时通过 std::destroy_at() 调用析构函数；复用的是底层内存。"
+    },
+    {
+      "q": "教材示例中对象池与 new/delete 的测试结果如何？",
+      "a": "教材报告对象池约为 54.526 ms，new/delete 约为 9463.2393 ms，前者约快 170 倍；这是特定测试机器上的结果。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "对象池通过placement new获取并构造对象",
+    "RAII与std::shared_ptr",
+    "动态内存分配开销"
+  ],
+  "source_pages": [
+    862,
+    863
+  ],
+  "needs_verification": true,
+  "verify_query": "\"C++20高级编程\" \"54.526ms\" \"9463.2393ms\" 对象池 ExpensiveObject",
+  "concept_id": "1790_对象池适合大量复用大对象的短期实例",
+  "_chunk_pages": [
+    861,
+    864
+  ]
+}

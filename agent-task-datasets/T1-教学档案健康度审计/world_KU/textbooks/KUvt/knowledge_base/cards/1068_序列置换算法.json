@@ -1,0 +1,44 @@
+{
+  "title": "序列置换算法",
+  "definition": "序列置换是在元素集合相同的情况下改变元素顺序。教材列出的置换算法包括 $\\text{is_permutation()}$、$\\text{next_permutation()}$ 和 $\\text{prev_permutation()}$。",
+  "key_points": [
+    "$\\text{is_permutation()}$ 判断一个范围内的元素是否是另一个范围内元素的置换，即两者包含相同元素但顺序可能不同；教材将其列为二次复杂度。",
+    "$\\text{next_permutation()}$ 修改序列，使其变为字典序上的下一个排列；成功时返回 true。",
+    "$\\text{prev_permutation()}$ 修改序列，使其变为字典序上的前一个排列；成功时返回 true。",
+    "如果从正确排序的序列开始，连续调用 next_permutation() 或 prev_permutation()，可以获得元素的所有可能排列；没有更多排列时返回 false。"
+  ],
+  "examples": [
+    "从升序序列 $[1,2,3]$ 开始，连续调用 $\\text{next_permutation()}$ 可以依次获得 $[1,3,2]$、$[2,1,3]$ 等排列，直到没有下一个排列并返回 false。"
+  ],
+  "misconceptions": [
+    "置换不会增加或删除元素，只改变元素顺序。",
+    "next_permutation() 不会无条件永远返回 true；到达最后一个排列后会返回 false。",
+    "要按字典序遍历所有排列，通常应从正确排序的序列开始。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "is_permutation() 判断什么？",
+      "a": "它判断一个范围内的元素是否是另一个范围内元素的置换，也就是元素相同但排列顺序可能不同。"
+    },
+    {
+      "q": "next_permutation() 没有更多排列时返回什么？",
+      "a": "返回 false。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "序列比较",
+    "字典序"
+  ],
+  "source_pages": [
+    519,
+    519
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1068_序列置换算法",
+  "_chunk_pages": [
+    517,
+    520
+  ]
+}

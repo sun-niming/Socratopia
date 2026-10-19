@@ -1,0 +1,44 @@
+{
+  "title": "自定义文件异常类层次",
+  "definition": "教材示例定义了一个继承自exception的FileError类，用于表示文件操作错误；FileOpenError和FileReadError进一步继承FileError，分别表示文件打开错误和文件读取错误。这样的异常层次允许调用者既可以针对具体错误类型处理，也可以通过FileError统一处理文件类错误。",
+  "key_points": [
+    "FileError继承自exception，并保存文件名和错误消息。",
+    "FileOpenError继承FileError，用于表示文件无法打开。",
+    "FileReadError继承FileError，用于表示读取文件时发生错误，并额外保存出错行号。",
+    "FileError重写what()，返回错误消息；getFilename()返回相关文件名。"
+  ],
+  "examples": [
+    "异常层次可表示为：$$\\mathrm{exception} \\leftarrow \\mathrm{FileError} \\leftarrow \\begin{cases}\\mathrm{FileOpenError}\\\\\\mathrm{FileReadError}\\end{cases}$$",
+    "可以用catch (const FileError& e)统一捕获FileOpenError和FileReadError，也可以把具体派生类catch写在FileError之前进行特殊处理。"
+  ],
+  "misconceptions": [
+    "FileOpenError和FileReadError不是与FileError无关的异常类型，而是FileError的派生类。",
+    "派生异常类仍然可以通过继承得到基类的what()和文件名相关接口；是否覆盖这些接口取决于类的定义。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "教材示例中的FileOpenError和FileReadError之间是什么关系？",
+      "a": "二者都继承自FileError；FileOpenError表示打开文件失败，FileReadError表示读取文件失败。"
+    },
+    {
+      "q": "FileError为什么继承exception？",
+      "a": "这样FileError及其派生类就能作为标准异常体系中的异常使用，并可通过exception类型进行统一捕获。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++继承",
+    "C++异常处理"
+  ],
+  "source_pages": [
+    450,
+    451
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "588_自定义文件异常类层次",
+  "_chunk_pages": [
+    449,
+    452
+  ]
+}

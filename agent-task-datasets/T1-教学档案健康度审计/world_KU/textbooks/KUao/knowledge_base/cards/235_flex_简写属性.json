@@ -1,0 +1,53 @@
+{
+  "title": "flex 简写属性",
+  "definition": "flex 是一个简写属性，用于统一设置 flex-grow、flex-shrink 和 flex-basis 三个子属性，从而控制弹性项目在容器内的伸缩行为。",
+  "key_points": [
+    "语法格式为：flex: flex-grow [ flex-shrink ] [ flex-basis ];",
+    "默认值为 0 1 auto，表示不放大、可缩小、基础大小为内容尺寸。",
+    "flex-grow 为必选项。",
+    "flex-shrink 为可选项，默认值为 1。",
+    "flex-basis 为可选项，默认值为 auto。",
+    "flex-grow 和 flex-shrink 的值类型为非负值。"
+  ],
+  "examples": [
+    "flex: 1 0 200px; 表示放大比例为 1，不缩小，初始大小为 200px。",
+    "flex: 0 1 auto; 表示不放大、可缩小、基础大小为内容尺寸。",
+    "flex: 2; 可理解为只给出 flex-grow，其余按默认值处理。"
+  ],
+  "misconceptions": [
+    "flex 不是单独控制某一种效果，而是同时设置三个子属性。",
+    "flex 的默认值不是 1 1 auto，而是 0 1 auto。",
+    "flex-grow 和 flex-shrink 的值不是负数。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "flex 属性的作用是什么？",
+      "a": "它是简写属性，用于统一设置 flex-grow、flex-shrink 和 flex-basis。"
+    },
+    {
+      "q": "flex 的默认值是什么？",
+      "a": "0 1 auto。"
+    },
+    {
+      "q": "flex: flex-grow [ flex-shrink ] [ flex-basis ]; 中哪个是必选项？",
+      "a": "flex-grow 是必选项。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "flex-grow",
+    "flex-shrink",
+    "flex-basis"
+  ],
+  "source_pages": [
+    161,
+    164
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "235_flex_简写属性",
+  "_chunk_pages": [
+    161,
+    164
+  ]
+}

@@ -1,0 +1,120 @@
+{
+  "conversationId": "wd-sizhIpU5OtkRAiAB4y",
+  "generatedAt": 1782385180529,
+  "pagesRange": "p.160-176",
+  "sections": [
+    {
+      "type": "tldr",
+      "content": "本节把弹性盒子和网格布局的核心抓法串起来：Flex 主要管一维方向上的伸缩、顺序和单项对齐，Grid 主要管二维网格里的轨道、区域、间距和对齐。"
+    },
+    {
+      "type": "narrative",
+      "content": "先从 `flex` 的三件套入手，逐个确认 `grow`、`shrink`、`basis` 的作用，再补上 `order` 和 `align-self` 这些项目级控制。随后切到 Grid，把列/行轨道、`fr`、`auto`、`repeat()`、`minmax()` 和区域写法连成一张更规整的布局图。"
+    },
+    {
+      "type": "concepts",
+      "items": [
+        {
+          "name": "Flex 简写 `flex`",
+          "body": "`flex` 不是单独的新属性，而是三个项目属性的简写：`flex-grow`、`flex-shrink`、`flex-basis`。\\n\\n```css\\nflex: 1 1 auto;\\n```\\n\\n可以把它理解成：\\n- 前两个值管“怎么长、怎么缩”\\n- 最后一个值管“起始多大”"
+        },
+        {
+          "name": "弹性项目的伸缩逻辑",
+          "body": "`flex-grow`、`flex-shrink`、`flex-basis` 分别解决三个问题：\\n\\n- `flex-grow`：容器还有剩余空间时，项目按什么比例放大\\n- `flex-shrink`：容器空间不足时，项目按什么比例缩小\\n- `flex-basis`：分配剩余空间之前，项目先按多大占位\\n\\n一些关键记忆点：\\n- `flex-grow` 默认值是 `\\(0\\)`，表示不主动放大\\n- `flex-shrink` 默认值是 `\\(1\\)`，表示默认参与收缩\\n- `flex-shrink: 0;` 表示这个项目不缩小\\n- `flex-basis` 看的主要是主轴上的初始大小"
+        },
+        {
+          "name": "排列顺序 `order`",
+          "body": "`order` 是**项目属性**，用来控制弹性项目的排列顺序，不是控制大小。\\n\\n规律：\\n- 默认值通常是 `\\(0\\)`\\n- 数值越小，越靠前\\n- 数值越大，越靠后\\n- 也可以写负数，让它排得更前\\n\\n例如：`order: -1;` 往往会排在 `order: 0;` 前面。"
+        },
+        {
+          "name": "单个项目对齐 `align-self`",
+          "body": "`align-self` 也是**项目属性**，作用对象是某一个被选中的项目，用来单独规定它在交叉轴上的对齐方式。\\n\\n可以把它理解成：`align-items` 是大家统一对齐，`align-self` 是某一个人例外。\\n\\n常见值：\\n- `auto`：跟随父容器\\n- `stretch`：拉伸\\n- `flex-start`：靠前\\n- `flex-end`：靠后\\n- `center`：居中\\n- `baseline`：按基线对齐\\n\\n例如：\\n```css\\nalign-self: center;\\n```\\n表示这个项目自己居中，不影响其他项目。"
+        },
+        {
+          "name": "Grid 轨道与单位",
+          "body": "`grid-template-columns` 定义**列轨道**，`grid-template-rows` 定义**行轨道**。\\n\\n几个常见单位/函数：\\n- `fr`：网格容器里可用空间的一份\\n- `auto`：轨道大小由内容决定\\n- `repeat()`：重复写很多次相同的轨道定义\\n- `minmax()`：给轨道设一个最小值和最大值范围\\n\\n例如：\\n```css\\ngrid-template-columns: repeat(3, 1fr);\\ngrid-template-rows: minmax(200px, 1fr);\\n```\\n\\n其中 `minmax(200px, 1fr)` 的意思是：这条轨道最少 `\\(200px\\)`，然后再尽量伸展到 `\\(1fr\\)`。"
+        },
+        {
+          "name": "Grid 区域与空单元格",
+          "body": "Grid 区域不是单个格子，而是由四条 Grid 线围起来的矩形区域，**可以包含一个或多个单元格**。\\n\\n`grid-template-areas` 是给**容器**画布局图的：用一行一行的字符串描述整张网格。\\n\\n- 同名区域连在一起，表示占住一整块\\n- `.` 表示空单元格，也就是留白\\n\\n例如：\\n```css\\ngrid-template-areas:\\n  \"header header header header\"\\n  \"main   main   .      sidebar\"\\n  \"footer footer footer footer\";\\n```\\n\\n`grid-area` 则更像是给**单个网格项**指定它要落到哪块区域里。"
+        },
+        {
+          "name": "Grid 间距与对齐",
+          "body": "`gap` 管的是轨道和轨道之间的间距，也就是格子之间的“缝”。\\n\\n- `gap: 15px;`：行间距和列间距都为 `\\(15px\\)`\\n- `gap: 20px 10px;`：前者是行间距，后者是列间距\\n\\n对齐方面：\\n- `justify-items`：单个网格项在自己单元格里的**水平**位置\\n- `align-items`：单个网格项在自己单元格里的**竖直**位置\\n- `justify-content`：整块网格内容在容器里的**水平**摆放"
+        }
+      ]
+    },
+    {
+      "type": "key-terms",
+      "items": [
+        {
+          "term": "主轴",
+          "definition": "Flex 里项目主要排列、对齐的方向。"
+        },
+        {
+          "term": "交叉轴",
+          "definition": "与主轴垂直的方向；`align-self`、`align-items` 常在这里起作用。"
+        },
+        {
+          "term": "弹性项目",
+          "definition": "Flex 容器中的子元素。"
+        },
+        {
+          "term": "剩余空间",
+          "definition": "容器里除去基础占位后还能分配的空间，`flex-grow` 主要处理它。"
+        },
+        {
+          "term": "轨道",
+          "definition": "Grid 里的行或列。"
+        },
+        {
+          "term": "单元格",
+          "definition": "Grid 网格中最基本的格子。"
+        },
+        {
+          "term": "`fr`",
+          "definition": "Grid 中表示可用空间份额的单位。"
+        },
+        {
+          "term": "空单元格",
+          "definition": "在 `grid-template-areas` 里用 `.` 表示的留白位置。"
+        }
+      ]
+    },
+    {
+      "type": "review-questions",
+      "items": [
+        {
+          "question": "`flex` 是哪三个属性的简写？",
+          "hint": "回想“放大、缩小、初始大小”三件事。",
+          "answer": "`flex-grow`、`flex-shrink`、`flex-basis`。"
+        },
+        {
+          "question": "`flex-grow` 和 `flex-shrink` 分别在什么情况下起作用？",
+          "hint": "一个看“多了”，一个看“少了”。",
+          "answer": "`flex-grow` 在容器有剩余空间时起作用，负责按比例放大；`flex-shrink` 在容器空间不足时起作用，负责按比例缩小。"
+        },
+        {
+          "question": "`order: -1;` 和 `order: 0;` 谁会排在前面？为什么？",
+          "hint": "看数值大小规律。",
+          "answer": "`order: -1;` 会排在前面，因为 `order` 的值越小越靠前，默认值通常是 `\\(0\\)`。"
+        },
+        {
+          "question": "`grid-template-columns`、`grid-template-rows`、`fr`、`auto`、`minmax(200px, 1fr)` 分别怎么理解？",
+          "hint": "先分清列/行，再看单位和范围。",
+          "answer": "`grid-template-columns` 管列轨道，`grid-template-rows` 管行轨道；`fr` 表示可用空间的一份；`auto` 表示大小由内容决定；`minmax(200px, 1fr)` 表示轨道最小 `\\(200px\\)`，最大可伸展到 `\\(1fr\\)`。"
+        },
+        {
+          "question": "如果要给容器“画布局图”，应该用哪个属性？`grid-area` 又更像做什么？",
+          "hint": "一个是容器级，一个是项目级。",
+          "answer": "给容器画布局图用 `grid-template-areas`；`grid-area` 更像是给单个网格项指定它要落到哪块区域里。"
+        },
+        {
+          "question": "`justify-items`、`align-items`、`justify-content` 分别管什么？",
+          "hint": "先看“单个项”还是“整块内容”。",
+          "answer": "`justify-items` 管单个网格项在自己单元格里的水平位置；`align-items` 管单个网格项在自己单元格里的竖直位置；`justify-content` 管整块网格内容在容器里的水平摆放。"
+        }
+      ]
+    }
+  ]
+}

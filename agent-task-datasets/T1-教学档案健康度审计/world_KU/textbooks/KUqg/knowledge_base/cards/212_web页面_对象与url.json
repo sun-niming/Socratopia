@@ -1,0 +1,46 @@
+{
+  "title": "Web页面、对象与URL",
+  "definition": "Web页面也称文档，由一个或多个对象组成。对象是可通过URL寻址的文件，例如HTML文件、JPEG图形、Java小程序或视频片段。多数Web页面包含一个HTML基本文件以及若干被其引用的对象。URL由存放对象的服务器主机名和对象路径名两部分组成。",
+  "key_points": [
+    "如果页面包含一个HTML基本文件和5个JPEG图形，则该页面共有6个对象。",
+    "HTML基本文件通过其他对象的URL引用这些对象。",
+    "URL的主机名标识存放对象的服务器，路径名标识对象在服务器上的位置。",
+    "浏览器实现HTTP客户端功能；Web服务器实现HTTP服务器端并存储可由URL寻址的Web对象。"
+  ],
+  "examples": [
+    "一个包含HTML文本和5个JPEG图形的Web页面由1个HTML基本文件和5个JPEG对象组成，共6个对象。",
+    "对于URL `http://www.someSchool.edu/someDepartment/picture.gif`，主机名是 `www.someSchool.edu`，路径名是 `/someDepartment/picture.gif`。"
+  ],
+  "misconceptions": [
+    "Web页面不一定是单个文件；它通常由HTML基本文件和多个引用对象组成。",
+    "URL中的主机名和路径名不是同一部分：主机名指出服务器，路径名指出对象位置。",
+    "浏览器负责实现HTTP客户端，但HTTP本身不负责规定浏览器如何把页面显示给用户。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "一个包含HTML基本文件和10个JPEG图形的页面有多少个对象？",
+      "a": "共有11个对象：1个HTML基本文件和10个JPEG图形。"
+    },
+    {
+      "q": "URL `http://www.someSchool.edu/someDepartment/picture.gif` 的主机名和路径名分别是什么？",
+      "a": "主机名是 `www.someSchool.edu`，路径名是 `/someDepartment/picture.gif`。"
+    },
+    {
+      "q": "HTML基本文件的作用是什么？",
+      "a": "它包含页面的基本内容，并通过对象的URL引用页面中的其他对象。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [],
+  "source_pages": [
+    81,
+    84
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "212_web页面_对象与url",
+  "_chunk_pages": [
+    81,
+    84
+  ]
+}

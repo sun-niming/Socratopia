@@ -1,0 +1,44 @@
+{
+  "title": "recv接收字节流",
+  "definition": "`recv` 用于从已连接的 socket 接收数据。它返回实际收到的字节数；返回 0 表示对端关闭；返回 -1 表示错误。对于 HTTP 请求，通常要从 `client_fd` 读取请求文本，并自己判断消息边界。",
+  "key_points": [
+    "原型是 `ssize_t recv(int sockfd, void *buf, size_t len, int flags);`。",
+    "本项目中 `sockfd` 通常是客户端连接 fd。",
+    "`recv` 读的是字节流，不能假设一次就读完整个 HTTP 请求。",
+    "接收后通常要手动补上字符串结尾 `\\0`，便于按文本处理。",
+    "`flags` 在本项目中通常写 0。"
+  ],
+  "examples": [
+    "```c\nchar buf[8192];\nssize_t n = recv(client_fd, buf, sizeof(buf) - 1, 0);\nif (n <= 0) {\nclose(client_fd);\nreturn;\n}\nbuf[n] = '\\0';\n```"
+  ],
+  "misconceptions": [
+    "以为一次 `recv` 一定能读完整个 HTTP 请求。",
+    "忘记给缓冲区补 `\\0` 就当作 C 字符串使用。",
+    "把 `recv` 的返回值 0 当成正常可继续读取的情况。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`recv` 返回 0 表示什么？",
+      "a": "表示对端关闭连接。"
+    },
+    {
+      "q": "为什么说 HTTP 边界要自己判断？",
+      "a": "因为 `recv` 只负责接收字节流，不会替你划分 HTTP 消息边界。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "accept取出客户端连接"
+  ],
+  "source_pages": [
+    45,
+    48
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "069_recv接收字节流",
+  "_chunk_pages": [
+    45,
+    48
+  ]
+}

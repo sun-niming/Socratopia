@@ -1,0 +1,53 @@
+{
+  "title": "使用 seek 和 tell 移动及查询文件位置",
+  "definition": "输入流和输出流都支持定位和查询当前位置的操作。输入流使用 `seekg()` 与 `tellg()`，输出流使用 `seekp()` 与 `tellp()`；定位位置和偏移量分别使用 `std::streampos` 与 `std::streamoff` 表示，并以字节计数。",
+  "key_points": [
+    "`seekg()`用于移动输入流的读位置，`seekp()`用于移动输出流的写位置。",
+    "定位函数有两类形式：`seekg(pos)`或`seekp(pos)`把位置设置为绝对位置；`seekg(offset, origin)`或`seekp(offset, origin)`把位置设置为相对于指定起点的偏移位置。",
+    "可用的起点包括 `ios_base::beg`（流开头）、`ios_base::end`（流结尾）和 `ios_base::cur`（当前位置）。",
+    "`tellg()`返回输入流的当前位置，`tellp()`返回输出流的当前位置，返回值类型为 `std::streampos`。",
+    "输入输出同时存在的文件流需要分别维护读位置和写位置，这种流称为双向 I/O（bidirectional I/O）。"
+  ],
+  "examples": [
+    "将输出流定位到从开头算起的第 2 个字节：`fout.seekp(2, ios_base::beg);`。",
+    "保存输入流当前位置：`std::streampos curPos{inStream.tellg()};`。",
+    "判断当前位置是否为流开头可写为：`if (curPos == ios_base::beg) { /* 位于开头 */ }`。",
+    "从文件末尾向前定位 3 个字节，可使用相对定位形式：`inStream.seekg(-3, ios_base::end);`。"
+  ],
+  "misconceptions": [
+    "`seekg()`和`seekp()`不是同一个位置接口的两个任意别名：前者针对输入位置，后者针对输出位置。",
+    "`ios_base::beg`、`end`和`cur`表示相对定位的起点，不是要移动的字节数。",
+    "`tellg()`和`tellp()`用于查询位置，不负责移动位置。",
+    "双向文件流可能需要分别记住读位置和写位置。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何把输出流移动到从文件开头算起的第2个字节？",
+      "a": "调用 `fout.seekp(2, ios_base::beg);`。"
+    },
+    {
+      "q": "输入流和输出流分别使用哪些查询当前位置的方法？",
+      "a": "输入流使用 `tellg()`，输出流使用 `tellp()`。"
+    },
+    {
+      "q": "`seekg(offset, origin)`中两个参数分别表示什么？",
+      "a": "第一个参数是要移动的偏移量，第二个参数是起始位置，例如 `ios_base::beg`、`ios_base::end`或`ios_base::cur`。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "文件流与文件打开模式",
+    "字节和流位置"
+  ],
+  "source_pages": [
+    426,
+    427
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "865_使用_seek_和_tell_移动及查询文件位置",
+  "_chunk_pages": [
+    425,
+    428
+  ]
+}

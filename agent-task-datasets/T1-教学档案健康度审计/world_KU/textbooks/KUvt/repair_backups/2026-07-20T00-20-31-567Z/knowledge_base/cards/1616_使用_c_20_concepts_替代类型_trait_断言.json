@@ -1,0 +1,41 @@
+{
+  "title": "使用 C++20 concepts 替代类型 trait 断言",
+  "definition": "当模板参数必须满足某种类型约束时，C++20 推荐使用 concepts 直接约束模板，而不是先接受任意类型再用带类型 trait 的 `static_assert` 检查。对于整型约束，可以使用标准概念 `integral`。",
+  "key_points": [
+    "模板约束可以写在模板声明中，例如 `template <integral T>`。",
+    "C++20 还支持简化函数模板语法，例如 `void foo(const integral auto& t) { }`。",
+    "concepts 直接表达模板参数要求，通常比函数体内的 `static_assert` 更清晰。"
+  ],
+  "examples": [
+    "使用受约束模板参数：```cpp\ntemplate <std::integral T>\nvoid foo(const T& t) { }\n```",
+    "使用简化函数模板语法：```cpp\nvoid foo(const std::integral auto& t) { }\n```"
+  ],
+  "misconceptions": [
+    "concepts 不是运行时类型检查；它们用于编译期约束模板。",
+    "使用 `integral` 约束并不表示所有算术类型都能传入；浮点类型不满足整型概念。",
+    "`static_assert` 仍然有用途，但对于表达模板参数约束，原文推荐优先使用 C++20 concepts。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何用 C++20 的 concept 表示 `foo` 只接受整型参数？",
+      "a": "可以写成 `template <std::integral T> void foo(const T& t) { }`，也可以写成 `void foo(const std::integral auto& t) { }`。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "函数模板",
+    "类型 trait",
+    "C++20 concepts"
+  ],
+  "source_pages": [
+    787,
+    787
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1616_使用_c_20_concepts_替代类型_trait_断言",
+  "_chunk_pages": [
+    785,
+    788
+  ]
+}

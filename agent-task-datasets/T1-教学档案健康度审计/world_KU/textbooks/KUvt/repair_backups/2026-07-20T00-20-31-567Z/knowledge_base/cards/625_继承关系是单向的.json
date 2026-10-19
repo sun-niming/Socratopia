@@ -1,0 +1,38 @@
+{
+  "title": "继承关系是单向的",
+  "definition": "继承关系从派生类指向基类是单向的：派生类知道并拥有基类的继承特性，但基类不包含关于某个派生类的特定信息。因此，基类类型的对象不能调用只在派生类中声明的公有方法或访问派生类新增的数据成员。",
+  "key_points": [
+    "`Derived` 与 `Base` 之间存在明确关系，但 `Base` 不知道 `Derived` 的任何信息。",
+    "基类对象只能使用基类自身可用的成员，不能使用派生类新增成员。",
+    "将对象声明为基类类型，不会因为某个派生类存在而自动获得派生类接口。"
+  ],
+  "examples": [
+    "`Base myBase;` 不能调用 `myBase.someOtherMethod();`，因为 `someOtherMethod()` 只在 `Derived` 中定义，而 `Base` 中没有该方法。"
+  ],
+  "misconceptions": [
+    "派生类能使用基类成员，不代表基类也能使用派生类成员。",
+    "对象的实际创建方式与表达式的静态类型是不同概念；仅把变量声明为 `Base` 类型，不会让它获得 `Derived` 的公有接口。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么 `Base myBase; myBase.someOtherMethod();` 无法编译？",
+      "a": "因为 `someOtherMethod()` 是 Derived 的成员，而 Base 类没有声明该公有方法；继承关系是单向的，基类不包含派生类接口。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "基类与派生类",
+    "成员访问控制"
+  ],
+  "source_pages": [
+    304,
+    304
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "625_继承关系是单向的",
+  "_chunk_pages": [
+    301,
+    304
+  ]
+}

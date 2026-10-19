@@ -1,0 +1,39 @@
+{
+  "title": "rmdir命令",
+  "definition": "rmdir 用于删除空目录。教材给出的格式是：rmdir 路径。它强调删除对象必须是空目录。",
+  "key_points": [
+    "rmdir 的作用是删除空目录。",
+    "命令格式为 rmdir 路径。"
+  ],
+  "examples": [
+    "rmdir olddir"
+  ],
+  "misconceptions": [
+    "把 rmdir 当作删除任意目录的命令；按教材，它用于删除空目录。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "rmdir 可以删除什么？",
+      "a": "空目录。"
+    },
+    {
+      "q": "rmdir 的基本格式是什么？",
+      "a": "rmdir 路径。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "目录的基本概念"
+  ],
+  "source_pages": [
+    13,
+    16
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "026_rmdir命令",
+  "_chunk_pages": [
+    13,
+    16
+  ]
+}

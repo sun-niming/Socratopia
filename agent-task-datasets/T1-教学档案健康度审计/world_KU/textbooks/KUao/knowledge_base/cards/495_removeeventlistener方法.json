@@ -1,0 +1,37 @@
+{
+  "title": "removeEventListener方法",
+  "definition": "要移除已经注册的事件监听器，可以调用元素的 removeEventListener 方法，并传入与注册时相同的参数。教材强调，相同事件的绑定和解除需要使用同一个函数对象。",
+  "key_points": [
+    "可用 removeEventListener 移除已注册的事件监听器",
+    "移除时参数要与注册时相同",
+    "绑定和解除必须使用同一个函数对象"
+  ],
+  "examples": [
+    "先用 addEventListener 注册 handler，再用 removeEventListener 移除同一个 handler"
+  ],
+  "misconceptions": [
+    "以为只要函数代码内容相同就能移除",
+    "以为可以用另一个新函数对象来解除绑定"
+  ],
+  "qa_pairs": [
+    {
+      "q": "移除已注册事件监听器时，为什么必须使用同一个函数对象？",
+      "a": "因为教材要求相同事件的绑定和解除需要使用同一个函数对象，才能正确移除。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "addEventListener方法"
+  ],
+  "source_pages": [
+    365,
+    368
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "495_removeeventlistener方法",
+  "_chunk_pages": [
+    365,
+    368
+  ]
+}

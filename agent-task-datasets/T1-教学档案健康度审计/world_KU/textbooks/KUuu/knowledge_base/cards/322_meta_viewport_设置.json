@@ -1,0 +1,43 @@
+{
+  "title": "meta viewport 设置",
+  "definition": "在页面中可以使用 meta 标签设置浏览器的视口宽度。教材中的设置可以让当前视口宽度等于设备宽度，并且不允许用户手动缩放。",
+  "key_points": [
+    "可以通过 meta 标签设置 viewport。",
+    "设置 `width=device-width` 可让当前视口宽度等于设备宽度。",
+    "设置 `maximum-scale=1.0` 和 `user-scalable=0` 可限制用户手动缩放。",
+    "移动设备默认布局视口一般大于理想视口，可能导致横向滚动条或页面被缩小，因此常需要把布局视口设置为理想视口。"
+  ],
+  "examples": [
+    "<meta name=\"viewport\" content=\"width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0\" />"
+  ],
+  "misconceptions": [
+    "设置 viewport 只是在页面上加一个标签，不会影响显示；实际上它会影响视口宽度和是否允许缩放。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "教材中的 viewport meta 标签起什么作用？",
+      "a": "让当前视口宽度等于设备宽度，并且不允许用户手动缩放。"
+    },
+    {
+      "q": "为什么移动端常要设置 viewport？",
+      "a": "因为默认布局视口一般大于理想视口，可能出现横向滚动条或需要缩小页面。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "视口",
+    "布局视口",
+    "理想视口"
+  ],
+  "source_pages": [
+    217,
+    220
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "322_meta_viewport_设置",
+  "_chunk_pages": [
+    217,
+    220
+  ]
+}

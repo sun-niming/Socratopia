@@ -1,0 +1,44 @@
+{
+  "title": "JavaScript 运算符分类",
+  "definition": "教材将常见运算符分为算术运算符、关系运算符、逻辑运算符、赋值运算符和其它运算符。不同类别的运算符用于不同的运算场景。",
+  "key_points": [
+    "算术运算符：+ - * / % ++ -- **。",
+    "关系运算符：== != > < >= <= === !==。",
+    "逻辑运算符：! && ||。",
+    "赋值运算符：= += -= *= /= %=。",
+    "其它运算符包括 ?:、typeof、[]、()、delete、new、. 等。"
+  ],
+  "examples": [
+    "a ** 2",
+    "x === y",
+    "flag && ready",
+    "count += 1",
+    "typeof a"
+  ],
+  "misconceptions": [
+    "误以为 == 和 === 完全相同。",
+    "误以为逻辑运算符只用于布尔值。",
+    "误以为 typeof 是函数而不是运算符。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "教材中列出的逻辑运算符有哪些？",
+      "a": "!、&&、||。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "运算符与操作数"
+  ],
+  "source_pages": [
+    249,
+    252
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "346_javascript_运算符分类",
+  "_chunk_pages": [
+    249,
+    252
+  ]
+}

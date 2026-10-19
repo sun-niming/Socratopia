@@ -1,0 +1,50 @@
+{
+  "title": "类模板中的跨类型拷贝构造函数",
+  "definition": "对于类模板 Grid<T>，Grid<int> 和 Grid<double> 是两种不同的类型。普通拷贝构造函数只能接收同一模板实例化类型的对象，因此不能直接用 Grid<int> 构造 Grid<double>。为支持不同元素类型网格之间的复制，可以在 Grid<T> 中增加一个以 E 为模板参数的成员模板拷贝构造函数：$\\texttt{template<typename E> Grid(const Grid<E>\\& src);}$。",
+  "key_points": [
+    "Grid<int> 与 Grid<double> 是不同类型；即使 int 可以转换为 double，普通拷贝构造和赋值也不会因此自动支持跨 Grid 类型转换。",
+    "普通拷贝构造函数在 Grid<double> 中生成的形式是：$\\texttt{Grid(const Grid<double>\\& src);}$，它不能接收 Grid<int>。",
+    "成员模板拷贝构造函数同时依赖外层类模板参数 T 和成员模板参数 E，因此可以把 Grid<E> 转换为 Grid<T>。",
+    "不能删除原始的非模板拷贝构造函数和拷贝赋值运算符；当 E 等于 T 时，编译器不会调用这些新的模板化版本。"
+  ],
+  "examples": [
+    "普通跨类型构造会失败：$\\texttt{Grid<double> newDoubleGrid\\{mylntGrid\\};}$，其中 mylntGrid 的类型为 Grid<int>。",
+    "成员模板声明：$\\texttt{template<typename E> Grid(const Grid<E>\\& src);}$",
+    "定义时先委托给非拷贝构造函数分配合适大小的存储，再逐元素复制：$\\texttt{m\\_cells[i][j] = src.at(i, j);}$"
+  ],
+  "misconceptions": [
+    "元素类型之间可以隐式转换，并不意味着包含这些元素的类模板实例化类型也可以相互赋值或构造。",
+    "成员模板拷贝构造函数不是普通拷贝构造函数的完全替代；当源和目标类型相同，仍应保留并使用原始拷贝构造函数。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么 Grid<int> 不能直接用于构造 Grid<double>？",
+      "a": "因为 Grid<int> 和 Grid<double> 是不同的类模板实例化类型，普通拷贝构造函数只接收同类型的 Grid<T>。"
+    },
+    {
+      "q": "如何让 Grid<double> 可以由 Grid<int> 构造？",
+      "a": "在 Grid<T> 中增加成员模板拷贝构造函数：$\\texttt{template<typename E> Grid(const Grid<E>\\& src);}$，使 Grid<T> 能从 Grid<E> 复制。"
+    },
+    {
+      "q": "为什么不能删除原始拷贝构造函数？",
+      "a": "当 E 等于 T 时，原始非模板拷贝构造函数和赋值运算符应负责同类型复制；编译器不会调用新的模板化版本。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "类模板",
+    "拷贝构造函数",
+    "成员函数模板"
+  ],
+  "source_pages": [
+    386,
+    387
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "785_类模板中的跨类型拷贝构造函数",
+  "_chunk_pages": [
+    385,
+    388
+  ]
+}

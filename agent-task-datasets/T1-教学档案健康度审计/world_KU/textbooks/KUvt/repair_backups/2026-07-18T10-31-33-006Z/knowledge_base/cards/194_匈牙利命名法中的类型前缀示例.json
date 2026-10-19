@@ -1,0 +1,41 @@
+{
+  "title": "匈牙利命名法中的类型前缀示例",
+  "definition": "原文以 pszName 为例说明一种带有类型或数据形态提示的命名方式：psz 可理解为 pointer to string, zero-terminated，即指向以零字符结尾字符串的指针。",
+  "key_points": [
+    "pszName 是原文给出的指针命名示例。",
+    "原文将 psz 解释为“pointer to string, zero-terminated”，表示指向以零字符结尾字符串的指针。",
+    "这种前缀属于命名约定，不是 C++ 类型系统或语法要求。"
+  ],
+  "examples": [
+    "文本形式示例：char* pszName; // psz 表示 pointer to string, zero-terminated。"
+  ],
+  "misconceptions": [
+    "psz 不是 C++ 关键字，也不会自动保证变量一定指向合法的零结尾字符串。",
+    "char* 只表示字符指针类型；字符串是否以零字符结尾取决于实际数据。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "原文如何解释 pszName 中的 psz？",
+      "a": "psz 表示 pointer to string, zero-terminated，即指向以零字符结尾字符串的指针。"
+    },
+    {
+      "q": "psz 是 C++ 的内置关键字吗？",
+      "a": "不是；它只是命名约定中的前缀。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++指针和C风格字符串"
+  ],
+  "source_pages": [
+    133,
+    136
+  ],
+  "needs_verification": true,
+  "verify_query": "《C++20高级编程》第5版 第133-134页 pszName pointer to string zero-terminated 匈牙利命名法",
+  "concept_id": "194_匈牙利命名法中的类型前缀示例",
+  "_chunk_pages": [
+    133,
+    136
+  ]
+}

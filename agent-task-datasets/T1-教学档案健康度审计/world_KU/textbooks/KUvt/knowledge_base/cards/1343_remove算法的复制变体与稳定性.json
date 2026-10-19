@@ -1,0 +1,46 @@
+{
+  "title": "remove算法的复制变体与稳定性",
+  "definition": "remove_copy 和 remove_copy_if 是 remove 与 remove_if 的复制变体。它们不改变源范围，而是把所有未被删除的元素复制到另一个目标范围。remove 系列算法是稳定的，会保持剩余元素在原容器中的相对顺序。",
+  "key_points": [
+    "remove_copy 按指定值排除元素，并复制未被排除的元素。",
+    "remove_copy_if 按谓词排除元素，并复制谓词不满足的元素。",
+    "复制变体要求目标范围足够大。",
+    "remove、remove_if 以及相应复制变体都保持剩余元素的相对顺序。"
+  ],
+  "examples": [
+    "std::remove_copy_if(begin(src), end(src), begin(dst), [](const string& str) { return str.empty(); });",
+    "若源序列为 {\"a\", \"\", \"b\", \"c\"}，复制结果为 {\"a\", \"b\", \"c\"}，且 a、b、c 的相对顺序不变。"
+  ],
+  "misconceptions": [
+    "remove_copy_if 不会修改源范围。",
+    "稳定性只表示保留元素的相对顺序不变，不表示元素在原容器中的位置不变。",
+    "remove_copy_if 不会自动扩展目标范围。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "remove_copy_if 与 remove_if 的主要区别是什么？",
+      "a": "remove_if 在原范围内就地移动保留元素；remove_copy_if 不改变源范围，而是把保留元素复制到目标范围。"
+    },
+    {
+      "q": "remove 系列算法的稳定性意味着什么？",
+      "a": "它们保持剩余元素原有的相对顺序。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "remove与remove_if",
+    "稳定算法",
+    "输出范围"
+  ],
+  "source_pages": [
+    644,
+    644
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1343_remove算法的复制变体与稳定性",
+  "_chunk_pages": [
+    641,
+    644
+  ]
+}

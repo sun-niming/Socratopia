@@ -1,0 +1,44 @@
+{
+  "title": "replace_copy与replace_copy_if",
+  "definition": "replace_copy 和 replace_copy_if 是 replace 与 replace_if 的复制变体。它们不直接修改源范围，而是将替换后的结果写入另一个目标范围，因此目标范围必须足够大，能够容纳输出元素。",
+  "key_points": [
+    "replace_copy 根据元素值执行替换并写入目标范围。",
+    "replace_copy_if 根据谓词执行替换并写入目标范围。",
+    "源范围保持不变。",
+    "目标范围必须有足够空间。"
+  ],
+  "examples": [
+    "std::replace_copy(begin(src), end(src), begin(dst), oldValue, newValue);",
+    "std::replace_copy_if(begin(src), end(src), begin(dst), predicate, newValue);"
+  ],
+  "misconceptions": [
+    "复制变体不会自动扩展目标容器。",
+    "replace_copy_if 不会删除不匹配元素，而是把所有源元素按替换规则复制到目标范围。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "replace_copy_if 会不会改变源范围？",
+      "a": "不会；它将处理结果复制到目标范围，源范围保持不变。"
+    },
+    {
+      "q": "使用 replace_copy 或 replace_copy_if 时需要注意什么？",
+      "a": "目标范围必须足够大，以容纳所有输出元素。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "replace与replace_if",
+    "输出迭代器"
+  ],
+  "source_pages": [
+    642,
+    642
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1338_replace_copy与replace_copy_if",
+  "_chunk_pages": [
+    641,
+    644
+  ]
+}

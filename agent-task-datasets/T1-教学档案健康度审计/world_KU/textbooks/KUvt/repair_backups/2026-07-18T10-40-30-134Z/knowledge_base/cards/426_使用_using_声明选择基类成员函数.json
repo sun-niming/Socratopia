@@ -1,0 +1,44 @@
+{
+  "title": "使用 using 声明选择基类成员函数",
+  "definition": "在多重继承的派生类中，可以使用 using 基类名::成员函数名将指定基类的成员函数引入派生类作用域，从而选择该基类版本作为未限定调用时使用的成员。",
+  "key_points": [
+    "原文的 DogBird 定义中出现 using Dog::eat;。",
+    "using Dog::eat; 表示将 Dog 的 eat 引入 DogBird 的作用域。",
+    "这种方式可用于处理 Dog 和 Bird 都有 eat() 时的名字查找与调用选择问题。"
+  ],
+  "examples": [
+    "class DogBird : public Dog, public Bird { public: using Dog::eat; };",
+    "DogBird animal;",
+    "animal.eat(); // 按原文意图选择 Dog::eat()"
+  ],
+  "misconceptions": [
+    "using Dog::eat; 不是重新定义一个新的 eat() 函数，而是把基类成员引入派生类作用域。",
+    "using 声明选择的是指定基类成员；它不会同时把所有同名基类成员合并为一个函数。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "using Dog::eat; 的作用是什么？",
+      "a": "把 Dog 的 eat 成员引入 DogBird 作用域，使 Dog::eat 成为该名称查找时的指定版本。"
+    },
+    {
+      "q": "using Dog::eat; 是否会创建一个新的 eat() 函数？",
+      "a": "不会；它只是将已有的 Dog::eat 引入派生类作用域。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "using 声明",
+    "多重继承中的成员函数调用歧义"
+  ],
+  "source_pages": [
+    329,
+    332
+  ],
+  "needs_verification": true,
+  "verify_query": "C++ using Base::function 多重继承 同名虚函数 using Dog::eat 调用规则",
+  "concept_id": "426_使用_using_声明选择基类成员函数",
+  "_chunk_pages": [
+    329,
+    332
+  ]
+}

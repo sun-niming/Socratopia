@@ -1,0 +1,3005 @@
+{
+  "textbookId": "KUbm",
+  "updatedAt": "2026-09-17T01:26:43.797Z",
+  "cards": [
+    {
+      "id": "fc_1780964793043_000_b94e65aca290",
+      "question": "为什么在命令 `find ./ -name \"*.log\"` 中，通常要给 `*.log` 加引号？",
+      "choices": [
+        "让 `find` 只搜索当前目录，而不搜索子目录",
+        "让 `find` 只匹配隐藏文件中的 `.log` 文件",
+        "告诉 `find` 把搜索结果按长格式显示",
+        "防止 shell 提前展开通配符，让 `find` 接收到字面量模式 `*.log`"
+      ],
+      "correctIndex": 3,
+      "explanation": "加引号可以防止 shell 在执行 `find` 之前先把 `*.log` 展开成当前目录中的具体文件名；这样 `find` 才能拿到原本的匹配模式，并在指定目录及子目录中搜索。",
+      "source": {
+        "textbook": "Linux",
+        "chapter": "幻灯片 7: 文件系统命令",
+        "textbookSlug": "KUbm"
+      },
+      "created": "2026-06-09T00:26:33.043Z",
+      "conversationId": "IaSWnxxWpTFH_Q37XLD_x",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-06-09T00:26:47.747Z",
+          "chosen": 3,
+          "correct": true
+        },
+        {
+          "time": "2026-06-09T16:02:25.927Z",
+          "chosen": 3,
+          "correct": true
+        },
+        {
+          "time": "2026-06-10T08:51:42.577Z",
+          "chosen": 3,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-06-17T16:00:00.000Z",
+      "interval": 8,
+      "ease": 2.8000000000000003,
+      "repetitions": 3
+    },
+    {
+      "id": "fc_1780964793043_001_cba6c58678f9",
+      "question": "执行 `ls -a -l -F` 时，三个参数分别主要起什么作用？",
+      "choices": [
+        "`-a` 显示隐藏文件，`-l` 长格式显示，`-F` 添加文件类型标记",
+        "`-a` 只显示普通文件，`-l` 显示文件内容，`-F` 查找符号链接",
+        "`-a` 长格式显示，`-l` 显示隐藏文件，`-F` 强制删除文件",
+        "`-a` 添加类型标记，`-l` 显示隐藏文件，`-F` 递归列出子目录"
+      ],
+      "correctIndex": 0,
+      "explanation": "`-a` 显示隐藏文件，`-l` 使用长格式显示权限、大小、时间等信息，`-F` 在文件名后添加类型标记，例如目录后加 `/`、可执行文件后加 `*`、符号链接后加 `@`。",
+      "source": {
+        "textbook": "Linux",
+        "chapter": "幻灯片 7: 文件系统命令",
+        "textbookSlug": "KUbm"
+      },
+      "created": "2026-06-09T00:26:33.043Z",
+      "conversationId": "IaSWnxxWpTFH_Q37XLD_x",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-06-09T00:26:59.913Z",
+          "chosen": 0,
+          "correct": true
+        },
+        {
+          "time": "2026-06-09T16:02:41.073Z",
+          "chosen": 0,
+          "correct": true
+        },
+        {
+          "time": "2026-06-10T08:51:12.262Z",
+          "chosen": 0,
+          "correct": true
+        },
+        {
+          "time": "2026-06-10T08:51:19.708Z",
+          "chosen": 0,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-07-01T16:00:00.000Z",
+      "interval": 22,
+      "ease": 2.9000000000000004,
+      "repetitions": 4
+    },
+    {
+      "id": "fc_1780964793043_002_ad0323db6635",
+      "question": "如果当前目录是 `/tmp`，依次执行 `cd /var/log`、`cd ..`、`cd -`，最后会停在哪个目录？",
+      "choices": [
+        "`/tmp`",
+        "`/var/log`",
+        "`/var`",
+        "`/home`"
+      ],
+      "correctIndex": 1,
+      "explanation": "执行 `cd /var/log` 后当前目录变为 `/var/log`，上一次目录是 `/tmp`；执行 `cd ..` 后当前目录变为 `/var`，上一次目录更新为 `/var/log`；所以再执行 `cd -` 会回到 `/var/log`。",
+      "source": {
+        "textbook": "Linux",
+        "chapter": "幻灯片 7: 文件系统命令",
+        "textbookSlug": "KUbm"
+      },
+      "created": "2026-06-09T00:26:33.043Z",
+      "conversationId": "IaSWnxxWpTFH_Q37XLD_x",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-06-09T00:28:24.502Z",
+          "chosen": 1,
+          "correct": true
+        },
+        {
+          "time": "2026-06-09T16:02:52.698Z",
+          "chosen": 1,
+          "correct": true
+        },
+        {
+          "time": "2026-06-10T08:51:17.046Z",
+          "chosen": 2,
+          "correct": false
+        },
+        {
+          "time": "2026-06-10T08:51:24.579Z",
+          "chosen": 1,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-06-10T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1780964793043_003_1ff640870f06",
+      "question": "如果 `aa` 和 `aa/bb` 都不存在，为什么 `mkdir aa/bb/cc` 通常会失败，而 `mkdir -p aa/bb/cc` 可以成功？",
+      "choices": [
+        "`mkdir -p` 会自动创建缺失的父目录，而普通 `mkdir` 要求父目录已存在",
+        "普通 `mkdir` 只能创建隐藏目录，`mkdir -p` 才能创建普通目录",
+        "普通 `mkdir` 只能在根目录下使用，`mkdir -p` 才能在当前目录下使用",
+        "`mkdir -p` 会把 `aa/bb/cc` 创建成普通文件，而普通 `mkdir` 只能创建目录"
+      ],
+      "correctIndex": 0,
+      "explanation": "不加 `-p` 时，`mkdir` 要求父目录已经存在；加上 `-p` 后，它会沿路径自动创建缺失的中间目录。",
+      "source": {
+        "textbook": "Linux",
+        "chapter": "幻灯片 7: 文件系统命令",
+        "textbookSlug": "KUbm"
+      },
+      "created": "2026-06-09T00:26:33.043Z",
+      "conversationId": "IaSWnxxWpTFH_Q37XLD_x",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-06-09T00:28:44.023Z",
+          "chosen": 0,
+          "correct": true
+        },
+        {
+          "time": "2026-06-09T16:03:02.786Z",
+          "chosen": 0,
+          "correct": true
+        },
+        {
+          "time": "2026-06-10T08:51:32.684Z",
+          "chosen": 0,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-06-17T16:00:00.000Z",
+      "interval": 8,
+      "ease": 2.8000000000000003,
+      "repetitions": 3
+    },
+    {
+      "id": "fc_1780964793043_004_c88fda324f7a",
+      "question": "关于 `cp -r project backup/` 和 `mv project backup/`，哪一项理解是正确的？假设 `backup/` 已经存在且是目录。",
+      "choices": [
+        "`cp -r` 会复制一份 `project/` 到 `backup/`，而 `mv` 会把原来的 `project/` 移动到 `backup/`",
+        "`cp -r` 只能复制普通文件，不能复制目录；`mv` 只能移动空目录",
+        "`cp -r` 和 `mv` 都会复制目录，并保留原位置的 `project/`",
+        "`cp -r` 会移动目录，`mv` 会复制目录，两者效果正好相反"
+      ],
+      "correctIndex": 0,
+      "explanation": "`cp -r` 会递归复制整个目录，所以原来的 `project/` 仍然存在，同时 `backup/project/` 中有一份副本；`mv` 是移动目录，原位置的 `project/` 会被搬到 `backup/` 中。",
+      "source": {
+        "textbook": "Linux",
+        "chapter": "幻灯片 7: 文件系统命令",
+        "textbookSlug": "KUbm"
+      },
+      "created": "2026-06-09T00:26:33.043Z",
+      "conversationId": "IaSWnxxWpTFH_Q37XLD_x",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-06-09T00:29:03.277Z",
+          "chosen": 0,
+          "correct": true
+        },
+        {
+          "time": "2026-06-09T16:03:29.787Z",
+          "chosen": 0,
+          "correct": true
+        },
+        {
+          "time": "2026-06-10T08:51:38.047Z",
+          "chosen": 0,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-06-17T16:00:00.000Z",
+      "interval": 8,
+      "ease": 2.8000000000000003,
+      "repetitions": 3
+    },
+    {
+      "id": "fc_1781081343402_000_8abb50e6cfe1",
+      "question": "关于 `tar` 创建归档和解包归档，下列理解哪一项最准确？",
+      "choices": [
+        "解包时必须使用 `c` 参数，因为它表示 copy",
+        "创建和解包都必须在命令末尾列出所有源文件名",
+        "`.tar.gz` 和 `.tar.bz2` 都应该使用 `j` 参数解压",
+        "创建时要写入源文件或目录，解包时通常只写归档文件名"
+      ],
+      "correctIndex": 3,
+      "explanation": "创建归档时需要指定要放进去的文件或目录；解包时通常只需要指定归档文件，因为归档内部已经记录了包含哪些文件。`.tar.gz` 通常配合 `z`，`.tar.bz2` 通常配合 `j`。",
+      "source": {
+        "textbook": "Linux",
+        "chapter": "幻灯片 21: 文件内容显示、统计及筛选",
+        "textbookSlug": "KUbm"
+      },
+      "created": "2026-06-10T08:49:03.402Z",
+      "conversationId": "9Ozilkg3QcAuw8AawUMMz",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-06-10T08:49:21.139Z",
+          "chosen": 3,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-06-10T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1781081343404_001_f2a5a31e14a4",
+      "question": "如果要先给新分区 `/dev/sdb1` 创建文件系统，再挂载到 `/mnt`，为什么不能写成 `mkfs /dev/sdb1 | mount /mnt`？",
+      "choices": [
+        "因为 `/mnt` 必须写在管道左边，设备名必须写在管道右边",
+        "因为 `mkfs` 只能用于查看分区，不能和其他命令一起使用",
+        "因为管道只能用于压缩命令，不能用于磁盘相关命令",
+        "因为 `mount` 需要设备文件和挂载点参数，不是接收 `mkfs` 的输出文本"
+      ],
+      "correctIndex": 3,
+      "explanation": "管道 `|` 会把前一个命令的输出文本传给后一个命令，但 `mount` 需要明确的设备文件和挂载点参数，而不是 `mkfs` 的输出文本。正确思路是分步执行：`mkfs /dev/sdb1`，再 `mount /dev/sdb1 /mnt`。",
+      "source": {
+        "textbook": "Linux",
+        "chapter": "幻灯片 21: 文件内容显示、统计及筛选",
+        "textbookSlug": "KUbm"
+      },
+      "created": "2026-06-10T08:49:03.404Z",
+      "conversationId": "9Ozilkg3QcAuw8AawUMMz",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-06-10T08:49:42.761Z",
+          "chosen": 3,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-06-10T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1781081343404_002_63e2e090e573",
+      "question": "关于 `mount /dev/sdb1 /data` 和 `umount /data`，下列说法哪一项正确？",
+      "choices": [
+        "`umount /data` 会删除 `/data` 目录以及其中所有文件",
+        "`umount /data` 会解除挂载关系，但 `/data` 目录本身仍然存在",
+        "`umount` 的标准写法是 `unmount`，两者在 Linux 中完全等价",
+        "`mount /dev/sdb1 /data` 的顺序可以随意交换，效果一样"
+      ],
+      "correctIndex": 1,
+      "explanation": "`mount /dev/sdb1 /data` 是把分区 `/dev/sdb1` 挂载到目录 `/data` 上；`umount /data` 是卸载这个挂载关系。卸载后目录本身仍然存在，只是不再通向该分区内容。",
+      "source": {
+        "textbook": "Linux",
+        "chapter": "幻灯片 21: 文件内容显示、统计及筛选",
+        "textbookSlug": "KUbm"
+      },
+      "created": "2026-06-10T08:49:03.404Z",
+      "conversationId": "9Ozilkg3QcAuw8AawUMMz",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-06-10T08:50:21.449Z",
+          "chosen": 1,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-06-10T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1781081343404_003_40ebbec31cc9",
+      "question": "已经通过 `ps -aux` 找到某个进程的 PID 是 `8888`，要强制结束它，正确命令及其含义是哪一项？",
+      "choices": [
+        "`kill -9 8888`，其中 `-9` 是信号，`8888` 是 PID",
+        "`ps -aux -9 8888`，因为 `ps` 既能查看也能杀死进程",
+        "`kill 8888 -PID`，因为 PID 必须写在 `-PID` 后面",
+        "`kill -8888 PID`，其中 `-8888` 表示强制结束该进程"
+      ],
+      "correctIndex": 0,
+      "explanation": "`kill -9 8888` 中，`-9` 是强制结束进程的信号，`8888` 才是目标进程的 PID。不能把 PID 写成信号值的一部分。",
+      "source": {
+        "textbook": "Linux",
+        "chapter": "幻灯片 21: 文件内容显示、统计及筛选",
+        "textbookSlug": "KUbm"
+      },
+      "created": "2026-06-10T08:49:03.404Z",
+      "conversationId": "9Ozilkg3QcAuw8AawUMMz",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-06-10T08:50:33.550Z",
+          "chosen": 0,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-06-10T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1781081343404_004_24b5460f0797",
+      "question": "运行 `sleep 100 &` 后，终端和 `sleep` 进程的状态最符合哪一项？",
+      "choices": [
+        "`sleep` 会被立即取消，所以终端提示符才会返回",
+        "`sleep` 会进入完全静默模式，任何输出都不会出现在终端",
+        "`sleep` 仍在后台运行，终端提示符会很快返回",
+        "`&` 只影响命令输出格式，不影响前后台执行"
+      ],
+      "correctIndex": 2,
+      "explanation": "`&` 会让前面的命令在后台执行，因此 `sleep` 仍在运行，但 shell 提示符会很快返回，用户可以继续输入其他命令。后台执行不等于完全静默，若程序有输出仍可能显示在终端。",
+      "source": {
+        "textbook": "Linux",
+        "chapter": "幻灯片 21: 文件内容显示、统计及筛选",
+        "textbookSlug": "KUbm"
+      },
+      "created": "2026-06-10T08:49:03.404Z",
+      "conversationId": "9Ozilkg3QcAuw8AawUMMz",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-06-10T08:50:48.578Z",
+          "chosen": 2,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-06-10T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1781138847419_000_f7f7e0b3aa31",
+      "question": "如果执行 `ping 8.8.8.8` 可以收到响应，但执行 `ping baidu.com` 失败，最可能说明什么？",
+      "choices": [
+        "本机一定没有网卡",
+        "DNS 解析可能出了问题",
+        "必须使用 `netstat -a` 才能恢复网络",
+        "目标 IP 一定被本机防火墙拦截"
+      ],
+      "correctIndex": 1,
+      "explanation": "能 ping 通 IP 说明基本网络连通性可能是正常的；域名 ping 不通更可能是域名没有被正确解析为 IP，因此优先怀疑 DNS 解析问题。",
+      "source": {
+        "textbook": "Linux",
+        "chapter": "幻灯片 35: 网络命令",
+        "textbookSlug": "KUbm"
+      },
+      "created": "2026-06-11T00:47:27.419Z",
+      "conversationId": "HhiMuSmQxCO6jtwXn5tRp",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-06-11T00:47:40.471Z",
+          "chosen": 1,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-06-11T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1781138847420_001_d3b282fe8157",
+      "question": "关于 `ping baidu.com` 的作用，下列理解最准确的是哪一项？",
+      "choices": [
+        "用于修改网卡的 IP 地址和子网掩码",
+        "用于列出本机所有监听端口和当前连接",
+        "用于检查到目标的连通性，但失败时不能直接断定整个网络坏了",
+        "只要 ping 不通域名，就说明网线一定断了"
+      ],
+      "correctIndex": 2,
+      "explanation": "`ping` 主要用于测试到目标主机的网络连通性和响应情况，但 ping 不通不一定表示整个网络彻底坏了，也可能是 DNS、目标服务器、防火墙或路由等环节的问题。",
+      "source": {
+        "textbook": "Linux",
+        "chapter": "幻灯片 35: 网络命令",
+        "textbookSlug": "KUbm"
+      },
+      "created": "2026-06-11T00:47:27.420Z",
+      "conversationId": "HhiMuSmQxCO6jtwXn5tRp",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-06-11T00:47:44.913Z",
+          "chosen": 2,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-06-11T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1781138847420_002_f92dc61711cb",
+      "question": "如果想查看本机当前有哪些网络连接或监听端口，应优先使用哪类命令？",
+      "choices": [
+        "`echo -e`",
+        "`chmod` 或 `chown`",
+        "`netstat` 或 `ss`",
+        "`ping`"
+      ],
+      "correctIndex": 2,
+      "explanation": "`netstat` 和 `ss` 用于查看本机网络连接状态、监听端口等信息；`ping` 主要用于测试和目标之间的连通性。",
+      "source": {
+        "textbook": "Linux",
+        "chapter": "幻灯片 35: 网络命令",
+        "textbookSlug": "KUbm"
+      },
+      "created": "2026-06-11T00:47:27.420Z",
+      "conversationId": "HhiMuSmQxCO6jtwXn5tRp",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-06-11T00:47:52.983Z",
+          "chosen": 2,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-06-11T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1781138847420_003_08a81e6cfe3e",
+      "question": "执行 `netstat -an` 时，`-a` 和 `-n` 的组合含义是什么？",
+      "choices": [
+        "只显示路由表，并自动解析主机名",
+        "显示网卡权限，并用数字形式显示权限位",
+        "显示所有连接/监听，并用数字形式显示地址和端口",
+        "测试所有远程主机是否可达，并显示延迟"
+      ],
+      "correctIndex": 2,
+      "explanation": "`-a` 表示显示所有连接和监听端口，`-n` 表示用数字形式显示地址和端口，不进行名称解析。",
+      "source": {
+        "textbook": "Linux",
+        "chapter": "幻灯片 35: 网络命令",
+        "textbookSlug": "KUbm"
+      },
+      "created": "2026-06-11T00:47:27.420Z",
+      "conversationId": "HhiMuSmQxCO6jtwXn5tRp",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-06-11T00:48:02.673Z",
+          "chosen": 2,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-06-11T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1781138847420_004_a0ef5af18bf7",
+      "question": "如果想查看路由表，并且希望地址尽量以数字形式显示，应该使用哪条命令？",
+      "choices": [
+        "`netstat -an`",
+        "`netstat -rn`",
+        "`ss -r`",
+        "`ping -rn`"
+      ],
+      "correctIndex": 1,
+      "explanation": "`netstat -r` 用于查看路由表，`-n` 表示数字显示地址和端口；组合起来就是 `netstat -rn`。",
+      "source": {
+        "textbook": "Linux",
+        "chapter": "幻灯片 35: 网络命令",
+        "textbookSlug": "KUbm"
+      },
+      "created": "2026-06-11T00:47:27.420Z",
+      "conversationId": "HhiMuSmQxCO6jtwXn5tRp",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-06-11T00:48:13.412Z",
+          "chosen": 1,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-06-11T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1781170778163_000_55ac139ab77d",
+      "question": "关于在 Vim 末行模式临时设置选项和写入 `.vimrc` 永久生效，下列哪种理解最准确？",
+      "choices": [
+        "末行模式用 `set ts=4`，写入 `.vimrc` 用 `:set ts=4`",
+        "末行模式和 `.vimrc` 都必须用中文全角冒号 `：set ts=4`",
+        "末行模式用 `:set ts=4`，写入 `.vimrc` 用 `set ts=4`",
+        "末行模式和 `.vimrc` 都必须写成 `:set ts = 4`"
+      ],
+      "correctIndex": 2,
+      "explanation": "在 Vim 末行模式中临时执行配置命令时通常要以英文半角冒号 `:` 开头；写入 `.vimrc` 时一般不写冒号，并且像 `ts=4` 这类设置等号两边不要加空格。",
+      "source": {
+        "textbook": "Linux",
+        "chapter": "幻灯片 9: shell元字符—p35",
+        "textbookSlug": "KUbm"
+      },
+      "created": "2026-06-11T09:39:38.163Z",
+      "conversationId": "XGG7tbOFGd5a8u4_v9EHY",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-06-11T09:39:51.064Z",
+          "chosen": 2,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-06-11T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1781170778165_001_d2ae52c7d4b7",
+      "question": "如果想让 Vim 每次启动都显示行号、Tab 宽度为 4、开启括号匹配，最合适的 `.vimrc` 写法是哪一个？",
+      "choices": [
+        "`set nu; set ts=4; set sm` 必须写在同一行",
+        "`set nu`、`set ts=4`、`set sm` 分三行写入",
+        "`set number=on`、`set tab=4`、`set match=on` 分三行写入",
+        "`:set nu`、`:set ts=4`、`:set sm` 分三行写入"
+      ],
+      "correctIndex": 1,
+      "explanation": "写入 `.vimrc` 时通常每个设置单独一行，不加末行模式中的冒号；`nu` 表示显示行号，`ts=4` 表示 Tab 宽度为 4，`sm` 表示开启括号匹配。",
+      "source": {
+        "textbook": "Linux",
+        "chapter": "幻灯片 9: shell元字符—p35",
+        "textbookSlug": "KUbm"
+      },
+      "created": "2026-06-11T09:39:38.165Z",
+      "conversationId": "XGG7tbOFGd5a8u4_v9EHY",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-06-11T09:40:06.847Z",
+          "chosen": 1,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-06-11T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1781170778165_002_5c3d8e0e6cba",
+      "question": "执行命令 `grep \"love\" a.txt | wc -l > count.txt` 时，Shell 对其中的 `|` 和 `>` 的理解正确的是哪一项？",
+      "choices": [
+        "`|` 和 `>` 都只是普通字符，只有 `grep` 和 `wc` 程序自己会解释它们",
+        "`|` 表示同时运行两个命令，`>` 表示把 `count.txt` 的内容输入给前面的命令",
+        "`|` 把 `grep` 的输出交给 `wc -l`，`>` 把最终结果覆盖写入 `count.txt`",
+        "`|` 表示把结果保存到文件，`>` 表示把前一个命令的输出传给后一个命令"
+      ],
+      "correctIndex": 2,
+      "explanation": "`|` 是管道，会把前一个命令的标准输出交给后一个命令；`>` 是输出重定向，会把最终标准输出覆盖写入指定文件。",
+      "source": {
+        "textbook": "Linux",
+        "chapter": "幻灯片 9: shell元字符—p35",
+        "textbookSlug": "KUbm"
+      },
+      "created": "2026-06-11T09:39:38.165Z",
+      "conversationId": "XGG7tbOFGd5a8u4_v9EHY",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-06-11T09:40:20.259Z",
+          "chosen": 2,
+          "correct": true
+        },
+        {
+          "time": "2026-06-11T09:41:09.399Z",
+          "chosen": 2,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-06-13T16:00:00.000Z",
+      "interval": 3,
+      "ease": 2.7,
+      "repetitions": 2
+    },
+    {
+      "id": "fc_1781170778165_003_44706d57795f",
+      "question": "关于 Bash 中 `type` 命令和命令查找顺序，下列哪项说法正确？",
+      "choices": [
+        "若想同时确认 `ls` 是否为别名并看到外部路径，应使用 `type -a ls`",
+        "若想查看所有匹配结果，应使用 `type -p ls`，因为 `-p` 会显示别名和路径",
+        "如果 `ls` 既是别名又有 `/bin/ls`，Bash 会优先执行 `/bin/ls`",
+        "如果想知道 `cd` 的类别，应使用 `type -a cd`，因为 `-t` 只能显示外部路径"
+      ],
+      "correctIndex": 0,
+      "explanation": "Bash 查找命令名时通常先处理别名，再看内置命令，最后查找 `PATH` 中的外部命令；`type -a` 可以列出所有匹配结果，适合同时查看别名和外部路径。",
+      "source": {
+        "textbook": "Linux",
+        "chapter": "幻灯片 9: shell元字符—p35",
+        "textbookSlug": "KUbm"
+      },
+      "created": "2026-06-11T09:39:38.165Z",
+      "conversationId": "XGG7tbOFGd5a8u4_v9EHY",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-06-11T09:41:04.274Z",
+          "chosen": 2,
+          "correct": false
+        },
+        {
+          "time": "2026-06-11T09:42:19.226Z",
+          "chosen": 0,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-06-11T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.4,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1781170778165_004_7b0452bdfbee",
+      "question": "关于 Bash 的历史命令，下列哪项理解最准确？",
+      "choices": [
+        "`history` 会自动执行最近的命令，`!编号` 只是用来查看命令内容",
+        "`!108` 会显示编号 108 的命令但不执行，`!!` 只会显示上一条命令",
+        "`!108` 会执行编号 108 的历史命令，`!!` 会重复执行上一条命令",
+        "`!!` 只会重复执行安全命令，例如 `ls`，不会重复执行 `rm`"
+      ],
+      "correctIndex": 2,
+      "explanation": "`!编号` 会重新执行历史列表中对应编号的命令，`!!` 会重新执行上一条命令；因此如果上一条是删除或覆盖类命令，使用 `!!` 前要特别小心。",
+      "source": {
+        "textbook": "Linux",
+        "chapter": "幻灯片 9: shell元字符—p35",
+        "textbookSlug": "KUbm"
+      },
+      "created": "2026-06-11T09:39:38.165Z",
+      "conversationId": "XGG7tbOFGd5a8u4_v9EHY",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-06-11T09:43:25.458Z",
+          "chosen": 2,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-06-11T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1781196412454_000_f6c5aa247854",
+      "question": "在 Shell 中，已知 `a=\"/e\"` 且变量 `atc` 未定义，执行 `echo \"$atc/httpd\"` 会输出什么？",
+      "choices": [
+        "/etc/httpd",
+        "$atc/httpd",
+        "空格后接 /httpd",
+        "/httpd"
+      ],
+      "correctIndex": 3,
+      "explanation": "Shell 会把 `$atc` 整体识别为变量名 `atc`，而不是变量 `a` 后接字符串 `tc`。由于 `atc` 未定义，它会被替换为空字符串，所以只剩下 `/httpd`。",
+      "source": {
+        "textbook": "Linux",
+        "chapter": "幻灯片 22: 常用环境变量",
+        "textbookSlug": "KUbm"
+      },
+      "created": "2026-06-11T16:46:52.454Z",
+      "conversationId": "PZVQelpofaMnjfQE2L5yK",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-06-11T16:47:11.478Z",
+          "chosen": 3,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-06-12T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1781196412455_001_08ddd30cecb4",
+      "question": "为什么 `echo \"${a}tc/httpd\"` 能在 `a=\"/e\"` 时输出 `/etc/httpd`？",
+      "choices": [
+        "`${a}` 只在变量未定义时才会生效",
+        "`${a}` 会把变量 `a` 永久改成 `/etc`",
+        "`${a}` 会自动查找名为 `atc` 的变量并补全路径",
+        "`${a}` 明确了变量名边界，后面的 `tc/httpd` 会被当作普通字符串拼接"
+      ],
+      "correctIndex": 3,
+      "explanation": "`${a}` 用大括号明确限定了变量名的边界，Shell 只把 `a` 当作变量名，后面的 `tc/httpd` 会作为普通字符串拼接。",
+      "source": {
+        "textbook": "Linux",
+        "chapter": "幻灯片 22: 常用环境变量",
+        "textbookSlug": "KUbm"
+      },
+      "created": "2026-06-11T16:46:52.455Z",
+      "conversationId": "PZVQelpofaMnjfQE2L5yK",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-06-11T16:47:22.568Z",
+          "chosen": 3,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-06-12T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1781196412455_002_18979c7d6f5a",
+      "question": "已知 `name=\"\"`，依次执行以下命令：\n\n```bash\necho \"${name:-A}\"\necho \"${name:=B}\"\necho \"${name:+C}\"\necho \"$name\"\n```\n四行输出分别是什么？",
+      "choices": [
+        "A、B、空字符串、B",
+        "A、B、C、C",
+        "A、A、C、A",
+        "A、B、C、B"
+      ],
+      "correctIndex": 3,
+      "explanation": "`${name:-A}` 在变量为空时临时返回 `A`，不改变变量；`${name:=B}` 在变量为空时返回 `B` 并赋值给 `name`；之后 `name` 非空，所以 `${name:+C}` 返回 `C`，最后 `name` 仍为 `B`。",
+      "source": {
+        "textbook": "Linux",
+        "chapter": "幻灯片 22: 常用环境变量",
+        "textbookSlug": "KUbm"
+      },
+      "created": "2026-06-11T16:46:52.455Z",
+      "conversationId": "PZVQelpofaMnjfQE2L5yK",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-06-11T16:47:36.162Z",
+          "chosen": 3,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-06-12T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1781196412455_003_d561c9b78a09",
+      "question": "关于运行 Shell 脚本的方式，下列说法哪一项正确？",
+      "choices": [
+        "`bash test.sh` 不需要脚本有执行权限，而 `./test.sh` 通常需要执行权限",
+        "`bash test.sh` 必须先执行 `chmod a+x test.sh` 才能运行",
+        "`./test.sh` 不需要 shebang，因为系统一定会自动用 Bash 解释它",
+        "`bash < test.sh` 表示把 `test.sh` 当作命令行参数传给 Bash"
+      ],
+      "correctIndex": 0,
+      "explanation": "`bash test.sh` 是把脚本文件作为参数交给 `bash` 执行，因此不要求脚本本身有执行权限；而 `./test.sh` 是直接把它当作可执行文件运行，通常需要执行权限，并依赖 shebang 指明解释器。",
+      "source": {
+        "textbook": "Linux",
+        "chapter": "幻灯片 22: 常用环境变量",
+        "textbookSlug": "KUbm"
+      },
+      "created": "2026-06-11T16:46:52.455Z",
+      "conversationId": "PZVQelpofaMnjfQE2L5yK",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-06-11T16:47:52.610Z",
+          "chosen": 0,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-06-12T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1781196412455_004_7a13e1b6d2a9",
+      "question": "执行 `bash backup.sh src/ dst/` 时，`$0`、`$1`、`$2`、`$#` 分别表示什么？",
+      "choices": [
+        "`$0` 是 `src/`，`$1` 是 `dst/`，`$2` 是空，`$#` 是 `2`",
+        "`$0` 是 `backup.sh`，`$1` 是 `src/ dst/`，`$2` 是空，`$#` 是 `1`",
+        "`$0` 是 `backup.sh`，`$1` 是 `src/`，`$2` 是 `dst/`，`$#` 是 `2`",
+        "`$0` 是 Bash，`$1` 是 `backup.sh`，`$2` 是 `src/`，`$#` 是 `3`"
+      ],
+      "correctIndex": 2,
+      "explanation": "在脚本中，`$0` 表示脚本名，`$1` 和 `$2` 分别表示第一个和第二个位置参数，`$#` 表示参数个数，不包括脚本名本身。",
+      "source": {
+        "textbook": "Linux",
+        "chapter": "幻灯片 22: 常用环境变量",
+        "textbookSlug": "KUbm"
+      },
+      "created": "2026-06-11T16:46:52.455Z",
+      "conversationId": "PZVQelpofaMnjfQE2L5yK",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-06-11T16:48:01.323Z",
+          "chosen": 2,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-06-12T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1781230743043_000_bd00250d57e6",
+      "question": "执行 `cd /var/log` 之后，`$HOME` 和 `$PWD` 的含义最准确的是哪一项？",
+      "choices": [
+        "`$HOME` 会变成 `/var/log`，`$PWD` 仍表示用户主目录",
+        "`$HOME` 和 `$PWD` 都会变成 `/var/log`",
+        "`$HOME` 和 `$PWD` 都只表示当前登录用户名",
+        "`$HOME` 仍表示用户主目录，`$PWD` 表示当前目录 `/var/log`"
+      ],
+      "correctIndex": 3,
+      "explanation": "`$HOME` 表示用户主目录，通常不会因为 `cd` 到别处而改变；`$PWD` 表示当前所在目录，会随着 `cd` 改变。因此进入 `/var/log` 后，`$PWD` 会反映当前位置。",
+      "source": {
+        "textbook": "Linux",
+        "chapter": "幻灯片 22: 常用环境变量",
+        "textbookSlug": "KUbm"
+      },
+      "created": "2026-06-12T02:19:03.043Z",
+      "conversationId": "ZBHon9ia438meGWxKCc_6",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-06-12T02:19:10.193Z",
+          "chosen": 3,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-06-12T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1781230743044_001_f3afa84103de",
+      "question": "关于 `$PATH` 的作用，下列说法哪一项最准确？",
+      "choices": [
+        "`$PATH` 保存当前所在目录，作用类似 `$PWD`",
+        "`$PATH` 是 Shell 查找命令时按顺序使用的目录列表",
+        "`$PATH` 保存当前正在运行的 shell 程序路径",
+        "`$PATH` 保存当前用户的主目录，作用类似 `$HOME`"
+      ],
+      "correctIndex": 1,
+      "explanation": "`$PATH` 是 Shell 查找命令时使用的目录搜索列表，目录之间通常用冒号分隔，并且按从左到右的顺序查找。它不是当前目录，也不是命令本身。",
+      "source": {
+        "textbook": "Linux",
+        "chapter": "幻灯片 22: 常用环境变量",
+        "textbookSlug": "KUbm"
+      },
+      "created": "2026-06-12T02:19:03.044Z",
+      "conversationId": "ZBHon9ia438meGWxKCc_6",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-06-12T02:19:18.386Z",
+          "chosen": 1,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-06-12T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1781230743044_002_5210a28b02b3",
+      "question": "如果 `PATH=/tmp:/usr/bin:/bin`，并且 `/tmp` 和 `/bin` 中都有可执行文件 `ls`，直接输入 `ls` 时会优先执行哪一个？",
+      "choices": [
+        "执行 `/bin/ls`，因为系统命令一定优先于普通目录",
+        "命令会报错，因为同名命令不能同时出现在多个目录",
+        "执行 `/tmp/ls`，因为 `/tmp` 在 `$PATH` 中更靠左",
+        "两个 `ls` 会同时执行，因为它们都在 `$PATH` 中"
+      ],
+      "correctIndex": 2,
+      "explanation": "`$PATH` 会从左到右查找命令，先找到可执行文件就执行。因此 `/tmp` 排在 `/bin` 前面时，会优先执行 `/tmp/ls`。",
+      "source": {
+        "textbook": "Linux",
+        "chapter": "幻灯片 22: 常用环境变量",
+        "textbookSlug": "KUbm"
+      },
+      "created": "2026-06-12T02:19:03.044Z",
+      "conversationId": "ZBHon9ia438meGWxKCc_6",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-06-12T02:19:30.247Z",
+          "chosen": 2,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-06-12T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1781230743044_003_125e3c1fd1b4",
+      "question": "关于 `$PS1` 和 `$PS2`，下列理解哪一项正确？",
+      "choices": [
+        "`$PS1` 和 `$PS2` 都用于控制 `$PATH` 的查找顺序",
+        "`$PS1` 控制主提示符，`$PS2` 控制命令未完成时的继续输入提示符",
+        "`$PS1` 保存当前用户名，`$PS2` 保存当前 shell 类型",
+        "`$PS1` 控制命令输出结果，`$PS2` 控制命令错误信息"
+      ],
+      "correctIndex": 1,
+      "explanation": "`$PS1` 控制正常等待输入命令时显示的主提示符；`$PS2` 控制命令尚未写完、需要继续输入时显示的副提示符，例如引号未闭合时的下一行提示符。",
+      "source": {
+        "textbook": "Linux",
+        "chapter": "幻灯片 22: 常用环境变量",
+        "textbookSlug": "KUbm"
+      },
+      "created": "2026-06-12T02:19:03.044Z",
+      "conversationId": "ZBHon9ia438meGWxKCc_6",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-06-12T02:19:33.947Z",
+          "chosen": 1,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-06-12T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1781230743044_004_e07f765fb537",
+      "question": "执行 `name=Alice` 后再执行 `export name`，然后启动一个新的子 shell，为什么子 shell 中仍可能看到变量 `name`？",
+      "choices": [
+        "因为所有普通变量都会自动传给任何子 shell",
+        "因为 `export` 会把普通变量变成可传递给子进程的环境变量",
+        "因为 `export` 会把变量写入 `$PATH`，所以子 shell 能找到它",
+        "因为启动新的 `bash` 会自动复制父 shell 中的所有局部变量"
+      ],
+      "correctIndex": 1,
+      "explanation": "普通 shell 变量默认只在当前 shell 中有效；使用 `export` 后，它会成为环境变量，并被传递给子进程或子 shell。",
+      "source": {
+        "textbook": "Linux",
+        "chapter": "幻灯片 22: 常用环境变量",
+        "textbookSlug": "KUbm"
+      },
+      "created": "2026-06-12T02:19:03.044Z",
+      "conversationId": "ZBHon9ia438meGWxKCc_6",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-06-12T02:20:15.736Z",
+          "chosen": 1,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-06-12T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1781281983530_000_a934d2826590",
+      "question": "在 Bash 中，`if grep \"love\" a.txt` 的分支选择主要取决于什么？",
+      "choices": [
+        "取决于 `grep` 命令是否返回成功状态，找到内容通常返回 0",
+        "取决于 `grep` 有没有把匹配行打印到终端，打印了才进入 `else`",
+        "取决于 `a.txt` 是否存在，只要文件存在就一定进入 `then`",
+        "取决于 `$0` 的值是否为 0，因为 `$0` 表示上一条命令的结果"
+      ],
+      "correctIndex": 0,
+      "explanation": "`if` 判断的是命令的退出状态：`grep` 找到匹配内容时返回 0，表示成功；没找到时返回非 0，因此会进入 `else` 分支。",
+      "source": {
+        "textbook": "Linux",
+        "chapter": "幻灯片 22: 常用环境变量",
+        "textbookSlug": "KUbm"
+      },
+      "created": "2026-06-12T16:33:03.530Z",
+      "conversationId": "ptzS6vQIgPgAsgDLZaPH-",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-06-12T16:34:08.205Z",
+          "chosen": 0,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-06-13T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1781281983531_001_f1085bf7c3dc",
+      "question": "对于下面的 `case` 语句，如果 `ans=Yes`，为什么会走兜底分支？\n\n```bash\ncase $ans in\n  y|Y|yes|YES) echo \"同意\";;\n  n|N|no|NO) echo \"拒绝\";;\n  *) echo \"输入无效\";;\nesac\n```",
+      "choices": [
+        "`*` 分支总是最先执行，不管前面是否匹配",
+        "`case` 默认会把所有输入转成小写，所以 `Yes` 会变成 `yes`",
+        "`case` 默认区分大小写，`Yes` 没有被列入同意模式",
+        "`|` 只能连接数字模式，不能连接字符串模式"
+      ],
+      "correctIndex": 2,
+      "explanation": "`case` 默认区分大小写，`Yes` 不等于 `yes` 或 `YES`，也不等于 `y` 或 `Y`，所以不会匹配第一支，只能匹配 `*` 兜底分支。",
+      "source": {
+        "textbook": "Linux",
+        "chapter": "幻灯片 22: 常用环境变量",
+        "textbookSlug": "KUbm"
+      },
+      "created": "2026-06-12T16:33:03.531Z",
+      "conversationId": "ptzS6vQIgPgAsgDLZaPH-",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-06-12T16:34:16.968Z",
+          "chosen": 2,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-06-13T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1781281983531_002_3b318d9bb115",
+      "question": "在 `case` 结构中，分支末尾的 `;;` 主要作用是什么？",
+      "choices": [
+        "结束当前分支，防止继续执行或混入后面的分支内容",
+        "表示整个 `case` 结构结束，作用和 `esac` 完全相同",
+        "表示把多个模式合并，相当于 `|` 的另一种写法",
+        "表示当前模式匹配失败，需要继续尝试下一个模式"
+      ],
+      "correctIndex": 0,
+      "explanation": "`;;` 用来结束当前匹配分支。Shell 执行完该分支命令后遇到 `;;` 就停止这一分支，不会继续把后面的分支内容混入当前分支。",
+      "source": {
+        "textbook": "Linux",
+        "chapter": "幻灯片 22: 常用环境变量",
+        "textbookSlug": "KUbm"
+      },
+      "created": "2026-06-12T16:33:03.531Z",
+      "conversationId": "ptzS6vQIgPgAsgDLZaPH-",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-06-12T16:34:22.875Z",
+          "chosen": 0,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-06-13T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1781281983531_003_7095225b8b23",
+      "question": "下面脚本如果运行 `bash show.sh \"red green\" blue`，会输出什么？\n\n```bash\nfor var\ndo\n  echo \"[$var]\"\ndone\n```",
+      "choices": [
+        "输出三行：`[show.sh]`、`[red green]` 和 `[blue]`",
+        "输出一行：`[red green blue]`",
+        "输出两行：`[red green]` 和 `[blue]`",
+        "输出三行：`[red]`、`[green]` 和 `[blue]`"
+      ],
+      "correctIndex": 2,
+      "explanation": "省略 `in` 的 `for var` 默认遍历位置参数 `$1`、`$2` 等；`\"red green\"` 因为有引号，是一个整体参数，所以循环两次。",
+      "source": {
+        "textbook": "Linux",
+        "chapter": "幻灯片 22: 常用环境变量",
+        "textbookSlug": "KUbm"
+      },
+      "created": "2026-06-12T16:33:03.531Z",
+      "conversationId": "ptzS6vQIgPgAsgDLZaPH-",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-06-12T16:34:32.653Z",
+          "chosen": 2,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-06-13T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1781281983531_004_5d57130ebb3c",
+      "question": "在下面的脚本中，如果 `names.txt` 的第一行是 `Alice Smith Cooper`，`first` 和 `last` 分别得到什么？\n\n```bash\nwhile read first last\ndo\n  echo \"$first\"\n  echo \"$last\"\ndone < names.txt\n```",
+      "choices": [
+        "`first` 得到整行 `Alice Smith Cooper`，`last` 为空",
+        "`first` 得到 `Alice`，`last` 得到 `Smith Cooper`",
+        "`first` 得到 `Alice Smith`，`last` 得到 `Cooper`",
+        "`first` 得到 `Alice`，`last` 只得到 `Smith`，`Cooper` 被丢弃"
+      ],
+      "correctIndex": 1,
+      "explanation": "`read` 后面有多个变量时，会按分隔符分配字段；当字段数量多于变量数量时，最后一个变量会接收剩下的所有内容。",
+      "source": {
+        "textbook": "Linux",
+        "chapter": "幻灯片 22: 常用环境变量",
+        "textbookSlug": "KUbm"
+      },
+      "created": "2026-06-12T16:33:03.531Z",
+      "conversationId": "ptzS6vQIgPgAsgDLZaPH-",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-06-12T16:34:59.220Z",
+          "chosen": 1,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-06-13T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1781342245188_000_23fe0271551c",
+      "question": "在 Shell 中，`return 300` 的退出码最终是多少？",
+      "choices": [
+        "300",
+        "255",
+        "256",
+        "44"
+      ],
+      "correctIndex": 3,
+      "explanation": "返回码范围是 0 到 255，超出部分按 256 取模，因此 300 % 256 = 44。",
+      "source": {
+        "textbook": "Linux",
+        "chapter": "幻灯片 22: 常用环境变量",
+        "textbookSlug": "KUbm"
+      },
+      "created": "2026-06-13T09:17:25.188Z",
+      "conversationId": "Ya_OLiHf4xIeRu7LTyw3b",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-06-13T09:17:32.390Z",
+          "chosen": 3,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-06-13T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1781342245188_001_a3e67ab2a7fa",
+      "question": "`$((i+1))` 与 `i=$((i+1))` 的区别是什么？",
+      "choices": [
+        "两者都不改变变量 i",
+        "`$((i+1))` 会改变变量；`i=$((i+1))` 只替换",
+        "`$((i+1))` 只替换，不改变变量；`i=$((i+1))` 会改变变量",
+        "两者都改变变量 i"
+      ],
+      "correctIndex": 2,
+      "explanation": "`$((i+1))` 仅计算结果并替换，不改变变量 i；`i=$((i+1))` 先将计算结果赋值给变量 i，从而改变 i 的值。",
+      "source": {
+        "textbook": "Linux",
+        "chapter": "幻灯片 22: 常用环境变量",
+        "textbookSlug": "KUbm"
+      },
+      "created": "2026-06-13T09:17:25.188Z",
+      "conversationId": "Ya_OLiHf4xIeRu7LTyw3b",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-06-13T09:17:40.203Z",
+          "chosen": 2,
+          "correct": true
+        },
+        {
+          "time": "2026-06-13T09:17:59.546Z",
+          "chosen": 2,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-06-15T16:00:00.000Z",
+      "interval": 3,
+      "ease": 2.7,
+      "repetitions": 2
+    },
+    {
+      "id": "fc_1781342245188_002_588bfe47c531",
+      "question": "`expr $a+$b` 与 `expr $a + $b` 的区别是什么？",
+      "choices": [
+        "两者都输出字符串，不计算",
+        "`expr $a+$b` 输出字符串，不计算；`expr $a + $b` 会计算",
+        "`expr $a+$b` 会计算；`expr $a + $b` 输出字符串",
+        "两者都会计算"
+      ],
+      "correctIndex": 1,
+      "explanation": "`expr` 要求操作数之间必须有空格，否则它会把整个表达式视为字符串原样输出。`expr $a+$b` 不会计算，只会输出连接后的字符串；`expr $a + $b` 会进行整数加法。",
+      "source": {
+        "textbook": "Linux",
+        "chapter": "幻灯片 22: 常用环境变量",
+        "textbookSlug": "KUbm"
+      },
+      "created": "2026-06-13T09:17:25.188Z",
+      "conversationId": "Ya_OLiHf4xIeRu7LTyw3b",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-06-13T09:17:54.745Z",
+          "chosen": 3,
+          "correct": false
+        },
+        {
+          "time": "2026-06-13T09:18:02.485Z",
+          "chosen": 1,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-06-13T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.4,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1781342245188_003_fc2d0d5b2324",
+      "question": "在 Shell 中，`let` 做整数除法 `7/2` 的结果是多少？",
+      "choices": [
+        "3",
+        "4",
+        "2",
+        "3.5"
+      ],
+      "correctIndex": 0,
+      "explanation": "`let` 进行整数运算，7/2 只取商的整数部分，即 3。",
+      "source": {
+        "textbook": "Linux",
+        "chapter": "幻灯片 22: 常用环境变量",
+        "textbookSlug": "KUbm"
+      },
+      "created": "2026-06-13T09:17:25.188Z",
+      "conversationId": "Ya_OLiHf4xIeRu7LTyw3b",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-06-13T09:18:07.482Z",
+          "chosen": 0,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-06-13T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1781342245188_004_1248e0f06c18",
+      "question": "`i=5; let i--; echo \"$i\"` 的输出是什么？",
+      "choices": [
+        "5",
+        "4",
+        "3",
+        "6"
+      ],
+      "correctIndex": 1,
+      "explanation": "`let i--` 将 i 自减 1，因此 i 从 5 变为 4。",
+      "source": {
+        "textbook": "Linux",
+        "chapter": "幻灯片 22: 常用环境变量",
+        "textbookSlug": "KUbm"
+      },
+      "created": "2026-06-13T09:17:25.188Z",
+      "conversationId": "Ya_OLiHf4xIeRu7LTyw3b",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-06-13T09:18:12.723Z",
+          "chosen": 1,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-06-13T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1781342342177_000_e596bd12cfe0",
+      "question": "在 Shell 中执行函数时，`return 3` 的作用最准确的是哪一项？",
+      "choices": [
+        "让整个脚本立即退出，并把退出码设为 3",
+        "把数字 3 输出到屏幕，然后继续执行函数后面的命令",
+        "把字符串 3 返回给调用者，可以像普通文本一样直接使用",
+        "结束函数，并把函数调用的返回码设为 3"
+      ],
+      "correctIndex": 3,
+      "explanation": "`return 3` 会结束当前函数，并把函数调用这条命令的返回码设为 3；它不会把 3 打印到屏幕上。若想看到这个返回码，需要在函数调用后查看 `$?`。",
+      "source": {
+        "textbook": "Linux",
+        "chapter": "",
+        "textbookSlug": "KUbm"
+      },
+      "created": "2026-06-13T09:19:02.177Z",
+      "conversationId": "Ya_OLiHf4xIeRu7LTyw3b",
+      "status": "active",
+      "history": [],
+      "nextReview": "2026-06-13T09:19:02.177Z",
+      "interval": 0,
+      "ease": 2.5,
+      "repetitions": 0
+    },
+    {
+      "id": "fc_1781342342177_001_2e97823e1672",
+      "question": "下面代码最终会输出什么？\n\n```bash\ncheck() {\n  return 5\n}\n\nif ! check\nthen\n  echo \"bad\"\nelse\n  echo \"ok\"\nfi\n```",
+      "choices": [
+        "bad",
+        "什么都不输出",
+        "ok",
+        "5"
+      ],
+      "correctIndex": 0,
+      "explanation": "`check` 返回 5，表示失败；但 `! check` 会把失败反转成成功，所以进入 `then` 分支，输出 `bad`。",
+      "source": {
+        "textbook": "Linux",
+        "chapter": "",
+        "textbookSlug": "KUbm"
+      },
+      "created": "2026-06-13T09:19:02.177Z",
+      "conversationId": "Ya_OLiHf4xIeRu7LTyw3b",
+      "status": "active",
+      "history": [],
+      "nextReview": "2026-06-13T09:19:02.177Z",
+      "interval": 0,
+      "ease": 2.5,
+      "repetitions": 0
+    },
+    {
+      "id": "fc_1781342342177_002_6a4cc1cbd0e6",
+      "question": "关于 Shell 中 `&&` 和 `||` 的短路执行，下列说法正确的是哪一项？",
+      "choices": [
+        "`||` 在前一条命令返回码为非负数时执行后面",
+        "`&&` 在前一条命令失败时执行后面，`||` 在前一条命令成功时执行后面",
+        "`&&` 在前一条命令成功时执行后面，`||` 在前一条命令失败时执行后面",
+        "`&&` 和 `||` 都只看命令有没有屏幕输出，不看返回码"
+      ],
+      "correctIndex": 2,
+      "explanation": "`cmd1 && cmd2` 表示只有 `cmd1` 返回码为 0 时才执行 `cmd2`；`cmd1 || cmd2` 表示只有 `cmd1` 返回码非 0 时才执行 `cmd2`。注意不是“非负”，因为 0 也是非负，但 0 在 Shell 中表示成功。",
+      "source": {
+        "textbook": "Linux",
+        "chapter": "",
+        "textbookSlug": "KUbm"
+      },
+      "created": "2026-06-13T09:19:02.177Z",
+      "conversationId": "Ya_OLiHf4xIeRu7LTyw3b",
+      "status": "active",
+      "history": [],
+      "nextReview": "2026-06-13T09:19:02.177Z",
+      "interval": 0,
+      "ease": 2.5,
+      "repetitions": 0
+    },
+    {
+      "id": "fc_1781342342177_003_7abd055fb127",
+      "question": "下面代码的两次 `echo` 分别输出什么？\n\n```bash\ni=5\necho \"$((i+1))\"\ni=$((i+1))\necho \"$i\"\n```",
+      "choices": [
+        "第一行输出 6，第二行输出 6",
+        "输出三行：6、6、6",
+        "第一行输出 5，第二行输出 6",
+        "第一行输出 6，第二行输出 5"
+      ],
+      "correctIndex": 0,
+      "explanation": "第一次 `$((i+1))` 只是临时计算并替换成 6，没有修改 `i`；随后 `i=$((i+1))` 把计算结果写回变量，所以第二次也输出 6。代码中只有两条 `echo`，因此只有两行输出。",
+      "source": {
+        "textbook": "Linux",
+        "chapter": "",
+        "textbookSlug": "KUbm"
+      },
+      "created": "2026-06-13T09:19:02.177Z",
+      "conversationId": "Ya_OLiHf4xIeRu7LTyw3b",
+      "status": "active",
+      "history": [],
+      "nextReview": "2026-06-13T09:19:02.177Z",
+      "interval": 0,
+      "ease": 2.5,
+      "repetitions": 0
+    },
+    {
+      "id": "fc_1781342342177_004_22a640c50601",
+      "question": "下面代码会输出什么？\n\n```bash\na=10\nb=3\nexpr $a / $b\n```",
+      "choices": [
+        "111",
+        "10 / 3",
+        "3.333333",
+        "3"
+      ],
+      "correctIndex": 3,
+      "explanation": "`expr` 做的是整数运算，`10 / 3` 会截掉小数部分，结果是 3，而不是 3.333 或其他拼接结果。",
+      "source": {
+        "textbook": "Linux",
+        "chapter": "",
+        "textbookSlug": "KUbm"
+      },
+      "created": "2026-06-13T09:19:02.177Z",
+      "conversationId": "Ya_OLiHf4xIeRu7LTyw3b",
+      "status": "active",
+      "history": [],
+      "nextReview": "2026-06-13T09:19:02.177Z",
+      "interval": 0,
+      "ease": 2.5,
+      "repetitions": 0
+    },
+    {
+      "id": "fc_1781353784840_000_4f4c3f4cd141",
+      "question": "关于 `expr` 和 `$(( ))` 的区别，下面哪项最能解释为什么 `expr 8+2` 容易出错，而 `echo $((8+2))` 通常可以正常工作？",
+      "choices": [
+        "`expr` 只能处理字符，`$(( ))` 只能处理数字，所以前者报错后者不报错",
+        "`expr` 和 `$(( ))` 本质上都会先把 `8+2` 当成字符串，因此两者都必须写空格",
+        "`$(( ))` 只有在表达式中没有运算符时才能省略空格，而 `expr` 总能自动识别 `8+2`",
+        "`expr` 依赖空格把操作数和运算符分成独立参数，而 `$(( ))` 由 shell 按算术表达式直接解析"
+      ],
+      "correctIndex": 3,
+      "explanation": "`expr` 是以命令参数的形式接收表达式，各元素必须靠空格分开；而 `$(( ))` 是 shell 内部的算术展开语法，会直接把内容按算术表达式解析。",
+      "source": {
+        "textbook": "Linux",
+        "chapter": "幻灯片 22: 常用环境变量",
+        "textbookSlug": "KUbm"
+      },
+      "created": "2026-06-13T12:29:44.840Z",
+      "conversationId": "4C83lMqiG5_UKiEPQeKkO",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-06-13T12:30:01.806Z",
+          "chosen": 3,
+          "correct": true
+        },
+        {
+          "time": "2026-06-13T12:31:03.995Z",
+          "chosen": 3,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-06-15T16:00:00.000Z",
+      "interval": 3,
+      "ease": 2.7,
+      "repetitions": 2
+    },
+    {
+      "id": "fc_1781353784840_001_c5c60949ad6e",
+      "question": "执行下面两条命令时：\n\n`expr 17 / 5`\n`expr 17 % 5`\n\n为什么输出分别是 `3` 和 `2`？",
+      "choices": [
+        "`/` 和 `%` 都是在做普通除法，只是 `%` 会把结果显示成更短的形式",
+        "`/` 取整数商而丢弃小数部分，`%` 取除法后的余数",
+        "`/` 先算出 `3.4` 再自动转成字符串 `3`，`%` 则返回被除数的个位数",
+        "`/` 会四舍五入到最接近的整数，因此 `17 / 5` 是 `3`，`%` 表示百分号所以得到 `2`"
+      ],
+      "correctIndex": 1,
+      "explanation": "`expr` 在这里做的是整数运算，`17 / 5` 只保留整数商 `3`，而 `%` 取余数，所以 `17 % 5` 得到 `2`。",
+      "source": {
+        "textbook": "Linux",
+        "chapter": "幻灯片 22: 常用环境变量",
+        "textbookSlug": "KUbm"
+      },
+      "created": "2026-06-13T12:29:44.840Z",
+      "conversationId": "4C83lMqiG5_UKiEPQeKkO",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-06-13T12:31:01.638Z",
+          "chosen": 3,
+          "correct": false
+        },
+        {
+          "time": "2026-06-13T12:31:08.063Z",
+          "chosen": 1,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-06-13T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.4,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1781353784840_002_c180409c0f25",
+      "question": "下面哪一条 `expr` 命令写法是正确的，并且最能体现它对空格的要求？",
+      "choices": [
+        "`expr 8 + 2`",
+        "`expr 8+2`",
+        "`expr 8 +2`",
+        "`expr 8+ 2`"
+      ],
+      "correctIndex": 0,
+      "explanation": "`expr` 会按空格拆分参数，因此必须写成左操作数、运算符、右操作数三个独立部分；只要把 `+` 跟数字粘在一起，结构就不对了。",
+      "source": {
+        "textbook": "Linux",
+        "chapter": "幻灯片 22: 常用环境变量",
+        "textbookSlug": "KUbm"
+      },
+      "created": "2026-06-13T12:29:44.840Z",
+      "conversationId": "4C83lMqiG5_UKiEPQeKkO",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-06-13T12:31:14.593Z",
+          "chosen": 0,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-06-13T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1781371688838_000_754aed420143",
+      "question": "在 shell 循环中执行 `eval echo $i. \\$$i`。当 `i=2` 时，第一层展开结束后、`eval` 还没有进行第二次解释前，命令最准确地会变成什么？",
+      "choices": [
+        "`echo 2. 2`",
+        "`echo $i. $2`",
+        "`echo 2. $2`",
+        "`echo 2. banana`"
+      ],
+      "correctIndex": 2,
+      "explanation": "`$i` 会先被展开成 `2`，而 `\\$` 会保留一个字面的 `$` 给下一轮解释，因此第一层结果是 `echo 2. $2`。只有 `eval` 再执行一次后，`$2` 才会变成第二个位置参数的值。",
+      "source": {
+        "textbook": "Linux",
+        "chapter": "幻灯片 22: 常用环境变量",
+        "textbookSlug": "KUbm"
+      },
+      "created": "2026-06-13T17:28:08.838Z",
+      "conversationId": "JyYQk02Ziw60ZDaeUE60f",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-06-13T17:28:22.163Z",
+          "chosen": 2,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-06-14T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1781371688838_001_4c12dbbbac5f",
+      "question": "脚本以 `bash test.sh apple banana` 运行，脚本中使用 `eval echo $i. \\$$i` 逐个打印位置参数。若当前 `i=1`，最终输出为什么是 `1. apple`？",
+      "choices": [
+        "因为 `eval` 会让拼出的 `echo 1. $1` 再执行一次，从而把 `$1` 展开成 `apple`",
+        "因为 `echo` 本身会递归展开参数，所以即使没有 `eval` 也会输出 `1. apple`",
+        "因为 `eval` 会自动把所有数字替换成对应的参数值，所以 `1` 会变成 `apple`",
+        "因为 `$$i` 直接等价于第一个位置参数，所以一次展开后就会得到 `apple`"
+      ],
+      "correctIndex": 0,
+      "explanation": "第一层展开先把命令拼成 `echo 1. $1`，随后 `eval` 让 shell 再解释一次，这时 `$1` 才会被当作第一个位置参数并展开成 `apple`。因此输出包含编号和参数值两部分。",
+      "source": {
+        "textbook": "Linux",
+        "chapter": "幻灯片 22: 常用环境变量",
+        "textbookSlug": "KUbm"
+      },
+      "created": "2026-06-13T17:28:08.838Z",
+      "conversationId": "JyYQk02Ziw60ZDaeUE60f",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-06-13T17:28:31.814Z",
+          "chosen": 0,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-06-14T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1781371688838_002_7966033d5041",
+      "question": "如果脚本 `test.sh` 只有一行 `name=Alice`，执行后希望在当前终端中还能通过 `echo $name` 看到 `Alice`，最合适的做法是哪个？",
+      "choices": [
+        "`bash test.sh`，因为它会把子 shell 中的变量自动同步回父 shell",
+        "`source test.sh`",
+        "`exec test.sh`，因为替换进程后变量会永久保存在当前终端",
+        "三者都可以，只要脚本里没有 `export`"
+      ],
+      "correctIndex": 1,
+      "explanation": "`source test.sh` 会在当前 shell 中执行脚本，因此变量赋值会留在当前终端环境里。`bash test.sh` 只会在子 shell 中生效，而 `exec` 会替换当前 shell，不适合保留原终端环境继续使用。",
+      "source": {
+        "textbook": "Linux",
+        "chapter": "幻灯片 22: 常用环境变量",
+        "textbookSlug": "KUbm"
+      },
+      "created": "2026-06-13T17:28:08.838Z",
+      "conversationId": "JyYQk02Ziw60ZDaeUE60f",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-06-13T17:28:39.400Z",
+          "chosen": 1,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-06-14T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1781371688838_003_0b098d31eb3b",
+      "question": "关于 `cd /tmp` 这类会改变当前目录的操作，下面哪种理解最准确？",
+      "choices": [
+        "想让 `cd` 的结果保留在当前终端，就必须影响当前 shell 的环境",
+        "可以先用 `bash test.sh`，这样目录变化会保留但变量不会污染",
+        "可以用 `exec cd /tmp` 只改变当前目录而不影响当前环境",
+        "只要脚本里只有 `cd` 没有赋值语句，就不算影响当前环境"
+      ],
+      "correctIndex": 0,
+      "explanation": "当前目录本身就是当前 shell 环境的一部分。想让目录变化在当前终端里保留下来，就必须在当前 shell 中执行，这也意味着不可能完全做到“改目录但完全不影响当前环境”。",
+      "source": {
+        "textbook": "Linux",
+        "chapter": "幻灯片 22: 常用环境变量",
+        "textbookSlug": "KUbm"
+      },
+      "created": "2026-06-13T17:28:08.838Z",
+      "conversationId": "JyYQk02Ziw60ZDaeUE60f",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-06-13T17:28:48.304Z",
+          "chosen": 0,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-06-14T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1781371688838_004_9c7ccda56b87",
+      "question": "你怀疑 shell 脚本的 bug 是在变量展开之后才暴露出来的。为了优先看到 shell 实际执行的展开后命令，应该使用哪个选项？",
+      "choices": [
+        "`source -x test.sh`",
+        "`bash -v`",
+        "`bash -n`",
+        "`bash -x`"
+      ],
+      "correctIndex": 3,
+      "explanation": "`bash -x` 会打印展开后的实际执行命令，最适合定位变量替换后才出现的问题。`-v` 更偏向显示脚本原文，`-n` 则只检查语法而不执行。",
+      "source": {
+        "textbook": "Linux",
+        "chapter": "幻灯片 22: 常用环境变量",
+        "textbookSlug": "KUbm"
+      },
+      "created": "2026-06-13T17:28:08.838Z",
+      "conversationId": "JyYQk02Ziw60ZDaeUE60f",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-06-13T17:28:54.024Z",
+          "chosen": 3,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-06-14T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1781438389566_000_073038027ffd",
+      "question": "如果在命令行运行 `./myprog hello world`，下面对 `argc` 和 shell 中 `$#` 的理解，哪一项最准确？",
+      "choices": [
+        "`argc` 的值是 3，因为它包含程序名；而 `$#` 只数 `hello` 和 `world` 这两个参数",
+        "`argc` 和 `$#` 的区别只在类型不同，一个是整数一个是字符串，计数范围没有区别",
+        "`argc` 的值是 2，因为它只统计程序名后面的实际参数，和 `$#` 完全一样",
+        "`argc` 的值和 `$#` 都是 3，因为 shell 也会把 `$0` 算进参数个数"
+      ],
+      "correctIndex": 0,
+      "explanation": "`argc` 会把程序名本身也算进去，所以这里是 3；而 shell 的 `$#` 只统计位置参数，不包含 `$0`。两者都和“计数参数”有关，但计数范围不同。",
+      "source": {
+        "textbook": "Linux",
+        "chapter": "幻灯片 4: gcc编译器",
+        "textbookSlug": "KUbm"
+      },
+      "created": "2026-06-14T11:59:49.566Z",
+      "conversationId": "E-7ySdqY-QOiM4Fip3e4M",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-06-14T12:00:11.673Z",
+          "chosen": 0,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-06-14T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1781438389567_001_2183f0ea536a",
+      "question": "关于 gcc 的编译流程，哪一项描述是正确的？",
+      "choices": [
+        "`.o` 文件是在预处理后立刻生成的，链接的主要作用是把 `.o` 翻译成汇编代码",
+        "汇编阶段负责展开头文件，链接阶段只把多个 `.c` 文件合并，不涉及库函数实现",
+        "预处理展开 `#include` 等指令，编译生成 `.s`，汇编生成 `.o`，链接再把目标文件和库拼成可执行文件",
+        "编译阶段直接把 `.c` 变成 `.o`，而 `.s` 是链接之后为了调试自动生成的中间文件"
+      ],
+      "correctIndex": 2,
+      "explanation": "`#include` 和 `#define` 的展开发生在预处理阶段；编译阶段把 C 源代码变成 `.s` 汇编文件；汇编阶段再生成 `.o` 目标文件；最后链接把 `.o` 和所需库组合成可执行文件。",
+      "source": {
+        "textbook": "Linux",
+        "chapter": "幻灯片 4: gcc编译器",
+        "textbookSlug": "KUbm"
+      },
+      "created": "2026-06-14T11:59:49.567Z",
+      "conversationId": "E-7ySdqY-QOiM4Fip3e4M",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-06-14T12:02:15.087Z",
+          "chosen": 2,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-06-14T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1781506074384_000_36ff2b5c8f6e",
+      "question": "gcc 的 -E 选项会让编译流程停在哪个阶段，输出什么类型的文件？",
+      "choices": [
+        "停在预处理阶段，输出 .i 文件",
+        "停在汇编阶段，输出 .o 文件",
+        "停在链接阶段，输出可执行文件",
+        "停在编译阶段，输出 .s 文件"
+      ],
+      "correctIndex": 0,
+      "explanation": "预处理的目的是展开 #include 和 #define 等指令，生成纯净的扩展 C 代码，通常输出为 .i 文件，-E 的作用正是停在预处理阶段。",
+      "source": {
+        "textbook": "Linux",
+        "chapter": "幻灯片 3: Linux下的C程序",
+        "textbookSlug": "KUbm"
+      },
+      "created": "2026-06-15T06:47:54.384Z",
+      "conversationId": "8n18H8KtwfzMfhTO09DvO",
+      "status": "active",
+      "history": [],
+      "nextReview": "2026-06-15T06:47:54.384Z",
+      "interval": 0,
+      "ease": 2.5,
+      "repetitions": 0
+    },
+    {
+      "id": "fc_1781506074384_001_be86d7d26cf8",
+      "question": "宏定义放在使用之后会出现什么问题？",
+      "choices": [
+        "宏会自动存储并在下一次编译时补救",
+        "宏会按编译器的智能预测自动展开",
+        "宏名无法展开，会被当作普通标识符",
+        "宏只在最终链接阶段才生效，所以顺序不影响"
+      ],
+      "correctIndex": 2,
+      "explanation": "预处理是按文件顺序自上而下工作的，如果宏定义在引用之后，预处理无法看到定义，宏名会被当作普通标识符处理，往往导致编译报错。",
+      "source": {
+        "textbook": "Linux",
+        "chapter": "幻灯片 3: Linux下的C程序",
+        "textbookSlug": "KUbm"
+      },
+      "created": "2026-06-15T06:47:54.384Z",
+      "conversationId": "8n18H8KtwfzMfhTO09DvO",
+      "status": "active",
+      "history": [],
+      "nextReview": "2026-06-15T06:47:54.384Z",
+      "interval": 0,
+      "ease": 2.5,
+      "repetitions": 0
+    },
+    {
+      "id": "fc_1781506074384_002_606d896cc7cc",
+      "question": "如何判断一个宏是“展开了但结果看起来没变”还是“根本没展开”？",
+      "choices": [
+        "看文件大小是否变化",
+        "看宏名是否大写",
+        "通过检查宏是否在引用前已定义来区分",
+        "看 -E 输出里是否有引号"
+      ],
+      "correctIndex": 2,
+      "explanation": "关键要看宏是否被定义过且在引用时已经可见。前者替换后可能出现相同的外观（如 #define N 10），而后者在预处理阶段就没有指定任何替换，所以原样保留且后续编译器会报错。",
+      "source": {
+        "textbook": "Linux",
+        "chapter": "幻灯片 3: Linux下的C程序",
+        "textbookSlug": "KUbm"
+      },
+      "created": "2026-06-15T06:47:54.384Z",
+      "conversationId": "8n18H8KtwfzMfhTO09DvO",
+      "status": "active",
+      "history": [],
+      "nextReview": "2026-06-15T06:47:54.384Z",
+      "interval": 0,
+      "ease": 2.5,
+      "repetitions": 0
+    },
+    {
+      "id": "fc_1781506074384_003_6ba69ab452b3",
+      "question": "两个不同头文件用了同一个 #ifndef 保护宏名，可能出现什么后果？",
+      "choices": [
+        "两个文件会按字母顺序先后展开，内容互相覆盖",
+        "第二个头文件可能整段内容都被跳过，导致找不到声明",
+        "同名宏会自动合并定义，不会出现问题",
+        "编译器会自动重命名保护宏，不会冲突"
+      ],
+      "correctIndex": 1,
+      "explanation": "#ifndef 机制会检查宏是否已经定义过，相同保护宏名会导致第二个头文件被直接跳过，其中的声明和定义无法展开，编译器可能因此找不到类型或函数。",
+      "source": {
+        "textbook": "Linux",
+        "chapter": "幻灯片 3: Linux下的C程序",
+        "textbookSlug": "KUbm"
+      },
+      "created": "2026-06-15T06:47:54.384Z",
+      "conversationId": "8n18H8KtwfzMfhTO09DvO",
+      "status": "active",
+      "history": [],
+      "nextReview": "2026-06-15T06:47:54.384Z",
+      "interval": 0,
+      "ease": 2.5,
+      "repetitions": 0
+    },
+    {
+      "id": "fc_1781506074384_004_e8ec0630a4fc",
+      "question": "gcc 命令中，-I、-L、-l 分别对应什么作用？",
+      "choices": [
+        "-I：目标输出目录；-L：编译优化选项；-l：头文件目录",
+        "-I：源文件输入；-L：链接脚本；-l：预处理宏定义",
+        "-I：库文件路径；-L：头文件路径；-l：目标文件",
+        "-I：头文件路径；-L：库文件路径；-l：具体库"
+      ],
+      "correctIndex": 3,
+      "explanation": "-I 指定头文件搜索路径，-L 指定库文件搜索路径，-l 指定具体链接哪个库。三者各自作用于头文件查找、库路径指定与最终链接阶段。",
+      "source": {
+        "textbook": "Linux",
+        "chapter": "幻灯片 3: Linux下的C程序",
+        "textbookSlug": "KUbm"
+      },
+      "created": "2026-06-15T06:47:54.384Z",
+      "conversationId": "8n18H8KtwfzMfhTO09DvO",
+      "status": "active",
+      "history": [],
+      "nextReview": "2026-06-15T06:47:54.384Z",
+      "interval": 0,
+      "ease": 2.5,
+      "repetitions": 0
+    },
+    {
+      "id": "fc_1781608797922_000_2cd7b0d0e9f0",
+      "question": "编译程序时，报错信息为 `fatal error: head.h: No such file or directory`，最应该检查哪个编译/链接选项？",
+      "choices": [
+        "-l",
+        "-L",
+        "-I",
+        "-static"
+      ],
+      "correctIndex": 2,
+      "explanation": "`head.h` 是头文件。`#include` 指令处理头文件包含发生在预处理阶段，`-I` 选项用来指定头文件的搜索目录。如果头文件找不到，应优先检查 `-I` 指定的路径是否正确。",
+      "source": {
+        "textbook": "Linux",
+        "chapter": "幻灯片 3: 系统调用（函数）与库函数",
+        "textbookSlug": "KUbm"
+      },
+      "created": "2026-06-16T11:19:57.922Z",
+      "conversationId": "94R0QjAqZhvQ3Rm1yLxJi",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-06-16T11:21:41.428Z",
+          "chosen": 1,
+          "correct": false
+        },
+        {
+          "time": "2026-06-16T11:21:58.422Z",
+          "chosen": 2,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-06-16T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.4,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1781608797924_001_62737a97f5c1",
+      "question": "在链接阶段，如果报错信息为 `cannot find -lxxx`，但已知该库文件确实存在于自定义目录中，应首先检查什么？",
+      "choices": [
+        "检查库文件目录是否通过 `-L` 正确指定",
+        "检查是否缺少 `-static` 编译选项",
+        "检查头文件目录是否通过 `-I` 正确指定",
+        "检查库文件核心名是否与 `-l` 后名字匹配"
+      ],
+      "correctIndex": 0,
+      "explanation": "`cannot find -lxxx` 表示链接器知道要链接名为 `xxx` 的库，但在其搜索路径中找不到对应的库文件。库文件存在于自定义目录中，说明问题的根源是链接器不知道去这个自定义目录找，也就是库的搜索目录没设置对，所以应首先检查 `-L` 选项。",
+      "source": {
+        "textbook": "Linux",
+        "chapter": "幻灯片 3: 系统调用（函数）与库函数",
+        "textbookSlug": "KUbm"
+      },
+      "created": "2026-06-16T11:19:57.924Z",
+      "conversationId": "94R0QjAqZhvQ3Rm1yLxJi",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-06-16T11:21:56.498Z",
+          "chosen": 0,
+          "correct": true
+        },
+        {
+          "time": "2026-06-16T11:22:01.207Z",
+          "chosen": 0,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-06-18T16:00:00.000Z",
+      "interval": 3,
+      "ease": 2.7,
+      "repetitions": 2
+    },
+    {
+      "id": "fc_1781608797924_002_51c47b42bc8d",
+      "question": "使用 `-l` 链接一个名为 `libcalc.so` 的库时，以下哪个写法是正确的？",
+      "choices": [
+        "-lcalc",
+        "-llibcalc",
+        "-lcalc.so",
+        "-llibcalc.so"
+      ],
+      "correctIndex": 0,
+      "explanation": "`-l` 选项后面跟的是库名的核心部分，系统会自动在其前面加上 `lib`，后面加上 `.so` 或 `.a` 等后缀来寻找相应的库文件。因此，`libcalc.so` 对应的核心名是 `calc`，正确的写法是 `-lcalc`。写成 `-lcalc.so` 会导致链接器去寻找 `libcalc.so.so`，通常找不到。",
+      "source": {
+        "textbook": "Linux",
+        "chapter": "幻灯片 3: 系统调用（函数）与库函数",
+        "textbookSlug": "KUbm"
+      },
+      "created": "2026-06-16T11:19:57.924Z",
+      "conversationId": "94R0QjAqZhvQ3Rm1yLxJi",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-06-16T11:22:12.697Z",
+          "chosen": 0,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-06-16T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1781608797924_003_d09a1f19459f",
+      "question": "在 `gcc` 命令中，关于 `-I`、`-L`、`-l` 三个选项的处理阶段，以下哪种描述最准确？",
+      "choices": [
+        "`-I` 在预处理阶段处理，`-L` 和 `-l` 在链接阶段处理",
+        "`-I` 和 `-L` 都在编译阶段处理，`-l` 在链接阶段处理",
+        "三个选项都在预处理阶段处理，为后续编译链接做准备",
+        "三个选项都在链接阶段处理，只是作用不同"
+      ],
+      "correctIndex": 0,
+      "explanation": "`-I` 是在预处理阶段指导编译器寻找 `#include` 包含的头文件；`-L` 用于指定链接时搜索库文件的目录；`-l` 则用于指定链接时需要链接的具体库的名字。因此，一个在预处理阶段起作用，另外两个在链接阶段起作用。",
+      "source": {
+        "textbook": "Linux",
+        "chapter": "幻灯片 3: 系统调用（函数）与库函数",
+        "textbookSlug": "KUbm"
+      },
+      "created": "2026-06-16T11:19:57.924Z",
+      "conversationId": "94R0QjAqZhvQ3Rm1yLxJi",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-06-16T11:22:29.483Z",
+          "chosen": 0,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-06-16T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1781627211797_000_4c875a894f1c",
+      "question": "在一条 make 规则里，‘冒号左边放的是目标，还是依赖？’这个问题的核心是理解 make 规则的哪一部分？",
+      "choices": [
+        "理解 make 自动变量的作用",
+        "理解 make 变量如何定义",
+        "理解 make 命令的执行流程",
+        "理解 make 规则中的目标与依赖关系"
+      ],
+      "correctIndex": 3,
+      "explanation": "make 规则中，冒号左边是目标（要生成的文件），右边是依赖文件列表。理解这一点是掌握 make 依赖关系和构建逻辑的基础。",
+      "source": {
+        "textbook": "Linux",
+        "chapter": "幻灯片 8: 函数库",
+        "textbookSlug": "KUbm"
+      },
+      "created": "2026-06-16T16:26:51.797Z",
+      "conversationId": "LkASE0UHEYFoPk8tSVF7g",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-06-16T16:32:01.672Z",
+          "chosen": 1,
+          "correct": false
+        },
+        {
+          "time": "2026-06-16T16:32:12.415Z",
+          "chosen": 3,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-06-17T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.4,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1781627211798_001_3ef866a4d792",
+      "question": "在 gdb 调试中，`next` 和 `step` 都是单步执行命令，但它们的核心区别是什么？",
+      "choices": [
+        "`next` 会进入函数，`step` 不进入函数",
+        "`next` 不进入函数，`step` 会进入函数",
+        "`next` 只适用于循环，`step` 适用于所有代码",
+        "`next` 和 `step` 没有区别"
+      ],
+      "correctIndex": 1,
+      "explanation": "`next` 不进入函数内部，只执行到当前函数的下一行；`step` 会进入函数内部，允许在函数内逐步调试。这是 gdb 中区分‘跳过’和‘深入’的关键。",
+      "source": {
+        "textbook": "Linux",
+        "chapter": "幻灯片 8: 函数库",
+        "textbookSlug": "KUbm"
+      },
+      "created": "2026-06-16T16:26:51.798Z",
+      "conversationId": "LkASE0UHEYFoPk8tSVF7g",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-06-16T16:32:09.513Z",
+          "chosen": 1,
+          "correct": true
+        },
+        {
+          "time": "2026-06-16T16:32:16.325Z",
+          "chosen": 1,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-06-19T16:00:00.000Z",
+      "interval": 3,
+      "ease": 2.7,
+      "repetitions": 2
+    },
+    {
+      "id": "fc_1781627211798_002_9352e0216135",
+      "question": "在 Linux 编程中，`isalnum()` 函数的作用是判断一个字符是否为字母或数字。如果只想判断字符是否为数字，应该使用哪个函数？",
+      "choices": [
+        "`islower()`",
+        "`isupper()`",
+        "`isdigit()`",
+        "`isalpha()`"
+      ],
+      "correctIndex": 2,
+      "explanation": "`isalnum()` 是判断字母或数字（alphanumeric），而 `isdigit()` 专门用于判断字符是否为数字。这是字符分类函数中常见的混淆点。",
+      "source": {
+        "textbook": "Linux",
+        "chapter": "幻灯片 8: 函数库",
+        "textbookSlug": "KUbm"
+      },
+      "created": "2026-06-16T16:26:51.798Z",
+      "conversationId": "LkASE0UHEYFoPk8tSVF7g",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-06-16T16:32:34.471Z",
+          "chosen": 2,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-06-17T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1781627211798_003_9d7cb5a377c2",
+      "question": "在 `struct tm` 中，`tm_year` 字段并非直接存储年份，而是存储‘从 1900 年开始的年数’。如果要显示当前的年份（如 2023），正确的计算方式是：",
+      "choices": [
+        "`tm_year + 1900`",
+        "`tm_year - 1900`",
+        "`tm_year * 100`",
+        "`tm_year`"
+      ],
+      "correctIndex": 0,
+      "explanation": "`tm_year` 存储的是自 1900 年以来的偏移量，因此显示完整年份时需加 1900。这是《Linux 编程》中时间结构体的常见陷阱。",
+      "source": {
+        "textbook": "Linux",
+        "chapter": "幻灯片 8: 函数库",
+        "textbookSlug": "KUbm"
+      },
+      "created": "2026-06-16T16:26:51.798Z",
+      "conversationId": "LkASE0UHEYFoPk8tSVF7g",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-06-16T16:32:46.386Z",
+          "chosen": 0,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-06-17T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1781627211798_004_41aeeb7515a5",
+      "question": "在 Makefile 中，自动变量 `$@` 代表什么？",
+      "choices": [
+        "所有依赖文件名",
+        "不包括扩展名的目标文件名",
+        "第一个依赖文件名",
+        "目标文件全名"
+      ],
+      "correctIndex": 3,
+      "explanation": "`$@` 是 make 自动变量中代表‘目标文件全名’的符号，用于在规则命令中引用当前目标，避免重复编写目标名。",
+      "source": {
+        "textbook": "Linux",
+        "chapter": "幻灯片 8: 函数库",
+        "textbookSlug": "KUbm"
+      },
+      "created": "2026-06-16T16:26:51.798Z",
+      "conversationId": "LkASE0UHEYFoPk8tSVF7g",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-06-16T16:32:53.383Z",
+          "chosen": 3,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-06-17T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1781825599395_000_feca0f2d8aae",
+      "question": "在 `mmap()` 中，`PROT_READ | PROT_WRITE` 和 `MAP_SHARED` 分别主要控制什么？",
+      "choices": [
+        "`PROT_READ | PROT_WRITE` 控制是否回写文件，`MAP_SHARED` 控制能否读写内存",
+        "`PROT_READ | PROT_WRITE` 决定映射哪个文件，`MAP_SHARED` 决定从文件哪里开始映射",
+        "`PROT_READ | PROT_WRITE` 表示私有映射，`MAP_SHARED` 表示只读映射",
+        "`PROT_READ | PROT_WRITE` 控制访问权限，`MAP_SHARED` 控制修改是否可能影响原文件"
+      ],
+      "correctIndex": 3,
+      "explanation": "`PROT_READ | PROT_WRITE` 控制映射区是否允许读写，属于访问权限；`MAP_SHARED` 控制修改是否可能共享并回写到底层文件，属于映射方式。",
+      "source": {
+        "textbook": "Linux",
+        "chapter": "幻灯片 9: 系统时间与日期函数",
+        "textbookSlug": "KUbm"
+      },
+      "created": "2026-06-18T23:33:19.395Z",
+      "conversationId": "x8ipWm49Xg4WU-XpIMOwk",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-06-18T23:33:31.390Z",
+          "chosen": 3,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-06-19T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1781825599395_001_39de76bbaef4",
+      "question": "如果一个程序想通过 `mmap()` 读取文件内容，并且即使修改映射区也不希望影响原文件，最合适的 flags 是什么？",
+      "choices": [
+        "`MAP_PRIVATE`，因为修改只作用于进程自己的副本",
+        "`PROT_WRITE`，因为它会自动阻止文件内容被改动",
+        "`MAP_SHARED`，因为共享映射可以防止修改写回文件",
+        "`O_RDONLY`，因为只要文件以只读方式打开，映射区就一定不能被修改"
+      ],
+      "correctIndex": 0,
+      "explanation": "`MAP_PRIVATE` 表示私有映射，对映射区的修改只影响当前进程看到的副本，不会回写到原文件。",
+      "source": {
+        "textbook": "Linux",
+        "chapter": "幻灯片 9: 系统时间与日期函数",
+        "textbookSlug": "KUbm"
+      },
+      "created": "2026-06-18T23:33:19.395Z",
+      "conversationId": "x8ipWm49Xg4WU-XpIMOwk",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-06-18T23:34:41.959Z",
+          "chosen": 0,
+          "correct": true
+        },
+        {
+          "time": "2026-06-18T23:35:11.057Z",
+          "chosen": 0,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-06-21T16:00:00.000Z",
+      "interval": 3,
+      "ease": 2.7,
+      "repetitions": 2
+    },
+    {
+      "id": "fc_1781825599395_002_24b3b915106b",
+      "question": "关于 `mmap()` 参数中的 `fd`、`offset` 和返回值，下列说法哪一项正确？",
+      "choices": [
+        "`fd` 是文件名字符串，`offset` 是目录项编号，返回值是 inode 号",
+        "`fd` 指定映射权限，`offset` 指定映射长度，返回值是新的文件描述符",
+        "`fd` 是 `fopen()` 返回的 `FILE *`，`offset` 指定内存地址，返回值是文件大小",
+        "`fd` 指定被映射的文件，`offset` 指定文件内起点，返回值是内存首地址"
+      ],
+      "correctIndex": 3,
+      "explanation": "`fd` 是 `open()` 返回的文件描述符；`offset` 表示从文件中的哪个位置开始映射；`mmap()` 的返回值是映射到进程地址空间后的内存起始地址。",
+      "source": {
+        "textbook": "Linux",
+        "chapter": "幻灯片 9: 系统时间与日期函数",
+        "textbookSlug": "KUbm"
+      },
+      "created": "2026-06-18T23:33:19.395Z",
+      "conversationId": "x8ipWm49Xg4WU-XpIMOwk",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-06-18T23:35:03.830Z",
+          "chosen": 2,
+          "correct": false
+        },
+        {
+          "time": "2026-06-18T23:35:18.182Z",
+          "chosen": 3,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-06-19T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.4,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1781825599395_003_2de6d38c88bf",
+      "question": "在 Linux 文件系统中，为什么文件重命名后，文件内容通常不会改变？",
+      "choices": [
+        "因为重命名会复制一份新文件，再删除旧文件，所以内容保持一致",
+        "因为重命名主要改变目录项中的名字，而不是文件的 inode 和数据块",
+        "因为目录只保存文件内容摘要，真正的文件名由数据块保存",
+        "因为文件名也存储在 inode 中，系统会自动同步所有数据块"
+      ],
+      "correctIndex": 1,
+      "explanation": "文件名存放在目录项中，目录项维护“文件名 → inode 号”的映射；inode 才记录文件属性和数据块位置。重命名主要修改目录中的名字记录，不改变文件对应的 inode。",
+      "source": {
+        "textbook": "Linux",
+        "chapter": "幻灯片 9: 系统时间与日期函数",
+        "textbookSlug": "KUbm"
+      },
+      "created": "2026-06-18T23:33:19.395Z",
+      "conversationId": "x8ipWm49Xg4WU-XpIMOwk",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-06-18T23:35:44.913Z",
+          "chosen": 1,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-06-19T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1781825599395_004_35de39ee8a3d",
+      "question": "如果两个文件名指向同一个 inode，其中一个文件名被 `rm` 删除后，为什么文件内容不一定立刻消失？",
+      "choices": [
+        "因为 `rm` 只是删除一个目录项，只有没有链接且没有进程打开时内容才会被回收",
+        "因为硬链接会自动复制文件内容，所以删除一个名字只会删除其中一份副本",
+        "因为 inode 中保存了所有文件名，所以删除一个名字不会影响任何链接计数",
+        "因为 `rm` 会先把文件内容移动到隐藏目录，等系统重启后再删除"
+      ],
+      "correctIndex": 0,
+      "explanation": "`rm` 本质上删除的是目录项，也就是去掉一个“文件名 → inode”的映射。只要还有其他硬链接或进程仍打开该文件，inode 和数据块就不会立刻被回收。",
+      "source": {
+        "textbook": "Linux",
+        "chapter": "幻灯片 9: 系统时间与日期函数",
+        "textbookSlug": "KUbm"
+      },
+      "created": "2026-06-18T23:33:19.395Z",
+      "conversationId": "x8ipWm49Xg4WU-XpIMOwk",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-06-18T23:37:06.482Z",
+          "chosen": 0,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-06-19T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1781924219988_000_0c42c137240b",
+      "question": "关于 `system()` 的作用，下列哪种理解最准确？",
+      "choices": [
+        "它直接把字符串当作机器指令执行",
+        "它只负责检查命令是否存在，不会执行",
+        "它只能执行 Linux 内核提供的系统调用",
+        "它让 shell 去执行命令字符串"
+      ],
+      "correctIndex": 3,
+      "explanation": "`system()` 会创建子进程，并通过 `/bin/sh -c cmdStr` 让 shell 执行给定命令；它不是程序自己直接解析并执行字符串。",
+      "source": {
+        "textbook": "Linux",
+        "chapter": "幻灯片 12: system系统调用",
+        "textbookSlug": "KUbm"
+      },
+      "created": "2026-06-20T02:56:59.988Z",
+      "conversationId": "gLdCaHok5rwtx1Fgnis7Z",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-06-20T02:58:26.760Z",
+          "chosen": 3,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-06-20T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1781924219988_001_111e0b21978e",
+      "question": "如果路径指向的是一个符号链接，而你想获取“链接本身”的属性，应该使用哪个函数？",
+      "choices": [
+        "`fstat()`，因为它能自动识别符号链接",
+        "`lstat()`，因为它查看符号链接本身",
+        "`access()`，因为它专门返回文件属性",
+        "`stat()`，因为它总是查看路径本身"
+      ],
+      "correctIndex": 1,
+      "explanation": "`stat()` 遇到符号链接时会跟随链接查看目标文件；`lstat()` 不跟随链接，而是查看符号链接本身。",
+      "source": {
+        "textbook": "Linux",
+        "chapter": "幻灯片 12: system系统调用",
+        "textbookSlug": "KUbm"
+      },
+      "created": "2026-06-20T02:56:59.988Z",
+      "conversationId": "gLdCaHok5rwtx1Fgnis7Z",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-06-20T02:58:32.871Z",
+          "chosen": 1,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-06-20T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1781924219989_002_d81396a4d523",
+      "question": "在 `struct stat` 中，如果要查看文件的实际大小，应该关注哪个字段？",
+      "choices": [
+        "`st_size`",
+        "`st_blksize`",
+        "`st_mode`",
+        "`st_nlink`"
+      ],
+      "correctIndex": 0,
+      "explanation": "`st_size` 表示文件的实际大小；`st_blksize` 表示文件系统建议的 I/O 块大小，不是文件本身有多少字节。",
+      "source": {
+        "textbook": "Linux",
+        "chapter": "幻灯片 12: system系统调用",
+        "textbookSlug": "KUbm"
+      },
+      "created": "2026-06-20T02:56:59.989Z",
+      "conversationId": "gLdCaHok5rwtx1Fgnis7Z",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-06-20T02:58:36.762Z",
+          "chosen": 0,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-06-20T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1781924219989_003_432969a91e84",
+      "question": "关于 `close(fd)`，下列说法哪一个最准确？",
+      "choices": [
+        "它会删除文件本体，使其他进程无法再访问",
+        "它只刷新缓冲区，不会影响文件描述符是否可用",
+        "它会关闭所有指向同一文件的文件描述符",
+        "它关闭的是这个文件描述符，而不是文件本体"
+      ],
+      "correctIndex": 3,
+      "explanation": "`close()` 关闭的是当前进程持有的文件描述符，而不是删除文件本体；如果其他文件描述符仍引用同一文件，它们仍可继续操作。",
+      "source": {
+        "textbook": "Linux",
+        "chapter": "幻灯片 12: system系统调用",
+        "textbookSlug": "KUbm"
+      },
+      "created": "2026-06-20T02:56:59.989Z",
+      "conversationId": "gLdCaHok5rwtx1Fgnis7Z",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-06-20T02:58:44.236Z",
+          "chosen": 3,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-06-20T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1781924219989_004_5084cbad9de9",
+      "question": "关于 `access(path, mode)` 的检查方式，下列哪项理解正确？",
+      "choices": [
+        "`F_OK | R_OK` 必须同时写，才能表示存在且可读",
+        "`F_OK` 查存在性，`R_OK | W_OK` 可同时检查可读和可写",
+        "`access()` 检查通过后，后续 `open()` 一定成功",
+        "`R_OK` 只检查权限，不要求文件存在"
+      ],
+      "correctIndex": 1,
+      "explanation": "`F_OK` 用于检查文件是否存在，`R_OK/W_OK/X_OK` 分别检查读、写、执行权限，并且权限检查可以用按位或组合；但 `F_OK` 通常为 0，因此检查可读时直接用 `R_OK` 即可。",
+      "source": {
+        "textbook": "Linux",
+        "chapter": "幻灯片 12: system系统调用",
+        "textbookSlug": "KUbm"
+      },
+      "created": "2026-06-20T02:56:59.989Z",
+      "conversationId": "gLdCaHok5rwtx1Fgnis7Z",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-06-20T02:58:54.655Z",
+          "chosen": 1,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-06-20T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1782196109567_000_d1eb12e77606",
+      "question": "教材中关于 `syslog()` 的描述，下面哪一项最准确地概括了它的作用与 `closelog()` 的关系？",
+      "choices": [
+        "`syslog()` 只负责打开日志文件，`closelog()` 必须调用才能真正写入",
+        "`syslog()` 主要用于进程间通信，`closelog()` 用来销毁进程标识",
+        "`syslog()` 只能在程序退出前调用一次，否则会丢失所有日志",
+        "`syslog()` 用来写系统日志，`closelog()` 不是必须调用的"
+      ],
+      "correctIndex": 3,
+      "explanation": "`syslog()` 是守护进程常用的写系统日志接口，而 `closelog()` 只是用于关闭日志连接的可选函数，不是必须调用。教材重点是“写日志”而不是“必须成对调用”。",
+      "source": {
+        "textbook": "Linux",
+        "chapter": "幻灯片 6: 进程标识",
+        "textbookSlug": "KUbm"
+      },
+      "created": "2026-06-23T06:28:29.567Z",
+      "conversationId": "StywV2Tm_kRWmsrh2_sYy",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-06-23T06:30:43.057Z",
+          "chosen": 3,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-06-23T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1782196109567_001_ddce3e741453",
+      "question": "教材说 Linux 的主要 IPC 技术包括哪些？下面哪一项符合教材原意？",
+      "choices": [
+        "管道、System V IPC 和套接字",
+        "管道、信号和系统日志",
+        "共享内存、信号量和信号",
+        "匿名管道、命名管道和信号"
+      ],
+      "correctIndex": 0,
+      "explanation": "教材把主要 IPC 技术概括为管道、System V IPC 和套接字。信号虽然和进程有关，但教材明确指出它不算严格意义上的 IPC，因为它主要承担事件通知而不是数据传输。",
+      "source": {
+        "textbook": "Linux",
+        "chapter": "幻灯片 6: 进程标识",
+        "textbookSlug": "KUbm"
+      },
+      "created": "2026-06-23T06:28:29.567Z",
+      "conversationId": "StywV2Tm_kRWmsrh2_sYy",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-06-23T06:30:49.493Z",
+          "chosen": 0,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-06-23T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1782196109567_002_abefa49ae30c",
+      "question": "关于匿名管道和命名管道，下面哪一项最符合教材中的区分方式？",
+      "choices": [
+        "命名管道只能单向传送数据，而匿名管道可以双向传输",
+        "匿名管道和命名管道都必须在同一进程内使用",
+        "匿名管道依赖文件系统，而命名管道不需要任何外部存储",
+        "匿名管道只能用于有亲缘关系的进程，而命名管道可以突破这个限制"
+      ],
+      "correctIndex": 3,
+      "explanation": "匿名管道是半双工、只能单向传送数据，并且只能用于有亲缘关系的进程；命名管道也叫 FIFO，借助外存，可以突破必须有亲缘关系这个限制。题目考的是它们的使用边界，而不是名字本身。",
+      "source": {
+        "textbook": "Linux",
+        "chapter": "幻灯片 6: 进程标识",
+        "textbookSlug": "KUbm"
+      },
+      "created": "2026-06-23T06:28:29.567Z",
+      "conversationId": "StywV2Tm_kRWmsrh2_sYy",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-06-23T06:30:58.883Z",
+          "chosen": 3,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-06-23T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1782196109567_003_faddc90bce4b",
+      "question": "教材中对 System V IPC 的描述，下面哪一项是正确的？",
+      "choices": [
+        "消息队列、套接字、日志缓冲区",
+        "管道、消息队列、套接字",
+        "共享内存、FIFO、信号",
+        "消息队列、信号量、共享内存"
+      ],
+      "correctIndex": 3,
+      "explanation": "System V IPC 包括消息队列、信号量和共享内存。三者中共享内存通常最快，因为不同进程直接共享同一块内存，减少了中间拷贝与传递开销。",
+      "source": {
+        "textbook": "Linux",
+        "chapter": "幻灯片 6: 进程标识",
+        "textbookSlug": "KUbm"
+      },
+      "created": "2026-06-23T06:28:29.567Z",
+      "conversationId": "StywV2Tm_kRWmsrh2_sYy",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-06-23T06:31:05.418Z",
+          "chosen": 3,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-06-23T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1782196109567_004_bfc24c87ab9b",
+      "question": "关于信号，教材中的说法哪一项最准确？",
+      "choices": [
+        "信号只用于用户态函数调用，和进程间通信无关",
+        "信号是软中断，主要用于事件通知，不承担真正的数据传输",
+        "信号到达后只能被系统忽略，进程不能进行任何处理",
+        "信号是一种高速通信机制，专门用于在进程间传递大块数据"
+      ],
+      "correctIndex": 1,
+      "explanation": "教材把信号看作软中断，主要用于事件通知，因此不负责真正的数据传输。收到信号后，进程可以阻塞、捕获、忽略或执行默认动作，这也是它和普通 IPC 的关键区别。",
+      "source": {
+        "textbook": "Linux",
+        "chapter": "幻灯片 6: 进程标识",
+        "textbookSlug": "KUbm"
+      },
+      "created": "2026-06-23T06:28:29.567Z",
+      "conversationId": "StywV2Tm_kRWmsrh2_sYy",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-06-23T06:31:15.350Z",
+          "chosen": 1,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-06-23T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1782208400472_000_cd11855e17ed",
+      "question": "在 Linux 消息队列中，`ftok()` 的主要作用是什么？",
+      "choices": [
+        "把消息队列中的消息按类型取出",
+        "根据 `pathname` 和 `proj_id` 生成 `key_t`",
+        "根据 `key_t` 直接创建消息队列并返回 `id`",
+        "为消息队列分配读写权限标志"
+      ],
+      "correctIndex": 1,
+      "explanation": "`ftok()` 不是直接创建消息队列，而是根据路径名 `pathname` 和项目编号 `proj_id` 生成一个 `key_t`。这个 key 用来让后续的 `msgget()` 定位同一个消息队列。",
+      "source": {
+        "textbook": "Linux",
+        "chapter": "幻灯片 27: 消息队列",
+        "textbookSlug": "KUbm"
+      },
+      "created": "2026-06-23T09:53:20.472Z",
+      "conversationId": "WzF-cY7R6WOcpdzX5CoBj",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-06-23T09:53:24.888Z",
+          "chosen": 2,
+          "correct": false
+        },
+        {
+          "time": "2026-06-23T09:53:41.893Z",
+          "chosen": 1,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-06-23T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.4,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1782208400473_001_42910e17c4f5",
+      "question": "关于 `msgget(key_t key, int msgflg)`，下面哪一项最准确？",
+      "choices": [
+        "根据 `id` 反推出 `key`，用于跨进程通信",
+        "返回的是消息队列的路径名，供进程共享",
+        "根据 `key` 创建或打开消息队列，并返回 `id`",
+        "只负责创建消息队列，不能打开已存在的队列"
+      ],
+      "correctIndex": 2,
+      "explanation": "`msgget()` 的作用是根据 `key` 创建或打开消息队列，返回的是消息队列标识 `id`，而不是 `key` 本身。后续的 `msgsnd()` 和 `msgrcv()` 通常都使用这个 `id`。",
+      "source": {
+        "textbook": "Linux",
+        "chapter": "幻灯片 27: 消息队列",
+        "textbookSlug": "KUbm"
+      },
+      "created": "2026-06-23T09:53:20.473Z",
+      "conversationId": "WzF-cY7R6WOcpdzX5CoBj",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-06-23T09:53:39.488Z",
+          "chosen": 0,
+          "correct": false
+        },
+        {
+          "time": "2026-06-23T09:53:48.366Z",
+          "chosen": 2,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-06-23T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.4,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1782208400473_002_5832d80e5776",
+      "question": "两个不同进程想操作同一个消息队列，最关键需要先共享什么？",
+      "choices": [
+        "同一个 `pid`",
+        "同一个缓冲区地址",
+        "同一个 `key`",
+        "同一个 `mtype`"
+      ],
+      "correctIndex": 2,
+      "explanation": "不同进程要访问同一个消息队列，必须先拿到同一个 `key`，再通过 `msgget()` 定位到同一个队列。`key` 相当于队列的标识入口。",
+      "source": {
+        "textbook": "Linux",
+        "chapter": "幻灯片 27: 消息队列",
+        "textbookSlug": "KUbm"
+      },
+      "created": "2026-06-23T09:53:20.473Z",
+      "conversationId": "WzF-cY7R6WOcpdzX5CoBj",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-06-23T09:53:59.998Z",
+          "chosen": 2,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-06-23T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1782208400473_003_8373ae854ce3",
+      "question": "在消息队列中，`msgsnd()` 和 `msgrcv()` 分别对应什么操作？",
+      "choices": [
+        "`msgsnd()` 发送，`msgrcv()` 接收",
+        "`msgsnd()` 设置权限，`msgrcv()` 生成 key",
+        "`msgsnd()` 接收，`msgrcv()` 发送",
+        "`msgsnd()` 创建队列，`msgrcv()` 删除队列"
+      ],
+      "correctIndex": 0,
+      "explanation": "`msgsnd()` 用于发送消息到队列中，`msgrcv()` 用于从队列中接收消息。二者是一对方向相反的接口。",
+      "source": {
+        "textbook": "Linux",
+        "chapter": "幻灯片 27: 消息队列",
+        "textbookSlug": "KUbm"
+      },
+      "created": "2026-06-23T09:53:20.473Z",
+      "conversationId": "WzF-cY7R6WOcpdzX5CoBj",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-06-23T09:54:03.786Z",
+          "chosen": 0,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-06-23T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1782208400473_004_f18774e8c01f",
+      "question": "消息队列的消息体中，为什么通常必须包含 `mtype` 字段？",
+      "choices": [
+        "它表示发送进程的 `pid`，用于确认发送者身份",
+        "它表示消息队列的权限位，用于控制访问",
+        "它表示消息类型，用于按类型组织和接收消息",
+        "它表示消息长度，用于决定队列大小"
+      ],
+      "correctIndex": 2,
+      "explanation": "`mtype` 表示消息类型，它不是可有可无的附加信息，而是接收消息时区分和筛选消息的重要依据。没有它，消息队列就难以按类型组织和提取消息。",
+      "source": {
+        "textbook": "Linux",
+        "chapter": "幻灯片 27: 消息队列",
+        "textbookSlug": "KUbm"
+      },
+      "created": "2026-06-23T09:53:20.473Z",
+      "conversationId": "WzF-cY7R6WOcpdzX5CoBj",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-06-23T09:54:08.208Z",
+          "chosen": 2,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-06-23T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1789608225259_000_b008d93eb04a",
+      "question": "愿景漂移的真正代价被描述为：不是理念本身消失，而是愿景失去了什么能力？",
+      "choices": [
+        "失去与竞品形成差异化的能力",
+        "失去指导产品定价和发布节奏的能力",
+        "失去向投资人描述市场潜力的能力",
+        "失去筛选功能的能力，从尺子变成口号"
+      ],
+      "correctIndex": 3,
+      "explanation": "愿景的价值在于作为核验新功能的尺子——它有刻度、能拒绝。一旦它宽到什么都装得下（题库、直播、社交都对），它就无法再说'这个不做'，筛选功能的能力就失效了。",
+      "source": {
+        "textbook": "现代软件工程 面向软件产品",
+        "chapter": "要点",
+        "textbookSlug": "KUbm"
+      },
+      "created": "2026-09-17T01:23:45.259Z",
+      "conversationId": "tUrLvh4daSprJN9Hd2n0h",
+      "status": "active",
+      "history": [
+        {
+          "schemaVersion": 2,
+          "time": "2026-09-17T01:25:30.013Z",
+          "chosen": 3,
+          "correct": true,
+          "domainRevision": 1,
+          "answerRecordId": "flashcard:fc_1789608225259_000_b008d93eb04a:1"
+        }
+      ],
+      "nextReview": "2026-09-17T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1789608225260_001_add03420133b",
+      "question": "产品路线图中每个里程碑都必须配上'判断成功的标准'，而不仅仅是日期。这主要是为了避免什么隐患？",
+      "choices": [
+        "没有标准就没人愿意为里程碑负责",
+        "里程碑过多会分散产品经理对愿景的注意力",
+        "日期会变成'完成'的定义，导致没做完也硬发，且无法判断进度是否落后",
+        "标准缺失会让路线图无法向投资人展示"
+      ],
+      "correctIndex": 2,
+      "explanation": "只写日期会让日期本身变成'完成'的定义——到了日子，东西没做完也得发。有了标准，团队才能判断是'快好了'还是'才起头'，才能决定砍功能、加人或推迟。",
+      "source": {
+        "textbook": "现代软件工程 面向软件产品",
+        "chapter": "要点",
+        "textbookSlug": "KUbm"
+      },
+      "created": "2026-09-17T01:23:45.260Z",
+      "conversationId": "tUrLvh4daSprJN9Hd2n0h",
+      "status": "active",
+      "history": [
+        {
+          "schemaVersion": 2,
+          "time": "2026-09-17T01:25:49.254Z",
+          "chosen": 2,
+          "correct": true,
+          "domainRevision": 1,
+          "answerRecordId": "flashcard:fc_1789608225260_001_add03420133b:1"
+        }
+      ],
+      "nextReview": "2026-09-17T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1789608225260_002_84b54fa12b5c",
+      "question": "产品待定项一开始写得粗、逐步细化，最核心的原因是什么？",
+      "choices": [
+        "因为产品经理没有时间提前细化所有条目",
+        "为了保证产品大方向不变，粗条目能锚定愿景",
+        "为了让开发团队有更多自由度自己决定做什么",
+        "为了保留变更空间——粗条目改一笔即可，细条目要整个重写，便于低成本地响应变化"
+      ],
+      "correctIndex": 3,
+      "explanation": "待定项粗是为了'便宜地变'：没轮到的事细节会变，提前细化就是白做功；粗条目便于排优先级，也留出变更空间。方向是由愿景守的，不是由待定项的粗细守的。",
+      "source": {
+        "textbook": "现代软件工程 面向软件产品",
+        "chapter": "要点",
+        "textbookSlug": "KUbm"
+      },
+      "created": "2026-09-17T01:23:45.260Z",
+      "conversationId": "tUrLvh4daSprJN9Hd2n0h",
+      "status": "active",
+      "history": [
+        {
+          "schemaVersion": 2,
+          "time": "2026-09-17T01:25:55.802Z",
+          "chosen": 3,
+          "correct": true,
+          "domainRevision": 1,
+          "answerRecordId": "flashcard:fc_1789608225260_002_84b54fa12b5c:1"
+        }
+      ],
+      "nextReview": "2026-09-17T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1789608225260_003_57ee4f1f81c7",
+      "question": "一旦原型有了外部用户，就应该把它当成'可以扔到一边的'系统。按教材说法，如果坚持在原型上继续叠功能，会逐步坏在哪？",
+      "choices": [
+        "为了提速在原型中留下的捷径会加速开发过程失控，最终增加安全性和可靠性变得不可能，因为技术债已无法偿还",
+        "外部用户会提出越来越多个性化需求，原型架构无法支持",
+        "原型缺少文档，新成员加入后团队会完全看不懂代码",
+        "原型使用的技术通常过时，继续叠功能会被竞争对手淘汰"
+      ],
+      "correctIndex": 0,
+      "explanation": "原型为提速走了大量捷径（忽略可靠性、性能、安全、架构），这些是欠着的技术债。有了外部用户就必须还债，而在原型上还债最贵，加到某一刻，增加安全性和可靠性实际上变得不可能。",
+      "source": {
+        "textbook": "现代软件工程 面向软件产品",
+        "chapter": "要点",
+        "textbookSlug": "KUbm"
+      },
+      "created": "2026-09-17T01:23:45.260Z",
+      "conversationId": "tUrLvh4daSprJN9Hd2n0h",
+      "status": "active",
+      "history": [
+        {
+          "schemaVersion": 2,
+          "time": "2026-09-17T01:26:21.707Z",
+          "chosen": 0,
+          "correct": true,
+          "domainRevision": 1,
+          "answerRecordId": "flashcard:fc_1789608225260_003_57ee4f1f81c7:1"
+        }
+      ],
+      "nextReview": "2026-09-17T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1789608225260_004_c6868b14a71d",
+      "question": "XP 的十项实践被教材分为'已被广泛采用'和'只在部分公司用'两堆。这个分野的根据是什么？",
+      "choices": [
+        "前者是技术实践，团队自己就能落地；后者是社会/组织实践，需要他人配合和组织层面的改变，且收益缺乏确凿证据",
+        "前者在大公司经过验证，后者只在初创公司经过验证",
+        "前者是 XP 独有的，后者是从 Scrum 借来的",
+        "前者由开发人员发起，后者由管理层强行推行"
+      ],
+      "correctIndex": 0,
+      "explanation": "左边那堆改的是代码和编码流程（增量计划、小版本、TDD、持续集成、重构），团队自己就能落地；右边那堆要动的是人（结对编程、集体所有权、在场客户、可持续速度、YAGNI），涉及同事习惯、心理边界、客户意愿、经理信任，必须靠整个组织一起落地，且缺乏确凿证据。",
+      "source": {
+        "textbook": "现代软件工程 面向软件产品",
+        "chapter": "要点",
+        "textbookSlug": "KUbm"
+      },
+      "created": "2026-09-17T01:23:45.260Z",
+      "conversationId": "tUrLvh4daSprJN9Hd2n0h",
+      "status": "active",
+      "history": [
+        {
+          "schemaVersion": 2,
+          "time": "2026-09-17T01:26:43.797Z",
+          "chosen": 0,
+          "correct": true,
+          "domainRevision": 1,
+          "answerRecordId": "flashcard:fc_1789608225260_004_c6868b14a71d:1"
+        }
+      ],
+      "nextReview": "2026-09-17T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    }
+  ]
+}

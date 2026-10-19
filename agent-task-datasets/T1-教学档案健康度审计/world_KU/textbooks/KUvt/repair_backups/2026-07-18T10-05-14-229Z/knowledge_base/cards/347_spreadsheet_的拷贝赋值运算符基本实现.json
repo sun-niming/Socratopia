@@ -1,0 +1,45 @@
+{
+  "title": "Spreadsheet 的拷贝赋值运算符基本实现",
+  "definition": "对于管理动态二维数组的 Spreadsheet 类，拷贝赋值运算符需要将右侧对象的数据复制到当前对象中。典型步骤是：先检查自赋值；释放当前对象原有的动态内存；按照右侧对象的宽度和高度重新分配内存；逐个复制单元格数据；最后返回当前对象。",
+  "key_points": [
+    "自赋值检查可避免对象给自身赋值时错误地释放自己的数据。通常通过判断对象地址是否相同实现：if (this == &rhs) { return *this; }。",
+    "释放动态二维数组时，应先逐列执行 delete[] m_cells[i]，再执行 delete[] m_cells，并将 m_cells 置为 nullptr。",
+    "重新分配内存后，需要用嵌套循环复制每个单元格：外层遍历宽度，内层遍历高度。",
+    "拷贝赋值运算符通常返回当前对象的引用，即 return *this，以支持连续赋值。"
+  ],
+  "examples": [
+    "自赋值检查：`if (this == &rhs) { return *this; }`。",
+    "动态二维数组释放与重新分配的结构：`for (size_t i{0}; i < m_width; ++i) { delete[] m_cells[i]; } delete[] m_cells; m_cells = nullptr;`，然后根据 rhs 的尺寸重新分配。",
+    "数据复制可表示为：$$m\\_cells[i][j] = rhs.m\\_cells[i][j]$$"
+  ],
+  "misconceptions": [
+    "拷贝赋值不能只复制 m_cells 指针，否则会形成浅拷贝，使两个对象共享同一块动态内存。",
+    "只释放最外层指针而不释放每一列数组会造成内存泄漏。",
+    "自赋值不是普通赋值的特殊无害情况；如果先释放旧内存再读取 rhs，可能导致数据丢失或未定义行为。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "管理动态二维数组的 Spreadsheet 拷贝赋值运算符通常需要哪些步骤？",
+      "a": "先检查自赋值；释放当前对象的旧动态内存；按照右侧对象的尺寸重新分配内存；逐个复制单元格数据；最后返回当前对象引用。"
+    },
+    {
+      "q": "为什么拷贝赋值运算符需要检查 `this == &rhs`？",
+      "a": "因为给对象自身赋值时，如果先释放当前内存，就可能同时破坏作为数据来源的 rhs，导致复制失败或未定义行为。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++拷贝构造和动态内存管理"
+  ],
+  "source_pages": [
+    265,
+    266
+  ],
+  "needs_verification": true,
+  "verify_query": "\"C++20高级编程\" \"Spreadsheet::operator=\" \"Check for self-assignment\"",
+  "concept_id": "347_spreadsheet_的拷贝赋值运算符基本实现",
+  "_chunk_pages": [
+    265,
+    268
+  ]
+}

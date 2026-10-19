@@ -1,0 +1,39 @@
+{
+  "title": "对象池 ObjectPool 的基本用途",
+  "definition": "ObjectPool 是一种类，用于避免过多的对象创建操作。它通过跟踪已经创建的对象，在需要某类对象的代码与已经分配的对象之间充当代理角色。原文后续示例使用 ObjectPool 作为被测试对象。",
+  "key_points": [
+    "对象池的目标是减少过多的对象创建操作。",
+    "对象池会跟踪已经创建的对象。",
+    "对象池可在对象需求方与已分配对象之间充当代理。",
+    "原文将 ObjectPool 类作为 Visual C++ 单元测试示例。"
+  ],
+  "examples": [
+    "单元测试示例继续使用第 29 章实现的 ObjectPool 类，并围绕该类创建 ObjectPoolTest 测试类。"
+  ],
+  "misconceptions": [
+    "对象池只是保存对象的普通容器。",
+    "使用对象池意味着对象永远不会被创建。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "ObjectPool 类的基本用途是什么？",
+      "a": "通过跟踪已经创建的对象，在对象需求方与已分配对象之间充当代理，以避免过多的对象创建操作。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "单元测试的基本概念",
+    "C++ 类的基本概念"
+  ],
+  "source_pages": [
+    883,
+    883
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1829_对象池_objectpool_的基本用途",
+  "_chunk_pages": [
+    881,
+    884
+  ]
+}

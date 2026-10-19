@@ -1,0 +1,51 @@
+{
+  "title": "观察者对象的注册、注销与示例结果",
+  "definition": "观察者类可以在构造时向主题注册事件处理函数，并保存返回的事件句柄；在析构时使用该句柄注销自己。这样可以避免主题继续通知已经销毁的观察者。原文示例同时注册了一个独立函数、一个 lambda，以及一个 `Observer` 对象。",
+  "key_points": [
+    "`Observer` 构造函数向 `subject.getEventDataModified()` 注册 lambda，并把事件参数转发给成员函数 `onSubjectModified`。",
+    "`Observer` 析构函数使用保存的句柄注销修改事件观察者。",
+    "主题可以同时拥有普通函数、lambda 和对象成员逻辑等不同形式的观察者。",
+    "注销某个观察者后，后续事件只通知仍然注册的观察者。"
+  ],
+  "examples": [
+    "典型生命周期可以概括为：$$\\text{构造 Observer}\\rightarrow\\text{注册并保存句柄}\\rightarrow\\text{主题触发事件}\\rightarrow\\text{析构 Observer 时注销}$$",
+    "原文示例先注册 `modified` 函数、删除事件 lambda 和 `Observer`，随后调用修改与删除操作；之后注销 `modified` 函数，再次调用操作。第一次修改事件会通知 `modified` 和 `Observer`，删除事件通知 lambda；注销后，修改事件不再通知 `modified`，删除事件仍通知 lambda。",
+    "原文给出的输出顺序为：`modified`、`Observer::onSubjectModified()`、`deleted`、`Observer::onSubjectModified()`、`deleted`。"
+  ],
+  "misconceptions": [
+    "观察者对象析构后不能继续留在主题的观察者列表中，否则主题可能调用失效对象；因此示例在析构时注销。",
+    "注销一个观察者不会自动注销其他观察者；每个注册关系都需要使用对应句柄处理。",
+    "事件的通知顺序取决于事件内部保存和遍历观察者的方式；学习者不应把不同事件混为一次通知。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么 Observer 要在析构函数中注销事件？",
+      "a": "为了移除指向该对象的观察者回调，避免对象销毁后主题仍调用失效的观察者。"
+    },
+    {
+      "q": "示例中注销 `modified` 后再次调用 `subject.modifyData()`，谁还会收到修改事件？",
+      "a": "`Observer` 仍然注册，因此它仍会收到修改事件；已经注销的 `modified` 函数不会再收到通知。"
+    },
+    {
+      "q": "示例中删除事件的 lambda 是否会因为注销修改事件而停止？",
+      "a": "不会。它注册在另一个删除事件上，注销修改事件不会影响它，因此后续 `deleteData()` 仍会输出 `deleted`。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "观察者模式的通知机制与低耦合",
+    "对象生命周期",
+    "lambda 表达式"
+  ],
+  "source_pages": [
+    959,
+    960
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1970_观察者对象的注册_注销与示例结果",
+  "_chunk_pages": [
+    957,
+    960
+  ]
+}

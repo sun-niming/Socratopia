@@ -1,0 +1,40 @@
+{
+  "title": "flex-wrap",
+  "definition": "flex-wrap 属性定义：当项目在一条轴线上排不下时，是否以及如何换行。默认情况下，项目都排在一条线（轴线）上。",
+  "key_points": [
+    "nowrap：默认值，不换行。",
+    "wrap：换行，第一行在上方。",
+    "wrap-reverse：换行，第一行在下方。"
+  ],
+  "examples": [
+    "flex-wrap: nowrap;",
+    "flex-wrap: wrap;",
+    "flex-wrap: wrap-reverse;"
+  ],
+  "misconceptions": [
+    "flex-wrap 不是控制项目对齐方式，而是控制是否换行以及换行后的行顺序。",
+    "nowrap 不表示项目自动缩小，它只表示不换行。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "flex-wrap 属性是用来做什么的？",
+      "a": "它定义当一条轴线排不下时，项目如何换行。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "弹性盒布局",
+    "轴线"
+  ],
+  "source_pages": [
+    153,
+    156
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "245_flex_wrap",
+  "_chunk_pages": [
+    153,
+    156
+  ]
+}

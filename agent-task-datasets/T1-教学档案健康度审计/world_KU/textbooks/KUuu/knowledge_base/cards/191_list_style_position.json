@@ -1,0 +1,36 @@
+{
+  "title": "list-style-position",
+  "definition": "list-style-position 用来设置列表项标号的位置。inside 表示标号位于列表区域内，outside 表示标号位于列表区域外。",
+  "key_points": [
+    "用于控制标号相对列表内容区域的位置",
+    "inside 表示标号在列表区域内",
+    "outside 表示标号在列表区域外"
+  ],
+  "examples": [
+    "list-style-position: inside;",
+    "list-style-position: outside;"
+  ],
+  "misconceptions": [
+    "误以为 inside 和 outside 是标号形状",
+    "误以为它决定的是文本缩进本身"
+  ],
+  "qa_pairs": [
+    {
+      "q": "list-style-position 中 inside 表示什么？",
+      "a": "标号位于列表区域内。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [],
+  "source_pages": [
+    117,
+    120
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "191_list_style_position",
+  "_chunk_pages": [
+    117,
+    120
+  ]
+}

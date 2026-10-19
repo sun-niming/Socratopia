@@ -1,0 +1,51 @@
+{
+  "title": "flex简写属性",
+  "definition": "flex属性是一个简写属性，用于统一设置flex-grow、flex-shrink和flex-basis三个子属性，以控制弹性项目在容器内的伸缩行为。其语法格式为flex: flex-grow [ flex-shrink ] [ flex-basis ]。默认值是0 1 auto，即不放大、可缩小、基础大小为内容尺寸。",
+  "key_points": [
+    "是flex-grow、flex-shrink、flex-basis的简写",
+    "用于控制弹性项目在容器内的伸缩行为",
+    "语法格式为flex: flex-grow [ flex-shrink ] [ flex-basis ]",
+    "默认值为0 1 auto",
+    "flex-grow为必选，flex-shrink和flex-basis为可选"
+  ],
+  "examples": [
+    "flex: 1 1 auto;",
+    "flex: 2 0 200px;",
+    "flex: 1;"
+  ],
+  "misconceptions": [
+    "flex只能写一个值且必须包含三个部分；原文说明后两个参数可省略。",
+    "flex默认值会让项目自动放大；原文给出的默认值是0 1 auto，表示不放大、可缩小、基础大小为内容尺寸。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "flex属性是什么类型的属性？",
+      "a": "它是一个简写属性。"
+    },
+    {
+      "q": "flex属性统一设置哪三个子属性？",
+      "a": "flex-grow、flex-shrink和flex-basis。"
+    },
+    {
+      "q": "flex的默认值是什么？",
+      "a": "默认值是0 1 auto。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "flex-grow属性",
+    "flex-shrink属性",
+    "flex-basis属性"
+  ],
+  "source_pages": [
+    161,
+    164
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "254_flex简写属性",
+  "_chunk_pages": [
+    161,
+    164
+  ]
+}

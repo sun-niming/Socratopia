@@ -1,0 +1,50 @@
+{
+  "title": "鼠标及相关常用事件",
+  "definition": "原文列出的鼠标及相关事件，覆盖点击、右键菜单、双击、按下与释放鼠标键、指针进出和移动、文本选择以及滚轮滚动等情形。",
+  "key_points": [
+    "click：在元素上按下并释放任意鼠标按键",
+    "contextmenu：右键点击，且在右键菜单显示前触发",
+    "dblclick：在元素上双击鼠标按钮",
+    "mousedown：在元素上按下任意鼠标按钮",
+    "mouseenter：指针移到有事件监听的元素内",
+    "mouseleave：指针移出元素范围外，且不冒泡",
+    "mousemove：指针在元素内移动时持续触发",
+    "mouseover：指针移到有事件监听的元素或者它的子元素内",
+    "mouseout：指针移出元素，或者移到它的子元素上",
+    "mouseup：在元素上释放任意鼠标按键",
+    "select：有文本被选中",
+    "wheel：滚轮向任意方向滚动"
+  ],
+  "examples": [
+    "button.addEventListener('click', handler)",
+    "div.addEventListener('contextmenu', handler)",
+    "p.addEventListener('select', handler)",
+    "area.addEventListener('wheel', handler)"
+  ],
+  "misconceptions": [
+    "click 不是只按下就触发，而是按下并释放之后才触发",
+    "mouseleave 在原文中明确写了“不冒泡”",
+    "mouseover / mouseout 与 mouseenter / mouseleave 的触发范围不同，不能混为一谈"
+  ],
+  "qa_pairs": [
+    {
+      "q": "指针移到有事件监听的元素内时，原文对应哪个事件？",
+      "a": "mouseenter。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "HTML事件基础"
+  ],
+  "source_pages": [
+    361,
+    361
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "521_鼠标及相关常用事件",
+  "_chunk_pages": [
+    361,
+    364
+  ]
+}

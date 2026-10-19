@@ -1,0 +1,47 @@
+{
+  "title": "GameBoard的复制和交换赋值",
+  "definition": "GameBoard的复制赋值运算符采用“复制和交换”惯用法：先用右值rhs构造一个临时副本，再将临时副本与当前对象交换，最后返回当前对象。这样复制工作在临时对象中完成，正式提交结果时只执行交换等不抛出异常的操作。GameBoard还提供swap成员函数和非成员swap函数，用于交换宽度、高度和棋盘单元格数据。",
+  "key_points": [
+    "复制赋值的大致流程是：GameBoard temp{rhs}; swap(temp); return *this;。",
+    "临时对象的构造负责完成内存分配和棋子深复制。",
+    "swap()交换m_width、m_height和m_cells。",
+    "源码还将移动构造函数和移动赋值运算符显式默认为移动操作。"
+  ],
+  "examples": [
+    "复制赋值的核心代码：\nGameBoard& GameBoard::operator=(const GameBoard& rhs) {\n    GameBoard temp{rhs};\n    swap(temp);\n    return *this;\n}",
+    "交换操作的结构：\nvoid GameBoard::swap(GameBoard& other) noexcept {\n    std::swap(m_width, other.m_width);\n    std::swap(m_height, other.m_height);\n    std::swap(m_cells, other.m_cells);\n}"
+  ],
+  "misconceptions": [
+    "复制和交换不是直接把rhs的成员逐个赋给当前对象，而是先构造临时副本再交换。",
+    "复制赋值使用的是深复制，因为临时副本构造时会对每个非空棋子调用clone()。",
+    "swap()交换的是棋盘的内部状态，不是逐个重新创建棋子对象。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "GameBoard复制赋值运算符为什么先构造临时对象？",
+      "a": "先在临时对象中完成复制和资源分配，再通过交换提交结果，可以让赋值提交阶段只执行不抛出异常的交换操作。"
+    },
+    {
+      "q": "GameBoard的swap()需要交换哪些成员？",
+      "a": "需要交换m_width、m_height和m_cells。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "复制构造函数",
+    "移动语义",
+    "异常安全",
+    "std::swap"
+  ],
+  "source_pages": [
+    375,
+    375
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "760_gameboard的复制和交换赋值",
+  "_chunk_pages": [
+    373,
+    376
+  ]
+}

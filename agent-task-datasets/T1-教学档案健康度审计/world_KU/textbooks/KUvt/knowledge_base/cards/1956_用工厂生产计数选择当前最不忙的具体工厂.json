@@ -1,0 +1,51 @@
+{
+  "title": "用工厂生产计数选择当前最不忙的具体工厂",
+  "definition": "LeastBusyFactory 是一种组合多个 CarFactory 的工厂。它保存一组具体工厂，在创建汽车时查询每个工厂已经生产的汽车数量，选择生产数量最少的工厂，再请求该工厂生产汽车。这样，调用者只需请求 LeastBusyFactory，而不必直接选择 FordFactory 或 ToyotaFactory。",
+  "key_points": [
+    "LeastBusyFactory 从 CarFactory 派生，并重写 createCar()。",
+    "其构造函数接收一组 `std::unique_ptr<CarFactory>`，并取得这些工厂的所有权。",
+    "如果没有提供任何工厂，构造函数会抛出运行时错误。",
+    "选择工厂的依据是 `getNumberOfCarsProduced()` 返回的生产数量。",
+    "示例中创建了 3 个 FordFactory 和 1 个 ToyotaFactory，并预先让部分工厂生产汽车，再由 LeastBusyFactory 继续分配请求。"
+  ],
+  "examples": [
+    "选择逻辑可概括为：$$f^*=\\arg\\min_{f\\in\\mathcal{F}}\\ \\text{getNumberOfCarsProduced}(f)$$然后执行 `f*->requestCar()`。",
+    "示例通过 `LeastBusyFactory leastBusyFactory{std::move(factories)};` 创建自动选择最不忙工厂的工厂，再循环请求 10 辆汽车。"
+  ],
+  "misconceptions": [
+    "LeastBusyFactory 本身不是某个汽车品牌的具体工厂，而是对多个 CarFactory 的调度封装。",
+    "选择的是当前已生产数量最少的工厂，不是固定优先选择 Toyota 或 Ford。",
+    "当多个工厂的生产数量相同时，源码中的严格小于比较会保留先遇到的候选工厂；并发请求时输出和状态可能不再完全可预测。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "LeastBusyFactory 如何选择生产汽车的工厂？",
+      "a": "它遍历所持有的工厂，比较各工厂已生产的汽车数量，并选择数量最少的工厂调用 requestCar()。"
+    },
+    {
+      "q": "为什么示例在单线程顺序执行时结果完全可预测？",
+      "a": "因为循环按确定顺序逐次选择当前生产数量最少的工厂；如果多个销售商并发请求，工厂状态的变化顺序可能不可预测。"
+    },
+    {
+      "q": "LeastBusyFactory 为什么需要持有多个 CarFactory？",
+      "a": "因为它要比较这些工厂的当前生产数量，并将请求转发给其中最不忙的工厂。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "工厂方法通过虚函数创建不同类型的对象",
+    "std::unique_ptr 所有权转移",
+    "多态容器"
+  ],
+  "source_pages": [
+    950,
+    952
+  ],
+  "needs_verification": true,
+  "verify_query": "《C++20高级编程》第5版 LeastBusyFactory getNumberOfCarsProduced requestCar 示例 输出 Toyota 工厂方法",
+  "concept_id": "1956_用工厂生产计数选择当前最不忙的具体工厂",
+  "_chunk_pages": [
+    949,
+    952
+  ]
+}

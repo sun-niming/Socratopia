@@ -1,0 +1,39 @@
+{
+  "title": "JavaScript运行环境",
+  "definition": "JavaScript的运行环境包括浏览器引擎和Node.js运行时。浏览器中的运行环境包含核心引擎和Web API；Node.js则是另一种独立的JavaScript运行时环境。",
+  "key_points": [
+    "浏览器中的JavaScript运行环境包含核心引擎和Web API",
+    "Node.js也是JavaScript运行时环境",
+    "不同环境适用于不同场景"
+  ],
+  "examples": [
+    "浏览器引擎 + Web API",
+    "Node.js运行时"
+  ],
+  "misconceptions": [
+    "JavaScript只能在浏览器里运行",
+    "只要有浏览器引擎就一定有Node.js"
+  ],
+  "qa_pairs": [
+    {
+      "q": "JavaScript的运行环境有哪些主要类型？",
+      "a": "浏览器引擎环境和Node.js运行时环境。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "JavaScript的起源",
+    "ECMAScript标准"
+  ],
+  "source_pages": [
+    233,
+    236
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "337_javascript运行环境",
+  "_chunk_pages": [
+    233,
+    236
+  ]
+}

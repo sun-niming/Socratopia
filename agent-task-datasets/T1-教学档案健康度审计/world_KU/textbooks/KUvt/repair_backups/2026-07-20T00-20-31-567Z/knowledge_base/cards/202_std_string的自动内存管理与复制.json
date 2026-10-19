@@ -1,0 +1,46 @@
+{
+  "title": "std::string的自动内存管理与复制",
+  "definition": "当 `std::string` 的操作需要扩大字符串容量时，字符串类会自动处理内存分配和调整大小。`std::string` 对象离开作用域时，其析构函数会清理相关内存，因此使用栈上的字符串对象也不会因字符串扩展而产生内存泄漏。`=` 运算符按预期复制字符串内容。",
+  "key_points": [
+    "字符串扩展所需的内存由 `std::string` 自动管理。",
+    "字符串对象离开作用域时，析构函数负责清理内存。",
+    "使用 `=` 复制字符串后，目标字符串获得源字符串的内容。",
+    "不需要像基于字符数组的字符串那样手动处理扩容和释放。"
+  ],
+  "examples": [
+    "`string myOtherString { myString };` 创建一个内容复制自 `myString` 的字符串对象。",
+    "若随后执行 `myOtherString[0] = 'H';`，修改的是 `myOtherString` 的首字符；原文示例输出为 `Hello, there`。"
+  ],
+  "misconceptions": [
+    "误以为字符串对象在栈上就不能使用动态内存。",
+    "误以为复制一个 `std::string` 只会复制指针，因此修改副本必然修改原字符串。",
+    "误以为字符串扩容后必须由程序员手动释放旧内存。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`std::string` 扩容时谁负责分配和释放相关内存？",
+      "a": "`std::string` 类负责内存分配和调整大小；字符串对象离开作用域时，其析构函数负责清理内存。"
+    },
+    {
+      "q": "用 `string myOtherString { myString };` 初始化后，修改 `myOtherString[0]` 的作用是什么？",
+      "a": "它修改 `myOtherString` 的首字符；该操作体现了字符串内容复制后的独立修改。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "std::string",
+    "构造函数与析构函数",
+    "作用域"
+  ],
+  "source_pages": [
+    108,
+    108
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "202_std_string的自动内存管理与复制",
+  "_chunk_pages": [
+    105,
+    108
+  ]
+}

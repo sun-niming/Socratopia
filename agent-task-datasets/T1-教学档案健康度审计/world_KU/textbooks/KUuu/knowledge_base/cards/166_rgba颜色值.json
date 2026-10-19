@@ -1,0 +1,36 @@
+{
+  "title": "rgba颜色值",
+  "definition": "rgba(x,x,x,x) 在 RGB 三个颜色分量之外，再增加一个 a 值表示透明度。",
+  "key_points": [
+    "a 的取值范围是 0.0 到 1.0。",
+    "a=0.0 表示完全透明，a=1.0 表示完全不透明。",
+    "原文示例为 rgba(255,0,0,0.5)，表示红色半透明。"
+  ],
+  "examples": [
+    "rgba(255,0,0,0.5)"
+  ],
+  "misconceptions": [
+    "rgba 不是四个颜色分量，最后一个参数表示透明度，不是第四色。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "rgba 中最后一个参数 a 表示什么？",
+      "a": "表示透明度，范围是 0.0 到 1.0。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "rgb整数颜色值"
+  ],
+  "source_pages": [
+    109,
+    112
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "166_rgba颜色值",
+  "_chunk_pages": [
+    109,
+    112
+  ]
+}

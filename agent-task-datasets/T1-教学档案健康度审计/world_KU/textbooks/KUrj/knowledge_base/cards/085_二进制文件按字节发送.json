@@ -1,0 +1,39 @@
+{
+  "title": "二进制文件按字节发送",
+  "definition": "发送静态文件时不能把文件内容当字符串处理。图片等二进制文件可能包含 `0` 字节，不能用 `strlen` 计算长度；应在 `read` 读取到多少字节就发送多少字节。响应头中的 `Content-Length` 则应使用 `stat.st_size`。",
+  "key_points": [
+    "二进制文件可能包含 `0` 字节，不能用字符串思维",
+    "发送长度应使用 `read` 的返回值",
+    "`Content-Length` 使用 `stat.st_size`"
+  ],
+  "examples": [
+    "循环读取：`while ((n = read(file_fd, buf, sizeof(buf))) > 0) { send_all(client_fd, buf, (size_t)n); }`",
+    "图片文件的大小不应通过 `strlen(buf)` 估算"
+  ],
+  "misconceptions": [
+    "把缓冲区内容当作以 `\\0` 结尾的字符串",
+    "认为所有文件都能用 `strlen` 统计长度"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么静态文件发送不能用 `strlen`？",
+      "a": "因为二进制文件里可能包含 `0` 字节，`strlen` 会提前截断；应该按 `read` 返回的实际字节数发送。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "read函数",
+    "stat函数"
+  ],
+  "source_pages": [
+    54,
+    55
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "085_二进制文件按字节发送",
+  "_chunk_pages": [
+    53,
+    56
+  ]
+}

@@ -1,0 +1,104 @@
+{
+  "conversationId": "PZVQelpofaMnjfQE2L5yK",
+  "generatedAt": 1782641268006,
+  "pagesRange": null,
+  "sections": [
+    {
+      "type": "tldr",
+      "content": "本节把 Shell 的“展开规则”串起来了：`#` 的注释边界、单双引号、转义符、`${}` 变量边界、默认值替换、脚本执行方式和 `$?` 返回码。"
+    },
+    {
+      "type": "narrative",
+      "content": "一开始围绕 `#`、单双引号和转义，慢慢摸清“哪些字符会被 Shell 特殊处理”。接着从 `${}`、`:-`、`:=`、`:+` 把变量替换的边界和默认值规则理顺。最后把这些零散规则收进脚本执行、位置参数和 `$?` 里，开始进入 `if` 的判断思路。"
+    },
+    {
+      "type": "concepts",
+      "items": [
+        {
+          "name": "注释 `#` 的边界",
+          "body": "`#` 只有在**不被引号保护**时才会开启注释。\n\n- `echo hello # world`：`# world` 会被当作注释，实际执行的是 `echo hello`\n- `echo \"# hello\"`：`#` 在双引号里，按普通字符处理\n- `echo '# hello'`：`#` 在单引号里，也按普通字符处理\n\n记法：**命令外面的 `#` 才是注释，字符串里的 `#` 只是字符。**"
+        },
+        {
+          "name": "单双引号的区别",
+          "body": "- **双引号**：保留空格等大部分字符的原样，但**允许变量替换**，例如 `$name` 会被展开\n- **单引号**：最“硬”，里面的内容几乎全部原样输出，`$name` 不会展开\n\n例子：\n\n```bash\\nname=Linux\\necho \"$name\"\\necho '$name'\n```\n\n前者输出 `Linux`，后者输出 `$name`。"
+        },
+        {
+          "name": "反斜杠 `\\` 的作用",
+          "body": "`\\` 常用来“保护”特殊字符，阻止它立刻触发 Shell 的解释。\n\n在双引号里，`\\$` 可以让 `$` 不再做变量替换；而 `\\\\` 会先变成一个普通反斜杠，再继续参与后面的展开。\n\n例子：\n\n```bash\\nname=Linux\\necho \"\\$name\"\\necho \"\\\\$name\"\n```\n\n第一行输出 `$name`，第二行输出 `\\Linux`。"
+        },
+        {
+          "name": "`${var}`：变量名边界",
+          "body": "`${var}` 的作用是把变量名和后面的普通字符分开，避免 Shell 把后面的字母也算进变量名里。\n\n例子：\n\n```bash\\na=/e\\necho \"${a}tc/httpd\"\n```\n\n这里会得到 `/etc/httpd`。\n\n如果写成 `$atc/httpd`，Shell 可能会把 `atc` 当成变量名，而不是 `a` 后面接 `tc`。"
+        },
+        {
+          "name": "默认值展开：`:-`、`:=`、`:+`",
+          "body": "这三个写法都在“变量为空或是否存在”时起作用：\n\n- `${var:-word}`：如果 `var` **为空或未定义**，就**临时**用 `word`，但**不改变量本身**\n- `${var:=word}`：如果 `var` **为空或未定义**，就用 `word`，并且**把 `word` 写回变量**\n- `${var:+word}`：如果 `var` **存在且非空**，就返回 `word`；否则返回空\n\n例子：\n\n```bash\\nname=\"\"\\necho \"${name:-Linux}\"\\necho \"${name:=Linux}\"\\necho \"${name:+Linux}\"\\necho \"$name\"\n```\n\n如果一开始 `name` 为空：\n\n- `:-` 会先显示 `Linux`\n- `:=` 会把 `name` 真的改成 `Linux`\n- `:+` 在 `name` 非空时才返回后面的内容"
+        },
+        {
+          "name": "脚本的开头、权限和运行方式",
+          "body": "脚本如果要直接执行，常见写法是：\n\n```bash\n#!/bin/bash\n```\n\n这行叫 **shebang**，告诉系统用哪个解释器来执行脚本。\n\n如果想直接运行 `./test.sh`，通常还需要给脚本执行权限：\n\n```bash\\nchmod a+x test.sh\n```\n\n而如果只是临时运行一次，也可以直接交给 `bash`：\n\n```bash\\nbash test.sh\n```\n\n或者把脚本内容通过标准输入喂给 `bash`：\n\n```bash\\nbash < test.sh\n```"
+        }
+      ]
+    },
+    {
+      "type": "key-terms",
+      "items": [
+        {
+          "term": "shebang",
+          "definition": "脚本第一行的解释器声明，例如 `#!/bin/bash`。"
+        },
+        {
+          "term": "输入重定向",
+          "definition": "把文件内容送进命令的标准输入，例如 `bash < test.sh`。"
+        },
+        {
+          "term": "位置参数",
+          "definition": "脚本或命令后面的参数占位，如 `$0`、`$1`、`$2`。"
+        },
+        {
+          "term": "执行权限",
+          "definition": "让文件可以被直接当作程序运行的权限，常用 `chmod a+x` 添加。"
+        },
+        {
+          "term": "返回码",
+          "definition": "上一条命令执行后的状态值，`$?` 里保存；`0` 通常表示成功。"
+        }
+      ]
+    },
+    {
+      "type": "notes",
+      "title": "脚本执行方式速记",
+      "content": "这节里出现的三种运行脚本方式，可以直接记成一组：\n\n```bash\\nbash test.sh\\nbash < test.sh\\nchmod a+x test.sh\n./test.sh\n```\n\n- `bash test.sh`：把脚本交给 `bash` 执行，不强依赖执行权限\n- `bash < test.sh`：把脚本内容作为标准输入交给 `bash`\n- `./test.sh`：直接运行脚本，通常需要 `#!/bin/bash` 和执行权限\n\n如果脚本想被“直接点开就跑”，重点就是：**第一行写对，权限给够**。"
+    },
+    {
+      "type": "review-questions",
+      "items": [
+        {
+          "question": "`echo \"# hello\"` 会输出什么？为什么？",
+          "answer": "输出 `# hello`。因为 `#` 在双引号里，不会开启注释，只是普通字符。"
+        },
+        {
+          "question": "比较 `echo \"$name\"` 和 `echo '$name'` 的结果。",
+          "answer": "双引号里 `$name` 会展开成变量值；单引号里不会展开，会原样输出 `$name`。"
+        },
+        {
+          "question": "如果 `name=\"\"`，`${name:-Linux}` 和 `${name:=Linux}` 分别做什么？",
+          "hint": "一个只是临时替代，一个会写回变量。",
+          "answer": "`${name:-Linux}` 会临时显示 `Linux`，但不改 `name`；`${name:=Linux}` 不但会显示 `Linux`，还会把 `name` 赋值成 `Linux`。"
+        },
+        {
+          "question": "`bash test.sh`、`./test.sh`、`bash < test.sh` 三种方式有什么区别？",
+          "answer": "`bash test.sh` 是把脚本作为 `bash` 的参数执行；`./test.sh` 是直接运行脚本，通常需要执行权限和 shebang；`bash < test.sh` 是把脚本内容通过标准输入交给 `bash`。"
+        },
+        {
+          "question": "`$?` 表示什么？`0` 和非 `0` 各代表什么？",
+          "answer": "`$?` 保存上一条命令的返回码。`0` 通常表示成功；非 `0` 表示失败、异常或没有达成目标。"
+        }
+      ]
+    },
+    {
+      "type": "open-question",
+      "content": "`if` 语句是怎么根据上一条命令的返回码，决定进入 `then` 还是 `else` 的？"
+    }
+  ]
+}

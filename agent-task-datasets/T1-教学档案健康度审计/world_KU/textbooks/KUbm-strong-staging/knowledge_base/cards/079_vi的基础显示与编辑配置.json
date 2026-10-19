@@ -1,0 +1,50 @@
+{
+  "title": "Vi的基础显示与编辑配置",
+  "definition": "Vi 可以通过 set 命令进行简单配置。set nu[number] 用于显示行号；set nonu[number] 用于取消行号显示；set ts=4 用于把 Tab 键的跳格数设置为 4；set sm（showmatch）用于启用括号匹配显示。",
+  "key_points": [
+    "set nu[number] 显示每行行号",
+    "set nonu[number] 取消行号显示",
+    "set ts=4 设置 Tab 键跳格数为 4",
+    "set sm 或 set showmatch 用于括号匹配"
+  ],
+  "examples": [
+    "set nu：显示行号",
+    "set nonu：关闭行号显示",
+    "set ts=4：将 Tab 跳格数设置为 4",
+    "set sm：打开括号匹配显示"
+  ],
+  "misconceptions": [
+    "把 set nu 和 set nonu 混淆；前者开启，后者关闭",
+    "误以为 ts=4 会自动进行代码缩进；它表示 Tab 的跳格数设置",
+    "忽略 sm 是 showmatch 的简写"
+  ],
+  "qa_pairs": [
+    {
+      "q": "怎样在 Vi 中显示每行行号？",
+      "a": "使用 set nu 或 set number。"
+    },
+    {
+      "q": "如何关闭行号显示？",
+      "a": "使用 set nonu 或 set nonumber。"
+    },
+    {
+      "q": "哪个设置用于括号匹配？",
+      "a": "set sm，即 showmatch。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "Vi末行模式"
+  ],
+  "source_pages": [
+    41,
+    44
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "079_vi的基础显示与编辑配置",
+  "_chunk_pages": [
+    41,
+    44
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "title": "map的模板参数与元素类型",
+  "definition": "map类模板有四种模板参数：键类型、值类型、比较类型和分配器类型。通常可以省略比较类型和分配器类型，使用默认值。map<int, Data>表示键类型为int、值类型为Data的map，其内部元素类型可理解为pair<int, Data>。",
+  "key_points": [
+    "map的主要两个类型参数依次是键类型和值类型，例如map<int, Data>。",
+    "比较类型用于决定键的排序规则；原文示例使用默认的less比较。",
+    "使用默认比较类型时，键需要支持operator<所要求的比较。",
+    "分配器类型属于map的模板参数之一，但原文不展开讨论。"
+  ],
+  "examples": [
+    "map<int, Data> dataMap;",
+    "map<string, int> scoreMap;",
+    "dataMap的元素可视为pair<int, Data>。"
+  ],
+  "misconceptions": [
+    "map<int, Data>中的int是键类型，不是值类型。",
+    "map的第二个模板参数是值类型，不是比较器类型。",
+    "map并不只能使用默认比较器，也可以提供自定义比较类型。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "map<int, Data>中int和Data分别表示什么？",
+      "a": "int是键类型，Data是值类型。"
+    },
+    {
+      "q": "map的比较类型有什么作用？",
+      "a": "它决定键的排序和比较规则；省略时通常使用默认的less比较。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "类模板参数",
+    "pair的基本使用"
+  ],
+  "source_pages": [
+    581,
+    582
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1202_map的模板参数与元素类型",
+  "_chunk_pages": [
+    581,
+    584
+  ]
+}

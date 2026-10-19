@@ -1,0 +1,47 @@
+{
+  "title": "为类模板成员函数单独添加 movable 约束",
+  "definition": "除了约束整个类模板外，还可以为类模板的某个成员函数单独添加约束。教材中的 `GameBoard<T>` 要求 `T` 派生自 `GamePiece`，同时其 `move` 成员函数额外要求 `T` 满足 `std::movable`。成员函数定义中的约束位置必须与声明对应。",
+  "key_points": [
+    "类模板约束可以限制模板参数的基本类型关系，例如 `T` 必须派生自 `GamePiece`。",
+    "成员函数可以使用尾部 requires 子句添加额外约束：`void move(...) requires std::movable<T>;`。",
+    "在类外定义成员函数时，也要保留该成员函数的约束：`void GameBoard<T>::move(...) requires std::movable<T> { ... }`。",
+    "类模板约束和成员函数约束可以同时存在，表示必须同时满足两层条件。"
+  ],
+  "examples": [
+    "类内声明：`void move(size_t xSrc, size_t ySrc, size_t xDest, size_t yDest) requires std::movable<T>;`",
+    "类外定义：`template <std::derived_from<GamePiece> T> void GameBoard<T>::move(size_t xSrc, size_t ySrc, size_t xDest, size_t yDest) requires std::movable<T> { ... }`",
+    "整体含义：`T` 必须满足 `std::derived_from<T, GamePiece>`，并且调用或使用该 `move` 成员函数时还必须满足 `std::movable<T>`。"
+  ],
+  "misconceptions": [
+    "只在类模板声明处约束 `T` 为 `GamePiece` 的派生类，并不会自动推出 `T` 满足 `std::movable`。",
+    "成员函数的额外约束不是普通函数体中的运行时检查，而是编译期约束。",
+    "类外定义受约束成员函数时不能随意省略模板约束；类模板约束和成员函数约束都应正确写出。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何让 `GameBoard<T>::move` 只对可移动的 `T` 提供？",
+      "a": "在成员函数声明和定义末尾添加 `requires std::movable<T>`，例如 `void move(...) requires std::movable<T>;`。"
+    },
+    {
+      "q": "`GameBoard<T>` 同时具有什么约束？",
+      "a": "类模板要求 `T` 派生自 `GamePiece`；其 `move` 成员函数还额外要求 `T` 满足 `std::movable`。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "类模板约束",
+    "`std::derived_from`",
+    "C++20 概念（concept）基础"
+  ],
+  "source_pages": [
+    406,
+    406
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 constrained class template member function trailing requires std::movable<T> GameBoard example",
+  "concept_id": "531_为类模板成员函数单独添加_movable_约束",
+  "_chunk_pages": [
+    405,
+    408
+  ]
+}

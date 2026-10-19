@@ -1,0 +1,44 @@
+{
+  "title": "嵌套类的访问控制",
+  "definition": "普通的 public、protected、private 访问控制同样适用于嵌套类定义。嵌套类如果声明为 private 或 protected，则只能在规定的访问范围内使用；只有 public 嵌套类才能从类外通过外围类的作用域限定名称访问。",
+  "key_points": [
+    "嵌套类的访问控制由其在外围类中的声明位置决定。",
+    "public 嵌套类可在类外使用 `Outer::Nested` 形式访问。",
+    "private 或 protected 嵌套类不能被不具备相应访问权限的类外代码直接使用。",
+    "嵌套类访问外围类成员的权限与外围类访问嵌套类成员的权限并不对称。"
+  ],
+  "examples": [
+    "public 嵌套类：`export class Spreadsheet { public: class Cell; };`，类外可使用 `Spreadsheet::Cell`。",
+    "若写成 `private: class Cell;`，则普通类外代码不能直接使用 `Spreadsheet::Cell`。"
+  ],
+  "misconceptions": [
+    "嵌套类并不会因为位于某个类内部就自动对所有外部代码可见。",
+    "嵌套类可以访问外围类的 private 或 protected 成员，不代表外围类可以访问嵌套类的所有 private 成员。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "private 嵌套类能否被任意类外代码使用？",
+      "a": "不能。private 嵌套类只能在具有相应访问权限的代码中使用。"
+    },
+    {
+      "q": "public 嵌套类在类外的典型名称写法是什么？",
+      "a": "使用 `OuterClass::NestedClass`，例如 `Spreadsheet::Cell`。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++访问控制限定符",
+    "嵌套类及其作用域访问规则"
+  ],
+  "source_pages": [
+    288,
+    288
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "599_嵌套类的访问控制",
+  "_chunk_pages": [
+    285,
+    288
+  ]
+}

@@ -1,0 +1,49 @@
+{
+  "title": "using指令与using声明",
+  "definition": "using 指令可以使后续代码使用指定名称空间中的名称而不必反复写名称空间限定符；也可以使用 using 声明只引入名称空间中的某个特定名称。它们能减少代码书写，但过度使用可能重新造成名称冲突。",
+  "key_points": [
+    "using namespace mycode; 会使后续代码可以直接使用 mycode 名称空间中的名称。",
+    "using std::cout; 只引入 std 名称空间中的 cout，其他 std 名称仍需写成 std::限定形式。",
+    "一个源文件可以包含多条 using 指令，但不应无节制地使用。",
+    "如果引入多个包含同名名称的名称空间，可能再次产生名称冲突。",
+    "教材明确建议不要在全局作用域的头文件中使用 using 指令或 using 声明，因为会影响所有包含该头文件的代码；较小作用域中使用则可以。"
+  ],
+  "examples": [
+    "using namespace std;\ncout << \"Hello\" << endl;",
+    "using std::cout;\ncout << \"Hello\";\nstd::endl;"
+  ],
+  "misconceptions": [
+    "using namespace std; 并不是把 std 中的所有名称复制到当前作用域，而是使名称查找可以使用该名称空间中的名称。",
+    "using std::cout; 只引入 cout，不会自动引入 std::endl 等其他名称。",
+    "using 指令越多不一定越方便；引入多个同名名称空间可能造成歧义。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "using namespace std; 的作用是什么？",
+      "a": "它使后续代码可以直接使用 std 名称空间中的名称，而不必为每个名称添加 std:: 前缀。"
+    },
+    {
+      "q": "如何只引入 std 名称空间中的 cout？",
+      "a": "使用 using 声明：using std::cout;。"
+    },
+    {
+      "q": "为什么不应在全局作用域的头文件中使用 using 指令？",
+      "a": "因为包含该头文件的所有代码都会受到影响，可能引入名称冲突或改变名称查找结果。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "名称空间与作用域解析运算符"
+  ],
+  "source_pages": [
+    39,
+    39
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "051_using指令与using声明",
+  "_chunk_pages": [
+    37,
+    40
+  ]
+}

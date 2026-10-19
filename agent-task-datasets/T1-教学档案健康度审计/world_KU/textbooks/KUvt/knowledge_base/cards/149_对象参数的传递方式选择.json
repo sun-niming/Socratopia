@@ -1,0 +1,45 @@
+{
+  "title": "对象参数的传递方式选择",
+  "definition": "如果函数需要修改调用方对象，应使用非 const 引用；如果不需要修改对象但希望避免复制，应使用 const 引用；对于简单的内置类型（如 `int`和`double`）且不需要修改实参时，可以使用值传递。教材还指出，移动语义会使对象值传递的规则在某些情况下有所调整。",
+  "key_points": [
+    "修改实参：使用非 const 引用，例如`T&`。",
+    "只读且对象可能较大：使用 const 引用，例如`const T&`。",
+    "简单内置类型且不需要修改：可以使用值传递。",
+    "并非所有类都适合值传递，有些类可能不允许复制。"
+  ],
+  "examples": [
+    "修改对象：`void update(MyClass& value);`。",
+    "只读传递对象：`void inspect(const MyClass& value);`。",
+    "简单类型只读传递：`void print(int value);`或`void print(double value);`。"
+  ],
+  "misconceptions": [
+    "“引用传递只在需要修改参数时才使用”是不完整的；const 引用常用于只读且高效地传递对象。",
+    "值传递并不总是更简单或更安全；对大型对象按值传递可能产生不必要的复制。",
+    "使用 const 引用并不表示函数拥有对象或负责释放对象。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "一个函数只读取大型类对象，不修改它，推荐使用哪种参数形式？",
+      "a": "推荐使用`const ClassType&`，这样避免复制并防止函数修改原对象。"
+    },
+    {
+      "q": "一个函数需要修改调用方传入的类对象，推荐使用哪种参数形式？",
+      "a": "推荐使用非 const 引用，即`ClassType&`。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "const 引用参数"
+  ],
+  "source_pages": [
+    82,
+    82
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "149_对象参数的传递方式选择",
+  "_chunk_pages": [
+    81,
+    84
+  ]
+}

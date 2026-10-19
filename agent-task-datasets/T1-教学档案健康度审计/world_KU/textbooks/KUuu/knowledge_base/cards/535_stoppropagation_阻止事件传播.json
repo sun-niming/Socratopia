@@ -1,0 +1,38 @@
+{
+  "title": "stopPropagation 阻止事件传播",
+  "definition": "在事件处理函数中调用 event 对象的 stopPropagation() 方法，可以阻止事件在 DOM 结构中继续传播，也就是取消后续的事件捕获或冒泡。",
+  "key_points": [
+    "只阻止事件继续沿 DOM 传播",
+    "不能阻止默认行为的发生",
+    "不能阻止附加到相同元素的相同事件类型的其它事件处理器"
+  ],
+  "examples": [
+    "event.stopPropagation();"
+  ],
+  "misconceptions": [
+    "误以为调用 stopPropagation() 后，链接点击等默认行为也会停止",
+    "误以为 stopPropagation() 会阻止同一元素上的所有同类事件处理器运行"
+  ],
+  "qa_pairs": [
+    {
+      "q": "stopPropagation() 的作用是什么？",
+      "a": "阻止事件在 DOM 结构中传播，取消后续的事件捕获或冒泡。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "事件对象",
+    "DOM 事件传播"
+  ],
+  "source_pages": [
+    377,
+    380
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "535_stoppropagation_阻止事件传播",
+  "_chunk_pages": [
+    377,
+    380
+  ]
+}

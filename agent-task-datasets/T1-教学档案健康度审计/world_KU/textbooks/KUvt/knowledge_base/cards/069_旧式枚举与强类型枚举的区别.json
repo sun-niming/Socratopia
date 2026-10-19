@@ -1,0 +1,45 @@
+{
+  "title": "旧式枚举与强类型枚举的区别",
+  "definition": "旧式枚举使用 `enum` 而不是 `enum class`，其枚举成员会导出到外层作用域，并且不是强类型的，通常会被当作整型处理。旧式枚举可以直接使用成员名，但容易产生名称冲突，也更容易发生不同枚举类型之间的误用。新代码应优先使用强类型枚举。",
+  "key_points": [
+    "旧式枚举示例：`enum PieceType { PieceTypeKing, PieceTypeQueen, PieceTypeRook, PieceTypePawn };`。",
+    "旧式枚举的成员可以不写枚举类型限定名，例如 `PieceType myPiece { PieceTypeQueen };`。",
+    "旧式枚举成员可能与父作用域中已有的变量或其他名称冲突。",
+    "旧式枚举缺乏强类型安全性，可能无意中比较不同枚举类型的值，或把错误枚举类型的值传给函数。"
+  ],
+  "examples": [
+    "`enum PieceType { PieceTypeKing, PieceTypeQueen, PieceTypeRook, PieceTypePawn };`",
+    "直接使用旧式枚举成员：`PieceType myPiece { PieceTypeQueen };`",
+    "若外层已有名为 `Ok` 的布尔变量，又声明名为 `Ok` 的枚举成员，可能造成重定义错误。"
+  ],
+  "misconceptions": [
+    "旧式枚举不是更简洁且完全等价的 `enum class`；它的成员作用域和类型安全性都不同。",
+    "旧式枚举成员不应随意使用过于普通的名称，否则容易与外层名称冲突。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "旧式枚举的枚举成员为什么容易产生命名冲突？",
+      "a": "因为旧式枚举成员会导出到外层作用域，可能与外层已有的变量或其他名称重名。"
+    },
+    {
+      "q": "新代码通常应优先使用哪一种枚举？",
+      "a": "应优先使用强类型枚举 `enum class`，因为它具有更好的作用域隔离和类型安全性。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "强类型枚举enum class",
+    "C++作用域"
+  ],
+  "source_pages": [
+    47,
+    47
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "069_旧式枚举与强类型枚举的区别",
+  "_chunk_pages": [
+    45,
+    48
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "title": "multiset允许保存等价元素",
+  "definition": "std::multiset 是一种关联容器，其关系类似于 multimap 与 map 的关系：它支持 set 的操作，但允许容器中同时保存多个彼此等价的元素。",
+  "key_points": [
+    "multiset 支持 set 的所有操作。",
+    "set 不允许重复的等价元素，而 multiset 允许多个等价元素同时存在。",
+    "原文未提供 multiset 的独立示例，因为它与 set 和 multimap 的使用方式非常相似。"
+  ],
+  "examples": [
+    "可以将多个等价元素插入 multiset，例如：std::multiset<int> values = {1, 1, 2};"
+  ],
+  "misconceptions": [
+    "multiset 并不是只能保存唯一键的 set。",
+    "multiset 与 multimap 的区别不能简单理解为是否允许重复；它们保存的元素结构不同，multiset 保存元素本身，multimap 保存键和值。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "multiset 与 set 的主要区别是什么？",
+      "a": "multiset 支持 set 的所有操作，但允许同时保存多个彼此等价的元素；set 通常只保存一个等价元素。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "set 关联容器"
+  ],
+  "source_pages": [
+    593,
+    593
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1225_multiset允许保存等价元素",
+  "_chunk_pages": [
+    593,
+    596
+  ]
+}

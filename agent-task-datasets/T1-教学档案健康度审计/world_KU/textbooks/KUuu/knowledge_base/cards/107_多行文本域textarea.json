@@ -1,0 +1,41 @@
+{
+  "title": "多行文本域textarea",
+  "definition": "textarea 用于输入多行文本内容，常用于留言、简介、详细描述等场景。它可通过 rows 和 cols 属性设置文本域的行数和列数，从而控制显示大小。",
+  "key_points": [
+    "textarea 用于多行文本输入。",
+    "rows 和 cols 用于设置文本域大小。",
+    "适合留言、简介、详细描述等内容。"
+  ],
+  "examples": [
+    "<textarea rows=\"4\" cols=\"30\">请输入内容</textarea>"
+  ],
+  "misconceptions": [
+    "textarea 只能输入一行文本。",
+    "rows 和 cols 是设置字体大小的属性。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "textarea 适合什么类型的内容？",
+      "a": "适合留言、简介、详细描述等多行内容。"
+    },
+    {
+      "q": "textarea 的 rows 和 cols 分别表示什么？",
+      "a": "rows 表示行数，cols 表示列数。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "HTML表单元素"
+  ],
+  "source_pages": [
+    69,
+    72
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "107_多行文本域textarea",
+  "_chunk_pages": [
+    69,
+    72
+  ]
+}

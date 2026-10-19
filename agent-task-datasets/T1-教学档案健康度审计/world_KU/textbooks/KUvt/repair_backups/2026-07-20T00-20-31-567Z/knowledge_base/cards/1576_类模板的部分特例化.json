@@ -1,0 +1,51 @@
+{
+  "title": "类模板的部分特例化",
+  "definition": "类模板部分特例化是指只固定或匹配模板参数的一部分，同时保留其他模板参数为参数化形式。它不同于完全特例化：完全特例化会固定全部模板参数，而部分特例化仍然适用于一组满足特定模式的模板实参。",
+  "key_points": [
+    "例如，原始 `Grid` 模板有 `T`、`WIDTH` 和 `HEIGHT` 三个模板参数。",
+    "可以只针对 `T` 为某种形式的情况编写特例化，同时保留 `WIDTH` 和 `HEIGHT`。",
+    "部分特例化的模板参数列表只列出仍然参数化的参数；被固定或匹配的参数写在类名后的模板实参列表中。",
+    "部分特例化中定义成员函数时，也必须在函数定义前写出对应的模板参数行，并使用完整的特例化类名。"
+  ],
+  "examples": [
+    "原始模板可写为：`template <typename T, size_t WIDTH, size_t HEIGHT> class Grid`。",
+    "针对 C 风格字符串指针的部分特例化：`template <size_t WIDTH, size_t HEIGHT> class Grid<const char*, WIDTH, HEIGHT>`。",
+    "成员函数定义形式：`template <size_t WIDTH, size_t HEIGHT> const std::optional<std::string>& Grid<const char*, WIDTH, HEIGHT>::at(size_t x, size_t y) const`。"
+  ],
+  "misconceptions": [
+    "部分特例化不是只声明两个模板参数后就可以用两个实参实例化；原模板仍然有三个模板参数。",
+    "`template <size_t WIDTH, size_t HEIGHT>` 表示该特例化自身保留两个参数，不表示 `Grid` 总共只有两个模板参数。",
+    "部分特例化的成员函数定义不能省略模板参数行或 `Grid<const char*, WIDTH, HEIGHT>` 这样的完整类名。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "什么是类模板部分特例化？",
+      "a": "它是只针对模板参数的一部分进行特化、同时保留其他参数继续参数化的类模板实现。"
+    },
+    {
+      "q": "对于 `Grid<const char*, WIDTH, HEIGHT>`，为什么模板参数列表只有 `WIDTH` 和 `HEIGHT`？",
+      "a": "因为 `const char*` 已经固定为特例化模式，只有 `WIDTH` 和 `HEIGHT` 仍然是可变的模板参数。"
+    },
+    {
+      "q": "`Grid<2, 3>` 为什么不能编译？",
+      "a": "因为原始 `Grid` 仍要求三个模板实参：类型 `T`、宽度和高度；只提供宽度和高度而没有提供类型。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "类模板",
+    "模板参数列表",
+    "模板特例化"
+  ],
+  "source_pages": [
+    762,
+    763
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1576_类模板的部分特例化",
+  "_chunk_pages": [
+    761,
+    764
+  ]
+}

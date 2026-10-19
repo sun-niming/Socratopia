@@ -1,0 +1,36 @@
+{
+  "title": "Grid轨道",
+  "definition": "Grid 轨道（Grid Track）是两条相邻 Grid 线之间的空间，也就是网格中的一行或一列。",
+  "key_points": [
+    "位于两条相邻 Grid 线之间",
+    "对应网格中的行或列",
+    "是网格尺寸划分的重要单位"
+  ],
+  "examples": [
+    "示意图中，三列内容之间的横向空间可理解为列轨道。"
+  ],
+  "misconceptions": [
+    "轨道等于线；实际上轨道是线与线之间的空间。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "Grid 轨道和 Grid 线有什么区别？",
+      "a": "线是分界线，轨道是两条相邻线之间的空间。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "Grid线"
+  ],
+  "source_pages": [
+    169,
+    172
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "243_grid轨道",
+  "_chunk_pages": [
+    169,
+    172
+  ]
+}

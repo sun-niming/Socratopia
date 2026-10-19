@@ -1,0 +1,44 @@
+{
+  "title": "Scrum的迭代与Sprint周期",
+  "definition": "Scrum是一种迭代过程，也是管理软件开发项目的常用方法。Scrum中的每次迭代称为一个Sprint周期，Sprint是Scrum过程的核心。Sprint长度应在项目开始时决定，通常为两到四周；每个Sprint结束时，目标是得到一个完全可用且经过测试的软件版本，该版本实现客户需求的一个子集。",
+  "key_points": [
+    "Scrum通过多个Sprint周期反复开发软件。",
+    "Sprint通常持续两到四周，但长度应在项目开始时确定。",
+    "每个Sprint结束时应力争得到可用且经过测试的软件版本。",
+    "每个版本通常只覆盖客户需求的一个子集。",
+    "Scrum允许把Sprint结果发布给客户，以便客户查看迭代版本并反馈潜在问题。",
+    "Scrum承认客户可能在开发过程中改变主意，因此通过后续迭代吸收反馈。"
+  ],
+  "examples": [
+    "在两周Sprint结束时，团队交付一个已经测试、可运行但只实现部分客户需求的软件版本。"
+  ],
+  "misconceptions": [
+    "Sprint不是只做计划的阶段，而是以可用、经过测试的软件增量为目标的迭代周期。",
+    "客户反馈通常影响后续Sprint，不意味着可以随意修改当前已经开始的Sprint内容。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "Scrum中Sprint通常持续多长时间？",
+      "a": "通常为两到四周，具体长度应在项目开始时决定。"
+    },
+    {
+      "q": "每个Sprint结束时的目标是什么？",
+      "a": "得到一个完全可用且经过测试的软件版本，该版本表示客户需求的一个子集。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "迭代式软件开发"
+  ],
+  "source_pages": [
+    842,
+    842
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1733_scrum的迭代与sprint周期",
+  "_chunk_pages": [
+    841,
+    844
+  ]
+}

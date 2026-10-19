@@ -1,0 +1,35 @@
+{
+  "title": "href属性",
+  "definition": "<a> 元素最重要的属性是 href 属性，它用来指定链接的目标。",
+  "key_points": [
+    "href 是 <a> 元素最重要的属性",
+    "href 用于指定链接目标"
+  ],
+  "examples": [
+    "<a href=\"https://example.com\">访问示例网站</a>"
+  ],
+  "misconceptions": [
+    "没有 href 属性时，就不能说明链接目标"
+  ],
+  "qa_pairs": [
+    {
+      "q": "<a> 元素中用于指定链接目标的属性是什么？",
+      "a": "href 属性。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "超链接标签a"
+  ],
+  "source_pages": [
+    49,
+    52
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "085_href属性",
+  "_chunk_pages": [
+    49,
+    52
+  ]
+}

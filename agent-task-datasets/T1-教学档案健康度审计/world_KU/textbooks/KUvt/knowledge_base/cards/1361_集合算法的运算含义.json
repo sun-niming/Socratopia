@@ -1,0 +1,49 @@
+{
+  "title": "集合算法的运算含义",
+  "definition": "集合算法作用于有序范围。includes()判断一个有序范围是否包含另一个有序范围的全部元素；set_union()产生并集；set_intersection()产生交集；set_difference()产生第一个范围相对于第二个范围的差集；set_symmetric_difference()产生只存在于其中一个范围、但不同时存在于两个范围中的元素。",
+  "key_points": [
+    "这些算法要求输入范围有序。",
+    "includes(A,B)用于判断B是否包含在A中，元素顺序不要求相同，但输入范围应按同一比较规则排序。",
+    "并集包含两个输入范围中的所有元素，交集只包含同时存在于两个范围中的元素。",
+    "差集A-B包含存在于第一个范围但不存在于第二个范围的元素。",
+    "对称差集包含只出现在一个范围中的元素，不包含同时出现在两个范围中的元素。"
+  ],
+  "examples": [
+    "vector<int> vec1{5, 6, 7, 8}; vector<int> vec2{8, 9, 10};",
+    "对上述范围，union结果为5 6 7 8 9 10，intersection结果为8，difference(vec1, vec2)结果为5 6 7，symmetric_difference结果为5 6 7 9 10。"
+  ],
+  "misconceptions": [
+    "set_difference(A,B)不是无方向的差集；它表示第一个范围减去第二个范围。",
+    "includes(A,B)表示A包含B，而不是两个范围是否有交集。",
+    "集合算法不是只能用于std::set对象，也可以用于任意满足有序要求的范围。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "对于范围A={5,6,7,8}和B={8,9,10}，A与B的交集是什么？",
+      "a": "交集是{8}。"
+    },
+    {
+      "q": "对于同样的A和B，set_difference(A,B)是什么？",
+      "a": "结果是{5,6,7}。"
+    },
+    {
+      "q": "如何判断第二个有序范围是否为第一个有序范围的子集？",
+      "a": "调用includes(第一个范围的首尾迭代器, 第二个范围的首尾迭代器)。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++标准库算法的迭代器范围"
+  ],
+  "source_pages": [
+    651,
+    652
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1361_集合算法的运算含义",
+  "_chunk_pages": [
+    649,
+    652
+  ]
+}

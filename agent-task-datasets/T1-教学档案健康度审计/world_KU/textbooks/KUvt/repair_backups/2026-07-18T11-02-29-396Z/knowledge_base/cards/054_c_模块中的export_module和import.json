@@ -1,0 +1,52 @@
+{
+  "title": "C++模块中的export、module和import",
+  "definition": "C++模块可以把代码组织成可导出的模块接口，并在其他源文件中导入使用。原文示例使用`export module employee;`声明名为`employee`的模块，使用`export struct Employee`导出结构体，再通过`import employee;`导入该模块。",
+  "key_points": [
+    "模块接口中可以使用`export module employee;`声明模块名称。",
+    "`export`可以使模块中的声明对导入该模块的代码可见。",
+    "原文导出的`Employee`结构体包含四个公开数据成员：`char firstInitial;`、`char lastInitial;`、`int employeeNumber;`和`int salary;`。",
+    "使用模块的源文件可以写`import employee;`。",
+    "原文还展示了导入标准库模块的形式：`import <iostream>;`和`import <format>;`。"
+  ],
+  "examples": [
+    "模块接口示例：`export module employee;`",
+    "导出结构体：`export struct Employee { char firstInitial; char lastInitial; int employeeNumber; int salary; };`",
+    "导入模块：`import employee;`",
+    "创建并填充对象：`Employee anEmployee; anEmployee.employeeNumber = 42; anEmployee.salary = 80000;`"
+  ],
+  "misconceptions": [
+    "`export`不是普通变量赋值关键字；在模块中它表示把声明作为模块接口的一部分提供出去。",
+    "`import employee;`导入的是模块，不是传统意义上的头文件文本复制。",
+    "结构体成员虽然是公开成员，但仍然必须使用对象名和成员访问运算符`.`访问，例如`anEmployee.salary`。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "原文如何声明名为`employee`的模块？",
+      "a": "使用`export module employee;`。"
+    },
+    {
+      "q": "如何导出包含员工信息的结构体？",
+      "a": "使用`export struct Employee { char firstInitial; char lastInitial; int employeeNumber; int salary; };`。"
+    },
+    {
+      "q": "其他源文件如何使用`employee`模块？",
+      "a": "写`import employee;`，然后即可使用模块导出的`Employee`。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "C++结构体",
+    "C++源文件与头文件基本概念"
+  ],
+  "source_pages": [
+    47,
+    48
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 modules export module employee export struct Employee import employee import <iostream> import <format> Marc Gregoire C++高级编程 第5版",
+  "concept_id": "054_c_模块中的export_module和import",
+  "_chunk_pages": [
+    45,
+    48
+  ]
+}

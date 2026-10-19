@@ -1,0 +1,167 @@
+{
+  "conversationId": "f2-a_LmrlGHSfJ3V9FGHH",
+  "generatedAt": 1782483257630,
+  "pagesRange": null,
+  "sections": [
+    {
+      "type": "tldr",
+      "content": "这一节主要把 `class` 里常见的成员关系和 `Array` 对象方法捋清了：`constructor`、类字段、私有字段、继承与 `super`，以及数组方法里哪些会改原数组、哪些会返回新数组。"
+    },
+    {
+      "type": "narrative",
+      "content": "一开始先从 `constructor` 顺着实例回到类本身，接着把类字段和私有字段分开：一个像实例自己的属性，一个只能在类内部访问。然后进入 `extends` 和 `super`，把“继承不是拷贝，而是沿原型链复用能力”这条线定下来。最后集中整理了 `Array` 对象的常见方法，重点区分了会修改原数组的方法和只返回新数组的方法。"
+    },
+    {
+      "type": "concepts",
+      "items": [
+        {
+          "name": "constructor",
+          "body": "`new Person().constructor` 通常指向构造函数本身，也就是 `Person`。\\n\\n它的作用可以理解为：\\n- 从实例找到它对应的类\\n- 进一步访问类上的静态方法\\n\\n例如：\\n```js\\nnew Person().constructor.hello()\\n```\\n如果 `hello` 是类上的静态方法，通常就能这样调用。"
+        },
+        {
+          "name": "类字段（class field）",
+          "body": "类字段是直接写在 `class` 里的属性，比如：\\n```js\\nclass Person {\\n  name = \"逆铭\";\\n}\\n```\\n\\n要点：\\n- 更像实例自己的属性\\n- 每个 `new Person()` 出来的对象通常都有自己的这一份\\n- 和原型上的共享方法不同\\n\\n如果写成静态字段：\\n```js\\nclass Person {\\n  static type = \"human\";\\n}\\n```\\n就会挂在类本身上，用 `Person.type` 访问。"
+        },
+        {
+          "name": "私有字段",
+          "body": "私有字段通常以 `#` 开头，比如：\\n```js\\nclass Person {\\n  #secret = \"123\";\\n}\\n```\\n\\n特点：\\n- 是实例自己的私有成员\\n- 类外面不能直接访问\\n- 只能通过类内部的方法间接读写\\n\\n例如：\\n```js\\nclass Person {\\n  #secret = \"123\";\\n  getSecret() {\\n    return this.#secret;\\n  }\\n}\\n```"
+        },
+        {
+          "name": "继承（extends）与 super",
+          "body": "`extends` 表示子类继承父类，例如：\\n```js\\nclass Student extends Person {}\\n```\\n\\n核心理解：\\n- `Student` 继承 `Person`\\n- 不是把父类代码复制一份\\n- 而是让子类沿着原型链复用父类能力\\n\\n`super` 用来调用父类构造器或父类方法。子类构造函数里通常先写 `super(name)`，再使用 `this`。"
+        },
+        {
+          "name": "this 与 super",
+          "body": "在子类构造函数里：\\n- `this` 指当前实例\\n- `super` 是调用父类那部分能力的入口\\n\\n这也是为什么通常要先 `super(...)`，再使用 `this`：父类那部分初始化好之后，当前实例才能继续补充自己的内容。"
+        },
+        {
+          "name": "JSON",
+          "body": "JSON 的全称是 `JavaScript Object Notation`，它是**数据交换格式**，不是普通的 JavaScript 对象本身。\\n\\n重点区分：\\n- JSON 字符串：`'{\"name\":\"逆铭\",\"age\":18}'`\\n- JavaScript 对象：`{ name: \"逆铭\" }`\\n\\n两个常用 API：\\n- `JSON.parse()`：JSON 字符串 \\(\\to\\) JS 对象\\n- `JSON.stringify()`：JS 对象 \\(\\to\\) JSON 字符串\\n\\n另外，JSON 里键名通常要加双引号。"
+        },
+        {
+          "name": "Array 是什么",
+          "body": "数组本质上也是对象。可以这样理解：\\n- 从类型上看，数组是对象\\n- 从来源上看，`Array` 是 JavaScript 提供的内置对象之一\\n\\n`[]` 创建出来的是 `Array` 的实例，不是普通对象。"
+        },
+        {
+          "name": "数组创建",
+          "body": "常见创建方式：\\n- `new Array(元素1, 元素2, ...)`：按元素创建\\n- `new Array(数组长度)`：按长度创建\\n- `[ 数据元素 ]`：数组字面量\\n\\n这几种方式本质上都是在创建数组实例。"
+        },
+        {
+          "name": "会修改原数组的方法",
+          "body": "这一组方法会直接改动原数组：\\n- `push()`：末尾添加元素，返回新长度\\n- `pop()`：末尾删除一个元素，返回被删元素\\n- `unshift()`：开头添加元素，返回新长度\\n- `shift()`：开头删除一个元素，返回被删元素\\n- `splice()`：删除、插入、替换元素\\n- `sort()`：排序，原地修改\\n- `reverse()`：翻转顺序，原地修改\\n\\n这是复习时最重要的一组分类。"
+        },
+        {
+          "name": "不会修改原数组的方法",
+          "body": "这一组方法通常返回新数组，原数组保持不变：\\n- `concat()`：拼接数组\\n- `slice()`：截取一段\\n- `map()`：遍历并生成新数组\\n- `filter()`：筛选并生成新数组\\n\\n记忆上可以把它们理解成“返回结果，不动原件”。"
+        },
+        {
+          "name": "sort()",
+          "body": "`sort()` 用来排序数组，但默认不是按数值大小排，而是按**字符串顺序**排，也就是字典序。\\n\\n例如：\\n```js\\n[3, 12, 2].sort()\\n```\\n\\n如果要按数值从小到大排，通常写比较函数：\\n```js\\nfunction(a, b) {\\n  return a - b;\\n}\\n```\\n\\n补充理解：\\n- `a - b` 通常表示升序\\n- `b - a` 通常表示降序"
+        },
+        {
+          "name": "reverse()",
+          "body": "`reverse()` 的作用是把数组顺序直接倒过来。\\n\\n例如：\\n```js\\n[1, 2, 3].reverse()\\n```\\n结果会变成 ` [3, 2, 1] `。\\n\\n它不是排序，只是翻转顺序，而且会修改原数组。"
+        },
+        {
+          "name": "concat()",
+          "body": "`concat()` 用来拼接数组。\\n\\n特点：\\n- 返回新数组\\n- 原数组不变\\n\\n例如：\\n```js\\nconst a = [1, 2];\\nconst b = a.concat([3, 4]);\\n```\\n\\n结果是：\\n- `a` 还是 `[1, 2]`\\n- `b` 是 `[1, 2, 3, 4]`"
+        },
+        {
+          "name": "slice()",
+          "body": "`slice()` 用来截取数组的一段。\\n\\n特点：\\n- 返回新数组\\n- 原数组不变\\n\\n例如：\\n```js\\n[1, 2, 3, 4].slice(1, 3)\\n```\\n结果是 `[2, 3]`。"
+        },
+        {
+          "name": "splice()",
+          "body": "`splice()` 常用于在指定位置删除、插入或替换元素。\\n\\n特点：\\n- 会修改原数组\\n- 处理的是数组中间位置的“动刀操作”\\n\\n例如：\\n```js\\n[1, 2, 3, 4].splice(1, 2)\\n```\\n会从索引 `1` 开始删除 `2` 个元素。"
+        },
+        {
+          "name": "indexOf() 与 lastIndexOf()",
+          "body": "这两个方法都用于查找元素位置，返回的是**索引**。\\n\\n- `indexOf()`：找第一次出现的位置\\n- `lastIndexOf()`：找最后一次出现的位置\\n\\n如果没找到，通常返回 `-1`。\\n\\n例如：\\n```js\\n[10, 20, 30, 20].indexOf(20)\\n```\\n结果是 `1`。\\n\\n```js\\n[10, 20, 30, 20].lastIndexOf(20)\\n```\\n结果是 `3`。"
+        },
+        {
+          "name": "forEach() / map() / filter()",
+          "body": "这三个方法都和遍历有关，但用途不同：\\n\\n- `forEach()`：遍历每一项，偏向“处理”，不返回新数组\\n- `map()`：遍历每一项，把处理结果组成新数组\\n- `filter()`：按条件筛选元素，返回筛选后的新数组\\n\\n可以这样记：\\n- `forEach()` = 只遍历\\n- `map()` = 遍历并改造\\n- `filter()` = 遍历并筛选"
+        },
+        {
+          "name": "join()",
+          "body": "`join()` 可以把数组元素连接成字符串。\\n\\n它的常见用途是把数组拼成一个字符串结果，而不是继续当数组处理。"
+        }
+      ]
+    },
+    {
+      "type": "key-terms",
+      "items": [
+        {
+          "term": "实例",
+          "definition": "通过构造函数或类创建出来的对象。"
+        },
+        {
+          "term": "构造函数",
+          "definition": "用来创建对象并初始化对象的函数或类构造器。"
+        },
+        {
+          "term": "静态方法",
+          "definition": "挂在类本身上的方法，通常通过类名直接调用。"
+        },
+        {
+          "term": "类字段",
+          "definition": "直接写在类里的属性声明，通常属于实例或类本身。"
+        },
+        {
+          "term": "私有字段",
+          "definition": "以 `#` 开头的字段，只能在类内部访问。"
+        },
+        {
+          "term": "原型对象",
+          "definition": "用于共享方法和属性的对象层。"
+        },
+        {
+          "term": "原地修改",
+          "definition": "直接改动原数组或原对象本身。"
+        },
+        {
+          "term": "新数组",
+          "definition": "方法执行后返回一个新的数组，原数组保持不变。"
+        },
+        {
+          "term": "JSON",
+          "definition": "一种用于数据交换的文本格式，长得像对象，但本质是字符串。"
+        },
+        {
+          "term": "字典序",
+          "definition": "按字符串比较规则进行排序的方式。"
+        }
+      ]
+    },
+    {
+      "type": "review-questions",
+      "items": [
+        {
+          "question": "`new Person().constructor` 通常指向什么？",
+          "hint": "想想它能不能回到类本身。",
+          "answer": "通常指向 `Person` 这个构造函数，也就是类本身。"
+        },
+        {
+          "question": "`name = \"逆铭\"` 这种类字段通常属于哪里？",
+          "hint": "不要和原型方法混在一起。",
+          "answer": "通常属于实例对象，不是原型对象。"
+        },
+        {
+          "question": "`#secret` 能不能在类外面直接用 `对象.#secret` 访问？",
+          "hint": "注意私有字段的访问范围。",
+          "answer": "不能。私有字段只能在类内部访问，类外直接访问会报错。"
+        },
+        {
+          "question": "`JSON.parse()` 和 `JSON.stringify()` 的方向分别是什么？",
+          "hint": "一个是字符串到对象，一个是对象到字符串。",
+          "answer": "`JSON.parse()` 是 JSON 字符串 \\(\\to\\) JS 对象；`JSON.stringify()` 是 JS 对象 \\(\\to\\) JSON 字符串。"
+        },
+        {
+          "question": "下面这些数组方法里，哪些会修改原数组：`sort()`、`reverse()`、`concat()`、`slice()`、`splice()`？",
+          "hint": "把“原地修改”和“返回新数组”分开想。",
+          "answer": "会修改原数组的是 `sort()`、`reverse()`、`splice()`；`concat()` 和 `slice()` 不修改原数组。"
+        }
+      ]
+    }
+  ]
+}

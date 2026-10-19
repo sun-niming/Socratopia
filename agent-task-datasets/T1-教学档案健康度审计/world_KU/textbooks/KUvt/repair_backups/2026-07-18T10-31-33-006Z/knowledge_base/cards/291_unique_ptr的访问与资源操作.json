@@ -1,0 +1,51 @@
+{
+  "title": "unique_ptr的访问与资源操作",
+  "definition": "std::unique_ptr既可以像指针一样访问所管理对象，也可以通过get()、reset()和release()等成员函数操作其资源。get()只取得被管理对象的裸指针而不转移所有权；reset()释放当前资源并可选择接管新资源；release()释放unique_ptr对资源的所有权，并返回裸指针。",
+  "key_points": [
+    "访问成员可使用箭头运算符：mySimpleSmartPtr->go()；也可先解引用再使用成员：(*mySimpleSmartPtr).go()。",
+    "get()返回所管理对象的裸指针，但unique_ptr仍然拥有该对象。",
+    "无参数调用reset()会释放资源并使unique_ptr为空；reset(new Simple{})会释放原资源并改为管理新的Simple对象。",
+    "release()会使unique_ptr放弃所有权，并返回裸指针；调用者随后必须负责正确管理该裸指针。"
+  ],
+  "examples": [
+    "调用裸指针参数函数：代码形式为processData(mySimpleSmartPtr.get());，其中processData的参数类型为Simple*。",
+    "释放并置空：代码形式为mySimpleSmartPtr.reset();。",
+    "替换资源：代码形式为mySimpleSmartPtr.reset(new Simple{});。",
+    "转移出所有权：代码形式为Simple* simple { mySimpleSmartPtr.release() };，使用完后执行delete simple;，并可将simple设为nullptr。"
+  ],
+  "misconceptions": [
+    "get()不会转移所有权，不能因为获得了裸指针就对该裸指针调用delete。",
+    "release()不会自动删除资源；它只是让unique_ptr放弃所有权，因此释放后的裸指针必须由其他代码负责处理。",
+    "reset()与release()不同：reset()会释放当前资源，而release()会返回资源指针并把所有权交出去。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何把unique_ptr管理的对象作为Simple*传给processData？",
+      "a": "调用processData(mySimpleSmartPtr.get());。get()只提供裸指针，不转移unique_ptr的所有权。"
+    },
+    {
+      "q": "mySimpleSmartPtr.reset()的作用是什么？",
+      "a": "释放mySimpleSmartPtr当前管理的资源，并使该unique_ptr不再管理对象。"
+    },
+    {
+      "q": "release()之后为什么还需要delete？",
+      "a": "因为release()只转移或放弃所有权，不会自动释放资源；返回的裸指针需要由新的所有者负责释放。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "std::unique_ptr与RAII",
+    "裸指针与delete"
+  ],
+  "source_pages": [
+    219,
+    220
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "291_unique_ptr的访问与资源操作",
+  "_chunk_pages": [
+    217,
+    220
+  ]
+}

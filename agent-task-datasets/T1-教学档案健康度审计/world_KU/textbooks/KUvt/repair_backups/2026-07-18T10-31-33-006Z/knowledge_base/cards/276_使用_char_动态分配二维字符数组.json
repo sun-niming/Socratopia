@@ -1,0 +1,50 @@
+{
+  "title": "使用 char** 动态分配二维字符数组",
+  "definition": "动态二维字符数组可以表示为一个 char**：先分配一个长度为第一维大小的 char* 指针数组，再为每个指针分别分配长度为第二维大小的 char 数组。因此，这种结构由一个“第一维指针数组”和多个“第二维子数组”组成，访问形式为 myArray[i][j]。释放时必须先逐个使用 delete[] 释放每个子数组，再使用 delete[] 释放第一维指针数组。",
+  "key_points": [
+    "第一步分配第一维：分配 xDimension 个 char* 指针。",
+    "第二步循环分配每个子数组：第 i 个子数组分配 yDimension 个 char 元素。",
+    "释放顺序与分配顺序相反：先 delete[] myArray[i]，最后 delete[] myArray。",
+    "原文指出直接写成 char** board { new char[i][j] }; 是错误的，不能通过编译；动态二维结构需要分配指针数组和各个子数组。"
+  ],
+  "examples": [
+    "char** allocateCharacterBoard(size_t xDimension, size_t yDimension) { char** myArray { new char*[xDimension] }; for (size_t i { 0 }; i < xDimension; i++) { myArray[i] = new char[yDimension]; } return myArray; }",
+    "释放时可按如下逻辑：for (size_t i { 0 }; i < xDimension; i++) { delete [] myArray[i]; myArray[i] = nullptr; } delete [] myArray; myArray = nullptr;",
+    "访问动态二维数组中的元素：myArray[i][j]。"
+  ],
+  "misconceptions": [
+    "char** 并不等同于一个已经自动分配好的二维 char 数组；它首先只是指向 char* 的指针。",
+    "不能只执行一次 delete[] myArray 就完成释放；每个 myArray[i] 指向的子数组也必须分别释放。",
+    "new char[i][j] 不能用变量 i 和 j 直接表示这种动态二维分配方式，原文明确将该写法标为编译错误。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "动态分配的二维字符数组为什么需要先分配 char* 数组，再分配各个 char 子数组？",
+      "a": "因为 char** 表示指向 char* 的指针；需要先得到 xDimension 个行指针，再让每个行指针分别指向一个包含 yDimension 个 char 的子数组。"
+    },
+    {
+      "q": "释放 char** 二维数组时，正确顺序是什么？",
+      "a": "先对每个 myArray[i] 执行 delete[]，再对 myArray 执行 delete[]。"
+    },
+    {
+      "q": "原文为什么把 char** board { new char[i][j] }; 标为 BUG？",
+      "a": "因为这种写法不能正确完成动态二维数组的分配，并且原文指出它不能通过编译。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++指针和动态内存分配",
+    "delete[] 释放动态数组"
+  ],
+  "source_pages": [
+    206,
+    207
+  ],
+  "needs_verification": true,
+  "verify_query": "\"C++20高级编程\" \"allocateCharacterBoard\" \"releaseCharacterBoard\" char** new char[xDimension]",
+  "concept_id": "276_使用_char_动态分配二维字符数组",
+  "_chunk_pages": [
+    205,
+    208
+  ]
+}

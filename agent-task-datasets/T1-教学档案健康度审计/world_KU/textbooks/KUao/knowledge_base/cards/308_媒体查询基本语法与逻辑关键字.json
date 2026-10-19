@@ -1,0 +1,45 @@
+{
+  "title": "媒体查询基本语法与逻辑关键字",
+  "definition": "媒体查询的基本写法是以 @media 开始，后接设备名和条件，条件部分可使用 only、not、and 等逻辑关键字，后面再写 CSS 样式规则；多个设备条件之间用逗号分隔。",
+  "key_points": [
+    "基本结构：@media 设备名 only（选取条件） not（选取条件） and（选取条件） { CSS样式规则 }。",
+    "only 表示限定某种设备，可省略。",
+    "and 表示逻辑与。",
+    "not 表示排除某种设备。",
+    "多个设备用逗号分隔。"
+  ],
+  "examples": [
+    "@media screen and (max-width: 600px) { ... }",
+    "@media print { ... }"
+  ],
+  "misconceptions": [
+    "and 不是“或者”，而是逻辑与。",
+    "only 不是必须写的，且可以省略。",
+    "多个设备条件不是用 and 连接，而是用逗号分隔。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "媒体查询中 not 的作用是什么？",
+      "a": "排除某种设备。"
+    },
+    {
+      "q": "多个设备条件之间如何分隔？",
+      "a": "用逗号分隔。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "媒体查询的作用与可获取的值"
+  ],
+  "source_pages": [
+    221,
+    224
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "308_媒体查询基本语法与逻辑关键字",
+  "_chunk_pages": [
+    221,
+    224
+  ]
+}

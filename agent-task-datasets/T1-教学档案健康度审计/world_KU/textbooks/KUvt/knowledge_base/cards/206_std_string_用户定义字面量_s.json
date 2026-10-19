@@ -1,0 +1,47 @@
+{
+  "title": "std::string 用户定义字面量 s",
+  "definition": "字符串字面量默认通常被解释为 const char*；在字符串字面量后添加标准用户定义字面量后缀 s，可以使其解释为 std::string。标准后缀 s 定义在 std::literals::string_literals 名称空间中。",
+  "key_points": [
+    "不带 s 的字符串字面量，例如 \"Hello World\"，通常具有 const char* 类型。",
+    "带 s 的字符串字面量，例如 \"Hello World\"s，表示一个 std::string。",
+    "相关字面量可通过 using namespace std::literals、using namespace std::string_literals 或 using namespace std::literals::string_literals 引入。",
+    "string_literals 和 literals 是内联名称空间，因此其中声明的内容也可以通过父名称空间访问。"
+  ],
+  "examples": [
+    "auto string1 { \"Hello World\" };  // 通常推导为 const char*",
+    "auto string2 { \"Hello World\"s }; // 推导为 std::string",
+    "vector<string> names { \"John\"s, \"Sam\"s, \"Joe\"s };"
+  ],
+  "misconceptions": [
+    "字符串字面量本身默认不是 std::string，而通常是 const char*。",
+    "仅仅写 using namespace std; 并不能把所有用户定义字面量后缀的使用规则理解为普通成员访问；通常应使用标准字面量名称空间中的 s。",
+    "后缀 s 不是字符串内容的一部分，而是用户定义字面量后缀。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何把字符串字面量解释为 std::string？",
+      "a": "在字符串字面量后使用标准用户定义字面量后缀 s，例如 \"Hello\"s，并使 std::literals::string_literals 名称空间中的字面量可见。"
+    },
+    {
+      "q": "\"Hello World\" 和 \"Hello World\"s 的主要区别是什么？",
+      "a": "前者通常被解释为 const char*，后者被解释为 std::string。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++ 字符串字面量",
+    "C++ 用户定义字面量",
+    "C++ 名称空间"
+  ],
+  "source_pages": [
+    109,
+    109
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "206_std_string_用户定义字面量_s",
+  "_chunk_pages": [
+    109,
+    112
+  ]
+}

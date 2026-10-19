@@ -1,0 +1,39 @@
+{
+  "title": "首尾子节点",
+  "definition": "element.firstChild 和 element.lastChild 分别返回第一个和最后一个子节点，类型可以是任何节点；element.firstElementChild 和 element.lastElementChild 分别返回第一个和最后一个元素子节点。",
+  "key_points": [
+    "firstChild/lastChild 面向所有节点类型",
+    "firstElementChild/lastElementChild 只面向元素节点",
+    "“Child” 与 “ElementChild” 的区别要分清"
+  ],
+  "examples": [
+    "element.firstChild",
+    "element.lastChild",
+    "element.firstElementChild",
+    "element.lastElementChild"
+  ],
+  "misconceptions": [
+    "firstChild 就等于 firstElementChild。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "firstChild 和 firstElementChild 有什么区别？",
+      "a": "firstChild 返回第一个子节点，可能是任何类型；firstElementChild 只返回第一个元素子节点。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "子节点集合"
+  ],
+  "source_pages": [
+    350,
+    352
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "500_首尾子节点",
+  "_chunk_pages": [
+    349,
+    352
+  ]
+}

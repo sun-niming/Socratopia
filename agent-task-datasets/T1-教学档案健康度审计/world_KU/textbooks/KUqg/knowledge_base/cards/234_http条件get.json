@@ -1,0 +1,52 @@
+{
+  "title": "HTTP条件GET",
+  "definition": "条件GET（conditional GET）是HTTP允许缓存器检查本地对象副本是否仍为最新的一种机制。一个HTTP请求同时满足以下两个条件时就是条件GET：请求使用GET方法，并且请求报文包含“If-Modified-Since:”首部行。该首部的值取自服务器此前响应中给出的对象最后修改时间。",
+  "key_points": [
+    "缓存对象可能陈旧，因为初始服务器上的对象可能在副本缓存后被修改。",
+    "服务器首次返回对象时，可在响应中携带“Last-Modified:”首部，说明对象的最后修改时间。",
+    "缓存器保存对象副本时，也要保存该最后修改时间。",
+    "缓存器以后检查对象是否更新时，发送GET请求，并加入“If-Modified-Since:”首部。",
+    "“If-Modified-Since:”的值等于缓存器此前从服务器响应的“Last-Modified:”首部中保存的时间。"
+  ],
+  "examples": [
+    "服务器首次返回对象时的相关响应首部可写为：\nHTTP/1.1 200 OK\nLast-Modified: Wed, 9 Sep 2015 09:23:24\nContent-Type: image/gif",
+    "缓存器一星期后检查该对象时可发送：\nGET /fruit/kiwi.gif HTTP/1.1\nHost: www.exotiquecuisine.com\nIf-Modified-Since: Wed, 9 Sep 2015 09:23:24",
+    "上述“If-Modified-Since:”时间与先前响应中的“Last-Modified:”时间相同，服务器可据此判断对象在该时间之后是否被修改。"
+  ],
+  "misconceptions": [
+    "只使用GET方法并不自动构成条件GET；请求中还必须包含“If-Modified-Since:”首部行。",
+    "“If-Modified-Since:”的时间不是缓存器随意填写的当前时间，而是来自服务器先前返回的对象最后修改时间。",
+    "缓存对象存在于本地不意味着它一定是最新的，因此缓存器需要执行新鲜度检查。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "一个HTTP请求成为条件GET需要满足哪两个条件？",
+      "a": "请求报文使用GET方法，并且包含“If-Modified-Since:”首部行。"
+    },
+    {
+      "q": "为什么需要条件GET？",
+      "a": "因为缓存器中的对象副本可能已经陈旧；条件GET允许缓存器向服务器检查该对象是否在缓存后被修改。"
+    },
+    {
+      "q": "条件GET中的“If-Modified-Since:”值从哪里获得？",
+      "a": "它取自服务器先前响应中“Last-Modified:”首部所给出的对象最后修改时间，缓存器在保存对象时同时保存该时间。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "Web缓存器",
+    "HTTP GET方法",
+    "HTTP请求与响应首部"
+  ],
+  "source_pages": [
+    89,
+    92
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "234_http条件get",
+  "_chunk_pages": [
+    89,
+    92
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "title": ":nth-of-type",
+  "definition": "`:nth-of-type(exp)` 用于按“同类型元素”的顺序进行匹配。教材说明是：先按类型 E 找出所有元素，再取第 exp 个；exp 可以是数字，也可以是 an+b 形式的表达式。",
+  "key_points": [
+    "它先筛出同类型元素，再在同类型集合中计数。",
+    "插入其他类型的元素不会改变同类型元素的序号。",
+    "exp 可以是数字或 an+b 形式。"
+  ],
+  "examples": [
+    "span:nth-of-type(2n+1)",
+    "教材示例中，元素间不插入 <em> 时，选中第 1、3、5、7 个子节点。",
+    "教材示例中，元素间插入 <em> 时，span:nth-of-type(2n+1) 选中第 1、4、6、8 个子节点，因为 <em> 会被跳过。"
+  ],
+  "misconceptions": [
+    ":nth-of-type 不是按所有子元素统一计数；它只按同类型元素计数。",
+    "插入其他类型元素会影响 :nth-of-type 的结果这一点是错误的。"
+  ],
+  "qa_pairs": [
+    {
+      "q": ":nth-of-type 和 :nth-child 的核心区别是什么？",
+      "a": ":nth-of-type 先按类型筛选再计数，:nth-child 先按子元素位置计数再判断类型。"
+    },
+    {
+      "q": "为什么示例里插入 <em> 后，span:nth-of-type(2n+1) 的结果会变化？",
+      "a": "因为 <em> 不属于 span，会被 :nth-of-type 跳过，所以只统计 span 的序号。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "伪类选择器"
+  ],
+  "source_pages": [
+    98,
+    99
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "151_nth_of_type",
+  "_chunk_pages": [
+    97,
+    100
+  ]
+}

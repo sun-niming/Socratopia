@@ -1,0 +1,41 @@
+{
+  "title": "循环结构",
+  "definition": "循环结构是程序控制结构的一种，用于重复执行某段代码。教材中列出的主要循环包括 while、do while、for、for...in 和 for...of。",
+  "key_points": [
+    "循环结构用于重复执行。",
+    "while、do while、for 是常见循环语句。",
+    "for...in 和 for...of 也是教材列出的循环形式。"
+  ],
+  "examples": [
+    "while (i < 10) { i++; }",
+    "do { i++; } while (i < 10);",
+    "for (var i = 0; i < 10; i++) { ... }",
+    "for (var k in obj) { ... }",
+    "for (var v of arr) { ... }"
+  ],
+  "misconceptions": [
+    "误以为循环结构只能用来做计数。",
+    "误以为 while 和 do while 完全一样。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "教材中列出了哪些主要循环结构？",
+      "a": "while、do while、for、for...in、for...of。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "程序控制结构"
+  ],
+  "source_pages": [
+    249,
+    252
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "349_循环结构",
+  "_chunk_pages": [
+    249,
+    252
+  ]
+}

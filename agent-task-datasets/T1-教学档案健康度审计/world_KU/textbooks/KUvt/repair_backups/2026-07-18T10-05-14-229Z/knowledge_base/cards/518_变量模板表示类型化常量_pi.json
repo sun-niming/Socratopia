@@ -1,0 +1,42 @@
+{
+  "title": "变量模板表示类型化常量 pi",
+  "definition": "变量模板允许为不同类型定义同名变量模板。原文使用变量模板定义数学常量 pi：$template\\ <typename\\ T>\\ constexpr\\ T\\ pi\\{T\\{3.141592653589793238462643383279502884\\}\\};$。使用时通过 $pi<float>$ 或 $pi<long\\ double>$ 获取指定类型的编译期常量。",
+  "key_points": [
+    "变量模板声明形式为 $template\\ <typename\\ T>\\ constexpr\\ T\\ pi\\{...\\};$。",
+    "$pi<float>$ 表示 float 类型的 pi，$pi<long\\ double>$ 表示 long double 类型的 pi。",
+    "constexpr 变量模板的具体实例可以在编译期求值。"
+  ],
+  "examples": [
+    "template <typename T>\\nconstexpr T pi { T { 3.141592653589793238462643383279502884 } };\\n\\nfloat piFloat { pi<float> };\\nauto piLongDouble { pi<long double> };"
+  ],
+  "misconceptions": [
+    "pi 不是只有一个固定的 C++ 类型；通过变量模板可以生成不同类型的 pi 实例。",
+    "$pi<float>$ 与 $pi<long\\ double>$ 的数值精度和类型不同。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何获得 float 类型的 pi 变量模板实例？",
+      "a": "使用 $pi<float>$，例如：$float\\ piFloat\\{pi<float>\\};$。"
+    },
+    {
+      "q": "变量模板示例中的 constexpr 有什么作用？",
+      "a": "它使相应的变量模板实例成为编译期常量，前提是其初始化满足常量表达式要求。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "类模板或函数模板基础",
+    "constexpr"
+  ],
+  "source_pages": [
+    397,
+    400
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "518_变量模板表示类型化常量_pi",
+  "_chunk_pages": [
+    397,
+    400
+  ]
+}

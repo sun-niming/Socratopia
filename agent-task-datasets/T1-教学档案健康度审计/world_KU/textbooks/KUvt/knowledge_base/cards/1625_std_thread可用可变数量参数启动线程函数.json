@@ -1,0 +1,40 @@
+{
+  "title": "std::thread可用可变数量参数启动线程函数",
+  "definition": "标准C++的std::thread可以启动一个可调用对象，并向它传递任意数量的参数。thread构造函数的第一个参数是新线程要执行的函数或其他可调用对象，后续参数会在线程开始执行时传递给该可调用对象。",
+  "key_points": [
+    "std::thread的构造函数是可变参数模板，因此线程函数不局限于只能接收一个参数。",
+    "线程启动后，后续参数会传递给指定的线程函数。"
+  ],
+  "examples": [
+    "定义线程函数：\nvoid counter(int id, int numIterations) {\n    for (int i{0}; i < numIterations; ++i) {\n        cout << \"Counter \" << id << \" has value \" << i << endl;\n    }\n}\n\n启动线程：\nthread t1{counter, 1, 6};"
+  ],
+  "misconceptions": [
+    "不要把std::thread误认为只能调用无参数函数或只能传递一个参数；它可以传递任意数量的参数。",
+    "创建thread对象只表示启动线程，不代表主线程会自动等待该线程完成。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "std::thread构造函数中第一个参数和后续参数分别表示什么？",
+      "a": "第一个参数是新线程要执行的函数或可调用对象，后续参数是在新线程开始执行时传递给它的参数。"
+    },
+    {
+      "q": "如何启动counter函数并传入id为1、迭代6次？",
+      "a": "可以写成：thread t1{counter, 1, 6};"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++函数调用与线程基本概念"
+  ],
+  "source_pages": [
+    793,
+    793
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1625_std_thread可用可变数量参数启动线程函数",
+  "_chunk_pages": [
+    793,
+    796
+  ]
+}

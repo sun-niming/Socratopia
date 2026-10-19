@@ -1,0 +1,53 @@
+{
+  "title": "使用引用限定符区分左值和右值对象",
+  "definition": "成员函数可以使用引用限定符限制其调用对象的值类别：`const &` 版本只能由左值对象调用，`&&` 版本只能由右值对象调用。通过为同名成员函数提供不同的引用限定版本，可以针对左值和右值对象采用不同的返回方式。",
+  "key_points": [
+    "`const std::string& getText() const &` 用于左值对象，返回成员字符串的常量左值引用。",
+    "`std::string&& getText() &&` 用于右值对象，返回成员字符串的右值引用，以便移动其内容。",
+    "命名对象 `textHolder` 是左值，因此调用 `textHolder.getText()` 时选择 `const &` 版本。",
+    "临时对象 `TextHolder{\"Hello world!\"}` 和 `std::move(textHolder)` 是右值，因此选择 `&&` 版本。"
+  ],
+  "examples": [
+    "类中的相关声明：`const std::string& getText() const & { return m_text; }`。",
+    "类中的相关声明：`std::string&& getText() && { return std::move(m_text); }`。",
+    "调用示例：`TextHolder textHolder{\"Hello world!\"}; textHolder.getText();` 选择左值版本。",
+    "调用示例：`TextHolder{\"Hello world!\"}.getText();` 选择右值版本。",
+    "调用示例：`std::move(textHolder).getText();` 选择右值版本，并返回 `std::string&&`。"
+  ],
+  "misconceptions": [
+    "`std::move` 本身不会移动对象；它主要是把表达式转换为可被视为右值的形式，使右值限定成员函数能够被调用。",
+    "`&&` 限定的成员函数不是只能返回右值引用；本例中它确实返回 `std::string&&`，但返回类型和调用限定符是两个不同概念。",
+    "没有引用限定符时，成员函数通常可能同时被左值和右值对象调用；本例通过 `const &` 与 `&&` 将两种情况区分开。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "对命名对象 `textHolder` 调用 `textHolder.getText()` 时，选择哪个重载？",
+      "a": "选择 `const std::string& getText() const &`，因为命名对象是左值。"
+    },
+    {
+      "q": "对 `TextHolder{\"Hello world!\"}` 调用 `getText()` 时，选择哪个重载？",
+      "a": "选择 `std::string&& getText() &&`，因为临时对象是右值。"
+    },
+    {
+      "q": "`std::move(textHolder).getText()` 为什么可以调用 `&&` 限定的成员函数？",
+      "a": "因为 `std::move(textHolder)` 将对象表达式转换为右值形式。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "左值与右值",
+    "C++成员函数重载",
+    "std::move的基本用法"
+  ],
+  "source_pages": [
+    281,
+    282
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "368_使用引用限定符区分左值和右值对象",
+  "_chunk_pages": [
+    281,
+    284
+  ]
+}

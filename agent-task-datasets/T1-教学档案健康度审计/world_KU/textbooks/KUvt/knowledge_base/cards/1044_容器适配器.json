@@ -1,0 +1,45 @@
+{
+  "title": "容器适配器",
+  "definition": "`queue`、`priority_queue`和`stack`都是容器适配器（container adapter）。它们不是完全独立的数据结构，而是构建在某种标准顺序容器之上的简单接口。",
+  "key_points": [
+    "容器适配器通过底层容器提供特定的访问和操作语义。",
+    "原文列出的底层容器包括`vector`、`list`和`deque`。",
+    "适配器的部分操作性能取决于所使用的底层容器。",
+    "`queue`和`stack`分别用于FIFO和LIFO语义，`priority_queue`用于按优先级处理元素。"
+  ],
+  "examples": [
+    "可以把`queue`理解为在底层顺序容器之上提供“队尾插入、队头删除”的接口。",
+    "可以把`stack`理解为在底层顺序容器之上提供“栈顶插入、栈顶删除”的接口。"
+  ],
+  "misconceptions": [
+    "`queue`、`stack`和`priority_queue`不是普通顺序容器的同义词，而是容器适配器。",
+    "使用容器适配器时，不能把它当作具有完整顺序容器接口的对象。",
+    "适配器的性能不一定完全独立于底层容器。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "哪些标准库类型被原文称为容器适配器？",
+      "a": "`queue`、`priority_queue`和`stack`。"
+    },
+    {
+      "q": "容器适配器通常构建在哪些容器之上？",
+      "a": "原文列举了`vector`、`list`和`deque`。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++顺序容器的基本概念",
+    "queue、priority_queue与stack"
+  ],
+  "source_pages": [
+    510,
+    512
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1044_容器适配器",
+  "_chunk_pages": [
+    509,
+    512
+  ]
+}

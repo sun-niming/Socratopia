@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "pipelineVersion": "post-class-v3",
+  "sourceHash": "sha256:b7fcb2c762af23e359d24540332bb60c5edab339fb16b735adf650573c8c66e7",
+  "sourceMessageCount": 32,
+  "chunkCount": 4,
+  "score": 0.7494,
+  "metrics": {
+    "topicCoverage": 0.7096774193548387,
+    "learnerEvidenceCoverage": 0.47058823529411764,
+    "explanationCoverage": 1,
+    "sourceIntegrity": 1,
+    "reviewQuestionDiversity": 0.9240506329113924,
+    "structureValidity": 1,
+    "lengthFitness": 0,
+    "duplicationRatio": 0,
+    "unsupportedTopicRatio": 0,
+    "lengthChars": 9133,
+    "conceptCount": 17,
+    "evidenceTopicCount": 31,
+    "chunkCompleteness": 1
+  },
+  "warnings": [],
+  "decision": "repair"
+}

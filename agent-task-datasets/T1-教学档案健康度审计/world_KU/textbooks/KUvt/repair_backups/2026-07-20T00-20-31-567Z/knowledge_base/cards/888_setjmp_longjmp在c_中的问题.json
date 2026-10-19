@@ -1,0 +1,38 @@
+{
+  "title": "setjmp/longjmp在C++中的问题",
+  "definition": "教材指出，C 程序员熟悉的 setjmp()/longjmp() 机制不能在 C++ 中正确使用，因为它可能绕过作用域对象的析构函数，破坏 C++ 的资源清理语义，因此应尽量避免使用。",
+  "key_points": [
+    "C++对象离开作用域时通常需要执行析构函数完成清理。",
+    "setjmp()/longjmp()进行非正常控制转移时可能跳过这些析构函数。",
+    "教材因此不介绍该机制的具体设置和使用细节。"
+  ],
+  "examples": [
+    "如果一个作用域中创建了需要析构清理的 C++对象，却通过 longjmp() 跳出该作用域，可能导致该对象的析构函数未执行。"
+  ],
+  "misconceptions": [
+    "只要 setjmp()/longjmp()在语法上能编译，就能安全替代 C++异常。",
+    "非正常跳转只影响控制流，不会影响对象生命周期；实际上它可能绕过析构函数。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么教材建议在 C++ 中避免使用 setjmp()/longjmp()？",
+      "a": "因为这种机制可能绕过栈中对象的作用域析构函数，从而破坏 C++的资源清理。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++对象生命周期",
+    "析构函数"
+  ],
+  "source_pages": [
+    437,
+    437
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "888_setjmp_longjmp在c_中的问题",
+  "_chunk_pages": [
+    437,
+    440
+  ]
+}

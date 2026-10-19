@@ -1,0 +1,44 @@
+{
+  "title": "std::pair及其成员访问",
+  "definition": "`std::pair`是C++标准库提供的二元组类型，用于将两个值组合在一起。两个值可以具有不同类型，并分别通过成员`first`和`second`访问。",
+  "key_points": [
+    "可以显式指定两个元素的类型，例如`std::pair<double, int>`。",
+    "`myPair.first`访问第一个元素，`myPair.second`访问第二个元素。",
+    "也可以使用CTAD省略模板参数，例如`std::pair myPair { 1.23, 5 };`。"
+  ],
+  "examples": [
+    "创建pair：`std::pair<double, int> myPair { 1.23, 5 };`",
+    "访问并输出两个元素：`cout << format(\"{} {}\", myPair.first, myPair.second);`",
+    "使用CTAD：`std::pair myPair { 1.23, 5 };`，其类型为`std::pair<double, int>`。"
+  ],
+  "misconceptions": [
+    "`first`和`second`不是数组下标，而是pair的两个固定成员名称。",
+    "`std::pair`只包含两个元素，不是用于保存任意数量元素的容器。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何访问`std::pair`的两个元素？",
+      "a": "使用`myPair.first`访问第一个元素，使用`myPair.second`访问第二个元素。"
+    },
+    {
+      "q": "`std::pair<double, int> myPair { 1.23, 5 };`中两个元素的类型和值分别是什么？",
+      "a": "第一个元素类型为`double`、值为1.23；第二个元素类型为`int`、值为5。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "类模板参数推导",
+    "成员访问运算符"
+  ],
+  "source_pages": [
+    59,
+    60
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "081_std_pair及其成员访问",
+  "_chunk_pages": [
+    57,
+    60
+  ]
+}

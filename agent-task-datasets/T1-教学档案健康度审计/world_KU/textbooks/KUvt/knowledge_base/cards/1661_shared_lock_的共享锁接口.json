@@ -1,0 +1,44 @@
+{
+  "title": "shared_lock 的共享锁接口",
+  "definition": "std::shared_lock 定义在 <shared_mutex> 中，是用于管理共享互斥体共享所有权的 RAII 锁类。它的构造函数和普通接口形式与 std::unique_lock 相同，但底层调用的是共享互斥体的共享操作，例如 lock_shared()、try_lock_shared() 和 unlock_shared()，因此获得的是共享锁而不是独占锁。",
+  "key_points": [
+    "shared_lock 对外可以使用 lock()、try_lock() 等与 unique_lock 类似的接口。",
+    "在底层 shared_mutex 上，shared_lock 的这些操作分别对应 lock_shared()、try_lock_shared() 和 unlock_shared()。",
+    "shared_lock 适合需要共享读权限的场景，多个线程可以同时持有共享锁。",
+    "shared_lock 可以作为 unique_lock 的一种替代形式，但两者获得的所有权类型不同：前者是共享锁，后者通常是独占锁。"
+  ],
+  "examples": [
+    "代码：std::shared_lock<std::shared_mutex> lock(m);\n代码：/* 在共享锁保护下读取数据 */\n代码：// lock 离开作用域时自动释放共享锁"
+  ],
+  "misconceptions": [
+    "shared_lock 并不获得独占写锁；它获得的是共享读锁。",
+    "shared_lock 的接口名称虽然是 lock()、try_lock() 等，但底层调用的是 lock_shared()、try_lock_shared() 等共享操作。",
+    "shared_lock 不能用于需要修改共享数据的独占写操作。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "shared_lock 与 unique_lock 的主要区别是什么？",
+      "a": "shared_lock 获得共享锁，底层使用 shared_mutex 的共享接口；unique_lock 通常获得独占锁。"
+    },
+    {
+      "q": "shared_lock 在底层 shared_mutex 上对应哪些操作？",
+      "a": "对应 lock_shared()、try_lock_shared() 和 unlock_shared() 等共享所有权操作。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "shared_mutex 的读锁与写锁",
+    "锁类与 RAII 自动解锁"
+  ],
+  "source_pages": [
+    808,
+    808
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1661_shared_lock_的共享锁接口",
+  "_chunk_pages": [
+    805,
+    808
+  ]
+}

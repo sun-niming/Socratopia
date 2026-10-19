@@ -1,0 +1,45 @@
+{
+  "title": "std::string_view 的截取与原始缓冲区构造",
+  "definition": "`std::string_view` 可以使用类似字符串的操作截取子串，也可以由字符缓冲区指针和长度构造。当原始缓冲区不是以 NUL 终止时，必须同时提供准确的缓冲区地址和长度；如果缓冲区以 NUL 终止且长度已知，也可以避免再次统计字符数。",
+  "key_points": [
+    "`remove_prefix(size_t n)` 将视图的起始位置向后移动 `n` 个字符，从而缩短视图。",
+    "`remove_suffix(size_t n)` 将视图的结束位置向前移动 `n` 个字符，从而缩短视图。",
+    "`data()` 返回底层字符数据的指针，但不保证数据以 NUL 终止。",
+    "可以使用指针和长度构造视图：`std::string_view{raw, length}`。"
+  ],
+  "examples": [
+    "从文件名中提取扩展名的思路可以写为：`return filename.substr(filename.rfind('.'));`。",
+    "从原始缓冲区构造视图：`const char* raw = ...; std::size_t length = ...; std::string_view view{raw, length};`。",
+    "若 `view` 内容为 `abcdef`，执行 `view.remove_prefix(2)` 后视图表示 `cdef`；执行 `view.remove_suffix(1)` 后视图表示 `abcde`。"
+  ],
+  "misconceptions": [
+    "`remove_prefix` 和 `remove_suffix` 不会修改或复制底层字符串，只会改变视图自身的范围。",
+    "`data()` 返回的指针不一定指向以 `\\0` 结尾的 C 字符串。",
+    "构造 `std::string_view` 时提供的长度必须对应有效的字符范围；视图不会自动检查缓冲区长度。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何从一个非 NUL 终止的字符缓冲区创建 `std::string_view`？",
+      "a": "提供缓冲区指针和字符数，例如 `std::string_view{raw, length}`。"
+    },
+    {
+      "q": "`remove_prefix(2)` 对字符串视图做什么？",
+      "a": "将视图的起始位置向后移动两个字符，使视图排除开头的两个字符。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "std::string_view 的用途与特性"
+  ],
+  "source_pages": [
+    113,
+    113
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "215_std_string_view_的截取与原始缓冲区构造",
+  "_chunk_pages": [
+    113,
+    116
+  ]
+}

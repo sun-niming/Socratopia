@@ -1,0 +1,44 @@
+{
+  "title": "MPLS标签通告与路径计算",
+  "definition": "MPLS路由器需要通过路由器之间的交互获知邻居是否支持MPLS，以及某个标签与特定IP目的地之间的关联。MPLS标签的分布需要信令协议支持；原文提到IETF定义了RSVP协议的扩展RSVP-TE用于MPLS信令。MPLS路径计算还可以利用扩展后的链路状态路由选择算法收集链路状态信息，但实际路径计算算法并未标准化，当前可能由厂商分别实现。",
+  "key_points": [
+    "标签通告用于让MPLS路由器了解邻居的MPLS能力以及标签与目的地之间的关联。",
+    "RSVP-TE是RSVP针对MPLS信令的扩展。",
+    "OSPF等链路状态路由选择算法可以扩展，用于向MPLS使能路由器传播链路状态信息。",
+    "原文指出MPLS实际路径计算算法没有标准化，当前是厂商特定的算法。"
+  ],
+  "examples": [
+    "图示场景中，R1向R2和R3通告：它可以到达目的地A，并且带有MPLS标签6的入帧将被转发到A；R3则通告标签10和12分别对应到A和D的转发。"
+  ],
+  "misconceptions": [
+    "MPLS标签不是路由器凭空生成后就能被全网自动理解的，需要通过路由器间的信令或控制过程分布。",
+    "链路状态信息的收集与具体的MPLS路径计算算法不是同一个概念；前者可以借助扩展的链路状态协议，后者在原文中被描述为未标准化。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "RSVP-TE在MPLS中承担什么作用？",
+      "a": "它是RSVP的扩展，关注MPLS信令工作，例如标签和相关转发路径信息的分布。"
+    },
+    {
+      "q": "MPLS的实际路径计算算法是否由统一标准完全规定？",
+      "a": "原文指出没有标准化，当前是厂商特定的算法。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "MPLS标签交换",
+    "链路状态路由选择",
+    "RSVP"
+  ],
+  "source_pages": [
+    337,
+    340
+  ],
+  "needs_verification": true,
+  "verify_query": "RFC 3209 RSVP-TE MPLS signaling path computation vendor-specific algorithms OSPF traffic engineering",
+  "concept_id": "775_mpls标签通告与路径计算",
+  "_chunk_pages": [
+    337,
+    340
+  ]
+}

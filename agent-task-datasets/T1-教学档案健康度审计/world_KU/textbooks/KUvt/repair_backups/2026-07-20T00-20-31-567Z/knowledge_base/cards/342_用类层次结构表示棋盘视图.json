@@ -1,0 +1,42 @@
+{
+  "title": "用类层次结构表示棋盘视图",
+  "definition": "ChessBoardView 用于显示棋盘，可以通过类层次结构支持不同显示方式。ChessBoardView 作为抽象超类，其具体子类可以分别实现控制台文本显示、二维图形显示和三维图形显示。",
+  "key_points": [
+    "ChessBoardView 抽象超类表示棋盘显示功能的共同接口。",
+    "具体显示类包括 ChessBoardViewConsole、ChessBoardViewGUI2D 和 ChessBoardViewGUI3D。",
+    "同一棋盘模型可以通过不同视图类显示在控制台、2D 图形界面或 3D 图形界面中。"
+  ],
+  "examples": [
+    "类层次结构可表示为：ChessBoardView → {ChessBoardViewConsole, ChessBoardViewGUI2D, ChessBoardViewGUI3D}。",
+    "同一个 ChessBoard 对象可以交给不同的 ChessBoardView 子类显示，而不必改变棋盘本身的数据。"
+  ],
+  "misconceptions": [
+    "ChessBoardView 的子类不是不同的棋盘数据结构，而是不同的棋盘显示方式。",
+    "支持多种显示方式并不意味着必须复制一份棋盘逻辑；显示逻辑应与棋盘数据和规则分离。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "ChessBoardView 类层次结构解决什么问题？",
+      "a": "它解决同一个棋盘以不同方式显示的问题，包括控制台文本显示、二维图形显示和三维图形显示。"
+    },
+    {
+      "q": "ChessBoardView 的具体子类有哪些？",
+      "a": "ChessBoardViewConsole、ChessBoardViewGUI2D 和 ChessBoardViewGUI3D。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "面向对象中的继承与抽象类"
+  ],
+  "source_pages": [
+    161,
+    161
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "342_用类层次结构表示棋盘视图",
+  "_chunk_pages": [
+    161,
+    164
+  ]
+}

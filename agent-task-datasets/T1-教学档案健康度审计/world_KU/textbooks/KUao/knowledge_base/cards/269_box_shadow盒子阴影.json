@@ -1,0 +1,49 @@
+{
+  "title": "box-shadow盒子阴影",
+  "definition": "box-shadow 用于给元素添加阴影。它的格式为 box-shadow: inset|outset 水平偏移 垂直偏移 模糊距离 扩散半径 颜色; 其中 outset 是默认值，表示外部阴影；inset 表示内部阴影。模糊距离决定阴影沿偏移边界每侧的模糊范围，值越大，模糊范围越大。box-shadow 还可以写多个值，用逗号隔开，从而产生多重阴影效果。",
+  "key_points": [
+    "box-shadow 用于添加元素阴影。",
+    "outset 是默认值，表示外部阴影；inset 表示内部阴影。",
+    "模糊距离越大，阴影越模糊，模糊范围越大。",
+    "box-shadow 可以写多个阴影值，多个值之间用逗号隔开。"
+  ],
+  "examples": [
+    "box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.5);",
+    "box-shadow: 0 0 5px orange inset;"
+  ],
+  "misconceptions": [
+    "box-shadow 只能生成外部阴影。",
+    "box-shadow 只能写一个阴影效果。",
+    "模糊距离越大，阴影边缘越清晰。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "box-shadow 的 inset 和 outset 分别表示什么？",
+      "a": "outset 表示外部阴影，inset 表示内部阴影。"
+    },
+    {
+      "q": "box-shadow 的多个阴影怎么写？",
+      "a": "可以写多个值，并用逗号隔开。"
+    },
+    {
+      "q": "模糊距离对阴影有什么影响？",
+      "a": "模糊距离越大，阴影沿偏移边界每侧的模糊范围越大。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "CSS基础",
+    "边框和阴影"
+  ],
+  "source_pages": [
+    189,
+    192
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "269_box_shadow盒子阴影",
+  "_chunk_pages": [
+    189,
+    192
+  ]
+}

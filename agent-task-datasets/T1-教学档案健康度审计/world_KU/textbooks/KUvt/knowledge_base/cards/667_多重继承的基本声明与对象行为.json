@@ -1,0 +1,49 @@
+{
+  "title": "多重继承的基本声明与对象行为",
+  "definition": "多重继承是指一个派生类同时继承多个基类。例如 `class DogBird : public Dog, public Bird` 表示 DogBird 同时拥有 Dog 和 Bird 两个公共基类。DogBird 对象可以使用两个基类的 public 成员，DogBird 的成员可以访问两个基类的 protected 成员，并且 DogBird 对象可以分别向上转型为 Dog 或 Bird。",
+  "key_points": [
+    "声明多重继承时，在类名后按顺序列出多个基类，例如 `class Baz : public Foo, public Bar`。",
+    "派生类对象包含各个基类的子对象，并支持这些基类的 public 方法。",
+    "派生类成员可以访问各基类的 protected 数据成员和方法。",
+    "多重继承对象可以分别向上转型为任意一个直接基类。",
+    "DogBird 可以同时调用 Dog 的 bark() 和 Bird 的 chirp()。"
+  ],
+  "examples": [
+    "示例：\n```cpp\nclass Dog {\npublic:\n    virtual void bark() { std::cout << \"Woof!\" << std::endl; }\n};\n\nclass Bird {\npublic:\n    virtual void chirp() { std::cout << \"Chirp!\" << std::endl; }\n};\n\nclass DogBird : public Dog, public Bird {};\n\nDogBird myConfusedAnimal;\nmyConfusedAnimal.bark();\nmyConfusedAnimal.chirp();\n```\n输出：\n```text\nWoof!\nChirp!\n```"
+  ],
+  "misconceptions": [
+    "多重继承并不意味着基类必须有共同的父类；示例中的 Dog 和 Bird 是两个独立基类。",
+    "DogBird 对象不是只能使用其中一个基类的功能，而是同时具备两个基类的 public 接口。",
+    "向上转型是分别转换为 Dog 或 Bird 的基类视图，不是把对象转换成一个同时合并的单一基类对象。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何声明一个同时继承 Foo 和 Bar 的 Baz？",
+      "a": "可以写成 `class Baz : public Foo, public Bar {};`。"
+    },
+    {
+      "q": "DogBird 对象可以调用哪些示例方法？",
+      "a": "可以调用 Dog 的 `bark()` 和 Bird 的 `chirp()`。"
+    },
+    {
+      "q": "多重继承的派生类对象可以向上转型为哪些类型？",
+      "a": "可以分别向上转型为它的任意一个直接基类，例如 DogBird 可以向上转型为 Dog 或 Bird。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "类继承与访问控制",
+    "向上转型"
+  ],
+  "source_pages": [
+    327,
+    328
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "667_多重继承的基本声明与对象行为",
+  "_chunk_pages": [
+    325,
+    328
+  ]
+}

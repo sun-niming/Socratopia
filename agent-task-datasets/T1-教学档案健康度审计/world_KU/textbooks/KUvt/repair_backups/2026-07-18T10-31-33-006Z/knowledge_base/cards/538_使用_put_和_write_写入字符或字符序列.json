@@ -1,0 +1,43 @@
+{
+  "title": "使用 put 和 write 写入字符或字符序列",
+  "definition": "输出流提供 `put()` 和 `write()` 成员函数：`put()` 用于写入单个字符，`write()` 用于按照指定长度写入字符序列。",
+  "key_points": [
+    "`cout.put('a')` 将单个字符 `a` 写入标准输出。",
+    "`cout.write(test, strlen(test))` 从 `test` 指向的字符序列开始，写入 `strlen(test)` 个字符。",
+    "示例中的 `test` 是字符串字面量 `\"hello there\\n\"`。"
+  ],
+  "examples": [
+    "```text\nconst char* test { \"hello there\\n\" };\ncout.write(test, strlen(test));\n```",
+    "```text\ncout.put('a');\n```"
+  ],
+  "misconceptions": [
+    "`put()` 和 `write()` 都是输出流的成员函数，不是替代 `<<` 的运算符。",
+    "`write()` 的第二个参数指定写入的字符数，不是字符串对象本身。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`cout.put('a')` 的作用是什么？",
+      "a": "向标准输出写入一个字符 `a`。"
+    },
+    {
+      "q": "`cout.write(test, strlen(test))` 的作用是什么？",
+      "a": "从 `test` 指向的位置开始写入 `strlen(test)` 个字符。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++标准输出流",
+    "C风格字符串"
+  ],
+  "source_pages": [
+    413,
+    416
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "538_使用_put_和_write_写入字符或字符序列",
+  "_chunk_pages": [
+    413,
+    416
+  ]
+}

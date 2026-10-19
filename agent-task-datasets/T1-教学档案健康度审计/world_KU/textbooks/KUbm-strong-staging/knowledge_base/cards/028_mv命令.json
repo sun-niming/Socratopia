@@ -1,0 +1,41 @@
+{
+  "title": "mv命令",
+  "definition": "mv 用于移动文件，或对文件进行更名。教材给出的格式是：mv 源文件（列表） 目标文件（目录）。这说明它可以把源文件移动到目标位置，也可用于文件更名。",
+  "key_points": [
+    "mv 的作用包括移动文件和文件更名。",
+    "命令包含源文件（列表）和目标文件（目录）两部分。"
+  ],
+  "examples": [
+    "mv a.txt b.txt",
+    "mv file1 file2 dir/"
+  ],
+  "misconceptions": [
+    "认为 mv 只能移动文件；按教材，它也可用于文件更名。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "mv 命令有哪两个主要作用？",
+      "a": "移动文件和文件更名。"
+    },
+    {
+      "q": "mv 命令通常包含哪两部分？",
+      "a": "源文件（列表）和目标文件（目录）。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "目录的基本概念",
+    "文件的基本概念"
+  ],
+  "source_pages": [
+    13,
+    16
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "028_mv命令",
+  "_chunk_pages": [
+    13,
+    16
+  ]
+}

@@ -1,0 +1,53 @@
+{
+  "title": "const成员函数与const正确性",
+  "definition": "在类成员函数声明和定义的参数列表末尾加上const，例如`double calculatePriceInDollars() const;`，表示该成员函数不会修改对象的数据成员。编译器会检查const成员函数，如果其代码尝试修改对象的数据成员，通常会报错。不改变对象状态的成员函数应声明为const，这体现了const-correctness原则；这类函数也称为检查器（inspector），相对于可能修改对象状态的赋值函数（mutator）。",
+  "key_points": [
+    "成员函数的const写在参数列表右括号之后，而不是函数名前。",
+    "const成员函数适合只读操作，例如获取乘客姓名、里程数或状态。",
+    "const成员函数不能直接修改对象的数据成员。",
+    "不改变对象数据成员的成员函数建议声明为const，以遵循const-correctness。",
+    "修改对象状态的成员函数，例如setter，不应声明为const。"
+  ],
+  "examples": [
+    "`std::string getPassengerName() const;`",
+    "`int getNumberOfMiles() const;`",
+    "`bool hasEliteSuperRewardsStatus() const;`",
+    "`void setPassengerName(std::string name);`通常用于修改数据成员，因此不是const成员函数。",
+    "定义形式：`std::string AirlineTicket::getPassengerName() const { return m_passengerName; }`。"
+  ],
+  "misconceptions": [
+    "const成员函数表示返回值是const；实际上它限制的是成员函数不能修改当前对象状态。",
+    "只要函数内部没有显式赋值，就一定可以声明为const；还需要确保函数执行过程中不会修改对象的数据成员。",
+    "getter和setter都应声明为const；通常只读的getter是const，而修改对象的setter不是const。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "成员函数声明为`getPassengerName() const`表示什么？",
+      "a": "表示该函数是只读成员函数，不能修改当前对象的数据成员。"
+    },
+    {
+      "q": "为什么getter通常应声明为const？",
+      "a": "因为getter只读取对象状态而不修改数据成员，声明为const可以表达并检查这一保证。"
+    },
+    {
+      "q": "setter通常为什么不声明为const？",
+      "a": "因为setter的职责是修改对象的数据成员，而const成员函数不能修改对象状态。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++类与成员函数",
+    "C++const基础"
+  ],
+  "source_pages": [
+    76,
+    76
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "136_const成员函数与const正确性",
+  "_chunk_pages": [
+    73,
+    76
+  ]
+}

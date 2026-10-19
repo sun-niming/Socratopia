@@ -1,0 +1,43 @@
+{
+  "title": "extern与链接属性",
+  "definition": "extern关键字可以用于指定名称具有外部链接。在原文所述情况下，const和typedef默认具有内部链接，可以使用extern使其变为外部链接。因此，extern可用于让某些默认不具备跨源文件可见性的名称参与跨文件链接。",
+  "key_points": [
+    "extern通常被描述为与用于内部链接的static相对的链接说明方式。",
+    "原文指出const和typedef默认具有内部链接。",
+    "可以使用extern改变这些名称的链接属性，使其具有外部链接。",
+    "extern的核心作用是影响名称在多个源文件之间的可见性和链接方式。"
+  ],
+  "examples": [
+    "概念性示例：\nextern const int sharedValue;\n\n该声明用于表达sharedValue具有外部链接，可由其他源文件引用其定义。"
+  ],
+  "misconceptions": [
+    "extern并不是自动生成变量或函数的定义；它主要用于声明和指定链接属性。",
+    "static和extern的关系是链接属性上的对比，不表示二者在所有语境中都是简单的互斥替换。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "extern在链接方面通常用于做什么？",
+      "a": "用于指定名称具有外部链接，使其可以在其他源文件中使用。"
+    },
+    {
+      "q": "原文指出哪些名称默认具有内部链接并可通过extern改变？",
+      "a": "const和typedef。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "外部链接与内部链接",
+    "声明与定义"
+  ],
+  "source_pages": [
+    364,
+    364
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 standard linkage const typedef extern internal linkage official reference",
+  "concept_id": "737_extern与链接属性",
+  "_chunk_pages": [
+    361,
+    364
+  ]
+}

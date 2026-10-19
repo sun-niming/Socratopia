@@ -1,0 +1,46 @@
+{
+  "title": "使用 putback 将指定字符放回输入流",
+  "definition": "`istream::putback(char)` 用于把指定字符放回输入流，使该字符成为下一次从流中读取时得到的字符。它与 `unget()` 的区别在于：`unget()` 退回最近读取的字符，而 `putback()` 接收一个要放回的指定字符。",
+  "key_points": [
+    "调用形式为 `cin.putback('e')`。",
+    "原文说明，调用 `putback('e')` 后，`'e'` 将成为下一次从输入流读取的字符。",
+    "示例先使用 `cin >> c` 读取一个字符，再使用 `putback('e')` 将字符 `e` 放回流中。"
+  ],
+  "examples": [
+    "文本示例：`char c; cin >> c; cout << format(\"Retrieved {} before putback('e').\", c) << endl; cin.putback('e');`",
+    "若后续再次读取一个字符，读取到的应是通过 `putback('e')` 放回的字符 `e`。"
+  ],
+  "misconceptions": [
+    "`putback('e')` 放回的是字符 `e`，不是之前读取到的字符；退回之前读取字符应使用 `unget()`。",
+    "`putback()` 不会直接修改已经存入变量 `c` 中的值，它只改变输入流中下一次读取到的内容。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`unget()` 和 `putback()` 的主要区别是什么？",
+      "a": "`unget()` 将最近读取的字符退回流中；`putback(char)` 将调用者指定的字符退回流中。"
+    },
+    {
+      "q": "执行 `cin.putback('e')` 后，下一次从流中读取的字符是什么？",
+      "a": "下一次读取的字符是 `e`。"
+    },
+    {
+      "q": "原文中的 `char c; cin >> c; cin.putback('e');` 表示什么？",
+      "a": "先读取一个字符并存入 `c`，然后把指定的字符 `e` 放回输入流，使其成为下一次读取的字符。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "使用 istream::get() 逐字符读取输入"
+  ],
+  "source_pages": [
+    417,
+    420
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "547_使用_putback_将指定字符放回输入流",
+  "_chunk_pages": [
+    417,
+    420
+  ]
+}

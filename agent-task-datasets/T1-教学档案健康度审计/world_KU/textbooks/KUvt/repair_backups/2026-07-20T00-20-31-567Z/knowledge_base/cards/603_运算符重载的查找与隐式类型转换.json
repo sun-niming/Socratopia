@@ -1,0 +1,46 @@
+{
+  "title": "运算符重载的查找与隐式类型转换",
+  "definition": "当编译器遇到运算符表达式时，会根据运算符和操作数查找合适的重载函数；如果操作数类型不完全匹配，还可能使用可行的类型转换。若 SpreadsheetCell 具有可用的转换构造函数，就可以把 double 或 string_view 等值转换为临时 SpreadsheetCell，再调用已有的 operator+。",
+  "key_points": [
+    "对于 `myCell + 4`，编译器可以把整数 4 转换为 SpreadsheetCell，再传给参数类型为 `const SpreadsheetCell&` 的成员 operator+。",
+    "对于 `myCell + string_view{str}`，编译器可以使用接受 string_view 的 SpreadsheetCell 构造函数创建临时对象。",
+    "隐式创建临时对象会增加开销；教材因此建议可以为 double 等常用类型额外提供 operator+ 重载。",
+    "成员 operator+ 的右操作数可以通过隐式转换变成 SpreadsheetCell，但左操作数仍必须能调用该成员函数。"
+  ],
+  "examples": [
+    "若存在从 double 到 SpreadsheetCell 的非 explicit 构造函数，`aThirdCell = myCell + 5;` 可以通过将 5 转换为临时 SpreadsheetCell 来完成。",
+    "可以直接提供重载：`SpreadsheetCell SpreadsheetCell::operator+(double rhs) const { return SpreadsheetCell { getValue() + rhs }; }`。"
+  ],
+  "misconceptions": [
+    "能够进行 `SpreadsheetCell + double` 并不代表一定能够进行 `double + SpreadsheetCell`；成员运算符重载对左右操作数的位置有限制。",
+    "隐式转换不是免费操作；它可能需要构造临时 SpreadsheetCell 对象。",
+    "只有适用的转换构造函数可用且满足重载决议要求时，编译器才会进行这种隐式转换。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么 `myCell + 4` 可以调用参数为 SpreadsheetCell 的成员 operator+？",
+      "a": "因为编译器可以使用 SpreadsheetCell 的非 explicit 转换构造函数，把 4 转换为临时 SpreadsheetCell。"
+    },
+    {
+      "q": "隐式转换为何可能影响效率？",
+      "a": "因为转换通常需要额外创建临时的 SpreadsheetCell 对象。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++构造函数",
+    "转换构造函数",
+    "成员运算符重载"
+  ],
+  "source_pages": [
+    291,
+    291
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "603_运算符重载的查找与隐式类型转换",
+  "_chunk_pages": [
+    289,
+    292
+  ]
+}

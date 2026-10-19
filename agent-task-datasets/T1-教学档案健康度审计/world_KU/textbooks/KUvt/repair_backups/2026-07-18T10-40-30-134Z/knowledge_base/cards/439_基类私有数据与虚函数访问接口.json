@@ -1,0 +1,52 @@
+{
+  "title": "基类私有数据与虚函数访问接口",
+  "definition": "基类可以把数据成员声明为 `private`，禁止派生类直接访问，同时通过公有或受保护的成员函数提供受控访问。在原文的 `MilesEstimator` 示例中，里程估算器保存私有数据成员 `m_gallonsLeft`，并通过 `setGallonsLeft` 和 `getGallonsLeft` 访问；`getMilesLeft()` 根据每加仑行驶里程和剩余汽油量计算还能行驶的里程。相关函数使用 `virtual`，因此派生类可以通过重写虚函数改变估算行为。",
+  "key_points": [
+    "私有数据成员只能由声明它的类直接访问；派生类不能直接读写基类的 `m_gallonsLeft`。",
+    "基类可以通过成员函数封装数据访问，例如：`virtual void setGallonsLeft(int gallons) { m_gallonsLeft = gallons; }` 和 `virtual int getGallonsLeft() const { return m_gallonsLeft; }`。",
+    "`getMilesLeft()` 的计算关系可写为：$$\\text{剩余里程}=\\text{每加仑行驶里程}\\times\\text{剩余汽油量}$$",
+    "原文示例中，`myMilesEstimator.setGallonsLeft(2);` 设置剩余汽油量，然后 `myMilesEstimator.getMilesLeft()` 获取估算的剩余里程。",
+    "将用于计算的成员函数声明为虚函数，可以让派生类提供不同的估算策略，同时保留基类统一的调用接口。"
+  ],
+  "examples": [
+    "原文中的基类接口包含：`int getMilesLeft() const { return getMilesPerGallon() * getGallonsLeft(); }`。",
+    "设置并读取剩余汽油量：`myMilesEstimator.setGallonsLeft(2);`，随后调用 `myMilesEstimator.getMilesLeft()`。",
+    "私有成员的核心结构可概括为：`private: int m_gallonsLeft{ 0 };`。"
+  ],
+  "misconceptions": [
+    "派生类不能因为继承了基类，就直接访问基类的 `private` 数据成员；应通过基类提供的成员函数访问。",
+    "`private` 不表示对象永远不能访问该数据，而是限制直接访问该成员的代码范围。",
+    "派生类改变燃油效率时，不应直接修改基类私有数据，而应重写合适的虚函数或使用基类提供的接口。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`MilesEstimator` 为什么把 `m_gallonsLeft` 声明为 `private`？",
+      "a": "为了禁止外部代码和派生类直接操作该数据，并通过 `setGallonsLeft`、`getGallonsLeft` 等成员函数提供受控访问。"
+    },
+    {
+      "q": "`getMilesLeft()` 的计算逻辑是什么？",
+      "a": "它将每加仑行驶里程与剩余汽油量相乘：$$\\text{getMilesLeft}=\\text{getMilesPerGallon}\\times\\text{getGallonsLeft}$$。"
+    },
+    {
+      "q": "派生类如果不能直接访问 `m_gallonsLeft`，如何设置剩余汽油量？",
+      "a": "调用基类提供的访问函数，例如 `myEstimator.setGallonsLeft(2);`。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "类的访问控制",
+    "继承中的虚函数",
+    "封装"
+  ],
+  "source_pages": [
+    339,
+    340
+  ],
+  "needs_verification": true,
+  "verify_query": "Marc Gregoire C++20 Advanced Programming 第339-340页 MilesEstimator getMilesLeft getMilesPerGallon m_gallonsLeft EfficientCarMilesEstimator",
+  "concept_id": "439_基类私有数据与虚函数访问接口",
+  "_chunk_pages": [
+    337,
+    340
+  ]
+}

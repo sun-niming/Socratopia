@@ -1,0 +1,38 @@
+{
+  "title": "标准库兼容容器需要支持迭代器和规定接口",
+  "definition": "开发与标准库兼容的容器时，需要遵循相应容器类别规定的需求，包括接口和迭代器行为。directed_graph 通过支持迭代器，能够与标准库算法配合使用。",
+  "key_points": [
+    "不同容器类别有各自必须满足的一组需求。",
+    "容器的迭代器支持是与标准库算法兼容的重要基础。",
+    "directed_graph 由于支持迭代器，可以使用标准库算法处理其元素或范围。"
+  ],
+  "examples": [
+    "概念性用法：\n```cpp\n// 只要 directed_graph 提供符合要求的迭代器，\n// 就可以将其 begin/end 范围传递给标准库算法。\nstd::sort(graph.begin(), graph.end());\n```"
+  ],
+  "misconceptions": [
+    "支持某种迭代器并不自动意味着支持所有标准库算法；算法还要求迭代器满足相应类别。",
+    "容器兼容标准库不仅是提供 `begin()` 和 `end()`，还涉及规定的接口、类型和语义要求。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么 directed_graph 能与标准库算法兼容？",
+      "a": "因为 directed_graph 支持迭代器，能够提供算法所需的元素范围。具体算法还取决于其对迭代器类别和元素操作的要求。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "迭代器类别",
+    "标准库算法"
+  ],
+  "source_pages": [
+    755,
+    755
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1565_标准库兼容容器需要支持迭代器和规定接口",
+  "_chunk_pages": [
+    753,
+    756
+  ]
+}

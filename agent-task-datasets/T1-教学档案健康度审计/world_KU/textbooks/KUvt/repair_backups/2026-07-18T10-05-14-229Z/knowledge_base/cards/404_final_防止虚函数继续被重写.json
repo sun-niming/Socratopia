@@ -1,0 +1,41 @@
+{
+  "title": "final 防止虚函数继续被重写",
+  "definition": "在 C++ 中，虚成员函数声明末尾的 `final` 表示该函数不能再被派生类重写。如果更深层次的派生类尝试使用 `override` 重写这个函数，程序将产生编译错误。",
+  "key_points": [
+    "基类可以声明 `virtual void someMethod() override final;`，其中 `final` 限制后续派生类继续重写该函数。",
+    "即使派生类继承了这个函数，继续声明同名的 `override` 仍然会导致编译错误。"
+  ],
+  "examples": [
+    "文本示例可整理为：\nclass Base {\npublic:\n    virtual void someMethod() = 0;\n};\n\nclass Derived : public Base {\npublic:\n    void someMethod() override final;\n};\n\nclass DerivedDerived : public Derived {\npublic:\n    void someMethod() override; // 编译错误\n};"
+  ],
+  "misconceptions": [
+    "`final` 不是表示函数已经实现，也不是表示函数不能被调用；它限制的是后续派生类的重写行为。",
+    "`override` 和 `final` 可以同时出现在同一个虚函数声明中：`override` 表示当前函数重写了基类虚函数，`final` 表示后续不能再重写。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "在 `void someMethod() override final;` 中，`final` 的作用是什么？",
+      "a": "禁止进一步的派生类重写 `someMethod`。"
+    },
+    {
+      "q": "如果 `Derived` 将 `someMethod` 声明为 `final`，`DerivedDerived` 再声明 `void someMethod() override;` 会发生什么？",
+      "a": "产生编译错误，因为 `final` 函数不能被继续重写。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++ 虚函数与继承",
+    "override 说明符"
+  ],
+  "source_pages": [
+    313,
+    316
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "404_final_防止虚函数继续被重写",
+  "_chunk_pages": [
+    313,
+    316
+  ]
+}

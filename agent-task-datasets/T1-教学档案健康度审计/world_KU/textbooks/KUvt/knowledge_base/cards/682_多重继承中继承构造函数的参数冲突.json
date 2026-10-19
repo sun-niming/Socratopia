@@ -1,0 +1,46 @@
+{
+  "title": "多重继承中继承构造函数的参数冲突",
+  "definition": "在多重继承中，如果两个基类分别具有参数列表相同的构造函数，同时在Derived中使用using分别继承两个基类的构造函数，就会产生相同签名的派生类构造函数，导致歧义或编译错误。解决方法是在Derived中显式定义冲突参数列表的构造函数。",
+  "key_points": [
+    "若Base1和Base2都拥有Base1(float)和Base2(float)，则同时声明using Base1::Base1;和using Base2::Base2;会产生Derived(float)的冲突。",
+    "Derived必须显式声明Derived(float)，以解决继承构造函数之间的歧义。",
+    "显式定义的Derived(float)可以在构造函数初始化器中分别调用Base1(float)和Base2(float)，从而明确初始化两个基类子对象。"
+  ],
+  "examples": [
+    "class Base1 { public: Base1() = default; Base1(float f); }; class Base2 { public: Base2() = default; Base2(std::string_view); Base2(float f); }; class Derived : public Base1, public Base2 { public: using Base1::Base1; using Base2::Base2; Derived(char c); };",
+    "Derived d{1.2f}; // 错误：Base1(float)和Base2(float)对应的继承构造函数产生歧义",
+    "解决方式：在Derived中增加Derived(float f);，由该构造函数明确如何初始化Base1和Base2。"
+  ],
+  "misconceptions": [
+    "同时写出两个using声明并不表示编译器会自动选择更合适的基类构造函数。",
+    "显式声明Derived(float)不是在Derived中再增加一个含糊的重载，而是明确接管该参数列表的构造责任。",
+    "多重继承中的歧义来自相同参数列表的基类构造函数，而不是仅仅因为存在两个基类。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "Base1和Base2都拥有一个float参数构造函数时，同时继承两者构造函数会有什么问题？",
+      "a": "会产生两个参数列表相同的Derived(float)构造形式，调用Derived{1.2f}时发生歧义并导致编译错误。"
+    },
+    {
+      "q": "如何解决多重继承中两个基类构造函数的参数冲突？",
+      "a": "在Derived中显式定义冲突参数列表的构造函数，例如Derived(float f);，并在其构造函数初始化器中明确调用相应的Base1和Base2构造函数。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "多重继承",
+    "使用using声明继承构造函数",
+    "构造函数初始化器"
+  ],
+  "source_pages": [
+    335,
+    336
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "682_多重继承中继承构造函数的参数冲突",
+  "_chunk_pages": [
+    333,
+    336
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "title": "使用 new 动态分配整数对象",
+  "definition": "C++ 可以使用 new 表达式动态分配一个 int 对象。new 表达式返回指向该对象的指针，因此应使用 int* 变量保存结果；通过解引用运算符 * 可以访问该动态分配的对象。",
+  "key_points": [
+    "可以先将指针初始化为空指针：int* ptr { nullptr };",
+    "使用 ptr = new int; 动态分配一个 int 对象，并让 ptr 指向该对象。",
+    "如果指针变量名为 handle，则 *handle 表示 handle 所指向的对象；在需要明确运算顺序时可写作 (*handle)。"
+  ],
+  "examples": [
+    "int* ptr { nullptr };",
+    "ptr = new int;",
+    "int* handle = new int;",
+    "通过 *handle 访问 handle 指向的 int 对象；(*handle) 与 *handle 在此处表示同一个被指向对象。"
+  ],
+  "misconceptions": [
+    "new int 创建的是一个 int 对象，而不是一个 int* 指针变量；指针变量只是保存 new 返回的地址。",
+    "handle 表示指针本身，*handle 才表示它所指向的对象。",
+    "把指针初始化为 nullptr 并不会分配 int 对象；只有执行 new int 才会进行动态分配。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何动态分配一个 int 对象并保存其地址？",
+      "a": "可以写作 int* ptr { new int };，也可以先写 int* ptr { nullptr };，再执行 ptr = new int;。"
+    },
+    {
+      "q": "表达式 *handle 表示什么？",
+      "a": "如果 handle 是指向 int 的指针，*handle 表示 handle 所指向的 int 对象。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++指针与解引用运算符"
+  ],
+  "source_pages": [
+    197,
+    200
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "265_使用_new_动态分配整数对象",
+  "_chunk_pages": [
+    197,
+    200
+  ]
+}

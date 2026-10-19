@@ -1,0 +1,41 @@
+{
+  "title": "if-else语句的花括号格式",
+  "definition": "原文展示了带花括号和不带花括号的 `if-else` 写法，并以输出条件真假为例。条件成立时执行 `if` 分支，条件不成立时执行 `else` 分支；使用花括号可以明确每个分支的语句范围。",
+  "key_points": [
+    "带花括号的形式为：`if (condition()) { ... } else { ... }`。",
+    "不带花括号时，`if` 或 `else` 默认只控制其后的第一条语句。",
+    "原文示例中，条件为真时输出 `condition was true`，否则输出 `condition was false`。"
+  ],
+  "examples": [
+    "$$\\texttt{void\\ someFunction()\\ \\{}$$\n$$\\texttt{\\ \\ if\\ (condition())\\ \\{}$$\n$$\\texttt{\\ \\ \\ \\ cout\\ <<\\ \"condition\\ was\\ true\"\\ <<\\ endl;}$$\n$$\\texttt{\\ \\ else\\ \\{}$$\n$$\\texttt{\\ \\ \\ \\ cout\\ <<\\ \"condition\\ was\\ false\"\\ <<\\ endl;}$$\n$$\\texttt{\\}}$$"
+  ],
+  "misconceptions": [
+    "没有花括号时，缩进不会改变语法；只有紧随其后的第一条语句属于 if 或 else。",
+    "else 与最近的、尚未匹配的 if 关联，而不是根据视觉缩进关联。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "if 条件为真时执行哪个分支？",
+      "a": "执行 if 分支；条件为假时执行 else 分支。"
+    },
+    {
+      "q": "不使用花括号时，一个 if 默认控制几条紧随其后的语句？",
+      "a": "默认只控制第一条语句。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++条件语句"
+  ],
+  "source_pages": [
+    133,
+    136
+  ],
+  "needs_verification": true,
+  "verify_query": "《C++20高级编程》第5版 第136页 if else 花括号 someFunction condition was true condition was false",
+  "concept_id": "202_if_else语句的花括号格式",
+  "_chunk_pages": [
+    133,
+    136
+  ]
+}

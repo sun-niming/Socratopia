@@ -1,0 +1,45 @@
+{
+  "title": "迭代器的尾后解引用与不匹配使用风险",
+  "definition": "迭代器的安全性通常接近指针。end()返回尾后迭代器，它不指向有效元素，不能被解引用；解引用尾后迭代器会产生未定义行为。来自不同vector的迭代器不能用来进行有效的遍历比较，也不能混合使用，否则可能导致循环不终止或解引用产生未定义行为。",
+  "key_points": [
+    "不能对end(intVector)进行解引用。",
+    "比较迭代器时，参与比较的迭代器应属于同一个容器或同一有效范围。",
+    "调试版实现可能检测部分迭代器错误并触发断言，但发布版通常默认不进行迭代器验证。"
+  ],
+  "examples": [
+    "错误示例：\n文本代码：vector<int> intVector; auto iter { end(intVector) }; *iter = 10; // 错误：iter不指向有效元素",
+    "错误示例：\n文本代码：vector<int> vectorOne(10); vector<int> vectorTwo(10); for (auto iter { begin(vectorTwo) }; iter != end(vectorOne); ++iter) { /* 错误：混用了两个vector的迭代器 */ }"
+  ],
+  "misconceptions": [
+    "end()指向最后一个元素；实际上它指向最后一个元素之后的位置。",
+    "只要两个迭代器类型相同，就可以互相比较；迭代器还必须来自适当的同一容器范围。",
+    "调试版没有报错就说明迭代器使用一定正确；运行时检查可能只在特定实现和配置中存在。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么不能解引用end()返回的迭代器？",
+      "a": "因为end()返回的是尾后迭代器，它不指向任何有效元素，解引用会产生未定义行为。"
+    },
+    {
+      "q": "为什么不能用vectorTwo的begin()与vectorOne的end()构造遍历循环？",
+      "a": "因为两个迭代器来自不同容器，比较和后续解引用的行为无效，可能导致循环无法终止或产生未定义行为。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "迭代器遍历",
+    "未定义行为",
+    "指针基础"
+  ],
+  "source_pages": [
+    555,
+    555
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1143_迭代器的尾后解引用与不匹配使用风险",
+  "_chunk_pages": [
+    553,
+    556
+  ]
+}

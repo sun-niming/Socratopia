@@ -1,0 +1,48 @@
+{
+  "title": "put、write 与输出缓冲区刷新",
+  "definition": "`put()` 和 `write()` 是输出流的原始输出方法。`put()` 接收并输出单个字符，`write()` 接收字符数组并按指定长度输出；这些方法不会像格式化输出那样进行特殊格式化。输出流通常会先把数据放入缓冲区，之后再写入目标。可以使用 `flush()` 显式要求流刷新缓冲区。",
+  "key_points": [
+    "`put()` 用于输出单个字符，例如 `cout.put('a');`。",
+    "`write()` 用于输出字符数组的指定长度，例如 `cout.write(test, strlen(test));`。",
+    "流可能在遇到 `endl`、流缓冲区满、流析构、显式调用 `flush()`，或要求从对应输入流读取数据时刷新。",
+    "缓冲通常是为了提高性能，因为一次写入较大的数据块可能比逐字符写入更快。"
+  ],
+  "examples": [
+    "```cpp\nconst char* test { \"hello there\\n\" };\ncout.write(test, strlen(test));\n```",
+    "```cpp\ncout.put('a');\n```",
+    "```cpp\ncout << \"abc\";\ncout.flush();\ncout << \"def\";\ncout << endl;\n```\n其中 `flush()` 显式刷新此前写入的内容。"
+  ],
+  "misconceptions": [
+    "认为 `put()` 和 `write()` 会自动进行与 `<<` 相同的格式化；原文强调它们按原本形式输出。",
+    "认为调用 `<<` 后数据一定立即到达目标设备；流通常会先进行缓冲。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`put()` 和 `write()` 分别接收什么数据？",
+      "a": "`put()` 接收单个字符；`write()` 接收字符数组，并按照给定长度输出。"
+    },
+    {
+      "q": "如何显式刷新输出流的缓冲区？",
+      "a": "调用该流的 `flush()` 方法，例如 `cout.flush();`。"
+    },
+    {
+      "q": "原文列出的哪些情况会使流刷新缓冲区？",
+      "a": "遇到 `endl`、流离开作用域被析构、缓冲区已满、显式调用 `flush()`，以及要求从对应输入流读取数据时。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "输出流串联与换行刷新"
+  ],
+  "source_pages": [
+    413,
+    414
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "838_put_write_与输出缓冲区刷新",
+  "_chunk_pages": [
+    413,
+    416
+  ]
+}

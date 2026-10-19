@@ -1,0 +1,42 @@
+{
+  "title": "函数递归",
+  "definition": "函数递归是指函数可以通过调用自身来解决问题的一种方法。递归通常把原问题分解为更小的同类问题，直到满足结束条件。",
+  "key_points": [
+    "函数会调用自身",
+    "需要有能停止递归的条件，否则可能无限调用"
+  ],
+  "examples": [
+    "function findMax(arr) { if (arr.length === 1) { return arr[0]; } else { var subMax = findMax(arr.slice(1)); return arr[0] > subMax ? arr[0] : subMax; } }",
+    "findMax([2, 7, 1, 12, 5]); // 12"
+  ],
+  "misconceptions": [
+    "递归不是重复写很多个函数，而是同一个函数反复调用自己",
+    "递归不是没有结束条件的循环，必须有终止条件"
+  ],
+  "qa_pairs": [
+    {
+      "q": "什么是函数递归？",
+      "a": "函数递归是指函数通过调用自身来解决问题的一种方法。"
+    },
+    {
+      "q": "递归函数为什么要有结束条件？",
+      "a": "因为没有结束条件，函数会不断调用自身，导致无法停止。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "函数",
+    "条件判断"
+  ],
+  "source_pages": [
+    269,
+    272
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "362_函数递归",
+  "_chunk_pages": [
+    269,
+    272
+  ]
+}

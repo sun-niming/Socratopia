@@ -1,0 +1,49 @@
+{
+  "title": "按名称获取当前时区和指定时区",
+  "definition": "`std::chrono::locate_zone()`根据时区名称查找并返回对应的`time_zone`对象指针；如果数据库中找不到指定时区，则抛出`runtime_error`异常。`std::chrono::current_zone()`用于获取当前时区。",
+  "key_points": [
+    "按名称获取时区：`locate_zone(\"Europe/Brussels\")`。",
+    "获取GMT时区：`locate_zone(\"GMT\")`。",
+    "获取当前时区：`current_zone()`。",
+    "查询不存在的时区名称会抛出`runtime_error`。"
+  ],
+  "examples": [
+    "`auto* brussels{std::chrono::locate_zone(\"Europe/Brussels\")};`",
+    "`auto* gmt{std::chrono::locate_zone(\"GMT\")};`",
+    "`auto* current{std::chrono::current_zone()};`"
+  ],
+  "misconceptions": [
+    "`current_zone()`表示程序运行环境的当前时区，不是固定返回GMT。",
+    "`locate_zone()`查找失败不是返回空指针，而是抛出`runtime_error`。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何获取名为`Europe/Brussels`的时区？",
+      "a": "调用`std::chrono::locate_zone(\"Europe/Brussels\")`。"
+    },
+    {
+      "q": "当`locate_zone()`找不到指定时区时会怎样？",
+      "a": "它会抛出`runtime_error`异常。"
+    },
+    {
+      "q": "如何获取当前时区？",
+      "a": "调用`std::chrono::current_zone()`。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++异常处理",
+    "std::chrono时区数据库与时区对象"
+  ],
+  "source_pages": [
+    694,
+    694
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1448_按名称获取当前时区和指定时区",
+  "_chunk_pages": [
+    693,
+    696
+  ]
+}

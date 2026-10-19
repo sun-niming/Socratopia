@@ -1,0 +1,46 @@
+{
+  "title": "通过类接口声明员工数据库操作",
+  "definition": "类的 public 部分可以声明供外部代码调用的成员函数接口。教材中的 `Database` 类示例声明了添加员工、按员工编号查找员工以及按姓名查找员工等操作；这些声明只描述函数名、参数和返回类型，具体实现可以放在类定义之外。",
+  "key_points": [
+    "`public:` 后声明的成员函数构成类的公共接口。",
+    "示例包含添加员工的操作：根据名字参数创建或添加员工。",
+    "示例包含按员工编号获取员工的操作。",
+    "示例还包含按名字和姓氏获取员工的重载操作。",
+    "同名函数可以通过不同参数列表形成重载。"
+  ],
+  "examples": [
+    "教材示例所表达的接口结构可写为：\n```cpp\nclass Database {\npublic:\n    Employee addEmployee(const std::string& firstName,\n                         const std::string& lastName);\n    Employee getEmployee(int employeeNumber);\n    Employee getEmployee(const std::string& firstName,\n                         const std::string& lastName);\n};\n```"
+  ],
+  "misconceptions": [
+    "认为函数声明本身就是函数的完整实现；声明可以只提供接口，函数体可在类外定义。",
+    "认为同一个类不能有两个同名函数；只要参数列表不同，就可以构成重载。",
+    "把按编号查找和按姓名查找误认为同一个操作；它们的参数形式不同，调用方式也不同。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "教材中的 `Database` 类提供了哪些员工相关接口？",
+      "a": "示例提供了添加员工、按员工编号获取员工、按名字和姓氏获取员工等接口。"
+    },
+    {
+      "q": "为什么 `getEmployee(int)` 和 `getEmployee(const std::string&, const std::string&)` 可以同名？",
+      "a": "因为它们的参数列表不同，属于函数重载。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++ 类与 public 成员",
+    "函数声明",
+    "函数重载"
+  ],
+  "source_pages": [
+    137,
+    140
+  ],
+  "needs_verification": true,
+  "verify_query": "\"C++20高级编程\" \"class Database\" \"getEmployee\" \"addEmployee\"",
+  "concept_id": "206_通过类接口声明员工数据库操作",
+  "_chunk_pages": [
+    137,
+    140
+  ]
+}

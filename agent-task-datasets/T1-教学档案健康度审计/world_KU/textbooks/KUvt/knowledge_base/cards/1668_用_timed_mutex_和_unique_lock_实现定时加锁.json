@@ -1,0 +1,49 @@
+{
+  "title": "用 timed_mutex 和 unique_lock 实现定时加锁",
+  "definition": "std::timed_mutex 可以与 std::unique_lock 配合，用指定的相对时间尝试获取锁。原文示例把 200 毫秒传给 unique_lock 构造函数：如果在该时间间隔内获得锁，unique_lock 可用于访问受保护的输出；如果超时仍未获得锁，则可通过 unique_lock 的布尔转换判断加锁失败，并跳过本次输出。",
+  "key_points": [
+    "定时锁允许线程在等待互斥体时设置最大等待时间。",
+    "示例使用 200 毫秒的相对时间作为加锁超时时间。",
+    "unique_lock 定义了 bool 转换运算符，因此可以直接写入 if 条件检查是否成功获得锁。",
+    "如果 200 毫秒内未获得锁，示例跳过输出，而不是无限期等待。"
+  ],
+  "examples": [
+    "示意代码：\n```cpp\nstd::timed_mutex m_timedMutex;\n\nfor (int i{0}; i < m_numIterations; ++i) {\n    std::unique_lock lock{m_timedMutex, 200ms};\n    if (lock) {\n        std::cout << \"Counter \" << m_id\n                  << \" has value \" << i << std::endl;\n    } else {\n        // 200 毫秒内未获得锁，跳过本次输出\n    }\n}\n```\n其中 200ms 使用 chrono 库表示时间长度。"
+  ],
+  "misconceptions": [
+    "定时加锁不是保证最终一定获得锁；超时时仍可能失败。",
+    "unique_lock 对象存在并不表示它一定持有锁，必须通过布尔条件检查加锁结果。",
+    "超时失败时不应执行需要互斥保护的输出操作。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "示例中的 unique_lock 会等待多久来获取 timed_mutex？",
+      "a": "最多等待 200 毫秒。"
+    },
+    {
+      "q": "如何检查 unique_lock 是否成功获得锁？",
+      "a": "利用 unique_lock 定义的 bool 转换运算符，例如写成 if (lock)。"
+    },
+    {
+      "q": "如果 200 毫秒内没有获得锁，示例会怎样？",
+      "a": "进入失败分支并跳过本次输出。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "std::unique_lock",
+    "std::timed_mutex",
+    "chrono 时间表示"
+  ],
+  "source_pages": [
+    812,
+    812
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1668_用_timed_mutex_和_unique_lock_实现定时加锁",
+  "_chunk_pages": [
+    809,
+    812
+  ]
+}

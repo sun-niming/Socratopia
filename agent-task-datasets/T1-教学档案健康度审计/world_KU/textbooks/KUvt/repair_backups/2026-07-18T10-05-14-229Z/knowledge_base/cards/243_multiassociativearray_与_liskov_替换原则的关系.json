@@ -1,0 +1,46 @@
+{
+  "title": "MultiAssociativeArray 与 Liskov 替换原则的关系",
+  "definition": "原文在讨论 `MultiAssociativeArray` 与 `AssociativeArray` 的关系时引出 LSP，即 Liskov Substitution Principle（里氏替换原则）。从页面可辨认的内容看，原文指出不能简单地因为两个类型具有相似的操作，就断定 MultiAssociativeArray 可以作为 AssociativeArray 的替代类型；由于二者对读取操作的语义不同，替换关系可能不成立。",
+  "key_points": [
+    "LSP 的核心问题是：如果某类型是另一类型的子类型，那么使用子类型对象的地方应能使用基类型对象，而不破坏程序正确性。",
+    "原文将 `AssociativeArray` 与 `MultiAssociativeArray` 放在 LSP 讨论中进行比较。",
+    "两者虽然都具有 `insert(key, value)`，但关联数组的 `get(key)` 与多重关联数组的 `getAll(key)` 反映了不同的返回语义。",
+    "因此，接口名称相似或存在继承关系，并不自动意味着满足 LSP。"
+  ],
+  "examples": [
+    "若某段程序要求 `AssociativeArray` 的 `get(key)` 返回单个值，那么直接替换为允许同一键对应多个值的 `MultiAssociativeArray`，可能无法保持原有行为。",
+    "可将替换要求抽象表示为：$$\\text{若 }M\\text{ 是 }A\\text{ 的子类型，则在要求 }A\\text{ 的所有场景中，使用 }M\\text{ 都应保持正确性。}$$"
+  ],
+  "misconceptions": [
+    "LSP 不是“所有子类都必须拥有与父类完全相同的实现”，而是关于可替换性和行为契约。",
+    "拥有相同的 `insert` 操作不代表两个类型具有相同的行为语义。",
+    "仅凭 `MultiAssociativeArray` 名称或类图中的继承箭头，不能断言它一定满足 LSP。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么 MultiAssociativeArray 不能仅因接口相似就被视为 AssociativeArray 的合适替代？",
+      "a": "因为二者对同一键的值数量和读取语义不同：AssociativeArray 通常读取单个值，而 MultiAssociativeArray 可读取多个值；这种差异可能破坏依赖 AssociativeArray 行为的代码。"
+    },
+    {
+      "q": "LSP 主要关注什么？",
+      "a": "LSP 主要关注子类型是否能够在需要基类型的所有场景中被替换使用，并保持程序的正确行为。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "继承与子类型",
+    "接口和行为契约",
+    "关联数组与多重关联数组"
+  ],
+  "source_pages": [
+    173,
+    176
+  ],
+  "needs_verification": true,
+  "verify_query": "《C++20高级编程》第5版 第175页 LSP Liskov Substitution Principle AssociativeArray MultiAssociativeArray 原文观点",
+  "concept_id": "243_multiassociativearray_与_liskov_替换原则的关系",
+  "_chunk_pages": [
+    173,
+    176
+  ]
+}

@@ -1,0 +1,113 @@
+{
+  "chunkId": "chunk-007",
+  "messageRange": [
+    64,
+    69
+  ],
+  "topics": [
+    {
+      "name": "GOTO 与闭包的关系",
+      "facts": [
+        "GOTO(I6,T) 是把 I6 中点在 T 前面的项跨过 T 得到新项，再求闭包。",
+        "两项的点后面都不是非终结符，所以闭包加不进新项。",
+        "I9={E→E+T·, T→T·*F} 正好是图 4-31 里 I6 沿 T 走到的那一格。",
+        "GOTO 求闭包是为了补上点后面是非终结符时所需的移入箭头。",
+        "闭包把「我在等某个非终结符」翻译成「我实际能移入哪些终结符」。"
+      ],
+      "examples": [
+        "I6 里点在 T 前面的有两条：E→E+·T 和 T→·T*F。",
+        "拿 I0 对 '(' 走一步最直观：跨过 '('，F→·(E) 变成 F→(·E)，点现在贴着非终结符 E。",
+        "若不求闭包，F→(·E) 孤零零一项，没有通往 id 也没有通往 '(' 的箭头，分析器会卡死。",
+        "I4=CLOSURE({F→(·E)})，才长出了对 '('、id 的箭头。"
+      ],
+      "sourceMessageIndexes": [
+        64,
+        67
+      ]
+    },
+    {
+      "name": "LR(0) 自动机状态转移图（图 4-31）",
+      "facts": [
+        "整个族中每个圆圈是一个状态，箭头上标的就是跨过的那个文法符号，也就是 GOTO 的第二个参数。",
+        "棕色实线是「向前」的转移，蓝色虚线是绕回去的回边。",
+        "每个状态出去的箭头，标签各不相同。",
+        "I4 同时有 E、T、F、'('、id 五条箭头。",
+        "I3={T→F·} 一条箭头都没有，因为它的点已经落在最右端，GOTO 没得可移。",
+        "这张图跟教材图 4-31 是同一张。"
+      ],
+      "examples": [
+        "回边例子：I6→I5 标 id，I4→I2 标 T。",
+        "图里 I4 有一支箭头标着 '('，绕一圈回到了它自己。"
+      ],
+      "sourceMessageIndexes": [
+        66,
+        67
+      ]
+    }
+  ],
+  "learnerEvidence": [
+    {
+      "kind": "confusion",
+      "content": "GOTO 为什么需要闭包",
+      "sourceMessageIndexes": [
+        64
+      ]
+    },
+    {
+      "kind": "confusion",
+      "content": "一个状态为什么能沿同一个符号回到自己",
+      "sourceMessageIndexes": [
+        67
+      ]
+    },
+    {
+      "kind": "shift",
+      "content": "我们先在4.6.5这一节前停下吧，这节课先停在这里。",
+      "sourceMessageIndexes": [
+        68
+      ]
+    }
+  ],
+  "keyInsights": [
+    {
+      "content": "闭包把「我在等某个非终结符」翻译成「我实际能移入哪些终结符」。",
+      "sourceMessageIndexes": [
+        67
+      ]
+    }
+  ],
+  "openQuestions": [
+    {
+      "content": "一个状态为什么能沿同一个符号回到自己？",
+      "sourceMessageIndexes": [
+        67,
+        68
+      ]
+    }
+  ],
+  "reviewCandidates": [
+    {
+      "question": "GOTO(I6,T) 的结果是什么？为什么闭包加不进新项？",
+      "answer": "GOTO(I6,T) 跨过 T 得到 E→E+T· 和 T→T·*F；两项的点后面都不是非终结符，所以闭包加不进新项，结果为 I9={E→E+T·, T→T·*F}。",
+      "sourceMessageIndexes": [
+        67
+      ]
+    },
+    {
+      "question": "GOTO 为什么非得求闭包？",
+      "answer": "点跨过符号后可能贴着非终结符，若不求闭包，状态里没有能移入的终结符箭头，分析器会卡死；闭包把等待的非终结符展开为实际能移入的终结符箭头。",
+      "sourceMessageIndexes": [
+        64,
+        67
+      ]
+    },
+    {
+      "question": "LR(0) 自动机状态转移图中箭头标签代表什么？I3 为什么没有出去的箭头？",
+      "answer": "箭头标签代表跨过的文法符号，即 GOTO 的第二个参数；I3={T→F·} 的点已在最右端，GOTO 没得可移，所以没有箭头。",
+      "sourceMessageIndexes": [
+        66,
+        67
+      ]
+    }
+  ]
+}

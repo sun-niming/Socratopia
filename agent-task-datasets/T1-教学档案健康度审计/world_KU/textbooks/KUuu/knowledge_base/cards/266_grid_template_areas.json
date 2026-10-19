@@ -1,0 +1,37 @@
+{
+  "title": "grid-template-areas",
+  "definition": "grid-template-areas 用于通过命名区域来定义网格布局。它把网格中的单元格组织成若干语义区域，布局结构更直观；其中英文句点 . 表示空单元格。",
+  "key_points": [
+    "可以通过命名区域来定义网格布局。",
+    "同一个区域名可以在相邻单元格中重复出现，形成一个区域。",
+    "句点 . 表示空单元格。"
+  ],
+  "examples": [
+    "grid-template-areas:\n  \"header header header header\"\n  \"main   main   .      sidebar\"\n  \"footer footer footer footer\";"
+  ],
+  "misconceptions": [
+    "grid-template-areas 不是选择器，而是网格容器属性。",
+    "点号 . 在这里不是类名，而是表示空单元格。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "grid-template-areas 中的 . 表示什么？",
+      "a": "表示空单元格。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "grid-template-columns 和 grid-template-rows"
+  ],
+  "source_pages": [
+    175,
+    176
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "266_grid_template_areas",
+  "_chunk_pages": [
+    173,
+    176
+  ]
+}

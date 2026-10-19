@@ -1,0 +1,53 @@
+{
+  "title": "使用 directory_iterator 手动递归遍历目录",
+  "definition": "可以通过一个带有层级参数的递归函数，结合 directory_iterator 手动实现目录树遍历：函数先处理当前路径，再对当前目录的直接条目逐个递归调用自身，并将层级加一。",
+  "key_points": [
+    "递归函数接收当前路径和目录层级参数，层级参数可以有默认值 $0$。",
+    "路径不存在时立即返回。",
+    "当前路径为普通文件时，输出文件路径和文件大小。",
+    "当前路径为目录时，先输出目录路径，再使用 directory_iterator 遍历该目录的直接条目。",
+    "递归调用时传入 `level + 1`，从而为下一层目录生成更深的缩进。",
+    "缩进长度可表示为 $2\\times\\text{level}$。"
+  ],
+  "examples": [
+    "伪代码结构：`void printDirectoryStructure(path p, size_t level = 0)`。",
+    "核心递归结构可写为：`for (auto& entry : directory_iterator{p}) { printDirectoryStructure(entry, level + 1); }`。",
+    "普通文件和目录的输出逻辑可表示为：$$\\text{当前路径}\\rightarrow\\begin{cases}\\text{输出 File 及文件大小},&\\text{如果是普通文件}\\\\\\text{输出 Dir，并递归遍历其直接条目},&\\text{如果是目录}\\end{cases}$$"
+  ],
+  "misconceptions": [
+    "directory_iterator 本身不会自动递归进入子目录；递归行为来自显式的递归函数调用。",
+    "递归调用时必须增加层级参数，否则所有条目可能使用相同的缩进。",
+    "处理目录前应判断路径是否存在，不能假定传入路径一定有效。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何使用 directory_iterator 实现递归目录遍历？",
+      "a": "先用 directory_iterator 遍历当前目录的直接条目，再对每个条目递归调用同一个函数，并将层级参数增加一。"
+    },
+    {
+      "q": "手动递归版本中 level 参数的作用是什么？",
+      "a": "level 表示当前条目的目录层级，用于计算输出时的缩进；递归到下一层时传入 `level + 1`。"
+    },
+    {
+      "q": "为什么手动递归版本需要先判断当前路径是普通文件还是目录？",
+      "a": "普通文件只需要输出信息，而目录还需要创建 directory_iterator 并继续遍历其条目。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "函数递归",
+    "C++ 迭代器的基本使用",
+    "文件系统路径与目录条目"
+  ],
+  "source_pages": [
+    433,
+    436
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "569_使用_directory_iterator_手动递归遍历目录",
+  "_chunk_pages": [
+    433,
+    436
+  ]
+}

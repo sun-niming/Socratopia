@@ -1,0 +1,55 @@
+{
+  "title": "time_point的含义与基本运算",
+  "definition": "time_point表示某个时钟上的特定时点。它以相对于关联时钟纪元的duration保存时间，并且始终与一个特定的clock关联。time_since_epoch()返回从该时钟纪元到当前time_point之间的duration。",
+  "key_points": [
+    "纪元是关联时钟的起点，不同操作系统或时钟可以使用不同的纪元和duration单位。",
+    "经典UNIX/Linux通常以1970年1月1日为时间纪元；原文还指出Windows使用1601年1月1日作为纪元，并以100纳秒为duration单位。",
+    "基本运算包括：$$tp+d=tp$$、$$d+tp=tp$$、$$tp-d=tp$$、$$tp-tp=d$$。",
+    "time_point之间可以使用比较运算符进行比较；time_point还提供min()和max()静态方法。",
+    "time_point的三个主要构造方式是：默认构造为纪元、由duration构造为“纪元+d”、由同一clock的其他duration精度time_point构造。"
+  ],
+  "examples": [
+    "创建steady_clock的纪元time_point并加上10分钟：\n```text\ntime_point<steady_clock> tp1;\ntp1 += minutes{10};\nauto d1{tp1.time_since_epoch()};\n```",
+    "time_point与duration的关系可写为：\n$$\n\\begin{aligned}\ntp+d&\\to tp\\\\\ntp-d&\\to tp\\\\\ntp_2-tp_1&\\to duration\n\\end{aligned}\n$$"
+  ],
+  "misconceptions": [
+    "time_point是一个独立于时钟的绝对时间；实际上每个time_point都关联一个clock。",
+    "所有操作系统都使用相同的纪元和duration单位；原文明确指出不同系统可能不同。",
+    "两个任意不同clock的time_point都可以直接相减；原文只说明time_point支持相应的基本运算，并强调每个time_point关联特定clock。",
+    "tp+tp是标准支持的运算；原文把它列为不支持的示例。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "time_point保存的是什么信息？",
+      "a": "它保存相对于关联clock的纪元的duration，因此表示该clock上的某个时点。"
+    },
+    {
+      "q": "time_since_epoch()返回什么？",
+      "a": "返回从关联clock的纪元到该time_point之间的duration。"
+    },
+    {
+      "q": "time_point减去time_point的结果是什么？",
+      "a": "结果是duration，表示两个时间点之间的时间间隔。"
+    },
+    {
+      "q": "默认构造time_point表示什么？",
+      "a": "它使用duration::zero()初始化，因此表示关联clock的纪元。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "clock与duration",
+    "C++类模板基础"
+  ],
+  "source_pages": [
+    690,
+    691
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1439_time_point的含义与基本运算",
+  "_chunk_pages": [
+    689,
+    692
+  ]
+}

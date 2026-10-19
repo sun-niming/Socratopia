@@ -1,0 +1,35 @@
+{
+  "title": "fixed 固定定位",
+  "definition": "fixed 是一种固定定位，元素相对于浏览器窗口进行定位。",
+  "key_points": [
+    "fixed 表示固定定位",
+    "定位参照物是浏览器窗口"
+  ],
+  "examples": [
+    "position: fixed; top: 0; right: 0;"
+  ],
+  "misconceptions": [
+    "fixed 是相对于页面内容定位；原文说明它是相对于浏览器窗口定位"
+  ],
+  "qa_pairs": [
+    {
+      "q": "fixed 定位相对于什么进行定位？",
+      "a": "相对于浏览器窗口进行定位。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "层定位"
+  ],
+  "source_pages": [
+    137,
+    140
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "222_fixed_固定定位",
+  "_chunk_pages": [
+    137,
+    140
+  ]
+}

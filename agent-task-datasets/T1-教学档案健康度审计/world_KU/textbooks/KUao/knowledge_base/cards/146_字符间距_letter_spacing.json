@@ -1,0 +1,37 @@
+{
+  "title": "字符间距 letter-spacing",
+  "definition": "letter-spacing 用于设置字符之间的间距。正数会拉大字符间距，负数会缩小字符间距，甚至可能出现字符重叠。",
+  "key_points": [
+    "letter-spacing 控制字符间距。",
+    "正数表示加大间距。",
+    "负数表示缩小间距，甚至可能重叠。"
+  ],
+  "examples": [
+    "letter-spacing: -3px;"
+  ],
+  "misconceptions": [
+    "letter-spacing 不是行间距。",
+    "负值不是非法，教材明确给出了负数示例。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "letter-spacing 的作用是什么？",
+      "a": "设置字符之间的间距。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "CSS基础"
+  ],
+  "source_pages": [
+    109,
+    112
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "146_字符间距_letter_spacing",
+  "_chunk_pages": [
+    109,
+    112
+  ]
+}

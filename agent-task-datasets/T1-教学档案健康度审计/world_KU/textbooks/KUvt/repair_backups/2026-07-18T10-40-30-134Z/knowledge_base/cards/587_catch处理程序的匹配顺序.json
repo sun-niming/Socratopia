@@ -1,0 +1,38 @@
+{
+  "title": "catch处理程序的匹配顺序",
+  "definition": "当多个catch处理程序用于同一个try块时，应先捕获派生异常类型，再捕获基类异常类型。异常处理会按照catch出现的顺序进行匹配；如果先捕获基类（例如std::exception），派生类异常（例如std::invalid_argument）也会被基类处理程序匹配，从而导致后面的派生类catch无法执行。",
+  "key_points": [
+    "应将更具体的派生异常类型放在前面，将更一般的基类异常类型放在后面。",
+    "例如，应先写catch (const invalid_argument& e)，再写catch (const exception& e)。",
+    "错误顺序是先捕获exception，再捕获invalid_argument，因为前者会遮蔽后者。"
+  ],
+  "examples": [
+    "正确顺序：try { myInts = readIntegerFile(filename); } catch (const invalid_argument& e) { /* 对无效文件名采取特殊处理 */ } catch (const exception& e) { cerr << e.what() << endl; return 1; }",
+    "错误顺序：try { myInts = readIntegerFile(filename); } catch (const exception& e) { /* 先匹配基类 */ } catch (const invalid_argument& e) { /* 该处理程序可能无法执行 */ }"
+  ],
+  "misconceptions": [
+    "catch块不一定会按照异常对象的实际类型自动跳到最具体的处理程序；它会按书写顺序尝试匹配。",
+    "把基类catch放在前面并不能实现“兜底且仍保留后续派生类处理”的效果。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么invalid_argument的catch处理程序必须写在exception的catch处理程序之前？",
+      "a": "因为invalid_argument是exception的派生类，catch会按顺序匹配；如果先匹配exception，invalid_argument异常会被基类处理程序捕获，后面的派生类处理程序不会执行。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++异常对象与try-catch语句"
+  ],
+  "source_pages": [
+    449,
+    450
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "587_catch处理程序的匹配顺序",
+  "_chunk_pages": [
+    449,
+    452
+  ]
+}

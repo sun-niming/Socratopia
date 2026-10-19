@@ -1,0 +1,50 @@
+{
+  "title": "C++20 模块接口中的导出声明",
+  "definition": "C++20 模块可以把模块接口写在模块接口单元中。原文示例使用 export module spreadsheet; 声明名为 spreadsheet 的模块，并使用 export class Spreadsheet 导出 Spreadsheet 类；还使用 export import spreadsheet_cell; 导出导入的 spreadsheet_cell 模块内容。",
+  "key_points": [
+    "export module spreadsheet; 用于声明模块接口单元所属的模块名称为 spreadsheet。",
+    "模块接口单元可以使用 export 导出类、函数或其他接口，使模块使用者能够使用这些声明。",
+    "原文示例通过 export class Spreadsheet 导出 Spreadsheet 类。",
+    "原文还出现 export import spreadsheet_cell;，表示导入 spreadsheet_cell 模块并将其接口重新导出。",
+    "原文在模块声明前出现 module; 和 #include <cstddef>，其中 module; 是全局模块片段的写法，用于放置传统预处理器指令。"
+  ],
+  "examples": [
+    "模块接口示例：module;\\n#include <cstddef>\\nexport module spreadsheet;\\nexport import spreadsheet_cell;",
+    "导出类的示例：export class Spreadsheet {\\npublic:\\n    Spreadsheet(std::size_t width, std::size_t height);\\n};"
+  ],
+  "misconceptions": [
+    "export module spreadsheet; 不是普通的类声明，而是模块接口单元中的模块声明。",
+    "只有在模块接口中写出 export 的声明才会作为模块接口对外提供；模块内部的未导出声明不能直接作为公开接口使用。",
+    "export import spreadsheet_cell; 不只是普通 import，它还会把被导入模块的可导出接口转发给 spreadsheet 模块的使用者。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "原文中如何声明名为 spreadsheet 的 C++ 模块？",
+      "a": "使用 export module spreadsheet;。"
+    },
+    {
+      "q": "原文中如何把 Spreadsheet 类作为模块接口导出？",
+      "a": "使用 export class Spreadsheet { ... };。"
+    },
+    {
+      "q": "export import spreadsheet_cell; 的作用是什么？",
+      "a": "导入 spreadsheet_cell 模块，并将其可导出的接口重新导出给 spreadsheet 模块的使用者。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++ 头文件与预处理器基础",
+    "C++ 类声明"
+  ],
+  "source_pages": [
+    257,
+    260
+  ],
+  "needs_verification": true,
+  "verify_query": "《C++20高级编程》第5版 第260页 export module spreadsheet export import spreadsheet_cell module 全局模块片段",
+  "concept_id": "342_c_20_模块接口中的导出声明",
+  "_chunk_pages": [
+    257,
+    260
+  ]
+}

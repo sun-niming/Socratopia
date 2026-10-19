@@ -1,0 +1,53 @@
+{
+  "title": "用 RAII 类包装 C 风格文件句柄",
+  "definition": "示例中的 `File` 类安全地包装 C 风格文件句柄 `std::FILE*`，通过析构函数、`reset()` 和 `release()` 管理句柄生命周期。它通常禁止拷贝构造和拷贝赋值，以避免多个对象错误地拥有同一个资源；同时允许移动构造和移动赋值来转移资源所有权。",
+  "key_points": [
+    "成员 `std::FILE* m_file { nullptr };` 保存被管理的文件句柄。",
+    "析构函数调用 `reset()`，由 `reset()` 关闭当前句柄并保存新的句柄。",
+    "`get()` 返回当前句柄，但不转移所有权。",
+    "`release()` 保存当前句柄、将成员置为 `nullptr`，然后返回原句柄，从而放弃管理权。",
+    "`reset()` 如果当前句柄非空则调用 `fclose(m_file)`，然后将成员设置为新句柄，默认新句柄为 `nullptr`。",
+    "拷贝构造和拷贝赋值被删除；示例允许移动构造和移动赋值。"
+  ],
+  "examples": [
+    "文件包装器的使用：`File myFile { fopen(\"input.txt\", \"r\") };`。当 `myFile` 离开作用域时，析构函数会自动关闭由它管理的文件。",
+    "`release()` 的核心行为可表示为：`std::FILE* file { m_file }; m_file = nullptr; return file;`。"
+  ],
+  "misconceptions": [
+    "`get()` 只提供句柄访问，不表示转移文件句柄的所有权。",
+    "`release()` 不会关闭文件；它只是放弃管理并返回句柄，调用者之后需要负责处理该句柄。",
+    "禁止拷贝是为了避免两个 `File` 对象同时负责关闭同一个文件句柄。",
+    "移动操作的目的不是复制资源，而是转移资源所有权。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`File::release()` 做了什么？",
+      "a": "它保存并返回当前 `std::FILE*`，将成员指针设为 `nullptr`，从而放弃对该文件句柄的管理。"
+    },
+    {
+      "q": "为什么 `File` 删除拷贝构造和拷贝赋值？",
+      "a": "因为多个对象拷贝拥有同一个文件句柄可能导致重复关闭或所有权混乱。"
+    },
+    {
+      "q": "`File` 对象离开作用域时发生什么？",
+      "a": "析构函数调用 `reset()`；如果句柄非空，则调用 `fclose()` 关闭文件。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "RAII资源管理思想",
+    "C++移动语义",
+    "C++拷贝控制"
+  ],
+  "source_pages": [
+    931,
+    932
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 RAII File wrapper std::FILE* get release reset deleted copy move constructor assignment example",
+  "concept_id": "1928_用_raii_类包装_c_风格文件句柄",
+  "_chunk_pages": [
+    929,
+    932
+  ]
+}

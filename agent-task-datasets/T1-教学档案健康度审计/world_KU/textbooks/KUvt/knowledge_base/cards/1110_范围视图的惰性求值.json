@@ -1,0 +1,43 @@
+{
+  "title": "范围视图的惰性求值",
+  "definition": "范围视图是惰性求值的：创建由范围适配器组成的视图时，通常不会立即过滤、转换或遍历元素；实际操作会在程序迭代视图中的元素时执行，例如 printRange() 使用基于范围的 for 循环遍历视图时。",
+  "key_points": [
+    "构建 result1、result2 等中间视图本身不会立即执行所有操作。",
+    "当迭代最终视图时，管道中的过滤和转换会按需计算。",
+    "惰性求值使视图能够表示很大的甚至无限的范围。",
+    "如果对无限视图直接进行无限遍历，程序不会结束；通常需要 views::take 等适配器限制输出数量。"
+  ],
+  "examples": [
+    "下面的视图创建时不会立即完成过滤：\nauto result{values | views::filter([](const auto& value) { return value % 2 == 0; })};\n只有在 printRange(\"Only even values: \", result) 遍历 result 时，过滤操作才实际发生。"
+  ],
+  "misconceptions": [
+    "惰性求值不等于永远不计算元素；元素会在迭代时按需计算。",
+    "创建了一个视图并不意味着已经得到一个独立保存结果的 vector。",
+    "无限视图本身可以被构造，但不能在没有终止条件的情况下完整遍历。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "范围视图什么时候执行过滤和转换？",
+      "a": "通常在迭代视图中的元素时执行，而不是在创建视图时立即执行。"
+    },
+    {
+      "q": "为什么无限的 iota 视图可以与 filter 和 transform 组合？",
+      "a": "因为这些操作是惰性执行的，只有在请求元素时才计算；再使用 views::take 限制请求的元素数量即可。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "范围适配器的管道组合"
+  ],
+  "source_pages": [
+    541,
+    543
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1110_范围视图的惰性求值",
+  "_chunk_pages": [
+    541,
+    544
+  ]
+}

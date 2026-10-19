@@ -1,0 +1,44 @@
+{
+  "title": "环形缓冲区按时间顺序输出消息",
+  "definition": "RingBuffer 的输出运算符必须按照消息从旧到新的逻辑顺序输出，而不是简单按照 vector 的物理下标顺序输出。如果缓冲区已经环回，最早的条目位于 `m_next`，因此先输出 `[m_next, end)`，再输出 `[begin, m_next)`；如果尚未环回，则只需输出从 `begin` 到 `m_next` 的有效条目。",
+  "key_points": [
+    "区间的右端点不包含在输出范围内。",
+    "发生环回时，`m_next` 指向最早的条目，也就是下一次会被覆盖的条目。",
+    "输出分两段：先输出 `m_next` 到容器末尾，再输出容器开头到 `m_next` 之前。",
+    "原文通过 `ostream_iterator<std::string>{ostr, \"\\n\"}` 将每个字符串输出并以换行分隔。"
+  ],
+  "examples": [
+    "已环回时的逻辑输出范围为：`[m_next, end(m_entries))`，然后是 `[begin(m_entries), m_next)`。",
+    "未环回时的有效输出范围为：`[begin(m_entries), m_next)`。"
+  ],
+  "misconceptions": [
+    "vector 的物理存储顺序不一定就是消息的新旧顺序；发生环回后必须拆分成两个区间输出。",
+    "`m_next` 指向的条目在已环回时是最早消息，而不是最新消息。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "环形缓冲区发生环回后，为什么要分两个区间输出？",
+      "a": "因为最早消息可能位于 vector 中间，最新消息位于 vector 开头附近；分两段输出才能恢复从最早到最新的逻辑顺序。"
+    },
+    {
+      "q": "发生环回时，输出运算符先输出哪一段？",
+      "a": "先输出从 `m_next` 到 vector 末尾的条目，再输出从 vector 开头到 `m_next` 之前的条目。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "环形缓冲区的基本工作方式",
+    "RingBuffer 的写入指针与环回状态"
+  ],
+  "source_pages": [
+    902,
+    903
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1870_环形缓冲区按时间顺序输出消息",
+  "_chunk_pages": [
+    901,
+    904
+  ]
+}

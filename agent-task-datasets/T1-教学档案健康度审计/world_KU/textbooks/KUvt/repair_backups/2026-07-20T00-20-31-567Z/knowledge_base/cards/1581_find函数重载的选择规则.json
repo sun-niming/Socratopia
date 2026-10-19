@@ -1,0 +1,53 @@
+{
+  "title": "Find函数重载的选择规则",
+  "definition": "当多个Find函数版本都能匹配调用时，编译器会根据重载决议选择更具体的版本。教材强调，在所有重载版本中，编译器总是倾向于选择最具体的函数；如果非模板函数与某个函数模板实例化具有同等匹配程度，则优先选择非模板函数。显式指定模板实参时，可以直接调用指定的模板实例，而不依赖模板参数推导。",
+  "key_points": [
+    "不显式指定模板参数时，编译器可根据实参推导模板参数。",
+    "显式写出模板实参时，例如`Find<int>(...)`，可以直接调用指定的模板实例。",
+    "指针参数形式可能匹配指针专用重载，因此会优先调用该重载。",
+    "`const char*`既可能显式调用通用模板实例，也可能在不显式指定模板参数时匹配专门的重载；具体取决于声明的重载集合和重载决议。"
+  ],
+  "examples": [
+    "`Find(mylnt, intArray, sizeArray)`：根据参数推导调用整数版本。",
+    "`Find<int>(mylnt, intArray, sizeArray)`：显式调用`Find<int>`。",
+    "`Find(myDouble, doubleArray, sizeArray)`：根据参数推导调用`Find<double>`。",
+    "`Find(intPointer, pointerArray, sizeArray)`：调用针对指针的Find重载。",
+    "`Find<SpreadsheetCell>(celll, cellArray, sizeArray)`：显式调用`Find<SpreadsheetCell>`。"
+  ],
+  "misconceptions": [
+    "误以为所有可匹配的重载都有相同优先级。",
+    "误以为显式指定模板实参后仍会按普通模板参数推导来决定模板类型。",
+    "误以为指针参数调用一定使用通用Find，而不会匹配指针专用重载。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "调用`Find(mylnt, intArray, sizeArray)`时，模板参数如何确定？",
+      "a": "编译器根据实参类型推导出`T`为`int`，调用整数版本的Find。"
+    },
+    {
+      "q": "调用`Find<int>(mylnt, intArray, sizeArray)`与不带`<int>`的调用有什么区别？",
+      "a": "前者显式指定模板实参为`int`，后者由编译器根据实参自动推导`T`为`int`。"
+    },
+    {
+      "q": "当非模板函数和函数模板实例化同样匹配时，通常优先选择哪一个？",
+      "a": "优先选择非模板函数。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "函数模板重载",
+    "模板参数推导",
+    "重载决议"
+  ],
+  "source_pages": [
+    765,
+    766
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1581_find函数重载的选择规则",
+  "_chunk_pages": [
+    765,
+    768
+  ]
+}

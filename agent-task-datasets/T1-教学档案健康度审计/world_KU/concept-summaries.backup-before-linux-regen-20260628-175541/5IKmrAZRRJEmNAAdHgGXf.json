@@ -1,0 +1,131 @@
+{
+  "conversationId": "5IKmrAZRRJEmNAAdHgGXf",
+  "generatedAt": 1782449559916,
+  "pagesRange": "p.231-239",
+  "sections": [
+    {
+      "type": "tldr",
+      "content": "这一节先把 JavaScript 的三层边界和类型框架搭起来：先分清内置对象、BOM、DOM，再掌握基本类型/引用类型，以及 `typeof` 的几个常见坑。"
+    },
+    {
+      "type": "narrative",
+      "content": "一开始是在搭地图：JavaScript 里的内置对象、BOM 和 DOM 分别管什么，先把边界分开。接着内容收拢到变量和数据类型，重点看“变量能不能改”“类型会不会变”，最后把 `undefined`、`null` 和 `typeof` 的几个容易混淆的点钉牢。"
+    },
+    {
+      "type": "concepts",
+      "items": [
+        {
+          "name": "JavaScript 内置对象",
+          "body": "JavaScript 语言自带的工具，不是自己临时定义出来的。常见的有 `Math`、`Date`、`Array`。\n\n- `Math`：偏数学计算\n- `Date`：偏时间处理\n- `Array`：偏一组数据的处理\n\n它们属于 JavaScript 自己这一层，不是 BOM，也不是 DOM。"
+        },
+        {
+          "name": "BOM",
+          "body": "Browser Object Model，浏览器对象模型，管的是**浏览器这一层**。\n\n可以先记成：如果是窗口、地址跳转、新窗口这类操作，更像 BOM。"
+        },
+        {
+          "name": "DOM",
+          "body": "Document Object Model，文档对象模型，管的是**页面/文档这一层**。\n\n如果是拿页面里的标题、按钮、文字，或者修改元素内容和样式，更像 DOM。"
+        },
+        {
+          "name": "弱类型变量",
+          "body": "JavaScript 的变量是弱类型变量，意思是：**同一个变量不固定死一种类型**。\n\n例如：\n\n```javascript\\nvar x = 10;\\nx = \"hello\";\n```\n\n这里变量名没变，但里面存的值可以从数字变成字符串。"
+        },
+        {
+          "name": "变量、常量",
+          "body": "- `var`、`let`：声明变量，值可以改\n- `const`：声明常量，绑定后的值不允许再改\n\n课堂里强调的是：变量里存的值可以换，`const` 则不能把绑定后的值再改掉。"
+        },
+        {
+          "name": "基本类型 vs 引用类型",
+          "body": "JavaScript 先分成两大类：\n\n- **基本类型**：值本身就是那个值\n- **引用类型**：变量里存的通常是对对象的引用\n\n课堂里提到的 7 种基本类型是：`string`、`number`、`boolean`、`undefined`、`null`、`symbol`、`bigint`；外加 1 种引用类型 `object`。\n\n直观理解：\n- 基本类型更像一个个独立的值\n- `object` 更像装着很多内容的一包结构"
+        },
+        {
+          "name": "typeof",
+          "body": "`typeof` 用来粗看一个值的大类，返回的是小写字符串。\n\n课堂里重点记住这些结果：\n- `typeof \"123\"` → `\"string\"`\n- `typeof 123` → `\"number\"`\n- `typeof true` → `\"boolean\"`\n- `typeof undefined` → `\"undefined\"`\n- `typeof null` → `\"object\"`\n- `typeof []` → `\"object\"`\n\n它适合先粗分，但不是完全精确的判别器。"
+        },
+        {
+          "name": "`undefined` 和 `null`",
+          "body": "这两个都表示“空”，但来源不同：\n\n- `undefined`：更像“还没被赋值”“系统默认空着”\n- `null`：更像“我故意把它设成空”\n\n课堂里反复强调：它们不一样，不能混成一个概念。"
+        },
+        {
+          "name": "`symbol` 和 `bigint`",
+          "body": "这两个是课堂里补到的另外两种基本类型：\n\n- `symbol`：更像唯一标签，不容易撞名\n- `bigint`：用来表示特别大的整数"
+        }
+      ]
+    },
+    {
+      "type": "key-terms",
+      "items": [
+        {
+          "term": "内置对象",
+          "definition": "JavaScript 语言自带的对象工具，如 `Math`、`Date`、`Array`。"
+        },
+        {
+          "term": "BOM",
+          "definition": "浏览器对象模型，负责浏览器窗口、地址等浏览器层面的事。"
+        },
+        {
+          "term": "DOM",
+          "definition": "文档对象模型，负责页面元素、内容和结构。"
+        },
+        {
+          "term": "弱类型变量",
+          "definition": "变量不固定死一种类型，同一个变量后面可以换不同类型的值。"
+        },
+        {
+          "term": "`const`",
+          "definition": "声明常量的关键字，绑定后的值不允许再改。"
+        },
+        {
+          "term": "基本类型",
+          "definition": "值本身就是那个值的类型，如 `string`、`number`、`boolean`、`undefined`、`null`、`symbol`、`bigint`。"
+        },
+        {
+          "term": "引用类型",
+          "definition": "以对象为代表的类型，变量里通常存的是对对象的引用。"
+        },
+        {
+          "term": "`typeof`",
+          "definition": "用来查看一个值的大类，返回字符串结果。"
+        },
+        {
+          "term": "`undefined`",
+          "definition": "表示还没被赋值，或者值缺失。"
+        },
+        {
+          "term": "`null`",
+          "definition": "表示故意设为空。"
+        }
+      ]
+    },
+    {
+      "type": "review-questions",
+      "items": [
+        {
+          "question": "如果我要打开新窗口、跳转地址，更像是 BOM 还是 DOM？",
+          "hint": "想想这是在操作浏览器本身，还是页面元素。",
+          "answer": "更像 **BOM**，因为这类操作管的是浏览器窗口和地址。"
+        },
+        {
+          "question": "如果我要修改页面里的标题文字，或者给按钮加样式，更像是 BOM 还是 DOM？",
+          "hint": "看对象是浏览器窗口，还是页面里的元素。",
+          "answer": "更像 **DOM**，因为它管页面里的元素、内容和结构。"
+        },
+        {
+          "question": "`typeof \"123\"`、`typeof 123`、`typeof true` 分别会是什么？",
+          "hint": "分别对应文本、数值、判断。",
+          "answer": "分别是 `\"string\"`、`\"number\"`、`\"boolean\"`。"
+        },
+        {
+          "question": "`undefined` 和 `null` 有什么区别？",
+          "hint": "一个更像没赋值，一个更像故意设为空。",
+          "answer": "`undefined` 更像“还没被赋值”；`null` 更像“故意把它设成空”。"
+        },
+        {
+          "question": "`typeof null` 和 `typeof []` 的结果是什么？这说明了什么？",
+          "hint": "注意 `typeof` 只是粗分，不是完全精确。",
+          "answer": "它们的结果都是 `\"object\"`。这说明 `typeof` 只能先粗分类型，`null` 和数组都容易落到对象这一类里。"
+        }
+      ]
+    }
+  ]
+}

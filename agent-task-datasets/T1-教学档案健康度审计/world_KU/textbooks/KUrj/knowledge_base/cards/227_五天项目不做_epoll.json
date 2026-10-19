@@ -1,0 +1,38 @@
+{
+  "title": "五天项目不做 epoll",
+  "definition": "epoll 适合高并发，但需要非阻塞 IO、事件循环和状态管理。五天项目的重点是做出稳定、可解释的 Web Server，因此采用 fork 并发更直观，也足以展示 Linux 进程和网络编程能力。",
+  "key_points": [
+    "epoll 适合高并发，但实现复杂度更高。",
+    "五天项目优先稳定、可解释，而不是追求极致并发。",
+    "fork 并发更直观，足以满足项目目标。"
+  ],
+  "examples": [
+    "用 fork 处理并发请求，而不是先做事件循环。"
+  ],
+  "misconceptions": [
+    "并发越强的方案越适合短周期项目。",
+    "不做 epoll 不代表技术含量低，而是目标不同。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么五天内不做 epoll？",
+      "a": "因为 epoll 适合高并发但需要非阻塞 IO、事件循环和状态管理；五天项目更需要稳定、可解释的 Web Server，fork 并发更直观。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "fork 后父进程关 client_fd",
+    "回收子进程"
+  ],
+  "source_pages": [
+    129,
+    132
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "227_五天项目不做_epoll",
+  "_chunk_pages": [
+    129,
+    132
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "title": "C++程序的main函数",
+  "definition": "原文在介绍C++基础内容时出现了main()，它表示C++程序中常见的程序入口函数写法。当前原文没有给出main函数的完整定义、返回类型或参数规则。",
+  "key_points": [
+    "原文明确出现了main()这一函数名称。",
+    "当前材料没有提供可据以完整讲解的main函数语法细节。"
+  ],
+  "examples": [
+    "原文出现的形式：main()"
+  ],
+  "misconceptions": [
+    "不能仅根据“main()”断定所有C++程序都必须严格写成无参数的main()形式。",
+    "main()是函数表示，不应误解为C++关键字。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "原文中出现了哪个常见的C++程序入口函数名称？",
+      "a": "main()。"
+    },
+    {
+      "q": "当前原文是否说明了main函数的所有合法声明形式？",
+      "a": "没有，当前原文只出现了main()，未说明完整声明形式。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++函数"
+  ],
+  "source_pages": [
+    13,
+    16
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 main函数合法声明形式 标准程序入口函数",
+  "concept_id": "009_c_程序的main函数",
+  "_chunk_pages": [
+    13,
+    16
+  ]
+}

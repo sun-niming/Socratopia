@@ -1,0 +1,44 @@
+{
+  "title": "跨类型 Grid 复制时必须通过公共接口访问源对象",
+  "definition": "在 Grid<T> 的成员模板拷贝构造函数中，源对象是 Grid<E>，目标对象是 Grid<T>。由于这两个类型不是同一类型，不能依赖一个实例化类型直接访问另一个实例化类型的私有成员；复制源网格的数据时，应通过源对象的公共方法 getWidth()、getHeight() 和 at() 访问。",
+  "key_points": [
+    "成员模板拷贝构造函数可以先使用 src.getWidth() 和 src.getHeight() 获取源网格尺寸。",
+    "逐元素复制时使用 src.at(i, j) 读取源网格元素。",
+    "源对象和目标对象分别属于 Grid<E> 与 Grid<T>，因此应通过公共访问方法完成跨实例化类型的数据访问。",
+    "示例复制逻辑是双重循环：对每个网格坐标 $(i,j)$ 执行 $\\texttt{m\\_cells[i][j] = src.at(i, j);}$。"
+  ],
+  "examples": [
+    "构造函数可先委托分配存储：$\\texttt{Grid<T>::Grid(const Grid<E>\\& src) : Grid\\{src.getWidth(), src.getHeight()\\} \\{\\ldots\\}}$",
+    "逐元素复制：$$\\texttt{for (size\\_t i\\{0\\}; i < m\\_width; i++) \\{}\\\\\\texttt{\\quad for (size\\_t j\\{0\\}; j < m\\_height; j++) \\{}\\\\\\texttt{\\quad\\quad m\\_cells[i][j] = src.at(i, j);}}$$"
+  ],
+  "misconceptions": [
+    "不能因为代码位于 Grid<T> 的成员函数中，就认为它可以直接访问 Grid<E> 对象的私有成员。教材要求通过 getWidth()、getHeight() 和 at() 等公共方法访问源对象。",
+    "跨类型复制不仅是把对象指针转换一下，还需要按照目标网格的元素类型逐个复制数据。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "跨类型 Grid 复制时为什么要调用 src.at(i, j)，而不是直接访问 src 的内部数组？",
+      "a": "因为源对象是 Grid<E>，目标对象是 Grid<T>，两者不是同一类型；应通过 getWidth()、getHeight() 和 at() 等公共方法访问源对象。"
+    },
+    {
+      "q": "成员模板拷贝构造函数中的双重循环完成什么任务？",
+      "a": "它遍历网格的宽度和高度，将源网格每个位置的元素复制到目标网格。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "类模板中的跨类型拷贝构造函数",
+    "访问控制和公共成员函数"
+  ],
+  "source_pages": [
+    387,
+    388
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "787_跨类型_grid_复制时必须通过公共接口访问源对象",
+  "_chunk_pages": [
+    385,
+    388
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "title": "变量名前缀的使用原则",
+  "definition": "变量名前缀可以表示变量的类型或用途，例如用 m 表示数据成员、用 s 表示静态变量或静态数据成员、用 k 表示常量、用 b 或 is 表示布尔值。但前缀会把某种实现信息固化在名称中；如果变量的实现属性发生变化而名称未同步修改，名称就会产生误导。因此，是否使用前缀应遵循团队或公司的统一约定。",
+  "key_points": [
+    "m 常用于表示类的数据成员，例如 mData。",
+    "s 或 ms 可用于表示静态变量或静态数据成员，例如 sLookupTable、msLookupTable。",
+    "k 可用于表示常量，例如 kMaximumLength；也有程序员使用全大写名称表示常量。",
+    "b 或 is 可用于表示布尔值，例如 bCompleted、isCompleted。",
+    "如果组织已有命名约定，即使个人偏好不同，也应遵守统一标准。"
+  ],
+  "examples": [
+    "const int kMaximumLength{100};",
+    "bool isCompleted{false};",
+    "class Example { int mData; };"
+  ],
+  "misconceptions": [
+    "使用前缀不是 C++ 语言强制要求，而是一种编码风格约定。",
+    "前缀并不能保证变量永远具有对应属性；例如成员变量从静态变为非静态后，旧前缀可能造成误导。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "使用变量名前缀可能带来什么维护问题？",
+      "a": "前缀可能记录变量当前的实现属性。如果属性后来改变而名称未修改，名称会继续表达错误的语义，从而误导维护者。"
+    },
+    {
+      "q": "k 前缀通常表示什么？",
+      "a": "通常表示常量，例如 kMaximumLength；不过也有团队使用全大写名称表示常量。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [],
+  "source_pages": [
+    133,
+    133
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "264_变量名前缀的使用原则",
+  "_chunk_pages": [
+    133,
+    136
+  ]
+}

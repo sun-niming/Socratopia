@@ -1,0 +1,49 @@
+{
+  "title": "Wireshark实验：DNS客户端交互",
+  "definition": "该Wireshark实验用于观察DNS客户端的实际运行过程。DNS用于将因特网主机名转换为IP地址；从DNS客户端角度看，客户向本地DNS服务器发送请求，并接收该服务器返回的响应。DNS服务器之间为解析请求而进行的递归或迭代通信，通常对DNS客户不可见。",
+  "key_points": [
+    "DNS的用途是将因特网主机名转换为IP地址。",
+    "DNS客户端向本地DNS服务器发送请求。",
+    "DNS客户端接收本地DNS服务器返回的响应。",
+    "DNS服务器之间可能通过递归或迭代方式解析请求，但这些内部过程通常不为DNS客户所见。",
+    "实验使用Wireshark观察运行中的DNS过程。"
+  ],
+  "examples": [
+    "从DNS客户端角度看，基本交互为：$$\\text{DNS客户}\\rightarrow\\text{本地DNS服务器：请求}$$ $$\\text{本地DNS服务器}\\rightarrow\\text{DNS客户：响应}$$"
+  ],
+  "misconceptions": [
+    "DNS客户端通常不直接负责与整个DNS等级结构中的所有服务器通信。",
+    "递归或迭代解析是DNS服务器之间可能进行的内部过程，不是客户端必须直接观察到的过程。",
+    "DNS的作用不是传输网页内容，而是进行主机名到IP地址的转换。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "DNS客户端通常向谁发送DNS请求？",
+      "a": "向本地DNS服务器发送请求。"
+    },
+    {
+      "q": "DNS的主要用途是什么？",
+      "a": "将因特网主机名转换为IP地址。"
+    },
+    {
+      "q": "DNS服务器之间的递归或迭代解析过程对DNS客户端是否通常可见？",
+      "a": "通常不可见；从客户端角度看，主要是向本地DNS服务器发送请求并接收响应。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "DNS",
+    "IP地址"
+  ],
+  "source_pages": [
+    137,
+    140
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "349_wireshark实验_dns客户端交互",
+  "_chunk_pages": [
+    137,
+    140
+  ]
+}

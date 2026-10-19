@@ -1,0 +1,45 @@
+{
+  "title": "在类外定义成员函数与作用域解析运算符",
+  "definition": "成员函数可以先在类定义中声明，再在类外提供函数体。类外定义时，函数名前要写类名和作用域解析运算符::，以表明该函数属于哪个类。例如SpreadsheetCell::setValue表示SpreadsheetCell类的setValue成员函数。",
+  "key_points": [
+    "类内声明和类外定义的函数签名必须对应。",
+    "类外定义setValue时使用void SpreadsheetCell::setValue(double value)。",
+    "类外定义getValue时使用double SpreadsheetCell::getValue() const。",
+    "作用域解析运算符::用于指定名称所属的作用域。",
+    "类外定义的成员函数仍然可以访问该类的私有数据成员，例如m_value。"
+  ],
+  "examples": [
+    "void SpreadsheetCell::setValue(double value)\n{\n    m_value = value;\n}\n\ndouble SpreadsheetCell::getValue() const\n{\n    return m_value;\n}"
+  ],
+  "misconceptions": [
+    "SpreadsheetCell::setValue中的::不是调用运算符，而是作用域解析运算符。",
+    "成员函数定义写在类外并不会使它变成非成员函数；SpreadsheetCell::前缀表明它仍然属于SpreadsheetCell。",
+    "类外定义时不能漏掉类名和::，否则就不是该类成员函数的正确类外定义。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么类外定义setValue时要写SpreadsheetCell::setValue？",
+      "a": "这是为了用作用域解析运算符::指定setValue属于SpreadsheetCell类。"
+    },
+    {
+      "q": "类外定义的SpreadsheetCell成员函数能否访问m_value？",
+      "a": "能。它仍然是SpreadsheetCell的成员函数，因此可以访问该类的私有成员m_value。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++类成员函数",
+    "C++作用域解析运算符"
+  ],
+  "source_pages": [
+    229,
+    232
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "308_在类外定义成员函数与作用域解析运算符",
+  "_chunk_pages": [
+    229,
+    232
+  ]
+}

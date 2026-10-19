@@ -1,0 +1,40 @@
+{
+  "title": "表单按钮类型",
+  "definition": "在表单中，submit按钮用于提交数据，reset按钮用于重置表单，button是普通按钮。button的内容更灵活，可以包含图标等内容，因此比 input type=\"button\" 更具可定制性。",
+  "key_points": [
+    "submit：提交数据",
+    "reset：重置表单",
+    "button：普通按钮，且更便于自定义内容"
+  ],
+  "examples": [
+    "<input type=\"submit\">",
+    "<input type=\"reset\">",
+    "<button><i>★</i>提交</button>"
+  ],
+  "misconceptions": [
+    "以为reset也会把数据提交到服务器",
+    "以为button默认一定会提交表单",
+    "以为button和input type=\"button\"在内容表现上完全一样"
+  ],
+  "qa_pairs": [
+    {
+      "q": "submit、reset、button分别有什么作用？",
+      "a": "submit用于提交数据，reset用于重置表单，button是普通按钮。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "HTML表单基础"
+  ],
+  "source_pages": [
+    73,
+    76
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "108_表单按钮类型",
+  "_chunk_pages": [
+    73,
+    76
+  ]
+}

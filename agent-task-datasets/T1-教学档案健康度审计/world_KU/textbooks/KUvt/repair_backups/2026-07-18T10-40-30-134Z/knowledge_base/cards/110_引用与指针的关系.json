@@ -1,0 +1,52 @@
+{
+  "title": "引用与指针的关系",
+  "definition": "引用可以作为被取地址的对象使用。对引用取地址，得到的是其所引用对象的地址，因此得到的指针指向原对象，而不是指向某个独立的“引用对象”。此外，引用本身也可以引用一个指针变量，形成“指针的引用”。",
+  "key_points": [
+    "`int& xRef { x };`后，`&xRef`与`&x`表示同一个对象地址。",
+    "`int* xPtr { &xRef };`使`xPtr`指向`x`。",
+    "通过`*xPtr = 100;`可以修改`x`的值。",
+    "`int*& ptrRef { intP };`表示`ptrRef`是对指针变量`intP`的引用；通过`ptrRef`修改指针值，也会改变`intP`。"
+  ],
+  "examples": [
+    "`int& xRef { x };`",
+    "`int* xPtr { &xRef };`",
+    "`*xPtr = 100;`",
+    "`int* intP { nullptr };`",
+    "`int*& ptrRef { intP };`"
+  ],
+  "misconceptions": [
+    "对引用取地址不会得到“指向引用本身”的特殊指针，而是得到指向被引用对象的指针。",
+    "`int*&`不是指向指针的普通指针，而是引用一个指针变量。",
+    "修改`ptrRef`的指针值会同时修改`intP`，因为二者表示同一个指针变量。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "若`xRef`引用`x`，`int* xPtr { &xRef };`中的`xPtr`指向什么？",
+      "a": "指向`x`，因为引用的地址就是被引用对象的地址。"
+    },
+    {
+      "q": "`int*& ptrRef { intP };`表示什么？",
+      "a": "表示`ptrRef`是`intP`这个指针变量的引用。"
+    },
+    {
+      "q": "通过`*xPtr = 100`会改变什么？",
+      "a": "会改变`x`的值；如果`xPtr`指向`x`，则`x`变为100。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "左值引用",
+    "指针与取地址运算"
+  ],
+  "source_pages": [
+    79,
+    80
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "110_引用与指针的关系",
+  "_chunk_pages": [
+    77,
+    80
+  ]
+}

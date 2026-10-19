@@ -1,0 +1,42 @@
+{
+  "title": ":first-child 和 :first-of-type",
+  "definition": "`:first-child` 表示一组兄弟元素中的第一个元素；`:first-of-type` 表示一组兄弟元素中其类型的第一个元素。",
+  "key_points": [
+    "`:first-child` 看的是兄弟元素中的“第一个”。",
+    "`:first-of-type` 看的是同类型兄弟元素中的“第一个”。",
+    "二者都属于结构型伪类。"
+  ],
+  "examples": [
+    "li:first-child { ... }",
+    "p:first-of-type { ... }"
+  ],
+  "misconceptions": [
+    "`:first-child` 不等于“某类型中的第一个”，它是所有兄弟中的第一个。",
+    "`:first-of-type` 只看同类型元素，不看其他类型元素的顺序。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`:first-child` 与 `:first-of-type` 的区别是什么？",
+      "a": "`:first-child` 选一组兄弟元素中的第一个；`:first-of-type` 选同类型兄弟元素中的第一个。"
+    },
+    {
+      "q": "`:first-of-type` 为什么可能和 `:first-child` 结果不同？",
+      "a": "因为它只统计同类型元素，而 `:first-child` 统计所有兄弟元素中的第一个。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "伪类选择器"
+  ],
+  "source_pages": [
+    97,
+    100
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "154_first_child_和_first_of_type",
+  "_chunk_pages": [
+    97,
+    100
+  ]
+}

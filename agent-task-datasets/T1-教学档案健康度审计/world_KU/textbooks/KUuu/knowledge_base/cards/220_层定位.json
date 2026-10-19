@@ -1,0 +1,41 @@
+{
+  "title": "层定位",
+  "definition": "CSS 定位可以通过 position 等属性实现“层定位”，即让一个元素像图层一样叠放在另一个元素之上。层定位通常分三步：先用 position 确定定位方式，再用 left、right、top、bottom 确定位置，最后用 z-index 确定层叠顺序；z-index 值越大，元素越显示在上面。",
+  "key_points": [
+    "position 用来决定定位方式",
+    "left/right/top/bottom 用来决定元素位置",
+    "z-index 用来决定层叠顺序，值大的在上面"
+  ],
+  "examples": [
+    "position: relative; left: 20px; top: 10px; z-index: 2;"
+  ],
+  "misconceptions": [
+    "只设置 left、top 就能定位；实际上还需要先设置 position",
+    "z-index 不是越小越靠上，而是值越大的元素显示在上面"
+  ],
+  "qa_pairs": [
+    {
+      "q": "层定位通常分哪三个步骤？",
+      "a": "先确定定位方式，再确定元素位置，最后确定元素层叠顺序。"
+    },
+    {
+      "q": "z-index 的作用是什么？",
+      "a": "决定元素的上下层叠顺序，z-index 值大的元素会显示在上面。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "CSS 属性"
+  ],
+  "source_pages": [
+    137,
+    140
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "220_层定位",
+  "_chunk_pages": [
+    137,
+    140
+  ]
+}

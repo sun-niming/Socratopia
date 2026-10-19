@@ -1,0 +1,44 @@
+{
+  "title": "使用 runtime_error 表示运行时读取错误",
+  "definition": "std::runtime_error 是定义在 <stdexcept> 中、从 std::exception 派生的标准异常类。它可以在构造时接收描述错误的字符串，适合表示运行时发生的错误，例如文件无法正确读取。捕获为 std::exception 类型时，也可以通过 what() 获取异常描述。",
+  "key_points": [
+    "runtime_error 定义在 <stdexcept> 中。",
+    "runtime_error 派生于 exception。",
+    "可以使用字符串构造 runtime_error，例如 runtime_error(\"Error reading the file.\")。",
+    "异常对象的 what() 方法可以取得异常描述。"
+  ],
+  "examples": [
+    "抛出运行时读取错误：\nthrow runtime_error(\"Error reading the file.\");\n\ntry {\n    myInts = readIntegerFile(filename);\n} catch (const exception& e) {\n    cerr << e.what() << endl;\n}"
+  ],
+  "misconceptions": [
+    "错误地认为 runtime_error 不是 exception 的派生类。",
+    "错误地认为捕获 exception 类型后无法获取具体异常的描述。",
+    "错误地认为 runtime_error 必须使用无参数默认构造函数。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "runtime_error 与 exception 有什么关系？",
+      "a": "runtime_error 派生于 exception，因此 catch (const exception& e) 可以捕获 runtime_error 对象。"
+    },
+    {
+      "q": "如何获得异常对象中保存的描述字符串？",
+      "a": "调用异常对象的 what() 方法，例如 e.what()。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "异常类继承关系",
+    "C++文件输入流"
+  ],
+  "source_pages": [
+    442,
+    443
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "899_使用_runtime_error_表示运行时读取错误",
+  "_chunk_pages": [
+    441,
+    444
+  ]
+}

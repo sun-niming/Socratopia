@@ -1,0 +1,45 @@
+{
+  "title": "C++模块接口文件与命名模块声明",
+  "definition": "C++20模块可以通过模块接口文件（原文示例使用.cppm扩展名）声明一个命名模块。命名模块接口通常以`export module 模块名;`开头，表示该文件提供名为“模块名”的模块接口；接口中声明为`export`的类、函数或别名可以被模块使用者导入。",
+  "key_points": [
+    "模块接口文件示例使用`.cppm`扩展名，例如`Person.cppm`。",
+    "命名模块声明的形式是：`export module person;`。",
+    "模块接口中可以导入依赖，例如`import <string>;`。",
+    "只有显式写出`export`的声明，才会成为模块对外提供的接口内容；原文示例使用了`export class Person`。"
+  ],
+  "examples": [
+    "模块接口声明：`export module person;`",
+    "导入字符串库：`import <string>;`",
+    "导出类声明：`export class Person { /* ... */ };`"
+  ],
+  "misconceptions": [
+    "模块文件不一定只能使用`.cppm`扩展名；原文只是给出了`.cppm`作为示例扩展名。",
+    "写出`module person;`与写出`export module person;`作用不同：前者不是模块接口的导出声明，后者用于声明并导出命名模块接口。",
+    "模块中的所有声明并不会自动成为外部可见接口，通常需要使用`export`。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "命名模块接口的典型声明是什么？",
+      "a": "典型形式是`export module person;`，它声明名为`person`的模块接口。"
+    },
+    {
+      "q": "模块接口中的类如何对模块使用者导出？",
+      "a": "在类声明前使用`export`，例如`export class Person { /* ... */ };`。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++头文件与源文件的基本组织方式"
+  ],
+  "source_pages": [
+    353,
+    354
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 named module interface unit export module .cppm export class syntax official documentation",
+  "concept_id": "455_c_模块接口文件与命名模块声明",
+  "_chunk_pages": [
+    353,
+    356
+  ]
+}

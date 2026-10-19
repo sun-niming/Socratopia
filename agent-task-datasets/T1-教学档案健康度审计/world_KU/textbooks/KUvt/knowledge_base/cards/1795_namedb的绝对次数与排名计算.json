@@ -1,0 +1,49 @@
+{
+  "title": "NameDB的绝对次数与排名计算",
+  "definition": "`getAbsoluteNumber(name)`返回指定名字的出现次数；如果vector中不存在该名字，则返回`-1`。`getNameRank(name)`先调用`getAbsoluteNumber`获得该名字的次数，若返回`-1`则同样返回`-1`；否则从排名1开始遍历所有条目，每发现一个出现次数严格高于目标次数的名字，就将排名加1。",
+  "key_points": [
+    "绝对次数表示目标名字在输入文件中出现的计数。",
+    "排名规则是：出现次数越高，排名越靠前；所有计数严格高于目标名字的条目数量决定其排名增量。",
+    "若目标名字不存在，两个查询方法都返回`-1`。",
+    "排名计算需要先查找目标次数，再遍历整个vector统计更高计数的名字。"
+  ],
+  "examples": [
+    "若目标名字的次数为`num`，排名可表示为：$$rank=1+\\left|\\{entry\\mid entry.second>num\\}\\right|.$$",
+    "若有两个名字的次数严格高于`Daniel`，则`Daniel`的排名为3。若没有名字的次数高于它，则排名为1。"
+  ],
+  "misconceptions": [
+    "排名不是目标名字在vector中的位置；它由计数大小决定。",
+    "与目标名字次数相同的名字不会使目标排名增加，因为比较条件是`entry.second > num`。",
+    "不存在的名字不是排名为0，而是返回`-1`。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`getAbsoluteNumber`找不到名字时返回什么？",
+      "a": "返回`-1`。"
+    },
+    {
+      "q": "如果目标名字的出现次数为num，哪些条目会使它的排名增加？",
+      "a": "所有`entry.second > num`的条目都会使排名增加1。"
+    },
+    {
+      "q": "出现次数最高且没有并列更高计数的名字排名是多少？",
+      "a": "排名为1。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "vector中的线性搜索",
+    "计数与比较"
+  ],
+  "source_pages": [
+    866,
+    867
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1795_namedb的绝对次数与排名计算",
+  "_chunk_pages": [
+    865,
+    868
+  ]
+}

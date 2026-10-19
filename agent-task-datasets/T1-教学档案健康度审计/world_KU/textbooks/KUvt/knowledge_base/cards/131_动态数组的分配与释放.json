@@ -1,0 +1,53 @@
+{
+  "title": "动态数组的分配与释放",
+  "definition": "C++可以使用new[]在自由存储区中动态分配数组。分配成功后，返回的指针可以像普通数组名一样通过下标访问元素。数组使用完毕后，必须使用delete[]释放对应内存，并可将指针设置为nullptr。使用new[]分配的数组必须使用delete[]释放，不能使用不匹配的释放方式。",
+  "key_points": [
+    "动态数组示例：`int* myVariableSizedArray { new int[10] };`。",
+    "动态数组可以通过下标访问和修改，例如：`myVariableSizedArray[3] = 2;`。",
+    "释放数组必须写成`delete[] myVariableSizedArray;`，delete后的方括号表示释放的是数组。",
+    "释放后可写成`myVariableSizedArray = nullptr;`，避免指针继续保存已释放内存的地址。",
+    "应优先使用C++的new/delete或new[]/delete[]，避免使用C语言的malloc/free。",
+    "每次调用new都应对应delete；每次调用new[]都应对应delete[]，否则可能发生内存泄漏。"
+  ],
+  "examples": [
+    "`int* myVariableSizedArray { new int[10] };`",
+    "`myVariableSizedArray[3] = 2;`",
+    "`delete[] myVariableSizedArray;`",
+    "`myVariableSizedArray = nullptr;`"
+  ],
+  "misconceptions": [
+    "使用delete释放new[]分配的数组是错误的；数组必须使用delete[]。",
+    "delete[]只释放数组本身占用的内存，不会自动把指针变量设置为nullptr。",
+    "将指针设置为nullptr不能代替delete；应先释放内存，再根据需要将指针设为nullptr。",
+    "只要程序结束就不需要释放动态数组；在程序运行期间不释放仍可能造成内存泄漏。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "使用new[]分配的动态数组应如何释放？",
+      "a": "使用delete[]释放，例如`delete[] myVariableSizedArray;`。"
+    },
+    {
+      "q": "为什么动态数组释放后常将指针设置为nullptr？",
+      "a": "为了避免指针继续保存已经释放的内存地址，减少误用悬空指针的风险。"
+    },
+    {
+      "q": "new[]和delete是否可以配对使用？",
+      "a": "不可以。new[]必须与delete[]配对，new才与delete配对。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++指针和数组基础"
+  ],
+  "source_pages": [
+    73,
+    73
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "131_动态数组的分配与释放",
+  "_chunk_pages": [
+    73,
+    76
+  ]
+}

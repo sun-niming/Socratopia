@@ -1,0 +1,47 @@
+{
+  "title": "std::chrono::duration 表示时间间隔",
+  "definition": "`std::chrono::duration` 是用于表示两个时间点之间间隔的模板类。它保存滴答数（tick count）和滴答周期（tick period）；滴答周期表示两个相邻滴答之间的秒数，是一个编译期 `ratio` 常量，因此可以表示 1 秒的分数。",
+  "key_points": [
+    "duration 表示的是时间间隔，而不是某一个具体时间点。",
+    "duration 由滴答数和滴答周期共同确定实际时间长度。",
+    "滴答周期是编译期 ratio 常量，可以是 1 秒的分数。",
+    "`duration` 是模板化的类。"
+  ],
+  "examples": [
+    "可以把一个 duration 理解为：$$\\text{时间间隔}=\\text{滴答数}\\times\\text{滴答周期}$$例如，若滴答数为 $60$、滴答周期为 $\\frac{1}{60}$ 秒，则时间间隔为 $1$ 秒。"
+  ],
+  "misconceptions": [
+    "duration 不是时钟本身，也不是表示日期或绝对时刻的时间点；它表示两个时间点之间的间隔。",
+    "滴答周期不一定是 1 秒，也可以是 1 秒的分数。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`std::chrono::duration` 表示什么？",
+      "a": "表示两个时间点之间的时间间隔。"
+    },
+    {
+      "q": "duration 保存哪两个核心信息？",
+      "a": "保存滴答数和滴答周期。"
+    },
+    {
+      "q": "滴答周期有什么特点？",
+      "a": "滴答周期表示两个滴答之间的秒数，是编译期 ratio 常量，可以表示 1 秒的分数。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "std::ratio 表示编译期有理数",
+    "时间点与时间间隔的基本概念"
+  ],
+  "source_pages": [
+    684,
+    684
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1428_std_chrono_duration_表示时间间隔",
+  "_chunk_pages": [
+    681,
+    684
+  ]
+}

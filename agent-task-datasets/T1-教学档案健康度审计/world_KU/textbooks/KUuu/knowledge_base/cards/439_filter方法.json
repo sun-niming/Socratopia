@@ -1,0 +1,43 @@
+{
+  "title": "filter方法",
+  "definition": "`filter()` 用于过滤数组：它会把回调结果为 `true` 的元素保留下来，组成一个新数组返回。",
+  "key_points": [
+    "返回新数组",
+    "只有回调返回 `true` 的元素才会进入新数组",
+    "用于筛选满足条件的元素"
+  ],
+  "examples": [
+    "[1,2,3,4].filter(x => x % 2 === 0)  // [2,4]",
+    "['🐕','🐶','🐕'].filter(x => x === '🐶')  // ['🐶']"
+  ],
+  "misconceptions": [
+    "`filter()` 会保留回调返回 `false` 的元素；实际上保留的是 `true`",
+    "`filter()` 返回原数组；实际上返回新数组"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`filter()` 如何决定保留哪些元素？",
+      "a": "回调返回 `true` 的元素会被保留。"
+    },
+    {
+      "q": "`filter()` 的返回值是什么？",
+      "a": "新数组。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "回调函数",
+    "Array对象与创建方式"
+  ],
+  "source_pages": [
+    307,
+    308
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "439_filter方法",
+  "_chunk_pages": [
+    305,
+    308
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "title": "MVC 架构模式",
+  "definition": "原文第184页出现了 `Model-View-Controller` 和缩写 `MVC`，表示模型—视图—控制器架构模式。给定片段未详细说明三部分的职责或交互流程。",
+  "key_points": [
+    "MVC 是 `Model-View-Controller` 的缩写。",
+    "Model 通常译为模型，View 通常译为视图，Controller 通常译为控制器。",
+    "原文还把 MVC 与 GUI 内容放在同一片段附近，但没有提供完整解释。"
+  ],
+  "examples": [
+    "MVC 的三个组成部分可写作：`Model`、`View`、`Controller`。",
+    "原文中的排版词语：`Model-View-Controller (MVC)`。"
+  ],
+  "misconceptions": [
+    "MVC 不是某一种 C++ 语法，而是一种软件架构或设计模式。",
+    "不能仅凭给定片段确定该教材对 Model、View、Controller 之间依赖方向的具体规定。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "MVC 是什么的缩写？",
+      "a": "Model-View-Controller，即模型—视图—控制器。"
+    },
+    {
+      "q": "MVC 的三个组成部分是什么？",
+      "a": "Model、View 和 Controller。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "软件架构基础"
+  ],
+  "source_pages": [
+    181,
+    184
+  ],
+  "needs_verification": true,
+  "verify_query": "《C++20高级编程》第5版 第184页 Model View Controller MVC GUI",
+  "concept_id": "256_mvc_架构模式",
+  "_chunk_pages": [
+    181,
+    184
+  ]
+}

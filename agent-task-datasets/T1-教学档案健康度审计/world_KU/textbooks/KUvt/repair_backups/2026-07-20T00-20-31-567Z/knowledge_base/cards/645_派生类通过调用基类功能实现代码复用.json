@@ -1,0 +1,44 @@
+{
+  "title": "派生类通过调用基类功能实现代码复用",
+  "definition": "派生类不必重新实现基类已有功能，可以在新方法中封装并调用基类方法，从而以较少代码提供新的接口。MyWeatherPrediction 的摄氏温度方法就是这种做法：转换单位后调用基类已有的华氏温度方法。",
+  "key_points": [
+    "setCurrentTempCelsius() 复用了基类的 setCurrentTempFahrenheit()。",
+    "getTomorrowTempCelsius() 复用了基类的 getTomorrowTempFahrenheit()。",
+    "这种方式把已有功能包装成更适合特定用户需求的新接口。",
+    "派生类还可以添加与基类已有功能无关的新功能。"
+  ],
+  "examples": [
+    "void MyWeatherPrediction::setCurrentTempCelsius(int temp) { int fahrenheitTemp{convertCelsiusToFahrenheit(temp)}; setCurrentTempFahrenheit(fahrenheitTemp); }",
+    "int MyWeatherPrediction::getTomorrowTempCelsius() const { int fahrenheitTemp{getTomorrowTempFahrenheit()}; return convertFahrenheitToCelsius(fahrenheitTemp); }"
+  ],
+  "misconceptions": [
+    "继承代码复用不只是复制基类代码；这里的复用是直接调用继承来的基类功能。",
+    "调用基类方法并不要求重新实现基类方法的内部算法。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么说 MyWeatherPrediction 的两个摄氏温度方法重用了基类代码？",
+      "a": "因为它们分别调用了基类已有的华氏温度设置和获取方法，只在调用前后增加了温度单位转换。"
+    },
+    {
+      "q": "派生类除了转换单位，还能增加什么功能？",
+      "a": "还可以增加与基类已有功能无关的功能，例如从 Internet 获取其他天气预报，或根据天气预报给出活动建议。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "通过继承添加功能",
+    "基类成员函数调用"
+  ],
+  "source_pages": [
+    315,
+    315
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "645_派生类通过调用基类功能实现代码复用",
+  "_chunk_pages": [
+    313,
+    316
+  ]
+}

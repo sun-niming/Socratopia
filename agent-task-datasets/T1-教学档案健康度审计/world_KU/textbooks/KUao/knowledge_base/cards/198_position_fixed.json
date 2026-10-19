@@ -1,0 +1,36 @@
+{
+  "title": "position: fixed",
+  "definition": "fixed 是固定定位，元素相对于浏览器窗口进行定位。",
+  "key_points": [
+    "fixed 表示固定定位",
+    "定位参照物是浏览器窗口"
+  ],
+  "examples": [
+    ".nav { position: fixed; top: 0; left: 0; }"
+  ],
+  "misconceptions": [
+    "fixed 是相对于父元素定位",
+    "fixed 会随着页面普通内容一起参与文档流排版"
+  ],
+  "qa_pairs": [
+    {
+      "q": "fixed 定位相对于什么进行定位？",
+      "a": "相对于浏览器窗口进行定位。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "position属性"
+  ],
+  "source_pages": [
+    137,
+    140
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "198_position_fixed",
+  "_chunk_pages": [
+    137,
+    140
+  ]
+}

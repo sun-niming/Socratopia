@@ -1,0 +1,42 @@
+{
+  "title": "DOM 事件的组成与绑定关系",
+  "definition": "DOM 事件通常涉及事件源/事件目标、事件类型和事件监听程序三部分：window、document 或 element 可以作为事件源或目标；load、click、mousedown、keypress 等是事件类型；监听程序则是编写的函数代码。事件注册、处理或绑定，就是把监听程序和某个事件目标、某种事件类型关联起来。",
+  "key_points": [
+    "事件源/事件目标可以是 window、document、element",
+    "事件类型可以是 load、click、mousedown、keypress 等",
+    "事件监听程序通常是编写的函数代码",
+    "事件注册/处理/绑定表示把监听程序与事件关联起来"
+  ],
+  "examples": [
+    "window",
+    "document",
+    "element",
+    "load",
+    "click / mousedown",
+    "keypress"
+  ],
+  "misconceptions": [
+    "以为事件只有“类型”，没有来源和监听程序；实际上事件通常要结合目标和监听代码一起理解。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "DOM 事件图中，监听程序指的是什么？",
+      "a": "指编写的函数代码。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "DOM 事件的含义与常见类型"
+  ],
+  "source_pages": [
+    357,
+    360
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "484_dom_事件的组成与绑定关系",
+  "_chunk_pages": [
+    357,
+    360
+  ]
+}

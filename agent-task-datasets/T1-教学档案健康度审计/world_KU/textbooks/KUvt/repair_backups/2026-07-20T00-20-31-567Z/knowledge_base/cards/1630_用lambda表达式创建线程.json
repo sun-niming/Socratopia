@@ -1,0 +1,42 @@
+{
+  "title": "用lambda表达式创建线程",
+  "definition": "lambda表达式是可调用对象，可以直接作为std::thread的线程函数。线程创建时可以通过lambda捕获列表保存外部变量，然后在线程函数体中使用这些变量。",
+  "key_points": [
+    "lambda可以直接作为std::thread构造函数的可调用对象。",
+    "值捕获的变量会被保存到lambda对象中，线程可以使用这些捕获的数据。",
+    "启动线程后仍需对thread对象调用join()或detach()。"
+  ],
+  "examples": [
+    "int id{1};\nint numIterations{5};\nthread t1{[id, numIterations] {\n    for (int i{0}; i < numIterations; ++i) {\n        cout << \"Counter \" << id << \" has value \" << i << endl;\n    }\n}};\nt1.join();"
+  ],
+  "misconceptions": [
+    "lambda作为线程函数时，捕获列表决定了它如何取得外部变量；不能认为所有外部变量都会自动可用。",
+    "lambda线程同样受thread对象生命周期规则约束，不能遗漏join()或detach()。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何让一个lambda在线程中使用外部变量id和numIterations？",
+      "a": "在lambda捕获列表中捕获它们，例如：[id, numIterations]。"
+    },
+    {
+      "q": "lambda启动的线程是否不需要join()或detach()？",
+      "a": "仍然需要。在销毁thread对象前必须调用join()或detach()。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "lambda表达式",
+    "std::thread的joinable状态"
+  ],
+  "source_pages": [
+    795,
+    795
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1630_用lambda表达式创建线程",
+  "_chunk_pages": [
+    793,
+    796
+  ]
+}

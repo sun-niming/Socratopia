@@ -1,0 +1,44 @@
+{
+  "title": "随机数引擎适配器",
+  "definition": "随机数引擎适配器是对某个基引擎生成结果进行修改或重新组织的模板类，体现了适配器模式。C++ 标准库提供 discard_block_engine、independent_bits_engine 和 shuffle_order_engine 三类适配器。",
+  "key_points": [
+    "discard_block_engine 使用基引擎生成一个大小为 $p$ 的块，丢弃其中 $p-r$ 个结果，只返回剩余的 $r$ 个结果。",
+    "independent_bits_engine 组合基引擎产生的多个随机数，生成具有指定位数 $w$ 的随机数。",
+    "shuffle_order_engine 使用一个大小为 $k$ 的内部表格，从表中随机选择结果，并用基引擎的新结果替换表中元素，从而改变输出顺序。",
+    "适配器不独立生成随机序列，而是建立在基引擎之上。"
+  ],
+  "examples": [
+    "discard_block_engine 的行为可概括为：先生成 $p$ 个值，再丢弃其中一部分，只输出 $r$ 个值，其中 $r\\le p$。",
+    "shuffle_order_engine 的过程可概括为：从内部表格中随机取一个值输出，再用基引擎生成的新值替换该表格位置。"
+  ],
+  "misconceptions": [
+    "引擎适配器不是新的分布对象；它主要修改基引擎的输出方式。",
+    "discard_block_engine 并不是把所有生成的值都返回，而是明确丢弃一部分值。",
+    "shuffle_order_engine 改变的是输出顺序和组织方式，并不等于把输出变成某个指定数学分布。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "discard_block_engine 的模板参数 $p$ 和 $r$ 分别表示什么？",
+      "a": "$p$ 表示每个块中基引擎生成的值的数量，$r$ 表示其中保留并返回的值的数量。"
+    },
+    {
+      "q": "independent_bits_engine 的作用是什么？",
+      "a": "它组合基引擎生成的一些随机数，以生成具有指定位数 $w$ 的随机数。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++ 随机数引擎的主要类型"
+  ],
+  "source_pages": [
+    698,
+    699
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1457_随机数引擎适配器",
+  "_chunk_pages": [
+    697,
+    700
+  ]
+}

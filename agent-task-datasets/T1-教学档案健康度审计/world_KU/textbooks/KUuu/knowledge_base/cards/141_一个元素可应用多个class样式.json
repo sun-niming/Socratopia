@@ -1,0 +1,35 @@
+{
+  "title": "一个元素可应用多个class样式",
+  "definition": "同一个HTML元素可以同时应用多个类样式，只需把多个class值用空格分隔写在class属性中。",
+  "key_points": [
+    "一个元素可以有多个class值",
+    "多个class值之间用空格分隔"
+  ],
+  "examples": [
+    "<p class=\"p1 p2 p3\">段落文字</p>"
+  ],
+  "misconceptions": [
+    "一个元素的class属性只能写一个类名。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "一个元素如何同时应用多个class样式？",
+      "a": "在class属性中用空格分隔写入多个类名。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "class选择器"
+  ],
+  "source_pages": [
+    89,
+    92
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "141_一个元素可应用多个class样式",
+  "_chunk_pages": [
+    89,
+    92
+  ]
+}

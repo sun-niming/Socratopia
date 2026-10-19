@@ -1,0 +1,46 @@
+{
+  "title": "用嵌套网格模板表示多维网格",
+  "definition": "多维网格可以通过让网格模板的元素类型继续使用网格模板来构造。一个一维网格的元素类型为`int`时表示一维整数网格；以一维网格作为元素类型可以得到二维网格；继续嵌套则可以得到三维或更高维网格。这种方法避免了为每个维度分别编写重复的网格类。",
+  "key_points": [
+    "二维网格可以表示为“一维网格的元素仍是一维网格”。",
+    "三维网格可以表示为“一维网格的元素是二维网格”。",
+    "嵌套类型的维度由模板实例化层数决定。",
+    "这种直接嵌套的声明能够工作，但类型声明较为冗长，因此教材随后使用NDGrid模板改进。"
+  ],
+  "examples": [
+    "一维、二维、三维网格可以写成：`OneDGrid<int> singleDGrid;`、`OneDGrid<OneDGrid<int>> twoDGrid;`、`OneDGrid<OneDGrid<OneDGrid<int>>> threeDGrid;`。",
+    "对三维网格进行下标访问可以写成`threeDGrid[3][3][3] = 5;`。"
+  ],
+  "misconceptions": [
+    "误以为必须为一维、二维、三维分别编写不同的网格类。",
+    "误以为嵌套的每一层都直接存储T对象；实际上外层网格的元素可以是另一层网格。",
+    "误以为`operator[]`一定进行边界检查；本教材中的OneDGrid下标运算符类似vector的`operator[]`，不执行边界检查。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何用OneDGrid构造三维整数网格？",
+      "a": "将OneDGrid嵌套三层，类型为`OneDGrid<OneDGrid<OneDGrid<int>>>`。"
+    },
+    {
+      "q": "为什么嵌套OneDGrid的方法可以表示任意维度网格？",
+      "a": "因为每增加一层OneDGrid就增加一个维度，元素类型还可以继续是更低维的网格。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "类模板",
+    "std::vector",
+    "下标运算符重载"
+  ],
+  "source_pages": [
+    766,
+    767
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1582_用嵌套网格模板表示多维网格",
+  "_chunk_pages": [
+    765,
+    768
+  ]
+}

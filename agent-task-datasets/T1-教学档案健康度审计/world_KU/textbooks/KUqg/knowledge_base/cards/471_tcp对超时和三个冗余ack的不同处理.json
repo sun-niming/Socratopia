@@ -1,0 +1,44 @@
+{
+  "title": "TCP对超时和三个冗余ACK的不同处理",
+  "definition": "TCP把超时和收到三个冗余ACK都视为丢包信号，但处理强度不同。超时通常被认为表示更严重的拥塞，因此TCP将拥塞窗口降为一个MSS；三个冗余ACK表明网络仍在继续传输报文段，因此TCP采取较温和的窗口减半处理。",
+  "key_points": [
+    "发生超时时，$ssthresh$被设置为发生丢包前$cwnd$的一半，随后$cwnd$被设置为$1$个MSS，并进入慢启动。",
+    "收到三个冗余ACK时，$ssthresh$被设置为发生丢包前$cwnd$的一半。",
+    "收到三个冗余ACK时，TCP将拥塞窗口减半，同时计入已经收到的3个冗余ACK对应的3个MSS，通常表示为$cwnd=ssthresh+3\\times MSS$，然后进入快速恢复。",
+    "三个冗余ACK触发的处理比超时触发的处理不那么剧烈，因为冗余ACK表明发送方向接收方的报文段仍在到达。"
+  ],
+  "examples": [
+    "若丢包前$cwnd=12\\times MSS$，则$ssthresh=6\\times MSS$。在TCP Reno中，三个冗余ACK后$cwnd=9\\times MSS$，即$ssthresh+3\\times MSS$；若是超时，则$cwnd$降为$1\\times MSS$。"
+  ],
+  "misconceptions": [
+    "三个冗余ACK和超时虽然都表示丢包，但TCP并不对二者采取完全相同的窗口调整。",
+    "三个冗余ACK后$cwnd$不是直接变成一个MSS；在Reno的快速恢复处理中，它先减半并加上3个MSS。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么三个冗余ACK触发的拥塞窗口调整比超时温和？",
+      "a": "因为三个冗余ACK说明网络仍在向接收方交付报文段，网络没有完全停止传输；超时则表明确认长期未到达，通常表示更严重的拥塞。"
+    },
+    {
+      "q": "若丢包前$cwnd=12\\times MSS$，三个冗余ACK到达后Reno如何设置$ssthresh$和$cwnd$？",
+      "a": "$ssthresh=6\\times MSS$，$cwnd=ssthresh+3\\times MSS=9\\times MSS$。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "TCP确认ACK",
+    "冗余ACK",
+    "TCP拥塞窗口cwnd"
+  ],
+  "source_pages": [
+    198,
+    199
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "471_tcp对超时和三个冗余ack的不同处理",
+  "_chunk_pages": [
+    197,
+    200
+  ]
+}

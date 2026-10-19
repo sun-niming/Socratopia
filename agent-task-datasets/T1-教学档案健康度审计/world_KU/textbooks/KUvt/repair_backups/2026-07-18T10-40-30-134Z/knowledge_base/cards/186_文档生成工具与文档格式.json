@@ -1,0 +1,42 @@
+{
+  "title": "文档生成工具与文档格式",
+  "definition": "第128页列举了可以从源代码注释或文档标记生成文档的工具和格式，包括 JavaDoc、C# 文档、Doxygen、HTML、UNIX man 等。Doxygen 可生成 HTML 等形式的文档，JavaDoc 是 Java 生态中常见的文档工具或注释格式。",
+  "key_points": [
+    "原文列出了 Java、JavaDoc、C#、Doxygen、HTML 和 UNIX man 等文档相关名称。",
+    "原文明确出现 `Doxygen(doxygen.org)`，表明 Doxygen 是一个可指向其官方网站的文档工具。",
+    "文档工具和文档输出格式不是同一个概念：Doxygen、JavaDoc 更接近工具或约定，HTML、UNIX man 更接近输出或呈现形式。"
+  ],
+  "examples": [
+    "原文中出现的文档相关项目包括：`JavaDoc`、`C#`、`Doxygen(doxygen.org)`、`HTML` 和 `UNIX man`。",
+    "代码注释可以包含待办事项，例如 `TODO: Implement updated algorithms!`；这类注释可作为后续维护和文档整理的线索。"
+  ],
+  "misconceptions": [
+    "Doxygen 和 HTML 不是同一层次的概念；Doxygen 可以生成 HTML 文档，而 HTML 是一种文档呈现格式。",
+    "原文只是列举这些工具或格式，没有说明每一种工具的完整用法、命令行参数或全部支持范围。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "第128页列举了哪些文档工具或格式？",
+      "a": "列举了 JavaDoc、C#、Doxygen、HTML 和 UNIX man 等名称。"
+    },
+    {
+      "q": "Doxygen 与 HTML 的关系是什么？",
+      "a": "Doxygen 是文档生成工具，HTML 是它可以生成或使用的一种文档呈现格式；原文未展开完整技术细节。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "源代码注释的基本作用"
+  ],
+  "source_pages": [
+    125,
+    128
+  ],
+  "needs_verification": true,
+  "verify_query": "《C++20高级编程》第5版 第128页 Doxygen JavaDoc C# HTML UNIX man 原文列表",
+  "concept_id": "186_文档生成工具与文档格式",
+  "_chunk_pages": [
+    125,
+    128
+  ]
+}

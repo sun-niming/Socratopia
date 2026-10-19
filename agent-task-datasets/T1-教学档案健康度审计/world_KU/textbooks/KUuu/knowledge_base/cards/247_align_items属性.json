@@ -1,0 +1,46 @@
+{
+  "title": "align-items属性",
+  "definition": "align-items 属性用于定义弹性容器中各项目在交叉轴上的对齐方式。它共有 5 个常用取值，具体效果与交叉轴方向有关；教材中默认假设交叉轴从上到下。",
+  "key_points": [
+    "flex-start：与交叉轴起点对齐。",
+    "flex-end：与交叉轴终点对齐。",
+    "center：与交叉轴中点对齐。",
+    "baseline：按项目第一行文字的基线对齐。",
+    "stretch：默认值；如果项目没有设置高度或高度为 auto，则会占满整个容器的高度。"
+  ],
+  "examples": [
+    "align-items: flex-start;",
+    "align-items: center;",
+    "align-items: stretch;"
+  ],
+  "misconceptions": [
+    "align-items 不是定义主轴对齐，而是定义交叉轴对齐。",
+    "stretch 不是把项目随意拉伸，而是在未设置高度或高度为 auto 时占满容器高度。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "align-items 属性控制什么方向上的对齐？",
+      "a": "控制项目在交叉轴上的对齐方式。"
+    },
+    {
+      "q": "align-items 的默认值是什么？",
+      "a": "stretch。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "弹性盒模型基础",
+    "主轴与交叉轴"
+  ],
+  "source_pages": [
+    157,
+    160
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "247_align_items属性",
+  "_chunk_pages": [
+    157,
+    160
+  ]
+}

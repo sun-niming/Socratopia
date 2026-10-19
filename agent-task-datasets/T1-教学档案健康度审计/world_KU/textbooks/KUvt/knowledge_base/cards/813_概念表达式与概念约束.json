@@ -1,0 +1,43 @@
+{
+  "title": "概念表达式与概念约束",
+  "definition": "概念表达式的语法是 `concept-name<argument-list>`，其计算结果为 `true` 或 `false`。结果为 `true` 表示给定的模板实参满足该概念、为该概念建模。概念定义中的约束必须是结果精确为布尔值的常量表达式，不能依赖类型转换。",
+  "key_points": [
+    "概念表达式在编译期用于判断模板实参是否满足要求。",
+    "约束表达式必须产生布尔值；约束不会在运行时计算。",
+    "例如：`template <typename T> concept C = sizeof(T) == 4;`。"
+  ],
+  "examples": [
+    "`Incrementable<T>` 是一个概念表达式，结果为真表示类型 `T` 满足 `Incrementable` 概念。",
+    "`template <typename T> concept C = sizeof(T) == 4;`"
+  ],
+  "misconceptions": [
+    "概念表达式不是普通的运行时布尔表达式。",
+    "概念约束不能依靠隐式类型转换把其他类型转换为布尔值；其结果必须精确为布尔值。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "概念表达式的结果表示什么？",
+      "a": "概念表达式的结果为 `true` 或 `false`；为 `true` 表示给定模板实参满足该概念。"
+    },
+    {
+      "q": "概念定义中的约束表达式需要满足什么条件？",
+      "a": "它必须是结果精确为布尔值的常量表达式，且不能依赖类型转换。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++模板基础",
+    "常量表达式"
+  ],
+  "source_pages": [
+    401,
+    401
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "813_概念表达式与概念约束",
+  "_chunk_pages": [
+    401,
+    404
+  ]
+}

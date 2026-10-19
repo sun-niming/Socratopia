@@ -1,0 +1,50 @@
+{
+  "title": "sample 随机抽样算法",
+  "definition": "sample() 从给定源范围中随机选择指定数量的元素，并将所选元素写入目标范围。它需要源范围首尾迭代器、目标范围起始迭代器、要选择的元素数量以及随机数生成引擎。目标范围必须能够容纳所选择的元素。",
+  "key_points": [
+    "参数结构为：源范围首迭代器、源范围尾迭代器、目标范围首迭代器、抽样数量、随机数生成引擎。",
+    "抽样结果写入目标范围，不要求修改源范围。",
+    "随机数生成引擎需要正确设置，教材示例使用 random_device 和 default_random_engine。"
+  ],
+  "examples": [
+    "const size_t numberOfSamples { 5 };",
+    "vector<int> samples(numberOfSamples);",
+    "default_random_engine engine(seed);",
+    "sample(cbegin(values), cend(values), begin(samples), numberOfSamples, engine);"
+  ],
+  "misconceptions": [
+    "sample() 的抽样数量不是源范围长度；它由单独的参数指定。",
+    "sample() 不会把结果自动存入新容器，必须提供目标范围。",
+    "没有合适的随机数生成引擎时，不能认为每次抽样结果都可靠地随机。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "sample() 用于做什么？",
+      "a": "从源范围中随机选择指定数量的元素，并把它们存储到目标范围。"
+    },
+    {
+      "q": "sample() 需要哪五类参数？",
+      "a": "源范围首尾迭代器、目标范围起始迭代器、选择数量和随机数生成引擎。"
+    },
+    {
+      "q": "为什么示例中的 samples 要先按 numberOfSamples 初始化？",
+      "a": "因为 sample() 需要一个足够大的目标范围来保存抽样结果。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "迭代器范围表示法",
+    "随机数生成引擎"
+  ],
+  "source_pages": [
+    645,
+    645
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 std::sample 参数 目标范围 随机数生成器 行为",
+  "concept_id": "1348_sample_随机抽样算法",
+  "_chunk_pages": [
+    645,
+    648
+  ]
+}

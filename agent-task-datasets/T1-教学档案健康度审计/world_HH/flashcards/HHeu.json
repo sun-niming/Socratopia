@@ -1,0 +1,428 @@
+{
+  "textbookId": "HHeu",
+  "updatedAt": "2026-05-21T02:42:44.098Z",
+  "cards": [
+    {
+      "id": "fc_1779243243803_000_q1ka",
+      "question": "对主析取范式整体取反后，应用德摩根律，会得到什么？",
+      "choices": [
+        "主合取范式",
+        "矛盾式",
+        "重言式",
+        "主析取范式的补集"
+      ],
+      "correctIndex": 0,
+      "explanation": "对主析取范式整体取反，通过德摩根律将析取变合取，每个极小项取反变成对偶的极大项，从而得到主合取范式。",
+      "source": {
+        "textbook": "离散数学第一章 - 数理逻辑（精炼版）",
+        "chapter": "",
+        "textbookSlug": "HHeu"
+      },
+      "created": "2026-05-20T02:14:03.803Z",
+      "conversationId": "yEGWSzMgm_-6jYO7byi8s",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-05-20T02:14:13.548Z",
+          "chosen": 0,
+          "correct": true
+        },
+        {
+          "time": "2026-05-20T07:03:47.547Z",
+          "chosen": 0,
+          "correct": true
+        },
+        {
+          "time": "2026-05-21T02:42:35.678Z",
+          "chosen": 0,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-05-28T16:00:00.000Z",
+      "interval": 8,
+      "ease": 2.8000000000000003,
+      "repetitions": 3
+    },
+    {
+      "id": "fc_1779243243804_001_ku0h",
+      "question": "对于一个既非重言式也非矛盾式的公式，其极小项个数与极大项个数之和等于什么？",
+      "choices": [
+        "2n",
+        "n²",
+        "n",
+        "2ⁿ"
+      ],
+      "correctIndex": 3,
+      "explanation": "极小项对应公式为真的真值行，极大项对应公式为假的真值行，它们的和等于所有可能真值指派的总数，即2的n次幂（n为变元个数）。",
+      "source": {
+        "textbook": "离散数学第一章 - 数理逻辑（精炼版）",
+        "chapter": "",
+        "textbookSlug": "HHeu"
+      },
+      "created": "2026-05-20T02:14:03.804Z",
+      "conversationId": "yEGWSzMgm_-6jYO7byi8s",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-05-20T02:14:19.520Z",
+          "chosen": 3,
+          "correct": true
+        },
+        {
+          "time": "2026-05-20T07:06:22.943Z",
+          "chosen": 3,
+          "correct": true
+        },
+        {
+          "time": "2026-05-21T02:42:38.648Z",
+          "chosen": 3,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-05-28T16:00:00.000Z",
+      "interval": 8,
+      "ease": 2.8000000000000003,
+      "repetitions": 3
+    },
+    {
+      "id": "fc_1779243243804_002_6ioz",
+      "question": "为什么任意两个不同的极小项之间，其合取一定是假？",
+      "choices": [
+        "因为极小项之间没有共同变元，所以合取无意义",
+        "因为存在变元P，一个极小项取P，另一个取¬P，它们的合取为假",
+        "因为极小项是互斥的，所以任何合取都自动为假",
+        "因为极小项包含所有变元，所以合取会重复，结果恒真"
+      ],
+      "correctIndex": 1,
+      "explanation": "两个不同的极小项必然在至少一个变元上取值相反（一个取原形，另一个取否定），而原形与否定合取为假，进而导致整个合取为假。",
+      "source": {
+        "textbook": "离散数学第一章 - 数理逻辑（精炼版）",
+        "chapter": "",
+        "textbookSlug": "HHeu"
+      },
+      "created": "2026-05-20T02:14:03.804Z",
+      "conversationId": "yEGWSzMgm_-6jYO7byi8s",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-05-20T02:14:28.360Z",
+          "chosen": 1,
+          "correct": true
+        },
+        {
+          "time": "2026-05-20T07:06:34.426Z",
+          "chosen": 1,
+          "correct": true
+        },
+        {
+          "time": "2026-05-21T02:42:44.096Z",
+          "chosen": 1,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-05-28T16:00:00.000Z",
+      "interval": 8,
+      "ease": 2.8000000000000003,
+      "repetitions": 3
+    },
+    {
+      "id": "fc_1779243243804_003_u9jy",
+      "question": "在逻辑学中，一个推理被称为“有效”的含义是什么？",
+      "choices": [
+        "前提和结论在现实世界中都为真",
+        "如果前提为真，结论必然为真",
+        "所有前提都是可靠的证据",
+        "推理过程让人感觉念头通达"
+      ],
+      "correctIndex": 1,
+      "explanation": "有效推理只关心前提与结论之间的形式关系：如果前提为真，结论必然为真，即前提合取蕴含结论是永真式；不关心前提在实际中是否真。",
+      "source": {
+        "textbook": "离散数学第一章 - 数理逻辑（精炼版）",
+        "chapter": "",
+        "textbookSlug": "HHeu"
+      },
+      "created": "2026-05-20T02:14:03.804Z",
+      "conversationId": "yEGWSzMgm_-6jYO7byi8s",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-05-20T02:14:34.403Z",
+          "chosen": 1,
+          "correct": true
+        },
+        {
+          "time": "2026-05-20T07:06:39.462Z",
+          "chosen": 1,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-05-22T16:00:00.000Z",
+      "interval": 3,
+      "ease": 2.7,
+      "repetitions": 2
+    },
+    {
+      "id": "fc_1779243243804_004_1pvy",
+      "question": "在符号化“明天要么天气好，要么下雨”这句话时，应该使用什么逻辑联结词来精确表达其互斥含义？",
+      "choices": [
+        "析取（P ∨ S）",
+        "合取（P ∧ S）",
+        "异或（P ⊕ S）",
+        "蕴含（P → S）"
+      ],
+      "correctIndex": 2,
+      "explanation": "日常语言中的“要么...要么...”通常表示互斥或（异或），即两者不能同时为真。这应符号化为异或（⊕），而析取（∨）是可兼或，允许两者同时为真。",
+      "source": {
+        "textbook": "离散数学第一章 - 数理逻辑（精炼版）",
+        "chapter": "",
+        "textbookSlug": "HHeu"
+      },
+      "created": "2026-05-20T02:14:03.804Z",
+      "conversationId": "yEGWSzMgm_-6jYO7byi8s",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-05-20T02:14:47.643Z",
+          "chosen": 2,
+          "correct": true
+        },
+        {
+          "time": "2026-05-20T07:06:45.395Z",
+          "chosen": 2,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-05-22T16:00:00.000Z",
+      "interval": 3,
+      "ease": 2.7,
+      "repetitions": 2
+    },
+    {
+      "id": "fc_1779260031298_000_vhog",
+      "question": "在谓词逻辑中，将“有些鸟不会飞”翻译为“∃x(B(x) → ¬F(x))”为什么是错误的？",
+      "choices": [
+        "因为“有些鸟不会飞”应该用全称量词表示",
+        "因为存在量词只能与合取搭配，不能与蕴含搭配",
+        "因为存在量词和蕴含组合会改变量词的辖域",
+        "因为它可能被非鸟个体（如猫）满足，导致公式不准确地表示原意"
+      ],
+      "correctIndex": 3,
+      "explanation": "正确答案是“因为它可能被非鸟个体（如猫）满足，导致公式不准确地表示原意”。存在量词与蕴含搭配时，当前件为假（如猫不是鸟）时蕴含为真，因此即使没有不会飞的鸟，该公式也可能为真，无法准确表达“存在一只鸟不会飞”。正确翻译应为 ∃x(B(x) ∧ ¬F(x))。",
+      "source": {
+        "textbook": "离散数学第一章 - 数理逻辑（精炼版）",
+        "chapter": "",
+        "textbookSlug": "HHeu"
+      },
+      "created": "2026-05-20T06:53:51.298Z",
+      "conversationId": "3m5T4y2stDbwAtcKmYTOY",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-05-20T07:01:40.015Z",
+          "chosen": 3,
+          "correct": true
+        },
+        {
+          "time": "2026-05-21T02:41:31.894Z",
+          "chosen": 3,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-05-23T16:00:00.000Z",
+      "interval": 3,
+      "ease": 2.7,
+      "repetitions": 2
+    },
+    {
+      "id": "fc_1779260031298_001_bzfg",
+      "question": "在谓词逻辑中，什么是判断一个公式是否为完整命题（即具有真值）的关键条件？",
+      "choices": [
+        "公式中所有变量都必须用不同的字母表示",
+        "公式中不能有自由变元，即所有变量都必须受量词约束",
+        "公式中必须使用全总个体域作为论述域",
+        "公式中必须包含至少一个量词"
+      ],
+      "correctIndex": 1,
+      "explanation": "正确答案是“公式中不能有自由变元，即所有变量都必须受量词约束”。自由变元像未填的空格，需要赋值才能确定真假，因此只有封闭公式（无自由变元）才能作为命题具有确定的真值。约束变元可以改名而不改变意义，而自由变元则不能随意改名。",
+      "source": {
+        "textbook": "离散数学第一章 - 数理逻辑（精炼版）",
+        "chapter": "",
+        "textbookSlug": "HHeu"
+      },
+      "created": "2026-05-20T06:53:51.298Z",
+      "conversationId": "3m5T4y2stDbwAtcKmYTOY",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-05-20T07:03:42.857Z",
+          "chosen": 1,
+          "correct": true
+        },
+        {
+          "time": "2026-05-21T02:42:30.035Z",
+          "chosen": 1,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-05-23T16:00:00.000Z",
+      "interval": 3,
+      "ease": 2.7,
+      "repetitions": 2
+    },
+    {
+      "id": "fc_1779330547827_000_0v5v",
+      "question": "在谓词逻辑中，量词交换规律 ∃y∀x P(x, y) ⇒ ∀x∃y P(x, y) 成立，但反方向不成立。以下哪个解释最准确地说明了反方向不成立的原因？",
+      "choices": [
+        "前件中 y 可以随 x 变化，后件要求 y 固定对所有 x 成立，后件比前件强",
+        "前件中 y 必须对所有 x 都相同，但后件允许 y 随 x 变化",
+        "反方向不成立是因为存在量词不能与全称量词同时出现",
+        "量词交换总是成立，但反方向需要额外条件"
+      ],
+      "correctIndex": 0,
+      "explanation": "反方向 ∀x∃y P(x, y) ⇒ ∃y∀x P(x, y) 不成立，因为前件只要求对每个 x 存在某个 y（可能随 x 变化），而后件要求存在一个固定的 y 对所有 x 都成立，这更强。例如，在实数域中，∀x∃y (x < y) 为真（每个 x 都有更大的数），但 ∃y∀x (x < y) 为假（没有最大的实数）。所以反方向不是永真的。",
+      "source": {
+        "textbook": "离散数学第一章 - 数理逻辑（精炼版）",
+        "chapter": "",
+        "textbookSlug": "HHeu"
+      },
+      "created": "2026-05-21T02:29:07.827Z",
+      "conversationId": "gx27hos4Yj36Tz-BssG5f",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-05-21T02:30:11.579Z",
+          "chosen": 0,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-05-21T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1779330547827_001_4ua4",
+      "question": "对于公式 ∀x (A(x) → B(x)) ⇔ ∀x A(x) → ∀x B(x)，以下哪个判断和反例构造是正确的？",
+      "choices": [
+        "不成立，构造反例使左边假右边真，如一个对象满足 A 不满足 B，另一个不满足 A",
+        "成立，只需将全称量词提出即可",
+        "不成立，但反例需要所有对象都不满足 A",
+        "成立，因为蕴含可以分配"
+      ],
+      "correctIndex": 0,
+      "explanation": "该等价式不成立。反例：个体域有两个对象 a 和 b。令 A(a) 为真，B(a) 为假；A(b) 为假，B(b) 为假。左边 ∀x(A(x) → B(x))：对于 a，真→假为假，所以左边为假。右边 ∀xA(x) → ∀xB(x)：因为 A(b) 为假，所以 ∀xA(x) 为假，蕴含前件假，整体为真。因此左边假右边真，等价式不成立。",
+      "source": {
+        "textbook": "离散数学第一章 - 数理逻辑（精炼版）",
+        "chapter": "",
+        "textbookSlug": "HHeu"
+      },
+      "created": "2026-05-21T02:29:07.827Z",
+      "conversationId": "gx27hos4Yj36Tz-BssG5f",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-05-21T02:31:17.682Z",
+          "chosen": 0,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-05-21T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1779330547827_002_8ihg",
+      "question": "在谓词逻辑推理中，使用全称指定（US）时，最重要的一条限制是什么？",
+      "choices": [
+        "代入的变量必须与全称量词的变量相同",
+        "代入的变量在原公式中必须是自由的，不能被其他量词约束",
+        "代入的变量必须是常量",
+        "代入的变量必须是全新的，从未在公式中出现过"
+      ],
+      "correctIndex": 1,
+      "explanation": "US 允许从 ∀x P(x) 推出 P(c)，但要求代入的个体 c 在 P(x) 中不能是受其他量词约束的变量。否则可能导致错误，如从 ∀x∃y (x < y) 用 US 将 x 换成 y 会得到 ∃y (y < y)，这是假的。所以关键是代入的变量要自由。",
+      "source": {
+        "textbook": "离散数学第一章 - 数理逻辑（精炼版）",
+        "chapter": "",
+        "textbookSlug": "HHeu"
+      },
+      "created": "2026-05-21T02:29:07.827Z",
+      "conversationId": "gx27hos4Yj36Tz-BssG5f",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-05-21T02:40:16.237Z",
+          "chosen": 1,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-05-21T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1779330547827_003_a91p",
+      "question": "在推理中，使用存在指定（ES）从 ∃x A(x) 推出 A(c) 时，一条关键规则是“先 US 再 ES”而不是相反。以下哪个例子最清楚地说明了顺序错误会导致矛盾？",
+      "choices": [
+        "实数域中，先 ES 得 x < c，再 US 得 c < c，导出矛盾",
+        "任何论域中，先 ES 都会导致循环依赖",
+        "实数域中，先 US 得 ∃y (y < y)，导出矛盾",
+        "先 ES 再 US 总是合法的，没有矛盾"
+      ],
+      "correctIndex": 0,
+      "explanation": "从 ∀x∃y P(x, y) 开始，如果先 ES，例如从 ∃y P(x, y) 推出 P(x, c)，其中 x 自由，再 US 将 x 换成 c，得到 P(c, c)，但这可能引向假结论。实数域中 ∀x∃y (x < y) 为真，但先 ES 得 x < c，再 US 得 c < c，这是假的。所以顺序错误会引入错误的依赖。",
+      "source": {
+        "textbook": "离散数学第一章 - 数理逻辑（精炼版）",
+        "chapter": "",
+        "textbookSlug": "HHeu"
+      },
+      "created": "2026-05-21T02:29:07.827Z",
+      "conversationId": "gx27hos4Yj36Tz-BssG5f",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-05-21T02:40:29.976Z",
+          "chosen": 0,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-05-21T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1779330547827_004_3j5s",
+      "question": "在谓词推理中，使用全称推广（UG）从 A(y) 推出 ∀x A(x) 是安全的，需要满足什么条件？",
+      "choices": [
+        "y 不能在前提中自由出现，且 y 不是由 ES 引入的变元",
+        "y 必须是常量，且前提中不含其他量词",
+        "y 必须是自由变元，且不是由 US 引入的",
+        "y 必须由 ES 引入，才能保证存在性"
+      ],
+      "correctIndex": 0,
+      "explanation": "UG 要求 y 在前提中不能自由出现，且 y 不能是由 ES 引入的（因为 ES 引入的 y 有特殊身份）。这样 y 才能代表任意个体。例如，如果前提是 P(y)（y 自由），则 UG 不合法，因为 y 有特定含义。正确的条件是：前提中不含 y 作为自由变元，且 y 不是 ES 引入的。",
+      "source": {
+        "textbook": "离散数学第一章 - 数理逻辑（精炼版）",
+        "chapter": "",
+        "textbookSlug": "HHeu"
+      },
+      "created": "2026-05-21T02:29:07.827Z",
+      "conversationId": "gx27hos4Yj36Tz-BssG5f",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-05-21T02:41:16.078Z",
+          "chosen": 0,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-05-21T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    }
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "title": "关联容器结点句柄：extract、insert与结点转移",
+  "definition": "有序和无序关联容器都可以使用基于结点的数据结构。自C++17起，标准库通过结点句柄直接访问关联容器中的结点。每个关联容器都有一个`node_type`类型别名表示其结点句柄类型。结点句柄只能移动，且拥有被提取结点中的元素。使用`extract`可以按迭代器或键提取结点；提取后该元素会从源容器中删除。使用支持结点句柄的`insert`可以把结点插入另一个关联容器，从而在不复制或移动元素对象的情况下转移结点。",
+  "key_points": [
+    "`extract`提取结点后，源容器不再包含该元素。",
+    "结点句柄是所提取元素的唯一拥有者，并且只能移动，不能复制。",
+    "目标容器可以通过`insert(std::move(node))`插入结点。",
+    "结点可以在兼容的关联容器之间转移，例如从`map`转移到`multimap`，或从`set`转移到`multiset`。",
+    "可以把提取和插入合并为一条语句：`dataMap2.insert(dataMap.extract(1));`。"
+  ],
+  "examples": [
+    "先提取再插入：`auto extractedNode = dataMap.extract(1); dataMap2.insert(std::move(extractedNode));`。",
+    "合并为一行：`dataMap2.insert(dataMap.extract(1));`。",
+    "结点句柄不能复制，应使用移动：`dataMap2.insert(std::move(extractedNode));`。"
+  ],
+  "misconceptions": [
+    "`extract`只是返回元素的副本，源容器仍保留原元素；实际上提取会从源容器删除该结点。",
+    "结点句柄可以任意复制；原文说明结点句柄只能移动。",
+    "使用结点转移一定会复制或移动元素对象；其目的正是在容器之间转移结点而不执行元素的复制或移动操作。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`dataMap.extract(1)`执行后，键为1的元素在哪里？",
+      "a": "它被从`dataMap`中移除，并由返回的结点句柄拥有。"
+    },
+    {
+      "q": "如何把提取出的结点插入`dataMap2`？",
+      "a": "调用`dataMap2.insert(std::move(extractedNode))`。"
+    },
+    {
+      "q": "为什么插入结点句柄时通常要使用`std::move`？",
+      "a": "因为结点句柄只能移动，不能复制。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "关联容器",
+    "移动语义",
+    "迭代器"
+  ],
+  "source_pages": [
+    586,
+    586
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1215_关联容器结点句柄_extract_insert与结点转移",
+  "_chunk_pages": [
+    585,
+    588
+  ]
+}

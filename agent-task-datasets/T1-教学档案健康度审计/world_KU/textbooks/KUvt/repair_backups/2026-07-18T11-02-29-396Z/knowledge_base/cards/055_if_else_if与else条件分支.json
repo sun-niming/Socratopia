@@ -1,0 +1,43 @@
+{
+  "title": "if、else if与else条件分支",
+  "definition": "C++使用`if`、`else if`和`else`根据条件选择执行路径。`if`后面的条件为真时执行对应语句块；如果该条件为假，可以继续检查`else if`条件；当所有前面的条件都为假时，执行`else`语句块。",
+  "key_points": [
+    "基本结构是：`if (条件) { ... } else if (其他条件) { ... } else { ... }`。",
+    "`else if`和`else`必须与前面的`if`语句关联。",
+    "在一组`if`、`else if`、`else`中，通常只执行第一个满足条件的分支。",
+    "使用花括号可以明确每个分支包含的语句范围。"
+  ],
+  "examples": [
+    "`if (i > 4) { /* Do something. */ } else if (i > 2) { /* Do something else. */ } else { /* Do something else. */ }`"
+  ],
+  "misconceptions": [
+    "`else`不是独立的条件语句，它必须属于某个`if`语句。",
+    "多个条件都为真时，`else if`链不会执行所有满足条件的分支，而是执行从上到下第一个满足条件的分支。",
+    "省略花括号可能使分支实际控制的语句范围与缩进显示不一致，因此应谨慎使用。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "在`if (i > 4) ... else if (i > 2) ... else ...`中，当`i`大于`4`时执行哪个分支？",
+      "a": "执行第一个`if`分支；后面的`else if`和`else`不会执行。"
+    },
+    {
+      "q": "当所有`if`和`else if`条件都为假时执行什么？",
+      "a": "如果存在`else`分支，则执行`else`中的语句。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "布尔条件与比较运算"
+  ],
+  "source_pages": [
+    45,
+    48
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "055_if_else_if与else条件分支",
+  "_chunk_pages": [
+    45,
+    48
+  ]
+}

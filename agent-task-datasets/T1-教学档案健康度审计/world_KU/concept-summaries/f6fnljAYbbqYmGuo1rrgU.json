@@ -1,0 +1,296 @@
+{
+  "conversationId": "f6fnljAYbbqYmGuo1rrgU",
+  "generatedAt": 1790502039278,
+  "pagesRange": null,
+  "sections": [
+    {
+      "type": "tldr",
+      "content": "本节课围绕「LL 与 LR 的取舍：人脑走自顶向下」展开，LL 给的是自顶向下，人脑易于处理。。"
+    },
+    {
+      "type": "concepts",
+      "items": [
+        {
+          "name": "LL 与 LR 的取舍：人脑走自顶向下",
+          "body": "- LL 给的是自顶向下，人脑易于处理。\n- LR 状态太多，人脑扛不住，适合交给工具生成。",
+          "sourceMessageIndexes": [
+            12,
+            13
+          ]
+        },
+        {
+          "name": "代表性文法与表达式文法的性质",
+          "body": "- 以关键字开头的构造（如 while、int）比较好分析，关键字一亮相就知道选哪条产生式。\n- 真正难缠的是表达式，因为运算符有结合性和优先级，得让文法把这两层写死。\n\n**例子**\n- $E \\to E + T \\mid T$，$T \\to T * F \\mid F$，$F \\to (E) \\mid \\texttt{id}$",
+          "sourceMessageIndexes": [
+            13
+          ]
+        },
+        {
+          "name": "左递归为何卡死自顶向下，以及消除左递归",
+          "body": "- 左递归让展开目标与待展开符号是同一个，分析器原地打转，一个词法单元都没消费掉，递归已经陷进去。\n- 右递归 $A \\to \\alpha A$ 不犯这毛病，因为右侧的 A 前面隔着 $\\alpha$，可以先吃掉东西再回头。\n\n**例子**\n- $E \\to T E'$，$E' \\to +T E' \\mid \\epsilon$，$T \\to F T'$，$T' \\to *F T' \\mid \\epsilon$，$F \\to (E) \\mid \\texttt{id}$",
+          "sourceMessageIndexes": [
+            14,
+            15
+          ]
+        },
+        {
+          "name": "二义性文法与分析方法对它的态度",
+          "body": "- 二义文法能给同一个句子长出两棵不同的分析树。\n- 课本 4.2.5 里有一句态度清楚的话：大部分语法分析器都期望文法是无二义性的，不然没法为一句输入唯一选定分析树。\n\n**例子**\n- $E \\to E + E \\mid E * E \\mid (E) \\mid \\texttt{id}$，它不区分 + 和 * 的优先级。",
+          "sourceMessageIndexes": [
+            15,
+            16,
+            17
+          ]
+        },
+        {
+          "name": "错误的四个层次与可行前缀特性",
+          "body": "- 错误按层次分四档：词法错误、语法错误、语义错误、逻辑错误。\n- 可行前缀特性：好的分析方法（如 LL、LR）一旦发现输入前缀没法靠补符号凑成合法串，就当场报错，绝不多扫。\n\n**例子**\n- 词法错误：把 ellipseSize 写成 elipseSize，或字符串引号没配好。",
+          "sourceMessageIndexes": [
+            17,
+            18,
+            19
+          ]
+        },
+        {
+          "name": "错误恢复的四张牌及其代价",
+          "body": "- 四张牌是恐慌模式、短语层次的恢复、错误产生式、全局纠正；没有哪张是唯一正解。\n- 恐慌模式发现错就丢弃输入符号，直到撞上同步词法单元再接着分析；只要一直丢符号就不会陷死循环。\n\n**例子**\n- 同步词法单元一般挑界限符，如分号、花括号。",
+          "sourceMessageIndexes": [
+            19,
+            21,
+            22,
+            23
+          ]
+        },
+        {
+          "name": "上下文无关文法的正式定义",
+          "body": "- 上下文无关文法由四样东西拼成：终结符号、非终结符号、开始符号、产生式。\n- 终结符号是组成串的基本符号，就是词法单元名字那一类。\n\n**例子**\n- \\texttt{stmt} \\to \\texttt{if}\\ (\\ \\texttt{expr}\\ )\\ \\texttt{stmt}\\ \\texttt{else}\\ \\texttt{stmt}",
+          "sourceMessageIndexes": [
+            23
+          ]
+        },
+        {
+          "name": "终结符号与非终结符号的辨认",
+          "body": "- if、 (、 )、 else 属于词法单元层面的终结符号\n- stmt、 expr 可以继续往下展开，是非终结符号\n\n**例子**\n- 产生式头 stmt，体 if ( expr ) stmt else stmt",
+          "sourceMessageIndexes": [
+            24,
+            25
+          ]
+        },
+        {
+          "name": "符号表示约定",
+          "body": "- 小写字母 a、b、c、运算符、标点、数字、黑体串（id、if）是终结符号\n- 大写字母 A、B、C 和斜体名 expr、stmt 是非终结符号\n\n**例子**\n- 终结符号举例：a、b、c、id、if",
+          "sourceMessageIndexes": [
+            25
+          ]
+        },
+        {
+          "name": "推导 (derivation)",
+          "body": "- 产生式被当作重写规则使用：从开始符号出发，每一步挑一个非终结符号，把它替换成它某条产生式的体\n- 这样替换的链条叫推导，符号记 $\\Rightarrow$，读作“推导出”\n\n**例子**\n- $E \\Rightarrow -E \\Rightarrow -(E) \\Rightarrow -(\\texttt{id})$，说明 $-(\\texttt{id})$ 是表达式的一个实例",
+          "sourceMessageIndexes": [
+            25
+          ]
+        },
+        {
+          "name": "推导的一般形式",
+          "body": "- 一般形式为：手中有串 $\\alpha A \\beta$，$A$ 是非终结符号，若有产生式 $A \\to \\gamma$，则写成 $\\alpha A \\beta \\Rightarrow \\alpha \\gamma \\beta$\n\n**例子**\n- $\\alpha A \\beta \\Rightarrow \\alpha \\gamma \\beta$",
+          "sourceMessageIndexes": [
+            25
+          ]
+        },
+        {
+          "name": "句型与句子的判定",
+          "body": "- $-E$ 中的 $E$ 仍是非终结符号、未展开完，所以 $-E$ 是句型\n- $-(\\texttt{id} + \\texttt{id})$ 全是终结符、不含非终结符，所以它是句子\n\n**例子**\n- $-E$ 作为句型",
+          "sourceMessageIndexes": [
+            27
+          ]
+        },
+        {
+          "name": "最左推导与最右推导",
+          "body": "- 最左推导：每个句型中永远挑最左的那个非终结符号替换，记 $\\Rightarrow_{lm}$\n- 最右推导：永远挑最右的那个替换，记 $\\Rightarrow_{rm}$，别名规范推导 (canonical derivation)\n\n**例子**\n- 同一个句子 $-(\\texttt{id} + \\texttt{id})$ 的两条推导只在最后几步的替换顺序上分岔：先换左边的 $E$ 还是先换右边的 $E$",
+          "sourceMessageIndexes": [
+            27
+          ]
+        },
+        {
+          "name": "语法分析树与推导的多对一关系",
+          "body": "- 语法分析树是推导的图形化，把替换先后顺序过滤掉，只留下结构\n- 每个内部结点标一个非终结符号 $A$，代表用了一次 $A \\to \\cdots$ 的产生式\n\n**例子**\n- 同一个句子可能有多条推导却只对应同一棵树",
+          "sourceMessageIndexes": [
+            27
+          ]
+        }
+      ]
+    },
+    {
+      "type": "notes",
+      "title": "学习轨迹",
+      "content": "- **答对**：LL 给的是自顶向下，人脑易于处理；对于 LR，人脑扛不住这么多状态。\n- **答对**：E 不断 +T | T，导致第一步始终无法结束。\n- **答对**：二义文法能为某个句子生成两棵语法分析树。\n- **误区**：LR 和 LL 对二义性的容忍度应当是一样的，课本里只说 LR 和 LL 是不同的分析技术，不会对结果产生实质性改变。\n- **答对**：a = b 属于逻辑错误，因为 a = b 和 a == b 从语法结构上来说都正确，语义上类型也能对上，只是逻辑上与程序员意图不同。\n- **答对**：在当前输入符号之前插入符号时，那个当前符号不会被消费掉。\n- **答对**：恐慌模式最省力但最粗暴，跳过的最多；全局纠正最贵最优雅；短语层次恢复的代价是可能无限循环、偏离程序员想法；错误产生式的代价是需要提前列出较全的常见错误。\n- **答对**：if ( ) else 是终结符号，stmt、expr 是非终结符号；头是 stmt，体是 if ( expr ) stmt else stmt\n- **答对**：被替换的是 A，没有变"
+    },
+    {
+      "type": "key-insight",
+      "content": "E 不断展开成 +T | T，导致第一步始终无法结束。",
+      "sourceMessageIndexes": [
+        14
+      ]
+    },
+    {
+      "type": "open-question",
+      "content": "产生式 \\texttt{stmt} \\to \\texttt{if}\\ (\\ \\texttt{expr}\\ )\\ \\texttt{stmt}\\ \\texttt{else}\\ \\texttt{stmt} 里哪些是终结符号、哪些是非终结符号，头是谁、体是谁？片段结束时尚未作答。"
+    },
+    {
+      "type": "review-questions",
+      "items": [
+        {
+          "question": "为什么左递归文法 $E \\to E + T \\mid T$ 不能直接用于自顶向下分析？",
+          "answer": "展开 E 时最左符号还是 E，一个词法单元都没消费掉就先去展开里层的 E，递归原地打转，永远迈不出读入下一个 token 的那一步。"
+        },
+        {
+          "question": "一条二义文法能为某个句子生成几棵语法分析树？LL 与 LR 对二义性的态度如何？",
+          "answer": "两棵（可多棵）。课本 4.2.5 说大部分语法分析器都期望文法是无二义性的，两条路都希望先拿消二义性规则把多余的树砍掉。"
+        },
+        {
+          "question": "本应写 a == b 却写成 a = b，属于哪一类错误？为什么编译时不被当作语法错误抓出来？",
+          "answer": "逻辑错误。两者语法结构都合法，语义上类型也未必打架，编译器只读文法读不到程序员意图，所以安全放过。"
+        },
+        {
+          "question": "为什么短语层次恢复中总是在当前输入符号之前插入符号会导致无限循环？",
+          "answer": "插入的记号先被分析掉，那个当前符号始终没被消费；只要它一直跟预期对不上，就一直往它前面塞，循环空转。破法是让插入的记号顺着分析被消费掉，使游标前移。"
+        }
+      ]
+    }
+  ],
+  "generationMeta": {
+    "pipelineVersion": "post-class-v2",
+    "mode": "chunked",
+    "jobId": "pn_mujmgwl740f66c323f5c",
+    "traceId": "tr_mujmgwl7a44fa0d135f1",
+    "sourceHash": "sha256:0664b337a5e992e7580ae344bd9314bcd9fff154c4ea79cfc238c953230f7129",
+    "sourceMessageCount": 60,
+    "chunkCount": 3,
+    "generatedAt": 1790502039278,
+    "decision": "degraded",
+    "quality": {
+      "score": 0.4226,
+      "metrics": {
+        "topicCoverage": 1,
+        "learnerEvidenceCoverage": 1,
+        "explanationCoverage": 0.9285714285714286,
+        "sourceIntegrity": 1,
+        "reviewQuestionDiversity": 0.967741935483871,
+        "structureValidity": 1,
+        "lengthFitness": 1,
+        "duplicationRatio": 0,
+        "unsupportedTopicRatio": 0,
+        "lengthChars": 3362,
+        "conceptCount": 14,
+        "evidenceTopicCount": 14,
+        "chunkCompleteness": 0.42857142857142855
+      }
+    },
+    "warnings": [
+      "compressed to fit the 3000-4000 target (4738 -> 3402 characters)",
+      "slice chunk-001 missing (upstream_bad_request)",
+      "slice chunk-003 missing (upstream_timeout)",
+      "slice chunk-006 missing (upstream_empty_content)",
+      "slice chunk-007 missing (upstream_timeout)",
+      "note covers 3 of 7 slices",
+      "scored against 43% of the lesson's slices"
+    ],
+    "evidenceIndex": [
+      {
+        "name": "LL 与 LR 的取舍：人脑走自顶向下",
+        "sourceMessageIndexes": [
+          12,
+          13
+        ]
+      },
+      {
+        "name": "代表性文法与表达式文法的性质",
+        "sourceMessageIndexes": [
+          13
+        ]
+      },
+      {
+        "name": "左递归为何卡死自顶向下，以及消除左递归",
+        "sourceMessageIndexes": [
+          14,
+          15
+        ]
+      },
+      {
+        "name": "二义性文法与分析方法对它的态度",
+        "sourceMessageIndexes": [
+          15,
+          16,
+          17
+        ]
+      },
+      {
+        "name": "错误的四个层次与可行前缀特性",
+        "sourceMessageIndexes": [
+          17,
+          18,
+          19
+        ]
+      },
+      {
+        "name": "错误恢复的四张牌及其代价",
+        "sourceMessageIndexes": [
+          19,
+          21,
+          22,
+          23
+        ]
+      },
+      {
+        "name": "上下文无关文法的正式定义",
+        "sourceMessageIndexes": [
+          23
+        ]
+      },
+      {
+        "name": "终结符号与非终结符号的辨认",
+        "sourceMessageIndexes": [
+          24,
+          25
+        ]
+      },
+      {
+        "name": "符号表示约定",
+        "sourceMessageIndexes": [
+          25
+        ]
+      },
+      {
+        "name": "推导 (derivation)",
+        "sourceMessageIndexes": [
+          25
+        ]
+      },
+      {
+        "name": "推导的一般形式",
+        "sourceMessageIndexes": [
+          25
+        ]
+      },
+      {
+        "name": "句型与句子的判定",
+        "sourceMessageIndexes": [
+          27
+        ]
+      },
+      {
+        "name": "最左推导与最右推导",
+        "sourceMessageIndexes": [
+          27
+        ]
+      },
+      {
+        "name": "语法分析树与推导的多对一关系",
+        "sourceMessageIndexes": [
+          27
+        ]
+      }
+    ],
+    "degradedReason": "chunk_failures"
+  }
+}

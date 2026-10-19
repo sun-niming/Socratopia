@@ -1,0 +1,46 @@
+{
+  "title": "std::string的常用成员函数",
+  "definition": "`std::string` 提供多种用于查找、截取、替换和检查前后缀的成员函数。`substr(pos, len)` 返回从位置 `pos` 开始、长度为 `len` 的子字符串；`find(str)` 查找子字符串，成功时返回其位置，失败时返回 `string::npos`；`replace(pos, len, str)` 用另一个字符串替换指定位置和长度的部分；`starts_with(str)` 和 `ends_with(str)` 分别判断字符串是否以给定子串开头或结尾。",
+  "key_points": [
+    "`substr` 的位置和长度决定返回的子字符串范围。",
+    "`find` 未找到目标时必须与 `string::npos` 比较。",
+    "`replace` 根据起始位置和长度替换原字符串的一部分。",
+    "`starts_with` 和 `ends_with` 返回布尔值。"
+  ],
+  "examples": [
+    "`auto part = str.substr(3, 6);` 获取从位置3开始、长度为6的子字符串。",
+    "`auto position = str.find(strWorld);`；应使用 `if (position != string::npos) { ... }` 判断是否找到。",
+    "`strHello.replace(position, 2, strWorld.substr(3, 6));` 将 `strHello` 的指定部分替换为截取出的子字符串。"
+  ],
+  "misconceptions": [
+    "误以为 `find` 未找到时返回0。",
+    "误以为 `substr(pos, len)` 的第二个参数是结束位置，而不是长度。",
+    "误以为 `starts_with` 和 `ends_with` 返回找到的位置，而不是布尔结果。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何判断 `std::string::find` 是否成功找到子字符串？",
+      "a": "将返回值与 `string::npos` 比较：`if (position != string::npos) { ... }` 表示找到了目标子字符串。"
+    },
+    {
+      "q": "`substr(pos, len)` 的两个参数分别表示什么？",
+      "a": "`pos` 表示起始位置，`len` 表示要返回的子字符串长度。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "std::string",
+    "字符串位置与长度"
+  ],
+  "source_pages": [
+    108,
+    108
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "204_std_string的常用成员函数",
+  "_chunk_pages": [
+    105,
+    108
+  ]
+}

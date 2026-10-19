@@ -1,0 +1,39 @@
+{
+  "title": "float属性",
+  "definition": "float 属性用于设定元素是否浮动以及向左还是向右浮动。其基本语法为 float:left|right|none。",
+  "key_points": [
+    "float:left 表示元素向左浮动",
+    "float:right 表示元素向右浮动",
+    "float:none 表示不浮动，是默认值"
+  ],
+  "examples": [
+    "float:left;",
+    "float:right;",
+    "float:none;"
+  ],
+  "misconceptions": [
+    "float:none 不是清除浮动，而是不浮动",
+    "float 属性只有 left 一种取值"
+  ],
+  "qa_pairs": [
+    {
+      "q": "float 属性的默认值是什么？",
+      "a": "none。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "浮动定位"
+  ],
+  "source_pages": [
+    141,
+    144
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "230_float属性",
+  "_chunk_pages": [
+    141,
+    144
+  ]
+}

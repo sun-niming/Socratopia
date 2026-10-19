@@ -1,0 +1,40 @@
+{
+  "title": "Global对象",
+  "definition": "Global对象是ECMAScript对象模型中的最高级对象，拥有最大的执行环境。一切声明的变量和函数都可以看作它的属性，因此在程序的任何地方都能访问这些全局成员。在浏览器中，Global对象对应window对象。",
+  "key_points": [
+    "它是ECMAScript对象模型中的最高级对象，表示全局对象。",
+    "一切声明的变量和函数都是它的属性，因此可在程序任意位置访问。",
+    "Global对象在程序开始运行前就已经由系统创建，因此可以直接使用parseInt等预定义函数。",
+    "在浏览器环境中，Global对象就是window对象。",
+    "Global对象不能像类一样被new调用，也不能像函数一样直接调用。"
+  ],
+  "examples": [
+    "浏览器中可以直接使用parseInt()，因为它属于全局对象的属性。",
+    "在浏览器里，全局对象可理解为window。"
+  ],
+  "misconceptions": [
+    "以为Global对象是某个普通的JavaScript对象实例，而不是“全局对象”的概念。",
+    "以为Global对象可以用new创建，或者可以像普通函数那样调用。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "Global对象在浏览器中对应什么对象？",
+      "a": "window对象。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "ECMAScript对象模型"
+  ],
+  "source_pages": [
+    301,
+    302
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "428_global对象",
+  "_chunk_pages": [
+    301,
+    304
+  ]
+}

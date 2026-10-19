@@ -1,0 +1,43 @@
+{
+  "title": "通过成员函数创建线程",
+  "definition": "可以把某个类的非静态成员函数以及对象指针传给std::thread，使新线程在指定对象上执行该成员函数。成员函数指针和对象指针共同确定调用哪个对象的方法。",
+  "key_points": [
+    "线程构造时需要提供成员函数指针和目标对象的指针或其他可调用对象。",
+    "如果多个线程访问同一个对象，必须确认这些访问是线程安全的，否则可能产生争用条件。",
+    "互斥等同步机制可以用于保护对共享对象的并发访问。"
+  ],
+  "examples": [
+    "class Request {\npublic:\n    Request(int id) : m_id{id} {}\n\n    void process() {\n        cout << \"Processing request \" << m_id << endl;\n    }\n\nprivate:\n    int m_id;\n};\n\nRequest req{100};\nthread t{&Request::process, &req};\nt.join();"
+  ],
+  "misconceptions": [
+    "仅把成员函数交给线程执行，并不会自动复制或保护目标对象。",
+    "多个线程访问同一个对象时，必须额外考虑同步和线程安全问题。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何在线程中执行对象req的Request::process成员函数？",
+      "a": "可以写成：thread t{&Request::process, &req};"
+    },
+    {
+      "q": "多个线程访问同一个对象时需要注意什么？",
+      "a": "需要确认访问是线程安全的，避免争用条件；必要时使用互斥等同步机制。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++成员函数指针",
+    "std::thread参数传递",
+    "线程安全基本概念"
+  ],
+  "source_pages": [
+    795,
+    795
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1631_通过成员函数创建线程",
+  "_chunk_pages": [
+    793,
+    796
+  ]
+}

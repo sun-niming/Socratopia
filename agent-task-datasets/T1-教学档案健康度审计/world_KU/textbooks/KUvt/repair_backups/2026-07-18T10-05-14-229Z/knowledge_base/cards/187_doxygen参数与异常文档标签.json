@@ -1,0 +1,42 @@
+{
+  "title": "Doxygen参数与异常文档标签",
+  "definition": "Doxygen 可以通过特殊注释为 C++ 接口生成文档。其中，`@param` 用于说明函数参数，`@throws` 用于说明函数可能抛出的异常。例如，构造函数文档可以说明 `initialSeeds` 参数的含义、取值要求以及不满足要求时抛出的异常。",
+  "key_points": [
+    "`@param` 后跟参数名及其说明，用于记录函数参数的语义和约束。",
+    "`@throws` 用于记录函数可能抛出的异常及其触发条件。",
+    "这些注释可以被 Doxygen 转换为 HTML 文档中的参数和异常说明。"
+  ],
+  "examples": [
+    "`@param initialSeeds The starting number of seeds, must be > 5.`",
+    "`@throws invalid_argument if initialSeeds <= 5.`"
+  ],
+  "misconceptions": [
+    "`@param` 和 `@throws` 不是 C++ 语法，不会直接改变程序的编译或运行行为。",
+    "只写参数类型而不说明参数含义，不能完全替代 `@param` 文档。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "Doxygen 中 `@param` 和 `@throws` 分别用于什么？",
+      "a": "`@param` 用于说明函数参数；`@throws` 用于说明函数可能抛出的异常及其触发条件。"
+    },
+    {
+      "q": "如何在 Doxygen 注释中说明 `initialSeeds` 必须大于 5？",
+      "a": "可以写：`@param initialSeeds The starting number of seeds, must be > 5.`"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++函数参数和异常的基本概念"
+  ],
+  "source_pages": [
+    129,
+    132
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "187_doxygen参数与异常文档标签",
+  "_chunk_pages": [
+    129,
+    132
+  ]
+}

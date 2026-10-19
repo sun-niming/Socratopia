@@ -1,0 +1,42 @@
+{
+  "title": "非虚函数被派生类同名声明时会隐藏而非重写",
+  "definition": "如果基类成员函数没有声明为 virtual，派生类中即使声明了同名函数，也不会重写基类函数，而是在派生类中创建一个彼此独立的新函数。这种情况称为隐藏基类方法。通过派生类对象直接调用时，通常调用派生类版本；通过基类指针或基类引用调用时，则调用基类版本。",
+  "key_points": [
+    "非虚函数调用根据表达式的静态类型确定，不会根据对象的实际派生类型动态分派。",
+    "派生类中的同名函数与基类非虚函数没有重写关系。",
+    "通过 `Derived` 对象调用同名函数，会调用 `Derived` 版本；通过 `Base&` 或 `Base*` 调用，会调用 `Base` 版本。"
+  ],
+  "examples": [
+    "代码关系可表示为：`class Base { public: void go(); };`，`class Derived : public Base { public: void go(); };`。调用 `Derived myDerived; myDerived.go();` 会调用 `Derived::go()`；调用 `Base& ref = myDerived; ref.go();` 会调用 `Base::go()`。"
+  ],
+  "misconceptions": [
+    "看到派生类和基类具有同名函数，不能直接认为发生了重写。",
+    "把基类引用绑定到派生类对象，并不会让非虚函数自动调用派生类版本。",
+    "隐藏与重写不同：隐藏不要求基类函数是 virtual，也不产生动态分派。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "基类的 go() 不是 virtual，派生类也定义了 go()，这是否构成重写？",
+      "a": "不构成重写。派生类只是定义了一个新的同名函数，并隐藏了基类函数。"
+    },
+    {
+      "q": "若 `Base& ref` 引用一个 `Derived` 对象，且 go() 不是虚函数，`ref.go()` 调用哪个版本？",
+      "a": "调用 `Base::go()`，因为非虚函数根据引用的静态类型进行静态绑定。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "继承与成员函数调用"
+  ],
+  "source_pages": [
+    309,
+    310
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "636_非虚函数被派生类同名声明时会隐藏而非重写",
+  "_chunk_pages": [
+    309,
+    312
+  ]
+}

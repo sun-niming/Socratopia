@@ -1,0 +1,38 @@
+{
+  "title": "访问日志记录",
+  "definition": "服务器应把请求和状态码记录到访问日志中，可以用 `tail -n 20 logs/access.log` 查看最近日志，确认请求是否被正确处理。",
+  "key_points": [
+    "访问日志应记录请求。",
+    "访问日志应记录状态码。",
+    "`tail -n 20` 可查看最近的日志内容。"
+  ],
+  "examples": [
+    "`tail -n 20 logs/access.log`"
+  ],
+  "misconceptions": [
+    "日志只记录错误请求，不记录正常请求。",
+    "没有看到日志就代表请求没到服务器。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "怎样查看最近的访问日志并确认状态码？",
+      "a": "执行 `tail -n 20 logs/access.log`。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "Linux 文本查看命令",
+    "日志基础"
+  ],
+  "source_pages": [
+    113,
+    116
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "190_访问日志记录",
+  "_chunk_pages": [
+    113,
+    116
+  ]
+}

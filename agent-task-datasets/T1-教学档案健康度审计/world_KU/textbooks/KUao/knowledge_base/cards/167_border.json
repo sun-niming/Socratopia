@@ -1,0 +1,41 @@
+{
+  "title": "border",
+  "definition": "CSS 的边框属性，用来设置元素边框。教材说明其取值顺序可由宽度、线条类型、颜色组成，示例为 1px solid blue。",
+  "key_points": [
+    "用于设置边框",
+    "常见写法顺序是宽度、线条类型、颜色",
+    "教材示例是 1px solid blue"
+  ],
+  "examples": [
+    "border: 1px solid blue;"
+  ],
+  "misconceptions": [
+    "border 不只是颜色，还包括宽度和线条类型。",
+    "边框样式的三个要素通常要一起考虑。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "border 属性的作用是什么？",
+      "a": "设置边框。"
+    },
+    {
+      "q": "border: 1px solid blue; 各部分分别表示什么？",
+      "a": "1px 是宽度，solid 是线条类型，blue 是颜色。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "CSS基础"
+  ],
+  "source_pages": [
+    117,
+    120
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "167_border",
+  "_chunk_pages": [
+    117,
+    120
+  ]
+}

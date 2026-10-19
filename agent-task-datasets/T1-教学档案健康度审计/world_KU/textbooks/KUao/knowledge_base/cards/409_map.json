@@ -1,0 +1,38 @@
+{
+  "title": "map()",
+  "definition": "`map()` 用于映射数组：它会对数组中的每个元素执行回调，并生成一个新数组。教材表格强调，回调函数一定要 `return` 当前元素对应的新值。",
+  "key_points": [
+    "返回值是新数组",
+    "对每个元素都执行回调",
+    "回调函数必须返回当前元素对应的新值"
+  ],
+  "examples": [
+    "['🐕', '🐕', '🐕'].map(el => '🐶') // ['🐶', '🐶', '🐶']"
+  ],
+  "misconceptions": [
+    "以为 `map()` 只是遍历，不会产生结果",
+    "以为 `map()` 返回 `undefined`",
+    "以为回调函数可以不返回值"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`map()` 的主要作用是什么？",
+      "a": "映射数组，生成一个新数组。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "Array对象与创建方式"
+  ],
+  "source_pages": [
+    307,
+    308
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "409_map",
+  "_chunk_pages": [
+    305,
+    308
+  ]
+}

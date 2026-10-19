@@ -1,0 +1,48 @@
+{
+  "title": "使用 throw 重新抛出当前异常",
+  "definition": "在异常处理程序（catch 块）中单独使用 throw;，可以重新抛出当前正在处理的原异常，使上层调用者继续处理同一个异常对象。与之不同，throw e; 会根据捕获变量 e 重新抛出一个异常表达式，可能造成异常对象类型信息被截断，特别是在通过基类引用捕获派生类异常时。",
+  "key_points": [
+    "catch 块中的单独 throw; 表示重新抛出当前异常。",
+    "重新抛出后，当前 catch 块结束，上层的 try/catch 可以继续捕获该异常。",
+    "throw; 保留原异常对象及其动态类型。",
+    "不要把 throw e; 当作 throw; 的等价写法；通过基类引用捕获后使用 throw e; 可能截断派生类异常对象。"
+  ],
+  "examples": [
+    "代码示例：\nvoid g() {\n    throw std::invalid_argument{\"Some exception\"};\n}\n\nvoid f() {\n    try {\n        g();\n    } catch (const std::invalid_argument& e) {\n        std::cout << \"caught in f: \" << e.what() << std::endl;\n        throw; // 重新抛出当前异常\n    }\n}\n\nint main() {\n    try {\n        f();\n    } catch (const std::invalid_argument& e) {\n        std::cout << \"caught in main: \" << e.what() << std::endl;\n    }\n}\n\n输出顺序为：\ncaught in f: Some exception\ncaught in main: Some exception"
+  ],
+  "misconceptions": [
+    "错误理解：throw; 与 throw e; 完全相同。实际 throw; 重新抛出原异常，而 throw e; 可能截断异常对象。",
+    "错误理解：throw; 会创建一个新的异常对象。实际它重新抛出当前正在处理的异常。",
+    "错误理解：异常只能在最初捕获它的 catch 块中处理。实际 catch 块可以使用 throw; 将异常继续传播给上层。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "在 catch 块中如何重新抛出当前异常？",
+      "a": "使用不带操作数的 throw;。"
+    },
+    {
+      "q": "为什么通常不能用 throw e; 替代 throw;？",
+      "a": "因为 e 可能是基类引用，throw e; 会按照表达式的静态类型重新抛出异常，可能截断原来的派生类异常对象；throw; 则保留原异常对象。"
+    },
+    {
+      "q": "示例中 f() 和 main() 如何分别处理同一个 invalid_argument 异常？",
+      "a": "f() 捕获后输出消息，再使用 throw; 重新抛出；main() 的 catch 再次捕获并输出消息。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++异常捕获",
+    "继承与多态对象切片"
+  ],
+  "source_pages": [
+    456,
+    456
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "923_使用_throw_重新抛出当前异常",
+  "_chunk_pages": [
+    453,
+    456
+  ]
+}

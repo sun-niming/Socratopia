@@ -1,0 +1,57 @@
+{
+  "title": "国际象棋程序的子系统职责",
+  "definition": "教材将国际象棋程序划分为 GamePlay、ChessBoard、ChessBoardView、ChessPiece、ChessPieceView、Player 和 ErrorLogger 等功能子系统。每个子系统承担相对独立的职责，并通过公开接口与其他子系统合作。",
+  "key_points": [
+    "GamePlay 负责开始游戏、控制游戏进度、控制绘制、判断胜方和结束游戏。",
+    "ChessBoard 负责存储棋子，并检测平局和将死等棋盘状态，同时提供获取和设置棋子的接口。",
+    "ChessBoardView 负责绘制棋盘，并利用 ChessPieceView 绘制相关棋子。",
+    "ChessPiece 负责棋子的移动行为和合法移动检测，并使用 ChessBoard 提供的棋子获取、设置接口。",
+    "ChessPieceView 负责绘制相应棋子。",
+    "Player 负责与用户交互，包括提醒用户移动、获取移动信息并执行移动；示例中有两名玩家。",
+    "ErrorLogger 负责把错误信息写入日志文件。",
+    "国际象棋开局时共有 32 个棋子，因此示例列出 32 个 ChessPiece 和 32 个 ChessPieceView 实例。"
+  ],
+  "examples": [
+    "子系统和主要职责可概括为：$$\\begin{array}{c|l}\\text{子系统}&\\text{主要职责}\\\\\\hline\\text{GamePlay}&\\text{控制游戏流程}\\\\\\text{ChessBoard}&\\text{存储棋子和检测棋盘状态}\\\\\\text{ChessBoardView}&\\text{绘制棋盘}\\\\\\text{ChessPiece}&\\text{移动并检测合法移动}\\\\\\text{ChessPieceView}&\\text{绘制棋子}\\\\\\text{Player}&\\text{与用户交互}\\\\\\text{ErrorLogger}&\\text{记录错误}\\end{array}$$"
+  ],
+  "misconceptions": [
+    "认为 GamePlay、Player 和 ChessBoard 应合并成一个没有职责边界的大子系统。",
+    "认为 ChessBoardView 应负责存储棋子数据。",
+    "认为 ChessPieceView 应决定棋子的移动是否合法。",
+    "认为 ErrorLogger 负责控制游戏流程。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "国际象棋示例中的 ChessBoard 子系统负责什么？",
+      "a": "负责存储棋子、检测平局和将死等棋盘状态，并提供获取和设置棋子的接口。"
+    },
+    {
+      "q": "哪个子系统负责与用户交互？",
+      "a": "Player。"
+    },
+    {
+      "q": "哪个子系统负责将错误信息写入日志文件？",
+      "a": "ErrorLogger。"
+    },
+    {
+      "q": "ChessPiece 与 ChessPieceView 的职责有何区别？",
+      "a": "ChessPiece 负责棋子的移动和合法移动检测；ChessPieceView 负责绘制棋子。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "将程序划分为子系统",
+    "MVC 模式的三个组件"
+  ],
+  "source_pages": [
+    159,
+    160
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "335_国际象棋程序的子系统职责",
+  "_chunk_pages": [
+    157,
+    160
+  ]
+}

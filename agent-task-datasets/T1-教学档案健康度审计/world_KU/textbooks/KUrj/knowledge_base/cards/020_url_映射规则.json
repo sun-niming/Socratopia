@@ -1,0 +1,41 @@
+{
+  "title": "URL 映射规则",
+  "definition": "静态文件服务器需要把 URL 路径映射到本地文件路径。原文给出的规则是：`root = ./www`，`index = index.html`，因此 `/` 和 `/index.html` 都映射到 `./www/index.html`，`/practice.html` 映射到 `./www/practice.html`，`/css/style.css` 映射到 `./www/css/style.css`。映射时要保证最终路径不要逃出 `root`。",
+  "key_points": [
+    "URL 总是以 `/` 开头，映射函数输入的是 URL 路径，输出的是候选文件路径。",
+    "`/` 和 `/index.html` 都应指向首页 `./www/index.html`。",
+    "拼接路径时要防止最终路径逃出 `root`。",
+    "映射函数只负责路径转换，不负责发送响应，也不负责写日志。"
+  ],
+  "examples": [
+    "`/ -> ./www/index.html`",
+    "`/practice.html -> ./www/practice.html`",
+    "`/css/style.css -> ./www/css/style.css`"
+  ],
+  "misconceptions": [
+    "以为 URL 可以直接无脑拼接成文件路径而不考虑 `root`。",
+    "以为路径映射函数应该顺便处理网络发送和日志记录。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`/` 和 `/index.html` 在原文规则下分别映射到哪里？",
+      "a": "都映射到 `./www/index.html`。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "文件路径基础",
+    "HTTP URL 基础"
+  ],
+  "source_pages": [
+    21,
+    24
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "020_url_映射规则",
+  "_chunk_pages": [
+    21,
+    24
+  ]
+}

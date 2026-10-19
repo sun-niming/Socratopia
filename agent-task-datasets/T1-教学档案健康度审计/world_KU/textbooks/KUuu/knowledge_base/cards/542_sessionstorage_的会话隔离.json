@@ -1,0 +1,45 @@
+{
+  "title": "sessionStorage 的会话隔离",
+  "definition": "sessionStorage 只在当前浏览器会话期间有效，数据只对当前窗口或标签页可用；当用户关闭浏览器窗口或标签页时，sessionStorage 中的数据会被清除。不同窗口或标签页之间的 sessionStorage 是隔离的，即使同源也不共享。页面中还指出：同一个窗口里通过 window.open() 打开的新标签页或窗口是否继承父窗口的 sessionStorage，取决于浏览器实现。",
+  "key_points": [
+    "数据只在当前浏览器会话中有效。",
+    "关闭窗口或标签页后数据清除。",
+    "不同标签页/窗口之间不共享 sessionStorage，即使同源也不共享。",
+    "window.open() 打开的页面可能继承父窗口的 sessionStorage，但依浏览器实现而定。"
+  ],
+  "examples": [
+    "sessionStorage.setItem('currentTabId', 'tab-123');",
+    "sessionStorage.setItem('userAction', 'editing');",
+    "// 在另一个独立打开的同源标签页中",
+    "sessionStorage.getItem('currentTabId'); // null"
+  ],
+  "misconceptions": [
+    "以为 sessionStorage 和 localStorage 一样可以被所有同源标签页共享。",
+    "以为关闭页面后数据还能保留。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "sessionStorage 的数据什么时候会被清除？",
+      "a": "当用户关闭浏览器窗口或标签页时会被清除。"
+    },
+    {
+      "q": "为什么另一个标签页里取不到 currentTabId？",
+      "a": "因为 sessionStorage 只在当前标签页或窗口中有效，不同标签页之间不共享。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "浏览器窗口/标签页"
+  ],
+  "source_pages": [
+    382,
+    384
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "542_sessionstorage_的会话隔离",
+  "_chunk_pages": [
+    381,
+    384
+  ]
+}

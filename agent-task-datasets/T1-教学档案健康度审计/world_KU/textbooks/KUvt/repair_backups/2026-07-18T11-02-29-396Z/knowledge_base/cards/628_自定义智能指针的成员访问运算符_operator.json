@@ -1,0 +1,45 @@
+{
+  "title": "自定义智能指针的成员访问运算符 operator->",
+  "definition": "类可以通过定义成员函数 `operator->`，使其对象支持成员访问运算符 `->`。对于保存对象指针的智能指针，`operator->` 返回内部的原始指针，因此 `smartCell->set(5)` 可以通过智能指针访问所管理对象的成员函数。",
+  "key_points": [
+    "`operator->` 用于重载成员访问运算符 `->`。",
+    "原文给出的核心实现是 `T* operator->() { return m_ptr; }`；同时还展示了常量版本 `const T* operator->() const`。",
+    "表达式 `smartCell->set(5)` 会通过重载的 `operator->` 获得内部指针，然后调用 `set` 成员函数。",
+    "原文将该过程概念性地写成类似 `smartCell.operator->()->set(5)` 的形式。"
+  ],
+  "examples": [
+    "```cpp\nT* operator->() { return m_ptr; }\nconst T* operator->() const { return m_ptr; }\n\nPointer<SpreadsheetCell> smartCell{new SpreadsheetCell};\nsmartCell->set(5);\ncout << smartCell->getValue() << endl;\n```",
+    "等价理解：`smartCell->set(5)` 先调用 `smartCell.operator->()` 得到 `SpreadsheetCell*`，再对该指针使用内置的 `->` 调用 `set`。"
+  ],
+  "misconceptions": [
+    "定义 `operator->` 的返回值通常应当是原始指针或能够继续支持 `operator->` 的对象；不能把它简单理解为返回被管理对象引用。",
+    "`smartCell->set(5)` 不是直接把 `smartCell` 当成原始指针，而是先调用自定义的 `operator->`。",
+    "`operator->` 与 `operator*` 是两个不同的运算符重载，定义其中一个不会自动定义另一个。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "自定义智能指针为什么可以写成 `smartCell->set(5)`？",
+      "a": "因为类定义了 `operator->`，该函数返回内部的 `SpreadsheetCell*`，随后使用原生指针的 `->` 调用 `set`。"
+    },
+    {
+      "q": "`operator->() const` 的返回类型为什么可以是 `const T*`？",
+      "a": "它用于常量智能指针对象，返回指向常量 `T` 的指针，从而通过该访问路径不能修改被指向对象。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++成员函数运算符重载",
+    "指针与成员访问运算符"
+  ],
+  "source_pages": [
+    485,
+    486
+  ],
+  "needs_verification": true,
+  "verify_query": "Marc Gregoire Professional C++ 5th edition operator-> smart pointer operator* operator.* 15.7.2 exact text",
+  "concept_id": "628_自定义智能指针的成员访问运算符_operator",
+  "_chunk_pages": [
+    485,
+    488
+  ]
+}

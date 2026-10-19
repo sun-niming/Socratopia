@@ -1,0 +1,36 @@
+{
+  "title": "background-size 属性",
+  "definition": "background-size 用于设置背景图片大小。教材给出的关键词是 cover 和 contain。",
+  "key_points": [
+    "cover 表示放大图像以铺满元素。",
+    "contain 表示缩小图像以铺满元素。"
+  ],
+  "examples": [
+    "background-size: cover;",
+    "background-size: contain;"
+  ],
+  "misconceptions": [
+    "cover 和 contain 的作用完全相同。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "cover 和 contain 分别表示什么？",
+      "a": "cover 表示放大图像，铺满元素；contain 表示缩小图像，铺满元素。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "背景样式"
+  ],
+  "source_pages": [
+    113,
+    116
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "188_background_size_属性",
+  "_chunk_pages": [
+    113,
+    116
+  ]
+}

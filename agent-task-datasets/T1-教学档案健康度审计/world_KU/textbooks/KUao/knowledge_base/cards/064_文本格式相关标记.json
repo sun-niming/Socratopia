@@ -1,0 +1,47 @@
+{
+  "title": "文本格式相关标记",
+  "definition": "HTML中用于文本格式处理的标记包括标题标记<h1>到<h6>、段落标记<p>、预格式化标记<pre>、换行标记<br>、强调标记strong和em、段内组合span、注释<!-- 内容 -->以及水平分割线hr。",
+  "key_points": [
+    "标题标记：<h1>…<h6>",
+    "段落标记：<p>",
+    "预格式化标记：<pre>",
+    "换行标记：<br>",
+    "强调标记：strong、em",
+    "段内组合：span",
+    "注释：<!-- 内容 -->",
+    "水平分割线：hr"
+  ],
+  "examples": [
+    "<h1>一级标题</h1>\n<p>这是一个段落。</p>\n<br>\n<!-- 这是注释 -->\n<hr>"
+  ],
+  "misconceptions": [
+    "这些标记都是用来创建页面结构的容器标记。",
+    "<br>是成对出现的标记。",
+    "注释内容会在浏览器页面中显示出来。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "本页列出的文本格式相关标记有哪些？",
+      "a": "标题标记h1到h6、段落标记p、预格式化标记pre、换行标记br、strong和em、span、注释以及hr。"
+    },
+    {
+      "q": "<br>的作用是什么？",
+      "a": "换行。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "HTML文档基本结构"
+  ],
+  "source_pages": [
+    45,
+    48
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "064_文本格式相关标记",
+  "_chunk_pages": [
+    45,
+    48
+  ]
+}

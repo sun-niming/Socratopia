@@ -1,0 +1,45 @@
+{
+  "title": "模板特化的模块组织与自动选择",
+  "definition": "在模块代码中，原始Grid模板可以放在一个名为main的模块接口分区，Grid<const char*>特化放在名为string的模块接口分区。特化分区需要导入原始模板分区，因为使用特化时原始模板也必须可见；总模块接口再导出这两个分区，用户即可直接使用原始模板和特化版本。",
+  "key_points": [
+    "特化所在分区需要导入原始模板，例如：import :main;。",
+    "总模块接口可以写成：\n```cpp\nexport module grid;\nexport import :main;\nexport import :string;\n```",
+    "用户不需要手动选择特化版本；编译器根据模板实参自动选择原始模板或对应的显式特化。",
+    "模块组织只是代码可见性和导出的安排，不改变显式特化的语义。"
+  ],
+  "examples": [
+    "模块结构示例：\n```cpp\n// string模块接口分区\nexport module grid:string;\nimport :main;\nexport template <>\nclass Grid<const char*> { /* ... */ };\n```",
+    "用户代码只需写：\n```cpp\nGrid<int> myIntGrid;                 // 使用原始Grid模板\nGrid<const char*> stringGrid1{2, 2}; // 使用const char*特化\n```"
+  ],
+  "misconceptions": [
+    "用户不需要显式调用某个名为specialization的类，也不需要手动切换实现。",
+    "特化分区不能完全忽略原始模板；原始模板必须对特化实现可见。",
+    "模块分区的组织方式不等于类继承关系。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "Grid<const char*>由谁选择使用特化版本？",
+      "a": "由编译器根据用户提供的模板实参自动选择。"
+    },
+    {
+      "q": "为什么string模块接口分区要import :main？",
+      "a": "因为使用模板特化时，原始Grid模板必须对特化实现可见。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++模块与模块接口分区",
+    "类模板显式特化"
+  ],
+  "source_pages": [
+    390,
+    391
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "793_模板特化的模块组织与自动选择",
+  "_chunk_pages": [
+    389,
+    392
+  ]
+}

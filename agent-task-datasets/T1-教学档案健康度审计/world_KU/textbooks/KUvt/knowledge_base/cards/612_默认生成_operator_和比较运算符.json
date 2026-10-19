@@ -1,0 +1,55 @@
+{
+  "title": "默认生成 operator<=> 和比较运算符",
+  "definition": "如果类的比较结果只需要依次比较其数据成员，可以将 `operator<=>` 显式默认化为 `= default`，让编译器自动生成比较逻辑。对于只有一个 `double` 数据成员的 `SpreadsheetCell`，编译器会根据该成员的比较运算符推断返回类型为 `std::partial_ordering`，从而支持两个 `SpreadsheetCell` 对象之间的完整比较。",
+  "key_points": [
+    "默认化的三向比较运算符示例：`[[nodiscard]] auto operator<=>(const SpreadsheetCell&) const = default;`。",
+    "编译器会依次比较类的数据成员来实现默认的 `operator<=>`。",
+    "如果使用 `auto` 作为返回类型，编译器会根据数据成员的 `operator<=>` 返回类型进行推断。",
+    "若数据成员不支持 `operator<=>`，返回类型推断可能无法工作，此时需要显式指定 `std::strong_ordering`、`std::partial_ordering` 或 `std::weak_ordering` 等返回类型。",
+    "显式默认化 `operator<=>` 时，编译器还会自动包含默认的 `operator==`；但如果类另外声明了 `operator==(double)`，则需要显式默认 `operator==(const SpreadsheetCell&)`，因为用户声明的重载会影响自动生成。",
+    "默认生成的比较只适用于按数据成员顺序比较即可满足类语义的情况。"
+  ],
+  "examples": [
+    "最简写法：`[[nodiscard]] auto operator<=>(const SpreadsheetCell&) const = default;`",
+    "也可以显式指定返回类型：`[[nodiscard]] std::partial_ordering operator<=>(const SpreadsheetCell&) const = default;`",
+    "当类只有一个 `double` 数据成员时，默认的 `operator<=>` 返回类型可推断为 `std::partial_ordering`。",
+    "如果同时提供了 `double` 版本的相等比较，应显式保留对象版本：`[[nodiscard]] bool operator==(const SpreadsheetCell&) const = default;`"
+  ],
+  "misconceptions": [
+    "`= default` 不是不实现比较，而是要求编译器按数据成员自动生成实现。",
+    "默认生成的比较不适合所有类；只有当按数据成员依次比较符合类的语义时才适用。",
+    "使用 `auto` 并不能解决所有默认三向比较问题；数据成员需要支持相应的 `operator<=>`，否则必须显式指定返回类型或调整实现。",
+    "添加 `operator==(double)` 后，不应假定对象版本的 `operator==` 仍会始终自动生成；教材要求在这种情况下显式默认对象版本。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何让编译器自动按照数据成员生成三向比较运算符？",
+      "a": "将成员函数声明为 `[[nodiscard]] auto operator<=>(const SpreadsheetCell&) const = default;`。"
+    },
+    {
+      "q": "为什么 `SpreadsheetCell` 默认生成的 `operator<=>` 返回 `std::partial_ordering`？",
+      "a": "因为它包含一个 `double` 数据成员，而 `double` 的三向比较结果是偏序关系。"
+    },
+    {
+      "q": "什么时候不适合使用默认生成的 `operator<=>`？",
+      "a": "当类的比较语义不等同于按数据成员顺序逐一比较时，不应直接使用默认生成的比较运算符。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "C++20 operator<=>",
+    "特殊成员函数的默认化",
+    "类数据成员比较"
+  ],
+  "source_pages": [
+    296,
+    296
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "612_默认生成_operator_和比较运算符",
+  "_chunk_pages": [
+    293,
+    296
+  ]
+}

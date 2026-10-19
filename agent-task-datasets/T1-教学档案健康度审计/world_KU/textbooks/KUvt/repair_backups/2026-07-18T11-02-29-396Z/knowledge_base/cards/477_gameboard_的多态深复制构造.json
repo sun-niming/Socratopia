@@ -1,0 +1,47 @@
+{
+  "title": "GameBoard 的多态深复制构造",
+  "definition": "GameBoard 的复制构造函数先委托普通构造函数创建相同尺寸的空棋盘，然后逐个检查源棋盘的单元格：如果源单元格非空，就调用其中 GamePiece 对象的虚拟 clone()，为目标棋盘创建同一实际派生类型的独立副本。",
+  "key_points": [
+    "复制构造函数通过构造函数委托先执行 GameBoard{src.m_width, src.m_height}，分配正确大小的 m_cells。",
+    "复制过程遍历所有坐标 $0 \\le i < m\\_width$ 和 $0 \\le j < m\\_height$。",
+    "当 src.m_cells[i][j] 非空时，目标单元格被赋值为 src.m_cells[i][j]->clone()。",
+    "该过程是深复制：目标棋盘中的棋子对象与源棋盘中的棋子对象彼此独立。",
+    "调用 clone() 可以在不事先知道具体派生类型的情况下复制 ChessPiece 等多态对象。"
+  ],
+  "examples": [
+    "复制构造的核心逻辑可表示为：$$\\begin{aligned}\\text{GameBoard(const GameBoard\\& src)}&:\\ \\text{GameBoard\\{src.m\\_width, src.m\\_height\\}}\\\\\\text{for }i&=0,\\ldots,m\\_width-1\\\\\\text{for }j&=0,\\ldots,m\\_height-1\\\\\\text{if }src.m\\_cells[i][j]\\ne\\text{nullptr}:&\\quad m\\_cells[i][j]=src.m\\_cells[i][j]->clone()\\end{aligned}$$",
+    "如果源棋盘的 $(0,0)$ 单元格保存 ChessPiece，复制后目标棋盘的 $(0,0)$ 单元格也保存一个新的 ChessPiece，而不是指向同一个对象。"
+  ],
+  "misconceptions": [
+    "复制 unique_ptr 本身不是合法的深复制方式；这里必须调用被指向对象的 clone()。",
+    "源单元格为空时，目标单元格保持为空，不会凭空创建棋子。",
+    "深复制并不意味着复制后两个棋盘共享同一批棋子；它们应拥有各自独立的对象。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "GameBoard 复制构造函数为什么不能直接复制 m_cells？",
+      "a": "因为 m_cells 包含不可复制的 std::unique_ptr，而且直接共享指针也会造成两个棋盘共同拥有同一棋子；复制构造函数必须逐个单元格调用 clone() 创建独立副本。"
+    },
+    {
+      "q": "GameBoard 复制构造函数遇到空单元格时如何处理？",
+      "a": "它只在源单元格非空时调用 clone()；空单元格保持为空。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "复制构造函数",
+    "std::unique_ptr的所有权语义",
+    "虚函数与多态复制"
+  ],
+  "source_pages": [
+    374,
+    375
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "477_gameboard_的多态深复制构造",
+  "_chunk_pages": [
+    373,
+    376
+  ]
+}

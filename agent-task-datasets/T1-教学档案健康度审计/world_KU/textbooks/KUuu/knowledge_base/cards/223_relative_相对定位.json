@@ -1,0 +1,42 @@
+{
+  "title": "relative 相对定位",
+  "definition": "relative 是相对定位，元素的位置相对于它原来应该出现的位置发生偏移，也就是在标准流中本来该出现的位置基础上移动。",
+  "key_points": [
+    "relative 表示相对定位",
+    "参照物是元素原来该出现的位置",
+    "元素仍以标准流中的原位置为基准发生偏移"
+  ],
+  "examples": [
+    "position: relative; left: 10px; top: 5px;"
+  ],
+  "misconceptions": [
+    "相对定位会脱离原来的参考位置；实际上是相对原来位置偏移",
+    "relative 的参照物是父元素；原文强调是相对于元素原来位置"
+  ],
+  "qa_pairs": [
+    {
+      "q": "relative 定位相对于什么位置？",
+      "a": "相对于元素原来该出现的位置进行偏移。"
+    },
+    {
+      "q": "相对定位中的“原来位置”指什么？",
+      "a": "指元素在标准流中应该出现的位置。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "层定位",
+    "static 默认定位"
+  ],
+  "source_pages": [
+    138,
+    139
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "223_relative_相对定位",
+  "_chunk_pages": [
+    137,
+    140
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "contentHash": "sha256:dcc21144f1af8e3bedcd61e335f1c5414181d8c612437ae77ab8e0f9a89a2ab7",
+  "generatedAt": "2026-06-24T16:13:36.684Z",
+  "pageRange": {
+    "start": 8,
+    "end": 10
+  },
+  "firstHalf": {
+    "pageRange": "8-9",
+    "summary": "前半部分主要讲 CSS 盒子模型与标准文档流。核心概念包括 content-box（标准盒子模型）、border-box（替代盒子模型）、box-sizing、content/padding/border/margin，以及元素总宽高与实际占位空间的计算关系；并说明 margin 在盒子外部，决定与其他元素的间距，而 padding、border 影响盒子本身尺寸。还介绍了 border 的宽度/颜色/样式及其缩写写法，margin/padding/border 的四值简写规则，以及多数元素默认值为 0、body/p/p/ul/li 等有特殊默认值。后半段转入标准流与元素类型：块元素、行内元素、行内块元素，display 的 block/inline/inline-block/none 转换，visibility:hidden 与 display:none 的区别，以及行内元素水平 margin、块元素垂直 margin 的表现。整体论点是：先理解盒模型和文档流，才能准确控制页面布局与元素占位。"
+  },
+  "secondHalf": {
+    "pageRange": "10-10",
+    "summary": "后半部分主要讲 CSS 的定位方式与现代布局方法。重点包括层定位中的 position 属性：static、relative、absolute、fixed、sticky，以及配合 left/right/top/bottom 和 z-index 来决定元素位置与层叠顺序；同时解释了 relative 相对自身原位偏移、absolute 相对最近已定位祖先、fixed 相对视口、sticky 兼具相对与固定特征，并提示 sticky 对 top/bottom 等阈值和父元素滚动条件有要求。接着介绍浮动布局 float:left/right/none 与 clear:left/right/both/none，强调 float 会影响相邻元素、元素浮动后脱离标准流、多个浮动盒子的排列规律及父元素高度塌陷问题与 BFC 解决思路。最后引入 Flex 弹性盒布局：通过 display:flex 使容器成为 flex container，子元素成为 flex item，围绕主轴/交叉轴、flex-direction、flex-wrap、justify-content、align-items、align-content 等属性实现更灵活的对齐与空间分配。"
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "title": "为 SpreadsheetCell 提供与 double 混合运算的 operator+ 重载",
+  "definition": "为了支持 SpreadsheetCell 与 double 之间的加法，可以为 operator+ 提供接受 double 的重载，并可以提供非成员 operator+，从而支持不同操作数顺序，例如 myCell + 5.6、myCell + 4、5.6 + myCell 和 4 + myCell。所有这些运算都应产生表示数值和的 SpreadsheetCell。",
+  "key_points": [
+    "成员重载可以接受 double 作为右操作数，例如 SpreadsheetCell operator+(double rhs) const。",
+    "该重载的典型实现是返回 SpreadsheetCell { getValue() + rhs }。",
+    "非成员 operator+ 可以接收两个 SpreadsheetCell 参数，例如 SpreadsheetCell operator+(const SpreadsheetCell& lhs, const SpreadsheetCell& rhs)。",
+    "非成员运算符适合处理左操作数不是 SpreadsheetCell 的情况，例如 double + SpreadsheetCell；成员运算符要求左操作数首先能够调用成员函数。",
+    "原文示例展示了 myCell + 5.6、myCell + 4、5.6 + myCell、4 + myCell，以及 4.5 + 5.5 这类写法。"
+  ],
+  "examples": [
+    "成员重载示意：SpreadsheetCell SpreadsheetCell::operator+(double rhs) const { return SpreadsheetCell { getValue() + rhs }; }",
+    "调用示例：aThirdCell = myCell + 5.6;",
+    "调用示例：aThirdCell = myCell + 4;",
+    "反向操作数示例：aThirdCell = 5.6 + myCell;",
+    "反向操作数示例：aThirdCell = 4 + myCell;",
+    "非成员重载示意：SpreadsheetCell operator+(const SpreadsheetCell& lhs, const SpreadsheetCell& rhs) { return SpreadsheetCell { lhs.getValue() + rhs.getValue() }; }"
+  ],
+  "misconceptions": [
+    "只定义 SpreadsheetCell 的成员 operator+ 并不能自动保证 5.6 + myCell 可用，因为此时左操作数 5.6 不是 SpreadsheetCell，不能直接调用 SpreadsheetCell 的成员函数。",
+    "支持 myCell + double 与支持 double + myCell 可能需要不同的重载，不能仅凭一个成员重载推断两种顺序都可用。",
+    "重载 operator+ 的结果仍然是 SpreadsheetCell，而不只是一个基础数值。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么需要非成员 operator+ 才能自然支持 5.6 + myCell？",
+      "a": "因为表达式左侧是 double，不能直接调用 SpreadsheetCell 的成员 operator+；非成员运算符可以同时接收 double 和 SpreadsheetCell 作为参数。"
+    },
+    {
+      "q": "如何支持 myCell + 5.6？",
+      "a": "可以定义成员函数 SpreadsheetCell operator+(double rhs) const，并返回 SpreadsheetCell { getValue() + rhs }。"
+    },
+    {
+      "q": "原文列举了哪些混合加法形式？",
+      "a": "包括 myCell + 5.6、myCell + 4、5.6 + myCell 和 4 + myCell。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "成员运算符重载",
+    "非成员运算符重载",
+    "C++隐式转换"
+  ],
+  "source_pages": [
+    291,
+    292
+  ],
+  "needs_verification": true,
+  "verify_query": "《C++20高级编程》第5版 SpreadsheetCell operator+(double) double + SpreadsheetCell 5.6 + myCell operator+ 原文",
+  "concept_id": "382_为_spreadsheetcell_提供与_double_混合运算的_opera",
+  "_chunk_pages": [
+    289,
+    292
+  ]
+}

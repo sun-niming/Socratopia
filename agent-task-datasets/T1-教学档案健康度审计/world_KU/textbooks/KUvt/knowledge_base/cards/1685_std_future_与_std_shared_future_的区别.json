@@ -1,0 +1,45 @@
+{
+  "title": "std::future 与 std::shared_future 的区别",
+  "definition": "`std::future<T>` 通常只允许对同一个 future 调用一次 `get()`：调用时结果会从 future 中移出，因此 `T` 只需要可移动构造。若需要多次调用 `get()`，或者让多个线程读取同一个异步结果，应使用 `std::shared_future<T>`；此时结果类型 `T` 需要可复制构造。",
+  "key_points": [
+    "`std::future<T>` 不可复制，结果通常只能通过一次 `get()` 取出。",
+    "`std::shared_future<T>` 可被多个使用者共享，并允许多次调用 `get()`。",
+    "可以通过 `future.share()` 创建 shared future。",
+    "也可以用 future 构造 shared future，但需要将不可复制的 future 移入构造函数。"
+  ],
+  "examples": [
+    "通过 `share()` 创建：`auto sharedFuture = signalPromise.get_future().share();`",
+    "也可以写成：`std::shared_future<int> sharedFuture{ signalPromise.get_future() };`",
+    "若 `future` 为 `std::future<T> f`，则通常使用 `std::move(f)` 将其移入 shared future。"
+  ],
+  "misconceptions": [
+    "误以为 `std::future<T>::get()` 可以无限次调用。",
+    "误以为所有 future 都可以复制；`std::future` 不可复制。",
+    "误以为使用 shared future 后结果类型只需可移动构造；原文指出 `T` 需要可复制构造。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "什么时候应使用 `std::shared_future<T>` 而不是 `std::future<T>`？",
+      "a": "当需要多次调用 `get()`，或需要让多个线程共享并读取同一个结果时。"
+    },
+    {
+      "q": "`std::future<T>` 和 `std::shared_future<T>` 对结果类型构造能力的要求有什么不同？",
+      "a": "`std::future<T>`要求 `T` 可移动构造；`std::shared_future<T>`要求 `T` 可复制构造。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "std::future 与 std::promise"
+  ],
+  "source_pages": [
+    821,
+    822
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1685_std_future_与_std_shared_future_的区别",
+  "_chunk_pages": [
+    821,
+    824
+  ]
+}

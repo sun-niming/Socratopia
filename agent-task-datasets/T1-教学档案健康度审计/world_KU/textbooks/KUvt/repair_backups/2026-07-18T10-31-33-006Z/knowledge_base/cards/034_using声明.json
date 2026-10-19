@@ -1,0 +1,43 @@
+{
+  "title": "using声明",
+  "definition": "`using` 声明可以把命名空间中的某个特定名称引入当前作用域。引入之后，可以在该作用域内使用未限定名称。例如，`using std::cout;` 只引入 `std::cout`，随后可以直接写 `cout`，但不会因此自动引入 `std` 中的所有其他名称。",
+  "key_points": [
+    "基本形式为 `using 命名空间名::成员名;`。",
+    "`using std::cout;` 只引入名称 `cout`。",
+    "引入特定名称比导入整个命名空间的范围更小。"
+  ],
+  "examples": [
+    "using std::cout;\ncout << \"Hello\";",
+    "using mycode::foo;\nfoo(); // 等价于在此处调用 mycode::foo()"
+  ],
+  "misconceptions": [
+    "误以为 `using std::cout;` 会引入整个 `std` 命名空间。",
+    "遗漏作用域解析符，把声明错误写成不完整的名称。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`using std::cout;` 有什么效果？",
+      "a": "它把 `std::cout` 这个特定名称引入当前作用域，使当前作用域中可以直接写 `cout`。"
+    },
+    {
+      "q": "`using mycode::foo;` 之后，如何调用该函数？",
+      "a": "可以直接写 `foo();`。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "命名空间的定义与限定名调用",
+    "作用域"
+  ],
+  "source_pages": [
+    37,
+    40
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "034_using声明",
+  "_chunk_pages": [
+    37,
+    40
+  ]
+}

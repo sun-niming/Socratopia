@@ -1,0 +1,37 @@
+{
+  "title": "inet_ntop 网络地址转字符串",
+  "definition": "inet_ntop(int af, const void *src, char *dst, socklen_t size) 用来把网络地址转换成字符串。成功时返回 dst，失败时返回 NULL。",
+  "key_points": [
+    "在项目中可用于把客户端 IP 写入访问日志。",
+    "调用时需要提供输出缓冲区 dst 和大小 size。"
+  ],
+  "examples": [
+    "const char *ip = inet_ntop(AF_INET, &addr, buf, sizeof(buf)); if (ip == NULL) { /* 处理失败 */ }"
+  ],
+  "misconceptions": [
+    "以为它直接返回新分配的字符串内存。",
+    "忽略输出缓冲区大小可能导致的问题。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "inet_ntop 的作用是什么？",
+      "a": "把网络地址转换成字符串。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "网络地址",
+    "字符串"
+  ],
+  "source_pages": [
+    101,
+    104
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "160_inet_ntop_网络地址转字符串",
+  "_chunk_pages": [
+    101,
+    104
+  ]
+}

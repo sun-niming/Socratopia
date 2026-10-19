@@ -1,0 +1,44 @@
+{
+  "title": "通过调用栈定位异常源代码",
+  "definition": "调试器因异常中断时，当前显示的代码可能是 C++运行库内部代码，而不是用户编写的代码。此时应打开调用栈窗口，在调用链中查找第一条属于用户代码的栈帧，并跳转到该位置，从而定位引发异常的源代码。原文示例使用 Debug | Windows | Call Stack，并由 std::bad_array_new_length 异常追踪到用户代码中的 copy()。",
+  "key_points": [
+    "异常中断时显示运行库代码，不代表错误一定发生在运行库中。",
+    "在 Visual Studio 中可通过 Debug | Windows | Call Stack 打开调用栈窗口。",
+    "应从调用栈中寻找第一条自己编写的代码，而不是只查看栈顶。",
+    "双击相应栈帧可以跳转到对应的源代码位置。"
+  ],
+  "examples": [
+    "ArticleCitations 示例在处理 paper2.txt 时抛出 std::bad_array_new_length。调试器最初显示的不是用户代码；查看调用栈后，可以发现问题发生在 copy() 中，并跳转到相应代码行。"
+  ],
+  "misconceptions": [
+    "看到调试器停在标准库或运行库代码中，就认定标准库存在错误。",
+    "只查看异常类型，不沿调用栈追查是由哪一行用户代码触发的。",
+    "认为调用栈顶部必然是最需要修改的用户代码。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "调试器停在并非自己编写的代码中时，应如何找到异常来源？",
+      "a": "打开 Call Stack 窗口，在调用栈中找到第一条属于自己代码的栈帧，并双击它跳转到对应位置。"
+    },
+    {
+      "q": "ArticleCitations 示例通过调用栈将问题定位到了哪里？",
+      "a": "定位到了 copy() 中。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "异常处理基础",
+    "函数调用栈"
+  ],
+  "source_pages": [
+    921,
+    922
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1905_通过调用栈定位异常源代码",
+  "_chunk_pages": [
+    921,
+    924
+  ]
+}

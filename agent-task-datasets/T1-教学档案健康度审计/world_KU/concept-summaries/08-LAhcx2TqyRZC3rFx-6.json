@@ -1,0 +1,150 @@
+{
+  "conversationId": "08-LAhcx2TqyRZC3rFx-6",
+  "generatedAt": 1790323124745,
+  "pagesRange": null,
+  "sections": [
+    {
+      "type": "tldr",
+      "content": "本节课围绕「综合属性与继承属性」展开，根结点的属性值是后缀串 $95-2+$。。"
+    },
+    {
+      "type": "concepts",
+      "items": [
+        {
+          "name": "综合属性与继承属性",
+          "body": "- 根结点的属性值是后缀串 $95-2+$。\n- $expr.t$ 是综合属性，因为它只依赖当前结点的子结点属性。\n- 综合属性的信息由子结点向父结点汇总。\n- 继承属性的信息由父结点、当前结点自身或兄弟结点传给当前结点。\n- 综合属性可以通过一次自底向上的遍历计算。\n- 继承属性的求值顺序可能更复杂。\n\n**例子**\n- $expr\\rightarrow expr_1+term$。\n- $expr.t=expr_1.t\\Vert term.t\\Vert '+'=95-\\Vert2\\Vert+=95-2+$。\n- $9\\rightarrow9$，$5\\rightarrow5$，$9-5\\rightarrow95-$，$2\\rightarrow2$，$(9-5)+2\\rightarrow95-2+$。",
+          "sourceMessageIndexes": [
+            39,
+            40,
+            41
+          ]
+        },
+        {
+          "name": "简单语法制导定义",
+          "body": "- 按照产生式体中各非终结符的出现顺序连接翻译结果，并插入附加字符的定义，叫简单语法制导定义。\n- 简单语法制导定义不改变子结点翻译结果的顺序，也不重新组织它们。\n\n**例子**\n- $expr\\rightarrow expr_1+term$。\n- $expr.t=expr_1.t\\Vert term.t\\Vert '+'$。",
+          "sourceMessageIndexes": [
+            41,
+            42,
+            43
+          ]
+        },
+        {
+          "name": "后序遍历与语义动作",
+          "body": "- 综合属性适合采用深度优先的自底向上遍历。\n- 后序遍历先访问子结点，最后访问当前结点。\n- 在根结点属性计算前，要先完成左子树和右子树的属性计算。\n- 语义动作放置的位置决定其在遍历中的执行时机。\n- 语义动作可以被看作语法分析树上的额外叶子结点。\n- 实现翻译方案时不一定构造整棵语法分析树，但必须保持语义动作与后序遍历一致的执行顺序。\n\n**例子**\n- 对 $(9-5)+2$，先得到左子树翻译结果 $95-$，再得到右子树结果 $2$，最后输出 $+$。\n- $expr\\rightarrow expr_1+term\\ \\{print('+')\\}$。\n- 该动作的执行顺序是翻译 $expr_1$、匹配 $+$、翻译 $term$、执行 $\\{print('+')\\}$。",
+          "sourceMessageIndexes": [
+            43,
+            44,
+            45,
+            46,
+            47,
+            48,
+            49,
+            51
+          ]
+        }
+      ]
+    },
+    {
+      "type": "notes",
+      "title": "学习轨迹",
+      "content": "- **答对**：学习者回答属性由父结点或兄弟结点传给当前结点时称为继承属性。\n- **答对**：学习者判断按 $expr_1.t$、$term.t$、$+$ 顺序连接得到 $expr.t$ 属于简单语法制导定义。\n- **答对**：学习者列出根结点计算前需要的结果为 $95-$、$2$、$+$。\n- **误区**：学习者认为输出 $+$ 的动作应在翻译左子树之前执行。\n- **答对**：学习者判断该动作体现的是后序遍历中的后缀输出。"
+    },
+    {
+      "type": "key-insight",
+      "content": "继承属性。",
+      "sourceMessageIndexes": [
+        40
+      ]
+    },
+    {
+      "type": "open-question",
+      "content": "当动作放在 $term$ 之前、早于 $term$ 的翻译执行时，输出的 $+$ 会落在什么位置，片段中尚未解决。"
+    },
+    {
+      "type": "review-questions",
+      "items": [
+        {
+          "question": "什么是综合属性？",
+          "answer": "综合属性是由子结点向父结点汇总的信息；$expr.t$ 只依赖当前结点的子结点属性，因此是综合属性。"
+        },
+        {
+          "question": "什么是继承属性？",
+          "answer": "继承属性是由父结点、当前结点自身或兄弟结点传给当前结点的属性。"
+        },
+        {
+          "question": "为什么 $expr.t=expr_1.t\\Vert term.t\\Vert '+'$ 属于简单语法制导定义？",
+          "answer": "因为它按照产生式体中非终结符的出现顺序取出 $expr_1.t$ 和 $term.t$，再插入附加字符串 $+$，没有改变或重新组织子结点翻译结果的顺序。"
+        },
+        {
+          "question": "对 $(9-5)+2$，计算根结点属性前需要先完成哪些结果？",
+          "answer": "先完成左子树得到 $95-$，再完成右子树得到 $2$，最后处理根运算符 $+$。"
+        },
+        {
+          "question": "在 $expr\\rightarrow expr_1+term\\ \\{print('+')\\}$ 中，语义动作何时执行？",
+          "answer": "先翻译 $expr_1$，再匹配 $+$，再翻译 $term$，最后执行 $print('+')$，从而得到后缀输出 $95-2+$。"
+        }
+      ]
+    }
+  ],
+  "generationMeta": {
+    "pipelineVersion": "post-class-v2",
+    "mode": "chunked",
+    "jobId": "pn_mugo1xde348272667679",
+    "traceId": "tr_mugo1xdebf6fba08f373",
+    "sourceHash": "sha256:fee27d8d62327bf9920b5fde42214b7d9e39051a53ef7a358b385125efa7d9ec",
+    "sourceMessageCount": 51,
+    "chunkCount": 1,
+    "generatedAt": 1790323124745,
+    "decision": "degraded",
+    "quality": {
+      "score": 0.8575,
+      "metrics": {
+        "topicCoverage": 1,
+        "learnerEvidenceCoverage": 0.6,
+        "explanationCoverage": 1,
+        "sourceIntegrity": 1,
+        "reviewQuestionDiversity": 0.6,
+        "structureValidity": 1,
+        "lengthFitness": 0.5506666666666666,
+        "duplicationRatio": 0,
+        "unsupportedTopicRatio": 0,
+        "lengthChars": 1652,
+        "conceptCount": 3,
+        "evidenceTopicCount": 3
+      }
+    },
+    "warnings": [],
+    "evidenceIndex": [
+      {
+        "name": "综合属性与继承属性",
+        "sourceMessageIndexes": [
+          39,
+          40,
+          41
+        ]
+      },
+      {
+        "name": "简单语法制导定义",
+        "sourceMessageIndexes": [
+          41,
+          42,
+          43
+        ]
+      },
+      {
+        "name": "后序遍历与语义动作",
+        "sourceMessageIndexes": [
+          43,
+          44,
+          45,
+          46,
+          47,
+          48,
+          49,
+          51
+        ]
+      }
+    ],
+    "degradedReason": "chunk_failures"
+  }
+}

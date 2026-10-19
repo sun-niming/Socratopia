@@ -1,0 +1,52 @@
+{
+  "title": "map与multimap",
+  "definition": "`map`定义在`<map>`头文件中，是保存键/值对的关联数组。它按照键而不是值对元素排序，并提供`operator[]`访问方式。`multimap`也定义在`<map>`头文件中，功能类似于`map`，但允许多个元素具有相同的键。",
+  "key_points": [
+    "`map`中的每个元素由键和值组成。",
+    "`map`可以使用任意类型作为索引键，例如`string`。",
+    "`map`按照键的顺序保存元素，而不是按照关联对象值的顺序保存。",
+    "`map`提供`operator[]`，而`set`没有该运算符。",
+    "`multimap`允许重复键；它与`map`的关系类似于`multiset`与`set`的关系。"
+  ],
+  "examples": [
+    "书店程序可以使用ISBN作为键、`Book`对象作为值：`map<ISBN, Book>`。",
+    "若需要通过字符串键关联整数值，可以使用类似`map<string, int>`的结构。",
+    "当一个键需要关联多个值时，可以考虑使用`multimap`。"
+  ],
+  "misconceptions": [
+    "`map`不是只保存值的集合，而是保存键/值对。",
+    "`map`的排序依据是键，不是值。",
+    "`map`不等同于允许重复键的容器；需要重复键时应使用`multimap`。",
+    "`set`和`map`都属于关联容器，但`set`中键本身就是值，`map`中键和值是两个组成部分。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`map`保存什么类型的数据？",
+      "a": "保存键/值对，并按照键的顺序组织元素。"
+    },
+    {
+      "q": "`map`与`multimap`的主要区别是什么？",
+      "a": "`map`不允许多个元素使用同一个键，而`multimap`允许重复键。"
+    },
+    {
+      "q": "`map`与`set`在访问接口上的一个重要区别是什么？",
+      "a": "`map`提供`operator[]`，而`set`不提供。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "set与multiset",
+    "关联容器的基本概念"
+  ],
+  "source_pages": [
+    510,
+    511
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1046_map与multimap",
+  "_chunk_pages": [
+    509,
+    512
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "title": "运算符重载的成员函数与全局函数规则",
+  "definition": "C++中的不同运算符对重载位置有不同要求。下标运算符operator[]、函数调用运算符operator()、类型转换运算符以及解除引用运算符operator->必须重载为成员函数；用户定义字面量运算符必须重载为全局函数。二元比较运算符、输入输出运算符通常建议重载为全局函数，以便支持左操作数不是当前类对象等情况。",
+  "key_points": [
+    "支持下标访问时必须定义成员函数operator[]，通常同时提供非const和const版本，例如：$E\\&\\ operator[](size\\_t\\ i)$与$const\\ E\\&\\ operator[](size\\_t\\ i)\\ const$。",
+    "使对象表现得像函数时，应定义成员函数operator()；它也可用于支持多维数组访问，因为operator[]只能直接表示一个索引。",
+    "类型转换运算符必须是成员函数，形式为$operator\\ type()\\ const$，其中type是目标类型。",
+    "用户定义字面量运算符必须是全局函数，例如：$T\\ operator\\\"\\\"\\_i(long\\ double\\ d)$。",
+    "输入输出运算符operator<<和operator>>通常定义为全局函数。"
+  ],
+  "examples": [
+    "下标运算符示例：$E\\&\\ operator[](size\\_t\\ i)$；const对象版本：$const\\ E\\&\\ operator[](size\\_t\\ i)\\ const$。",
+    "类型转换运算符示例：$operator\\ bool()\\ const$。",
+    "用户定义字面量示例：$T\\ operator\\\"\\\"\\_i(long\\ double\\ d)$。"
+  ],
+  "misconceptions": [
+    "不是所有运算符都可以自由选择定义为成员函数或全局函数；operator[]、operator()和类型转换运算符必须是成员函数。",
+    "用户定义字面量运算符不能定义为成员函数。",
+    "建议定义为全局函数不等于必须定义为全局函数；本知识点中的“建议”是编码规则，而不是语法上的绝对限制。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "哪些运算符必须重载为成员函数？",
+      "a": "operator[]、operator()、类型转换运算符以及operator->必须重载为成员函数。"
+    },
+    {
+      "q": "为什么多维数组访问常使用operator()而不是operator[]？",
+      "a": "函数调用运算符可以接收多个参数，因此能够表示多个维度的索引；operator[]通常只能直接接收一个索引。"
+    },
+    {
+      "q": "用户定义字面量运算符应定义在哪里？",
+      "a": "必须定义为全局函数。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++成员函数与非成员函数",
+    "C++运算符重载基础"
+  ],
+  "source_pages": [
+    473,
+    473
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "950_运算符重载的成员函数与全局函数规则",
+  "_chunk_pages": [
+    473,
+    476
+  ]
+}

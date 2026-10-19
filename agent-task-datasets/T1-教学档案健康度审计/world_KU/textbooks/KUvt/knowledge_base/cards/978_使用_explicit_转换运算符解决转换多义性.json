@@ -1,0 +1,48 @@
+{
+  "title": "使用 explicit 转换运算符解决转换多义性",
+  "definition": "当一个类同时提供从数值类型到类对象的构造函数，以及从类对象到该数值类型的转换运算符时，某些表达式可能存在两条同样可行的转换路径。此时编译器无法决定应先把类对象转换为数值类型，还是先把数值转换为类对象，因此会拒绝编译。将转换运算符声明为 explicit，可以禁止其参与通常的隐式转换，从而消除这种多义性。",
+  "key_points": [
+    "教材中的冲突场景是：SpreadsheetCell 有 double 构造函数，同时又有 operator double()。",
+    "在相关加法表达式中，编译器可能选择：先将 SpreadsheetCell 转为 double 再进行 double 加法；或者先将 double 转为 SpreadsheetCell 再进行 SpreadsheetCell 加法。",
+    "将声明改为 $explicit\\ operator\\ double()\\ const;$ 后，该转换运算符不再参与一般隐式转换，教材称相关代码可以正常编译。",
+    "explicit 转换运算符仍可通过显式转换等方式使用；它并不等于删除该转换能力。"
+  ],
+  "examples": [
+    "explicit operator double() const;",
+    "SpreadsheetCell cell { 6.6 };",
+    "教材所述多义性本质上是两条候选路径：$(SpreadsheetCell\\to double)\\to double\\ 加法$，或 $double\\to SpreadsheetCell\\to SpreadsheetCell\\ 加法$。"
+  ],
+  "misconceptions": [
+    "explicit 会禁止所有形式的转换；它主要限制隐式转换，显式转换仍可使用。",
+    "出现多义性时，编译器会根据程序员通常更可能的意图自动选择一条路径；教材说明编译器会拒绝做决定。",
+    "把 double 构造函数标记为 explicit 是唯一解决办法；教材说明也可以把 double 转换运算符标记为 explicit。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么同时存在 double 构造函数和 operator double() 可能导致多义性？",
+      "a": "因为表达式可能选择两条路径：将 SpreadsheetCell 转为 double 后进行数值运算，或将 double 转为 SpreadsheetCell 后进行类对象运算。"
+    },
+    {
+      "q": "如何用转换运算符解决该多义性？",
+      "a": "将转换运算符声明为 $explicit\\ operator\\ double()\\ const;$，使其不参与一般隐式转换。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "隐式类型转换",
+    "转换构造函数",
+    "转换运算符",
+    "explicit"
+  ],
+  "source_pages": [
+    488,
+    488
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "978_使用_explicit_转换运算符解决转换多义性",
+  "_chunk_pages": [
+    485,
+    488
+  ]
+}

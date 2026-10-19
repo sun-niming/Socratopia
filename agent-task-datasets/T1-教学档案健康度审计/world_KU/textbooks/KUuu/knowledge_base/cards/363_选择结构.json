@@ -1,0 +1,40 @@
+{
+  "title": "选择结构",
+  "definition": "选择结构用于让程序在不同条件下执行不同分支。原文指出，主要有 if 和 switch 两种。",
+  "key_points": [
+    "选择结构会根据条件进行分支执行。",
+    "原文主要提到 if。",
+    "原文主要提到 switch。"
+  ],
+  "examples": [
+    "if (条件) { ... }",
+    "switch (值) { ... }"
+  ],
+  "misconceptions": [
+    "选择结构不只有 if，也包括 switch。",
+    "选择结构不是重复执行，而是分支执行。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "选择结构主要有哪些？",
+      "a": "if 和 switch。"
+    },
+    {
+      "q": "选择结构的作用是什么？",
+      "a": "根据条件执行不同分支。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [],
+  "source_pages": [
+    249,
+    252
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "363_选择结构",
+  "_chunk_pages": [
+    249,
+    252
+  ]
+}

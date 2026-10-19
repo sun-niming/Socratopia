@@ -1,0 +1,240 @@
+{
+  "chunkId": "chunk-002",
+  "messageRange": [
+    10,
+    23
+  ],
+  "topics": [
+    {
+      "name": "最右推导",
+      "facts": [
+        "推导是从开始符号出发，每一步把一个非终结符号替换成某条产生式的右边，直到全是终结符号为止。",
+        "一步里如果有多个非终结符号可换，先换哪个由人选择。",
+        "每一步都换最左的非终结符号叫最左推导；每一步都换最右的非终结符号叫最右推导。",
+        "在 \\(S \\Rightarrow^* \\alpha A w \\Rightarrow \\alpha \\beta w\\) 这一步中，被替换的 \\(A\\) 是当前句型里最右边的非终结符号。",
+        "若 \\(A\\) 是最右非终结符号，则它右边的 \\(w\\) 中不能含有非终结符号，即 \\(w\\) 全由终结符号组成。"
+      ],
+      "examples": [
+        "最左推导：\\(E \\Rightarrow E+T \\Rightarrow T+T \\Rightarrow F+T \\Rightarrow id+T \\Rightarrow id+T*F \\Rightarrow id+F*F \\Rightarrow id+id*F \\Rightarrow id+id*id\\)。",
+        "最右推导：\\(E \\Rightarrow E+T \\Rightarrow E+T*F \\Rightarrow E+T*id \\Rightarrow E+F*id \\Rightarrow E+id*id \\Rightarrow T+id*id \\Rightarrow F+id*id \\Rightarrow id+id*id\\)。"
+      ],
+      "sourceMessageIndexes": [
+        11,
+        13
+      ]
+    },
+    {
+      "name": "归约与句柄",
+      "facts": [
+        "归约是找到和产生式体匹配的子串，换成它的头。",
+        "句柄是这一轮真正该归约的那一段。",
+        "归错了句型就接不回原来的推导链；归对了才能继续往根上长。",
+        "句柄右边剩下的 \\(w\\) 全是终结符，说明句柄右边的输入已经不需要再归约。",
+        "自底向上分析就是从从左到右扫输入，反复找句柄、剪句柄，剪到只剩开始符号 \\(S\\) 为止。"
+      ],
+      "examples": [
+        "第一次归约是拿 \\(F\\to id\\) 去剪掉最左边那个 \\(id_1\\)，句型从 \\(id_1*id_2\\) 变成 \\(F*id_2\\)。",
+        "句型走到 \\(T*F\\) 时，句柄是 \\(T*F\\)，归约用的是 \\(T\\to T*F\\)，剪完得到 \\(T\\)。"
+      ],
+      "sourceMessageIndexes": [
+        11,
+        15,
+        17,
+        18,
+        19
+      ]
+    },
+    {
+      "name": "移入-归约分析（4.5.3）",
+      "facts": [
+        "移入-归约分析有两个部件：一个栈存文法符号，一个输入缓冲区存还没处理的符号。",
+        "约定栈顶画在右边。",
+        "开局是栈里只有 \\(\\$\\)，输入缓冲区里是 \\(w\\,\\$\\)。",
+        "机器循环：从左往右扫，先往栈里塞若干个输入符号，直到栈顶凑出一个能归约的串 \\(\\beta\\)，就把 \\(\\beta\\) 换成它的产生式头，反复做直到栈里只剩开始符号、输入也空了。",
+        "四种动作：移入、归约、接受、报错。",
+        "句柄在没被识别之前，永远出现在栈顶，绝不会藏在栈中间。"
+      ],
+      "examples": [
+        "用 \\(id_1*id_2\\) 走一趟的表格，含栈、输入与动作。"
+      ],
+      "sourceMessageIndexes": [
+        19,
+        21
+      ]
+    },
+    {
+      "name": "冲突（4.5.4）",
+      "facts": [
+        "4.5.4 讲什么样的文法这套技术对付不了，也就是冲突。",
+        "第一类是移入/归约冲突，教材用悬空 else 文法（4.14）。",
+        "若在 \\(\\cdots \\textbf{if}\\; expr\\; \\textbf{then}\\; stmt\\)、输入以 else 开头时选归约，else 会跟更外面的 if 配对，与大多数语言 else 就近配对的约定不一致。",
+        "教材解法：碰到 else 就选移入，使每个 else 与前面还没配上对的 then 结合。",
+        "这类文法本身是二义的，不是 LR 的，修正技术留到 4.8。",
+        "第二类是归约/归约冲突，教材例 4.39 用过程调用与数组引用。",
+        "区分二者要查符号表，让词法分析器在返回单元前先查，是过程名就返回 procid 而不是 id。"
+      ],
+      "examples": [
+        "悬空 else 文法：\\(stmt \\to \\textbf{if}\\; expr\\; \\textbf{then}\\; stmt \\mid \\textbf{if}\\; expr\\; \\textbf{then}\\; stmt\\; \\textbf{else}\\; stmt \\mid \\textbf{other}\\)。",
+        "过程调用 \\(stmt \\to id\\,(\\text{parameter\\_list})\\)，\\(parameter \\to id\\)；数组引用 \\(expr \\to id\\,(\\text{expr\\_list})\\)，\\(expr \\to id\\)。",
+        "输入 \\(p(i,j)\\) 的词法单元流 \\(id\\,(\\,id\\,,\\,id\\,)\\)，栈 \\(\\cdots id\\,(\\,id\\)，缺的信息在栈外，要查符号表。"
+      ],
+      "sourceMessageIndexes": [
+        21,
+        23
+      ]
+    }
+  ],
+  "learnerEvidence": [
+    {
+      "kind": "confusion",
+      "content": "最右推导，但是为什么我还真看不出来。",
+      "sourceMessageIndexes": [
+        10
+      ]
+    },
+    {
+      "kind": "confusion",
+      "content": "没太听懂呢，老师。最右推导是什么？",
+      "sourceMessageIndexes": [
+        12
+      ]
+    },
+    {
+      "kind": "correct",
+      "content": "w。",
+      "sourceMessageIndexes": [
+        14
+      ]
+    },
+    {
+      "kind": "correct",
+      "content": "F->id；\\(id_{1}\\)。",
+      "sourceMessageIndexes": [
+        16
+      ]
+    },
+    {
+      "kind": "misconception",
+      "content": "句柄是 T*F，用 E->T*F 归约。",
+      "sourceMessageIndexes": [
+        18
+      ]
+    },
+    {
+      "kind": "misconception",
+      "content": "因为 E 是开始符号，在还有句柄未归约的情况下，不能被归约出来，否则会让句柄被藏在栈中间。",
+      "sourceMessageIndexes": [
+        20
+      ]
+    },
+    {
+      "kind": "correct",
+      "content": "不一致。",
+      "sourceMessageIndexes": [
+        22
+      ]
+    }
+  ],
+  "keyInsights": [
+    {
+      "content": "第一次归约用的是 \\(F\\to id\\)，剪掉的句柄是 \\(id_1\\)。",
+      "sourceMessageIndexes": [
+        16
+      ]
+    }
+  ],
+  "openQuestions": [
+    {
+      "content": "句型 \\(\\alpha A w\\) 中若 \\(w\\) 里出现非终结符号，真正的「最右非终结符号」是谁？",
+      "sourceMessageIndexes": [
+        11,
+        13
+      ]
+    },
+    {
+      "content": "在 \\(id_1 * id_2\\) 的归约里，第一次归约用的是哪条产生式，剪掉的句柄是谁？",
+      "sourceMessageIndexes": [
+        15
+      ]
+    },
+    {
+      "content": "句型走到 \\(T*F\\) 时，该剪的句柄是谁，用哪条产生式归约？",
+      "sourceMessageIndexes": [
+        17
+      ]
+    },
+    {
+      "content": "第 4 行栈里是 \\(\\$T\\)、下一个输入是 \\(*\\)，为什么这时候不该把 \\(T\\) 归约成 \\(E\\)，而应该先移入？",
+      "sourceMessageIndexes": [
+        19
+      ]
+    },
+    {
+      "content": "若选归约，把 \\(\\textbf{if}\\; expr\\; \\textbf{then}\\; stmt\\) 收成 \\(stmt\\)，else 会跟哪个 if 配对？与 else 就近配对一致吗？",
+      "sourceMessageIndexes": [
+        21
+      ]
+    },
+    {
+      "content": "例 4.39 里为什么只靠栈里的符号永远分不出该用哪条产生式？缺失的信息属于哪一类知识，为什么栈和输入缓冲区装不下它？",
+      "sourceMessageIndexes": [
+        23
+      ]
+    }
+  ],
+  "reviewCandidates": [
+    {
+      "question": "什么是最右推导？",
+      "answer": "每一步都换当前句型中最右边那个非终结符号的推导。",
+      "sourceMessageIndexes": [
+        13
+      ]
+    },
+    {
+      "question": "在 \\(S \\Rightarrow^* \\alpha A w \\Rightarrow \\alpha \\beta w\\) 中，为什么 \\(w\\) 全由终结符号组成？",
+      "answer": "因为 \\(A\\) 是最右非终结符号，\\(w\\) 中若含非终结符号，那个更靠右的家伙才该被替换，\\(A\\) 就不成其为最右。",
+      "sourceMessageIndexes": [
+        11,
+        13
+      ]
+    },
+    {
+      "question": "什么是句柄？它右边的 \\(w\\) 全是终结符意味着什么？",
+      "answer": "句柄是这一轮真正该归约的那一段；右边全是终结符说明右边已不需要再归约，分析器一遇到句柄就敢下手。",
+      "sourceMessageIndexes": [
+        11,
+        17
+      ]
+    },
+    {
+      "question": "移入-归约分析有哪四种动作？",
+      "answer": "移入、归约、接受、报错。",
+      "sourceMessageIndexes": [
+        19
+      ]
+    },
+    {
+      "question": "句柄在被识别前出现在哪里？这条性质有什么作用？",
+      "answer": "永远出现在栈顶，绝不会藏在栈中间；使分析器不必往栈中间回头翻找。",
+      "sourceMessageIndexes": [
+        19,
+        21
+      ]
+    },
+    {
+      "question": "悬空 else 文法的移入/归约冲突如何解决？",
+      "answer": "遇 else 选移入，使 else 与最近未配对的 then 就近配对。",
+      "sourceMessageIndexes": [
+        21,
+        23
+      ]
+    },
+    {
+      "question": "例 4.39 中如何区分过程调用与数组引用的归约？",
+      "answer": "查符号表，令词法分析器对过程名返回 procid 而非 id，从而按 procid 或 id 选择产生式。",
+      "sourceMessageIndexes": [
+        23
+      ]
+    }
+  ]
+}

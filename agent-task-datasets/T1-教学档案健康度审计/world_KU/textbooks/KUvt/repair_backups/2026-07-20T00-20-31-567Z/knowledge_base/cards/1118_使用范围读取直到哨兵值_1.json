@@ -1,0 +1,51 @@
+{
+  "title": "使用范围读取直到哨兵值 -1",
+  "definition": "可以使用基于范围的 for 循环和范围库的输入流视图，从标准输入读取整数，直到读到哨兵值 $-1$。读取到的整数应存入 vector，然后使用 myCopyO 算法检查或输出该 vector 中的值。教材还提示，可以使用 std::ranges::copyO 将源范围复制到目标，减少或避免显式循环。",
+  "key_points": [
+    "输入来源是标准输入，元素类型为整数。",
+    "读到 $-1$ 时停止读取；$-1$ 是结束标记，不应作为普通数据处理，原文未明确说明是否存入 vector。",
+    "读取结果存入 vector。",
+    "可以使用 myCopyO 验证 vector 的内容。",
+    "附加练习提示使用 std::ranges::copyO，以范围作为第一个参数、输出迭代器作为第二个参数。"
+  ],
+  "examples": [
+    "停止条件可表示为：$$x=-1\\Rightarrow\\text{停止读取}$$",
+    "copyO 的调用形式按原文提示为：文本表示 `std::ranges::copyO(source_range, output_iterator)`。"
+  ],
+  "misconceptions": [
+    "$-1$ 是停止读取的哨兵值，不是需要继续处理的普通整数。",
+    "std::ranges::copyO 的第一个参数是范围，第二个参数是输出迭代器。",
+    "附加练习只是提示一种避免循环的方案，原文没有给出完整实现。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "练习 17-4 读取整数时何时停止？",
+      "a": "当从标准输入读到 $-1$ 时停止。"
+    },
+    {
+      "q": "读取的整数应存储在哪里？",
+      "a": "存储到一个 vector 中。"
+    },
+    {
+      "q": "原文提示如何尝试避免显式循环？",
+      "a": "可以考虑使用 std::ranges::copyO，把源范围作为第一个参数、输出迭代器作为第二个参数。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "vector容器",
+    "范围库输入流视图",
+    "范围算法"
+  ],
+  "source_pages": [
+    545,
+    545
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 std::ranges istream_view copyO sentinel -1 exercise 17-4 Marc Gregoire",
+  "concept_id": "1118_使用范围读取直到哨兵值_1",
+  "_chunk_pages": [
+    545,
+    548
+  ]
+}

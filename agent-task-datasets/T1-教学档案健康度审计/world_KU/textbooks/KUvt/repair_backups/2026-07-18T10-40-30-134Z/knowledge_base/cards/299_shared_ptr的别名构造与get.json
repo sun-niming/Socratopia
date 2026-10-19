@@ -1,0 +1,42 @@
+{
+  "title": "shared_ptr的别名构造与get",
+  "definition": "`shared_ptr`支持别名构造（aliasing），可以让一个`shared_ptr`保存某个指针值，同时继续共享另一个对象的所有权。通过`get()`可以取得`shared_ptr`当前保存的裸指针，但`get()`不会转移所有权，也不会释放资源。",
+  "key_points": [
+    "别名`shared_ptr`的指针值可以与其实际负责保持存活的拥有对象不同。",
+    "别名构造适合在共享某个拥有对象生命周期的同时，访问该对象中的成员或相关子对象。",
+    "调用`get()`只返回裸指针观察值，不会使`shared_ptr`失去所有权。"
+  ],
+  "examples": [
+    "原文给出别名构造相关示意：`auto foo { make_foo>(42) }; auto aliasing { ... };`，其核心是由一个`shared_ptr`共享拥有对象，同时让另一个`shared_ptr`指向别的地址。",
+    "通过`p.get()`可以取得`p`保存的裸指针；该操作不等同于`unique_ptr::release()`。"
+  ],
+  "misconceptions": [
+    "别名`shared_ptr`指向的地址与控制块所拥有的对象可以不同，因此不能仅凭保存的地址判断谁负责释放资源。",
+    "`get()`不会创建新的所有权，也不会释放或转移资源。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`shared_ptr::get()`做什么？",
+      "a": "返回该`shared_ptr`保存的裸指针，但不转移所有权、不释放资源。"
+    },
+    {
+      "q": "别名构造的核心特点是什么？",
+      "a": "一个`shared_ptr`可以保存某个指针值，同时共享另一个对象的所有权和生命周期。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "shared_ptr的引用计数与共享所有权"
+  ],
+  "source_pages": [
+    221,
+    224
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 std::shared_ptr aliasing constructor get() 标准用法 示例",
+  "concept_id": "299_shared_ptr的别名构造与get",
+  "_chunk_pages": [
+    221,
+    224
+  ]
+}

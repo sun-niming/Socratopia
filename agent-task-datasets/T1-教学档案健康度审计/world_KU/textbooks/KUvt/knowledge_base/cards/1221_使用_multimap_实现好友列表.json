@@ -1,0 +1,54 @@
+{
+  "title": "使用 multimap 实现好友列表",
+  "definition": "可以用 `std::multimap<std::string, std::string>` 实现好友列表：键表示用户，值表示该用户的一位好友。由于一个用户可以有多个好友，multimap 允许同一个键对应多个值。好友列表类通常提供添加好友、删除指定好友、判断好友关系以及获取全部好友等操作。",
+  "key_points": [
+    "`addBuddy(name, buddy)` 在好友关系不存在时插入键值对 `{name, buddy}`，以避免重复的键值对。",
+    "`isBuddy(name, buddy)` 使用 `equal_range(name)` 遍历指定用户的全部好友，并检查某个值是否等于 `buddy`。",
+    "`removeBuddy(name, buddy)` 应只遍历指定用户的范围，找到目标好友后调用针对迭代器的 `erase(iter)` 删除一个元素。",
+    "不能使用删除某个键对应全部元素的 `erase(key)` 版本，因为该操作会删除指定用户的所有好友。",
+    "`getBuddies(name)` 需要遍历 `equal_range(name)` 返回的键值对范围，把每个元素的 `second` 提取到新的 `std::vector<std::string>` 中。",
+    "multimap 迭代器指向键值对，而不是单独的字符串，因此不能直接用该范围构造好友字符串向量，必须显式提取 `iter->second`。"
+  ],
+  "examples": [
+    "核心数据成员：`std::multimap<std::string, std::string> m_buddies;`。",
+    "判断好友关系的核心逻辑：`auto [begin, end] = m_buddies.equal_range(name);`，遍历范围；若 `iter->second == buddy`，返回 `true`，否则遍历结束后返回 `false`。",
+    "获取好友列表的核心逻辑：遍历 `equal_range(name)`，执行 `buddies.push_back(iter->second)`，最后返回该向量。",
+    "示例操作：先添加 Harry Potter 的 Ron Weasley、Hermione Granger、Hagrid 和 Draco Malfoy，再删除 Draco Malfoy；随后获取 Harry Potter 的好友列表。"
+  ],
+  "misconceptions": [
+    "删除一个好友不能调用 `erase(name)`，否则会删除该用户对应的全部元素。",
+    "`equal_range()` 返回的迭代器指向 `pair<const std::string, std::string>` 一类的键值对，不是直接指向好友字符串。",
+    "好友关系示例中，A 是 B 的好友并不自动意味着 multimap 会自动生成 B 是 A 的好友；原文示例明确插入两个方向的记录。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么 BuddyList::removeBuddy 不能直接调用 `m_buddies.erase(name)`？",
+      "a": "因为 `erase(name)` 会删除指定键对应的所有元素，而 removeBuddy 只应删除指定用户的一位好友。"
+    },
+    {
+      "q": "BuddyList::getBuddies 为什么要显式遍历 equal_range()？",
+      "a": "因为 multimap 迭代器指向键值对，返回结果需要的是好友字符串，也就是每个键值对的 `second` 成员。"
+    },
+    {
+      "q": "BuddyList 如何避免插入重复的好友关系？",
+      "a": "先调用 `isBuddy(name, buddy)` 检查；只有不存在该关系时才插入 `{name, buddy}`。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "multimap 的基本特性与范围查找",
+    "C++ 结构化绑定",
+    "C++ 容器迭代器"
+  ],
+  "source_pages": [
+    589,
+    591
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1221_使用_multimap_实现好友列表",
+  "_chunk_pages": [
+    589,
+    592
+  ]
+}

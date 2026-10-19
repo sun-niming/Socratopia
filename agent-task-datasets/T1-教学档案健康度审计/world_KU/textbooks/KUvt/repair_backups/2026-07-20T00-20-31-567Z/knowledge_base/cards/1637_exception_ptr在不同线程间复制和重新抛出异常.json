@@ -1,0 +1,48 @@
+{
+  "title": "exception_ptr在不同线程间复制和重新抛出异常",
+  "definition": "std::exception_ptr是一种可以引用当前异常对象或其副本的对象。线程在catch块中调用std::current_exception()保存异常，通过共享的exception_ptr把异常传递给另一个线程；接收线程调用std::rethrow_exception()重新抛出该异常，从而在当前线程中继续使用通常的try/catch机制处理它。该机制适用于std::exception及int、string、自定义异常等各种异常类型。",
+  "key_points": [
+    "std::current_exception()应在catch块中调用；如果当前没有正在处理的异常，则返回空的exception_ptr。",
+    "只要仍有exception_ptr对象引用异常对象，该异常对象就保持可用。exception_ptr具有NullablePointer特性，可以直接用if检查是否为空。",
+    "std::rethrow_exception(p)会重新抛出p所引用的异常，重新抛出不必发生在最初创建异常引用的线程中；该函数不会正常返回。",
+    "std::make_exception_ptr(e)创建一个引用给定异常对象副本的exception_ptr；原文将其说明为以下逻辑的简写：\n$$\n\\begin{aligned}\n\\texttt{try \\{ throw e; \\}}\\\\\n\\texttt{catch(...) \\{ return current\\_exception(); \\}}\n\\end{aligned}\n$$"
+  ],
+  "examples": [
+    "跨线程传递异常的核心模式：\n```cpp\nvoid threadFunc(std::exception_ptr& err) {\n    try {\n        doSomeWork();\n    } catch (...) {\n        err = std::current_exception();\n    }\n}\n\nvoid doWorkInThread() {\n    std::exception_ptr error;\n    std::thread t{threadFunc, std::ref(error)};\n    t.join();\n    if (error) {\n        std::rethrow_exception(error);\n    }\n}\n```\n主线程可以再用try/catch捕获重新抛出的异常。"
+  ],
+  "misconceptions": [
+    "异常不能直接从一个线程的执行栈自动传播到另一个线程；必须在线程内部捕获，并通过exception_ptr等方式传递。",
+    "std::exception_ptr不是异常本身，而是引用异常对象或其副本的可空对象。",
+    "调用std::current_exception()不会把异常立即重新抛出；它只是保存当前正在处理的异常引用。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何把工作线程中的异常传递给主线程？",
+      "a": "工作线程在catch(...)中调用std::current_exception()保存到共享的std::exception_ptr中；主线程join()等待工作线程结束后，如果该指针非空，就调用std::rethrow_exception()重新抛出并捕获。"
+    },
+    {
+      "q": "没有正在处理的异常时，std::current_exception()返回什么？",
+      "a": "返回空的std::exception_ptr。"
+    },
+    {
+      "q": "std::rethrow_exception()是否必须在最初捕获异常的线程中调用？",
+      "a": "不必，它可以在另一个线程中重新抛出该异常。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++异常处理",
+    "std::thread的join与引用参数传递"
+  ],
+  "source_pages": [
+    798,
+    799
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1637_exception_ptr在不同线程间复制和重新抛出异常",
+  "_chunk_pages": [
+    797,
+    800
+  ]
+}

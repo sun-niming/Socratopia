@@ -1,0 +1,45 @@
+{
+  "title": "DOM节点类型",
+  "definition": "DOM 树中的每一个部分都叫作一个节点（Node）。教材中列出了常见的节点类型：文档节点、元素节点、文本节点、属性节点和注释节点。",
+  "key_points": [
+    "文档节点（Document Node）是整棵 DOM 树的根节点，对应 document。",
+    "元素节点（Element Node）对应 HTML 标签，如 <body>、<div>、<p>、<a>。",
+    "文本节点（Text Node）表示元素内部的文本内容。",
+    "属性节点（Attribute Node）表示元素的属性，如 id、class、src；但在现代 DOM 操作中，属性通常作为元素节点的属性来访问，而不是独立的节点。",
+    "注释节点（Comment Node）对应 HTML 注释 <!-- ... -->。"
+  ],
+  "examples": [
+    "document 是文档节点。",
+    "<div id=\"box\" class=\"red\">Hello</div> 中，div 是元素节点，Hello 是文本节点，id 和 class 是属性。",
+    "<!-- This is a comment --> 是注释节点。"
+  ],
+  "misconceptions": [
+    "属性一定都是独立节点；教材特别说明，现代 DOM 操作中通常把属性当作元素的属性来访问。",
+    "DOM 节点只包括标签；实际上文本和注释也属于节点。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "document 在 DOM 中属于什么节点？",
+      "a": "文档节点（Document Node），也是整棵 DOM 树的根节点。"
+    },
+    {
+      "q": "HTML 注释在 DOM 中对应什么节点？",
+      "a": "注释节点（Comment Node）。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "DOM树的生成"
+  ],
+  "source_pages": [
+    345,
+    348
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "463_dom节点类型",
+  "_chunk_pages": [
+    345,
+    348
+  ]
+}

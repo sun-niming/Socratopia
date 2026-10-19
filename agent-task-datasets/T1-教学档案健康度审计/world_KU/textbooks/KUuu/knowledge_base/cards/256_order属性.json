@@ -1,0 +1,44 @@
+{
+  "title": "order属性",
+  "definition": "order 属性用于定义弹性项目的排列顺序；数值越小，排列越靠前，默认值为 0。",
+  "key_points": [
+    "order 决定项目在弹性容器中的先后顺序。",
+    "数值越小，项目越靠前。",
+    "默认值是 0。"
+  ],
+  "examples": [
+    ".item { order: <integer>; }",
+    "order: -1;",
+    "order: 1;",
+    "order: 2;"
+  ],
+  "misconceptions": [
+    "order 不是改变元素在 HTML 中的真实书写顺序，只是改变视觉排列顺序。",
+    "order 的值越大越靠前是错误的，实际是越小越靠前。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "order 属性的默认值是多少？",
+      "a": "0。"
+    },
+    {
+      "q": "order 数值大小规律和排列先后是什么关系？",
+      "a": "数值越小，排列越靠前。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "弹性布局基础"
+  ],
+  "source_pages": [
+    165,
+    168
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "256_order属性",
+  "_chunk_pages": [
+    165,
+    168
+  ]
+}

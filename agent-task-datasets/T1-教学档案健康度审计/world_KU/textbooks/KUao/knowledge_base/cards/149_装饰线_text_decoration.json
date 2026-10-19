@@ -1,0 +1,39 @@
+{
+  "title": "装饰线 text-decoration",
+  "definition": "text-decoration 用于设置文本装饰线。教材给出的取值包括 none、overline、underline 和 line-through。",
+  "key_points": [
+    "none 表示无装饰线。",
+    "overline 表示顶部装饰线。",
+    "underline 表示底部装饰线。",
+    "line-through 表示删除线。"
+  ],
+  "examples": [
+    "text-decoration: underline;",
+    "text-decoration: line-through;"
+  ],
+  "misconceptions": [
+    "underline 不是加粗。",
+    "text-decoration 只控制装饰线，不是文本颜色属性。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "text-decoration: line-through 表示什么？",
+      "a": "表示删除线。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "CSS基础"
+  ],
+  "source_pages": [
+    109,
+    112
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "149_装饰线_text_decoration",
+  "_chunk_pages": [
+    109,
+    112
+  ]
+}

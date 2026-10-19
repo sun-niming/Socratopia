@@ -1,0 +1,45 @@
+{
+  "title": "std::condition_variable 与 std::condition_variable_any 的区别",
+  "definition": "条件变量允许一个线程阻塞，直到另一个线程发出通知、满足某个条件，或达到指定时间；它用于显式的线程间通信。两类条件变量都定义在 `<condition_variable>` 中：`std::condition_variable` 只能等待 `std::unique_lock<std::mutex>`，而 `std::condition_variable_any` 可以等待任何提供 `lock()` 和 `unlock()` 方法的锁类型。",
+  "key_points": [
+    "`std::condition_variable` 通常用于 `std::unique_lock<std::mutex>`。",
+    "`std::condition_variable_any` 可配合自定义锁类型或其他满足要求的锁类型。",
+    "条件变量本身不保存业务条件；等待线程仍应通过共享状态或谓词判断条件是否成立。",
+    "教材指出 `std::condition_variable` 根据 C++ 标准在特定平台上可达到最高效率。"
+  ],
+  "examples": [
+    "```cpp\nstd::mutex m_mutex;\nstd::condition_variable m_condVar;\nstd::unique_lock<std::mutex> lock{m_mutex};\nm_condVar.wait(lock, predicate);\n```",
+    "使用 `std::condition_variable_any` 时，所使用的锁类至少应提供 `lock()` 和 `unlock()` 方法。"
+  ],
+  "misconceptions": [
+    "调用 notify 并不等于业务条件已经成立；等待线程仍需检查共享状态。",
+    "`std::condition_variable` 不是可以直接配合任意锁类型使用的通用版本。",
+    "条件变量的等待通常要和互斥体及共享状态一起使用，而不是单独作为事件标志。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "std::condition_variable 和 std::condition_variable_any 的主要区别是什么？",
+      "a": "std::condition_variable 只能等待 std::unique_lock<std::mutex>；std::condition_variable_any 可以等待任何提供 lock() 和 unlock() 方法的锁类型。"
+    },
+    {
+      "q": "条件变量主要用于什么？",
+      "a": "用于线程间显式通信，使一个线程阻塞，直到另一个线程通知、条件满足或指定时间到达。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "互斥体与 unique_lock",
+    "线程阻塞与唤醒"
+  ],
+  "source_pages": [
+    814,
+    815
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1671_std_condition_variable_与_std_condition_v",
+  "_chunk_pages": [
+    813,
+    816
+  ]
+}

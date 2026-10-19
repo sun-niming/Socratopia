@@ -1,0 +1,40 @@
+{
+  "title": "std::string对象的独立拷贝与可修改性",
+  "definition": "用一个 `std::string`对象初始化另一个对象时，会得到内容独立的字符串对象。修改拷贝对象的字符不会改变原字符串对象。",
+  "key_points": [
+    "`std::string myOtherString{myString};`会创建 `myString`的拷贝。",
+    "可以通过下标运算符访问和修改字符串中的字符，例如 `myOtherString[0] = 'H';`。",
+    "修改拷贝对象后，原对象与拷贝对象可以保存不同内容。"
+  ],
+  "examples": [
+    "`std::string myOtherString{myString};`",
+    "`myOtherString[0] = 'H';`",
+    "如果拷贝前 `myString`的内容为以小写 `h`开头的字符串，修改 `myOtherString[0]`为大写 `H`后，`myOtherString`的开头变为 `H`，不会因此修改 `myString`。"
+  ],
+  "misconceptions": [
+    "拷贝 `std::string`对象不是让两个变量共享同一个可变字符串对象；修改其中一个对象不会按引用传播到另一个对象。",
+    "下标访问得到的是字符位置访问，不是创建新的字符串。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "执行 `std::string myOtherString{myString};`后，修改 `myOtherString[0]`会不会修改 `myString[0]`？",
+      "a": "不会；两个 `std::string`对象是独立的拷贝。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "std::string用于管理字符序列",
+    "C++对象拷贝"
+  ],
+  "source_pages": [
+    105,
+    108
+  ],
+  "needs_verification": true,
+  "verify_query": "C++ std::string 拷贝构造 myOtherString myString 修改下标 独立副本 教材 第108页",
+  "concept_id": "153_std_string对象的独立拷贝与可修改性",
+  "_chunk_pages": [
+    105,
+    108
+  ]
+}

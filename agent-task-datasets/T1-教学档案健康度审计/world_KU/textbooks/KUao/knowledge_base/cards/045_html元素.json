@@ -1,0 +1,39 @@
+{
+  "title": "HTML元素",
+  "definition": "HTML元素是把HTML标记和标记之间的内容组合起来形成的结构。元素通常呈现为嵌套结构，也就是一个元素内部还可以包含其他元素。",
+  "key_points": [
+    "元素由开始标记、内容和结束标记共同构成。",
+    "HTML元素常以嵌套方式组织页面内容。"
+  ],
+  "examples": [
+    "<p>这是一个段落</p>",
+    "<div><span>嵌套内容</span></div>"
+  ],
+  "misconceptions": [
+    "元素不只是一个标记本身，而是标记与其内容的整体。",
+    "元素之间可以相互嵌套，但不能无限制地乱嵌套，仍要符合HTML结构。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "HTML元素是由什么组合而成的？",
+      "a": "由HTML标记和标记之间的内容组合而成。"
+    },
+    {
+      "q": "HTML元素常呈现什么结构？",
+      "a": "嵌套结构。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [],
+  "source_pages": [
+    37,
+    37
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "045_html元素",
+  "_chunk_pages": [
+    37,
+    40
+  ]
+}

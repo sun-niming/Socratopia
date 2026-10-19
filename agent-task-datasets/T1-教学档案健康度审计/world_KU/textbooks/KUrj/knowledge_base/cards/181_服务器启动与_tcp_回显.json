@@ -1,0 +1,39 @@
+{
+  "title": "服务器启动与 TCP 回显",
+  "definition": "启动命令 `./webserver -p 8080` 预期会打印 `listening on port 8080`；随后可以用 `nc 127.0.0.1 8080` 建立 TCP 连接，Echo 版本应能把输入原样回显。",
+  "key_points": [
+    "启动后应显示正在监听 8080 端口。",
+    "`nc` 可以用来验证原始 TCP 连接是否建立成功。",
+    "Echo 版本应对输入做回显。"
+  ],
+  "examples": [
+    "`./webserver -p 8080`",
+    "`nc 127.0.0.1 8080`"
+  ],
+  "misconceptions": [
+    "能用浏览器访问就等于 TCP 层一定没问题。",
+    "`nc` 连接成功后一定说明 HTTP 逻辑也正确。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何验证服务器启动后确实在 8080 端口提供服务？",
+      "a": "先运行 `./webserver -p 8080`，再用 `nc 127.0.0.1 8080` 测试连接。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "Linux 命令基础",
+    "TCP 基础"
+  ],
+  "source_pages": [
+    113,
+    116
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "181_服务器启动与_tcp_回显",
+  "_chunk_pages": [
+    113,
+    116
+  ]
+}

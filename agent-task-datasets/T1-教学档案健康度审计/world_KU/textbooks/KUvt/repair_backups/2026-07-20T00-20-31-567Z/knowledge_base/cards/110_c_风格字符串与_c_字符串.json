@@ -1,0 +1,46 @@
+{
+  "title": "C 风格字符串与 C++ 字符串",
+  "definition": "C++ 中有两种字符串表示方法：C 风格字符串用字符数组表示；C++ 风格字符串把 C 风格的表示封装在更易使用、更安全的 `std::string` 类型中。`std::string` 定义在 `<string>` 头文件中，其使用方式在许多方面类似基本类型。",
+  "key_points": [
+    "C 风格字符串的基础表示是字符数组。",
+    "C++ 风格字符串使用 `std::string`，例如 `std::string myString { \"Hello, World\" };`。",
+    "可以使用下标访问字符串中的字符；下标从 0 开始。"
+  ],
+  "examples": [
+    "`std::string myString { \"Hello, World\" };`。",
+    "`myString[1]` 访问字符串的第二个字符，即字符 `e`。",
+    "`cout << format(\"The value of myString is {}\", myString) << endl;` 可输出字符串内容。"
+  ],
+  "misconceptions": [
+    "`myString[1]` 不是第一个字符，而是第二个字符，因为字符串下标从 0 开始。",
+    "C 风格字符串和 `std::string` 都能表示文本，但它们不是同一种类型。",
+    "`std::string` 定义在 `<string>` 中，而不是 `<initializer_list>` 中。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "C++ 中字符串有哪两种主要表示方法？",
+      "a": "C 风格字符串使用字符数组表示；C++ 风格字符串使用封装后的 `std::string` 类型表示。"
+    },
+    {
+      "q": "`std::string myString { \"Hello, World\" };` 中 `myString[1]` 表示什么？",
+      "a": "表示字符串中的第二个字符，即 `e`。"
+    },
+    {
+      "q": "`std::string` 定义在哪个头文件中？",
+      "a": "定义在 `<string>` 头文件中。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [],
+  "source_pages": [
+    63,
+    63
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "110_c_风格字符串与_c_字符串",
+  "_chunk_pages": [
+    61,
+    64
+  ]
+}

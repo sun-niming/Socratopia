@@ -1,0 +1,44 @@
+{
+  "title": "listen进入监听状态",
+  "definition": "`listen` 的作用是把已经绑定好的 TCP socket 转为监听状态，使其成为被动接受连接的 socket。调用 `listen` 之后，程序才能通过 `accept` 取出客户端连接。",
+  "key_points": [
+    "原型是 `int listen(int sockfd, int backlog);`。",
+    "`sockfd` 必须是已经 `bind` 过的 socket。",
+    "`backlog` 表示等待连接队列相关参数，不等于最终最大并发数。",
+    "`listen` 本身不负责接收数据，也不是阻塞等待连接的函数。",
+    "真正的连接由后续 `accept` 取出。"
+  ],
+  "examples": [
+    "```c\nif (listen(listen_fd, 64) < 0) {\nperror(\"listen\");\nclose(listen_fd);\nreturn -1;\n}\n```"
+  ],
+  "misconceptions": [
+    "以为 `listen` 会直接阻塞并接受客户端。",
+    "以为 `backlog` 就是服务器最多能服务的用户总数。",
+    "以为 `listen` 之后就已经拿到了客户端 fd。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`listen` 前必须先做哪一步？",
+      "a": "先 `bind`。"
+    },
+    {
+      "q": "`listen` 的 `backlog` 是什么含义？",
+      "a": "它与等待连接队列相关，不等于最终最大并发数。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "bind绑定本地地址端口"
+  ],
+  "source_pages": [
+    46,
+    47
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "067_listen进入监听状态",
+  "_chunk_pages": [
+    45,
+    48
+  ]
+}

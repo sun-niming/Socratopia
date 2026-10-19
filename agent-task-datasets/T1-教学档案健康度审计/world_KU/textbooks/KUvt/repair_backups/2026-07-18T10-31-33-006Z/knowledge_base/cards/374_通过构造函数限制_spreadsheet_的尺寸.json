@@ -1,0 +1,45 @@
+{
+  "title": "通过构造函数限制 Spreadsheet 的尺寸",
+  "definition": "Spreadsheet 的构造函数接收宽度和高度，并将实际保存的宽度、高度分别限制为输入值与类常量上限中的较小值。原文使用 `std::min(width, MaxWidth)` 和 `std::min(height, MaxHeight)` 完成这一限制。",
+  "key_points": [
+    "宽度成员使用 `std::min(width, MaxWidth)` 初始化。",
+    "高度成员使用 `std::min(height, MaxHeight)` 初始化。",
+    "原文提示 `std::min()` 需要包含 `<algorithm>` 头文件。",
+    "原文还提供了带默认参数的构造函数声明：`Spreadsheet(size_t width = MaxWidth, size_t height = MaxHeight);`。"
+  ],
+  "examples": [
+    "尺寸限制可表示为：$$\\begin{aligned}\\text{m\\_width}&=\\min(\\text{width},\\text{MaxWidth})\\\\\\text{m\\_height}&=\\min(\\text{height},\\text{MaxHeight})\\end{aligned}$$",
+    "带默认参数的声明：`Spreadsheet(size_t width = MaxWidth, size_t height = MaxHeight);`。"
+  ],
+  "misconceptions": [
+    "`std::min()` 不会把小于上限的尺寸强行改成上限；它保留较小的输入值。",
+    "默认参数只在调用时省略相应实参时生效，并不表示所有 Spreadsheet 实例都必须使用 100×100。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如果传入的 width 大于 MaxWidth，Spreadsheet 保存的宽度是什么？",
+      "a": "保存为 `MaxWidth`，因为构造函数使用 `std::min(width, MaxWidth)`。"
+    },
+    {
+      "q": "Spreadsheet 构造函数的默认宽度和高度是什么？",
+      "a": "默认宽度为 `MaxWidth`，默认高度为 `MaxHeight`；原文中二者都定义为 100。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "`std::min()`",
+    "构造函数默认参数",
+    "成员初始化器"
+  ],
+  "source_pages": [
+    285,
+    288
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "374_通过构造函数限制_spreadsheet_的尺寸",
+  "_chunk_pages": [
+    285,
+    288
+  ]
+}

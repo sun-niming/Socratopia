@@ -1,0 +1,43 @@
+{
+  "title": "Lambda表达式的基本用途与语法",
+  "definition": "Lambda 表达式是在需要函数的地方定义的小型、未命名内联函数。教材示例 `[](const Person& person) { return person.getFirstName(); }` 中，`[]` 表示 lambda 的开始，圆括号中是参数列表，大括号中是函数体。参数类型也可以写成 `auto`，例如 `[](const auto& person) { return person.getFirstName(); }`。",
+  "key_points": [
+    "lambda 可以直接作为范围算法的回调或投影函数。",
+    "基本结构为：`[捕获列表](参数列表) { 函数体 }`；本页示例使用空捕获列表 `[]`。",
+    "lambda 可以用独立函数替代；例如按名字取得属性的 lambda，可改写为返回名字的普通函数。",
+    "参数类型可以明确写成 `const Person&`，也可以使用 `const auto&`。"
+  ],
+  "examples": [
+    "`[](const Person& person) { return person.getFirstName(); }`",
+    "泛型参数写法：`[](const auto& person) { return person.getFirstName(); }`"
+  ],
+  "misconceptions": [
+    "lambda 不只是语法缩写；它本质上可以在表达式所在位置提供一个可调用对象。",
+    "`[]` 在本例中表示空捕获列表，不表示没有参数；参数位于后面的圆括号中。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "lambda 表达式 `[](const auto& person) { return person.getFirstName(); }` 做了什么？",
+      "a": "它接收一个对象引用，并返回该对象的 `getFirstName()` 结果。"
+    },
+    {
+      "q": "lambda 表达式的参数列表和函数体分别位于哪里？",
+      "a": "参数列表位于圆括号中，函数体位于大括号中。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "函数调用与回调函数"
+  ],
+  "source_pages": [
+    538,
+    539
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1105_lambda表达式的基本用途与语法",
+  "_chunk_pages": [
+    537,
+    540
+  ]
+}

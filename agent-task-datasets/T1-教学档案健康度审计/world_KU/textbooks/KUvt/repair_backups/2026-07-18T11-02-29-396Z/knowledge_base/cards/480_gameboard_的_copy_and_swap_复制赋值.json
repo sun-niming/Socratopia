@@ -1,0 +1,48 @@
+{
+  "title": "GameBoard 的 copy-and-swap 复制赋值",
+  "definition": "GameBoard 的复制赋值运算符采用 copy-and-swap 惯用法：先用右值参数 rhs 构造一个临时副本，再通过不抛异常的 swap() 将临时副本与当前对象交换，最后返回当前对象。临时对象析构时会释放当前对象原有的资源。",
+  "key_points": [
+    "复制赋值先执行 GameBoard temp{rhs}，由复制构造函数完成深复制。",
+    "随后调用 swap(temp)，交换当前对象与临时对象的宽度、高度和单元格容器。",
+    "原文中的 swap() 使用 std::swap 交换 m_width、m_height 和 m_cells。",
+    "swap() 被声明为 noexcept，因此提交交换阶段只进行不抛异常的操作。",
+    "函数最后返回 *this。"
+  ],
+  "examples": [
+    "复制赋值的核心流程：$$\\begin{aligned}\\text{GameBoard temp\\{rhs\\};}\\\\\\text{swap(temp); }\\\\\\text{return }*this;\\end{aligned}$$",
+    "交换的成员包括：$$\\begin{aligned}\\text{swap}(m\\_width,other.m\\_width);\\\\\\text{swap}(m\\_height,other.m\\_height);\\\\\\text{swap}(m\\_cells,other.m\\_cells);\\end{aligned}$$"
+  ],
+  "misconceptions": [
+    "copy-and-swap 中的 temp 不是对 rhs 的浅复制，而是通过复制构造函数创建的深复制。",
+    "swap() 不是逐个棋子重新复制，而是交换对象管理的成员容器和尺寸信息。",
+    "当前对象原有资源不是在交换前立即销毁，而是在临时对象离开作用域时由其析构过程释放。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "GameBoard 的复制赋值运算符为什么先创建临时对象？",
+      "a": "临时对象通过复制构造函数完成全部复制工作；随后只需用 noexcept 的 swap() 提交结果，从而简化资源管理并提高异常安全性。"
+    },
+    {
+      "q": "copy-and-swap 赋值完成后，临时对象中保存什么？",
+      "a": "它保存当前对象原先的宽度、高度和单元格资源；临时对象离开作用域后，这些旧资源会被释放。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "复制构造函数",
+    "复制赋值运算符",
+    "异常安全",
+    "std::swap"
+  ],
+  "source_pages": [
+    373,
+    376
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "480_gameboard_的_copy_and_swap_复制赋值",
+  "_chunk_pages": [
+    373,
+    376
+  ]
+}

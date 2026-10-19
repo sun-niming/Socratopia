@@ -1,0 +1,43 @@
+{
+  "title": "命名空间的定义与限定名调用",
+  "definition": "命名空间用于把相关声明组织在一个具名作用域中，从而减少名称冲突。可以使用 `namespace 名称 { ... }` 定义命名空间；在命名空间外访问其中成员时，可使用作用域解析运算符 `::` 构成限定名，例如 `mycode::foo()`。",
+  "key_points": [
+    "定义命名空间的基本语法是 `namespace 名称 { 声明和定义 }`。",
+    "`::` 是作用域解析运算符。",
+    "`mycode::foo()` 明确调用 `mycode` 命名空间中的 `foo()`。",
+    "不同命名空间可以包含同名函数而不直接冲突。"
+  ],
+  "examples": [
+    "namespace mycode {\n    void foo()\n    {\n        std::cout << \"foo() called in the mycode namespace\" << std::endl;\n    }\n}\n\nmycode::foo(); // 调用 mycode 命名空间中的 foo()"
+  ],
+  "misconceptions": [
+    "误以为定义在命名空间中的函数总能在外部直接写成 `foo()`；若该名称未被引入，通常需要写限定名。",
+    "把 `::` 错写成成员访问运算符 `.`。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何明确调用 `mycode` 命名空间中的 `foo()`？",
+      "a": "写成 `mycode::foo();`。"
+    },
+    {
+      "q": "命名空间的主要用途是什么？",
+      "a": "把名称组织到独立作用域中，并减少名称冲突。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "函数基础",
+    "作用域"
+  ],
+  "source_pages": [
+    37,
+    40
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "033_命名空间的定义与限定名调用",
+  "_chunk_pages": [
+    37,
+    40
+  ]
+}

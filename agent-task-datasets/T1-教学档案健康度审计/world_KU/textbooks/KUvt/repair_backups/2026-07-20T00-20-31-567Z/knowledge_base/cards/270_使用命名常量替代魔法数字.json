@@ -1,0 +1,48 @@
+{
+  "title": "使用命名常量替代魔法数字",
+  "definition": "魔法数字是直接出现在代码中的、含义不明显的数值常量，例如 2.71828、24 或 3600。应使用具有语义的符号名称表示这些不变值，使代码读者能够理解其含义，并便于统一修改。C++ 中可以使用 const 定义命名常量；从 C++20 开始，标准库还在 <numbers> 中提供预定义数学常量。",
+  "key_points": [
+    "命名常量应表达数值的含义，而不是只暴露数值本身。",
+    "示例：ApproximationForE 表示 e 的近似值，HoursPerDay 表示每天小时数，SecondsPerHour 表示每小时秒数。",
+    "C++ 中可以使用 const 声明不可重新赋值的命名常量。",
+    "C++20 标准库的 <numbers> 中提供了预定义数学常量，例如 e、pi、phi 和 sqrt2；具体名称应以标准库声明为准。"
+  ],
+  "examples": [
+    "const double ApproximationForE{2.71828182845904523536};",
+    "const int HoursPerDay{24};",
+    "const int SecondsPerHour{3'600};",
+    "数学常量示意：#include <numbers>，使用标准库提供的相应名称，例如 std::numbers::e 或 std::numbers::pi。"
+  ],
+  "misconceptions": [
+    "数字本身能被程序正确计算，并不意味着它对读者具有清晰含义。",
+    "命名常量不仅用于方便修改，也用于传达数值的语义。",
+    "标准库数学常量的具体名称不能仅凭教材 OCR 文本猜测，应以 C++20 标准库文档为准。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "什么是魔法数字？为什么应避免使用？",
+      "a": "魔法数字是直接写在代码中且含义不明显的数值，例如 24 或 3600。应使用命名常量替代，以表达含义并提高可读性和可维护性。"
+    },
+    {
+      "q": "如何定义每天小时数和每小时秒数这两个命名常量？",
+      "a": "可以写成：const int HoursPerDay{24}; 和 const int SecondsPerHour{3'600};"
+    },
+    {
+      "q": "C++20 标准库把预定义数学常量放在哪里？",
+      "a": "放在 <numbers> 头文件提供的 std::numbers 名称空间中；具体常量名称应查阅对应版本的标准库文档。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [],
+  "source_pages": [
+    135,
+    135
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 <numbers> std::numbers 预定义数学常量 e pi phi sqrt2 具体名称",
+  "concept_id": "270_使用命名常量替代魔法数字",
+  "_chunk_pages": [
+    133,
+    136
+  ]
+}

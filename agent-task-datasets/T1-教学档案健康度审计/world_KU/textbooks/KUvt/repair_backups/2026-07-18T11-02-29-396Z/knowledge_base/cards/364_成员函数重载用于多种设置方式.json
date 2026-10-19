@@ -1,0 +1,45 @@
+{
+  "title": "成员函数重载用于多种设置方式",
+  "definition": "C++ 允许在同一个类中定义名称相同但参数列表不同的成员函数，这称为函数重载。原文中的 SpreadsheetCell 提供多个 set 函数重载，例如接收 double 的 set(double value) 和接收字符串视图的 set(std::string_view value)，调用时由编译器根据实参类型选择合适的重载。",
+  "key_points": [
+    "函数重载要求参数列表不同，不能仅靠返回类型不同来区分。",
+    "SpreadsheetCell 可以同时提供 set(double value) 和 set(std::string_view value)。",
+    "传入 double 时通常选择 set(double)；传入字符串视图时通常选择 set(std::string_view)。",
+    "重载选择属于编译期的重载决议。"
+  ],
+  "examples": [
+    "两个重载：void set(double value); void set(std::string_view value);",
+    "调用示例：SpreadsheetCell cell; cell.set(3.14); // 选择 set(double)",
+    "调用示例：cell.set(\"6\"); // 根据参数类型选择字符串相关重载"
+  ],
+  "misconceptions": [
+    "函数重载不是同名函数随意重复定义；重载函数必须具有不同的参数列表。",
+    "不能只通过改变返回类型来重载函数。",
+    "重载决议不是运行时根据对象内容选择，而是编译器根据调用表达式和参数类型进行选择。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "SpreadsheetCell 如何分别支持用数值和字符串设置单元格？",
+      "a": "定义同名但参数类型不同的重载，例如 void set(double value); 和 void set(std::string_view value);。"
+    },
+    {
+      "q": "调用 cell.set(3.14) 时通常选择哪个重载？",
+      "a": "选择参数类型为 double 的 set(double value) 重载。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "函数参数与函数重载"
+  ],
+  "source_pages": [
+    277,
+    280
+  ],
+  "needs_verification": true,
+  "verify_query": "\"C++20高级编程\" \"SpreadsheetCell\" \"void set(std::string_view value)\"",
+  "concept_id": "364_成员函数重载用于多种设置方式",
+  "_chunk_pages": [
+    277,
+    280
+  ]
+}

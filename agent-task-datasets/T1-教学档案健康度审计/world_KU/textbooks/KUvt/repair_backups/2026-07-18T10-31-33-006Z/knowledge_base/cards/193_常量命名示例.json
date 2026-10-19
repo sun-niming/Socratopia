@@ -1,0 +1,40 @@
+{
+  "title": "常量命名示例",
+  "definition": "原文给出了常量命名示例：以 k 开头并采用有意义的名称，例如 kMaximumLength；布尔变量或状态变量可使用 bCompleted 这样的名称。由于原文存在 OCR 丢失和混排，具体命名规则需结合原书页面核实。",
+  "key_points": [
+    "最大长度常量的示例名称为 kMaximumLength。",
+    "已完成状态的布尔变量示例名称为 bCompleted。",
+    "命名应尽量表达常量或变量的语义，而不是只使用无意义的缩写。"
+  ],
+  "examples": [
+    "最大长度常量：kMaximumLength。",
+    "完成状态变量：bCompleted。"
+  ],
+  "misconceptions": [
+    "kMaximumLength 中的 k 并不是 C++ 语法要求，而是原文示例中的命名前缀。",
+    "bCompleted 只是命名示例，不能据此断定所有布尔变量都必须以 b 开头。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "原文给出的最大长度常量命名示例是什么？",
+      "a": "kMaximumLength。"
+    },
+    {
+      "q": "原文给出的完成状态变量命名示例是什么？",
+      "a": "bCompleted。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [],
+  "source_pages": [
+    133,
+    136
+  ],
+  "needs_verification": true,
+  "verify_query": "《C++20高级编程》第5版 第133页 kMaximumLength bCompleted 命名约定",
+  "concept_id": "193_常量命名示例",
+  "_chunk_pages": [
+    133,
+    136
+  ]
+}

@@ -1,0 +1,209 @@
+{
+  "chunkId": "chunk-001",
+  "messageRange": [
+    0,
+    11
+  ],
+  "topics": [
+    {
+      "name": "FOLLOW集合的传递与预测分析表填写",
+      "facts": [
+        "$)$ 先落进 \\(\\mathrm{FOLLOW}(E)\\)，再传给 \\(\\mathrm{FOLLOW}(E')\\)",
+        "产生式 \\(F \\to (\\,E\\,)\\) 使 \\()\\) 进入 \\(\\mathrm{FOLLOW}(E)\\)",
+        "由 \\(E \\to T\\,E'\\)，\\(E'\\) 位于体末尾，整个 \\(\\mathrm{FOLLOW}(E)\\) 落入 \\(\\mathrm{FOLLOW}(E')\\)",
+        "最终 \\(\\mathrm{FOLLOW}(E')=\\{\\,),\\,\\$\\}\\)，\\(M[E',)]\\) 填 \\(E'\\to\\epsilon\\)"
+      ],
+      "examples": [
+        "产生式 \\(E \\to T\\,E'\\) 与 \\(F \\to (\\,E\\,)\\)",
+        "预测分析表项 \\(M[E',)]=E'\\to\\epsilon\\)"
+      ],
+      "sourceMessageIndexes": [
+        1,
+        2,
+        3
+      ]
+    },
+    {
+      "name": "非递归的预测分析",
+      "facts": [
+        "4.4.1 递归下降的栈藏在递归调用中，不可见",
+        "4.4.4 把栈显式摆到台面上，程序无需递归，靠表驱动",
+        "不变式：设 \\(u\\) 是已匹配的输入前缀，栈中符号串为 \\(\\alpha\\)，则任意时刻满足 \\(S \\Rightarrow_{lm}^{*} u\\,\\alpha\\)",
+        "栈里装的是从开始符号出发、尚未被消化的那部分",
+        "算法 4.34 每轮只看栈顶 \\(X\\) 和当前输入符号 \\(a\\)",
+        "\\(X\\) 是终结符且等于 \\(a\\) 时：弹出栈顶，输入指针前移",
+        "\\(X\\) 是终结符但不等于 \\(a\\) 时：报错",
+        "\\(X\\) 是非终结符而 \\(M[X,a]\\) 是 error 时：报错",
+        "\\(X\\) 是非终结符且 \\(M[X,a]=X\\to Y_1Y_2\\cdots Y_k\\) 时：输出该产生式，弹出 \\(X\\)，把 \\(Y_k,\\dots,Y_1\\) 依次压栈，\\(Y_1\\) 落在栈顶"
+      ],
+      "examples": [
+        "预测分析器四个角色：输入缓冲区（含结束标记 \\(\\$\\)）、栈、预测分析表 \\(M[X,a]\\)、输出",
+        "展开 \\(E\\to T\\,E'\\) 后，栈从顶到底为 \\(T\\,E'\\,\\$\\)",
+        "教材图 4-21 的 id + id * id 完整分析过程"
+      ],
+      "sourceMessageIndexes": [
+        3,
+        5
+      ]
+    },
+    {
+      "name": "预测分析中的错误恢复",
+      "facts": [
+        "分析器只有两个时刻知道自己错了：栈顶终结符与当前输入不匹配；栈顶非终结符 \\(A\\)、当前输入 \\(a\\) 而 \\(M[A,a]\\) 为空",
+        "恐慌模式：把输入符号一个个丢掉，直到撞见事先选好的同步词法单元，然后继续分析",
+        "\\(\\mathrm{FOLLOW}(A)\\) 可整个放入 \\(A\\) 的同步集合",
+        "光靠 FOLLOW 不够：C 语言语句末尾漏分号时，下一语句开头关键字会被一起丢掉，因此要把高层构造的开始符号加进低层构造的同步集合",
+        "遇到 \\(M[F,+]\\) 是 synch 时，弹出栈顶 \\(F\\)，输入指针原地不动"
+      ],
+      "examples": [
+        "C 语言语句末尾漏掉分号的例子",
+        "\\(M[F,+]\\) 为 synch 的处理"
+      ],
+      "sourceMessageIndexes": [
+        5,
+        7
+      ]
+    },
+    {
+      "name": "自底向上的语法分析",
+      "facts": [
+        "自底向上从叶子往上长树，一路长到根",
+        "归约 (reduction)：找到和某个产生式体匹配的子串，把它换成产生式头部的非终结符",
+        "自底向上分析就是反向构造一个最右推导"
+      ],
+      "examples": [
+        "输入 id * id 按表达式文法 (4.1)：\\(id * id \\to F * id \\to T * id \\to T * F \\to T \\to E\\)",
+        "反过来读为最右推导：\\(E \\Rightarrow T \\Rightarrow T * F \\Rightarrow T * id \\Rightarrow F * id \\Rightarrow id * id\\)"
+      ],
+      "sourceMessageIndexes": [
+        7
+      ]
+    },
+    {
+      "name": "句柄 (handle)",
+      "facts": [
+        "形式化定义：若文法有 \\(S \\Rightarrow \\alpha A w \\Rightarrow \\alpha\\beta w\\)，则紧跟在 \\(\\alpha\\) 后面的产生式 \\(A\\to\\beta\\) 是串 \\(\\alpha\\beta w\\) 的一个句柄",
+        "和某个产生式体匹配的最左子串不一定是句柄",
+        "无二义性文法每个右句型恰好一个句柄；二义性文法可能不止一个句柄",
+        "句柄右边的 \\(w\\) 只可能由终结符号组成",
+        "理由：推导那一步替换的是当前句型中最右边的非终结符 \\(A\\)，其右边不可能再有非终结符",
+        "句柄右边的输入已不需再归约，故分析器从左往右扫，一遇到句柄就下手"
+      ],
+      "examples": [
+        "句型 \\(T * id_2\\) 中 \\(T\\) 不是句柄",
+        "把 \\(T\\) 归约成 \\(E\\) 得 \\(E * id_2\\)，该形状推不出来，说明归错了",
+        "真正的句柄是第二个 \\(id_2\\)，套 \\(F\\to id\\)",
+        "\\(id_1 * id_2\\) 全程序句柄表：\\(id_1\\)/\\(F\\to id\\)；\\(F\\)/\\(T\\to F\\)；\\(id_2\\)/\\(F\\to id\\)；\\(T*F\\)/\\(T\\to T*F\\)；\\(T\\)/\\(E\\to T\\)"
+      ],
+      "sourceMessageIndexes": [
+        7,
+        9,
+        11
+      ]
+    },
+    {
+      "name": "句柄剪枝与自底向上分析骨架",
+      "facts": [
+        "反复找句柄、归约，直到栈里只剩 \\(E\\)，这就是句柄剪枝",
+        "句柄剪枝把最右推推导反着走了一遍"
+      ],
+      "examples": [
+        "从 \\(id_1*id_2\\) 剪到只剩 \\(E\\)"
+      ],
+      "sourceMessageIndexes": [
+        9
+      ]
+    }
+  ],
+  "learnerEvidence": [
+    {
+      "kind": "correct",
+      "content": "\")先落进FOLLOW(E)，然后再传给FOLLOW(E')\"",
+      "sourceMessageIndexes": [
+        2
+      ]
+    },
+    {
+      "kind": "correct",
+      "content": "回答出用最右推导",
+      "sourceMessageIndexes": [
+        10
+      ]
+    },
+    {
+      "kind": "confusion",
+      "content": "\"最右推导，但是为什么我还真看不出来\"——知道方向是最右推导，但说不出为什么句柄右边 \\(\\omega\\) 只可能是终结符号",
+      "sourceMessageIndexes": [
+        10
+      ]
+    }
+  ],
+  "keyInsights": [
+    {
+      "content": "\\()\\) 先进 \\(\\mathrm{FOLLOW}(E)\\) 再传给 \\(\\mathrm{FOLLOW}(E')\\)",
+      "sourceMessageIndexes": [
+        2
+      ]
+    },
+    {
+      "content": "句柄右边只能是终结符，因为构造的是最右推导",
+      "sourceMessageIndexes": [
+        10
+      ]
+    }
+  ],
+  "openQuestions": [
+    {
+      "content": "句型写成 \\(\\alpha A w\\)，假如 \\(w\\) 里出现了一个非终结符号，那这个句型里真正的「最右非终结符号」应该是谁？",
+      "sourceMessageIndexes": [
+        11
+      ]
+    }
+  ],
+  "reviewCandidates": [
+    {
+      "question": "在 \\(F \\to (\\,E\\,)\\) 和 \\(E \\to T\\,E'\\) 下，\\()\\) 如何进入 \\(\\mathrm{FOLLOW}(E')\\)？",
+      "answer": "\\()\\) 先因 \\(F\\to(\\,E\\,)\\) 进入 \\(\\mathrm{FOLLOW}(E)\\)，再顺 \\(E\\to T\\,E'\\) 传给 \\(\\mathrm{FOLLOW}(E')\\)，故 \\(\\mathrm{FOLLOW}(E')=\\{\\,),\\,\\$\\}\\)。",
+      "sourceMessageIndexes": [
+        1,
+        2,
+        3
+      ]
+    },
+    {
+      "question": "非递归预测分析中栈应满足的不变式是什么？",
+      "answer": "设 \\(u\\) 是已匹配输入前缀，栈中符号串为 \\(\\alpha\\)，则 \\(S \\Rightarrow_{lm}^{*} u\\,\\alpha\\)。",
+      "sourceMessageIndexes": [
+        3
+      ]
+    },
+    {
+      "question": "算法 4.34 在 \\(M[X,a]=X\\to Y_1Y_2\\cdots Y_k\\) 时如何操作栈？",
+      "answer": "输出该产生式，弹出 \\(X\\)，把 \\(Y_k,\\dots,Y_1\\) 依次压栈，使 \\(Y_1\\) 落在栈顶。",
+      "sourceMessageIndexes": [
+        3
+      ]
+    },
+    {
+      "question": "恐慌模式中遇到 \\(M[F,+]\\) 为 synch 该怎么处理？",
+      "answer": "弹出栈顶 \\(F\\)，输入指针不动。",
+      "sourceMessageIndexes": [
+        7
+      ]
+    },
+    {
+      "question": "句柄的形式化定义是什么？",
+      "answer": "若 \\(S \\Rightarrow \\alpha A w \\Rightarrow \\alpha\\beta w\\)，则紧跟在 \\(\\alpha\\) 后面的产生式 \\(A\\to\\beta\\) 就是 \\(\\alpha\\beta w\\) 的一个句柄。",
+      "sourceMessageIndexes": [
+        7
+      ]
+    },
+    {
+      "question": "为什么句柄右边的 \\(w\\) 只可能由终结符组成？",
+      "answer": "因为构造的是最右推导；被替换的 \\(A\\) 是当前句型 \\(\\alpha A w\\) 中最右边的非终结符，其右边不可能再有非终结符，故 \\(w\\) 全为终结符。",
+      "sourceMessageIndexes": [
+        11
+      ]
+    }
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "title": "使用 concept 约束类模板参数",
+  "definition": "C++20 的 concept 可以约束类模板或函数模板的模板参数。示例使用 `requires std::floating_point<T> || std::integral<T>`，规定 `SimpleWrapper<T>` 的 `T` 必须是浮点类型或整型；如果指定不满足约束的类型，程序将产生编译错误。",
+  "key_points": [
+    "约束可以写在模板声明之后，例如 `template <typename T> requires ...`。",
+    "`std::floating_point<T>` 表示 `T` 满足浮点类型概念。",
+    "`std::integral<T>` 表示 `T` 满足整型概念。",
+    "逻辑或运算符 `||` 表示满足浮点类型或整型中的任意一个即可。",
+    "不满足约束的模板实参会导致编译错误，而不是等到运行时才报错。"
+  ],
+  "examples": [
+    "约束声明：`export template <typename T> requires std::floating_point<T> || std::integral<T> class SimpleWrapper { ... };`。",
+    "`SimpleWrapper<int>` 和使用浮点类型的包装器满足该约束；使用不满足整型或浮点型约束的类型则不能实例化该模板。"
+  ],
+  "misconceptions": [
+    "concept 约束不是运行时类型检查，而是在编译阶段检查。",
+    "该约束允许的是整型或浮点型，不是任意算术类型或任意可转换类型。",
+    "约束类模板参数不会取消模板，`SimpleWrapper` 仍然是类模板。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "示例中的 `SimpleWrapper<T>` 允许哪些类型作为 `T`？",
+      "a": "允许满足 `std::floating_point<T>` 或 `std::integral<T>` 的类型，即浮点类型或整型。"
+    },
+    {
+      "q": "如果模板实参不满足 requires 约束，会发生什么？",
+      "a": "实例化该模板时会产生编译错误。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++类模板基础",
+    "C++20 concepts基础"
+  ],
+  "source_pages": [
+    930,
+    931
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1926_使用_concept_约束类模板参数",
+  "_chunk_pages": [
+    929,
+    932
+  ]
+}

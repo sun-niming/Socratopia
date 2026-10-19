@@ -1,0 +1,43 @@
+{
+  "title": "函数指针类型别名",
+  "definition": "函数指针保存函数的地址，并且其类型由函数的参数类型和返回类型共同决定。可以使用 using 类型别名为特定函数指针类型命名，从而简化声明和参数定义。",
+  "key_points": [
+    "Matcher 表示指向“接收两个 int 参数并返回 bool”的函数的指针。",
+    "MatchHandler 表示指向“接收一个 size_t 参数和两个 int 参数且无返回值”的函数的指针。",
+    "只有函数签名与函数指针类型兼容的函数，才能作为相应参数传入。"
+  ],
+  "examples": [
+    "定义比较回调类型：$\\texttt{using Matcher = bool(*)(int, int);}$",
+    "定义处理回调类型：$\\texttt{using MatchHandler = void(*)(size\\_t, int, int);}$",
+    "匹配函数示例：$\\texttt{bool intEqual(int item1, int item2) \\{ return item1 == item2; \\}}$"
+  ],
+  "misconceptions": [
+    "函数指针类型不仅由返回类型决定，参数数量和参数类型也必须兼容。",
+    "Matcher 和 MatchHandler 虽然都是函数指针类型，但它们的参数列表和返回类型不同，不能混用。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "Matcher 类型表示什么？",
+      "a": "Matcher 表示指向接收两个 int 参数并返回 bool 的函数的指针，声明为 $\\texttt{using Matcher = bool(*)(int, int);}$。"
+    },
+    {
+      "q": "MatchHandler 类型表示什么？",
+      "a": "MatchHandler 表示指向接收一个 size_t 参数和两个 int 参数、无返回值的函数的指针，声明为 $\\texttt{using MatchHandler = void(*)(size\\_t, int, int);}$。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "回调与可调用对象"
+  ],
+  "source_pages": [
+    606,
+    607
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1246_函数指针类型别名",
+  "_chunk_pages": [
+    605,
+    608
+  ]
+}

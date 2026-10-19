@@ -1,0 +1,41 @@
+{
+  "title": "静态文件发送主流程",
+  "definition": "`send_static_file` 是 `file_server.c` 的核心接口，用来把 HTTP URL 路径映射到本地文件并发送静态内容。它的处理顺序是：先对 URL 解码并做基础路径校验，再拼接候选路径，随后依次执行 `stat`、`realpath`、根目录边界检查、普通文件检查、`open/read/send`，最后把处理结果写入 `HttpResult`。",
+  "key_points": [
+    "职责是连接 HTTP 路径和本地文件系统，负责安全映射、`stat`、`open/read/send`。",
+    "失败时要通过 `send_error` 返回相应错误；成功时返回 200 并更新 `result->status`、`result->bytes`。",
+    "处理顺序很重要：先解码与校验，再拼路径，再判断存在，再做根目录边界检查，再判断是否为普通文件。"
+  ],
+  "examples": [
+    "访问 `/` 时返回 `config->index`。",
+    "访问 `/practice.html` 时返回对应静态文件。",
+    "不存在文件返回 404；目录或越权路径返回 403。"
+  ],
+  "misconceptions": [
+    "把 `realpath` 放在 `stat` 前面会让不存在文件直接失败，难以区分 404 和 403。",
+    "以为静态文件发送只是简单读取文件并输出，实际上还必须做路径安全检查。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`send_static_file` 的整体处理顺序是什么？",
+      "a": "先 URL 解码和路径校验，再拼接候选路径，然后 `stat` 判断是否存在，接着 `realpath` 和根目录边界检查，再判断是否为普通文件，最后 `open/read/send`。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "HTTP路径基础",
+    "本地文件系统基础"
+  ],
+  "source_pages": [
+    85,
+    86,
+    87
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "129_静态文件发送主流程",
+  "_chunk_pages": [
+    85,
+    88
+  ]
+}

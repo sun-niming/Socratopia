@@ -1,0 +1,41 @@
+{
+  "title": "list-style-image",
+  "definition": "CSS 的列表项标号图像属性，用来让列表项标号以图片形式显示。教材示例写法为 list-style-image: url(\"images/bullet.gif\");",
+  "key_points": [
+    "用于把列表标号显示为图像",
+    "常用取值形式是 url(图片路径)",
+    "适合自定义列表前的项目符号外观"
+  ],
+  "examples": [
+    "list-style-image: url(\"images/bullet.gif\");"
+  ],
+  "misconceptions": [
+    "它不是用来设置列表缩进或标号位置的。",
+    "图片路径写法通常通过 url(...) 指定。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "list-style-image 的作用是什么？",
+      "a": "让列表项标号以图像显示。"
+    },
+    {
+      "q": "教材中的示例如何写？",
+      "a": "list-style-image: url(\"images/bullet.gif\");"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "CSS基础"
+  ],
+  "source_pages": [
+    117,
+    120
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "165_list_style_image",
+  "_chunk_pages": [
+    117,
+    120
+  ]
+}

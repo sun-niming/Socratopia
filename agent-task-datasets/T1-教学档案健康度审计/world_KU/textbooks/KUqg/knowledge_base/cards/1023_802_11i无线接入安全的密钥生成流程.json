@@ -1,0 +1,46 @@
+{
+  "title": "802.11i无线接入安全的密钥生成流程",
+  "definition": "802.11i使无线客户站点（STA）在通过无线信道通信前，依次完成相互鉴别、主密钥生成、成对主密钥（PMK）生成和临时密钥（TK）生成。最终，STA和接入点（AP）利用TK对无线链路上的数据进行加密并保护报文完整性。",
+  "key_points": [
+    "STA与鉴别服务器（AS）进行相互鉴别，AP主要负责在STA与AS之间中继报文。",
+    "STA和AS共同生成双方知道的主密钥（MK）。",
+    "STA和AS分别利用MK生成相同的成对主密钥（PMK）；AS再把PMK发送给AP。",
+    "STA和AP利用PMK导出用于报文加密和完整性保护的临时密钥（TK）。",
+    "802.11i支持多种加密形式，包括基于AES的方案和强化版WEP。"
+  ],
+  "examples": [
+    "密钥关系可概括为：$$\\text{STA}\\leftrightarrow\\text{AS}:\\text{相互鉴别并生成 }MK$$ $$\\text{STA}:MK\\rightarrow PMK\\qquad \\text{AS}:MK\\rightarrow PMK\\rightarrow AP$$ $$\\text{STA},\\text{AP}:PMK\\rightarrow TK$$",
+    "在STA能够通过无线信道与远程主机通信前，需要先完成上述鉴别和密钥建立过程。"
+  ],
+  "misconceptions": [
+    "AP不是最初与STA完成相互鉴别并生成MK的实体；在该阶段AP基本上只起中继作用。",
+    "PMK不是直接由AP独立生成的；STA和AS根据MK分别导出相同的PMK，随后AS把PMK发送给AP。",
+    "TK不是用于所有因特网端到端通信的通用密钥，而是用于无线链路级数据保护的临时密钥。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "802.11i中STA、AS和AP之间的密钥生成关系是什么？",
+      "a": "STA与AS相互鉴别并共同生成MK；STA和AS分别用MK生成相同的PMK，AS将PMK发送给AP；随后STA和AP用PMK导出TK，用于无线链路上的加密和完整性保护。"
+    },
+    {
+      "q": "TK在802.11i中有什么用途？",
+      "a": "TK用于执行经无线链路向远程主机发送数据时的链路级加密，并用于报文完整性保护。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "共享密钥与对称加密",
+    "无线局域网基本组成"
+  ],
+  "source_pages": [
+    441,
+    442
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1023_802_11i无线接入安全的密钥生成流程",
+  "_chunk_pages": [
+    441,
+    444
+  ]
+}

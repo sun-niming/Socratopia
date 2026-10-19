@@ -1,0 +1,44 @@
+{
+  "title": "displayMenu 的菜单显示与输入",
+  "definition": "displayMenu() 负责输出雇员数据库的操作菜单，使用标准输入读取用户选择的整数，并返回这个选择。原文明确假定用户在需要输入数字时会正确输入数字；输入错误处理将在后续 I/O 内容中介绍。",
+  "key_points": [
+    "菜单包括雇用、解雇、晋升、列出全部雇员、列出当前雇员、列出已离职雇员和退出。",
+    "函数使用 int 类型保存用户选择。",
+    "函数通过 cin 读取 selection，并返回 selection。",
+    "该示例没有处理非数字输入或其他输入错误。"
+  ],
+  "examples": [
+    "核心结构可表示为：\n```cpp\nint displayMenu() {\n    int selection;\n    // 输出菜单\n    std::cin >> selection;\n    return selection;\n}\n```",
+    "菜单选项与操作的对应关系为：\n$$\n0\\to退出,\\quad 1\\to雇用,\\quad 2\\to解雇,\\quad 3\\to晋升,\\\\\n4\\to显示全部,\\quad 5\\to显示当前,\\quad 6\\to显示已离职\n$$"
+  ],
+  "misconceptions": [
+    "displayMenu() 只负责显示菜单和读取选择，不负责执行雇用、解雇或晋升操作。",
+    "示例代码假定输入正确，并不表示 cin 自动能够妥善处理所有错误输入。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "displayMenu() 的返回值是什么？",
+      "a": "它返回用户通过标准输入选择的整数选项。"
+    },
+    {
+      "q": "原文对用户输入作了什么假定？",
+      "a": "假定用户在需要数字时会输入数字，因此示例暂未处理输入错误。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "标准输入输出",
+    "整数变量"
+  ],
+  "source_pages": [
+    99,
+    99
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "182_displaymenu_的菜单显示与输入",
+  "_chunk_pages": [
+    97,
+    100
+  ]
+}

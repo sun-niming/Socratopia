@@ -1,0 +1,47 @@
+{
+  "title": "const 与非 const at() 重载的实现",
+  "definition": "GameBoard 为 at() 提供 const 和非 const 两个重载：const 版本返回 const std::unique_ptr<GamePiece>&，非 const 版本返回 std::unique_ptr<GamePiece>&。原文中非 const 版本通过 as_const(*this) 调用 const 版本，以复用坐标检查和访问逻辑，再使用 const_cast 去除返回引用的 const 属性。",
+  "key_points": [
+    "const 版本的函数签名为 const std::unique_ptr<GamePiece>& at(size_t x, size_t y) const。",
+    "非 const 版本的函数签名为 std::unique_ptr<GamePiece>& at(size_t x, size_t y)。",
+    "非 const 版本的实现形式是：return const_cast<std::unique_ptr<GamePiece>&>(as_const(*this).at(x, y));",
+    "这种写法避免在两个重载中重复实现坐标检查和单元格访问。"
+  ],
+  "examples": [
+    "核心实现：std::unique_ptr<GamePiece>& GameBoard::at(size_t x, size_t y) { return const_cast<std::unique_ptr<GamePiece>&>(as_const(*this).at(x, y)); }",
+    "const 对象只能通过 const 重载读取：const GameBoard board{8, 8}; board.at(0, 0);",
+    "非 const 对象可以通过非 const 重载修改单元格：GameBoard board{8, 8}; board.at(0, 0) = std::make_unique<ChessPiece>();"
+  ],
+  "misconceptions": [
+    "const 重载和非 const 重载不是两个不同名称的函数，而是由成员函数的 const 限定区分。",
+    "非 const 重载返回可修改的 unique_ptr 引用，因此可以替换棋子或赋值 nullptr。",
+    "as_const(*this) 本身不会复制 GameBoard，它只是把当前对象视为 const 对象来调用 const 重载。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么非 const at() 可以调用 const at()？",
+      "a": "它先用 as_const(*this) 将当前对象视为 const，从而调用 const 重载；随后用 const_cast 将返回引用恢复为可修改的非 const 引用。"
+    },
+    {
+      "q": "const GameBoard 的 at() 返回什么类型？",
+      "a": "返回 const std::unique_ptr<GamePiece>&，调用者不能通过该引用修改单元格的 unique_ptr。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "const成员函数重载",
+    "std::as_const",
+    "const_cast"
+  ],
+  "source_pages": [
+    373,
+    376
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "479_const_与非_const_at_重载的实现",
+  "_chunk_pages": [
+    373,
+    376
+  ]
+}

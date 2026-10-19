@@ -1,0 +1,46 @@
+{
+  "title": "在自定义异常中保存 source_location",
+  "definition": "自定义异常类可以把异常消息和 std::source_location 一起保存下来。构造函数通过 std::source_location::current() 默认记录创建该异常对象的位置，并提供 where() 函数返回保存的位置，从而使捕获异常的代码能够查询异常发生位置。",
+  "key_points": [
+    "示例中的 MyException 继承自 std::exception。",
+    "MyException 保存两个成员：异常消息 m_message 和源代码位置 m_location。",
+    "构造函数接收 string message，并将消息移动到 m_message；同时接收一个默认值为 std::source_location::current() 的位置参数。",
+    "what() 返回异常消息的 C 字符串；where() 返回保存的 source_location。",
+    "捕获 MyException 后，可以通过 e.where() 获取异常位置。"
+  ],
+  "examples": [
+    "核心接口可表示为：class MyException : public std::exception { public: MyException(std::string message, std::source_location location = std::source_location::current()); const char* what() const noexcept override; virtual const std::source_location& where() const noexcept; private: std::string m_message; std::source_location m_location; };",
+    "捕获异常后可以写成：const auto& location = e.where(); 然后使用 location.line()、location.file_name() 等信息进行输出。"
+  ],
+  "misconceptions": [
+    "继承 std::exception 并不会自动保存异常发生的源代码位置；必须像示例一样显式保存 std::source_location。",
+    "what() 返回的是异常消息，不是源文件名或行号；源代码位置需要通过 where() 获取。",
+    "where() 返回的是保存的位置对象，而不是重新计算捕获点的位置。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "MyException 如何保存异常消息和源代码位置？",
+      "a": "它使用 m_message 保存异常消息，使用 m_location 保存 std::source_location；构造函数通过 std::source_location::current() 为位置参数提供默认值。"
+    },
+    {
+      "q": "捕获 MyException 后如何取得异常发生位置？",
+      "a": "通过 e.where() 获取 source_location 引用，再调用其 line()、file_name() 或 function_name() 等成员函数。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++异常类与 std::exception",
+    "std::source_location"
+  ],
+  "source_pages": [
+    453,
+    454
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "594_在自定义异常中保存_source_location",
+  "_chunk_pages": [
+    453,
+    456
+  ]
+}

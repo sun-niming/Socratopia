@@ -1,0 +1,39 @@
+{
+  "title": "DOM事件",
+  "definition": "事件是系统内发生的动作或者发生的事情。系统在事件出现时会产生或触发某种信号，并提供自动执行某种动作的机制。JavaScript 可以监听这些事件，并在事件发生时执行代码，这些代码称为事件处理程序或事件监听器。",
+  "key_points": [
+    "事件既可以来自用户交互，也可以来自浏览器行为",
+    "事件发生后，JavaScript 可以对其做出响应",
+    "事件处理程序/事件监听器本质上都是在事件触发时执行的代码"
+  ],
+  "examples": [
+    "用户交互：click、mouseover、keydown、submit",
+    "浏览器行为：load、DOMContentLoaded"
+  ],
+  "misconceptions": [
+    "事件不只是鼠标点击，浏览器状态变化也可以触发事件",
+    "事件监听器不是事件本身，而是响应事件的代码"
+  ],
+  "qa_pairs": [
+    {
+      "q": "什么是 DOM 事件？",
+      "a": "DOM 事件是系统中发生的动作或事情，发生后可以触发 JavaScript 代码执行。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "JavaScript基础",
+    "DOM节点"
+  ],
+  "source_pages": [
+    359,
+    360
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "516_dom事件",
+  "_chunk_pages": [
+    357,
+    360
+  ]
+}

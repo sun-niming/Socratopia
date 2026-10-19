@@ -1,0 +1,39 @@
+{
+  "title": "粘性定位的使用条件",
+  "definition": "要让元素真正表现为粘性定位，必须满足若干条件：设置 position:sticky 时，必须同时设置 top、bottom、right、left 中至少一个属性；父元素不能设置 overflow:hidden 或 overflow:auto；父元素必须能够滚动；父元素高度不能低于 sticky 元素的高度；父元素不能只有一个 sticky 子元素，还要包含其他子元素。",
+  "key_points": [
+    "position:sticky 必须搭配 top、bottom、right、left 之一，否则元素仍为相对定位",
+    "父元素不能使用 overflow:hidden 或 overflow:auto",
+    "父元素必须可滚动",
+    "父元素高度不能低于 sticky 元素高度",
+    "父元素不能只包含一个 sticky 子元素，还要有其他子元素"
+  ],
+  "examples": [
+    "position:sticky; top:0;"
+  ],
+  "misconceptions": [
+    "只写 position:sticky 就一定会产生粘性效果",
+    "父元素设置了任意 overflow 都不影响 sticky"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么有时设置了 position:sticky 但元素没有粘住？",
+      "a": "因为它还必须设置 top/bottom/right/left 之一，并且父元素等条件也要满足。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "粘性定位"
+  ],
+  "source_pages": [
+    141,
+    144
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "228_粘性定位的使用条件",
+  "_chunk_pages": [
+    141,
+    144
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "title": "HTML5新增多媒体元素",
+  "definition": "HTML5新增了用于嵌入多媒体内容的元素，包括<video>和<audio>。<video>用于定义视频内容，<audio>用于定义音频内容。",
+  "key_points": [
+    "<video>元素定义视频，例如电影片段或其他视频流。",
+    "<audio>元素定义音频，例如音乐或其他音频流。",
+    "这类元素用于在HTML中直接表达多媒体内容。"
+  ],
+  "examples": [
+    "<video>...</video>",
+    "<audio>...</audio>"
+  ],
+  "misconceptions": [
+    "<video>和<audio>不是普通文本容器，而是专门的多媒体语义元素。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "<video>元素用来做什么？",
+      "a": "定义视频，例如电影片段或其他视频流。"
+    },
+    {
+      "q": "<audio>元素用来做什么？",
+      "a": "定义音频，例如音乐或其他音频流。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "HTML基础标签"
+  ],
+  "source_pages": [
+    41,
+    44
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "055_html5新增多媒体元素",
+  "_chunk_pages": [
+    41,
+    44
+  ]
+}

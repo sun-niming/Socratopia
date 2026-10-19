@@ -1,0 +1,43 @@
+{
+  "title": "window 对象的层级与全局属性",
+  "definition": "window 对象位于 BOM 的顶层，由浏览器创建，并且对应 JavaScript 本地对象 Global。浏览器环境中，使用 var 声明的全局变量和全局函数都属于 window 对象的属性。",
+  "key_points": [
+    "window 是 BOM 的顶层对象。",
+    "window 由浏览器创建，也对应 JavaScript 本地对象 Global。",
+    "用 var 声明的全局变量属于 window 的属性。",
+    "全局函数也属于 window 的属性。"
+  ],
+  "examples": [
+    "var a = 1; 在浏览器中，a 可以看作 window 的属性。",
+    "function f(){}; 在浏览器中，f 也属于 window 的属性。"
+  ],
+  "misconceptions": [
+    "window 不是普通的自定义对象，而是浏览器创建的顶层对象。",
+    "全局变量和全局函数在浏览器中并不是完全独立存在的，它们都挂在 window 上。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "window 对象在 BOM 中处于什么位置？",
+      "a": "window 对象位于 BOM 的顶层。"
+    },
+    {
+      "q": "浏览器中的全局变量和全局函数属于谁的属性？",
+      "a": "它们都属于 window 对象的属性。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "BOM（浏览器对象模型）"
+  ],
+  "source_pages": [
+    331,
+    331
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "441_window_对象的层级与全局属性",
+  "_chunk_pages": [
+    329,
+    332
+  ]
+}

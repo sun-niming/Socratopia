@@ -1,0 +1,45 @@
+{
+  "title": "MPLS首部的插入位置与字段",
+  "definition": "MPLS帧在链路层首部和网络层IP首部之间加入一个小的MPLS首部。根据原文，MPLS首部包含标签、预留的3比特实验字段、1比特S字段以及寿命字段等信息。S字段用于指示一组“成栈”的MPLS首部是否已经到达末尾。",
+  "key_points": [
+    "MPLS增强帧的结构可以表示为：链路层首部 $\\rightarrow$ MPLS首部 $\\rightarrow$ IP首部 $\\rightarrow$ 链路层帧的其余部分。",
+    "MPLS首部中的标签用于标签交换。",
+    "预留的3比特实验字段可用于实验性用途。",
+    "1比特S字段用于指示一组MPLS首部成栈时，当前首部是否位于栈底或表示首部序列结束。",
+    "寿命字段用于表示原文所述的生存时间信息。"
+  ],
+  "examples": [
+    "以太网承载IP数据报时，MPLS增强帧可以写成：以太网首部、MPLS首部、IP首部、IP数据及其他帧字段。"
+  ],
+  "misconceptions": [
+    "MPLS首部不是放在IP首部之后，而是插入在链路层首部和IP首部之间。",
+    "普通的非MPLS路由器不能直接按普通IP帧方式正确处理带有MPLS首部的帧。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "MPLS首部位于链路层首部和IP首部的哪一侧？",
+      "a": "MPLS首部位于二层链路层首部之后、三层IP首部之前。"
+    },
+    {
+      "q": "MPLS首部中的S字段有什么作用？",
+      "a": "当多个MPLS首部成栈时，S字段用于指示首部序列的结束。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "链路层帧",
+    "IP首部",
+    "MPLS标签"
+  ],
+  "source_pages": [
+    337,
+    340
+  ],
+  "needs_verification": true,
+  "verify_query": "RFC 3032 MPLS label stack entry fields 3-bit experimental field S bit TTL field",
+  "concept_id": "773_mpls首部的插入位置与字段",
+  "_chunk_pages": [
+    337,
+    340
+  ]
+}

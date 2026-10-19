@@ -1,0 +1,47 @@
+{
+  "title": "constexpr函数可用于常量表达式",
+  "definition": "将函数声明为constexpr，表示该函数具备在编译期求值的条件；当调用所处的上下文需要常量表达式且实参也是编译期可确定的值时，编译器可以在编译期计算其结果。",
+  "key_points": [
+    "constexpr函数可以在需要常量表达式的地方被调用，例如用于数组长度。",
+    "constexpr函数可以调用其他constexpr函数，但不能调用非constexpr函数。",
+    "为了能够在编译期求值，constexpr函数受到较多限制；教材指出这类函数不能有副作用，也不能引发异常。",
+    "constexpr并不保证每次调用都发生在编译期；如果调用时的值只能在运行期确定，调用可以在运行期执行。"
+  ],
+  "examples": [
+    "constexpr int getArraySize() { return 32; }\nint myArray[getArraySize()]; // OK",
+    "int myArray[getArraySize() + 1]; // OK",
+    "constexpr double inchToMm(double inch) { return inch * 25.4; }\nconstexpr double inch { 6.0 };\nconstexpr double mm1 { inchToMm(inch) }; // 编译期求值",
+    "double dynamicInch { 8.0 };\ndouble mm2 { inchToMm(dynamicInch) }; // 运行期求值"
+  ],
+  "misconceptions": [
+    "constexpr不等于“函数一定在编译期执行”；它只表示函数可以在满足条件时进行编译期求值。",
+    "只有函数声明为constexpr，并不意味着使用运行期变量调用它时也能在编译期计算。",
+    "constexpr函数不能像普通函数一样不受限制地调用任意函数。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "constexpr函数是否保证每次调用都在编译期执行？",
+      "a": "不保证。constexpr表示函数可以在满足常量表达式条件时于编译期求值；如果实参在运行期才确定，则调用会在运行期执行。"
+    },
+    {
+      "q": "为什么getArraySize()可以用作数组长度？",
+      "a": "因为getArraySize()是constexpr函数，调用结果可以作为编译期确定的常量表达式。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "常量表达式",
+    "数组声明"
+  ],
+  "source_pages": [
+    77,
+    77
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "138_constexpr函数可用于常量表达式",
+  "_chunk_pages": [
+    77,
+    80
+  ]
+}

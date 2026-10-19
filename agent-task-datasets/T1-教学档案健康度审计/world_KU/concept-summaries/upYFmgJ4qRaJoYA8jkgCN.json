@@ -1,0 +1,116 @@
+{
+  "conversationId": "upYFmgJ4qRaJoYA8jkgCN",
+  "generatedAt": 1784629407648,
+  "pagesRange": "p.63",
+  "sections": [
+    {
+      "type": "tldr",
+      "content": "本节掌握了 C 风格字符串与 `std::string` 的区别，并建立了面向对象的核心框架：类描述共同的数据和行为，对象是具体实例，`private` 数据通过 `public` 接口受控访问。"
+    },
+    {
+      "type": "narrative",
+      "content": "课程从字符串的两种表示方式开始，先明确字符数组、`std::string` 和下标访问的区别；随后转向面向对象思想，用 `AirlineTicket` 说明对象如何把数据与行为组织在一起。最后学习了类与对象、`public` 与 `private`、封装，以及 `do/while`“先执行、后判断”的循环特点。"
+    },
+    {
+      "type": "concepts",
+      "items": [
+        {
+          "name": "C 风格字符串与 C++ 风格字符串",
+          "body": "- **C 风格字符串**：本质是字符数组，以空字符 `\\0` 作为结尾标记，例如：\n```cpp\\nchar text[] { \"Hello\" };\n```\n- **C++ 风格字符串**：使用 `std::string` 类型，需要包含 `<string>` 头文件：\n```cpp\n#include <string>\n\\nstd::string myString { \"Hello, World\" };\n```\n- 两者都能表示文本，但类型不同。使用 `cout` 时还需要包含 `<iostream>`。"
+        },
+        {
+          "name": "字符串下标访问",
+          "body": "字符串下标从 `0` 开始。例如：\n```cpp\\nstd::string word { \"C++\" };\n```\n此时：\n- `word[0]` 是 `'C'`\n- `word[1]` 是 `'+'`\n- `word[2]` 是 `'+'`\n\n长度为 `3` 的字符串，最后一个有效下标是 `2`。"
+        },
+        {
+          "name": "面向对象：数据与行为",
+          "body": "面向对象的基本视角，是把一个事物的**数据（特征或状态）**与相关的**行为（可以执行的操作）**组织在一起。\n\n以 `AirlineTicket` 为例：\n- 数据：飞行里程、目的地、是否属于精英超级奖励计划会员\n- 行为：计算票价、修改目的地、查询票价\n\n“是否具有会员资格”属于数据，通常可以用 `bool` 表示；“计算票价”属于行为。"
+        },
+        {
+          "name": "类与对象",
+          "body": "- **类（class）**：对一类事物的抽象描述或设计模板，规定其共同的数据和行为。\n- **对象（object）**：根据类创建出来的具体实例。\n\n```cpp\\nclass AirlineTicket {\n    // 描述机票的共同数据和行为\n};\n\\nAirlineTicket ticket;  // ticket 是具体对象\n```\n\n同一个类创建出的不同对象可以拥有不同的数据，例如不同的目的地，但共享相同的基本结构和行为。"
+        },
+        {
+          "name": "public、private 与封装",
+          "body": "- `public`：类外部可以访问，适合提供对象对外使用的操作，例如计算票价。\n- `private`：类外部不能直接访问，适合保护对象内部数据。\n\n```cpp\\nclass AirlineTicket {\\npublic:\n    double calculatePriceInDollars();\n\\nprivate:\n    int m_numberOfMiles;\n};\n```\n\n封装的核心思想是：**隐藏内部数据，只通过公开接口提供受控访问**。因此，类外部不能直接写入 `m_numberOfMiles`，而应通过类似 `setNumberOfMiles(500)` 的 `public` 成员函数操作。"
+        },
+        {
+          "name": "do/while 循环",
+          "body": "`do/while` 的特点是**先执行循环体，再判断条件**，因此循环体至少执行一次。\n\n```cpp\\nint n { 5 };\n\\ndo {\n    ++n;\n} while (n < 5);\n```\n\n即使初始条件不成立，循环体仍会先执行一次。"
+        }
+      ]
+    },
+    {
+      "type": "key-insight",
+      "content": "类描述一类事物共同具有的数据和行为；对象是根据类创建出的具体实例。",
+      "attribution": "学习者"
+    },
+    {
+      "type": "key-terms",
+      "items": [
+        {
+          "term": "C 风格字符串",
+          "definition": "以字符数组表示、并以空字符 `\\0` 结尾的字符串。"
+        },
+        {
+          "term": "std::string",
+          "definition": "C++ 标准库提供的字符串类型，定义在 `<string>` 头文件中。"
+        },
+        {
+          "term": "类（class）",
+          "definition": "描述一类事物共同数据和行为的抽象模板。"
+        },
+        {
+          "term": "对象（object）",
+          "definition": "根据类创建出的具体实例。"
+        },
+        {
+          "term": "封装（encapsulation）",
+          "definition": "隐藏对象内部实现或数据，仅通过公开接口提供受控访问。"
+        },
+        {
+          "term": "public",
+          "definition": "允许类外部访问的成员区域。"
+        },
+        {
+          "term": "private",
+          "definition": "通常只能由类自身成员访问的成员区域。"
+        }
+      ]
+    },
+    {
+      "type": "open-question",
+      "content": "`do/while` 示例中，变量 `n` 从 `5` 开始，循环体执行一次后变为 `6`，随后条件不成立。需要进一步熟练判断此类循环中变量的最终值和循环体执行次数。"
+    },
+    {
+      "type": "review-questions",
+      "items": [
+        {
+          "question": "`std::string` 定义在哪个头文件中？",
+          "hint": "回忆字符串类型对应的标准库头文件。",
+          "answer": "定义在 `<string>` 头文件中，使用时通常写作 `#include <string>`。"
+        },
+        {
+          "question": "对于 `std::string word { \"C++\" };`，`word[0]`、`word[1]` 和 `word[2]` 分别是什么？",
+          "hint": "字符串下标从 `0` 开始。",
+          "answer": "`word[0]` 是 `'C'`，`word[1]` 是 `'+'`，`word[2]` 是 `'+'`。"
+        },
+        {
+          "question": "在 `AirlineTicket` 中，“目的地”和“计算票价”分别属于数据还是行为？",
+          "hint": "数据是对象保存的特征，行为是对象执行的操作。",
+          "answer": "“目的地”属于数据；“计算票价”属于行为。"
+        },
+        {
+          "question": "如果 `m_numberOfMiles` 是 `private` 成员，类外代码能否直接执行 `ticket.m_numberOfMiles = 500;`？为什么？",
+          "hint": "思考 `private` 的访问范围。",
+          "answer": "不能。因为 `private` 成员不能被类外部代码直接访问，通常应通过 `public` 成员函数进行受控修改。"
+        },
+        {
+          "question": "下面的 `do/while` 循环中，循环体执行几次，`n` 的最终值是多少？\n```cpp\\nint n { 5 };\\ndo {\n    ++n;\n} while (n < 5);\n```",
+          "hint": "先执行一次循环体，再判断条件。",
+          "answer": "循环体执行 `1` 次；`n` 先从 `5` 变为 `6`，随后判断 `6 < 5` 为假，因此最终值是 `6`。"
+        }
+      ]
+    }
+  ]
+}

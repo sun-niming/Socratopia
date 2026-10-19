@@ -1,0 +1,49 @@
+{
+  "title": "因特网标准与RFC",
+  "definition": "因特网标准用于让不同协议及其实现取得一致认识，从而使人们能够创造可以协同工作的网络系统和产品。因特网标准由因特网工程任务组（IETF）研发，IETF发布的标准文档称为请求评论（RFC）。RFC文档定义了TCP、IP、HTTP和SMTP等协议。IEEE 802 LAN/MAN标准化委员会则制定了以太网和无线WiFi等网络链路标准。",
+  "key_points": [
+    "IETF是研发因特网标准的组织。",
+    "RFC是IETF标准文档的名称。",
+    "RFC可以定义TCP、IP、HTTP和SMTP等协议。",
+    "IEEE 802 LAN/MAN标准化委员会制定以太网和无线WiFi等标准。",
+    "网络标准的作用是促进不同系统和产品之间的协同工作。"
+  ],
+  "examples": [
+    "HTTP用于Web，SMTP用于电子邮件；这些协议的定义可以出现在RFC文档中。",
+    "以太网和无线WiFi属于IEEE 802 LAN/MAN标准化委员会制定的网络链路标准示例。"
+  ],
+  "misconceptions": [
+    "RFC不是某一种网络协议，而是IETF标准文档的名称。",
+    "IETF并非教材中所有网络标准的唯一制定组织；IEEE也制定网络链路标准。",
+    "网络标准的目的不只是记录技术细节，还包括让不同系统和产品能够协同工作。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "谁负责研发因特网标准？",
+      "a": "因特网工程任务组（IETF）负责研发因特网标准。"
+    },
+    {
+      "q": "RFC是什么？",
+      "a": "RFC是IETF标准文档的名称，全称为请求评论（Request For Comment）。"
+    },
+    {
+      "q": "以太网和无线WiFi标准由哪个组织制定？",
+      "a": "教材举例指出，它们由IEEE 802 LAN/MAN标准化委员会制定。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "TCP/IP与因特网协议标准"
+  ],
+  "source_pages": [
+    21,
+    22
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "040_因特网标准与rfc",
+  "_chunk_pages": [
+    21,
+    24
+  ]
+}

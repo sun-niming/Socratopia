@@ -1,0 +1,41 @@
+{
+  "title": "Object 类型",
+  "definition": "Object 类型是 JavaScript 中重要的数据类型之一。除前面的各种常用基本数据类型外，对象也是 JavaScript 的重要组成部分。原文给出的例子包括字符串对象、数组对象以及普通对象。",
+  "key_points": [
+    "对象是 JavaScript 中除基本数据类型外的重要组成部分。",
+    "原文把字符串对象、数组对象都作为对象类型的例子。",
+    "普通对象也属于 Object 类型。"
+  ],
+  "examples": [
+    "var s1 = new String(\"xx\")",
+    "var obj2 = {};",
+    "var arr = new Array()"
+  ],
+  "misconceptions": [
+    "对象不只限于用 {} 写出来的普通对象。",
+    "字符串和数组在 JavaScript 中也可以作为对象来使用。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "原文给出了哪几类对象的例子？",
+      "a": "字符串对象、普通对象和数组对象。"
+    },
+    {
+      "q": "Object 类型在 JavaScript 中的地位是什么？",
+      "a": "它是 JavaScript 中重要的组成部分，位于常用基本数据类型之外。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [],
+  "source_pages": [
+    249,
+    252
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "359_object_类型",
+  "_chunk_pages": [
+    249,
+    252
+  ]
+}

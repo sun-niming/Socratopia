@@ -1,0 +1,43 @@
+{
+  "title": "用语义明确的返回类型减少注释负担",
+  "definition": "如果函数返回普通的通用类型，例如int，调用者可能无法仅根据函数声明理解返回值的具体含义。更好的设计是使用语义明确的类型，例如RecordID，使类型本身表达返回值含义，并为未来扩展保留空间。",
+  "key_points": [
+    "通用类型的语义通常不够明确，可能需要额外注释解释。",
+    "RecordID比普通int更能表达“记录标识符”的含义。",
+    "RecordID可以是只包含一个int数据成员的简单类，并且未来可以根据需要增加更多数据成员。",
+    "使用语义明确的类型可以减少对解释性注释的依赖。"
+  ],
+  "examples": [
+    "不够明确的声明：int saveRecord(Record record);\\n教材建议的声明：RecordID saveRecord(Record record);"
+  ],
+  "misconceptions": [
+    "把返回类型从int改为RecordID不只是改名；其目的在于让类型携带更清晰的语义。",
+    "语义明确的类型并不要求一开始就设计得非常复杂；它可以先是只包含一个int数据成员的简单类。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么RecordID比int更适合作为saveRecord的返回类型？",
+      "a": "RecordID直接表达返回值是记录标识符，而普通int无法表达具体含义；RecordID还便于未来增加相关数据。"
+    },
+    {
+      "q": "使用语义明确的返回类型有什么好处？",
+      "a": "它能让函数声明本身传达更多信息，减少解释返回值含义所需的注释，并提高未来扩展能力。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "类型设计基础",
+    "函数返回值基础"
+  ],
+  "source_pages": [
+    124,
+    124
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "242_用语义明确的返回类型减少注释负担",
+  "_chunk_pages": [
+    121,
+    124
+  ]
+}

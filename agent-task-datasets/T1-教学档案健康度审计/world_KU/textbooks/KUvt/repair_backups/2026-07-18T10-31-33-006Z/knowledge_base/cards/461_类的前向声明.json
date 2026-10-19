@@ -1,0 +1,44 @@
+{
+  "title": "类的前向声明",
+  "definition": "前向声明是在只需要知道某个类型名称时，先声明该类型而不提供完整定义。例如class Preferences;声明Preferences是一个类，使Logger类能够声明以Preferences对象引用为参数的成员函数，而不必立即包含Preferences的完整头文件。",
+  "key_points": [
+    "前向声明的典型写法是：class Preferences;。",
+    "Logger可以据此声明void setPreferences(const Preferences& prefs);。",
+    "前向声明可以减少头文件之间的直接依赖，降低重复包含和循环包含问题。",
+    "仅有前向声明时，通常只能使用指针或引用等不要求已知完整对象布局的声明形式；若需要创建对象、访问成员或按值使用类型，通常还需要包含其完整定义。"
+  ],
+  "examples": [
+    "class Preferences; // forward declaration\n\nclass Logger\n{\npublic:\n    void setPreferences(const Preferences& prefs);\n    void logError(std::string_view error);\n};"
+  ],
+  "misconceptions": [
+    "前向声明不是类的完整定义，不能替代类体中的成员和数据布局。",
+    "前向声明并不意味着编译器已经知道Preferences对象的大小。",
+    "声明引用参数时可以使用前向声明，但在实现需要访问Preferences成员的地方通常必须包含其完整定义。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么Logger示例可以在未包含Preferences完整定义的情况下声明setPreferences？",
+      "a": "因为参数是const Preferences&引用，声明该函数时只需知道Preferences是一个类，因此可以先写class Preferences;进行前向声明。"
+    },
+    {
+      "q": "前向声明和完整类定义有什么区别？",
+      "a": "前向声明只告诉编译器某个类型名称及其类别，不提供成员和对象布局；完整定义则包含类的完整声明内容。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++类声明",
+    "C++引用与头文件依赖"
+  ],
+  "source_pages": [
+    361,
+    364
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20教材 第362页 forward declaration class Preferences Logger setPreferences const Preferences&",
+  "concept_id": "461_类的前向声明",
+  "_chunk_pages": [
+    361,
+    364
+  ]
+}

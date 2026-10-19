@@ -1,0 +1,51 @@
+{
+  "title": "extern \"C\" 指定 C 语言链接约定",
+  "definition": "`extern \"C\"` 是 C++ 的语言链接规范，用于告知 C++ 编译器某个函数或一组声明应使用 C 语言兼容的链接名称和链接约定，从而能够调用 C 编译器编译的函数。它可以修饰单个声明，也可以包围多个声明。",
+  "key_points": [
+    "单个声明的形式为：`extern \"C\" declaration;`。",
+    "多个声明可以放在代码块中：`extern \"C\" { declaration1; declaration2; }`。",
+    "在 C++ 客户端的头文件声明处使用 `extern \"C\"`，可使调用方按 C 链接名称查找函数。",
+    "如果库源代码本身用 C++ 编译，但希望导出 C 兼容接口，还需要在函数定义处使用相同的语言链接规范。",
+    "标准允许语言链接规范使用语言名称，但实际编译器通常主要支持 `\"C\"`；具体支持情况由编译器供应商决定。"
+  ],
+  "examples": [
+    "单个函数声明：`extern \"C\" int cFunction(int);`。",
+    "多个声明：`extern \"C\" { void declaration1(); int declaration2(); }`。",
+    "调用 C 函数的概念流程为：$$\\text{C++ 声明使用 extern \"C\"}\\rightarrow\\text{生成 C 兼容链接名称}\\rightarrow\\text{链接已编译的 C 库}$$。"
+  ],
+  "misconceptions": [
+    "`extern \"C\"` 不表示函数必须由 C++ 编译器编译；它主要指定语言链接方式。",
+    "`extern \"C\"` 不是把 C++ 函数变成 C 函数，也不会自动解决所有 C 与 C++ 类型或 ABI 兼容问题。",
+    "语言链接规范与函数是否具有外部可见性是不同概念；本页重点是名称改编和链接兼容性。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`extern \"C\"` 的主要作用是什么？",
+      "a": "它告知 C++ 编译器使用 C 语言兼容的链接名称和链接约定，避免 C++ 名称改编导致无法链接 C 库函数。"
+    },
+    {
+      "q": "`extern \"C\"` 如何声明多个函数？",
+      "a": "可以使用代码块，例如：`extern \"C\" { void declaration1(); int declaration2(); }`。"
+    },
+    {
+      "q": "如果 C++ 源文件定义的函数要提供给 C 代码调用，是否只需在调用方头文件中写 `extern \"C\"`？",
+      "a": "不一定。若函数定义由 C++ 编译，还应在定义处使用相同的语言链接规范，以便生成 C 兼容的链接名称。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++ 调用已编译 C 代码时的名称改编问题",
+    "编译、链接与库"
+  ],
+  "source_pages": [
+    979,
+    980
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "2015_extern_c_指定_c_语言链接约定",
+  "_chunk_pages": [
+    977,
+    980
+  ]
+}

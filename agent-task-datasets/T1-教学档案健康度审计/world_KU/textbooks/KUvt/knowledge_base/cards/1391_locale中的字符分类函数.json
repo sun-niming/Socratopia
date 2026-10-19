@@ -1,0 +1,43 @@
+{
+  "title": "locale中的字符分类函数",
+  "definition": "C++标准库的<locale>提供了一组字符分类函数，用于根据指定的locale判断字符所属的类别。这些函数接收待分类的字符和用于分类的locale两个参数。",
+  "key_points": [
+    "原文列出的字符分类函数包括std::isspace()、std::isblank()、std::iscntrl()、std::isupper()、std::islower()、std::isalpha()、std::isdigit()、std::ispunct()、std::isxdigit()、std::isalnum()、std::isprint()和std::isgraph()。原文中的“isprintf()”疑似排版或识别错误。",
+    "字符的具体分类含义取决于字符类别规则和所使用的locale。",
+    "示例：使用法语locale判断字符'E'是否为大写字母：$\\texttt{bool\\ result\\ \\{\\ std::isupper('E',\\ std::locale\\{\\ \"fr-FR\"\\ \\})\\ \\};}$。"
+  ],
+  "examples": [
+    "std::locale french { \"fr-FR\" };",
+    "bool result { std::isupper('E', french) }; // 原文说明 result 为 true"
+  ],
+  "misconceptions": [
+    "字符分类函数并不只根据ASCII规则判断；指定的locale可能影响分类结果。",
+    "不要把字符分类函数与正则表达式中的字符类完全等同；原文说明正则表达式上下文中还会进一步讨论字符类含义。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "locale中的字符分类函数接收哪些参数？",
+      "a": "接收两个参数：要分类的字符，以及用于分类的locale。"
+    },
+    {
+      "q": "如何使用locale判断字符'E'是否为大写字母？",
+      "a": "可以调用std::isupper('E', std::locale{\"fr-FR\"})；原文示例说明结果为true。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++字符与字符串基础",
+    "C++ locale对象基础"
+  ],
+  "source_pages": [
+    665,
+    665
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 std::locale 字符分类函数 isspace isblank iscntrl isupper islower isalpha isdigit ispunct isxdigit isalnum isprint isgraph 第二个参数 locale 标准库参考",
+  "concept_id": "1391_locale中的字符分类函数",
+  "_chunk_pages": [
+    665,
+    668
+  ]
+}

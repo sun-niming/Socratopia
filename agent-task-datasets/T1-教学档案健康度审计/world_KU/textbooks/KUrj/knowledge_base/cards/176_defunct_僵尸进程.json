@@ -1,0 +1,37 @@
+{
+  "title": "defunct 僵尸进程",
+  "definition": "出现 defunct 僵尸进程，说明子进程已经退出，但父进程没有及时回收。教材给出的处理方式是安装 SIGCHLD 处理函数，并循环调用 waitpid(-1, NULL, WNOHANG) 直到没有可回收的子进程。",
+  "key_points": [
+    "父进程必须回收退出的子进程。",
+    "需要安装 SIGCHLD 处理函数。",
+    "回收时应循环调用 waitpid(-1, NULL, WNOHANG)。"
+  ],
+  "examples": [
+    "ps -ef | grep defunct"
+  ],
+  "misconceptions": [
+    "以为子进程退出后系统会自动消除 defunct 状态。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "处理 defunct 僵尸进程的关键做法是什么？",
+      "a": "安装 SIGCHLD 处理函数，并循环调用 waitpid(-1, NULL, WNOHANG) 回收子进程。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "进程",
+    "信号"
+  ],
+  "source_pages": [
+    109,
+    112
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "176_defunct_僵尸进程",
+  "_chunk_pages": [
+    109,
+    112
+  ]
+}

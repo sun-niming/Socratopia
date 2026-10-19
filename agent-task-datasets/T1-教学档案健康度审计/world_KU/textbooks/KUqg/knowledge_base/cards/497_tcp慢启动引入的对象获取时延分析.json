@@ -1,0 +1,45 @@
+{
+  "title": "TCP慢启动引入的对象获取时延分析",
+  "definition": "原文研究TCP慢启动对Web对象获取时延的影响。客户与Web服务器通过速率为$R$的链路直接相连，要获取长度恰好为$15S$的对象，其中$S$是最大段长度（MSS）；客户与服务器之间的往返时间为$RTT$，并假定其为常数。计算获取时间时包括TCP连接建立时间，并忽略协议首部。",
+  "key_points": [
+    "对象长度为$15S$，其中$S$表示MSS。",
+    "链路传输速率为$R$，因此发送一个长度为$S$的段所需的传输时间为$S/R$。",
+    "需要根据$RTT$与$S/R$之间的大小关系分情况分析。",
+    "摘录中的三个条件涉及$RTT$、$S/R$和$4S/R$的比较。"
+  ],
+  "examples": [
+    "题设中的分情况条件包含：$$\\frac{4S}{R}>\\frac{S}{R}+RTT>\\frac{2S}{R}$$、$$\\frac{S}{R}+RTT>\\frac{4S}{R}$$以及$$\\frac{S}{R}>RTT$$。"
+  ],
+  "misconceptions": [
+    "对象大小为$15S$并不意味着只需传输一个报文段；它需要拆分为多个最大段。",
+    "题目要求的获取时间包括TCP连接创建，不能只计算对象数据的链路传输时间。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "该时延分析题中的对象长度、链路速率和往返时间分别是什么？",
+      "a": "对象长度为$15S$，链路速率为$R$，往返时间为常数$RTT$；其中$S$是MSS。"
+    },
+    {
+      "q": "计算对象获取时间时是否包括TCP连接创建？",
+      "a": "包括TCP连接创建，并且忽略协议首部。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "TCP慢启动",
+    "MSS",
+    "RTT",
+    "链路传输时延"
+  ],
+  "source_pages": [
+    213,
+    216
+  ],
+  "needs_verification": true,
+  "verify_query": "Kurose Ross Computer Networking 7th edition exercise P56 object length 15S slow start cases 4S/R S/R RTT exact inequalities",
+  "concept_id": "497_tcp慢启动引入的对象获取时延分析",
+  "_chunk_pages": [
+    213,
+    216
+  ]
+}

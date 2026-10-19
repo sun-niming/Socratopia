@@ -1,0 +1,45 @@
+{
+  "title": "C++20 无状态 lambda 的默认构造、拷贝和赋值",
+  "definition": "从 C++20 开始，无状态 lambda 表达式，即不捕获任何变量的 lambda，可以进行默认构造、拷贝和赋值。无状态 lambda 的闭包类型因此支持这些相应操作。",
+  "key_points": [
+    "无状态 lambda 的捕获列表为空，例如 `[](...) { ... }`。",
+    "可以通过 `decltype(lambda)` 获得其闭包类型。",
+    "C++20 起可以默认构造该闭包类型的对象，并进行拷贝和赋值。"
+  ],
+  "examples": [
+    "`auto lambda = [](int a, int b) { return a + b; };`。",
+    "获得闭包类型并默认构造对象：`decltype(lambda) lambda2{};`。",
+    "`lambda2 = lambda;` 表示对无状态 lambda 对象进行赋值。"
+  ],
+  "misconceptions": [
+    "误以为所有 lambda 闭包都可以默认构造；教材这里限定为无状态 lambda。",
+    "误以为无状态 lambda 和有状态 lambda 在对象操作方面完全相同；有捕获的 lambda 通常需要依赖捕获成员的构造和赋值性质。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "C++20 中哪些 lambda 可以默认构造、拷贝和赋值？",
+      "a": "无状态 lambda，即不捕获任何变量的 lambda。"
+    },
+    {
+      "q": "如何声明无状态 lambda 的闭包类型对象？",
+      "a": "先用 `decltype(lambda)` 获取类型，再进行构造，例如 `decltype(lambda) lambda2{};`。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "lambda 闭包类型",
+    "默认构造",
+    "拷贝与赋值"
+  ],
+  "source_pages": [
+    624,
+    624
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1293_c_20_无状态_lambda_的默认构造_拷贝和赋值",
+  "_chunk_pages": [
+    621,
+    624
+  ]
+}

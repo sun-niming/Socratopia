@@ -1,0 +1,42 @@
+{
+  "title": "三向比较运算符与命名比较函数",
+  "definition": "C++20 的三向比较运算符 <=> 可以一次比较两个对象，并产生一个排序结果，从而避免为判断多个关系而重复执行比较。头文件 <compare> 提供了根据排序结果判断关系的命名函数。",
+  "key_points": [
+    "三向比较表达式的结果可以用 std::strong_ordering 等排序类别表示。",
+    "std::is_eq()、std::is_neq()、std::is_lt()、std::is_lteq()、std::is_gt() 和 std::is_gteq() 分别用于判断结果是否表示 =、!=、<、<=、> 或 >=。",
+    "如果程序需要为自定义类型提供三向比较支持，需要额外定义相应的比较行为。"
+  ],
+  "examples": [
+    "strong_ordering result { 1 <=> 0 };",
+    "if (std::is_gt(result)) { std::cout << \"greater\" << std::endl; }"
+  ],
+  "misconceptions": [
+    "<=> 只表示小于关系；实际上它产生的是可表示排序关系的比较结果。",
+    "只要两个类型能够使用 < 运算符，就一定自动具备完整的 <=> 支持；自定义类型可能需要专门提供三向比较支持。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "std::is_gt(result) 为 true 表示什么？",
+      "a": "表示 result 表示大于关系，即原比较结果对应 >。"
+    },
+    {
+      "q": "为什么使用 <=> 可能比依次调用两个比较运算符更高效？",
+      "a": "因为 <=> 可以一次产生排序结果，避免潜在地执行两个独立且可能昂贵的比较。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "比较运算符的基本用法"
+  ],
+  "source_pages": [
+    53,
+    53
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "082_三向比较运算符与命名比较函数",
+  "_chunk_pages": [
+    53,
+    56
+  ]
+}

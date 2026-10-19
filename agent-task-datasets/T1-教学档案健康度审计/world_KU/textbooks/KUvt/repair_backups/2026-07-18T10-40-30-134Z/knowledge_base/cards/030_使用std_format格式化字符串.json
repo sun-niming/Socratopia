@@ -1,0 +1,45 @@
+{
+  "title": "使用std::format格式化字符串",
+  "definition": "C++20 的 `std::format()` 根据格式字符串生成格式化结果。格式字符串中的 `{}` 是替换字段，后续实参会被格式化并放入相应位置。使用该功能需要包含 `<format>`。格式化结果可以再交给 `std::cout` 输出。",
+  "key_points": [
+    "`std::format()` 是 C++20 的格式化功能。",
+    "格式字符串中的 `{}` 用于放置对应实参的格式化结果。",
+    "需要包含头文件 `<format>`。",
+    "`std::format()` 生成格式化结果，本身不等同于向控制台输出。"
+  ],
+  "examples": [
+    "#include <format>\n#include <iostream>\n\nstd::cout << std::format(\"There are {} ways I love you.\", 219) << std::endl;"
+  ],
+  "misconceptions": [
+    "误以为 `std::format()` 会自动把结果打印到控制台；示例中仍需使用 `std::cout` 输出其结果。",
+    "遗漏 `<format>` 头文件。",
+    "把 `{}` 当作普通文本，而没有提供对应的格式化实参。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "在 `std::format(\"There are {} ways\", 219)` 中，`{}` 会被什么替换？",
+      "a": "会被实参 `219` 的格式化结果替换。"
+    },
+    {
+      "q": "使用 `std::format()` 应包含哪个头文件？",
+      "a": "`<format>`。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "使用std::cout输出",
+    "函数调用",
+    "字符串字面量"
+  ],
+  "source_pages": [
+    37,
+    40
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "030_使用std_format格式化字符串",
+  "_chunk_pages": [
+    37,
+    40
+  ]
+}

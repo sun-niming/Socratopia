@@ -1,0 +1,41 @@
+{
+  "title": "S-GW的功能",
+  "definition": "服务网关（Serving Gateway，S-GW）是4G数据平面中的移动性锚点，所有UE流量都通过S-GW传递。S-GW还承担收费或记账功能，以及法定流量拦截功能。",
+  "key_points": [
+    "S-GW属于数据平面组件。",
+    "所有UE流量都经过S-GW。",
+    "S-GW除数据转发相关功能外，还负责收费/记账和法定流量拦截。"
+  ],
+  "examples": [
+    "UE访问外部网络时，其用户流量在4G核心网中会经过S-GW，再继续转发到其他网络。"
+  ],
+  "misconceptions": [
+    "S-GW不是只用于计费；它首先是所有UE流量经过的数据平面移动性锚点。",
+    "S-GW与MME的职责不同：S-GW主要处理数据平面流量，MME主要处理连接和移动性管理。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么说S-GW是数据平面移动性锚点？",
+      "a": "因为所有UE流量都通过S-GW传递，S-GW在数据平面中承担与移动性相关的锚定作用。"
+    },
+    {
+      "q": "S-GW还承担哪些辅助功能？",
+      "a": "它承担收费/记账功能以及法定流量拦截功能。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "4G网络体系结构的总体特征"
+  ],
+  "source_pages": [
+    381,
+    384
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "894_s_gw的功能",
+  "_chunk_pages": [
+    381,
+    384
+  ]
+}

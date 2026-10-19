@@ -1,0 +1,41 @@
+{
+  "title": "用文档注释说明函数的功能、参数、返回值和异常",
+  "definition": "函数文档应明确说明函数的用途、每个参数的含义、返回值的含义，以及在什么条件下抛出异常。原文以 `saveRecord` 为例：函数用于把给定记录保存到数据库，并说明参数 `record`、返回值以及数据库未打开时的异常。",
+  "key_points": [
+    "功能说明应回答函数做什么，例如：`Saves the given record to the database.`。",
+    "参数说明应解释参数的用途及其可能发生的变化。",
+    "返回值说明应解释返回值代表什么，而不只是写出返回类型。",
+    "异常说明应指出异常发生的前提条件，例如尚未调用 `openDatabase()`。"
+  ],
+  "examples": [
+    "```cpp\n// Saves the given record to the database.\n//\n// Parameters:\n// record: If the given record does not yet have a database ID,\n//         then the method modifies the record object to store\n//         the ID assigned by the database.\n//\n// Returns:\n// An integer representing the ID of the saved record.\n//\n// Throws:\n// DatabaseNotOpenedException if the openDatabase() method has not\n// been called yet.\nint saveRecord(Records record);\n```"
+  ],
+  "misconceptions": [
+    "只写函数名和返回类型就等于完成了接口文档。",
+    "`Throws` 部分只需要列出异常类型，不需要说明触发条件。",
+    "参数说明只用于解释输入值，不需要说明函数是否会修改参数对象。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "一个完整的函数接口说明通常至少应包含哪些内容？",
+      "a": "应包含函数功能、参数说明、返回值说明，以及可能抛出的异常和其触发条件。"
+    },
+    {
+      "q": "原文中 `saveRecord` 在什么情况下可能抛出 `DatabaseNotOpenedException`？",
+      "a": "如果尚未调用 `openDatabase()`，就可能抛出该异常。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [],
+  "source_pages": [
+    123,
+    124
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "177_用文档注释说明函数的功能_参数_返回值和异常",
+  "_chunk_pages": [
+    121,
+    124
+  ]
+}

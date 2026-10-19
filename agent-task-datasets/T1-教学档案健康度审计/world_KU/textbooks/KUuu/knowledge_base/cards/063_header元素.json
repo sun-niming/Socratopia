@@ -1,0 +1,37 @@
+{
+  "title": "header元素",
+  "definition": "header元素表示页面中一个内容区域或整个页面的标题区，常用于放置 Logo、导航、搜索框等内容。",
+  "key_points": [
+    "可以表示整个页面的标题区，也可以表示某个内容区域的标题区",
+    "常见内容包括 Logo、导航、搜索框",
+    "与内容区块的“头部”语义相关"
+  ],
+  "examples": [
+    "<header>包含Logo、导航、搜索框</header>"
+  ],
+  "misconceptions": [
+    "header不只是整个页面最上方的一块，也可以用于某个内容区块的标题区",
+    "header不等于普通的div容器，它强调语义"
+  ],
+  "qa_pairs": [
+    {
+      "q": "header元素表示什么？",
+      "a": "表示页面中一个内容区域或整个页面的标题区，常包含Logo、导航、搜索框。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "HTML标签基础"
+  ],
+  "source_pages": [
+    41,
+    42
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "063_header元素",
+  "_chunk_pages": [
+    41,
+    44
+  ]
+}

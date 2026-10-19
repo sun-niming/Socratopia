@@ -1,0 +1,50 @@
+{
+  "title": "析构函数与对象的自动销毁",
+  "definition": "析构函数是对象销毁时自动调用的特殊成员函数，名称为类名前加波浪号，例如 SpreadsheetCell 类的析构函数声明为 ~SpreadsheetCell()。具有自动存储期的局部对象在离开其作用域时自动销毁并调用析构函数；内层作用域中的对象会在离开该作用域时销毁。",
+  "key_points": [
+    "析构函数的形式为 ~类名()，例如 ~SpreadsheetCell()。",
+    "局部对象在其所在作用域结束时自动销毁，不需要显式调用析构函数。",
+    "同一作用域中，后构造的局部对象先销毁，先构造的对象后销毁。",
+    "内层作用域结束时，内层对象先被销毁；外层对象会在外层作用域结束时销毁。"
+  ],
+  "examples": [
+    "class SpreadsheetCell {\npublic:\n    ~SpreadsheetCell();\n};",
+    "SpreadsheetCell myCell{5};\nif (myCell.getValue() == 5) {\n    SpreadsheetCell anotherCell{6};\n} // 离开该代码块时，anotherCell 被销毁\n// 离开外层作用域时，myCell 被销毁",
+    "SpreadsheetCell myCell2{4};\nSpreadsheetCell anotherCell2{5};\n// 离开作用域时，anotherCell2 先销毁，myCell2 后销毁"
+  ],
+  "misconceptions": [
+    "析构函数不是普通成员函数，通常不应由程序员直接调用。",
+    "对象离开作用域时销毁，并不意味着所有动态分配对象也会自动销毁；动态对象通常需要 delete。",
+    "销毁顺序与构造顺序相反：后构造者先销毁。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "SpreadsheetCell 类的析构函数应如何命名？",
+      "a": "命名为 ~SpreadsheetCell()。"
+    },
+    {
+      "q": "anotherCell 在示例中何时销毁？",
+      "a": "当包含它的 if 代码块结束时销毁。"
+    },
+    {
+      "q": "myCell2 和 anotherCell2 离开同一作用域时，谁先销毁？",
+      "a": "anotherCell2 后构造，因此先销毁；myCell2 后销毁。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "类与对象",
+    "作用域"
+  ],
+  "source_pages": [
+    250,
+    251
+  ],
+  "needs_verification": true,
+  "verify_query": "《C++20高级编程》第5版 SpreadsheetCell 析构函数 anotherCell2 myCell2 销毁顺序 第250-251页",
+  "concept_id": "333_析构函数与对象的自动销毁",
+  "_chunk_pages": [
+    249,
+    252
+  ]
+}

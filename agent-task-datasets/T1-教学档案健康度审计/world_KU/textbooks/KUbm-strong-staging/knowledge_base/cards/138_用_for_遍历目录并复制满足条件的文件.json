@@ -1,0 +1,44 @@
+{
+  "title": "用 for 遍历目录并复制满足条件的文件",
+  "definition": "教材给出了一个 for 循环脚本示例：先检查前两个参数是否都是目录；如果参数有误就输出“arguments error”并退出。随后使用“for file in $1/*”遍历第一个目录下的各项，对每个 file 进行条件判断；如果它是普通文件且可读，就把它复制到第二个目录。这个示例体现了 for 循环遍历文件路径并结合条件执行操作的用法。",
+  "key_points": [
+    "先用条件判断检查参数对应的目录是否合法",
+    "使用“for file in $1/*”遍历第一个目录中的各项",
+    "对每个遍历项判断是否为普通文件且可读",
+    "满足条件时执行“cp $file $2”复制到目标目录"
+  ],
+  "examples": [
+    "#!/bin/bash\n[ ! -d $1 -o ! -d $2 ]&&{\necho arguments error;exit 1;\n}\nfor file in $1/*\ndo\nif test -f $file –a –r $file\nthen\ncp $file $2\nfi\ndone"
+  ],
+  "misconceptions": [
+    "不要认为该脚本会复制第一个目录下的所有内容；它只在条件满足时复制。",
+    "不要把“for file in $1/*”理解为只得到文件名；这里遍历的是与该模式匹配的各项路径。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "教材中的目录复制示例为什么先检查 $1 和 $2？",
+      "a": "因为脚本要求前两个参数都是目录，若不是目录则输出 arguments error 并退出。"
+    },
+    {
+      "q": "在该示例中，for file in $1/* 的作用是什么？",
+      "a": "遍历第一个目录下的各项，并把每一项依次赋给变量 file。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "for 循环格式1：遍历 word_list",
+    "Shell 条件测试基础",
+    "目录与文件基础"
+  ],
+  "source_pages": [
+    81,
+    84
+  ],
+  "needs_verification": true,
+  "verify_query": "核实 Linux shell 教材第83页示例脚本中“if test -f $file –a –r $file”原始写法，确认连字符是否为标准 -a 以及条件含义是否为“普通文件且可读”",
+  "concept_id": "138_用_for_遍历目录并复制满足条件的文件",
+  "_chunk_pages": [
+    81,
+    84
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "title": "[[maybe_unused]] 属性",
+  "definition": "`[[maybe_unused]]` 是用于抑制未使用实体警告的 C++ 属性。在 `callDoit` 示例中，如果模板参数 `T` 不满足条件，`constexpr if` 会丢弃调用 `t.doit()` 的分支，参数 `t` 可能不再被使用；给参数加上 `[[maybe_unused]]` 可以避免编译器针对未使用参数发出警告或错误。",
+  "key_points": [
+    "它用于表达某个变量、参数或其他实体可能有意未被使用。",
+    "在模板代码中，不同实例化结果可能使用或不使用同一个参数，因此该属性尤其有用。",
+    "该属性不会改变程序的运行逻辑，也不会让不存在的成员函数变得可调用。"
+  ],
+  "examples": [
+    "```cpp\ntemplate <typename T>\nvoid callDoit(const T& [[maybe_unused]] t) {\n    if constexpr (std::is_base_of_v<IsDoable, T>) {\n        t.doit();\n    } else {\n        std::cout << \"Cannot call doit()!\" << std::endl;\n    }\n}\n```"
+  ],
+  "misconceptions": [
+    "`[[maybe_unused]]` 不是关闭所有编译器诊断的通用开关；它主要针对实体未使用这一情况。",
+    "它不会阻止模板中其他真正的编译错误。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么 `callDoit` 的参数 `t` 可以标记为 `[[maybe_unused]]`？",
+      "a": "因为对于不派生自 `IsDoable` 的模板实例，`constexpr if` 会丢弃调用 `t.doit()` 的分支，参数 `t` 可能未被使用；该属性可抑制相应的未使用参数警告。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "constexpr if",
+    "函数模板"
+  ],
+  "source_pages": [
+    786,
+    786
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1612_maybe_unused_属性",
+  "_chunk_pages": [
+    785,
+    788
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "title": "提取查询字符串参数",
+  "definition": "可以用 RegExp.exec() 从 URI 查询字符串中提取某个参数的值。示例代码会根据参数名动态构造正则，匹配参数名后面的值，并通过结果数组的第 1 个分组返回该值。",
+  "key_points": [
+    "new RegExp(val+ '=([^&]*)', 'ig') 会根据参数名动态生成正则。",
+    "([^&]*) 表示捕获参数值，直到遇到 & 为止。",
+    "exec(uri) 返回匹配结果数组，result[1] 取到第一个捕获分组；若没有匹配则返回空字符串。"
+  ],
+  "examples": [
+    "var s='?name=cie&phone=87092352&code=065'; getValue(s,'name')  // cie"
+  ],
+  "misconceptions": [
+    "exec() 不是直接返回参数值，而是返回匹配结果数组。",
+    "函数不是一次性解析所有参数，而是按传入的 val 查找单个参数。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "getValue(s, 'name') 在示例中返回什么？",
+      "a": "返回 cie。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "正则表达式基础",
+    "RegExp.exec()",
+    "字符串"
+  ],
+  "source_pages": [
+    325,
+    328
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "464_提取查询字符串参数",
+  "_chunk_pages": [
+    325,
+    328
+  ]
+}

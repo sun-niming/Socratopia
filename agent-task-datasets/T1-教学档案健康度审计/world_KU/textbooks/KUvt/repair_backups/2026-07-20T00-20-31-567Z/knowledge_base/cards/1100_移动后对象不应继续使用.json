@@ -1,0 +1,33 @@
+{
+  "title": "移动后对象不应继续使用",
+  "definition": "教材警告：一个对象被移动到另一个对象之后，不应该再使用原来的对象。",
+  "key_points": [
+    "移动操作会把对象的资源或状态转移给另一个对象。",
+    "为避免依赖移动后对象的状态，移动完成后不要继续使用原对象。"
+  ],
+  "examples": [
+    "如果对象 obj 被移动到 other 中，完成移动后不要再使用 obj。"
+  ],
+  "misconceptions": [
+    "不要把“移动后不应使用”理解为移动操作一定会销毁原对象；本页只强调移动后不要继续使用它。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "对象被移动到另一个对象之后，应该如何处理原对象？",
+      "a": "不应该再使用原对象。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [],
+  "source_pages": [
+    537,
+    537
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 moved-from object after std::move can it be used valid unspecified state 教材 移动后对象 不应使用",
+  "concept_id": "1100_移动后对象不应继续使用",
+  "_chunk_pages": [
+    537,
+    540
+  ]
+}

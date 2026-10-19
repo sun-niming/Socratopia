@@ -1,0 +1,52 @@
+{
+  "title": "使用regex_iterator遍历所有匹配项",
+  "definition": "当需要从源字符串中提取某个正则表达式模式的所有匹配项时，应使用regex_iterator或regex_token_iterator，而不是在循环中反复调用regex_search()并手动移动搜索范围。regex_iterator与标准库容器迭代器类似，遍历过程中每次表示一个匹配结果。",
+  "key_points": [
+    "对于std::string，通常使用sregex_iterator。",
+    "尾迭代器通过默认构造获得，例如：`const sregex_iterator end;`。",
+    "首迭代器需要接收源字符串的首迭代器、尾迭代器和正则表达式，例如：`sregex_iterator iter{cbegin(str), cend(str), reg}`。",
+    "每次递增迭代器都会移动到下一个匹配项，直到与默认构造的尾迭代器相等。",
+    "解引用regex_iterator可以得到一个smatch对象，访问`(*iter)[0].str()`可以取得当前匹配的文本。",
+    "教材示例使用模式`[\\w]+`搜索一个或多个单词字符，并输出源字符串中的所有匹配单词。"
+  ],
+  "examples": [
+    "遍历std::string中所有匹配项：`const sregex_iterator end; for (sregex_iterator iter{cbegin(str), cend(str), reg}; iter != end; ++iter) { cout << (*iter)[0].str(); }`。",
+    "若`reg`表示单词模式`[\\w]+`，输入`This, is a test.`时，可依次得到`This`、`is`、`a`和`test`。"
+  ],
+  "misconceptions": [
+    "regex_iterator的尾迭代器不是针对每个容器单独取得的普通cend迭代器，而是通过默认构造获得的特殊尾迭代器。",
+    "解引用regex_iterator得到的是匹配结果对象，不是直接得到普通字符串；通常需要访问`[0].str()`。",
+    "反复调用regex_search()并手动调整迭代器范围可能因锚点、单词边界或空匹配而导致问题，教材建议使用regex_iterator或regex_token_iterator。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何构造sregex_iterator的尾迭代器？",
+      "a": "通过默认构造，例如`const sregex_iterator end;`。"
+    },
+    {
+      "q": "如何从regex_iterator当前元素中取得完整匹配文本？",
+      "a": "使用`(*iter)[0].str()`。"
+    },
+    {
+      "q": "为什么提取所有匹配项时推荐regex_iterator？",
+      "a": "因为regex_iterator专门用于遍历正则表达式的所有匹配项，避免在循环中手动调用regex_search()和移动范围时因空匹配、锚点或单词边界造成问题。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "regex_search()的子串搜索",
+    "C++迭代器基础",
+    "std::string"
+  ],
+  "source_pages": [
+    675,
+    676
+  ],
+  "needs_verification": true,
+  "verify_query": "《C++20高级编程》第5版 regex_iterator sregex_iterator [\\\\w]+ regex_search 空匹配 示例",
+  "concept_id": "1415_使用regex_iterator遍历所有匹配项",
+  "_chunk_pages": [
+    673,
+    676
+  ]
+}

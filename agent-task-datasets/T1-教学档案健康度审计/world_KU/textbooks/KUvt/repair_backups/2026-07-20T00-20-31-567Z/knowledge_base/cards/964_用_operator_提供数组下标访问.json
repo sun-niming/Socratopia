@@ -1,0 +1,44 @@
+{
+  "title": "用 operator[] 提供数组下标访问",
+  "definition": "自定义数组类可以重载下标运算符 operator[]，使对象支持传统的数组下标语法。非 const 版本通常返回指定元素的 T&，并可在索引超出当前大小时先扩容，再返回该位置的引用。这样既可以读取元素，也可以通过赋值修改元素。",
+  "key_points": [
+    "非 const 下标运算符的典型声明是：`T& operator[](size_t x);`。",
+    "实现可以在访问索引不小于当前大小时调用 `resize(x + AllocSize)`，然后返回 `m_elements[x]`。",
+    "返回引用使表达式既能出现在赋值号右侧，也能出现在赋值号左侧。"
+  ],
+  "examples": [
+    "```cpp\nArray<int> myArray;\nmyArray[3] = 100;          // 通过返回的引用修改元素\nint value = myArray[3];    // 读取元素\n```",
+    "典型实现：\n```cpp\ntemplate <typename T>\nT& Array<T>::operator[](size_t x) {\n    resize(x + AllocSize);\n    return m_elements[x];\n}\n```"
+  ],
+  "misconceptions": [
+    "operator[] 只用于读取元素；错误。返回 T& 时，它也可以用于修改元素。",
+    "下标访问一定不会改变数组大小；错误。原文中的非 const 实现会在需要时扩容。",
+    "返回元素的值和返回元素的引用效果相同；错误。只有返回引用时，`myArray[i] = 100` 才能修改数组中的元素。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么 `myArray[i] = 100` 可以修改自定义数组中的元素？",
+      "a": "因为非 const 的 `operator[]` 返回元素的引用 `T&`，赋值操作实际修改了该引用所绑定的 `m_elements[i]`。"
+    },
+    {
+      "q": "非 const `operator[]` 在索引越界时可以怎样处理？",
+      "a": "原文实现会调用 `resize(x + AllocSize)` 扩大数组，然后返回 `m_elements[x]` 的引用。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++引用",
+    "运算符重载基础"
+  ],
+  "source_pages": [
+    481,
+    482
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "964_用_operator_提供数组下标访问",
+  "_chunk_pages": [
+    481,
+    484
+  ]
+}

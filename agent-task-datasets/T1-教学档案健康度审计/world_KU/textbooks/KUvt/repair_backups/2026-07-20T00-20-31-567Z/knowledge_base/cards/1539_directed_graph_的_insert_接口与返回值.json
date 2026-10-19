@@ -1,0 +1,47 @@
+{
+  "title": "directed_graph 的 insert() 接口与返回值",
+  "definition": "为了遵循标准库容器的接口风格，directed_graph 的 insert() 不再只返回 bool，而是返回 `std::pair<iterator, bool>`。其中迭代器指向新插入的元素，或者指向图中已经存在的相同元素；布尔值为 true 表示插入成功，为 false 表示元素已经存在、未发生插入。",
+  "key_points": [
+    "支持传入 `const T&` 和 `T&&` 的两个插入重载：`std::pair<iterator, bool> insert(const T& node_value);` 和 `std::pair<iterator, bool> insert(T&& node_value);`",
+    "插入前通过查找判断节点值是否已经存在。",
+    "如果元素已存在，返回指向已有元素的迭代器和 false。",
+    "如果元素成功加入图中，返回指向新元素的迭代器和 true。",
+    "可以使用结构化绑定接收返回值。"
+  ],
+  "examples": [
+    "使用结构化绑定判断重复插入：`auto [iter, inserted] { graph.insert(22) }; if (!inserted) { std::cout << \"Duplicate element.\\n\"; }`",
+    "返回值的逻辑可以表示为：$$\\text{insert}(x)=\\begin{cases}\\{\\text{指向已有元素的迭代器},\\ \\text{false}\\},&x\\text{已存在}\\\\\\{\\text{指向新元素的迭代器},\\ \\text{true}\\},&x\\text{成功插入}\\end{cases}$$"
+  ],
+  "misconceptions": [
+    "insert() 返回的 bool 不是“图是否为空”，而是本次插入是否真正添加了元素。",
+    "插入重复值时不会新增节点，但返回的迭代器仍然指向图中已有的该节点。",
+    "返回类型中的 iterator 是 directed_graph 自身的迭代器，不是整数下标。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "directed_graph::insert() 返回 `std::pair<iterator, bool>` 时，bool 为 false 表示什么？",
+      "a": "表示给定值已经存在于图中，因此没有新增元素。"
+    },
+    {
+      "q": "如何取得 insert() 返回的迭代器和布尔值？",
+      "a": "可以使用结构化绑定，例如 `auto [iter, inserted] { graph.insert(22) };`。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "std::pair",
+    "C++移动语义",
+    "结构化绑定"
+  ],
+  "source_pages": [
+    741,
+    742
+  ],
+  "needs_verification": true,
+  "verify_query": "\"directed_graph\" \"std::pair<iterator, bool>\" insert \"m_nodes.emplace_back\"",
+  "concept_id": "1539_directed_graph_的_insert_接口与返回值",
+  "_chunk_pages": [
+    741,
+    744
+  ]
+}

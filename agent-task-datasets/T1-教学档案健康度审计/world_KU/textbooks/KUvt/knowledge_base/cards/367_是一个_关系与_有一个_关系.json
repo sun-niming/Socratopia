@@ -1,0 +1,49 @@
+{
+  "title": "“是一个”关系与“有一个”关系",
+  "definition": "“是一个”（is-a）关系表示一个类是另一个类的一种，通常对应继承关系；例如，Monkey 是一种 Animal。“有一个”（has-a）关系表示一个类包含或使用另一个类的对象，通常对应组合或聚合关系。设计时应根据新类与已有类的语义关系及使用方式选择，而不能仅因两个类功能相似就继承。",
+  "key_points": [
+    "若 MultiAssociativeArray 继承 AssociativeArray，就是“是一个”关系。",
+    "若 MultiAssociativeArray 内部包含一个 AssociativeArray 对象，就是“有一个”关系。",
+    "“是一个”通常会继承基类公开接口和行为；“有一个”可以通过封装内部对象来复用实现。",
+    "一个类在现实概念上与另一个类相关，并不自动意味着代码中应使用继承。"
+  ],
+  "examples": [
+    "AssociativeArray 将一个键映射到一个值；MultiAssociativeArray 将一个键映射到多个值。后者可以通过内部包含 AssociativeArray 来实现：MultiAssociativeArray 内部把集合封装为值，再交给 AssociativeArray 存储。",
+    "可以将关系抽象为：$$\\text{MultiAssociativeArray} \\;\\text{has-a}\\; \\text{AssociativeArray}$$；若采用继承，则表示：$$\\text{MultiAssociativeArray} \\;\\text{is-a}\\; \\text{AssociativeArray}$$。"
+  ],
+  "misconceptions": [
+    "两个类拥有相似的方法，不代表它们一定是继承关系。",
+    "“有一个”关系不是不能复用已有类功能，而是通过包含已有类对象来复用。",
+    "现实世界中的分类关系不能直接替代代码中的功能关系。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "Monkey 与 Animal 的关系属于哪一种关系？",
+      "a": "属于“是一个”关系，因为 Monkey 是一种 Animal。"
+    },
+    {
+      "q": "如果 MultiAssociativeArray 内部保存一个 AssociativeArray 对象，这属于哪一种关系？",
+      "a": "属于“有一个”关系，因为 MultiAssociativeArray 包含一个 AssociativeArray 对象。"
+    },
+    {
+      "q": "选择“是一个”还是“有一个”时应考虑什么？",
+      "a": "应考虑新类是否真正能够作为已有类使用，以及它是仅复用已有类功能，还是在其基础上保持兼容地扩展功能。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "继承和基类、派生类",
+    "类的组合与封装"
+  ],
+  "source_pages": [
+    173,
+    174
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "367_是一个_关系与_有一个_关系",
+  "_chunk_pages": [
+    173,
+    176
+  ]
+}

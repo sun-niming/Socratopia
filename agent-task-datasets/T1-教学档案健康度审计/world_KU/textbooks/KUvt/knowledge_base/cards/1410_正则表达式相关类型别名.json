@@ -1,0 +1,43 @@
+{
+  "title": "正则表达式相关类型别名",
+  "definition": "C++标准库为不同字符类型和输入形式的正则表达式匹配结果、正则迭代器和正则令牌迭代器提供了类型别名。针对std::string使用const_iterator时，常用别名包括smatch、sregex_iterator和sregex_token_iterator；针对std::wstring则有wsmatch、wsregex_iterator和wsregex_token_iterator。",
+  "key_points": [
+    "smatch等匹配结果类型用于保存正则表达式匹配结果。",
+    "sregex_iterator用于遍历std::string中的所有匹配项。",
+    "w前缀的相关别名用于宽字符串或宽字符输入。"
+  ],
+  "examples": [
+    "使用std::string进行匹配时，可以声明：`smatch m;`",
+    "遍历std::string中的匹配项时，可以声明：`sregex_iterator iter;`"
+  ],
+  "misconceptions": [
+    "smatch不是只能表示整个输入字符串的类型，它还可以保存捕获组等匹配结果。",
+    "sregex_iterator和普通容器迭代器类似，但其尾迭代器通常通过默认构造获得。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "使用std::string作为正则表达式输入序列时，通常使用哪些类型别名？",
+      "a": "通常使用smatch保存匹配结果，使用sregex_iterator遍历匹配项，使用sregex_token_iterator遍历正则表达式匹配的令牌。"
+    },
+    {
+      "q": "wsmatch中的w表示什么？",
+      "a": "w表示该类型用于宽字符或宽字符串相关的正则表达式匹配。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++字符串类型",
+    "C++迭代器基础"
+  ],
+  "source_pages": [
+    673,
+    673
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1410_正则表达式相关类型别名",
+  "_chunk_pages": [
+    673,
+    676
+  ]
+}

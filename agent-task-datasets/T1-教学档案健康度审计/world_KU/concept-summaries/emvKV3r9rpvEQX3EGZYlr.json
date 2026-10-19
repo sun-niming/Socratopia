@@ -1,0 +1,192 @@
+{
+  "conversationId": "emvKV3r9rpvEQX3EGZYlr",
+  "generatedAt": 1785135841577,
+  "pagesRange": "p.80-90",
+  "sections": [
+    {
+      "type": "tldr",
+      "content": "本节围绕 `constexpr`、引用与指针、函数参数和返回值、类型别名、`auto` 及异常处理，建立了“编译期与运行期、绑定与重新指向、只读与可修改、按值与按引用”的核心区分。"
+    },
+    {
+      "type": "narrative",
+      "content": "课程先从 `const` 成员函数和常量表达式出发，逐步理解了 `constexpr`、`consteval` 以及编译期对象。随后转向引用和指针，比较了引用绑定、指针改指向、引用参数、返回引用和输出参数，最后扩展到 `const_cast`、`std::as_const`、异常处理、类型别名与 `auto` 类型推导。"
+    },
+    {
+      "type": "concepts",
+      "items": [
+        {
+          "name": "`const` 成员函数",
+          "body": "`const` 对象只能调用末尾带 `const` 的成员函数，因为这种函数承诺不会修改对象。\n\n```cpp\\nclass Employee {\\npublic:\n    int getNumber() const;\n    void setNumber(int number);\n};\n\\nconst Employee employee{};\\nemployee.getNumber(); // 合法\n// employee.setNumber(1); // 错误\n```\n\n- `getNumber() const`：可被 `const` 对象调用。\n- `setNumber(int)`：可能修改对象，`const` 对象不能调用。"
+        },
+        {
+          "name": "常量表达式与 `constexpr`",
+          "body": "`constexpr` 变量必须能够在编译期求值，并且具有只读性质。\n\n```cpp\\nconstexpr int version{2};\n// version = 3; // 错误\n```\n\n普通变量即使初始化为字面量，也不一定是常量表达式：\n\n```cpp\\nint value{2};\n// constexpr int result{value + 1}; // 错误\n```\n\n若改为：\n\n```cpp\\nconstexpr int value{2};\\nconstexpr int result{value + 1}; // 正确\n```\n\n`const` 只表示不能修改，不自动保证编译期求值；`constexpr` 则要求初始化结果可在编译期确定。"
+        },
+        {
+          "name": "`constexpr` 函数与 `constexpr` 对象",
+          "body": "`constexpr` 函数具备编译期求值资格，但并不意味着每次调用都必须在编译期执行。\n\n```cpp\\nconstexpr int square(int value)\n{\n    return value * value;\n}\n\\nconstexpr int result{square(5)}; // 编译期计算\n\\nint number{5};\\nint runtimeResult{square(number)}; // 运行时计算\n```\n\n构造函数和成员函数也可以声明为 `constexpr`，从而创建编译期对象：\n\n```cpp\\nclass Number {\\npublic:\n    constexpr Number(int value) : m_value{value} {}\n    constexpr int getValue() const { return m_value; }\n\\nprivate:\n    int m_value;\n};\n\\nconstexpr Number number{42};\\nconstexpr int value{number.getValue()};\n```\n\n要成功进行编译期求值，构造过程以及调用的相关函数都必须支持常量表达式求值。"
+        },
+        {
+          "name": "立即函数 `consteval`",
+          "body": "`consteval` 函数的每次调用都必须在编译期完成。\n\n```cpp\\nconsteval int getValue()\n{\n    return 42;\n}\n\\nint value{getValue()}; // 合法\n```\n\n调用会在编译期计算出 $42$，但结果可以用于初始化普通变量。区别是：\n\n- `constexpr`：可以编译期计算，也可以运行时计算；\n- `consteval`：调用必须发生在编译期。"
+        },
+        {
+          "name": "引用的绑定与赋值",
+          "body": "引用是已有对象的另一个名字。引用一旦绑定，就不能通过赋值改为绑定另一个对象。\n\n```cpp\\nint first{10};\\nint second{20};\n\\nint& ref{first};\\nref = second;\n```\n\n执行后：\n\n```cpp\\nfirst == 20;\\nsecond == 20;\n```\n\n`ref = second` 是把 `second` 的值赋给 `first`，不是让 `ref` 重新绑定到 `second`。"
+        },
+        {
+          "name": "`const` 引用与临时对象",
+          "body": "普通非常量引用不能绑定临时值：\n\n```cpp\n// int& ref{42}; // 错误\n```\n\n`const` 引用可以绑定临时对象，并在引用作用域内延长该临时对象的生命周期：\n\n```cpp\\nconst int& ref{42};\n```\n\n它可以读取临时对象，但不能通过 `ref` 修改它。`const` 引用参数还适合只读且体积较大的对象，例如：\n\n```cpp\\nvoid print(const std::string& text)\n{\n    std::cout << text;\n}\n```\n\n这样既避免复制字符串，又禁止函数通过 `text` 修改原对象。"
+        },
+        {
+          "name": "指针的引用",
+          "body": "引用也可以引用一个指针变量：\n\n```cpp\\nint value{42};\\nint* pointer{&value};\\nint*& refToPointer{pointer};\n\\nint anotherValue{100};\\nrefToPointer = &anotherValue;\n```\n\n修改 `refToPointer` 实际上是在修改指针变量 `pointer`，因此 `pointer` 会改为指向 `anotherValue`。这与普通对象引用不能重新绑定不同。"
+        },
+        {
+          "name": "结构化绑定中的引用",
+          "body": "结构化绑定可以把对象的成员拆成多个名称。\n\n```cpp\\nstd::pair<int, int> point{10, 20};\\nauto& [x, y] = point;\\nx = 100;\n```\n\n此时 `point.first` 也变为 $100$，因为 `x` 引用原对象的成员。\n\n```cpp\\nauto [x, y] = point;\n```\n\n这种写法通常得到成员值的副本，修改 `x` 不会影响 `point.first`。\n\n常见区别：\n\n- `auto`：按值分解；\n- `auto&`：以非常量引用分解，可修改原对象；\n- `const auto&`：以常量引用分解，只读原对象。"
+        },
+        {
+          "name": "引用数据成员",
+          "body": "引用数据成员必须在构造函数初始化器中绑定，不能在构造函数体内“后来绑定”。\n\n```cpp\\nclass Box {\\npublic:\n    Box(int& value)\n        : m_value{value} {}\n\\nprivate:\n    int& m_value;\n};\n```\n\n下面的写法不合法：\n\n```cpp\\nBox(int& value)\n{\n    m_value = value; // 不是绑定，而是给已绑定对象赋值\n}\n```\n\n进入构造函数体之前，引用成员就必须已经完成初始化。"
+        },
+        {
+          "name": "引用参数的选择",
+          "body": "参数形式应根据函数是否修改对象以及对象复制成本来选择：\n\n- `T value`：按值传递，函数操作副本，适合简单的 `int`、`double` 等类型；\n- `T& value`：按非常量引用传递，函数可以修改调用者的对象；\n- `const T& value`：只读引用，避免复制大型对象。\n\n例如：\n\n```cpp\\nvoid update(MyClass& value);          // 修改对象\\nvoid inspect(const MyClass& value);   // 只读大型对象\\nvoid print(int value);                // 简单类型按值传递\n```"
+        },
+        {
+          "name": "返回引用与对象生命周期",
+          "body": "函数可以返回已有对象的引用，调用者能够直接修改该对象：\n\n```cpp\\nint& getElement(int* array, std::size_t index)\n{\n    return array[index];\n}\n\\nint numbers[]{10, 20, 30};\\ngetElement(numbers, 1) = 99;\n```\n\n返回后 `numbers[1]` 为 $99$。\n\n不能返回局部变量的引用，因为局部变量在函数结束时销毁：\n\n```cpp\\nint& bad()\n{\n    int value{42};\n    return value; // 悬空引用，后续使用会产生未定义行为\n}\n```\n\n局部 `static` 变量的生命周期持续到程序结束，因此可以安全返回其引用：\n\n```cpp\\nint& getGlobal()\n{\n    static int value{42};\n    return value;\n}\n```\n\n这里的变量作用域仍在函数内部，只是生命周期延长了。"
+        },
+        {
+          "name": "指针与引用的取舍",
+          "body": "指针可以为空，也可以在之后改为指向另一个对象；引用通常必须在定义时绑定，并且不能重新绑定。\n\n```cpp\\nint number{10};\\nint other{20};\n\\nint* pointer{&number};\\npointer = &other;\n*pointer = 99;\n```\n\n执行后：\n\n```cpp\\nnumber == 10;\\nother == 99;\n```\n\n`*pointer` 表示指针当前指向的对象。只有在指针有效且不为空时，解引用才安全。"
+        },
+        {
+          "name": "用对象返回多个结果",
+          "body": "引用参数可以让函数同时修改多个调用者变量：\n\n```cpp\\nvoid split(int value, int& whole, int& part)\n{\n    whole = value / 10;\n    part = value % 10;\n}\n```\n\n但更推荐把多个结果封装进一个对象并按值返回：\n\n```cpp\\nstruct SplitResult {\n    int whole;\n    int part;\n};\n\\nSplitResult split(int value)\n{\n    return {\n        .whole = value / 10,\n        .part = value % 10\n    };\n}\n```\n\n调用方可以直接写：\n\n```cpp\\nauto result = split(47);\n```\n\n这样不需要提前创建输出变量，输入和输出边界更清晰；`std::vector` 还会自动管理内部内存。"
+        },
+        {
+          "name": "`const_cast` 与 `std::as_const`",
+          "body": "`const_cast` 可以移除表达式上的 `const` 属性，但只有当底层对象本来不是 `const` 时，修改才可能安全：\n\n```cpp\\nint a{10};\\nconst int* p1{&a};\n*const_cast<int*>(p1) = 20; // 可以安全修改 a\n```\n\n如果对象本身就是 `const`，移除表面上的 `const` 后再修改会产生未定义行为：\n\n```cpp\\nconst int b{10};\\nconst int* p2{&b};\n*const_cast<int*>(p2) = 20; // 未定义行为\n```\n\n`std::as_const` 则用于主动获得只读视图：\n\n```cpp\\nstd::string str{\"hello\"};\\nauto& view = std::as_const(str); // const std::string&\n```\n\n它不复制对象，也不改变 `str` 本身的类型；只是让 `view` 不能用于修改 `str`。"
+        },
+        {
+          "name": "异常处理",
+          "body": "异常处理通常由 `throw`、`try` 和 `catch` 组成：\n\n```cpp\\ntry {\n    throw std::runtime_error{\"出错\"};\n    std::cout << \"继续\";\n}\\ncatch (const std::runtime_error&) {\n    std::cout << \"已处理\";\n}\n```\n\n执行 `throw` 后，当前 `try` 代码块的正常流程立即中断，后续语句不会执行；程序寻找匹配的 `catch`。本例只输出“已处理”，不会输出“继续”。如果没有匹配的处理器，异常会继续向调用栈上层传播。"
+        },
+        {
+          "name": "类型别名：`using` 与 `typedef`",
+          "body": "`using` 和 `typedef` 都只是为已有类型创建别名，不会产生新的独立类型。\n\n```cpp\\nusing Value = int;\\ntypedef int Value;\n```\n\n现代 C++ 更推荐 `using`，尤其是复杂类型：\n\n```cpp\\nusing StringList = std::vector<std::string>;\\nusing Numbers = std::vector<int>;\n```\n\n看到 `typedef` 时，应理解为“已有类型的别名”，而不是新类型或自动类型转换。"
+        },
+        {
+          "name": "`auto` 类型推导",
+          "body": "`auto` 根据初始化表达式推导一个明确的静态类型，必须有初始化值：\n\n```cpp\\nauto number = 42;        // int\\nauto price = 3.14;       // double\\nauto name = std::string{\"text\"};\n```\n\n按值推导时，通常会去除顶层引用和 `const`：\n\n```cpp\\nint number{10};\\nconst int& reference{number};\n\\nauto a = reference;   // int，得到副本\\nauto& b = reference;  // const int&，保留引用和只读属性\n```\n\n因此，是否写 `&` 是关键：\n\n- `auto x = expression`：通常按值推导；\n- `auto& y = expression`：保留引用属性。"
+        },
+        {
+          "name": "指针与 `auto` 的 `const` 位置",
+          "body": "使用 `auto*` 可以明确表达指针类型：\n\n```cpp\\nint i{};\\nauto* p{&i}; // int*\n```\n\n`const` 的位置决定限制对象：\n\n```cpp\\nconst auto* p{&i};        // const int*\\nauto* const p{&i};        // int* const\\nconst auto* const p{&i};  // const int* const\n```\n\n- `const auto*`：不能通过指针修改所指对象，但指针可以改指向；\n- `auto* const`：指针不能改指向，但可以修改所指对象；\n- `const auto* const`：两者都不能修改。\n\n特别注意：\n\n```cpp\\nconst auto p{&i};\n```\n\n推导为 `int* const`，表示指针本身是 `const`，不是所指整数为 `const`。"
+        },
+        {
+          "name": "列表初始化中的 `auto`",
+          "body": "拷贝列表初始化与直接列表初始化的推导规则不同：\n\n```cpp\\nauto values = {1, 2, 3}; // std::initializer_list<int>\\nauto value{1};           // int\n```\n\n拷贝列表初始化要求元素类型一致：\n\n```cpp\\nauto a = {1, 2, 3};\n// auto b = {1, 2.0}; // 错误，元素类型不一致\n```\n\n直接列表初始化的 `auto` 在 C++17 之后要求大括号内只有一个元素：\n\n```cpp\\nauto x{1};     // int\n// auto y{1, 2}; // 错误，元素过多\n```"
+        }
+      ]
+    },
+    {
+      "type": "key-insight",
+      "content": "“`consteval` 的核心是调用时机必须是编译期，不是说结果只能存进 `constexpr` 变量。”",
+      "attribution": "学习者"
+    },
+    {
+      "type": "key-insight",
+      "content": "“引用一旦绑定，就不能通过赋值改为绑定另一个对象；`ref = second` 是赋值，不是重新绑定。”",
+      "attribution": "学习者"
+    },
+    {
+      "type": "key-insight",
+      "content": "“指针的引用能改变指针的指向。”",
+      "attribution": "学习者"
+    },
+    {
+      "type": "key-insight",
+      "content": "“`const` 引用既能保证只读，又能避免产生副本，适合只读取大型对象。”",
+      "attribution": "学习者"
+    },
+    {
+      "type": "key-insight",
+      "content": "“`static` 局部变量的生命周期延长到整个程序结束，但作用域仍然只在函数内部。”",
+      "attribution": "学习者"
+    },
+    {
+      "type": "key-terms",
+      "items": [
+        {
+          "term": "`constexpr`",
+          "definition": "要求变量、函数或对象具备编译期求值能力；变量本身不可修改。"
+        },
+        {
+          "term": "`consteval`",
+          "definition": "立即函数，每次调用都必须在编译期完成。"
+        },
+        {
+          "term": "悬空引用",
+          "definition": "引用仍然存在，但它绑定的对象已经销毁，继续使用会产生未定义行为。"
+        },
+        {
+          "term": "输出参数",
+          "definition": "通过引用参数让函数写入调用者变量，从而返回额外结果。"
+        },
+        {
+          "term": "`const_cast`",
+          "definition": "用于添加或移除表达式的 `const` 属性；不能安全修改本身就是 `const` 的对象。"
+        },
+        {
+          "term": "`std::as_const`",
+          "definition": "为已有对象提供一个不复制对象的只读引用视图。"
+        },
+        {
+          "term": "类型别名",
+          "definition": "已有类型的另一个名字，不会创建新的独立类型。"
+        },
+        {
+          "term": "`std::initializer_list`",
+          "definition": "由 `auto values = { ... }` 形式的拷贝列表初始化推导出的列表类型。"
+        }
+      ]
+    },
+    {
+      "type": "open-question",
+      "content": "下一节可继续学习 `decltype` 的完整规则。课堂中已经指出，`decltype` 的具体规则尚未在当前教材页展开；尤其需要区分 `decltype(变量名)` 与带括号表达式的推导行为。"
+    },
+    {
+      "type": "review-questions",
+      "items": [
+        {
+          "question": "为什么 `constexpr int result{square(number)};` 在 `number` 是普通 `int` 时不能编译？",
+          "hint": "区分“已经初始化”为某个值和“属于常量表达式”。",
+          "answer": "因为 `constexpr` 变量的初始化表达式必须能在编译期求值。普通的 `int number{5}` 不是常量表达式，即使它当前值为 $5$，也不能用于该初始化。"
+        },
+        {
+          "question": "执行以下代码后，`first` 和 `second` 分别是多少？\n\n```cpp\\nint first{10};\\nint second{20};\\nint& ref{first};\\nref = second;\n```",
+          "hint": "引用不能重新绑定。",
+          "answer": "`first == 20`，`second == 20`。`ref = second` 是把 `second` 的值赋给 `ref` 当前绑定的对象 `first`。"
+        },
+        {
+          "question": "为什么下面的函数可以返回引用，而返回普通局部变量的引用不安全？\n\n```cpp\\nint& getValue()\n{\n    static int value{42};\n    return value;\n}\n```",
+          "hint": "关注生命周期，而不是只看作用域。",
+          "answer": "局部 `static` 变量的生命周期持续到整个程序结束，所以函数返回后 `value` 仍然存在。普通局部变量在函数结束时销毁，返回其引用会形成悬空引用。"
+        },
+        {
+          "question": "以下代码中，`pointer` 最终指向哪个对象？\n\n```cpp\\nint first{10};\\nint second{20};\\nint* pointer{&first};\\nint*& refToPointer{pointer};\\nrefToPointer = &second;\n```",
+          "hint": "这里修改的是指针变量本身。",
+          "answer": "`pointer` 最终指向 `second`。`refToPointer` 是 `pointer` 的引用，给它赋值会改变 `pointer` 的指向。"
+        },
+        {
+          "question": "判断以下声明的类型：\n\n```cpp\\nauto a = {1, 2, 3};\\nauto b{1};\n```",
+          "hint": "区分拷贝列表初始化和直接列表初始化。",
+          "answer": "`a` 的类型是 `std::initializer_list<int>`，`b` 的类型是 `int`。"
+        }
+      ]
+    }
+  ]
+}

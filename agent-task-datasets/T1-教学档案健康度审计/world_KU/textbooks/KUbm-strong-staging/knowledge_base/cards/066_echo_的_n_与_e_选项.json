@@ -1,0 +1,42 @@
+{
+  "title": "echo 的 -n 与 -e 选项",
+  "definition": "教材列出 echo 的两个常用选项：“-n”表示不输出换行符，“-e”表示解析转义符。它们用于控制 echo 输出时的显示方式。",
+  "key_points": [
+    "-n：不输出换行符",
+    "-e：解析转义符",
+    "这两个选项都属于 echo 的输出控制选项"
+  ],
+  "examples": [
+    "echo -n 字符串列表",
+    "echo -e 字符串列表"
+  ],
+  "misconceptions": [
+    "认为 echo 输出后一定换行；教材指出加“-n”时不输出换行符",
+    "认为 echo 不处理转义；教材指出加“-e”时会解析转义符"
+  ],
+  "qa_pairs": [
+    {
+      "q": "echo 的哪个选项表示不输出换行符？",
+      "a": "-n。"
+    },
+    {
+      "q": "echo 的哪个选项表示解析转义符？",
+      "a": "-e。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "echo 命令用于字符显示"
+  ],
+  "source_pages": [
+    33,
+    36
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "066_echo_的_n_与_e_选项",
+  "_chunk_pages": [
+    33,
+    36
+  ]
+}

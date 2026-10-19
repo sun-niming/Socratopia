@@ -1,0 +1,44 @@
+{
+  "title": "std::optional、std::variant、std::any与std::tuple的用途关系",
+  "definition": "C++标准库提供多种用于表达不同数据结构的数据类型：std::optional用于表示一个值可能存在也可能不存在；std::variant用于表示一个对象可以持有若干指定类型中的一种；std::any用于持有任意类型的值；std::tuple是std::pair的泛化，可以在一个对象中组合多个元素。教材建议将variant和any与optional进行对比，理解它们适用场景的差异。",
+  "key_points": [
+    "std::variant的候选类型集合在类型中明确规定。",
+    "std::any能够持有任意类型，因此类型约束比variant更宽松。",
+    "std::optional表达的是“有值或无值”，而不是多个候选类型中的一种。",
+    "std::tuple可以组合多个元素，属于std::pair的泛化。"
+  ],
+  "examples": [
+    "optional适合表示“查询结果可能不存在”。",
+    "variant适合表示“结果可能是类型A、类型B或类型C中的一种”。",
+    "any适合表示类型在编译时不固定、但运行时需要保存的值。",
+    "tuple可以表示多个位置相关的元素，例如概念上的$(T_1,T_2,T_3)$。"
+  ],
+  "misconceptions": [
+    "std::variant不是std::optional的简单替代品；optional表示有值或无值，variant表示若干指定类型中的一种。",
+    "std::tuple不只包含两个元素；std::pair可以看作具有两个元素的特殊组合，而tuple可组合多个元素。",
+    "std::any与std::variant的类型约束不同，不能把二者视为完全相同的数据结构。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "optional、variant和any分别适合表达什么？",
+      "a": "optional表达值可能存在或不存在；variant表达值是若干预先指定类型中的一种；any表达可以持有任意类型的值。"
+    },
+    {
+      "q": "std::tuple与std::pair是什么关系？",
+      "a": "std::tuple是std::pair的泛化，可以组合多个元素，而std::pair通常组合两个元素。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [],
+  "source_pages": [
+    1006,
+    1007
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "2087_std_optional_std_variant_std_any与std_tup",
+  "_chunk_pages": [
+    1005,
+    1008
+  ]
+}

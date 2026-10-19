@@ -1,0 +1,8659 @@
+{
+  "state": "done",
+  "title": "C++20高级编程(第5版)(上下册） ([比]马克·格雷戈勒（Marc Gregoire）) ",
+  "format": "pdf",
+  "updatedAt": "2026-07-20T00:20:34.645Z",
+  "startedAt": "2026-07-18T11:02:30.573Z",
+  "visionFallbackAvailable": false,
+  "premiumEscalationAvailable": true,
+  "cardCount": 2097,
+  "chunksDone": 253,
+  "chunksTotal": 253,
+  "consecutiveTerminalFailures": 0,
+  "log": [
+    {
+      "ts": "2026-07-18T11:02:36.879Z",
+      "type": "chunk_start",
+      "chunk": 1,
+      "pages": [
+        1,
+        4
+      ],
+      "imageCount": 1
+    },
+    {
+      "ts": "2026-07-18T11:03:40.848Z",
+      "type": "card_multimodal_ok",
+      "chunk": 1,
+      "cardCount": 7
+    },
+    {
+      "ts": "2026-07-18T11:03:40.848Z",
+      "type": "chunk_done",
+      "chunk": 1,
+      "pages": [
+        1,
+        4
+      ],
+      "cardCount": 7,
+      "method": "multimodal",
+      "sourceChars": 2647,
+      "sourceCjk": 1348,
+      "imageCount": 1,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T11:03:40.860Z",
+      "type": "chunk_start",
+      "chunk": 2,
+      "pages": [
+        5,
+        8
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-18T11:04:25.288Z",
+      "type": "card_text_ok",
+      "chunk": 2,
+      "cardCount": 4
+    },
+    {
+      "ts": "2026-07-18T11:04:25.288Z",
+      "type": "chunk_done",
+      "chunk": 2,
+      "pages": [
+        5,
+        8
+      ],
+      "cardCount": 4,
+      "method": "text-only",
+      "sourceChars": 3289,
+      "sourceCjk": 2520,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T11:04:25.295Z",
+      "type": "chunk_start",
+      "chunk": 3,
+      "pages": [
+        9,
+        12
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-18T11:04:25.631Z",
+      "type": "model_retry",
+      "attempt": 1,
+      "delayMs": 750,
+      "error": "HTTP 503: {\"error\":{\"message\":\"Service temporarily unavailable\",\"type\":\"api_error\",\"param\":\"\",\"code\":null}}"
+    },
+    {
+      "ts": "2026-07-18T11:04:27.100Z",
+      "type": "model_retry",
+      "attempt": 2,
+      "delayMs": 1500,
+      "error": "HTTP 503: {\"error\":{\"message\":\"Service temporarily unavailable\",\"type\":\"api_error\",\"param\":\"\",\"code\":null}}"
+    },
+    {
+      "ts": "2026-07-18T11:05:31.718Z",
+      "type": "card_text_ok",
+      "chunk": 3,
+      "cardCount": 7
+    },
+    {
+      "ts": "2026-07-18T11:05:31.718Z",
+      "type": "chunk_done",
+      "chunk": 3,
+      "pages": [
+        9,
+        12
+      ],
+      "cardCount": 7,
+      "method": "text-only",
+      "sourceChars": 2765,
+      "sourceCjk": 1947,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T11:05:31.732Z",
+      "type": "chunk_start",
+      "chunk": 4,
+      "pages": [
+        13,
+        16
+      ],
+      "imageCount": 1
+    },
+    {
+      "ts": "2026-07-18T11:06:43.461Z",
+      "type": "card_multimodal_ok",
+      "chunk": 4,
+      "cardCount": 7
+    },
+    {
+      "ts": "2026-07-18T11:06:43.461Z",
+      "type": "chunk_done",
+      "chunk": 4,
+      "pages": [
+        13,
+        16
+      ],
+      "cardCount": 7,
+      "method": "multimodal",
+      "sourceChars": 3672,
+      "sourceCjk": 2754,
+      "imageCount": 1,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T11:06:43.473Z",
+      "type": "chunk_start",
+      "chunk": 5,
+      "pages": [
+        17,
+        20
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-18T11:08:01.724Z",
+      "type": "card_text_ok",
+      "chunk": 5,
+      "cardCount": 8
+    },
+    {
+      "ts": "2026-07-18T11:08:01.725Z",
+      "type": "chunk_done",
+      "chunk": 5,
+      "pages": [
+        17,
+        20
+      ],
+      "cardCount": 8,
+      "method": "text-only",
+      "sourceChars": 4331,
+      "sourceCjk": 1824,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T11:08:01.739Z",
+      "type": "chunk_start",
+      "chunk": 6,
+      "pages": [
+        21,
+        24
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-18T11:08:02.136Z",
+      "type": "model_retry",
+      "attempt": 1,
+      "delayMs": 750,
+      "error": "HTTP 503: {\"error\":{\"message\":\"Service temporarily unavailable\",\"type\":\"api_error\",\"param\":\"\",\"code\":null}}"
+    },
+    {
+      "ts": "2026-07-18T11:08:05.778Z",
+      "type": "card_text_ok",
+      "chunk": 6,
+      "cardCount": 0
+    },
+    {
+      "ts": "2026-07-18T11:08:05.778Z",
+      "type": "card_premium_escalate",
+      "chunk": 6,
+      "model": "gpt-5.6-sol",
+      "reason": "mini_zero_cards"
+    },
+    {
+      "ts": "2026-07-18T11:08:25.018Z",
+      "type": "model_retry",
+      "attempt": 1,
+      "delayMs": 750,
+      "error": "read ECONNRESET"
+    },
+    {
+      "ts": "2026-07-18T11:08:29.447Z",
+      "type": "card_premium_ok",
+      "chunk": 6,
+      "cardCount": 0
+    },
+    {
+      "ts": "2026-07-18T11:08:29.448Z",
+      "type": "chunk_done",
+      "chunk": 6,
+      "pages": [
+        21,
+        24
+      ],
+      "cardCount": 0,
+      "method": "none",
+      "sourceChars": 4848,
+      "sourceCjk": 1810,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T11:08:29.449Z",
+      "type": "chunk_start",
+      "chunk": 7,
+      "pages": [
+        25,
+        28
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-18T11:08:32.646Z",
+      "type": "card_text_ok",
+      "chunk": 7,
+      "cardCount": 0
+    },
+    {
+      "ts": "2026-07-18T11:08:32.646Z",
+      "type": "card_premium_escalate",
+      "chunk": 7,
+      "model": "gpt-5.6-sol",
+      "reason": "mini_zero_cards"
+    },
+    {
+      "ts": "2026-07-18T11:08:32.992Z",
+      "type": "model_retry",
+      "attempt": 1,
+      "delayMs": 750,
+      "error": "HTTP 503: {\"error\":{\"message\":\"Service temporarily unavailable\",\"type\":\"api_error\",\"param\":\"\",\"code\":null}}"
+    },
+    {
+      "ts": "2026-07-18T11:08:34.099Z",
+      "type": "model_retry",
+      "attempt": 2,
+      "delayMs": 1500,
+      "error": "HTTP 503: {\"error\":{\"message\":\"Service temporarily unavailable\",\"type\":\"api_error\",\"param\":\"\",\"code\":null}}"
+    },
+    {
+      "ts": "2026-07-18T11:08:39.032Z",
+      "type": "card_premium_ok",
+      "chunk": 7,
+      "cardCount": 0
+    },
+    {
+      "ts": "2026-07-18T11:08:39.032Z",
+      "type": "chunk_done",
+      "chunk": 7,
+      "pages": [
+        25,
+        28
+      ],
+      "cardCount": 0,
+      "method": "none",
+      "sourceChars": 4894,
+      "sourceCjk": 1445,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T11:08:39.033Z",
+      "type": "chunk_start",
+      "chunk": 8,
+      "pages": [
+        29,
+        32
+      ],
+      "imageCount": 1
+    },
+    {
+      "ts": "2026-07-18T11:08:58.132Z",
+      "type": "model_retry",
+      "attempt": 1,
+      "delayMs": 750,
+      "error": "read ECONNRESET"
+    },
+    {
+      "ts": "2026-07-18T11:09:05.378Z",
+      "type": "card_multimodal_ok",
+      "chunk": 8,
+      "cardCount": 0
+    },
+    {
+      "ts": "2026-07-18T11:09:06.768Z",
+      "type": "model_retry",
+      "attempt": 1,
+      "delayMs": 750,
+      "error": "HTTP 503: {\"error\":{\"message\":\"Service temporarily unavailable\",\"type\":\"api_error\",\"param\":\"\",\"code\":null}}"
+    },
+    {
+      "ts": "2026-07-18T11:09:10.325Z",
+      "type": "card_text_ok",
+      "chunk": 8,
+      "cardCount": 0
+    },
+    {
+      "ts": "2026-07-18T11:09:10.325Z",
+      "type": "card_premium_escalate",
+      "chunk": 8,
+      "model": "gpt-5.6-sol",
+      "reason": "mini_zero_cards"
+    },
+    {
+      "ts": "2026-07-18T11:09:15.213Z",
+      "type": "card_premium_ok",
+      "chunk": 8,
+      "cardCount": 0
+    },
+    {
+      "ts": "2026-07-18T11:09:15.213Z",
+      "type": "chunk_done",
+      "chunk": 8,
+      "pages": [
+        29,
+        32
+      ],
+      "cardCount": 0,
+      "method": "multimodal",
+      "sourceChars": 1979,
+      "sourceCjk": 747,
+      "imageCount": 1,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T11:09:15.214Z",
+      "type": "chunk_start",
+      "chunk": 9,
+      "pages": [
+        33,
+        36
+      ],
+      "imageCount": 1
+    },
+    {
+      "ts": "2026-07-18T11:10:37.679Z",
+      "type": "card_multimodal_ok",
+      "chunk": 9,
+      "cardCount": 10
+    },
+    {
+      "ts": "2026-07-18T11:10:37.679Z",
+      "type": "chunk_done",
+      "chunk": 9,
+      "pages": [
+        33,
+        36
+      ],
+      "cardCount": 10,
+      "method": "multimodal",
+      "sourceChars": 2661,
+      "sourceCjk": 1796,
+      "imageCount": 1,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T11:10:37.695Z",
+      "type": "chunk_start",
+      "chunk": 10,
+      "pages": [
+        37,
+        40
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-18T11:12:28.737Z",
+      "type": "card_text_ok",
+      "chunk": 10,
+      "cardCount": 12
+    },
+    {
+      "ts": "2026-07-18T11:12:28.738Z",
+      "type": "chunk_done",
+      "chunk": 10,
+      "pages": [
+        37,
+        40
+      ],
+      "cardCount": 12,
+      "method": "text-only",
+      "sourceChars": 4021,
+      "sourceCjk": 2345,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T11:12:28.759Z",
+      "type": "chunk_start",
+      "chunk": 11,
+      "pages": [
+        41,
+        44
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-18T11:13:55.779Z",
+      "type": "card_text_ok",
+      "chunk": 11,
+      "cardCount": 9
+    },
+    {
+      "ts": "2026-07-18T11:13:55.780Z",
+      "type": "chunk_done",
+      "chunk": 11,
+      "pages": [
+        41,
+        44
+      ],
+      "cardCount": 9,
+      "method": "text-only",
+      "sourceChars": 4319,
+      "sourceCjk": 2033,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T11:13:55.794Z",
+      "type": "chunk_start",
+      "chunk": 12,
+      "pages": [
+        45,
+        48
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-18T11:13:56.198Z",
+      "type": "model_retry",
+      "attempt": 1,
+      "delayMs": 750,
+      "error": "HTTP 503: {\"error\":{\"message\":\"Service temporarily unavailable\",\"type\":\"api_error\",\"param\":\"\",\"code\":null}}"
+    },
+    {
+      "ts": "2026-07-18T11:15:20.675Z",
+      "type": "card_text_ok",
+      "chunk": 12,
+      "cardCount": 8
+    },
+    {
+      "ts": "2026-07-18T11:15:20.675Z",
+      "type": "chunk_done",
+      "chunk": 12,
+      "pages": [
+        45,
+        48
+      ],
+      "cardCount": 8,
+      "method": "text-only",
+      "sourceChars": 4331,
+      "sourceCjk": 2062,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T11:15:20.689Z",
+      "type": "chunk_start",
+      "chunk": 13,
+      "pages": [
+        49,
+        52
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-18T11:16:55.129Z",
+      "type": "card_text_ok",
+      "chunk": 13,
+      "cardCount": 9
+    },
+    {
+      "ts": "2026-07-18T11:16:55.129Z",
+      "type": "chunk_done",
+      "chunk": 13,
+      "pages": [
+        49,
+        52
+      ],
+      "cardCount": 9,
+      "method": "text-only",
+      "sourceChars": 4586,
+      "sourceCjk": 2044,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T11:16:55.144Z",
+      "type": "chunk_start",
+      "chunk": 14,
+      "pages": [
+        53,
+        56
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-18T11:18:28.232Z",
+      "type": "card_text_ok",
+      "chunk": 14,
+      "cardCount": 12
+    },
+    {
+      "ts": "2026-07-18T11:18:28.232Z",
+      "type": "chunk_done",
+      "chunk": 14,
+      "pages": [
+        53,
+        56
+      ],
+      "cardCount": 12,
+      "method": "text-only",
+      "sourceChars": 4071,
+      "sourceCjk": 1671,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T11:18:28.252Z",
+      "type": "chunk_start",
+      "chunk": 15,
+      "pages": [
+        57,
+        60
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-18T11:19:46.769Z",
+      "type": "card_text_ok",
+      "chunk": 15,
+      "cardCount": 9
+    },
+    {
+      "ts": "2026-07-18T11:19:46.770Z",
+      "type": "chunk_done",
+      "chunk": 15,
+      "pages": [
+        57,
+        60
+      ],
+      "cardCount": 9,
+      "method": "text-only",
+      "sourceChars": 4091,
+      "sourceCjk": 1951,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T11:19:46.785Z",
+      "type": "chunk_start",
+      "chunk": 16,
+      "pages": [
+        61,
+        64
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-18T11:21:24.514Z",
+      "type": "card_text_ok",
+      "chunk": 16,
+      "cardCount": 11
+    },
+    {
+      "ts": "2026-07-18T11:21:24.514Z",
+      "type": "chunk_done",
+      "chunk": 16,
+      "pages": [
+        61,
+        64
+      ],
+      "cardCount": 11,
+      "method": "text-only",
+      "sourceChars": 4304,
+      "sourceCjk": 2046,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T11:21:24.532Z",
+      "type": "chunk_start",
+      "chunk": 17,
+      "pages": [
+        65,
+        68
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-18T11:21:24.821Z",
+      "type": "model_retry",
+      "attempt": 1,
+      "delayMs": 750,
+      "error": "HTTP 503: {\"error\":{\"message\":\"Service temporarily unavailable\",\"type\":\"api_error\",\"param\":\"\",\"code\":null}}"
+    },
+    {
+      "ts": "2026-07-18T11:22:52.108Z",
+      "type": "card_text_ok",
+      "chunk": 17,
+      "cardCount": 9
+    },
+    {
+      "ts": "2026-07-18T11:22:52.109Z",
+      "type": "chunk_done",
+      "chunk": 17,
+      "pages": [
+        65,
+        68
+      ],
+      "cardCount": 9,
+      "method": "text-only",
+      "sourceChars": 4437,
+      "sourceCjk": 1452,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T11:22:52.132Z",
+      "type": "chunk_start",
+      "chunk": 18,
+      "pages": [
+        69,
+        72
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-18T11:24:28.263Z",
+      "type": "card_text_ok",
+      "chunk": 18,
+      "cardCount": 8
+    },
+    {
+      "ts": "2026-07-18T11:24:28.265Z",
+      "type": "chunk_done",
+      "chunk": 18,
+      "pages": [
+        69,
+        72
+      ],
+      "cardCount": 8,
+      "method": "text-only",
+      "sourceChars": 4062,
+      "sourceCjk": 2371,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T11:24:28.295Z",
+      "type": "chunk_start",
+      "chunk": 19,
+      "pages": [
+        73,
+        76
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-18T11:25:48.167Z",
+      "type": "card_text_ok",
+      "chunk": 19,
+      "cardCount": 7
+    },
+    {
+      "ts": "2026-07-18T11:25:48.178Z",
+      "type": "chunk_done",
+      "chunk": 19,
+      "pages": [
+        73,
+        76
+      ],
+      "cardCount": 7,
+      "method": "text-only",
+      "sourceChars": 4067,
+      "sourceCjk": 1705,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T11:25:48.207Z",
+      "type": "chunk_start",
+      "chunk": 20,
+      "pages": [
+        77,
+        80
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-18T11:27:09.258Z",
+      "type": "card_text_ok",
+      "chunk": 20,
+      "cardCount": 9
+    },
+    {
+      "ts": "2026-07-18T11:27:09.259Z",
+      "type": "chunk_done",
+      "chunk": 20,
+      "pages": [
+        77,
+        80
+      ],
+      "cardCount": 9,
+      "method": "text-only",
+      "sourceChars": 4349,
+      "sourceCjk": 2177,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T11:27:09.292Z",
+      "type": "chunk_start",
+      "chunk": 21,
+      "pages": [
+        81,
+        84
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-18T11:28:26.594Z",
+      "type": "card_text_ok",
+      "chunk": 21,
+      "cardCount": 7
+    },
+    {
+      "ts": "2026-07-18T11:28:26.595Z",
+      "type": "chunk_done",
+      "chunk": 21,
+      "pages": [
+        81,
+        84
+      ],
+      "cardCount": 7,
+      "method": "text-only",
+      "sourceChars": 4092,
+      "sourceCjk": 2227,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T11:28:26.619Z",
+      "type": "chunk_start",
+      "chunk": 22,
+      "pages": [
+        85,
+        88
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-18T11:28:26.974Z",
+      "type": "model_retry",
+      "attempt": 1,
+      "delayMs": 750,
+      "error": "HTTP 503: {\"error\":{\"message\":\"Service temporarily unavailable\",\"type\":\"api_error\",\"param\":\"\",\"code\":null}}"
+    },
+    {
+      "ts": "2026-07-18T11:29:34.165Z",
+      "type": "card_text_ok",
+      "chunk": 22,
+      "cardCount": 6
+    },
+    {
+      "ts": "2026-07-18T11:29:34.167Z",
+      "type": "chunk_done",
+      "chunk": 22,
+      "pages": [
+        85,
+        88
+      ],
+      "cardCount": 6,
+      "method": "text-only",
+      "sourceChars": 4675,
+      "sourceCjk": 2116,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T11:29:34.188Z",
+      "type": "chunk_start",
+      "chunk": 23,
+      "pages": [
+        89,
+        92
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-18T11:31:13.973Z",
+      "type": "card_text_ok",
+      "chunk": 23,
+      "cardCount": 11
+    },
+    {
+      "ts": "2026-07-18T11:31:13.980Z",
+      "type": "chunk_done",
+      "chunk": 23,
+      "pages": [
+        89,
+        92
+      ],
+      "cardCount": 11,
+      "method": "text-only",
+      "sourceChars": 3508,
+      "sourceCjk": 2077,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T11:31:14.019Z",
+      "type": "chunk_start",
+      "chunk": 24,
+      "pages": [
+        93,
+        96
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-18T11:32:28.161Z",
+      "type": "card_text_ok",
+      "chunk": 24,
+      "cardCount": 8
+    },
+    {
+      "ts": "2026-07-18T11:32:28.161Z",
+      "type": "chunk_done",
+      "chunk": 24,
+      "pages": [
+        93,
+        96
+      ],
+      "cardCount": 8,
+      "method": "text-only",
+      "sourceChars": 4631,
+      "sourceCjk": 1151,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T11:32:28.202Z",
+      "type": "chunk_start",
+      "chunk": 25,
+      "pages": [
+        97,
+        100
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-18T11:33:39.421Z",
+      "type": "card_text_ok",
+      "chunk": 25,
+      "cardCount": 7
+    },
+    {
+      "ts": "2026-07-18T11:33:39.422Z",
+      "type": "chunk_done",
+      "chunk": 25,
+      "pages": [
+        97,
+        100
+      ],
+      "cardCount": 7,
+      "method": "text-only",
+      "sourceChars": 3702,
+      "sourceCjk": 827,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T11:33:39.461Z",
+      "type": "chunk_start",
+      "chunk": 26,
+      "pages": [
+        101,
+        104
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-18T11:34:53.803Z",
+      "type": "card_text_ok",
+      "chunk": 26,
+      "cardCount": 8
+    },
+    {
+      "ts": "2026-07-18T11:34:53.805Z",
+      "type": "chunk_done",
+      "chunk": 26,
+      "pages": [
+        101,
+        104
+      ],
+      "cardCount": 8,
+      "method": "text-only",
+      "sourceChars": 3871,
+      "sourceCjk": 2225,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T11:34:53.845Z",
+      "type": "chunk_start",
+      "chunk": 27,
+      "pages": [
+        105,
+        108
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-18T11:36:28.843Z",
+      "type": "card_text_ok",
+      "chunk": 27,
+      "cardCount": 11
+    },
+    {
+      "ts": "2026-07-18T11:36:28.864Z",
+      "type": "chunk_done",
+      "chunk": 27,
+      "pages": [
+        105,
+        108
+      ],
+      "cardCount": 11,
+      "method": "text-only",
+      "sourceChars": 3784,
+      "sourceCjk": 2267,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T11:36:28.907Z",
+      "type": "chunk_start",
+      "chunk": 28,
+      "pages": [
+        109,
+        112
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-18T11:38:00.913Z",
+      "type": "card_text_ok",
+      "chunk": 28,
+      "cardCount": 9
+    },
+    {
+      "ts": "2026-07-18T11:38:00.948Z",
+      "type": "chunk_done",
+      "chunk": 28,
+      "pages": [
+        109,
+        112
+      ],
+      "cardCount": 9,
+      "method": "text-only",
+      "sourceChars": 5625,
+      "sourceCjk": 1753,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T11:38:00.997Z",
+      "type": "chunk_start",
+      "chunk": 29,
+      "pages": [
+        113,
+        116
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-18T11:39:42.852Z",
+      "type": "card_text_ok",
+      "chunk": 29,
+      "cardCount": 10
+    },
+    {
+      "ts": "2026-07-18T11:39:42.853Z",
+      "type": "chunk_done",
+      "chunk": 29,
+      "pages": [
+        113,
+        116
+      ],
+      "cardCount": 10,
+      "method": "text-only",
+      "sourceChars": 4631,
+      "sourceCjk": 2173,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T11:39:42.891Z",
+      "type": "chunk_start",
+      "chunk": 30,
+      "pages": [
+        117,
+        120
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-18T11:39:43.197Z",
+      "type": "model_retry",
+      "attempt": 1,
+      "delayMs": 750,
+      "error": "HTTP 503: {\"error\":{\"message\":\"Service temporarily unavailable\",\"type\":\"api_error\",\"param\":\"\",\"code\":null}}"
+    },
+    {
+      "ts": "2026-07-18T11:39:44.207Z",
+      "type": "model_retry",
+      "attempt": 2,
+      "delayMs": 1500,
+      "error": "HTTP 503: {\"error\":{\"message\":\"Service temporarily unavailable\",\"type\":\"api_error\",\"param\":\"\",\"code\":null}}"
+    },
+    {
+      "ts": "2026-07-18T11:39:45.993Z",
+      "type": "card_text_fail",
+      "chunk": 30,
+      "error": "HTTP 503: {\"error\":{\"message\":\"Service temporarily unavailable\",\"type\":\"api_error\",\"param\":\"\",\"code\":null}}"
+    },
+    {
+      "ts": "2026-07-18T11:39:45.993Z",
+      "type": "card_premium_escalate",
+      "chunk": 30,
+      "model": "gpt-5.6-sol",
+      "reason": "mini_zero_cards"
+    },
+    {
+      "ts": "2026-07-18T11:39:46.265Z",
+      "type": "model_retry",
+      "attempt": 1,
+      "delayMs": 750,
+      "error": "HTTP 503: {\"error\":{\"message\":\"Service temporarily unavailable\",\"type\":\"api_error\",\"param\":\"\",\"code\":null}}"
+    },
+    {
+      "ts": "2026-07-18T11:42:28.486Z",
+      "type": "card_premium_ok",
+      "chunk": 30,
+      "cardCount": 11
+    },
+    {
+      "ts": "2026-07-18T11:42:28.492Z",
+      "type": "chunk_done",
+      "chunk": 30,
+      "pages": [
+        117,
+        120
+      ],
+      "cardCount": 11,
+      "method": "premium",
+      "sourceChars": 4462,
+      "sourceCjk": 1276,
+      "imageCount": 0,
+      "hadRequestFailure": true,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T11:42:28.541Z",
+      "type": "chunk_start",
+      "chunk": 31,
+      "pages": [
+        121,
+        124
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-18T11:42:28.907Z",
+      "type": "model_retry",
+      "attempt": 1,
+      "delayMs": 750,
+      "error": "HTTP 503: {\"error\":{\"message\":\"Service temporarily unavailable\",\"type\":\"api_error\",\"param\":\"\",\"code\":null}}"
+    },
+    {
+      "ts": "2026-07-18T11:43:37.674Z",
+      "type": "card_text_ok",
+      "chunk": 31,
+      "cardCount": 9
+    },
+    {
+      "ts": "2026-07-18T11:43:37.675Z",
+      "type": "chunk_done",
+      "chunk": 31,
+      "pages": [
+        121,
+        124
+      ],
+      "cardCount": 9,
+      "method": "text-only",
+      "sourceChars": 4218,
+      "sourceCjk": 2427,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T11:43:37.725Z",
+      "type": "chunk_start",
+      "chunk": 32,
+      "pages": [
+        125,
+        128
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-18T11:44:59.258Z",
+      "type": "card_text_ok",
+      "chunk": 32,
+      "cardCount": 9
+    },
+    {
+      "ts": "2026-07-18T11:44:59.258Z",
+      "type": "chunk_done",
+      "chunk": 32,
+      "pages": [
+        125,
+        128
+      ],
+      "cardCount": 9,
+      "method": "text-only",
+      "sourceChars": 4649,
+      "sourceCjk": 1960,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T11:44:59.304Z",
+      "type": "chunk_start",
+      "chunk": 33,
+      "pages": [
+        129,
+        132
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-18T11:44:59.676Z",
+      "type": "model_retry",
+      "attempt": 1,
+      "delayMs": 750,
+      "error": "HTTP 503: {\"error\":{\"message\":\"Service temporarily unavailable\",\"type\":\"api_error\",\"param\":\"\",\"code\":null}}"
+    },
+    {
+      "ts": "2026-07-18T11:45:01.176Z",
+      "type": "model_retry",
+      "attempt": 2,
+      "delayMs": 1500,
+      "error": "HTTP 503: {\"error\":{\"message\":\"Service temporarily unavailable\",\"type\":\"api_error\",\"param\":\"\",\"code\":null}}"
+    },
+    {
+      "ts": "2026-07-18T11:46:32.462Z",
+      "type": "card_text_ok",
+      "chunk": 33,
+      "cardCount": 10
+    },
+    {
+      "ts": "2026-07-18T11:46:32.464Z",
+      "type": "chunk_done",
+      "chunk": 33,
+      "pages": [
+        129,
+        132
+      ],
+      "cardCount": 10,
+      "method": "text-only",
+      "sourceChars": 3890,
+      "sourceCjk": 2204,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T11:46:32.508Z",
+      "type": "chunk_start",
+      "chunk": 34,
+      "pages": [
+        133,
+        136
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-18T11:46:32.811Z",
+      "type": "model_retry",
+      "attempt": 1,
+      "delayMs": 750,
+      "error": "HTTP 503: {\"error\":{\"message\":\"Service temporarily unavailable\",\"type\":\"api_error\",\"param\":\"\",\"code\":null}}"
+    },
+    {
+      "ts": "2026-07-18T11:46:33.863Z",
+      "type": "model_retry",
+      "attempt": 2,
+      "delayMs": 1500,
+      "error": "HTTP 503: {\"error\":{\"message\":\"Service temporarily unavailable\",\"type\":\"api_error\",\"param\":\"\",\"code\":null}}"
+    },
+    {
+      "ts": "2026-07-18T11:48:16.595Z",
+      "type": "card_text_ok",
+      "chunk": 34,
+      "cardCount": 12
+    },
+    {
+      "ts": "2026-07-18T11:48:16.596Z",
+      "type": "chunk_done",
+      "chunk": 34,
+      "pages": [
+        133,
+        136
+      ],
+      "cardCount": 12,
+      "method": "text-only",
+      "sourceChars": 4273,
+      "sourceCjk": 2883,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T11:48:16.620Z",
+      "type": "chunk_start",
+      "chunk": 35,
+      "pages": [
+        137,
+        140
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-18T11:48:16.957Z",
+      "type": "model_retry",
+      "attempt": 1,
+      "delayMs": 750,
+      "error": "HTTP 503: {\"error\":{\"message\":\"Service temporarily unavailable\",\"type\":\"api_error\",\"param\":\"\",\"code\":null}}"
+    },
+    {
+      "ts": "2026-07-18T11:48:17.984Z",
+      "type": "model_retry",
+      "attempt": 2,
+      "delayMs": 1500,
+      "error": "HTTP 503: {\"error\":{\"message\":\"Service temporarily unavailable\",\"type\":\"api_error\",\"param\":\"\",\"code\":null}}"
+    },
+    {
+      "ts": "2026-07-18T11:48:19.781Z",
+      "type": "card_text_fail",
+      "chunk": 35,
+      "error": "HTTP 503: {\"error\":{\"message\":\"Service temporarily unavailable\",\"type\":\"api_error\",\"param\":\"\",\"code\":null}}"
+    },
+    {
+      "ts": "2026-07-18T11:48:19.782Z",
+      "type": "card_premium_escalate",
+      "chunk": 35,
+      "model": "gpt-5.6-sol",
+      "reason": "mini_zero_cards"
+    },
+    {
+      "ts": "2026-07-18T11:50:13.126Z",
+      "type": "card_premium_ok",
+      "chunk": 35,
+      "cardCount": 10
+    },
+    {
+      "ts": "2026-07-18T11:50:13.126Z",
+      "type": "chunk_done",
+      "chunk": 35,
+      "pages": [
+        137,
+        140
+      ],
+      "cardCount": 10,
+      "method": "premium",
+      "sourceChars": 3310,
+      "sourceCjk": 1807,
+      "imageCount": 0,
+      "hadRequestFailure": true,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T11:50:13.151Z",
+      "type": "chunk_start",
+      "chunk": 36,
+      "pages": [
+        141,
+        144
+      ],
+      "imageCount": 3
+    },
+    {
+      "ts": "2026-07-18T11:50:53.828Z",
+      "type": "card_multimodal_ok",
+      "chunk": 36,
+      "cardCount": 5
+    },
+    {
+      "ts": "2026-07-18T11:50:53.828Z",
+      "type": "chunk_done",
+      "chunk": 36,
+      "pages": [
+        141,
+        144
+      ],
+      "cardCount": 5,
+      "method": "multimodal",
+      "sourceChars": 691,
+      "sourceCjk": 567,
+      "imageCount": 3,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T11:50:53.844Z",
+      "type": "chunk_start",
+      "chunk": 37,
+      "pages": [
+        145,
+        148
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-18T11:50:54.382Z",
+      "type": "model_retry",
+      "attempt": 1,
+      "delayMs": 750,
+      "error": "HTTP 503: {\"error\":{\"message\":\"Service temporarily unavailable\",\"type\":\"api_error\",\"param\":\"\",\"code\":null}}"
+    },
+    {
+      "ts": "2026-07-18T11:52:25.116Z",
+      "type": "card_text_ok",
+      "chunk": 37,
+      "cardCount": 10
+    },
+    {
+      "ts": "2026-07-18T11:52:25.117Z",
+      "type": "chunk_done",
+      "chunk": 37,
+      "pages": [
+        145,
+        148
+      ],
+      "cardCount": 10,
+      "method": "text-only",
+      "sourceChars": 5374,
+      "sourceCjk": 4256,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T11:52:25.135Z",
+      "type": "chunk_start",
+      "chunk": 38,
+      "pages": [
+        149,
+        152
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-18T11:53:52.589Z",
+      "type": "card_text_ok",
+      "chunk": 38,
+      "cardCount": 10
+    },
+    {
+      "ts": "2026-07-18T11:53:52.589Z",
+      "type": "chunk_done",
+      "chunk": 38,
+      "pages": [
+        149,
+        152
+      ],
+      "cardCount": 10,
+      "method": "text-only",
+      "sourceChars": 4899,
+      "sourceCjk": 3904,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T11:53:52.605Z",
+      "type": "chunk_start",
+      "chunk": 39,
+      "pages": [
+        153,
+        156
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-18T11:55:34.009Z",
+      "type": "card_text_ok",
+      "chunk": 39,
+      "cardCount": 11
+    },
+    {
+      "ts": "2026-07-18T11:55:34.009Z",
+      "type": "chunk_done",
+      "chunk": 39,
+      "pages": [
+        153,
+        156
+      ],
+      "cardCount": 11,
+      "method": "text-only",
+      "sourceChars": 4583,
+      "sourceCjk": 3724,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T11:55:34.026Z",
+      "type": "chunk_start",
+      "chunk": 40,
+      "pages": [
+        157,
+        160
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-18T11:55:34.446Z",
+      "type": "model_retry",
+      "attempt": 1,
+      "delayMs": 750,
+      "error": "HTTP 503: {\"error\":{\"message\":\"Service temporarily unavailable\",\"type\":\"api_error\",\"param\":\"\",\"code\":null}}"
+    },
+    {
+      "ts": "2026-07-18T11:55:35.510Z",
+      "type": "model_retry",
+      "attempt": 2,
+      "delayMs": 1500,
+      "error": "HTTP 503: {\"error\":{\"message\":\"Service temporarily unavailable\",\"type\":\"api_error\",\"param\":\"\",\"code\":null}}"
+    },
+    {
+      "ts": "2026-07-18T11:55:37.313Z",
+      "type": "card_text_fail",
+      "chunk": 40,
+      "error": "HTTP 503: {\"error\":{\"message\":\"Service temporarily unavailable\",\"type\":\"api_error\",\"param\":\"\",\"code\":null}}"
+    },
+    {
+      "ts": "2026-07-18T11:55:37.313Z",
+      "type": "card_premium_escalate",
+      "chunk": 40,
+      "model": "gpt-5.6-sol",
+      "reason": "mini_zero_cards"
+    },
+    {
+      "ts": "2026-07-18T11:58:24.655Z",
+      "type": "card_premium_ok",
+      "chunk": 40,
+      "cardCount": 20
+    },
+    {
+      "ts": "2026-07-18T11:58:24.655Z",
+      "type": "chunk_done",
+      "chunk": 40,
+      "pages": [
+        157,
+        160
+      ],
+      "cardCount": 20,
+      "method": "premium",
+      "sourceChars": 4606,
+      "sourceCjk": 3210,
+      "imageCount": 0,
+      "hadRequestFailure": true,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T11:58:24.686Z",
+      "type": "chunk_start",
+      "chunk": 41,
+      "pages": [
+        161,
+        164
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-18T11:59:37.952Z",
+      "type": "card_text_ok",
+      "chunk": 41,
+      "cardCount": 8
+    },
+    {
+      "ts": "2026-07-18T11:59:37.952Z",
+      "type": "chunk_done",
+      "chunk": 41,
+      "pages": [
+        161,
+        164
+      ],
+      "cardCount": 8,
+      "method": "text-only",
+      "sourceChars": 3698,
+      "sourceCjk": 2140,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T11:59:37.963Z",
+      "type": "chunk_start",
+      "chunk": 42,
+      "pages": [
+        165,
+        168
+      ],
+      "imageCount": 1
+    },
+    {
+      "ts": "2026-07-18T12:01:02.976Z",
+      "type": "card_multimodal_ok",
+      "chunk": 42,
+      "cardCount": 9
+    },
+    {
+      "ts": "2026-07-18T12:01:02.977Z",
+      "type": "chunk_done",
+      "chunk": 42,
+      "pages": [
+        165,
+        168
+      ],
+      "cardCount": 9,
+      "method": "multimodal",
+      "sourceChars": 3314,
+      "sourceCjk": 2399,
+      "imageCount": 1,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T12:01:02.990Z",
+      "type": "chunk_start",
+      "chunk": 43,
+      "pages": [
+        169,
+        172
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-18T12:02:26.805Z",
+      "type": "card_text_ok",
+      "chunk": 43,
+      "cardCount": 8
+    },
+    {
+      "ts": "2026-07-18T12:02:26.805Z",
+      "type": "chunk_done",
+      "chunk": 43,
+      "pages": [
+        169,
+        172
+      ],
+      "cardCount": 8,
+      "method": "text-only",
+      "sourceChars": 4526,
+      "sourceCjk": 3456,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T12:02:26.819Z",
+      "type": "chunk_start",
+      "chunk": 44,
+      "pages": [
+        173,
+        176
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-18T12:03:38.696Z",
+      "type": "card_text_ok",
+      "chunk": 44,
+      "cardCount": 6
+    },
+    {
+      "ts": "2026-07-18T12:03:38.698Z",
+      "type": "chunk_done",
+      "chunk": 44,
+      "pages": [
+        173,
+        176
+      ],
+      "cardCount": 6,
+      "method": "text-only",
+      "sourceChars": 4942,
+      "sourceCjk": 2594,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T12:03:38.707Z",
+      "type": "chunk_start",
+      "chunk": 45,
+      "pages": [
+        177,
+        180
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-18T12:04:40.148Z",
+      "type": "card_text_ok",
+      "chunk": 45,
+      "cardCount": 6
+    },
+    {
+      "ts": "2026-07-18T12:04:40.149Z",
+      "type": "chunk_done",
+      "chunk": 45,
+      "pages": [
+        177,
+        180
+      ],
+      "cardCount": 6,
+      "method": "text-only",
+      "sourceChars": 3259,
+      "sourceCjk": 2465,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T12:04:40.160Z",
+      "type": "chunk_start",
+      "chunk": 46,
+      "pages": [
+        181,
+        184
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-18T12:06:05.521Z",
+      "type": "card_text_ok",
+      "chunk": 46,
+      "cardCount": 10
+    },
+    {
+      "ts": "2026-07-18T12:06:05.522Z",
+      "type": "chunk_done",
+      "chunk": 46,
+      "pages": [
+        181,
+        184
+      ],
+      "cardCount": 10,
+      "method": "text-only",
+      "sourceChars": 5255,
+      "sourceCjk": 4180,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T12:06:05.538Z",
+      "type": "chunk_start",
+      "chunk": 47,
+      "pages": [
+        185,
+        188
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-18T12:07:45.331Z",
+      "type": "card_text_ok",
+      "chunk": 47,
+      "cardCount": 8
+    },
+    {
+      "ts": "2026-07-18T12:07:45.331Z",
+      "type": "chunk_done",
+      "chunk": 47,
+      "pages": [
+        185,
+        188
+      ],
+      "cardCount": 8,
+      "method": "text-only",
+      "sourceChars": 5356,
+      "sourceCjk": 3672,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T12:07:45.345Z",
+      "type": "chunk_start",
+      "chunk": 48,
+      "pages": [
+        189,
+        192
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-18T12:09:23.648Z",
+      "type": "card_text_ok",
+      "chunk": 48,
+      "cardCount": 12
+    },
+    {
+      "ts": "2026-07-18T12:09:23.649Z",
+      "type": "chunk_done",
+      "chunk": 48,
+      "pages": [
+        189,
+        192
+      ],
+      "cardCount": 12,
+      "method": "text-only",
+      "sourceChars": 5263,
+      "sourceCjk": 4365,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T12:09:23.669Z",
+      "type": "chunk_start",
+      "chunk": 49,
+      "pages": [
+        193,
+        196
+      ],
+      "imageCount": 1
+    },
+    {
+      "ts": "2026-07-18T12:10:37.359Z",
+      "type": "card_multimodal_ok",
+      "chunk": 49,
+      "cardCount": 7
+    },
+    {
+      "ts": "2026-07-18T12:10:37.359Z",
+      "type": "chunk_done",
+      "chunk": 49,
+      "pages": [
+        193,
+        196
+      ],
+      "cardCount": 7,
+      "method": "multimodal",
+      "sourceChars": 2629,
+      "sourceCjk": 1981,
+      "imageCount": 1,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T12:10:37.371Z",
+      "type": "chunk_start",
+      "chunk": 50,
+      "pages": [
+        197,
+        200
+      ],
+      "imageCount": 1
+    },
+    {
+      "ts": "2026-07-18T12:10:38.157Z",
+      "type": "model_retry",
+      "attempt": 1,
+      "delayMs": 750,
+      "error": "HTTP 503: {\"error\":{\"message\":\"Service temporarily unavailable\",\"type\":\"api_error\",\"param\":\"\",\"code\":null}}"
+    },
+    {
+      "ts": "2026-07-18T12:10:58.016Z",
+      "type": "model_retry",
+      "attempt": 2,
+      "delayMs": 1500,
+      "error": "read ECONNRESET"
+    },
+    {
+      "ts": "2026-07-18T12:11:56.336Z",
+      "type": "card_multimodal_ok",
+      "chunk": 50,
+      "cardCount": 6
+    },
+    {
+      "ts": "2026-07-18T12:11:56.337Z",
+      "type": "chunk_done",
+      "chunk": 50,
+      "pages": [
+        197,
+        200
+      ],
+      "cardCount": 6,
+      "method": "multimodal",
+      "sourceChars": 2198,
+      "sourceCjk": 1613,
+      "imageCount": 1,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T12:11:56.349Z",
+      "type": "chunk_start",
+      "chunk": 51,
+      "pages": [
+        201,
+        204
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-18T12:11:56.722Z",
+      "type": "model_retry",
+      "attempt": 1,
+      "delayMs": 750,
+      "error": "HTTP 503: {\"error\":{\"message\":\"Service temporarily unavailable\",\"type\":\"api_error\",\"param\":\"\",\"code\":null}}"
+    },
+    {
+      "ts": "2026-07-18T12:12:16.880Z",
+      "type": "model_retry",
+      "attempt": 2,
+      "delayMs": 1500,
+      "error": "read ECONNRESET"
+    },
+    {
+      "ts": "2026-07-18T12:13:34.776Z",
+      "type": "card_text_ok",
+      "chunk": 51,
+      "cardCount": 9
+    },
+    {
+      "ts": "2026-07-18T12:13:34.776Z",
+      "type": "chunk_done",
+      "chunk": 51,
+      "pages": [
+        201,
+        204
+      ],
+      "cardCount": 9,
+      "method": "text-only",
+      "sourceChars": 4187,
+      "sourceCjk": 2245,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T12:13:34.789Z",
+      "type": "chunk_start",
+      "chunk": 52,
+      "pages": [
+        205,
+        208
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-18T12:15:16.461Z",
+      "type": "card_text_ok",
+      "chunk": 52,
+      "cardCount": 10
+    },
+    {
+      "ts": "2026-07-18T12:15:16.461Z",
+      "type": "chunk_done",
+      "chunk": 52,
+      "pages": [
+        205,
+        208
+      ],
+      "cardCount": 10,
+      "method": "text-only",
+      "sourceChars": 3591,
+      "sourceCjk": 1975,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T12:15:16.476Z",
+      "type": "chunk_start",
+      "chunk": 53,
+      "pages": [
+        209,
+        212
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-18T12:17:00.868Z",
+      "type": "card_text_ok",
+      "chunk": 53,
+      "cardCount": 10
+    },
+    {
+      "ts": "2026-07-18T12:17:00.869Z",
+      "type": "chunk_done",
+      "chunk": 53,
+      "pages": [
+        209,
+        212
+      ],
+      "cardCount": 10,
+      "method": "text-only",
+      "sourceChars": 4796,
+      "sourceCjk": 3090,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T12:17:00.887Z",
+      "type": "chunk_start",
+      "chunk": 54,
+      "pages": [
+        213,
+        216
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-18T12:17:01.248Z",
+      "type": "model_retry",
+      "attempt": 1,
+      "delayMs": 750,
+      "error": "HTTP 503: {\"error\":{\"message\":\"Service temporarily unavailable\",\"type\":\"api_error\",\"param\":\"\",\"code\":null}}"
+    },
+    {
+      "ts": "2026-07-18T12:18:29.585Z",
+      "type": "card_text_ok",
+      "chunk": 54,
+      "cardCount": 7
+    },
+    {
+      "ts": "2026-07-18T12:18:29.586Z",
+      "type": "chunk_done",
+      "chunk": 54,
+      "pages": [
+        213,
+        216
+      ],
+      "cardCount": 7,
+      "method": "text-only",
+      "sourceChars": 5353,
+      "sourceCjk": 2729,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T12:18:29.604Z",
+      "type": "chunk_start",
+      "chunk": 55,
+      "pages": [
+        217,
+        220
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-18T12:20:13.126Z",
+      "type": "card_text_ok",
+      "chunk": 55,
+      "cardCount": 12
+    },
+    {
+      "ts": "2026-07-18T12:20:13.126Z",
+      "type": "chunk_done",
+      "chunk": 55,
+      "pages": [
+        217,
+        220
+      ],
+      "cardCount": 12,
+      "method": "text-only",
+      "sourceChars": 5035,
+      "sourceCjk": 2574,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T12:20:13.145Z",
+      "type": "chunk_start",
+      "chunk": 56,
+      "pages": [
+        221,
+        224
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-18T12:23:13.152Z",
+      "type": "model_retry",
+      "attempt": 1,
+      "delayMs": 750,
+      "error": "timeout 180000ms"
+    },
+    {
+      "ts": "2026-07-18T12:24:45.355Z",
+      "type": "card_text_ok",
+      "chunk": 56,
+      "cardCount": 9
+    },
+    {
+      "ts": "2026-07-18T12:24:45.355Z",
+      "type": "chunk_done",
+      "chunk": 56,
+      "pages": [
+        221,
+        224
+      ],
+      "cardCount": 9,
+      "method": "text-only",
+      "sourceChars": 5262,
+      "sourceCjk": 2111,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T12:24:45.373Z",
+      "type": "chunk_start",
+      "chunk": 57,
+      "pages": [
+        225,
+        228
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-18T12:25:04.683Z",
+      "type": "model_retry",
+      "attempt": 1,
+      "delayMs": 750,
+      "error": "read ECONNRESET"
+    },
+    {
+      "ts": "2026-07-18T12:26:30.635Z",
+      "type": "card_text_ok",
+      "chunk": 57,
+      "cardCount": 8
+    },
+    {
+      "ts": "2026-07-18T12:26:30.635Z",
+      "type": "chunk_done",
+      "chunk": 57,
+      "pages": [
+        225,
+        228
+      ],
+      "cardCount": 8,
+      "method": "text-only",
+      "sourceChars": 3550,
+      "sourceCjk": 1749,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T12:26:30.650Z",
+      "type": "chunk_start",
+      "chunk": 58,
+      "pages": [
+        229,
+        232
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-18T12:27:47.177Z",
+      "type": "card_text_ok",
+      "chunk": 58,
+      "cardCount": 10
+    },
+    {
+      "ts": "2026-07-18T12:27:47.177Z",
+      "type": "chunk_done",
+      "chunk": 58,
+      "pages": [
+        229,
+        232
+      ],
+      "cardCount": 10,
+      "method": "text-only",
+      "sourceChars": 3947,
+      "sourceCjk": 1858,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T12:27:47.194Z",
+      "type": "chunk_start",
+      "chunk": 59,
+      "pages": [
+        233,
+        236
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-18T12:27:47.619Z",
+      "type": "model_retry",
+      "attempt": 1,
+      "delayMs": 750,
+      "error": "HTTP 503: {\"error\":{\"message\":\"Service temporarily unavailable\",\"type\":\"api_error\",\"param\":\"\",\"code\":null}}"
+    },
+    {
+      "ts": "2026-07-18T12:27:48.689Z",
+      "type": "model_retry",
+      "attempt": 2,
+      "delayMs": 1500,
+      "error": "HTTP 503: {\"error\":{\"message\":\"Service temporarily unavailable\",\"type\":\"api_error\",\"param\":\"\",\"code\":null}}"
+    },
+    {
+      "ts": "2026-07-18T12:28:57.836Z",
+      "type": "card_text_ok",
+      "chunk": 59,
+      "cardCount": 7
+    },
+    {
+      "ts": "2026-07-18T12:28:57.837Z",
+      "type": "chunk_done",
+      "chunk": 59,
+      "pages": [
+        233,
+        236
+      ],
+      "cardCount": 7,
+      "method": "text-only",
+      "sourceChars": 3650,
+      "sourceCjk": 1461,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T12:28:57.850Z",
+      "type": "chunk_start",
+      "chunk": 60,
+      "pages": [
+        237,
+        240
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-18T12:29:17.172Z",
+      "type": "model_retry",
+      "attempt": 1,
+      "delayMs": 750,
+      "error": "read ECONNRESET"
+    },
+    {
+      "ts": "2026-07-18T12:29:19.118Z",
+      "type": "model_retry",
+      "attempt": 2,
+      "delayMs": 1500,
+      "error": "HTTP 503: {\"error\":{\"message\":\"Service temporarily unavailable\",\"type\":\"api_error\",\"param\":\"\",\"code\":null}}"
+    },
+    {
+      "ts": "2026-07-18T12:29:21.042Z",
+      "type": "card_text_fail",
+      "chunk": 60,
+      "error": "HTTP 503: {\"error\":{\"message\":\"Service temporarily unavailable\",\"type\":\"api_error\",\"param\":\"\",\"code\":null}}"
+    },
+    {
+      "ts": "2026-07-18T12:29:21.042Z",
+      "type": "card_premium_escalate",
+      "chunk": 60,
+      "model": "gpt-5.6-sol",
+      "reason": "mini_zero_cards"
+    },
+    {
+      "ts": "2026-07-18T12:30:55.559Z",
+      "type": "card_premium_ok",
+      "chunk": 60,
+      "cardCount": 7
+    },
+    {
+      "ts": "2026-07-18T12:30:55.560Z",
+      "type": "chunk_done",
+      "chunk": 60,
+      "pages": [
+        237,
+        240
+      ],
+      "cardCount": 7,
+      "method": "premium",
+      "sourceChars": 4868,
+      "sourceCjk": 1579,
+      "imageCount": 0,
+      "hadRequestFailure": true,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T12:30:55.573Z",
+      "type": "chunk_start",
+      "chunk": 61,
+      "pages": [
+        241,
+        244
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-18T12:31:00.882Z",
+      "type": "model_retry",
+      "attempt": 1,
+      "delayMs": 750,
+      "error": "HTTP 503: {\"error\":{\"message\":\"Service temporarily unavailable\",\"type\":\"api_error\",\"param\":\"\",\"code\":null}}"
+    },
+    {
+      "ts": "2026-07-18T12:32:10.672Z",
+      "type": "card_text_ok",
+      "chunk": 61,
+      "cardCount": 7
+    },
+    {
+      "ts": "2026-07-18T12:32:10.672Z",
+      "type": "chunk_done",
+      "chunk": 61,
+      "pages": [
+        241,
+        244
+      ],
+      "cardCount": 7,
+      "method": "text-only",
+      "sourceChars": 3743,
+      "sourceCjk": 1972,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T12:32:10.684Z",
+      "type": "chunk_start",
+      "chunk": 62,
+      "pages": [
+        245,
+        248
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-18T12:32:12.153Z",
+      "type": "model_retry",
+      "attempt": 1,
+      "delayMs": 750,
+      "error": "HTTP 503: {\"error\":{\"message\":\"Service temporarily unavailable\",\"type\":\"api_error\",\"param\":\"\",\"code\":null}}"
+    },
+    {
+      "ts": "2026-07-18T12:32:32.251Z",
+      "type": "model_retry",
+      "attempt": 2,
+      "delayMs": 1500,
+      "error": "read ECONNRESET"
+    },
+    {
+      "ts": "2026-07-18T12:34:02.050Z",
+      "type": "card_text_ok",
+      "chunk": 62,
+      "cardCount": 9
+    },
+    {
+      "ts": "2026-07-18T12:34:02.050Z",
+      "type": "chunk_done",
+      "chunk": 62,
+      "pages": [
+        245,
+        248
+      ],
+      "cardCount": 9,
+      "method": "text-only",
+      "sourceChars": 4504,
+      "sourceCjk": 1923,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T12:34:02.067Z",
+      "type": "chunk_start",
+      "chunk": 63,
+      "pages": [
+        249,
+        252
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-18T12:34:21.365Z",
+      "type": "model_retry",
+      "attempt": 1,
+      "delayMs": 750,
+      "error": "read ECONNRESET"
+    },
+    {
+      "ts": "2026-07-18T12:34:22.764Z",
+      "type": "model_retry",
+      "attempt": 2,
+      "delayMs": 1500,
+      "error": "HTTP 503: {\"error\":{\"message\":\"Service temporarily unavailable\",\"type\":\"api_error\",\"param\":\"\",\"code\":null}}"
+    },
+    {
+      "ts": "2026-07-18T12:34:43.625Z",
+      "type": "card_text_fail",
+      "chunk": 63,
+      "error": "read ECONNRESET"
+    },
+    {
+      "ts": "2026-07-18T12:34:43.625Z",
+      "type": "card_premium_escalate",
+      "chunk": 63,
+      "model": "gpt-5.6-sol",
+      "reason": "mini_zero_cards"
+    },
+    {
+      "ts": "2026-07-18T12:34:44.070Z",
+      "type": "model_retry",
+      "attempt": 1,
+      "delayMs": 750,
+      "error": "HTTP 503: {\"error\":{\"message\":\"Service temporarily unavailable\",\"type\":\"api_error\",\"param\":\"\",\"code\":null}}"
+    },
+    {
+      "ts": "2026-07-18T12:37:03.259Z",
+      "type": "card_premium_ok",
+      "chunk": 63,
+      "cardCount": 12
+    },
+    {
+      "ts": "2026-07-18T12:37:03.259Z",
+      "type": "chunk_done",
+      "chunk": 63,
+      "pages": [
+        249,
+        252
+      ],
+      "cardCount": 12,
+      "method": "premium",
+      "sourceChars": 4273,
+      "sourceCjk": 2092,
+      "imageCount": 0,
+      "hadRequestFailure": true,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T12:37:03.278Z",
+      "type": "chunk_start",
+      "chunk": 64,
+      "pages": [
+        253,
+        256
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-18T12:37:03.643Z",
+      "type": "model_retry",
+      "attempt": 1,
+      "delayMs": 750,
+      "error": "HTTP 503: {\"error\":{\"message\":\"Service temporarily unavailable\",\"type\":\"api_error\",\"param\":\"\",\"code\":null}}"
+    },
+    {
+      "ts": "2026-07-18T12:38:41.358Z",
+      "type": "card_text_ok",
+      "chunk": 64,
+      "cardCount": 9
+    },
+    {
+      "ts": "2026-07-18T12:38:41.358Z",
+      "type": "chunk_done",
+      "chunk": 64,
+      "pages": [
+        253,
+        256
+      ],
+      "cardCount": 9,
+      "method": "text-only",
+      "sourceChars": 4074,
+      "sourceCjk": 2509,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T12:38:41.374Z",
+      "type": "chunk_start",
+      "chunk": 65,
+      "pages": [
+        257,
+        260
+      ],
+      "imageCount": 1
+    },
+    {
+      "ts": "2026-07-18T12:38:42.807Z",
+      "type": "model_retry",
+      "attempt": 1,
+      "delayMs": 750,
+      "error": "HTTP 503: {\"error\":{\"message\":\"Service temporarily unavailable\",\"type\":\"api_error\",\"param\":\"\",\"code\":null}}"
+    },
+    {
+      "ts": "2026-07-18T12:38:44.844Z",
+      "type": "model_retry",
+      "attempt": 2,
+      "delayMs": 1500,
+      "error": "HTTP 503: {\"error\":{\"message\":\"Service temporarily unavailable\",\"type\":\"api_error\",\"param\":\"\",\"code\":null}}"
+    },
+    {
+      "ts": "2026-07-18T12:38:46.701Z",
+      "type": "card_multimodal_fail",
+      "chunk": 65,
+      "error": "HTTP 503: {\"error\":{\"message\":\"Service temporarily unavailable\",\"type\":\"api_error\",\"param\":\"\",\"code\":null}}"
+    },
+    {
+      "ts": "2026-07-18T12:39:51.600Z",
+      "type": "card_text_ok",
+      "chunk": 65,
+      "cardCount": 6
+    },
+    {
+      "ts": "2026-07-18T12:39:51.600Z",
+      "type": "chunk_done",
+      "chunk": 65,
+      "pages": [
+        257,
+        260
+      ],
+      "cardCount": 6,
+      "method": "text-only",
+      "sourceChars": 2732,
+      "sourceCjk": 1378,
+      "imageCount": 1,
+      "hadRequestFailure": true,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T12:39:51.614Z",
+      "type": "chunk_start",
+      "chunk": 66,
+      "pages": [
+        261,
+        264
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-18T12:40:49.272Z",
+      "type": "card_text_ok",
+      "chunk": 66,
+      "cardCount": 5
+    },
+    {
+      "ts": "2026-07-18T12:40:49.272Z",
+      "type": "chunk_done",
+      "chunk": 66,
+      "pages": [
+        261,
+        264
+      ],
+      "cardCount": 5,
+      "method": "text-only",
+      "sourceChars": 3219,
+      "sourceCjk": 1152,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T12:40:49.283Z",
+      "type": "chunk_start",
+      "chunk": 67,
+      "pages": [
+        265,
+        268
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-18T12:42:10.282Z",
+      "type": "card_text_ok",
+      "chunk": 67,
+      "cardCount": 7
+    },
+    {
+      "ts": "2026-07-18T12:42:10.282Z",
+      "type": "chunk_done",
+      "chunk": 67,
+      "pages": [
+        265,
+        268
+      ],
+      "cardCount": 7,
+      "method": "text-only",
+      "sourceChars": 4507,
+      "sourceCjk": 1949,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T12:42:10.294Z",
+      "type": "chunk_start",
+      "chunk": 68,
+      "pages": [
+        269,
+        272
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-18T12:43:43.671Z",
+      "type": "card_text_ok",
+      "chunk": 68,
+      "cardCount": 9
+    },
+    {
+      "ts": "2026-07-18T12:43:43.671Z",
+      "type": "chunk_done",
+      "chunk": 68,
+      "pages": [
+        269,
+        272
+      ],
+      "cardCount": 9,
+      "method": "text-only",
+      "sourceChars": 4724,
+      "sourceCjk": 1692,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T12:43:43.687Z",
+      "type": "chunk_start",
+      "chunk": 69,
+      "pages": [
+        273,
+        276
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-18T12:44:49.617Z",
+      "type": "card_text_ok",
+      "chunk": 69,
+      "cardCount": 6
+    },
+    {
+      "ts": "2026-07-18T12:44:49.617Z",
+      "type": "chunk_done",
+      "chunk": 69,
+      "pages": [
+        273,
+        276
+      ],
+      "cardCount": 6,
+      "method": "text-only",
+      "sourceChars": 4290,
+      "sourceCjk": 2126,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T12:44:49.628Z",
+      "type": "chunk_start",
+      "chunk": 70,
+      "pages": [
+        277,
+        280
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-18T12:46:08.186Z",
+      "type": "card_text_ok",
+      "chunk": 70,
+      "cardCount": 8
+    },
+    {
+      "ts": "2026-07-18T12:46:08.186Z",
+      "type": "chunk_done",
+      "chunk": 70,
+      "pages": [
+        277,
+        280
+      ],
+      "cardCount": 8,
+      "method": "text-only",
+      "sourceChars": 4857,
+      "sourceCjk": 2007,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T12:46:08.199Z",
+      "type": "chunk_start",
+      "chunk": 71,
+      "pages": [
+        281,
+        284
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-18T12:47:22.739Z",
+      "type": "card_text_ok",
+      "chunk": 71,
+      "cardCount": 6
+    },
+    {
+      "ts": "2026-07-18T12:47:22.739Z",
+      "type": "chunk_done",
+      "chunk": 71,
+      "pages": [
+        281,
+        284
+      ],
+      "cardCount": 6,
+      "method": "text-only",
+      "sourceChars": 4552,
+      "sourceCjk": 2147,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T12:47:22.749Z",
+      "type": "chunk_start",
+      "chunk": 72,
+      "pages": [
+        285,
+        288
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-18T12:48:29.868Z",
+      "type": "card_text_ok",
+      "chunk": 72,
+      "cardCount": 6
+    },
+    {
+      "ts": "2026-07-18T12:48:29.868Z",
+      "type": "chunk_done",
+      "chunk": 72,
+      "pages": [
+        285,
+        288
+      ],
+      "cardCount": 6,
+      "method": "text-only",
+      "sourceChars": 4185,
+      "sourceCjk": 1658,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T12:48:29.879Z",
+      "type": "chunk_start",
+      "chunk": 73,
+      "pages": [
+        289,
+        292
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-18T12:49:39.261Z",
+      "type": "card_text_ok",
+      "chunk": 73,
+      "cardCount": 7
+    },
+    {
+      "ts": "2026-07-18T12:49:39.262Z",
+      "type": "chunk_done",
+      "chunk": 73,
+      "pages": [
+        289,
+        292
+      ],
+      "cardCount": 7,
+      "method": "text-only",
+      "sourceChars": 4957,
+      "sourceCjk": 1648,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T12:49:39.274Z",
+      "type": "chunk_start",
+      "chunk": 74,
+      "pages": [
+        293,
+        296
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-18T12:51:06.826Z",
+      "type": "card_text_ok",
+      "chunk": 74,
+      "cardCount": 6
+    },
+    {
+      "ts": "2026-07-18T12:51:06.826Z",
+      "type": "chunk_done",
+      "chunk": 74,
+      "pages": [
+        293,
+        296
+      ],
+      "cardCount": 6,
+      "method": "text-only",
+      "sourceChars": 5761,
+      "sourceCjk": 1901,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T12:51:06.837Z",
+      "type": "chunk_start",
+      "chunk": 75,
+      "pages": [
+        297,
+        300
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-18T12:52:27.315Z",
+      "type": "card_text_ok",
+      "chunk": 75,
+      "cardCount": 7
+    },
+    {
+      "ts": "2026-07-18T12:52:27.315Z",
+      "type": "chunk_done",
+      "chunk": 75,
+      "pages": [
+        297,
+        300
+      ],
+      "cardCount": 7,
+      "method": "text-only",
+      "sourceChars": 5110,
+      "sourceCjk": 2015,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T12:52:27.327Z",
+      "type": "chunk_start",
+      "chunk": 76,
+      "pages": [
+        301,
+        304
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-18T12:53:38.716Z",
+      "type": "card_text_ok",
+      "chunk": 76,
+      "cardCount": 8
+    },
+    {
+      "ts": "2026-07-18T12:53:38.716Z",
+      "type": "chunk_done",
+      "chunk": 76,
+      "pages": [
+        301,
+        304
+      ],
+      "cardCount": 8,
+      "method": "text-only",
+      "sourceChars": 3818,
+      "sourceCjk": 2528,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T12:53:38.729Z",
+      "type": "chunk_start",
+      "chunk": 77,
+      "pages": [
+        305,
+        308
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-18T12:54:45.780Z",
+      "type": "card_text_ok",
+      "chunk": 77,
+      "cardCount": 7
+    },
+    {
+      "ts": "2026-07-18T12:54:45.780Z",
+      "type": "chunk_done",
+      "chunk": 77,
+      "pages": [
+        305,
+        308
+      ],
+      "cardCount": 7,
+      "method": "text-only",
+      "sourceChars": 4487,
+      "sourceCjk": 1957,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T12:54:45.791Z",
+      "type": "chunk_start",
+      "chunk": 78,
+      "pages": [
+        309,
+        312
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-18T12:56:03.498Z",
+      "type": "card_text_ok",
+      "chunk": 78,
+      "cardCount": 7
+    },
+    {
+      "ts": "2026-07-18T12:56:03.500Z",
+      "type": "chunk_done",
+      "chunk": 78,
+      "pages": [
+        309,
+        312
+      ],
+      "cardCount": 7,
+      "method": "text-only",
+      "sourceChars": 4052,
+      "sourceCjk": 2111,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T12:56:03.513Z",
+      "type": "chunk_start",
+      "chunk": 79,
+      "pages": [
+        313,
+        316
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-18T12:56:22.784Z",
+      "type": "model_retry",
+      "attempt": 1,
+      "delayMs": 750,
+      "error": "read ECONNRESET"
+    },
+    {
+      "ts": "2026-07-18T12:56:42.805Z",
+      "type": "model_retry",
+      "attempt": 2,
+      "delayMs": 1500,
+      "error": "read ECONNRESET"
+    },
+    {
+      "ts": "2026-07-18T12:57:44.822Z",
+      "type": "card_text_ok",
+      "chunk": 79,
+      "cardCount": 6
+    },
+    {
+      "ts": "2026-07-18T12:57:44.822Z",
+      "type": "chunk_done",
+      "chunk": 79,
+      "pages": [
+        313,
+        316
+      ],
+      "cardCount": 6,
+      "method": "text-only",
+      "sourceChars": 4737,
+      "sourceCjk": 1701,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T12:57:44.835Z",
+      "type": "chunk_start",
+      "chunk": 80,
+      "pages": [
+        317,
+        320
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-18T12:59:04.422Z",
+      "type": "card_text_ok",
+      "chunk": 80,
+      "cardCount": 9
+    },
+    {
+      "ts": "2026-07-18T12:59:04.422Z",
+      "type": "chunk_done",
+      "chunk": 80,
+      "pages": [
+        317,
+        320
+      ],
+      "cardCount": 9,
+      "method": "text-only",
+      "sourceChars": 3701,
+      "sourceCjk": 1554,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T12:59:04.437Z",
+      "type": "chunk_start",
+      "chunk": 81,
+      "pages": [
+        321,
+        324
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-18T13:00:09.878Z",
+      "type": "card_text_ok",
+      "chunk": 81,
+      "cardCount": 6
+    },
+    {
+      "ts": "2026-07-18T13:00:09.879Z",
+      "type": "chunk_done",
+      "chunk": 81,
+      "pages": [
+        321,
+        324
+      ],
+      "cardCount": 6,
+      "method": "text-only",
+      "sourceChars": 5284,
+      "sourceCjk": 2370,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T13:00:09.890Z",
+      "type": "chunk_start",
+      "chunk": 82,
+      "pages": [
+        325,
+        328
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-18T13:01:29.710Z",
+      "type": "card_text_ok",
+      "chunk": 82,
+      "cardCount": 7
+    },
+    {
+      "ts": "2026-07-18T13:01:29.710Z",
+      "type": "chunk_done",
+      "chunk": 82,
+      "pages": [
+        325,
+        328
+      ],
+      "cardCount": 7,
+      "method": "text-only",
+      "sourceChars": 4993,
+      "sourceCjk": 2015,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T13:01:29.722Z",
+      "type": "chunk_start",
+      "chunk": 83,
+      "pages": [
+        329,
+        332
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-18T13:02:54.004Z",
+      "type": "card_text_ok",
+      "chunk": 83,
+      "cardCount": 8
+    },
+    {
+      "ts": "2026-07-18T13:02:54.004Z",
+      "type": "chunk_done",
+      "chunk": 83,
+      "pages": [
+        329,
+        332
+      ],
+      "cardCount": 8,
+      "method": "text-only",
+      "sourceChars": 4336,
+      "sourceCjk": 2011,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T13:02:54.019Z",
+      "type": "chunk_start",
+      "chunk": 84,
+      "pages": [
+        333,
+        336
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-18T13:04:04.785Z",
+      "type": "card_text_ok",
+      "chunk": 84,
+      "cardCount": 6
+    },
+    {
+      "ts": "2026-07-18T13:04:04.785Z",
+      "type": "chunk_done",
+      "chunk": 84,
+      "pages": [
+        333,
+        336
+      ],
+      "cardCount": 6,
+      "method": "text-only",
+      "sourceChars": 3789,
+      "sourceCjk": 1234,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T13:04:04.819Z",
+      "type": "chunk_start",
+      "chunk": 85,
+      "pages": [
+        337,
+        340
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-18T13:05:04.591Z",
+      "type": "card_text_ok",
+      "chunk": 85,
+      "cardCount": 4
+    },
+    {
+      "ts": "2026-07-18T13:05:04.591Z",
+      "type": "chunk_done",
+      "chunk": 85,
+      "pages": [
+        337,
+        340
+      ],
+      "cardCount": 4,
+      "method": "text-only",
+      "sourceChars": 3612,
+      "sourceCjk": 1716,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T13:05:04.601Z",
+      "type": "chunk_start",
+      "chunk": 86,
+      "pages": [
+        341,
+        344
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-18T13:06:24.158Z",
+      "type": "card_text_ok",
+      "chunk": 86,
+      "cardCount": 8
+    },
+    {
+      "ts": "2026-07-18T13:06:24.158Z",
+      "type": "chunk_done",
+      "chunk": 86,
+      "pages": [
+        341,
+        344
+      ],
+      "cardCount": 8,
+      "method": "text-only",
+      "sourceChars": 3646,
+      "sourceCjk": 1834,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T13:06:24.176Z",
+      "type": "chunk_start",
+      "chunk": 87,
+      "pages": [
+        345,
+        348
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-18T13:07:43.442Z",
+      "type": "card_text_ok",
+      "chunk": 87,
+      "cardCount": 7
+    },
+    {
+      "ts": "2026-07-18T13:07:43.469Z",
+      "type": "chunk_done",
+      "chunk": 87,
+      "pages": [
+        345,
+        348
+      ],
+      "cardCount": 7,
+      "method": "text-only",
+      "sourceChars": 4310,
+      "sourceCjk": 1805,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T13:07:43.501Z",
+      "type": "chunk_start",
+      "chunk": 88,
+      "pages": [
+        349,
+        352
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-18T13:08:43.988Z",
+      "type": "card_text_ok",
+      "chunk": 88,
+      "cardCount": 5
+    },
+    {
+      "ts": "2026-07-18T13:08:43.996Z",
+      "type": "chunk_done",
+      "chunk": 88,
+      "pages": [
+        349,
+        352
+      ],
+      "cardCount": 5,
+      "method": "text-only",
+      "sourceChars": 3411,
+      "sourceCjk": 1948,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T13:08:44.052Z",
+      "type": "chunk_start",
+      "chunk": 89,
+      "pages": [
+        353,
+        356
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-18T13:10:20.641Z",
+      "type": "card_text_ok",
+      "chunk": 89,
+      "cardCount": 11
+    },
+    {
+      "ts": "2026-07-18T13:10:20.642Z",
+      "type": "chunk_done",
+      "chunk": 89,
+      "pages": [
+        353,
+        356
+      ],
+      "cardCount": 11,
+      "method": "text-only",
+      "sourceChars": 4324,
+      "sourceCjk": 2421,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T18:07:32.013Z",
+      "type": "chunk_start",
+      "chunk": 90,
+      "pages": [
+        357,
+        360
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-18T18:08:57.141Z",
+      "type": "card_text_ok",
+      "chunk": 90,
+      "cardCount": 8
+    },
+    {
+      "ts": "2026-07-18T18:08:57.141Z",
+      "type": "chunk_done",
+      "chunk": 90,
+      "pages": [
+        357,
+        360
+      ],
+      "cardCount": 8,
+      "method": "text-only",
+      "sourceChars": 5116,
+      "sourceCjk": 1963,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T18:08:57.156Z",
+      "type": "chunk_start",
+      "chunk": 91,
+      "pages": [
+        361,
+        364
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-18T18:10:25.955Z",
+      "type": "card_text_ok",
+      "chunk": 91,
+      "cardCount": 11
+    },
+    {
+      "ts": "2026-07-18T18:10:25.955Z",
+      "type": "chunk_done",
+      "chunk": 91,
+      "pages": [
+        361,
+        364
+      ],
+      "cardCount": 11,
+      "method": "text-only",
+      "sourceChars": 3989,
+      "sourceCjk": 2487,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T18:10:25.973Z",
+      "type": "chunk_start",
+      "chunk": 92,
+      "pages": [
+        365,
+        368
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-18T18:12:08.074Z",
+      "type": "card_text_ok",
+      "chunk": 92,
+      "cardCount": 10
+    },
+    {
+      "ts": "2026-07-18T18:12:08.075Z",
+      "type": "chunk_done",
+      "chunk": 92,
+      "pages": [
+        365,
+        368
+      ],
+      "cardCount": 10,
+      "method": "text-only",
+      "sourceChars": 3789,
+      "sourceCjk": 2259,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T18:12:08.091Z",
+      "type": "chunk_start",
+      "chunk": 93,
+      "pages": [
+        369,
+        372
+      ],
+      "imageCount": 1
+    },
+    {
+      "ts": "2026-07-18T18:13:34.904Z",
+      "type": "card_multimodal_ok",
+      "chunk": 93,
+      "cardCount": 9
+    },
+    {
+      "ts": "2026-07-18T18:13:34.904Z",
+      "type": "chunk_done",
+      "chunk": 93,
+      "pages": [
+        369,
+        372
+      ],
+      "cardCount": 9,
+      "method": "multimodal",
+      "sourceChars": 2005,
+      "sourceCjk": 1284,
+      "imageCount": 1,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T18:13:34.919Z",
+      "type": "chunk_start",
+      "chunk": 94,
+      "pages": [
+        373,
+        376
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-18T18:14:42.533Z",
+      "type": "card_text_ok",
+      "chunk": 94,
+      "cardCount": 6
+    },
+    {
+      "ts": "2026-07-18T18:14:42.534Z",
+      "type": "chunk_done",
+      "chunk": 94,
+      "pages": [
+        373,
+        376
+      ],
+      "cardCount": 6,
+      "method": "text-only",
+      "sourceChars": 5112,
+      "sourceCjk": 1436,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T18:14:42.544Z",
+      "type": "chunk_start",
+      "chunk": 95,
+      "pages": [
+        377,
+        380
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-18T18:16:15.671Z",
+      "type": "card_text_ok",
+      "chunk": 95,
+      "cardCount": 10
+    },
+    {
+      "ts": "2026-07-18T18:16:15.671Z",
+      "type": "chunk_done",
+      "chunk": 95,
+      "pages": [
+        377,
+        380
+      ],
+      "cardCount": 10,
+      "method": "text-only",
+      "sourceChars": 4975,
+      "sourceCjk": 1842,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T18:20:27.893Z",
+      "type": "chunk_start",
+      "chunk": 96,
+      "pages": [
+        381,
+        384
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-18T18:20:27.912Z",
+      "type": "chunk_start",
+      "chunk": 97,
+      "pages": [
+        385,
+        388
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-18T18:21:52.501Z",
+      "type": "card_text_ok",
+      "chunk": 96,
+      "cardCount": 8
+    },
+    {
+      "ts": "2026-07-18T18:21:52.502Z",
+      "type": "chunk_done",
+      "chunk": 96,
+      "pages": [
+        381,
+        384
+      ],
+      "cardCount": 8,
+      "method": "text-only",
+      "sourceChars": 4528,
+      "sourceCjk": 2080,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T18:22:03.874Z",
+      "type": "card_text_ok",
+      "chunk": 97,
+      "cardCount": 9
+    },
+    {
+      "ts": "2026-07-18T18:22:03.874Z",
+      "type": "chunk_done",
+      "chunk": 97,
+      "pages": [
+        385,
+        388
+      ],
+      "cardCount": 9,
+      "method": "text-only",
+      "sourceChars": 4532,
+      "sourceCjk": 1852,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T18:22:03.902Z",
+      "type": "chunk_start",
+      "chunk": 98,
+      "pages": [
+        389,
+        392
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-18T18:22:03.903Z",
+      "type": "chunk_start",
+      "chunk": 99,
+      "pages": [
+        393,
+        396
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-18T18:23:06.507Z",
+      "type": "card_text_ok",
+      "chunk": 98,
+      "cardCount": 5
+    },
+    {
+      "ts": "2026-07-18T18:23:06.507Z",
+      "type": "chunk_done",
+      "chunk": 98,
+      "pages": [
+        389,
+        392
+      ],
+      "cardCount": 5,
+      "method": "text-only",
+      "sourceChars": 5351,
+      "sourceCjk": 1308,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T18:23:40.415Z",
+      "type": "card_text_ok",
+      "chunk": 99,
+      "cardCount": 10
+    },
+    {
+      "ts": "2026-07-18T18:23:40.416Z",
+      "type": "chunk_done",
+      "chunk": 99,
+      "pages": [
+        393,
+        396
+      ],
+      "cardCount": 10,
+      "method": "text-only",
+      "sourceChars": 5012,
+      "sourceCjk": 1429,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T18:23:40.439Z",
+      "type": "chunk_start",
+      "chunk": 100,
+      "pages": [
+        397,
+        400
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-18T18:23:40.439Z",
+      "type": "chunk_start",
+      "chunk": 101,
+      "pages": [
+        401,
+        404
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-18T18:24:57.662Z",
+      "type": "card_text_ok",
+      "chunk": 100,
+      "cardCount": 8
+    },
+    {
+      "ts": "2026-07-18T18:24:57.662Z",
+      "type": "chunk_done",
+      "chunk": 100,
+      "pages": [
+        397,
+        400
+      ],
+      "cardCount": 8,
+      "method": "text-only",
+      "sourceChars": 4811,
+      "sourceCjk": 2148,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T18:25:08.910Z",
+      "type": "card_text_ok",
+      "chunk": 101,
+      "cardCount": 10
+    },
+    {
+      "ts": "2026-07-18T18:25:08.911Z",
+      "type": "chunk_done",
+      "chunk": 101,
+      "pages": [
+        401,
+        404
+      ],
+      "cardCount": 10,
+      "method": "text-only",
+      "sourceChars": 4807,
+      "sourceCjk": 1802,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T18:25:08.943Z",
+      "type": "chunk_start",
+      "chunk": 102,
+      "pages": [
+        405,
+        408
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-18T18:25:08.944Z",
+      "type": "chunk_start",
+      "chunk": 103,
+      "pages": [
+        409,
+        412
+      ],
+      "imageCount": 1
+    },
+    {
+      "ts": "2026-07-18T18:26:11.484Z",
+      "type": "card_multimodal_ok",
+      "chunk": 103,
+      "cardCount": 7
+    },
+    {
+      "ts": "2026-07-18T18:26:11.484Z",
+      "type": "chunk_done",
+      "chunk": 103,
+      "pages": [
+        409,
+        412
+      ],
+      "cardCount": 7,
+      "method": "multimodal",
+      "sourceChars": 3041,
+      "sourceCjk": 2266,
+      "imageCount": 1,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T18:26:24.729Z",
+      "type": "card_text_ok",
+      "chunk": 102,
+      "cardCount": 7
+    },
+    {
+      "ts": "2026-07-18T18:26:24.729Z",
+      "type": "chunk_done",
+      "chunk": 102,
+      "pages": [
+        405,
+        408
+      ],
+      "cardCount": 7,
+      "method": "text-only",
+      "sourceChars": 4287,
+      "sourceCjk": 1859,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T18:26:24.750Z",
+      "type": "chunk_start",
+      "chunk": 104,
+      "pages": [
+        413,
+        416
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-18T18:26:24.751Z",
+      "type": "chunk_start",
+      "chunk": 105,
+      "pages": [
+        417,
+        420
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-18T18:27:42.127Z",
+      "type": "card_text_ok",
+      "chunk": 104,
+      "cardCount": 7
+    },
+    {
+      "ts": "2026-07-18T18:27:42.127Z",
+      "type": "chunk_done",
+      "chunk": 104,
+      "pages": [
+        413,
+        416
+      ],
+      "cardCount": 7,
+      "method": "text-only",
+      "sourceChars": 4991,
+      "sourceCjk": 1836,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T18:27:49.700Z",
+      "type": "card_text_ok",
+      "chunk": 105,
+      "cardCount": 9
+    },
+    {
+      "ts": "2026-07-18T18:27:49.701Z",
+      "type": "chunk_done",
+      "chunk": 105,
+      "pages": [
+        417,
+        420
+      ],
+      "cardCount": 9,
+      "method": "text-only",
+      "sourceChars": 4349,
+      "sourceCjk": 1775,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T18:27:49.725Z",
+      "type": "chunk_start",
+      "chunk": 106,
+      "pages": [
+        421,
+        424
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-18T18:27:49.726Z",
+      "type": "chunk_start",
+      "chunk": 107,
+      "pages": [
+        425,
+        428
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-18T18:29:00.194Z",
+      "type": "card_text_ok",
+      "chunk": 107,
+      "cardCount": 6
+    },
+    {
+      "ts": "2026-07-18T18:29:00.194Z",
+      "type": "chunk_done",
+      "chunk": 107,
+      "pages": [
+        425,
+        428
+      ],
+      "cardCount": 6,
+      "method": "text-only",
+      "sourceChars": 4277,
+      "sourceCjk": 1845,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T18:29:21.065Z",
+      "type": "card_text_ok",
+      "chunk": 106,
+      "cardCount": 9
+    },
+    {
+      "ts": "2026-07-18T18:29:21.065Z",
+      "type": "chunk_done",
+      "chunk": 106,
+      "pages": [
+        421,
+        424
+      ],
+      "cardCount": 9,
+      "method": "text-only",
+      "sourceChars": 4500,
+      "sourceCjk": 1650,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T18:29:21.100Z",
+      "type": "chunk_start",
+      "chunk": 108,
+      "pages": [
+        429,
+        432
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-18T18:29:21.102Z",
+      "type": "chunk_start",
+      "chunk": 109,
+      "pages": [
+        433,
+        436
+      ],
+      "imageCount": 1
+    },
+    {
+      "ts": "2026-07-18T18:30:27.779Z",
+      "type": "card_multimodal_ok",
+      "chunk": 109,
+      "cardCount": 7
+    },
+    {
+      "ts": "2026-07-18T18:30:27.779Z",
+      "type": "chunk_done",
+      "chunk": 109,
+      "pages": [
+        433,
+        436
+      ],
+      "cardCount": 7,
+      "method": "multimodal",
+      "sourceChars": 2855,
+      "sourceCjk": 1500,
+      "imageCount": 1,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T18:30:53.063Z",
+      "type": "card_text_ok",
+      "chunk": 108,
+      "cardCount": 10
+    },
+    {
+      "ts": "2026-07-18T18:30:53.063Z",
+      "type": "chunk_done",
+      "chunk": 108,
+      "pages": [
+        429,
+        432
+      ],
+      "cardCount": 10,
+      "method": "text-only",
+      "sourceChars": 4369,
+      "sourceCjk": 1665,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T18:30:53.089Z",
+      "type": "chunk_start",
+      "chunk": 110,
+      "pages": [
+        437,
+        440
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-18T18:30:53.090Z",
+      "type": "chunk_start",
+      "chunk": 111,
+      "pages": [
+        441,
+        444
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-18T18:32:03.681Z",
+      "type": "card_text_ok",
+      "chunk": 111,
+      "cardCount": 9
+    },
+    {
+      "ts": "2026-07-18T18:32:03.681Z",
+      "type": "chunk_done",
+      "chunk": 111,
+      "pages": [
+        441,
+        444
+      ],
+      "cardCount": 9,
+      "method": "text-only",
+      "sourceChars": 4319,
+      "sourceCjk": 1124,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T18:32:15.194Z",
+      "type": "card_text_ok",
+      "chunk": 110,
+      "cardCount": 10
+    },
+    {
+      "ts": "2026-07-18T18:32:15.194Z",
+      "type": "chunk_done",
+      "chunk": 110,
+      "pages": [
+        437,
+        440
+      ],
+      "cardCount": 10,
+      "method": "text-only",
+      "sourceChars": 4458,
+      "sourceCjk": 2613,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T18:32:15.223Z",
+      "type": "chunk_start",
+      "chunk": 112,
+      "pages": [
+        445,
+        448
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-18T18:32:15.223Z",
+      "type": "chunk_start",
+      "chunk": 113,
+      "pages": [
+        449,
+        452
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-18T18:33:29.558Z",
+      "type": "card_text_ok",
+      "chunk": 113,
+      "cardCount": 6
+    },
+    {
+      "ts": "2026-07-18T18:33:29.559Z",
+      "type": "chunk_done",
+      "chunk": 113,
+      "pages": [
+        449,
+        452
+      ],
+      "cardCount": 6,
+      "method": "text-only",
+      "sourceChars": 4573,
+      "sourceCjk": 1514,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T18:33:37.508Z",
+      "type": "card_text_ok",
+      "chunk": 112,
+      "cardCount": 9
+    },
+    {
+      "ts": "2026-07-18T18:33:37.508Z",
+      "type": "chunk_done",
+      "chunk": 112,
+      "pages": [
+        445,
+        448
+      ],
+      "cardCount": 9,
+      "method": "text-only",
+      "sourceChars": 4432,
+      "sourceCjk": 1435,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T18:33:37.533Z",
+      "type": "chunk_start",
+      "chunk": 114,
+      "pages": [
+        453,
+        456
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-18T18:33:37.534Z",
+      "type": "chunk_start",
+      "chunk": 115,
+      "pages": [
+        457,
+        460
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-18T18:34:40.243Z",
+      "type": "card_text_ok",
+      "chunk": 114,
+      "cardCount": 5
+    },
+    {
+      "ts": "2026-07-18T18:34:40.243Z",
+      "type": "chunk_done",
+      "chunk": 114,
+      "pages": [
+        453,
+        456
+      ],
+      "cardCount": 5,
+      "method": "text-only",
+      "sourceChars": 4485,
+      "sourceCjk": 1042,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T18:34:52.702Z",
+      "type": "card_text_ok",
+      "chunk": 115,
+      "cardCount": 8
+    },
+    {
+      "ts": "2026-07-18T18:34:52.702Z",
+      "type": "chunk_done",
+      "chunk": 115,
+      "pages": [
+        457,
+        460
+      ],
+      "cardCount": 8,
+      "method": "text-only",
+      "sourceChars": 4296,
+      "sourceCjk": 2062,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T18:34:52.723Z",
+      "type": "chunk_start",
+      "chunk": 116,
+      "pages": [
+        461,
+        464
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-18T18:34:52.724Z",
+      "type": "chunk_start",
+      "chunk": 117,
+      "pages": [
+        465,
+        468
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-18T18:35:58.496Z",
+      "type": "card_text_ok",
+      "chunk": 117,
+      "cardCount": 5
+    },
+    {
+      "ts": "2026-07-18T18:35:58.496Z",
+      "type": "chunk_done",
+      "chunk": 117,
+      "pages": [
+        465,
+        468
+      ],
+      "cardCount": 5,
+      "method": "text-only",
+      "sourceChars": 4205,
+      "sourceCjk": 1834,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T18:36:00.533Z",
+      "type": "card_text_ok",
+      "chunk": 116,
+      "cardCount": 5
+    },
+    {
+      "ts": "2026-07-18T18:36:00.533Z",
+      "type": "chunk_done",
+      "chunk": 116,
+      "pages": [
+        461,
+        464
+      ],
+      "cardCount": 5,
+      "method": "text-only",
+      "sourceChars": 4496,
+      "sourceCjk": 1721,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T18:36:00.551Z",
+      "type": "chunk_start",
+      "chunk": 118,
+      "pages": [
+        469,
+        472
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-18T18:36:00.552Z",
+      "type": "chunk_start",
+      "chunk": 119,
+      "pages": [
+        473,
+        476
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-18T18:37:38.564Z",
+      "type": "card_text_ok",
+      "chunk": 118,
+      "cardCount": 8
+    },
+    {
+      "ts": "2026-07-18T18:37:38.565Z",
+      "type": "chunk_done",
+      "chunk": 118,
+      "pages": [
+        469,
+        472
+      ],
+      "cardCount": 8,
+      "method": "text-only",
+      "sourceChars": 5070,
+      "sourceCjk": 3456,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T18:37:42.740Z",
+      "type": "card_text_ok",
+      "chunk": 119,
+      "cardCount": 7
+    },
+    {
+      "ts": "2026-07-18T18:37:42.741Z",
+      "type": "chunk_done",
+      "chunk": 119,
+      "pages": [
+        473,
+        476
+      ],
+      "cardCount": 7,
+      "method": "text-only",
+      "sourceChars": 4255,
+      "sourceCjk": 1843,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T18:37:42.765Z",
+      "type": "chunk_start",
+      "chunk": 120,
+      "pages": [
+        477,
+        480
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-18T18:37:42.766Z",
+      "type": "chunk_start",
+      "chunk": 121,
+      "pages": [
+        481,
+        484
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-18T18:39:10.995Z",
+      "type": "card_text_ok",
+      "chunk": 121,
+      "cardCount": 9
+    },
+    {
+      "ts": "2026-07-18T18:39:10.995Z",
+      "type": "chunk_done",
+      "chunk": 121,
+      "pages": [
+        481,
+        484
+      ],
+      "cardCount": 9,
+      "method": "text-only",
+      "sourceChars": 4320,
+      "sourceCjk": 1869,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T18:39:17.723Z",
+      "type": "card_text_ok",
+      "chunk": 120,
+      "cardCount": 6
+    },
+    {
+      "ts": "2026-07-18T18:39:17.723Z",
+      "type": "chunk_done",
+      "chunk": 120,
+      "pages": [
+        477,
+        480
+      ],
+      "cardCount": 6,
+      "method": "text-only",
+      "sourceChars": 4743,
+      "sourceCjk": 1350,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T18:39:17.750Z",
+      "type": "chunk_start",
+      "chunk": 122,
+      "pages": [
+        485,
+        488
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-18T18:39:17.750Z",
+      "type": "chunk_start",
+      "chunk": 123,
+      "pages": [
+        489,
+        492
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-18T18:40:36.361Z",
+      "type": "card_text_ok",
+      "chunk": 122,
+      "cardCount": 8
+    },
+    {
+      "ts": "2026-07-18T18:40:36.361Z",
+      "type": "chunk_done",
+      "chunk": 122,
+      "pages": [
+        485,
+        488
+      ],
+      "cardCount": 8,
+      "method": "text-only",
+      "sourceChars": 4460,
+      "sourceCjk": 2079,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T18:41:00.715Z",
+      "type": "card_text_ok",
+      "chunk": 123,
+      "cardCount": 10
+    },
+    {
+      "ts": "2026-07-18T18:41:00.715Z",
+      "type": "chunk_done",
+      "chunk": 123,
+      "pages": [
+        489,
+        492
+      ],
+      "cardCount": 10,
+      "method": "text-only",
+      "sourceChars": 5228,
+      "sourceCjk": 1654,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T18:41:00.744Z",
+      "type": "chunk_start",
+      "chunk": 124,
+      "pages": [
+        493,
+        496
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-18T18:41:00.744Z",
+      "type": "chunk_start",
+      "chunk": 125,
+      "pages": [
+        497,
+        500
+      ],
+      "imageCount": 1
+    },
+    {
+      "ts": "2026-07-18T18:42:23.263Z",
+      "type": "card_text_ok",
+      "chunk": 124,
+      "cardCount": 7
+    },
+    {
+      "ts": "2026-07-18T18:42:23.263Z",
+      "type": "chunk_done",
+      "chunk": 124,
+      "pages": [
+        493,
+        496
+      ],
+      "cardCount": 7,
+      "method": "text-only",
+      "sourceChars": 4159,
+      "sourceCjk": 1454,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T18:42:26.737Z",
+      "type": "card_multimodal_ok",
+      "chunk": 125,
+      "cardCount": 9
+    },
+    {
+      "ts": "2026-07-18T18:42:26.737Z",
+      "type": "chunk_done",
+      "chunk": 125,
+      "pages": [
+        497,
+        500
+      ],
+      "cardCount": 9,
+      "method": "multimodal",
+      "sourceChars": 2335,
+      "sourceCjk": 1298,
+      "imageCount": 1,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T18:42:26.764Z",
+      "type": "chunk_start",
+      "chunk": 126,
+      "pages": [
+        501,
+        504
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-18T18:42:26.765Z",
+      "type": "chunk_start",
+      "chunk": 127,
+      "pages": [
+        505,
+        508
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-18T18:44:21.104Z",
+      "type": "card_text_ok",
+      "chunk": 126,
+      "cardCount": 15
+    },
+    {
+      "ts": "2026-07-18T18:44:21.104Z",
+      "type": "chunk_done",
+      "chunk": 126,
+      "pages": [
+        501,
+        504
+      ],
+      "cardCount": 15,
+      "method": "text-only",
+      "sourceChars": 5031,
+      "sourceCjk": 2950,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T18:44:39.413Z",
+      "type": "card_text_ok",
+      "chunk": 127,
+      "cardCount": 18
+    },
+    {
+      "ts": "2026-07-18T18:44:39.413Z",
+      "type": "chunk_done",
+      "chunk": 127,
+      "pages": [
+        505,
+        508
+      ],
+      "cardCount": 18,
+      "method": "text-only",
+      "sourceChars": 4775,
+      "sourceCjk": 2916,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T18:44:39.464Z",
+      "type": "chunk_start",
+      "chunk": 128,
+      "pages": [
+        509,
+        512
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-18T18:44:39.465Z",
+      "type": "chunk_start",
+      "chunk": 129,
+      "pages": [
+        513,
+        516
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-18T18:46:13.527Z",
+      "type": "card_text_ok",
+      "chunk": 129,
+      "cardCount": 11
+    },
+    {
+      "ts": "2026-07-18T18:46:13.527Z",
+      "type": "chunk_done",
+      "chunk": 129,
+      "pages": [
+        513,
+        516
+      ],
+      "cardCount": 11,
+      "method": "text-only",
+      "sourceChars": 4211,
+      "sourceCjk": 2784,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T18:46:29.363Z",
+      "type": "card_text_ok",
+      "chunk": 128,
+      "cardCount": 12
+    },
+    {
+      "ts": "2026-07-18T18:46:29.363Z",
+      "type": "chunk_done",
+      "chunk": 128,
+      "pages": [
+        509,
+        512
+      ],
+      "cardCount": 12,
+      "method": "text-only",
+      "sourceChars": 5301,
+      "sourceCjk": 3284,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T18:46:29.398Z",
+      "type": "chunk_start",
+      "chunk": 130,
+      "pages": [
+        517,
+        520
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-18T18:46:29.399Z",
+      "type": "chunk_start",
+      "chunk": 131,
+      "pages": [
+        521,
+        524
+      ],
+      "imageCount": 2
+    },
+    {
+      "ts": "2026-07-18T18:47:06.129Z",
+      "type": "card_multimodal_ok",
+      "chunk": 131,
+      "cardCount": 4
+    },
+    {
+      "ts": "2026-07-18T18:47:06.129Z",
+      "type": "chunk_done",
+      "chunk": 131,
+      "pages": [
+        521,
+        524
+      ],
+      "cardCount": 4,
+      "method": "multimodal",
+      "sourceChars": 1249,
+      "sourceCjk": 800,
+      "imageCount": 2,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T18:48:11.305Z",
+      "type": "card_text_ok",
+      "chunk": 130,
+      "cardCount": 10
+    },
+    {
+      "ts": "2026-07-18T18:48:11.306Z",
+      "type": "chunk_done",
+      "chunk": 130,
+      "pages": [
+        517,
+        520
+      ],
+      "cardCount": 10,
+      "method": "text-only",
+      "sourceChars": 3693,
+      "sourceCjk": 2423,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T18:48:11.328Z",
+      "type": "chunk_start",
+      "chunk": 132,
+      "pages": [
+        525,
+        528
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-18T18:48:11.328Z",
+      "type": "chunk_start",
+      "chunk": 133,
+      "pages": [
+        529,
+        532
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-18T18:49:27.080Z",
+      "type": "card_text_ok",
+      "chunk": 132,
+      "cardCount": 6
+    },
+    {
+      "ts": "2026-07-18T18:49:27.080Z",
+      "type": "chunk_done",
+      "chunk": 132,
+      "pages": [
+        525,
+        528
+      ],
+      "cardCount": 6,
+      "method": "text-only",
+      "sourceChars": 3747,
+      "sourceCjk": 2025,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T18:49:42.698Z",
+      "type": "card_text_ok",
+      "chunk": 133,
+      "cardCount": 10
+    },
+    {
+      "ts": "2026-07-18T18:49:42.698Z",
+      "type": "chunk_done",
+      "chunk": 133,
+      "pages": [
+        529,
+        532
+      ],
+      "cardCount": 10,
+      "method": "text-only",
+      "sourceChars": 4838,
+      "sourceCjk": 2016,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T18:49:42.726Z",
+      "type": "chunk_start",
+      "chunk": 134,
+      "pages": [
+        533,
+        536
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-18T18:49:42.727Z",
+      "type": "chunk_start",
+      "chunk": 135,
+      "pages": [
+        537,
+        540
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-18T18:51:03.613Z",
+      "type": "card_text_ok",
+      "chunk": 134,
+      "cardCount": 8
+    },
+    {
+      "ts": "2026-07-18T18:51:03.613Z",
+      "type": "chunk_done",
+      "chunk": 134,
+      "pages": [
+        533,
+        536
+      ],
+      "cardCount": 8,
+      "method": "text-only",
+      "sourceChars": 6035,
+      "sourceCjk": 1957,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T18:51:06.296Z",
+      "type": "card_text_ok",
+      "chunk": 135,
+      "cardCount": 9
+    },
+    {
+      "ts": "2026-07-18T18:51:06.296Z",
+      "type": "chunk_done",
+      "chunk": 135,
+      "pages": [
+        537,
+        540
+      ],
+      "cardCount": 9,
+      "method": "text-only",
+      "sourceChars": 5103,
+      "sourceCjk": 2822,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T18:51:06.324Z",
+      "type": "chunk_start",
+      "chunk": 136,
+      "pages": [
+        541,
+        544
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-18T18:51:06.325Z",
+      "type": "chunk_start",
+      "chunk": 137,
+      "pages": [
+        545,
+        548
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-18T18:52:21.647Z",
+      "type": "card_text_ok",
+      "chunk": 136,
+      "cardCount": 7
+    },
+    {
+      "ts": "2026-07-18T18:52:21.648Z",
+      "type": "chunk_done",
+      "chunk": 136,
+      "pages": [
+        541,
+        544
+      ],
+      "cardCount": 7,
+      "method": "text-only",
+      "sourceChars": 4858,
+      "sourceCjk": 1497,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T18:53:05.021Z",
+      "type": "card_text_ok",
+      "chunk": 137,
+      "cardCount": 12
+    },
+    {
+      "ts": "2026-07-18T18:53:05.021Z",
+      "type": "chunk_done",
+      "chunk": 137,
+      "pages": [
+        545,
+        548
+      ],
+      "cardCount": 12,
+      "method": "text-only",
+      "sourceChars": 3481,
+      "sourceCjk": 2204,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T18:53:05.051Z",
+      "type": "chunk_start",
+      "chunk": 138,
+      "pages": [
+        549,
+        552
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-18T18:53:05.052Z",
+      "type": "chunk_start",
+      "chunk": 139,
+      "pages": [
+        553,
+        556
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-18T18:54:37.598Z",
+      "type": "card_text_ok",
+      "chunk": 138,
+      "cardCount": 10
+    },
+    {
+      "ts": "2026-07-18T18:54:37.598Z",
+      "type": "chunk_done",
+      "chunk": 138,
+      "pages": [
+        549,
+        552
+      ],
+      "cardCount": 10,
+      "method": "text-only",
+      "sourceChars": 4735,
+      "sourceCjk": 1917,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T18:54:39.552Z",
+      "type": "card_text_ok",
+      "chunk": 139,
+      "cardCount": 11
+    },
+    {
+      "ts": "2026-07-18T18:54:39.552Z",
+      "type": "chunk_done",
+      "chunk": 139,
+      "pages": [
+        553,
+        556
+      ],
+      "cardCount": 11,
+      "method": "text-only",
+      "sourceChars": 4126,
+      "sourceCjk": 1754,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T18:54:39.587Z",
+      "type": "chunk_start",
+      "chunk": 140,
+      "pages": [
+        557,
+        560
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-18T18:54:39.588Z",
+      "type": "chunk_start",
+      "chunk": 141,
+      "pages": [
+        561,
+        564
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-18T18:55:46.270Z",
+      "type": "card_text_ok",
+      "chunk": 141,
+      "cardCount": 7
+    },
+    {
+      "ts": "2026-07-18T18:55:46.270Z",
+      "type": "chunk_done",
+      "chunk": 141,
+      "pages": [
+        561,
+        564
+      ],
+      "cardCount": 7,
+      "method": "text-only",
+      "sourceChars": 6013,
+      "sourceCjk": 1810,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T18:56:13.682Z",
+      "type": "card_text_ok",
+      "chunk": 140,
+      "cardCount": 9
+    },
+    {
+      "ts": "2026-07-18T18:56:13.683Z",
+      "type": "chunk_done",
+      "chunk": 140,
+      "pages": [
+        557,
+        560
+      ],
+      "cardCount": 9,
+      "method": "text-only",
+      "sourceChars": 5100,
+      "sourceCjk": 2325,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T18:56:13.708Z",
+      "type": "chunk_start",
+      "chunk": 142,
+      "pages": [
+        565,
+        568
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-18T18:56:13.709Z",
+      "type": "chunk_start",
+      "chunk": 143,
+      "pages": [
+        569,
+        572
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-18T18:57:36.291Z",
+      "type": "card_text_ok",
+      "chunk": 143,
+      "cardCount": 7
+    },
+    {
+      "ts": "2026-07-18T18:57:36.291Z",
+      "type": "chunk_done",
+      "chunk": 143,
+      "pages": [
+        569,
+        572
+      ],
+      "cardCount": 7,
+      "method": "text-only",
+      "sourceChars": 4833,
+      "sourceCjk": 1581,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T18:57:36.453Z",
+      "type": "card_text_ok",
+      "chunk": 142,
+      "cardCount": 9
+    },
+    {
+      "ts": "2026-07-18T18:57:36.453Z",
+      "type": "chunk_done",
+      "chunk": 142,
+      "pages": [
+        565,
+        568
+      ],
+      "cardCount": 9,
+      "method": "text-only",
+      "sourceChars": 5044,
+      "sourceCjk": 1514,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T18:57:36.486Z",
+      "type": "chunk_start",
+      "chunk": 144,
+      "pages": [
+        573,
+        576
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-18T18:57:36.487Z",
+      "type": "chunk_start",
+      "chunk": 145,
+      "pages": [
+        577,
+        580
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-18T18:58:50.642Z",
+      "type": "card_text_ok",
+      "chunk": 145,
+      "cardCount": 9
+    },
+    {
+      "ts": "2026-07-18T18:58:50.642Z",
+      "type": "chunk_done",
+      "chunk": 145,
+      "pages": [
+        577,
+        580
+      ],
+      "cardCount": 9,
+      "method": "text-only",
+      "sourceChars": 4586,
+      "sourceCjk": 1393,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T18:59:00.661Z",
+      "type": "card_text_ok",
+      "chunk": 144,
+      "cardCount": 9
+    },
+    {
+      "ts": "2026-07-18T18:59:00.662Z",
+      "type": "chunk_done",
+      "chunk": 144,
+      "pages": [
+        573,
+        576
+      ],
+      "cardCount": 9,
+      "method": "text-only",
+      "sourceChars": 4666,
+      "sourceCjk": 1505,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T18:59:00.691Z",
+      "type": "chunk_start",
+      "chunk": 146,
+      "pages": [
+        581,
+        584
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-18T18:59:00.692Z",
+      "type": "chunk_start",
+      "chunk": 147,
+      "pages": [
+        585,
+        588
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-18T19:00:30.895Z",
+      "type": "card_text_ok",
+      "chunk": 147,
+      "cardCount": 7
+    },
+    {
+      "ts": "2026-07-18T19:00:30.895Z",
+      "type": "chunk_done",
+      "chunk": 147,
+      "pages": [
+        585,
+        588
+      ],
+      "cardCount": 7,
+      "method": "text-only",
+      "sourceChars": 4988,
+      "sourceCjk": 1258,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T19:00:41.267Z",
+      "type": "card_text_ok",
+      "chunk": 146,
+      "cardCount": 13
+    },
+    {
+      "ts": "2026-07-18T19:00:41.267Z",
+      "type": "chunk_done",
+      "chunk": 146,
+      "pages": [
+        581,
+        584
+      ],
+      "cardCount": 13,
+      "method": "text-only",
+      "sourceChars": 4296,
+      "sourceCjk": 1737,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T19:00:41.302Z",
+      "type": "chunk_start",
+      "chunk": 148,
+      "pages": [
+        589,
+        592
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-18T19:00:41.303Z",
+      "type": "chunk_start",
+      "chunk": 149,
+      "pages": [
+        593,
+        596
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-18T19:01:44.627Z",
+      "type": "card_text_ok",
+      "chunk": 148,
+      "cardCount": 5
+    },
+    {
+      "ts": "2026-07-18T19:01:44.627Z",
+      "type": "chunk_done",
+      "chunk": 148,
+      "pages": [
+        589,
+        592
+      ],
+      "cardCount": 5,
+      "method": "text-only",
+      "sourceChars": 5539,
+      "sourceCjk": 1203,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T19:01:48.856Z",
+      "type": "card_text_ok",
+      "chunk": 149,
+      "cardCount": 7
+    },
+    {
+      "ts": "2026-07-18T19:01:48.856Z",
+      "type": "chunk_done",
+      "chunk": 149,
+      "pages": [
+        593,
+        596
+      ],
+      "cardCount": 7,
+      "method": "text-only",
+      "sourceChars": 3990,
+      "sourceCjk": 1768,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T19:01:48.880Z",
+      "type": "chunk_start",
+      "chunk": 150,
+      "pages": [
+        597,
+        600
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-18T19:01:48.881Z",
+      "type": "chunk_start",
+      "chunk": 151,
+      "pages": [
+        601,
+        604
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-18T19:03:24.669Z",
+      "type": "card_text_ok",
+      "chunk": 150,
+      "cardCount": 8
+    },
+    {
+      "ts": "2026-07-18T19:03:24.669Z",
+      "type": "chunk_done",
+      "chunk": 150,
+      "pages": [
+        597,
+        600
+      ],
+      "cardCount": 8,
+      "method": "text-only",
+      "sourceChars": 5061,
+      "sourceCjk": 1417,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T19:03:26.287Z",
+      "type": "card_text_ok",
+      "chunk": 151,
+      "cardCount": 6
+    },
+    {
+      "ts": "2026-07-18T19:03:26.287Z",
+      "type": "chunk_done",
+      "chunk": 151,
+      "pages": [
+        601,
+        604
+      ],
+      "cardCount": 6,
+      "method": "text-only",
+      "sourceChars": 6247,
+      "sourceCjk": 837,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T19:03:26.311Z",
+      "type": "chunk_start",
+      "chunk": 152,
+      "pages": [
+        605,
+        608
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-18T19:03:26.311Z",
+      "type": "chunk_start",
+      "chunk": 153,
+      "pages": [
+        609,
+        612
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-18T19:04:38.206Z",
+      "type": "card_text_ok",
+      "chunk": 152,
+      "cardCount": 7
+    },
+    {
+      "ts": "2026-07-18T19:04:38.207Z",
+      "type": "chunk_done",
+      "chunk": 152,
+      "pages": [
+        605,
+        608
+      ],
+      "cardCount": 7,
+      "method": "text-only",
+      "sourceChars": 4870,
+      "sourceCjk": 2175,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T19:04:47.189Z",
+      "type": "card_text_ok",
+      "chunk": 153,
+      "cardCount": 7
+    },
+    {
+      "ts": "2026-07-18T19:04:47.189Z",
+      "type": "chunk_done",
+      "chunk": 153,
+      "pages": [
+        609,
+        612
+      ],
+      "cardCount": 7,
+      "method": "text-only",
+      "sourceChars": 5197,
+      "sourceCjk": 1921,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T19:04:47.216Z",
+      "type": "chunk_start",
+      "chunk": 154,
+      "pages": [
+        613,
+        616
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-18T19:04:47.217Z",
+      "type": "chunk_start",
+      "chunk": 155,
+      "pages": [
+        617,
+        620
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-18T19:06:15.273Z",
+      "type": "card_text_ok",
+      "chunk": 155,
+      "cardCount": 9
+    },
+    {
+      "ts": "2026-07-18T19:06:15.273Z",
+      "type": "chunk_done",
+      "chunk": 155,
+      "pages": [
+        617,
+        620
+      ],
+      "cardCount": 9,
+      "method": "text-only",
+      "sourceChars": 4862,
+      "sourceCjk": 2320,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T19:06:34.087Z",
+      "type": "card_text_ok",
+      "chunk": 154,
+      "cardCount": 14
+    },
+    {
+      "ts": "2026-07-18T19:06:34.088Z",
+      "type": "chunk_done",
+      "chunk": 154,
+      "pages": [
+        613,
+        616
+      ],
+      "cardCount": 14,
+      "method": "text-only",
+      "sourceChars": 4706,
+      "sourceCjk": 1861,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T19:06:34.127Z",
+      "type": "chunk_start",
+      "chunk": 156,
+      "pages": [
+        621,
+        624
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-18T19:06:34.127Z",
+      "type": "chunk_start",
+      "chunk": 157,
+      "pages": [
+        625,
+        628
+      ],
+      "imageCount": 1
+    },
+    {
+      "ts": "2026-07-18T19:07:49.082Z",
+      "type": "card_multimodal_ok",
+      "chunk": 157,
+      "cardCount": 8
+    },
+    {
+      "ts": "2026-07-18T19:07:49.082Z",
+      "type": "chunk_done",
+      "chunk": 157,
+      "pages": [
+        625,
+        628
+      ],
+      "cardCount": 8,
+      "method": "multimodal",
+      "sourceChars": 2449,
+      "sourceCjk": 1369,
+      "imageCount": 1,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T19:08:20.141Z",
+      "type": "card_text_ok",
+      "chunk": 156,
+      "cardCount": 12
+    },
+    {
+      "ts": "2026-07-18T19:08:20.141Z",
+      "type": "chunk_done",
+      "chunk": 156,
+      "pages": [
+        621,
+        624
+      ],
+      "cardCount": 12,
+      "method": "text-only",
+      "sourceChars": 4881,
+      "sourceCjk": 1986,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T19:08:20.177Z",
+      "type": "chunk_start",
+      "chunk": 158,
+      "pages": [
+        629,
+        632
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-18T19:08:20.178Z",
+      "type": "chunk_start",
+      "chunk": 159,
+      "pages": [
+        633,
+        636
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-18T19:09:45.076Z",
+      "type": "card_text_ok",
+      "chunk": 159,
+      "cardCount": 9
+    },
+    {
+      "ts": "2026-07-18T19:09:45.077Z",
+      "type": "chunk_done",
+      "chunk": 159,
+      "pages": [
+        633,
+        636
+      ],
+      "cardCount": 9,
+      "method": "text-only",
+      "sourceChars": 5193,
+      "sourceCjk": 1389,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T19:09:59.403Z",
+      "type": "card_text_ok",
+      "chunk": 158,
+      "cardCount": 10
+    },
+    {
+      "ts": "2026-07-18T19:09:59.403Z",
+      "type": "chunk_done",
+      "chunk": 158,
+      "pages": [
+        629,
+        632
+      ],
+      "cardCount": 10,
+      "method": "text-only",
+      "sourceChars": 4530,
+      "sourceCjk": 1718,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T19:09:59.437Z",
+      "type": "chunk_start",
+      "chunk": 160,
+      "pages": [
+        637,
+        640
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-18T19:09:59.438Z",
+      "type": "chunk_start",
+      "chunk": 161,
+      "pages": [
+        641,
+        644
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-18T19:11:35.703Z",
+      "type": "card_text_ok",
+      "chunk": 161,
+      "cardCount": 12
+    },
+    {
+      "ts": "2026-07-18T19:11:35.703Z",
+      "type": "chunk_done",
+      "chunk": 161,
+      "pages": [
+        641,
+        644
+      ],
+      "cardCount": 12,
+      "method": "text-only",
+      "sourceChars": 4651,
+      "sourceCjk": 1760,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T19:11:45.754Z",
+      "type": "card_text_ok",
+      "chunk": 160,
+      "cardCount": 13
+    },
+    {
+      "ts": "2026-07-18T19:11:45.754Z",
+      "type": "chunk_done",
+      "chunk": 160,
+      "pages": [
+        637,
+        640
+      ],
+      "cardCount": 13,
+      "method": "text-only",
+      "sourceChars": 4998,
+      "sourceCjk": 1553,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T19:11:45.795Z",
+      "type": "chunk_start",
+      "chunk": 162,
+      "pages": [
+        645,
+        648
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-18T19:11:45.796Z",
+      "type": "chunk_start",
+      "chunk": 163,
+      "pages": [
+        649,
+        652
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-18T19:12:59.672Z",
+      "type": "card_text_ok",
+      "chunk": 163,
+      "cardCount": 9
+    },
+    {
+      "ts": "2026-07-18T19:12:59.673Z",
+      "type": "chunk_done",
+      "chunk": 163,
+      "pages": [
+        649,
+        652
+      ],
+      "cardCount": 9,
+      "method": "text-only",
+      "sourceChars": 5132,
+      "sourceCjk": 1605,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T19:13:18.284Z",
+      "type": "card_text_ok",
+      "chunk": 162,
+      "cardCount": 9
+    },
+    {
+      "ts": "2026-07-18T19:13:18.284Z",
+      "type": "chunk_done",
+      "chunk": 162,
+      "pages": [
+        645,
+        648
+      ],
+      "cardCount": 9,
+      "method": "text-only",
+      "sourceChars": 4666,
+      "sourceCjk": 1112,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T19:13:18.316Z",
+      "type": "chunk_start",
+      "chunk": 164,
+      "pages": [
+        653,
+        656
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-18T19:13:18.317Z",
+      "type": "chunk_start",
+      "chunk": 165,
+      "pages": [
+        657,
+        660
+      ],
+      "imageCount": 1
+    },
+    {
+      "ts": "2026-07-18T19:14:28.288Z",
+      "type": "card_multimodal_ok",
+      "chunk": 165,
+      "cardCount": 7
+    },
+    {
+      "ts": "2026-07-18T19:14:28.289Z",
+      "type": "chunk_done",
+      "chunk": 165,
+      "pages": [
+        657,
+        660
+      ],
+      "cardCount": 7,
+      "method": "multimodal",
+      "sourceChars": 2392,
+      "sourceCjk": 1430,
+      "imageCount": 1,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T19:14:57.525Z",
+      "type": "card_text_ok",
+      "chunk": 164,
+      "cardCount": 9
+    },
+    {
+      "ts": "2026-07-18T19:14:57.525Z",
+      "type": "chunk_done",
+      "chunk": 164,
+      "pages": [
+        653,
+        656
+      ],
+      "cardCount": 9,
+      "method": "text-only",
+      "sourceChars": 5179,
+      "sourceCjk": 1939,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T19:14:57.554Z",
+      "type": "chunk_start",
+      "chunk": 166,
+      "pages": [
+        661,
+        664
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-18T19:14:57.555Z",
+      "type": "chunk_start",
+      "chunk": 167,
+      "pages": [
+        665,
+        668
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-18T19:16:33.747Z",
+      "type": "card_text_ok",
+      "chunk": 166,
+      "cardCount": 11
+    },
+    {
+      "ts": "2026-07-18T19:16:33.748Z",
+      "type": "chunk_done",
+      "chunk": 166,
+      "pages": [
+        661,
+        664
+      ],
+      "cardCount": 11,
+      "method": "text-only",
+      "sourceChars": 5480,
+      "sourceCjk": 2615,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T19:16:53.410Z",
+      "type": "card_text_ok",
+      "chunk": 167,
+      "cardCount": 10
+    },
+    {
+      "ts": "2026-07-18T19:16:53.411Z",
+      "type": "chunk_done",
+      "chunk": 167,
+      "pages": [
+        665,
+        668
+      ],
+      "cardCount": 10,
+      "method": "text-only",
+      "sourceChars": 5017,
+      "sourceCjk": 2337,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T19:16:53.449Z",
+      "type": "chunk_start",
+      "chunk": 168,
+      "pages": [
+        669,
+        672
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-18T19:16:53.451Z",
+      "type": "chunk_start",
+      "chunk": 169,
+      "pages": [
+        673,
+        676
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-18T19:18:08.011Z",
+      "type": "card_text_ok",
+      "chunk": 169,
+      "cardCount": 6
+    },
+    {
+      "ts": "2026-07-18T19:18:08.012Z",
+      "type": "chunk_done",
+      "chunk": 169,
+      "pages": [
+        673,
+        676
+      ],
+      "cardCount": 6,
+      "method": "text-only",
+      "sourceChars": 5734,
+      "sourceCjk": 2012,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T19:18:37.347Z",
+      "type": "card_text_ok",
+      "chunk": 168,
+      "cardCount": 9
+    },
+    {
+      "ts": "2026-07-18T19:18:37.347Z",
+      "type": "chunk_done",
+      "chunk": 168,
+      "pages": [
+        669,
+        672
+      ],
+      "cardCount": 9,
+      "method": "text-only",
+      "sourceChars": 4742,
+      "sourceCjk": 2717,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T19:18:37.370Z",
+      "type": "chunk_start",
+      "chunk": 170,
+      "pages": [
+        677,
+        680
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-18T19:18:37.371Z",
+      "type": "chunk_start",
+      "chunk": 171,
+      "pages": [
+        681,
+        684
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-18T19:19:49.915Z",
+      "type": "card_text_ok",
+      "chunk": 171,
+      "cardCount": 7
+    },
+    {
+      "ts": "2026-07-18T19:19:49.915Z",
+      "type": "chunk_done",
+      "chunk": 171,
+      "pages": [
+        681,
+        684
+      ],
+      "cardCount": 7,
+      "method": "text-only",
+      "sourceChars": 4426,
+      "sourceCjk": 1712,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T19:19:50.188Z",
+      "type": "card_text_ok",
+      "chunk": 170,
+      "cardCount": 6
+    },
+    {
+      "ts": "2026-07-18T19:19:50.189Z",
+      "type": "chunk_done",
+      "chunk": 170,
+      "pages": [
+        677,
+        680
+      ],
+      "cardCount": 6,
+      "method": "text-only",
+      "sourceChars": 5064,
+      "sourceCjk": 1735,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T19:19:50.214Z",
+      "type": "chunk_start",
+      "chunk": 172,
+      "pages": [
+        685,
+        688
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-18T19:19:50.214Z",
+      "type": "chunk_start",
+      "chunk": 173,
+      "pages": [
+        689,
+        692
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-18T19:21:15.943Z",
+      "type": "card_text_ok",
+      "chunk": 173,
+      "cardCount": 6
+    },
+    {
+      "ts": "2026-07-18T19:21:15.943Z",
+      "type": "chunk_done",
+      "chunk": 173,
+      "pages": [
+        689,
+        692
+      ],
+      "cardCount": 6,
+      "method": "text-only",
+      "sourceChars": 5475,
+      "sourceCjk": 1592,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T19:21:15.982Z",
+      "type": "card_text_ok",
+      "chunk": 172,
+      "cardCount": 8
+    },
+    {
+      "ts": "2026-07-18T19:21:15.983Z",
+      "type": "chunk_done",
+      "chunk": 172,
+      "pages": [
+        685,
+        688
+      ],
+      "cardCount": 8,
+      "method": "text-only",
+      "sourceChars": 5486,
+      "sourceCjk": 1681,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T19:21:16.009Z",
+      "type": "chunk_start",
+      "chunk": 174,
+      "pages": [
+        693,
+        696
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-18T19:21:16.010Z",
+      "type": "chunk_start",
+      "chunk": 175,
+      "pages": [
+        697,
+        700
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-18T19:22:46.269Z",
+      "type": "card_text_ok",
+      "chunk": 175,
+      "cardCount": 8
+    },
+    {
+      "ts": "2026-07-18T19:22:46.269Z",
+      "type": "chunk_done",
+      "chunk": 175,
+      "pages": [
+        697,
+        700
+      ],
+      "cardCount": 8,
+      "method": "text-only",
+      "sourceChars": 5249,
+      "sourceCjk": 2470,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T19:22:48.466Z",
+      "type": "card_text_ok",
+      "chunk": 174,
+      "cardCount": 10
+    },
+    {
+      "ts": "2026-07-18T19:22:48.466Z",
+      "type": "chunk_done",
+      "chunk": 174,
+      "pages": [
+        693,
+        696
+      ],
+      "cardCount": 10,
+      "method": "text-only",
+      "sourceChars": 4038,
+      "sourceCjk": 1643,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T19:22:48.498Z",
+      "type": "chunk_start",
+      "chunk": 176,
+      "pages": [
+        701,
+        704
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-18T19:22:48.499Z",
+      "type": "chunk_start",
+      "chunk": 177,
+      "pages": [
+        705,
+        708
+      ],
+      "imageCount": 1
+    },
+    {
+      "ts": "2026-07-18T19:23:45.937Z",
+      "type": "card_text_ok",
+      "chunk": 176,
+      "cardCount": 4
+    },
+    {
+      "ts": "2026-07-18T19:23:45.937Z",
+      "type": "chunk_done",
+      "chunk": 176,
+      "pages": [
+        701,
+        704
+      ],
+      "cardCount": 4,
+      "method": "text-only",
+      "sourceChars": 4707,
+      "sourceCjk": 1158,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T19:23:57.177Z",
+      "type": "card_multimodal_ok",
+      "chunk": 177,
+      "cardCount": 8
+    },
+    {
+      "ts": "2026-07-18T19:23:57.177Z",
+      "type": "chunk_done",
+      "chunk": 177,
+      "pages": [
+        705,
+        708
+      ],
+      "cardCount": 8,
+      "method": "multimodal",
+      "sourceChars": 2658,
+      "sourceCjk": 784,
+      "imageCount": 1,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-18T19:23:57.198Z",
+      "type": "chunk_start",
+      "chunk": 178,
+      "pages": [
+        709,
+        712
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-18T19:23:57.199Z",
+      "type": "chunk_start",
+      "chunk": 179,
+      "pages": [
+        713,
+        716
+      ],
+      "imageCount": 1
+    },
+    {
+      "ts": "2026-07-19T04:22:03.289Z",
+      "type": "model_retry",
+      "attempt": 1,
+      "delayMs": 750,
+      "error": "timeout 180000ms"
+    },
+    {
+      "ts": "2026-07-19T04:22:03.290Z",
+      "type": "model_retry",
+      "attempt": 1,
+      "delayMs": 750,
+      "error": "timeout 180000ms"
+    },
+    {
+      "ts": "2026-07-19T04:23:18.371Z",
+      "type": "card_multimodal_ok",
+      "chunk": 179,
+      "cardCount": 7
+    },
+    {
+      "ts": "2026-07-19T04:23:18.371Z",
+      "type": "chunk_done",
+      "chunk": 179,
+      "pages": [
+        713,
+        716
+      ],
+      "cardCount": 7,
+      "method": "multimodal",
+      "sourceChars": 1794,
+      "sourceCjk": 964,
+      "imageCount": 1,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-19T04:23:37.682Z",
+      "type": "card_text_ok",
+      "chunk": 178,
+      "cardCount": 10
+    },
+    {
+      "ts": "2026-07-19T04:23:37.682Z",
+      "type": "chunk_done",
+      "chunk": 178,
+      "pages": [
+        709,
+        712
+      ],
+      "cardCount": 10,
+      "method": "text-only",
+      "sourceChars": 4556,
+      "sourceCjk": 1636,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-19T04:27:18.508Z",
+      "type": "chunk_start",
+      "chunk": 180,
+      "pages": [
+        717,
+        720
+      ],
+      "imageCount": 1
+    },
+    {
+      "ts": "2026-07-19T04:27:18.528Z",
+      "type": "chunk_start",
+      "chunk": 181,
+      "pages": [
+        721,
+        724
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-19T04:28:35.261Z",
+      "type": "card_text_ok",
+      "chunk": 181,
+      "cardCount": 6
+    },
+    {
+      "ts": "2026-07-19T04:28:35.261Z",
+      "type": "chunk_done",
+      "chunk": 181,
+      "pages": [
+        721,
+        724
+      ],
+      "cardCount": 6,
+      "method": "text-only",
+      "sourceChars": 4906,
+      "sourceCjk": 1248,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-19T04:28:53.755Z",
+      "type": "card_multimodal_ok",
+      "chunk": 180,
+      "cardCount": 8
+    },
+    {
+      "ts": "2026-07-19T04:28:53.756Z",
+      "type": "chunk_done",
+      "chunk": 180,
+      "pages": [
+        717,
+        720
+      ],
+      "cardCount": 8,
+      "method": "multimodal",
+      "sourceChars": 3568,
+      "sourceCjk": 2124,
+      "imageCount": 1,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-19T04:28:53.781Z",
+      "type": "chunk_start",
+      "chunk": 182,
+      "pages": [
+        725,
+        728
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-19T04:28:53.783Z",
+      "type": "chunk_start",
+      "chunk": 183,
+      "pages": [
+        729,
+        732
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-19T04:30:15.377Z",
+      "type": "card_text_ok",
+      "chunk": 183,
+      "cardCount": 9
+    },
+    {
+      "ts": "2026-07-19T04:30:15.377Z",
+      "type": "chunk_done",
+      "chunk": 183,
+      "pages": [
+        729,
+        732
+      ],
+      "cardCount": 9,
+      "method": "text-only",
+      "sourceChars": 4495,
+      "sourceCjk": 1087,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-19T04:30:29.982Z",
+      "type": "card_text_ok",
+      "chunk": 182,
+      "cardCount": 11
+    },
+    {
+      "ts": "2026-07-19T04:30:29.983Z",
+      "type": "chunk_done",
+      "chunk": 182,
+      "pages": [
+        725,
+        728
+      ],
+      "cardCount": 11,
+      "method": "text-only",
+      "sourceChars": 5459,
+      "sourceCjk": 1327,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-19T04:30:30.012Z",
+      "type": "chunk_start",
+      "chunk": 184,
+      "pages": [
+        733,
+        736
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-19T04:30:30.013Z",
+      "type": "chunk_start",
+      "chunk": 185,
+      "pages": [
+        737,
+        740
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-19T04:31:26.602Z",
+      "type": "card_text_ok",
+      "chunk": 185,
+      "cardCount": 4
+    },
+    {
+      "ts": "2026-07-19T04:31:26.603Z",
+      "type": "chunk_done",
+      "chunk": 185,
+      "pages": [
+        737,
+        740
+      ],
+      "cardCount": 4,
+      "method": "text-only",
+      "sourceChars": 6177,
+      "sourceCjk": 730,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-19T04:32:13.384Z",
+      "type": "card_text_ok",
+      "chunk": 184,
+      "cardCount": 10
+    },
+    {
+      "ts": "2026-07-19T04:32:13.385Z",
+      "type": "chunk_done",
+      "chunk": 184,
+      "pages": [
+        733,
+        736
+      ],
+      "cardCount": 10,
+      "method": "text-only",
+      "sourceChars": 5665,
+      "sourceCjk": 1755,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-19T04:32:13.415Z",
+      "type": "chunk_start",
+      "chunk": 186,
+      "pages": [
+        741,
+        744
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-19T04:32:13.416Z",
+      "type": "chunk_start",
+      "chunk": 187,
+      "pages": [
+        745,
+        748
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-19T04:33:22.843Z",
+      "type": "card_text_ok",
+      "chunk": 186,
+      "cardCount": 6
+    },
+    {
+      "ts": "2026-07-19T04:33:22.844Z",
+      "type": "chunk_done",
+      "chunk": 186,
+      "pages": [
+        741,
+        744
+      ],
+      "cardCount": 6,
+      "method": "text-only",
+      "sourceChars": 6066,
+      "sourceCjk": 869,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-19T04:33:25.176Z",
+      "type": "card_text_ok",
+      "chunk": 187,
+      "cardCount": 6
+    },
+    {
+      "ts": "2026-07-19T04:33:25.176Z",
+      "type": "chunk_done",
+      "chunk": 187,
+      "pages": [
+        745,
+        748
+      ],
+      "cardCount": 6,
+      "method": "text-only",
+      "sourceChars": 6088,
+      "sourceCjk": 896,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-19T04:33:25.199Z",
+      "type": "chunk_start",
+      "chunk": 188,
+      "pages": [
+        749,
+        752
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-19T04:33:25.200Z",
+      "type": "chunk_start",
+      "chunk": 189,
+      "pages": [
+        753,
+        756
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-19T04:34:42.918Z",
+      "type": "card_text_ok",
+      "chunk": 188,
+      "cardCount": 7
+    },
+    {
+      "ts": "2026-07-19T04:34:42.918Z",
+      "type": "chunk_done",
+      "chunk": 188,
+      "pages": [
+        749,
+        752
+      ],
+      "cardCount": 7,
+      "method": "text-only",
+      "sourceChars": 5536,
+      "sourceCjk": 1240,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-19T04:34:58.588Z",
+      "type": "card_text_ok",
+      "chunk": 189,
+      "cardCount": 12
+    },
+    {
+      "ts": "2026-07-19T04:34:58.589Z",
+      "type": "chunk_done",
+      "chunk": 189,
+      "pages": [
+        753,
+        756
+      ],
+      "cardCount": 12,
+      "method": "text-only",
+      "sourceChars": 4102,
+      "sourceCjk": 1824,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-19T04:34:58.622Z",
+      "type": "chunk_start",
+      "chunk": 190,
+      "pages": [
+        757,
+        760
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-19T04:34:58.623Z",
+      "type": "chunk_start",
+      "chunk": 191,
+      "pages": [
+        761,
+        764
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-19T04:36:01.862Z",
+      "type": "card_text_ok",
+      "chunk": 191,
+      "cardCount": 5
+    },
+    {
+      "ts": "2026-07-19T04:36:01.863Z",
+      "type": "chunk_done",
+      "chunk": 191,
+      "pages": [
+        761,
+        764
+      ],
+      "cardCount": 5,
+      "method": "text-only",
+      "sourceChars": 4959,
+      "sourceCjk": 1217,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-19T04:36:11.818Z",
+      "type": "card_text_ok",
+      "chunk": 190,
+      "cardCount": 5
+    },
+    {
+      "ts": "2026-07-19T04:36:11.818Z",
+      "type": "chunk_done",
+      "chunk": 190,
+      "pages": [
+        757,
+        760
+      ],
+      "cardCount": 5,
+      "method": "text-only",
+      "sourceChars": 5191,
+      "sourceCjk": 1177,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-19T04:36:11.837Z",
+      "type": "chunk_start",
+      "chunk": 192,
+      "pages": [
+        765,
+        768
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-19T04:36:11.838Z",
+      "type": "chunk_start",
+      "chunk": 193,
+      "pages": [
+        769,
+        772
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-19T04:37:28.354Z",
+      "type": "card_text_ok",
+      "chunk": 192,
+      "cardCount": 6
+    },
+    {
+      "ts": "2026-07-19T04:37:28.354Z",
+      "type": "chunk_done",
+      "chunk": 192,
+      "pages": [
+        765,
+        768
+      ],
+      "cardCount": 6,
+      "method": "text-only",
+      "sourceChars": 5453,
+      "sourceCjk": 1282,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-19T04:37:31.423Z",
+      "type": "card_text_ok",
+      "chunk": 193,
+      "cardCount": 7
+    },
+    {
+      "ts": "2026-07-19T04:37:31.424Z",
+      "type": "chunk_done",
+      "chunk": 193,
+      "pages": [
+        769,
+        772
+      ],
+      "cardCount": 7,
+      "method": "text-only",
+      "sourceChars": 4830,
+      "sourceCjk": 1755,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-19T04:37:31.447Z",
+      "type": "chunk_start",
+      "chunk": 194,
+      "pages": [
+        773,
+        776
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-19T04:37:31.448Z",
+      "type": "chunk_start",
+      "chunk": 195,
+      "pages": [
+        777,
+        780
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-19T04:38:35.913Z",
+      "type": "card_text_ok",
+      "chunk": 195,
+      "cardCount": 6
+    },
+    {
+      "ts": "2026-07-19T04:38:35.913Z",
+      "type": "chunk_done",
+      "chunk": 195,
+      "pages": [
+        777,
+        780
+      ],
+      "cardCount": 6,
+      "method": "text-only",
+      "sourceChars": 4590,
+      "sourceCjk": 1026,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-19T04:39:03.539Z",
+      "type": "card_text_ok",
+      "chunk": 194,
+      "cardCount": 8
+    },
+    {
+      "ts": "2026-07-19T04:39:03.540Z",
+      "type": "chunk_done",
+      "chunk": 194,
+      "pages": [
+        773,
+        776
+      ],
+      "cardCount": 8,
+      "method": "text-only",
+      "sourceChars": 3881,
+      "sourceCjk": 1423,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-19T04:39:03.565Z",
+      "type": "chunk_start",
+      "chunk": 196,
+      "pages": [
+        781,
+        784
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-19T04:39:03.566Z",
+      "type": "chunk_start",
+      "chunk": 197,
+      "pages": [
+        785,
+        788
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-19T04:40:16.278Z",
+      "type": "card_text_ok",
+      "chunk": 196,
+      "cardCount": 5
+    },
+    {
+      "ts": "2026-07-19T04:40:16.278Z",
+      "type": "chunk_done",
+      "chunk": 196,
+      "pages": [
+        781,
+        784
+      ],
+      "cardCount": 5,
+      "method": "text-only",
+      "sourceChars": 5322,
+      "sourceCjk": 1676,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-19T04:40:21.990Z",
+      "type": "card_text_ok",
+      "chunk": 197,
+      "cardCount": 8
+    },
+    {
+      "ts": "2026-07-19T04:40:21.990Z",
+      "type": "chunk_done",
+      "chunk": 197,
+      "pages": [
+        785,
+        788
+      ],
+      "cardCount": 8,
+      "method": "text-only",
+      "sourceChars": 4135,
+      "sourceCjk": 1966,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-19T04:40:22.014Z",
+      "type": "chunk_start",
+      "chunk": 198,
+      "pages": [
+        789,
+        792
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-19T04:40:22.015Z",
+      "type": "chunk_start",
+      "chunk": 199,
+      "pages": [
+        793,
+        796
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-19T04:41:30.693Z",
+      "type": "card_text_ok",
+      "chunk": 198,
+      "cardCount": 6
+    },
+    {
+      "ts": "2026-07-19T04:41:30.694Z",
+      "type": "chunk_done",
+      "chunk": 198,
+      "pages": [
+        789,
+        792
+      ],
+      "cardCount": 6,
+      "method": "text-only",
+      "sourceChars": 3544,
+      "sourceCjk": 2678,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-19T04:41:47.589Z",
+      "type": "card_text_ok",
+      "chunk": 199,
+      "cardCount": 10
+    },
+    {
+      "ts": "2026-07-19T04:41:47.590Z",
+      "type": "chunk_done",
+      "chunk": 199,
+      "pages": [
+        793,
+        796
+      ],
+      "cardCount": 10,
+      "method": "text-only",
+      "sourceChars": 4069,
+      "sourceCjk": 1870,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-19T04:41:47.620Z",
+      "type": "chunk_start",
+      "chunk": 200,
+      "pages": [
+        797,
+        800
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-19T04:41:47.621Z",
+      "type": "chunk_start",
+      "chunk": 201,
+      "pages": [
+        801,
+        804
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-19T04:43:14.534Z",
+      "type": "card_text_ok",
+      "chunk": 200,
+      "cardCount": 7
+    },
+    {
+      "ts": "2026-07-19T04:43:14.535Z",
+      "type": "chunk_done",
+      "chunk": 200,
+      "pages": [
+        797,
+        800
+      ],
+      "cardCount": 7,
+      "method": "text-only",
+      "sourceChars": 4977,
+      "sourceCjk": 2034,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-19T04:43:24.611Z",
+      "type": "card_text_ok",
+      "chunk": 201,
+      "cardCount": 10
+    },
+    {
+      "ts": "2026-07-19T04:43:24.612Z",
+      "type": "chunk_done",
+      "chunk": 201,
+      "pages": [
+        801,
+        804
+      ],
+      "cardCount": 10,
+      "method": "text-only",
+      "sourceChars": 4377,
+      "sourceCjk": 1674,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-19T04:43:24.644Z",
+      "type": "chunk_start",
+      "chunk": 202,
+      "pages": [
+        805,
+        808
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-19T04:43:24.644Z",
+      "type": "chunk_start",
+      "chunk": 203,
+      "pages": [
+        809,
+        812
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-19T04:44:33.299Z",
+      "type": "card_text_ok",
+      "chunk": 203,
+      "cardCount": 6
+    },
+    {
+      "ts": "2026-07-19T04:44:33.299Z",
+      "type": "chunk_done",
+      "chunk": 203,
+      "pages": [
+        809,
+        812
+      ],
+      "cardCount": 6,
+      "method": "text-only",
+      "sourceChars": 3856,
+      "sourceCjk": 1392,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-19T04:45:11.231Z",
+      "type": "card_text_ok",
+      "chunk": 202,
+      "cardCount": 11
+    },
+    {
+      "ts": "2026-07-19T04:45:11.232Z",
+      "type": "chunk_done",
+      "chunk": 202,
+      "pages": [
+        805,
+        808
+      ],
+      "cardCount": 11,
+      "method": "text-only",
+      "sourceChars": 5491,
+      "sourceCjk": 2685,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-19T04:45:11.262Z",
+      "type": "chunk_start",
+      "chunk": 204,
+      "pages": [
+        813,
+        816
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-19T04:45:11.262Z",
+      "type": "chunk_start",
+      "chunk": 205,
+      "pages": [
+        817,
+        820
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-19T04:46:27.556Z",
+      "type": "card_text_ok",
+      "chunk": 205,
+      "cardCount": 6
+    },
+    {
+      "ts": "2026-07-19T04:46:27.556Z",
+      "type": "chunk_done",
+      "chunk": 205,
+      "pages": [
+        817,
+        820
+      ],
+      "cardCount": 6,
+      "method": "text-only",
+      "sourceChars": 4699,
+      "sourceCjk": 1814,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-19T04:46:29.919Z",
+      "type": "card_text_ok",
+      "chunk": 204,
+      "cardCount": 8
+    },
+    {
+      "ts": "2026-07-19T04:46:29.920Z",
+      "type": "chunk_done",
+      "chunk": 204,
+      "pages": [
+        813,
+        816
+      ],
+      "cardCount": 8,
+      "method": "text-only",
+      "sourceChars": 4355,
+      "sourceCjk": 1950,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-19T04:46:29.945Z",
+      "type": "chunk_start",
+      "chunk": 206,
+      "pages": [
+        821,
+        824
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-19T04:46:29.946Z",
+      "type": "chunk_start",
+      "chunk": 207,
+      "pages": [
+        825,
+        828
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-19T04:47:36.584Z",
+      "type": "card_text_ok",
+      "chunk": 206,
+      "cardCount": 7
+    },
+    {
+      "ts": "2026-07-19T04:47:36.584Z",
+      "type": "chunk_done",
+      "chunk": 206,
+      "pages": [
+        821,
+        824
+      ],
+      "cardCount": 7,
+      "method": "text-only",
+      "sourceChars": 5139,
+      "sourceCjk": 1157,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-19T04:48:15.405Z",
+      "type": "card_text_ok",
+      "chunk": 207,
+      "cardCount": 12
+    },
+    {
+      "ts": "2026-07-19T04:48:15.405Z",
+      "type": "chunk_done",
+      "chunk": 207,
+      "pages": [
+        825,
+        828
+      ],
+      "cardCount": 12,
+      "method": "text-only",
+      "sourceChars": 4197,
+      "sourceCjk": 2163,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-19T04:48:15.439Z",
+      "type": "chunk_start",
+      "chunk": 208,
+      "pages": [
+        829,
+        832
+      ],
+      "imageCount": 1
+    },
+    {
+      "ts": "2026-07-19T04:48:15.440Z",
+      "type": "chunk_start",
+      "chunk": 209,
+      "pages": [
+        833,
+        836
+      ],
+      "imageCount": 1
+    },
+    {
+      "ts": "2026-07-19T04:49:17.119Z",
+      "type": "card_multimodal_ok",
+      "chunk": 209,
+      "cardCount": 6
+    },
+    {
+      "ts": "2026-07-19T04:49:17.119Z",
+      "type": "chunk_done",
+      "chunk": 209,
+      "pages": [
+        833,
+        836
+      ],
+      "cardCount": 6,
+      "method": "multimodal",
+      "sourceChars": 2996,
+      "sourceCjk": 2618,
+      "imageCount": 1,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-19T04:49:42.813Z",
+      "type": "card_multimodal_ok",
+      "chunk": 208,
+      "cardCount": 11
+    },
+    {
+      "ts": "2026-07-19T04:49:42.813Z",
+      "type": "chunk_done",
+      "chunk": 208,
+      "pages": [
+        829,
+        832
+      ],
+      "cardCount": 11,
+      "method": "multimodal",
+      "sourceChars": 1951,
+      "sourceCjk": 1388,
+      "imageCount": 1,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-19T04:49:42.843Z",
+      "type": "chunk_start",
+      "chunk": 210,
+      "pages": [
+        837,
+        840
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-19T04:49:42.843Z",
+      "type": "chunk_start",
+      "chunk": 211,
+      "pages": [
+        841,
+        844
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-19T04:51:06.886Z",
+      "type": "card_text_ok",
+      "chunk": 210,
+      "cardCount": 9
+    },
+    {
+      "ts": "2026-07-19T04:51:06.886Z",
+      "type": "chunk_done",
+      "chunk": 210,
+      "pages": [
+        837,
+        840
+      ],
+      "cardCount": 9,
+      "method": "text-only",
+      "sourceChars": 3189,
+      "sourceCjk": 2639,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-19T04:51:51.271Z",
+      "type": "card_text_ok",
+      "chunk": 211,
+      "cardCount": 16
+    },
+    {
+      "ts": "2026-07-19T04:51:51.271Z",
+      "type": "chunk_done",
+      "chunk": 211,
+      "pages": [
+        841,
+        844
+      ],
+      "cardCount": 16,
+      "method": "text-only",
+      "sourceChars": 5794,
+      "sourceCjk": 4165,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-19T04:51:51.312Z",
+      "type": "chunk_start",
+      "chunk": 212,
+      "pages": [
+        845,
+        848
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-19T04:51:51.312Z",
+      "type": "chunk_start",
+      "chunk": 213,
+      "pages": [
+        849,
+        852
+      ],
+      "imageCount": 1
+    },
+    {
+      "ts": "2026-07-19T04:52:55.144Z",
+      "type": "card_multimodal_ok",
+      "chunk": 213,
+      "cardCount": 7
+    },
+    {
+      "ts": "2026-07-19T04:52:55.144Z",
+      "type": "chunk_done",
+      "chunk": 213,
+      "pages": [
+        849,
+        852
+      ],
+      "cardCount": 7,
+      "method": "multimodal",
+      "sourceChars": 2062,
+      "sourceCjk": 1615,
+      "imageCount": 1,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-19T04:53:47.836Z",
+      "type": "card_text_ok",
+      "chunk": 212,
+      "cardCount": 19
+    },
+    {
+      "ts": "2026-07-19T04:53:47.836Z",
+      "type": "chunk_done",
+      "chunk": 212,
+      "pages": [
+        845,
+        848
+      ],
+      "cardCount": 19,
+      "method": "text-only",
+      "sourceChars": 5044,
+      "sourceCjk": 4324,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-19T04:53:47.878Z",
+      "type": "chunk_start",
+      "chunk": 214,
+      "pages": [
+        853,
+        856
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-19T04:53:47.879Z",
+      "type": "chunk_start",
+      "chunk": 215,
+      "pages": [
+        857,
+        860
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-19T04:55:10.509Z",
+      "type": "card_text_ok",
+      "chunk": 214,
+      "cardCount": 9
+    },
+    {
+      "ts": "2026-07-19T04:55:10.509Z",
+      "type": "chunk_done",
+      "chunk": 214,
+      "pages": [
+        853,
+        856
+      ],
+      "cardCount": 9,
+      "method": "text-only",
+      "sourceChars": 4972,
+      "sourceCjk": 3250,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-19T04:55:20.954Z",
+      "type": "card_text_ok",
+      "chunk": 215,
+      "cardCount": 8
+    },
+    {
+      "ts": "2026-07-19T04:55:20.955Z",
+      "type": "chunk_done",
+      "chunk": 215,
+      "pages": [
+        857,
+        860
+      ],
+      "cardCount": 8,
+      "method": "text-only",
+      "sourceChars": 5687,
+      "sourceCjk": 2889,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-19T04:55:20.982Z",
+      "type": "chunk_start",
+      "chunk": 216,
+      "pages": [
+        861,
+        864
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-19T04:55:20.983Z",
+      "type": "chunk_start",
+      "chunk": 217,
+      "pages": [
+        865,
+        868
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-19T04:56:26.033Z",
+      "type": "card_text_ok",
+      "chunk": 217,
+      "cardCount": 6
+    },
+    {
+      "ts": "2026-07-19T04:56:26.034Z",
+      "type": "chunk_done",
+      "chunk": 217,
+      "pages": [
+        865,
+        868
+      ],
+      "cardCount": 6,
+      "method": "text-only",
+      "sourceChars": 5084,
+      "sourceCjk": 1333,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-19T04:56:36.725Z",
+      "type": "card_text_ok",
+      "chunk": 216,
+      "cardCount": 6
+    },
+    {
+      "ts": "2026-07-19T04:56:36.726Z",
+      "type": "chunk_done",
+      "chunk": 216,
+      "pages": [
+        861,
+        864
+      ],
+      "cardCount": 6,
+      "method": "text-only",
+      "sourceChars": 5861,
+      "sourceCjk": 1552,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-19T04:56:36.747Z",
+      "type": "chunk_start",
+      "chunk": 218,
+      "pages": [
+        869,
+        872
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-19T04:56:36.748Z",
+      "type": "chunk_start",
+      "chunk": 219,
+      "pages": [
+        873,
+        876
+      ],
+      "imageCount": 1
+    },
+    {
+      "ts": "2026-07-19T04:57:32.587Z",
+      "type": "card_text_ok",
+      "chunk": 218,
+      "cardCount": 6
+    },
+    {
+      "ts": "2026-07-19T04:57:32.588Z",
+      "type": "chunk_done",
+      "chunk": 218,
+      "pages": [
+        869,
+        872
+      ],
+      "cardCount": 6,
+      "method": "text-only",
+      "sourceChars": 5172,
+      "sourceCjk": 997,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-19T04:57:34.259Z",
+      "type": "card_multimodal_ok",
+      "chunk": 219,
+      "cardCount": 7
+    },
+    {
+      "ts": "2026-07-19T04:57:34.259Z",
+      "type": "chunk_done",
+      "chunk": 219,
+      "pages": [
+        873,
+        876
+      ],
+      "cardCount": 7,
+      "method": "multimodal",
+      "sourceChars": 2389,
+      "sourceCjk": 1305,
+      "imageCount": 1,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-19T04:57:34.284Z",
+      "type": "chunk_start",
+      "chunk": 220,
+      "pages": [
+        877,
+        880
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-19T04:57:34.285Z",
+      "type": "chunk_start",
+      "chunk": 221,
+      "pages": [
+        881,
+        884
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-19T04:57:53.499Z",
+      "type": "model_retry",
+      "attempt": 1,
+      "delayMs": 750,
+      "error": "read ECONNRESET"
+    },
+    {
+      "ts": "2026-07-19T04:58:39.964Z",
+      "type": "card_text_ok",
+      "chunk": 221,
+      "cardCount": 10
+    },
+    {
+      "ts": "2026-07-19T04:58:39.965Z",
+      "type": "chunk_done",
+      "chunk": 221,
+      "pages": [
+        881,
+        884
+      ],
+      "cardCount": 10,
+      "method": "text-only",
+      "sourceChars": 4898,
+      "sourceCjk": 2921,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-19T04:59:10.087Z",
+      "type": "card_text_ok",
+      "chunk": 220,
+      "cardCount": 9
+    },
+    {
+      "ts": "2026-07-19T04:59:10.087Z",
+      "type": "chunk_done",
+      "chunk": 220,
+      "pages": [
+        877,
+        880
+      ],
+      "cardCount": 9,
+      "method": "text-only",
+      "sourceChars": 4127,
+      "sourceCjk": 2762,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-19T04:59:10.116Z",
+      "type": "chunk_start",
+      "chunk": 222,
+      "pages": [
+        885,
+        888
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-19T04:59:10.117Z",
+      "type": "chunk_start",
+      "chunk": 223,
+      "pages": [
+        889,
+        892
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-19T05:00:29.665Z",
+      "type": "card_text_ok",
+      "chunk": 222,
+      "cardCount": 9
+    },
+    {
+      "ts": "2026-07-19T05:00:29.665Z",
+      "type": "chunk_done",
+      "chunk": 222,
+      "pages": [
+        885,
+        888
+      ],
+      "cardCount": 9,
+      "method": "text-only",
+      "sourceChars": 5471,
+      "sourceCjk": 1371,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-19T05:00:33.278Z",
+      "type": "card_text_ok",
+      "chunk": 223,
+      "cardCount": 10
+    },
+    {
+      "ts": "2026-07-19T05:00:33.279Z",
+      "type": "chunk_done",
+      "chunk": 223,
+      "pages": [
+        889,
+        892
+      ],
+      "cardCount": 10,
+      "method": "text-only",
+      "sourceChars": 5324,
+      "sourceCjk": 3712,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-19T05:00:33.310Z",
+      "type": "chunk_start",
+      "chunk": 224,
+      "pages": [
+        893,
+        896
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-19T05:00:33.311Z",
+      "type": "chunk_start",
+      "chunk": 225,
+      "pages": [
+        897,
+        900
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-19T05:01:47.560Z",
+      "type": "card_text_ok",
+      "chunk": 224,
+      "cardCount": 9
+    },
+    {
+      "ts": "2026-07-19T05:01:47.560Z",
+      "type": "chunk_done",
+      "chunk": 224,
+      "pages": [
+        893,
+        896
+      ],
+      "cardCount": 9,
+      "method": "text-only",
+      "sourceChars": 4229,
+      "sourceCjk": 3188,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-19T05:02:04.056Z",
+      "type": "card_text_ok",
+      "chunk": 225,
+      "cardCount": 8
+    },
+    {
+      "ts": "2026-07-19T05:02:04.057Z",
+      "type": "chunk_done",
+      "chunk": 225,
+      "pages": [
+        897,
+        900
+      ],
+      "cardCount": 8,
+      "method": "text-only",
+      "sourceChars": 4179,
+      "sourceCjk": 1931,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-19T05:02:04.086Z",
+      "type": "chunk_start",
+      "chunk": 226,
+      "pages": [
+        901,
+        904
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-19T05:02:04.087Z",
+      "type": "chunk_start",
+      "chunk": 227,
+      "pages": [
+        905,
+        908
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-19T05:03:22.949Z",
+      "type": "card_text_ok",
+      "chunk": 227,
+      "cardCount": 9
+    },
+    {
+      "ts": "2026-07-19T05:03:22.949Z",
+      "type": "chunk_done",
+      "chunk": 227,
+      "pages": [
+        905,
+        908
+      ],
+      "cardCount": 9,
+      "method": "text-only",
+      "sourceChars": 4797,
+      "sourceCjk": 3499,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-19T05:03:34.903Z",
+      "type": "card_text_ok",
+      "chunk": 226,
+      "cardCount": 10
+    },
+    {
+      "ts": "2026-07-19T05:03:34.904Z",
+      "type": "chunk_done",
+      "chunk": 226,
+      "pages": [
+        901,
+        904
+      ],
+      "cardCount": 10,
+      "method": "text-only",
+      "sourceChars": 5171,
+      "sourceCjk": 1458,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-19T05:03:34.934Z",
+      "type": "chunk_start",
+      "chunk": 228,
+      "pages": [
+        909,
+        912
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-19T05:03:34.935Z",
+      "type": "chunk_start",
+      "chunk": 229,
+      "pages": [
+        913,
+        916
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-19T05:04:23.361Z",
+      "type": "card_text_ok",
+      "chunk": 229,
+      "cardCount": 4
+    },
+    {
+      "ts": "2026-07-19T05:04:23.361Z",
+      "type": "chunk_done",
+      "chunk": 229,
+      "pages": [
+        913,
+        916
+      ],
+      "cardCount": 4,
+      "method": "text-only",
+      "sourceChars": 5326,
+      "sourceCjk": 380,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-19T05:05:01.320Z",
+      "type": "card_text_ok",
+      "chunk": 228,
+      "cardCount": 8
+    },
+    {
+      "ts": "2026-07-19T05:05:01.321Z",
+      "type": "chunk_done",
+      "chunk": 228,
+      "pages": [
+        909,
+        912
+      ],
+      "cardCount": 8,
+      "method": "text-only",
+      "sourceChars": 5170,
+      "sourceCjk": 2709,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-19T05:05:01.342Z",
+      "type": "chunk_start",
+      "chunk": 230,
+      "pages": [
+        917,
+        920
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-19T05:05:01.343Z",
+      "type": "chunk_start",
+      "chunk": 231,
+      "pages": [
+        921,
+        924
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-19T05:06:07.244Z",
+      "type": "card_text_ok",
+      "chunk": 230,
+      "cardCount": 6
+    },
+    {
+      "ts": "2026-07-19T05:06:07.244Z",
+      "type": "chunk_done",
+      "chunk": 230,
+      "pages": [
+        917,
+        920
+      ],
+      "cardCount": 6,
+      "method": "text-only",
+      "sourceChars": 6156,
+      "sourceCjk": 1356,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-19T05:06:35.066Z",
+      "type": "card_text_fail",
+      "chunk": 231,
+      "error": "Bad escaped character in JSON at position 6364 (line 1 column 6365)"
+    },
+    {
+      "ts": "2026-07-19T05:06:35.066Z",
+      "type": "card_premium_escalate",
+      "chunk": 231,
+      "model": "gpt-5.6-sol",
+      "reason": "mini_zero_cards"
+    },
+    {
+      "ts": "2026-07-19T05:08:03.758Z",
+      "type": "model_retry",
+      "attempt": 1,
+      "delayMs": 750,
+      "error": "HTTP 408: {\"error\":{\"message\":\"stream error: stream disconnected before completion: stream closed before ***.completed\",\"type\":\"invalid_request_error\",\"param\":\"\",\"code\":null}}"
+    },
+    {
+      "ts": "2026-07-19T05:09:54.254Z",
+      "type": "card_premium_ok",
+      "chunk": 231,
+      "cardCount": 11
+    },
+    {
+      "ts": "2026-07-19T05:09:54.254Z",
+      "type": "chunk_done",
+      "chunk": 231,
+      "pages": [
+        921,
+        924
+      ],
+      "cardCount": 11,
+      "method": "premium",
+      "sourceChars": 4652,
+      "sourceCjk": 1663,
+      "imageCount": 0,
+      "hadRequestFailure": true,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-19T05:09:54.284Z",
+      "type": "chunk_start",
+      "chunk": 232,
+      "pages": [
+        925,
+        928
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-19T05:09:54.285Z",
+      "type": "chunk_start",
+      "chunk": 233,
+      "pages": [
+        929,
+        932
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-19T05:11:09.127Z",
+      "type": "card_text_ok",
+      "chunk": 232,
+      "cardCount": 7
+    },
+    {
+      "ts": "2026-07-19T05:11:09.127Z",
+      "type": "chunk_done",
+      "chunk": 232,
+      "pages": [
+        925,
+        928
+      ],
+      "cardCount": 7,
+      "method": "text-only",
+      "sourceChars": 4564,
+      "sourceCjk": 1132,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-19T05:11:16.325Z",
+      "type": "card_text_ok",
+      "chunk": 233,
+      "cardCount": 8
+    },
+    {
+      "ts": "2026-07-19T05:11:16.325Z",
+      "type": "chunk_done",
+      "chunk": 233,
+      "pages": [
+        929,
+        932
+      ],
+      "cardCount": 8,
+      "method": "text-only",
+      "sourceChars": 3662,
+      "sourceCjk": 1098,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-19T05:11:16.348Z",
+      "type": "chunk_start",
+      "chunk": 234,
+      "pages": [
+        933,
+        936
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-19T05:11:16.349Z",
+      "type": "chunk_start",
+      "chunk": 235,
+      "pages": [
+        937,
+        940
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-19T05:12:20.342Z",
+      "type": "card_text_ok",
+      "chunk": 234,
+      "cardCount": 5
+    },
+    {
+      "ts": "2026-07-19T05:12:20.343Z",
+      "type": "chunk_done",
+      "chunk": 234,
+      "pages": [
+        933,
+        936
+      ],
+      "cardCount": 5,
+      "method": "text-only",
+      "sourceChars": 4545,
+      "sourceCjk": 2009,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-19T05:12:32.130Z",
+      "type": "card_text_ok",
+      "chunk": 235,
+      "cardCount": 7
+    },
+    {
+      "ts": "2026-07-19T05:12:32.130Z",
+      "type": "chunk_done",
+      "chunk": 235,
+      "pages": [
+        937,
+        940
+      ],
+      "cardCount": 7,
+      "method": "text-only",
+      "sourceChars": 4077,
+      "sourceCjk": 2497,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-19T05:12:32.153Z",
+      "type": "chunk_start",
+      "chunk": 236,
+      "pages": [
+        941,
+        944
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-19T05:12:32.154Z",
+      "type": "chunk_start",
+      "chunk": 237,
+      "pages": [
+        945,
+        948
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-19T05:15:32.164Z",
+      "type": "model_retry",
+      "attempt": 1,
+      "delayMs": 750,
+      "error": "timeout 180000ms"
+    },
+    {
+      "ts": "2026-07-19T05:15:32.164Z",
+      "type": "model_retry",
+      "attempt": 1,
+      "delayMs": 750,
+      "error": "timeout 180000ms"
+    },
+    {
+      "ts": "2026-07-19T05:16:27.547Z",
+      "type": "card_text_ok",
+      "chunk": 236,
+      "cardCount": 6
+    },
+    {
+      "ts": "2026-07-19T05:16:27.547Z",
+      "type": "chunk_done",
+      "chunk": 236,
+      "pages": [
+        941,
+        944
+      ],
+      "cardCount": 6,
+      "method": "text-only",
+      "sourceChars": 3341,
+      "sourceCjk": 1410,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-19T05:16:43.152Z",
+      "type": "card_text_ok",
+      "chunk": 237,
+      "cardCount": 6
+    },
+    {
+      "ts": "2026-07-19T05:16:43.152Z",
+      "type": "chunk_done",
+      "chunk": 237,
+      "pages": [
+        945,
+        948
+      ],
+      "cardCount": 6,
+      "method": "text-only",
+      "sourceChars": 4176,
+      "sourceCjk": 1601,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-19T05:16:43.175Z",
+      "type": "chunk_start",
+      "chunk": 238,
+      "pages": [
+        949,
+        952
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-19T05:16:43.176Z",
+      "type": "chunk_start",
+      "chunk": 239,
+      "pages": [
+        953,
+        956
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-19T05:17:44.313Z",
+      "type": "card_text_ok",
+      "chunk": 239,
+      "cardCount": 6
+    },
+    {
+      "ts": "2026-07-19T05:17:44.313Z",
+      "type": "chunk_done",
+      "chunk": 239,
+      "pages": [
+        953,
+        956
+      ],
+      "cardCount": 6,
+      "method": "text-only",
+      "sourceChars": 4253,
+      "sourceCjk": 1326,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-19T05:17:46.485Z",
+      "type": "card_text_ok",
+      "chunk": 238,
+      "cardCount": 6
+    },
+    {
+      "ts": "2026-07-19T05:17:46.485Z",
+      "type": "chunk_done",
+      "chunk": 238,
+      "pages": [
+        949,
+        952
+      ],
+      "cardCount": 6,
+      "method": "text-only",
+      "sourceChars": 4249,
+      "sourceCjk": 1184,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-19T05:17:46.508Z",
+      "type": "chunk_start",
+      "chunk": 240,
+      "pages": [
+        957,
+        960
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-19T05:17:46.508Z",
+      "type": "chunk_start",
+      "chunk": 241,
+      "pages": [
+        961,
+        964
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-19T05:18:58.114Z",
+      "type": "card_text_ok",
+      "chunk": 240,
+      "cardCount": 6
+    },
+    {
+      "ts": "2026-07-19T05:18:58.114Z",
+      "type": "chunk_done",
+      "chunk": 240,
+      "pages": [
+        957,
+        960
+      ],
+      "cardCount": 6,
+      "method": "text-only",
+      "sourceChars": 4065,
+      "sourceCjk": 1609,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-19T05:19:01.214Z",
+      "type": "card_text_ok",
+      "chunk": 241,
+      "cardCount": 8
+    },
+    {
+      "ts": "2026-07-19T05:19:01.214Z",
+      "type": "chunk_done",
+      "chunk": 241,
+      "pages": [
+        961,
+        964
+      ],
+      "cardCount": 8,
+      "method": "text-only",
+      "sourceChars": 4355,
+      "sourceCjk": 1166,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-19T05:19:01.239Z",
+      "type": "chunk_start",
+      "chunk": 242,
+      "pages": [
+        965,
+        968
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-19T05:19:01.240Z",
+      "type": "chunk_start",
+      "chunk": 243,
+      "pages": [
+        969,
+        972
+      ],
+      "imageCount": 1
+    },
+    {
+      "ts": "2026-07-19T05:20:18.500Z",
+      "type": "card_text_ok",
+      "chunk": 242,
+      "cardCount": 8
+    },
+    {
+      "ts": "2026-07-19T05:20:18.501Z",
+      "type": "chunk_done",
+      "chunk": 242,
+      "pages": [
+        965,
+        968
+      ],
+      "cardCount": 8,
+      "method": "text-only",
+      "sourceChars": 4960,
+      "sourceCjk": 2046,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-19T05:20:32.017Z",
+      "type": "card_multimodal_ok",
+      "chunk": 243,
+      "cardCount": 9
+    },
+    {
+      "ts": "2026-07-19T05:20:32.018Z",
+      "type": "chunk_done",
+      "chunk": 243,
+      "pages": [
+        969,
+        972
+      ],
+      "cardCount": 9,
+      "method": "multimodal",
+      "sourceChars": 3045,
+      "sourceCjk": 2133,
+      "imageCount": 1,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-19T05:20:32.049Z",
+      "type": "chunk_start",
+      "chunk": 244,
+      "pages": [
+        973,
+        976
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-19T05:20:32.050Z",
+      "type": "chunk_start",
+      "chunk": 245,
+      "pages": [
+        977,
+        980
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-19T05:22:00.900Z",
+      "type": "card_text_ok",
+      "chunk": 245,
+      "cardCount": 7
+    },
+    {
+      "ts": "2026-07-19T05:22:00.900Z",
+      "type": "chunk_done",
+      "chunk": 245,
+      "pages": [
+        977,
+        980
+      ],
+      "cardCount": 7,
+      "method": "text-only",
+      "sourceChars": 4778,
+      "sourceCjk": 1776,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-19T05:22:39.314Z",
+      "type": "card_text_ok",
+      "chunk": 244,
+      "cardCount": 13
+    },
+    {
+      "ts": "2026-07-19T05:22:39.314Z",
+      "type": "chunk_done",
+      "chunk": 244,
+      "pages": [
+        973,
+        976
+      ],
+      "cardCount": 13,
+      "method": "text-only",
+      "sourceChars": 5498,
+      "sourceCjk": 3545,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-19T05:22:39.344Z",
+      "type": "chunk_start",
+      "chunk": 246,
+      "pages": [
+        981,
+        984
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-19T05:22:39.345Z",
+      "type": "chunk_start",
+      "chunk": 247,
+      "pages": [
+        985,
+        988
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-19T05:22:58.560Z",
+      "type": "model_retry",
+      "attempt": 1,
+      "delayMs": 750,
+      "error": "read ECONNRESET"
+    },
+    {
+      "ts": "2026-07-19T05:23:18.545Z",
+      "type": "model_retry",
+      "attempt": 2,
+      "delayMs": 1500,
+      "error": "read ECONNRESET"
+    },
+    {
+      "ts": "2026-07-19T05:24:29.570Z",
+      "type": "card_text_ok",
+      "chunk": 246,
+      "cardCount": 5
+    },
+    {
+      "ts": "2026-07-19T05:24:29.570Z",
+      "type": "chunk_done",
+      "chunk": 246,
+      "pages": [
+        981,
+        984
+      ],
+      "cardCount": 5,
+      "method": "text-only",
+      "sourceChars": 4423,
+      "sourceCjk": 1556,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-19T05:25:39.348Z",
+      "type": "model_retry",
+      "attempt": 1,
+      "delayMs": 750,
+      "error": "timeout 180000ms"
+    },
+    {
+      "ts": "2026-07-19T05:26:59.095Z",
+      "type": "card_text_ok",
+      "chunk": 247,
+      "cardCount": 8
+    },
+    {
+      "ts": "2026-07-19T05:26:59.095Z",
+      "type": "chunk_done",
+      "chunk": 247,
+      "pages": [
+        985,
+        988
+      ],
+      "cardCount": 8,
+      "method": "text-only",
+      "sourceChars": 4757,
+      "sourceCjk": 3144,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-19T05:26:59.118Z",
+      "type": "chunk_start",
+      "chunk": 248,
+      "pages": [
+        989,
+        992
+      ],
+      "imageCount": 1
+    },
+    {
+      "ts": "2026-07-19T05:26:59.119Z",
+      "type": "chunk_start",
+      "chunk": 249,
+      "pages": [
+        993,
+        996
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-19T05:28:05.258Z",
+      "type": "card_multimodal_ok",
+      "chunk": 248,
+      "cardCount": 6
+    },
+    {
+      "ts": "2026-07-19T05:28:05.258Z",
+      "type": "chunk_done",
+      "chunk": 248,
+      "pages": [
+        989,
+        992
+      ],
+      "cardCount": 6,
+      "method": "multimodal",
+      "sourceChars": 1799,
+      "sourceCjk": 934,
+      "imageCount": 1,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-19T05:28:45.952Z",
+      "type": "card_text_ok",
+      "chunk": 249,
+      "cardCount": 14
+    },
+    {
+      "ts": "2026-07-19T05:28:45.952Z",
+      "type": "chunk_done",
+      "chunk": 249,
+      "pages": [
+        993,
+        996
+      ],
+      "cardCount": 14,
+      "method": "text-only",
+      "sourceChars": 4290,
+      "sourceCjk": 3290,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-19T05:28:45.983Z",
+      "type": "chunk_start",
+      "chunk": 250,
+      "pages": [
+        997,
+        1000
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-19T05:28:45.985Z",
+      "type": "chunk_start",
+      "chunk": 251,
+      "pages": [
+        1001,
+        1004
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-19T05:30:09.962Z",
+      "type": "card_text_ok",
+      "chunk": 250,
+      "cardCount": 9
+    },
+    {
+      "ts": "2026-07-19T05:30:09.962Z",
+      "type": "chunk_done",
+      "chunk": 250,
+      "pages": [
+        997,
+        1000
+      ],
+      "cardCount": 9,
+      "method": "text-only",
+      "sourceChars": 3917,
+      "sourceCjk": 2088,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-19T05:31:11.030Z",
+      "type": "card_text_ok",
+      "chunk": 251,
+      "cardCount": 25
+    },
+    {
+      "ts": "2026-07-19T05:31:11.030Z",
+      "type": "chunk_done",
+      "chunk": 251,
+      "pages": [
+        1001,
+        1004
+      ],
+      "cardCount": 25,
+      "method": "text-only",
+      "sourceChars": 3317,
+      "sourceCjk": 2608,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-19T05:31:11.077Z",
+      "type": "chunk_start",
+      "chunk": 252,
+      "pages": [
+        1005,
+        1008
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-07-19T05:31:11.078Z",
+      "type": "chunk_start",
+      "chunk": 253,
+      "pages": [
+        1009,
+        1012
+      ],
+      "imageCount": 1
+    },
+    {
+      "ts": "2026-07-19T05:32:03.849Z",
+      "type": "card_multimodal_ok",
+      "chunk": 253,
+      "cardCount": 5
+    },
+    {
+      "ts": "2026-07-19T05:32:03.849Z",
+      "type": "chunk_done",
+      "chunk": 253,
+      "pages": [
+        1009,
+        1012
+      ],
+      "cardCount": 5,
+      "method": "multimodal",
+      "sourceChars": 2534,
+      "sourceCjk": 1994,
+      "imageCount": 1,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-19T05:32:35.537Z",
+      "type": "card_text_ok",
+      "chunk": 252,
+      "cardCount": 9
+    },
+    {
+      "ts": "2026-07-19T05:32:35.538Z",
+      "type": "chunk_done",
+      "chunk": 252,
+      "pages": [
+        1005,
+        1008
+      ],
+      "cardCount": 9,
+      "method": "text-only",
+      "sourceChars": 3516,
+      "sourceCjk": 2834,
+      "imageCount": 0,
+      "hadRequestFailure": false,
+      "terminalFailure": false
+    },
+    {
+      "ts": "2026-07-19T06:07:14.985Z",
+      "type": "model_retry",
+      "attempt": 1,
+      "delayMs": 750,
+      "error": "read ECONNRESET"
+    }
+  ],
+  "resumedAt": "2026-07-19T04:27:12.020Z",
+  "resumedFromChunk": 179,
+  "needsVerification": 317,
+  "hasTeachingMap": true,
+  "extraction": {
+    "pages": 1012,
+    "sparsePages": 29,
+    "garbledPages": 0,
+    "renderedPages": 29
+  },
+  "chunksProcessed": 253,
+  "activationEligible": true,
+  "requestedPageRange": [
+    1,
+    1012
+  ],
+  "lastCardPage": 1010,
+  "coverageRatio": 0.998,
+  "chunkCount": 253,
+  "zeroCardChunks": 3,
+  "failedChunks": 2,
+  "terminalFailedChunks": 0,
+  "failedEvents": 7,
+  "trailingEmptyChunks": 0,
+  "teachingMapDegraded": false,
+  "chunksExpected": 253,
+  "teachingMapOrderRepairedAt": "2026-07-20T00:20:34.645Z"
+}

@@ -1,0 +1,43 @@
+{
+  "title": "Unicode转义序列",
+  "definition": "在非原始的 UTF-8 字符串字面量中，可以使用 `\\u` 后跟十六进制数字的形式插入指定的 Unicode 码点。例如，`\\u03C0` 表示希腊字母 pi，`\\u00B2` 表示上标 2。",
+  "key_points": [
+    "Unicode转义序列用于在源代码中按码点指定字符。",
+    "示例格式为 `\\u03C0` 和 `\\u00B2`。",
+    "原始字符串字面量不会按普通字符串的方式处理转义序列，因此本知识点针对非原始字符串字面量。"
+  ],
+  "examples": [
+    "`const char8_t* formula { u8\"\\u03C0\\u00B2\" };`",
+    "上述字符串表示由 pi 字符和上标 2 组成的公式文本。"
+  ],
+  "misconceptions": [
+    "`\\u03C0` 表示的是 Unicode 码点，不是字符串中的四个普通可见字符。",
+    "原始字符串字面量与普通字符串字面量对反斜杠转义的处理不同。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何在 UTF-8 字符串字面量中插入 Unicode 字符 pi？",
+      "a": "可以写成 `u8\"\\u03C0\"`，其中 `\\u03C0` 表示 pi 的 Unicode 码点。"
+    },
+    {
+      "q": "`\\u00B2` 表示什么？",
+      "a": "它表示 Unicode 字符上标 2。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "Unicode编码",
+    "C++转义序列"
+  ],
+  "source_pages": [
+    662,
+    662
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1385_unicode转义序列",
+  "_chunk_pages": [
+    661,
+    664
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "title": "为 directed_graph 增加 assign 方法",
+  "definition": "directed_graph 可以仿照 vector 增加 assign 方法，用给定迭代器范围或 initializer_list 中的元素替换当前图中的所有节点。assign 的语义是先清空当前图，再按输入顺序插入新的节点。",
+  "key_points": [
+    "迭代器范围版本是函数模板：$\\texttt{template <typename Iter> void assign(Iter first, Iter last);}$。",
+    "还可以提供初始化列表版本：$\\texttt{void assign(std::initializer_list<T> init);}$。",
+    "assign 会清空当前图，然后遍历输入范围并调用 insert 插入每个元素。",
+    "迭代器版本的基本实现为：先 $\\texttt{clear();}$，再执行 $\\texttt{for (auto iter = first; iter != last; ++iter) insert(*iter);}$。"
+  ],
+  "examples": [
+    "接口：$\\texttt{template <typename Iter> void assign(Iter first, Iter last);}$。",
+    "接口：$\\texttt{void assign(std::initializer_list<T> init);}$。",
+    "范围版本实现：$\\texttt{clear(); for (auto iter = first; iter != last; ++iter) \\\\{ insert(*iter); \\\\}}$。"
+  ],
+  "misconceptions": [
+    "assign 不是在当前图末尾追加元素，而是先清空当前图再插入新元素。",
+    "迭代器范围版本接收的是半开区间 $[first,last)$，遍历在 iter 等于 last 时结束。",
+    "assign 的迭代器版本本身是函数模板，不要求迭代器类型固定为某一种容器的迭代器。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "directed_graph::assign 的语义是什么？",
+      "a": "用指定迭代器范围或 initializer_list 中的元素替换当前图的内容；实现上先清空当前图，再逐个插入新节点。"
+    },
+    {
+      "q": "为什么 assign(Iter first, Iter last) 要声明为函数模板？",
+      "a": "因为它应支持不同类型的输入迭代器，只要迭代器能够遍历元素并提供可用于 insert 的值即可。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++迭代器范围",
+    "std::initializer_list",
+    "模板函数"
+  ],
+  "source_pages": [
+    752,
+    752
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1556_为_directed_graph_增加_assign_方法",
+  "_chunk_pages": [
+    749,
+    752
+  ]
+}

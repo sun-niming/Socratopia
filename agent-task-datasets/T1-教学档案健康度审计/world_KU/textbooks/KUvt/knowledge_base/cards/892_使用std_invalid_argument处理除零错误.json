@@ -1,0 +1,40 @@
+{
+  "title": "使用std::invalid_argument处理除零错误",
+  "definition": "教材用安全除法示例说明：当除法的分母为 0 时，函数可以抛出一个 std::invalid_argument 类型的异常，并在调用处用 catch 捕获该异常；该异常的 what() 方法可返回构造时提供的错误描述字符串。",
+  "key_points": [
+    "std::invalid_argument 是标准异常类型，教材指出它定义在 `<stdexcept>` 中。",
+    "分母为 0 时抛出异常，正常除法结果不会返回。",
+    "捕获异常后可以通过 `e.what()` 获取描述异常的字符串。",
+    "示例中的错误消息为 `Divide by zero`，输出形式为 `Caught exception: Divide by zero`。"
+  ],
+  "examples": [
+    "示意代码：`double SafeDivide(double num, double den) { if (den == 0) { throw std::invalid_argument{\"Divide by zero\"}; } return num / den; }`。调用 `SafeDivide(10, 0)` 时，调用方的 `catch (const std::invalid_argument& e)` 可以输出 `e.what()`。"
+  ],
+  "misconceptions": [
+    "分母为 0 时函数会返回某个特殊的 double 值；示例采用的是抛出异常。",
+    "what() 返回一个可修改的字符串；教材说明它返回描述异常的 `const char*` 字符串。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "SafeDivide(10, 0)发生什么？",
+      "a": "因为分母为 0，SafeDivide 抛出带有 `Divide by zero` 消息的 std::invalid_argument 异常；若调用方捕获它，可通过 e.what() 输出该消息。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "throw语句",
+    "try/catch结构",
+    "C++标准异常类型"
+  ],
+  "source_pages": [
+    439,
+    440
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "892_使用std_invalid_argument处理除零错误",
+  "_chunk_pages": [
+    437,
+    440
+  ]
+}

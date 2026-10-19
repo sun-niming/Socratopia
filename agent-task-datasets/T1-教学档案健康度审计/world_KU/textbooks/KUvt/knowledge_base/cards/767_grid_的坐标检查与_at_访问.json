@@ -1,0 +1,46 @@
+{
+  "title": "Grid 的坐标检查与 at() 访问",
+  "definition": "`Grid<T>` 通过 `verifyCoordinate(size_t x, size_t y) const` 检查坐标是否超出网格范围。若 `x >= m_width` 或 `y >= m_height`，就抛出 `std::out_of_range` 异常。`at()` 先调用坐标检查，再返回对应网格单元的 `std::optional<T>` 引用；常量对象使用 const 引用版本，非 const 对象使用可修改的非 const 引用版本。",
+  "key_points": [
+    "横坐标合法条件是 $x < m\\_width$。",
+    "纵坐标合法条件是 $y < m\\_height$。",
+    "坐标越界时抛出 `std::out_of_range`。",
+    "`const` 版本返回 `const std::optional<T>&`，非 `const` 版本返回 `std::optional<T>&`。",
+    "非 `const` 版本可以通过 `std::as_const(*this).at(x, y)` 调用 const 版本，再使用 `const_cast` 返回可修改引用。"
+  ],
+  "examples": [
+    "坐标合法范围可写为：$$0 \\le x < m\\_width,\\qquad 0 \\le y < m\\_height.$$",
+    "访问并赋值：`myIntGrid.at(0, 0) = 10;`",
+    "读取可选值：`int x { myIntGrid.at(0, 0).value_or(0) };`"
+  ],
+  "misconceptions": [
+    "`at()` 返回的不是一定存在的 `T` 值，而是 `std::optional<T>` 的引用。",
+    "坐标检查不是只检查是否为负；参数类型是 `size_t`，教材中的检查重点是是否达到或超过宽度、高度。",
+    "const 网格对象不能通过 `at()` 修改单元，因为它返回 const optional 引用。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`verifyCoordinate` 何时抛出 `std::out_of_range`？",
+      "a": "当 $x \\ge m\\_width$ 或 $y \\ge m\\_height$ 时抛出。"
+    },
+    {
+      "q": "`Grid<T>::at()` 的 const 和非 const 版本分别返回什么？",
+      "a": "const 版本返回 `const std::optional<T>&`；非 const 版本返回 `std::optional<T>&`。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "Grid 的值语义与 std::optional"
+  ],
+  "source_pages": [
+    379,
+    379
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "767_grid_的坐标检查与_at_访问",
+  "_chunk_pages": [
+    377,
+    380
+  ]
+}

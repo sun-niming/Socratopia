@@ -1,0 +1,35 @@
+{
+  "title": "HTML5文档类型声明",
+  "definition": "HTML5文档应使用正确的文档类型声明：<!doctype html>。",
+  "key_points": [
+    "HTML5的文档类型声明写法是<!doctype html>。",
+    "这属于HTML5代码约定的一部分。"
+  ],
+  "examples": [
+    "<!doctype html>"
+  ],
+  "misconceptions": [
+    "文档类型声明不是可有可无的装饰，它是HTML5页面书写规范的一部分。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "HTML5使用什么文档类型声明？",
+      "a": "<!doctype html>"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "HTML基础标签"
+  ],
+  "source_pages": [
+    41,
+    44
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "058_html5文档类型声明",
+  "_chunk_pages": [
+    41,
+    44
+  ]
+}

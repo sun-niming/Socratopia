@@ -1,0 +1,46 @@
+{
+  "title": "EAP在802.11i鉴别中的封装与传输",
+  "definition": "可扩展鉴别协议（EAP）定义客户与鉴别服务器之间交互时使用的请求/响应式端到端报文格式。在802.11i场景中，STA与AP之间的EAP报文使用EAPoL进行封装并通过802.11无线链路传输；AP拆封后，再使用RADIUS重新封装，通过UDP/IP发送给鉴别服务器。",
+  "key_points": [
+    "EAP是STA与AS之间的端到端鉴别协议，AP主要转发报文。",
+    "STA到AP的链路使用EAPoL（EAP over LAN）封装。",
+    "AP到AS的传输使用RADIUS封装，并运行在UDP/IP之上。",
+    "802.11i没有强制规定唯一的EAP鉴别方法，教材指出实践中经常使用EAP-TLS。",
+    "EAP鉴别可以使客户与鉴别服务器相互鉴别，并导出双方都知道的主密钥。"
+  ],
+  "examples": [
+    "协议路径可写为：$$\\text{STA}\\xrightarrow[802.11无线链路]{\\text{EAPoL封装}}\\text{AP}\\xrightarrow[\\text{UDP/IP}]{\\text{RADIUS重新封装}}\\text{AS}$$",
+    "EAP-TLS利用公钥技术，包括不重数加密和报文摘要，使客户与鉴别服务器能够相互鉴别并导出主密钥。"
+  ],
+  "misconceptions": [
+    "EAP报文并不是只在STA与AP之间完成端到端鉴别；鉴别对端是鉴别服务器，AP主要承担中继和重新封装作用。",
+    "EAPoL和RADIUS不是同一层次、同一段链路上的封装：EAPoL用于STA与AP之间，RADIUS用于AP与AS之间。",
+    "AP不一定执行具体的鉴别算法；鉴别方法由EAP方案实现，802.11i本身不强制唯一方案。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "EAP报文从无线客户到鉴别服务器经过哪些封装？",
+      "a": "STA与AP之间，EAP报文使用EAPoL封装并通过802.11无线链路发送；AP拆封后使用RADIUS重新封装，再通过UDP/IP传输到AS。"
+    },
+    {
+      "q": "EAP在802.11i鉴别中起什么作用？",
+      "a": "EAP定义STA与AS之间的请求/响应式端到端鉴别报文格式，并支持选择不同的鉴别方法，使双方能够相互鉴别并导出共享的主密钥。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "协议封装与解封装",
+    "公钥密码学基本概念"
+  ],
+  "source_pages": [
+    441,
+    444
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1024_eap在802_11i鉴别中的封装与传输",
+  "_chunk_pages": [
+    441,
+    444
+  ]
+}

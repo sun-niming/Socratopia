@@ -1,0 +1,50 @@
+{
+  "title": "浮点数 to_chars 的格式选项",
+  "definition": "std::to_chars 的浮点重载可以通过 std::chars_format 指定浮点数的文本表示格式。原文列出了 scientific、fixed、hex 和 general 四种枚举项，并给出了相应的表示风格。",
+  "key_points": [
+    "chars_format::scientific 使用科学计数法风格，形式类似 $(-)d.ddde\\pm dd$。",
+    "chars_format::fixed 使用定点表示法，形式类似 $(-)ddd.ddd$。",
+    "chars_format::hex 使用十六进制浮点表示法，形式类似 $(-)h.hhhp\\pm d$，原文特别注明不带 0x。",
+    "chars_format::general = fixed | scientific，表示一般格式。",
+    "浮点 to_chars 可以传入格式，也可以传入格式和精度。"
+  ],
+  "examples": [
+    "to_chars(first, last, value, chars_format::scientific);",
+    "to_chars(first, last, value, chars_format::fixed, precision);",
+    "chars_format::general"
+  ],
+  "misconceptions": [
+    "scientific 和 fixed 不是同一种输出形式：前者使用指数，后者使用定点小数形式。",
+    "chars_format::hex 的示例形式不应简单理解为普通整数十六进制格式；原文描述的是十六进制浮点风格。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "chars_format::scientific 的输出风格是什么？",
+      "a": "采用科学计数法，形式类似 $(-)d.ddde\\pm dd$。"
+    },
+    {
+      "q": "chars_format::fixed 与 chars_format::scientific 有什么区别？",
+      "a": "fixed 使用类似 $(-)ddd.ddd$ 的定点形式；scientific 使用类似 $(-)d.ddde\\pm dd$ 的科学计数法形式。"
+    },
+    {
+      "q": "chars_format::general 在原文中如何定义？",
+      "a": "原文将其定义为 fixed | scientific。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "std::to_chars",
+    "浮点数表示法"
+  ],
+  "source_pages": [
+    109,
+    112
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 chars_format scientific fixed hex general to_chars 浮点格式 precision 标准定义",
+  "concept_id": "160_浮点数_to_chars_的格式选项",
+  "_chunk_pages": [
+    109,
+    112
+  ]
+}

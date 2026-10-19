@@ -1,0 +1,42 @@
+{
+  "title": "std::pair与std::tuple的基本特征",
+  "definition": "std::pair可以保存两个值，两个值的类型分别在编译期确定；std::tuple是std::pair的泛化，可以保存任意数量的值，每个元素都有自己在编译期确定的类型。pair和tuple的元素数量及元素类型都是固定的。",
+  "key_points": [
+    "std::pair只有两个元素，通常通过`.first`和`.second`访问。",
+    "std::tuple可以包含任意数量的元素，元素类型可以各不相同。",
+    "tuple的大小和每个元素的类型在编译期确定。",
+    "C++模板参数推导（CTAD）可以根据构造函数实参推导pair或tuple的类型。"
+  ],
+  "examples": [
+    "代码示例：`std::pair<int, std::string> p1 { 16, \"Hello World\" };`，可通过`p1.first`和`p1.second`访问。",
+    "代码示例：`using MyTuple = std::tuple<int, std::string, bool>; MyTuple t1 { 16, \"Test\", true };`。",
+    "使用CTAD：`std::pair p2 { true, 0.123f };`。"
+  ],
+  "misconceptions": [
+    "std::tuple不是只能保存两个元素；两个元素的情况只是std::pair可以处理的特殊情况。",
+    "tuple的元素数量和类型不是运行时动态变化的，而是在编译期确定的。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "std::pair和std::tuple的主要区别是什么？",
+      "a": "std::pair固定保存两个值；std::tuple可以保存任意数量的值，并且每个元素可以有不同类型。"
+    },
+    {
+      "q": "tuple的大小和元素类型何时确定？",
+      "a": "在编译期确定。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [],
+  "source_pages": [
+    709,
+    709
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1474_std_pair与std_tuple的基本特征",
+  "_chunk_pages": [
+    709,
+    712
+  ]
+}

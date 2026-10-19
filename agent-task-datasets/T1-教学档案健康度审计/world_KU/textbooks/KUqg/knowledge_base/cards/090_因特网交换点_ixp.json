@@ -1,0 +1,43 @@
+{
+  "title": "因特网交换点 IXP",
+  "definition": "因特网交换点（Internet Exchange Point，IXP）是多个 ISP 可以在其中汇合并进行对等的地点。IXP 通常位于设有自身交换机的独立建筑物中，用于促进多个 ISP 之间的直接互联。",
+  "key_points": [
+    "IXP 将多个 ISP 集中到同一个交换环境中，便于它们彼此对等。",
+    "通过 IXP 对等，ISP 可以直接交换相互之间的流量，而不必总是经过上游 ISP。",
+    "教材将接入 ISP、区域 ISP、第一层 ISP、PoP、多宿、对等和 IXP 组成的生态系统称为网络结构 4。"
+  ],
+  "examples": [
+    "一个接入 ISP 和一个内容提供商网络可以在 IXP 处直接对等。",
+    "多个 ISP 将路由器接入同一 IXP 的交换机，在该处建立彼此之间的互联。"
+  ],
+  "misconceptions": [
+    "IXP 本身就是一个向所有用户提供互联网接入的 ISP。",
+    "连接到同一个 IXP 就表示所有 ISP 自动成为客户—提供商关系。",
+    "IXP 只能连接同一层级的 ISP。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "IXP 的主要作用是什么？",
+      "a": "IXP 是多个 ISP 汇合并进行对等的地点，使它们能够通过直接互联交换流量。"
+    },
+    {
+      "q": "ISP 为什么可能选择通过 IXP 进行对等？",
+      "a": "因为 IXP 提供集中、便于建立直接互联的交换环境，可以减少经过上游 ISP 的流量。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "ISP 对等与客户—提供商关系"
+  ],
+  "source_pages": [
+    41,
+    44
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "090_因特网交换点_ixp",
+  "_chunk_pages": [
+    41,
+    44
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "title": "多类样式",
+  "definition": "同一个元素的class属性可以写多个类名，多个类名之间用空格分隔。",
+  "key_points": [
+    "一个元素可以应用多个类样式",
+    "class属性中的多个类样式值用空格分隔"
+  ],
+  "examples": [
+    "<p class=\"p1 p2 p3\">段落文字</p>"
+  ],
+  "misconceptions": [
+    "多个类名不是用逗号分隔，也不是写多个class属性"
+  ],
+  "qa_pairs": [
+    {
+      "q": "一个元素如何应用多个类样式？",
+      "a": "在class属性中写多个类名，并用空格分隔。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "class选择器"
+  ],
+  "source_pages": [
+    89,
+    92
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "117_多类样式",
+  "_chunk_pages": [
+    89,
+    92
+  ]
+}

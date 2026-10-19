@@ -1,0 +1,51 @@
+{
+  "title": "虚方法的动态调用",
+  "definition": "当基类方法声明为 `virtual` 并被派生类重写时，通过实际对象调用该方法，会执行对象所属类的对应版本；当基类引用或指针实际指向派生类对象时，调用虚方法也会执行派生类的重写版本。",
+  "key_points": [
+    "直接通过 Base 对象调用虚方法，执行 Base 版本。",
+    "直接通过 Derived 对象调用被重写的方法，执行 Derived 版本。",
+    "基类引用或指针可以指向派生类对象；通过它调用 virtual 方法时，会根据对象的实际类型调用派生类版本。",
+    "基类引用或指针的静态类型仍限制了可访问的成员：它不能调用只在派生类中定义、基类中不存在的方法或成员。"
+  ],
+  "examples": [
+    "直接调用基类版本：`Base myBase; myBase.someMethod();`，执行 Base 的 `someMethod()`。",
+    "直接调用派生类版本：`Derived myDerived; myDerived.someMethod();`，执行 Derived 的 `someMethod()`。",
+    "基类引用指向派生类对象：`Derived myDerived; Base& ref = myDerived; ref.someMethod();`。如果 `Base::someMethod()` 是 virtual，则调用 Derived 版本。",
+    "`ref.someOtherMethod();` 不能编译，因为 `someOtherMethod()` 只在 Derived 中定义，而 `ref` 的类型是 `Base&`。"
+  ],
+  "misconceptions": [
+    "基类引用或指针实际指向派生类对象时，只会影响 virtual 方法的调用；它不会让引用或指针获得派生类新增成员的静态访问权限。",
+    "如果基类方法没有声明为 `virtual`，通过基类引用或指针调用时不能正确实现这种派生类重写行为。",
+    "继承了某方法并不意味着派生类自动改变该方法行为；只有显式重写后，才会使用派生类版本。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "当 `Base& ref` 实际引用一个 `Derived` 对象，并且 `someMethod()` 是 virtual 时，`ref.someMethod()` 调用哪个版本？",
+      "a": "调用 Derived 重写的 `someMethod()` 版本。"
+    },
+    {
+      "q": "为什么 `Base& ref` 不能调用只在 Derived 中定义的 `someOtherMethod()`？",
+      "a": "因为引用的静态类型是 Base，而 `someOtherMethod()` 没有在 Base 中定义。"
+    },
+    {
+      "q": "基类方法未声明为 virtual 时，通过基类引用调用同名派生类方法会怎样？",
+      "a": "不能正确实现基于实际对象类型的派生类重写调用。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "virtual 方法与派生类重写",
+    "C++引用和指针的基本用法"
+  ],
+  "source_pages": [
+    307,
+    308
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "632_虚方法的动态调用",
+  "_chunk_pages": [
+    305,
+    308
+  ]
+}

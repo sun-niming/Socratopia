@@ -1,0 +1,1366 @@
+{
+  "textbookId": "HHah",
+  "updatedAt": "2026-05-24T06:27:21.406Z",
+  "cards": [
+    {
+      "id": "fc_1779363028507_000_ga9m",
+      "question": "如果关系 R = {⟨x,y⟩ | x<y} 定义在实数集上，它属于哪种特性？",
+      "choices": [
+        "自反且对称",
+        "反自反且传递",
+        "对称且传递",
+        "自反且反对称"
+      ],
+      "correctIndex": 1,
+      "explanation": "“<”关系没有任何元素满足 x<x，因此不是自反的；它满足反自反性。同时，如果 a<b 且 b<c，则 a<c 成立，因此它是传递的。但它不是对称的（a<b 时 b<a 不成立），且满足反对称（因为 a<b 且 b<a 不可能同时成立）。",
+      "source": {
+        "textbook": "集合论与二元关系",
+        "chapter": "",
+        "textbookSlug": "HHah"
+      },
+      "created": "2026-05-21T11:30:28.507Z",
+      "conversationId": "Nxv4WJ8c55ACj7kNskItA",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-05-21T11:31:32.986Z",
+          "chosen": 1,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-05-21T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1779363028507_001_ew8u",
+      "question": "在集合论中，为什么“空关系”被认为是传递的？",
+      "choices": [
+        "因为空关系是对称的",
+        "因为前提不成立时，蕴含式自动成立",
+        "因为空关系是自反的",
+        "因为空关系包含所有元素的自环"
+      ],
+      "correctIndex": 1,
+      "explanation": "传递性的定义是一个蕴含式：如果存在 xRy 且 yRz，则必须有 xRz。当没有任何这样的 x,y,z 满足前提时，该蕴含式在逻辑上为“空真”（vacuously true），因此空关系满足传递性。",
+      "source": {
+        "textbook": "集合论与二元关系",
+        "chapter": "",
+        "textbookSlug": "HHah"
+      },
+      "created": "2026-05-21T11:30:28.507Z",
+      "conversationId": "Nxv4WJ8c55ACj7kNskItA",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-05-21T11:32:02.874Z",
+          "chosen": 1,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-05-21T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1779363028507_002_rogw",
+      "question": "关系 R = {⟨1,1⟩, ⟨2,2⟩, ⟨3,3⟩, ⟨1,2⟩} 在集合 A={1,2,3} 上具有以下哪些特性？",
+      "choices": [
+        "反自反、对称、传递",
+        "自反、对称、传递",
+        "自反、反对称、传递",
+        "自反、反对称、非传递"
+      ],
+      "correctIndex": 2,
+      "explanation": "该关系包含所有元素的自环（⟨1,1⟩, ⟨2,2⟩, ⟨3,3⟩），因此是自反的。它同时满足反对称：因为 ⟨1,2⟩ 存在但 ⟨2,1⟩ 不存在，且没有矛盾。传递性也成立：⟨1,2⟩ 和 ⟨2,2⟩ 推出 ⟨1,2⟩（已存在），没有其他链条。但对称性不成立，因为 ⟨1,2⟩ 存在而 ⟨2,1⟩ 缺失。",
+      "source": {
+        "textbook": "集合论与二元关系",
+        "chapter": "",
+        "textbookSlug": "HHah"
+      },
+      "created": "2026-05-21T11:30:28.507Z",
+      "conversationId": "Nxv4WJ8c55ACj7kNskItA",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-05-21T11:32:26.488Z",
+          "chosen": 2,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-05-21T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1779363028507_003_a5f5",
+      "question": "关系 R 和 S 都是集合 A 上的关系。要使 R·S = S·R 成立，以下哪个条件是常见的例子？",
+      "choices": [
+        "R 是恒等关系",
+        "R 是全域关系",
+        "R 和 S 互为逆关系",
+        "R 和 S 都是对称关系"
+      ],
+      "correctIndex": 0,
+      "explanation": "如果 R 是恒等关系（即对角线关系），那么 R·S = S（因为恒等关系如同单位矩阵），同样 S·R = S，因此相等。这是满足交换性的一个典型情况。其他情况如全域关系或任意对称关系不一定保证交换。",
+      "source": {
+        "textbook": "集合论与二元关系",
+        "chapter": "",
+        "textbookSlug": "HHah"
+      },
+      "created": "2026-05-21T11:30:28.507Z",
+      "conversationId": "Nxv4WJ8c55ACj7kNskItA",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-05-21T11:32:37.661Z",
+          "chosen": 0,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-05-21T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1779364471191_000_515y",
+      "question": "二元关系被定义为笛卡尔积的子集。以下哪个选项最准确地解释了这种定义的内在逻辑？",
+      "choices": [
+        "关系是笛卡尔积中任意配对的集合，无需任何规则",
+        "关系是笛卡尔积中每个元素与自身配对的集合",
+        "关系是笛卡尔积中所有可能配对的集合",
+        "关系是从笛卡尔积中筛选出满足特定规则的配对，这些配对构成一个子集"
+      ],
+      "correctIndex": 3,
+      "explanation": "正确答案是 B，因为一个关系本质上是从所有可能配对（笛卡尔积）中筛选出满足特定规则的配对，从而形成一个子集。其他选项错误：A 混淆了关系与映射，C 错误地将关系局限于自反性，D 曲解了定义的普遍性。",
+      "source": {
+        "textbook": "集合论与二元关系",
+        "chapter": "",
+        "textbookSlug": "HHah"
+      },
+      "created": "2026-05-21T11:54:31.191Z",
+      "conversationId": "Nxv4WJ8c55ACj7kNskItA",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-05-24T06:26:01.669Z",
+          "chosen": 3,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-05-24T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1779364471191_001_unbc",
+      "question": "给定关系 R = {⟨x,y⟩ | x < y} 在集合 A={1,2,3} 上，其关系矩阵的正确形式是什么？",
+      "choices": [
+        "[[0,0,0],[1,0,0],[1,1,0]]",
+        "[[0,1,1],[0,0,1],[0,0,0]]",
+        "[[1,0,0],[0,1,0],[0,0,1]]",
+        "[[1,1,1],[1,1,1],[1,1,1]]"
+      ],
+      "correctIndex": 1,
+      "explanation": "正确答案是 C。因为 x<y 时，只有在 x 小于 y 的情况下才填 1，所以矩阵是上三角矩阵，且对角线为 0。其他选项错误：A 有对角线上的 1，B 是下三角矩阵，D 是全 1 矩阵。",
+      "source": {
+        "textbook": "集合论与二元关系",
+        "chapter": "",
+        "textbookSlug": "HHah"
+      },
+      "created": "2026-05-21T11:54:31.191Z",
+      "conversationId": "Nxv4WJ8c55ACj7kNskItA",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-05-24T06:26:19.833Z",
+          "chosen": 1,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-05-24T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1779364471192_002_iux8",
+      "question": "在实数集上，关系“<”（小于）具有以下哪种性质？",
+      "choices": [
+        "自反性和传递性",
+        "自反性和对称性",
+        "对称性和传递性",
+        "反对称性"
+      ],
+      "correctIndex": 3,
+      "explanation": "正确答案是 B。因为对于任意 a,b，若 a<b 则不可能 b<a，所以它是反对称的；但它不是自反的（a<a 不成立），也不是对称的（a<b 推不出 b<a），也不满足传递性的定义（a<b 且 b<c 推不出 a<c）。",
+      "source": {
+        "textbook": "集合论与二元关系",
+        "chapter": "",
+        "textbookSlug": "HHah"
+      },
+      "created": "2026-05-21T11:54:31.192Z",
+      "conversationId": "Nxv4WJ8c55ACj7kNskItA",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-05-24T06:26:28.745Z",
+          "chosen": 3,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-05-24T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1779364471192_003_8nwv",
+      "question": "对于空关系 R=∅ 在集合 A={1,2} 上，以下哪项判断正确？",
+      "choices": [
+        "空关系既不是自反的，也不满足传递性",
+        "空关系是自反的，但不满足传递性",
+        "空关系既是自反的，又满足传递性",
+        "空关系不是自反的，但满足传递性"
+      ],
+      "correctIndex": 3,
+      "explanation": "正确答案是 D。空关系没有配对的序偶，因此对任意 x，不存在 xRx，所以不是自反的。同时，它满足传递性，因为传递性定义中前提“xRy 且 yRz”永远不成立，蕴含式自动为真（空真）。",
+      "source": {
+        "textbook": "集合论与二元关系",
+        "chapter": "",
+        "textbookSlug": "HHah"
+      },
+      "created": "2026-05-21T11:54:31.192Z",
+      "conversationId": "Nxv4WJ8c55ACj7kNskItA",
+      "status": "favorited",
+      "history": [
+        {
+          "time": "2026-05-24T06:26:53.636Z",
+          "chosen": 2,
+          "correct": false
+        }
+      ],
+      "nextReview": "2026-05-23T16:00:00.000Z",
+      "interval": 0,
+      "ease": 2.3,
+      "repetitions": 0
+    },
+    {
+      "id": "fc_1779364471192_004_63vn",
+      "question": "关系合成 R·S 与 S·R 相等，需要满足什么条件？",
+      "choices": [
+        "R 和 S 都是同一集合 A 上的关系，且满足 R 和 S 在结构上可交换",
+        "R 和 S 都是对称关系",
+        "R 和 S 都是同一集合 A 上的关系",
+        "R 和 S 必须都是恒等关系"
+      ],
+      "correctIndex": 0,
+      "explanation": "正确答案是 C。合成可交换的前提是 R 和 S 都是同一集合 A 上的关系，并且需要满足 R 和 S 在某种结构上对称（如其中之一是恒等关系或两者相同）。其他选项错误：A 只是必要条件，B 忽视了结构要求，D 错误地认为可交换条件不可实现。",
+      "source": {
+        "textbook": "集合论与二元关系",
+        "chapter": "",
+        "textbookSlug": "HHah"
+      },
+      "created": "2026-05-21T11:54:31.192Z",
+      "conversationId": "Nxv4WJ8c55ACj7kNskItA",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-05-24T06:27:21.404Z",
+          "chosen": 0,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-05-24T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1779365063547_000_z5hj",
+      "question": "设 R 和 S 是集合 A 上的关系，则“R·S = S·R”成立的必要充分条件是什么？",
+      "choices": [
+        "R 和 S 都是对称关系",
+        "R 和 S 都是全域关系",
+        "R 和 S 互为逆关系",
+        "R 和 S 中至少有一个是恒等关系，或 R=S"
+      ],
+      "correctIndex": 3,
+      "explanation": "正确答案基于对话中的核心结论：R=S（同一关系）时显然成立；恒等关系（单位关系）与任何关系合成可交换，因为单位矩阵与任何矩阵乘法可交换。但全域关系与任意关系合成一般不可交换，说明不是所有关系都成。因此，R=S 或其中之一为恒等关系是使等式成立的足够条件，但不是唯一条件，更精确地说，恒等关系是最典型的可交换情形。",
+      "source": {
+        "textbook": "集合论与二元关系",
+        "chapter": "",
+        "textbookSlug": "HHah"
+      },
+      "created": "2026-05-21T12:04:23.547Z",
+      "conversationId": "Nxv4WJ8c55ACj7kNskItA",
+      "status": "active",
+      "history": [],
+      "nextReview": "2026-05-21T12:04:23.547Z",
+      "interval": 0,
+      "ease": 2.5,
+      "repetitions": 0
+    },
+    {
+      "id": "fc_1779365063547_001_h72g",
+      "question": "给定 A={1,2}，R={⟨1,2⟩}，S={⟨2,1⟩}，则 R·S 的结果是什么？",
+      "choices": [
+        "{⟨1,1⟩}",
+        "{⟨2,2⟩}",
+        "∅",
+        "{⟨1,2⟩}"
+      ],
+      "correctIndex": 0,
+      "explanation": "对话中明确计算了 R·S：从 R 的 ⟨1,2⟩ 出发，b=2，S 中有 ⟨2,1⟩，得到 ⟨1,1⟩，所以 R·S={⟨1,1⟩}。类似地计算 S·R 为 {⟨2,2⟩}，两者不相等。",
+      "source": {
+        "textbook": "集合论与二元关系",
+        "chapter": "",
+        "textbookSlug": "HHah"
+      },
+      "created": "2026-05-21T12:04:23.547Z",
+      "conversationId": "Nxv4WJ8c55ACj7kNskItA",
+      "status": "active",
+      "history": [],
+      "nextReview": "2026-05-21T12:04:23.547Z",
+      "interval": 0,
+      "ease": 2.5,
+      "repetitions": 0
+    },
+    {
+      "id": "fc_1779365063547_002_0y48",
+      "question": "在关系合成 R·S 的矩阵表示中，关系矩阵的乘法对应哪种运算规则？",
+      "choices": [
+        "矩阵加法",
+        "矩阵转置",
+        "布尔矩阵乘法（逻辑与、或运算）",
+        "普通实数矩阵乘法"
+      ],
+      "correctIndex": 2,
+      "explanation": "对话中学习者提到用矩阵处理关系，合成对应布尔矩阵乘法。布尔矩阵乘法中，元素 (i,j) 是 ∑(R[i,k] ∧ S[k,j])（逻辑与/或），而非普通乘法或加法。",
+      "source": {
+        "textbook": "集合论与二元关系",
+        "chapter": "",
+        "textbookSlug": "HHah"
+      },
+      "created": "2026-05-21T12:04:23.547Z",
+      "conversationId": "Nxv4WJ8c55ACj7kNskItA",
+      "status": "active",
+      "history": [],
+      "nextReview": "2026-05-21T12:04:23.547Z",
+      "interval": 0,
+      "ease": 2.5,
+      "repetitions": 0
+    },
+    {
+      "id": "fc_1779365063547_003_pm1x",
+      "question": "设 A={1,2,3}，R 是 A 上的全域关系（即 A×A），S={⟨1,2⟩}，则 R·S 的结果包含哪些序偶？",
+      "choices": [
+        "{⟨1,2⟩, ⟨2,2⟩, ⟨3,2⟩}",
+        "{⟨2,2⟩}",
+        "{⟨1,2⟩}",
+        "{⟨1,1⟩, ⟨1,2⟩, ⟨1,3⟩}"
+      ],
+      "correctIndex": 0,
+      "explanation": "对话中学习者计算得出 R·S={⟨1,2⟩,⟨2,2⟩,⟨3,2⟩}，因为全域关系中任意元素 (a,b) 都存在，要使得 ⟨b,c⟩ 在 S 中，需要 c=2 且 b 任意，因此得到所有 a 到 2 的序偶。S·R 则不同，为 {⟨1,1⟩,⟨1,2⟩,⟨1,3⟩}。",
+      "source": {
+        "textbook": "集合论与二元关系",
+        "chapter": "",
+        "textbookSlug": "HHah"
+      },
+      "created": "2026-05-21T12:04:23.547Z",
+      "conversationId": "Nxv4WJ8c55ACj7kNskItA",
+      "status": "active",
+      "history": [],
+      "nextReview": "2026-05-21T12:04:23.547Z",
+      "interval": 0,
+      "ease": 2.5,
+      "repetitions": 0
+    },
+    {
+      "id": "fc_1779365063547_004_cm61",
+      "question": "在关系图（有向图）中，关系 R 的平方（R² = R·R）的语义是什么？",
+      "choices": [
+        "不存在任何路径的节点对",
+        "存在长度为2的路径的节点对",
+        "存在长度为1的路径的节点对",
+        "所有能走到自身（自环）的节点"
+      ],
+      "correctIndex": 1,
+      "explanation": "对话中明确说明：R² 表示在关系图上“走两步”（即经过一次中间节点）能到达的节点对。例如从 a→b→c 得到 ⟨a,c⟩。这等价于存在长度2的路径，而非直接一步。",
+      "source": {
+        "textbook": "集合论与二元关系",
+        "chapter": "",
+        "textbookSlug": "HHah"
+      },
+      "created": "2026-05-21T12:04:23.547Z",
+      "conversationId": "Nxv4WJ8c55ACj7kNskItA",
+      "status": "active",
+      "history": [],
+      "nextReview": "2026-05-21T12:04:23.547Z",
+      "interval": 0,
+      "ease": 2.5,
+      "repetitions": 0
+    },
+    {
+      "id": "fc_1779365893909_000_c9hz",
+      "question": "关系合成可交换性（R·S = S·R）的讨论，通常需要先满足什么前提条件？",
+      "choices": [
+        "R和S都是自反关系",
+        "R和S都是对称关系",
+        "R和S都是同一个集合A上的关系",
+        "R和S都是传递关系"
+      ],
+      "correctIndex": 2,
+      "explanation": "对话中明确指出，如果R是从A到B、S是从B到C的关系，则R·S和S·R不是同一类东西，无法比较相等。因此，合成可交换性的前提是R和S都必须是同一个集合A上的关系。",
+      "source": {
+        "textbook": "集合论与二元关系",
+        "chapter": "",
+        "textbookSlug": "HHah"
+      },
+      "created": "2026-05-21T12:18:13.909Z",
+      "conversationId": "Nxv4WJ8c55ACj7kNskItA",
+      "status": "active",
+      "history": [],
+      "nextReview": "2026-05-21T12:18:13.909Z",
+      "interval": 0,
+      "ease": 2.5,
+      "repetitions": 0
+    },
+    {
+      "id": "fc_1779365893909_001_36ax",
+      "question": "在对话中，老师给出了反例：A={1,2}，R={⟨1,2⟩}，S={⟨2,1⟩}。这一例子旨在说明什么？",
+      "choices": [
+        "合成运算不满足交换律",
+        "两个关系“相对于彼此对称”时，其合成不一定可交换",
+        "只有一个集合上的关系才能定义合成",
+        "自反关系之间的合成一定可交换"
+      ],
+      "correctIndex": 1,
+      "explanation": "计算得R·S={⟨1,1⟩}，S·R={⟨2,2⟩}，两者不相等，尽管R和S互为逆关系。这说明即使两个关系“看起来互为镜像”，它们的合成也不一定可交换。因此，该例反驳了“若两个关系对称则合成可交换”的直觉。",
+      "source": {
+        "textbook": "集合论与二元关系",
+        "chapter": "",
+        "textbookSlug": "HHah"
+      },
+      "created": "2026-05-21T12:18:13.909Z",
+      "conversationId": "Nxv4WJ8c55ACj7kNskItA",
+      "status": "active",
+      "history": [],
+      "nextReview": "2026-05-21T12:18:13.909Z",
+      "interval": 0,
+      "ease": 2.5,
+      "repetitions": 0
+    },
+    {
+      "id": "fc_1779365893909_002_a2vn",
+      "question": "根据对话中关于恒等关系的讨论，以下哪个说法是正确的？",
+      "choices": [
+        "全域关系与任意关系的合成都可交换",
+        "若R是恒等关系，则R·S = S·R只有当S也是恒等关系时才成立",
+        "恒等关系与任意同集合上的关系的合成都是可交换的",
+        "只有恒等关系自身与自身的合成才是可交换的"
+      ],
+      "correctIndex": 2,
+      "explanation": "对话中强调，恒等关系（单位矩阵）与任何同集合上的关系R进行合成都可交换：恒等关系·R = R·恒等关系 = R。这是唯一一种使得合成对所有S成立的情况。",
+      "source": {
+        "textbook": "集合论与二元关系",
+        "chapter": "",
+        "textbookSlug": "HHah"
+      },
+      "created": "2026-05-21T12:18:13.909Z",
+      "conversationId": "Nxv4WJ8c55ACj7kNskItA",
+      "status": "active",
+      "history": [],
+      "nextReview": "2026-05-21T12:18:13.909Z",
+      "interval": 0,
+      "ease": 2.5,
+      "repetitions": 0
+    },
+    {
+      "id": "fc_1779365893909_003_vi39",
+      "question": "在车站情景中，关系R = {⟨a,b⟩, ⟨c,b⟩, ⟨b,c⟩, ⟨c,d⟩}，从a出发经过两次换乘（即R·R的像）可以到达哪些点？",
+      "choices": [
+        "可以到达c和d",
+        "只能到达c",
+        "可以到达b和c",
+        "可以到达a、b和c"
+      ],
+      "correctIndex": 1,
+      "explanation": "R·R表示从a出发走两步。从a开始，第一步只能到b（⟨a,b⟩）；第二步从b出发，b在R中的像有⟨b,c⟩，所以到达c。此外没有其他路径。b自身没有自环（⟨b,b⟩不在R中），因此a→b→b不合法。故只能到达c。",
+      "source": {
+        "textbook": "集合论与二元关系",
+        "chapter": "",
+        "textbookSlug": "HHah"
+      },
+      "created": "2026-05-21T12:18:13.909Z",
+      "conversationId": "Nxv4WJ8c55ACj7kNskItA",
+      "status": "active",
+      "history": [],
+      "nextReview": "2026-05-21T12:18:13.909Z",
+      "interval": 0,
+      "ease": 2.5,
+      "repetitions": 0
+    },
+    {
+      "id": "fc_1779366629657_000_f8bl",
+      "question": "设 R 和 S 是集合 A 上的两个关系。以下哪个条件能保证 R·S = S·R？",
+      "choices": [
+        "R 是全域关系",
+        "R 和 S 互为逆关系",
+        "R 是恒等关系",
+        "R 和 S 都是 A 上的关系"
+      ],
+      "correctIndex": 2,
+      "explanation": "根据对话中的反例，即使 R 和 S 都是 A 上的关系，R·S 与 S·R 也不一定相等。只有当其中一个是恒等关系，或 R=S，或两者满足更特殊的结构时，合成才可交换。选项中“R 是恒等关系”是教材中明确给出的一个充分条件。",
+      "source": {
+        "textbook": "集合论与二元关系",
+        "chapter": "",
+        "textbookSlug": "HHah"
+      },
+      "created": "2026-05-21T12:30:29.657Z",
+      "conversationId": "Nxv4WJ8c55ACj7kNskItA",
+      "status": "active",
+      "history": [],
+      "nextReview": "2026-05-21T12:30:29.657Z",
+      "interval": 0,
+      "ease": 2.5,
+      "repetitions": 0
+    },
+    {
+      "id": "fc_1779366629657_001_sbwf",
+      "question": "在关系合成的矩阵表示中，恒等关系对应的是哪个矩阵？",
+      "choices": [
+        "零矩阵",
+        "单位矩阵",
+        "上三角矩阵",
+        "全 1 矩阵"
+      ],
+      "correctIndex": 1,
+      "explanation": "恒等关系 I_A = {⟨x, x⟩ | x∈A}，其矩阵表示中只有主对角线元素为 1，其余全为 0，这正是单位矩阵。",
+      "source": {
+        "textbook": "集合论与二元关系",
+        "chapter": "",
+        "textbookSlug": "HHah"
+      },
+      "created": "2026-05-21T12:30:29.657Z",
+      "conversationId": "Nxv4WJ8c55ACj7kNskItA",
+      "status": "active",
+      "history": [],
+      "nextReview": "2026-05-21T12:30:29.657Z",
+      "interval": 0,
+      "ease": 2.5,
+      "repetitions": 0
+    },
+    {
+      "id": "fc_1779366629657_002_j5bc",
+      "question": "设 A={1,2,3}，R 是 A 上的全域关系（即 R = A×A），S = {⟨1,2⟩}。根据对话中的计算，R·S 等于以下哪个？",
+      "choices": [
+        "{⟨1,2⟩, ⟨2,2⟩, ⟨3,2⟩}",
+        "∅",
+        "{⟨1,1⟩, ⟨1,2⟩, ⟨1,3⟩}",
+        "{⟨1,2⟩}"
+      ],
+      "correctIndex": 0,
+      "explanation": "全域关系 R 包含所有序对，故对任意 a∈A，存在 b∈A 使 ⟨b,2⟩∈S，因此 R·S 包含所有形如 ⟨a,2⟩ 的序对，即 {⟨1,2⟩, ⟨2,2⟩, ⟨3,2⟩}。",
+      "source": {
+        "textbook": "集合论与二元关系",
+        "chapter": "",
+        "textbookSlug": "HHah"
+      },
+      "created": "2026-05-21T12:30:29.657Z",
+      "conversationId": "Nxv4WJ8c55ACj7kNskItA",
+      "status": "active",
+      "history": [],
+      "nextReview": "2026-05-21T12:30:29.657Z",
+      "interval": 0,
+      "ease": 2.5,
+      "repetitions": 0
+    },
+    {
+      "id": "fc_1779366629657_003_50zb",
+      "question": "在对话中的车站情景里，关系 R 表示“一趟直达电车”。从 a 出发换乘一次（即走两步），以下哪个目的地是可达的？",
+      "choices": [
+        "c",
+        "a",
+        "b",
+        "d"
+      ],
+      "correctIndex": 0,
+      "explanation": "根据对话中的关系 R = {⟨a, b⟩, ⟨b, c⟩, ⟨c, d⟩, ⟨c, b⟩}，从 a 出发先到 b，再从 b 可到 c（因为 ⟨b, c⟩∈R），因此 a 经两步可到达 c。a→b→b 不可行，因为 ⟨b, b⟩ 不在 R 中。",
+      "source": {
+        "textbook": "集合论与二元关系",
+        "chapter": "",
+        "textbookSlug": "HHah"
+      },
+      "created": "2026-05-21T12:30:29.657Z",
+      "conversationId": "Nxv4WJ8c55ACj7kNskItA",
+      "status": "active",
+      "history": [],
+      "nextReview": "2026-05-21T12:30:29.657Z",
+      "interval": 0,
+      "ease": 2.5,
+      "repetitions": 0
+    },
+    {
+      "id": "fc_1779366629657_004_pv8j",
+      "question": "设 R 和 S 是集合 A 上的关系，若 R·S = S·R，则以下哪个说法一定正确？",
+      "choices": [
+        "R 和 S 互为逆关系",
+        "S 必须是恒等关系",
+        "R 必须是恒等关系",
+        "R·S = S·R"
+      ],
+      "correctIndex": 3,
+      "explanation": "对话中通过反例说明，即使 R 和 S 都是 A 上的关系，合成也不一定可交换。只有在特殊条件（如 R 是恒等关系或 R=S）下才成立。但因此可推出 R·S = S·R 时，R 和 S 具有某种对称性或交换性，不一定是恒等关系。选项 A 和 B 过于绝对，而“R 和 S 的复合可交换”是显然的结论。",
+      "source": {
+        "textbook": "集合论与二元关系",
+        "chapter": "",
+        "textbookSlug": "HHah"
+      },
+      "created": "2026-05-21T12:30:29.657Z",
+      "conversationId": "Nxv4WJ8c55ACj7kNskItA",
+      "status": "active",
+      "history": [],
+      "nextReview": "2026-05-21T12:30:29.657Z",
+      "interval": 0,
+      "ease": 2.5,
+      "repetitions": 0
+    },
+    {
+      "id": "fc_1779366704138_000_47ub",
+      "question": "在关系合成运算 $R \\cdot S$ 中，当 $R$ 是恒等关系 $I_A$ 时，$R \\cdot S$ 与 $S \\cdot R$ 的关系是什么？",
+      "choices": [
+        "$I_A \\cdot S = S \\cdot I_A$ 当且仅当 $S$ 是自反关系时成立",
+        "$I_A \\cdot S = S \\cdot I_A$ 总是成立",
+        "$I_A \\cdot S \\neq S \\cdot I_A$ 除非 $S$ 是空关系",
+        "$I_A \\cdot S = S \\cdot I_A$ 当且仅当 $S$ 是对称关系时成立"
+      ],
+      "correctIndex": 1,
+      "explanation": "恒等关系 $I_A$ 与任意关系 $S$ 合成时，$I_A \\cdot S = S$ 且 $S \\cdot I_A = S$，因此两者始终相等，即恒等关系是合成运算的“单位元”，具有可交换性。",
+      "source": {
+        "textbook": "集合论与二元关系",
+        "chapter": "",
+        "textbookSlug": "HHah"
+      },
+      "created": "2026-05-21T12:31:44.138Z",
+      "conversationId": "Nxv4WJ8c55ACj7kNskItA",
+      "status": "active",
+      "history": [],
+      "nextReview": "2026-05-21T12:31:44.138Z",
+      "interval": 0,
+      "ease": 2.5,
+      "repetitions": 0
+    },
+    {
+      "id": "fc_1779366704138_001_utvn",
+      "question": "在集合 $A=\\{1,2,3\\}$ 上，$R$ 是全域关系（$R=A \\times A$），$S=\\{ \\langle 1,2 \\rangle \\}$。计算 $R \\cdot S$ 和 $S \\cdot R$ 的结果，以下哪个说法正确？",
+      "choices": [
+        "$R \\cdot S = \\{\\langle 1,2 \\rangle, \\langle 2,2 \\rangle, \\langle 3,2 \\rangle\\}$，$S \\cdot R = \\{\\langle 1,1 \\rangle, \\langle 1,2 \\rangle, \\langle 1,3 \\rangle\\}$，两者不相等",
+        "$R \\cdot S = S \\cdot R = \\{\\langle 1,2 \\rangle, \\langle 2,2 \\rangle, \\langle 3,2 \\rangle\\}$",
+        "$R \\cdot S = \\{\\langle 1,1 \\rangle, \\langle 1,2 \\rangle, \\langle 1,3 \\rangle\\}$，$S \\cdot R = \\{\\langle 1,2 \\rangle, \\langle 2,2 \\rangle, \\langle 3,2 \\rangle\\}$",
+        "$R \\cdot S = S \\cdot R = \\{\\langle 1,1 \\rangle, \\langle 1,2 \\rangle, \\langle 1,3 \\rangle\\}$"
+      ],
+      "correctIndex": 0,
+      "explanation": "全域关系 $R$ 包含所有有序对。$R \\cdot S$ 得到所有从 $A$ 到 $2$ 的对，即 $\\{\\langle 1,2 \\rangle, \\langle 2,2 \\rangle, \\langle 3,2 \\rangle\\}$；$S \\cdot R$ 得到从 $1$ 到 $A$ 的所有对，即 $\\{\\langle 1,1 \\rangle, \\langle 1,2 \\rangle, \\langle 1,3 \\rangle\\}$。两者不相等，说明全域关系与任意关系的合成通常不可交换。",
+      "source": {
+        "textbook": "集合论与二元关系",
+        "chapter": "",
+        "textbookSlug": "HHah"
+      },
+      "created": "2026-05-21T12:31:44.138Z",
+      "conversationId": "Nxv4WJ8c55ACj7kNskItA",
+      "status": "active",
+      "history": [],
+      "nextReview": "2026-05-21T12:31:44.138Z",
+      "interval": 0,
+      "ease": 2.5,
+      "repetitions": 0
+    },
+    {
+      "id": "fc_1779366704139_002_xuvd",
+      "question": "给定关系 $R = \\{\\langle a, b \\rangle, \\langle b, c \\rangle, \\langle c, d \\rangle\\}$，不考虑自环。从 $a$ 出发经过两步合成（即 $R \\cdot R$），能到达哪些元素？",
+      "choices": [
+        "$a$, $b$, $c$ 都可达",
+        "$c$ 和 $d$",
+        "只有 $c$",
+        "$b$ 和 $c$"
+      ],
+      "correctIndex": 2,
+      "explanation": "$R \\cdot R$ 表示通过两步关系找到可达点。从 $a$ 出发：$a \\to b \\to c$，得到 $c$；从 $a$ 不能直接到 $b$ 再回 $b$（因为 $R$ 中没有 $\\langle b,b \\rangle$），所以只有 $c$。",
+      "source": {
+        "textbook": "集合论与二元关系",
+        "chapter": "",
+        "textbookSlug": "HHah"
+      },
+      "created": "2026-05-21T12:31:44.139Z",
+      "conversationId": "Nxv4WJ8c55ACj7kNskItA",
+      "status": "active",
+      "history": [],
+      "nextReview": "2026-05-21T12:31:44.139Z",
+      "interval": 0,
+      "ease": 2.5,
+      "repetitions": 0
+    },
+    {
+      "id": "fc_1779366704139_003_pcrg",
+      "question": "在对话中，伙伴将全域关系和恒等关系比喻为“频谱的两端”。以下哪个关于它们与任意关系 $S$ 合成特性的描述是正确的？",
+      "choices": [
+        "恒等关系与任意 $S$ 合成总是可交换，全域关系与某些 $S$ 合成通常不可交换",
+        "恒等关系和全域关系与任意 $S$ 合成都可交换",
+        "恒等关系和全域关系与任意 $S$ 合成都不可交换",
+        "全域关系与任意 $S$ 合成总是可交换，恒等关系与某些 $S$ 合成通常不可交换"
+      ],
+      "correctIndex": 0,
+      "explanation": "恒等关系 $I_A$ 与任何 $S$ 合成都相等（可交换），因为它是单位元；全域关系 $A \\times A$ 与某些 $S$ 合成可能不等，但并非始终可交换，只有特殊情况（如 $S$ 也是全关系）才相等。伙伴的比喻强调了两者在“可交换性”上的极端差异。",
+      "source": {
+        "textbook": "集合论与二元关系",
+        "chapter": "",
+        "textbookSlug": "HHah"
+      },
+      "created": "2026-05-21T12:31:44.139Z",
+      "conversationId": "Nxv4WJ8c55ACj7kNskItA",
+      "status": "active",
+      "history": [],
+      "nextReview": "2026-05-21T12:31:44.139Z",
+      "interval": 0,
+      "ease": 2.5,
+      "repetitions": 0
+    },
+    {
+      "id": "fc_1779366704139_004_7iiq",
+      "question": "在关系 $R = \\{\\langle a, b \\rangle, \\langle b, c \\rangle, \\langle c, d \\rangle, \\langle b, b \\rangle\\}$（新增自环）中，从 $a$ 出发经过两次合成（$R \\cdot R$）能到达哪些元素？",
+      "choices": [
+        "$b$ 和 $c$",
+        "$b$、$c$ 和 $d$",
+        "只有 $c$",
+        "只有 $b$"
+      ],
+      "correctIndex": 0,
+      "explanation": "从 $a$ 出发：$a \\to b \\to c$（得 $c$）和 $a \\to b \\to b$（得 $b$），所以可达 $b$ 和 $c$。$d$ 需要三步（$a\\to b\\to c\\to d$），两步无法到达。",
+      "source": {
+        "textbook": "集合论与二元关系",
+        "chapter": "",
+        "textbookSlug": "HHah"
+      },
+      "created": "2026-05-21T12:31:44.139Z",
+      "conversationId": "Nxv4WJ8c55ACj7kNskItA",
+      "status": "active",
+      "history": [],
+      "nextReview": "2026-05-21T12:31:44.139Z",
+      "interval": 0,
+      "ease": 2.5,
+      "repetitions": 0
+    },
+    {
+      "id": "fc_1779367834080_000_2s3d",
+      "question": "在集合论中，下面哪个对“集合”的描述最符合其作为数学基础概念的核心理念？",
+      "choices": [
+        "一个能够容纳无限多个元素的容器，元素可以任意重复加入。",
+        "一组确定的、互不相同的对象，作为一个整体来研究。",
+        "一个由相同类型元素组成的列表，元素之间的顺序很重要。",
+        "任意一些事物构成的群体，不关心重复或顺序。"
+      ],
+      "correctIndex": 1,
+      "explanation": "集合的核心理念是将确定的、可区分的对象封装为一个整体，强调元素的确定性和互异性，而不是仅仅“把一些东西放在一起”或关注顺序。正确答案突出了“确定性分组”和“元素互异”，这正是集合公理（如外延公理）的核心。",
+      "source": {
+        "textbook": "集合论与二元关系",
+        "chapter": "",
+        "textbookSlug": "HHah"
+      },
+      "created": "2026-05-21T12:50:34.080Z",
+      "conversationId": "4KbyJ0l9oWeb66d1kb55o",
+      "status": "active",
+      "history": [],
+      "nextReview": "2026-05-21T12:50:34.080Z",
+      "interval": 0,
+      "ease": 2.5,
+      "repetitions": 0
+    },
+    {
+      "id": "fc_1779367834080_001_qxu1",
+      "question": "下列哪个示例满足集合的外延公理（即两个集合相等当且仅当它们有完全相同的元素）？",
+      "choices": [
+        "集合 {1, 2, 3} 和集合 {3, 2, 1} 是同一个集合。",
+        "集合 {1, 2, 3} 和列表 (1, 2, 3) 是同一个集合。",
+        "集合 {1, 2, 3} 和集合 {1, 2, 3, 3} 不是同一个集合。",
+        "集合 {1, 2, 3} 和集合 {1, 2, 4} 是同一个集合。"
+      ],
+      "correctIndex": 0,
+      "explanation": "外延公理规定，集合由它的元素决定，与元素顺序、重复书写无关。只有第四个选项用大括号写出相同元素（尽管顺序不同）且排除了重复，因此是同一个集合。其他选项要么包含重复（不是元素互异），要么顺序被视为差异。",
+      "source": {
+        "textbook": "集合论与二元关系",
+        "chapter": "",
+        "textbookSlug": "HHah"
+      },
+      "created": "2026-05-21T12:50:34.080Z",
+      "conversationId": "4KbyJ0l9oWeb66d1kb55o",
+      "status": "active",
+      "history": [],
+      "nextReview": "2026-05-21T12:50:34.080Z",
+      "interval": 0,
+      "ease": 2.5,
+      "repetitions": 0
+    },
+    {
+      "id": "fc_1779368105828_000_imgb",
+      "question": "集合论中，集合作为一个基本概念，它最核心的特征是什么？",
+      "choices": [
+        "集合中的元素可以重复，只要它们属于同一个类别",
+        "集合中的元素必须是确定且互不相同的",
+        "集合是描述一个范围，只要在这个范围内的东西都属于它",
+        "集合就是一堆东西随便放在一起"
+      ],
+      "correctIndex": 1,
+      "explanation": "正确答案是C。集合的核心特征是其元素的确定性和互异性，即一个对象要么属于要么不属于该集合，且集合中元素互不相同。其他选项要么过度简化（A），要么混淆了集合与范围或类别的概念（B、D）。",
+      "source": {
+        "textbook": "集合论与二元关系",
+        "chapter": "",
+        "textbookSlug": "HHah"
+      },
+      "created": "2026-05-21T12:55:05.828Z",
+      "conversationId": "4KbyJ0l9oWeb66d1kb55o",
+      "status": "active",
+      "history": [],
+      "nextReview": "2026-05-21T12:55:05.828Z",
+      "interval": 0,
+      "ease": 2.5,
+      "repetitions": 0
+    },
+    {
+      "id": "fc_1779368105828_001_k5xs",
+      "question": "根据集合论定义，以下哪个描述是一个合法的集合？",
+      "choices": [
+        "集合写为{s, d, 3, 5}",
+        "集合写为{1, 2, 2, 3}",
+        "所有大于等于1且小于等于3的自然数",
+        "所有高个子的人"
+      ],
+      "correctIndex": 2,
+      "explanation": "正确答案是A。集合要求元素确定且互异。A中集合由明确的自然数构成。B中“高个子”不满足确定性（多高算高？）。C中重复元素2只算一次，因此实际只有{1,2,3}，但这不违法，但重复写法本身容易混淆，更关键的是C写作形式有误，但最贴切的是C实际上合法，不过题目设计意图是考核确定性，所以考确定性场景最佳。重新审视：A明确，B模糊，C有重复但数学上仍为{1,2,3}，D无意义字符。最合适干扰是B，因为不满足确定性。",
+      "source": {
+        "textbook": "集合论与二元关系",
+        "chapter": "",
+        "textbookSlug": "HHah"
+      },
+      "created": "2026-05-21T12:55:05.828Z",
+      "conversationId": "4KbyJ0l9oWeb66d1kb55o",
+      "status": "active",
+      "history": [],
+      "nextReview": "2026-05-21T12:55:05.828Z",
+      "interval": 0,
+      "ease": 2.5,
+      "repetitions": 0
+    },
+    {
+      "id": "fc_1779368910905_000_7w7n",
+      "question": "在集合论中，一个集合的本质特征是什么？",
+      "choices": [
+        "集合就是一组数的简单罗列",
+        "集合只能包含数学对象，不能包含其他集合",
+        "集合中的元素必须按从小到大排列",
+        "集合中的元素必须是确定的、互异的"
+      ],
+      "correctIndex": 3,
+      "explanation": "集合的本质是元素的确定性——任意一个对象要么属于该集合，要么不属于，没有中间状态或重复对象。这与简单地将一堆东西放在一起不同，后者可能无序或有重复。",
+      "source": {
+        "textbook": "集合论与二元关系",
+        "chapter": "",
+        "textbookSlug": "HHah"
+      },
+      "created": "2026-05-21T13:08:30.905Z",
+      "conversationId": "4KbyJ0l9oWeb66d1kb55o",
+      "status": "active",
+      "history": [],
+      "nextReview": "2026-05-21T13:08:30.905Z",
+      "interval": 0,
+      "ease": 2.5,
+      "repetitions": 0
+    },
+    {
+      "id": "fc_1779368910905_001_noej",
+      "question": "下列关于空集的描述，哪一个是正确的？",
+      "choices": [
+        "空集就是数字0",
+        "空集是任何集合的子集",
+        "空集不包含任何元素，所以它不能被定义",
+        "空集就是“不存在”，因此不等于任何集合"
+      ],
+      "correctIndex": 1,
+      "explanation": "空集是不含任何元素的集合，它是所有集合的子集，但不想象中的“虚无”或“零本身”。空集是一个集合，零是一个数，两者不同。",
+      "source": {
+        "textbook": "集合论与二元关系",
+        "chapter": "",
+        "textbookSlug": "HHah"
+      },
+      "created": "2026-05-21T13:08:30.905Z",
+      "conversationId": "4KbyJ0l9oWeb66d1kb55o",
+      "status": "active",
+      "history": [],
+      "nextReview": "2026-05-21T13:08:30.905Z",
+      "interval": 0,
+      "ease": 2.5,
+      "repetitions": 0
+    },
+    {
+      "id": "fc_1779368910905_002_izuq",
+      "question": "集合论中，如何判断两个集合相等？",
+      "choices": [
+        "两个集合相等当且仅当它们包含相同的元素",
+        "两个集合相等当且仅当它们有相同的名称",
+        "两个集合相等当且仅当它们包含相同数量的元素",
+        "两个集合相等当且仅当它们的元素完全相同且顺序也一致"
+      ],
+      "correctIndex": 0,
+      "explanation": "集合相等的定义是：它们含有完全相同的元素，且与元素的顺序无关。只要元素一样，顺序不同，集合就相等。",
+      "source": {
+        "textbook": "集合论与二元关系",
+        "chapter": "",
+        "textbookSlug": "HHah"
+      },
+      "created": "2026-05-21T13:08:30.905Z",
+      "conversationId": "4KbyJ0l9oWeb66d1kb55o",
+      "status": "active",
+      "history": [],
+      "nextReview": "2026-05-21T13:08:30.905Z",
+      "interval": 0,
+      "ease": 2.5,
+      "repetitions": 0
+    },
+    {
+      "id": "fc_1779368910905_003_i89m",
+      "question": "设A = {1, 2, 3}，B = {1, {2, 3}}，以下说法正确的是？",
+      "choices": [
+        "A = B",
+        "{2, 3} ∈ B",
+        "2 ∈ B",
+        "{2, 3} ⊆ A"
+      ],
+      "correctIndex": 1,
+      "explanation": "A中的2是一个元素，B中的{2,3}是一个子集元素。2本身不是B的元素；B的元素是数字1和集合{2,3}。所以“2 ∈ B”错误，“{2,3} ∈ B”正确。",
+      "source": {
+        "textbook": "集合论与二元关系",
+        "chapter": "",
+        "textbookSlug": "HHah"
+      },
+      "created": "2026-05-21T13:08:30.905Z",
+      "conversationId": "4KbyJ0l9oWeb66d1kb55o",
+      "status": "active",
+      "history": [],
+      "nextReview": "2026-05-21T13:08:30.905Z",
+      "interval": 0,
+      "ease": 2.5,
+      "repetitions": 0
+    },
+    {
+      "id": "fc_1779368910905_004_hmay",
+      "question": "如果S = {x | x是正整数且x < 3}，则下面哪个关于S的描述正确？",
+      "choices": [
+        "S = {0, 1, 2}",
+        "S有2个元素",
+        "S是空集，因为“正整数且x<3”没有意义",
+        "S包含所有小于3的实数"
+      ],
+      "correctIndex": 1,
+      "explanation": "这个集合描述法表示所有满足x是正整数且x<3的元素，即1和2。因此S = {1, 2}，其元素个数是2。",
+      "source": {
+        "textbook": "集合论与二元关系",
+        "chapter": "",
+        "textbookSlug": "HHah"
+      },
+      "created": "2026-05-21T13:08:30.905Z",
+      "conversationId": "4KbyJ0l9oWeb66d1kb55o",
+      "status": "active",
+      "history": [],
+      "nextReview": "2026-05-21T13:08:30.905Z",
+      "interval": 0,
+      "ease": 2.5,
+      "repetitions": 0
+    },
+    {
+      "id": "fc_1779368998184_000_2f4y",
+      "question": "如果 R 是集合 A 上的全域关系（即 R = A × A），S 是任意非空关系，那么 R·S 与 S·R 的关系是？",
+      "choices": [
+        "只有当 S 也是全域关系时才相等",
+        "总是相等",
+        "通常不相等",
+        "只有当 S 是恒等关系时才相等"
+      ],
+      "correctIndex": 2,
+      "explanation": "全域关系包含所有可能的序对，但关系的合成顺序对结果有决定性影响：R·S 从 R 的像出发查找 S 的后继，而 S·R 从 S 出发查找 R 的后继，由于全域关系的“全”并不保证合成结果与顺序无关，因此通常 R·S ≠ S·R。",
+      "source": {
+        "textbook": "集合论与二元关系",
+        "chapter": "",
+        "textbookSlug": "HHah"
+      },
+      "created": "2026-05-21T13:09:58.184Z",
+      "conversationId": "Nxv4WJ8c55ACj7kNskItA",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-05-21T15:41:07.129Z",
+          "chosen": 2,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-05-21T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1779368998185_001_57ok",
+      "question": "在关系图中，从节点 a 出发，通过两步（即合成两次）能够到达的节点集合，对应以下哪个运算？",
+      "choices": [
+        "R∘R 作用于 a 的像",
+        "R 的反关系作用于 a 的像",
+        "R 的恒等关系与 a 的合成",
+        "R 的逆关系与 a 的合成"
+      ],
+      "correctIndex": 0,
+      "explanation": "两步可达的节点集合正是 R∘R 的像，即合成关系 R² 中所有以 a 为第一元素的序对的第二元素构成的集合，这等价于从 a 出发经过恰好两次关系转移所能到达的所有节点。",
+      "source": {
+        "textbook": "集合论与二元关系",
+        "chapter": "",
+        "textbookSlug": "HHah"
+      },
+      "created": "2026-05-21T13:09:58.185Z",
+      "conversationId": "Nxv4WJ8c55ACj7kNskItA",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-05-21T15:42:15.275Z",
+          "chosen": 0,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-05-21T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1779368998185_002_x09i",
+      "question": "给定关系 R = {⟨a,b⟩, ⟨c,b⟩, ⟨b,c⟩, ⟨c,d⟩}，那么关系图中从 a 出发走两步（即 R∘R）能到达哪些节点？",
+      "choices": [
+        "b、c 和 d",
+        "b 和 c",
+        "只有 c",
+        "c 和 d"
+      ],
+      "correctIndex": 2,
+      "explanation": "从 a 出发，先通过 ⟨a,b⟩ 到达 b，再从 b 出发，b 的出边只有 ⟨b,c⟩，所以只能到达 c。b 没有自环（b→b 在 R 中不存在），因此 a→b→b 不是合法路径。",
+      "source": {
+        "textbook": "集合论与二元关系",
+        "chapter": "",
+        "textbookSlug": "HHah"
+      },
+      "created": "2026-05-21T13:09:58.185Z",
+      "conversationId": "Nxv4WJ8c55ACj7kNskItA",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-05-21T15:42:56.773Z",
+          "chosen": 2,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-05-21T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1779368998185_003_nwza",
+      "question": "在关系中，对任意关系 S，以下哪个关系与 S 合成时总是可交换的（即 R·S = S·R）？",
+      "choices": [
+        "空关系",
+        "全域关系",
+        "对称关系",
+        "恒等关系"
+      ],
+      "correctIndex": 3,
+      "explanation": "恒等关系 I_A = {⟨x,x⟩ | x∈A} 与任何关系合成都不会改变该关系：I_A∘S = S∘I_A = S，因此它总是可交换的。全域关系则不具有此性质，因为它会引入所有可能的序对，使得合成结果受顺序影响。",
+      "source": {
+        "textbook": "集合论与二元关系",
+        "chapter": "",
+        "textbookSlug": "HHah"
+      },
+      "created": "2026-05-21T13:09:58.185Z",
+      "conversationId": "Nxv4WJ8c55ACj7kNskItA",
+      "status": "active",
+      "history": [],
+      "nextReview": "2026-05-21T13:09:58.185Z",
+      "interval": 0,
+      "ease": 2.5,
+      "repetitions": 0
+    },
+    {
+      "id": "fc_1779440910776_000_e59x",
+      "question": "在偏序关系⟨A, ≤⟩中，若B ⊆ A，则“最小上界”的含义是什么？",
+      "choices": [
+        "上界集合中的最小元素",
+        "B中元素的并集",
+        "A中的最大元素",
+        "B中的最大元素"
+      ],
+      "correctIndex": 0,
+      "explanation": "最小上界是所有上界中“最小”的那个，它必须是一个上界，并且小于等于任何其他上界，体现了偏序中“最小”的全局比较要求。",
+      "source": {
+        "textbook": "集合论与二元关系",
+        "chapter": "",
+        "textbookSlug": "HHah"
+      },
+      "created": "2026-05-22T09:08:30.776Z",
+      "conversationId": "7zYDu7p2_rh4tqSDBsXQr",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-05-22T09:09:07.320Z",
+          "chosen": 0,
+          "correct": true
+        },
+        {
+          "time": "2026-05-22T09:11:44.415Z",
+          "chosen": 0,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-05-24T16:00:00.000Z",
+      "interval": 3,
+      "ease": 2.7,
+      "repetitions": 2
+    },
+    {
+      "id": "fc_1779440910776_001_olq9",
+      "question": "在集合A={2,3,6}上的整除偏序关系中，子集B={2,3}的极大元素和极小元素是什么？",
+      "choices": [
+        "极大元素是2，极小元素是3",
+        "极大元素是6，极小元素是2",
+        "极大元素是2和3，极小元素是2和3",
+        "极大元素是6，极小元素是2和3"
+      ],
+      "correctIndex": 2,
+      "explanation": "在B中，2和3彼此不可比，没有元素能整除对方，因此它们互为极大和极小元素。",
+      "source": {
+        "textbook": "集合论与二元关系",
+        "chapter": "",
+        "textbookSlug": "HHah"
+      },
+      "created": "2026-05-22T09:08:30.776Z",
+      "conversationId": "7zYDu7p2_rh4tqSDBsXQr",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-05-22T09:09:23.918Z",
+          "chosen": 2,
+          "correct": true
+        },
+        {
+          "time": "2026-05-22T09:11:47.210Z",
+          "chosen": 2,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-05-24T16:00:00.000Z",
+      "interval": 3,
+      "ease": 2.7,
+      "repetitions": 2
+    },
+    {
+      "id": "fc_1779440910776_002_fj28",
+      "question": "实数上的“小于”关系⟨R, <⟩为什么是拟序而不是偏序？",
+      "choices": [
+        "因为它不满足自反性",
+        "因为它不满足传递性",
+        "因为它不满足反对称性",
+        "因为它不满足对称性"
+      ],
+      "correctIndex": 0,
+      "explanation": "拟序是反自反和传递的，而偏序要求自反、反对称和传递。“小于”关系不满足自反性（因为x<x不成立），所以是拟序。",
+      "source": {
+        "textbook": "集合论与二元关系",
+        "chapter": "",
+        "textbookSlug": "HHah"
+      },
+      "created": "2026-05-22T09:08:30.776Z",
+      "conversationId": "7zYDu7p2_rh4tqSDBsXQr",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-05-22T09:09:32.407Z",
+          "chosen": 0,
+          "correct": true
+        },
+        {
+          "time": "2026-05-22T09:11:49.975Z",
+          "chosen": 0,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-05-24T16:00:00.000Z",
+      "interval": 3,
+      "ease": 2.7,
+      "repetitions": 2
+    },
+    {
+      "id": "fc_1779603890840_000_90dg",
+      "question": "在偏序集中，什么条件下可以称某个元素是“最小”的？",
+      "choices": [
+        "该元素小于等于集合中所有其他元素",
+        "该元素能被集合中所有元素整除",
+        "该元素没有比它更小的元素",
+        "该元素是集合中最小的一个上界"
+      ],
+      "correctIndex": 0,
+      "explanation": "最小元素必须与集合中所有其他元素都可比较，且小于或等于它们，而极小元素仅需没有比它更小的元素，可能与其他元素不可比。",
+      "source": {
+        "textbook": "集合论与二元关系",
+        "chapter": "",
+        "textbookSlug": "HHah"
+      },
+      "created": "2026-05-24T06:24:50.840Z",
+      "conversationId": "ZS0F40eYOOgjYYQ6puX_j",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-05-24T06:25:02.569Z",
+          "chosen": 0,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-05-24T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1779603890840_001_2zgr",
+      "question": "在偏序集 ⟨{2,5,6,10,15,30}, 整除⟩ 中，为什么没有最小元素？",
+      "choices": [
+        "因为集合中存在比2和5更小的元素",
+        "因为2和5都是极小元素，且不可比较",
+        "因为整除关系不是自反的",
+        "因为30不是极小元素"
+      ],
+      "correctIndex": 1,
+      "explanation": "2和5都是极小元素，但它们互相不可比（2不能整除5，5不能整除2），所以没有元素能小于等于其他所有元素。",
+      "source": {
+        "textbook": "集合论与二元关系",
+        "chapter": "",
+        "textbookSlug": "HHah"
+      },
+      "created": "2026-05-24T06:24:50.840Z",
+      "conversationId": "ZS0F40eYOOgjYYQ6puX_j",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-05-24T06:25:13.106Z",
+          "chosen": 1,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-05-24T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1779603890840_002_kdu3",
+      "question": "拟序（反自反+传递）与偏序（自反+反对称+传递）之间最重要的区别是什么？",
+      "choices": [
+        "偏序有自反性，拟序有反自反性",
+        "偏序只适用于有限集合",
+        "拟序没有传递性，偏序有",
+        "拟序有反对称性，偏序没有"
+      ],
+      "correctIndex": 0,
+      "explanation": "偏序要求自反性（元素与自身相关），而拟序要求反自反性（元素不与自身相关），这是核心区别。",
+      "source": {
+        "textbook": "集合论与二元关系",
+        "chapter": "",
+        "textbookSlug": "HHah"
+      },
+      "created": "2026-05-24T06:24:50.840Z",
+      "conversationId": "ZS0F40eYOOgjYYQ6puX_j",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-05-24T06:25:21.735Z",
+          "chosen": 0,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-05-24T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1779603890840_003_krpk",
+      "question": "有限偏序集总能排成线序（拓扑分类），下面哪个陈述正确描述了这一过程？",
+      "choices": [
+        "每一步从剩余元素中选一个极小元素，放入序列，然后删除",
+        "每一步从剩余元素中选一个最小元素，放入序列，然后删除",
+        "每一步从剩余元素中选一个极大元素，放入序列，然后删除",
+        "每一步从剩余元素中删除所有不可比元素"
+      ],
+      "correctIndex": 0,
+      "explanation": "拓扑分类通过反复选择一个极小元素并移除，来人为构造一个线性序列，确保原偏序关系不被破坏，即使原关系不是线序。",
+      "source": {
+        "textbook": "集合论与二元关系",
+        "chapter": "",
+        "textbookSlug": "HHah"
+      },
+      "created": "2026-05-24T06:24:50.840Z",
+      "conversationId": "ZS0F40eYOOgjYYQ6puX_j",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-05-24T06:25:42.177Z",
+          "chosen": 0,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-05-24T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1779603890840_004_6g5g",
+      "question": "给定模数k=4，整数集I上的模4等价关系有多少个不同的等价类？",
+      "choices": [
+        "无穷多",
+        "4",
+        "1",
+        "3"
+      ],
+      "correctIndex": 1,
+      "explanation": "模4等价将整数按对4取余的余数分类，余数有0、1、2、3四种，因此有4个等价类。",
+      "source": {
+        "textbook": "集合论与二元关系",
+        "chapter": "",
+        "textbookSlug": "HHah"
+      },
+      "created": "2026-05-24T06:24:50.840Z",
+      "conversationId": "ZS0F40eYOOgjYYQ6puX_j",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-05-24T06:25:51.159Z",
+          "chosen": 1,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-05-24T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    }
+  ]
+}

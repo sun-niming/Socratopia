@@ -1,0 +1,47 @@
+{
+  "title": "结构化绑定",
+  "definition": "结构化绑定是一种声明多个变量的语法，可以使用数组、结构体、std::pair 或元组中的元素对这些变量进行初始化。声明时必须使用 auto，不能用 int 等具体类型替代 auto；声明的变量数量必须与右侧表达式中的元素数量匹配。",
+  "key_points": [
+    "基本形式是 `auto [变量1, 变量2, ...] { 表达式 };`。",
+    "如果结构体的所有非静态数据成员都是 public，也可以使用结构化绑定；绑定变量按成员声明顺序对应各成员。",
+    "使用 `auto&` 或 `const auto&` 可以分别创建对元素的非 const 引用或 const 引用。"
+  ],
+  "examples": [
+    "数组结构化绑定：`int values[] { 1, 2, 3 }; auto [x, y, z] { values };`。",
+    "结构体结构化绑定：`auto [x, y, z] { point };`，其中 `point` 的所有非静态成员都必须是 public。",
+    "pair 结构化绑定：`std::pair myPair { \"hello\", 5 }; auto [theString, theInt] { myPair };`。",
+    "引用形式：`auto& [x, y, z] { point };`；const 引用形式：`const auto& [x, y, z] { point };`。"
+  ],
+  "misconceptions": [
+    "结构化绑定不是只能用于数组，也可以用于满足条件的结构体、pair 和元组。",
+    "不能使用 `int [x, y, z]` 这种形式；结构化绑定声明必须使用 `auto`、`auto&` 或 `const auto&`。",
+    "变量数量不必任意指定，必须与右侧表达式提供的元素数量匹配。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "结构化绑定声明必须使用什么关键字？",
+      "a": "必须使用 `auto`，也可以使用 `auto&` 或 `const auto&`；不能用 `int` 等具体类型替代。"
+    },
+    {
+      "q": "结构化绑定中的变量数量有什么要求？",
+      "a": "必须与右侧数组、结构体、pair 或元组中的元素数量匹配。"
+    },
+    {
+      "q": "如何让结构化绑定创建引用？",
+      "a": "使用 `auto&` 创建非 const 引用，使用 `const auto&` 创建 const 引用。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [],
+  "source_pages": [
+    61,
+    61
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "103_结构化绑定",
+  "_chunk_pages": [
+    61,
+    64
+  ]
+}

@@ -1,0 +1,48 @@
+{
+  "title": "C++ 标准输入输出流对象",
+  "definition": "C++ 标准输入输出库提供多个预定义的流对象。原文列出标准字符流对象 `cin`、`cout`、`cerr`、`clog`，以及对应的宽字符流对象 `wcin`、`wcout`、`wcerr`、`wclog`。",
+  "key_points": [
+    "`cin`、`cout`、`cerr`、`clog` 属于原文列出的 C++ 标准流对象。",
+    "对应的宽字符流对象是 `wcin`、`wcout`、`wcerr`、`wclog`。",
+    "原文还提到 `flush()`，它与刷新输出流有关。"
+  ],
+  "examples": [
+    "输出到标准输出流：`cout << \"Hello\";`",
+    "输出内容并刷新流：`cout << \"Hello\" << flush;",
+    "宽字符输出流示例：`wcout << L\"Hello\";`"
+  ],
+  "misconceptions": [
+    "`cout` 和 `cin` 不是 C 风格的 `printf()`、`scanf()` 函数，而是 C++ 流对象。",
+    "`wcout` 不是普通的 `cout` 拼写变体；它是面向宽字符的对应流对象。",
+    "使用 `flush` 刷新流与输出换行不是同一概念；原文分别列出了 `flush()` 和 `endl`。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "原文列出了哪些标准字符流对象？",
+      "a": "`cin`、`cout`、`cerr` 和 `clog`。"
+    },
+    {
+      "q": "与 `cout` 对应的宽字符流对象是什么？",
+      "a": "`wcout`。"
+    },
+    {
+      "q": "原文提到的用于刷新输出流的操作是什么？",
+      "a": "`flush()`，在流式写法中可写作 `cout << flush`。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C 与 C++ 的输入输出方式"
+  ],
+  "source_pages": [
+    409,
+    412
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "534_c_标准输入输出流对象",
+  "_chunk_pages": [
+    409,
+    412
+  ]
+}

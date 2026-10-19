@@ -1,0 +1,47 @@
+{
+  "title": "基于局部静态对象的 C++ 单例实现",
+  "definition": "教材介绍的真正单例实现使用访问控制和 `static` 关键字：构造函数与析构函数设为私有，禁止复制构造、移动构造、复制赋值和移动赋值，并通过静态 `instance()` 方法返回唯一对象的引用。`instance()` 方法内部保存一个局部静态 Logger 对象，该对象在首次需要时创建，并在程序结束时自动销毁。",
+  "key_points": [
+    "Logger 的构造函数和析构函数为私有，外部代码不能直接创建或删除 Logger 对象。",
+    "复制构造、移动构造、复制赋值和移动赋值被删除，以防止通过复制或移动产生额外对象。",
+    "客户端通过类似 `Logger::instance()` 的静态方法取得唯一 Logger 对象。",
+    "日志文件名必须在第一次调用 `instance()` 之前设置。",
+    "打开日志文件失败时，构造过程会抛出运行时错误。"
+  ],
+  "examples": [
+    "核心结构可概括为：\n```cpp\nclass Logger final {\npublic:\n    static void setLogFilename(std::string_view filename);\n    static Logger& instance();\n\n    Logger(const Logger&) = delete;\n    Logger(Logger&&) = delete;\n    Logger& operator=(const Logger&) = delete;\n    Logger& operator=(Logger&&) = delete;\n\nprivate:\n    Logger();\n    ~Logger();\n};\n\nLogger& Logger::instance() {\n    static Logger instance; // 局部静态对象\n    return instance;\n}\n```"
+  ],
+  "misconceptions": [
+    "提供 `static instance()` 方法并不意味着可以创建多个对象；唯一对象由函数内部的局部静态实例提供。",
+    "删除复制和移动操作是为了防止通过复制或移动得到额外实例，不能只依靠全局访问函数来保证唯一性。",
+    "日志文件名若在第一次调用 `instance()` 后才设置，不能满足教材示例要求。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何通过 `instance()` 获得单例对象？",
+      "a": "在 `instance()` 函数内部定义一个局部静态 Logger 对象，然后返回该对象的引用：`static Logger instance; return instance;`。"
+    },
+    {
+      "q": "为什么 Logger 的构造函数和析构函数要设为私有？",
+      "a": "为了阻止外部代码直接创建或删除 Logger 实例，使实例生命周期由单例实现控制。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "单例模式的定义",
+    "C++ static 局部变量",
+    "构造函数与析构函数",
+    "删除函数"
+  ],
+  "source_pages": [
+    966,
+    967
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 Scott Meyers Singleton local static instance private constructor destructor deleted copy move Logger implementation",
+  "concept_id": "1984_基于局部静态对象的_c_单例实现",
+  "_chunk_pages": [
+    965,
+    968
+  ]
+}

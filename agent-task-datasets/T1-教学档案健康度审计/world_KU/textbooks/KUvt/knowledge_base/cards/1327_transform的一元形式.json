@@ -1,0 +1,44 @@
+{
+  "title": "transform的一元形式",
+  "definition": "transform的一元形式对源范围内的每个元素调用一次回调函数，并把回调返回的新元素写入目标范围。其参数依次包括源范围的首迭代器、尾后迭代器、目标范围的首迭代器和回调函数。源范围和目标范围可以相同，此时实现就地转换。",
+  "key_points": [
+    "回调函数每次接收一个源元素并返回一个结果元素。",
+    "目标范围必须有足够的可写位置。",
+    "源范围和目标范围相同可以就地修改元素。"
+  ],
+  "examples": [
+    "将myVector的每个元素增加100：transform(begin(myVector), end(myVector), begin(myVector), [](int i){ return i + 100; });",
+    "若原myVector为$[1,2]$，执行后为$[101,102]$。"
+  ],
+  "misconceptions": [
+    "transform不是只查找元素，它会把回调返回值写入目标范围。",
+    "一元transform的回调接收一个元素；使用两个范围的形式时才会接收两个元素。",
+    "就地transform要求目标范围与源范围对应的位置可写。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "transform的一元形式需要哪些主要参数？",
+      "a": "源范围首迭代器、尾后迭代器、目标范围首迭代器以及一个一元回调函数。"
+    },
+    {
+      "q": "如何使用一元transform把每个元素增加100？",
+      "a": "使用transform(begin(v), end(v), begin(v), [](int i){ return i + 100; })，源范围和目标范围相同。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "修改序列算法的基本特点",
+    "Lambda表达式和谓词"
+  ],
+  "source_pages": [
+    638,
+    639
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1327_transform的一元形式",
+  "_chunk_pages": [
+    637,
+    640
+  ]
+}

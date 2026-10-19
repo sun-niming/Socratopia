@@ -1,0 +1,44 @@
+{
+  "title": "范围工厂",
+  "definition": "范围工厂用于直接构造能够按需生成元素的视图，而不必先准备一个容器。原文列举的范围工厂包括 empty_view、single_view、iota_view 和 basic_istream_view（或 istream_view）。这些视图中的元素可以在迭代时惰性生成。",
+  "key_points": [
+    "empty_view 创建空视图。",
+    "single_view 创建只包含一个给定元素的视图。",
+    "iota_view 创建从初始值开始、后续值递增 1 的有界或无限视图。",
+    "basic_istream_view 或 istream_view 从底层输入流中读取元素。",
+    "范围工厂既可以通过范围类的构造函数使用，也可以通过 std::ranges::views 命名空间中的工厂函数使用。"
+  ],
+  "examples": [
+    "以下两种写法等价，都创建从 10 开始的无限序列 10、11、12……：\nstd::ranges::iota_view{10};\nstd::ranges::views::iota(10);"
+  ],
+  "misconceptions": [
+    "范围工厂创建的是视图，不一定立即创建并存储所有元素。",
+    "iota_view 的默认形式可以是无限范围，因此需要 take 等操作限制遍历长度。",
+    "范围工厂与范围适配器不同：工厂负责产生或构造一个范围，适配器负责处理已有范围。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "范围工厂的作用是什么？",
+      "a": "范围工厂用于构造能够按需生成元素的视图，例如空视图、单元素视图、递增序列视图和输入流视图。"
+    },
+    {
+      "q": "iota_view(10) 生成什么序列？",
+      "a": "它生成从 10 开始、每个后续元素比前一个元素大 1 的序列，即 10、11、12……；在未指定边界时通常是无限序列。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "范围视图的惰性求值"
+  ],
+  "source_pages": [
+    543,
+    543
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 std::ranges::iota_view std::ranges::views::iota empty_view single_view basic_istream_view istream_view 官方文档",
+  "concept_id": "1113_范围工厂",
+  "_chunk_pages": [
+    541,
+    544
+  ]
+}

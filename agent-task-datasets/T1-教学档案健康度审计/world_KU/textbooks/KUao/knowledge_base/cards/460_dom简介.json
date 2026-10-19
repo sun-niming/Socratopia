@@ -1,0 +1,48 @@
+{
+  "title": "DOM简介",
+  "definition": "文档对象模型（DOM，Document Object Model）是 W3C 的标准，为 HTML 和 XML 文档提供一种结构化表示。它把整个页面描绘成一个由多层节点构成的树状结构，并提供编程接口，允许程序（如 JavaScript）访问和操作文档的内容、结构和样式，从而在不重新加载整个页面的情况下动态改变网页，实现交互效果。",
+  "key_points": [
+    "DOM是W3C标准，适用于HTML和XML文档。",
+    "DOM把文档表示成多层节点组成的树状结构。",
+    "DOM提供API，允许访问和操作文档的内容、结构和样式。",
+    "DOM的目的之一是无需重新加载整个页面即可动态改变网页。"
+  ],
+  "examples": [
+    "例如：添加、删除、修改HTML元素和属性。",
+    "例如：改变CSS样式，或响应用户事件。"
+  ],
+  "misconceptions": [
+    "误以为DOM只是HTML源码本身；实际上它是对文档的结构化表示。",
+    "误以为修改页面内容必须整页重新加载；DOM可以支持局部动态更新。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "DOM是什么标准？",
+      "a": "DOM是W3C的标准。"
+    },
+    {
+      "q": "DOM把页面表示成什么结构？",
+      "a": "表示成由多层节点构成的树状结构。"
+    },
+    {
+      "q": "DOM的主要作用是什么？",
+      "a": "允许程序访问和操作文档内容、结构和样式，实现动态交互。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "JavaScript基本语法",
+    "JavaScript对象"
+  ],
+  "source_pages": [
+    341,
+    344
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "460_dom简介",
+  "_chunk_pages": [
+    341,
+    344
+  ]
+}

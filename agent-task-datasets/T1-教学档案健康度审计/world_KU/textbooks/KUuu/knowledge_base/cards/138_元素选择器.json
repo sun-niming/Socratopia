@@ -1,0 +1,37 @@
+{
+  "title": "元素选择器",
+  "definition": "元素选择器是以HTML标签名作为选择器的方式，用来匹配所有该标签的元素。",
+  "key_points": [
+    "选择器写成标签名",
+    "会匹配页面中所有同名标签元素"
+  ],
+  "examples": [
+    "body{ color:#111111; font-size:12px; }",
+    "img { border-width:0; }"
+  ],
+  "misconceptions": [
+    "元素选择器不是选择某一个特定元素，而是选择所有该标签元素。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "元素选择器是根据什么来匹配元素的？",
+      "a": "根据HTML标签名来匹配。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "CSS选择器",
+    "HTML元素"
+  ],
+  "source_pages": [
+    89,
+    92
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "138_元素选择器",
+  "_chunk_pages": [
+    89,
+    92
+  ]
+}

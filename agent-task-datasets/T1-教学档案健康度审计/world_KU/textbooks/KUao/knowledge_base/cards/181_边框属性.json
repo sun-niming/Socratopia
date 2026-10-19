@@ -1,0 +1,37 @@
+{
+  "title": "边框属性",
+  "definition": "在盒子模型中，margin 和 padding 属性比较简单，只能设置大小；边框则可以设置宽度、颜色和样式。教材中给出的边框相关属性主要有 border-width、border-color、border-style。",
+  "key_points": [
+    "margin 和 padding 只能设置大小。",
+    "border 可以分别控制宽度、颜色和样式。",
+    "border-style 在不同浏览器中的表现可能略有差别。"
+  ],
+  "examples": [
+    "例如：border-width: 1px; border-color: red; border-style: solid;"
+  ],
+  "misconceptions": [
+    "误以为边框只能设置粗细，不能单独设置颜色或样式。",
+    "误以为 margin、padding 也能像 border 一样分开控制颜色和样式。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "边框和 margin、padding 的属性控制方式有什么不同？",
+      "a": "margin 和 padding 只能设置大小；边框除了大小，还可以设置颜色和样式。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "盒子模型"
+  ],
+  "source_pages": [
+    125,
+    128
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "181_边框属性",
+  "_chunk_pages": [
+    125,
+    128
+  ]
+}

@@ -1,0 +1,224 @@
+{
+  "chunkId": "chunk-001",
+  "messageRange": [
+    0,
+    15
+  ],
+  "topics": [
+    {
+      "name": "自底向上语法分析与归约",
+      "facts": [
+        "自底向上分析对应从叶子往根构造分析树，即把输入串一步步归约回开始符号。",
+        "每一次归约，把一个与某产生式体匹配的子串，替换成该产生式的左部。",
+        "把归约链倒过来读就是对应的最右推导。",
+        "自底向上分析的每一步归约，都必须恰好是某个最右推导步骤的倒放。"
+      ],
+      "examples": [
+        "id*id 的归约链：\\(id*id \\to F*id \\to T*id \\to T*F \\to T \\to E\\)",
+        "对应的最右推导：\\(E \\Rightarrow_{rm} T \\Rightarrow_{rm} T*F \\Rightarrow_{rm} T*id \\Rightarrow_{rm} F*id \\Rightarrow_{rm} id*id\\)"
+      ],
+      "sourceMessageIndexes": [
+        0,
+        1
+      ]
+    },
+    {
+      "name": "句柄与移入-归约",
+      "facts": [
+        "该被归约的子串叫句柄。",
+        "句柄的判据是：把这段子串换成左部之后，得到的串必须恰好是最右推导链上的前一个句型。",
+        "无二义的文法里，每个右句型有且只有一个句柄；出现多个，就说明文法有歧义。",
+        "句柄永远出现在栈的顶端，绝不会埋在栈中间。",
+        "移入-归约分析器的循环是：移入若干符号，在栈顶归约一次，再移入若干符号，如此往复。",
+        "表驱动分析器的四种动作：移入、归约、接受、报错。",
+        "归约是把栈顶与产生式体匹配的串 β 弹出，再把左部 A 压进去。"
+      ],
+      "examples": [
+        "归约链到 \\(T*id_2\\) 时，\\(T\\) 不能归约为 \\(E\\)，因为 \\(E*id_2\\) 不能从开始符号 \\(E\\) 推导出来。",
+        "栈里是 \\(\\$T\\)，下一个输入符号是 \\(*\\)，此时应移入 \\(*\\) 而不是归约 \\(T\\to E\\)。"
+      ],
+      "sourceMessageIndexes": [
+        1,
+        3,
+        5,
+        6
+      ]
+    },
+    {
+      "name": "项与 LR(0) 项集",
+      "facts": [
+        "一个项就是一条产生式，加上一个位于体上某处的点。",
+        "产生式 \\(A\\to XYZ\\) 一共生成四个项：\\(A\\to \\cdot XYZ\\)、\\(A\\to X\\cdot YZ\\)、\\(A\\to XY\\cdot Z\\)、\\(A\\to XYZ\\cdot\\)。",
+        "点的左边是已经看完的部分，点的右边是接下来期待看到的。",
+        "点的右边还有符号则体没走完，不能归约；点在最右端则体完整，可以归约。",
+        "同一个状态里如果既有「往右走」的项、又有「体完整」的项，就会产生移入/归约冲突。"
+      ],
+      "examples": [
+        "\\(A\\to X\\cdot YZ\\) 表示刚看完一个能由 \\(X\\) 推出的串，还期待 \\(YZ\\)。",
+        "\\(A\\to XYZ\\cdot\\) 表示体已经完整，是该归约的时候了。",
+        "\\(E\\to E+T\\) 生成的四个项：\\(E\\to \\cdot E+T\\)、\\(E\\to E\\cdot +T\\)、\\(E\\to E+\\cdot T\\)、\\(E\\to E+T\\cdot\\)；\\(E\\to E+T\\cdot\\) 表示可以归约。",
+        "栈里读到 \\(T\\) 后，对应状态里有项 \\(T\\to T\\cdot *F\\)，点的右边还剩 \\(*F\\)，必须移入 \\(*\\)。"
+      ],
+      "sourceMessageIndexes": [
+        7,
+        8,
+        9
+      ]
+    },
+    {
+      "name": "CLOSURE 闭包",
+      "facts": [
+        "CLOSURE 吃项集，不吃非终结符。",
+        "闭包规则一：把 \\(I\\) 里的项全部放进 \\(\\mathrm{CLOSURE}(I)\\)。",
+        "闭包规则二：若 \\(A\\to\\alpha\\cdot B\\beta\\) 已在其中，\\(B\\to\\gamma\\) 是某条产生式，而 \\(B\\to\\cdot\\gamma\\) 还不在，就把它加进来；反复执行直到没有新项可加。",
+        "闭包沿着「点的右边是非终结符」这条链往下走，走到点右边是终结符（或走到底）为止。"
+      ],
+      "examples": [
+        "\\(\\mathrm{CLOSURE}(\\{E\\to E+\\cdot T\\})=\\{E\\to E+\\cdot T,\\;T\\to\\cdot T*F,\\;T\\to\\cdot F,\\;F\\to\\cdot(E),\\;F\\to\\cdot id\\}\\)",
+        "增广文法开始项 \\(I=\\{E'\\to\\cdot E\\}\\) 一路展开得到教材图 4-31 里的 \\(I_0\\)。"
+      ],
+      "sourceMessageIndexes": [
+        9,
+        11
+      ]
+    },
+    {
+      "name": "GOTO 函数",
+      "facts": [
+        "\\(\\mathrm{GOTO}(I,X)=\\mathrm{CLOSURE}(\\{A\\to\\alpha X\\cdot\\beta \\mid A\\to\\alpha\\cdot X\\beta\\in I\\})\\)。",
+        "GOTO 分两段：先把点跨过符号 \\(X\\)，再对得到的那组项求一次闭包。",
+        "点在产生式体最左端的项也要算，只要点后正好是 \\(X\\)，它一样参与「跨符号」。"
+      ],
+      "examples": [
+        "对 \\(I=\\{E\\to E+\\cdot T,\\;T\\to\\cdot T*F,\\;T\\to\\cdot F,\\;F\\to\\cdot(E),\\;F\\to\\cdot id\\}\\)，\\(\\mathrm{GOTO}(I,T)=\\{E\\to E+T\\cdot,\\;T\\to T\\cdot*F\\}\\)。",
+        "第一段跨 \\(T\\) 得到 \\(E\\to E+T\\cdot\\) 和 \\(T\\to T\\cdot*F\\)；第二段闭包无可添加。"
+      ],
+      "sourceMessageIndexes": [
+        11,
+        13,
+        14,
+        15
+      ]
+    }
+  ],
+  "learnerEvidence": [
+    {
+      "kind": "correct",
+      "content": "不能把 \\(T\\) 归约成 \\(E\\)，因为右边还剩下 \\(*id\\) 没有归约，此时直接归约到开始符号，后边的终结符号就没法参与归约了。",
+      "sourceMessageIndexes": [
+        2
+      ]
+    },
+    {
+      "kind": "correct",
+      "content": "移入 \\(*\\)，因为句柄必须在栈顶，不能在栈中间，如果归约成 \\(E\\)，句柄就被压在栈中间了。",
+      "sourceMessageIndexes": [
+        6
+      ]
+    },
+    {
+      "kind": "correct",
+      "content": "\\(E\\to E+T\\) 的四个项：\\(E\\to \\cdot E+T\\)、\\(E\\to E\\cdot +T\\)、\\(E\\to E+\\cdot T\\)、\\(E\\to E+T\\cdot\\)；\\(E\\to E+T\\cdot\\) 表示可以归约。",
+      "sourceMessageIndexes": [
+        8
+      ]
+    },
+    {
+      "kind": "misconception",
+      "content": "加 CLOSURE(CLOSURE(T))。",
+      "sourceMessageIndexes": [
+        10
+      ]
+    },
+    {
+      "kind": "confusion",
+      "content": "I 是哪个？",
+      "sourceMessageIndexes": [
+        12
+      ]
+    },
+    {
+      "kind": "correct",
+      "content": "\\(T\\to\\cdot T*F\\) 也能点跨过 \\(T\\)，所以第一段是 \\(E\\to E+T\\cdot\\) 和 \\(T\\to T\\cdot*F\\)；\\(\\mathrm{GOTO}(I,T)=\\{E\\to E+T\\cdot,\\;T\\to T\\cdot*F\\}\\)。",
+      "sourceMessageIndexes": [
+        14
+      ]
+    },
+    {
+      "kind": "shift",
+      "content": "从认为 \\(T\\to\\cdot T*F\\) 不参与跨 \\(T\\)，到发现点在最左端的项也参与「跨符号」。",
+      "sourceMessageIndexes": [
+        13,
+        14,
+        15
+      ]
+    }
+  ],
+  "keyInsights": [
+    {
+      "content": "不能把 \\(T\\) 归约成 \\(E\\)，因为右边还剩下 \\(*id\\) 没有归约，后边的终结符号就没法参与归约了。",
+      "sourceMessageIndexes": [
+        2
+      ]
+    },
+    {
+      "content": "移入 \\(*\\)，因为句柄必须在栈顶，不能在栈中间。",
+      "sourceMessageIndexes": [
+        6
+      ]
+    },
+    {
+      "content": "\\(T\\to\\cdot T*F\\) 也能点跨过 \\(T\\)，所以 \\(\\mathrm{GOTO}(I,T)\\) 应为 \\(\\{E\\to E+T\\cdot,\\;T\\to T\\cdot*F\\}\\)。",
+      "sourceMessageIndexes": [
+        14
+      ]
+    }
+  ],
+  "openQuestions": [
+    {
+      "content": "\\(\\mathrm{GOTO}(I,()\\) 等于什么？\\(I\\) 里点右边紧挨着左括号的项是哪个？跨过 \\((\\) 之后剩下什么？闭包会不会忙起来？",
+      "sourceMessageIndexes": [
+        15
+      ]
+    }
+  ],
+  "reviewCandidates": [
+    {
+      "question": "什么是句柄？无二义文法中每个右句型有几个句柄？",
+      "answer": "句柄是该被归约的子串；判据是把这段子串换成左部之后，得到的串必须恰好是最右推导链上的前一个句型。无二义文法里每个右句型有且只有一个句柄。",
+      "sourceMessageIndexes": [
+        1,
+        3
+      ]
+    },
+    {
+      "question": "移入-归约分析器的循环是哪两步？",
+      "answer": "移入若干符号，直到栈顶形成句柄，然后在栈顶归约一次，如此往复。",
+      "sourceMessageIndexes": [
+        5
+      ]
+    },
+    {
+      "question": "产生式 \\(E\\to E+T\\) 生成的四个项分别是什么？哪一个表示可以归约？",
+      "answer": "\\(E\\to \\cdot E+T\\)、\\(E\\to E\\cdot +T\\)、\\(E\\to E+\\cdot T\\)、\\(E\\to E+T\\cdot\\)；\\(E\\to E+T\\cdot\\) 表示可以归约。",
+      "sourceMessageIndexes": [
+        7,
+        8
+      ]
+    },
+    {
+      "question": "CLOSURE 的两条规则是什么？",
+      "answer": "规则一：把 \\(I\\) 里的项全部放进 \\(\\mathrm{CLOSURE}(I)\\)。规则二：若 \\(A\\to\\alpha\\cdot B\\beta\\) 已在其中，\\(B\\to\\gamma\\) 是某条产生式，而 \\(B\\to\\cdot\\gamma\\) 还不在，就把它加进来；反复执行直到没有新项可加。",
+      "sourceMessageIndexes": [
+        9
+      ]
+    },
+    {
+      "question": "\\(\\mathrm{GOTO}(I,X)\\) 的定义是什么？它分哪两段？",
+      "answer": "\\(\\mathrm{GOTO}(I,X)=\\mathrm{CLOSURE}(\\{A\\to\\alpha X\\cdot\\beta \\mid A\\to\\alpha\\cdot X\\beta\\in I\\})\\)；分两段：先把点跨过符号 \\(X\\)，再对得到的那组项求一次闭包。",
+      "sourceMessageIndexes": [
+        11
+      ]
+    }
+  ]
+}

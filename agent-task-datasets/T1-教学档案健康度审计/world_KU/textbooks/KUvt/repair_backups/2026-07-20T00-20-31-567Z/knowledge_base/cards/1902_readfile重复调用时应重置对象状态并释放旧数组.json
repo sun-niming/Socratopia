@@ -1,0 +1,50 @@
+{
+  "title": "readFile重复调用时应重置对象状态并释放旧数组",
+  "definition": "ArticleCitations::readFile() 可以在同一个对象上调用多次，因此每次读取新文件前，都应释放之前为 m_citations 分配的动态数组，并将指针和引文数量重置为安全的初始状态。教材给出的修改是先执行 delete[] m_citations，然后设置 m_citations = nullptr 和 m_numCitations = 0；如果新文件包含引文，再重新分配数组并读取数据。没有引文时，m_numCitations 应保持为 0，而不能设置为 -1。",
+  "key_points": [
+    "重复读取前必须释放旧的 m_citations 数组，避免旧数据残留和内存泄漏。",
+    "释放数组后应将 m_citations 设为 nullptr，并将 m_numCitations 设为 0。",
+    "没有引文时，m_numCitations 应初始化为 0。",
+    "有引文时，先分配 new string[count]，再清除输入流状态并通过 seekg() 回到引文起始位置进行读取。"
+  ],
+  "examples": [
+    "初始化和清理部分：\ndelete[] m_citations;\nm_citations = nullptr;\nm_numCitations = 0;",
+    "有引文时的处理：\nif (count != 0) {\n    m_citations = new string[count];\n    m_numCitations = count;\n    inputFile.clear();\n    inputFile.seekg(citationsStart);\n    // 读取每条引文\n}"
+  ],
+  "misconceptions": [
+    "误以为给 m_citations 重新赋值即可自动释放旧数组；使用 new[] 分配的数组必须用 delete[] 释放。",
+    "误以为没有引文时可以用 -1 表示数量；本例中该值会导致后续拷贝和分配出现问题。",
+    "误以为 readFile() 只会对一个对象调用一次，因此不需要清理旧数据。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "readFile() 在同一个 ArticleCitations 对象上重复调用时，为什么要先 delete[] m_citations？",
+      "a": "因为对象可能已经持有上一次读取时动态分配的引文数组。先释放旧数组可以避免内存泄漏和旧数据残留。"
+    },
+    {
+      "q": "没有引文时 m_numCitations 应设置为多少？",
+      "a": "应设置为 0，而不是 -1。"
+    },
+    {
+      "q": "释放旧数组后为什么还要把 m_citations 设置为 nullptr？",
+      "a": "这样可以明确表示当前没有有效的引文数组，避免继续使用已经释放的地址。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "动态数组的new[]与delete[]",
+    "C++对象状态管理",
+    "文件读取结束时流状态变化的原因"
+  ],
+  "source_pages": [
+    920,
+    920
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1902_readfile重复调用时应重置对象状态并释放旧数组",
+  "_chunk_pages": [
+    917,
+    920
+  ]
+}

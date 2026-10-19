@@ -1,0 +1,54 @@
+{
+  "title": "用 declare 声明变量类型或属性",
+  "definition": "declare 命令用于声明变量，其基本格式为“declare [选项] 变量名”。教材列出了四个选项：-a 表示声明变量为数组；-i 表示声明为整型；-x 表示声明为环境变量；-r 表示声明为只读变量。",
+  "key_points": [
+    "基本格式：declare [选项] 变量名",
+    "-a：声明变量为数组",
+    "-i：声明为整型",
+    "-x：声明为环境变量",
+    "-r：声明为只读变量"
+  ],
+  "examples": [
+    "declare -a arr",
+    "declare -i num",
+    "declare -x var",
+    "declare -r name"
+  ],
+  "misconceptions": [
+    "误以为 declare 只能定义普通变量，实际上还可声明数组、整型、环境变量和只读变量",
+    "误以为 -x 只是一种赋值方式，实际上它表示声明为环境变量"
+  ],
+  "qa_pairs": [
+    {
+      "q": "declare 命令的基本格式是什么？",
+      "a": "declare [选项] 变量名。"
+    },
+    {
+      "q": "用哪个选项把变量声明为数组？",
+      "a": "-a。"
+    },
+    {
+      "q": "用哪个选项把变量声明为只读变量？",
+      "a": "-r。"
+    },
+    {
+      "q": "declare 的 -x 选项表示什么？",
+      "a": "声明为环境变量。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "Shell变量的基本概念"
+  ],
+  "source_pages": [
+    65,
+    68
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "116_用_declare_声明变量类型或属性",
+  "_chunk_pages": [
+    65,
+    68
+  ]
+}

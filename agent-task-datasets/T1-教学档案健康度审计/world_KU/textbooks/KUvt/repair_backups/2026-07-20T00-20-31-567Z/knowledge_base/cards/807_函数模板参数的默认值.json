@@ -1,0 +1,36 @@
+{
+  "title": "函数模板参数的默认值",
+  "definition": "函数模板的模板类型参数可以设置默认值。若某个模板参数具有默认值，并且其余所需模板参数能够从函数实参推导，则调用函数模板时可以省略该参数。",
+  "key_points": [
+    "教材示例为：RetType 的默认值是 long long，而 T1、T2 由函数实参推导。",
+    "因此可以直接调用 add(1, 2)，返回类型模板参数采用默认值 long long。",
+    "默认模板参数用于减少调用时必须显式书写的模板参数。"
+  ],
+  "examples": [
+    "template <typename RetType = long long, typename T1, typename T2>\nRetType add(const T1& t1, const T2& t2) { return t1 + t2; }\n\nauto result { add(1, 2) };"
+  ],
+  "misconceptions": [
+    "设置默认值并不意味着所有模板参数都不需要满足推导或指定条件；没有默认值且无法从实参推导的参数仍必须显式提供。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为 RetType 设置默认值后，add 函数可以怎样调用？",
+      "a": "可以调用 add(1, 2)，此时 RetType 使用默认值 long long，T1 和 T2 根据实参推导。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "函数模板参数的显式指定与类型推导"
+  ],
+  "source_pages": [
+    398,
+    398
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "807_函数模板参数的默认值",
+  "_chunk_pages": [
+    397,
+    400
+  ]
+}

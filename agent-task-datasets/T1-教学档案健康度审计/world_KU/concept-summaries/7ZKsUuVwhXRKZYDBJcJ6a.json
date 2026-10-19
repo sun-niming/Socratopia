@@ -1,0 +1,134 @@
+{
+  "conversationId": "7ZKsUuVwhXRKZYDBJcJ6a",
+  "generatedAt": 1782640776478,
+  "pagesRange": null,
+  "sections": [
+    {
+      "type": "tldr",
+      "content": "本节把 Linux 命令从“会写单条命令”推进到“会用 \\(find\\)、\\(grep\\)、管道和重定向组合处理文件内容”。"
+    },
+    {
+      "type": "narrative",
+      "content": "一开始先纠正 \\(find\\) 里 \\(-exec\\) 的收尾语法，把 `\\;` 这个最容易出错的尾巴钉牢。接着一路练到 \\(grep\\) 的基本筛选、正则锚点与字符类，最后把筛选结果接上管道和重定向，开始能做“统计并保存”这种复合任务。"
+    },
+    {
+      "type": "concepts",
+      "items": [
+        {
+          "name": "\\(find\\) 与 \\(-exec\\)",
+          "body": "`find` 用来递归查找，常见结构是：\n\n```bash\\nfind ./ -type d -name \"backup\" -exec ls -ld {} \\;\n```\n\n可以拆成四段看：\n\n- `./`：从当前目录开始\n- `-type d`：只找目录\n- `-name \"backup\"`：名字叫 `backup`\n- `-exec ls -ld {} \\;`：对每个结果执行 `ls -ld`\n\n重点是：`-exec` 的结束符必须写成 `\\;`，而且 `{} ` 和 `\\;` 之间要有空格。"
+        },
+        {
+          "name": "\\(grep\\) 的基本筛选",
+          "body": "`grep` 是“从内容里筛选行”的命令。\n\n- `grep \"love\" a.txt`：找包含 `love` 的行\n- `grep -n \"love\" a.txt`：显示行号\n- `grep -v \"love\" a.txt`：显示不包含 `love` 的行\n- `grep -vn \"love\" a.txt`：不包含 `love`，并显示行号\n\n它的核心不是“看文件”，而是“按模式过滤文本行”。"
+        },
+        {
+          "name": "正则元字符",
+          "body": "这节课主要练了这些符号：\n\n- `^`：行开头\n- `$`：行结尾\n- `.`：任意一个字符\n- `*`：前一个字符重复 \\(0\\) 次或多次\n- `[Ll]`：字符集合，表示 `L` 或 `l`\n- `[A-Z]`：范围，表示任意大写字母\n- `[^A-Z]`：取反字符集合，表示非大写字母\n- `\\.`：把 `.` 转义成普通句点\n\n几个典型例子：\n\n```bash\\ngrep \"^love$\" a.txt\\ngrep \"l..e\" a.txt\\ngrep \"[Ll][oa]ve\" a.txt\\ngrep \"[^A-Z]ove\" a.txt\\ngrep \"^love\\.\" a.txt\n```\n\n直觉上可以这样记：\n\n- `^love$`：整行正好是 `love`\n- `l..e`：中间有两个任意字符\n- `.*love$`：前面任意，结尾是 `love`\n- `love\\.`：字面量的 `love.`，不是“love 后面跟任意字符”"
+        },
+        {
+          "name": "管道与重定向",
+          "body": "管道 `|` 的作用是：把前一个命令的输出交给后一个命令继续处理。\n\n```bash\\ngrep \"love\" a.txt | wc -l\n```\n\n这里是：先筛出包含 `love` 的行，再用 `wc -l` 统计行数。\n\n重定向分两种：\n\n- `>`：覆盖写入\n- `>>`：追加写入\n\n例子：\n\n```bash\\ngrep \"love\" a.txt > result.txt\\ngrep \"love\" a.txt >> result.txt\n```\n\n把它们接起来，也能做“筛选 + 统计 + 保存”：\n\n```bash\\ngrep \"love\" a.txt | wc -l > count.txt\n```"
+        }
+      ]
+    },
+    {
+      "type": "key-terms",
+      "items": [
+        {
+          "term": "find ./",
+          "definition": "从当前目录开始递归查找。"
+        },
+        {
+          "term": "-exec",
+          "definition": "对每个查到的结果执行后面的命令，结尾要写 `\\;`。"
+        },
+        {
+          "term": "grep",
+          "definition": "按模式筛选文本行的命令。"
+        },
+        {
+          "term": "-n",
+          "definition": "显示匹配结果的行号。"
+        },
+        {
+          "term": "-v",
+          "definition": "取反，显示不匹配的行。"
+        },
+        {
+          "term": "^",
+          "definition": "行开头锚点。"
+        },
+        {
+          "term": "$",
+          "definition": "行尾锚点。"
+        },
+        {
+          "term": ".",
+          "definition": "任意一个字符。"
+        },
+        {
+          "term": "*",
+          "definition": "前一个元素重复 \\(0\\) 次或多次。"
+        },
+        {
+          "term": "[Ll]",
+          "definition": "字符集合，表示 `L` 或 `l`。"
+        },
+        {
+          "term": "[^A-Z]",
+          "definition": "取反字符集合，表示非大写字母。"
+        },
+        {
+          "term": "\\.",
+          "definition": "转义句点，匹配字面量 `.`。"
+        },
+        {
+          "term": "|",
+          "definition": "管道，把前一个命令的输出交给后一个命令。"
+        },
+        {
+          "term": ">",
+          "definition": "覆盖重定向。"
+        },
+        {
+          "term": ">>",
+          "definition": "追加重定向。"
+        },
+        {
+          "term": "wc -l",
+          "definition": "统计行数。"
+        }
+      ]
+    },
+    {
+      "type": "review-questions",
+      "items": [
+        {
+          "question": "写出命令：从当前目录开始，找出所有 `.txt` 普通文件，并把每个文件内容打印出来。",
+          "hint": "用 `find` + `-type f` + `-name` + `-exec`。",
+          "answer": "```bash\\nfind ./ -type f -name \"*.txt\" -exec cat {} \\;\n```"
+        },
+        {
+          "question": "解释这三个模式分别匹配什么：`grep \"love\" a.txt`、`grep \"love$\" a.txt`、`grep \"^love$\" a.txt`。",
+          "hint": "分别看“包含”“行尾”“整行”。",
+          "answer": "- `grep \"love\" a.txt`：包含 `love` 的行\n- `grep \"love$\" a.txt`：以 `love` 结尾的行\n- `grep \"^love$\" a.txt`：整行正好等于 `love`"
+        },
+        {
+          "question": "`grep -vn \"^love\\.\\$\" a.txt` 这类题里，`-v`、`-n`、`^`、`$`、`\\.` 各自做什么？",
+          "hint": "先判断“整行正好是 `love.`”，再取反。",
+          "answer": "更标准的写法是：\n\n```bash\\ngrep -vn \"^love\\.\" a.txt\n```\n\n如果题意是“整行正好是 `love.`”，应写成：\n\n```bash\\ngrep -vn \"^love\\.\\$\" a.txt\n```\n\n其中：\n\n- `-v`：显示不匹配的行\n- `-n`：显示行号\n- `^`：锁定行开头\n- `$`：锁定行结尾\n- `\\.`：把句点当成普通字符"
+        },
+        {
+          "question": "统计 `a.txt` 里包含 `love` 的行数，并把结果覆盖保存到 `count.txt`。",
+          "hint": "先筛选，再 `wc -l`，最后用 `>`。",
+          "answer": "```bash\\ngrep \"love\" a.txt | wc -l > count.txt\n```"
+        }
+      ]
+    },
+    {
+      "type": "open-question",
+      "content": "`link.txt` 如果是 `a.txt` 的符号链接，它更像是“复制了一份内容”，还是“指向原文件的快捷方式”？它和原文件内容是怎样关联的？"
+    }
+  ]
+}

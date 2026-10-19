@@ -1,0 +1,63 @@
+{
+  "title": "std::optional 可选值",
+  "definition": "std::optional<T> 是一个标准库类模板，用于表示一个对象中可能包含一个 T 类型的值，也可能不包含任何值。它适合表示函数参数或返回结果的可选性，从而避免使用 nullptr、-1、EOF 等特殊值表示“没有结果”，也可以避免通过布尔返回值加输出参数组合表示成功或失败。",
+  "key_points": [
+    "std::optional<T> 的模板参数 T 指定可能包含的值的类型，例如 std::optional<int>。",
+    "空 optional 可用 std::nullopt 或空初始化器 {} 表示。",
+    "可使用 has_value() 判断是否包含值，也可以直接在 if 语句中使用 optional。",
+    "包含值时，可通过 value() 或解引用运算符 * 访问值。",
+    "对空 optional 调用 value() 会抛出 std::bad_optional_access 异常。",
+    "value_or(defaultValue) 在 optional 有值时返回该值；为空时返回指定的默认值。",
+    "不能保存引用类型，例如 std::optional<T&> 无效，但可以保存指针类型。"
+  ],
+  "examples": [
+    "std::optional<int> getData(bool giveIt) { if (giveIt) { return 42; } return std::nullopt; }",
+    "std::optional<int> data1 { getData(true) };",
+    "std::optional<int> data2 { getData(false) };",
+    "if (data2) { /* data2 包含值时执行 */ }",
+    "data1.value();",
+    "*data1;",
+    "data2.value_or(0);"
+  ],
+  "misconceptions": [
+    "std::optional<int> 不一定包含整数；它也可能为空。",
+    "调用 value() 不会在空 optional 时返回某个默认整数，而是会抛出 std::bad_optional_access。",
+    "optional 的模板参数不能写成引用类型 T&，但可以将指针作为 T 保存。",
+    "optional 并不是用特殊整数值表示缺失状态，而是显式表示“有值”或“无值”。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何判断 std::optional<int> data 是否包含值？",
+      "a": "可以调用 data.has_value()，也可以直接写 if (data) 进行判断。"
+    },
+    {
+      "q": "对空 optional 调用 value() 会发生什么？",
+      "a": "会抛出 std::bad_optional_access 异常。"
+    },
+    {
+      "q": "value_or(0) 对空的 std::optional<int> 有什么作用？",
+      "a": "因为 optional 为空，它会返回指定的默认值 0；如果 optional 有值，则返回其中的值。"
+    },
+    {
+      "q": "std::optional 可以直接保存引用吗？",
+      "a": "不可以，std::optional<T&> 无效；但可以把指针类型作为 optional 的模板参数。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "类模板",
+    "函数返回值",
+    "异常的基本概念"
+  ],
+  "source_pages": [
+    60,
+    60
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "102_std_optional_可选值",
+  "_chunk_pages": [
+    57,
+    60
+  ]
+}

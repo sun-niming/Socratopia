@@ -1,0 +1,46 @@
+{
+  "title": "使用 iota_view 构造无限递增序列",
+  "definition": "views::iota(10) 可以创建从 10 开始的惰性无限递增数字序列。该序列可以继续通过 filter、transform 和 take 组成管道；take 用于限制最终实际生成和输出的元素数量。",
+  "key_points": [
+    "从 10 开始的 iota 序列为 10、11、12、13……。",
+    "过滤奇数后只剩 10、12、14、16……。",
+    "将这些偶数乘以 2 后得到 20、24、28、32……。",
+    "使用 views::take(10) 后，只输出前 10 个结果：20、24、28、32、36、40、44、48、52、56。",
+    "不能直接完整输出 values、result1 或 result2，因为它们仍表示无限范围；直接遍历会持续进行。"
+  ],
+  "examples": [
+    "auto values{views::iota(10)};\nauto result{values | views::filter([](const auto& value) { return value % 2 == 0; }) | views::transform([](const auto& value) { return value * 2.0; }) | views::take(10)};\n输出为：20 24 28 32 36 40 44 48 52 56。"
+  ],
+  "misconceptions": [
+    "iota(10) 不是只生成一个元素 10，而是生成从 10 开始递增的序列。",
+    "filter 和 transform 不会把无限范围自动变成有限范围；必须使用 take 或其他终止条件。",
+    "views::take(10) 保留的是经过前面过滤和转换后的前 10 个元素。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么示例必须使用 views::take(10)？",
+      "a": "因为 views::iota(10) 创建的是无限序列，前面的 filter 和 transform 仍然产生无限范围；views::take(10) 将最终输出限制为 10 个元素。"
+    },
+    {
+      "q": "该示例输出的前 10 个元素是什么？",
+      "a": "20、24、28、32、36、40、44、48、52、56。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "范围工厂",
+    "范围视图的惰性求值",
+    "范围适配器的管道组合"
+  ],
+  "source_pages": [
+    543,
+    544
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1114_使用_iota_view_构造无限递增序列",
+  "_chunk_pages": [
+    541,
+    544
+  ]
+}

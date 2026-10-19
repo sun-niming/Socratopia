@@ -1,0 +1,43 @@
+{
+  "title": "常见Shell种类",
+  "definition": "教材列出三种常见Shell：/bin/sh，对应B-shell，由R.Bourne在Bell实验室开发，是Unix的标准Shell；/bin/csh，对应C-shell，由Bill Joy在加州大学开发，提供历史机制和别名替换；/bin/bash，对应Bourne Again Shell，是Linux标准Shell，并且兼容B-Shell。",
+  "key_points": [
+    "/bin/sh：B-shell，Unix的标准Shell",
+    "/bin/csh：C-shell，提供历史机制和别名替换",
+    "/bin/bash：Bourne Again Shell，Linux标准Shell，兼容B-Shell"
+  ],
+  "examples": [
+    "/bin/sh —— B-shell",
+    "/bin/csh —— C-shell",
+    "/bin/bash —— Bourne Again Shell"
+  ],
+  "misconceptions": [
+    "误以为Linux只存在bash一种Shell；教材列出了sh、csh和bash等不同Shell",
+    "误以为bash与B-Shell完全无关；教材指出bash兼容B-Shell"
+  ],
+  "qa_pairs": [
+    {
+      "q": "教材中Linux标准Shell是哪一种？",
+      "a": "教材指出Linux标准Shell是/bin/bash，即Bourne Again Shell。"
+    },
+    {
+      "q": "哪一种Shell提供历史机制和别名替换？",
+      "a": "教材指出/bin/csh，即C-shell，提供历史机制和别名替换。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "Shell的概念"
+  ],
+  "source_pages": [
+    45,
+    48
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "083_常见shell种类",
+  "_chunk_pages": [
+    45,
+    48
+  ]
+}

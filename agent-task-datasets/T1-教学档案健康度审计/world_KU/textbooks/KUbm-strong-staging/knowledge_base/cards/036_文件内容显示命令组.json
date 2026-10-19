@@ -1,0 +1,43 @@
+{
+  "title": "文件内容显示命令组",
+  "definition": "教材把 cat、more、less、head、tail 列为“文件内容显示”相关命令，它们都属于查看文件内容时常用的命令。该页主要给出了命令名称，没有进一步展开各命令差异。",
+  "key_points": [
+    "文件内容显示命令包括：cat、more、less、head、tail",
+    "这些命令用于查看文件内容",
+    "教材此处是命令列举，没有给出详细参数说明"
+  ],
+  "examples": [
+    "cat file.txt",
+    "more file.txt",
+    "less file.txt",
+    "head file.txt",
+    "tail file.txt"
+  ],
+  "misconceptions": [
+    "认为文件内容显示只有 cat 一种命令是不对的，教材列出了五种常见命令",
+    "把这一页理解为详细讲解各命令参数不对，原文只是列举"
+  ],
+  "qa_pairs": [
+    {
+      "q": "教材列出的文件内容显示命令有哪些？",
+      "a": "cat、more、less、head、tail。"
+    },
+    {
+      "q": "这些命令在教材中归入哪一类用途？",
+      "a": "归入文件内容显示。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [],
+  "source_pages": [
+    17,
+    20
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "036_文件内容显示命令组",
+  "_chunk_pages": [
+    17,
+    20
+  ]
+}

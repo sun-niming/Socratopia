@@ -1,0 +1,41 @@
+{
+  "title": "SIGCHLD 子进程回收",
+  "definition": "fork 并发服务器中，父进程会不断创建子进程处理请求，因此必须安装 `SIGCHLD` 处理器，在子进程退出时用 `waitpid` 循环回收，避免产生僵尸进程。",
+  "key_points": [
+    "`handle_sigchld` 中用 `while (waitpid(-1, NULL, WNOHANG) > 0) {}` 回收所有已退出的子进程。",
+    "`install_sigchld_handler` 通过 `sigaction` 安装信号处理器。",
+    "`sa_flags = SA_RESTART` 可以减少系统调用被信号打断的概率。",
+    "即使设置了 `SA_RESTART`，仍然要保留对 `errno == EINTR` 的处理。"
+  ],
+  "examples": [
+    "回收子进程的核心代码：`while (waitpid(-1, NULL, WNOHANG) > 0) {}`",
+    "信号安装骨架：`sa.sa_handler = handle_sigchld; sigemptyset(&sa.sa_mask); sa.sa_flags = SA_RESTART; sigaction(SIGCHLD, &sa, NULL);`"
+  ],
+  "misconceptions": [
+    "以为子进程退出后系统会自动帮父进程清理，不需要 `waitpid`。",
+    "以为设置了 `SA_RESTART` 就完全不需要处理 `EINTR`。",
+    "以为 `waitpid` 只调用一次就能回收所有退出的子进程。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么 `SIGCHLD` 处理器里要循环调用 `waitpid`？",
+      "a": "因为一次信号到达时可能已有多个子进程退出，循环调用才能把它们都回收，避免僵尸进程。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "信号处理",
+    "进程与僵尸进程"
+  ],
+  "source_pages": [
+    74,
+    75
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "117_sigchld_子进程回收",
+  "_chunk_pages": [
+    73,
+    76
+  ]
+}

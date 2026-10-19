@@ -1,0 +1,47 @@
+{
+  "title": "equal() 与 mismatch() 的四迭代器重载",
+  "definition": "equal() 和 mismatch() 都有使用两个范围首尾迭代器的四迭代器重载。四迭代器形式分别接收第一个范围的首尾迭代器和第二个范围的首尾迭代器，因此可以明确处理两个长度不同的范围。原文建议为保险起见始终使用四迭代器版本。",
+  "key_points": [
+    "三迭代器版本接收第一个范围的首尾迭代器，以及第二个范围的首迭代器。",
+    "四迭代器版本接收两个范围各自的首尾迭代器。",
+    "equal() 的四迭代器版本可以处理长度不同的范围。",
+    "mismatch() 的四迭代器版本可以在两个范围长度信息都明确的情况下查找不匹配位置。"
+  ],
+  "examples": [
+    "if (equal(cbegin(myVector), cend(myVector), cbegin(myList), cend(myList))) { /* 两个范围元素相等 */ }",
+    "auto miss { mismatch(cbegin(myVector), cend(myVector), cbegin(myList), cend(myList)) };",
+    "mismatch() 返回结果中的 miss.first 可用于定位 vector 中第一个不匹配元素。"
+  ],
+  "misconceptions": [
+    "三迭代器版本总能安全地比较任意长度的两个范围。",
+    "equal() 只支持同一种容器。",
+    "mismatch() 只返回一个迭代器；实际上它会返回与各个范围对应的迭代器结果。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么原文建议优先使用 equal() 的四迭代器版本？",
+      "a": "因为四迭代器版本同时知道两个范围的首尾位置，可以处理不同大小的范围，更加安全。"
+    },
+    {
+      "q": "mismatch() 返回的 miss.first 表示什么？",
+      "a": "它表示第一个范围中与第二个范围对应元素不匹配的位置。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "equal()",
+    "mismatch()",
+    "迭代器范围"
+  ],
+  "source_pages": [
+    635,
+    636
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1319_equal_与_mismatch_的四迭代器重载",
+  "_chunk_pages": [
+    633,
+    636
+  ]
+}

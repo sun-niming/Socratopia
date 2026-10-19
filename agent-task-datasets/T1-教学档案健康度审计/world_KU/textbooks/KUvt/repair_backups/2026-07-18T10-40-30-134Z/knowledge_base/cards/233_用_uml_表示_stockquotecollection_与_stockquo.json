@@ -1,0 +1,56 @@
+{
+  "title": "用 UML 表示 StockQuoteCollection 与 StockQuote",
+  "definition": "原文第168页给出了一个 UML 类图示例，用于表示 StockQuoteCollection（股票报价集合）与 StockQuote（股票报价）之间的结构关系。StockQuote 类包含公司名称、股票代码和当前价格等数据，以及 analyze()、buyShares()、sellShares() 等操作；StockQuoteCollection 类包含股票报价容器和时间戳等数据，以及 retrieveQuotes()、sortQuotes() 等操作。图中还用关系线表示集合类与股票报价类之间的关联。",
+  "key_points": [
+    "StockQuote 的属性包括 m_companyName: string、m_tickerSymbol: string 和 m_currentPrice: Currency。",
+    "StockQuote 的操作包括 analyze(): void、buyShares(): void 和 sellShares(): void。OCR 中 sellShares 被识别为 sel!Shares，需以原图核对。",
+    "StockQuoteCollection 的属性包括 m_stockQuotes: vector 和 m_timestamp: DateTime。",
+    "StockQuoteCollection 的操作包括 retrieveQuotes(): void 和 sortQuotes(): void。",
+    "UML 类成员前的减号通常表示私有成员，前的加号通常表示公有成员；该图中属性使用减号，操作使用加号。"
+  ],
+  "examples": [
+    "StockQuote 类可按以下 UML 文字形式表示：\n$$\\begin{array}{l}\n\\text{StockQuote}\\\\\n-\\ m\\_companyName : string\\\\\n-\\ m\\_tickerSymbol : string\\\\\n-\\ m\\_currentPrice : Currency\\\\\n+\\ analyze() : void\\\\\n+\\ buyShares() : void\\\\\n+\\ sellShares() : void\n\\end{array}$$",
+    "StockQuoteCollection 类可按以下 UML 文字形式表示：\n$$\\begin{array}{l}\n\\text{StockQuoteCollection}\\\\\n-\\ m\\_stockQuotes : vector\\\\\n-\\ m\\_timestamp : DateTime\\\\\n+\\ retrieveQuotes() : void\\\\\n+\\ sortQuotes() : void\n\\end{array}$$",
+    "在 UML 中，成员声明“+analyze(): void”表示一个公有的 analyze 操作，其返回类型为 void；“-m_currentPrice: Currency”表示一个私有的 m_currentPrice 属性，其类型为 Currency。"
+  ],
+  "misconceptions": [
+    "StockQuoteCollection 不是单个股票报价；它表示包含多个 StockQuote 的集合。",
+    "UML 中的“+”和“-”不是加法、减法运算符，而是成员可见性标记，通常分别表示公有和私有。",
+    "图中写出 vector 并不等于已经给出了完整的 C++ 类型参数，例如 vector<StockQuote>；不能擅自补全模板参数。",
+    "根据当前 OCR，不能确定图中关系线的精确 UML 多重性或箭头含义。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "StockQuote 类有哪些属性？",
+      "a": "包括 m_companyName: string、m_tickerSymbol: string 和 m_currentPrice: Currency。"
+    },
+    {
+      "q": "StockQuote 类有哪些操作？",
+      "a": "包括 analyze(): void、buyShares(): void 和 sellShares(): void；其中 sellShares 的 OCR 识别结果有误，应以原图核对。"
+    },
+    {
+      "q": "StockQuoteCollection 类有哪些属性和操作？",
+      "a": "属性包括 m_stockQuotes: vector 和 m_timestamp: DateTime；操作包括 retrieveQuotes(): void 和 sortQuotes(): void。"
+    },
+    {
+      "q": "UML 类图中的“+”和“-”分别表示什么？",
+      "a": "通常“+”表示公有成员，“-”表示私有成员。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "类、对象、属性和成员函数的基本概念",
+    "UML 类图符号的基本概念"
+  ],
+  "source_pages": [
+    165,
+    168
+  ],
+  "needs_verification": true,
+  "verify_query": "《C++20高级编程》第5版 第168页 Figure 5-1 UML StockQuoteCollection StockQuote m_companyName m_tickerSymbol m_currentPrice sellShares",
+  "concept_id": "233_用_uml_表示_stockquotecollection_与_stockquo",
+  "_chunk_pages": [
+    165,
+    168
+  ]
+}

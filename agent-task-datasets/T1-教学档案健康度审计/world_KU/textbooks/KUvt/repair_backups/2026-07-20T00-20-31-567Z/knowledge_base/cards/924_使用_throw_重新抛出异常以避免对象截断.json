@@ -1,0 +1,42 @@
+{
+  "title": "使用 throw; 重新抛出异常以避免对象截断",
+  "definition": "在异常处理程序中，关键字 `throw;` 会重新抛出当前正在处理的原始异常，并保留其实际类型。相反，使用 `throw e;` 会把异常对象按捕获变量的静态类型重新抛出，可能发生对象截断，使派生异常对象被缩减为基类异常对象。",
+  "key_points": [
+    "例如，`invalid_argument` 派生自 `exception`。如果用 `catch (const exception& e)` 捕获后执行 `throw e;`，重新抛出的对象可能只保留 `exception` 部分。",
+    "重新抛出当前异常时应始终使用 `throw;`，不要使用 `throw e;`。",
+    "使用 `throw;` 可以让更高层的异常处理程序继续看到原始异常的动态类型。"
+  ],
+  "examples": [
+    "错误写法：`catch (const exception& e) { throw e; }`。这可能导致派生类异常被截断为 `exception`。",
+    "正确写法：`catch (const exception& e) { throw; }`。这会重新抛出原始异常。"
+  ],
+  "misconceptions": [
+    "`throw e;` 并不等价于 `throw;`。前者会重新构造并抛出捕获变量，可能造成对象截断；后者才是重新抛出当前异常。",
+    "异常处理程序中不能因为变量名相同就认为 `throw e;` 一定保留原始异常的完整类型。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "在 catch 块中重新抛出当前异常应该使用什么语句？",
+      "a": "应使用 `throw;`，它会重新抛出当前正在处理的原始异常。"
+    },
+    {
+      "q": "为什么不应使用 `throw e;` 重新抛出异常？",
+      "a": "因为它可能执行对象截断，把派生异常对象缩减为捕获变量的基类类型，从而丢失派生类信息。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++异常捕获与异常类型继承"
+  ],
+  "source_pages": [
+    457,
+    457
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "924_使用_throw_重新抛出异常以避免对象截断",
+  "_chunk_pages": [
+    457,
+    460
+  ]
+}

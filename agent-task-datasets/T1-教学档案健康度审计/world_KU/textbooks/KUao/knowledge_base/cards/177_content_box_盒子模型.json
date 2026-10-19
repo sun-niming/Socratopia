@@ -1,0 +1,42 @@
+{
+  "title": "content-box 盒子模型",
+  "definition": "content-box 是 CSS 的默认盒子模型。在这种模型下，设置的 width 和 height 只作用于内容区（content），元素最终占据的总宽高还要再加上内边距和边框。",
+  "key_points": [
+    "content-box 是 CSS 默认设置。",
+    "width 和 height 只应用于内容区。",
+    "元素总宽度 = width + padding-left + padding-right + border-left + border-right。",
+    "元素总高度 = height + padding-top + padding-bottom + border-top + border-bottom。"
+  ],
+  "examples": [
+    "如果 width=200px，padding-left=10px，padding-right=10px，border-left=2px，border-right=2px，则实际宽度=224px。"
+  ],
+  "misconceptions": [
+    "认为设置了 width 之后，元素最终显示宽度就一定等于 width。",
+    "认为 padding 和 border 会被包含在 content-box 的 width 中。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "content-box 下，width 表示什么区域的宽度？",
+      "a": "内容区的宽度。"
+    },
+    {
+      "q": "教材中的 .box 在 content-box 下，实际宽度为什么是 224px？",
+      "a": "因为 200px + 10px + 10px + 2px + 2px = 224px。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "box-sizing 属性"
+  ],
+  "source_pages": [
+    123,
+    123
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "177_content_box_盒子模型",
+  "_chunk_pages": [
+    121,
+    124
+  ]
+}

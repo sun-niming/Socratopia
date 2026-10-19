@@ -1,0 +1,44 @@
+{
+  "title": "SNMP使用UDP传输",
+  "definition": "教材指出，SNMP报文采用不可靠的UDP数据报传输是一种更可取的设计选择，而不是使用TCP。该段原文以习题形式要求分析选择UDP而不是TCP的理由，但没有在所给页面中直接列出这些理由。",
+  "key_points": [
+    "SNMP报文可以由UDP承载。",
+    "UDP提供不可靠的数据报传输。",
+    "教材将UDP而非TCP描述为SNMP更可取的运输协议选择。",
+    "所给原文没有直接给出选择UDP的具体原因，不能仅依据这几页补充原因。"
+  ],
+  "examples": [
+    "SNMP运输关系可简写为：$\\text{SNMP报文}\\rightarrow\\text{UDP数据报}$。"
+  ],
+  "misconceptions": [
+    "误以为教材在此处详细列出了SNMP选择UDP的全部理由；该页只是提出分析问题。",
+    "误以为UDP本身提供可靠交付；原文明确称其为不可靠的UDP数据报。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "根据原文，SNMP报文更倾向于使用UDP还是TCP传输？",
+      "a": "更倾向于使用UDP数据报传输。"
+    },
+    {
+      "q": "所给原文是否直接说明了SNMP选择UDP的全部理由？",
+      "a": "没有；原文把分析这些理由作为习题提出。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "SNMP",
+    "UDP",
+    "TCP"
+  ],
+  "source_pages": [
+    297,
+    300
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "668_snmp使用udp传输",
+  "_chunk_pages": [
+    297,
+    300
+  ]
+}

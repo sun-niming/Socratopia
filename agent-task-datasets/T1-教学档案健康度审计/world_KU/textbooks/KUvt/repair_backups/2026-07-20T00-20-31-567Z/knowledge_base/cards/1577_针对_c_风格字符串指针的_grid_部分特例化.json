@@ -1,0 +1,51 @@
+{
+  "title": "针对 C 风格字符串指针的 Grid 部分特例化",
+  "definition": "可以为 `Grid` 的 `T = const char*` 情况提供部分特例化：`template <size_t WIDTH, size_t HEIGHT> class Grid<const char*, WIDTH, HEIGHT>`。该特例化保留宽度和高度参数，但将网格元素的存储和访问类型改为 `std::string`，从而为 C 风格字符串提供专门实现。",
+  "key_points": [
+    "特例化只固定类型参数 `T` 为 `const char*`，宽度 `WIDTH` 和高度 `HEIGHT` 仍可变。",
+    "该特例化的 `at` 方法返回 `std::optional<std::string>&` 或对应的常量引用。",
+    "内部网格存储为 `std::optional<std::string> m_cells[WIDTH][HEIGHT]`。",
+    "使用时仍需提供三个模板实参：`Grid<const char*, 2, 2>`；不能写成只含宽高的 `Grid<2, 3>`。"
+  ],
+  "examples": [
+    "类模板声明：`template <size_t WIDTH, size_t HEIGHT> class Grid<const char*, WIDTH, HEIGHT>`。",
+    "实例化特例化版本：`Grid<const char*, 2, 2> myStringGrid;`。",
+    "与之对比，`Grid<int, 2, 2> myIntGrid;` 使用原始模板，而不是 `const char*` 特例化版本。"
+  ],
+  "misconceptions": [
+    "虽然特例化模板参数列表只有两个参数，但实例化 `Grid` 时仍要写出被固定的类型参数 `const char*`。",
+    "`Grid<const char*, 2, 2>` 的元素接口使用 `std::string`，不等于网格元素仍直接以 `const char*` 存储。",
+    "`Grid<2, 3>` 不是省略类型参数的合法写法。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "哪个实例化会使用 `const char*` 的部分特例化？",
+      "a": "`Grid<const char*, 2, 2>` 会使用该部分特例化。"
+    },
+    {
+      "q": "为什么 `Grid<2, 3>` 不合法？",
+      "a": "因为 `Grid` 仍需要类型、宽度和高度三个模板实参，不能只提供宽度和高度。"
+    },
+    {
+      "q": "该特例化中网格单元格的存储类型是什么？",
+      "a": "原文给出的存储类型是 `std::optional<std::string>`。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "类模板部分特例化",
+    "std::optional",
+    "C 风格字符串与 std::string"
+  ],
+  "source_pages": [
+    762,
+    763
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1577_针对_c_风格字符串指针的_grid_部分特例化",
+  "_chunk_pages": [
+    761,
+    764
+  ]
+}

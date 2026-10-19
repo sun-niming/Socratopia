@@ -1,0 +1,47 @@
+{
+  "title": "对类模板特定成员函数添加额外约束",
+  "definition": "除了约束整个类模板外，还可以仅对类模板中的某个成员函数增加额外约束。例如，`GameBoard<T>` 可以要求其模板参数 `T` 派生自 `GamePiece`，同时只要求 `move` 成员函数在 `T` 满足 `std::movable` 时可用。",
+  "key_points": [
+    "类模板约束适用于整个类模板。",
+    "成员函数的 requires 子句可以增加只针对该成员函数的额外条件。",
+    "成员函数声明和成员函数定义处都需要写这个额外约束。",
+    "由于模板采用选择性实例化，不满足成员函数额外约束的类型仍可实例化类模板，只要不调用该受约束的成员函数。"
+  ],
+  "examples": [
+    "成员函数声明：`void move(size_t xSrc, size_t ySrc, size_t xDest, size_t yDest) requires std::movable<T>;`",
+    "成员函数定义：`template <std::derived_from<GamePiece> T> void GameBoard<T>::move(size_t xSrc, size_t ySrc, size_t xDest, size_t yDest) requires std::movable<T> { /* ... */ }`",
+    "类模板可以对 `T` 施加 `std::derived_from<T, GamePiece>` 约束，而只对 `move` 额外施加 `std::movable<T>` 约束。"
+  ],
+  "misconceptions": [
+    "成员函数的额外约束会阻止整个类模板被实例化。",
+    "只要类模板本身可以实例化，所有成员函数就都一定可以调用。",
+    "成员函数定义处可以省略声明处的 requires 约束。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "非移动类型是否完全不能实例化带有受约束 `move` 方法的 `GameBoard`？",
+      "a": "不一定。根据选择性实例化，只要不调用 `move` 方法，仍可以使用非移动类型的 `GameBoard` 类模板。"
+    },
+    {
+      "q": "成员函数额外约束的作用是什么？",
+      "a": "它只限制该成员函数的可用条件，而不必把同样的条件施加到整个类模板。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "约束类模板",
+    "选择性实例化",
+    "成员函数模板"
+  ],
+  "source_pages": [
+    406,
+    407
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "827_对类模板特定成员函数添加额外约束",
+  "_chunk_pages": [
+    405,
+    408
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "title": "std::endl与换行符\\n的区别",
+  "definition": "std::endl 会向输出流插入换行，并刷新输出流当前的缓冲区；字符转义序列 \\n 也会插入换行，但不会自动刷新缓冲区。因此，教材不建议在循环中无节制地使用 std::endl，因为频繁刷新可能影响程序性能。",
+  "key_points": [
+    "std::endl 的效果包括换行和刷新缓冲区。",
+    "\\n 的效果是换行，不会自动刷新缓冲区。",
+    "在循环中频繁使用 std::endl 可能导致性能下降。"
+  ],
+  "examples": [
+    "std::cout << \"Hello\" << std::endl;",
+    "std::cout << \"Hello\\n\";"
+  ],
+  "misconceptions": [
+    "std::endl 不只是普通的换行符，它还会刷新输出缓冲区。",
+    "使用 \\n 换行时，不能把它理解为必然立即把所有内容显示出来，因为它不会自动刷新缓冲区。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "std::endl 和 \\n 有什么区别？",
+      "a": "二者都会换行，但 std::endl 还会刷新输出缓冲区，而 \\n 不会自动刷新缓冲区。"
+    },
+    {
+      "q": "为什么不建议在循环中大量使用 std::endl？",
+      "a": "因为 std::endl 每次都会刷新缓冲区，频繁刷新可能影响程序性能。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++输出流与std::cout"
+  ],
+  "source_pages": [
+    37,
+    38
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "047_std_endl与换行符_n的区别",
+  "_chunk_pages": [
+    37,
+    40
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "title": "数组下标与指针算术的等价形式",
+  "definition": "对于指向数组元素的指针，数组下标表达式 `myArray[2]` 与指针算术和解引用表达式 `*(myArray + 2)` 表示同一个数组元素，因此二者都可以用于读取或修改该元素。",
+  "key_points": [
+    "`myArray[2]` 表示从首元素向后移动 2 个元素后的位置并解引用。",
+    "`*(myArray + 2) = 33;` 与 `myArray[2] = 33;` 对数组元素的修改效果相同。",
+    "指针算术中的步长按所指向元素的类型计算，而不是按字节简单加 2。"
+  ],
+  "examples": [
+    "```cpp\nint* myArray { new int[8] };\nmyArray[2] = 33;\n*(myArray + 2) = 33;\n```"
+  ],
+  "misconceptions": [
+    "下标运算不是只能用于数组对象；指向数组元素的指针也支持下标运算。",
+    "`myArray + 2` 表示向后移动两个 `int` 元素，不是只移动两个字节。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`myArray[2]` 与 `*(myArray + 2)` 有什么关系？",
+      "a": "二者表示同一个数组元素，通常可以互换。"
+    },
+    {
+      "q": "`myArray + 2` 表示什么？",
+      "a": "表示从 `myArray` 指向的位置向后移动两个所指类型元素后得到的指针。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "使用指针访问数组元素"
+  ],
+  "source_pages": [
+    209,
+    212
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "282_数组下标与指针算术的等价形式",
+  "_chunk_pages": [
+    209,
+    212
+  ]
+}

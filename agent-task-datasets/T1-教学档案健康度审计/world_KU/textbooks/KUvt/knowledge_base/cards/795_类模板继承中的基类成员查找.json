@@ -1,0 +1,44 @@
+{
+  "title": "类模板继承中的基类成员查找",
+  "definition": "当类模板派生自类模板时，派生类可以重用基类实例化后具有的成员和方法。例如，GameBoard<T>继承Grid<T>，因此GameBoard<T>对象可以使用Grid<T>提供的网格功能。由于C++名称查找规则的要求，在派生类模板中访问依赖于模板参数的基类成员时，应通过this指针或显式限定的基类模板名进行引用，例如this->at(...)或Grid<T>::at(...)。",
+  "key_points": [
+    "典型声明形式为：template <typename T> class GameBoard : public Grid<T> { ... };",
+    "访问基类模板中的成员时，推荐明确写成Grid<T>::成员或this->成员。",
+    "GameBoard<T>的构造函数可以通过成员初始化列表初始化基类：GameBoard<T>::GameBoard(size_t width, size_t height) : Grid<T>{width, height} {}。"
+  ],
+  "examples": [
+    "移动网格中的元素可以写成：Grid<T>::at(xDest, yDest) = std::move(Grid<T>::at(xSrc, ySrc)); Grid<T>::at(xSrc, ySrc).reset();",
+    "等价写法是：this->at(xDest, yDest) = std::move(this->at(xSrc, ySrc)); this->at(xSrc, ySrc).reset();",
+    "使用示例：GameBoard<ChessPiece> chessBoard{8, 8}; ChessPiece pawn; chessBoard.at(0, 0) = pawn; chessBoard.move(0, 0, 0, 1);"
+  ],
+  "misconceptions": [
+    "派生类模板可以无条件地直接写基类模板成员名；在依赖基类中，通常需要使用this->或Grid<T>::进行限定。",
+    "继承只表示代码复制；实际上派生类还可以通过基类接口使用继承来的成员，并可用于多态。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "在GameBoard<T>中访问Grid<T>的at方法时，为什么常写成Grid<T>::at(...)或this->at(...)？",
+      "a": "因为Grid<T>是依赖于模板参数T的基类，C++名称查找规则要求使用this指针或Grid<T>::显式指涉其中的成员和方法。"
+    },
+    {
+      "q": "GameBoard<T>的构造函数如何初始化Grid<T>基类？",
+      "a": "在成员初始化列表中写成：GameBoard<T>::GameBoard(size_t width, size_t height) : Grid<T>{width, height} {}。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "类模板",
+    "继承与成员初始化列表"
+  ],
+  "source_pages": [
+    393,
+    393
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "795_类模板继承中的基类成员查找",
+  "_chunk_pages": [
+    393,
+    396
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "title": "Unicode及其编码选择",
+  "definition": "Unicode是一套用于表示不同语言和字符的统一字符体系，其高层目标是在本地化场景中支持多种语言文字。Unicode字符可以采用不同编码方式表示，例如 UTF-8 和 UTF-16；理解这些编码选择的基本概念即可，不一定需要掌握实现细节。",
+  "key_points": [
+    "Unicode的基本思想是为多种语言和字符提供统一表示。",
+    "Unicode与本地化密切相关。",
+    "UTF-8和UTF-16是编码Unicode字符的不同选择。"
+  ],
+  "examples": [
+    "面试回答可以概括为：Unicode解决多语言字符的统一表示问题，UTF-8和UTF-16是其常见编码选择。"
+  ],
+  "misconceptions": [
+    "认为Unicode和UTF-8是完全相同的概念。",
+    "认为理解Unicode必须掌握所有编码实现细节。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "Unicode在本地化中的高层作用是什么？",
+      "a": "Unicode为多种语言和字符提供统一表示，使程序能够支持国际化文本。"
+    },
+    {
+      "q": "原文列举了哪些Unicode编码选择？",
+      "a": "UTF-8和UTF-16。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "字符与字符串编码基本概念"
+  ],
+  "source_pages": [
+    994,
+    994
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "2042_unicode及其编码选择",
+  "_chunk_pages": [
+    993,
+    996
+  ]
+}

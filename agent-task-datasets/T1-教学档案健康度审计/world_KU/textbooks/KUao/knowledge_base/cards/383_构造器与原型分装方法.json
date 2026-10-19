@@ -1,0 +1,39 @@
+{
+  "title": "构造器与原型分装方法",
+  "definition": "在常见的对象定义模式中，构造器函数负责在函数体内使用 this 定义实例属性，而方法则定义在 prototype 属性上。这样做时，构造器主要放属性初始化，方法分装到不同代码块中，代码更清晰、可读性更好。",
+  "key_points": [
+    "构造器函数体中通常用 this 定义属性。",
+    "方法通常放在构造器的 prototype 属性上。",
+    "属性和方法分开写，可以提高代码可读性。"
+  ],
+  "examples": [
+    "function Person(name, age){ this.name = name; this.age = age; }",
+    "Person.prototype.say = function(){...}"
+  ],
+  "misconceptions": [
+    "误以为方法也必须写在构造器函数体里。",
+    "误以为 prototype 只能存放实例属性。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "常见的对象定义模式中，属性和方法分别写在哪里？",
+      "a": "属性写在构造器函数体中并使用 this 定义，方法写在 prototype 属性上。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "函数",
+    "对象"
+  ],
+  "source_pages": [
+    289,
+    290
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "383_构造器与原型分装方法",
+  "_chunk_pages": [
+    289,
+    292
+  ]
+}

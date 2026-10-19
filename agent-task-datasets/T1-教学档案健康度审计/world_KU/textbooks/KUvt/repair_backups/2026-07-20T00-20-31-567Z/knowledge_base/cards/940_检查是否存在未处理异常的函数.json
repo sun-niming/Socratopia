@@ -1,0 +1,45 @@
+{
+  "title": "检查是否存在未处理异常的函数",
+  "definition": "`<exception>` 中提供了用于查询当前未处理异常数量的函数 `std::uncaught_exceptions()`。如果其返回值大于 0，表示当前存在已经抛出但尚未到达匹配 `catch` 的异常，通常意味着正在进行栈展开。C++17 之前使用的是返回布尔值的 `std::uncaught_exception()`；该旧函数在 C++17 中被弃用，并在 C++20 中移除。教材同时指出，这类函数使用复杂，应避免依赖它来设计析构函数行为。",
+  "key_points": [
+    "`std::uncaught_exceptions()` 返回当前未处理异常的数量。",
+    "返回值大于 0 时，说明至少有一个异常已经抛出但尚未匹配到 `catch`。",
+    "C++17 之前的 `std::uncaught_exception()` 只返回布尔值。",
+    "`std::uncaught_exception()` 在 C++17 中被弃用，并在 C++20 中移除。",
+    "教材建议避免使用这些函数，因为相关判断和析构函数行为较为复杂。"
+  ],
+  "examples": [
+    "可用如下条件判断是否存在未处理异常：`if (std::uncaught_exceptions() > 0) { /* 正在进行异常传播或栈展开 */ }`。"
+  ],
+  "misconceptions": [
+    "`std::uncaught_exceptions() > 0` 表示异常已经被某个 catch 捕获；实际上，它表示异常已经抛出但尚未到达匹配的 catch。",
+    "旧函数 `std::uncaught_exception()` 与现代函数完全相同；实际上，旧函数返回布尔值，现代函数返回未处理异常的数量。",
+    "检测到未处理异常后就可以安全地在析构函数中抛出另一个异常；实际上，栈展开期间从析构函数再次抛出异常会导致 `std::terminate()`。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`std::uncaught_exceptions()` 返回值大于 0 说明什么？",
+      "a": "说明当前有一个或多个异常已经抛出，但尚未到达匹配的 `catch`，通常表示正在进行栈展开。"
+    },
+    {
+      "q": "C++17 之前的 `std::uncaught_exception()` 与 `std::uncaught_exceptions()` 有什么区别？",
+      "a": "前者返回布尔值，后者返回未处理异常的数量；旧函数在 C++17 中弃用，并在 C++20 中移除。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "C++异常传播与栈展开",
+    "C++析构函数"
+  ],
+  "source_pages": [
+    466,
+    466
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "940_检查是否存在未处理异常的函数",
+  "_chunk_pages": [
+    465,
+    468
+  ]
+}

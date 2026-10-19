@@ -1,0 +1,43 @@
+{
+  "title": "switch中的fallthrough与[[fallthrough]]属性",
+  "definition": "在C++的switch语句中，如果一个case分支执行到末尾而没有break，控制流会继续执行后续case中的语句，这称为fallthrough。若这种贯穿执行是有意设计的，可以使用[[fallthrough]]属性明确标注，以表明这里不是遗漏break。",
+  "key_points": [
+    "没有break时，case Custom可以继续执行case Standard和case Default之后的代码。",
+    "教材示例中，case Custom先将value设为84，然后通过[[fallthrough]]继续进入后续分支。",
+    "[[fallthrough]]用于标记有意的case贯穿执行，不能把它理解为自动跳出switch。",
+    "多个连续case可以共享同一段代码，例如case Standard和case Default后共同执行代码。"
+  ],
+  "examples": [
+    "switch (mode) { using enum Mode; case Custom: value = 84; [[fallthrough]]; case Standard: case Default: /* Do something with value */ break; }"
+  ],
+  "misconceptions": [
+    "[[fallthrough]]不会阻止贯穿执行；它只是明确说明贯穿是有意的。",
+    "case Standard后没有独立代码时，可以与case Default共同使用同一段代码。",
+    "每个case都必须写break并不绝对；有意的fallthrough可以省略break，但应清楚表达意图。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "switch中的fallthrough是什么意思？",
+      "a": "指一个case执行结束后没有break，控制流继续执行后续case中的代码。"
+    },
+    {
+      "q": "[[fallthrough]]的作用是什么？",
+      "a": "它用于标记有意的case贯穿执行，帮助读者和工具区分有意设计与可能遗漏break的情况。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "switch语句按case选择分支"
+  ],
+  "source_pages": [
+    49,
+    52
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "058_switch中的fallthrough与_fallthrough_属性",
+  "_chunk_pages": [
+    49,
+    52
+  ]
+}

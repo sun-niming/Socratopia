@@ -1,0 +1,46 @@
+{
+  "title": "重写一个重载方法会隐藏基类同名重载",
+  "definition": "当派生类声明了与基类同名的方法时，派生类中的声明会隐藏基类中该名称的其他重载版本。即使派生类只重写了其中一个参数列表对应的版本，基类其他重载方法也不会自动出现在派生类对象的直接查找结果中。",
+  "key_points": [
+    "重载由方法名和参数列表共同决定；只重写一个重载版本，不等于重写同名的全部版本。",
+    "对显式声明为派生类类型的对象调用未在派生类中声明的同名重载，可能导致“没有匹配方法”的编译错误。",
+    "可以通过基类指针或基类引用访问基类中未被派生类声明覆盖的重载版本。",
+    "在派生类中写 `using Base::overload;`，可以把基类同名重载引入派生类作用域，再单独重写其中某个版本。",
+    "使用 `using` 的风险是：如果基类后来增加新的同名重载，派生类可能不会因未重写该新版本而报错；因此为避免歧义和遗漏，最好显式检查并重写所有需要定制的重载版本。"
+  ],
+  "examples": [
+    "未引入基类重载时，可表示为：\n```cpp\nclass Base {\npublic:\n    virtual void overload();\n    virtual void overload(int);\n};\n\nclass Derived : public Base {\npublic:\n    void overload() override;\n};\n\nDerived d;\nd.overload(2); // 由于 Derived::overload 隐藏了同名基类重载，可能无法匹配\n\nBase& ref = d;\nref.overload(7); // 可访问 Base::overload(int)\n```",
+    "只想保留基类其他重载并重写无参数版本时：\n```cpp\nclass Derived : public Base {\npublic:\n    using Base::overload;\n    void overload() override;\n};\n```"
+  ],
+  "misconceptions": [
+    "重写一个重载版本不会自动重写或自动暴露其他参数列表的版本。",
+    "基类方法被派生类同名声明隐藏，不等于基类方法已经不存在；通过基类指针或引用仍可能访问它。",
+    "`using Base::overload` 只能引入基类重载，不能自动为派生类生成重写实现。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "派生类只重写 `overload()` 后，为什么 `Derived` 对象调用 `overload(2)` 可能编译失败？",
+      "a": "因为派生类中声明的 `overload()` 会隐藏基类中其他同名重载，基类的 `overload(int)` 不会自动参与对 `Derived` 对象的名称查找。"
+    },
+    {
+      "q": "如何在重写一个基类重载的同时保留其他基类重载？",
+      "a": "在派生类中使用 `using Base::overload;`，然后单独声明需要重写的重载版本。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++继承与虚函数",
+    "C++函数重载"
+  ],
+  "source_pages": [
+    338,
+    339
+  ],
+  "needs_verification": true,
+  "verify_query": "C++ 派生类 同名重载 隐藏 using Base::overload 基类指针 引用 重写",
+  "concept_id": "685_重写一个重载方法会隐藏基类同名重载",
+  "_chunk_pages": [
+    337,
+    340
+  ]
+}

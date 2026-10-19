@@ -1211,10 +1211,28 @@ function createAutoAdvance(options) {
         } }, publicSnapshot(state, conversation));
       }
 
-      if (Number(normalized.envelope.baseCausalConversationRevision) !== Number(conversation.causalConversationRevision) || Number(normalized.envelope.baseReadingVersion) !== Number(conversation.readingVersion)) {
+      // A client that reloaded its page (app restart, window reload, renderer
+      // crash) has no __SOCRATOPIA_ADVANCE_STATE__ entry until its
+      // /api/reading-context bootstrap resolves, so it sends base 0/0 for
+      // whatever it types first. That client is *unfenced*, not stale: it holds
+      // no view of the reading window at all. Rejecting it produced a
+      // STALE_TURN on the first message after every restart. The server is
+      // authoritative, so accept the envelope once and let the response
+      // snapshot (reading_range / done / error payload) teach the client the
+      // real revisions. A genuinely stale client always carries non-zero bases,
+      // because it read them from a snapshot it did receive.
+      var baseCausal = Number(normalized.envelope.baseCausalConversationRevision);
+      var baseReading = Number(normalized.envelope.baseReadingVersion);
+      var unfencedEnvelope = baseCausal === 0 && baseReading === 0;
+      if (!unfencedEnvelope &&
+          (baseCausal !== Number(conversation.causalConversationRevision) || baseReading !== Number(conversation.readingVersion))) {
         var stale = codedError("STALE_TURN", "Conversation or reading revision is stale", 409);
         stale.snapshot = publicSnapshot(state, conversation);
         throw stale;
+      }
+      if (unfencedEnvelope && (Number(conversation.causalConversationRevision) !== 0 || Number(conversation.readingVersion) !== 0)) {
+        console.warn("[auto-advance] accepted an unfenced envelope (client lost its advance snapshot): conv=" + conversation.conversationId +
+          " client=0/0 authoritative=" + conversation.causalConversationRevision + "/" + conversation.readingVersion);
       }
       if (conversation.lastAssistantMessageId && normalized.envelope.parentAssistantMessageId !== conversation.lastAssistantMessageId) {
         var staleParent = codedError("STALE_TURN", "Parent assistant message is stale", 409);

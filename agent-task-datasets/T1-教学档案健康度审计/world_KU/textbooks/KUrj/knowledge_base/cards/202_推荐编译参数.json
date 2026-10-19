@@ -1,0 +1,39 @@
+{
+  "title": "推荐编译参数",
+  "definition": "编译 Web 服务器项目时，推荐在 Makefile 中使用类似 `CFLAGS = -Wall -Wextra -g -std=c11` 的参数。其中，`-Wall -Wextra` 用于打开常见警告，`-g` 生成调试信息以便使用 `gdb`，`-std=c11` 用于固定语言标准为 C11。",
+  "key_points": [
+    "`-Wall -Wextra` 会打开常见警告，很多 warning 可能最终变成运行时 bug。",
+    "`-g` 生成调试信息，便于调试器定位问题。",
+    "`-std=c11` 固定使用 C11 语言标准。"
+  ],
+  "examples": [
+    "`CFLAGS = -Wall -Wextra -g -std=c11`"
+  ],
+  "misconceptions": [
+    "警告只是“装饰”，可以完全忽略。",
+    "`-g` 会影响程序功能；实际上它主要是为了调试信息。",
+    "语言标准可以随意混用，不需要固定。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`-Wall -Wextra -g -std=c11` 这几个参数分别有什么作用？",
+      "a": "`-Wall -Wextra` 打开常见警告，`-g` 生成调试信息，`-std=c11` 固定为 C11 标准。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "Makefile基础",
+    "C语言基础"
+  ],
+  "source_pages": [
+    125,
+    128
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "202_推荐编译参数",
+  "_chunk_pages": [
+    125,
+    128
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "title": "SpreadsheetCell 基类的多态接口设计",
+  "definition": "原文在多态示例中设计了一个名为 `SpreadsheetCell` 的基类，用于表示电子表格单元格。该类提供虚析构函数，以及用于设置单元格内容和获取字符串表示的虚函数接口：`set(std::string_view value)` 与 `getString() const`。字符串单元格和数值单元格等不同类型可以从该基类派生，并通过重写这些虚函数实现各自行为。",
+  "key_points": [
+    "模块接口中声明了 `export module spreadsheet_cell;`，并导入 `<string>` 与 `<string_view>`。",
+    "基类接口包含虚析构函数：`virtual ~SpreadsheetCell() = default;`。",
+    "普通多态接口可写为：`virtual void set(std::string_view value);` 与 `virtual std::string getString() const;`。",
+    "原文列举了 `DoubleSpreadsheetCell` 和 `StringSpreadsheetCell` 作为 `SpreadsheetCell` 的不同派生类型。"
+  ],
+  "examples": [
+    "基类接口可写为：\n`export class SpreadsheetCell { public: virtual ~SpreadsheetCell() = default; virtual void set(std::string_view value); virtual std::string getString() const; };`",
+    "继承关系可概括为：$$\\text{SpreadsheetCell} \\leftarrow \\begin{cases}\\text{DoubleSpreadsheetCell}\\\\\\text{StringSpreadsheetCell}\\end{cases}$$"
+  ],
+  "misconceptions": [
+    "`SpreadsheetCell` 的作用是提供统一的多态接口，不等于所有单元格都必须用同一种具体数据类型存储。",
+    "`DoubleSpreadsheetCell` 和 `StringSpreadsheetCell` 是不同的派生类，不应把它们误认为同一个具体类。",
+    "仅声明虚函数并不表示该类一定是抽象类；原文后续通过将函数声明为纯虚函数，才得到抽象类版本。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`SpreadsheetCell` 基类在原文中提供了哪些主要多态接口？",
+      "a": "它提供虚析构函数，以及用于设置值和获取字符串表示的虚函数：`set(std::string_view value)` 和 `getString() const`。"
+    },
+    {
+      "q": "为什么可以用 `SpreadsheetCell` 统一表示 `StringSpreadsheetCell` 和 `DoubleSpreadsheetCell`？",
+      "a": "因为后两者都可以继承 `SpreadsheetCell`，并通过重写基类的虚函数实现各自的单元格行为。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++类与继承",
+    "C++虚函数与多态"
+  ],
+  "source_pages": [
+    322,
+    323,
+    324
+  ],
+  "needs_verification": true,
+  "verify_query": "Marc Gregoire C++20 Advanced Programming 5th edition SpreadsheetCell DoubleSpreadsheetCell StringSpreadsheetCell virtual set getString module spreadsheet_cell",
+  "concept_id": "415_spreadsheetcell_基类的多态接口设计",
+  "_chunk_pages": [
+    321,
+    324
+  ]
+}

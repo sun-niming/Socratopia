@@ -1,0 +1,48 @@
+{
+  "title": "C++17 的 search 专用搜索器",
+  "definition": "从 C++17 开始，search() 可以接收一个可选的搜索器参数，用于指定子序列搜索算法。原文列出的搜索器包括 default_searcher、boyer_moore_searcher 和 boyer_moore_horspool_searcher；后两者分别实现 Boyer–Moore 和 Boyer–Moore–Horspool 搜索算法，并定义在 <functional> 中。",
+  "key_points": [
+    "默认搜索器可以替换为 Boyer–Moore 或 Boyer–Moore–Horspool 搜索器。",
+    "专用搜索器适合在较大文本中查找子字符串。",
+    "这些算法能够跳过部分 haystack 字符，而不是逐个检查所有字符，因此实际运行中可能比默认搜索更快。",
+    "needle 越长时，专用搜索算法通常有机会跳过更多 haystack 字符。"
+  ],
+  "examples": [
+    "string text { \"This is the haystack to search a needle in.\" };",
+    "string toSearchFor { \"needle\" };",
+    "boyer_moore_searcher searcher { cbegin(toSearchFor), cend(toSearchFor) };",
+    "auto result { search(cbegin(text), cend(text), searcher) };",
+    "如果 result != cend(text)，则表示找到了 needle。"
+  ],
+  "misconceptions": [
+    "search() 只能使用默认搜索方式，不能指定搜索算法。",
+    "专用搜索算法在任何输入上都必然比默认算法快；原文只说它们在实际中通常更快，具体效果取决于数据和搜索模式。",
+    "Boyer–Moore–Horspool 在所有方面都优于 Boyer–Moore；原文指出二者需要根据具体情况选择。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "从 C++17 开始，如何让 search() 使用指定的搜索算法？",
+      "a": "向 search() 传入一个搜索器对象作为可选参数，例如使用 boyer_moore_searcher 对象。"
+    },
+    {
+      "q": "Boyer–Moore 类搜索器为什么可能比默认搜索更快？",
+      "a": "因为它们可以跳过 haystack 中的一部分字符，而不是检查每个字符。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "search() 算法",
+    "字符串与迭代器"
+  ],
+  "source_pages": [
+    634,
+    635
+  ],
+  "needs_verification": true,
+  "verify_query": "C++17 std::search default_searcher boyer_moore_searcher boyer_moore_horspool_searcher <functional> 标准定义",
+  "concept_id": "1316_c_17_的_search_专用搜索器",
+  "_chunk_pages": [
+    633,
+    636
+  ]
+}

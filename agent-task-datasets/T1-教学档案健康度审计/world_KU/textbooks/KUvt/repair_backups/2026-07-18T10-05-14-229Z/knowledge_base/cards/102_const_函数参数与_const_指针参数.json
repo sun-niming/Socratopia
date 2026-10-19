@@ -1,0 +1,49 @@
+{
+  "title": "const 函数参数与 const 指针参数",
+  "definition": "函数参数声明中的 const 可以限制函数体对参数或参数所指对象的修改。对于按值传递的参数，如 `const int param`，函数内部不能修改该参数；对于 `const std::string* someString`，函数不能通过该指针修改所指字符串，但可以接收指向非 const 字符串的地址。",
+  "key_points": [
+    "`const std::string*` 表示不能通过该指针修改字符串内容。",
+    "如果函数试图执行 `*someString = \"Test\";`，代码不能编译。",
+    "非 const 的 string 对象地址可以传给 `const std::string*` 参数。",
+    "按值传递的 `const int param` 只限制函数体内部对参数副本的修改，不会改变调用者的原变量。"
+  ],
+  "examples": [
+    "void mysteryFunction(const std::string* someString)\n{\n    // *someString = \"Test\"; // 不能编译\n}\n\nstd::string myString { \"The string\" };\nmysteryFunction(&myString); // 可以传入非 const 字符串的地址\n\nvoid func(const int param)\n{\n    // 不允许在函数体内修改 param\n}"
+  ],
+  "misconceptions": [
+    "`const std::string*` 不表示调用者传入的原字符串对象本身永远不可修改；它只禁止在该函数中通过 someString 修改。",
+    "按值传递的 const 参数不会使调用者的原变量变成 const。",
+    "const 参数并不禁止读取参数；它主要禁止指定方式下的修改。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么 `*someString = \"Test\";` 在 `const std::string* someString` 函数中不能编译？",
+      "a": "因为 someString 指向 const std::string，不能通过它修改所指字符串。"
+    },
+    {
+      "q": "`mysteryFunction(&myString)` 是否允许传入普通的非 const string 对象地址？",
+      "a": "允许。指向非 const 对象的指针可以转换为指向 const 对象的指针，用于只读访问。"
+    },
+    {
+      "q": "`void func(const int param)` 中的 const 影响调用者的整数变量吗？",
+      "a": "不影响；param 是按值传递的副本，const 只限制函数体内对该副本的修改。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "函数参数传递",
+    "指针",
+    "const 变量"
+  ],
+  "source_pages": [
+    75,
+    76
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "102_const_函数参数与_const_指针参数",
+  "_chunk_pages": [
+    73,
+    76
+  ]
+}

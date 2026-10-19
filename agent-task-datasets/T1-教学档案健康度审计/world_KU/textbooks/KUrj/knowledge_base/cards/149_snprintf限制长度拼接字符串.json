@@ -1,0 +1,44 @@
+{
+  "title": "snprintf限制长度拼接字符串",
+  "definition": "`snprintf` 是带长度限制的格式化字符串函数，原型是 `int snprintf(char *str, size_t size, const char *format, ...);`。它会返回本应写入的字符数，不包含结尾的 `0`；如果返回值大于等于 `size`，说明内容被截断了。",
+  "key_points": [
+    "头文件是 `<stdio.h>`。",
+    "适合拼接响应头、错误页面、文件路径、配置字符串。",
+    "不要用 `sprintf`，否则可能造成缓冲区溢出。",
+    "调用后要检查返回值是否大于等于 `size`，避免忽略截断。"
+  ],
+  "examples": [
+    "`int n = snprintf(buf, sizeof(buf), \"Content-Length: %d\", len);`",
+    "`if (n >= sizeof(buf)) { /* 被截断 */ }`"
+  ],
+  "misconceptions": [
+    "`snprintf` 和 `sprintf` 一样安全地写入任意长度。",
+    "只要函数调用成功，就不需要检查返回值。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`snprintf` 的返回值大于等于 `size` 说明什么？",
+      "a": "说明输出内容被截断了。"
+    },
+    {
+      "q": "为什么本项目更推荐 `snprintf` 而不是 `sprintf`？",
+      "a": "因为 `snprintf` 有长度限制，可以降低缓冲区溢出的风险。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C语言基础",
+    "格式化输出基础"
+  ],
+  "source_pages": [
+    97,
+    100
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "149_snprintf限制长度拼接字符串",
+  "_chunk_pages": [
+    97,
+    100
+  ]
+}

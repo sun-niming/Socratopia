@@ -1,0 +1,45 @@
+{
+  "title": "URL中的协议名",
+  "definition": "URL 的协议名部分表示访问资源时采用的协议。原文列举的协议名包括 http、https 和 mailto。其中，http 是超文本传输协议，用于传送网页；https 也是网页传输协议；mailto 用于打开邮件客户端。",
+  "key_points": [
+    "协议名是 URL 的一部分。",
+    "http 用于传送网页。",
+    "https 也可作为网页访问协议。",
+    "mailto 用于打开邮件客户端。"
+  ],
+  "examples": [
+    "http://example.com",
+    "https://example.com",
+    "mailto:abc@example.com"
+  ],
+  "misconceptions": [
+    "误以为所有 URL 都必须是 http。",
+    "误以为 mailto 也是网页传输协议。",
+    "误以为 https 和 http 在 URL 中没有区别。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "教材中提到 URL 的协议名有哪些？",
+      "a": "http、https、mailto。"
+    },
+    {
+      "q": "mailto 协议的作用是什么？",
+      "a": "打开邮件客户端。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "URL的定义与一般格式"
+  ],
+  "source_pages": [
+    21,
+    24
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "033_url中的协议名",
+  "_chunk_pages": [
+    21,
+    24
+  ]
+}

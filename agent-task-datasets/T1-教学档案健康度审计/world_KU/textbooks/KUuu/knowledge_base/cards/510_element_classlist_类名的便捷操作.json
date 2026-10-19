@@ -1,0 +1,42 @@
+{
+  "title": "element.classList：类名的便捷操作",
+  "definition": "`element.classList`用于更方便地操作元素的类名，返回一个`DOMTokenList`。它提供添加、删除、切换、判断和替换类名的方法。",
+  "key_points": [
+    "`classList`比直接操作`className`更方便。",
+    "返回的是`DOMTokenList`。",
+    "常用方法包括`add()`、`remove()`、`toggle()`、`contains()`、`replace()`。",
+    "`add()`添加类；`remove()`删除类；`toggle()`有则删、无则加；`contains()`检查是否包含某个类；`replace()`替换类。"
+  ],
+  "examples": [
+    "let box = document.getElementById('myBox');\nbox.classList.add('highlight');\nbox.classList.remove('hidden');\nif (box.classList.contains('highlight')) {\n  console.log('Box is highlighted!');\n}"
+  ],
+  "misconceptions": [
+    "认为`classList`返回的是字符串；实际上它返回`DOMTokenList`。",
+    "认为`toggle()`只能添加或只能删除；它会根据是否存在来切换。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`element.classList`返回什么？",
+      "a": "返回一个`DOMTokenList`。"
+    },
+    {
+      "q": "`classList.toggle('active')`的作用是什么？",
+      "a": "如果类存在则移除，不存在则添加。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "element.className：获取或设置class属性字符串"
+  ],
+  "source_pages": [
+    353,
+    356
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "510_element_classlist_类名的便捷操作",
+  "_chunk_pages": [
+    353,
+    356
+  ]
+}

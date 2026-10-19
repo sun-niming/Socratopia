@@ -1,0 +1,43 @@
+{
+  "title": "ASCII 字符集的基本限制",
+  "definition": "ASCII 是一个 7 位字符集合，通常存储在 8 位的 char 类型中。在入门 C 或 C++ 编程时，常把字符等同于字节，并假定字符属于 ASCII；但这种假定不能覆盖所有语言或字符集。",
+  "key_points": [
+    "ASCII 使用 7 位表示字符。",
+    "ASCII 字符通常存储在 8 位的 char 类型中。",
+    "并非所有语言或字符集都能用一个 8 位字节表示。",
+    "只按 ASCII 处理字符会限制程序对国际语言的支持。"
+  ],
+  "examples": [
+    "教材举出的非 ASCII 语言示例包括日语和阿拉伯语；这些语言的字符不能简单地按美国 ASCII 字符处理。"
+  ],
+  "misconceptions": [
+    "char 类型占用 8 位并不意味着所有语言的每个字符都能用一个 char 表示。",
+    "ASCII 是 7 位字符集，不等同于所有字符编码，也不能代表全世界的字符。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "ASCII 是多少位的字符集合？",
+      "a": "ASCII 是 7 位字符集合，通常存储在 8 位的 char 类型中。"
+    },
+    {
+      "q": "为什么不能把所有字符都当作 ASCII 字符？",
+      "a": "因为许多语言或字符集无法用 ASCII 表示，例如日语和阿拉伯语。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "字符与字节",
+    "C++ 基本类型"
+  ],
+  "source_pages": [
+    660,
+    660
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1378_ascii_字符集的基本限制",
+  "_chunk_pages": [
+    657,
+    660
+  ]
+}

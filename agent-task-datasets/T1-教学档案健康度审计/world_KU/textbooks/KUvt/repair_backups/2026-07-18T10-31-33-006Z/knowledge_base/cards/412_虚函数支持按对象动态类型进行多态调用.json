@@ -1,0 +1,53 @@
+{
+  "title": "虚函数支持按对象动态类型进行多态调用",
+  "definition": "当基类声明虚函数、派生类重写该函数，并通过支持多态的基类接口访问对象时，调用结果可以取决于对象的动态类型。教材中的 Book、Paperback 和 Romance 示例展示了 getDescription() 的逐层重写：Romance 的描述由 Paperback 的描述再加上 Romance 前缀，Paperback 的描述由 Book 的描述再加上 Paperback 前缀。",
+  "key_points": [
+    "Book::getDescription() 返回 \"Book\"。",
+    "Paperback::getDescription() 返回 \"Paperback \" + Book::getDescription()。",
+    "Romance::getDescription() 返回 \"Romance \" + Paperback::getDescription()。",
+    "因此 Romance 对象的描述为 \"Romance Paperback Book\"，而 Book 对象的描述为 \"Book\"。",
+    "教材示例还显示 novel.getHeight() 输出 60，而 book.getHeight() 输出 120，说明不同类型的对象可以得到不同的高度结果。"
+  ],
+  "examples": [
+    "class Book { public: virtual ~Book() = default; virtual std::string getDescription() const { return \"Book\"; } virtual int getHeight() const { return 120; } };",
+    "Paperback::getDescription() 可表示为：return \"Paperback \" + Book::getDescription();",
+    "Romance::getDescription() 可表示为：return \"Romance \" + Paperback::getDescription();",
+    "输出示例：novel.getDescription() 输出 \"Romance Paperback Book\"；book.getDescription() 输出 \"Book\"。"
+  ],
+  "misconceptions": [
+    "调用虚函数时永远只执行基类版本；实际上，虚函数调用可以根据对象的动态类型执行派生类重写版本。",
+    "派生类重写函数后不能复用基类实现；实际上，可以通过 Book::getDescription() 或 Paperback::getDescription() 显式调用基类版本并在其结果上继续组合。",
+    "所有对象的 getHeight() 都返回同一个值；教材示例显示 novel.getHeight() 为 60、book.getHeight() 为 120。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "Romance 类的 getDescription() 如何构造最终描述？",
+      "a": "它返回 \"Romance \" + Paperback::getDescription()；而 Paperback::getDescription() 又返回 \"Paperback \" + Book::getDescription()，因此最终为 \"Romance Paperback Book\"。"
+    },
+    {
+      "q": "教材示例中 novel.getDescription() 和 book.getDescription() 分别输出什么？",
+      "a": "novel.getDescription() 输出 \"Romance Paperback Book\"，book.getDescription() 输出 \"Book\"。"
+    },
+    {
+      "q": "教材示例中 novel.getHeight() 和 book.getHeight() 分别输出什么？",
+      "a": "novel.getHeight() 输出 60，book.getHeight() 输出 120。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "继承",
+    "虚函数",
+    "函数重写"
+  ],
+  "source_pages": [
+    319,
+    320
+  ],
+  "needs_verification": true,
+  "verify_query": "\"C++20高级编程\" \"Romance Paperback Book\" \"novel.getHeight\" 60 120",
+  "concept_id": "412_虚函数支持按对象动态类型进行多态调用",
+  "_chunk_pages": [
+    317,
+    320
+  ]
+}

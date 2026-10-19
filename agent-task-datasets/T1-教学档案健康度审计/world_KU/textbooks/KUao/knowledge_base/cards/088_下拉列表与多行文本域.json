@@ -1,0 +1,50 @@
+{
+  "title": "下拉列表与多行文本域",
+  "definition": "HTML中，`select` 与 `option` 组合用于创建下拉列表；在 `option` 上添加 `selected=\"selected\"` 可设置默认选项。`textarea` 用于创建多行文本域，常通过 `rows` 和 `cols` 控制显示行列大小，适合留言、简介、详细描述等长文本输入。",
+  "key_points": [
+    "下拉列表由 `select` 和 `option` 组成。",
+    "在 `option` 上加 `selected` 可设置默认项。",
+    "`textarea` 用于输入多行文本。",
+    "`textarea` 常用 `rows`、`cols` 控制大小。",
+    "下拉列表适合节省空间，多行文本域适合长文本输入。"
+  ],
+  "examples": [
+    "<select name=\"city\"> <option value=\"bj\">北京</option> <option value=\"sh\" selected=\"selected\">上海</option> </select>",
+    "<textarea name=\"intro\" rows=\"4\" cols=\"30\"></textarea>"
+  ],
+  "misconceptions": [
+    "`select` 只能用于城市选择，不能用于其他选择场景。",
+    "`textarea` 只是一个普通输入框，不能输入多行。",
+    "`selected` 应该加在 `select` 上，而不是 `option` 上。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "下拉列表由哪些标签组成？",
+      "a": "由 `select` 和 `option` 组成。"
+    },
+    {
+      "q": "如何设置下拉列表的默认项？",
+      "a": "在对应的 `option` 上添加 `selected=\"selected\"`。"
+    },
+    {
+      "q": "`textarea` 适合哪些场景？",
+      "a": "适合留言、简介、详细描述等多行文本输入场景。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "HTML基础",
+    "表单控件"
+  ],
+  "source_pages": [
+    69,
+    72
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "088_下拉列表与多行文本域",
+  "_chunk_pages": [
+    69,
+    72
+  ]
+}

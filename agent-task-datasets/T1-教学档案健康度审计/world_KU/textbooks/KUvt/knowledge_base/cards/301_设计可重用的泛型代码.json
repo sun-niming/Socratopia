@@ -1,0 +1,42 @@
+{
+  "title": "设计可重用的泛型代码",
+  "definition": "可重用代码应尽量不绑定于某一个具体场景或具体类型，而应通过泛型、抽象接口等方式适用于一类问题。原文以二维棋盘为例：将棋子类型设置为模板参数，就可以让同一个棋盘类服务于国际象棋、西洋跳棋等不同棋盘游戏。",
+  "key_points": [
+    "应设计能够在当前项目和今后项目中复用的类、算法和数据结构。",
+    "泛型棋盘可以把固定的ChessPiece类型改为模板参数PieceType。",
+    "这种设计只需改变类声明和接口中的类型依赖，就能扩大代码的适用范围。"
+  ],
+  "examples": [
+    "原文意图可表示为：\n```cpp\ntemplate <typename PieceType>\nclass GameBoard {\npublic:\n    void setPieceAt(size_t x, size_t y, PieceType* piece);\n    PieceType* getPieceAt(size_t x, size_t y) const;\n    bool isEmpty(size_t x, size_t y) const;\n};\n```",
+    "使用时，GameBoard可以分别用于ChessPiece或其他棋子类型，而不必为每种棋子重新编写ChessBoard。"
+  ],
+  "misconceptions": [
+    "泛型代码不是只能用于一种固定类型的代码复制品；它通过类型参数支持多种类型。",
+    "可重用性不只取决于代码是否短小，更取决于设计时是否避免不必要的具体绑定。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何把只适用于ChessPiece的棋盘类设计成可用于多种棋盘游戏的类？",
+      "a": "将棋子类型从固定的ChessPiece改为模板参数PieceType，例如定义template <typename PieceType> class GameBoard，并在接口中使用PieceType。"
+    },
+    {
+      "q": "为什么在设计阶段决定使用泛型棋盘很重要？",
+      "a": "虽然代码改动可能很简单，但这一设计决定会影响代码的适用范围，使同一组件能够高效服务于多种二维棋盘游戏。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++模板基础"
+  ],
+  "source_pages": [
+    149,
+    149
+  ],
+  "needs_verification": true,
+  "verify_query": "《C++20高级编程》第5版 第149页 GameBoard template PieceType setPieceAt getPieceAt isEmpty 原文",
+  "concept_id": "301_设计可重用的泛型代码",
+  "_chunk_pages": [
+    149,
+    152
+  ]
+}

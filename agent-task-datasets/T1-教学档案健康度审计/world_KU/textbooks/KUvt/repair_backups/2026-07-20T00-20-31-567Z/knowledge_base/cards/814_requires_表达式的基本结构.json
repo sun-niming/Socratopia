@@ -1,0 +1,43 @@
+{
+  "title": "requires 表达式的基本结构",
+  "definition": "requires 表达式是一种用于在编译期验证类型、表达式或其他约束是否有效的常量表达式，基本语法为 `requires (parameter-list) { requirements; }`。参数列表可选；主体中的每个 requirement 都必须以分号结尾。requires 表达式中的要求只被编译器检查，不会在运行时执行。",
+  "key_points": [
+    "语法为 `requires (parameter-list) { requirements; }`。",
+    "`parameter-list` 用于引入主体中使用的命名变量，可以省略。",
+    "主体中不能使用普通变量声明、循环或条件语句。",
+    "requires 表达式包含四类 requirement：简单 requirement、类型 requirement、复合 requirement 和嵌套 requirement。"
+  ],
+  "examples": [
+    "`template <typename T> concept C = requires (T x) { x++; };`",
+    "requires 表达式中的 `x` 是参数列表引入的用于检查的变量，不是运行时创建的普通变量。"
+  ],
+  "misconceptions": [
+    "requires 表达式中的表达式不会在运行时真正执行。",
+    "requires 表达式主体不是普通函数体，不能随意写变量声明、循环和条件语句。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "requires 表达式的基本语法是什么？",
+      "a": "`requires (parameter-list) { requirements; }`，参数列表可选，主体中的每个 requirement 必须以分号结尾。"
+    },
+    {
+      "q": "requires 表达式中的参数列表有什么作用？",
+      "a": "它用于引入可以在 requires 表达式主体中使用的命名变量。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "概念表达式与概念约束"
+  ],
+  "source_pages": [
+    401,
+    401
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "814_requires_表达式的基本结构",
+  "_chunk_pages": [
+    401,
+    404
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "title": "闭包实现计数器",
+  "definition": "闭包可以用来实现简单的计数器功能，并且通过闭包机制保持变量的私有性和持久性。也就是说，外部不能直接访问该变量，但每次调用内部函数时，变量值可以继续累积。",
+  "key_points": [
+    "闭包可以保存函数执行后的变量状态",
+    "变量具有私有性，外部难以直接访问",
+    "变量具有持久性，函数多次调用时状态仍能保留"
+  ],
+  "examples": [
+    "function counterFunc(initValue){ var count = initValue; let fun = function(){ count++; return count; } return fun; } let counter = counterFunc(10); console.log(counter()); // 11 console.log(counter()); // 12 console.log(counter()); // 13"
+  ],
+  "misconceptions": [
+    "计数器的值不是每次都重新从初始值开始，而是会在闭包中持续累加",
+    "私有性并不表示变量被销毁，而是外部无法直接访问"
+  ],
+  "qa_pairs": [
+    {
+      "q": "闭包为什么适合实现计数器？",
+      "a": "因为闭包能保存并持续更新内部变量，使其在多次调用中保持状态。"
+    },
+    {
+      "q": "教材中的计数器例子里，counterFunc(10) 第一次返回多少？",
+      "a": "第一次返回 11。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "闭包",
+    "函数",
+    "变量"
+  ],
+  "source_pages": [
+    269,
+    272
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "364_闭包实现计数器",
+  "_chunk_pages": [
+    269,
+    272
+  ]
+}

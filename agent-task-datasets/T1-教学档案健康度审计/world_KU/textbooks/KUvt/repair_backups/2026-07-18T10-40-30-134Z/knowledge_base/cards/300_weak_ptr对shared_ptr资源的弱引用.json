@@ -1,0 +1,49 @@
+{
+  "title": "weak_ptr对shared_ptr资源的弱引用",
+  "definition": "`std::weak_ptr<T>`是一种不拥有资源的智能指针，用来观察由`shared_ptr`管理的对象。`weak_ptr`不会增加`shared_ptr`的共享所有者数量，因此即使仍有`weak_ptr`存在，只要最后一个`shared_ptr`被销毁或重置，被管理对象仍然会被释放。",
+  "key_points": [
+    "可以由`shared_ptr`构造`weak_ptr`，但`weak_ptr`不拥有对象。",
+    "使用`weak_ptr::lock()`尝试获得一个临时的`shared_ptr`。",
+    "如果对象仍然存活，`lock()`返回指向该对象的有效`shared_ptr`；如果对象已经释放，`lock()`返回空的`shared_ptr`，可用`if (resource)`判断。",
+    "`weak_ptr`常用于观察资源是否仍然存在，避免因为观察者本身而延长资源生命周期。"
+  ],
+  "examples": [
+    "`void useResource(weak_ptr<Simple>& weakSimple) { auto resource { weakSimple.lock() }; if (resource) { cout << \"Resource still alive.\" << endl; } else { cout << \"Resource has been freed!\" << endl; } }`",
+    "`auto sharedSimple { make_shared<Simple>() }; weak_ptr<Simple> weakSimple { sharedSimple }; useResource(weakSimple); sharedSimple.reset(); useResource(weakSimple);`",
+    "执行逻辑：第一次调用时对象仍存活；`sharedSimple.reset()`后，由于没有其他`shared_ptr`拥有对象，对象被析构；第二次调用时`lock()`得到空的`shared_ptr`。"
+  ],
+  "misconceptions": [
+    "`weak_ptr`不会阻止对象析构；它本身不是资源所有者。",
+    "不能直接通过`weak_ptr`安全地使用对象，应先调用`lock()`获得临时的`shared_ptr`并检查结果。",
+    "`weak_ptr`仍然存在并不意味着对象仍然存在。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何判断`weak_ptr`所观察的对象是否仍然存活？",
+      "a": "调用`auto resource { weakSimple.lock() };`，然后检查`if (resource)`。"
+    },
+    {
+      "q": "为什么`sharedSimple.reset()`后对象会被释放，即使`weakSimple`仍然存在？",
+      "a": "因为`weakSimple`不是拥有者；重置最后一个`shared_ptr`后，资源的共享所有者数量变为零。"
+    },
+    {
+      "q": "当`weak_ptr::lock()`发现对象已经释放时会返回什么？",
+      "a": "返回空的`shared_ptr`，即可按布尔条件判断为假。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "shared_ptr的引用计数与共享所有权"
+  ],
+  "source_pages": [
+    221,
+    224
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "300_weak_ptr对shared_ptr资源的弱引用",
+  "_chunk_pages": [
+    221,
+    224
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "title": "用类层次结构表示棋子类型",
+  "definition": "在国际象棋系统中，可以用一个抽象的 ChessPiece 基类表示棋子的共同概念，再用具体子类表示不同棋子类型：Rook（车）、Bishop（象）、Knight（马）、King（王）、Pawn（兵）和 Queen（后）。这种层次结构将共同接口与具体棋子实现分开。",
+  "key_points": [
+    "ChessPiece 是棋子类层次结构的抽象超类。",
+    "具体子类包括 Rook、Bishop、Knight、King、Pawn 和 Queen。",
+    "每个棋子需要存储自己在棋盘上的位置，并支持根据棋盘位置查询棋子以及判断移动是否合法。"
+  ],
+  "examples": [
+    "类层次结构可表示为：ChessPiece → {Rook, Bishop, Knight, King, Pawn, Queen}。",
+    "每个具体棋子对象都可以保存自己的棋盘坐标，例如棋子当前位置为 $(x,y)$。"
+  ],
+  "misconceptions": [
+    "ChessPiece 的子类不只是用于区分名称；它们还应体现不同棋子的移动合法性规则。",
+    "类层次结构本身不等于完整实现，还需要为类确定接口、数据结构和算法。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "ChessPiece 类层次结构包含哪些主要类？",
+      "a": "抽象超类是 ChessPiece，具体子类包括 Rook、Bishop、Knight、King、Pawn 和 Queen。"
+    },
+    {
+      "q": "棋子对象至少需要保存什么信息？",
+      "a": "至少需要保存棋子在棋盘上的位置，并能够参与棋子查询和移动合法性判断。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "面向对象中的继承与抽象类"
+  ],
+  "source_pages": [
+    161,
+    161
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "341_用类层次结构表示棋子类型",
+  "_chunk_pages": [
+    161,
+    164
+  ]
+}

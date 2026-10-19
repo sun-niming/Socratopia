@@ -1,0 +1,44 @@
+{
+  "title": "堆算法与堆数据结构",
+  "definition": "堆是一种标准数据结构，其中数组或序列的元素以半排序方式组织，从而能够快速找到“顶部”元素。堆通常用于实现 $\\text{priority_queue}$。C++ 标准库提供一组堆算法，用于检查、创建、插入、删除和排序堆。",
+  "key_points": [
+    "$\\text{is_heap()}$ 检查一个范围内的元素是否构成堆；$\\text{is_heap_until()}$ 查找从范围起点开始仍保持堆性质的最大子范围。",
+    "$\\text{make_heap()}$ 根据给定范围的元素创建堆，教材将其列为线性复杂度。",
+    "$\\text{push_heap()}$ 和 $\\text{pop_heap()}$ 分别用于在堆中添加或删除元素，教材将其列为对数复杂度。",
+    "$\\text{sort_heap()}$ 将堆转换为升序排列的元素范围，教材将其列为线性对数复杂度。"
+  ],
+  "examples": [
+    "可以先对一个范围调用 $\\text{make_heap()}$ 建立堆，再使用 $\\text{push_heap()}$ 添加元素、使用 $\\text{pop_heap()}$ 移除堆顶元素，最后使用 $\\text{sort_heap()}$ 得到升序范围。"
+  ],
+  "misconceptions": [
+    "堆不是完全排序的序列；它只保证满足堆结构所需的部分排序关系。",
+    "push_heap() 和 pop_heap() 通常要求操作前的范围已经满足相应的堆条件。",
+    "堆的“顶部”元素可快速访问，但不能据此认为所有元素都已按升序或降序排列。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "堆为什么适合实现 priority_queue？",
+      "a": "堆以半排序方式组织元素，能够快速找到顶部元素，符合优先队列反复访问最高优先级元素的需求。"
+    },
+    {
+      "q": "make_heap() 和 sort_heap() 分别做什么？",
+      "a": "make_heap() 从一个范围创建堆；sort_heap() 把堆转换为升序排列的元素范围。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "数组或序列",
+    "优先队列"
+  ],
+  "source_pages": [
+    517,
+    518
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1065_堆算法与堆数据结构",
+  "_chunk_pages": [
+    517,
+    520
+  ]
+}

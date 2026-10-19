@@ -1,0 +1,46 @@
+{
+  "title": "std::string的字符串比较",
+  "definition": "`std::string`可以通过比较操作或 `compare()`成员函数比较两个字符串。比较结果可用于判断字符串相等，以及判断一个字符串在字典序比较中小于还是大于另一个字符串。",
+  "key_points": [
+    "C风格字符串通常使用 `strcmp()`进行比较；`std::string`可以直接使用字符串比较操作。",
+    "`a.compare(b)`返回一个表示比较结果的值：结果为0表示相等，结果小于0表示 `a`小于 `b`，结果大于0表示 `a`大于 `b`。",
+    "C++20可以使用 `std::is_lt(result)`、`std::is_gt(result)`和 `std::is_eq(result)`等函数判断比较结果。"
+  ],
+  "examples": [
+    "`auto result = a.compare(b);`",
+    "`if (result > 0) { std::cout << \"greater\" << std::endl; }`",
+    "`if (result == 0) { std::cout << \"equal\" << std::endl; }`",
+    "C++20形式：`if (std::is_lt(result)) { std::cout << \"less\" << std::endl; }`、`if (std::is_gt(result)) { std::cout << \"greater\" << std::endl; }`、`if (std::is_eq(result)) { std::cout << \"equal\" << std::endl; }`"
+  ],
+  "misconceptions": [
+    "`compare()`返回值不应只理解为固定的 `-1`、`0`或 `1`；可靠的判断方式是判断其小于、等于或大于0。",
+    "字符串比较不是按字符串长度简单比较，而是根据字符序列的字典序规则进行比较。",
+    "`strcmp()`主要用于C风格字符串；对 `std::string`应优先使用其比较运算或 `compare()`。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`a.compare(b)`的结果为0表示什么？",
+      "a": "表示字符串 `a`和 `b`相等。"
+    },
+    {
+      "q": "如何判断 `a.compare(b)`表示 `a`大于 `b`？",
+      "a": "可以判断 `result > 0`，或者在C++20中使用 `std::is_gt(result)`。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "std::string用于管理字符序列",
+    "字符串字典序比较"
+  ],
+  "source_pages": [
+    105,
+    108
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 std::string compare std::is_lt std::is_gt std::is_eq 返回类型 教材 第107页",
+  "concept_id": "152_std_string的字符串比较",
+  "_chunk_pages": [
+    105,
+    108
+  ]
+}

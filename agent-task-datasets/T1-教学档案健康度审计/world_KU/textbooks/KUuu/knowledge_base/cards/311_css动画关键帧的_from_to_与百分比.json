@@ -1,0 +1,42 @@
+{
+  "title": "CSS动画关键帧的 from/to 与百分比",
+  "definition": "在 CSS 动画中，可以用关键字 from 和 to 来表示样式变化的开始和完成；也可以使用百分比值来指定各个时间点的样式变化，从而添加任意多个样式更改点。",
+  "key_points": [
+    "from 表示开始，to 表示完成。",
+    "from/to 用来设置样式何时改变。",
+    "百分比值可以定义多个样式变化点，数量可以很多。"
+  ],
+  "examples": [
+    "from { ... } to { ... }",
+    "0% { ... } 50% { ... } 100% { ... }"
+  ],
+  "misconceptions": [
+    "容易把 from/to 理解成普通文本，而不是关键帧的起止标记。",
+    "容易以为 CSS 动画只能写开始和结束两个状态，不能写中间状态。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "from 和 to 分别表示什么？",
+      "a": "from 表示开始，to 表示完成。"
+    },
+    {
+      "q": "如果想在动画中设置多个中间变化点，可以用什么方法？",
+      "a": "可以使用百分比值。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "CSS基础"
+  ],
+  "source_pages": [
+    209,
+    209
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "311_css动画关键帧的_from_to_与百分比",
+  "_chunk_pages": [
+    209,
+    212
+  ]
+}

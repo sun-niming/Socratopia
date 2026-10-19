@@ -1,0 +1,52 @@
+{
+  "title": "DataHolder 的 setData 参数传递方式",
+  "definition": "`DataHolder` 用成员变量 `std::vector<int> m_data` 保存数据。原文展示了三种 `setData` 设计：使用 `const std::vector<int>&` 接收左值并复制；重载 `std::vector<int>&&` 接收右值并移动；或者按值接收 `std::vector<int> data`，再使用 `m_data = std::move(data)` 将参数内容移动到成员变量。",
+  "key_points": [
+    "`void setData(const std::vector<int>& data) { m_data = data; }` 可以接收左值和临时对象，但赋值给成员时会进行复制。",
+    "增加 `void setData(std::vector<int>&& data) { m_data = std::move(data); }` 后，右值参数可以通过移动转移资源。",
+    "按值传参版本 `void setData(std::vector<int> data) { m_data = std::move(data); }` 能统一处理左值和右值：传入左值时先复制构造参数，传入右值时通常可移动构造参数，然后再把参数移动到成员。",
+    "调用重载版本时，左值匹配 `const std::vector<int>&`，右值或临时对象匹配 `std::vector<int>&&`。"
+  ],
+  "examples": [
+    "左值调用：`std::vector<int> myData{11, 22, 33}; wrapper.setData(myData);`，通常调用 `const std::vector<int>&` 重载并复制数据。",
+    "临时对象调用：`wrapper.setData({22, 33, 44});`，通常匹配右值引用重载，并使用移动赋值。",
+    "按值传参版本：`void setData(std::vector<int> data) { m_data = std::move(data); }`。"
+  ],
+  "misconceptions": [
+    "`const std::vector<int>&` 可以绑定临时对象，但函数体中的 `m_data = data` 仍然是复制赋值，因为 `data` 是具名变量且表达式类别为左值。",
+    "右值引用参数 `data` 在函数体内也是具名变量，直接写 `m_data = data` 不会自动按右值移动，通常需要写 `std::move(data)`。",
+    "按值传参并不意味着所有调用都无复制：传入左值时通常需要先复制构造形参。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`wrapper.setData(myData);` 中 `myData` 是左值，通常如何传递？",
+      "a": "它通常匹配 `const std::vector<int>&` 重载，随后通过 `m_data = data` 复制数据。"
+    },
+    {
+      "q": "为什么右值引用重载的函数体中要写 `m_data = std::move(data)`？",
+      "a": "因为具名的右值引用参数 `data` 在函数体内是左值表达式，必须显式使用 `std::move(data)` 才能匹配移动赋值。"
+    },
+    {
+      "q": "按值版本为什么写成 `m_data = std::move(data)`？",
+      "a": "因为形参 `data` 已经是函数内部拥有的对象，将其移动到成员变量可以避免再次复制其资源。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "左值与右值",
+    "const 引用",
+    "右值引用",
+    "std::vector 的复制与移动"
+  ],
+  "source_pages": [
+    273,
+    276
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "360_dataholder_的_setdata_参数传递方式",
+  "_chunk_pages": [
+    273,
+    276
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "title": "棋类程序的棋盘视图与棋子视图分层",
+  "definition": "教材把棋类程序的模型对象与显示对象分开：ChessBoardView 表示棋盘视图，并可细分为 ChessBoardViewConsole、ChessBoardViewGUI2D 和 ChessBoardViewGUI3D；ChessPieceView 表示棋子视图，并可进一步对应不同棋子及其控制台或二维 GUI 视图。图中还显示 ChessBoardView 与 ChessBoard、ChessPieceView 与 ChessPiece 之间存在观察关系。",
+  "key_points": [
+    "棋盘视图可以面向控制台、二维 GUI 或三维 GUI。",
+    "视图类型与棋盘模型 ChessBoard、棋子模型 ChessPiece 分开。",
+    "图中使用 Observer 标注表示视图关注相应模型的状态变化。",
+    "将显示方式与棋盘、棋子数据分离，可以支持多种显示界面。"
+  ],
+  "examples": [
+    "棋盘视图的层次可表示为：$$\\text{ChessBoardView}\\rightarrow\\{\\text{Console},\\text{GUI2D},\\text{GUI3D}\\}$$",
+    "图中出现的具体棋子视图包括 RookView、BishopView，以及 RookViewConsole、RookViewGUI2D 等。"
+  ],
+  "misconceptions": [
+    "ChessBoardViewGUI2D 和 ChessBoardViewGUI3D 是显示方式，不是两种不同的棋盘数据模型。",
+    "视图负责显示或响应模型状态，不应将视图本身误认为 ChessBoard 或 ChessPiece。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "ChessBoardView 可以有哪些具体显示形式？",
+      "a": "控制台显示、二维 GUI 显示和三维 GUI 显示，图中分别对应 ChessBoardViewConsole、ChessBoardViewGUI2D 和 ChessBoardViewGUI3D。"
+    },
+    {
+      "q": "图中 Observer 标注表达了什么关系？",
+      "a": "它表示相应视图关注棋盘或棋子的状态变化，以便视图反映模型状态。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++类与继承",
+    "观察者模式"
+  ],
+  "source_pages": [
+    161,
+    164
+  ],
+  "needs_verification": true,
+  "verify_query": "《C++20高级编程》第5版 第161页 ChessBoardView ChessPieceView Observer ChessBoard UML",
+  "concept_id": "227_棋类程序的棋盘视图与棋子视图分层",
+  "_chunk_pages": [
+    161,
+    164
+  ]
+}

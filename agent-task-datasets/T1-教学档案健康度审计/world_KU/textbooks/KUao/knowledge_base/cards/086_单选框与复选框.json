@@ -1,0 +1,53 @@
+{
+  "title": "单选框与复选框",
+  "definition": "HTML表单中，单选框（radio）用于一组选项中只能选择一个；复选框（checkbox）用于允许同时选择多个选项。它们常配合 `input` 使用，并依赖 `value`、`checked`、`name` 等属性控制默认值、默认选中状态和分组。",
+  "key_points": [
+    "单选框在同一组选项中只能选一个。",
+    "复选框允许同时选择多个选项。",
+    "`checked=\"checked\"` 用于设置默认选中状态。",
+    "`name` 值相同的单选项通常属于同一组。",
+    "`value` 表示该选项对应的具体值。"
+  ],
+  "examples": [
+    "<input type=\"radio\" name=\"gender\" value=\"男\" checked=\"checked\">男",
+    "<input type=\"radio\" name=\"gender\" value=\"女\">女",
+    "<input type=\"checkbox\" name=\"hobby\" value=\"阅读\">阅读",
+    "<input type=\"checkbox\" name=\"hobby\" value=\"运动\" checked=\"checked\">运动"
+  ],
+  "misconceptions": [
+    "单选框和复选框都只能选一个。",
+    "`checked` 只能用于单选框，不能用于复选框。",
+    "`name` 不重要；实际上同名单选框才会被视为同组。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "单选框和复选框的核心区别是什么？",
+      "a": "单选框在同组中只能选一个，复选框可以同时选多个。"
+    },
+    {
+      "q": "`checked=\"checked\"` 的作用是什么？",
+      "a": "设置该选项为默认选中状态。"
+    },
+    {
+      "q": "为什么同一组单选框常使用相同的 `name`？",
+      "a": "因为 `name` 相同表示属于同一组，便于只选择其中一个。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "HTML基础",
+    "input标签",
+    "表单属性"
+  ],
+  "source_pages": [
+    69,
+    72
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "086_单选框与复选框",
+  "_chunk_pages": [
+    69,
+    72
+  ]
+}

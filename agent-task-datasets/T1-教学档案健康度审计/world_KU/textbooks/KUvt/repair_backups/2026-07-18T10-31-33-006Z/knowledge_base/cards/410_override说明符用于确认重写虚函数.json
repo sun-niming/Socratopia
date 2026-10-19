@@ -1,0 +1,43 @@
+{
+  "title": "override说明符用于确认重写虚函数",
+  "definition": "派生类成员函数可以使用 override 说明符，明确表示该函数 intended to 重写基类中的虚函数。编译器会检查派生类函数是否确实与基类虚函数匹配；如果没有正确重写，程序应报告错误。",
+  "key_points": [
+    "基类先声明虚函数，例如 virtual std::string getTemperature() const;。",
+    "派生类可以写成 std::string getTemperature() const override;。",
+    "override 要求函数签名与基类虚函数匹配，包括参数列表、const 等限定。"
+  ],
+  "examples": [
+    "class WeatherPrediction { public: virtual std::string getTemperature() const; };",
+    "class MyWeatherPrediction : public WeatherPrediction { public: std::string getTemperature() const override; };"
+  ],
+  "misconceptions": [
+    "override 会自动让一个普通的基类非虚函数变成虚函数；实际上，override 只能用于重写基类虚函数。",
+    "只要函数名相同就一定构成重写；实际上，参数列表和 const 等函数限定也必须匹配。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "派生类中的 getTemperature() 为什么写 override？",
+      "a": "它表示该函数要重写基类的虚函数，并要求编译器检查函数签名是否确实匹配。"
+    },
+    {
+      "q": "基类函数声明为 virtual std::string getTemperature() const; 时，派生类的正确重写形式是什么？",
+      "a": "std::string getTemperature() const override;"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "继承",
+    "虚函数"
+  ],
+  "source_pages": [
+    317,
+    320
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "410_override说明符用于确认重写虚函数",
+  "_chunk_pages": [
+    317,
+    320
+  ]
+}

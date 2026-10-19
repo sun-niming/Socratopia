@@ -1,0 +1,41 @@
+{
+  "title": "不采用的资料",
+  "definition": "讲义明确列出了一批不采用的资料，包括若干教程 PDF 以及所有 CSDN 推文、403 页面和登录残留。其含义是：这些资料不纳入本课程的学习路径。",
+  "key_points": [
+    "列出的“不采用”资料不进入学习范围",
+    "明确排除了 CSDN 推文、403 页面和登录残留"
+  ],
+  "examples": [
+    "`01-socket/C-Echo-Server-Tutorial.pdf`",
+    "`03-file-io/Linux-C-File-IO-Tutorial.pdf`",
+    "`05-process/wait-waitpid-zombie-process.pdf`",
+    "任何 CSDN 推文、CSDN 403 页面、CSDN 登录残留"
+  ],
+  "misconceptions": [
+    "不采用不等于这些资料完全错误，而是本讲义不把它们作为学习材料",
+    "不要把“资料多”误解成“都要看”"
+  ],
+  "qa_pairs": [
+    {
+      "q": "讲义明确排除了哪些类型的资料？",
+      "a": "列出的若干教程 PDF，以及任何 CSDN 推文、CSDN 403 页面和 CSDN 登录残留。"
+    },
+    {
+      "q": "为什么要列“不采用”的资料？",
+      "a": "为了避免学习路径被无关或质量不稳定的资料带偏。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [],
+  "source_pages": [
+    133,
+    136
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "236_不采用的资料",
+  "_chunk_pages": [
+    133,
+    136
+  ]
+}

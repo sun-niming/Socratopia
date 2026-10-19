@@ -1,0 +1,46 @@
+{
+  "title": "使用#include包含文件",
+  "definition": "`#include`是C++预处理指令，用于按照指定形式包含一个文件的内容。教材第36页给出的抽象语法是`#include [file]`，并以`#include <iostream>`作为标准库相关示例。`#include`行以预处理指令形式出现，不是普通的C++函数调用。",
+  "key_points": [
+    "基本形式是`#include [file]`，其中`[file]`表示要包含的文件名或路径。",
+    "标准库头文件示例是`#include <iostream>`。",
+    "尖括号中的名称表示按标准库头文件形式书写的包含项。",
+    "`#include`属于预处理阶段使用的指令。"
+  ],
+  "examples": [
+    "`#include <iostream>`",
+    "抽象形式：`#include [file]`"
+  ],
+  "misconceptions": [
+    "`#include`不是函数，也不需要写成`#include([file])`。",
+    "不能把尖括号、文件名和预处理指令名称随意省略或混写。",
+    "教材介绍的是包含文件的写法，不等于完整说明所有头文件查找规则。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "包含iostream的传统写法是什么？",
+      "a": "`#include <iostream>`。"
+    },
+    {
+      "q": "教材给出的#include抽象语法是什么？",
+      "a": "`#include [file]`。"
+    },
+    {
+      "q": "#include属于什么类型的语言构造？",
+      "a": "它是C++预处理指令。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [],
+  "source_pages": [
+    33,
+    36
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "022_使用_include包含文件",
+  "_chunk_pages": [
+    33,
+    36
+  ]
+}

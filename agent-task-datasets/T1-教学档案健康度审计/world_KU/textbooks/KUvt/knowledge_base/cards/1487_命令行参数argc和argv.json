@@ -1,0 +1,44 @@
+{
+  "title": "命令行参数argc和argv",
+  "definition": "命令行应用程序的`main`函数可以接收命令行参数，形式为`main(int argc, char** argv)`。其中，`argc`表示命令行参数的数量，`argv`是一个字符串数组，每个元素对应一个命令行参数。练习24-2假设参数形式为`name=value`，要求解析这些参数。",
+  "key_points": [
+    "`argc`表示命令行参数数量。",
+    "`argv`表示字符串参数数组，每个参数对应一个字符串。",
+    "可以遍历命令行参数，并对每个`name=value`形式的字符串进行解析。",
+    "练习要求在`main()`中循环处理命令行参数。"
+  ],
+  "examples": [
+    "函数声明形式：`int main(int argc, char** argv)`。",
+    "若命令行为`program enabled=true count=42 name=Alice`，则后续参数可以按`name=value`形式逐个拆分和解析。"
+  ],
+  "misconceptions": [
+    "`argc`不是参数数组，而是参数数量；`argv`才是参数字符串数组。",
+    "命令行参数通常包含程序名这一项，具体遍历范围应结合题目约定和实现进行确认。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "在`main(int argc, char** argv)`中，`argc`和`argv`分别表示什么？",
+      "a": "`argc`表示命令行参数的数量，`argv`是保存各个命令行参数字符串的数组。"
+    },
+    {
+      "q": "练习24-2假设命令行参数采用什么形式？",
+      "a": "采用`name=value`形式。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++函数参数",
+    "字符串处理"
+  ],
+  "source_pages": [
+    714,
+    714
+  ],
+  "needs_verification": true,
+  "verify_query": "C++ main argc argv 命令行参数 name=value 练习24-2 原文",
+  "concept_id": "1487_命令行参数argc和argv",
+  "_chunk_pages": [
+    713,
+    716
+  ]
+}

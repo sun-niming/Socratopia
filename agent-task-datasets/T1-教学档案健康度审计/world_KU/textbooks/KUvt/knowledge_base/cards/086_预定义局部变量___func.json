@@ -1,0 +1,42 @@
+{
+  "title": "预定义局部变量 __func__",
+  "definition": "每个函数都有一个预定义的局部变量 __func__，其中包含当前函数的名称。它可以用于日志记录等场景，以便输出当前正在执行的函数名。",
+  "key_points": [
+    "__func__ 只能表示当前函数的名称。",
+    "它是函数内部可使用的预定义局部变量。",
+    "日志代码可以把 __func__ 的值输出或格式化，以记录进入了哪个函数。"
+  ],
+  "examples": [
+    "int addNumbers(int number1, int number2) { std::cout << std::format(\"Entering function {}\", __func__) << std::endl; return number1 + number2; }"
+  ],
+  "misconceptions": [
+    "__func__ 不是调用者传入的参数。",
+    "__func__ 表示当前函数名，不是当前源文件名或当前代码行号。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "__func__ 的值表示什么？",
+      "a": "表示当前函数的名称。"
+    },
+    {
+      "q": "__func__ 的一个常见用途是什么？",
+      "a": "用于日志记录，例如记录程序进入了哪个函数。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "函数的基本结构",
+    "日志记录的基本概念"
+  ],
+  "source_pages": [
+    54,
+    54
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "086_预定义局部变量___func",
+  "_chunk_pages": [
+    53,
+    56
+  ]
+}

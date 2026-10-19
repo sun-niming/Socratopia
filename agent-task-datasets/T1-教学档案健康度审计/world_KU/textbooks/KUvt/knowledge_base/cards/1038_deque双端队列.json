@@ -1,0 +1,50 @@
+{
+  "title": "deque双端队列",
+  "definition": "deque是double-ended queue的缩写，定义在<deque>头文件中。它支持对元素的快速访问，通常为常量时间；在序列两端插入和删除元素也很快，通常为常量时间；在序列中间插入和删除通常为线性时间。deque的元素不连续存储，实际速度可能比vector慢。",
+  "key_points": [
+    "deque支持两端快速插入和删除。",
+    "deque支持元素快速访问，通常为$O(1)$。",
+    "在中间插入和删除通常为线性时间。",
+    "deque元素在内存中不连续存储。",
+    "如果既需要两端快速插入或删除，又需要快速访问所有元素，应考虑deque；但大多数情况下教材仍建议优先使用vector。"
+  ],
+  "examples": [
+    "代码示例：\nstd::deque<int> values{10, 20, 30};\nvalues.push_front(5);\nvalues.push_back(40);\nint x{values[2]};"
+  ],
+  "misconceptions": [
+    "deque不是只能在两端访问的队列；它也支持对元素的快速访问。",
+    "deque的中间插入和删除不是常量时间。",
+    "deque与vector都支持快速访问，但deque的元素不连续存储。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "deque适合什么场景？",
+      "a": "适合既需要在序列两端快速插入或删除，又需要快速访问所有元素的场景。"
+    },
+    {
+      "q": "deque中间插入和删除的复杂度通常是多少？",
+      "a": "通常是线性时间。"
+    },
+    {
+      "q": "deque和vector的存储方式有何区别？",
+      "a": "vector的元素连续存储，deque的元素不连续存储。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "队列",
+    "随机访问",
+    "时间复杂度"
+  ],
+  "source_pages": [
+    508,
+    508
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1038_deque双端队列",
+  "_chunk_pages": [
+    505,
+    508
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "title": "显式默认或删除拷贝赋值运算符",
+  "definition": "可以使用 `= default` 或 `= delete` 显式控制编译器生成的拷贝赋值运算符。`= default` 表示要求编译器生成默认实现；`= delete` 表示明确禁止调用该赋值运算符。",
+  "key_points": [
+    "显式默认的形式是 `SpreadsheetCell& operator=(const SpreadsheetCell& rhs) = default;`。",
+    "显式删除的形式是 `SpreadsheetCell& operator=(const SpreadsheetCell& rhs) = delete;`。",
+    "显式删除后，对该类对象进行相应的拷贝赋值会导致编译错误。"
+  ],
+  "examples": [
+    "`class SpreadsheetCell { public: SpreadsheetCell& operator=(const SpreadsheetCell& rhs) = default; };`",
+    "`class SpreadsheetCell { public: SpreadsheetCell& operator=(const SpreadsheetCell& rhs) = delete; };`"
+  ],
+  "misconceptions": [
+    "`= default` 不是删除函数，而是要求使用编译器生成的默认实现。",
+    "`= delete` 不是函数体为空；它明确表示该函数不可调用。",
+    "显式声明赋值运算符不等于一定要自己编写成员逐个赋值的函数体。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何显式要求编译器生成默认的拷贝赋值运算符？",
+      "a": "在声明末尾写 `SpreadsheetCell& operator=(const SpreadsheetCell& rhs) = default;`。"
+    },
+    {
+      "q": "如何禁止某个类使用拷贝赋值运算符？",
+      "a": "将该运算符声明为 `= delete`，例如 `SpreadsheetCell& operator=(const SpreadsheetCell& rhs) = delete;`。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "拷贝赋值运算符的基本实现",
+    "C++函数显式默认与删除"
+  ],
+  "source_pages": [
+    253,
+    253
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "540_显式默认或删除拷贝赋值运算符",
+  "_chunk_pages": [
+    253,
+    256
+  ]
+}

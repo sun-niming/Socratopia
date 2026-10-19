@@ -1,0 +1,44 @@
+{
+  "title": "DNS 资源记录结构与 TTL",
+  "definition": "共同实现 DNS 分布式数据库的 DNS 服务器存储资源记录（Resource Record，RR）。资源记录可表示为四元组 $$(Name,\\ Value,\\ Type,\\ TTL)$$其中，$TTL$ 是记录的生存时间，用于决定该资源记录应当何时从缓存中删除；$Name$ 和 $Value$ 的含义取决于 $Type$。每个 DNS 回答报文包含一条或多条资源记录。",
+  "key_points": [
+    "资源记录是 DNS 分布式数据库中的基本数据项。",
+    "资源记录包含 $Name$、$Value$、$Type$ 和 $TTL$ 四个字段。",
+    "$TTL$ 控制资源记录在缓存中的有效时间。",
+    "同一 DNS 回答报文可以包含多条资源记录。"
+  ],
+  "examples": [
+    "资源记录的通用形式为 $$(Name,\\ Value,\\ Type,\\ TTL)$$",
+    "讲解记录类型时可以暂时省略 $TTL$，写成三元组，例如 $$(relay1.bar.foo.com,\\ 145.37.93.126,\\ A)$$"
+  ],
+  "misconceptions": [
+    "误以为 $TTL$ 是服务器的永久存储期限；它描述记录在缓存中的生存时间。",
+    "误以为一个 DNS 回答只能携带一条资源记录；回答区域可以包含多条资源记录。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "DNS 资源记录由哪些字段组成？",
+      "a": "由 $Name$、$Value$、$Type$ 和 $TTL$ 组成，即 $$(Name,\\ Value,\\ Type,\\ TTL)$$。"
+    },
+    {
+      "q": "资源记录中的 $TTL$ 有什么作用？",
+      "a": "表示记录的生存时间，决定缓存中的该资源记录应当何时被删除。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "DNS 缓存",
+    "DNS 分布式数据库"
+  ],
+  "source_pages": [
+    105,
+    108
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "266_dns_资源记录结构与_ttl",
+  "_chunk_pages": [
+    105,
+    108
+  ]
+}

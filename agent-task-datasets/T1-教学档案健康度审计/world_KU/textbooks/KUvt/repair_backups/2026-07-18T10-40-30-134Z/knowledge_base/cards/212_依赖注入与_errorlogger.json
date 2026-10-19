@@ -1,0 +1,45 @@
+{
+  "title": "依赖注入与 ErrorLogger",
+  "definition": "第150页在 C++ 相关内容中出现了 `ErrorLogger`，并明确标注了“dependency injection（依赖注入）”。依赖注入是指：一个类所需的对象或服务由外部提供并传入，而不是由该类在内部直接创建。这里的依赖示例是错误日志记录器 `ErrorLogger`。",
+  "key_points": [
+    "`ErrorLogger` 被作为依赖注入相关示例出现。",
+    "依赖注入的核心是由外部提供对象依赖，再交给使用者使用。",
+    "与在业务类内部直接构造 `ErrorLogger` 相比，注入依赖可以使使用者依赖抽象接口或外部提供的具体对象。",
+    "第150页的代码和上下文在识别文本中不完整，因此无法确认原文采用的是构造函数注入、成员函数注入还是其他具体形式。"
+  ],
+  "examples": [
+    "概念性示例：\n`class GameService {\\npublic:\\n    GameService(ErrorLogger* logger);\\nprivate:\\n    ErrorLogger* logger;\\n};`\n这里 `ErrorLogger` 由外部传入，而不是由 `GameService` 在内部自行创建。"
+  ],
+  "misconceptions": [
+    "依赖注入不是专门指错误日志，也可以注入数据库连接、配置对象或其他服务。",
+    "依赖注入不等于继承；它通常表示把对象作为参数、成员或属性提供给使用者。",
+    "仅仅在类中声明一个 `ErrorLogger` 指针，并不自动构成完整的依赖注入；还需要由外部负责提供该依赖。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "什么是依赖注入？",
+      "a": "依赖注入是把类所需的对象或服务由外部创建并传入，而不是让该类在内部直接创建这些依赖。"
+    },
+    {
+      "q": "第150页中依赖注入示例涉及哪个类型？",
+      "a": "涉及 `ErrorLogger`，即错误日志记录器。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++类与对象",
+    "构造函数和指针",
+    "面向对象设计中的对象依赖"
+  ],
+  "source_pages": [
+    149,
+    152
+  ],
+  "needs_verification": true,
+  "verify_query": "《C++20高级编程》第5版 第150页 ErrorLogger dependency injection C++ 原文 构造函数注入",
+  "concept_id": "212_依赖注入与_errorlogger",
+  "_chunk_pages": [
+    149,
+    152
+  ]
+}

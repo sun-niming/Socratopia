@@ -1,0 +1,52 @@
+{
+  "title": "forward_list 的典型操作",
+  "definition": "forward_list 提供面向单链表的操作，例如 splice_after()、insert_after()、emplace_after()、erase_after()、push_front() 和 pop_front()。由于它只能前向遍历，若要在链表尾部插入元素，必须从 before_begin() 开始遍历，找到最后一个元素的迭代器，再调用 insert_after()。",
+  "key_points": [
+    "splice_after() 将另一个 forward_list 的元素接入指定位置之后。",
+    "push_front() 在链表头部添加元素。",
+    "insert_after() 在指定迭代器所指位置之后插入元素或一个范围内的元素。",
+    "forward_list 没有 end() 所代表的最后一个元素；end() 是尾后迭代器，因此要找到最后一个元素，必须遍历查找。",
+    "原文示例使用 `before_begin()` 和两个迭代器遍历，找到 list1 的最后一个元素，然后将 list3 插入其后。"
+  ],
+  "examples": [
+    "将 list2 插入 list1 的头部：`list1.splice_after(list1.before_begin(), list2);`",
+    "在头部添加 0：`list1.push_front(0);`",
+    "查找最后一个元素并插入 list3：`auto iter{list1.before_begin()}; auto iterTemp{iter}; while (++iterTemp != end(list1)) { ++iter; } list1.insert_after(iter, cbegin(list3), cend(list3));`",
+    "原文示例最终输出：`0 1 2 3 4 5 6 7 8 9`。"
+  ],
+  "misconceptions": [
+    "不能使用 end() 作为最后一个元素的位置；end() 是尾后迭代器，不指向实际元素。",
+    "splice_after() 的位置参数指向要插入位置之后的元素；对于在头部插入，应传入 before_begin()。",
+    "forward_list 可以通过反向迭代器直接找到尾部；它不提供反向遍历迭代器，只能从头遍历。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何使用 splice_after() 把 list2 插入 list1 的开头？",
+      "a": "调用 `list1.splice_after(list1.before_begin(), list2);`。"
+    },
+    {
+      "q": "为什么在 forward_list 尾部插入元素需要遍历？",
+      "a": "因为 forward_list 只支持前向迭代，不能通过反向迭代器访问尾部，也不能直接使用一个指向最后元素的常量时间操作。"
+    },
+    {
+      "q": "原文示例中，插入 list3 后 list1 的输出是什么？",
+      "a": "`0 1 2 3 4 5 6 7 8 9`。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "forward_list 是单链表",
+    "迭代器的 begin 与 end"
+  ],
+  "source_pages": [
+    571,
+    572
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1177_forward_list_的典型操作",
+  "_chunk_pages": [
+    569,
+    572
+  ]
+}

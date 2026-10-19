@@ -1,0 +1,45 @@
+{
+  "title": "static_assert 编译期断言",
+  "definition": "`static_assert` 用于在编译期检查一个布尔表达式。表达式为 `true` 时编译继续；表达式为 `false` 时编译器报告错误。它可接收一个可选的错误消息，用于说明断言失败的原因。",
+  "key_points": [
+    "典型语法为 `static_assert(表达式, \"错误消息\");`。",
+    "从 C++17 开始，错误消息参数可以省略：`static_assert(表达式);`。",
+    "断言常用于检查平台条件、类型属性或模板参数是否满足要求。"
+  ],
+  "examples": [
+    "检查是否以 64 位环境编译：```cpp\nstatic_assert(sizeof(void*) == 8,\n              \"Requires 64-bit compilation.\");\n```",
+    "省略错误消息：```cpp\nstatic_assert(sizeof(void*) == 8);\n```",
+    "结合类型 trait：```cpp\ntemplate <typename T>\nvoid foo(const T& t) {\n    static_assert(std::is_integral_v<T>,\n                  \"T should be an integral type.\");\n}\n```"
+  ],
+  "misconceptions": [
+    "`static_assert` 失败发生在编译期，不是程序运行时抛出的异常。",
+    "省略错误消息并不代表断言失败不会报错；编译器仍会报告静态断言失败，只是消息通常由编译器决定。",
+    "`sizeof(void*) == 8` 检查的是指针大小是否为 8 字节，用于示例中的 64 位编译环境检查；它不是对所有平台特征的完整检测。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如果 `static_assert` 的表达式为 `false`，会发生什么？",
+      "a": "编译器会报告错误，程序不能正常通过编译。"
+    },
+    {
+      "q": "C++17 对 `static_assert` 的语法有什么变化？",
+      "a": "第二个字符串错误消息参数变为可选，可以写成 `static_assert(表达式);`。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "编译期求值",
+    "类型 trait"
+  ],
+  "source_pages": [
+    786,
+    787
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1615_static_assert_编译期断言",
+  "_chunk_pages": [
+    785,
+    788
+  ]
+}

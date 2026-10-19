@@ -1,0 +1,142 @@
+{
+  "conversationId": "Ya_OLiHf4xIeRu7LTyw3b",
+  "generatedAt": 1781342520101,
+  "pagesRange": null,
+  "sections": [
+    {
+      "type": "tldr",
+      "content": "本节课核心是把 Shell 的循环控制、函数返回码、短路逻辑和整数运算分清：看清“什么时候执行、是否写回变量、返回码是否为 \\(0\\)”就能判断输出。"
+    },
+    {
+      "type": "narrative",
+      "content": "这节从 C 风格 `for` 的执行顺序开始，先练清楚初始化、判断、循环体、更新的节奏；随后区分 `break`、`continue`、`exit` 对流程的不同影响。后半段进入函数返回码、`if` 判断、`&&` / `||` 短路逻辑，以及 `let`、`$(( ))`、`expr` 三种整数运算写法，最后停在 `expr 10 / 3` 的整数除法上，留作下次继续确认。"
+    },
+    {
+      "type": "concepts",
+      "items": [
+        {
+          "name": "C 风格 `for` 的执行顺序",
+          "body": "结构：\n\n```bash\\nfor ((e1; e2; e3))\\ndo\n  command_list\\ndone\n```\n\n执行顺序是：\n\n1. 先执行 `e1`：初始化，只做一次。\n2. 判断 `e2`：条件成立才进入循环体。\n3. 执行循环体。\n4. 执行 `e3`：更新。\n5. 回到第 \\(2\\) 步继续判断。\n\n例子：\n\n```bash\\nfor ((i=1; i<=5; i=i+2))\\ndo\n  echo \"$i\"\\ndone\n```\n\n流程是先输出，再执行 `i=i+2`，所以输出：\n\n```text\n1\n3\n5\n```\n\n如果条件改成 `i<5`：\n\n```bash\\nfor ((i=1; i<5; i=i+2))\\ndo\n  echo \"$i\"\\ndone\n```\n\n当 `i` 从 \\(3\\) 更新到 \\(5\\) 后，会先判断 `i<5`，判断失败，所以 \\(5\\) 不会进入循环体，最终只输出：\n\n```text\n1\n3\n```"
+        },
+        {
+          "name": "`break`、`continue`、`exit` 的区别",
+          "body": "三者都能改变执行流程，但“离开范围”不同：\n\n- `break`：直接跳出当前循环。\n- `continue`：跳过本轮剩余语句，进入下一轮循环。\n- `exit n`：退出整个脚本，并把 \\(n\\) 作为退出码。\n\n`break` 例子：\n\n```bash\\nfor ((i=1; i<=5; i++))\\ndo\n  if [ $i -eq 3 ]\n  then\n    break\n  fi\n  echo \"$i\"\\ndone\n```\n\n当 `i` 等于 \\(3\\) 时，先触发 `break`，后面的 `echo` 不执行，因此输出不是 \\(1,3\\)，而是：\n\n```text\n1\n2\n```\n\n`continue` 例子：\n\n```bash\\nfor ((i=1; i<=5; i++))\\ndo\n  if [ $i -eq 3 ]\n  then\n    continue\n  fi\n  echo \"$i\"\\ndone\n```\n\n当 `i` 等于 \\(3\\) 时跳过本轮 `echo`，但循环继续，所以输出：\n\n```text\n1\n2\n4\n5\n```\n\n`exit` 例子：\n\n```bash\\nfor ((i=1; i<=5; i++))\\ndo\n  if [ $i -eq 3 ]\n  then\n    exit 7\n  fi\n  echo \"$i\"\\ndone\n\\necho \"after loop\"\n```\n\n当 `i` 等于 \\(3\\) 时整个脚本结束，循环外的 `echo \"after loop\"` 也不会执行。屏幕只输出：\n\n```text\n1\n2\n```\n\n退出码 \\(7\\) 不会直接显示在屏幕上，可以在外部通过 `$?` 查看。"
+        },
+        {
+          "name": "Shell 函数与 `return` 返回码",
+          "body": "Shell 函数写法：\n\n```bash\\nhello() {\n  echo \"hi\"\n}\n```\n\n重点：\n\n- 函数通常要先定义后使用。\n- `echo` 负责屏幕输出。\n- `return n` 负责设置函数返回码，不是返回字符串。\n- 返回码范围通常是 \\(0\\) 到 \\(255\\)。\n\n例子：\n\n```bash\\nsay_hi() {\n  echo \"hi\"\n  return 3\n}\n\\nsay_hi\\necho \"$?\"\n```\n\n输出：\n\n```text\\nhi\n3\n```\n\n如果 `return` 后面还有语句：\n\n```bash\\nsay_hi() {\n  echo \"hi\"\n  return 3\n  echo \"bye\"\n}\n```\n\n`return 3` 一执行，函数就结束，所以 `bye` 不会输出。\n\n返回码超过 \\(255\\) 时，通常按 \\(256\\) 取模。例如：\n\n```bash\\nf() {\n  return 300\n}\n\\nf\\necho \"$?\"\n```\n\n因为 \\(300 \\bmod 256 = 44\\)，所以最后更可能输出：\n\n```text\n44\n```"
+        },
+        {
+          "name": "`if` 判断看的是返回码",
+          "body": "Shell 中，`if` 判断命令是否“成功”：\n\n- 返回码为 \\(0\\)：成功，走 `then`。\n- 返回码非 \\(0\\)：失败，走 `else`。\n\n例子：\n\n```bash\\ncheck() {\n  return 0\n}\n\\nif check\\nthen\n  echo \"ok\"\\nelse\n  echo \"bad\"\\nfi\n```\n\n输出：\n\n```text\\nok\n```\n\n如果改成：\n\n```bash\\ncheck() {\n  return 5\n}\n```\n\n因为 \\(5\\) 是非 \\(0\\)，所以走 `else`，输出：\n\n```text\\nbad\n```\n\n`!` 会反转成功/失败：\n\n```bash\\ncheck() {\n  return 0\n}\n\\nif ! check\\nthen\n  echo \"bad\"\\nelse\n  echo \"ok\"\\nfi\n```\n\n`check` 本来成功，但 `!` 反转成失败，所以不走 `then`，输出：\n\n```text\\nok\n```"
+        },
+        {
+          "name": "`&&` 与 `||` 的短路逻辑",
+          "body": "短路组合看前一个命令的返回码：\n\n- `cmd1 && cmd2`：只有 `cmd1` 成功，即返回码为 \\(0\\)，才执行 `cmd2`。\n- `cmd1 || cmd2`：只有 `cmd1` 失败，即返回码非 \\(0\\)，才执行 `cmd2`。\n\n注意：`||` 不是“非负”时执行，而是“非 \\(0\\)”时执行。\n\n综合例子：\n\n```bash\\nfalse || echo \"A\"\\ntrue && echo \"B\"\\nfalse && echo \"C\"\\ntrue || echo \"D\"\\necho \"end\"\n```\n\n逐行看：\n\n- `false || echo \"A\"`：前面失败，执行后面。\n- `true && echo \"B\"`：前面成功，执行后面。\n- `false && echo \"C\"`：前面失败，短路，不执行后面。\n- `true || echo \"D\"`：前面成功，短路，不执行后面。\n\n最终输出：\n\n```text\\nA\\nB\\nend\n```"
+        },
+        {
+          "name": "函数中的变量与位置参数",
+          "body": "Shell 函数通常在当前 Shell 环境中运行，所以函数里修改普通变量，外面也能看到：\n\n```bash\\nname=old\n\\nchange() {\n  name=new\n}\n\\nchange\\necho \"$name\"\n```\n\n输出：\n\n```text\\nnew\n```\n\n函数也可以接收位置参数：\n\n```bash\\nshow() {\n  echo \"$1\"\n  echo \"$2\"\n}\n\\nshow apple banana\n```\n\n函数内部 `$1` 是 `apple`，`$2` 是 `banana`，最终输出：\n\n```text\\napple\\nbanana\n```\n\n如果调用时加引号：\n\n```bash\\nshow \"apple banana\" pear\n```\n\n引号会把 `apple banana` 保护成一个参数，所以 `$1` 是 `apple banana`，`$2` 是 `pear`。调用语句本身不会自动输出，只有函数里的 `echo` 会输出。"
+        },
+        {
+          "name": "`let`：执行整数运算并写回变量",
+          "body": "`let` 用来做整数运算，变量名前可以不加 `$`。它像是一条“运算命令”，常用于修改变量。\n\n例子：\n\n```bash\\ni=1\\nlet i=i+1\\necho \"$i\"\n```\n\n输出：\n\n```text\n2\n```\n\n常见写法：\n\n```bash\\ni=5\\nlet i--\\necho \"$i\"\n```\n\n输出：\n\n```text\n4\n```\n\n乘法时，稳妥写法是给表达式加引号，避免 `*` 被 Shell 当成通配符展开：\n\n```bash\\na=3\\nb=4\\nlet \"c=a*b\"\\necho \"$c\"\n```\n\n输出：\n\n```text\n12\n```\n\n`let` 做的是整数运算，所以：\n\n```bash\\na=7\\nb=2\\nlet \"c=a/b\"\\necho \"$c\"\n```\n\n输出 \\(3\\)，不是 \\(3.5\\)。取余写作 `%`：\n\n```bash\\na=7\\nb=2\\nlet \"r=a%b\"\\necho \"$r\"\n```\n\n输出：\n\n```text\n1\n```"
+        },
+        {
+          "name": "`$(( ))`：算出结果并替换出来",
+          "body": "`$((表达式))` 也是整数运算，但它更像“把这里替换成计算结果”。\n\n例子：\n\n```bash\\na=3\\nb=4\\necho $((a+b))\n```\n\n输出：\n\n```text\n7\n```\n\n可以把结果赋值给变量：\n\n```bash\\na=3\\nb=4\\nc=$((a*b))\\necho \"$c\"\n```\n\n输出：\n\n```text\n12\n```\n\n关键区别：是否写回变量。\n\n```bash\\ni=5\\necho \"next is $((i+1))\"\\necho \"$i\"\n```\n\n`$((i+1))` 只是临时计算，变量 `i` 没被改，所以最后输出仍是：\n\n```text\n5\n```\n\n但：\n\n```bash\\ni=5\\ni=$((i+1))\\necho \"$i\"\n```\n\n右边先算出 \\(6\\)，左边 `i=` 再写回变量，所以输出：\n\n```text\n6\n```"
+        },
+        {
+          "name": "`expr`：更挑剔的整数运算命令",
+          "body": "`expr` 也能做整数运算，但元素之间必须有空格。\n\n```bash\\nexpr 3 + 4\n```\n\n输出：\n\n```text\n7\n```\n\n使用变量：\n\n```bash\\na=3\\nb=4\\nexpr $a + $b\n```\n\n变量先展开成 \\(3\\) 和 \\(4\\)，所以输出：\n\n```text\n7\n```\n\n注意：\n\n```bash\\nexpr $a+$b\n```\n\n因为缺少空格，会把 `3+4` 当成一个字符串原样处理，不会按加法计算。\n\n本节最后停在：\n\n```bash\\na=10\\nb=3\\nexpr $a / $b\n```\n\n这题还没最终讲完，但它属于整数除法问题，可以和前面 `let` 的整数除法类比。"
+        }
+      ]
+    },
+    {
+      "type": "key-insight",
+      "content": "“返回码是 \\(0\\) 到 \\(255\\)，是因为位数限制在 `00000000` 到 `11111111` 之间……\\(300\\) 超过后按 \\(256\\) 取模，所以是 \\(44\\)。”",
+      "attribution": "学习者"
+    },
+    {
+      "type": "key-insight",
+      "content": "“\\(5\\) 为非 \\(0\\) 走 `else`。”",
+      "attribution": "学习者"
+    },
+    {
+      "type": "key-insight",
+      "content": "“`i=` 是被赋值了……我没看到 `i=`。”——这句话抓住了 `$(( ))` 临时计算和真正写回变量的关键区别。",
+      "attribution": "学习者"
+    },
+    {
+      "type": "key-terms",
+      "items": [
+        {
+          "term": "`-eq`",
+          "definition": "Shell 条件测试中的“等于”，不是“大于”。本节中误把 `-eq` 看成 `-gt` 曾导致对 `break` 输出的误判。"
+        },
+        {
+          "term": "`break`",
+          "definition": "跳出当前循环，循环体后续语句不再执行。"
+        },
+        {
+          "term": "`continue`",
+          "definition": "跳过本轮循环剩余语句，进入下一轮循环判断或更新流程。"
+        },
+        {
+          "term": "`exit n`",
+          "definition": "退出整个脚本，并设置退出码为 \\(n\\)。"
+        },
+        {
+          "term": "返回码",
+          "definition": "命令或函数执行后的状态码；Shell 中 \\(0\\) 表示成功，非 \\(0\\) 表示失败，通常范围为 \\(0\\) 到 \\(255\\)。"
+        },
+        {
+          "term": "`$?`",
+          "definition": "保存上一条命令或函数调用的返回码。"
+        },
+        {
+          "term": "短路逻辑",
+          "definition": "`&&` 和 `||` 根据前一条命令的成功或失败决定是否执行后一条命令。"
+        },
+        {
+          "term": "整数运算",
+          "definition": "Shell 的 `let`、`$(( ))`、`expr` 在本节讨论中都按整数处理，除法会截掉小数部分。"
+        }
+      ]
+    },
+    {
+      "type": "open-question",
+      "content": "本节最后的 `expr $a / $b` 中，当 `a=10`、`b=3` 时，应该类比前面的整数除法继续判断：`expr` 会不会像 `let` 一样截掉小数部分？这道题留到下次确认。"
+    },
+    {
+      "type": "review-questions",
+      "items": [
+        {
+          "question": "下面代码输出什么？\n\n```bash\\nfor ((i=1; i<6; i=i+2))\\ndo\n  echo \"$i\"\\ndone\n```",
+          "hint": "注意第三段更新发生在循环体之后，更新后再回到条件判断。",
+          "answer": "输出：\n\n```text\n1\n3\n5\n```\n\n因为 `i` 依次为 \\(1\\)、\\(3\\)、\\(5\\) 时都满足 `i<6`；输出 \\(5\\) 后更新到 \\(7\\)，再判断失败退出。"
+        },
+        {
+          "question": "下面代码输出什么？\n\n```bash\\nfor ((i=1; i<=4; i++))\\ndo\n  if [ $i -eq 2 ]\n  then\n    continue\n  fi\n\n  if [ $i -eq 4 ]\n  then\n    break\n  fi\n\n  echo \"$i\"\\ndone\n\\necho \"done\"\n```",
+          "hint": "`continue` 跳过本轮，`break` 只跳出循环，不退出脚本。",
+          "answer": "输出：\n\n```text\n1\n3\\ndone\n```\n\n`i=2` 时 `continue`，跳过本轮；`i=4` 时 `break` 跳出循环；循环外的 `echo \"done\"` 仍会执行。"
+        },
+        {
+          "question": "下面代码输出什么？\n\n```bash\\ncheck() {\n  return 5\n}\n\\nif ! check\\nthen\n  echo \"bad\"\\nelse\n  echo \"ok\"\\nfi\n```",
+          "hint": "先判断 `check` 的返回码，再考虑 `!` 的反转。",
+          "answer": "输出：\n\n```text\\nbad\n```\n\n`check` 返回 \\(5\\)，本来是失败；`!` 把失败反转成成功，所以进入 `then` 分支。"
+        },
+        {
+          "question": "下面两段代码中，哪一段会改变变量 `i`？\n\n```bash\\necho \"$((i+1))\"\n```\n\n```bash\\ni=$((i+1))\n```",
+          "hint": "看有没有左边的 `i=`。",
+          "answer": "第二段会改变 `i`。\n\n第一段只是把 `i+1` 的结果临时替换给 `echo` 输出；第二段右边先计算，再通过左边的 `i=` 写回变量。"
+        },
+        {
+          "question": "下面代码输出什么？\n\n```bash\\na=7\\nb=2\\nlet \"c=a/b\"\\nlet \"r=a%b\"\\necho \"$c\"\\necho \"$r\"\n```",
+          "hint": "`let` 做整数除法，`%` 取余。",
+          "answer": "输出：\n\n```text\n3\n1\n```\n\n因为 \\(7 / 2\\) 的整数商是 \\(3\\)，余数是 \\(1\\)。"
+        }
+      ]
+    }
+  ]
+}

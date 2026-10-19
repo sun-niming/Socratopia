@@ -1,0 +1,45 @@
+{
+  "title": "vertical-align",
+  "definition": "CSS 的单元格垂直对齐属性，用来设置文本在单元格内部的垂直对齐方式。教材给出的取值是 top、center、bottom，分别表示居上、居中、居下。",
+  "key_points": [
+    "用于控制文本在单元格内部的垂直位置",
+    "top 表示居上",
+    "center 表示居中",
+    "bottom 表示居下"
+  ],
+  "examples": [
+    "vertical-align: top;",
+    "vertical-align: center;",
+    "vertical-align: bottom;"
+  ],
+  "misconceptions": [
+    "这里讲的是单元格内文本的垂直对齐，不是水平对齐。",
+    "center 在教材中表示居中。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "vertical-align 在表格中控制什么？",
+      "a": "控制文本在单元格内部的垂直对齐方式。"
+    },
+    {
+      "q": "top、center、bottom 分别表示什么？",
+      "a": "居上、居中、居下。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "表格基础",
+    "CSS基础"
+  ],
+  "source_pages": [
+    117,
+    120
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "172_vertical_align",
+  "_chunk_pages": [
+    117,
+    120
+  ]
+}

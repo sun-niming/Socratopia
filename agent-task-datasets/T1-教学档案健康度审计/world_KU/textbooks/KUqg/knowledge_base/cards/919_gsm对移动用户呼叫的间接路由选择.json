@@ -1,0 +1,46 @@
+{
+  "title": "GSM对移动用户呼叫的间接路由选择",
+  "definition": "GSM采用间接路由选择方法定位移动用户：呼叫先从通信者到达移动用户的归属MSC，再由归属MSC根据HLR提供的位置信息，将呼叫路由到被访网络的MSC，最后到达为移动用户提供服务的基站。",
+  "key_points": [
+    "移动用户的永久电话号码不对应某条固定电话线路或固定位置。",
+    "电话号码的前几位足以在全球范围内判别移动用户的归属网络。",
+    "呼叫首先经公共交换电话网（PSTN）到达移动用户归属网络中的归属MSC。",
+    "归属MSC查询HLR，以确定移动用户当前所在的位置。",
+    "如果HLR直接返回移动站点漫游号码（MSRN），归属MSC使用该号码通过网络到达被访网络的MSC。",
+    "如果HLR没有漫游号码而只返回VLR地址，归属MSC还需要查询VLR以获取漫游号码。",
+    "呼叫的完整路径可概括为：通信者 $\rightarrow$ PSTN $\rightarrow$ 归属MSC $\rightarrow$ 被访MSC $\rightarrow$ 服务移动用户的基站。"
+  ],
+  "examples": [
+    "呼叫定位过程：$$\\text{通信者}\\rightarrow\\text{PSTN}\\rightarrow\\text{归属MSC}\\rightarrow\\text{被访MSC}\\rightarrow\\text{基站}\\rightarrow\\text{移动用户}$$"
+  ],
+  "misconceptions": [
+    "移动用户的永久电话号码并不直接表示用户当前所在的电话线路或位置。",
+    "呼叫不是直接从通信者路由到移动用户当前所在的被访网络，而是先经过归属网络中的归属MSC。",
+    "漫游号码不是移动用户的永久电话号码，而是用户进入被访网络后临时分配的号码。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "GSM定位移动用户的呼叫经过哪些主要节点？",
+      "a": "呼叫先经PSTN到达归属MSC，归属MSC查询HLR并利用漫游号码将呼叫路由到被访MSC，随后由被访MSC将呼叫送到服务移动用户的基站。"
+    },
+    {
+      "q": "为什么GSM呼叫路由被称为间接路由选择？",
+      "a": "因为呼叫先路由到移动用户的归属网络，再从归属网络路由到移动用户当前所在的被访网络，而不是直接到达被访网络。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "GSM中的归属网络与被访网络"
+  ],
+  "source_pages": [
+    393,
+    394
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "919_gsm对移动用户呼叫的间接路由选择",
+  "_chunk_pages": [
+    393,
+    396
+  ]
+}

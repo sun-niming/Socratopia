@@ -1,0 +1,37 @@
+{
+  "title": "accept 要处理 EINTR",
+  "definition": "安装 `SIGCHLD` 后，子进程退出信号可能打断阻塞中的 `accept`，此时 `accept` 会返回 `-1`，并把 `errno` 置为 `EINTR`。这不是致命错误，服务器应继续循环 `accept`，而不是直接退出。",
+  "key_points": [
+    "信号可能打断阻塞中的 `accept`。",
+    "`errno == EINTR` 表示被信号中断，不是致命错误。",
+    "遇到 `EINTR` 应继续接受连接。"
+  ],
+  "examples": [
+    "`accept()` 返回 `-1` 且 `errno` 为 `EINTR` 时，执行 `continue`。"
+  ],
+  "misconceptions": [
+    "`accept` 返回 `-1` 不一定是严重故障。",
+    "收到信号后服务器不应直接退出。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么 accept 要处理 EINTR？",
+      "a": "因为安装 `SIGCHLD` 后，信号可能打断阻塞中的 `accept`，此时 `errno` 为 `EINTR`，应继续循环而不是退出。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "回收子进程"
+  ],
+  "source_pages": [
+    129,
+    132
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "221_accept_要处理_eintr",
+  "_chunk_pages": [
+    129,
+    132
+  ]
+}

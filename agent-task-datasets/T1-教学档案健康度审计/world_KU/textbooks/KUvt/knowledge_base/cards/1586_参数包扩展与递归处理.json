@@ -1,0 +1,46 @@
+{
+  "title": "参数包扩展与递归处理",
+  "definition": "参数包扩展是使用 `...` 将参数包中的每个元素展开，并对每个元素重复指定的表达式，再用逗号分隔。可变参数函数常通过“一个参数的递归函数模板 + 零参数的基例函数”逐个处理参数。",
+  "key_points": [
+    "在 `typename... Tn` 中，`...` 声明类型参数包；在 `Tn... args` 中，`...` 声明函数参数包。",
+    "在 `processValues(args...)` 中，`...` 是参数包扩展，会把 `args` 展开成逗号分隔的独立参数。",
+    "递归版本通常需要一个不接收参数的基例函数，以便在参数耗尽时停止递归。",
+    "函数模板 `template<typename T1, typename... Tn> void processValues(T1 arg1, Tn... args)` 每次先处理 `arg1`，再递归处理剩余参数，因此每次递归调用都会减少一个参数。",
+    "参数包扩展的基本形式是：将左侧表达式针对包中的每个元素重复，并用逗号连接。"
+  ],
+  "examples": [
+    "典型结构：`void processValues() {}`；`template<typename T1, typename... Tn> void processValues(T1 arg1, Tn... args) { handleValue(arg1); processValues(args...); }`。",
+    "调用 `processValues(1, 2.0, \"test\")` 时，可展开为依次处理 `1`、`2.0` 和 `\"test\"`，最后调用 `processValues()` 结束递归。"
+  ],
+  "misconceptions": [
+    "`args...` 不是把参数包作为一个整体传递，而是把其中的每个参数展开后分别传递。",
+    "递归函数模板没有自动的结束条件；必须提供能够接收零个参数的基例，否则递归无法正常终止。",
+    "参数包的展开顺序不能理解为随机顺序；该示例按参数列表顺序逐个处理。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`processValues(args...)` 中的 `...` 起什么作用？",
+      "a": "它执行参数包扩展，把 `args` 中的每个参数展开为独立参数，并用逗号分隔后调用 `processValues`。"
+    },
+    {
+      "q": "为什么递归处理参数包时需要零参数基例？",
+      "a": "每次递归都会减少一个参数，最终会调用无参数版本；无参数基例用于停止递归。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "可变参数模板与参数包",
+    "函数模板递归"
+  ],
+  "source_pages": [
+    770,
+    770
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1586_参数包扩展与递归处理",
+  "_chunk_pages": [
+    769,
+    772
+  ]
+}

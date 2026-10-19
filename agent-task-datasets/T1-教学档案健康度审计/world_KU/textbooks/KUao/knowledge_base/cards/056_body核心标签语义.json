@@ -1,0 +1,47 @@
+{
+  "title": "body核心标签语义",
+  "definition": "HTML5在body中常用的核心语义标签包括<header>、<nav>、<main>、<article>、<section>、<aside>、<footer>。它们分别对应页面的头部、导航、主内容、独立文章、章节、侧边内容和页脚，用来把页面内容按语义分区。",
+  "key_points": [
+    "<header>：头部，通常包含Logo、导航、搜索框。",
+    "<nav>：导航，专门放链接的地方。",
+    "<main>：主角，页面唯一的核心内容。",
+    "<article>：独立的文章，即使单独拆出来放到别的网站也能读通。",
+    "<section>：章节，把内容按逻辑分块，例如产品特性区、关于我们区。",
+    "<aside>：题外话，侧边栏、广告、友情链接等。",
+    "<footer>：脚板底，版权信息、备案号、底部链接等。"
+  ],
+  "examples": [
+    "<main>页面唯一的核心内容</main>",
+    "<section>产品特性区</section>",
+    "<aside>侧边栏内容</aside>"
+  ],
+  "misconceptions": [
+    "<section>不是随便用来包一块内容的普通容器，它强调内容的逻辑分组。",
+    "<article>强调内容的独立可读性，不只是“看起来像一段内容”。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "<main>元素的作用是什么？",
+      "a": "表示页面唯一的核心内容。"
+    },
+    {
+      "q": "<article>与<section>的区别在原文中是怎样表达的？",
+      "a": "<article>表示独立的文章，单独拆出来放到别的网站也能读通；<section>用于把内容按逻辑分块。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "HTML基础标签"
+  ],
+  "source_pages": [
+    41,
+    44
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "056_body核心标签语义",
+  "_chunk_pages": [
+    41,
+    44
+  ]
+}

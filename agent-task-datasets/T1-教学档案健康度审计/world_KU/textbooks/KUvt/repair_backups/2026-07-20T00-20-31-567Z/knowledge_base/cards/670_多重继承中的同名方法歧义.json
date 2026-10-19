@@ -1,0 +1,50 @@
+{
+  "title": "多重继承中的同名方法歧义",
+  "definition": "当一个类从多个基类继承，而这些基类提供同名方法时，派生类对象直接调用该方法可能产生歧义，编译器无法判断应调用哪个基类版本。例如，DogBird 同时继承 Dog 和 Bird，且二者都有 eat() 方法时，myConfusedAnimal.eat() 会编译错误。",
+  "key_points": [
+    "可以使用 dynamic_cast 显式转换为目标基类引用或指针，再调用该基类版本，例如 dynamic_cast<Dog&>(myConfusedAnimal).eat()。",
+    "可以使用限定名直接指定基类版本，例如 myConfusedAnimal.Dog::eat()。",
+    "派生类可以定义自己的同名方法，在方法内部通过 Dog::eat() 或 Bird::eat() 显式选择要调用的基类实现。",
+    "也可以在派生类中使用 using Dog::eat;，将指定基类的 eat() 引入派生类作用域，从而消除调用歧义。"
+  ],
+  "examples": [
+    "class DogBird : public Dog, public Bird { };\nDogBird myConfusedAnimal;\nmyConfusedAnimal.eat(); // 编译错误：调用 eat() 存在歧义",
+    "dynamic_cast<Dog&>(myConfusedAnimal).eat(); // 调用 Dog::eat()",
+    "myConfusedAnimal.Dog::eat(); // 调用 Dog::eat()",
+    "class DogBird : public Dog, public Bird {\npublic:\n    void eat() override {\n        Dog::eat();\n    }\n};",
+    "class DogBird : public Dog, public Bird {\npublic:\n    using Dog::eat;\n};"
+  ],
+  "misconceptions": [
+    "同名方法不会因为派生类对象同时属于多个基类就自动选择某一个版本，必须显式消除歧义。",
+    "dynamic_cast 不是唯一的解决方式，基类限定名和 using 声明也可以解决方法歧义。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "DogBird 同时继承 Dog 和 Bird，二者都有 eat() 方法时，直接执行 myConfusedAnimal.eat() 会发生什么？",
+      "a": "会产生编译错误，因为调用存在歧义，编译器无法判断应调用 Dog::eat() 还是 Bird::eat()。"
+    },
+    {
+      "q": "如何显式调用 Dog 版本的 eat()？",
+      "a": "可以写 dynamic_cast<Dog&>(myConfusedAnimal).eat();，也可以写 myConfusedAnimal.Dog::eat();。"
+    },
+    {
+      "q": "在 DogBird 中使用 using Dog::eat; 的作用是什么？",
+      "a": "将 Dog 基类的 eat() 显式引入 DogBird，从而指定应继承和使用 Dog 版本的 eat()。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "继承与基类成员访问"
+  ],
+  "source_pages": [
+    329,
+    329
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "670_多重继承中的同名方法歧义",
+  "_chunk_pages": [
+    329,
+    332
+  ]
+}

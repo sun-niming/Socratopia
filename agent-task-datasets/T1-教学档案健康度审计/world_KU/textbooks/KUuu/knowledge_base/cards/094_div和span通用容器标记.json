@@ -1,0 +1,44 @@
+{
+  "title": "div和span通用容器标记",
+  "definition": "div和span是不含有其他特定语义的HTML标记，主要用来充当容器，把其他网页元素放在其中。它们本身不会使文字的格式外观发生改变，通常配合CSS来设置容器内元素的表现。二者的区别在于：div是块级元素，span是行内元素。",
+  "key_points": [
+    "div和span都没有特定语义，只起容器作用。",
+    "容器中的内容默认不会因为放入div或span而改变外观。",
+    "它们常用于配合CSS进行样式控制。",
+    "div是块级元素，span是行内元素。"
+  ],
+  "examples": [
+    "<div>这里可以放文本、图片、列表等内容</div>",
+    "<span>这是一段行内文字</span>"
+  ],
+  "misconceptions": [
+    "把div和span理解为会自动改变内容样式的标记。",
+    "认为div和span的功能不同很大；实际上它们主要区别是块级与行内。",
+    "认为span可以像div一样默认独占一整行。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "div和span的主要作用是什么？",
+      "a": "作为通用容器标记，用来放置网页中的各种元素，通常配合CSS进行样式设置。"
+    },
+    {
+      "q": "div和span的区别是什么？",
+      "a": "div是块级元素，span是行内元素。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "HTML基础"
+  ],
+  "source_pages": [
+    61,
+    64
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "094_div和span通用容器标记",
+  "_chunk_pages": [
+    61,
+    64
+  ]
+}

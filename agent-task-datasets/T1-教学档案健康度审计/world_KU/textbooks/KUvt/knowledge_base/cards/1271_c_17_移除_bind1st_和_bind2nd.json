@@ -1,0 +1,43 @@
+{
+  "title": "C++17 移除 bind1st 和 bind2nd",
+  "definition": "早期 C++ 标准中的 bind1st() 和 bind2nd() 在 C++17 中被移除。需要实现类似的参数绑定功能时，可以使用 lambda 表达式或 std::bind 代替。",
+  "key_points": [
+    "bind1st() 和 bind2nd() 已不属于 C++17 标准。",
+    "现代 C++ 中可以使用 lambda 表达式实现固定参数绑定。",
+    "也可以使用 std::bind 与占位符实现参数绑定。"
+  ],
+  "examples": [
+    "替代方式一：使用 std::bind 将比较器的第二个参数绑定为固定值。",
+    "替代方式二：使用 lambda 表达式，例如 auto greaterEqualTo100 = [](int value) { return value >= 100; };"
+  ],
+  "misconceptions": [
+    "bind1st 和 bind2nd 不是 C++20 中推荐使用的标准工具。",
+    "它们被移除后，不能再依赖它们编写符合 C++17 及以后标准的代码。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "C++17 对 bind1st() 和 bind2nd() 做了什么处理？",
+      "a": "C++17 将它们从标准中移除。"
+    },
+    {
+      "q": "bind1st() 和 bind2nd() 可以用什么替代？",
+      "a": "可以使用 lambda 表达式或 std::bind。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "lambda 表达式",
+    "std::bind 绑定固定参数"
+  ],
+  "source_pages": [
+    616,
+    616
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1271_c_17_移除_bind1st_和_bind2nd",
+  "_chunk_pages": [
+    613,
+    616
+  ]
+}

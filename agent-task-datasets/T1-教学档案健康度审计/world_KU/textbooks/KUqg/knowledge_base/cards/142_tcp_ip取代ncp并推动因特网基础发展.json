@@ -1,0 +1,39 @@
+{
+  "title": "TCP/IP取代NCP并推动因特网基础发展",
+  "definition": "1983年1月1日，TCP/IP正式成为ARPAnet的新标准主机协议，取代NCP，所有主机被要求迁移到TCP/IP。20世纪80年代后期，TCP扩展了基于主机的拥塞控制；同时，DNS被研制出来，用于把人可读的因特网名字映射为32比特IP地址。",
+  "key_points": [
+    "从NCP迁移到TCP/IP是ARPAnet发展中的标志性事件。",
+    "TCP后来增加了基于主机的拥塞控制机制。",
+    "DNS的作用是将人可读的名字，例如 gaia.cs.umass.edu，映射到32比特IP地址。"
+  ],
+  "examples": [
+    "域名 gaia.cs.umass.edu 可通过DNS映射到相应的32比特IP地址。"
+  ],
+  "misconceptions": [
+    "DNS不是用来传输网页内容的协议；原文强调的是它负责名字到IP地址的映射。",
+    "TCP/IP取代NCP并不是只更换某一台主机上的软件，而是要求ARPAnet中的所有主机完成迁移。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "TCP/IP何时取代NCP成为ARPAnet的新标准主机协议？",
+      "a": "1983年1月1日。"
+    },
+    {
+      "q": "DNS在原文中承担什么功能？",
+      "a": "将人可读的因特网名字映射到它的32比特IP地址。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [],
+  "source_pages": [
+    61,
+    64
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "142_tcp_ip取代ncp并推动因特网基础发展",
+  "_chunk_pages": [
+    61,
+    64
+  ]
+}

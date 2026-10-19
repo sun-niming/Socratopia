@@ -1,0 +1,47 @@
+{
+  "title": "DNS查询与单对象Web访问时延",
+  "definition": "当URL对应的IP地址没有缓存在本地主机时，客户必须先依次访问若干DNS服务器，再与Web服务器建立TCP连接并发送HTTP请求。若访问了$n$个DNS服务器，其往返时间依次为$RTT_1,RTT_2,\\ldots,RTT_n$，本地主机与Web服务器之间的往返时间为$RTT_0$，并忽略对象传输时间，则总时延为DNS查询时延、TCP握手时延和HTTP请求—响应时延之和。",
+  "key_points": [
+    "DNS查询总时延为$\\sum_{i=1}^{n}RTT_i$。",
+    "建立TCP连接通常需要$1RTT_0$。",
+    "TCP连接建立后，发送HTTP请求并收到非常小的对象还需要$1RTT_0$。",
+    "忽略对象传输时间时，总时延为$$T=\\sum_{i=1}^{n}RTT_i+2RTT_0.$$"
+  ],
+  "examples": [
+    "若依次访问3个DNS服务器，则$$T=RTT_1+RTT_2+RTT_3+2RTT_0.$$",
+    "若$RTT_1=10\\text{ ms}$、$RTT_2=20\\text{ ms}$、$RTT_0=50\\text{ ms}$，则$$T=10+20+2\\times50=130\\text{ ms}.$$"
+  ],
+  "misconceptions": [
+    "不能只计算DNS查询时间；还要包括TCP握手和HTTP请求—响应各一个服务器RTT。",
+    "式中的$2RTT_0$不表示对象往返传输了两次，而是分别对应TCP连接建立和HTTP请求—响应。",
+    "该公式建立在对象传输时间可忽略的假设上；对象较大时还必须加入实际传输时间。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "访问$n$个DNS服务器后获取一个很小的Web对象，忽略传输时间时总时延是多少？",
+      "a": "$$T=\\sum_{i=1}^{n}RTT_i+2RTT_0.$$"
+    },
+    {
+      "q": "公式中的两个$RTT_0$分别对应什么过程？",
+      "a": "一个$RTT_0$用于建立TCP连接，另一个$RTT_0$用于发送HTTP请求并接收服务器响应。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "往返时间RTT",
+    "DNS查询",
+    "TCP三次握手",
+    "HTTP请求与响应"
+  ],
+  "source_pages": [
+    133,
+    136
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "335_dns查询与单对象web访问时延",
+  "_chunk_pages": [
+    133,
+    136
+  ]
+}

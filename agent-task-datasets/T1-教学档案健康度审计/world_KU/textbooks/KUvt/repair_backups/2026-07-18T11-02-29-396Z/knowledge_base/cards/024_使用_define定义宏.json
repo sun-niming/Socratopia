@@ -1,0 +1,42 @@
+{
+  "title": "使用#define定义宏",
+  "definition": "`#define`是预处理指令，用于按照指定标识符和值定义宏。教材第36页给出的抽象形式是`#define [id] [value]`，其中`[id]`表示宏标识符，`[value]`表示宏替换内容。",
+  "key_points": [
+    "基本形式是`#define [id] [value]`。",
+    "`[id]`是宏的标识符，`[value]`是与该标识符关联的替换内容。",
+    "宏定义发生在预处理阶段。",
+    "当前页面只给出了语法形式，没有提供具体宏示例或宏展开规则的完整说明。"
+  ],
+  "examples": [
+    "抽象写法：`#define [id] [value]`。",
+    "按该形式构造的示例：`#define SIZE 10`；其中`SIZE`是标识符，`10`是替换内容。该具体例子不是教材原文示例。"
+  ],
+  "misconceptions": [
+    "`#define`定义的是预处理宏，不是普通变量声明。",
+    "宏标识符和值之间不使用赋值运算符`=`。",
+    "不能把宏定义直接当作具有类型检查的常量声明。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "教材给出的#define语法形式是什么？",
+      "a": "`#define [id] [value]`。"
+    },
+    {
+      "q": "在`#define SIZE 10`中，哪一部分是宏标识符？",
+      "a": "`SIZE`是宏标识符，`10`是宏替换内容。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [],
+  "source_pages": [
+    33,
+    36
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "024_使用_define定义宏",
+  "_chunk_pages": [
+    33,
+    36
+  ]
+}

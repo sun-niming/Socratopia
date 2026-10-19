@@ -1,0 +1,55 @@
+{
+  "title": "通过eatenBy实现双分派",
+  "definition": "在动物捕食示例中，双分派可以通过 `eats` 和 `eatenBy` 两组虚函数实现。捕食者的 `eats(const Animal&)` 不直接判断被捕食者类型，而是调用 `prey.eatenBy(*this)`。第一次虚调用依据捕食者的运行时类型选择 `eats`，第二次虚调用依据被捕食者的运行时类型选择 `eatenBy`；同时，`*this` 的静态类型在每个派生类的 `eats` 实现中是具体派生类类型，从而能够选择正确的 `eatenBy` 重载。",
+  "key_points": [
+    "基类声明一个接收 `Animal&` 的纯虚 `eats`，以及针对每种具体动物类型的纯虚 `eatenBy` 重载。",
+    "示意基类接口：`virtual bool eats(const Animal& prey) const = 0;`、`virtual bool eatenBy(const Bear&) const = 0;`、`virtual bool eatenBy(const Fish&) const = 0;`、`virtual bool eatenBy(const TRex&) const = 0;`。",
+    "每个派生类的 `eats` 实现采用相同形式：`return prey.eatenBy(*this);`。",
+    "第一次多态调用选择实际捕食者的 `eats` 实现；第二次多态调用选择实际被捕食者的 `eatenBy` 实现。",
+    "前置声明是必要的，因为 `Animal` 基类接口使用了派生类引用类型。",
+    "不能把 `eats` 的统一实现上移到 `Animal` 基类中，否则其中的 `*this` 静态类型是 `Animal`，无法确定应选择哪个 `eatenBy` 重载。"
+  ],
+  "examples": [
+    "核心实现：`bool Bear::eats(const Animal& prey) const { return prey.eatenBy(*this); }`。",
+    "接口结构：`class Animal { public: virtual bool eats(const Animal&) const = 0; virtual bool eatenBy(const Bear&) const = 0; virtual bool eatenBy(const Fish&) const = 0; virtual bool eatenBy(const TRex&) const = 0; };`。",
+    "前置声明示例：`class Fish; class Bear; class TRex; class Animal { /* 使用上述类型的引用 */ };`。"
+  ],
+  "misconceptions": [
+    "误以为双分派只需要一次虚函数调用；它的关键是连续发生两次多态分派。",
+    "误以为 `eatenBy` 应只接收 `Animal&`；若如此，第二次调用仍无法根据具体捕食者类型区分行为。",
+    "误以为可以把 `return prey.eatenBy(*this);` 直接写进基类的统一实现；在基类中 `*this` 的静态类型是 `Animal`，不能正确选择具体重载。",
+    "误以为前置声明只是可选的代码风格；当基类接口引用尚未定义的派生类类型时，前置声明是必要的。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "双分派中 `return prey.eatenBy(*this);` 为什么能依据两个对象的类型分派？",
+      "a": "外层调用先依据捕食者对象的运行时类型选择具体的 `eats` 实现；随后对 `prey` 调用虚函数 `eatenBy`，依据被捕食者的运行时类型选择其实现，而 `*this` 在具体 `eats` 中具有具体派生类的静态类型，从而选择正确的重载。"
+    },
+    {
+      "q": "为什么不能把所有派生类的 `eats` 实现统一上移到 `Animal` 基类？",
+      "a": "因为基类实现中的 `*this` 静态类型是 `Animal`，编译器无法据此选择 `eatenBy(const Bear&)`、`eatenBy(const Fish&)` 等具体重载。"
+    },
+    {
+      "q": "双分派需要在基类中为每种派生类声明什么？",
+      "a": "需要为每种派生类声明一个对应的 `eatenBy(const DerivedType&)` 纯虚重载，并由各派生类实现这些行为。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "虚函数与运行时多态",
+    "函数重载",
+    "前置声明",
+    "双分派基本概念"
+  ],
+  "source_pages": [
+    935,
+    936
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1934_通过eatenby实现双分派",
+  "_chunk_pages": [
+    933,
+    936
+  ]
+}

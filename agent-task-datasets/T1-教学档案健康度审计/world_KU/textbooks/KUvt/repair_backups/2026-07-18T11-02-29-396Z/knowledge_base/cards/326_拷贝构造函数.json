@@ -1,0 +1,46 @@
+{
+  "title": "拷贝构造函数",
+  "definition": "拷贝构造函数是用于根据同一个类的另一个对象创建新对象的特殊构造函数。原文中的 `SpreadsheetCell` 拷贝构造函数声明为 `SpreadsheetCell(const SpreadsheetCell& src);`，定义中使用源对象的成员初始化新对象的对应成员。",
+  "key_points": [
+    "典型的拷贝构造函数参数类型是本类对象的常量引用：`const 类名&`。",
+    "拷贝构造函数的声明形式为 `SpreadsheetCell(const SpreadsheetCell& src);`。",
+    "原文定义通过初始化列表复制成员：`SpreadsheetCell::SpreadsheetCell(const SpreadsheetCell& src) : m_value{src.m_value} {}`。",
+    "使用常量引用可以避免复制源对象，并允许从常量对象进行拷贝。"
+  ],
+  "examples": [
+    "声明：`SpreadsheetCell(const SpreadsheetCell& src);`",
+    "定义：`SpreadsheetCell::SpreadsheetCell(const SpreadsheetCell& src) : m_value{src.m_value} {}`",
+    "上述定义表示用源对象 `src` 的 `m_value` 初始化新对象的 `m_value`。"
+  ],
+  "misconceptions": [
+    "拷贝构造函数不是普通的返回值为类类型的函数，而是构造函数，因此没有返回类型。",
+    "参数通常应使用引用；写成按值传递本类对象会引发构造参数本身的拷贝问题。",
+    "拷贝构造函数的作用是创建新对象，不是把一个已经存在的对象通过普通赋值运算符重新赋值。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "原文中 `SpreadsheetCell` 的拷贝构造函数声明是什么？",
+      "a": "`SpreadsheetCell(const SpreadsheetCell& src);`"
+    },
+    {
+      "q": "如何用源对象的 `m_value` 初始化新对象的 `m_value`？",
+      "a": "在拷贝构造函数初始化列表中写 `m_value{src.m_value}`。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "构造函数初始化列表",
+    "C++引用与常量引用"
+  ],
+  "source_pages": [
+    241,
+    244
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "326_拷贝构造函数",
+  "_chunk_pages": [
+    241,
+    244
+  ]
+}

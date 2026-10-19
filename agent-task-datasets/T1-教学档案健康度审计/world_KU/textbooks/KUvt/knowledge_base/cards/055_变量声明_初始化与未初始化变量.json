@@ -1,0 +1,45 @@
+{
+  "title": "变量声明、初始化与未初始化变量",
+  "definition": "C++允许在代码中的多个位置声明变量；变量通常可以在其声明所在行之后使用。声明变量时可以同时提供初始值，也可以不提供。未提供初始值的局部变量不会由语言自动赋予有意义的值，读取它可能得到不确定结果并导致程序错误，因此应尽量在声明时初始化。",
+  "key_points": [
+    "变量声明需要指定变量类型和名称，例如 int uninitializedInt;。",
+    "可以使用花括号在声明时初始化变量，例如 int initializedInt { 7 };。",
+    "未初始化变量的内容取决于相应存储区域和运行状态，不能假定它具有某个确定值。",
+    "教材将未初始化变量视为许多 bug 的来源。"
+  ],
+  "examples": [
+    "int uninitializedInt;",
+    "int initializedInt { 7 };",
+    "std::cout << std::format(\"{} was assigned an initial value\", initializedInt) << std::endl;"
+  ],
+  "misconceptions": [
+    "声明变量不等于为变量提供了有效的初始值。",
+    "未初始化变量的值不是可靠的随机数，程序不能依赖它；应将其视为不确定值。",
+    "变量不必全部在函数开头声明，但必须在使用前完成声明。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何声明一个值为 7 的 int 变量？",
+      "a": "使用花括号初始化：int initializedInt { 7 };。"
+    },
+    {
+      "q": "为什么不应读取未初始化变量？",
+      "a": "因为它没有可靠的确定值，读取结果不可依赖，并可能成为程序错误的来源。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++基本数据类型"
+  ],
+  "source_pages": [
+    40,
+    40
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 局部变量默认初始化 未初始化 int 读取不确定值 标准",
+  "concept_id": "055_变量声明_初始化与未初始化变量",
+  "_chunk_pages": [
+    37,
+    40
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "title": "reinterpret_cast进行低层次指针和引用转换",
+  "definition": "`reinterpret_cast` 用于低层次地重新解释指针或引用的类型。原文示例中，两个无关类 `X` 和 `Y` 之间的指针、引用转换不能使用 `static_cast`，需要使用 `reinterpret_cast`；从对象指针转换为 `void*` 不需要显式转换，但从 `void*` 转回对象指针需要 `reinterpret_cast`。这种转换只改变类型解释方式，不会把一个对象真正转换成另一个无关类对象。",
+  "key_points": [
+    "无关类 `X` 和 `Y` 之间的指针转换示例为 `xp = reinterpret_cast<X*>(yp);`。",
+    "对象指针可以隐式转换为 `void*`，例如 `void* p { xp };`。",
+    "从 `void*` 转回对象指针时，原文使用 `xp = reinterpret_cast<X*>(p);`。",
+    "无关类之间的引用转换也使用 `reinterpret_cast`，例如 `reinterpret_cast<Y&>(x)`。",
+    "`reinterpret_cast` 不执行对象内容或对象布局的语义转换，错误地解引用转换后的指针或引用可能不安全。"
+  ],
+  "examples": [
+    "无关类指针转换：\n```cpp\nclass X {};\nclass Y {};\n\nX x;\nY y;\nX* xp { &x };\nY* yp { &y };\n\nxp = reinterpret_cast<X*>(yp);\n```",
+    "对象指针与 `void*`：\n```cpp\nvoid* p { xp };                 // 从对象指针到 void*，不需要显式转换\nxp = reinterpret_cast<X*>(p);  // 从 void* 转回 X*，需要 reinterpret_cast\n```",
+    "无关类引用转换：\n```cpp\nX& xr { x };\nY& yr { reinterpret_cast<Y&>(xr) };\n```"
+  ],
+  "misconceptions": [
+    "`reinterpret_cast<X*>(yp)` 不会把 `Y` 对象变成真正的 `X` 对象，只是把指针按 `X*` 类型重新解释。",
+    "`void*` 可以保存对象地址，但从 `void*` 转回具体对象指针时仍需确保原地址对应的对象类型正确。",
+    "对于具有继承关系的类型转换，不能因为 `reinterpret_cast` 能够写出，就认为它比合适的继承转换更安全。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么原文使用 `reinterpret_cast<X*>(yp)`，而不是 `static_cast<X*>(yp)`？",
+      "a": "因为 `X` 和 `Y` 是无关类，二者之间的指针转换不能使用 `static_cast`，需要使用 `reinterpret_cast`。"
+    },
+    {
+      "q": "从 `X*` 到 `void*` 是否需要显式转换？",
+      "a": "原文示例中不需要，可以直接写 `void* p { xp };`。"
+    },
+    {
+      "q": "从 `void*` 转回 `X*` 应使用什么转换？",
+      "a": "使用 `reinterpret_cast<X*>(p)`。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "指针与引用",
+    "void指针",
+    "static_cast"
+  ],
+  "source_pages": [
+    345,
+    348
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "450_reinterpret_cast进行低层次指针和引用转换",
+  "_chunk_pages": [
+    345,
+    348
+  ]
+}

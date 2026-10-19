@@ -1,0 +1,161 @@
+{
+  "textbookId": "KUuu",
+  "updatedAt": "2026-06-27T05:41:23.172Z",
+  "cards": [
+    {
+      "id": "fc_1782538798612_000_7092f351f1ea",
+      "question": "如果你要在 Web Storage 里保存一个对象，并且之后还能恢复成对象，最合理的流程是什么？",
+      "choices": [
+        "直接把对象传给 setItem()，浏览器会自动转成对象",
+        "只要用 getItem() 读出来，字符串会自动恢复成原对象",
+        "先 JSON.parse() 再 setItem()，这样能减少转换次数",
+        "存之前先 JSON.stringify()，取出来后再 JSON.parse()"
+      ],
+      "correctIndex": 3,
+      "explanation": "Web Storage 只能直接存字符串，所以对象或数组要先用 `JSON.stringify()` 转成字符串存进去。读取后如果要恢复成对象，再用 `JSON.parse()` 还原。",
+      "source": {
+        "textbook": "Web前端开发合集",
+        "chapter": "幻灯片 152: 7.12.1 localStorage",
+        "textbookSlug": "KUuu"
+      },
+      "created": "2026-06-27T05:39:58.612Z",
+      "conversationId": "avErLlWOM-nFIgkBT7HWx",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-06-27T05:40:40.013Z",
+          "chosen": 3,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-06-27T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1782538798613_001_e67d5de469dc",
+      "question": "关于 localStorage 和 sessionStorage 的区别，下面哪一项最准确地抓住了核心？",
+      "choices": [
+        "最关键的区别是保存时长：localStorage 更长期，sessionStorage 只在当前会话有效",
+        "最关键的区别是 sessionStorage 的容量更大，所以更适合长期保存",
+        "最关键的区别是 localStorage 只能在同源页面共享，sessionStorage 不能共享给任何页面",
+        "最关键的区别是 localStorage 能存对象，sessionStorage 不能存对象"
+      ],
+      "correctIndex": 0,
+      "explanation": "`localStorage` 和 `sessionStorage` 都是按键值对保存字符串，但最关键的区别在保存时长：前者更偏长期保存，后者只在当前会话内有效，关闭标签页或窗口后通常就会清除。",
+      "source": {
+        "textbook": "Web前端开发合集",
+        "chapter": "幻灯片 152: 7.12.1 localStorage",
+        "textbookSlug": "KUuu"
+      },
+      "created": "2026-06-27T05:39:58.613Z",
+      "conversationId": "avErLlWOM-nFIgkBT7HWx",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-06-27T05:40:50.941Z",
+          "chosen": 0,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-06-27T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1782538798613_002_36b54a5a6804",
+      "question": "如果执行 `localStorage.getItem('theme')` 时，`theme` 这个键从未被存过，返回值最可能是什么？",
+      "choices": [
+        "null",
+        "空字符串 ''",
+        "undefined",
+        "0"
+      ],
+      "correctIndex": 0,
+      "explanation": "`getItem()` 读取不到对应键时，不会报错，而是返回 `null`。这是 Web Storage 里一个容易和 `undefined` 混淆的边界。",
+      "source": {
+        "textbook": "Web前端开发合集",
+        "chapter": "幻灯片 152: 7.12.1 localStorage",
+        "textbookSlug": "KUuu"
+      },
+      "created": "2026-06-27T05:39:58.613Z",
+      "conversationId": "avErLlWOM-nFIgkBT7HWx",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-06-27T05:40:57.726Z",
+          "chosen": 0,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-06-27T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1782538798613_003_1cc59fada8cd",
+      "question": "下面哪一种说法最能准确区分 `removeItem()` 和 `clear()`？",
+      "choices": [
+        "removeItem() 只能删 sessionStorage，clear() 只能删 localStorage",
+        "removeItem() 和 clear() 的效果一样，只是写法不同",
+        "removeItem() 清空全部数据，clear() 只删除一个指定键",
+        "removeItem() 删除某一个指定键，clear() 清空全部数据"
+      ],
+      "correctIndex": 3,
+      "explanation": "`removeItem()` 只删除指定键对应的一项数据，而 `clear()` 会把整个 Web Storage 里的所有内容一次清空。两者的粒度不同。",
+      "source": {
+        "textbook": "Web前端开发合集",
+        "chapter": "幻灯片 152: 7.12.1 localStorage",
+        "textbookSlug": "KUuu"
+      },
+      "created": "2026-06-27T05:39:58.613Z",
+      "conversationId": "avErLlWOM-nFIgkBT7HWx",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-06-27T05:41:06.282Z",
+          "chosen": 3,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-06-27T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1782538798613_004_d75f998d4b5f",
+      "question": "你在一个页面里把数据存进了 sessionStorage。关于它是否会被其他页面拿到，下面哪种理解最符合教材中的边界？",
+      "choices": [
+        "只要用 localStorage 同步过一次，sessionStorage 就会变成共享的",
+        "只要页面地址相同，sessionStorage 就一定会永久保留",
+        "通常不会和其他标签页或窗口共享数据",
+        "只要是同源页面，都会自动共享 sessionStorage"
+      ],
+      "correctIndex": 2,
+      "explanation": "`sessionStorage` 是按会话隔离的，通常不同标签页或窗口之间不共享数据。它更像当前页面这次打开时临时使用的存储空间，而不是跨页面共享的仓库。",
+      "source": {
+        "textbook": "Web前端开发合集",
+        "chapter": "幻灯片 152: 7.12.1 localStorage",
+        "textbookSlug": "KUuu"
+      },
+      "created": "2026-06-27T05:39:58.613Z",
+      "conversationId": "avErLlWOM-nFIgkBT7HWx",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-06-27T05:41:23.171Z",
+          "chosen": 2,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-06-27T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    }
+  ]
+}

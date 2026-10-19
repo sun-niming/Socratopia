@@ -1,0 +1,42 @@
+{
+  "title": "使用std::get按索引访问tuple元素",
+  "definition": "可以使用`std::get<I>(tuple对象)`从std::tuple中获取索引为I的元素。索引从0开始，因此`std::get<0>`访问第一个元素，`std::get<1>`访问第二个元素，以此类推。索引I必须在编译期已知，返回值类型是该位置元素的实际类型。",
+  "key_points": [
+    "tuple索引从0开始。",
+    "模板参数I必须是编译期常量，不能直接使用运行时循环变量作为索引。",
+    "`std::get<I>`返回对应位置元素，可用于读取或在元素可修改时修改元素。"
+  ],
+  "examples": [
+    "`using MyTuple = std::tuple<int, std::string, bool>; MyTuple t1 { 16, \"Test\", true };`",
+    "`std::cout << std::get<0>(t1);`访问整数16，`std::cout << std::get<1>(t1);`访问字符串`\"Test\"`，`std::cout << std::get<2>(t1);`访问布尔值。"
+  ],
+  "misconceptions": [
+    "不能把运行时变化的整数变量直接作为`std::get<i>`中的索引，因为tuple索引必须在编译期确定。",
+    "`std::get<1>`访问的是第二个元素，而不是第一个元素。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何访问tuple的第三个元素？",
+      "a": "使用`std::get<2>(tuple对象)`，因为索引从0开始。"
+    },
+    {
+      "q": "为什么不能用普通运行时循环变量i遍历tuple并调用`std::get<i>`？",
+      "a": "因为`std::get`的索引模板参数必须在编译期已知，而普通循环变量通常在运行时变化。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "std::pair与std::tuple的基本特征"
+  ],
+  "source_pages": [
+    709,
+    710
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1475_使用std_get按索引访问tuple元素",
+  "_chunk_pages": [
+    709,
+    712
+  ]
+}

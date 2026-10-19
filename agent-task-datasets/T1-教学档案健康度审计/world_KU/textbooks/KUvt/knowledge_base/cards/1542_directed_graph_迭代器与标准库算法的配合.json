@@ -1,0 +1,50 @@
+{
+  "title": "directed_graph 迭代器与标准库算法的配合",
+  "definition": "directed_graph 支持迭代器后，可以像标准库容器一样使用范围式 for 循环、成员迭代器、非成员函数 `std::begin()`/`std::end()`，也可以把它的迭代器传给标准库算法，例如 `std::find()` 和 `std::count_if()`。由于 directed_graph 只提供 const 迭代器，因此只能直接支持不修改元素的标准库算法。",
+  "key_points": [
+    "可以使用 `graph.cbegin()` 和 `graph.cend()` 遍历。",
+    "可以使用非成员函数 `std::cbegin(graph)` 和 `std::cend(graph)` 遍历。",
+    "支持范围式 for 循环：`for (auto& node : graph)`。",
+    "可以用 `std::find(std::begin(graph), std::end(graph), value)` 查找节点。",
+    "可以用 `std::count_if()` 统计满足条件的节点。",
+    "由于只有 const 迭代器，修改元素的算法不能按普通可写容器的方式使用。",
+    "原文指出，常见的 remove-erase 写法不能编译：`graph.erase(std::remove_if(std::begin(graph), std::end(graph), predicate), std::end(graph));`。"
+  ],
+  "examples": [
+    "使用 std::find 查找节点：`auto result { std::find(std::begin(graph), std::end(graph), 22) }; if (result != std::end(graph)) { std::cout << \"Node 22 found.\" << std::endl; }`",
+    "统计值大于 22 的节点：`auto count { std::count_if(std::begin(graph), std::end(graph), [](const auto& node) { return node > 22; }) };`",
+    "范围式 for 循环：`for (auto& node : graph) { std::cout << node << std::endl; }`"
+  ],
+  "misconceptions": [
+    "支持迭代器并不意味着所有标准库算法都能使用；算法还必须符合迭代器的读写能力。",
+    "`std::find()` 只查找元素，不会修改 directed_graph。",
+    "由于 directed_graph 只有 const 迭代器，不能把它当作具有可写元素迭代器的容器使用。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么 std::find() 可以用于 directed_graph？",
+      "a": "因为 directed_graph 提供了可供 `std::begin()` 和 `std::end()` 使用的迭代器，std::find() 只需要读取元素。"
+    },
+    {
+      "q": "为什么 remove-erase 惯用法不能用于这里？",
+      "a": "因为 directed_graph 只支持 const 迭代器，而 `std::remove_if()` 需要通过迭代器移动或覆盖元素，不能修改 const 元素。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "标准库算法",
+    "const_iterator",
+    "范围式 for 循环"
+  ],
+  "source_pages": [
+    743,
+    744
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1542_directed_graph_迭代器与标准库算法的配合",
+  "_chunk_pages": [
+    741,
+    744
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "title": "200 OK 返回 JSON",
+  "definition": "服务器也可以用 HTTP/1.1 200 OK 返回 JSON 数据，响应头应使用 `Content-Type: application/json; charset=utf-8`。原文指出这在项目中是可选的，用于说明未来可以扩展成 API。",
+  "key_points": [
+    "JSON 的正确 MIME 类型是 `application/json; charset=utf-8`。",
+    "这类接口在原文中是可选的，例如 `/api/status`。",
+    "它的意义之一是说明项目后续可以扩展成 API。"
+  ],
+  "examples": [
+    "HTTP/1.1 200 OK\nContent-Type: application/json; charset=utf-8\nContent-Length: 32\nConnection: close\n\n{\"status\":\"ok\",\"uptime\":12}",
+    "可选接口：`/api/status`。"
+  ],
+  "misconceptions": [
+    "以为项目五天内必须实现 JSON 接口。",
+    "把 JSON 的 `Content-Type` 写成 HTML 或 CSS 的类型。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "JSON 响应应使用什么 `Content-Type`？",
+      "a": "`application/json; charset=utf-8`。"
+    },
+    {
+      "q": "原文中 JSON 响应的项目定位是什么？",
+      "a": "它是可选的，主要用来说明后续可以扩展成 API。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "HTTP 响应基础"
+  ],
+  "source_pages": [
+    117,
+    120
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "196_200_ok_返回_json",
+  "_chunk_pages": [
+    117,
+    120
+  ]
+}

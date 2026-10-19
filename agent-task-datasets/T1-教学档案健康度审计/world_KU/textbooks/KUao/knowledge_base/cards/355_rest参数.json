@@ -1,0 +1,43 @@
+{
+  "title": "rest参数",
+  "definition": "rest参数用于接收任意个实参，多余的实参会以数组的形式传递给 rest。",
+  "key_points": [
+    "函数可以接收任意个实参。",
+    "多余的实参会以数组形式收集到 rest 中。",
+    "rest 参数在函数参数列表中用 ... 分隔。",
+    "教材给出的形式是：function 函数名(参数列表, …rest){……}"
+  ],
+  "examples": [
+    "function 函数名(参数列表, …rest){……}"
+  ],
+  "misconceptions": [
+    "rest 参数只能接收一个实参。",
+    "rest 参数会把参数传成类数组对象而不是数组。",
+    "rest 参数和普通形参没有区别。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "rest 参数的作用是什么？",
+      "a": "接收任意个实参，并把多余的实参以数组的形式传递给 rest。"
+    },
+    {
+      "q": "rest 参数在函数参数列表中如何表示？",
+      "a": "用 ... 分隔，写作参数列表, …rest。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "形参、实参与arguments对象"
+  ],
+  "source_pages": [
+    253,
+    256
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "355_rest参数",
+  "_chunk_pages": [
+    253,
+    256
+  ]
+}

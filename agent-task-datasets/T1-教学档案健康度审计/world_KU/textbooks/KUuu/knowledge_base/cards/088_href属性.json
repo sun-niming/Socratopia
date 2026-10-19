@@ -1,0 +1,40 @@
+{
+  "title": "href属性",
+  "definition": "href 属性用于规定超链接的目的地，也就是链接要跳转到的目标地址。对于 `<a>` 标签来说，只有写了 `href`，它才表示一个真正的链接；如果不写 `href`，`<a>` 只是链接的占位符。",
+  "key_points": [
+    "`href` 用来指定链接目标地址。",
+    "`<a>` 标签不写 `href` 时，不是链接，只是占位符。"
+  ],
+  "examples": [
+    "<a href=\"http://www.w3school.com.cn\">Visit W3School</a>"
+  ],
+  "misconceptions": [
+    "只要使用了 `<a>` 标签，它就一定是超链接。",
+    "`href` 只是可有可无的装饰属性，没有实际作用。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "href 属性的作用是什么？",
+      "a": "规定链接的目的地（目标地址）。"
+    },
+    {
+      "q": "如果 `<a>` 标签没有 `href` 属性，会怎样？",
+      "a": "它不是链接，而只是链接的占位符。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "HTML超链接基础"
+  ],
+  "source_pages": [
+    53,
+    56
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "088_href属性",
+  "_chunk_pages": [
+    53,
+    56
+  ]
+}

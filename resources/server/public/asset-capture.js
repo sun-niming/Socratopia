@@ -160,6 +160,27 @@
   window.__SOCRATOPIA_ASSET_META__ = api.meta;
   window.__SOCRATOPIA_ASSET_META_LABEL__ = api.metaLabel;
 
+  // A figure whose source carries no intrinsic dimensions — an SVG with only a
+  // `viewBox`, which is exactly what the figure guide tells the tutor to draw —
+  // renders 0x0 inside the shrink-to-fit badge wrapper: Blink resolves the img's
+  // `max-width:100%` against a wrapper width that is itself derived from the img, so
+  // the circle collapses to zero.  The badge (absolutely positioned, `right:6`) then
+  // escapes to the left of the bubble and wraps one character per line ("AI/自/绘").
+  // Stamping the decoded natural size onto the element gives it a definite size, so
+  // the wrapper and the badge follow the picture again.  Called from the renderer's
+  // img `onLoad` and from the hydration sweep below.
+  api.fitImage = function (img) {
+    try {
+      if (!img || !img.setAttribute || !img.naturalWidth || !img.naturalHeight) return false;
+      var rect = typeof img.getBoundingClientRect === "function" ? img.getBoundingClientRect() : null;
+      if (rect && rect.width > 0) return false;
+      img.setAttribute("width", String(img.naturalWidth));
+      img.setAttribute("height", String(img.naturalHeight));
+      return true;
+    } catch (_) { return false; }
+  };
+  window.__SOCRATOPIA_ASSET_FIT__ = api.fitImage;
+
   function toast(message, tone) {
     var el = document.createElement("div");
     el.setAttribute("data-socratopia-toast", "1");
@@ -334,6 +355,11 @@
       if (img.setAttribute) img.setAttribute("data-socratopia-asset-hydrated", "1");
       blobUrl(assetUrl).then(function (objectUrl) {
         if (objectUrl) {
+          // Same self-heal as the renderer's onLoad: an intrinsic-size-less SVG would
+          // otherwise come back as a 0x0 <img> the moment the blob lands.
+          if (typeof img.addEventListener === "function") {
+            img.addEventListener("load", function () { api.fitImage(img); });
+          }
           img.src = objectUrl;
           hydrateDebug.ok += 1;
         } else {
@@ -376,6 +402,8 @@
       var img = document.createElement("img");
       img.style.cssText = "max-width:96vw;max-height:92vh;border-radius:8px;box-shadow:0 12px 48px rgba(0,0,0,.5);background:#fff";
       lightbox.appendChild(img);
+      // An intrinsic-size-less SVG opens as a 0x0 flex item without this.
+      img.addEventListener("load", function () { api.fitImage(img); });
       lightbox.addEventListener("click", function () { lightbox.style.display = "none"; });
       (document.body || document.documentElement).appendChild(lightbox);
       var onKey = function (event) {

@@ -1,0 +1,41 @@
+{
+  "title": "document.getElementById",
+  "definition": "document.getElementById(id) 是通过元素的 id 属性获取单个元素节点的方法。教材说明，id 在文档中应该是唯一的；如果没有找到对应元素，则返回 null。",
+  "key_points": [
+    "通过 id 属性查找元素，只能返回一个元素节点。",
+    "id 应该在文档中唯一。",
+    "如果未找到匹配元素，返回 null。"
+  ],
+  "examples": [
+    "let mainTitle = document.getElementById('main-title');"
+  ],
+  "misconceptions": [
+    "它会返回所有同名 id 的元素；实际上 id 应该唯一，而且该方法只返回单个元素。",
+    "找不到元素时会抛出错误；教材说明返回 null。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "document.getElementById('main-title') 找不到元素时返回什么？",
+      "a": "返回 null。"
+    },
+    {
+      "q": "getElementById 的作用是什么？",
+      "a": "通过元素的 id 属性获取单个元素节点。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "DOM树的生成"
+  ],
+  "source_pages": [
+    345,
+    348
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "465_document_getelementbyid",
+  "_chunk_pages": [
+    345,
+    348
+  ]
+}

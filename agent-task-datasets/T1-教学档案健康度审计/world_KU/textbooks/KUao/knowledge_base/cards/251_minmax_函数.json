@@ -1,0 +1,47 @@
+{
+  "title": "minmax() 函数",
+  "definition": "minmax() 函数用于在 CSS 网格轨道定义中定义一个长度范围，写法为 minmax(min, max)，其中 min 表示轨道的最小尺寸，max 表示轨道的最大尺寸。原文示例 minmax(100px, auto) 用于创建一个至少 100px 高、但可以自动伸展的行。",
+  "key_points": [
+    "minmax() 用于定义一个长度范围。",
+    "语法形式为 minmax(min, max)。",
+    "minmax(100px, auto) 表示轨道最小为 100px，最大由 auto 决定。"
+  ],
+  "examples": [
+    ".container {\n  /* 创建一个至少 100px 高，但可以自动伸展的行 */\n  grid-template-rows: minmax(100px, auto);\n}"
+  ],
+  "misconceptions": [
+    "不要把 minmax(100px, auto) 理解为固定 100px；原文说明它创建的是至少 100px 高、可以自动伸展的行。",
+    "不要忽略 minmax() 中两个参数的含义；原文给出的形式是 minmax(min, max)。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "minmax() 函数的作用是什么？",
+      "a": "用于定义一个长度范围。"
+    },
+    {
+      "q": "minmax() 的基本写法是什么？",
+      "a": "minmax(min, max)。"
+    },
+    {
+      "q": "grid-template-rows: minmax(100px, auto); 在原文中表示什么？",
+      "a": "创建一个至少 100px 高，但可以自动伸展的行。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "CSS 网格布局",
+    "auto 轨道尺寸",
+    "grid-template-columns 与 grid-template-rows"
+  ],
+  "source_pages": [
+    173,
+    175
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "251_minmax_函数",
+  "_chunk_pages": [
+    173,
+    176
+  ]
+}

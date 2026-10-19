@@ -1,0 +1,47 @@
+{
+  "title": "send_error 生成错误响应",
+  "definition": "`send_error` 负责构造并发送一个合法的 HTTP 错误响应。它先拼出 HTML 格式的错误页正文，再拼出包含状态行、`Content-Type`、`Content-Length` 和 `Connection: close` 的响应头，然后分别通过 `send_all` 发送头和正文；如果传入了 `result`，还会把状态码和正文长度写回结果结构。",
+  "key_points": [
+    "错误页正文使用 HTML，标题和正文都包含状态码与原因短语。",
+    "响应头必须包含状态行，例如 `HTTP/1.1 %d %s`。",
+    "必须写 `Content-Type: text/html; charset=utf-8`。",
+    "必须写 `Content-Length`，长度取正文长度。",
+    "必须写 `Connection: close`。",
+    "头和正文都通过 `send_all` 发送。",
+    "如果 `result` 非空，写入 `result->status` 和 `result->bytes`。"
+  ],
+  "examples": [
+    "响应头结构示例：`HTTP/1.1 404 Not Found\\r\\nContent-Type: text/html; charset=utf-8\\r\\nContent-Length: ...\\r\\nConnection: close\\r\\n\\r\\n`"
+  ],
+  "misconceptions": [
+    "以为错误页可以只发正文，不需要 HTTP 状态行。",
+    "以为错误响应不用 `Content-Length`。",
+    "以为错误响应不需要 `Content-Type`。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`send_error` 为什么要先构造 HTML 再发出？",
+      "a": "因为它要返回一个合法、可显示的 HTTP 错误页面，而不是只发一段纯文本。"
+    },
+    {
+      "q": "`send_error` 发送时必须带哪几个关键头？",
+      "a": "`Content-Type`、`Content-Length` 和 `Connection: close`，并且要有状态行。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "HTTP响应",
+    "send_all"
+  ],
+  "source_pages": [
+    79,
+    80
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "122_send_error_生成错误响应",
+  "_chunk_pages": [
+    77,
+    80
+  ]
+}

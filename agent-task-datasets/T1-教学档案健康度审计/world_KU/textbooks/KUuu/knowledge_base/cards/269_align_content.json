@@ -1,0 +1,42 @@
+{
+  "title": "align-content",
+  "definition": "align-content 是 Grid 容器的对齐属性，用于垂直对齐整个网格内容，而不是单个网格项。",
+  "key_points": [
+    "它作用于整个网格内容的垂直位置。",
+    "原文给出的可选值有 `start`、`end`、`center`、`stretch`、`space-around`、`space-between`、`space-evenly`。"
+  ],
+  "examples": [
+    "align-content: center;",
+    "align-content: end;",
+    "align-content: start;"
+  ],
+  "misconceptions": [
+    "它不是用来对齐单个网格项的，单个网格项的垂直对齐由 `align-items` 处理。",
+    "不要把它和 `justify-content` 混淆；后者用于水平对齐整个网格内容。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "align-content 的作用是什么？",
+      "a": "用于垂直对齐整个网格内容。"
+    },
+    {
+      "q": "align-content 的可选值有哪些？",
+      "a": "start、end、center、stretch、space-around、space-between、space-evenly。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "Grid 容器"
+  ],
+  "source_pages": [
+    178,
+    180
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "269_align_content",
+  "_chunk_pages": [
+    177,
+    180
+  ]
+}

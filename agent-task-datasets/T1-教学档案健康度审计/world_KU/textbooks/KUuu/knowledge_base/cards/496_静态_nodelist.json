@@ -1,0 +1,37 @@
+{
+  "title": "静态 NodeList",
+  "definition": "教材说明 NodeList 通常是静态的：它是在调用时获取到的 DOM 快照，后续 DOM 的变化不会反映到已经获取到的 NodeList 中；但也有例外，例如 element.childNodes 返回的是动态 NodeList。",
+  "key_points": [
+    "通常是调用时的快照",
+    "后续 DOM 改变不会自动更新到已获取的 NodeList",
+    "element.childNodes 是教材给出的动态 NodeList 例外"
+  ],
+  "examples": [
+    "document.querySelectorAll('nav a') 返回的结果通常是静态 NodeList",
+    "element.childNodes"
+  ],
+  "misconceptions": [
+    "只要叫 NodeList 就一定会随着页面变化自动更新。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "教材中所说的静态 NodeList 是什么意思？",
+      "a": "它表示在调用时获得的 DOM 快照，之后 DOM 变化不会反映到这个 NodeList 里。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "NodeList"
+  ],
+  "source_pages": [
+    349,
+    352
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "496_静态_nodelist",
+  "_chunk_pages": [
+    349,
+    352
+  ]
+}

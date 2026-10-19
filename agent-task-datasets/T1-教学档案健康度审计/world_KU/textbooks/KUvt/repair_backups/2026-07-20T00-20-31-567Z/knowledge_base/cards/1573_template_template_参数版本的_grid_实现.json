@@ -1,0 +1,52 @@
+{
+  "title": "template template 参数版本的 Grid 实现",
+  "definition": "在 template template 参数版本中，Grid 的第二个参数 Container 表示容器模板，而不是已实例化容器类型。Grid 将其具体化为 `Container<std::optional<T>>`，并用这个类型作为每一列的容器。因此，Grid 可以直接以 `Grid<int, std::vector>` 或 `Grid<int, std::deque>` 的形式实例化。",
+  "key_points": [
+    "第二个模板参数需要声明 Container 接收元素类型 E 和分配器类型 Allocator：\n```cpp\ntemplate <typename E,\n          typename Allocator = std::allocator<E>>\nclass Container\n```",
+    "成员变量应使用具体化后的容器类型：\n```cpp\nstd::vector<Container<std::optional<T>>> m_cells;\n```",
+    "`at` 方法返回 `std::optional<T>&` 或 `const std::optional<T>&`，因为每个网格单元的类型是 `std::optional<T>`。",
+    "在 C++17 及以后，template template 参数声明中可以用 `typename` 替代 `class`，例如 `template <typename E> typename Container` 的相应写法。",
+    "成员函数定义时必须重复完整的 template template 参数列表，但不能重复默认模板参数。"
+  ],
+  "examples": [
+    "模板使用示例：\n```cpp\nGrid<int, std::vector> myGrid;\nmyGrid.at(1, 2) = 3;\nstd::cout << myGrid.at(1, 2).value_or(0) << std::endl;\n\nGrid<int, std::vector> myGrid2{myGrid};\nGrid<int, std::deque> myDequeGrid;\n```",
+    "单元格访问接口可写为：\n```cpp\nstd::optional<T>& at(std::size_t x, std::size_t y);\nconst std::optional<T>& at(std::size_t x, std::size_t y) const;\n```",
+    "容器类型的展开关系为：\n$$\n\\text{Grid<T, Container>}\\quad\\Longrightarrow\\quad\n\\text{m\\_cells: std::vector<Container<std::optional<T>>>}\n$$"
+  ],
+  "misconceptions": [
+    "此版本中的 Container 不能直接作为成员类型使用，必须写成 `Container<std::optional<T>>`。",
+    "`Grid<int, std::vector>` 并不表示网格单元是 int；按照原文实现，单元格类型是 `std::optional<int>`。",
+    "template template 参数仍然要求传入的模板参数列表能够匹配声明中的元素类型和分配器类型。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "template template 参数版本中，`m_cells` 的完整类型是什么？",
+      "a": "是 `std::vector<Container<std::optional<T>>>`。外层 vector 保存列，Container 模板实例化后保存每列的 `std::optional<T>` 单元格。"
+    },
+    {
+      "q": "对于 `Grid<int, std::deque>`，每个网格单元的类型是什么？",
+      "a": "每个网格单元的类型是 `std::optional<int>`，每一列的容器类型是 `std::deque<std::optional<int>>`。"
+    },
+    {
+      "q": "为什么 `at` 返回 `std::optional<T>&`？",
+      "a": "因为 template template 参数版本把 `Container<std::optional<T>>` 作为列容器，所以其元素类型就是 `std::optional<T>`。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "template template 参数",
+    "std::optional",
+    "类模板成员函数定义"
+  ],
+  "source_pages": [
+    759,
+    760
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1573_template_template_参数版本的_grid_实现",
+  "_chunk_pages": [
+    757,
+    760
+  ]
+}

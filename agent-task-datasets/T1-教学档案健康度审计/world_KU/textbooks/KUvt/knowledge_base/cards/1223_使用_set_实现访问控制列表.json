@@ -1,0 +1,52 @@
+{
+  "title": "使用 set 实现访问控制列表",
+  "definition": "访问控制列表可以用 `std::set<std::string>` 表示：每个实体对应一个 set，set 中保存所有有权访问该实体的用户名。添加用户使用 `emplace()`，删除用户使用 `erase()`，判断用户是否存在可使用 `count(user) != 0`，获取全部用户则通过 set 的 `begin` 和 `end` 迭代器构造一个字符串向量。",
+  "key_points": [
+    "访问控制列表的数据成员可以定义为 `std::set<std::string> m_allowed;`。",
+    "构造函数可以接收 `std::initializer_list<std::string>`，并使用 `m_allowed.insert(begin(users), end(users))` 批量插入初始用户。",
+    "`addUser(user)` 可调用 `m_allowed.emplace(user)`；由于 set 不允许重复值，重复添加不会形成重复用户。",
+    "`removeUser(user)` 可调用 `m_allowed.erase(user)` 删除用户。",
+    "`isAllowed(user)` 可通过 `m_allowed.count(user) != 0` 判断用户是否在权限集合中。",
+    "`getAllUsers()` 可返回 `std::vector<std::string>(begin(m_allowed), end(m_allowed))`，因为 set 的迭代器直接指向字符串元素。"
+  ],
+  "examples": [
+    "核心成员：`std::set<std::string> m_allowed;`。",
+    "构造向量并返回的等价写法：`std::vector<std::string> users(begin(m_allowed), end(m_allowed)); return users;`。",
+    "由于 set 按序保存元素，使用 `begin(m_allowed)` 和 `end(m_allowed)` 构造出的向量会按照 set 的遍历顺序获得用户。"
+  ],
+  "misconceptions": [
+    "访问控制列表中每个用户名不需要额外的权限值；本例只表示用户是否在允许集合中。",
+    "`getAllUsers()` 可以直接用 set 的迭代器构造字符串向量，因为 set 迭代器指向字符串本身；这不同于 multimap 迭代器指向键值对。",
+    "set 的去重特性意味着重复添加同一用户名不会创建多个相同权限项。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何用 set 表示一个实体的访问控制列表？",
+      "a": "为该实体维护一个 `std::set<std::string>`，其中每个元素是一个有权访问的用户名。"
+    },
+    {
+      "q": "如何判断用户是否在访问控制列表中？",
+      "a": "检查 `m_allowed.count(user) != 0`；结果为真表示用户存在于权限集合中。"
+    },
+    {
+      "q": "为什么 AccessList::getAllUsers 可以直接用 begin 和 end 构造 vector？",
+      "a": "因为 set 迭代器直接引用字符串元素，而不是键值对，所以可以直接用于 `std::vector<std::string>` 的范围构造函数。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "set 容器的基本特性",
+    "C++ 容器范围构造"
+  ],
+  "source_pages": [
+    592,
+    592
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1223_使用_set_实现访问控制列表",
+  "_chunk_pages": [
+    589,
+    592
+  ]
+}

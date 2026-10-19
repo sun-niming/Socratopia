@@ -1,0 +1,49 @@
+{
+  "title": "扫描算法与前缀和",
+  "definition": "扫描算法也称为前缀和、累积和或部分和算法。将扫描算法应用于一个范围后，会得到另一个范围，其中每个输出元素表示输入范围从起点开始、截至某个位置的累积结果。相关算法定义在 <numeric> 中。",
+  "key_points": [
+    "C++ 标准库中有 5 个扫描算法：exclusive_scan()、inclusive_scan()、partial_sum()、transform_exclusive_scan() 和 transform_inclusive_scan()。",
+    "扫描算法通常使用一个初始值 Init 和一个二元运算符进行累积。",
+    "transform_exclusive_scan() 和 transform_inclusive_scan() 会在进行广义累积之前，先对每个元素应用一元函数。",
+    "扫描算法的输出通常与输入范围具有对应的位置关系。"
+  ],
+  "examples": [
+    "对于输入序列 $x_0,x_1,\\ldots,x_{n-1}$，inclusive scan 的概念结果为：$$y_i=\\mathrm{Init}\\oplus x_0\\oplus x_1\\oplus\\cdots\\oplus x_i$$",
+    "transform_inclusive_scan() 可概念化为：$$y_i=\\mathrm{Init}\\oplus f(x_0)\\oplus f(x_1)\\oplus\\cdots\\oplus f(x_i)$$"
+  ],
+  "misconceptions": [
+    "扫描算法不是只返回一个最终累积值，而是为输入范围中的多个位置生成累积结果。",
+    "transform_*_scan() 与普通 scan 的区别在于，它们会先对元素应用一元变换函数。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "扫描算法又称为什么？",
+      "a": "扫描算法又称前缀和、累积和或部分和算法。"
+    },
+    {
+      "q": "C++ 中有哪些扫描算法？",
+      "a": "exclusive_scan()、inclusive_scan()、partial_sum()、transform_exclusive_scan() 和 transform_inclusive_scan()。"
+    },
+    {
+      "q": "哪两种扫描算法会先对元素应用一元函数？",
+      "a": "transform_exclusive_scan() 和 transform_inclusive_scan()。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "范围算法",
+    "二元运算符",
+    "累积计算"
+  ],
+  "source_pages": [
+    657,
+    657
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1374_扫描算法与前缀和",
+  "_chunk_pages": [
+    657,
+    660
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "title": "按值返回对象与返回局部对象引用的区别",
+  "definition": "如果方法内部创建了一个局部对象，并在方法结束时把它交给调用者，应按值返回该对象。不能返回这个局部对象的引用，因为函数退出后局部对象会被销毁，返回的引用将失效。",
+  "key_points": [
+    "SpreadsheetCell的 doubleToString() 方法创建一个局部字符串对象，并按值返回该字符串。",
+    "函数退出时，局部对象会被销毁，因此返回局部对象的引用是无效的。"
+  ],
+  "examples": [
+    "正确做法：string SpreadsheetCell::doubleToString() const { string result; return result; }",
+    "错误做法：string& SpreadsheetCell::doubleToString() const { string result; return result; }，因为 result 在函数退出时被销毁。"
+  ],
+  "misconceptions": [
+    "为了避免复制，不能随意把局部对象改为按引用返回；局部对象销毁后，引用会悬空。",
+    "按值返回对象虽然可能涉及拷贝构造，但对于需要返回局部对象的情况仍是有效且必要的接口形式。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么不能返回指向局部字符串对象的引用？",
+      "a": "因为函数退出时局部字符串对象会被销毁，返回的引用不再指向有效对象。"
+    },
+    {
+      "q": "SpreadsheetCell的 doubleToString() 为什么按值返回字符串？",
+      "a": "因为该方法创建了一个局部字符串对象，并需要在方法结束时把结果交给调用者；返回局部对象的引用会失效。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "对象生命周期",
+    "引用返回值",
+    "函数返回值"
+  ],
+  "source_pages": [
+    246,
+    246
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "520_按值返回对象与返回局部对象引用的区别",
+  "_chunk_pages": [
+    245,
+    248
+  ]
+}

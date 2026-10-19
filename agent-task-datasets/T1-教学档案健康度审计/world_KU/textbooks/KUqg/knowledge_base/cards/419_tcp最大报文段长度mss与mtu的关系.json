@@ -1,0 +1,50 @@
+{
+  "title": "TCP最大报文段长度MSS与MTU的关系",
+  "definition": "最大报文段长度（MSS）是TCP报文段中应用层数据字段的最大长度，不包括TCP首部。MSS通常根据路径上的最大传输单元（MTU）设置，使TCP报文段封装进IP数据报后，再加上TCP/IP首部，能够适合单个链路层帧。教材给出的典型计算是：若MTU为1500字节，TCP/IP首部通常为40字节，则MSS通常为1460字节。",
+  "key_points": [
+    "MSS限制的是TCP报文段中应用层数据的最大长度，而不是包含首部的整个TCP报文段长度。",
+    "MSS通常依据本地或路径MTU设置。",
+    "路径MTU是从源主机到目的主机的所有链路中能够发送的最大链路层帧长度。",
+    "大文件通常被TCP划分成多个长度不超过MSS的数据块，最后一块通常小于MSS。"
+  ],
+  "examples": [
+    "若MTU为1500字节，TCP/IP首部合计通常为40字节，则可按 $$\\mathrm{MSS}=1500-40=1460\\ \\text{字节}$$ 设置MSS。",
+    "Telnet等交互式应用经常发送远小于MSS的数据块。"
+  ],
+  "misconceptions": [
+    "MSS是包含TCP首部的TCP报文段最大长度；实际上MSS只指应用层数据字段的最大长度。",
+    "MSS总是等于本地主机链路的MTU；MSS还可以根据路径MTU设置。",
+    "应用发送大文件时通常只生成一个TCP报文段；TCP通常会把大文件划分为多个不超过MSS的数据块。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "MSS和MTU有什么区别？",
+      "a": "MTU是链路层帧的最大长度；MSS是TCP报文段中应用层数据字段的最大长度。"
+    },
+    {
+      "q": "若MTU为1500字节、TCP/IP首部为40字节，典型MSS是多少？",
+      "a": "1460字节。"
+    },
+    {
+      "q": "MSS是否包括TCP首部？",
+      "a": "不包括，MSS只表示TCP报文段中应用层数据的最大长度。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "TCP报文段",
+    "网络层IP数据报",
+    "最大传输单元MTU"
+  ],
+  "source_pages": [
+    169,
+    172
+  ],
+  "needs_verification": true,
+  "verify_query": "Kurose Ross Computer Networking 7th edition TCP Ethernet PPP MTU 1500 bytes MSS 1460 bytes page 153",
+  "concept_id": "419_tcp最大报文段长度mss与mtu的关系",
+  "_chunk_pages": [
+    169,
+    172
+  ]
+}

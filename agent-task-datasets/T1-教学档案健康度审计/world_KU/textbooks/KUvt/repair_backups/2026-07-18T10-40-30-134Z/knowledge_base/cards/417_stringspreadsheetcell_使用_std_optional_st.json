@@ -1,0 +1,52 @@
+{
+  "title": "StringSpreadsheetCell 使用 std::optional<std::string> 存储值",
+  "definition": "`StringSpreadsheetCell` 是从 `SpreadsheetCell` 派生的字符串单元格类。它用私有成员 `std::optional<std::string> m_value` 保存字符串值，并重写基类的 `set` 和 `getString` 方法。`set(std::string_view value)` 将传入值赋给 `m_value`；`getString()` 在有值时返回该字符串，在没有值时返回空字符串，原文给出的实现形式为 `m_value.value_or(\"\")`。",
+  "key_points": [
+    "类声明使用继承关系：`class StringSpreadsheetCell : public SpreadsheetCell`。",
+    "两个接口函数都使用 `override`：`void set(std::string_view value) override;` 和 `std::string getString() const override;`。",
+    "私有数据成员是：`std::optional<std::string> m_value;`。",
+    "设置值的实现是：`void set(std::string_view value) override { m_value = value; }`。",
+    "读取值时使用 `value_or(\"\")`，因此没有存储值时返回空字符串。"
+  ],
+  "examples": [
+    "模块和类接口可写为：\n`export module string_spreadsheet_cell;`\n`import spreadsheet_cell;`\n`import <string>;`\n`import <string_view>;`\n`import <optional>;`\n`export class StringSpreadsheetCell : public SpreadsheetCell { public: void set(std::string_view value) override; std::string getString() const override; private: std::optional<std::string> m_value; };`",
+    "设置字符串：`void set(std::string_view value) override { m_value = value; }`。",
+    "获取字符串的核心逻辑：`return m_value.value_or(\"\");`"
+  ],
+  "misconceptions": [
+    "`std::optional<std::string>` 不表示字符串一定有值；它还可以表示当前没有存储值。",
+    "`getString()` 在没有值时不是返回某个未定义内容，原文给出的逻辑是通过 `value_or(\"\")` 返回空字符串。",
+    "`override` 表示该函数用于重写基类虚函数；它不是独立于基类接口的新函数。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`StringSpreadsheetCell` 的成员 `m_value` 使用什么类型？",
+      "a": "使用 `std::optional<std::string>`，即 `std::optional<std::string> m_value;`。"
+    },
+    {
+      "q": "`StringSpreadsheetCell::set` 做了什么？",
+      "a": "它把传入的 `std::string_view value` 赋给 `m_value`：`m_value = value;`。"
+    },
+    {
+      "q": "当 `StringSpreadsheetCell` 没有存储字符串时，`getString()` 返回什么？",
+      "a": "根据原文使用 `m_value.value_or(\"\")` 的实现，没有值时返回空字符串。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++继承与虚函数",
+    "std::optional",
+    "std::string_view"
+  ],
+  "source_pages": [
+    321,
+    324
+  ],
+  "needs_verification": true,
+  "verify_query": "Marc Gregoire C++20 Advanced Programming 5th edition page 324 StringSpreadsheetCell std::optional<std::string> m_value value_or getString set string_view",
+  "concept_id": "417_stringspreadsheetcell_使用_std_optional_st",
+  "_chunk_pages": [
+    321,
+    324
+  ]
+}

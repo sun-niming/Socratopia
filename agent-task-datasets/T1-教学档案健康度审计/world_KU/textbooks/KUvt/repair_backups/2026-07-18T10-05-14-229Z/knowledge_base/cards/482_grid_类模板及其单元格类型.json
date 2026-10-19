@@ -1,0 +1,46 @@
+{
+  "title": "Grid 类模板及其单元格类型",
+  "definition": "Grid 是一个类模板，使用模板参数 T 表示每个网格单元中存储的值类型。网格内部的单元格使用 std::optional<T> 表示，因此每个位置既可以存储一个 T 值，也可以表示为空。",
+  "key_points": [
+    "模板声明形式为：template <typename T> class Grid。",
+    "单元格类型是 std::optional<T>，因此 at(x, y) 返回对 std::optional<T> 的引用。",
+    "T 可以是 int、double、SpreadsheetCell、const char*、std::vector<int> 等类型，前提是这些类型能够满足相应的存储和赋值要求。"
+  ],
+  "examples": [
+    "Grid<int> intGrid;",
+    "Grid<double> doubleGrid { 11, 11 };",
+    "Grid<SpreadsheetCell> spreadsheet;",
+    "Grid<std::vector<int>> gridOfVectors;"
+  ],
+  "misconceptions": [
+    "Grid<T> 的单元格不是直接的 T，而是 std::optional<T>。",
+    "模板参数 T 不局限于 int 或 double，也可以是用户自定义类型、指针类型或容器类型。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "Grid<int> 中的 int 表示什么？",
+      "a": "它表示每个网格单元存储的值类型；实际单元格类型是 std::optional<int>。"
+    },
+    {
+      "q": "Grid 是否只能存储数值？",
+      "a": "不是。原文示例还展示了 SpreadsheetCell、const char* 和 std::vector<int> 等类型。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++ 类模板",
+    "std::optional 的基本用法"
+  ],
+  "source_pages": [
+    377,
+    378,
+    380
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "482_grid_类模板及其单元格类型",
+  "_chunk_pages": [
+    377,
+    380
+  ]
+}

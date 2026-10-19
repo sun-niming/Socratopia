@@ -1,0 +1,50 @@
+{
+  "title": "运行时从 Windows DLL 获取函数指针",
+  "definition": "Windows 程序可以在运行时使用 LoadLibrary 加载动态链接库，再使用 GetProcAddress 按函数名获取函数地址，并将该地址转换为与目标函数原型兼容的函数指针后调用。加载失败时库句柄为 NULL；获取函数地址失败时函数指针为 nullptr。",
+  "key_points": [
+    "动态链接库 DLL 是由代码和数据组成的库，程序可以使用其中的功能。",
+    "调用 GetProcAddress 前必须知道目标函数的原型，包括返回类型、参数类型和调用约定。",
+    "原文示例中的 Connect 函数返回 int，参数为 bool、int 和 const char*。",
+    "Microsoft 特定的调用约定指令用于规定参数传递方式和清理方式。"
+  ],
+  "examples": [
+    "加载库：$\\texttt{HMODULE lib \\{ ::LoadLibrary(\"hardware.dll\") \\};}$。",
+    "按原文原型定义函数指针别名：$\\texttt{using ConnectFunction = int(\\_\\_stdcall*)(bool, int, const char*);}$。",
+    "获取函数地址：$\\texttt{ConnectFunction connect \\{ (ConnectFunction)::GetProcAddress(lib, \"Connect\") \\};}$。",
+    "获取成功后可调用：$\\texttt{connect(true, 3, \"Hello world\");}$。"
+  ],
+  "misconceptions": [
+    "LoadLibrary 返回的是库句柄，不是目标函数指针。",
+    "GetProcAddress 获取的是函数地址；只有将其按兼容原型保存为函数指针后才能按函数调用。",
+    "函数指针的调用约定必须与 DLL 中函数的调用约定兼容，否则调用可能不正确。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "运行时从 DLL 获取函数通常需要哪两个 Windows API？",
+      "a": "先使用 LoadLibrary 加载 DLL，再使用 GetProcAddress 根据函数名获取函数地址。"
+    },
+    {
+      "q": "为什么调用 GetProcAddress 前必须知道函数原型？",
+      "a": "因为必须用兼容的返回类型、参数类型和调用约定定义函数指针，才能正确调用获取到的函数地址。"
+    },
+    {
+      "q": "加载 DLL 或获取函数地址失败时分别如何表示？",
+      "a": "原文说明 LoadLibrary 失败时库句柄为 NULL，获取函数地址失败时 connect 为 nullptr。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "函数指针类型别名"
+  ],
+  "source_pages": [
+    608,
+    608
+  ],
+  "needs_verification": true,
+  "verify_query": "Microsoft LoadLibrary GetProcAddress __stdcall function pointer syntax C++",
+  "concept_id": "1250_运行时从_windows_dll_获取函数指针",
+  "_chunk_pages": [
+    605,
+    608
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "title": "用 std::unordered_map 评估查找性能",
+  "definition": "在 NameDB 程序中，可以把保存姓名及其计数的数据结构从 std::map 替换为 std::unordered_map。原文指出，std::unordered_map 提供 $O(1)$ 查找时间；但是否比 std::map 更快，应针对具体应用程序使用剖析器进行实测，而不能仅凭理论复杂度下结论。",
+  "key_points": [
+    "std::unordered_map 的查找时间在原文中记为 $O(1)$。",
+    "是否实际更快取决于具体应用程序，应使用性能剖析器比较。",
+    "性能优化应以测量结果为依据，而不是只依据数据结构的理论复杂度。"
+  ],
+  "examples": [
+    "可将成员变量从 std::map<std::string, int> 改为 std::unordered_map<std::string, int>，然后分别运行程序并比较剖析结果。"
+  ],
+  "misconceptions": [
+    "认为查找复杂度为 $O(1)$ 就一定比 std::map 快。",
+    "认为更换容器后无需重新运行剖析器验证效果。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么不能仅凭 std::unordered_map 的 $O(1)$ 查找时间就断定它一定比 std::map 快？",
+      "a": "因为实际性能还取决于具体应用程序和运行环境，必须使用剖析器进行实测比较。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "std::map 与 std::unordered_map 的基本用途",
+    "算法复杂度的基本概念"
+  ],
+  "source_pages": [
+    869,
+    869
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1799_用_std_unordered_map_评估查找性能",
+  "_chunk_pages": [
+    869,
+    872
+  ]
+}

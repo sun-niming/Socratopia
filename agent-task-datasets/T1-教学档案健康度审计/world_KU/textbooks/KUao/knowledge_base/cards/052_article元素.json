@@ -1,0 +1,41 @@
+{
+  "title": "article元素",
+  "definition": "article元素表示页面中的一块与上下文不相关的独立内容，例如博客中的一篇文章。",
+  "key_points": [
+    "article表示独立内容。",
+    "这块内容与上下文不相关。",
+    "教材举例是博客中的一篇文章。"
+  ],
+  "examples": [
+    "<article><h2>一篇文章</h2><p>正文...</p></article>"
+  ],
+  "misconceptions": [
+    "article不是用来表示任意一块布局区域，而是强调内容的独立性。",
+    "article内容应能脱离上下文单独理解。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "article元素表示什么样的内容？",
+      "a": "表示页面中的一块与上下文不相关的独立内容。"
+    },
+    {
+      "q": "教材中给出的article例子是什么？",
+      "a": "博客中的一篇文章。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "HTML5新增元素"
+  ],
+  "source_pages": [
+    40,
+    40
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "052_article元素",
+  "_chunk_pages": [
+    37,
+    40
+  ]
+}

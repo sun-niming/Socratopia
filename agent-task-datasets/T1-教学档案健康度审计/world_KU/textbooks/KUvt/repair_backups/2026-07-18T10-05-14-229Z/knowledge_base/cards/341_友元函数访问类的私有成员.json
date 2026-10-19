@@ -1,0 +1,49 @@
+{
+  "title": "友元函数访问类的私有成员",
+  "definition": "在 C++ 中，使用 friend 关键字可以把非成员函数声明为某个类的友元。友元函数不是该类的成员函数，但它可以访问该类的 private 和 protected 成员。友元关系必须在类定义中显式声明。",
+  "key_points": [
+    "友元函数通常在类内使用 friend 声明，但函数本身仍然是非成员函数。",
+    "友元函数可以访问声明它为友元的类的 private 和 protected 数据成员。",
+    "友元函数的定义可以放在类外，例如先在类内声明 friend void printFoo(const Foo&);，再在类外定义该函数。",
+    "原文示例涉及 Foo 和 Bar：Bar 的成员函数 processFoo(const Foo&) 可以被声明为 Foo 的友元；非成员函数 printFoo(const Foo&) 也可以被声明为 Foo 的友元。"
+  ],
+  "examples": [
+    "类内声明友元成员函数：class Foo { friend void Bar::processFoo(const Foo&); };",
+    "类内声明友元非成员函数：class Foo { friend void printFoo(const Foo&); };",
+    "类外定义友元函数：void printFoo(const Foo& foo) { /* 可访问 foo 的 private 和 protected 数据成员 */ }"
+  ],
+  "misconceptions": [
+    "友元函数不是成员函数，不能把它当作 Foo 的成员函数使用。",
+    "声明为友元不会使整个 Bar 类或所有 Bar 的成员函数都自动获得访问权限；需要针对具体函数进行友元声明。",
+    "友元函数可以访问 private 和 protected 成员，但这不等于把这些成员的访问权限改成 public。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "友元函数是否属于声明它的类的成员函数？",
+      "a": "不是。友元函数是非成员函数，只是获得了访问该类 private 和 protected 成员的特殊权限。"
+    },
+    {
+      "q": "如何让非成员函数 printFoo(const Foo&) 访问 Foo 的私有数据成员？",
+      "a": "在 Foo 类定义中声明 friend void printFoo(const Foo&);，然后在类外定义该函数。"
+    },
+    {
+      "q": "把 Bar::processFoo(const Foo&) 声明为 Foo 的友元后，它可以访问什么？",
+      "a": "该特定的 Bar::processFoo(const Foo&) 函数可以访问 Foo 的 private 和 protected 成员。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++ 类的访问控制"
+  ],
+  "source_pages": [
+    258,
+    259
+  ],
+  "needs_verification": true,
+  "verify_query": "《C++20高级编程》第5版 第258-259页 friend Foo Bar processFoo printFoo private protected 友元函数 原文",
+  "concept_id": "341_友元函数访问类的私有成员",
+  "_chunk_pages": [
+    257,
+    260
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "title": "transform 视图可以映射为另一种类型",
+  "definition": "views::transform 不要求输出元素与输入元素具有相同类型。它可以把输入范围中的元素映射成另一种类型，例如将整数映射成带双引号的 std::string。",
+  "key_points": [
+    "transform 的映射函数决定视图元素的结果类型。",
+    "输入范围可以是 vector<int>，输出视图的元素可以是字符串。",
+    "示例先过滤偶数，再使用 views::take(3) 保留前三个偶数，最后将每个整数格式化为带引号的字符串。",
+    "示例的输出为：\"2\" \"4\" \"6\"。"
+  ],
+  "examples": [
+    "vector values{1, 2, 3, 4, 5, 6, 7, 8, 9, 10};\nauto result{values | views::filter([](const auto& value) { return value % 2 == 0; }) | views::take(3) | views::transform([](const auto& value) { return format(R\"(\\\"{}\\\")\", value); })};\n输出元素为字符串：\"2\"、\"4\"、\"6\"。"
+  ],
+  "misconceptions": [
+    "transform 并不只用于数值运算，也可以把元素转换成字符串等其他类型。",
+    "transform 视图的输出值不一定能反向写回原始范围；如果映射函数产生临时值，视图通常是只读的。",
+    "views::take(3) 在本例中保留的是过滤后结果的前三个元素，而不是原始序列的前三个元素。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何把前 3 个偶数转换成带引号的字符串？",
+      "a": "依次使用 views::filter 保留偶数、views::take(3) 保留前三个结果，再使用 views::transform 将每个整数格式化为带引号的字符串。"
+    },
+    {
+      "q": "transform 视图是否必须保持元素类型不变？",
+      "a": "不必须。它可以把一种类型的元素映射为另一种类型，例如把 int 映射为 std::string。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "范围适配器的管道组合"
+  ],
+  "source_pages": [
+    542,
+    543
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1112_transform_视图可以映射为另一种类型",
+  "_chunk_pages": [
+    541,
+    544
+  ]
+}

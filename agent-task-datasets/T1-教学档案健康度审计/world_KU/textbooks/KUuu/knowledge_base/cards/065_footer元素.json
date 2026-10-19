@@ -1,0 +1,37 @@
+{
+  "title": "footer元素",
+  "definition": "footer元素表示整个页面或页面中一个内容区块的脚注。一般来说，它会包含创作者的姓名、创作日期以及创作者联系信息，也可放版权信息、备案号、底部链接。",
+  "key_points": [
+    "可表示整个页面的脚注",
+    "也可表示某个内容区块的脚注",
+    "常包含作者信息、日期、联系信息、版权信息、备案号或底部链接"
+  ],
+  "examples": [
+    "<footer>版权信息、备案号、底部链接</footer>"
+  ],
+  "misconceptions": [
+    "footer不只用于页面最底部，也可用于内容区块的脚注",
+    "footer不等于单纯的装饰性页脚，它有明确语义"
+  ],
+  "qa_pairs": [
+    {
+      "q": "footer元素通常表示什么？",
+      "a": "表示整个页面或页面中一个内容区块的脚注。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "HTML标签基础"
+  ],
+  "source_pages": [
+    41,
+    42
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "065_footer元素",
+  "_chunk_pages": [
+    41,
+    44
+  ]
+}

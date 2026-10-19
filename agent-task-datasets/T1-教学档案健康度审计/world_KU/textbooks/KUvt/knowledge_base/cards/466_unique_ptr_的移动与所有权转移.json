@@ -1,0 +1,45 @@
+{
+  "title": "unique_ptr 的移动与所有权转移",
+  "definition": "由于 unique_ptr 表示唯一所有权，它不能被复制，但可以通过移动语义把资源所有权从一个 unique_ptr 转移给另一个对象。使用 `std::move()` 可以显式执行这种所有权转移；移动后，原 unique_ptr 不再拥有该资源。",
+  "key_points": [
+    "unique_ptr 的复制操作被禁止。",
+    "移动操作会转移资源所有权，而不是复制资源本身。",
+    "将 unique_ptr 作为按值函数参数传递时，通常需要使用 std::move() 表示所有权转移。",
+    "类可以通过 unique_ptr 参数接收资源，并在成员初始化时移动到数据成员中。"
+  ],
+  "examples": [
+    "`auto myIntSmartPtr { std::make_unique<int>(42) };`",
+    "`Foo f { std::move(myIntSmartPtr) };`",
+    "构造函数示例：`Foo(std::unique_ptr<int> data) : m_data { std::move(data) } {}`"
+  ],
+  "misconceptions": [
+    "`std::move()` 本身不复制对象；它把表达式转换为可移动对象，使所有权能够转移。",
+    "移动后不能继续假定原 unique_ptr 仍然拥有原资源。",
+    "unique_ptr 不能通过普通赋值复制给另一个 unique_ptr。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么 unique_ptr 可以移动但不能复制？",
+      "a": "因为它必须保持资源的唯一所有权；复制会产生多个所有者，而移动可以把唯一所有权从一个对象转移给另一个对象。"
+    },
+    {
+      "q": "如何把 `myIntSmartPtr` 的所有权转移给 `Foo`？",
+      "a": "使用 `Foo f { std::move(myIntSmartPtr) };`。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "unique_ptr 的唯一所有权与自动释放"
+  ],
+  "source_pages": [
+    220,
+    220
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "466_unique_ptr_的移动与所有权转移",
+  "_chunk_pages": [
+    217,
+    220
+  ]
+}

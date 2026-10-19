@@ -1,0 +1,48 @@
+{
+  "title": "switch中的fallthrough与[[fallthrough]]",
+  "definition": "在switch语句中，一旦从某个case标签开始执行，代码会继续执行后面的语句；如果没有遇到break，即使随后遇到另一个case标签，也不会自动停止。这种继续执行后续case代码的行为称为fallthrough。使用C++特性[[fallthrough]]可以明确标记有意进行的fallthrough。",
+  "key_points": [
+    "忘记break可能导致意外的fallthrough，从而成为程序错误。",
+    "空的case之间的连续落入通常不会产生编译器警告。",
+    "对于有意设计的落入，可以在相关位置写[[fallthrough]]，告知编译器这是刻意行为。",
+    "fallthrough可以用于让多个case共享同一段代码。"
+  ],
+  "examples": [
+    "enum class Mode { Default, Custom, Standard };\\nint value { 42 };\\nswitch (mode) {\\n    using enum Mode;\\n    case Custom:\\n        value = 84;\\n        [[fallthrough]];\\n    case Standard:\\n    case Default:\\n        /* 使用value执行操作 */\\n        break;\\n}",
+    "在上述示例中，Custom会先将value从42改为84，然后继续执行Standard和Default共享的代码；Standard也会落入Default共享的代码。"
+  ],
+  "misconceptions": [
+    "遇到下一个case标签不会自动停止执行；真正结束当前switch路径通常需要break、return等控制转移。",
+    "[[fallthrough]]不是用来阻止落入，而是用来声明该落入是有意的。",
+    "每个case都必须有独立代码；多个case可以共享同一段代码。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "switch中没有break时会发生什么？",
+      "a": "执行会继续到后续语句，即使遇到另一个case标签也会继续，这称为fallthrough。"
+    },
+    {
+      "q": "[[fallthrough]]的作用是什么？",
+      "a": "明确告诉编译器当前case落入后续case是有意设计的，以避免相关警告。"
+    },
+    {
+      "q": "示例中Mode::Custom分支执行后会发生什么？",
+      "a": "先把value从42改为84，然后落入后续共享代码；最终执行Standard和Default共用的语句。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "switch语句的多分支选择"
+  ],
+  "source_pages": [
+    50,
+    50
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "076_switch中的fallthrough与_fallthrough",
+  "_chunk_pages": [
+    49,
+    52
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "title": "C 风格数组的 begin/end 与 cbegin/cend",
+  "definition": "对于静态分配且直接访问的 C 风格数组，可以使用 std::begin() 或 std::cbegin() 获取指向第一个元素的迭代器，使用 std::end() 或 std::cend() 获取指向最后一个元素之后位置的迭代器。这样可以避免手动写出数组首地址和尾后地址。",
+  "key_points": [
+    "std::begin(values) 和 std::cbegin(values) 指向静态 C 风格数组的第一个元素。",
+    "std::end(values) 和 std::cend(values) 指向数组尾后位置。",
+    "这些函数适用于静态分配、不是通过指针访问的 C 风格数组。",
+    "如果涉及指针或动态分配的 C 风格数组，不能按原文所述方式使用这些数组重载函数来获得完整范围。"
+  ],
+  "examples": [
+    "使用 cbegin() 和 cend() 将数组插入 vector：\n```text\nvec.insert(end(vec), cbegin(values), cend(values));\n```",
+    "这里传入的数组范围是 $[\\operatorname{cbegin}(values),\\operatorname{cend}(values))$。"
+  ],
+  "misconceptions": [
+    "std::begin() 和 std::end() 并不是对任意数组指针都能自动推导出数组长度。",
+    "cend() 返回的是尾后迭代器，不是最后一个元素的迭代器。",
+    "动态分配数组或仅有一个指针时，通常没有数组长度信息，不能直接依赖这些静态数组重载函数。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何获得静态 C 风格数组 values 的常量迭代器范围？",
+      "a": "使用 std::cbegin(values) 作为首迭代器，使用 std::cend(values) 作为尾后迭代器。"
+    },
+    {
+      "q": "原文对 std::begin() 和 std::end() 的适用范围有什么警告？",
+      "a": "它们所述的数组用法仅适用于静态分配且不通过指针访问的 C 风格数组；涉及指针或动态分配数组时不可行。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C 风格数组",
+    "迭代器范围",
+    "std::begin 和 std::end"
+  ],
+  "source_pages": [
+    600,
+    600
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1237_c_风格数组的_begin_end_与_cbegin_cend",
+  "_chunk_pages": [
+    597,
+    600
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "title": "HTTP Header 边界与读取策略",
+  "definition": "HTTP Header 和 Body 之间用空行分隔，即 `\r\n\r\n`。对于 GET 请求，通常没有请求体，所以五天版本只需要读到请求头即可；更稳妥的做法是持续 `recv`，直到发现 `\r\n\r\n` 或缓冲区满。",
+  "key_points": [
+    "Header 和 Body 的分隔符是 `\r\n\r\n`。",
+    "GET 请求通常不需要处理请求体。",
+    "可以先读取一个 buffer，再找第一行并解析。",
+    "建议 `buffer` 大小设为 `8192`。",
+    "如果请求过长，可返回 `400`。"
+  ],
+  "examples": [
+    "使用 `recv()` 循环读取，直到找到 `\r\n\r\n`。",
+    "`buffer` 大小设为 `8192`。"
+  ],
+  "misconceptions": [
+    "不能把整个 HTTP 请求都当成一行字符串来处理。",
+    "GET 请求通常不需要读取 body，但仍要识别 header 的结束位置。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "HTTP Header 和 Body 的分隔符是什么？",
+      "a": "`\\r\\n\\r\\n`。"
+    },
+    {
+      "q": "五天版本为何通常只读到请求头？",
+      "a": "因为 GET 请求通常没有请求体。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "HTTP 请求行结构"
+  ],
+  "source_pages": [
+    13,
+    16
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "009_http_header_边界与读取策略",
+  "_chunk_pages": [
+    13,
+    16
+  ]
+}

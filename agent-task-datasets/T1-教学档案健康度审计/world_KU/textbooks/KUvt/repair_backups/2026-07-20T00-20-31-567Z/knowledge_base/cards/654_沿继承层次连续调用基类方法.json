@@ -1,0 +1,52 @@
+{
+  "title": "沿继承层次连续调用基类方法",
+  "definition": "在多层继承结构中，派生类可以调用直接基类的同名方法，并在其结果上添加自己的功能，从而让操作沿继承链逐层累积。基类方法调用使用显式作用域，例如 `Paperback::getDescription()`；未被中间类重写的虚方法则沿继承层次向上查找最近的实现。",
+  "key_points": [
+    "例如 `Romance::getDescription()` 可以返回 `\"Romance \" + Paperback::getDescription()`，而 `Paperback::getDescription()` 又返回 `\"Paperback \" + Book::getDescription()`。",
+    "连续调用的结果是 `\"Romance Paperback Book\"`。",
+    "若中间派生类没有重写某个虚方法，调用会沿层次结构向上寻找实现。",
+    "在教材示例中，`Paperback` 没有重写 `getHeight()`，因此 `Paperback::getHeight()` 解析为 `Book::getHeight()`。",
+    "`Romance` 可调用继承来的 `getHeight()` 并对结果进行修改，例如将高度除以 2。"
+  ],
+  "examples": [
+    "类层次结构：`Book` 是基类，`Paperback` 和 `Technical` 直接继承 `Book`，`Romance` 继承 `Paperback`。",
+    "描述信息的累积：`Book::getDescription()` 返回 `\"Book\"`；`Paperback::getDescription()` 返回 `\"Paperback \" + Book::getDescription()`；`Romance::getDescription()` 返回 `\"Romance \" + Paperback::getDescription()`，最终结果为 `\"Romance Paperback Book\"`。",
+    "高度方法：`Book::getHeight()` 返回 `120`；若 `Romance::getHeight()` 返回 `Paperback::getHeight() / 2`，则结果为 `60`。"
+  ],
+  "misconceptions": [
+    "误以为派生类重写方法后，基类版本就不能再调用。",
+    "误以为每个中间派生类都必须重写所有虚方法。",
+    "误以为调用未重写的虚方法会得到空实现或编译错误，而不是沿继承层次寻找基类实现。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何得到教材示例中的 `\"Romance Paperback Book\"`？",
+      "a": "`Romance::getDescription()` 调用 `Paperback::getDescription()`，后者再调用 `Book::getDescription()`，逐层拼接得到该字符串。"
+    },
+    {
+      "q": "如果 `Paperback` 没有重写 `getHeight()`，`Paperback::getHeight()` 实际解析为什么？",
+      "a": "解析为 `Book::getHeight()`。"
+    },
+    {
+      "q": "如果 `Book::getHeight()` 返回 `120`，`Romance` 将继承的高度除以 2，结果是多少？",
+      "a": "结果为 `60`。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "虚函数与重写",
+    "在派生类中调用基类方法",
+    "多层继承"
+  ],
+  "source_pages": [
+    319,
+    320
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "654_沿继承层次连续调用基类方法",
+  "_chunk_pages": [
+    317,
+    320
+  ]
+}

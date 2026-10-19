@@ -1,0 +1,43 @@
+{
+  "title": "lambda 返回类型推导与 decltype(auto)",
+  "definition": "lambda 省略尾返回类型时，返回类型会按普通函数返回类型推导规则推导；这种推导会移除返回类型中的引用和顶层 `const`。如果希望保留返回表达式的精确类型，包括引用和 `const`，可以使用尾返回类型 `decltype(auto)`。",
+  "key_points": [
+    "普通的自动返回类型推导可能把引用返回值推导为值类型。",
+    "教材示例中，`getName()` 返回 `const string&`，但 lambda 直接 `return person.getName();` 时，推导出的 lambda 返回类型为 `string`，会产生名字的拷贝。",
+    "使用 `-> decltype(auto)` 可以使 lambda 的返回类型与返回表达式的 `decltype` 结果匹配。",
+    "如果返回表达式的类型是 `const string&`，使用 `decltype(auto)` 后，lambda 也返回 `const string&`。"
+  ],
+  "examples": [
+    "直接推导：`[](const Person& person) { return person.getName(); }` 的返回类型会被推导为 `string`。",
+    "保留精确类型：`[](const Person& person) -> decltype(auto) { return person.getName(); }`，返回类型为 `const string&`。"
+  ],
+  "misconceptions": [
+    "`auto` 返回类型推导不会自动保留返回表达式的引用类型。",
+    "使用 `decltype(auto)` 可能返回引用，因此必须确保被引用对象在 lambda 调用者使用该引用期间仍然有效。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何让 lambda 保留 `getName()` 返回的 `const string&` 类型？",
+      "a": "在 lambda 后写尾返回类型 `-> decltype(auto)`。"
+    },
+    {
+      "q": "为什么直接 `return person.getName();` 可能产生字符串拷贝？",
+      "a": "因为普通自动返回类型推导会移除引用和顶层 `const`，将 `const string&` 推导为 `string`。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "lambda 的参数与返回类型"
+  ],
+  "source_pages": [
+    619,
+    619
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1277_lambda_返回类型推导与_decltype_auto",
+  "_chunk_pages": [
+    617,
+    620
+  ]
+}

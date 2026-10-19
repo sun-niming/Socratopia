@@ -1,0 +1,44 @@
+{
+  "title": "close",
+  "definition": "`close(int fd)` 用于关闭文件描述符。原文说明，socket、普通文件、日志文件底层都可能对应 fd；成功返回 0，失败返回 -1。失败时一般不要继续使用该 fd。在本项目中，`client_fd`、`file_fd`、`listen_fd` 在不需要时都要关闭，fork 后父子进程尤其要按职责关闭。",
+  "key_points": [
+    "头文件是 `<unistd.h>`。",
+    "原型是 `int close(int fd);`。",
+    "作用是关闭文件描述符。",
+    "成功返回 0，失败返回 -1；失败后一般不要继续使用该 fd。",
+    "本项目中每个 `client_fd`、`file_fd`、`listen_fd` 在不需要时都要关闭。",
+    "fork 后父子进程要按职责分别关闭不需要的 fd。"
+  ],
+  "examples": [
+    "父进程 `accept` 后 `fork`，父进程立即 `close(client_fd)`，子进程处理完请求后再 `close(client_fd)`。"
+  ],
+  "misconceptions": [
+    "`close` 只对 socket 有效，对普通文件无效。",
+    "关闭一个 fd 后还能继续把它当作有效连接使用。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`close(int fd)` 的作用是什么？",
+      "a": "关闭文件描述符。"
+    },
+    {
+      "q": "fork 后为什么父子进程都要注意关闭不需要的 fd？",
+      "a": "否则可能导致连接迟迟不释放，或者资源被错误地保留。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "文件描述符"
+  ],
+  "source_pages": [
+    93,
+    96
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "145_close",
+  "_chunk_pages": [
+    93,
+    96
+  ]
+}

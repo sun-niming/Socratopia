@@ -1,0 +1,43 @@
+{
+  "title": "<version>头文件",
+  "definition": "<version>头文件用于查询正在使用的C++标准库实现的相关信息。它公开的具体内容取决于库实现，可能包括版本号、发布日期和版权声明，并且还公开标准库特性测试宏。",
+  "key_points": [
+    "<version>提供标准库实现信息。",
+    "可公开的信息可能包括版本号、发布日期和版权声明。",
+    "<version>还公开标准库特性测试宏。",
+    "具体公开哪些实现信息取决于标准库实现。"
+  ],
+  "examples": [
+    "代码示例：\n#include <version>\n// 随后可以检查标准库特性测试宏，例如__cpp_lib_filesystem。"
+  ],
+  "misconceptions": [
+    "<version>不是用来查询C++语言标准版本的唯一接口；教材强调它查询的是正在使用的标准库实现信息。",
+    "不同标准库实现通过<version>公开的具体信息可能不同。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "<version>头文件用于查询什么？",
+      "a": "用于查询正在使用的C++标准库实现的相关信息。"
+    },
+    {
+      "q": "<version>中公开的信息是否在所有实现中完全相同？",
+      "a": "不一定，具体内容取决于库实现。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++头文件",
+    "标准库实现"
+  ],
+  "source_pages": [
+    507,
+    507
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1031_version_头文件",
+  "_chunk_pages": [
+    505,
+    508
+  ]
+}

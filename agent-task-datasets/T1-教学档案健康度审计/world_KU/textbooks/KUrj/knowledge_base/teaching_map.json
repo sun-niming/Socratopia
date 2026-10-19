@@ -1,0 +1,945 @@
+{
+  "version": 2,
+  "generated_at": "2026-06-29T02:53:34.813Z",
+  "segments": [
+    {
+      "page_range": [
+        13,
+        20
+      ],
+      "sequence": [
+        {
+          "phase": 1,
+          "label": "基础认知",
+          "card_ids": [
+            "002_echo_server_的用途",
+            "001_tcp_连接常用系统调用",
+            "004_字节序与监听地址设置",
+            "006_tcp_与_http_的分层关系",
+            "007_项目分层结构"
+          ],
+          "teach_goal": "建立 Echo Server、TCP/HTTP 分层和项目结构的整体认知，并掌握监听前必需的地址与字节序基础。",
+          "branches": [
+            "进一步了解 socket 生命周期",
+            "补充常见网络编程错误排查"
+          ]
+        },
+        {
+          "phase": 2,
+          "label": "监听与验收",
+          "card_ids": [
+            "003_监听套接字初始化",
+            "005_echo_server_验收与排查顺序"
+          ],
+          "teach_goal": "完成监听套接字的创建与初始化，并能按正确顺序验证 Echo Server 是否工作。",
+          "branches": [
+            "端口占用与绑定失败排查",
+            "accept/recv/send 的完整回路"
+          ]
+        },
+        {
+          "phase": 3,
+          "label": "HTTP请求解析",
+          "card_ids": [
+            "008_http_请求行结构",
+            "009_http_header_边界与读取策略",
+            "010_content_length_的含义",
+            "015_httprequest_结构体与解析",
+            "012_http_请求最小格式"
+          ],
+          "teach_goal": "理解 HTTP 请求的最小组成、请求行和 Header 的读取方式，并能将请求解析为结构体。",
+          "branches": [
+            "扩展更多请求头字段",
+            "支持 POST 与带 body 的请求"
+          ]
+        },
+        {
+          "phase": 4,
+          "label": "HTTP响应生成",
+          "card_ids": [
+            "011_send_all_的作用",
+            "014_http_状态码范围",
+            "016_固定_html_响应",
+            "013_http_响应最小格式"
+          ],
+          "teach_goal": "掌握 HTTP 响应的最小格式、状态码选择与可靠发送方法，最终输出固定 HTML 响应。",
+          "branches": [
+            "动态模板渲染",
+            "更多状态码与错误页处理"
+          ]
+        }
+      ],
+      "generated_by": "llm-validated"
+    },
+    {
+      "page_range": [
+        21,
+        28
+      ],
+      "sequence": [
+        {
+          "phase": 1,
+          "label": "第 21-24 页",
+          "card_ids": [
+            "017_send_all_必要性",
+            "018_第2天验收与常见排查",
+            "020_url_映射规则",
+            "021_stat_的作用与普通文件判断"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 2,
+          "label": "第 21-24 页",
+          "card_ids": [
+            "022_open_read_close_读取文件的固定模式",
+            "023_content_length_的来源",
+            "024_mime_类型的作用",
+            "019_浏览器会连续请求多个静态资源"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 3,
+          "label": "第 25-28 页",
+          "card_ids": [
+            "030_stat检查文件状态",
+            "025_mime类型的作用",
+            "027_统一错误响应",
+            "028_url到文件路径映射"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 4,
+          "label": "第 25-28 页",
+          "card_ids": [
+            "029_url路径与文件路径的区别",
+            "031_不服务目录",
+            "032_流式发送文件",
+            "033_第3天验收标准"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        }
+      ],
+      "generated_by": "deterministic-page-order",
+      "fallback_reason": "llm_map_failed"
+    },
+    {
+      "page_range": [
+        26,
+        40
+      ],
+      "sequence": [
+        {
+          "phase": 1,
+          "label": "服务与日志基础",
+          "card_ids": [
+            "026_mime类型表与默认值",
+            "040_访问日志的基本字段",
+            "039_命令行配置服务器",
+            "045_命令行参数配置",
+            "046_访问日志"
+          ],
+          "teach_goal": "掌握服务器启动配置、默认响应类型和访问日志的基本结构，为项目运行与排错打基础。",
+          "branches": [
+            "HTTP 响应头扩展",
+            "日志格式定制"
+          ]
+        },
+        {
+          "phase": 2,
+          "label": "Fork 与并发日志",
+          "card_ids": [
+            "041_fork_场景下的日志写法",
+            "048_fork_的返回值与复制"
+          ],
+          "teach_goal": "理解 fork 的复制与返回值特性，并据此写出多进程场景下安全的日志输出。",
+          "branches": [
+            "进程模型",
+            "并发写日志"
+          ]
+        },
+        {
+          "phase": 3,
+          "label": "路径漏洞入门",
+          "card_ids": [
+            "034_目录穿越漏洞",
+            "036_基础路径过滤规则",
+            "038_根目录边界判断"
+          ],
+          "teach_goal": "识别目录穿越成因，掌握基础路径过滤与根目录边界判断。",
+          "branches": [
+            "输入校验",
+            "路径拼接"
+          ]
+        },
+        {
+          "phase": 4,
+          "label": "路径安全加固",
+          "card_ids": [
+            "035_先_url_解码再检查",
+            "037_realpath_的正确使用",
+            "042_路径安全防护",
+            "043_url_解码顺序",
+            "044_路径校验与_realpath",
+            "047_第4天验收重点"
+          ],
+          "teach_goal": "进一步掌握 URL 解码顺序、realpath 校验和综合路径防护，并完成阶段验收。",
+          "branches": [
+            "规范化处理",
+            "安全审计"
+          ]
+        }
+      ],
+      "generated_by": "llm-validated"
+    },
+    {
+      "page_range": [
+        37,
+        48
+      ],
+      "sequence": [
+        {
+          "phase": 1,
+          "label": "第 37-40 页",
+          "card_ids": [
+            "049_父子进程的_fd_关闭规则",
+            "051_waitpid_回收子进程",
+            "052_accept_的_eintr_处理",
+            "053_fork_并发服务器骨架"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 2,
+          "label": "第 37-40 页",
+          "card_ids": [
+            "054_测试矩阵",
+            "055_多端访问与_http_后端底座",
+            "056_后续_ai_出题判题讲题扩展",
+            "057_为什么五天内优先用_fork"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 3,
+          "label": "第 38-44 页",
+          "card_ids": [
+            "050_子进程用__exit",
+            "058_僵尸进程回收",
+            "059_sigchld_处理与_sa_restart",
+            "060_验收测试要覆盖错误路径"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 4,
+          "label": "第 41-48 页",
+          "card_ids": [
+            "061_文件描述符_fd",
+            "062_socket_函数",
+            "063_项目定位与答辩表达",
+            "064_socket创建监听端点"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        }
+      ],
+      "generated_by": "deterministic-page-order",
+      "fallback_reason": "llm_map_failed"
+    },
+    {
+      "page_range": [
+        45,
+        56
+      ],
+      "sequence": [
+        {
+          "phase": 1,
+          "label": "TCP服务端基础",
+          "card_ids": [
+            "065_setsockopt设置so_reuseaddr",
+            "066_bind绑定本地地址端口",
+            "068_accept取出客户端连接",
+            "069_recv接收字节流",
+            "067_listen进入监听状态"
+          ],
+          "teach_goal": "掌握 TCP 服务端从绑定、监听到接收连接与字节流的基本流程。",
+          "branches": [
+            "客户端连接生命周期"
+          ]
+        },
+        {
+          "phase": 2,
+          "label": "调试与骨架",
+          "card_ids": [
+            "071_第1天调试顺序",
+            "070_send_all_封装",
+            "072_tcp骨架最小流程"
+          ],
+          "teach_goal": "学会用调试顺序和发送封装搭建可运行的 TCP 服务器骨架。",
+          "branches": [
+            "最小可运行服务器模板"
+          ]
+        },
+        {
+          "phase": 3,
+          "label": "HTTP报文解析",
+          "card_ids": [
+            "073_http与tcp字节流",
+            "075_header_与_body_分隔",
+            "076_content_length_含义",
+            "077_connection_close",
+            "078_parse_request_line",
+            "079_send_error",
+            "074_请求行三个字段"
+          ],
+          "teach_goal": "理解 HTTP 报文在 TCP 字节流中的边界、请求行结构及常见解析与错误处理。",
+          "branches": [
+            "HTTP 请求解析器"
+          ]
+        },
+        {
+          "phase": 4,
+          "label": "HTTP服务器实战",
+          "card_ids": [
+            "080_最小http服务器流程"
+          ],
+          "teach_goal": "把前面的 TCP 与 HTTP 知识整合成一个最小可用的 HTTP 服务器流程。",
+          "branches": [
+            "完整请求-响应闭环"
+          ]
+        }
+      ],
+      "generated_by": "llm-validated"
+    },
+    {
+      "page_range": [
+        53,
+        60
+      ],
+      "sequence": [
+        {
+          "phase": 1,
+          "label": "启动与路径基础",
+          "card_ids": [
+            "081_url路径与文件路径",
+            "082_首页映射",
+            "083_浏览器附属资源请求",
+            "093_命令行配置"
+          ],
+          "teach_goal": "先理解程序如何接收配置，再认识 URL 到文件路径的基本映射，以及首页和附属资源请求的处理方式。",
+          "branches": [
+            "可扩展到静态网站资源组织"
+          ]
+        },
+        {
+          "phase": 2,
+          "label": "文件读取与响应",
+          "card_ids": [
+            "088_get_mime_type函数",
+            "089_send_error错误响应",
+            "084_普通文件判断",
+            "085_二进制文件按字节发送",
+            "086_stat函数",
+            "087_open和read读取文件"
+          ],
+          "teach_goal": "掌握如何判断文件是否可服务、读取文件内容，并按正确类型或错误情况返回响应。",
+          "branches": [
+            "可扩展到分块传输与缓存控制"
+          ]
+        },
+        {
+          "phase": 3,
+          "label": "路径规范化",
+          "card_ids": [
+            "092_realpath_的边界判断",
+            "095_url_decode_函数",
+            "096_realpath_函数"
+          ],
+          "teach_goal": "学会先解码再规范化路径，并通过边界判断确保路径仍限定在站点根目录内。",
+          "branches": [
+            "可扩展到不同操作系统路径分隔符"
+          ]
+        },
+        {
+          "phase": 4,
+          "label": "攻击防护与取证",
+          "card_ids": [
+            "090_目录穿越攻击路径",
+            "091_安全检查顺序",
+            "094_访问日志作为证据"
+          ],
+          "teach_goal": "从目录穿越攻击出发，明确安全检查必须发生在风险路径使用之前，并用日志辅助验证与追踪。",
+          "branches": [
+            "可扩展到审计与安全测试"
+          ]
+        }
+      ],
+      "generated_by": "llm-validated"
+    },
+    {
+      "page_range": [
+        57,
+        72
+      ],
+      "sequence": [
+        {
+          "phase": 1,
+          "label": "第 57-62 页",
+          "card_ids": [
+            "097_getopt_函数",
+            "098_strftime_函数",
+            "099_fork_复制进程并复制_fd_表",
+            "101_sigchld_与子进程回收"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 2,
+          "label": "第 61-64 页",
+          "card_ids": [
+            "103_fork_函数用法",
+            "100_僵尸进程",
+            "102_eintr_的处理",
+            "104_waitpid_函数用法"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 3,
+          "label": "第 61-72 页",
+          "card_ids": [
+            "105_sigaction_安装信号处理",
+            "106_最终验收命令组",
+            "107_头文件只放声明",
+            "108_serverconfig_保存_root_与_root_real"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 4,
+          "label": "第 69-72 页",
+          "card_ids": [
+            "109_httpresult_用于统一日志",
+            "110_缓冲区大小要集中定义",
+            "112_load_config_负责默认值与命令行覆盖",
+            "113_端口范围与_root_real_校验"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        }
+      ],
+      "generated_by": "deterministic-page-order",
+      "fallback_reason": "llm_map_failed"
+    },
+    {
+      "page_range": [
+        70,
+        84
+      ],
+      "sequence": [
+        {
+          "phase": 1,
+          "label": "第 70-76 页",
+          "card_ids": [
+            "111_main_c_的职责是启动流程",
+            "114_配置默认值与参数校验",
+            "115_server_c_的职责边界",
+            "116_创建监听_socket"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 2,
+          "label": "第 74-78 页",
+          "card_ids": [
+            "117_sigchld_子进程回收",
+            "118_fork_并发服务循环与_fd_关闭规则",
+            "119_请求行解析函数",
+            "120_请求错误码区分"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 3,
+          "label": "第 79-82 页",
+          "card_ids": [
+            "121_send_all_循环发送",
+            "122_send_error_生成错误响应",
+            "123_响应发送的整体原则",
+            "124_mime_类型判断"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 4,
+          "label": "第 81-84 页",
+          "card_ids": [
+            "128_先解码再校验",
+            "125_url_百分号解码",
+            "126_url_路径合法性校验",
+            "127_根目录边界判断"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        }
+      ],
+      "generated_by": "deterministic-page-order",
+      "fallback_reason": "llm_map_failed"
+    },
+    {
+      "page_range": [
+        85,
+        96
+      ],
+      "sequence": [
+        {
+          "phase": 1,
+          "label": "静态文件基础",
+          "card_ids": [
+            "129_静态文件发送主流程",
+            "132_普通文件判断与文件体发送",
+            "130_url解码与根路径映射",
+            "131_候选路径拼接与根目录边界检查",
+            "133_访问日志写入"
+          ],
+          "teach_goal": "掌握静态文件请求从路径解析到文件发送的核心链路，并完成基础访问日志记录。",
+          "branches": [
+            "路径安全校验",
+            "文件发送流程拆解"
+          ]
+        },
+        {
+          "phase": 2,
+          "label": "请求整合与异常处理",
+          "card_ids": [
+            "134_访问日志检查",
+            "136_解析失败与日志占位",
+            "137_handle_client_自查点",
+            "135_handle_client_总控流程"
+          ],
+          "teach_goal": "把静态文件处理整合进 handle_client，并补齐日志检查、解析失败与自检逻辑。",
+          "branches": [
+            "异常分支处理",
+            "日志格式核对"
+          ]
+        },
+        {
+          "phase": 3,
+          "label": "测试与验收",
+          "card_ids": [
+            "138_测试脚本目的",
+            "139_curl_测试覆盖场景",
+            "140_报告截图证明原则"
+          ],
+          "teach_goal": "理解测试脚本和 curl 的验证作用，学会用截图与覆盖场景证明实现正确。",
+          "branches": [
+            "curl 复现请求",
+            "测试结果留证"
+          ]
+        },
+        {
+          "phase": 4,
+          "label": "并发与扩展",
+          "card_ids": [
+            "141_epoll",
+            "142_线程池",
+            "143_cgi"
+          ],
+          "teach_goal": "建立高并发服务器的基础能力，并理解动态内容扩展方式。",
+          "branches": [
+            "事件驱动模型",
+            "并发处理优化",
+            "动态脚本接口"
+          ]
+        },
+        {
+          "phase": 5,
+          "label": "综合应用",
+          "card_ids": [
+            "144_在线判题"
+          ],
+          "teach_goal": "将前面学到的请求处理、并发与扩展能力综合到在线判题场景中。",
+          "branches": [
+            "综合系统设计",
+            "端到端项目落地"
+          ]
+        }
+      ],
+      "generated_by": "llm-validated"
+    },
+    {
+      "page_range": [
+        93,
+        104
+      ],
+      "sequence": [
+        {
+          "phase": 1,
+          "label": "第 93-100 页",
+          "card_ids": [
+            "145_close",
+            "146_perror",
+            "147_perror打印系统调用错误",
+            "148_memset初始化内存"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 2,
+          "label": "第 97-100 页",
+          "card_ids": [
+            "149_snprintf限制长度拼接字符串",
+            "151_strcmp比较字符串是否相等",
+            "153_strchr查找首个字符",
+            "150_strlen计算字符串长度"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 3,
+          "label": "第 99-104 页",
+          "card_ids": [
+            "152_strncmp按前n字符比较",
+            "155_strstr_查找子串",
+            "154_strrchr_查找最后一个字符",
+            "156_atoi_字符串转整数"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 4,
+          "label": "第 101-104 页",
+          "card_ids": [
+            "157_strtol_更可靠地转整数",
+            "158_fopen_打开文件流",
+            "159_fprintf_格式化写入文件",
+            "160_inet_ntop_网络地址转字符串"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        }
+      ],
+      "generated_by": "deterministic-page-order",
+      "fallback_reason": "llm_map_failed"
+    },
+    {
+      "page_range": [
+        105,
+        112
+      ],
+      "sequence": [
+        {
+          "phase": 1,
+          "label": "系统调用入门",
+          "card_ids": [
+            "163_localtime_r_转本地时间",
+            "161_inet_ntop_替代_inet_ntoa",
+            "162_time_获取当前时间戳"
+          ],
+          "teach_goal": "先掌握时间获取、时间格式转换和地址字符串转换等基础系统接口，为后续服务器开发打底。",
+          "branches": [
+            "时间戳与日期格式化",
+            "IP地址表示与转换"
+          ]
+        },
+        {
+          "phase": 2,
+          "label": "进程与信号",
+          "card_ids": [
+            "164_exit_立即结束子进程",
+            "165_sigemptyset_初始化空信号集",
+            "176_defunct_僵尸进程"
+          ],
+          "teach_goal": "理解信号集初始化、子进程退出和僵尸进程成因，具备处理进程生命周期问题的基础。",
+          "branches": [
+            "子进程管理",
+            "信号处理与回收"
+          ]
+        },
+        {
+          "phase": 3,
+          "label": "端口与连接",
+          "card_ids": [
+            "166_curl_connection_refused_排错",
+            "167_bind_address_already_in_use_排错",
+            "168_端口占用与_so_reuseaddr",
+            "177_服务器运行一会儿后停止接收连接"
+          ],
+          "teach_goal": "掌握服务器绑定、端口占用、连接被拒绝以及运行一段时间后失去接收能力的排查思路。",
+          "branches": [
+            "端口复用",
+            "连接建立与监听队列"
+          ]
+        },
+        {
+          "phase": 4,
+          "label": "页面与HTTP排障",
+          "card_ids": [
+            "170_css_不生效",
+            "169_浏览器空白但_curl_有内容",
+            "171_图片或大文件只返回一半",
+            "172_目录穿越",
+            "174_post_没有返回_405",
+            "173_不存在文件却返回_403"
+          ],
+          "teach_goal": "在服务能连通后，进一步定位页面渲染、静态资源、HTTP方法和文件访问权限等问题。",
+          "branches": [
+            "静态资源加载",
+            "HTTP状态码与路径安全"
+          ]
+        }
+      ],
+      "generated_by": "llm-validated"
+    },
+    {
+      "page_range": [
+        111,
+        116
+      ],
+      "sequence": [
+        {
+          "phase": 1,
+          "label": "第 111-116 页",
+          "card_ids": [
+            "175_错误请求没有写入日志",
+            "178_进程与监听检查",
+            "179_fork_与_accept_异常处理",
+            "180_中文乱码排查与修复"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 2,
+          "label": "第 113-116 页",
+          "card_ids": [
+            "181_服务器启动与_tcp_回显",
+            "183_post_方法不允许",
+            "184_curl_v_调试头信息",
+            "185_练习页返回_200"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 3,
+          "label": "第 113-116 页",
+          "card_ids": [
+            "186_css_的_mime_类型",
+            "187_不存在文件返回_404",
+            "188_目录穿越防护",
+            "189_编码穿越防护"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 4,
+          "label": "第 113-116 页",
+          "card_ids": [
+            "190_访问日志记录",
+            "191_并发访问稳定性",
+            "192_僵尸进程检查",
+            "193_最终回归测试"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        }
+      ],
+      "generated_by": "deterministic-page-order",
+      "fallback_reason": "llm_map_failed"
+    },
+    {
+      "page_range": [
+        114,
+        132
+      ],
+      "sequence": [
+        {
+          "phase": 1,
+          "label": "第 114-120 页",
+          "card_ids": [
+            "182_根路径返回首页",
+            "194_200_ok_返回_html",
+            "195_200_ok_返回_css",
+            "196_200_ok_返回_json"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 2,
+          "label": "第 117-124 页",
+          "card_ids": [
+            "197_常见错误响应码",
+            "198_mime_与扩展名测试库",
+            "199_静态文件的_mime_类型映射",
+            "200_curl_常用调试参数"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 3,
+          "label": "第 123-128 页",
+          "card_ids": [
+            "201_静态站点测试用例与预期状态码",
+            "202_推荐编译参数",
+            "203_addresssanitizer_调试选项",
+            "204_常见编译_链接错误"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 4,
+          "label": "第 125-132 页",
+          "card_ids": [
+            "205_gdb_最小调试路线",
+            "206_报告中的测试表模板",
+            "207_关键实现顺序回放",
+            "208_http_通用协议"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        }
+      ],
+      "generated_by": "deterministic-page-order",
+      "fallback_reason": "llm_map_failed"
+    },
+    {
+      "page_range": [
+        129,
+        132
+      ],
+      "sequence": [
+        {
+          "phase": 1,
+          "label": "起步与响应",
+          "card_ids": [
+            "209_静态服务器先支持_get",
+            "210_content_length_的作用",
+            "211_不能用_strlen_统计文件长度",
+            "212_css_需要正确的_mime",
+            "213_404_与_403_的区别",
+            "217_so_reuseaddr_的作用",
+            "222_日志要记录状态码",
+            "223_命令行参数配置"
+          ],
+          "teach_goal": "先把静态服务器的启动配置、基础响应和正确的 HTTP 返回规则搭起来。",
+          "branches": [
+            "补充请求头与响应头格式",
+            "对比不同资源类型的返回策略"
+          ]
+        },
+        {
+          "phase": 2,
+          "label": "路径安全",
+          "card_ids": [
+            "214_先_url_解码再查穿越",
+            "215_realpath_不能直接用于所有路径",
+            "216_root_前缀要检查边界"
+          ],
+          "teach_goal": "在读取文件前正确解析路径并阻止目录穿越与越界访问。",
+          "branches": [
+            "URL 编码与解码顺序",
+            "路径规范化的边界条件"
+          ]
+        },
+        {
+          "phase": 3,
+          "label": "并发健壮",
+          "card_ids": [
+            "218_fork_后父进程关_client_fd",
+            "219_fork_后子进程关_listen_fd",
+            "220_回收子进程",
+            "221_accept_要处理_eintr",
+            "224_不要直接照搬_tinyhttpd"
+          ],
+          "teach_goal": "让服务器在信号、fork 和多进程场景下稳定工作，并形成可维护的实现思路。",
+          "branches": [
+            "父子进程资源管理",
+            "子进程回收与僵尸进程",
+            "代码迁移与重构取舍"
+          ]
+        }
+      ],
+      "generated_by": "llm-validated"
+    },
+    {
+      "page_range": [
+        129,
+        136
+      ],
+      "sequence": [
+        {
+          "phase": 1,
+          "label": "第 129-132 页",
+          "card_ids": [
+            "225_http_底座与_ai_系统",
+            "226_http_便于多端复用",
+            "227_五天项目不做_epoll",
+            "228_http_响应要有空行和_crlf"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 2,
+          "label": "第 129-136 页",
+          "card_ids": [
+            "229_send_要考虑未发送完",
+            "230_stat_与_open_失败要处理",
+            "231_不要直接拼接用户_url",
+            "232_推荐阅读顺序"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 3,
+          "label": "第 133-136 页",
+          "card_ids": [
+            "234_本地资料仓库位置",
+            "235_按天对应的资料索引",
+            "236_不采用的资料",
+            "237_查阅官方资料的原则"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 4,
+          "label": "第 135-136 页",
+          "card_ids": [
+            "233_五天学习内容范围"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        }
+      ],
+      "generated_by": "deterministic-page-order",
+      "fallback_reason": "llm_map_failed"
+    }
+  ],
+  "fallback_segments": 8
+}

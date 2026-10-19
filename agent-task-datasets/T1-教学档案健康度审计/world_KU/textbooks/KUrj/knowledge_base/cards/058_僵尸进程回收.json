@@ -1,0 +1,41 @@
+{
+  "title": "僵尸进程回收",
+  "definition": "僵尸进程不是“还在运行”的子进程，而是子进程已经结束，但父进程还没有读取它的退出状态。此时内核会保留一小段进程表信息；如果并发创建很多子进程，僵尸进程会不断累积，所以必须用 waitpid 回收。",
+  "key_points": [
+    "子进程结束但父进程未回收退出状态时，会出现僵尸进程。",
+    "僵尸进程会占用进程表信息，数量多了会累积。",
+    "回收时常在 SIGCHLD 处理函数里循环调用 waitpid(-1, NULL, WNOHANG) > 0。"
+  ],
+  "examples": [
+    "void handle_sigchld(int sig) { (void)sig; while (waitpid(-1, NULL, WNOHANG) > 0) { } }"
+  ],
+  "misconceptions": [
+    "误以为僵尸进程就是子进程仍在正常运行。",
+    "误以为只要程序结束了就不会留下任何进程表信息。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "什么是僵尸进程？",
+      "a": "子进程已经结束，但父进程还没有读取它的退出状态时，内核保留的进程表信息状态。"
+    },
+    {
+      "q": "为什么要在信号处理里循环调用 waitpid？",
+      "a": "因为一次 SIGCHLD 可能对应多个已结束子进程，循环回收才能把它们都清理掉。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "子进程"
+  ],
+  "source_pages": [
+    41,
+    44
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "058_僵尸进程回收",
+  "_chunk_pages": [
+    41,
+    44
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "title": "href中的相对URL示例",
+  "definition": "教材在 href 属性的说明中给出了相对 URL 的写法示例，说明链接地址不一定要写成完整的绝对地址，也可以写成相对路径形式。",
+  "key_points": [
+    "教材给出了 href 的相对 URL 示例。",
+    "示例包括 yule/news.html、../oa.html、pop.html。",
+    "这些示例都写成了路径形式，而不是完整网址。"
+  ],
+  "examples": [
+    "href=\"yule/news.html\"",
+    "href=\"../oa.html\"",
+    "href=\"pop.html\""
+  ],
+  "misconceptions": [
+    "以为 href 必须写完整的网址。",
+    "以为只有一种相对 URL 写法。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "教材中给出的 href 相对 URL 示例有哪些？",
+      "a": "yule/news.html、../oa.html、pop.html。"
+    },
+    {
+      "q": "href 一定要写完整网址吗？",
+      "a": "不一定，教材给出了相对 URL 的写法示例。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "href属性"
+  ],
+  "source_pages": [
+    53,
+    56
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "071_href中的相对url示例",
+  "_chunk_pages": [
+    53,
+    56
+  ]
+}

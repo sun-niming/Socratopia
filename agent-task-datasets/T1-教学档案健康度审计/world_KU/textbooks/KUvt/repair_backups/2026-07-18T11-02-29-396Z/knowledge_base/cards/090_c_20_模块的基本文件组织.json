@@ -1,0 +1,46 @@
+{
+  "title": "C++20 模块的基本文件组织",
+  "definition": "C++20 模块可以把模块接口和模块实现分离。原文展示了模块接口文件中的 export module airline_ticket;，以及实现文件中的 module airline_ticket;。接口中导出类及其公共声明，实现在另一个源文件中定义成员函数。",
+  "key_points": [
+    "模块接口声明使用 export module 模块名;，原文模块名为 airline_ticket。",
+    "实现文件使用 module airline_ticket; 指定自己属于该模块，但不再写 export。",
+    "模块接口中可使用 import <string>; 引入字符串相关声明。",
+    "原文说明 C++ 模块相关文件通常使用 .cppm 表示模块接口、.cpp 表示实现文件；具体文件扩展名可能受编译器和工具链约定影响。"
+  ],
+  "examples": [
+    "模块接口：export module airline_ticket;",
+    "模块接口中：import <string>;",
+    "实现文件：module airline_ticket;"
+  ],
+  "misconceptions": [
+    "export module 与 module 不是同一条声明：前者声明并导出模块接口，后者用于模块实现单元。",
+    "模块接口文件和实现文件属于同一个模块时，模块名必须对应。",
+    "模块文件的扩展名本身不是 C++ 语言语法；原文给出的 .cppm 和 .cpp 属于文件组织示例。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "模块接口文件中如何声明 airline_ticket 模块？",
+      "a": "使用 export module airline_ticket;。"
+    },
+    {
+      "q": "模块实现文件中如何表明它属于 airline_ticket 模块？",
+      "a": "使用 module airline_ticket;。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++源文件与编译单元",
+    "类声明"
+  ],
+  "source_pages": [
+    63,
+    64
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 modules .cppm extension module interface unit export module implementation unit official standard",
+  "concept_id": "090_c_20_模块的基本文件组织",
+  "_chunk_pages": [
+    61,
+    64
+  ]
+}

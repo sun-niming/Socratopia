@@ -1,0 +1,37 @@
+{
+  "title": "form的name属性",
+  "definition": "form标签的name属性表示表单的唯一标识，后端可以根据这个名称确定数据来源。",
+  "key_points": [
+    "name属性用于标识表单。",
+    "教材指出它是表单的唯一标识。",
+    "后端根据该名称确定数据来源。"
+  ],
+  "examples": [
+    "<form name=\"loginForm\"></form>"
+  ],
+  "misconceptions": [
+    "name属性只是随便写的，没有识别作用。",
+    "name属性主要用来决定表单提交地址。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "form标签的name属性有什么作用？",
+      "a": "它是表单的唯一标识，后端可根据此名称确定数据来源。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "HTML表单的作用与组成"
+  ],
+  "source_pages": [
+    65,
+    68
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "100_form的name属性",
+  "_chunk_pages": [
+    65,
+    68
+  ]
+}

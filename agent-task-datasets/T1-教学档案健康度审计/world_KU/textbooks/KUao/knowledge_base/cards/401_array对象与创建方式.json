@@ -1,0 +1,38 @@
+{
+  "title": "Array对象与创建方式",
+  "definition": "在 ECMAScript 中，数组也是对象。使用一对方括号创建数组时，实际上是调用 Array 构造函数来创建一个 Array 类的实例。教材给出了 3 种写法：`new Array(元素1, 元素2, ..., 元素n)`、`new Array(数组长度)`、`[数据元素]`。",
+  "key_points": [
+    "数组在 ECMAScript 中本质上也是对象",
+    "`new Array(...)` 可以按元素创建，也可以按长度创建",
+    "`[ ... ]` 是更常见的数组字面量写法"
+  ],
+  "examples": [
+    "var arr1 = new Array(1, 2, 3);",
+    "var arr2 = new Array(5);",
+    "var arr3 = [1, 2, 3];"
+  ],
+  "misconceptions": [
+    "以为数组不是对象，只是单独的数据类型",
+    "以为只有 `new Array()` 才能创建数组",
+    "以为方括号写法和 Array 构造函数没有关系"
+  ],
+  "qa_pairs": [
+    {
+      "q": "教材中数组有哪几种创建方式？",
+      "a": "`new Array(元素1, 元素2, ..., 元素n)`、`new Array(数组长度)`、`[数据元素]`。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [],
+  "source_pages": [
+    305,
+    308
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "401_array对象与创建方式",
+  "_chunk_pages": [
+    305,
+    308
+  ]
+}

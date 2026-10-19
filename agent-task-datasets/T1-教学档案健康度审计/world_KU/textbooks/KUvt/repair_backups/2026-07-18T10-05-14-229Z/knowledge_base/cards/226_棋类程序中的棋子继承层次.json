@@ -1,0 +1,41 @@
+{
+  "title": "棋类程序中的棋子继承层次",
+  "definition": "教材中的棋类模型以 ChessPiece 作为棋子抽象类型，并列出 Bishop、Knight、Rook、King、Pawn、Queen 等具体棋子类型。具体棋子共享 ChessPiece 的共同抽象，同时可以分别实现或表示各自的棋子行为。",
+  "key_points": [
+    "ChessPiece 是棋子类型的共同抽象。",
+    "Bishop、Knight、Rook、King、Pawn、Queen 是具体棋子类型。",
+    "这种结构用一个共同的基类表示多种棋子，便于在棋盘和游戏逻辑中统一处理不同棋子。"
+  ],
+  "examples": [
+    "可将棋子类型关系概括为：$$\\text{ChessPiece}\\rightarrow\\{\\text{Bishop},\\text{Knight},\\text{Rook},\\text{King},\\text{Pawn},\\text{Queen}\\}$$"
+  ],
+  "misconceptions": [
+    "ChessPiece 不等于某一种具体棋子；它表示所有棋子的共同抽象。",
+    "继承层次本身并不表示棋子的摆放位置或棋盘状态。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "教材列出的具体棋子类型有哪些？",
+      "a": "Bishop、Knight、Rook、King、Pawn 和 Queen。"
+    },
+    {
+      "q": "ChessPiece 在该结构中的作用是什么？",
+      "a": "ChessPiece 是各种具体棋子共享的抽象类型，用于统一表示和处理棋子。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++类与继承"
+  ],
+  "source_pages": [
+    161,
+    164
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "226_棋类程序中的棋子继承层次",
+  "_chunk_pages": [
+    161,
+    164
+  ]
+}

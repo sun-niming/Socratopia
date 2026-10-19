@@ -1,0 +1,48 @@
+{
+  "title": "Shell变量替换：默认值与条件替换",
+  "definition": "Shell支持多种变量替换形式。${var}返回变量var的值；若未初始化，则返回空。${var:-str}表示：若var存在且不为空，则返回var的值，否则返回str。${var:=str}表示：若var存在且不为空，则返回var的值，否则将str赋给var并返回。${var:?str}表示：若var存在且不为空，则返回var的值，否则显示“var:str”。${var:+str}表示：若var存在且不为空，则返回str，否则返回空。",
+  "key_points": [
+    "${var}：返回var的值，未初始化则返回空",
+    "${var:-str}：var存在且不为空时返回var，否则返回str",
+    "${var:=str}：var存在且不为空时返回var，否则先赋值str再返回",
+    "${var:?str}：var存在且不为空时返回var，否则显示“var:str”",
+    "${var:+str}：var存在且不为空时返回str，否则返回空"
+  ],
+  "examples": [
+    "${var}",
+    "${var:-default}",
+    "${var:=default}",
+    "${var:?error}",
+    "${var:+ok}"
+  ],
+  "misconceptions": [
+    "误以为“:-”和“:=”作用相同；实际上“:=”还会给变量赋值",
+    "误以为“:+”会返回变量本身；原文说明它在变量存在且不为空时返回的是str",
+    "误以为变量未初始化时“${var}”会报错；原文说明其返回空"
+  ],
+  "qa_pairs": [
+    {
+      "q": "“${var:-str}”和“${var:=str}”有什么区别？",
+      "a": "两者都在var不存在或为空时使用str，但“${var:=str}”会把str赋给var，而“${var:-str}”只返回str、不赋值。"
+    },
+    {
+      "q": "“${var:+str}”在什么情况下返回str？",
+      "a": "当var存在且不为空时返回str，否则返回空。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "Shell变量引用"
+  ],
+  "source_pages": [
+    61,
+    64
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "110_shell变量替换_默认值与条件替换",
+  "_chunk_pages": [
+    61,
+    64
+  ]
+}

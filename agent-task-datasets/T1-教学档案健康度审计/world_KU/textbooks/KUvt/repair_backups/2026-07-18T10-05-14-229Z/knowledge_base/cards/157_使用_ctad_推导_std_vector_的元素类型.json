@@ -1,0 +1,43 @@
+{
+  "title": "使用 CTAD 推导 std::vector 的元素类型",
+  "definition": "类模板参数推导（CTAD，Class Template Argument Deduction）允许在创建 std::vector 时省略模板参数，让编译器根据初始化元素推导元素类型。字符串字面量和 std::string 对象会导致不同的推导结果。",
+  "key_points": [
+    "vector names { \"John\", \"Sam\", \"Joe\" }; 会根据普通字符串字面量推导出元素类型为 const char*，即类似 std::vector<const char*>。",
+    "vector names { \"John\"s, \"Sam\"s, \"Joe\"s }; 会根据 std::string 字面量推导出元素类型为 std::string，即类似 std::vector<std::string>。",
+    "使用 \"s\" 后缀可以明确让字符串元素成为 std::string，而不是 const char*。"
+  ],
+  "examples": [
+    "vector names { \"John\", \"Sam\", \"Joe\" }; // 推导为包含 const char* 元素的 vector",
+    "vector names { \"John\"s, \"Sam\"s, \"Joe\"s }; // 推导为 std::vector<std::string>"
+  ],
+  "misconceptions": [
+    "CTAD 不会因为变量名是 names 就自动选择 std::string；推导结果取决于初始化表达式的实际类型。",
+    "普通字符串字面量与带 \"s\" 后缀的字符串字面量不是同一种类型，因此会产生不同的 vector 元素类型。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "vector names { \"John\", \"Sam\", \"Joe\" }; 通过 CTAD 可能推导出什么元素类型？",
+      "a": "根据普通字符串字面量，推导出元素类型为 const char*，即类似 std::vector<const char*>。"
+    },
+    {
+      "q": "如何让 CTAD 推导出 std::vector<std::string>？",
+      "a": "给每个字符串字面量加上 std::string_literals 提供的 \"s\" 后缀，例如 vector names { \"John\"s, \"Sam\"s, \"Joe\"s };。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "类模板参数推导 CTAD",
+    "字符串字面量与 std::string_literals 后缀"
+  ],
+  "source_pages": [
+    109,
+    112
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 CTAD vector names { \"John\", \"Sam\", \"Joe\" } vector<const char*> vector<string> \"s\" 后缀",
+  "concept_id": "157_使用_ctad_推导_std_vector_的元素类型",
+  "_chunk_pages": [
+    109,
+    112
+  ]
+}

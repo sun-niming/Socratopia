@@ -1,0 +1,44 @@
+{
+  "title": "grep命令筛选文件内容",
+  "definition": "grep 用于文件内容筛选。教材给出的基本格式是：grep [选项] 模式 文件列表。其中“模式”是正则表达式，用来描述要匹配的内容。",
+  "key_points": [
+    "基本格式：grep [选项] 模式 文件列表",
+    "用途：对文件内容进行筛选",
+    "模式使用正则表达式"
+  ],
+  "examples": [
+    "grep \"main\" a.c",
+    "grep \"^root\" /etc/passwd"
+  ],
+  "misconceptions": [
+    "把 grep 理解成按文件名筛选是不对的，教材明确是文件内容筛选",
+    "把“模式”当成只能是普通字符串不完整，教材明确指出模式是正则表达式"
+  ],
+  "qa_pairs": [
+    {
+      "q": "grep 命令的主要作用是什么？",
+      "a": "用于文件内容筛选。"
+    },
+    {
+      "q": "教材中 grep 的基本语法是什么？",
+      "a": "grep [选项] 模式 文件列表。"
+    },
+    {
+      "q": "grep 中的“模式”指什么？",
+      "a": "指正则表达式。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [],
+  "source_pages": [
+    17,
+    20
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "038_grep命令筛选文件内容",
+  "_chunk_pages": [
+    17,
+    20
+  ]
+}

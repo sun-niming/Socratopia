@@ -1,0 +1,44 @@
+{
+  "title": "使用 ExpectException 编写负面测试",
+  "definition": "负面测试是专门验证某种操作应当失败的测试，例如验证某个方法是否抛出预期类型的异常。Visual C++测试框架提供 Assert::ExpectException<T>() 处理这类测试，其中模板类型参数 T 指定预期异常的类型；传入的 lambda 表达式用于执行预期会抛出异常的代码。",
+  "key_points": [
+    "负面测试检验的是预期失败行为，而不是正常成功行为。",
+    "`Assert::ExpectException<std::invalid_argument>(lambda);` 表示 lambda 应抛出 `std::invalid_argument`。",
+    "如果 lambda 没有抛出预期异常类型，测试不会满足该负面测试的要求。",
+    "示例中的 lambda 抛出带有消息 `\"Error\"` 的 `std::invalid_argument` 异常。"
+  ],
+  "examples": [
+    "`Assert::ExpectException<std::invalid_argument>([]{ throw std::invalid_argument(\"Error\"); });`"
+  ],
+  "misconceptions": [
+    "负面测试不是把测试写错，而是有意验证异常、错误输入或其他失败行为。",
+    "ExpectException 的模板参数不是任意说明文字，而是要验证的异常类型。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何测试一段代码是否抛出 std::invalid_argument？",
+      "a": "将该代码放入 lambda，并使用 `Assert::ExpectException<std::invalid_argument>(lambda);` 进行断言。"
+    },
+    {
+      "q": "负面测试主要验证什么？",
+      "a": "验证程序在特定错误条件下是否按预期失败，例如抛出指定类型的异常。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++异常处理",
+    "lambda 表达式",
+    "Visual C++单元测试断言"
+  ],
+  "source_pages": [
+    886,
+    886
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1834_使用_expectexception_编写负面测试",
+  "_chunk_pages": [
+    885,
+    888
+  ]
+}

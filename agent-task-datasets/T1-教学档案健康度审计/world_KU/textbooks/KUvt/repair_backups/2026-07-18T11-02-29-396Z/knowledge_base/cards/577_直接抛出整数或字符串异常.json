@@ -1,0 +1,48 @@
+{
+  "title": "直接抛出整数或字符串异常",
+  "definition": "C++ 允许使用 `throw` 直接抛出整数、字符串字面量等值。例如，文件打开失败时可以抛出整数错误码，也可以抛出字符串错误信息；调用方必须使用对应类型的 `catch` 参数进行捕获。",
+  "key_points": [
+    "整数异常示例为 `throw 5;`，对应 `catch (int e)`。",
+    "字符串字面量异常示例为 `throw \"Unable to open file\";`，对应 `catch (const char* e)`。",
+    "捕获整数后可以把错误码格式化到错误信息中，例如输出文件名和错误码。",
+    "捕获字符串后可以直接输出该字符串。"
+  ],
+  "examples": [
+    "整数异常处理示例：`catch (int e) { cerr << format(\"Unable to open file {} (Error Code {})\", filename, e) << endl; return 1; }`。",
+    "字符串异常处理示例：`catch (const char* e) { cerr << e << endl; return 1; }`。"
+  ],
+  "misconceptions": [
+    "抛出字符串字面量时，捕获类型不是 `string`，原文示例使用的是 `const char*`。",
+    "`catch (int e)` 只能匹配整数异常，不能直接匹配字符串异常。",
+    "异常值的类型会影响捕获方式；不同类型不能随意使用同一个精确类型的 `catch`。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`throw 5;` 应由哪种 `catch` 捕获？",
+      "a": "应由 `catch (int e)` 捕获。"
+    },
+    {
+      "q": "`throw \"Unable to open file\";` 在原文示例中由哪种 `catch` 捕获？",
+      "a": "由 `catch (const char* e)` 捕获。"
+    },
+    {
+      "q": "整数异常被捕获后，示例中如何使用该整数？",
+      "a": "将它作为错误码，和文件名一起格式化输出。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "异常的抛出与捕获"
+  ],
+  "source_pages": [
+    441,
+    442
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "577_直接抛出整数或字符串异常",
+  "_chunk_pages": [
+    441,
+    444
+  ]
+}

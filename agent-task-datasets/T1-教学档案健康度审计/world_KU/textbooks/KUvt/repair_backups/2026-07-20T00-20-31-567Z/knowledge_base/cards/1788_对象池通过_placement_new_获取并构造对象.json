@@ -1,0 +1,51 @@
+{
+  "title": "对象池通过 placement new 获取并构造对象",
+  "definition": "对象池的 acquireObject() 方法从空闲对象列表取得一个 T*。如果没有空闲位置，就先调用 addChunk() 分配新块。随后使用 placement new 在该未初始化内存上构造 T，并把传入 acquireObject() 的参数完美转发给 T 的构造函数，最后返回一个带自定义删除器的 std::shared_ptr<T>。",
+  "key_points": [
+    "空闲对象列表为空时，先执行 addChunk()。",
+    "placement new 只在指定的已有内存位置构造对象，不重新分配内存：\n$$\\text{new}(object)\\ T\\{\\text{std::forward<Args>(args)}...\\};$$",
+    "acquireObject() 是可变参数模板，因此可以接受任意数量和类型的构造参数。",
+    "构造成功后，从 m_freeObjects 的末尾移除该位置。",
+    "返回的 shared_ptr 使用自定义删除器；删除器不释放内存，而是销毁对象并把该位置放回空闲列表。"
+  ],
+  "examples": [
+    "典型实现逻辑为：\n```cpp\ntemplate <typename... Args>\nstd::shared_ptr<T> acquireObject(Args&&... args) {\n    if (m_freeObjects.empty()) {\n        addChunk();\n    }\n    T* object { m_freeObjects.back() };\n    new (object) T { std::forward<Args>(args)... };\n    m_freeObjects.pop_back();\n    return std::shared_ptr<T> { object, [this](T* object) {\n        std::destroy_at(object);\n        m_freeObjects.push_back(object);\n    } };\n}\n```"
+  ],
+  "misconceptions": [
+    "placement new 不会分配新的内存；它只在已有的未初始化存储中调用构造函数。",
+    "shared_ptr 的默认删除行为不能直接用于这种对象池，因为对象池中的内存不应在每次对象归还时释放。",
+    "对象归还对象池时仍然需要调用析构函数；复用的是存储空间，不是跳过对象生命周期管理。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "当对象池没有空闲对象时，acquireObject() 做什么？",
+      "a": "调用 addChunk() 分配一个新的未初始化内存块，并把其中各个位置加入空闲对象列表，然后取得一个位置构造对象。"
+    },
+    {
+      "q": "对象池返回的 shared_ptr 被销毁时会发生什么？",
+      "a": "自定义删除器调用 std::destroy_at() 销毁对象，然后把该对象的地址放回 m_freeObjects，而不是释放底层内存。"
+    },
+    {
+      "q": "如何把 acquireObject() 的参数传给 T 的构造函数？",
+      "a": "通过 std::forward<Args>(args)... 完美转发，例如 placement new 表达式为 $$\\text{new}(object)\\ T\\{\\text{std::forward<Args>(args)}...\\};$$"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "对象池按倍增策略分配新内存块",
+    "placement new",
+    "可变参数模板与完美转发",
+    "std::shared_ptr自定义删除器"
+  ],
+  "source_pages": [
+    861,
+    862
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1788_对象池通过_placement_new_获取并构造对象",
+  "_chunk_pages": [
+    861,
+    864
+  ]
+}

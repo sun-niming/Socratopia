@@ -1,0 +1,44 @@
+{
+  "title": "C++20有符号数与无符号数的安全比较",
+  "definition": "C++20在<utility>中提供std::cmp_equal、std::cmp_not_equal、std::cmp_less、std::cmp_less_equal、std::cmp_greater和std::cmp_greater_equal等比较函数，用于更恰当地比较两个整数，尤其适合有符号整数和无符号整数混合比较的场景。",
+  "key_points": [
+    "普通混合比较可能发生隐式转换，导致有符号负数转换为很大的无符号数。",
+    "安全比较函数能够按照整数的数学意义处理有符号数与无符号数的比较。",
+    "原文示例中，普通表达式-1 > 0u的结果为true，而std::cmp_greater(-1, 0u)的结果为false。"
+  ],
+  "examples": [
+    "普通比较：std::cout << (-1 > 0u) << std::endl;结果为1。",
+    "安全比较：std::cout << std::cmp_greater(-1, 0u) << std::endl;结果为0。",
+    "原因是普通比较中-1会先转换为无符号整数，成为一个很大的正数。"
+  ],
+  "misconceptions": [
+    "表达式-1 > 0u一定按数学意义比较并得到false；实际上普通C++混合比较会触发类型转换，结果可能为true。",
+    "只要比较双方写成整数，就不需要考虑有符号性；实际上有符号和无符号混合比较可能产生意外结果。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么普通表达式-1 > 0u可能为true？",
+      "a": "因为混合比较时-1会转换为无符号整数，变成一个很大的无符号值，因此大于0u。"
+    },
+    {
+      "q": "如何安全地判断-1是否大于0u？",
+      "a": "使用std::cmp_greater(-1, 0u)，其结果按数学意义比较，为false。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "整数类型转换",
+    "有符号整数与无符号整数"
+  ],
+  "source_pages": [
+    504,
+    504
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1018_c_20有符号数与无符号数的安全比较",
+  "_chunk_pages": [
+    501,
+    504
+  ]
+}

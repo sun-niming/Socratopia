@@ -1,0 +1,48 @@
+{
+  "title": "源代码控制解决方案的分类与示例",
+  "definition": "原文按部署和协作方式将源代码控制解决方案分为仅本地、客户机/服务器和分布式三类，并分别列出免费或开源方案以及商业方案。表中的列表只是精选示例，并不完整；本书没有具体建议使用哪一种方案。",
+  "key_points": [
+    "仅本地解决方案示例：免费或开源的 sees、商业的 RCS。",
+    "客户机/服务器解决方案示例：免费或开源的 CVS、Subversion；商业的 IBM Rational ClearCase、Azure DevOps Server、Perforce。",
+    "分布式解决方案示例：免费或开源的 Git、Mercurial、Bazaar；商业的 TeamWare、BitKeeper、Plastic SCM。",
+    "原文明确说明该列表不完整，只是用于了解可用解决方案的精选列表。"
+  ],
+  "examples": [
+    "可以把 Git、Mercurial 和 Bazaar 归入原文表格中的分布式解决方案示例。",
+    "可以把 CVS 和 Subversion 归入客户机/服务器解决方案示例。"
+  ],
+  "misconceptions": [
+    "表格并不是源代码控制软件的完整清单。",
+    "表格按解决方案类型和免费/开源或商业属性进行示例性分类，不表示每个方案只能用于某一种开发场景。",
+    "原文没有要求读者必须选择表中的某一个方案。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "原文列出的源代码控制解决方案分为哪几类？",
+      "a": "分为仅本地解决方案、客户机/服务器解决方案和分布式解决方案。"
+    },
+    {
+      "q": "Git 在原文表格中属于哪一类？",
+      "a": "Git 被列为分布式解决方案中的免费或开源示例。"
+    },
+    {
+      "q": "原文是否声称表 28-1 列出了所有可用的解决方案？",
+      "a": "不是。原文说明列表并不完整，只是一组精选的解决方案。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "源代码控制中的基本术语"
+  ],
+  "source_pages": [
+    849,
+    849
+  ],
+  "needs_verification": true,
+  "verify_query": "《C++20高级编程》第5版 表28-1 sees RCS CVS Subversion Git Mercurial Bazaar TeamWare BitKeeper Plastic SCM 源代码控制解决方案",
+  "concept_id": "1765_源代码控制解决方案的分类与示例",
+  "_chunk_pages": [
+    849,
+    852
+  ]
+}

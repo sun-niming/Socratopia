@@ -1,0 +1,46 @@
+{
+  "title": "属性操作方法：getAttribute、setAttribute、hasAttribute、removeAttribute",
+  "definition": "这些方法用于更通用地获取、设置、检查和删除元素属性，适用于所有属性，包括自定义属性。",
+  "key_points": [
+    "`getAttribute(name)`：获取指定属性的值，返回字符串。",
+    "`setAttribute(name, value)`：设置指定属性的值；若已存在则更新，否则创建新属性。",
+    "`hasAttribute(name)`：检查元素是否有指定属性，返回布尔值。",
+    "`removeAttribute(name)`：删除指定属性。",
+    "这些方法比直接访问属性更通用，可用于自定义属性。"
+  ],
+  "examples": [
+    "let v = element.getAttribute('data-id');",
+    "element.setAttribute('title', 'hello');",
+    "if (element.hasAttribute('disabled')) { /* ... */ }",
+    "element.removeAttribute('title');"
+  ],
+  "misconceptions": [
+    "认为只能操作标准属性；实际上也适用于自定义属性。",
+    "认为`setAttribute`只能修改已有属性；它也能创建新属性。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`getAttribute(name)`返回什么类型的值？",
+      "a": "返回字符串。"
+    },
+    {
+      "q": "`hasAttribute(name)`的返回值是什么？",
+      "a": "布尔值。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "标准属性的直接访问与修改"
+  ],
+  "source_pages": [
+    353,
+    356
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "507_属性操作方法_getattribute_setattribute_hasattr",
+  "_chunk_pages": [
+    353,
+    356
+  ]
+}

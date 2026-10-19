@@ -1,0 +1,115 @@
+{
+  "conversationId": "OcA2C0_PyxXRNZMU4_8Lf",
+  "generatedAt": 1782380821812,
+  "pagesRange": "p.142",
+  "sections": [
+    {
+      "type": "tldr",
+      "content": "这一段把 CSS 定位的几种常见模式串起来了：`static` 是默认流，`relative` 原位偏移，`absolute` 脱离文档流找非 `static` 祖先，`fixed` 钉在视口上，`sticky` 则先流动后粘住；最后再用 `float` 处理环绕和并排布局。"
+    },
+    {
+      "type": "narrative",
+      "content": "先从 `margin` 确认“空白在元素外面”这个盒模型边界，再把 `static`、`relative`、`absolute`、`sticky`、`fixed` 的差别一层层分开。最后落到 `z-index` 和 `float`：前者管层叠遮挡，后者管浮动排版。"
+    },
+    {
+      "type": "concepts",
+      "items": [
+        {
+          "name": "margin",
+          "body": "- `margin` 是**元素外边距**，留出来的空白在元素外面，不算进内容区。\n- 四个方向：`margin-top`、`margin-right`、`margin-bottom`、`margin-left`。\n- 作用：给盒子外面留空，把别的元素推开。"
+        },
+        {
+          "name": "static",
+          "body": "- `position: static` 是**默认状态**。\n- 元素仍在**标准文档流**里，不会脱离布局。\n- `top`、`right`、`bottom`、`left` 这类偏移属性通常对它不起作用。\n- `z-index` 一般也不作用于它。"
+        },
+        {
+          "name": "relative",
+          "body": "- `position: relative` 是**相对定位**。\n- 元素**还占着原来的位置**，只是视觉上自己偏移一点。\n- 可以理解成：**动了，但原位还在**。"
+        },
+        {
+          "name": "absolute",
+          "body": "- `position: absolute` 是**绝对定位**。\n- 它会**脱离标准文档流**，原来的占位会让出来，后面的元素会补上来继续排。\n- 通常会找**最近的非 `static` 祖先**作为参照物；如果一路都没有，就退到更基础的参照层（初始包含块）来定位。\n- 可以记成：**动了，而且位置让出来了**。"
+        },
+        {
+          "name": "fixed",
+          "body": "- `position: fixed` 是**固定定位**。\n- 它相对于**视口**（浏览器窗口）进行偏移。\n- 页面滚动时，元素位置通常不变，像被“钉”在窗口上。\n- 例如：`top: 0; right: 0;` 可以让元素贴在视口右上角。"
+        },
+        {
+          "name": "sticky",
+          "body": "- `position: sticky` 可以理解成 `relative` 和 `fixed` 的混合体。\n- **没到阈值前**，它像 `relative`，先按正常流动。\n- **跨过阈值后**，它像 `fixed`，开始“粘住”。\n- 教材里强调：至少要配合 `top`、`bottom`、`left`、`right` 里的一个才会真正生效。\n- 还提到一些限制：父元素不能设 `overflow: hidden` 或 `overflow: auto`，父元素要可滚动，父元素高度不能低于 `sticky` 元素，且父元素不能只有一个 `sticky` 子元素。"
+        },
+        {
+          "name": "z-index",
+          "body": "- `z-index` 管的是**元素重叠时谁盖在谁上面**。\n- `z-index` 越大，通常越靠上显示。\n- 它控制的是**层级/遮挡**，不是位置移动。"
+        },
+        {
+          "name": "float",
+          "body": "- `float` 用来让元素**向左、向右浮动，或者不浮动**。\n- 常见取值：`left`、`right`、`none`。\n- 用途：**文字环绕图片**、**多列布局**。\n- 核心理解：它会改变元素默认“**独占一行**”的排版方式。"
+        }
+      ]
+    },
+    {
+      "type": "key-terms",
+      "items": [
+        {
+          "term": "标准文档流",
+          "definition": "浏览器默认的正常排版顺序，元素按普通方式参与布局。"
+        },
+        {
+          "term": "视口",
+          "definition": "浏览器窗口中用户当前看到页面的区域。"
+        },
+        {
+          "term": "脱离标准文档流",
+          "definition": "元素不再按正常排队方式占位，后面的元素会像它不在那儿一样继续布局。"
+        },
+        {
+          "term": "层叠顺序",
+          "definition": "多个元素重叠时，决定谁显示在上面的顺序。"
+        },
+        {
+          "term": "阈值",
+          "definition": "`sticky` 从“正常流动”切换到“粘住”所需要跨过的条件点。"
+        },
+        {
+          "term": "初始包含块",
+          "definition": "定位时更基础的参照层；当找不到合适祖先时，`absolute` 会退到这里。"
+        }
+      ]
+    },
+    {
+      "type": "review-questions",
+      "items": [
+        {
+          "question": "`relative` 和 `absolute` 在“是否保留原占位”上有什么区别？",
+          "hint": "想一想后面的元素会不会补上来。",
+          "answer": "`relative` **保留原来的占位**，只是自己视觉上偏移；`absolute` 会**脱离标准文档流**，原占位让出来，后面的元素会继续往前排。"
+        },
+        {
+          "question": "`sticky` 是什么时候开始“粘住”的？它至少要配合什么属性？",
+          "hint": "先正常流动，再满足条件。",
+          "answer": "`sticky` 不是一开始就固定，而是**先正常流动，跨过阈值后才像 `fixed` 一样粘住**。它至少要配合 `top`、`bottom`、`left`、`right` 里的一个。"
+        },
+        {
+          "question": "`z-index` 主要控制什么？它会改变元素的位置吗？",
+          "hint": "区分“层级”和“移动”。",
+          "answer": "`z-index` 主要控制**层级/遮挡顺序**，也就是谁盖在谁上面；它**不负责位置移动**。"
+        },
+        {
+          "question": "`float: left;`、`float: right;`、`float: none;` 分别表示什么？",
+          "hint": "三个值要能快速说出来。",
+          "answer": "`float: left;` 表示**向左浮动**，`float: right;` 表示**向右浮动**，`float: none;` 表示**不浮动**。"
+        },
+        {
+          "question": "`fixed` 是相对于什么定位的？页面滚动时它会怎样？",
+          "hint": "关注浏览器窗口。",
+          "answer": "`fixed` 是相对于**视口**定位的；页面滚动时，它的位置通常**不变**，像钉在窗口上一样。"
+        }
+      ]
+    },
+    {
+      "type": "open-question",
+      "content": "为什么 `sticky` 对父元素的 `overflow`、高度和子元素结构有这么多限制？这些限制背后的布局原因是什么？"
+    }
+  ]
+}

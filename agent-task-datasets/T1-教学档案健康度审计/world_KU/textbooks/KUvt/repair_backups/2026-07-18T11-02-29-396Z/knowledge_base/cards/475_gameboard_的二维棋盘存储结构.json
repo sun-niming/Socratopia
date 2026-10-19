@@ -1,0 +1,47 @@
+{
+  "title": "GameBoard 的二维棋盘存储结构",
+  "definition": "GameBoard 表示一个具有宽度和高度的二维棋盘，并使用 std::vector<std::vector<std::unique_ptr<GamePiece>>> m_cells 保存棋盘中的棋子。每个单元格拥有一个 std::unique_ptr<GamePiece>，因此单元格可以为空，也可以指向任意继承自 GamePiece 的具体棋子类型。",
+  "key_points": [
+    "GameBoard 保存 m_width 和 m_height，默认宽度与默认高度均为 10。",
+    "m_cells 是二维 vector：外层按列索引，内层按行索引，访问形式为 m_cells[x][y]。",
+    "单元格类型是 std::unique_ptr<GamePiece>，可以存储 ChessPiece、TicTacToePiece 等 GamePiece 派生对象。",
+    "unique_ptr 表示 GameBoard 对其单元格中的棋子拥有所有权，棋子对象会随对应 unique_ptr 的生命周期自动释放。"
+  ],
+  "examples": [
+    "二维单元格可表示为：$$m\\_cells[x][y]$$",
+    "构造一个 8×8 棋盘：GameBoard chessBoard{8, 8};",
+    "将棋子放入坐标 $(0,0)$：chessBoard.at(0, 0) = std::make_unique<ChessPiece>();"
+  ],
+  "misconceptions": [
+    "m_cells 的元素不是普通的 GamePiece 对象，而是 std::unique_ptr<GamePiece>。",
+    "二维 vector 的访问顺序在原文实现中是先 x 后 y，即 m_cells[x][y]，不能任意交换。",
+    "一个空单元格可以用 nullptr 表示；空单元格并不表示其中保存了一个默认构造的 GamePiece。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "GameBoard 如何表示一个空的棋盘单元格？",
+      "a": "使用值为 nullptr 的 std::unique_ptr<GamePiece> 表示。"
+    },
+    {
+      "q": "GameBoard 的 m_cells[x][y] 表示什么？",
+      "a": "表示横坐标为 x、纵坐标为 y 的棋盘单元格，其中保存的是 std::unique_ptr<GamePiece>。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "std::vector二维容器",
+    "std::unique_ptr的基本用法",
+    "C++继承与多态"
+  ],
+  "source_pages": [
+    374,
+    376
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "475_gameboard_的二维棋盘存储结构",
+  "_chunk_pages": [
+    373,
+    376
+  ]
+}

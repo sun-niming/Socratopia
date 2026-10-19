@@ -1,0 +1,39 @@
+{
+  "title": "匿名函数",
+  "definition": "匿名函数是没有函数名的函数。按照教材的说法，当使用 function 关键字定义函数时，如果没有指定函数名称，这个函数就称为匿名函数。",
+  "key_points": [
+    "匿名函数的特征是“没有函数名”。",
+    "它仍然是函数，只是定义时不写名称。"
+  ],
+  "examples": [
+    "var fn = function () { alert('hello'); };"
+  ],
+  "misconceptions": [
+    "匿名函数不是“没有 function 关键字”的函数，而是“没有指定函数名称”的函数。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "什么是匿名函数？",
+      "a": "匿名函数是没有函数名的函数。"
+    },
+    {
+      "q": "用 function 关键字定义时，什么情况下称为匿名函数？",
+      "a": "当没有指定函数名称时。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "函数"
+  ],
+  "source_pages": [
+    265,
+    268
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "385_匿名函数",
+  "_chunk_pages": [
+    265,
+    268
+  ]
+}

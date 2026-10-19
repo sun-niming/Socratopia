@@ -1,0 +1,54 @@
+{
+  "title": "std::to_string 与字符串到数值的转换函数",
+  "definition": "C++ 标准库提供 std::to_string 将数值转换为 std::string，并提供 std::stoi、std::stol、std::stoul、std::stoll、std::stoull、std::stof、std::stold 等函数，将 std::string 转换为整数或浮点数。整数转换函数可以通过 idx 返回第一个未解析字符的位置，并可指定进制。",
+  "key_points": [
+    "std::to_string 的一般形式是 string to_string(T val);，用于把数值 val 转换为字符串。",
+    "整数转换函数包括：int stoi(const string& str, size_t* idx = 0, int base = 10);、long stol(...)、unsigned long stoul(...)、long long stoll(...)、unsigned long long stoull(...)。",
+    "浮点转换函数包括 float stof(const string& str, size_t* idx = 0); 和 long double stold(const string& str, size_t* idx = 0);。",
+    "idx 非空时，可用于获得转换停止的位置；若字符串为 \"123USD\"，stoi 转换出的值为 123，idx 指向字符 U。",
+    "整数转换函数的 base 默认值为 10；原文还列出了 0x 和 0X 等进制前缀。",
+    "转换失败或超出范围时，相关函数可能抛出 std::invalid_argument 或 std::out_of_range。"
+  ],
+  "examples": [
+    "long double d { 3.14L };",
+    "const string toParse { \"123USD\" };",
+    "size_t index {};",
+    "int value { stoi(toParse, &index) }; // value 为 123，index 指向 U",
+    "toParse[index] // 第一个未解析字符为 'U'"
+  ],
+  "misconceptions": [
+    "stoi 不一定会要求整个字符串都由数字组成；它可以解析开头的有效数字，并通过 idx 报告第一个未解析字符的位置。",
+    "std::to_string 是数值到字符串的转换；stoi、stol 等则是字符串到数值的转换。",
+    "base 参数只适用于整数转换函数，不适用于 stof 和 stold。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "调用 stoi(\"123USD\", &index) 后，value 和 toParse[index] 分别是什么？",
+      "a": "value 为 123，toParse[index] 为字符 'U'，因为 U 是第一个未被解析的字符。"
+    },
+    {
+      "q": "std::stoi 的 base 参数默认是多少？",
+      "a": "默认是 10。"
+    },
+    {
+      "q": "字符串到数值的转换可能报告哪些错误？",
+      "a": "原文列出了 std::invalid_argument 和 std::out_of_range，分别用于无效参数以及结果超出范围等情况。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "std::string",
+    "异常的基本概念"
+  ],
+  "source_pages": [
+    109,
+    112
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 std::to_string stoi stol stoul stoll stoull stof stold idx base invalid_argument out_of_range 123USD",
+  "concept_id": "158_std_to_string_与字符串到数值的转换函数",
+  "_chunk_pages": [
+    109,
+    112
+  ]
+}

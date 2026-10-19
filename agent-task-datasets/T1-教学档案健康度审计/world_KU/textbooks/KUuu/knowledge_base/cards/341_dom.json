@@ -1,0 +1,37 @@
+{
+  "title": "DOM",
+  "definition": "DOM是文档对象模型（Document Object Model），通过它可以操作HTML文档的结构、样式和内容，例如单击按钮修改文字颜色。",
+  "key_points": [
+    "DOM关注HTML文档",
+    "可操作结构、样式和内容",
+    "可通过交互改变页面显示"
+  ],
+  "examples": [
+    "单击按钮修改文字颜色"
+  ],
+  "misconceptions": [
+    "DOM只负责读取HTML，不负责修改",
+    "DOM是浏览器窗口模型"
+  ],
+  "qa_pairs": [
+    {
+      "q": "DOM可以操作HTML文档的哪些方面？",
+      "a": "结构、样式和内容。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "浏览器端JavaScript的组成"
+  ],
+  "source_pages": [
+    233,
+    236
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "341_dom",
+  "_chunk_pages": [
+    233,
+    236
+  ]
+}

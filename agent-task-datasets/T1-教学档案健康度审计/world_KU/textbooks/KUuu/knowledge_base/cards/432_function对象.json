@@ -1,0 +1,38 @@
+{
+  "title": "Function对象",
+  "definition": "在JavaScript中，使用function关键字定义函数时，系统内部实际上会创建一个Function类的对象实例，因此ECMAScript中的函数也是对象。",
+  "key_points": [
+    "function关键字定义的函数，内部实际上是Function类的对象实例。",
+    "ECMAScript中的函数也是对象。",
+    "可以用new Function(...)的方式创建函数对象。"
+  ],
+  "examples": [
+    "var func = new Function(\"a\", \"b\", \"return a-b\");",
+    "alert(func(3, 4));"
+  ],
+  "misconceptions": [
+    "以为函数只是代码片段，不是对象。",
+    "以为只有function关键字定义的函数才可以被调用，new Function创建的函数对象不能调用。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "ECMAScript中的函数本质上是什么？",
+      "a": "函数本质上是Function类的对象实例，也就是对象。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "Object对象"
+  ],
+  "source_pages": [
+    301,
+    304
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "432_function对象",
+  "_chunk_pages": [
+    301,
+    304
+  ]
+}

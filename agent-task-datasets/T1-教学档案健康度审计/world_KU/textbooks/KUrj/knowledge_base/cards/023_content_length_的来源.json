@@ -1,0 +1,38 @@
+{
+  "title": "Content-Length 的来源",
+  "definition": "静态文件响应头需要 `Content-Length`。最简单的来源是 `stat.st_size`，因为对普通文件来说，它就是文件的字节数。浏览器根据这个值知道后面还要接收多少字节。",
+  "key_points": [
+    "`Content-Length` 是静态响应头中的必要字段之一。",
+    "对普通文件，`stat.st_size` 就是文件字节数。",
+    "浏览器会根据 `Content-Length` 判断响应体还要接收多少字节。"
+  ],
+  "examples": [
+    "```c\nsnprintf(header, sizeof(header),\n\"HTTP/1.1 200 OK\\r\\n\"\n\"Content-Type: %s\\r\\n\"\n\"Content-Length: %ld\\r\\n\"\n\"Connection: close\\r\\n\"\n\"\\r\\n\",\n mime, (long)st.st_size);\n```"
+  ],
+  "misconceptions": [
+    "以为 `Content-Length` 只是可选项，浏览器不需要它。",
+    "以为长度可以随便写成字符个数或其它估计值。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "静态文件响应里的 `Content-Length` 通常从哪里来？",
+      "a": "最简单来源是 `stat.st_size`，因为它表示普通文件的字节数。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "stat 系统调用基础",
+    "HTTP 响应头基础"
+  ],
+  "source_pages": [
+    21,
+    24
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "023_content_length_的来源",
+  "_chunk_pages": [
+    21,
+    24
+  ]
+}

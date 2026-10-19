@@ -1,0 +1,38 @@
+{
+  "title": "使用尾置返回类型表达 add 的返回类型",
+  "definition": "函数可以使用尾置返回类型语法，在参数列表之后通过 $->\\ decltype(expression)$ 指定返回类型。对于依赖函数参数名称的返回类型，尾置返回类型可以直接引用这些参数，例如使用 $decltype(t1+t2)$ 表示 add 函数的返回类型。",
+  "key_points": [
+    "尾置返回类型的基本形式是：返回类型写作 auto，参数列表后写 $->\\ 返回类型$。",
+    "尾置返回类型可以引用参数名，因此适合表示依赖函数参数的类型。",
+    "示例中返回类型可以写成 $decltype(t1+t2)$。"
+  ],
+  "examples": [
+    "template<typename T1, typename T2>\\nauto add(const T1& t1, const T2& t2)\\n    -> decltype(t1 + t2)\\n{\\n    return t1 + t2;\\n}"
+  ],
+  "misconceptions": [
+    "尾置返回类型不是把返回类型省略了，而是把返回类型移动到参数列表之后。",
+    "尾置返回类型中的 decltype(t1+t2) 表示表达式的类型，而不是表达式的运行时值。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何用尾置返回类型声明返回类型为 decltype(t1+t2) 的 add 函数？",
+      "a": "写成：$auto\\ add(const\\ T1\\&\\ t1,\\ const\\ T2\\&\\ t2)\\ ->\\ decltype(t1+t2)$，函数体中返回 $t1+t2$。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "decltype",
+    "函数模板"
+  ],
+  "source_pages": [
+    397,
+    400
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "516_使用尾置返回类型表达_add_的返回类型",
+  "_chunk_pages": [
+    397,
+    400
+  ]
+}

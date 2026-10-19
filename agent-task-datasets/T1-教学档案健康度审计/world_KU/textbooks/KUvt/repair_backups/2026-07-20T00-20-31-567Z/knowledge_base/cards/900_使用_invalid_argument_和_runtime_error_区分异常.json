@@ -1,0 +1,48 @@
+{
+  "title": "使用 invalid_argument 和 runtime_error 区分异常情况",
+  "definition": "读取整数文件时，可以针对不同错误抛出不同的标准异常类型：文件无法打开时抛出 invalid_argument，文件内容无法正确读取时抛出 runtime_error。invalid_argument 和 runtime_error 都定义在 <stdexcept> 中，并且都没有公有的默认构造函数，通常使用带字符串参数的构造函数提供错误描述。",
+  "key_points": [
+    "文件无法打开：throw invalid_argument(\"Unable to open the file.\")。",
+    "文件无法正确读取：throw runtime_error(\"Error reading the file.\")。",
+    "两种异常都可以通过 what() 获取描述。",
+    "invalid_argument 和 runtime_error 都属于标准异常类。"
+  ],
+  "examples": [
+    "根据错误类型抛出不同异常：\nif (inputStream.fail()) {\n    throw invalid_argument(\"Unable to open the file.\");\n}\n\nwhile (inputStream >> temp) {\n    integers.push_back(temp);\n}\nif (!inputStream.eof()) {\n    throw runtime_error(\"Error reading the file.\");\n}"
+  ],
+  "misconceptions": [
+    "错误地认为所有文件错误都必须使用同一种异常类型。",
+    "错误地认为 invalid_argument 和 runtime_error 有公有无参数默认构造函数。",
+    "错误地认为只要读取循环结束，就一定是正常到达文件末尾；还需要检查 eof()。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "示例中打开文件失败时抛出哪一种异常？",
+      "a": "抛出 invalid_argument。"
+    },
+    {
+      "q": "示例中无法正确读取整数时抛出哪一种异常？",
+      "a": "抛出 runtime_error。"
+    },
+    {
+      "q": "为什么读取循环结束后还要检查 eof()？",
+      "a": "如果没有到达文件末尾，说明循环可能因读取错误而结束，此时应抛出 runtime_error。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++异常类",
+    "文件输入流状态"
+  ],
+  "source_pages": [
+    443,
+    443
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "900_使用_invalid_argument_和_runtime_error_区分异常",
+  "_chunk_pages": [
+    441,
+    444
+  ]
+}

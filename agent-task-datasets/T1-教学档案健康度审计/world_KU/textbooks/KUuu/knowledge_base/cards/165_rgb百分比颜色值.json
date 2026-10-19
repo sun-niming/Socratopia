@@ -1,0 +1,34 @@
+{
+  "title": "rgb百分比颜色值",
+  "definition": "rgb(x%,x%,x%) 用红、绿、蓝三个基本颜色分量的百分比值混合表示颜色，每个分量取值范围是 0% 到 100%。",
+  "key_points": [
+    "格式为 rgb(红%,绿%,蓝%)。",
+    "每个分量的取值范围是 0%-100%。",
+    "原文示例包括红色 rgb(100%,0%,0%)。"
+  ],
+  "examples": [
+    "rgb(100%,0%,0%)"
+  ],
+  "misconceptions": [
+    "百分比写法和整数写法不是同一种单位，但都是在描述 RGB 三个分量。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "rgb(100%,0%,0%) 表示什么颜色？",
+      "a": "表示红色。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [],
+  "source_pages": [
+    109,
+    112
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "165_rgb百分比颜色值",
+  "_chunk_pages": [
+    109,
+    112
+  ]
+}

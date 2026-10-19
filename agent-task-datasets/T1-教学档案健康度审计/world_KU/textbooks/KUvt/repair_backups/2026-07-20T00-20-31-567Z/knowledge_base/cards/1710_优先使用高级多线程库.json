@@ -1,0 +1,41 @@
+{
+  "title": "优先使用高级多线程库",
+  "definition": "C++标准库提供的是编写多线程代码所需的基本构件，正确使用这些构件并不容易。教材建议在可能时使用高级多线程库，例如 Intel Threading Building Blocks（TBB）和 Microsoft Parallel Patterns Library（PPL），而不是完全自行实现多线程基础设施。",
+  "key_points": [
+    "标准 C++ 多线程构件是基础构件，直接正确使用并非易事。",
+    "多线程程序容易出错，自行实现不一定能按预期正确工作。",
+    "教材列举的高级多线程库包括 Intel Threading Building Blocks（TBB）和 Microsoft Parallel Patterns Library（PPL）。"
+  ],
+  "examples": [
+    "对于任务并行、线程调度等复杂需求，可以评估使用 TBB 或 PPL，而不是从线程、队列和同步原语开始自行构建完整并发框架。"
+  ],
+  "misconceptions": [
+    "使用高级库不能自动消除所有并发错误，程序仍需遵守库的使用规则并正确设计共享数据。",
+    "标准库提供基本构件不等于标准库不能编写多线程程序；教材强调的是直接使用基本构件实现复杂并发系统较困难。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "教材为什么建议尽可能使用高级多线程库？",
+      "a": "因为标准 C++ 只提供多线程编程的基本构件，正确使用并不容易；自行实现多线程功能容易出错，也不一定能按预期工作。"
+    },
+    {
+      "q": "教材列举了哪些高级多线程库？",
+      "a": "Intel Threading Building Blocks（TBB）和 Microsoft Parallel Patterns Library（PPL）。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++标准线程库基础"
+  ],
+  "source_pages": [
+    829,
+    829
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1710_优先使用高级多线程库",
+  "_chunk_pages": [
+    829,
+    832
+  ]
+}

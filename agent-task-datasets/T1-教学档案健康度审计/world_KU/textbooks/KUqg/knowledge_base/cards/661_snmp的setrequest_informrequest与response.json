@@ -1,0 +1,47 @@
+{
+  "title": "SNMP的SetRequest、InformRequest与Response",
+  "definition": "SetRequest用于设置被管设备中一个或多个MIB对象实例的值；代理通常通过带有“noError”差错状态的Response PDU确认设置已经成功。InformRequest用于一个管理服务器向另一个远程管理服务器通知MIB信息。Response通常由被管设备发送给管理服务器，以响应管理服务器的请求并返回所请求的信息。",
+  "key_points": [
+    "SetRequest的发送方向通常是管理服务器到代理。",
+    "SetRequest成功时，代理用带有“noError”差错状态的Response确认该值已被设置。",
+    "InformRequest用于管理实体之间的通知，接收方是远程管理实体。",
+    "Response可以响应GetRequest、GetNextRequest、GetBulkRequest、SetRequest或InformRequest。"
+  ],
+  "examples": [
+    "管理服务器发送SetRequest，将被管设备的某个配置型MIB对象设置为新值；代理随后返回带有“noError”的Response。",
+    "一个管理服务器通过InformRequest向远程管理服务器通知某项MIB信息。"
+  ],
+  "misconceptions": [
+    "Response只用于回应读取请求；实际上，它也可以回应SetRequest和InformRequest。",
+    "InformRequest是代理向普通管理服务器发送的陷阱；实际上，原文将InformRequest描述为管理实体向远程管理实体发送的通知。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "SetRequest的作用是什么？",
+      "a": "设置被管设备中一个或多个MIB对象实例的值。"
+    },
+    {
+      "q": "SetRequest成功后代理如何确认？",
+      "a": "代理发送带有“noError”差错状态的Response PDU，确认该值已经被设置。"
+    },
+    {
+      "q": "InformRequest的作用是什么？",
+      "a": "向不能直接访问的远程管理实体通知MIB信息。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "SNMPv2的七种PDU类型"
+  ],
+  "source_pages": [
+    293,
+    296
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "661_snmp的setrequest_informrequest与response",
+  "_chunk_pages": [
+    293,
+    296
+  ]
+}

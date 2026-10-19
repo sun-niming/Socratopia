@@ -1,0 +1,40 @@
+{
+  "title": "readonly 与 disabled 的区别",
+  "definition": "readonly 表示只读，控件仍保持正常外观，用户可以点击或复制内容，且数据会被提交到服务器；disabled 表示禁用，控件呈灰色，无法点击或获得焦点，并且不会随表单提交。",
+  "key_points": [
+    "readonly：只读，外观正常",
+    "readonly：可以点击/复制内容，提交时会被提交至服务器",
+    "disabled：禁用，外观置灰",
+    "disabled：无法点击或获得焦点，且不会随表单提交"
+  ],
+  "examples": [
+    "<input value=\"abc\" readonly>",
+    "<input value=\"abc\" disabled>"
+  ],
+  "misconceptions": [
+    "把 readonly 和 disabled 当成同一种状态",
+    "以为 disabled 的内容仍会随表单提交",
+    "以为 readonly 也不能被选中或复制"
+  ],
+  "qa_pairs": [
+    {
+      "q": "readonly 和 disabled 的核心区别是什么？",
+      "a": "readonly 是只读，内容会提交；disabled 是禁用，不会随表单提交。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "表单控件"
+  ],
+  "source_pages": [
+    74,
+    74
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "091_readonly_与_disabled_的区别",
+  "_chunk_pages": [
+    73,
+    76
+  ]
+}

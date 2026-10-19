@@ -1,0 +1,45 @@
+{
+  "title": "重载构造函数根据初始化实参选择",
+  "definition": "类可以定义多个参数列表不同的构造函数。创建对象时，C++根据提供的初始化实参与构造函数参数类型选择匹配的重载。例如，SpreadsheetCell 可以分别接受 double 和 string_view 初始值。",
+  "key_points": [
+    "示例类声明包含 `SpreadsheetCell(double initialValue);` 和 `SpreadsheetCell(std::string_view initialValue);` 两个构造函数。",
+    "使用数值实参时选择 double 构造函数，例如 `SpreadsheetCell aFourthCell{4.4};`。",
+    "使用字符串实参时选择 string_view 构造函数，例如 `SpreadsheetCell aThirdCell{\"test\"};`。",
+    "通过 `make_unique<SpreadsheetCell>(\"5.5\")` 创建对象时，也会选择字符串参数构造函数。"
+  ],
+  "examples": [
+    "`SpreadsheetCell aThirdCell{\"test\"};`",
+    "`SpreadsheetCell aFourthCell{4.4};`",
+    "`auto aFifthCellp{make_unique<SpreadsheetCell>(\"5.5\")};`"
+  ],
+  "misconceptions": [
+    "构造函数重载不是根据返回值区分的，而是根据参数列表区分的。",
+    "字符串实参和 double 实参会选择不同的构造函数；不能认为所有初始值都会无条件调用同一个构造函数。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`SpreadsheetCell aFourthCell{4.4};` 调用哪个构造函数？",
+      "a": "调用 `SpreadsheetCell(double initialValue)`。"
+    },
+    {
+      "q": "`SpreadsheetCell aThirdCell{\"test\"};` 调用哪个构造函数？",
+      "a": "调用 `SpreadsheetCell(std::string_view initialValue)`。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "构造函数基础",
+    "函数重载"
+  ],
+  "source_pages": [
+    237,
+    240
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "318_重载构造函数根据初始化实参选择",
+  "_chunk_pages": [
+    237,
+    240
+  ]
+}

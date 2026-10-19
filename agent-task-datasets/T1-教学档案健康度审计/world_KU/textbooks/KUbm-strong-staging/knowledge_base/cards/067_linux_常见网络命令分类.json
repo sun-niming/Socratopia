@@ -1,0 +1,50 @@
+{
+  "title": "Linux 常见网络命令分类",
+  "definition": "教材把网络命令按用途进行了归类：查看网络接口设置可用“ifconfig、ip”；检查网络接口状态可用“ping”；查看网络监听或连接状态可用“netstat、ss”。同时教材提示：在新版 Linux 中，网络操作命令有所变化。",
+  "key_points": [
+    "查看网络接口设置：ifconfig、ip",
+    "检查网络接口状态：ping",
+    "查看网络监听/连接状态：netstat、ss",
+    "教材注明：新版 Linux 中网络操作命令有所变化"
+  ],
+  "examples": [
+    "查看设置网络接口设置：ifconfig",
+    "查看设置网络接口设置：ip",
+    "检查网络接口状态：ping",
+    "查看网络监听/连接状态：netstat",
+    "查看网络监听/连接状态：ss"
+  ],
+  "misconceptions": [
+    "认为所有网络相关任务都只用一个命令完成；教材按不同用途区分了不同命令",
+    "忽视 Linux 版本差异；教材明确说明新版 Linux 中网络操作命令有所变化"
+  ],
+  "qa_pairs": [
+    {
+      "q": "教材中，查看网络接口设置可用哪些命令？",
+      "a": "ifconfig、ip。"
+    },
+    {
+      "q": "教材中，检查网络接口状态可用什么命令？",
+      "a": "ping。"
+    },
+    {
+      "q": "教材中，查看网络监听或连接状态可用哪些命令？",
+      "a": "netstat、ss。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "Linux 基本命令"
+  ],
+  "source_pages": [
+    33,
+    36
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "067_linux_常见网络命令分类",
+  "_chunk_pages": [
+    33,
+    36
+  ]
+}

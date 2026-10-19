@@ -1,0 +1,48 @@
+{
+  "title": "为 SpreadsheetCell 重载输入输出流运算符",
+  "definition": "可以通过非成员运算符重载，让 `SpreadsheetCell` 对象直接参与标准输入输出流操作。输出运算符 `operator<<` 接收 `std::ostream&` 和 `const SpreadsheetCell&`，将单元格的值写入流并返回该流；输入运算符 `operator>>` 接收 `std::istream&` 和 `SpreadsheetCell&`，先从流中读取一个 `double` 值，再通过 `cell.set(value)` 写入单元格，并返回该输入流。返回流引用可以支持连续链式操作。",
+  "key_points": [
+    "输出运算符的典型声明是 `std::ostream& operator<<(std::ostream& ostr, const SpreadsheetCell& cell)`。",
+    "输入运算符的典型声明是 `std::istream& operator>>(std::istream& istr, SpreadsheetCell& cell)`。",
+    "输出操作不会修改单元格，因此单元格参数使用 `const SpreadsheetCell&`。",
+    "输入操作会修改单元格，因此单元格参数必须使用 `SpreadsheetCell&`。",
+    "两个运算符都返回流引用，从而支持 `cin >> a >> b` 和 `cout << a << b` 这样的链式表达式。"
+  ],
+  "examples": [
+    "输出运算符的核心逻辑：`ostr << cell.getValue(); return ostr;`。",
+    "输入运算符的核心逻辑：`double value; istr >> value; cell.set(value); return istr;`。",
+    "`cin >> myCell >> anotherCell >> aThirdCell;` 等价于嵌套调用：`operator>>(operator>>(operator>>(cin, myCell), anotherCell), aThirdCell);`。"
+  ],
+  "misconceptions": [
+    "重载 `operator<<` 和 `operator>>` 时，通常不是把流对象按值返回，而是返回 `std::ostream&` 或 `std::istream&`。",
+    "输入运算符读取的是数值并调用 `set` 修改单元格，而不是直接修改单元格的私有数据成员。",
+    "链式输入输出并不是编译器进行的特殊批量处理，而是前一次运算返回流引用后，继续作为下一次运算的左操作数。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么 `operator<<` 的 SpreadsheetCell 参数应声明为 `const SpreadsheetCell&`？",
+      "a": "输出操作只读取单元格值，不应修改单元格，因此使用常量引用既避免拷贝又保证不会修改对象。"
+    },
+    {
+      "q": "为什么 `cin >> myCell >> anotherCell` 能够连续执行？",
+      "a": "因为 `operator>>` 返回 `std::istream&`，第一次操作返回 `cin` 本身，返回的流可以继续作为下一次输入操作的左操作数。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++ 运算符重载",
+    "引用与 const 引用",
+    "标准输入输出流"
+  ],
+  "source_pages": [
+    478,
+    479
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "620_为_spreadsheetcell_重载输入输出流运算符",
+  "_chunk_pages": [
+    477,
+    480
+  ]
+}

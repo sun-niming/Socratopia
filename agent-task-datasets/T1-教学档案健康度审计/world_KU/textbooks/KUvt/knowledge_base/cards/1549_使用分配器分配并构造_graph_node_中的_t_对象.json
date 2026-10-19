@@ -1,0 +1,58 @@
+{
+  "title": "使用分配器分配并构造 graph_node 中的 T 对象",
+  "definition": "接收分配器的 graph_node 构造函数先调用 m_allocator.allocate(1) 分配足以容纳一个 T 对象的原始内存，再使用 placement new 在这块内存中构造 T。拷贝版本用 t 构造 T，移动版本用 std::move(t) 构造 T。",
+  "key_points": [
+    "allocate(1) 只分配保存一个 T 实例所需的内存，不会构造 T 对象。",
+    "placement new 负责在已分配的内存块中真正构造 T。",
+    "拷贝构造路径使用 new (m_data) T { t };",
+    "移动构造路径使用 new (m_data) T { std::move(t) };",
+    "不带 allocator 参数的构造函数通过传入默认构造的 A{}，转发给带 allocator 参数的构造函数。",
+    "析构函数显式调用 m_data->~T() 销毁 T 实例，并使用分配器释放相应内存。"
+  ],
+  "examples": [
+    "拷贝构造的核心代码：\ntemplate <typename T, typename A>\ngraph_node<T, A>::graph_node(directed_graph<T, A>* graph, const T& t, const A& allocator)\n    : m_graph{ graph }, m_allocator{ allocator } {\n    m_data = m_allocator.allocate(1);\n    new (m_data) T{ t };\n}",
+    "移动构造的核心代码：\nm_data = m_allocator.allocate(1);\nnew (m_data) T{ std::move(t) };",
+    "无分配器参数的构造函数将工作转发为：\ngraph_node<T, A>::graph_node(directed_graph<T, A>* graph, const T& t)\n    : graph_node<T, A>{ graph, t, A{} } {}"
+  ],
+  "misconceptions": [
+    "allocate(1) 不会调用 T 的构造函数，只会取得原始存储空间。",
+    "placement new 不是再次分配内存，而是在已经分配的地址上构造对象。",
+    "显式调用 T 的析构函数是销毁对象的步骤，不能用释放原始内存来替代。",
+    "使用自定义分配器时，分配和释放必须与对象的构造和析构配套处理。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "m_allocator.allocate(1) 完成了什么操作？",
+      "a": "它为一个 T 对象分配足够的原始内存，但不构造 T 对象。"
+    },
+    {
+      "q": "graph_node 如何在 allocate 得到的内存中构造 T？",
+      "a": "使用 placement new，例如 new (m_data) T{ t }；移动构造时使用 new (m_data) T{ std::move(t) }。"
+    },
+    {
+      "q": "没有显式传入分配器时，graph_node 使用什么分配器？",
+      "a": "通过传入默认构造的分配器 A{}，转发到带分配器参数的构造函数。"
+    },
+    {
+      "q": "graph_node 析构时需要完成哪些步骤？",
+      "a": "先显式调用 m_data->~T() 销毁 T 实例，再使用保存的分配器释放该内存块。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "自定义分配器支持",
+    "placement new",
+    "对象生命周期"
+  ],
+  "source_pages": [
+    748,
+    748
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1549_使用分配器分配并构造_graph_node_中的_t_对象",
+  "_chunk_pages": [
+    745,
+    748
+  ]
+}

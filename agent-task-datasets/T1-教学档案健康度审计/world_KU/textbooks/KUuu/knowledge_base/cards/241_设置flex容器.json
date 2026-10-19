@@ -1,0 +1,37 @@
+{
+  "title": "设置Flex容器",
+  "definition": "任何容器都可以通过将元素的 display 属性值设为 flex 来使用 Flex 布局。这样，该容器下的项目会自动切换为 flex 布局。",
+  "key_points": [
+    "通过设置 display: flex 可以定义一个 Flex 容器",
+    "容器下的子元素会自动成为 Flex 项目",
+    "元素设为 Flex 布局后，子元素的 float、clear 和 vertical-align 属性会失效"
+  ],
+  "examples": [
+    "div { display: flex; }"
+  ],
+  "misconceptions": [
+    "不是只有特定标签才能使用 Flex；任意容器都可以设为 flex",
+    "把父元素设为 flex 后，子元素仍然可以继续依靠 float、clear、vertical-align 来布局"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何把一个元素定义为 Flex 布局容器？",
+      "a": "给该元素设置 display: flex。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "CSS常用样式"
+  ],
+  "source_pages": [
+    149,
+    152
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "241_设置flex容器",
+  "_chunk_pages": [
+    149,
+    152
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "title": "list-style-position",
+  "definition": "CSS 的列表项标号位置属性，用来指定列表标号位于列表区域内还是列表区域外。教材给出的取值是 inside 和 outside。",
+  "key_points": [
+    "inside 表示标号位于列表区域内",
+    "outside 表示标号位于列表区域外",
+    "用于控制标号相对列表内容的位置"
+  ],
+  "examples": [
+    "list-style-position: inside;",
+    "list-style-position: outside;"
+  ],
+  "misconceptions": [
+    "它不是用来改变标号的形状或编号样式的。",
+    "inside 和 outside 只影响标号位置，不改变列表项内容本身。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "list-style-position 的 inside 表示什么？",
+      "a": "标号位于列表区域内。"
+    },
+    {
+      "q": "list-style-position 的 outside 表示什么？",
+      "a": "标号位于列表区域外。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "CSS基础"
+  ],
+  "source_pages": [
+    117,
+    120
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "164_list_style_position",
+  "_chunk_pages": [
+    117,
+    120
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "title": "HTML文档基本结构",
+  "definition": "HTML文档通常由<html>、<head>、<body>三部分构成。<html>表示HTML文档开始和结束的位置，包含head部分和body部分；<head>用于放置文档描述信息；<body>用于放置网页实际显示的内容；<!doctype html>用于声明文档类型。",
+  "key_points": [
+    "<html>标记包含整个HTML文档，并包住<head>和<body>。",
+    "<!doctype html>用于声明文档类型。"
+  ],
+  "examples": [
+    "<!doctype html>\n<html>\n  <head>...</head>\n  <body>...</body>\n</html>"
+  ],
+  "misconceptions": [
+    "认为<head>里的内容会直接显示在浏览器窗口中。",
+    "认为<body>之外的内容也属于网页主体显示内容。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "HTML文档基本结构由哪几部分组成？",
+      "a": "通常由<html>、<head>、<body>三部分组成，并可用<!doctype html>声明文档类型。"
+    },
+    {
+      "q": "<html>标记的作用是什么？",
+      "a": "它告诉浏览器HTML文档开始和结束的位置，并包含head部分和body部分。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [],
+  "source_pages": [
+    45,
+    48
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "075_html文档基本结构",
+  "_chunk_pages": [
+    45,
+    48
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "title": "对象池按倍增策略分配新内存块",
+  "definition": "对象池的 addChunk() 方法负责分配一块尚未初始化的连续内存，并把这块内存中每个 T 对象的位置加入空闲对象列表。分配器只分配原始内存，不会调用 T 的构造函数。每次添加完一个块后，将下一次待分配的块大小加倍。",
+  "key_points": [
+    "使用分配器分配足以容纳 m_newChunkSize 个 T 实例的未初始化内存：auto* firstNewObject { m_allocator.allocate(m_newChunkSize) };",
+    "将新块的首地址保存到内存块列表 m_pool 中。",
+    "使用 std::iota() 把从 firstNewObject 开始的 T* 指针依次写入空闲对象列表；对 T* 加 1 会指向块中的下一个 T 位置。",
+    "分配新块不会构造 T 对象；对象要到 acquireObject() 中才构造。",
+    "完成分配后将 m_newChunkSize 加倍，使下一块大小为当前块的两倍，这种策略遵循 std::vector 等容器的容量增长思路，目的是提高性能。"
+  ],
+  "examples": [
+    "典型逻辑可表示为：\n```cpp\nauto* firstNewObject { m_allocator.allocate(m_newChunkSize) };\nm_pool.push_back(firstNewObject);\nauto oldFreeObjectsSize { m_freeObjects.size() };\nm_freeObjects.resize(oldFreeObjectsSize + m_newChunkSize);\nstd::iota(m_freeObjects.begin() + oldFreeObjectsSize,\n          m_freeObjects.end(), firstNewObject);\nm_newChunkSize *= 2;\n```"
+  ],
+  "misconceptions": [
+    "allocate() 分配原始存储空间并不等于构造了 T 对象。",
+    "std::iota() 在这里填充的是连续的 T* 地址，而不是已经初始化的 T 对象。",
+    "块大小加倍只影响后续块的分配大小，不会改变已经分配的块。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "addChunk() 是否会调用每个 T 对象的构造函数？",
+      "a": "不会。addChunk() 只分配未初始化的原始内存，并记录各个 T 对象位置；真正构造 T 对象由 acquireObject() 完成。"
+    },
+    {
+      "q": "为什么 addChunk() 使用 std::iota()？",
+      "a": "因为需要把新内存块中每个 T 实例的位置依次加入空闲对象列表；从首个 T* 开始递增指针即可得到后续位置。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++分配器的 allocate/deallocate",
+    "指针算术",
+    "std::iota算法"
+  ],
+  "source_pages": [
+    861,
+    862
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1787_对象池按倍增策略分配新内存块",
+  "_chunk_pages": [
+    861,
+    864
+  ]
+}

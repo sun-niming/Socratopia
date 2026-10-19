@@ -1,0 +1,44 @@
+{
+  "title": "模板依赖类型前的typename",
+  "definition": "在模板代码中，如果通过一个或多个模板参数访问某个类型，必须使用typename显式告诉编译器该名称表示类型。RoundRobin中，T是模板参数，std::vector<T>::iterator依赖于T，因此成员声明必须写成typename std::vector<T>::iterator。",
+  "key_points": [
+    "依赖模板参数的名称可能被编译器解析为值或其他成员，typename用于明确其为类型。",
+    "RoundRobin的迭代器成员声明为：typename std::vector<T>::iterator m_nextElement;",
+    "typename在这里不是模板参数声明的一部分，而是依赖类型前的类型说明符。"
+  ],
+  "examples": [
+    "正确写法：typename std::vector<T>::iterator m_nextElement;",
+    "省略typename的写法在此类依赖类型场景下不符合要求。"
+  ],
+  "misconceptions": [
+    "typename并不表示std::vector<T>::iterator是某个变量；它表示该名称是一个类型。",
+    "只有因为iterator类型依赖于模板参数T，才需要在这里显式写typename。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么RoundRobin中要写typename std::vector<T>::iterator？",
+      "a": "因为std::vector<T>::iterator依赖模板参数T，必须用typename明确说明它是一个类型。"
+    },
+    {
+      "q": "typename在依赖类型前的主要作用是什么？",
+      "a": "告诉编译器该依赖名称表示类型，而不是静态成员或其他名称。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "类模板",
+    "嵌套类型",
+    "C++名称查找"
+  ],
+  "source_pages": [
+    563,
+    563
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1163_模板依赖类型前的typename",
+  "_chunk_pages": [
+    561,
+    564
+  ]
+}

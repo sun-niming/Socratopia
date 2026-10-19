@@ -1,0 +1,49 @@
+{
+  "title": "客户TCP的典型状态序列",
+  "definition": "客户TCP在连接建立和拆除过程中会经历一系列状态。典型序列是：从CLOSED开始，发送SYN后进入SYN_SENT；收到服务器的SYN与ACK并发送ACK后进入ESTABLISHED；客户发起关闭并发送FIN后进入FIN_WAIT_1；收到服务器对FIN的确认后进入FIN_WAIT_2；收到服务器的FIN并发送ACK后进入TIME_WAIT；等待结束后回到CLOSED。",
+  "key_points": [
+    "CLOSED表示客户TCP当前没有建立连接。",
+    "SYN_SENT表示客户已发送SYN，正在等待服务器发送包含SYN和ACK的报文段。",
+    "ESTABLISHED表示连接已经建立，双方可以发送和接收包含应用层有效载荷的数据的TCP报文段。",
+    "FIN_WAIT_1和FIN_WAIT_2分别表示客户已发送FIN、等待确认，以及已收到确认、等待服务器FIN。",
+    "TIME_WAIT结束后，连接正式关闭，客户端资源包括端口号被释放。"
+  ],
+  "examples": [
+    "客户状态转换可写为：$$\\text{CLOSED}\\xrightarrow{\\text{发送SYN}}\\text{SYN\\_SENT}\\xrightarrow{\\text{收到SYN+ACK并发送ACK}}\\text{ESTABLISHED}$$ $$\\text{ESTABLISHED}\\xrightarrow{\\text{发送FIN}}\\text{FIN\\_WAIT\\_1}\\xrightarrow{\\text{收到ACK}}\\text{FIN\\_WAIT\\_2}\\xrightarrow{\\text{收到FIN并发送ACK}}\\text{TIME\\_WAIT}\\xrightarrow{\\text{等待结束}}\\text{CLOSED}$$"
+  ],
+  "misconceptions": [
+    "SYN_SENT不是连接已经建立的状态，此时客户仍在等待服务器的响应。",
+    "收到服务器对客户FIN的ACK后不会立即进入TIME_WAIT，而是先进入FIN_WAIT_2并等待服务器自己的FIN。",
+    "ESTABLISHED不仅表示握手报文交换完成，还表示TCP可以传输应用层有效载荷数据。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "客户TCP发送SYN后进入什么状态？",
+      "a": "进入SYN_SENT状态。"
+    },
+    {
+      "q": "客户TCP收到服务器的SYN和ACK并发送ACK后进入什么状态？",
+      "a": "进入ESTABLISHED状态。"
+    },
+    {
+      "q": "客户TCP收到服务器FIN并发送ACK后进入什么状态？",
+      "a": "进入TIME_WAIT状态。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "TCP三次握手",
+    "TCP连接的四次挥手"
+  ],
+  "source_pages": [
+    185,
+    186
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "447_客户tcp的典型状态序列",
+  "_chunk_pages": [
+    185,
+    188
+  ]
+}

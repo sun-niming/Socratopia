@@ -1,0 +1,46 @@
+{
+  "title": "定时互斥体与超时加锁",
+  "definition": "定时互斥体允许线程在指定的时间范围内尝试获取锁；如果在规定时间内仍未获得锁，调用失败并返回 false。标准库提供 std::timed_mutex、std::recursive_timed_mutex 和 std::shared_timed_mutex。",
+  "key_points": [
+    "定时互斥体同样支持 lock()、try_lock() 和 unlock()；其中 lock() 会一直阻塞，try_lock() 会立即返回。",
+    "try_lock_for(rel_time)：在给定的相对时间内尝试获取锁，超时仍未获取时返回 false。rel_time 的类型应为 std::chrono::duration。",
+    "try_lock_until(abs_time)：尝试获取锁，直到系统时间达到或超过指定绝对时间；超时未获取时返回 false。abs_time 的类型应为 std::chrono::time_point。",
+    "std::shared_timed_mutex 还支持 lock_shared()、try_lock_shared()、unlock_shared()，以及 try_lock_shared_for() 和 try_lock_shared_until()。",
+    "已经拥有 timed_mutex 或 shared_timed_mutex 所有权的线程不允许再次获取同一互斥体上的锁，否则可能导致死锁；recursive_timed_mutex 允许同一线程多次获取锁。"
+  ],
+  "examples": [
+    "相对超时形式：\n代码：if (m.try_lock_for(100ms)) { /* 成功获得锁 */ m.unlock(); } else { /* 超时失败 */ }",
+    "绝对时间形式：\n代码：if (m.try_lock_until(deadline)) { /* 成功获得锁 */ m.unlock(); } else { /* 到达截止时间仍失败 */ }"
+  ],
+  "misconceptions": [
+    "try_lock_for() 不是无限期等待；超过给定相对时间后会放弃。",
+    "try_lock_until() 接收的是绝对时间点，而不是持续时长。",
+    "所有定时互斥体都允许递归加锁是错误的；教材明确指出递归行为由 recursive_timed_mutex 提供。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "try_lock_for() 和 try_lock_until() 的区别是什么？",
+      "a": "try_lock_for() 使用相对持续时间作为超时条件；try_lock_until() 使用系统时间上的绝对时间点作为截止时间。"
+    },
+    {
+      "q": "定时互斥体在超时前没有获得锁时返回什么？",
+      "a": "调用失败并返回 false。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "非定时互斥体的通用操作",
+    "std::chrono 的 duration 与 time_point"
+  ],
+  "source_pages": [
+    807,
+    807
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1657_定时互斥体与超时加锁",
+  "_chunk_pages": [
+    805,
+    808
+  ]
+}

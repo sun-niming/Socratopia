@@ -1,0 +1,37 @@
+{
+  "title": "root 前缀要检查边界",
+  "definition": "判断路径是否位于 root 下时，不能只看“是否以前缀开头”，还要检查边界。比如 root 是 `/home/user/www`，路径 `/home/user/www2/a.html` 也以它开头，但并不属于该目录；正确做法是前缀匹配后，下一个字符必须是 `/` 或字符串结束。",
+  "key_points": [
+    "只做前缀匹配会误判。",
+    "前缀后必须检查边界字符。",
+    "边界字符应是 `/` 或字符串结束。"
+  ],
+  "examples": [
+    "`/home/user/www2/a.html` 不能算作 `/home/user/www` 的子路径。"
+  ],
+  "misconceptions": [
+    "字符串前缀相同，不代表目录层级关系相同。",
+    "路径安全判断不能只靠 `strncmp`。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么 root 前缀判断要检查边界？",
+      "a": "因为像 `/home/user/www2/a.html` 也会以 `/home/user/www` 开头，必须检查前缀后是否是 `/` 或字符串结束，才能避免误判。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "先 URL 解码再查穿越"
+  ],
+  "source_pages": [
+    129,
+    132
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "216_root_前缀要检查边界",
+  "_chunk_pages": [
+    129,
+    132
+  ]
+}

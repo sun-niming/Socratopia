@@ -1,0 +1,44 @@
+{
+  "title": "复制构造函数的基本实现",
+  "definition": "复制构造函数用于使用同类型的已有对象初始化新对象。原文给出的 `SpreadsheetCell` 复制构造函数接收一个 `const SpreadsheetCell&` 参数，并将源对象的 `m_value` 成员复制到新对象中。",
+  "key_points": [
+    "复制构造函数的参数通常是同类型对象的常量引用，例如 `const SpreadsheetCell& src`。",
+    "构造函数通过 `m_value = src.m_value;` 复制源对象的成员值。",
+    "使用已有对象创建新对象时，会自动选择复制构造函数，例如 `SpreadsheetCell anotherCell{myCell};`。"
+  ],
+  "examples": [
+    "复制构造函数实现：\n```cpp\nSpreadsheetCell::SpreadsheetCell(const SpreadsheetCell& src)\n{\n    m_value = src.m_value;\n}\n```",
+    "调用示例：\n```cpp\nSpreadsheetCell myCell{5};\nSpreadsheetCell anotherCell{myCell};\n```"
+  ],
+  "misconceptions": [
+    "复制构造函数不是普通的赋值运算符；它在新对象构造期间执行。",
+    "参数使用 `const` 引用可以接受常量对象，并避免复制传参。",
+    "复制构造函数复制的是源对象的成员状态；原文示例中具体复制的是 `m_value`。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`SpreadsheetCell` 的复制构造函数接收什么参数？",
+      "a": "接收一个 `const SpreadsheetCell&` 类型的参数，例如 `const SpreadsheetCell& src`。"
+    },
+    {
+      "q": "复制构造函数在原文示例中复制了什么成员？",
+      "a": "将源对象的 `src.m_value` 复制到新对象的 `m_value` 中。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++构造函数",
+    "C++引用与 const"
+  ],
+  "source_pages": [
+    253,
+    256
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "340_复制构造函数的基本实现",
+  "_chunk_pages": [
+    253,
+    256
+  ]
+}

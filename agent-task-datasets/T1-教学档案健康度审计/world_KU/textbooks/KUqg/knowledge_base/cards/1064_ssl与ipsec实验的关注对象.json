@@ -1,0 +1,50 @@
+{
+  "title": "SSL与IPsec实验的关注对象",
+  "definition": "原文介绍了两个实验。SSL实验关注经TCP连接发送的SSL记录，分析记录的定界、类型和字段；IPsec实验关注在Linux装置之间创建IPsec，并在隧道模式中使用ESP协议创建IPsec安全关联（SA）。",
+  "key_points": [
+    "SSL实验的分析对象是SSL记录，包括记录类型、字段以及它们在TCP报文中的承载方式。",
+    "IPsec实验第一部分使用两个普通Linux装置，每个装置有一块以太网适配器。",
+    "IPsec实验第二部分需要四个Linux装置，每个装置有两块以太网适配器。",
+    "第二部分在隧道模式中使用ESP协议创建IPsec SA，实验过程包括手动创建SA以及让IKE创建SA。"
+  ],
+  "examples": [
+    "实验步骤可概括为：手动配置IPsec安全关联$\\rightarrow$使用IKE创建安全关联；其中隧道模式使用ESP协议。"
+  ],
+  "misconceptions": [
+    "SSL实验的重点是SSL记录分析，不是泛泛测试所有应用层协议。",
+    "IPsec实验中的SA不是普通TCP连接；SA是IPsec安全关联。",
+    "原文只说明了实验使用的装置数量和协议模式，没有给出具体配置命令。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "SSL实验主要分析什么？",
+      "a": "分析经TCP连接传输的SSL记录，包括记录定界、类型和字段。"
+    },
+    {
+      "q": "IPsec实验第二部分使用什么模式和协议？",
+      "a": "使用隧道模式和ESP协议创建IPsec安全关联。"
+    },
+    {
+      "q": "IPsec实验中先后涉及哪两种建立SA的方式？",
+      "a": "先手动创建SA，然后让IKE创建SA。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "SSL记录",
+    "IPsec安全关联",
+    "ESP",
+    "IKE"
+  ],
+  "source_pages": [
+    455,
+    456
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1064_ssl与ipsec实验的关注对象",
+  "_chunk_pages": [
+    453,
+    456
+  ]
+}

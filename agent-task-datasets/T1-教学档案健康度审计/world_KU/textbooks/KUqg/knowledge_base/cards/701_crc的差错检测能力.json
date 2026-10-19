@@ -1,0 +1,45 @@
+{
+  "title": "CRC的差错检测能力",
+  "definition": "CRC标准使用不同长度的生成多项式，例如8、12、16和32比特的生成多项式。根据原文，每个CRC标准都能检测长度小于$r+1$比特的突发差错，也就是能够检测所有连续的$r$比特或更少的差错；在适当假设下，对长度大于$r+1$比特的突发差错，检测概率为$1-0.5^r$。此外，每个CRC标准都能检测任何奇数个比特差错。",
+  "key_points": [
+    "原文列举的生成多项式长度包括8、12、16和32比特。",
+    "连续长度不超过$r$比特的突发差错都能被检测到。",
+    "对于更长的突发差错，原文给出的检测概率为$1-0.5^r$。",
+    "任意奇数个比特差错都能被CRC检测到。"
+  ],
+  "examples": [
+    "若某CRC使用$r$个CRC比特，则长度为$r$比特或更短的连续突发差错都应能检测到。",
+    "CRC-32是被多种链路级IEEE协议采用的32比特标准。"
+  ],
+  "misconceptions": [
+    "“能检测到”不等于“能纠正”；本节讨论的是差错检测。",
+    "CRC并非保证检测所有任意长度的差错模式；原文对较长突发差错给出的是概率性检测结论。",
+    "$r$表示附加CRC比特数，而不是完整发送比特串的长度。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "CRC能检测哪些突发差错？",
+      "a": "能检测长度小于$r+1$比特，即连续长度为$r$比特或更少的所有突发差错。"
+    },
+    {
+      "q": "CRC能否检测任意奇数个比特差错？",
+      "a": "可以，原文指出每个CRC标准都能检测任何奇数个比特差错。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "CRC编码的基本思想",
+    "突发差错"
+  ],
+  "source_pages": [
+    309,
+    312
+  ],
+  "needs_verification": true,
+  "verify_query": "Kurose Ross Computer Networking 7th edition CRC every CRC standard detects bursts less than r+1 bits probability 1-0.5^r odd number bit errors",
+  "concept_id": "701_crc的差错检测能力",
+  "_chunk_pages": [
+    309,
+    312
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "title": "按值返回对象时的复制、赋值与返回值优化",
+  "definition": "函数按值返回对象时，可能涉及返回对象的拷贝构造，以及把返回的临时对象赋给目标对象时的拷贝赋值。原文以 `string SpreadsheetCell::getString() const { return doubleToString(m_value); }` 和不同的接收写法说明：用赋值语句接收时可能调用赋值运算符；用声明初始化接收时调用拷贝构造函数。编译器还可能通过返回值优化（RVO）和复制省略减少或消除代价较高的拷贝。",
+  "key_points": [
+    "`string si; si = myCell2.getString();` 中，原文说明返回值可能先创建未命名临时 `string`，再调用 `si` 的赋值运算符。",
+    "`string s2 = myCell3.getString();` 是声明初始化，原文说明 `s2` 调用拷贝构造函数，而不是赋值运算符。",
+    "返回值优化（RVO）利用复制省略，可能优化掉返回值过程中的拷贝构造开销。"
+  ],
+  "examples": [
+    "函数示例：`string SpreadsheetCell::getString() const { return doubleToString(m_value); }`。",
+    "接收方式一：`SpreadsheetCell myCell2{5}; string si; si = myCell2.getString();`。",
+    "接收方式二：`SpreadsheetCell myCell3{5}; string s2 = myCell3.getString();`。"
+  ],
+  "misconceptions": [
+    "按值返回对象并不意味着程序必然执行一次可观察到的拷贝；编译器可能进行 RVO 或其他复制省略。",
+    "`string si; si = myCell2.getString();` 和 `string s2 = myCell3.getString();` 的对象生命周期不同，不能仅根据都出现等号来判断调用的是同一个函数。",
+    "RVO 是返回值优化，不是移动语义本身。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`string si; si = myCell2.getString();` 与 `string s2 = myCell3.getString();` 在原文中的主要区别是什么？",
+      "a": "前者先默认构造 `si`，再用返回结果进行赋值，因此会调用赋值运算符；后者直接声明并初始化 `s2`，因此调用拷贝构造函数。"
+    },
+    {
+      "q": "RVO 的作用是什么？",
+      "a": "RVO 即返回值优化，编译器利用复制省略减少或消除返回对象时可能发生的拷贝构造开销。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "拷贝构造函数",
+    "拷贝赋值运算符",
+    "按值返回",
+    "临时对象"
+  ],
+  "source_pages": [
+    254,
+    255
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "543_按值返回对象时的复制_赋值与返回值优化",
+  "_chunk_pages": [
+    253,
+    256
+  ]
+}

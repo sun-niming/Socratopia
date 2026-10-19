@@ -1,0 +1,43 @@
+{
+  "title": "for 循环格式2：遍历位置变量",
+  "definition": "Shell 的 for 循环格式2写作“for var; do command_list; done”。教材说明这种写法是“从 shell 的位置变量中取值”，也就是循环变量 var 依次取得传给脚本或 shell 的位置参数，然后执行循环体。",
+  "key_points": [
+    "基本形式为：for var do command_list done",
+    "这种写法不写 in 列表",
+    "教材明确指出：它从 shell 的位置变量中取值"
+  ],
+  "examples": [
+    "for var\ndo\ncommand_list\ndone",
+    "#!/bin/bash\necho you enter $# vars\necho They are:\ncount=0\nfor var\ndo\necho \"$count. $var \"\nlet count=count + 1\ndone"
+  ],
+  "misconceptions": [
+    "不要把“for var”理解为无数据来源的死循环；它的取值来源是 shell 的位置变量。",
+    "不要认为这种写法必须显式写出 in；格式2本身就是省略列表、直接取位置变量。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "for 循环格式2“for var”中的值从哪里来？",
+      "a": "从 shell 的位置变量中取值。"
+    },
+    {
+      "q": "教材中用什么例子说明 for var 的用途？",
+      "a": "用它显示输入的参量，逐个输出传入脚本的变量。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "Shell 位置变量",
+    "Shell 循环结构基础"
+  ],
+  "source_pages": [
+    81,
+    84
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "137_for_循环格式2_遍历位置变量",
+  "_chunk_pages": [
+    81,
+    84
+  ]
+}

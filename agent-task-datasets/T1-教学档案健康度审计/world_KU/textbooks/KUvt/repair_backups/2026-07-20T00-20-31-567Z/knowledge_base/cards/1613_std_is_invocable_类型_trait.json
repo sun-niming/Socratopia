@@ -1,0 +1,40 @@
+{
+  "title": "std::is_invocable 类型 trait",
+  "definition": "`std::is_invocable` 用于在编译期判断：给定的可调用对象是否能够以指定的参数类型调用。其 `_v` 变量模板形式直接产生布尔值，可用于 `if constexpr` 等编译期条件。",
+  "key_points": [
+    "典型形式为 `std::is_invocable_v<可调用对象类型, 参数类型...>`。",
+    "它判断的是调用表达式是否有效，而不只是检查继承关系。",
+    "在 `callDoit` 示例中，`decltype(&IsDoable::doit)` 表示成员函数指针类型，`T` 表示待检查的对象类型。"
+  ],
+  "examples": [
+    "```cpp\ntemplate <typename T>\nvoid callDoit(const T& [[maybe_unused]] t) {\n    if constexpr (std::is_invocable_v<decltype(&IsDoable::doit), T>) {\n        t.doit();\n    } else {\n        std::cout << \"Cannot call doit()!\" << std::endl;\n    }\n}\n```",
+    "对于 `Derived`，成员函数指针可以用 `Derived` 对象调用，因此条件为真；对于 `int`，条件为假。"
+  ],
+  "misconceptions": [
+    "`std::is_invocable` 本身不会调用函数，它只在编译期检查调用是否有效。",
+    "它不等同于 `std::is_base_of`：前者检查可调用性，后者检查类型之间的派生关系。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`std::is_invocable_v<decltype(&IsDoable::doit), T>` 检查什么？",
+      "a": "它在编译期检查 `IsDoable::doit` 的成员函数指针是否可以使用类型 `T` 的对象调用。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "类型 trait",
+    "constexpr if",
+    "成员函数指针"
+  ],
+  "source_pages": [
+    786,
+    786
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1613_std_is_invocable_类型_trait",
+  "_chunk_pages": [
+    785,
+    788
+  ]
+}

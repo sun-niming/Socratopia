@@ -1,0 +1,44 @@
+{
+  "title": "SIP 向已知 IP 地址建立呼叫的起始过程",
+  "definition": "在 Alice 已知 Bob 计算机 IP 地址的场景中，Alice 和 Bob 的计算机都运行基于 SIP 的电话软件。Alice 向 Bob 发送 SIP INVITE 报文时，SIP 会话开始；该 INVITE 报文类似于 HTTP 请求报文，并通过 UDP 发送到 SIP 的周知端口 5060。",
+  "key_points": [
+    "示例假设主叫者 Alice 已经知道被叫者 Bob 计算机的 IP 地址。",
+    "Alice 和 Bob 的计算机都配有基于 SIP 的软件。",
+    "INVITE 是用于开始 SIP 会话的报文。",
+    "INVITE 通过 UDP 发送到 SIP 周知端口 5060。"
+  ],
+  "examples": [
+    "在教材图 9-9 的场景中，Alice 向 Bob 发送 INVITE；该报文经 UDP 发送到端口 5060，随后 Bob 的终端振铃。"
+  ],
+  "misconceptions": [
+    "INVITE 不是 RTP 媒体数据分组，而是用于启动 SIP 会话的信令报文。",
+    "端口 5060 在该教材示例中是 SIP 的周知端口，不应理解为音频媒体一定使用该端口。",
+    "该示例建立在 Alice 已知 Bob IP 地址的前提下，不能据此推断所有 SIP 呼叫都直接依赖用户手动知道对方 IP 地址。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "在 Alice 已知 Bob IP 地址时，什么事件标志着 SIP 会话开始？",
+      "a": "Alice 向 Bob 发送 SIP INVITE 报文。"
+    },
+    {
+      "q": "SIP INVITE 在教材示例中通过什么协议和端口发送？",
+      "a": "通过 UDP 发送到 SIP 的周知端口 5060。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "SIP 的功能",
+    "UDP 端口"
+  ],
+  "source_pages": [
+    473,
+    476
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1114_sip_向已知_ip_地址建立呼叫的起始过程",
+  "_chunk_pages": [
+    473,
+    476
+  ]
+}

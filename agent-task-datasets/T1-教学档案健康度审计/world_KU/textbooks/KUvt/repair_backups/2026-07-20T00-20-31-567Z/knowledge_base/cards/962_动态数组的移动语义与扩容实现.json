@@ -1,0 +1,55 @@
+{
+  "title": "动态数组的移动语义与扩容实现",
+  "definition": "示例 `Array<T>` 通过移动构造函数和移动赋值运算符转移底层动态数组的所有权，而不是复制全部元素。移动后，源对象的数组指针被置为空指针、大小被置为 0。扩容时创建一个更大的、元素零初始化的新数组，将旧数组中的元素复制到新数组，释放旧数组，再用新数组替换原数组。",
+  "key_points": [
+    "移动构造函数通过交换或转移源对象的 `m_elements` 和 `m_size` 获得资源。",
+    "移动构造完成后，源对象通常处于 `m_elements == nullptr` 且 `m_size == 0` 的状态。",
+    "移动赋值前应释放当前对象已经拥有的旧数组，避免内存泄漏。",
+    "移动赋值需要处理自移动赋值；若 `this == &rhs`，应直接返回当前对象。",
+    "扩容函数创建大小为 `newSize` 的新数组，并把旧数组元素复制到新数组。",
+    "扩容完成后删除旧数组，并更新 `m_size` 和 `m_elements`。",
+    "示例使用 `std::make_unique<T[]>(newSize)` 临时管理新数组，最后通过 `release()` 将所有权交给裸指针成员。"
+  ],
+  "examples": [
+    "移动构造的资源转移关系可表示为：\n移动前：目标对象没有资源，源对象持有 `m_elements` 和 `m_size`；\n移动后：目标对象持有原数组，源对象为 `m_elements == nullptr`、`m_size == 0`。",
+    "移动赋值的基本流程：\n`if (this == &rhs) return *this;`\n`delete[] m_elements;`\n`m_elements = std::exchange(rhs.m_elements, nullptr);`\n`m_size = std::exchange(rhs.m_size, 0);`\n`return *this;`",
+    "扩容的核心流程：\n`auto newArray = std::make_unique<T[]>(newSize);`\n`for (std::size_t i = 0; i < m_size; ++i) newArray[i] = m_elements[i];`\n`delete[] m_elements;`\n`m_size = newSize;`\n`m_elements = newArray.release();`"
+  ],
+  "misconceptions": [
+    "移动对象不是把每个元素逐一复制到目标对象，而是转移底层动态数组的所有权。",
+    "移动完成后，源对象仍然存在，但其原有数组资源已经转移，不能再假定它保留原来的元素。",
+    "扩容时不能直接覆盖旧数组，否则会丢失旧元素；必须先创建新数组并复制旧元素。",
+    "移动赋值时如果不先释放目标对象原有数组，可能造成内存泄漏。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "动态数组的移动构造函数与复制构造函数的主要区别是什么？",
+      "a": "移动构造函数转移底层数组指针和大小等资源，不逐个复制全部元素；复制构造函数则需要创建独立存储并复制元素。"
+    },
+    {
+      "q": "移动操作完成后，源 `Array` 对象通常处于什么状态？",
+      "a": "源对象的底层数组指针被置为 `nullptr`，数组大小被置为 `0`，表示其原有资源已经转移。"
+    },
+    {
+      "q": "动态数组扩容时为什么要先创建新数组并复制元素？",
+      "a": "因为新数组可能位于不同的内存位置。必须先把旧数组元素复制到新数组，再释放旧数组并更新成员指针，才能在扩容后保留原有数据。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "动态内存管理",
+    "移动构造函数与移动赋值",
+    "类模板"
+  ],
+  "source_pages": [
+    480,
+    480
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "962_动态数组的移动语义与扩容实现",
+  "_chunk_pages": [
+    477,
+    480
+  ]
+}

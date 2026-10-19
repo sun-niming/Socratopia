@@ -1,0 +1,39 @@
+{
+  "title": "location对象与href属性",
+  "definition": "location对象用于分析和设置页面的URL地址。它是window对象和document对象的属性，且指向同一个对象。location对象的href属性表示当前文档的URL；给href赋值会让浏览器跳转到新的地址。",
+  "key_points": [
+    "location对象既可通过window.location访问，也可通过document.location访问，二者是同一个对象。",
+    "href属性保存当前文档的URL地址。",
+    "把新的URL赋给href，会直接跳转到该页面。"
+  ],
+  "examples": [
+    "window.location.href = \"http://www.nwafu.edu.cn\"",
+    "执行后将跳转到学校主页。"
+  ],
+  "misconceptions": [
+    "以为href只是普通字符串，修改后不会发生页面跳转。",
+    "以为window.location和document.location是两个不同对象。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "location对象的href属性有什么作用？",
+      "a": "它表示当前文档的URL地址；给href赋值会让页面跳转到对应地址。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "window对象",
+    "URL"
+  ],
+  "source_pages": [
+    337,
+    340
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "481_location对象与href属性",
+  "_chunk_pages": [
+    337,
+    340
+  ]
+}

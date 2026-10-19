@@ -1,0 +1,37 @@
+{
+  "title": "不存在文件返回 404",
+  "definition": "当请求的资源不存在时，例如 `/no-file.html`，服务器应返回 404。",
+  "key_points": [
+    "请求目标不存在。",
+    "状态码应为 404。",
+    "这表示资源未找到。"
+  ],
+  "examples": [
+    "`curl -i http://127.0.0.1:8080/no-file.html`"
+  ],
+  "misconceptions": [
+    "不存在的文件也可以返回 200。",
+    "404 和 403 是同一类错误。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "请求不存在的文件应返回什么状态码？",
+      "a": "404。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "HTTP 状态码"
+  ],
+  "source_pages": [
+    113,
+    116
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "187_不存在文件返回_404",
+  "_chunk_pages": [
+    113,
+    116
+  ]
+}

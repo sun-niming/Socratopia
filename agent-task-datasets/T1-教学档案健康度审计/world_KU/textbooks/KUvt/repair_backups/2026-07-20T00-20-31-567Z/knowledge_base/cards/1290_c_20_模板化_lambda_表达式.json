@@ -1,0 +1,51 @@
+{
+  "title": "C++20 模板化 lambda 表达式",
+  "definition": "C++20 支持在 lambda 捕获块之后直接写模板参数列表，从而创建模板化 lambda。模板化 lambda 可以显式访问参数的类型信息，也可以通过模板参数和 `requires` 条款限制参数类型。",
+  "key_points": [
+    "模板化 lambda 的形式类似 `[]<typename T>(const T& value) { ... }`。",
+    "当参数是 `vector<T>` 时，可以直接使用模板参数 `T` 表示元素类型，不必通过 `decltype`、`decay_t` 和 `value_type` 间接推导。",
+    "泛型 lambda 的多个 `auto` 参数分别推导类型；若要求两个参数类型相同，可以使用同一个模板类型参数 `T`。",
+    "可以使用 `requires` 条款对模板类型设置约束。"
+  ],
+  "examples": [
+    "要求参数为某种元素类型的 `vector`：`auto lambda = []<typename T>(const std::vector<T>& values) { T someValue{}; T::some_static_function(); };`。",
+    "要求两个参数具有相同类型：`auto lambda = []<typename T>(const T& value1, const T& value2) { /* ... */ };`。",
+    "添加整型约束：`auto lambda = []<typename T>(const T& value1, const T& value2) requires std::integral<T> { /* ... */ };`。"
+  ],
+  "misconceptions": [
+    "误以为泛型 lambda 使用两个 `auto` 参数时它们天然具有相同类型；它们实际上分别推导。",
+    "误以为模板化 lambda 只能用于 `vector`；教材同时说明它还可用于约束多个参数具有相同类型等场景。",
+    "误以为 `requires` 会改变模板参数推导；它主要用于约束已经推导出的模板参数是否满足条件。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "模板化 lambda 相比普通泛型 lambda 的一个重要优势是什么？",
+      "a": "可以显式获得并使用参数的模板类型信息，例如直接用 `T` 表示 `vector<T>` 的元素类型。"
+    },
+    {
+      "q": "如何要求 lambda 的两个参数具有相同类型？",
+      "a": "使用同一个模板类型参数，例如 `[]<typename T>(const T& value1, const T& value2) { /* ... */ }`。"
+    },
+    {
+      "q": "如何给模板化 lambda 添加整型约束？",
+      "a": "可写为 `requires std::integral<T>`，例如 `[]<typename T>(const T& a, const T& b) requires std::integral<T> { /* ... */ }`。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "泛型 lambda",
+    "函数模板",
+    "模板类型约束"
+  ],
+  "source_pages": [
+    623,
+    623
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1290_c_20_模板化_lambda_表达式",
+  "_chunk_pages": [
+    621,
+    624
+  ]
+}

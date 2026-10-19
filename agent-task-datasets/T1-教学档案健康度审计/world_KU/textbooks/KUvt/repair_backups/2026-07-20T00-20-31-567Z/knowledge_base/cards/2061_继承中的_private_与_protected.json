@@ -1,0 +1,37 @@
+{
+  "title": "继承中的 private 与 protected",
+  "definition": "在继承关系中，基类成员的访问级别会影响派生类能否直接访问它们。教材要求特别理解 `private` 和 `protected` 的区别：基类的 `private` 成员不能被派生类直接访问，而 `protected` 成员可以被派生类成员函数直接访问，但仍不是普通外部代码可直接访问的公有接口。",
+  "key_points": [
+    "`private` 成员属于基类自身的实现细节，派生类不能直接访问。",
+    "`protected` 成员可供派生类使用，但访问范围仍小于 `public` 成员。",
+    "继承访问说明符与基类成员自身的访问说明符是两个相关但不同的概念。"
+  ],
+  "examples": [
+    "如果基类有 `protected: int value;`，派生类成员函数可以直接使用 `value`；如果它声明为 `private: int value;`，派生类不能直接使用它。"
+  ],
+  "misconceptions": [
+    "`protected` 并不等于 `public`；不相关的外部代码通常不能直接访问受保护成员。",
+    "派生类继承了基类成员，不代表它可以绕过基类成员的 `private` 访问限制。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "从派生类角度看，基类的 `private` 和 `protected` 成员有什么区别？",
+      "a": "派生类不能直接访问基类的 `private` 成员，但可以直接访问基类的 `protected` 成员。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++访问控制"
+  ],
+  "source_pages": [
+    1001,
+    1002
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "2061_继承中的_private_与_protected",
+  "_chunk_pages": [
+    1001,
+    1004
+  ]
+}

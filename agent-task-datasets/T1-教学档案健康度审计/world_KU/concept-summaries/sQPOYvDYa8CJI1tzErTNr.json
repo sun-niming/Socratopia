@@ -1,0 +1,863 @@
+{
+  "conversationId": "sQPOYvDYa8CJI1tzErTNr",
+  "generatedAt": 1791527032372,
+  "pagesRange": null,
+  "sections": [
+    {
+      "type": "tldr",
+      "content": "本节课围绕「不归零编码与自同步」展开，不归零制里，正电平代表 1、负电平代表 0。。"
+    },
+    {
+      "type": "concepts",
+      "items": [
+        {
+          "name": "不归零编码与自同步",
+          "body": "- 不归零制里，正电平代表 1、负电平代表 0。",
+          "sourceMessageIndexes": [
+            0,
+            1
+          ]
+        },
+        {
+          "name": "带通调制",
+          "body": "- 带通调制要借助载波，教材点名的载波是正弦波。",
+          "sourceMessageIndexes": [
+            1,
+            2,
+            3
+          ]
+        },
+        {
+          "name": "实际信道失真与码间串扰",
+          "body": "- 任何实际信道都不理想，带宽受限、有噪声、有干扰、有失真，不能以任意高的速率传输。",
+          "sourceMessageIndexes": [
+            3
+          ]
+        },
+        {
+          "name": "奈氏准则",
+          "body": "- 信道能通过的频率范围有限，很多高频分量过不去。",
+          "sourceMessageIndexes": [
+            3,
+            4,
+            5,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15
+          ]
+        },
+        {
+          "name": "信噪比",
+          "body": "- 噪声瞬时值随机、有时很大，会让接收端对码元的判决出错。",
+          "sourceMessageIndexes": [
+            7
+          ]
+        },
+        {
+          "name": "香农定理",
+          "body": "- 1948 年香农用信息论推出：带宽受限、且有高斯白噪声干扰的信道，极限而无差错的信息传输速率是 C = W log2(1+S/N) (bit/s)，其中 W 是信道带宽，S 是信号平均功率，N 是高斯噪声功率。",
+          "sourceMessageIndexes": [
+            7,
+            8,
+            9
+          ]
+        },
+        {
+          "name": "传输媒体",
+          "body": "- 传输媒体指发送器和接收器之间的物理通路。",
+          "sourceMessageIndexes": [
+            15,
+            29
+          ]
+        },
+        {
+          "name": "奈氏与香农公式的权衡",
+          "body": "- 十六进制时奈氏上限为 $2\\times4000\\times\\log_2 16=32000\\ \\text{b/s}$",
+          "sourceMessageIndexes": [
+            14,
+            15
+          ]
+        },
+        {
+          "name": "双绞线",
+          "body": "- 双绞线把两根互相绝缘的铜导线并排，再按规则的方法绞合起来",
+          "sourceMessageIndexes": [
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21
+          ]
+        },
+        {
+          "name": "RJ-45 接口标准",
+          "body": "- 双绞线接到设备上靠 RJ-45 接头",
+          "sourceMessageIndexes": [
+            19
+          ]
+        },
+        {
+          "name": "同轴电缆",
+          "body": "- 同轴电缆由四层同心结构组成，从里到外：内导体、绝缘层、外导体屏蔽层、保护塑料外层",
+          "sourceMessageIndexes": [
+            21,
+            22,
+            23
+          ]
+        },
+        {
+          "name": "光缆",
+          "body": "- 光纤由非常透明的石英玻璃拉成细丝，主要由纤芯和包层构成",
+          "sourceMessageIndexes": [
+            23,
+            27
+          ]
+        },
+        {
+          "name": "多模光纤的展宽与失真",
+          "body": "- 展宽英文叫 pulse broadening，指波形在时间轴上被拉长",
+          "sourceMessageIndexes": [
+            24,
+            25
+          ]
+        },
+        {
+          "name": "脉冲展宽 (pulse broadening)",
+          "body": "- 展宽指波形在时间轴上被拉长。",
+          "sourceMessageIndexes": [
+            24,
+            25,
+            26,
+            27
+          ]
+        },
+        {
+          "name": "单模光纤的代价与波段",
+          "body": "- 单模光纤纤芯细到只有几个微米，制造成本高、连接困难，光源必须用昂贵的半导体激光器。",
+          "sourceMessageIndexes": [
+            27
+          ]
+        },
+        {
+          "name": "光纤的优劣",
+          "body": "- 光纤优点：通信容量非常大；传输损耗小、中继距离长；抗雷电和电磁干扰；无串音干扰、保密性好；体积小、重量轻。",
+          "sourceMessageIndexes": [
+            27,
+            28,
+            29
+          ]
+        },
+        {
+          "name": "微波通信",
+          "body": "- 微波频率范围 300 MHz 到 300 GHz，波长 1 m 到 1 mm，实际主要用 2 GHz 到 40 GHz。",
+          "sourceMessageIndexes": [
+            29,
+            30,
+            31
+          ]
+        },
+        {
+          "name": "多径效应",
+          "body": "- 基站发出的信号可先经过多个障碍物的数次反射，从多条路径、按不同时间到达接收方。",
+          "sourceMessageIndexes": [
+            29
+          ]
+        },
+        {
+          "name": "无线通信误码率",
+          "body": "- 无线信道传数字信号必须让误码率（比特错误率）不大于可容许的范围。",
+          "sourceMessageIndexes": [
+            29
+          ]
+        },
+        {
+          "name": "微波接力",
+          "body": "- 远距离微波通信 = 微波接力：在地面每隔一段距离设一个中继站，把前一站送来的信号放大再发给下一站。",
+          "sourceMessageIndexes": [
+            31
+          ]
+        },
+        {
+          "name": "奈氏与香农公式中 W 的作用",
+          "body": "- C = W log2(1+S/N) 中 W 直接乘在外面，频段越宽 W 越大，容量越大。",
+          "sourceMessageIndexes": [
+            32,
+            33
+          ]
+        },
+        {
+          "name": "卫星通信",
+          "body": "- 传统微波接力通信有两种方式：地面微波接力、卫星通信。",
+          "sourceMessageIndexes": [
+            33,
+            34,
+            35
+          ]
+        },
+        {
+          "name": "无线局域网与 ISM 频段",
+          "body": "- 无线局域网是用无线信道的计算机局域网。",
+          "sourceMessageIndexes": [
+            35,
+            36
+          ]
+        },
+        {
+          "name": "传播时延与发送时延的区别",
+          "body": "- 传播时延 = 距离 / 传播速率，只被距离单独定住。",
+          "sourceMessageIndexes": [
+            34,
+            35
+          ]
+        },
+        {
+          "name": "信道复用技术概述",
+          "body": "- 复用允许用户使用一个共享信道进行通信。",
+          "sourceMessageIndexes": [
+            37
+          ]
+        },
+        {
+          "name": "频分复用 FDM",
+          "body": "- FDM 在一条通信线路上设置多个信道，每路信道的信号以不同的载波频率进行调制。",
+          "sourceMessageIndexes": [
+            37,
+            38,
+            39
+          ]
+        },
+        {
+          "name": "时分复用 TDM",
+          "body": "- TDM 把时间划分成一段段等长的时分复用帧（TDM 帧）。",
+          "sourceMessageIndexes": [
+            39,
+            40,
+            41
+          ]
+        },
+        {
+          "name": "时分复用导致信道利用率不高",
+          "body": "- 当用户暂时无数据发送时，分配给该用户的时隙只能处于空闲状态。",
+          "sourceMessageIndexes": [
+            40,
+            41
+          ]
+        },
+        {
+          "name": "频分多址与时分多址",
+          "body": "- 频分多址接入 FDMA：让 N 个用户各用一个频带，或让更多用户轮流使用这 N 个频带。",
+          "sourceMessageIndexes": [
+            41
+          ]
+        },
+        {
+          "name": "统计时分复用 STDM",
+          "body": "- STDM 帧不是固定分配时隙，而是按需动态地分配时隙，所以能提高线路的利用率。",
+          "sourceMessageIndexes": [
+            41,
+            42,
+            43
+          ]
+        },
+        {
+          "name": "波分复用 WDM",
+          "body": "- 波分复用就是光的频分复用。",
+          "sourceMessageIndexes": [
+            43,
+            44,
+            45
+          ]
+        },
+        {
+          "name": "码分复用 CDM",
+          "body": "- 每一个用户可以在同样的时间使用同样的频带进行通信。",
+          "sourceMessageIndexes": [
+            45
+          ]
+        },
+        {
+          "name": "CDMA 工作原理",
+          "body": "- 每一个比特时间划分为 m 个短间隔，每个间隔叫一个码片 (chip)，通常 m 取 64 或 128。",
+          "sourceMessageIndexes": [
+            45
+          ]
+        },
+        {
+          "name": "扩频与 DSSS/FHSS",
+          "body": "- S 站实际发送的数据率提高到 mb bit/s。",
+          "sourceMessageIndexes": [
+            47
+          ]
+        },
+        {
+          "name": "CDMA 的正交性",
+          "body": "- 每个站分配的码片序列各不相同，且必须互相正交 (orthogonal)。",
+          "sourceMessageIndexes": [
+            47
+          ]
+        },
+        {
+          "name": "CDMA 发送与接收流程",
+          "body": "- S 站把自己每个比特换成对应码片，得到 S 站发送的信号 S_x。",
+          "sourceMessageIndexes": [
+            49
+          ]
+        },
+        {
+          "name": "CDMA 例题",
+          "body": "- 四个站的码片各 8 位：A = (-1 -1 -1 +1 +1 -1 +1 +1)，B = (-1 -1 +1 -1 +1 +1 +1 -1)，C = (-1 +1 -1 +1 +1 +1 -1 -1)，D = (-1 +1 -1 -1 -1 +1 -1 -1)。",
+          "sourceMessageIndexes": [
+            49,
+            50,
+            51
+          ]
+        },
+        {
+          "name": "数字传输系统与 PCM 标准 E1/T1",
+          "body": "- 电话网早期长途干线大都采用时分复用脉码调制 PCM 的数字传输方式，在电话局之间的中继线上传送多路电话。",
+          "sourceMessageIndexes": [
+            51,
+            52,
+            53
+          ]
+        },
+        {
+          "name": "早期数字传输系统的缺点",
+          "body": "- 速率标准 E1 和 T1 不统一。",
+          "sourceMessageIndexes": [
+            53
+          ]
+        },
+        {
+          "name": "同步光纤网 SONET",
+          "body": "- 美国在 1988 年首先推出了数字传输标准——同步光纤网 SONET (Synchronous Optical Network)。",
+          "sourceMessageIndexes": [
+            53
+          ]
+        },
+        {
+          "name": "同步数字系列 SDH",
+          "body": "- ITU-T 以美国标准 SONET 为基础，制订出国际标准，即同步数字系列 SDH (Synchronous Digital Hierarchy)。",
+          "sourceMessageIndexes": [
+            53,
+            54,
+            55
+          ]
+        },
+        {
+          "name": "E1 速率与 8000 帧 × 32 时隙 × 8 bit 的计算",
+          "body": "- 8000 帧 × 32 时隙 × 8 bit = 2048000，除以 10^6 得 2.048 Mbit/s。",
+          "sourceMessageIndexes": [
+            52,
+            53
+          ]
+        },
+        {
+          "name": "OC/STS 级与 STM 级的对应关系",
+          "body": "- OC-1 / STS-1 = 51.84 Mbit/s。",
+          "sourceMessageIndexes": [
+            53
+          ]
+        },
+        {
+          "name": "SONET / SDH 标准的意义",
+          "body": "- 定义了标准光信号，规定了波长为 1310 nm 和 1550 nm 的激光源。",
+          "sourceMessageIndexes": [
+            55,
+            57
+          ]
+        },
+        {
+          "name": "2.6 宽带接入技术目录",
+          "body": "- 宽带接入技术包括三个题目：2.6.1 ADSL 技术、2.6.2 光纤同轴混合网（HFC 网）、2.6.3 FTTx 技术。",
+          "sourceMessageIndexes": [
+            57
+          ]
+        },
+        {
+          "name": "宽带：标准在不断提高",
+          "body": "- 宽带不是一个固定的技术，而是一道门槛，而且这道门槛越抬越高。",
+          "sourceMessageIndexes": [
+            57
+          ]
+        },
+        {
+          "name": "有线/无线与速率门槛的区分",
+          "body": "- 有线 / 无线分的是接入所用的传输媒体。",
+          "sourceMessageIndexes": [
+            58,
+            59
+          ]
+        },
+        {
+          "name": "2.6.1 ADSL 技术",
+          "body": "- 非对称数字用户线 ADSL (Asymmetric Digital Subscriber Line) 用数字技术对现有的模拟电话用户线进行改造，使它能够承载宽带业务。",
+          "sourceMessageIndexes": [
+            59
+          ]
+        },
+        {
+          "name": "DMT 调制技术",
+          "body": "- 我国采用的是离散多音调 DMT (Discrete Multi-Tone) 调制技术。",
+          "sourceMessageIndexes": [
+            59,
+            60,
+            61
+          ]
+        },
+        {
+          "name": "ADSL 的组成",
+          "body": "- 基于 ADSL 的接入网由三大部分组成：数字用户线接入复用器 DSLAM、用户线、用户家中的一些设施。",
+          "sourceMessageIndexes": [
+            61,
+            62,
+            63
+          ]
+        },
+        {
+          "name": "FDM频分复用与ADSL频谱分配",
+          "body": "- FDM频分复用把一对电话线的频谱切成若干段",
+          "sourceMessageIndexes": [
+            60,
+            61
+          ]
+        },
+        {
+          "name": "第二代ADSL",
+          "body": "- 第二代ADSL包括ADSL2（G.992.3 和 G.992.4）和 ADSL2+（G.992.5）",
+          "sourceMessageIndexes": [
+            63
+          ]
+        },
+        {
+          "name": "xDSL家族",
+          "body": "- 前缀x表示在数字用户线上实现的不同宽带方案",
+          "sourceMessageIndexes": [
+            63,
+            64,
+            65
+          ]
+        },
+        {
+          "name": "光纤同轴混合网（HFC网）",
+          "body": "- CATV网 (Community Antenna Television) 就是有线电视网，树形结构的同轴电缆网络，采用模拟技术的频分复用，对电视节目做单向传输",
+          "sourceMessageIndexes": [
+            65,
+            66,
+            67
+          ]
+        },
+        {
+          "name": "HFC的机顶盒与电缆调制解调器",
+          "body": "- 机顶盒（set-top box）连接在同轴电缆和用户的电视机之间，作用是使现有的模拟电视机能够接收数字电视信号",
+          "sourceMessageIndexes": [
+            67,
+            68,
+            69
+          ]
+        },
+        {
+          "name": "FTTx技术",
+          "body": "- FTTx：Fiber To The…（光纤到…），代表多种宽带光纤接入方式",
+          "sourceMessageIndexes": [
+            69,
+            70,
+            71
+          ]
+        },
+        {
+          "name": "2.6 宽带接入的三条主线",
+          "body": "- 2.6.1 ADSL：改现有电话铜线，点对点，非对称（下宽上窄），靠FDM把话音和上网分在频谱两段",
+          "sourceMessageIndexes": [
+            71
+          ]
+        },
+        {
+          "name": "FTTB 与 FTTx 铜缆最后一段",
+          "body": "- FTTB 的意思是「光纤只到大楼」。",
+          "sourceMessageIndexes": [
+            70,
+            71
+          ]
+        },
+        {
+          "name": "2.6 宽带接入三条主线",
+          "body": "- 2.6.1 ADSL 改造现有电话铜线，点对点，非对称（下宽上窄），靠 FDM 把话音和上网分在频谱两段。",
+          "sourceMessageIndexes": [
+            71
+          ]
+        },
+        {
+          "name": "HFC 共享信道导致抢带宽",
+          "body": "- HFC 在原理上注定要跟邻居抢带宽。",
+          "sourceMessageIndexes": [
+            71,
+            72,
+            73
+          ]
+        },
+        {
+          "name": "三种接入收口对比",
+          "body": "- ADSL：最后一公里跑现有电话铜线，点对点结构，无光纤参与。",
+          "sourceMessageIndexes": [
+            73
+          ]
+        }
+      ]
+    },
+    {
+      "type": "notes",
+      "title": "学习轨迹",
+      "content": "- **答对**：因为不归零没有时钟特征的跳变。\n- **答对**：A 调幅 B 调频 C 调相。\n- **答对**：2*3000*log2 8 = 2*3000*3 = 18000 b/s。\n- **误区**：把从 dB 转回比值写成 S/N = (30/10)^10，底数是 30/10，指数是 10。\n- **答对**：码元携带比特数。\n- **答对**：二进制时奈氏准则的码元速率上限为 2*W=8000；2*W*log2 2=8000 b/s。香农定理 D = W log2(1+127) = 7*4000 = 28000 b/s。\n- **误区**：认为二进制时此时香农定理是天花板，没有对两个上限取小。\n- **答对**：十六进制时算出 32000 b/s，并判断天平倾斜给香农公式。\n- **答对**：学习者说“32000b/s/所以天平倾斜给香农公式”，即十六进制时奈氏上限为 32000 b/s，实际取小仍受香农限制。\n- **答对**：学习者选 STP，理由指到屏蔽层，认为可抗电磁干扰。\n- **误区**：学习者说“屏蔽层，否则电磁干扰太强容易击穿电路，干扰信号传输”，把屏蔽层机制说成击穿电路。\n- **误区**：学习者说“因为每一对线各加一层屏蔽层可以有效防止一处失效处处失效，而后者 F/UTP 不行”，把 U/FTP 优于 F/UTP 解释成冗余式“一处失效处处失效”，不是串扰机制。\n- **答对**：学习者回答“衰减随频率升高而增大”，正确解释类别升高、距离反而缩短的原因。\n- **答对**：学习者回答“外导体屏蔽层，是一回事”，正确指出同轴电缆靠外导体屏蔽层抗干扰，并认为与 F/UTP 铝箔在挡干扰角色上同类。\n- **困惑**：学习者问“展宽是什么概念？教材上说是会逐渐展宽，造成失真”，对展宽概念不清楚。\n- **困惑**：展宽是什么概念？教材上说是会逐渐展宽，造成失真。\n- **答对**：不会（发生展宽），因为光线只有一条路径，不会被分摊拉长路程。\n- **误区**：因为铜缆线对之间的电气会互相干扰，但光纤内的光线是串行的。\n- **答对**：（微波传播距离）弯曲地表。\n- **答对**：W\n- **答对**：（传播时延）被卫星与中继站的距离定下来的。发送时延要看数据量和传输速率。\n- **答对**：被卫星与中继站的距离定下来的。发送时延要看数据量和传输速率。\n- **答对**：第三段，因为带宽最大\n- **答对**：钥匙是频率吧\n- **误区**：时隙变成空的，浪费的是通信资源，导致这一段时间的所有通信资源停摆\n- **答对**：不能（靠第几格认出是谁的数据）\n- **误区**：不能，得多带频率\n- **答对**：靠频率分\n- **答对**：WDM 靠频率分。\n- **答对**：接收端必须有一份跟 S 一模一样的 m 位码片序列。\n- **答对**：两个站码片序列没有正交时，S·T_x 不会等于零，导致信息交叉在一起。\n- **答对**：A 站与 E 的规格化内积得到 1，说明 A 发送了比特 1。\n- **答对**：确认 8000 × 32 × 8 等于 2.048 Mbit/s，与教材对得上。\n- **答对**：对的上（认同 8000 帧 × 32 时隙 × 8 bit 的 E1 计算）\n- **答对**：3，或许能（给出 STM-1 与 SONET 基本速率之间的倍数 3）\n- **答对**：都定死了（认为世界性统一既统一了速率等级，也统一了时钟来源）\n- **答对**：有线无线是分接入的传播媒体\n- **误区**：门槛量的是性能的带宽（把 bit/s 单位的速率门槛说成是带宽）\n- **答对**：FDM频分复用\n- **答对**：需要将电话数据和上网数据分开\n- **答对**：SDSL对称数字用户线\n- **困惑**：应该不对吧，应该是HDSL或者Giga DSL，因为要发大量数据，需要高速和上行\n- **答对**：居民用户端对下行流量需求大，上行较小\n- **误区**：解调器做的是接入，而ATU做的是翻译工作\n- **困惑**：电缆？（指FTTB从大楼到家的最后一段）\n- **答对**：学习者回答 HFC 是三种接入里原理上注定要跟邻居抢带宽的那种。"
+    },
+    {
+      "type": "key-insight",
+      "content": "不归零没有时钟特征的跳变，因此接收端抽不出时钟节拍。",
+      "sourceMessageIndexes": [
+        0
+      ]
+    },
+    {
+      "type": "open-question",
+      "content": "对于频带宽度已经确定、信噪比不能再提高、码元传输速率也已经到上限的信道，还有没有别的办法把信息的传输速率再往上抬？"
+    },
+    {
+      "type": "review-questions",
+      "items": [
+        {
+          "question": "奈氏准则的适用条件、公式和它限制的对象分别是什么？",
+          "answer": "适用条件是带宽为 W 的低通信道、不考虑噪声；码元传输最高速率为 2W 码元/秒；它限制的是码元速率，不对信息（比特）传输速率设限。"
+        },
+        {
+          "question": "若码元有 M 个离散状态，理想低通信道下的极限数据传输率如何计算？",
+          "answer": "C = 2W log2 M (b/s)。"
+        }
+      ]
+    }
+  ],
+  "generationMeta": {
+    "pipelineVersion": "post-class-v2",
+    "mode": "chunked",
+    "jobId": "pn_mv0kvv2ab1d9d729454a",
+    "traceId": "tr_mv0kvv2a31715b693c23",
+    "sourceHash": "sha256:1124a5f508ac370c7a7f3d9463d786c2ff7821477b5c0f31c697a62fd278eba1",
+    "sourceMessageCount": 75,
+    "chunkCount": 8,
+    "generatedAt": 1791527032372,
+    "decision": "degraded",
+    "quality": {
+      "score": 0.8406,
+      "metrics": {
+        "topicCoverage": 1,
+        "learnerEvidenceCoverage": 1,
+        "explanationCoverage": 0.04918032786885246,
+        "sourceIntegrity": 1,
+        "reviewQuestionDiversity": 1,
+        "structureValidity": 1,
+        "lengthFitness": 0.66525,
+        "duplicationRatio": 0,
+        "unsupportedTopicRatio": 0,
+        "lengthChars": 5339,
+        "conceptCount": 61,
+        "evidenceTopicCount": 77,
+        "chunkCompleteness": 1
+      }
+    },
+    "warnings": [
+      "degraded note is 5341 characters, still above the 3000-4000 target"
+    ],
+    "evidenceIndex": [
+      {
+        "name": "不归零编码与自同步",
+        "sourceMessageIndexes": [
+          0,
+          1
+        ]
+      },
+      {
+        "name": "带通调制",
+        "sourceMessageIndexes": [
+          1,
+          2,
+          3
+        ]
+      },
+      {
+        "name": "实际信道失真与码间串扰",
+        "sourceMessageIndexes": [
+          3
+        ]
+      },
+      {
+        "name": "奈氏准则",
+        "sourceMessageIndexes": [
+          3,
+          4,
+          5
+        ]
+      },
+      {
+        "name": "信噪比",
+        "sourceMessageIndexes": [
+          7
+        ]
+      },
+      {
+        "name": "香农定理",
+        "sourceMessageIndexes": [
+          7,
+          8,
+          9
+        ]
+      },
+      {
+        "name": "奈氏准则与香农公式的比较",
+        "sourceMessageIndexes": [
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ]
+      },
+      {
+        "name": "传输媒体",
+        "sourceMessageIndexes": [
+          15
+        ]
+      },
+      {
+        "name": "奈氏与香农公式的权衡",
+        "sourceMessageIndexes": [
+          14,
+          15
+        ]
+      },
+      {
+        "name": "传输媒体概述",
+        "sourceMessageIndexes": [
+          15
+        ]
+      },
+      {
+        "name": "双绞线",
+        "sourceMessageIndexes": [
+          15,
+          16,
+          17
+        ]
+      },
+      {
+        "name": "双绞线缩写规则与屏蔽结构",
+        "sourceMessageIndexes": [
+          17,
+          18,
+          19
+        ]
+      },
+      {
+        "name": "RJ-45 接口标准",
+        "sourceMessageIndexes": [
+          19
+        ]
+      },
+      {
+        "name": "双绞线的类别",
+        "sourceMessageIndexes": [
+          19,
+          20,
+          21
+        ]
+      },
+      {
+        "name": "同轴电缆",
+        "sourceMessageIndexes": [
+          21,
+          22,
+          23
+        ]
+      },
+      {
+        "name": "光缆",
+        "sourceMessageIndexes": [
+          23
+        ]
+      },
+      {
+        "name": "多模光纤的展宽与失真",
+        "sourceMessageIndexes": [
+          24,
+          25
+        ]
+      },
+      {
+        "name": "脉冲展宽 (pulse broadening)",
+        "sourceMessageIndexes": [
+          24,
+          25,
+          26,
+          27
+        ]
+      },
+      {
+        "name": "单模光纤的代价与波段",
+        "sourceMessageIndexes": [
+          27
+        ]
+      },
+      {
+        "name": "光缆",
+        "sourceMessageIndexes": [
+          27
+        ]
+      },
+      {
+        "name": "光纤的优劣",
+        "sourceMessageIndexes": [
+          27,
+          28,
+          29
+        ]
+      },
+      {
+        "name": "非导引型传输媒体",
+        "sourceMessageIndexes": [
+          29
+        ]
+      },
+      {
+        "name": "微波通信",
+        "sourceMessageIndexes": [
+          29,
+          30,
+          31
+        ]
+      },
+      {
+        "name": "多径效应",
+        "sourceMessageIndexes": [
+          29
+        ]
+      },
+      {
+        "name": "无线通信误码率",
+        "sourceMessageIndexes": [
+          29
+        ]
+      },
+      {
+        "name": "微波接力",
+        "sourceMessageIndexes": [
+          31
+        ]
+      },
+      {
+        "name": "地面微波接力的优缺点",
+        "sourceMessageIndexes": [
+          31
+        ]
+      },
+      {
+        "name": "奈氏与香农公式中 W 的作用",
+        "sourceMessageIndexes": [
+          32,
+          33
+        ]
+      },
+      {
+        "name": "卫星通信",
+        "sourceMessageIndexes": [
+          33
+        ]
+      },
+      {
+        "name": "卫星通信优缺点",
+        "sourceMessageIndexes": [
+          33,
+          34,
+          35
+        ]
+      },
+      {
+        "name": "无线局域网与 ISM 频段",
+        "sourceMessageIndexes": [
+          35
+        ]
+      },
+      {
+        "name": "传播时延与发送时延的区别",
+        "sourceMessageIndexes": [
+          34,
+          35
+        ]
+      },
+      {
+        "name": "无线局域网与 ISM 频段",
+        "sourceMessageIndexes": [
+          35,
+          36
+        ]
+      },
+      {
+        "name": "信道复用技术概述",
+        "sourceMessageIndexes": [
+          37
+        ]
+      },
+      {
+        "name": "频分复用 FDM",
+        "sourceMessageIndexes": [
+          37,
+          38,
+          39
+        ]
+      },
+      {
+        "name": "时分复用 TDM",
+        "sourceMessageIndexes": [
+          39,
+          40,
+          41
+        ]
+      },
+      {
+        "name": "时分复用导致信道利用率不高",
+        "sourceMessageIndexes": [
+          40,
+          41
+        ]
+      },
+      {
+        "name": "频分多址与时分多址",
+        "sourceMessageIndexes": [
+          41
+        ]
+      },
+      {
+        "name": "统计时分复用 STDM",
+        "sourceMessageIndexes": [
+          41,
+          42,
+          43
+        ]
+      },
+      {
+        "name": "波分复用 WDM",
+        "sourceMessageIndexes": [
+          43,
+          44,
+          45
+        ]
+      }
+    ],
+    "degradedReason": "schema_invalid"
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "title": "用UML表示棋子类的属性与操作",
+  "definition": "原文给出一个棋类程序的UML类图示例，其中包含Pawn和Bishop等棋子类型。类图使用带符号的成员表示可见性：`-`表示私有成员，`+`表示公有成员。图中棋子类具有位置、颜色和是否被吃掉等数据成员，以及移动、判断移动是否合法、绘制和升变等操作。",
+  "key_points": [
+    "Pawn和Bishop类图中出现了类似`m_locationOnBoard : Location`、`m_color : Color`和`m_isCaptured : bool`的数据成员。",
+    "图中操作包括`move() : void`、`isMoveLegal() : bool`和`draw() : void`；Pawn还出现了`promote() : void`。",
+    "UML成员前的`-`和`+`分别用于表示私有成员和公有成员。"
+  ],
+  "examples": [
+    "UML成员可按如下形式理解：`-m_color : Color`表示名为`m_color`、类型为`Color`的私有数据成员。",
+    "`+isMoveLegal() : bool`表示一个公有成员函数，函数名为`isMoveLegal`，返回类型为`bool`。"
+  ],
+  "misconceptions": [
+    "不要把UML中的`:`误解为C++继承关系；它用于分隔成员名称和类型或返回类型。",
+    "不能仅凭这几页确定Pawn和Bishop之间的完整继承关系，也不能据此补充未显示的成员或行为。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "在UML类图中，`-m_color : Color`表示什么？",
+      "a": "它表示一个名为`m_color`、类型为`Color`的私有数据成员。"
+    },
+    {
+      "q": "`+isMoveLegal() : bool`表示什么？",
+      "a": "它表示一个公有成员函数`isMoveLegal`，返回类型为`bool`。"
+    },
+    {
+      "q": "原文图示中Pawn类额外出现了哪个操作？",
+      "a": "出现了`promote() : void`操作。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++类的成员与访问控制",
+    "UML类图基本表示法"
+  ],
+  "source_pages": [
+    145,
+    148
+  ],
+  "needs_verification": true,
+  "verify_query": "《C++20高级编程》第5版 第146页 Pawn Bishop UML m_locationOnBoard m_color isCaptured promote move isMoveLegal draw 原图",
+  "concept_id": "208_用uml表示棋子类的属性与操作",
+  "_chunk_pages": [
+    145,
+    148
+  ]
+}

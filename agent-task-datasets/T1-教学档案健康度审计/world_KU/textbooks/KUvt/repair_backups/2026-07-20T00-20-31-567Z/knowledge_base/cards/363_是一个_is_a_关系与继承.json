@@ -1,0 +1,50 @@
+{
+  "title": "“是一个”（is-a）关系与继承",
+  "definition": "“是一个”关系表示类 A 是类 B 的一种特殊类型，或 A 与 B 相似但具有额外特征。在面向对象编程中，这种层次关系通常通过继承实现：B 是基类，A 是派生类或子类。",
+  "key_points": [
+    "“是一个”关系也称为派生、子类、扩展或继承关系。",
+    "继承允许派生类获得基类中表示的通用属性和行为。",
+    "基类应封装所有相关类型共有的属性和行为，派生类可以表达更具体的特征。",
+    "Animal 可以作为基类，Monkey、Kangaroo、Penguin 可以作为其派生类。",
+    "Checkbox 是一种 Button，因此 Checkbox 可以通过继承 Button 并增加选中状态来表示。"
+  ],
+  "examples": [
+    "继承层次可以写成：$$\\text{Monkey}\\ \\text{is-a}\\ \\text{Animal}$$",
+    "Animal 可以包含大小、生活区域、食物等属性，以及走动、进食、睡觉等行为；Monkey 在继承这些内容的基础上还可以增加自己的特征。",
+    "用户界面中：$$\\text{Checkbox}\\ \\text{is-a}\\ \\text{Button}$$"
+  ],
+  "misconceptions": [
+    "“是一个”不是“有一个”；Monkey 是 Animal 的一种，而不是 Animal 包含一个 Monkey。",
+    "派生类并不只是复制基类代码，它表达的是一种类型层次关系，并可增加或改变特征。",
+    "具有某个相同属性值不等于发生继承，例如猴子吃香蕉、企鹅吃鱼，只是 diet 属性的值不同。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "什么是“是一个”关系？",
+      "a": "它表示一个类是另一个类的一种特殊类型，即 A 是一个 B；在面向对象编程中通常通过继承实现。"
+    },
+    {
+      "q": "为什么 Monkey 可以作为 Animal 的派生类？",
+      "a": "因为猴子是一种动物，具有动物共有的属性和行为，同时还可能具有自己的特殊特征。"
+    },
+    {
+      "q": "Checkbox 与 Button 的关系是什么？",
+      "a": "Checkbox 是一种 Button，Checkbox 可以继承 Button 的通用功能，并增加表示是否选中的状态。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "“有一个”（has-a）关系"
+  ],
+  "source_pages": [
+    171,
+    172
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "363_是一个_is_a_关系与继承",
+  "_chunk_pages": [
+    169,
+    172
+  ]
+}

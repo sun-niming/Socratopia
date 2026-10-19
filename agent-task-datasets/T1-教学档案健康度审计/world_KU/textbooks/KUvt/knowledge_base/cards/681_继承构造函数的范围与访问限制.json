@@ -1,0 +1,44 @@
+{
+  "title": "继承构造函数的范围与访问限制",
+  "definition": "使用using Base::Base;继承构造函数时，不能只选择基类构造函数中的一部分；教材说明会继承基类除默认构造函数外的其他构造函数。继承构造函数所采用的访问规范与基类中原构造函数的访问规范相同，与派生类中using声明所在的访问规范无关。",
+  "key_points": [
+    "不能通过using声明只继承基类构造函数的一个子集。",
+    "教材说明：继承构造函数时，会继承除默认构造函数外的其他基类构造函数。",
+    "using声明位于public、protected还是private区域，不会改变被继承构造函数原本的访问权限；继承时使用基类中的访问规范。"
+  ],
+  "examples": [
+    "class Base { public: Base(); Base(std::string_view); Base(float); }; class Derived : public Base { private: using Base::Base; };",
+    "根据教材说明，不能通过该using声明只继承Base(std::string_view)而排除Base(float)；继承构造函数的访问性仍按Base中对应构造函数的访问规范确定。"
+  ],
+  "misconceptions": [
+    "不能把using Base::Base;写成只继承某一个指定构造函数的选择器。",
+    "把using Base::Base;放在private区域，并不意味着所有继承来的构造函数都自动变成private。",
+    "继承构造函数的访问性应查看基类构造函数自身的访问规范，而不是只看using声明的位置。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "能否只使用using声明继承Base(std::string_view)，而不继承Base(float)？",
+      "a": "不能。教材说明使用using继承构造函数时不能只继承基类构造函数的一个子集。"
+    },
+    {
+      "q": "using Base::Base;位于Derived的private区域时，继承构造函数的访问权限由谁决定？",
+      "a": "由基类中对应构造函数的访问规范决定，而不是由using声明所在的访问区域决定。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "访问控制",
+    "使用using声明继承构造函数"
+  ],
+  "source_pages": [
+    335,
+    335
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 using Base::Base 继承构造函数 默认构造函数 访问权限 using声明所在访问区 标准规则",
+  "concept_id": "681_继承构造函数的范围与访问限制",
+  "_chunk_pages": [
+    333,
+    336
+  ]
+}

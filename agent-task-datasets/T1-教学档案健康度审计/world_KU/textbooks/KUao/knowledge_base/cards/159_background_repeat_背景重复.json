@@ -1,0 +1,42 @@
+{
+  "title": "background-repeat 背景重复",
+  "definition": "background-repeat 用于设置背景图片的重复方式。教材给出的取值包括 repeat、repeat-x、repeat-y 和 no-repeat。",
+  "key_points": [
+    "repeat 表示在横向和纵向都重复填充。",
+    "repeat-x 表示只在水平方向重复填充一行。",
+    "repeat-y 表示只在垂直方向重复填充一列。",
+    "no-repeat 表示不重复，只显示一次背景图片。"
+  ],
+  "examples": [
+    "background-repeat: repeat;",
+    "background-repeat: repeat-x;",
+    "background-repeat: repeat-y;",
+    "background-repeat: no-repeat;"
+  ],
+  "misconceptions": [
+    "repeat-x 会在垂直方向重复。",
+    "no-repeat 仍然会平铺背景图。",
+    "repeat、repeat-x、repeat-y、no-repeat 没有区别。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "background-repeat 的 no-repeat 表示什么？",
+      "a": "表示不重复，只显示一次背景图片。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "background-image 背景图片"
+  ],
+  "source_pages": [
+    113,
+    116
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "159_background_repeat_背景重复",
+  "_chunk_pages": [
+    113,
+    116
+  ]
+}

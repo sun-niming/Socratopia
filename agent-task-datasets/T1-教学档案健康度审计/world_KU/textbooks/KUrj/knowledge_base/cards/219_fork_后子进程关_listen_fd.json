@@ -1,0 +1,37 @@
+{
+  "title": "fork 后子进程关 listen_fd",
+  "definition": "`fork` 后的子进程只负责处理一个客户端请求，不应该继续接受新连接，因此应关闭 `listen_fd`。这样既能减少 fd 泄漏，也能让父子职责更清晰。",
+  "key_points": [
+    "子进程只处理当前客户端请求。",
+    "子进程不应继续 `accept`，所以要关闭 `listen_fd`。",
+    "关闭 `listen_fd` 可以减少 fd 泄漏并明确职责。"
+  ],
+  "examples": [
+    "父进程保留监听套接字，子进程关闭监听套接字。"
+  ],
+  "misconceptions": [
+    "子进程保留监听套接字并不会帮助当前请求处理。",
+    "关闭 `listen_fd` 不是多余操作，而是职责分离的一部分。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么子进程要关闭 listen_fd？",
+      "a": "因为子进程只负责处理一个客户端请求，不应该继续接受新连接；关闭 `listen_fd` 可减少 fd 泄漏并明确职责。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "fork 后父进程关 client_fd"
+  ],
+  "source_pages": [
+    129,
+    132
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "219_fork_后子进程关_listen_fd",
+  "_chunk_pages": [
+    129,
+    132
+  ]
+}

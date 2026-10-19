@@ -1,0 +1,51 @@
+{
+  "title": "累积与归约算法",
+  "definition": "<numeric>中定义了多种归约算法，包括std::accumulate()、std::reduce()、std::inner_product()和std::transform_reduce()。归约算法会反复使用二元运算符组合一个范围中的元素，或组合两个范围中的对应元素，直到得到一个结果值；这类操作也称为累加、聚合、压缩、注入或折叠。std::accumulate()不支持并行执行，而std::reduce()支持执行策略，适合需要并行或矢量化处理的大型范围。",
+  "key_points": [
+    "std::accumulate()和std::reduce()通常把范围元素与初始值Init逐步组合。",
+    "教材给出的抽象形式是：$$Init\\ op\\ x_0\\ op\\ x_1\\ op\\cdots\\ op\\ x_{n-1}$$。",
+    "默认情况下，std::accumulate()使用operator+，std::reduce()使用std::plus。",
+    "std::reduce()可以接收执行策略，例如std::execution::par_unseq。",
+    "并行归约可能改变组合顺序，因此使用的运算通常应适合非严格顺序的组合。"
+  ],
+  "examples": [
+    "double result1 = std::accumulate(std::cbegin(vec), std::cend(vec), 0.0);\ndouble result2 = std::reduce(std::execution::par_unseq, std::cbegin(vec), std::cend(vec));",
+    "教材说明以下两种写法都用于求和：\n$$result_1=\\operatorname{accumulate}(vec,0.0)$$\n$$result_2=\\operatorname{reduce}(\\text{par\\_unseq},vec)$$"
+  ],
+  "misconceptions": [
+    "std::accumulate()和std::reduce()并不完全等价：前者不支持并行执行，后者支持执行策略。",
+    "并行归约不应依赖元素严格按照从左到右的固定顺序组合。",
+    "这些算法定义在<numeric>中。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么大型数据集可以考虑使用std::reduce()而不是std::accumulate()？",
+      "a": "因为std::reduce()支持并行和矢量化执行策略，在大型输入范围上可能获得更好的性能。"
+    },
+    {
+      "q": "std::accumulate()默认使用什么二元运算？std::reduce()默认使用什么？",
+      "a": "std::accumulate()默认使用operator+；std::reduce()默认使用std::plus。"
+    },
+    {
+      "q": "归约算法的基本目标是什么？",
+      "a": "反复使用一个运算符组合范围中的元素，直到得到一个结果值。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "函数对象与二元运算",
+    "执行策略",
+    "迭代器范围"
+  ],
+  "source_pages": [
+    656,
+    656
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1371_累积与归约算法",
+  "_chunk_pages": [
+    653,
+    656
+  ]
+}

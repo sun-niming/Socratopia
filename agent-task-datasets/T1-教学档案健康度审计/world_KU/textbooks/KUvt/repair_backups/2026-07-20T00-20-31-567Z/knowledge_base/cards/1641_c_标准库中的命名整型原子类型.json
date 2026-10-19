@@ -1,0 +1,46 @@
+{
+  "title": "C++标准库中的命名整型原子类型",
+  "definition": "C++标准为基本类型提供了若干命名的整型原子类型，它们分别对应相应的std::atomic<T>特化。原文表27-5列出了这些命名类型及其等效的std::atomic类型；std::atomic_flag是一个特殊的原子类型，原文表中没有为它列出对应的std::atomic<T>形式。",
+  "key_points": [
+    "atomic_bool等效于std::atomic<bool>。",
+    "atomic_char、atomic_uchar、atomic_int、atomic_uint分别对应char、unsigned char、int、unsigned int的std::atomic特化。",
+    "atomic_long、atomic_ulong、atomic_llong、atomic_ullong分别对应long、unsigned long、long long、unsigned long long的std::atomic特化。",
+    "atomic_wchar_t对应std::atomic<wchar_t>；atomic_flag在原文表中标注为没有等效的std::atomic类型。"
+  ],
+  "examples": [
+    "典型对应关系可写为：\n$$\n\\begin{array}{c|c}\n\\text{命名原子类型} & \\text{等效的类型}\\\\\n\\hline\n\\texttt{atomic\\_bool} & \\texttt{std::atomic<bool>}\\\\\n\\texttt{atomic\\_int} & \\texttt{std::atomic<int>}\\\\\n\\texttt{atomic\\_uint} & \\texttt{std::atomic<unsigned\\ int>}\\\\\n\\texttt{atomic\\_long} & \\texttt{std::atomic<long>}\\\\\n\\texttt{atomic\\_llong} & \\texttt{std::atomic<long\\ long>}\\\\\n\\texttt{atomic\\_wchar\\_t} & \\texttt{std::atomic<wchar\\_t>}\n\\end{array}\n$$"
+  ],
+  "misconceptions": [
+    "命名整型原子类型与相应的std::atomic<T>特化表示等效的原子类型，不是普通非原子整数类型。",
+    "atomic_flag不能简单地按原文表格理解为某个普通的std::atomic<T>别名。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "atomic_int等效于哪一种类型？",
+      "a": "等效于std::atomic<int>。"
+    },
+    {
+      "q": "atomic_bool等效于哪一种类型？",
+      "a": "等效于std::atomic<bool>。"
+    },
+    {
+      "q": "原文对atomic_flag的等效类型如何标注？",
+      "a": "原文表27-5将其标注为没有等效的std::atomic类型。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "std::atomic保证并发访问的原子性"
+  ],
+  "source_pages": [
+    800,
+    800
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 标准库 命名整型原子类型 atomic_bool atomic_int atomic_ullong atomic_flag 与 std::atomic<T> 的对应关系",
+  "concept_id": "1641_c_标准库中的命名整型原子类型",
+  "_chunk_pages": [
+    797,
+    800
+  ]
+}

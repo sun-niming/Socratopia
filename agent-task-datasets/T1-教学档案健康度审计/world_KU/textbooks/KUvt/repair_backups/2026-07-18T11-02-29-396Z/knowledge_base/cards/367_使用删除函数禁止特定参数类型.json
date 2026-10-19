@@ -1,0 +1,43 @@
+{
+  "title": "使用删除函数禁止特定参数类型",
+  "definition": "在函数声明后写上 `= delete`，表示该函数被明确删除，调用者不能使用该重载。删除函数可用于阻止某些参数类型通过重载或隐式类型转换调用不希望使用的接口。",
+  "key_points": [
+    "`void setValue(double value);` 提供了接受 `double` 的重载。",
+    "`void setValue(int) = delete;` 明确禁止接受 `int` 的调用。",
+    "因此，`setValue(1.23)` 可以调用 `setValue(double)`，而 `setValue(123)` 会因匹配到已删除的 `int` 重载而编译失败。"
+  ],
+  "examples": [
+    "代码示例：`SpreadsheetCell cell; cell.setValue(1.23);` 可以编译。",
+    "代码示例：`cell.setValue(123);` 会编译失败，因为 `int` 重载被删除。",
+    "接口声明：`export class SpreadsheetCell { public: void setValue(double value); void setValue(int) = delete; };`"
+  ],
+  "misconceptions": [
+    "`= delete` 不是函数体为空，也不是运行时抛出异常，而是在编译阶段禁止调用。",
+    "删除 `int` 重载后，并不等于所有整数都不能传给 `double` 参数；本例通过显式删除 `int` 重载来阻止整数调用。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`SpreadsheetCell` 同时声明 `void setValue(double);` 和 `void setValue(int) = delete;` 后，调用 `cell.setValue(123);` 的结果是什么？",
+      "a": "编译失败，因为调用匹配到了被删除的 `int` 重载。"
+    },
+    {
+      "q": "`cell.setValue(1.23);` 会调用哪个函数？",
+      "a": "调用 `setValue(double)`，因为实参 `1.23` 的类型是 `double`。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++函数重载"
+  ],
+  "source_pages": [
+    281,
+    284
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "367_使用删除函数禁止特定参数类型",
+  "_chunk_pages": [
+    281,
+    284
+  ]
+}

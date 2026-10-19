@@ -1,0 +1,45 @@
+{
+  "title": "可变参数模板与参数包",
+  "definition": "可变参数模板（variadic template）是能够接收可变数量模板参数的模板。参数包使用 `typename... Types` 声明，可以接收任意数量的类型参数，包括零个参数。",
+  "key_points": [
+    "`typename... Types` 中的 `...` 表示模板参数包。",
+    "可用不同数量的类型实例化模板，例如 `MyVariadicTemplate<int>`、`MyVariadicTemplate<std::string, double, std::list<int>>`。",
+    "允许零个模板参数时，可以直接使用 `MyVariadicTemplate<>`。",
+    "若要求至少有一个模板参数，可以把第一个参数单独声明，例如 `template<typename T1, typename... Types>`；此时空参数列表不能实例化该模板。",
+    "参数包不能直接遍历，通常需要借助模板递归或折叠表达式处理。"
+  ],
+  "examples": [
+    "允许零个模板参数：`template<typename... Types> class MyVariadicTemplate {};`，实例化为 `MyVariadicTemplate<> instance;`。",
+    "至少需要一个模板参数：`template<typename T1, typename... Types> class MyVariadicTemplate {};`。"
+  ],
+  "misconceptions": [
+    "`typename...` 后面的三个点不是语法错误，而是参数包声明语法。",
+    "可变参数模板并不等于运行时动态类型容器；模板参数的数量和类型仍然在编译期确定。",
+    "参数包不能像普通数组一样直接用下标遍历。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "什么是可变参数模板？",
+      "a": "可变参数模板是能够接收可变数量模板参数的模板，参数数量可以是零个或多个，具体取决于模板声明是否要求至少一个固定参数。"
+    },
+    {
+      "q": "如何禁止可变参数模板使用零个模板参数？",
+      "a": "至少声明一个固定模板参数，例如 `template<typename T1, typename... Types> class MyVariadicTemplate {};`。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++类模板与函数模板"
+  ],
+  "source_pages": [
+    769,
+    769
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1585_可变参数模板与参数包",
+  "_chunk_pages": [
+    769,
+    772
+  ]
+}

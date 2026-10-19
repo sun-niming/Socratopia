@@ -1,0 +1,52 @@
+{
+  "title": "测试 ObjectPool 释放后的对象复用",
+  "definition": "ObjectPool 的释放测试验证：对象归还对象池后，对象池能够再次提供这些对象，并且在所有已释放对象被重新获取之前不创建额外对象。测试先获取 10 个 Serial 对象，记录它们的原始指针并保存 shared_ptr 以保持对象存活；随后清空 shared_ptr 容器，将对象释放回池中；再次获取 10 个对象，并检查新获得的原始指针是否都曾在第一阶段出现过。",
+  "key_points": [
+    "第一阶段获取 10 个对象，并把原始指针保存到 `vector<Serial*> retrievedSerialPointers`。",
+    "同时把 `shared_ptr<Serial>` 保存到 `vector<shared_ptr<Serial>> retrievedSerials`，以保持对象处于活动状态。",
+    "调用 `retrievedSerials.clear()` 后，所有对象被释放回对象池。",
+    "第二阶段再次获取 10 个对象，并记录其原始指针。",
+    "如果对象池正确复用对象，第二阶段的每个原始指针都应属于第一阶段记录的指针集合。",
+    "该测试使用 `<algorithm>` 中的 `std::sort()` 算法辅助比较指针集合。"
+  ],
+  "examples": [
+    "测试阶段可表示为：$$\\text{获取 10 个对象并记录指针} \\rightarrow \\text{clear() 归还对象} \\rightarrow \\text{再次获取 10 个对象} \\rightarrow \\text{检查指针是否重合}$$",
+    "第一阶段保存对象地址：`retrievedSerialPointers.push_back(object.get());`；保持对象存活：`retrievedSerials.push_back(object);`；释放回池：`retrievedSerials.clear();`"
+  ],
+  "misconceptions": [
+    "清空保存对象的 shared_ptr 容器并不表示对象必然被销毁；在 ObjectPool 语境中，这一步用于触发对象归还对象池。",
+    "比较序列号或对象值不一定能验证复用；该测试明确记录并比较原始指针，以确认是否重新使用原对象。",
+    "测试的目标不是要求每次获取都返回同一个对象，而是要求释放后的对象能够被池再次复用，且不额外创建对象。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "ObjectPool 释放测试为什么要保存对象的原始指针？",
+      "a": "为了在第二次获取时比较地址，判断获取到的对象是否就是第一阶段归还给池的对象。"
+    },
+    {
+      "q": "释放测试中为什么要先保存 shared_ptr，再调用 clear()？",
+      "a": "保存 shared_ptr 可以让第一阶段获取的对象保持活动状态；调用 clear() 后再将这些对象归还对象池。"
+    },
+    {
+      "q": "该测试如何判断对象池没有创建额外对象？",
+      "a": "再次获取 10 个对象后，检查它们的原始指针是否全部出现在第一阶段记录的指针集合中。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "智能指针对象生命周期",
+    "ObjectPool 获取对象",
+    "C++ vector 和算法"
+  ],
+  "source_pages": [
+    888,
+    888
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1839_测试_objectpool_释放后的对象复用",
+  "_chunk_pages": [
+    885,
+    888
+  ]
+}

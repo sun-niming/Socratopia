@@ -1,0 +1,43 @@
+{
+  "title": "istream_iterator 从输入流读取元素",
+  "definition": "`istream_iterator<T>` 是输入流迭代器类模板，模板参数 T 表示从输入流读取的元素类型。它通过输入操作读取值，可以作为标准算法和容器方法的输入来源，从而以迭代器方式访问输入流中的数据。",
+  "key_points": [
+    "`istream_iterator` 把从输入流读取值的操作抽象为输入迭代器操作。",
+    "它可以作为算法或容器方法的源范围。",
+    "教材随后给出的 `sum` 模板通过解引用 begin 取得首个值，再遍历到 end 并累加所有元素。"
+  ],
+  "examples": [
+    "使用整数输入流迭代器的形式：`istream_iterator<int> input { cin };`。",
+    "求范围和的模板：`template <typename InputIter> auto sum(InputIter begin, InputIter end) { auto sum { *begin }; for (auto iter { ++begin }; iter != end; ++iter) { sum += *iter; } return sum; }`"
+  ],
+  "misconceptions": [
+    "`istream_iterator` 用于读取输入，不是用于向输出流写入元素；输出应使用 `ostream_iterator`。",
+    "`sum` 示例假定范围至少包含一个元素，因为它先执行 `*begin` 获取初始和。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "istream_iterator 的用途是什么？",
+      "a": "通过迭代器抽象从输入流中读取指定类型的值，并作为算法或容器方法的输入来源。"
+    },
+    {
+      "q": "教材中的 sum 函数如何计算范围内元素的和？",
+      "a": "先将 `*begin` 作为初始和，再从下一个迭代器开始遍历到 end，并将每个元素累加到 sum 中。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "流迭代器的作用与种类",
+    "使用 != 判断迭代器范围结束"
+  ],
+  "source_pages": [
+    532,
+    532
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1091_istream_iterator_从输入流读取元素",
+  "_chunk_pages": [
+    529,
+    532
+  ]
+}

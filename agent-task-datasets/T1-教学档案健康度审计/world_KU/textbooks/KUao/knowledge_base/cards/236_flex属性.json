@@ -1,0 +1,44 @@
+{
+  "title": "flex属性",
+  "definition": "flex是弹性布局中用于统一设置flex-grow、flex-shrink和flex-basis的简写属性，用来控制弹性项目在容器内的伸缩行为。它支持单值语法和双值语法；单值语法中，flex:1可等效为1 1 0%，表示基础大小为0%，剩余空间按比例分配；flex:auto等效为1 1 auto，表示可放大/缩小，基础大小由内容或宽度决定；flex:none等效为0 0 auto，表示不放大也不缩小，保持原始尺寸。双值语法中，flex:1 2等效为1 2 0%，flex-basis默认为0%；flex:200px 0等效为0 1 200px。",
+  "key_points": [
+    "flex是flex-grow、flex-shrink、flex-basis的简写属性",
+    "单值语法包括数字、auto、none三类写法",
+    "flex:1等效于1 1 0%，剩余空间按比例分配",
+    "flex:auto等效于1 1 auto，flex:none等效于0 0 auto",
+    "双值语法会补全为三值形式，例如1 2→1 2 0%"
+  ],
+  "examples": [
+    "flex: 1",
+    "flex: auto",
+    "flex: none",
+    "flex: 1 2",
+    "flex: 200px 0"
+  ],
+  "misconceptions": [
+    "不要把flex只理解成flex-grow，它实际上同时控制grow、shrink和basis",
+    "flex:auto并不等于flex:1，它的基础大小不是0%，而是auto",
+    "flex:none不是让元素消失，而是让它保持原始尺寸且不伸缩"
+  ],
+  "qa_pairs": [
+    {
+      "q": "flex属性的作用是什么？",
+      "a": "它是flex-grow、flex-shrink和flex-basis的简写，用于控制弹性项目在容器内的伸缩行为。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "弹性布局基础"
+  ],
+  "source_pages": [
+    165,
+    166
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "236_flex属性",
+  "_chunk_pages": [
+    165,
+    168
+  ]
+}

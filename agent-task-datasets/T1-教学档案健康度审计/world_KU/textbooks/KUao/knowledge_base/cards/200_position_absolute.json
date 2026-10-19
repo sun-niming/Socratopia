@@ -1,0 +1,37 @@
+{
+  "title": "position: absolute",
+  "definition": "absolute 是绝对定位，元素的位置相对于最近的已定位祖先元素进行定位。已定位是指该元素的 position 属性被设置且不是 static；祖先是从该元素一直到根节点的所有元素；最近是指距离该元素最近的那个节点。",
+  "key_points": [
+    "absolute 表示绝对定位",
+    "参照物是最近的已定位祖先元素",
+    "已定位指 position 被设置且不是 static 的元素"
+  ],
+  "examples": [
+    ".parent { position: relative; } .child { position: absolute; top: 0; right: 0; }"
+  ],
+  "misconceptions": [
+    "absolute 一定相对于浏览器窗口定位",
+    "只要有父元素，absolute 就一定相对于父元素定位"
+  ],
+  "qa_pairs": [
+    {
+      "q": "absolute 定位相对于什么元素定位？",
+      "a": "相对于最近的已定位祖先元素。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "position属性"
+  ],
+  "source_pages": [
+    138,
+    140
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "200_position_absolute",
+  "_chunk_pages": [
+    137,
+    140
+  ]
+}

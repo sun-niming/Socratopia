@@ -1,0 +1,44 @@
+{
+  "title": "泛型 lambda 表达式",
+  "definition": "泛型 lambda 通过将参数类型写成 `auto`，让编译器根据调用实参自动推导参数类型。其类型推导规则与模板参数推导规则相同，因此同一个泛型 lambda 可以用于不同类型的参数。",
+  "key_points": [
+    "参数声明为 `auto` 即可启用自动类型推导。",
+    "不同参数分别进行类型推导，因此不同参数的类型可以不同。",
+    "编译器会将泛型 lambda 生成类似函数对象的类型，并为调用运算符生成函数模板。"
+  ],
+  "examples": [
+    "泛型相等比较 lambda：`auto areEqual = [](const auto& value1, const auto& value2) { return value1 == value2; };`。",
+    "其行为可理解为：`class CompilerGeneratedName { public: template <typename T1, typename T2> auto operator()(const T1& value1, const T2& value2) const { return value1 == value2; } };`。",
+    "`areEqual` 可以作为回调传给 `findMatches(values1, values2, areEqual, printMatch);`。"
+  ],
+  "misconceptions": [
+    "误以为泛型 lambda 的所有参数必须具有相同类型；使用多个 `auto` 参数时，它们会分别推导，类型可以不同。",
+    "误以为泛型 lambda 只能处理整数；只要表达式对相应类型有效，它也可以用于其他类型。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何声明一个泛型 lambda？",
+      "a": "把参数类型写成 `auto`，例如 `[](const auto& x) { return x; }`。"
+    },
+    {
+      "q": "泛型 lambda 的多个 `auto` 参数是否必须推导为同一种类型？",
+      "a": "不必须。每个参数独立进行类型推导，因此类型可以不同。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "lambda 表达式",
+    "模板参数推导"
+  ],
+  "source_pages": [
+    622,
+    622
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1287_泛型_lambda_表达式",
+  "_chunk_pages": [
+    621,
+    624
+  ]
+}

@@ -1,0 +1,49 @@
+{
+  "title": "enable_shared_from_this 安全获取指向自身的智能指针",
+  "definition": "从 std::enable_shared_from_this 派生的类，可以在对象的成员函数中安全地返回一个与该对象共享所有权的 shared_ptr，或返回一个跟踪该对象所有权的 weak_ptr。它提供 shared_from_this() 和 weak_from_this() 两个 public 方法。",
+  "key_points": [
+    "shared_from_this() 返回与对象共享所有权的 shared_ptr。",
+    "weak_from_this() 返回跟踪对象所有权的 weak_ptr。",
+    "只有当对象已经被 shared_ptr 管理时，调用 shared_from_this() 才是有效的。",
+    "对象通常应通过 make_shared 创建并由 shared_ptr 管理后，再调用 shared_from_this()。"
+  ],
+  "examples": [
+    "类可以从 std::enable_shared_from_this<Foo> 派生，并在成员函数 getPointer() 中返回 shared_from_this()。",
+    "调用形式：auto ptr1 { make_shared<Foo>() }; auto ptr2 { ptr1->getPointer() }; 此时 ptr2 与 ptr1 共享同一个 Foo 对象的所有权。"
+  ],
+  "misconceptions": [
+    "enable_shared_from_this 不是把 this 指针直接包装成一个新的独立 shared_ptr。",
+    "shared_from_this() 不能在对象尚未由 shared_ptr 管理时随意调用。",
+    "weak_from_this() 返回的是 weak_ptr，不会增加对象的共享所有权。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "shared_from_this() 返回什么？",
+      "a": "返回一个与当前对象共享所有权的 shared_ptr。"
+    },
+    {
+      "q": "使用 enable_shared_from_this 的对象应如何创建后才能安全调用 shared_from_this()？",
+      "a": "应先让对象的指针存储在 shared_ptr 中，例如使用 make_shared 创建对象，然后再调用 shared_from_this()。"
+    },
+    {
+      "q": "weak_from_this() 在对象尚未存储于 shared_ptr 时会怎样？",
+      "a": "调用本身允许，但会返回一个空的 weak_ptr。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "shared_ptr 的共享所有权概念",
+    "weak_ptr 的基本概念"
+  ],
+  "source_pages": [
+    225,
+    226
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "480_enable_shared_from_this_安全获取指向自身的智能指针",
+  "_chunk_pages": [
+    225,
+    228
+  ]
+}

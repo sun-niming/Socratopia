@@ -1,0 +1,43 @@
+{
+  "title": "使用 delete[] 释放动态数组",
+  "definition": "对于使用 new[] 分配的动态数组，必须使用 delete[] 释放整个数组；释放后可将指针设为 nullptr，避免继续通过该指针访问已释放的内存。",
+  "key_points": [
+    "数组是用 new[] 分配时，应与 delete[] 配对使用。",
+    "如果需要逐个处理数组元素，应先处理元素，再使用 delete[] 释放数组本身。",
+    "释放数组后，将指针赋值为 nullptr，可表示该指针当前不再指向有效数组。"
+  ],
+  "examples": [
+    "mySimplePtrArray[i] = nullptr;",
+    "delete [] mySimplePtrArray;",
+    "mySimplePtrArray = nullptr;"
+  ],
+  "misconceptions": [
+    "不能用 delete 代替 delete[] 来释放由 new[] 分配的数组。",
+    "delete[] 释放数组后，原指针不会自动变成 nullptr，因此需要显式赋值。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "使用 new[] 分配的数组应该用什么形式释放？",
+      "a": "应该使用 delete[] 释放。"
+    },
+    {
+      "q": "delete[] 执行后，数组指针会自动变成 nullptr 吗？",
+      "a": "不会，需要显式执行类似 mySimplePtrArray = nullptr; 的赋值。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++指针和动态内存分配"
+  ],
+  "source_pages": [
+    205,
+    208
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "274_使用_delete_释放动态数组",
+  "_chunk_pages": [
+    205,
+    208
+  ]
+}

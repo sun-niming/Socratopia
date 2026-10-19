@@ -1,0 +1,39 @@
+{
+  "title": "Content-Length 含义",
+  "definition": "`Content-Length` 表示响应体的字节数。对于字符串响应体，C 语言的 `strlen()` 返回的是字节数，所以可以用 `strlen(body)`；但中文 UTF-8 字符通常不等于 1 字节，文件和图片等二进制内容不能用 `strlen()`，而应使用 `stat.st_size` 或实际读取到的字节数。",
+  "key_points": [
+    "`Content-Length` 表示响应体字节数。",
+    "字符串响应体可以用 `strlen(body)` 计算长度。",
+    "中文 UTF-8 字符通常不是 1 字节。",
+    "文件和图片不能用 `strlen()`，要用 `stat.st_size` 或实际读取字节数。"
+  ],
+  "examples": [
+    "字符串正文可写成：`Content-Length: strlen(body)`；文件正文应按文件大小计算。"
+  ],
+  "misconceptions": [
+    "把字符数等同于字节数。",
+    "对任意文件内容都使用 `strlen()` 计算长度。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`Content-Length` 表示什么？",
+      "a": "表示响应体的字节数。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "字节与字符的区别",
+    "HTTP 响应基础"
+  ],
+  "source_pages": [
+    49,
+    52
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "076_content_length_含义",
+  "_chunk_pages": [
+    49,
+    52
+  ]
+}

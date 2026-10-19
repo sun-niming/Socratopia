@@ -1,0 +1,53 @@
+{
+  "title": "常见搜索算法及其功能",
+  "definition": "标准库提供了多个用于在迭代器范围内搜索元素或子序列的算法。它们可以查找不满足条件的第一个元素、连续相等元素、目标集合中的元素、子序列、最后一次出现的子序列，以及连续重复出现指定次数的值。",
+  "key_points": [
+    "find_if_not(first,last,pred) 查找第一个不满足谓词 pred 的元素。",
+    "adjacent_find(first,last) 查找第一对相邻且相等的元素，并返回这对元素中第一个元素的迭代器。",
+    "find_first_of(first,last,s_first,s_last) 查找第一个属于目标集合范围的元素。",
+    "search(first,last,s_first,s_last) 查找目标子序列第一次出现的位置。",
+    "find_end(first,last,s_first,s_last) 查找目标子序列最后一次出现的位置。",
+    "search_n(first,last,count,value) 查找连续出现 count 次的 value 所构成的序列。"
+  ],
+  "examples": [
+    "vector myVector { 5, 6, 9, 8, 8, 3 };",
+    "auto it { find_if_not(cbegin(myVector), cend(myVector), [](int i){ return i < 8; }) }; 该调用找到第一个不小于 8 的元素，即 9。",
+    "vector targets { 8, 9 }; find_first_of() 在 myVector 中找到 9，因为它是目标集合中的第一个匹配元素。",
+    "vector sub { 8, 3 }; search() 可以找到子序列 {8,3}；search_n() 可查找连续两个 8。"
+  ],
+  "misconceptions": [
+    "find_if_not() 查找的是第一个满足谓词的元素；实际上它查找第一个不满足谓词的元素。",
+    "find_end() 查找第一次出现的子序列；实际上它查找最后一次出现的位置。",
+    "search_n() 中的 count 表示搜索范围长度；实际上它表示同一个值需要连续出现的次数。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "在序列 {5, 6, 9, 8, 8, 3} 中，find_if_not(..., [](int i){ return i < 8; }) 找到什么？",
+      "a": "找到 9，因为 9 是第一个不满足 $i<8$ 的元素。"
+    },
+    {
+      "q": "search() 和 find_end() 查找子序列时有什么区别？",
+      "a": "search() 查找子序列第一次出现的位置，find_end() 查找子序列最后一次出现的位置。"
+    },
+    {
+      "q": "search_n(..., 2, 8) 的含义是什么？",
+      "a": "查找连续两个值为 8 的元素。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "迭代器范围",
+    "谓词与 Lambda 表达式"
+  ],
+  "source_pages": [
+    633,
+    634
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1314_常见搜索算法及其功能",
+  "_chunk_pages": [
+    633,
+    636
+  ]
+}

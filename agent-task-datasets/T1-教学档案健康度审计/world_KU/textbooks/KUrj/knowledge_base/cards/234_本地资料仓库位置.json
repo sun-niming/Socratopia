@@ -1,0 +1,39 @@
+{
+  "title": "本地资料仓库位置",
+  "definition": "讲义指出，本地资料仓库位于 `C:\\Users\\ASUS\\Downloads\\LINUX`。后续各类教材、源码、示例和索引都围绕这个本地目录组织。",
+  "key_points": [
+    "资料仓库有一个明确的本地根目录",
+    "后续按天分组的资料都在该目录下的不同子目录中"
+  ],
+  "examples": [
+    "`C:\\Users\\ASUS\\Downloads\\LINUX\\01-socket\\echo_server.c`",
+    "`C:\\Users\\ASUS\\Downloads\\LINUX\\02-http\\HTTP请求响应格式.md`"
+  ],
+  "misconceptions": [
+    "这里说的是本地资料仓库路径，不是在线文档的 URL",
+    "不是所有学习材料都必须从网络下载，很多已整理在本地仓库中"
+  ],
+  "qa_pairs": [
+    {
+      "q": "本地资料仓库的根路径是什么？",
+      "a": "`C:\\Users\\ASUS\\Downloads\\LINUX`。"
+    },
+    {
+      "q": "为什么这个路径重要？",
+      "a": "因为后续学习资料都按这个仓库结构组织，便于快速查找。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [],
+  "source_pages": [
+    133,
+    136
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "234_本地资料仓库位置",
+  "_chunk_pages": [
+    133,
+    136
+  ]
+}

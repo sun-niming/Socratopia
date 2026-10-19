@@ -1,0 +1,45 @@
+{
+  "title": "使用 `strcpy` 和 `strcat` 处理 C 风格字符串",
+  "definition": "`strcpy(destination, source)` 将源 C 风格字符串复制到目标字符数组；`strcat(destination, source)` 将源字符串追加到目标字符串末尾。使用这两个函数时，目标数组必须预先分配足够空间以容纳最终字符串及其结尾的 NUL 字符。",
+  "key_points": [
+    "`strcpy` 用于复制字符串，目标空间必须足够。",
+    "`strcat` 用于连接字符串，目标字符串必须已经是以 NUL 结尾的合法 C 风格字符串。",
+    "连接多个字符串时，所需空间是各字符串长度之和再加 `1` 个 NUL 字符。",
+    "原文的 `appendStrings` 示例先分配空间，再依次调用 `strcpy`、`strcat` 和 `strcat`。"
+  ],
+  "examples": [
+    "```cpp\nchar* appendStrings(const char* str1,\n                    const char* str2,\n                    const char* str3) {\n    char* result {\n        new char[strlen(str1) + strlen(str2) + strlen(str3) + 1]\n    };\n    strcpy(result, str1);\n    strcat(result, str2);\n    strcat(result, str3);\n    return result;\n}\n```",
+    "若 `str1`、`str2`、`str3` 分别为 `\"a\"`、`\"bc\"`、`\"def\"`，最终字符串为 `\"abcdef\"`，需要 `1+2+3+1=7` 个字符位置。"
+  ],
+  "misconceptions": [
+    "`strcat` 的目标参数不能是没有初始化或没有 NUL 结尾的字符数组。",
+    "目标数组空间不足时，`strcpy` 和 `strcat` 不会自动扩容。",
+    "连接三个字符串时不能只按最长字符串分配空间，必须按总长度加一个 NUL 字符分配。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "连接三个 C 风格字符串时，目标数组至少需要多大空间？",
+      "a": "至少需要 `strlen(str1) + strlen(str2) + strlen(str3) + 1` 个字符位置，最后的 `1` 用于结尾的 NUL 字符。"
+    },
+    {
+      "q": "原文中的 `appendStrings` 为什么先调用 `strcpy`，再调用两次 `strcat`？",
+      "a": "先把第一个字符串复制到目标数组，使目标成为合法的 NUL 结尾字符串；随后将第二、第三个字符串依次追加到末尾。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C 风格字符串以 NUL 字符结尾",
+    "复制 C 风格字符串时必须为 NUL 预留空间"
+  ],
+  "source_pages": [
+    101,
+    104
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "146_使用_strcpy_和_strcat_处理_c_风格字符串",
+  "_chunk_pages": [
+    101,
+    104
+  ]
+}

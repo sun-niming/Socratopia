@@ -1,0 +1,46 @@
+{
+  "title": "使用 va_arg 依次读取指定数量的可变参数",
+  "definition": "对于 C 风格可变参数函数，调用者通常需要通过固定参数提供后续参数的数量或其他必要信息。原文的 `printInts(size_t num, ...)` 以 `num` 指定整数个数，在循环中使用 `va_arg(ap, int)` 依次读取这些整数，读取结束后调用 `va_end(ap)`。",
+  "key_points": [
+    "`num` 表示后续需要读取的整数参数数量。",
+    "循环条件可写为 `i < num`，每次循环读取一个 `int`。",
+    "`va_arg(ap, int)` 从参数列表中取出下一个 `int`。",
+    "完成读取后应调用 `va_end(ap)` 清理参数列表。"
+  ],
+  "examples": [
+    "```text\nvoid printInts(size_t num, ...)\n{\n    for (size_t i { 0 }; i < num; ++i) {\n        int temp { va_arg(ap, int) };\n        cout << temp << ' ';\n    }\n    va_end(ap);\n}\n```",
+    "调用 `printInts(5, 5, 4, 3, 2, 1);` 表示后续有 5 个整数，函数依次读取 `5`、`4`、`3`、`2`、`1`。"
+  ],
+  "misconceptions": [
+    "认为 `va_arg` 可以在不知道参数实际类型的情况下安全读取任意类型。",
+    "认为 `num` 会由可变参数机制自动获得；原文示例中数量由固定参数显式传入。",
+    "认为读取完参数后不需要调用 `va_end`。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`printInts(5, 5, 4, 3, 2, 1);` 中第一个 `5` 的作用是什么？",
+      "a": "它是固定参数 `num`，表示后面要读取 5 个整数；后面的五个数才是待输出的整数参数。"
+    },
+    {
+      "q": "`va_arg(ap, int)` 的作用是什么？",
+      "a": "从可变参数列表 `ap` 中读取下一个参数，并按 `int` 类型解释它。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C 风格可变参数",
+    "循环",
+    "size_t"
+  ],
+  "source_pages": [
+    365,
+    368
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 printInts(size_t num, ...) va_arg(ap, int) va_end 示例",
+  "concept_id": "469_使用_va_arg_依次读取指定数量的可变参数",
+  "_chunk_pages": [
+    365,
+    368
+  ]
+}

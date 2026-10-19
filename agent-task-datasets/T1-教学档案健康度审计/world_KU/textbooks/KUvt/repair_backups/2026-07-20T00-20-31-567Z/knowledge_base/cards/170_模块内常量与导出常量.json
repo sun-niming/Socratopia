@@ -1,0 +1,49 @@
+{
+  "title": "模块内常量与导出常量",
+  "definition": "在 Employee 模块的 Records 名称空间中，教材定义了两个常量。DefaultStartingSalary 没有导出，只供 employee 模块内部代码使用；DefaultRaiseAndDemeritAmount 使用 export 导出，因此模块外部代码也可以访问和使用它。",
+  "key_points": [
+    "DefaultStartingSalary 表示新雇员的默认起薪。",
+    "DefaultStartingSalary 没有导出，模块外部代码不能直接使用它；模块内部可通过 Records::DefaultStartingSalary 访问。",
+    "DefaultRaiseAndDemeritAmount 表示雇员晋升或降级时默认的薪资涨幅或跌幅。",
+    "DefaultRaiseAndDemeritAmount 被导出，模块外部代码可以使用它，例如用默认涨薪金额的两倍进行提拔。"
+  ],
+  "examples": [
+    "模块内部常量可写为：const int DefaultStartingSalary { 30'000 };",
+    "导出常量可写为：export const int DefaultRaiseAndDemeritAmount { 1'000 };",
+    "外部代码可以使用导出的 DefaultRaiseAndDemeritAmount，并将两倍的值作为晋升金额。"
+  ],
+  "misconceptions": [
+    "所有在模块中定义的常量都会自动对模块外可见。教材明确区分了未导出常量和导出常量。",
+    "DefaultStartingSalary 表示晋升或降级金额。教材规定它表示新雇员的默认起薪。",
+    "未导出意味着模块内部代码也无法访问。教材指出模块内部代码可以访问未导出的 DefaultStartingSalary。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "DefaultStartingSalary 的用途是什么？是否导出？",
+      "a": "它表示新雇员的默认起薪，没有导出，只供 employee 模块内部代码使用。"
+    },
+    {
+      "q": "DefaultRaiseAndDemeritAmount 的用途是什么？",
+      "a": "它表示雇员晋升或降级时默认的薪资涨幅或跌幅，并且被导出供模块外部使用。"
+    },
+    {
+      "q": "为什么一个常量前面使用 export？",
+      "a": "因为这样可以将该常量导出，使模块外部代码能够访问和使用它。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++20 模块接口文件与名称空间"
+  ],
+  "source_pages": [
+    92,
+    92
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 模块 export const 命名空间内常量可见性 DefaultStartingSalary DefaultRaiseAndDemeritAmount",
+  "concept_id": "170_模块内常量与导出常量",
+  "_chunk_pages": [
+    89,
+    92
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "title": "get_mime_type函数",
+  "definition": "`get_mime_type(const char *path)` 根据文件扩展名返回 `Content-Type`。静态服务器在发送响应头前应先调用它，让不同类型的文件使用正确的 MIME；如果 MIME 写错，浏览器可能无法正确加载页面资源。",
+  "key_points": [
+    "根据扩展名决定 `Content-Type`",
+    "发送静态文件响应头前调用",
+    "MIME 错误会导致浏览器加载异常"
+  ],
+  "examples": [
+    "`.html -> text/html; charset=utf-8`",
+    ".css -> text/css; charset=utf-8",
+    ".js -> application/javascript; charset=utf-8",
+    ".png -> image/png",
+    "没有扩展名时可返回 `application/octet-stream`"
+  ],
+  "misconceptions": [
+    "认为所有文件都可以返回 `text/html`",
+    "认为扩展名写错一个也不会影响浏览器"
+  ],
+  "qa_pairs": [
+    {
+      "q": "get_mime_type 的作用是什么？",
+      "a": "它根据文件扩展名返回合适的 Content-Type。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "HTTP响应头",
+    "文件扩展名"
+  ],
+  "source_pages": [
+    53,
+    56
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "088_get_mime_type函数",
+  "_chunk_pages": [
+    53,
+    56
+  ]
+}

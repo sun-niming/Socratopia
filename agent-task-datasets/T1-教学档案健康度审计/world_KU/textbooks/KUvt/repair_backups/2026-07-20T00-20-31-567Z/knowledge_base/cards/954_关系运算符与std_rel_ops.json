@@ -1,0 +1,51 @@
+{
+  "title": "关系运算符与std::rel_ops",
+  "definition": "传统的std::rel_ops名称空间提供了关系运算符函数模板：根据已有的operator==和operator<，为类补充operator!=、operator>、operator<=和operator>=。这种自动生成方式存在适用范围过宽、不能很好配合某些比较工具模板以及隐式转换不可行等问题。C++20提供三向比较运算符operator<=>，通常应显式默认或实现它，而不再使用std::rel_ops。",
+  "key_points": [
+    "std::rel_ops中的operator!=依赖operator==。",
+    "std::rel_ops中的operator>、operator<=和operator>=依赖operator<。",
+    "使用std::rel_ops可能使关系运算符适用于关系表达式中涉及的所有相关类型，而不只是期望的类。",
+    "教材指出，std::rel_ops不能很好地用于诸如std::greater<>的实用工具模板，并且隐式转换不可行。",
+    "在C++20中，可以显式默认或实现operator<=>，以获得六种常用比较运算符的支持：$==$、$!=$、$<$、$>$、$\\leq$、$\\geq$。"
+  ],
+  "examples": [
+    "传统方式的依赖关系：若类提供`operator==`和`operator<`，则可由std::rel_ops补充`operator!=`、`operator>`、`operator<=`和`operator>=`。",
+    "C++20推荐的形式：`auto operator<=>(const T&) const = default;`。"
+  ],
+  "misconceptions": [
+    "std::rel_ops不是根据任意一个比较运算符就能生成全部关系运算符；它至少需要operator==和operator<。",
+    "使用std::rel_ops并不只是简单地减少代码，还可能带来类型适用范围过宽等问题。",
+    "operator<=>是三向比较运算符，不是普通的“小于”运算符；但在C++20比较语境中可以支持其他关系比较。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "std::rel_ops如何生成operator!=？",
+      "a": "它根据类已有的operator==生成operator!=。"
+    },
+    {
+      "q": "std::rel_ops如何生成operator>、operator<=和operator>=？",
+      "a": "这些运算符根据类已有的operator<生成。"
+    },
+    {
+      "q": "C++20中推荐使用什么替代std::rel_ops？",
+      "a": "为类显式默认或实现三向比较运算符operator<=>。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "关系运算符重载",
+    "函数模板",
+    "C++20三向比较运算符"
+  ],
+  "source_pages": [
+    475,
+    476
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 operator<=> defaulted comparison operators std::rel_ops deprecated six comparison operators",
+  "concept_id": "954_关系运算符与std_rel_ops",
+  "_chunk_pages": [
+    473,
+    476
+  ]
+}

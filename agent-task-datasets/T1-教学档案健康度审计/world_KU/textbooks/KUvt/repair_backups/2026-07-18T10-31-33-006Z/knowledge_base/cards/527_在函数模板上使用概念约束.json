@@ -1,0 +1,52 @@
+{
+  "title": "在函数模板上使用概念约束",
+  "definition": "概念可以约束函数模板的模板参数。C++20 支持多种等价或近似等价的写法，包括约束模板参数、使用受约束的模板参数语法，以及在函数声明中使用 requires 子句。只有满足约束的类型才能参与函数模板匹配。",
+  "key_points": [
+    "可以在模板参数前写概念，例如 `template <Incrementable T>`。",
+    "也可以写成 `template <typename T> requires Incrementable<T>`。",
+    "还可以使用尾随 requires 子句，例如 `template <typename T> requires requires(T x) { x++; ++x; }`。",
+    "函数模板的约束不满足时，该候选模板会被排除，并产生约束不满足的编译期诊断。"
+  ],
+  "examples": [
+    "`template <Incrementable T> void process(const T& t);`",
+    "`template <typename T> requires Incrementable<T> void process(const T& t);`",
+    "`template <typename T> requires convertible_to<T, bool> void process(const T& t);`",
+    "直接使用 requires 表达式约束：`template <typename T> requires requires(T x) { x++; ++x; } void process(const T& t);`"
+  ],
+  "misconceptions": [
+    "概念约束不是函数体内的运行时判断；不满足约束的模板通常在重载候选筛选阶段就被排除。",
+    "`requires Incrementable<T>` 是 requires 子句，而 `requires(T x) { x++; ++x; }` 是 requires 表达式；二者语法位置和作用形式不同。",
+    "一个类型能传给普通函数，不代表它一定满足带概念约束的函数模板。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "下面两种写法表达的约束是否相同：`template <Incrementable T>` 与 `template <typename T> requires Incrementable<T>`？",
+      "a": "它们都要求模板参数 `T` 满足 `Incrementable` 概念，属于不同的约束语法形式。"
+    },
+    {
+      "q": "为什么 `std::string` 不能调用受 `Incrementable` 约束的 `process`？",
+      "a": "因为 `Incrementable` 要求对象支持 `x++` 和 `++x`，而 `std::string` 不支持对字符串对象进行递增操作。"
+    },
+    {
+      "q": "不满足概念约束时，编译器通常如何处理该函数模板？",
+      "a": "该模板候选会因约束不满足而被忽略，并给出“constraints not satisfied”等诊断信息。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "函数模板",
+    "函数模板重载与候选筛选",
+    "C++20概念"
+  ],
+  "source_pages": [
+    401,
+    404
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "527_在函数模板上使用概念约束",
+  "_chunk_pages": [
+    401,
+    404
+  ]
+}

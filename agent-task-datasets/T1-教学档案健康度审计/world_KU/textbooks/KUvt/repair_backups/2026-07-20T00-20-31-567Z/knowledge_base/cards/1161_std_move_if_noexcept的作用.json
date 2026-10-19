@@ -1,0 +1,47 @@
+{
+  "title": "std::move_if_noexcept的作用",
+  "definition": "std::move_if_noexcept()定义在<utility>头文件中，用于根据类型的移动构造函数是否声明为noexcept，决定把对象作为右值引用还是const引用传递给后续构造函数：如果移动构造函数为noexcept，就转换为右值引用，以便调用移动构造函数；否则转换为const引用，以便调用复制构造函数。",
+  "key_points": [
+    "std::move_if_noexcept()接收一个左值引用参数。",
+    "移动构造函数为noexcept时，它产生可用于移动的右值引用。",
+    "移动构造函数可能抛出异常时，它产生const引用，从而使后续代码选择复制构造。",
+    "该辅助函数主要用于自定义类似标准库的容器，在元素搬迁时兼顾性能与异常安全。",
+    "标准库没有提供对应的、根据noexcept选择移动赋值或复制赋值的通用辅助函数。"
+  ],
+  "examples": [
+    "使用形式：auto&& value{std::move_if_noexcept(object)};",
+    "在自定义容器扩容时，可以把std::move_if_noexcept(element)传给新存储区中的元素构造函数。"
+  ],
+  "misconceptions": [
+    "std::move_if_noexcept()本身不会完成元素搬迁；它主要通过选择返回的引用类型，使后续构造函数选择移动或复制。",
+    "它不仅仅是无条件调用std::move()；是否转换为右值取决于移动构造函数的noexcept属性。",
+    "该函数针对的是构造过程；教材指出标准库没有提供类似的移动赋值/复制赋值选择辅助函数。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "std::move_if_noexcept()在移动构造函数为noexcept时返回什么效果？",
+      "a": "它把对象转换为右值引用，使后续构造通常调用移动构造函数。"
+    },
+    {
+      "q": "当移动构造函数可能抛出异常时，std::move_if_noexcept()如何帮助保证异常安全？",
+      "a": "它把对象作为const引用传递，使后续代码通常调用复制构造函数，而不是可能抛出的移动构造函数。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "移动语义",
+    "noexcept",
+    "右值引用"
+  ],
+  "source_pages": [
+    562,
+    562
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1161_std_move_if_noexcept的作用",
+  "_chunk_pages": [
+    561,
+    564
+  ]
+}

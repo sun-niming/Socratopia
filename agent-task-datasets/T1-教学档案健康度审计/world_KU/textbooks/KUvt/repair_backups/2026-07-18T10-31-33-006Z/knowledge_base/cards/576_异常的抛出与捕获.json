@@ -1,0 +1,44 @@
+{
+  "title": "异常的抛出与捕获",
+  "definition": "C++ 使用 `throw` 抛出异常对象或值，并使用 `try` 代码块和后续的 `catch` 处理异常。若被调用的函数抛出异常，控制流会从该函数转移到能够匹配该异常类型的 `catch` 块；未处理的异常不会继续按普通返回值传递。",
+  "key_points": [
+    "可能抛出异常的代码放在 `try { ... }` 中。",
+    "使用 `throw` 抛出异常，例如 `throw 5;`、`throw \"Unable to open file\";` 或抛出异常对象。",
+    "`catch` 的参数类型必须能够匹配被抛出的异常类型。",
+    "处理异常后，示例程序通过 `return 1` 或其他返回值结束 `main`。"
+  ],
+  "examples": [
+    "文件打开失败时可以抛出整数错误码：`throw 5;`，调用方使用 `catch (int e)` 捕获。",
+    "文件打开失败时也可以抛出字符串：`throw \"Unable to open file\";`，调用方使用 `catch (const char* e)` 捕获。"
+  ],
+  "misconceptions": [
+    "`throw` 不是普通的函数返回；它会改变控制流并寻找匹配的 `catch`。",
+    "`try` 本身不会自动处理异常，必须存在相应的 `catch`。",
+    "只能捕获异常对象这一说法不准确；原文示例也展示了抛出整数和字符串字面量。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "C++ 中如何处理一个可能抛出异常的函数调用？",
+      "a": "将调用放在 `try` 代码块中，并在后面提供能够匹配异常类型的 `catch` 块。"
+    },
+    {
+      "q": "如果函数执行 `throw 5;`，可以用什么形式捕获？",
+      "a": "可以使用 `catch (int e)` 捕获。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++ 函数调用和控制流"
+  ],
+  "source_pages": [
+    441,
+    442
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "576_异常的抛出与捕获",
+  "_chunk_pages": [
+    441,
+    444
+  ]
+}

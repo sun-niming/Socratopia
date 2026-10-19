@@ -1,0 +1,53 @@
+{
+  "title": "list 的特殊成员算法",
+  "definition": "除了 splice() 之外，std::list 还提供了一些针对链表优化的算法成员函数，包括 remove()、remove_if()、unique()、merge()、sort() 和 reverse()。如果既可以调用 list 成员函数，也可以调用泛型标准库算法，通常应优先使用 list 的成员函数，因为它们针对 list 的结构实现得更高效。",
+  "key_points": [
+    "remove() 和 remove_if() 用于从 list 中删除指定元素：remove() 根据相等比较删除，remove_if() 根据用户提供的谓词删除。",
+    "unique() 根据相等比较或用户提供的二元谓词，删除 list 中连续的重复元素。它只处理相邻重复元素，不负责删除所有位置上的重复值。",
+    "merge() 合并两个 list；调用前两个 list 必须已经按照相应的比较规则排序。该操作会改变作为参数传入的 list。",
+    "sort() 对 list 中的元素执行稳定排序；reverse() 反转 list 中元素的顺序。",
+    "从 C++20 开始，remove()、remove_if() 和 unique() 返回 std::size_t 类型的已删除元素数量；此前版本不返回该数量。",
+    "泛型算法 std::sort() 要求随机访问迭代器，而 list 不提供随机访问迭代器，因此不能直接对 list 使用 std::sort()。"
+  ],
+  "examples": [
+    "对 list 调用成员排序：`std::list<int> values{3, 1, 2}; values.sort();`",
+    "删除 list 中所有值为 0 的元素：`values.remove(0);`",
+    "使用谓词删除满足条件的元素：`values.remove_if([](int n) { return n < 0; });`",
+    "使用 `unique()` 删除相邻重复元素：`std::list<int> values{1, 1, 2, 2, 3}; values.unique();` 结果为 `1, 2, 3`。"
+  ],
+  "misconceptions": [
+    "unique() 会删除 list 中所有重复值；实际上它只删除连续的重复元素，因此通常需要先排序，才能按值去除全部重复项。",
+    "可以对 list 直接调用泛型算法 std::sort()；实际上 std::sort() 需要随机访问迭代器，而 list 不满足这一要求。",
+    "merge() 只是复制另一个 list 的元素；实际上 merge() 对作为参数传入的 list 具有破坏性。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么不能直接使用 std::sort() 对 std::list 排序？",
+      "a": "因为 std::sort() 要求随机访问迭代器，而 std::list 只提供双向迭代器；应使用 list 自己的 sort() 成员函数。"
+    },
+    {
+      "q": "list::unique() 删除哪些元素？",
+      "a": "它删除按照相等比较或指定二元谓词判定为重复的连续元素，只处理相邻重复项。"
+    },
+    {
+      "q": "从 C++20 开始，list::remove() 返回什么？",
+      "a": "返回 std::size_t 类型的已移除元素数量。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "迭代器类别",
+    "标准库泛型算法"
+  ],
+  "source_pages": [
+    569,
+    569
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1174_list_的特殊成员算法",
+  "_chunk_pages": [
+    569,
+    572
+  ]
+}

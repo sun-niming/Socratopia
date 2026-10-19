@@ -1,0 +1,44 @@
+{
+  "title": "sigemptyset 初始化空信号集",
+  "definition": "`sigemptyset(sigset_t *set)` 用于初始化一个空信号集。其原型为 `int sigemptyset(sigset_t *set);`，成功返回 `0`，失败返回 `-1`。在本项目中，它用于设置 `sigaction` 的 `sa_mask`；即使结构体先用 `memset` 清零，也仍然要调用 `sigemptyset`。",
+  "key_points": [
+    "头文件是 `<signal.h>`。",
+    "作用是初始化空信号集。",
+    "成功返回 `0`，失败返回 `-1`。",
+    "在本项目中用于设置 `sigaction` 的 `sa_mask`。",
+    "即使先 `memset` 了结构体，也要再调用 `sigemptyset`。"
+  ],
+  "examples": [
+    "`sigset_t set; sigemptyset(&set);`"
+  ],
+  "misconceptions": [
+    "误以为 `memset` 清零后就等同于正确初始化了信号集。",
+    "误以为 `sigaction` 结构体只要大致填一下就行。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`sigemptyset` 的作用是什么？",
+      "a": "初始化空信号集。"
+    },
+    {
+      "q": "为什么即使 `memset` 过结构体，仍要调用 `sigemptyset`？",
+      "a": "因为信号集需要按其专门的方式初始化，不能只靠内存清零代替。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "信号与信号集",
+    "sigaction"
+  ],
+  "source_pages": [
+    105,
+    108
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "165_sigemptyset_初始化空信号集",
+  "_chunk_pages": [
+    105,
+    108
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "title": "EmployeeTest.cpp中的Employee使用示例",
+  "definition": "EmployeeTest.cpp通过模块导入Employee类，并在main()中创建和操作一个员工对象。示例先创建名字为Jane、姓氏为Doe的Employee对象，再修改名字、姓氏、员工编号和薪资，执行两次晋升，雇用员工，最后显示员工信息。",
+  "key_points": [
+    "使用import employee;导入employee模块。",
+    "使用using namespace Records;后可以直接使用Employee类型。",
+    "对象创建语句为Employee emp { \"Jane\", \"Doe\" };。",
+    "示例将名字改为John，姓氏保持为Doe，员工编号设为71，薪资设为501000。",
+    "先调用emp.promote()使用默认加薪额，再调用emp.promote(50)增加指定数额。",
+    "调用emp.hire()后再调用emp.display()，因此显示为当前在职员工。"
+  ],
+  "examples": [
+    "示例代码流程：Employee emp { \"Jane\", \"Doe\" }; emp.setFirstName(\"John\"); emp.setLastName(\"Doe\"); emp.setEmployeeNumber(71); emp.setSalary(501000); emp.promote(); emp.promote(50); emp.hire(); emp.display();"
+  ],
+  "misconceptions": [
+    "构造函数中的名字Jane后来被setFirstName(\"John\")改成了John，最终显示的名字不是Jane。",
+    "emp.promote()和emp.promote(50)都会加薪，第二次调用不是覆盖第一次加薪。",
+    "如果不调用emp.hire()，display()不会把该员工显示为Current Employee。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "示例中Employee对象最终的名字是什么？",
+      "a": "名字是John，姓氏是Doe，因为创建后调用了setFirstName(\"John\")。"
+    },
+    {
+      "q": "示例中为什么最后会显示Current Employee？",
+      "a": "因为在调用display()之前执行了emp.hire()。"
+    },
+    {
+      "q": "示例中执行了几次晋升？",
+      "a": "两次：一次调用emp.promote()使用默认加薪额，另一次调用emp.promote(50)指定加薪50。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "Employee的晋升、降职、雇用与解雇操作",
+    "C++对象创建与成员函数调用",
+    "C++模块导入基础"
+  ],
+  "source_pages": [
+    93,
+    96
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "133_employeetest_cpp中的employee使用示例",
+  "_chunk_pages": [
+    93,
+    96
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "title": "Serial 测试辅助类的唯一序列号",
+  "definition": "Serial 是 ObjectPool 测试使用的辅助类。每创建一个 Serial 对象，构造函数都会从一个类级别的下一个序列号计数器中取得当前值，然后使计数器递增；因此新对象获得单调递增的序列号，初始序列号为 0。对象可以通过 `getSerialNumber()` 读取自己的序列号。",
+  "key_points": [
+    "序列号计数器在对象之间共享，而不是每个对象各自从 0 开始。",
+    "第一个 Serial 对象的序列号为 0，后续对象获得递增的序列号。",
+    "`getSerialNumber()` 是常量成员函数，用于读取对象的序列号。",
+    "该类用于在测试中区分不同对象，并检查对象池是否重复提供同一对象。"
+  ],
+  "examples": [
+    "概念性实现：`Serial() : m_serialNumber{ms_nextSerial++} {}`；读取序列号：`size_t getSerialNumber() const { return m_serialNumber; }`。",
+    "连续创建三个对象时，其序列号应依次为 $0、1、2$。"
+  ],
+  "misconceptions": [
+    "序列号唯一性用于识别对象创建或分发情况，不等同于对象的内存地址。",
+    "调用 getSerialNumber() 不会生成新的序列号；序列号是在构造对象时确定的。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "Serial 类的第一个对象获得什么序列号？",
+      "a": "获得序列号 0。"
+    },
+    {
+      "q": "Serial 测试辅助类为什么适合用于测试 ObjectPool？",
+      "a": "因为每个新对象都有可观察的递增序列号，可以据此区分对象并检查对象是否被重复提供。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++类与构造函数",
+    "静态数据成员"
+  ],
+  "source_pages": [
+    886,
+    887
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1836_serial_测试辅助类的唯一序列号",
+  "_chunk_pages": [
+    885,
+    888
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "title": "为Person类定义用户定义字面量_p",
+  "definition": "练习15-4要求在Person类基础上添加用户定义字面量运算符_p，使字符串字面量能够直接构造Person对象。该字面量约定：名字中不支持空格，姓氏中支持空格。",
+  "key_points": [
+    "用户定义字面量后缀为_p。",
+    "字符串字面量的内容应被解析为Person的名字和姓氏。",
+    "名字部分不支持空格。",
+    "姓氏部分支持空格。",
+    "例如，\"Peter Van Weert\"_p应生成名字为Peter、姓氏为Van Weert的Person对象。"
+  ],
+  "examples": [
+    "\"Peter Van Weert\"_p应生成一个Person对象，其中名字是Peter，姓氏是Van Weert。",
+    "可以将结果理解为：Person{\"Peter\", \"Van Weert\"}。"
+  ],
+  "misconceptions": [
+    "名字和姓氏的空格规则不同：名字不支持空格，但姓氏可以包含空格。",
+    "_p是题目要求定义的自定义字面量后缀，不是C++内置的通用字符串转换语法。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "\"Peter Van Weert\"_p应构造出什么Person？",
+      "a": "构造一个名字为Peter、姓氏为Van Weert的Person。"
+    },
+    {
+      "q": "_p字面量对名字和姓氏中的空格有什么要求？",
+      "a": "名字中不支持空格，姓氏中支持空格。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++用户定义字面量",
+    "Person类",
+    "字符串解析"
+  ],
+  "source_pages": [
+    498,
+    498
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1002_为person类定义用户定义字面量_p",
+  "_chunk_pages": [
+    497,
+    500
+  ]
+}

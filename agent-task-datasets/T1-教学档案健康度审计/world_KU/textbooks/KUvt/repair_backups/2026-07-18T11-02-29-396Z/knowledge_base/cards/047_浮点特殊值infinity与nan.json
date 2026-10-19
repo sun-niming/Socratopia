@@ -1,0 +1,43 @@
+{
+  "title": "浮点特殊值Infinity与NaN",
+  "definition": "浮点计算可能产生特殊值无穷大（infinity）和非数（NaN，Not a Number）。C++可通过`<cmath>`中的`std::isinf()`和`std::isnan()`检查浮点值是否分别为无穷大或NaN；也可以使用`std::numeric_limits<double>::infinity()`获取`double`的正无穷大。",
+  "key_points": [
+    "`std::isinf()`用于检查浮点值是否为无穷大。",
+    "`std::isnan()`用于检查浮点值是否为NaN。",
+    "相关函数和数值通常需要`<cmath>`及`<limits>`。",
+    "无穷大和NaN属于浮点计算中的特殊结果或特殊表示。"
+  ],
+  "examples": [
+    "`std::numeric_limits<double>::infinity()`表示`double`的正无穷大。",
+    "```cpp\nif (std::isinf(value)) { /* value为无穷大 */ }\nif (std::isnan(value)) { /* value为NaN */ }\n```"
+  ],
+  "misconceptions": [
+    "NaN不是普通的数值零，也不表示正无穷大。",
+    "检查NaN应使用`std::isnan()`，不能把NaN简单当作普通整数值比较。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "检查浮点数是否为无穷大，应使用什么函数？",
+      "a": "使用`std::isinf()`。"
+    },
+    {
+      "q": "如何获取`double`的正无穷大？",
+      "a": "使用`std::numeric_limits<double>::infinity()`。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "std::numeric_limits查询数值类型边界"
+  ],
+  "source_pages": [
+    41,
+    44
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "047_浮点特殊值infinity与nan",
+  "_chunk_pages": [
+    41,
+    44
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "title": "用户定义的类模板推导指南",
+  "definition": "用户定义的推导指南（user-defined deduction guide）是在类模板定义之外提供的一条规则，用于告诉编译器：当构造函数接收特定形式的实参时，应把类模板参数推导成什么类型。它通常与类模板位于同一个命名空间中。",
+  "key_points": [
+    "推导指南可以修正默认 CTAD 不符合需求的推导结果。",
+    "对于模板 $\\texttt{SpreadsheetCell<T>}$，如果构造函数接收 $\\texttt{const char*}$，可以指定将 $T$ 推导为 $\\texttt{std::string}$。",
+    "示例推导指南为：$\\texttt{SpreadsheetCell(const char*) -> SpreadsheetCell<std::string>;}$.",
+    "通用形式为：$\\texttt{explicit TemplateName(Parameters) -> DeducedTemplate;}$. 其中 explicit 是可选的，其行为与构造函数中的 explicit 相同。",
+    "这些推导指南通常也可以写成模板形式。"
+  ],
+  "examples": [
+    "类模板示意：$\\texttt{template<typename T> class SpreadsheetCell\\{...\\};}$",
+    "用户定义推导指南：$\\texttt{SpreadsheetCell(const char*) -> SpreadsheetCell<std::string>;}$.",
+    "因此，使用字符串字面量构造时，可以使 $T$ 推导为 std::string，而不是 $\\texttt{const char*}$。"
+  ],
+  "misconceptions": [
+    "用户定义推导指南不是构造函数本身，不负责创建对象；它只规定 CTAD 时模板参数如何推导。",
+    "如果没有用户定义推导指南，把 const char* 作为构造实参时，默认可能将 T 推导为 const char*，不会自动变成 std::string。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "用户定义的推导指南解决什么问题？",
+      "a": "它为编译器提供自定义的模板参数推导规则，例如把传入 const char* 的 SpreadsheetCell 推导为 SpreadsheetCell<std::string>。"
+    },
+    {
+      "q": "$\\texttt{SpreadsheetCell(const char*) -> SpreadsheetCell<std::string>;} $表示什么？",
+      "a": "表示当构造函数实参匹配 const char* 时，将类模板参数 T 推导为 std::string。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "类模板实参推导（CTAD）",
+    "类模板构造函数"
+  ],
+  "source_pages": [
+    385,
+    386
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "783_用户定义的类模板推导指南",
+  "_chunk_pages": [
+    385,
+    388
+  ]
+}

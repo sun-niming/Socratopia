@@ -1,0 +1,40 @@
+{
+  "title": "命令帮助的 help 与 --help 方式",
+  "definition": "教材在“帮助命令”中列出了两种相关写法：help 选项，以及 命令 --help。可据此理解为，除 man 和 info 外，还可以通过 help 或在命令后加 --help 的方式查看帮助信息。由于原文对“help选项”的具体含义未展开，此点需要进一步核实。",
+  "key_points": [
+    "教材明确列出“help选项”",
+    "教材明确列出“命令 --help”",
+    "原文未进一步说明 help 的适用范围和详细用法"
+  ],
+  "examples": [
+    "命令 --help",
+    "help 选项"
+  ],
+  "misconceptions": [
+    "不要根据本页内容擅自推断 help 的完整语法和所有行为",
+    "help选项 与 命令 --help 在教材中只是被列出，原文未给出更详细解释"
+  ],
+  "qa_pairs": [
+    {
+      "q": "教材除 man 和 info 外，还列出了哪些帮助方式？",
+      "a": "列出了 help 选项以及 命令 --help。"
+    },
+    {
+      "q": "为什么这个知识点需要核实？",
+      "a": "因为原文只列出“help选项”和“命令 --help”，没有展开具体语法与适用范围。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [],
+  "source_pages": [
+    5,
+    8
+  ],
+  "needs_verification": true,
+  "verify_query": "Linux help 命令 用法 help 选项 命令 --help 区别",
+  "concept_id": "011_命令帮助的_help_与_help_方式",
+  "_chunk_pages": [
+    5,
+    8
+  ]
+}

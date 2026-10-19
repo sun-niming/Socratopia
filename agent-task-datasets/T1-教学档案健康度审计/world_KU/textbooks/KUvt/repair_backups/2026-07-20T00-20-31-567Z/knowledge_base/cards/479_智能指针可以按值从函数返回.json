@@ -1,0 +1,44 @@
+{
+  "title": "智能指针可以按值从函数返回",
+  "definition": "由于命名返回值优化和移动语义，shared_ptr、unique_ptr 和 weak_ptr 都可以高效地按值从函数返回。返回智能指针不会因为按值返回就必然产生低效的深拷贝。",
+  "key_points": [
+    "shared_ptr、unique_ptr 和 weak_ptr 都支持按值从函数返回。",
+    "命名返回值优化和移动语义使这种返回方式通常高效。",
+    "函数可以创建或获得一个智能指针，然后直接 return 该智能指针。"
+  ],
+  "examples": [
+    "示例形式：unique_ptr<Simple> create() { unique_ptr<Simple> ptr; return ptr; }",
+    "调用形式：auto mySmartPtr2 { create() };"
+  ],
+  "misconceptions": [
+    "不能因为看到按值返回就断定一定发生昂贵的深拷贝。",
+    "unique_ptr 不能复制，但可以通过移动语义从函数返回。",
+    "按值返回智能指针不等于返回裸指针，也不会因此失去智能指针的资源管理能力。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "哪些标准智能指针可以高效地按值从函数返回？",
+      "a": "shared_ptr、unique_ptr 和 weak_ptr。"
+    },
+    {
+      "q": "为什么按值返回智能指针通常是高效的？",
+      "a": "因为命名返回值优化和移动语义可以避免不必要的复制开销。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "智能指针的基本概念",
+    "函数返回值的基本概念"
+  ],
+  "source_pages": [
+    225,
+    225
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "479_智能指针可以按值从函数返回",
+  "_chunk_pages": [
+    225,
+    228
+  ]
+}

@@ -1,0 +1,49 @@
+{
+  "title": "time_point的精度转换与time_point_cast",
+  "definition": "time_point可以像duration一样进行不同精度之间的转换。若隐式转换不会造成数据丢失，可以直接用目标精度的time_point接收；若转换可能丢失数据，则应使用time_point_cast<目标duration>()进行显式转换。将较高精度转换为较低精度时，超出目标精度的部分会被截去。",
+  "key_points": [
+    "同一clock的不同duration精度可以用于构造相应的time_point。",
+    "例如从seconds转换为milliseconds属于不会丢失数据的隐式转换。",
+    "从milliseconds转换为seconds可能丢失毫秒部分，必须显式使用time_point_cast<seconds>()。",
+    "time_point也提供floor()、ceil()和round()操作，作用类似于对数值进行向下取整、向上取整和舍入。"
+  ],
+  "examples": [
+    "seconds到milliseconds的隐式转换：\n```text\ntime_point<steady_clock, seconds> tpSeconds{42s};\ntime_point<steady_clock, milliseconds> tpMilliseconds{tpSeconds};\n```\n此时经过转换的时间为42000毫秒。",
+    "milliseconds到seconds的显式转换：\n```text\ntime_point<steady_clock, milliseconds> tpMilliseconds{42'424ms};\ntime_point<steady_clock, seconds> tpSeconds{\n    time_point_cast<seconds>(tpMilliseconds)\n};\nmilliseconds ms{tpSeconds.time_since_epoch()};\ncout << ms.count() << endl;\n```\n转换结果为42000毫秒，原有的424毫秒被舍去。"
+  ],
+  "misconceptions": [
+    "所有time_point精度转换都可以隐式完成；可能丢失数据时必须显式转换。",
+    "time_point_cast<seconds>()会四舍五入到最近的秒；原文示例中42424毫秒转换后为42000毫秒，表示超出部分被截去。",
+    "time_point_cast()只能用于duration，不能用于time_point；duration使用duration_cast()，time_point使用time_point_cast()。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "什么时候可以隐式转换time_point的duration精度？",
+      "a": "当转换不会导致数据丢失时，例如从42秒转换为42000毫秒。"
+    },
+    {
+      "q": "为什么42'424ms转换为seconds要使用time_point_cast<seconds>()？",
+      "a": "因为毫秒到秒的转换可能丢失毫秒部分，所以需要显式转换；该示例转换后相当于42000毫秒。"
+    },
+    {
+      "q": "time_point_cast()与duration_cast()的区别是什么？",
+      "a": "time_point_cast()用于转换time_point的精度，duration_cast()用于显式转换duration的精度。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "time_point与duration",
+    "模板类型转换"
+  ],
+  "source_pages": [
+    691,
+    691
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1440_time_point的精度转换与time_point_cast",
+  "_chunk_pages": [
+    689,
+    692
+  ]
+}

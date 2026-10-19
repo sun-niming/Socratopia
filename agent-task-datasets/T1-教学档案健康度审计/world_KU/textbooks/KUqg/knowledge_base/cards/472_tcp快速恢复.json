@@ -1,0 +1,50 @@
+{
+  "title": "TCP快速恢复",
+  "definition": "TCP快速恢复是TCP在收到三个冗余ACK后使用的拥塞控制状态。在该状态中，TCP针对引起快速恢复的缺失报文段，对每个后续冗余ACK将拥塞窗口增加一个MSS；当缺失报文段的确认到达后，TCP降低拥塞窗口并进入拥塞避免。",
+  "key_points": [
+    "进入快速恢复时，通常将$ssthresh$设置为原$cwnd$的一半，并将$cwnd$设置为$ssthresh+3\\times MSS$。",
+    "快速恢复期间，每收到一个冗余ACK，就将$cwnd$增加一个MSS，并在允许时发送新的报文段。",
+    "当缺失报文段的确认到达时，TCP在降低$cwnd$后转入拥塞避免状态。",
+    "如果快速恢复期间发生超时，则执行与慢启动和拥塞避免中相同的超时处理：将$cwnd$设置为一个MSS，将$ssthresh$设置为原$cwnd$的一半，然后转入慢启动。",
+    "快速恢复是TCP推荐的构件，但不是必需构件。"
+  ],
+  "examples": [
+    "若进入快速恢复前$cwnd=12\\times MSS$，则$ssthresh=6\\times MSS$、$cwnd=9\\times MSS$。之后每收到一个冗余ACK，$cwnd$再增加一个MSS。"
+  ],
+  "misconceptions": [
+    "快速恢复并不意味着完全不降低拥塞窗口；进入该状态时TCP仍会将阈值设为原窗口的一半。",
+    "快速恢复不是所有TCP实现都必须支持的机制。",
+    "快速恢复通常由三个冗余ACK触发，而不是由超时触发。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "TCP在快速恢复状态下收到一个冗余ACK时如何调整？",
+      "a": "将$cwnd$增加一个MSS，并在拥塞窗口允许时发送新的报文段。"
+    },
+    {
+      "q": "快速恢复状态何时转入拥塞避免？",
+      "a": "当对缺失报文段的确认到达后，TCP降低拥塞窗口并进入拥塞避免状态。"
+    },
+    {
+      "q": "快速恢复期间发生超时会怎样？",
+      "a": "将$cwnd$设置为一个MSS，将$ssthresh$设置为原$cwnd$的一半，然后转入慢启动。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "TCP拥塞避免",
+    "三个冗余ACK",
+    "TCP超时重传"
+  ],
+  "source_pages": [
+    198,
+    199
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "472_tcp快速恢复",
+  "_chunk_pages": [
+    197,
+    200
+  ]
+}

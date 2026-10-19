@@ -1,0 +1,44 @@
+{
+  "title": "std::as_const 辅助函数",
+  "definition": "std::as_const 是标准库提供的辅助函数，用于获得对象的 const 引用版本。对对象 obj 而言，as_const(obj) 的效果基本等价于将 obj 转换为 const T&，其中 T 是 obj 的类型。它不会修改对象本身，而是提供一个只读的 const 引用访问方式。",
+  "key_points": [
+    "std::as_const 定义在 <utility> 中。",
+    "它接收一个引用参数并返回该对象的 const 引用版本。",
+    "相比直接书写 const_cast，as_const 通常能够更清楚地表达“以 const 方式访问对象”的意图。",
+    "示例形式为：const std::string constStr{ std::as_const(str) };"
+  ],
+  "examples": [
+    "示例：\nstd::string str;\nconst std::string constStr{ std::as_const(str) };"
+  ],
+  "misconceptions": [
+    "std::as_const 不是复制对象的操作，而是返回对象的 const 引用版本。",
+    "std::as_const 不会把对象永久声明为 const，也不会改变对象本身的类型。",
+    "std::as_const 与 const_cast 的用途不同：前者用于获得只读访问，后者用于显式添加或移除 const 属性。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "std::as_const(obj) 返回什么？",
+      "a": "它返回 obj 的 const 引用版本，基本等价于将 obj 转换为 const T&。"
+    },
+    {
+      "q": "使用 std::as_const 需要包含哪个头文件？",
+      "a": "需要包含 <utility>。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "const限定符",
+    "引用"
+  ],
+  "source_pages": [
+    86,
+    86
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "156_std_as_const_辅助函数",
+  "_chunk_pages": [
+    85,
+    88
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "title": "字符串常用方法",
+  "definition": "字符串对象提供了多种常用方法，用于读取字符、查找位置、截取子串、大小写转换和替换内容。原文列出了charAt()或at()、charCodeAt()、indexOf()、lastIndexOf()、substring()、toLowerCase()、toUpperCase()、replace()等方法及其基本作用。",
+  "key_points": [
+    "charAt()或at()：返回指定位置的字符。",
+    "charCodeAt()：返回指定位置字符的Unicode编码。",
+    "indexOf()：返回字符串中第一次出现的位置；lastIndexOf()：从后向前搜索。",
+    "substring()：提取两个指定索引号之间的字符。",
+    "toLowerCase()/toUpperCase()：转换大小写。",
+    "replace()：搜索值或正则表达式并返回替换后的字符串。"
+  ],
+  "examples": [
+    "\"abc\".charAt(1)",
+    "\"abcabc\".indexOf(\"b\")",
+    "\"abc\".toUpperCase()",
+    "\"abc\".replace(\"a\",\"x\")"
+  ],
+  "misconceptions": [
+    "认为这些方法会直接修改原字符串。",
+    "把indexOf和lastIndexOf的搜索方向搞反。",
+    "把charAt()和charCodeAt()的返回结果混为一谈。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "charCodeAt()返回的是什么？",
+      "a": "返回指定位置字符的Unicode编码。"
+    },
+    {
+      "q": "substring()的作用是什么？",
+      "a": "提取字符串中两个指定索引号之间的字符。"
+    },
+    {
+      "q": "replace()可以用来做什么？",
+      "a": "在字符串中搜索值或正则表达式，并返回替换值后的字符串。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "字符串下标访问"
+  ],
+  "source_pages": [
+    309,
+    312
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "419_字符串常用方法",
+  "_chunk_pages": [
+    309,
+    312
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "title": "class 中的构造函数 constructor",
+  "definition": "class 中的构造函数是一个特殊的方法，在创建新对象时会自动调用。它的作用是初始化对象状态，或者执行其他必要操作；在 class 里，这个方法的函数名固定为 constructor。",
+  "key_points": [
+    "构造函数是 class 中的特殊方法。",
+    "创建新对象时会自动调用 constructor。",
+    "它主要用于初始化对象状态或执行必要操作。",
+    "在 class 中，构造函数名固定为 constructor。"
+  ],
+  "examples": [
+    "class Person { constructor(name, age) { this.name = name; this.age = age; } }"
+  ],
+  "misconceptions": [
+    "误以为构造函数需要手动调用。",
+    "误以为 class 里的构造函数名字可以随意改。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "class 里的构造函数叫什么名字？",
+      "a": "constructor。"
+    },
+    {
+      "q": "constructor 在什么时候执行？",
+      "a": "在创建新对象时自动调用。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "class 的概念"
+  ],
+  "source_pages": [
+    289,
+    292
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "386_class_中的构造函数_constructor",
+  "_chunk_pages": [
+    289,
+    292
+  ]
+}

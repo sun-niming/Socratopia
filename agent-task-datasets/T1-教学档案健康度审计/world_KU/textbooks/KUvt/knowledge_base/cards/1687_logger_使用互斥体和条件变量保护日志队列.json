@@ -1,0 +1,46 @@
+{
+  "title": "Logger 使用互斥体和条件变量保护日志队列",
+  "definition": "多线程 Logger 允许多个线程向共享队列添加日志消息，并由一个后台线程从队列中取出消息后串行写入文件。由于 C++ 标准不提供线程安全的队列，Logger 使用互斥体保护队列访问，并使用条件变量通知后台线程有新消息到达。",
+  "key_points": [
+    "`log()` 需要先获得互斥锁，再把日志消息加入共享队列。",
+    "加入消息后应通知条件变量，使后台处理线程能够被唤醒。",
+    "后台线程负责打开日志文件并持续处理队列中的日志。",
+    "Logger 禁止拷贝构造和拷贝赋值，以避免多个 Logger 对象不恰当地共享后台线程或同步状态。"
+  ],
+  "examples": [
+    "核心成员关系：\n```cpp\nstd::mutex m_mutex;\nstd::condition_variable m_condVar;\nstd::queue<std::string> m_queue;\nstd::thread m_thread;\n```",
+    "记录日志的基本结构：\n```cpp\nstd::unique_lock lock{m_mutex};\nm_queue.push(std::move(entry));\nm_condVar.notify_all();\n```"
+  ],
+  "misconceptions": [
+    "误以为多个线程可以直接同时读写同一个 `std::queue` 而不需要同步。",
+    "误以为只要有后台线程就能自动保证日志写入顺序；共享队列的访问仍需同步。",
+    "误以为 Logger 可以任意复制；原文中的设计明确删除了拷贝构造和拷贝赋值。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么 Logger 需要互斥体？",
+      "a": "因为多个线程会同时向共享日志队列写入，后台线程也会读取队列；互斥体用于避免并发访问造成数据竞争。"
+    },
+    {
+      "q": "为什么 Logger 需要条件变量？",
+      "a": "用于在有日志消息到达时通知并唤醒等待中的后台处理线程。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "互斥体与锁",
+    "条件变量",
+    "std::queue"
+  ],
+  "source_pages": [
+    822,
+    823
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1687_logger_使用互斥体和条件变量保护日志队列",
+  "_chunk_pages": [
+    821,
+    824
+  ]
+}

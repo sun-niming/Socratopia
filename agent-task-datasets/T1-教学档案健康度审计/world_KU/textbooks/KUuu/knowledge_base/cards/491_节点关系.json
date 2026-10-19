@@ -1,0 +1,42 @@
+{
+  "title": "节点关系",
+  "definition": "DOM 节点之间存在父子和兄弟关系。直接包含另一个节点的节点叫父节点；被另一个节点直接包含的节点叫子节点；拥有相同父节点的节点叫兄弟节点。图示中，<html> 是 <head> 和 <body> 的父节点，而 <head> 与 <body> 互为兄弟节点。",
+  "key_points": [
+    "父节点直接包含另一个节点",
+    "子节点被另一个节点直接包含",
+    "兄弟节点拥有相同的父节点",
+    "图示中 <head> 和 <body> 都是 <html> 的子节点，也是兄弟节点"
+  ],
+  "examples": [
+    "<html> 的子节点有 <head> 和 <body>；<head> 与 <body> 是兄弟节点"
+  ],
+  "misconceptions": [
+    "兄弟节点不要求标签名相同，只要父节点相同即可",
+    "父子关系是“直接包含”关系，不是任意祖先与后代关系"
+  ],
+  "qa_pairs": [
+    {
+      "q": "<head> 和 <body> 之间是什么关系？",
+      "a": "兄弟节点。"
+    },
+    {
+      "q": "谁是 <head> 的父节点？",
+      "a": "<html>。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "DOM节点类型"
+  ],
+  "source_pages": [
+    345,
+    346
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "491_节点关系",
+  "_chunk_pages": [
+    345,
+    348
+  ]
+}

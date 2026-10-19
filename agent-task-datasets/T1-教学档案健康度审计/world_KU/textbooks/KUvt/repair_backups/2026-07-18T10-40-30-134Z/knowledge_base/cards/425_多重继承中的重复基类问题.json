@@ -1,0 +1,44 @@
+{
+  "title": "多重继承中的重复基类问题",
+  "definition": "如果一个类在继承列表中直接重复继承同一个基类，例如 class DogBird : public Bird, public Dog，而 Bird 本身又继承 Dog，则 DogBird 会通过两条继承路径获得 Dog 子对象，可能导致重复基类错误或形成菱形继承结构。",
+  "key_points": [
+    "原文示例为 class Bird : public Dog {}; 以及 class DogBird : public Bird, public Dog {};。",
+    "DogBird 一方面直接继承 Dog，另一方面通过 Bird 间接继承 Dog。",
+    "原文将该声明标记为 Error，说明这种重复基类布局是不允许的或会导致编译错误。"
+  ],
+  "examples": [
+    "class Dog {};",
+    "class Bird : public Dog {};",
+    "class DogBird : public Bird, public Dog { }; // Error!"
+  ],
+  "misconceptions": [
+    "只要两个继承路径最终都到达同一个基类，就不会自动共享同一个基类子对象。",
+    "直接继承 Dog 和通过 Bird 继承 Dog 是两条不同的继承路径，不能简单视为一次继承。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么 class DogBird : public Bird, public Dog {} 会出错？",
+      "a": "因为 Bird 已经继承 Dog，而 DogBird 又直接继承 Dog，导致 Dog 沿两条路径成为重复基类。"
+    },
+    {
+      "q": "该示例体现了哪类继承问题？",
+      "a": "体现了多重继承中的重复基类或菱形继承相关问题。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "多重继承",
+    "继承层次结构"
+  ],
+  "source_pages": [
+    329,
+    332
+  ],
+  "needs_verification": true,
+  "verify_query": "C++ 多重继承 Bird public Dog DogBird public Bird public Dog 重复基类 编译错误",
+  "concept_id": "425_多重继承中的重复基类问题",
+  "_chunk_pages": [
+    329,
+    332
+  ]
+}

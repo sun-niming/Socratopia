@@ -1,0 +1,44 @@
+{
+  "title": "document.querySelector",
+  "definition": "document.querySelector(cssSelector) 是使用 CSS 选择器语法查找元素的方法。它只返回匹配到的第一个元素；如果没有找到匹配项，则返回 null。",
+  "key_points": [
+    "参数是 CSS 选择器，可以写 id、类名、后代/子代选择器等。",
+    "只返回匹配选择器的第一个元素。",
+    "如果没有匹配到元素，返回 null。",
+    "这种方法常用且灵活。"
+  ],
+  "examples": [
+    "let firstButton = document.querySelector('button.primary');",
+    "let container = document.querySelector('#container > .item');"
+  ],
+  "misconceptions": [
+    "它会返回所有匹配元素；实际上只返回第一个匹配元素。",
+    "它只能按 id 查找；实际上可以使用各种 CSS 选择器。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "document.querySelector('button.primary') 会返回什么？",
+      "a": "返回第一个匹配 button.primary 的元素；如果没有匹配则返回 null。"
+    },
+    {
+      "q": "querySelector 使用什么语法来查找元素？",
+      "a": "使用 CSS 选择器语法。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "CSS选择器基础",
+    "DOM树的生成"
+  ],
+  "source_pages": [
+    345,
+    348
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "466_document_queryselector",
+  "_chunk_pages": [
+    345,
+    348
+  ]
+}

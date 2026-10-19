@@ -1,0 +1,51 @@
+{
+  "title": "使用bitset表示有线电视频道订阅",
+  "definition": "可以用一个固定长度的 `bitset` 表示有线电视频道订阅情况：每个频道对应一个位，设置为 `1` 的位表示用户订阅了对应频道，值为 `0` 的位表示未订阅。频道套餐也可以表示为 `bitset`，从而通过按位运算管理套餐与客户订阅的组合。",
+  "key_points": [
+    "示例中的系统支持 10 个频道，通过 `static const size_t NumChannels { 10 };` 表示频道总数。",
+    "套餐和客户信息分别存储在两个映射中，映射类型为 `std::map<std::string, std::bitset<NumChannels>>`。",
+    "套餐名称映射到套餐包含的频道集合；客户名称映射到客户当前订阅的频道集合。",
+    "向客户添加单个频道使用 `set(channel)`，移除单个频道使用 `reset(channel)`。",
+    "向客户添加整个套餐使用按位或：`customerChannels |= packageChannels`。"
+  ],
+  "examples": [
+    "可将频道集合表示为：\n$$\n\\text{频道集合}=b_9b_8\\dots b_1b_0\n$$\n其中 $b_i=1$ 表示对应频道已订阅，$b_i=0$ 表示未订阅。",
+    "示例类的核心数据结构可以写成：`using MapType = std::map<std::string, std::bitset<NumChannels>>; MapType m_packages, m_customers;`。"
+  ],
+  "misconceptions": [
+    "套餐不是单独的一组整数频道，而是同样用 `bitset` 表示的频道集合。",
+    "向客户添加套餐时应进行按位或，而不是直接覆盖客户原有的频道集合。",
+    "位被设置只表示对应频道已订阅，不表示频道编号本身等于该位的二进制权值。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "在 CableCompany 模型中，设置的位表示什么？",
+      "a": "设置的位表示用户实际订阅的频道。"
+    },
+    {
+      "q": "为什么套餐也适合用 `bitset` 表示？",
+      "a": "因为套餐本质上是一个固定频道集合，可以用每一位表示一个频道是否包含在套餐中。"
+    },
+    {
+      "q": "如何把套餐中的频道加入客户已有的频道？",
+      "a": "获取套餐和客户的 `bitset` 后执行 `customerChannels |= packageChannels`。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "bitset的基本概念和基本操作",
+    "std::map基础",
+    "按位或运算"
+  ],
+  "source_pages": [
+    602,
+    604
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1242_使用bitset表示有线电视频道订阅",
+  "_chunk_pages": [
+    601,
+    604
+  ]
+}

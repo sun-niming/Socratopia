@@ -1,0 +1,51 @@
+{
+  "title": "布尔逻辑运算符与短路求值",
+  "definition": "C++使用逻辑运算符组合布尔条件：&&表示逻辑与，||表示逻辑或，!表示逻辑非。逻辑与要求两个操作数都为真，逻辑或要求至少一个操作数为真，逻辑非将布尔结果取反。&&和||具有短路求值特性：当左侧操作数已经足以确定整个结果时，右侧表达式不会被求值。",
+  "key_points": [
+    "逻辑与：只有两个操作数都为真时结果才为真。",
+    "逻辑或：至少一个操作数为真时结果为真。",
+    "逻辑非：将真变为假，将假变为真。",
+    "例如：if (!someBoolean)表示someBoolean为假时执行主体。",
+    "例如：if (someBoolean && someOtherBoolean)表示两个条件都为真时执行主体。",
+    "教材还给出包含多个&&的表达式，用于说明当结果已经确定时，后续部分可能不再求值。"
+  ],
+  "examples": [
+    "if (!someBoolean) { cout << \"someBoolean is false\"; }",
+    "if (someBoolean && someOtherBoolean) { cout << \"both are true\"; }",
+    "bool result { bool1 && 0 && (i > 7) && !done };"
+  ],
+  "misconceptions": [
+    "&&不是按位与，||也不是按位或；逻辑运算符用于布尔逻辑，按位运算符是&和|。",
+    "逻辑与中只要左侧已经为假，右侧就不会继续求值；逻辑或中只要左侧已经为真，右侧就不会继续求值。",
+    "!someBoolean表示someBoolean为假时条件为真，而不是表示someBoolean本身为真。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "表达式someBoolean && someOtherBoolean何时为真？",
+      "a": "只有someBoolean和someOtherBoolean都为真时，整个表达式才为真。"
+    },
+    {
+      "q": "什么是逻辑运算的短路求值？",
+      "a": "当左侧操作数已经能够确定&&或||的整体结果时，C++不会求值右侧操作数。"
+    },
+    {
+      "q": "!someBoolean为真说明什么？",
+      "a": "说明someBoolean的值为假。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "布尔值与条件表达式"
+  ],
+  "source_pages": [
+    51,
+    52
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 教材《C++20高级编程》第5版 第51-52页 逻辑运算符 && || ! 短路求值 bool result bool1 && 0",
+  "concept_id": "061_布尔逻辑运算符与短路求值",
+  "_chunk_pages": [
+    49,
+    52
+  ]
+}

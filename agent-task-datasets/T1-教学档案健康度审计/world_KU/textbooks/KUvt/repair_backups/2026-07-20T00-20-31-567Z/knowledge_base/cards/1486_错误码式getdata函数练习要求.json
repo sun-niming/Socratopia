@@ -1,0 +1,46 @@
+{
+  "title": "错误码式getData函数练习要求",
+  "definition": "练习24-1要求使用错误码而不是异常实现错误处理：定义一个只存储单条消息的`Error`类，提供设置消息的构造函数和获取消息的getter；再编写带有`fail`参数的`getData()`函数，当`fail`为`false`时返回数据的`vector`，否则返回一个`Error`实例。实现中不允许使用非常量输出参数引用，并且应在`main()`中测试。",
+  "key_points": [
+    "`Error`类只负责保存一条错误消息。",
+    "`Error`应有一个用于设置消息的构造函数，以及一个用于读取消息的getter。",
+    "`getData(fail)`根据`fail`决定返回数据vector还是`Error`实例。",
+    "题目要求使用错误码式结果表达，不使用异常；也不允许使用非常量输出参数引用。"
+  ],
+  "examples": [
+    "返回类型可以设计为能够表示两种结果的类型，例如`std::variant<std::vector<Data>, Error>`；但具体`Data`类型和实现方式应以题目上下文为准。",
+    "逻辑可表示为：$$getData(fail)=\\begin{cases}\\text{数据的vector},&fail=false\\\\\\text{Error实例},&fail=true\\end{cases}$$"
+  ],
+  "misconceptions": [
+    "题目要求的是错误码式处理，不是抛出异常。",
+    "`fail`为`false`时表示成功并返回数据；不是`fail`为`true`时返回数据。",
+    "不能通过非常量引用参数把结果写回调用者。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "练习24-1中`getData()`在什么情况下返回`Error`？",
+      "a": "当参数`fail`为`true`时返回`Error`实例；当`fail`为`false`时返回数据的vector。"
+    },
+    {
+      "q": "练习24-1对输出参数有什么限制？",
+      "a": "不允许使用非常量输出参数的引用。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "错误码与异常的区别",
+    "vector",
+    "类与构造函数"
+  ],
+  "source_pages": [
+    714,
+    714
+  ],
+  "needs_verification": true,
+  "verify_query": "《C++20高级编程》第5版 练习24-1 Error getData fail vector 非const输出参数原文",
+  "concept_id": "1486_错误码式getdata函数练习要求",
+  "_chunk_pages": [
+    713,
+    716
+  ]
+}

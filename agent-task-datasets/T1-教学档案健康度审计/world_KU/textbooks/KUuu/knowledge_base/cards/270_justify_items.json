@@ -1,0 +1,43 @@
+{
+  "title": "justify-items",
+  "definition": "justify-items 是 Grid 容器属性，用于水平对齐单元格内的 Grid 项。",
+  "key_points": [
+    "它作用于单元格内部的 Grid 项，而不是整个网格内容。",
+    "页面示例中出现了 `center`、`start`、`stretch` 等写法。"
+  ],
+  "examples": [
+    "justify-items: center;",
+    "justify-items: start;",
+    "justify-items: stretch;"
+  ],
+  "misconceptions": [
+    "它不是用来控制整个网格在容器中的位置，那是 `justify-content` 的作用。",
+    "不要把它和 `align-items` 混淆；后者是垂直对齐单元格内的 Grid 项。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "justify-items 的作用是什么？",
+      "a": "水平对齐单元格内的 Grid 项。"
+    },
+    {
+      "q": "justify-items 和 justify-content 的区别是什么？",
+      "a": "justify-items 对齐单元格内的 Grid 项；justify-content 对齐整个网格内容。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "Grid 容器",
+    "Grid 项"
+  ],
+  "source_pages": [
+    178,
+    179
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "270_justify_items",
+  "_chunk_pages": [
+    177,
+    180
+  ]
+}

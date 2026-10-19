@@ -1,0 +1,43 @@
+{
+  "title": "查阅官方资料的原则",
+  "definition": "讲义给出了一条查阅原则：先看本地整理的 Markdown 和源码，因为它们最贴近项目实现；遇到函数参数、返回值、errno、边界语义不确定时，再查 man-pages；遇到 HTTP 概念不确定时查 MDN；遇到 Makefile 规则不确定时查 GNU Make Manual。",
+  "key_points": [
+    "本地整理资料优先于外部官方文档",
+    "man-pages 用于核实 Linux 函数语义细节",
+    "MDN 用于核实 HTTP 概念，GNU Make Manual 用于核实 Makefile 规则"
+  ],
+  "examples": [
+    "socket / bind / listen / accept / send / recv 的 man-pages",
+    "`https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Overview`",
+    "`https://www.gnu.org/software/make/manual/make.html`"
+  ],
+  "misconceptions": [
+    "不是一上来就先翻官方手册，讲义强调先看项目整理资料",
+    "不是所有问题都查同一种资料，Linux 函数、HTTP、Makefile 分别对应不同权威来源"
+  ],
+  "qa_pairs": [
+    {
+      "q": "当你不确定 `open` 的边界语义时，讲义建议先查什么？",
+      "a": "先看本地整理资料；如果仍不确定，再查 Linux man-pages 的 `open`。"
+    },
+    {
+      "q": "HTTP 概念不确定时该查哪里？",
+      "a": "查 MDN HTTP Overview。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "推荐阅读顺序"
+  ],
+  "source_pages": [
+    133,
+    136
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "237_查阅官方资料的原则",
+  "_chunk_pages": [
+    133,
+    136
+  ]
+}

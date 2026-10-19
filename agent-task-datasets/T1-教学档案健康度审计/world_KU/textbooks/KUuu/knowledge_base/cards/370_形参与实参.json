@@ -1,0 +1,38 @@
+{
+  "title": "形参与实参",
+  "definition": "形参是定义函数时在括号中的标识符，多个参数用逗号分隔，而且不指定类型；实参是调用函数时传递给函数形参的数据。",
+  "key_points": [
+    "形参出现在函数定义时",
+    "实参出现在函数调用时",
+    "形参不指定类型",
+    "多个参数之间用逗号分隔"
+  ],
+  "examples": [
+    "function add(a,b){\n  return a+b;\n}\nadd(1,2);"
+  ],
+  "misconceptions": [
+    "形参和实参不是同一个概念",
+    "形参在原文中不要求指定类型"
+  ],
+  "qa_pairs": [
+    {
+      "q": "形参和实参分别是什么？",
+      "a": "形参是定义函数时括号中的标识符；实参是调用函数时传递给函数形参的数据。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "函数"
+  ],
+  "source_pages": [
+    253,
+    256
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "370_形参与实参",
+  "_chunk_pages": [
+    253,
+    256
+  ]
+}

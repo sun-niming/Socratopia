@@ -228,13 +228,51 @@ const DIALOGUE = "\"先生今日讲得好。\"";
     "a narration span followed by prose on the same line is speech"
   );
 
+  // An ```svg fence orders a figure; its source is drawing instructions, never prose.
+  // A blank line inside the fence is common in a drawn diagram, and the paragraph
+  // splitter used to cut there — the tail half no longer *opens* with the fence, so
+  // the adapter saw ordinary text and read `  <text ...>main()</text>` aloud.  The
+  // splitter now holds the cut while a fence is still open, so no released fragment
+  // can carry fence source without carrying the fence that marks it silent.
+  const SVG_BODY = [
+    '<svg viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg">',
+    '  <rect x="20" y="40" width="120" height="40" fill="#eef"/>',
+    "",
+    '  <text x="30" y="66">main()</text>',
+    "</svg>"
+  ].join("\n");
+  const FIGURE_REPLY = "把 $I_0$ 和它的 $*$ 边画出来就是：\n\n```svg\n<!-- title: GOTO 状态 -->\n" + SVG_BODY + "\n```\n\n换你走一步。";
+
+  for (const [label, chunks] of [
+    ["in one delta", [FIGURE_REPLY]],
+    ["character by character", [...FIGURE_REPLY]]
+  ]) {
+    const spoken = await synthesisInput(FIGURE_REPLY, chunks);
+    const leaked = spoken.filter((text) => /<svg|viewBox|<rect|<text|<\/svg>|```|--- title:/.test(text));
+    assert.deepStrictEqual(leaked, [], label + ": svg fence source must never reach the synthesiser");
+    assert(spoken.some((text) => text.includes("换你走一步")), label + ": the prose after the figure must still be spoken");
+  }
+
+  // the fragmenter, not luck: an open fence must hold the cut at a blank line too
+  const fenceParts = fragment("前言。\n\n```svg\n" + SVG_BODY + "\n```\n\n收尾。", SENTENCE_SPLIT_RE);
+  for (const piece of fenceParts) {
+    const ticks = (piece.match(/```/g) || []).length;
+    assert.strictEqual(ticks % 2, 0, "every released fragment must be fence-balanced: " + JSON.stringify(piece.slice(0, 60)));
+  }
+  assert.strictEqual(
+    fenceParts.filter((piece) => /<text|<\/svg>/.test(piece)).length,
+    1,
+    "the whole fence must stay in one fragment"
+  );
+
   console.log(JSON.stringify({
     result: "PASS",
     bundles: bundles.length,
     helper: "single",
     narrationSynthesis: 0,
     mixedDialogueSpoken: true,
-    emphasisSpoken: true
+    emphasisSpoken: true,
+    svgFenceSpoken: 0
   }, null, 2));
 })().catch(error => {
   console.error(error && error.stack || error);

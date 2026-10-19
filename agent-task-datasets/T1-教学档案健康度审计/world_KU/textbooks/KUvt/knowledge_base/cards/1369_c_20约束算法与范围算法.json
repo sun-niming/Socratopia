@@ -1,0 +1,52 @@
+{
+  "title": "C++20约束算法与范围算法",
+  "definition": "C++20在std::ranges命名空间中提供了许多标准算法的受约束版本。这些算法使用概念约束模板类型参数，因此传入无效参数时通常能产生更清晰的编译器错误信息。受约束算法既可以接收起始和结束迭代器，也可以直接接收一个范围，还支持投影；但它们不支持并行执行，因此不能接收执行策略参数。",
+  "key_points": [
+    "受约束算法定义在<algorithm>中，但位于std::ranges命名空间。",
+    "概念约束能够在编译期更明确地指出参数不满足要求，例如sort需要随机访问迭代器。",
+    "范围重载可以直接传入容器或其他范围，避免重复书写begin/end迭代器。",
+    "受约束算法支持投影，可在算法比较前把元素映射为用于比较的值。",
+    "std::ranges中的受约束算法不支持并行执行。"
+  ],
+  "examples": [
+    "使用迭代器调用：\nauto result{std::ranges::find(std::cbegin(values), std::cend(values), 2)};\nif (result != std::cend(values)) {\n    std::cout << *result << std::endl;\n}",
+    "使用范围调用时，可以直接写：\nauto result{std::ranges::find(values, 2)};",
+    "受约束算法不能写成带执行策略的形式：\n// std::ranges::sort(std::execution::par, values); // 不支持"
+  ],
+  "misconceptions": [
+    "std::ranges::find不是只能接收范围，它也可以像std::find一样接收一对迭代器。",
+    "受约束算法不是运行时检查；概念约束主要在编译期检查参数是否满足要求。",
+    "使用std::ranges算法并不意味着自动获得并行执行能力。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "受约束算法相比普通std算法的主要优势是什么？",
+      "a": "它使用概念约束模板参数，通常能提供更清晰的编译错误；同时支持直接传入范围和使用投影。"
+    },
+    {
+      "q": "std::ranges::find(values, 2)相比使用一对迭代器有什么好处？",
+      "a": "它直接把values作为范围传入，不必手写std::begin和std::end，代码更简洁且不易因迭代器范围写错而出错。"
+    },
+    {
+      "q": "受约束算法能否接收std::execution::par？",
+      "a": "不能，教材指出受约束算法不支持并行执行。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "模板与概念",
+    "迭代器和范围",
+    "标准库算法"
+  ],
+  "source_pages": [
+    655,
+    656
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1369_c_20约束算法与范围算法",
+  "_chunk_pages": [
+    653,
+    656
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "title": "Shell变量赋值格式",
+  "definition": "教材给出的 Shell 变量赋值格式为“变量名=值”。其中需要特别注意：赋值号“=”两边不能有空格。",
+  "key_points": [
+    "赋值基本格式：变量名=值",
+    "赋值号两边没有空格"
+  ],
+  "examples": [
+    "变量名=值",
+    "name=linux"
+  ],
+  "misconceptions": [
+    "误以为可以写成“变量名 = 值”，教材明确指出赋值号两边没有空格",
+    "误以为赋值格式与普通数学等式完全相同，教材强调 shell 语法对空格有严格要求"
+  ],
+  "qa_pairs": [
+    {
+      "q": "Shell 变量如何赋值？",
+      "a": "使用“变量名=值”的格式进行赋值。"
+    },
+    {
+      "q": "Shell 变量赋值时等号两边能加空格吗？",
+      "a": "不能。教材明确说明赋值号两边没有空格。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "Shell变量"
+  ],
+  "source_pages": [
+    57,
+    60
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "108_shell变量赋值格式",
+  "_chunk_pages": [
+    57,
+    60
+  ]
+}

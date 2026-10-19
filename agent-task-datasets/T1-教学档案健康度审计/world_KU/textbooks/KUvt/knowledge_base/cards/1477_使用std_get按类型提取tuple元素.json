@@ -1,0 +1,41 @@
+{
+  "title": "使用std::get按类型提取tuple元素",
+  "definition": "除了按索引访问外，还可以使用`std::get<T>(tuple对象)`按元素类型提取tuple中的元素。若tuple中有多个元素具有相同的目标类型，则按类型提取会导致编译错误，因此这种方式要求目标类型在tuple中具有唯一匹配元素。",
+  "key_points": [
+    "按类型访问的形式是`std::get<T>(tuple对象)`。",
+    "目标类型必须在tuple中唯一，否则编译器会报错。",
+    "返回值是tuple中该类型元素的值或引用，具体取决于tuple对象的类型和访问上下文。"
+  ],
+  "examples": [
+    "对于`std::tuple<int, std::string, bool> t1 { 16, \"Test\", true };`，可以使用`std::get<std::string>(t1)`取得字符串`\"Test\"`。"
+  ],
+  "misconceptions": [
+    "按类型调用`std::get`并不是在tuple中搜索任意可转换类型，而是要求存在唯一匹配的元素类型。",
+    "如果tuple中有两个相同类型的元素，不能通过该类型唯一确定要访问哪一个。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何从`std::tuple<int, std::string, bool>`中获取字符串元素？",
+      "a": "使用`std::get<std::string>(t1)`。"
+    },
+    {
+      "q": "如果tuple中有两个std::string元素，能否使用`std::get<std::string>`？",
+      "a": "不能，因为目标类型不唯一，会导致编译错误。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "使用std::get按索引访问tuple元素"
+  ],
+  "source_pages": [
+    710,
+    710
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1477_使用std_get按类型提取tuple元素",
+  "_chunk_pages": [
+    709,
+    712
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "title": "C++标准执行策略与并行算法",
+  "definition": "部分C++标准库算法支持通过执行策略指定执行方式。执行策略作为算法的第一个参数，用于说明算法是否允许并行执行或矢量化执行。相关策略和全局实例定义在<execution>中的std::execution命名空间。矢量化执行通常利用SIMD（单指令多数据）指令，用一条硬件指令同时处理多个数据。",
+  "key_points": [
+    "sequenced_policy及全局实例seq：不允许算法并行执行。",
+    "parallel_policy及全局实例par：允许算法并行执行。",
+    "parallel_unsequenced_policy及全局实例par_unseq：允许并行执行和矢量化执行，也允许在线程之间迁移执行。",
+    "unsequenced_policy及全局实例unseq：允许矢量化执行，但不允许并行执行。",
+    "使用执行策略的算法示例：std::sort(std::execution::par, begin(myVector), end(myVector));"
+  ],
+  "examples": [
+    "#include <execution>\nstd::sort(std::execution::par, std::begin(myVector), std::end(myVector));",
+    "四类策略可概括为：\n$$\\begin{array}{c|c|c}\n\\text{策略实例} & \\text{并行执行} & \\text{矢量化执行} \\\\\n\\hline\n\\text{seq} & \\text{否} & \\text{否} \\\\\n\\text{par} & \\text{是} & \\text{否} \\\\\n\\text{par\\_unseq} & \\text{是} & \\text{是} \\\\\n\\text{unseq} & \\text{否} & \\text{是}\n\\end{array}$$"
+  ],
+  "misconceptions": [
+    "并行执行和矢量化执行不是完全相同的概念：并行执行通常涉及多个线程，而矢量化执行利用SIMD指令同时处理多个数据。",
+    "传入并行执行策略不保证所有实现和所有输入都一定获得明显加速。",
+    "执行策略应作为支持该策略的算法重载的第一个参数传入。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "std::execution::par表示什么？",
+      "a": "它表示算法允许并行执行，但不表示允许矢量化执行。"
+    },
+    {
+      "q": "std::execution::par_unseq与std::execution::unseq的区别是什么？",
+      "a": "par_unseq同时允许并行和矢量化执行；unseq只允许矢量化执行，不允许并行执行。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "标准库算法",
+    "线程与SIMD的基本概念"
+  ],
+  "source_pages": [
+    654,
+    655
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1367_c_标准执行策略与并行算法",
+  "_chunk_pages": [
+    653,
+    656
+  ]
+}

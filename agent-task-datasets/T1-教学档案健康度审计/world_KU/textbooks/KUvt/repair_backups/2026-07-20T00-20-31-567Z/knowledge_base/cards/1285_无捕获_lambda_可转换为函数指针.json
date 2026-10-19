@@ -1,0 +1,39 @@
+{
+  "title": "无捕获 lambda 可转换为函数指针",
+  "definition": "对于不捕获任何变量的 lambda 表达式，编译器会自动提供转换运算符，使其能够转换为函数指针。因此，无捕获 lambda 可以作为参数传递给要求函数指针的函数。",
+  "key_points": [
+    "该规则适用于不捕获任何内容的 lambda。",
+    "转换后的函数指针类型必须与 lambda 的调用签名匹配。",
+    "捕获了局部变量的 lambda 不能按此规则直接转换为普通函数指针。"
+  ],
+  "examples": [
+    "无捕获 lambda：`auto lambda = [](int x) { return x * 2; };`。",
+    "可转换为匹配的函数指针：`int (*fn)(int) = [](int x) { return x * 2; };`。"
+  ],
+  "misconceptions": [
+    "误以为所有 lambda 都能转换为函数指针；带捕获的 lambda 通常不能直接转换为普通函数指针。",
+    "误以为转换为函数指针后仍然保留捕获状态；无捕获 lambda 本身没有需要保存的外部状态。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "什么样的 lambda 可以自动转换为函数指针？",
+      "a": "不捕获任何内容的 lambda。其函数指针的参数和返回类型必须与 lambda 的调用签名匹配。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "lambda 表达式",
+    "函数指针"
+  ],
+  "source_pages": [
+    621,
+    621
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1285_无捕获_lambda_可转换为函数指针",
+  "_chunk_pages": [
+    621,
+    624
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "title": "Object.create创建原型对象",
+  "definition": "Object.create()用于创建一个新对象，并把指定的现有对象作为这个新对象的原型。新对象会继承原型对象的属性和方法；在新对象中对继承来的属性和方法进行添加、修改或删除，不会影响原型对象本身。Object.create()还可以接收一个可选的属性对象 propertiesObject，用来给新对象指定属性和值。proto 参数是原型对象，也可以为 null。",
+  "key_points": [
+    "新对象与原型对象通过原型链关联，而不是简单复制属性",
+    "新对象可以使用继承来的属性和方法，且对新对象的改动不影响原型对象",
+    "Object.create(proto, propertiesObject) 中 proto 可为 null，propertiesObject 是可选的属性描述对象"
+  ],
+  "examples": [
+    "const person = { firstName: 'John', lastName: 'Doe' }; const newPerson = Object.create(person); console.log(newPerson.firstName); // 'John' console.log(newPerson.lastName); // 'Doe'"
+  ],
+  "misconceptions": [
+    "误以为 Object.create() 会把原型对象的属性完整复制到新对象中",
+    "误以为修改新对象上的继承属性会同步修改原型对象"
+  ],
+  "qa_pairs": [
+    {
+      "q": "Object.create() 的主要作用是什么？",
+      "a": "创建一个新对象，并让该对象使用指定对象作为原型，从而继承原型对象的属性和方法。"
+    },
+    {
+      "q": "Object.create() 的 proto 参数可以是什么？",
+      "a": "proto 是新对象的原型对象，也可以为 null。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "对象",
+    "原型"
+  ],
+  "source_pages": [
+    281,
+    282
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "406_object_create创建原型对象",
+  "_chunk_pages": [
+    281,
+    284
+  ]
+}

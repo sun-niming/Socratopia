@@ -1,0 +1,53 @@
+{
+  "title": "map的insert方法与返回值",
+  "definition": "map的insert方法用于添加键/值对，并且不会覆盖已经存在的同键元素。insert的基本返回值是一个pair，其中first是指向相关map元素的迭代器，second是bool值，表示是否实际插入了新元素。若键已存在，插入失败，迭代器仍指向已有元素。",
+  "key_points": [
+    "insert可以接收initializer list形式的键/值对，也可以接收pair对象。",
+    "插入成功时返回pair的second为true；键已存在时为false。",
+    "insert不会因为键已存在而改写旧值。",
+    "返回的迭代器指向具有指定键的元素，无论该元素是新插入的还是原来已有的。",
+    "对于map<int, Data>，返回类型可写为pair<map<int, Data>::iterator, bool>。"
+  ],
+  "examples": [
+    "map<int, Data> dataMap;",
+    "auto ret{dataMap.insert({1, Data{4}})};",
+    "if (ret.second) { /* Insert succeeded! */ } else { /* Insert failed! */ }",
+    "ret = dataMap.insert(make_pair(1, Data{6})); // 若键1已存在，不会覆盖原值"
+  ],
+  "misconceptions": [
+    "insert返回的bool不是表示map对象是否有效，而是表示本次是否插入了新键/值对。",
+    "insert遇到重复键时不会更新旧值。",
+    "insert返回的第一个元素是迭代器，不是插入元素的值本身。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "insert返回的pair中second表示什么？",
+      "a": "表示本次是否成功插入了新的键/值对；成功为true，键已存在时为false。"
+    },
+    {
+      "q": "map中已经存在键1时，再次insert键1的新值会发生什么？",
+      "a": "insert不会覆盖已有值，返回pair的second为false，迭代器指向已有的键1元素。"
+    },
+    {
+      "q": "如何取得insert返回的元素？",
+      "a": "通过返回pair的first取得迭代器，再通过该迭代器访问map中的元素。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "map的唯一键约束",
+    "迭代器的基本使用",
+    "pair的基本使用"
+  ],
+  "source_pages": [
+    583,
+    583
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1205_map的insert方法与返回值",
+  "_chunk_pages": [
+    581,
+    584
+  ]
+}

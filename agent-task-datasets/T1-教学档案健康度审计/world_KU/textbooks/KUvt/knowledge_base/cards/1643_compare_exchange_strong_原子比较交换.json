@@ -1,0 +1,44 @@
+{
+  "title": "compare_exchange_strong 原子比较交换",
+  "definition": "std::atomic<T>::compare_exchange_strong(T& expected, T desired) 以原子方式比较原子对象当前值与 expected：如果二者相等，就把原子对象修改为 desired；如果不相等，就把原子对象当前值写入 expected，并返回 false。该操作是实现无锁并发数据结构的重要组件。",
+  "key_points": [
+    "比较和可能的写入作为一个不可分割的原子操作完成。",
+    "比较成功时，原子对象被设置为 desired。",
+    "比较失败时，expected 被更新为原子对象当前值，并返回 false。",
+    "教材强调，无锁并发数据结构是高级主题。"
+  ],
+  "examples": [
+    "伪代码：\nif (*this == expected) {\n    this = desired;\n    return true;\n} else {\n    expected = *this;\n    return false;\n}"
+  ],
+  "misconceptions": [
+    "compare_exchange_strong 失败时不会把 desired 写入原子对象。",
+    "比较失败时 expected 不是保持原值，而是会被更新为原子对象当前值。",
+    "使用 compare_exchange_strong 并不意味着整个程序自动不需要设计同步逻辑；它只是构建无锁算法的基础操作。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "compare_exchange_strong 比较成功时做什么？",
+      "a": "如果原子对象当前值等于 expected，就以原子方式把原子对象修改为 desired，并返回成功。"
+    },
+    {
+      "q": "compare_exchange_strong 比较失败时如何处理 expected？",
+      "a": "它不修改原子对象，而是把原子对象当前值写入 expected，并返回 false。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "原子操作",
+    "无锁并发数据结构"
+  ],
+  "source_pages": [
+    801,
+    801
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1643_compare_exchange_strong_原子比较交换",
+  "_chunk_pages": [
+    801,
+    804
+  ]
+}

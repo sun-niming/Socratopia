@@ -1,0 +1,46 @@
+{
+  "title": "使用移动语义向 vector 添加元素",
+  "definition": "当向 vector 添加元素时，如果传入的是左值，通常会复制该对象；如果传入右值，则可以调用移动版本，把对象的资源转移到 vector 中，从而避免复制。可以使用 std::move() 将一个命名对象转换为可移动的右值。",
+  "key_points": [
+    "vec.push_back(myElement) 中，myElement 是命名对象，通常会复制到 vector。",
+    "vec.push_back(std::move(myElement)) 明确要求使用移动语义，将 myElement 的资源转移到 vector。",
+    "移动后，myElement 仍处于有效状态，但其具体值不确定；在重新使其处于确定状态前，不应继续按原值使用它。",
+    "向 push_back() 传递临时对象时会调用移动版本，例如 vec.push_back(std::string(5, 'a'))。"
+  ],
+  "examples": [
+    "vector<string> vec;\nstring myElement(5, 'a');\nvec.push_back(myElement); // 复制 myElement",
+    "vec.push_back(std::move(myElement)); // 使用移动语义，移动后 myElement 的值不确定",
+    "vec.push_back(string(5, 'a')); // 临时 string 对象可被移动到 vector"
+  ],
+  "misconceptions": [
+    "std::move() 本身不执行资源转移；它将表达式转换为可用于移动的右值，实际移动由被调用的移动构造或移动赋值操作完成。",
+    "移动后的对象不是被销毁，也不是无效对象；它仍然有效，但其值不确定。",
+    "只有传入临时对象或显式使用 std::move() 才能明确选择移动语义。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么 vec.push_back(myElement) 通常会产生复制？",
+      "a": "因为 myElement 是命名对象，属于左值，通常匹配接收 const T& 的版本并复制对象。"
+    },
+    {
+      "q": "调用 vec.push_back(std::move(myElement)) 后，myElement 处于什么状态？",
+      "a": "myElement 仍然有效，但处于值不确定的状态，不应继续按原值使用。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "左值与右值",
+    "移动语义"
+  ],
+  "source_pages": [
+    558,
+    559
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1152_使用移动语义向_vector_添加元素",
+  "_chunk_pages": [
+    557,
+    560
+  ]
+}

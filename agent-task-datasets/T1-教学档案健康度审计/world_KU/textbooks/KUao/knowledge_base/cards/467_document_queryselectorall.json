@@ -1,0 +1,43 @@
+{
+  "title": "document.querySelectorAll",
+  "definition": "`document.querySelectorAll(cssSelector)` 用 CSS 选择器语法一次获取页面中所有匹配的元素。它返回的是 `NodeList`，不是单个元素；这个结果可以用 `forEach` 遍历。教材中还说明，`NodeList` 通常是调用时获取到的 DOM 快照，后续 DOM 变化一般不会反映到已获取的 `NodeList` 中。",
+  "key_points": [
+    "使用 CSS 选择器语法进行匹配。",
+    "返回所有匹配元素组成的 `NodeList`。",
+    "`NodeList` 可以用 `forEach` 遍历。",
+    "教材说明：`NodeList` 通常是静态的快照。"
+  ],
+  "examples": [
+    "let allLinksInNav = document.querySelectorAll('nav a');\nallLinksInNav.forEach(link => {\n  console.log(link.href);\n});"
+  ],
+  "misconceptions": [
+    "把 `querySelectorAll` 误认为只返回一个元素。",
+    "以为返回的 `NodeList` 会像实时列表一样自动随 DOM 变化更新。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`document.querySelectorAll('nav a')` 返回什么？",
+      "a": "返回所有匹配 `nav a` 的元素组成的 `NodeList`。"
+    },
+    {
+      "q": "为什么后面可以直接写 `forEach`？",
+      "a": "因为返回的是可遍历的 `NodeList`。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "CSS选择器",
+    "DOM元素"
+  ],
+  "source_pages": [
+    349,
+    352
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "467_document_queryselectorall",
+  "_chunk_pages": [
+    349,
+    352
+  ]
+}

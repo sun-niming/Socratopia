@@ -1,0 +1,37 @@
+{
+  "title": "CSS声明格式",
+  "definition": "CSS中的声明是属性和值的组合，属性与值之间用英文冒号“:”分隔；每个属性值对之间用英文分号“;”分隔。",
+  "key_points": [
+    "声明由属性和值组成",
+    "属性和值之间用英文冒号分隔",
+    "多个属性值对之间用英文分号分隔"
+  ],
+  "examples": [
+    "border-width:0px;"
+  ],
+  "misconceptions": [
+    "属性和值之间用等号分隔",
+    "多个属性值对之间用逗号分隔"
+  ],
+  "qa_pairs": [
+    {
+      "q": "CSS声明中属性和值如何分隔？",
+      "a": "属性和价值之间用英文冒号（:）分隔，每个属性值对之间用英文分号（;）分隔。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "CSS样式规则"
+  ],
+  "source_pages": [
+    85,
+    88
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "132_css声明格式",
+  "_chunk_pages": [
+    85,
+    88
+  ]
+}

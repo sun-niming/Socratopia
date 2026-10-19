@@ -1,0 +1,41 @@
+{
+  "title": "歧义基类与歧义数据成员",
+  "definition": "如果一个派生类通过不同继承路径继承了同一个基类，或者直接、间接重复继承了同一个基类，就会形成歧义基类；访问该基类的成员时，编译器无法确定应采用哪一个基类子对象。同样，如果多个基类包含同名数据成员，派生类对象直接访问该成员也会产生歧义。",
+  "key_points": [
+    "例如 Bird 继承 Dog，而 DogBird 又继承 Bird 和 Dog，则 DogBird 中存在两个 Dog 继承路径，Dog 成为歧义基类。",
+    "类层次结构混乱或人为构造的重复继承，可能导致歧义基类。",
+    "如果 Dog 和 Bird 都有同名数据成员，DogBird 对象直接访问该成员时也会产生歧义。"
+  ],
+  "examples": [
+    "class Dog {};\nclass Bird : public Dog {};\nclass DogBird : public Bird, public Dog { }; // 编译错误：Dog 是歧义基类"
+  ],
+  "misconceptions": [
+    "只要两个基类名称不同，就一定不会有基类歧义；实际上它们可能通过继承路径共同包含同一个基类。",
+    "歧义只会发生在方法调用上；同名数据成员也会造成歧义。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么 class DogBird : public Bird, public Dog {} 会产生歧义基类错误？",
+      "a": "因为 Bird 已经继承 Dog，而 DogBird 又直接继承 Dog，因此 DogBird 通过两条路径获得 Dog，Dog 成为歧义基类。"
+    },
+    {
+      "q": "多个基类都包含同名数据成员时，访问该成员会怎样？",
+      "a": "直接访问会产生歧义错误，因为编译器无法确定应访问哪个基类中的数据成员。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "多重继承中的同名方法歧义"
+  ],
+  "source_pages": [
+    329,
+    329
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "671_歧义基类与歧义数据成员",
+  "_chunk_pages": [
+    329,
+    332
+  ]
+}

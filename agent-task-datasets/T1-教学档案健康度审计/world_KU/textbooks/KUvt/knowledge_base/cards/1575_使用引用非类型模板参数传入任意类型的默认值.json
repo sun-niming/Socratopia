@@ -1,0 +1,46 @@
+{
+  "title": "使用引用非类型模板参数传入任意类型的默认值",
+  "definition": "为了让网格支持对象类型作为默认单元格值，可以把默认值模板参数声明为引用，例如 `template <typename T, const T& DEFAULT> class Grid`。实例化时传入一个具有链接的对象引用；网格可以使用该对象作为默认值。",
+  "key_points": [
+    "引用形式的非类型模板参数可以引用对象，因此适用于 `SpreadsheetCell` 等不能直接作为值参数传入的类型。",
+    "作为第二个模板参数传入的引用必须具有链接，原文示例使用了具有内部链接的对象。",
+    "示例通过匿名命名空间中的对象提供内部链接：`int defaultInt{11};` 和 `SpreadsheetCell defaultCell{1.2};`。",
+    "实例化形式分别为 `Grid<int, defaultInt>` 和 `Grid<SpreadsheetCell, defaultCell>`。"
+  ],
+  "examples": [
+    "```text\nnamespace {\n    int defaultInt{11};\n    SpreadsheetCell defaultCell{1.2};\n}\n\nGrid<int, defaultInt> myIntGrid;\nGrid<SpreadsheetCell, defaultCell> mySpreadsheet;\n```",
+    "模板声明：`template <typename T, const T& DEFAULT> class Grid`。"
+  ],
+  "misconceptions": [
+    "引用非类型模板参数不是把对象复制到模板参数中，而是让模板参数引用一个满足要求的对象。",
+    "并非任意局部对象都可以作为该引用参数；原文强调被引用对象必须具有链接。",
+    "引用形式解决的是对象作为模板参数的问题，并不意味着所有对象都能无条件作为非类型模板参数。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何让 `Grid` 使用 `SpreadsheetCell` 对象作为默认单元格值？",
+      "a": "将默认值参数改为引用形式：`template <typename T, const T& DEFAULT> class Grid`，然后使用具有链接的对象实例化，例如 `Grid<SpreadsheetCell, defaultCell>`。"
+    },
+    {
+      "q": "原文示例中的 `defaultInt` 和 `defaultCell` 为什么放在匿名命名空间中？",
+      "a": "原文用匿名命名空间为它们提供内部链接，以满足引用非类型模板参数对链接的要求。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "非类型模板参数",
+    "模板引用参数",
+    "对象的链接属性"
+  ],
+  "source_pages": [
+    761,
+    762
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1575_使用引用非类型模板参数传入任意类型的默认值",
+  "_chunk_pages": [
+    761,
+    764
+  ]
+}

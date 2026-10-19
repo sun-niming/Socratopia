@@ -1,0 +1,46 @@
+{
+  "title": "std::array 固定大小容器",
+  "definition": "std::array 是 C++ 标准库提供的固定大小容器，本质上是对 C 风格数组的简单包装，定义在相应标准库头文件中。声明 std::array 时需要指定元素类型和数组大小。它始终知道自身大小，不会自动转换为指针，并提供迭代器以便遍历元素。",
+  "key_points": [
+    "std::array 的模板参数依次是元素类型和大小，形式为 std::array<类型, 大小>。",
+    "std::array 的大小固定，必须在编译期确定，运行时不能增大或缩小。",
+    "相比 C 风格数组，std::array 能直接知道自身大小，且不会自动转换为指针。",
+    "std::array 支持类模板参数推导（CTAD），但 CTAD 需要根据初始化器推导类型和大小。"
+  ],
+  "examples": [
+    "std::array<int, 3> arr;",
+    "std::array arr { 1, 2, 3 }; // 使用初始化器进行 CTAD，推导出元素类型和大小"
+  ],
+  "misconceptions": [
+    "std::array 不是动态数组，不能在运行时自动扩容。",
+    "使用 CTAD 并不意味着可以完全省略初始化器；教材强调需要初始化器才能正常推导。",
+    "std::array 中的所有元素仍然必须是同一类型。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "std::array 的两个模板参数分别表示什么？",
+      "a": "第一个参数表示元素类型，第二个参数表示数组大小，例如 std::array<int, 3>。"
+    },
+    {
+      "q": "std::array 与 C 风格数组相比有什么主要好处？",
+      "a": "std::array 始终知道自身大小，不会自动转换为指针，并提供迭代器，便于安全地获取大小和遍历元素。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "类模板",
+    "C 风格数组",
+    "模板参数"
+  ],
+  "source_pages": [
+    58,
+    59
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 std::array CTAD 初始化器 模板参数 元素类型 数组大小 官方文档",
+  "concept_id": "099_std_array_固定大小容器",
+  "_chunk_pages": [
+    57,
+    60
+  ]
+}

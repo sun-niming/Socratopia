@@ -1,0 +1,41 @@
+{
+  "title": "C++预处理器与#include",
+  "definition": "预处理指令是在编译前由预处理器处理的、以 `#` 开头的指令。若编译器不支持 C++20 模块，可以使用 `#include <iostream>` 替代输入输出相关的模块导入。`#include` 会让预处理器把指定文件的内容插入到该指令所在的位置，从而使当前文件能够使用其中声明的功能。",
+  "key_points": [
+    "预处理指令以 `#` 开头。",
+    "`#include [file]` 的作用是把指定文件的内容插入指令所在的位置。",
+    "`#include` 几乎总是用于包含头文件。",
+    "`<iostream>` 头文件声明了 C++ 提供的输入输出机制。"
+  ],
+  "examples": [
+    "包含输入输出头文件：`#include <iostream>`。",
+    "一般形式：`#include <file>`。"
+  ],
+  "misconceptions": [
+    "误以为 `#include` 是在程序运行时加载文件；原文说明它由预处理器在编译前处理。",
+    "误以为 `#include` 只适用于标准库头文件；其作用是插入指定文件内容。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`#include <iostream>` 的作用是什么？",
+      "a": "它告诉预处理器把 `<iostream>` 头文件的内容插入当前位置，使当前文件可以使用其中声明的输入输出功能。"
+    },
+    {
+      "q": "预处理指令有什么形式特征？",
+      "a": "预处理指令以 `#` 符号开头。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [],
+  "source_pages": [
+    36,
+    36
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "039_c_预处理器与_include",
+  "_chunk_pages": [
+    33,
+    36
+  ]
+}

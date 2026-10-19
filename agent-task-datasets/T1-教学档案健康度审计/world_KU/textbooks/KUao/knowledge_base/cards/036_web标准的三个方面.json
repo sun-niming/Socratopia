@@ -1,0 +1,39 @@
+{
+  "title": "Web标准的三个方面",
+  "definition": "Web标准是一系列标准的集合，主要包括结构、表现和行为三个方面。结构用于对网页元素进行整理和分类；表现用于设置网页元素的版式、颜色、大小等外观样式；行为用于网页模型的定义及交互。",
+  "key_points": [
+    "结构：对内容进行整理和分类，对应标准语言为HTML",
+    "表现：对结构化信息进行样式/外观控制，主要指CSS",
+    "行为：对内容的交互及操作效果进行控制，主要为JavaScript"
+  ],
+  "examples": [
+    "结构对应HTML，表现对应CSS，行为对应JavaScript"
+  ],
+  "misconceptions": [
+    "把Web标准只理解为CSS样式规范",
+    "把结构、表现、行为混为一谈"
+  ],
+  "qa_pairs": [
+    {
+      "q": "Web标准主要包括哪三个方面？",
+      "a": "结构、表现和行为。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "HTML",
+    "CSS",
+    "JavaScript"
+  ],
+  "source_pages": [
+    25,
+    28
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "036_web标准的三个方面",
+  "_chunk_pages": [
+    25,
+    28
+  ]
+}

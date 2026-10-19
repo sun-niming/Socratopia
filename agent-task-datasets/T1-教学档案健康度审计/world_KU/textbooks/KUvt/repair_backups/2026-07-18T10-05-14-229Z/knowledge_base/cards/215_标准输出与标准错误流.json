@@ -1,0 +1,35 @@
+{
+  "title": "标准输出与标准错误流",
+  "definition": "原文在第153页并列出现“stderr/cerr”和“stdout/cout”。这表明教材将 C++ 的 cerr 与标准错误流 stderr、cout 与标准输出流 stdout 联系起来讨论；但当前页面信息未完整说明它们的具体行为和差异。",
+  "key_points": [
+    "stderr 与 cerr 被并列列出。",
+    "stdout 与 cout 被并列列出。",
+    "原文没有提供重定向、缓冲或使用场景等进一步说明。"
+  ],
+  "examples": [
+    "原文中的对应关系可记为：stderr/cerr；stdout/cout。"
+  ],
+  "misconceptions": [
+    "不能仅凭本页断定 cerr 与 stderr 在所有实现和使用场景下完全等价。",
+    "不能把 stdout/cout 与 stderr/cerr 误认为同一个输出通道。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "原文将哪些 C++ 输出对象或流分别与 stderr、stdout 并列？",
+      "a": "cerr 与 stderr 并列，cout 与 stdout 并列。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [],
+  "source_pages": [
+    153,
+    156
+  ],
+  "needs_verification": true,
+  "verify_query": "《C++20高级编程》第5版 第153页 stderr cerr stdout cout 原文",
+  "concept_id": "215_标准输出与标准错误流",
+  "_chunk_pages": [
+    153,
+    156
+  ]
+}

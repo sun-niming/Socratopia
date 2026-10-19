@@ -1,0 +1,42 @@
+{
+  "title": "Node.js的特点与用途",
+  "definition": "Node.js是一个免费、开源、跨平台的JavaScript运行时环境，基于Google的V8引擎构建。开发人员可以用它创建服务器Web应用、命令行工具和脚本。",
+  "key_points": [
+    "免费、开源、跨平台",
+    "基于Google的V8引擎构建",
+    "可用于服务器Web应用、命令行工具和脚本"
+  ],
+  "examples": [
+    "使用Node.js编写服务器Web应用",
+    "使用Node.js制作命令行工具"
+  ],
+  "misconceptions": [
+    "Node.js只是一个浏览器插件",
+    "Node.js不能用来写脚本"
+  ],
+  "qa_pairs": [
+    {
+      "q": "Node.js基于什么引擎构建？",
+      "a": "基于Google的V8引擎构建。"
+    },
+    {
+      "q": "Node.js可以用于哪些开发场景？",
+      "a": "服务器Web应用、命令行工具和脚本。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "JavaScript运行环境"
+  ],
+  "source_pages": [
+    233,
+    236
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "326_node_js的特点与用途",
+  "_chunk_pages": [
+    233,
+    236
+  ]
+}

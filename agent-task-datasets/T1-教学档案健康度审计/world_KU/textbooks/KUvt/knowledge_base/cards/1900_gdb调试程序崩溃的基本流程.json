@@ -1,0 +1,48 @@
+{
+  "title": "GDB调试程序崩溃的基本流程",
+  "definition": "在 Linux 或 UNIX 平台上，可以使用 GNU 调试器 GDB 调查程序崩溃原因。编译程序时应使用 g++ 的 -g 选项生成调试信息，然后在 GDB 中运行程序。程序崩溃并中断后，使用 bt 或 backtrace 查看调用栈，从栈顶开始寻找属于自己代码的第一个栈帧，再使用 frame 切换到该栈帧，使用 list 查看出错代码附近的源代码，最后可使用 print 查看当前作用域中的变量值。",
+  "key_points": [
+    "使用 g++ -g 编译程序，使调试器能够读取源代码和变量等调试信息。",
+    "run 命令启动程序；程序崩溃后，GDB 会中断执行并允许检查现场。",
+    "bt 或 backtrace 显示当前调用栈，编号为 #0 的帧位于栈顶，表示最后一个操作。",
+    "frame 帧编号切换到指定栈帧；list 显示该栈帧附近的源代码；print 表达式查看值。"
+  ],
+  "examples": [
+    "典型命令序列：\ng++ -g ...\ngdb buggyprogram\n(gdb) run\n(gdb) bt\n(gdb) frame 8\n(gdb) list\n(gdb) print src"
+  ],
+  "misconceptions": [
+    "误以为 backtrace 只显示当前函数，而不是完整的调用栈。",
+    "误以为应从调用栈底部开始查找自己的代码；教材示例要求从栈顶开始寻找属于自己代码的第一个栈帧。",
+    "误以为程序崩溃后只能重新运行，不能查看崩溃时的变量和源代码位置。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "GDB 中 bt 命令有什么作用？",
+      "a": "bt 是 backtrace 的缩写，用于显示程序当前的调用栈，包括各个栈帧及其调用关系。"
+    },
+    {
+      "q": "发现调用栈中的第一个自有代码栈帧后，如何查看对应的出错代码？",
+      "a": "使用 frame 加上栈帧编号切换到该栈帧，再使用 list 查看该位置附近的源代码。"
+    },
+    {
+      "q": "在 GDB 中如何检查当前作用域内的变量值？",
+      "a": "使用 print 命令，例如 print src。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "调用栈和栈帧的基本概念",
+    "C++程序的编译与运行"
+  ],
+  "source_pages": [
+    918,
+    920
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1900_gdb调试程序崩溃的基本流程",
+  "_chunk_pages": [
+    917,
+    920
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "title": "超链接伪类状态与顺序",
+  "definition": "超链接有四种不同状态，设置样式时要使用伪类选择器。教材给出的设置顺序遵循 love&hate 原则，即 a:link → a:visited → a:hover → a:active。",
+  "key_points": [
+    "超链接样式可用伪类选择器来设置。",
+    "共有四种状态：link、visited、hover、active。",
+    "设置顺序应为 a:link、a:visited、a:hover、a:active。"
+  ],
+  "examples": [
+    "a:link → a:visited → a:hover → a:active"
+  ],
+  "misconceptions": [
+    "四种伪类可以任意顺序书写。",
+    "hover 和 active 的位置不重要。",
+    "love&hate 原则与超链接样式无关。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "教材中超链接伪类的推荐顺序是什么？",
+      "a": "a:link → a:visited → a:hover → a:active。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "CSS选择器基础"
+  ],
+  "source_pages": [
+    113,
+    116
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "156_超链接伪类状态与顺序",
+  "_chunk_pages": [
+    113,
+    116
+  ]
+}

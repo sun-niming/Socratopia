@@ -1,0 +1,62 @@
+{
+  "title": "from_chars：从字符区间解析数值",
+  "definition": "from_chars 从调用者提供的字符区间 $[first,last)$ 中解析整数或浮点数，并把结果写入调用者提供的 value 变量，返回 from_chars_result。其 ptr 指向第一个未转换字符；如果全部字符成功转换，则 ptr 等于 last。",
+  "key_points": [
+    "整数重载为 from_chars_result from_chars(const char* first, const char* last, IntegerT& value, int base = 10);",
+    "浮点重载为 from_chars_result from_chars(const char* first, const char* last, FloatT& value, chars_format format = chars_format::general);",
+    "如果一个字符都没有转换，ptr 等于 first，ec 为 errc::invalid_argument。",
+    "如果解析出的值过大，无法由目标类型表示，ec 为 errc::result_out_of_range。",
+    "from_chars 不忽略前导空白。",
+    "to_chars 和 from_chars 配合使用时，可以验证完美往返：解析后的数值应与原始数值相等。"
+  ],
+  "examples": [
+    "double value1 { 0.314 };",
+    "string out(BufferSize, ' ');",
+    "auto [ptr1, error1] { to_chars(out.data(), out.data() + out.size(), value1) };",
+    "double value2;",
+    "auto [ptr2, error2] { from_chars(out.data(), out.data() + out.size(), value2) };",
+    "if (error2 == errc{} && value1 == value2) { /* Perfect roundtrip */ }"
+  ],
+  "misconceptions": [
+    "from_chars 不会创建 std::string，也不会自动跳过前导空白。",
+    "ptr 等于 last 只表示输入区间中的字符都已成功转换，不表示一定没有发生范围错误；仍应检查 ec。",
+    "解析失败时不能只看 value 的内容，必须检查返回的错误码 ec。",
+    "完美往返要求转换成功且反序列化结果等于原始值。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "from_chars 成功解析全部输入时，ptr 等于什么？",
+      "a": "ptr 等于 last。"
+    },
+    {
+      "q": "如果没有任何字符被 from_chars 转换，返回什么错误？",
+      "a": "ptr 等于 first，ec 等于 errc::invalid_argument。"
+    },
+    {
+      "q": "如果解析值超出目标类型范围，返回什么错误？",
+      "a": "ec 等于 errc::result_out_of_range。"
+    },
+    {
+      "q": "from_chars 是否忽略前导空白？",
+      "a": "不忽略前导空白。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "<charconv>",
+    "字符区间解析",
+    "错误码 errc",
+    "浮点数表示"
+  ],
+  "source_pages": [
+    112,
+    112
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 std::from_chars 是否忽略前导空白 invalid_argument result_out_of_range 标准文档",
+  "concept_id": "212_from_chars_从字符区间解析数值",
+  "_chunk_pages": [
+    109,
+    112
+  ]
+}

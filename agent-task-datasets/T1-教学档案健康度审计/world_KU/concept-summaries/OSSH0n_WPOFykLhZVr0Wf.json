@@ -1,0 +1,543 @@
+{
+  "conversationId": "OSSH0n_WPOFykLhZVr0Wf",
+  "generatedAt": 1791895203030,
+  "pagesRange": "170-203（含 4.4.4、4.5、4.6、4.9.2、第 7 章开头）",
+  "sections": [
+    {
+      "type": "tldr",
+      "content": "从预测分析的 FOLLOW 传递与表驱动执行，走到自底向上的移入-归约与 LR(0) 项集族：句柄是每轮该剪的那一段，LR(0) 自动机的状态是项集，ACTION/GOTO 表把移入、归约、接受、报错编码进格子。"
+    },
+    {
+      "type": "narrative",
+      "content": "开头收尾非递归预测分析：$\\mathrm{FOLLOW}$ 的传递、$M[E',)]$ 填 $E'\\to\\epsilon$，以及恐慌模式的同步词法单元。中段翻到自底向上：归约反向构造最右推导，句柄是每轮真正该剪的子串，$id_1*id_2$ 走了一遍移入-归约表，并碰到两类冲突。后段进入 LR：LR(0) 项、项集族、自动机与 LR 分析器骨架，最后用 SLR 算法 4.46 把表和 FOLLOW 接上，停在 GOTO 与闭包的关系。"
+    },
+    {
+      "type": "concepts",
+      "items": [
+        {
+          "name": "FOLLOW集合的传递与预测分析表填写",
+          "body": "$)$ 先落进 $\\mathrm{FOLLOW}(E)$（因 $F\\to(\\,E\\,)$），再顺 $E\\to T\\,E'$ 传给 $\\mathrm{FOLLOW}(E')$，因为 $E'$ 位于体末尾。最终 $\\mathrm{FOLLOW}(E')=\\{\\,),\\,\\$\\}$，$M[E',)]=E'\\to\\epsilon$。",
+          "sourceMessageIndexes": [
+            1,
+            2,
+            3
+          ]
+        },
+        {
+          "name": "非递归的预测分析",
+          "body": "把递归栈显式摆到台面上，靠表驱动。不变式：设 $u$ 是已匹配输入前缀、栈中符号串为 $\\alpha$，则 $S\\Rightarrow_{lm}^{*}u\\,\\alpha$。算法 4.34 每轮看栈顶 $X$ 与当前输入 $a$：终结符相等则弹栈并前移，不等报错；非终结符则查 $M[X,a]$，是 error 报错，若是 $X\\to Y_1Y_2\\cdots Y_k$ 就输出该产生式、弹出 $X$、把 $Y_k,\\dots,Y_1$ 依次压栈，使 $Y_1$ 落在栈顶。",
+          "sourceMessageIndexes": [
+            3,
+            5
+          ]
+        },
+        {
+          "name": "预测分析中的错误恢复",
+          "body": "分析器只在两处知道自己错了：栈顶终结符与输入不匹配；栈顶非终结符 $A$ 遇 $a$ 而 $M[A,a]$ 为空。恐慌模式把输入符号逐个丢掉，直到撞上同步词法单元再继续。$\\mathrm{FOLLOW}(A)$ 可整个放进 $A$ 的同步集合；但光靠 FOLLOW 不够——C 语句末尾漏分号时，下一语句开头关键字会被一并丢掉，所以要把高层构造的开始符号加进低层构造的同步集合。遇到 $M[F,+]$ 为 synch，弹出栈顶 $F$，输入指针不动。",
+          "sourceMessageIndexes": [
+            5,
+            7
+          ]
+        },
+        {
+          "name": "自底向上的语法分析",
+          "body": "从叶子往上长树，一路长到根；归约就是找到与产生式体匹配的子串，换成头部非终结符。自底向上分析就是反向构造一个最右推导。例：$id*id\\to F*id\\to T*id\\to T*F\\to T\\to E$，倒过来读为 $E\\Rightarrow T\\Rightarrow T*F\\Rightarrow T*id\\Rightarrow F*id\\Rightarrow id*id$。",
+          "sourceMessageIndexes": [
+            7
+          ]
+        },
+        {
+          "name": "最右推导",
+          "body": "每一步都换当前句型中最右边那个非终结符。若这一步写成 $S\\Rightarrow^{*}\\alpha A w\\Rightarrow\\alpha\\beta w$，被换的 $A$ 是最右非终结符，它右边的 $w$ 中不可能含非终结符，故 $w$ 全为终结符。例：$E\\Rightarrow E+T\\Rightarrow E+T*F\\Rightarrow\\cdots\\Rightarrow id+id*id$。",
+          "sourceMessageIndexes": [
+            11,
+            13
+          ]
+        },
+        {
+          "name": "句柄",
+          "body": "形式化定义：若 $S\\Rightarrow\\alpha A w\\Rightarrow\\alpha\\beta w$，则紧跟在 $\\alpha$ 后面的产生式 $A\\to\\beta$ 是串 $\\alpha\\beta w$ 的一个句柄。与某产生式体匹配的最左子串不一定是句柄：$T*id_2$ 中 $T$ 不是句柄，把它归约成 $E$ 得 $E*id_2$，推不出这个形状，说明归错了；真正的句柄是 $id_2$，套 $F\\to id$。无二义文法每个右句型恰好一个句柄，二义文法可能不止一个。$id_1*id_2$ 全程序句柄表：$id_1/F\\to id$，$F/T\\to F$，$id_2/F\\to id$，$T*F/T\\to T*F$，$T/E\\to T$。",
+          "sourceMessageIndexes": [
+            7,
+            9,
+            11
+          ]
+        },
+        {
+          "name": "句柄剪枝与自底向上分析骨架",
+          "body": "反复找句柄、归约，直到栈里只剩开始符号，这就是句柄剪枝，它把最右推导反着走了一遍。句柄右边剩下的 $w$ 全是终结符，说明右边的输入已经不需要再归约，分析器从左往右扫、一遇到句柄就敢下手。",
+          "sourceMessageIndexes": [
+            9,
+            11
+          ]
+        },
+        {
+          "name": "移入-归约分析（4.5.3）",
+          "body": "两个部件：栈（存文法符号）、输入缓冲区（存未处理符号），栈顶画在右边，开局栈 $\\$$、输入 $w\\,\\$$。循环：先往栈里塞符号，直到栈顶凑出可归约的 $\\beta$，换成产生式头，直到栈里只剩开始符号且输入空。四种动作：移入、归约、接受、报错。关键性质：句柄在被识别前永远出现在栈顶，绝不会藏在栈中间。",
+          "sourceMessageIndexes": [
+            19,
+            21
+          ]
+        },
+        {
+          "name": "冲突（4.5.4）",
+          "body": "第一类移入/归约冲突，用悬空 else 文法（4.14）：栈里是 $\\cdots\\textbf{if}\\,expr\\,\\textbf{then}\\,stmt$、输入以 else 开头时，若归约则 else 只能配更外面的 if，与语言 else 就近配对的约定相反；教材解法是遇 else 选移入。这类文法本身是二义的，不是 LR 的，修正技术留到 4.8。第二类归约/归约冲突，教材例 4.39 用过程调用与数组引用：输入 $p(i,j)$ 的词法流 $id\\,(\\,id\\,,\\,id\\,)$，栈 $\\cdots id\\,(\\,id$，栈顶 $id$ 同时是 $parameter\\to id$ 与 $expr\\to id$ 的体；区分要靠查符号表，让词法分析器先查，是过程名就返回 procid 而非 id，拍板的是栈顶往下第三个符号。",
+          "sourceMessageIndexes": [
+            21,
+            23,
+            24,
+            25,
+            26,
+            27
+          ]
+        },
+        {
+          "name": "LR 分析技术介绍与 LR(k) 含义",
+          "body": "L：对输入从左到右扫描；R：反向构造最右推导，即归约序列倒过来写；k：做决定时向前看 k 个输入符号，k=0 和 k=1 才有实践意义，真实使用的文法通常落在 LR(1)。LR 分析器表格驱动，结构与递归下降/非递归 LL 类似：驱动程序加分析表；能给某文法构造出分析表就称它是 LR 文法。优点：几乎所有程序设计语言构造只要能写出上下文无关文法就能构造 LR 分析器；最通用的无回溯移入-归约技术且效率高；从左到右扫描时尽可能早发现错误；LR 文法是 LL 文法的真超集。代价是手工构造工作量巨大，得靠生成工具（4.9 节 Yacc）。",
+          "sourceMessageIndexes": [
+            27,
+            28,
+            29
+          ]
+        },
+        {
+          "name": "LR(0) 项",
+          "body": "文法 $G$ 的 LR(0) 项是产生式加一个点，点在体里某个位置。点左边是已到手符号，点右边是还盼望的符号；点在开头表示还没看到，点在最右端表示可以归约。$A\\to XYZ$ 生出四个项：$A\\to\\cdot XYZ$、$A\\to X\\cdot YZ$、$A\\to XY\\cdot Z$、$A\\to XYZ\\cdot$；$A\\to\\epsilon$ 只有一个项 $A\\to\\cdot$。项集可用两个整数表示：产生式编号与点的位置。",
+          "sourceMessageIndexes": [
+            29,
+            31,
+            47
+          ]
+        },
+        {
+          "name": "图 4-34 分析表与 ACTION/GOTO 表",
+          "body": "栈里存状态编号 0、5、3、2、7 等，符号列只是翻出对应文法符号给人看；每步动作都是拿当前栈顶状态加下一输入符号去查表。$ACTION[i,a]$ 管终结符一侧：$s_i$ 表示移入并压状态 i，数字 j 表示按编号 j 的产生式归约，$acc$ 表示接受，空白表示报错（如 $ACTION[0,id]=s5$、$ACTION[5,*]=r6$、$ACTION[1,\\$]=acc$）。$GOTO[i,A]$ 管非终结符一侧，配合归约才用得上。状态 5 敢按 $F\\to id$ 归约，是因为状态 5 里装着项 $F\\to id\\cdot$，点已落到最右端。",
+          "sourceMessageIndexes": [
+            31,
+            53,
+            57,
+            58,
+            59
+          ]
+        },
+        {
+          "name": "栈中状态与文法符号的绑定约定",
+          "body": "栈里存状态序列 $s_0s_1\\cdots s_m$，$s_m$ 在栈顶；移入时压入的是状态 j 而非输入符号 $a$。每个状态与唯一文法符号绑定：所有进入状态 j 的箭头标签都是同一个文法符号 $X$，只有开始状态 0 例外，它是栈底不绑任何符号。符号可以从对应状态复原出来，因此不必真的存符号。是状态到符号唯一，而非符号到状态唯一（图 4-31 中状态 1 和 8 都靠 $E$ 进来，状态 2 和 9 都靠 $T$）。",
+          "sourceMessageIndexes": [
+            53,
+            55
+          ]
+        },
+        {
+          "name": "格局与四种动作的后果",
+          "body": "格局写成一对 $(s_0s_1\\cdots s_m,\\;a_ia_{i+1}\\cdots a_n\\$)$，左边栈右边剩余输入，对应最右句型 $X_1X_2\\cdots X_m a_ia_{i+1}\\cdots a_n$，$X_k$ 是状态 $s_k$ 代表的文法符号。移入 $s$：把状态 $s$ 压栈，输入往后挪一格。归约 $A\\to\\beta$（设 $\\beta$ 长 $r$）：弹出 $r$ 个状态，让 $s_{m-r}$ 露到栈顶，再压入 $s=GOTO[s_{m-r},A]$，当前输入符号不动。接受：分析完成；报错：调错误恢复例程。算法 4.44 是所有 LR 分析器的总纲，区别只在 ACTION、GOTO 表。",
+          "sourceMessageIndexes": [
+            55,
+            57,
+            59,
+            61
+          ]
+        },
+        {
+          "name": "归约不消费输入的原因",
+          "body": "归约不吃输入与终结符/非终结符无关：要收的那串东西早就已经在栈上，归约只动栈不动输入；输入符号的作用只是查表挑出该步动作，挑完原地待着。句柄在栈里，不在输入缓冲区里。反例验证：$F\\to id$ 的体是 id，$F\\to(E)$ 的体里有 $($ 和 $)$，$T\\to T*F$ 里有 $*$，全是终结符也照样归约。",
+          "sourceMessageIndexes": [
+            56,
+            57
+          ]
+        },
+        {
+          "name": "SLR 表构造法（算法 4.46）",
+          "body": "只用规范 LR(0) 项集族 $C$ 和 FOLLOW 集。移入：若 $[A\\to\\alpha\\cdot a\\beta]\\in I_i$ 且 $a$ 终结符、$GOTO(I_i,a)=I_j$，置 $ACTION[i,a]=$ 移入 j。归约：若 $[A\\to\\alpha\\cdot]\\in I_i$ 且 $A\\neq S'$，对 $\\mathrm{FOLLOW}(A)$ 中每个 $a$ 置 $ACTION[i,a]=$ 归约 $A\\to\\alpha$。接受：若 $[S'\\to S\\cdot]\\in I_i$，置 $ACTION[i,\\$]=$ 接受。其余填报错。FOLLOW 限制的意义是只有后面真可能跟这个符号才敢归约，这是 SLR 中 S 的由来。例：$I_1=\\{[E'\\to E\\cdot],[E\\to E\\cdot+T]\\}$，前者得 $ACTION[1,\\$]=acc$，后者得 $ACTION[1,+]=s6$。",
+          "sourceMessageIndexes": [
+            61,
+            63
+          ]
+        },
+        {
+          "name": "项集族的逐层推导",
+          "body": "工具是 CLOSURE 和 GOTO 两个函数反复跑。$I_0=\\text{CLOSURE}(\\{[E'\\to\\cdot E]\\})$ 铺开后得到一串项；每一层拿上一层的状态对各文法符号跑 GOTO 得到新状态；对旧状态跑 GOTO 落地全是已在 $C$ 里的老状态时循环停止。同一状态对不同符号跑 GOTO 开出不同新状态，项集族分叉成树。例：$GOTO(I_0,E)=I_1$，$GOTO(I_1,+)=I_6$，$GOTO(I_6,T)=I_9$，$GOTO(I_7,F)=I_{10}$，$GOTO(I_8,))=I_{11}$。",
+          "sourceMessageIndexes": [
+            63,
+            67
+          ]
+        },
+        {
+          "name": "LR 项集族构造流水线的三张图",
+          "body": "图 4-32（CLOSURE）是零件：先把 $I$ 中各项原样放入；对每一项，若点后面是非终结符 $B$，把 $B$ 的每条产生式 $B\\to\\cdot\\gamma$ 加进来；反复直到不再冒新项。图 4-33（items(G)）是装配线：起手 $\\text{CLOSURE}(\\{[S'\\to\\cdot S]\\})$，反复算 $GOTO(I,X)$，未进过 $C$ 就收进去，直到不再长出新项集。图 4-31 是成品：圆圈是状态（项集），箭头是 GOTO；$I_0$ 里 $E'\\to E\\cdot$ 沿 $E$ 走到 $I_1$，动作是 accept。中间涉及增广文法（新开始符号 $S'$ 和 $S'\\to S$，用于告诉分析器何时停止）和 GOTO 函数。",
+          "sourceMessageIndexes": [
+            34,
+            35,
+            42,
+            45
+          ]
+        },
+        {
+          "name": "GOTO 与闭包的关系",
+          "body": "GOTO(I,X) 把 $I$ 中点在 $X$ 之前的项 $A\\to\\alpha\\cdot X\\beta$ 的点跨过 $X$，得 $A\\to\\alpha X\\cdot\\beta$，再求这些新项集合的闭包。$GOTO(I_6,T)$ 得到 $I_9=\\{E\\to E+T\\cdot,\\;T\\to T\\cdot*F\\}$，两项点后都不是非终结符，所以闭包加不进新项。求闭包是为了补上点后面是非终结符时所需的移入箭头：拿 $I_0$ 对 $($ 走一步，$F\\to\\cdot(E)$ 跨过 $($ 变 $F\\to(\\cdot E)$，点贴着非终结符 $E$；若不求闭包，这一项孤零零，没有通往 id 或 $($ 的箭头，分析器会卡死；$I_4=\\text{CLOSURE}(\\{F\\to(\\cdot E)\\})$ 才长出对 $($、id 的箭头。闭包把「我在等某个非终结符」翻译成「我实际能移入哪些终结符」。",
+          "sourceMessageIndexes": [
+            64,
+            67
+          ]
+        },
+        {
+          "name": "LR(0) 自动机状态转移图（图 4-31）",
+          "body": "每个圆圈是一个状态，箭头上标的就是跨过的文法符号，即 GOTO 的第二个参数；棕色实线是「向前」的转移，蓝色虚线是绕回去的回边。每个状态出去的箭头标签各不相同。$I_4$ 同时有 $E$、$T$、$F$、$($、id 五条箭头；$I_3=\\{T\\to F\\cdot\\}$ 一条箭头都没有，因为点已落在最右端，GOTO 没得可移。回边例子：$I_6\\to I_5$ 标 id，$I_4\\to I_2$ 标 $T$；图中 $I_4$ 有一支标 $($ 的箭头绕一圈回到它自己。",
+          "sourceMessageIndexes": [
+            66,
+            67
+          ]
+        },
+        {
+          "name": "Yacc 的冲突解决",
+          "body": "第 202 页仍在 4.9.2。Yacc 对二义性文法（如 $E\\to E+E$、$E\\to E*E$）建 LALR 表时会遇到移入/归约冲突；它会报出冲突数量，加 -v 会生成 y.output（内含项集内核、冲突描述、可读的 LR 分析表），教材建议只要报冲突就翻 y.output。默认解决方式：归约/归约冲突选在规约里列在前面的产生式；移入/归约冲突总是移入，这正好把悬空 else 解对。可用 %left、%right、%nonassoc 给终结符赋优先级和结合性，优先级高低看声明出现先后（先出现的优先级最低，同一条声明里的符号优先级相同）；在移入 a 与按某产生式归约之间比较的是该产生式的优先级和 a 的优先级，产生式优先级一般取其最右终结符号的优先级。%prec 后面的符号可以根本不存在，像 UMINUS 只是占位符，词法分析器永不返回它。",
+          "sourceMessageIndexes": [
+            36,
+            37,
+            38,
+            39,
+            40,
+            41
+          ]
+        },
+        {
+          "name": "第 7 章运行时刻环境：栈中非局部数据的访问",
+          "body": "第 7 章对应 284 页，问题从「句子合不合文法」转为「变量和数据住在内存哪儿、怎么被找出来」。7.3.1 没有嵌套过程时（C 系列）：全局变量分配在静态区、编译时刻地址固定、直接用静态地址访问；其他变量是栈顶活动的局部变量、顺 top_sp 找。全局变量静态分配的好处是过程可当参数传递、也可当结果返回，因为非局部变量都指向静态存储，与激活无关。7.3.2 语言允许嵌套声明过程时变复杂：哪怕编译时明知 $p$ 嵌在 $q$ 里，运行时也确定不了活动记录谁高谁低，因为可能递归、栈里同时好几份活动记录（练习 7.2.6 以 C 函数 $f$ 为例）。",
+          "sourceMessageIndexes": [
+            32,
+            33
+          ]
+        }
+      ]
+    },
+    {
+      "type": "key-insight",
+      "content": "闭包把「我在等某个非终结符」翻译成「我实际能移入哪些终结符」。",
+      "sourceMessageIndexes": [
+        67
+      ]
+    },
+    {
+      "type": "key-terms",
+      "items": [
+        {
+          "term": "最右推导",
+          "definition": "每一步都换当前句型中最右边那个非终结符号的推导。"
+        },
+        {
+          "term": "归约",
+          "definition": "找到与某个产生式体匹配的子串，把它换成产生式头部的非终结符。"
+        },
+        {
+          "term": "句柄",
+          "definition": "若 $S\\Rightarrow\\alpha A w\\Rightarrow\\alpha\\beta w$，则紧跟在 $\\alpha$ 后面的产生式 $A\\to\\beta$ 是 $\\alpha\\beta w$ 的一个句柄，即这一轮真正该归约的那一段。"
+        },
+        {
+          "term": "句柄剪枝",
+          "definition": "反复找句柄、归约，直到栈里只剩开始符号，把最右推导反着走一遍。"
+        },
+        {
+          "term": "LR(0) 项",
+          "definition": "文法的一条产生式加上一个点，点插在产生式体中的某个位置；点左边是已到手符号，右边是还盼望的符号。"
+        },
+        {
+          "term": "闭包 CLOSURE(I)",
+          "definition": "先把 $I$ 中各项原样放入；若 $A\\to\\alpha\\cdot B\\beta\\in I$，对 $B$ 的每条产生式 $B\\to\\gamma$ 把 $B\\to\\cdot\\gamma$ 加入；反复直到不再产生新项。"
+        },
+        {
+          "term": "GOTO(I,X)",
+          "definition": "找出 $I$ 中所有点在 $X$ 之前的项 $A\\to\\alpha\\cdot X\\beta$，把点跨过 $X$ 得 $A\\to\\alpha X\\cdot\\beta$，凑成集合后求闭包。"
+        },
+        {
+          "term": "增广文法",
+          "definition": "给文法添新开始符号 $S'$ 与产生式 $S'\\to S$，用于告诉分析器什么时候停止。"
+        },
+        {
+          "term": "LR(k)",
+          "definition": "L 从左到右扫描输入，R 反向构造最右推导，k 是做出分析决定时向前看的输入符号数，通常取 1。"
+        },
+        {
+          "term": "格局",
+          "definition": "$(s_0s_1\\cdots s_m,\\;a_ia_{i+1}\\cdots a_n\\$)$，左边是栈、右边是剩余输入，对应最右句型 $X_1X_2\\cdots X_m a_i\\cdots a_n$。"
+        }
+      ]
+    },
+    {
+      "type": "notes",
+      "title": "学习者误区、困惑与理解转变逐条记录",
+      "content": "- **[confusion]** 「最右推导，但是为什么我还真看不出来」「没太听懂呢，老师。最右推导是什么？」——知道方向是最右推导，但说不出为什么句柄右边 $w$ 只可能是终结符。（[10, 12]）\n- **[confusion]** 学习者对 $GOTO(I_0,()$ 只写出 $F\\to\\cdot(E)$，没有把点跨过 $($，也没有求闭包。（[50]）\n- **[misconception]** 「句柄是 $T*F$，用 $E\\to T*F$ 归约。」——该处正确的句柄应配合 $T\\to T*F$ 或相应产生式判断，归错句型就接不回原推导链。（[18]）\n- **[misconception]** 「因为 $E$ 是开始符号，在还有句柄未归约的情况下，不能被归约出来，否则会让句柄被藏在栈中间。」——学到了正确性质，但把它当成了「不能归约 $T\\to E$」的理由；真正理由是栈顶状态 2 上有标 $*$ 的箭头，得先移入。（[20]）\n- **[misconception]** 「归约不吃输入是因为都不是终结符号。」——归约只动栈不动输入与终结符/非终结符无关，要收的串早在栈上，输入符号只用来查表挑动作。（[56]）\n- **[confusion]** 「不清楚状态复原符号的约定是怎么做到的」——栈里只存状态，符号从对应状态复原。（[54]）"
+    },
+    {
+      "type": "open-question",
+      "content": "一个状态为什么能沿同一个符号回到自己？",
+      "sourceMessageIndexes": [
+        67,
+        68
+      ]
+    }
+  ],
+  "generationMeta": {
+    "pipelineVersion": "post-class-v3",
+    "mode": "chunked",
+    "jobId": "pn_mv6o2yxmf4fe34dd59d9",
+    "traceId": "tr_mv6o2yxm8110dc70daca",
+    "sourceHash": "sha256:02ce409eeacb8ccd6e79905dd4e6c41ec6c713a024b0e7907c04b0e151befeec",
+    "sourceMessageCount": 69,
+    "chunkCount": 7,
+    "generatedAt": 1791895203030,
+    "decision": "repair",
+    "quality": {
+      "score": 0.6547,
+      "metrics": {
+        "topicCoverage": 0.7741935483870968,
+        "learnerEvidenceCoverage": 0.5384615384615384,
+        "explanationCoverage": 0.9090909090909091,
+        "sourceIntegrity": 1,
+        "reviewQuestionDiversity": 0,
+        "structureValidity": 0.75,
+        "lengthFitness": 0.0685,
+        "duplicationRatio": 0.09090909090909091,
+        "unsupportedTopicRatio": 0,
+        "lengthChars": 7726,
+        "conceptCount": 22,
+        "evidenceTopicCount": 31,
+        "chunkCompleteness": 1
+      }
+    },
+    "warnings": [],
+    "evidenceIndex": [
+      {
+        "name": "FOLLOW集合的传递与预测分析表填写",
+        "sourceMessageIndexes": [
+          1,
+          2,
+          3
+        ]
+      },
+      {
+        "name": "非递归的预测分析",
+        "sourceMessageIndexes": [
+          3,
+          5
+        ]
+      },
+      {
+        "name": "预测分析中的错误恢复",
+        "sourceMessageIndexes": [
+          5,
+          7
+        ]
+      },
+      {
+        "name": "自底向上的语法分析",
+        "sourceMessageIndexes": [
+          7
+        ]
+      },
+      {
+        "name": "句柄 (handle)",
+        "sourceMessageIndexes": [
+          7,
+          9,
+          11
+        ]
+      },
+      {
+        "name": "句柄剪枝与自底向上分析骨架",
+        "sourceMessageIndexes": [
+          9
+        ]
+      },
+      {
+        "name": "最右推导",
+        "sourceMessageIndexes": [
+          11,
+          13
+        ]
+      },
+      {
+        "name": "归约与句柄",
+        "sourceMessageIndexes": [
+          11,
+          15,
+          17,
+          18,
+          19
+        ]
+      },
+      {
+        "name": "移入-归约分析（4.5.3）",
+        "sourceMessageIndexes": [
+          19,
+          21
+        ]
+      },
+      {
+        "name": "冲突（4.5.4）",
+        "sourceMessageIndexes": [
+          21,
+          23
+        ]
+      },
+      {
+        "name": "else 悬空二义性",
+        "sourceMessageIndexes": [
+          22,
+          23
+        ]
+      },
+      {
+        "name": "归约/归约冲突与例 4.39",
+        "sourceMessageIndexes": [
+          23,
+          24,
+          25,
+          26,
+          27
+        ]
+      },
+      {
+        "name": "LR 分析技术介绍与 LR(k) 含义",
+        "sourceMessageIndexes": [
+          27,
+          28,
+          29
+        ]
+      },
+      {
+        "name": "LR(0) 项",
+        "sourceMessageIndexes": [
+          29,
+          31
+        ]
+      },
+      {
+        "name": "图 4-34 分析表",
+        "sourceMessageIndexes": [
+          31
+        ]
+      },
+      {
+        "name": "第 7 章运行时刻环境：栈中非局部数据的访问",
+        "sourceMessageIndexes": [
+          33
+        ]
+      },
+      {
+        "name": "运行时刻环境与栈中非局部数据访问",
+        "sourceMessageIndexes": [
+          32,
+          33
+        ]
+      },
+      {
+        "name": "LR(0) 自动机的用法",
+        "sourceMessageIndexes": [
+          34,
+          35
+        ]
+      },
+      {
+        "name": "Yacc 的冲突解决",
+        "sourceMessageIndexes": [
+          36,
+          37,
+          38,
+          39,
+          40,
+          41
+        ]
+      },
+      {
+        "name": "LR 项集族构造流水线的三张图",
+        "sourceMessageIndexes": [
+          42,
+          45
+        ]
+      },
+      {
+        "name": "LR(0) 自动机与项集构造",
+        "sourceMessageIndexes": [
+          45,
+          47,
+          49,
+          51,
+          53
+        ]
+      },
+      {
+        "name": "归约与移入的判定依据",
+        "sourceMessageIndexes": [
+          52,
+          53
+        ]
+      },
+      {
+        "name": "LR 分析器的组成",
+        "sourceMessageIndexes": [
+          53
+        ]
+      },
+      {
+        "name": "ACTION 与 GOTO 表",
+        "sourceMessageIndexes": [
+          53,
+          57,
+          58,
+          59
+        ]
+      },
+      {
+        "name": "栈中状态与文法符号的绑定约定",
+        "sourceMessageIndexes": [
+          53,
+          55
+        ]
+      },
+      {
+        "name": "格局与四种动作的后果",
+        "sourceMessageIndexes": [
+          55,
+          57,
+          59,
+          61
+        ]
+      },
+      {
+        "name": "归约不消费输入的原因",
+        "sourceMessageIndexes": [
+          56,
+          57
+        ]
+      },
+      {
+        "name": "SLR 表构造法",
+        "sourceMessageIndexes": [
+          61,
+          63
+        ]
+      },
+      {
+        "name": "项集族的逐层推导",
+        "sourceMessageIndexes": [
+          63
+        ]
+      },
+      {
+        "name": "GOTO 与闭包的关系",
+        "sourceMessageIndexes": [
+          64,
+          67
+        ]
+      },
+      {
+        "name": "LR(0) 自动机状态转移图（图 4-31）",
+        "sourceMessageIndexes": [
+          66,
+          67
+        ]
+      }
+    ],
+    "degradedReason": null
+  }
+}

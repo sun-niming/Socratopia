@@ -1,0 +1,35 @@
+{
+  "title": "JavaScript数据类型分类",
+  "definition": "JavaScript有7种基本（原始）数据类型和1种复合（引用）数据类型。7种基本类型是String、Number、Boolean、Null、Undefined、Symbol（ES6）、BigInt（ES11）；1种复合类型是Object。",
+  "key_points": [
+    "基本类型共有7种，复合类型只有1种",
+    "基本类型包括String、Number、Boolean、Null、Undefined、Symbol、BigInt",
+    "复合（引用）数据类型是Object"
+  ],
+  "examples": [
+    "String、Number、Boolean、Null、Undefined、Symbol、BigInt、Object"
+  ],
+  "misconceptions": [
+    "以为JavaScript只有几种基础类型，忽略了Symbol和BigInt",
+    "以为Object也是基本类型"
+  ],
+  "qa_pairs": [
+    {
+      "q": "JavaScript中有多少种基本类型和多少种复合类型？",
+      "a": "7种基本类型和1种复合类型。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [],
+  "source_pages": [
+    241,
+    244
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "345_javascript数据类型分类",
+  "_chunk_pages": [
+    241,
+    244
+  ]
+}

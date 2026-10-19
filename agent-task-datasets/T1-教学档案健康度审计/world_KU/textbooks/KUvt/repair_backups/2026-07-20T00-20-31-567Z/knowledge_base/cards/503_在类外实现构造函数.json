@@ -1,0 +1,44 @@
+{
+  "title": "在类外实现构造函数",
+  "definition": "构造函数与普通成员函数一样，需要提供实现。在类定义之外实现构造函数时，必须使用“类名::构造函数名”的作用域限定形式。由于构造函数名与类名相同，SpreadsheetCell 的构造函数写作 SpreadsheetCell::SpreadsheetCell。构造函数可以调用该类的其他成员函数来完成初始化。",
+  "key_points": [
+    "构造函数是类的成员函数，其名称必须与类名相同。",
+    "类外定义构造函数时，需要使用作用域解析运算符 ::。",
+    "构造函数没有返回类型，连 void 也不能写。",
+    "构造函数体内可以调用其他成员函数，例如通过 setValue(initialValue) 设置初始值。"
+  ],
+  "examples": [
+    "SpreadsheetCell::SpreadsheetCell(double initialValue)\n{\n    setValue(initialValue);\n}"
+  ],
+  "misconceptions": [
+    "误以为 SpreadsheetCell::SpreadsheetCell 中重复的名称是多余的；前一个 SpreadsheetCell 是类作用域，后一个是构造函数名。",
+    "误以为构造函数不需要像普通成员函数一样提供实现。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么类外定义 SpreadsheetCell 的构造函数时要写成 SpreadsheetCell::SpreadsheetCell？",
+      "a": "因为第一个 SpreadsheetCell 指定类作用域，第二个 SpreadsheetCell 是与类同名的构造函数名称。"
+    },
+    {
+      "q": "构造函数能否调用同一个类的普通成员函数？",
+      "a": "可以。例如构造函数可以调用 setValue(initialValue) 来设置对象的初始值。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "类与对象",
+    "成员函数",
+    "作用域解析运算符"
+  ],
+  "source_pages": [
+    237,
+    237
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "503_在类外实现构造函数",
+  "_chunk_pages": [
+    237,
+    240
+  ]
+}

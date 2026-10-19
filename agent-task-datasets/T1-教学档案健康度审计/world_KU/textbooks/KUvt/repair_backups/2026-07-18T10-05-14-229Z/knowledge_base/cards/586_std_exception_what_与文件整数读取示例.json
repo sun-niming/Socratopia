@@ -1,0 +1,54 @@
+{
+  "title": "std::exception::what()与文件整数读取示例",
+  "definition": "标准异常通常提供 what() 成员函数，用于返回描述异常的字符串；教材示例使用 const char* 形式的返回值。readIntegerFile(string_view filename) 打开文件并逐个读取整数：打开失败时抛出 std::invalid_argument，读取过程中出现非文件结束错误时抛出 std::runtime_error，成功时返回整数向量。",
+  "key_points": [
+    "函数首先用 ifstream 打开 filename；如果 inputStream.fail() 为真，则构造错误信息并抛出 invalid_argument。",
+    "读取循环使用 while (inputStream >> temp)，每成功读取一个整数，就调用 integers.push_back(temp)。",
+    "循环结束后，如果 !inputStream.eof()，说明不是正常到达文件末尾，而是读取过程中出现错误，此时抛出 runtime_error。",
+    "成功读取后返回 vector<int> integers。"
+  ],
+  "examples": [
+    "代码逻辑可表示为：\nvector<int> readIntegerFile(string_view filename) {\n    ifstream inputStream{filename.data()};\n    if (inputStream.fail()) {\n        throw invalid_argument{\"Unable to open file ...\"};\n    }\n    vector<int> integers;\n    int temp;\n    while (inputStream >> temp) {\n        integers.push_back(temp);\n    }\n    if (!inputStream.eof()) {\n        throw runtime_error{\"Unable to read file ...\"};\n    }\n    return integers;\n}",
+    "异常类型与错误阶段的对应关系：\n$$\\text{打开失败}\\rightarrow\\text{invalid\\_argument},\\qquad\n\\text{读取异常且非 EOF}\\rightarrow\\text{runtime\\_error}$$",
+    "调用方可以写成：\nint main() {\n    std::vector<int> myInts{readIntegerFile(filename)};\n}"
+  ],
+  "misconceptions": [
+    "while (inputStream >> temp) 循环结束不一定表示正常到达文件末尾，还可能是格式错误或其他输入错误，因此需要检查 eof()。",
+    "inputStream.fail() 检查的是文件流状态，不是检查文件内容是否为空。",
+    "what() 用于取得异常描述信息，不会重新抛出异常。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "readIntegerFile 在文件无法打开时抛出什么异常？",
+      "a": "抛出 std::invalid_argument。"
+    },
+    {
+      "q": "为什么读取循环结束后还要检查 !inputStream.eof()？",
+      "a": "因为循环可能由于读取错误而结束；如果没有到达文件末尾，就应抛出 std::runtime_error。"
+    },
+    {
+      "q": "成功读取文件后 readIntegerFile 返回什么？",
+      "a": "返回包含所读整数的 std::vector<int>。"
+    },
+    {
+      "q": "标准异常的 what() 通常用于做什么？",
+      "a": "返回描述异常原因的字符串信息，教材中标示为 const char*。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "标准异常类型层次",
+    "C++输入文件流"
+  ],
+  "source_pages": [
+    445,
+    448
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 std::exception what() return type const char* readIntegerFile invalid_argument runtime_error example",
+  "concept_id": "586_std_exception_what_与文件整数读取示例",
+  "_chunk_pages": [
+    445,
+    448
+  ]
+}

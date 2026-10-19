@@ -1,0 +1,46 @@
+{
+  "title": "重载式单个多态不能同时处理两个运行时类型",
+  "definition": "一种看似可行的方案是在基类中为每种具体动物类型重载 `eats`，例如分别提供 `eats(const Bear&)` 和 `eats(const Fish&)`。这种方案只能在参数对象的编译期类型已知时选择正确重载；当参数是 `Animal&` 时，编译器无法根据其运行时类型选择具体重载，因此不能实现真正的双对象运行时多态。",
+  "key_points": [
+    "基类可以声明多个纯虚重载，例如：`virtual bool eats(const Bear&) const = 0;` 和 `virtual bool eats(const Fish&) const = 0;`。",
+    "调用 `myBear.eats(myFish)` 时，捕食者和被捕食者的编译期类型都已知，因此可以选择 `eats(const Fish&)`。",
+    "通过 `Animal&` 访问捕食者仍可触发捕食者一侧的虚函数多态。",
+    "如果把被捕食者也作为 `Animal&` 传入，重载决议发生在编译期，编译器无法根据运行时类型选择 `eats(const Bear&)`、`eats(const Fish&)` 等重载。"
+  ],
+  "examples": [
+    "可以编译的调用：`Bear myBear; Fish myFish; std::cout << myBear.eats(myFish) << std::endl;`。",
+    "不能依靠运行时类型选择重载的调用：`Animal& animalRef = myFish; myBear.eats(animalRef);`。因为 `Bear` 没有接收 `Animal&` 的对应 `eats` 重载，且编译器不会用 `animalRef` 的运行时类型进行重载决议。"
+  ],
+  "misconceptions": [
+    "误以为函数重载本身是运行时多态；重载选择主要依据参数的编译期类型。",
+    "误以为只要在基类中把每个具体类型都声明成虚函数重载，就能实现两个对象的运行时类型分派。",
+    "误以为一个 `Animal&` 参数会在运行时自动转换为实际派生类引用并选择相应重载。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么 `myBear.eats(myFish)` 可以调用，而 `myBear.eats(animalRef)` 不能实现同样的效果？",
+      "a": "前者的参数编译期类型是 `Fish`，编译器能选择对应重载；后者的参数编译期类型是 `Animal&`，重载决议无法依据其运行时类型选择具体版本。"
+    },
+    {
+      "q": "重载式单个多态为什么不是真正的双分派？",
+      "a": "因为它只能通过虚函数处理接收对象一侧的多态，而参数重载的选择依赖编译期类型，不能根据参数对象的运行时类型分派。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "函数重载",
+    "虚函数与运行时多态",
+    "编译期类型与运行时类型"
+  ],
+  "source_pages": [
+    934,
+    935
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1933_重载式单个多态不能同时处理两个运行时类型",
+  "_chunk_pages": [
+    933,
+    936
+  ]
+}

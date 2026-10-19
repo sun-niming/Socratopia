@@ -1,0 +1,36 @@
+{
+  "title": "Flex布局概念",
+  "definition": "Flex（弹性盒）布局是W3C在2009年提出的一种现代CSS布局模型。它通过对容器使用 flex 布局，实现灵活的空间分配和对齐控制，尤其便于响应式布局，能够解决传统布局中元素对齐、分布和动态尺寸调整的问题。",
+  "key_points": [
+    "Flex布局是一维布局模型，主要处理单行或单列布局",
+    "容器可自动调整子元素的尺寸和顺序",
+    "可以轻松实现多种对齐方式和空间分配"
+  ],
+  "examples": [
+    ".container { display: flex; }"
+  ],
+  "misconceptions": [
+    "Flex布局不是传统的二维网格布局；教材强调它是一维布局模型"
+  ],
+  "qa_pairs": [
+    {
+      "q": "Flex布局的核心优势是什么？",
+      "a": "它能方便地进行空间分配和对齐控制，特别适合响应式布局。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "CSS语法"
+  ],
+  "source_pages": [
+    149,
+    152
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "240_flex布局概念",
+  "_chunk_pages": [
+    149,
+    152
+  ]
+}

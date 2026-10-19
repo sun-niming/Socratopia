@@ -1,0 +1,43 @@
+{
+  "title": "合并姓名存在性检查与计数递增",
+  "definition": "第二次设计尝试中，将原先分别执行“检查姓名是否存在”和“递增姓名计数”的两个操作合并为 NameDB::nameExistsAndIncrement。该方法查找姓名：如果找到，就将对应计数加一并返回 true；如果没有找到，则返回 false，由构造函数随后添加一个初始计数为 1 的新姓名。",
+  "key_points": [
+    "找到姓名时执行 ++res->second，并返回 true。",
+    "未找到姓名时返回 false。",
+    "构造函数逐个读取文件中的姓名，并根据返回值决定是递增已有计数还是添加新姓名。",
+    "这种设计减少了重复的查找逻辑。"
+  ],
+  "examples": [
+    "处理姓名的逻辑可以概括为：\n```text\nwhile (inputFile >> name) {\n    if (!nameExistsAndIncrement(name)) {\n        addNewName(name);\n    }\n}\n```"
+  ],
+  "misconceptions": [
+    "认为 nameExistsAndIncrement 在姓名不存在时也会自动插入姓名；原文中的实现只返回 false，插入由 addNewName 完成。",
+    "认为该方法返回的 true/false 表示计数是否递增成功；更准确地说，true 表示姓名原本存在并已递增，false 表示姓名不存在。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "nameExistsAndIncrement 找到姓名时做什么？",
+      "a": "将该姓名对应的计数加一，并返回 true。"
+    },
+    {
+      "q": "nameExistsAndIncrement 未找到姓名时做什么？",
+      "a": "返回 false；构造函数随后调用 addNewName，将该姓名以计数 1 加入数据库。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "std::map 的 find 操作",
+    "函数返回布尔值的控制流"
+  ],
+  "source_pages": [
+    869,
+    870
+  ],
+  "needs_verification": true,
+  "verify_query": "\"NameDB::nameExistsAndIncrement\" \"addNewName\" C++20",
+  "concept_id": "1800_合并姓名存在性检查与计数递增",
+  "_chunk_pages": [
+    869,
+    872
+  ]
+}

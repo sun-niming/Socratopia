@@ -1,0 +1,44 @@
+{
+  "title": "std::bind 绑定固定参数",
+  "definition": "std::bind 可以把可调用对象的部分参数绑定为固定值，并返回一个新的可调用对象。未绑定的参数用 std::placeholders::_1、_2、_3 等占位符表示；由于 C++ 标准没有指定 bind 返回对象的具体类型，通常使用 auto 保存返回值。",
+  "key_points": [
+    "bind 的参数顺序为：被绑定的可调用对象，随后是传给原可调用对象的参数或占位符。",
+    "_1 表示新可调用对象被调用时传入的第一个参数。",
+    "固定值参数在生成的新可调用对象每次调用时都使用该值。",
+    "占位符定义在 std::placeholders 命名空间中。"
+  ],
+  "examples": [
+    "给定 void func(int num, string_view str);，可以写：string myString{\"abc\"}; auto f1 = bind(func, placeholders::_1, myString); f1(16);",
+    "调用 f1(16) 等价于调用 func(16, myString)，输出示例为 func(16, abc)。"
+  ],
+  "misconceptions": [
+    "bind 返回的对象不是简单的函数指针，因此不能假定其具体类型。",
+    "_1 不是原函数的第一个固定参数，而是新绑定对象调用时传入的第一个参数。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "在 auto f1 = bind(func, placeholders::_1, myString) 中，调用 f1(16) 会调用什么？",
+      "a": "会调用 func(16, myString)。"
+    },
+    {
+      "q": "为什么通常用 auto 保存 std::bind 的返回值？",
+      "a": "因为 C++ 标准没有指定 std::bind 返回类型的具体名称。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "可调用对象",
+    "占位符"
+  ],
+  "source_pages": [
+    615,
+    615
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1265_std_bind_绑定固定参数",
+  "_chunk_pages": [
+    613,
+    616
+  ]
+}

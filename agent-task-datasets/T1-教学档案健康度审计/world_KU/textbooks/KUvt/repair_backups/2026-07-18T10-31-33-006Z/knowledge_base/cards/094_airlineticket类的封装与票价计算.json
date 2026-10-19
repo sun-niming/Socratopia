@@ -1,0 +1,49 @@
+{
+  "title": "AirlineTicket类的封装与票价计算",
+  "definition": "`AirlineTicket`类把乘客姓名、飞行里程数和精英超级奖励状态作为私有数据成员，并通过公有的获取器、设置器和票价计算成员函数访问或操作这些数据。票价计算规则是：如果乘客具有精英超级奖励状态，票价为$0$；否则票价等于飞行里程数乘以$0.1$。",
+  "key_points": [
+    "私有成员包括乘客姓名、里程数和精英超级奖励状态。",
+    "获取器用于读取成员值，例如`getPassengerName()`、`getNumberOfMiles()`和`hasEliteSuperRewardsStatus()`。",
+    "设置器用于修改成员值，例如`setPassengerName(...)`、`setNumberOfMiles(...)`和`setHasEliteSuperRewardsStatus(...)`。",
+    "票价函数可表示为：$$\\operatorname{price}=\\begin{cases}0,&\\text{如果具有精英超级奖励状态}\\\\0.1\\times\\operatorname{numberOfMiles},&\\text{否则}\\end{cases}$$"
+  ],
+  "examples": [
+    "`myTicket.setPassengerName(\"Sherman T. Socketwrench\"); myTicket.setNumberOfMiles(700); double cost { myTicket.calculatePriceInDollars() };`。在未设置精英状态为`true`时，按照原文公式，票价为$700\\times0.1=70$。",
+    "典型票价函数：`if (hasEliteSuperRewardsStatus()) { return 0; } return getNumberOfMiles() * 0.1;`。"
+  ],
+  "misconceptions": [
+    "私有数据成员不能被类外代码直接访问，应通过公有成员函数访问或修改。",
+    "设置了乘客姓名不会自动改变票价；原文中的票价只取决于精英状态和里程数。",
+    "精英状态为`true`时不是按里程数乘以$0.1$收费，而是直接返回$0$。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "AirlineTicket对象的精英超级奖励状态为`true`时，票价是多少？",
+      "a": "票价为$0$。"
+    },
+    {
+      "q": "精英状态为`false`且里程数为$700$时，按照原文公式票价是多少？",
+      "a": "票价为$700\\times0.1=70$。"
+    },
+    {
+      "q": "为什么示例代码使用`setNumberOfMiles(700)`而不是直接修改里程成员？",
+      "a": "因为里程成员是私有的，类外代码应通过公有设置器修改它。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++类和数据成员",
+    "C++访问控制"
+  ],
+  "source_pages": [
+    65,
+    66
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "094_airlineticket类的封装与票价计算",
+  "_chunk_pages": [
+    65,
+    68
+  ]
+}

@@ -1,0 +1,49 @@
+{
+  "title": "在容器中实现引用语义的方法",
+  "definition": "如果希望容器表现出引用语义，可以在容器中存储元素的指针，而不是元素本身；复制指针后，多个指针仍然指向同一个元素。也可以存储 std::reference_wrapper，使引用具有可复制性。std::ref() 和 std::cref() 可用于创建 reference wrapper，它们以及 reference_wrapper 类模板定义在 <functional> 头文件中。",
+  "key_points": [
+    "存储指针时，容器复制的是指针值，复制后的指针仍指向同一元素。",
+    "std::reference_wrapper 可把引用包装成可以复制的对象。",
+    "std::ref() 用于创建可修改引用包装，std::cref() 用于创建常量引用包装。",
+    "相关类型和函数定义在 <functional> 头文件中。"
+  ],
+  "examples": [
+    "指针语义可概念化表示为：$$p_1\\text{复制为}p_2\\Rightarrow p_1\\text{与}p_2\\text{指向同一元素}$$",
+    "使用形式：文本表示 `#include <functional>`、`std::ref(object)`、`std::cref(object)`。"
+  ],
+  "misconceptions": [
+    "复制容器中的指针不会复制指针所指向的对象。",
+    "reference_wrapper 不是对象本身的深拷贝，而是让引用可以作为可复制对象存储。",
+    "使用指针或引用包装器时，元素的生命周期和所有权问题仍需正确处理。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何让容器中的元素具有引用语义？",
+      "a": "可以存储指针而不是元素本身，或者存储 std::reference_wrapper。"
+    },
+    {
+      "q": "复制容器中的指针会发生什么？",
+      "a": "复制后的指针仍然指向同一个元素。"
+    },
+    {
+      "q": "std::ref() 和 std::cref() 定义在哪个头文件中？",
+      "a": "定义在 <functional> 头文件中。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "指针与引用",
+    "C++模板"
+  ],
+  "source_pages": [
+    547,
+    547
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1121_在容器中实现引用语义的方法",
+  "_chunk_pages": [
+    545,
+    548
+  ]
+}

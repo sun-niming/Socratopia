@@ -1,0 +1,44 @@
+{
+  "title": "预定义随机数引擎类型",
+  "definition": "C++ 标准库在 <random> 中提供了一些预定义随机数引擎类型，用来封装复杂的模板参数。教材建议一般直接使用这些预定义类型，而不要自行指定伪随机引擎的数学参数。典型例子是 mt19937，它是梅森旋转引擎的预定义类型别名。default_random_engine 的具体类型由实现决定，因此可能因编译器或标准库实现而不同。",
+  "key_points": [
+    "预定义引擎可以避免使用者直接填写复杂、难以理解的数学参数。",
+    "`mt19937` 是常用的梅森旋转伪随机引擎类型。",
+    "`default_random_engine` 的具体实现由标准库实现定义，不同编译器或平台可能不同。",
+    "教材列举的预定义生成器还包括 minstd_rand、minstd_rand0、mt19937_64、ranlux24_base、ranlux48_base、ranlux24、ranlux48、knuth_b 等。"
+  ],
+  "examples": [
+    "推荐的引擎声明：`std::mt19937 engine;`。",
+    "不应依赖 `default_random_engine` 在不同平台上具有完全相同的具体算法，因为其类型由实现定义。"
+  ],
+  "misconceptions": [
+    "预定义引擎不是完全随机的硬件设备，它们大多仍是伪随机数引擎。",
+    "使用预定义类型并不意味着不需要种子；软件伪随机引擎仍然需要初始化种子。",
+    "default_random_engine 不是保证跨编译器、跨平台一致的固定引擎。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么通常建议使用预定义随机数引擎？",
+      "a": "因为手动指定引擎模板参数可能涉及复杂的数学参数，预定义类型已经封装了这些参数，使用更简单且不易出错。"
+    },
+    {
+      "q": "default_random_engine 是否在所有实现中都代表同一种具体引擎？",
+      "a": "不一定。它的具体类型由标准库实现定义，因此可能随编译器或平台变化。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++ 随机数引擎的主要类型"
+  ],
+  "source_pages": [
+    698,
+    699
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 <random> 预定义随机数引擎类型 mt19937 default_random_engine minstd_rand ranlux24_base knuth_b 标准定义",
+  "concept_id": "1456_预定义随机数引擎类型",
+  "_chunk_pages": [
+    697,
+    700
+  ]
+}

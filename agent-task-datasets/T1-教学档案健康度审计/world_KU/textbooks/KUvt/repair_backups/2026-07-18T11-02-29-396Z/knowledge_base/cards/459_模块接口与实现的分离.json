@@ -1,0 +1,50 @@
+{
+  "title": "模块接口与实现的分离",
+  "definition": "教材通过 `math.cppm`、`math-helpers.cpp` 和 `math.cpp` 等文件示例说明：模块可以把对外可见的函数声明放在模块接口文件中，把辅助函数和具体函数定义放在实现文件中。接口文件声明模块用户需要调用的函数，而实现文件提供函数体和内部辅助逻辑。",
+  "key_points": [
+    "模块接口文件可以声明对外函数，例如：`double superLog(double z, double b);` 和 `double lerchZeta(double lambda, double alpha, double s);`。",
+    "实现文件可以定义不需要作为公共接口暴露的辅助函数，例如：`double someHelperFunction(double a) { return /* ... */; }`。",
+    "实现文件还可以定义接口中已声明的函数，例如：`double Math::lerchZeta(double lambda, double alpha, double s) { return /* ... */; }`。",
+    "将接口声明与实现定义分离，有助于隐藏实现细节；但具体文件扩展名和构建规则取决于编译器及项目配置。"
+  ],
+  "examples": [
+    "接口声明示例：`double superLog(double z, double b);`。",
+    "接口声明示例：`double lerchZeta(double lambda, double alpha, double s);`。",
+    "内部辅助函数示例：`double someHelperFunction(double a) { return /* ... */; }`。"
+  ],
+  "misconceptions": [
+    "接口文件中的函数声明不是函数实现，只有声明而没有可链接的定义时，调用可能导致链接错误。",
+    "辅助函数是否对外可见，不只由它所在的文件名决定，还取决于模块导出和声明方式。",
+    "`.cppm` 是常见的模块接口文件扩展名，但扩展名本身不是 C++ 标准规定的唯一形式。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "模块接口文件通常放置什么内容？",
+      "a": "通常放置模块声明以及需要对模块使用方公开的类型和函数声明，例如 `double superLog(double z, double b);`。"
+    },
+    {
+      "q": "`someHelperFunction` 在示例中起什么作用？",
+      "a": "它是实现文件中的辅助函数，用于支持模块内部实现，示例没有给出其具体函数体。"
+    },
+    {
+      "q": "为什么要把函数声明和函数定义分开？",
+      "a": "这样可以让使用方只依赖稳定的公共接口，同时把具体实现和辅助逻辑隐藏在实现文件中。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "函数声明与定义",
+    "C++ 编译单元与链接"
+  ],
+  "source_pages": [
+    357,
+    360
+  ],
+  "needs_verification": true,
+  "verify_query": "《C++20高级编程》第5版第360页 math.cppm math-helpers.cpp math.cpp 模块接口实现分离",
+  "concept_id": "459_模块接口与实现的分离",
+  "_chunk_pages": [
+    357,
+    360
+  ]
+}

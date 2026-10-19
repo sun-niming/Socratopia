@@ -1,0 +1,46 @@
+{
+  "title": "insert_or_assign更新或插入map元素",
+  "definition": "insert_or_assign用于根据键插入或更新map元素。它与insert的返回类型类似，也返回包含迭代器和布尔值的pair；区别在于，如果指定键已经存在，insert_or_assign会用新值改写旧值，而insert不会改写旧值。insert_or_assign把键和值作为两个独立参数传入。",
+  "key_points": [
+    "键不存在时，insert_or_assign插入新的键/值对。",
+    "键已存在时，insert_or_assign用新值覆盖原值。",
+    "insert_or_assign的键和值是两个独立的函数参数。",
+    "其返回结果可用类似insert的方式检查。"
+  ],
+  "examples": [
+    "map<int, Data> dataMap;",
+    "auto ret{dataMap.insert_or_assign(1, Data{4})};",
+    "if (ret.second) { /* 根据返回结果处理 */ }"
+  ],
+  "misconceptions": [
+    "insert_or_assign不是只插入不更新；它会在键已存在时赋新值。",
+    "insert_or_assign与insert的主要区别不是返回类型，而是遇到重复键时是否覆盖旧值。",
+    "insert_or_assign不要求把键和值先封装成pair再传入。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "键已存在时，insert和insert_or_assign分别怎么处理？",
+      "a": "insert不改写旧值并报告插入失败；insert_or_assign用新值改写旧值。"
+    },
+    {
+      "q": "insert_or_assign的参数形式是什么？",
+      "a": "键和值分别作为两个独立参数传入。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "map的insert方法与返回值",
+    "map的唯一键约束"
+  ],
+  "source_pages": [
+    583,
+    584
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1207_insert_or_assign更新或插入map元素",
+  "_chunk_pages": [
+    581,
+    584
+  ]
+}

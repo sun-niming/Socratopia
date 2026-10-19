@@ -1,0 +1,42 @@
+{
+  "title": "BitTorrent的最稀缺优先策略",
+  "definition": "最稀缺优先（rarest first）是BitTorrent选择请求块的一种策略。Alice针对自己尚未拥有的块，统计这些块在邻居中的副本数量，并优先请求副本数量最少的块，以促进稀缺块更快地在洪流中重新分发，近似均衡每个块在洪流中的副本数量。",
+  "key_points": [
+    "最稀缺块是指在Alice的邻居中副本数量最少的、且Alice尚未拥有的块。",
+    "Alice优先请求最稀缺的块，而不是任意选择一个尚未拥有的块。",
+    "该策略的目标是加快稀缺块的重新分发，并大致均衡各个块在洪流中的副本数量。"
+  ],
+  "examples": [
+    "若Alice尚未拥有块$A$和块$B$，而邻居中块$A$有2个副本、块$B$有5个副本，则块$A$更稀缺，Alice应优先请求块$A$。"
+  ],
+  "misconceptions": [
+    "最稀缺优先不是优先请求文件中编号最小或最早出现的块。",
+    "判断稀缺性时，原文强调的是该块在Alice邻居中的副本数量，而不是整个互联网中的绝对副本数量。",
+    "该策略的目标不是让Alice个人最快完成下载，而是大致均衡块在整个洪流中的副本数量。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "什么是BitTorrent中的最稀缺优先？",
+      "a": "对Alice尚未拥有的块，找出在其邻居中副本数量最少的块，并优先请求这些块。"
+    },
+    {
+      "q": "最稀缺优先的主要目的是什么？",
+      "a": "让稀缺块更快地重新分发，从而大致均衡每个块在洪流中的副本数量。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "BitTorrent中的追踪器、邻近对等方与连接"
+  ],
+  "source_pages": [
+    113,
+    116
+  ],
+  "needs_verification": true,
+  "verify_query": "BitTorrent rarest first strategy purpose balance replicas Cohen 2003 textbook",
+  "concept_id": "285_bittorrent的最稀缺优先策略",
+  "_chunk_pages": [
+    113,
+    116
+  ]
+}

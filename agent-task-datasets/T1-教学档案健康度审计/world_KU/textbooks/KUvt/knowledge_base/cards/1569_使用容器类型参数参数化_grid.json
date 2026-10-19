@@ -1,0 +1,51 @@
+{
+  "title": "使用容器类型参数参数化 Grid",
+  "definition": "Grid 类模板可以同时接收元素类型 T 和底层容器类型 Container 两个模板参数。Container 用来指定每一列实际采用的容器，例如 `std::vector<std::optional<int>>` 或 `std::deque<std::optional<int>>`。因此，Grid 可以在保持相同网格接口的同时切换底层容器。",
+  "key_points": [
+    "模板实例化形式为 `Grid<T, Container>`，例如 `Grid<int, std::vector<std::optional<int>>>`。",
+    "成员 `m_cells` 的类型是 `std::vector<Container>`，也就是外层固定使用 `std::vector`，每个元素是一列 Container；它不是 `std::vector<std::vector<...>>` 的固定写法。",
+    "构造函数先将 `m_cells` 调整为宽度，再将每一列调整为高度，因此网格尺寸为宽度乘高度。",
+    "`at(x, y)` 返回给定 Container 的 `value_type` 引用，即返回类型可写为 `typename Container::value_type&`；const 重载返回 const 引用。"
+  ],
+  "examples": [
+    "`Grid<int, std::vector<std::optional<int>>> myIntVectorGrid;`",
+    "`Grid<int, std::deque<std::optional<int>>> myIntDequeGrid;`",
+    "使用示例：`myIntVectorGrid.at(3, 4) = 5;`，然后可通过 `myIntVectorGrid.at(3, 4).value_or(0)` 读取值。",
+    "构造函数的核心逻辑可表示为：\n```text\nm_cells.resize(m_width);\nfor (auto& column : m_cells) {\n    column.resize(m_height);\n}\n```"
+  ],
+  "misconceptions": [
+    "`Container` 在这一节中表示已经实例化的容器类型，例如 `std::vector<std::optional<int>>`，不是单独的 `std::vector` 模板。",
+    "`m_cells` 不是二维 `std::vector` 的固定类型；它是 `std::vector<Container>`，其中 Container 可以是 vector、deque 或满足要求的其他容器。",
+    "`T` 是 Grid 的元素类型参数，而实际单元格类型在示例中是 `std::optional<T>`。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "Grid 的两个模板参数分别表示什么？",
+      "a": "第一个参数 T 表示元素类型；第二个参数 Container 表示已经实例化的底层容器类型，例如 `std::vector<std::optional<int>>` 或 `std::deque<std::optional<int>>`。"
+    },
+    {
+      "q": "为什么 `m_cells` 的类型是 `std::vector<Container>`？",
+      "a": "Grid 使用外层 vector 保存各列，而每个 Container 保存一列中的单元格，因此类型是 `std::vector<Container>`。"
+    },
+    {
+      "q": "`Grid<int, std::deque<std::optional<int>>>` 与 vector 版本的主要区别是什么？",
+      "a": "两者元素类型和 Grid 接口相同，区别在于每一列使用的底层容器分别是 deque 和 vector。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++ 类模板和模板类型参数",
+    "std::vector、std::deque 与 std::optional 的基本用法"
+  ],
+  "source_pages": [
+    757,
+    758
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1569_使用容器类型参数参数化_grid",
+  "_chunk_pages": [
+    757,
+    760
+  ]
+}

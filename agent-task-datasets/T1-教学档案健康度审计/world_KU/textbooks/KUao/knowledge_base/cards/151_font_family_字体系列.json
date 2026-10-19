@@ -1,0 +1,39 @@
+{
+  "title": "font-family 字体系列",
+  "definition": "font-family 用于指定字体系列，并且可以按优先级写成一组字体名称。客户端会先尝试使用第一项字体；如果第一项未安装或无法显示，就依次改用后面的字体。中文字体名通常有中英文两种写法，考虑兼容性时可以把两种名称都列出来；如果字体名包含空格或其他特殊字符，应把字体名写在单引号或双引号中。",
+  "key_points": [
+    "可以一次设置多个字体，浏览器按顺序回退选择。",
+    "中文字体可同时写英文名和中文名以提高兼容性。",
+    "字体名包含空格或特殊字符时要加引号。"
+  ],
+  "examples": [
+    "font-family: \"Microsoft YaHei\", \"微软雅黑\";",
+    "font-family: \"Microsoft YaHei\", sans-serif;"
+  ],
+  "misconceptions": [
+    "字体系列只能写一个字体名。",
+    "字体名里有空格也可以不加引号。",
+    "后面的备用字体不会被使用。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "font-family 为什么常常写多个字体名？",
+      "a": "因为浏览器会按顺序尝试，前面的字体不可用时会回退到后面的字体。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "CSS基础"
+  ],
+  "source_pages": [
+    113,
+    114
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "151_font_family_字体系列",
+  "_chunk_pages": [
+    113,
+    116
+  ]
+}

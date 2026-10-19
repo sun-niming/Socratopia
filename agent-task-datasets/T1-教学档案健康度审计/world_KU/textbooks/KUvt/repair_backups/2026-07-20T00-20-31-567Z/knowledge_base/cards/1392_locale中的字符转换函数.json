@@ -1,0 +1,41 @@
+{
+  "title": "locale中的字符转换函数",
+  "definition": "<locale>提供std::toupper()和std::tolower()两个字符转换函数，用于按照指定locale将字符转换为大写或小写形式。每个函数接收待转换的字符和用于转换的locale两个参数。",
+  "key_points": [
+    "std::toupper()用于转换为大写，std::tolower()用于转换为小写。",
+    "转换结果可能受指定locale影响。",
+    "原文示例使用法语locale将字符'e'转换为大写字符。"
+  ],
+  "examples": [
+    "auto upper { std::toupper('e', std::locale { \"fr-FR\" }) };"
+  ],
+  "misconceptions": [
+    "std::toupper()和std::tolower()不是无条件地适用于任意多字节字符串；原文讨论的是字符转换函数。",
+    "不能省略locale并据此假定所有语言环境下的转换规则完全相同。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "std::toupper()和std::tolower()各自用于什么？",
+      "a": "std::toupper()按指定locale将字符转换为大写形式，std::tolower()按指定locale将字符转换为小写形式。"
+    },
+    {
+      "q": "locale字符转换函数需要哪些参数？",
+      "a": "需要待转换的字符和用于转换的locale两个参数。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "locale中的字符分类函数"
+  ],
+  "source_pages": [
+    665,
+    665
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1392_locale中的字符转换函数",
+  "_chunk_pages": [
+    665,
+    668
+  ]
+}

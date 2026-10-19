@@ -1,0 +1,35 @@
+{
+  "title": "border-collapse",
+  "definition": "border-collapse 用来设置表格边框的合并方式。separate 表示表格边框与单元格边框分开，collapse 表示合并为单一边框。",
+  "key_points": [
+    "用于表格边框处理",
+    "separate 表示边框分开",
+    "collapse 表示边框合并成单一边框"
+  ],
+  "examples": [
+    "border-collapse: collapse;"
+  ],
+  "misconceptions": [
+    "误以为 collapse 表示去掉边框",
+    "误以为 separate 是把表格结构分开"
+  ],
+  "qa_pairs": [
+    {
+      "q": "border-collapse 的 collapse 表示什么？",
+      "a": "合并为单一边框。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [],
+  "source_pages": [
+    117,
+    120
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "197_border_collapse",
+  "_chunk_pages": [
+    117,
+    120
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "title": "因特网的多层 ISP 等级结构",
+  "definition": "因特网不是由一个覆盖全球的 ISP 组成，而是由不同层级、不同覆盖范围的 ISP 互联形成的网络。区域内的接入 ISP 通常连接到区域 ISP，区域 ISP 再连接到第一层 ISP；某些较大的区域 ISP 还可以连接多个较小的区域 ISP，形成更复杂的多层等级结构。",
+  "key_points": [
+    "第一层 ISP 位于该等级结构的顶部，类似于全球传输 ISP，但并不覆盖世界上的每一个城市。",
+    "接入 ISP 通常向其区域 ISP 付费，区域 ISP 通常向第一层 ISP 付费，形成客户—提供商关系。",
+    "接入 ISP 也可以直接连接第一层 ISP，并向第一层 ISP 付费。",
+    "第一层 ISP 通常不向其他 ISP 付费，因为它们处于该等级结构的顶部。",
+    "教材以中国为例说明：城市接入 ISP 可连接省级 ISP，省级 ISP 可连接国家级 ISP，国家级 ISP 最终连接第一层 ISP。"
+  ],
+  "examples": [
+    "一个城市中的接入 ISP 连接省级 ISP，省级 ISP 连接国家级 ISP，国家级 ISP 连接第一层 ISP。",
+    "在某些区域中，较小的区域 ISP 连接较大的区域 ISP，而较大的区域 ISP 再连接第一层 ISP。"
+  ],
+  "misconceptions": [
+    "因特网存在一个覆盖全球且所有 ISP 都必须连接的唯一 ISP。",
+    "第一层 ISP 在所有城市都直接存在。",
+    "客户—提供商关系意味着各级 ISP 之间都必须使用相同的技术或协议。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "在典型的 ISP 等级结构中，接入 ISP、区域 ISP 和第一层 ISP 的连接关系是什么？",
+      "a": "接入 ISP 通常连接区域 ISP，区域 ISP 再连接第一层 ISP；较大的区域 ISP 还可能连接较小的区域 ISP。"
+    },
+    {
+      "q": "为什么第一层 ISP 通常不向其他 ISP 付费？",
+      "a": "因为第一层 ISP 位于该等级结构的顶部，是其他较低层 ISP 的提供商。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [],
+  "source_pages": [
+    41,
+    44
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "087_因特网的多层_isp_等级结构",
+  "_chunk_pages": [
+    41,
+    44
+  ]
+}

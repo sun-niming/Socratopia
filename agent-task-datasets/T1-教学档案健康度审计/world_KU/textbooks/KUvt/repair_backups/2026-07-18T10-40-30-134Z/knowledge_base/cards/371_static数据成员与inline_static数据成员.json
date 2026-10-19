@@ -1,0 +1,52 @@
+{
+  "title": "static数据成员与inline static数据成员",
+  "definition": "类的 `static` 数据成员属于类本身，而不是某个单独的对象实例，通常由该类的所有对象共享。传统写法是在类内声明静态数据成员，再在类外提供定义；使用 `static inline` 时，可以直接在类内定义并初始化该静态数据成员。",
+  "key_points": [
+    "类内传统声明示例：`static std::size_t ms_counter;`。",
+    "传统类外定义示例：`std::size_t Spreadsheet::ms_counter;`。",
+    "类内定义示例：`static inline std::size_t ms_counter{0};`。",
+    "`static inline` 形式可以在类定义中同时完成声明、定义和初始化，初始值为 `0`。",
+    "静态数据成员使用类作用域进行定义或访问，例如 `Spreadsheet::ms_counter`。"
+  ],
+  "examples": [
+    "传统写法：`class Spreadsheet { private: static std::size_t ms_counter; };`，并在类外写 `std::size_t Spreadsheet::ms_counter;`。",
+    "inline写法：`class Spreadsheet { private: static inline std::size_t ms_counter{0}; };`。",
+    "类外定义中的限定名称：`std::size_t Spreadsheet::ms_counter;`。"
+  ],
+  "misconceptions": [
+    "`static` 数据成员不是每个对象各有一份；它属于类并由该类的对象共同使用。",
+    "仅在类内写传统形式的 `static std::size_t ms_counter;` 通常只是声明，仍需要类外定义；本页给出了 `std::size_t Spreadsheet::ms_counter;` 这种定义形式。",
+    "`static inline` 中的 `inline` 不是把每个对象都复制一份变量，而是允许静态数据成员直接在类内定义。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "传统写法中，类内声明 `static std::size_t ms_counter;` 后，类外如何定义它？",
+      "a": "写作 `std::size_t Spreadsheet::ms_counter;`。"
+    },
+    {
+      "q": "`static inline std::size_t ms_counter{0};` 表示什么？",
+      "a": "表示定义一个属于 `Spreadsheet` 类的静态数据成员，并在类内将其初始化为 `0`。"
+    },
+    {
+      "q": "静态数据成员属于每个 `Spreadsheet` 对象，还是属于 `Spreadsheet` 类？",
+      "a": "属于 `Spreadsheet` 类，通常由该类的对象共享。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++类与对象",
+    "static成员",
+    "类作用域与限定名称"
+  ],
+  "source_pages": [
+    281,
+    284
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "371_static数据成员与inline_static数据成员",
+  "_chunk_pages": [
+    281,
+    284
+  ]
+}

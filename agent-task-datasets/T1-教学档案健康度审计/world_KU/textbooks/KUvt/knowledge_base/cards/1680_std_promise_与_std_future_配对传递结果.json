@@ -1,0 +1,53 @@
+{
+  "title": "std::promise 与 std::future 配对传递结果",
+  "definition": "std::promise 是 C++ 中用于显式存储异步计算结果或异常的类。线程可以在 promise 上调用 set_value() 存储结果，或调用 set_exception() 存储异常；与该 promise 关联的 std::future 随后可以获取结果，或者在调用 get() 时重新抛出该异常。一个 promise 只能设置一次结果或异常。",
+  "key_points": [
+    "std::promise 提供 set_value() 来存储计算结果。",
+    "std::promise 提供 set_exception() 来存储异常。",
+    "只能在同一个 promise 上调用一次 set_value() 或 set_exception()；重复调用会抛出 std::future_error。",
+    "通常由创建线程调用 promise.get_future() 获取对应 future，再把 promise 移动到执行计算的线程。",
+    "promise 无法复制，但可以移动，因此适合通过移动操作将其传递给新线程。",
+    "执行线程完成计算后写入 promise，另一个线程通过 future 获取结果。"
+  ],
+  "examples": [
+    "基本流程：线程 A 创建 promise<int> myPromise；线程 A 调用 myPromise.get_future() 获取 future；线程 A 将 std::move(myPromise) 传给线程 B；线程 B 调用 set_value() 存储结果；线程 A 调用 future.get() 获取结果。",
+    "示意代码：promise<int> myPromise; thread theThread{doWork, move(myPromise)}; theThread.join();"
+  ],
+  "misconceptions": [
+    "promise 不能复制；传递给线程时应使用移动语义。",
+    "调用 get_future() 不会直接取得计算结果，它只是取得与 promise 关联的 future。",
+    "set_value() 和 set_exception() 不能在同一个 promise 上重复调用。",
+    "promise 既可以传递正常结果，也可以传递异常；异常不应被误认为只能在产生异常的线程中处理。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何让线程 B 将计算结果传递给线程 A？",
+      "a": "线程 A 创建 promise 并调用 get_future() 获取 future，然后把 promise 移动给线程 B；线程 B 计算完成后调用 set_value()，线程 A 通过 future.get() 获取结果。"
+    },
+    {
+      "q": "std::promise 为什么需要移动而不能复制？",
+      "a": "promise 不支持复制构造，但支持移动构造，因此应通过 std::move 将其转移给目标线程。"
+    },
+    {
+      "q": "重复调用 promise 的 set_value() 或 set_exception() 会怎样？",
+      "a": "同一个 promise 只能设置一次；重复调用会抛出 std::future_error 异常。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "std::future 获取异步计算结果",
+    "C++移动语义",
+    "C++异常处理"
+  ],
+  "source_pages": [
+    819,
+    819
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1680_std_promise_与_std_future_配对传递结果",
+  "_chunk_pages": [
+    817,
+    820
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "title": "Wireshark实验：HTTP观察内容",
+  "definition": "该Wireshark实验用于观察运行中的HTTP协议，研究HTTP通信和报文的多个方面，包括基本的GET/响应交互、HTTP报文格式、大型HTML文件的检索、带有内嵌URL的HTML文件检索、持续连接与非持续连接，以及HTTP鉴别和安全性。",
+  "key_points": [
+    "实验使用Wireshark分组嗅探器观察实际运行中的HTTP协议。",
+    "研究基本的HTTP GET请求与响应交互。",
+    "研究HTTP报文格式以及HTML文件的检索。",
+    "比较持续连接和非持续连接。",
+    "观察HTTP鉴别和安全性相关内容。"
+  ],
+  "examples": [
+    "可以按主题观察：GET请求 → HTTP响应 → 响应报文格式 → 大型HTML文件或包含内嵌URL的HTML文件的检索。"
+  ],
+  "misconceptions": [
+    "Wireshark实验不仅观察GET请求，还包括响应、连接方式、鉴别和安全性等多个方面。",
+    "持续连接与非持续连接是实验中需要比较的HTTP连接行为。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "Wireshark HTTP实验研究哪些连接方式？",
+      "a": "研究持续连接和非持续连接。"
+    },
+    {
+      "q": "该实验是否只观察HTTP请求而不观察响应？",
+      "a": "不是；实验包括基本的GET/响应交互，也研究HTTP响应报文格式。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "HTTP",
+    "Wireshark分组嗅探"
+  ],
+  "source_pages": [
+    137,
+    140
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "348_wireshark实验_http观察内容",
+  "_chunk_pages": [
+    137,
+    140
+  ]
+}

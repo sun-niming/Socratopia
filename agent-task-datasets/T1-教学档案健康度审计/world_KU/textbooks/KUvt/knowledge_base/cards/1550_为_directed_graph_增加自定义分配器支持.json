@@ -1,0 +1,42 @@
+{
+  "title": "为 directed_graph 增加自定义分配器支持",
+  "definition": "为了让 directed_graph 使用指定的内存分配器，需要把分配器类型作为第二个模板参数，并在类中保存该分配器。类模板可定义为 $\\texttt{template <typename T, typename A = std::allocator<T>>}$，其中 $T$ 是节点值类型，$A$ 是分配器类型。",
+  "key_points": [
+    "增加类型别名 $\\texttt{using allocator_type = A;}$。",
+    "增加保存节点容器的分配器成员，例如 $\\texttt{A m_allocator;}$。",
+    "节点容器的类型也必须使用 $A$，例如 $\\texttt{std::vector<details::graph_node<T, A>>}$。",
+    "提供默认构造函数，以及接收指定分配器的构造函数：$\\texttt{explicit directed_graph(const A& allocator) noexcept;}$。",
+    "所有成员函数的定义都要从 $\\texttt{template<typename T>}$ 改为 $\\texttt{template<typename T, typename A>}$，类名也从 $\\texttt{directed_graph<T>}$ 改为 $\\texttt{directed_graph<T, A>}$。"
+  ],
+  "examples": [
+    "默认模板参数：$\\texttt{template <typename T, typename A = std::allocator<T>>}$。",
+    "分配器构造函数的典型实现：$\\texttt{directed_graph<T, A>::directed_graph(const A& allocator) noexcept : m_nodes{allocator}, m_allocator{allocator} \\\\{\\\\}}$。"
+  ],
+  "misconceptions": [
+    "第二个模板参数不是节点值类型，而是分配器类型。",
+    "只在类声明中增加分配器模板参数是不够的，所有相关成员函数定义也必须带上 $T,A$ 两个模板参数。",
+    "$\\texttt{std::allocator<T>}$ 是默认分配器，但调用者可以传入其他满足分配器要求的类型。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为 directed_graph 增加自定义分配器支持需要做哪些主要修改？",
+      "a": "增加第二个模板类型参数 $A$，默认值为 $\\texttt{std::allocator<T>}$；增加 $\\texttt{allocator_type}$ 别名和 $\\texttt{m_allocator}$ 成员；让节点容器使用 $A$；提供默认构造函数和接收分配器的构造函数；并修改所有成员函数定义中的模板参数和类模板实参。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++类模板与模板参数",
+    "C++标准分配器基本概念"
+  ],
+  "source_pages": [
+    749,
+    750
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1550_为_directed_graph_增加自定义分配器支持",
+  "_chunk_pages": [
+    749,
+    752
+  ]
+}

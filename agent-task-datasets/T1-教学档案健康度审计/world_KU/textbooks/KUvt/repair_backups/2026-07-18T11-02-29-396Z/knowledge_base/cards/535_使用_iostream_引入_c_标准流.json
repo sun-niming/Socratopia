@@ -1,0 +1,47 @@
+{
+  "title": "使用 <iostream> 引入 C++ 标准流",
+  "definition": "使用 C++ 标准流对象时，应包含 `<iostream>` 头文件。该头文件提供原文介绍的 `cout`、`cin`、`clog` 等标准流对象，可用于处理整数、双精度数以及 C++ 字符串等数据。",
+  "key_points": [
+    "`<iostream>` 是使用 C++ 标准输入输出流的头文件。",
+    "原文列出的相关流对象包括 `cout`、`cin` 和 `clog`。",
+    "C++ 流式输入输出可以处理 `int`、`double` 和 C++ `string` 等数据。"
+  ],
+  "examples": [
+    "```cpp\n#include <iostream>\n\nint i = 42;\ndouble d = 3.14;\nstd::cout << i << std::endl;\nstd::cout << d << std::endl;\n```",
+    "输出 C++ 字符串：`cout << myString << endl;`"
+  ],
+  "misconceptions": [
+    "只包含与 C 输入输出相关的头文件，并不能自动提供 C++ 的 `cout` 和 `cin`。",
+    "`<iostream>` 是头文件名，不是流对象名称；流对象是 `cout`、`cin` 等。",
+    "使用 `cout` 输出时，数据通过 `<<` 连接到流，而不是作为函数参数直接传入。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "使用 `cout` 和 `cin` 等 C++ 标准流通常需要包含哪个头文件？",
+      "a": "需要包含 `<iostream>`。"
+    },
+    {
+      "q": "如何用 C++ 流输出整数 `i` 并换行？",
+      "a": "可以写作 `cout << i << endl;`；在标准命名空间写法中通常为 `std::cout << i << std::endl;`。"
+    },
+    {
+      "q": "原文给出了怎样输出字符串的示例？",
+      "a": "`cout << myString << endl;`。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++ 标准输入输出流对象"
+  ],
+  "source_pages": [
+    411,
+    412
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "535_使用_iostream_引入_c_标准流",
+  "_chunk_pages": [
+    409,
+    412
+  ]
+}

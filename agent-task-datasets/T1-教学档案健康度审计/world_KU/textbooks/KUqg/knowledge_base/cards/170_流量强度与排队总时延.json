@@ -1,0 +1,39 @@
+{
+  "title": "流量强度与排队总时延",
+  "definition": "令分组平均长度为 $L$ 比特、平均到达率为 $a$ 个分组/秒、链路速率为 $R$ bps，则流量强度为 $$I=\\frac{La}{R}.$$ 在原文给定的排队模型中，当 $I<1$ 时，排队时延为 $$d_{\\text{queue}}=\\frac{IL/R}{1-I},$$ 加上传输时延 $L/R$ 后，总时延可化简为 $$d_{\\text{total}}=\\frac{L/R}{1-I}.$$",
+  "key_points": [
+    "稳定工作所讨论的范围是 $I<1$。",
+    "当 $I$ 接近 1 时，模型中的总时延会快速增大。",
+    "用分组传输率 $\\mu=R/L$ 表示时，$I=a/\\mu$，总时延可写为 $$d_{\\text{total}}=\\frac{1}{\\mu-a}.$$"
+  ],
+  "examples": [
+    "若 $I=0.5$，则总时延为 $$d_{\\text{total}}=\\frac{L/R}{1-0.5}=2\\frac{L}{R}.$$"
+  ],
+  "misconceptions": [
+    "误以为流量强度达到或超过 1 时仍能直接使用同一有限时延公式。",
+    "误把到达率 $a$ 和比特率 $La$ 当作相同单位的量。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "已知分组到达率为 $a$、链路分组传输率为 $\\mu$，在该排队模型中总时延是多少？",
+      "a": "当 $a<\\mu$ 时，$$d_{\\text{total}}=\\frac{1}{\\mu-a}.$$"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "排队时延",
+    "传输时延",
+    "流量强度"
+  ],
+  "source_pages": [
+    65,
+    68
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "170_流量强度与排队总时延",
+  "_chunk_pages": [
+    65,
+    68
+  ]
+}

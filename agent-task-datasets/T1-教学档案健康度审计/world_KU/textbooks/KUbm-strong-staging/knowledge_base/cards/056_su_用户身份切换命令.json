@@ -1,0 +1,42 @@
+{
+  "title": "su 用户身份切换命令",
+  "definition": "su 用于切换用户身份，命令格式为 su [-] [用户名]。默认切换为 root。选项 - 的作用是：在切换用户的同时，用指定用户的登录 shell 环境替换当前 shell 环境。",
+  "key_points": [
+    "命令格式：su [-] [用户名]",
+    "默认切换为 root",
+    "使用 - 时，会用指定用户的登录 shell 环境替换当前 shell 环境"
+  ],
+  "examples": [
+    "su",
+    "su - 用户名"
+  ],
+  "misconceptions": [
+    "不要认为 su 只能切换到普通用户，教材说明默认切换为 root",
+    "不要忽略 - 的作用；它不仅切换用户，还会替换当前 shell 环境"
+  ],
+  "qa_pairs": [
+    {
+      "q": "su 命令默认切换到哪个用户？",
+      "a": "默认切换为 root。"
+    },
+    {
+      "q": "su 命令中的 - 有什么作用？",
+      "a": "切换用户的同时，用指定用户的登录 shell 环境替换当前 shell 环境。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "用户管理相关配置文件"
+  ],
+  "source_pages": [
+    29,
+    32
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "056_su_用户身份切换命令",
+  "_chunk_pages": [
+    29,
+    32
+  ]
+}

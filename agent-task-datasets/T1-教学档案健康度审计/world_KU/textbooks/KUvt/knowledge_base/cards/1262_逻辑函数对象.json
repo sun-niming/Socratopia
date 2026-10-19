@@ -1,0 +1,46 @@
+{
+  "title": "逻辑函数对象",
+  "definition": "逻辑函数对象将逻辑运算符封装为可调用对象：logical_not 对应 !，logical_and 对应 &&，logical_or 对应 ||。这些逻辑函数对象处理 true 和 false 值，可用于对布尔值范围进行组合计算。",
+  "key_points": [
+    "logical_not 对应一元逻辑非运算。",
+    "logical_and 和 logical_or 分别对应逻辑与、逻辑或。",
+    "教材用 logical_and<> 配合累积算法实现检查所有布尔标志是否为 true。",
+    "教材用 logical_or<> 配合累积算法实现检查是否至少有一个布尔标志为 true。",
+    "实际使用 all_of 和 any_of 算法通常更合适，因为它们具有短路特性，性能更好。"
+  ],
+  "examples": [
+    "概念性代码：bool allTrue(const vector<bool>& flags) { return accumulate(begin(flags), end(flags), true, logical_and<>{}); }",
+    "概念性代码：bool anyTrue(const vector<bool>& flags) { return accumulate(begin(flags), end(flags), false, logical_or<>{}); }",
+    "教材原文将第二个示例的初始值写成 true，且函数名仍写为 allTrue；这与 anyTrue 的通常实现不一致。"
+  ],
+  "misconceptions": [
+    "logical_and<> 和 logical_or<> 是逻辑运算函数对象，不是位运算函数对象。",
+    "用累积方式实现 allTrue 或 anyTrue 时不一定短路；标准 all_of 和 any_of 具有短路优势。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "logical_and<>、logical_or<> 和 logical_not<> 分别对应哪些运算？",
+      "a": "分别对应逻辑与 &&、逻辑或 || 和逻辑非 !。"
+    },
+    {
+      "q": "为什么教材推荐使用 all_of 和 any_of 替代累积实现的全真或存在真判断？",
+      "a": "因为 all_of 和 any_of 具有短路特性，找到决定结果的元素后可以提前结束，性能通常更好。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "函数对象",
+    "逻辑运算符"
+  ],
+  "source_pages": [
+    614,
+    614
+  ],
+  "needs_verification": true,
+  "verify_query": "教材《C++20高级编程》第5版 logical_or accumulate anyTrue 初始值 true 是否为排版错误",
+  "concept_id": "1262_逻辑函数对象",
+  "_chunk_pages": [
+    613,
+    616
+  ]
+}

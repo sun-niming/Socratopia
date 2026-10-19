@@ -1,0 +1,37 @@
+{
+  "title": "函数表达式",
+  "definition": "函数表达式是把函数赋给变量的一种写法，格式为 var functionName = function(arg1,arg2,...,argn){[statements][return [expression]]}。",
+  "key_points": [
+    "通过 var 变量名 = function(...) 的形式定义函数",
+    "函数名位置可以由变量名承担",
+    "函数体写法与普通函数类似"
+  ],
+  "examples": [
+    "var functionName = function (arg1,arg2,...,argn)\n{\n[statements]\n[return [expression]]\n}"
+  ],
+  "misconceptions": [
+    "函数表达式不等于函数声明，写法不同",
+    "函数表达式不是必须先写 function 名称"
+  ],
+  "qa_pairs": [
+    {
+      "q": "函数表达式的基本形式是什么？",
+      "a": "var functionName = function(arg1,arg2,...,argn){[statements][return [expression]]}"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "函数"
+  ],
+  "source_pages": [
+    253,
+    256
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "369_函数表达式",
+  "_chunk_pages": [
+    253,
+    256
+  ]
+}

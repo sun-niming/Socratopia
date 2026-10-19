@@ -1,0 +1,51 @@
+{
+  "title": "wchar_t 与宽字符",
+  "definition": "C++ 提供内建类型 wchar_t，用于保存宽字符（wide character），可用于表示包含非 ASCII 字符的语言。C++ 标准没有规定 wchar_t 的具体大小；不同编译器可能使用 16 位或 32 位，因此跨平台代码不能假定 wchar_t 的大小为某个固定数值。",
+  "key_points": [
+    "wchar_t 是 C++ 的内建宽字符类型。",
+    "教材以日语和阿拉伯语为例，说明非 ASCII 字符可以用 wchar_t 表示。",
+    "C++ 标准不定义 wchar_t 必须占用多少位。",
+    "不同编译器可能使用 16 位或 32 位的 wchar_t。",
+    "为了编写跨平台代码，不应假定 wchar_t 的大小是某个特定数值。"
+  ],
+  "examples": [
+    "不安全的跨平台假定包括：假定 sizeof(wchar_t) 必定等于 2，或假定 wchar_t 必定是 16 位。",
+    "宽字符类型的概念表示：`wchar_t ch;`"
+  ],
+  "misconceptions": [
+    "wchar_t 并非在所有平台上都固定为 16 位。",
+    "使用 wchar_t 并不意味着可以安全地假定其底层大小或具体字符编码在所有平台都相同。",
+    "wchar_t 与普通 char 的用途不同，不能简单把二者的大小和可表示字符范围等同起来。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "wchar_t 用来做什么？",
+      "a": "wchar_t 是用于保存宽字符的 C++ 内建类型，可用于表示非 ASCII 字符。"
+    },
+    {
+      "q": "C++ 标准是否规定 wchar_t 的大小？",
+      "a": "没有。不同编译器可能使用 16 位或 32 位的 wchar_t。"
+    },
+    {
+      "q": "跨平台代码为什么不能假定 wchar_t 的大小？",
+      "a": "因为 C++ 标准没有规定其大小，不同编译器的实现可能不同。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "ASCII 字符集的基本限制",
+    "C++ 基本类型",
+    "字符编码"
+  ],
+  "source_pages": [
+    660,
+    660
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1379_wchar_t_与宽字符",
+  "_chunk_pages": [
+    657,
+    660
+  ]
+}

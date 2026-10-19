@@ -1,0 +1,38 @@
+{
+  "title": "findIndex()",
+  "definition": "`findIndex()` 用于获取符合条件的第一个元素的位置（下标）；教材表格说明它返回数字，并且回调返回 `true` 时循环结束。",
+  "key_points": [
+    "返回值是数字下标",
+    "找到的是第一个符合条件的元素位置",
+    "回调返回 `true` 时循环结束"
+  ],
+  "examples": [
+    "['a', 'b', 'c'].findIndex(el => el === 'c') // 2"
+  ],
+  "misconceptions": [
+    "以为 `findIndex()` 返回元素本身",
+    "以为返回的是所有匹配元素的下标集合",
+    "以为找不到时返回数组长度"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`findIndex()` 返回什么？",
+      "a": "符合条件的第一个元素的位置（下标）。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "Array对象与创建方式"
+  ],
+  "source_pages": [
+    307,
+    308
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "414_findindex",
+  "_chunk_pages": [
+    305,
+    308
+  ]
+}

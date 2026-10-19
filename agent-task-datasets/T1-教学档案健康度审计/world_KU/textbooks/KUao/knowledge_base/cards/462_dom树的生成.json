@@ -1,0 +1,37 @@
+{
+  "title": "DOM树的生成",
+  "definition": "当浏览器加载一个 HTML 页面时，会先解析 HTML 代码，再创建一个与该 HTML 结构对应的 DOM 树。DOM 树用来表示页面内容的层级结构，后续 JavaScript 对页面元素的操作通常就是基于这棵树进行的。",
+  "key_points": [
+    "浏览器不是直接操作 HTML 源码，而是先把 HTML 解析成 DOM 树。",
+    "DOM 树与页面结构一一对应，树中的节点表示页面中的各个部分。"
+  ],
+  "examples": [
+    "HTML 示例：<!DOCTYPE html><html><head><title>My Page</title></head><body><h1>Welcome!</h1><p>This is a paragraph.</p><!-- This is a comment --></body></html>",
+    "浏览器解析后会得到包含 document、html、head、body、h1、p、注释等节点的 DOM 树。"
+  ],
+  "misconceptions": [
+    "DOM 树就是 HTML 源文件本身；实际上 DOM 树是浏览器解析 HTML 后生成的数据结构。",
+    "DOM 树里只有元素，没有文本或注释；实际上文本、注释等也可以成为节点。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "浏览器加载 HTML 页面后，首先会做什么并生成什么结构？",
+      "a": "浏览器会解析 HTML 代码，并创建对应的 DOM 树。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "HTML基础"
+  ],
+  "source_pages": [
+    345,
+    348
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "462_dom树的生成",
+  "_chunk_pages": [
+    345,
+    348
+  ]
+}

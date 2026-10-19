@@ -1,0 +1,43 @@
+{
+  "title": "C++静态方法不能被重写",
+  "definition": "在 C++ 中，静态方法不能同时具有虚函数属性，因此不能通过继承实现运行时重写。若基类和派生类声明了同名静态方法，这两个方法彼此独立，分别属于各自的类。通过类名调用时，调用由类名明确指定的静态方法。",
+  "key_points": [
+    "静态方法没有 this 指针，不能访问特定对象的实例状态。",
+    "用对象表达式调用静态方法时，对象本身不参与动态分派；调用哪个方法取决于表达式的编译期类型。",
+    "如果通过指向派生对象的基类指针或引用调用同名静态方法，会调用基类版本，而不会根据对象的实际类型调用派生类版本。"
+  ],
+  "examples": [
+    "可抽象表示为：\n```cpp\nclass BaseStatic {\npublic:\n    static void beStatic();\n};\n\nclass DerivedStatic : public BaseStatic {\npublic:\n    static void beStatic();\n};\n\nDerivedStatic d;\nBaseStatic& ref = d;\nd.beStatic();    // 按 DerivedStatic 的编译期类型调用 DerivedStatic::beStatic()\nref.beStatic();  // 按 BaseStatic& 的编译期类型调用 BaseStatic::beStatic()\n```",
+    "通过类名调用时，`BaseStatic::beStatic()` 和 `DerivedStatic::beStatic()` 分别调用各自类中声明的静态方法。"
+  ],
+  "misconceptions": [
+    "静态方法不是虚方法，不能像普通虚方法那样根据对象的实际类型进行动态分派。",
+    "对象可以用于调用静态方法，但这不表示静态方法获得了 this 指针或访问了该对象。",
+    "基类引用指向派生对象时，调用同名静态方法仍不会调用派生类版本。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "C++ 中静态方法能否被重写？",
+      "a": "不能。静态方法不能是虚方法，因此不能被重写；派生类中的同名静态方法与基类方法是两个独立的方法。"
+    },
+    {
+      "q": "若 `BaseStatic& ref` 实际引用一个 `DerivedStatic` 对象，执行 `ref.beStatic()` 会调用哪个版本？",
+      "a": "调用 `BaseStatic` 版本，因为静态方法调用依据表达式的编译期类型，而 `ref` 的类型是 `BaseStatic&`。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++继承与成员函数调用"
+  ],
+  "source_pages": [
+    337,
+    338
+  ],
+  "needs_verification": true,
+  "verify_query": "C++ 静态成员函数 能否重写 同名静态方法 基类引用 派生对象 编译期类型",
+  "concept_id": "684_c_静态方法不能被重写",
+  "_chunk_pages": [
+    337,
+    340
+  ]
+}

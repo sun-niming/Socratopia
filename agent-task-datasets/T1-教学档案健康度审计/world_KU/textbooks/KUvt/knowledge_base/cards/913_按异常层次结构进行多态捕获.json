@@ -1,0 +1,45 @@
+{
+  "title": "按异常层次结构进行多态捕获",
+  "definition": "异常类型具有继承关系时，可以通过捕获基类引用来匹配该基类及其派生类的异常。例如，std::exception 类型的 catch 子句能够匹配包括 std::invalid_argument 和 std::runtime_error 在内的派生类异常。捕获的类型在层次结构中越高，处理逻辑通常越通用、针对性越弱。利用多态性捕获异常时，应按引用捕获，通常优先使用 const 引用，以避免按值捕获造成对象截断和不必要的复制。",
+  "key_points": [
+    "std::exception 的 catch 子句可以匹配 std::exception 的派生类异常。",
+    "基类捕获范围更广，但对具体错误的处理针对性较弱。",
+    "多态捕获异常时应按引用捕获，推荐使用 const 引用，例如 catch (const std::exception& e)。",
+    "按值捕获可能发生对象截断，导致派生类对象中的信息丢失。"
+  ],
+  "examples": [
+    "try {\n    myInts = readIntegerFile(filename);\n} catch (const std::exception& e) {\n    std::cerr << e.what() << std::endl;\n    return 1;\n}",
+    "上述 catch (const std::exception& e) 可以匹配 std::invalid_argument、std::runtime_error 等 std::exception 的派生类异常。"
+  ],
+  "misconceptions": [
+    "认为 catch (const std::exception& e) 只能捕获 std::exception 对象，不能捕获其派生类对象。",
+    "认为按值捕获与按引用捕获完全等价；实际上按值捕获可能导致截断。",
+    "认为捕获层次越高越好；基类捕获虽然范围广，但通常缺少针对具体异常的处理能力。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么多态捕获异常时通常要使用 const 引用？",
+      "a": "因为按引用捕获可以保留异常对象的实际派生类型信息，并避免不必要的复制；使用 const 引用还表示处理代码不会修改异常对象。"
+    },
+    {
+      "q": "catch (const std::exception& e) 能否捕获 std::invalid_argument 异常？",
+      "a": "能。std::invalid_argument 是 std::exception 的派生类，基类引用可以匹配派生类对象。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++异常处理基础",
+    "C++继承与多态"
+  ],
+  "source_pages": [
+    449,
+    450
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "913_按异常层次结构进行多态捕获",
+  "_chunk_pages": [
+    449,
+    452
+  ]
+}

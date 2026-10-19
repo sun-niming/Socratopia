@@ -1,0 +1,47 @@
+{
+  "title": "insert() 的提示参数和迭代器范围重载",
+  "definition": "directed_graph 还提供接收迭代器提示的 insert() 重载，以及接收迭代器范围的 insert() 重载。提示参数在 directed_graph 中没有实际用途，只是为了与其他标准库容器的接口保持对称；范围重载可以接收来自任意容器的迭代器范围，并逐个插入范围内的元素。",
+  "key_points": [
+    "提示版本的形式包括 `iterator insert(const_iterator hint, const T& node_value);` 和 `iterator insert(const_iterator hint, T&& node_value);`。",
+    "directed_graph 会忽略 hint，并转发到不带提示参数的 insert()，最后返回其 pair 结果中的 `.first`。",
+    "范围版本是函数模板，因此 first 和 last 可以来自任意容器的迭代器，而不局限于 directed_graph。",
+    "范围插入的实现使用 `std::copy` 和 `std::insert_iterator`。",
+    "传入范围中的元素会按照范围逐个尝试插入，重复元素是否新增由 insert() 的判重规则决定。"
+  ],
+  "examples": [
+    "提示参数被忽略：`return insert(node_value).first;`",
+    "范围插入的典型实现：`template <typename Iter> void insert(Iter first, Iter last) { std::copy(first, last, std::insert_iterator { *this, begin() }); }`"
+  ],
+  "misconceptions": [
+    "hint 并不保证插入位置，也不会在 directed_graph 中优化插入过程。",
+    "范围 insert() 的迭代器不要求来自另一个 directed_graph，可以来自其他容器。",
+    "范围 insert() 的返回类型是 void，不是单个迭代器或 pair。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "directed_graph 的提示版 insert() 如何处理 hint？",
+      "a": "它忽略 hint，只调用不带提示参数的 insert()，并返回结果中的迭代器部分。"
+    },
+    {
+      "q": "范围版 insert() 能否接收 std::vector 的迭代器？",
+      "a": "可以。该版本是模板，可以接收来自任意容器的迭代器范围。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "迭代器范围",
+    "函数模板",
+    "std::insert_iterator"
+  ],
+  "source_pages": [
+    742,
+    742
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1540_insert_的提示参数和迭代器范围重载",
+  "_chunk_pages": [
+    741,
+    744
+  ]
+}

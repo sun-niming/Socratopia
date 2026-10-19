@@ -1,0 +1,40 @@
+{
+  "title": "form的method属性",
+  "definition": "form标签的method属性规定发送数据的HTTP方法。教材给出的常见取值是GET和POST，其中GET适合短数据，POST适合安全性高、长文本。",
+  "key_points": [
+    "method属性规定发送数据的HTTP方法。",
+    "常见取值有GET和POST。",
+    "GET适合短数据。",
+    "POST适合安全性高、长文本。"
+  ],
+  "examples": [
+    "<form method=\"GET\"></form>",
+    "<form method=\"POST\"></form>"
+  ],
+  "misconceptions": [
+    "GET和POST没有区别。",
+    "POST只用于短数据。",
+    "method属性决定表单提交到哪里。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "form标签的method属性有什么作用？",
+      "a": "它规定发送数据的HTTP方法，常见取值是GET和POST。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "HTML表单的作用与组成"
+  ],
+  "source_pages": [
+    65,
+    68
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "102_form的method属性",
+  "_chunk_pages": [
+    65,
+    68
+  ]
+}

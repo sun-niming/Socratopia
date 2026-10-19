@@ -1,0 +1,43 @@
+{
+  "title": "#pragma 的实现定义性质",
+  "definition": "#pragma 是一种预处理指令，其具体行为由编译器实现决定。编译器可以定义自己的 #pragma 扩展；如果某个实现不理解某条 #pragma 指令，则会忽略它。原文举例说明，一些编译器允许使用 #pragma 临时关闭编译器警告。",
+  "key_points": [
+    "#pragma 不由 C++标准统一规定具体行为。",
+    "不同编译器对同一条 #pragma 的支持可能不同。",
+    "不理解某条 #pragma 的实现可以忽略该指令。",
+    "依赖特定 #pragma 会降低程序的可移植性。"
+  ],
+  "examples": [
+    "原文提到，某些编译器支持使用 #pragma 临时关闭编译器警告；但该行为属于编译器实现提供的扩展，不能假定所有编译器都支持。"
+  ],
+  "misconceptions": [
+    "#pragma 不是在所有编译器上都具有相同效果。",
+    "编译器忽略不理解的 #pragma，并不等于执行了该指令要求的操作。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "#pragma 的行为由谁决定？",
+      "a": "#pragma 的具体行为由编译器实现决定，而不是由 C++标准统一规定。"
+    },
+    {
+      "q": "如果编译器不理解某条 #pragma，会发生什么？",
+      "a": "原文指出，实现可以忽略该指令。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "预处理指令",
+    "编译器扩展"
+  ],
+  "source_pages": [
+    974,
+    974
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "2001_pragma_的实现定义性质",
+  "_chunk_pages": [
+    973,
+    976
+  ]
+}

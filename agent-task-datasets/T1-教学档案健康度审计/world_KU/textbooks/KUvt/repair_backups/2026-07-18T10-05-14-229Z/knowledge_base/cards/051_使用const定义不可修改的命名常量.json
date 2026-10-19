@@ -1,0 +1,46 @@
+{
+  "title": "使用const定义不可修改的命名常量",
+  "definition": "`const`用于声明初始化后不能通过该变量名修改的对象。原文使用`const int`为棋子类型定义整数常量，例如`PieceTypeKing`、`PieceTypeQueen`、`PieceTypeRook`和`PieceTypePawn`，随后可以把这些常量用于初始化普通整数变量。",
+  "key_points": [
+    "声明形式可以是`const int 名称 { 初始值 };`。",
+    "例如：`const int PieceTypeKing { 0 };`。",
+    "`const`对象必须在定义时初始化。",
+    "常量可以用于初始化其他变量，例如：`int myPiece { PieceTypeKing };`。"
+  ],
+  "examples": [
+    "`const int PieceTypeKing { 0 };`",
+    "`const int PieceTypeQueen { 1 };`",
+    "`const int PieceTypeRook { 2 };`",
+    "`const int PieceTypePawn { 3 };`",
+    "`int myPiece { PieceTypeKing };`"
+  ],
+  "misconceptions": [
+    "`const`变量不是普通变量，初始化后不能通过该名称重新赋值。",
+    "用多个整数常量表示一组相关选项时，仍然只是整数常量，并不等同于枚举类型。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何声明值为`0`且不能被修改的整数常量？",
+      "a": "可以写成`const int PieceTypeKing { 0 };`。"
+    },
+    {
+      "q": "`int myPiece { PieceTypeKing };`表示什么？",
+      "a": "它用常量`PieceTypeKing`的值初始化整数变量`myPiece`。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++变量声明与初始化"
+  ],
+  "source_pages": [
+    45,
+    48
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "051_使用const定义不可修改的命名常量",
+  "_chunk_pages": [
+    45,
+    48
+  ]
+}

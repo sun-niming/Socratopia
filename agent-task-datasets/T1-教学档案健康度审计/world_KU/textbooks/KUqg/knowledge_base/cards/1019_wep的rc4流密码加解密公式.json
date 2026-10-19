@@ -1,0 +1,49 @@
+{
+  "title": "WEP的RC4流密码加解密公式",
+  "definition": "WEP使用RC4流密码对每个数据帧的“载荷+4字节CRC”进行加密。对于由帧密钥$(K_s,IV)$产生的密钥流第$i$个字节$k_i^{(K_s,IV)}$，明文数据字节$d_i$与该密钥流字节按位异或，得到密文字节$c_i$；解密时再次异或同一密钥流即可恢复明文。",
+  "key_points": [
+    "加密公式为：$$c_i=d_i\\oplus k_i^{(K_s,IV)}$$",
+    "解密公式为：$$d_i=c_i\\oplus k_i^{(K_s,IV)}$$",
+    "异或具有可逆性，即$(x\\oplus y)\\oplus y=x$。",
+    "RC4产生的密钥流用于加密数据载荷和CRC值，而不是只加密载荷。"
+  ],
+  "examples": [
+    "若发送端使用密钥流字节$k_i$，则先计算$c_i=d_i\\oplus k_i$；接收端使用同一个$k_i$计算$d_i=c_i\\oplus k_i$。",
+    "一个WEP帧可抽象为：$$\\text{明文载荷}\\;||\\;\\text{CRC}\\xrightarrow[\\text{帧密钥}(K_s,IV)]{\\text{RC4与异或}}\\text{密文载荷}\\;||\\;\\text{密文CRC}$$"
+  ],
+  "misconceptions": [
+    "RC4是流密码，原文将其理解为生成密钥流并逐字节与明文异或，而不是把整个帧当作一个固定长度块直接加密。",
+    "接收方必须使用与发送方相同的$K_s$和该帧的IV，才能生成相同的密钥流。",
+    "CRC用于检测差错，不等同于密码学上的报文完整性保护。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "WEP的加密公式是什么？",
+      "a": "$$c_i=d_i\\oplus k_i^{(K_s,IV)}$$其中$d_i$是明文字节，$k_i^{(K_s,IV)}$是帧密钥产生的密钥流字节，$c_i$是密文字节。"
+    },
+    {
+      "q": "WEP如何解密一个字节？",
+      "a": "接收方计算$$d_i=c_i\\oplus k_i^{(K_s,IV)}$$即可恢复明文字节。"
+    },
+    {
+      "q": "WEP中的RC4密钥流加密哪些内容？",
+      "a": "加密数据载荷和该载荷对应的4字节CRC。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "异或运算",
+    "流密码"
+  ],
+  "source_pages": [
+    439,
+    440
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1019_wep的rc4流密码加解密公式",
+  "_chunk_pages": [
+    437,
+    440
+  ]
+}

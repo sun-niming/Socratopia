@@ -1,0 +1,43 @@
+{
+  "title": "auto 与 decltype(auto) 的返回类型推导差异",
+  "definition": "函数返回类型写成 auto 时，编译器根据 return 表达式推导返回类型，并且推导结果会去掉顶层 const 和引用限定符。decltype(auto) 则按照 decltype 的规则推导返回类型，保留表达式导致的 const 和引用性质。",
+  "key_points": [
+    "使用 auto 推导变量或函数返回类型时，通常不会保留顶层 const 和引用。",
+    "decltype 不会去掉表达式类型中的 const 和引用限定符。",
+    "decltype(auto) 结合了自动推导和 decltype 的保留规则，可避免不必要地剥离 const 或引用。",
+    "对于通常返回新对象的 operator+，auto 去掉限定符往往是合适的；但对于需要返回引用或保留 const 的模板，decltype(auto) 更合适。"
+  ],
+  "examples": [
+    "const std::string message { \"Test\" };\nconst std::string getString() { return message; }\n\nauto s1 { getString() };             // s1 推导为 std::string\nconst auto& s2 { getString() };      // 显式声明为 const 引用\ndecltype(getString()) s3 { getString() }; // 保留 getString() 的类型特征\ndecltype(auto) s4 { getString() };   // 按 decltype 规则推导"
+  ],
+  "misconceptions": [
+    "auto 并不会无条件保留原表达式的 const 和引用限定符。",
+    "decltype(auto) 不是普通的 auto 别名；它使用 decltype 的规则，因此推导结果可能是引用类型。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "auto 与 decltype(auto) 推导返回类型的主要区别是什么？",
+      "a": "auto 推导时会去掉顶层 const 和引用限定符；decltype(auto) 按 decltype 规则推导，会保留相应的 const 和引用性质。"
+    },
+    {
+      "q": "为什么 add 函数有时适合使用 decltype(auto)？",
+      "a": "因为 decltype(auto) 可以保留 tl + t2 表达式结果中的 const 和引用限定符，避免 auto 推导时发生不希望的剥离。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "auto 类型推导",
+    "decltype"
+  ],
+  "source_pages": [
+    398,
+    399
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "808_auto_与_decltype_auto_的返回类型推导差异",
+  "_chunk_pages": [
+    397,
+    400
+  ]
+}

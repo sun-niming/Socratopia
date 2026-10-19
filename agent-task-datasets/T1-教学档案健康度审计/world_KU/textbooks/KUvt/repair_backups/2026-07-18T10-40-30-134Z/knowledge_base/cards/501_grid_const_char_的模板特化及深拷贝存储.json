@@ -1,0 +1,49 @@
+{
+  "title": "Grid<const char*>的模板特化及深拷贝存储",
+  "definition": "教材为Grid<const char*>提供了一个显式模板特化。该特化不再直接把单元存储为std::optional<const char*>，而是使用std::vector<std::vector<std::optional<std::string>>> m_cells，并通过m_width和m_height记录网格尺寸。这样，传入的C风格字符串内容可存储为std::string。",
+  "key_points": [
+    "特化声明为Grid<const char*>。",
+    "内部单元类型为std::optional<std::string>，而不是std::optional<const char*>。",
+    "内部网格使用二维vector表示：外层vector表示列，内层vector表示每列中的行。",
+    "构造函数根据给定宽度和高度设置m_width、m_height，并将每个列vector调整为m_height大小。",
+    "该特化显式默认了拷贝构造、拷贝赋值、移动构造和移动赋值运算符。"
+  ],
+  "examples": [
+    "示例：`Grid<const char*> stringGrid1{2, 2};`。可以执行`stringGrid1.at(0, 0) = \"hello\";`和`stringGrid1.at(0, 1) = dummy;`，其中dummy的类型为const char*，单元最终使用std::string存储。",
+    "特化的单元存储类型可写为：`std::vector<std::vector<std::optional<std::string>>>`。"
+  ],
+  "misconceptions": [
+    "误以为Grid<const char*>特化仍然保存const char*指针；原文中的实现使用std::optional<std::string>保存单元。",
+    "误以为传入字符串字面量后只保存其地址；该特化的设计目标是将内容存入std::string。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "Grid<const char*>特化的单元类型是什么？",
+      "a": "std::optional<std::string>。"
+    },
+    {
+      "q": "为什么要为Grid<const char*>提供特化？",
+      "a": "原文将其单独特化，并使用std::string作为单元存储类型，而不是直接存储const char*。"
+    },
+    {
+      "q": "Grid<const char*>的网格尺寸由哪些成员记录？",
+      "a": "由m_width和m_height记录。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "类模板显式特化",
+    "std::vector与std::string"
+  ],
+  "source_pages": [
+    390,
+    391
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "501_grid_const_char_的模板特化及深拷贝存储",
+  "_chunk_pages": [
+    389,
+    392
+  ]
+}

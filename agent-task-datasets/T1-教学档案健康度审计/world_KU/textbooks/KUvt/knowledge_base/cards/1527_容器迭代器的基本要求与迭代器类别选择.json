@@ -1,0 +1,43 @@
+{
+  "title": "容器迭代器的基本要求与迭代器类别选择",
+  "definition": "为了使容器能够用于泛型算法，每个容器都必须提供能够访问其元素的迭代器。迭代器通常需要提供重载的 operator* 和 operator->，并根据所支持的行为提供其他操作。设计迭代器时，首先要选择迭代器类别，例如正向迭代器、双向迭代器或随机访问迭代器。教材为 directed_graph 选择双向迭代器，因此需要提供递增、递减、赋值和不等比较等操作。",
+  "key_points": [
+    "operator* 用于访问迭代器指向的元素；operator-> 用于访问元素的成员。",
+    "双向迭代器支持向前和向后移动，directed_graph 迭代器需要支持 operator++、operator--、operator= 和 operator!=。",
+    "随机访问迭代器还需要更多操作，例如通过 operator+、operator-、比较运算符和 operator[] 实现随机移动与访问。"
+  ],
+  "examples": [
+    "directed_graph 的迭代器类别选择为双向迭代器，因此类中包含前置和后置的 `operator++`、`operator--`，以及解引用和比较操作。",
+    "如果迭代器 it 指向包含 value 成员的元素，`(*it).value` 和 `it->value` 都可用于访问该成员，前提是相应运算符已正确实现。"
+  ],
+  "misconceptions": [
+    "只实现 operator++ 并不能使迭代器成为双向迭代器；双向迭代器还必须支持向后移动 operator--。",
+    "迭代器类别越强，所需操作越多；不能把双向迭代器直接当作随机访问迭代器使用。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "容器为什么必须提供迭代器？",
+      "a": "因为泛型算法需要通过迭代器访问容器中的元素；没有合适的迭代器，容器就难以用于泛型算法。"
+    },
+    {
+      "q": "directed_graph 为什么选择双向迭代器？",
+      "a": "教材认为双向访问适合 directed_graph，因此迭代器需要支持向前和向后移动等双向迭代操作。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++迭代器基础",
+    "泛型算法"
+  ],
+  "source_pages": [
+    734,
+    734
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1527_容器迭代器的基本要求与迭代器类别选择",
+  "_chunk_pages": [
+    733,
+    736
+  ]
+}

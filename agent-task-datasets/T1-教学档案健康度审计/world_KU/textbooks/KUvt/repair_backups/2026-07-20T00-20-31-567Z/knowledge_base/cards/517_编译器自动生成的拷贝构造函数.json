@@ -1,0 +1,42 @@
+{
+  "title": "编译器自动生成的拷贝构造函数",
+  "definition": "如果类没有自行编写拷贝构造函数，C++通常会自动生成一个拷贝构造函数。它使用源对象中相应数据成员的值初始化新对象的每个数据成员；如果某个数据成员本身是对象，则会调用该成员对象的拷贝构造函数。",
+  "key_points": [
+    "多数情况下，编译器生成的拷贝构造函数已经足够，因此不需要手动编写。",
+    "拷贝构造函数的典型形式为：classname::classname(const classname& src)。",
+    "某些涉及特殊资源管理的情况可能需要自定义拷贝构造函数，原文提示这些内容在第9章讨论。"
+  ],
+  "examples": [
+    "若存在类 SpreadsheetCell，则拷贝构造函数可表示为：SpreadsheetCell(const SpreadsheetCell& src)。",
+    "SpreadsheetCell cell1{4}; SpreadsheetCell cell2{cell1}; 此时使用拷贝构造函数用 cell1 初始化 cell2。"
+  ],
+  "misconceptions": [
+    "没有手写拷贝构造函数并不表示对象不能复制；编译器通常会自动生成一个。",
+    "拷贝构造函数不只是复制基本类型成员；对于对象类型成员，还会调用相应成员的拷贝构造函数。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "没有手动声明拷贝构造函数时，C++通常如何复制对象？",
+      "a": "C++通常会自动生成拷贝构造函数，用源对象相应数据成员的值初始化目标对象的数据成员；对象类型成员会调用其自身的拷贝构造函数。"
+    },
+    {
+      "q": "编译器生成的拷贝构造函数的典型参数形式是什么？",
+      "a": "典型形式为 classname::classname(const classname& src)。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "类与对象的基本概念"
+  ],
+  "source_pages": [
+    245,
+    245
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "517_编译器自动生成的拷贝构造函数",
+  "_chunk_pages": [
+    245,
+    248
+  ]
+}

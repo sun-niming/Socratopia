@@ -1,0 +1,45 @@
+{
+  "title": "使用 peek、get、putback 和 unget 进行字符流预读与回退",
+  "definition": "在 C++ 输入流中，peek() 查看下一个字符但不将其从流中移除；get() 读取并移除一个字符；putback(c) 将指定字符放回输入流；unget() 尝试将最近读取的字符放回输入流。它们可用于在正式读取前检查输入内容，或在读取后回退一个字符。",
+  "key_points": [
+    "peek() 只查看下一个字符，不改变输入流中的下一个待读字符。",
+    "get() 会读取字符并推进输入流。",
+    "putback(c) 将字符 c 放回输入流，使其成为后续可读取的字符。",
+    "unget() 用于回退最近读取的字符；具体能否成功取决于流状态和流缓冲区的支持。",
+    "执行这些操作后应检查输入流状态，例如使用 if (!cin) 判断是否发生错误。"
+  ],
+  "examples": [
+    "如果输入流中当前下一个字符是 'w'，先执行 cin >> c 读取它，再执行 cin.putback('e')，后续读取可能得到 'e'。原文示例输出包括：Retrieved w before putback('e'). 和 Retrieved e after putback('e').",
+    "典型调用形式：cin.peek(); cin.get(); cin.putback('e'); cin.unget();"
+  ],
+  "misconceptions": [
+    "peek() 不会读取并移除字符；把 peek() 当作 get() 会导致后续输入位置判断错误。",
+    "putback(c) 不是无条件成功的，操作后仍应检查流状态。",
+    "unget() 回退的是最近读取的字符，不是任意指定字符；若要放回指定字符，应使用 putback(c)。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "peek() 与 get() 在输入流中的主要区别是什么？",
+      "a": "peek() 查看下一个字符但不移除它；get() 读取并移除下一个字符。"
+    },
+    {
+      "q": "如何把字符 'e' 放回输入流？",
+      "a": "可以调用 cin.putback('e')；调用后应检查 cin 的状态。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++标准输入流和流状态"
+  ],
+  "source_pages": [
+    421,
+    424
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "548_使用_peek_get_putback_和_unget_进行字符流预读与回退",
+  "_chunk_pages": [
+    421,
+    424
+  ]
+}

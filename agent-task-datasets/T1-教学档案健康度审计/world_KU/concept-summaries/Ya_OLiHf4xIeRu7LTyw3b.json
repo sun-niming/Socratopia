@@ -1,0 +1,123 @@
+{
+  "conversationId": "Ya_OLiHf4xIeRu7LTyw3b",
+  "generatedAt": 1782641576877,
+  "pagesRange": null,
+  "sections": [
+    {
+      "type": "tldr",
+      "content": "这节把 Shell 的循环控制、函数返回码和整数运算串起来了：`for ((...))` 按“初始化→判断→执行→更新”运行，`break/continue/exit` 负责改写流程，函数靠返回码配合 `if`、`!`、`&&`、`||` 判断，而 `let`、`$(( ))`、`expr` 都是在做整数计算。"
+    },
+    {
+      "type": "narrative",
+      "content": "先从 `for ((e1; e2; e3))` 的执行顺序切入，确认每一轮到底是“先输出再更新”还是“先更新再输出”。接着把 `break`、`continue`、`exit` 分清：一个退循环、一个跳过本轮、一个直接退脚本。最后转到函数和整数运算，理解 `return` 只回状态码，不回字符串；`let`、`$(( ))`、`expr` 则分别提供了不同风格的算术写法。"
+    },
+    {
+      "type": "concepts",
+      "items": [
+        {
+          "name": "C 风格 for 的执行顺序",
+          "body": "```bash\\nfor ((i=1; i<=3; i++))\\ndo\n  echo \"$i\"\\ndone\n```\n\n执行顺序不是三段同时发生，而是：\n\n1. 先执行 `e1`，只做一次初始化\n2. 再判断 `e2`\n3. 条件成立才进循环体\n4. 体执行完后，再做 `e3`\n5. 回到第 2 步\n\n所以像 `for ((i=1; i<=5; i=i+2))` 这种写法，通常是**先输出，再加 \\(2\\)**。条件不满足时，循环体根本不会进。"
+        },
+        {
+          "name": "循环控制词：break / continue / exit",
+          "body": "- `break`：**直接跳出循环**，循环后面的内容不再继续本轮\n- `continue`：**跳过本轮剩余内容**，进入下一轮\n- `exit`：**直接结束整个脚本**，不是只结束循环\n\n例子里：\n\n```bash\\nfor ((i=1; i<=5; i++))\\ndo\n  if [ $i -eq 3 ]\n  then\n    break\n  fi\n  echo \"$i\"\\ndone\n```\n\n当 `i=3` 时，如果先执行到 `break`，那一轮后面的 `echo` 不会执行，而且整个循环也结束了。\n\n而 `continue` 只是不打印当前轮，后面轮次还会继续。"
+        },
+        {
+          "name": "函数与返回码",
+          "body": "Shell 函数要**先定义后使用**，而且函数体是在当前 Shell 环境里执行的。\n\n```bash\\nsay_hi() {\n  echo \"hi\"\n  return 3\n}\n\\nsay_hi\\necho \"$?\"\n```\n\n这里要分清两件事：\n\n- `echo`：负责**屏幕输出**\n- `return`：负责**返回码**\n\n返回码通常在 \\(0\\) 到 \\(255\\) 之间；`0` 表示成功，非 `0` 表示失败。像 `return 300` 这种会按 \\(256\\) 取模，最后变成 \\(44\\)。\n\n函数里改普通变量，外面一般也能看到：\n\n```bash\\nname=old\\nchange() {\n  name=new\n}\n```\n\n调用后，`name` 会变成 `new`。"
+        },
+        {
+          "name": "if、!、&&、|| 的状态码逻辑",
+          "body": "Shell 的判断看的是**命令返回码**，不是“是否有输出”。\n\n- `if cmd`：`cmd` 返回 \\(0\\) 走 `then`\n- `! cmd`：把成功/失败反过来\n- `cmd1 && cmd2`：只有 `cmd1` 成功，才执行 `cmd2`\n- `cmd1 || cmd2`：只有 `cmd1` 失败，才执行 `cmd2`\n\n注意：`||` 判断的是**非 \\(0\\)**，不是“非负”。因为返回码本来就通常是 \\(0\\) 到 \\(255\\)。\n\n例如：\n\n```bash\\nfalse || echo \"A\"\\ntrue && echo \"B\"\\nfalse && echo \"C\"\\ntrue || echo \"D\"\n```\n\n最终只会输出 `A` 和 `B`。"
+        },
+        {
+          "name": "let、$(( ))、expr：整数运算的三种写法",
+          "body": "### `let`\n`let` 会做**整数运算并写回变量**：\n\n```bash\\ni=1\\nlet i=i+1\n```\n\n`i` 会真的变成 `2`。`let` 里乘号 `*` 常常要加引号，避免被 Shell 当成通配符。\n\n### `$(( ))`\n`$(( ))` 是**算术替换**，会先算出结果，再把结果放到原位置：\n\n```bash\\na=3\\nb=4\\necho $((a+b))\n```\n\n这里会直接输出 `7`。如果写成 `i=$((i+1))`，那就是把结果**写回变量**；如果只是 `echo \"$((i+1))\"`，那只是临时计算，不会改变 `i`。\n\n### `expr`\n`expr` 也是整数运算工具，但**运算符两边必须有空格**：\n\n```bash\\nexpr $a + $b\n```\n\n可以正常算；但 `expr $a+$b` 往往会被当成字符串，不会按运算处理。\n\n整体上，`let` 和 `$(( ))` 更现代、更常用；`expr` 则更“老派”，但课堂里很重要。"
+        }
+      ]
+    },
+    {
+      "type": "key-terms",
+      "items": [
+        {
+          "term": "C 风格 for",
+          "definition": "`for ((e1; e2; e3))` 这种写法，按“初始化→判断→执行→更新”循环。"
+        },
+        {
+          "term": "break",
+          "definition": "直接跳出当前循环。"
+        },
+        {
+          "term": "continue",
+          "definition": "跳过本轮剩余内容，进入下一轮。"
+        },
+        {
+          "term": "exit",
+          "definition": "直接结束整个脚本，可带退出码。"
+        },
+        {
+          "term": "返回码",
+          "definition": "命令执行后的状态值，通常 \\(0\\) 表示成功，非 \\(0\\) 表示失败。"
+        },
+        {
+          "term": "$?",
+          "definition": "查看上一条命令的返回码。"
+        },
+        {
+          "term": "return",
+          "definition": "在函数里设置返回码，不是输出文本。"
+        },
+        {
+          "term": "短路",
+          "definition": "`&&` / `||` 依据前一个命令的成败决定后一个命令是否执行。"
+        },
+        {
+          "term": "let",
+          "definition": "Shell 的整数运算命令，常用于自增、自减、乘除取余。"
+        },
+        {
+          "term": "$(( ))",
+          "definition": "算术替换，先计算整数表达式，再把结果替换到当前位置。"
+        },
+        {
+          "term": "expr",
+          "definition": "老式整数运算工具，运算符两边通常要有空格。"
+        }
+      ]
+    },
+    {
+      "type": "open-question",
+      "content": "如果写 `expr 10 / 3`，最后会得到什么？它和 `let`、`$(( ))` 的整数除法行为是不是一致，都会把小数部分截掉？"
+    },
+    {
+      "type": "review-questions",
+      "items": [
+        {
+          "question": "`for ((i=1; i<=5; i=i+2))` 最终会输出哪些数？",
+          "hint": "先想清楚 `i=i+2` 是在每轮循环体的前面还是后面执行。",
+          "answer": "输出 `1`、`3`、`5`。每轮都是先执行循环体，后执行 `i=i+2`。"
+        },
+        {
+          "question": "下面这段代码最终输出什么？\n\n```bash\\nfor ((i=1; i<=5; i++))\\ndo\n  if [ $i -eq 3 ]\n  then\n    break\n  fi\n  echo \"$i\"\\ndone\n```",
+          "hint": "`break` 是跳出循环，不是跳过当前行。",
+          "answer": "输出 `1`、`2`。当 `i=3` 时先触发 `break`，后面的 `echo` 不会执行，循环也直接结束。"
+        },
+        {
+          "question": "下面这段代码最终输出什么？\n\n```bash\\ncheck() {\n  return 5\n}\n\\nif check\\nthen\n  echo \"ok\"\\nelse\n  echo \"bad\"\\nfi\n```",
+          "hint": "Shell 里非 `0` 代表失败。",
+          "answer": "输出 `bad`。因为 `return 5` 是非 `0`，`if` 会走 `else`。"
+        },
+        {
+          "question": "`let \"c=a*b\"` 和 `echo \"$((a*b))\"` 的区别是什么？",
+          "hint": "一个会不会改变量，另一个会不会。",
+          "answer": "`let \"c=a*b\"` 会把结果写回变量 `c`；`echo \"$((a*b))\"` 只是临时计算并输出结果，不会自动改变 `a` 或 `b`。"
+        },
+        {
+          "question": "为什么 `expr $a + $b` 能算，`expr $a+$b` 却经常不行？",
+          "hint": "注意 `expr` 对空格很敏感。",
+          "answer": "因为 `expr` 需要运算符两边有空格；`expr $a+$b` 往往会被当成一个普通字符串，而不是算式。"
+        }
+      ]
+    }
+  ]
+}

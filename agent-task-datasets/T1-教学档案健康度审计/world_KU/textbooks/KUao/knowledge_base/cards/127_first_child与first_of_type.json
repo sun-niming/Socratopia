@@ -1,0 +1,43 @@
+{
+  "title": "first-child与first-of-type",
+  "definition": "first-child 表示一组兄弟元素中的第一个元素；first-of-type 表示一组兄弟元素中其类型的第一个元素。二者都属于伪类选择器，但判断“第一个”的标准不同。",
+  "key_points": [
+    ":first-child 关注“兄弟元素中的第一个”。",
+    ":first-of-type 关注“同类型元素中的第一个”。",
+    "first-child 与 first-of-type 都是伪类选择器。",
+    "二者的区别在于：一个按兄弟顺序判断，一个按元素类型判断。"
+  ],
+  "examples": [
+    ":first-child",
+    "first-of-type"
+  ],
+  "misconceptions": [
+    "first-of-type 不要求它一定是所有兄弟节点中的第一个，只要求它是同类型中的第一个。",
+    "first-child 不能被“同类型中第一个”这个条件替代。"
+  ],
+  "qa_pairs": [
+    {
+      "q": ":first-child 和 :first-of-type 的区别是什么？",
+      "a": ":first-child 是一组兄弟元素中的第一个元素，:first-of-type 是一组兄弟元素中其类型的第一个元素。"
+    },
+    {
+      "q": "这两个选择器都属于哪一类选择器？",
+      "a": "伪类选择器。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "伪类选择器"
+  ],
+  "source_pages": [
+    97,
+    100
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "127_first_child与first_of_type",
+  "_chunk_pages": [
+    97,
+    100
+  ]
+}

@@ -1,0 +1,123 @@
+{
+  "conversationId": "H_CUtB_3Dt0vQR7wLaGnV",
+  "generatedAt": 1789291180693,
+  "pagesRange": "p.131-136",
+  "sections": [
+    {
+      "type": "tldr",
+      "content": "本章习题的核心是**服务模型的分岔**：TCP 给应用面向连接、可靠、按序的字节流；UDP 给无连接的数据报，地址贴一次用完即弃。围绕这个分岔，我们做通了套接字数目、启动顺序、HTTP/SMTP/POP3 的协议选型、DNS 的 A 与 MX 记录，以及单击超链接的时延分解。"
+    },
+    {
+      "type": "narrative",
+      "content": "这次从 R26（UDP 一扇门 vs TCP n+1 扇门）开始，一路拆到 R27（服务器/客户启动顺序）、R11（HTTP/SMTP/POP3 为何站在 TCP 上）、R19（同一主机名 alias 同时挂 A 和 MX），最后落到 P7 的时延拆解——把「点击 → 收到对象」拆成 DNS 的 n 个 RTT 加服务器方向的两个来回。学习者在 R27、R11、R19 都一次答对；P7 起初只数了一个来回，被点醒后补出了「请求去、对象回」的第二趟。最后一问（为什么只 close connectionSocket）留作下次的钩子。"
+    },
+    {
+      "type": "concepts",
+      "items": [
+        {
+          "name": "UDP 服务器为何只需一个套接字",
+          "body": "UDP 服务器只有**一扇门**，却同时照看所有客户，靠的是**每个到达的分组自己带着寄件人地址**：源 IP + 源端口。服务器回信时把 `clientAddress` 原样贴回去即可，从不「记住」谁：\n\n```python\nserverSocket.sendto(modifiedMessage.encode(), clientAddress)\n```\n\n教科书式的说法：UDP 服务器不维系连接状态。分组的地址信息一直**挂在报文上**，所以一扇门够用。"
+        },
+        {
+          "name": "TCP 服务器为何需要两个（及以上）套接字",
+          "body": "TCP 的**字节流上没有寄件人地址**，所以它换了办法：三次握手时把一对地址（客户 IP/端口 + 服务器 IP/端口）绑死到一个 **连接套接字** 上。\n\n- **欢迎套接字（serverSocket）**：绑在固定端口（如 12000），所有客户共用，`accept()` 只负责「开门」，从不读也不写。\n- **连接套接字（connectionSocket）**：`accept()` 每迎来一位客户就为它开一扇专属门，客户走后关闭。\n\n所以 n 个并行客户 = 1 扇欢迎之门 + n 扇专属之门 = $n+1$ 个套接字。"
+        },
+        {
+          "name": "TCP 是字节流，不保留 send 的边界",
+          "body": "客户连着调用 `send(\"Hello\")`、`send(\"World\")`，服务器一次 `recv(1024)` **不保证**收到 \"Hello\" 和 \"World\" 两条独立消息。TCP 只保证两件事：\n\n- 字节都到（可靠）\n- 按序到（有序）\n\n至于「哪几个字节算一条消息」，TCP 不知道——`send` 划下的边界它不认。可能一次收到 `\"HelloWorld\"`，也可能只收到 `\"Hel\"`。\n\n要让消息有边界，需**应用自己划**：长度字段（length-prefix）或分隔符（如换行）。"
+        },
+        {
+          "name": "客户端的端口从哪来：操作系统 + 临时端口",
+          "body": "TCPClient / UDPClient 创建套接字时都**没有**指定客户自己的端口：\n\n```python\nclientSocket = socket(AF_INET, SOCK_STREAM)  # 无端口\n```\n\n端口由**操作系统**临时分配，叫 **临时端口（ephemeral port）**，从一个较大范围内挑一个空闲的。\n\\nTCP 中它真正定下来的时刻是 `connect()`：\n\n```python\nclientSocket.connect((serverName, serverPort))\n```\n\n这一行同时做两件事：① 向服务器发起三次握手；② 操作系统给套接字配上**客户自己**的 IP + 临时端口，两对地址合成一条连接。从此绑到该套接字，连接存续期间不变。\n\\nUDP 没有 `connect()`，地址在**真正发送那一刻**才贴上：\n\n```python\nclientSocket.sendto(message.encode(), (serverName, serverPort))\n```\n\n目的地由应用显式附上，源地址由操作系统自动补上——**每发一次贴一次**。这就是「有连接 vs 无连接」在代码上的手感差别。"
+        },
+        {
+          "name": "close() 是隔空的告别",
+          "body": "```python\nclientSocket.close()\n```\n\n教材原话：这一行不只是把套接字从本地抹掉，还会**引起客户中的 TCP 向服务器中的 TCP 发送一条 TCP 报文**（细节在 3.5 节）。因此 `close()` 不是只扫自家院子的小动作——它隔空向对面传一句「这条连接我到这儿为止了」。两端是一起把它放下的，不是客户单方面走掉、服务器干等。"
+        },
+        {
+          "name": "R27：为什么 TCP 服务器必须先启动",
+          "body": "客户的 `connect()` 一执行，就是起身去敲服务器主机的固定端口（如 12000）。而那扇门，只有**在那台主机上真的执行过** `bind(('', 12000))` 的服务器程序才造得出来。\n\n- **服务器没启动**：端口没人占用，服务器主机的操作系统回一个「拒绝」信号，`connect()` 立刻失败报错。客户**不能**自己把那扇门造出来——它住在另一台主机上，没资格去别人家钉门。\n- **UDP 客户为何可以先启动**：UDP 客户从头到尾都不需要「被接待」。`sendto` 只是把分组往网络里一丢就走，没人收也照发。没有握手、没有连接，也就没有「对面必须站着人」这个前提。"
+        },
+        {
+          "name": "R11：HTTP、SMTP、POP3 为何都站在 TCP 上",
+          "body": "三个协议都把**一整个东西**当作要送过网络的内容：\n\n- **HTTP**：一个完整网页对象\n- **SMTP**：一封完整邮件\n- **POP3**：取回一封完整邮件\n\n少一个字节、或者顺序挪位，那份东西就毁了。它们缺不了的、UDP 给不了的两样东西：**可靠 + 按序**。\n\n补充：UDP 本身不「坏」，它只是把可靠性还给应用处理。这三个协议的作者选了省事的方案——直接站在 TCP 上。UDP 更适合实时音视频、DNS 查询等**容忍丢失、追求轻快**的场景。"
+        },
+        {
+          "name": "R19：同一主机名 alias 如何同时挂 A 和 MX",
+          "body": "一个机构想同时让：\n\n- 用户敲 `foo.com` 访问网站；\n- 发往 `@foo.com` 的邮件有人收。\n\n`foo.com` 身上可以同时挂两种类型的记录：\n\n| 类型 | 指向 | 谁查 |\n|---|---|---|\n| **A** | Web 服务器的 IP | 浏览器访问网站 |\n| **MX** | 邮件服务器的**主机名**（如 `mail.foo.com`） | SMTP 投递邮件 |\n\n关键点：**只有 A 记录的 VALUE 是 IP**；MX 记录的 VALUE 是**主机名**。两者靠记录类型分开，靠同一个 alias 走，不会打架。所以问题「包含邮件服务器主机名的 RR 是什么类型」——答案是 **MX**。"
+        },
+        {
+          "name": "P7：点击超链接到收到对象的时延拆解",
+          "body": "条件：\n\n- 本地主机 IP 未缓存，需 DNS lookups；\n- 先后经过 $n$ 个 DNS 服务器，RTT 依次为 $\\mathrm{RTT}_1, \\dots, \\mathrm{RTT}_n$；\n- 页面只含一个对象（少量 HTML 文本）；\n- 本地主机与对象服务器的 RTT 为 $\\mathrm{RTT}_0$；\n- 对象传输时间为零。\n\n来龙去脉：\n\n1. **DNS 段**：$n$ 次查询 = $\\mathrm{RTT}_1 + \\cdots + \\mathrm{RTT}_n$。\n2. **握手一次往返**：`connect()` 触发三次握手，1 个 $\\mathrm{RTT}_0$（把路铺好）。\n3. **HTTP 一次往返**：客户送**请求报文**过去，服务器回**对象**回来，另 1 个 $\\mathrm{RTT}_0$。\n\n所以总数：\n\n$$\n\\nT = \\sum_{i=1}^{n} \\mathrm{RTT}_i + 2\\,\\mathrm{RTT}_0\n$$\n\n易错点：只答 $1 \\cdot \\mathrm{RTT}_0$（只算握手），漏掉请求-响应那一趟。"
+        },
+        {
+          "name": "TCPServer.py 的骨架",
+          "body": "```python\nserverSocket = socket(AF_INET, SOCK_STREAM)\nserverSocket.bind(('', serverPort))\nserverSocket.listen(1)\n\nwhile True:\n    connectionSocket, addr = serverSocket.accept()\n    sentence = connectionSocket.recv(1024).decode()\n    capitalizedSentence = sentence.upper()\n    connectionSocket.send(capitalizedSentence.encode())\n    connectionSocket.close()\n```\n\n**收—加工—送回**：从 `connectionSocket` 读到客户送来的字节，用 `upper()` 变大写，再从同一扇门送回。\n\n`serverSocket` 从不读写，只在 `accept()` 时把每位新客人交给一扇专属新门。程序结尾只关 `connectionSocket`，**从不去关** `serverSocket`——欢迎之门一直开着，循环回到 `accept()`，继续等下一次敲门。"
+        }
+      ]
+    },
+    {
+      "type": "key-terms",
+      "items": [
+        {
+          "term": "欢迎套接字（welcome socket）",
+          "definition": "TCPServer 里绑在固定端口的 `serverSocket`。所有客户共用，只在 `accept()` 时开门，从不读也不写。"
+        },
+        {
+          "term": "连接套接字（connection socket）",
+          "definition": "`accept()` 为每位客户新开、供其独占的套接字。客户走后关闭。"
+        },
+        {
+          "term": "临时端口（ephemeral port）",
+          "definition": "操作系统为客户套接字临分配的一个空闲端口，通常取自较大范围。TCP 中在 `connect()` 时定下，UDP 中在首次 `sendto` 时贴上。"
+        },
+        {
+          "term": "字节流（byte stream）",
+          "definition": "TCP 交给应用的抽象：保证字节都到、按序到，但不认 `send` 划下的消息边界。"
+        },
+        {
+          "term": "A 记录",
+          "definition": "DNS 记录类型，VALUE 是 IPv4 地址。浏览器访问网站时先查它。"
+        },
+        {
+          "term": "MX 记录",
+          "definition": "DNS 记录类型，VALUE 是邮件服务器的**主机名**。SMTP 投信前先查它。"
+        }
+      ]
+    },
+    {
+      "type": "open-question",
+      "content": "为什么 TCPServer.py 里**只关 `connectionSocket`，却从不去关那扇 `serverSocket`**？如果真把 `serverSocket` 关了，服务器进入的是什么状态？（——这是这节留作下次收尾的最后一问。）"
+    },
+    {
+      "type": "review-questions",
+      "items": [
+        {
+          "question": "UDP 服务器只有一个套接字，为什么不会把不同客户弄混？",
+          "hint": "想想服务器回信时用的地址从哪来。",
+          "answer": "每个到达的 UDP 分组**自带寄件人地址**（源 IP + 源端口）。服务器用收到的 `clientAddress` 原样回信即可，无需记住谁。所以一扇门够用。"
+        },
+        {
+          "question": "为什么 TCP 服务器必须为一个客户开一个额外的连接套接字？",
+          "hint": "想想 TCP 字节流上有没有「寄件人地址」。",
+          "answer": "TCP 的**字节流上没有寄件人地址**。它靠三次握手把一对（客户 IP/端口 + 服务器 IP/端口）绑到一个连接套接字上。`accept()` 每迎来一位客户就为它开一扇专属门，n 个客户共 $n+1$ 个套接字。"
+        },
+        {
+          "question": "用户点击超链接，IP 未缓存，先后访问 $n$ 个 DNS 服务器（RTT 分别为 $\\mathrm{RTT}_1, \\dots, \\mathrm{RTT}_n$），再到服务器取一个 HTML 对象（本地与服务器的 RTT 为 $\\mathrm{RTT}_0$，对象传输时间为零）。从点击到收到对象需多长时间？",
+          "hint": "先算 DNS 段，再数服务器方向有几个来回。",
+          "answer": "$$\nT = \\sum_{i=1}^{n}\\mathrm{RTT}_i + 2\\,\\mathrm{RTT}_0\n$$\n\n服务器方向两个来回：① `connect()` 的三次握手（1 个 $\\mathrm{RTT}_0$）；② 送 HTTP **请求报文**去、回**对象**来（另 1 个 $\\mathrm{RTT}_0$）。"
+        },
+        {
+          "question": "一个机构想让 `foo.com` 既是网站入口又是收信入口，DNS 该怎么配？",
+          "hint": "两条记录各管一条路，靠类型分开。",
+          "answer": "同时挂：\n- **A 记录** `foo.com` → Web 服务器 IP（浏览器走这条）；\n- **MX 记录** `foo.com` → 邮件服务器**主机名**（如 `mail.foo.com`）（SMTP 走这条）。\n\n两者各管一条路，不冲突。"
+        },
+        {
+          "question": "客户连调两次 `send(\"Hello\")`、`send(\"World\")`，服务器只 `recv(1024)` 一次，会收到什么？",
+          "hint": "试图回忆 TCP 对「消息边界」的态度。",
+          "answer": "**不确定**。TCP 是字节流，只保证字节都到、按序到，不认 `send` 的边界。可能一次收到 `\"HelloWorld\"`，也可能只收到 `\"Hel\"`。要让消息有边界，应用需自己加长度字段或分隔符。"
+        }
+      ]
+    }
+  ]
+}

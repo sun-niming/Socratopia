@@ -1,0 +1,42 @@
+{
+  "title": "man 命令的 -a 与 -s 选项",
+  "definition": "教材列出了 man 命令的两个选项：-a 表示显示所有手册页；-s 章节号 表示显示指定章节的手册。",
+  "key_points": [
+    "-a：显示所有手册页",
+    "-s 章节号：显示指定章节的手册",
+    "这两个选项都属于 man 命令的用法"
+  ],
+  "examples": [
+    "man -a 命令名",
+    "man -s 章节号 命令名"
+  ],
+  "misconceptions": [
+    "-s 后面需要给出章节号，不是任意参数",
+    "-a 和 -s 都是 man 的选项，不是独立命令"
+  ],
+  "qa_pairs": [
+    {
+      "q": "man 的 -a 选项有什么作用？",
+      "a": "显示所有手册页。"
+    },
+    {
+      "q": "man 的 -s 章节号 选项有什么作用？",
+      "a": "显示指定章节的手册。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "man 命令的作用与基本格式"
+  ],
+  "source_pages": [
+    5,
+    8
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "009_man_命令的_a_与_s_选项",
+  "_chunk_pages": [
+    5,
+    8
+  ]
+}

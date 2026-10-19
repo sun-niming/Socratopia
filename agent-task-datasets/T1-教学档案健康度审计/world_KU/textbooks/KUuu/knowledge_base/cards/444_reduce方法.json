@@ -1,0 +1,44 @@
+{
+  "title": "reduce方法",
+  "definition": "`reduce()` 会对数组中的每个元素按顺序执行 reducer 函数。教材配图显示，reducer 形如 `(acc, cur) => acc + cur`，即用前一步的累积结果 `acc` 和当前值 `cur` 逐步得到最终结果。",
+  "key_points": [
+    "对数组元素按顺序处理",
+    "通过 reducer 函数逐步累积结果",
+    "教材示例使用 `acc` 和 `cur` 两个参数",
+    "最终结果由累积过程决定"
+  ],
+  "examples": [
+    "[1,2,3].reduce((acc, cur) => acc + cur)  // 6",
+    "['🥒','🍅','🥞','🧀'].reduce((acc, cur) => acc + cur)"
+  ],
+  "misconceptions": [
+    "`reduce()` 只能用于求和；实际上也可以用于其他累积计算",
+    "`reduce()` 只是遍历，不产生结果；它会把元素归并成一个结果"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`reduce()` 的核心思想是什么？",
+      "a": "按顺序把每个元素与累积结果结合，逐步得到最终结果。"
+    },
+    {
+      "q": "教材示例中 `reduce()` 的回调参数有哪些？",
+      "a": "`acc` 和 `cur`。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "回调函数",
+    "Array对象与创建方式"
+  ],
+  "source_pages": [
+    307,
+    308
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "444_reduce方法",
+  "_chunk_pages": [
+    305,
+    308
+  ]
+}

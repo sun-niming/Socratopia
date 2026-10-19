@@ -1,0 +1,43 @@
+{
+  "title": "用vector<pair>表示名字计数数据库",
+  "definition": "初次设计的NameDB内存数据库使用一个vector保存名字及其出现次数。vector的每个元素是一个pair，其中first保存名字，second保存该名字在原始数据文件中出现的次数。构造函数逐个读取文件中的名字：如果名字已存在，就增加对应计数；否则添加一个计数为1的新条目。",
+  "key_points": [
+    "数据成员可表示为`std::vector<std::pair<std::string, int>> m_names;`。",
+    "`pair`用于把两种不同类型的值组合成一个对象：本例中分别是名字和整数计数。",
+    "构造函数读取文件失败时抛出`invalid_argument`异常，异常信息为`Unable to open file`。",
+    "新名字通过类似`m_names.push_back(make_pair(name.data(), 1));`的操作加入数据库。"
+  ],
+  "examples": [
+    "数据库中的一个条目可以抽象表示为`{ \"Daniel\", 12 }`，其中名字为`Daniel`，出现次数为`12`。",
+    "构造过程的逻辑可表示为：$$\\text{若 }name\\text{ 已存在，则 count\\leftarrow count+1；否则加入 }(name,1)。$$"
+  ],
+  "misconceptions": [
+    "`pair`不是只能保存相同类型的两个值；它可以组合两种不同类型。",
+    "该设计不是直接按名字快速定位条目，而是把所有条目顺序存放在vector中。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "初次设计中，NameDB的vector元素保存什么？",
+      "a": "每个元素是一个`pair`，保存一个名字及其在原始数据文件中的出现次数。"
+    },
+    {
+      "q": "读取到一个尚未出现过的名字时，数据库如何处理？",
+      "a": "将该名字加入vector，并把它的计数初始化为1。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++标准库vector和pair"
+  ],
+  "source_pages": [
+    865,
+    865
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1793_用vector_pair_表示名字计数数据库",
+  "_chunk_pages": [
+    865,
+    868
+  ]
+}

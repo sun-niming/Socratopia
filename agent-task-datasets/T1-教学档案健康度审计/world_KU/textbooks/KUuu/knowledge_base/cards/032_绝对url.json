@@ -1,0 +1,42 @@
+{
+  "title": "绝对URL",
+  "definition": "绝对URL使用完整的URL指向网络资源。教材给出两种形式：完整URL时，浏览器按该URL中指定的协议、域名和路径加载资源；隐去协议时，浏览器使用加载该URL的文档相同的协议来调用该URL。",
+  "key_points": [
+    "绝对URL使用完整URL指向网络资源",
+    "完整URL会明确给出协议、域名和路径",
+    "隐去协议时，浏览器沿用当前文档的协议"
+  ],
+  "examples": [
+    "https://developer.mozilla.org/zh-CN/docs/Learn/Common_questions/Web_mechanics/What_is_a_URL",
+    "//example.com/path/file.html"
+  ],
+  "misconceptions": [
+    "只要省略了协议，URL就一定不是绝对URL",
+    "绝对URL只包含域名，不需要路径"
+  ],
+  "qa_pairs": [
+    {
+      "q": "什么是绝对URL？",
+      "a": "绝对URL使用完整的URL指向网络资源。"
+    },
+    {
+      "q": "隐去协议的绝对URL，浏览器会如何处理？",
+      "a": "浏览器会使用加载该URL的文档相同的协议来调用该URL。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "URL的一般格式与协议名"
+  ],
+  "source_pages": [
+    21,
+    24
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "032_绝对url",
+  "_chunk_pages": [
+    21,
+    24
+  ]
+}

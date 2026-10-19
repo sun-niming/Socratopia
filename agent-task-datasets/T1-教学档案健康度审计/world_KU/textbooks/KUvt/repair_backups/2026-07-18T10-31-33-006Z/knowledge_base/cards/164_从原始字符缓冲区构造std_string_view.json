@@ -1,0 +1,44 @@
+{
+  "title": "从原始字符缓冲区构造std::string_view",
+  "definition": "当字符串由字符指针和字符数量表示时，可以使用字符指针与长度构造std::string_view，从而处理不一定以NUL字符结尾的字符序列。构造形式为`std::string_view{raw, length}`。",
+  "key_points": [
+    "原文使用`const char* raw`和`size_t length`表示一段原始字符数据。",
+    "可以将字符指针和长度组合为`std::string_view{raw, length}`，再传给extractExtension。",
+    "使用显式长度可以准确限定视图包含的字符范围，而不依赖字符数据是否以NUL字符结尾。"
+  ],
+  "examples": [
+    "`size_t length{ /* ... */ };`",
+    "`extractExtension(std::string_view{ raw, length })`",
+    "原文还展示了将`{ raw, length }`作为参数传入extractExtension的写法。"
+  ],
+  "misconceptions": [
+    "仅有`const char*`时，通常无法表达字符序列的准确长度；原文示例通过额外的`size_t length`明确长度。",
+    "std::string_view不一定要求底层字符序列以NUL字符结尾；使用指针和长度即可表示一段字符范围。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何从原始字符指针和长度构造std::string_view？",
+      "a": "使用`std::string_view{raw, length}`，其中raw是字符指针，length是要包含的字符数。"
+    },
+    {
+      "q": "为什么原文同时传递raw和length？",
+      "a": "因为string_view可以按照给定长度表示字符范围，不必仅依靠NUL字符来确定字符串结尾。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "std::string_view的基本用途",
+    "C风格字符串和NUL字符"
+  ],
+  "source_pages": [
+    113,
+    116
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "164_从原始字符缓冲区构造std_string_view",
+  "_chunk_pages": [
+    113,
+    116
+  ]
+}

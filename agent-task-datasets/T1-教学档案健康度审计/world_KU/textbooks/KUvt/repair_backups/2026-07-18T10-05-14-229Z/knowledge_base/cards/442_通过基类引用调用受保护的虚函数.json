@@ -1,0 +1,43 @@
+{
+  "title": "通过基类引用调用受保护的虚函数",
+  "definition": "如果派生类重写了基类的虚函数，并将该重写函数声明为 protected，那么直接通过派生类对象调用会因为访问权限不足而报错；但如果先把该对象绑定到基类引用，再通过基类引用调用虚函数，调用表达式的访问检查依据基类中的成员访问权限进行，同时虚函数分派仍会执行派生类的重写版本。",
+  "key_points": [
+    "示例中，Shy::talk() 是 protected，因此直接执行 myShy.talk() 会报错。",
+    "Gregarious& ref { myShy }; 将 Shy 对象绑定到基类 Gregarious 引用。",
+    "执行 ref.talk() 时，访问检查依据 Gregarious::talk()，而虚函数分派最终调用 Shy::talk()，输出“Shy reluctantly says hello.”。",
+    "访问控制检查与虚函数动态分派是两个不同过程：前者依据表达式的静态类型，后者决定实际执行的重写函数。"
+  ],
+  "examples": [
+    "代码示例：\nclass Gregarious {\npublic:\n    virtual void talk() {\n        cout << \"Gregarious says hi!\" << endl;\n    }\n};\n\nclass Shy : public Gregarious {\nprotected:\n    void talk() override {\n        cout << \"Shy reluctantly says hello.\" << endl;\n    }\n};\n\nShy myShy;\nmyShy.talk();             // 错误：尝试访问 protected 成员\nGregarious& ref { myShy };\nref.talk();               // 调用 Shy::talk()，输出 Shy reluctantly says hello."
+  ],
+  "misconceptions": [
+    "不能简单认为 protected 虚函数永远不能从类外调用；通过访问权限允许的基类接口调用时，仍可能动态分派到派生类的 protected 重写函数。",
+    "虚函数最终执行哪个版本，不等于访问权限检查依据哪个版本；访问检查和动态分派应分别判断。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么 myShy.talk() 报错，而 Gregarious& ref { myShy }; ref.talk() 可以调用？",
+      "a": "myShy.talk() 的表达式静态类型是 Shy，Shy::talk() 为 protected，类外直接访问不允许。ref.talk() 的表达式静态类型是 Gregarious，Gregarious::talk() 为 public，访问检查通过；由于它是虚函数，运行时仍动态分派到 Shy::talk()。"
+    },
+    {
+      "q": "通过基类引用调用 ref.talk() 时，实际执行哪个函数？",
+      "a": "实际执行 Shy::talk()，因为 talk() 是虚函数且 ref 实际引用的是 Shy 对象。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++继承与访问控制",
+    "C++虚函数与动态分派"
+  ],
+  "source_pages": [
+    341,
+    344
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "442_通过基类引用调用受保护的虚函数",
+  "_chunk_pages": [
+    341,
+    344
+  ]
+}

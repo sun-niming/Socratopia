@@ -1,0 +1,50 @@
+{
+  "title": "Grid<const char*>的坐标检查与at访问",
+  "definition": "Grid<const char*>特化提供verifyCoordinate、const版本at和非const版本at。verifyCoordinate检查x是否小于m_width、y是否小于m_height；越界时抛出std::out_of_range，并使用std::format生成错误信息。const版本at先进行坐标检查，再返回m_cells[x][y]。非const版本通过std::as_const(*this).at(x, y)复用const版本的检查和访问逻辑，再使用const_cast移除返回引用的const限定。",
+  "key_points": [
+    "当x >= m_width时抛出std::out_of_range。",
+    "当y >= m_height时抛出std::out_of_range。",
+    "const版本at返回const std::optional<std::string>&。",
+    "非const版本at返回std::optional<std::string>&。",
+    "非const版本通过调用const版本避免重复实现坐标检查和元素访问。"
+  ],
+  "examples": [
+    "访问逻辑可概括为：$$\\text{at}(x,y)=\\begin{cases}\\text{抛出 std::out\\_of\\_range},&x\\ge m\\_width\\ \\text{或}\\ y\\ge m\\_height\\\\m\\_cells[x][y],&\\text{否则}\\end{cases}$$",
+    "非const访问可写成：`return const_cast<std::optional<std::string>&>(std::as_const(*this).at(x, y));`"
+  ],
+  "misconceptions": [
+    "误以为at对越界坐标返回空optional；原文实现是在越界时抛出std::out_of_range。",
+    "误以为const对象和非const对象使用两套独立的边界检查；非const版本通过调用const版本复用检查逻辑。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "当x大于或等于m_width时，Grid<const char*>::at会怎样？",
+      "a": "verifyCoordinate抛出std::out_of_range。"
+    },
+    {
+      "q": "const版本at返回什么类型？",
+      "a": "返回const std::optional<std::string>&。"
+    },
+    {
+      "q": "非const版本at如何复用const版本的实现？",
+      "a": "先对*this使用std::as_const调用const版本at，再用const_cast将返回引用转换为非const引用。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "const成员函数重载",
+    "异常抛出",
+    "std::optional"
+  ],
+  "source_pages": [
+    389,
+    392
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "502_grid_const_char_的坐标检查与at访问",
+  "_chunk_pages": [
+    389,
+    392
+  ]
+}

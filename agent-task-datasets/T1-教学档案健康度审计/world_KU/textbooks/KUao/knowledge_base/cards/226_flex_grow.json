@@ -1,0 +1,37 @@
+{
+  "title": "flex-grow",
+  "definition": "flex-grow 用于设置弹性项目的放大系数，也就是项目在有剩余空间时的扩展能力。",
+  "key_points": [
+    "作用对象是项目（子元素）",
+    "用于设置放大系数",
+    "属于项目的属性，不是容器属性"
+  ],
+  "examples": [
+    "flex-grow: 1;"
+  ],
+  "misconceptions": [
+    "它是容器属性；原文说它是项目属性",
+    "它用于缩小项目；原文对应的是放大系数"
+  ],
+  "qa_pairs": [
+    {
+      "q": "flex-grow 用来设置什么？",
+      "a": "设置项目的放大系数。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "弹性盒布局基础"
+  ],
+  "source_pages": [
+    157,
+    160
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "226_flex_grow",
+  "_chunk_pages": [
+    157,
+    160
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "title": "普通文件判断",
+  "definition": "静态服务器只应该返回普通文件。目录、设备文件、管道、符号链接等都要谨慎处理；在五天版本中，遇到非普通文件通常直接返回 403。判断是否普通文件可通过 `stat` 取得的 `st_mode` 再用 `S_ISREG` 检查。",
+  "key_points": [
+    "只返回普通文件",
+    "目录、设备文件、管道、符号链接需要谨慎处理",
+    "可用 `S_ISREG(st.st_mode)` 判断是否普通文件，非普通文件返回 403"
+  ],
+  "examples": [
+    "`if (!S_ISREG(st.st_mode)) { send_error(fd, 403, \"Forbidden\", \"not a regular file\"); return; }`"
+  ],
+  "misconceptions": [
+    "认为只要路径存在就可以直接返回",
+    "认为目录也可以像普通文件一样直接发送"
+  ],
+  "qa_pairs": [
+    {
+      "q": "静态服务器为什么要判断 `S_ISREG(st.st_mode)`？",
+      "a": "因为服务器只应返回普通文件；如果是目录或其他特殊文件，应拒绝处理，常见做法是返回 403。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "stat函数",
+    "文件系统基础"
+  ],
+  "source_pages": [
+    54,
+    55
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "084_普通文件判断",
+  "_chunk_pages": [
+    53,
+    56
+  ]
+}

@@ -1,0 +1,49 @@
+{
+  "title": "虚基类解决菱形继承中的重复基类",
+  "definition": "当两个中间派生类都以虚继承方式继承同一个基类时，最底层派生类只包含一份共享的虚基类子对象。原文中 `Dog` 和 `Bird` 都声明为 `public virtual Animal`，`DogBird` 多重继承 `Dog` 和 `Bird`，因此 `DogBird` 只包含一个共享的 `Animal` 子对象。这样调用 `myConfusedAnimal.sleep()` 时不会因为存在两条 `Animal` 继承路径而产生歧义。",
+  "key_points": [
+    "`Dog : public virtual Animal` 和 `Bird : public virtual Animal` 中的 `virtual` 表示虚继承。",
+    "`DogBird : public Dog, public Bird` 同时继承 `Dog` 与 `Bird`。",
+    "虚继承使最底层派生类共享同一个 `Animal` 基类子对象，而不是分别从 `Dog` 和 `Bird` 获得两份。",
+    "原文中 `Animal::sleep()` 是虚函数，`DogBird` 可以直接调用共享的 `sleep()`。"
+  ],
+  "examples": [
+    "```cpp\nclass Animal {\npublic:\n    virtual void eat() = 0;\n    virtual void sleep() { std::cout << \"...\" << std::endl; }\n};\n\nclass Dog : public virtual Animal {\npublic:\n    void eat() override { std::cout << \"The dog ate.\" << std::endl; }\n};\n\nclass Bird : public virtual Animal {\npublic:\n    void eat() override { std::cout << \"The bird ate.\" << std::endl; }\n};\n\nclass DogBird : public Dog, public Bird {\npublic:\n    void eat() override { Dog::eat(); }\n};\n\nDogBird myConfusedAnimal;\nmyConfusedAnimal.sleep(); // 不会因虚基类而产生歧义\n```"
+  ],
+  "misconceptions": [
+    "多重继承本身不会自动消除重复基类；这里能够共享 `Animal`，关键在于 `Dog` 和 `Bird` 使用了虚继承。",
+    "虚继承并不表示 `DogBird` 只继承 `Dog` 或只继承 `Bird`；它仍然同时继承二者，只是二者共享同一个 `Animal` 子对象。",
+    "`eat()` 在 `Dog` 和 `Bird` 中都有重写版本，因此 `DogBird` 还需要提供自己的最终重写版本来消除覆盖歧义。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "原文中为什么 `myConfusedAnimal.sleep()` 不会产生歧义？",
+      "a": "因为 `Dog` 和 `Bird` 都以虚方式继承 `Animal`，`DogBird` 中只有一个共享的 `Animal` 虚基类子对象。"
+    },
+    {
+      "q": "`DogBird` 的继承关系是什么？",
+      "a": "`DogBird` 公有继承 `Dog` 和 `Bird`，而 `Dog`、`Bird` 又都公有虚继承 `Animal`。"
+    },
+    {
+      "q": "`DogBird::eat()` 中为什么写成 `Dog::eat()`？",
+      "a": "因为 `Dog` 和 `Bird` 都重写了 `Animal::eat()`，`DogBird` 显式选择调用 `Dog` 的实现。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++类继承",
+    "多重继承",
+    "虚函数"
+  ],
+  "source_pages": [
+    345,
+    348
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "447_虚基类解决菱形继承中的重复基类",
+  "_chunk_pages": [
+    345,
+    348
+  ]
+}

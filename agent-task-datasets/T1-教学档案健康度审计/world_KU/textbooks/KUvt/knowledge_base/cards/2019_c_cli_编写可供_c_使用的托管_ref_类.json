@@ -1,0 +1,50 @@
+{
+  "title": "C++/CLI 编写可供 C# 使用的托管 ref 类",
+  "definition": "C++/CLI 不仅能让 C++使用 C#类库，还能定义托管的 `ref class`。编译后，这类可以被其他支持 CLI 的语言（例如 C#）引用和实例化。",
+  "key_points": [
+    "托管 C++类使用 `public ref class` 声明。",
+    "ref 类中的公共方法可以被 C#代码调用。",
+    "C#端像使用普通 .NET 类一样，通过 `new` 创建 C++/CLI ref 类实例。",
+    "原文示例只处理 `double` 等基本数据类型；如果跨越 C#与 C++/CLI 边界传递 `string`、`vector` 等非基本数据类型，通常需要更复杂的对象编组。"
+  ],
+  "examples": [
+    "C++/CLI 定义托管类：`public ref class MyCppRefClass { public: double TripleIt(double value) { return value * 3.0; } };`",
+    "C# 使用该类：`MyCppRefClass cppRefClass = new MyCppRefClass(); return cppRefClass.TripleIt(value);`。",
+    "当 C#传入 `1.2` 时，`TripleIt` 返回 `3.6`。"
+  ],
+  "misconceptions": [
+    "`ref class` 不是普通的原生 C++类，而是由 CLI 管理、可供其他 CLI 语言使用的托管类。",
+    "C#端不需要用 C++/CLI 的 `gcnew`；C#端使用自己的 `new` 创建该托管类实例。",
+    "基本类型跨语言传递相对简单，但复杂对象并不一定能直接互传，可能需要编组。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "C++/CLI 中如何声明一个可被 C#使用的托管类？",
+      "a": "使用 `public ref class`，例如 `public ref class MyCppRefClass`。"
+    },
+    {
+      "q": "C#如何调用 C++/CLI ref 类的方法？",
+      "a": "引用相应命名空间后，用 C#的 `new` 创建实例，再调用其公共方法，例如 `cppRefClass.TripleIt(value)`。"
+    },
+    {
+      "q": "为什么 `string`、`vector` 等类型的跨语言传递更复杂？",
+      "a": "因为需要在 C#与 C++/CLI 之间对对象进行编组或转换，不能像 `double` 等基本类型那样直接处理。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++/CLI 使用 C# 类库",
+    "C# 类和命名空间基础"
+  ],
+  "source_pages": [
+    983,
+    983
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "2019_c_cli_编写可供_c_使用的托管_ref_类",
+  "_chunk_pages": [
+    981,
+    984
+  ]
+}

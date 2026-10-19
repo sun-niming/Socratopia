@@ -1,0 +1,43 @@
+{
+  "title": "使用 using Base::Base 继承基类构造函数",
+  "definition": "派生类可以在类定义中写 `using Base::Base;`，从而继承基类的构造函数，使派生类对象能够使用这些构造函数形式进行初始化。调用继承来的构造函数时，基类子对象由对应的基类构造函数初始化，派生类自身的成员则按照派生类的默认初始化规则处理。",
+  "key_points": [
+    "典型写法为 `class Derived : public Base { public: using Base::Base; };`。",
+    "如果基类具有 `Base(std::string_view)`、`Base(float)` 和默认构造函数，派生类可以使用相应形式构造对象。",
+    "示例中的 `Derived derived2 { \"Hello\" };` 调用继承来的基类字符串构造函数；`Derived derived3;` 使用默认构造形式。",
+    "继承构造函数不会使派生类自动获得一个原本由派生类自己声明或删除的任意构造函数。"
+  ],
+  "examples": [
+    "class Base {\npublic:\n    Base() = default;\n    Base(std::string_view str);\n    Base(float f);\n};\n\nclass Derived : public Base {\npublic:\n    using Base::Base;\n};\n\nDerived derived1{\"Hello\"};\nDerived derived2{1.23f};\nDerived derived3;"
+  ],
+  "misconceptions": [
+    "`using Base::Base` 不是把基类构造函数复制到派生类源代码中，而是让基类构造函数参与派生类对象的构造过程。",
+    "继承基类构造函数不意味着派生类的所有自定义构造需求都会自动满足。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何让 `Derived` 使用 `Base(std::string_view)` 和 `Base(float)` 构造函数？",
+      "a": "在 `Derived` 中声明 `using Base::Base;`。"
+    },
+    {
+      "q": "若 `Base` 有默认构造函数，`using Base::Base` 后是否可以写 `Derived derived3;`？",
+      "a": "在原文示例所示条件下可以，调用继承来的默认构造形式。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++继承",
+    "C++构造函数"
+  ],
+  "source_pages": [
+    333,
+    334
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 inherited constructors using Base::Base default constructor behavior derived class",
+  "concept_id": "433_使用_using_base_base_继承基类构造函数",
+  "_chunk_pages": [
+    333,
+    336
+  ]
+}

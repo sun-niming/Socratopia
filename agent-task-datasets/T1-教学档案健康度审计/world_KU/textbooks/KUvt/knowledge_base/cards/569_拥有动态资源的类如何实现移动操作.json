@@ -1,0 +1,50 @@
+{
+  "title": "拥有动态资源的类如何实现移动操作",
+  "definition": "对于拥有动态分配内存的类，移动操作应把资源指针及相关元数据从源对象转移到目标对象，然后将源对象重置为安全状态，通常把指针设为 `nullptr`，把尺寸或计数设为 `0`，以避免源对象析构时再次释放已转移的资源。",
+  "key_points": [
+    "移动前应先处理目标对象原有资源；移动赋值运算符通常先调用清理函数。",
+    "移动操作可以浅复制资源指针，因为资源所有权随后会转移给目标对象。",
+    "转移完成后必须重置源对象，防止源对象析构时重复释放资源。",
+    "移动赋值运算符中的自我赋值检查可以避免将对象移动给自身时发生崩溃。"
+  ],
+  "examples": [
+    "```text\nvoid Spreadsheet::cleanup() noexcept {\n    for (size_t i { 0 }; i < m_width; ++i) {\n        delete[] m_cells[i];\n    }\n    delete[] m_cells;\n    m_cells = nullptr;\n    m_width = m_height = 0;\n}\n\nvoid Spreadsheet::moveFrom(Spreadsheet&& src) noexcept {\n    m_width = src.m_width;\n    m_height = src.m_height;\n    m_cells = src.m_cells;\n\n    src.m_width = 0;\n    src.m_height = 0;\n    src.m_cells = nullptr;\n}\n```",
+    "```text\nSpreadsheet& Spreadsheet::operator=(Spreadsheet&& rhs) noexcept {\n    if (this != &rhs) {\n        cleanup();\n        moveFrom(std::move(rhs));\n    }\n    return *this;\n}\n```",
+    "```text\nsheet1 = std::move(sheet1);\n```\n移动赋值运算符中的自我赋值检查可以防止此类操作导致崩溃。"
+  ],
+  "misconceptions": [
+    "移动资源指针后，不能让源对象继续保留原指针，否则源对象和目标对象会同时认为自己拥有同一资源。",
+    "移动赋值不是只复制指针；还必须清理目标对象旧资源并重置源对象。",
+    "移动后的源对象不是被立即销毁，而是应保持能够安全析构和再次赋值的状态。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么移动后要将源对象的指针设为 `nullptr`？",
+      "a": "因为资源所有权已经转移给目标对象；将源指针置空可以防止源对象析构时重复释放同一块内存。"
+    },
+    {
+      "q": "移动赋值运算符为什么通常要先清理目标对象？",
+      "a": "目标对象可能已经拥有资源，先清理可以避免原有资源泄漏，然后再接收源对象的资源。"
+    },
+    {
+      "q": "移动赋值中的自我赋值检查是什么？",
+      "a": "通常是 `if (this != &rhs)`，用于避免 `object = std::move(object)` 这类操作破坏对象自身的资源。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "移动语义的实现要求",
+    "动态内存管理"
+  ],
+  "source_pages": [
+    270,
+    271
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 移动构造函数 移动赋值运算符 资源所有权 nullptr 自我移动赋值 this != &rhs 实现规范",
+  "concept_id": "569_拥有动态资源的类如何实现移动操作",
+  "_chunk_pages": [
+    269,
+    272
+  ]
+}

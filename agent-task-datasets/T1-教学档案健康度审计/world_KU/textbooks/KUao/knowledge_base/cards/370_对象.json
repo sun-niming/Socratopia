@@ -1,0 +1,36 @@
+{
+  "title": "对象",
+  "definition": "在 JavaScript 中，对象是一种复合数据类型，包含一组无序的属性和方法（函数）。每个属性都有名字和值，属性值可以是任何类型的数据，包括基本类型、函数或另一个对象。",
+  "key_points": [
+    "对象是复合数据类型",
+    "对象由无序的属性和方法组成",
+    "属性值可以是基本类型、函数或另一个对象"
+  ],
+  "examples": [
+    "const person = { name: '张三', sayHi: function(){ return 'hi'; } }"
+  ],
+  "misconceptions": [
+    "对象的属性值只能是简单数据；实际上也可以是函数或另一个对象"
+  ],
+  "qa_pairs": [
+    {
+      "q": "JavaScript 对象的属性值可以是什么类型？",
+      "a": "可以是任何类型的数据，包括基本类型、函数或另一个对象。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "JavaScript基本语法"
+  ],
+  "source_pages": [
+    273,
+    276
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "370_对象",
+  "_chunk_pages": [
+    273,
+    276
+  ]
+}

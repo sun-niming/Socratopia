@@ -1,0 +1,44 @@
+{
+  "title": "动态分配基本类型数组",
+  "definition": "在自由存储区中，可以使用new[]动态分配数组。表达式new int[5]会分配5个连续的int元素，并返回指向第0个元素的指针。动态数组的大小可以在运行时确定，但数组一旦分配，其大小不会自动改变。",
+  "key_points": [
+    "动态数组使用new[]分配，例如$\\text{new int[num]}$。",
+    "返回值是指向数组第0个元素的指针。",
+    "基本类型动态数组默认不会为元素提供有意义的初值；可以使用初始化列表显式初始化。",
+    "动态分配只表示分配时大小可以运行时确定，并不表示数组会自动扩容。",
+    "通过new[]分配的数组必须使用delete[]释放。"
+  ],
+  "examples": [
+    "分配5个int元素：int* myArrayPtr { new int[5] };",
+    "动态确定数组大小：size_t n { /* 运行时得到的数量 */ }; int* p { new int[n] };",
+    "使用初始化列表：int* myArrayPtr { new int[] { 1, 2, 3, 4, 5 } };",
+    "释放数组：delete[] myArrayPtr; myArrayPtr = nullptr;"
+  ],
+  "misconceptions": [
+    "认为动态数组会像标准库容器一样自动扩容。",
+    "认为new int[5]返回的是整个数组对象而不是指向第0个元素的指针。",
+    "认为释放动态数组时可以使用普通delete。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "动态分配数组与栈上数组的主要区别是什么？",
+      "a": "二者都可以连续存储同类型元素并通过下标访问；动态数组位于自由存储区，大小可以在运行时确定，但分配后大小不会自动改变，并且必须使用delete[]释放。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "数组",
+    "new和delete"
+  ],
+  "source_pages": [
+    202,
+    203
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "424_动态分配基本类型数组",
+  "_chunk_pages": [
+    201,
+    204
+  ]
+}

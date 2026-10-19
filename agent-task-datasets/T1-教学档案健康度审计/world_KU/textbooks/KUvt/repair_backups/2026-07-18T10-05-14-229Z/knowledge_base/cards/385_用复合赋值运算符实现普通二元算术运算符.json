@@ -1,0 +1,44 @@
+{
+  "title": "用复合赋值运算符实现普通二元算术运算符",
+  "definition": "SpreadsheetCell 的普通二元算术运算符，例如 `operator+`，可以通过先创建结果对象，再调用复合赋值运算符来实现。这样可以复用 `operator+=` 的核心逻辑，避免重复编写加法细节。",
+  "key_points": [
+    "普通加法运算符可以声明为非成员函数：`SpreadsheetCell operator+(const SpreadsheetCell& lhs, const SpreadsheetCell& rhs);`。",
+    "实现时先创建结果对象，再将左操作数和右操作数合并，最后返回结果。",
+    "原文提示该实现应“Forward to +=”，即把普通加法转发给已经实现的 `operator+=`。",
+    "普通 `operator+` 通常返回一个新的 SpreadsheetCell，而不是修改左操作数。"
+  ],
+  "examples": [
+    "实现思路示意：`SpreadsheetCell operator+(const SpreadsheetCell& lhs, const SpreadsheetCell& rhs) { SpreadsheetCell result{lhs}; result += rhs; return result; }`",
+    "使用示意：`SpreadsheetCell sum = myCell + aThirdCell;`"
+  ],
+  "misconceptions": [
+    "`operator+` 与 `operator+=` 的语义相同；实际上 `operator+` 通常产生新对象，`operator+=` 修改左操作数。",
+    "必须把所有算术逻辑分别写一遍；更好的做法是让 `operator+` 复用 `operator+=`。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么可以用 `operator+=` 实现 `operator+`？",
+      "a": "因为 `operator+` 可以先复制左操作数到结果对象，再对结果对象执行 `operator+=`，最后返回结果。"
+    },
+    {
+      "q": "`operator+` 通常是否应修改左操作数？",
+      "a": "通常不应修改左操作数，而应返回一个表示加法结果的新 SpreadsheetCell 对象。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "为类重载复合赋值运算符",
+    "C++非成员运算符重载"
+  ],
+  "source_pages": [
+    293,
+    296
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "385_用复合赋值运算符实现普通二元算术运算符",
+  "_chunk_pages": [
+    293,
+    296
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "title": "作用域解析运算符定义类外成员函数",
+  "definition": "在类外定义成员函数时，需要在函数名前写类名和作用域解析运算符::，以表明该函数属于这个类。例如SpreadsheetCell::setValue表示SpreadsheetCell类的setValue成员函数。类外定义成员函数时，不要重复写public、protected或private访问说明符。",
+  "key_points": [
+    "成员函数类外定义的形式通常是返回类型 类名::函数名(参数列表)。",
+    "::称为作用域解析运算符。",
+    "类外定义时，访问权限由类内的声明决定，不在定义处重复写访问说明符。"
+  ],
+  "examples": [
+    "void SpreadsheetCell::setValue(double value)\n{\n    m_value = value;\n}\n\ndouble SpreadsheetCell::getValue() const\n{\n    return m_value;\n}"
+  ],
+  "misconceptions": [
+    "SpreadsheetCell::不是函数名的一部分，而是用于指定类作用域的语法。",
+    "类外定义成员函数时写public void SpreadsheetCell::setValue(...)不是教材所示的正确做法；访问说明符应保留在类定义中。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "类外定义SpreadsheetCell的setValue时，为什么要写SpreadsheetCell::setValue？",
+      "a": "作用域解析运算符表明该函数是SpreadsheetCell类的成员函数。"
+    },
+    {
+      "q": "类外定义成员函数时是否需要再次写public？",
+      "a": "不需要。访问说明符应在类定义中声明，类外定义时不重复写。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "成员函数的声明与定义",
+    "作用域解析运算符"
+  ],
+  "source_pages": [
+    232,
+    232
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "493_作用域解析运算符定义类外成员函数",
+  "_chunk_pages": [
+    229,
+    232
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "title": "响应发送的整体原则",
+  "definition": "在 `response.c` 里，发送数据的整体原则是：所有发送都应经过 `send_all`，不要在项目中到处散落直接 `send`；所有错误都应该生成合法的 HTTP 响应。这样可以避免部分发送导致的数据截断，也能保证浏览器和 `curl` 都能稳定处理错误页。",
+  "key_points": [
+    "不要散落很多直接 `send` 调用。",
+    "一旦要处理部分发送，统一封装到 `send_all` 更容易维护。",
+    "错误响应也必须是完整的 HTTP 响应。",
+    "错误页需要 `Content-Length` 和 `Content-Type`，否则行为可能不稳定。"
+  ],
+  "examples": [
+    "用 `curl -i` 查看错误响应时，应能看到 `Content-Length`。",
+    "大文件发送时，不能因为只调用一次 `send` 就被截断。"
+  ],
+  "misconceptions": [
+    "以为错误页可以随便写，不用遵守 HTTP 格式。",
+    "以为直接多次 `send` 比封装函数更简单且更安全。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么项目里不建议到处直接调用 `send`？",
+      "a": "因为一旦出现部分发送问题，分散的调用会让修改和维护变得困难。"
+    },
+    {
+      "q": "错误响应为什么也要写 `Content-Length`？",
+      "a": "这样客户端才能正确判断正文长度，避免浏览器行为不稳定。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "HTTP响应格式",
+    "send_all"
+  ],
+  "source_pages": [
+    79,
+    80
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "123_响应发送的整体原则",
+  "_chunk_pages": [
+    77,
+    80
+  ]
+}

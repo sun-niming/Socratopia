@@ -1,0 +1,51 @@
+{
+  "title": "std::find_if() 使用谓词查找元素",
+  "definition": "std::find_if() 与 std::find() 类似，但它不直接把元素与某个值比较，而是接收一个谓词回调。算法按顺序对范围内的元素调用该谓词；当谓词首次返回 true 时，find_if() 返回指向该元素的迭代器。如果所有元素都使谓词返回 false，则返回指定的尾迭代器。",
+  "key_points": [
+    "谓词通常接收一个元素并返回 bool。",
+    "find_if() 在谓词返回 true 的第一个元素处停止。",
+    "未找到满足条件的元素时，返回本次调用的尾迭代器。",
+    "谓词可以是普通函数、函数对象或 lambda 表达式。"
+  ],
+  "examples": [
+    "定义“完美分数”谓词：`bool perfectScore(int num) { return num >= 100; }`",
+    "使用普通函数：`auto it = find_if(cbegin(myVector), endIt, perfectScore);`",
+    "使用 lambda：`auto it = find_if(cbegin(myVector), endIt, [](int i) { return i >= 100; });`",
+    "判断结果：`if (it == endIt) { /* 没有完美分数 */ } else { /* *it 是第一个满足条件的分数 */ }`"
+  ],
+  "misconceptions": [
+    "find_if() 不是查找与某个固定值相等的元素，而是查找第一个使谓词返回 true 的元素。",
+    "谓词返回 true 后算法不会继续检查后面的元素。",
+    "谓词应返回布尔条件；不能把任意数值计算结果误认为明确的查找条件。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "std::find_if() 与 std::find() 的主要区别是什么？",
+      "a": "std::find() 直接查找与给定值相等的元素；std::find_if() 调用谓词，根据谓词是否返回 true 来判断元素是否满足条件。"
+    },
+    {
+      "q": "find_if() 找到满足条件的元素后返回什么？",
+      "a": "返回指向第一个满足条件元素的迭代器。"
+    },
+    {
+      "q": "如何用 lambda 查找第一个大于或等于 100 的整数？",
+      "a": "`find_if(first, last, [](int i) { return i >= 100; })`。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "迭代器范围 $[first,last)$",
+    "谓词与 lambda 表达式"
+  ],
+  "source_pages": [
+    630,
+    631
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 std::find_if predicate return first matching iterator official reference",
+  "concept_id": "1305_std_find_if_使用谓词查找元素",
+  "_chunk_pages": [
+    629,
+    632
+  ]
+}

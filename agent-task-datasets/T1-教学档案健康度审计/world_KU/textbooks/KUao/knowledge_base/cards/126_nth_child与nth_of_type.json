@@ -1,0 +1,49 @@
+{
+  "title": "nth-child与nth-of-type",
+  "definition": "这两个伪类都用于按顺序选择子元素，但计算方式不同。nth-child(exp) 是先按子节点顺序计数，再判断是否是指定类型 E；nth-of-type(exp) 是先找出同类型 E 的所有元素，再取第 exp 个。exp 可以是数字，也可以是 an+b 形式的表达式。",
+  "key_points": [
+    "nth-child(exp)：祖先元素 PE 的第 exp 个 E 类型后代元素。",
+    "nth-child 会先计数后判断类型。",
+    "nth-of-type(exp)：祖先元素 PE 的第 exp 个 E 类型后代元素。",
+    "nth-of-type 会先按类型 E 找出所有元素，再取第 exp 个。",
+    "exp 可为数字或 an+b 形式表达式（a、b 为常量，n 为变量，从 0 开始取值）。",
+    "页面示例中，span:nth-child(2n+1) 在没有插入 em 时会选中第 1、3、5、7 个子节点。",
+    "页面示例中，span:nth-child(2n+1) 在插入 em 后会选中第 1、5、7 个子节点；第 3 个子节点会被计数，但因为它不是 span，所以不被选中。",
+    "页面示例中，span:nth-of-type(2n+1) 在插入 em 后会选中第 1、4、6、8 个 span；em 会被完全跳过和忽略。"
+  ],
+  "examples": [
+    "span:nth-child(2n+1)",
+    "span:nth-of-type(2n+1)",
+    "第 1、3、5、7 个子节点被选中",
+    "第 1、4、6、8 个 span 被选中"
+  ],
+  "misconceptions": [
+    "nth-child 不是只统计同类型元素；它会把所有子节点都算进去。",
+    "nth-of-type 不会把其他类型元素计入排序。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "nth-child 和 nth-of-type 的核心区别是什么？",
+      "a": "nth-child 先按子节点位置计数再判断类型；nth-of-type 先按类型筛选，再取第几个。"
+    },
+    {
+      "q": "在插入 em 元素后，为什么 span:nth-child(2n+1) 与 span:nth-of-type(2n+1) 的结果不同？",
+      "a": "因为 nth-child 会把 em 也计入位置，而 nth-of-type 只统计 span，em 会被跳过。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "伪类选择器"
+  ],
+  "source_pages": [
+    98,
+    99
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "126_nth_child与nth_of_type",
+  "_chunk_pages": [
+    97,
+    100
+  ]
+}

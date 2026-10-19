@@ -1,0 +1,38 @@
+{
+  "title": "行内式引入CSS",
+  "definition": "行内式是指直接在 HTML 标签的 style 属性中设置 CSS。它把样式写在具体元素上，格式表现为某个属性对应某个值。",
+  "key_points": [
+    "样式写在元素的 style 属性中。",
+    "适用于单个标签的局部样式设置。",
+    "原文给出的格式是“某个属性：值”。"
+  ],
+  "examples": [
+    "<img src=\"1.gif\" alt=\"测试\" style=\"border-width: 0px;\" />"
+  ],
+  "misconceptions": [
+    "行内式不是写在独立的 CSS 文件里。",
+    "行内式只影响当前这个元素，不是整页统一样式。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "行内式引入 CSS 是在哪里写样式？",
+      "a": "直接在标签的 style 属性中设置。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "HTML标签与属性",
+    "CSS样式规则与声明"
+  ],
+  "source_pages": [
+    85,
+    88
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "109_行内式引入css",
+  "_chunk_pages": [
+    85,
+    88
+  ]
+}

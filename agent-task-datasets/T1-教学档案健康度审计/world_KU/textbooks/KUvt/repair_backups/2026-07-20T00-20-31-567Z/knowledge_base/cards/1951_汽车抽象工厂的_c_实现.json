@@ -1,0 +1,50 @@
+{
+  "title": "汽车抽象工厂的 C++ 实现",
+  "definition": "汽车抽象工厂的实现由两部分组成：汽车产品层次结构和工厂层次结构。ICar 定义纯虚函数 info()，各具体汽车类重写它并返回自身信息；IAbstractCarFactory 定义返回 std::unique_ptr<ICar> 的 makeSedan() 和 makeSuv() 接口；具体工厂通过 std::make_unique 创建相应的具体汽车对象。",
+  "key_points": [
+    "ICar 应提供虚析构函数，并将 info() 声明为纯虚函数：$$\\text{virtual }\\sim\\text{ICar}()=\\text{default};\\qquad\\text{virtual std::string info() const}=0;$$",
+    "FordSedan、FordSuv、ToyotaSedan 和 ToyotaSuv 分别继承相应品牌类，并重写 info()。",
+    "具体工厂返回 std::unique_ptr<ICar>，因此调用方可以通过抽象接口使用对象，并由智能指针管理对象生命周期。",
+    "FordFactory 的 makeSuv() 返回 std::make_unique<FordSuv>()，makeSedan() 返回 std::make_unique<FordSedan>()；ToyotaFactory 按同样方式创建 Toyota 产品。"
+  ],
+  "examples": [
+    "核心接口可写成：\nexport class IAbstractCarFactory {\npublic:\n    virtual ~IAbstractCarFactory() = default;\n    virtual std::unique_ptr<ICar> makeSuv() = 0;\n    virtual std::unique_ptr<ICar> makeSedan() = 0;\n};",
+    "FordFactory 的实现可写成：\nclass FordFactory : public IAbstractCarFactory {\npublic:\n    std::unique_ptr<ICar> makeSuv() override {\n        return std::make_unique<FordSuv>();\n    }\n    std::unique_ptr<ICar> makeSedan() override {\n        return std::make_unique<FordSedan>();\n    }\n};"
+  ],
+  "misconceptions": [
+    "抽象工厂接口不应直接返回 FordSedan 或 ToyotaSedan 等具体类型，而应返回抽象产品类型，如 std::unique_ptr<ICar>。",
+    "纯虚函数只声明接口，不能使 ICar 直接实例化。",
+    "使用 ICar 指针并不意味着对象失去了具体类型；实际对象仍然是具体的 Ford 或 Toyota 产品。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么 ICar 需要虚析构函数？",
+      "a": "因为对象通常通过 ICar 抽象指针或智能指针使用，虚析构函数能够确保通过基类接口销毁派生类对象时进行正确的析构。"
+    },
+    {
+      "q": "FordFactory::makeSuv() 应创建什么对象？",
+      "a": "应创建 FordSuv 对象，并以 std::unique_ptr<ICar> 返回，例如 return std::make_unique<FordSuv>();。"
+    },
+    {
+      "q": "抽象工厂的创建函数为什么返回 std::unique_ptr<ICar>？",
+      "a": "这样调用方只依赖 ICar 抽象接口，同时使用 unique_ptr 管理具体汽车对象的生命周期。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "抽象工厂模式的结构",
+    "C++虚函数与纯虚函数",
+    "C++智能指针"
+  ],
+  "source_pages": [
+    946,
+    947
+  ],
+  "needs_verification": true,
+  "verify_query": "《C++20高级编程》第5版 抽象工厂 IAbstractCarFactory virtual destructor makeSuv makeSedan FordFactory 示例",
+  "concept_id": "1951_汽车抽象工厂的_c_实现",
+  "_chunk_pages": [
+    945,
+    948
+  ]
+}

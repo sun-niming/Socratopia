@@ -1,0 +1,46 @@
+{
+  "title": "HTML5代码约定",
+  "definition": "HTML5代码约定是一组常见书写规范，包括使用正确的文档类型、元素名和属性名尽量小写、按规则闭合元素，以及空元素和属性书写的约定。",
+  "key_points": [
+    "使用正确的文档类型：<!doctype html>",
+    "使用小写元素名",
+    "关闭所有 HTML 元素",
+    "空的 HTML 元素中，关闭空元素是可选的",
+    "使用小写属性名",
+    "属性值加引号（原文给出了相关书写示例）"
+  ],
+  "examples": [
+    "<!doctype html>",
+    "<section><p>This is a paragraph.</p></section>",
+    "<meta charset=\"utf-8\">",
+    "<meta charset=\"utf-8\" />",
+    "<input type=\"text\" size='20' value=123 disabled>"
+  ],
+  "misconceptions": [
+    "以为HTML5不需要文档类型声明",
+    "以为标签可以随意大小写混用",
+    "以为所有元素都可以不闭合",
+    "以为空元素必须只能写一种固定形式"
+  ],
+  "qa_pairs": [
+    {
+      "q": "HTML5代码约定包括哪些常见规范？",
+      "a": "包括正确的文档类型、小写元素名、闭合所有元素、空元素闭合可选、小写属性名、属性值书写约定等。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "HTML标签基础"
+  ],
+  "source_pages": [
+    41,
+    44
+  ],
+  "needs_verification": true,
+  "verify_query": "HTML5 代码约定 属性值加引号 空 双引号 单引号 input type=\"text\" size='20' value=123 disabled",
+  "concept_id": "074_html5代码约定",
+  "_chunk_pages": [
+    41,
+    44
+  ]
+}

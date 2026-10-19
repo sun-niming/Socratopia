@@ -1,0 +1,51 @@
+{
+  "title": "const引用与临时对象",
+  "definition": "const引用不能通过该引用修改其所绑定对象。非const引用不能绑定到整数字面量等未命名值或临时对象，而const引用可以绑定，并可使临时对象的生命周期延长到该引用超出作用域。",
+  "key_points": [
+    "const int&与int const&含义相同。",
+    "const引用禁止通过该引用赋值，但如果原对象本身不是const，仍可直接通过原对象修改它。",
+    "非const引用不能绑定到字面量5等未命名值；const引用可以绑定。",
+    "const引用可以绑定函数返回的临时对象，并使该临时对象保持到引用超出作用域。"
+  ],
+  "examples": [
+    "int z;\nconst int& zRef { z };\n// zRef = 4; // 编译失败\nz = 4; // 可以直接通过z修改对象",
+    "// int& unnamedRef1 { 5 }; // 编译失败\nconst int& unnamedRef2 { 5 }; // OK",
+    "std::string getString() { return \"Hello world!\"; }\n// std::string& string1 { getString() }; // 编译失败\nconst std::string& string2 { getString() }; // OK，临时对象保持到string2超出作用域"
+  ],
+  "misconceptions": [
+    "const引用的const只限制通过该引用修改对象，不一定表示被引用对象本身不可修改。",
+    "const引用不是只能绑定已有命名变量；它也可以绑定字面量和临时对象。",
+    "非const引用不能绑定字面量或临时对象。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "const int& zRef { z }后能否执行zRef = 4？",
+      "a": "不能，这会编译失败，因为const引用禁止通过该引用修改对象。"
+    },
+    {
+      "q": "const引用绑定函数返回的临时std::string有什么作用？",
+      "a": "它可以绑定该临时对象，并使临时对象的生命周期延长到该引用超出作用域。"
+    },
+    {
+      "q": "int&能否绑定整数字面量5？",
+      "a": "不能；const int&可以绑定5。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "引用变量的基本语义",
+    "const对象",
+    "临时对象"
+  ],
+  "source_pages": [
+    79,
+    79
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "143_const引用与临时对象",
+  "_chunk_pages": [
+    77,
+    80
+  ]
+}

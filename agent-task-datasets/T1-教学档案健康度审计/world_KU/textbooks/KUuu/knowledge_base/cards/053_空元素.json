@@ -1,0 +1,36 @@
+{
+  "title": "空元素",
+  "definition": "空元素是由于无法嵌套子节点和内容而形成的元素，例如img标签构成的元素就是空元素。",
+  "key_points": [
+    "空元素内部不能嵌套子节点和内容",
+    "img标签构成的元素是教材给出的空元素示例"
+  ],
+  "examples": [
+    "<img src=\"a.jpg\" alt=\"示意图\">"
+  ],
+  "misconceptions": [
+    "空元素也能像普通元素一样再包裹文本内容",
+    "空元素一定没有任何属性"
+  ],
+  "qa_pairs": [
+    {
+      "q": "什么是空元素？",
+      "a": "空元素是无法嵌套子节点和内容的元素，img标签构成的元素就是空元素。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "HTML元素"
+  ],
+  "source_pages": [
+    37,
+    40
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "053_空元素",
+  "_chunk_pages": [
+    37,
+    40
+  ]
+}

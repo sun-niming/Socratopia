@@ -1,0 +1,42 @@
+{
+  "title": "const 变量",
+  "definition": "const 用于声明不可通过该名称修改的常量对象。const 变量通常必须在定义时初始化；初始化后不能再给它赋予新值。",
+  "key_points": [
+    "const 可用于声明具名常量，例如整数、字符串和浮点数。",
+    "const 对象不能通过其 const 名称被修改。",
+    "const 变量与预处理器宏相比具有类型信息，并遵循 C++ 的作用域规则。"
+  ],
+  "examples": [
+    "const int versionNumberMajor { 2 };\nconst std::string productName { \"Super Hyper Net Modulator\" };\nconst double PI { 3.141592653589793238462 };"
+  ],
+  "misconceptions": [
+    "const 并不表示变量必须在编译期求值；只表示初始化后不能通过该对象进行修改。",
+    "const 不是 #define 的简单同义词；const 声明的是具有类型的 C++对象。",
+    "声明为 const 后不能再通过同一个 const 对象名赋值。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "const int versionNumberMajor { 2 }; 的含义是什么？",
+      "a": "声明一个值为 2 的 const int 对象，初始化后不能通过 versionNumberMajor 修改其值。"
+    },
+    {
+      "q": "const 与预处理器 #define 的一个重要区别是什么？",
+      "a": "const 声明具有 C++类型和作用域的对象，而 #define 是预处理阶段的文本替换。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++变量与类型"
+  ],
+  "source_pages": [
+    73,
+    76
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "100_const_变量",
+  "_chunk_pages": [
+    73,
+    76
+  ]
+}

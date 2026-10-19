@@ -1,0 +1,40 @@
+{
+  "title": "localStorage的使用场景",
+  "definition": "localStorage适合保存需要跨会话长期保留、且不敏感的数据。原文列出的典型用途包括：用户偏好设置、记住用户登录状态的标志、离线少量数据存储，以及缓存不常变动的数据以减少网络请求。",
+  "key_points": [
+    "适合保存用户偏好，如主题、语言",
+    "可保存“记住我”之类的登录状态标志，但不建议直接存敏感 token",
+    "可用于离线数据存储和性能优化缓存"
+  ],
+  "examples": [
+    "主题=dark、语言=zh-CN",
+    "存储一个“记住我”的标志",
+    "缓存不常变动的数据，减少网络请求"
+  ],
+  "misconceptions": [
+    "localStorage可以直接存密码或完整 token",
+    "localStorage只适合临时数据",
+    "localStorage不能用于缓存数据"
+  ],
+  "qa_pairs": [
+    {
+      "q": "localStorage最适合保存什么类型的数据？",
+      "a": "适合保存需要长期保留、且不敏感的数据，例如用户偏好、登录状态标志和缓存数据。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "Web Storage"
+  ],
+  "source_pages": [
+    385,
+    387
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "544_localstorage的使用场景",
+  "_chunk_pages": [
+    385,
+    387
+  ]
+}

@@ -1,0 +1,171 @@
+{
+  "textbookId": "KUhi",
+  "updatedAt": "2026-06-27T16:28:01.610Z",
+  "cards": [
+    {
+      "id": "fc_1782577619941_000_3c1a3c776193",
+      "question": "在随机化算法的三类划分中，哪一类算法“总是得到正确结果，但运行时间可能随机变化”",
+      "choices": [
+        "蒙特卡罗算法",
+        "确定性算法",
+        "舍伍德算法",
+        "拉斯维加斯算法"
+      ],
+      "correctIndex": 3,
+      "explanation": "这是拉斯维加斯算法的典型特征：正确性不依赖运气，但完成时间可能因随机选择而变化。它和蒙特卡罗算法的关键区别在于，后者允许极小概率出错。",
+      "source": {
+        "textbook": "算法设计与分",
+        "chapter": "",
+        "textbookSlug": "KUhi"
+      },
+      "created": "2026-06-27T16:26:59.941Z",
+      "conversationId": "I15ygf9babbbu2Nv5CmUh",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-06-27T16:27:16.010Z",
+          "chosen": 2,
+          "correct": false
+        },
+        {
+          "time": "2026-06-27T16:27:25.520Z",
+          "chosen": 3,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-06-28T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.4,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1782577619941_001_79def2927c51",
+      "question": "为什么教材强调随机化算法仍然要分析复杂度，尤其是期望复杂度或错误概率？",
+      "choices": [
+        "因为随机化会把所有问题都变成 NP 完全问题，所以必须重新分类",
+        "因为随机性只是实现技巧，算法性质不再需要任何理论分析",
+        "因为随机化算法一定比确定性算法更慢，所以必须额外证明它不会超时",
+        "因为随机性会让运行时间或正确性变成概率性的，所以仍需分析期望复杂度或错误概率"
+      ],
+      "correctIndex": 3,
+      "explanation": "因为随机化只改变了运行过程的概率分布，并没有取消“算法性能需要被证明”这一点。对于不同类型的随机化算法，要么关心随机运行时间的期望，要么关心出错概率，而不是直接认为随机化就不用分析了。",
+      "source": {
+        "textbook": "算法设计与分",
+        "chapter": "",
+        "textbookSlug": "KUhi"
+      },
+      "created": "2026-06-27T16:26:59.941Z",
+      "conversationId": "I15ygf9babbbu2Nv5CmUh",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-06-27T16:27:21.100Z",
+          "chosen": 3,
+          "correct": true
+        },
+        {
+          "time": "2026-06-27T16:27:37.167Z",
+          "chosen": 3,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-06-30T16:00:00.000Z",
+      "interval": 3,
+      "ease": 2.7,
+      "repetitions": 2
+    },
+    {
+      "id": "fc_1782577619941_002_af80889272aa",
+      "question": "关于 P、NP、NP-complete，下面哪一项说法最准确？",
+      "choices": [
+        "NP-complete 问题既属于 NP，又是 NP-hard",
+        "P 问题强调的是答案给出后才能快速验证",
+        "NP-complete 问题只要能快速验证答案即可，不必属于 NP",
+        "NP-hard 问题一定都能在多项式时间内求解"
+      ],
+      "correctIndex": 0,
+      "explanation": "P 是能在多项式时间内直接求解的问题；NP 强调的是给定解后能在多项式时间内验证；NP-complete 则必须同时属于 NP，并且是 NP-hard，也就是 NP 中最难的一类代表问题。",
+      "source": {
+        "textbook": "算法设计与分",
+        "chapter": "",
+        "textbookSlug": "KUhi"
+      },
+      "created": "2026-06-27T16:26:59.941Z",
+      "conversationId": "I15ygf9babbbu2Nv5CmUh",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-06-27T16:27:44.191Z",
+          "chosen": 0,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-06-28T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1782577619941_003_32f32971d273",
+      "question": "在 KMP 算法中，文本串指针在失配后通常不回退，最根本的原因是什么？",
+      "choices": [
+        "因为文本串一旦失配就说明前面的字符都已经完全确定，不需要再比较",
+        "因为 KMP 把所有失配都交给 next 数组处理，所以文本串永远不会出现比较失败",
+        "因为可以利用模式串的最长相等前后缀信息，只回退模式串指针",
+        "因为文本指针回退会破坏 next 数组的正确性"
+      ],
+      "correctIndex": 2,
+      "explanation": "KMP 通过 next 数组保存了模式串内部的最长相等前后缀信息。失配时，只需让模式串按这个信息跳转，就能复用已经比较过的文本部分，因此不必回退文本指针。",
+      "source": {
+        "textbook": "算法设计与分",
+        "chapter": "",
+        "textbookSlug": "KUhi"
+      },
+      "created": "2026-06-27T16:26:59.941Z",
+      "conversationId": "I15ygf9babbbu2Nv5CmUh",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-06-27T16:27:54.025Z",
+          "chosen": 2,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-06-28T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1782577619941_004_032bdb457e21",
+      "question": "在 KMP 中，next 数组的核心作用是什么？",
+      "choices": [
+        "记录模式串各前缀的最长相等前后缀长度，用于失配时跳转",
+        "记录文本串中已经匹配过的字符数，用于决定是否回退文本指针",
+        "记录模式串与文本串当前已匹配部分的编辑距离，用于动态规划",
+        "记录每个字符出现的次数，用于快速统计模式串频率"
+      ],
+      "correctIndex": 0,
+      "explanation": "next 数组记录的是模式串前缀中“最长相等前后缀”的长度。它的作用不是直接表示匹配位置，而是在失配时告诉算法模式串应该滑到哪里继续比较，从而避免重复扫描。",
+      "source": {
+        "textbook": "算法设计与分",
+        "chapter": "",
+        "textbookSlug": "KUhi"
+      },
+      "created": "2026-06-27T16:26:59.941Z",
+      "conversationId": "I15ygf9babbbu2Nv5CmUh",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-06-27T16:28:01.609Z",
+          "chosen": 0,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-06-28T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    }
+  ]
+}

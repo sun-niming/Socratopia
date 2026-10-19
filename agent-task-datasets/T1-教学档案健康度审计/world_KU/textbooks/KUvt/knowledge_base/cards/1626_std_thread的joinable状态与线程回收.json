@@ -1,0 +1,42 @@
+{
+  "title": "std::thread的joinable状态与线程回收",
+  "definition": "如果一个thread对象表示系统当前或过去的某个活动线程，则该对象是可结合的（joinable）。即使线程函数已经执行完毕，thread对象仍可能保持joinable状态。默认构造的thread对象不可结合。在销毁joinable的thread对象之前，必须调用join()或detach()；否则析构函数会调用std::terminate()，导致应用程序突然终止。",
+  "key_points": [
+    "join()是阻塞调用，会等待对应线程完成工作；调用后thread对象变为不可结合。",
+    "detach()使底层操作系统线程与thread对象分离，让线程继续独立运行；调用后thread对象变为不可结合。",
+    "thread对象析构时仍然joinable会调用std::terminate()。"
+  ],
+  "examples": [
+    "thread t1{counter, 1, 6};\nthread t2{counter, 2, 4};\nt1.join();\nt2.join();\n\n也可以分离线程：\nthread t{counter, 1, 6};\nt.detach();"
+  ],
+  "misconceptions": [
+    "线程函数执行完毕不等于thread对象自动变为不可结合。",
+    "join()和detach()不是可有可无的清理操作；在销毁joinable对象前必须调用其中一个。",
+    "detach()不会等待线程完成，而是让线程独立继续运行。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "join()和detach()的主要区别是什么？",
+      "a": "join()会阻塞当前线程并等待目标线程完成；detach()会将目标线程与thread对象分离，让其独立运行。二者都会使thread对象变为不可结合。"
+    },
+    {
+      "q": "如果一个仍然joinable的thread对象被销毁，会发生什么？",
+      "a": "thread析构函数会调用std::terminate()，从而突然终止应用程序。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "std::thread启动线程"
+  ],
+  "source_pages": [
+    793,
+    793
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1626_std_thread的joinable状态与线程回收",
+  "_chunk_pages": [
+    793,
+    796
+  ]
+}

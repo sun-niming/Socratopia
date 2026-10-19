@@ -1,0 +1,50 @@
+{
+  "title": "MultiAssociativeArray 的继承与组合设计",
+  "definition": "对于允许一个键对应多个值的 MultiAssociativeArray，可以有两种主要设计：继承 AssociativeArray，重写插入和获取等行为，并增加获取全部值的方法；或者在 MultiAssociativeArray 内部包含 AssociativeArray，把多个字符串组成集合后作为单个值存储。教材指出，组合方案可以更自由地修改公开接口，也能避免已有类不适合的功能和行为直接暴露给新类。",
+  "key_points": [
+    "AssociativeArray 的基本语义是一个键对应一个值；同一个键再次插入新值时，旧值会被替换。",
+    "MultiAssociativeArray 的语义是一个键对应多个值，因此插入已有键时应把新元素加入集合，而不是删除旧元素。",
+    "继承方案可能需要重写插入和获取操作，并增加类似 getAll(key) 的接口。",
+    "组合方案中，MultiAssociativeArray 可以内部持有 AssociativeArray，并把集合当作 AssociativeArray 的值。",
+    "组合允许新类拥有不同于已有类的公开接口，例如直接使用 getAll() 表明返回某个键的全部值。"
+  ],
+  "examples": [
+    "使用组合实现时，可以按以下逻辑操作：\n1. 创建集合 collection，并加入 \"Kleper, Scott\"。\n2. 执行 `myArray.insert(14534, collection)`，使键 14534 对应集合 `{ \"Kleper, Scott\" }`。\n3. 取出该集合，加入 \"Kleper, Marni\"。\n4. 再次插入更新后的集合，使键 14534 对应 `{ \"Kleper, Scott\", \"Kleper, Marni\" }`。",
+    "继承设计可以提供 `insert(key, value)`、`get(key)` 和新增的 `getAll(key)`；组合设计则可以只暴露适合多值语义的 `insert(key, value)` 与 `getAll(key)`。"
+  ],
+  "misconceptions": [
+    "继承 AssociativeArray 并不只是增加一个新类名；由于单值和多值的行为不同，通常需要重写多个操作。",
+    "组合不是把多个类简单并列，而是让外部类封装并使用内部类对象。",
+    "MultiAssociativeArray 不应被默认理解为完全等同于 AssociativeArray，因为两者对重复键的处理语义不同。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么 MultiAssociativeArray 需要区别于 AssociativeArray 的插入行为？",
+      "a": "因为 AssociativeArray 对同一个键通常只保留一个值，插入新值会替换旧值；MultiAssociativeArray 需要保留旧值，并把新值加入集合。"
+    },
+    {
+      "q": "组合方案如何利用 AssociativeArray 存储多个值？",
+      "a": "将多个字符串先封装为一个集合，再把这个集合作为某个键对应的单个值存入内部的 AssociativeArray。"
+    },
+    {
+      "q": "组合方案为什么可以更容易修改公开接口？",
+      "a": "因为 MultiAssociativeArray 不必直接继承并暴露 AssociativeArray 的接口，可以设计更符合多值语义的方法，例如用 getAll() 获取某个键的全部值。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "“是一个”关系与“有一个”关系",
+    "类的组合与封装"
+  ],
+  "source_pages": [
+    174,
+    175
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "368_multiassociativearray_的继承与组合设计",
+  "_chunk_pages": [
+    173,
+    176
+  ]
+}

@@ -1,0 +1,48 @@
+{
+  "title": "Shell脚本的组成与注释形式",
+  "definition": "教材指出，一个 Bourne shell 程序由 Linux 命令、Bourne shell 命令、控制命令和注释组成。注释是前面有井号（#）的行，可以自成一行，也可以跟在一个命令（可执行语句）之后，用于对命令表和命令行进行注释。",
+  "key_points": [
+    "Bourne shell 程序由四类内容组成：Linux命令、Bourne shell命令、控制命令和注释",
+    "注释以前导 # 标识",
+    "注释可以单独成行",
+    "注释也可以跟在命令之后",
+    "注释用于对命令表和命令行进行说明"
+  ],
+  "examples": [
+    "# 这是注释",
+    "命令  # 跟在命令之后的注释"
+  ],
+  "misconceptions": [
+    "误以为注释只能独立占一行，教材说明也可以跟在命令之后",
+    "误以为脚本只由Linux命令组成，教材还列出了Bourne shell命令、控制命令和注释"
+  ],
+  "qa_pairs": [
+    {
+      "q": "一个 Bourne shell 程序由哪些内容组成？",
+      "a": "由Linux命令、Bourne shell命令、控制命令和注释组成。"
+    },
+    {
+      "q": "Shell 脚本中的注释是什么形式？",
+      "a": "前面有井号 # 的行。"
+    },
+    {
+      "q": "注释必须单独成行吗？",
+      "a": "不一定，也可以跟在一个命令之后。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "Shell基础"
+  ],
+  "source_pages": [
+    53,
+    56
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "103_shell脚本的组成与注释形式",
+  "_chunk_pages": [
+    53,
+    56
+  ]
+}

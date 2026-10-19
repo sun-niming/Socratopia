@@ -1,0 +1,41 @@
+{
+  "title": "directed_graph 的改进方向",
+  "definition": "原文提出了 directed_graph 类模板的多个可能改进方向：允许修改节点、检查图中是否存在循环、支持随机访问迭代器，以及借鉴标准库关联容器的节点相关功能。",
+  "key_points": [
+    "当前实现因邻接表使用节点索引，不允许直接修改节点；若支持修改，`directed_graph<T>::iterator` 可以改为非 const 迭代器。",
+    "当前实现不检查图中的循环；加入循环检查后，可以将图限制为有向无环图。",
+    "可以把当前的双向迭代器改进为随机访问迭代器。",
+    "可以增加 `node_type` 类型别名以及 `extract` 等节点相关方法。"
+  ],
+  "examples": [
+    "改进目标的概念关系：\n$$\n\\text{循环检查} \\;\\Rightarrow\\; \\text{可将图限制为有向无环图（DAG）}\n$$"
+  ],
+  "misconceptions": [
+    "“加入循环检查”是改进方向，并不表示当前 directed_graph 已经自动保证无环。",
+    "将迭代器改为非 const 迭代器是为了允许修改节点，但节点修改还必须与内部索引结构保持一致。",
+    "节点相关的 `extract` 等功能只是建议的扩展，并非当前实现已经具备的功能。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "原文列出了哪些 directed_graph 改进方向？",
+      "a": "包括允许修改节点、检查循环以支持有向无环图、支持随机访问迭代器，以及增加 `node_type` 和 `extract` 等节点相关功能。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "迭代器类别",
+    "有向图与有向无环图",
+    "标准库关联容器节点操作"
+  ],
+  "source_pages": [
+    754,
+    754
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1563_directed_graph_的改进方向",
+  "_chunk_pages": [
+    753,
+    756
+  ]
+}

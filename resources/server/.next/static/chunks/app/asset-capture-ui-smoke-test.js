@@ -298,7 +298,7 @@ test("both frontend files parse", function () {
 
 test("the shell loads the bumped capture script and the figure entry reuses the marquee", function () {
   var html = fs.readFileSync(INDEX_HTML, "utf8");
-  assert.ok(html.indexOf("/asset-capture.js?v=20261010-6") !== -1, "the script query must advance with the file");
+  assert.ok(html.indexOf("/asset-capture.js?v=20261013-7") !== -1, "the script query must advance with the file");
   var source = fs.readFileSync(PUBLIC_SCRIPT, "utf8");
   assert.ok(source.indexOf("pickRegionOnImage(img)") !== -1, "the marquee must be reused, not re-implemented");
   assert.ok(source.indexOf("page-image=1") !== -1, "the preview must come from the server's page-image action");
@@ -381,6 +381,54 @@ test("the provenance badge reads kind/page from the meta channel", function () {
   assert.ok(page.indexOf("__SOCRATOPIA_ASSET_META_LABEL__") !== -1, "badge not rendered by the img override");
   assert.ok(page.indexOf("metaCache") !== -1, "render must read the cache, not start a fetch");
   assert.ok(page.indexOf("n.useEffect(") !== -1, "meta must arrive through an effect re-render");
+});
+
+test("an intrinsic-size-less diagram can never collapse to 0x0 behind its badge", function () {
+  // An SVG carrying only a `viewBox` — the shape the figure guide prescribes, and
+  // what the tutor actually draws — has no intrinsic dimension.  Inside the
+  // shrink-to-fit badge wrapper Blink resolves the img's `max-width:100%` against a
+  // wrapper width derived from that same img, the circle collapses to 0x0, the
+  // picture vanishes and the badge escapes the bubble and wraps one character per
+  // line ("AI/自/绘").  Two independent guards: the live fence sizes itself from its
+  // own viewBox, and both figure imgs self-heal on load.
+  var t = fs.readFileSync(PAGE_CHUNK, "utf8");
+  assert.ok(t.indexOf('/viewBox\\s*=\\s*["\']([^"\']+)["\']/i.exec(_t)') !== -1,
+    "the live diagram must take its size from its viewBox");
+  assert.ok(t.indexOf("width:_vw||void 0,height:_vh||void 0") !== -1,
+    "no viewBox-derived size on the live diagram");
+  assert.strictEqual((t.match(/__SOCRATOPIA_ASSET_FIT__/g) || []).length, 2,
+    "both figure imgs (asset anchor and live fence) must self-heal on load");
+  assert.strictEqual((t.match(/pointerEvents:"none",userSelect:"none",whiteSpace:"nowrap"/g) || []).length, 2,
+    "both badges must refuse to wrap");
+  var script = fs.readFileSync(PUBLIC_SCRIPT, "utf8");
+  assert.ok(script.indexOf("window.__SOCRATOPIA_ASSET_FIT__ = api.fitImage") !== -1,
+    "the fitter is not exposed to the renderer");
+  assert.ok(script.indexOf("api.fitImage(img)") !== -1, "the sweep/lightbox never self-heals");
+});
+
+test("fitImage stamps the decoded natural size only while the img is collapsed", function () {
+  var dom = makeDom();
+  var api = loadPublicScript(dom);
+  assert.strictEqual(typeof api.fitImage, "function", "api.fitImage missing");
+
+  var collapsed = dom.document.createElement("img");
+  collapsed.naturalWidth = 720;
+  collapsed.naturalHeight = 400; // the stub's rect is 0x0: this is the bug's shape
+  assert.strictEqual(api.fitImage(collapsed), true, "a collapsed svg img must be healed");
+  assert.strictEqual(collapsed.attributes["width"], "720");
+  assert.strictEqual(collapsed.attributes["height"], "400");
+
+  var fine = dom.document.createElement("img");
+  fine.naturalWidth = 256;
+  fine.naturalHeight = 142;
+  fine.getBoundingClientRect = function () { return { left: 0, top: 0, width: 256, height: 142 }; };
+  assert.strictEqual(api.fitImage(fine), false, "a laid-out img must be left alone");
+  assert.strictEqual(fine.attributes["width"], undefined);
+
+  // A broken img (no intrinsic size at all) keeps its alt box.
+  var broken = dom.document.createElement("img");
+  assert.strictEqual(api.fitImage(broken), false, "an undecoded img must be left alone");
+  assert.strictEqual(api.fitImage(null), false, "null must not throw");
 });
 
 test("a figure is drawn on its own white ground, all three surfaces", function () {

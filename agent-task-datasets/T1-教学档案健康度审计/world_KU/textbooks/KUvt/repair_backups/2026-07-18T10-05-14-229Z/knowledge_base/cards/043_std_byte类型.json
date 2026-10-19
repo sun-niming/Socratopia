@@ -1,0 +1,39 @@
+{
+  "title": "std::byte类型",
+  "definition": "`std::byte`是C++17引入的字节类型，定义在标准库中。它用于表示字节数据；原文示例使用整数值`42`进行列表初始化：`std::byte b{42};`。`std::byte`与`char`、`signed char`和`unsigned char`是不同的类型。",
+  "key_points": [
+    "`std::byte`属于C++17引入的类型。",
+    "使用它需要包含相应的标准库定义，并通过`std::byte`名称使用。",
+    "原文示例为`std::byte b{42};`。"
+  ],
+  "examples": [
+    "`std::byte b{42};`"
+  ],
+  "misconceptions": [
+    "`std::byte`不是`unsigned char`的别名。",
+    "`std::byte`不应被当作普通整数类型直接进行一般算术运算。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`std::byte`是在C++哪个版本引入的？",
+      "a": "原文标注为C++17。"
+    },
+    {
+      "q": "如何声明一个值为42的`std::byte`变量？",
+      "a": "`std::byte b{42};`。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [],
+  "source_pages": [
+    41,
+    44
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "043_std_byte类型",
+  "_chunk_pages": [
+    41,
+    44
+  ]
+}

@@ -1,0 +1,50 @@
+{
+  "title": "struct与class的默认成员访问权限及初始化",
+  "definition": "C++中的`struct`和`class`都可以包含数据成员、构造函数和成员函数，但默认访问权限不同：`struct`的成员默认是`public`，`class`的成员默认是`private`。原文用`CircleStruct`和`CircleClass`对比了两者的成员声明和对象初始化方式。",
+  "key_points": [
+    "`struct`中未显式写访问说明符的成员默认是公有成员。",
+    "`class`中未显式写访问说明符的成员默认是私有成员。",
+    "`CircleClass`通过构造函数初始化器初始化成员：`m_x`、`m_y`和`m_radius`。",
+    "对于带有合适构造函数的类，可以使用括号初始化，也可以在C++11中使用花括号初始化。"
+  ],
+  "examples": [
+    "结构体对象可直接按成员顺序初始化：`CircleStruct myCircle1 = { 10, 10, 2.5 };`。",
+    "类对象可通过构造函数初始化：`CircleClass myCircle2(10, 10, 2.5);`。",
+    "C++11允许使用花括号初始化类对象：`CircleClass myCircle4 = { 10, 10, 2.5 };` 或 `CircleClass myCircle6 { 10, 10, 2.5 };`。"
+  ],
+  "misconceptions": [
+    "`struct`和`class`并非功能完全不同；这里强调的核心默认差异是成员访问权限。",
+    "`class`的成员不是永远私有；显式写出`public:`后可以公开成员。",
+    "使用花括号初始化并不表示对象一定是结构体；具有匹配构造函数的类也可以使用花括号初始化。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`struct`和`class`在默认成员访问权限上的区别是什么？",
+      "a": "`struct`成员默认是`public`，`class`成员默认是`private`。"
+    },
+    {
+      "q": "`CircleClass myCircle2(10, 10, 2.5);`调用了什么？",
+      "a": "调用`CircleClass`的构造函数，并用三个参数初始化对象。"
+    },
+    {
+      "q": "C++11中，类对象能否使用花括号初始化？",
+      "a": "能，只要类具有可匹配的构造函数或满足相应的初始化条件，例如`CircleClass myCircle6 { 10, 10, 2.5 };`。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++类和对象",
+    "C++构造函数"
+  ],
+  "source_pages": [
+    67,
+    68
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "096_struct与class的默认成员访问权限及初始化",
+  "_chunk_pages": [
+    65,
+    68
+  ]
+}

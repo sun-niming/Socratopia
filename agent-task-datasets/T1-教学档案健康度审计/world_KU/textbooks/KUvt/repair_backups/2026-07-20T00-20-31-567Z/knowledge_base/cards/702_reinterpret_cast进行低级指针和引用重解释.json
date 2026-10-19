@@ -1,0 +1,52 @@
+{
+  "title": "reinterpret_cast进行低级指针和引用重解释",
+  "definition": "`reinterpret_cast`比 `static_cast`更强大但安全性更低，可执行部分不符合通常 C++ 类型关系的低级重解释转换。例如，它可以在不相关类型的指针之间转换，也可以在不相关类型的引用之间转换，还可把 `void*` 转换回具体类型的指针。`void*`只表示内存中的某个位置，不携带类型信息。",
+  "key_points": [
+    "不相关类型的指针之间可以使用 `reinterpret_cast`，而 `static_cast`通常不能完成这种转换。",
+    "指针转换为 `void*` 可以隐式完成；从 `void*` 转回正确的具体指针类型通常需要 `reinterpret_cast`。",
+    "不相关类型的引用之间也可以使用 `reinterpret_cast`。",
+    "`reinterpret_cast`并非万能，仍然受到 C++ 类型转换规则的限制，而且使用不当会导致不安全结果。"
+  ],
+  "examples": [
+    "不相关指针转换：`X* xp = reinterpret_cast<X*>(yp);`，其中 `yp` 是 `Y*`，且 `X`、`Y` 无继承关系。",
+    "转换为 `void*`：`void* p { xp };`；从 `void*` 转回：`xp = reinterpret_cast<X*>(p);`。",
+    "不相关引用转换：`Y& yr { reinterpret_cast<Y&>(xr) };`，其中 `xr` 是 `X&`。"
+  ],
+  "misconceptions": [
+    "误以为 `reinterpret_cast` 会把对象内容安全地转换成目标类型；它主要是重新解释地址或引用，并不自动改变对象实际类型。",
+    "误以为只要转换成功编译，解引用结果就一定安全。",
+    "误以为 `void*` 保存了原对象的类型信息；原文明确指出 `void*`只指向内存位置，不携带类型信息。",
+    "误以为 `reinterpret_cast`可以无条件完成任何转换；原文指出它仍有很多限制。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么从 `void*` 转回具体指针通常需要 `reinterpret_cast`？",
+      "a": "因为 `void*`只保存内存位置，不保存类型信息；转换回具体类型的指针时需要显式告诉编译器如何解释该地址。"
+    },
+    {
+      "q": "`reinterpret_cast`与 `static_cast`相比有什么主要特点？",
+      "a": "`reinterpret_cast`能够执行更多低级、甚至涉及不相关类型的重解释转换，但安全性更低；`static_cast`遵守更严格的类型规则。"
+    },
+    {
+      "q": "`X*`和`Y*`不相关时，为什么示例使用 `reinterpret_cast<X*>(yp)`而不是 `static_cast<X*>(yp)`？",
+      "a": "因为 `static_cast`不能转换不相关类型的指针，而 `reinterpret_cast`可以进行这种低级指针重解释。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "指针与引用",
+    "static_cast的适用限制",
+    "void指针"
+  ],
+  "source_pages": [
+    348,
+    348
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "702_reinterpret_cast进行低级指针和引用重解释",
+  "_chunk_pages": [
+    345,
+    348
+  ]
+}

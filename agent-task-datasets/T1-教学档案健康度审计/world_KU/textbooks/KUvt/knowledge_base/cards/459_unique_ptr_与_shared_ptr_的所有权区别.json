@@ -1,0 +1,44 @@
+{
+  "title": "unique_ptr 与 shared_ptr 的所有权区别",
+  "definition": "`std::unique_ptr` 表示资源的唯一所有权，同一资源不能同时由多个 unique_ptr 共同拥有；`std::shared_ptr` 表示共享所有权，多个 shared_ptr 可以指向同一个资源，只有最后一个指向该资源的 shared_ptr 被销毁或重置时，资源才会被释放。",
+  "key_points": [
+    "`std::unique_ptr` 适用于资源只有一个所有者的情况。",
+    "`std::shared_ptr` 适用于确实需要多个所有者共同管理同一资源的情况。",
+    "教材建议默认使用 `unique_ptr`，只有真正需要共享资源时才使用 `shared_ptr`。",
+    "无论使用哪种资源分配方式，都应尽快把资源交给智能指针或其他 RAII 类管理。"
+  ],
+  "examples": [
+    "唯一所有权：`auto p = std::make_unique<Simple>();`。",
+    "共享所有权：多个 `std::shared_ptr<T>` 可以共同指向同一个资源；资源在最后一个 shared_ptr 释放所有权时才释放。"
+  ],
+  "misconceptions": [
+    "`shared_ptr` 并不是默认优于 `unique_ptr`；教材明确建议优先使用 `unique_ptr`。",
+    "多个指针指向同一地址不等于共享所有权；只有采用相应共享所有权机制的 `shared_ptr` 才具有该语义。",
+    "RAII 的含义是 Resource Acquisition Is Initialization，即资源获取即初始化。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "什么时候应使用 unique_ptr，什么时候应使用 shared_ptr？",
+      "a": "资源只有一个所有者时使用 unique_ptr；只有在确实需要多个所有者共同管理同一资源时才使用 shared_ptr。"
+    },
+    {
+      "q": "shared_ptr 何时释放共享资源？",
+      "a": "当指向该资源的最后一个 shared_ptr 被销毁或重置时释放资源。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "智能指针解决的内存管理问题"
+  ],
+  "source_pages": [
+    217,
+    218
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "459_unique_ptr_与_shared_ptr_的所有权区别",
+  "_chunk_pages": [
+    217,
+    220
+  ]
+}

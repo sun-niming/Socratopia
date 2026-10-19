@@ -1,0 +1,55 @@
+{
+  "title": "重载函数调用运算符 operator()",
+  "definition": "类可以定义 operator() 成员函数，使类对象能够像函数一样使用。这样的对象通常称为函数对象（functor）。调用 square(x) 时，实际上会调用 square.operator()(x)。同一个类还可以根据参数列表重载多个 operator()，例如分别接受 int 和 std::string_view。",
+  "key_points": [
+    "函数调用运算符的典型声明为：int operator()(int param);",
+    "定义 operator() 后，类对象可以使用 obj(argument) 的函数调用形式。",
+    "operator() 与普通成员函数可以同时存在；square(x) 调用 operator()，square.doSquare(x) 调用普通成员函数 doSquare。",
+    "operator() 可以重载，重载版本通过参数类型或参数数量区分。",
+    "原文示例还展示了 int operator()(int param); 和 void operator()(std::string_view str); 这两个重载。"
+  ],
+  "examples": [
+    "class FunctionObject { public: int operator()(int param); int doSquare(int param); };",
+    "int FunctionObject::operator()(int param) { return doSquare(param); }",
+    "int FunctionObject::doSquare(int param) { return param * param; }",
+    "FunctionObject square; xSquared = square(x); xSquaredAgain = square.doSquare(x);",
+    "class FunctionObject { public: int operator()(int param); void operator()(std::string_view str); };"
+  ],
+  "misconceptions": [
+    "函数对象不是普通函数指针；它是定义了 operator() 的类对象。",
+    "square(x) 不是调用名为 square 的普通函数，而是调用对象 square 的 operator()。",
+    "operator() 并不只能定义一个版本，可以像普通成员函数一样重载。",
+    "operator() 和普通成员函数 doSquare 的调用语法及含义不同：前者使用对象后跟括号，后者使用成员函数名。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "定义 operator() 后，为什么 FunctionObject 类型的对象可以写成 square(x)？",
+      "a": "因为类定义了函数调用运算符 operator()，所以 square(x) 会被解释为 square.operator()(x)。"
+    },
+    {
+      "q": "原文中 square(x) 与 square.doSquare(x) 分别调用什么？",
+      "a": "square(x) 调用 FunctionObject::operator()(int)，square.doSquare(x) 调用普通成员函数 doSquare(int)。"
+    },
+    {
+      "q": "operator() 能否重载为同时接受 int 和 std::string_view 的两个版本？",
+      "a": "可以。可以分别声明 int operator()(int param); 和 void operator()(std::string_view str);，编译器根据实参匹配合适的版本。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "类成员函数",
+    "函数重载",
+    "运算符重载"
+  ],
+  "source_pages": [
+    483,
+    484
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "625_重载函数调用运算符_operator",
+  "_chunk_pages": [
+    481,
+    484
+  ]
+}

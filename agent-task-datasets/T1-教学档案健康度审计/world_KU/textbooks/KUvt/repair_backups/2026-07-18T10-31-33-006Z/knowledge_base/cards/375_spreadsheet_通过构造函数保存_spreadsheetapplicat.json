@@ -1,0 +1,46 @@
+{
+  "title": "Spreadsheet 通过构造函数保存 SpreadsheetApplication 的引用",
+  "definition": "Spreadsheet 的一种构造函数除了接收宽度和高度外，还接收 `const SpreadsheetApplication& theApp`，并将该应用对象保存到成员引用 `m_theApp` 中。这样 Spreadsheet 对象可以关联一个外部的 SpreadsheetApplication 对象。",
+  "key_points": [
+    "构造函数形式为 `Spreadsheet(size_t width, size_t height, const SpreadsheetApplication& theApp);`。",
+    "类中保存的成员为 `const SpreadsheetApplication& m_theApp;`。",
+    "构造函数初始化器中使用 `m_theApp { theApp }` 保存传入的应用对象引用。",
+    "原文在这一部分提到 Spreadsheet、SpreadsheetApplication 和 MVC 的关系，但给出的代码重点是构造函数参数及引用成员。"
+  ],
+  "examples": [
+    "类声明示例：`export class Spreadsheet { public: Spreadsheet(size_t width, size_t height, const SpreadsheetApplication& theApp); private: const SpreadsheetApplication& m_theApp; };`",
+    "构造函数初始化器中的相关部分：`m_theApp { theApp }`。"
+  ],
+  "misconceptions": [
+    "`m_theApp` 是引用成员，不是把 SpreadsheetApplication 对象复制一份保存到 Spreadsheet 中。",
+    "参数类型中的 `const` 表示通过该引用不能修改所引用的 SpreadsheetApplication。",
+    "传入应用对象后，Spreadsheet 并不会自动创建一个新的 SpreadsheetApplication；原文代码只是保存传入对象的引用。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "Spreadsheet 为什么在构造函数中接收 `const SpreadsheetApplication&`？",
+      "a": "为了接收一个 SpreadsheetApplication 对象的常量引用，并将其保存到成员引用 `m_theApp` 中。"
+    },
+    {
+      "q": "Spreadsheet 中保存应用对象的成员声明是什么？",
+      "a": "`const SpreadsheetApplication& m_theApp;`。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++ 引用成员",
+    "const 引用",
+    "类的前置声明或类型声明"
+  ],
+  "source_pages": [
+    286,
+    287
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "375_spreadsheet_通过构造函数保存_spreadsheetapplicat",
+  "_chunk_pages": [
+    285,
+    288
+  ]
+}

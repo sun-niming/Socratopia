@@ -1,0 +1,40 @@
+{
+  "title": "background 背景简写",
+  "definition": "background 是背景相关属性的统一设置方式。教材给出的设置顺序是：颜色、图片、重复方式、位置、大小。",
+  "key_points": [
+    "可在一条声明中统一设置背景相关属性。",
+    "教材给出的顺序是颜色、图片、重复方式、位置、大小。"
+  ],
+  "examples": [
+    "background: red url(\"bg.jpg\") no-repeat left center / cover;"
+  ],
+  "misconceptions": [
+    "background 简写可以不按顺序写。",
+    "background 只能设置颜色，不能设置图片和重复方式。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "background 简写属性在教材中建议按什么顺序设置？",
+      "a": "颜色、图片、重复方式、位置、大小。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "background-color 背景颜色",
+    "background-image 背景图片",
+    "background-repeat 背景重复",
+    "background-position 背景位置",
+    "background-size 背景大小"
+  ],
+  "source_pages": [
+    113,
+    116
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "162_background_背景简写",
+  "_chunk_pages": [
+    113,
+    116
+  ]
+}

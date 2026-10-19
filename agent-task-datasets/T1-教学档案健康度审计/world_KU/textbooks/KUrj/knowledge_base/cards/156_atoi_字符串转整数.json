@@ -1,0 +1,38 @@
+{
+  "title": "atoi 字符串转整数",
+  "definition": "atoi(const char *nptr) 用来把字符串转换成 int。它的缺点是无法区分非法输入和 0，因此不适合做严格校验。",
+  "key_points": [
+    "在项目中可用于解析 \"-p 8080\" 的端口。",
+    "如果输入是 \"abc\"，atoi 可能得到 0，不能说明它是合法的 0。",
+    "五天版可以先用 atoi，再检查端口是否在 1 到 65535。"
+  ],
+  "examples": [
+    "int port = atoi(argv[i]); if (port < 1 || port > 65535) { /* 处理错误 */ }"
+  ],
+  "misconceptions": [
+    "把 atoi 的返回值当作已经验证过的合法数字。",
+    "认为 atoi 能告诉你输入是否全部是数字。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "atoi 为什么不够严谨？",
+      "a": "因为它无法区分非法输入和数值 0。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "字符串转整数",
+    "整数范围"
+  ],
+  "source_pages": [
+    101,
+    104
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "156_atoi_字符串转整数",
+  "_chunk_pages": [
+    101,
+    104
+  ]
+}

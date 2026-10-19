@@ -1,0 +1,38 @@
+{
+  "title": "根路径返回首页",
+  "definition": "访问根路径 `GET /` 时，服务器应返回首页 HTML 内容；实验预期中表现为 `HTTP/1.1 200 OK` 和 HTML body，在后续实验里对应返回 `index.html` 内容。",
+  "key_points": [
+    "请求方法是 GET，路径是 `/`。",
+    "响应状态码应为 200 OK。",
+    "响应体应是 HTML 首页内容，等价于返回 `index.html` 内容。"
+  ],
+  "examples": [
+    "`curl -i http://127.0.0.1:8080/`"
+  ],
+  "misconceptions": [
+    "根路径请求应该返回 404。",
+    "首页内容一定要是固定字符串，不能来自 `index.html`。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "访问 `http://127.0.0.1:8080/` 时应看到什么结果？",
+      "a": "应看到 `HTTP/1.1 200 OK`，并返回 HTML 首页内容。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "HTTP 方法",
+    "HTTP 状态码"
+  ],
+  "source_pages": [
+    114,
+    115
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "182_根路径返回首页",
+  "_chunk_pages": [
+    113,
+    116
+  ]
+}

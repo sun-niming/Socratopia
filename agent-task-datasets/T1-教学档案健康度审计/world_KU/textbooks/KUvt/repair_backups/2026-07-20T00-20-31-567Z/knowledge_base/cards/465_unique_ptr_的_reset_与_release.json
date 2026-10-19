@@ -1,0 +1,45 @@
+{
+  "title": "unique_ptr 的 reset 与 release",
+  "definition": "`reset()` 会释放 unique_ptr 当前拥有的资源，并可选择让它改为管理新的指针；不带参数时会使 unique_ptr 为空。`release()` 则断开 unique_ptr 与底层指针的连接，返回原始指针并使 unique_ptr 为空，但不会自动释放资源，此后调用者必须负责释放该资源。",
+  "key_points": [
+    "`p.reset();` 释放当前资源并使 p 为空。",
+    "`p.reset(new T{});` 释放当前资源，并让 p 管理新的动态对象。",
+    "`p.release();` 放弃所有权并返回底层原始指针。",
+    "release() 后资源不再由 unique_ptr 管理，必须由接收原始指针的一方负责释放。"
+  ],
+  "examples": [
+    "`mySimpleSmartPtr.reset();`",
+    "`mySimpleSmartPtr.reset(new Simple{});`",
+    "`Simple* simple { mySimpleSmartPtr.release() }; delete simple; simple = nullptr;`"
+  ],
+  "misconceptions": [
+    "reset() 与 release() 不同：reset() 会释放当前资源，而 release() 只转移或放弃管理关系，不会释放资源。",
+    "调用 release() 后如果忘记 delete 返回的原始指针，仍可能造成内存泄漏。",
+    "release() 返回原始指针后，原 unique_ptr 已不再拥有该资源。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "reset() 和 release() 的核心区别是什么？",
+      "a": "reset() 会释放原资源并可改为管理新资源；release() 只解除 unique_ptr 的所有权并返回原始指针，不会释放资源。"
+    },
+    {
+      "q": "调用 release() 后谁负责释放资源？",
+      "a": "调用者负责在资源使用完毕后释放该资源，通常需要对返回的原始指针执行 delete。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "unique_ptr 的解引用与 get"
+  ],
+  "source_pages": [
+    220,
+    220
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "465_unique_ptr_的_reset_与_release",
+  "_chunk_pages": [
+    217,
+    220
+  ]
+}

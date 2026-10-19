@@ -1,0 +1,44 @@
+{
+  "title": "类类型到指针类型的转换运算符",
+  "definition": "类可以定义转换运算符，将对象转换为指针类型。对于类似智能指针的类，常用的目标类型是 void*，因为 void* 除了可在布尔表达式中测试之外，不能直接执行其他指针操作。这样，对象就可以用于 if、!、与 nullptr 比较等场景。",
+  "key_points": [
+    "可通过成员函数 operator void*() const 定义到 void* 的转换。",
+    "当对象出现在 if 条件、逻辑非或指针有效性判断等位置时，会触发相应的转换。",
+    "转换为 void* 的主要用途是表达对象是否为空，而不是让对象真正参与指针运算。"
+  ],
+  "examples": [
+    "示意声明：`operator void*() const { return m_ptr; }`",
+    "对于 `Pointer<SpreadsheetCell> p`，以下判断可以使用：`if (p) { /* 非空 */ }`、`if (!p) { /* 为空 */ }`、`if (p != nullptr) { /* 非空 */ }`。",
+    "原文示例中，空指针对象输出 `nullptr`；非空对象依次可输出 `not nullptr`、`not NULL`、`not nullptr`。"
+  ],
+  "misconceptions": [
+    "定义了 `operator void*()` 并不意味着对象可以像普通对象指针一样执行任意指针运算。",
+    "转换运算符的主要作用是支持上下文中的有效性判断，而不是替代对象本身的成员访问接口。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么类似智能指针的类常把转换目标类型设计为 `void*`？",
+      "a": "因为 `void*` 可以用于布尔表达式中的空值判断，同时不能直接进行其他指针操作，能够限制这种隐式转换的用途。"
+    },
+    {
+      "q": "定义 `operator void*() const` 后，对象可以用于哪些典型表达式？",
+      "a": "可以用于 `if (p)`、`if (!p)` 以及与 `nullptr`、`NULL` 的比较等有效性判断。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++运算符重载",
+    "隐式类型转换"
+  ],
+  "source_pages": [
+    489,
+    489
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "980_类类型到指针类型的转换运算符",
+  "_chunk_pages": [
+    489,
+    492
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "title": "using namespace指令",
+  "definition": "`using namespace 命名空间名;` 是 using 指令，它使指定命名空间中的名称在当前作用域内可以通过未限定形式参与名称查找。例如，`using namespace std;` 后可以写 `cout` 和 `endl`，而不必在每次使用时写 `std::cout` 和 `std::endl`。",
+  "key_points": [
+    "语法为 `using namespace 名称;`。",
+    "`using namespace std;` 可使标准库名称以未限定形式使用。",
+    "导入整个命名空间可能增加名称冲突或名称歧义的风险。",
+    "using 指令与只引入单个名称的 using 声明不同。"
+  ],
+  "examples": [
+    "using namespace std;\ncout << \"Hello World\" << endl;"
+  ],
+  "misconceptions": [
+    "误以为 `using namespace std;` 会把标准库成员复制到当前命名空间；它影响的是名称查找。",
+    "混淆 `using namespace std;` 与 `using std::cout;`：前者涉及整个命名空间，后者只涉及一个指定名称。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`using namespace std;` 后，`std::cout` 可以怎样简写？",
+      "a": "可以写成 `cout`。"
+    },
+    {
+      "q": "using 指令相比 using 声明有什么潜在问题？",
+      "a": "它使整个命名空间中的名称参与未限定名称查找，因而更容易产生命名冲突或歧义。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "命名空间的定义与限定名调用",
+    "作用域"
+  ],
+  "source_pages": [
+    37,
+    40
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "035_using_namespace指令",
+  "_chunk_pages": [
+    37,
+    40
+  ]
+}

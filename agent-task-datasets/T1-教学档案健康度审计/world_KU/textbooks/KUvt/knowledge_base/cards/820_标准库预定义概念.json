@@ -1,0 +1,52 @@
+{
+  "title": "标准库预定义概念",
+  "definition": "C++标准库在 `<concepts>` 的 `std` 名称空间中定义了许多预定义概念，覆盖核心语言、比较、对象和可调用对象等类别；`<iterator>` 还定义了迭代器相关概念以及与算法需求相关的概念。满足需求时应优先直接使用标准概念或组合标准概念，而不是重复实现自己的概念。",
+  "key_points": [
+    "核心语言概念示例包括 `same_as`、`derived_from`、`convertible_to`、`integral`、`floating_point` 和 `copy_constructible`。",
+    "比较概念示例包括 `equality_comparable` 和 `totally_ordered`。",
+    "对象概念示例包括 `movable` 和 `copyable`。",
+    "可调用概念示例包括 `invocable` 和 `predicate`。",
+    "`<iterator>` 提供 `random_access_iterator`、`forward_iterator` 等迭代器概念。"
+  ],
+  "examples": [
+    "要求 `T` 派生自 `Foo`：`template <typename T> concept IsDerivedFromFoo = derived_from<T, Foo>;`",
+    "要求 `T` 可转换为 `bool`：`template <typename T> concept IsConvertibleToBool = convertible_to<T, bool>;`",
+    "要求 `T` 可默认构造且可拷贝构造：`template <typename T> concept DefaultAndCopyConstructible = default_initializable<T> && copy_constructible<T>;`"
+  ],
+  "misconceptions": [
+    "标准概念位于 `std` 名称空间，使用时通常需要包含相应标准库头文件。",
+    "标准概念不是只能单独使用，也可以通过 `&&` 和 `||` 组合成更具体的概念。",
+    "使用标准概念并不意味着所有相关语义都被完全证明；它检查的是该概念规定的约束。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`derived_from<T, Foo>` 检查什么？",
+      "a": "它检查类型 `T` 是否派生自类 `Foo`。"
+    },
+    {
+      "q": "如何定义一个要求类型既可默认构造又可拷贝构造的概念？",
+      "a": "`template <typename T> concept DefaultAndCopyConstructible = default_initializable<T> && copy_constructible<T>;`"
+    },
+    {
+      "q": "教材建议在可能时如何编写概念？",
+      "a": "优先使用已有的标准概念，或将标准概念组合起来，而不是自行重复实现。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "概念表达式与概念约束",
+    "组合概念表达式",
+    "C++标准库头文件与名称空间"
+  ],
+  "source_pages": [
+    403,
+    403
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 standard library concepts <concepts> derived_from convertible_to default_initializable copy_constructible categories",
+  "concept_id": "820_标准库预定义概念",
+  "_chunk_pages": [
+    401,
+    404
+  ]
+}

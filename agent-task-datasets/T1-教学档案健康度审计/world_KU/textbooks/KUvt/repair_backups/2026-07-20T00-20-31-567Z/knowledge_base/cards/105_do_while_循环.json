@@ -1,0 +1,41 @@
+{
+  "title": "do/while 循环",
+  "definition": "do/while 循环先执行一次循环体，再在循环体末尾求值条件表达式，以决定是否继续下一轮。因此，即使条件一开始为 false，循环体也至少执行一次。",
+  "key_points": [
+    "基本结构是 `do { 循环体 } while (条件表达式);`。",
+    "条件检测位于循环体之后，而 while 循环的条件检测位于循环体之前。",
+    "适用于要求代码块至少执行一次、之后再根据条件决定是否重复执行的场景。"
+  ],
+  "examples": [
+    "`int i { 100 }; do { cout << \"This is silly.\" << endl; ++i; } while (i < 5);` 中，条件第一次检测时为 false，但输出语句仍执行一次。"
+  ],
+  "misconceptions": [
+    "do/while 循环不会因为初始条件为 false 而跳过循环体；它一定先执行一次。",
+    "do/while 末尾的分号是语法的一部分：`while (条件表达式);`。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "do/while 循环至少执行几次循环体？",
+      "a": "至少执行一次。"
+    },
+    {
+      "q": "do/while 与 while 的主要区别是什么？",
+      "a": "do/while 先执行循环体再判断条件，while 先判断条件再决定是否执行循环体。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "while 循环"
+  ],
+  "source_pages": [
+    61,
+    62
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "105_do_while_循环",
+  "_chunk_pages": [
+    61,
+    64
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "title": "表单重置与提交事件",
+  "definition": "在表单相关控件上点击重置按钮或提交按钮时触发的事件。",
+  "key_points": [
+    "reset：点击重置按钮时触发。",
+    "submit：点击提交按钮时触发。"
+  ],
+  "examples": [
+    "点击重置按钮触发 reset",
+    "点击提交按钮触发 submit"
+  ],
+  "misconceptions": [
+    "submit 不是“表单验证通过”才触发，原文只说明它在点击提交按钮时触发。",
+    "reset 不等于页面刷新，它对应的是重置按钮。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "点击提交按钮会触发什么事件？",
+      "a": "submit"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [],
+  "source_pages": [
+    361,
+    364
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "486_表单重置与提交事件",
+  "_chunk_pages": [
+    361,
+    364
+  ]
+}

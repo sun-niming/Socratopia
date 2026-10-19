@@ -1,0 +1,40 @@
+{
+  "title": "类型别名优先于 typedef",
+  "definition": "C++ 中类型别名和 typedef 都可以为已有类型定义别名，但二者并不完全等效。教材指出，类型别名与模板结合使用时功能更强，因此通常应优先选择类型别名，而不是 typedef。",
+  "key_points": [
+    "类型别名和 typedef 都用于为类型创建别名。",
+    "类型别名与模板结合使用时功能更强。",
+    "教材建议始终优先使用类型别名。"
+  ],
+  "examples": [
+    "可使用类型别名语法：using String = std::string;",
+    "不要在新代码中无条件优先选择 typedef。"
+  ],
+  "misconceptions": [
+    "类型别名与 typedef 在所有场景下都完全等效。",
+    "类型别名只能用于基本类型，不能用于类模板或复杂类型。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "教材建议在类型别名和 typedef 之间优先选择哪一种？",
+      "a": "优先选择类型别名，因为它与模板结合使用时功能更强。"
+    },
+    {
+      "q": "类型别名与 typedef 是否完全等效？",
+      "a": "不完全等效。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [],
+  "source_pages": [
+    89,
+    89
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "160_类型别名优先于_typedef",
+  "_chunk_pages": [
+    89,
+    92
+  ]
+}

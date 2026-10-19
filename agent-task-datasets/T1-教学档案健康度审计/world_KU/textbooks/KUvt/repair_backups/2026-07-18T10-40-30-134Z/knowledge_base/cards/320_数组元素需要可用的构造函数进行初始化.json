@@ -1,0 +1,45 @@
+{
+  "title": "数组元素需要可用的构造函数进行初始化",
+  "definition": "创建类对象数组时，如果没有为每个元素显式提供初始化值，数组元素需要调用类的默认构造函数。因此，没有默认构造函数的 SpreadsheetCell 不能直接创建 `SpreadsheetCell cells[3];`，也不能直接使用 `new SpreadsheetCell[10]`。如果为数组元素逐一提供初始化对象，则可以创建数组。",
+  "key_points": [
+    "没有默认构造函数时，`SpreadsheetCell cells[3];` 无法通过编译。",
+    "没有默认构造函数时，`new SpreadsheetCell[10]` 也无法为 10 个元素找到无参构造方式。",
+    "可以通过显式初始化每个元素来创建数组，例如 `SpreadsheetCell cells[3]{SpreadsheetCell{0}, SpreadsheetCell{23}, SpreadsheetCell{41}};`。",
+    "为类补充默认构造函数后，类对象数组可以在没有逐元素实参的情况下创建。"
+  ],
+  "examples": [
+    "失败：`SpreadsheetCell cells[3];`（类没有默认构造函数时）",
+    "失败：`SpreadsheetCell* myCellp{new SpreadsheetCell[10]};`（类没有默认构造函数时）",
+    "显式初始化：`SpreadsheetCell cells[3]{SpreadsheetCell{0}, SpreadsheetCell{23}, SpreadsheetCell{41}};`"
+  ],
+  "misconceptions": [
+    "数组中的每个对象不会自动使用带参数的构造函数；若未逐元素提供初始化值，就必须存在可调用的默认构造函数。",
+    "能够创建一个单独的 `SpreadsheetCell{5}`，不代表能够直接创建没有默认构造函数的 `SpreadsheetCell[10]`。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么 `SpreadsheetCell cells[3];` 在 SpreadsheetCell 没有默认构造函数时不能编译？",
+      "a": "因为数组中的每个元素都需要在创建时初始化，而该声明没有为元素提供参数，所以必须调用默认构造函数；类没有默认构造函数时无法完成初始化。"
+    },
+    {
+      "q": "没有默认构造函数时，如何创建包含 0、23、41 的 SpreadsheetCell 数组？",
+      "a": "为每个元素显式提供初始化对象，例如 `SpreadsheetCell cells[3]{SpreadsheetCell{0}, SpreadsheetCell{23}, SpreadsheetCell{41}};`。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "构造函数重载",
+    "C++数组初始化"
+  ],
+  "source_pages": [
+    237,
+    240
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "320_数组元素需要可用的构造函数进行初始化",
+  "_chunk_pages": [
+    237,
+    240
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "title": "函数中的静态局部变量具有持久化状态",
+  "definition": "在函数体内使用 `static` 声明的局部变量，只在程序执行到该声明处时初始化一次；函数结束后变量仍然存在，再次调用该函数时会保留上一次调用修改后的值。原文用 `static bool initialized { false };` 记录初始化是否已经完成。",
+  "key_points": [
+    "静态局部变量的作用域仍限于声明它的函数内部。",
+    "它的生命周期通常持续到程序结束，而不是在每次函数调用结束时销毁。",
+    "原文逻辑是：如果 `initialized` 为 `false`，执行初始化代码并将其设为 `true`；后续调用不再重复执行这段初始化。"
+  ],
+  "examples": [
+    "```text\nvoid performTask()\n{\n    static bool initialized { false };\n    if (!initialized) {\n        cout << \"initializing\" << endl;\n        // Perform initialization.\n        initialized = true;\n    }\n    // Perform the desired task.\n}\n```",
+    "第一次调用 `performTask()` 时，`initialized` 初始为 `false`，会输出初始化信息并将其改为 `true`；后续调用会保留该值。"
+  ],
+  "misconceptions": [
+    "误以为 `static` 局部变量每次进入函数时都会重新初始化。",
+    "误以为静态局部变量可以在函数外直接通过名称访问。",
+    "误以为把变量声明为 `static` 就会让它成为全局变量。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "原文中的 `static bool initialized { false };` 为什么能防止初始化代码重复执行？",
+      "a": "因为该局部变量只初始化一次，并在函数调用结束后保留值；第一次执行后它被设为 `true`，后续调用时条件 `!initialized` 为假。"
+    },
+    {
+      "q": "静态局部变量的作用域和生命周期分别是什么？",
+      "a": "作用域仍限于声明它的函数，生命周期则持续存在并保留状态，不会在每次函数返回时销毁。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "局部变量",
+    "布尔类型与条件语句"
+  ],
+  "source_pages": [
+    365,
+    368
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "466_函数中的静态局部变量具有持久化状态",
+  "_chunk_pages": [
+    365,
+    368
+  ]
+}

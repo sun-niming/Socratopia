@@ -1,0 +1,46 @@
+{
+  "title": "form标签常用属性",
+  "definition": "form标签用于定义表单域，常用属性包括name、action和method。name用于表单的标识，后端根据这个名称确定数据来源；action规定表单数据发送到哪里，通常是后端处理页面的URL；method规定发送数据的HTTP方法，常见为GET和POST。",
+  "key_points": [
+    "name用于表单标识",
+    "action规定表单数据发送目标",
+    "method规定HTTP提交方法",
+    "GET适合短数据，POST适合安全性要求更高或较长文本的数据",
+    "表单语法形如 <form name=\"名称\" method=\"方式\" action=\"后端地址\">……</form>"
+  ],
+  "examples": [
+    "<form name=\"名称\" method=\"方式\" action=\"后端地址\">……</form>",
+    "method=\"GET\"",
+    "method=\"POST\""
+  ],
+  "misconceptions": [
+    "以为action是表单名称",
+    "以为method表示页面跳转方式",
+    "以为GET和POST都适合任何长度和敏感度的数据"
+  ],
+  "qa_pairs": [
+    {
+      "q": "form标签的action属性做什么？",
+      "a": "规定向哪里发送表单数据，通常是后端处理页面的URL。"
+    },
+    {
+      "q": "method属性的作用是什么？",
+      "a": "规定发送数据的HTTP方法，常见是GET和POST。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "HTML表单的作用"
+  ],
+  "source_pages": [
+    65,
+    68
+  ],
+  "needs_verification": true,
+  "verify_query": "HTML form 标签 name 属性 是否用于表单唯一标识；action 属性与 method 属性的标准含义；GET 和 POST 在表单提交中的适用场景",
+  "concept_id": "084_form标签常用属性",
+  "_chunk_pages": [
+    65,
+    68
+  ]
+}

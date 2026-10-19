@@ -1,0 +1,43 @@
+{
+  "title": "输入流运算符读取数据并按空白分词",
+  "definition": "使用输入流运算符 `>>` 可以从 `cin` 或其他输入流中读取数据，并把读取结果保存到变量中。默认情况下，`>>` 按空白字符对输入进行标志化，因此一次读取字符串时，只会得到下一个空白字符之前的内容。",
+  "key_points": [
+    "`cin >> variable` 将输入数据保存到 `variable` 中，变量类型决定数据的读取类型。",
+    "空白字符包括空格、换行、回车、水平制表符和垂直制表符。",
+    "读取字符串时，`>>` 默认跳过前导空白，并在下一个空白字符处停止，因此不能直接读取包含空格的完整姓名。",
+    "可以连续读取多个值，也可以混合不同类型，例如 `cin >> guestName >> partySize`。"
+  ],
+  "examples": [
+    "读取一个单词：`string userInput; cin >> userInput;`",
+    "读取一个整数：`int userInput; cin >> userInput;`",
+    "连续读取姓名和人数：`string guestName; int partySize; cin >> guestName >> partySize;`",
+    "输入 `hello there` 时，使用 `cin >> userInput` 后，`userInput` 的值为 `hello`。"
+  ],
+  "misconceptions": [
+    "`>>` 读取字符串时不会自动读取整行；遇到空格、换行等空白字符就会结束本次字符串读取。",
+    "`>>` 不只适用于整数，也可以用于字符串等多种变量类型。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "使用 `cin >> userInput` 读取 `hello there` 后，`userInput` 的值是什么？",
+      "a": "值为 `hello`，因为输入流运算符默认按空白字符分隔输入。"
+    },
+    {
+      "q": "如何使用输入流运算符同时读取姓名和聚餐人数？",
+      "a": "可以声明 `string guestName; int partySize;`，然后执行 `cin >> guestName >> partySize;`。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [],
+  "source_pages": [
+    417,
+    417
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "844_输入流运算符读取数据并按空白分词",
+  "_chunk_pages": [
+    417,
+    420
+  ]
+}

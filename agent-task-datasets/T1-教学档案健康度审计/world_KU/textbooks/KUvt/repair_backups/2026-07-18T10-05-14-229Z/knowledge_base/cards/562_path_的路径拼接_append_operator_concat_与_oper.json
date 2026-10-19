@@ -1,0 +1,46 @@
+{
+  "title": "path 的路径拼接：append、operator/=、concat 与 operator+=",
+  "definition": "`std::filesystem::path` 支持带路径分隔语义的拼接和不带路径分隔语义的连接。原文列出 `append()` 与 `operator/=`，以及 `concat()` 与 `operator+=`：前一组用于追加路径组件并处理路径分隔符，后一组用于直接连接字符串。",
+  "key_points": [
+    "`append()` 与 `operator/=` 用于追加路径组件，通常会按路径拼接规则处理分隔符。",
+    "`concat()` 与 `operator+=` 用于直接连接路径文本，不负责像目录拼接那样自动添加路径分隔符。",
+    "原文示例以 `D:\\Foo` 为初始路径，先追加 `Bar`，再使用不同操作继续拼接，以比较结果。",
+    "路径拼接关系可概括为：$$p\\mathbin{/=}component\\ \\approx\\ p.append(component)$$ $$p\\mathbin{+=}text\\ \\approx\\ p.concat(text)$$"
+  ],
+  "examples": [
+    "带路径分隔语义的拼接：`path p{R\"(D:\\Foo)\"}; p.append(\"Bar\"); p /= \"Bar\";`。",
+    "直接连接：`path p{\"D:/Foo\"}; p.concat(\"Bar\"); p += \"Bar\";`。",
+    "原文在 Windows 环境下展示了带分隔符的路径结果与直接连接结果，二者应区分。"
+  ],
+  "misconceptions": [
+    "`operator/=` 与 `operator+=` 作用不同：前者是路径组件拼接，后者是文本连接。",
+    "使用 `concat()` 或 `operator+=` 时不能假定系统会自动插入目录分隔符。",
+    "路径拼接不是普通字符串拼接；目录组件拼接应优先使用 `append()` 或 `operator/=`。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`path` 的 `append()` 和 `concat()` 有什么区别？",
+      "a": "`append()` 按路径组件追加并遵循路径分隔规则；`concat()` 直接连接路径文本，不承担同样的路径分隔处理。"
+    },
+    {
+      "q": "`operator/=` 和 `operator+=` 分别对应哪两个成员函数？",
+      "a": "`operator/=` 对应 `append()`；`operator+=` 对应 `concat()`。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "std::filesystem::path 的构造",
+    "运算符重载基本概念"
+  ],
+  "source_pages": [
+    429,
+    432
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 std::filesystem path append operator/= concat operator+= separator behavior example",
+  "concept_id": "562_path_的路径拼接_append_operator_concat_与_oper",
+  "_chunk_pages": [
+    429,
+    432
+  ]
+}

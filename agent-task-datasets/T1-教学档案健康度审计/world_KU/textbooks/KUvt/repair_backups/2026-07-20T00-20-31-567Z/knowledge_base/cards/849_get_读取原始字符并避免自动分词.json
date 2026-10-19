@@ -1,0 +1,45 @@
+{
+  "title": "get() 读取原始字符并避免自动分词",
+  "definition": "输入流的 `get()` 方法可以读取原始输入字符，因此适合处理包含空格等空白字符的文本。它有多个重载：一种形式返回下一个字符或特殊的 EOF 值；另一种形式把字符写入传入的 `char` 变量，并返回输入流引用。",
+  "key_points": [
+    "与 `>>` 默认按空白分词不同，`get()` 可以逐字符读取，包括空格和换行。",
+    "返回字符的 `get()` 版本应使用 `int` 保存结果，因为它还需要表示 `std::char_traits<char>::eof()` 等非字符值。",
+    "接收字符引用的版本可直接放入条件中，例如 `while (stream.get(next)) { ... }`。",
+    "读取流会改变流的当前位置，因此读取方法不能通过 `const istream&` 调用；函数参数应使用非 const 引用。"
+  ],
+  "examples": [
+    "使用返回值版本逐字符读取：`int next = stream.get(); if (!stream || next == std::char_traits<char>::eof()) break; name += static_cast<char>(next);`。",
+    "使用字符引用版本：`char next; while (stream.get(next)) { name += next; }`。",
+    "逐字符读取完整姓名时，输入中的空格会被追加到 `name` 中。"
+  ],
+  "misconceptions": [
+    "返回字符的 `get()` 不能安全地直接用 `char` 保存，因为它还要表示 EOF。",
+    "`get()` 不会像 `>>` 那样自动跳过所有空白字符。",
+    "输入流参数不能声明为 `const istream&` 后再调用会改变流位置的读取方法。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么 `stream.get()` 的返回值通常保存到 `int` 而不是 `char`？",
+      "a": "因为它除了返回字符外，还需要返回 `std::char_traits<char>::eof()` 等特殊的非字符值。"
+    },
+    {
+      "q": "如何用 `get(char&)` 逐字符读取，直到读取失败？",
+      "a": "声明 `char next;`，然后使用 `while (stream.get(next)) { name += next; }`。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "通过输入流状态判断读取是否成功"
+  ],
+  "source_pages": [
+    419,
+    419
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "849_get_读取原始字符并避免自动分词",
+  "_chunk_pages": [
+    417,
+    420
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "title": "C++文件系统库",
+  "definition": "文件系统支持库定义在<filesystem>头文件中，位于std::filesystem命名空间。它用于编写可移植的文件系统代码，可以判断路径对应的是目录还是文件、迭代目录内容、操作路径，以及获取文件大小、扩展名和创建时间等信息。",
+  "key_points": [
+    "使用文件系统库时通常需要使用std::filesystem命名空间。",
+    "文件系统库支持路径操作和目录遍历。",
+    "文件系统库可以查询文件或目录的相关信息。"
+  ],
+  "examples": [
+    "代码示例：\nnamespace fs = std::filesystem;\nfs::path p{\"data/example.txt\"};\nbool isFile{fs::is_regular_file(p)};"
+  ],
+  "misconceptions": [
+    "文件系统库不只用于打开和读取文件，还支持路径操作、目录迭代和文件属性查询。",
+    "使用文件系统库不等于只能处理普通文件，也可以处理目录和路径。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "文件系统库定义在哪个头文件和命名空间中？",
+      "a": "定义在<filesystem>头文件中，位于std::filesystem命名空间。"
+    },
+    {
+      "q": "文件系统库可以查询哪些文件信息？",
+      "a": "例如文件大小、扩展名和创建时间等信息。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "命名空间",
+    "文件和目录的基本概念"
+  ],
+  "source_pages": [
+    505,
+    506
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1026_c_文件系统库",
+  "_chunk_pages": [
+    505,
+    508
+  ]
+}

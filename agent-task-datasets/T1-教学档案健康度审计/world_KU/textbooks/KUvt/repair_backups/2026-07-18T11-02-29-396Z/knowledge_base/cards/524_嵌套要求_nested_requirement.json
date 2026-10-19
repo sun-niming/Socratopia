@@ -1,0 +1,43 @@
+{
+  "title": "嵌套要求（nested requirement）",
+  "definition": "嵌套要求是在 `requires` 表达式内部使用 `requires` 关键字，对一个约束表达式或编译期布尔条件进行检查。它可以表达不能直接归类为表达式、类型或复合要求的额外条件。",
+  "key_points": [
+    "嵌套要求的典型形式是 `requires 条件;`。",
+    "条件通常必须是编译期可判断的约束或常量表达式。",
+    "例如 `requires sizeof(t) == 4;` 要求 `sizeof(t) == 4` 成立。"
+  ],
+  "examples": [
+    "`template <typename T> concept C = requires(T t) { requires sizeof(t) == 4; };`",
+    "上例先声明用于检查的 `T t`，再通过嵌套要求约束 `sizeof(t) == 4`。"
+  ],
+  "misconceptions": [
+    "嵌套要求不是再次检查某个运行时函数调用，而是检查一个编译期条件。",
+    "`requires sizeof(t) == 4;` 中的 `t` 来自外层 requires 表达式的参数列表。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何在 requires 表达式中要求对象 `t` 的大小为 4？",
+      "a": "可以写 `requires(T t) { requires sizeof(t) == 4; };`。"
+    },
+    {
+      "q": "嵌套要求主要用于什么？",
+      "a": "用于在 requires 表达式内部加入一个额外的编译期约束或布尔条件。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "requires 表达式",
+    "编译期常量表达式"
+  ],
+  "source_pages": [
+    401,
+    404
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "524_嵌套要求_nested_requirement",
+  "_chunk_pages": [
+    401,
+    404
+  ]
+}

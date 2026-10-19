@@ -1,0 +1,47 @@
+{
+  "title": "不完整实现类型与类外默认析构函数",
+  "definition": "当接口类只通过前置声明知道实现类，而实现类的完整定义位于实现文件中时，接口类不能在类定义处直接默认化依赖该实现类型的析构函数或其他特殊成员函数。应在实现类已经完整定义的实现文件中再将这些函数设置为 `= default`，以便编译器能够看到完整的实现类定义。",
+  "key_points": [
+    "Spreadsheet 只在类定义中前置声明 `class Impl;`，此时编译器还不知道 Impl 的完整定义。",
+    "Spreadsheet 使用 `std::unique_ptr<Impl>` 保存实现对象，因此需要用户声明的析构函数。",
+    "析构函数可以在实现文件中写成 `Spreadsheet::~Spreadsheet() = default;`。",
+    "原文还指出，移动构造函数和移动赋值运算符等其他特殊成员函数在涉及不完整 Impl 类型时也可能需要在实现文件中默认化。"
+  ],
+  "examples": [
+    "接口类中可先写：`class Impl; std::unique_ptr<Impl> m_impl;`。",
+    "在实现类 `class Spreadsheet::Impl { ... };` 定义之后，再写：`Spreadsheet::~Spreadsheet() = default;`。"
+  ],
+  "misconceptions": [
+    "前置声明 `class Impl;` 不等于已经提供了 Impl 的完整定义。",
+    "不能因为函数实现很简单，就一定能在接口类定义内部直接写 `= default`；如果编译器需要使用尚未完整定义的 Impl 类型，就必须推迟到实现文件。",
+    "pimpl 中使用 `unique_ptr` 并不会自动消除析构函数定义时对完整实现类型的要求。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么 pimpl 接口类的析构函数通常要在实现文件中默认化？",
+      "a": "因为接口类定义处只有 `Impl` 的前置声明，编译器还看不到其完整定义；在实现文件中定义析构函数时，编译器已经能够处理 Impl 的析构。"
+    },
+    {
+      "q": "Spreadsheet 的析构函数为什么需要用户声明？",
+      "a": "因为 Spreadsheet 含有指向实现类的 `std::unique_ptr`，其析构过程依赖实现类的完整定义。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "pimpl惯用法",
+    "前置声明",
+    "std::unique_ptr",
+    "特殊成员函数"
+  ],
+  "source_pages": [
+    299,
+    299
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 unique_ptr incomplete type pimpl destructor defined out of line defaulted move constructor move assignment incomplete type requirements",
+  "concept_id": "617_不完整实现类型与类外默认析构函数",
+  "_chunk_pages": [
+    297,
+    300
+  ]
+}

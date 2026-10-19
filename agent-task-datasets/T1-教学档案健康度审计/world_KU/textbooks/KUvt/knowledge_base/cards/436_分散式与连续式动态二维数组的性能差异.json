@@ -1,0 +1,45 @@
+{
+  "title": "分散式与连续式动态二维数组的性能差异",
+  "definition": "逐行动态分配的二维数组会使各个子数组成为分散的内存块，可能降低处理该数据结构的算法性能。若需要更好的局部性和访问性能，可以分配一个包含全部元素的大内存块，并将二维坐标映射到一维偏移量。",
+  "key_points": [
+    "分散式方案先分配第一层指针数组，再分别分配每个子数组，因此各行可能位于不同内存区域。",
+    "连续式方案将全部元素放在一个大内存块中，理论上具有更好的内存连续性。",
+    "若二维数组的行数为 $xDimension$、列数为 $yDimension$，按行连续存储时，坐标 $(x,y)$ 的一维偏移量通常可写为：\n$$\\text{offset}=x\\times yDimension+y$$",
+    "原文指出，使用连续内存通常能让处理这类数据结构的算法运行得更快。"
+  ],
+  "examples": [
+    "设二维数组有 `xDimension` 行、`yDimension` 列，按行存储时：\n```text\n元素 board[x][y] 对应一维数组 data[x * yDimension + y]\n```",
+    "若有 $4\\times7$ 个元素，坐标 $(2,3)$ 的偏移量为：\n$$2\\times7+3=17$$"
+  ],
+  "misconceptions": [
+    "使用 `char**` 的二维数组不必然连续；逐行 `new[]` 分配通常形成分散内存块。",
+    "连续内存并不意味着可以忽略边界检查；下标越界仍然会导致未定义行为。",
+    "原文关于访问公式的 OCR 文本不完整，因此具体变量顺序应以教材原版或上下文核对。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么逐行动态分配的二维数组可能影响性能？",
+      "a": "因为各个子数组可能分散在不同内存块中，访问时的内存局部性较差。"
+    },
+    {
+      "q": "按行存储的二维数组中，坐标 $(x,y)$ 如何映射为一维偏移量？",
+      "a": "通常为 `x * yDimension + y`，其中 `yDimension` 是每行的元素数。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "动态二维数组的分配与释放",
+    "数组内存布局与一维下标映射"
+  ],
+  "source_pages": [
+    207,
+    207
+  ],
+  "needs_verification": true,
+  "verify_query": "C++ dynamic 2D array contiguous memory offset x dimension y dimension formula x*yDimension+y textbook",
+  "concept_id": "436_分散式与连续式动态二维数组的性能差异",
+  "_chunk_pages": [
+    205,
+    208
+  ]
+}

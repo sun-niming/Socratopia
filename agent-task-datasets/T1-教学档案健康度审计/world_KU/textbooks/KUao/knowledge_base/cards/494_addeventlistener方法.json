@@ -1,0 +1,42 @@
+{
+  "title": "addEventListener方法",
+  "definition": "在支持 DOM 2 级标准的浏览器中，可以使用 addEventListener 方法为元素注册事件监听器。它既支持注册冒泡型事件处理，也支持注册捕获型事件处理。该方法接受三个参数：第一个参数是事件类型名；第二个参数是回调处理函数，也就是监听器函数；第三个参数用于说明回调是在事件传递过程中的捕获阶段还是冒泡阶段被调用。第三个参数为 false 时在冒泡阶段调用，为 true 时表示创建捕捉事件监听器。",
+  "key_points": [
+    "适用于支持 DOM 2 级标准的浏览器",
+    "既可注册冒泡型监听器，也可注册捕获型监听器",
+    "第一个参数是事件类型名",
+    "第二个参数是回调处理函数（监听器函数）",
+    "第三个参数 false 表示冒泡阶段，true 表示捕获阶段"
+  ],
+  "examples": [
+    "element.addEventListener('click', handler, false)",
+    "element.addEventListener('click', handler, true)"
+  ],
+  "misconceptions": [
+    "以为 addEventListener 只能绑定冒泡事件",
+    "以为第三个参数是事件名称或别的标识",
+    "以为 false 表示捕获阶段"
+  ],
+  "qa_pairs": [
+    {
+      "q": "addEventListener 的第三个参数为 true 和 false 分别表示什么？",
+      "a": "true 表示在捕获阶段调用，false 表示在冒泡阶段调用。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "事件绑定方式",
+    "标准事件模型"
+  ],
+  "source_pages": [
+    367,
+    368
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "494_addeventlistener方法",
+  "_chunk_pages": [
+    365,
+    368
+  ]
+}

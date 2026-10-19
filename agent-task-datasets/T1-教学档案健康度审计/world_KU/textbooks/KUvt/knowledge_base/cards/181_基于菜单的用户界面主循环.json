@@ -1,0 +1,45 @@
+{
+  "title": "基于菜单的用户界面主循环",
+  "definition": "用户界面通过 main() 中的循环反复显示菜单、读取用户选择，并使用 switch 根据选择执行相应操作；当用户选择退出选项时，将 done 设为 true，循环结束。",
+  "key_points": [
+    "循环条件是 !done，即只要尚未完成就继续显示菜单。",
+    "displayMenu() 返回一个整数 selection。",
+    "switch 根据 selection 分派操作：0 退出，1 雇用，2 解雇，3 晋升，4 显示全部雇员，5 显示当前雇员，6 显示已离职雇员。",
+    "default 分支报告未知命令。"
+  ],
+  "examples": [
+    "主循环的结构可表示为：\n```cpp\nbool done{false};\nwhile (!done) {\n    int selection{displayMenu()};\n    switch (selection) {\n        case 0:\n            done = true;\n            break;\n        case 1:\n            doHire(employeeDB);\n            break;\n        case 2:\n            doFire(employeeDB);\n            break;\n        case 3:\n            doPromote(employeeDB);\n            break;\n        case 4:\n            employeeDB.displayAll();\n            break;\n        case 5:\n            employeeDB.displayCurrent();\n            break;\n        case 6:\n            employeeDB.displayFormer();\n            break;\n        default:\n            std::cerr << \"Unknown command.\" << std::endl;\n            break;\n    }\n}\n```"
+  ],
+  "misconceptions": [
+    "switch 的每个 case 通常需要 break，否则可能继续执行后续 case。",
+    "选择退出不是直接结束整个程序代码，而是设置 done，使 while 循环条件失效。",
+    "菜单界面只是调用 Database 和 Employee 的功能，不等于把所有业务逻辑都写在 main() 中。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "菜单程序如何实现反复显示菜单并处理选择？",
+      "a": "在 while (!done) 循环中调用 displayMenu() 获取选择，再用 switch 执行对应操作。"
+    },
+    {
+      "q": "用户选择 0 时发生什么？",
+      "a": "程序将 done 设为 true，随后 while 循环结束。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "while 循环",
+    "switch 语句",
+    "函数调用"
+  ],
+  "source_pages": [
+    98,
+    98
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "181_基于菜单的用户界面主循环",
+  "_chunk_pages": [
+    97,
+    100
+  ]
+}

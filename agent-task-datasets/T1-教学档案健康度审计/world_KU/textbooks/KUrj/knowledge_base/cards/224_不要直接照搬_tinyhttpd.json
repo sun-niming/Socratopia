@@ -1,0 +1,38 @@
+{
+  "title": "不要直接照搬 tinyhttpd",
+  "definition": "可以借鉴 tinyhttpd 的结构思路，如 `startup`、`accept_request`、`serve_file`、`headers`，但不应直接照搬。因为 tinyhttpd 较旧，存在固定路径、`sprintf`、CGI、路径安全不足等问题；实现时应使用更安全的 `snprintf`、`realpath` 和清晰的模块拆分。",
+  "key_points": [
+    "可以学习 tinyhttpd 的整体结构。",
+    "不能直接照搬旧实现中的不安全写法。",
+    "应使用更安全的函数和更清晰的模块拆分。"
+  ],
+  "examples": [
+    "用 `snprintf` 代替 `sprintf`。",
+    "用 `realpath` 做路径安全校验。"
+  ],
+  "misconceptions": [
+    "参考开源项目不等于原样复制。",
+    "旧项目的实现方式不一定符合当前安全要求。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么不直接照搬 tinyhttpd？",
+      "a": "因为它适合学习结构，但较旧，存在固定路径、`sprintf`、CGI 和路径安全不足等问题；应学习思路而不是原样复制。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "静态服务器先支持 GET"
+  ],
+  "source_pages": [
+    129,
+    132
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "224_不要直接照搬_tinyhttpd",
+  "_chunk_pages": [
+    129,
+    132
+  ]
+}

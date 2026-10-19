@@ -1,0 +1,258 @@
+{
+  "chunkId": "chunk-003",
+  "messageRange": [
+    16,
+    27
+  ],
+  "topics": [
+    {
+      "name": "Optional 类型与空值处理",
+      "facts": [
+        "Optional 的作用是把“有可能找不到”写进方法的签名里。",
+        "返回类型是 Optional<Ingredient> 时，调用方必须显式面对“万一为空”的情况：orElse、orElseThrow、isPresent 等总得选一条路。",
+        "直接返回 Ingredient 时签名看不出任何暗示，调用方可能一路无视直到运行到那一步才抛出 NullPointerException。"
+      ],
+      "examples": [
+        "用 orElse 兜底、用 orElseThrow 抛错、用 isPresent 先问一句。",
+        "清单 3.1 那个 Optional 不是随手加的。"
+      ],
+      "sourceMessageIndexes": [
+        16,
+        17
+      ]
+    },
+    {
+      "name": "仓储接口与实现分离",
+      "facts": [
+        "教材先把“这个存储库该有哪些本事”整理成接口 IngredientRepository，三条操作一条一句方法声明，接口正文留空。",
+        "“要什么”和“怎么做到”被切成两半，怎么连库、怎么拼 SQL 留给实现类去填。",
+        "页 80 给出接口正文：findAll 返回 Iterable<Ingredient>，findById 返回 Optional<Ingredient>，save 返回 Ingredient。"
+      ],
+      "examples": [
+        "```java\npublic interface IngredientRepository {\n  Iterable<Ingredient> findAll();\n  Optional<Ingredient> findById(String id);\n  Ingredient save(Ingredient ingredient);\n}\n```"
+      ],
+      "sourceMessageIndexes": [
+        17,
+        21
+      ]
+    },
+    {
+      "name": "JdbcTemplate 的依赖注入",
+      "facts": [
+        "实现类要跑 SQL 总得先拿到一个 JdbcTemplate 对象。",
+        "页 77 清单 3.2 开头有一行 private JdbcTemplate jdbcTemplate;。",
+        "Spring 启动时做组件扫描，扫到存储库实现类，在实例化时把需要的 JdbcTemplate 注入进去。",
+        "注入方式有构造器注入和字段注入，构造器注入更受推崇，因为依赖一眼可见、对象更容易在测试里被替换。"
+      ],
+      "examples": [
+        "private JdbcTemplate jdbcTemplate;",
+        "学习者答：Spring 扫描后给他注入的值。"
+      ],
+      "sourceMessageIndexes": [
+        17,
+        18,
+        19
+      ]
+    },
+    {
+      "name": "@Repository 与构造函数注入",
+      "facts": [
+        "@Repository 是 Spring 的原型注解之一，跟 @Controller、@Component 同族。",
+        "@Repository 给类的身份是“仓储”，Spring 组件扫描时自动发现它，在应用上下文里生成一个 bean。",
+        "清单 3.4 的实现骨架用构造函数注入 JdbcTemplate。",
+        "教材说单构造函数时可以省掉 @Autowired；想显式写、或存在多个构造函数时才标上。",
+        "页 77 那个片段只孤零零一行 private JdbcTemplate jdbcTemplate;，看着像字段注入；到清单 3.4 才亮出真身，是构造函数注入。"
+      ],
+      "examples": [
+        "```java\n@Repository\npublic class JdbcIngredientRepository implements IngredientRepository {\n  private JdbcTemplate jdbcTemplate;\n\n  public JdbcIngredientRepository(JdbcTemplate jdbcTemplate) {\n    this.jdbcTemplate = jdbcTemplate;\n  }\n  // ...\n}\n```"
+      ],
+      "sourceMessageIndexes": [
+        21
+      ]
+    },
+    {
+      "name": "RowMapper 与 query 方法",
+      "facts": [
+        "RowMapper 是函数式接口，只有一个抽象方法 mapRow(ResultSet, int)。",
+        "mapRowToIngredient(ResultSet row, int rowNum) 的参数表和方法名对得上，签名严丝合缝，所以方法引用能直接站到“需要一个 RowMapper 实现”的位置上。",
+        "方法引用本身就是 lambda 的简写形式，编译时直接充当那个单抽象方法的实现，中间不必真去造一个匿名内部类。",
+        "query() 第一个参数是 SQL，第二个是 Spring 的 RowMapper，后面再跟 SQL 需要的参数。",
+        "findAll() 没有参数，因为没有 where 条件；findById() 有 where 条件所以带参数。"
+      ],
+      "examples": [
+        "```java\nreturn jdbcTemplate.query(\n    \"select id, name, type from Ingredient\",\n    this::mapRowToIngredient);\n```",
+        "```java\nList<Ingredient> results = jdbcTemplate.query(\n    \"select id, name, type from Ingredient where id=?\",\n    this::mapRowToIngredient,\n    id);\n```",
+        "教材页 81 给的那段显式 new RowMapper<>(){...} 代码，是拿来对照“如果我偏要老老实实手写”的样子的。"
+      ],
+      "sourceMessageIndexes": [
+        21,
+        22,
+        24,
+        25
+      ]
+    },
+    {
+      "name": "把存储库接进流程",
+      "facts": [
+        "清单 3.7：DesignTacoController 里注入 IngredientRepository，addIngredientsToModel() 改成调用 ingredientRepo.findAll()，第 2 章那份硬编码的配料清单退役。",
+        "清单 3.8：IngredientByIdConverter 简化成一句 ingredientRepo.findById(id).orElse(null)，原来那张手搭的 Map 也删了。",
+        "findById 返回 Optional，转换器想拿回普通 Ingredient，就用 orElse(null) 把“找不到”这层壳拆掉。谁调用谁负责交代空值。"
+      ],
+      "examples": [
+        "ingredientRepo.findAll()",
+        "ingredientRepo.findById(id).orElse(null)"
+      ],
+      "sourceMessageIndexes": [
+        25
+      ]
+    },
+    {
+      "name": "数据库 schema 与预加载数据",
+      "facts": [
+        "页 84 是 3.1.3 定义 schema 并预加载数据。",
+        "图 3.1 给出 Taco Cloud 需要的四张表：Taco_Order、Taco、Ingredient_Ref、Ingredient。",
+        "Taco 不能脱离 Taco_Order 存在，所以 Taco_Order 和 Taco 是一个聚合，Taco_Order 是聚合根。",
+        "Ingredient 是自己聚合里的唯一成员，能独立存在，Taco 通过 Ingredient_Ref 引用它。",
+        "一个 Taco 要用多种配料，同一种配料又会出现在很多个 Taco 里，这是多对多关系。",
+        "在 Taco 表里开一列硬存配料，一列只能装一个值，列的数目得随配料数量变，完全没法固定。",
+        "把“一个 Taco 用了哪些配料”单独拎到中间表 Ingredient_Ref，一行记一条“某 Taco 用了某 Ingredient”，多对多就被拆成两组一对多。",
+        "页 85 建 Ingredient_Ref 表时只列了 ingredient、taco、taco_key 三列，taco_key 用来保留配料在列表里的顺序。",
+        "页 90 的 saveIngredientRefs() 里 key++ 就是干保留顺序这个的。",
+        "类路径根目录下放 schema.sql，应用启动时里面的 SQL 会被执行来建表。",
+        "根目录下再放 data.sql，里面是 insert 语句，启动时执行来预加载配料数据。",
+        "两个文件都放在项目的 src/main/resources/ 下。",
+        "页 86 清单 3.10 前四行是 delete from ...，先清空再插入，省得重复启动时数据叠起来。"
+      ],
+      "examples": [
+        "表 Taco_Order：存订单细节（收货信息、支付信息、下单时间）。",
+        "表 Taco：存每个玉米卷设计的信息。",
+        "表 Ingredient_Ref：把 Taco 行连到 Ingredient 行。",
+        "表 Ingredient：存原料信息。",
+        "清单 3.9 的建表 SQL 有 create table 建列、末尾几条 alter table ... add foreign key 立外键。",
+        "清单 3.10 的 insert 语句。"
+      ],
+      "sourceMessageIndexes": [
+        25,
+        27
+      ]
+    }
+  ],
+  "learnerEvidence": [
+    {
+      "kind": "correct",
+      "content": "防止调用方忘记处理空可能结果。",
+      "sourceMessageIndexes": [
+        16
+      ]
+    },
+    {
+      "kind": "correct",
+      "content": "Spring 扫描后给他注入的值？",
+      "sourceMessageIndexes": [
+        18
+      ]
+    },
+    {
+      "kind": "correct",
+      "content": "RowMapper 接口是单函数接口，因此方法引用实际上是将这个方法用 lambda 包装成一个 RowMapper 类型的匿名内部类。",
+      "sourceMessageIndexes": [
+        22,
+        24
+      ]
+    },
+    {
+      "kind": "misconception",
+      "content": "减少一张表的复杂度。",
+      "sourceMessageIndexes": [
+        26
+      ]
+    }
+  ],
+  "keyInsights": [
+    {
+      "content": "Optional 的作用是防止调用方忘记处理空可能结果。",
+      "sourceMessageIndexes": [
+        16,
+        17
+      ]
+    },
+    {
+      "content": "Spring 扫描后给 JdbcTemplate 字段注入值。",
+      "sourceMessageIndexes": [
+        18,
+        19
+      ]
+    },
+    {
+      "content": "RowMapper 接口是单函数接口，因此方法引用实际上是将这个方法用 lambda 包装成一个 RowMapper 类型的匿名内部类。",
+      "sourceMessageIndexes": [
+        22,
+        24
+      ]
+    }
+  ],
+  "openQuestions": [
+    {
+      "content": "实现类要真把 SQL 跑起来，它总得先拿到一个 JdbcTemplate 对象，这个对象从哪儿来？",
+      "sourceMessageIndexes": [
+        17
+      ]
+    },
+    {
+      "content": "为什么中间还要多插一张 Ingredient_Ref，而不干脆在 Taco 表里开一列把配料直接存进去？",
+      "sourceMessageIndexes": [
+        25
+      ]
+    },
+    {
+      "content": "这套机制里没有写任何一行“请执行这个文件”的代码，它凭什么在启动时自己就执行了？这属于 Spring Boot 的哪个核心思路？",
+      "sourceMessageIndexes": [
+        27
+      ]
+    }
+  ],
+  "reviewCandidates": [
+    {
+      "question": "Optional 返回类型相比直接返回 Ingredient 的核心好处是什么？",
+      "answer": "把“有可能找不到”写进方法签名，调用方必须显式面对空值情况，把运行时的隐患提前变成签名上看得见、必须交代的东西。",
+      "sourceMessageIndexes": [
+        16,
+        17
+      ]
+    },
+    {
+      "question": "JdbcIngredientRepository 里的 JdbcTemplate 字段是怎么被赋值的？",
+      "answer": "Spring 启动时组件扫描到该实现类，在实例化时通过构造函数把 JdbcTemplate 注入进去。",
+      "sourceMessageIndexes": [
+        17,
+        18,
+        19,
+        21
+      ]
+    },
+    {
+      "question": "RowMapper 为什么可以用方法引用来充当？",
+      "answer": "RowMapper 是只有一个抽象方法 mapRow(ResultSet, int) 的函数式接口，mapRowToIngredient 的参数表和方法名对得上，所以方法引用能直接站到需要一个 RowMapper 实现的位置上。",
+      "sourceMessageIndexes": [
+        22,
+        24,
+        25
+      ]
+    },
+    {
+      "question": "为什么需要 Ingredient_Ref 这张中间表，而不能在 Taco 表里开一列存配料？",
+      "answer": "一个 Taco 要用多种配料，同一种配料又会出现在很多个 Taco 里，是多对多关系。在 Taco 表里开一列只能装一个值，列的数目得随配料数量变，没法固定。Ingredient_Ref 一行记一条“某 Taco 用了某 Ingredient”，把多对多拆成两组一对多。",
+      "sourceMessageIndexes": [
+        25,
+        27
+      ]
+    },
+    {
+      "question": "schema.sql 和 data.sql 各自的作用和放置位置是什么？",
+      "answer": "schema.sql 放在 src/main/resources 下，启动时执行里面的 SQL 来建表；data.sql 也放在 src/main/resources 下，里面是 insert 语句，启动时执行来预加载配料数据。",
+      "sourceMessageIndexes": [
+        27
+      ]
+    }
+  ]
+}

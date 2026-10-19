@@ -1,0 +1,37 @@
+{
+  "title": "text-shadow 属性",
+  "definition": "text-shadow 属性用于添加文本阴影。其格式为：text-shadow: 水平偏移 垂直偏移 阴影大小 颜色;",
+  "key_points": [
+    "按顺序写出水平偏移、垂直偏移、阴影大小和颜色",
+    "用于文本而不是盒子阴影"
+  ],
+  "examples": [
+    "h1{color:white;text-shadow:2px 2px 4px #000;}"
+  ],
+  "misconceptions": [
+    "把 text-shadow 当成 box-shadow",
+    "把阴影大小理解成元素尺寸"
+  ],
+  "qa_pairs": [
+    {
+      "q": "text-shadow 的格式是什么？",
+      "a": "text-shadow: 水平偏移 垂直偏移 阴影大小 颜色;"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "CSS 基础",
+    "颜色值"
+  ],
+  "source_pages": [
+    193,
+    196
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "288_text_shadow_属性",
+  "_chunk_pages": [
+    193,
+    196
+  ]
+}

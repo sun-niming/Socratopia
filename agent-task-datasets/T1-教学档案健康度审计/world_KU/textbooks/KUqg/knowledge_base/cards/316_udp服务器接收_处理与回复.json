@@ -1,0 +1,52 @@
+{
+  "title": "UDP服务器接收、处理与回复",
+  "definition": "UDP服务器进入无限循环，持续等待和处理来自任意客户端的 UDP 分组。`recvfrom(2048)` 返回客户端发来的数据以及客户端地址；客户端地址包含客户端 IP 地址和客户端端口号。服务器将收到的字节解码为字符串，通过 `upper()` 转换为大写，再编码为字节，并通过 `sendto()` 将结果发送回该客户端地址。回复后服务器继续循环，等待下一个分组。",
+  "key_points": [
+    "`while True` 使服务器能够无限期地接收和处理分组。",
+    "`message, clientAddress = serverSocket.recvfrom(2048)` 同时取得报文数据和客户端返回地址。",
+    "服务器必须使用 `clientAddress` 才能知道回复应发送到哪个客户端的 IP 地址和端口号。",
+    "处理过程为：字节解码成字符串、转换为大写、重新编码为字节。",
+    "`serverSocket.sendto(modifiedMessage.encode(), clientAddress)` 将响应发回原客户端。",
+    "发送一个响应后，UDP服务器不会退出，而是继续等待其他客户端分组。"
+  ],
+  "examples": [
+    "while True:\n    message, clientAddress = serverSocket.recvfrom(2048)\n    modifiedMessage = message.decode().upper()\n    serverSocket.sendto(modifiedMessage.encode(), clientAddress)",
+    "处理流程可表示为：$$\\text{接收字节}\\xrightarrow{\\text{decode()}}\\text{字符串}\\xrightarrow{\\text{upper()}}\\text{大写字符串}\\xrightarrow{\\text{encode()}}\\text{响应字节}$$"
+  ],
+  "misconceptions": [
+    "误以为服务器可以忽略 `recvfrom()` 返回的客户端地址并自动回复；无连接 UDP 的 `sendto()` 需要指定回复的目的地址。",
+    "误以为 `upper()` 直接处理套接字收到的字节；原文先通过 `decode()` 得到字符串。",
+    "误以为服务器处理一个客户端分组后便结束；示例服务器在无限循环中继续等待后续分组。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "UDP服务器为什么要保存 `clientAddress`？",
+      "a": "因为它包含客户端的 IP 地址和端口号，是服务器将响应发送回该客户端所需的目的地址。"
+    },
+    {
+      "q": "服务器怎样把客户端发送的小写句子变为大写并返回？",
+      "a": "先用 `recvfrom()` 接收字节和客户端地址，再执行 `message.decode().upper()` 得到大写字符串，最后编码为字节并用 `sendto()` 发往 `clientAddress`。"
+    },
+    {
+      "q": "UDP服务器发送完一个响应后会做什么？",
+      "a": "它仍留在 `while True` 循环中，继续等待来自任意客户端的下一个 UDP 分组。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "UDP服务器套接字与端口绑定",
+    "字符串与字节",
+    "UDP客户端发送报文"
+  ],
+  "source_pages": [
+    126,
+    127
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "316_udp服务器接收_处理与回复",
+  "_chunk_pages": [
+    125,
+    128
+  ]
+}

@@ -1,0 +1,49 @@
+{
+  "title": "服务器TCP的典型状态序列",
+  "definition": "服务器TCP在典型的被动建连和正常拆除过程中，先由服务器应用程序创建监听套接字并进入LISTEN；收到客户端SYN后发送SYNACK并进入SYN_RCVD；收到客户端ACK后进入ESTABLISHED。连接关闭时，服务器可收到客户端FIN并发送ACK，之后发送自己的FIN；收到对方ACK后回到CLOSED。",
+  "key_points": [
+    "LISTEN表示服务器正在监听连接请求。",
+    "服务器收到SYN并发送SYNACK后进入SYN_RCVD。",
+    "服务器收到客户端ACK后进入ESTABLISHED。",
+    "服务器端也可以发起关闭，状态图中的关闭路径包括发送FIN、接收ACK等变迁。",
+    "原文只描述正常建立和拆除，没有覆盖双方同时建立或同时终止等异常情况。"
+  ],
+  "examples": [
+    "服务器建连状态可写为：$$\\text{LISTEN}\\xrightarrow{\\text{收到SYN并发送SYNACK}}\\text{SYN\\_RCVD}\\xrightarrow{\\text{收到ACK}}\\text{ESTABLISHED}$$"
+  ],
+  "misconceptions": [
+    "LISTEN不是已建立连接状态，而是等待连接请求的监听状态。",
+    "服务器收到SYN后不能直接进入ESTABLISHED，还要等待客户端对SYNACK的ACK。",
+    "教材中的典型状态序列不等于TCP所有异常场景下的完整状态机。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "服务器收到客户端SYN并发送SYNACK后进入什么状态？",
+      "a": "进入SYN_RCVD状态。"
+    },
+    {
+      "q": "服务器收到客户端对SYNACK的ACK后进入什么状态？",
+      "a": "进入ESTABLISHED状态。"
+    },
+    {
+      "q": "教材中的服务器状态图是否覆盖双方同时建立或同时终止连接的情况？",
+      "a": "没有，原文只描述正常建立和拆除过程。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "TCP三次握手",
+    "TCP连接状态"
+  ],
+  "source_pages": [
+    187,
+    188
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "451_服务器tcp的典型状态序列",
+  "_chunk_pages": [
+    185,
+    188
+  ]
+}

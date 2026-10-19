@@ -1,0 +1,50 @@
+{
+  "title": "返回值优化 NRVO 与 RVO",
+  "definition": "函数按值返回对象时，编译器可能省略返回对象产生的拷贝或移动操作。返回语句返回一个有名字的局部变量时，这种优化称为 NRVO（Named Return Value Optimization，命名返回值优化）；返回语句返回未命名的临时对象时，称为 RVO（Return Value Optimization，返回值优化）。二者都可以实现近似零拷贝的值传递语义。",
+  "key_points": [
+    "NRVO 要求返回语句直接返回一个适合作为返回对象的本地命名变量。",
+    "RVO 适用于返回未命名临时对象的情形。",
+    "返回值即使没有被显式保存，也可能需要先构造临时对象，以便传递给后续操作，例如输出运算符。",
+    "当 NRVO 或 RVO 不可用时，返回对象可能发生拷贝或移动；如果类型支持移动语义，通常优先移动而不是拷贝。"
+  ],
+  "examples": [
+    "例如：`Person createPerson(); cout << createPerson();`。返回的 `Person` 需要以某种对象形式传递给 `operator<<`。",
+    "适合 NRVO 的形式可抽象表示为：`Person person; return person;`。",
+    "返回条件表达式 `return condition ? person1 : person2;` 时，返回的不是一个单独的局部命名变量，因此 NRVO 不适用。"
+  ],
+  "misconceptions": [
+    "NRVO 和 RVO 不是程序员可以强制要求编译器执行的普通运行时操作，而是编译器可能采用的优化。",
+    "仅仅把返回表达式改成 `return std::move(person1)` 或 `return std::move(person2)` 并不能启用 NRVO，反而会明确要求使用移动语义。",
+    "返回值优化并不等于所有返回对象都绝对不会拷贝或移动；在优化不可用时仍可能发生拷贝或移动。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "什么是 NRVO？",
+      "a": "NRVO 是命名返回值优化：当函数返回一个适合作为返回值的命名局部变量时，编译器可能省略该对象的拷贝或移动。"
+    },
+    {
+      "q": "为什么 `return condition ? person1 : person2;` 通常不能应用 NRVO？",
+      "a": "因为返回表达式根据条件在两个对象之间选择，并不是直接返回一个单独的局部命名变量，所以不符合 NRVO 的适用形式。"
+    },
+    {
+      "q": "把条件返回改为使用 `std::move` 是否能启用 NRVO？",
+      "a": "不能。使用 `std::move` 会强制表达式采用移动语义，而不是启用 NRVO；如果类型不支持移动语义，可能退回到拷贝。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "拷贝构造与移动构造",
+    "左值与右值"
+  ],
+  "source_pages": [
+    857,
+    858
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1779_返回值优化_nrvo_与_rvo",
+  "_chunk_pages": [
+    857,
+    860
+  ]
+}

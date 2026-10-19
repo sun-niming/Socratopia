@@ -1,0 +1,48 @@
+{
+  "title": "通过重载解除引用运算符实现类指针行为",
+  "definition": "类可以重载解除引用运算符，使其对象表现得像指针。此机制主要用于实现智能指针，也广泛用于迭代器。示例中的 Pointer<T> 保存一个原始指针，并在析构时释放其指向的存储空间。",
+  "key_points": [
+    "Pointer<T> 的构造函数接收并保存一个原始指针，析构函数使用 delete 释放该指针，并将成员指针设为 nullptr。",
+    "类指针类型通常需要同时提供 operator* 和 operator->，分别支持解除引用和通过箭头访问成员。",
+    "教材强调，实际编程中应优先使用标准库的 std::shared_ptr 和 std::unique_ptr，而不是自行编写智能指针。"
+  ],
+  "examples": [
+    "Pointer<int> smartInt { new int };",
+    "*smartInt = 5;",
+    "std::cout << *smartInt << std::endl;",
+    "Pointer<SpreadsheetCell> smartCell { new SpreadsheetCell };",
+    "smartCell->set(5);",
+    "std::cout << smartCell->getValue() << std::endl;"
+  ],
+  "misconceptions": [
+    "重载了 operator* 就自动具备了 operator-> 的功能；实际上二者需要分别实现。",
+    "示例 Pointer<T> 是适合生产环境的完整智能指针；教材明确说明它只是用于演示运算符重载机制。",
+    "自行实现的智能指针可以随意复制或赋值；示例通过删除相关函数来禁止这些操作。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "示例 Pointer<T> 类的主要作用是什么？",
+      "a": "保存一个原始指针，并在对象销毁时释放该指针指向的存储空间，同时通过重载运算符提供类似指针的使用方式。"
+    },
+    {
+      "q": "为什么通常应同时实现 operator* 和 operator->？",
+      "a": "因为二者分别支持解除引用和通过箭头访问对象成员；只实现其中一个会使类的使用方式不完整并造成困惑。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++类与析构函数",
+    "指针和动态内存"
+  ],
+  "source_pages": [
+    485,
+    486
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "972_通过重载解除引用运算符实现类指针行为",
+  "_chunk_pages": [
+    485,
+    488
+  ]
+}

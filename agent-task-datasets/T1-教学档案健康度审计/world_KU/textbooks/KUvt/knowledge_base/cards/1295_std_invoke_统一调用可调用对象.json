@@ -1,0 +1,46 @@
+{
+  "title": "std::invoke 统一调用可调用对象",
+  "definition": "`std::invoke` 定义在 `<functional>` 中，用于使用一组参数调用可调用对象。它可以调用普通函数、lambda 表达式以及对象的成员函数等。该工具尤其适合需要在泛型模板代码中调用任意可调用对象的场景。",
+  "key_points": [
+    "调用普通函数时，可以把函数名和实参传给 `std::invoke`。",
+    "调用 lambda 时，可以把 lambda 和实参传给 `std::invoke`。",
+    "调用成员函数时，可以把成员函数指针和对象传给 `std::invoke`。",
+    "`std::invoke` 位于 `std` 命名空间，声明在 `<functional>` 头文件中。"
+  ],
+  "examples": [
+    "```cpp\n#include <functional>\n#include <iostream>\n#include <string>\n#include <string_view>\n\nvoid printMessage(std::string_view message) {\n    std::cout << message << std::endl;\n}\n\nint main() {\n    std::invoke(printMessage, \"Hello invoke.\");\n    std::invoke([](const auto& msg) {\n        std::cout << msg << std::endl;\n    }, \"Hello invoke.\");\n\n    std::string msg{\"Hello invoke.\"};\n    std::cout << std::invoke(&std::string::size, msg) << std::endl;\n}\n```"
+  ],
+  "misconceptions": [
+    "`std::invoke` 不仅能调用普通函数，也能调用 lambda 和成员函数。",
+    "`std::invoke` 本身不是只能处理函数指针的工具；它面向更一般的可调用对象。",
+    "直接调用普通函数或 lambda 通常也可以完成任务，`std::invoke` 的主要价值在于统一泛型调用方式。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`std::invoke` 可以调用哪些类型的可调用对象？",
+      "a": "它可以调用普通函数、lambda 表达式和对象的成员函数等可调用对象。"
+    },
+    {
+      "q": "为什么泛型模板代码中使用 `std::invoke` 很有用？",
+      "a": "因为模板代码可以用统一的形式调用任意可调用对象，而不必分别处理普通函数、lambda 或成员函数。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "函数指针",
+    "lambda 表达式",
+    "成员函数指针",
+    "泛型模板"
+  ],
+  "source_pages": [
+    625,
+    625
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1295_std_invoke_统一调用可调用对象",
+  "_chunk_pages": [
+    625,
+    628
+  ]
+}

@@ -1,0 +1,56 @@
+{
+  "title": "DNS 资源记录类型",
+  "definition": "DNS 资源记录中，$Type$ 决定 $Name$ 和 $Value$ 的含义。原文介绍了 A、NS、CNAME 和 MX 四种类型：A 记录把主机名映射为 IP 地址；NS 记录指出负责某个域或知道如何获得该域中主机地址的 DNS 服务器；CNAME 记录把别名映射为规范主机名；MX 记录把邮件域名或邮件服务器别名映射为邮件服务器的规范主机名。",
+  "key_points": [
+    "A 记录：$Name$ 是主机名，$Value$ 是对应的 IP 地址。",
+    "NS 记录：$Name$ 是域，$Value$ 是知道如何获得该域内主机 IP 地址的权威 DNS 服务器主机名，用于沿查询链路由 DNS 查询。",
+    "CNAME 记录：$Name$ 是别名，$Value$ 是该别名对应的规范主机名。",
+    "MX 记录：$Name$ 是邮件服务器使用的别名或域名，$Value$ 是邮件服务器的规范主机名。",
+    "若同一别名同时用于邮件服务和其他服务，查询邮件服务器规范名应请求 MX 记录，查询其他服务器规范名应请求 CNAME 记录。"
+  ],
+  "examples": [
+    "A 记录：$$(relay1.bar.foo.com,\\ 145.37.93.126,\\ A)$$",
+    "NS 记录：$$(foo.com,\\ dns.foo.com,\\ NS)$$",
+    "CNAME 记录：$$(foo.com,\\ relay1.bar.foo.com,\\ CNAME)$$",
+    "MX 记录：$$(foo.com,\\ mail.bar.foo.com,\\ MX)$$"
+  ],
+  "misconceptions": [
+    "误以为 NS 记录直接给出目标主机的 IP 地址；NS 记录的 $Value$ 是相关 DNS 服务器的主机名。",
+    "误以为 CNAME 记录的 $Value$ 是 IP 地址；其 $Value$ 是规范主机名。",
+    "误以为查询邮件服务器规范主机名应使用 CNAME；原文指出应请求 MX 记录。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "哪种 DNS 记录提供标准的主机名到 IP 地址映射？",
+      "a": "A 记录。"
+    },
+    {
+      "q": "NS 记录的 $Name$ 和 $Value$ 分别表示什么？",
+      "a": "$Name$ 是一个域，$Value$ 是知道如何获得该域内主机 IP 地址的权威 DNS 服务器的主机名。"
+    },
+    {
+      "q": "CNAME 记录有什么作用？",
+      "a": "把一个别名映射为对应的规范主机名。"
+    },
+    {
+      "q": "为了获得邮件服务器的规范主机名，应请求哪种记录？",
+      "a": "MX 记录。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "DNS 资源记录结构与 TTL",
+    "主机别名与规范主机名"
+  ],
+  "source_pages": [
+    105,
+    108
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "267_dns_资源记录类型",
+  "_chunk_pages": [
+    105,
+    108
+  ]
+}

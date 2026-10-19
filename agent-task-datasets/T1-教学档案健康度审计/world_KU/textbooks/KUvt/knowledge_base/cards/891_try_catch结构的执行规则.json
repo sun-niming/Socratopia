@@ -1,0 +1,44 @@
+{
+  "title": "try/catch结构的执行规则",
+  "definition": "C++使用 try/catch 结构处理异常。try 块包含可能抛出异常的代码，后续的一个或多个 catch 块按异常类型匹配并处理异常。如果 try 块没有抛出异常，catch 块不会执行，程序继续执行 try/catch 结构之后的代码；如果抛出异常，则控制权立即转移到匹配的 catch 块。",
+  "key_points": [
+    "基本形式是：`try { /* 可能抛出异常的代码 */ } catch (Type1 name) { /* 处理 Type1 */ } catch (Type2 name) { /* 处理 Type2 */ }`。",
+    "异常可能由 try 块直接执行 throw 产生，也可能由 try 块调用的多层函数间接产生。",
+    "抛出异常后，抛出点之后的原路径代码不会执行。",
+    "如果 catch 块正常执行结束，且没有返回、抛出新异常或重新抛出异常，则继续执行 catch 块之后的剩余代码。"
+  ],
+  "examples": [
+    "控制流可概括为：无异常时为 `$try\\text{块}\\rightarrow catch\\text{块被跳过}\\rightarrow 剩余代码$`；有匹配异常时为 `$try\\text{块}\\rightarrow 匹配的catch\\text{块}\\rightarrow 剩余代码$`。"
+  ],
+  "misconceptions": [
+    "所有 catch 块都会依次执行；实际上通常只有匹配异常类型的 catch 块获得控制权。",
+    "try 块抛出异常后仍会执行 try 块末尾的语句；实际上会立即转移到匹配的 catch 块。",
+    "catch 块结束后一定回到 try 块；实际上会继续执行 catch 块之后的代码，除非发生返回或再次抛出异常等控制转移。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "try 块没有抛出异常时，catch 块和后续代码如何执行？",
+      "a": "所有 catch 块都会被跳过，程序继续执行 try/catch 结构之后的剩余代码。"
+    },
+    {
+      "q": "catch 块执行结束且没有再次改变控制流时，程序从哪里继续？",
+      "a": "从该 catch 块最后一条语句之后的剩余代码继续执行。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "异常抛出与捕获",
+    "函数控制流"
+  ],
+  "source_pages": [
+    439,
+    439
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "891_try_catch结构的执行规则",
+  "_chunk_pages": [
+    437,
+    440
+  ]
+}

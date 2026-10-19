@@ -1,0 +1,45 @@
+{
+  "title": "C++属性语法[[attribute]]",
+  "definition": "C++属性使用双层方括号语法 `[[attribute]]` 表示，用于向编译器提供关于代码的附加信息或请求特定诊断行为。原文将其与其他语言或编译器特有的属性写法进行对比，并展示了标准属性的形式。",
+  "key_points": [
+    "标准C++属性的基本形式是 `[[attribute]]`。",
+    "属性可以写在函数、参数、类型别名等声明附近，具体适用对象取决于属性本身。",
+    "原文后续列举了 `[[nodiscard]]`、`[[maybe_unused]]`、`[[noreturn]]`、`[[deprecated]]`、`[[likely]]` 和 `[[unlikely]]` 等属性。"
+  ],
+  "examples": [
+    "`[[attribute]]`",
+    "`[[nodiscard]] int func();`",
+    "`[[deprecated]] void func();`"
+  ],
+  "misconceptions": [
+    "属性不是普通函数调用，也不是预处理器宏。",
+    "所有属性都不能随意应用到任意声明；每个属性都有自己的适用对象和语义。",
+    "使用属性通常是向编译器提供信息或请求诊断，并不等于自动改变所有运行时逻辑。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "C++标准属性的基本语法是什么？",
+      "a": "基本语法是 `[[attribute]]`。"
+    },
+    {
+      "q": "原文列举了哪些C++属性？",
+      "a": "包括 `[[nodiscard]]`、`[[maybe_unused]]`、`[[noreturn]]`、`[[deprecated]]`、`[[likely]]` 和 `[[unlikely]]`。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++声明语法"
+  ],
+  "source_pages": [
+    54,
+    55,
+    56
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "068_c_属性语法_attribute",
+  "_chunk_pages": [
+    53,
+    56
+  ]
+}

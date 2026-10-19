@@ -1,0 +1,49 @@
+{
+  "title": "raw 模式用户定义字面量运算符",
+  "definition": "raw 模式的用户定义字面量运算符接收一个 const char* 参数，该参数指向以 0 结尾的 C 风格字符序列。raw 运算符需要自行解析字符序列并将其转换为目标类型。原文指出，raw 模式只能处理非字符串字面量。",
+  "key_points": [
+    "raw 模式运算符的参数形式是一个 const char*。",
+    "该参数表示以 0 结尾的 C 风格字符串，内容是字面量的字符序列。",
+    "raw 运算符需要自行完成解析和类型转换。",
+    "原文示例中，123_i 可以用 raw 模式实现；而字符串字面量需要使用带字符指针和长度两个参数的 cooked 运算符。"
+  ],
+  "examples": [
+    "raw 模式运算符示意：\\n\\texttt{std::complex<long double> operator\"\"\\_i(const char* p) \\\\{\\\\n    // 解析 p 指向的 C 风格字符序列，并转换为复数\\\\n\\\\}}",
+    "raw 模式下，\\texttt{123\\_i} 的运算符接收表示 123 的字符序列，而不是已经转换好的整数值。"
+  ],
+  "misconceptions": [
+    "raw 模式接收的不是数值 123 或浮点数 3.14，而是对应的字符序列。",
+    "raw 模式不能直接处理字符串字面量；字符串字面量需要使用接收字符数组和长度的 cooked 形式。",
+    "raw 运算符不会自动完成复杂的字符串解析，原文要求其实现自行解析 C 风格字符串并转换为目标类型。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "raw 模式字面量运算符的参数类型是什么？",
+      "a": "是一个 \\texttt{const char*}，指向以 0 结尾的 C 风格字符序列。"
+    },
+    {
+      "q": "raw 模式下，123_i 的运算符接收整数 123 还是字符序列？",
+      "a": "接收表示该字面量的字符序列，而不是整数 123。"
+    },
+    {
+      "q": "为什么字符串字面量不能使用原文所述的 raw 模式？",
+      "a": "原文指出 raw 模式只能处理非字符串字面量；字符串字面量需要带字符指针和长度两个参数的 cooked 运算符。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "用户定义字面量的基本规则及 raw/cooked 模式",
+    "C风格字符串"
+  ],
+  "source_pages": [
+    496,
+    496
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 raw user-defined literal operator string literals restriction const char* operator literal rules",
+  "concept_id": "996_raw_模式用户定义字面量运算符",
+  "_chunk_pages": [
+    493,
+    496
+  ]
+}

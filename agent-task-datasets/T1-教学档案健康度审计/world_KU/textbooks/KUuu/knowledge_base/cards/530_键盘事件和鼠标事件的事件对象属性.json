@@ -1,0 +1,38 @@
+{
+  "title": "键盘事件和鼠标事件的事件对象属性",
+  "definition": "不同类型的事件，事件对象上可用的属性不同。教材列出了键盘事件常见属性 keyCode、ctrlKey、key，以及鼠标事件常见属性 clientX、clientY、offsetX、offsetY。",
+  "key_points": [
+    "键盘事件常见属性包括 keyCode、ctrlKey、key",
+    "鼠标事件常见属性包括 clientX、clientY、offsetX、offsetY",
+    "这些属性用于获取与具体输入设备相关的信息"
+  ],
+  "examples": [
+    "键盘事件：event.keyCode、event.ctrlKey、event.key",
+    "鼠标事件：event.clientX、event.clientY、event.offsetX、event.offsetY"
+  ],
+  "misconceptions": [
+    "所有事件对象都有完全相同的属性；实际上不同事件类型的属性不同。",
+    "keyCode、clientX 等属性可以互换使用；它们分别对应键盘和鼠标事件。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "鼠标事件对象中常见的坐标属性有哪些？",
+      "a": "clientX、clientY、offsetX、offsetY。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "事件对象"
+  ],
+  "source_pages": [
+    369,
+    372
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "530_键盘事件和鼠标事件的事件对象属性",
+  "_chunk_pages": [
+    369,
+    372
+  ]
+}

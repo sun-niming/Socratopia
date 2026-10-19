@@ -1,0 +1,44 @@
+{
+  "title": "C++正则表达式迭代器",
+  "definition": "C++ regex 库提供两类用于遍历多个匹配结果的迭代器。`regex_iterator` 用于遍历源字符串中某个正则表达式出现的所有匹配位置；`regex_token_iterator` 用于遍历某个正则表达式匹配结果中的捕获组，适合按捕获组提取源字符串内容。",
+  "key_points": [
+    "`regex_iterator` 面向源字符串中的所有模式匹配。",
+    "`regex_token_iterator` 面向模式匹配产生的捕获组。",
+    "二者都适用于需要处理源字符串中多个匹配结果的场景，而不是只处理一次匹配。"
+  ],
+  "examples": [
+    "如果源字符串中多次出现由正则表达式匹配的模式，可以使用 `regex_iterator` 依次访问这些匹配。",
+    "如果需要遍历每次匹配中的指定捕获组，可以使用 `regex_token_iterator`。"
+  ],
+  "misconceptions": [
+    "`regex_iterator` 和 `regex_token_iterator` 的遍历对象相同是错误的：前者遍历模式匹配，后者遍历捕获组或令牌。",
+    "使用正则表达式迭代器并不意味着只能找到一个匹配。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "哪一种迭代器用于遍历源字符串中模式出现的所有位置？",
+      "a": "`regex_iterator`。"
+    },
+    {
+      "q": "哪一种迭代器适合遍历模式匹配中的捕获组？",
+      "a": "`regex_token_iterator`。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++迭代器",
+    "捕获组",
+    "C++ regex 库的核心类型与算法"
+  ],
+  "source_pages": [
+    672,
+    672
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1409_c_正则表达式迭代器",
+  "_chunk_pages": [
+    669,
+    672
+  ]
+}

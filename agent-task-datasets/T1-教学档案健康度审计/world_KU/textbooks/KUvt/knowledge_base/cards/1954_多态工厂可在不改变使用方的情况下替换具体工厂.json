@@ -1,0 +1,42 @@
+{
+  "title": "多态工厂可在不改变使用方的情况下替换具体工厂",
+  "definition": "多态工厂是指使用方只依赖抽象工厂接口和抽象产品接口，而不直接依赖具体工厂或具体产品。程序请求产品时，可以实际使用 ToyotaFactory、FordFactory 等不同工厂；只需替换工厂实例，就能使用完全不同的对象和类集合。",
+  "key_points": [
+    "CarDealer 与工厂之间的关系保持不变，具体工厂可以从 ToyotaFactory 替换为 FordFactory。",
+    "调用者只请求抽象的 Car，不必知道实际返回的是 Toyota 还是 Ford。",
+    "这种设计有利于扩展：增加或替换具体工厂时，通常不需要修改使用工厂的业务代码。"
+  ],
+  "examples": [
+    "CarDealer 持有或使用抽象工厂，并调用类似 requestCar() 的方法；当传入 ToyotaFactory 时得到 Toyota，换成 FordFactory 时得到 Ford。"
+  ],
+  "misconceptions": [
+    "多态工厂并不意味着所有工厂生产同一种具体类；不同具体工厂可以返回不同的具体产品。",
+    "调用者不需要知道具体产品类型，但产品仍应遵循共同的抽象接口。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么 CarDealer 不需要知道当前使用的是 ToyotaFactory 还是 FordFactory？",
+      "a": "因为 CarDealer 依赖抽象工厂和抽象产品接口；不同具体工厂都能通过同一接口提供可使用的 Car。"
+    },
+    {
+      "q": "替换具体工厂实例后，为什么业务程序仍可以工作？",
+      "a": "因为业务程序调用的是稳定的抽象接口，而不是某个具体工厂或具体汽车类。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "面向对象多态",
+    "抽象接口"
+  ],
+  "source_pages": [
+    949,
+    949
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1954_多态工厂可在不改变使用方的情况下替换具体工厂",
+  "_chunk_pages": [
+    949,
+    952
+  ]
+}

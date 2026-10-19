@@ -1,0 +1,39 @@
+{
+  "title": "send_all 封装",
+  "definition": "`send()` 可能一次只发送部分数据，返回值表示本次实际发送的字节数，失败返回 `-1`。因此发送 HTTP 响应头、错误页面或文件内容时，不能假设一次 `send()` 就能把所有数据发完，必须用循环按返回值持续发送，直到全部发送完成或发生错误。",
+  "key_points": [
+    "`send(fd, buf, len, flags)` 的 `flags` 在本项目通常写 `0`。",
+    "返回值是本次实际发送字节数；失败返回 `-1`。",
+    "对发送不完整的情况，要封装 `send_all` 按返回值循环发送。",
+    "对二进制文件不能用 `strlen()` 计算长度。"
+  ],
+  "examples": [
+    "项目内最小示例：\n```c\nint send_all(int fd, const void *buf, size_t len) {\n    const char *p = buf;\n    size_t sent = 0;\n    while (sent < len) {\n        ssize_t n = send(fd, p + sent, len - sent, 0);\n        if (n <= 0) return -1;\n        sent += (size_t)n;\n    }\n    return 0;\n}\n```"
+  ],
+  "misconceptions": [
+    "以为一次 `send()` 一定能把所有字节发完。",
+    "对文件、图片等二进制内容用 `strlen()` 计算发送长度。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么发送数据时要封装 `send_all`？",
+      "a": "因为 `send()` 可能只发送部分字节，必须循环直到全部发送完。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "TCP 套接字基础",
+    "send/recv 基础"
+  ],
+  "source_pages": [
+    49,
+    52
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "070_send_all_封装",
+  "_chunk_pages": [
+    49,
+    52
+  ]
+}

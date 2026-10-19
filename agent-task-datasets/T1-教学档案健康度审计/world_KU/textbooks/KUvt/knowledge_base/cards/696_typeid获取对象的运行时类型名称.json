@@ -1,0 +1,44 @@
+{
+  "title": "typeid获取对象的运行时类型名称",
+  "definition": "对具有多态性的对象通过基类引用或指针间接使用 `typeid` 时，可以获得对象实际所属类型的 `std::type_info` 信息；调用其 `name()` 可取得类型名称字符串。该名称的具体格式由编译器实现决定，不能假定不同编译器输出一致。",
+  "key_points": [
+    "示例中的 `logObject` 接收 `const Loggable&`，先输出 `typeid(loggableObject).name()`，再输出对象的日志信息。",
+    "Microsoft Visual C++ 2017 的示例输出为 `class Foo: Hello logger.`；GCC 的示例输出为 `3Foo: Hello logger.`。",
+    "如果使用 `typeid` 的目的不是日志记录或调试，应考虑用虚方法替代。"
+  ],
+  "examples": [
+    "代码结构：`void logObject(const Loggable& obj) { cout << typeid(obj).name() << \":\"; cout << obj.getLogMessage() << endl; }`",
+    "`Foo` 实例的日志信息为 `Hello logger.`，但类型名称可能因编译器不同而显示为 `class Foo` 或 `3Foo`。"
+  ],
+  "misconceptions": [
+    "误以为 `typeid(...).name()` 在所有编译器上都会返回相同格式的类名。",
+    "误以为使用 `typeid` 就能得到与编译器无关、适合程序逻辑判断的稳定字符串。",
+    "误以为日志场景必须使用 `typeid`；原文建议在非日志或调试场景优先考虑虚方法。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么不能依赖 `typeid(obj).name()` 在不同编译器上返回相同的字符串？",
+      "a": "因为 `name()` 返回的名称格式由编译器实现决定。例如 Microsoft Visual C++ 2017 和 GCC 对同一个 `Foo` 类型可能输出不同字符串。"
+    },
+    {
+      "q": "原文建议在什么情况下考虑用虚方法替代 `typeid`？",
+      "a": "如果使用 `typeid` 不是为了日志记录或调试，就应该考虑用虚方法替代。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "虚函数与多态",
+    "继承与基类引用"
+  ],
+  "source_pages": [
+    345,
+    345
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "696_typeid获取对象的运行时类型名称",
+  "_chunk_pages": [
+    345,
+    348
+  ]
+}

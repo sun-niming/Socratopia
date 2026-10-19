@@ -1,0 +1,45 @@
+{
+  "title": "派生类构造函数隐藏继承的同参数构造函数",
+  "definition": "当Derived使用using Base::Base;继承基类构造函数，同时又显式定义了与某个继承构造函数相同参数列表的构造函数时，Derived自身定义的构造函数优先，基类的同参数构造函数被隐藏。其他参数列表不同的继承构造函数仍可用。",
+  "key_points": [
+    "派生类显式定义的构造函数优先于继承来的同参数列表构造函数。",
+    "隐藏只针对参数列表冲突的构造函数，不会隐藏其他参数列表的继承构造函数。",
+    "例如Base有Base(std::string_view)和Base(float)，Derived使用using Base::Base;并定义Derived(float)，则float版本由Derived(float)负责，string_view版本仍可使用。"
+  ],
+  "examples": [
+    "class Base { public: Base() = default; Base(std::string_view str); Base(float f); }; class Derived : public Base { public: using Base::Base; Derived(float f); };",
+    "Derived d1{\"Hello\"}; // 调用继承的Base(std::string_view)形式",
+    "Derived d2{1.23f}; // 调用Derived(float)，而不是继承的Base(float)形式",
+    "Derived d3; // 使用默认构造方式"
+  ],
+  "misconceptions": [
+    "派生类定义Derived(float)不会隐藏所有从Base继承的构造函数，只会覆盖或隐藏参数列表相同的float版本。",
+    "继承构造函数与普通虚函数重写机制不同；这里的核心效果是派生类同参数构造函数优先，而不是构造函数发生虚函数式重写。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "Derived使用using Base::Base;后又定义Derived(float)，调用Derived{1.23f}时使用哪个构造函数？",
+      "a": "使用Derived(float)，因为派生类显式定义的同参数列表构造函数优先，并隐藏继承的Base(float)形式。"
+    },
+    {
+      "q": "Derived定义Derived(float)后，Derived{\"Hello\"}还能否使用继承的字符串视图构造形式？",
+      "a": "可以，因为Derived(float)只与float参数构造函数冲突，不影响继承的Base(std::string_view)形式。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "使用using声明继承构造函数",
+    "构造函数重载"
+  ],
+  "source_pages": [
+    334,
+    335
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "680_派生类构造函数隐藏继承的同参数构造函数",
+  "_chunk_pages": [
+    333,
+    336
+  ]
+}

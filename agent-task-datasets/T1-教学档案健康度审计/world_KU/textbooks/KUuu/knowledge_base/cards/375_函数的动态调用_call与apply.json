@@ -1,0 +1,41 @@
+{
+  "title": "函数的动态调用：call与apply",
+  "definition": "除了直接使用函数名加括号的方式调用函数外，函数对象还提供apply和call两个方法属性，用于动态调用函数。apply(this参数, 函数参数数组)的参数形式是数组；call(this参数, 函数参数1, 函数参数2, …, 函数参数n)的参数形式是逐个列出。call与apply的区别只在于传递参数的形式不同。",
+  "key_points": [
+    "函数除了用函数名()还可以动态调用",
+    "apply的第二个参数是函数参数数组",
+    "call的参数是this参数加上多个独立参数",
+    "call与apply的区别主要在参数传递形式"
+  ],
+  "examples": [
+    "func.apply(obj, [1, 2])",
+    "func.call(obj, 1, 2)"
+  ],
+  "misconceptions": [
+    "call和apply的区别在于能否改变this，这不对；它们主要区别是参数形式不同",
+    "apply和call只是普通函数名，不是方法",
+    "这两种调用方式和直接函数调用没有任何区别"
+  ],
+  "qa_pairs": [
+    {
+      "q": "call和apply的主要区别是什么？",
+      "a": "传递参数的形式不同：apply传数组，call传多个独立参数。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "函数",
+    "参数"
+  ],
+  "source_pages": [
+    257,
+    260
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "375_函数的动态调用_call与apply",
+  "_chunk_pages": [
+    257,
+    260
+  ]
+}

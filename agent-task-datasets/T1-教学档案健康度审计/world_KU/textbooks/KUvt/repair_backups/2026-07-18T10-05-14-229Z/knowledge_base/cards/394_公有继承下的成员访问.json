@@ -1,0 +1,49 @@
+{
+  "title": "公有继承下的成员访问",
+  "definition": "使用 `public` 继承时，派生类对象可以使用基类中可公开访问的成员。基类的 `public` 成员在派生类中仍可作为公有成员使用；基类的 `protected` 成员可由派生类的成员函数访问，但不能由类外代码通过派生类对象直接访问；基类的 `private` 成员不能由派生类成员函数直接访问。",
+  "key_points": [
+    "公有继承的基本语法是 `class Derived : public Base { ... };`。",
+    "基类的公有成员可以通过派生类对象调用。",
+    "基类的受保护成员可供派生类内部使用，但不能被普通类外代码直接访问。",
+    "基类的私有成员仍属于基类本身，派生类不能直接访问。"
+  ],
+  "examples": [
+    "基类和派生类示例：\n`class Base {`\n`public:`\n`    void someMethod() {}`\n`protected:`\n`    int m_protectedInt { 0 };`\n`private:`\n`    int m_privateInt { 0 };`\n`};`\n\n`class Derived : public Base {`\n`public:`\n`    void someOtherMethod() {}`\n`};`",
+    "派生类对象可以调用继承来的公有成员，也可以调用自身的公有成员：\n`Derived myDerived;`\n`myDerived.someMethod();`\n`myDerived.someOtherMethod();`"
+  ],
+  "misconceptions": [
+    "公有继承不表示基类的私有成员变成派生类的公有成员。",
+    "`protected` 成员不是任何代码都能访问；它主要供基类和派生类的成员函数使用。",
+    "派生类对象能够调用基类的公有成员，不等于派生类能够直接访问基类的私有数据成员。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "公有继承时，派生类对象能否调用基类的公有成员函数 `someMethod()`？",
+      "a": "可以。例如 `Derived myDerived; myDerived.someMethod();`。"
+    },
+    {
+      "q": "派生类能否直接访问基类的私有成员？",
+      "a": "不能。基类的私有成员只能由基类自身的成员函数和友元访问，派生类不能直接访问。"
+    },
+    {
+      "q": "基类的 `protected` 成员能否通过派生类对象在类外直接访问？",
+      "a": "不能。它可以由派生类的成员函数访问，但不能由普通类外代码直接访问。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++类的访问控制符",
+    "C++继承中的基类与派生类"
+  ],
+  "source_pages": [
+    303,
+    304
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "394_公有继承下的成员访问",
+  "_chunk_pages": [
+    301,
+    304
+  ]
+}

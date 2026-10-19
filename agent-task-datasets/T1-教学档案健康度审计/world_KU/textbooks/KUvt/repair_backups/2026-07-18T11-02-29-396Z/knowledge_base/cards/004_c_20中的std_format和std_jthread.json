@@ -1,0 +1,37 @@
+{
+  "title": "C++20中的std::format和std::jthread",
+  "definition": "原文在介绍C++20时明确列出了std::format和std::jthread。这表明它们属于本书涉及的C++20相关内容。",
+  "key_points": [
+    "std::format是原文列出的C++20相关标准库组件。",
+    "std::jthread是原文列出的C++20相关线程组件。",
+    "本卡片仅依据原文确认二者与C++20相关，不扩展其具体用法或完整标准语义。"
+  ],
+  "examples": [
+    "原文列举：std::format、std::jthread、C++20。"
+  ],
+  "misconceptions": [
+    "不能仅凭本段原文推断std::format和std::jthread的完整接口、参数或使用方式。",
+    "不能把原文列出的两个组件理解为C++20的全部新特性。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "原文将哪些内容列为C++20相关内容？",
+      "a": "原文列出了std::format和std::jthread。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "了解C++标准版本和标准库组件的基本概念"
+  ],
+  "source_pages": [
+    9,
+    12
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "004_c_20中的std_format和std_jthread",
+  "_chunk_pages": [
+    9,
+    12
+  ]
+}

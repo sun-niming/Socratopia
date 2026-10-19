@@ -1,0 +1,44 @@
+{
+  "title": "多个 catch 按顺序匹配异常类型",
+  "definition": "一个 try 语句后可以跟多个 catch 处理程序，以分别处理不同类型的异常。异常抛出后，编译器会按照 catch 语句在代码中的书写顺序查找能够匹配的处理程序，并执行匹配的第一个处理程序。由于 runtime_error 和 invalid_argument 都是异常类，具体类型的 catch 应写在更一般类型的 catch 之前。",
+  "key_points": [
+    "可以为不同异常类型编写不同的 catch。",
+    "catch 处理程序按书写顺序进行匹配。",
+    "文件打开失败抛出 invalid_argument 时，由对应的 catch 处理。",
+    "文件读取失败抛出 runtime_error 时，由对应的 catch 处理。"
+  ],
+  "examples": [
+    "分别处理两种异常：\ntry {\n    myInts = readIntegerFile(fileName);\n} catch (const invalid_argument& e) {\n    cerr << e.what() << endl;\n    return 1;\n} catch (const runtime_error& e) {\n    cerr << e.what() << endl;\n    return 2;\n}"
+  ],
+  "misconceptions": [
+    "错误地认为所有 catch 都会依次执行。实际上只执行第一个匹配的 catch。",
+    "错误地认为 catch 的顺序不影响结果。",
+    "错误地认为捕获基类异常后还能让后面的派生类 catch 处理同一个异常。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "一个 try 后有多个 catch 时，catch 按什么顺序进行匹配？",
+      "a": "按照它们在代码中的书写顺序进行匹配。"
+    },
+    {
+      "q": "如果先写 catch (const exception& e)，再写 catch (const runtime_error& e)，会有什么问题？",
+      "a": "先写的 exception catch 已能匹配 runtime_error，因此后面的 runtime_error catch 将无法处理该异常；应先写更具体的类型。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "继承与多态",
+    "按类型捕获异常"
+  ],
+  "source_pages": [
+    443,
+    444
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "901_多个_catch_按顺序匹配异常类型",
+  "_chunk_pages": [
+    441,
+    444
+  ]
+}

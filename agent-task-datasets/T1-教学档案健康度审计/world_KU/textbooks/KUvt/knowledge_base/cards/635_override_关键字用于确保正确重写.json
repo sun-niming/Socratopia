@@ -1,0 +1,42 @@
+{
+  "title": "override 关键字用于确保正确重写",
+  "definition": "在派生类成员函数声明后使用 override，表示该函数必须重写基类中的某个虚函数。编译器会检查函数名、参数列表等是否与基类虚函数匹配；如果基类函数的签名发生变化，而派生类函数没有同步更新，编译器会报告错误，而不是悄悄创建一个新的虚函数。",
+  "key_points": [
+    "只有基类中声明为 virtual 的函数才能被正确重写。",
+    "override 本身不会使一个非虚函数变成虚函数；它用于要求编译器验证重写关系。",
+    "例如基类函数从接收 int 改为接收 double 后，派生类仍接收 int 时，使用 override 会触发编译错误。",
+    "重写基类方法时，建议始终在派生类方法上使用 override。"
+  ],
+  "examples": [
+    "基类原本声明为 `virtual void someMethod(int);`，派生类声明为 `void someMethod(int) override;`。如果基类后来改为 `virtual void someMethod(double);`，派生类仍写 `void someMethod(int) override;`，则会编译失败。"
+  ],
+  "misconceptions": [
+    "函数名相同并不一定表示重写成功；参数列表不同可能导致创建新的函数。",
+    "override 不是运行时机制，也不是用来开启动态绑定的关键字；virtual 才决定函数是否参与虚函数机制。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "在派生类成员函数后写 override 的主要作用是什么？",
+      "a": "要求该函数必须重写基类中的虚函数，并让编译器检查重写是否正确；如果没有匹配的基类虚函数，就产生编译错误。"
+    },
+    {
+      "q": "如果基类的虚函数参数从 int 改成 double，而派生类仍使用 int，使用 override 会发生什么？",
+      "a": "派生类函数不再匹配基类虚函数，编译器会报告错误，提醒开发者更新派生类函数。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "继承与虚函数基础"
+  ],
+  "source_pages": [
+    309,
+    309
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "635_override_关键字用于确保正确重写",
+  "_chunk_pages": [
+    309,
+    312
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "title": "类字段定义",
+  "definition": "类字段可以在类的构造函数中定义，也可以在类的构造函数外部定义。使用类字段声明语法时，类字段和对象属性相似，但它不属于变量，因此不需要使用 let 或 var 来声明。",
+  "key_points": [
+    "类字段既可以写在构造函数里，也可以写在构造函数外部。",
+    "类字段使用类字段声明语法。",
+    "类字段类似对象属性，但不是普通变量，所以不需要 let 或 var。"
+  ],
+  "examples": [
+    "class Rectangle {\n  height = 10;\n  width = 20;\n  constructor() {}\n}",
+    "class Rectangle {\n  constructor(height, width) {\n    this.height = height;\n    this.width = width;\n  }\n}"
+  ],
+  "misconceptions": [
+    "类字段必须像普通变量一样用 let 或 var 声明。",
+    "类字段只能在构造函数内部定义。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "类字段可以定义在什么位置？",
+      "a": "可以定义在类的构造函数中，也可以定义在类的构造函数外部。"
+    },
+    {
+      "q": "类字段为什么不需要 let 或 var？",
+      "a": "因为类字段不是普通变量，它更像对象属性。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "JavaScript 类基础"
+  ],
+  "source_pages": [
+    293,
+    296
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "388_类字段定义",
+  "_chunk_pages": [
+    293,
+    296
+  ]
+}

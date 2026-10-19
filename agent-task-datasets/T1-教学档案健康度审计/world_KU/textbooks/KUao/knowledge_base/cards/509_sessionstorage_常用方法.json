@@ -1,0 +1,55 @@
+{
+  "title": "sessionStorage 常用方法",
+  "definition": "sessionStorage 的操作方法与 localStorage 完全相同，只是操作对象变成了 sessionStorage。常用方法包括 setItem(key, value)、getItem(key)、removeItem(key)、clear()、key(index) 和 length。",
+  "key_points": [
+    "setItem 用于写入数据。",
+    "getItem 用于读取指定键的值。",
+    "removeItem 用于删除指定键。",
+    "clear 用于清空当前会话中的全部数据。",
+    "key(index) 可以按索引获取键名。",
+    "length 表示当前存储项数量。"
+  ],
+  "examples": [
+    "sessionStorage.setItem('currentTabId', 'tab-123');",
+    "sessionStorage.getItem('currentTabId');",
+    "sessionStorage.removeItem('userAction');",
+    "sessionStorage.clear();",
+    "sessionStorage.key(0);",
+    "sessionStorage.length;"
+  ],
+  "misconceptions": [
+    "sessionStorage 和 localStorage 的方法不同；实际上它们的方法完全相同，只是操作对象不同。",
+    "clear 只删除某一个键；实际上它会清空当前会话中的所有 sessionStorage 数据。",
+    "key(index) 获取的是值；实际上它返回的是对应位置的键名。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "sessionStorage 和 localStorage 在方法上有什么关系？",
+      "a": "方法完全相同，只是操作的对象不同。"
+    },
+    {
+      "q": "sessionStorage.key(index) 返回什么？",
+      "a": "返回指定索引位置的键名。"
+    },
+    {
+      "q": "sessionStorage.length 表示什么？",
+      "a": "表示当前 sessionStorage 中存储项的数量。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "sessionStorage 会话存储特性",
+    "JavaScript 函数调用基础"
+  ],
+  "source_pages": [
+    381,
+    384
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "509_sessionstorage_常用方法",
+  "_chunk_pages": [
+    381,
+    384
+  ]
+}

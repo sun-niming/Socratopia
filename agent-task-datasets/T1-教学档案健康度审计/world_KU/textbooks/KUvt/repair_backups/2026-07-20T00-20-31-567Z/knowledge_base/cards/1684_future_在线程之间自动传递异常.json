@@ -1,0 +1,45 @@
+{
+  "title": "future 在线程之间自动传递异常",
+  "definition": "使用 future 时，异步任务中抛出的异常会自动保存到关联的 promise 中。调用 future 的 `get()` 时，如果任务成功完成，`get()` 返回计算结果；如果任务抛出了异常，`get()` 会重新抛出该异常，因此调用方可以使用 `try-catch` 处理异步任务的异常。",
+  "key_points": [
+    "异步函数抛出的异常不会因线程边界而直接丢失，而是与 future 关联的 promise 保存。",
+    "调用 `get()` 是取得结果或接收异常的关键操作。",
+    "异常通常应在调用 `get()` 的位置通过 `try-catch` 捕获。",
+    "promise 也可以通过 `set_exception()` 显式存储异常。"
+  ],
+  "examples": [
+    "```cpp\ntry {\n    int result{ myFuture.get() };\n    std::cout << result << std::endl;\n} catch (const std::exception& ex) {\n    std::cout << \"Caught exception: \" << ex.what() << std::endl;\n}\n```",
+    "使用异步策略启动任务：`auto myFuture = std::async(std::launch::async, calculate);`"
+  ],
+  "misconceptions": [
+    "误以为工作线程中的异常一定会直接终止主线程。",
+    "误以为只要启动了异步任务，异常就会在调用 `std::async` 的地方立即抛出；通常是在调用关联 future 的 `get()` 时重新抛出。",
+    "误以为 `wait()` 会返回计算结果；取得结果并接收异常应调用 `get()`。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "future 关联的异步任务抛出异常后，异常何时通常被调用方观察到？",
+      "a": "调用方调用该 future 的 `get()` 时，保存的异常会被重新抛出。"
+    },
+    {
+      "q": "promise 如何显式保存异常？",
+      "a": "可以调用 `set_exception()` 将异常存储到 promise 中。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "std::future 与 std::promise",
+    "C++ 异常处理"
+  ],
+  "source_pages": [
+    821,
+    821
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1684_future_在线程之间自动传递异常",
+  "_chunk_pages": [
+    821,
+    824
+  ]
+}

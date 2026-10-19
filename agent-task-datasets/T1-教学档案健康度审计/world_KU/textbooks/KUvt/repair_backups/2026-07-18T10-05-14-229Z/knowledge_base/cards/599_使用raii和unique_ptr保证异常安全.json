@@ -1,0 +1,45 @@
+{
+  "title": "使用RAII和unique_ptr保证异常安全",
+  "definition": "RAII（资源获取即初始化）是一种资源管理方式：把资源的生命周期绑定到对象生命周期，由对象析构函数负责释放资源。异常发生并触发栈展开时，RAII对象仍会自动析构，因此比手动使用裸指针和delete更能保证资源得到清理。C++中的unique_ptr是用于实现这类自动资源管理的智能指针。",
+  "key_points": [
+    "使用裸指针new string{}后，需要在所有可能路径上正确执行delete，否则可能发生资源泄漏。",
+    "如果资源封装在RAII对象中，离开作用域时对象析构函数会负责释放资源。",
+    "教材在异常清理示例中引出unique_ptr，说明应使用RAII来处理动态资源。",
+    "RAII不仅适用于正常返回路径，也适用于异常导致的栈展开路径。"
+  ],
+  "examples": [
+    "不安全的手动管理形式：string* str2 { new string{} }; funcTwo(); delete str2;。如果funcTwo()抛出异常，delete str2;可能被跳过。",
+    "更符合RAII思想的形式是使用unique_ptr管理动态对象，例如：unique_ptr<string> str2 { new string{} };。"
+  ],
+  "misconceptions": [
+    "认为只要在正常路径上写了delete，就已经完全避免内存泄漏；异常路径可能绕过delete。",
+    "认为unique_ptr只是一种更方便的裸指针；它还会在对象生命周期结束时自动释放所管理的资源。",
+    "认为RAII只能处理正常函数返回，不能处理异常；栈展开时RAII对象同样会被销毁。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "RAII为什么能够改善异常安全性？",
+      "a": "因为资源由对象管理，异常导致栈展开并离开作用域时，对象会自动析构，从而执行资源释放。"
+    },
+    {
+      "q": "裸指针str2在funcTwo()抛出异常时为什么可能造成资源泄漏？",
+      "a": "因为异常会跳过funcTwo()调用之后的delete str2;语句，而裸指针本身不会自动释放动态对象。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++对象生命周期",
+    "C++异常处理基础"
+  ],
+  "source_pages": [
+    458,
+    459
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "599_使用raii和unique_ptr保证异常安全",
+  "_chunk_pages": [
+    457,
+    460
+  ]
+}

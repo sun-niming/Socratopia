@@ -1,0 +1,941 @@
+{
+  "textbookId": "HHth",
+  "updatedAt": "2026-06-02T01:47:10.303Z",
+  "cards": [
+    {
+      "id": "fc_1779638570400_000_7tzl",
+      "question": "函数与一般二元关系的核心区别是什么？",
+      "choices": [
+        "函数要求值域等于陪域；二元关系允许值域小于陪域",
+        "函数要求每个输出都有唯一输入；二元关系允许输入重复",
+        "函数要求定义域和陪域相等；二元关系无此限制",
+        "函数要求每个输入都有唯一输出；二元关系允许一对多或某些输入无对应"
+      ],
+      "correctIndex": 3,
+      "explanation": "函数要求每个输入都有唯一输出；二元关系允许一对多或某些输入无对应。",
+      "source": {
+        "textbook": "离散数学 — 第三部分 代数系统（精炼版）",
+        "chapter": "第一章 函数与基数",
+        "textbookSlug": "HHth"
+      },
+      "created": "2026-05-24T16:02:50.400Z",
+      "conversationId": "2FClnbB1Tl-evDWJh3eQv",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-05-24T16:04:27.848Z",
+          "chosen": 3,
+          "correct": true
+        },
+        {
+          "time": "2026-05-27T03:18:53.363Z",
+          "chosen": 1,
+          "correct": false
+        },
+        {
+          "time": "2026-05-29T08:37:55.071Z",
+          "chosen": 3,
+          "correct": true
+        },
+        {
+          "time": "2026-05-30T09:20:21.656Z",
+          "chosen": 1,
+          "correct": false
+        },
+        {
+          "time": "2026-05-31T06:35:17.286Z",
+          "chosen": 3,
+          "correct": true
+        },
+        {
+          "time": "2026-05-31T08:54:07.634Z",
+          "chosen": 3,
+          "correct": true
+        },
+        {
+          "time": "2026-05-31T11:38:20.535Z",
+          "chosen": 3,
+          "correct": true
+        },
+        {
+          "time": "2026-06-01T11:20:33.986Z",
+          "chosen": 3,
+          "correct": true
+        },
+        {
+          "time": "2026-06-02T01:47:02.442Z",
+          "chosen": 3,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-07-28T16:00:00.000Z",
+      "interval": 57,
+      "ease": 2.8000000000000003,
+      "repetitions": 5
+    },
+    {
+      "id": "fc_1779638570400_001_9jqv",
+      "question": "关于偏函数的描述，哪一项是正确的？",
+      "choices": [
+        "偏函数要求所有输入都有对应，但输出可以重复",
+        "偏函数允许一对多，但要求所有输入有对应",
+        "偏函数是一般二元关系，无任何限制",
+        "偏函数允许部分输入无对应，但对有对应的输入保持唯一性"
+      ],
+      "correctIndex": 3,
+      "explanation": "偏函数允许部分输入无对应，但对有对应的输入保持唯一性，即确定性保留。",
+      "source": {
+        "textbook": "离散数学 — 第三部分 代数系统（精炼版）",
+        "chapter": "第一章 函数与基数",
+        "textbookSlug": "HHth"
+      },
+      "created": "2026-05-24T16:02:50.400Z",
+      "conversationId": "2FClnbB1Tl-evDWJh3eQv",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-05-24T16:04:32.177Z",
+          "chosen": 3,
+          "correct": true
+        },
+        {
+          "time": "2026-05-27T03:19:27.253Z",
+          "chosen": 3,
+          "correct": true
+        },
+        {
+          "time": "2026-05-29T08:40:59.370Z",
+          "chosen": 3,
+          "correct": true
+        },
+        {
+          "time": "2026-05-31T08:54:43.549Z",
+          "chosen": 3,
+          "correct": true
+        },
+        {
+          "time": "2026-06-01T11:21:57.568Z",
+          "chosen": 3,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-08-03T16:00:00.000Z",
+      "interval": 64,
+      "ease": 3,
+      "repetitions": 5
+    },
+    {
+      "id": "fc_1779638570400_002_fqbo",
+      "question": "如何判断一个关系是否为单射？",
+      "choices": [
+        "陪域中每个元素必须接收至少一个箭头",
+        "陪域中每个元素最多只接收到一个箭头",
+        "定义域和陪域元素个数相等",
+        "定义域中每个元素映射到唯一陪域元素"
+      ],
+      "correctIndex": 1,
+      "explanation": "单射要求陪域中每个元素最多被一个定义域元素映射到，即箭头不重叠。",
+      "source": {
+        "textbook": "离散数学 — 第三部分 代数系统（精炼版）",
+        "chapter": "第一章 函数与基数",
+        "textbookSlug": "HHth"
+      },
+      "created": "2026-05-24T16:02:50.400Z",
+      "conversationId": "2FClnbB1Tl-evDWJh3eQv",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-05-24T16:04:41.684Z",
+          "chosen": 1,
+          "correct": true
+        },
+        {
+          "time": "2026-05-27T03:19:34.600Z",
+          "chosen": 1,
+          "correct": true
+        },
+        {
+          "time": "2026-05-29T08:41:08.898Z",
+          "chosen": 1,
+          "correct": true
+        },
+        {
+          "time": "2026-05-31T08:54:47.669Z",
+          "chosen": 1,
+          "correct": true
+        },
+        {
+          "time": "2026-05-31T08:55:11.422Z",
+          "chosen": 1,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-08-02T16:00:00.000Z",
+      "interval": 64,
+      "ease": 3,
+      "repetitions": 5
+    },
+    {
+      "id": "fc_1779638570400_003_mkyy",
+      "question": "双射的逆关系一定是函数，因为：",
+      "choices": [
+        "双射是满射且每个原像唯一",
+        "双射的合成仍是双射",
+        "双射中定义域和陪域大小相同",
+        "双射中每个陪域元素都有唯一原像"
+      ],
+      "correctIndex": 3,
+      "explanation": "双射既满足唯一性，又满足完备性，故逆关系满足函数定义。",
+      "source": {
+        "textbook": "离散数学 — 第三部分 代数系统（精炼版）",
+        "chapter": "第一章 函数与基数",
+        "textbookSlug": "HHth"
+      },
+      "created": "2026-05-24T16:02:50.400Z",
+      "conversationId": "2FClnbB1Tl-evDWJh3eQv",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-05-24T16:07:31.373Z",
+          "chosen": 3,
+          "correct": true
+        },
+        {
+          "time": "2026-05-27T03:19:55.131Z",
+          "chosen": 3,
+          "correct": true
+        },
+        {
+          "time": "2026-05-29T08:41:27.939Z",
+          "chosen": 3,
+          "correct": true
+        },
+        {
+          "time": "2026-05-31T08:55:05.221Z",
+          "chosen": 0,
+          "correct": false
+        },
+        {
+          "time": "2026-05-31T08:55:21.466Z",
+          "chosen": 3,
+          "correct": true
+        },
+        {
+          "time": "2026-05-31T11:38:18.615Z",
+          "chosen": 3,
+          "correct": true
+        },
+        {
+          "time": "2026-06-01T11:20:18.047Z",
+          "chosen": 3,
+          "correct": true
+        },
+        {
+          "time": "2026-06-02T01:46:59.429Z",
+          "chosen": 3,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-06-24T16:00:00.000Z",
+      "interval": 23,
+      "ease": 3,
+      "repetitions": 4
+    },
+    {
+      "id": "fc_1779638570400_004_3cri",
+      "question": "康托尔对角线法证明[0,1]不可数时，需要避免的陷阱是什么？",
+      "choices": [
+        "构造的数必须是有理数",
+        "构造时不能重复使用对角线上的数字",
+        "对角线数字必须按递增顺序排列",
+        "避免构造出的小数有0.5000…和0.4999…这种两种表示法"
+      ],
+      "correctIndex": 3,
+      "explanation": "避免构造出的小数有0.5000…和0.4999…这种两种表示法，导致数相等但形式不同。",
+      "source": {
+        "textbook": "离散数学 — 第三部分 代数系统（精炼版）",
+        "chapter": "第一章 函数与基数",
+        "textbookSlug": "HHth"
+      },
+      "created": "2026-05-24T16:02:50.400Z",
+      "conversationId": "2FClnbB1Tl-evDWJh3eQv",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-05-24T16:07:36.250Z",
+          "chosen": 3,
+          "correct": true
+        },
+        {
+          "time": "2026-05-27T03:20:00.707Z",
+          "chosen": 3,
+          "correct": true
+        },
+        {
+          "time": "2026-05-29T08:41:32.479Z",
+          "chosen": 3,
+          "correct": true
+        },
+        {
+          "time": "2026-05-31T08:55:26.142Z",
+          "chosen": 3,
+          "correct": true
+        },
+        {
+          "time": "2026-06-02T01:47:07.470Z",
+          "chosen": 3,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-08-04T16:00:00.000Z",
+      "interval": 64,
+      "ease": 3,
+      "repetitions": 5
+    },
+    {
+      "id": "fc_1779851380451_000_ubqs",
+      "question": "在代数系统 ⟨I, *, 2⟩ 中，运算定义为 a * b = a + b - 2，幺元为 2。每个元素 a 的逆元是什么？",
+      "choices": [
+        "a + 2",
+        "a - 2",
+        "2 - a",
+        "4 - a"
+      ],
+      "correctIndex": 3,
+      "explanation": "根据逆元定义，a 的逆元需要满足 a * b = 2。由运算定义 a * b = a + b - 2 = 2 推出 a + b = 4，因此 b = 4 - a。4 - a 是整数，所以每个元素都有逆元。",
+      "source": {
+        "textbook": "离散数学 — 第三部分 代数系统（精炼版）",
+        "chapter": "逆元",
+        "textbookSlug": "HHth"
+      },
+      "created": "2026-05-27T03:09:40.451Z",
+      "conversationId": "uZ4tdEC46Zi-wTD7VY4J3",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-05-27T03:18:01.524Z",
+          "chosen": 3,
+          "correct": true
+        },
+        {
+          "time": "2026-05-29T08:38:03.245Z",
+          "chosen": 3,
+          "correct": true
+        },
+        {
+          "time": "2026-05-29T08:38:13.449Z",
+          "chosen": 3,
+          "correct": true
+        },
+        {
+          "time": "2026-05-31T11:39:00.588Z",
+          "chosen": 3,
+          "correct": true
+        },
+        {
+          "time": "2026-06-02T01:47:10.302Z",
+          "chosen": 3,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-08-04T16:00:00.000Z",
+      "interval": 64,
+      "ease": 3,
+      "repetitions": 5
+    },
+    {
+      "id": "fc_1779851380451_001_7n1f",
+      "question": "在学习者纠正伙伴的运算表错误后，他们发现元素 a 有右逆元 c，但没有左逆元。这主要是因为运算缺乏什么性质？",
+      "choices": [
+        "存在零元",
+        "交换律不成立",
+        "结合律不成立",
+        "不存在幺元"
+      ],
+      "correctIndex": 1,
+      "explanation": "运算表不对称导致左乘和右乘结果不同，即左逆元和右逆元不匹配。这种不对称的根源是运算不满足交换律：如果运算可交换，则左乘和右乘结果相同，左逆元和右逆元将一致。",
+      "source": {
+        "textbook": "离散数学 — 第三部分 代数系统（精炼版）",
+        "chapter": "逆元",
+        "textbookSlug": "HHth"
+      },
+      "created": "2026-05-27T03:09:40.451Z",
+      "conversationId": "uZ4tdEC46Zi-wTD7VY4J3",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-05-27T03:18:13.630Z",
+          "chosen": 1,
+          "correct": true
+        },
+        {
+          "time": "2026-05-29T08:38:10.196Z",
+          "chosen": 2,
+          "correct": false
+        },
+        {
+          "time": "2026-05-29T08:38:16.451Z",
+          "chosen": 1,
+          "correct": true
+        },
+        {
+          "time": "2026-05-30T09:20:36.387Z",
+          "chosen": 1,
+          "correct": true
+        },
+        {
+          "time": "2026-05-31T06:35:21.651Z",
+          "chosen": 1,
+          "correct": true
+        },
+        {
+          "time": "2026-05-31T11:39:10.738Z",
+          "chosen": 1,
+          "correct": true
+        },
+        {
+          "time": "2026-06-01T11:21:53.117Z",
+          "chosen": 1,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-08-01T16:00:00.000Z",
+      "interval": 62,
+      "ease": 2.9000000000000004,
+      "repetitions": 5
+    },
+    {
+      "id": "fc_1779851380451_002_24db",
+      "question": "根据教材的讨论，元素 a 有右逆元但无左逆元时，它为什么在左乘意义下不可约？",
+      "choices": [
+        "因为 a 没有逆元，所以不可约",
+        "因为 a 是零元，所以不可约",
+        "因为乘法运算不满足结合律",
+        "因为右逆元只能在右乘运算中消去，不能用于左乘运算"
+      ],
+      "correctIndex": 3,
+      "explanation": "a 有右逆元 c，表示 a * c = 幺元 b，但这只能用于右边消去（即若 x * a = y * a 则 x = y）。对于左边等式 a * x = a * y，没有逆元可以消去左边的 a。运算表显示 a * a = a 和 a * b = a，但 a ≠ b，所以 a 在左乘意义下不可约。",
+      "source": {
+        "textbook": "离散数学 — 第三部分 代数系统（精炼版）",
+        "chapter": "逆元",
+        "textbookSlug": "HHth"
+      },
+      "created": "2026-05-27T03:09:40.451Z",
+      "conversationId": "uZ4tdEC46Zi-wTD7VY4J3",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-05-27T03:18:19.892Z",
+          "chosen": 3,
+          "correct": true
+        },
+        {
+          "time": "2026-05-29T08:40:15.756Z",
+          "chosen": 3,
+          "correct": true
+        },
+        {
+          "time": "2026-05-31T06:35:34.510Z",
+          "chosen": 3,
+          "correct": true
+        },
+        {
+          "time": "2026-05-31T11:39:15.143Z",
+          "chosen": 3,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-06-21T16:00:00.000Z",
+      "interval": 22,
+      "ease": 2.9000000000000004,
+      "repetitions": 4
+    },
+    {
+      "id": "fc_1779851380451_003_w1bg",
+      "question": "教材中讨论的可逆性与可约性的区别是什么？",
+      "choices": [
+        "可逆性要求左右逆元相等，可约性不要求",
+        "可约性要求集合内存在逆元，可逆性不要求",
+        "可约性和可逆性本质相同，只是名称不同",
+        "可约性是在运算中可消去，不依赖逆元存在；可逆性要求存在集合内的双向逆元"
+      ],
+      "correctIndex": 3,
+      "explanation": "可约性是一种运算性质：如果 a * x = a * y 能推出 x = y，则 a 可约。这不需要在集合中存在逆元，只需逻辑上可消去。可逆性则需要存在一个集合内的元素 b，使得 a * b = 幺元且 b * a = 幺元。例如在整数乘法中，3 可约（因为可以两边除以 3），但 3 的乘法逆元 1/3 不在整数集合内，所以 3 不可逆。",
+      "source": {
+        "textbook": "离散数学 — 第三部分 代数系统（精炼版）",
+        "chapter": "逆元",
+        "textbookSlug": "HHth"
+      },
+      "created": "2026-05-27T03:09:40.451Z",
+      "conversationId": "uZ4tdEC46Zi-wTD7VY4J3",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-05-27T03:18:24.593Z",
+          "chosen": 3,
+          "correct": true
+        },
+        {
+          "time": "2026-05-29T08:40:19.640Z",
+          "chosen": 3,
+          "correct": true
+        },
+        {
+          "time": "2026-05-31T06:35:40.625Z",
+          "chosen": 3,
+          "correct": true
+        },
+        {
+          "time": "2026-05-31T11:39:17.566Z",
+          "chosen": 3,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-06-21T16:00:00.000Z",
+      "interval": 22,
+      "ease": 2.9000000000000004,
+      "repetitions": 4
+    },
+    {
+      "id": "fc_1779851380451_004_6l0s",
+      "question": "在判断子代数时，如果一个代数系统含有常数（例如幺元），那么子集必须满足什么条件才能成为子代数的载体？",
+      "choices": [
+        "子集必须包含所有逆元",
+        "子集对运算封闭即可，常数可随意选择",
+        "子集对运算封闭，且常数必须属于子集",
+        "子集必须与母集元素数相同"
+      ],
+      "correctIndex": 2,
+      "explanation": "根据定义6.2-2，子代数要求：子集对运算封闭，并且常数（如幺元）必须属于子集。例如 ⟨I, +, 0⟩ 的子代数 ⟨E, +, 0⟩ 中，偶数集 E 对加法封闭且幺元 0 ∈ E。而自然数集（不含 0）的例子中，虽然对加法封闭，但幺元 0 不在集中，所以不能构成子代数。",
+      "source": {
+        "textbook": "离散数学 — 第三部分 代数系统（精炼版）",
+        "chapter": "逆元",
+        "textbookSlug": "HHth"
+      },
+      "created": "2026-05-27T03:09:40.451Z",
+      "conversationId": "uZ4tdEC46Zi-wTD7VY4J3",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-05-27T03:18:44.207Z",
+          "chosen": 2,
+          "correct": true
+        },
+        {
+          "time": "2026-05-29T08:40:54.352Z",
+          "chosen": 2,
+          "correct": true
+        },
+        {
+          "time": "2026-05-31T06:35:49.685Z",
+          "chosen": 2,
+          "correct": true
+        },
+        {
+          "time": "2026-06-01T11:21:17.807Z",
+          "chosen": 2,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-06-22T16:00:00.000Z",
+      "interval": 22,
+      "ease": 2.9000000000000004,
+      "repetitions": 4
+    },
+    {
+      "id": "fc_1780209094263_000_2hal",
+      "question": "在群的凯莱表中，为什么固定某个元素 $a$ 的那一行不会漏掉任何群元素？",
+      "choices": [
+        "因为每一行的元素个数总是和群的元素个数一样多",
+        "因为群运算满足封闭性，所以每一行必然包含所有元素",
+        "因为同一行中的元素彼此不同，所以一定不会漏掉元素",
+        "因为对任意 $b\\in G$，都可以写成 $b=a*(a^{-1}*b)$"
+      ],
+      "correctIndex": 3,
+      "explanation": "因为对任意 $b\\in G$，都可以写成 $b=a*(a^{-1}*b)$。这说明每个元素都能在这一行中被表示出来，所以不会漏掉任何元素；关键不是“封闭”，而是可用逆元把任意元素重新写成这一行的结果。",
+      "source": {
+        "textbook": "离散数学 — 第三部分 代数系统（精炼版）",
+        "chapter": "",
+        "textbookSlug": "HHth"
+      },
+      "created": "2026-05-31T06:31:34.263Z",
+      "conversationId": "eI2TMHTBsyws5U_70CM6G",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-05-31T06:31:49.336Z",
+          "chosen": 3,
+          "correct": true
+        },
+        {
+          "time": "2026-05-31T08:54:21.272Z",
+          "chosen": 3,
+          "correct": true
+        },
+        {
+          "time": "2026-05-31T11:38:28.309Z",
+          "chosen": 3,
+          "correct": true
+        },
+        {
+          "time": "2026-06-01T11:21:27.609Z",
+          "chosen": 3,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-06-22T16:00:00.000Z",
+      "interval": 22,
+      "ease": 2.9000000000000004,
+      "repetitions": 4
+    },
+    {
+      "id": "fc_1780209094263_001_u9se",
+      "question": "下面哪一项最准确地说明了“置换”为什么必须是双射？",
+      "choices": [
+        "只要映射后的元素仍在原集合中，就一定是置换",
+        "双射能保证每个元素恰好出现一次，因此不会漏掉也不会重复",
+        "只要映射是单射，就一定可以看作置换",
+        "只要映射到同一个集合，就一定是置换"
+      ],
+      "correctIndex": 1,
+      "explanation": "置换的本质是把集合中的元素重新排列，因此每个元素都必须恰好出现一次。双射正好保证“不会漏掉”和“不会重复”，并且因此映射可以逆回来。",
+      "source": {
+        "textbook": "离散数学 — 第三部分 代数系统（精炼版）",
+        "chapter": "",
+        "textbookSlug": "HHth"
+      },
+      "created": "2026-05-31T06:31:34.263Z",
+      "conversationId": "eI2TMHTBsyws5U_70CM6G",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-05-31T06:34:10.661Z",
+          "chosen": 1,
+          "correct": true
+        },
+        {
+          "time": "2026-05-31T06:34:28.696Z",
+          "chosen": 1,
+          "correct": true
+        },
+        {
+          "time": "2026-05-31T08:54:39.501Z",
+          "chosen": 1,
+          "correct": true
+        },
+        {
+          "time": "2026-06-01T11:21:36.824Z",
+          "chosen": 1,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-06-22T16:00:00.000Z",
+      "interval": 22,
+      "ease": 2.9000000000000004,
+      "repetitions": 4
+    },
+    {
+      "id": "fc_1780209094263_002_shyw",
+      "question": "为什么两个置换先后复合后，结果仍然是置换？",
+      "choices": [
+        "因为任何函数复合后都可以逆回来，所以一定是置换",
+        "因为复合只是改变顺序，不会改变集合本身，所以自动是置换",
+        "因为双射的复合仍然是双射",
+        "因为两个置换复合后元素个数不变，所以一定还是置换"
+      ],
+      "correctIndex": 2,
+      "explanation": "因为置换本质上是双射，而双射的复合仍然是双射。也就是说，先后两次“重新排列”不会破坏一一对应关系，所以复合结果仍可逆，仍是置换。",
+      "source": {
+        "textbook": "离散数学 — 第三部分 代数系统（精炼版）",
+        "chapter": "",
+        "textbookSlug": "HHth"
+      },
+      "created": "2026-05-31T06:31:34.263Z",
+      "conversationId": "eI2TMHTBsyws5U_70CM6G",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-05-31T06:34:22.559Z",
+          "chosen": 1,
+          "correct": false
+        },
+        {
+          "time": "2026-05-31T06:34:41.033Z",
+          "chosen": 2,
+          "correct": true
+        },
+        {
+          "time": "2026-05-31T08:54:04.184Z",
+          "chosen": 2,
+          "correct": true
+        },
+        {
+          "time": "2026-05-31T11:38:23.204Z",
+          "chosen": 2,
+          "correct": true
+        },
+        {
+          "time": "2026-06-01T11:20:30.576Z",
+          "chosen": 2,
+          "correct": true
+        },
+        {
+          "time": "2026-06-02T01:47:05.086Z",
+          "chosen": 2,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-07-28T16:00:00.000Z",
+      "interval": 57,
+      "ease": 2.8000000000000003,
+      "repetitions": 5
+    },
+    {
+      "id": "fc_1780209094263_003_0qye",
+      "question": "在置换群中，为什么恒等置换 $I_n$ 是么元？",
+      "choices": [
+        "因为它与任意置换复合都不改变结果",
+        "因为它能把任何元素送回原位，所以它一定是零元",
+        "因为它是所有置换中最简单的那个",
+        "因为它的逆置换仍然是它自己，所以它是么元"
+      ],
+      "correctIndex": 0,
+      "explanation": "恒等置换对每个元素都不做改变，所以无论与哪个置换复合，结果都不变。也就是对任意置换 $a$，都有 $I_n\\circ a=a$ 且 $a\\circ I_n=a$。",
+      "source": {
+        "textbook": "离散数学 — 第三部分 代数系统（精炼版）",
+        "chapter": "",
+        "textbookSlug": "HHth"
+      },
+      "created": "2026-05-31T06:31:34.263Z",
+      "conversationId": "eI2TMHTBsyws5U_70CM6G",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-05-31T06:34:57.516Z",
+          "chosen": 0,
+          "correct": true
+        },
+        {
+          "time": "2026-05-31T08:54:26.348Z",
+          "chosen": 0,
+          "correct": true
+        },
+        {
+          "time": "2026-05-31T11:38:34.373Z",
+          "chosen": 0,
+          "correct": true
+        },
+        {
+          "time": "2026-06-01T11:21:42.807Z",
+          "chosen": 0,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-06-22T16:00:00.000Z",
+      "interval": 22,
+      "ease": 2.9000000000000004,
+      "repetitions": 4
+    },
+    {
+      "id": "fc_1780209094264_004_6xma",
+      "question": "为什么一个置换的逆映射也一定是置换？",
+      "choices": [
+        "因为只要有逆映射，就一定比原映射更像置换",
+        "因为双射的逆映射仍然是双射",
+        "因为逆映射一定保持元素位置完全不变",
+        "因为逆映射只是把顺序反过来，不需要满足任何额外条件"
+      ],
+      "correctIndex": 1,
+      "explanation": "置换本来就是双射，而双射的逆映射仍然是双射。逆映射同样满足一一对应，因此既不会重复也不会漏掉元素，所以它仍是置换。",
+      "source": {
+        "textbook": "离散数学 — 第三部分 代数系统（精炼版）",
+        "chapter": "",
+        "textbookSlug": "HHth"
+      },
+      "created": "2026-05-31T06:31:34.264Z",
+      "conversationId": "eI2TMHTBsyws5U_70CM6G",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-05-31T06:35:06.563Z",
+          "chosen": 1,
+          "correct": true
+        },
+        {
+          "time": "2026-05-31T08:54:29.484Z",
+          "chosen": 1,
+          "correct": true
+        },
+        {
+          "time": "2026-05-31T11:38:53.691Z",
+          "chosen": 1,
+          "correct": true
+        },
+        {
+          "time": "2026-06-01T11:21:47.854Z",
+          "chosen": 1,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-06-22T16:00:00.000Z",
+      "interval": 22,
+      "ease": 2.9000000000000004,
+      "repetitions": 4
+    },
+    {
+      "id": "fc_1780364736067_000_u1yj",
+      "question": "为什么 $⟨\\mathbb N,+,\\cdot\\rangle$ 不是整数环 $\\mathbb Z$ 的子环？",
+      "choices": [
+        "它不对乘法封闭，因为自然数相乘可能得到负数",
+        "它缺少分配律，所以不能继承整数环结构",
+        "它不对取负封闭，因此不具备加法逆元",
+        "它没有乘法幺元，所以不能成为子环"
+      ],
+      "correctIndex": 2,
+      "explanation": "$\\mathbb N$ 虽然对加法和乘法封闭，但子环还需要对加法逆元封闭。由于 $1\\in\\mathbb N$ 而 $-1\\notin\\mathbb N$，所以它不满足子环条件。",
+      "source": {
+        "textbook": "离散数学 — 第三部分 代数系统（精炼版）",
+        "chapter": "",
+        "textbookSlug": "HHth"
+      },
+      "created": "2026-06-02T01:45:36.067Z",
+      "conversationId": "-D3pEI2GLH3ywAGu9zk_k",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-06-02T01:45:55.169Z",
+          "chosen": 2,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-06-02T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1780364736067_001_i0a3",
+      "question": "若一个集合是整数环的子集，想最快判断它不是子环，通常优先检查哪一条性质？",
+      "choices": [
+        "加法封闭性，因为最容易通过一个反例直接否定",
+        "是否所有元素都有乘法逆元，因为子环必须是群",
+        "是否含有乘法幺元，因为每个子环都必须和原环有同一个幺元",
+        "乘法交换律，因为子环必须额外满足交换律"
+      ],
+      "correctIndex": 0,
+      "explanation": "实际判别时最常先看加法封闭性，因为只要找到两个元素相加跑出集合，就能立刻否定子环；这往往比检查乘法或更复杂的条件更快。",
+      "source": {
+        "textbook": "离散数学 — 第三部分 代数系统（精炼版）",
+        "chapter": "",
+        "textbookSlug": "HHth"
+      },
+      "created": "2026-06-02T01:45:36.067Z",
+      "conversationId": "-D3pEI2GLH3ywAGu9zk_k",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-06-02T01:46:05.627Z",
+          "chosen": 0,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-06-02T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1780364736067_002_oivs",
+      "question": "理想相比子环，额外关键要求的“吸收性”是指什么？",
+      "choices": [
+        "任取 $d_1,d_2\\in D$，都有 $d_1d_2\\in D$",
+        "任取 $d\\in D$，都存在 $d^{-1}\\in D$",
+        "任取 $r\\in R$，都存在 $d\\in D$ 使得 $rd=1$",
+        "任取 $r\\in R,\\ d\\in D$，都有 $rd,dr\\in D$"
+      ],
+      "correctIndex": 3,
+      "explanation": "子环只要求内部元素运算后仍留在集合内；理想还要求任意环元素与理想元素相乘，结果仍回到理想中，这正是吸收性。",
+      "source": {
+        "textbook": "离散数学 — 第三部分 代数系统（精炼版）",
+        "chapter": "",
+        "textbookSlug": "HHth"
+      },
+      "created": "2026-06-02T01:45:36.067Z",
+      "conversationId": "-D3pEI2GLH3ywAGu9zk_k",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-06-02T01:46:11.458Z",
+          "chosen": 3,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-06-02T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1780364736067_003_os03",
+      "question": "为什么在构造商环 $R/K$ 时，理想 $K$ 的吸收性主要是在保证哪一部分是良定义的？",
+      "choices": [
+        "保证陪集上的乘法与代表元选择无关",
+        "保证陪集上的加法满足交换律",
+        "保证商集中的元素个数有限",
+        "保证每个陪集都有乘法逆元"
+      ],
+      "correctIndex": 0,
+      "explanation": "加法陪集来自加法正规子群结构，本身较容易定义；真正需要吸收性的是乘法，因为换代表元后会出现像 $(a-a')b$、$a'(b-b')$ 这样的项，需要它们仍落在 $K$ 中。",
+      "source": {
+        "textbook": "离散数学 — 第三部分 代数系统（精炼版）",
+        "chapter": "",
+        "textbookSlug": "HHth"
+      },
+      "created": "2026-06-02T01:45:36.067Z",
+      "conversationId": "-D3pEI2GLH3ywAGu9zk_k",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-06-02T01:46:23.346Z",
+          "chosen": 0,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-06-02T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1780364736067_004_ls31",
+      "question": "设 $K=\\ker h$ 是环同态 $h:R\\to S$ 的核。为什么 $a+K=b+K$ 的判据是 $a-b\\in K$，而不是 $a+b\\in K$？",
+      "choices": [
+        "因为 $a+b\\in K$ 与 $a-b\\in K$ 在任意理想中总是等价的",
+        "因为陪集相等表示两个代表元相差一个核中的元素",
+        "因为环同态保乘法，所以陪集相等必须由积决定",
+        "因为核中的元素在加法下都等于零，所以只能看和"
+      ],
+      "correctIndex": 1,
+      "explanation": "两个陪集相等表示它们的代表元只差一个核中的元素，即 $a=b+k$ 某个 $k\\in K$，这等价于 $a-b=k\\in K$。因此判据依赖“差”属于核。",
+      "source": {
+        "textbook": "离散数学 — 第三部分 代数系统（精炼版）",
+        "chapter": "",
+        "textbookSlug": "HHth"
+      },
+      "created": "2026-06-02T01:45:36.067Z",
+      "conversationId": "-D3pEI2GLH3ywAGu9zk_k",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-06-02T01:46:45.163Z",
+          "chosen": 1,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-06-02T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    }
+  ]
+}

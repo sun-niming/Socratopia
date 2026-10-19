@@ -1,0 +1,52 @@
+{
+  "title": "Valgrind 可报告动态内存分配、释放和泄漏情况",
+  "definition": "在 Linux 环境中，Valgrind 可以检查程序运行期间的动态内存使用情况，并在退出时报告分配与释放的数量、仍未释放的内存块及其调用栈。原文示例显示 Valgrind 报告了 4 次分配、2 次释放、16 字节分配，以及退出时仍存在的 2 个未释放内存块。",
+  "key_points": [
+    "Valgrind 可用于 Linux 程序的动态内存问题分析。",
+    "报告可以显示 allocs、frees 和 allocated bytes 等统计信息。",
+    "原文示例包含 at exit: 8 bytes in 2 blocks，表示程序退出时仍有 2 个内存块共 8 字节未释放。",
+    "Valgrind 会给出分配发生位置的调用栈，例如 operator new、Simple::Simple() 和 main 中的源代码行。",
+    "原文将泄漏记录区分为 still reachable 和 definitely lost；前者表示退出时仍可通过指针找到，后者表示内存已经没有可用指针。"
+  ],
+  "examples": [
+    "原文统计示例：4 allocs, 2 frees, 16 bytes allocated。",
+    "原文泄漏摘要示例：at exit: 8 bytes in 2 blocks；其中一条记录标为 still reachable，另一条标为 definitely lost。",
+    "Valgrind 调用栈示例可追溯到 operator new、Simple::Simple() 和 main (leaky.cpp:24) 等位置。"
+  ],
+  "misconceptions": [
+    "误以为 allocs 等于 frees 就不会泄漏；还必须检查是否存在仍未释放的内存块。",
+    "误以为 still reachable 与 definitely lost 完全相同；Valgrind 对二者进行了不同分类。",
+    "误以为 ERROR SUMMARY: 0 errors 表示没有任何内存泄漏；原文同时展示了未释放内存的报告，因此应分别查看泄漏摘要。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "原文 Valgrind 报告中的 at exit: 8 bytes in 2 blocks 表示什么？",
+      "a": "表示程序退出时仍有 2 个动态内存块没有释放，总计 8 字节。"
+    },
+    {
+      "q": "Valgrind 报告中的 definitely lost 表示什么？",
+      "a": "表示该内存已经没有可用指针能够访问，属于明确丢失的内存。"
+    },
+    {
+      "q": "Valgrind 如何帮助定位泄漏来源？",
+      "a": "它通过调用栈列出分配路径，指出 operator new、构造函数和 main 中的源代码位置。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "动态内存泄漏",
+    "调用栈",
+    "Linux 命令行调试工具"
+  ],
+  "source_pages": [
+    213,
+    216
+  ],
+  "needs_verification": true,
+  "verify_query": "Valgrind at exit still reachable definitely lost 4 allocs 2 frees 16 bytes allocated 原文 第216页",
+  "concept_id": "288_valgrind_可报告动态内存分配_释放和泄漏情况",
+  "_chunk_pages": [
+    213,
+    216
+  ]
+}

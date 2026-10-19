@@ -1,0 +1,45 @@
+{
+  "title": "用函数对象创建线程",
+  "definition": "函数对象是实现了operator()的类对象，也称为可调用对象。可以把函数对象传给std::thread，让线程执行其operator()。函数对象类可以保存成员变量，因此除了构造函数参数外，还可以通过对象成员保存线程所需的状态。",
+  "key_points": [
+    "函数对象类通常通过构造函数初始化线程所需的数据成员。",
+    "实现operator()后，该类的实例就可以作为std::thread的可调用对象。",
+    "std::thread默认会把函数对象复制到线程的内部存储中。",
+    "如果必须在线程中执行某个特定函数对象实例，应使用std::ref()或std::cref()传入。"
+  ],
+  "examples": [
+    "class Counter {\npublic:\n    Counter(int id, int numIterations)\n        : m_id{id}, m_numIterations{numIterations} {}\n\n    void operator()() const {\n        for (int i{0}; i < m_numIterations; ++i) {\n            cout << \"Counter \" << m_id << \" has value \" << i << endl;\n        }\n    }\n\nprivate:\n    int m_id;\n    int m_numIterations;\n};\n\n使用临时函数对象：\nthread t1{Counter{1, 20}};\n\n使用命名函数对象：\nCounter c{2, 12};\nthread t2{c};\n\nt1.join();\nt2.join();\n\n按引用使用特定实例：\nthread t3{ref(c)};"
+  ],
+  "misconceptions": [
+    "函数对象不是函数指针；它是一个实现了operator()的对象。",
+    "把命名函数对象传给thread默认会复制它，而不是自动在线程中使用原对象。",
+    "若使用std::ref()，必须保证被引用的函数对象在线程运行期间仍然存在。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "一个类要作为函数对象传给std::thread，至少需要满足什么条件？",
+      "a": "该类需要实现可调用的operator()成员函数。"
+    },
+    {
+      "q": "如何确保线程执行的是函数对象c这个特定实例，而不是它的副本？",
+      "a": "使用thread t{std::ref(c)}；通常需要包含<functional>并使用std::ref。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++类与成员函数",
+    "operator()与函数对象",
+    "std::thread参数传递"
+  ],
+  "source_pages": [
+    794,
+    795
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1629_用函数对象创建线程",
+  "_chunk_pages": [
+    793,
+    796
+  ]
+}

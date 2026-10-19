@@ -1,0 +1,40 @@
+{
+  "title": "justify-self 属性",
+  "definition": "justify-self 用于设置单个网格元素在其单元格中的水平对齐方式。它会覆盖容器上的 justify-items 设置，只对单个 Grid 项目生效。",
+  "key_points": [
+    "作用对象是单个网格项目。",
+    "控制的是水平位置。",
+    "可取值为 start、end、center、stretch。",
+    "它会覆盖容器的 justify-items。"
+  ],
+  "examples": [
+    ".item-c { justify-self: end; }"
+  ],
+  "misconceptions": [
+    "容易误以为它控制整个网格容器的对齐，实际上只影响单个网格项目。",
+    "容易把它和 align-self 混淆；justify-self 处理的是水平对齐。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "justify-self 的作用是什么？",
+      "a": "设置单个网格元素在单元格中的水平位置。"
+    },
+    {
+      "q": "justify-self 的常用取值有哪些？",
+      "a": "start、end、center、stretch。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [],
+  "source_pages": [
+    185,
+    188
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "278_justify_self_属性",
+  "_chunk_pages": [
+    185,
+    188
+  ]
+}

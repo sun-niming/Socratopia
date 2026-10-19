@@ -1,0 +1,39 @@
+{
+  "title": "函数重载不能只靠返回类型区分",
+  "definition": "C++ 的函数重载要求函数参数列表不同；如果两个函数只有返回类型不同而参数列表相同，就不能构成合法重载。例如，`double fjord(double)` 和 `int fjord(double)` 不能同时作为同一作用域中的重载函数。",
+  "key_points": [
+    "返回类型不参与函数重载签名的区分。",
+    "参数类型或参数数量必须存在差异，才能形成重载。",
+    "调用者通常无法仅根据返回类型决定应调用哪个函数。"
+  ],
+  "examples": [
+    "以下声明不构成合法重载：\n`double fjord(double val);`\n`int fjord(double val);`",
+    "可以通过修改参数列表形成不同重载，例如：\n`double fjord(double val);`\n`int fjord(int val);`"
+  ],
+  "misconceptions": [
+    "把返回类型改成不同类型，就可以重载同名函数；这是错误的。",
+    "显式指定接收返回值的变量类型，不能解决同参数列表函数仅返回类型不同的问题。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "下面两个函数能否构成合法重载？\n`double fjord(double);`\n`int fjord(double);`",
+      "a": "不能。它们的参数列表完全相同，只是返回类型不同，而返回类型不能用于区分重载。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "函数声明与定义",
+    "函数重载"
+  ],
+  "source_pages": [
+    999,
+    1000
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "2057_函数重载不能只靠返回类型区分",
+  "_chunk_pages": [
+    997,
+    1000
+  ]
+}

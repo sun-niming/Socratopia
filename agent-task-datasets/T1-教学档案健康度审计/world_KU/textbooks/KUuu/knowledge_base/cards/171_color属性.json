@@ -1,0 +1,39 @@
+{
+  "title": "color属性",
+  "definition": "color 属性用于设置文本颜色。",
+  "key_points": [
+    "属性值可以是颜色值。",
+    "原文示例包括 red、#f00、rgb(255,0,0)。"
+  ],
+  "examples": [
+    "color: red;",
+    "color: #f00;",
+    "color: rgb(255,0,0);"
+  ],
+  "misconceptions": [
+    "color 属性设置的是文本颜色，不是背景颜色。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "color 属性的作用是什么？",
+      "a": "设置文本颜色。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "命名颜色",
+    "十六进制颜色值",
+    "rgb整数颜色值"
+  ],
+  "source_pages": [
+    109,
+    112
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "171_color属性",
+  "_chunk_pages": [
+    109,
+    112
+  ]
+}

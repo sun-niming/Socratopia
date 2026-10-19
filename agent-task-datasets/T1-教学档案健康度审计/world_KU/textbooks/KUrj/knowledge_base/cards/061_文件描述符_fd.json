@@ -1,0 +1,43 @@
+{
+  "title": "文件描述符 fd",
+  "definition": "文件描述符是 Linux 进程访问资源的入口，是一个非负整数。内核通过它找到真正的打开文件、socket、管道或设备。本项目中，socket 也是文件描述符，静态文件也是文件描述符，所以很多系统调用都围绕 fd 工作。",
+  "key_points": [
+    "fd 是 Linux 进程访问资源的入口。",
+    "内核通过 fd 定位打开文件、socket、管道或设备。",
+    "listen_fd、client_fd、file_fd 分别承担不同职责，不能混用。",
+    "fork 并发时父子进程会复制 fd 表，不需要的 fd 必须及时 close。"
+  ],
+  "examples": [
+    "int listen_fd = socket(AF_INET, SOCK_STREAM, 0); int client_fd = accept(listen_fd, (struct sockaddr *)&client_addr, &len); int file_fd = open(path, O_RDONLY); close(file_fd); close(client_fd); close(listen_fd);"
+  ],
+  "misconceptions": [
+    "误以为 socket 不是文件描述符。",
+    "误以为 accept 返回的新 fd 可以直接覆盖监听 fd。",
+    "误以为忘记 close 只是不优雅，不会造成实际问题。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "listen_fd、client_fd、file_fd 分别表示什么？",
+      "a": "listen_fd 是监听 socket，client_fd 是已连接的客户端 socket，file_fd 是打开的静态文件。"
+    },
+    {
+      "q": "为什么 fork 后要关闭不需要的 fd？",
+      "a": "因为父子进程会复制 fd 表，不关闭会造成资源泄漏。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "Linux 进程"
+  ],
+  "source_pages": [
+    41,
+    44
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "061_文件描述符_fd",
+  "_chunk_pages": [
+    41,
+    44
+  ]
+}

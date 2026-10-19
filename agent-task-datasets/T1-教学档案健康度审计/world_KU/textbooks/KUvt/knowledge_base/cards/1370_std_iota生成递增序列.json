@@ -1,0 +1,45 @@
+{
+  "title": "std::iota生成递增序列",
+  "definition": "定义在<numeric>中的std::iota()用于填充指定迭代器范围，从给定初始值开始，为后续元素反复应用operator++生成序列值。教材示例从5开始填充10个int元素，得到5到14。该算法不仅适用于整数，也适用于能够实现递增操作的元素类型。",
+  "key_points": [
+    "调用形式为std::iota(first, last, value)，它填充[first,last)范围。",
+    "第一个元素使用给定初始值，后续元素依次递增。",
+    "教材描述该算法可用于实现了operator++的元素类型。"
+  ],
+  "examples": [
+    "std::vector<int> values(10);\nstd::iota(std::begin(values), std::end(values), 5);\n// values为：5 6 7 8 9 10 11 12 13 14",
+    "生成的第k个元素（从0开始计数）可表示为：\n$$values[k]=5+k$$"
+  ],
+  "misconceptions": [
+    "std::iota不是只把同一个值复制到整个范围，而是生成连续序列。",
+    "起始值5是第一个元素的值，第二个元素通常由递增操作得到6。",
+    "std::iota定义在<numeric>而不是<algorithm>中。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "对长度为10的vector<int>调用std::iota(begin(values), end(values), 5)后，元素是什么？",
+      "a": "元素依次为5、6、7、8、9、10、11、12、13、14。"
+    },
+    {
+      "q": "std::iota的第三个参数表示什么？",
+      "a": "它表示填充序列的初始值。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "迭代器范围",
+    "operator++",
+    "vector"
+  ],
+  "source_pages": [
+    656,
+    656
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1370_std_iota生成递增序列",
+  "_chunk_pages": [
+    653,
+    656
+  ]
+}

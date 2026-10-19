@@ -1,0 +1,55 @@
+{
+  "title": "用引用参数返回多个结果",
+  "definition": "一个 C++ 函数只能直接返回一个返回值，但可以通过引用参数修改调用方提供的多个变量，从而返回多个结果。对于需要同时更新指针和大小等多个输出值的函数，可以使用指针的引用（如`int*&`）和普通类型的引用（如`size_t&`）。",
+  "key_points": [
+    "`int*&`表示“对`int*`指针变量的引用”，函数可以通过它修改调用方的指针变量。",
+    "`size_t&`表示对调用方大小变量的引用，函数可以通过它写回数组大小。",
+    "使用引用参数时，调用方直接传变量，例如`separateOddsAndEvens(arr, size, oddNums, numOdds, evenNums, numEvens);`。",
+    "相比 C 风格的指针输出参数，引用参数版本不需要在函数体中反复解引用，也不需要调用方传递变量地址。",
+    "动态分配的数组仍由调用方负责释放，示例使用`delete[]`释放两个数组。"
+  ],
+  "examples": [
+    "引用参数版本的函数声明：`void separateOddsAndEvens(const int arr[], size_t size, int*& odds, size_t& numOdds, int*& evens, size_t& numEvens);`。",
+    "调用方变量：`int* oddNums{nullptr}; int* evenNums{nullptr}; size_t numOdds{0}, numEvens{0};`。",
+    "调用形式：`separateOddsAndEvens(unSplit, std::size(unSplit), oddNums, numOdds, evenNums, numEvens);`。",
+    "函数返回的两个数组使用完后释放：`delete[] oddNums; oddNums = nullptr; delete[] evenNums; evenNums = nullptr;`。",
+    "参数关系可表示为：输入数组`arr`经过分类后，通过`odds`和`evens`返回两个新数组，通过`numOdds`和`numEvens`返回它们的元素个数。"
+  ],
+  "misconceptions": [
+    "`int*&`不是普通的`int&`，而是对指针变量本身的引用，因此函数可以改变调用方的指针值。",
+    "函数调用时传递引用参数不需要写`&`；`&`出现在参数声明中，而不是调用表达式中。",
+    "函数创建的新数组不会自动释放；按照原文示例，调用方负责使用`delete[]`释放它们。",
+    "引用参数可以返回多个结果，但并不自动解决动态内存所有权问题。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么`separateOddsAndEvens`需要使用`int*&`参数？",
+      "a": "因为函数要动态分配新数组并把新数组的地址写回调用方的指针变量，所以需要对指针变量本身进行引用传递。"
+    },
+    {
+      "q": "`size_t& numOdds`在该函数中的作用是什么？",
+      "a": "它允许函数把奇数数组的元素个数直接写回调用方的`numOdds`变量；`numEvens`同理。"
+    },
+    {
+      "q": "调用方为什么要执行`delete[] oddNums`和`delete[] evenNums`？",
+      "a": "因为这两个数组由函数动态分配，调用方负责释放它们以避免内存泄漏。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "值传递与非 const 引用传递",
+    "引用与指针的基本取舍",
+    "动态数组与 delete[]"
+  ],
+  "source_pages": [
+    83,
+    84
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "153_用引用参数返回多个结果",
+  "_chunk_pages": [
+    81,
+    84
+  ]
+}

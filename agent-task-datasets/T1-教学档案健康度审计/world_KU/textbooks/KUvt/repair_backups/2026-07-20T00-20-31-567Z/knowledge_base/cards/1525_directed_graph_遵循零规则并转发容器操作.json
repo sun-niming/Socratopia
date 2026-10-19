@@ -1,0 +1,45 @@
+{
+  "title": "directed_graph 遵循零规则并转发容器操作",
+  "definition": "教材中的 directed_graph 实现遵循零规则：不需要显式编写拷贝构造函数、移动构造函数、拷贝赋值运算符、移动赋值运算符或析构函数。其 size()、max_size() 和 empty() 方法通过转发调用内部 m_nodes 容器中名称相同的方法来实现。",
+  "key_points": [
+    "size() 返回 m_nodes.size() 的结果。",
+    "max_size() 返回 m_nodes.max_size() 的结果。",
+    "empty() 应返回 m_nodes.empty() 的结果。",
+    "size_type 是 directed_graph 类模板内部定义的类型别名；在类模板外部定义成员函数时，返回类型必须使用 typename directed_graph<T>::size_type 这样的完全限定形式。"
+  ],
+  "examples": [
+    "类外定义 size() 时可以写成：文本形式为 `template <typename T> typename directed_graph<T>::size_type directed_graph<T>::size() const noexcept`，函数体返回 `m_nodes.size()`。",
+    "max_size() 的函数体为返回 `m_nodes.max_size()`；empty() 的函数体应转发到 `m_nodes.empty()`。"
+  ],
+  "misconceptions": [
+    "零规则并不表示类没有资源或没有数据成员，而是表示默认的特殊成员函数行为已经正确，因此不需要显式声明。",
+    "类模板外部使用依赖于模板参数的嵌套类型时，不能省略 `typename`。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么类外定义 directed_graph<T>::size() 时要写 typename directed_graph<T>::size_type？",
+      "a": "因为 size_type 是依赖于模板参数 T 的嵌套类型别名，类模板外部定义时需要用 typename 和完全限定名称明确说明它是类型。"
+    },
+    {
+      "q": "directed_graph 的 size() 如何实现？",
+      "a": "直接返回内部 m_nodes 容器的 size() 结果，即 `return m_nodes.size();`。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++类模板",
+    "C++零规则",
+    "依赖类型与typename"
+  ],
+  "source_pages": [
+    733,
+    734
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1525_directed_graph_遵循零规则并转发容器操作",
+  "_chunk_pages": [
+    733,
+    736
+  ]
+}

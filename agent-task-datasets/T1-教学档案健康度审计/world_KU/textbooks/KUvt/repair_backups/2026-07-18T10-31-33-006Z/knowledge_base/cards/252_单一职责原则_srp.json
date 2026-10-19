@@ -1,0 +1,41 @@
+{
+  "title": "单一职责原则（SRP）",
+  "definition": "原文在第182页列出 SRP，并给出英文名称 Single Responsibility Principle（单一职责原则）。原文片段还出现了 XML 和 `Car`，但内容不完整，因此无法仅依据该片段确定教材对 SRP 的完整定义或示例。",
+  "key_points": [
+    "SRP 是 Single Responsibility Principle 的缩写。",
+    "中文通常译为“单一职责原则”。",
+    "给定片段没有完整阐释“职责”的含义，也没有提供完整代码示例。"
+  ],
+  "examples": [
+    "原文相关词语包括：`SRP (Single Responsibility Principle)`、`XML`、`Car`。"
+  ],
+  "misconceptions": [
+    "不能仅凭缩写把 SRP 解释成其他设计原则。",
+    "不能根据片段中的 `XML` 和 `Car` 臆造完整的类设计示例。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "SRP 的英文全称是什么？",
+      "a": "Single Responsibility Principle。"
+    },
+    {
+      "q": "SRP 通常译为什么？",
+      "a": "单一职责原则。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "面向对象设计原则"
+  ],
+  "source_pages": [
+    181,
+    184
+  ],
+  "needs_verification": true,
+  "verify_query": "《C++20高级编程》第5版 第182页 SRP Single Responsibility Principle XML Car",
+  "concept_id": "252_单一职责原则_srp",
+  "_chunk_pages": [
+    181,
+    184
+  ]
+}

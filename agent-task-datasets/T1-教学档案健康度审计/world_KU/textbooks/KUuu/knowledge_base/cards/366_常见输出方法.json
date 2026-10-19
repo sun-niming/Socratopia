@@ -1,0 +1,43 @@
+{
+  "title": "常见输出方法",
+  "definition": "原文列出了 JavaScript 中几种常见输出方法：console.log()、window.alert()、document.write()，以及通过 document.getElementById(\"id\").innerHTML = 输出的内容 来输出到页面元素中。",
+  "key_points": [
+    "console.log() 用于输出信息。",
+    "window.alert() 用于弹出提示框。",
+    "document.write() 可直接向文档写入内容。",
+    "document.getElementById(\"id\").innerHTML 可把内容写入指定元素。"
+  ],
+  "examples": [
+    "console.log(\"hello\")",
+    "window.alert(\"hello\")",
+    "document.write(\"hello\")",
+    "document.getElementById(\"id\").innerHTML = \"输出的内容\""
+  ],
+  "misconceptions": [
+    "输出不只一种方式，不能只记住 console.log()。",
+    "innerHTML 是给页面元素赋内容，不是独立的函数调用。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "原文列出了哪些常见输出方法？",
+      "a": "console.log()、window.alert()、document.write()、document.getElementById(\"id\").innerHTML=输出的内容。"
+    },
+    {
+      "q": "document.getElementById(\"id\").innerHTML 的作用是什么？",
+      "a": "把内容输出到指定 id 的页面元素中。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [],
+  "source_pages": [
+    249,
+    252
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "366_常见输出方法",
+  "_chunk_pages": [
+    249,
+    252
+  ]
+}

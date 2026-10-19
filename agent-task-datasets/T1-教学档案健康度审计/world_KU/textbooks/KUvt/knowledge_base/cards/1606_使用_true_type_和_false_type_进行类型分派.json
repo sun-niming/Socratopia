@@ -1,0 +1,46 @@
+{
+  "title": "使用 true_type 和 false_type 进行类型分派",
+  "definition": "类型 trait 可以在模板实例化时根据类型属性选择不同的函数重载。示例中，process() 使用 is_integral<T>::type{} 生成 true_type 或 false_type 的对象，并将其传给 processHelper()；重载解析据此选择整数类型或非整数类型对应的函数。",
+  "key_points": [
+    "is_integral<T>::type 表示对类型 T 的整数类型判断结果，其类型可以是 true_type 或 false_type。",
+    "processHelper() 的第二个参数分别声明为 true_type 或 false_type，用于函数重载解析；由于函数体不使用该参数，因此参数可以不命名。",
+    "process() 本身只接收一个值，再通过 processHelper(t, typename is_integral<T>::type{}) 进行类型分派。",
+    "调用 process(123) 会选择整数类型分支；调用 process(2.2) 或 process(\"Test\") 会选择非整数类型分支。"
+  ],
+  "examples": [
+    "示意代码：\n```cpp\ntemplate <typename T>\nvoid processHelper(const T& t, std::true_type) {\n    std::cout << t << \" is integral type.\" << std::endl;\n}\n\ntemplate <typename T>\nvoid processHelper(const T& t, std::false_type) {\n    std::cout << t << \" is a non-integral type.\" << std::endl;\n}\n\ntemplate <typename T>\nvoid process(const T& t) {\n    processHelper(t, typename std::is_integral<T>::type{});\n}\n```",
+    "调用 `process(123);` 的输出为 `123 is an integral type.`；调用 `process(2.2);` 的输出为 `2.2 is a non-integral type.`。",
+    "也可以在同一个函数模板中使用 `if constexpr (std::is_integral_v<T>)`，在编译期选择整数或非整数分支。"
+  ],
+  "misconceptions": [
+    "true_type 或 false_type 不是运行时传递的普通布尔值；它们是用于区分重载的类型。",
+    "第二个参数的主要作用是参与重载解析，而不是在函数体中读取其值。",
+    "类型 trait 不是只能单独查询类型属性，更重要的用途之一是在模板中根据属性生成或选择代码。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "process() 如何根据 T 是否为整数类型选择不同的 processHelper()？",
+      "a": "它使用 `typename std::is_integral<T>::type{}` 生成 true_type 或 false_type 的临时对象，并将其作为第二个参数传给 processHelper()；重载解析选择相应版本。"
+    },
+    {
+      "q": "为什么 processHelper() 的 true_type 或 false_type 参数可以不命名？",
+      "a": "因为函数体不使用该参数，它仅用于函数重载解析。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "函数模板与函数重载",
+    "类型 trait 基础"
+  ],
+  "source_pages": [
+    781,
+    782
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1606_使用_true_type_和_false_type_进行类型分派",
+  "_chunk_pages": [
+    781,
+    784
+  ]
+}

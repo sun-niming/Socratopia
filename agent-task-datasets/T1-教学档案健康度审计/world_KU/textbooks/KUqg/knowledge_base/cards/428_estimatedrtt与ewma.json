@@ -1,0 +1,48 @@
+{
+  "title": "EstimatedRTT与EWMA",
+  "definition": "EstimatedRTT是TCP根据SampleRTT样本维护的往返时间均值。获得新的SampleRTT后，TCP用指数加权移动平均（EWMA）更新EstimatedRTT：$$\\mathrm{EstimatedRTT}_{\\mathrm{new}}=(1-\\alpha)\\cdot\\mathrm{EstimatedRTT}_{\\mathrm{old}}+\\alpha\\cdot\\mathrm{SampleRTT}$$其中，教材给出的推荐值为$\\alpha=0.125=1/8$，此时：$$\\mathrm{EstimatedRTT}_{\\mathrm{new}}=0.875\\cdot\\mathrm{EstimatedRTT}_{\\mathrm{old}}+0.125\\cdot\\mathrm{SampleRTT}$$",
+  "key_points": [
+    "EstimatedRTT是SampleRTT的加权平均，而不是简单算术平均。",
+    "新近的SampleRTT权重大于旧样本的权重，因此EstimatedRTT能较好反映当前网络拥塞情况。",
+    "当$\\alpha=1/8$时，当前新样本的权重为0.125，原EstimatedRTT的权重为0.875。",
+    "SampleRTT波动较大时，EWMA会使EstimatedRTT的变化趋于平缓。"
+  ],
+  "examples": [
+    "若当前EstimatedRTT为100毫秒，新SampleRTT为140毫秒，且$\\alpha=0.125$，则：$$\\mathrm{EstimatedRTT}_{\\mathrm{new}}=0.875\\times100+0.125\\times140=105\\text{毫秒}$$"
+  ],
+  "misconceptions": [
+    "EstimatedRTT不是只取最近一次SampleRTT。",
+    "$\\alpha$越大，意味着新SampleRTT对更新结果的影响越大；教材给出的推荐值是$0.125$。",
+    "EWMA会平滑样本波动，但不会保证每次更新后的EstimatedRTT都等于某个历史样本。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "TCP如何根据新的SampleRTT更新EstimatedRTT？",
+      "a": "使用公式$$\\mathrm{EstimatedRTT}_{\\mathrm{new}}=(1-\\alpha)\\cdot\\mathrm{EstimatedRTT}_{\\mathrm{old}}+\\alpha\\cdot\\mathrm{SampleRTT}$$。"
+    },
+    {
+      "q": "当$\\alpha=0.125$时，EstimatedRTT更新公式是什么？",
+      "a": "$$\\mathrm{EstimatedRTT}_{\\mathrm{new}}=0.875\\cdot\\mathrm{EstimatedRTT}_{\\mathrm{old}}+0.125\\cdot\\mathrm{SampleRTT}$$。"
+    },
+    {
+      "q": "为什么TCP使用EWMA估计RTT？",
+      "a": "因为SampleRTT会受路由器拥塞和端系统负载变化影响而波动，EWMA能让估计值更平滑，同时使较新的样本权重更大。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "TCP的SampleRTT测量",
+    "加权平均"
+  ],
+  "source_pages": [
+    173,
+    176
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "428_estimatedrtt与ewma",
+  "_chunk_pages": [
+    173,
+    176
+  ]
+}

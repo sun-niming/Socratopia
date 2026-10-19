@@ -1,0 +1,43 @@
+{
+  "title": "通过异常处理输出流错误",
+  "definition": "可以要求流在发生故障时抛出异常，然后使用 `catch` 捕获 `ios_base::failure`。异常对象的 `what()` 方法可提供错误描述，`code()` 方法可提供错误代码；这些信息是否有用取决于所使用的标准库实现。",
+  "key_points": [
+    "通过 `exceptions()` 设置需要触发异常的流状态标志。",
+    "原文示例设置了 `ios::failbit`、`ios::badbit` 和 `ios::eofbit`。",
+    "使用 `try` 包围可能触发流错误的输出操作。",
+    "使用 `catch (const ios_base::failure& ex)` 捕获流异常。",
+    "`ex.what()` 获取错误描述，`ex.code()` 获取错误代码。"
+  ],
+  "examples": [
+    "```cpp\ncout.exceptions(ios::failbit | ios::badbit | ios::eofbit);\ntry {\n    cout << \"Hello World.\" << endl;\n} catch (const ios_base::failure& ex) {\n    cerr << \"Caught exception: \" << ex.what()\n         << \", error code = \" << ex.code() << endl;\n}\n```"
+  ],
+  "misconceptions": [
+    "认为设置异常后所有流错误都会提供同样有用的诊断信息；原文指出信息质量取决于标准库实现。",
+    "把 `good()`、`fail()` 的主动检查与异常机制混为一谈；前者是查询状态，后者是在指定状态发生时抛出异常。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何让流在发生故障时抛出异常？",
+      "a": "调用流的 `exceptions()` 方法设置相应状态标志，例如 `ios::failbit | ios::badbit | ios::eofbit`。"
+    },
+    {
+      "q": "捕获 `ios_base::failure` 后，如何获取错误描述和错误代码？",
+      "a": "分别调用异常对象的 `what()` 和 `code()` 方法。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "输出流状态检查"
+  ],
+  "source_pages": [
+    414,
+    415
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "840_通过异常处理输出流错误",
+  "_chunk_pages": [
+    413,
+    416
+  ]
+}

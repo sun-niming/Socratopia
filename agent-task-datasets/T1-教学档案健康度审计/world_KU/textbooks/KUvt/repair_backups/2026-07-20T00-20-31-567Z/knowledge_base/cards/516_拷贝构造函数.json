@@ -1,0 +1,48 @@
+{
+  "title": "拷贝构造函数",
+  "definition": "拷贝构造函数是用于根据一个已有对象创建另一个对象副本的特殊构造函数。它通常接收源对象的 `const` 引用作为参数，没有返回值，并应在构造过程中复制源对象的所有数据成员。",
+  "key_points": [
+    "典型声明形式是 `ClassName(const ClassName& src);`。",
+    "参数通常使用 `const` 引用，避免复制源对象，并允许从常量对象复制。",
+    "拷贝构造函数的职责是将新对象初始化为源对象的副本。",
+    "可以使用构造函数初始化器复制各个数据成员。"
+  ],
+  "examples": [
+    "```cpp\nclass SpreadsheetCell {\npublic:\n    SpreadsheetCell(const SpreadsheetCell& src);\nprivate:\n    double m_value{0};\n};\n\nSpreadsheetCell::SpreadsheetCell(const SpreadsheetCell& src)\n    : m_value{src.m_value}\n{\n}\n```",
+    "若源对象为 `src`，上述拷贝构造函数会使用 `src.m_value` 初始化新对象的 `m_value`。"
+  ],
+  "misconceptions": [
+    "误以为拷贝构造函数是返回新对象的普通函数；它是构造函数，因此没有返回值。",
+    "误以为拷贝构造函数只能复制一个特定数据成员；教材要求其按照预期行为复制源对象的所有数据成员。",
+    "误以为拷贝构造函数的参数应按值传递；按值传递会引入额外复制，典型形式是 `const` 引用。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "拷贝构造函数的典型参数类型是什么？",
+      "a": "通常是源对象类型的 `const` 引用，例如 `const SpreadsheetCell& src`。"
+    },
+    {
+      "q": "拷贝构造函数的作用是什么？",
+      "a": "根据一个已有对象创建新对象，并将新对象初始化为源对象的副本。"
+    },
+    {
+      "q": "下面的初始化器完成了什么操作：`: m_value{src.m_value}`？",
+      "a": "它使用源对象 `src` 的 `m_value` 成员初始化新对象的 `m_value` 成员。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "构造函数初始化器列表"
+  ],
+  "source_pages": [
+    244,
+    244
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "516_拷贝构造函数",
+  "_chunk_pages": [
+    241,
+    244
+  ]
+}

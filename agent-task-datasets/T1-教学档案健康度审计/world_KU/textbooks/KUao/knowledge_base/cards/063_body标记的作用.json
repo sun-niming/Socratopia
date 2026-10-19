@@ -1,0 +1,41 @@
+{
+  "title": "body标记的作用",
+  "definition": "<body>…</body>用于指明HTML文档的主体区域，网页中要显示的内容都放在这个标记内，结束标记</body>表示主体区域结束。",
+  "key_points": [
+    "body表示页面主体区域。",
+    "网页实际显示的内容放在body内。",
+    "</body>表示主体区域结束。"
+  ],
+  "examples": [
+    "<body>\n  <h1>标题</h1>\n  <p>正文内容</p>\n</body>"
+  ],
+  "misconceptions": [
+    "body里只能放文字，不能放其他HTML元素。",
+    "body中的内容不会显示。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "网页要显示的内容应放在哪里？",
+      "a": "放在<body>…</body>中。"
+    },
+    {
+      "q": "</body>表示什么？",
+      "a": "表示主体区域结束。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "HTML文档基本结构"
+  ],
+  "source_pages": [
+    45,
+    48
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "063_body标记的作用",
+  "_chunk_pages": [
+    45,
+    48
+  ]
+}

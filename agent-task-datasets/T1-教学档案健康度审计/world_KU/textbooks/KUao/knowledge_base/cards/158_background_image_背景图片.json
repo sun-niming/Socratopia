@@ -1,0 +1,36 @@
+{
+  "title": "background-image 背景图片",
+  "definition": "background-image 用于设置背景图片，教材说明它通过 url 函数来指定图片地址。",
+  "key_points": [
+    "背景图片通过 url() 指定。",
+    "属性值中写入图片路径或文件名。"
+  ],
+  "examples": [
+    "background-image: url(\"bg.jpg\");"
+  ],
+  "misconceptions": [
+    "背景图片必须用 img 标签来设置。",
+    "background-image 不能使用 url()。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "background-image 如何指定背景图片？",
+      "a": "使用 url() 函数，例如 background-image: url(\"bg.jpg\");。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "CSS基础"
+  ],
+  "source_pages": [
+    113,
+    116
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "158_background_image_背景图片",
+  "_chunk_pages": [
+    113,
+    116
+  ]
+}

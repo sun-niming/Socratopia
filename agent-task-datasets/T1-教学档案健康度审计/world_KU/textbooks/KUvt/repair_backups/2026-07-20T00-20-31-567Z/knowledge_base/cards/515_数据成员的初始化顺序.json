@@ -1,0 +1,47 @@
+{
+  "title": "数据成员的初始化顺序",
+  "definition": "数据成员的实际初始化顺序由它们在类定义中的声明顺序决定，而不是由构造函数初始化器列表中的书写顺序决定。初始化器列表中的顺序不能改变成员的实际初始化顺序。",
+  "key_points": [
+    "编译器按照数据成员在类定义中出现的先后顺序初始化它们。",
+    "如果一个成员的初始化依赖于另一个成员，应让被依赖的成员在类定义中先声明。",
+    "初始化器列表顺序与类定义顺序不一致时，一些编译器会发出警告。",
+    "错误依赖初始化器列表顺序可能导致成员使用尚未初始化的数据，产生未定义或不可预期的结果。"
+  ],
+  "examples": [
+    "正确的成员声明顺序：\n```cpp\nclass MyClass {\nprivate:\n    double m_value{0};\n    Foo m_foo;\n};\n```\n对应初始化器：`MyClass::MyClass(double value) : m_value{value}, m_foo{m_value} {}`。",
+    "如果先声明 `Foo m_foo;`，再声明 `double m_value{0};`，即使写成 `: m_value{value}, m_foo{m_value}`，实际仍会先初始化 `m_foo`，此时 `m_value` 还没有被初始化。"
+  ],
+  "misconceptions": [
+    "误以为把某个成员写在初始化器列表前面，就能让它先于其他成员初始化。",
+    "误以为初始化器列表中 `m_value` 出现在 `m_foo` 前面，就一定可以安全地用 `m_value` 初始化 `m_foo`。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "C++按照什么顺序初始化数据成员？",
+      "a": "按照数据成员在类定义中的声明顺序初始化，而不是按照构造函数初始化器列表中的顺序。"
+    },
+    {
+      "q": "如果 `m_foo` 的初始化需要使用 `m_value`，应如何声明成员？",
+      "a": "应在类定义中先声明 `m_value`，再声明 `m_foo`，使 `m_value` 先完成初始化。"
+    },
+    {
+      "q": "如何避免成员初始化顺序导致 `Foo` 使用未初始化的 `m_value`？",
+      "a": "可以调整类中成员的声明顺序，或者让 `m_foo` 直接使用构造函数参数初始化，例如 `: m_value{value}, m_foo{value}`。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "构造函数初始化器列表"
+  ],
+  "source_pages": [
+    243,
+    244
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "515_数据成员的初始化顺序",
+  "_chunk_pages": [
+    241,
+    244
+  ]
+}

@@ -1,0 +1,49 @@
+{
+  "title": "auto 默认会去除引用和 const 限定符",
+  "definition": "使用 auto 进行类型推断时，推断结果会去除初始化表达式类型中的引用和 const 限定符。因此，如果用 auto 接收一个返回 const 引用的函数结果，通常会得到一个非 const、非引用的对象副本；如果不希望复制，应显式使用 auto& 或 const auto&。",
+  "key_points": [
+    "auto 会去除引用。",
+    "auto 会去除 const 限定符。",
+    "去除引用后，变量通常会保存一个副本，而不是继续引用原对象。",
+    "若要保留引用，应使用 auto&；若要建立 const 引用，应使用 const auto&。"
+  ],
+  "examples": [
+    "假设 foo() 返回 const string&：auto f1 { foo() }; 中 f1 的类型为 string，并会创建副本。",
+    "若希望保留 const 引用，可写为：const auto& f2 { foo() };。",
+    "工具函数 as_const(str) 返回 str 的 const 引用版本，但 auto result { as_const(str) }; 仍会推断为 string，并创建副本。"
+  ],
+  "misconceptions": [
+    "auto 会自动保留原表达式的引用和 const 属性。",
+    "auto result { as_const(str) }; 会得到 const string&。实际上，教材指出它会得到 string 并发生复制。",
+    "只要初始化表达式返回引用，使用 auto 就一定不会复制。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如果 foo() 返回 const string&，auto f1 { foo() }; 中 f1 的类型是什么？",
+      "a": "f1 的类型是 string，而不是 const string&，因此会创建一个副本。"
+    },
+    {
+      "q": "如何使用 auto 保存 foo() 返回的 const string& 而不复制？",
+      "a": "写成 const auto& f2 { foo() };。"
+    },
+    {
+      "q": "as_const(str) 与 auto 结合使用时为什么可能发生复制？",
+      "a": "因为 auto 会去除引用和 const 限定符，所以 auto result { as_const(str) }; 推断为 string，而不是 const string&。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "auto 的基本作用与用途"
+  ],
+  "source_pages": [
+    89,
+    90
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "162_auto_默认会去除引用和_const_限定符",
+  "_chunk_pages": [
+    89,
+    92
+  ]
+}

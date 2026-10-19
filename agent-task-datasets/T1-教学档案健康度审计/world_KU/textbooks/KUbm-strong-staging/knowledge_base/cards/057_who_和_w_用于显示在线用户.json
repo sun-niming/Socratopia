@@ -1,0 +1,37 @@
+{
+  "title": "who 和 w 用于显示在线用户",
+  "definition": "who 和 w 是用于显示在线用户的命令。教材在“显示在线用户”这一项下给出了 who/w，明确它们用于查看当前在线用户情况。",
+  "key_points": [
+    "who 可用于显示在线用户",
+    "w 也可用于显示在线用户",
+    "它们都属于用户查看类命令"
+  ],
+  "examples": [
+    "who",
+    "w"
+  ],
+  "misconceptions": [
+    "不要把 who/w 误解为进程管理命令；教材将其归在显示在线用户"
+  ],
+  "qa_pairs": [
+    {
+      "q": "Linux 中可用哪些命令显示在线用户？",
+      "a": "可用 who 和 w。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "用户管理相关配置文件"
+  ],
+  "source_pages": [
+    29,
+    32
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "057_who_和_w_用于显示在线用户",
+  "_chunk_pages": [
+    29,
+    32
+  ]
+}

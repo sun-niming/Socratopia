@@ -1,0 +1,38 @@
+{
+  "title": "CSS像素",
+  "definition": "CSS像素是Web开发中的逻辑单位，用于定义元素尺寸和位置。它的渲染效果受设备像素比（DPR）和屏幕密度影响，决定网页在不同设备上的显示效果。",
+  "key_points": [
+    "属于Web开发中的逻辑单位",
+    "用于定义元素的尺寸和位置",
+    "其显示效果会受到DPR和屏幕密度影响"
+  ],
+  "examples": [
+    "iPhone 4 图中标注的 CSS 像素为 480×320"
+  ],
+  "misconceptions": [
+    "CSS像素不等于设备上的真实物理像素",
+    "同样的CSS尺寸在不同DPR设备上不一定占用相同的物理像素数量"
+  ],
+  "qa_pairs": [
+    {
+      "q": "CSS像素主要用于什么？",
+      "a": "用于定义元素的尺寸和位置，是Web开发中的逻辑单位。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "物理像素"
+  ],
+  "source_pages": [
+    213,
+    215,
+    216
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "297_css像素",
+  "_chunk_pages": [
+    213,
+    216
+  ]
+}

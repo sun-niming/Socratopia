@@ -1,0 +1,51 @@
+{
+  "title": "标准库容器要求提供的公共类型别名",
+  "definition": "如果希望自定义的 `directed_graph` 更好地配合标准库算法，就需要遵循标准库容器的接口约定，包括提供规定的公共类型别名。原文列出的别名用于描述元素类型、引用类型、迭代器类型、大小类型和迭代器差值类型。",
+  "key_points": [
+    "`value_type`：容器中保存的元素类型。",
+    "`reference`：容器元素类型的引用，通常为 `value_type&`。",
+    "`const_reference`：容器元素类型的 const 引用，通常为 `const value_type&`。",
+    "`iterator`：遍历容器中元素的迭代器类型。",
+    "`const_iterator`：遍历容器中 const 元素的迭代器类型。",
+    "`size_type`：表示容器元素个数的类型，通常为 `size_t`。",
+    "`difference_type`：表示两个迭代器之间差值的类型，通常为 `ptrdiff_t`。"
+  ],
+  "examples": [
+    "原文中的部分定义：`using value_type = T;`、`using reference = value_type&;`、`using const_reference = const value_type&;`、`using size_type = size_t;`、`using difference_type = ptrdiff_t;`。",
+    "使用别名后的下标接口：`reference operator[](size_type index);` 和 `const_reference operator[](size_type index) const;`"
+  ],
+  "misconceptions": [
+    "这些名称是类型别名，不是必须分别存储的数据成员。",
+    "`size_type` 表示元素数量相关的无符号大小类型，`difference_type` 用于表示迭代器间差值，二者用途不同。",
+    "原文此处的类定义尚未实现 `iterator` 和 `const_iterator`，后文将详细讲解迭代器。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`value_type` 表示什么？",
+      "a": "表示容器中保存的元素类型。"
+    },
+    {
+      "q": "`reference` 和 `const_reference` 有什么区别？",
+      "a": "`reference` 是元素类型的可修改引用，通常为 `value_type&`；`const_reference` 是元素类型的 const 引用，通常为 `const value_type&`。"
+    },
+    {
+      "q": "`size_type` 与 `difference_type` 分别用于什么？",
+      "a": "`size_type` 用于表示容器元素个数，通常为 `size_t`；`difference_type` 用于表示两个迭代器之间的差值，通常为 `ptrdiff_t`。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++类模板与类型别名"
+  ],
+  "source_pages": [
+    731,
+    732
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1522_标准库容器要求提供的公共类型别名",
+  "_chunk_pages": [
+    729,
+    732
+  ]
+}

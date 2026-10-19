@@ -1,0 +1,47 @@
+{
+  "title": "虚函数与派生类重写",
+  "definition": "基类将成员函数声明为 `virtual` 后，派生类可以提供同名、同参数列表的成员函数实现来重写它。派生类中的重写函数可以写成 `virtual void someMethod() override;`；其中 `override` 明确表示该函数应当重写基类的虚函数。",
+  "key_points": [
+    "基类中的虚函数声明形式例如：`virtual void someMethod();`。",
+    "派生类可以重新实现该函数，例如：`void someMethod() override;`。",
+    "派生类重写函数可以继续写 `virtual`，但通常使用 `override` 来表达并检查重写意图。",
+    "`override` 会要求派生类函数确实匹配基类的虚函数；函数名、参数列表等不匹配时不能作为该虚函数的正确重写。"
+  ],
+  "examples": [
+    "基类：`class Base { public: virtual void someMethod(); };`",
+    "派生类：`class Derived : public Base { public: virtual void someMethod() override; };`",
+    "基类实现可以输出：`This is Base's version of someMethod().`；派生类实现可以输出：`This is Derived's version of someMethod().`"
+  ],
+  "misconceptions": [
+    "仅仅函数名相同并不一定构成重写；函数签名必须与基类虚函数匹配。",
+    "`override` 不是运行时调用机制本身，而是用于声明并检查派生类函数是否重写了基类虚函数。",
+    "派生类重写虚函数后，基类版本并没有消失；仍可通过基类对象或其他合适方式调用基类版本。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "基类如何声明一个可被派生类重写的成员函数？",
+      "a": "在函数声明前使用 `virtual`，例如 `virtual void someMethod();`。"
+    },
+    {
+      "q": "派生类中的 `void someMethod() override;` 表示什么？",
+      "a": "表示派生类提供了对基类虚函数 `someMethod()` 的重写，并要求编译器检查这种重写关系。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++继承",
+    "C++成员函数"
+  ],
+  "source_pages": [
+    306,
+    307,
+    308
+  ],
+  "needs_verification": true,
+  "verify_query": "《C++20高级编程》第5版 第306-308页 virtual override someMethod Derived Base",
+  "concept_id": "397_虚函数与派生类重写",
+  "_chunk_pages": [
+    305,
+    308
+  ]
+}

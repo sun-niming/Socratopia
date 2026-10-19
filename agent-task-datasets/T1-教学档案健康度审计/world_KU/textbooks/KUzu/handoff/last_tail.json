@@ -1,0 +1,26 @@
+{
+  "savedAt": "2026-10-14T11:19:48.336Z",
+  "messages": [
+    {
+      "role": "user",
+      "content": "变成Repository的继承类，统一管理？"
+    },
+    {
+      "role": "assistant",
+      "content": "逆铭，方向对了一半，但少了一半更狠的。\n\nRepository 接口统一、都来继承 Spring Data 的接口——这一层你说对了。可你没猜到的是被删掉那部分：`JdbcIngredientRepository` 和 `JdbcOrderRepository` 这两个实现类，不是变成继承类，而是**整个删掉，一个实现类都不写**。\n\nSpring Data 在应用启动时，会根据这些接口**自动生成实现类**。你写接口、它给实现。所以上一节那两个手工类，现在成了累赘。\n\n*她把那两页并在一起，像是要把其中一张抽走。*\n\n具体怎么改。老的 `IngredientRepository` 只是普通接口，Spring Data 不认识它。要让它接管，接口必须继承自 Spring Data 的 `Repository`：\n\n```java\ninterface IngredientRepository\n    extends Repository<Ingredient, String> { ... }\n```\n\n注意它是**参数化**的：第一个参数是仓库负责持久化的对象类型（`Ingredient`），第二个参数是对应 ID 字段的类型（`Ingredient` 的 id 是 `String`）。\n\n不过教材马上又给了更省事的做法：Spring Data 还提供了 **`CrudRepository`**，它已经内置了创建、读取、更新、删除的十几个常用方法——`findAll()`、`findById()`、`save()` 全在里面。既然父亲已经有了，儿子就不必再声明一遍。于是接口可以干净成这个样子：\n\n```java\ninterface IngredientRepository\n    extends CrudRepository<Ingredient, String> {\n}\n```\n\n空的，一个方法都不写。`findAll`/`findById`/`save` 照常能调，因为都继承来了。这也是为什么教材说：这两个手工实现类可以放心删除，控制器注入方式完全不用改。\n\n已经看清 Ingredient 这边的写法了。那按同样的规矩，`OrderRepository` 那一行该怎么写？你说说看，两个尖括号里各填什么。"
+    },
+    {
+      "role": "user",
+      "content": "interface OrderRepository extends CrudRepositrory<TacoOrder, Long> {}"
+    },
+    {
+      "role": "assistant",
+      "content": "对了，`Long` 就是 `TacoOrder` 的 id 字段类型。写的时候一个小地方：是 `CrudRepository`，那个多出来的 r 删掉就好。\n\n*她把笔搁下，转向清单 3.15 那一页。*\n\n接口写完了，可 Spring Data 这会儿还不知道该把对象怎么塞进数据库。缺的是最后一块：**给领域实体加注解**。这就是 3.2.3 要做的。\n\n两个注解唱主角。\n\n`@Id`——指出哪个字段是这个对象的标识。Spring Data 靠它知道哪一列是主键。\n\n`@Table`——**可选的**。不写，它默认按类名去找表：`TacoOrder` 对应一张叫“TacoOrder”的表。想换成别的名字，就给它一个参数：\n\n```java\n@Table(\"Taco_Cloud_Order\")\npublic class TacoOrder { ... }\n```\n\n其余属性按名字自动落到同名（转下划线）的列上。比如 `deliveryName` 自动对应 `delivery_name` 列。若想自己指定列名，用 `@Column`：\n\n```java\n@Column(\"customer_name\")\n@NotBlank(message=\"Delivery name is required\")\nprivate String deliveryName;\n```\n\n同样的规矩套到其他实体上：`Ingredient`、`Taco` 都加 `@Table` 和 `@Id`。有一处教材只给了写法、没展开原因——`Ingredient implements Persistable<String>`，这里先记住它这么写。至于 `IngredientRef`，它会自动落到 `Ingredient_Ref` 表，因为这张表没有标识列，所以**不需要**加 `@Id`。\n\n那我按这个规则问你一处：`TacoOrder` 类上**什么都不加** `@Table` 注解，它会去查哪张表？如果我想让它查 `Taco_Cloud_Order` 这张表，代码该怎么改？"
+    },
+    {
+      "role": "user",
+      "content": "[下课] 请执行课后更新。"
+    }
+  ],
+  "operationId": "endclass:v1:31d5630f6c03dcbcba41f7e6fdad76fd:40f75affa487ae69968b8de1"
+}

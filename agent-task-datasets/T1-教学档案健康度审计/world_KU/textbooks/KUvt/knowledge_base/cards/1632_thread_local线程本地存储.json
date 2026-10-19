@@ -1,0 +1,43 @@
+{
+  "title": "thread_local线程本地存储",
+  "definition": "C++的thread_local关键字可以把变量声明为线程本地数据。这样的变量在每个线程中都有独立副本，并在线程的整个生命周期中持续存在；对于每个线程，该变量只初始化一次。不同线程对thread_local变量的访问互不共享同一个副本。",
+  "key_points": [
+    "普通全局变量由所有线程共享一个对象；thread_local全局变量则每个线程拥有一个独立对象。",
+    "线程本地变量在每个线程中分别初始化一次。",
+    "如果thread_local变量声明在函数作用域内，其行为类似静态局部变量，但每个线程有自己的独立副本，并且每个线程只初始化一次。"
+  ],
+  "examples": [
+    "全局变量声明：\nint k;\nthread_local int n;\n\n线程函数：\nvoid threadFunction(int id) {\n    cout << format(\"Thread {}: k={}, n={}\\\\n\", id, k, n);\n    ++n;\n    ++k;\n}\n\n先后启动两个线程并分别等待：\nthread t1{threadFunction, 1};\nt1.join();\nthread t2{threadFunction, 2};\nt2.join();\n\n可能输出：\nThread 1: k=0, n=0\nThread 2: k=1, n=0"
+  ],
+  "misconceptions": [
+    "thread_local变量不是所有线程共享的一个变量；每个线程都有自己的副本。",
+    "thread_local变量在一个线程中被多次访问时，不会每次访问都重新初始化。",
+    "普通全局变量k与thread_local变量n的共享方式不同：k共享一个实例，n每个线程一份。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "在原文示例中，为什么线程2看到k=1而仍看到n=0？",
+      "a": "k是普通全局变量，线程1递增后线程2看到同一个共享实例的值1；n是thread_local变量，线程2使用的是自己独立初始化的副本，因此仍为0。"
+    },
+    {
+      "q": "函数作用域内的thread_local变量有什么特点？",
+      "a": "它类似静态局部变量，会在每个线程中保持存在，并且每个线程拥有独立副本、只初始化一次。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "全局变量与静态局部变量",
+    "多线程共享数据"
+  ],
+  "source_pages": [
+    796,
+    796
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1632_thread_local线程本地存储",
+  "_chunk_pages": [
+    793,
+    796
+  ]
+}

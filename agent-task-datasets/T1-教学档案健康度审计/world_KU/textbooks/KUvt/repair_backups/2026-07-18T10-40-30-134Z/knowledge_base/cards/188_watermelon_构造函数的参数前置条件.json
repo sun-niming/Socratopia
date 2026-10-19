@@ -1,0 +1,45 @@
+{
+  "title": "Watermelon 构造函数的参数前置条件",
+  "definition": "`Watermelon(size_t initialSeeds)` 是 Watermelon 类的构造函数。它要求传入的初始种子数 `initialSeeds` 必须大于 5；当 `initialSeeds <= 5` 时，构造函数应抛出参数无效异常。",
+  "key_points": [
+    "构造函数签名为 `Watermelon(size_t initialSeeds);`。",
+    "参数 `initialSeeds` 表示初始种子数。",
+    "参数前置条件是：`initialSeeds > 5`。",
+    "当 `initialSeeds <= 5` 时，文档声明会抛出 `invalid_argument` 异常。"
+  ],
+  "examples": [
+    "有效调用条件：`initialSeeds > 5`。",
+    "无效条件可表示为：$$initialSeeds \\le 5$$",
+    "文档中的异常契约可写为：`@throws invalid_argument if initialSeeds <= 5.`"
+  ],
+  "misconceptions": [
+    "`size_t` 只表示参数类型，不表示它可以无条件接受任意种子数。",
+    "参数类型检查和业务前置条件不同；即使参数类型正确，`initialSeeds <= 5` 仍然不符合该构造函数的文档要求。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "Watermelon 构造函数对 `initialSeeds` 有什么要求？",
+      "a": "`initialSeeds` 必须大于 5，即 `initialSeeds > 5`。"
+    },
+    {
+      "q": "当 `initialSeeds <= 5` 时会发生什么？",
+      "a": "根据文档，构造函数会抛出 `invalid_argument` 异常。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++构造函数",
+    "C++异常"
+  ],
+  "source_pages": [
+    129,
+    132
+  ],
+  "needs_verification": true,
+  "verify_query": "《C++20高级编程》第5版 Watermelon(size_t initialSeeds) invalid_argument initialSeeds <= 5",
+  "concept_id": "188_watermelon_构造函数的参数前置条件",
+  "_chunk_pages": [
+    129,
+    132
+  ]
+}

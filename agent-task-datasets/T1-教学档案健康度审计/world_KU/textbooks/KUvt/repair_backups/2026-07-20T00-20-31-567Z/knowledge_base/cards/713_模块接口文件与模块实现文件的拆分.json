@@ -1,0 +1,47 @@
+{
+  "title": "模块接口文件与模块实现文件的拆分",
+  "definition": "一个模块可以由一个模块接口文件和一个或多个模块实现文件组成。接口文件通常以 .cppm 为扩展名，实现文件通常以 .cpp 为扩展名；接口文件声明并导出公共接口，实现文件保存相应的实现代码。",
+  "key_points": [
+    "可以把所有函数和方法的实现移到实现文件，只在接口文件中保留函数原型、类定义等。",
+    "也可以把小型函数和方法保留在接口文件中，把其他实现移到实现文件中。",
+    "模块实现文件中的命名模块声明不使用 export 关键字。",
+    "模块实现文件不能导出任何内容，只有模块接口文件可以导出内容。"
+  ],
+  "examples": [
+    "模块接口文件：\nexport module person;\nexport class Person {\npublic:\n    Person(std::string firstName, std::string lastName);\n    std::string getFirstName() const;\n};\n\n模块实现文件：\nmodule person;\n\nPerson::Person(std::string firstName, std::string lastName) { /* 实现 */ }"
+  ],
+  "misconceptions": [
+    "模块实现文件不是另一个可以独立导出接口的模块文件；它属于相应模块，但不能使用 export 导出内容。",
+    "接口文件和实现文件的拆分不是固定只能采用一种粒度，函数实现放置位置具有灵活性。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "模块接口文件和模块实现文件通常分别使用什么扩展名？",
+      "a": "模块接口文件通常使用 .cppm，模块实现文件通常使用 .cpp，但接口文件扩展名并非由标准强制规定。"
+    },
+    {
+      "q": "模块实现文件中的模块声明为什么不写 export？",
+      "a": "因为它只是指定该实现属于哪个已命名模块，不负责导出模块接口。"
+    },
+    {
+      "q": "模块实现文件能否导出实体？",
+      "a": "不能；原文明确指出只有模块接口文件可以导出内容。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "模块接口文件与模块声明",
+    "模块实体的导出方式"
+  ],
+  "source_pages": [
+    355,
+    356
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 module implementation unit cannot export declarations module interface unit export rules",
+  "concept_id": "713_模块接口文件与模块实现文件的拆分",
+  "_chunk_pages": [
+    353,
+    356
+  ]
+}

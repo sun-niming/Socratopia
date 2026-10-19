@@ -1,0 +1,43 @@
+{
+  "title": "ICMPv6的扩展",
+  "definition": "ICMPv6是RFC 4443为IPv6定义的新版本ICMP。它重新组织了现有ICMP类型和编码的定义，并增加了IPv6新功能所需的新类型和编码。原文举例包括“分组太大”类型和“未被承认的IPv6选项”差错编码。",
+  "key_points": [
+    "ICMPv6面向IPv6网络。",
+    "ICMPv6重新组织现有ICMP类型和编码定义。",
+    "ICMPv6增加了适应IPv6新功能的新类型和编码。",
+    "原文列举的新增内容包括“分组太大”类型和“未被承认的IPv6选项”差错编码。"
+  ],
+  "examples": [
+    "IPv6网络中的分组超过路径允许的大小时，可以使用ICMPv6的“分组太大”类型报告该情况。"
+  ],
+  "misconceptions": [
+    "ICMPv6不是简单地把IPv4中的ICMP名称替换为IPv6，而是重新组织并增加了类型和编码。",
+    "原文没有说ICMPv6只用于差错报告；其描述重点是类型和编码的扩展。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "ICMPv6由哪个RFC定义？",
+      "a": "由RFC 4443定义。"
+    },
+    {
+      "q": "ICMPv6相对于原有ICMP增加了什么？",
+      "a": "增加了IPv6新功能所需的新类型和编码，例如“分组太大”类型和“未被承认的IPv6选项”差错编码。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "ICMP的作用与体系结构位置",
+    "IPv6基础"
+  ],
+  "source_pages": [
+    289,
+    292
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "651_icmpv6的扩展",
+  "_chunk_pages": [
+    289,
+    292
+  ]
+}

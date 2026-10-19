@@ -1,0 +1,51 @@
+{
+  "title": "PlayerProxy 隐藏网络故障",
+  "definition": "PlayerProxy 实现与 Player 相同的 IPlayer 接口，并持有一个真正的 IPlayer 对象。它把不需要网络的请求转发给底层对象；对于需要网络的即时消息请求，则先检查网络可用性，在网络断开时返回默认字符串或其他替代结果，从而隐藏底层 Player 抛出的网络异常。",
+  "key_points": [
+    "IPlayer 接口声明 getName() 和 sendInstantMessage(std::string_view message) 等公有操作。",
+    "Player 和 PlayerProxy 都实现 IPlayer，因此客户端可以统一使用 IPlayer 接口。",
+    "PlayerProxy 通过 unique_ptr<IPlayer> 持有底层对象，并在构造时取得该对象的所有权。",
+    "getName() 直接转发给底层 player。",
+    "sendInstantMessage() 在网络可用时转发请求；网络不可用时不让底层异常暴露给客户端，而是返回默认字符串或执行代理定义的替代行为。"
+  ],
+  "examples": [
+    "所有权转移的构造方式：PlayerProxy::PlayerProxy(std::unique_ptr<IPlayer> player) : m_player{std::move(player)} {}",
+    "名称转发：std::string PlayerProxy::getName() const { return m_player->getName(); }",
+    "接口使用形式：客户端只依赖 IPlayer，而不必区分实际使用的是 Player 还是 PlayerProxy。"
+  ],
+  "misconceptions": [
+    "PlayerProxy 不是简单地缓存 Player 的所有结果；原文明确说明 getName 会转发给底层对象。",
+    "代理隐藏的是网络故障等令人不快的语义，不是把 Player 的全部功能都删除。",
+    "unique_ptr 表明 PlayerProxy 对传入的 IPlayer 对象拥有所有权，而不是只保存一个不拥有所有权的引用。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "PlayerProxy 如何处理网络连接断开的情况？",
+      "a": "它检查网络连接状态；网络断开时返回默认字符串或其他替代结果，而不是直接调用会抛出异常的底层 Player 方法，从而隐藏网络故障。"
+    },
+    {
+      "q": "PlayerProxy 为什么实现 IPlayer 接口？",
+      "a": "这样客户端可以通过同一个 IPlayer 抽象使用真实 Player 或代理 PlayerProxy，而不必知道底层对象是否可用。"
+    },
+    {
+      "q": "PlayerProxy 的 unique_ptr<IPlayer> 成员表示什么？",
+      "a": "它表示 PlayerProxy 持有底层 IPlayer 对象的所有权，构造函数通过移动传入的 unique_ptr 完成所有权转移。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "代理模式的概念与典型用途",
+    "C++ 多态接口"
+  ],
+  "source_pages": [
+    956,
+    956
+  ],
+  "needs_verification": true,
+  "verify_query": "《C++20高级编程》第5版 PlayerProxy sendInstantMessage network default string unique_ptr IPlayer 实现",
+  "concept_id": "1964_playerproxy_隐藏网络故障",
+  "_chunk_pages": [
+    953,
+    956
+  ]
+}

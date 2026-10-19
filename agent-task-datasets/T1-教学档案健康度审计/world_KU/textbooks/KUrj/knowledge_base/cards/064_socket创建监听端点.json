@@ -1,0 +1,42 @@
+{
+  "title": "socket创建监听端点",
+  "definition": "在程序启动时先调用 `socket(AF_INET, SOCK_STREAM, 0)` 创建一个 TCP 套接字，通常保存为 `listen_fd`，后续的 `bind`、`listen`、`accept` 都基于它。`socket` 只是创建端点，还没有绑定端口，也不能接收连接。",
+  "key_points": [
+    "创建监听 socket 时常用 `AF_INET`、`SOCK_STREAM`、`0`。",
+    "`socket` 只是得到一个 fd，不等于已经能监听或收连接。",
+    "创建后要检查返回值，失败时应处理错误。"
+  ],
+  "examples": [
+    "```c\nint listen_fd = socket(AF_INET, SOCK_STREAM, 0);\nif (listen_fd < 0) {\nperror(\"socket\");\nreturn -1;\n}\n```"
+  ],
+  "misconceptions": [
+    "以为 `socket` 之后就已经绑定了端口。",
+    "以为 `socket` 返回的 fd 立刻可以接收客户端连接。",
+    "把 `SOCK_DGRAM` 误写成适用于这里的类型。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`socket(AF_INET, SOCK_STREAM, 0)` 的作用是什么？",
+      "a": "创建一个用于 TCP/IPv4 通信的套接字 fd，后续还要再 `bind`、`listen` 才能用于监听。"
+    },
+    {
+      "q": "为什么说 `socket` 之后还不能直接收连接？",
+      "a": "因为它只是创建了端点，没有绑定端口，也没有进入监听状态。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "文件描述符"
+  ],
+  "source_pages": [
+    45,
+    48
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "064_socket创建监听端点",
+  "_chunk_pages": [
+    45,
+    48
+  ]
+}

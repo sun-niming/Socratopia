@@ -1,0 +1,39 @@
+{
+  "title": "setInterval 与 clearInterval",
+  "definition": "setInterval 用于设置每隔一段时间重复执行代码；clearInterval 用于终止该定时器。它也可以使用定时器名来保存返回值并取消定时。",
+  "key_points": [
+    "格式： [定时器名=] setInterval(<表达式或函数对象>，毫秒)",
+    "setInterval 表示按固定间隔重复执行代码",
+    "clearInterval(定时器名) 用于终止定时器"
+  ],
+  "examples": [
+    "var clock = setInterval(function(){console.log('tick')}, 1000)\nclearInterval(clock)"
+  ],
+  "misconceptions": [
+    "setInterval 不是只执行一次，而是重复执行。",
+    "clearInterval 不是清除页面内容，而是停止该间隔定时器。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "setInterval 的作用是什么？",
+      "a": "用于设置每隔一段时间就重复执行代码。"
+    },
+    {
+      "q": "clearInterval 的作用是什么？",
+      "a": "终止定时器。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [],
+  "source_pages": [
+    333,
+    336
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "453_setinterval_与_clearinterval",
+  "_chunk_pages": [
+    333,
+    336
+  ]
+}

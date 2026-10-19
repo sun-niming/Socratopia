@@ -1,0 +1,50 @@
+{
+  "title": "border-radius圆角边框",
+  "definition": "border-radius 属性用于给元素添加圆角边框。它的格式是 border-radius: 水平方向取值 / 垂直方向取值; 这两个值共同决定圆角的形状；如果两个值相同，则可以合并成一个值。border-radius 还可以分为四个方向的子属性，用来分别设置不同角的圆角。",
+  "key_points": [
+    "border-radius 用于添加元素的圆角边框。",
+    "语法中可分别指定水平和垂直方向的圆角半径。",
+    "水平和垂直取值共同决定圆角形状；相同的时候可简写为一个值。",
+    "border-radius 可以拆分成四个方向的子属性，分别控制四个角。"
+  ],
+  "examples": [
+    "border-radius: 水平方向取值 / 垂直方向取值;",
+    "border-top-left-radius: 40px 20px; /*左上角：水平40px，垂直20px，形成1/4椭圆角*/",
+    "border-bottom-right-radius:20px; /*右下角：水平20px，垂直20px，形成1/4圆角*/"
+  ],
+  "misconceptions": [
+    "border-radius 只能设置四个角都一样的圆角。",
+    "border-radius 只能写一个值，不能分别控制水平和垂直半径。",
+    "圆角只能是正圆角，不能出现椭圆角。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "border-radius 的两个取值分别表示什么？",
+      "a": "分别表示水平方向取值和垂直方向取值。"
+    },
+    {
+      "q": "如果 border-radius 的两个值相同，可以怎么写？",
+      "a": "可以合并成一个值。"
+    },
+    {
+      "q": "border-radius 能否分成四个方向分别设置？",
+      "a": "可以，原文说明它可以分为四个方向的子属性。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "CSS基础",
+    "CSS选择器与属性"
+  ],
+  "source_pages": [
+    190,
+    191
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "268_border_radius圆角边框",
+  "_chunk_pages": [
+    189,
+    192
+  ]
+}

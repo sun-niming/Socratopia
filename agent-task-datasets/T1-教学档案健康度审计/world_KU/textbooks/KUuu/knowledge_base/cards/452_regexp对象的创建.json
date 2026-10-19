@@ -1,0 +1,47 @@
+{
+  "title": "RegExp对象的创建",
+  "definition": "JavaScript 中创建正则表达式对象有两种常见方式：一种是正则表达式字面量写法，另一种是使用 RegExp 构造函数。若表达式需要由变量拼接而成，只能使用 RegExp 构造函数。",
+  "key_points": [
+    "字面量方式：var 对象名 = /表达式/[flags]",
+    "构造函数方式：var 对象名 = new RegExp(表达式)",
+    "示例中可用 /\\^http[s]?:\\/\\// 这样的字面量创建对象",
+    "当正则表达式要由变量组成时，应使用 RegExp 构造函数",
+    "教材强调：通过变量来组成表达式时，不能只用字面量写法"
+  ],
+  "examples": [
+    "var regExp=/^http[s]?:\\/\\//;",
+    "regExp=new RegExp(\"^http[s]?:\\\\/\\\\/\");",
+    "var pattern = \"^http\" + suffix; regExp = new RegExp(pattern);"
+  ],
+  "misconceptions": [
+    "正则表达式只能用字面量创建",
+    "只要是正则表达式，就都能直接写成 /.../，不需要构造函数",
+    "RegExp 构造函数和字面量写法在“变量拼接表达式”场景下完全等价"
+  ],
+  "qa_pairs": [
+    {
+      "q": "创建正则表达式对象有哪两种方式？",
+      "a": "字面量方式和 RegExp 构造函数方式。"
+    },
+    {
+      "q": "什么时候必须使用 RegExp 构造函数？",
+      "a": "当正则表达式需要由变量来组成时。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "JavaScript变量基础",
+    "字符串基础"
+  ],
+  "source_pages": [
+    313,
+    316
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "452_regexp对象的创建",
+  "_chunk_pages": [
+    313,
+    316
+  ]
+}

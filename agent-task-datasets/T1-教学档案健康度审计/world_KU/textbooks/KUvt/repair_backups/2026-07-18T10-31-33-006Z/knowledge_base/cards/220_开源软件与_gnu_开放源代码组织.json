@@ -1,0 +1,49 @@
+{
+  "title": "开源软件与 GNU、开放源代码组织",
+  "definition": "原文第156页第8项出现“open-source”，并列举 Android、Linux、Google Chrome、Mozilla Firefox 等名称；同时提到 Richard Stallman、GNU、free software、Open Source Initiative 和 open-source software，并给出相关网站。页面信息表明该处讨论开源软件及其相关人物、项目或组织，但具体定义和历史关系需要核实。",
+  "key_points": [
+    "原文出现 `open-source` 和 `open-source software`。",
+    "原文列举 Android、Linux、Google Chrome、Mozilla Firefox。",
+    "原文将 Richard Stallman 与 GNU、`free software` 联系起来。",
+    "原文还出现 Open Source Initiative，并给出 `www.gnu.org` 与 `www.opensource.org`。"
+  ],
+  "examples": [
+    "原文列举的名称包括：Android、Linux、Google Chrome、Mozilla Firefox。",
+    "原文出现的相关关系可表示为：Richard Stallman → GNU → `free software`；Open Source Initiative → `open-source software`。",
+    "原文给出的站点包括：`www.gnu.org`、`www.opensource.org`。"
+  ],
+  "misconceptions": [
+    "不能把 `free software` 简单理解为“没有任何费用的软件”；当前页面只给出了该术语，没有展开定义。",
+    "不能仅凭本页断定 Android、Linux、Google Chrome 和 Mozilla Firefox 的许可证或开发模式完全相同。",
+    "不能把 GNU 与 Open Source Initiative 直接视为同一个组织。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "第156页列举了哪些开源软件或项目名称？",
+      "a": "Android、Linux、Google Chrome 和 Mozilla Firefox。"
+    },
+    {
+      "q": "原文将哪些人物、项目或组织与开源主题联系起来？",
+      "a": "Richard Stallman、GNU、free software 和 Open Source Initiative。"
+    },
+    {
+      "q": "原文给出了哪些相关网站？",
+      "a": "`www.gnu.org` 和 `www.opensource.org`。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "软件许可证的基本概念"
+  ],
+  "source_pages": [
+    153,
+    156
+  ],
+  "needs_verification": true,
+  "verify_query": "《C++20高级编程》第5版 第156页 open-source Richard Stallman GNU Open Source Initiative 完整原文与上下文",
+  "concept_id": "220_开源软件与_gnu_开放源代码组织",
+  "_chunk_pages": [
+    153,
+    156
+  ]
+}

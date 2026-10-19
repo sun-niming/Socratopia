@@ -1,0 +1,43 @@
+{
+  "title": "在 Visual C++ 中启用 C++20",
+  "definition": "原文展示了使用 Microsoft Visual C++ 2019 创建 C++ Windows Console 项目，并在项目属性的 C/C++ 语言标准设置中选择 ISO C++20 或 Latest C++ Working Draft，从而为项目配置 C++20 语言标准。",
+  "key_points": [
+    "创建项目的大致路径为 File → New Project → C++ → Windows → Console，然后创建项目。",
+    "在项目属性中进入 C/C++ → Language → Language Standard。",
+    "原文列出了 ISO C++20 和 Latest C++ Working Draft 两种相关选项。"
+  ],
+  "examples": [
+    "Visual Studio 项目属性中的设置路径：C/C++ → Language → Language Standard → ISO C++20。",
+    "示例代码中出现了 C++20 模块导入形式：import <iostream>;"
+  ],
+  "misconceptions": [
+    "仅创建 C++ 项目并不等于已经启用 C++20；还需要在语言标准设置中选择相应选项。",
+    "原文同时出现 Microsoft Visual C++ 2019 与 C++20 选项，但不能仅凭该页断定所有 C++20 特性都得到完整支持。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "在 Visual C++ 项目中，原文指出应在哪个设置项选择 C++20？",
+      "a": "进入项目属性的 C/C++ → Language → Language Standard，选择 ISO C++20 或原文列出的 Latest C++ Working Draft。"
+    },
+    {
+      "q": "原文展示的项目类型是什么？",
+      "a": "C++ Windows Console 项目。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++ 项目创建",
+    "编译器语言标准设置"
+  ],
+  "source_pages": [
+    17,
+    20
+  ],
+  "needs_verification": true,
+  "verify_query": "Microsoft Visual C++ 2019 C++20 Language Standard ISO C++20 Latest C++ Working Draft 项目属性菜单",
+  "concept_id": "014_在_visual_c_中启用_c_20",
+  "_chunk_pages": [
+    17,
+    20
+  ]
+}

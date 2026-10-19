@@ -1,0 +1,168 @@
+{
+  "conversationId": "h8tM2csXVvjbQzKiGudI4",
+  "generatedAt": 1792139212936,
+  "pagesRange": "179–181（第 181 页为 4.7.1「规范 LR(1) 项」开头；第 179 页为 SLR 在 I₂ 上冲突的相关段落）",
+  "sections": [
+    {
+      "type": "tldr",
+      "content": "继续走 4.7.1：规范 LR(1) 项把「向前看符号」钉在每一项上，于是同一只状态 I₂ 里，移入项只认 $=$、归约项只认 $\\$$，SLR 上的移入/归约冲突就此消失——向前看符号不是装饰，它直接决定这一项在哪些格子里动手。"
+    },
+    {
+      "type": "narrative",
+      "content": "上一节在 4.7.1 立住了闭包规则，本节先把它用在文法（4.49）上：从 $I_0$ 出发，先纠正「β 取自父项点右侧那串、而非新项自己的尾巴」这一手，得到 $[L\\to\\cdot *R,\\ =]$ 与 $[L\\to\\cdot *R,\\ \\$]$ 两项并存。随后按「挑核—点越过 X—补闭包」三步，依次走出 $GOTO(I_0,*)$、$GOTO(I_0,L)=I_2$、$GOTO(I_2,=)$，并在 I₂ 上亲眼看到凭证如何把 SLR 的僵局解开。最后停在 $GOTO(I_6,R)$ 之前。"
+    },
+    {
+      "type": "concepts",
+      "items": [
+        {
+          "name": "规范 LR(1) 项：核心 + 向前看符号",
+          "body": "每个 LR(1) 项写成一枚 $[A\\to\\alpha\\cdot\\beta,\\ a]$：方括号里是**核心**（产生式加圆点）＋**向前看符号** $a$。\n\n关键事实：同一个核心可以在同一项集里以**两枚项并存**，只因凭证不同：\n\n$$\n[L\\to\\cdot *R,\\ =]\\qquad\\text{与}\\qquad[L\\to\\cdot *R,\\ \\$]\n$$\n\n它们各占一位、互不合并。这正是规范 LR(1) 的状态数会比 LR(0) 膨胀得多的源头。",
+          "sourceMessageIndexes": [
+            1,
+            3,
+            9
+          ]
+        },
+        {
+          "name": "闭包规则：$\\beta$ 取自父项，$\\epsilon$ 时只看 $a$",
+          "body": "闭包展开用的凭证是 $\\mathrm{FIRST}(\\beta a)$，其中 $\\beta$ 取自**触发展开的父项**中圆点右侧的那串，与新项自己长什么样无关。\n\n对照文法（4.49）中的两处：\n\n- 父项 $[S\\to\\cdot L=R,\\ \\$]$：点后是 $L$，$\\beta=R$、$a=\\$$，凭证落在 $\\mathrm{FIRST}(=R\\$)=\\{=\\}$ 里，新项带 $=$。\n- 父项 $[R\\to\\cdot L,\\ \\$]$：点后是 $L$，后面什么也没有，$\\beta=\\epsilon$，规则退化成 $\\mathrm{FIRST}(\\epsilon\\$)=\\{\\$\\}$，新项带 $\\$$。\n\n易错点：把新项自身的尾部 $*R$ 当成 $\\beta$，从而写出 $\\mathrm{FIRST}(=*\\$)$、$\\mathrm{FIRST}(*\\$)$。",
+          "sourceMessageIndexes": [
+            1,
+            3
+          ]
+        },
+        {
+          "name": "GOTO 的两步：挑核 + 闭包",
+          "body": "一个状态就是一匣子项，GOTO 不神秘，只有两步：\n\n1. **挑核**：在 $I$ 里挑出所有圆点正停在 $X$ 前的项，把点越过 $X$；向前看符号原样跟着走。\n2. **闭包**：对核套 $\\mathrm{FIRST}(\\beta a)$ 规则，补齐可以再展开的项，这些是非核。\n\n以 $GOTO(I_0,*)$ 为例：$I_0$ 里只有 $[L\\to\\cdot *R,\\ =]$ 与 $[L\\to\\cdot *R,\\ \\$]$ 符合，拆开点越过 $*$，得 $[L\\to *\\cdot R,\\ =]$、$[L\\to *\\cdot R,\\ \\$]$，核心一致故合写成核 $[L\\to *\\cdot R,\\ =/\\$]$；闭包再补出 $[R\\to\\cdot L,\\ =/\\$]$、$[L\\to\\cdot *R,\\ =/\\$]$、$[L\\to id,\\ =/\\$]$。\n\n口诀：挑核管「哪些项、什么凭证被带走」，点挪一步管「核心长什么样」，闭包管「还要补哪些」。",
+          "sourceMessageIndexes": [
+            7,
+            9
+          ]
+        },
+        {
+          "name": "I₂：SLR 栽跟头的地方，正是凭证解围的地方",
+          "body": "由 $I_0$ 中圆点停在 $L$ 前的 $[S\\to\\cdot L=R,\\ \\$]$ 与 $[R\\to\\cdot L,\\ \\$]$ 越过 $L$，得 $I_2=\\{S\\to L\\cdot =R,\\ \\$;\\ R\\to L\\cdot,\\ \\$\\}$。\n\n- 面对输入 $=$：$[S\\to L\\cdot =R,\\ \\$]$ 圆点停在 $=$ 前 → **移入**；$[R\\to L\\cdot,\\ \\$]$ 凭证只有 $\\$$，**够不着 $=$ 格**。\n- 面对输入 $\\$$：$[R\\to L\\cdot,\\ \\$]$ 凭证恰是 $\\$$ → **归约 $R\\to L$**；移入项不碰 $\\$$ 格。\n\n对比 SLR：那里 $[R\\to L\\cdot]$ 不带符号，借的是全局 $\\mathrm{FOLLOW}(R)$，而 $=$ 恰好混在里面，于是它伸手去管 $=$ 格、撞上移入。规范 LR(1) 把凭证钉死，两枚项井水不犯河水，无二义文法（4.49）被拿下。",
+          "sourceMessageIndexes": [
+            13,
+            15,
+            17,
+            19
+          ]
+        },
+        {
+          "name": "向前看符号决定动作格",
+          "body": "从 $[L\\to *\\cdot R,\\ =/\\$]$ 越过 $R$ 得 $[L\\to *R\\cdot,\\ =/\\$]$，圆点已到最右端、引不出闭包，整只新状态只剩这一项。它该走什么、在哪些输入上走？答案是按归约 $L\\to *R$ 作用于 $=$ 与 $\\$$ 两处。\n\n可见向前看符号不是装饰：它直接决定这一项在哪些格子里动手。",
+          "sourceMessageIndexes": [
+            11,
+            13
+          ]
+        },
+        {
+          "name": "同核心不同凭证 = 两个不同状态",
+          "body": "从 $I_2$ 越过 $=$，核只有 $[S\\to L=\\cdot R,\\ \\$]$；它对 $R$ 补闭包，因父项点后 $\\beta=\\epsilon$、$a=\\$$，补出的三项 $[R\\to\\cdot L,\\ \\$]$、$[L\\to\\cdot *R,\\ \\$]$、$[L\\to\\cdot id,\\ \\$]$ **全部只带 $\\$$**。\n\n回头对照 $I_0$ 里的 $[L\\to\\cdot *R,\\ =/\\$]$、$[L\\to id,\\ =/\\$]$：核心相同、凭证不同，那就是两个不同的状态，不会合并。",
+          "sourceMessageIndexes": [
+            21,
+            23
+          ]
+        }
+      ]
+    },
+    {
+      "type": "key-insight",
+      "content": "同一只 $I_2$，面对 $=$ 给移入、依据是 $[S\\to L\\cdot =R,\\ \\$]$；面对 $\\$$ 给归约、依据是 $[R\\to L\\cdot,\\ \\$]$——凭证把两枚项的地界钉死，冲突不再发生。",
+      "sourceMessageIndexes": [
+        16,
+        18
+      ]
+    },
+    {
+      "type": "key-terms",
+      "items": [
+        {
+          "term": "规范 LR(1) 项",
+          "definition": "形如 $[A\\to\\alpha\\cdot\\beta,\\ a]$ 的项，核心与向前看符号 $a$ 绑定在一起。"
+        },
+        {
+          "term": "核 (kernel)",
+          "definition": "在 GOTO 中，圆点正停在 $X$ 前的那些项把点越过 $X$ 后得到的项；向前看符号原样跟随。核之外的项由闭包补出。"
+        },
+        {
+          "term": "闭包",
+          "definition": "对核套用 $\\mathrm{FIRST}(\\beta a)$ 规则补齐可再展开的项；$\\beta$ 取自父项点右侧那串，$\\beta=\\epsilon$ 时凭证退化为 $\\mathrm{FIRST}(a)$。"
+        },
+        {
+          "term": "GOTO(I, X)",
+          "definition": "从状态 $I$ 沿符号 $X$ 迈一步：挑核（点越过 $X$）后对核做闭包，得到新状态。"
+        },
+        {
+          "term": "向前看符号",
+          "definition": "挂在每一项上的凭证，决定该项能在哪些输入符号上触发动作（移入或归约）。"
+        }
+      ]
+    },
+    {
+      "type": "review-questions",
+      "items": [
+        {
+          "question": "闭包展开新项 $[L\\to\\cdot *R]$ 时，$\\beta$ 到底取自哪里？父项分别为 $[S\\to\\cdot L=R,\\ \\$]$ 和 $[R\\to\\cdot L,\\ \\$]$ 时，新项各带什么凭证？",
+          "answer": "$\\beta$ 取自父项中圆点右侧的那串，与新项自身无关。第一种父项点后是 $L$、$\\beta=R$、$a=\\$$，凭证取自 $\\mathrm{FIRST}(=R\\$)=\\{=\\}$；第二种父项点后 $\\beta=\\epsilon$，退化为 $\\mathrm{FIRST}(\\epsilon\\$)=\\{\\$\\}$，凭证为 $\\$$。"
+        },
+        {
+          "question": "写出 $GOTO(I_0,*)$ 的核，并说明闭包要补哪几项、凭证从哪来。",
+          "answer": "核是 $[L\\to *\\cdot R,\\ =/\\$]$（由 $I_0$ 里两枚圆点停在 $*$ 前的项越过 $*$ 合并而来）。闭包补出 $[R\\to\\cdot L,\\ =/\\$]$、$[L\\to\\cdot *R,\\ =/\\$]$、$[L\\to id,\\ =/\\$]$，凭证由父项沿 $\\mathrm{FIRST}(\\beta a)$ 一路传下。"
+        },
+        {
+          "question": "SLR 在 $I_2$ 上为什么会在 $=$ 处冲突？规范 LR(1) 是如何让这个冲突消失的？",
+          "answer": "SLR 中 $[R\\to L\\cdot]$ 不带符号、借的是全局 $\\mathrm{FOLLOW}(R)$，而 $=$ 在其中，于是它与移入项争夺 $=$ 格。LR(1) 把该凭证钉成 $\\$$，它便够不着 $=$ 格；$=$ 归移入项、$\\$$ 归归约项。"
+        },
+        {
+          "question": "从 $I_2$ 沿 $=$ 走一步，核是什么？闭包补出的三项各带什么凭证？与 $I_0$ 里同核心的项相比有何不同？",
+          "answer": "核是 $[S\\to L=\\cdot R,\\ \\$]$。闭包补出 $[R\\to\\cdot L,\\ \\$]$、$[L\\to\\cdot *R,\\ \\$]$、$[L\\to\\cdot id,\\ \\$]$，因 $\\beta=\\epsilon$、$a=\\$$，三项全只带 $\\$$。$I_0$ 里同核心项带 $=/\\$$，凭证不同即为不同状态，不合并。"
+        },
+        {
+          "question": "$[L\\to *R\\cdot,\\ =/\\$]$ 圆点已到最右端，它能在哪些输入符号上动作？动作是什么？",
+          "answer": "按归约 $L\\to *R$ 作用于 $=$ 与 $\\$$ 两处输入——这正是算向前看符号的用处所在。"
+        }
+      ]
+    },
+    {
+      "type": "notes",
+      "title": "定位与进度",
+      "content": "- 本段对应教材第 181 页 4.7.1「规范 LR(1) 项」开头；对照第 179 页关于 SLR 在 $I_2$ 上冲突、而规范 LR／LALR 能处理文法（4.49）的结论。\n- 已走完：$I_0$ 的闭包 → $GOTO(I_0,*)$ → $GOTO(I_0,L)=I_2$ → $GOTO(I_2,=)$（记为 $I_6$）。\n- 下一手（未完成）：$GOTO(I_6,R)$ 的核是哪一枚项、圆点停在何处。"
+    }
+  ],
+  "generationMeta": {
+    "pipelineVersion": "post-class-v3",
+    "mode": "short",
+    "jobId": "pn_mvap60t13cc2af84fc92",
+    "traceId": "tr_mvap60t1822e456b4b10",
+    "sourceHash": "sha256:2209b433847c2b69be3ddb8aee4d46beb74d043ab98065b23d2c1e5827b7347b",
+    "sourceMessageCount": 35,
+    "chunkCount": 0,
+    "generatedAt": 1792139212936,
+    "decision": "remerge",
+    "quality": {
+      "score": 0.5419,
+      "metrics": {
+        "topicCoverage": 1,
+        "learnerEvidenceCoverage": 1,
+        "explanationCoverage": 1,
+        "sourceIntegrity": 1,
+        "reviewQuestionDiversity": 0.8315789473684211,
+        "structureValidity": 1,
+        "lengthFitness": 0.37560000000000004,
+        "duplicationRatio": 0,
+        "unsupportedTopicRatio": 1,
+        "lengthChars": 4061,
+        "conceptCount": 6,
+        "evidenceTopicCount": 0,
+        "chunkCompleteness": 1
+      }
+    },
+    "warnings": [
+      "6 concept(s) have no chunk-evidence source"
+    ],
+    "evidenceIndex": [],
+    "degradedReason": null
+  }
+}

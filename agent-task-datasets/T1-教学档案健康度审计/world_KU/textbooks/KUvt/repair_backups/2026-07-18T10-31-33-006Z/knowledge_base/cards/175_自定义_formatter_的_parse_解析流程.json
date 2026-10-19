@@ -1,0 +1,51 @@
+{
+  "title": "自定义 formatter 的 parse() 解析流程",
+  "definition": "自定义 formatter 的 `parse()` 函数通过格式化上下文读取格式字段中的说明符。原文流程是：取得 `context.begin()` 和 `context.end()`，检查当前字符是否为 `}`；如果是，则采用默认模式并返回；否则检查当前字符是否为允许的自定义选项，设置输出模式并向后移动迭代器；最后确认下一个字符是 `}`，否则抛出格式错误。",
+  "key_points": [
+    "`context.begin()` 和 `context.end()` 用于获得格式说明符范围，原文将其表示为区间 `[context.begin(), context.end())`。",
+    "空格式字段 `{}` 的解析起点就是 `}`，此时直接采用默认的键和值联合输出模式。",
+    "解析到 `a`、`b` 或 `c` 时分别设置对应的 `OutputType`。",
+    "解析完一个自定义选项后，若还有字符且该字符不是 `}`，则抛出 `format_error`。",
+    "`parse()` 返回解析结束位置，使格式化库能够继续处理格式字段。"
+  ],
+  "examples": [
+    "解析 `{}`：当前迭代器指向 `}`，选择 `KeyAndValue` 并返回。",
+    "解析 `{:a}`：读取 `a`，设置 `KeyOnly`，然后确认下一个字符是 `}`。",
+    "解析 `{:cd}`：读取 `c` 后发现下一个字符是 `d` 而不是 `}`，因此抛出 `format_error{\"Invalid KeyValue format specifier.\"}`。"
+  ],
+  "misconceptions": [
+    "`parse()` 的职责是解析格式说明符，不是实际输出对象内容；实际输出由 `format()` 完成。",
+    "`context.end()` 是结束位置，不代表格式字段中一定存在合法说明符。",
+    "在原文这个 formatter 中，合法格式只允许一个自定义字符；不能把 `a`、`b`、`c` 任意串联。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "自定义 formatter 的 `parse()` 在遇到 `}` 时做什么？",
+      "a": "它认为格式字段没有自定义说明符，采用默认的 `KeyAndValue` 模式并返回当前迭代器。"
+    },
+    {
+      "q": "为什么解析 `{:cd}` 时会报错？",
+      "a": "读取 `c` 后，剩余字符 `d` 不是结束符 `}`，说明格式说明符包含非法多余内容，因此抛出 `format_error`。"
+    },
+    {
+      "q": "`parse()` 和 `format()` 的职责有什么区别？",
+      "a": "`parse()` 解析格式字符串并设置输出模式；`format()` 根据该模式把对象内容写入输出上下文。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "自定义 std::formatter 的基本结构",
+    "C++ 迭代器和异常处理基础"
+  ],
+  "source_pages": [
+    119,
+    120
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 formatter parse context.begin context.end return iterator custom format specifier validation",
+  "concept_id": "175_自定义_formatter_的_parse_解析流程",
+  "_chunk_pages": [
+    117,
+    120
+  ]
+}

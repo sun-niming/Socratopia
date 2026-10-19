@@ -1,0 +1,51 @@
+{
+  "title": "使用 noexcept 实现不抛异常的交换",
+  "definition": "noexcept 是 C++ 中用于声明函数不会抛出异常的说明符。复制和交换惯用方法要求 swap 操作不抛出异常，因此 Spreadsheet 的成员 swap 和相应的非成员 swap 都应标记为 noexcept。若一个实际标记为 noexcept 的函数抛出异常，程序将终止。",
+  "key_points": [
+    "Spreadsheet::swap 可以使用标准库中的 std::swap 交换各个数据成员。",
+    "需要交换的数据成员包括 m_width、m_height 和 m_cells。",
+    "非成员 swap 可以调用成员 swap，从而让标准库算法能够使用该交换操作。",
+    "交换函数声明为 noexcept，是复制和交换方法提供强异常安全性的前提之一。",
+    "std::swap 位于标准库相关头文件中，原文指出可使用 <utility> 中的工具函数。"
+  ],
+  "examples": [
+    "交换成员的结构可以写为：\n```cpp\nvoid Spreadsheet::swap(Spreadsheet& other) noexcept\n{\n    std::swap(m_width, other.m_width);\n    std::swap(m_height, other.m_height);\n    std::swap(m_cells, other.m_cells);\n}\n```",
+    "非成员交换函数的结构可以写为：\n```cpp\nvoid swap(Spreadsheet& first, Spreadsheet& second) noexcept\n{\n    first.swap(second);\n}\n```"
+  ],
+  "misconceptions": [
+    "noexcept 不是“函数通常不抛异常”的注释，而是对函数行为的承诺；标记为 noexcept 的函数若抛出异常，程序会终止。",
+    "swap 不需要逐个复制所有单元格；它可以高效地交换成员值，包括动态数组指针。",
+    "只有成员 swap 而没有适当的非成员 swap 时，标准库算法未必能以期望方式找到该交换操作。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么复制和交换中的 swap 要标记为 noexcept？",
+      "a": "因为交换阶段必须保证不抛出异常，只有这样复制和交换才能在复制成功后安全提交修改。"
+    },
+    {
+      "q": "Spreadsheet 的 swap 需要交换哪些数据成员？",
+      "a": "需要交换 m_width、m_height 和 m_cells。"
+    },
+    {
+      "q": "noexcept 函数如果真的抛出异常会怎样？",
+      "a": "程序将终止。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "函数异常说明",
+    "std::swap",
+    "复制和交换惯用方法"
+  ],
+  "source_pages": [
+    266,
+    267
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "561_使用_noexcept_实现不抛异常的交换",
+  "_chunk_pages": [
+    265,
+    268
+  ]
+}

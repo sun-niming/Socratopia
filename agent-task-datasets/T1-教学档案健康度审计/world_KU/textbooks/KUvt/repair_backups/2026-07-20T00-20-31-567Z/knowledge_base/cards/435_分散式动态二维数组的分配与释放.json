@@ -1,0 +1,46 @@
+{
+  "title": "分散式动态二维数组的分配与释放",
+  "definition": "采用 `char**` 的动态二维数组通常需要两步分配：先分配保存行指针的第一层数组，再为每个行指针分配一个字符子数组。释放时必须按相反层级逐行释放子数组，最后释放第一层指针数组；数组版 `delete[]` 不会自动释放这些子数组。",
+  "key_points": [
+    "分配第一层指针数组：`char** myArray { new char*[xDimension] };`。",
+    "对每个第一维下标 `i` 分配子数组：`myArray[i] = new char[yDimension];`。",
+    "释放时先执行 `delete[] myArray[i];`，再执行 `delete[] myArray;`。",
+    "释放后可以将相应指针设为 `nullptr`，以避免继续使用已释放地址。",
+    "分配和释放的循环范围必须覆盖所有已分配的子数组。"
+  ],
+  "examples": [
+    "分配逻辑：\n```text\nchar** allocateCharacterBoard(size_t xDimension, size_t yDimension) {\n    char** myArray { new char*[xDimension] };\n    for (size_t i { 0 }; i < xDimension; i++) {\n        myArray[i] = new char[yDimension];\n    }\n    return myArray;\n}\n```",
+    "释放逻辑：\n```text\nvoid releaseCharacterBoard(char** myArray, size_t xDimension) {\n    for (size_t i { 0 }; i < xDimension; i++) {\n        delete[] myArray[i];\n        myArray[i] = nullptr;\n    }\n    delete[] myArray;\n    myArray = nullptr;\n}\n```"
+  ],
+  "misconceptions": [
+    "只执行 `delete[] myArray` 不会自动释放 `myArray[i]` 指向的各个子数组。",
+    "释放子数组时必须使用 `delete[]`，因为子数组是用 `new[]` 分配的。",
+    "释放函数中把形参 `myArray` 设为 `nullptr`，不会自动改变调用者持有的指针；原文仅说明释放后进行置空操作。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "释放 `char**` 动态二维数组的正确顺序是什么？",
+      "a": "先对每个子数组执行 `delete[] myArray[i]`，最后对第一层指针数组执行 `delete[] myArray`。"
+    },
+    {
+      "q": "为什么必须循环释放每个 `myArray[i]`？",
+      "a": "因为每个子数组是独立分配的，`delete[] myArray` 不会自动清理它们。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "动态二维数组的指针层级与错误分配方式",
+    "new[] 与 delete[] 的匹配规则"
+  ],
+  "source_pages": [
+    207,
+    207
+  ],
+  "needs_verification": true,
+  "verify_query": "《C++20高级编程》第207页 allocateCharacterBoard releaseCharacterBoard char** 原文代码",
+  "concept_id": "435_分散式动态二维数组的分配与释放",
+  "_chunk_pages": [
+    205,
+    208
+  ]
+}

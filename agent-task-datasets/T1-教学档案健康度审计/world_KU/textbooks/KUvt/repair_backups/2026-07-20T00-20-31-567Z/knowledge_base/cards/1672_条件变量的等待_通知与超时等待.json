@@ -1,0 +1,50 @@
+{
+  "title": "条件变量的等待、通知与超时等待",
+  "definition": "条件变量提供通知线程和等待线程的方法。`notify_one()` 唤醒一个等待线程，`notify_all()` 唤醒所有等待线程；`wait()` 等待通知，`wait_for()` 最多等待指定的相对时长，`wait_until()` 最多等待到指定的绝对时间点。调用 `wait()` 的线程应先获得对应锁，`wait()` 会以原子方式释放锁并阻塞，唤醒后重新获得锁再返回。",
+  "key_points": [
+    "`notify_one()` 类似于唤醒一个等待者。",
+    "`notify_all()` 唤醒等待该条件变量的所有线程。",
+    "`wait_for()` 可能因通知或相对超时时间到达而返回。",
+    "`wait_until()` 可能因通知或系统时间超过指定绝对时间而返回。",
+    "等待线程返回后，仍应检查谓词或共享状态。"
+  ],
+  "examples": [
+    "带谓词的等待可等价改写为：\n$$\n\\texttt{while (!predicate())}\\n\\quad\\texttt{wait(lk);}\n$$",
+    "代码形式：\n```cpp\nm_condVar.wait(lock, [this] { return !m_queue.empty(); });\n```"
+  ],
+  "misconceptions": [
+    "wait 返回不一定表示业务条件已经满足，因为可能发生虚假唤醒或其他线程先消耗了共享资源。",
+    "调用 wait 前不应忽略锁的要求；教材要求调用线程已经获得传入的锁。",
+    "wait_for 和 wait_until 的超时返回不表示一定收到通知。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "notify_one() 和 notify_all() 的区别是什么？",
+      "a": "notify_one() 唤醒一个等待线程，notify_all() 唤醒所有等待该条件变量的线程。"
+    },
+    {
+      "q": "wait_for() 与 wait_until() 的区别是什么？",
+      "a": "wait_for() 使用相对时间长度等待；wait_until() 使用绝对时间点等待。"
+    },
+    {
+      "q": "为什么推荐使用带谓词的 wait()？",
+      "a": "因为线程可能虚假唤醒，带谓词的 wait() 会反复检查条件，只有谓词为真时才继续执行。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "条件变量的基本概念",
+    "互斥锁与 RAII 锁"
+  ],
+  "source_pages": [
+    814,
+    815
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1672_条件变量的等待_通知与超时等待",
+  "_chunk_pages": [
+    813,
+    816
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "title": "[[maybe_unused]]属性",
+  "definition": "`[[maybe_unused]]` 用于标记可能不会被使用的实体，例如函数参数或类型别名，以抑制编译器针对未使用实体发出的警告。",
+  "key_points": [
+    "原文函数中，未使用的 `param1` 和 `param2` 会触发 Visual C++ 的 C4100 警告。",
+    "将参数声明为 `[[maybe_unused]] int param2` 后，可以抑制对 `param2` 未被引用的警告。",
+    "原文还展示了 `[[maybe_unused]] typedef`，说明该属性也可用于类型别名声明。"
+  ],
+  "examples": [
+    "`int func(int param1, [[maybe_unused]] int param2) { return 42; }`",
+    "`[[maybe_unused]] typedef ...;`"
+  ],
+  "misconceptions": [
+    "`[[maybe_unused]]` 不会自动使用变量，也不会改变变量的值或生命周期。",
+    "该属性的主要作用是抑制未使用警告，而不是表示变量一定会被使用。",
+    "如果其他参数仍未使用，未给这些参数添加属性时，编译器仍可能继续报告警告。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`[[maybe_unused]]` 的主要作用是什么？",
+      "a": "标记可能未被使用的实体，从而抑制编译器针对未使用实体发出的警告。"
+    },
+    {
+      "q": "如何只抑制 `param2` 的未使用参数警告？",
+      "a": "写成 `int func(int param1, [[maybe_unused]] int param2)`；`param1` 若仍未使用，仍可能产生警告。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++属性语法[[attribute]]",
+    "函数参数"
+  ],
+  "source_pages": [
+    53,
+    56
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "070_maybe_unused_属性",
+  "_chunk_pages": [
+    53,
+    56
+  ]
+}

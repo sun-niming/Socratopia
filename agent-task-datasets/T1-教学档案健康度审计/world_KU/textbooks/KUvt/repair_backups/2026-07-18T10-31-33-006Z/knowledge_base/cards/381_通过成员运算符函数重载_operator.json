@@ -1,0 +1,50 @@
+{
+  "title": "通过成员运算符函数重载 operator+",
+  "definition": "可以把 SpreadsheetCell 的加法操作符重载为成员函数 operator+(const SpreadsheetCell& cell) const，使两个 SpreadsheetCell 对象可以直接使用 + 运算符相加。该成员函数通常返回一个保存两者数值之和的新 SpreadsheetCell。",
+  "key_points": [
+    "成员运算符函数的声明为 SpreadsheetCell operator+(const SpreadsheetCell& cell) const;。",
+    "实现可以复用 add() 的逻辑：return SpreadsheetCell { getValue() + cell.getValue() };。",
+    "表达式 myCell + anotherCell 等价于成员函数调用 myCell.operator+(anotherCell)。",
+    "与显式调用 add() 相比，运算符重载使表达式更接近数学写法。"
+  ],
+  "examples": [
+    "成员运算符函数实现：SpreadsheetCell SpreadsheetCell::operator+(const SpreadsheetCell& cell) const { return SpreadsheetCell { getValue() + cell.getValue() }; }",
+    "运算符写法：SpreadsheetCell aThirdCell { myCell + anotherCell };",
+    "等价的显式成员函数调用：SpreadsheetCell aThirdCell { myCell.operator+(anotherCell) };"
+  ],
+  "misconceptions": [
+    "operator+ 不是特殊关键字，而是用于定义加法运算行为的运算符函数名称。",
+    "myCell + anotherCell 不是自动调用 add()；如果定义的是成员 operator+，它等价于调用 myCell.operator+(anotherCell)。",
+    "重载 operator+ 通常返回新的 SpreadsheetCell，不代表把右操作数直接写入左操作数。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "myCell + anotherCell 在成员运算符重载存在时等价于什么？",
+      "a": "等价于 myCell.operator+(anotherCell)。"
+    },
+    {
+      "q": "SpreadsheetCell 的成员 operator+ 应返回什么？",
+      "a": "应返回一个新的 SpreadsheetCell，其值是当前对象值与参数对象值之和。"
+    },
+    {
+      "q": "成员 operator+ 的参数为什么通常是 const SpreadsheetCell&？",
+      "a": "因为右操作数只需被读取，不应被修改，并且用引用可以避免复制。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++类的成员函数",
+    "运算符重载基础"
+  ],
+  "source_pages": [
+    289,
+    292
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "381_通过成员运算符函数重载_operator",
+  "_chunk_pages": [
+    289,
+    292
+  ]
+}

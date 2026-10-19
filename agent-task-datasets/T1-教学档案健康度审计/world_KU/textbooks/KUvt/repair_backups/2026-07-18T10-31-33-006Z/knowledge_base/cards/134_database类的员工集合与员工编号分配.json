@@ -1,0 +1,59 @@
+{
+  "title": "Database类的员工集合与员工编号分配",
+  "definition": "Database类用于管理多个Employee对象。它内部使用std::vector<Employee>成员m_employees保存员工，并使用m_nextEmployeeNumber记录下一个可分配的员工编号。m_nextEmployeeNumber以FirstEmployeeNumber初始化。Database提供按员工编号查询、按名字和姓氏查询、显示全部员工、显示当前员工和显示曾经员工等接口。",
+  "key_points": [
+    "Database内部容器为std::vector<Employee> m_employees。",
+    "下一个员工编号存储在m_nextEmployeeNumber中。",
+    "m_nextEmployeeNumber的初始值为FirstEmployeeNumber，源码中FirstEmployeeNumber被定义为11000。",
+    "addEmployee接收名字和姓氏，创建Employee对象并自动分配员工编号。",
+    "addEmployee使用m_nextEmployeeNumber++分配当前编号，然后使下一个编号递增。",
+    "addEmployee会自动调用hire()，把新添加的员工设为在职状态，再存入vector并返回所存员工的引用。",
+    "Database还声明了getEmployee(int employeeNumber)、getEmployee(const std::string firstName, const std::string lastName)、displayAll()、displayCurrent()和displayFormer()等函数。"
+  ],
+  "examples": [
+    "编号分配过程可表示为：$$\\text{assignedNumber}=m\\_nextEmployeeNumber;\\quad m\\_nextEmployeeNumber\\mathrel{++}$$",
+    "添加员工的源码逻辑：创建Employee；调用setEmployeeNumber(m_nextEmployeeNumber++)；调用hire()；执行m_employees.push_back(theEmployee)；返回m_employees.back()。",
+    "若初始编号为11000，连续添加两名员工时，按源码逻辑第一名获得11000，下一可用编号变为11001；第二名获得11001。"
+  ],
+  "misconceptions": [
+    "Database不是只保存一名Employee，而是通过std::vector<Employee>保存多个员工。",
+    "addEmployee不仅把员工加入容器，还会自动设置员工编号并调用hire()。",
+    "m_nextEmployeeNumber++表示先使用当前编号，再将下一编号加1。",
+    "源码片段只展示了getEmployee(int employeeNumber)函数的开头，不能据此补写其完整查找和异常处理行为。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "Database使用什么容器保存员工？",
+      "a": "使用std::vector<Employee>成员m_employees。"
+    },
+    {
+      "q": "Database如何生成新的员工编号？",
+      "a": "从m_nextEmployeeNumber取出当前编号分配给员工，然后使用m_nextEmployeeNumber++使下一可用编号递增。"
+    },
+    {
+      "q": "addEmployee添加员工时是否自动雇用员工？",
+      "a": "是。源码在加入vector之前调用了theEmployee.hire()。"
+    },
+    {
+      "q": "源码显示FirstEmployeeNumber的值是多少？",
+      "a": "源码显示其值为11000。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "Employee类的接口与数据成员",
+    "C++标准容器std::vector",
+    "C++引用返回值和后缀递增运算"
+  ],
+  "source_pages": [
+    95,
+    96
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20高级编程第5版 Database.cppm FirstEmployeeNumber 11000 addEmployee m_nextEmployeeNumber getEmployee",
+  "concept_id": "134_database类的员工集合与员工编号分配",
+  "_chunk_pages": [
+    93,
+    96
+  ]
+}

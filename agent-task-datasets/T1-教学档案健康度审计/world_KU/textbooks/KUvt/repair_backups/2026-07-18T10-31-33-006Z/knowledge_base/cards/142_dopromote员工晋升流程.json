@@ -1,0 +1,49 @@
+{
+  "title": "doPromote员工晋升流程",
+  "definition": "原文第100页显示，doPromote() 读取员工编号并调用 Database::getEmployee() 获取员工，然后调用员工对象的 promote()；代码还出现了 raiseAmount 和 std::logic_error 异常捕获，但页面文字存在明显缺损，具体参数和完整控制流程需要核实。",
+  "key_points": [
+    "函数意图是根据员工编号查找员工并执行晋升。",
+    "代码中出现 `int employeeNumber`，并从标准输入读取员工编号。",
+    "代码中出现 `int raiseAmount`，但原文缺损，无法确认其是否被读取以及是否传给 promote()。",
+    "代码中出现 `emp.promote(raiseAmount)` 的片段，但无法仅凭当前 OCR 文本确认 promote() 的准确函数签名。",
+    "代码中出现 `catch (const std::logic_error& exception)`，说明晋升操作可能进行逻辑错误处理，但完整 try 块边界在原文中不可清晰辨认。"
+  ],
+  "examples": [
+    "按页面可辨认内容，流程近似为：\n```cpp\nint employeeNumber;\nstd::cin >> employeeNumber;\nint raiseAmount;\nauto& emp{db.getEmployee(employeeNumber)};\nemp.promote(raiseAmount);\n```\n上述代码中的参数形式和输入流程应以教材清晰原版为准。"
+  ],
+  "misconceptions": [
+    "不能根据当前页面 OCR 断定 promote() 一定无参数；第100页明确出现了 `raiseAmount` 和 `emp.promote(raiseAmount)` 片段。",
+    "不能断定 doPromote() 的异常处理、成功提示和错误提示与 doFire() 完全相同，因为原文在页面边界处缺损。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "doPromote() 的基本业务目标是什么？",
+      "a": "根据员工编号找到员工，并执行晋升操作。"
+    },
+    {
+      "q": "第100页中与晋升金额相关的变量名是什么？",
+      "a": "raiseAmount。"
+    },
+    {
+      "q": "能否仅依据给出的缺损文本确定 promote() 的完整函数签名？",
+      "a": "不能；文本中出现了 `emp.promote(raiseAmount)`，但页面缺损，需核实清晰原文。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "员工晋升操作",
+    "C++异常处理",
+    "函数参数"
+  ],
+  "source_pages": [
+    97,
+    100
+  ],
+  "needs_verification": true,
+  "verify_query": "\"C++20高级编程\" \"raiseAmount\" \"doPromote\" \"promote(raiseAmount)\"",
+  "concept_id": "142_dopromote员工晋升流程",
+  "_chunk_pages": [
+    97,
+    100
+  ]
+}

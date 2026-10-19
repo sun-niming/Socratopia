@@ -1,0 +1,37 @@
+{
+  "title": "CSS自定义属性与 var()",
+  "definition": "自定义属性也称 CSS 变量或级联变量，是由 CSS 作者定义的值，可在整个文档中重复使用；使用 var() 函数来获取这个值。",
+  "key_points": [
+    "自定义属性由 CSS 作者定义。",
+    "它的值可以在整个文档中重复使用。",
+    "用 var() 函数获取自定义属性的值。"
+  ],
+  "examples": [
+    "由自定义属性标记设定值，再用 var() 函数取值"
+  ],
+  "misconceptions": [
+    "CSS 变量不是 JavaScript 变量。",
+    "自定义属性的作用不只是局部使用，教材强调它可以在整个文档中重复使用。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "CSS 自定义属性的作用是什么？",
+      "a": "它由 CSS 作者定义，值可在整个文档中重复使用，并可通过 var() 获取。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "CSS基础"
+  ],
+  "source_pages": [
+    109,
+    112
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "144_css自定义属性与_var",
+  "_chunk_pages": [
+    109,
+    112
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "title": "Hello World程序展示的基本概念",
+  "definition": "Hello World 程序是一个极简的 C++ 程序示例。它虽然功能简单，但可以展示 C++ 程序格式中的注释、模块导入、main 函数以及输入输出流等基本概念。该程序的预期效果是在屏幕上输出“Hello, World!”。",
+  "key_points": [
+    "Hello World 程序用于展示 C++ 程序的基本结构，而不仅仅是输出一行文字。",
+    "程序涉及注释、模块导入、main 函数和输入输出流。",
+    "若编译器不支持 C++20 模块，可以使用包含头文件的方式替代模块导入。"
+  ],
+  "examples": [
+    "程序的预期输出为：`Hello, World!`。",
+    "与输入输出相关的导入语句示例为：`import <iostream>;`。"
+  ],
+  "misconceptions": [
+    "误以为 Hello World 程序只说明如何输出文字，而不涉及程序格式。",
+    "误以为所有编译器都支持文中的 C++20 模块写法。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "Hello World 程序在本章中用来展示哪些内容？",
+      "a": "展示注释、模块导入、main 函数和输入输出流等 C++ 程序格式的基本概念。"
+    },
+    {
+      "q": "Hello World 程序的预期输出是什么？",
+      "a": "`Hello, World!`。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [],
+  "source_pages": [
+    35,
+    35
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 Hello World import <iostream> main 输出 Hello World 标准语法 编译器支持",
+  "concept_id": "036_hello_world程序展示的基本概念",
+  "_chunk_pages": [
+    33,
+    36
+  ]
+}

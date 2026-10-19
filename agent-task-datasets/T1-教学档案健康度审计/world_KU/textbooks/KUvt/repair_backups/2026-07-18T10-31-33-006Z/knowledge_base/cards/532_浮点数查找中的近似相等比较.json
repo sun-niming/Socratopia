@@ -1,0 +1,52 @@
+{
+  "title": "浮点数查找中的近似相等比较",
+  "definition": "对浮点数进行查找时，直接使用 `==` 比较可能不适合作为通用的相等判断。教材给出的重载将 `Find` 限制为浮点类型，并在比较数组元素与目标值时调用 `AreEqual(arr[i], value)`，而不是直接使用 `arr[i] == value`。`AreEqual` 还接受默认值为 2 的 `precision` 参数，用于控制比较精度；原文未完整给出其实现。",
+  "key_points": [
+    "通用版本的 `Find` 使用 `if (arr[i] == value)` 进行精确比较。",
+    "浮点版本写成 `template <std::floating_point T> size_t Find(const T& value, const T* arr, size_t size)`。",
+    "浮点版本使用 `AreEqual(arr[i], value)` 判断数组元素是否与目标值近似相等。",
+    "原文显示 `AreEqual` 的声明为 `template <std::floating_point T> bool AreEqual(T x, T y, int precision = 2)`；其完整比较公式在给定摘录中不完整。"
+  ],
+  "examples": [
+    "通用精确比较的核心逻辑：`if (arr[i] == value) { ... }`。",
+    "浮点专用查找的核心逻辑：`if (AreEqual(arr[i], value)) { ... }`。",
+    "浮点查找模板：`template <std::floating_point T> size_t Find(const T& value, const T* arr, size_t size);`",
+    "近似比较函数声明：`template <std::floating_point T> bool AreEqual(T x, T y, int precision = 2);`"
+  ],
+  "misconceptions": [
+    "浮点类型的 `Find` 不是简单把通用版本中的 `==` 换成另一种语法，而是调用专门的近似比较函数 `AreEqual`。",
+    "`precision = 2` 是教材中显示的默认参数，不应据此臆断其确切数学含义；必须结合 `AreEqual` 的完整实现确认。",
+    "`std::floating_point` 约束只允许浮点类型参与该重载，不表示所有数值类型都能调用它。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "浮点版本的 `Find` 为什么调用 `AreEqual`，而不是直接使用 `==`？",
+      "a": "教材将浮点查找设计为使用 `AreEqual(arr[i], value)` 进行近似相等判断，以避免把浮点值只按完全相等进行比较。"
+    },
+    {
+      "q": "教材给出的 `AreEqual` 函数默认精度参数是多少？",
+      "a": "声明中显示默认参数为 `precision = 2`。"
+    },
+    {
+      "q": "浮点版本的 `Find` 对模板参数有什么限制？",
+      "a": "它使用 `template <std::floating_point T>`，因此模板参数 `T` 必须满足 `std::floating_point` 概念。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "函数模板",
+    "浮点数类型",
+    "C++20 标准库概念"
+  ],
+  "source_pages": [
+    407,
+    407
+  ],
+  "needs_verification": true,
+  "verify_query": "Marc Gregoire C++20 Advanced Programming 5th edition AreEqual floating_point Find precision 2 implementation",
+  "concept_id": "532_浮点数查找中的近似相等比较",
+  "_chunk_pages": [
+    405,
+    408
+  ]
+}

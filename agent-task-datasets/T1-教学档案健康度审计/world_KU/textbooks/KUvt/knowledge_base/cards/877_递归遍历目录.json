@@ -1,0 +1,57 @@
+{
+  "title": "递归遍历目录",
+  "definition": "如果要递归遍历指定目录中的所有文件和子目录，可以使用 recursive_directory_iterator。构造起始迭代器时传入要遍历的目录路径；构造结束迭代器时使用默认构造的 recursive_directory_iterator。迭代器引用的目录条目可以通过解引用操作符 * 访问。",
+  "key_points": [
+    "recursive_directory_iterator 用于递归访问目录及其子目录。",
+    "起始迭代器需要用待遍历目录的路径构造。",
+    "结束迭代器可以使用默认构造的 recursive_directory_iterator。",
+    "可以通过解引用操作符 * 访问当前迭代器所引用的 directory_entry。",
+    "遍历时需要使用结束迭代器判断何时停止。"
+  ],
+  "examples": [
+    "recursive_directory_iterator begin{\"data\"};",
+    "recursive_directory_iterator end{};",
+    "for (auto it = begin; it != end; ++it) {",
+    "    const directory_entry& entry = *it;",
+    "}"
+  ],
+  "misconceptions": [
+    "普通目录遍历和递归目录遍历不是同一概念；recursive_directory_iterator 会继续进入子目录。",
+    "构造起始迭代器时必须指定要遍历的目录路径。",
+    "迭代器本身不是 directory_entry，访问当前条目通常需要解引用。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "哪个迭代器用于递归遍历目录中的文件和子目录？",
+      "a": "recursive_directory_iterator。"
+    },
+    {
+      "q": "如何构造 recursive_directory_iterator 的起始迭代器？",
+      "a": "用要遍历的目录路径作为构造参数。"
+    },
+    {
+      "q": "如何构造结束迭代器？",
+      "a": "默认构造一个 recursive_directory_iterator。"
+    },
+    {
+      "q": "如何访问迭代器当前引用的 directory_entry？",
+      "a": "使用解引用操作符 *。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "目录与 directory_entry",
+    "C++ 迭代器和解引用操作"
+  ],
+  "source_pages": [
+    432,
+    432
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "877_递归遍历目录",
+  "_chunk_pages": [
+    429,
+    432
+  ]
+}

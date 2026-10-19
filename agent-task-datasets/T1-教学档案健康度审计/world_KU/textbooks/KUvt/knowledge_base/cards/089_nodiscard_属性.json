@@ -1,0 +1,49 @@
+{
+  "title": "[[nodiscard]] 属性",
+  "definition": "[[nodiscard]] 属性用于标记有返回值的函数、类或枚举，提示编译器：调用或使用该实体产生的结果不应被忽略。对于被标记函数，如果调用者没有处理返回值，编译器可以发出警告。C++20 还允许在 [[nodiscard]] 后提供字符串形式的原因说明。",
+  "key_points": [
+    "对返回错误代码的函数使用 [[nodiscard]]，可以提醒调用者不要忽略错误代码。",
+    "调用带有 [[nodiscard]] 属性的函数却丢弃返回值时，编译器通常会发出警告。",
+    "从 C++20 开始，可以写成 [[nodiscard(\"原因说明\")]]。",
+    "原文说明该属性还可用于类和枚举。"
+  ],
+  "examples": [
+    "[[nodiscard]] int func() { return 42; }",
+    "int main() { func(); }",
+    "C++20 写法：[[nodiscard(\"Some explanation\")]] int func();"
+  ],
+  "misconceptions": [
+    "[[nodiscard]] 不是强制所有编译器都以编译错误拒绝代码；原文主要说明编译器会发出警告。",
+    "该属性不会阻止函数被调用，它主要用于提醒返回值不应被忽略。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "调用 [[nodiscard]] int func() 但不使用返回值，可能发生什么？",
+      "a": "编译器可能发出丢弃返回值的警告。"
+    },
+    {
+      "q": "[[nodiscard]] 特别适合标记哪类函数？",
+      "a": "适合标记返回错误代码或其他不应被忽略结果的函数。"
+    },
+    {
+      "q": "C++20 如何为 [[nodiscard]] 添加原因说明？",
+      "a": "使用 [[nodiscard(\"原因说明\")]] 的形式。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++ 属性的标准化语法",
+    "函数返回值"
+  ],
+  "source_pages": [
+    55,
+    55
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "089_nodiscard_属性",
+  "_chunk_pages": [
+    53,
+    56
+  ]
+}

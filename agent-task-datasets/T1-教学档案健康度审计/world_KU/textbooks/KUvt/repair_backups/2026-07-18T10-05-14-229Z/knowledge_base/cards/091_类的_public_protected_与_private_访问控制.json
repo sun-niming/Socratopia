@@ -1,0 +1,44 @@
+{
+  "title": "类的 public、protected 与 private 访问控制",
+  "definition": "C++ 类可以通过访问说明符控制成员的可访问范围。public 成员可由类的外部代码访问；private 成员只能由类自身的成员函数和相关特权代码访问；protected 成员可由类自身及派生类访问。原文强调通常将数据成员放在 private 中，并通过 public 的 getter 和 setter 函数提供访问或修改接口。",
+  "key_points": [
+    "public 部分用于声明外部代码可以调用的构造函数和成员函数。",
+    "private 部分用于隐藏类的内部数据，例如乘客姓名、里程和会员状态。",
+    "getter 通常用于读取私有数据，setter 通常用于修改私有数据；原文以 getPassengerName/setPassengerName 等函数为例。",
+    "原文提到 protected，但给出的 AirlineTicket 类成员主要放在 public 和 private 区域。"
+  ],
+  "examples": [
+    "class AirlineTicket { public: AirlineTicket(); double calculatePriceInDollars(); std::string getPassengerName(); void setPassengerName(std::string name); private: std::string m_passengerName; int m_numberOfMiles; bool m_hasEliteSuperRewardsStatus; };"
+  ],
+  "misconceptions": [
+    "private 数据成员不能因为对象存在就被类外代码直接访问；通常需要通过 public 成员函数间接访问。",
+    "getter 和 setter 不是 C++ 的特殊关键字，而是用于读取和设置数据的普通成员函数命名方式。",
+    "protected 并不等同于 public；普通类外部代码不能像访问 public 成员一样直接访问 protected 成员。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么把 AirlineTicket 的数据成员放在 private 区域？",
+      "a": "为了隐藏类的内部状态，避免类外代码直接访问，并通过 public 的成员函数提供受控的读取和修改方式。"
+    },
+    {
+      "q": "getPassengerName 和 setPassengerName 分别起什么作用？",
+      "a": "getPassengerName 用于获取乘客姓名，setPassengerName 用于设置或修改乘客姓名。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++类与对象",
+    "成员函数"
+  ],
+  "source_pages": [
+    61,
+    64
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "091_类的_public_protected_与_private_访问控制",
+  "_chunk_pages": [
+    61,
+    64
+  ]
+}

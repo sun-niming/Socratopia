@@ -1,0 +1,48 @@
+{
+  "title": "构造函数与析构函数",
+  "definition": "构造函数是与类同名且没有返回类型的方法，在创建类对象时自动调用；析构函数是在类名前加波浪号 `~`、且没有返回类型的方法，在对象销毁时自动调用。",
+  "key_points": [
+    "构造函数名称与类名相同，例如类 `AirlineTicket` 的构造函数名为 `AirlineTicket`。",
+    "构造函数没有返回类型，包括不能写 `void`。",
+    "析构函数名称形如 `~AirlineTicket()`，对象销毁时自动调用。",
+    "构造函数可使用构造函数初始化器，在构造函数名称后加冒号，直接初始化数据成员。"
+  ],
+  "examples": [
+    "构造函数初始化器的形式：`AirlineTicket::AirlineTicket() : m_passengerName { \"Unknown Passenger\" }, m_numberOfMiles { 0 }, m_hasEliteSuperRewardsStatus { false } { }`。",
+    "创建 `AirlineTicket` 对象时会自动调用其构造函数；对象销毁时会自动调用析构函数。"
+  ],
+  "misconceptions": [
+    "构造函数不是普通返回对象的函数，不能声明返回类型。",
+    "析构函数不是通过普通函数调用语法来代替对象销毁的；它会在对象销毁时自动调用。",
+    "构造函数初始化器位于构造函数参数列表之后、函数体之前，并以冒号开头。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "什么是构造函数？",
+      "a": "构造函数是与类同名且没有返回类型的方法，在创建类对象时自动调用。"
+    },
+    {
+      "q": "什么是析构函数？",
+      "a": "析构函数是名称以 `~` 加类名组成、没有返回类型的方法，在对象销毁时自动调用。"
+    },
+    {
+      "q": "构造函数初始化器写在哪里？",
+      "a": "写在构造函数名称和参数列表之后、函数体之前，以冒号开头。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++ 类的成员与访问控制"
+  ],
+  "source_pages": [
+    64,
+    64
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 构造函数初始化器列表语法 AirlineTicket m_passengerName m_numberOfMiles m_hasEliteSuperRewardsStatus Marc Gregoire C++20高级编程 第5版",
+  "concept_id": "113_构造函数与析构函数",
+  "_chunk_pages": [
+    61,
+    64
+  ]
+}

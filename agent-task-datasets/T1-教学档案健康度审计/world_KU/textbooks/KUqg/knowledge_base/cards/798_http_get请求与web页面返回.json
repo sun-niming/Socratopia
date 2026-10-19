@@ -1,0 +1,46 @@
+{
+  "title": "HTTP GET请求与Web页面返回",
+  "definition": "TCP连接建立后，浏览器生成包含待获取URL的HTTP GET报文，并把它写入TCP套接字。GET报文成为TCP报文段的载荷，随后经IP和链路层封装交付给Web服务器。服务器从TCP套接字读取GET报文，生成HTTP响应，将请求的Web页面内容放入响应体并通过TCP返回。客户端浏览器从套接字读取响应，抽取响应体中的HTML并显示页面。",
+  "key_points": [
+    "HTTP报文作为TCP所传输的应用层数据。",
+    "HTTP GET报文包含要获取的URL。",
+    "服务器将请求的Web页面内容放入HTTP响应体。",
+    "浏览器从HTTP响应体中抽取HTML并显示Web页面。"
+  ],
+  "examples": [
+    "封装关系可表示为：HTTP GET报文→TCP报文段载荷→IP数据报→链路层帧。",
+    "HTTP响应经谷歌网络、Comcast网络和学校网络返回Bob便携机。"
+  ],
+  "misconceptions": [
+    "误以为HTTP GET直接作为独立的以太网帧发送；它先成为TCP报文段的载荷，再经过IP和链路层封装。",
+    "误以为TCP负责生成或解释HTML；TCP负责可靠传送字节，HTTP服务器和浏览器分别生成、解析HTTP内容。",
+    "误以为收到DNS回答就等于已经取得Web页面；DNS只提供服务器IP地址，之后还需建立TCP连接并完成HTTP交互。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "HTTP GET报文在TCP传输中扮演什么角色？",
+      "a": "它作为TCP报文段的载荷，经TCP连接发送给Web服务器。"
+    },
+    {
+      "q": "浏览器最终从HTTP响应的哪个部分取得网页HTML？",
+      "a": "从HTTP响应体中取得。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "TCP三次握手建立Web连接",
+    "HTTP请求与响应",
+    "协议封装"
+  ],
+  "source_pages": [
+    345,
+    348
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "798_http_get请求与web页面返回",
+  "_chunk_pages": [
+    345,
+    348
+  ]
+}

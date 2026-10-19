@@ -1,0 +1,37 @@
+{
+  "title": "class选择器",
+  "definition": "class选择器是通过元素的class属性值来选择元素的选择器，写法为.类名。多个位置需要相同样式时常用类选择器。",
+  "key_points": [
+    "格式是.类名{...}",
+    "可用于多个元素共享同一种样式"
+  ],
+  "examples": [
+    "<p class=\"intro\">测试1</p>\n<p class=\"intro\">测试2</p>\n.intro{ font-weight:bold; }"
+  ],
+  "misconceptions": [
+    "class选择器前缀是.，不是#",
+    "多个元素共用样式时不一定要复制相同CSS，类选择器更合适"
+  ],
+  "qa_pairs": [
+    {
+      "q": "什么时候常用class选择器？",
+      "a": "当多个地方需要使用同种样式时。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "CSS选择器",
+    "HTML元素"
+  ],
+  "source_pages": [
+    89,
+    92
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "116_class选择器",
+  "_chunk_pages": [
+    89,
+    92
+  ]
+}

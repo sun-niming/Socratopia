@@ -1,0 +1,44 @@
+{
+  "title": "表格的作用与基本标记",
+  "definition": "HTML表格的主要作用是显示格式化数据。网页中的表格由<table>标记定义，表格按行组织，每一行用<tr>表示，行内再分成单元格，单元格用<td>或<th>表示。因此<table>、<tr>、<td>/<th>是表格最基本的标记。",
+  "key_points": [
+    "表格的主要用途是显示格式化数据。",
+    "表格可以固定文本或图像的显示位置。",
+    "表格还可以使用多重表格，并设置前景色和背景色。",
+    "表格的基本结构是：table定义表格，tr定义行，td/th定义单元格。"
+  ],
+  "examples": [
+    "<table>\n  <tr>\n    <td>A</td>\n    <td>B</td>\n  </tr>\n</table>",
+    "<table>\n  <tr>\n    <th>姓名</th>\n    <th>年龄</th>\n  </tr>\n</table>"
+  ],
+  "misconceptions": [
+    "认为表格只能用来排版，不能用于显示数据。",
+    "认为表格不是按行组织，而是直接由单元格随意组成。",
+    "认为<td>和<th>不是单元格标记。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "HTML表格的主要作用是什么？",
+      "a": "显示格式化数据。"
+    },
+    {
+      "q": "定义表格、行和单元格的基本标记分别是什么？",
+      "a": "<table>定义表格，<tr>定义行，<td>或<th>定义单元格。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "HTML基础"
+  ],
+  "source_pages": [
+    61,
+    64
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "095_表格的作用与基本标记",
+  "_chunk_pages": [
+    61,
+    64
+  ]
+}

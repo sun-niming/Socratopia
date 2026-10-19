@@ -1,0 +1,43 @@
+{
+  "title": "在自定义异常中保存 source_location",
+  "definition": "可以在自定义异常类中保存抛出异常时的 std::source_location。异常类的构造函数将 source_location::current() 作为默认参数，这样创建异常对象时会自动记录创建该异常的位置；异常对象再通过 where() 等成员函数向捕获者提供该位置。",
+  "key_points": [
+    "自定义异常可以同时保存错误消息和 std::source_location。",
+    "构造函数可声明为 source_location location = source_location::current()，从而自动记录异常创建位置。",
+    "where() 可以返回保存的 source_location，调用者可进一步读取 line()、file_name() 和 function_name()。",
+    "异常的 what() 函数通常返回保存的错误消息。"
+  ],
+  "examples": [
+    "代码结构示例：\nclass MyException : public std::exception {\npublic:\n    MyException(std::string message,\n                std::source_location location = std::source_location::current())\n        : m_message{std::move(message)}, m_location{std::move(location)} {}\n\n    const char* what() const noexcept override {\n        return m_message.c_str();\n    }\n\n    const std::source_location& where() const noexcept {\n        return m_location;\n    }\n\nprivate:\n    std::string m_message;\n    std::source_location m_location;\n};\n\n捕获异常后可以使用 e.where().line() 获取异常位置的行号。"
+  ],
+  "misconceptions": [
+    "错误理解：where() 返回的是异常被 catch 的位置。实际返回的是构造该异常对象时保存的 source_location。",
+    "错误理解：source_location 会自动修改异常的 what() 文本。实际需要由程序显式读取位置信息并格式化输出。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何让自定义异常自动保存创建位置？",
+      "a": "让异常构造函数接收一个 std::source_location 参数，并将 std::source_location::current() 设为默认值，然后把该参数保存为成员变量。"
+    },
+    {
+      "q": "捕获 MyException 后如何读取保存的源代码位置？",
+      "a": "调用 e.where() 获取 source_location，再调用其 line()、file_name() 或 function_name() 等成员函数读取具体信息。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++异常类",
+    "C++20 source_location"
+  ],
+  "source_pages": [
+    453,
+    454
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "920_在自定义异常中保存_source_location",
+  "_chunk_pages": [
+    453,
+    456
+  ]
+}

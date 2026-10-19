@@ -1,0 +1,44 @@
+{
+  "title": "测试 ObjectPool 获取有效对象",
+  "definition": "ObjectPool 的获取测试用于验证对象池能够提供所需类型的对象。测试先创建 `ObjectPool<Serial>`，再调用 `acquireObject()` 获取对象，并通过 Serial 的序列号验证返回对象有效且序列号不小于 0。",
+  "key_points": [
+    "对象池通过模板参数指定所管理的对象类型，例如 `ObjectPool<Serial>`。",
+    "`acquireObject()` 用于从对象池获取对象。",
+    "测试使用返回对象的 `getSerialNumber()` 检查获取结果。",
+    "教材示例的断言条件是：$$\\text{serial->getSerialNumber()} \\ge 0$$"
+  ],
+  "examples": [
+    "`ObjectPool<Serial> myPool;`；`auto serial{myPool.acquireObject()};`；`Assert::IsTrue(serial->getSerialNumber() >= 0);`"
+  ],
+  "misconceptions": [
+    "该测试主要验证对象能够被获取且具有有效的 Serial 序列号，并不单独证明对象池已经满足所有复用或独占性要求。",
+    "`acquireObject()` 返回的是对象池提供的对象句柄；示例通过 `serial->` 访问对象成员。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "testAcquire 测试的主要行为是什么？",
+      "a": "创建 `ObjectPool<Serial>`，调用 `acquireObject()` 获取对象，并断言其序列号大于或等于 0。"
+    },
+    {
+      "q": "testAcquire 中的核心断言是什么？",
+      "a": "`Assert::IsTrue(serial->getSerialNumber() >= 0);`。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "Serial 测试辅助类的唯一序列号",
+    "C++模板类",
+    "智能指针基本用法"
+  ],
+  "source_pages": [
+    887,
+    887
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1837_测试_objectpool_获取有效对象",
+  "_chunk_pages": [
+    885,
+    888
+  ]
+}

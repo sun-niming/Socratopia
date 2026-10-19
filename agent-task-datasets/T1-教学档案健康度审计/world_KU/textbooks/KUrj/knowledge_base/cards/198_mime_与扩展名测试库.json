@@ -1,0 +1,53 @@
+{
+  "title": "MIME 与扩展名测试库",
+  "definition": "原文给出一组按扩展名检查响应 `Content-Type` 的测试用例。服务器应根据文件扩展名返回相应 MIME 类型，并可用 `curl -i` 查看响应头中的 `Content-Type` 是否符合预期。",
+  "key_points": [
+    "`.html` 和 `.htm` 都应返回 `text/html; charset=utf-8`。",
+    "`.css` 应返回 `text/css; charset=utf-8`。",
+    "`.js` 应返回 `application/javascript; charset=utf-8`。",
+    "测试方法示例：`curl -i http://127.0.0.1:8080/test.html | head -n 10`。",
+    "检查重点是响应头里的 `Content-Type`，而不是只看正文内容。"
+  ],
+  "examples": [
+    "`.html` → `text/html; charset=utf-8`",
+    "`.htm` → `text/html; charset=utf-8`",
+    "`.css` → `text/css; charset=utf-8`",
+    "`.js` → `application/javascript; charset=utf-8`",
+    "`curl -i http://127.0.0.1:8080/test.css | head -n 10`"
+  ],
+  "misconceptions": [
+    "以为 `.htm` 和 `.html` 需要不同的 MIME 类型。",
+    "只看 `curl` 输出正文，不检查响应头。",
+    "以为扩展名和 MIME 类型无关。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`.html` 文件在原文中应该返回什么 MIME 类型？",
+      "a": "`text/html; charset=utf-8`。"
+    },
+    {
+      "q": "如何快速检查服务器对某个扩展名的 MIME 返回是否正确？",
+      "a": "使用 `curl -i URL | head -n 10`，查看响应头中的 `Content-Type`。"
+    },
+    {
+      "q": "`.js` 文件应返回什么 MIME 类型？",
+      "a": "`application/javascript; charset=utf-8`。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "HTTP 响应基础",
+    "Content-Type"
+  ],
+  "source_pages": [
+    117,
+    120
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "198_mime_与扩展名测试库",
+  "_chunk_pages": [
+    117,
+    120
+  ]
+}

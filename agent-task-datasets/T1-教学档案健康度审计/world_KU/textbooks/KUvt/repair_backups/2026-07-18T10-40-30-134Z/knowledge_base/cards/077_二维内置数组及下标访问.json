@@ -1,0 +1,44 @@
+{
+  "title": "二维内置数组及下标访问",
+  "definition": "二维内置数组可以理解为由多个一维数组组成的表格。声明`char ticTacToeBoard[3][3];`会创建3行3列的字符数组，访问元素时使用两个下标，前一个下标表示行，后一个下标表示列。",
+  "key_points": [
+    "`ticTacToeBoard[行][列]`用于访问二维数组中的单个元素。",
+    "`ticTacToeBoard[1][1] = 'o';`把第2行第2列的元素设置为字符`'o'`，因为C++数组下标从0开始。",
+    "`char ticTacToeBoard[3][3]`的行列下标范围都是0到2。"
+  ],
+  "examples": [
+    "声明：`char ticTacToeBoard[3][3];`",
+    "赋值：`ticTacToeBoard[1][1] = 'o';`",
+    "二维布局可表示为$$\\begin{bmatrix} [0][0] & [0][1] & [0][2] \\\\ [1][0] & [1][1] & [1][2] \\\\ [2][0] & [2][1] & [2][2] \\end{bmatrix}$$"
+  ],
+  "misconceptions": [
+    "`ticTacToeBoard[1][1]`不是第1行第1列，而是从0计数后的第2行第2列。",
+    "二维数组的两个下标不能颠倒；第一个表示行，第二个表示列。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`ticTacToeBoard[1][1] = 'o';`修改的是哪个位置？",
+      "a": "修改第2行第2列的位置，因为数组下标从0开始。"
+    },
+    {
+      "q": "`char ticTacToeBoard[3][3]`有多少个元素？",
+      "a": "共有$3\\times3=9$个字符元素。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++数组下标",
+    "字符类型"
+  ],
+  "source_pages": [
+    57,
+    60
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "077_二维内置数组及下标访问",
+  "_chunk_pages": [
+    57,
+    60
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "title": "std::string_view 字面量 sv",
+  "definition": "C++ 提供标准用户定义字面量 `sv`，可以把字符串字面量直接解释为 `std::string_view`。使用该字面量前，需要引入相应的命名空间，例如 `std::string_view_literals`、`std::literals` 或 `std`。",
+  "key_points": [
+    "字符串字面量后缀 `sv` 可生成 `std::string_view`，例如 `\"My string\"sv`。",
+    "可以使用 `using namespace std::string_view_literals;`。",
+    "教材还列出 `using namespace std::literals;` 或 `using namespace std;` 作为可用的引入方式。"
+  ],
+  "examples": [
+    "`using namespace std::string_view_literals;`",
+    "`auto sv = \"My string\"sv;`"
+  ],
+  "misconceptions": [
+    "后缀 `sv` 不是普通字符串内容的一部分，而是用户定义字面量后缀。",
+    "使用 `sv` 不会让视图拥有独立的字符串副本；仍需注意视图的生命周期规则。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何把字符串字面量写成 `std::string_view`？",
+      "a": "在字面量后使用 `sv`，例如 `\"My string\"sv`，并引入 `std::string_view_literals` 等相应命名空间。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "std::string_view 的用途与特性"
+  ],
+  "source_pages": [
+    114,
+    115
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 std::string_view_literals operator\"\"sv using namespace 标准文档",
+  "concept_id": "219_std_string_view_字面量_sv",
+  "_chunk_pages": [
+    113,
+    116
+  ]
+}

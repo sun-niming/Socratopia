@@ -1,0 +1,53 @@
+{
+  "title": "std::packaged_task 自动关联任务与 future",
+  "definition": "std::packaged_task 是对可调用对象的封装，它会自动创建并管理与任务关联的 promise：调用任务后，函数的返回值会自动存入关联的共享状态，函数抛出的异常也会自动存入该状态。通过 packaged_task::get_future() 可以取得对应的 std::future，再把 packaged_task 移入线程执行。",
+  "key_points": [
+    "packaged_task 的模板参数描述可调用对象的函数类型，例如 std::packaged_task<int(int, int)>。",
+    "get_future() 用于取得任务结果对应的 future。",
+    "packaged_task 不能复制，但可以移动，因此通常移动到新线程中执行。",
+    "执行 packaged_task 时，函数返回值会自动成为 future 的结果，不需要显式调用 promise.set_value()。",
+    "函数抛出的异常会自动存入关联状态，并可通过 future.get() 传递给获取结果的线程。",
+    "future.get() 在任务结果可用前会阻塞。"
+  ],
+  "examples": [
+    "示意流程：packaged_task<int(int, int)> task{calculateSum}; auto theFuture{task.get_future()}; thread theThread{move(task), 39, 3}; int result{theFuture.get()};",
+    "若 calculateSum(int a, int b) 返回 a + b，则使用参数 39 和 3 执行任务后，theFuture.get() 得到 42。"
+  ],
+  "misconceptions": [
+    "packaged_task 不是只保存函数的普通对象；它还自动连接了结果状态和 future。",
+    "使用 packaged_task 时不需要显式创建 promise 或手动调用 set_value()。",
+    "packaged_task 不能复制，传入线程时应移动。",
+    "调用 get_future() 只是取得结果访问端；真正执行任务仍需调用 packaged_task 或在线程中运行它。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "std::packaged_task 相比显式使用 std::promise 有什么便利？",
+      "a": "它自动创建 promise，并自动把可调用对象的返回值或异常存入关联状态，不需要手动调用 set_value() 或 set_exception()。"
+    },
+    {
+      "q": "如何从 packaged_task 获取结果？",
+      "a": "先调用 task.get_future() 获取 future，再执行或在线程中移动执行 task，最后调用 future.get() 获取结果。"
+    },
+    {
+      "q": "为什么示例中要把 task 移入线程？",
+      "a": "packaged_task 不能复制，只能移动；将其移动到线程中可以让该线程执行任务。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "std::promise 与 std::future 配对传递结果",
+    "C++移动语义",
+    "可调用对象与线程"
+  ],
+  "source_pages": [
+    819,
+    820
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1681_std_packaged_task_自动关联任务与_future",
+  "_chunk_pages": [
+    817,
+    820
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "title": "用 assert 表示绝不应发生的情况",
+  "definition": "如果代码中存在一个按设计绝不应到达的分支，可以使用一个恒为假的断言表达式让程序在该位置失败，并输出错误消息。原文示例为 `assert(!\"This should never happen.\");`，因为非空字符串字面量在布尔上下文中为 true，取反后为 false。",
+  "key_points": [
+    "该写法的目的不是检查正常条件，而是标记“不应发生”的程序状态。",
+    "原文示例为：`assert(!\"This should never happen.\");`。",
+    "断言失败时会输出错误消息并终止程序。",
+    "这种断言适用于真正不应出现的情况，不应滥用于普通输入错误。"
+  ],
+  "examples": [
+    "`assert(!\"This should never happen.\");`"
+  ],
+  "misconceptions": [
+    "字符串字面量不是空指针；非空字符串在布尔上下文中为真，所以加 `!` 后得到假。",
+    "这不是向用户报告可恢复错误的常规方式，而是用于暴露程序内部不应发生的状态。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么 `assert(!\"This should never happen.\");` 总是失败？",
+      "a": "因为非空字符串字面量在布尔上下文中为 true，取反后为 false，所以 assert 条件恒为假。"
+    },
+    {
+      "q": "这种恒失败断言适合表示什么？",
+      "a": "适合表示按程序设计绝不应发生的路径或状态。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "assert 宏的基本行为"
+  ],
+  "source_pages": [
+    904,
+    904
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1876_用_assert_表示绝不应发生的情况",
+  "_chunk_pages": [
+    901,
+    904
+  ]
+}

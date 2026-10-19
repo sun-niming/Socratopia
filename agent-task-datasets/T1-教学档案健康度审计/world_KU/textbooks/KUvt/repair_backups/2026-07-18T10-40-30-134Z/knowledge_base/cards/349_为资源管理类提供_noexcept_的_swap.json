@@ -1,0 +1,46 @@
+{
+  "title": "为资源管理类提供 noexcept 的 swap",
+  "definition": "对于管理资源的类，可以提供一个 `noexcept` 的成员 swap 函数，用于交换两个对象的内部状态。Spreadsheet 示例中，swap 依次交换宽度、高度和动态单元格数组指针，并承诺该操作不会抛出异常。",
+  "key_points": [
+    "成员函数声明可写为 `void swap(Spreadsheet& other) noexcept;`。",
+    "swap 应交换对象的所有关键数据成员，例如 `m_width`、`m_height` 和 `m_cells`。",
+    "成员之间可使用 `std::swap` 交换：`swap(m_width, other.m_width);`。",
+    "还可以提供非成员 swap 函数，使其转调成员函数：`void swap(Spreadsheet& first, Spreadsheet& second) noexcept { first.swap(second); }`。",
+    "swap 的 `noexcept` 保证是 copy-and-swap 赋值实现中提交阶段安全的重要条件。"
+  ],
+  "examples": [
+    "成员 swap：`void Spreadsheet::swap(Spreadsheet& other) noexcept { std::swap(m_width, other.m_width); std::swap(m_height, other.m_height); std::swap(m_cells, other.m_cells); }`。",
+    "非成员包装函数：`void swap(Spreadsheet& first, Spreadsheet& second) noexcept { first.swap(second); }`。"
+  ],
+  "misconceptions": [
+    "swap 不应逐个复制所有单元格内容；本例交换的是尺寸和动态数组指针等内部状态。",
+    "声明了 `noexcept` 就要求函数实现确实不会抛出异常；不能仅为了满足接口而随意添加。",
+    "swap 只交换部分数据成员会导致对象状态不一致，因此必须覆盖类资源管理所需的全部关键成员。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "Spreadsheet 示例中的 swap 交换哪些成员？",
+      "a": "交换 `m_width`、`m_height` 和 `m_cells`。"
+    },
+    {
+      "q": "为什么 copy-and-swap 中的 swap 通常声明为 `noexcept`？",
+      "a": "因为赋值操作在交换阶段提交新状态；如果交换抛出异常，可能破坏异常安全保证，所以交换应当是不会抛出的操作。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "std::swap 的基本用法",
+    "异常说明 noexcept"
+  ],
+  "source_pages": [
+    266,
+    267
+  ],
+  "needs_verification": true,
+  "verify_query": "\"void Spreadsheet::swap\" \"m_width\" \"m_height\" \"m_cells\" noexcept",
+  "concept_id": "349_为资源管理类提供_noexcept_的_swap",
+  "_chunk_pages": [
+    265,
+    268
+  ]
+}

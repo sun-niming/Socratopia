@@ -1,0 +1,48 @@
+{
+  "title": "iterator_traits对自定义迭代器的要求",
+  "definition": "自定义迭代器如果要适用于泛型算法，就必须能够通过 iterator_traits 提供标准迭代器信息。iterator_traits 为每种迭代器类型定义五个类型别名：value_type、difference_type、iterator_category、pointer 和 reference。默认的 iterator_traits 实现会从迭代器类型自身获取这些别名，因此自定义迭代器可以直接在类中定义它们。",
+  "key_points": [
+    "const_directed_graph_iterator 是双向迭代器，因此其 iterator_category 应指定为 bidirectional_iterator_tag。",
+    "教材列出的其他迭代器类别包括 input_iterator_tag、output_iterator_tag、forward_iterator_tag、random_access_iterator_tag，以及 C++20 的 contiguous_iterator_tag。",
+    "教材指出，过去建议从 `<iterator>` 中定义的 std::iterator 派生自定义迭代器，但该类模板已经弃用，不应继续使用。"
+  ],
+  "examples": [
+    "const_directed_graph_iterator 的类型别名包括：`using value_type = typename DirectedGraph::value_type;`、`using difference_type = ptrdiff_t;`、`using pointer = const value_type*;`、`using reference = const value_type&;`。",
+    "其迭代器类别应表示为 `using iterator_category = std::bidirectional_iterator_tag;`。"
+  ],
+  "misconceptions": [
+    "实现了 operator++ 和 operator-- 并不等于自动满足所有泛型算法要求；还需要正确提供 iterator_traits 所需的类型信息。",
+    "不应再通过继承 std::iterator 来定义新的自定义迭代器，因为教材明确指出 std::iterator 已弃用。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "iterator_traits 为迭代器提供哪五个类型别名？",
+      "a": "value_type、difference_type、iterator_category、pointer 和 reference。"
+    },
+    {
+      "q": "const_directed_graph_iterator 应使用哪一种 iterator_category？",
+      "a": "应使用 bidirectional_iterator_tag，因为它被设计为双向迭代器。"
+    },
+    {
+      "q": "现代 C++ 中是否应从 std::iterator 派生自定义迭代器？",
+      "a": "不应这样做；教材指出 std::iterator 已弃用。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++迭代器类别",
+    "类型别名",
+    "泛型算法"
+  ],
+  "source_pages": [
+    735,
+    735
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1530_iterator_traits对自定义迭代器的要求",
+  "_chunk_pages": [
+    733,
+    736
+  ]
+}

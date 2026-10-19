@@ -1,0 +1,43 @@
+{
+  "title": "绝对URL",
+  "definition": "绝对 URL 是使用完整 URL 指向网络资源的方式。教材指出，绝对 URL 包括两种常见写法：一种是完整 URL，浏览器会使用其中指定的协议、域名和路径加载资源；另一种是隐去协议，浏览器会使用加载当前文档时所用的相同协议来调用该 URL。",
+  "key_points": [
+    "绝对 URL 使用完整的 URL 指向网络资源。",
+    "完整 URL 会明确给出协议、域名和路径。",
+    "隐去协议时，浏览器会沿用当前文档的协议。"
+  ],
+  "examples": [
+    "https://example.com/path/file.html",
+    "//example.com/path/file.html"
+  ],
+  "misconceptions": [
+    "误以为绝对 URL 可以缺少主机信息。",
+    "误以为隐去协议表示不需要协议就能随意访问任意资源。",
+    "误以为绝对 URL 和相对 URL 是同一种写法。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "什么是绝对 URL？",
+      "a": "使用完整 URL 指向网络资源的 URL。"
+    },
+    {
+      "q": "隐去协议的 URL 会怎样被浏览器处理？",
+      "a": "浏览器会使用加载该 URL 的文档相同的协议来调用它。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "URL的定义与一般格式"
+  ],
+  "source_pages": [
+    21,
+    24
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "034_绝对url",
+  "_chunk_pages": [
+    21,
+    24
+  ]
+}

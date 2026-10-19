@@ -1,0 +1,53 @@
+{
+  "title": "动态创建和释放指针数组及其所指向的对象",
+  "definition": "使用 new Simple*[size] 创建的是一个包含 size 个 Simple* 指针的数组，而不是 size 个 Simple 对象。若要让每个指针指向一个动态创建的 Simple 对象，必须逐个使用 new Simple{} 进行分配；使用完毕后，先逐个使用 delete 释放每个对象，再使用 delete[] 释放指针数组本身。",
+  "key_points": [
+    "Simple** mySimplePtrArray { new Simple*[size] }; 创建指针数组，数组元素类型为 Simple*。",
+    "指针数组本身不等于对象数组；每个元素最初只是一个指针存储位置。",
+    "可以在循环中执行 mySimplePtrArray[i] = new Simple{}; 为每个指针分配一个 Simple 对象。",
+    "释放时应先循环 delete mySimplePtrArray[i];，再使用 delete[] mySimplePtrArray; 释放指针数组。",
+    "删除每个对象和删除指针数组是两个不同层次的操作。"
+  ],
+  "examples": [
+    "创建指针数组：Simple** mySimplePtrArray { new Simple*[size] };",
+    "为每个指针分配对象：for (size_t i { 0 }; i < size; i++) { mySimplePtrArray[i] = new Simple{}; }",
+    "释放每个对象：for (size_t i { 0 }; i < size; i++) { delete mySimplePtrArray[i]; }",
+    "释放指针数组本身：delete[] mySimplePtrArray;"
+  ],
+  "misconceptions": [
+    "new Simple*[size] 不会自动创建 size 个 Simple 对象，它只创建 size 个 Simple* 指针元素。",
+    "只执行 delete[] mySimplePtrArray 不能释放每个指针所指向的 Simple 对象，会造成内存泄漏。",
+    "指针数组中的单个对象使用 delete 释放，指针数组本身使用 delete[] 释放。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "Simple** mySimplePtrArray { new Simple*[size] }; 创建了什么？",
+      "a": "它创建了一个包含 size 个 Simple* 元素的动态指针数组，不会自动创建 Simple 对象。"
+    },
+    {
+      "q": "如何释放由该指针数组及其元素指向的对象？",
+      "a": "先遍历数组，对每个元素执行 delete mySimplePtrArray[i];，再执行 delete[] mySimplePtrArray; 释放指针数组本身。"
+    },
+    {
+      "q": "为什么不能只使用 delete[] mySimplePtrArray？",
+      "a": "因为 delete[] 只能释放指针数组本身，不会自动释放每个指针所指向的动态 Simple 对象。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "指针数组",
+    "动态对象分配",
+    "new[] 与 delete[]"
+  ],
+  "source_pages": [
+    201,
+    204
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 Simple** new Simple*[size] 循环 new Simple{} delete 每个元素 delete[] 指针数组 教材第204页",
+  "concept_id": "273_动态创建和释放指针数组及其所指向的对象",
+  "_chunk_pages": [
+    201,
+    204
+  ]
+}

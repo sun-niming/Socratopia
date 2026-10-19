@@ -1,0 +1,44 @@
+{
+  "title": "Database按条件显示雇员",
+  "definition": "Database 的显示方法通过遍历雇员集合来输出雇员信息。displayAll() 显示所有雇员；displayCurrent() 只显示 isHired() 返回 true 的雇员；displayFormer() 采用与 displayCurrent() 类似的筛选算法，用于显示已离职雇员。",
+  "key_points": [
+    "显示方法的共同步骤是遍历所有雇员，并让符合条件的 Employee 对象调用自身的 display() 方法。",
+    "displayAll() 不进行雇佣状态筛选。",
+    "displayCurrent() 的筛选条件是 employee.isHired()。",
+    "displayFormer() 与 displayCurrent() 类似，但筛选已离职雇员。"
+  ],
+  "examples": [
+    "所有雇员的核心逻辑可表示为：\n```cpp\nfor (const auto& employee : m_employees) {\n    employee.display();\n}\n```",
+    "当前雇员的核心逻辑可表示为：\n```cpp\nfor (const auto& employee : m_employees) {\n    if (employee.isHired()) {\n        employee.display();\n    }\n}\n```"
+  ],
+  "misconceptions": [
+    "displayCurrent() 不是显示全部雇员，而是只显示仍在职的雇员。",
+    "Database 不需要直接访问 Employee 的内部数据；它可以通过 Employee 的 public 方法，如 isHired() 和 display()，完成筛选和显示。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "displayAll() 和 displayCurrent() 的主要区别是什么？",
+      "a": "displayAll() 显示所有雇员；displayCurrent() 只显示 isHired() 返回 true 的雇员。"
+    },
+    {
+      "q": "这些显示方法采用了什么共同算法？",
+      "a": "遍历雇员集合，对满足显示条件的雇员调用其 display() 方法。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "范围 for 循环",
+    "类的 public 成员函数"
+  ],
+  "source_pages": [
+    97,
+    97
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "179_database按条件显示雇员",
+  "_chunk_pages": [
+    97,
+    100
+  ]
+}

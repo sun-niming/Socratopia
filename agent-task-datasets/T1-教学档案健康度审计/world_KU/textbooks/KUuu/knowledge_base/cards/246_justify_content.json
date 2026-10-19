@@ -1,0 +1,44 @@
+{
+  "title": "justify-content",
+  "definition": "justify-content 属性定义项目在主轴上的对齐方式。它的取值有 5 个：flex-start、flex-end、center、space-between、space-around；具体效果与主轴方向有关。",
+  "key_points": [
+    "flex-start：默认值，左对齐。",
+    "flex-end：右对齐。",
+    "center：居中。",
+    "space-between：两端对齐，项目之间的间隔都相等。",
+    "space-around：每个项目两侧的间隔相等，因此项目之间的间隔比项目与边框的间隔大一倍。"
+  ],
+  "examples": [
+    "justify-content: flex-start;",
+    "justify-content: flex-end;",
+    "justify-content: center;",
+    "justify-content: space-between;",
+    "justify-content: space-around;"
+  ],
+  "misconceptions": [
+    "space-between 不是让所有空隙都一样大，它强调的是项目之间两两之间的间隔相等。",
+    "space-around 不是“完全等距”，它是项目两侧间隔相等，因此中间间隔会更大。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "justify-content 属性控制什么？",
+      "a": "它控制项目在主轴上的对齐方式。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "弹性盒布局",
+    "主轴"
+  ],
+  "source_pages": [
+    153,
+    156
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "246_justify_content",
+  "_chunk_pages": [
+    153,
+    156
+  ]
+}

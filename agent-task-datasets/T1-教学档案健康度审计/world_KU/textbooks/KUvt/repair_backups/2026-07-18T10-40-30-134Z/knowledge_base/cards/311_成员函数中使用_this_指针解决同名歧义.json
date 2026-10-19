@@ -1,0 +1,46 @@
+{
+  "title": "成员函数中使用 this 指针解决同名歧义",
+  "definition": "在 SpreadsheetCell::setValue(double value) 中，参数名 value 与成员变量名 value（或对应的成员存储位置）发生同名时，使用 this 指针明确表示当前对象的成员。典型写法是 this->value = value，其中左侧表示当前对象的成员，右侧表示函数参数。",
+  "key_points": [
+    "this 指针指向正在调用该成员函数的当前对象。",
+    "当成员变量与参数同名时，未加限定的 value 可能造成含义混淆。",
+    "this->value 明确表示当前对象的成员变量，右侧 value 表示传入的函数参数。",
+    "原文指出类似 value = value; 的写法令人困惑，因为两侧名称相同，不能直观区分成员和参数。"
+  ],
+  "examples": [
+    "推荐写法：void SpreadsheetCell::setValue(double value) { this->value = value; }",
+    "若成员变量实际命名为 m_value，则可写为：void SpreadsheetCell::setValue(double value) { m_value = value; }",
+    "调用 myCell.setValue(6) 时，成员函数中的 this 指向 myCell。"
+  ],
+  "misconceptions": [
+    "this 不是被设置的数值，而是指向当前对象的指针。",
+    "value = value; 不能清楚地表达“把参数保存到成员变量”的意图。",
+    "只有在成员变量和参数同名时才特别需要使用 this-> 来消除歧义；如果成员变量叫 m_value，直接写 m_value = value 即可。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "在 setValue(double value) 中，this 指针表示什么？",
+      "a": "它表示调用该成员函数的当前 SpreadsheetCell 对象。"
+    },
+    {
+      "q": "为什么 this->value = value 比 value = value 更清楚？",
+      "a": "因为 this->value 明确表示当前对象的成员变量，右侧 value 表示函数参数。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++类的成员变量与成员函数",
+    "C++指针与对象成员访问"
+  ],
+  "source_pages": [
+    233,
+    234
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "311_成员函数中使用_this_指针解决同名歧义",
+  "_chunk_pages": [
+    233,
+    236
+  ]
+}

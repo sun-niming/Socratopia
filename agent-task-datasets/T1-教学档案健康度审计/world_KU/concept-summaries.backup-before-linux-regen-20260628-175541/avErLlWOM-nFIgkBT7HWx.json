@@ -1,0 +1,139 @@
+{
+  "conversationId": "avErLlWOM-nFIgkBT7HWx",
+  "generatedAt": 1782538937798,
+  "pagesRange": null,
+  "sections": [
+    {
+      "type": "tldr",
+      "content": "这节课把 DOM 操作从“改内容”一路推进到“改属性、改样式、建节点、处理事件、再到 Web Storage 存取数据”，核心就是：会用常见 API，分清它们各自管什么。"
+    },
+    {
+      "type": "narrative",
+      "content": "一开始从属性操作接上样式操作，接着把节点的创建、插入、删除串起来。后半段重点转到事件委托、默认行为与事件传播的边界，最后收束到 `localStorage` 和 `sessionStorage`，把数据存取和对象序列化的流程完整走通。"
+    },
+    {
+      "type": "concepts",
+      "items": [
+        {
+          "name": "属性操作",
+          "body": "常见一组是：\n\n- `getAttribute('属性名')`：读属性值\n- `setAttribute('属性名', '值')`：写/改属性值\n- `removeAttribute('属性名')`：删属性\n- `hasAttribute('属性名')`：判断有没有这个属性\n\n补充：像 `src`、`href`、`value`、`id`、`className` 这类常见属性，也可以直接用 `.` 访问，比如 `img.src = 'a.jpg'`。`className` 适合直接改整串类名。"
+        },
+        {
+          "name": "修改样式与类名",
+          "body": "常见三种方式：\n\n1. 直接改 `style`\n   - 例如 `div.style.color = 'red'`\n   - CSS 里的连字符写法在 JS 里通常要改成驼峰，比如 `backgroundColor`\n\n2. `cssText`\n   - 一次写入一整段行内样式\n   - 例如 `div.style.cssText = 'color: red; background-color: black;'`\n   - 方便，但可能覆盖原来的行内样式\n\n3. 改类名\n   - `className`：直接改整串类名\n   - `classList`：更适合增删切换单个类\n\n`classList` 这一组很常用：\n- `classList.add('active')`：加类\n- `classList.remove('active')`：删类\n- `classList.toggle('active')`：有就删，没有就加\n- `classList.contains('active')`：判断有没有这个类\n- `classList.replace('old', 'new')`：把旧类替换成新类\n\n经验上：临时改一个具体样式用 `style`，切换一整套样式更常改类。"
+        },
+        {
+          "name": "创建、插入、删除节点",
+          "body": "这一块通常按顺序记：\n\n1. 创建\n   - `document.createElement('p')`\n   - `document.createTextNode('hello')`\n\n2. 插入\n   - `appendChild()`：插到父元素末尾\n   - `insertBefore(newNode, oldNode)`：插到某个节点前面\n   - `append()`：追加到后面，也能放字符串\n   - `prepend()`：插到最前面\n\n3. 删除\n   - `remove()`：自己删自己\n   - `removeChild()`：父元素删除子元素\n\n可以把它们理解成：`createElement()` 是“造”，插入方法是“放进去”，删除方法是“拿掉”。"
+        },
+        {
+          "name": "事件委托",
+          "body": "事件委托就是：不把监听器绑在每个子元素上，而是绑在父容器上统一处理。因为事件会在 DOM 中传播，所以点子元素时，父容器也能接到这个事件。\n\n重点边界：\n- `event.target`：真正被点击的元素\n- `event.currentTarget`：当前绑定监听器的元素，事件委托里通常是父容器\n\n典型场景：一堆子方块点击后统一变色，不用每个方块都单独绑定事件。"
+        },
+        {
+          "name": "默认行为与事件传播",
+          "body": "两个最容易混的 API：\n\n- `event.preventDefault()`：阻止默认行为\n  - 例如表单提交、链接跳转、右键菜单等\n- `event.stopPropagation()`：阻止事件继续传播\n  - 也就是阻止冒泡到父元素\n\n常见搭配：\n- `onsubmit` 里先检查输入框\n- 如果不合格，就 `preventDefault()` 阻止提交\n\n边界要分清：\n- `preventDefault()` 不管事件传播\n- `stopPropagation()` 不管默认行为\n- 在子元素里 `stopPropagation()` 后，父元素通常收不到这次点击"
+        },
+        {
+          "name": "Web Storage",
+          "body": "这一块分成 `localStorage` 和 `sessionStorage`，两者方法很像，都是键值对存储，而且都只能直接存字符串。\n\n常用 API：\n- `setItem('key', 'value')`：存\n- `getItem('key')`：取\n- `removeItem('key')`：删一个\n- `clear()`：清空全部\n- `length`：看当前有多少项\n\n重要边界：\n- `getItem()` 取不到对应键时，返回 `null`\n- 存对象或数组前，要先 `JSON.stringify()`\n- 取出来后要恢复对象，再 `JSON.parse()`\n\n区别：\n- `localStorage`：相对长期保存\n- `sessionStorage`：当前会话内有效，关掉窗口或标签页后清掉\n- `sessionStorage` 不会和另一个同源标签页共享数据\n\n可以把流程记成一句话：存前转字符串，取后再还原。"
+        }
+      ]
+    },
+    {
+      "type": "key-terms",
+      "items": [
+        {
+          "term": "getAttribute()",
+          "definition": "读取元素的某个属性值"
+        },
+        {
+          "term": "setAttribute()",
+          "definition": "设置或修改元素属性"
+        },
+        {
+          "term": "removeAttribute()",
+          "definition": "删除元素属性"
+        },
+        {
+          "term": "hasAttribute()",
+          "definition": "判断元素是否拥有某个属性"
+        },
+        {
+          "term": "classList.add()",
+          "definition": "给元素新增一个类名"
+        },
+        {
+          "term": "classList.remove()",
+          "definition": "删除元素的某个类名"
+        },
+        {
+          "term": "classList.toggle()",
+          "definition": "有就删，没有就加"
+        },
+        {
+          "term": "event.target",
+          "definition": "真正触发事件的元素"
+        },
+        {
+          "term": "event.currentTarget",
+          "definition": "当前绑定监听器的元素"
+        },
+        {
+          "term": "preventDefault()",
+          "definition": "阻止默认行为"
+        },
+        {
+          "term": "stopPropagation()",
+          "definition": "阻止事件继续传播"
+        },
+        {
+          "term": "localStorage",
+          "definition": "浏览器本地持久存储"
+        },
+        {
+          "term": "sessionStorage",
+          "definition": "当前会话临时存储"
+        },
+        {
+          "term": "JSON.stringify()",
+          "definition": "把对象或数组转成字符串"
+        },
+        {
+          "term": "JSON.parse()",
+          "definition": "把 JSON 字符串还原成对象"
+        }
+      ]
+    },
+    {
+      "type": "review-questions",
+      "items": [
+        {
+          "question": "如果要读取图片的 `src` 属性值，应该用哪个方法？",
+          "hint": "回想属性操作那一组里“读”的方法。",
+          "answer": "`getAttribute('src')`"
+        },
+        {
+          "question": "如果要把图片的 `alt` 改成“风景图”，应该用哪个方法？",
+          "hint": "回想属性操作里“写/改”的方法。",
+          "answer": "`setAttribute('alt', '风景图')`"
+        },
+        {
+          "question": "在事件委托里，真正被点击的元素要通过哪个属性拿到？",
+          "hint": "不是绑定监听器的那个元素。",
+          "answer": "`event.target`"
+        },
+        {
+          "question": "如果在子元素的点击事件里调用 `stopPropagation()`，父元素还能收到这个点击事件吗？",
+          "hint": "想想它阻止的是谁。",
+          "answer": "不能。`stopPropagation()` 会阻止事件继续冒泡到父元素。"
+        },
+        {
+          "question": "把对象存进 `localStorage` 或 `sessionStorage` 之前，第一步通常要做什么？",
+          "hint": "先把对象变成字符串。",
+          "answer": "先用 `JSON.stringify()` 转成字符串，再用 `setItem()` 存。"
+        }
+      ]
+    }
+  ]
+}

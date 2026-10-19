@@ -1,0 +1,47 @@
+{
+  "title": "queue的主要接口与pop不返回元素",
+  "definition": "queue提供用于队列操作的简化接口。push()和emplace()在队尾添加元素；pop()移除队头元素；front()和back()分别返回队头和队尾元素的引用但不删除元素；size()返回元素数量；empty()判断是否为空；swap()交换两个queue的内容。pop()不返回被移除的元素，如果需要先取得它，必须在调用pop()前通过front()获取。",
+  "key_points": [
+    "读取并移除队头元素的标准步骤是先保存front()的结果，再调用pop()。",
+    "对非const queue调用front()和back()可得到可写引用；对const queue调用时得到const引用。",
+    "当queue为空时，不能直接依赖front()获取有效元素；应先检查empty()。"
+  ],
+  "examples": [
+    "读取并移除队头元素：\nif (!q.empty()) {\n    auto value = q.front();\n    q.pop();\n    // 使用value\n}",
+    "错误理解示例：\nint value = q.pop(); // 错误，pop()没有返回值"
+  ],
+  "misconceptions": [
+    "queue::pop()不会返回弹出的元素。",
+    "front()和back()只访问元素，不会删除元素。",
+    "调用pop()前如果需要元素值，必须先调用front()并保存结果。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何从queue中取得并移除队头元素？",
+      "a": "先通过front()取得或复制队头元素，再调用pop()移除它。"
+    },
+    {
+      "q": "queue::pop()返回什么？",
+      "a": "pop()不返回被移除的元素。"
+    },
+    {
+      "q": "queue为空时应如何安全地读取队头？",
+      "a": "先调用empty()检查是否为空，非空时再调用front()。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "std::queue的先进先出语义与底层容器要求"
+  ],
+  "source_pages": [
+    575,
+    575
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1188_queue的主要接口与pop不返回元素",
+  "_chunk_pages": [
+    573,
+    576
+  ]
+}

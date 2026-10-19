@@ -1,0 +1,37 @@
+{
+  "title": "SO_REUSEADDR 的作用",
+  "definition": "`SO_REUSEADDR` 适合服务器调试时反复启动和停止的场景，它可以减少端口短时间不可复用带来的阻碍。但它不能抢占另一个正在监听同一端口的进程。",
+  "key_points": [
+    "它用于缓解端口短时间不可复用的问题。",
+    "常见于服务器反复重启调试。",
+    "它不能强行抢占别的监听进程。"
+  ],
+  "examples": [
+    "调试 Web Server 时频繁重启，设置 `SO_REUSEADDR` 更方便。"
+  ],
+  "misconceptions": [
+    "`SO_REUSEADDR` 不是“随便就能占用别人的端口”。",
+    "它解决的是调试和端口复用问题，不是并发模型问题。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么要使用 SO_REUSEADDR？",
+      "a": "因为调试服务器时常常反复启动停止，`SO_REUSEADDR` 能减少端口短时间不可复用带来的问题。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "HTTP 通用协议"
+  ],
+  "source_pages": [
+    129,
+    132
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "217_so_reuseaddr_的作用",
+  "_chunk_pages": [
+    129,
+    132
+  ]
+}

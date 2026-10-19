@@ -1,0 +1,44 @@
+{
+  "title": "display属性与元素类型转换",
+  "definition": "在标准流下，可以通过设置CSS的display属性来改变元素的显示类型。教材给出的常用取值有：none、block、inline、inline-block。它们分别表示：元素不显示、显示为块元素、显示为行元素、显示为行内块元素。",
+  "key_points": [
+    "display:none：元素不显示",
+    "display:block：显示为块元素",
+    "display:inline：显示为行元素",
+    "display:inline-block：显示为行内块元素",
+    "display属性可用于元素类型转换"
+  ],
+  "examples": [
+    "a元素设置为display:inline-block后，既具有block的高宽、边框、边距等特征，又具有inline的同行排列特征"
+  ],
+  "misconceptions": [
+    "把display:inline-block误认为只是“更大的行内元素”，忽略了它同时保留块元素和行内元素的部分特征",
+    "把display:none理解成仅仅是不显示，而不影响布局"
+  ],
+  "qa_pairs": [
+    {
+      "q": "display属性常用的4个取值分别是什么？",
+      "a": "none、block、inline、inline-block。"
+    },
+    {
+      "q": "为什么可以把a元素设为inline-block？",
+      "a": "因为它既具有块元素的高宽、边框、边距等特征，又具有行内元素的同行排列特征。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "CSS基础",
+    "元素显示方式"
+  ],
+  "source_pages": [
+    133,
+    136
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "190_display属性与元素类型转换",
+  "_chunk_pages": [
+    133,
+    136
+  ]
+}

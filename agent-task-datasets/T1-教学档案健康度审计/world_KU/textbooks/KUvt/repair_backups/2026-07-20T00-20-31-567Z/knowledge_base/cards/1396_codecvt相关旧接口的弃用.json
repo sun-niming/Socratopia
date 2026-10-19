@@ -1,0 +1,44 @@
+{
+  "title": "codecvt相关旧接口的弃用",
+  "definition": "原文说明：C++17之前，<codecvt>中提供codecvt_utf8、codecvt_utf16和codecvt_utf8_utf16等编码转换工具，并可通过wstring_convert和wbuffer_convert使用。C++17起，这些转换工具及相关<codecvt>功能被标记为不建议使用；原文给出的原因包括错误处理不正确、结构有误的Unicode字符串可能造成安全风险，以及API晦涩难用。",
+  "key_points": [
+    "原文建议在标准库提供合适、安全且易用的替代功能之前，使用第三方库正确处理Unicode字符串，例如ICU。",
+    "结构有误的Unicode字符串可能成为安全攻击的输入，因此编码转换不能只追求能够运行，还要正确处理错误。",
+    "C++标准对这些接口的具体弃用、保留或移除状态可能随版本和具体组件而不同。"
+  ],
+  "examples": [
+    "原文列出的旧工具：std::codecvt_utf8、std::codecvt_utf16、std::codecvt_utf8_utf16。",
+    "原文列出的简便接口：std::wstring_convert和std::wbuffer_convert。",
+    "第三方替代方案示例：ICU。"
+  ],
+  "misconceptions": [
+    "“弃用”不等于“在所有C++版本中立即删除”；弃用通常表示不建议新代码继续使用，但具体可用性取决于标准版本和实现。",
+    "仅将字节序列转换成宽字符并不能自动保证输入Unicode字符串结构合法或安全。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "原文为什么不再详细讨论wstring_convert和wbuffer_convert？",
+      "a": "因为相关<codecvt>转换工具和简便接口被不建议使用，原文指出其错误处理不正确、API晦涩，并可能带来Unicode安全风险。"
+    },
+    {
+      "q": "原文建议使用什么处理Unicode字符串？",
+      "a": "在标准库提供合适替代功能前，建议使用第三方库，例如ICU。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "Unicode与字符编码基础",
+    "C++标准版本和弃用概念"
+  ],
+  "source_pages": [
+    666,
+    666
+  ],
+  "needs_verification": true,
+  "verify_query": "C++17 C++20 std::codecvt_utf8 std::codecvt_utf16 std::codecvt_utf8_utf16 wstring_convert wbuffer_convert 弃用状态",
+  "concept_id": "1396_codecvt相关旧接口的弃用",
+  "_chunk_pages": [
+    665,
+    668
+  ]
+}

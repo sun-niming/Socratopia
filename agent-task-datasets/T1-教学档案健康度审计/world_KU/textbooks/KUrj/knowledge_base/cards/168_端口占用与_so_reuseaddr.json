@@ -1,0 +1,36 @@
+{
+  "title": "端口占用与 SO_REUSEADDR",
+  "definition": "当服务器在 bind 时遇到端口占用问题，可以先杀掉占用该端口的旧进程，或者改用其他端口；在代码里，应在 bind 之前设置 SO_REUSEADDR，以便复用地址并减少重启时的绑定阻塞问题。",
+  "key_points": [
+    "先处理占用端口的旧进程，或者直接换端口。",
+    "代码中要在 bind 前设置 SO_REUSEADDR。"
+  ],
+  "examples": [
+    "先杀掉占用端口的旧进程，或换端口。代码中在 bind 前设置 SO_REUSEADDR。"
+  ],
+  "misconceptions": [
+    "以为端口绑定失败时只能换端口，忽略了 SO_REUSEADDR。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "端口被占用时，教材给出的处理思路是什么？",
+      "a": "先杀掉占用端口的旧进程，或换端口；并在 bind 前设置 SO_REUSEADDR。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "端口",
+    "进程"
+  ],
+  "source_pages": [
+    109,
+    112
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "168_端口占用与_so_reuseaddr",
+  "_chunk_pages": [
+    109,
+    112
+  ]
+}

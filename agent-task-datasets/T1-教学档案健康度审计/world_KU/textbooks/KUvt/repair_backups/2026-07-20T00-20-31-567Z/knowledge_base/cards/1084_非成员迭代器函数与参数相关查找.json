@@ -1,0 +1,43 @@
+{
+  "title": "非成员迭代器函数与参数相关查找",
+  "definition": "标准库提供了非成员函数 begin、end、cbegin、cend、rbegin、rend、crbegin 和 crend，用于获取容器或其他范围的迭代器。教材建议优先使用这些非成员函数，尤其是在编写泛型代码时，通常先写 `using std::begin;`，再无命名空间限定地调用 `begin(x)`，从而同时支持参数相关查找（ADL）和标准库重载。",
+  "key_points": [
+    "非成员函数分别可获得非常量、常量、非常量反向和常量反向迭代器。",
+    "泛型代码中的推荐写法是：`using std::begin; begin(value);`。",
+    "无命名空间限定的调用允许编译器根据实参类型，通过 ADL 在用户自定义类型所在的命名空间查找重载；若找不到，再尝试 `std::begin`。",
+    "只调用 `std::begin` 时只查找 std 命名空间；不使用 `using std::begin` 而直接调用 `begin` 时，主要依赖 ADL。"
+  ],
+  "examples": [
+    "推荐的泛型写法：`using std::begin; auto first { begin(value) };`",
+    "自定义类型的 begin 重载可以放在与该类型相同的命名空间中，以便通过 ADL 找到。"
+  ],
+  "misconceptions": [
+    "`std::begin(x)` 与 `begin(x)` 在泛型代码中的查找行为不完全相同；后者配合 `using std::begin` 可以同时考虑标准库函数和 ADL 重载。",
+    "ADL 并不是在所有命名空间中无条件搜索，而是根据函数实参的类型关联到相应命名空间。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "泛型代码中为什么常写 `using std::begin; begin(x);`？",
+      "a": "这样既能使用 std::begin 的标准重载，又能通过 ADL 找到与用户自定义类型位于同一命名空间中的 begin 重载。"
+    },
+    {
+      "q": "如果只写 `std::begin(x)`，会发生什么？",
+      "a": "调用被限定在 std 命名空间中，不能依靠普通的 ADL 查找用户命名空间中的重载。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "半开区间与容器迭代器函数"
+  ],
+  "source_pages": [
+    529,
+    530
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1084_非成员迭代器函数与参数相关查找",
+  "_chunk_pages": [
+    529,
+    532
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "title": "std::variant 的含义与类型集合",
+  "definition": "std::variant 在头文件 <variant> 中定义，是一种可辨识联合类型，用于保存预先指定的多个类型中的一个值。定义 variant 时必须列出它可能包含的类型，模板类型参数必须互不相同。一个 variant 在任意时刻只能包含其中一个值。",
+  "key_points": [
+    "例如，variant<int, string, float> 可以保存 int、string 或 float 中的一个值。",
+    "variant 的模板类型参数必须唯一，例如 variant<int, int> 无效。",
+    "variant 同一时刻只能存储一个活动值；向其中赋值新的类型时，原来的活动值会被替换。"
+  ],
+  "examples": [
+    "variant<int, string, float> v;",
+    "对 v 依次执行 v = 12;、v = 12.5f;、v = \"text\"s; 后，v 依次保存整数、浮点数和字符串。"
+  ],
+  "misconceptions": [
+    "variant 不是同时保存所有候选类型的容器，而是任意时刻只保存其中一个值。",
+    "variant 的候选类型不是任意重复列表，模板类型参数必须唯一。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "variant<int, string, float> v; 表示什么？",
+      "a": "它表示 v 可以保存 int、string 或 float 中的一个值，但任意时刻只能保存其中一个。"
+    },
+    {
+      "q": "variant<int, int> 为什么无效？",
+      "a": "因为 std::variant 的模板类型参数必须互不相同。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [],
+  "source_pages": [
+    706,
+    707
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1465_std_variant_的含义与类型集合",
+  "_chunk_pages": [
+    705,
+    708
+  ]
+}

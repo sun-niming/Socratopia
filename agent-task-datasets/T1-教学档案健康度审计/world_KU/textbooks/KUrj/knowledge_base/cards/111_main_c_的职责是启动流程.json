@@ -1,0 +1,43 @@
+{
+  "title": "main.c 的职责是启动流程",
+  "definition": "`main.c` 只负责把程序启动流程串起来：读取配置、初始化监听 socket、安装并发相关处理，然后进入服务循环。它不应该直接处理 HTTP，也不应该直接读取文件。",
+  "key_points": [
+    "`main` 负责程序入口和启动编排。",
+    "应依次调用 `load_config`、`create_listen_socket`、`serve_forever`。",
+    "`main` 不应包含大段业务逻辑。",
+    "启动完成后可以打印端口、根目录和首页文件，方便调试。"
+  ],
+  "examples": [
+    "`main -> load_config -> create_listen_socket -> serve_forever`。",
+    "打印：`webserver listening on port %d`、`root: %s`、`index: %s`。"
+  ],
+  "misconceptions": [
+    "main 应该把所有 HTTP 处理都写进去，这样最直观。",
+    "main 中堆满业务逻辑不会影响维护。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "main.c 的核心职责是什么？",
+      "a": "把启动流程串起来，而不是直接处理 HTTP 或文件读取。"
+    },
+    {
+      "q": "为什么 main 要保持简短？",
+      "a": "这样主流程清楚，也方便单独调试 server.c、request.c、file_server.c。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "配置模块与命令行参数处理"
+  ],
+  "source_pages": [
+    70,
+    71
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "111_main_c_的职责是启动流程",
+  "_chunk_pages": [
+    69,
+    72
+  ]
+}

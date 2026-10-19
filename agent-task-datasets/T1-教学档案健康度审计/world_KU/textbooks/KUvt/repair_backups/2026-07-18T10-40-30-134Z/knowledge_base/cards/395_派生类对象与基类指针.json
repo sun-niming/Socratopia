@@ -1,0 +1,46 @@
+{
+  "title": "派生类对象与基类指针",
+  "definition": "派生类对象可以被基类指针指向，这是因为派生类对象包含基类子对象。典型写法是 `Base* base { new Derived{} };`，其中动态创建的是 `Derived` 对象，但指针的静态类型是 `Base*`。通过该基类指针，只能直接访问基类类型中声明且对当前访问可见的成员。",
+  "key_points": [
+    "基类指针可以指向派生类对象：`Base* base { new Derived{} };`。",
+    "指针的静态类型决定了通过该指针能够直接查找哪些成员。",
+    "如果 `someOtherMethod()` 只在 `Derived` 中声明而未在 `Base` 中声明，则 `base->someOtherMethod()` 不能通过 `Base*` 直接调用。",
+    "将派生类对象存储在基类指针中并不意味着基类接口自动包含派生类新增成员。"
+  ],
+  "examples": [
+    "基类指针指向派生类对象：\n`Base* base { new Derived{} }; // Create Derived, store it in Base pointer.`",
+    "若 `someOtherMethod()` 只属于 `Derived`，则以下调用不成立：\n`base->someOtherMethod();`\n因为 `base` 的类型是 `Base*`，而不是 `Derived*`，且 `Base` 中没有声明该成员。",
+    "直接使用派生类对象时，可以调用派生类新增成员：\n`Derived myDerived;`\n`myDerived.someOtherMethod();`"
+  ],
+  "misconceptions": [
+    "基类指针指向派生类对象后，不能直接调用派生类中基类未声明的新成员。",
+    "对象的实际类型和指针的静态类型是两个概念：示例中实际对象是 `Derived`，但指针类型是 `Base*`。",
+    "基类指针能够指向派生类对象，不表示任意基类成员都一定可以访问；成员仍需在基类接口中声明并满足访问权限。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`Base* base { new Derived{} };` 中实际创建的对象是什么类型？指针是什么类型？",
+      "a": "实际创建的是 `Derived` 类型对象，指针的静态类型是 `Base*`。"
+    },
+    {
+      "q": "为什么 `base->someOtherMethod()` 不能调用派生类新增的 `someOtherMethod()`？",
+      "a": "因为 `base` 的静态类型是 `Base*`，而 `someOtherMethod()` 只在 `Derived` 中声明、未在 `Base` 中声明。通过 `Base*` 只能直接使用基类接口中可见的成员。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++继承中的基类与派生类",
+    "C++指针和对象类型"
+  ],
+  "source_pages": [
+    301,
+    304
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "395_派生类对象与基类指针",
+  "_chunk_pages": [
+    301,
+    304
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "title": "程序控制结构",
+  "definition": "程序控制结构是指程序执行流程的组织方式。教材中将其分为顺序结构、选择结构和循环结构三类。",
+  "key_points": [
+    "顺序结构：按照书写次序依次执行。",
+    "选择结构：根据条件进行分支，主要有 if 和 switch。",
+    "循环结构：重复执行，主要有 while、do while、for、for...in、for...of。"
+  ],
+  "examples": [
+    "if (x > 0) { ... } else { ... }",
+    "switch (day) { ... }",
+    "for (var i = 0; i < 10; i++) { ... }"
+  ],
+  "misconceptions": [
+    "误以为程序只能按固定顺序执行。",
+    "误以为选择结构只有 if，没有 switch。",
+    "误以为循环结构只有 for 一种。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "教材中的三种程序控制结构分别是什么？",
+      "a": "顺序结构、选择结构、循环结构。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "JavaScript 基础语法"
+  ],
+  "source_pages": [
+    249,
+    252
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "347_程序控制结构",
+  "_chunk_pages": [
+    249,
+    252
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "title": "以模板参数作为基类的 SelfDrivable",
+  "definition": "原文给出模板声明 `template <typename T> class SelfDrivable : public T`，表示定义一个名为 `SelfDrivable` 的类模板，它公开继承模板参数 `T` 指定的类型。原文还给出使用 `Car` 和 `Truck` 实例化该模板的示例。",
+  "key_points": [
+    "模板参数声明为 `typename T`。",
+    "`SelfDrivable` 使用 `public T` 公开继承 `T`。",
+    "当 `T` 为 `Car` 时，可得到 `SelfDrivable<Car>`；当 `T` 为 `Truck` 时，可得到 `SelfDrivable<Truck>`。"
+  ],
+  "examples": [
+    "```cpp\ntemplate <typename T>\nclass SelfDrivable : public T\n{\n};\n\nSelfDrivable<Car> selfDrivingCar;\nSelfDrivable<Truck> selfDrivingTruck;\n```"
+  ],
+  "misconceptions": [
+    "`SelfDrivable<Car>` 不是 `Car` 的别名，而是以 `Car` 为模板参数生成的一个类模板特化类型。",
+    "`public T` 表示公开继承模板参数指定的基类，不是声明一个名为 `T` 的成员变量。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`SelfDrivable<Car>` 中的 `Car` 扮演什么角色？",
+      "a": "`Car` 是类模板 `SelfDrivable` 的模板实参，实例化出 `SelfDrivable<Car>` 类型。"
+    },
+    {
+      "q": "`class SelfDrivable : public T` 表示什么？",
+      "a": "表示 `SelfDrivable<T>` 公开继承模板参数 `T` 指定的类型。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++ 类继承",
+    "C++ 类模板"
+  ],
+  "source_pages": [
+    181,
+    184
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "254_以模板参数作为基类的_selfdrivable",
+  "_chunk_pages": [
+    181,
+    184
+  ]
+}

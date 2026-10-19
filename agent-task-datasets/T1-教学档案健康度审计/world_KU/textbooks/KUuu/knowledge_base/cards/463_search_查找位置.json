@@ -1,0 +1,38 @@
+{
+  "title": "search()查找位置",
+  "definition": "search() 方法使用正则表达式在字符串中查找匹配项，并返回匹配位置。它类似 indexOf，但参数是正则对象，返回的是从 0 开始计数的整数位置。",
+  "key_points": [
+    "re = /falls/; s.search(re) 会在字符串中查找 falls。",
+    "返回值表示首次匹配出现的位置，类型是 int，从 0 开始计数。",
+    "它适合用正则来找位置，而不只是固定子串查找。"
+  ],
+  "examples": [
+    "var s = 'The rain in Spain falls mainly in the plain.'; s.search(/falls/)  // 18"
+  ],
+  "misconceptions": [
+    "search 返回的是匹配到的字符串本身；实际上返回的是位置。",
+    "search 的结果从 1 开始计数；实际上从 0 开始。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "search() 方法的返回值是什么？",
+      "a": "返回匹配位置的整数，从 0 开始计数。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "正则表达式基础",
+    "字符串"
+  ],
+  "source_pages": [
+    325,
+    328
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "463_search_查找位置",
+  "_chunk_pages": [
+    325,
+    328
+  ]
+}

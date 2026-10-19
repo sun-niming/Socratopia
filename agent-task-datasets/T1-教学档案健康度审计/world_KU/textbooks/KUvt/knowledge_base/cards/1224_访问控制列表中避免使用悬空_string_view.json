@@ -1,0 +1,39 @@
+{
+  "title": "访问控制列表中避免使用悬空 string_view",
+  "definition": "如果访问控制列表保存的是 std::string_view，而被引用的字符串对象生命周期短于访问控制列表，那么字符串销毁后，string_view 就会指向已经失效的字符数据，形成悬空指针。访问控制列表应保存 std::string，以拥有字符串内容并避免该生命周期问题。",
+  "key_points": [
+    "std::string_view 只保存对字符序列的非拥有引用，不会延长被引用字符串的生命周期。",
+    "如果局部字符串在花括号结束时销毁，而访问控制列表仍保存其 string_view，之后访问该视图就是未定义行为。",
+    "原文指出 m_allowed 数据成员应使用 std::string 的 set，而不是 string_view 的 set。"
+  ],
+  "examples": [
+    "fileX.addUser(user); 如果 user 是花括号内创建的局部字符串，则离开花括号后 user 被销毁，fileX 中保存的 string_view 变成悬空引用。",
+    "更安全的成员类型可表示为：std::set<std::string> m_allowed;"
+  ],
+  "misconceptions": [
+    "std::string_view 不会自动复制字符串内容。",
+    "只要 string_view 本身还存在，并不意味着它引用的字符串仍然有效。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么访问控制列表不应使用 std::set<std::string_view> 保存局部用户字符串？",
+      "a": "因为 string_view 不拥有字符串内容。局部字符串销毁后，访问控制列表中的 string_view 会指向已被销毁的字符数据，形成悬空指针；使用 std::set<std::string> 可以保存字符串副本。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "对象生命周期与作用域",
+    "std::string 与 std::string_view 的区别"
+  ],
+  "source_pages": [
+    593,
+    593
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1224_访问控制列表中避免使用悬空_string_view",
+  "_chunk_pages": [
+    593,
+    596
+  ]
+}

@@ -1,0 +1,105 @@
+{
+  "schemaVersion": 1,
+  "status": "committed",
+  "operationId": "endclass:v1:1fff04245b942af5fd7d4d3e7763770a:96870ab7fe7266eb9f8e014d",
+  "operationHash": "ccec87fdb637f3720a477bf7baf150b864ef7d167b221d3873b7f56281cb8b29",
+  "scope": {
+    "accountId": "local",
+    "profileId": "uolmzgq8",
+    "worldId": "KU",
+    "conversationId": "sQPOYvDYa8CJI1tzErTNr"
+  },
+  "companion": {
+    "slotId": "npc_d",
+    "companionInstanceId": "ci_eae8a26a8802b69c1d978269",
+    "candidateId": "ct_3lesrzvq",
+    "displayName": "夏洛蒂"
+  },
+  "committedAt": "2026-10-09T06:21:14.002Z",
+  "targets": [
+    {
+      "relativePath": "pal_moments.md",
+      "oldHash": "5f2395c2088edf0527f6f3dbbc3a171ae80c7cdb1a208782a78a62f6cded5d9c",
+      "newHash": "ccf760f873c3fd586cb65f5695e5217426eb6c4d979028697ea67765737568f3",
+      "deleting": false
+    },
+    {
+      "relativePath": "textbooks/KUvg/progress.md",
+      "oldHash": "06181a3037d4d7f095e1640b9dca3862f1f20c099f47895378da12425939f821",
+      "newHash": "4d73bd93b8e8ff209a8c3f975c5f858eece7f88171584f607e4525a5547ffb8d",
+      "deleting": false
+    },
+    {
+      "relativePath": "diary/2026-10.md",
+      "oldHash": "1eb4b3ecf7dd9dc3d89b1747a6cf6c5f40dc8d6423487149be676100d72a2af9",
+      "newHash": "3225cdf47c60b0cd1b3c22c4e13bf2f9f0f62935db8291384ff99e419a9a9993",
+      "deleting": false
+    },
+    {
+      "relativePath": "relation_npc_d.md",
+      "oldHash": "e334bf74ad04cbcfe8fe33d04f93ee393ae03223309e7e477d1a44b848d15c14",
+      "newHash": "ff013da8dd17f50a901a89ee1133d96989a23e4888599fc555521ca47b4cc1a4",
+      "deleting": false
+    },
+    {
+      "relativePath": "world_meta.json",
+      "oldHash": "3314018129f2c191a41a1fea87cfbc54477076ea0ab7435d889cf028751a5d64",
+      "newHash": "296a2d6bc8f1200cd12eb45bde765f4d90b5f51d9e90639b1cd751201b100ea0",
+      "deleting": false
+    },
+    {
+      "relativePath": "world_records.md",
+      "oldHash": "66ff1a05d306a49e9d1d863bda412c2a659edf7f96ec5ffaaf9d86956a59dfba",
+      "newHash": "87a9ac7119e70976c49dd6c89d98886a151cb4c8b88f386b1ceaa8e742c2770c",
+      "deleting": false
+    },
+    {
+      "relativePath": "textbooks/textbook_index.json",
+      "oldHash": "a2fc345f6b6bff88ae7e9b22f404466d082e3182057bdfcf2f7495d7dc40fa4d",
+      "newHash": "1a14cb9963a2516d9e8588d950a5977cbe396e0323a37b3ffb1a629c9a5388e0",
+      "deleting": false
+    },
+    {
+      "relativePath": "textbooks/KUvg/handoff/last_tail.json",
+      "oldHash": "76738ae9fcba53c80cb472c4f1be0dbc167e5aba50fe0982f76689aa5ec1ac5b",
+      "newHash": "df5d906cd6f2b5babeed9bbf53063c55c24cd9241256606bd35d803961137244",
+      "deleting": false
+    },
+    {
+      "relativePath": "textbooks/KUvg/handoff/last_meta.json",
+      "oldHash": "a1a31b8ddb61eb06eaf7732b40470f77834afe10a6808c53252216fc44fd520c",
+      "newHash": "d2b3504c75e59fc0ca8f90e223a5f69be7e87de33c6d2531e6085f492c2c3f8f",
+      "deleting": false
+    },
+    {
+      "relativePath": "conversations/sQPOYvDYa8CJI1tzErTNr/current_reading.md",
+      "oldHash": "fc44065da397d363c7d6d977382a7095c197686460450d0c518b60f5082c55ef",
+      "newHash": null,
+      "deleting": true
+    },
+    {
+      "relativePath": "textbooks/KUvg/current_reading.md",
+      "oldHash": null,
+      "newHash": null,
+      "deleting": true
+    },
+    {
+      "relativePath": "conversations/sQPOYvDYa8CJI1tzErTNr/current_reading_summary.json",
+      "oldHash": null,
+      "newHash": null,
+      "deleting": true
+    },
+    {
+      "relativePath": "conversations/sQPOYvDYa8CJI1tzErTNr/handoff.json",
+      "oldHash": null,
+      "newHash": null,
+      "deleting": true
+    }
+  ],
+  "payload": {
+    "farewell": "*她把笔记合上，指尖在封皮上轻轻按了一下。*\n\n今天从 CDMA 一路走到三种宽带接入，线索接得挺顺。你那个「都定死了」和最后挑出 HFC 的两下，我记在本子上了。",
+    "companionNote": "那个\"上下行一样快\"的答案你第一反应是对的，别急着改口。下次光纤排序那道题别忘了来答。",
+    "marker": "<!-- continuityEvent:ccec87fdb637f3720a477bf7 companion:ci_eae8a26a8802b69c1d978269 mode:classroom -->",
+    "endingPage": 101
+  }
+}

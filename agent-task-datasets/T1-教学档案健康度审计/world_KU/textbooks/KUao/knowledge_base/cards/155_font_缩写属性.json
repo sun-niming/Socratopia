@@ -1,0 +1,43 @@
+{
+  "title": "font 缩写属性",
+  "definition": "font 是字体相关属性的缩写形式，可以在一条声明中设置字体的多个属性。教材说明它的属性值有先后顺序，字号与行高可以用斜杠 / 分隔；并且 font 缩写必须包含 <font-size> 和 <font-family>。",
+  "key_points": [
+    "可在一条声明中设置多个字体属性。",
+    "属性值有固定先后顺序。",
+    "字号和行高可用 / 分隔。",
+    "必须包含 font-size 和 font-family。"
+  ],
+  "examples": [
+    "font: italic bold 16px/1.5em \"宋体\";",
+    "font: bold 18px \"幼圆\";"
+  ],
+  "misconceptions": [
+    "font 缩写可以只写字体名。",
+    "font 缩写的顺序可以完全乱写。",
+    "font 缩写不需要字号和字体系列。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "font 缩写中至少必须包含哪两个值？",
+      "a": "必须包含 font-size 和 font-family。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "font-family 字体系列",
+    "font-size 字号",
+    "font-style 斜体",
+    "font-weight 粗体"
+  ],
+  "source_pages": [
+    113,
+    114
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "155_font_缩写属性",
+  "_chunk_pages": [
+    113,
+    116
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "title": "使用捕获组索引提取日期的月和日",
+  "definition": "通过向 `regex_token_iterator` 传入捕获组索引集合，可以只遍历正则表达式中指定捕获组的匹配文本。例如，日期正则表达式可以把年份、月份和日期分别放入捕获组，再使用 `vector<int>{2, 3}` 只输出月份和日期。",
+  "key_points": [
+    "正则表达式中的捕获组索引决定了 `regex_token_iterator` 输出哪些子表达式。",
+    "将 `vector<int>{2, 3}` 作为 `SubMatches` 参数时，迭代器按指定索引遍历第 2 和第 3 个捕获组。",
+    "日期正则表达式使用 `^` 和 `$` 锚点时，可以要求整个输入字符串都符合日期格式。",
+    "示例中，合法日期会输出月份和日期；不符合正则表达式的输入不会产生这些捕获组输出。"
+  ],
+  "examples": [
+    "核心用法：`vector<int> indices { 2, 3 }; const sregex_token_iterator end; for (sregex_token_iterator iter { cbegin(str), cend(str), reg, indices }; iter != end; ++iter) { cout << iter->str() << endl; }`",
+    "教材示例的输入 `2011/1/13` 会提取并输出月份 `1` 和日期 `13`；输入 `2011/1/32` 不符合日期模式，因此不会输出有效的月、日捕获结果。"
+  ],
+  "misconceptions": [
+    "`vector<int>{2, 3}` 不是表示字符串中的字符位置，而是表示正则表达式捕获组的索引。",
+    "使用 `regex_token_iterator` 指定捕获组并不会自动验证所有可能的日期语义；它只能按照给定正则表达式判断输入是否匹配。",
+    "`^` 和 `$` 是正则表达式锚点，用于约束匹配范围，不是日期格式本身的一部分。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何让 `regex_token_iterator` 只遍历日期正则表达式中的月份和日期？",
+      "a": "把月份和日期所在的捕获组索引放入 `vector<int>`，例如 `vector<int> indices { 2, 3 };`，再将该向量传给迭代器构造函数。"
+    },
+    {
+      "q": "为什么日期正则表达式示例中加入 `^` 和 `$`？",
+      "a": "为了要求正则表达式匹配整个输入序列，而不是只在输入字符串的一部分中找到匹配。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "regex_token_iterator 的作用与构造参数",
+    "正则表达式捕获组与锚点"
+  ],
+  "source_pages": [
+    678,
+    678
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 regex_token_iterator vector<int> submatches capture group indices date example ^ $ 标准库",
+  "concept_id": "1417_使用捕获组索引提取日期的月和日",
+  "_chunk_pages": [
+    677,
+    680
+  ]
+}

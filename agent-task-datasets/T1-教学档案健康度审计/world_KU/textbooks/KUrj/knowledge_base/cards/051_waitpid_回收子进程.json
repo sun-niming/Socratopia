@@ -1,0 +1,39 @@
+{
+  "title": "waitpid 回收子进程",
+  "definition": "子进程退出后，父进程必须读取它的退出状态，否则会留下僵尸进程。讲义推荐在 SIGCHLD 处理函数里循环调用 waitpid(-1, NULL, WNOHANG) 进行回收：使用循环是因为可能有多个子进程几乎同时退出；使用 WNOHANG 是因为信号处理函数里不能阻塞等待尚未退出的子进程。",
+  "key_points": [
+    "不回收子进程会产生僵尸进程",
+    "一个 SIGCHLD 可能对应多个已退出的子进程，所以要循环回收",
+    "WNOHANG 用于避免在信号处理函数里阻塞"
+  ],
+  "examples": [
+    "while (waitpid(-1, NULL, WNOHANG) > 0) { }"
+  ],
+  "misconceptions": [
+    "一次 SIGCHLD 只能回收一个子进程",
+    "信号处理函数里可以阻塞等待子进程退出"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么回收子进程时要使用 WNOHANG？",
+      "a": "因为在信号处理函数里不能阻塞等待未退出的子进程，WNOHANG 可以让 waitpid 非阻塞地回收已经退出的子进程。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "子进程用 _exit",
+    "fork 的返回值与复制"
+  ],
+  "source_pages": [
+    37,
+    38,
+    40
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "051_waitpid_回收子进程",
+  "_chunk_pages": [
+    37,
+    40
+  ]
+}

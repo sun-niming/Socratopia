@@ -1,0 +1,56 @@
+{
+  "title": "PacketBuffer使用queue实现数据包缓冲",
+  "definition": "PacketBuffer是一个使用std::queue保存数据包的类模板。数据包到达时按顺序进入队列，较高层处理数据包时按到达顺序从队头取出。当指定最大容量且缓冲区已满时，后续数据包会被丢弃；如果最大容量为0，则表示容量不受限制。bufferPacket()负责缓存数据包并返回是否成功，getNextPacket()负责取出下一个数据包；缓冲区为空时，getNextPacket()抛出std::out_of_range异常。",
+  "key_points": [
+    "PacketBuffer<T>可用于不同类型的数据包，例如不同网络层的数据包类型。",
+    "m_maxSize为0表示不限制缓冲区大小；大于0时，最多保存m_maxSize个数据包。",
+    "bufferPacket(const T&)在有空间时将数据压入队列并返回true；已满时丢弃数据包并返回false。",
+    "getNextPacket()先复制队头元素，再调用queue::pop()移除队头并返回该元素。",
+    "网络数据包适合使用queue，因为数据包应按照到达顺序处理。"
+  ],
+  "examples": [
+    "核心接口可表示为：\ntemplate <typename T>\nclass PacketBuffer {\npublic:\n    explicit PacketBuffer(std::size_t maxSize = 0);\n    bool bufferPacket(const T& packet);\n    [[nodiscard]] T getNextPacket();\nprivate:\n    std::queue<T> m_packets;\n    std::size_t m_maxSize;\n};",
+    "满缓冲区判断逻辑：\nif (m_maxSize > 0 && m_packets.size() == m_maxSize) {\n    return false; // 丢弃新数据包\n}\nm_packets.push(packet);\nreturn true;",
+    "取出数据包的逻辑：\nif (m_packets.empty()) {\n    throw std::out_of_range{\"Buffer is empty\"};\n}\nT temp{m_packets.front()};\nm_packets.pop();\nreturn temp;"
+  ],
+  "misconceptions": [
+    "maxSize为0不是表示缓冲区不能保存数据，而是表示容量无限制。",
+    "缓冲区已满时，bufferPacket()不会覆盖旧数据包，而是丢弃后续到达的数据包。",
+    "getNextPacket()不是在空队列上返回默认构造对象，而是在缓冲区为空时抛出std::out_of_range。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "PacketBuffer为什么使用std::queue？",
+      "a": "因为网络数据包应按照到达顺序处理，queue提供先进先出语义。"
+    },
+    {
+      "q": "PacketBuffer的maxSize为0表示什么？",
+      "a": "表示缓冲区大小不受限制。"
+    },
+    {
+      "q": "当PacketBuffer已达到最大容量时，bufferPacket()如何处理新数据包？",
+      "a": "丢弃新数据包并返回false。"
+    },
+    {
+      "q": "对空的PacketBuffer调用getNextPacket()会发生什么？",
+      "a": "抛出std::out_of_range异常。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "std::queue的先进先出语义与底层容器要求",
+    "queue的主要接口与pop不返回元素",
+    "C++类模板"
+  ],
+  "source_pages": [
+    575,
+    576
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1189_packetbuffer使用queue实现数据包缓冲",
+  "_chunk_pages": [
+    573,
+    576
+  ]
+}

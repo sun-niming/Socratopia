@@ -1,0 +1,38 @@
+{
+  "title": "HTTP 底座与 AI 系统",
+  "definition": "这个项目本质上是在做 HTTP 服务底座，不是直接实现 AI。后续可以在此基础上增加 `/questions.json` 返回题库、`/submit` 接收答案、`/judge` 返回判题结果、`/explain` 调用 AI 生成讲解，从而支撑在线学习系统的后端能力。",
+  "key_points": [
+    "当前项目是 HTTP 服务底座。",
+    "后续可扩展题库、提交、判题和讲解接口。",
+    "它训练的是在线学习系统的后端基础能力，而非直接实现 AI。"
+  ],
+  "examples": [
+    "`/questions.json`、`/submit`、`/judge`、`/explain`。"
+  ],
+  "misconceptions": [
+    "HTTP 服务底座和 AI 本体不是一回事。",
+    "先把后端接口搭好，才能承载后续 AI 功能。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "这个项目和 AI 出题判题讲题有什么关系？",
+      "a": "它是 HTTP 服务底座，后续可以增加题库、提交、判题和 AI 讲解接口，为在线学习系统提供后端基础能力。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "HTTP 通用协议",
+    "命令行参数配置"
+  ],
+  "source_pages": [
+    129,
+    132
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "225_http_底座与_ai_系统",
+  "_chunk_pages": [
+    129,
+    132
+  ]
+}

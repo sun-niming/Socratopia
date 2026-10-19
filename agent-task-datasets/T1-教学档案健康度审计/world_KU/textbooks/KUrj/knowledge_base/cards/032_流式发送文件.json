@@ -1,0 +1,44 @@
+{
+  "title": "流式发送文件",
+  "definition": "发送静态文件时，推荐流式发送：先发响应头，再用固定大小缓冲区循环 `read()` 文件并通过 `send_all()` 发送，而不是一次性 `malloc` 整个文件。响应头中的 `Content-Length` 可以由 `stat.st_size` 得到。",
+  "key_points": [
+    "使用固定大小缓冲区，例如 `char buf[8192];`。",
+    "循环 `read(file_fd, buf, sizeof(buf))`，再 `send_all(client_fd, buf, n)`。",
+    "先发响应头，再发文件体。",
+    "`Content-Length` 可直接取自 `stat.st_size`。",
+    "这种方式内存占用稳定，也更接近真实 Web Server 的实现。"
+  ],
+  "examples": [
+    "`int send_file_body(int client_fd, int file_fd) { char buf[8192]; ssize_t n; while ((n = read(file_fd, buf, sizeof(buf))) > 0) { if (send_all(client_fd, buf, (size_t)n) < 0) return -1; } return n < 0 ? -1 : 0; }`"
+  ],
+  "misconceptions": [
+    "文件越大，越应该先整文件读进内存再发送。",
+    "响应头可以不先发送，直接把文件内容写给客户端。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么推荐流式发送文件？",
+      "a": "因为内存占用稳定，文件稍大也不容易爆内存。"
+    },
+    {
+      "q": "`Content-Length` 可以从哪里得到？",
+      "a": "可以从 `stat.st_size` 得到。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "stat检查文件状态",
+    "统一错误响应"
+  ],
+  "source_pages": [
+    25,
+    28
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "032_流式发送文件",
+  "_chunk_pages": [
+    25,
+    28
+  ]
+}

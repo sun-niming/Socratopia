@@ -1,0 +1,47 @@
+{
+  "title": "SYN Cookie防御机制",
+  "definition": "SYN Cookie是一种防御SYN洪泛攻击的机制。服务器收到SYN时不为其创建半开连接，也不保存与该SYN对应的状态；服务器把SYN的源、目的IP地址和端口号以及服务器秘密数输入散列函数，生成特殊的初始序列号cookie，并在SYNACK中发送该cookie。若客户返回合法ACK，服务器重新计算cookie并验证ACK，验证成功后才生成全开的连接。",
+  "key_points": [
+    "SYN Cookie的核心思想是在收到SYN时不分配半开连接资源。",
+    "cookie由SYN的源和目的IP地址、源和目的端口号以及服务器秘密数经过散列函数生成。",
+    "服务器不记忆cookie，也不保存与该SYN对应的其他状态信息。",
+    "合法ACK中的确认字段应等于SYNACK中的序列号cookie加1。",
+    "服务器重新计算cookie；若计算结果加1等于ACK确认值，则认为ACK对应于先前的SYN，并建立全开连接。",
+    "如果客户不返回ACK，服务器不会因为该SYN而分配连接资源。"
+  ],
+  "examples": [
+    "设服务器根据连接信息和秘密数计算得到cookie为$C$，则服务器在SYNACK中使用序列号$C$；合法客户返回的ACK确认值应为$C+1$。服务器重新计算并验证该关系。"
+  ],
+  "misconceptions": [
+    "SYN Cookie不是把所有半开连接保存起来再逐个清理，而是尽量不保存对应状态。",
+    "收到ACK后不能仅凭ACK到达就建立连接，服务器还必须验证cookie。",
+    "cookie不是客户生成的普通随机数，而是服务器根据连接信息和秘密数计算出的特殊初始序列号。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "SYN Cookie如何避免SYN洪泛攻击消耗大量半开连接资源？",
+      "a": "服务器收到SYN时不创建半开连接，也不保存对应状态，只把经过散列计算得到的cookie放入SYNACK；只有收到并验证合法ACK后才建立全开连接。"
+    },
+    {
+      "q": "服务器如何验证客户返回的ACK对应于先前的SYN？",
+      "a": "服务器用SYNACK中的源和目的IP地址、端口号以及秘密数重新计算cookie；如果计算结果加1等于ACK确认字段的值，就认为该ACK合法。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "SYN洪泛攻击",
+    "TCP三次握手",
+    "TCP序列号与确认号"
+  ],
+  "source_pages": [
+    185,
+    188
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "450_syn_cookie防御机制",
+  "_chunk_pages": [
+    185,
+    188
+  ]
+}

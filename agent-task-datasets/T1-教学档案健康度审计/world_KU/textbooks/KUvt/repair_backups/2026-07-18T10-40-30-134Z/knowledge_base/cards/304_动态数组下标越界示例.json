@@ -1,0 +1,50 @@
+{
+  "title": "动态数组下标越界示例",
+  "definition": "原文分配了包含 10 个 int 元素的动态数组，并使用下标访问数组。包含 10 个元素的数组合法下标范围是 $0$ 到 $9$；因此 `values[10]` 越过了数组末尾。此外，使用 `index <= numberOfElements` 作为遍历条件时，最后一次会访问 `values[10]`，同样越界。",
+  "key_points": [
+    "代码中的元素数量是 `numberOfElements = 10`。",
+    "动态数组的合法下标为 $0,1,\\ldots,9$，即 $0 \\le index < 10$。",
+    "`values[10] = 99;` 是越界写入。",
+    "打印循环使用 `index <= numberOfElements`，会访问 `values[10]`，属于越界读取。",
+    "遍历 10 个元素时，条件应使用 `index < numberOfElements`。"
+  ],
+  "examples": [
+    "原文代码中的越界写入：\n\n```cpp\nconst size_t numberOfElements{10};\nint* values{new int[numberOfElements]};\nvalues[10] = 99;\n```\n数组只有 `values[0]` 到 `values[9]`。",
+    "原文代码中的越界读取：\n\n```cpp\nfor (int index{0}; index <= numberOfElements; ++index) {\n    std::cout << values[index] << \" \";\n}\n```\n更合适的循环边界是：\n\n```cpp\nfor (size_t index{0}; index < numberOfElements; ++index) {\n    std::cout << values[index] << \" \";\n}\n```"
+  ],
+  "misconceptions": [
+    "数组有 10 个元素时，最大合法下标不是 10，而是 9。",
+    "`<= numberOfElements` 不能用于遍历下标从 0 开始、长度为 `numberOfElements` 的数组。",
+    "越界访问不一定立即报错，但仍然属于错误程序行为，可能导致数据破坏或不可预测结果。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "长度为 10 的数组的合法下标范围是什么？",
+      "a": "合法下标范围是 $0$ 到 $9$，也就是 $0 \\le index < 10$。"
+    },
+    {
+      "q": "原文中的 `values[10] = 99` 有什么问题？",
+      "a": "它访问了长度为 10 的数组的第 11 个位置，构成越界写入；正确的最后一个元素是 `values[9]`。"
+    },
+    {
+      "q": "遍历该数组时为什么应使用 `index < numberOfElements` 而不是 `index <= numberOfElements`？",
+      "a": "因为下标从 0 开始，`index < 10` 只会访问 0 到 9；使用 `<= 10` 会额外访问越界下标 10。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++数组下标从 0 开始",
+    "动态内存分配"
+  ],
+  "source_pages": [
+    225,
+    228
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "304_动态数组下标越界示例",
+  "_chunk_pages": [
+    225,
+    228
+  ]
+}

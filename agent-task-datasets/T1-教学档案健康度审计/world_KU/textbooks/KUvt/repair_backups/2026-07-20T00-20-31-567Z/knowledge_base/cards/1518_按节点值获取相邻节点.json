@@ -1,0 +1,48 @@
+{
+  "title": "按节点值获取相邻节点",
+  "definition": "有向图的 `get_adjacent_nodes_values` 公共方法接收一个节点值，并返回与该节点直接相邻的节点值集合。如果给定节点不存在，则返回空集合。该方法通过先查找节点，再复用接收相邻节点索引列表的重载来完成查询。",
+  "key_points": [
+    "参数是节点值的 const 引用，返回类型是 `std::set<T>`。",
+    "若 `findNode(node_value)` 找不到节点，则返回空的 `std::set<T>`。",
+    "若节点存在，则读取该节点的相邻节点索引，并将索引转换成对应的节点值。",
+    "返回集合会按 `std::set` 的规则保存元素，因此相邻节点值不会重复。"
+  ],
+  "examples": [
+    "接口形式：`std::set<T> get_adjacent_nodes_values(const T& node_value) const;`",
+    "不存在节点时的处理：`if (iter == std::end(m_nodes)) { return std::set<T>{}; }`"
+  ],
+  "misconceptions": [
+    "该方法查询的是直接相邻节点，不是从给定节点可达的所有后继节点。",
+    "找不到节点时不会抛出异常，原文实现返回空集合。",
+    "返回的是节点值集合，不是节点索引列表。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "给定节点不存在时，`get_adjacent_nodes_values` 返回什么？",
+      "a": "返回空的 `std::set<T>`。"
+    },
+    {
+      "q": "该方法返回相邻节点的索引还是值？",
+      "a": "返回相邻节点的值，类型为 `std::set<T>`。"
+    },
+    {
+      "q": "按节点值查询相邻节点时，内部大致经过哪些步骤？",
+      "a": "先查找具有该值的节点；若找不到则返回空集合；若找到，则读取其相邻节点索引并转换为相邻节点值。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "有向图的节点与边"
+  ],
+  "source_pages": [
+    730,
+    730
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1518_按节点值获取相邻节点",
+  "_chunk_pages": [
+    729,
+    732
+  ]
+}

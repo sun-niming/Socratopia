@@ -1,0 +1,42 @@
+{
+  "title": "未捕获的异步任务 future 会使 std::async 变成阻塞调用",
+  "definition": "调用 std::async 后返回一个 future。若不保存这个 future，返回的临时 future 会在当前语句结束前析构；future 的析构函数会等待关联的异步计算完成。因此，未捕获返回 future 的 std::async 调用实际上可能表现为同步阻塞调用。",
+  "key_points": [
+    "std::async 可以异步或同步执行可调用对象，具体取决于启动策略和实现选择。",
+    "future 的析构可能阻塞，直到关联的计算结果可用。",
+    "如果希望异步任务与当前线程并行执行，应保存 std::async 返回的 future。"
+  ],
+  "examples": [
+    "可能导致阻塞的写法：`std::async(calculate);`",
+    "更明确地强制异步执行并保存结果：`auto resultFuture = std::async(std::launch::async, calculate);`"
+  ],
+  "misconceptions": [
+    "误以为调用了 std::async 就一定会在另一个线程中立即并行执行。",
+    "误以为不保存返回的 future 不会影响任务执行；实际上临时 future 的析构可能等待任务完成。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么 `std::async(calculate);` 可能成为阻塞调用？",
+      "a": "因为返回的临时 future 未被保存，会在当前语句结束前析构；其析构函数会等待计算完成。"
+    },
+    {
+      "q": "如何避免因临时 future 析构而立即等待异步任务？",
+      "a": "保存 std::async 返回的 future，例如 `auto f = std::async(std::launch::async, calculate);`。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "std::future 的基本概念"
+  ],
+  "source_pages": [
+    821,
+    821
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1683_未捕获的异步任务_future_会使_std_async_变成阻塞调用",
+  "_chunk_pages": [
+    821,
+    824
+  ]
+}

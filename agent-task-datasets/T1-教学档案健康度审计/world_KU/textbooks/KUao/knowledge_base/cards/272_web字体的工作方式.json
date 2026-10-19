@@ -1,0 +1,41 @@
+{
+  "title": "Web字体的工作方式",
+  "definition": "Web字体指网页可使用的字体。原文说明：每种字体都对应着字体文件；在没有@font-face规则之前，客户端能否正确显示font-family规定的字体，取决于该字体文件是否预装在客户端。使用@font-face后，可以把字体文件放在服务器端，页面渲染时客户端会从服务器下载该字体文件并使用。",
+  "key_points": [
+    "每种字体都对应一个字体文件",
+    "没有@font-face时，字体是否能显示取决于客户端是否预装该字体文件",
+    "@font-face允许字体文件放在服务器端，由客户端按需下载使用"
+  ],
+  "examples": [
+    "网页使用某种未预装字体时，可先通过@font-face提供该字体文件，再在页面中用font-family引用它"
+  ],
+  "misconceptions": [
+    "以为font-family写了字体名，浏览器一定能显示",
+    "以为Web字体只能安装在用户本机上，不能从服务器加载"
+  ],
+  "qa_pairs": [
+    {
+      "q": "没有@font-face规则时，客户端能否正确显示font-family规定的字体，主要取决于什么？",
+      "a": "取决于该字体文件是否预装在客户端。"
+    },
+    {
+      "q": "@font-face带来的主要变化是什么？",
+      "a": "可以把字体文件放到服务器端，渲染页面时由客户端下载并使用。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "CSS基础"
+  ],
+  "source_pages": [
+    193,
+    196
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "272_web字体的工作方式",
+  "_chunk_pages": [
+    193,
+    196
+  ]
+}

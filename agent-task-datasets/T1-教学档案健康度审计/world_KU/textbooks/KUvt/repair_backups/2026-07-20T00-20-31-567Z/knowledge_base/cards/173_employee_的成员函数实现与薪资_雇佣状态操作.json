@@ -1,0 +1,47 @@
+{
+  "title": "Employee 的成员函数实现与薪资、雇佣状态操作",
+  "definition": "Employee 的 promote 方法通过增加当前薪资实现加薪，demote 方法通过减少当前薪资实现扣薪；hire 方法将 m_hired 设置为 true，fire 方法将其设置为 false。display 方法将雇员姓名、当前或离职状态、雇员编号和薪资输出到控制台。",
+  "key_points": [
+    "`promote(int raiseAmount)` 的逻辑是 `setSalary(getSalary() + raiseAmount)`。",
+    "`demote(int demeritAmount)` 的逻辑是 `setSalary(getSalary() - demeritAmount)`。",
+    "`hire()` 设置 `m_hired = true`，`fire()` 设置 `m_hired = false`。",
+    "`display() const` 是只读成员函数，用于输出当前雇员信息。",
+    "类的成员函数可以直接访问 private 数据成员，但教材建议即使在类内部也优先使用已有的获取器和设置器。"
+  ],
+  "examples": [
+    "薪资变化：若当前薪资为 1000，调用 `promote(50)` 后薪资为 1050；调用 `demote(20)` 后薪资为 1030。",
+    "状态切换：`emp.hire();` 将雇员设为在职，`emp.fire();` 将雇员设为离职。",
+    "`display()` 输出的信息包括姓名、`Current Employee` 或 `Former Employee`、雇员编号和薪资。"
+  ],
+  "misconceptions": [
+    "demote 不是把雇员解雇，而是减少薪资；解雇应调用 fire。",
+    "const 成员函数并不表示不能输出信息，而是表示该函数不应修改对象状态。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "promote 方法如何计算新的薪资？",
+      "a": "将当前薪资与 raiseAmount 相加，即 `setSalary(getSalary() + raiseAmount)`。"
+    },
+    {
+      "q": "如何判断 display 输出 Current Employee 还是 Former Employee？",
+      "a": "根据 `isHired()` 的结果判断；true 输出 Current Employee，false 输出 Former Employee。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "类成员函数",
+    "const成员函数",
+    "条件运算符"
+  ],
+  "source_pages": [
+    94,
+    94
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "173_employee_的成员函数实现与薪资_雇佣状态操作",
+  "_chunk_pages": [
+    93,
+    96
+  ]
+}

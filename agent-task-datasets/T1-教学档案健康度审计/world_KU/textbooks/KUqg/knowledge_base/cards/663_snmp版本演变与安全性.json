@@ -1,0 +1,43 @@
+{
+  "title": "SNMP版本演变与安全性",
+  "definition": "SNMP经历了三个版本的演变。原文将SNMPv3概括为在SNMPv2基础上增加安全性和管理能力的版本。由于早期SNMP缺乏适当的安全性，SNMP主要被用于监视而不是控制，例如SNMPv1中很少使用SetRequest；SNMPv3更加重视安全性。",
+  "key_points": [
+    "SNMPv3是在SNMPv2基础上发展而来的版本。",
+    "SNMPv3的显著变化集中在管理和安全领域。",
+    "缺乏适当安全性会限制SNMP执行控制操作的使用。",
+    "原文以SNMPv1中很少使用SetRequest为例，说明安全性不足会使SNMP更多用于监视而不是控制。"
+  ],
+  "examples": [
+    "如果管理人员担心未经授权的配置修改，可能更多使用SNMP进行状态监视，而较少使用SetRequest进行控制。"
+  ],
+  "misconceptions": [
+    "SNMP从最初版本起就具有充分的安全性；原文指出早期版本的安全性不足。",
+    "SNMPv3只是更换了报文名称；原文强调其在安全性和管理能力方面有明显变化。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "SNMPv3相对于SNMPv2的主要改进方向是什么？",
+      "a": "主要是在SNMPv2基础上增加和强化安全性及管理能力。"
+    },
+    {
+      "q": "为什么早期SNMP主要用于监视而不是控制？",
+      "a": "因为缺乏适当的安全性，配置和控制操作存在风险，所以例如SNMPv1中很少使用SetRequest。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "SNMP的请求响应模式与陷阱报文",
+    "SNMP基于UDP传输时的请求标识与重传"
+  ],
+  "source_pages": [
+    293,
+    296
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "663_snmp版本演变与安全性",
+  "_chunk_pages": [
+    293,
+    296
+  ]
+}

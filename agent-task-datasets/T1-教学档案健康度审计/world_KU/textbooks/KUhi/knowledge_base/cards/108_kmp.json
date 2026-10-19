@@ -1,0 +1,38 @@
+{
+  "title": "KMP",
+  "definition": "KMP 是一种字符串匹配算法，它利用模式串的前后缀信息来避免失配后回退文本指针，因此总时间复杂度为 O(n+m)。",
+  "key_points": [
+    "核心思想是利用前后缀信息。",
+    "发生失配时，文本指针不回退。",
+    "整体匹配时间为 O(n+m)。"
+  ],
+  "examples": [
+    "字符串匹配中，模式串失配后根据前后缀表调整匹配位置"
+  ],
+  "misconceptions": [
+    "KMP 不是重新从头比较文本。",
+    "KMP 的效率来自前后缀表，而不是简单的暴力扫描。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "KMP 失配后，哪个指针不回退？",
+      "a": "文本指针不回退。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "字符串",
+    "字符串匹配"
+  ],
+  "source_pages": [
+    93,
+    93
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "108_kmp",
+  "_chunk_pages": [
+    93,
+    93
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "title": "UDP客户端发送报文",
+  "definition": "UDP客户端使用 `sendto()` 发送报文。套接字发送的是字节，因此用户输入的字符串要先通过 `encode()` 转换为字节。调用 `sendto(data, (serverName, serverPort))` 时，需要为每个报文显式提供目的服务器的主机地址和端口号。源地址也会附加到 UDP 分组中，但这一过程由系统自动完成。",
+  "key_points": [
+    "用户输入首先保存在字符串变量中。",
+    "`encode()` 将字符串转换为可通过套接字发送的字节。",
+    "UDP是无连接的，发送时使用 `sendto()` 显式指定目的地址 `(服务器地址, 服务器端口号)`。",
+    "源 IP 地址和源端口号由系统自动附加，不需要应用程序在 `sendto()` 中显式填写。"
+  ],
+  "examples": [
+    "message = raw_input('Input lowercase sentence:')\nclientSocket.sendto(message.encode(), (serverName, serverPort))",
+    "目的套接字地址可表示为二元组：$$(\\text{serverName},\\ \\text{serverPort})$$"
+  ],
+  "misconceptions": [
+    "误以为 Python 套接字可以直接发送字符串而不进行转换；原文示例先调用 `encode()` 转换为字节。",
+    "误以为 UDP 套接字建立连接后无需为报文指定目的地址；原文中的 UDP 客户端在 `sendto()` 中显式给出目的地址。",
+    "误以为应用程序还必须手工填写源 IP 地址和源端口号；这些信息由系统自动附加。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "UDP客户端为什么在发送消息前调用 `encode()`？",
+      "a": "因为套接字需要发送字节，而用户输入的消息是字符串，`encode()` 用于将字符串转换为字节。"
+    },
+    {
+      "q": "`sendto(message.encode(), (serverName, serverPort))` 中的第二个参数表示什么？",
+      "a": "它表示目的服务器的套接字地址，由服务器主机名或 IP 地址以及服务器端口号组成。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "UDP客户端套接字的创建与配置",
+    "字符串与字节"
+  ],
+  "source_pages": [
+    125,
+    126
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "313_udp客户端发送报文",
+  "_chunk_pages": [
+    125,
+    128
+  ]
+}

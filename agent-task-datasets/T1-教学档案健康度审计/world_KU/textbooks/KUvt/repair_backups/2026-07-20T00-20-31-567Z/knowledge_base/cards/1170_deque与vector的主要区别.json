@@ -1,0 +1,44 @@
+{
+  "title": "deque与vector的主要区别",
+  "definition": "deque（双端队列）定义在<deque>头文件中，整体用途与vector相近，但底层不要求元素存储在连续内存中。deque支持首端和尾端的常量时间插入与删除，而vector主要支持尾端的摊还常量时间操作。",
+  "key_points": [
+    "deque不要求元素位于连续内存中。",
+    "deque在首端和尾端都支持常量时间的插入和删除。",
+    "deque提供push_front()、pop_front()和emplace_front()等vector没有提供的首端操作。",
+    "从C++17开始，emplace_front()返回新插入元素的引用，而不是void。",
+    "deque不公开reserve()和capacity()这样的底层内存管理接口。"
+  ],
+  "examples": [
+    "deque<int> values; values.push_front(1); values.emplace_front(0); values.push_back(2);可在两端添加元素。",
+    "与vector不同，deque不提供reserve()和capacity()来让用户直接管理其底层容量。"
+  ],
+  "misconceptions": [
+    "deque不要求连续内存，因此不能假设deque元素可以像vector元素一样整体传给需要连续数组的接口。",
+    "deque的首端操作不是vector的常见高效操作；deque专门支持两端常量时间插入和删除。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "deque与vector在内存连续性方面有什么区别？",
+      "a": "vector的元素通常连续存储，而deque不要求元素保存在连续内存中。"
+    },
+    {
+      "q": "deque相对于vector在插入删除方面的主要优势是什么？",
+      "a": "deque在首端和尾端都支持常量时间的元素插入和删除；vector主要只有尾端操作具有摊还常量时间复杂度。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "vector容器的基本操作和复杂度"
+  ],
+  "source_pages": [
+    567,
+    567
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1170_deque与vector的主要区别",
+  "_chunk_pages": [
+    565,
+    568
+  ]
+}

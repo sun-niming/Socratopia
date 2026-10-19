@@ -1,0 +1,504 @@
+{
+  "conversationId": "KfG43v-cJLlvThdB6I4bv",
+  "generatedAt": 1791895191184,
+  "pagesRange": "60-90",
+  "sections": [
+    {
+      "type": "tldr",
+      "content": "本段从表单验证错误处理与视图控制器讲起，先定下“Errors 靠紧邻位置配对、hasErrors 分全局与单点”两条规则，再用视图控制器简化无逻辑控制器、用模板库选型与缓存收尾第 2 章；随后转入第 3 章数据持久化，用 JdbcTemplate 重写朴素 JDBC、让存储库接口与实现分离，并靠 schema.sql/data.sql 自动配置建表灌数据、用 GeneratedKeyHolder 拿回主键、用 @Transactional 守住三层写入。"
+    },
+    {
+      "type": "narrative",
+      "content": "开头先解决“验证失败后错误怎么回填页面”，顺路学会用 WebMvcConfigurer 把只转发的控制器删掉，并弄清五种模板引擎的依赖与打包代价。接着从“静态网页与真应用的分界线是数据”切入第 3 章：先对比朴素 JDBC 与 JdbcTemplate，再把存储库拆成接口与实现两半；最后落到数据库表设计——中间表拆多对多、约定文件名自动执行 SQL、插入时顺便取回主键，并留下事务这个悬念。"
+    },
+    {
+      "type": "concepts",
+      "items": [
+        {
+          "name": "验证错误处理：Errors 参数的位置规则",
+          "body": "被验证对象与 Errors 必须紧挨排列，Spring 靠“Errors 紧跟被验证对象后面”这一位置关系配对；Errors 参数本身没有写入任何名字去指明属于哪个对象，`@Valid` 只负责触发验证，不指明配对对象。\n\n- 正确：`processOrder(@Valid TacoOrder order, Errors errors)`\n- 错误：`processOrder(Errors errors, @Valid TacoOrder order)`，倒过来后 Spring 无法把错误对象接到 order 身上。",
+          "sourceMessageIndexes": [
+            1,
+            2,
+            3
+          ]
+        },
+        {
+          "name": "在 Thymeleaf 中显示验证错误",
+          "body": "控制器发现错误时 `return \"orderForm\"` 把请求打回表单；`th:if=\"${#fields.hasErrors('ccNumber')}\"` 判断字段是否有错，有错才渲染该 `<span>`；`th:errors=\"*{ccNumber}\"` 用该字段的验证消息替换 `<span>` 里的占位文字，其他字段各自配一个自己的 `<span>`。\n\n`hasErrors()` 不带字段名，问的是整个表单有没有任何错误；`hasErrors('ccNumber')` 带字段名，只问这一个字段。所以只留空城市、卡号填对时，总提示 `<div>` 显示，ccNumber 的 `<span>` 不显示。",
+          "sourceMessageIndexes": [
+            3,
+            4,
+            5
+          ]
+        },
+        {
+          "name": "2.4 使用视图控制器",
+          "body": "HomeController 不填模型、不处理输入，只把 `/` 转发到首页视图；可用 `WebMvcConfigurer` 的 `addViewControllers` 替代：`registry.addViewController(\"/\").setViewName(\"home\")`，`addViewController(\"/\")` 登记谁来处理 `/` 这个 GET，`setViewName(\"home\")` 告诉它转发到哪。配好后 HomeController 可整个删掉，行为一模一样。\n\nWebMvcConfigurer 是接口，Java 8 起 default 方法允许接口方法带默认实现，它把所有方法都给了默认空实现，实现类只覆盖需要的方法；也可把 `implements WebMvcConfigurer` 挂到启动类上省掉 WebConfig 类。作者偏好 web、数据、安全各建一个配置类，这是口味问题不是对错。",
+          "sourceMessageIndexes": [
+            5,
+            6,
+            7
+          ]
+        },
+        {
+          "name": "2.5 选择视图模板库",
+          "body": "Spring Boot 接模板引擎的套路三步：加模板库 starter 到构建；在 `src/main/resources/templates` 下写模板；启动时自动检测并自动配好组件。表 2.2 列了五种：FreeMarker（spring-boot-starter-freemarker）、Groovy Templates（spring-boot-starter-groovy-templates）、JSP（None）、Mustache（spring-boot-starter-mustache）、Thymeleaf（spring-boot-starter-thymeleaf）。\n\nJSP 免依赖是因为 JSP 规范由 servlet 容器自己实现，默认内嵌 Tomcat 已带支持；但容器习惯在 `/WEB-INF` 下找 JSP，可执行 JAR 无法满足，想用 JSP 就得打 WAR 部署到传统 servlet 容器。一句话：JSP 免依赖但挑部署形式，其他模板要依赖但不挑打包方式。",
+          "sourceMessageIndexes": [
+            7,
+            8,
+            9
+          ]
+        },
+        {
+          "name": "2.5.1 缓存模板",
+          "body": "模板默认解析一次就缓存，后续请求吃缓存：生产环境是好事，省得每个请求重新解析；开发时却导致改完模板刷浏览器仍是旧版本，非得重启才生效。\n\n解法是关掉对应模板引擎缓存，如 Thymeleaf 在 application.properties 写 `spring.thymeleaf.cache = false`（FreeMarker：spring.freemarker.cache；Groovy：spring.groovy.template.cache；Mustache：spring.mustache.cache）。上线前一定要删掉或改回 true；善后可用 profile 文件，或挂 DevTools 由它开发时自动关、部署时自动恢复。",
+          "sourceMessageIndexes": [
+            9,
+            10,
+            11
+          ]
+        },
+        {
+          "name": "第 3 章动机与 JDBC vs JPA",
+          "body": "数据才是应用和静态网页的分界线：Taco Cloud 要留住食材、玉米卷、订单，没有数据库推不动。处理关系数据 Java 有两条主流路——JDBC 与 JPA，Spring 对两条都做了抽象，本章先讲 JDBC。",
+          "sourceMessageIndexes": [
+            11
+          ]
+        },
+        {
+          "name": "朴素 JDBC 与 JdbcTemplate 对比",
+          "body": "清单 3.1 的朴素 JDBC 里，真正的查询只占几行，却被开连接、建语句、关资源的代码埋住；执行随时可能出问题，必须接住受检异常 SQLException，而最常见的那几种错在 catch 块里根本处理不了，最后还是得往上抛。\n\n清单 3.2 用 `jdbcTemplate.query(\"select id, name, type from Ingredient where id=?\", ...)` 后不用亲手写这些。那些活儿不是没发生，只是挪进了 JdbcTemplate 内部；它还把受检异常替你转成自己的一套运行时异常，所以不必在每个方法里接 SQLException。",
+          "sourceMessageIndexes": [
+            11,
+            12,
+            13
+          ]
+        },
+        {
+          "name": "为持久化改造领域实体（3.1.1）",
+          "body": "持久化时通常最好有唯一标识对象的字段：Ingredient 早有 id，Taco 与 TacoOrder 还得补上。清单 3.3 给 Taco 加 `private Long id;`、`private Date createdAt;`，TacoOrder 加 id 和 placedAt（下单时间）。除了声明字段什么都不用做，Lombok 的 @Data 运行时自动生成 getter/setter；不用 Lombok 就得自己写。TacoOrder 还带 `implements Serializable` 和 serialVersionUID，为序列化留口子。",
+          "sourceMessageIndexes": [
+            13
+          ]
+        },
+        {
+          "name": "使用 JdbcTemplate（3.1.2）备料",
+          "body": "加 `spring-boot-starter-jdbc` 依赖；开发阶段嵌入式数据库就够，书上选 H2（`com.h2database:h2`）。H2 默认随机生成数据库名，连接 URL 难确定，于是把名字固定：`spring.datasource.generate-unique-name=false`、`spring.datasource.name=tacocloud`，URL 就是 `jdbc:h2:mem:tacocloud`，H2 控制台才连得上。页 79 顺带提到 application.properties 可改名 application.yml 用 YAML 写，效果一样。",
+          "sourceMessageIndexes": [
+            13,
+            14,
+            15
+          ]
+        },
+        {
+          "name": "定义 JDBC 存储库与 Optional 返回类型",
+          "body": "先把存储库要干的三件事写成接口 `IngredientRepository`：查询所有、通过 id 查单个、保存一个，接口正文先空着，怎么连库、怎么拼 SQL 留给实现类。\n\n`Optional<Ingredient> findById(String id)` 把“有可能找不到”直接写进方法签名：调用方想拿出里面的东西必须显式面对“万一它是空的”（orElse 兜底、orElseThrow 抛错、isPresent 先问一句）；直接返回 Ingredient 时签名上看不出暗示，可能一路无视直到运行时炸出 NullPointerException。Optional 把运行时的隐患提前变成签名上看得见、必须交代的东西。",
+          "sourceMessageIndexes": [
+            15,
+            16,
+            17
+          ]
+        },
+        {
+          "name": "依赖注入 JdbcTemplate 与接口实现分离",
+          "body": "接口定“要什么”，实现填“怎么做到”，再注入到要用它的地方。Spring 启动时组件扫描扫到实现类，在实例化时把需要的 JdbcTemplate 一并交到它手里：`private JdbcTemplate jdbcTemplate` 字段从没亲手赋值，对象一出生就已有值。交付方式有两种——写进构造器参数（Spring 先备好 JdbcTemplate bean 再 new 存储库）或直接标在字段上让它自己填；构造函数注入更受推崇，依赖一眼可见、测试里更好替换。\n\n页 80 的 `@Repository` 与 @Controller、@Component 同族，给类的身份是仓储，扫描时自动发现并在上下文中生成 bean；教材说单构造函数可省掉 @Autowired。",
+          "sourceMessageIndexes": [
+            18,
+            19,
+            21
+          ]
+        },
+        {
+          "name": "query 方法与 RowMapper 函数式接口",
+          "body": "`query()` 第一个参数是 SQL，第二个是 Spring 的 RowMapper（把结果集每一行变成一个对象），后面跟 SQL 需要的参数：`findAll()` 无 where 条件所以没参数，`findById()` 有参数。\n\nRowMapper 只有一个抽象方法 `mapRow(ResultSet, int)`，是函数式接口；`mapRowToIngredient(ResultSet row, int rowNum)` 参数表与方法名对得上、签名严丝合缝，所以方法引用能直接站到需要 RowMapper 实现的位置。方法引用是 lambda 的简写，编译时直接充当那个单抽象方法的实现，中间不必真去造匿名内部类；页 81 显式 `new RowMapper<>(){...}` 只是对照，两版做的事相同。",
+          "sourceMessageIndexes": [
+            21,
+            22,
+            24,
+            25
+          ]
+        },
+        {
+          "name": "存储库接入原有流程",
+          "body": "清单 3.7：DesignTacoController 注入 IngredientRepository，`addIngredientsToModel()` 改成调 `ingredientRepo.findAll()`，第 2 章那份硬编码的配料清单退役。清单 3.8：IngredientByIdConverter 简化成一句 `ingredientRepo.findById(id).orElse(null)`，原来手搭的 Map 也删了。findById 返回 Optional，转换器想拿回普通 Ingredient，于是用 orElse(null) 把“找不到”这层壳拆掉——谁调用谁负责交代空值。",
+          "sourceMessageIndexes": [
+            25
+          ]
+        },
+        {
+          "name": "数据库表结构与聚合",
+          "body": "图 3.1 给出四张表：Taco_Order 存订单细节（收货、支付、下单时间），Taco 存每个玉米卷设计，Ingredient_Ref 把 Taco 行连到 Ingredient 行，Ingredient 存原料。Taco 不能脱离 Taco_Order 存在，所以 Taco_Order 与 Taco 是一个聚合，Taco_Order 是聚合根；Ingredient 是自己聚合里的唯一成员，能独立存在，Taco 通过 Ingredient_Ref 引用它。",
+          "sourceMessageIndexes": [
+            25
+          ]
+        },
+        {
+          "name": "多对多关系的中间表 Ingredient_Ref",
+          "body": "一个 Taco 要用多种配料，同一种配料又出现在很多个 Taco 里，这是多对多。要是在 Taco 表里开一列硬存配料，一列只能装一个值，为每种配料各开一列则列数随配料数量变、完全没法固定。\n\n解法是把“一个 Taco 用了哪些配料”单独拎到中间表：一行记一条某 Taco 用了某 Ingredient，多对多被拆成两组一对多。页 85 建表只列 ingredient、taco、taco_key 三列，taco_key 保留配料在列表里的顺序，页 90 的 `saveIngredientRefs()` 里 `key++` 就是干这个的。中间表的存在是为了拆关系，不是为了少建表。",
+          "sourceMessageIndexes": [
+            25,
+            26,
+            27
+          ]
+        },
+        {
+          "name": "schema.sql 与 data.sql 约定及自动配置",
+          "body": "类路径根目录（src/main/resources/）下放一个 schema.sql，启动时里面 SQL 被拿去建表（清单 3.9：create table 建列、末尾 alter table ... add foreign key 立外键）；再放一个 data.sql，里面 insert 语句启动时预加载配料数据（清单 3.10 前四行还先 `delete from ...`，先清空再插入，省得重复启动数据叠起来）。\n\n这套机制属于 Spring Boot 的自动配置：不写任何一行“请执行这个文件”的代码，靠在约定位置找约定文件名，名字对、位置对就认领；默认开着，也可用配置项关掉或指定别的文件名。",
+          "sourceMessageIndexes": [
+            27,
+            28,
+            29
+          ]
+        },
+        {
+          "name": "OrderRepository.save()、拿回主键与三层写入",
+          "body": "接口 `OrderRepository` 声明 `TacoOrder save(TacoOrder order)`：存一个订单、返回存好之后的订单。TacoOrder 是聚合根，Taco 不能脱离它单独存在，每个 Taco 又通过 IngredientRef 挂着若干配料，所以存订单是一串连锁动作：存 TacoOrder → 存它的每个 Taco → 存每个 Taco 的 IngredientRef。IngredientRef 只有一个字段 `private final String ingredient`。\n\n建表 SQL 里 Taco_Order 的 id 写成 `id identity`，值由数据库生成；方法最后 `return order` 得带着 id，于是创建语句时声明 `pscf.setReturnGeneratedKeys(true)`，`jdbcOperations.update(psc, keyHolder)` 执行后用 `keyHolder.getKey().longValue()` 取出、`order.setId(orderId)` 写回——是插入时顺便吐回，不是事后补一次查询；Spring 把这套包装成 GeneratedKeyHolder，它的构造函数收的是 JdbcOperations 而非 JdbcTemplate，写成接口类型更松耦合、测试时更好替换。\n\nsaveTaco() 结构与 save() 几乎一样（插 Taco、拿回 tacoId、setId，再调 saveIngredientRefs()，其中 key++ 保住顺序）；save() 头上挂着 @Transactional。",
+          "sourceMessageIndexes": [
+            29,
+            30,
+            31
+          ]
+        }
+      ]
+    },
+    {
+      "type": "key-insight",
+      "content": "Errors 参数的配对靠“紧邻被验证对象”这一位置规则，而不是靠 @Valid 指明配对对象。",
+      "sourceMessageIndexes": [
+        2,
+        3
+      ]
+    },
+    {
+      "type": "key-terms",
+      "items": [
+        {
+          "term": "Errors",
+          "definition": "紧跟在被验证对象后面的参数，Spring 靠位置关系把它与对象配对，用来接收验证错误。"
+        },
+        {
+          "term": "#fields.hasErrors() / hasErrors('字段名')",
+          "definition": "Thymeleaf 表达式：不带字段名测整个表单有无错误，带字段名只测该字段。"
+        },
+        {
+          "term": "th:errors=\"*{字段名}\"",
+          "definition": "把该字段的验证消息替换掉 `<span>` 里的占位文字。"
+        },
+        {
+          "term": "WebMvcConfigurer",
+          "definition": "Spring 接口，所有方法都有默认空实现，覆盖 addViewControllers 即可登记视图控制器。"
+        },
+        {
+          "term": "JdbcTemplate",
+          "definition": "Spring 对 JDBC 的抽象，替你开连接、建语句、关资源，并把受检异常转成运行时异常。"
+        },
+        {
+          "term": "Optional",
+          "definition": "把“可能找不到”写进方法签名的返回类型，逼调用方显式处理空结果。"
+        },
+        {
+          "term": "RowMapper",
+          "definition": "函数式接口，只有一个抽象方法 mapRow(ResultSet, int)，负责把结果集每一行变成对象。"
+        },
+        {
+          "term": "GeneratedKeyHolder",
+          "definition": "Spring 包装“插入时返回生成的键”的机制，构造函数收 JdbcOperations。"
+        },
+        {
+          "term": "Ingredient_Ref",
+          "definition": "拆多对多的中间表，一行记一条某 Taco 用了某 Ingredient，taco_key 保留配料顺序。"
+        },
+        {
+          "term": "@Transactional",
+          "definition": "标在 save() 上，守住三层写入的事务注解，防止半途出错留下脏数据。"
+        }
+      ]
+    },
+    {
+      "type": "notes",
+      "title": "学习者表现与待解问题",
+      "content": "**已答对（correct）**\n\n- 顺序倒过来不行：靠 Errors 前面紧邻的 @Valid 判断配对。[2]\n- 只留空城市、卡号填对时：总 `<div>` 会显示，ccNumber 不会显示。[4]\n- Java 8 起用 default 方法允许接口带默认实现。[6]\n- 嵌入式 Tomcat 就提供了 JSP 支持。[8]\n- 挂了 DevTools 算把 2.5.1 整个小节的问题彻底解决了。[10]\n- 用 JdbcTemplate 后不用写开连接、建语句、关资源。[12]\n- 固定数据库名是为了登录 H2 控制台。[14]\n- 用 Optional 是为了防止调用方忘记处理空可能结果。[16]\n- 追问“JdbcTemplate 字段是 Spring 扫描后给它注入的值？”。[18]\n- “RowMapper 接口是单函数接口，因此方法引用实际上是将这个方法用 lambda 包装成一个 RowMapper 类型的匿名内部类。”[22, 24]\n- 自动配置。[28]\n\n**误区（misconception）**\n\n- 认为“加一张 Ingredient_Ref 是为了减少一张表的复杂度”——实际是为了把多对多拆成两组一对多，不是为了少建表。[26]\n\n**困惑（confusion）**\n\n- 想用 JDBC 插完再查回生成的 id（jdbc 查找一下吧）——实际是插入时用 getGeneratedKeys()/GeneratedKeyHolder 顺便吐回，不是事后补一次查询。[30]\n\n**理解转变（shift）**\n\n- “我们继续从下一页看起，第 80 页”——从 Optional 讨论转到接口正文。[20]\n\n**未解问题**\n\n- 实现类要真把 SQL 跑起来，它总得先拿到一个 JdbcTemplate 对象，这个对象从哪儿来？[17]\n- 具体这份实现用哪种写法、三个方法各自怎么落到 SQL？[19]\n- 为什么中间要多插一张 Ingredient_Ref，而不干脆在 Taco 表里开一列存配料？[25]\n- schema.sql/data.sql 没写“请执行这个文件”，凭什么启动时自己执行？属于 Spring Boot 哪个核心思路？[27]\n- 为什么 save() 非得标 @Transactional？写到第二层或第三层时出错、没有事务守着，数据库里会留下什么？[31, 33]\n- 项目里挂了 DevTools，还需不需要自己动手写 spring.thymeleaf.cache = false？[9]"
+    },
+    {
+      "type": "open-question",
+      "content": "为什么这个 save() 非得标 @Transactional 不可？假如写到第二层或第三层时出了错，没有事务在那儿守着，数据库里会留下什么？（记在账上，下次从事务接着算）"
+    },
+    {
+      "type": "review-questions",
+      "items": [
+        {
+          "question": "processOrder(Errors errors, @Valid TacoOrder order) 这种参数顺序为什么不行？",
+          "answer": "Errors 参数没有写入指明所属对象的名字，Spring 靠“Errors 紧跟在被验证对象后面”这一位置关系配对；顺序倒过来后它前面站的是别的参数，无法把错误对象接到 order 上。"
+        },
+        {
+          "question": "用户只把城市字段留空、卡号填对时，总提示 <div> 和 ccNumber 的 <span> 各会不会显示？",
+          "answer": "总 <div> 显示（hasErrors() 不带字段名，测的是整个表单有无任何错误）；ccNumber 的 <span> 不显示（该字段无错）。"
+        },
+        {
+          "question": "JSP 为什么在表 2.2 里不需要 starter 依赖？它的代价是什么？",
+          "answer": "JSP 规范由 servlet 容器自己实现，默认内嵌 Tomcat 已带 JSP 支持，所以不需要 starter。代价是容器习惯在 /WEB-INF 下找 JSP，可执行 JAR 无法满足，想用 JSP 就得打成 WAR 部署到传统 servlet 容器里。"
+        },
+        {
+          "question": "为什么 findById 返回 Optional<Ingredient> 而不是直接返回 Ingredient？",
+          "answer": "Optional 把“可能找不到”写进签名，调用方必须显式处理空结果（orElse、orElseThrow、isPresent）；直接返回 Ingredient 签名上看不出暗示，容易在运行时炸出 NullPointerException，报错点还可能离真正出问题的地方很远。"
+        },
+        {
+          "question": "OrderRepository.save() 里怎么把数据库生成的 id 拿回来并写回对象？",
+          "answer": "JDBC 的 PreparedStatement 能在插入的同时返回生成的键；创建语句时声明要返回生成的键（pscf.setReturnGeneratedKeys(true)），执行 jdbcOperations.update(psc, keyHolder) 后用 keyHolder.getKey().longValue() 取出，再 order.setId(orderId) 写回对象。是插入时顺便吐回，不是事后补一次查询。"
+        }
+      ]
+    }
+  ],
+  "generationMeta": {
+    "pipelineVersion": "post-class-v3",
+    "mode": "chunked",
+    "jobId": "pn_mv6nz8ih284cd22bc986",
+    "traceId": "tr_mv6nz8ih9c80bd25457b",
+    "sourceHash": "sha256:b7fcb2c762af23e359d24540332bb60c5edab339fb16b735adf650573c8c66e7",
+    "sourceMessageCount": 32,
+    "chunkCount": 4,
+    "generatedAt": 1791895191184,
+    "decision": "repair",
+    "quality": {
+      "score": 0.7494,
+      "metrics": {
+        "topicCoverage": 0.7096774193548387,
+        "learnerEvidenceCoverage": 0.47058823529411764,
+        "explanationCoverage": 1,
+        "sourceIntegrity": 1,
+        "reviewQuestionDiversity": 0.9240506329113924,
+        "structureValidity": 1,
+        "lengthFitness": 0,
+        "duplicationRatio": 0,
+        "unsupportedTopicRatio": 0,
+        "lengthChars": 9133,
+        "conceptCount": 17,
+        "evidenceTopicCount": 31,
+        "chunkCompleteness": 1
+      }
+    },
+    "warnings": [
+      "merged duplicate section type=key-insight"
+    ],
+    "evidenceIndex": [
+      {
+        "name": "验证错误处理：Errors 参数的位置规则",
+        "sourceMessageIndexes": [
+          1,
+          2,
+          3
+        ]
+      },
+      {
+        "name": "在 Thymeleaf 中显示验证错误",
+        "sourceMessageIndexes": [
+          3,
+          4,
+          5
+        ]
+      },
+      {
+        "name": "2.4 使用视图控制器",
+        "sourceMessageIndexes": [
+          5,
+          6,
+          7
+        ]
+      },
+      {
+        "name": "2.5 选择视图模板库",
+        "sourceMessageIndexes": [
+          7,
+          8,
+          9
+        ]
+      },
+      {
+        "name": "2.5.1 缓存模板",
+        "sourceMessageIndexes": [
+          9
+        ]
+      },
+      {
+        "name": "JSP 与 Servlet 容器",
+        "sourceMessageIndexes": [
+          8,
+          9
+        ]
+      },
+      {
+        "name": "缓存模板（2.5.1）",
+        "sourceMessageIndexes": [
+          9,
+          10,
+          11
+        ]
+      },
+      {
+        "name": "第 3 章动机与 JDBC vs JPA",
+        "sourceMessageIndexes": [
+          11
+        ]
+      },
+      {
+        "name": "朴素 JDBC 与 JdbcTemplate 对比（清单 3.1 / 3.2）",
+        "sourceMessageIndexes": [
+          11,
+          12,
+          13
+        ]
+      },
+      {
+        "name": "为持久化改造领域实体（3.1.1）",
+        "sourceMessageIndexes": [
+          13
+        ]
+      },
+      {
+        "name": "使用 JdbcTemplate（3.1.2）备料",
+        "sourceMessageIndexes": [
+          13,
+          14,
+          15
+        ]
+      },
+      {
+        "name": "定义 JDBC 存储库与 Optional 返回类型",
+        "sourceMessageIndexes": [
+          15,
+          16,
+          17
+        ]
+      },
+      {
+        "name": "Optional 的作用",
+        "sourceMessageIndexes": [
+          16,
+          17
+        ]
+      },
+      {
+        "name": "接口与实现分离",
+        "sourceMessageIndexes": [
+          17
+        ]
+      },
+      {
+        "name": "依赖注入 JdbcTemplate",
+        "sourceMessageIndexes": [
+          18,
+          19
+        ]
+      },
+      {
+        "name": "IngredientRepository 接口与 JdbcIngredientRepository 实现",
+        "sourceMessageIndexes": [
+          21
+        ]
+      },
+      {
+        "name": "query 方法和 RowMapper",
+        "sourceMessageIndexes": [
+          21
+        ]
+      },
+      {
+        "name": "RowMapper 是函数式接口",
+        "sourceMessageIndexes": [
+          22,
+          24,
+          25
+        ]
+      },
+      {
+        "name": "存储库接入原有流程",
+        "sourceMessageIndexes": [
+          25
+        ]
+      },
+      {
+        "name": "数据库表结构与聚合",
+        "sourceMessageIndexes": [
+          25
+        ]
+      },
+      {
+        "name": "中间表 Ingredient_Ref 的必要性",
+        "sourceMessageIndexes": [
+          25,
+          26,
+          27
+        ]
+      },
+      {
+        "name": "schema.sql 与 data.sql 约定",
+        "sourceMessageIndexes": [
+          27
+        ]
+      },
+      {
+        "name": "多对多关系的中间表",
+        "sourceMessageIndexes": [
+          26,
+          27
+        ]
+      },
+      {
+        "name": "按文件名认领任务的约定：schema.sql 与 data.sql",
+        "sourceMessageIndexes": [
+          27,
+          28,
+          29
+        ]
+      },
+      {
+        "name": "自动配置",
+        "sourceMessageIndexes": [
+          28,
+          29
+        ]
+      },
+      {
+        "name": "repository 的三段式",
+        "sourceMessageIndexes": [
+          29
+        ]
+      },
+      {
+        "name": "OrderRepository.save() 与聚合关系",
+        "sourceMessageIndexes": [
+          29
+        ]
+      },
+      {
+        "name": "拿回数据库生成的主键",
+        "sourceMessageIndexes": [
+          29,
+          30,
+          31
+        ]
+      },
+      {
+        "name": "save() 的执行流程",
+        "sourceMessageIndexes": [
+          31
+        ]
+      },
+      {
+        "name": "saveTaco() 与 saveIngredientRefs()",
+        "sourceMessageIndexes": [
+          31
+        ]
+      },
+      {
+        "name": "事务与三层写入",
+        "sourceMessageIndexes": [
+          31,
+          33
+        ]
+      }
+    ],
+    "degradedReason": null
+  }
+}

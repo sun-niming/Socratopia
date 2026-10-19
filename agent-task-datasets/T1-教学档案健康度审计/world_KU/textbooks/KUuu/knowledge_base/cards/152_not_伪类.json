@@ -1,0 +1,42 @@
+{
+  "title": ":not 伪类",
+  "definition": "`:not(selector)` 用于在祖先元素 PE 中匹配“不符合指定选择器”的每个元素。它相当于给选择条件加一个“排除项”。",
+  "key_points": [
+    "`:not(...)` 表示取反，匹配不符合括号内选择器的元素。",
+    "它仍然是选择元素本身，只是把符合某条件的元素排除掉。",
+    "可与其他选择器组合使用。"
+  ],
+  "examples": [
+    "div:not(.selected) { ... }",
+    "li:not(:first-child) { ... }"
+  ],
+  "misconceptions": [
+    ":not 不是选择“不是父元素”的元素，而是排除掉满足括号内条件的元素。",
+    ":not 不会创建新元素，只是改变筛选条件。"
+  ],
+  "qa_pairs": [
+    {
+      "q": ":not(selector) 的作用是什么？",
+      "a": "匹配不符合指定选择器的元素。"
+    },
+    {
+      "q": ":not 的本质是什么？",
+      "a": "本质上是一个否定筛选条件。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "伪类选择器"
+  ],
+  "source_pages": [
+    97,
+    100
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "152_not_伪类",
+  "_chunk_pages": [
+    97,
+    100
+  ]
+}

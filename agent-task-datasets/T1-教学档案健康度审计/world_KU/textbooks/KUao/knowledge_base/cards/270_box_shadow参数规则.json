@@ -1,0 +1,43 @@
+{
+  "title": "box-shadow参数规则",
+  "definition": "box-shadow用于给元素添加阴影效果。向元素添加单个box-shadow效果时，规则中的长度值可以给出2个、3个或4个：若只给出2个值，分别解释为水平偏移和垂直偏移；若给出第3个值，表示阴影大小（blur-radius）；若给出第4个值，表示阴影扩展（spread-radius）。该规则还可选写inset关键字和颜色值。若要给同一个元素添加多个阴影效果，要用逗号把每个阴影规则分隔开。",
+  "key_points": [
+    "2个length值依次表示offset-x和offset-y",
+    "第3个值表示blur-radius，第4个值表示spread-radius",
+    "inset和颜色值都是可选项",
+    "多个阴影之间用逗号分隔"
+  ],
+  "examples": [
+    "box-shadow: 10px 5px 5px 0 #333 inset;",
+    "box-shadow: 2px 2px 4px #000, 0 0 10px #f00;"
+  ],
+  "misconceptions": [
+    "把第3个值误认为水平偏移或扩展半径",
+    "以为box-shadow只能写一个阴影，不能用逗号叠加多个阴影"
+  ],
+  "qa_pairs": [
+    {
+      "q": "box-shadow写两个长度值时，它们分别表示什么？",
+      "a": "分别表示水平偏移和垂直偏移。"
+    },
+    {
+      "q": "box-shadow的第4个长度值表示什么？",
+      "a": "表示spread-radius，也就是阴影扩展。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "CSS基础"
+  ],
+  "source_pages": [
+    193,
+    196
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "270_box_shadow参数规则",
+  "_chunk_pages": [
+    193,
+    196
+  ]
+}

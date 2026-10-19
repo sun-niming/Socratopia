@@ -1,0 +1,37 @@
+{
+  "title": "server.c 的职责边界",
+  "definition": "`server.c` 只负责网络层和并发层：创建监听 socket、接收连接、回收子进程并把客户端交给 `handle_client`。它不负责文件如何读取，也不负责 MIME 类型等应用层细节。",
+  "key_points": [
+    "`server.c` 负责接入网络连接并把客户端处理工作交给 `handle_client`。",
+    "它不关心文件读取逻辑，也不关心 MIME 解析。",
+    "本文件应提供的核心接口包括 `create_listen_socket`、`serve_forever`、`install_sigchld_handler`。"
+  ],
+  "examples": [
+    "接口划分示例：`create_listen_socket` 负责建监听 socket，`serve_forever` 负责循环接收连接，`install_sigchld_handler` 负责回收子进程。"
+  ],
+  "misconceptions": [
+    "以为 `server.c` 要把静态文件读取、HTTP 细节、MIME 处理都一起实现。",
+    "以为网络接入和业务处理必须写在同一个函数里。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`server.c` 主要负责哪些事情？",
+      "a": "主要负责网络层和并发层，例如监听、接收连接、fork 并发和回收子进程；不负责文件读取和 MIME 处理。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "模块划分"
+  ],
+  "source_pages": [
+    73,
+    76
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "115_server_c_的职责边界",
+  "_chunk_pages": [
+    73,
+    76
+  ]
+}

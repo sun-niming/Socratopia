@@ -1,0 +1,41 @@
+{
+  "title": "gap",
+  "definition": "gap 是 Grid 容器属性，用于定义 Grid 线（轨道之间）的间距。它可简写为 `gap: <row-gap> <column-gap>`；如果只写一个值，则表示行间距和列间距相同。",
+  "key_points": [
+    "`row-gap` 表示行间距，`column-gap` 表示列间距。",
+    "`gap` 可以写两个值分别控制行、列间距，也可以只写一个值让两者相同。"
+  ],
+  "examples": [
+    ".container {\n  gap: 20px 10px; /* 行间距 20px，列间距 10px */\n}",
+    ".container {\n  gap: 15px;\n}"
+  ],
+  "misconceptions": [
+    "`gap` 不是给 Grid 项本身加外边距，而是控制轨道之间的空隙。",
+    "只写一个值时，不是只作用于行或列，而是行、列间距都相同。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "gap: 20px 10px 分别表示什么？",
+      "a": "行间距为 20px，列间距为 10px。"
+    },
+    {
+      "q": "gap 只写一个值时表示什么？",
+      "a": "表示行间距和列间距相同。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "Grid 容器"
+  ],
+  "source_pages": [
+    177,
+    180
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "267_gap",
+  "_chunk_pages": [
+    177,
+    180
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "title": "闭包",
+  "definition": "闭包是函数和其作用域绑定在一起形成的结构。尤其在函数嵌套中，内部函数作为外部函数的返回值时，内部函数与外部函数的作用域绑定在一起，就构成闭包。",
+  "key_points": [
+    "闭包由函数及其可访问的作用域组成",
+    "内部函数可以访问外部函数中的变量",
+    "当内部函数被返回到外部继续使用时，仍能保留对外部作用域的访问"
+  ],
+  "examples": [
+    "function outter() { let outNum = 111; function inner() { let innerNum = 222; console.log(outNum); } return inner; } let demo = outter(); demo(); // 访问到 outNum"
+  ],
+  "misconceptions": [
+    "闭包不等于把函数单独返回；关键是返回的函数仍然保留了对外部作用域的引用",
+    "闭包不是只有一层嵌套才有，重点是函数与作用域的绑定关系"
+  ],
+  "qa_pairs": [
+    {
+      "q": "教材中对闭包的定义是什么？",
+      "a": "函数和其作用域绑定在一起构成闭包。"
+    },
+    {
+      "q": "为什么返回内部函数时可能形成闭包？",
+      "a": "因为内部函数与外部函数的作用域绑定在一起，返回后仍可访问外部作用域中的变量。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "函数",
+    "作用域",
+    "函数嵌套"
+  ],
+  "source_pages": [
+    270,
+    271
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "363_闭包",
+  "_chunk_pages": [
+    269,
+    272
+  ]
+}

@@ -1,0 +1,50 @@
+{
+  "title": "非 public 继承的访问级别变化",
+  "definition": "C++允许使用 `protected` 或 `private` 继承。`protected` 继承会使基类的 public 方法和数据成员在派生类中变为 protected；`private` 继承会使基类的 public 和 protected 方法及数据成员在派生类中变为 private。若继承声明未写访问说明符，类默认采用 private 继承，结构体默认采用 public 继承。",
+  "key_points": [
+    "public、protected、private 继承会影响基类成员在派生类中的可访问级别。",
+    "protected 继承：基类 public 成员在派生类中变为 protected；基类 protected 成员仍属于受保护成员。",
+    "private 继承：基类 public 和 protected 成员在派生类中都变为 private。",
+    "非 public 继承较少见，原文建议谨慎使用，因为许多程序员并不熟悉它。"
+  ],
+  "examples": [
+    "`class Derived : protected Base {};`：`Base` 的 public 接口在 `Derived` 中作为 protected 成员使用。",
+    "`class Derived : private Base {};`：`Base` 的 public、protected 成员在 `Derived` 中作为 private 成员使用。",
+    "`class C : Base {};` 等价于 private 继承；`struct S : Base {};` 等价于 public 继承。"
+  ],
+  "misconceptions": [
+    "误以为 protected 继承会把基类的所有成员都变成 private。",
+    "误以为类和结构体在未写继承访问说明符时默认规则相同。",
+    "误以为非 public 继承通常可以直接替代组合；原文指出它较少见，并提醒谨慎使用。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "未指定继承访问说明符时，类和结构体分别默认采用什么继承方式？",
+      "a": "类默认采用 private 继承，结构体默认采用 public 继承。"
+    },
+    {
+      "q": "private 继承对基类 public 和 protected 成员的访问级别有什么影响？",
+      "a": "它们在派生类中都变为 private。"
+    },
+    {
+      "q": "protected 继承的主要效果是什么？",
+      "a": "基类的 public 方法和数据成员在派生类中变为 protected，从而对外部客户代码隐藏，但派生类内部仍可使用。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "类的访问控制",
+    "继承的基本语法"
+  ],
+  "source_pages": [
+    345,
+    345
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "697_非_public_继承的访问级别变化",
+  "_chunk_pages": [
+    345,
+    348
+  ]
+}

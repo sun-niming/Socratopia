@@ -1,0 +1,42 @@
+{
+  "title": "std::bind 重新排列参数",
+  "definition": "std::bind 不仅可以绑定固定值，还可以通过不同顺序使用占位符来重新排列参数。新可调用对象中的占位符决定其调用参数将传递给原可调用对象的哪个参数位置。",
+  "key_points": [
+    "bind(func, _2, _1) 表示新对象的第二个调用参数传给 func 的第一个参数，新对象的第一个调用参数传给 func 的第二个参数。",
+    "占位符的编号表示新绑定对象被调用时的参数编号。",
+    "绑定对象的参数顺序可以与原函数的参数顺序不同。"
+  ],
+  "examples": [
+    "auto f2 = bind(func, placeholders::_2, placeholders::_1);",
+    "调用 f2(\"Test\", 32) 等价于调用 func(32, \"Test\")，输出示例为 func(32, Test)。"
+  ],
+  "misconceptions": [
+    "bind 中 _1、_2 的编号不是原函数参数编号，而是新生成可调用对象的参数编号。",
+    "重新排列参数不需要修改原函数定义。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "auto f2 = bind(func, _2, _1); 调用 f2(\"Test\", 32) 时，实际调用顺序是什么？",
+      "a": "实际调用 func(32, \"Test\")。"
+    },
+    {
+      "q": "bind 中的 _2 表示什么？",
+      "a": "表示新绑定对象被调用时传入的第二个参数。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "std::bind 绑定固定参数"
+  ],
+  "source_pages": [
+    615,
+    615
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1266_std_bind_重新排列参数",
+  "_chunk_pages": [
+    613,
+    616
+  ]
+}

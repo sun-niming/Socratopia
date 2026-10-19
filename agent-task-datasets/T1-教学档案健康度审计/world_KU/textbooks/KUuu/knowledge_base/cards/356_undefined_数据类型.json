@@ -1,0 +1,39 @@
+{
+  "title": "Undefined 数据类型",
+  "definition": "Undefined 数据类型只有一个值 undefined，表示“未定义”。原文指出，它会在两种情况下出现：对象属性不存在，或者声明了变量但从未赋值。",
+  "key_points": [
+    "Undefined 只有一个值：undefined。",
+    "undefined 表示“未定义”。",
+    "对象属性不存在时可能出现 undefined。",
+    "变量声明后从未赋值时会是 undefined。"
+  ],
+  "examples": [
+    "let a;  // a 为 undefined",
+    "obj.noSuchProperty  // 属性不存在时可能得到 undefined"
+  ],
+  "misconceptions": [
+    "把 undefined 和 null 当成同一个概念。",
+    "认为变量只要声明了就一定有具体值。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "undefined 什么时候会出现？",
+      "a": "例如对象属性不存在，或者变量声明了但从未赋值。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "JavaScript 基本数据类型"
+  ],
+  "source_pages": [
+    245,
+    248
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "356_undefined_数据类型",
+  "_chunk_pages": [
+    245,
+    248
+  ]
+}

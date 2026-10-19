@@ -1,0 +1,38 @@
+{
+  "title": "reduce()",
+  "definition": "`reduce()` 会对数组中的每个元素按顺序执行 reducer 函数；教材表格与配图说明，它可把一组元素逐步“归约”成一个结果，示例为 `reduce((acc, cur) => acc + cur)`。",
+  "key_points": [
+    "按顺序处理每个元素",
+    "通过 reducer 函数把数组逐步归约成一个结果",
+    "教材配图示例使用了 `(acc, cur) => acc + cur`"
+  ],
+  "examples": [
+    "[1, 2, 3].reduce((acc, cur) => acc + cur) // 6"
+  ],
+  "misconceptions": [
+    "以为 `reduce()` 只是普通遍历",
+    "以为 `reduce()` 必然返回数组",
+    "以为 reducer 只会执行一次"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`reduce()` 的核心作用是什么？",
+      "a": "对每个元素按序执行 reducer 函数，把数组逐步归约成一个结果。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "Array对象与创建方式"
+  ],
+  "source_pages": [
+    307,
+    308
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "415_reduce",
+  "_chunk_pages": [
+    305,
+    308
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "title": "every方法",
+  "definition": "`every()` 用于判断数组中所有元素是否都符合条件。它返回布尔类型；只有所有元素都满足条件时才返回 `true`，只要有一个元素不满足就结束并返回 `false`。",
+  "key_points": [
+    "返回布尔类型",
+    "要求所有元素都满足条件",
+    "一旦有元素不满足条件就结束遍历"
+  ],
+  "examples": [
+    "[2,4,6].every(x => x % 2 === 0)  // true",
+    "['🐕','🐕','🐶','🐕'].every(x => x === '🐕')  // false"
+  ],
+  "misconceptions": [
+    "`every()` 只要有一个元素满足就返回 `true`；这是 `some()` 的特征",
+    "`every()` 的遍历一定会执行完所有元素；教材说明遇到不满足条件时可结束"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`every()` 的判断标准是什么？",
+      "a": "所有元素都满足条件时才返回 `true`。"
+    },
+    {
+      "q": "`every()` 的返回值类型是什么？",
+      "a": "布尔类型。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "回调函数",
+    "Array对象与创建方式"
+  ],
+  "source_pages": [
+    307,
+    308
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "442_every方法",
+  "_chunk_pages": [
+    305,
+    308
+  ]
+}

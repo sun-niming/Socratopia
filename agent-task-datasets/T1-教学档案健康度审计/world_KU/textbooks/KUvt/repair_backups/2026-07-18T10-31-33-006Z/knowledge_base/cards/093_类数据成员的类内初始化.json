@@ -1,0 +1,41 @@
+{
+  "title": "类数据成员的类内初始化",
+  "definition": "C++允许在类定义中直接为非静态数据成员提供默认初始化值。对象构造时，如果构造函数没有通过构造函数初始化器提供其他值，就会使用这些类内初始化器。例如，字符串成员可初始化为“Unknown Passenger”，整数成员初始化为 $0$，布尔成员初始化为 $false$。",
+  "key_points": [
+    "类内初始化器写在数据成员声明之后，例如：`std::string m_passengerName { \"Unknown Passenger\" };`。",
+    "列表初始化可以用于不同类型的数据成员，例如：`int m_numberOfMiles { 0 };` 和 `bool m_hasEliteSuperRewardsStatus { false };`。",
+    "类内初始化器为成员提供默认值，不妨碍构造函数在需要时使用构造函数初始化器指定其他值。"
+  ],
+  "examples": [
+    "`class AirlineTicket { private: std::string m_passengerName { \"Unknown Passenger\" }; int m_numberOfMiles { 0 }; bool m_hasEliteSuperRewardsStatus { false }; };`"
+  ],
+  "misconceptions": [
+    "类内初始化器不是给整个类对象只执行一次的初始化；它用于每个对象的数据成员初始化。",
+    "类内初始化器不能替代所有构造函数逻辑；构造函数仍可执行其他初始化或操作。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如果AirlineTicket对象构造时没有另外指定乘客姓名、里程数和精英会员状态，类内初始化器会提供什么值？",
+      "a": "乘客姓名为`\"Unknown Passenger\"`，里程数为$0$，精英会员状态为`false`。"
+    },
+    {
+      "q": "类内初始化器中布尔成员的默认值是什么？",
+      "a": "`false`。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++类和数据成员"
+  ],
+  "source_pages": [
+    65,
+    68
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "093_类数据成员的类内初始化",
+  "_chunk_pages": [
+    65,
+    68
+  ]
+}

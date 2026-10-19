@@ -1,0 +1,46 @@
+{
+  "title": "测试 ObjectPool 不重复分发对象",
+  "definition": "ObjectPool 的独占性测试通过连续获取多个对象并记录其序列号，验证对象池不会把同一个 Serial 对象同时提供两次。测试将返回的智能指针保存到 vector 中以保持对象存活，并把每个序列号插入 set；最后断言 set 中的序列号数量等于获取对象数量。",
+  "key_points": [
+    "示例获取对象的数量为 10，即 `numberOfObjectsToRetrieve = 10`。",
+    "使用 `vector<shared_ptr<Serial>>` 保存返回对象，避免在循环迭代后对象自动释放回对象池。",
+    "使用 `set<size_t>` 保存序列号；set 会自动去除重复值。",
+    "若获取到的 10 个对象各不相同，则应满足：$$\\text{seenSerialNumbers.size()}=\\text{numberOfObjectsToRetrieve}=10$$",
+    "示例使用 `Assert::AreEqual(numberOfObjectsToRetrieve, seenSerialNumbers.size());` 完成断言。"
+  ],
+  "examples": [
+    "概念流程：获取 10 次对象 → 将每个对象保存到 `retrievedSerials` → 将每个序列号插入 `seenSerialNumbers` → 比较两个容器的数量。",
+    "若 10 次获取中有一个对象重复，则 set 中的不同序列号数量小于 10，断言失败。"
+  ],
+  "misconceptions": [
+    "仅比较获取次数和 vector 大小不能证明对象不同，因为 vector 可以包含重复对象；这里需要 set 去重后的序列号数量。",
+    "保存 shared_ptr 不只是为了记录结果，也是为了让对象在整个循环期间保持存活，避免被归还对象池。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么独占性测试需要使用 set 记录序列号？",
+      "a": "因为 set 会去除重复序列号，比较其大小与获取次数即可检查是否有重复对象。"
+    },
+    {
+      "q": "如果获取 10 个对象后 set 中只有 9 个不同序列号，说明什么？",
+      "a": "至少有一个对象被重复提供，ObjectPool 的独占性要求未满足。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "Serial 测试辅助类的唯一序列号",
+    "C++ vector 和 set 容器",
+    "智能指针对象生命周期"
+  ],
+  "source_pages": [
+    887,
+    888
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1838_测试_objectpool_不重复分发对象",
+  "_chunk_pages": [
+    885,
+    888
+  ]
+}

@@ -1,0 +1,48 @@
+{
+  "title": "rdt2.2 的带序号 ACK 机制",
+  "definition": "rdt2.2 是一种使用带分组序号 ACK 的可靠数据传输协议。接收方对序号为 $0$ 和 $1$ 的数据分组分别发送 ACK0 和 ACK1；发送方根据 ACK 中的序号判断确认是否对应当前分组。收到损坏的 ACK 或确认序号不匹配的 ACK 时，发送方重传当前数据分组。",
+  "key_points": [
+    "接收方对正确接收的序号为 $0$ 的分组发送 ACK0，对正确接收的序号为 $1$ 的分组发送 ACK1。",
+    "发送方等待与当前分组序号匹配的 ACK。例如发送分组 $0$ 时等待 ACK0，发送分组 $1$ 时等待 ACK1。",
+    "发送方收到损坏的 ACK，或收到错误序号的 ACK 时，会重新发送当前保存的分组。"
+  ],
+  "examples": [
+    "发送方处于“等待 ACK0”状态时，若收到满足 $\\mathrm{notcorrupt}(\\mathrm{rcvpkt})\\land\\mathrm{isACK}(\\mathrm{rcvpkt},0)$ 的报文，则认为分组 $0$ 已被确认。",
+    "若发送方处于“等待 ACK1”状态，却收到损坏报文或 ACK0，则重新发送当前的分组 $1$。",
+    "接收方收到未损坏且序号为 $0$ 的分组时，可执行：\\n$\\mathrm{extract}(\\mathrm{rcvpkt},\\mathrm{data})$；\\n$\\mathrm{deliver\\_data(data)}$；\\n$\\mathrm{sndpkt}=\\mathrm{make\\_pkt}(\\mathrm{ACK},0,\\mathrm{checksum})$；\\n$\\mathrm{udt\\_send(sndpkt)}$。"
+  ],
+  "misconceptions": [
+    "收到任意 ACK 都可以推进发送状态；实际上 ACK 的序号必须与当前等待的序号匹配。",
+    "收到错误序号的 ACK 时应立即向上层交付数据；实际上发送方应重传当前分组，接收方只有在正确接收新分组时才交付数据。",
+    "ACK 中的序号是 ACK 报文本身的编号；在该协议中，它表示被确认的数据分组序号。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "发送方发送分组 $0$ 时，rdt2.2 应等待哪一个确认？",
+      "a": "应等待 ACK0。"
+    },
+    {
+      "q": "rdt2.2 发送方收到损坏的 ACK 或错误序号的 ACK 时采取什么动作？",
+      "a": "重传当前的数据分组。"
+    },
+    {
+      "q": "rdt2.2 接收方正确收到序号为 $1$ 的数据分组后如何响应？",
+      "a": "提取并向上层交付数据，然后发送 ACK1。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "rdt2.1 中带序号确认的可靠传输"
+  ],
+  "source_pages": [
+    157,
+    158
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "389_rdt2_2_的带序号_ack_机制",
+  "_chunk_pages": [
+    157,
+    160
+  ]
+}

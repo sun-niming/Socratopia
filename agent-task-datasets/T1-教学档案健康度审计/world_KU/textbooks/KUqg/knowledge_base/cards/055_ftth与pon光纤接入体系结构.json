@@ -1,0 +1,43 @@
+{
+  "title": "FTTH与PON光纤接入体系结构",
+  "definition": "光纤到户（Fiber To The Home，FTTH）是从本地中心局直接向家庭提供光纤路径的接入技术。PON（Passive Optical Network，被动光纤网络）中，家庭的光纤网络端接器（ONT）通过专用光纤连接到光纤分配器，分配器将通常少于100个家庭汇聚到一根共享光纤，再连接到中心局的光线路端接器（OLT）。OLT负责光信号与电信号之间的转换，并通过本地电话公司的路由器连接到因特网。",
+  "key_points": [
+    "FTTH的光纤分布方案包括每户独享一根光纤的直接光纤方案，以及多个家庭共享中心局出发光纤的方案。",
+    "共享光纤的分布体系结构包括主动光纤网络（AON）和被动光纤网络（PON）。",
+    "PON中，分配器会复制所有从OLT发送到分配器的分组，使这些分组能够发送到相关家庭。",
+    "家庭路由器通常是无线路由器，它连接家庭设备与ONT。"
+  ],
+  "examples": [
+    "PON中的连接关系可以表示为：$$\\text{家庭设备}\\rightarrow\\text{家庭路由器}\\rightarrow\\text{ONT}\\rightarrow\\text{光纤分配器}\\rightarrow\\text{共享光纤}\\rightarrow\\text{OLT}\\rightarrow\\text{本地电话公司路由器}\\rightarrow\\text{因特网}$$"
+  ],
+  "misconceptions": [
+    "错误地认为PON中每个家庭从中心局一直独享一根光纤；原文指出多户家庭通常共享从中心局出来的光纤。",
+    "错误地认为ONT直接完成全部路由功能；原文强调OLT完成光电转换，家庭路由器连接家庭设备与ONT。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "PON中ONT、分配器和OLT分别起什么作用？",
+      "a": "ONT位于家庭并连接家庭路由器；分配器汇聚多个家庭并复制从OLT下发的分组；OLT位于中心局，负责光信号和电信号之间的转换，并连接到因特网。"
+    },
+    {
+      "q": "PON中多个家庭如何连接到中心局？",
+      "a": "每个家庭通过专用光纤连接到分配器，分配器再把通常少于100个家庭汇聚到一根共享光纤，该共享光纤连接到中心局的OLT。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "住宅宽带接入",
+    "光纤传输"
+  ],
+  "source_pages": [
+    29,
+    30
+  ],
+  "needs_verification": true,
+  "verify_query": "FTTH PON ONT splitter OLT architecture shared fiber fewer than 100 homes textbook Kurose Ross 7th edition",
+  "concept_id": "055_ftth与pon光纤接入体系结构",
+  "_chunk_pages": [
+    29,
+    32
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "title": "约束类模板的模板参数",
+  "definition": "C++20 可以像约束函数模板一样约束类模板的模板类型参数。例如，可以要求 `GameBoard<T>` 的模板参数 `T` 必须是 `GamePiece` 的派生类。约束可以直接写在模板参数中，也可以使用 requires 子句。",
+  "key_points": [
+    "使用概念直接约束模板参数：`template <std::derived_from<GamePiece> T>`。",
+    "使用 requires 子句约束模板参数：`template <typename T> requires std::derived_from<T, GamePiece>`。",
+    "类模板的成员函数定义处也必须重复相应的类模板约束。",
+    "如果模板实参不满足约束，类模板实例化会在编译期受到限制。"
+  ],
+  "examples": [
+    "`template <std::derived_from<GamePiece> T> class GameBoard : public Grid<T> { /* ... */ };`",
+    "等价形式：`template <typename T> requires std::derived_from<T, GamePiece> class GameBoard : public Grid<T> { /* ... */ };`",
+    "成员函数定义可以写成：`template <std::derived_from<GamePiece> T> void GameBoard<T>::move(size_t xSrc, size_t ySrc, size_t xDest, size_t yDest) { /* ... */ }`"
+  ],
+  "misconceptions": [
+    "类模板约束只写在类模板声明处，成员函数的模板定义处就不需要重复。",
+    "`std::derived_from<GamePiece>` 的含义是 `GamePiece` 派生自 `T`；实际含义是模板参数 `T` 应满足派生自 `GamePiece` 的约束。",
+    "类模板约束是在运行时检查对象类型，而不是编译期约束模板实例化。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何约束 `GameBoard` 的模板类型参数，使其必须满足 `std::derived_from<T, GamePiece>`？",
+      "a": "可以写成 `template <std::derived_from<GamePiece> T> class GameBoard { /* ... */ };`，也可以写成 `template <typename T> requires std::derived_from<T, GamePiece> class GameBoard { /* ... */ };`。"
+    },
+    {
+      "q": "类模板成员函数的定义处是否也要写类模板的约束？",
+      "a": "需要，成员函数定义处应重复相应的类模板约束。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "类模板",
+    "C++20概念",
+    "std::derived_from"
+  ],
+  "source_pages": [
+    406,
+    406
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "826_约束类模板的模板参数",
+  "_chunk_pages": [
+    405,
+    408
+  ]
+}

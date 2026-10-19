@@ -1,0 +1,43 @@
+{
+  "title": "Grid 容器的 display 属性",
+  "definition": "要把元素定义为 Grid 容器，可以使用 display 属性。display: grid 会把元素定义为块级的 Grid 容器，display: inline-grid 会把元素定义为内联级的 Grid 容器。",
+  "key_points": [
+    "display 属性可以用来创建 Grid 容器。",
+    "display: grid 使元素成为块级 Grid 容器。",
+    "display: inline-grid 使元素成为内联级 Grid 容器。"
+  ],
+  "examples": [
+    ".container {",
+    "  display: grid;",
+    "}"
+  ],
+  "misconceptions": [
+    "误以为 display: grid 和 display: inline-grid 没有区别。",
+    "误以为只有设置 grid-template 等属性后，元素才算 Grid 容器。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何把元素定义为 Grid 容器？",
+      "a": "给元素设置 display: grid 或 display: inline-grid。"
+    },
+    {
+      "q": "display: grid 与 display: inline-grid 的区别是什么？",
+      "a": "display: grid 使元素成为块级 Grid 容器，display: inline-grid 使元素成为内联级 Grid 容器。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "Grid 核心概念"
+  ],
+  "source_pages": [
+    169,
+    172
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "261_grid_容器的_display_属性",
+  "_chunk_pages": [
+    169,
+    172
+  ]
+}

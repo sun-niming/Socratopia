@@ -1,0 +1,45 @@
+{
+  "title": "fork 并发服务循环与 fd 关闭规则",
+  "definition": "服务循环的基本模式是：父进程 `accept` 到连接后 `fork`，子进程处理客户端请求，父进程继续等待下一个连接。fork 并发服务器中最重要的规则是：子进程关闭监听 fd，父进程关闭客户端 fd。",
+  "key_points": [
+    "`serve_forever` 先安装 `SIGCHLD` 处理器，再进入无限 `accept` 循环。",
+    "`accept` 失败时如果是 `errno == EINTR`，应继续循环，不要退出服务。",
+    "`fork` 后，子进程执行 `handle_client(client_fd, &client_addr, config)`，完成后 `close(client_fd)` 并 `_exit(0)`。",
+    "父进程在 `fork` 成功后要 `close(client_fd)`，避免 fd 泄漏。",
+    "子进程要 `close(listen_fd)`，避免子进程持有监听 fd。",
+    "如果 `fork` 调试困难，可以先临时改成直接调用 `handle_client`，稳定后再恢复 fork。"
+  ],
+  "examples": [
+    "典型结构：`int client_fd = accept(...); pid_t pid = fork(); if (pid == 0) { close(listen_fd); handle_client(client_fd, &client_addr, config); close(client_fd); _exit(0); } else if (pid > 0) { close(client_fd); }`",
+    "`if (client_fd < 0) { if (errno == EINTR) continue; }`"
+  ],
+  "misconceptions": [
+    "以为子进程处理完请求后直接 `return` 就够了；实际上应使用 `_exit(0)`。",
+    "以为父子进程都可以不关闭对方不需要的 fd。",
+    "以为 `accept` 被信号打断后应该立刻退出服务。",
+    "以为 fork 并发时可以忽略僵尸进程问题。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "fork 并发服务器里，父进程和子进程分别应关闭哪个 fd？",
+      "a": "子进程应关闭 `listen_fd`，父进程应关闭 `client_fd`。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "fork",
+    "accept",
+    "文件描述符"
+  ],
+  "source_pages": [
+    75,
+    76
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "118_fork_并发服务循环与_fd_关闭规则",
+  "_chunk_pages": [
+    73,
+    76
+  ]
+}

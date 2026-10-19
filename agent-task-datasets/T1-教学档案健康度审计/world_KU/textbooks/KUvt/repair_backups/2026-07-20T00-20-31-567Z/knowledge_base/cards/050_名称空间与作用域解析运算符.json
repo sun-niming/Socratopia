@@ -1,0 +1,43 @@
+{
+  "title": "名称空间与作用域解析运算符",
+  "definition": "名称空间用于将名称放入指定的作用域环境中，以区分不同代码段中同名的函数、类型或其他名称，从而减少名称冲突。调用名称空间中的名称时，可以使用作用域解析运算符 :: 指明名称空间，例如 mycode::foo()。",
+  "key_points": [
+    "使用 namespace 块可以把代码放入指定名称空间。",
+    "不同名称空间中可以存在同名函数，例如 mycode::foo 和其他库中的 foo。",
+    ":: 称为作用域解析运算符，用于指定名称所属的名称空间。",
+    "名称空间内部的代码可以直接使用同一名称空间内的其他名称。"
+  ],
+  "examples": [
+    "namespace mycode {\n    void foo() {\n        std::cout << \"foo() called in the mycode namespace\" << std::endl;\n    }\n}",
+    "mycode::foo();"
+  ],
+  "misconceptions": [
+    "名称空间不会改变函数本身的功能，主要作用是区分名称所属的环境。",
+    "调用名称空间中的函数时，不能把名称空间名和函数名混为一个普通标识符；应使用 mycode::foo() 这样的限定形式。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "名称空间解决什么问题？",
+      "a": "它通过为名称指定所属环境来处理不同代码段之间的名称冲突问题。"
+    },
+    {
+      "q": "如何调用名称空间 mycode 中的 foo 函数？",
+      "a": "使用作用域解析运算符调用：mycode::foo();。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++函数基础"
+  ],
+  "source_pages": [
+    38,
+    38
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "050_名称空间与作用域解析运算符",
+  "_chunk_pages": [
+    37,
+    40
+  ]
+}

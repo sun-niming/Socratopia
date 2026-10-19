@@ -1,0 +1,48 @@
+{
+  "title": "函数调用运算符与函数对象",
+  "definition": "C++ 允许在类中将非静态成员函数重载为函数调用运算符 `operator()`。定义了该运算符的类对象可以像函数一样使用，这种对象称为函数对象或仿函数。调用对象时，表达式 `object(args)` 实际上会调用该对象的 `operator()(args)`。",
+  "key_points": [
+    "函数调用运算符写作 `operator()`。",
+    "它只能重载为类中的非静态成员函数。",
+    "函数对象既可以使用函数调用语法，也可以像普通对象一样拥有其他方法和数据成员。",
+    "同一个类可以按照一般重载规则提供多个参数列表不同的 operator()。"
+  ],
+  "examples": [
+    "```cpp\nclass FunctionObject {\npublic:\n    int operator()(int param);\n    int doSquare(int param);\n};\n\nint FunctionObject::operator()(int param) {\n    return doSquare(param);\n}\n\nint FunctionObject::doSquare(int param) {\n    return param * param;\n}\n\nFunctionObject square;\nint xSquared = square(3);             // 调用 operator()\nint xSquaredAgain = square.doSquare(3); // 调用普通成员函数\n```"
+  ],
+  "misconceptions": [
+    "operator() 可以重载为全局函数或静态成员函数；原文指出它只能是类中的非静态方法。",
+    "函数对象本身就是函数指针；错误，它是对象，只是支持类似函数的调用语法。",
+    "调用 `square(3)` 与调用普通方法 `square.doSquare(3)` 在语法和机制上完全相同；前者调用 operator()，后者调用普通成员函数。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "什么是函数对象？",
+      "a": "包含重载函数调用运算符 `operator()` 的类对象称为函数对象或仿函数，它可以像函数一样使用。"
+    },
+    {
+      "q": "表达式 `square(3)` 实际调用了什么？",
+      "a": "它调用了 `square` 对象的 `operator()(3)`。"
+    },
+    {
+      "q": "函数调用运算符必须是什么类型的成员函数？",
+      "a": "它必须重载为类中的非静态成员函数。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "类与成员函数",
+    "运算符重载基础"
+  ],
+  "source_pages": [
+    483,
+    484
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "969_函数调用运算符与函数对象",
+  "_chunk_pages": [
+    481,
+    484
+  ]
+}

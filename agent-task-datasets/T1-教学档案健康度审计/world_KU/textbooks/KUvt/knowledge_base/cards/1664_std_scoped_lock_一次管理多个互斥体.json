@@ -1,0 +1,44 @@
+{
+  "title": "std::scoped_lock 一次管理多个互斥体",
+  "definition": "std::scoped_lock 在 <mutex> 中定义，作用类似于 lock_guard，但能够接收数量可变的互斥体。它可以方便地一次获取多个互斥体，并在离开作用域时自动释放这些锁；调用者不必手动安排正确的加锁顺序。",
+  "key_points": [
+    "std::scoped_lock 支持同时管理多个互斥体。",
+    "它简化了多互斥体加锁过程，不需要调用者手动处理获取锁的顺序。",
+    "对象离开作用域时会自动释放所管理的锁。",
+    "原文指出，std::scoped_lock 的性能比手动获取多个锁更好。"
+  ],
+  "examples": [
+    "多互斥体的典型写法：\n```cpp\nstd::mutex mutex1, mutex2;\nvoid process()\n{\n    std::scoped_lock lock{mutex1, mutex2};\n    // 两个互斥体都已获得\n} // lock 离开作用域，两个互斥体自动释放\n```"
+  ],
+  "misconceptions": [
+    "std::scoped_lock 不是只能管理一个互斥体；它的主要便利之处正是可以接收多个互斥体。",
+    "使用多个互斥体时，不需要先分别构造带 std::defer_lock 的 unique_lock 再调用 std::lock。",
+    "锁不会永久持有；std::scoped_lock 离开作用域后会自动释放锁。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "std::scoped_lock 与 lock_guard 的主要区别是什么？",
+      "a": "lock_guard 通常管理一个互斥体，而 std::scoped_lock 可以管理数量可变的多个互斥体。"
+    },
+    {
+      "q": "使用 std::scoped_lock 管理多个互斥体有什么好处？",
+      "a": "它可以简化多互斥体加锁，并避免调用者手动安排正确的加锁顺序。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "RAII 加锁",
+    "std::lock 与多互斥体加锁"
+  ],
+  "source_pages": [
+    809,
+    809
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1664_std_scoped_lock_一次管理多个互斥体",
+  "_chunk_pages": [
+    809,
+    812
+  ]
+}

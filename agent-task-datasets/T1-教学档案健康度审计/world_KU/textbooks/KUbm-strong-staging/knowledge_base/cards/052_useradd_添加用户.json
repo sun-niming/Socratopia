@@ -1,0 +1,39 @@
+{
+  "title": "useradd 添加用户",
+  "definition": "教材在“用户管理”中给出添加用户命令：useradd 用户名。按教材内容，useradd 用于添加一个新用户，基本写法是在命令后给出用户名。",
+  "key_points": [
+    "用途：添加用户",
+    "命令格式：useradd 用户名",
+    "属于用户管理基本命令"
+  ],
+  "examples": [
+    "命令格式示例：useradd 用户名"
+  ],
+  "misconceptions": [
+    "不要把 useradd 与 userdel 混淆；前者是添加，后者是删除",
+    "不要省略用户名参数"
+  ],
+  "qa_pairs": [
+    {
+      "q": "教材中添加用户使用什么命令？",
+      "a": "useradd。"
+    },
+    {
+      "q": "教材给出的 useradd 使用格式是什么？",
+      "a": "useradd 用户名。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [],
+  "source_pages": [
+    25,
+    28
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "052_useradd_添加用户",
+  "_chunk_pages": [
+    25,
+    28
+  ]
+}

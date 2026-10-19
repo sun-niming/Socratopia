@@ -1,0 +1,41 @@
+{
+  "title": "BGP的NEXT-HOP属性",
+  "definition": "NEXT-HOP是BGP路由中AS-PATH起始处路由器接口的IP地址。它表示当前AS应将分组转交给哪个下一跳网关；该下一跳接口通常不属于当前AS，但包含该接口IP地址的子网与当前AS直接连接。",
+  "key_points": [
+    "NEXT-HOP与AS-PATH共同帮助路由器确定如何到达外部前缀。",
+    "在示例中，经AS2到达x的路由，其NEXT-HOP是路由器2a相关接口的IP地址；绕过AS2、经AS3到达x的路由，其NEXT-HOP是路由器3d相关接口的IP地址。",
+    "一条简化的BGP路由可表示为：NEXT-HOP；AS-PATH；目的前缀。"
+  ],
+  "examples": [
+    "一台AS1内的路由器可能看到两条到x的BGP路由：\n1. NEXT-HOP为路由器2a接口IP，AS-PATH为“AS2 AS3”，目的前缀为x；\n2. NEXT-HOP为路由器3d接口IP，AS-PATH为“AS3”，目的前缀为x。"
+  ],
+  "misconceptions": [
+    "NEXT-HOP不一定是当前AS内部某台路由器的接口地址；教材示例中特别指出，它可以不属于当前AS。",
+    "NEXT-HOP不是目的主机地址，而是到达外部路由路径起点的下一跳接口地址。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "BGP路由中的NEXT-HOP表示什么？",
+      "a": "它表示AS-PATH起始处路由器接口的IP地址，即当前AS向该外部路径转发分组时应到达的下一跳接口。"
+    },
+    {
+      "q": "简化的BGP路由包含哪三个组件？",
+      "a": "NEXT-HOP、AS-PATH和目的前缀。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "BGP路由的组成与AS-PATH属性"
+  ],
+  "source_pages": [
+    277,
+    280
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "620_bgp的next_hop属性",
+  "_chunk_pages": [
+    277,
+    280
+  ]
+}

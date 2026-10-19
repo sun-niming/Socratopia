@@ -1,0 +1,45 @@
+{
+  "title": "使用 const auto& 遍历容器元素",
+  "definition": "在基于范围的 for 循环中使用 `const auto&`，可以按常量引用依次访问容器中的元素：不复制元素，并且不能通过该循环变量修改元素。教材示例使用 `for (const auto& employee : m_employees)` 遍历员工集合。",
+  "key_points": [
+    "`auto` 让编译器根据容器元素类型推导循环变量类型。",
+    "`&` 表示使用引用，避免复制每个元素。",
+    "`const` 表示通过该引用不能修改对应元素。",
+    "这种写法适合只读取或显示容器元素的场景。"
+  ],
+  "examples": [
+    "```cpp\nfor (const auto& employee : m_employees) {\n    if (employee.isHired()) {\n        employee.display();\n    }\n}\n```"
+  ],
+  "misconceptions": [
+    "认为 `const auto&` 会复制元素；实际上它是引用。",
+    "认为使用引用后就一定可以修改元素；`const` 引用不能通过该变量修改元素。",
+    "认为基于范围的 for 循环只能遍历数组，实际上也可用于支持范围遍历的容器或对象。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`for (const auto& employee : m_employees)` 中的 `const auto&` 有什么作用？",
+      "a": "`auto` 自动推导元素类型，`&` 避免复制元素，`const` 防止通过 `employee` 修改容器中的元素。"
+    },
+    {
+      "q": "如果循环体需要修改员工对象，`const auto&` 是否合适？",
+      "a": "不合适，因为 const 引用禁止通过该循环变量修改员工对象；应根据需求使用非 const 引用，并确保容器本身允许修改。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++ 引用",
+    "基于范围的 for 循环",
+    "const 限定符"
+  ],
+  "source_pages": [
+    137,
+    140
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "205_使用_const_auto_遍历容器元素",
+  "_chunk_pages": [
+    137,
+    140
+  ]
+}

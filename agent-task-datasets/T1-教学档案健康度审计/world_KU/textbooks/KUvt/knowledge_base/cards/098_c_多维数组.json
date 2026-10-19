@@ -1,0 +1,40 @@
+{
+  "title": "C++ 多维数组",
+  "definition": "C++ 支持多维 C 风格数组。二维数组可以看作由行和列组成的网格，每个元素通过两个下标访问；声明中的两个大小分别表示两个维度的长度。",
+  "key_points": [
+    "二维数组声明形式为：类型 数组名[第一维大小][第二维大小]。",
+    "二维数组元素通过两个下标访问，例如 ticTacToeBoard[1][1]。",
+    "对于 char ticTacToeBoard[3][3]，两个下标的有效范围都为 0 到 2。"
+  ],
+  "examples": [
+    "char ticTacToeBoard[3][3];",
+    "ticTacToeBoard[1][1] = 'o';",
+    "二维数组的坐标可表示为 $[行][列]$，因此 $\\text{ticTacToeBoard}[1][1]$ 表示第 2 行第 2 列的元素。"
+  ],
+  "misconceptions": [
+    "二维数组的下标仍然从 0 开始，而不是从 1 开始。",
+    "ticTacToeBoard[1][1] 不是第一行第一列，而是下标均为 1 的位置。",
+    "三维及更高维数组虽然可以声明，但教材指出它们更难描绘且极少使用。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "char ticTacToeBoard[3][3] 中 ticTacToeBoard[1][1] 表示什么？",
+      "a": "它表示二维数组中两个下标都为 1 的元素，即按 0 起始下标计数的第 2 行第 2 列元素。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C 风格数组的声明与下标"
+  ],
+  "source_pages": [
+    58,
+    58
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "098_c_多维数组",
+  "_chunk_pages": [
+    57,
+    60
+  ]
+}

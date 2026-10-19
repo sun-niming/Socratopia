@@ -1,0 +1,51 @@
+{
+  "title": "使用const保护函数参数",
+  "definition": "函数参数可以声明为const，以防止函数体内通过该参数修改对象或参数值。对于指针参数，`const string*`表示函数不能通过该指针修改所指字符串；普通的`string*`可以自动转换为`const string*`。对于按值传递的基本类型参数，例如`const int param`，const只保护函数体内的局部参数副本，不会改变调用者传入的原变量。",
+  "key_points": [
+    "将参数声明为`const`可以防止函数实现者无意中修改参数。",
+    "`void mysteryFunction(const string* someString)`中，表达式`*someString = \"Test\";`不能通过编译。",
+    "调用函数时，`string*`可以自动转换为`const string*`。",
+    "`void func(const int param)`中，函数体不能修改param。",
+    "const主要防止无意识的修改；原文指出，仍存在有意识绕过这种限制的方法。"
+  ],
+  "examples": [
+    "`void mysteryFunction(const string* someString) { *someString = \"Test\"; }`中的赋值不能通过编译。",
+    "`string myString { \"The string\" }; mysteryFunction(&myString);`：`&myString`得到的`string*`可传给`const string*`参数。",
+    "`void func(const int param) { /* 不能修改param */ }`。"
+  ],
+  "misconceptions": [
+    "const参数会阻止调用者传入普通变量；实际上普通对象的指针可以转换为指向const对象的指针。",
+    "`const int param`可以防止调用者原变量被修改；按值传递时它只保护函数内部的参数副本。",
+    "声明指针参数为const后，函数不能读取对象；const只禁止通过该路径修改对象，读取仍然允许。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么函数参数常声明为`const string*`？",
+      "a": "为了保证函数体不能通过该指针修改调用者传入的字符串。"
+    },
+    {
+      "q": "`string*`能否传给`const string*`参数？",
+      "a": "可以，普通的`string*`可以自动转换为`const string*`。"
+    },
+    {
+      "q": "`const int param`保护的是调用者的原变量吗？",
+      "a": "不是。按值传递时它保护的是函数体内的参数副本。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "函数参数传递",
+    "指针与const"
+  ],
+  "source_pages": [
+    75,
+    76
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "135_使用const保护函数参数",
+  "_chunk_pages": [
+    73,
+    76
+  ]
+}

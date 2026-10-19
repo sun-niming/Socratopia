@@ -1,0 +1,43 @@
+{
+  "title": "容器基础成员函数的复杂度与语义",
+  "definition": "教材列出的容器基础成员函数中，begin()、end()、cbegin()、cend()、swap()、size()、max_size() 和 empty() 都具有常量时间复杂度；逐元素比较两个容器的比较运算符具有线性时间复杂度。begin() 返回第一个元素的迭代器，end() 返回最后一个元素之后的位置，cbegin() 和 cend() 返回对应的 const 迭代器，size() 返回当前元素个数，max_size() 返回容器理论上可保存的最大元素数，empty() 判断容器是否为空。",
+  "key_points": [
+    "end() 和 cend() 返回的是“越过最后一个元素”的位置，不能把它们当作最后一个元素本身。",
+    "swap(Container&) 交换两个容器中的内容，教材将其复杂度列为常量时间。",
+    "size()、max_size() 和 empty() 的声明分别为：$$\\begin{aligned}\\text{size\\_type size() const noexcept;}\\\\\\text{size\\_type max\\_size() const noexcept;}\\\\\\text{bool empty() const noexcept;}\\end{aligned}$$"
+  ],
+  "examples": [
+    "对容器 c，c.begin() 指向第一个元素；c.end() 指向最后一个元素之后的位置；c.cbegin() 和 c.cend() 返回只读迭代器。",
+    "若 c.size() == 0，则 c.empty() 为 true。"
+  ],
+  "misconceptions": [
+    "end() 或 cend() 不是最后一个元素的迭代器，而是最后一个元素之后的哨兵位置。",
+    "max_size() 不是当前元素数量，而是容器能够保存的最大元素数。",
+    "容器比较不是常量时间操作；教材将逐元素比较两个容器列为线性时间复杂度。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "end() 返回什么位置？",
+      "a": "返回容器中最后一个元素后面的位置，即越过末尾的迭代器位置。"
+    },
+    {
+      "q": "empty() 与 size() 的关系是什么？",
+      "a": "empty() 判断容器是否包含元素；当 size() 为 0 时，empty() 返回 true。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++容器与迭代器的基本概念"
+  ],
+  "source_pages": [
+    733,
+    733
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1524_容器基础成员函数的复杂度与语义",
+  "_chunk_pages": [
+    733,
+    736
+  ]
+}

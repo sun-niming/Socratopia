@@ -1,0 +1,51 @@
+{
+  "title": "新代码中应优先使用标准库容器或矩阵类",
+  "definition": "原文建议尽可能避免旧式 C 风格数组，因为其不提供足够的内存安全性。在新代码中，应优先考虑 C++ 标准库容器，例如用 `std::array` 表示固定大小数组、用 `std::vector<T>` 表示一维动态数组、用 `std::vector<std::vector<T>>` 表示二维动态数组；对于需要等长行和更方便接口的多维数据，可使用或编写 `Matrix`、`Table` 等类模板封装内存管理和元素访问。",
+  "key_points": [
+    "固定大小数组可考虑 `std::array`。",
+    "一维动态数组可考虑 `std::vector<T>`。",
+    "二维动态数组可考虑 `std::vector<std::vector<T>>`。",
+    "嵌套 `vector` 使用方便性有限，并且仍可能存在行数据分散的问题。",
+    "需要等长行、连续内存或更简洁接口时，可以使用辅助的 `Matrix` 或 `Table` 类模板，将内存分配、释放和元素访问细节隐藏起来。"
+  ],
+  "examples": [
+    "一维动态数组：`std::vector<int> values;`",
+    "二维动态数组的直接表示：`std::vector<std::vector<int>> matrix;`",
+    "等长二维数据可设计矩阵接口，例如：\n```text\nMatrix<int> matrix(rows, columns);\nmatrix(x, y) = value;\n```\n这里的 `Matrix` 仅表示原文建议的封装类模板思想，具体实现需另行定义。"
+  ],
+  "misconceptions": [
+    "标准库容器并不自动保证所有二维数据都采用单一连续内存；`std::vector<std::vector<T>>` 的各行通常是独立容器。",
+    "“建议使用容器”不表示 C 风格数组在 C++ 中无法使用，而是表示新代码应尽量避免其内存管理风险。",
+    "`Matrix` 或 `Table` 不是原文给出的标准库类型，而是可编写或复用的辅助类模板。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "原文建议用什么替代旧式 C 风格数组？",
+      "a": "建议使用 C++ 标准库容器，例如 `std::array` 和 `std::vector`。"
+    },
+    {
+      "q": "如何表示一维和二维动态数组？",
+      "a": "一维动态数组可用 `std::vector<T>`，二维动态数组可用 `std::vector<std::vector<T>>`。"
+    },
+    {
+      "q": "为什么需要 `Matrix` 或 `Table` 类模板？",
+      "a": "它们可以隐藏多维数据的内存分配、释放和元素访问细节，并提供更方便的接口。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++标准库容器",
+    "动态数组的基本概念"
+  ],
+  "source_pages": [
+    207,
+    208
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "437_新代码中应优先使用标准库容器或矩阵类",
+  "_chunk_pages": [
+    205,
+    208
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "title": "宽字符字面量与宽字符流",
+  "definition": "当程序需要支持非西方字符集时，可以使用宽字符类型和宽字符字面量。使用 `wchar_t` 表示宽字符时，字符串和字符字面量前应加前缀 `L`。例如：`wchar_t myWideCharacter { L'm' };`。标准 I/O 流也有对应的宽字符版本，包括 `wcout`、`wcin`、`wcerr` 和 `wclog`；宽字符文件流包括 `wifstream` 和 `wofstream`。",
+  "key_points": [
+    "宽字符字符字面量使用 `L` 前缀，例如 `L'm'`。",
+    "宽字符串字面量使用 `L` 前缀，例如 `L\"文本\"`。",
+    "宽字符版本的标准流与普通流的使用方式基本相同，例如使用 `wcout` 输出宽字符串。",
+    "`wchar_t` 的大小和编码具有平台相关性，跨平台代码不应假定其固定大小。"
+  ],
+  "examples": [
+    "`wchar_t myWideCharacter { L'm' };`",
+    "`wcout << L\"宽字符文本\" << endl;`"
+  ],
+  "misconceptions": [
+    "宽字符并不等于某一种固定的 Unicode 编码；`wchar_t` 的大小和编码由编译器或平台决定。",
+    "仅仅把普通字符串改成宽字符串，并不能自动解决所有本地化问题。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何定义一个值为字母 m 的宽字符？",
+      "a": "使用 `wchar_t myWideCharacter { L'm' };`。"
+    },
+    {
+      "q": "宽字符版本的标准输出流是什么？",
+      "a": "是 `wcout`；对应的输入、错误输出和日志流分别是 `wcin`、`wcerr` 和 `wclog`。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++字符类型与字符串字面量"
+  ],
+  "source_pages": [
+    661,
+    662
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1380_宽字符字面量与宽字符流",
+  "_chunk_pages": [
+    661,
+    664
+  ]
+}

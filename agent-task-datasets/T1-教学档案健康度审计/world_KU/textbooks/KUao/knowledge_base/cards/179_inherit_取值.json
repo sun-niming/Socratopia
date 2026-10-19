@@ -1,0 +1,40 @@
+{
+  "title": "inherit 取值",
+  "definition": "inherit 是 box-sizing 的一种取值，表示该属性值应该从父元素继承。",
+  "key_points": [
+    "inherit 用于让当前元素沿用父元素的 box-sizing 值。",
+    "它属于 box-sizing 的取值之一。"
+  ],
+  "examples": [
+    "box-sizing: inherit;"
+  ],
+  "misconceptions": [
+    "认为 inherit 是一种新的盒子模型。",
+    "认为 inherit 会自动固定为 content-box 或 border-box。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "box-sizing: inherit 表示什么？",
+      "a": "表示该属性值从父元素继承。"
+    },
+    {
+      "q": "inherit 是什么类型的内容？",
+      "a": "它是 box-sizing 的一个取值。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "box-sizing 属性"
+  ],
+  "source_pages": [
+    124,
+    124
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "179_inherit_取值",
+  "_chunk_pages": [
+    121,
+    124
+  ]
+}

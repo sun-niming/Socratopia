@@ -1,0 +1,46 @@
+{
+  "title": "std::vector 容器与模板参数",
+  "definition": "原文第184页出现了 `std::vector<int>`、`std::vector<double>`，并提到 `double`、C# vector 和 C 的 `void*`。可确认 `std::vector` 以尖括号中的类型作为模板参数，用于形成特定元素类型的容器；原文对其与其他语言或 `void*` 的比较不完整。",
+  "key_points": [
+    "`std::vector<int>` 表示元素类型为 `int` 的 `std::vector` 特化类型。",
+    "`std::vector<double>` 表示元素类型为 `double` 的 `std::vector` 特化类型。",
+    "元素类型写在模板实参列表中：`std::vector<T>`。",
+    "原文还出现了 C# `vector` 和 C `void*`，但无法据此恢复完整比较结论。"
+  ],
+  "examples": [
+    "$$\\mathrm{std::vector<int>}$$",
+    "$$\\mathrm{std::vector<double>}$$",
+    "代码示例：`std::vector<int> numbers;`"
+  ],
+  "misconceptions": [
+    "`std::vector<int>` 和 `std::vector<double>` 不是同一种元素类型的容器。",
+    "尖括号中的 `int` 或 `double` 是模板类型参数，不是运行时传入的普通值。",
+    "不能仅凭原文断言 C++ 的 `std::vector` 与 C# 的 `vector` 完全等价。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`std::vector<int>` 中的 `int` 表示什么？",
+      "a": "表示该 `std::vector` 容器的元素类型是 `int`。"
+    },
+    {
+      "q": "如何表示元素类型为 `double` 的标准向量容器？",
+      "a": "使用 `std::vector<double>`。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++ 模板基础",
+    "C++ 标准库容器"
+  ],
+  "source_pages": [
+    181,
+    184
+  ],
+  "needs_verification": true,
+  "verify_query": "《C++20高级编程》第5版 第184页 std::vector<int> std::vector<double> C# vector void*",
+  "concept_id": "258_std_vector_容器与模板参数",
+  "_chunk_pages": [
+    181,
+    184
+  ]
+}

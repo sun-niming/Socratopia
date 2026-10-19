@@ -1,0 +1,43 @@
+{
+  "title": "directed_graph 的按节点值 erase 重载",
+  "definition": "directed_graph 可以提供接收节点值 `const T&` 的 erase 重载。该函数先查找节点；如果找到，就删除与该节点相关的所有链接并删除节点，返回 1；如果找不到，则返回 0。因此该重载返回被删除节点的数量，结果只能是 0 或 1。",
+  "key_points": [
+    "函数形式可写为：`size_type erase(const T& node_value);`。",
+    "查找节点可使用 `findNode(node_value)`。",
+    "找到节点时需要先删除指向或关联该节点的链接，再从节点存储中擦除该节点。",
+    "未找到节点时不修改图并返回 0。"
+  ],
+  "examples": [
+    "```cpp\nauto count = graph.erase(66);\n// count == 1 表示删除了节点 66；count == 0 表示节点不存在\n```"
+  ],
+  "misconceptions": [
+    "该 erase 重载返回的不是迭代器，而是被删除节点的数量。",
+    "删除节点时不能只从节点容器中移除节点，还必须处理与该节点有关的链接。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "directed_graph 按节点值调用 `erase` 时可能返回哪些值？",
+      "a": "只能返回 0 或 1：节点不存在时返回 0，成功删除一个节点时返回 1。"
+    },
+    {
+      "q": "删除 directed_graph 中的节点时，为什么还要删除相关链接？",
+      "a": "因为图的节点和链接之间存在关联；只删除节点而保留相关链接会破坏图的内部结构。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "关联容器的 erase 语义",
+    "图的节点与边"
+  ],
+  "source_pages": [
+    754,
+    754
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1561_directed_graph_的按节点值_erase_重载",
+  "_chunk_pages": [
+    753,
+    756
+  ]
+}

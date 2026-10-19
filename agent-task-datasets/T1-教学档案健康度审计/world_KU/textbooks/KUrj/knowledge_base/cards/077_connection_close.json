@@ -1,0 +1,39 @@
+{
+  "title": "Connection: close",
+  "definition": "在本项目中，不实现 HTTP/1.1 的 keep-alive，而是在响应头里写 `Connection: close`，发送完响应后直接关闭 `client_fd`。这样一个连接只处理一个请求，代码更简单，也更稳定。",
+  "key_points": [
+    "HTTP/1.1 理论上可以保持连接。",
+    "五天版本不做 keep-alive。",
+    "响应头写 `Connection: close`。",
+    "发送完响应后关闭 `client_fd`。",
+    "一个连接只处理一个请求。"
+  ],
+  "examples": [
+    "响应头可包含：`Connection: close`。"
+  ],
+  "misconceptions": [
+    "以为 HTTP/1.1 必须长连接。",
+    "发送完响应后还要继续在同一连接上处理多个请求。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么本项目要使用 `Connection: close`？",
+      "a": "因为不做 keep-alive，可以让每个连接只处理一个请求，代码更简单稳定。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "HTTP 连接基础"
+  ],
+  "source_pages": [
+    49,
+    52
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "077_connection_close",
+  "_chunk_pages": [
+    49,
+    52
+  ]
+}

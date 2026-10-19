@@ -1,0 +1,39 @@
+{
+  "title": "Wireshark实验对TCP的分析内容",
+  "definition": "TCP Wireshark实验要求使用Web浏览器访问Web服务器上的文件，并用Wireshark捕获分组；同时分析客户端和服务器端的分组踪迹，以研究TCP连接的性能和行为。",
+  "key_points": [
+    "实验可以分析自己访问Web服务器产生的分组，也可以分析服务器提供的可读分组踪迹文件。",
+    "重点观察TCP窗口行为、分组丢失、重传、流量控制和拥塞控制。",
+    "实验还要求估计客户机与Web服务器之间的往返时间。"
+  ],
+  "examples": [
+    "可以从分组踪迹中追踪：$$\\text{TCP窗口变化}\\rightarrow\\text{推断丢包}\\rightarrow\\text{观察重传}\\rightarrow\\text{分析流控与拥塞控制}$$。"
+  ],
+  "misconceptions": [
+    "Wireshark实验不只是查看TCP首部字段，还要结合踪迹分析连接性能和协议行为。",
+    "服务器端踪迹文件记录的是访问该Web服务器过程中产生的分组，可用于与客户端踪迹进行对照。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "TCP Wireshark实验重点研究哪些TCP行为？",
+      "a": "重点研究TCP窗口行为、分组丢失、重传、流量控制、拥塞控制，并估计往返时间。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "TCP",
+    "Wireshark",
+    "分组踪迹"
+  ],
+  "source_pages": [
+    213,
+    216
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "499_wireshark实验对tcp的分析内容",
+  "_chunk_pages": [
+    213,
+    216
+  ]
+}

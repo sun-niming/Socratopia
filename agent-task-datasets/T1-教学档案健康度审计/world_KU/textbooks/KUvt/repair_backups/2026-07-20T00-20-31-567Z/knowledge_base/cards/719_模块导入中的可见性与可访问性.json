@@ -1,0 +1,46 @@
+{
+  "title": "模块导入中的可见性与可访问性",
+  "definition": "在 C++ 模块中，从一个模块导入另一个模块后，被导入模块提供的功能可能变得可访问，但其中的某些类型名称不一定自动在当前源文件中可见。可见性决定名称能否直接写出并被编译器识别；可访问性表示相关功能可以被使用。导入 `person` 模块后，即使当前文件没有显式导入 `<string>`，也可以通过 `auto` 接收 `getLastName()` 的返回值，并调用该返回值的成员函数。",
+  "key_points": [
+    "如果 `test.cpp` 只写 `import person;` 而没有显式导入 `<string>`，直接写 `std::string` 可能无法编译。",
+    "下面的代码可以利用返回对象及其成员函数：`const auto& lastName { person.getLastName() };`、`auto length { lastName.length() };`。",
+    "为了让名称 `std::string` 在当前源文件中可见，需要显式导入 `<string>`。",
+    "模块中的非成员函数不会因为相关类型可用就自动可见；例如输出运算符 `operator<<` 不是 `std::string` 的成员函数，使用输出语句时还需要显式导入提供该运算符的内容。"
+  ],
+  "examples": [
+    "可能无法直接使用类型名称：\n`import person;`\n`std::string str;`",
+    "不显式写出 `std::string` 时可以使用：\n`const auto& lastName { person.getLastName() };`\n`auto length { lastName.length() };`",
+    "使用输出运算符的示例：\n`cout << person.getLastName() << endl;`"
+  ],
+  "misconceptions": [
+    "导入一个模块后，该模块接口文件中的所有导入声明都会自动传递给导入者。",
+    "只要某个类型可以被间接使用，就一定可以直接写出该类型名称，例如一定可以直接写 `std::string`。",
+    "成员函数和非成员函数在模块可见性方面完全相同；实际上，原文特别指出 `operator<<` 不是 `std::string` 的成员函数。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "只导入 `person` 模块而不导入 `<string>` 时，为什么 `const auto& lastName { person.getLastName() };` 仍可能成立？",
+      "a": "因为导入 `person` 后，相关功能变得可访问；虽然 `std::string` 这个名称未必可见，但可以用 `auto` 接收 `getLastName()` 的结果，并调用该结果的成员函数。"
+    },
+    {
+      "q": "为什么使用 `cout << person.getLastName() << endl;` 时还需要显式导入相关内容？",
+      "a": "因为 `operator<<` 是非成员函数，不是 `std::string` 的成员函数；它不会仅因 `std::string` 可访问而自动可见。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++模块的导入声明",
+    "C++成员函数与非成员函数"
+  ],
+  "source_pages": [
+    357,
+    357
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "719_模块导入中的可见性与可访问性",
+  "_chunk_pages": [
+    357,
+    360
+  ]
+}

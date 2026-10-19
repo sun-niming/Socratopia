@@ -1,0 +1,45 @@
+{
+  "title": "main函数与程序参数",
+  "definition": "main 函数是 C++程序的入口函数，并返回一个 int 值表示程序的最终执行状态。main 函数可以没有参数，也可以采用两个参数的形式：int main(int argc, char* argv[])。其中 argc 表示传递给程序的实际参数数量，argv 保存这些实际参数；实际参数从索引 1 开始。",
+  "key_points": [
+    "main 函数可以写成 int main()，也可以写成 int main(int argc, char* argv[])。",
+    "main 函数返回 int，用于表示程序的最终执行状态。",
+    "如果 main 函数中省略显式 return 语句，会自动返回 0。",
+    "argc 表示传递给程序的实参数目，argv 保存实参字符串。",
+    "教材提醒 argv[0] 可能是程序名称，也可能是空字符串，因此不应依赖它来获取程序名称；实际参数从 argv[1] 开始。"
+  ],
+  "examples": [
+    "int main() {\n    return 0;\n}",
+    "int main(int argc, char* argv[]) {\n    // argc 表示参数数量，argv[1] 开始通常是用户传入的第一个参数\n}"
+  ],
+  "misconceptions": [
+    "main 函数不是只能写成带 argc 和 argv 的形式，也可以不带参数。",
+    "argc 不表示从 argv[1] 开始的用户参数数量，而是传递给程序的实参数目；教材特别说明实际参数从索引 1 开始。",
+    "省略 return 并不意味着 main 没有返回值；main 会自动返回 0。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "main 函数的作用和返回值是什么？",
+      "a": "main 函数是程序入口，返回一个 int 值表示程序的最终执行状态；若省略显式 return，自动返回 0。"
+    },
+    {
+      "q": "int main(int argc, char* argv[]) 中 argc 和 argv 分别表示什么？",
+      "a": "argc 表示传递给程序的实参数目，argv 保存这些实参字符串；实际参数从索引 1 开始。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++函数基础"
+  ],
+  "source_pages": [
+    37,
+    37
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 main argc argv[0] 是否可能为空字符串 实际参数从 argv[1] 开始 标准",
+  "concept_id": "045_main函数与程序参数",
+  "_chunk_pages": [
+    37,
+    40
+  ]
+}

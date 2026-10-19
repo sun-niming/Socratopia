@@ -1,0 +1,43 @@
+{
+  "title": "delete与delete[]必须与new和new[]匹配",
+  "definition": "释放动态内存时，必须使用与分配形式匹配的释放运算符：通过new分配单个对象的内存使用delete释放，通过new[]分配数组的内存使用delete[]释放。delete[]会自动调用对象数组中每个元素的析构函数，然后释放数组内存。使用错误的释放形式会导致未定义或异常行为。",
+  "key_points": [
+    "$\\text{new}$必须匹配$\\text{delete}$。",
+    "$\\text{new[]}$必须匹配$\\text{delete[]}$。",
+    "delete[]释放对象数组时，会调用数组中对象元素的析构函数。",
+    "用delete释放new[]得到的数组，可能只析构第一个元素，也可能造成内存崩溃等异常行为。",
+    "释放后可以将指针设为nullptr，避免继续使用已经释放的内存。"
+  ],
+  "examples": [
+    "正确释放对象数组：Simple* mySimpleArray { new Simple[4] }; delete[] mySimpleArray; mySimpleArray = nullptr;",
+    "正确释放单个对象：Simple* p { new Simple{} }; delete p; p = nullptr;",
+    "错误匹配：Simple* a { new Simple[4] }; delete a;"
+  ],
+  "misconceptions": [
+    "认为delete和delete[]可以互换。",
+    "认为delete[]只释放数组内存而不会调用析构函数。",
+    "认为将指针设为nullptr能够代替释放内存。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "new[]分配的对象数组为什么必须使用delete[]释放？",
+      "a": "因为delete[]知道这是一个数组，会逐个调用数组元素的析构函数并释放整个数组；使用普通delete可能只处理一个元素或导致异常行为。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "构造函数与析构函数",
+    "动态对象数组"
+  ],
+  "source_pages": [
+    203,
+    204
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "428_delete与delete_必须与new和new_匹配",
+  "_chunk_pages": [
+    201,
+    204
+  ]
+}

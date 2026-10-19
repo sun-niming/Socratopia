@@ -1,0 +1,46 @@
+{
+  "title": "头文件保护与#pragma once",
+  "definition": "头文件保护用于避免同一个头文件因被多个头文件或源文件重复包含而导致重复定义。传统做法是在头文件开头使用#ifndef检查保护标识符，随后使用#define定义该标识符，并在文件末尾使用#endif结束条件编译。现代编译器通常支持#pragma once，它可以声明该头文件在一次编译中只被包含一次。",
+  "key_points": [
+    "如果保护标识符已经定义，预处理器会跳过该头文件直到匹配的#endif。",
+    "如果保护标识符尚未定义，预处理器先定义它，再处理头文件内容。",
+    "头文件保护可以避免类等实体因多次包含而产生重复定义。",
+    "原文指出#pragma once可以替代传统的包含保护指令。"
+  ],
+  "examples": [
+    "传统包含保护：\n#ifndef LOGGER_H\n#define LOGGER_H\n\nclass Logger { /* ... */ };\n\n#endif\n\n现代写法：\n#pragma once\nclass Logger { /* ... */ };"
+  ],
+  "misconceptions": [
+    "包含保护不是为了阻止不同源文件分别使用同一个头文件，而是为了防止同一编译单元中重复处理该头文件。",
+    "使用#pragma once时仍然需要把它放在头文件中；它不是一个独立的源文件。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么A.h和B.h都包含Logger.h时，App.cpp同时包含A.h和B.h可能导致重复定义？",
+      "a": "因为Logger.h的内容会通过A.h和B.h各处理一次，Logger类可能因此被定义两次。"
+    },
+    {
+      "q": "传统头文件保护的基本结构是什么？",
+      "a": "先用#ifndef检查标识符是否未定义，再用#define定义该标识符，最后用#endif结束条件编译区域。"
+    },
+    {
+      "q": "#pragma once的作用是什么？",
+      "a": "保证同一个头文件在一次编译中只被包含一次，从而避免重复定义。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "预处理器#include与条件编译"
+  ],
+  "source_pages": [
+    361,
+    361
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "729_头文件保护与_pragma_once",
+  "_chunk_pages": [
+    361,
+    364
+  ]
+}

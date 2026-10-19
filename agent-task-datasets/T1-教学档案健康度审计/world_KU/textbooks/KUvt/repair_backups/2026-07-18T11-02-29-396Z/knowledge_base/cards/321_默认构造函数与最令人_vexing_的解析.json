@@ -1,0 +1,47 @@
+{
+  "title": "默认构造函数与最令人 vexing 的解析",
+  "definition": "默认构造函数是不需要调用者提供实参的构造函数。若 SpreadsheetCell 声明并定义了 `SpreadsheetCell();`，则 `SpreadsheetCell myCell;` 或 `SpreadsheetCell myCell{};` 可以创建对象。需要注意，`SpreadsheetCell myCell();` 会被解析为一个名为 myCell、返回 SpreadsheetCell 的函数声明，而不是对象定义。",
+  "key_points": [
+    "示例默认构造函数将成员 `m_value` 初始化为 0：`SpreadsheetCell::SpreadsheetCell() : m_value(0) {}`。",
+    "`SpreadsheetCell myCell;` 会调用默认构造函数。",
+    "`SpreadsheetCell myCell{};` 也会调用默认构造函数。",
+    "`SpreadsheetCell myCell();` 是函数声明，因此后续写 `myCell.setValue(6);` 会出错；这种情况称为 most vexing parse。"
+  ],
+  "examples": [
+    "默认构造函数：`SpreadsheetCell::SpreadsheetCell() : m_value(0) {}`",
+    "调用默认构造函数：`SpreadsheetCell myCell{};`",
+    "最令人 vexing 的解析：`SpreadsheetCell myCell();`",
+    "对象创建后修改：`SpreadsheetCell myCell{}; myCell.setValue(6);`"
+  ],
+  "misconceptions": [
+    "`SpreadsheetCell myCell();` 不是创建一个名为 myCell 的对象，而是声明一个函数。",
+    "使用空的大括号 `SpreadsheetCell myCell{};` 可以明确表达对象初始化，避免把声明误解析为函数。",
+    "默认构造函数不一定意味着成员自动获得业务上需要的值；本例中教材明确将 `m_value` 设为 0。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`SpreadsheetCell myCell();` 声明了什么？",
+      "a": "它声明了一个名为 `myCell`、返回类型为 `SpreadsheetCell`、无参数的函数，而不是创建对象。"
+    },
+    {
+      "q": "如何明确创建一个调用默认构造函数的 SpreadsheetCell 对象？",
+      "a": "可以写 `SpreadsheetCell myCell{};`，也可以写 `SpreadsheetCell myCell;`。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "默认构造函数",
+    "变量声明与函数声明"
+  ],
+  "source_pages": [
+    239,
+    240
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "321_默认构造函数与最令人_vexing_的解析",
+  "_chunk_pages": [
+    237,
+    240
+  ]
+}

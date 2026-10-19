@@ -1,0 +1,32 @@
+{
+  "title": "程序中的 bug",
+  "definition": "原文在第155页第5、6项附近多次出现“bug”，表明程序错误或缺陷是该部分涉及的主题之一；但当前页面没有给出 bug 的分类、成因、调试方法或示例。",
+  "key_points": [
+    "原文明确出现术语“bug”。",
+    "页面文字不足以确认教材具体讨论的是一般程序错误、调试，还是某种特定错误。"
+  ],
+  "examples": [],
+  "misconceptions": [
+    "不能仅依据本页内容列出教材所讲的 bug 类型。",
+    "不能把 bug 自动等同于编译错误；原文在此处没有作出这种区分。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "第155页出现了哪个表示程序缺陷的术语？",
+      "a": "bug。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [],
+  "source_pages": [
+    153,
+    156
+  ],
+  "needs_verification": true,
+  "verify_query": "《C++20高级编程》第5版 第155页 bug 第5项第6项完整原文",
+  "concept_id": "218_程序中的_bug",
+  "_chunk_pages": [
+    153,
+    156
+  ]
+}

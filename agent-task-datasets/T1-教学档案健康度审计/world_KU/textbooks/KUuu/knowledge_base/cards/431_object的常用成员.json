@@ -1,0 +1,39 @@
+{
+  "title": "Object的常用成员",
+  "definition": "Object对象的常用成员包括constructor、prototype、toString和valueOf。constructor用于引用创建对象的构造函数；prototype用于引用对象的原型；toString用于返回表示对象值的字符串；valueOf用于对象转换为某种基本数据类型时调用，尤其不是字符串时。",
+  "key_points": [
+    "constructor属性：引用创建对象的构造函数。",
+    "prototype属性：引用该对象的原型。",
+    "toString方法：返回代表对象值的字符串。",
+    "valueOf方法：在对象需要转换为某种基本数据类型时调用，尤其是非字符串转换。"
+  ],
+  "examples": [
+    "toString方法返回字符串表示。",
+    "valueOf方法在对象转成基本数据类型时被调用。"
+  ],
+  "misconceptions": [
+    "以为toString只对字符串类型有意义。",
+    "以为valueOf是把对象转换成字符串的方法。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "Object的valueOf方法主要用于什么场景？",
+      "a": "当需要把对象转换为某种基本数据类型时调用，尤其不是字符串时。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "Object对象"
+  ],
+  "source_pages": [
+    301,
+    304
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "431_object的常用成员",
+  "_chunk_pages": [
+    301,
+    304
+  ]
+}

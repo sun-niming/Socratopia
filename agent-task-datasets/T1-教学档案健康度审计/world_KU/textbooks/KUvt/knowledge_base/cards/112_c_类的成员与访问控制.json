@@ -1,0 +1,49 @@
+{
+  "title": "C++ 类的成员与访问控制",
+  "definition": "C++ 类用于定义对象的特征和行为。类中可以声明数据成员（属性）和方法（行为）；每个数据成员和方法都具有访问级别，访问级别包括 `public`、`protected` 和 `private`。",
+  "key_points": [
+    "`public` 成员可以从类的外部访问。",
+    "`private` 成员不能从类的外部直接访问。",
+    "`protected` 的具体用途与继承相关。",
+    "访问说明符可以按任意顺序出现，也可以重复使用。",
+    "教材推荐将数据成员声明为 `private`，需要时通过 `public` 或 `protected` 的 getter 和 setter 访问它们。"
+  ],
+  "examples": [
+    "`AirlineTicket` 类可以把 `m_passengerName`、`m_numberOfMiles` 和 `m_hasEliteSuperRewardsStatus` 声明为 `private`，再提供 `getPassengerName()`、`setPassengerName(...)` 等 public 方法访问它们。",
+    "这种做法可以在不改变 public/protected 接口的情况下改变数据的内部表达方式。"
+  ],
+  "misconceptions": [
+    "`private` 成员不是不能被类使用，而是不能被类外部直接访问。",
+    "访问说明符不是只能出现一次，也不要求固定顺序。",
+    "getter 和 setter 不是 C++ 自动生成的特殊语法，而是类作者提供的访问方法。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "C++ 类的三种访问级别是什么？",
+      "a": "`public`、`protected` 和 `private`。"
+    },
+    {
+      "q": "为什么通常把数据成员声明为 private？",
+      "a": "为了隐藏数据的内部表达方式，并通过 getter 和 setter 提供受控访问，使 public/protected 接口保持稳定。"
+    },
+    {
+      "q": "类外部能否直接访问 private 数据成员？",
+      "a": "不能直接访问，通常需要通过类提供的 public 或 protected 方法间接访问。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "类与对象的基本概念"
+  ],
+  "source_pages": [
+    64,
+    64
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "112_c_类的成员与访问控制",
+  "_chunk_pages": [
+    61,
+    64
+  ]
+}

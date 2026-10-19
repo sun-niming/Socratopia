@@ -1,0 +1,42 @@
+{
+  "title": "SIGCHLD 处理与 SA_RESTART",
+  "definition": "可以用 sigaction 给 SIGCHLD 安装处理器，在处理器里回收已结束的子进程。设置 SA_RESTART 能减少系统调用被信号中断的问题，但 accept() 仍建议显式处理 EINTR。",
+  "key_points": [
+    "先用 memset 将 struct sigaction 清零，再设置 sa_handler、sa_mask 和 sa_flags。",
+    "sa.sa_handler = handle_sigchld，sigemptyset(&sa.sa_mask)，sa.sa_flags = SA_RESTART。",
+    "sigaction(SIGCHLD, &sa, NULL) 用于注册 SIGCHLD 处理函数。",
+    "SA_RESTART 只能减少中断影响，不能替代对 accept() 的 EINTR 处理。"
+  ],
+  "examples": [
+    "struct sigaction sa; memset(&sa, 0, sizeof(sa)); sa.sa_handler = handle_sigchld; sigemptyset(&sa.sa_mask); sa.sa_flags = SA_RESTART; sigaction(SIGCHLD, &sa, NULL);"
+  ],
+  "misconceptions": [
+    "误以为设置了 SA_RESTART 后，所有被信号打断的系统调用都不需要再处理 EINTR。",
+    "误以为 SIGCHLD 只是提示子进程退出，不需要配合回收逻辑。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "SA_RESTART 的作用是什么？",
+      "a": "它可以减少系统调用被信号中断的问题。"
+    },
+    {
+      "q": "为什么 accept() 仍建议处理 EINTR？",
+      "a": "因为即使设置了 SA_RESTART，accept() 仍可能被信号打断，必须显式处理 EINTR。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "僵尸进程回收"
+  ],
+  "source_pages": [
+    41,
+    44
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "059_sigchld_处理与_sa_restart",
+  "_chunk_pages": [
+    41,
+    44
+  ]
+}

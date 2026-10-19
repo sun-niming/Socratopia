@@ -1,0 +1,44 @@
+{
+  "title": "Employee类的接口与数据成员",
+  "definition": "Employee类用于表示一名员工。它提供员工姓名、员工编号、薪资和在职状态的管理接口，以及晋升、降职、雇用、解雇和信息显示等操作。类中包含以下主要数据成员：名字m_firstName、姓氏m_lastName、员工编号m_employeeNumber、薪资m_salary和在职标志m_hired。源码显示，m_salary使用DefaultStartingSalary进行默认初始化，m_hired默认初始化为false。",
+  "key_points": [
+    "构造函数接收名字和姓氏：Employee(const std::string firstName, const std::string lastName)。",
+    "提供promote、demote、hire、fire和display等操作。",
+    "提供姓名、员工编号和薪资的getter/setter，以及isHired()状态查询函数。",
+    "m_hired为false表示员工初始不是在职状态；雇用后可变为true。",
+    "源码中的部分类型和标识符存在OCR错乱，标准写法应核对原书代码。"
+  ],
+  "examples": [
+    "典型对象创建：Employee emp { \"Jane\", \"Doe\" };",
+    "典型状态和属性操作：emp.setEmployeeNumber(71); emp.setSalary(501000); emp.hire();"
+  ],
+  "misconceptions": [
+    "Employee对象创建后不等于已经在职；源码中m_hired默认值为false，需要调用hire()才设为在职。",
+    "getter用于读取属性，setter用于修改属性；不能把两者的职责混淆。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "Employee类主要保存哪些员工信息？",
+      "a": "主要保存名字、姓氏、员工编号、薪资和在职状态。"
+    },
+    {
+      "q": "Employee对象创建后是否自动处于在职状态？",
+      "a": "不是。源码显示m_hired默认初始化为false，需要调用hire()将其设为true。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++类与对象的基本概念"
+  ],
+  "source_pages": [
+    93,
+    94
+  ],
+  "needs_verification": true,
+  "verify_query": "马克·格雷戈勒 C++20高级编程 第5版 Employee class DefaultStartingSalary DefaultRaiseAndDemeritAmount employee.cppm",
+  "concept_id": "130_employee类的接口与数据成员",
+  "_chunk_pages": [
+    93,
+    96
+  ]
+}

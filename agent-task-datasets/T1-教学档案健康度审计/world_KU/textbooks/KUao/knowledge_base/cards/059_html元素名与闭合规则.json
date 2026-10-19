@@ -1,0 +1,42 @@
+{
+  "title": "HTML元素名与闭合规则",
+  "definition": "HTML5代码约定中，元素名应使用小写；同时要求关闭所有HTML元素。对于空的HTML元素，关闭是可选的。",
+  "key_points": [
+    "元素名使用小写，例如<section>、<p>。",
+    "非空元素应成对闭合，例如<section>...</section>。",
+    "HTML5中，空元素的关闭可以省略，也可以写成自闭合形式。"
+  ],
+  "examples": [
+    "<section>\n<p>This is a paragraph.</p>\n</section>",
+    "<meta charset=\"utf-8\">",
+    "<meta charset=\"utf-8\" />"
+  ],
+  "misconceptions": [
+    "“关闭所有HTML元素”并不等于空元素也必须强制写结束标签；原文指出空元素的关闭是可选的。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "HTML5中元素名应如何书写？",
+      "a": "使用小写元素名。"
+    },
+    {
+      "q": "HTML5中空元素的关闭是否必须？",
+      "a": "不是必须，关闭空元素是可选的。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "HTML5文档类型声明"
+  ],
+  "source_pages": [
+    41,
+    44
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "059_html元素名与闭合规则",
+  "_chunk_pages": [
+    41,
+    44
+  ]
+}

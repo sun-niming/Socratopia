@@ -1,0 +1,44 @@
+{
+  "title": "受概念约束的 auto 变量和 lambda 参数",
+  "definition": "概念可以直接用于约束占位类型 `auto`，包括普通变量和 lambda 表达式参数。只有推导出的类型满足指定概念时，声明才有效。",
+  "key_points": [
+    "可以写 `Incrementable auto value{1};`，表示推导出的类型必须满足 `Incrementable`。",
+    "约束放在 `auto` 前面，例如 `Incrementable auto`。",
+    "约束不满足时，程序会在编译期被拒绝。"
+  ],
+  "examples": [
+    "`Incrementable auto value{1};`：从初始化器 `1` 推导类型，并要求该类型满足 `Incrementable`。",
+    "原文还给出字符串示例：`Incrementable auto value{ \"abc\"s };`。该示例用于说明约束也可以应用于推导出的字符串类型，但通常 `std::string` 不满足仅要求前置和后置递增的 `Incrementable` 概念。"
+  ],
+  "misconceptions": [
+    "`Incrementable auto` 不是把变量声明成名为 `Incrementable` 的类型，而是用概念约束 `auto` 的类型推导结果。",
+    "初始化器的类型必须满足概念；仅仅能够完成类型推导还不够。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`Incrementable auto value{1};` 的含义是什么？",
+      "a": "它推导 `value` 的类型，并要求推导出的类型满足 `Incrementable` 概念。"
+    },
+    {
+      "q": "如果推导出的类型不满足概念，会发生什么？",
+      "a": "程序在编译期报错，变量声明不能成立。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "auto类型推导",
+    "C++20概念",
+    "lambda表达式参数"
+  ],
+  "source_pages": [
+    403,
+    404
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 constrained placeholder type Incrementable auto variable syntax lambda parameter",
+  "concept_id": "526_受概念约束的_auto_变量和_lambda_参数",
+  "_chunk_pages": [
+    401,
+    404
+  ]
+}

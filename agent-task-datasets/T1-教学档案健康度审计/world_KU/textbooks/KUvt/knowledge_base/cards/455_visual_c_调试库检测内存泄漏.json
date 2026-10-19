@@ -1,0 +1,53 @@
+{
+  "title": "Visual C++ 调试库检测内存泄漏",
+  "definition": "在 Windows 的 Visual C++ 环境中，调试库可以检测程序退出时仍未释放的动态内存，并将泄漏信息输出到调试控制台。该功能通常需要在调试版本中启用 CRT 调试分配支持、重新定义调试版的 \\texttt{new}，并在 \\texttt{main()} 开头设置泄漏检查标志。",
+  "key_points": [
+    "教材给出的启用步骤包括：按指定顺序加入 CRT 调试相关宏和头文件；在 \\texttt{_DEBUG} 条件下重新定义 \\texttt{new}；在 \\texttt{main()} 第一行调用泄漏检查设置函数。",
+    "调试输出通常包含分配发生的文件名和行号，能够帮助定位分配了内存但未释放的位置。",
+    "输出中大括号内的数字表示从程序开始运行后进行的内存分配计数。",
+    "可以调用 \\texttt{CrtSetBreakAlloc(147)}，使调试器在第 147 次内存分配时中断。",
+    "这些工具只能提供定位问题的信息，不能自动修复泄漏；通常仍需跟踪指针何处被改写，并在适当位置释放原对象。",
+    "由于性能原因，发行版通常不会执行内存泄漏检测。"
+  ],
+  "examples": [
+    "教材给出的泄漏检查设置调用为：\n\\texttt{CrtSetDbgFlag(\\_CRTDBG\\_ALLOC\\_MEM\\_DF | \\_CRTDBG\\_LEAK\\_CHECK\\_DF);}\n该调用用于让 Visual CRT 在应用程序退出时把检测到的内存泄漏写入调试输出控制台。",
+    "若调试输出包含：\\texttt{leaky.cpp(15) : \\{147\\} normal block ...}，则可理解为泄漏相关分配发生在 \\texttt{leaky.cpp} 第 15 行，\\texttt{147} 是分配计数。",
+    "定位某次分配时可使用：\\texttt{CrtSetBreakAlloc(147);}"
+  ],
+  "misconceptions": [
+    "泄漏检测工具只能报告和定位问题，不能自动释放泄漏对象或修复程序逻辑。",
+    "调试输出中的分配计数不是源代码行号；文件名后的括号内容才是行号。",
+    "泄漏检测主要针对调试版本，不能假设发行版默认会进行同样的检测。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "Visual C++ 的内存泄漏检测输出通常能提供什么信息？",
+      "a": "它通常能指出发生分配的源文件和行号，并显示分配计数等信息，从而帮助定位哪些分配没有被释放。"
+    },
+    {
+      "q": "如何让调试器在第 147 次分配时中断？",
+      "a": "在 \\texttt{main()} 开头加入 \\texttt{CrtSetBreakAlloc(147);}。"
+    },
+    {
+      "q": "Visual C++ 泄漏检测工具能否自动修复内存泄漏？",
+      "a": "不能。它只能提供泄漏位置等信息，开发者仍需跟踪指针被改写或对象未释放的实际原因并修改代码。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "内存泄漏",
+    "Visual C++ 调试",
+    "预处理器条件编译"
+  ],
+  "source_pages": [
+    215,
+    216
+  ],
+  "needs_verification": true,
+  "verify_query": "Microsoft Visual C++ CRT debug heap _CrtSetDbgFlag _CRTDBG_LEAK_CHECK_DF _CrtSetBreakAlloc documentation",
+  "concept_id": "455_visual_c_调试库检测内存泄漏",
+  "_chunk_pages": [
+    213,
+    216
+  ]
+}

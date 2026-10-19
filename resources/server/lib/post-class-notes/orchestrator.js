@@ -21,7 +21,7 @@ var prompts = require("./prompts.js");
 var quality = require("./quality.js");
 var schema = require("./schema.js");
 
-var PIPELINE_VERSION = "post-class-v2";
+var PIPELINE_VERSION = "post-class-v3";
 
 var STATUS = {
   created: "created",
@@ -44,11 +44,16 @@ var DEFAULT_LIMITS = {
   mapTimeoutMs: 90000,
   reduceTimeoutMs: 150000,
   repairTimeoutMs: 60000,
-  directMaxTokens: 4096,
-  mapMaxTokens: 4096,
-  reduceMaxTokens: 4096,
-  repairMaxTokens: 4096,
-  tokenScaleOnShorten: 0.7
+  // A merge (reduce) and a repair both re-emit a *whole* note; the direct pass
+  // can write less because it starts from nothing.  At 4096 the merge of four
+  // slices ran out of room, the repair inherited the same ceiling, and the job
+  // degraded into the deterministic skeleton — so the two re-emitters get the
+  // larger budget and a truncated retry keeps most of it.
+  directMaxTokens: 6144,
+  mapMaxTokens: 6144,
+  reduceMaxTokens: 8192,
+  repairMaxTokens: 8192,
+  tokenScaleOnShorten: 0.9
 };
 
 var PLACEHOLDER = {

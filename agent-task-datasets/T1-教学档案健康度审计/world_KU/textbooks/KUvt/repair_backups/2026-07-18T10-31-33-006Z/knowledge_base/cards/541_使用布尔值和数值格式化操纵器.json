@@ -1,0 +1,55 @@
+{
+  "title": "使用布尔值和数值格式化操纵器",
+  "definition": "C++输入输出流可以通过操纵器控制输出格式。原文列举了 `boolalpha`、`noboolalpha`、`hex`、`oct`、`dec`、`setprecision`、`setw`、`setfill`、`showpoint` 和 `noshowpoint` 等操纵器。",
+  "key_points": [
+    "默认输出布尔值时，示例中的 `true` 输出为 `1`；使用 `boolalpha` 后输出为 `true`；使用 `noboolalpha` 后恢复为数值形式 `1`。",
+    "`setw(n)` 设置当前输出字段的宽度。",
+    "当实际输出宽度小于字段宽度时，`setfill(ch)` 指定用于填充的字符。",
+    "`setprecision(n)` 可以设置浮点数输出精度；也可以使用成员函数 `cout.precision(n)`。",
+    "`noshowpoint` 用于示例中的浮点数输出格式，使 `double dbl2 { 5 };` 输出为 `5` 而不是带小数点的形式。",
+    "`hex`、`oct`、`dec` 分别用于十六进制、八进制和十进制格式。"
+  ],
+  "examples": [
+    "```text\nbool myBool { true };\ncout << \"This is the default: \" << myBool << endl;\ncout << \"This should be true: \" << boolalpha << myBool << endl;\ncout << \"This should be 1: \" << noboolalpha << myBool << endl;\n```",
+    "```text\nint i { 123 };\ncout << setw(6) << i << endl;\n```\n字段宽度为 6，示例输出为右对齐的 `123`。",
+    "```text\ncout << setfill('0') << setw(6) << i << endl;\n```\n对于 `i == 123`，示例输出为 `000123`。",
+    "```text\ncout << setfill('*') << setw(6) << i << endl;\n```\n对于 `i == 123`，示例输出为 `***123`。",
+    "```text\ndouble value { 1.23456789 };\ncout << setprecision(5) << value << endl;\n```\n原文示例期望输出 `1.2346`。"
+  ],
+  "misconceptions": [
+    "`setw(6)` 表示字段宽度为 6，不是把数值本身改成六位数。",
+    "`setfill()` 指定填充字符，不会自动改变被输出数值的内容。",
+    "`setprecision(5)` 在原文示例中得到 `1.2346`，这里的精度表现应结合具体浮点格式设置理解，不能简单理解为永远保留 5 位小数。",
+    "使用 `boolalpha` 后布尔值输出为文字形式；使用 `noboolalpha` 后恢复为数值形式。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何让 `true` 输出为 `true` 而不是 `1`？",
+      "a": "在输出前插入 `boolalpha`，例如 `cout << boolalpha << myBool;`。"
+    },
+    {
+      "q": "如何把整数 `123` 按宽度 6、用 `0` 填充输出？",
+      "a": "使用 `cout << setfill('0') << setw(6) << 123;`，示例结果为 `000123`。"
+    },
+    {
+      "q": "如何设置浮点数输出精度？",
+      "a": "可以使用操纵器 `setprecision(n)`，也可以调用成员函数 `cout.precision(n)`。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++流插入运算符",
+    "布尔值和数值类型"
+  ],
+  "source_pages": [
+    415,
+    416
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "541_使用布尔值和数值格式化操纵器",
+  "_chunk_pages": [
+    413,
+    416
+  ]
+}

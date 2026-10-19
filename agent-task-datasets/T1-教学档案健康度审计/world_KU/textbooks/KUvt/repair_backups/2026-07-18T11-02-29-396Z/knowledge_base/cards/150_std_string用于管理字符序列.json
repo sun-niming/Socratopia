@@ -1,0 +1,39 @@
+{
+  "title": "std::string用于管理字符序列",
+  "definition": "`std::string` 是 C++标准库提供的字符串类型，用于表示和管理字符序列。它位于 `std` 命名空间中，通常写作 `std::string`。",
+  "key_points": [
+    "`std::string`用于存储字符序列。",
+    "可以使用字符串字面量初始化 `std::string`对象。",
+    "与直接操作字符数组相比，`std::string`提供了字符串拼接、比较和查找等成员操作。"
+  ],
+  "examples": [
+    "`std::string a{\"12\"};`",
+    "`std::string b{\"34\"};`",
+    "`std::string c;`"
+  ],
+  "misconceptions": [
+    "`std::string`不是单个字符，而是由多个字符组成的字符序列类型。",
+    "`std::string`与C风格字符串不是同一种类型；需要C风格字符串时，可以调用 `c_str()` 或 `data()` 获取字符指针。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`std::string`主要用于表示什么？",
+      "a": "它主要用于表示和管理字符序列，也就是C++中的字符串。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++字符类型和字符串字面量"
+  ],
+  "source_pages": [
+    106,
+    108
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "150_std_string用于管理字符序列",
+  "_chunk_pages": [
+    105,
+    108
+  ]
+}

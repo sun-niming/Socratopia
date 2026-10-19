@@ -1,0 +1,44 @@
+{
+  "title": "泛型参数和返回值必须记录其实际传递类型",
+  "definition": "有些函数接口使用泛型类型来传递多种不同信息，例如Windows消息处理程序的WPARAM、LPARAM和LRESULT。由于这些类型本身不能直接表示实际承载的数据类型和含义，文档必须说明每个参数或返回值在具体场景中的类型解释及业务含义。",
+  "key_points": [
+    "泛型类型可以传递不同种类的信息，但类型本身无法完整表达这些信息。",
+    "文档应说明泛型参数实际解释为什么类型，例如整数或指向某对象的指针。",
+    "文档还应说明这些值的业务含义，以及返回值在不同情况下代表什么。"
+  ],
+  "examples": [
+    "// Parameters:\\n// WPARAM wParam: (WPARAM)(int): An integer representing ...\\n// LPARAM lParam: (LPARAM)(string*): A string pointer representing ...\\n// Returns: (LRESULT)(Record*)\\n// nullptr in case of an error, otherwise a pointer to a Record object\\nLRESULT handleMessage(WPARAM wParam, LPARAM lParam);"
+  ],
+  "misconceptions": [
+    "泛型类型名称并不能自动说明实际传递的数据类型。",
+    "仅说明参数是WPARAM或LPARAM仍不够，还应说明其实际解释方式和语义。",
+    "返回值为LRESULT并不意味着调用者无需知道它在具体接口中表示什么。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么使用WPARAM、LPARAM和LRESULT时需要额外文档？",
+      "a": "因为这些类型可以承载不同内容，类型本身不能说明实际数据类型和含义；文档需要明确具体解释方式。"
+    },
+    {
+      "q": "handleMessage的返回值文档应说明哪些情况？",
+      "a": "应说明返回值被解释为Record指针，并说明出错时返回nullptr，否则返回指向Record对象的指针。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "函数接口文档基础",
+    "指针基础",
+    "类型转换基础"
+  ],
+  "source_pages": [
+    124,
+    124
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "243_泛型参数和返回值必须记录其实际传递类型",
+  "_chunk_pages": [
+    121,
+    124
+  ]
+}

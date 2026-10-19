@@ -1,0 +1,42 @@
+{
+  "title": "C++模块中导出类的基本声明",
+  "definition": "在C++20模块中，可以使用export module声明模块，并使用export class导出类，使其他模块能够使用该类。SpreadsheetCell类公开提供setValue和getValue成员函数，内部保存一个私有的double数据成员m_value。",
+  "key_points": [
+    "模块接口可以写成export module spreadsheet_cell;。",
+    "使用export class SpreadsheetCell导出类定义。",
+    "public区域声明可供类外调用的成员函数；private区域声明类的内部数据成员。",
+    "getValue()后面的const表示该成员函数不会修改当前对象的状态。"
+  ],
+  "examples": [
+    "export module spreadsheet_cell;\nexport class SpreadsheetCell {\npublic:\n    void setValue(double value);\n    double getValue() const;\nprivate:\n    double m_value;\n};"
+  ],
+  "misconceptions": [
+    "export class并不表示类的所有成员都自动公开；成员仍然受public、protected和private访问控制。",
+    "getValue() const中的const不是返回值类型，而是成员函数限定符。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "SpreadsheetCell类中哪些成员可以直接从类外访问？",
+      "a": "位于public区域的setValue和getValue可以直接从类外访问；位于private区域的m_value不能直接从类外访问。"
+    },
+    {
+      "q": "getValue()声明末尾的const表示什么？",
+      "a": "表示该成员函数不会修改调用它的SpreadsheetCell对象的状态。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++类与成员函数基础"
+  ],
+  "source_pages": [
+    229,
+    232
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "305_c_模块中导出类的基本声明",
+  "_chunk_pages": [
+    229,
+    232
+  ]
+}

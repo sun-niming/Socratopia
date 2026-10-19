@@ -1,0 +1,43 @@
+{
+  "title": "ARP请求与ARP响应的链路层发送方式",
+  "definition": "ARP查询请求使用广播帧发送，因为发送方尚不知道目标IP地址对应的MAC地址，需要让同一广播局域网上的节点都能收到并检查该请求。ARP响应则使用具有特定目的MAC地址的帧发送，因为响应方已经知道查询发起者的MAC地址。",
+  "key_points": [
+    "ARP请求的目的MAC地址是广播地址。",
+    "ARP响应的目的MAC地址是查询发起者的特定MAC地址。",
+    "ARP请求和响应都用于获得IP地址与MAC地址之间的映射。"
+  ],
+  "examples": [
+    "主机A想获得主机B的MAC地址时，可广播ARP请求；主机B收到后，向A的MAC地址单播ARP响应。"
+  ],
+  "misconceptions": [
+    "误以为ARP响应也必须广播给局域网中的所有主机。",
+    "误以为ARP查询可以在不知道目标MAC地址时直接发送给目标MAC地址。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "ARP查询为什么在广播帧中发送？",
+      "a": "因为发送方尚不知道目标IP地址对应的MAC地址，需要让局域网中的节点都能收到并检查请求。"
+    },
+    {
+      "q": "ARP响应为什么发送到特定目的MAC地址？",
+      "a": "因为响应方已经知道发起ARP查询的主机的MAC地址。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "MAC地址",
+    "IP地址",
+    "广播帧"
+  ],
+  "source_pages": [
+    349,
+    352
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "812_arp请求与arp响应的链路层发送方式",
+  "_chunk_pages": [
+    349,
+    352
+  ]
+}

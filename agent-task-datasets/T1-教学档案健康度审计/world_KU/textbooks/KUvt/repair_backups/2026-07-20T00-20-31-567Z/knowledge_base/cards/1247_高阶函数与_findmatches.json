@@ -1,0 +1,49 @@
+{
+  "title": "高阶函数与 findMatches",
+  "definition": "接收其他函数作为参数，或返回函数的函数称为高阶函数。原文中的 findMatches 接收两个 int 类型的 span、一个 Matcher 和一个 MatchHandler，按索引并行遍历两个 span；当 Matcher 判断对应元素匹配时，调用 MatchHandler 处理匹配结果。",
+  "key_points": [
+    "两个 span 的元素数量必须相同；如果大小不同，函数直接返回。",
+    "遍历索引 $i$ 从 $0$ 到 $\\texttt{values1.size()}-1$。",
+    "对每个位置调用 $\\texttt{matcher(values1[i], values2[i])}$。",
+    "如果返回 true，则调用 $\\texttt{handler(i, values1[i], values2[i])}$。"
+  ],
+  "examples": [
+    "核心逻辑可表示为：$$\\begin{aligned}\\text{if }&\\texttt{values1.size()} \\ne \\texttt{values2.size()}:\\quad\\texttt{return;}\\\\&\\texttt{for } i=0,1,\\ldots,\\texttt{values1.size()}-1:\\\\&\\quad\\texttt{if (matcher(values1[i], values2[i]))}\\\\&\\qquad\\texttt{handler(i, values1[i], values2[i]);}\\end{aligned}$$",
+    "示例数据为 $\\texttt{values1 = \\{2,5,6,9,10,1,1\\}}$、$\\texttt{values2 = \\{4,4,2,9,0,3,1\\}}$，使用相等判断时，匹配位置为 3 和 6。"
+  ],
+  "misconceptions": [
+    "findMatches 不是只能使用相等比较；比较规则由传入的 Matcher 决定。",
+    "两个 span 大小不同并不会只遍历较短者，原文实现要求大小相同并在大小不同的情况下直接返回。",
+    "MatchHandler 只在 Matcher 返回 true 时调用。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "findMatches 在两个 span 大小不同时做什么？",
+      "a": "直接返回，不进行遍历，因为该实现要求两个 span 具有相同数量的元素。"
+    },
+    {
+      "q": "findMatches 何时调用 MatchHandler？",
+      "a": "对某个索引 $i$，当 $\\texttt{matcher(values1[i], values2[i])}$ 返回 true 时，调用 $\\texttt{handler(i, values1[i], values2[i])}$。"
+    },
+    {
+      "q": "为什么 findMatches 是高阶函数？",
+      "a": "因为它接收 Matcher 和 MatchHandler 这两个函数回调作为参数。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "函数指针类型别名",
+    "回调与可调用对象"
+  ],
+  "source_pages": [
+    607,
+    607
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1247_高阶函数与_findmatches",
+  "_chunk_pages": [
+    605,
+    608
+  ]
+}

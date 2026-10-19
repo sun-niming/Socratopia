@@ -1,0 +1,50 @@
+{
+  "title": "Grid 的坐标检查与 at 访问函数",
+  "definition": "Grid 提供 at(size_t x, size_t y) 用于访问指定坐标的单元格。访问前会调用 verifyCoordinate(x, y) 检查边界；当 x 超出宽度或 y 超出高度时，函数抛出 std::out_of_range。const 对象调用 const 重载，非 const 对象调用非 const 重载。",
+  "key_points": [
+    "边界检查逻辑为：若 $x\\ge m\\_width$，抛出 std::out_of_range；若 $y\\ge m\\_height$，也抛出 std::out_of_range。",
+    "const 重载返回 const std::optional<T>&：$$\\texttt{const std::optional<T>\\& at(size\\_t x, size\\_t y) const;}$$",
+    "非 const 重载返回 std::optional<T>&，因此可以通过 at 修改单元格。",
+    "非 const at 的实现可以通过调用 const 版本后再使用 const_cast 返回可修改引用。"
+  ],
+  "examples": [
+    "mylntGrid.at(0, 0) = 10;",
+    "读取可能为空的单元格：$$\\texttt{int x\\{ myIntGrid.at(0,0).value\\_or(0) \\};}$$",
+    "若网格宽度为 $w$，调用 at(x,y) 时只要满足 $x\\ge w$ 或 $y\\ge h$，就会抛出 std::out_of_range。"
+  ],
+  "misconceptions": [
+    "at 返回的不是直接的 T，而是 std::optional<T> 的引用。",
+    "坐标越界不会静默访问其他位置；原文实现会进行检查并抛出异常。",
+    "value_or(0) 是在 optional 为空时提供默认值，不是把网格单元永久设置为 0。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么可以写 myIntGrid.at(0, 0) = 10？",
+      "a": "因为非 const at 返回 std::optional<int>&，该引用可以被赋值为 int，从而使对应 optional 存储值 10。"
+    },
+    {
+      "q": "如何在单元格为空时读取默认值 0？",
+      "a": "调用该单元格的 value_or(0)，例如：$$\\texttt{int x\\{ myIntGrid.at(0,0).value\\_or(0) \\};}$$"
+    },
+    {
+      "q": "访问越界坐标时会发生什么？",
+      "a": "verifyCoordinate 会检测越界，并抛出 std::out_of_range。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "std::optional 的引用和 value_or",
+    "C++ 异常基础"
+  ],
+  "source_pages": [
+    377,
+    380
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "484_grid_的坐标检查与_at_访问函数",
+  "_chunk_pages": [
+    377,
+    380
+  ]
+}

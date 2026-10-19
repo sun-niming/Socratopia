@@ -1,0 +1,37 @@
+{
+  "title": "translate 变换",
+  "definition": "translate 是 2D 变换中的移动方法，用来让元素沿 X 轴和/或 Y 轴发生位移。",
+  "key_points": [
+    "示例中写作 transform:translate(50px,50px)",
+    "第一个参数表示 X 轴位移",
+    "第二个参数表示 Y 轴位移"
+  ],
+  "examples": [
+    "transform:translate(50px,50px); /*沿X轴移动50px，Y轴移动50px*/"
+  ],
+  "misconceptions": [
+    "translate 不是旋转，也不是缩放，而是位移",
+    "位移方向分别对应 X 轴和 Y 轴"
+  ],
+  "qa_pairs": [
+    {
+      "q": "transform:translate(50px,50px) 表示什么？",
+      "a": "沿 X 轴移动 50px，沿 Y 轴移动 50px。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "2D变换"
+  ],
+  "source_pages": [
+    197,
+    200
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "276_translate_变换",
+  "_chunk_pages": [
+    197,
+    200
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "title": "curl 测试覆盖场景",
+  "definition": "脚本用一组 curl 请求覆盖项目的关键场景：正常 200 页面、404 不存在资源、405 的 POST、目录穿越请求、URL 编码目录穿越请求，以及并发访问下服务器是否崩溃。",
+  "key_points": [
+    "`/`、`/practice.html`、`/css/style.css` 用于检查 200 和 MIME。",
+    "`/not-found.html` 用于检查 404，POST 请求用于检查 405。",
+    "`/../../etc/passwd` 和 `/%2e%2e/%2e%2e/etc/passwd` 用于检查目录穿越处理。",
+    "循环发起多个后台请求用于并发测试，只看服务器是否崩溃。"
+  ],
+  "examples": [
+    "脚本中的测试包括：curl -i -X POST $BASE/ | head -n 10，以及 curl -i $BASE/%2e%2e/%2e%2e/etc/passwd | head -n 10。"
+  ],
+  "misconceptions": [
+    "并发测试要看每个请求的详细输出",
+    "目录穿越只需要测试未编码形式"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么脚本同时测试普通目录穿越和 URL 编码目录穿越？",
+      "a": "因为两种形式都可能绕过路径检查，需要分别验证。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "测试脚本目的"
+  ],
+  "source_pages": [
+    89,
+    92
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "139_curl_测试覆盖场景",
+  "_chunk_pages": [
+    89,
+    92
+  ]
+}

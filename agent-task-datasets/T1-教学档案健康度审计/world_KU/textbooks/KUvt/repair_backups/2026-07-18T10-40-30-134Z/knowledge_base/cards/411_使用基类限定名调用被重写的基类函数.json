@@ -1,0 +1,42 @@
+{
+  "title": "使用基类限定名调用被重写的基类函数",
+  "definition": "在派生类成员函数中，如果要调用基类版本的同名函数，应使用基类限定名，例如 WeatherPrediction::getTemperature()。直接写 getTemperature() 会再次查找当前派生类函数，可能导致递归调用。",
+  "key_points": [
+    "错误形式是：return getTemperature() + \"\\u00B0F\";。在 MyWeatherPrediction::getTemperature() 内，这会再次调用 MyWeatherPrediction::getTemperature()。",
+    "调用基类实现的形式是：return WeatherPrediction::getTemperature() + \"\\u00B0F\";。",
+    "\\u00B0 是 ISO/IEC 10646 中表示度数符号的转义表示，拼接后用于形成带 °F 的温度字符串。"
+  ],
+  "examples": [
+    "class MyWeatherPrediction : public WeatherPrediction { public: std::string getTemperature() const override { return WeatherPrediction::getTemperature() + \"\\u00B0F\"; } };"
+  ],
+  "misconceptions": [
+    "在派生类重写函数中直接调用同名函数，就会自动调用基类版本；实际上，不加基类限定名时通常会再次调用当前派生类函数。",
+    "使用基类限定名会触发虚函数动态分派；实际上，WeatherPrediction::getTemperature() 这种限定调用明确选择基类实现。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何在 MyWeatherPrediction::getTemperature() 中调用 WeatherPrediction 的实现？",
+      "a": "使用 WeatherPrediction::getTemperature()，例如 return WeatherPrediction::getTemperature() + \"\\u00B0F\";。"
+    },
+    {
+      "q": "为什么 return getTemperature() + \"\\u00B0F\"; 可能是 BUG？",
+      "a": "因为它可能再次调用当前的 MyWeatherPrediction::getTemperature()，形成递归调用，而不是调用基类实现。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "虚函数重写",
+    "作用域限定名"
+  ],
+  "source_pages": [
+    317,
+    320
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "411_使用基类限定名调用被重写的基类函数",
+  "_chunk_pages": [
+    317,
+    320
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "title": "CSS动画与关键帧",
+  "definition": "动画是由静态图片连续播放而成，这些静态图片称为关键帧（Key Frame）。",
+  "key_points": [
+    "动画可以看作连续播放的静态图片",
+    "静态图片称为关键帧（Key Frame）"
+  ],
+  "examples": [
+    "Key Frame 1 -> Key Frame 2 -> Key Frame 3"
+  ],
+  "misconceptions": [
+    "关键帧只是普通图片，与动画无关",
+    "动画只能通过过渡实现"
+  ],
+  "qa_pairs": [
+    {
+      "q": "什么是关键帧（Key Frame）？",
+      "a": "组成动画的静态图片。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "CSS基础"
+  ],
+  "source_pages": [
+    205,
+    208
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "291_css动画与关键帧",
+  "_chunk_pages": [
+    205,
+    208
+  ]
+}

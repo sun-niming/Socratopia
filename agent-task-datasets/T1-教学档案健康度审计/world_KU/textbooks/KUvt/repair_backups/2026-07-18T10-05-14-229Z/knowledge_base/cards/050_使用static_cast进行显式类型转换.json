@@ -1,0 +1,45 @@
+{
+  "title": "使用static_cast进行显式类型转换",
+  "definition": "`static_cast<T>(expression)`是C++中的显式类型转换写法，用于把表达式转换为指定类型`T`。原文示例将整数转换为`short`，再将浮点数转换为`double`后参与除法运算。",
+  "key_points": [
+    "显式转换的基本形式是`static_cast<目标类型>(表达式)`。",
+    "示例：`someShort = static_cast<short>(someInteger);`把`someInteger`转换为`short`。",
+    "示例：`someDouble = static_cast<double>(someFloat) / 100000;`先把`someFloat`转换为`double`，再进行除法。",
+    "类型转换可能造成数据范围或精度变化，目标类型必须能够合理表示转换结果。"
+  ],
+  "examples": [
+    "`someShort = static_cast<short>(someInteger);`",
+    "`someDouble = static_cast<double>(someFloat) / 100000;`"
+  ],
+  "misconceptions": [
+    "`static_cast`不是把变量本身永久改成另一种类型，而是产生转换后的表达式结果。",
+    "转换为`short`不保证大整数能够无损保存。",
+    "整数和浮点数混合运算时，不能忽略类型转换对结果精度和运算类型的影响。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何把`someInteger`显式转换为`short`？",
+      "a": "使用`static_cast<short>(someInteger)`，例如：`someShort = static_cast<short>(someInteger);`。"
+    },
+    {
+      "q": "原文中为什么将`someFloat`转换为`double`后再除以`100000`？",
+      "a": "使用`static_cast<double>(someFloat)`明确把操作数转换为`double`，使该除法在`double`类型下进行。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++基本类型",
+    "C++表达式与算术运算"
+  ],
+  "source_pages": [
+    45,
+    48
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "050_使用static_cast进行显式类型转换",
+  "_chunk_pages": [
+    45,
+    48
+  ]
+}

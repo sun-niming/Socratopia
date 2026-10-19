@@ -1,0 +1,42 @@
+{
+  "title": "sort与stable_sort的区别",
+  "definition": "sort()对指定范围进行排序，但不保证相等元素的相对顺序保持不变；stable_sort()也会排序，并且保持范围内相等元素原有的相对顺序。由于需要维护相等元素的相对顺序，stable_sort()通常比sort()效率低。",
+  "key_points": [
+    "稳定排序只关心相等元素之间的相对次序。",
+    "stable_sort()适用于相等键关联着其他信息、且需要保留原始先后顺序的场景。",
+    "两者都可以对指定范围进行排序，并可使用比较规则。"
+  ],
+  "examples": [
+    "sort(begin(values), end(values));",
+    "stable_sort(begin(values), end(values));"
+  ],
+  "misconceptions": [
+    "stable_sort()并不是按照另一种数值顺序排序，而是额外保证相等元素的相对顺序。",
+    "sort()不能保证相等元素的相对顺序。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "stable_sort()相对于sort()增加了什么保证？",
+      "a": "它保持排序范围内相等元素的相对顺序。"
+    },
+    {
+      "q": "为什么stable_sort()通常比sort()低效？",
+      "a": "因为它需要额外维护相等元素的相对顺序。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "通用排序算法的适用范围"
+  ],
+  "source_pages": [
+    649,
+    649
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1356_sort与stable_sort的区别",
+  "_chunk_pages": [
+    649,
+    652
+  ]
+}

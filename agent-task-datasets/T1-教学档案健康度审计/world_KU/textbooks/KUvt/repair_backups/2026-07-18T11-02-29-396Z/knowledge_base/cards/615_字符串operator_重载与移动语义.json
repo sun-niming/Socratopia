@@ -1,0 +1,47 @@
+{
+  "title": "字符串operator+重载与移动语义",
+  "definition": "字符串连接可以通过多个 `operator+` 重载支持不同的左值、右值组合。原文展示了根据操作数是否为右值来选择复用已有字符串内存的实现：当某个操作数是右值时，可以通过移动语义复用该对象的内存，从而减少不必要的内存分配；当两个操作数都是 const 左值时，则不能复用它们的内存。",
+  "key_points": [
+    "`string + string` 的不同值类别组合可以分别实现专门的重载。",
+    "当左操作数是左值、右操作数是右值时，可以将左值内容追加到右值中，并返回移动后的结果。",
+    "当左操作数是右值、右操作数是左值时，可以在左操作数已有内存上追加右操作数。",
+    "当两个操作数都是右值时，可以复用左操作数或右操作数的内存。",
+    "两个 const 左值相加时通常需要创建新的结果字符串，原文标注为不能复用内存。"
+  ],
+  "examples": [
+    "原文给出的实现思路包括：`return move(lhs.append(rhs));`，表示将 `rhs` 追加到 `lhs` 后移动返回结果。",
+    "另一种实现思路是：`return move(rhs.insert(0, lhs));`，表示将 `lhs` 插入到 `rhs` 开头后移动返回结果。",
+    "原文对重载的内存复用说明包括：`string operator+(const string& lhs, const string& rhs); // No memory reuse.` 以及右值参与时可以复用左值或右值的内存。"
+  ],
+  "misconceptions": [
+    "只要调用了 `operator+` 就一定会复用已有字符串内存；是否能复用取决于操作数的值类别和具体实现。",
+    "移动语义通常转移或复用资源，但移动后的源对象仍然是有效对象，不能简单理解为对象被销毁。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么字符串的 `operator+` 需要针对左值和右值提供不同重载？",
+      "a": "因为左值通常仍要保留原内容，右值则可以安全地转移或复用其内部资源，从而减少内存分配和拷贝。"
+    },
+    {
+      "q": "两个 const 左值字符串相加时，原文对内存复用作了什么说明？",
+      "a": "原文标注为 `No memory reuse`，即不能复用这两个操作数的已有内存。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "左值与右值",
+    "移动语义",
+    "函数重载"
+  ],
+  "source_pages": [
+    473,
+    476
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 std::string operator+ overload lvalue rvalue memory reuse lhs.append rhs.insert textbook Marc Gregoire",
+  "concept_id": "615_字符串operator_重载与移动语义",
+  "_chunk_pages": [
+    473,
+    476
+  ]
+}

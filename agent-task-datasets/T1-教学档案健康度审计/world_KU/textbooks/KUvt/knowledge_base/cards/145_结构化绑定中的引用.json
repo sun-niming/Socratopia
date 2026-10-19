@@ -1,0 +1,46 @@
+{
+  "title": "结构化绑定中的引用",
+  "definition": "结构化绑定可以使用引用，使绑定名称直接引用结构化绑定所分解对象中的对应元素。使用auto&时可以通过绑定名称修改原对象；使用const auto&时，绑定名称以const引用方式访问原对象。",
+  "key_points": [
+    "普通auto结构化绑定会按值分解对象。",
+    "auto& [a, b]表示以引用方式分解，绑定名称引用原对象中的元素。",
+    "const auto& [a, b]表示以const引用方式分解，不能通过绑定名称修改元素。",
+    "是否使用引用会影响绑定名称对原对象的修改能力。"
+  ],
+  "examples": [
+    "std::pair myPair { \"hello\", 5 };\nauto [theString, theInt] { myPair }; // 按值分解",
+    "auto& [theString, theInt] { myPair }; // 分解为对非const元素的引用",
+    "const auto& [theString, theInt] { myPair }; // 分解为对const元素的引用"
+  ],
+  "misconceptions": [
+    "结构化绑定默认使用auto并不等同于总是得到原对象元素的引用；需要显式写auto&或const auto&。",
+    "const auto&不能通过绑定名称修改原对象。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何让结构化绑定中的名称引用myPair的原始元素？",
+      "a": "使用auto&，例如auto& [theString, theInt] { myPair };。"
+    },
+    {
+      "q": "auto&和const auto&结构化绑定的主要区别是什么？",
+      "a": "auto&提供对非const元素的引用，可以修改原对象；const auto&提供const引用，不能通过绑定名称修改原对象。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "结构化绑定",
+    "引用",
+    "const引用"
+  ],
+  "source_pages": [
+    80,
+    80
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "145_结构化绑定中的引用",
+  "_chunk_pages": [
+    77,
+    80
+  ]
+}

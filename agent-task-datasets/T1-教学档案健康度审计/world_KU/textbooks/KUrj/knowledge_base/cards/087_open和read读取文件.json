@@ -1,0 +1,39 @@
+{
+  "title": "open和read读取文件",
+  "definition": "`open(const char *pathname, int flags)` 用于打开文件，项目中通常使用 `O_RDONLY`；`read(int fd, void *buf, size_t count)` 用于读取文件内容，返回实际读取的字节数。静态服务器会先 `open` 文件，再循环 `read`，最后 `close` 文件描述符。",
+  "key_points": [
+    "`open` 用 `O_RDONLY` 打开静态文件",
+    "`read` 的返回值是实际读取字节数",
+    "读取完文件后要 `close(file_fd)`"
+  ],
+  "examples": [
+    "`int file_fd = open(path, O_RDONLY);`",
+    "`ssize_t n; while ((n = read(file_fd, buf, sizeof(buf))) > 0) { ... }`"
+  ],
+  "misconceptions": [
+    "认为 `read` 一次就一定能读完整个文件",
+    "忘记在读完后关闭文件描述符"
+  ],
+  "qa_pairs": [
+    {
+      "q": "open/read 读取静态文件时最容易犯什么错？",
+      "a": "把 `read` 缓冲区当字符串，或者忘记在结束后 `close` 文件描述符。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "stat函数",
+    "文件I/O基础"
+  ],
+  "source_pages": [
+    55,
+    56
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "087_open和read读取文件",
+  "_chunk_pages": [
+    53,
+    56
+  ]
+}

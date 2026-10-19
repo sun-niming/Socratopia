@@ -1,0 +1,50 @@
+{
+  "title": "C++继承声明语法",
+  "definition": "在类定义后使用冒号和基类列表声明继承关系。教材示例中，`Derived` 以公有继承方式继承 `Base`：`class Derived : public Base { ... };`。派生类本身仍是一个完整的类，可以增加自己的方法和数据成员。",
+  "key_points": [
+    "基本形式是 `class 派生类 : public 基类 { 派生类成员 };`。",
+    "教材示例中的 `Base` 包含一个公有方法 `someMethod()`、一个受保护数据成员 `m_protectedInt` 和一个私有数据成员 `m_privateInt`。",
+    "`Derived` 增加了自己的公有方法 `someOtherMethod()`。",
+    "一个派生类还可以继续作为另一个类的基类，从而形成继承链。"
+  ],
+  "examples": [
+    "教材示例可整理为：`class Base { public: void someMethod() {} protected: int m_protectedInt{0}; private: int m_privateInt{0}; };`",
+    "`class Derived : public Base { public: void someOtherMethod() {} };`",
+    "可以继续定义 `class DerivedDerived : public Derived { };`，形成 `Base -> Derived -> DerivedDerived` 的继承链。"
+  ],
+  "misconceptions": [
+    "派生类不是只能包含从基类继承来的成员；它可以声明自己的方法和数据成员。",
+    "继承链不要求只有两层，派生类还可以继续被继承。",
+    "基类的私有成员虽然属于基类对象的实现部分，但不能被派生类直接访问；教材明确指出派生类可访问基类的公有和受保护成员。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何声明一个公有继承自 Base 的 Derived 类？",
+      "a": "使用 `class Derived : public Base { ... };`。"
+    },
+    {
+      "q": "派生类能否继续作为其他类的基类？",
+      "a": "可以，因此可以形成多层继承链。"
+    },
+    {
+      "q": "教材示例中 Derived 自己增加了什么成员？",
+      "a": "它增加了公有方法 `someOtherMethod()`。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "类定义",
+    "访问控制符 public、protected、private"
+  ],
+  "source_pages": [
+    303,
+    303
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "622_c_继承声明语法",
+  "_chunk_pages": [
+    301,
+    304
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "title": "非严格模式下thisArg的自动转换",
+  "definition": "在非严格模式下，如果函数被调用时显式传入的this为undefined或null，它会被替换为globalThis；如果传入的是原始值，this会被替换为该原始值的包装对象。",
+  "key_points": [
+    "undefined和null会被替换为globalThis",
+    "原始值会被装箱成对应的包装对象",
+    "这是非严格模式下的行为"
+  ],
+  "examples": [
+    "sayHello.call(null)",
+    "sayHello.call(1)"
+  ],
+  "misconceptions": [
+    "传入null后this仍然是null",
+    "传入数字后this仍然还是数字"
+  ],
+  "qa_pairs": [
+    {
+      "q": "非严格模式下，call/apply传入null时this会怎样？",
+      "a": "会被替换为globalThis，浏览器中通常是window。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "this的基本含义",
+    "call/apply显式绑定this"
+  ],
+  "source_pages": [
+    263,
+    264
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "384_非严格模式下thisarg的自动转换",
+  "_chunk_pages": [
+    261,
+    264
+  ]
+}

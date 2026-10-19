@@ -1,0 +1,48 @@
+{
+  "title": "Date对象常用设置方法",
+  "definition": "JavaScript 的 Date 对象提供一组“设置”方法，用来修改日期时间的不同组成部分：setDate() 设置日，setFullYear() 设置年（可选月和日），setHours() 设置小时，setMilliseconds() 设置毫秒，setMinutes() 设置分，setMonth() 设置月，setSeconds() 设置秒，setTime() 按从 1970 年 1 月 1 日 0 时起计算的毫秒数设置时间。",
+  "key_points": [
+    "setDate()：设置日期中的“日”，取值 1-31",
+    "setFullYear()：设置“年”，并且可同时设置月和日",
+    "setHours()/setMinutes()/setSeconds()/setMilliseconds()：分别设置时、分、秒、毫秒",
+    "setMonth() 的月份按 0-11 计数",
+    "setTime() 使用自 1970-01-01 起的毫秒数"
+  ],
+  "examples": [
+    "date.setDate(15)",
+    "date.setFullYear(2024, 6, 1)",
+    "date.setHours(13); date.setMinutes(30); date.setSeconds(0)",
+    "date.setMonth(0)",
+    "date.setTime(1700000000000)"
+  ],
+  "misconceptions": [
+    "setMonth() 的月份不是 1-12，而是 0-11",
+    "setTime() 不是设置“当前时间字符串”，而是设置时间戳毫秒数",
+    "setDate() 设置的是“日”，不是“星期”"
+  ],
+  "qa_pairs": [
+    {
+      "q": "Date 对象中 setMonth() 的取值范围是什么？",
+      "a": "0-11。"
+    },
+    {
+      "q": "setTime() 的参数表示什么？",
+      "a": "从 1970 年 1 月 1 日 0 时起到指定时刻的毫秒数。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "JavaScript Date对象基础"
+  ],
+  "source_pages": [
+    313,
+    316
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "451_date对象常用设置方法",
+  "_chunk_pages": [
+    313,
+    316
+  ]
+}

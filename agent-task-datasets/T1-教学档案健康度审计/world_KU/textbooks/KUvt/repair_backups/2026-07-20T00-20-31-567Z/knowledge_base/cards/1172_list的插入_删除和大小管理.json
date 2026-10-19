@@ -1,0 +1,49 @@
+{
+  "title": "list的插入、删除和大小管理",
+  "definition": "list支持push_back()、pop_back()、emplace()、emplace_back()、insert()、erase()和clear()等操作，也支持push_front()、emplace_front()和pop_front()。只要已经找到正确的操作位置，除clear()外，这些插入和删除操作的复杂度都是常量时间。list支持size()、empty()和resize()，但不提供reserve()和capacity()；其中size()具有常量时间复杂度。",
+  "key_points": [
+    "list适合需要频繁插入和删除、但不需要按索引快速访问的场景。",
+    "插入或删除操作的常量时间前提是已经通过迭代器定位到正确位置。",
+    "clear()不属于上述常量时间操作，其复杂度与需要清除的元素数量有关。",
+    "list不公开连续内存或容量管理模型，因此没有reserve()和capacity()。",
+    "尽管list插入删除方便，实际性能仍可能不如vector，应使用性能分析器进行判断。"
+  ],
+  "examples": [
+    "若it已经指向插入位置，list.emplace(it, value)可以在该位置常量时间地插入元素。",
+    "对list调用size()、empty()和resize()是支持的，但不能调用list.reserve()或list.capacity()。"
+  ],
+  "misconceptions": [
+    "list的任意位置插入删除不是在不知道位置时也能常量时间完成；寻找位置可能需要线性时间。",
+    "list并不因为插入删除复杂度低就必然比vector快，实际速度要通过性能分析确定。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "list在什么条件下可以常量时间插入或删除元素？",
+      "a": "当已经通过迭代器找到正确的操作位置时，除clear()外相关插入和删除操作为常量时间。"
+    },
+    {
+      "q": "list是否支持reserve()和capacity()？",
+      "a": "不支持；list不公开底层内存模型。"
+    },
+    {
+      "q": "list的size()复杂度是什么？",
+      "a": "常量时间。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "list的基本特征与访问方式",
+    "容器操作复杂度"
+  ],
+  "source_pages": [
+    567,
+    568
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1172_list的插入_删除和大小管理",
+  "_chunk_pages": [
+    565,
+    568
+  ]
+}

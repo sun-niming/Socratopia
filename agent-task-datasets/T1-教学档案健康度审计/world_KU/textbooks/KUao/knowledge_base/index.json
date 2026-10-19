@@ -1,0 +1,5179 @@
+{
+  "textbook": "Web前端开发合集.pdf",
+  "title": "Web前端开发合集",
+  "lang": "zh",
+  "built_at": "2026-06-25T10:10:26.256Z",
+  "model": "gpt-5.4-mini",
+  "vision_fallback": null,
+  "format": "pdf",
+  "card_count": 516,
+  "needs_verification_count": 13,
+  "cards": [
+    {
+      "concept_id": "001_课程名称",
+      "title": "课程名称",
+      "difficulty": 1,
+      "source_pages": [
+        1,
+        4
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "002_主讲人",
+      "title": "主讲人",
+      "difficulty": 1,
+      "source_pages": [
+        1,
+        4
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "003_上课要求",
+      "title": "上课要求",
+      "difficulty": 1,
+      "source_pages": [
+        1,
+        4
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "004_实验要求",
+      "title": "实验要求",
+      "difficulty": 1,
+      "source_pages": [
+        1,
+        4
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "005_课后学习与联系老师方式",
+      "title": "课后学习与联系老师方式",
+      "difficulty": 1,
+      "source_pages": [
+        1,
+        4
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "006_考核方式",
+      "title": "考核方式",
+      "difficulty": 2,
+      "source_pages": [
+        1,
+        4
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "007_课堂考勤要求",
+      "title": "课堂考勤要求",
+      "difficulty": 2,
+      "source_pages": [
+        1,
+        4
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "008_关于ai_学习web技术仍然必要",
+      "title": "关于AI：学习Web技术仍然必要",
+      "difficulty": 2,
+      "source_pages": [
+        1,
+        4
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "009_ai完成作业的使用规范",
+      "title": "AI完成作业的使用规范",
+      "difficulty": 1,
+      "source_pages": [
+        5,
+        5
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "010_课程培养目标",
+      "title": "课程培养目标",
+      "difficulty": 1,
+      "source_pages": [
+        6,
+        6
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "011_课程内容范围",
+      "title": "课程内容范围",
+      "difficulty": 1,
+      "source_pages": [
+        6,
+        6
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "012_第1章基本信息",
+      "title": "第1章基本信息",
+      "difficulty": 1,
+      "source_pages": [
+        7,
+        7
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "013_本部分学习目标",
+      "title": "本部分学习目标",
+      "difficulty": 1,
+      "source_pages": [
+        8,
+        8
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "014_internet",
+      "title": "Internet",
+      "difficulty": 1,
+      "source_pages": [
+        9,
+        12
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "015_中国正式接入国际互联网",
+      "title": "中国正式接入国际互联网",
+      "difficulty": 1,
+      "source_pages": [
+        9,
+        12
+      ],
+      "needs_verification": true
+    },
+    {
+      "concept_id": "016_www_万维网",
+      "title": "WWW（万维网）",
+      "difficulty": 1,
+      "source_pages": [
+        9,
+        12
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "017_万维网的诞生背景",
+      "title": "万维网的诞生背景",
+      "difficulty": 2,
+      "source_pages": [
+        11,
+        12
+      ],
+      "needs_verification": true
+    },
+    {
+      "concept_id": "018_万维网诞生的关键技术",
+      "title": "万维网诞生的关键技术",
+      "difficulty": 2,
+      "source_pages": [
+        9,
+        12
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "019_第一个网页浏览器和网页服务器",
+      "title": "第一个网页浏览器和网页服务器",
+      "difficulty": 2,
+      "source_pages": [
+        11,
+        12
+      ],
+      "needs_verification": true
+    },
+    {
+      "concept_id": "020_第一个网站",
+      "title": "第一个网站",
+      "difficulty": 2,
+      "source_pages": [
+        11,
+        12
+      ],
+      "needs_verification": true
+    },
+    {
+      "concept_id": "021_蒂姆_伯纳斯_李",
+      "title": "蒂姆·伯纳斯-李",
+      "difficulty": 1,
+      "source_pages": [
+        13,
+        14
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "022_w3c_万维网联盟",
+      "title": "W3C（万维网联盟）",
+      "difficulty": 2,
+      "source_pages": [
+        13,
+        16
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "023_网页_web页面",
+      "title": "网页（Web页面）",
+      "difficulty": 2,
+      "source_pages": [
+        13,
+        16
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "024_客户端与服务器端",
+      "title": "客户端与服务器端",
+      "difficulty": 1,
+      "source_pages": [
+        17,
+        20
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "025_前端与后端",
+      "title": "前端与后端",
+      "difficulty": 1,
+      "source_pages": [
+        17,
+        20
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "026_前台与后台",
+      "title": "前台与后台",
+      "difficulty": 1,
+      "source_pages": [
+        17,
+        20
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "027_浏览器",
+      "title": "浏览器",
+      "difficulty": 1,
+      "source_pages": [
+        17,
+        20
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "028_浏览器内核与渲染差异",
+      "title": "浏览器内核与渲染差异",
+      "difficulty": 2,
+      "source_pages": [
+        17,
+        20
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "029_浏览器渲染流程",
+      "title": "浏览器渲染流程",
+      "difficulty": 2,
+      "source_pages": [
+        17,
+        20
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "030_常见浏览器",
+      "title": "常见浏览器",
+      "difficulty": 1,
+      "source_pages": [
+        21,
+        24
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "031_浏览器开发者工具",
+      "title": "浏览器开发者工具",
+      "difficulty": 2,
+      "source_pages": [
+        21,
+        24
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "032_url的定义与一般格式",
+      "title": "URL的定义与一般格式",
+      "difficulty": 2,
+      "source_pages": [
+        21,
+        24
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "033_url中的协议名",
+      "title": "URL中的协议名",
+      "difficulty": 1,
+      "source_pages": [
+        21,
+        24
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "034_绝对url",
+      "title": "绝对URL",
+      "difficulty": 2,
+      "source_pages": [
+        21,
+        24
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "035_相对url",
+      "title": "相对URL",
+      "difficulty": 1,
+      "source_pages": [
+        25,
+        28
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "036_web标准的三个方面",
+      "title": "Web标准的三个方面",
+      "difficulty": 1,
+      "source_pages": [
+        25,
+        28
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "037_html_css和javascript的职责分工",
+      "title": "HTML、CSS和JavaScript的职责分工",
+      "difficulty": 1,
+      "source_pages": [
+        26,
+        27
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "038_web前端开发工具",
+      "title": "Web前端开发工具",
+      "difficulty": 1,
+      "source_pages": [
+        25,
+        28
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "039_html章节安排",
+      "title": "HTML章节安排",
+      "difficulty": 1,
+      "source_pages": [
+        29,
+        32
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "040_html部分主要内容",
+      "title": "HTML部分主要内容",
+      "difficulty": 1,
+      "source_pages": [
+        29,
+        32
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "041_html基础",
+      "title": "HTML基础",
+      "difficulty": 1,
+      "source_pages": [
+        33,
+        36
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "042_html发展历程",
+      "title": "HTML发展历程",
+      "difficulty": 2,
+      "source_pages": [
+        33,
+        34
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "043_标记",
+      "title": "标记",
+      "difficulty": 1,
+      "source_pages": [
+        33,
+        36
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "044_标记属性语法",
+      "title": "标记属性语法",
+      "difficulty": 1,
+      "source_pages": [
+        33,
+        36
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "045_html元素",
+      "title": "HTML元素",
+      "difficulty": 1,
+      "source_pages": [
+        37,
+        37
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "046_父元素_子元素_兄弟元素",
+      "title": "父元素、子元素、兄弟元素",
+      "difficulty": 1,
+      "source_pages": [
+        37,
+        37
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "047_空元素",
+      "title": "空元素",
+      "difficulty": 1,
+      "source_pages": [
+        37,
+        37
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "048_html元素分类",
+      "title": "HTML元素分类",
+      "difficulty": 2,
+      "source_pages": [
+        38,
+        38
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "049_行内元素_块级元素_行内块元素的特征",
+      "title": "行内元素、块级元素、行内块元素的特征",
+      "difficulty": 2,
+      "source_pages": [
+        38,
+        38
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "050_html4常见标记分类",
+      "title": "HTML4常见标记分类",
+      "difficulty": 2,
+      "source_pages": [
+        39,
+        39
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "051_section元素",
+      "title": "section元素",
+      "difficulty": 2,
+      "source_pages": [
+        40,
+        40
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "052_article元素",
+      "title": "article元素",
+      "difficulty": 2,
+      "source_pages": [
+        40,
+        40
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "053_aside元素",
+      "title": "aside元素",
+      "difficulty": 2,
+      "source_pages": [
+        40,
+        40
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "054_html5新增结构语义元素",
+      "title": "HTML5新增结构语义元素",
+      "difficulty": 1,
+      "source_pages": [
+        41,
+        42
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "055_html5新增多媒体元素",
+      "title": "HTML5新增多媒体元素",
+      "difficulty": 1,
+      "source_pages": [
+        41,
+        44
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "056_body核心标签语义",
+      "title": "body核心标签语义",
+      "difficulty": 2,
+      "source_pages": [
+        41,
+        44
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "057_语义化的三大价值",
+      "title": "语义化的三大价值",
+      "difficulty": 2,
+      "source_pages": [
+        41,
+        44
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "058_html5文档类型声明",
+      "title": "HTML5文档类型声明",
+      "difficulty": 1,
+      "source_pages": [
+        41,
+        44
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "059_html元素名与闭合规则",
+      "title": "HTML元素名与闭合规则",
+      "difficulty": 1,
+      "source_pages": [
+        41,
+        44
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "060_html属性书写规则",
+      "title": "HTML属性书写规则",
+      "difficulty": 1,
+      "source_pages": [
+        41,
+        44
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "061_html文档基本结构",
+      "title": "HTML文档基本结构",
+      "difficulty": 1,
+      "source_pages": [
+        45,
+        48
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "062_head标记的作用",
+      "title": "head标记的作用",
+      "difficulty": 1,
+      "source_pages": [
+        45,
+        48
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "063_body标记的作用",
+      "title": "body标记的作用",
+      "difficulty": 1,
+      "source_pages": [
+        45,
+        48
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "064_文本格式相关标记",
+      "title": "文本格式相关标记",
+      "difficulty": 1,
+      "source_pages": [
+        45,
+        48
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "065_字符实体",
+      "title": "字符实体",
+      "difficulty": 1,
+      "source_pages": [
+        45,
+        48
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "066_html列表标记",
+      "title": "HTML列表标记",
+      "difficulty": 1,
+      "source_pages": [
+        49,
+        52
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "067_超链接标签_a",
+      "title": "超链接标签<a>",
+      "difficulty": 1,
+      "source_pages": [
+        51,
+        52
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "068_url类型",
+      "title": "URL类型",
+      "difficulty": 1,
+      "source_pages": [
+        49,
+        52
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "069_超链接默认外观",
+      "title": "超链接默认外观",
+      "difficulty": 1,
+      "source_pages": [
+        49,
+        52
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "070_href属性",
+      "title": "href属性",
+      "difficulty": 1,
+      "source_pages": [
+        53,
+        56
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "071_href中的相对url示例",
+      "title": "href中的相对URL示例",
+      "difficulty": 2,
+      "source_pages": [
+        53,
+        56
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "072_target属性",
+      "title": "target属性",
+      "difficulty": 2,
+      "source_pages": [
+        53,
+        56
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "073_target属性值",
+      "title": "target属性值",
+      "difficulty": 2,
+      "source_pages": [
+        53,
+        56
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "074_title属性",
+      "title": "title属性",
+      "difficulty": 1,
+      "source_pages": [
+        53,
+        56
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "075_img图像标记",
+      "title": "img图像标记",
+      "difficulty": 1,
+      "source_pages": [
+        57,
+        60
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "076_网页中支持的图像文件格式",
+      "title": "网页中支持的图像文件格式",
+      "difficulty": 1,
+      "source_pages": [
+        57,
+        60
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "077_div和span容器标记",
+      "title": "div和span容器标记",
+      "difficulty": 1,
+      "source_pages": [
+        61,
+        64
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "078_div与span的区别",
+      "title": "div与span的区别",
+      "difficulty": 1,
+      "source_pages": [
+        61,
+        64
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "079_表格标记的作用与基本结构",
+      "title": "表格标记的作用与基本结构",
+      "difficulty": 1,
+      "source_pages": [
+        61,
+        64
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "080_表格的组成部分与单元格类型",
+      "title": "表格的组成部分与单元格类型",
+      "difficulty": 1,
+      "source_pages": [
+        61,
+        64
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "081_table边框属性border",
+      "title": "table边框属性border",
+      "difficulty": 1,
+      "source_pages": [
+        65,
+        68
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "082_单元格合并colspan与rowspan",
+      "title": "单元格合并colspan与rowspan",
+      "difficulty": 1,
+      "source_pages": [
+        65,
+        68
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "083_html表单的作用",
+      "title": "HTML表单的作用",
+      "difficulty": 1,
+      "source_pages": [
+        65,
+        68
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "084_form标签常用属性",
+      "title": "form标签常用属性",
+      "difficulty": 2,
+      "source_pages": [
+        65,
+        68
+      ],
+      "needs_verification": true
+    },
+    {
+      "concept_id": "085_input文本框与密码框",
+      "title": "input文本框与密码框",
+      "difficulty": 1,
+      "source_pages": [
+        69,
+        72
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "086_单选框与复选框",
+      "title": "单选框与复选框",
+      "difficulty": 1,
+      "source_pages": [
+        69,
+        72
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "087_label标签提升交互",
+      "title": "label标签提升交互",
+      "difficulty": 1,
+      "source_pages": [
+        69,
+        72
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "088_下拉列表与多行文本域",
+      "title": "下拉列表与多行文本域",
+      "difficulty": 1,
+      "source_pages": [
+        69,
+        72
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "089_submit_reset_button_按钮类型",
+      "title": "submit、reset、button 按钮类型",
+      "difficulty": 1,
+      "source_pages": [
+        73,
+        73
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "090_button_的可定制性",
+      "title": "button 的可定制性",
+      "difficulty": 1,
+      "source_pages": [
+        73,
+        73
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "091_readonly_与_disabled_的区别",
+      "title": "readonly 与 disabled 的区别",
+      "difficulty": 2,
+      "source_pages": [
+        74,
+        74
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "092_表单开发流程",
+      "title": "表单开发流程",
+      "difficulty": 2,
+      "source_pages": [
+        75,
+        75
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "093_用户注册页面中的控件映射",
+      "title": "用户注册页面中的控件映射",
+      "difficulty": 2,
+      "source_pages": [
+        75,
+        76
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "094_iframe标记",
+      "title": "iframe标记",
+      "difficulty": 1,
+      "source_pages": [
+        77,
+        80
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "095_iframe的src属性",
+      "title": "iframe的src属性",
+      "difficulty": 1,
+      "source_pages": [
+        77,
+        80
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "096_iframe的width属性",
+      "title": "iframe的width属性",
+      "difficulty": 1,
+      "source_pages": [
+        77,
+        80
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "097_iframe的height属性",
+      "title": "iframe的height属性",
+      "difficulty": 1,
+      "source_pages": [
+        77,
+        80
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "098_iframe的name属性",
+      "title": "iframe的name属性",
+      "difficulty": 1,
+      "source_pages": [
+        77,
+        80
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "099_iframe的frameborder属性",
+      "title": "iframe的frameborder属性",
+      "difficulty": 1,
+      "source_pages": [
+        77,
+        80
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "100_iframe的allowfullscreen属性",
+      "title": "iframe的allowfullscreen属性",
+      "difficulty": 1,
+      "source_pages": [
+        77,
+        80
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "101_iframe的sandbox属性",
+      "title": "iframe的sandbox属性",
+      "difficulty": 2,
+      "source_pages": [
+        77,
+        80
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "102_iframe的loading属性",
+      "title": "iframe的loading属性",
+      "difficulty": 1,
+      "source_pages": [
+        77,
+        80
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "103_课程名称与主讲人",
+      "title": "课程名称与主讲人",
+      "difficulty": 1,
+      "source_pages": [
+        81,
+        84
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "104_css章节与学时",
+      "title": "CSS章节与学时",
+      "difficulty": 1,
+      "source_pages": [
+        81,
+        84
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "105_css_zen_garden引入网站",
+      "title": "CSS Zen Garden引入网站",
+      "difficulty": 1,
+      "source_pages": [
+        81,
+        84
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "106_css部分主要内容",
+      "title": "CSS部分主要内容",
+      "difficulty": 1,
+      "source_pages": [
+        81,
+        84
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "107_css概述",
+      "title": "CSS概述",
+      "difficulty": 1,
+      "source_pages": [
+        85,
+        88
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "108_css样式规则与声明",
+      "title": "CSS样式规则与声明",
+      "difficulty": 1,
+      "source_pages": [
+        85,
+        88
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "109_行内式引入css",
+      "title": "行内式引入CSS",
+      "difficulty": 1,
+      "source_pages": [
+        85,
+        88
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "110_嵌入式引入css",
+      "title": "嵌入式引入CSS",
+      "difficulty": 1,
+      "source_pages": [
+        85,
+        88
+      ],
+      "needs_verification": true
+    },
+    {
+      "concept_id": "111_链接外部样式表",
+      "title": "链接外部样式表",
+      "difficulty": 1,
+      "source_pages": [
+        85,
+        88
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "112_导入外部样式表",
+      "title": "导入外部样式表",
+      "difficulty": 2,
+      "source_pages": [
+        85,
+        88
+      ],
+      "needs_verification": true
+    },
+    {
+      "concept_id": "113_css选择器",
+      "title": "CSS选择器",
+      "difficulty": 1,
+      "source_pages": [
+        89,
+        90,
+        91,
+        92
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "114_元素选择器",
+      "title": "元素选择器",
+      "difficulty": 1,
+      "source_pages": [
+        89,
+        92
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "115_id选择器",
+      "title": "id选择器",
+      "difficulty": 1,
+      "source_pages": [
+        89,
+        92
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "116_class选择器",
+      "title": "class选择器",
+      "difficulty": 1,
+      "source_pages": [
+        89,
+        92
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "117_多类样式",
+      "title": "多类样式",
+      "difficulty": 1,
+      "source_pages": [
+        89,
+        92
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "118_通配选择器",
+      "title": "通配选择器",
+      "difficulty": 1,
+      "source_pages": [
+        89,
+        92
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "119_分组选择器",
+      "title": "分组选择器",
+      "difficulty": 2,
+      "source_pages": [
+        89,
+        92
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "120_后代选择器",
+      "title": "后代选择器",
+      "difficulty": 1,
+      "source_pages": [
+        93,
+        96
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "121_子元素选择器",
+      "title": "子元素选择器",
+      "difficulty": 1,
+      "source_pages": [
+        93,
+        96
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "122_相邻兄弟选择器",
+      "title": "相邻兄弟选择器",
+      "difficulty": 1,
+      "source_pages": [
+        93,
+        96
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "123_通用兄弟选择器",
+      "title": "通用兄弟选择器",
+      "difficulty": 1,
+      "source_pages": [
+        93,
+        96
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "124_属性选择器",
+      "title": "属性选择器",
+      "difficulty": 1,
+      "source_pages": [
+        97,
+        100
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "125_伪类选择器",
+      "title": "伪类选择器",
+      "difficulty": 1,
+      "source_pages": [
+        97,
+        100
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "126_nth_child与nth_of_type",
+      "title": "nth-child与nth-of-type",
+      "difficulty": 2,
+      "source_pages": [
+        98,
+        99
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "127_first_child与first_of_type",
+      "title": "first-child与first-of-type",
+      "difficulty": 1,
+      "source_pages": [
+        97,
+        100
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "128_not伪类",
+      "title": ":not伪类",
+      "difficulty": 1,
+      "source_pages": [
+        97,
+        100
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "129_hover伪类",
+      "title": ":hover伪类",
+      "difficulty": 1,
+      "source_pages": [
+        97,
+        100
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "130_active伪类",
+      "title": ":active伪类",
+      "difficulty": 1,
+      "source_pages": [
+        97,
+        100
+      ],
+      "needs_verification": true
+    },
+    {
+      "concept_id": "131_伪元素选择器",
+      "title": "伪元素选择器",
+      "difficulty": 1,
+      "source_pages": [
+        97,
+        100
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "132_css层叠性",
+      "title": "CSS层叠性",
+      "difficulty": 1,
+      "source_pages": [
+        101,
+        102
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "133_css冲突样式的优先级规则",
+      "title": "CSS冲突样式的优先级规则",
+      "difficulty": 2,
+      "source_pages": [
+        101,
+        104
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "134_选择器特殊性_优先级_计算规则",
+      "title": "选择器特殊性（优先级）计算规则",
+      "difficulty": 2,
+      "source_pages": [
+        103,
+        104
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "135_css继承性",
+      "title": "CSS继承性",
+      "difficulty": 1,
+      "source_pages": [
+        105,
+        108
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "136_css绝对单位",
+      "title": "CSS绝对单位",
+      "difficulty": 1,
+      "source_pages": [
+        105,
+        108
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "137_css相对单位",
+      "title": "CSS相对单位",
+      "difficulty": 1,
+      "source_pages": [
+        105,
+        108
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "138_命名颜色",
+      "title": "命名颜色",
+      "difficulty": 1,
+      "source_pages": [
+        109,
+        112
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "139_rgb_颜色函数",
+      "title": "rgb()颜色函数",
+      "difficulty": 1,
+      "source_pages": [
+        109,
+        112
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "140_rgba_颜色函数",
+      "title": "rgba()颜色函数",
+      "difficulty": 1,
+      "source_pages": [
+        109,
+        112
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "141_十六进制颜色值",
+      "title": "十六进制颜色值",
+      "difficulty": 1,
+      "source_pages": [
+        109,
+        112
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "142_十六进制颜色简写",
+      "title": "十六进制颜色简写",
+      "difficulty": 1,
+      "source_pages": [
+        109,
+        112
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "143_transparent",
+      "title": "transparent",
+      "difficulty": 1,
+      "source_pages": [
+        109,
+        112
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "144_css自定义属性与_var",
+      "title": "CSS自定义属性与 var()",
+      "difficulty": 2,
+      "source_pages": [
+        109,
+        112
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "145_文本颜色_color",
+      "title": "文本颜色 color",
+      "difficulty": 1,
+      "source_pages": [
+        109,
+        112
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "146_字符间距_letter_spacing",
+      "title": "字符间距 letter-spacing",
+      "difficulty": 1,
+      "source_pages": [
+        109,
+        112
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "147_行高_line_height",
+      "title": "行高 line-height",
+      "difficulty": 1,
+      "source_pages": [
+        109,
+        112
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "148_水平对齐_text_align",
+      "title": "水平对齐 text-align",
+      "difficulty": 1,
+      "source_pages": [
+        109,
+        112
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "149_装饰线_text_decoration",
+      "title": "装饰线 text-decoration",
+      "difficulty": 1,
+      "source_pages": [
+        109,
+        112
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "150_首行缩进_text_indent",
+      "title": "首行缩进 text-indent",
+      "difficulty": 1,
+      "source_pages": [
+        109,
+        112
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "151_font_family_字体系列",
+      "title": "font-family 字体系列",
+      "difficulty": 1,
+      "source_pages": [
+        113,
+        114
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "152_font_size_字号",
+      "title": "font-size 字号",
+      "difficulty": 1,
+      "source_pages": [
+        113,
+        114
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "153_font_style_斜体",
+      "title": "font-style 斜体",
+      "difficulty": 1,
+      "source_pages": [
+        113,
+        114
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "154_font_weight_粗体",
+      "title": "font-weight 粗体",
+      "difficulty": 1,
+      "source_pages": [
+        113,
+        114
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "155_font_缩写属性",
+      "title": "font 缩写属性",
+      "difficulty": 2,
+      "source_pages": [
+        113,
+        114
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "156_超链接伪类状态与顺序",
+      "title": "超链接伪类状态与顺序",
+      "difficulty": 2,
+      "source_pages": [
+        113,
+        116
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "157_background_color_背景颜色",
+      "title": "background-color 背景颜色",
+      "difficulty": 1,
+      "source_pages": [
+        113,
+        116
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "158_background_image_背景图片",
+      "title": "background-image 背景图片",
+      "difficulty": 1,
+      "source_pages": [
+        113,
+        116
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "159_background_repeat_背景重复",
+      "title": "background-repeat 背景重复",
+      "difficulty": 1,
+      "source_pages": [
+        113,
+        116
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "160_background_position_背景位置",
+      "title": "background-position 背景位置",
+      "difficulty": 1,
+      "source_pages": [
+        113,
+        116
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "161_background_size_背景大小",
+      "title": "background-size 背景大小",
+      "difficulty": 2,
+      "source_pages": [
+        113,
+        116
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "162_background_背景简写",
+      "title": "background 背景简写",
+      "difficulty": 2,
+      "source_pages": [
+        113,
+        116
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "163_list_style_type",
+      "title": "list-style-type",
+      "difficulty": 1,
+      "source_pages": [
+        117,
+        120
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "164_list_style_position",
+      "title": "list-style-position",
+      "difficulty": 1,
+      "source_pages": [
+        117,
+        120
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "165_list_style_image",
+      "title": "list-style-image",
+      "difficulty": 1,
+      "source_pages": [
+        117,
+        120
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "166_list_style",
+      "title": "list-style",
+      "difficulty": 2,
+      "source_pages": [
+        117,
+        120
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "167_border",
+      "title": "border",
+      "difficulty": 1,
+      "source_pages": [
+        117,
+        120
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "168_width",
+      "title": "width",
+      "difficulty": 1,
+      "source_pages": [
+        117,
+        120
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "169_height",
+      "title": "height",
+      "difficulty": 1,
+      "source_pages": [
+        117,
+        120
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "170_border_collapse",
+      "title": "border-collapse",
+      "difficulty": 2,
+      "source_pages": [
+        117,
+        120
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "171_caption_side",
+      "title": "caption-side",
+      "difficulty": 1,
+      "source_pages": [
+        117,
+        120
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "172_vertical_align",
+      "title": "vertical-align",
+      "difficulty": 2,
+      "source_pages": [
+        117,
+        120
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "173_border_spacing",
+      "title": "border-spacing",
+      "difficulty": 2,
+      "source_pages": [
+        117,
+        120
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "174_盒子模型",
+      "title": "盒子模型",
+      "difficulty": 1,
+      "source_pages": [
+        117,
+        120
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "175_盒子模型的组成",
+      "title": "盒子模型的组成",
+      "difficulty": 1,
+      "source_pages": [
+        121,
+        121
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "176_box_sizing_属性",
+      "title": "box-sizing 属性",
+      "difficulty": 2,
+      "source_pages": [
+        122,
+        124
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "177_content_box_盒子模型",
+      "title": "content-box 盒子模型",
+      "difficulty": 2,
+      "source_pages": [
+        123,
+        123
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "178_border_box_盒子模型",
+      "title": "border-box 盒子模型",
+      "difficulty": 2,
+      "source_pages": [
+        124,
+        124
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "179_inherit_取值",
+      "title": "inherit 取值",
+      "difficulty": 1,
+      "source_pages": [
+        124,
+        124
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "180_盒子尺寸与占据空间",
+      "title": "盒子尺寸与占据空间",
+      "difficulty": 1,
+      "source_pages": [
+        125,
+        128
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "181_边框属性",
+      "title": "边框属性",
+      "difficulty": 1,
+      "source_pages": [
+        125,
+        128
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "182_内外边距与边框宽度的缩写",
+      "title": "内外边距与边框宽度的缩写",
+      "difficulty": 1,
+      "source_pages": [
+        125,
+        128
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "183_border简写与单边颜色设置",
+      "title": "border简写与单边颜色设置",
+      "difficulty": 1,
+      "source_pages": [
+        125,
+        128
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "184_盒子属性默认值",
+      "title": "盒子属性默认值",
+      "difficulty": 2,
+      "source_pages": [
+        125,
+        128
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "185_定位方式分类",
+      "title": "定位方式分类",
+      "difficulty": 1,
+      "source_pages": [
+        129,
+        132
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "186_标准文档流",
+      "title": "标准文档流",
+      "difficulty": 1,
+      "source_pages": [
+        129,
+        132
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "187_块元素",
+      "title": "块元素",
+      "difficulty": 1,
+      "source_pages": [
+        129,
+        132
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "188_行内元素",
+      "title": "行内元素",
+      "difficulty": 1,
+      "source_pages": [
+        129,
+        132
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "189_行内块元素",
+      "title": "行内块元素",
+      "difficulty": 1,
+      "source_pages": [
+        129,
+        132
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "190_display属性与元素类型转换",
+      "title": "display属性与元素类型转换",
+      "difficulty": 1,
+      "source_pages": [
+        133,
+        136
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "191_visibility属性控制元素可见性",
+      "title": "visibility属性控制元素可见性",
+      "difficulty": 1,
+      "source_pages": [
+        133,
+        136
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "192_visibility_hidden与display_none的区别",
+      "title": "visibility:hidden与display:none的区别",
+      "difficulty": 1,
+      "source_pages": [
+        133,
+        136
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "193_行内元素之间的水平margin",
+      "title": "行内元素之间的水平margin",
+      "difficulty": 1,
+      "source_pages": [
+        133,
+        136
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "194_块级元素之间的竖直margin",
+      "title": "块级元素之间的竖直margin",
+      "difficulty": 1,
+      "source_pages": [
+        133,
+        136
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "195_层定位",
+      "title": "层定位",
+      "difficulty": 2,
+      "source_pages": [
+        137,
+        140
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "196_z_index",
+      "title": "z-index",
+      "difficulty": 1,
+      "source_pages": [
+        137,
+        138
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "197_position_static",
+      "title": "position: static",
+      "difficulty": 1,
+      "source_pages": [
+        137,
+        140
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "198_position_fixed",
+      "title": "position: fixed",
+      "difficulty": 1,
+      "source_pages": [
+        137,
+        140
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "199_position_relative",
+      "title": "position: relative",
+      "difficulty": 1,
+      "source_pages": [
+        138,
+        139
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "200_position_absolute",
+      "title": "position: absolute",
+      "difficulty": 2,
+      "source_pages": [
+        138,
+        140
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "201_position_sticky",
+      "title": "position: sticky",
+      "difficulty": 2,
+      "source_pages": [
+        137,
+        140
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "202_固定定位",
+      "title": "固定定位",
+      "difficulty": 1,
+      "source_pages": [
+        141,
+        144
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "203_粘性定位",
+      "title": "粘性定位",
+      "difficulty": 2,
+      "source_pages": [
+        141,
+        144
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "204_粘性定位的使用条件",
+      "title": "粘性定位的使用条件",
+      "difficulty": 2,
+      "source_pages": [
+        141,
+        144
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "205_浮动定位",
+      "title": "浮动定位",
+      "difficulty": 1,
+      "source_pages": [
+        141,
+        144
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "206_float属性",
+      "title": "float属性",
+      "difficulty": 1,
+      "source_pages": [
+        141,
+        144
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "207_clear属性",
+      "title": "clear属性",
+      "difficulty": 1,
+      "source_pages": [
+        141,
+        144
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "208_clear属性的作用与语法",
+      "title": "clear属性的作用与语法",
+      "difficulty": 1,
+      "source_pages": [
+        145,
+        148
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "209_float与clear的影响范围区别",
+      "title": "float与clear的影响范围区别",
+      "difficulty": 1,
+      "source_pages": [
+        145,
+        148
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "210_单个盒子浮动后的特点",
+      "title": "单个盒子浮动后的特点",
+      "difficulty": 2,
+      "source_pages": [
+        145,
+        148
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "211_多个浮动元素的排列特点",
+      "title": "多个浮动元素的排列特点",
+      "difficulty": 2,
+      "source_pages": [
+        145,
+        148
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "212_容器过窄时浮动元素换行与卡住现象",
+      "title": "容器过窄时浮动元素换行与卡住现象",
+      "difficulty": 2,
+      "source_pages": [
+        145,
+        148
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "213_父元素高度塌陷与bfc解决思路",
+      "title": "父元素高度塌陷与BFC解决思路",
+      "difficulty": 2,
+      "source_pages": [
+        145,
+        148
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "214_浮动定位的页面布局应用",
+      "title": "浮动定位的页面布局应用",
+      "difficulty": 2,
+      "source_pages": [
+        145,
+        148
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "215_flex布局概念",
+      "title": "Flex布局概念",
+      "difficulty": 1,
+      "source_pages": [
+        149,
+        152
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "216_通过display_flex定义flex容器",
+      "title": "通过display:flex定义Flex容器",
+      "difficulty": 1,
+      "source_pages": [
+        149,
+        152
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "217_flex容器与flex项目",
+      "title": "Flex容器与Flex项目",
+      "difficulty": 1,
+      "source_pages": [
+        149,
+        152
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "218_flex的主轴与交叉轴",
+      "title": "Flex的主轴与交叉轴",
+      "difficulty": 2,
+      "source_pages": [
+        149,
+        152
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "219_弹性盒布局容器属性",
+      "title": "弹性盒布局容器属性",
+      "difficulty": 1,
+      "source_pages": [
+        153,
+        156
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "220_flex_direction",
+      "title": "flex-direction",
+      "difficulty": 1,
+      "source_pages": [
+        153,
+        156
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "221_flex_wrap",
+      "title": "flex-wrap",
+      "difficulty": 1,
+      "source_pages": [
+        153,
+        156
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "222_justify_content",
+      "title": "justify-content",
+      "difficulty": 1,
+      "source_pages": [
+        153,
+        156
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "223_align_items",
+      "title": "align-items",
+      "difficulty": 1,
+      "source_pages": [
+        157,
+        160
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "224_align_content",
+      "title": "align-content",
+      "difficulty": 1,
+      "source_pages": [
+        157,
+        160
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "225_flex_flow",
+      "title": "flex-flow",
+      "difficulty": 1,
+      "source_pages": [
+        157,
+        160
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "226_flex_grow",
+      "title": "flex-grow",
+      "difficulty": 1,
+      "source_pages": [
+        157,
+        160
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "227_flex_shrink",
+      "title": "flex-shrink",
+      "difficulty": 1,
+      "source_pages": [
+        157,
+        160
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "228_flex_basis",
+      "title": "flex-basis",
+      "difficulty": 1,
+      "source_pages": [
+        157,
+        160
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "229_flex",
+      "title": "flex",
+      "difficulty": 2,
+      "source_pages": [
+        157,
+        160
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "230_order",
+      "title": "order",
+      "difficulty": 1,
+      "source_pages": [
+        157,
+        160
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "231_align_self",
+      "title": "align-self",
+      "difficulty": 1,
+      "source_pages": [
+        157,
+        160
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "232_flex_grow",
+      "title": "flex-grow",
+      "difficulty": 1,
+      "source_pages": [
+        161,
+        164
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "233_flex_shrink",
+      "title": "flex-shrink",
+      "difficulty": 1,
+      "source_pages": [
+        161,
+        164
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "234_flex_basis",
+      "title": "flex-basis",
+      "difficulty": 2,
+      "source_pages": [
+        161,
+        164
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "235_flex_简写属性",
+      "title": "flex 简写属性",
+      "difficulty": 2,
+      "source_pages": [
+        161,
+        164
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "236_flex属性",
+      "title": "flex属性",
+      "difficulty": 2,
+      "source_pages": [
+        165,
+        166
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "237_order属性",
+      "title": "order属性",
+      "difficulty": 1,
+      "source_pages": [
+        165,
+        168
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "238_align_self属性",
+      "title": "align-self属性",
+      "difficulty": 2,
+      "source_pages": [
+        165,
+        168
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "239_grid布局",
+      "title": "Grid布局",
+      "difficulty": 2,
+      "source_pages": [
+        169,
+        172
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "240_grid容器",
+      "title": "Grid容器",
+      "difficulty": 1,
+      "source_pages": [
+        169,
+        172
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "241_grid项目",
+      "title": "Grid项目",
+      "difficulty": 1,
+      "source_pages": [
+        169,
+        172
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "242_grid线",
+      "title": "Grid线",
+      "difficulty": 2,
+      "source_pages": [
+        169,
+        172
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "243_grid轨道",
+      "title": "Grid轨道",
+      "difficulty": 2,
+      "source_pages": [
+        169,
+        172
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "244_grid单元格",
+      "title": "Grid单元格",
+      "difficulty": 2,
+      "source_pages": [
+        169,
+        172
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "245_grid区域",
+      "title": "Grid区域",
+      "difficulty": 2,
+      "source_pages": [
+        169,
+        172
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "246_grid_template_columns_与_grid_template_ro",
+      "title": "grid-template-columns 与 grid-template-rows",
+      "difficulty": 1,
+      "source_pages": [
+        173,
+        174
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "247_网格轨道的固定单位与百分比",
+      "title": "网格轨道的固定单位与百分比",
+      "difficulty": 1,
+      "source_pages": [
+        173,
+        176
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "248_fr_单位",
+      "title": "fr 单位",
+      "difficulty": 1,
+      "source_pages": [
+        173,
+        174
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "249_auto_轨道尺寸",
+      "title": "auto 轨道尺寸",
+      "difficulty": 1,
+      "source_pages": [
+        173,
+        175
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "250_repeat_函数",
+      "title": "repeat() 函数",
+      "difficulty": 1,
+      "source_pages": [
+        173,
+        175
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "251_minmax_函数",
+      "title": "minmax() 函数",
+      "difficulty": 2,
+      "source_pages": [
+        173,
+        175
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "252_grid_template_areas",
+      "title": "grid-template-areas",
+      "difficulty": 2,
+      "source_pages": [
+        173,
+        176
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "253_gap_间距",
+      "title": "gap 间距",
+      "difficulty": 1,
+      "source_pages": [
+        177,
+        178
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "254_justify_content",
+      "title": "justify-content",
+      "difficulty": 1,
+      "source_pages": [
+        178,
+        180
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "255_align_content",
+      "title": "align-content",
+      "difficulty": 2,
+      "source_pages": [
+        178,
+        180
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "256_justify_items",
+      "title": "justify-items",
+      "difficulty": 1,
+      "source_pages": [
+        178,
+        180
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "257_align_items",
+      "title": "align-items",
+      "difficulty": 1,
+      "source_pages": [
+        178,
+        180
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "258_网格线编号与定位",
+      "title": "网格线编号与定位",
+      "difficulty": 1,
+      "source_pages": [
+        181,
+        184
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "259_grid_row_start_与_grid_row_end",
+      "title": "grid-row-start 与 grid-row-end",
+      "difficulty": 1,
+      "source_pages": [
+        181,
+        184
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "260_grid_row_简写",
+      "title": "grid-row 简写",
+      "difficulty": 1,
+      "source_pages": [
+        181,
+        184
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "261_grid_column_start_与_grid_column_end",
+      "title": "grid-column-start 与 grid-column-end",
+      "difficulty": 1,
+      "source_pages": [
+        181,
+        184
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "262_grid_column_简写",
+      "title": "grid-column 简写",
+      "difficulty": 1,
+      "source_pages": [
+        181,
+        184
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "263_grid_area_属性",
+      "title": "grid-area 属性",
+      "difficulty": 2,
+      "source_pages": [
+        185,
+        188
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "264_justify_self_属性",
+      "title": "justify-self 属性",
+      "difficulty": 2,
+      "source_pages": [
+        185,
+        188
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "265_align_self_属性",
+      "title": "align-self 属性",
+      "difficulty": 2,
+      "source_pages": [
+        185,
+        188
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "266_place_self_属性",
+      "title": "place-self 属性",
+      "difficulty": 2,
+      "source_pages": [
+        185,
+        188
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "267_css3新特性与浏览器前缀",
+      "title": "CSS3新特性与浏览器前缀",
+      "difficulty": 1,
+      "source_pages": [
+        189,
+        192
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "268_border_radius圆角边框",
+      "title": "border-radius圆角边框",
+      "difficulty": 2,
+      "source_pages": [
+        190,
+        191
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "269_box_shadow盒子阴影",
+      "title": "box-shadow盒子阴影",
+      "difficulty": 2,
+      "source_pages": [
+        189,
+        192
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "270_box_shadow参数规则",
+      "title": "box-shadow参数规则",
+      "difficulty": 2,
+      "source_pages": [
+        193,
+        196
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "271_text_shadow文本阴影",
+      "title": "text-shadow文本阴影",
+      "difficulty": 1,
+      "source_pages": [
+        193,
+        196
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "272_web字体的工作方式",
+      "title": "Web字体的工作方式",
+      "difficulty": 2,
+      "source_pages": [
+        193,
+        196
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "273_字体文件",
+      "title": "字体文件",
+      "difficulty": 1,
+      "source_pages": [
+        193,
+        196
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "274_font_face规则",
+      "title": "@font-face规则",
+      "difficulty": 2,
+      "source_pages": [
+        193,
+        196
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "275_2d变换",
+      "title": "2D变换",
+      "difficulty": 1,
+      "source_pages": [
+        197,
+        198
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "276_translate_变换",
+      "title": "translate 变换",
+      "difficulty": 1,
+      "source_pages": [
+        197,
+        200
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "277_rotate_变换",
+      "title": "rotate 变换",
+      "difficulty": 1,
+      "source_pages": [
+        197,
+        200
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "278_scale_变换",
+      "title": "scale 变换",
+      "difficulty": 1,
+      "source_pages": [
+        197,
+        200
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "279_skew_变换",
+      "title": "skew 变换",
+      "difficulty": 1,
+      "source_pages": [
+        197,
+        200
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "280_transform_origin属性",
+      "title": "transform-origin属性",
+      "difficulty": 2,
+      "source_pages": [
+        197,
+        200
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "281_3d变换",
+      "title": "3D变换",
+      "difficulty": 2,
+      "source_pages": [
+        197,
+        200
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "282_transform三维方法",
+      "title": "transform三维方法",
+      "difficulty": 2,
+      "source_pages": [
+        201,
+        204
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "283_transform_origin",
+      "title": "transform-origin",
+      "difficulty": 2,
+      "source_pages": [
+        201,
+        202,
+        204
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "284_transform_style",
+      "title": "transform-style",
+      "difficulty": 2,
+      "source_pages": [
+        201,
+        204
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "285_perspective与perspective_origin",
+      "title": "perspective与perspective-origin",
+      "difficulty": 2,
+      "source_pages": [
+        201,
+        202
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "286_backface_visibility",
+      "title": "backface-visibility",
+      "difficulty": 1,
+      "source_pages": [
+        201,
+        202
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "287_3d变换结构",
+      "title": "3D变换结构",
+      "difficulty": 2,
+      "source_pages": [
+        201,
+        204
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "288_css3过渡",
+      "title": "CSS3过渡",
+      "difficulty": 1,
+      "source_pages": [
+        205,
+        208
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "289_transition_duration_必须设置",
+      "title": "transition-duration 必须设置",
+      "difficulty": 1,
+      "source_pages": [
+        205,
+        208
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "290_贝塞尔曲线在线取值",
+      "title": "贝塞尔曲线在线取值",
+      "difficulty": 1,
+      "source_pages": [
+        205,
+        208
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "291_css动画与关键帧",
+      "title": "CSS动画与关键帧",
+      "difficulty": 1,
+      "source_pages": [
+        205,
+        208
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "292_css动画的设计步骤与生效条件",
+      "title": "CSS动画的设计步骤与生效条件",
+      "difficulty": 2,
+      "source_pages": [
+        207,
+        208
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "293_css动画关键帧写法",
+      "title": "CSS动画关键帧写法",
+      "difficulty": 2,
+      "source_pages": [
+        209,
+        209
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "294_响应式网页设计",
+      "title": "响应式网页设计",
+      "difficulty": 2,
+      "source_pages": [
+        211,
+        211
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "295_iphone1屏幕规格",
+      "title": "iPhone1屏幕规格",
+      "difficulty": 1,
+      "source_pages": [
+        212,
+        212
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "296_物理像素",
+      "title": "物理像素",
+      "difficulty": 1,
+      "source_pages": [
+        215,
+        216
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "297_css像素",
+      "title": "CSS像素",
+      "difficulty": 1,
+      "source_pages": [
+        213,
+        215,
+        216
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "298_设备像素比_dpr",
+      "title": "设备像素比（DPR）",
+      "difficulty": 1,
+      "source_pages": [
+        213,
+        215,
+        216
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "299_物理像素与css像素的换算公式",
+      "title": "物理像素与CSS像素的换算公式",
+      "difficulty": 2,
+      "source_pages": [
+        213,
+        216
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "300_视口",
+      "title": "视口",
+      "difficulty": 1,
+      "source_pages": [
+        217,
+        219
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "301_布局视口",
+      "title": "布局视口",
+      "difficulty": 1,
+      "source_pages": [
+        217,
+        220
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "302_理想视口",
+      "title": "理想视口",
+      "difficulty": 2,
+      "source_pages": [
+        218,
+        218
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "303_视觉视口",
+      "title": "视觉视口",
+      "difficulty": 2,
+      "source_pages": [
+        219,
+        219
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "304_meta_viewport设置",
+      "title": "meta viewport设置",
+      "difficulty": 1,
+      "source_pages": [
+        220,
+        220
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "305_默认布局视口过大",
+      "title": "默认布局视口过大",
+      "difficulty": 2,
+      "source_pages": [
+        220,
+        220
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "306_视口相关属性设置",
+      "title": "视口相关属性设置",
+      "difficulty": 1,
+      "source_pages": [
+        221,
+        224
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "307_媒体查询的作用与可获取的值",
+      "title": "媒体查询的作用与可获取的值",
+      "difficulty": 1,
+      "source_pages": [
+        221,
+        224
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "308_媒体查询基本语法与逻辑关键字",
+      "title": "媒体查询基本语法与逻辑关键字",
+      "difficulty": 2,
+      "source_pages": [
+        221,
+        224
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "309_媒体类型参数",
+      "title": "媒体类型参数",
+      "difficulty": 1,
+      "source_pages": [
+        221,
+        224
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "310_媒体查询常用属性",
+      "title": "媒体查询常用属性",
+      "difficulty": 1,
+      "source_pages": [
+        225,
+        228
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "311_媒体查询的两种使用方式",
+      "title": "媒体查询的两种使用方式",
+      "difficulty": 1,
+      "source_pages": [
+        225,
+        228
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "312_响应式布局示例_600px断点",
+      "title": "响应式布局示例：600px断点",
+      "difficulty": 2,
+      "source_pages": [
+        227,
+        228
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "313_javascript程序设计",
+      "title": "JavaScript程序设计",
+      "difficulty": 1,
+      "source_pages": [
+        231,
+        232
+      ],
+      "needs_verification": true
+    },
+    {
+      "concept_id": "314_概述",
+      "title": "概述",
+      "difficulty": 1,
+      "source_pages": [
+        229,
+        232
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "315_javascript基本语法",
+      "title": "JavaScript基本语法",
+      "difficulty": 1,
+      "source_pages": [
+        229,
+        232
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "316_javascript函数",
+      "title": "JavaScript函数",
+      "difficulty": 1,
+      "source_pages": [
+        229,
+        232
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "317_javascript对象",
+      "title": "JavaScript对象",
+      "difficulty": 1,
+      "source_pages": [
+        229,
+        232
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "318_常用内置对象",
+      "title": "常用内置对象",
+      "difficulty": 2,
+      "source_pages": [
+        229,
+        232
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "319_浏览器对象模型bom",
+      "title": "浏览器对象模型BOM",
+      "difficulty": 2,
+      "source_pages": [
+        229,
+        232
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "320_文档对象模型dom",
+      "title": "文档对象模型DOM",
+      "difficulty": 2,
+      "source_pages": [
+        229,
+        232
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "321_javascript的诞生",
+      "title": "JavaScript的诞生",
+      "difficulty": 1,
+      "source_pages": [
+        233,
+        234
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "322_ecmascript标准",
+      "title": "ECMAScript标准",
+      "difficulty": 2,
+      "source_pages": [
+        233,
+        234
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "323_es3与javascript语法继承",
+      "title": "ES3与JavaScript语法继承",
+      "difficulty": 2,
+      "source_pages": [
+        233,
+        234
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "324_es2015_es6_的重要性",
+      "title": "ES2015（ES6）的重要性",
+      "difficulty": 1,
+      "source_pages": [
+        233,
+        236
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "325_javascript运行环境",
+      "title": "JavaScript运行环境",
+      "difficulty": 2,
+      "source_pages": [
+        233,
+        236
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "326_node_js的特点与用途",
+      "title": "Node.js的特点与用途",
+      "difficulty": 2,
+      "source_pages": [
+        233,
+        236
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "327_浏览器端javascript的组成",
+      "title": "浏览器端JavaScript的组成",
+      "difficulty": 2,
+      "source_pages": [
+        233,
+        236
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "328_网页中插入javascript脚本的方法",
+      "title": "网页中插入JavaScript脚本的方法",
+      "difficulty": 1,
+      "source_pages": [
+        237,
+        240
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "329_javascript变量与声明关键字",
+      "title": "JavaScript变量与声明关键字",
+      "difficulty": 2,
+      "source_pages": [
+        237,
+        240
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "330_javascript标识符命名规则",
+      "title": "JavaScript标识符命名规则",
+      "difficulty": 1,
+      "source_pages": [
+        237,
+        240
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "331_javascript数据类型分类",
+      "title": "JavaScript数据类型分类",
+      "difficulty": 1,
+      "source_pages": [
+        241,
+        244
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "332_typeof运算符",
+      "title": "typeof运算符",
+      "difficulty": 1,
+      "source_pages": [
+        241,
+        244
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "333_string类型",
+      "title": "String类型",
+      "difficulty": 1,
+      "source_pages": [
+        241,
+        244
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "334_模板字符串",
+      "title": "模板字符串",
+      "difficulty": 2,
+      "source_pages": [
+        241,
+        244
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "335_number类型",
+      "title": "Number类型",
+      "difficulty": 2,
+      "source_pages": [
+        241,
+        244
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "336_number特殊值",
+      "title": "Number特殊值",
+      "difficulty": 2,
+      "source_pages": [
+        241,
+        244
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "337_整数的进制表示",
+      "title": "整数的进制表示",
+      "difficulty": 2,
+      "source_pages": [
+        241,
+        244
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "338_浮点数与科学计数法",
+      "title": "浮点数与科学计数法",
+      "difficulty": 2,
+      "source_pages": [
+        241,
+        244
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "339_boolean_数据类型",
+      "title": "Boolean 数据类型",
+      "difficulty": 1,
+      "source_pages": [
+        245,
+        248
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "340_null_数据类型",
+      "title": "Null 数据类型",
+      "difficulty": 1,
+      "source_pages": [
+        245,
+        248
+      ],
+      "needs_verification": true
+    },
+    {
+      "concept_id": "341_undefined_数据类型",
+      "title": "Undefined 数据类型",
+      "difficulty": 1,
+      "source_pages": [
+        245,
+        248
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "342_symbol_数据类型",
+      "title": "Symbol 数据类型",
+      "difficulty": 2,
+      "source_pages": [
+        245,
+        248
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "343_bigint_数据类型",
+      "title": "BigInt 数据类型",
+      "difficulty": 1,
+      "source_pages": [
+        249,
+        252
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "344_object_类型",
+      "title": "Object 类型",
+      "difficulty": 1,
+      "source_pages": [
+        249,
+        252
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "345_运算符与操作数",
+      "title": "运算符与操作数",
+      "difficulty": 1,
+      "source_pages": [
+        249,
+        252
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "346_javascript_运算符分类",
+      "title": "JavaScript 运算符分类",
+      "difficulty": 2,
+      "source_pages": [
+        249,
+        252
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "347_程序控制结构",
+      "title": "程序控制结构",
+      "difficulty": 1,
+      "source_pages": [
+        249,
+        252
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "348_选择结构",
+      "title": "选择结构",
+      "difficulty": 1,
+      "source_pages": [
+        249,
+        252
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "349_循环结构",
+      "title": "循环结构",
+      "difficulty": 1,
+      "source_pages": [
+        249,
+        252
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "350_break_与_continue",
+      "title": "break 与 continue",
+      "difficulty": 2,
+      "source_pages": [
+        249,
+        252
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "351_常见输出方式",
+      "title": "常见输出方式",
+      "difficulty": 1,
+      "source_pages": [
+        249,
+        252
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "352_javascript函数",
+      "title": "JavaScript函数",
+      "difficulty": 1,
+      "source_pages": [
+        253,
+        256
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "353_函数表达式",
+      "title": "函数表达式",
+      "difficulty": 1,
+      "source_pages": [
+        253,
+        256
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "354_形参_实参与arguments对象",
+      "title": "形参、实参与arguments对象",
+      "difficulty": 1,
+      "source_pages": [
+        253,
+        256
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "355_rest参数",
+      "title": "rest参数",
+      "difficulty": 2,
+      "source_pages": [
+        253,
+        256
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "356_默认参数",
+      "title": "默认参数",
+      "difficulty": 1,
+      "source_pages": [
+        253,
+        256
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "357_return与函数返回值",
+      "title": "return与函数返回值",
+      "difficulty": 1,
+      "source_pages": [
+        257,
+        257
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "358_函数对象的动态调用",
+      "title": "函数对象的动态调用",
+      "difficulty": 2,
+      "source_pages": [
+        258,
+        258
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "359_call与apply的区别及this指向",
+      "title": "call与apply的区别及this指向",
+      "difficulty": 2,
+      "source_pages": [
+        258,
+        258
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "360_ecmascript_5严格模式",
+      "title": "ECMAScript 5严格模式",
+      "difficulty": 2,
+      "source_pages": [
+        260,
+        260
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "361_开启严格模式",
+      "title": "开启严格模式",
+      "difficulty": 1,
+      "source_pages": [
+        260,
+        260
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "362_函数递归",
+      "title": "函数递归",
+      "difficulty": 2,
+      "source_pages": [
+        269,
+        272
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "363_闭包",
+      "title": "闭包",
+      "difficulty": 2,
+      "source_pages": [
+        270,
+        271
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "364_闭包实现计数器",
+      "title": "闭包实现计数器",
+      "difficulty": 2,
+      "source_pages": [
+        269,
+        272
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "365_javascript作用域",
+      "title": "JavaScript作用域",
+      "difficulty": 1,
+      "source_pages": [
+        269,
+        272
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "366_声明提升",
+      "title": "声明提升",
+      "difficulty": 2,
+      "source_pages": [
+        273,
+        274
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "367_var_变量声明提升",
+      "title": "var 变量声明提升",
+      "difficulty": 1,
+      "source_pages": [
+        273,
+        274
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "368_函数声明提升",
+      "title": "函数声明提升",
+      "difficulty": 1,
+      "source_pages": [
+        273,
+        276
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "369_var_与_let_的差异",
+      "title": "var 与 let 的差异",
+      "difficulty": 2,
+      "source_pages": [
+        273,
+        276
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "370_对象",
+      "title": "对象",
+      "difficulty": 1,
+      "source_pages": [
+        273,
+        276
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "371_对象的创建方式",
+      "title": "对象的创建方式",
+      "difficulty": 1,
+      "source_pages": [
+        273,
+        276
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "372_构造函数创建对象",
+      "title": "构造函数创建对象",
+      "difficulty": 1,
+      "source_pages": [
+        277,
+        280
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "373_自定义构造函数与_this",
+      "title": "自定义构造函数与 this",
+      "difficulty": 2,
+      "source_pages": [
+        277,
+        280
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "374_字面量对象",
+      "title": "字面量对象",
+      "difficulty": 1,
+      "source_pages": [
+        279,
+        280
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "375_object_create创建对象",
+      "title": "Object.create创建对象",
+      "difficulty": 2,
+      "source_pages": [
+        281,
+        282
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "376_访问对象属性",
+      "title": "访问对象属性",
+      "difficulty": 1,
+      "source_pages": [
+        281,
+        284
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "377_对象的释放与垃圾收集器",
+      "title": "对象的释放与垃圾收集器",
+      "difficulty": 1,
+      "source_pages": [
+        281,
+        284
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "378_prototype_与_prototype",
+      "title": "prototype 与 [[Prototype]]",
+      "difficulty": 2,
+      "source_pages": [
+        285,
+        288
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "379_原型链",
+      "title": "原型链",
+      "difficulty": 2,
+      "source_pages": [
+        285,
+        287
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "380_原型系统的根对象",
+      "title": "原型系统的根对象",
+      "difficulty": 1,
+      "source_pages": [
+        285,
+        288
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "381_原型扩展",
+      "title": "原型扩展",
+      "difficulty": 2,
+      "source_pages": [
+        285,
+        288
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "382_属性查找顺序",
+      "title": "属性查找顺序",
+      "difficulty": 2,
+      "source_pages": [
+        285,
+        288
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "383_构造器与原型分装方法",
+      "title": "构造器与原型分装方法",
+      "difficulty": 1,
+      "source_pages": [
+        289,
+        290
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "384_原型扩展",
+      "title": "原型扩展",
+      "difficulty": 2,
+      "source_pages": [
+        289,
+        290
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "385_class_的概念",
+      "title": "class 的概念",
+      "difficulty": 1,
+      "source_pages": [
+        289,
+        292
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "386_class_中的构造函数_constructor",
+      "title": "class 中的构造函数 constructor",
+      "difficulty": 1,
+      "source_pages": [
+        289,
+        292
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "387_class_的两种定义方式",
+      "title": "class 的两种定义方式",
+      "difficulty": 2,
+      "source_pages": [
+        289,
+        292
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "388_类字段定义",
+      "title": "类字段定义",
+      "difficulty": 1,
+      "source_pages": [
+        293,
+        296
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "389_私有字段",
+      "title": "私有字段",
+      "difficulty": 2,
+      "source_pages": [
+        293,
+        296
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "390_类方法定义",
+      "title": "类方法定义",
+      "difficulty": 2,
+      "source_pages": [
+        295,
+        296
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "391_类继承与_extends_关键字",
+      "title": "类继承与 extends 关键字",
+      "difficulty": 2,
+      "source_pages": [
+        297,
+        300
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "392_json_对象的两个方法",
+      "title": "JSON 对象的两个方法",
+      "difficulty": 1,
+      "source_pages": [
+        297,
+        300
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "393_ecmascript_中的本地对象与宿主对象",
+      "title": "ECMAScript 中的本地对象与宿主对象",
+      "difficulty": 2,
+      "source_pages": [
+        297,
+        300
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "394_ecmascript_只是语言规范",
+      "title": "ECMAScript 只是语言规范",
+      "difficulty": 1,
+      "source_pages": [
+        297,
+        300
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "395_global对象",
+      "title": "Global对象",
+      "difficulty": 1,
+      "source_pages": [
+        301,
+        302
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "396_globalthis对象",
+      "title": "globalThis对象",
+      "difficulty": 1,
+      "source_pages": [
+        301,
+        304
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "397_全局对象在程序启动前已创建",
+      "title": "全局对象在程序启动前已创建",
+      "difficulty": 1,
+      "source_pages": [
+        301,
+        304
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "398_object对象",
+      "title": "Object对象",
+      "difficulty": 2,
+      "source_pages": [
+        301,
+        304
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "399_object的常用属性和方法",
+      "title": "Object的常用属性和方法",
+      "difficulty": 2,
+      "source_pages": [
+        301,
+        304
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "400_function对象",
+      "title": "Function对象",
+      "difficulty": 2,
+      "source_pages": [
+        301,
+        304
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "401_array对象与创建方式",
+      "title": "Array对象与创建方式",
+      "difficulty": 1,
+      "source_pages": [
+        305,
+        308
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "402_pop",
+      "title": "pop()",
+      "difficulty": 1,
+      "source_pages": [
+        305,
+        308
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "403_push",
+      "title": "push()",
+      "difficulty": 1,
+      "source_pages": [
+        305,
+        308
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "404_shift",
+      "title": "shift()",
+      "difficulty": 1,
+      "source_pages": [
+        305,
+        308
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "405_unshift",
+      "title": "unshift()",
+      "difficulty": 1,
+      "source_pages": [
+        305,
+        308
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "406_join",
+      "title": "join()",
+      "difficulty": 1,
+      "source_pages": [
+        305,
+        308
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "407_sort",
+      "title": "sort()",
+      "difficulty": 2,
+      "source_pages": [
+        305,
+        308
+      ],
+      "needs_verification": true
+    },
+    {
+      "concept_id": "408_indexof",
+      "title": "indexOf()",
+      "difficulty": 1,
+      "source_pages": [
+        305,
+        308
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "409_map",
+      "title": "map()",
+      "difficulty": 2,
+      "source_pages": [
+        307,
+        308
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "410_filter",
+      "title": "filter()",
+      "difficulty": 2,
+      "source_pages": [
+        307,
+        308
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "411_foreach",
+      "title": "forEach()",
+      "difficulty": 1,
+      "source_pages": [
+        307,
+        308
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "412_some",
+      "title": "some()",
+      "difficulty": 2,
+      "source_pages": [
+        307,
+        308
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "413_every",
+      "title": "every()",
+      "difficulty": 2,
+      "source_pages": [
+        307,
+        308
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "414_findindex",
+      "title": "findIndex()",
+      "difficulty": 2,
+      "source_pages": [
+        307,
+        308
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "415_reduce",
+      "title": "reduce()",
+      "difficulty": 3,
+      "source_pages": [
+        307,
+        308
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "416_string基本类型与string构造函数",
+      "title": "String基本类型与String构造函数",
+      "difficulty": 1,
+      "source_pages": [
+        309,
+        312
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "417_字符串下标访问",
+      "title": "字符串下标访问",
+      "difficulty": 1,
+      "source_pages": [
+        309,
+        312
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "418_模板字符串",
+      "title": "模板字符串",
+      "difficulty": 1,
+      "source_pages": [
+        309,
+        312
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "419_字符串常用方法",
+      "title": "字符串常用方法",
+      "difficulty": 2,
+      "source_pages": [
+        309,
+        312
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "420_date对象的创建",
+      "title": "Date对象的创建",
+      "difficulty": 1,
+      "source_pages": [
+        309,
+        312
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "421_date对象的常用获取方法",
+      "title": "Date对象的常用获取方法",
+      "difficulty": 2,
+      "source_pages": [
+        309,
+        312
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "422_日期对象设置方法",
+      "title": "日期对象设置方法",
+      "difficulty": 1,
+      "source_pages": [
+        313,
+        313
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "423_regexp对象的创建方式",
+      "title": "RegExp对象的创建方式",
+      "difficulty": 1,
+      "source_pages": [
+        314,
+        314
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "424_正则表达式基础语法_转义_点号_或与字符集合",
+      "title": "正则表达式基础语法：转义、点号、或与字符集合",
+      "difficulty": 2,
+      "source_pages": [
+        315,
+        315
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "425_正则表达式预定义字符类",
+      "title": "正则表达式预定义字符类",
+      "difficulty": 1,
+      "source_pages": [
+        316,
+        316
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "426_正则表达式分组与非捕获分组",
+      "title": "正则表达式分组与非捕获分组",
+      "difficulty": 2,
+      "source_pages": [
+        316,
+        316
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "427_位置锚点",
+      "title": "位置锚点",
+      "difficulty": 1,
+      "source_pages": [
+        317,
+        320
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "428_单词边界",
+      "title": "单词边界",
+      "difficulty": 1,
+      "source_pages": [
+        317,
+        320
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "429_重复限定符",
+      "title": "重复限定符",
+      "difficulty": 2,
+      "source_pages": [
+        317,
+        320
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "430_匹配参数",
+      "title": "匹配参数",
+      "difficulty": 1,
+      "source_pages": [
+        317,
+        320
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "431_regexp_test_方法",
+      "title": "RegExp.test 方法",
+      "difficulty": 1,
+      "source_pages": [
+        317,
+        320
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "432_exec返回匹配结果",
+      "title": "exec返回匹配结果",
+      "difficulty": 2,
+      "source_pages": [
+        321,
+        322
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "433_match方法",
+      "title": "match方法",
+      "difficulty": 1,
+      "source_pages": [
+        321,
+        324
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "434_replace方法",
+      "title": "replace方法",
+      "difficulty": 1,
+      "source_pages": [
+        321,
+        324
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "435_replace方法结合正则分组替换手机号中间四位",
+      "title": "replace方法结合正则分组替换手机号中间四位",
+      "difficulty": 2,
+      "source_pages": [
+        325,
+        328
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "436_search方法查找正则匹配位置",
+      "title": "search方法查找正则匹配位置",
+      "difficulty": 1,
+      "source_pages": [
+        325,
+        328
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "437_用regexp和exec解析查询字符串参数值",
+      "title": "用RegExp和exec解析查询字符串参数值",
+      "difficulty": 2,
+      "source_pages": [
+        325,
+        328
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "438_math对象提供数学常量和函数",
+      "title": "Math对象提供数学常量和函数",
+      "difficulty": 1,
+      "source_pages": [
+        325,
+        328
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "439_math对象的取整方法",
+      "title": "Math对象的取整方法",
+      "difficulty": 1,
+      "source_pages": [
+        325,
+        328
+      ],
+      "needs_verification": true
+    },
+    {
+      "concept_id": "440_bom_浏览器对象模型",
+      "title": "BOM（浏览器对象模型）",
+      "difficulty": 1,
+      "source_pages": [
+        330,
+        330
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "441_window_对象的层级与全局属性",
+      "title": "window 对象的层级与全局属性",
+      "difficulty": 2,
+      "source_pages": [
+        331,
+        331
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "442_window_对象的主要用途",
+      "title": "window 对象的主要用途",
+      "difficulty": 1,
+      "source_pages": [
+        331,
+        331
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "443_window_devicepixelratio",
+      "title": "window.devicePixelRatio",
+      "difficulty": 1,
+      "source_pages": [
+        332,
+        332
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "444_window_innerheight",
+      "title": "window.innerHeight",
+      "difficulty": 1,
+      "source_pages": [
+        332,
+        332
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "445_window_innerwidth",
+      "title": "window.innerWidth",
+      "difficulty": 1,
+      "source_pages": [
+        332,
+        332
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "446_window_visualviewport",
+      "title": "window.visualViewport",
+      "difficulty": 1,
+      "source_pages": [
+        332,
+        332
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "447_window_open_打开新窗口",
+      "title": "window.open 打开新窗口",
+      "difficulty": 1,
+      "source_pages": [
+        333,
+        336
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "448_alert_系统对话框",
+      "title": "alert 系统对话框",
+      "difficulty": 1,
+      "source_pages": [
+        333,
+        336
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "449_confirm_系统对话框",
+      "title": "confirm 系统对话框",
+      "difficulty": 1,
+      "source_pages": [
+        333,
+        336
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "450_prompt_系统对话框",
+      "title": "prompt 系统对话框",
+      "difficulty": 1,
+      "source_pages": [
+        333,
+        336
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "451_定时操作的两种用途",
+      "title": "定时操作的两种用途",
+      "difficulty": 2,
+      "source_pages": [
+        333,
+        336
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "452_settimeout_与_cleartimeout",
+      "title": "setTimeout 与 clearTimeout",
+      "difficulty": 2,
+      "source_pages": [
+        333,
+        336
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "453_setinterval_与_clearinterval",
+      "title": "setInterval 与 clearInterval",
+      "difficulty": 2,
+      "source_pages": [
+        333,
+        336
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "454_location对象",
+      "title": "location对象",
+      "difficulty": 1,
+      "source_pages": [
+        337,
+        340
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "455_location_href属性",
+      "title": "location.href属性",
+      "difficulty": 1,
+      "source_pages": [
+        337,
+        340
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "456_location_replace方法",
+      "title": "location.replace方法",
+      "difficulty": 2,
+      "source_pages": [
+        337,
+        340
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "457_history对象",
+      "title": "history对象",
+      "difficulty": 2,
+      "source_pages": [
+        337,
+        340
+      ],
+      "needs_verification": true
+    },
+    {
+      "concept_id": "458_navigator对象",
+      "title": "navigator对象",
+      "difficulty": 1,
+      "source_pages": [
+        337,
+        340
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "459_screen对象",
+      "title": "screen对象",
+      "difficulty": 1,
+      "source_pages": [
+        341,
+        344
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "460_dom简介",
+      "title": "DOM简介",
+      "difficulty": 2,
+      "source_pages": [
+        341,
+        344
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "461_dom级别发展",
+      "title": "DOM级别发展",
+      "difficulty": 2,
+      "source_pages": [
+        341,
+        344
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "462_dom树的生成",
+      "title": "DOM树的生成",
+      "difficulty": 1,
+      "source_pages": [
+        345,
+        348
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "463_dom节点类型",
+      "title": "DOM节点类型",
+      "difficulty": 1,
+      "source_pages": [
+        345,
+        348
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "464_dom中的父子兄弟关系",
+      "title": "DOM中的父子兄弟关系",
+      "difficulty": 1,
+      "source_pages": [
+        345,
+        348
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "465_document_getelementbyid",
+      "title": "document.getElementById",
+      "difficulty": 1,
+      "source_pages": [
+        345,
+        348
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "466_document_queryselector",
+      "title": "document.querySelector",
+      "difficulty": 2,
+      "source_pages": [
+        345,
+        348
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "467_document_queryselectorall",
+      "title": "document.querySelectorAll",
+      "difficulty": 1,
+      "source_pages": [
+        349,
+        352
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "468_父节点访问",
+      "title": "父节点访问",
+      "difficulty": 1,
+      "source_pages": [
+        349,
+        352
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "469_子节点集合访问",
+      "title": "子节点集合访问",
+      "difficulty": 1,
+      "source_pages": [
+        349,
+        352
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "470_首尾子节点访问",
+      "title": "首尾子节点访问",
+      "difficulty": 1,
+      "source_pages": [
+        349,
+        352
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "471_兄弟节点访问",
+      "title": "兄弟节点访问",
+      "difficulty": 1,
+      "source_pages": [
+        351,
+        352
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "472_innerhtml",
+      "title": "innerHTML",
+      "difficulty": 1,
+      "source_pages": [
+        353,
+        356
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "473_textcontent",
+      "title": "textContent",
+      "difficulty": 1,
+      "source_pages": [
+        353,
+        356
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "474_innertext",
+      "title": "innerText",
+      "difficulty": 2,
+      "source_pages": [
+        353,
+        356
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "475_标准属性直接访问",
+      "title": "标准属性直接访问",
+      "difficulty": 1,
+      "source_pages": [
+        353,
+        356
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "476_属性通用操作方法",
+      "title": "属性通用操作方法",
+      "difficulty": 2,
+      "source_pages": [
+        353,
+        356
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "477_element_style_与内联样式",
+      "title": "element.style 与内联样式",
+      "difficulty": 2,
+      "source_pages": [
+        353,
+        356
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "478_classname_与_classlist",
+      "title": "className 与 classList",
+      "difficulty": 2,
+      "source_pages": [
+        353,
+        356
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "479_创建元素节点与文本节点",
+      "title": "创建元素节点与文本节点",
+      "difficulty": 1,
+      "source_pages": [
+        357,
+        358
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "480_传统_dom_插入节点方法",
+      "title": "传统 DOM 插入节点方法",
+      "difficulty": 1,
+      "source_pages": [
+        357,
+        358
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "481_dom_节点删除方法",
+      "title": "DOM 节点删除方法",
+      "difficulty": 1,
+      "source_pages": [
+        357,
+        358
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "482_更现代的_dom_插入方法",
+      "title": "更现代的 DOM 插入方法",
+      "difficulty": 2,
+      "source_pages": [
+        357,
+        360
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "483_dom_事件的含义与常见类型",
+      "title": "DOM 事件的含义与常见类型",
+      "difficulty": 1,
+      "source_pages": [
+        359,
+        360
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "484_dom_事件的组成与绑定关系",
+      "title": "DOM 事件的组成与绑定关系",
+      "difficulty": 2,
+      "source_pages": [
+        357,
+        360
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "485_常用资源与页面生命周期事件",
+      "title": "常用资源与页面生命周期事件",
+      "difficulty": 1,
+      "source_pages": [
+        361,
+        364
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "486_表单重置与提交事件",
+      "title": "表单重置与提交事件",
+      "difficulty": 1,
+      "source_pages": [
+        361,
+        364
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "487_键盘事件",
+      "title": "键盘事件",
+      "difficulty": 1,
+      "source_pages": [
+        361,
+        364
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "488_常用鼠标_选择与滚轮事件",
+      "title": "常用鼠标、选择与滚轮事件",
+      "difficulty": 1,
+      "source_pages": [
+        361,
+        364
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "489_dom事件流",
+      "title": "DOM事件流",
+      "difficulty": 2,
+      "source_pages": [
+        361,
+        364
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "490_事件冒泡",
+      "title": "事件冒泡",
+      "difficulty": 2,
+      "source_pages": [
+        361,
+        364
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "491_事件捕获",
+      "title": "事件捕获",
+      "difficulty": 2,
+      "source_pages": [
+        361,
+        364
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "492_标准事件模型",
+      "title": "标准事件模型",
+      "difficulty": 2,
+      "source_pages": [
+        365,
+        368
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "493_事件绑定方式",
+      "title": "事件绑定方式",
+      "difficulty": 1,
+      "source_pages": [
+        365,
+        368
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "494_addeventlistener方法",
+      "title": "addEventListener方法",
+      "difficulty": 2,
+      "source_pages": [
+        367,
+        368
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "495_removeeventlistener方法",
+      "title": "removeEventListener方法",
+      "difficulty": 2,
+      "source_pages": [
+        365,
+        368
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "496_事件对象",
+      "title": "事件对象",
+      "difficulty": 1,
+      "source_pages": [
+        369,
+        372
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "497_事件对象常用属性",
+      "title": "事件对象常用属性",
+      "difficulty": 1,
+      "source_pages": [
+        370,
+        371
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "498_键盘和鼠标事件对象属性",
+      "title": "键盘和鼠标事件对象属性",
+      "difficulty": 1,
+      "source_pages": [
+        369,
+        372
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "499_事件委托",
+      "title": "事件委托",
+      "difficulty": 2,
+      "source_pages": [
+        369,
+        372
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "500_事件委托",
+      "title": "事件委托",
+      "difficulty": 2,
+      "source_pages": [
+        373,
+        374
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "501_阻止默认行为",
+      "title": "阻止默认行为",
+      "difficulty": 1,
+      "source_pages": [
+        375,
+        376
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "502_onsubmit表单非空检查",
+      "title": "onsubmit表单非空检查",
+      "difficulty": 1,
+      "source_pages": [
+        373,
+        376
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "503_stoppropagation",
+      "title": "stopPropagation",
+      "difficulty": 1,
+      "source_pages": [
+        377,
+        380
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "504_preventdefault",
+      "title": "preventDefault",
+      "difficulty": 1,
+      "source_pages": [
+        377,
+        380
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "505_web_storage_api",
+      "title": "Web Storage API",
+      "difficulty": 1,
+      "source_pages": [
+        377,
+        380
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "506_localstorage",
+      "title": "localStorage",
+      "difficulty": 1,
+      "source_pages": [
+        379,
+        380
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "507_localstorage_基本操作",
+      "title": "localStorage 基本操作",
+      "difficulty": 1,
+      "source_pages": [
+        381,
+        384
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "508_sessionstorage_会话存储特性",
+      "title": "sessionStorage 会话存储特性",
+      "difficulty": 2,
+      "source_pages": [
+        382,
+        383,
+        384
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "509_sessionstorage_常用方法",
+      "title": "sessionStorage 常用方法",
+      "difficulty": 1,
+      "source_pages": [
+        381,
+        384
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "510_localstorage_的使用场景",
+      "title": "localStorage 的使用场景",
+      "difficulty": 1,
+      "source_pages": [
+        385,
+        387
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "511_sessionstorage_的使用场景",
+      "title": "sessionStorage 的使用场景",
+      "difficulty": 1,
+      "source_pages": [
+        385,
+        387
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "512_web_storage_的安全性注意事项",
+      "title": "Web Storage 的安全性注意事项",
+      "difficulty": 2,
+      "source_pages": [
+        385,
+        387
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "513_web_storage_的容量限制与错误",
+      "title": "Web Storage 的容量限制与错误",
+      "difficulty": 2,
+      "source_pages": [
+        385,
+        387
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "514_web_storage_的同步操作特性",
+      "title": "Web Storage 的同步操作特性",
+      "difficulty": 2,
+      "source_pages": [
+        385,
+        387
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "515_web_storage_仅支持字符串",
+      "title": "Web Storage 仅支持字符串",
+      "difficulty": 2,
+      "source_pages": [
+        385,
+        387
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "516_localstorage_和_sessionstorage_的同源策略限制",
+      "title": "localStorage 和 sessionStorage 的同源策略限制",
+      "difficulty": 2,
+      "source_pages": [
+        385,
+        387
+      ],
+      "needs_verification": false
+    }
+  ]
+}

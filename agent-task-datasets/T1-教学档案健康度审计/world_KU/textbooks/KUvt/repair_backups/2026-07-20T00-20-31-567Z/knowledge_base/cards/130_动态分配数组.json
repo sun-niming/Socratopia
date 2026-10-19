@@ -1,0 +1,50 @@
+{
+  "title": "动态分配数组",
+  "definition": "使用 `new[]` 操作符可以在自由存储区中动态分配数组。数组的元素数量可以由运行期的变量决定；保存数组首地址的指针变量本身可以位于栈上，而动态创建的数组位于自由存储区。",
+  "key_points": [
+    "`new int[arraySize]` 为 `arraySize` 个 `int` 元素分配自由存储区。",
+    "数组大小可以由运行期计算或读取的变量决定。",
+    "指针变量和它指向的动态数组可能位于不同区域：指针变量通常位于栈中，数组位于自由存储区。",
+    "动态分配的数组属于动态内存，使用完毕后必须采用与数组分配形式匹配的释放方式。"
+  ],
+  "examples": [
+    "`int arraySize { 8 };`",
+    "`int* myVariableSizedArray { new int[arraySize] };`",
+    "上述代码为 `8` 个 `int` 元素分配空间；`myVariableSizedArray` 是栈中的指针变量，数组本体位于自由存储区。"
+  ],
+  "misconceptions": [
+    "`myVariableSizedArray` 是指针，不是数组本体；它保存动态数组的首地址。",
+    "数组大小由变量决定时，动态数组的存储空间仍然位于自由存储区，而不是指针变量所在的栈帧。",
+    "使用 `new[]` 分配的数组不能按单个对象使用普通 `delete` 释放，应使用匹配的数组释放形式。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`new int[arraySize]` 做了什么？",
+      "a": "在自由存储区中为 `arraySize` 个 `int` 元素分配数组空间，并返回数组首元素的地址。"
+    },
+    {
+      "q": "动态数组和保存其地址的指针通常分别位于哪里？",
+      "a": "指针变量通常位于栈中，动态数组位于自由存储区。"
+    },
+    {
+      "q": "用 `new[]` 分配的数组应使用什么形式释放？",
+      "a": "应使用与之匹配的 `delete[]` 形式释放。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "动态内存的分配与释放",
+    "指针"
+  ],
+  "source_pages": [
+    72,
+    72
+  ],
+  "needs_verification": true,
+  "verify_query": "C++ new[] delete[] 动态数组 释放规则 new int[arraySize] C++20",
+  "concept_id": "130_动态分配数组",
+  "_chunk_pages": [
+    69,
+    72
+  ]
+}

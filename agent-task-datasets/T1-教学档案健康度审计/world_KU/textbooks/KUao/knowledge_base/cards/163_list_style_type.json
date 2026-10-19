@@ -1,0 +1,42 @@
+{
+  "title": "list-style-type",
+  "definition": "CSS 的列表项标号类型属性，用来指定列表前面的标记样式。教材给出的取值包括：无序列表的 disc（实心圆）、circle（空心圆）、square（实心方块），以及有序列表的 decimal（数字）、lower-alpha（小写字母）。",
+  "key_points": [
+    "用于控制列表项标号的类型",
+    "无序列表常见取值有 disc、circle、square",
+    "有序列表常见取值有 decimal、lower-alpha"
+  ],
+  "examples": [
+    "list-style-type: disc;",
+    "list-style-type: lower-alpha;"
+  ],
+  "misconceptions": [
+    "它不是用来控制标号位置或标号图片的。",
+    "有序列表和无序列表可使用的标号类型不同。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "list-style-type 的作用是什么？",
+      "a": "设置列表项标号的类型。"
+    },
+    {
+      "q": "disc、circle、square 分别表示什么？",
+      "a": "分别表示实心圆、空心圆、实心方块。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "CSS基础"
+  ],
+  "source_pages": [
+    117,
+    120
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "163_list_style_type",
+  "_chunk_pages": [
+    117,
+    120
+  ]
+}

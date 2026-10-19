@@ -1,0 +1,42 @@
+{
+  "title": "避免无用注释",
+  "definition": "注释应提供代码本身无法直接表达的有用信息。若注释只是重复函数名、构造函数名或显而易见的代码含义，就属于无用注释；即使使用Doxygen自动生成文档，也应避免这类注释。",
+  "key_points": [
+    "注释应补充说明，而不是机械重复代码中的名称。",
+    "如果代码已经通过清晰的函数名、参数名和类型表达了含义，就不必再添加同义说明。",
+    "注释应重点解释参数限制、异常条件或不明显的行为等附加信息。"
+  ],
+  "examples": [
+    "不必要的注释：`* The Watermelon constructor.`，因为函数声明`Watermelon(size_t initialSeeds);`已经明确表明它是Watermelon构造函数。",
+    "有用的补充信息：说明`initialSeeds`必须大于5，以及参数不满足条件时会抛出异常。"
+  ],
+  "misconceptions": [
+    "自动生成文档并不要求每个函数都添加一段重复其名称的说明。",
+    "注释越多不一定越好；重复或无信息的注释会降低文档质量。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么`The Watermelon constructor.`被认为是多余注释？",
+      "a": "因为构造函数的名称和声明已经清楚表达了它是Watermelon构造函数，这段注释没有提供额外信息。"
+    },
+    {
+      "q": "对于Watermelon构造函数，哪些信息比重复函数名称更值得写入注释？",
+      "a": "参数的含义和限制，以及参数不合法时抛出的异常。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "代码注释的基本作用"
+  ],
+  "source_pages": [
+    129,
+    129
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "254_避免无用注释",
+  "_chunk_pages": [
+    129,
+    132
+  ]
+}

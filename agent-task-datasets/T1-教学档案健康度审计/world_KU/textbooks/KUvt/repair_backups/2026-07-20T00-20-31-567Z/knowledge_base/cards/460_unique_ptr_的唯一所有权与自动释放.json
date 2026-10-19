@@ -1,0 +1,44 @@
+{
+  "title": "unique_ptr 的唯一所有权与自动释放",
+  "definition": "`std::unique_ptr<T>` 是具有唯一所有权语义的智能指针。它拥有一个动态资源；当 unique_ptr 被销毁或重置时，会自动释放该资源。资源释放与对象生命周期绑定，因此即使函数执行 return 或抛出异常，也能自动进行清理。",
+  "key_points": [
+    "unique_ptr 不能被复制，因为复制会产生两个唯一所有者。",
+    "unique_ptr 可以通过移动语义把所有权转移给另一个 unique_ptr。",
+    "对于具有唯一所有者的动态分配资源，教材建议将其保存在 unique_ptr 实例中。",
+    "使用 unique_ptr 可以减少在多个 return 语句和异常路径中手动 delete 的负担。"
+  ],
+  "examples": [
+    "`auto mySimpleSmartPtr { std::make_unique<Simple>() };`",
+    "当 `mySimpleSmartPtr` 离开作用域时，它会自动释放所拥有的 `Simple` 对象。"
+  ],
+  "misconceptions": [
+    "unique_ptr 不是共享指针，不能直接复制。",
+    "unique_ptr 自动释放资源不代表资源可以被任意使用；仍须遵守对象生命周期和所有权规则。",
+    "手动在每个 return 之前调用 delete 不是使用唯一所有权资源的首选方式。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么 unique_ptr 不能复制？",
+      "a": "因为它表示唯一所有权，复制会使同一资源出现多个所有者，并可能导致重复释放。"
+    },
+    {
+      "q": "函数抛出异常时，unique_ptr 为什么仍能释放资源？",
+      "a": "因为异常离开作用域时，局部 unique_ptr 会被销毁，其析构函数会自动释放所拥有的资源。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "智能指针解决的内存管理问题"
+  ],
+  "source_pages": [
+    218,
+    219
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "460_unique_ptr_的唯一所有权与自动释放",
+  "_chunk_pages": [
+    217,
+    220
+  ]
+}

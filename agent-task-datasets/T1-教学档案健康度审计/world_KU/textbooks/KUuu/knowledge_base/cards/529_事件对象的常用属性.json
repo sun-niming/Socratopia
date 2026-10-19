@@ -1,0 +1,39 @@
+{
+  "title": "事件对象的常用属性",
+  "definition": "事件对象包含多个常用属性，用来描述事件本身和触发事件的元素。教材中列出的核心属性有 currentTarget、target 和 type。",
+  "key_points": [
+    "currentTarget 表示当前事件处理程序所在的元素",
+    "target 表示引发事件的元素引用",
+    "type 表示被触发的事件类型"
+  ],
+  "examples": [
+    "event.currentTarget",
+    "event.target",
+    "event.type"
+  ],
+  "misconceptions": [
+    "currentTarget 和 target 一定总是相同；实际上它们含义不同。",
+    "type 表示触发事件的元素；实际上它表示事件类型。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "event.target 和 event.currentTarget 分别表示什么？",
+      "a": "event.target 是引发事件的元素，event.currentTarget 是当前事件处理程序所在的元素。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "事件对象"
+  ],
+  "source_pages": [
+    370,
+    371
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "529_事件对象的常用属性",
+  "_chunk_pages": [
+    369,
+    372
+  ]
+}

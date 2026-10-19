@@ -1,0 +1,54 @@
+{
+  "title": "初始化列表构造函数",
+  "definition": "初始化列表构造函数是以 std::initializer_list<T> 作为第一个参数，并且没有其他参数，或者其余参数都有默认值的构造函数。它允许使用花括号中的元素列表直接构造对象。",
+  "key_points": [
+    "std::initializer_list<double> 可以通过 size() 获取元素个数，并可以使用基于范围的 for 循环访问元素。",
+    "EvenSequence 类要求初始化列表中的元素个数为偶数；如果元素个数为奇数，则抛出异常。",
+    "构造函数可以使用 vector 的 push_back() 或 assign() 将初始化列表中的元素复制到成员 vector 中。",
+    "标准库容器也支持初始化列表构造，例如可以直接用花括号初始化 std::vector。",
+    "初始化列表不仅可以用于构造函数，也可以用于普通函数。"
+  ],
+  "examples": [
+    "EvenSequence pi{1.0, 2.0, 3.0, 4.0, 5.0, 6.0}; pi.dump(); 可以成功构造，因为元素个数为偶数。",
+    "EvenSequence p2{1.0, 2.0, 3.0}; 会抛出异常，因为初始化列表元素个数为奇数。",
+    "初始化 std::vector：vector<string> myVec{\"String 1\", \"String 2\", \"String 3\"};",
+    "不使用初始化列表构造函数时，也可以写成：vector<string> myVec; myVec.push_back(\"String 1\"); myVec.push_back(\"String 2\"); myVec.push_back(\"String 3\");"
+  ],
+  "misconceptions": [
+    "std::initializer_list构造函数不要求元素个数必须为偶数；偶数要求是原文中 EvenSequence 类的特定约束。",
+    "初始化列表构造函数的参数类型是 std::initializer_list<T>，不是普通的数组参数。",
+    "使用花括号初始化 vector 并不意味着必须手动逐个调用 push_back。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "什么是初始化列表构造函数？",
+      "a": "它是以 std::initializer_list<T> 为第一个参数，且没有其他参数或其他参数具有默认值的构造函数。"
+    },
+    {
+      "q": "为什么 EvenSequence p2{1.0, 2.0, 3.0} 会抛出异常？",
+      "a": "因为初始化列表包含3个元素，元素个数为奇数，不满足 EvenSequence 要求元素个数为偶数的条件。"
+    },
+    {
+      "q": "如何在初始化列表构造函数中访问 initializer_list 的元素？",
+      "a": "可以使用 size() 获取元素数量，并使用基于范围的 for 循环遍历元素。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "构造函数",
+    "std::vector",
+    "异常处理",
+    "基于范围的 for 循环"
+  ],
+  "source_pages": [
+    246,
+    247
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "522_初始化列表构造函数",
+  "_chunk_pages": [
+    245,
+    248
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "title": "AddressSanitizer 调试选项",
+  "definition": "在调试阶段，可以在编译和链接参数中加入 AddressSanitizer，例如 `CFLAGS = -Wall -Wextra -g -std=c11 -fsanitize=address`，并设置 `LDFLAGS = -fsanitize=address`。它可以帮助发现越界和 `use-after-free` 问题；课程演示最终版可以不用，但调试阶段很有用。",
+  "key_points": [
+    "需要在编译和链接阶段都加入 `-fsanitize=address`。",
+    "它主要帮助发现越界和 `use-after-free`。",
+    "适合调试阶段使用，不一定保留到最终演示版。"
+  ],
+  "examples": [
+    "`CFLAGS = -Wall -Wextra -g -std=c11 -fsanitize=address`",
+    "`LDFLAGS = -fsanitize=address`"
+  ],
+  "misconceptions": [
+    "AddressSanitizer 只需要加在 `CFLAGS` 里，不需要 `LDFLAGS`。",
+    "它只对最终提交有帮助，调试阶段不重要。",
+    "它能解决所有 bug，而不仅仅是帮助发现内存错误。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "AddressSanitizer 主要能帮助发现哪两类问题？",
+      "a": "越界和 `use-after-free`。"
+    },
+    {
+      "q": "为什么它更适合调试阶段而不是最终版？",
+      "a": "因为它主要用于辅助发现错误，课程演示最终版可以不使用。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "编译参数基础",
+    "动态内存管理基础"
+  ],
+  "source_pages": [
+    125,
+    128
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "203_addresssanitizer_调试选项",
+  "_chunk_pages": [
+    125,
+    128
+  ]
+}

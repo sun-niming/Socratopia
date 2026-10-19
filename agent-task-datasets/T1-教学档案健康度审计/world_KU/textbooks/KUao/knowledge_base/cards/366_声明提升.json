@@ -1,0 +1,37 @@
+{
+  "title": "声明提升",
+  "definition": "JavaScript在运行时会经历语法分析、预编译和解释执行阶段；在预编译阶段，函数声明和变量声明会被提前到作用域前面，这种现象称为声明提升。",
+  "key_points": [
+    "发生在预编译阶段",
+    "函数声明和变量声明都会提升",
+    "函数声明的提升优先级高于变量声明"
+  ],
+  "examples": [
+    "在预编译后，函数声明会排在变量声明之前"
+  ],
+  "misconceptions": [
+    "声明提升不是把代码执行顺序整体改变，而是把声明提前；函数声明的提升优先于变量声明"
+  ],
+  "qa_pairs": [
+    {
+      "q": "什么是声明提升？",
+      "a": "指 JavaScript 在预编译阶段把函数声明和变量声明提前到作用域前面的现象。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "JavaScript运行阶段",
+    "作用域"
+  ],
+  "source_pages": [
+    273,
+    274
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "366_声明提升",
+  "_chunk_pages": [
+    273,
+    276
+  ]
+}

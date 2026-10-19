@@ -1,0 +1,38 @@
+{
+  "title": "表单重置与提交事件",
+  "definition": "表单相关的常用事件主要有 reset 和 submit，分别对应点击重置按钮和点击提交按钮。",
+  "key_points": [
+    "reset：点击重置按钮时触发",
+    "submit：点击提交按钮时触发",
+    "这两个事件都属于表单交互中常见的触发时机"
+  ],
+  "examples": [
+    "form.addEventListener('reset', handler)",
+    "form.addEventListener('submit', handler)"
+  ],
+  "misconceptions": [
+    "reset 不是提交表单；submit 也不是重置表单",
+    "这两个事件对应的是按钮触发时机，而不是页面任意位置点击时都触发"
+  ],
+  "qa_pairs": [
+    {
+      "q": "点击提交按钮时通常触发哪个事件？",
+      "a": "submit。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "HTML表单基础"
+  ],
+  "source_pages": [
+    361,
+    361
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "519_表单重置与提交事件",
+  "_chunk_pages": [
+    361,
+    364
+  ]
+}

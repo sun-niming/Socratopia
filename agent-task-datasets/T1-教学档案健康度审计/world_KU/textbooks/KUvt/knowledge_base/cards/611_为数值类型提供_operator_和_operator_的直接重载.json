@@ -1,0 +1,48 @@
+{
+  "title": "为数值类型提供 operator== 和 operator<=> 的直接重载",
+  "definition": "当类对象经常与 `double` 等数值类型比较时，可以额外提供直接接受 `double` 的成员重载，以避免先将 `double` 隐式转换为临时 `SpreadsheetCell` 对象。对于 `SpreadsheetCell`，可额外声明 `operator==(double)` 和 `operator<=>(double)`。",
+  "key_points": [
+    "直接重载可以避免隐式转换和临时对象带来的轻微性能开销。",
+    "相等比较重载形式为 `[[nodiscard]] bool operator==(double rhs) const;`。",
+    "三向比较重载形式为 `[[nodiscard]] std::partial_ordering operator<=>(double rhs) const;`。",
+    "实现通常直接比较当前对象的 `double` 值与参数 `rhs`。"
+  ],
+  "examples": [
+    "声明：`[[nodiscard]] bool operator==(double rhs) const;`",
+    "声明：`[[nodiscard]] std::partial_ordering operator<=>(double rhs) const;`",
+    "实现：`bool SpreadsheetCell::operator==(double rhs) const { return getValue() == rhs; }`",
+    "实现：`std::partial_ordering SpreadsheetCell::operator<=>(double rhs) const { return getValue() <=> rhs; }`",
+    "调用示例：`if (myCell < 10) { /* ... */ }`，编译器可以使用面向 `double` 的直接重载。"
+  ],
+  "misconceptions": [
+    "支持 `double` 比较不一定需要提供所有比较运算符的 3 类重载；在 C++20 中通常只需额外提供 `operator==(double)` 和 `operator<=>(double)`。",
+    "直接提供 `double` 重载的主要目的之一是避免隐式转换创建临时对象，而不是改变比较的数学含义。",
+    "`operator==(double)` 仍然是浮点相等比较，不能自动消除浮点表示误差问题。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么要为 `double` 单独提供比较运算符重载？",
+      "a": "为了避免将 `double` 隐式转换为临时 `SpreadsheetCell` 对象，从而减少轻微的性能开销。"
+    },
+    {
+      "q": "C++20 中，为了直接支持 `SpreadsheetCell` 与 `double` 的完整比较，教材要求额外提供哪两个成员运算符？",
+      "a": "`[[nodiscard]] bool operator==(double rhs) const;` 和 `[[nodiscard]] std::partial_ordering operator<=>(double rhs) const;`。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++20 operator<=>",
+    "隐式类型转换"
+  ],
+  "source_pages": [
+    296,
+    296
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "611_为数值类型提供_operator_和_operator_的直接重载",
+  "_chunk_pages": [
+    293,
+    296
+  ]
+}

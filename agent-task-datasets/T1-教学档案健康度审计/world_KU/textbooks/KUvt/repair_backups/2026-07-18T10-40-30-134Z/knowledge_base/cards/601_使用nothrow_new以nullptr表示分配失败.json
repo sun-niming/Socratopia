@@ -1,0 +1,45 @@
+{
+  "title": "使用nothrow new以nullptr表示分配失败",
+  "definition": "C++提供nothrow形式的new和new[]，例如new(nothrow) int[integerCount]。这种形式在内存分配失败时不抛出bad_alloc，而是返回nullptr，因此调用者必须显式检查返回指针是否为nullptr。",
+  "key_points": [
+    "nothrow形式的动态分配语法包括new(nothrow)和相应的数组分配形式。",
+    "分配失败时，nothrow new返回nullptr，而不是通过异常报告失败。",
+    "使用nothrow new后必须检查指针是否为nullptr。",
+    "只有确认指针非nullptr后，才能继续执行依赖内存分配成功的代码。"
+  ],
+  "examples": [
+    "示例代码结构：int* ptr { new(nothrow) int[integerCount] }; if (ptr == nullptr) { cerr << \"Unable to allocate memory!\" << endl; return; }",
+    "与普通new不同，nothrow版本把失败表示为返回值：分配成功时ptr指向数组，失败时ptr等于nullptr。"
+  ],
+  "misconceptions": [
+    "认为nothrow new分配失败时也会自动抛出bad_alloc；教材示例采用nullptr返回值表示失败。",
+    "认为使用nothrow后不需要检查指针；不检查nullptr可能导致后续对无效指针的使用。",
+    "认为new(nothrow)能够保证分配成功；它只是改变失败报告方式，并不能消除内存不足的可能性。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "nothrow new分配失败时返回什么？",
+      "a": "返回nullptr。"
+    },
+    {
+      "q": "使用nothrow new后为什么要判断ptr == nullptr？",
+      "a": "因为分配失败不会通过bad_alloc异常通知调用者，而是通过nullptr返回值表示，必须显式检查。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "动态内存分配",
+    "nullptr"
+  ],
+  "source_pages": [
+    457,
+    460
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "601_使用nothrow_new以nullptr表示分配失败",
+  "_chunk_pages": [
+    457,
+    460
+  ]
+}

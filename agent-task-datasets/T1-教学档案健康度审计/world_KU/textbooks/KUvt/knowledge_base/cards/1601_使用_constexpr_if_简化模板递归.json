@@ -1,0 +1,46 @@
+{
+  "title": "使用 constexpr if 简化模板递归",
+  "definition": "constexpr if 是在编译期求值的 if 语句。对于 constexpr if 中不会到达的分支，该分支不会被编译。模板元编程可以利用这一点控制递归：当编译期条件不满足时，递归调用被直接排除，因此不再需要单独编写模板递归的基本情形。",
+  "key_points": [
+    "constexpr if 的条件在编译期判断，而不是运行时判断。",
+    "未被选中的 constexpr if 分支不会参与编译。",
+    "在元组打印中，当 n > 1 时递归处理前面的元素；条件不满足时递归自然停止。",
+    "示例中的 get<n - 1>(t) 用于访问元组的第 n 个元素（下标从 0 开始时，其下标为 n-1）。"
+  ],
+  "examples": [
+    "简化后的辅助函数形式：\n\n```cpp\ntemplate <typename TupleType, int n>\nvoid tuplePrintHelper(const TupleType& t) {\n    if constexpr (n > 1) {\n        tuplePrintHelper<TupleType, n - 1>(t);\n        cout << get<n - 1>(t) << endl;\n    }\n}\n```",
+    "进一步合并为一个函数模板：\n\n```cpp\ntemplate <typename TupleType, int n = tuple_size<TupleType>::value>\nvoid tuplePrint(const TupleType& t) {\n    if constexpr (n > 1) {\n        tuplePrint<TupleType, n - 1>(t);\n        cout << get<n - 1>(t) << endl;\n    }\n}\n```"
+  ],
+  "misconceptions": [
+    "constexpr if 不是普通运行时 if；未选中的分支不会被编译。",
+    "constexpr if 并不表示所有分支都执行，而是只保留编译期条件选中的分支。",
+    "这里的 n 是编译期模板参数，不是运行时变量。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "constexpr if 与普通 if 的关键区别是什么？",
+      "a": "constexpr if 的条件在编译期判断，未被选中的分支不会被编译；普通 if 的分支通常都必须能够通过编译，只在运行时决定执行哪一支。"
+    },
+    {
+      "q": "为什么使用 constexpr if 后可以省略模板递归的基本情形？",
+      "a": "因为当 n > 1 不成立时，递归调用所在分支在编译期被排除，递归会停止。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "模板递归",
+    "编译期常量表达式",
+    "std::tuple元素访问"
+  ],
+  "source_pages": [
+    777,
+    778
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1601_使用_constexpr_if_简化模板递归",
+  "_chunk_pages": [
+    777,
+    780
+  ]
+}

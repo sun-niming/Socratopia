@@ -1,0 +1,45 @@
+{
+  "title": "std::vector动态序列容器",
+  "definition": "`std::vector`是C++标准库中的动态序列容器，可以保存一组同类型元素，并在运行过程中通过成员函数增加元素。使用`push_back()`可以把元素追加到vector末尾。",
+  "key_points": [
+    "可以使用`std::vector<int>`创建保存`int`元素的vector。",
+    "`push_back(value)`会将一个元素添加到vector的末尾。",
+    "原文示例依次执行`myVector.push_back(33);`和`myVector.push_back(44);`，因此元素按插入顺序保存为33、44。",
+    "与固定大小的`std::array`相比，vector适合需要动态增加元素数量的场景。"
+  ],
+  "examples": [
+    "创建整数vector：`std::vector<int> myVector;`",
+    "追加元素：`myVector.push_back(33);`和`myVector.push_back(44);`",
+    "追加后的顺序可表示为$$\\begin{bmatrix}33 & 44\\end{bmatrix}$$"
+  ],
+  "misconceptions": [
+    "`push_back(33)`不会把已有元素替换为33，而是在末尾追加一个新元素。",
+    "`std::vector<int>`只能保存整数，不能在同一个vector中直接混合保存不同类型的元素。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何向`std::vector<int> myVector`末尾添加整数33？",
+      "a": "调用`myVector.push_back(33);`。"
+    },
+    {
+      "q": "依次调用`push_back(33)`和`push_back(44)`后，vector中的元素顺序是什么？",
+      "a": "元素顺序为33、44。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++标准库容器",
+    "成员函数调用"
+  ],
+  "source_pages": [
+    57,
+    60
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "080_std_vector动态序列容器",
+  "_chunk_pages": [
+    57,
+    60
+  ]
+}

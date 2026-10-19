@@ -1,0 +1,43 @@
+{
+  "title": "使用 bind 绑定标准比较函数对象",
+  "definition": "std::bind 也可以绑定标准函数对象的部分参数，从而生成具有更具体比较条件的新可调用对象。例如，可以把 greater_equal<> 的第二个参数固定为 100，生成用于判断第一个参数是否大于等于 100 的对象。",
+  "key_points": [
+    "标准函数对象本身可以作为 bind 的第一个参数。",
+    "greater_equal<> 的第一个参数保留为占位符，第二个参数可以绑定为固定值 100。",
+    "绑定后的对象可以使用一个参数调用。"
+  ],
+  "examples": [
+    "auto greaterEqualTo100 = bind(greater_equal<>{}, placeholders::_1, 100);",
+    "调用 greaterEqualTo100(x) 的效果是判断 $x \\ge 100$。"
+  ],
+  "misconceptions": [
+    "绑定第二个参数为 100 不会把第一个参数也固定为 100。",
+    "greater_equal 的结果是布尔值，表示第一个操作数是否大于或等于第二个操作数。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何生成一个判断参数是否大于等于 100 的可调用对象？",
+      "a": "可以写：auto greaterEqualTo100 = bind(greater_equal<>{}, placeholders::_1, 100);。"
+    },
+    {
+      "q": "greaterEqualTo100(120) 的结果是什么？",
+      "a": "结果为 true，因为 $120 \\ge 100$。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "std::bind 绑定固定参数",
+    "比较函数对象"
+  ],
+  "source_pages": [
+    616,
+    616
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1270_使用_bind_绑定标准比较函数对象",
+  "_chunk_pages": [
+    613,
+    616
+  ]
+}

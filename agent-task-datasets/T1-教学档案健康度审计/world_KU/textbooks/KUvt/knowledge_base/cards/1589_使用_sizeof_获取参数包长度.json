@@ -1,0 +1,39 @@
+{
+  "title": "使用 sizeof... 获取参数包长度",
+  "definition": "在使用参数包的函数或模板中，可以使用 `sizeof...(参数包名称)` 在编译期获取参数包中元素的数量。",
+  "key_points": [
+    "`sizeof...(args)` 返回参数包 `args` 中参数的数量。",
+    "返回值是编译期可确定的大小值，适合用于模板逻辑或初始化常量。",
+    "示例写法为 `int numOfArguments { sizeof...(args) };`。",
+    "它统计的是参数包中的元素个数，而不是所有递归层级累计处理的参数总数。"
+  ],
+  "examples": [
+    "`int numOfArguments { sizeof...(args) };` 表示把 `args` 参数包的长度保存到 `numOfArguments`。",
+    "如果 `args` 包含三个参数，则 `sizeof...(args)` 的结果为 `3`。"
+  ],
+  "misconceptions": [
+    "`sizeof...(args)` 不是计算所有参数占用的字节数；它计算的是参数个数。",
+    "它不会递归遍历参数包，只是直接取得参数包的元素数量。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何获取可变参数函数中参数包的参数个数？",
+      "a": "使用 `sizeof...(args)`，其中 `args` 是参数包名称。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "可变参数模板与参数包"
+  ],
+  "source_pages": [
+    771,
+    771
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1589_使用_sizeof_获取参数包长度",
+  "_chunk_pages": [
+    769,
+    772
+  ]
+}

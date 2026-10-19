@@ -1,0 +1,45 @@
+{
+  "title": "catch 子句的匹配顺序",
+  "definition": "当一个 try 语句后有多个 catch 子句时，C++ 按 catch 子句在源代码中出现的顺序依次匹配，并执行第一条匹配的子句。若范围更广的基类 catch 子句出现在范围更窄的派生类 catch 子句之前，基类子句会先匹配所有相关派生类异常，使后面的派生类子句无法执行。因此，catch 子句应按照从限制最多、最具体的异常类型到限制最少、最通用的异常类型排列。",
+  "key_points": [
+    "多个 catch 子句按源代码中的先后顺序匹配。",
+    "第一条匹配成功的 catch 子句执行，后续 catch 子句不再执行。",
+    "派生类异常应放在基类异常之前。",
+    "基类 catch 子句放在前面会遮蔽后面的派生类 catch 子句；编译器可能警告，但不应依赖编译器发现这一问题。"
+  ],
+  "examples": [
+    "正确顺序：\ntry {\n    myInts = readIntegerFile(filename);\n} catch (const std::invalid_argument& e) {\n    // 针对无效文件名采取特殊处理\n} catch (const std::exception& e) {\n    std::cerr << e.what() << std::endl;\n    return 1;\n}",
+    "错误顺序：\ntry {\n    myInts = readIntegerFile(filename);\n} catch (const std::exception& e) {\n    // 先匹配基类\n} catch (const std::invalid_argument& e) {\n    // 永远不会执行\n}"
+  ],
+  "misconceptions": [
+    "认为编译器会自动选择最具体的 catch 子句；实际上 C++ 按书写顺序匹配。",
+    "认为后面的 catch 子句仍可能在前面的基类子句执行后继续执行；实际上只执行第一条匹配的子句。",
+    "认为只要 catch 子句类型不同，排列顺序就无关紧要。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "多个 catch 子句的匹配顺序是什么？",
+      "a": "按照 catch 子句在代码中的出现顺序依次匹配，第一条匹配的 catch 子句执行，后续子句不再执行。"
+    },
+    {
+      "q": "为什么派生类 catch 子句必须放在基类 catch 子句之前？",
+      "a": "因为基类 catch 子句能够匹配派生类异常。如果基类子句先出现，它会先捕获派生类异常，使后面的派生类子句无法执行。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++异常处理基础",
+    "C++继承与多态"
+  ],
+  "source_pages": [
+    449,
+    450
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "914_catch_子句的匹配顺序",
+  "_chunk_pages": [
+    449,
+    452
+  ]
+}

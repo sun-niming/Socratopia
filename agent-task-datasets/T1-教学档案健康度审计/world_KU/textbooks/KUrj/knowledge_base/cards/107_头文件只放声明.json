@@ -1,0 +1,43 @@
+{
+  "title": "头文件只放声明",
+  "definition": "在该项目中，头文件应只放函数声明、共同数据结构和必要的宏定义，不应塞入函数实现，也不应随意定义全局变量。这样做可以避免多重定义，保证各个 .c 文件都能通过同一个接口协作。",
+  "key_points": [
+    "头文件负责“声明接口”，不是实现业务逻辑。",
+    "函数声明要与 .c 中的实现保持一致。",
+    "头文件里避免定义全局变量。",
+    "应包含 include guard，防止重复包含。"
+  ],
+  "examples": [
+    "int parse_request_line(const char *buf, HttpRequest *req);",
+    "void write_access_log(const ServerConfig *config, const char *client_ip, const HttpRequest *req, const HttpResult *result);"
+  ],
+  "misconceptions": [
+    "把函数实现直接写进头文件就更省事；实际上容易导致多重定义。",
+    "头文件内容越多越好；实际上应尽量只保留接口和共享数据。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么这个项目的头文件不应该写函数实现？",
+      "a": "因为头文件应只提供声明；写实现容易在多个 .c 文件包含时引发多重定义。"
+    },
+    {
+      "q": "头文件中还应注意什么？",
+      "a": "要有 include guard，并避免定义全局变量。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C 语言基础"
+  ],
+  "source_pages": [
+    69,
+    72
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "107_头文件只放声明",
+  "_chunk_pages": [
+    69,
+    72
+  ]
+}

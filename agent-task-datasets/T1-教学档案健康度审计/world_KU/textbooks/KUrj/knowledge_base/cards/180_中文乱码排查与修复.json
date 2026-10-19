@@ -1,0 +1,40 @@
+{
+  "title": "中文乱码排查与修复",
+  "definition": "当 HTML 中文显示乱码时，应同时检查页面声明、响应头和文件编码：页面里要有 `<meta charset=\"utf-8\">`，响应头 `Content-Type` 要带 `charset=utf-8`，源文件本身也要保存为 UTF-8；可以用 `curl -i` 查看响应头。",
+  "key_points": [
+    "HTML 中需要声明 `<meta charset=\"utf-8\">`。",
+    "响应头应使用 `text/html; charset=utf-8`。",
+    "源文件编码也要是 UTF-8，否则仍可能乱码。"
+  ],
+  "examples": [
+    "`curl -i http://127.0.0.1:8080/`",
+    "`<meta charset=\"utf-8\">`",
+    "`Content-Type: text/html; charset=utf-8`"
+  ],
+  "misconceptions": [
+    "只改浏览器编码就能根治乱码。",
+    "只改 HTML 页面，不改响应头或源文件编码就一定没问题。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "排查 HTML 中文乱码时要检查哪三项？",
+      "a": "检查 HTML 的 charset 声明、响应头的 charset、以及源文件是否为 UTF-8。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "HTML 基础",
+    "HTTP 响应头基础"
+  ],
+  "source_pages": [
+    113,
+    116
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "180_中文乱码排查与修复",
+  "_chunk_pages": [
+    113,
+    116
+  ]
+}

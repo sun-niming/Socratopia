@@ -1,0 +1,44 @@
+{
+  "title": "递归目录迭代器的使用",
+  "definition": "`std::recursive_directory_iterator` 用于递归遍历目录及其子目录中的条目。遍历时从起始路径构造迭代器，并与默认构造的结束迭代器比较；每次循环使用 `++iter` 访问下一个条目。结束迭代器不代表有效的目录条目，不能解引用。",
+  "key_points": [
+    "可以使用 `iter.depth()` 获取当前条目的递归深度，并据此生成缩进文本，例如 `std::string spacer(iter.depth() * 2, ' ')`。",
+    "通过解引用迭代器得到目录项：`auto& entry = *iter`，再使用 `is_regular_file(entry)`、`is_directory(entry)`、`entry.path()` 和 `file_size(entry)` 判断或获取信息。",
+    "基本遍历结构为：`for (auto iter{begin}; iter != end; ++iter) { ... }`。",
+    "结束迭代器只用于表示遍历终点，不属于被遍历的目录内容。"
+  ],
+  "examples": [
+    "示例结构：`std::recursive_directory_iterator begin{p}; std::recursive_directory_iterator end{}; for (auto iter{begin}; iter != end; ++iter) { auto& entry = *iter; }`。",
+    "可以用 `path p{R\"(D:\\Foo\\Bar)\"};` 调用目录打印函数。"
+  ],
+  "misconceptions": [
+    "结束迭代器不是最后一个有效目录项，不能对它解引用。",
+    "递归目录迭代器不需要手动为每一层子目录再写一层循环；它本身会递归访问子目录。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "递归目录迭代器的结束迭代器能否被解引用？",
+      "a": "不能。结束迭代器不代表集合中的有效目录项，只用于表示遍历结束。"
+    },
+    {
+      "q": "如何获得递归目录迭代器当前条目的目录项？",
+      "a": "对迭代器解引用，例如 `auto& entry = *iter`。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++迭代器的基本使用",
+    "C++文件系统路径与目录项"
+  ],
+  "source_pages": [
+    433,
+    433
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 recursive_directory_iterator default end iterator iter.depth directory_entry example",
+  "concept_id": "878_递归目录迭代器的使用",
+  "_chunk_pages": [
+    433,
+    436
+  ]
+}

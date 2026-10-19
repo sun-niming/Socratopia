@@ -1,0 +1,38 @@
+{
+  "title": "僵尸进程检查",
+  "definition": "用 `ps -ef | grep defunct` 可以检查是否存在僵尸进程；实验预期是没有大量 `webserver defunct`，否则说明子进程回收可能有问题。",
+  "key_points": [
+    "`defunct` 表示僵尸进程。",
+    "可以用 `ps -ef | grep defunct` 进行检查。",
+    "大量僵尸进程通常意味着子进程回收不及时。"
+  ],
+  "examples": [
+    "`ps -ef | grep defunct`"
+  ],
+  "misconceptions": [
+    "`defunct` 是正常运行中的进程名。",
+    "只要进程退出了，就一定不会留下僵尸进程。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何检查服务器是否产生大量僵尸进程？",
+      "a": "执行 `ps -ef | grep defunct` 查看是否出现大量 `webserver defunct`。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "进程基础",
+    "Linux 命令基础"
+  ],
+  "source_pages": [
+    113,
+    116
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "192_僵尸进程检查",
+  "_chunk_pages": [
+    113,
+    116
+  ]
+}

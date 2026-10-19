@@ -1,0 +1,47 @@
+{
+  "title": "className 与 classList",
+  "definition": "className 用于获取或设置元素的 class 属性字符串，赋值时会覆盖全部现有类；classList 则提供更方便的类操作方式，返回一个 DOMTokenList，可按单个类进行增删改查。",
+  "key_points": [
+    "className 读写的是完整的 class 字符串，设置时会覆盖所有现有类",
+    "classList 返回 DOMTokenList，适合按单个类操作",
+    "classList 常用方法包括 add、remove、toggle、contains、replace"
+  ],
+  "examples": [
+    "element.className = 'new-class another-class';",
+    "box.classList.add('highlight');",
+    "box.classList.remove('hidden');",
+    "if (box.classList.contains('highlight')) { console.log('Box is highlighted!'); }",
+    "element.classList.toggle('active');",
+    "element.classList.replace('old', 'new');"
+  ],
+  "misconceptions": [
+    "className 只会追加类名；实际上赋值会覆盖原有类",
+    "classList 只能添加类，不能删除或判断；实际上它还支持 remove、toggle、contains、replace"
+  ],
+  "qa_pairs": [
+    {
+      "q": "classList 的 toggle('active') 会做什么？",
+      "a": "如果类名存在就移除，不存在就添加。"
+    },
+    {
+      "q": "className 和 classList 的主要区别是什么？",
+      "a": "className 操作完整的类字符串；classList 支持更细粒度的单个类操作。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "DOM元素",
+    "CSS类名"
+  ],
+  "source_pages": [
+    353,
+    356
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "478_classname_与_classlist",
+  "_chunk_pages": [
+    353,
+    356
+  ]
+}

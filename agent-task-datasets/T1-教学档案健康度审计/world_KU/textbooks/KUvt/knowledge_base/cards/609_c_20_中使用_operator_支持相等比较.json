@@ -1,0 +1,52 @@
+{
+  "title": "C++20 中使用 operator== 支持相等比较",
+  "definition": "在 C++20 中，类可以将 `operator==` 实现为成员函数，并使用一个 `operator==` 重载支持对象与可隐式转换类型之间的相等比较。编译器可以重写诸如 `10 == myCell` 的表达式，使其能够调用 `myCell.operator==(10)`。同时，实现 `operator==` 后，C++20 会自动提供对 `operator!=` 的支持。",
+  "key_points": [
+    "推荐的成员函数形式是 `[[nodiscard]] bool operator==(const SpreadsheetCell& rhs) const;`。",
+    "`[[nodiscard]]` 用于提示调用者不要忽略比较结果。",
+    "由于 `SpreadsheetCell` 支持从 `double` 到自身的隐式转换，`myCell == 10` 可以调用 `operator==(const SpreadsheetCell&)`。",
+    "表达式 `10 == myCell` 可以被编译器重写为等价于 `myCell == 10` 的形式，从而调用右侧对象的成员函数。",
+    "实现 `operator==` 后，C++20 会自动支持 `operator!=`，无需再单独实现。"
+  ],
+  "examples": [
+    "成员函数声明：`[[nodiscard]] bool operator==(const SpreadsheetCell& rhs) const;`",
+    "对象与数值比较：`if (myCell == 10) { cout << \"myCell == 10\\n\"; }`",
+    "交换操作数后仍可比较：`if (10 == myCell) { cout << \"10 == myCell\\n\"; }`",
+    "不等比较可直接使用：`if (myCell != aThirdCell) { cout << \"myCell != aThirdCell\\n\"; }`"
+  ],
+  "misconceptions": [
+    "C++20 并不是让所有任意方向的成员运算符调用都天然成立；`10 == myCell` 能成立依赖于编译器对表达式的重写。",
+    "实现 `operator==` 并不意味着必须手动再实现 `operator!=`。",
+    "`[[nodiscard]]` 不会改变比较结果，只是用于避免调用者忽略结果。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "C++20 中实现 `operator==` 后，是否还必须手动实现 `operator!=`？",
+      "a": "不必。C++20 会根据 `operator==` 自动提供对 `operator!=` 的支持。"
+    },
+    {
+      "q": "为什么 `10 == myCell` 可以调用 `SpreadsheetCell` 的成员 `operator==`？",
+      "a": "C++20 编译器可以将其重写为等价于 `myCell == 10` 的表达式，从而调用右侧 `SpreadsheetCell` 对象的成员函数。"
+    },
+    {
+      "q": "`[[nodiscard]]` 放在比较运算符声明上的作用是什么？",
+      "a": "提示调用者不应忽略比较运算符返回的结果。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "成员函数运算符重载",
+    "隐式类型转换"
+  ],
+  "source_pages": [
+    294,
+    295
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "609_c_20_中使用_operator_支持相等比较",
+  "_chunk_pages": [
+    293,
+    296
+  ]
+}

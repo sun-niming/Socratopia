@@ -1,0 +1,43 @@
+{
+  "title": "chown 修改文件所有者",
+  "definition": "在 Linux 中，可使用“chown”改变文件所有者。教材给出的命令格式为“chown user[.group] [-R] 文件列表”，表示按该格式指定用户，且可带可选项“-R”。",
+  "key_points": [
+    "改变文件所有者使用“chown”",
+    "教材给出的语法是：chown user[.group] [-R] 文件列表",
+    "该命令操作对象是文件列表"
+  ],
+  "examples": [
+    "chown user 文件列表",
+    "chown user.group 文件列表",
+    "chown user.group -R 文件列表"
+  ],
+  "misconceptions": [
+    "把 chown 误认为修改权限的命令；教材中它用于改变文件所有者",
+    "把 chown 与 chmod 混淆；两者作用不同"
+  ],
+  "qa_pairs": [
+    {
+      "q": "教材中，用什么命令改变文件所有者？",
+      "a": "使用“chown”。"
+    },
+    {
+      "q": "教材给出的 chown 命令格式是什么？",
+      "a": "“chown user[.group] [-R] 文件列表”。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "Linux 基本命令"
+  ],
+  "source_pages": [
+    33,
+    36
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "064_chown_修改文件所有者",
+  "_chunk_pages": [
+    33,
+    36
+  ]
+}

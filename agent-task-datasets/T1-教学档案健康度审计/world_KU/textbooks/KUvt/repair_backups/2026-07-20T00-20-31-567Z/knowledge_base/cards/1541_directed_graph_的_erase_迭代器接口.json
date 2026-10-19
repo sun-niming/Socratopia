@@ -1,0 +1,47 @@
+{
+  "title": "directed_graph 的 erase() 迭代器接口",
+  "definition": "为了遵循标准库容器的接口风格，directed_graph 提供基于迭代器的 erase()。单元素版本删除迭代器 pos 指向的节点；范围版本删除 `[first, last)` 范围内的节点。两种版本都返回指向最后一个被删除元素之后位置的迭代器。",
+  "key_points": [
+    "单元素版本为 `iterator erase(const_iterator pos);`。",
+    "范围版本为 `iterator erase(const_iterator first, const_iterator last);`，删除半开区间 `[first,last)`。",
+    "删除节点前需要移除所有指向该节点的关联链接，原文中对应操作为 `remove_all_links_to(...)`。",
+    "如果 pos 已经是 `m_nodes` 的尾后迭代器，单元素 erase() 不删除任何节点，并返回图的尾后迭代器。",
+    "返回迭代器可用于继续遍历或作为标准库接口的结果。"
+  ],
+  "examples": [
+    "删除查找到的节点：`graph.erase(std::find(std::begin(graph), std::end(graph), 44));`",
+    "范围删除可以表示为：$$\\text{erase}(first,last)\\ \\text{删除}\\ [first,last)\\ \\text{中的所有节点，并返回删除区间之后的位置}$$"
+  ],
+  "misconceptions": [
+    "erase() 的范围是半开区间 `[first,last)`，不会删除 last 指向的元素。",
+    "erase() 返回的不是 bool，而是删除位置之后的迭代器。",
+    "删除节点不仅要从节点容器中移除节点，还要处理指向该节点的图链接。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`erase(pos)` 返回什么？",
+      "a": "返回指向被删除节点之后位置的 iterator；如果 pos 是尾后迭代器，则返回尾后迭代器。"
+    },
+    {
+      "q": "`erase(first, last)` 会删除 last 指向的节点吗？",
+      "a": "不会，它删除半开区间 `[first,last)` 中的节点。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "迭代器失效规则",
+    "半开区间",
+    "有向图节点与链接"
+  ],
+  "source_pages": [
+    742,
+    743
+  ],
+  "needs_verification": true,
+  "verify_query": "\"directed_graph\" \"remove_all_links_to\" \"erase(const_iterator first\"",
+  "concept_id": "1541_directed_graph_的_erase_迭代器接口",
+  "_chunk_pages": [
+    741,
+    744
+  ]
+}

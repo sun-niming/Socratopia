@@ -1,0 +1,42 @@
+{
+  "title": ":hover 和 :active",
+  "definition": "`:hover` 用于元素被鼠标悬停时的状态；`:active` 用于元素获得焦点、处于活动状态时的状态。它们都属于伪类选择器。",
+  "key_points": [
+    "`:hover` 反映鼠标悬停状态。",
+    "`:active` 反映活动状态。",
+    "这类选择器用于描述交互状态，而不是修改元素本身的结构。"
+  ],
+  "examples": [
+    "a:hover { color: red; }",
+    "button:active { background: #ccc; }"
+  ],
+  "misconceptions": [
+    "`:hover` 和 `:active` 不是给元素永久添加样式类。",
+    "它们描述的是状态变化，不是 DOM 结构变化。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`:hover` 表示什么状态？",
+      "a": "鼠标悬停在元素上时的状态。"
+    },
+    {
+      "q": "`:active` 表示什么状态？",
+      "a": "元素获得焦点、处于活动状态时的状态。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "伪类选择器"
+  ],
+  "source_pages": [
+    97,
+    100
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "153_hover_和_active",
+  "_chunk_pages": [
+    97,
+    100
+  ]
+}

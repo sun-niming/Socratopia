@@ -1,0 +1,44 @@
+{
+  "title": "KMP匹配伪代码流程",
+  "definition": "KMP-MATCH(T,P)的基本流程是：先对模式串P执行BUILD-NEXT(P)，再用i扫描文本串、j扫描模式串。相等时i和j同时前进；失配时j回退到next[j]；当j达到模式长度m时，说明找到一次匹配。",
+  "key_points": [
+    "先构造next，再进行匹配",
+    "匹配时用i扫文本、j扫模式",
+    "j达到m表示找到一次匹配",
+    "不同教材可能采用next为-1版本或0长度版本，但必须前后一致、自洽"
+  ],
+  "examples": [
+    "伪代码可写成：KMP-MATCH(T,P)：BUILD-NEXT(P)；i、j初始化后循环比较；相等则同时前进，失配则让j=next[j]；若j==m则报告匹配"
+  ],
+  "misconceptions": [
+    "next数组只有唯一一种固定定义，教材和教材之间不能不同",
+    "失配时一定要把i回到起点",
+    "j达到m还不能说明已经匹配成功"
+  ],
+  "qa_pairs": [
+    {
+      "q": "KMP-MATCH的第一步是什么？",
+      "a": "先对模式串执行BUILD-NEXT(P)，构造next数组。"
+    },
+    {
+      "q": "j达到m表示什么？",
+      "a": "表示已经找到一次完整匹配。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "next数组的含义",
+    "KMP失配时的指针移动"
+  ],
+  "source_pages": [
+    85,
+    88
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "096_kmp匹配伪代码流程",
+  "_chunk_pages": [
+    85,
+    88
+  ]
+}

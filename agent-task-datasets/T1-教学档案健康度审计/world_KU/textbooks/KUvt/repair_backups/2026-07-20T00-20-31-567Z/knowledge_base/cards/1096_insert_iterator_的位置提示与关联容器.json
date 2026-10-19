@@ -1,0 +1,44 @@
+{
+  "title": "insert_iterator 的位置提示与关联容器",
+  "definition": "insert_iterator 在构造时除了接受目标容器引用，还接受一个初始迭代器位置。它把该位置作为第一次调用 insert(position, element) 时的位置提示；每次插入后，insert_iterator 会依据 insert() 的返回值更新位置提示，使其指向刚插入元素的下一个位置。由于关联容器通常不允许修改正在迭代的元素，因此可以使用 insert_iterator 把关联容器作为修改算法的目标，通过插入而不是修改已有元素。",
+  "key_points": [
+    "insert_iterator 的构造形式需要目标容器和初始位置提示。",
+    "在关联容器中，可以把 begin(setOne) 或 end(setOne) 作为位置提示。",
+    "关联容器的 insert() 可以接受迭代器位置作为提示，但容器可以忽略该提示。",
+    "std::inserter(container, position) 可以创建 insert_iterator；也可以使用 insert_iterator{container, position} 进行 CTAD。"
+  ],
+  "examples": [
+    "vector<int> vectorOne{1, 2, 3, 4, 5};\nset<int> setOne;\nmyCopy(cbegin(vectorOne), cend(vectorOne), inserter(setOne, begin(setOne)));",
+    "myCopy(cbegin(vectorOne), cend(vectorOne), insert_iterator{setOne, begin(setOne)});"
+  ],
+  "misconceptions": [
+    "insert_iterator 的位置参数是插入位置提示，不一定强制容器在该位置插入。",
+    "对于 set 等关联容器，使用 insert_iterator 的目的不是修改已有元素，而是向容器插入元素。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么 insert_iterator 可以用于把关联容器作为修改算法的目标？",
+      "a": "关联容器通常不允许修改正在迭代的元素，但 insert_iterator 不修改已有元素，而是调用容器的 insert() 插入新元素。"
+    },
+    {
+      "q": "insert_iterator 每次插入后如何处理位置提示？",
+      "a": "它根据 insert() 的返回值更新提示，使该位置位于刚插入元素的下一位置。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "插入迭代器",
+    "关联容器的 insert 操作"
+  ],
+  "source_pages": [
+    534,
+    534
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1096_insert_iterator_的位置提示与关联容器",
+  "_chunk_pages": [
+    533,
+    536
+  ]
+}

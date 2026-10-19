@@ -1,0 +1,51 @@
+{
+  "title": "Employee::display()输出的员工信息",
+  "definition": "Employee::display()是一个const成员函数，用于向控制台输出员工信息。它输出员工姓名、当前或曾经在职的状态、员工编号和薪资，并使用std::format格式化部分文本。姓名以“姓, 名”的形式显示，状态根据isHired()的结果显示为“Current Employee”或“Former Employee”。",
+  "key_points": [
+    "display()不会修改Employee对象，因此声明为const。",
+    "姓名输出格式为姓氏在前、名字在后：Employee: 姓氏, 名字。",
+    "在职状态通过条件表达式判断：isHired()为true时输出Current Employee，否则输出Former Employee。",
+    "随后输出Employee Number和Salary等信息。",
+    "源码中的输出文本和标点存在OCR错乱，具体格式应以原书代码为准。"
+  ],
+  "examples": [
+    "若姓氏为Doe、名字为John、员工编号为71、薪资为501000且员工在职，输出内容包含：Employee: Doe, John、Current Employee、Employee Number: 71和Salary: $501000。",
+    "状态判断可抽象为：$$\\text{status}=\\begin{cases}\\text{Current Employee},&\\text{isHired()为true}\\\\\\text{Former Employee},&\\text{isHired()为false}\\end{cases}$$"
+  ],
+  "misconceptions": [
+    "display()不仅输出姓名，还输出在职状态、员工编号和薪资。",
+    "display()的const表示该函数不修改对象状态，不表示输出内容是常量。",
+    "Former Employee表示当前不是在职状态，不一定表示对象已经被销毁。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "display()为什么声明为const？",
+      "a": "因为display()只读取员工信息并输出，不修改Employee对象的成员状态。"
+    },
+    {
+      "q": "员工未在职时，display()显示哪种状态文本？",
+      "a": "显示Former Employee。"
+    },
+    {
+      "q": "display()输出的姓名顺序是什么？",
+      "a": "姓氏在前，名字在后，格式类似Employee: Doe, John。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "Employee类的接口与数据成员",
+    "C++ const成员函数",
+    "C++条件表达式"
+  ],
+  "source_pages": [
+    93,
+    96
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20高级编程第5版 Employee::display std::format Current Employee Former Employee 输出格式",
+  "concept_id": "132_employee_display_输出的员工信息",
+  "_chunk_pages": [
+    93,
+    96
+  ]
+}

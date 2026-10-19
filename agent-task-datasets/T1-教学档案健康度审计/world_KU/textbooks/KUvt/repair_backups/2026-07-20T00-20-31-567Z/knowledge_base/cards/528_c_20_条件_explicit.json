@@ -1,0 +1,45 @@
+{
+  "title": "C++20 条件 explicit",
+  "definition": "从 C++20 开始，`explicit` 可以接收一个布尔常量表达式，形成条件 `explicit`。当表达式为 `true` 时，构造函数按 `explicit` 处理；原文指出，直接写 `explicit(true)` 等价于无条件的 `explicit`。这一特性尤其适合根据类型萃取结果决定泛型代码中的构造转换是否应为显式转换。",
+  "key_points": [
+    "基本语法为 `explicit(布尔表达式) 构造函数声明;`。",
+    "`explicit(true)` 与普通 `explicit` 的效果相同。",
+    "条件表达式可以来自类型萃取，用于查询类型属性并据此控制转换行为。",
+    "条件 `explicit` 主要用于高级泛型模板代码。"
+  ],
+  "examples": [
+    "声明示例：`explicit(true) MyClass(int);`。更一般的形式是：`explicit(condition) MyClass(int);`，其中 `condition` 必须提供可用于判断的布尔结果。"
+  ],
+  "misconceptions": [
+    "误以为 `explicit(true)` 是运行时开关；它用于构造函数声明，并根据布尔常量表达式决定显式性。",
+    "误以为 `explicit(true)` 与普通 `explicit` 有不同效果；当参数恒为 `true` 时，两者等价。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "条件 `explicit` 从哪个 C++ 标准开始提供？",
+      "a": "从 C++20 开始提供。"
+    },
+    {
+      "q": "类型萃取结果为什么适合作为 `explicit(...)` 的参数？",
+      "a": "类型萃取可查询类型属性，其布尔结果可决定某个构造函数是否应禁止隐式转换。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "explicit 构造函数",
+    "布尔常量表达式",
+    "泛型模板",
+    "类型萃取"
+  ],
+  "source_pages": [
+    249,
+    249
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "528_c_20_条件_explicit",
+  "_chunk_pages": [
+    249,
+    252
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "title": "inline成员函数的定义方式",
+  "definition": "`inline` 可用于声明或定义成员函数。本例展示了两种写法：在类外定义成员函数时显式写出 `inline`；在类定义体内直接定义成员函数时，可将函数定义写在类中。`inline` 不等同于强制编译器进行内联机器码优化。",
+  "key_points": [
+    "类外定义示例：`inline double SpreadsheetCell::getValue() const { ... }`。",
+    "类外定义的 `getValue()` 和 `getString()` 都通过 `m_numAccesses++` 记录访问次数。",
+    "`getValue()` 返回成员变量 `m_value`。",
+    "`getString()` 调用 `doubleToString(m_value)`，将数值转换为字符串后返回。",
+    "也可以在类定义体内直接定义成员函数，例如：`inline double getValue() const { ... }`。"
+  ],
+  "examples": [
+    "类外定义：`inline double SpreadsheetCell::getValue() const { m_numAccesses++; return m_value; }`。",
+    "类外定义：`inline std::string SpreadsheetCell::getString() const { m_numAccesses++; return doubleToString(m_value); }`。",
+    "类内定义：`inline double getValue() const { m_numAccesses++; return m_value; }`。"
+  ],
+  "misconceptions": [
+    "写出 `inline` 不保证函数一定会被编译器展开为内联代码；是否优化由编译器和编译选项等因素决定。",
+    "`inline` 不会改变函数的返回值或访问控制；本例中函数仍然是 `const` 成员函数，并且会修改可修改的访问计数成员。",
+    "`inline` 不是只能用于短函数；本页重点是成员函数的定义形式和链接/编译处理，而不是函数长度。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`SpreadsheetCell::getValue()` 的主要功能是什么？",
+      "a": "先执行 `m_numAccesses++`，再返回成员变量 `m_value`。"
+    },
+    {
+      "q": "`SpreadsheetCell::getString()` 如何得到返回值？",
+      "a": "先执行 `m_numAccesses++`，然后返回 `doubleToString(m_value)` 的结果。"
+    },
+    {
+      "q": "在类定义体内直接定义成员函数时，为什么可以看到 `inline` 写法？",
+      "a": "这是将成员函数直接定义在类中的写法；本例显式使用了 `inline`。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++类成员函数",
+    "const成员函数",
+    "函数定义与声明"
+  ],
+  "source_pages": [
+    282,
+    283
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "369_inline成员函数的定义方式",
+  "_chunk_pages": [
+    281,
+    284
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "title": "使用箭头运算符访问指针所指对象的成员",
+  "definition": "当 cell 是指向对象的指针时，cell->set(5) 用于调用该指针所指对象的成员函数。它是解引用和成员选择的组合简写，等价于 (*cell).set(5)。原文使用 SpreadsheetCell* cell 指向动态创建的 SpreadsheetCell 对象，并展示了这两种等价写法。",
+  "key_points": [
+    "表达式 p->member 等价于 (*p).member。",
+    "使用 -> 前，p 通常必须是指向对象或类成员的适当指针。",
+    "原文中 (*cell).set(5); 与 cell->set(5); 完成相同的成员函数调用。",
+    "括号不能省略：*cell.set(5) 的解析方式不同，不能作为 (*cell).set(5) 的等价写法。"
+  ],
+  "examples": [
+    "SpreadsheetCell* cell { new SpreadsheetCell };",
+    "(*cell).set(5);",
+    "cell->set(5);",
+    "其中 cell->set(5) 是“解引用并进行成员选择”的简写形式。"
+  ],
+  "misconceptions": [
+    "-> 不是普通的减号和大于号组合，而是专门的指针成员访问运算符。",
+    "cell->set(5) 不等于 cell.set(5)；cell 是指针时应使用 ->，对象本身才使用 .。",
+    "(*cell).set(5) 与 cell->set(5) 等价，但 *cell.set(5) 不具有相同含义。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "cell->set(5) 等价于什么表达式？",
+      "a": "等价于 (*cell).set(5)。"
+    },
+    {
+      "q": "对象本身和指向对象的指针分别使用什么成员访问运算符？",
+      "a": "对象本身使用点运算符 .，指针使用箭头运算符 ->。"
+    },
+    {
+      "q": "原文中 cell 的类型是什么？",
+      "a": "cell 的类型是 SpreadsheetCell*，即指向 SpreadsheetCell 的指针。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "指针",
+    "对象成员访问"
+  ],
+  "source_pages": [
+    481,
+    484
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "626_使用箭头运算符访问指针所指对象的成员",
+  "_chunk_pages": [
+    481,
+    484
+  ]
+}

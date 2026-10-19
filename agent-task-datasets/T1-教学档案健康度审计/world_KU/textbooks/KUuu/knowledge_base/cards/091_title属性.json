@@ -1,0 +1,40 @@
+{
+  "title": "title属性",
+  "definition": "title 属性可用于很多标签，其作用是在鼠标停留在该元素上时显示说明文字。对于超链接来说，它常用来补充链接内容的提示信息。",
+  "key_points": [
+    "鼠标停留在元素上时，会显示 `title` 提供的说明文字。",
+    "`title` 不只用于超链接，很多标签都可以使用。"
+  ],
+  "examples": [
+    "<a href=\"00.html\" title=\"格力太阳能喜获国家免检产品称号\">格力太阳能</a>"
+  ],
+  "misconceptions": [
+    "`title` 会把文字直接显示在页面正文中。",
+    "`title` 只适用于 `<a>` 标签。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "title 属性的作用是什么？",
+      "a": "在鼠标停留在元素上时显示说明文字。"
+    },
+    {
+      "q": "超链接中使用 title 属性能带来什么效果？",
+      "a": "鼠标悬停时显示补充说明。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "HTML标签属性基础"
+  ],
+  "source_pages": [
+    53,
+    56
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "091_title属性",
+  "_chunk_pages": [
+    53,
+    56
+  ]
+}

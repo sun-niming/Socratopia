@@ -1,0 +1,36 @@
+{
+  "title": "grid-template-columns 和 grid-template-rows",
+  "definition": "这两个 CSS 属性用于在网格容器中定义网格的列和行，也就是预先指定网格轨道的尺寸与数量。grid-template-columns 控制列轨道，grid-template-rows 控制行轨道。",
+  "key_points": [
+    "grid-template-columns 用来定义网格的列轨道。",
+    "grid-template-rows 用来定义网格的行轨道。",
+    "轨道尺寸可以写成不同长度单位、比例单位、auto、repeat()、minmax() 等形式。"
+  ],
+  "examples": [
+    "grid-template-columns: 100px 1fr 2fr;",
+    "grid-template-rows: 50px 50px;"
+  ],
+  "misconceptions": [
+    "不是给单个网格项设置宽高，而是先定义整个网格容器的列和行。",
+    "列和行的数量由属性值中写出的轨道数决定。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "grid-template-columns 和 grid-template-rows 分别控制什么？",
+      "a": "前者控制列轨道，后者控制行轨道。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [],
+  "source_pages": [
+    173,
+    176
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "262_grid_template_columns_和_grid_template_ro",
+  "_chunk_pages": [
+    173,
+    176
+  ]
+}

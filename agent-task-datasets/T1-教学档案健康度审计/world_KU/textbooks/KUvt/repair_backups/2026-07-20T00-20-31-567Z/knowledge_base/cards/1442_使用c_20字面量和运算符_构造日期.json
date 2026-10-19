@@ -1,0 +1,53 @@
+{
+  "title": "使用C++20字面量和运算符/构造日期",
+  "definition": "C++20的chrono日期库提供chrono_literals命名空间中的y和d用户定义字面量，分别用于创建year和day。日期可以通过运算符/按不同顺序组合，包括Y/M/D、M/D/Y和D/M/Y等形式；也可以先构造month_day，再与year组合。",
+  "key_points": [
+    "2020y创建一个year对象，22d创建一个day对象。",
+    "June等月份命名常量可直接用于构造日期。",
+    "完整日期可以直接构造为year_month_day，也可以使用运算符/组合。",
+    "原文给出的组合顺序包括Y/M/D、M/D/Y和D/M/Y。",
+    "last可用于表示某月或某年的某月的最后一天。"
+  ],
+  "examples": [
+    "创建2020年6月22日：\n```text\nyear_month_day fulldate1{2020y, June, 22d};\nauto fulldate2{2020y / June / 22d};\nauto fulldate3{22d / June / 2020y};\n```",
+    "先创建month_day，再组合年份：\n```text\nauto june22{June / 22d};\nauto june22_2020{2020y / june22};\n```",
+    "创建某年6月的最后一天：\n```text\nauto lastDayOfAJune{June / last};\nauto lastDayOfJune2020{2020y / lastDayOfAJune};\n```"
+  ],
+  "misconceptions": [
+    "2020y和22d是普通整数；它们分别是用于创建year和day的chrono用户定义字面量。",
+    "运算符/只能按年/月/日顺序使用；原文还给出了月/日/年和日/月/年等顺序。",
+    "last表示数字日期；它用于表示某月或某年某月的最后一天。",
+    "所有由运算符/组合出的对象都必然是year_month_day；根据参与组合的对象，结果也可能是month_day或month_day_last等日期相关类型。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何用C++20 chrono字面量表示2020年6月22日？",
+      "a": "可以写成2020y / June / 22d，也可以显式构造year_month_day{2020y, June, 22d}。"
+    },
+    {
+      "q": "如何构造2020年6月22日的month_day和完整日期？",
+      "a": "先写auto june22{June / 22d};，再写auto june22_2020{2020y / june22};。"
+    },
+    {
+      "q": "如何表示2020年6月的最后一天？",
+      "a": "先写auto lastDayOfAJune{June / last};，再写auto lastDayOfJune2020{2020y / lastDayOfAJune};。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "std::chrono日期类型",
+    "C++用户定义字面量",
+    "运算符重载基础"
+  ],
+  "source_pages": [
+    692,
+    692
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 std::chrono 日期运算符/ 的合法组合顺序 year_month_day year_month_weekday Monday[3] / June / 2020 类型 last",
+  "concept_id": "1442_使用c_20字面量和运算符_构造日期",
+  "_chunk_pages": [
+    689,
+    692
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "title": "定时操作函数的用途",
+  "definition": "定时操作函数主要有两种用途：一是周期性地执行脚本，例如页面上的时钟每隔一秒更新一次；二是将某个操作延时一段时间后执行，例如让用户等待一段时间才能进行操作。使用 window.setTimeout 时，后面的脚本可以继续运行而不受影响。",
+  "key_points": [
+    "用途一：周期性执行脚本",
+    "用途二：延时执行某个操作",
+    "setTimeout 执行时，后面的脚本可以继续运行，不受影响"
+  ],
+  "examples": [
+    "页面时钟每隔一秒更新一次时间显示",
+    "window.setTimeout(function(){ /* 延时执行 */ }, 1000)"
+  ],
+  "misconceptions": [
+    "定时操作不只有一种，教材明确区分了周期性执行和延时执行",
+    "setTimeout 不是阻塞式等待，不会让后续脚本停住"
+  ],
+  "qa_pairs": [
+    {
+      "q": "定时操作函数通常有哪两种使用目的？",
+      "a": "周期性执行脚本，以及延时执行某个操作。"
+    },
+    {
+      "q": "使用 window.setTimeout 后，后面的脚本会怎样？",
+      "a": "可以继续运行，不受影响。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "window 对象"
+  ],
+  "source_pages": [
+    333,
+    336
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "478_定时操作函数的用途",
+  "_chunk_pages": [
+    333,
+    336
+  ]
+}

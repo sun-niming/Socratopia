@@ -1,0 +1,63 @@
+{
+  "title": "静态站点测试用例与预期状态码",
+  "definition": "原文给出了一组可直接用于报告的 `curl` 测试用例，用来验证静态服务器是否按预期工作。测试时不仅要看是否能访问页面，还要检查状态码、`Content-Type`，必要时再结合服务器日志判断问题。",
+  "key_points": [
+    "首页 `/` 预期返回 `200 OK`，并且 `Content-Type` 为 `text/html`。",
+    "练习页 `/practice.html` 预期返回 `200 OK`。",
+    "CSS 文件 `/css/style.css` 预期返回 `text/css`。",
+    "不存在的文件 `/no-such-file.html` 预期返回 `404 Not Found`。",
+    "对 `/` 发起 `POST` 请求，预期返回 `405 Method Not Allowed`。",
+    "目录穿越请求如 `/../../etc/passwd` 或 `/%2e%2e/%2e%2e/etc/passwd` 应被拒绝，预期返回 `403` 或 `400`。",
+    "如果结果不符合预期，先看状态码，再看 `Content-Type`，再看服务器日志。"
+  ],
+  "examples": [
+    "`curl -i http://127.0.0.1:8080/`",
+    "`curl -i http://127.0.0.1:8080/practice.html`",
+    "`curl -i http://127.0.0.1:8080/css/style.css`",
+    "`curl -i http://127.0.0.1:8080/no-such-file.html`",
+    "`curl -i -X POST http://127.0.0.1:8080/`",
+    "`curl -i http://127.0.0.1:8080/../../etc/passwd`",
+    "`curl -i http://127.0.0.1:8080/%2e%2e/%2e%2e/etc/passwd`"
+  ],
+  "misconceptions": [
+    "把 `404` 当作服务器整体出错；实际上它通常表示请求的资源不存在。",
+    "把 `405` 当作路径不存在；实际上它表示请求方法不被允许。",
+    "目录穿越请求只要做了 URL 编码就能绕过检查；原文明确把编码形式也列为测试用例。",
+    "测试时只看页面能否打开，不看状态码和响应头。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "首页 `/` 的预期状态码和 `Content-Type` 是什么？",
+      "a": "预期返回 `200 OK`，`Content-Type` 为 `text/html`。"
+    },
+    {
+      "q": "不存在文件时应返回什么状态码？",
+      "a": "`404 Not Found`。"
+    },
+    {
+      "q": "对首页发起 `POST` 请求应返回什么状态码？",
+      "a": "`405 Method Not Allowed`。"
+    },
+    {
+      "q": "目录穿越请求应返回什么结果？",
+      "a": "应返回 `403` 或 `400`。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "HTTP 状态码",
+    "HTTP 方法",
+    "curl 基础"
+  ],
+  "source_pages": [
+    123,
+    124
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "201_静态站点测试用例与预期状态码",
+  "_chunk_pages": [
+    121,
+    124
+  ]
+}

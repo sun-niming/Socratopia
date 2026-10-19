@@ -1,0 +1,161 @@
+{
+  "textbookId": "KUao",
+  "updatedAt": "2026-06-25T10:56:41.951Z",
+  "cards": [
+    {
+      "id": "fc_1782384969386_000_0a211f981f23",
+      "question": "在 Grid 布局中，如果你要定义网格的“列轨道”，应该使用哪个属性？",
+      "choices": [
+        "grid-template-columns",
+        "grid-area",
+        "grid-template-areas",
+        "grid-template-rows"
+      ],
+      "correctIndex": 0,
+      "explanation": "`grid-template-columns` 负责定义列轨道，`grid-template-rows` 才负责定义行轨道。把 columns 和 rows 的方向对应起来，最不容易混淆。",
+      "source": {
+        "textbook": "Web前端开发合集",
+        "chapter": "幻灯片 96: 4.2 网格布局-网格容器属性",
+        "textbookSlug": "KUao"
+      },
+      "created": "2026-06-25T10:56:09.386Z",
+      "conversationId": "wd-sizhIpU5OtkRAiAB4y",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-06-25T10:56:17.347Z",
+          "chosen": 0,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-06-25T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1782384969387_001_d70982d268ee",
+      "question": "关于 `1fr` 的含义，下面哪一项最准确？",
+      "choices": [
+        "内容本身的最小宽度",
+        "剩余可用空间中的一份",
+        "网格间距的一半",
+        "固定的 1px"
+      ],
+      "correctIndex": 1,
+      "explanation": "`fr` 表示网格容器中可用空间的份额，不是固定长度。`1fr` 不是 1px，而是“剩余可用空间中的一份”。",
+      "source": {
+        "textbook": "Web前端开发合集",
+        "chapter": "幻灯片 96: 4.2 网格布局-网格容器属性",
+        "textbookSlug": "KUao"
+      },
+      "created": "2026-06-25T10:56:09.387Z",
+      "conversationId": "wd-sizhIpU5OtkRAiAB4y",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-06-25T10:56:22.498Z",
+          "chosen": 1,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-06-25T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1782384969387_002_2a84bacd8c34",
+      "question": "对于 `minmax(200px, 1fr)`，下面哪种理解是正确的？",
+      "choices": [
+        "它会始终固定为 200px",
+        "最小值是 1fr，最大值是 200px",
+        "最小值是 200px，最大值是 1fr",
+        "它会在 200px 以下继续缩小"
+      ],
+      "correctIndex": 2,
+      "explanation": "`minmax()` 是给轨道设置最小值和最大值范围。这里最小值是 `200px`，最大值是 `1fr`，所以它至少保持 200px，再根据剩余空间继续伸展。",
+      "source": {
+        "textbook": "Web前端开发合集",
+        "chapter": "幻灯片 96: 4.2 网格布局-网格容器属性",
+        "textbookSlug": "KUao"
+      },
+      "created": "2026-06-25T10:56:09.387Z",
+      "conversationId": "wd-sizhIpU5OtkRAiAB4y",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-06-25T10:56:25.918Z",
+          "chosen": 2,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-06-25T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1782384969387_003_051f19008407",
+      "question": "在 `grid-template-areas` 中，点号 `.` 的作用是什么？",
+      "choices": [
+        "表示这一格自动继承上一行区域名",
+        "表示这一列是主轴方向",
+        "空单元格，表示留白",
+        "表示该区域必须被拉伸"
+      ],
+      "correctIndex": 2,
+      "explanation": "`grid-template-areas` 用字符串描述区域布局，而 `.` 表示空单元格，也就是该位置暂时留白，不分配给任何区域名。",
+      "source": {
+        "textbook": "Web前端开发合集",
+        "chapter": "幻灯片 96: 4.2 网格布局-网格容器属性",
+        "textbookSlug": "KUao"
+      },
+      "created": "2026-06-25T10:56:09.387Z",
+      "conversationId": "wd-sizhIpU5OtkRAiAB4y",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-06-25T10:56:31.961Z",
+          "chosen": 2,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-06-25T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1782384969387_004_9570dc0b4e28",
+      "question": "如果写了 `justify-items: center;`，它主要是在调整什么？",
+      "choices": [
+        "每个网格项在自己单元格里的水平位置",
+        "网格轨道之间的间距",
+        "整块网格内容在容器中的水平位置",
+        "每个网格项在自己单元格里的竖直位置"
+      ],
+      "correctIndex": 0,
+      "explanation": "`justify-items` 管的是每个网格项在自己单元格里的水平位置，不是整块网格内容的位置。`center` 表示把单个项目放到单元格水平中间。",
+      "source": {
+        "textbook": "Web前端开发合集",
+        "chapter": "幻灯片 96: 4.2 网格布局-网格容器属性",
+        "textbookSlug": "KUao"
+      },
+      "created": "2026-06-25T10:56:09.387Z",
+      "conversationId": "wd-sizhIpU5OtkRAiAB4y",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-06-25T10:56:41.950Z",
+          "chosen": 0,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-06-25T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    }
+  ]
+}

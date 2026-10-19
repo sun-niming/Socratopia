@@ -1,0 +1,44 @@
+{
+  "title": "strncmp按前n字符比较",
+  "definition": "`strncmp` 用来比较两个字符串的前 `n` 个字符，原型是 `int strncmp(const char *s1, const char *s2, size_t n);`。当前 `n` 个字符相等时返回 `0`。在本项目中，它用于 `realpath` 后检查路径是否以 root 开头。",
+  "key_points": [
+    "头文件是 `<string.h>`。",
+    "比较的是前 `n` 个字符，不是整串。",
+    "前 `n` 个字符相等时返回 `0`。",
+    "只做前缀比较还不够，必须继续检查边界，避免 `/www2` 通过 `/www` 的检查。",
+    "修正方法是：前缀相等后继续检查 `path[n] == '\\0' || path[n] == '/'`。"
+  ],
+  "examples": [
+    "`if (strncmp(path, root, n) == 0 && (path[n] == '\\0' || path[n] == '/')) { ... }`"
+  ],
+  "misconceptions": [
+    "只要前缀匹配，就一定说明路径在根目录下。",
+    "`strncmp` 比较前缀时不需要再检查后续字符。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么只做前缀比较会有安全问题？",
+      "a": "因为像 `/www2` 这样的路径也可能通过 `/www` 的前缀检查，所以还要检查后面的字符边界。"
+    },
+    {
+      "q": "前缀相等后还要补充什么判断？",
+      "a": "要检查 `path[n] == '\\0' || path[n] == '/'`。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "strcmp比较字符串是否相等",
+    "路径处理基础"
+  ],
+  "source_pages": [
+    99,
+    100
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "152_strncmp按前n字符比较",
+  "_chunk_pages": [
+    97,
+    100
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "title": "shared_ptr 的指针强制转换",
+  "definition": "存储某种类型指针的 shared_ptr 可以在符合类型转换规则的情况下转换为另一种类型的 shared_ptr。标准库提供 const_pointer_cast()、dynamic_pointer_cast()、static_pointer_cast() 和 reinterpret_pointer_cast()，它们分别对应原始指针转换中的 const_cast、dynamic_cast、static_cast 和 reinterpret_cast。",
+  "key_points": [
+    "shared_ptr 的转换不是任意类型之间都有效，必须满足相应的类型转换限制。",
+    "const_pointer_cast() 用于对应 const_cast 的 shared_ptr 转换。",
+    "dynamic_pointer_cast()、static_pointer_cast() 和 reinterpret_pointer_cast() 分别对应 dynamic_cast、static_cast 和 reinterpret_cast 的转换思想。",
+    "原文说明这些转换方法的详细行为将在第 10 章讨论。"
+  ],
+  "examples": [
+    "const_pointer_cast<T>(someSharedPtr)",
+    "dynamic_pointer_cast<Derived>(baseSharedPtr)",
+    "static_pointer_cast<T>(someSharedPtr)",
+    "reinterpret_pointer_cast<T>(someSharedPtr)"
+  ],
+  "misconceptions": [
+    "所有 shared_ptr 类型都可以无条件互相转换；实际上转换受到类型关系和转换规则限制。",
+    "shared_ptr 的强制转换与直接转换原始指针完全没有区别；它们还要保持 shared_ptr 的共享所有权管理。",
+    "dynamic_pointer_cast()、static_pointer_cast() 等函数名可以省略；使用时必须调用相应的标准库函数。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "shared_ptr 有哪些标准强制转换函数？",
+      "a": "const_pointer_cast()、dynamic_pointer_cast()、static_pointer_cast() 和 reinterpret_pointer_cast()。"
+    },
+    {
+      "q": "shared_ptr 的强制转换是否对所有类型组合都有效？",
+      "a": "无效。能够转换的类型受到相应指针转换规则的限制。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "shared_ptr 的共享所有权与基本用法",
+    "C++ 原始指针类型转换"
+  ],
+  "source_pages": [
+    223,
+    223
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "473_shared_ptr_的指针强制转换",
+  "_chunk_pages": [
+    221,
+    224
+  ]
+}

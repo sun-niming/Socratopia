@@ -1,0 +1,53 @@
+{
+  "title": "双向流与 fstream",
+  "definition": "双向流是能够同时执行输入和输出的流。iostream 是 istream 和 ostream 的子类，因此双向流通过多重继承同时获得输入和输出能力，并支持 >>、<< 以及输入流和输出流的方法。fstream 提供双向文件流，适合在读取文件找到目标位置后立即修改文件内容；stringstream 则提供双向字符串流。",
+  "key_points": [
+    "双向流同时支持输入操作和输出操作。",
+    "fstream 用于双向访问文件，stringstream 用于双向访问字符串。",
+    "在双向流中从读取切换到写入或从写入切换到读取时，必须正确定位流的位置。",
+    "双向流通常使用独立的读位置和写位置，因此切换操作时需要明确处理对应位置。"
+  ],
+  "examples": [
+    "fstream ioData{\"data.txt\"};",
+    "int idRead;",
+    "ioData >> idRead;",
+    "ioData.seekp(ioData.tellg());",
+    "ioData << \" \" << newNumber;",
+    "stringstream text; // 可对字符串进行输入和输出"
+  ],
+  "misconceptions": [
+    "fstream 不是只能读取或只能写入的文件流，而是同时支持两种方向。",
+    "双向流不会自动保证读写位置都位于期望位置；读写切换时仍需正确定位。",
+    "使用 fstream 修改文件并不意味着可以任意改变记录长度而不影响后续数据。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "什么是双向流？",
+      "a": "双向流是同时支持输入和输出的流，支持 >>、<< 以及输入流和输出流的方法。"
+    },
+    {
+      "q": "C++ 中哪个类提供双向文件流？",
+      "a": "fstream 类提供双向文件流。"
+    },
+    {
+      "q": "stringstream 的用途是什么？",
+      "a": "stringstream 用于对字符串进行双向访问，即既可以从字符串流读取，也可以向字符串流写入。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++输入流与输出流的基本用法",
+    "文件流的打开与读写"
+  ],
+  "source_pages": [
+    429,
+    430
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "869_双向流与_fstream",
+  "_chunk_pages": [
+    429,
+    432
+  ]
+}

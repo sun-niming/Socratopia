@@ -1,0 +1,47 @@
+{
+  "title": "std::chrono::duration的模板参数与基本功能",
+  "definition": "`std::chrono::duration<Rep, Period>`表示一段由若干个固定长度滴答组成的时间间隔。模板参数`Rep`是保存滴答数的表示类型，通常为算术类型；模板参数`Period`是一个表示单个滴答周期的有理数常量。若省略`Period`，默认使用`std::ratio<1>`，即每个滴答为1秒。",
+  "key_points": [
+    "`Rep`决定滴答数的存储类型，例如`long`或`double`。",
+    "`Period`表示每个滴答对应的时间长度；例如`std::ratio<60>`表示每个滴答为60秒。",
+    "`duration`提供默认构造、由滴答数构造，以及由另一个`duration`构造等方式。",
+    "`duration`支持算术运算、复合赋值运算和比较运算。",
+    "常用成员函数包括`count()`、`zero()`、`min()`和`max()`；其中`count()`返回滴答数。"
+  ],
+  "examples": [
+    "`std::chrono::duration<long> d1;`等价于`std::chrono::duration<long, std::ratio<1>> d1;`。",
+    "`std::chrono::duration<long, std::ratio<60>> d2;`表示每个滴答为1分钟。",
+    "`std::chrono::duration<double, std::ratio<1, 60>> d3;`表示每个滴答为$\\frac{1}{60}$秒。",
+    "`d.count()`返回该duration保存的滴答数。"
+  ],
+  "misconceptions": [
+    "`Rep`表示时间单位；实际上`Rep`只表示滴答数的存储类型，时间单位由`Period`决定。",
+    "`duration<long>`表示毫秒或某个编译器默认单位；实际上它的默认滴答周期是1秒。",
+    "`count()`返回的数值一定以秒为单位；实际上它返回的是以该duration自身滴答为单位的数值。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`duration<long, ratio<60>>`表示什么？",
+      "a": "它表示每个滴答为60秒，也就是1分钟；模板中的`long`用于保存滴答数。"
+    },
+    {
+      "q": "`duration`的`count()`返回什么？",
+      "a": "返回该duration中的滴答数，返回类型是模板参数`Rep`指定的类型。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++类模板和模板参数"
+  ],
+  "source_pages": [
+    685,
+    685
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1429_std_chrono_duration的模板参数与基本功能",
+  "_chunk_pages": [
+    685,
+    688
+  ]
+}

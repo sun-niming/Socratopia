@@ -1,0 +1,47 @@
+{
+  "title": "在派生类中调用基类被重写的方法",
+  "definition": "派生类重写基类方法后，基类版本仍然存在。若派生类方法需要先执行基类版本，再添加自己的功能，应使用作用域解析运算符明确指定基类，例如 `Base::method()`；否则直接调用同名方法会解析到派生类自身，造成递归调用。",
+  "key_points": [
+    "同名重写方法中直接写 `getTemperature()`，会解析到当前类的 `getTemperature()`。",
+    "在当前类方法中直接调用同名方法可能导致无限递归，直到栈空间耗尽。",
+    "调用基类版本应写成 `WeatherPrediction::getTemperature()` 或相应的 `Base::method()`。",
+    "教材提到 Microsoft Visual C++ 支持非标准的 `__super` 关键字，但这不是标准 C++ 写法。"
+  ],
+  "examples": [
+    "错误写法：`return getTemperature() + \"\\u00B0F\";`，会再次调用 `MyWeatherPrediction::getTemperature()`，形成无限递归。",
+    "正确写法：`return WeatherPrediction::getTemperature() + \"\\u00B0F\";`。",
+    "标准 C++ 的一般形式为：`return Base::method() + extra;`。"
+  ],
+  "misconceptions": [
+    "误以为派生类中的同名方法调用会自动转到基类版本。",
+    "误以为重写意味着基类方法已经被删除。",
+    "误以为 Microsoft Visual C++ 的 `__super` 是标准 C++ 关键字。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "派生类重写方法后，如何调用基类的同名方法？",
+      "a": "使用作用域解析运算符，例如 `Base::method()`。"
+    },
+    {
+      "q": "为什么在 `MyWeatherPrediction::getTemperature()` 中直接写 `getTemperature()` 会出错？",
+      "a": "名称解析会找到当前类的同名方法，导致该方法不断调用自身并形成无限递归。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++方法重写",
+    "作用域解析运算符",
+    "递归调用"
+  ],
+  "source_pages": [
+    318,
+    319
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "653_在派生类中调用基类被重写的方法",
+  "_chunk_pages": [
+    317,
+    320
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "title": "box-shadow多重阴影",
+  "definition": "box-shadow属性的取值可以有多个，用于给元素添加多重阴影效果。多个阴影取值之间使用逗号隔开。",
+  "key_points": [
+    "box-shadow可以设置多个阴影取值。",
+    "多个取值可以形成多重阴影效果。",
+    "多个box-shadow取值之间用逗号隔开。"
+  ],
+  "examples": [
+    "box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.5), 0 0 5px orange inset;"
+  ],
+  "misconceptions": [
+    "误以为一个元素只能有一个box-shadow阴影。",
+    "误以为多重阴影需要写多个box-shadow属性；教材说明可以在一个box-shadow中用逗号分隔多个取值。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "box-shadow如何添加多重阴影效果？",
+      "a": "可以给box-shadow设置多个取值，多个取值之间用逗号隔开。"
+    },
+    {
+      "q": "多个box-shadow取值之间用什么符号隔开？",
+      "a": "用逗号隔开。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "box-shadow盒子阴影"
+  ],
+  "source_pages": [
+    189,
+    192
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "285_box_shadow多重阴影",
+  "_chunk_pages": [
+    189,
+    192
+  ]
+}

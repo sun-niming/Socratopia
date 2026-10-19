@@ -1,0 +1,50 @@
+{
+  "title": "C++预定义标准流",
+  "definition": "C++在std名称空间中预定义了用于标准输入输出的流实例。cin是从输入控制台读取数据的输入流；cout是向输出控制台写入数据的缓冲输出流；cerr是向错误控制台写入数据的非缓冲输出流；clog是向错误控制台写入数据的缓冲输出流。错误控制台通常等同于输出控制台。",
+  "key_points": [
+    "cin：输入流，从输入控制台读取数据。",
+    "cout：缓冲输出流，向输出控制台写入数据。",
+    "cerr：非缓冲输出流，向错误控制台写入数据。",
+    "clog：缓冲输出流，向错误控制台写入数据。",
+    "这些标准流定义在std名称空间中，并由<iostream>头文件声明。"
+  ],
+  "examples": [
+    "标准输出：std::cout << \"Hello\" << std::endl;",
+    "标准输入：int value; std::cin >> value;",
+    "错误输出：std::cerr << \"error\" << std::endl;"
+  ],
+  "misconceptions": [
+    "cerr和clog都用于错误输出，但cerr是非缓冲的，clog是缓冲的。",
+    "cout不是输入流，cin也不是输出流。",
+    "标准流通常关联控制台，但不能据此断定所有程序运行环境都一定存在可见控制台。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "cin、cout、cerr和clog分别用于什么？",
+      "a": "cin从输入控制台读取数据；cout向输出控制台写入缓冲数据；cerr向错误控制台写入非缓冲数据；clog向错误控制台写入缓冲数据。"
+    },
+    {
+      "q": "cerr和clog的主要区别是什么？",
+      "a": "cerr是非缓冲输出流，clog是缓冲输出流。"
+    },
+    {
+      "q": "预定义标准流定义在哪个名称空间？",
+      "a": "它们定义在std名称空间中。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "缓冲流、非缓冲流与flush"
+  ],
+  "source_pages": [
+    411,
+    411
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 标准流 cin cout cerr clog 缓冲 非缓冲 错误控制台 std 名称空间",
+  "concept_id": "833_c_预定义标准流",
+  "_chunk_pages": [
+    409,
+    412
+  ]
+}

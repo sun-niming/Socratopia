@@ -1,0 +1,140 @@
+{
+  "conversationId": "SKQ16AypwNRAqke9m9LKF",
+  "generatedAt": 1782214021557,
+  "pagesRange": null,
+  "sections": [
+    {
+      "type": "tldr",
+      "content": "本节主要梳理了 Web 前端入门的底层框架：Internet 是基础网络，WWW 跑在其上，HTTP 负责传输，HTML/CSS/JavaScript 分别负责结构、样式和交互；同时还区分了 URI/URL、浏览器/浏览器内核，并说明了课程规则与 AI 使用边界。"
+    },
+    {
+      "type": "narrative",
+      "content": "一开始先把 URI 和 URL 的边界钉牢：URI 更偏“标识”，URL 更偏“定位”。接着顺着浏览器和内核这条线往下走，分清了“给人用的外壳”和“负责解析、渲染网页的核心”。最后把 Web 的基础技术串成一张网：Internet、WWW、HTTP、HTML、CSS、JavaScript，再到 jQuery 和 Vue.js，以及这门课的考核和 AI 规范。"
+    },
+    {
+      "type": "concepts",
+      "items": [
+        {
+          "name": "URI 与 URL",
+          "body": "- **URI**：统一资源标识符，更大的概念，侧重“这个资源是谁”。\n- **URL**：统一资源定位符，是 URI 的一种，侧重“这个资源在哪里、怎么访问”。\n- 记法：**只说明身份**更像 URI；**还能告诉你位置和访问方式**更像 URL。"
+        },
+        {
+          "name": "浏览器 与 浏览器内核",
+          "body": "- **浏览器**：用户直接看到、直接操作的软件外壳。\n- **浏览器内核**：真正负责解析网页内容、进行布局和渲染的核心部分。\n- 可以把浏览器看成“入口/界面”，把内核看成“发动机”。"
+        },
+        {
+          "name": "前端三件套",
+          "body": "- **HTML**：负责网页结构与内容组织。\n- **CSS**：负责样式、外观与排版。\n- **JavaScript**：负责交互与动态行为。\n- 课堂里举的例子是：按钮能被点击后弹出提示，这类功能主要靠 JavaScript 实现。"
+        },
+        {
+          "name": "jQuery 与 Vue.js",
+          "body": "- **jQuery**：JavaScript 的库/辅助工具，目标是让常见操作写得更方便、更省代码。\n- **Vue.js**：前端常见的框架，常被放在 JavaScript 库和框架这一类里理解。\n- 这两者都不是替代 HTML/CSS 的，而是围绕 JavaScript 帮助前端开发更高效。"
+        },
+        {
+          "name": "Internet 与 WWW",
+          "body": "- **Internet**：网络底座。\n- **WWW**：建立在 Internet 基础上的网页信息浏览系统，也就是 Web。\n- **WWW** 通过 **HTTP(s)** 传输超文本信息。\n- 另外，Internet 还承载了 Email、FTP、即时通信等服务。"
+        },
+        {
+          "name": "超文本",
+          "body": "- 超文本的核心特点是**含链接、可跳转**。\n- 它不是只能按顺序读完的文本，而是可以通过链接在不同页面间跳转。"
+        },
+        {
+          "name": "课程学习主线",
+          "body": "- 这门课强调 Web 前端开发的基础框架与常用技术。\n- 课程中也强调了 AI 使用规范、作业要求和上机能力的重要性。"
+        }
+      ]
+    },
+    {
+      "type": "notes",
+      "title": "课程要求与学习方式",
+      "content": "- **AI 可以辅助学习，但不能直接提交大模型生成的内容。**\n- 作业或报告里要**注明使用了什么大模型、怎么使用的**。\n- 老师可能会**随机抽问细节**，确认是否真正理解。\n- 总评成绩：**平时成绩 30% + 上机考试 70%**。\n- 这门课的导向很明确：**可以借助工具提速，但真正能力要靠自己练出来。**"
+    },
+    {
+      "type": "key-terms",
+      "items": [
+        {
+          "term": "URI",
+          "definition": "统一资源标识符，侧重标识资源本身。"
+        },
+        {
+          "term": "URL",
+          "definition": "统一资源定位符，URI 的一种，侧重资源位置与访问方式。"
+        },
+        {
+          "term": "Internet",
+          "definition": "网络底座，WWW 等服务建立其上。"
+        },
+        {
+          "term": "WWW",
+          "definition": "万维网，基于 Internet 的网页信息浏览系统。"
+        },
+        {
+          "term": "HTTP",
+          "definition": "超文本传输协议，负责传输网页内容。"
+        },
+        {
+          "term": "浏览器",
+          "definition": "用户直接使用的网页访问软件。"
+        },
+        {
+          "term": "浏览器内核",
+          "definition": "负责解析与渲染网页内容的核心组件。"
+        },
+        {
+          "term": "HTML",
+          "definition": "负责网页结构与内容组织。"
+        },
+        {
+          "term": "CSS",
+          "definition": "负责网页样式与外观。"
+        },
+        {
+          "term": "JavaScript",
+          "definition": "负责网页交互与动态行为。"
+        },
+        {
+          "term": "jQuery",
+          "definition": "JavaScript 库，用来简化常见操作。"
+        },
+        {
+          "term": "Vue.js",
+          "definition": "前端框架，常用于构建界面与应用。"
+        },
+        {
+          "term": "超文本",
+          "definition": "包含链接、可跳转的文本组织方式。"
+        }
+      ]
+    },
+    {
+      "type": "review-questions",
+      "items": [
+        {
+          "question": "URI 和 URL 的关系是什么？",
+          "hint": "先想“谁更大，谁更具体”。",
+          "answer": "**URI** 是更大的概念，**URL** 是 URI 的一种，偏向“定位资源”。如果只是在说明“它是谁”，更像 URI；如果还告诉你“它在哪里、怎么访问”，更像 URL。"
+        },
+        {
+          "question": "浏览器和浏览器内核有什么区别？",
+          "hint": "一个是外壳，一个是核心。",
+          "answer": "**浏览器**是用户直接看到和操作的软件界面；**浏览器内核**负责解析网页并进行渲染。两者不是一回事。"
+        },
+        {
+          "question": "HTML、CSS、JavaScript 分别负责什么？",
+          "hint": "结构、样式、交互。",
+          "answer": "**HTML** 负责结构和内容组织，**CSS** 负责样式，**JavaScript** 负责交互和动态行为。"
+        },
+        {
+          "question": "为什么教材一边允许 AI 辅助，一边又把上机考试放到 70%？",
+          "hint": "想想“工具”和“能力”的区别。",
+          "answer": "因为 AI 只能帮你提速，不能替你真正掌握开发能力。把 **70%** 放在上机考试上，是为了强调实际动手能力，而不是只会看懂或借助工具生成。"
+        },
+        {
+          "question": "WWW、HTTP、Internet 三者是什么关系？",
+          "hint": "先找底座，再找传输方式。",
+          "answer": "**Internet** 是底层网络，**WWW** 是建立在 Internet 上的网页系统，**HTTP** 则负责在 WWW 中传输超文本信息。"
+        }
+      ]
+    }
+  ]
+}

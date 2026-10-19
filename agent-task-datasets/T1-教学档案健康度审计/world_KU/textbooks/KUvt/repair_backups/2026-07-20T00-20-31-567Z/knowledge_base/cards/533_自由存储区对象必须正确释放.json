@@ -1,0 +1,48 @@
+{
+  "title": "自由存储区对象必须正确释放",
+  "definition": "使用 `new` 或 `new[]` 在自由存储区动态分配的对象，不会仅因创建它的局部指针离开作用域而自动销毁。在没有智能指针管理时，程序必须对相应指针使用 `delete` 或 `delete[]`，以调用对象的析构函数并释放动态分配的内存。",
+  "key_points": [
+    "`new` 分配的单个对象应使用 `delete` 释放。",
+    "`new[]` 分配的对象数组应使用 `delete[]` 释放。",
+    "仅让原始指针离开作用域不会自动销毁它指向的动态对象。",
+    "执行 `delete` 后可将指针设为 `nullptr`，避免保留悬空指针值。",
+    "更推荐使用智能指针管理动态对象。"
+  ],
+  "examples": [
+    "`SpreadsheetCell* cellPtr1{new SpreadsheetCell{5}}; delete cellPtr1; cellPtr1 = nullptr;` 会调用对象的析构函数并释放内存。",
+    "如果执行 `SpreadsheetCell* cellPtr2{new SpreadsheetCell{6}};` 后既不调用 `delete cellPtr2;`，也不交给智能指针管理，则该对象不会因 `cellPtr2` 离开作用域而自动释放。"
+  ],
+  "misconceptions": [
+    "误以为原始指针离开作用域时，它指向的动态对象也会自动销毁。",
+    "误以为 `new[]` 分配的数组可以用普通 `delete` 释放；必须与 `delete[]` 配对。",
+    "误以为将指针设为 `nullptr` 就等于释放对象；必须先正确执行 `delete` 或由智能指针完成释放。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "使用 `new[]` 分配的动态数组应使用什么释放？",
+      "a": "应使用 `delete[]`。"
+    },
+    {
+      "q": "为什么原始指针离开作用域可能造成内存泄漏？",
+      "a": "因为指针变量本身会消失，但它所指向的自由存储区对象不会自动销毁；若未调用 `delete` 或使用智能指针，动态内存不会被释放。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "指针",
+    "new 与 delete",
+    "析构函数",
+    "动态内存"
+  ],
+  "source_pages": [
+    251,
+    251
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "533_自由存储区对象必须正确释放",
+  "_chunk_pages": [
+    249,
+    252
+  ]
+}

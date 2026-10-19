@@ -1,0 +1,42 @@
+{
+  "title": "SSL在协议栈中的位置与作用",
+  "definition": "SSL技术上位于应用层，但从应用程序开发者的角度看，它像一个提供安全TCP服务的运输层协议。应用程序通过包含SSL类或库，使用类似TCP套接字API的接口建立安全通信。",
+  "key_points": [
+    "SSL对TCP提供的字节流服务进行安全增强。",
+    "SSL不是替代IP的网络层协议，而是建立在TCP之上的安全协议机制。",
+    "SSL可为HTTP等应用提供安全通信，也可为其他基于TCP的应用提供安全通信。"
+  ],
+  "examples": [
+    "协议关系可以概括为：应用程序 → SSL → TCP → IP。",
+    "一个应用程序调用类似TCP套接字的SSL接口发送数据，SSL负责保护数据后再交给TCP传输。"
+  ],
+  "misconceptions": [
+    "SSL在应用层，所以它只能保护HTTP；实际上，SSL可以保护运行在TCP之上的其他应用程序。",
+    "SSL直接提供可靠的网络传输；原文强调SSL增强的是TCP服务，底层仍然使用TCP。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "从技术层次和开发者视角看，SSL分别位于哪里？",
+      "a": "技术上SSL位于应用层；从开发者视角看，它像一个提供安全TCP服务的运输层协议。"
+    },
+    {
+      "q": "SSL为什么能够用于HTTP以外的应用？",
+      "a": "因为SSL增强的是TCP服务，而不是只针对HTTP设计；任何运行在TCP之上的应用都可以使用它。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "SSL解决的网络通信安全问题"
+  ],
+  "source_pages": [
+    429,
+    432
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "996_ssl在协议栈中的位置与作用",
+  "_chunk_pages": [
+    429,
+    432
+  ]
+}

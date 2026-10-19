@@ -1,0 +1,37 @@
+{
+  "title": "class选择器",
+  "definition": "class选择器通过元素的class属性值来选择元素，写法是在类名之前加点号（.）。当多个地方需要使用同种样式时，可以使用类选择器。",
+  "key_points": [
+    "写法形式为 .类名",
+    "适合复用同一种样式到多个地方"
+  ],
+  "examples": [
+    "<p class=\"intro\">测试1</p>",
+    "<p class=\"intro\">测试2</p>",
+    ".intro{ font-weight:bold; }"
+  ],
+  "misconceptions": [
+    "class选择器不要求class值唯一，同一个类可以被多个元素使用。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "什么时候适合使用class选择器？",
+      "a": "当多个地方需要使用同种样式时。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "CSS选择器"
+  ],
+  "source_pages": [
+    89,
+    92
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "140_class选择器",
+  "_chunk_pages": [
+    89,
+    92
+  ]
+}

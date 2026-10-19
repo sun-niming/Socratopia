@@ -1,0 +1,43 @@
+{
+  "title": "Object.create创建对象",
+  "definition": "Object.create() 是 JavaScript 中用于创建新对象的方法。它会使用一个现有对象作为新对象的原型，因此新对象可以继承原型对象上的属性和方法。新对象中对继承来的属性或方法进行添加、修改、删除，不会影响原型对象本身。",
+  "key_points": [
+    "Object.create() 的作用是“基于某个原型对象创建新对象”。",
+    "第一个参数 proto 是原型对象，可以为 null。",
+    "第二个参数 propertiesObject 是可选的，用来给新对象指定属性和值。",
+    "这种方式有利于代码重用和维护。"
+  ],
+  "examples": [
+    "const person = { firstName: 'John', lastName: 'Doe' }; const newPerson = Object.create(person); console.log(newPerson.firstName); // 'John' console.log(newPerson.lastName); // 'Doe'"
+  ],
+  "misconceptions": [
+    "Object.create() 不是把原型对象“复制”成一个新对象，而是让新对象以它作为原型。",
+    "修改新对象的属性不会改变原型对象。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "Object.create() 创建的新对象和原型对象是什么关系？",
+      "a": "新对象以原型对象作为原型，并继承其属性和方法。"
+    },
+    {
+      "q": "Object.create() 的第一个参数可以是什么？",
+      "a": "可以是作为新对象原型的对象，也可以是 null。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "对象",
+    "原型"
+  ],
+  "source_pages": [
+    281,
+    282
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "375_object_create创建对象",
+  "_chunk_pages": [
+    281,
+    284
+  ]
+}

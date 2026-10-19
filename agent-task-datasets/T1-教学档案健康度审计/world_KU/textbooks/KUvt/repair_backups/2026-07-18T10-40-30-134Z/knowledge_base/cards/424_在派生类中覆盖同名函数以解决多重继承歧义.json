@@ -1,0 +1,44 @@
+{
+  "title": "在派生类中覆盖同名函数以解决多重继承歧义",
+  "definition": "派生类可以定义自己的同名虚函数并使用 override 覆盖基类虚函数，从而为通过派生类对象进行的调用提供统一入口。在该函数体内，可以使用基类限定名显式调用某个基类版本。",
+  "key_points": [
+    "DogBird 可以定义 void eat() override。",
+    "DogBird::eat() 的实现可以显式调用 Dog::eat()，例如 Dog::eat();。",
+    "这种做法把原本来自多个基类的同名函数调用集中到派生类自己的实现中。"
+  ],
+  "examples": [
+    "class DogBird : public Dog, public Bird { public: void eat() override { Dog::eat(); } };",
+    "DogBird myAnimal;",
+    "myAnimal.eat(); // 调用 DogBird::eat()，其内部显式调用 Dog::eat()"
+  ],
+  "misconceptions": [
+    "仅仅声明 DogBird 继承 Dog 和 Bird，不会自动选择其中一个 eat()。",
+    "override 表示派生类函数覆盖虚函数；它不是用于任意同名非虚函数的通用消歧关键字。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "DogBird 如何为 eat() 提供明确的派生类实现？",
+      "a": "在 DogBird 中声明 void eat() override，并在函数体内用 Dog::eat() 等限定调用指定的基类版本。"
+    },
+    {
+      "q": "DogBird 定义 eat() 后，myAnimal.eat() 调用哪个函数？",
+      "a": "调用 DogBird::eat()；如果 DogBird::eat() 的函数体写有 Dog::eat()，则随后调用 Dog::eat()。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "虚函数与 override",
+    "多重继承中的成员函数调用歧义"
+  ],
+  "source_pages": [
+    329,
+    330
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "424_在派生类中覆盖同名函数以解决多重继承歧义",
+  "_chunk_pages": [
+    329,
+    332
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "title": "用参数个数读取C风格变长参数",
+  "definition": "由于C风格变长参数列表本身不记录参数数量，函数可以把第一个命名参数设计为参数个数，然后循环调用`va_arg`读取指定数量的参数。教材中的`printInts`函数接收任意数量的`int`参数，并由第一个参数说明后续整数的数量。",
+  "key_points": [
+    "调用者必须保证第一个参数给出的数量与实际提供的变长参数数量一致。",
+    "读取参数时，`va_arg(ap, int)`表示从参数列表中取出下一个参数，并按`int`解释。",
+    "读取完成后仍然必须调用`va_end(ap)`。"
+  ],
+  "examples": [
+    "```cpp\nvoid printInts(std::size_t num, ...)\n{\n    va_list ap;\n    va_start(ap, num);\n    for (std::size_t i{0}; i < num; ++i) {\n        int temp{va_arg(ap, int)};\n        std::cout << temp << ' ';\n    }\n    va_end(ap);\n}\n```",
+    "调用方式：`printInts(5, 5, 4, 3, 2, 1);`。第一个参数`5`表示后面提供了5个整数。"
+  ],
+  "misconceptions": [
+    "第一个参数只是调用约定中的计数值，编译器不会自动检查它是否等于实际参数数量。",
+    "`va_arg`中的类型参数不会验证实际传入参数的类型是否正确。",
+    "如果计数值过大，函数可能读取不存在的参数，产生未定义或不可预测的结果。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`printInts(5, 5, 4, 3, 2, 1)`中的第一个`5`表示什么？",
+      "a": "它表示后面有5个整数参数。"
+    },
+    {
+      "q": "如果调用者写错参数数量，会发生什么？",
+      "a": "函数无法自行检测，可能读取过少或过多的参数，从而导致错误或不可预测的行为。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C风格变长参数列表的基本用法"
+  ],
+  "source_pages": [
+    367,
+    368
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "745_用参数个数读取c风格变长参数",
+  "_chunk_pages": [
+    365,
+    368
+  ]
+}

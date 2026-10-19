@@ -1,0 +1,42 @@
+{
+  "title": "从同一个裸指针分别构造多个shared_ptr的危险",
+  "definition": "不能把同一个裸指针分别传给多个独立构造的`shared_ptr`。这样会创建多个彼此独立的控制块，每个`shared_ptr`都会认为自己独占管理该裸指针，并可能在销毁时重复释放同一个对象。应当先构造一个`shared_ptr`，再复制该`shared_ptr`。",
+  "key_points": [
+    "错误方式是：先得到一个裸指针，再用该裸指针分别构造两个`shared_ptr`。",
+    "正确方式是先使用`make_shared`或只用一次裸指针构造`shared_ptr`，然后复制已有的`shared_ptr`。",
+    "多个独立控制块会破坏共享所有权语义，并可能导致重复析构或未定义行为。"
+  ],
+  "examples": [
+    "危险代码：`Simple* mySimple { new Simple{} }; shared_ptr<Simple> smartPtr1 { mySimple }; shared_ptr<Simple> smartPtr2 { mySimple };`。原文随后展示了对象构造和析构信息，说明这种写法不是建立两个安全的共享所有者。",
+    "推荐代码：`auto smartPtr1 { std::make_shared<Simple>() }; auto smartPtr2 { smartPtr1 };`。"
+  ],
+  "misconceptions": [
+    "两个`shared_ptr`保存相同的裸地址，并不代表它们共享同一个控制块。",
+    "只有复制同一个`shared_ptr`，或通过共享指针的规范方式创建，才能安全地共享所有权。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么不能从同一个裸指针分别构造两个`shared_ptr`？",
+      "a": "因为它们通常会建立独立的控制块，并可能分别释放同一个对象，造成重复释放。"
+    },
+    {
+      "q": "如何安全地获得两个共同拥有对象的`shared_ptr`？",
+      "a": "先创建一个`shared_ptr`，例如`auto p1 { std::make_shared<Simple>() };`，再执行`auto p2 { p1 };`。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "shared_ptr的引用计数与共享所有权"
+  ],
+  "source_pages": [
+    221,
+    224
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "297_从同一个裸指针分别构造多个shared_ptr的危险",
+  "_chunk_pages": [
+    221,
+    224
+  ]
+}

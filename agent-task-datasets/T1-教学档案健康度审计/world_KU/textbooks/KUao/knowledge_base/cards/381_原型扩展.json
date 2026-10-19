@@ -1,0 +1,39 @@
+{
+  "title": "原型扩展",
+  "definition": "可以通过给构造函数的 prototype 添加属性或方法来扩展原型：构造函数.prototype.扩展属性 = 属性值（可以是函数）。这样，由该构造函数产生的所有对象都会共享这个属性或方法。",
+  "key_points": [
+    "向 constructor.prototype 添加的成员会出现在该构造函数创建的所有对象上",
+    "扩展属性可以是普通值，也可以是函数",
+    "这种做法适合为一类对象统一增加共享方法"
+  ],
+  "examples": [
+    "Person.prototype.say = function() { ... }",
+    "构造函数.prototype.扩展属性 = 属性值"
+  ],
+  "misconceptions": [
+    "给 prototype 加成员不是给某一个实例单独加属性，而是给这一类对象共享",
+    "原型扩展后，已经创建的对象也会通过原型链访问到新增成员"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么给构造函数的 prototype 添加方法后，所有实例都能用？",
+      "a": "因为这些实例的 [[Prototype]] 指向该 prototype，对原型上的新增属性或方法都能通过原型链访问到。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "prototype 与 [[Prototype]]",
+    "原型链"
+  ],
+  "source_pages": [
+    285,
+    288
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "381_原型扩展",
+  "_chunk_pages": [
+    285,
+    288
+  ]
+}

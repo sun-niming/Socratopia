@@ -1,0 +1,46 @@
+{
+  "title": "history前进、后退与刷新",
+  "definition": "History对象提供了在浏览记录中移动的方法：history.go(-1)或history.back()返回前一页；history.go(1)或history.forward()前进一页；history.go(0)或教材所写的history.refresh用于刷新当前页。",
+  "key_points": [
+    "history.go(-1) 和 history.back() 都表示后退一页。",
+    "history.go(1) 和 history.forward() 都表示前进一页。",
+    "history.go(0) 用于刷新显示当前页；教材还写到 history.refresh。"
+  ],
+  "examples": [
+    "history.go(-1);",
+    "history.back();",
+    "history.go(1);",
+    "history.forward();",
+    "history.go(0);",
+    "history.refresh"
+  ],
+  "misconceptions": [
+    "以为history.go(0)是前进一页。",
+    "以为后退和前进只能用go()，不能用back()/forward()。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何让浏览器返回前一页？",
+      "a": "可以使用history.go(-1)或history.back()。"
+    },
+    {
+      "q": "如何让浏览器前进一页？",
+      "a": "可以使用history.go(1)或history.forward()。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "history对象"
+  ],
+  "source_pages": [
+    337,
+    340
+  ],
+  "needs_verification": true,
+  "verify_query": "JavaScript History对象 refresh 方法 是否存在 history.refresh 还是教材笔误 应为 location.reload 请联网核实",
+  "concept_id": "484_history前进_后退与刷新",
+  "_chunk_pages": [
+    337,
+    340
+  ]
+}

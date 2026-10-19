@@ -1,0 +1,39 @@
+{
+  "title": "最小HTTP服务器流程",
+  "definition": "把 Echo Server 改造成最小 HTTP Server 时，服务器先接收请求并打印原始请求，再解析请求行；只接受 GET，请求方法不是 GET 时返回 405；响应可以先固定返回 HTML，不读取文件。调试时可用 curl -i 查看状态行、Header、空行和 Body，并用 POST 故意触发错误响应。",
+  "key_points": [
+    "先打印原始请求，观察浏览器和 curl 的请求差异",
+    "解析请求行，非 GET 返回 405",
+    "响应内容可先固定为 HTML，不必读文件"
+  ],
+  "examples": [
+    "用 curl -i 访问服务器，检查是否包含状态行、Header、空行和 Body",
+    "用 POST 请求测试错误响应是否返回 405"
+  ],
+  "misconceptions": [
+    "以为最小 HTTP Server 一开始就必须支持所有方法",
+    "以为只要返回了 HTML，状态行和响应头就不重要"
+  ],
+  "qa_pairs": [
+    {
+      "q": "把 Echo Server 改成最小 HTTP Server 的第一步通常做什么？",
+      "a": "先接收并打印原始请求，再解析请求行；只处理 GET，其他方法返回 405。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "HTTP请求",
+    "HTTP响应"
+  ],
+  "source_pages": [
+    53,
+    56
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "080_最小http服务器流程",
+  "_chunk_pages": [
+    53,
+    56
+  ]
+}

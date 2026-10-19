@@ -1,0 +1,44 @@
+{
+  "title": "box-sizing 属性",
+  "definition": "box-sizing 是一个 CSS 属性，用来决定元素的 width 和 height 应该如何计算。教材中给出了 content-box、border-box、inherit 三种取值。",
+  "key_points": [
+    "box-sizing 影响元素总宽度和总高度的计算方式。",
+    "content-box 是默认值。",
+    "border-box 是为了解决 content-box 计算不直观而引入的替代盒子模型。",
+    "inherit 表示 box-sizing 的值应从父元素继承。"
+  ],
+  "examples": [
+    "box-sizing: content-box;",
+    "box-sizing: border-box;",
+    "box-sizing: inherit;"
+  ],
+  "misconceptions": [
+    "认为 box-sizing 只影响视觉样式，不影响宽高计算。",
+    "认为 box-sizing 的取值只有 content-box 和 border-box。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "box-sizing 的作用是什么？",
+      "a": "决定元素的 width 和 height 如何计算。"
+    },
+    {
+      "q": "教材中列出了 box-sizing 的哪几种取值？",
+      "a": "content-box、border-box、inherit。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "盒子模型的组成"
+  ],
+  "source_pages": [
+    122,
+    124
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "176_box_sizing_属性",
+  "_chunk_pages": [
+    121,
+    124
+  ]
+}

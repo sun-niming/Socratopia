@@ -1,0 +1,51 @@
+{
+  "title": "关联容器的比较器模板参数",
+  "definition": "某些标准库容器（例如 map）允许使用比较器作为模板类型参数。比较器用于对元素进行排序，并且具有默认值，通常不需要显式指定。map 的模板参数包括键类型 Key、映射值类型 T、默认比较器 std::less<Key> 以及默认分配器。",
+  "key_points": [
+    "比较器主要用于关联容器中元素的排序或键的有序组织。",
+    "比较器是可作为模板参数传入的类型。",
+    "map 默认使用 std::less<Key> 作为比较器。",
+    "map 还具有默认的分配器，其元素类型与键值对有关。",
+    "使用默认比较器时，通常不需要显式指定它。"
+  ],
+  "examples": [
+    "map 模板结构可简化表示为：`template<class Key, class T, class Compare = std::less<Key>, class Allocator = std::allocator<std::pair<const Key, T>>> class map;`",
+    "默认比较关系可表示为：$$\\text{Compare}=\\text{std::less<Key>}$$"
+  ],
+  "misconceptions": [
+    "比较器不是用于比较 map 的映射值，而是用于关联容器的键排序或组织。",
+    "使用 map 时不一定要自己编写比较器，默认的 std::less<Key> 通常已经足够。",
+    "比较器与分配器是不同的模板参数，前者用于比较，后者用于内存管理。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "map 的比较器用于什么？",
+      "a": "用于排序或组织 map 的键。"
+    },
+    {
+      "q": "map 的默认比较器是什么？",
+      "a": "std::less<Key>。"
+    },
+    {
+      "q": "使用 map 时是否必须显式指定比较器？",
+      "a": "不必须；比较器有默认值，通常可以省略。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "map关联容器",
+    "函数对象",
+    "模板参数"
+  ],
+  "source_pages": [
+    548,
+    548
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1124_关联容器的比较器模板参数",
+  "_chunk_pages": [
+    545,
+    548
+  ]
+}

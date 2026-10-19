@@ -1,0 +1,49 @@
+{
+  "title": "WeatherPrediction 天气预测接口类",
+  "definition": "`WeatherPrediction` 是一个用于天气预测的 C++ 类接口。它根据当前温度以及木星和火星之间的距离预测天气；即使没有提供这些数据，也会给出一个预测，但原文说明这种情况下预测准确率为 99%。该类通过虚成员函数提供设置数据、获取预测结果和显示结果的接口。",
+  "key_points": [
+    "`setCurrentTempFahrenheit(int temp)` 用于设置当前华氏温度。",
+    "`setPositionOfJupiter(int distanceFromMars)` 用于设置木星到火星的距离。",
+    "`getTomorrowTempFahrenheit() const` 返回明天的华氏温度预测。",
+    "`getChanceOfRain() const` 返回明天下雨的概率，原文说明返回值为 1 表示确定下雨，0 表示没有下雨可能。",
+    "`getTemperature() const` 返回温度的字符串表示；`showResult() const` 用于按指定格式向用户显示结果。"
+  ],
+  "examples": [
+    "接口结构可概括为：\nexport class WeatherPrediction {\npublic:\n    virtual void setCurrentTempFahrenheit(int temp);\n    virtual void setPositionOfJupiter(int distanceFromMars);\n    virtual int getTomorrowTempFahrenheit() const;\n    virtual double getChanceOfRain() const;\n    virtual std::string getTemperature() const;\n    virtual void showResult() const;\n};"
+  ],
+  "misconceptions": [
+    "`getChanceOfRain()` 返回的是概率数值，不是百分数字符串；原文用 1 表示确定下雨、0 表示没有下雨可能。",
+    "天气预测类不仅负责返回温度，还提供了设置输入数据、获取降雨概率、获取温度字符串和显示结果等接口。",
+    "原文中的 99% 是在输入数据未提供时的预测准确率说明，不应理解为降雨概率恒为 99%。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`WeatherPrediction::setCurrentTempFahrenheit` 的参数表示什么？",
+      "a": "当前温度的华氏度数值。"
+    },
+    {
+      "q": "`getChanceOfRain() const` 返回什么？",
+      "a": "明天下雨的概率；原文说明 1 表示确定下雨，0 表示没有下雨可能。"
+    },
+    {
+      "q": "如果没有提供当前温度和木星到火星的距离，WeatherPrediction 是否仍会给出预测？",
+      "a": "会，但原文说明这种情况下预测准确率为 99%。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++ 类与成员函数",
+    "C++ 继承和虚函数"
+  ],
+  "source_pages": [
+    313,
+    315
+  ],
+  "needs_verification": true,
+  "verify_query": "\"WeatherPrediction\" \"setCurrentTempFahrenheit\" \"getChanceOfRain\" C++20",
+  "concept_id": "405_weatherprediction_天气预测接口类",
+  "_chunk_pages": [
+    313,
+    316
+  ]
+}

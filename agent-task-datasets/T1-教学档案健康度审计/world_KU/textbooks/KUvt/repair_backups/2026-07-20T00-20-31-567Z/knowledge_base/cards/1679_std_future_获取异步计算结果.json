@@ -1,0 +1,53 @@
+{
+  "title": "std::future 获取异步计算结果",
+  "definition": "std::future 是 C++ 中用于获取异步计算结果的对象。计算结果可以由同一线程或其他线程产生，并通过 future 传递给需要结果的线程。调用 future.get() 可以取得结果；如果结果尚未准备好，get() 会阻塞，直到结果可用。一个 future 通常只能调用一次 get()。",
+  "key_points": [
+    "future 是线程间传递计算结果的输出端；与之对应的 promise 是结果的输入端。",
+    "std::future<T> 中的 T 表示计算结果类型。",
+    "调用 get() 会取得结果；结果未准备好时，调用线程会等待。",
+    "get() 取出结果后，future 不应再次用于获取同一结果；原文指出第二次调用的行为是不确定的。",
+    "可以使用 wait_for() 等等待机制先检查结果是否准备好，从而避免无条件地长期阻塞。",
+    "future 还可以把异步线程中的异常传递给获取结果的线程；获取线程可以自行处理该异常。"
+  ],
+  "examples": [
+    "结果获取形式：int result{myFuture.get()};",
+    "线程可以在结果尚未准备好时先做其他工作，再通过 future 的等待机制检查结果是否可用。",
+    "异步计算与结果传递可抽象为：计算线程 -> promise -> future -> 获取结果的线程。"
+  ],
+  "misconceptions": [
+    "future 不会自动让 get() 立即返回；如果结果尚未生成，get() 会阻塞。",
+    "future 不是结果本身，而是用于访问异步结果的对象。",
+    "std::thread 本身不方便直接返回线程函数的计算结果，通常需要 future/promise 等机制传递结果。",
+    "线程函数中未处理而逸出的异常不会安全地返回给调用线程；原文指出这会导致 C++ 运行时调用 std::terminate()。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "调用 std::future<T>::get() 时，如果结果尚未计算完成，会发生什么？",
+      "a": "调用线程会阻塞，直到结果可用，然后返回类型为 T 的结果。"
+    },
+    {
+      "q": "future 和 promise 的关系是什么？",
+      "a": "promise 是异步结果的输入端，用于存储结果或异常；future 是输出端，用于取得该结果或接收该异常。"
+    },
+    {
+      "q": "为什么通常不能对同一个 future 多次调用 get()？",
+      "a": "get() 会取出 future 关联状态中的结果；原文指出同一个 future 只能调用一次，第二次调用的行为不确定。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++线程基础",
+    "异常处理基础"
+  ],
+  "source_pages": [
+    818,
+    819
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1679_std_future_获取异步计算结果",
+  "_chunk_pages": [
+    817,
+    820
+  ]
+}

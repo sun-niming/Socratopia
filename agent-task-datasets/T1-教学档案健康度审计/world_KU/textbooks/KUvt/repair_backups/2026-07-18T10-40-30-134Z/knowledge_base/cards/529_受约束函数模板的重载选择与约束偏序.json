@@ -1,0 +1,48 @@
+{
+  "title": "受约束函数模板的重载选择与约束偏序",
+  "definition": "当多个函数模板都能匹配调用参数时，C++20 会比较它们的约束。更具体、限制更严格的约束可以优先于较一般的约束，从而选择更特化的重载。教材示例中，`integral<T> && sizeof(T) == 4` 比单独的 `integral<T>` 更具体，因此对于满足条件的 4 字节整数类型，优先选择前者。",
+  "key_points": [
+    "示例中有两个重载：一个要求 `integral<T>`，另一个要求 `integral<T> && sizeof(T) == 4`。",
+    "调用 `process(int { 1 });` 时，教材输出显示选择了 `integral<T> && sizeof(T) == 4` 重载。",
+    "调用 `process(short { 2 });` 时，教材输出显示选择了 `integral<T>` 重载；这表明该 `short` 类型在教材所用环境中不满足 `sizeof(T) == 4`。",
+    "重载选择依赖实际类型及其约束是否满足；不能仅根据类型名称推断 `sizeof(T)`。"
+  ],
+  "examples": [
+    "`template <typename T> requires std::integral<T> void process(const T& t) { cout << \"integral<T>\" << endl; }`",
+    "`template <typename T> requires (std::integral<T> && sizeof(T) == 4) void process(const T& t) { cout << \"integral<T> && sizeof(T) == 4\" << endl; }`",
+    "`process(int { 1 });` 选择更具体的 `std::integral<T> && sizeof(T) == 4` 重载。",
+    "`process(short { 2 });` 选择 `std::integral<T>` 重载。"
+  ],
+  "misconceptions": [
+    "并非所有整数类型的 `sizeof(T)` 都相同；`int` 和 `short` 的大小取决于实现，教材示例只说明其所用环境中的结果。",
+    "两个重载都可行时，不是简单按照源代码出现顺序选择，而是要比较模板特化程度和约束关系。",
+    "`std::integral<T> && sizeof(T) == 4` 并不表示所有整数类型都能匹配，它还额外要求 `sizeof(T) == 4`。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "对于教材示例中的两个重载，为什么 `process(int { 1 })` 选择 `integral<T> && sizeof(T) == 4`？",
+      "a": "因为 `int` 满足 `std::integral<T>`，并且在教材所用环境中 `sizeof(int) == 4`；带有两个条件的约束比单独的 `std::integral<T>` 更具体。"
+    },
+    {
+      "q": "教材示例中 `process(short { 2 })` 选择哪个重载？",
+      "a": "选择只要求 `std::integral<T>` 的重载，因为教材所用环境中的 `short` 不满足 `sizeof(T) == 4`。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "函数模板重载",
+    "C++20 概念（concept）基础",
+    "`sizeof` 运算符"
+  ],
+  "source_pages": [
+    405,
+    405
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 constrained function template overload resolution integral<T> sizeof(T) == 4 process(int) process(short) subsumption example",
+  "concept_id": "529_受约束函数模板的重载选择与约束偏序",
+  "_chunk_pages": [
+    405,
+    408
+  ]
+}

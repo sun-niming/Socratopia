@@ -1,0 +1,41 @@
+{
+  "title": "realpath 的正确使用",
+  "definition": "realpath() 会把路径转换成规范绝对路径，处理 .、..、多余斜杠和符号链接。它适合用于检查候选文件是否真的落在网站根目录内。但要注意：realpath() 要求目标路径存在；如果目标不存在，函数会失败。因此，不能把 realpath 失败简单理解为非法路径。",
+  "key_points": [
+    "realpath() 会规范化路径，包括处理 .、..、多余斜杠和符号链接。",
+    "对存在的路径，应在 realpath 后检查它是否仍在 root 内。",
+    "realpath() 需要目标存在；不存在时会失败。",
+    "不存在文件应返回 404，而不是把所有 realpath 失败都当成 403。"
+  ],
+  "examples": [
+    "root: /home/user/webserver/www",
+    "path: /home/user/webserver/www/../secret.txt",
+    "realpath: /home/user/webserver/secret.txt"
+  ],
+  "misconceptions": [
+    "realpath() 失败就一定表示恶意访问。",
+    "realpath() 只会处理 ../，不会处理符号链接。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么不能把 realpath 失败都当成 403？",
+      "a": "因为 realpath 需要目标存在，文件不存在时也会失败；课程项目建议先判断是否存在，不存在返回 404。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "基础路径过滤规则",
+    "目录穿越漏洞"
+  ],
+  "source_pages": [
+    30,
+    31
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "037_realpath_的正确使用",
+  "_chunk_pages": [
+    29,
+    32
+  ]
+}

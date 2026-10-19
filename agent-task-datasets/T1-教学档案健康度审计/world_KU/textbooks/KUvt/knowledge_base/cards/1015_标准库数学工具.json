@@ -1,0 +1,48 @@
+{
+  "title": "标准库数学工具",
+  "definition": "C++标准库提供常见数学函数、特殊数学函数、整数最大公约数和最小公倍数、中点计算、复数、有理数以及数值数组等工具。常见数学函数定义在<cmath>中；gcd和lcm定义在<numeric>中；复数类定义在<complex>中；编译期有理数类模板ratio定义在<ratio>中；valarray定义在<valarray>中。",
+  "key_points": [
+    "<cmath>提供abs、remainder、fma、exp、log、pow、sqrt、sin、atan2、sinh、erf、tgamma、ceil和floor等数学函数。",
+    "C++17增加了用于特殊数学函数的支持，C++20增加midpoint等数学工具；原文还提到lerp用于线性插值或外插。",
+    "<numeric>中的gcd和lcm分别计算整数的最大公约数和最小公倍数；C++20的midpoint可计算两个整数、浮点数或指针的中点。",
+    "std::complex表示具有实部和虚部的复数；std::ratio可在编译期精确表示有限有理数。",
+    "std::valarray类似vector，但面向高性能数值应用进行了专门优化，并提供表示向量切片的相关类。"
+  ],
+  "examples": [
+    "最大公约数示例：std::gcd(12, 8)的结果为4。",
+    "最小公倍数示例：std::lcm(12, 8)的结果为24。",
+    "线性插值可表示为：$$\\operatorname{lerp}(a,b,t)=a+t(b-a)$$",
+    "复数可表示为：$$z=a+bi$$，其中$a$是实部，$b$是虚部。"
+  ],
+  "misconceptions": [
+    "标准库内建了通用矩阵类；实际上，原文明确指出标准库没有内建矩阵类，第三方库如Boost可以提供矩阵支持。",
+    "std::ratio用于近似保存浮点数；实际上它用于精确表示由分子和分母定义的有限有理数。",
+    "valarray就是vector的完全替代品；实际上它针对高性能数值应用进行了专门优化，适用侧重点不同。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "C++标准库是否提供内建的通用矩阵类？",
+      "a": "没有。标准库提供valarray及向量切片等数值构件，可以据此构建矩阵运算类；像Boost这样的第三方库可以提供矩阵支持。"
+    },
+    {
+      "q": "gcd、lcm和midpoint分别用于什么？",
+      "a": "gcd计算最大公约数，lcm计算最小公倍数，midpoint计算两个整数、浮点数或指针的中点。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "C++标准库基础",
+    "数值计算基础"
+  ],
+  "source_pages": [
+    503,
+    503
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 std::lerp std::midpoint 适用类型 <cmath> <numeric> 标准定义",
+  "concept_id": "1015_标准库数学工具",
+  "_chunk_pages": [
+    501,
+    504
+  ]
+}

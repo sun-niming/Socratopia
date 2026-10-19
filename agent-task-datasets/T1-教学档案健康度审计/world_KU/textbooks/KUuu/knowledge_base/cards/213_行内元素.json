@@ -1,0 +1,39 @@
+{
+  "title": "行内元素",
+  "definition": "行内元素（inline element）一般都是基于语义级的基本元素。它只能容纳文本或者其他行内元素。",
+  "key_points": [
+    "行内元素强调语义，通常是基本内容单元。",
+    "行内元素只能容纳文本或其他行内元素。",
+    "span、a、img 是常见的行内元素。"
+  ],
+  "examples": [
+    "span",
+    "a",
+    "img"
+  ],
+  "misconceptions": [
+    "行内元素不能直接包含块元素。",
+    "行内元素不等于可以随意设置成块级布局。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "行内元素能容纳哪些内容？",
+      "a": "行内元素只能容纳文本或者其他行内元素。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "标准文档流"
+  ],
+  "source_pages": [
+    129,
+    132
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "213_行内元素",
+  "_chunk_pages": [
+    129,
+    132
+  ]
+}

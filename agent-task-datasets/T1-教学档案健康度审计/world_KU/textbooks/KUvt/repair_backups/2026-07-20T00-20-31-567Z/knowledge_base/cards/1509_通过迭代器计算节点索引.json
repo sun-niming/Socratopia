@@ -1,0 +1,43 @@
+{
+  "title": "通过迭代器计算节点索引",
+  "definition": "get_index_of_node 接收节点容器的 const_iterator，通过该迭代器与 m_nodes 起始迭代器之间的距离计算节点索引。实现使用 std::distance(std::cbegin(m_nodes), node_iter)，再将结果转换为 std::size_t；该方法声明为 const noexcept。",
+  "key_points": [
+    "索引等于节点迭代器到 m_nodes 首元素迭代器之间的距离：$\\text{index}=\\operatorname{distance}(\\operatorname{cbegin}(m\\_nodes),\\text{node\\_iter})$。",
+    "返回类型为 std::size_t。",
+    "方法不会修改图，因此是 const；原文还标记为 noexcept。"
+  ],
+  "examples": [
+    "核心实现：\n```cpp\nconst auto index{std::distance(std::cbegin(m_nodes), node_iter)};\nreturn static_cast<std::size_t>(index);\n```"
+  ],
+  "misconceptions": [
+    "该方法不是根据节点值重新搜索索引，而是根据已有迭代器计算位置。",
+    "节点索引取决于其在 m_nodes 中的位置；删除前面的节点可能使后续节点索引变化。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "get_index_of_node 如何得到节点索引？",
+      "a": "计算 node_iter 与 m_nodes 的起始迭代器之间的距离，并将结果转换为 std::size_t。"
+    },
+    {
+      "q": "为什么删除节点后需要更新邻接索引？",
+      "a": "因为节点存储在 vector 中，删除一个元素会改变其后元素的位置索引。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "std::distance",
+    "vector迭代器",
+    "std::size_t"
+  ],
+  "source_pages": [
+    727,
+    727
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1509_通过迭代器计算节点索引",
+  "_chunk_pages": [
+    725,
+    728
+  ]
+}

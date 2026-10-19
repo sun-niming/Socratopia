@@ -1,0 +1,41 @@
+{
+  "title": "echo 命令用于字符显示",
+  "definition": "在 Linux 中，“echo”用于字符显示。教材给出的基本形式是“echo [-选项] 字符串列表”。它可以配合选项控制输出效果。",
+  "key_points": [
+    "字符显示使用“echo”命令",
+    "基本形式：echo [-选项] 字符串列表",
+    "echo 可以带选项，也可以输出字符串列表"
+  ],
+  "examples": [
+    "echo 字符串列表",
+    "echo [-选项] 字符串列表"
+  ],
+  "misconceptions": [
+    "认为 echo 只能原样输出文本；教材说明它还可通过选项控制换行和转义解析"
+  ],
+  "qa_pairs": [
+    {
+      "q": "教材中，字符显示使用什么命令？",
+      "a": "使用“echo”命令。"
+    },
+    {
+      "q": "echo 的基本形式是什么？",
+      "a": "“echo [-选项] 字符串列表”。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "Linux 基本命令"
+  ],
+  "source_pages": [
+    33,
+    36
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "065_echo_命令用于字符显示",
+  "_chunk_pages": [
+    33,
+    36
+  ]
+}

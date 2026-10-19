@@ -1,0 +1,178 @@
+{
+  "conversationId": "vS_1AORhMjQDsRuG5Y3HM",
+  "generatedAt": 1789276440259,
+  "pagesRange": "p.116-130",
+  "sections": [
+    {
+      "type": "tldr",
+      "content": "本次课覆盖 **2.6 视频流与 CDN** 和 **2.7 套接字编程**：视频流从 HTTP 流→DASH→CDN→Netflix/YouTube/看看案例一路走完；套接字编程用一对 UDP 客户-服务器程序起手，再对比 TCP 的「两扇门」模型（欢迎套接字 + 连接套接字）。"
+    },
+    {
+      "type": "narrative",
+      "content": "从视频流门口的 HTTP 流开始，先撞上「一份编码伺候不了所有带宽」的瓶颈，引出 DASH 的多版本 + 分块 + 告示文件 + 客户端自测切档。接着把单数据中心的三条罪抖出来，用 CDN 逐条拆——专用/第三方之分、深入/邀请做客两种布置原则、地理最邻近 vs 实时测量的集群选择。回头翻了一下 DHT 的旧账（环形结构、后继、O(N) 查询、节点离开的后继接管），立刻转回 2.7，用一对 UDP 程序把套接字、端口、bind、recvfrom 的客户地址、无状态这些概念逐行落地，再换到 TCP 的握手、SOCK_STREAM、connect、欢迎套接字与连接套接字的双门模型。"
+    },
+    {
+      "type": "concepts",
+      "items": [
+        {
+          "name": "HTTP 流 (HTTP streaming)",
+          "body": "视频作为普通文件存在服务器上，有独立 URL。客户建 TCP 连接后发 HTTP GET，服务器以尽可能快的速率在一个 HTTP 响应报文中把文件送过来。客户侧字节落入应用缓存，超过预设门限才开始播放，之后边接收边播放。\n\n**硬伤**：所有客户收到**相同编码**的视频。低带宽客户启动慢；高带宽客户被编码质量上限拖累；带宽波动时缓存被抽空，画面**停滞**。"
+        },
+        {
+          "name": "DASH (Dynamic Adaptive Streaming over HTTP)",
+          "body": "经 HTTP 的动态适应性流。三件事：\n\n1. 同一部视频编成**几个不同版本**，每版一个比特率、对应一档质量；\n2. 每个版本切成**几秒长**的块，各自有独立 URL；\n3. 客户**一次请求一块**，且可在播放过程中**中途改档**。\n\n**切档依据**：客户每下完一块就测一次接收带宽，跑速率决定算法——缓存多、带宽高选高速率版；缓存少、带宽低选低速率版。\n\n**开播前第一个请求**：要的是**告示文件 (manifest file)**。它为每个版本列出 URL 和比特率。\n\n受益人群：**移动用户**（带宽天然波动）。"
+        },
+        {
+          "name": "内容分发网 (CDN)",
+          "body": "在地理上分散部署服务器，把内容副本存在里面，把每个用户请求定向到能给出最好体验的 CDN 位置。\n\n**按归属分类**：\n- **专用 CDN**：内容提供商自己拥有、自己用。例：Google 分发 YouTube。\n- **第三方 CDN**：一家 CDN 代表多个内容提供商分发。例：Akamai、Limelight、Level-3。\n\n**布置原则**：\n- **深入 (enter-deep)**：Akamai 首创，服务器集群放进全球**接入 ISP**。买到距离（端用户到集群的链路和路由器少），代价是维护管理开销大。\n- **邀请做客 (bring home)**：Limelight 这类，在**少量关键位置**（约 10 个，通常放 IXP）建大集群。位置少好管，代价是端用户侧时延较高、吞吐量较低。\n\n一句话：**定位原则是「离用户近」与「好管理」之间的取舍。**"
+        },
+        {
+          "name": "集群选择策略 (cluster selection strategy)",
+          "body": "CDN 部署的**核心**。CDN 通过客户的 DNS 查找，拿到客户**本地 DNS 服务器 (LDNS)** 的 IP——**它知道的是 LDNS 的 IP，不是客户本人的 IP**。基于这个 IP 挑集群。\n\n**地理上最邻近 (geographically closest)**：用商用地理位置数据库（Quova、MaxMind）把 LDNS 的 IP 映射到地理位置，挑离它最近的集群。\n\n**三条短板**：\n1. 地理近 ≠ 网络路径近（20 公里直线，网线绕 2000 公里）；\n2. 端用户可能配置用**远地的 LDNS**，LDNS 位置本身离客户很远；\n3. **静态**——每次都指派同一个集群，看不见时延和带宽随时间变化。\n\n**改进**：**实时测量**——每个集群周期性地向全世界 LDNS 发探测分组（ping 或 DNS 请求），按当前时延和丢包挑。代价：不少 LDNS 被配置成**不回**探测。"
+        },
+        {
+          "name": "分布式散列表 (Distributed Hash Table, DHT)",
+          "body": "解 BitTorrent 追踪器**集中式单点**的痛点。把「哪个文件有哪些对等方」这张登记表交给对等方们自己一起管——叫 **trackerless torrent**（无追踪器洪流）。\n\n**三条线索**：\n1. **给每个人发号码**：标识符空间 $[0, 2^n-1]$，实用取 SHA-1 的 $160$ 位。每个对等方按某种方式（如对 IP 和端口做哈希）拿一个标识符。\n2. **给内容也发号码**：$(键, 值)$ 对里，键取内容的哈希，值是该内容的对等方 IP。BitTorrent 里键就是洪流标识。\n3. **号码怎么对应到人**：把 $(键, 值)$ 对交给**标识符离这个键最近**的对等方保管，「最近」在**环形**空间上算——**环形 DHT**，负责的是环上的**后继**。\n\n**代价**：每人对等方只认识直接后继，查询最多 $N-1$ 跳、平均 $N/2$ 跳，整体 $O(N)$。方向是让每个对等方多记几个「捷径」，把复杂度压到 $O(\\log N)$。\n\n**节点离开**：范围 $(\\text{predecessor}, P]$ 里的键由**后继接管**，负责范围扩成 $(\\text{predecessor}, S]$。突发掉线可能丢数据，实践中靠把 $(键, 值)$ 对复制到环上多个对等方兜底。"
+        },
+        {
+          "name": "BitTorrent 一报还一报 (tit-for-tat)",
+          "body": "对等方握有许多 $256\\text{KB}$ 的块，上行带宽有限，需决定优先发给谁。规则：**谁当前给我的上传速率最高，我就优先把块回给谁**。\n\n补充机制：**乐观疏通 (optimistic unchoking)**——除前四名外，再随机挑一个不算账，给新来的留口子。"
+        },
+        {
+          "name": "Netflix 的分发架构",
+          "body": "两个主要部件：**亚马逊云** + **自己的专用 CDN**。\n\n亚马逊云管四摊：Web 网站、内容摄取、内容处理（生成多格式 × 多比特率，为 DASH 铺路）、向 CDN 上载版本。\n\n专用 CDN：在 **50 多个 IXP** 位置有机架，另有**数百个 ISP** 位置。机架服务器带几个 10Gbps 口，存储超 100TB。\n\n两处跟通用做法不同：\n- 用 **推 (push)**，在非高峰时段把内容推给 CDN 服务器，不用拉高速缓存；\n- 哪些片子最流行，按**逐天**的数据来定。\n\n交付动作：用户在亚马逊云上选片 → 云里软件确认哪个 CDN 服务器有拷贝 → 挑一台「最好」的 → 软件把服务器 **IP + 资源配置文件**（各版本 URL）发给客户 → 客户做专用版 DASH，块长约 **4 秒**。\n\n**省掉 DNS 重定向**的资格：同时占着内容提供商和 CDN 运营者两头，且只分发视频不分发网页，不用靠 DNS 截获别人的请求。"
+        },
+        {
+          "name": "YouTube 的分发",
+          "body": "和 Netflix 一样用**专用 CDN**，集群铺在几百个 IXP 和 ISP 位置，另有它的大数据中心。\n\n**和 Netflix 拧着走**：\n- **拉高速缓存 + DNS 重定向**；\n- 集群选择大多挑**客户与集群之间 RTT 最低**的那个，偶尔为平衡负载引到更远节点；\n- 用 HTTP 流，但**不搞适应性流**（不用 DASH），版本就那几个，要**用户自己手动选**；\n- 用字节范围请求，达到目标量就掐断。"
+        },
+        {
+          "name": "看看的分发（混合 CDN-P2P）",
+          "body": "走 **P2P 交付**而不是客户-服务器。高层看很像 BitTorrent：先联系跟踪器，找到有副本的对等方，并行要块。区别在优先级：**优先给即将播放的块**，保住连续播放。\n\n后来迁到**混合 CDN-P2P**：在中国部署数以百计的服务器，把内容推上去，**启动阶段主要由 CDN 顶着**——即 **短启动时延**。\n\n客户**同时**向 CDN 和对等方要内容：CDN 顶着启动，P2P 一旦总流量够播，就从 CDN 停流、纯走 P2P。一句话：**用 CDN 买「快启动」，用 P2P 买「低成本」。**"
+        },
+        {
+          "name": "套接字编程的两种应用分类",
+          "body": "按**协议是否公开**分：\n- **开放应用**：实现 RFC 或别的标准文档定义的协议，规则人人共知。客户和服务器都必须守 RFC 规矩。例：Chrome 和 Apache、BitTorrent 客户和跟踪器。\n- **专用应用**：应用层协议**没有公开发布**。一个开发者产两份代码，功能全归他控制；代价是**别的开发者写不出能互通的代码**。"
+        },
+        {
+          "name": "UDP 客户-服务器程序",
+          "body": "**最简应用**四步：客户从键盘读一行 → 发给服务器 → 服务器转大写 → 发回客户 → 客户显示。\n\n**客户代码**：\n```python\nclientSocket = socket(AF_INET, SOCK_DGRAM)  # AF_INET=IPv4, SOCK_DGRAM=UDP\nmessage = raw_input('Input lowercase sentence:')\nclientSocket.sendto(message.encode(), (serverName, serverPort))\nmodifiedMessage, serverAddress = clientSocket.recvfrom(2048)\nprint(modifiedMessage.decode())\nclientSocket.close()\n```\n客户建套接字时**不指定端口号**，源端口由操作系统在第一次 `sendto` 时临时分配。`sendto` 前 `encode()` 把字符串转字节；地址由 `(serverName, serverPort)` 拼成——主机名由底层操作系统查 DNS 换成 IP。\n\n**服务器代码**：\n```python\nserverSocket = socket(AF_INET, SOCK_DGRAM)\nserverSocket.bind(('', serverPort))          # 钉死门牌\nwhile True:\n    message, clientAddress = serverSocket.recvfrom(2048)\n    modifiedMessage = message.decode().upper()\n    serverSocket.sendto(modifiedMessage.encode(), clientAddress)\n```\n服务器**必须 bind 钉死端口**（如 12000），因为外面素不相识的客户得知道该敲哪扇门。`recvfrom` 返回的 `clientAddress` 是**发送方地址**，回信全靠它——服务器一侧的「返回地址」。\n\n**UDP 不记账**：套接字不认人，同一客户前后两个数据报，服务器处理完就撒手，套接字不留档。**门牌固定、来处现取现用、状态不留**。"
+        },
+        {
+          "name": "TCP 客户-服务器程序",
+          "body": "**客户代码**：\n```python\nclientSocket = socket(AF_INET, SOCK_STREAM)     # SOCK_STREAM=TCP\nclientSocket.connect((serverName, serverPort))  # 敲欢迎之门，握手\nclientSocket.send(sentence.encode())            # 无目的地参数\nmodifiedSentence = clientSocket.recv(2048)\n```\n`connect()` 参数是**服务器端的地址**，执行完三次握手完成、连接建立。`send()` **没有目的地参数**——地址已经在连接里。客户仍不 `bind`，源端口由系统分配。\n\n**服务器代码**：\n```python\nserverSocket = socket(AF_INET, SOCK_STREAM)\nserverSocket.bind(('', serverPort))\nserverSocket.listen(1)                            # 请求连接最大数\nwhile True:\n    connectionSocket, addr = serverSocket.accept()\n    sentence = connectionSocket.recv(1024).decode()\n    capitalizedSentence = sentence.upper()\n    connectionSocket.send(capitalizedSentence.encode())\n    connectionSocket.close()                      # 关连接门，不关欢迎门\n```\n\n**两扇门**：\n- `serverSocket` **欢迎套接字**：一扇，所有客户的起始接触点，长期资产，不开不关；\n- `connectionSocket` **连接套接字**：每客户一扇，承载数据，用完即弃。\n\n**$n$ 个并行客户 → $n+1$ 个套接字。**\n\n**TCP 三件性质**：可靠（按发送顺序收到每个字节）、**全双工**（套接字既发也收）、**字节流**（程序看不见握手/寻路/分装）。两个方向的字节流彼此**独立**：`send` 出去的走**出向**那股，`recv` 只读**入向**那股。\n\n**不保留报文边界**：`recv(1024)` 里的 $1024$ 不是消息长度，只是接收缓冲有多大。客户分两次 `send` 发 `\"Hel\"`、`\"lo\"`，服务器一次 `recv` 可能拿回 `\"Hel\"`、`\"Hello\"`，甚至只 `\"H\"`。只保证**顺序**。需要边界的应用常放长度字段或特殊分隔符（后者为补充，教材未展开）。"
+        }
+      ]
+    },
+    {
+      "type": "key-insight",
+      "content": "「距离的度量只有一个维度，代价却住在另一个维度里。」——CDN 那边地理最近 ≠ 网络路径最近；DHT 这边标识符最近的后继 ≠ 查询跳数最少。两桩现场，同一个错位。",
+      "attribution": "青衣（对学习者推理的总结）"
+    },
+    {
+      "type": "key-terms",
+      "items": [
+        {
+          "term": "洪流 (torrent)",
+          "definition": "参与**同一个文件**分发的所有对等方的集合。"
+        },
+        {
+          "term": "块 (chunk)",
+          "definition": "洪流里对等方交换的单位，BitTorrent 典型 $256\\text{KB}$。每人手里只有一个子集。"
+        },
+        {
+          "term": "追踪器 (tracker)",
+          "definition": "洪流里的基础设施节点，**不碰数据**：登记谁在洪流里（周期性心跳），加入时**随机**挑一批对等方 IP 递给新人。"
+        },
+        {
+          "term": "邻近对等方 (neighboring peers)",
+          "definition": "Alice 从追踪器拿到候选单子后，**并行**建 TCP 连接成功的那些。圈子随时间波动。"
+        },
+        {
+          "term": "告示文件 (manifest file)",
+          "definition": "DASH 里，客户开播前**第一个 HTTP GET** 要的东西。为每个视频版本列出 URL 和比特率。"
+        },
+        {
+          "term": "IXP (Internet Exchange Point)",
+          "definition": "因特网交换点。**邀请做客**原则下的 CDN 大集群常放这里。"
+        },
+        {
+          "term": "LDNS",
+          "definition": "客户**本地 DNS 服务器**。CDN 拿到的 IP 是 LDNS 的，不是客户本人的。"
+        },
+        {
+          "term": "DHT (Distributed Hash Table)",
+          "definition": "分布式散列表。把登记表按号码分片、交给节点们自己保管，查询顺着环找「最近的后继」。"
+        },
+        {
+          "term": "无追踪器洪流 (trackerless torrent)",
+          "definition": "BitTorrent 用 DHT 实现的形式：没有中心追踪器，登记交给对等方们自己管。"
+        },
+        {
+          "term": "一报还一报 (tit-for-tat)",
+          "definition": "BitTorrent 里决定优先把块发给谁的规则：谁当前给我的上传速率最高，我就优先回给谁。"
+        },
+        {
+          "term": "乐观疏通 (optimistic unchoking)",
+          "definition": "除前四名外，再**随机**挑一个不算账，给新来的留个口子。"
+        },
+        {
+          "term": "欢迎套接字 (serverSocket / welcoming socket)",
+          "definition": "TCP 服务器的一扇**长期资产**：所有客户的起始接触点，`bind` 钉死门牌、`listen` 开始聆听，数量恒为 $1$。"
+        },
+        {
+          "term": "连接套接字 (connectionSocket)",
+          "definition": "TCP 服务器每接一个客户 `accept()` 新开的一扇门，承载该客户的数据，用完 `close`。**一次性耗材，每客户一扇**。"
+        },
+        {
+          "term": "SOCK_DGRAM / SOCK_STREAM",
+          "definition": "`SOCK_DGRAM` 申请 UDP 套接字（datagram，数据报）；`SOCK_STREAM` 申请 TCP 套接字（字节流）。**DATAGRAM 对 UDP，STREAM 对 TCP。**"
+        }
+      ]
+    },
+    {
+      "type": "open-question",
+      "content": "TCP 不保留报文边界，需要边界的应用怎么办？教材只在章末 P31 留了一句「面向字节 API 与显式维护报文边界 API 的优缺点」，**具体做法（长度字段、特殊分隔符）是青衣补充的**，作者没展开——留待下次或自行查证。"
+    },
+    {
+      "type": "review-questions",
+      "items": [
+        {
+          "question": "**DASH 客户**第一次发出去的 HTTP GET，要的是什么？拿到之后才能干什么？",
+          "hint": "它是「开播前的第一件事」。",
+          "answer": "要的是**告示文件 (manifest file)**。拿到后客户才知道这台服务器上有哪几档视频版本、每档的 URL 和比特率，之后才能一块一块地发字节范围请求、边下边测带宽边切档。"
+        },
+        {
+          "question": "**CDN** 用地理最邻近策略挑集群，为什么可能挑错？举两种失灵情况。",
+          "hint": "地理库只看坐标，不看路径。",
+          "answer": "① 地理近 ≠ 网络路径近：两地隔 20 公里，网线绕 2000 公里，地理库照样引向「鸟飞最近」的集群。② 端用户可能配置用**远地的 LDNS**，LDNS 的位置本身就离客户很远，CDN 拿这个 IP 挑集群等于替一个不在场的人选座。另有第三条：策略是**静态**的，看不见时延和带宽随时间变化。"
+        },
+        {
+          "question": "**环形 DHT** 里，每个对等方只认识自己的直接后继。查询一个键最多要转发多少次？为什么这在 BitTorrent 洪流里是灾难？",
+          "hint": "键刚好藏在发起者「前一个」位置，最坏情况会怎样。",
+          "answer": "最坏 $N-1$ 跳，平均 $N/2$ 跳，整体 $O(N)$。洪流动辄成千上万对等方，意味着一个查询要经过成千上万个节点才能找到负责人；中间任何一个节点离开，链条就断。方向是让每个对等方多记几个「捷径」，压到 $O(\\log N)$。"
+        },
+        {
+          "question": "**UDP 服务器**的 `recvfrom` 为什么不指定端口号就能收到数据？**TCP 服务器**呢？",
+          "hint": "想想「门牌号」和「谁敲的门」这两件事。",
+          "answer": "**UDP**：服务器建完套接字后 `bind` 把套接字钉死在一个确定的端口号上（如 12000），括号里 `''` 是通配所有本地 IP。没有这个固定门牌，外面素不相识的客户就不知道敲哪扇门。**TCP**：同样 `bind` 钉死欢迎套接字的门牌，然后 `listen` 开始聆听；每接一个客户 `accept()` 新开一扇连接套接字。"
+        },
+        {
+          "question": "如果 TCP 服务器同时服务 **$n$ 个**并行客户，来自不同主机，服务器这一侧一共握着几个套接字？分别是哪些？",
+          "hint": "「欢迎门」是长期资产，几扇？",
+          "answer": "**$n+1$** 个。$n$ 扇**连接套接字**（`accept()` 每接一个客户新开一扇，承载这条连接的数据，用完即关），外加 **$1$ 扇欢迎套接字** `serverSocket`（从头到尾不开不关，长期资产）。"
+        },
+        {
+          "question": "TCP **不保留报文边界**，客户分两次 `send` 发 `\"Hel\"` 和 `\"lo\"`，服务器第一次 `recv(1024)` 拿回来的**一定**只是 `\"Hel\"` 吗？为什么？",
+          "hint": "`recv(1024)` 里的 $1024$ 是什么？",
+          "answer": "**不一定**。可能拿回 `\"Hel\"`，也可能 `\"Hello\"`，甚至只 `\"H\"`。$1024$ 不是消息长度，只是**接收缓冲有多大**，能装多少装多少。TCP 只保证**字节按序到达**，不保证「写一次、读一次」。对照 UDP：一次 `sendto` 出去一个数据报，对端一次 `recvfrom` 取回那**一个**，边界天然保留。"
+        }
+      ]
+    },
+    {
+      "type": "notes",
+      "title": "关于「距离 ≠ 代价」的两桩现场",
+      "content": "青衣把 CDN 和 DHT 两处错位并排摆在桌上——同一种错，两个维度：\n\n**CDN 那边**：地理最近 ≠ 网络路径最近。Quova、MaxMind 存的是 IP 到地理位置的映射，不是路由长度或跳数；20 公里直线，网线绕 2000 公里。\n\n**环形 DHT 那边**：标识符最近的后继 ≠ 查询跳数最少。环上规则只看标识符大小，不问「走过去要几步」。\n\n两者都是：**距离的度量只有一个维度，代价却住在另一个维度里。**\n\n青衣把这一对取名「两桩现场」——同一个错位，从两个场景里各自抓了一次。"
+    }
+  ]
+}

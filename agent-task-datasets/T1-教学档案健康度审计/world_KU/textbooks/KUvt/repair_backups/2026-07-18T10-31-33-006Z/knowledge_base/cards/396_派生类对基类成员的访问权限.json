@@ -1,0 +1,43 @@
+{
+  "title": "派生类对基类成员的访问权限",
+  "definition": "在 C++ 中，基类的 `protected` 数据成员可以被派生类的成员函数直接访问；基类的 `private` 数据成员不能被派生类直接访问。若派生类需要访问私有数据，应通过基类提供的 `public` 或适当权限的 getter/setter 成员函数间接访问。",
+  "key_points": [
+    "派生类成员函数可以直接读取或修改基类的 `protected` 成员，例如 `m_protectedInt`。",
+    "派生类成员函数直接访问基类的 `private` 成员（例如 `m_privateInt`）会产生编译错误。",
+    "getter/setter 可以作为访问基类私有成员的公开接口。"
+  ],
+  "examples": [
+    "示意代码：`class Base { protected: int m_protectedInt{0}; private: int m_privateInt{0}; };`",
+    "派生类成员函数中，`cout << m_protectedInt << endl;` 可以通过编译；`cout << m_privateInt << endl;` 会报错。"
+  ],
+  "misconceptions": [
+    "`protected` 并不等同于 `public`：普通外部代码不能像访问公有成员那样任意访问它。",
+    "继承了基类并不意味着派生类可以直接访问基类的所有成员；`private` 成员仍然只能由基类自身的成员或友元访问。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "派生类的成员函数能否直接访问基类的 `protected` 数据成员？",
+      "a": "能。例如派生类成员函数可以直接访问基类的 `m_protectedInt`。"
+    },
+    {
+      "q": "派生类的成员函数直接访问基类的 `private` 数据成员会怎样？",
+      "a": "会产生编译错误；应通过基类提供的 getter/setter 等成员函数间接访问。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++类的成员访问权限",
+    "C++继承"
+  ],
+  "source_pages": [
+    305,
+    308
+  ],
+  "needs_verification": true,
+  "verify_query": "《C++20高级编程》第5版 第305页 protected private 派生类 m_protectedInt m_privateInt getter setter",
+  "concept_id": "396_派生类对基类成员的访问权限",
+  "_chunk_pages": [
+    305,
+    308
+  ]
+}

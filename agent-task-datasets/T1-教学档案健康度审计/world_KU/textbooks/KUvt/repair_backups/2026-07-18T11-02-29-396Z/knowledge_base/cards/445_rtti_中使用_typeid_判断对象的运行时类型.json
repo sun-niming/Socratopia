@@ -1,0 +1,50 @@
+{
+  "title": "RTTI 中使用 typeid 判断对象的运行时类型",
+  "definition": "RTTI（Run-Time Type Information，运行时类型信息）允许程序在运行时获取或判断对象的实际类型。使用 typeid 表达式可以将对象或表达式的运行时类型与某个类型进行比较；教材示例通过 typeid(animal) 分别与 typeid(Dog) 和 typeid(Bird) 比较，并根据结果输出不同信息。使用 typeid 通常需要包含头文件 <typeinfo>。",
+  "key_points": [
+    "RTTI 的相关工具包括 typeid 和 dynamic_cast；本页示例具体展示了 typeid。",
+    "典型比较形式是：if (typeid(animal) == typeid(Dog)) { ... }。",
+    "当 animal 的实际类型匹配 Dog 时，示例输出“Woof!”；匹配 Bird 时，示例输出“Chirp!”。",
+    "typeid 的比较结果是布尔条件，可用于根据运行时类型选择不同处理逻辑。"
+  ],
+  "examples": [
+    "示例形式：\n#include <typeinfo>\n\nvoid speak(const Animal& animal) {\n    if (typeid(animal) == typeid(Dog)) {\n        cout << \"Woof!\" << endl;\n    } else if (typeid(animal) == typeid(Bird)) {\n        cout << \"Chirp!\" << endl;\n    }\n}",
+    "逻辑关系可写为：\n$$\n\\operatorname{typeid}(animal)=\n\\begin{cases}\n\\operatorname{typeid}(Dog),&\\text{输出 }\\texttt{Woof!}\\\\\n\\operatorname{typeid}(Bird),&\\text{输出 }\\texttt{Chirp!}\n\\end{cases}\n$$"
+  ],
+  "misconceptions": [
+    "typeid(animal) 比较的是类型信息，不是比较对象的值。",
+    "不能把 typeid 与 dynamic_cast 混为一谈：教材本页同时提到二者，但示例展示的是 typeid 的类型比较。",
+    "仅仅看到基类引用或指针并不能直接断定其实际对象类型；RTTI 的用途正是运行时获取或判断这类类型信息。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何用 typeid 判断 animal 的实际类型是否为 Dog？",
+      "a": "使用 if (typeid(animal) == typeid(Dog)) 进行比较。比较成立时，示例输出“Woof!”。"
+    },
+    {
+      "q": "教材示例中，animal 的实际类型为 Bird 时输出什么？",
+      "a": "输出“Chirp!”。"
+    },
+    {
+      "q": "使用 typeid 需要包含哪个头文件？",
+      "a": "包含 <typeinfo>。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++继承与多态",
+    "C++引用",
+    "运行时类型信息RTTI"
+  ],
+  "source_pages": [
+    341,
+    344
+  ],
+  "needs_verification": true,
+  "verify_query": "\"C++20高级编程\" \"RTTI\" \"typeid(animal)\" Dog Bird Woof Chirp",
+  "concept_id": "445_rtti_中使用_typeid_判断对象的运行时类型",
+  "_chunk_pages": [
+    341,
+    344
+  ]
+}

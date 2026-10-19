@@ -1,0 +1,39 @@
+{
+  "title": "基于迭代器范围的 directed_graph 构造函数",
+  "definition": "directed_graph 可以提供接收两个迭代器和一个分配器的构造函数，用指定的迭代器范围构造图。该构造函数是函数模板，并把实际工作转发给已有的 assign 方法。",
+  "key_points": [
+    "构造函数可写为：`template <typename Iter> directed_graph(Iter first, Iter last, const A& allocator);`。",
+    "实现先初始化分配器 `m_allocator{allocator}`，再调用 `assign(first, last);`。",
+    "这种接口可以从其他容器或任意输入范围复制节点值。"
+  ],
+  "examples": [
+    "```cpp\nstd::vector<int> values{11, 22, 33};\ndirected_graph<int> graph(std::begin(values), std::end(values), allocator);\n```"
+  ],
+  "misconceptions": [
+    "迭代器范围构造函数的两个迭代器必须表示同一范围，通常采用半开区间 `[first, last)`。",
+    "该构造函数不是只能接收 directed_graph 的迭代器，而是通过 `template <typename Iter>` 支持迭代器类型。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何使用一段迭代器范围构造 directed_graph？",
+      "a": "提供或调用接收 `first`、`last` 和分配器的构造函数；其实现将分配器保存到 `m_allocator`，再调用 `assign(first, last)`。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "迭代器范围",
+    "函数模板",
+    "assign 操作"
+  ],
+  "source_pages": [
+    753,
+    754
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1560_基于迭代器范围的_directed_graph_构造函数",
+  "_chunk_pages": [
+    753,
+    756
+  ]
+}

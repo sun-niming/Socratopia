@@ -1,0 +1,43 @@
+{
+  "title": "类型 trait 的 _v 变量模板简写",
+  "definition": "对于具有 value 成员的类型 trait，C++提供了一个与 trait 同名并带有 _v 后缀的变量模板，用于直接取得该 trait 的布尔值或对应的 value 结果。它可以把 some_trait<T>::value 简写为 some_trait_v<T>，从而减少代码书写。",
+  "key_points": [
+    "传统写法是 some_trait<T>::value。",
+    "变量模板简写形式是 some_trait_v<T>。",
+    "原文示例使用 is_integral_v<int> 和 is_const_v<T>。"
+  ],
+  "examples": [
+    "传统写法：\n\n```cpp\nis_integral<int>::value\n```\n\n简写写法：\n\n```cpp\nis_integral_v<int>\n```",
+    "使用变量模板改写判断：\n\n```cpp\nif (is_integral_v<int>) {\n    cout << \"int is integral\" << endl;\n} else {\n    cout << \"int is not integral\" << endl;\n}\n```"
+  ],
+  "misconceptions": [
+    "_v 形式不是另一种不同的类型判断规则，而是对 trait::value 的变量模板形式封装。",
+    "只有具有 value 成员的相关 trait 才适用这种 _v 简写。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "is_integral<int>::value 如何改写为变量模板形式？",
+      "a": "改写为 is_integral_v<int>。"
+    },
+    {
+      "q": "_v 变量模板形式相对于 ::value 有什么作用？",
+      "a": "它提供更简洁的写法，直接取得类型 trait 的 value。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "变量模板",
+    "类型 trait 的基本用法"
+  ],
+  "source_pages": [
+    780,
+    780
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1605_类型_trait_的__v_变量模板简写",
+  "_chunk_pages": [
+    777,
+    780
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "title": "使用枚举类表示 SpreadsheetCell 的颜色",
+  "definition": "可以在 SpreadsheetCell 类中定义枚举类 Color，用 Red、Green、Blue、Yellow 表示单元格颜色，并通过 setColor(Color) 设置颜色、通过 getColor() const 获取颜色。枚举类成员应使用带作用域的名称访问，例如 SpreadsheetCell::Color::Blue。",
+  "key_points": [
+    "枚举类可定义为 enum class Color { Red = 1, Green, Blue, Yellow };，其中未显式赋值的枚举项通常按前一项递增。",
+    "成员变量可以使用类内初始化器设置默认颜色，例如 Color m_color { Color::Red };。",
+    "调用枚举类成员时需要使用作用域限定名，例如 myCell.setColor(SpreadsheetCell::Color::Blue);。",
+    "getColor() 声明为 const，表示该成员函数不会修改对象状态。"
+  ],
+  "examples": [
+    "代码示例：enum class Color { Red = 1, Green, Blue, Yellow };",
+    "代码示例：void setColor(Color color);",
+    "代码示例：Color getColor() const;",
+    "代码示例：Color m_color { Color::Red };",
+    "代码示例：SpreadsheetCell myCell { 5 }; myCell.setColor(SpreadsheetCell::Color::Blue); auto color { myCell.getColor() };"
+  ],
+  "misconceptions": [
+    "不能把 enum class 的成员直接当作无作用域的 Red、Green、Blue 使用，应写成 Color::Red 或 SpreadsheetCell::Color::Blue。",
+    "getColor() 后面的 const 不是返回值类型的一部分，而是表示该成员函数不会修改对象。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何把 SpreadsheetCell 对象的颜色设置为蓝色？",
+      "a": "使用 myCell.setColor(SpreadsheetCell::Color::Blue);。"
+    },
+    {
+      "q": "m_color 的默认值是什么？",
+      "a": "默认值是 Color::Red，即 SpreadsheetCell::Color::Red。"
+    },
+    {
+      "q": "为什么 getColor() 声明末尾有 const？",
+      "a": "const 表示调用 getColor() 不会修改 SpreadsheetCell 对象的状态。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++类的成员函数",
+    "C++枚举类 enum class"
+  ],
+  "source_pages": [
+    289,
+    292
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "379_使用枚举类表示_spreadsheetcell_的颜色",
+  "_chunk_pages": [
+    289,
+    292
+  ]
+}

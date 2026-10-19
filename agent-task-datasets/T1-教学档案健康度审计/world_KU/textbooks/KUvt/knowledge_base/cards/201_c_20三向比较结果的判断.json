@@ -1,0 +1,41 @@
+{
+  "title": "C++20三向比较结果的判断",
+  "definition": "C++20中，字符串类支持三向比较运算符。比较结果不是直接用整数含义判断，而可以使用 `is_lt(result)`、`is_gt(result)` 和 `is_eq(result)` 分别判断结果是否表示小于、大于或相等。",
+  "key_points": [
+    "`is_lt(result)` 判断左侧字符串是否小于右侧字符串。",
+    "`is_gt(result)` 判断左侧字符串是否大于右侧字符串。",
+    "`is_eq(result)` 判断两个字符串是否相等。",
+    "这种方式避免直接记忆比较结果整数值的含义。"
+  ],
+  "examples": [
+    "`if (is_lt(result)) { cout << \"less\" << endl; }`",
+    "`if (is_gt(result)) { cout << \"greater\" << endl; }`",
+    "`if (is_eq(result)) { cout << \"equal\" << endl; }`"
+  ],
+  "misconceptions": [
+    "误以为三向比较结果只能通过与某个固定整数直接比较来判断。",
+    "误以为 `is_eq(result)` 的含义是不相等。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何使用C++20提供的判断函数检查三向比较结果是否相等？",
+      "a": "使用 `is_eq(result)`；若返回真，表示两个字符串相等。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "std::string的字符串比较",
+    "C++20三向比较运算符"
+  ],
+  "source_pages": [
+    107,
+    107
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "201_c_20三向比较结果的判断",
+  "_chunk_pages": [
+    105,
+    108
+  ]
+}

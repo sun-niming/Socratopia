@@ -1,0 +1,41 @@
+{
+  "title": "iframe的src属性",
+  "definition": "src 属性用于指定 iframe 要嵌入的页面 URL，是必填属性。",
+  "key_points": [
+    "指定要嵌入的页面地址",
+    "原文标注为必填属性"
+  ],
+  "examples": [
+    "<iframe src=\"01.html\"></iframe>"
+  ],
+  "misconceptions": [
+    "认为 src 可以省略；原文说明它是必填。",
+    "认为 src 只能填写当前站点文件；原文表述为页面 URL。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "iframe 的 src 属性有什么作用？",
+      "a": "指定要嵌入的页面 URL。"
+    },
+    {
+      "q": "src 属性是否必填？",
+      "a": "是，原文标注为必填。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "iframe标签",
+    "HTML属性"
+  ],
+  "source_pages": [
+    77,
+    80
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "113_iframe的src属性",
+  "_chunk_pages": [
+    77,
+    80
+  ]
+}

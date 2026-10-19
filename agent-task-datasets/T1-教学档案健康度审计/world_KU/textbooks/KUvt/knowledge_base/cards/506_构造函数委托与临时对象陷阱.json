@@ -1,0 +1,46 @@
+{
+  "title": "构造函数委托与临时对象陷阱",
+  "definition": "在一个构造函数的函数体中直接写出“类名(参数)”并不会用另一个构造函数初始化当前对象，而是创建一个新的、未命名的临时对象。因此，这种写法不能实现构造函数之间的初始化复用。C++提供委托构造函数，允许在构造函数初始化器中调用同一个类的其他构造函数。",
+  "key_points": [
+    "在构造函数体中执行 SpreadsheetCell(value); 会创建临时 SpreadsheetCell 对象。",
+    "临时对象与当前正在构造的对象不是同一个对象。",
+    "这种错误代码可能成功编译、链接和运行，但结果并非预期。",
+    "若要让一个构造函数使用同类的另一个构造函数，应使用委托构造函数，即在构造函数初始化器中指定目标构造函数。"
+  ],
+  "examples": [
+    "错误思路：\nSpreadsheetCell::SpreadsheetCell(std::string_view initialValue)\n{\n    SpreadsheetCell(stringToDouble(initialValue));\n}\n这里创建的是临时未命名对象，不会用 double 构造函数初始化当前对象。",
+    "委托构造的形式为：\nSpreadsheetCell::SpreadsheetCell(std::string_view initialValue)\n    : SpreadsheetCell(stringToDouble(initialValue))\n{\n}\n关键点是调用出现在构造函数初始化器中，而不是函数体中。"
+  ],
+  "misconceptions": [
+    "误以为在构造函数体中写 SpreadsheetCell(value); 等同于给当前对象再次调用构造函数。",
+    "误以为代码能够编译和运行就说明当前对象已按预期完成初始化。",
+    "误以为构造函数可以像普通成员函数一样直接相互调用并作用于当前对象。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "在构造函数体内写 SpreadsheetCell(stringToDouble(initialValue)); 会发生什么？",
+      "a": "它会创建一个新的、未命名的临时 SpreadsheetCell 对象，而不会使用该构造函数初始化当前对象。"
+    },
+    {
+      "q": "应使用什么机制让一个构造函数调用同一个类的另一个构造函数？",
+      "a": "应使用委托构造函数，在构造函数初始化器中指定同一个类的另一个构造函数。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "构造函数重载",
+    "临时对象",
+    "构造函数初始化器"
+  ],
+  "source_pages": [
+    238,
+    238
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "506_构造函数委托与临时对象陷阱",
+  "_chunk_pages": [
+    237,
+    240
+  ]
+}

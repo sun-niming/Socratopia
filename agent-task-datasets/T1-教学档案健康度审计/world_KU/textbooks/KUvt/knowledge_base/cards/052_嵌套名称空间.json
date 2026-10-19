@@ -1,0 +1,42 @@
+{
+  "title": "嵌套名称空间",
+  "definition": "嵌套名称空间是指把一个名称空间定义在另一个名称空间中。访问嵌套名称空间中的名称时，各级名称空间使用 :: 分隔。C++17 起可以使用紧凑的嵌套名称空间语法；在 C++17 之前需要逐层嵌套 namespace 块。",
+  "key_points": [
+    "C++17 及以后可写成 namespace MyLibraries::Networking::FTP { ... }。",
+    "C++17 之前需要写成多层结构：namespace MyLibraries { namespace Networking { namespace FTP { ... } } }。",
+    "嵌套名称空间的限定名称使用双冒号分隔各级名称空间。"
+  ],
+  "examples": [
+    "namespace MyLibraries::Networking::FTP {\n    // ...\n}",
+    "namespace MyLibraries {\n    namespace Networking {\n        namespace FTP {\n            // ...\n        }\n    }\n}"
+  ],
+  "misconceptions": [
+    "紧凑语法并不是所有 C++旧版本都支持；教材指出它是在 C++17 之后得到支持的。",
+    "嵌套名称空间的各级名称之间使用 ::，不是使用单个冒号。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "C++17 起如何定义 MyLibraries、Networking 和 FTP 三层嵌套名称空间？",
+      "a": "可以写成 namespace MyLibraries::Networking::FTP { ... }。"
+    },
+    {
+      "q": "C++17 之前如何定义同样的嵌套名称空间？",
+      "a": "需要逐层书写 namespace MyLibraries { namespace Networking { namespace FTP { ... } } }。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "名称空间与作用域解析运算符"
+  ],
+  "source_pages": [
+    40,
+    40
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "052_嵌套名称空间",
+  "_chunk_pages": [
+    37,
+    40
+  ]
+}

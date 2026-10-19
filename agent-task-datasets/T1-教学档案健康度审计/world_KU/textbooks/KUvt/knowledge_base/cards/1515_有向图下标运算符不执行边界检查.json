@@ -1,0 +1,40 @@
+{
+  "title": "有向图下标运算符不执行边界检查",
+  "definition": "有向图类可以重载下标运算符，使调用者通过索引访问图中的节点值。该运算符直接访问对应索引的节点，不会主动检查索引是否越界；传入无效索引可能导致未定义行为。类中通常同时提供非 const 和 const 两个版本。",
+  "key_points": [
+    "非 const 对象返回节点值的可修改引用，形式可写为 `T& operator[](size_type index)`。",
+    "const 对象返回节点值的 const 引用，形式可写为 `const T& operator[](size_type index) const`。",
+    "该运算符不负责检查索引是否小于图中节点数量。"
+  ],
+  "examples": [
+    "访问索引为 `index` 的节点值：`return m_nodes[index].value();`",
+    "使用类型别名后，两个重载可写为：`reference operator[](size_type index);` 和 `const_reference operator[](size_type index) const;`"
+  ],
+  "misconceptions": [
+    "不能认为重载的 `operator[]` 会自动进行边界检查。",
+    "const 版本返回的是 const 引用，不能通过它修改节点值。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "directed_graph 的下标运算符是否会检查索引越界？",
+      "a": "不会。该运算符直接访问对应索引的节点，不执行边界检查。"
+    },
+    {
+      "q": "为什么 directed_graph 需要提供两个 operator[] 重载？",
+      "a": "为了分别支持非 const 对象和 const 对象：非 const 版本返回可修改引用，const 版本返回 const 引用。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [],
+  "source_pages": [
+    729,
+    729
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1515_有向图下标运算符不执行边界检查",
+  "_chunk_pages": [
+    729,
+    732
+  ]
+}

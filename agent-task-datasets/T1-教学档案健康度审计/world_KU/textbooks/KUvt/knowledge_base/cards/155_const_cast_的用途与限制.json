@@ -1,0 +1,48 @@
+{
+  "title": "const_cast 的用途与限制",
+  "definition": "const_cast 是 C++ 的一种类型转换，用于为对象的表达式添加或移除 const 属性；在 C++ 提供的几种显式类型转换中，它是唯一可以移除 const 属性的转换。只有在能够确定后续调用的函数不会修改对象时，才可以安全地移除 const。若对象本身最初就是 const，则通过 const_cast 移除 const 后再修改该对象会导致未定义行为。",
+  "key_points": [
+    "const_cast 的主要用途是添加或取消 const 属性。",
+    "如果对象本身不是 const，只是通过 const 引用或 const 指针访问，那么在确认不会修改对象时可以移除访问表达式的 const。",
+    "如果底层对象本身是 const，就不能通过 const_cast 合法地修改它。",
+    "教材示例用于兼容一个接收 char*、但调用方只有 const char* 的第三方函数。"
+  ],
+  "examples": [
+    "第三方函数声明为：\nvoid ThirdPartyLibraryMethod(char* str);\n\n调用方函数接收 const char*，并在确认第三方函数不会修改字符串时，可以写成：\nvoid f(const char* str) {\n    ThirdPartyLibraryMethod(const_cast<char*>(str));\n}"
+  ],
+  "misconceptions": [
+    "const_cast 不会把一个真正的 const 对象变成可安全修改的对象。",
+    "const_cast 不是普通类型转换，也不能用于任意不相关类型之间的转换。",
+    "能够编译通过不代表移除 const 后修改对象就是合法的；必须区分对象本身是否为 const。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "const_cast 的作用是什么？",
+      "a": "const_cast 用于为表达式添加或移除 const 属性，是 C++ 类型转换中唯一可以移除 const 属性的转换。"
+    },
+    {
+      "q": "什么时候可以安全地使用 const_cast 移除 const？",
+      "a": "只有在能够确定对象本身不是 const，并且被调用的函数不会修改该对象时，才可以安全使用。"
+    },
+    {
+      "q": "如果对象本身是 const，却通过 const_cast 修改它，会怎样？",
+      "a": "这种修改会导致未定义行为；正确做法通常是保持 const，或重构接口和程序。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "const限定符",
+    "C++显式类型转换"
+  ],
+  "source_pages": [
+    86,
+    86
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "155_const_cast_的用途与限制",
+  "_chunk_pages": [
+    85,
+    88
+  ]
+}

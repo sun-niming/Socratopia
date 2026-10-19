@@ -1,0 +1,105 @@
+{
+  "schemaVersion": 1,
+  "status": "committed",
+  "operationId": "endclass:v1:cc50dff32b91a441fd0394a1b95dc42d:ab46a9f875948759d1451136",
+  "operationHash": "51580770e612dca23b76091d8e2af6198cda328d32b248037159d3082d48faa0",
+  "scope": {
+    "accountId": "local",
+    "profileId": "uolmzgq8",
+    "worldId": "KU",
+    "conversationId": "wtcLeAfVbbn2OCYSlX7yE"
+  },
+  "companion": {
+    "slotId": "npc_d",
+    "companionInstanceId": "ci_6988246c6ce5fbce05a9b74c",
+    "candidateId": "ct_ahvgk5n4",
+    "displayName": "青衣"
+  },
+  "committedAt": "2026-09-14T11:55:59.625Z",
+  "targets": [
+    {
+      "relativePath": "pal_moments.md",
+      "oldHash": "4dfc5ad8d3bd6988d396cc6505abfbff008fbec217cf5de14db538d52ed90451",
+      "newHash": "8f830149c1a20be27256f1bd1b6b9e84e1bf0e3028465b67b02f2279292ffb44",
+      "deleting": false
+    },
+    {
+      "relativePath": "textbooks/KUyw/progress.md",
+      "oldHash": "4f58eda8a398f4a4f995aeb21a8098e092a22970c3dd00da4eb3ece9012968ef",
+      "newHash": "3931135cd5c69088404f3bbb7a8e7272cecb6cf238144ed2aadd9ebb202fdbf6",
+      "deleting": false
+    },
+    {
+      "relativePath": "diary/2026-09.md",
+      "oldHash": "27c6d0500a619184c7107e947008bbda7e88640ab5b642026373ab2f76df5f41",
+      "newHash": "572c496974b5795ac856c7edb51434c0daec7ca80d23ad2fb7be530d307e181f",
+      "deleting": false
+    },
+    {
+      "relativePath": "relation_npc_d.md",
+      "oldHash": "30ccdcb6902262c985e80e1ee95d15b913d4b744d452c47c2cdb05191cf1c133",
+      "newHash": "11030d04233a1d6721a2b5d1923c79f83aadd71bb4fee5a4008ff2b3f156e842",
+      "deleting": false
+    },
+    {
+      "relativePath": "world_meta.json",
+      "oldHash": "6333fa05e9394c103e3d7489f131ed1fc1ed9525885faba168909cbfaf15733e",
+      "newHash": "38ef0e9477dc7355c48be92d8039942809ba6bc20c8020915b1657faa95b4a05",
+      "deleting": false
+    },
+    {
+      "relativePath": "world_records.md",
+      "oldHash": "322f991868a5bf9a6e52323e798f4fa86e85ea26f5f0b6fed46e6c39d4fc7f8c",
+      "newHash": "c23bddc86fed5b3fe4d85ff7afeb057b53039039302c45db231bc6880c5bd064",
+      "deleting": false
+    },
+    {
+      "relativePath": "textbooks/textbook_index.json",
+      "oldHash": "b7fc13d06d3b79876aae9c3dce29f24974255d36b0e05055522d80ab3b768731",
+      "newHash": "d3a22266f4ceb7ab4df1474a39e756a1cb3ca62ffb6f9ec3fb1468b7f60bace7",
+      "deleting": false
+    },
+    {
+      "relativePath": "textbooks/KUyw/handoff/last_tail.json",
+      "oldHash": "18cc7b41643cd884c48b32b35f1dbf349a3339c7f4968906b86b0e422780d869",
+      "newHash": "8c10c220180ca7b2dc05edc3ccc6f2764d778e200915418b1a5d7308e8c0b53d",
+      "deleting": false
+    },
+    {
+      "relativePath": "textbooks/KUyw/handoff/last_meta.json",
+      "oldHash": "ee5dad6ff8428024f1f5ec28cbe5ba3d02cb346d603f637c9146e240642e7967",
+      "newHash": "aeee1fd177d16b59222a38a9bb54ac758603726758370117b5331881ee654bf1",
+      "deleting": false
+    },
+    {
+      "relativePath": "conversations/wtcLeAfVbbn2OCYSlX7yE/current_reading.md",
+      "oldHash": "65eb3c6684e5f38e4a5d96d1b612c429b8dcd8faad47c7cb1e8985735ebdf49e",
+      "newHash": null,
+      "deleting": true
+    },
+    {
+      "relativePath": "textbooks/KUyw/current_reading.md",
+      "oldHash": null,
+      "newHash": null,
+      "deleting": true
+    },
+    {
+      "relativePath": "conversations/wtcLeAfVbbn2OCYSlX7yE/current_reading_summary.json",
+      "oldHash": null,
+      "newHash": null,
+      "deleting": true
+    },
+    {
+      "relativePath": "conversations/wtcLeAfVbbn2OCYSlX7yE/handoff.json",
+      "oldHash": null,
+      "newHash": null,
+      "deleting": true
+    }
+  ],
+  "payload": {
+    "farewell": "*青衣把空杯端起来，又搁回去。*\n\n到点了。今天从恐慌模式推到 [A-Za-z]，判断大多落在结构上，我没多少要补。图 3-15 末尾那道检查还挂着，下次拿 thenextvalue 走一遍给我看。",
+    "companionNote": "今天从恐慌模式一路推到 [A-Za-z]，判断落得干净。结尾 thenextvalue 那问还悬着，下次走一遍给我看，断在哪儿它自己会说。",
+    "marker": "<!-- continuityEvent:51580770e612dca23b76091d companion:ci_6988246c6ce5fbce05a9b74c mode:classroom -->",
+    "endingPage": 93
+  }
+}

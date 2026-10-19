@@ -1,0 +1,39 @@
+{
+  "title": "父子进程的 fd 关闭规则",
+  "definition": "fork 后要按角色关闭不需要的文件描述符：父进程需要继续 accept，所以保留 listen_fd，但不处理当前客户端，因此要关闭 client_fd；子进程只处理当前客户端，所以保留 client_fd，但不再 accept 新连接，因此要关闭 listen_fd。这样做是为了保证连接生命周期正确，并避免资源释放不及时。",
+  "key_points": [
+    "父进程保留 listen_fd、关闭 client_fd",
+    "子进程保留 client_fd、关闭 listen_fd",
+    "关闭无关 fd 不是为了代码整洁，而是为了正确释放连接资源"
+  ],
+  "examples": [
+    "父进程：close(client_fd);",
+    "子进程：close(listen_fd);"
+  ],
+  "misconceptions": [
+    "两个进程都保留两个 fd 也没关系",
+    "关闭 fd 只是代码风格问题，不影响资源生命周期"
+  ],
+  "qa_pairs": [
+    {
+      "q": "fork 之后为什么父进程要关闭 client_fd？",
+      "a": "因为父进程不处理当前客户端连接，只需要继续 accept，所以应关闭 client_fd 以便正确释放资源。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "fork 的返回值与复制"
+  ],
+  "source_pages": [
+    37,
+    38,
+    40
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "049_父子进程的_fd_关闭规则",
+  "_chunk_pages": [
+    37,
+    40
+  ]
+}

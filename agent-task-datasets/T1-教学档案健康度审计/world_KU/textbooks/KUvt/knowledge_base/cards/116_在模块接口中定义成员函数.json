@@ -1,0 +1,43 @@
+{
+  "title": "在模块接口中定义成员函数",
+  "definition": "C++类的成员函数既可以在类外单独定义，也可以直接把实现写在模块接口文件的类定义中。直接写在类定义中的成员函数，函数体紧跟在函数声明之后。",
+  "key_points": [
+    "类内定义的成员函数可以直接访问本类的数据成员。",
+    "例如 getPassengerName() 可以返回 m_passengerName，setPassengerName() 可以修改 m_passengerName。",
+    "成员函数实现直接放在模块接口中时，不需要再使用类名和作用域解析运算符进行类外定义。"
+  ],
+  "examples": [
+    "export class AirlineTicket {\npublic:\n    std::string getPassengerName() { return m_passengerName; }\n    void setPassengerName(std::string name) { m_passengerName = name; }\n    int getNumberOfMiles() { return m_numberOfMiles; }\n    void setNumberOfMiles(int miles) { m_numberOfMiles = miles; }\nprivate:\n    std::string m_passengerName { \"Unknown Passenger\" };\n    int m_numberOfMiles { 0 };\n};",
+    "double calculatePriceInDollars() {\n    if (hasEliteSuperRewardsStatus()) {\n        return 0;\n    }\n    return getNumberOfMiles() * 0.1;\n}"
+  ],
+  "misconceptions": [
+    "成员函数不一定必须在类外实现；也可以直接在类定义中实现。",
+    "把函数写在类定义中并不会使它变成普通的全局函数，它仍然是该类的成员函数。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "成员函数有哪些常见的实现位置？",
+      "a": "可以在类外使用类名和作用域解析运算符定义，也可以直接写在模块接口文件的类定义中。"
+    },
+    {
+      "q": "AirlineTicket 的 setPassengerName() 的作用是什么？",
+      "a": "把传入的字符串赋给数据成员 m_passengerName。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "类的成员函数",
+    "C++模块接口"
+  ],
+  "source_pages": [
+    65,
+    66
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "116_在模块接口中定义成员函数",
+  "_chunk_pages": [
+    65,
+    68
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "title": "count_if统计满足条件的元素",
+  "definition": "count_if算法接收一个由首尾迭代器指定的范围和一个谓词，返回范围内使谓词结果为true的元素个数。谓词通常可用lambda表达式表示。",
+  "key_points": [
+    "典型形式为count_if(首迭代器, 尾后迭代器, 谓词)。",
+    "lambda可以按值捕获外部变量，并在谓词中使用该变量。",
+    "例如对序列$1,2,3,4,5,6,7,8,9$统计大于3的元素，结果为6。"
+  ],
+  "examples": [
+    "vector values { 1, 2, 3, 4, 5, 6, 7, 8, 9 }; int value { 3 }; auto tally { count_if(cbegin(values), cend(values), [value](int i){ return i > value; }) };",
+    "上述代码的输出为：Found 6 values > 3。数学上统计的是满足$i>3$的元素数量，即$6$。"
+  ],
+  "misconceptions": [
+    "count_if返回的不是满足条件的元素本身，而是满足条件的元素个数。",
+    "谓词只决定某个元素是否被计数，不会自动修改该元素。",
+    "范围由首迭代器和尾后迭代器指定，尾后迭代器不指向实际元素。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "count_if统计什么？",
+      "a": "统计给定范围内使指定谓词返回true的元素个数。"
+    },
+    {
+      "q": "对序列$1$到$9$统计大于$3$的元素，count_if返回多少？",
+      "a": "返回6，因为满足条件的元素是4、5、6、7、8、9。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "非修改计数算法的分类",
+    "Lambda表达式和谓词",
+    "迭代器范围"
+  ],
+  "source_pages": [
+    637,
+    637
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1322_count_if统计满足条件的元素",
+  "_chunk_pages": [
+    637,
+    640
+  ]
+}

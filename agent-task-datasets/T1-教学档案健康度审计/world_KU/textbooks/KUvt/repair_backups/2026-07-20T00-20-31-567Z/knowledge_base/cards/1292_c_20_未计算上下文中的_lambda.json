@@ -1,0 +1,40 @@
+{
+  "title": "C++20 未计算上下文中的 lambda",
+  "definition": "C++20 允许在未计算上下文中使用 lambda 表达式。未计算上下文中的表达式只用于编译期的类型分析，不会在运行期真正执行；例如，传递给 `decltype` 的表达式属于这种情况。",
+  "key_points": [
+    "C++17 及更早版本不允许在 `decltype` 等未计算上下文中直接使用 lambda。",
+    "C++20 允许使用 `decltype` 获取未计算 lambda 的类型。",
+    "示例：`using LambdaType = decltype([](int a, int b) { return a + b; });`。"
+  ],
+  "examples": [
+    "`using LambdaType = decltype([](int a, int b) { return a + b; });`。",
+    "上述代码不会调用 lambda，而是定义 `LambdaType` 作为该 lambda 表达式类型的别名。"
+  ],
+  "misconceptions": [
+    "误以为 `decltype` 中的 lambda 会在运行期执行；`decltype` 参数处于未计算上下文，只用于类型确定。",
+    "误以为该语法在所有 C++ 标准版本中都有效；教材指出这是 C++20 的能力。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "C++20 对未计算上下文中的 lambda 做了什么改变？",
+      "a": "C++20 允许在未计算上下文中使用 lambda，例如使用 `decltype([](int a, int b) { return a + b; })` 获取其类型。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "lambda 表达式",
+    "decltype",
+    "C++标准版本"
+  ],
+  "source_pages": [
+    624,
+    624
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1292_c_20_未计算上下文中的_lambda",
+  "_chunk_pages": [
+    621,
+    624
+  ]
+}

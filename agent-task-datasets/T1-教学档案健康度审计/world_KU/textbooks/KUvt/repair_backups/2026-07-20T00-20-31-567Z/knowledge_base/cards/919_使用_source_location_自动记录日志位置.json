@@ -1,0 +1,42 @@
+{
+  "title": "使用 source_location 自动记录日志位置",
+  "definition": "C++20 的 std::source_location 可以记录源代码中的文件名、行号、函数名等位置信息。将 std::source_location::current() 作为日志函数参数的默认值时，current() 获取的是调用日志函数的位置，而不是日志函数定义内部的位置，因此可以自动记录真正发起日志调用的代码行。",
+  "key_points": [
+    "日志函数可以接收 source_location 参数，并将 std::source_location::current() 设为默认参数值。",
+    "调用 std::source_location::current() 的位置由实际调用 logMessage() 的代码决定，而不是由 logMessage() 函数定义中的参数声明位置决定。",
+    "source_location 可提供 file_name()、line() 和 function_name() 等信息，用于生成包含文件名、行号和函数名的日志。"
+  ],
+  "examples": [
+    "代码示例：\nvoid logMessage(std::string_view message, const std::source_location& location = std::source_location::current()) {\n    std::cout << std::format(\"{}({}): {}: {}\", location.file_name(), location.line(), location.function_name(), message) << std::endl;\n}\n\nvoid foo() {\n    logMessage(\"Starting execution of foo().\");\n}\n\n如果 logMessage() 在第 17 行被调用，输出中的行号就是 17，而不是 logMessage() 函数内部的行号。"
+  ],
+  "misconceptions": [
+    "错误理解：默认参数中的 std::source_location::current() 总是记录日志函数定义的位置。实际记录的是调用日志函数的位置。",
+    "错误理解：source_location 只能记录行号。实际上它还可以提供文件名和函数名等源代码位置信息。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么将 std::source_location::current() 作为 logMessage() 的默认参数，可以记录调用者的位置？",
+      "a": "因为默认参数表达式是在调用 logMessage() 时求值的，所以 std::source_location::current() 获取的是调用 logMessage() 的源代码位置。"
+    },
+    {
+      "q": "source_location 在日志记录中通常用于获取哪些信息？",
+      "a": "通常用于获取源文件名、行号和函数名，并将这些信息加入日志输出。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++函数默认参数",
+    "C++20标准库基本用法"
+  ],
+  "source_pages": [
+    453,
+    453
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "919_使用_source_location_自动记录日志位置",
+  "_chunk_pages": [
+    453,
+    456
+  ]
+}

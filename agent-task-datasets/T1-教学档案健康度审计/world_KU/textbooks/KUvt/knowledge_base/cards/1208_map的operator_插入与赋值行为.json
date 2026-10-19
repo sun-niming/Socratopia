@@ -1,0 +1,47 @@
+{
+  "title": "map的operator[]插入与赋值行为",
+  "definition": "map重载了operator[]，可以用下标键直接访问或设置元素值。对于不存在的键，operator[]会创建该键对应的新元素；对于已经存在的键，赋值会替换原有值。因此，operator[]总能完成插入或赋值，但可能先默认构造一个值对象。",
+  "key_points": [
+    "可以写dataMap[1] = Data{4};，其中键和值分别通过下标和赋值运算符指定。",
+    "键不存在时，operator[]会创建对应元素。",
+    "键已存在时，通过operator[]赋值会替换原值。",
+    "operator[]可能总是构建一个新的值对象，因此值类型需要提供默认构造函数。",
+    "由于访问不存在的键会修改map，operator[]不是const成员函数。"
+  ],
+  "examples": [
+    "map<int, Data> dataMap;",
+    "dataMap[1] = Data{4};",
+    "dataMap[1] = Data{6}; // 如果键1已存在，则用Data{6}替换原值"
+  ],
+  "misconceptions": [
+    "map的operator[]不只是读取；访问不存在的键会插入新元素。",
+    "operator[]不能用于const map的只读查找。",
+    "使用operator[]时，值类型不仅要能接收赋值，在需要默认插入时还要能默认构造。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "使用dataMap[1] = Data{4};会发生什么？",
+      "a": "如果键1不存在，就创建键1对应的元素并赋值为Data{4}；如果已存在，则把原值替换为Data{4}。"
+    },
+    {
+      "q": "为什么const map不能使用operator[]读取元素？",
+      "a": "因为operator[]可能在键不存在时创建新元素，会修改map，因此该运算符没有被标记为const；只读查找应使用find。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "map的唯一键约束",
+    "const对象与const成员函数"
+  ],
+  "source_pages": [
+    584,
+    584
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1208_map的operator_插入与赋值行为",
+  "_chunk_pages": [
+    581,
+    584
+  ]
+}

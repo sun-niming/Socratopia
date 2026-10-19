@@ -1,0 +1,50 @@
+{
+  "title": "使用 operator auto 定义转换运算符",
+  "definition": "转换运算符可以使用 auto 作为目标类型，让编译器根据函数体中的 return 表达式推导转换结果类型。例如，SpreadsheetCell 的 double 转换运算符可以写成 $operator\\ auto()\\ const\\ \\{\\ return\\ getValue();\\ \\}$。具有 auto 返回类型推导的函数，其实现必须对类的用户可见，因此示例直接将定义放在类定义中。",
+  "key_points": [
+    "示例写法为：$operator\\ auto()\\ const\\ \\{\\ return\\ getValue();\\ \\}$。",
+    "使用 auto 返回类型推导时，函数体必须可见，以便编译器推导返回类型。",
+    "教材指出，auto 会移除引用和 const 限定符；如果原本希望返回 T 的引用，直接使用 auto 可能推导为按值返回 T，从而产生拷贝。",
+    "如需保留引用或 const 限定符，应显式添加相应的引用和 const 说明。"
+  ],
+  "examples": [
+    "class SpreadsheetCell { public: operator auto() const { return getValue(); } };",
+    "若需要返回引用，应根据教材提示显式指定引用及 const 限定符，而不能依赖普通 auto 自动保留它们。"
+  ],
+  "misconceptions": [
+    "auto 一定会保留返回表达式的引用和 const 属性；教材指出普通 auto 推导会移除这些限定符。",
+    "operator auto() 的函数体可以只在类外某个不可见位置定义；教材指出返回类型推导要求实现对类用户可见。",
+    "operator auto() 必然表示转换为某个固定的标准类型；实际目标类型由 return 表达式推导。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何用 auto 写 SpreadsheetCell 的转换运算符？",
+      "a": "可以写成 $operator\\ auto()\\ const\\ \\{\\ return\\ getValue();\\ \\}$。"
+    },
+    {
+      "q": "为什么带 auto 返回类型推导的转换运算符通常直接定义在类内？",
+      "a": "因为编译器需要看到函数实现才能推导返回类型，教材要求该实现对类的用户可见。"
+    },
+    {
+      "q": "使用普通 auto 返回引用表达式时需要注意什么？",
+      "a": "auto 会移除引用和 const 限定符，可能改为按值返回并生成拷贝；需要时应显式指定引用和 const。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "auto 类型推导",
+    "转换运算符",
+    "引用与 const"
+  ],
+  "source_pages": [
+    487,
+    488
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "977_使用_operator_auto_定义转换运算符",
+  "_chunk_pages": [
+    485,
+    488
+  ]
+}

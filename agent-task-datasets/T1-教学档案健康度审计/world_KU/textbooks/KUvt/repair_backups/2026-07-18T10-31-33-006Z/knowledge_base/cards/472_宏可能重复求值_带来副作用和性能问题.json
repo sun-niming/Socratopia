@@ -1,0 +1,44 @@
+{
+  "title": "宏可能重复求值，带来副作用和性能问题",
+  "definition": "函数式宏会把参数文本复制到宏替换结果中的每一个位置。如果宏参数是函数调用或其他有副作用、计算代价高的表达式，那么使用宏可能导致该表达式被执行多次。平方宏 `SQUARE(x)` 通常会把 `x` 放置两次，因此传入昂贵函数调用时可能重复调用两次。",
+  "key_points": [
+    "例如使用 `SQUARE(veryExpensiveFunctionCallToComputeNumber())` 时，宏展开会把该函数调用复制两遍。",
+    "重复求值可能导致额外计算开销；如果参数表达式修改状态，还可能产生不同于普通函数调用的结果。",
+    "普通函数的参数通常只在调用时求值一次，而宏不提供这种保证。"
+  ],
+  "examples": [
+    "若定义 `#define SQUARE(x) ((x) * (x))`，则 `SQUARE(veryExpensiveFunctionCallToComputeNumber())` 大致展开为：`((veryExpensiveFunctionCallToComputeNumber()) * (veryExpensiveFunctionCallToComputeNumber()))`。",
+    "若参数是会修改计数器的表达式，例如 `SQUARE(i++)`，宏展开后会出现两次 `i++`；这类写法可能导致副作用和未定义行为，不应使用。"
+  ],
+  "misconceptions": [
+    "误以为宏参数只会计算一次，因为源代码中只写了一次实参。",
+    "误以为宏与内联函数完全等价；宏可能重复求值，而函数参数求值规则不同。",
+    "认为重复调用只影响速度，不会影响程序行为；当参数具有副作用时，结果也可能改变。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么 `SQUARE(veryExpensiveFunctionCallToComputeNumber())` 可能很慢？",
+      "a": "因为平方宏通常将参数复制两次，导致 `veryExpensiveFunctionCallToComputeNumber()` 可能被调用两次。"
+    },
+    {
+      "q": "函数式宏的参数被使用两次时，传入带副作用的表达式会有什么风险？",
+      "a": "该表达式可能被求值两次，从而重复修改状态、产生未定义行为或得到不同于预期的结果。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++预处理器宏",
+    "函数调用与表达式求值"
+  ],
+  "source_pages": [
+    369,
+    372
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "472_宏可能重复求值_带来副作用和性能问题",
+  "_chunk_pages": [
+    369,
+    372
+  ]
+}

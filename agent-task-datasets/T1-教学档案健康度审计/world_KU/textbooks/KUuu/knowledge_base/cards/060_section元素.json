@@ -1,0 +1,36 @@
+{
+  "title": "section元素",
+  "definition": "section元素表示页面中的一个内容区块，例如章节、页眉、页脚或者页面中的其他部分；它可以与h1到h6等标题元素结合使用，用来表示文档结构。",
+  "key_points": [
+    "表示页面中的一个内容区块",
+    "可以与h1到h6等标题元素结合表示文档结构"
+  ],
+  "examples": [
+    "<section><h2>章节标题</h2>...</section>"
+  ],
+  "misconceptions": [
+    "section只是普通容器，不能体现结构",
+    "section不能和标题元素配合使用"
+  ],
+  "qa_pairs": [
+    {
+      "q": "section元素表示什么？",
+      "a": "section元素表示页面中的一个内容区块，并且可以与h1到h6等标题元素结合来表示文档结构。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "HTML5新增结构元素"
+  ],
+  "source_pages": [
+    37,
+    40
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "060_section元素",
+  "_chunk_pages": [
+    37,
+    40
+  ]
+}

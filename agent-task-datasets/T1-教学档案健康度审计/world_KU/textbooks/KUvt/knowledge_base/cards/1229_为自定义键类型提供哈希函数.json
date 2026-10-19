@@ -1,0 +1,46 @@
+{
+  "title": "为自定义键类型提供哈希函数",
+  "definition": "当无序关联容器使用的键类型没有可用的标准哈希函数时，必须为该类型提供自定义哈希函数。原文示例通过为 IntWrapper 编写 std::hash<IntWrapper> 的模板特例，并实现函数调用运算符，返回其内部整数的标准哈希值。",
+  "key_points": [
+    "IntWrapper 需要定义 operator==，因为无序关联容器需要比较键是否相等。",
+    "std::hash 模板定义在 <functional> 头文件中。",
+    "自定义哈希通常通过特例化 std::hash<自定义类型> 实现。",
+    "哈希函数的返回类型是 std::size_t。",
+    "如果类型包含多个数据成员，计算哈希时需要考虑所有相关数据成员；原文示例仅包含一个整数成员。"
+  ],
+  "examples": [
+    "原文示例的核心写法可表示为：\nclass IntWrapper {\npublic:\n    IntWrapper(int i) : m_wrappedInt{i} {}\n    int getValue() const { return m_wrappedInt; }\n    bool operator==(const IntWrapper&) const = default;\nprivate:\n    int m_wrappedInt;\n};\n\ntemplate<>\nstruct std::hash<IntWrapper> {\n    std::size_t operator()(const IntWrapper& x) const {\n        return std::hash<int>{}(x.getValue());\n    }\n};"
+  ],
+  "misconceptions": [
+    "自定义类型不会因为定义了 operator== 就自动获得 std::hash。",
+    "哈希函数只返回哈希值，仍然需要相等比较来确认桶中的具体键。",
+    "为 std::hash 提供允许的模板特例不同于随意向 std 名称空间添加新的普通声明。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何为没有标准哈希函数的 IntWrapper 提供哈希支持？",
+      "a": "特例化 std::hash<IntWrapper>，实现返回 std::size_t 的 operator()，并在其中调用内部整数的标准哈希函数，例如 return std::hash<int>{}(x.getValue());"
+    },
+    {
+      "q": "为什么 IntWrapper 还要定义 operator==？",
+      "a": "无序关联容器在发生哈希冲突时需要使用键相等比较来判断两个键是否相同。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "哈希冲突与桶",
+    "函数对象与模板特例化",
+    "运算符重载"
+  ],
+  "source_pages": [
+    595,
+    595
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1229_为自定义键类型提供哈希函数",
+  "_chunk_pages": [
+    593,
+    596
+  ]
+}

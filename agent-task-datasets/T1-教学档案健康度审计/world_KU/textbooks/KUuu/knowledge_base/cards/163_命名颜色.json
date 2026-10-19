@@ -1,0 +1,34 @@
+{
+  "title": "命名颜色",
+  "definition": "在 CSS 中，可以直接用颜色的英文名称表示颜色，这类写法称为命名颜色。",
+  "key_points": [
+    "常见示例有 red、blue、green 等。",
+    "适合用已知颜色名直接指定颜色。"
+  ],
+  "examples": [
+    "color: red;",
+    "color: blue;"
+  ],
+  "misconceptions": [
+    "不是所有颜色都必须写成 rgb() 或十六进制形式，颜色名也可以直接使用。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "什么是命名颜色？",
+      "a": "直接使用颜色英文名称表示颜色，如 red、blue、green 等。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [],
+  "source_pages": [
+    109,
+    112
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "163_命名颜色",
+  "_chunk_pages": [
+    109,
+    112
+  ]
+}

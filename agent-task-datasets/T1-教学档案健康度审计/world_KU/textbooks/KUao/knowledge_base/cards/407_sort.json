@@ -1,0 +1,40 @@
+{
+  "title": "sort()",
+  "definition": "`sort()` 方法对数组元素进行排序，并返回排序后的数组；它是原地排序，不会复制新数组。教材说明默认排序顺序是先把元素转换为字符串，再按字符串升序排序；并给出了 `compareFun(a,b)` 的返回值规则。",
+  "key_points": [
+    "原地排序，不复制数组",
+    "默认按字符串升序排序",
+    "教材给出的 compareFun 规则是：返回值 > 0 不交换，< 0 交换，= 0 不动"
+  ],
+  "examples": [
+    "var arr = [10, 2, 1];",
+    "arr.sort(); // 默认按字符串排序，结果可能是 [1, 10, 2]",
+    "arr.sort([compareFunction])"
+  ],
+  "misconceptions": [
+    "以为 `sort()` 默认按数值大小排序",
+    "以为 `sort()` 会返回一个全新的数组",
+    "以为 `sort()` 不会改变原数组"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`sort()` 默认按什么顺序排序？",
+      "a": "先把元素转换为字符串，再按字符串升序排序。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "Array对象与创建方式"
+  ],
+  "source_pages": [
+    305,
+    308
+  ],
+  "needs_verification": true,
+  "verify_query": "JavaScript Array.prototype.sort compareFunction 返回值 正负 交换 以及 课程教材 compareFun(a,b) a 代表后面一个元素 b 代表前面的元素",
+  "concept_id": "407_sort",
+  "_chunk_pages": [
+    305,
+    308
+  ]
+}

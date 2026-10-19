@@ -1,0 +1,51 @@
+{
+  "title": "C++中的框架、API与Windows GUI工具",
+  "definition": "第151至152页提到框架（Framework）、API、Microsoft Windows、Microsoft Foundation Classes（MFC）以及 Qt，并将 MFC 和 Qt 与 Windows GUI 图形用户界面开发联系起来。由原文可确定：这些内容属于 C++ 在 Windows 平台进行图形用户界面开发时涉及的框架或工具；但识别文本未完整呈现各小节的详细论述。",
+  "key_points": [
+    "原文出现了 Framework（框架）和 API（应用程序编程接口）等术语。",
+    "原文提到 Microsoft Windows 平台及 Microsoft Foundation Classes，缩写为 MFC。",
+    "第152页将 MFC 和 Qt 列在 Windows GUI 开发相关内容中。",
+    "GUI 是图形用户界面（Graphical User Interface）的缩写。",
+    "由于原文片段大量缺失，无法仅依据该片段确认 MFC 与 Qt 在书中具体承担的全部功能或比较结论。"
+  ],
+  "examples": [
+    "可将原文中的关系概括为：C++ → Windows GUI 开发 → MFC、Qt 等相关工具或框架。",
+    "`MFC` 的英文全称是 `Microsoft Foundation Classes`；原文第151页和第152页均出现了 MFC 相关内容。"
+  ],
+  "misconceptions": [
+    "API、框架和具体库不是完全同义的概念：API强调可调用的编程接口，框架通常还规定程序结构或提供较完整的开发骨架。",
+    "MFC 的全称是 `Microsoft Foundation Classes`，不是 `Microsoft Foundation Class`。",
+    "出现 MFC 和 Qt 并不表示二者必须同时使用；原文片段只表明它们都与 Windows GUI 开发内容相关。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "第152页提到哪些与 Windows GUI 开发相关的 C++ 工具或框架？",
+      "a": "提到了 MFC 和 Qt。"
+    },
+    {
+      "q": "MFC 的英文全称是什么？",
+      "a": "Microsoft Foundation Classes。"
+    },
+    {
+      "q": "GUI 是什么？",
+      "a": "GUI 是 Graphical User Interface 的缩写，中文为图形用户界面。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++程序开发基础",
+    "Windows平台基础",
+    "API与GUI基本概念"
+  ],
+  "source_pages": [
+    151,
+    152
+  ],
+  "needs_verification": true,
+  "verify_query": "《C++20高级编程》第5版 第151-152页 Framework API MFC Qt Windows GUI 原文",
+  "concept_id": "213_c_中的框架_api与windows_gui工具",
+  "_chunk_pages": [
+    149,
+    152
+  ]
+}

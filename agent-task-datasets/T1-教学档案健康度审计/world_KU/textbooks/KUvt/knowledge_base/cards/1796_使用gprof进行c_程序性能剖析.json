@@ -1,0 +1,48 @@
+{
+  "title": "使用gprof进行C++程序性能剖析",
+  "definition": "教材给出的gprof性能分析流程分为三个步骤：首先在编译时使用性能剖析选项，使程序运行时记录执行信息；然后运行程序生成`gmon.out`；最后使用`gprof`读取可执行文件和`gmon.out`，并将报告重定向到文件中。",
+  "key_points": [
+    "使用GCC时，教材示例在编译命令中加入`-pg`，例如`gcc -lstdc++ -std=c++2a -pg -fmodules-ts -o namedb NameDB.cpp NameDBTest.cpp`。",
+    "运行编译后的程序后，工作目录中应生成`gmon.out`。",
+    "分析命令为`gprof namedb gmon.out > gprof-analysis.out`。",
+    "gprof报告可能较晦涩，需要结合其列含义和调用图进行解释。"
+  ],
+  "examples": [
+    "完整流程可抽象为：`编译（加入-pg）` → `运行程序生成gmon.out` → `gprof namedb gmon.out > gprof-analysis.out`。",
+    "教材指出，初次使用vector的程序运行较慢，因此运行时需要耐心。"
+  ],
+  "misconceptions": [
+    "仅执行`gprof`命令不会自动产生原始剖析数据；必须先用适当选项编译并运行程序。",
+    "`gmon.out`是程序运行后生成的剖析数据文件，不是源代码文件。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "使用gprof分析程序通常需要哪三个步骤？",
+      "a": "编译时启用剖析、运行程序生成`gmon.out`、再用`gprof`分析并输出报告。"
+    },
+    {
+      "q": "教材示例中用于启用GCC性能剖析的选项是什么？",
+      "a": "`-pg`。"
+    },
+    {
+      "q": "如何将namedb的gprof报告重定向到文件？",
+      "a": "执行`gprof namedb gmon.out > gprof-analysis.out`。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++程序编译与运行",
+    "命令行重定向"
+  ],
+  "source_pages": [
+    867,
+    868
+  ],
+  "needs_verification": true,
+  "verify_query": "GCC gprof -pg -fmodules-ts C++20 modules-ts 编译命令 gmon.out 官方文档",
+  "concept_id": "1796_使用gprof进行c_程序性能剖析",
+  "_chunk_pages": [
+    865,
+    868
+  ]
+}

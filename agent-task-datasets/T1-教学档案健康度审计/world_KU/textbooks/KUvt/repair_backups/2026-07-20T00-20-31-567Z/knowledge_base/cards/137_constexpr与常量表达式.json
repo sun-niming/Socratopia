@@ -1,0 +1,51 @@
+{
+  "title": "constexpr与常量表达式",
+  "definition": "constexpr用于声明可以在编译期求值的常量或函数。常量表达式是能够由编译器求值的表达式；在要求编译期常量的场景中，普通const函数并不自动满足这一要求。例如，数组大小需要常量表达式时，`const int getArraySize() { return 32; }`这样的普通函数调用不能作为内置数组的大小；应使用适合产生常量表达式的constexpr形式。",
+  "key_points": [
+    "常量表达式是在编译器求值的表达式。",
+    "某些语境要求表达式必须是常量表达式，例如原文所述的内置数组大小。",
+    "`const`表示对象或函数接口中的内容不能通过相应方式修改，但不等于该表达式一定能在编译期求值。",
+    "要让函数用于需要编译期常量的场景，应考虑声明为`constexpr`，并满足constexpr函数的编译期求值条件。"
+  ],
+  "examples": [
+    "原文中的普通const函数：`const int getArraySize() { return 32; }`。",
+    "将数组大小写成`int myArray[getArraySize()];`在原文语境下无效，因为该函数不是constexpr函数。",
+    "适合编译期求值的形式可写为：`constexpr int getArraySize() { return 32; }`，然后使用`int myArray[getArraySize()];`。"
+  ],
+  "misconceptions": [
+    "const函数和constexpr函数完全相同；const主要表示不可修改，constexpr强调可在编译期求值。",
+    "任何返回固定数值的函数都能用于内置数组大小；普通函数调用不一定是常量表达式。",
+    "constexpr只表示运行时结果不变；它的核心含义是表达式在满足条件时可由编译器求值。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "什么是常量表达式？",
+      "a": "常量表达式是能够由编译器在编译期求值的表达式。"
+    },
+    {
+      "q": "为什么原文中的`const int getArraySize()`不能用于内置数组大小？",
+      "a": "因为它只是普通const函数，不是可用于该常量表达式语境的constexpr函数调用。"
+    },
+    {
+      "q": "const和constexpr的主要区别是什么？",
+      "a": "const主要限制修改；constexpr用于表达可以在编译期求值的常量或函数。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++const基础",
+    "函数声明与返回值",
+    "数组基础"
+  ],
+  "source_pages": [
+    76,
+    76
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 内置数组大小 常量表达式 const 函数 constexpr 函数标准规则",
+  "concept_id": "137_constexpr与常量表达式",
+  "_chunk_pages": [
+    73,
+    76
+  ]
+}

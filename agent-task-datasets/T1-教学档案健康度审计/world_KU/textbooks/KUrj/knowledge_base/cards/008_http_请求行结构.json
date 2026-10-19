@@ -1,0 +1,49 @@
+{
+  "title": "HTTP 请求行结构",
+  "definition": "HTTP 请求行由三部分组成：方法、request target、协议版本。示例是 `GET /practice.html HTTP/1.1`，其中 `GET` 表示请求获取资源，`/practice.html` 是请求目标，这里简化为 URL 路径，`HTTP/1.1` 是协议版本。",
+  "key_points": [
+    "请求行的基本格式是：`METHOD SP REQUEST_TARGET SP HTTP_VERSION`。",
+    "项目只支持 `GET` 是合理的，因为静态文件服务器核心是按路径读取并返回资源。",
+    "请求行不完整时可返回 `400`。",
+    "方法不是 `GET` 时可返回 `405`。",
+    "路径不是以 `/` 开头时可返回 `400`。"
+  ],
+  "examples": [
+    "`GET /practice.html HTTP/1.1`",
+    "若方法是 `POST`，返回 `405`。",
+    "若请求只有 `GET /`，可返回 `400`。"
+  ],
+  "misconceptions": [
+    "`POST` 不是这个五天主线要支持的方法。",
+    "request target 在这里不必展开成完整 URL，教材中简化为路径。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "请求行 `GET /practice.html HTTP/1.1` 的三部分分别是什么？",
+      "a": "方法、request target、协议版本。"
+    },
+    {
+      "q": "如果方法不是 `GET`，应该返回什么？",
+      "a": "`405`。"
+    },
+    {
+      "q": "如果路径不是 `/` 开头，应该返回什么？",
+      "a": "`400`。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "TCP 与 HTTP 的分层关系"
+  ],
+  "source_pages": [
+    13,
+    16
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "008_http_请求行结构",
+  "_chunk_pages": [
+    13,
+    16
+  ]
+}

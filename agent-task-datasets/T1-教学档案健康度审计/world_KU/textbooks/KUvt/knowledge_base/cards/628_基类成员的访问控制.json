@@ -1,0 +1,42 @@
+{
+  "title": "基类成员的访问控制",
+  "definition": "在继承关系中，基类成员的访问说明符决定派生类能否直接访问它们：基类的 public 和 protected 成员可供派生类成员函数使用，基类的 private 成员不能被派生类成员函数直接访问。",
+  "key_points": [
+    "基类的 protected 数据成员和成员函数可以被派生类成员函数直接访问。",
+    "基类的 private 数据成员和成员函数只能由基类自身的成员函数访问，派生类不能直接访问。",
+    "从派生类的角度看，基类的 public 和 protected 成员是可用的；但派生类仍不能访问基类的 private 成员。"
+  ],
+  "examples": [
+    "如果 Base 中声明 `protected: int m_protectedInt{0};`，则 `Derived::someOtherMethod()` 可以直接使用 `m_protectedInt`。",
+    "如果 Base 中声明 `private: int m_privateInt{0};`，则 Derived 中直接使用 `m_privateInt` 会导致编译错误。"
+  ],
+  "misconceptions": [
+    "派生类能够访问基类成员，并不意味着派生类能够访问基类的 private 成员；private 成员对派生类仍不可直接访问。",
+    "protected 并不是对所有代码公开；它主要允许类自身和派生类访问。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "派生类能否直接访问基类的 protected 数据成员？",
+      "a": "能。派生类成员函数可以直接访问基类的 protected 数据成员。"
+    },
+    {
+      "q": "派生类能否直接访问基类的 private 数据成员？",
+      "a": "不能。派生类成员函数不能直接访问基类的 private 数据成员。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++类的访问说明符"
+  ],
+  "source_pages": [
+    305,
+    305
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "628_基类成员的访问控制",
+  "_chunk_pages": [
+    305,
+    308
+  ]
+}

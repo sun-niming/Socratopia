@@ -1,0 +1,41 @@
+{
+  "title": "用 using 声明继承基类成员函数重载",
+  "definition": "在派生类中，可以使用成员函数形式的 using 声明将基类的同名成员函数引入派生类作用域。这样，派生类既可以保留基类版本，也可以添加自己的同名重载，而不会因为派生类声明了一个同名函数就直接遮蔽基类的所有同名函数。典型写法是 `using Base::someMethod;`。",
+  "key_points": [
+    "`using Base::someMethod;` 会把基类的 `someMethod` 引入派生类作用域。",
+    "派生类可以在此基础上增加新的重载，例如 `someMethod(int)`。",
+    "该 using 声明用于名称查找和重载集合引入，不等于重新实现基类函数。"
+  ],
+  "examples": [
+    "class Base {\npublic:\n    virtual void someMethod();\n};\n\nclass Derived : public Base {\npublic:\n    using Base::someMethod;\n    void someMethod(int i);\n};"
+  ],
+  "misconceptions": [
+    "在派生类中声明同名函数并不会自动保留基类的全部同名重载；通常需要使用 `using Base::someMethod;` 将基类重载引入。",
+    "using 声明本身不会把基类成员函数复制成新的函数实现。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何让派生类在添加 `someMethod(int)` 的同时仍能使用基类的 `someMethod`？",
+      "a": "在派生类中写 `using Base::someMethod;`，再声明新的 `someMethod(int)` 重载。"
+    },
+    {
+      "q": "`using Base::someMethod;` 的主要作用是什么？",
+      "a": "将基类的同名成员函数引入派生类作用域，使其参与派生类中的名称查找和重载。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++继承与成员函数重载"
+  ],
+  "source_pages": [
+    333,
+    336
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 using Base::someMethod derived class inherit overloads exact syntax and behavior",
+  "concept_id": "432_用_using_声明继承基类成员函数重载",
+  "_chunk_pages": [
+    333,
+    336
+  ]
+}

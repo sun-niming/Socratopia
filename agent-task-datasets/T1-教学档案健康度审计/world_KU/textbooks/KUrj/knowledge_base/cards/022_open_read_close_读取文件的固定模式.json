@@ -1,0 +1,40 @@
+{
+  "title": "open/read/close 读取文件的固定模式",
+  "definition": "读取静态文件时，常用模式是：先 `open(path, O_RDONLY)`，如果失败则返回 403；再用固定大小缓冲区循环 `read(fd, buf, sizeof(buf))`，每次读到多少字节就发送多少字节；`read()` 返回 0 表示 EOF，返回 -1 表示错误；最后 `close(fd)`。发送文件块时不能用 `strlen(buf)`，因为文件可能是二进制并包含 `\\0`。",
+  "key_points": [
+    "`open(path, O_RDONLY)` 失败时返回 403。",
+    "`read()` 返回值 `n` 就是本次实际读取到的字节数，发送时应按 `n` 发送。",
+    "`read()` 返回 0 表示 EOF，返回 -1 表示错误。",
+    "不要用 `strlen(buf)` 发送文件块，因为二进制文件里可能有 `\\0`。",
+    "读取结束后要 `close(fd)`。"
+  ],
+  "examples": [
+    "```c\nint fd = open(path, O_RDONLY);\nif (fd < 0) {\n    return 403;\n}\nchar buf[8192];\nssize_t n;\nwhile ((n = read(fd, buf, sizeof(buf))) > 0) {\n    send_all(client_fd, buf, (size_t)n);\n}\nclose(fd);\n```"
+  ],
+  "misconceptions": [
+    "以为 `strlen(buf)` 可以用来表示任意文件块的真实长度。",
+    "以为 `read()` 只会返回成功或失败，不会返回 0。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么不能用 `strlen(buf)` 发送读取到的文件块？",
+      "a": "因为文件可能是二进制，里面可能有 `\\0`，`strlen` 会提前截断；应使用 `read()` 返回的字节数 `n`。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "open/read/close 基础",
+    "二进制与文本文件区别"
+  ],
+  "source_pages": [
+    21,
+    24
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "022_open_read_close_读取文件的固定模式",
+  "_chunk_pages": [
+    21,
+    24
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "title": "ECMAScript 中的本地对象与宿主对象",
+  "definition": "在 ECMAScript 中，根据对象的作用范围，对象可分为本地对象和宿主对象。本地对象被定义为独立于宿主环境实现的对象。",
+  "key_points": [
+    "对象可按作用范围进行分类",
+    "分类包括本地对象和宿主对象",
+    "本地对象独立于宿主环境实现"
+  ],
+  "examples": [
+    "独立于宿主环境实现的对象"
+  ],
+  "misconceptions": [
+    "本地对象是由宿主环境提供的对象",
+    "本地对象必须依赖浏览器才能存在"
+  ],
+  "qa_pairs": [
+    {
+      "q": "ECMAScript 中对象按什么分类？",
+      "a": "按对象的作用范围分为本地对象和宿主对象。"
+    },
+    {
+      "q": "本地对象的定义是什么？",
+      "a": "独立于宿主环境实现的对象。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "ECMAScript"
+  ],
+  "source_pages": [
+    297,
+    300
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "393_ecmascript_中的本地对象与宿主对象",
+  "_chunk_pages": [
+    297,
+    300
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "title": "forward_list 是单链表",
+  "definition": "std::forward_list 定义在相应标准库头文件中，是一种单链表；std::list 是双链表。forward_list 只支持前向迭代，因此不能像 list 一样反向遍历，也不能直接高效访问某个元素的前驱节点。",
+  "key_points": [
+    "forward_list 只支持前向迭代器，不提供反向遍历迭代器。",
+    "修改 forward_list 中的范围时，通常需要先访问待修改位置之前的元素，因为单链表操作需要前驱节点。",
+    "用于 erase_after() 和 splice_after() 等操作的范围是前开范围；不能简单地使用 begin() 构造需要前驱位置的范围。",
+    "before_begin() 返回指向链表第一个元素之前的假想元素的迭代器。该迭代器不能解引用，但递增一次后可得到与 begin() 相同效果的迭代器。",
+    "forward_list 为尽量减少内存使用而不提供 size() 成员函数，因此不能像 list 一样直接通过 size() 查询元素个数。"
+  ],
+  "examples": [
+    "访问链表第一个元素之前的位置：`auto pos = list.before_begin();`",
+    "`before_begin()` 不能解引用，但 `++pos` 后得到的迭代器等价于 `list.begin()`。",
+    "在单链表中插入元素通常需要指定前驱位置，例如使用 `list.insert_after(pos, value);`。"
+  ],
+  "misconceptions": [
+    "before_begin() 返回的是第一个元素的迭代器；实际上它指向第一个元素之前的假想位置。",
+    "可以对 before_begin() 解引用；实际上该迭代器指向非法数据，不能解引用。",
+    "forward_list 没有 size() 是因为不能计算元素数量；实际上可以遍历计算，但标准类型本身不提供 size() 成员函数，以减少内存使用。",
+    "forward_list 与 list 一样支持反向迭代；实际上 forward_list 只支持前向迭代。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "forward_list 与 list 在链表结构上有什么区别？",
+      "a": "forward_list 是单链表，list 是双链表。"
+    },
+    {
+      "q": "before_begin() 的作用是什么？",
+      "a": "它返回指向 forward_list 第一个元素之前的假想元素的迭代器，适合用于需要指定首元素前驱位置的插入或链表操作。"
+    },
+    {
+      "q": "为什么 forward_list 不提供 size()？",
+      "a": "原文说明，forward_list 要最小化内存使用；不提供 size() 就不需要存储链表大小。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "单链表与双链表",
+    "迭代器"
+  ],
+  "source_pages": [
+    570,
+    570
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1176_forward_list_是单链表",
+  "_chunk_pages": [
+    569,
+    572
+  ]
+}

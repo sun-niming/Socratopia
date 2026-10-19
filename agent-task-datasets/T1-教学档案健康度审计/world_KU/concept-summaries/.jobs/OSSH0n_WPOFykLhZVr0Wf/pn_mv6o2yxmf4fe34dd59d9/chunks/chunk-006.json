@@ -1,0 +1,283 @@
+{
+  "chunkId": "chunk-006",
+  "messageRange": [
+    52,
+    64
+  ],
+  "topics": [
+    {
+      "name": "归约与移入的判定依据",
+      "facts": [
+        "项的点落在最右端时表示产生式体符号已全部到手，该归约",
+        "项的点后面还跟着符号时表示还没攒完，应继续移入",
+        "有路走就移入，没路走就归约"
+      ],
+      "examples": [
+        "$F\\to id\\,\\cdot$ 点在最右端，按 $F\\to id$ 归约"
+      ],
+      "sourceMessageIndexes": [
+        52,
+        53
+      ]
+    },
+    {
+      "name": "LR 分析器的组成",
+      "facts": [
+        "一个 LR 分析器由输入、输出、栈、驱动程序、语法分析表五样东西组成",
+        "所有 LR 分析器的驱动程序一模一样，区别全在表上"
+      ],
+      "examples": [],
+      "sourceMessageIndexes": [
+        53
+      ]
+    },
+    {
+      "name": "ACTION 与 GOTO 表",
+      "facts": [
+        "表分 ACTION 和 GOTO 两块",
+        "$ACTION[i,a]$ 管终结符号一侧，取值有移入 j、归约 $A\\to\\beta$、接受、报错四种",
+        "$GOTO[i,A]$ 管非终结符号一侧，配合归约使用",
+        "ACTION 表中 $s_i$ 表示移入并压状态 i，数字 j 表示按编号 j 的产生式归约，$acc$ 表示接受，空白表示报错",
+        "GOTO 表中非终结符一侧直接填目标状态号"
+      ],
+      "examples": [
+        "$ACTION[0,id]=s5$：状态 0 遇 id 移入压状态 5",
+        "$ACTION[5,*]=r6$：状态 5 遇 * 按产生式 6 即 $F\\to id$ 归约",
+        "表达式文法产生式编号：$E\\to E+T$ 为 1，$E\\to T$ 为 2，$T\\to T*F$ 为 3，$T\\to F$ 为 4，$F\\to(E)$ 为 5，$F\\to id$ 为 6"
+      ],
+      "sourceMessageIndexes": [
+        53,
+        57,
+        58,
+        59
+      ]
+    },
+    {
+      "name": "栈中状态与文法符号的绑定约定",
+      "facts": [
+        "栈里存的是状态序列，$s_m$ 在栈顶",
+        "移入时压入的是状态 j 而非输入符号 a",
+        "每个状态都与唯一的文法符号绑定，所有进入状态 j 的箭头标签都是同一个文法符号 X",
+        "只有开始状态 0 例外，它是栈底，不绑任何符号",
+        "符号可以从对应的状态复原出来，因此不需要真的存符号",
+        "两个状态可以共用同一个符号，是状态到符号唯一而非符号到状态唯一"
+      ],
+      "examples": [
+        "状态 5 对应 id，状态 2 对应 T，状态 3 对应 F",
+        "图 4-31 中状态 1 和状态 8 都靠 E 进来，状态 2 和状态 9 都靠 T"
+      ],
+      "sourceMessageIndexes": [
+        53,
+        55
+      ]
+    },
+    {
+      "name": "格局与四种动作的后果",
+      "facts": [
+        "格局写成一对 $(s_0s_1\\cdots s_m,\\ a_ia_{i+1}\\cdots a_n\\ \\$)$，左边是栈右边是剩余输入",
+        "格局对应最右句型 $X_1X_2\\cdots X_m\\,a_ia_{i+1}\\cdots a_n$，$X_k$ 是状态 $s_k$ 代表的文法符号",
+        "移入 s：把状态 s 压栈，输入往后挪一格",
+        "归约 $A\\to\\beta$：设 β 长为 r，弹出 r 个状态，让 $s_{m-r}$ 露到栈顶，再压入 $s=GOTO[s_{m-r},A]$，当前输入符号不动",
+        "接受：分析完成；报错：调错误恢复例程",
+        "算法 4.44 是所有 LR 分析器的总纲，区别只在 ACTION、GOTO 表"
+      ],
+      "examples": [
+        "分析 id*id+id 的完整走法表：从栈 0 开始逐步移入归约直到 $ACTION[1,\\$]=acc$"
+      ],
+      "sourceMessageIndexes": [
+        55,
+        57,
+        59,
+        61
+      ]
+    },
+    {
+      "name": "归约不消费输入的原因",
+      "facts": [
+        "归约不吃输入与终结符、非终结符无关",
+        "要收的那串东西早就已经在栈上，归约只动栈不动输入",
+        "输入符号的作用只是查表挑出该步动作，挑完原地待着",
+        "句柄在栈里，不在输入缓冲区里"
+      ],
+      "examples": [
+        "$F\\to id$ 的体是 id，$F\\to(E)$ 的体里有 ( 和 )，$T\\to T*F$ 里有 *，全是终结符也照样归约"
+      ],
+      "sourceMessageIndexes": [
+        56,
+        57
+      ]
+    },
+    {
+      "name": "SLR 表构造法",
+      "facts": [
+        "SLR 构造法算法编号 4.46，只用规范 LR(0) 项集族 C 和 FOLLOW 集",
+        "移入规则：若 $[A\\to\\alpha\\cdot a\\beta]$ 在 $I_i$ 中且 a 是终结符、$GOTO(I_i,a)=I_j$，置 $ACTION[i,a]=$ 移入 j",
+        "归约规则：若 $[A\\to\\alpha\\cdot]$ 在 $I_i$ 中且 $A\\neq S'$，对 FOLLOW(A) 中每个 a 置 $ACTION[i,a]=$ 归约 $A\\to\\alpha$",
+        "接受规则：若 $[S'\\to S\\cdot]$ 在 $I_i$ 中，置 $ACTION[i,\\$]=$ 接受",
+        "剩余格子填报错",
+        "FOLLOW 限制的意义是只有后面真可能跟这个符号才敢归约，这是 SLR 中 S 的由来"
+      ],
+      "examples": [
+        "$I_1=\\{[E'\\to E\\cdot],[E\\to E\\cdot+T]\\}$：$[E'\\to E\\cdot]$ 套规则 3 得 $ACTION[1,\\$]=acc$；$[E\\to E\\cdot+T]$ 套规则 1 得 $ACTION[1,+]=s6$"
+      ],
+      "sourceMessageIndexes": [
+        61,
+        63
+      ]
+    },
+    {
+      "name": "项集族的逐层推导",
+      "facts": [
+        "工具是 CLOSURE 和 GOTO 两个函数一遍遍跑",
+        "$I_0=\\text{CLOSURE}(\\{[E'\\to\\cdot E]\\})$ 闭包铺开得到一串项",
+        "每一层拿上一层的状态对各个文法符号跑 GOTO 得到新状态",
+        "对旧状态跑 GOTO 落地全是已在 C 里的老状态时循环停止",
+        "同一状态对不同符号跑 GOTO 开出不同新状态，项集族分叉成树"
+      ],
+      "examples": [
+        "$GOTO(I_0,E)=I_1$，$GOTO(I_0,T)=I_2$，$GOTO(I_0,F)=I_3$，$GOTO(I_0,()=I_4$，$GOTO(I_0,id)=I_5$",
+        "$GOTO(I_1,+)=I_6$，$GOTO(I_2,*)=I_7$，$GOTO(I_4,E)=I_8$",
+        "$GOTO(I_6,T)=I_9$，$GOTO(I_7,F)=I_{10}$，$GOTO(I_8,))=I_{11}$",
+        "$I_4$ 对 T、F、(、id 走回到 $I_2,I_3,I_4,I_5$",
+        "$I_6=\\{E\\to E+\\cdot T,\\ T\\to\\cdot T*F,\\ T\\to\\cdot F,\\ F\\to\\cdot(E),\\ F\\to\\cdot id\\}$"
+      ],
+      "sourceMessageIndexes": [
+        63
+      ]
+    }
+  ],
+  "learnerEvidence": [
+    {
+      "kind": "correct",
+      "content": "归约，id 后的点",
+      "sourceMessageIndexes": [
+        52
+      ]
+    },
+    {
+      "kind": "confusion",
+      "content": "不清楚状态复原符号的约定是怎么做到的",
+      "sourceMessageIndexes": [
+        54
+      ]
+    },
+    {
+      "kind": "misconception",
+      "content": "认为归约不吃输入是因为都不是终结符号",
+      "sourceMessageIndexes": [
+        56
+      ]
+    },
+    {
+      "kind": "correct",
+      "content": "$ACTION[5,*]=r6$",
+      "sourceMessageIndexes": [
+        58
+      ]
+    },
+    {
+      "kind": "correct",
+      "content": "$ACTION[7,id]=s5$，移入，压进去状态是 s5",
+      "sourceMessageIndexes": [
+        60
+      ]
+    },
+    {
+      "kind": "shift",
+      "content": "要求接着讲项集族是怎么一层层推出来的",
+      "sourceMessageIndexes": [
+        62
+      ]
+    },
+    {
+      "kind": "shift",
+      "content": "要求接着讲 GOTO 为什么需要闭包",
+      "sourceMessageIndexes": [
+        64
+      ]
+    }
+  ],
+  "keyInsights": [
+    {
+      "content": "归约，id 后的点",
+      "sourceMessageIndexes": [
+        52
+      ]
+    }
+  ],
+  "openQuestions": [
+    {
+      "content": "GOTO 为什么需要闭包",
+      "sourceMessageIndexes": [
+        64
+      ]
+    },
+    {
+      "content": "$\\text{GOTO}(I_6,T)$ 得到哪个状态、里面有哪些项",
+      "sourceMessageIndexes": [
+        63
+      ]
+    }
+  ],
+  "reviewCandidates": [
+    {
+      "question": "一个 LR 分析器由哪五样东西组成？所有 LR 分析器的共同点是什么？",
+      "answer": "由输入、输出、栈、驱动程序、语法分析表组成；所有 LR 分析器的驱动程序一模一样，区别全在表上",
+      "sourceMessageIndexes": [
+        53
+      ]
+    },
+    {
+      "question": "$ACTION[i,a]$ 的取值有哪四种？",
+      "answer": "移入 j、归约 $A\\to\\beta$、接受、报错",
+      "sourceMessageIndexes": [
+        53
+      ]
+    },
+    {
+      "question": "栈里为什么可以不存文法符号而只存状态？",
+      "answer": "因为每个状态都与唯一的文法符号绑定，所有进入状态 j 的箭头标签都是同一个文法符号 X；只有开始状态 0 例外不绑任何符号。符号可以从对应状态复原出来",
+      "sourceMessageIndexes": [
+        53,
+        55
+      ]
+    },
+    {
+      "question": "归约 $A\\to\\beta$ 时对栈和输入各做什么？",
+      "answer": "设 β 长为 r，弹出 r 个状态让 $s_{m-r}$ 露到栈顶，再压入 $s=GOTO[s_{m-r},A]$；当前输入符号不动",
+      "sourceMessageIndexes": [
+        55
+      ]
+    },
+    {
+      "question": "归约为什么不需要消费输入符号？",
+      "answer": "要收的那串东西早就已经在栈上，归约只动栈不动输入；输入符号的作用只是查表挑出该步动作，挑完原地待着",
+      "sourceMessageIndexes": [
+        57
+      ]
+    },
+    {
+      "question": "分析 id*id+id 时 $ACTION[5,*]$ 这一格写的是什么？该做什么动作？",
+      "answer": "r6，即按产生式 6（$F\\to id$）归约",
+      "sourceMessageIndexes": [
+        57,
+        58,
+        59
+      ]
+    },
+    {
+      "question": "SLR 构造表时三条核心规则是什么？",
+      "answer": "移入：若 $[A\\to\\alpha\\cdot a\\beta]\\in I_i$ 且 a 终结符、$GOTO(I_i,a)=I_j$，置 $ACTION[i,a]=$ 移入 j；归约：若 $[A\\to\\alpha\\cdot]\\in I_i$ 且 $A\\neq S'$，对 FOLLOW(A) 中每个 a 置 $ACTION[i,a]=$ 归约 $A\\to\\alpha$；接受：若 $[S'\\to S\\cdot]\\in I_i$，置 $ACTION[i,\\$]=$ 接受；其余填报错",
+      "sourceMessageIndexes": [
+        61
+      ]
+    },
+    {
+      "question": "$I_1=\\{[E'\\to E\\cdot],[E\\to E\\cdot+T]\\}$ 按 SLR 规则各自往表里填什么？",
+      "answer": "$[E'\\to E\\cdot]$ 套接受规则得 $ACTION[1,\\$]=acc$；$[E\\to E\\cdot+T]$ 点后跟终结符 + 且 $GOTO(I_1,+)=I_6$，得 $ACTION[1,+]=s6$",
+      "sourceMessageIndexes": [
+        63
+      ]
+    }
+  ]
+}

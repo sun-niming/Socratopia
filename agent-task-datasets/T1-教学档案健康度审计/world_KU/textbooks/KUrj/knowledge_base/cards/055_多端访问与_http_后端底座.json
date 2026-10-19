@@ -1,0 +1,37 @@
+{
+  "title": "多端访问与 HTTP 后端底座",
+  "definition": "因为这个项目使用 HTTP，所以客户端不局限于浏览器。只要某个客户端能够发送 HTTP 请求，就可以访问这套服务端，例如 Web 浏览器、Electron 桌面端、移动端 App、MacOS 客户端以及局域网中的其他机器。因此，这个项目可以概括为“多端访问的后端底座”。",
+  "key_points": [
+    "HTTP 使客户端类型不受限",
+    "浏览器之外的客户端也可以复用同一服务端",
+    "适合在答辩中说明项目的通用访问能力"
+  ],
+  "examples": [
+    "Web 浏览器可以访问；Electron 桌面端可以访问；移动端 App 可以访问；MacOS 客户端可以访问；局域网其他机器也可以访问。"
+  ],
+  "misconceptions": [
+    "这个项目只能给浏览器用",
+    "多端访问必须重写服务器"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何向答辩老师解释这个项目的多端发布能力？",
+      "a": "这是一个 HTTP 服务端，只要客户端能发 HTTP 请求，就可以复用同一套服务端模型，因此它支持多端访问。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "HTTP 协议"
+  ],
+  "source_pages": [
+    37,
+    40
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "055_多端访问与_http_后端底座",
+  "_chunk_pages": [
+    37,
+    40
+  ]
+}

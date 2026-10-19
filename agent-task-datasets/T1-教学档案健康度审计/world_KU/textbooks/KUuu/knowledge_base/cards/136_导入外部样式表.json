@@ -1,0 +1,38 @@
+{
+  "title": "导入外部样式表",
+  "definition": "导入外部样式表是指在 style 标签中使用导入方式来引入外部 CSS；原文特别提示这种方式不要忘了分号“;”。",
+  "key_points": [
+    "在style标签中使用",
+    "用于导入外部样式表",
+    "这种方式要注意分号"
+  ],
+  "examples": [
+    "在style标签中使用导入语句（原文提示不要忘了分号;）"
+  ],
+  "misconceptions": [
+    "导入外部样式表要写在link标签中",
+    "导入语句后可以省略分号"
+  ],
+  "qa_pairs": [
+    {
+      "q": "导入外部样式表时应注意什么？",
+      "a": "在style标签中使用，并且不要忘了分号。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "HTML基础",
+    "CSS概述"
+  ],
+  "source_pages": [
+    85,
+    88
+  ],
+  "needs_verification": true,
+  "verify_query": "教材《Web前端开发合集》第88页 导入外部样式表 在style标签中的完整语法是什么？请核实是否使用@import以及分号写法。",
+  "concept_id": "136_导入外部样式表",
+  "_chunk_pages": [
+    85,
+    88
+  ]
+}

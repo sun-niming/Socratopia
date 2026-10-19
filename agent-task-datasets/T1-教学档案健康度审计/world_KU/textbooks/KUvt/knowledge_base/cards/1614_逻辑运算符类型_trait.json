@@ -1,0 +1,44 @@
+{
+  "title": "逻辑运算符类型 trait",
+  "definition": "C++ 提供三种用于组合类型 trait 结果的逻辑运算符 trait：`conjunction` 表示逻辑与，`disjunction` 表示逻辑或，`negation` 表示逻辑非。它们可以接收可变数量的模板类型参数，并通过 `_v` 变量模板直接得到布尔结果。",
+  "key_points": [
+    "`std::conjunction_v<Ts...>` 只有在所有输入 trait 都为真时才为真。",
+    "`std::disjunction_v<Ts...>` 只要至少一个输入 trait 为真就为真。",
+    "`std::negation_v<T>` 是输入 trait 结果的逻辑非。"
+  ],
+  "examples": [
+    "```cpp\nstd::cout << std::conjunction_v<\n    std::is_integral<int>, std::is_integral<short>>; // 1\n\nstd::cout << std::conjunction_v<\n    std::is_integral<int>, std::is_integral<double>>; // 0\n\nstd::cout << std::disjunction_v<\n    std::is_integral<int>,\n    std::is_integral<double>,\n    std::is_integral<short>>; // 1\n\nstd::cout << std::negation_v<std::is_integral<int>>; // 0\n```",
+    "数学关系可写为：$$\\operatorname{conjunction}(A_1,\\ldots,A_n)=A_1\\land\\cdots\\land A_n$$ $$\\operatorname{disjunction}(A_1,\\ldots,A_n)=A_1\\lor\\cdots\\lor A_n$$ $$\\operatorname{negation}(A)=\\lnot A$$"
+  ],
+  "misconceptions": [
+    "`conjunction` 不是只接收两个 trait；它可以接收可变数量的模板参数。",
+    "`_v` 形式返回的是布尔值，不是 trait 类型本身；不带 `_v` 的形式是 trait 类型。",
+    "这些 trait 在编译期组合类型条件，不是运行时的逻辑运算。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`std::conjunction_v<std::is_integral<int>, std::is_integral<double>>` 的值是什么？",
+      "a": "值为 `false`，因为 `double` 不是整型，两个条件不可能同时为真。"
+    },
+    {
+      "q": "`std::disjunction_v<std::is_integral<int>, std::is_integral<double>>` 的值是什么？",
+      "a": "值为 `true`，因为 `int` 是整型，至少一个条件为真。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "类型 trait",
+    "可变参数模板"
+  ],
+  "source_pages": [
+    786,
+    786
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1614_逻辑运算符类型_trait",
+  "_chunk_pages": [
+    785,
+    788
+  ]
+}

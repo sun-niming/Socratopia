@@ -1,0 +1,43 @@
+{
+  "title": "std::jthread自动join并支持协作式取消",
+  "definition": "C++20引入了std::jthread，它定义在<thread>中，功能基本类似于std::thread，但有两个重要特性：析构函数会自动调用join()，并且支持协作式取消。使用std::jthread可以避免因销毁仍然joinable的std::thread对象而调用std::terminate()。",
+  "key_points": [
+    "std::jthread是C++20引入的线程类型。",
+    "std::jthread在析构时自动join。",
+    "std::jthread支持协作式取消，但取消仍需要线程配合，而不是强制杀死线程。"
+  ],
+  "examples": [
+    "概念性对比：\nstd::thread对象销毁前通常需要显式调用join()；std::jthread在析构时会自动join。\n\nstd::jthread定义在<thread>头文件中。"
+  ],
+  "misconceptions": [
+    "自动join不等于线程会被强制终止；析构时仍会等待线程完成。",
+    "std::jthread的协作式取消不是立即、强制地杀死线程，线程本身需要配合取消请求。",
+    "std::jthread并非完全不同于std::thread的线程模型；教材强调它基本等同于thread，但增加了自动join和协作式取消。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "std::jthread相对于std::thread增加了哪两个重要特性？",
+      "a": "它在析构函数中自动join，并支持协作式取消。"
+    },
+    {
+      "q": "std::jthread的自动join能否强制终止线程？",
+      "a": "不能。自动join会等待线程完成；协作式取消也需要线程主动配合。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "std::thread的joinable状态",
+    "协作式线程取消"
+  ],
+  "source_pages": [
+    796,
+    796
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1634_std_jthread自动join并支持协作式取消",
+  "_chunk_pages": [
+    793,
+    796
+  ]
+}

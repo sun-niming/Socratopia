@@ -1,0 +1,50 @@
+{
+  "title": "lambda 中捕获 this 与 *this",
+  "definition": "lambda 可以捕获当前对象的 `this` 指针，也可以捕获当前对象的副本。`[this]` 捕获指针，使 lambda 能访问该对象的成员；`[*this]` 捕获当前对象的拷贝，当 lambda 执行时原对象可能已经不存活时，可以使用对象副本。",
+  "key_points": [
+    "`[this]` 捕获当前对象的指针；lambda 可以访问该对象的公有、保护和私有数据成员及方法。",
+    "使用 `[this]` 时，必须确保该指针指向的对象在 lambda 最后一次执行时仍然存活。",
+    "`[*this]` 捕获当前对象的副本，适合 lambda 执行时原对象可能已经销毁的场景。",
+    "对象的数据成员不能像普通局部变量那样单独直接写入捕获列表；应通过 `this` 或 `*this` 捕获当前对象。",
+    "教材指出，在 C++20 中，如果需要按值捕获当前对象指针，应显式写 `[=, this]`；仅使用 `[=]` 隐式捕获 `this` 已被弃用。"
+  ],
+  "examples": [
+    "捕获对象指针：`[this] { memberFunction(); }`。",
+    "捕获对象副本：`[*this] { useMemberData(); }`。",
+    "默认按值捕获其他变量并显式捕获 `this`：`[=, this] { ... }`。"
+  ],
+  "misconceptions": [
+    "`[this]` 捕获的是对象指针，不是整个对象的副本。",
+    "`[*this]` 与 `[this]` 不同：前者保存对象副本，后者保存指针。",
+    "即使 lambda 只在对象销毁后执行，`[this]` 也不安全；必须考虑对象生命周期。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`[this]` 和 `[*this]` 的区别是什么？",
+      "a": "`[this]` 捕获当前对象的指针，`[*this]` 捕获当前对象的拷贝。"
+    },
+    {
+      "q": "什么时候更适合使用 `[*this]`？",
+      "a": "当 lambda 执行时原对象可能已经不再存活，但仍需要访问对象状态时。"
+    },
+    {
+      "q": "C++20 中如何在默认值捕获的同时显式捕获 `this`？",
+      "a": "使用 `[=, this]`。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "lambda 的引用捕获与默认捕获"
+  ],
+  "source_pages": [
+    620,
+    620
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 lambda [=] 隐式捕获 this 弃用 [=, this] 标准",
+  "concept_id": "1281_lambda_中捕获_this_与_this",
+  "_chunk_pages": [
+    617,
+    620
+  ]
+}

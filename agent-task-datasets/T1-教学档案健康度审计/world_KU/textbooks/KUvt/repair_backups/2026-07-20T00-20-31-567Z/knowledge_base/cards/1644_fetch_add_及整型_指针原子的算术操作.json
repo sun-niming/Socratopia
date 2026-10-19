@@ -1,0 +1,48 @@
+{
+  "title": "fetch_add 及整型、指针原子的算术操作",
+  "definition": "fetch_add(value) 以原子方式获取原子对象当前值，将给定值加到原子对象上，并返回加法执行前的旧值。整型原子类型还支持 fetch_sub()、fetch_and()、fetch_or()、fetch_xor() 以及相应的复合赋值和自增、自减操作；原子指针类型支持 fetch_add()、fetch_sub()、++、+=、-- 和 -= 等操作。",
+  "key_points": [
+    "fetch_add() 返回的是修改前的旧值，而不是修改后的新值。",
+    "示例中初值为 10，执行 fetch_add(4) 后，返回值为 10，原子对象变为 14。",
+    "原子操作通常可以接收 memory_order 参数；默认内存序为 memory_order_seq_cst。",
+    "教材指出，C++20 为浮点原子类型增加了 fetch_add() 和 fetch_sub() 支持。"
+  ],
+  "examples": [
+    "代码：\natomic<int> value { 10 };\nint fetched { value.fetch_add(4) };\n执行后：\n$$\\begin{aligned}\nfetched &= 10\\\\\nvalue &= 14\n\\end{aligned}$$"
+  ],
+  "misconceptions": [
+    "fetch_add() 返回旧值，不是加法完成后的新值。",
+    "对原子对象使用 fetch_add() 不等于对任意相关非原子数据都提供线程安全。",
+    "memory_order 参数改变的是内存同步语义，不是 fetch_add 的加法结果。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "atomic<int> value{10}; 执行 int fetched = value.fetch_add(4); 后，fetched 和 value 分别是多少？",
+      "a": "fetched 为 10，value 为 14。"
+    },
+    {
+      "q": "整型原子类型支持哪些主要原子操作？",
+      "a": "支持 fetch_add()、fetch_sub()、fetch_and()、fetch_or()、fetch_xor()，以及教材列出的相应复合赋值、自增和自减操作。"
+    },
+    {
+      "q": "fetch_add() 返回新值还是旧值？",
+      "a": "返回执行加法前的旧值。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "原子类型",
+    "内存序"
+  ],
+  "source_pages": [
+    801,
+    802
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 std::atomic floating point fetch_add fetch_sub integral pointer atomic operations memory_order_seq_cst",
+  "concept_id": "1644_fetch_add_及整型_指针原子的算术操作",
+  "_chunk_pages": [
+    801,
+    804
+  ]
+}

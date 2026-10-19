@@ -1,0 +1,48 @@
+{
+  "title": "const 成员函数与 const-correctness",
+  "definition": "在成员函数声明和定义末尾加 `const`，表示该成员函数承诺不修改所属对象的可观察状态。const 成员函数通常用于检查或获取对象信息，称为 inspector；修改对象状态的成员函数通常称为 mutator。const 对象只能调用其 const 成员函数。",
+  "key_points": [
+    "成员函数的 const 写在参数列表右括号之后，例如 `std::string getPassengerName() const;`。",
+    "读取对象状态的函数通常应声明为 const，例如 calculatePriceInDollars、getPassengerName 和 getNumberOfMiles。",
+    "修改对象状态的函数通常不声明为 const，例如 setPassengerName 和 setNumberOfMiles。",
+    "const-correctness 要求根据成员函数是否修改对象状态，正确区分 inspector 与 mutator。"
+  ],
+  "examples": [
+    "class AirlineTicket {\npublic:\n    double calculatePriceInDollars() const;\n    std::string getPassengerName() const;\n    void setPassengerName(std::string name);\n    int getNumberOfMiles() const;\n    void setNumberOfMiles(int miles);\n    bool hasEliteSuperRewardsStatus() const;\n    void setHasEliteSuperRewardsStatus(bool status);\n};\n\nstd::string AirlineTicket::getPassengerName() const\n{\n    return m_passengerName;\n}"
+  ],
+  "misconceptions": [
+    "const 成员函数中的 const 不是返回值的 const；它修饰成员函数对所属对象的操作权限。",
+    "getter 不是因为名字以 get 开头就自动成为 const，只有在声明中明确写出末尾的 const 才是 const 成员函数。",
+    "setter 通常会修改对象状态，因此不能随意声明为 const。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`std::string getPassengerName() const;` 中末尾的 const 表示什么？",
+      "a": "表示该成员函数承诺不修改所属 AirlineTicket 对象的状态。"
+    },
+    {
+      "q": "AirlineTicket 的 `setPassengerName` 为什么没有声明为 const？",
+      "a": "因为它要修改 m_passengerName，属于修改对象状态的 mutator。"
+    },
+    {
+      "q": "const 成员函数通常对应哪类操作？",
+      "a": "通常对应读取或检查对象状态的 inspector 操作。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "类与成员函数",
+    "const 变量"
+  ],
+  "source_pages": [
+    73,
+    76
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "103_const_成员函数与_const_correctness",
+  "_chunk_pages": [
+    73,
+    76
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "title": "mutable 成员与 const 成员函数中的修改",
+  "definition": "mutable 数据成员可以在 const 成员函数中被修改。它适用于不会改变对象主要逻辑状态、但需要维护的辅助信息，例如访问次数、缓存或调试统计。原文中 m_numAccesses 声明为 mutable，因此 getValue() const 和 getString() const 可以递增它。",
+  "key_points": [
+    "普通数据成员不能在 const 成员函数中直接修改。",
+    "使用 mutable 声明的数据成员可以在 const 成员函数中修改。",
+    "原文示例中 m_value 是普通 double 成员，而 m_numAccesses 是 mutable size_t 成员。",
+    "getValue() const 和 getString() const 都执行 m_numAccesses++，然后分别返回数值或字符串。"
+  ],
+  "examples": [
+    "成员声明：double m_value{0}; mutable size_t m_numAccesses{0};",
+    "const 成员函数中更新访问次数：double SpreadsheetCell::getValue() const { m_numAccesses++; return m_value; }",
+    "另一个 const 成员函数：std::string SpreadsheetCell::getString() const { m_numAccesses++; return doubleToString(m_value); }"
+  ],
+  "misconceptions": [
+    "mutable 不是让整个对象都可以在 const 成员函数中修改；它只放宽被声明为 mutable 的数据成员。",
+    "mutable 不会使普通成员 m_value 也能在 const 成员函数中修改。",
+    "使用 mutable 不等于对象整体不再具有 const 语义；对象的主要状态仍应遵守 const 限制。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么 getValue() const 可以执行 m_numAccesses++？",
+      "a": "因为 m_numAccesses 被声明为 mutable，mutable 数据成员允许在 const 成员函数中修改。"
+    },
+    {
+      "q": "如果 m_numAccesses 没有声明为 mutable，const 成员函数中执行 m_numAccesses++ 会怎样？",
+      "a": "通常会违反 const 限制并导致编译错误。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "const 成员函数"
+  ],
+  "source_pages": [
+    277,
+    280
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "363_mutable_成员与_const_成员函数中的修改",
+  "_chunk_pages": [
+    277,
+    280
+  ]
+}

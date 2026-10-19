@@ -1,0 +1,40 @@
+{
+  "title": "Vim的启动命令",
+  "definition": "教材给出的 Vim 启动方式是使用命令“vim [文件名]”。其中“[文件名]”表示要编辑的文件名。",
+  "key_points": [
+    "启动命令写法为 vim [文件名]",
+    "该命令用于打开并编辑指定文件"
+  ],
+  "examples": [
+    "vim test.txt"
+  ],
+  "misconceptions": [
+    "把方括号“[ ]”当成实际要输入的字符",
+    "认为启动 Vim 不需要写 vim 命令本身"
+  ],
+  "qa_pairs": [
+    {
+      "q": "教材中启动 Vim 的命令是什么？",
+      "a": "vim [文件名]。"
+    },
+    {
+      "q": "命令“vim test.txt”表示什么？",
+      "a": "启动 Vim 并编辑文件 test.txt。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "Vim的工作模式"
+  ],
+  "source_pages": [
+    37,
+    40
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "070_vim的启动命令",
+  "_chunk_pages": [
+    37,
+    40
+  ]
+}

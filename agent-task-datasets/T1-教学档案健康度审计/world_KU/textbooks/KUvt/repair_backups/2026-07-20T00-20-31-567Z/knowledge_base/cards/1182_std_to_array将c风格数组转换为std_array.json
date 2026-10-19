@@ -1,0 +1,43 @@
+{
+  "title": "std::to_array将C风格数组转换为std::array",
+  "definition": "C++20提供非成员函数std::to_array，它定义在<array>头文件中，可以使用元素的复制初始化，将给定的一维C风格数组转换为std::array。返回的std::array元素类型和元素数量由输入数组确定。",
+  "key_points": [
+    "调用形式包括std::to_array(数组)或std::to_array({元素列表})。",
+    "该函数只适用于一维数组。",
+    "转换结果的元素类型与输入元素类型对应，数组长度保持不变。"
+  ],
+  "examples": [
+    "auto arr1{std::to_array({11, 22, 33})}; // 类型为std::array<int, 3>",
+    "double carray[]{9, 8, 7, 6};\nauto arr2{std::to_array(carray)}; // 类型为std::array<double, 4>"
+  ],
+  "misconceptions": [
+    "std::to_array不是把数组转换为指针；它会创建一个新的std::array对象。",
+    "原文所述std::to_array仅适用于一维数组，不能据此推断它能直接转换多维数组。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "std::to_array定义在哪个头文件中？",
+      "a": "它定义在<array>头文件中。"
+    },
+    {
+      "q": "double carray[]{9, 8, 7, 6};调用std::to_array(carray)后得到什么类型？",
+      "a": "得到std::array<double, 4>。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C风格数组",
+    "std::array的基本用法"
+  ],
+  "source_pages": [
+    573,
+    573
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1182_std_to_array将c风格数组转换为std_array",
+  "_chunk_pages": [
+    573,
+    576
+  ]
+}

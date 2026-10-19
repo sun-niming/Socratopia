@@ -1,0 +1,47 @@
+{
+  "title": "std::string_view 解决只读字符串形参的困境",
+  "definition": "在 C++17 之前，为只读字符串函数选择形参类型存在取舍：使用 const char* 时，传入 std::string 通常需要先调用 c_str() 或 data()，函数也无法直接使用 std::string 的面向对象接口；使用 const std::string& 时，传入字符串字面量会导致编译器创建一个临时 std::string 并复制字面量内容，从而产生额外开销。std::string_view 这一类设计用于解决这种只读字符串参数选择问题。",
+  "key_points": [
+    "const char* 可以接收字符指针，但传入 std::string 时通常需要调用 c_str() 或 data()。",
+    "使用 const char* 会使函数失去 std::string 的面向对象特性和辅助方法。",
+    "const std::string& 要求实参能够形成 std::string；传入字符串字面量时可能创建临时 string 并复制内容。",
+    "原文指出这种临时对象和复制会带来一定开销。",
+    "该页原文在介绍 string_view 的背景，后续具体接口和生命周期规则不在给定内容中。"
+  ],
+  "examples": [
+    "只读函数若形参为 const char*，调用 std::string 实参时可能需要：func(text.c_str());",
+    "若形参为 const std::string&，调用 func(\"Hello\"); 时可能创建临时 std::string 并复制字符串字面量。"
+  ],
+  "misconceptions": [
+    "const char* 并不是接收只读字符串的唯一合理形参类型。",
+    "const std::string& 虽然避免了按值复制，但传入字符串字面量时仍可能产生临时 std::string。",
+    "仅凭本页节选不能推断 string_view 的完整生命周期规则或所有成员函数。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "在 C++17 之前，为什么 const char* 不是只读字符串参数的完美选择？",
+      "a": "传入 std::string 时通常需要调用 c_str() 或 data()，并且函数无法直接使用 std::string 的面向对象接口和辅助方法。"
+    },
+    {
+      "q": "为什么 const std::string& 作为只读字符串参数也存在开销？",
+      "a": "传入字符串字面量时，编译器可能创建临时 std::string 并复制字面量内容。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "const 引用",
+    "C 风格字符串",
+    "std::string"
+  ],
+  "source_pages": [
+    112,
+    112
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "213_std_string_view_解决只读字符串形参的困境",
+  "_chunk_pages": [
+    109,
+    112
+  ]
+}

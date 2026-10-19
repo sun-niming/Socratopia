@@ -1,0 +1,45 @@
+{
+  "title": "无序关联容器的透明查找支持",
+  "definition": "C++20 为无序关联容器提供了透明运算符支持，例如 unordered_map 和 unordered_set。要实现透明查找，需要提供自定义哈希函数，并在其中定义类型别名 using is_transparent = void;，同时将透明的 equal_to<> 作为键相等比较器。",
+  "key_points": [
+    "自定义哈希函数必须能够处理查询所使用的异构类型，例如 string_view。",
+    "透明哈希器可以定义 operator()(string_view sv) const，并调用 hash<string_view>{}(sv)。",
+    "unordered_set 的模板参数示例为 unordered_set<string, Hasher, equal_to<>>。",
+    "使用透明哈希与透明相等比较器后，可以用 \"Key\" 或 \"Key\"sv 查找，而无需构造 string。"
+  ],
+  "examples": [
+    "代码结构：class Hasher { public: using is_transparent = void; size_t operator()(string_view sv) const { return hash<string_view>{}(sv); } };",
+    "容器示例：unordered_set<string, Hasher, equal_to<>> mySet;",
+    "查询示例：auto i1 = mySet.find(\"Key\"); auto i2 = mySet.find(\"Key\"sv); // 均无需构造 string、无需分配内存。"
+  ],
+  "misconceptions": [
+    "只给 unordered_set 指定 equal_to<> 而没有提供支持异构类型的哈希函数，并不能完整实现透明查找。",
+    "无序容器的透明查找不仅依赖相等比较器，也依赖哈希函数对相关类型的一致支持。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "实现 unordered_set 的透明查找通常需要为自定义哈希器定义什么类型别名？",
+      "a": "需要定义 using is_transparent = void;。"
+    },
+    {
+      "q": "unordered_set 使用透明哈希器时，键相等比较器应如何指定？",
+      "a": "可以指定透明的 equal_to<>，例如 unordered_set<string, Hasher, equal_to<>>。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "透明比较器与异构查找",
+    "无序关联容器的哈希与相等比较"
+  ],
+  "source_pages": [
+    614,
+    614
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 unordered_set transparent lookup is_transparent custom hash equal_to<> string_view requirements",
+  "concept_id": "1261_无序关联容器的透明查找支持",
+  "_chunk_pages": [
+    613,
+    616
+  ]
+}

@@ -1,0 +1,56 @@
+{
+  "title": "KeyValue 自定义格式说明符示例",
+  "definition": "教材中的 `KeyValue` 类保存一个字符串键和一个整数值。其自定义 formatter 定义了四种格式行为：空说明符 `{}` 和 `{:c}` 同时输出键和值，`{:a}` 只输出键，`{:b}` 只输出值；其他说明符会抛出 `std::format_error`。",
+  "key_points": [
+    "`KeyValue` 包含字符串成员 `m_key` 和整数成员 `m_value`。",
+    "`{}`：默认同时输出键和值。",
+    "`{:a}`：只输出键。",
+    "`{:b}`：只输出值。",
+    "`{:c}`：同时输出键和值。",
+    "非法说明符产生消息 `Invalid KeyValue format specifier.`。"
+  ],
+  "examples": [
+    "设 `KeyValue keyValue { \"Key1\", 11 };`。",
+    "`format(\"{}\", keyValue)` 输出 `Key1 - 11`。",
+    "`format(\"{:a}\", keyValue)` 输出 `Key1`。",
+    "`format(\"{:b}\", keyValue)` 输出 `11`。",
+    "`format(\"{:c}\", keyValue)` 输出 `Key1 - 11`。",
+    "`format(\"{:cd}\", keyValue)` 会触发 `std::format_error`，错误消息为 `Invalid KeyValue format specifier.`。"
+  ],
+  "misconceptions": [
+    "误以为 `a`、`b`、`c` 是所有自定义类型通用的标准说明符；它们只是该 `KeyValue` formatter 自行定义的规则。",
+    "误以为 `{}` 不能用于自定义类型；只要提供正确的 formatter，空说明符可以对应默认格式。",
+    "误以为 `{:cd}` 会按 `c` 处理并忽略 `d`；示例会把多余字符视为错误。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "在教材的 `KeyValue` formatter 中，`{:a}`、`{:b}` 和 `{:c}` 分别输出什么？",
+      "a": "`{:a}` 只输出键，`{:b}` 只输出值，`{:c}` 同时输出键和值。"
+    },
+    {
+      "q": "对 `KeyValue { \"Key1\", 11 }` 使用空说明符 `{}` 会输出什么？",
+      "a": "输出 `Key1 - 11`。"
+    },
+    {
+      "q": "对该类型使用 `{:cd}` 会发生什么？",
+      "a": "抛出 `std::format_error`，错误消息为 `Invalid KeyValue format specifier.`。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "通过 std::formatter 支持自定义类型",
+    "自定义 formatter 的 parse 方法",
+    "自定义 formatter 的 format 方法"
+  ],
+  "source_pages": [
+    119,
+    120
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "234_keyvalue_自定义格式说明符示例",
+  "_chunk_pages": [
+    117,
+    120
+  ]
+}

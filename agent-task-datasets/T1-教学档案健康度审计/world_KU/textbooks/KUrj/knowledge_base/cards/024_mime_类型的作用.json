@@ -1,0 +1,42 @@
+{
+  "title": "MIME 类型的作用",
+  "definition": "MIME 类型决定浏览器如何处理响应体：`text/html` 按 HTML 解析，`text/css` 作为样式表，`application/javascript` 作为脚本，`image/png` 作为 PNG 图片，`application/octet-stream` 表示未知二进制，浏览器可能下载。MIME 不是单纯的“标签”，而是浏览器加载和解析资源的重要依据。",
+  "key_points": [
+    "`Content-Type` 决定浏览器如何处理响应体。",
+    "`text/html`、`text/css`、`application/javascript`、`image/png`、`application/octet-stream` 的用途不同。",
+    "MIME 类型会影响浏览器是否把内容当页面、样式、脚本、图片或下载内容处理。"
+  ],
+  "examples": [
+    "`text/html`：按 HTML 解析",
+    "`text/css`：作为样式表",
+    "`application/javascript`：作为脚本",
+    "`image/png`：作为 PNG 图片",
+    "`application/octet-stream`：未知二进制，浏览器可能下载"
+  ],
+  "misconceptions": [
+    "以为 MIME 类型只是附加说明，写错也无所谓。",
+    "以为所有文件都可以统一返回 `text/html`。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`text/css` 的作用是什么？",
+      "a": "它表示响应体是样式表，浏览器会按 CSS 处理。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "HTTP 响应头基础",
+    "浏览器资源加载基础"
+  ],
+  "source_pages": [
+    21,
+    24
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "024_mime_类型的作用",
+  "_chunk_pages": [
+    21,
+    24
+  ]
+}

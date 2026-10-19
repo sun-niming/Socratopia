@@ -1,0 +1,37 @@
+{
+  "title": "相对单位",
+  "definition": "相对单位是相对于其他长度或元素的属性来计算的。教材列出的常用相对单位包括em、rem、ex、%、vh、vw。",
+  "key_points": [
+    "相对单位的计算依赖于其他长度或元素的属性。",
+    "常用相对单位包括em、rem、ex、%、vh、vw。",
+    "相对单位不是固定不变的值。"
+  ],
+  "examples": [
+    "em、rem、ex、%、vh、vw"
+  ],
+  "misconceptions": [
+    "以为相对单位也是固定值。",
+    "以为所有相对单位都只和父元素有关。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "相对单位是怎样计算的？",
+      "a": "相对单位是相对于其他长度或元素的属性来计算的。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "CSS基础"
+  ],
+  "source_pages": [
+    105,
+    108
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "161_相对单位",
+  "_chunk_pages": [
+    105,
+    108
+  ]
+}

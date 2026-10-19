@@ -1,0 +1,52 @@
+{
+  "title": "嵌套类及其作用域访问规则",
+  "definition": "类定义内部可以声明并定义另一个类，这个内部类称为嵌套类。嵌套类的名称属于外围类的类作用域；在外围类外部引用它时，通常必须使用 `外围类名::嵌套类名` 的限定名称。嵌套类也可以先在外围类中前置声明，再在外围类外部独立定义。",
+  "key_points": [
+    "类中声明的内容都具有该类的作用域；如果嵌套类声明为 public，可在类外通过 `ClassName::NestedClassName` 访问。",
+    "在外围类外定义嵌套类成员函数时，名称需要写成 `Spreadsheet::Cell::成员函数`。",
+    "如果嵌套类作为外围类方法的返回类型，返回类型也需要使用限定名称，例如 `Spreadsheet::Cell&`。",
+    "可以在外围类中写 `class Cell;` 前置声明，然后在类外写 `class Spreadsheet::Cell { ... };`，以避免外围类定义过于臃肿。"
+  ],
+  "examples": [
+    "前置声明：`export class Spreadsheet { public: class Cell; };`",
+    "类外定义嵌套类：`class Spreadsheet::Cell { public: Cell() = default; Cell(double initialValue); };`",
+    "类外定义嵌套类构造函数：`Spreadsheet::Cell::Cell(double initialValue) : m_value { initialValue } {}`",
+    "外围类方法返回嵌套类引用：`Spreadsheet::Cell& Spreadsheet::getCellAt(size_t x, size_t y) { verifyCoordinate(x, y); return m_cells[x][y]; }`"
+  ],
+  "misconceptions": [
+    "嵌套类不是与外围类处于同一作用域的普通独立类；其名称属于外围类作用域。",
+    "在外围类外定义嵌套类成员函数时，不能只写 `Cell::Cell(...)`，通常需要写完整的 `Spreadsheet::Cell::Cell(...)`。",
+    "嵌套类与外围类之间不是自动的双向完全访问关系；原文明确指出，嵌套类可以访问外围类的所有 private 或 protected 成员，而外围类只能访问嵌套类的 public 成员。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "在 Spreadsheet 类外部如何引用其嵌套类 Cell？",
+      "a": "使用限定名称 `Spreadsheet::Cell`。"
+    },
+    {
+      "q": "如何避免把完整的 Cell 类定义直接写入 Spreadsheet 类而使类定义臃肿？",
+      "a": "先在 Spreadsheet 内前置声明 `class Cell;`，再在类外独立定义 `class Spreadsheet::Cell { ... };`。"
+    },
+    {
+      "q": "嵌套类和外围类的访问权限关系是什么？",
+      "a": "嵌套类有权访问外围类的所有 private 或 protected 成员；外围类只能访问嵌套类的 public 成员。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "C++类作用域",
+    "前置声明",
+    "成员函数类外定义"
+  ],
+  "source_pages": [
+    287,
+    288
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "598_嵌套类及其作用域访问规则",
+  "_chunk_pages": [
+    285,
+    288
+  ]
+}

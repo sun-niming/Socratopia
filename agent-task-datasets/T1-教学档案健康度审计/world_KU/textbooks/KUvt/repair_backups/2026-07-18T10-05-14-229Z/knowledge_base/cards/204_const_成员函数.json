@@ -1,0 +1,44 @@
+{
+  "title": "const 成员函数",
+  "definition": "在 C++ 类成员函数声明或定义的参数列表末尾写 `const`，表示该成员函数承诺不修改当前对象的可修改状态。调用这类函数时，即使对象本身是 const，也可以调用该函数。教材示例中的 `displayCurrent() const` 用于显示数据库当前内容。",
+  "key_points": [
+    "const 成员函数的形式是 `返回类型 函数名(参数列表) const`。",
+    "定义类外成员函数时，函数声明和函数定义末尾的 `const` 必须保持一致。",
+    "const 成员函数适合查询、显示或读取对象状态的操作。",
+    "示例中的 `displayCurrent() const` 遍历员工并显示已雇用的员工。"
+  ],
+  "examples": [
+    "```cpp\n// The displayCurrent() method\nvoid Database::displayCurrent() const\n{\n    // For each employee...\n    for (const auto& employee : m_employees) {\n        if (employee.isHired()) {\n            employee.display();\n        }\n    }\n}\n```"
+  ],
+  "misconceptions": [
+    "把成员函数末尾的 `const` 理解为函数返回 const，而实际上它修饰的是成员函数对当前对象的访问权限。",
+    "认为 const 成员函数绝对不能执行任何操作；它可以读取对象状态并调用适合的 const 成员函数，但不能直接修改对象的可修改成员状态。",
+    "只在类声明中写 `const`、在类外定义中省略 `const`。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`void Database::displayCurrent() const` 末尾的 `const` 表示什么？",
+      "a": "它表示 `displayCurrent` 是 const 成员函数，函数承诺不修改当前 `Database` 对象的可修改状态。"
+    },
+    {
+      "q": "为什么显示数据库内容的函数适合声明为 const 成员函数？",
+      "a": "显示操作通常只读取对象数据而不修改对象，因此适合使用 const 成员函数表达这种约束。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++ 类与成员函数",
+    "const 限定符"
+  ],
+  "source_pages": [
+    137,
+    140
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "204_const_成员函数",
+  "_chunk_pages": [
+    137,
+    140
+  ]
+}

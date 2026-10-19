@@ -1,0 +1,57 @@
+{
+  "title": "不同场景下强制类型转换的选择",
+  "definition": "教材根据转换场景总结了 C++ 强制类型转换的选择：移除 const 属性使用 const_cast；语言支持的显式转换或用户定义转换使用 static_cast；不相关类型之间的按位对象转换使用 bit_cast；继承层次结构中的指针或引用转换通常建议使用 dynamic_cast 或 static_cast；不相关类型之间的指针、引用或函数指针转换使用 reinterpret_cast。",
+  "key_points": [
+    "移除 const 属性：使用 const_cast。",
+    "语言支持的显式转换，例如 int 转 double、int 转 bool：使用 static_cast。",
+    "由用户定义的构造函数或转换函数支持的显式转换：使用 static_cast。",
+    "一个类的对象转换为另一个无关类的对象：使用 bit_cast。",
+    "同一继承层次结构中，一个类的指针或引用转换为另一个类的指针或引用：教材建议使用 dynamic_cast 或 static_cast；其中 dynamic_cast 会进行运行时检查。",
+    "指向一种类型的指针转换为指向其他不相关类型的指针、不同不相关类型的引用之间的转换，以及函数指针之间的转换：使用 reinterpret_cast。"
+  ],
+  "examples": [
+    "语言支持的数值转换：`static_cast<double>(someInt)`。",
+    "移除 const 属性：`const_cast<目标类型>(对象)`。",
+    "同一继承层次结构中的指针转换：`dynamic_cast<Derived*>(basePointer)` 或在确认转换正确时使用 `static_cast<Derived*>(basePointer)`。",
+    "不相关类型之间的对象按位转换：`std::bit_cast<Target>(source)`。"
+  ],
+  "misconceptions": [
+    "所有显式转换都应该使用 reinterpret_cast。教材按照转换场景区分了 const_cast、static_cast、bit_cast、dynamic_cast 和 reinterpret_cast。",
+    "同一继承层次结构中的转换只能使用 dynamic_cast。教材指出也可以使用 static_cast，但 static_cast 不执行运行时类型检查。",
+    "bit_cast 用于任意两个类型之间的转换。教材将其用于大小相同且为普通可复制类型的对象按位转换。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "把 int 显式转换为 double 应使用哪种转换？",
+      "a": "static_cast。"
+    },
+    {
+      "q": "移除对象的 const 属性应使用哪种转换？",
+      "a": "const_cast。"
+    },
+    {
+      "q": "同一继承层次结构中把基类指针转换为派生类指针，教材建议使用什么？",
+      "a": "建议使用 dynamic_cast，也可以使用 static_cast；dynamic_cast 会执行运行时类型检查。"
+    },
+    {
+      "q": "两个无关类的对象进行按位转换应使用什么？",
+      "a": "std::bit_cast，并且源类型和目标类型必须满足 bit_cast 的大小和普通可复制类型要求。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++ 强制类型转换",
+    "继承与多态"
+  ],
+  "source_pages": [
+    350,
+    350
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "706_不同场景下强制类型转换的选择",
+  "_chunk_pages": [
+    349,
+    352
+  ]
+}

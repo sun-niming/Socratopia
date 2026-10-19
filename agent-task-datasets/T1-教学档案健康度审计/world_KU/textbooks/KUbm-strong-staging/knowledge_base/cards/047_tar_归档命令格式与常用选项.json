@@ -1,0 +1,49 @@
+{
+  "title": "tar 归档命令格式与常用选项",
+  "definition": "教材给出的 tar 归档命令格式是：tar [cx][zj][v]f filename [filelist]。其中，x 表示展开归档，z 表示调用 gzip 对归档进行压缩或解压，j 表示调用 bzip2 对归档进行压缩或解压，v 表示显示冗余信息。教材中 c 的说明写成“创建归”，从上下文看应与创建归档有关，但原文显示不完整。",
+  "key_points": [
+    "命令格式：tar [cx][zj][v]f filename [filelist]",
+    "x：展开归档",
+    "z：调用 gzip 对归档压缩/解压",
+    "j：调用 bzip2 对归档压缩/解压",
+    "v：显示冗余信息",
+    "c 的原文说明不完整，疑为“创建归档”"
+  ],
+  "examples": [
+    "命令格式示例：tar [cx][zj][v]f filename [filelist]"
+  ],
+  "misconceptions": [
+    "不要把 tar 与 gzip、bzip2 完全等同；教材区分了归档与调用压缩工具的关系",
+    "不要遗漏 f 后面的 filename；教材格式中明确包含 filename"
+  ],
+  "qa_pairs": [
+    {
+      "q": "教材给出的 tar 命令格式是什么？",
+      "a": "tar [cx][zj][v]f filename [filelist]。"
+    },
+    {
+      "q": "tar 中 z 和 j 分别表示什么？",
+      "a": "z 表示调用 gzip 对归档压缩/解压，j 表示调用 bzip2 对归档压缩/解压。"
+    },
+    {
+      "q": "tar 中 v 表示什么？",
+      "a": "显示冗余信息。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "gzip/gunzip 与 .gz 压缩文件",
+    "bzip2/bunzip2 与 .bz2 压缩文件"
+  ],
+  "source_pages": [
+    25,
+    28
+  ],
+  "needs_verification": true,
+  "verify_query": "Linux tar [cx][zj][v]f filename [filelist] c 创建归档 选项说明 教材",
+  "concept_id": "047_tar_归档命令格式与常用选项",
+  "_chunk_pages": [
+    25,
+    28
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "title": "资源管理类应优先使用智能指针和初始化器",
+  "definition": "对于包含动态资源的类，应使用智能指针管理资源，并通过构造函数初始化器初始化数据成员。示例修正版中的 `Buggy` 类使用 `std::unique_ptr<double>` 替代裸指针，并在构造函数初始化器中初始化 `mParam` 和 `mGraphicDimension`，从而减少手动释放资源的风险。",
+  "key_points": [
+    "动态资源成员可声明为 `std::unique_ptr<T>`，使资源生命周期由对象自动管理。",
+    "构造函数初始化器可直接初始化数据成员，例如：\n$$\\texttt{Buggy::Buggy(int param) : mParam(param), mGraphicDimension(new double) \\{\\}}$$",
+    "不需要自定义析构逻辑时，可以显式默认析构函数：`virtual ~Buggy() = default;`。",
+    "类若不允许复制，可显式删除拷贝构造函数和拷贝赋值运算符：`= delete`。",
+    "移动构造函数和移动赋值运算符可以显式默认，并可标记为 `noexcept`。"
+  ],
+  "examples": [
+    "成员声明：`std::unique_ptr<double> mGraphicDimension;`。",
+    "构造函数初始化器：`Buggy::Buggy(int param) : mParam(param), mGraphicDimension(new double) {}`。",
+    "禁止复制：`Buggy(const Buggy& src) = delete;` 和 `Buggy& operator=(const Buggy& rhs) = delete;`。"
+  ],
+  "misconceptions": [
+    "使用 `std::unique_ptr` 后仍不应再手动对其内部指针调用 `delete`。",
+    "显式默认移动操作并不等于允许复制；复制构造和复制赋值可以分别被删除。",
+    "构造函数体内赋值与成员初始化器并非完全等价；成员初始化器直接完成成员初始化。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "示例代码为什么把 `double* mGraphicDimension` 改成 `std::unique_ptr<double>`？",
+      "a": "为了使用智能指针自动管理动态对象的生命周期，减少内存泄漏和手动释放错误。"
+    },
+    {
+      "q": "如何显式禁止 `Buggy` 对象的复制？",
+      "a": "将拷贝构造函数和拷贝赋值运算符声明为 `= delete`。"
+    },
+    {
+      "q": "构造函数初始化器中初始化了哪些成员？",
+      "a": "初始化了 `mParam` 和 `mGraphicDimension`。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "智能指针",
+    "构造函数初始化器",
+    "拷贝与移动语义"
+  ],
+  "source_pages": [
+    999,
+    1000
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 教材 Buggy class mGraphicDimension unique_ptr explicit default move constructor copy delete virtual destructor 示例",
+  "concept_id": "2058_资源管理类应优先使用智能指针和初始化器",
+  "_chunk_pages": [
+    997,
+    1000
+  ]
+}

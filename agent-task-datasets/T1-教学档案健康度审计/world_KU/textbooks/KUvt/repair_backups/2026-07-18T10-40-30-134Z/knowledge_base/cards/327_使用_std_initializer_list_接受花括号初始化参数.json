@@ -1,0 +1,46 @@
+{
+  "title": "使用 std::initializer_list 接受花括号初始化参数",
+  "definition": "构造函数可以使用参数类型 std::initializer_list<T> 接受一组由花括号提供的、类型为 T 的初始值。例如，EvenSequence 的构造函数声明为 EvenSequence(std::initializer_list<double> args)，因此可以使用 EvenSequence{1.0, 2.0, 3.0} 的形式创建对象。",
+  "key_points": [
+    "std::initializer_list<double> 表示构造函数接收一组 double 值。",
+    "可以通过 args.size() 获取花括号中元素的数量，并通过范围 for 遍历这些元素。",
+    "EvenSequence 示例要求参数个数必须是偶数；当 args.size() % 2 != 0 时抛出 std::invalid_argument。",
+    "构造函数可以先调用 m_sequence.reserve(args.size())，再将参数逐个加入 vector<double> 成员。"
+  ],
+  "examples": [
+    "示例构造：EvenSequence p1 { 1.0, 2.0, 3.0, 4.0, 5.0, 6.0 };",
+    "参数个数为奇数时：EvenSequence p2 { 1.0, 2.0, 3.0 }; 此类构造会触发 std::invalid_argument。",
+    "核心检查逻辑：$$\\begin{cases}\\text{继续构造},&args.size()\\bmod 2=0\\\\\\text{throw std::invalid_argument},&args.size()\\bmod 2\\ne 0\\end{cases}$$"
+  ],
+  "misconceptions": [
+    "std::initializer_list 不是只能用于 std::vector；用户自定义类的构造函数也可以使用它。",
+    "花括号中的元素数量不一定满足类自身的业务规则；EvenSequence 明确要求元素数量为偶数。",
+    "initializer_list 中的元素不能被理解为一个已经构造好的 vector；它表示由花括号提供的一组初始化元素。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "EvenSequence 的构造函数为什么检查 args.size() % 2 != 0？",
+      "a": "因为该类要求初始化参数的数量为偶数；如果数量为奇数，就抛出 std::invalid_argument。"
+    },
+    {
+      "q": "EvenSequence 可以如何用六个 double 值初始化？",
+      "a": "可以写成 EvenSequence p1 { 1.0, 2.0, 3.0, 4.0, 5.0, 6.0 };"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++类构造函数",
+    "std::vector 的基本用法"
+  ],
+  "source_pages": [
+    246,
+    247
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "327_使用_std_initializer_list_接受花括号初始化参数",
+  "_chunk_pages": [
+    245,
+    248
+  ]
+}

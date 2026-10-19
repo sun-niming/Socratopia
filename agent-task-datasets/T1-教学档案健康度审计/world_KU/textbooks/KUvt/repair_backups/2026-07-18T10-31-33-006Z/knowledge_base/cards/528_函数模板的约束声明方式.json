@@ -1,0 +1,47 @@
+{
+  "title": "函数模板的约束声明方式",
+  "definition": "C++20 可以使用约束（constraint）限定函数模板允许接受的类型。约束通常写在模板参数列表之后的 requires 子句中，也可以写在函数声明末尾；还可以使用受约束的占位符类型，例如 `Incrementable auto`。只有满足约束的类型，函数模板才参与调用匹配。",
+  "key_points": [
+    "可以直接使用类型特征或概念作为约束，例如 `requires (sizeof(T) == 4)`、`requires std::is_arithmetic_v<T>` 或 `requires Incrementable<T> && Decrementable<T>`。",
+    "requires 子句可以放在模板参数列表之后：`template <typename T> requires Incrementable<T> void process(const T& t);`。",
+    "requires 子句也可以放在函数声明末尾：`template <typename T> void process(const T& t) requires Incrementable<T>;`。",
+    "可以使用受约束的占位符参数简写模板，例如 `void process(const Incrementable auto& t);`。"
+  ],
+  "examples": [
+    "`template <typename T> requires (sizeof(T) == 4) void process(const T& t);`",
+    "`template <typename T> requires Incrementable<T> && Decrementable<T> void process(const T& t);`",
+    "`template <typename T> requires std::is_arithmetic_v<T> void process(const T& t);`",
+    "`void process(const Incrementable auto& t);`"
+  ],
+  "misconceptions": [
+    "requires 不是只能放在模板声明开头；它也可以放在函数声明末尾。",
+    "满足某个类型特征并不意味着所有函数模板都可以调用；调用时仍需满足具体函数的约束。",
+    "`Incrementable auto` 不是普通的 `auto`，它要求推导出的类型满足 `Incrementable` 概念。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "C++20 中如何约束一个函数模板，使其参数类型必须满足 `Incrementable<T>`？",
+      "a": "可以在模板参数列表后写 `requires Incrementable<T>`，例如 `template <typename T> requires Incrementable<T> void process(const T& t);`；也可以把 `requires Incrementable<T>` 放在函数声明末尾。"
+    },
+    {
+      "q": "`void process(const Incrementable auto& t);` 表达了什么含义？",
+      "a": "它表示一个使用受约束占位符的函数，参数推导出的类型必须满足 `Incrementable` 概念。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "函数模板",
+    "C++20 概念（concept）基础"
+  ],
+  "source_pages": [
+    405,
+    405
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "528_函数模板的约束声明方式",
+  "_chunk_pages": [
+    405,
+    408
+  ]
+}

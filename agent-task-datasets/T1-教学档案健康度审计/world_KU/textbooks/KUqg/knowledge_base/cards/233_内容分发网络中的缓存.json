@@ -1,0 +1,45 @@
+{
+  "title": "内容分发网络中的缓存",
+  "definition": "内容分发网络（Content Distribution Network，CDN）通过在因特网上安装许多地理上分散的缓存器，使大量Web流量能够在靠近用户的位置得到处理和交付，从而实现流量本地化。CDN既可以是向多个内容提供者提供服务的共享CDN，也可以是由特定组织使用的专用CDN。",
+  "key_points": [
+    "CDN由许多地理上分散的缓存器构成。",
+    "分散部署缓存器可以使大量流量本地化。",
+    "教材列举Akamai和Limelight作为共享CDN的例子。",
+    "教材列举谷歌和Netflix作为专用CDN的例子。"
+  ],
+  "examples": [
+    "共享CDN示例：Akamai、Limelight。",
+    "专用CDN示例：谷歌、Netflix。",
+    "用户请求的内容若能由地理位置较近的CDN缓存器提供，就不必让全部流量都从远端初始服务器传输。"
+  ],
+  "misconceptions": [
+    "CDN不是单台集中式缓存服务器，而是由许多地理上分散的缓存器组成。",
+    "CDN不只有共享服务一种形式，也可以是专用CDN。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "CDN如何使Web流量本地化？",
+      "a": "它在因特网上部署许多地理上分散的缓存器，使内容能够从靠近用户的缓存位置交付。"
+    },
+    {
+      "q": "教材列举了哪些共享CDN和专用CDN？",
+      "a": "共享CDN包括Akamai和Limelight；专用CDN包括谷歌和Netflix。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "Web缓存器",
+    "因特网流量"
+  ],
+  "source_pages": [
+    89,
+    92
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "233_内容分发网络中的缓存",
+  "_chunk_pages": [
+    89,
+    92
+  ]
+}

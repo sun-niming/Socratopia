@@ -1,0 +1,37 @@
+{
+  "title": "事件冒泡",
+  "definition": "事件冒泡是事件传播的一种方式：从事件触发的源节点开始，逐级向父节点传递，直到最顶节点 document。",
+  "key_points": [
+    "传播方向是自下而上",
+    "起点是事件触发的源节点，也就是最具体的元素",
+    "终点是 document 节点，即最上层的节点"
+  ],
+  "examples": [
+    "点击一个嵌套按钮后，事件可从按钮向其父元素再到 document 逐级传播"
+  ],
+  "misconceptions": [
+    "冒泡不是从 document 往下传，那个方向是捕获",
+    "冒泡的起点不是根节点，而是事件触发的源节点"
+  ],
+  "qa_pairs": [
+    {
+      "q": "事件冒泡的传播方向是什么？",
+      "a": "从源节点逐级向上传播到 document。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "DOM事件流"
+  ],
+  "source_pages": [
+    363,
+    363
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "523_事件冒泡",
+  "_chunk_pages": [
+    361,
+    364
+  ]
+}

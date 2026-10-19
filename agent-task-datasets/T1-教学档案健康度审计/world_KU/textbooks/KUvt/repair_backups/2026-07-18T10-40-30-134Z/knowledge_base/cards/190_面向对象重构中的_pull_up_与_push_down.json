@@ -1,0 +1,43 @@
+{
+  "title": "面向对象重构中的 Pull Up 与 Push Down",
+  "definition": "原文在面向对象编程（OOP）的重构内容中列出了两种操作：Pull Up 和 Push Down。截取文本只给出了术语及其所在的重构语境，没有提供两者具体的移动对象、适用条件或操作步骤。",
+  "key_points": [
+    "这两个术语出现在 `refactoring`（重构）和 OOP 语境中。",
+    "原文列出的术语包括 `pull up` 和 `push down`。",
+    "给定片段不足以从教材原文确认两种重构操作的精确定义和边界。"
+  ],
+  "examples": [
+    "原文术语：`(pull up): OOP`。",
+    "原文术语：`(push down) OOP`。"
+  ],
+  "misconceptions": [
+    "不能仅凭给定片段断言 Pull Up 或 Push Down 一定针对方法、字段或类层次结构中的哪一种具体元素。",
+    "不能根据该片段推导出两种重构操作的详细步骤。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "原文把 Pull Up 和 Push Down 放在哪个主题下？",
+      "a": "放在面向对象编程（OOP）的重构（refactoring）主题下。"
+    },
+    {
+      "q": "给定片段是否足以说明 Pull Up 和 Push Down 的完整操作定义？",
+      "a": "不足以；片段只列出了术语，没有给出具体定义或步骤。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "面向对象编程",
+    "代码重构"
+  ],
+  "source_pages": [
+    129,
+    132
+  ],
+  "needs_verification": true,
+  "verify_query": "《C++20高级编程》第5版 refactoring pull up push down OOP 第131页",
+  "concept_id": "190_面向对象重构中的_pull_up_与_push_down",
+  "_chunk_pages": [
+    129,
+    132
+  ]
+}

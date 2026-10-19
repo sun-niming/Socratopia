@@ -1,0 +1,42 @@
+{
+  "title": "块级元素之间的竖直margin",
+  "definition": "块级元素之间可以通过上下外边距来控制竖直方向的间距。原文示例中，块元素1 设置 margin-bottom:50px，块元素2 设置 margin-top:30px，用来表现两个块级元素之间的上下距离。",
+  "key_points": [
+    "适用于块级元素之间的竖直间距。",
+    "可以用 margin-bottom 设置下方外边距。",
+    "可以用 margin-top 设置上方外边距。"
+  ],
+  "examples": [
+    "<div style=\"margin-bottom:50px;\">块元素1</div>",
+    "<div style=\"margin-top:30px;\">块元素2</div>"
+  ],
+  "misconceptions": [
+    "以为竖直间距只能通过一个元素的外边距控制。",
+    "以为 margin 只能在水平方向起作用。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "块级元素之间的竖直间距通常用什么来设置？",
+      "a": "可以用 margin-top 和 margin-bottom 设置。"
+    },
+    {
+      "q": "示例中块元素1设置了什么外边距？",
+      "a": "margin-bottom:50px。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "CSS属性"
+  ],
+  "source_pages": [
+    133,
+    136
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "219_块级元素之间的竖直margin",
+  "_chunk_pages": [
+    133,
+    136
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "title": "font-weight 粗体",
+  "definition": "font-weight 用于设置字体粗细。教材列出的取值有 normal 表示正常，bold 表示粗体，另外还可以使用数值 100、200、300～900 来表示不同粗细程度。",
+  "key_points": [
+    "normal 表示正常字重。",
+    "bold 表示粗体。",
+    "也可以使用 100、200、300～900 这类数值。"
+  ],
+  "examples": [
+    "font-weight: normal;",
+    "font-weight: bold;",
+    "font-weight: 700;"
+  ],
+  "misconceptions": [
+    "font-weight 只能写 bold。",
+    "数值字重不能使用。",
+    "bold 和 normal 不是同一类属性值。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "font-weight 可以用哪些类型的值？",
+      "a": "可以用 normal、bold，也可以用 100、200、300～900 这样的数值。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "CSS基础"
+  ],
+  "source_pages": [
+    113,
+    114
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "154_font_weight_粗体",
+  "_chunk_pages": [
+    113,
+    116
+  ]
+}

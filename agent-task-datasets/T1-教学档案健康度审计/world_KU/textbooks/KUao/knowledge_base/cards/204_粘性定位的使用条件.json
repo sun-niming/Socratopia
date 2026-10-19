@@ -1,0 +1,42 @@
+{
+  "title": "粘性定位的使用条件",
+  "definition": "要让粘性定位正常生效，原文给出了若干限制条件：父元素不能设置 overflow:hidden 或 overflow:auto，父元素必须能够滚动；父元素的高度不能低于 sticky 元素的高度；父元素不能只有一个 sticky 子元素，还要包含其他子元素。",
+  "key_points": [
+    "父元素不能是 overflow:hidden 或 overflow:auto",
+    "父元素必须是可滚动的",
+    "父元素高度不能低于 sticky 元素高度",
+    "父元素不能只有一个 sticky 子元素，还要包含其他子元素"
+  ],
+  "examples": [
+    "父元素需要可滚动，且子元素中设置了 position: sticky; top: 0;"
+  ],
+  "misconceptions": [
+    "认为只要写了 sticky 就一定会生效",
+    "认为任何父元素结构都可以直接使用 sticky"
+  ],
+  "qa_pairs": [
+    {
+      "q": "sticky 元素的父元素能设置 overflow:hidden 吗？",
+      "a": "不能。"
+    },
+    {
+      "q": "父元素只包含一个 sticky 子元素可以吗？",
+      "a": "不可以，还要包含其他子元素。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "粘性定位"
+  ],
+  "source_pages": [
+    141,
+    144
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "204_粘性定位的使用条件",
+  "_chunk_pages": [
+    141,
+    144
+  ]
+}

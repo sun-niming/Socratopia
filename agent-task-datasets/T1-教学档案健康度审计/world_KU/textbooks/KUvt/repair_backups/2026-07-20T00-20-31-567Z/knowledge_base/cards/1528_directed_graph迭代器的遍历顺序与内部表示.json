@@ -1,0 +1,43 @@
+{
+  "title": "directed_graph迭代器的遍历顺序与内部表示",
+  "definition": "directed_graph 是无序图，因此其迭代器不执行有序遍历，而是按照节点被添加到图中的顺序遍历节点。由于所有节点存储在内部的 vector 容器 m_nodes 中，directed_graph 迭代器可以设计为对相关 vector 迭代器的包装器。尾迭代器则可以使用 m_nodes 的 vector 尾迭代器表示。",
+  "key_points": [
+    "无序容器不应为了迭代而额外进行有序排列，因为有序迭代效率较低。",
+    "迭代器的内部表示通常与容器的内部实现紧密相关。",
+    "尾迭代器表示最后一个元素之后的位置，而不是某个实际元素。"
+  ],
+  "examples": [
+    "若节点依次以 A、B、C 的顺序加入 directed_graph，则迭代器遍历顺序为 A、B、C。",
+    "若 `m_nodes.end()` 是内部 vector 的尾迭代器，则 directed_graph 的尾迭代器可以包装或使用该位置。"
+  ],
+  "misconceptions": [
+    "directed_graph 的“无序”不表示每次遍历顺序随机变化；教材规定其按照节点加入顺序遍历。",
+    "尾迭代器不能被解引用，因为它不指向实际元素。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "directed_graph 迭代器按照什么顺序遍历节点？",
+      "a": "按照节点添加到图中的顺序遍历，而不是按照节点值或其他规则排序。"
+    },
+    {
+      "q": "为什么 directed_graph 迭代器可以包装 vector 迭代器？",
+      "a": "因为 directed_graph 的节点都存储在内部 m_nodes vector 中，vector 迭代器已经能够定位这些节点。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "容器迭代器",
+    "vector迭代器"
+  ],
+  "source_pages": [
+    734,
+    735
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1528_directed_graph迭代器的遍历顺序与内部表示",
+  "_chunk_pages": [
+    733,
+    736
+  ]
+}

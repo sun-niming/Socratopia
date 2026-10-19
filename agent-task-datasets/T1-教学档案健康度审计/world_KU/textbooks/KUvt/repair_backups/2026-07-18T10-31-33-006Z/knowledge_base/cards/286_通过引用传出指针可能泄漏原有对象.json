@@ -1,0 +1,45 @@
+{
+  "title": "通过引用传出指针可能泄漏原有对象",
+  "definition": "当函数参数是指针的引用，例如 void doSomething(Simple*& outSimplePtr)，函数可以直接修改调用者持有的指针。如果函数在未释放原对象的情况下让该指针指向一个新分配的 Simple 对象，原对象就失去最后的指针而发生内存泄漏。调用者随后 delete 指针时，只能释放新对象，不能释放已经丢失的原对象。",
+  "key_points": [
+    "Simple*& 是“指向 Simple 的指针的引用”，函数可以改变调用者的指针变量。",
+    "原文标注的 bug 是：函数没有删除原来的 Simple{}，却让 outSimplePtr 指向了新对象。",
+    "main 中先执行 Simple* simplePtr { new Simple{} };，再调用 doSomething(simplePtr)。",
+    "调用 delete simplePtr 只能清理第二个对象，原来的对象已经无法访问。"
+  ],
+  "examples": [
+    "原文场景可概括为：Simple* simplePtr { new Simple{} }; doSomething(simplePtr); delete simplePtr;",
+    "如果 doSomething 内部直接执行 outSimplePtr = new Simple{}; 而没有先处理原来的对象，则会泄漏原来的 Simple 实例。"
+  ],
+  "misconceptions": [
+    "误以为函数返回后 delete simplePtr 会释放所有由该函数涉及的对象；它只能释放当前 simplePtr 所指向的对象。",
+    "误以为修改指针变量等同于释放旧对象；赋予指针新地址不会自动释放旧地址。",
+    "误以为使用指针引用只会传递对象地址；Simple*& 允许函数修改调用者的指针本身。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么 main 中的 delete simplePtr 只能清理第二个 Simple 对象？",
+      "a": "因为 doSomething 已将 simplePtr 改为指向新对象，原对象的地址被覆盖且没有先删除，所以 delete simplePtr 只能删除新对象。"
+    },
+    {
+      "q": "doSomething(Simple*& outSimplePtr) 中的 & 有什么作用？",
+      "a": "它使参数成为指针的引用，函数可以直接修改调用者的指针变量。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++ new 与 delete",
+    "指针引用"
+  ],
+  "source_pages": [
+    214,
+    215
+  ],
+  "needs_verification": true,
+  "verify_query": "《C++20高级编程》第5版 第214-215页 doSomething Simple*& 原对象内存泄漏",
+  "concept_id": "286_通过引用传出指针可能泄漏原有对象",
+  "_chunk_pages": [
+    213,
+    216
+  ]
+}

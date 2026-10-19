@@ -1,0 +1,51 @@
+{
+  "title": "const_directed_graph_iterator的结构与操作",
+  "definition": "const_directed_graph_iterator 是一个双向 const 迭代器类模板。它定义 value_type、difference_type、pointer、reference 和 iterator_type 等类型别名，提供默认构造函数、由底层节点迭代器和图指针构造的构造函数、解引用、箭头访问、前置和后置递增、前置和后置递减，以及相等比较操作。其内部保存 m_nodeIterator 和指向图对象的 m_graph 指针。",
+  "key_points": [
+    "iterator_type 被定义为 DirectedGraph::nodes_container_type::const_iterator，用于包装底层容器的 const 迭代器。",
+    "构造函数接收一个底层迭代器和一个 const DirectedGraph*，不转移图对象的所有权。",
+    "类中声明了 `operator*`、`operator->`、前置和后置 `operator++`、前置和后置 `operator--`，以及 C++20 默认化的 `operator==`。",
+    "m_graph 初始化为 nullptr；迭代器不拥有图对象，因此析构时不应删除 m_graph。"
+  ],
+  "examples": [
+    "核心数据成员可表示为：`iterator_type m_nodeIterator;` 和 `const DirectedGraph* m_graph{nullptr};`。",
+    "构造函数可表示为：`const_directed_graph_iterator(iterator_type it, const DirectedGraph* graph) : m_nodeIterator{it}, m_graph{graph} {}`。",
+    "双向迭代器同时提供前置形式 `++it`、`--it` 和后置形式 `it++`、`it--`。"
+  ],
+  "misconceptions": [
+    "迭代器保存图指针并不表示它拥有图对象；教材明确说明构造函数不转移所有权。",
+    "默认构造的迭代器不保证指向某个有效元素，不能像普通有效迭代器一样直接解引用或移动。",
+    "定义了 operator== 不代表可以忽略迭代器所处容器和位置的有效性。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "const_directed_graph_iterator 内部保存哪些主要数据？",
+      "a": "保存底层节点 const 迭代器 m_nodeIterator，以及指向对应 DirectedGraph 的 const 指针 m_graph。"
+    },
+    {
+      "q": "const_directed_graph_iterator 是否拥有 m_graph 指向的图对象？",
+      "a": "不拥有；构造函数不转移所有权，迭代器也不负责删除该图对象。"
+    },
+    {
+      "q": "该迭代器需要提供哪些移动操作？",
+      "a": "作为双向迭代器，它需要提供前置和后置的 operator++ 与 operator--。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "双向迭代器",
+    "const迭代器",
+    "C++运算符重载"
+  ],
+  "source_pages": [
+    735,
+    736
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1531_const_directed_graph_iterator的结构与操作",
+  "_chunk_pages": [
+    733,
+    736
+  ]
+}

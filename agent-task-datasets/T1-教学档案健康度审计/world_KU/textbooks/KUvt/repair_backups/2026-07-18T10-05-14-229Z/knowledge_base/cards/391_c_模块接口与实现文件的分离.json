@@ -1,0 +1,52 @@
+{
+  "title": "C++模块接口与实现文件的分离",
+  "definition": "原文将电子表格组件拆分为模块接口部分和模块实现部分。模块接口使用`export module spreadsheet;`声明模块，并通过`export`导出类和函数；模块实现文件使用`module spreadsheet;`加入该模块，再定义`Spreadsheet::Impl`及各成员函数。",
+  "key_points": [
+    "模块接口以`export module spreadsheet;`开头。",
+    "接口可以导入并重新导出其他模块，例如原文包含`export import spreadsheet_cell;`；也可以导入标准库，例如`import <memory>;`。",
+    "公开类型和函数前使用`export`，例如`export class SpreadsheetApplication { };`和`export class Spreadsheet { ... };`。",
+    "实现文件使用`module spreadsheet;`，然后定义`Spreadsheet::Impl`及`Spreadsheet`的成员函数。",
+    "这种组织方式使模块使用者看到导出的公共接口，而实现细节保留在模块实现部分。"
+  ],
+  "examples": [
+    "模块接口示例：`export module spreadsheet;`",
+    "导入依赖示例：`export import spreadsheet_cell;`和`import <memory>;`",
+    "模块实现示例：`module spreadsheet; import <utility>; import <stdexcept>; import <format>; import <algorithm>;`",
+    "实现类定义示例：`class Spreadsheet::Impl { /* Omitted for brevity */ };`"
+  ],
+  "misconceptions": [
+    "误以为`export module spreadsheet;`和`module spreadsheet;`是两个不同模块；它们分别用于声明模块接口单元和模块实现单元。",
+    "误以为所有导入内容都会自动成为模块的公共接口；只有使用`export import`重新导出的内容才按该形式导出。",
+    "误以为模块实现文件中的`Spreadsheet::Impl`必须暴露给模块使用者；Pimpl设计通常正是为了隐藏它。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "模块接口文件如何声明名为`spreadsheet`的模块？",
+      "a": "使用`export module spreadsheet;`。"
+    },
+    {
+      "q": "模块实现文件如何表明自己属于`spreadsheet`模块？",
+      "a": "使用`module spreadsheet;`。"
+    },
+    {
+      "q": "接口中如何导出`Spreadsheet`类？",
+      "a": "使用`export class Spreadsheet { ... };`。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++20模块",
+    "头文件与实现文件的分离"
+  ],
+  "source_pages": [
+    298,
+    299
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 modules export module module implementation unit export import standard library headers syntax",
+  "concept_id": "391_c_模块接口与实现文件的分离",
+  "_chunk_pages": [
+    297,
+    300
+  ]
+}

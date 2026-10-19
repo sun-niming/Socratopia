@@ -1,0 +1,1613 @@
+{
+  "textbookId": "KUyw",
+  "updatedAt": "2026-10-16T03:47:34.909Z",
+  "cards": [
+    {
+      "id": "fc_1789982006003_000_ba68f830d76e",
+      "question": "在例 3.11 的 Lex 程序中，输入 `if`（后跟空格）时词法分析器返回 `IF`，而输入 `ifx` 时返回 `ID`。这两次裁决分别依靠哪条冲突解决规则？",
+      "choices": [
+        "`if` 靠先列优先（`if` 比 `{id}` 短），`ifx` 靠最长匹配（`ifx` 比 `{id}` 长）",
+        "`if` 靠关键字机匹配失败后回退，`ifx` 靠关键字机匹配失败后回退",
+        "`if` 靠最长匹配（长度 2 = 2 但优先选关键字），`ifx` 靠先列优先（`if` 规则先列出）",
+        "`if` 靠先列优先（长度打平），`ifx` 靠最长匹配（长度 3 > 2）"
+      ],
+      "correctIndex": 3,
+      "explanation": "输入 `if` 时，`{id}` 和 `if` 两条模式都只能匹配两个字符，长度打平，此时由先列优先规则裁决，`if` 规则先列出所以返回 `IF`；输入 `ifx` 时，`{id}` 能匹配全部三个字符而 `if` 只能匹配两个，长度 3 > 2，由最长匹配规则裁决，返回 `ID`。",
+      "source": {
+        "textbook": "编译原理 第二版",
+        "chapter": "",
+        "textbookSlug": "KUyw"
+      },
+      "created": "2026-09-21T09:13:26.003Z",
+      "conversationId": "EJCMdZUMLRh0uIgZkHKXm",
+      "status": "active",
+      "history": [
+        {
+          "schemaVersion": 2,
+          "time": "2026-09-21T09:14:42.469Z",
+          "chosen": 3,
+          "correct": true,
+          "domainRevision": 1,
+          "answerRecordId": "flashcard:fc_1789982006003_000_ba68f830d76e:1"
+        }
+      ],
+      "nextReview": "2026-09-21T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1789982006003_001_97542cd2ff86",
+      "question": "图 3-13 那张 relop 状态转换图（状态 0 上有三条出边，分别标 `<`、`=`、`>`）被判定为 DFA。以下哪个条件才是它满足的 DFA 确定性条件？",
+      "choices": [
+        "所有接受状态都没有出边，所有非接受状态都必须有出边",
+        "每个状态只有一条离开该状态的边，多余的边必须删除",
+        "同一个状态上不能同时存在出边和入边",
+        "对每个状态及字母表中的每个符号，有且只有一条以该符号为标号的出边"
+      ],
+      "correctIndex": 3,
+      "explanation": "DFA 的确定性条件不是'每个状态总共只有一条出边'，而是'对每个状态、字母表中的每个符号，有且只有一条以该符号为标号的出边'。图 3-13 的状态 0 可以有多条出边，只要每条边的标号互不相同就满足 DFA。",
+      "source": {
+        "textbook": "编译原理 第二版",
+        "chapter": "",
+        "textbookSlug": "KUyw"
+      },
+      "created": "2026-09-21T09:13:26.003Z",
+      "conversationId": "EJCMdZUMLRh0uIgZkHKXm",
+      "status": "active",
+      "history": [
+        {
+          "schemaVersion": 2,
+          "time": "2026-09-21T09:15:21.987Z",
+          "chosen": 3,
+          "correct": true,
+          "domainRevision": 1,
+          "answerRecordId": "flashcard:fc_1789982006003_001_97542cd2ff86:1"
+        }
+      ],
+      "nextReview": "2026-09-21T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1789982006003_002_f2fc344cacff",
+      "question": "在子集构造法中，NFA 读入串 $x$ 后可能停在集合 $T$，再读入符号 $a$ 后，对应的 DFA 状态（即 NFA 可能停下的新集合）应如何计算？",
+      "choices": [
+        "$\\epsilon\\text{-closure}(\\text{move}(T,a))$",
+        "$\\epsilon\\text{-closure}(T) \\cup \\text{move}(T, a)$",
+        "$\\text{move}(T, a)$ 再减去 $T$ 中无 $a$ 出边的状态",
+        "$\\text{move}(\\epsilon\\text{-closure}(T), a)$"
+      ],
+      "correctIndex": 0,
+      "explanation": "读入 $a$ 后，NFA 先沿标号 $a$ 的边走到 $\\text{move}(T,a)$，到达后还可以沿 $\\epsilon$ 边继续白走若干步，所以新集合是 $\\epsilon\\text{-closure}(\\text{move}(T,a))$。先走 $a$ 边再取 $\\epsilon$-closure，顺序不能颠倒。",
+      "source": {
+        "textbook": "编译原理 第二版",
+        "chapter": "",
+        "textbookSlug": "KUyw"
+      },
+      "created": "2026-09-21T09:13:26.003Z",
+      "conversationId": "EJCMdZUMLRh0uIgZkHKXm",
+      "status": "active",
+      "history": [
+        {
+          "schemaVersion": 2,
+          "time": "2026-09-21T09:16:35.040Z",
+          "chosen": 0,
+          "correct": true,
+          "domainRevision": 1,
+          "answerRecordId": "flashcard:fc_1789982006003_002_f2fc344cacff:1"
+        }
+      ],
+      "nextReview": "2026-09-21T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1789982006003_003_c310b731a7ab",
+      "question": "子集构造法中，DFA 的起始状态被定义为 $\\epsilon\\text{-closure}(s_0)$ 而不是 $\\{s_0\\}$。这个选择的根本原因是什么？",
+      "choices": [
+        "因为 $\\epsilon$-closure 会把 $s_0$ 的所有出边目标（无论标号是什么）都收进来，以便消除不确定性",
+        "因为 $s_0$ 可能挂有 $\\epsilon$ 出边，NFA 在读任何字符前就能零成本到达其他状态，这些状态必须一并纳入",
+        "因为 $s_0$ 不一定是 NFA 的接受状态，取 $\\epsilon$-closure 后可以顺便把所有接受状态收集进来",
+        "因为子集构造法要求所有 DFA 状态都必须是集合，而 $\\{s_0\\}$ 不够稳定，需要先扩展一次"
+      ],
+      "correctIndex": 1,
+      "explanation": "$s_0$ 只是 NFA 的名义起点。如果 $s_0$ 有 $\\epsilon$ 出边，那么在读入任何字符之前，NFA 就可以沿 $\\epsilon$ 边零成本地到达其他状态。所以'读第一个字符前可能站的位置'必须是 $\\epsilon\\text{-closure}(s_0)$，否则会漏掉这些零成本路径。",
+      "source": {
+        "textbook": "编译原理 第二版",
+        "chapter": "",
+        "textbookSlug": "KUyw"
+      },
+      "created": "2026-09-21T09:13:26.003Z",
+      "conversationId": "EJCMdZUMLRh0uIgZkHKXm",
+      "status": "active",
+      "history": [
+        {
+          "schemaVersion": 2,
+          "time": "2026-09-21T09:17:07.904Z",
+          "chosen": 1,
+          "correct": true,
+          "domainRevision": 1,
+          "answerRecordId": "flashcard:fc_1789982006003_003_c310b731a7ab:1"
+        },
+        {
+          "schemaVersion": 2,
+          "time": "2026-09-21T09:18:21.851Z",
+          "chosen": 1,
+          "correct": true,
+          "domainRevision": 2,
+          "answerRecordId": "flashcard:fc_1789982006003_003_c310b731a7ab:2"
+        }
+      ],
+      "nextReview": "2026-09-23T16:00:00.000Z",
+      "interval": 3,
+      "ease": 2.7,
+      "repetitions": 2
+    },
+    {
+      "id": "fc_1789982006003_004_24440bb42868",
+      "question": "在 Lex 生成的合并 NFA（图 3-52）中，教材故意保留了每台子 NFA 的多个接受状态，而在例 3.24 的并运算中却要把子机器的接受标记统统摘掉。这种差异的根本原因是什么？",
+      "choices": [
+        "例 3.24 造的是识别 $L(s)\\cup L(t)$ 的单台 NFA，只需一个接受状态；而 Lex 合并 NFA 中每个接受状态标志着命中了哪条模式，用于区分不同规则并触发对应动作",
+        "例 3.24 是手绘状态转换图；Lex 合并 NFA 由算法自动生成，自动生成的机器天然允许多个接受状态",
+        "例 3.24 的并运算需要满足'一个入口一个出口'不变式；Lex 合并 NFA 不需要满足任何不变式所以可以随意保留",
+        "例 3.24 中摘掉接受标记是为了防止 $\\epsilon$ 边形成死循环；Lex 合并 NFA 没有 $\\epsilon$ 边所以不需要摘"
+      ],
+      "correctIndex": 0,
+      "explanation": "例 3.24 造的是单台识别 $L(s) \\cup L(t)$ 的 NFA，整台机器只需一个接受状态，所以子机器的接受标记必须摘掉。而 Lex 合并 NFA 要同时识别多条不同模式，每个接受状态代表'匹配到了哪条模式'，保留多个接受状态才能区分命中的是哪条规则并执行对应动作。",
+      "source": {
+        "textbook": "编译原理 第二版",
+        "chapter": "",
+        "textbookSlug": "KUyw"
+      },
+      "created": "2026-09-21T09:13:26.003Z",
+      "conversationId": "EJCMdZUMLRh0uIgZkHKXm",
+      "status": "active",
+      "history": [
+        {
+          "schemaVersion": 2,
+          "time": "2026-09-21T09:17:42.032Z",
+          "chosen": 2,
+          "correct": false,
+          "domainRevision": 1,
+          "answerRecordId": "flashcard:fc_1789982006003_004_24440bb42868:1"
+        },
+        {
+          "schemaVersion": 2,
+          "time": "2026-09-21T09:18:43.148Z",
+          "chosen": 0,
+          "correct": true,
+          "domainRevision": 2,
+          "answerRecordId": "flashcard:fc_1789982006003_004_24440bb42868:2"
+        }
+      ],
+      "nextReview": "2026-09-21T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.4,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1790322776557_000_c9ab78945fa8",
+      "question": "对于输入串 `count + 1`，如果讨论的是语法分析树而不是抽象语法树，根结点通常表示什么？",
+      "choices": [
+        "`id`，因为标识符是输入中的第一个词法单元",
+        "加号 `+`，因为它决定了整个表达式的主要运算",
+        "表达式这个非终结符号",
+        "`num`，因为数字是表达式的最终结果"
+      ],
+      "correctIndex": 2,
+      "explanation": "语法分析树需要体现文法中的完整结构，因此根结点通常是代表整个输入串的非终结符号“表达式”。虽然 `+` 是核心运算符，但它在语法分析树中通常位于表达式根结点之下；在抽象语法树中，`+` 才可能直接作为根结点。",
+      "source": {
+        "textbook": "编译原理 第二版",
+        "chapter": "",
+        "textbookSlug": "KUyw"
+      },
+      "created": "2026-09-25T07:52:56.557Z",
+      "conversationId": "08-LAhcx2TqyRZC3rFx-6",
+      "status": "active",
+      "history": [
+        {
+          "schemaVersion": 2,
+          "time": "2026-09-25T07:53:41.461Z",
+          "chosen": 1,
+          "correct": false,
+          "domainRevision": 1,
+          "answerRecordId": "flashcard:fc_1790322776557_000_c9ab78945fa8:1"
+        },
+        {
+          "schemaVersion": 2,
+          "time": "2026-09-25T07:53:55.804Z",
+          "chosen": 2,
+          "correct": true,
+          "domainRevision": 2,
+          "answerRecordId": "flashcard:fc_1790322776557_000_c9ab78945fa8:2"
+        },
+        {
+          "schemaVersion": 2,
+          "time": "2026-09-25T07:54:22.023Z",
+          "chosen": 2,
+          "correct": true,
+          "domainRevision": 3,
+          "answerRecordId": "flashcard:fc_1790322776557_000_c9ab78945fa8:3"
+        }
+      ],
+      "nextReview": "2026-09-27T16:00:00.000Z",
+      "interval": 3,
+      "ease": 2.5,
+      "repetitions": 2
+    },
+    {
+      "id": "fc_1790322776558_001_f36a13cc60f5",
+      "question": "语法分析树的叶子结点从左到右依次为 `9`、`-`、`5`、`+`、`2` 时，这棵树的结果（yield）是什么？",
+      "choices": [
+        "`(9-5)+2`，因为 yield 必须包含表达式的分组结构",
+        "`9-5+2` 这个终结符号串",
+        "数值 $6$，因为 $(9-5)+2=6$",
+        "`95-2+`，因为这是该表达式的后缀表示"
+      ],
+      "correctIndex": 1,
+      "explanation": "语法分析树的结果是从左到右拼接叶子结点得到的终结符号串，即 `9-5+2`。数值 $6$ 是按照树所表达的结构进行求值后得到的结果，不是语法分析树的 yield。",
+      "source": {
+        "textbook": "编译原理 第二版",
+        "chapter": "",
+        "textbookSlug": "KUyw"
+      },
+      "created": "2026-09-25T07:52:56.558Z",
+      "conversationId": "08-LAhcx2TqyRZC3rFx-6",
+      "status": "active",
+      "history": [
+        {
+          "schemaVersion": 2,
+          "time": "2026-09-25T07:53:51.654Z",
+          "chosen": 3,
+          "correct": false,
+          "domainRevision": 1,
+          "answerRecordId": "flashcard:fc_1790322776558_001_f36a13cc60f5:1"
+        },
+        {
+          "schemaVersion": 2,
+          "time": "2026-09-25T07:54:17.076Z",
+          "chosen": 0,
+          "correct": false,
+          "domainRevision": 2,
+          "answerRecordId": "flashcard:fc_1790322776558_001_f36a13cc60f5:2"
+        },
+        {
+          "schemaVersion": 2,
+          "time": "2026-09-25T07:54:26.954Z",
+          "chosen": 1,
+          "correct": true,
+          "domainRevision": 3,
+          "answerRecordId": "flashcard:fc_1790322776558_001_f36a13cc60f5:3"
+        }
+      ],
+      "nextReview": "2026-09-25T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.1999999999999997,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1790322776558_002_9ef490f953ca",
+      "question": "在文法\n$$\n\\begin{aligned}\n\\text{expr}&\\rightarrow \\text{expr}+\\text{term}\\mid \\text{term}\\\\\n\\text{term}&\\rightarrow \\text{term}*\\text{factor}\\mid \\text{factor}\n\\end{aligned}\n$$\n中，为什么表达式 $9+5*2$ 的最外层运算符是 `+` 而不是 `*`？",
+      "choices": [
+        "因为 `+` 在输入串中出现得比 `*` 更早",
+        "因为结合性规定所有表达式都必须从左到右计算",
+        "因为 `+` 的运算结果会自动成为 `*` 的左运算分量",
+        "因为 `*` 在 term 层先构成一个整体，之后 expr 层才用 `+` 连接它"
+      ],
+      "correctIndex": 3,
+      "explanation": "文法把 `+` 放在较高层的 `expr` 中，把 `*` 放在更深入的 `term` 中，因此 `5*2` 会先作为一个完整的 term 构成右侧子表达式，最后才在 expr 层与 $9$ 做加法。这种非终结符层次编码了运算符优先级。",
+      "source": {
+        "textbook": "编译原理 第二版",
+        "chapter": "",
+        "textbookSlug": "KUyw"
+      },
+      "created": "2026-09-25T07:52:56.558Z",
+      "conversationId": "08-LAhcx2TqyRZC3rFx-6",
+      "status": "active",
+      "history": [
+        {
+          "schemaVersion": 2,
+          "time": "2026-09-25T07:54:56.428Z",
+          "chosen": 3,
+          "correct": true,
+          "domainRevision": 1,
+          "answerRecordId": "flashcard:fc_1790322776558_002_9ef490f953ca:1"
+        },
+        {
+          "schemaVersion": 2,
+          "time": "2026-09-25T07:55:18.502Z",
+          "chosen": 3,
+          "correct": true,
+          "domainRevision": 2,
+          "answerRecordId": "flashcard:fc_1790322776558_002_9ef490f953ca:2"
+        }
+      ],
+      "nextReview": "2026-09-27T16:00:00.000Z",
+      "interval": 3,
+      "ease": 2.7,
+      "repetitions": 2
+    },
+    {
+      "id": "fc_1790322776558_003_13a2101d49dd",
+      "question": "按照后缀表示的翻译规则，表达式 $9*(5+2)$ 应该翻译成什么？",
+      "choices": [
+        "$952+*$",
+        "$925+*$",
+        "$9*52+$",
+        "$52+9*$"
+      ],
+      "correctIndex": 0,
+      "explanation": "后缀表示要求先输出左运算分量 $9$，再翻译右侧括号表达式 $5+2$ 得到 `52+`，最后输出外层运算符 `*`。因此结果是 `952+*`，括号本身不出现在后缀串中。",
+      "source": {
+        "textbook": "编译原理 第二版",
+        "chapter": "",
+        "textbookSlug": "KUyw"
+      },
+      "created": "2026-09-25T07:52:56.558Z",
+      "conversationId": "08-LAhcx2TqyRZC3rFx-6",
+      "status": "active",
+      "history": [
+        {
+          "schemaVersion": 2,
+          "time": "2026-09-25T07:55:10.435Z",
+          "chosen": 3,
+          "correct": false,
+          "domainRevision": 1,
+          "answerRecordId": "flashcard:fc_1790322776558_003_13a2101d49dd:1"
+        },
+        {
+          "schemaVersion": 2,
+          "time": "2026-09-25T07:55:23.030Z",
+          "chosen": 0,
+          "correct": true,
+          "domainRevision": 2,
+          "answerRecordId": "flashcard:fc_1790322776558_003_13a2101d49dd:2"
+        }
+      ],
+      "nextReview": "2026-09-25T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.4,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1790322776558_004_017877355c19",
+      "question": "在语法制导定义中，若一个结点的属性值只由其子结点的属性值计算得到，例如\n$$\n\\text{expr}.t=\\text{expr}_1.t\\Vert\\text{term}.t\\Vert '+'\n$$\n那么这个属性属于哪一类？",
+      "choices": [
+        "终结符号属性",
+        "继承属性",
+        "词法属性",
+        "综合属性"
+      ],
+      "correctIndex": 3,
+      "explanation": "该属性从子结点向父结点汇总信息：先得到 `expr₁.t` 和 `term.t`，再计算父结点的 `expr.t`。这种由子结点属性计算父结点属性的属性称为综合属性；继承属性则通常由父结点或兄弟结点向当前结点传递信息。",
+      "source": {
+        "textbook": "编译原理 第二版",
+        "chapter": "",
+        "textbookSlug": "KUyw"
+      },
+      "created": "2026-09-25T07:52:56.558Z",
+      "conversationId": "08-LAhcx2TqyRZC3rFx-6",
+      "status": "active",
+      "history": [
+        {
+          "schemaVersion": 2,
+          "time": "2026-09-25T07:55:33.326Z",
+          "chosen": 3,
+          "correct": true,
+          "domainRevision": 1,
+          "answerRecordId": "flashcard:fc_1790322776558_004_017877355c19:1"
+        }
+      ],
+      "nextReview": "2026-09-25T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1790417160764_000_fc80fb9cf8b2",
+      "question": "在分层符号表中，`get(s)` 沿 `prev` 链由内向外查找，命中同名条目就立即返回。这一实现主要服务于哪条规则？",
+      "choices": [
+        "最近嵌套规则：标识符绑定到最近的外层可见声明，先遇到即命中。",
+        "最外层优先规则：从全局符号表开始向外层扩展查找。",
+        "声明顺序规则：按声明出现的先后顺序绑定，最早声明优先。",
+        "同层覆盖规则：只允许同一作用域内重声明，不允许内层遮蔽外层。"
+      ],
+      "correctIndex": 0,
+      "explanation": "由内向外、先命中先返回，正是最近嵌套规则：标识符应绑定到最近的那个同名声明，外层同名声明被内层有效声明遮蔽。",
+      "source": {
+        "textbook": "编译原理 第二版",
+        "chapter": "",
+        "textbookSlug": "KUyw"
+      },
+      "created": "2026-09-26T10:06:00.764Z",
+      "conversationId": "l8CSY0K4pq761mzn_LSNy",
+      "status": "active",
+      "history": [
+        {
+          "schemaVersion": 2,
+          "time": "2026-09-26T10:07:23.620Z",
+          "chosen": 0,
+          "correct": true,
+          "domainRevision": 1,
+          "answerRecordId": "flashcard:fc_1790417160764_000_fc80fb9cf8b2:1"
+        }
+      ],
+      "nextReview": "2026-09-26T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1790417160764_001_378ebae17b80",
+      "question": "教材说，即使给语言加上声明，块里的声明也可以不出现在抽象语法树中，而语句必须入树。主要原因是什么？",
+      "choices": [
+        "声明信息已经通过符号表从声明处传递到使用处，抽象语法树只需承载语句和表达式的结构。",
+        "声明属于运行时信息，必须在目标代码生成阶段才第一次出现。",
+        "抽象语法树的结点类太少，无法为声明定义对应的结点类。",
+        "声明在语义上没有任何含义，只是给词法分析器看的装饰。"
+      ],
+      "correctIndex": 0,
+      "explanation": "声明的类型等信息通过 `decl` 动作 `put` 进符号表，使用时由 `factor → id` 的 `get` 取回，走的是声明→符号表→使用的独立通道；树只负责语句/表达式结构，不必重复保存声明。",
+      "source": {
+        "textbook": "编译原理 第二版",
+        "chapter": "",
+        "textbookSlug": "KUyw"
+      },
+      "created": "2026-09-26T10:06:00.764Z",
+      "conversationId": "l8CSY0K4pq761mzn_LSNy",
+      "status": "active",
+      "history": [
+        {
+          "schemaVersion": 2,
+          "time": "2026-09-26T10:07:32.935Z",
+          "chosen": 0,
+          "correct": true,
+          "domainRevision": 1,
+          "answerRecordId": "flashcard:fc_1790417160764_001_378ebae17b80:1"
+        }
+      ],
+      "nextReview": "2026-09-26T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1790417160764_002_9f3d2edf8c52",
+      "question": "关于教材中的“三地址代码”，下列理解正确的是？",
+      "choices": [
+        "它用三层地址空间分别表示全局、局部和临时变量。",
+        "每条指令最多有三个地址位置：两个操作数和一个结果，且代码是线性、无层次结构的。",
+        "每条指令必须访问三个不同的内存单元，所以叫三地址。",
+        "它要求每条指令都有三行，分别写操作、跳转和标号。"
+      ],
+      "correctIndex": 1,
+      "explanation": "三地址代码是线性表示，一条指令形如 $x = y\\ op\\ z$，最多涉及三个地址：两个操作数和一个结果；它没有树形结构的层次。",
+      "source": {
+        "textbook": "编译原理 第二版",
+        "chapter": "",
+        "textbookSlug": "KUyw"
+      },
+      "created": "2026-09-26T10:06:00.764Z",
+      "conversationId": "l8CSY0K4pq761mzn_LSNy",
+      "status": "active",
+      "history": [
+        {
+          "schemaVersion": 2,
+          "time": "2026-09-26T10:07:36.565Z",
+          "chosen": 1,
+          "correct": true,
+          "domainRevision": 1,
+          "answerRecordId": "flashcard:fc_1790417160764_002_9f3d2edf8c52:1"
+        }
+      ],
+      "nextReview": "2026-09-26T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1790417160764_003_e7f593f20e0d",
+      "question": "教材的类型检查模型中，已知 `x` 是字符串、`y` 是整数，表达式 `z = x + y` 的 `+` 按重载规则会先被判定成“连接”，但整体仍报类型错误。为什么？",
+      "choices": [
+        "因为`+`因存在字符串分量被判为连接，而另一个分量是整型且二者不自动转换，导致类型不一致。",
+        "因为赋值号`=`左边是`z`，右边是表达式，赋值不做类型检查。",
+        "因为`+`只有整数加法一种含义，字符串分量使重载失效。",
+        "因为字符串连接要求两边都是字符串，所以应先把整数转成字符串再连接，不会报错。"
+      ],
+      "correctIndex": 0,
+      "explanation": "重载规则根据运算分量类型定含义：有字符串分量则 `+` 为连接；但另一个分量是整型，而该模型里字符串和整型不自动互转，无法凑出一致类型，所以报错。",
+      "source": {
+        "textbook": "编译原理 第二版",
+        "chapter": "",
+        "textbookSlug": "KUyw"
+      },
+      "created": "2026-09-26T10:06:00.764Z",
+      "conversationId": "l8CSY0K4pq761mzn_LSNy",
+      "status": "active",
+      "history": [
+        {
+          "schemaVersion": 2,
+          "time": "2026-09-26T10:07:57.664Z",
+          "chosen": 0,
+          "correct": true,
+          "domainRevision": 1,
+          "answerRecordId": "flashcard:fc_1790417160764_003_e7f593f20e0d:1"
+        }
+      ],
+      "nextReview": "2026-09-26T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1790417160764_004_2f6ee1a8e2fb",
+      "question": "在生成三地址代码时，用 `null` 占位并事后回填，为什么同一个 `null` 落到“赋值右部”能省掉拷贝，落到“子表达式”却省不掉？",
+      "choices": [
+        "`null`只能回填一次，赋值右部在回填后不再有其他指令，子表达式会有多次使用。",
+        "赋值右部时结果地址已知，可把`null`直接回填为左部变量；子表达式还需要临时量供后续指令使用，不能直接回填成最终变量。",
+        "子表达式必须做类型检查，类型检查要求有临时量，赋值右部则不用。",
+        "赋值右部的优先级高于子表达式，所以可以先回填。"
+      ],
+      "correctIndex": 1,
+      "explanation": "若该运算结果就是赋值右部，最终地址已知，可把 `null` 直接填成左部变量，于是没有临时量拷贝；若它只是更大表达式的一部分，需要一个临时量给后续指令引用，所以必须回填成临时量。",
+      "source": {
+        "textbook": "编译原理 第二版",
+        "chapter": "",
+        "textbookSlug": "KUyw"
+      },
+      "created": "2026-09-26T10:06:00.764Z",
+      "conversationId": "l8CSY0K4pq761mzn_LSNy",
+      "status": "active",
+      "history": [
+        {
+          "schemaVersion": 2,
+          "time": "2026-09-26T10:08:37.870Z",
+          "chosen": 1,
+          "correct": true,
+          "domainRevision": 1,
+          "answerRecordId": "flashcard:fc_1790417160764_004_2f6ee1a8e2fb:1"
+        }
+      ],
+      "nextReview": "2026-09-26T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1791623029826_000_ee6d5852ed42",
+      "question": "在自底向上语法分析中，对输入串 $id*id$ 使用表达式文法（4.1）进行归约时，句型 $T*id_2$ 中的 $T$ 为什么不是句柄（handle）？",
+      "choices": [
+        "因为 $T$ 只含一个非终结符，而归约操作只能作用于至少包含一个终结符的子串，所以 $T$ 不是句柄。",
+        "因为 $T$ 不是任何产生式的右部，归约操作要求被归约串必须完全等于某条产生式的右部，所以 $T$ 不能被归约。",
+        "因为 $T$ 出现在句型的非最左位置，而自底向上分析规定只能归约当前句型最左边的可归约串，所以 $T$ 不是句柄。",
+        "若将 $T$ 归约为 $E$，得到 $E*id_2$，但该串无法从开始符号 $E$ 推导出来，因此 $T$ 不是当前句型的句柄。"
+      ],
+      "correctIndex": 3,
+      "explanation": "句柄是某个右句型中与某条产生式体匹配、且归约后仍能得到合法右句型的子串。若把 $T$ 归约为 $E$，得到 $E*id_2$，而 $E*id_2$ 无法从开始符号 $E$ 推导出来，因此 $T$ 不是当前句型相对于该归约的句柄。",
+      "source": {
+        "textbook": "编译原理 第二版",
+        "chapter": "",
+        "textbookSlug": "KUyw"
+      },
+      "created": "2026-10-10T09:03:49.826Z",
+      "conversationId": "nxptfPVfsNLM-pi5X9tHt",
+      "status": "active",
+      "history": [],
+      "nextReview": "2026-10-10T09:03:49.826Z",
+      "interval": 0,
+      "ease": 2.5,
+      "repetitions": 0
+    },
+    {
+      "id": "fc_1791623029826_001_26b24cba7280",
+      "question": "消除左递归的替换公式将 $A\\to A\\alpha\\mid\\beta$ 改写为 $A\\to\\beta A'$ 和 $A'\\to\\alpha A'\\mid\\epsilon$。在本节例 4.20 中，结果里出现 $A\\to A'$，这一条对应的原始 $\\beta$ 是什么？为什么替换后右边只剩一个 $A'$？",
+      "choices": [
+        "对应的 $\\beta$ 是 $Aad$；因为 $Aad$ 是左递归项，消除后只保留新非终结符 $A'$，所以右边只剩 $A'$。",
+        "对应的 $\\beta$ 是 $c$；因为 $c$ 被放进 $A'$ 后，$A$ 只需继续引用 $A'$ 即可，所以右边只剩 $A'$。",
+        "对应的 $\\beta$ 是 $bd$；因为 $bd$ 被移入新非终结符 $A'$ 后，$A$ 的右边就只剩 $A'$。",
+        "对应的 $\\beta$ 是 $\\epsilon$；因为公式中 $\\beta A'$ 当 $\\beta=\\epsilon$ 时成为 $\\epsilon A'$，空串消失后右边就只剩 $A'$。"
+      ],
+      "correctIndex": 3,
+      "explanation": "标准替换公式是 $A\\to\\beta A'$。当某个 $\\beta$ 本身为 $\\epsilon$ 时，$\\epsilon A'$ 中的空串直接消失，于是写成 $A\\to A'$；这并不是因为 $A'$ 能推出 $\\epsilon$ 才得到的。",
+      "source": {
+        "textbook": "编译原理 第二版",
+        "chapter": "",
+        "textbookSlug": "KUyw"
+      },
+      "created": "2026-10-10T09:03:49.826Z",
+      "conversationId": "nxptfPVfsNLM-pi5X9tHt",
+      "status": "active",
+      "history": [],
+      "nextReview": "2026-10-10T09:03:49.826Z",
+      "interval": 0,
+      "ease": 2.5,
+      "repetitions": 0
+    },
+    {
+      "id": "fc_1791623029826_002_feb2dbbaeedf",
+      "question": "在构造 LL(1) 预测分析表时，对产生式 $A\\to\\alpha$，若 $\\epsilon\\in\\mathrm{FIRST}(\\alpha)$，除了把该产生式填入 $\\mathrm{FIRST}(\\alpha)$ 中每个终结符对应的格子外，还应依据哪条规则填入哪些格子？",
+      "choices": [
+        "把 $A\\to\\alpha$ 填入 $\\mathrm{FOLLOW}(A)$ 中每个符号 $b$ 对应的格子 $M[A,b]$。",
+        "把 $A\\to\\alpha$ 填入 $\\mathrm{FOLLOW}(\\alpha)$ 中每个符号 $b$ 对应的格子 $M[A,b]$。",
+        "把 $A\\to\\alpha$ 填入 $\\mathrm{FIRST}(A)$ 中每个符号 $a$ 对应的格子 $M[A,a]$，因为 $A$ 本身的首符号集合才是当前状态可选的依据。",
+        "把 $A\\to\\alpha$ 填入所有尚未填写的空格 $M[A,b]$，因为 $\\epsilon$ 产生式可以充当默认产生式以处理任意输入。"
+      ],
+      "correctIndex": 0,
+      "explanation": "当 $\\alpha$ 能推出 $\\epsilon$ 时，该产生式不消耗任何输入符号，此时应把 $A\\to\\alpha$ 填入 $\\mathrm{FOLLOW}(A)$ 中每个符号 $b$ 对应的格子 $M[A,b]$，表示在 $A$ 后应出现这些符号时可以选择这条空产生式。",
+      "source": {
+        "textbook": "编译原理 第二版",
+        "chapter": "",
+        "textbookSlug": "KUyw"
+      },
+      "created": "2026-10-10T09:03:49.826Z",
+      "conversationId": "nxptfPVfsNLM-pi5X9tHt",
+      "status": "active",
+      "history": [],
+      "nextReview": "2026-10-10T09:03:49.826Z",
+      "interval": 0,
+      "ease": 2.5,
+      "repetitions": 0
+    },
+    {
+      "id": "fc_1791778521804_000_76a9397f0f1c",
+      "question": "在最右推导的一步 $S \\Rightarrow^* \\alpha A w \\Rightarrow \\alpha \\beta w$ 中，被替换的 $A$ 是当前句型的最右非终结符号。这直接意味着 $w$ 具有什么性质？",
+      "choices": [
+        "$w$ 全部由终结符号组成",
+        "$w$ 可以含有非终结符号，但只能是 $A$ 能推导出的符号",
+        "$w$ 中至少含有一个非终结符号",
+        "$w$ 一定为空串"
+      ],
+      "correctIndex": 0,
+      "explanation": "既然 $A$ 是句型 $\\alpha A w$ 中最靠右的非终结符号，它右边就不能再出现任何非终结符号，否则那个更靠右的非终结符号才该被替换。因此 $w$ 只能全部由终结符号组成。",
+      "source": {
+        "textbook": "编译原理 第二版",
+        "chapter": "",
+        "textbookSlug": "KUyw"
+      },
+      "created": "2026-10-12T04:15:21.804Z",
+      "conversationId": "OSSH0n_WPOFykLhZVr0Wf",
+      "status": "active",
+      "history": [
+        {
+          "schemaVersion": 2,
+          "time": "2026-10-12T04:15:31.300Z",
+          "chosen": 0,
+          "correct": true,
+          "domainRevision": 1,
+          "answerRecordId": "flashcard:fc_1791778521804_000_76a9397f0f1c:1"
+        }
+      ],
+      "nextReview": "2026-10-12T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1791778521804_001_422e53d6c81a",
+      "question": "自底向上分析中，句柄的右端部分（最右句型 $\\alpha A w$ 中的 $w$）为什么全是终结符号，而不含非终结符号？",
+      "choices": [
+        "因为文法规定句柄右侧不允许出现非终结符号，否则该文法不是上下文无关文法",
+        "因为 $w$ 是已经归约完成的部分，所以只剩终结符号",
+        "因为终结符号比非终结符号优先级更高，必须优先出现在右边",
+        "因为若 $w$ 含非终结符号，那个更靠右的符号才该先被替换，$A$ 就不是最右非终结符号"
+      ],
+      "correctIndex": 3,
+      "explanation": "如果 $w$ 中含有非终结符号，那个更靠右的非终结符号才应该是本轮最右推导要替换的对象，$A$ 就不再是最右非终结符号，也就不能在这一步作为句柄被归约。",
+      "source": {
+        "textbook": "编译原理 第二版",
+        "chapter": "",
+        "textbookSlug": "KUyw"
+      },
+      "created": "2026-10-12T04:15:21.804Z",
+      "conversationId": "OSSH0n_WPOFykLhZVr0Wf",
+      "status": "active",
+      "history": [
+        {
+          "schemaVersion": 2,
+          "time": "2026-10-12T04:15:41.973Z",
+          "chosen": 3,
+          "correct": true,
+          "domainRevision": 1,
+          "answerRecordId": "flashcard:fc_1791778521804_001_422e53d6c81a:1"
+        }
+      ],
+      "nextReview": "2026-10-12T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1791778521804_002_61dee0dfadfa",
+      "question": "在移入-归约分析中，栈里只存状态编号而不直接存文法符号。归约时需要知道弹出几个符号、归约成哪个非终结符号，这些信息从哪里来？",
+      "choices": [
+        "输入缓冲区里仍保留着被移入符号的副本，归约时从缓冲区读取",
+        "每个状态与唯一的文法符号绑定，符号可以从对应状态中复原出来",
+        "归约所需的符号由 ACTION 表的移入项 j 中携带的信息提供",
+        "状态编号的位数直接编码了弹出符号的数量"
+      ],
+      "correctIndex": 1,
+      "explanation": "每个状态与唯一的文法符号绑定（所有进入该状态的箭头标签相同），因此从一个状态就能推出它对应的文法符号，符号列可由状态复原，无需真正把符号存在栈里。",
+      "source": {
+        "textbook": "编译原理 第二版",
+        "chapter": "",
+        "textbookSlug": "KUyw"
+      },
+      "created": "2026-10-12T04:15:21.804Z",
+      "conversationId": "OSSH0n_WPOFykLhZVr0Wf",
+      "status": "active",
+      "history": [
+        {
+          "schemaVersion": 2,
+          "time": "2026-10-12T04:16:12.046Z",
+          "chosen": 1,
+          "correct": true,
+          "domainRevision": 1,
+          "answerRecordId": "flashcard:fc_1791778521804_002_61dee0dfadfa:1"
+        }
+      ],
+      "nextReview": "2026-10-12T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1791778521804_003_9b2a6efaead7",
+      "question": "LR 分析器执行归约动作时，为什么不需要消费（读取）输入符号？",
+      "choices": [
+        "因为归约动作由 GOTO 表决定，而 GOTO 表只查非终结符号，与输入无关",
+        "因为归约处理的是非终结符号，输入符号都是终结符号，二者互不相干",
+        "因为输入符号在移入时已经被消费过一次，归约时不能再消费",
+        "归约只操作栈上已有的符号，输入符号仅用于查表决定动作，不参与归约本身"
+      ],
+      "correctIndex": 3,
+      "explanation": "归约操作只修改栈：把栈顶已有的产生式体弹出并替换为非终结符号。输入符号只用于查表决定当前动作，本身留在缓冲区里向前看，所以归约一步不吃输入。",
+      "source": {
+        "textbook": "编译原理 第二版",
+        "chapter": "",
+        "textbookSlug": "KUyw"
+      },
+      "created": "2026-10-12T04:15:21.804Z",
+      "conversationId": "OSSH0n_WPOFykLhZVr0Wf",
+      "status": "active",
+      "history": [
+        {
+          "schemaVersion": 2,
+          "time": "2026-10-12T04:16:24.171Z",
+          "chosen": 3,
+          "correct": true,
+          "domainRevision": 1,
+          "answerRecordId": "flashcard:fc_1791778521804_003_9b2a6efaead7:1"
+        }
+      ],
+      "nextReview": "2026-10-12T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1791778521804_004_e0bab8620d96",
+      "question": "Yacc 在默认情况下遇到移入/归约冲突时总是选移入。对于悬空 else 文法，为什么这恰好符合「else 就近配对」的语言约定？",
+      "choices": [
+        "选移入会让 else 与最外层的 if 结合，使得嵌套结构更加清晰",
+        "选移入可以避免归约/归约冲突同时发生，保证分析器不报错",
+        "选移入使 else 与最近的那个 if 结合，符合 else 就近配对的约定",
+        "选移入是因为 else 的优先级高于 then，高优先级符号总是先移入"
+      ],
+      "correctIndex": 2,
+      "explanation": "若在栈顶是 $\\textbf{if}\\ expr\\ \\textbf{then}\\ stmt$、输入为 else 时选归约，这个 else 就只能与更外层的 if 配对；选移入则让 else 与最近的那个还未配对的 then 结合，实现就近配对。",
+      "source": {
+        "textbook": "编译原理 第二版",
+        "chapter": "",
+        "textbookSlug": "KUyw"
+      },
+      "created": "2026-10-12T04:15:21.804Z",
+      "conversationId": "OSSH0n_WPOFykLhZVr0Wf",
+      "status": "active",
+      "history": [
+        {
+          "schemaVersion": 2,
+          "time": "2026-10-12T04:16:44.098Z",
+          "chosen": 2,
+          "correct": true,
+          "domainRevision": 1,
+          "answerRecordId": "flashcard:fc_1791778521804_004_e0bab8620d96:1"
+        }
+      ],
+      "nextReview": "2026-10-12T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1791877432937_000_933d7a0779bb",
+      "question": "关于最右推导的形式化定义 $S \\Rightarrow \\alpha A w \\Rightarrow \\alpha \\beta w$，以下说法正确的是？",
+      "choices": [
+        "$w$ 里可以再含非终结符号，只要那个非终结符号比 $A$ 先被换掉就行",
+        "$A$ 是 $\\alpha A w$ 中最靠左的非终结符号，$w$ 可以是任意符号串",
+        "$A$ 是 $\\alpha A w$ 中最靠右的非终结符号，因此 $w$ 中只能含终结符号，不能再有非终结符号",
+        "$A$ 可以是句型中随便哪一个非终结符号，只要它最终能推出全终结符串即可"
+      ],
+      "correctIndex": 2,
+      "explanation": "最右推导每一步换掉的是句型中最靠右的非终结符号。既然这一步换的是 $A$，说明 $A$ 是 $\\alpha A w$ 中最靠右的非终结符号，因此它右边的 $w$ 里不可能含有非终结符号，$w$ 只能全由终结符号组成。",
+      "source": {
+        "textbook": "编译原理 第二版",
+        "chapter": "",
+        "textbookSlug": "KUyw"
+      },
+      "created": "2026-10-13T07:43:52.937Z",
+      "conversationId": "OSSH0n_WPOFykLhZVr0Wf",
+      "status": "active",
+      "history": [],
+      "nextReview": "2026-10-13T07:43:52.937Z",
+      "interval": 0,
+      "ease": 2.5,
+      "repetitions": 0
+    },
+    {
+      "id": "fc_1791877432938_001_c3e7107d3168",
+      "question": "在移入-归约分析中，栈里是 $\\$T$、下一个输入符号是 $*$，此时为什么**不能**把 $T$ 归约为 $E$？",
+      "choices": [
+        "因为归约动作必须先消费掉一个输入符号，而此时输入还是 $*$，条件不满足",
+        "因为 $T$ 不是任何一个产生式的右部，根本无法归约为 $E$",
+        "此时真正的句柄是还留在输入缓冲区里的 $id_2$，栈顶的 $T$ 不是句柄，过早归约会使句型离开原推导链",
+        "因为 $E$ 是开始符号，开始符号只能在分析的最后一步归约出来"
+      ],
+      "correctIndex": 2,
+      "explanation": "此刻栈中 $T$ 与剩余输入合起来对应的句型是 $T*id_2$，它的句柄是还留在输入缓冲区里的 $id_2$，栈顶的 $T$ 并不是句柄。若过早把 $T$ 归约成 $E$，会得到 $E*id_2$ 这种形状，它不在从 $E$ 出发的最右推导路径上，无法接回推导链。",
+      "source": {
+        "textbook": "编译原理 第二版",
+        "chapter": "",
+        "textbookSlug": "KUyw"
+      },
+      "created": "2026-10-13T07:43:52.938Z",
+      "conversationId": "OSSH0n_WPOFykLhZVr0Wf",
+      "status": "active",
+      "history": [],
+      "nextReview": "2026-10-13T07:43:52.938Z",
+      "interval": 0,
+      "ease": 2.5,
+      "repetitions": 0
+    },
+    {
+      "id": "fc_1791877432938_002_c47d071fcb71",
+      "question": "教材中所谓「句柄在未被识别之前，永远出现在栈顶，绝不会藏在栈中间」这一性质，其直观依据是什么？",
+      "choices": [
+        "因为最右推导中后一步换的总是前一步产物里最靠右的非终结符号，归约与移入后下一个句柄会自动浮到栈顶",
+        "因为分析器随时可以扫描整个栈，一旦句柄藏在栈中间就用一次额外的栈内查找把它提出来",
+        "因为句柄一定是最右边的那个终结符号，而终结符号总是最后才被压入栈顶的",
+        "因为语法分析表保证了任何时刻栈中至多只有一个非终结符号，所以句柄不可能藏在栈中间"
+      ],
+      "correctIndex": 0,
+      "explanation": "在最右推导中，后一步被替换的非终结符号总是前一步产生式体中最靠右的那个非终结符号。因此分析器每归约一次、再移入若干符号后，下一个句柄会自动浮到栈顶，无需回头往栈中间翻找。",
+      "source": {
+        "textbook": "编译原理 第二版",
+        "chapter": "",
+        "textbookSlug": "KUyw"
+      },
+      "created": "2026-10-13T07:43:52.938Z",
+      "conversationId": "OSSH0n_WPOFykLhZVr0Wf",
+      "status": "active",
+      "history": [],
+      "nextReview": "2026-10-13T07:43:52.938Z",
+      "interval": 0,
+      "ease": 2.5,
+      "repetitions": 0
+    },
+    {
+      "id": "fc_1791877432938_003_1c5ee1b75ce9",
+      "question": "关于 LR(0) 项及其作用，下列说法正确的是？",
+      "choices": [
+        "起点项 $A \\to \\cdot XYZ$ 表示 $XYZ$ 已经全部到手，可以直接归约成 $A$",
+        "项的个数固定等于产生式的条数，每条产生式只对应一个项",
+        "项中的点只是装饰性的记号，移入还是归约完全由输入的下一个符号单独决定",
+        "项中的点标记了「已看到哪儿」，点在右部最右端的项表示可以归约，点后面还有符号的项表示需要继续移入"
+      ],
+      "correctIndex": 3,
+      "explanation": "LR(0) 项是产生式加上一个点，点的位置表示分析器「已经走到哪儿了」。点在最右端表示右部各符号已全部到手、可以归约；点后面还跟着符号则表示尚未攒完、需要继续移入。这正是分析器判断移入还是归约的底层依据。",
+      "source": {
+        "textbook": "编译原理 第二版",
+        "chapter": "",
+        "textbookSlug": "KUyw"
+      },
+      "created": "2026-10-13T07:43:52.938Z",
+      "conversationId": "OSSH0n_WPOFykLhZVr0Wf",
+      "status": "active",
+      "history": [],
+      "nextReview": "2026-10-13T07:43:52.938Z",
+      "interval": 0,
+      "ease": 2.5,
+      "repetitions": 0
+    },
+    {
+      "id": "fc_1791877432938_004_e1e7945ccf38",
+      "question": "在构造 LR(0) 项集族时，$\\text{GOTO}(I, X)$ 在把点跨过 $X$ 之后为什么还必须求闭包？",
+      "choices": [
+        "因为闭包函数负责去掉项集中重复的项，保证每个状态里项不重复",
+        "因为点跨过 $X$ 后可能紧贴某个非终结符 $B$，必须把 $B$ 的各条产生式补进来，状态才有可移入的终结符箭头",
+        "因为只有经过闭包才能把终结符号也一并纳入状态，否则状态里只有非终结符号",
+        "因为闭包函数会把项集里所有点移动到最右端，使状态可以直接执行归约"
+      ],
+      "correctIndex": 1,
+      "explanation": "点跨过 $X$ 之后若点正好贴着某个非终结符 $B$，说明分析器接下来在等一个能由 $B$ 推出的串。该串的开头必然来自 $B$ 的某条产生式，所以必须把 $B \\to \\cdot\\gamma$ 这些项补进来，才使该状态含有能实际移入的终结符箭头；不补闭包，状态就没有出路，分析会卡死。",
+      "source": {
+        "textbook": "编译原理 第二版",
+        "chapter": "",
+        "textbookSlug": "KUyw"
+      },
+      "created": "2026-10-13T07:43:52.938Z",
+      "conversationId": "OSSH0n_WPOFykLhZVr0Wf",
+      "status": "active",
+      "history": [],
+      "nextReview": "2026-10-13T07:43:52.938Z",
+      "interval": 0,
+      "ease": 2.5,
+      "repetitions": 0
+    },
+    {
+      "id": "fc_1791877432938_005_7d3548b1e46a",
+      "question": "在 SLR 分析表的构造规则中，对项集 $I_i$ 中形如 $[A \\to \\alpha\\cdot]$ 的项，要按哪条规则填表？",
+      "choices": [
+        "对任意终结符号 $a$ 一律置 $ACTION[i,a]=$ 归约 $A\\to\\alpha$，无需任何集合限制",
+        "对 $\\text{FIRST}(A)$ 中的每个终结符号 $a$，置 $ACTION[i,a]=$ 归约 $A\\to\\alpha$",
+        "对该项点前面那个文法符号 $\\alpha$ 所对应的所有输入符号置 $ACTION[i,a]=$ 移入",
+        "对 $\\text{FOLLOW}(A)$ 中的每个终结符号 $a$，置 $ACTION[i,a]=$ 归约 $A\\to\\alpha$"
+      ],
+      "correctIndex": 3,
+      "explanation": "规则 2（归约）：若 $[A\\to\\alpha\\cdot]\\in I_i$ 且 $A\\neq S'$，则对 $\\text{FOLLOW}(A)$ 中的每个终结符号 $a$，置 $ACTION[i,a]=$ 归约 $A\\to\\alpha$。用 FOLLOW 集是为了限制「只有后面真可能出现 $a$ 才敢归约」，这正是 SLR 里 S 的由来。",
+      "source": {
+        "textbook": "编译原理 第二版",
+        "chapter": "",
+        "textbookSlug": "KUyw"
+      },
+      "created": "2026-10-13T07:43:52.938Z",
+      "conversationId": "OSSH0n_WPOFykLhZVr0Wf",
+      "status": "active",
+      "history": [],
+      "nextReview": "2026-10-13T07:43:52.938Z",
+      "interval": 0,
+      "ease": 2.5,
+      "repetitions": 0
+    },
+    {
+      "id": "fc_1791877432938_006_76ad45c47203",
+      "question": "关于归约动作「弹出 $r$ 个状态、再按 $GOTO$ 压入一个新状态」中「归约不消费输入符号」的原因，下列解释正确的是？",
+      "choices": [
+        "因为归约时手上处理的都是非终结符号，而非终结符号不会出现在输入缓冲区里，所以用不着消费输入",
+        "因为归约按产生式的右部长度 $r$ 弹出状态，同时也必须相应地向前跳过 $r$ 个输入符号",
+        "因为要归约的那一小段早就已经在栈上了，输入符号只用来陪栈顶状态查表选定动作，选定后它就原地不动",
+        "因为归约是自底向上分析的最后一步，分析到这里输入串已经空了，自然没什么可消费"
+      ],
+      "correctIndex": 2,
+      "explanation": "归约要做的事已经全部在栈上了——把栈顶现成的那段 $\\beta$ 收成 $A$，手只动栈不动输入。输入符号的作用只是配合栈顶状态查表、帮你选定这一步该做归约；选定之后它原地不动，等下一步再处理。因此归约不消费输入。",
+      "source": {
+        "textbook": "编译原理 第二版",
+        "chapter": "",
+        "textbookSlug": "KUyw"
+      },
+      "created": "2026-10-13T07:43:52.938Z",
+      "conversationId": "OSSH0n_WPOFykLhZVr0Wf",
+      "status": "active",
+      "history": [],
+      "nextReview": "2026-10-13T07:43:52.938Z",
+      "interval": 0,
+      "ease": 2.5,
+      "repetitions": 0
+    },
+    {
+      "id": "fc_1791877432938_007_949a045c2d6f",
+      "question": "关于 LR 分析器栈里只存状态、不存文法符号这一设计，下列说法正确的是？",
+      "choices": [
+        "因为每个状态都由唯一一个文法符号的箭头进入，符号可以从状态号反推出来；反过来同一符号可以对应多个状态",
+        "因为每个文法符号只对应唯一一个状态，所以符号和状态可以互相唯一地推来推去",
+        "因为符号只出现在 $GOTO$ 表里、状态只出现在 $ACTION$ 表里，两者本来就分开存放，栈里只需存状态",
+        "因为栈里存了符号会让栈太占内存，教材为了节省空间才取消了符号这一列"
+      ],
+      "correctIndex": 0,
+      "explanation": "每个状态都和唯一的文法符号绑定：进入某个状态 $j$ 的所有箭头都带同一个标签 $X$，因此从状态可以反推回它所代表的文法符号。栈里留状态号，需要时就能还原出符号，无需另占空间存符号。注意反向不成立——两个不同状态可以共用同一个符号。",
+      "source": {
+        "textbook": "编译原理 第二版",
+        "chapter": "",
+        "textbookSlug": "KUyw"
+      },
+      "created": "2026-10-13T07:43:52.938Z",
+      "conversationId": "OSSH0n_WPOFykLhZVr0Wf",
+      "status": "active",
+      "history": [],
+      "nextReview": "2026-10-13T07:43:52.938Z",
+      "interval": 0,
+      "ease": 2.5,
+      "repetitions": 0
+    },
+    {
+      "id": "fc_1791887612781_000_ed29596695a9",
+      "question": "在 LR(0) 项 $A \\to XYZ$ 生成的四个项中，哪一个表示了「所有符号都已看到，可以归约」的信号？",
+      "choices": [
+        "$A \\to XYZ\\cdot$",
+        "$A \\to XY \\cdot Z$",
+        "$A \\to \\cdot XYZ$",
+        "$A \\to X \\cdot YZ$"
+      ],
+      "correctIndex": 0,
+      "explanation": "项中圆点左边的部分是已经识别到的符号，右边是还期待的符号。当圆点位于产生式体最右端时（如 $A \\to XYZ\\cdot$），说明整个产生式体都已匹配完毕，应该进行归约。",
+      "source": {
+        "textbook": "编译原理 第二版",
+        "chapter": "",
+        "textbookSlug": "KUyw"
+      },
+      "created": "2026-10-13T10:33:32.781Z",
+      "conversationId": "OSSH0n_WPOFykLhZVr0Wf",
+      "status": "active",
+      "history": [
+        {
+          "schemaVersion": 2,
+          "time": "2026-10-13T10:33:48.960Z",
+          "chosen": 0,
+          "correct": true,
+          "domainRevision": 1,
+          "answerRecordId": "flashcard:fc_1791887612781_000_ed29596695a9:1"
+        },
+        {
+          "schemaVersion": 2,
+          "time": "2026-10-13T10:37:39.719Z",
+          "chosen": 0,
+          "correct": true,
+          "domainRevision": 2,
+          "answerRecordId": "flashcard:fc_1791887612781_000_ed29596695a9:2"
+        }
+      ],
+      "nextReview": "2026-10-15T16:00:00.000Z",
+      "interval": 3,
+      "ease": 2.7,
+      "repetitions": 2
+    },
+    {
+      "id": "fc_1791887612782_001_73e3727fbca3",
+      "question": "LR(0) 自动机中状态栈里只存状态编号而不存文法符号，归约时需要知道弹出几个符号，这是怎么解决的？",
+      "choices": [
+        "分析表额外记录了一个指针，指向当前符号栈的顶部位置",
+        "驱动程序维护了一个独立的符号栈，与状态栈同步更新",
+        "状态编号本身就是按符号顺序编码的，解码即可得到符号",
+        "每个状态唯一对应一个文法符号，可以通过状态序列反推符号序列"
+      ],
+      "correctIndex": 3,
+      "explanation": "每个状态对应唯一一个文法符号（进入该状态的所有转移都标同一个符号），因此有了状态序列就能还原出对应的符号序列，从而知道产生式体有多长、该弹几个状态。",
+      "source": {
+        "textbook": "编译原理 第二版",
+        "chapter": "",
+        "textbookSlug": "KUyw"
+      },
+      "created": "2026-10-13T10:33:32.782Z",
+      "conversationId": "OSSH0n_WPOFykLhZVr0Wf",
+      "status": "active",
+      "history": [
+        {
+          "schemaVersion": 2,
+          "time": "2026-10-13T10:37:27.533Z",
+          "chosen": 2,
+          "correct": false,
+          "domainRevision": 1,
+          "answerRecordId": "flashcard:fc_1791887612782_001_73e3727fbca3:1"
+        },
+        {
+          "schemaVersion": 2,
+          "time": "2026-10-13T10:37:41.678Z",
+          "chosen": 3,
+          "correct": true,
+          "domainRevision": 2,
+          "answerRecordId": "flashcard:fc_1791887612782_001_73e3727fbca3:2"
+        }
+      ],
+      "nextReview": "2026-10-13T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.4,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1791887612782_002_9b8c074991b1",
+      "question": "在 GOTO 函数的定义中，计算出「点跨过符号 $X$」的新项之后，为什么还要对结果求 CLOSURE？",
+      "choices": [
+        "因为 GOTO 的结果必须是一个封闭项集，否则不满足 LR(0) 自动机的数学定义",
+        "因为闭包能够计算出该状态的 FOLLOW 集，从而确定归约动作",
+        "因为求闭包可以消除项集中的冗余项，使自动机状态数最少",
+        "因为点跨过 $X$ 后可能落在非终结符前面，闭包补全该非终结符所能展开的所有产生式，使自动机具备正确的前移路径"
+      ],
+      "correctIndex": 3,
+      "explanation": "跨过 $X$ 后圆点可能停在某个非终结符 $B$ 之前（如 $A \\to \\alpha \\cdot B\\beta$），这时分析器需要知道接下来能移入哪些终结符。闭包把 $B$ 的所有产生式以圆点在最左端的形式加入，补全了这些转移箭头，否则自动机会缺少可走的路径。",
+      "source": {
+        "textbook": "编译原理 第二版",
+        "chapter": "",
+        "textbookSlug": "KUyw"
+      },
+      "created": "2026-10-13T10:33:32.782Z",
+      "conversationId": "OSSH0n_WPOFykLhZVr0Wf",
+      "status": "active",
+      "history": [
+        {
+          "schemaVersion": 2,
+          "time": "2026-10-13T10:38:02.757Z",
+          "chosen": 3,
+          "correct": true,
+          "domainRevision": 1,
+          "answerRecordId": "flashcard:fc_1791887612782_002_9b8c074991b1:1"
+        }
+      ],
+      "nextReview": "2026-10-13T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1791887612782_003_0832288f74d5",
+      "question": "SLR 分析表构造中，当归约项 $[A \\to \\alpha\\cdot]$ 在状态 $i$ 中时，为什么只在 FOLLOW$(A)$ 中的符号上填归约动作，而不是所有终结符？",
+      "choices": [
+        "因为其他符号一定会触发移入动作，不需要在归约行中重复填写",
+        "因为 SLR 方法要求 ACTION 表中每一行必须恰好填满，FOLLOW 集提供了填满所需的符号",
+        "只有输入符号确实可能紧跟在 $A$ 之后时归约才是安全的，否则归约后的句型无法接回推导链",
+        "因为 FOLLOW 集恰好等于该状态的移入符号集，用它可以减少表格规模"
+      ],
+      "correctIndex": 2,
+      "explanation": "只有在输入符号确实可能跟在 $A$ 后面时（即在 FOLLOW$(A)$ 中），在该状态归约才是安全的。如果对不在 FOLLOW$(A)$ 中的符号也填归约，可能导致错误的归约，因为该归约后的句型不可能出现在原推导链上。",
+      "source": {
+        "textbook": "编译原理 第二版",
+        "chapter": "",
+        "textbookSlug": "KUyw"
+      },
+      "created": "2026-10-13T10:33:32.782Z",
+      "conversationId": "OSSH0n_WPOFykLhZVr0Wf",
+      "status": "active",
+      "history": [
+        {
+          "schemaVersion": 2,
+          "time": "2026-10-13T10:55:36.423Z",
+          "chosen": 2,
+          "correct": true,
+          "domainRevision": 1,
+          "answerRecordId": "flashcard:fc_1791887612782_003_0832288f74d5:1"
+        },
+        {
+          "schemaVersion": 2,
+          "time": "2026-10-13T10:56:02.081Z",
+          "chosen": 2,
+          "correct": true,
+          "domainRevision": 2,
+          "answerRecordId": "flashcard:fc_1791887612782_003_0832288f74d5:2"
+        }
+      ],
+      "nextReview": "2026-10-15T16:00:00.000Z",
+      "interval": 3,
+      "ease": 2.7,
+      "repetitions": 2
+    },
+    {
+      "id": "fc_1791887612782_004_16325a4ca814",
+      "question": "例 4.39 中，过程调用和数组引用共享产生式 $parameter \\to id$ 与 $expr \\to id$，分析器仅凭栈中符号无法决定归约方向。根本原因是什么？",
+      "choices": [
+        "为分析器没有实现归约/归约冲突的优先级比较机制",
+        "因为该文法是二义的，LR 分析器无法处理任何二义性文法",
+        "因为词法分析器返回的 $id$ 丢失了位置信息，需要向前多看一个符号才能区分",
+        "两条产生式右部完全相同，区分的依据（标识符是过程名还是数组名）存放在符号表中，不在栈和输入缓冲区里"
+      ],
+      "correctIndex": 3,
+      "explanation": "两条产生式的右部完全相同（都是 $id$），仅从栈顶的符号无法区分该按哪条产生式归约。区分的关键在于标识符 $id$ 的语义角色（过程名还是数组名），这个信息保存在符号表中，词法分析器通过返回 procid 而非 id 将其编码进终结符，从而让分析器能做出区分。",
+      "source": {
+        "textbook": "编译原理 第二版",
+        "chapter": "",
+        "textbookSlug": "KUyw"
+      },
+      "created": "2026-10-13T10:33:32.782Z",
+      "conversationId": "OSSH0n_WPOFykLhZVr0Wf",
+      "status": "active",
+      "history": [
+        {
+          "schemaVersion": 2,
+          "time": "2026-10-13T10:55:56.860Z",
+          "chosen": 1,
+          "correct": false,
+          "domainRevision": 1,
+          "answerRecordId": "flashcard:fc_1791887612782_004_16325a4ca814:1"
+        },
+        {
+          "schemaVersion": 2,
+          "time": "2026-10-13T10:56:09.185Z",
+          "chosen": 3,
+          "correct": true,
+          "domainRevision": 2,
+          "answerRecordId": "flashcard:fc_1791887612782_004_16325a4ca814:2"
+        }
+      ],
+      "nextReview": "2026-10-13T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.4,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1791893702420_000_d40d49824c98",
+      "question": "在移入-归约分析中，句柄的右边全都是终结符号，这一事实的直接推论是什么？",
+      "choices": [
+        "右侧全是终结符，意味着分析器必须先移入全部输入再归约",
+        "右侧全是终结符，所以句柄只能出现在栈底",
+        "右侧没有等待归约的非终结符，分析器遇到句柄就能直接归约，不必回头",
+        "右侧全是终结符，说明该句柄一定由最右推导最后一步产生"
+      ],
+      "correctIndex": 2,
+      "explanation": "句柄右边没有待归约的非终结符，意味着分析器从左往右扫时一旦识别出句柄就可以立即归约，不必回头查看栈中间或右侧的内容。",
+      "source": {
+        "textbook": "编译原理 第二版",
+        "chapter": "",
+        "textbookSlug": "KUyw"
+      },
+      "created": "2026-10-13T12:15:02.420Z",
+      "conversationId": "OSSH0n_WPOFykLhZVr0Wf",
+      "status": "active",
+      "history": [],
+      "nextReview": "2026-10-13T12:15:02.420Z",
+      "interval": 0,
+      "ease": 2.5,
+      "repetitions": 0
+    },
+    {
+      "id": "fc_1791893702421_001_71eb2f42f246",
+      "question": "对于产生式 $T \\to T*F$，其 LR(0) 项中表示「$T$ 和 $*$ 都已到手，正等着 $F$」的是哪一个？",
+      "choices": [
+        "$T \\to \\cdot T*F$",
+        "$T \\to T*\\cdot F$",
+        "$T \\to T\\cdot *F$",
+        "$T \\to T*F\\cdot$"
+      ],
+      "correctIndex": 1,
+      "explanation": "项中的点标记已经看到的位置，点左边是已获得的符号，点右边是期望出现的符号。$T*\\cdot F$ 表示 $T$ 和 $*$ 已在点左侧，$F$ 在点右侧等待。",
+      "source": {
+        "textbook": "编译原理 第二版",
+        "chapter": "",
+        "textbookSlug": "KUyw"
+      },
+      "created": "2026-10-13T12:15:02.421Z",
+      "conversationId": "OSSH0n_WPOFykLhZVr0Wf",
+      "status": "active",
+      "history": [],
+      "nextReview": "2026-10-13T12:15:02.421Z",
+      "interval": 0,
+      "ease": 2.5,
+      "repetitions": 0
+    },
+    {
+      "id": "fc_1791893702421_002_506dba7fb6ff",
+      "question": "在 SLR 分析表构造中，若项 $[A \\to \\alpha\\cdot]$ 在项集 $I_i$ 中且 $A \\neq S'$，则对哪些输入符号置 $ACTION[i,a] = $ 归约 $A \\to \\alpha$？",
+      "choices": [
+        "对所有终结符 a，因为点已在最右端",
+        "只对 $ 符号，因为归约意味着分析可能结束",
+        "对 FOLLOW(A) 中的每个终结符 a",
+        "对 FIRST(A) 中的每个终结符 a"
+      ],
+      "correctIndex": 2,
+      "explanation": "SLR 用 FOLLOW 集来限制归约动作的适用范围——只有当某个终结符确实可能跟在 $A$ 后面时，才允许在该状态下用这条产生式归约，这正是 SLR 中「S」（Simple）的含义。",
+      "source": {
+        "textbook": "编译原理 第二版",
+        "chapter": "",
+        "textbookSlug": "KUyw"
+      },
+      "created": "2026-10-13T12:15:02.421Z",
+      "conversationId": "OSSH0n_WPOFykLhZVr0Wf",
+      "status": "active",
+      "history": [],
+      "nextReview": "2026-10-13T12:15:02.421Z",
+      "interval": 0,
+      "ease": 2.5,
+      "repetitions": 0
+    },
+    {
+      "id": "fc_1791893702421_003_bc8a576d6aec",
+      "question": "在 LR 分析器的栈中只存状态编号而不存文法符号，归约时之所以能知道该弹出几个符号，靠的是哪条约定？",
+      "choices": [
+        "栈中实际同时存有状态和符号，只是符号列不显示",
+        "归约时弹出的符号数由当前输入符号决定",
+        "每个状态对应唯一的文法符号——所有进入该状态的箭头标签相同，因此符号可以从状态复原",
+        "每个文法符号对应唯一的状态，因此查符号即可知道状态"
+      ],
+      "correctIndex": 2,
+      "explanation": "每个状态由唯一的文法符号通过 GOTO 到达，因此状态编号本身就编码了它对应的文法符号，归约时从状态即可复原符号信息。但要注意反过来不成立：多个状态可以对应同一个文法符号。",
+      "source": {
+        "textbook": "编译原理 第二版",
+        "chapter": "",
+        "textbookSlug": "KUyw"
+      },
+      "created": "2026-10-13T12:15:02.421Z",
+      "conversationId": "OSSH0n_WPOFykLhZVr0Wf",
+      "status": "active",
+      "history": [],
+      "nextReview": "2026-10-13T12:15:02.421Z",
+      "interval": 0,
+      "ease": 2.5,
+      "repetitions": 0
+    },
+    {
+      "id": "fc_1791893702421_004_468ea5a3be6e",
+      "question": "在 GOTO 函数中，对项集 $I$ 跨过符号 $X$ 后为什么还需要求闭包？",
+      "choices": [
+        "因为 GOTO 的结果必须包含原项集中的所有项，闭包用于补全",
+        "因为闭包用于判断该状态是否已经存在于项集族 $C$ 中",
+        "因为点右边可能是非终结符，闭包把「等待非终结符」展开为「可移入哪些终结符」，从而生成必要的移入箭头",
+        "因为闭包用于消除项集中的重复项"
+      ],
+      "correctIndex": 2,
+      "explanation": "跨过 $X$ 后如果点紧贴一个非终结符 $B$，该状态中只有等待 $B$ 的项而没有移入动作，必须通过闭包把 $B$ 的各产生式展开，才能生成对终结符的移入箭头。",
+      "source": {
+        "textbook": "编译原理 第二版",
+        "chapter": "",
+        "textbookSlug": "KUyw"
+      },
+      "created": "2026-10-13T12:15:02.421Z",
+      "conversationId": "OSSH0n_WPOFykLhZVr0Wf",
+      "status": "active",
+      "history": [],
+      "nextReview": "2026-10-13T12:15:02.421Z",
+      "interval": 0,
+      "ease": 2.5,
+      "repetitions": 0
+    },
+    {
+      "id": "fc_1791976667202_000_e12ca67bad9c",
+      "question": "在移入-归约分析中，句柄的核心性质是什么？为什么分析器从左往右扫描时，一遇到句柄就可以归约，而不用回头检查句柄右侧的符号？",
+      "choices": [
+        "句柄左侧的符号全是终结符，所以分析器只能从右往左扫描。",
+        "句柄在被识别之前可能藏在栈中间，必须扫描整个栈才能确定。",
+        "句柄在被识别之前永远出现在栈顶，且句柄右侧的串只含终结符号，因此无需回头检查右侧。",
+        "句柄右侧的符号也是非终结符，需要等待右侧归约完成后再处理句柄。"
+      ],
+      "correctIndex": 2,
+      "explanation": "教材强调：句柄在被识别之前永远出现在栈顶，绝不会藏在栈中间；句柄右边的串全是终结符号，右边已经没有等着被归约的非终结符，因此分析器可以遇到句柄就归约，不必回头。",
+      "source": {
+        "textbook": "编译原理 第二版",
+        "chapter": "",
+        "textbookSlug": "KUyw"
+      },
+      "created": "2026-10-14T11:17:47.202Z",
+      "conversationId": "OSSH0n_WPOFykLhZVr0Wf",
+      "status": "active",
+      "history": [],
+      "nextReview": "2026-10-14T11:17:47.202Z",
+      "interval": 0,
+      "ease": 2.5,
+      "repetitions": 0
+    },
+    {
+      "id": "fc_1791976667202_001_127f20a1ea60",
+      "question": "在 LR(0) 项中，形如 $A \\to \\alpha\\cdot\\beta$ 的项表示什么含义？当一个项的点落在产生式体最右端时，意味着什么？",
+      "choices": [
+        "点左边是已经识别的前缀，点右边是还期待的符号；点在最右端表示可以归约。",
+        "点左边是尚未识别的符号，点右边是已经入栈的符号；点在最右端表示发生语法错误。",
+        "点表示输入指针的位置，与栈内容无关；点在最右端表示需要继续移入。",
+        "点表示产生式编号和状态编号的分隔符；点在最右端表示归约/归约冲突。"
+      ],
+      "correctIndex": 0,
+      "explanation": "LR(0) 项中的点标记“已经看到哪里了”：点左边是已经到手的前缀，点右边是还期待的符号。点在最右端表示产生式体已经全部识别完，可以归约。",
+      "source": {
+        "textbook": "编译原理 第二版",
+        "chapter": "",
+        "textbookSlug": "KUyw"
+      },
+      "created": "2026-10-14T11:17:47.202Z",
+      "conversationId": "OSSH0n_WPOFykLhZVr0Wf",
+      "status": "active",
+      "history": [],
+      "nextReview": "2026-10-14T11:17:47.202Z",
+      "interval": 0,
+      "ease": 2.5,
+      "repetitions": 0
+    },
+    {
+      "id": "fc_1791976667202_002_0562df65ada1",
+      "question": "计算 $\\text{GOTO}(I, X)$ 时，找到所有点在 $X$ 之前的项 $A \\to \\alpha\\cdot X\\beta$，把点跨过 $X$ 得到 $A \\to \\alpha X\\cdot\\beta$ 后，为什么还必须再求这些新项的 CLOSURE？",
+      "choices": [
+        "因为 GOTO 函数只处理终结符，闭包负责把非终结符转换成终结符。",
+        "因为闭包会删除已经在 $C$ 中出现过的旧状态，避免状态重复。",
+        "因为点跨过 $X$ 后必须立即归约，闭包用来决定归约用哪条产生式。",
+        "因为点右边可能紧跟非终结符，闭包会补入该非终结符的所有产生式项，使新状态具备后续移入终结符的转移。"
+      ],
+      "correctIndex": 3,
+      "explanation": "GOTO 跨过符号后，如果点右边是非终结符，新状态必须包含该非终结符的所有产生式项，才能为后续移入终结符提供转移箭头；否则分析器会在该状态卡死。闭包把“等待某个非终结符”翻译成“实际可移入哪些终结符”。",
+      "source": {
+        "textbook": "编译原理 第二版",
+        "chapter": "",
+        "textbookSlug": "KUyw"
+      },
+      "created": "2026-10-14T11:17:47.202Z",
+      "conversationId": "OSSH0n_WPOFykLhZVr0Wf",
+      "status": "active",
+      "history": [],
+      "nextReview": "2026-10-14T11:17:47.202Z",
+      "interval": 0,
+      "ease": 2.5,
+      "repetitions": 0
+    },
+    {
+      "id": "fc_1791976667202_003_79931e28be31",
+      "question": "SLR 分析表构造中，若项 $[A \\to \\alpha\\cdot]$ 在状态 $I_i$ 中且 $A \\neq S'$，则对哪些输入符号设置归约动作？这个限制在 SLR 中起什么作用？",
+      "choices": [
+        "对所有终结符设置归约，因为项 $[A \\to \\alpha\\cdot]$ 已经完整识别了 $\\alpha$。",
+        "对 FOLLOW(A) 中的每个符号设置归约，保证只有后面可能跟该符号时才归约。",
+        "对 FIRST(A) 中的每个符号设置归约，保证不会与移入动作冲突。",
+        "只对 $\\$$ 设置归约，因为只有输入结束时才能确定句柄。"
+      ],
+      "correctIndex": 1,
+      "explanation": "SLR 只在 FOLLOW(A) 中的符号上设置归约，保证只有后面真的可能跟这个符号时才归约，从而避免一些无效归约；这正是“Simple”的体现。",
+      "source": {
+        "textbook": "编译原理 第二版",
+        "chapter": "",
+        "textbookSlug": "KUyw"
+      },
+      "created": "2026-10-14T11:17:47.202Z",
+      "conversationId": "OSSH0n_WPOFykLhZVr0Wf",
+      "status": "active",
+      "history": [],
+      "nextReview": "2026-10-14T11:17:47.202Z",
+      "interval": 0,
+      "ease": 2.5,
+      "repetitions": 0
+    },
+    {
+      "id": "fc_1791976667202_004_7077efc3eec6",
+      "question": "在 Yacc 处理表达式文法时，默认遇到移入/归约冲突会“总是移入”。对二义性产生式 $E \\to E+E$，如果栈顶是完整的 $E+E$ 且下一个输入是 $+$，默认策略会生成什么结合性？而声明 `%left '+' '-'` 后会改选什么动作？",
+      "choices": [
+        "默认“总是移入”生成右结合；`%left` 后因优先级相同且左结合，改为归约。",
+        "默认“总是移入”生成左结合；`%left` 后因优先级相同且左结合，改为移入。",
+        "默认“总是归约”生成右结合；`%left` 后因优先级相同且左结合，改为归约。",
+        "默认“总是归约”生成左结合；`%left` 后因优先级相同且左结合，改为移入。"
+      ],
+      "correctIndex": 0,
+      "explanation": "默认移入会把第二个 $+$ 移进栈，形成 $E+(E+E)$，即右结合；`%left` 给 `+` 左结合性，优先级相同且左结合时改为归约，形成 $(E+E)+E$。",
+      "source": {
+        "textbook": "编译原理 第二版",
+        "chapter": "",
+        "textbookSlug": "KUyw"
+      },
+      "created": "2026-10-14T11:17:47.202Z",
+      "conversationId": "OSSH0n_WPOFykLhZVr0Wf",
+      "status": "active",
+      "history": [],
+      "nextReview": "2026-10-14T11:17:47.202Z",
+      "interval": 0,
+      "ease": 2.5,
+      "repetitions": 0
+    },
+    {
+      "id": "fc_1792122415177_000_fa59c571c184",
+      "question": "在自底向上语法分析中，关于句柄（handle）的判定，下列哪项说法是正确的？",
+      "choices": [
+        "某个子串是句柄，当且仅当它出现在栈顶且和某条产生式右部匹配。",
+        "某个子串是句柄，当且仅当它和某条产生式的右部完全相同。",
+        "在无二义的文法中，每个句型可能有多个句柄，分析器只需任选其一进行归约。",
+        "某个子串是句柄，当且仅当把它替换成相应产生式左部后得到的串恰好是最右推导链上的前一个句型。"
+      ],
+      "correctIndex": 3,
+      "explanation": "句柄的判据不是'与某产生式体匹配'，而是把该子串替换成左部后，得到的串必须恰好是最右推导链上的前一个句型，即恰好可以成为某个最右推导的逆步骤。仅仅'与产生式体长得一样'并不意味着它一定是句柄，如 T 配 E→T 在 T*id 中就不是句柄。",
+      "source": {
+        "textbook": "编译原理 第二版",
+        "chapter": "",
+        "textbookSlug": "KUyw"
+      },
+      "created": "2026-10-16T03:46:55.177Z",
+      "conversationId": "IY_9NUUS-7x7m-h3vDqEb",
+      "status": "active",
+      "history": [
+        {
+          "schemaVersion": 2,
+          "time": "2026-10-16T03:47:04.269Z",
+          "chosen": 3,
+          "correct": true,
+          "domainRevision": 1,
+          "answerRecordId": "flashcard:fc_1792122415177_000_fa59c571c184:1"
+        }
+      ],
+      "nextReview": "2026-10-16T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1792122415177_001_0a024f07dc83",
+      "question": "关于项（item）$A\\to X\\cdot YZ$ 与 $A\\to XYZ\\cdot$ 的含义，下列哪项说法最准确？",
+      "choices": [
+        "$A\\to X\\cdot YZ$ 表示 $X$ 和 $YZ$ 都已看完，可以直接归约。",
+        "点是用来标记归约次序的，点越靠左归约越先发生。",
+        "$A\\to X\\cdot YZ$ 中点的左边是已看完的部分、右边是接下来期待的部分，$A\\to XYZ\\cdot$ 表示体已完整可归约。",
+        "两个项含义相同，都表示该产生式有可能被用来归约。"
+      ],
+      "correctIndex": 2,
+      "explanation": "项中的点把产生式体分成两部分：点左边是已经看完并成功匹配的部分，点右边是接下来还期待匹配的部分。$A\\to X\\cdot YZ$ 表示已看完 $X$，还期待 $YZ$，体未走完，不能归约；$A\\to XYZ\\cdot$ 表示体已完整，是可以归约的项。",
+      "source": {
+        "textbook": "编译原理 第二版",
+        "chapter": "",
+        "textbookSlug": "KUyw"
+      },
+      "created": "2026-10-16T03:46:55.177Z",
+      "conversationId": "IY_9NUUS-7x7m-h3vDqEb",
+      "status": "active",
+      "history": [
+        {
+          "schemaVersion": 2,
+          "time": "2026-10-16T03:47:12.372Z",
+          "chosen": 2,
+          "correct": true,
+          "domainRevision": 1,
+          "answerRecordId": "flashcard:fc_1792122415177_001_0a024f07dc83:1"
+        }
+      ],
+      "nextReview": "2026-10-16T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1792122415177_002_f79fc423da80",
+      "question": "在计算 GOTO(I, X) 时，正确的操作步骤是？",
+      "choices": [
+        "先在 I 中求一次闭包，再把点跨过 X。",
+        "只把点跨过 X 即可，无需再做任何处理。",
+        "把 I 中所有项的点都向前移动一格，然后删去点落在末端的项。",
+        "先把点跨过 X，再对得到的那组项求一次闭包。"
+      ],
+      "correctIndex": 3,
+      "explanation": "GOTO(I, X) 分两段：先把 I 中所有点右边紧挨 X 的项的点跨过 X，再对得到的那组项求一次 CLOSURE。漏掉第二段闭包是不完整的。",
+      "source": {
+        "textbook": "编译原理 第二版",
+        "chapter": "",
+        "textbookSlug": "KUyw"
+      },
+      "created": "2026-10-16T03:46:55.177Z",
+      "conversationId": "IY_9NUUS-7x7m-h3vDqEb",
+      "status": "active",
+      "history": [
+        {
+          "schemaVersion": 2,
+          "time": "2026-10-16T03:47:21.798Z",
+          "chosen": 3,
+          "correct": true,
+          "domainRevision": 1,
+          "answerRecordId": "flashcard:fc_1792122415177_002_f79fc423da80:1"
+        }
+      ],
+      "nextReview": "2026-10-16T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1792122415177_003_94248ae4c5a7",
+      "question": "关于状态 $I_2=\\{S\\to L\\cdot=R,\\; R\\to L\\cdot\\}$ 中出现的移入/归约冲突，以及规范 LR(1) 如何解决它，下列说法正确的是？",
+      "choices": [
+        "冲突是因为状态里同时含移入项和归约项，LR(1) 通过把这两种项拆到不同状态来消除。",
+        "这个文法本身有歧义，必须改写文法才能消除冲突。",
+        "冲突的根源是 $=\\in\\mathrm{FOLLOW}(R)$，LR(1) 只是把该项从状态中删除规避掉了冲突。",
+        "冲突的根源是 SLR 用全局 FOLLOW(R) 做近似，而 LR(1) 给每个项配精确的向前看符号，使 $=$ 只触发移入，冲突消除。"
+      ],
+      "correctIndex": 3,
+      "explanation": "SLR 只用当前状态和全局的 FOLLOW 集做决定，无法区分栈上那个 L 是'走在 S→L=R 的半路上'还是'一个完整的 R→L'，因此 $=$ 同时落在 FOLLOW(R) 中引发冲突。LR(1) 让每个项单独携带精确的向前看符号，例如把 $R\\to L\\cdot$ 限定为只在 $\\$$ 上归约，$=$ 便不再触发归约，冲突消除。",
+      "source": {
+        "textbook": "编译原理 第二版",
+        "chapter": "",
+        "textbookSlug": "KUyw"
+      },
+      "created": "2026-10-16T03:46:55.177Z",
+      "conversationId": "IY_9NUUS-7x7m-h3vDqEb",
+      "status": "active",
+      "history": [
+        {
+          "schemaVersion": 2,
+          "time": "2026-10-16T03:47:34.909Z",
+          "chosen": 3,
+          "correct": true,
+          "domainRevision": 1,
+          "answerRecordId": "flashcard:fc_1792122415177_003_94248ae4c5a7:1"
+        }
+      ],
+      "nextReview": "2026-10-16T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    }
+  ]
+}

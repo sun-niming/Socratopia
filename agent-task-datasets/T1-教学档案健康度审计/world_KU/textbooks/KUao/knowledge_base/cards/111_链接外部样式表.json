@@ -1,0 +1,39 @@
+{
+  "title": "链接外部样式表",
+  "definition": "链接外部样式表是指在 HTML 的 head 标签中使用 link 标签，引入一个外部的 .css 文件。href 用来指定被链接资源的 URL，URL 可以是绝对路径或相对路径；rel 用来说明链接文档与当前文档的关系。",
+  "key_points": [
+    "在 head 中使用 link 标签引入外部 CSS 文件。",
+    "href 指定被链接资源的 URL。",
+    "URL 可以是绝对的，也可以是相对的。",
+    "rel 用来描述链接文档与当前文档的关系。"
+  ],
+  "examples": [
+    "<link href=\"your-stylesheet.css\" rel=\"stylesheet\" />"
+  ],
+  "misconceptions": [
+    "link 引入外部样式表时，样式文件通常不是写在 HTML 内部。",
+    "href 不是用来写关系类型的，rel 也不是用来写文件路径的。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "外部样式表通过哪个标签引入？",
+      "a": "通过 head 中的 link 标签引入。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "HTML文档结构",
+    "CSS概述"
+  ],
+  "source_pages": [
+    85,
+    88
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "111_链接外部样式表",
+  "_chunk_pages": [
+    85,
+    88
+  ]
+}

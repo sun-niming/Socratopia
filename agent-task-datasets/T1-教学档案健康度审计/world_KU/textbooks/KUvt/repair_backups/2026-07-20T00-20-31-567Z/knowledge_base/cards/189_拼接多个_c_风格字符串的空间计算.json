@@ -1,0 +1,44 @@
+{
+  "title": "拼接多个 C 风格字符串的空间计算",
+  "definition": "如果动态生成一个由多个 C 风格字符串拼接而成的新字符串，所需空间等于所有源字符串实际长度之和，再加 1 个 char 用于最终字符串的结尾 NUL。",
+  "key_points": [
+    "三个字符串拼接后的空间公式为 $\\texttt{strlen(str1) + strlen(str2) + strlen(str3) + 1}$。",
+    "可以先用 strcpy()复制第一个字符串，再依次用 strcat()追加后续字符串。",
+    "strcat()中的 cat 表示 concatenate，即“串联”或“拼接”。"
+  ],
+  "examples": [
+    "动态分配三个字符串拼接结果：$\\texttt{char* result \\{ new char[strlen(str1) + strlen(str2) + strlen(str3) + 1] \\};}$",
+    "拼接步骤：$\\texttt{strcpy(result, str1);}$，然后依次执行 $\\texttt{strcat(result, str2);}$ 和 $\\texttt{strcat(result, str3);}$。"
+  ],
+  "misconceptions": [
+    "拼接后的空间只需要取最长源字符串的长度。",
+    "每个源字符串的长度都要额外加 1；对于最终结果，教材给出的计算是所有实际长度之和再加一个最终 NUL 的空间。",
+    "strlen()包含各字符串的结尾 NUL，因此拼接时不需要额外空间。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "三个 C 风格字符串拼接后的动态空间应如何计算？",
+      "a": "应计算为 $\\texttt{strlen(str1) + strlen(str2) + strlen(str3) + 1}$，最后的 1 用于最终字符串的结尾 NUL。"
+    },
+    {
+      "q": "strcat()函数在示例中承担什么作用？",
+      "a": "它把源字符串追加到目标字符串末尾，用于逐个拼接字符串。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C 风格字符串以 NUL 字符结尾",
+    "为 C 风格字符串动态分配空间必须额外加一"
+  ],
+  "source_pages": [
+    103,
+    103
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "189_拼接多个_c_风格字符串的空间计算",
+  "_chunk_pages": [
+    101,
+    104
+  ]
+}

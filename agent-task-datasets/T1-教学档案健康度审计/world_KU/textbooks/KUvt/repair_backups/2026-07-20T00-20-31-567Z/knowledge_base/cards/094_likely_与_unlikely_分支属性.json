@@ -1,0 +1,38 @@
+{
+  "title": "[[likely]] 与 [[unlikely]] 分支属性",
+  "definition": "C++ 可以使用 [[likely]] 和 [[unlikely]] 属性标记 if 或 switch 语句中的分支，向编译器提示某个分支更可能或更不可能执行。这些属性通常很少需要，因为现代编译器和硬件已经具有较强的分支预测能力；在性能至关重要的代码中，可能使用它们帮助编译器进行优化。",
+  "key_points": [
+    "[[likely]] 用于标记预期更可能执行的分支，[[unlikely]] 用于标记预期较不可能执行的分支。",
+    "这些属性是性能提示，不改变分支条件的逻辑结果。",
+    "教材示例展示了它们既可以用于 if-else，也可以用于 switch 的 case 分支。"
+  ],
+  "examples": [
+    "if (value > 11) [[unlikely]] { /* Do something ... */ } else { /* Do something else ... */ }",
+    "switch (value) { [[likely]] case 1: /* Do something */ break; [[unlikely]] case 12: /* Do something */ break; }"
+  ],
+  "misconceptions": [
+    "使用 [[likely]] 或 [[unlikely]] 不会强制程序一定选择某个分支。",
+    "并非所有 if 或 switch 都需要添加这些属性；教材强调它们很少需要。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "[[likely]] 和 [[unlikely]] 的作用是什么？",
+      "a": "它们分别向编译器提示某个分支更可能或更不可能执行，主要用于可能影响性能的代码；它们不改变程序的逻辑语义。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++条件语句"
+  ],
+  "source_pages": [
+    57,
+    57
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "094_likely_与_unlikely_分支属性",
+  "_chunk_pages": [
+    57,
+    60
+  ]
+}

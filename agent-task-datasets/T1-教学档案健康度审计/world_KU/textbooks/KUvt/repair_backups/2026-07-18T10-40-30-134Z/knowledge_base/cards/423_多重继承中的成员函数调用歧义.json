@@ -1,0 +1,45 @@
+{
+  "title": "多重继承中的成员函数调用歧义",
+  "definition": "当一个派生类同时继承的多个基类都提供同名成员函数时，直接通过派生类对象调用该成员函数可能无法确定应使用哪个基类版本，从而产生歧义编译错误。",
+  "key_points": [
+    "示例中，DogBird 同时继承 Dog 和 Bird，而 Dog、Bird 都定义了 eat()。因此调用 myConfusedAnimal.eat() 会产生“调用 eat() 不明确”的错误。",
+    "可以使用限定名明确指定基类版本，例如 myConfusedAnimal.Dog::eat()。",
+    "也可以通过 dynamic_cast<Dog&>(myConfusedAnimal).eat() 将对象视为 Dog 子对象后调用 Dog::eat()。"
+  ],
+  "examples": [
+    "class DogBird : public Dog, public Bird { };",
+    "DogBird myConfusedAnimal;",
+    "myConfusedAnimal.eat(); // Error: Ambiguous call to method eat()",
+    "myConfusedAnimal.Dog::eat(); // 调用 Dog::eat()",
+    "dynamic_cast<Dog&>(myConfusedAnimal).eat(); // 调用 Dog::eat()"
+  ],
+  "misconceptions": [
+    "同时继承多个类并不意味着同名成员函数会自动合并；如果多个基类都提供该成员函数，直接调用可能产生歧义。",
+    "dynamic_cast 不是消除所有继承关系歧义的唯一方法；在明确知道目标基类时，也可以使用基类限定名。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么 myConfusedAnimal.eat() 会编译错误？",
+      "a": "因为 DogBird 同时继承 Dog 和 Bird，而两个基类都定义了 eat()，编译器无法判断应调用哪个版本。"
+    },
+    {
+      "q": "如何明确调用 Dog::eat()？",
+      "a": "可以使用 myConfusedAnimal.Dog::eat()，或者使用 dynamic_cast<Dog&>(myConfusedAnimal).eat()。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++继承与成员函数调用"
+  ],
+  "source_pages": [
+    329,
+    332
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "423_多重继承中的成员函数调用歧义",
+  "_chunk_pages": [
+    329,
+    332
+  ]
+}

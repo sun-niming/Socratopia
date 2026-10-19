@@ -1,0 +1,41 @@
+{
+  "title": "skew倾斜",
+  "definition": "skew是2D变换中的倾斜方法，用于让元素沿X轴或Y轴产生倾斜效果。",
+  "key_points": [
+    "第一个参数对应X轴倾斜角度",
+    "第二个参数对应Y轴倾斜角度",
+    "参数使用角度值"
+  ],
+  "examples": [
+    "transform:skew(10deg,30deg); /*沿X轴倾斜10°，Y轴倾斜30°*/"
+  ],
+  "misconceptions": [
+    "skew是缩放效果。",
+    "skew只能在一个轴上倾斜。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "transform:skew(10deg,30deg)表示什么？",
+      "a": "沿X轴倾斜10°，沿Y轴倾斜30°。"
+    },
+    {
+      "q": "skew属于哪种2D变换？",
+      "a": "倾斜变换。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "2D变换"
+  ],
+  "source_pages": [
+    197,
+    200
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "296_skew倾斜",
+  "_chunk_pages": [
+    197,
+    200
+  ]
+}

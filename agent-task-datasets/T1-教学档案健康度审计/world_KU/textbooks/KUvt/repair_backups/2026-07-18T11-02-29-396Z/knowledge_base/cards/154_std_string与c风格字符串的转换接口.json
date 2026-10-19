@@ -1,0 +1,44 @@
+{
+  "title": "std::string与C风格字符串的转换接口",
+  "definition": "`std::string`提供 `c_str()`和 `data()`等成员函数，用于获取指向其字符数据的指针，从而与需要C风格字符串接口的代码交互。",
+  "key_points": [
+    "`c_str()`返回指向以空字符结尾的字符序列的指针，类型为 `const char*`。",
+    "教材指出 `data()`也可用于获取字符数据指针；C++17后其返回类型和相关接口行为得到统一或增强。",
+    "通过这些接口获得的指针用于读取字符串内容时，应注意其是否允许修改以及指针的有效期。"
+  ],
+  "examples": [
+    "`const char* p = myString.c_str();`",
+    "`const char* p = myString.data();`"
+  ],
+  "misconceptions": [
+    "`c_str()`返回的是字符指针，不是另一个 `std::string`对象。",
+    "通过 `c_str()`获得的 `const char*`不能直接用于修改字符串内容。",
+    "字符串对象发生可能导致存储重新分配的修改后，之前取得的字符指针不应盲目继续使用。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何获取 `std::string`对应的C风格字符串指针？",
+      "a": "可以调用 `myString.c_str()`，其结果可用于初始化 `const char*`。"
+    },
+    {
+      "q": "`c_str()`的典型返回类型是什么？",
+      "a": "典型返回类型是 `const char*`。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "std::string用于管理字符序列",
+    "C风格字符串"
+  ],
+  "source_pages": [
+    105,
+    108
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 std::string c_str data C++14 C++17 const char* 返回类型 教材 第108页",
+  "concept_id": "154_std_string与c风格字符串的转换接口",
+  "_chunk_pages": [
+    105,
+    108
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "title": "RSA正确性的数论基础",
+  "definition": "RSA正确性依赖模算术和数论结论。令$n=pq$，其中$p,q$为素数，并令$z=(p-1)(q-1)$。RSA选择$e,d$使$ed\\equiv1\\pmod z$，于是对符合条件的报文整数$m$，先加密再解密可以恢复原文：$$(m^e\\bmod n)^d\\bmod n=m^{ed}\\bmod n=m.$$",
+  "key_points": [
+    "模运算满足$(a\\bmod n)^d\\bmod n=a^d\\bmod n$。",
+    "教材使用的数论结论是：当$n=pq$且$z=(p-1)(q-1)$时，适当条件下有$x^z\\equiv1\\pmod n$。",
+    "因为$ed\\equiv1\\pmod z$，所以存在整数$k$使$ed=1+kz$，从而可将$m^{ed}$化为$m$的模$n$余数。",
+    "教材还指出，先做$d$次幂运算再做$e$次幂运算，同样能够恢复$m$：$$(m^d\\bmod n)^e\\bmod n=m.$$"
+  ],
+  "examples": [
+    "RSA加密后解密的完整形式是：$$c=m^e\\bmod n,$$ $$m=c^d\\bmod n=(m^e\\bmod n)^d\\bmod n.$$",
+    "在教材例子中，$e=5,d=29,z=24$，且$ed=145\\equiv1\\pmod{24}$。"
+  ],
+  "misconceptions": [
+    "RSA能够恢复明文不是因为普通整数幂运算互相抵消，而是因为特定的模运算和数论关系。",
+    "$ed\\equiv1\\pmod z$是RSA密钥选择的重要条件，不能任意选择$e,d$。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "RSA为什么能在解密时恢复$m$？",
+      "a": "因为$n=pq$、$z=(p-1)(q-1)$，并且选择$e,d$满足$ed\\equiv1\\pmod z$；由数论结论可得$m^{ed}\\bmod n=m$。"
+    },
+    {
+      "q": "RSA能否先执行类似解密的$d$次幂运算，再执行$e$次幂运算？",
+      "a": "教材指出可以，结果同样为$m$：$(m^d\\bmod n)^e\\bmod n=m$。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "RSA加密与解密过程",
+    "模运算",
+    "素数与欧拉函数相关数论"
+  ],
+  "source_pages": [
+    413,
+    416
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "963_rsa正确性的数论基础",
+  "_chunk_pages": [
+    413,
+    416
+  ]
+}

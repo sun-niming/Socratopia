@@ -1,0 +1,49 @@
+{
+  "title": "不同 VLAN 之间的通信",
+  "definition": "不同 VLAN 被完全隔离时，属于不同 VLAN 的主机不能直接进行第二层通信。要实现跨 VLAN 通信，可以将 VLAN 交换机的一个端口连接到外部路由器，并将该端口配置为同时属于相关 VLAN。跨 VLAN 的数据报先在源 VLAN 内到达路由器，再由路由器转发到目标 VLAN；也可以使用将 VLAN 交换机和路由器集成在一起的单一设备。",
+  "key_points": [
+    "完全隔离的两个 VLAN 之间不能直接进行第二层帧转发。",
+    "跨 VLAN 通信需要经过路由器执行第三层转发。",
+    "连接路由器的交换机端口可以配置为同时属于多个 VLAN。",
+    "从 EE VLAN 发往 CS VLAN 的数据报路径是：EE VLAN $\\rightarrow$ 路由器 $\\rightarrow$ CS VLAN。",
+    "厂商可以将 VLAN 交换机和路由器集成为一台设备，避免使用分离的外部路由器。"
+  ],
+  "examples": [
+    "设端口 1 连接路由器，并配置为同时属于 EE VLAN 和 CS VLAN。EE 主机发往 CS 主机的数据报可表示为：$$\\text{EE 主机}\\xrightarrow{\\text{EE VLAN}}\\text{路由器}\\xrightarrow{\\text{CS VLAN}}\\text{CS 主机}.$$"
+  ],
+  "misconceptions": [
+    "共享同一台物理交换机不等于不同 VLAN 可以直接互通。",
+    "交换机的第二层 VLAN 隔离本身不能完成跨 VLAN 通信，仍需要路由功能。",
+    "连接路由器的端口同时属于多个 VLAN，是为了让路由器能够接收和发送不同 VLAN 的流量。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "不同 VLAN 之间为什么需要路由器？",
+      "a": "因为不同 VLAN 被第二层隔离，不能直接交换帧；路由器可以在不同 VLAN 之间进行第三层数据报转发。"
+    },
+    {
+      "q": "EE VLAN 到 CS VLAN 的数据报经过怎样的路径？",
+      "a": "数据报先从 EE VLAN 到达路由器，再由路由器转发到 CS VLAN，最后到达 CS 主机。"
+    },
+    {
+      "q": "连接路由器的交换机端口应如何配置？",
+      "a": "该端口应配置为同时属于需要互通的 VLAN，例如同时属于 EE VLAN 和 CS VLAN。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "基于端口的 VLAN",
+    "路由器的第三层转发"
+  ],
+  "source_pages": [
+    333,
+    336
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "767_不同_vlan_之间的通信",
+  "_chunk_pages": [
+    333,
+    336
+  ]
+}

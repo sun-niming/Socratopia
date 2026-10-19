@@ -1,0 +1,46 @@
+{
+  "title": "使用非类型模板参数指定网格默认值",
+  "definition": "类模板可以把一个非类型模板参数作为网格单元格的默认初始值。例如，模板声明为 `template <typename T, const T DEFAULT = T()> class Grid` 时，`T` 是单元格类型，`DEFAULT` 是该类型的默认值；构造网格时可以用 `DEFAULT` 初始化每个单元格。",
+  "key_points": [
+    "非类型模板参数的类型可以使用前一个类型模板参数 `T`，例如 `const T`。",
+    "使用默认模板实参 `T{}` 或 `T()` 可以使 `Grid<T>` 使用值初始化结果作为默认单元格值。",
+    "可以显式指定默认值，例如 `Grid<int, 10>` 表示单元格初始值为 10；`Grid<int>` 使用默认值 0。",
+    "同一个模板定义可能对某些类型可用、对另一些类型无法编译。"
+  ],
+  "examples": [
+    "`Grid<int> myIntGrid;`：网格单元格初始值为 0。",
+    "`Grid<int, 10> myIntGrid2;`：网格单元格初始值为 10。",
+    "初始化网格单元格的核心逻辑可表示为：`element = DEFAULT;`"
+  ],
+  "misconceptions": [
+    "`DEFAULT` 不是运行时构造函数参数，而是编译期非类型模板参数。",
+    "`Grid<int>` 和 `Grid<int, 10>` 不是同一个模板实例，因为它们的非类型模板参数不同。",
+    "不能把任意对象直接作为这种非类型模板参数传入。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`Grid<int, 10>` 中的 `10` 表示什么？",
+      "a": "它是非类型模板参数 `DEFAULT` 的值，表示网格中每个单元格的初始值为 10。"
+    },
+    {
+      "q": "为什么 `Grid<SpreadsheetCell, defaultCell>` 不能用于值形式的非类型模板参数？",
+      "a": "因为对象不能直接作为这种非类型模板参数传入；该形式的非类型模板参数不接受任意对象。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "类模板",
+    "非类型模板参数"
+  ],
+  "source_pages": [
+    761,
+    761
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1574_使用非类型模板参数指定网格默认值",
+  "_chunk_pages": [
+    761,
+    764
+  ]
+}

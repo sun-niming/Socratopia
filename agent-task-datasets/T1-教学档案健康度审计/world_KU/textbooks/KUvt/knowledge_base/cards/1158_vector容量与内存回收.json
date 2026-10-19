@@ -1,0 +1,42 @@
+{
+  "title": "vector容量与内存回收",
+  "definition": "std::vector会在容量不足时自动分配更多内存，但删除元素只会减小vector的大小size，不会自动减小容量capacity，也不会释放已经分配的内存。若要回收vector占用的全部内存，可以把它与一个空的同类型vector交换；交换后，原vector的容量变为0，原来占用的内存由临时空vector持有，并在语句结束时释放。",
+  "key_points": [
+    "vector的size表示当前元素数量，capacity表示已分配、可容纳的元素数量。删除元素通常只改变size，不改变capacity。",
+    "将vector与空vector交换可释放原vector持有的内存：vector<int>{}.swap(values);",
+    "教材还指出，可在构造函数中或通过resize()、assign()预先指定元素数量；这种操作会创建指定大小的vector，容量也可能达到相应大小。"
+  ],
+  "examples": [
+    "释放values占用的内存：vector<int>{}.swap(values);",
+    "删除元素后，vector的size可能减少，但capacity通常保持不变。"
+  ],
+  "misconceptions": [
+    "调用clear()或删除元素并不等于释放vector的容量。",
+    "size和capacity不是同一个概念；size是元素数量，capacity是已分配空间能够容纳的元素数量。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "从vector中删除元素后，vector的容量会自动减少吗？",
+      "a": "通常不会。删除元素会减少size，但不会减少capacity，也不会释放已分配的内存。"
+    },
+    {
+      "q": "如何用一条语句回收名为values的vector占用的全部内存？",
+      "a": "使用vector<int>{}.swap(values);。交换后，values变为空vector，容量变为0，原内存由临时vector在语句结束时释放。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "std::vector的size与capacity"
+  ],
+  "source_pages": [
+    561,
+    561
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1158_vector容量与内存回收",
+  "_chunk_pages": [
+    561,
+    564
+  ]
+}

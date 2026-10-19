@@ -1,0 +1,43 @@
+{
+  "title": "流迭代器的作用与种类",
+  "definition": "流迭代器是类似迭代器的类模板，可以把输入流和输出流分别抽象为输入迭代器和输出迭代器，从而将流作为标准库算法的输入来源或输出目标。教材列出四种流迭代器：`ostream_iterator`、`istream_iterator`、`ostreambuf_iterator` 和 `istreambuf_iterator`；其中后两者很少使用。",
+  "key_points": [
+    "`ostream_iterator` 用于向输出流写入元素。",
+    "`istream_iterator` 用于从输入流中读取元素。",
+    "流迭代器使标准算法能够以迭代器方式处理流。",
+    "`ostreambuf_iterator` 和 `istreambuf_iterator` 也属于流迭代器，但教材未进一步展开。"
+  ],
+  "examples": [
+    "可以把 `ostream_iterator<int>` 作为复制算法的目标迭代器，把容器元素输出到 `cout`。",
+    "可以把 `istream_iterator<int>` 作为算法或容器方法的输入来源，从输入流中逐个读取整数。"
+  ],
+  "misconceptions": [
+    "流迭代器不是容器迭代器；它们把流的读写操作封装成类似迭代器的接口。",
+    "`istream_iterator` 用于输入，`ostream_iterator` 用于输出，二者方向相反。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "流迭代器解决什么问题？",
+      "a": "它把输入流或输出流抽象成输入迭代器或输出迭代器，使标准库算法能够读写流。"
+    },
+    {
+      "q": "教材列出的两种主要流迭代器是什么？",
+      "a": "`istream_iterator` 和 `ostream_iterator`。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "使用 != 判断迭代器范围结束"
+  ],
+  "source_pages": [
+    531,
+    532
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1089_流迭代器的作用与种类",
+  "_chunk_pages": [
+    529,
+    532
+  ]
+}

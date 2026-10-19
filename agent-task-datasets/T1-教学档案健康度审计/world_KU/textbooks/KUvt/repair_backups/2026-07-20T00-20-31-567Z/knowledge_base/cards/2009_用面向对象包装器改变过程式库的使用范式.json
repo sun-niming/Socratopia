@@ -1,0 +1,49 @@
+{
+  "title": "用面向对象包装器改变过程式库的使用范式",
+  "definition": "将 C 语言的过程式库与 C++结合使用时，程序可能混合过程式和面向对象两种范式。为了保留面向对象的使用方式，可以为过程式 C 库增加面向对象包装器。原文将这种做法与名为 facade 的设计模式联系起来，并以网络库接口为例。",
+  "key_points": [
+    "过程式 C 网络库通常通过独立函数和句柄完成查找主机、建立连接、关闭连接、获取网页和释放内存等操作。",
+    "直接使用这类过程式接口，可能使 C++程序失去面向对象的组织方式。",
+    "可以为过程式库添加面向对象包装器，把底层函数和资源管理封装到 C++类中。",
+    "原文给出的 C 网络库函数包括 `lookupHostByName`、`freeHostHandle`、`connectToHost`、`closeConnection`、`retrieveWebPage` 和 `freeWebPage`。"
+  ],
+  "examples": [
+    "原文中的过程式接口示例：\\n```cpp\\nHostHandle* lookupHostByName(char* hostName);\\nvoid freeHostHandle(HostHandle* host);\\nConnectionHandle* connectToHost(HostHandle* host);\\nvoid closeConnection(ConnectionHandle* connection);\\nchar* retrieveWebPage(ConnectionHandle* connection, char* page);\\nvoid freeWebPage(char* page);\\n```\\nC++程序可以在这些函数外部增加类包装器，使主程序通过对象和成员函数使用网络连接。"
+  ],
+  "misconceptions": [
+    "使用 C 库并不必然要求整个 C++程序改写为过程式风格；可以通过包装器维持面向对象接口。",
+    "facade 包装器的目的不是改变底层 C 库的实现，而是为客户端提供更合适、更抽象的使用接口。",
+    "原文只说明了增加面向对象包装器的思路，并未给出完整包装器实现。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么在 C++程序中为过程式 C 库增加面向对象包装器？",
+      "a": "因为直接使用过程式库会混合过程式和面向对象范式；包装器可以把底层函数封装成更适合 C++对象模型的接口。"
+    },
+    {
+      "q": "原文网络库接口中，哪个函数用于关闭连接？",
+      "a": "`closeConnection(ConnectionHandle* connection)` 用于关闭给定连接。"
+    },
+    {
+      "q": "哪个函数用于释放通过网络库获得的网页内存？",
+      "a": "`freeWebPage(char* page)` 用于释放网页指针指向的内存。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "C 与 C++互操作",
+    "面向对象封装",
+    "设计模式"
+  ],
+  "source_pages": [
+    976,
+    976
+  ],
+  "needs_verification": true,
+  "verify_query": "Facade design pattern C++ 包装 C 过程式库 netwrklib lookupHostByName 教材原文",
+  "concept_id": "2009_用面向对象包装器改变过程式库的使用范式",
+  "_chunk_pages": [
+    973,
+    976
+  ]
+}

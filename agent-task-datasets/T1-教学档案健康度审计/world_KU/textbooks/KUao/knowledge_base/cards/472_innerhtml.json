@@ -1,0 +1,38 @@
+{
+  "title": "innerHTML",
+  "definition": "element.innerHTML 用于获取或设置元素内部的 HTML 内容。获取时返回元素内部的 HTML 字符串；设置时会把传入的字符串解析为 HTML，并替换原有内容。",
+  "key_points": [
+    "可用于读取元素内部的 HTML，也可用于写入新的 HTML 内容",
+    "写入时会解析 HTML 标签，而不是当作纯文本处理",
+    "如果内容来自用户输入，直接使用 innerHTML 可能带来跨站脚本攻击（XSS）风险，因为其中的 <script> 可能被执行"
+  ],
+  "examples": [
+    "let content = element.innerHTML;",
+    "element.innerHTML = 'New <strong>HTML</strong> content';"
+  ],
+  "misconceptions": [
+    "innerHTML 只是普通文本拼接，不会执行其中的脚本或标签；实际上它会按 HTML 解析"
+  ],
+  "qa_pairs": [
+    {
+      "q": "innerHTML 适合用来处理什么内容？要注意什么安全问题？",
+      "a": "它适合获取或设置元素内部的 HTML 内容；但如果内容来自用户输入，不能直接信任，可能引发 XSS。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "DOM元素",
+    "HTML标签"
+  ],
+  "source_pages": [
+    353,
+    356
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "472_innerhtml",
+  "_chunk_pages": [
+    353,
+    356
+  ]
+}

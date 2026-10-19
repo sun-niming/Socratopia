@@ -1,0 +1,42 @@
+{
+  "title": "prompt 对话框",
+  "definition": "window.prompt([message] [, default]) 用于显示消息提示框并接收用户输入。它有两个参数：第一个是显示给用户的文本，第二个是文本框中的默认值；点击“确定”返回输入的字符串，点击“取消”返回 null。",
+  "key_points": [
+    "调用形式：window.prompt([message] [, default])",
+    "第一个参数是提示文本，第二个参数是默认值",
+    "点击“确定”返回用户输入的字符串",
+    "点击“取消”返回 null"
+  ],
+  "examples": [
+    "var name = prompt('请输入姓名', '张三');"
+  ],
+  "misconceptions": [
+    "prompt 不只是提示信息，还会让用户输入内容",
+    "点击“取消”不是返回空字符串，而是返回 null"
+  ],
+  "qa_pairs": [
+    {
+      "q": "prompt() 的第二个参数表示什么？",
+      "a": "文本框中的默认值。"
+    },
+    {
+      "q": "prompt() 点击“取消”会返回什么？",
+      "a": "null。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "window 对象"
+  ],
+  "source_pages": [
+    333,
+    336
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "477_prompt_对话框",
+  "_chunk_pages": [
+    333,
+    336
+  ]
+}

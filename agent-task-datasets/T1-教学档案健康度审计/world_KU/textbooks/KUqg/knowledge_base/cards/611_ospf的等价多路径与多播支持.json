@@ -1,0 +1,41 @@
+{
+  "title": "OSPF的等价多路径与多播支持",
+  "definition": "OSPF在存在多条到同一目的地且总开销相同的路径时，允许同时使用这些路径，而不必只选择一条路径承载全部流量。OSPF还通过多播OSPF（MOSPF）扩展支持多播路由选择。",
+  "key_points": [
+    "OSPF允许使用多条相同开销的路径，即等价开销多路径。",
+    "MOSPF使用已有的OSPF链路数据库。",
+    "MOSPF在原有OSPF链路状态广播机制上增加一种新的链路状态通告，以支持多播路由选择。"
+  ],
+  "examples": [
+    "若到某目的地存在路径$P_1$和$P_2$，且$$\\operatorname{cost}(P_1)=\\operatorname{cost}(P_2)$$则OSPF可以同时使用$P_1$和$P_2$。"
+  ],
+  "misconceptions": [
+    "OSPF并不要求在多条等价路径中只能选择一条。",
+    "MOSPF不是完全独立于OSPF的另一套链路数据库，而是使用已有OSPF链路数据库并增加新的链路状态通告。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "当到达同一目的地存在多条相同开销的路径时，OSPF如何处理？",
+      "a": "OSPF允许同时使用多条相同开销的路径，而不是只选择一条路径承载全部流量。"
+    },
+    {
+      "q": "MOSPF如何在OSPF基础上支持多播路由选择？",
+      "a": "MOSPF使用现有的OSPF链路数据库，并在OSPF链路状态广播机制中增加一种新的链路状态通告。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "OSPF的基本原理与链路状态通告"
+  ],
+  "source_pages": [
+    273,
+    276
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "611_ospf的等价多路径与多播支持",
+  "_chunk_pages": [
+    273,
+    276
+  ]
+}

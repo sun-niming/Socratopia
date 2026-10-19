@@ -1,0 +1,37 @@
+{
+  "title": "grid-column 简写与 span 写法",
+  "definition": "grid-column 是 grid-column-start 和 grid-column-end 的简写形式，两个值之间用 / 分隔。原文还给出了 span 写法，例如 grid-column: 2 / span 2;，表示从第 2 条网格线开始，向后跨 2 个单元格。",
+  "key_points": [
+    "grid-column 可把起始线和结束线写成一条声明。",
+    "简写格式中使用 / 分隔。",
+    "end 位置可以写成 span 加数字，表示跨越的列数。"
+  ],
+  "examples": [
+    "grid-column: 2 / 4;",
+    "grid-column: 2 / span 2;"
+  ],
+  "misconceptions": [
+    "容易把 span 2 误解成“结束线是第 2 条线”，实际上它表示跨越 2 个单元格。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "grid-column: 2 / span 2; 表示什么？",
+      "a": "表示从第 2 条网格线开始，向后跨 2 个单元格。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "grid-column-start 与 grid-column-end"
+  ],
+  "source_pages": [
+    182,
+    184
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "276_grid_column_简写与_span_写法",
+  "_chunk_pages": [
+    181,
+    184
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "title": "数组头尾增删方法",
+  "definition": "这组方法用于在数组两端增删元素，并会改变原数组。`pop()` 删除最后一个元素并返回该元素值；`push()` 在末尾添加一个或多个元素并返回新长度；`shift()` 删除第一个元素并返回该元素值；`unshift()` 在开头添加一个或多个元素并返回新长度。",
+  "key_points": [
+    "`pop()`：删除末尾元素，返回被删元素",
+    "`push()`：向末尾追加元素，返回新长度",
+    "`shift()`：删除首元素，返回被删元素",
+    "`unshift()`：向开头追加元素，返回新长度",
+    "这些方法都会改变原数组的长度"
+  ],
+  "examples": [
+    "arr.pop()",
+    "arr.push(4)",
+    "arr.shift()",
+    "arr.unshift(0)"
+  ],
+  "misconceptions": [
+    "`push()` 和 `unshift()` 返回的是新数组；实际上返回的是新长度",
+    "`pop()` 和 `shift()` 不会改变数组长度；实际上会改变"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`pop()` 和 `push()` 的区别是什么？",
+      "a": "`pop()` 删除最后一个元素并返回它；`push()` 向末尾添加元素并返回新长度。"
+    },
+    {
+      "q": "`shift()` 和 `unshift()` 的区别是什么？",
+      "a": "`shift()` 删除第一个元素并返回它；`unshift()` 向开头添加元素并返回新长度。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "Array对象与创建方式"
+  ],
+  "source_pages": [
+    305,
+    308
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "434_数组头尾增删方法",
+  "_chunk_pages": [
+    305,
+    308
+  ]
+}

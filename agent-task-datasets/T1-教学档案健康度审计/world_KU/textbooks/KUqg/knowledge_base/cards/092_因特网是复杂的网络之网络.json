@@ -1,0 +1,45 @@
+{
+  "title": "因特网是复杂的网络之网络",
+  "definition": "今天的因特网可以看成由大量不同规模、不同地理覆盖范围的 ISP 和内容提供商网络互联形成的网络之网络。其结构包含十多个第一层 ISP 和数十万个较低层 ISP；较低层 ISP 与较高层 ISP 相连，较高层 ISP 彼此互联，主要内容提供商也会建设自己的网络并在可能的地方与较低层 ISP 直接互联。",
+  "key_points": [
+    "不同 ISP 的覆盖范围差异很大：有些跨越多个大洲和大洋，有些只覆盖狭窄的地理区域。",
+    "用户和内容提供商通常是较低层 ISP 的客户。",
+    "较低层 ISP 是较高层 ISP 的客户。",
+    "因特网的实际结构比简单的单一等级结构更复杂，包含 PoP、多宿、对等、IXP 和内容提供商网络。"
+  ],
+  "examples": [
+    "一个用户通过接入 ISP 访问内容提供商；接入 ISP 可能经由区域 ISP 或第一层 ISP 到达目标网络。",
+    "一个大型内容提供商在可能的地方直接与较低层 ISP 互联，同时通过第一层 ISP 到达其他接入网络。"
+  ],
+  "misconceptions": [
+    "因特网是由一个中央机构统一运营的单一网络。",
+    "所有互联网流量都必须经过第一层 ISP。",
+    "所有 ISP 的覆盖范围和层级地位都相同。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么说因特网是“网络之网络”？",
+      "a": "因为它由大量彼此互联的 ISP 和内容提供商网络组成，这些网络具有不同层级、规模和覆盖范围。"
+    },
+    {
+      "q": "较低层 ISP 与较高层 ISP 的关系通常是什么？",
+      "a": "较低层 ISP 通常是较高层 ISP 的客户，并向较高层 ISP 付费以获得互联能力。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "因特网的多层 ISP 等级结构",
+    "ISP 对等与客户—提供商关系"
+  ],
+  "source_pages": [
+    41,
+    44
+  ],
+  "needs_verification": true,
+  "verify_query": "current Internet structure number of tier-1 ISPs hundreds of thousands lower-tier ISPs network of networks",
+  "concept_id": "092_因特网是复杂的网络之网络",
+  "_chunk_pages": [
+    41,
+    44
+  ]
+}

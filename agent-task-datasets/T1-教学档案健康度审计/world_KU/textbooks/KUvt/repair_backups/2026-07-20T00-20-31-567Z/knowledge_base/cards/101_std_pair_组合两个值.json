@@ -1,0 +1,45 @@
+{
+  "title": "std::pair 组合两个值",
+  "definition": "std::pair 是定义在 <utility> 中的类模板，用于把两个值组合成一个对象。这两个值可以是不同类型，通过公共数据成员 first 和 second 访问。std::pair 也支持类模板参数推导（CTAD）。",
+  "key_points": [
+    "std::pair 的两个元素可以具有不同类型。",
+    "第一个元素通过 first 访问，第二个元素通过 second 访问。",
+    "可以显式指定类型，也可以使用初始化器让 CTAD 推导类型。"
+  ],
+  "examples": [
+    "std::pair<double, int> myPair { 1.23, 5 };",
+    "std::pair myPair { 1.23, 5 };",
+    "std::cout << std::format(\"{} {}\", myPair.first, myPair.second); // 输出两个成员"
+  ],
+  "misconceptions": [
+    "std::pair 不是只能存储相同类型的两个值。",
+    "first 和 second 是成员访问名称，不是数组下标。",
+    "CTAD 仍然需要初始化器来推导两个元素的类型。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "std::pair<double, int> myPair { 1.23, 5 }; 中如何访问两个值？",
+      "a": "通过 myPair.first 访问 1.23，通过 myPair.second 访问 5。"
+    },
+    {
+      "q": "std::pair 的两个值必须是相同类型吗？",
+      "a": "不必须；std::pair 可以组合两个不同类型的值。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "类模板",
+    "成员访问运算符"
+  ],
+  "source_pages": [
+    59,
+    60
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "101_std_pair_组合两个值",
+  "_chunk_pages": [
+    57,
+    60
+  ]
+}

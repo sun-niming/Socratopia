@@ -1,0 +1,53 @@
+{
+  "title": "非模板函数优先于同样匹配的函数模板",
+  "definition": "当一个非模板函数与函数模板实例对同一次调用都能提供同等好的匹配时，重载解析会选择非模板函数。原文利用这一规则为 C 风格字符串查找提供专用的非模板 `Find`，使普通调用使用 `strcmp` 比较字符串内容；若显式写出模板实参，则会调用函数模板实例。",
+  "key_points": [
+    "对 `const char*` 使用内置 `operator==` 比较的是指针值，不是字符串内容。",
+    "专用的非模板重载使用 `strcmp(arr[i], value) == 0` 判断两个 C 风格字符串内容是否相等。",
+    "调用 `Find(word, words, sizeWords)` 时，非模板函数被选择。",
+    "调用 `Find<const char*>(word, words, sizeWords)` 时，显式模板实参使调用指向函数模板实例。",
+    "非模板重载未找到目标时同样返回 `NOT_FOUND`。"
+  ],
+  "examples": [
+    "size_t Find(const char* value, const char** arr, size_t size)\n{\n    for (size_t i = 0; i < size; ++i) {\n        if (strcmp(arr[i], value) == 0) {\n            return i;\n        }\n    }\n    return NOT_FOUND;\n}",
+    "const char* word{\"two\"};\nconst char* words[]{\"one\", \"two\", \"three\", \"four\"};\nconst size_t sizeWords{std::size(words)};\n\nsize_t res{Find(word, words, sizeWords)}; // 调用非模板函数\nres = Find<const char*>(word, words, sizeWords); // 调用模板实例"
+  ],
+  "misconceptions": [
+    "误以为两个 `const char*` 用 `==` 会比较字符串文本内容；它比较的是指针值。",
+    "误以为只要存在函数模板，编译器就一定优先选择模板。",
+    "误以为显式写出 `<const char*>` 后仍会调用非模板重载；显式模板实参表示要调用模板。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么 C 风格字符串的专用 `Find` 使用 `strcmp`？",
+      "a": "因为 `const char*` 的 `==` 比较指针值，而 `strcmp(...) == 0` 才表示字符串内容相等。"
+    },
+    {
+      "q": "`Find(word, words, sizeWords)` 在非模板重载和模板实例匹配同样好时选择哪一个？",
+      "a": "选择非模板函数。"
+    },
+    {
+      "q": "如何显式调用 `T=const char*` 的函数模板实例？",
+      "a": "写成 `Find<const char*>(word, words, sizeWords)`。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "函数模板",
+    "函数重载",
+    "重载解析",
+    "C风格字符串",
+    "strcmp"
+  ],
+  "source_pages": [
+    393,
+    396
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "510_非模板函数优先于同样匹配的函数模板",
+  "_chunk_pages": [
+    393,
+    396
+  ]
+}

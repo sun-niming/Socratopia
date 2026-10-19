@@ -1,0 +1,41 @@
+{
+  "title": "C 风格字符串以 NUL 字符结尾",
+  "definition": "C 风格字符串使用字符数组表示，并以空字符（NUL，写作 $\\texttt{\\\\0}$）作为结束标志。字符串的实际字符数不包含这个结尾字符，但存储空间必须包含它。NUL 字符与 NULL 指针不是同一个概念。",
+  "key_points": [
+    "字符串\"hello\"包含 5 个实际字符，但需要 6 个 char 的空间：5 个字符加 1 个结尾的 $\\texttt{\\\\0}$。",
+    "strlen() 返回实际字符数，不包含结尾的 $\\texttt{\\\\0}$。",
+    "理解 C 风格字符串仍然重要，因为 C++ 程序可能需要调用第三方库或操作系统提供的 C 接口。"
+  ],
+  "examples": [
+    "字符串\"hello\"在内存中可表示为：$\\texttt{'h', 'e', 'l', 'l', 'o', '\\\\0'}$。",
+    "$\\texttt{strlen(\"hello\")} = 5$，但保存该字符串需要 6 个字符空间。"
+  ],
+  "misconceptions": [
+    "NUL（$\\texttt{\\\\0}$）不是 NULL 指针。",
+    "strlen() 返回的不是包括结尾 NUL 在内的存储空间大小。",
+    "只要字符数组中有若干字符，就不一定是合法的 C 风格字符串；它必须有可识别的结尾 NUL。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "C 风格字符串为什么比实际字符数多占用一个字符空间？",
+      "a": "因为字符串末尾必须存储一个 NUL 字符 $\\texttt{\\\\0}$，用于标记字符串结束。"
+    },
+    {
+      "q": "strlen(\"hello\")返回多少？保存\"hello\"需要多少个 char 空间？",
+      "a": "strlen(\"hello\")返回 5；保存它需要 6 个 char 空间，包括末尾的 $\\texttt{\\\\0}$。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [],
+  "source_pages": [
+    102,
+    103
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "186_c_风格字符串以_nul_字符结尾",
+  "_chunk_pages": [
+    101,
+    104
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "title": "border简写与单边颜色设置",
+  "definition": "border 属性可以按 border-width | border-style | border-color 的方式缩写设置边框；同时还可以分别设置 border-style 和 border-color，也可以进一步针对单边设置颜色，例如 border-right-color、border-top-color。",
+  "key_points": [
+    "border 简写包含宽度、样式、颜色三个部分。",
+    "边框的样式和颜色可以单独设置。",
+    "可以对某一边单独设置颜色，如 border-right-color。"
+  ],
+  "examples": [
+    "border: 1px solid #000;",
+    "border-top-color: blue;",
+    "border-right-color: red;"
+  ],
+  "misconceptions": [
+    "误以为 border 只能整体设置，不能单独控制某一边的颜色。",
+    "误以为 border 简写只能写一个值。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "border 属性的缩写由哪些部分组成？",
+      "a": "border-width、border-style、border-color。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "边框属性",
+    "内外边距与边框宽度的缩写"
+  ],
+  "source_pages": [
+    125,
+    128
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "183_border简写与单边颜色设置",
+  "_chunk_pages": [
+    125,
+    128
+  ]
+}

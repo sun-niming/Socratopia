@@ -1,0 +1,44 @@
+{
+  "title": "可写span与只读span",
+  "definition": "std::span可以提供对底层元素的读写访问。可写span中的元素被修改时，底层序列中的对应元素也会被修改。如果函数不应修改数据，可以使用std::span<const T>，它提供只读视图。对于原本接收const std::vector<T>&的函数，可以考虑改用std::span<const T>，从而同时接受vector、array和C风格数组等序列。",
+  "key_points": [
+    "std::span<T>通常允许通过operator[]等方式修改底层元素。",
+    "std::span<const T>禁止通过该视图修改元素，但不表示底层对象在所有途径下都不可修改。",
+    "const span和span<const T>含义不同：前者主要限制span对象本身，后者限制通过span访问元素。",
+    "只读span可以统一接收多种连续序列的只读视图和子视图。"
+  ],
+  "examples": [
+    "只读打印函数：\nvoid print(std::span<const int> values) {\n    for (const auto& value : values) {\n        std::cout << value << ' ';\n    }\n    std::cout << std::endl;\n}",
+    "如果values是指向vector元素的可写span，执行values[0] = 100会修改vector中的第一个元素；若参数类型为std::span<const int>，则不能通过values修改元素。"
+  ],
+  "misconceptions": [
+    "std::span<const T>不会复制数据，它只是禁止通过该视图写入。",
+    "使用std::span<const T>并不意味着底层对象绝对不可变；底层对象仍可能通过其他可写引用被修改。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么打印函数可以使用std::span<const int>？",
+      "a": "因为打印只需要读取元素，不需要修改元素；const元素可以防止函数通过span修改底层序列。"
+    },
+    {
+      "q": "修改可写span中的元素会发生什么？",
+      "a": "对应的底层序列元素也会被修改，因为span不复制数据。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "std::span是连续元素序列的非拥有视图",
+    "const引用与只读访问"
+  ],
+  "source_pages": [
+    575,
+    575
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1185_可写span与只读span",
+  "_chunk_pages": [
+    573,
+    576
+  ]
+}

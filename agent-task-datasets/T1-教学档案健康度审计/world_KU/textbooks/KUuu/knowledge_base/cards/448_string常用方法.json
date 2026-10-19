@@ -1,0 +1,58 @@
+{
+  "title": "String常用方法",
+  "definition": "教材列出了多个字符串常用方法：charAt()或at()返回指定位置的字符，charCodeAt()返回指定位置字符的Unicode编码，indexOf()返回字符串中第一次出现的位置，lastIndexOf()从后向前搜索字符串，substring()提取两个指定索引号之间的字符，toLowerCase()转小写，toUpperCase()转大写，replace()搜索值或正则表达式并返回替换后的字符串。",
+  "key_points": [
+    "charAt()或at()：返回指定位置的字符。",
+    "charCodeAt()：返回指定位置字符的Unicode编码。",
+    "indexOf()：返回值在字符串中第一次出现的位置。",
+    "lastIndexOf()：从后向前搜索字符串。",
+    "substring()：提取两个指定索引号之间的字符。",
+    "toLowerCase()：把字符串转换为小写。",
+    "toUpperCase()：把字符串转换为大写。",
+    "replace()：搜索值或正则表达式，并返回替换值的字符串。"
+  ],
+  "examples": [
+    "'hello'.charAt(1)",
+    "'hello'.charCodeAt(1)",
+    "'hello hello'.indexOf('he')",
+    "'hello'.lastIndexOf('l')",
+    "'abcdef'.substring(1, 4)",
+    "'ABC'.toLowerCase()",
+    "'abc'.toUpperCase()",
+    "'hello'.replace('h', 'H')"
+  ],
+  "misconceptions": [
+    "把indexOf()理解为返回所有匹配位置。",
+    "把substring()理解为替换字符串的方法。",
+    "把replace()只理解为只能传字符串，忽略了正则表达式。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "charCodeAt() 的作用是什么？",
+      "a": "返回指定位置字符的Unicode编码。"
+    },
+    {
+      "q": "toUpperCase() 的作用是什么？",
+      "a": "把字符串转换为大写。"
+    },
+    {
+      "q": "replace() 可以搜索什么？",
+      "a": "可以搜索值或正则表达式。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "字符串下标访问"
+  ],
+  "source_pages": [
+    309,
+    312
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "448_string常用方法",
+  "_chunk_pages": [
+    309,
+    312
+  ]
+}

@@ -1,0 +1,50 @@
+{
+  "title": "decltype 与 decltype(auto) 的返回类型推导",
+  "definition": "$decltype(expression)$ 根据表达式的类型和值类别生成类型；使用 $decltype(auto)$ 作为函数返回类型时，返回类型按照 decltype 的规则从 return 表达式推导，因此可以保留表达式的引用和 const 等类型属性。与普通 $auto$ 相比，$decltype(auto)$ 更适合精确转发返回表达式的类型。",
+  "key_points": [
+    "示例中 $getString()$ 的返回类型是 $const\\ std::string\\&$。",
+    "使用 $auto\\ s1\\{getString()\\}$ 时，变量类型会推导为 $std::string$，顶层 const 和引用不会按原样保留。",
+    "使用 $const\\ auto\\&\\ s2\\{getString()\\}$ 可以保留为对 const 字符串的引用。",
+    "使用 $decltype(getString())\\ s3\\{getString()\\}$ 或 $decltype(auto)\\ s4\\{getString()\\}$ 可以保留 $getString()$ 的精确类型，即 $const\\ std::string\\&$。"
+  ],
+  "examples": [
+    "const std::string message { \"Test\" };\\nconst std::string& getString() { return message; }\\n\\nauto s1 { getString() };\\nconst auto& s2 { getString() };\\ndecltype(getString()) s3 { getString() };\\ndecltype(auto) s4 { getString() };",
+    "函数返回类型示例：\\ntemplate<typename T1, typename T2>\\ndecltype(auto) add(const T1& t1, const T2& t2) {\\n    return t1 + t2;\\n}"
+  ],
+  "misconceptions": [
+    "decltype(auto) 不是普通 auto 的别名；它使用 decltype 规则，可能推导出引用类型。",
+    "使用 auto 接收返回值时，不能默认认为返回函数的引用和 const 属性会被原样保留。",
+    "decltype(auto) 只有在 return 表达式本身产生相应引用类型时才会得到引用类型。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如果 getString() 的返回类型是 const std::string&，decltype(getString()) 的结果是什么？",
+      "a": "结果是 $const\\ std::string\\&$。"
+    },
+    {
+      "q": "为什么示例中的 s4 能保留 getString() 的 const 引用类型？",
+      "a": "因为 $decltype(auto)$ 按 decltype 规则推导，而 $decltype(getString())$ 是 $const\\ std::string\\&$。"
+    },
+    {
+      "q": "decltype(auto) 与 auto 的主要区别是什么？",
+      "a": "auto 通常按值推导并可能丢弃顶层引用或 const；decltype(auto) 按 decltype 规则推导，可以保留表达式的引用、const 等类型属性。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "auto 类型推导",
+    "引用与 const",
+    "decltype"
+  ],
+  "source_pages": [
+    398,
+    399
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "515_decltype_与_decltype_auto_的返回类型推导",
+  "_chunk_pages": [
+    397,
+    400
+  ]
+}

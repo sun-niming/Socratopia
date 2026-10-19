@@ -1,0 +1,45 @@
+{
+  "title": "C++ 局部静态对象的线程安全边界",
+  "definition": "教材称 `instance()` 中的局部静态对象为 magic static，并指出 C++ 会以线程安全的方式初始化该对象，因此该单例实现不需要手动同步其初始化过程。但线程安全只覆盖对象初始化；如果多个线程同时调用 Logger 的其他方法，仍必须使这些方法自身具备线程安全性。",
+  "key_points": [
+    "局部静态实例的初始化由 C++ 以线程安全方式完成。",
+    "不需要为该局部静态实例的初始化额外手动执行线程同步。",
+    "线程安全初始化不等于 Logger 的全部操作都是线程安全的。",
+    "多线程调用 Logger 的成员方法时，仍需使用适当同步机制保护共享状态。"
+  ],
+  "examples": [
+    "线程安全边界：\n$$\n\\text{线程安全初始化} \\neq \\text{所有成员方法线程安全}\n$$",
+    "即使 `Logger::instance()` 的首次初始化是安全的，多个线程同时执行 `log(...)` 或修改日志级别时，仍可能需要同步。"
+  ],
+  "misconceptions": [
+    "magic static 不是指整个单例类自动变成线程安全类。",
+    "只确认实例初始化安全，不能据此断言日志写入、日志级别修改等操作没有数据竞争。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "局部静态单例的线程安全保证覆盖哪些内容？",
+      "a": "它保证局部静态实例的初始化过程是线程安全的。"
+    },
+    {
+      "q": "如果多个线程同时调用 Logger 方法，还需要做什么？",
+      "a": "必须使 Logger 方法本身线程安全，并根据共享数据情况使用同步机制。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "局部静态变量",
+    "多线程与数据竞争",
+    "互斥与同步"
+  ],
+  "source_pages": [
+    967,
+    967
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 function-local static variable thread-safe initialization magic static member function thread safety",
+  "concept_id": "1985_c_局部静态对象的线程安全边界",
+  "_chunk_pages": [
+    965,
+    968
+  ]
+}

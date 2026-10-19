@@ -1,0 +1,39 @@
+{
+  "title": "confirm 系统对话框",
+  "definition": "window.confirm([message]) 用于显示确认提示框，包含“确定”和“取消”按钮。用户点击“确定”时返回 true，点击“取消”时返回 false。",
+  "key_points": [
+    "语法：window.confirm([message])",
+    "对话框包含“确定”和“取消”按钮",
+    "点击“确定”返回 true，点击“取消”返回 false"
+  ],
+  "examples": [
+    "var ok = confirm('是否删除？')"
+  ],
+  "misconceptions": [
+    "confirm 不是输入框，不能输入文本。",
+    "confirm 的返回值不是字符串，而是布尔值 true 或 false。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "confirm() 点击“确定”时返回什么？",
+      "a": "true。"
+    },
+    {
+      "q": "confirm() 的主要用途是什么？",
+      "a": "显示确认提示框，让用户在确定和取消之间选择。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [],
+  "source_pages": [
+    333,
+    336
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "449_confirm_系统对话框",
+  "_chunk_pages": [
+    333,
+    336
+  ]
+}

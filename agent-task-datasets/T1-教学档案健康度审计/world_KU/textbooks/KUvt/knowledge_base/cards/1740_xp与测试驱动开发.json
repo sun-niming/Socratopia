@@ -1,0 +1,46 @@
+{
+  "title": "XP与测试驱动开发",
+  "definition": "极限编程（Extreme Programming，XP）是一种软件开发方法。XP认为测试非常重要，主张在实际代码之前编写自动化单元测试；先写出的测试通常会因代码尚未实现而失败，随后编写代码使测试通过。这个过程称为TDD（Test Driven Development，测试驱动开发）。",
+  "key_points": [
+    "XP把测试视为开发过程中的重要实践。",
+    "自动化单元测试用于验证独立功能是否正常工作。",
+    "XP建议先编写单元测试，再编写实际代码。",
+    "当功能实现正确并满足测试要求时，相关测试应全部通过。",
+    "原文给出的基于文件的对象存储单元测试示例包括`testSaveObject`、`testLoadObject`和`testDeleteObject`。",
+    "TDD的核心顺序可以写为：先写测试 → 编写实现代码 → 运行测试并使其通过。"
+  ],
+  "examples": [
+    "$$\\text{编写测试}\\rightarrow\\text{编写实现代码}\\rightarrow\\text{运行测试并通过}$$",
+    "基于文件的对象存储可以分别测试保存、加载和删除：`testSaveObject`、`testLoadObject`、`testDeleteObject`。"
+  ],
+  "misconceptions": [
+    "单元测试不是只在代码完成后才编写；XP和TDD强调先写测试。",
+    "测试开始时失败并不一定表示测试错误，因为测试可能是在实现代码尚未编写时先创建的。",
+    "单元测试通常针对独立功能，而不是只进行人工的整体演示。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "TDD的基本做法是什么？",
+      "a": "在实际代码之前编写自动化单元测试，再编写代码使测试通过。"
+    },
+    {
+      "q": "XP中的单元测试主要验证什么？",
+      "a": "验证独立功能是否正常工作。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "单元测试基础"
+  ],
+  "source_pages": [
+    844,
+    844
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1740_xp与测试驱动开发",
+  "_chunk_pages": [
+    841,
+    844
+  ]
+}

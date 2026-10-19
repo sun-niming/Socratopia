@@ -1,0 +1,44 @@
+{
+  "title": "C++ 模块实现文件的基本结构",
+  "definition": "Employee 的模块实现文件以 `module employee;` 指定所属模块，随后导入实现所需的标准库模块，例如 `<iostream>` 和 `<format>`，并可以使用 `using namespace std;` 简化标准库名称的书写。",
+  "key_points": [
+    "模块实现文件必须通过 module 声明指明其所属模块。",
+    "实现文件可以导入所需的标准库组件。",
+    "Employee 的构造函数和成员函数实现在 `namespace Records` 命名空间中。"
+  ],
+  "examples": [
+    "原文实现文件开头的结构：`module employee; import <iostream>; import <format>; using namespace std;`",
+    "成员函数定义示例：`namespace Records { Employee::Employee(...) : m_firstName{ firstName }, m_lastName{ lastName } { } }`"
+  ],
+  "misconceptions": [
+    "`module employee;` 是模块实现声明，不是普通的头文件包含语句。",
+    "using namespace std 只影响名称查找简写，不会把标准库类型变成自定义类型。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "Employee.cpp 的第一条模块相关语句是什么？",
+      "a": "`module employee;`，它指定该源文件属于 employee 模块。"
+    },
+    {
+      "q": "Employee 模块实现文件导入了哪些原文明确提到的标准库组件？",
+      "a": "`<iostream>` 和 `<format>`。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++模块",
+    "命名空间",
+    "标准库导入"
+  ],
+  "source_pages": [
+    93,
+    94
+  ],
+  "needs_verification": true,
+  "verify_query": "\"module employee;\" \"import <format>;\" \"Employee.cpp\" C++20",
+  "concept_id": "178_c_模块实现文件的基本结构",
+  "_chunk_pages": [
+    93,
+    96
+  ]
+}

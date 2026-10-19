@@ -1,0 +1,44 @@
+{
+  "title": "input文本框与密码框",
+  "definition": "在HTML表单中，使用 input 标签并通过 type 属性指定输入框类型：type=\"text\" 表示常规文本输入框，type=\"password\" 表示密码输入框，密码会以掩码方式显示。value 属性用于设置输入框内的初始内容，也就是默认值；同时应为输入框补充 name 属性，便于后端识别和接收数据。",
+  "key_points": [
+    "type=\"text\" 是普通文本输入框。",
+    "type=\"password\" 是密码输入框，输入内容会掩码显示。",
+    "value 用来设置输入框的初始内容（默认值）。",
+    "name 属性有助于后端识别提交的数据。"
+  ],
+  "examples": [
+    "<input type=\"text\" name=\"username\" value=\"张三\">",
+    "<input type=\"password\" name=\"pwd\" value=\"123456\">"
+  ],
+  "misconceptions": [
+    "value 不是用户最终提交的唯一依据，它只是初始值。",
+    "password 输入框只是显示成掩码，并不代表数据会自动加密。",
+    "input 不写 name 也能显示，但后端可能难以识别字段。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "type=\"text\" 和 type=\"password\" 分别表示什么？",
+      "a": "type=\"text\" 是常规文本输入框，type=\"password\" 是密码输入框，内容会以掩码显示。"
+    },
+    {
+      "q": "input 的 value 属性有什么作用？",
+      "a": "用于设置输入框内的初始内容，也就是默认值。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "HTML基础"
+  ],
+  "source_pages": [
+    69,
+    72
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "103_input文本框与密码框",
+  "_chunk_pages": [
+    69,
+    72
+  ]
+}

@@ -1,0 +1,50 @@
+{
+  "title": "算法对迭代器类别的要求",
+  "definition": "不同标准库算法对传入迭代器的能力有不同要求。只有当容器提供满足算法要求的迭代器类别时，才能使用该算法；不能因为容器能提供迭代器，就认为所有算法都适用。",
+  "key_points": [
+    "`copy_backward()` 需要双向迭代器，以便从序列末尾开始反向复制元素。",
+    "`stable_sort()` 需要随机访问迭代器，并在原地排序时保持重复元素的相对顺序。",
+    "`forward_list` 只支持前向迭代器，不支持双向迭代器或随机访问迭代器。",
+    "因此，`copy_backward()` 和 `stable_sort()` 不能用于 `forward_list`。"
+  ],
+  "examples": [
+    "迭代器要求可以概括为：\n$$\n\\text{算法可用} \\Longrightarrow \\text{容器迭代器能力} \\supseteq \\text{算法所需迭代器能力}\n$$\n例如，`forward_list` 只有前向迭代器，因此不能满足 `copy_backward()` 的双向迭代器要求，也不能满足 `stable_sort()` 的随机访问迭代器要求。"
+  ],
+  "misconceptions": [
+    "能使用 `begin()` 和 `end()` 并不代表容器支持所有标准库算法。",
+    "`stable_sort()` 与普通排序不同，它还要求在排序后保持等价元素的相对顺序。",
+    "前向迭代器不能向后移动，因此不能满足需要从尾部反向操作的算法。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么 `copy_backward()` 不能用于 `forward_list`？",
+      "a": "因为 `copy_backward()` 需要双向迭代器，而 `forward_list` 只提供前向迭代器。"
+    },
+    {
+      "q": "为什么 `stable_sort()` 不能用于 `forward_list`？",
+      "a": "因为 `stable_sort()` 需要随机访问迭代器，而 `forward_list` 不提供随机访问迭代器。"
+    },
+    {
+      "q": "`stable_sort()` 除了排序外还具有什么性质？",
+      "a": "它在原地排序时保持重复元素的相对顺序。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "迭代器类别",
+    "前向迭代器",
+    "双向迭代器",
+    "随机访问迭代器"
+  ],
+  "source_pages": [
+    628,
+    628
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1300_算法对迭代器类别的要求",
+  "_chunk_pages": [
+    625,
+    628
+  ]
+}

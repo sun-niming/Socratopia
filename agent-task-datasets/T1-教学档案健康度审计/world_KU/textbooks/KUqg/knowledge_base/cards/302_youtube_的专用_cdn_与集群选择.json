@@ -1,0 +1,44 @@
+{
+  "title": "YouTube 的专用 CDN 与集群选择",
+  "definition": "YouTube 广泛使用 Google 的专用 CDN 分发视频。Google 在许多 IXP 和 ISP 位置部署服务器集群，也从大型数据中心分发视频。与 Netflix 不同，Google 使用拉高速缓存和 DNS 重定向。通常，Google 通过 DNS 将客户定向到使客户与集群之间 RTT 较低的集群；有时为了平衡集群负载，也会将客户定向到距离更远的集群。",
+  "key_points": [
+    "YouTube 视频由 Google 的专用 CDN、ISP/IXP 位置的服务器集群以及大型数据中心共同分发。",
+    "Google 使用拉高速缓存和 DNS 重定向。",
+    "集群选择通常以较低的客户—集群 RTT 为目标。",
+    "为平衡负载，客户有时会被 DNS 定向到 RTT 更高或地理位置更远的集群。"
+  ],
+  "examples": [
+    "某客户通常被 DNS 定向到 RTT 最低的 YouTube 集群；如果该集群负载较高，也可能被定向到较远的集群。"
+  ],
+  "misconceptions": [
+    "YouTube 总是把客户定向到地理位置最近的集群；原文强调的是通常选择 RTT 较低的集群，并可能为了负载均衡选择更远的集群。",
+    "YouTube 和 Netflix 在 CDN 选择机制上完全相同；原文指出 YouTube 使用 DNS 重定向和拉高速缓存，而 Netflix 直接告知客户 CDN 服务器并使用推高速缓存。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "YouTube 通常依据什么选择客户连接的 CDN 集群？",
+      "a": "通常通过 DNS 将客户定向到使客户与集群之间 RTT 最低的集群；但为了平衡负载，有时会选择更远的集群。"
+    },
+    {
+      "q": "YouTube 与 Netflix 在 CDN 机制上有哪些重要区别？",
+      "a": "YouTube 使用 DNS 重定向和拉高速缓存；Netflix 的专用软件直接告知客户使用哪台 CDN 服务器，并使用推高速缓存。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "CDN 的基本概念",
+    "DNS 重定向",
+    "往返时间（RTT）"
+  ],
+  "source_pages": [
+    121,
+    124
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "302_youtube_的专用_cdn_与集群选择",
+  "_chunk_pages": [
+    121,
+    124
+  ]
+}

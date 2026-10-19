@@ -1,0 +1,36 @@
+{
+  "title": "DOM树",
+  "definition": "浏览器加载一个 HTML 页面时，会先解析 HTML 代码，并创建一个与页面内容对应的 DOM 树。DOM 树是一种层级结构，整个树以 document 作为根节点。",
+  "key_points": [
+    "浏览器解析 HTML 后会生成对应的 DOM 树",
+    "document 是 DOM 树的根节点"
+  ],
+  "examples": [
+    "<!DOCTYPE html><html><head><title>My Page</title></head><body><h1>Welcome!</h1><p>This is a paragraph.</p></body></html> 会被浏览器解析成以 document 为根的 DOM 树"
+  ],
+  "misconceptions": [
+    "DOM 树不是 HTML 源代码本身，而是浏览器解析后形成的对象结构",
+    "页面中的内容不只是可见标签，还会包含文本等节点"
+  ],
+  "qa_pairs": [
+    {
+      "q": "浏览器加载 HTML 页面后会得到什么结构？",
+      "a": "对应的 DOM 树。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "HTML基础"
+  ],
+  "source_pages": [
+    345,
+    346
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "489_dom树",
+  "_chunk_pages": [
+    345,
+    348
+  ]
+}

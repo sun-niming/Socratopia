@@ -1,0 +1,43 @@
+{
+  "title": "std::find与自定义Find函数模板",
+  "definition": "C++标准库提供了功能比原文自定义Find函数模板更强大的std::find算法。自定义Find用于说明函数模板、类型推导和数组查找机制；在实际开发中，若需求与标准算法匹配，应优先查阅并考虑使用std::find。",
+  "key_points": [
+    "原文自定义Find按索引遍历数组并返回索引或NOT_FOUND。",
+    "标准库中的std::find提供了更通用的查找功能，具体详情在教材第18章。",
+    "自定义Find与std::find不是同一个函数，返回形式和调用接口可能不同。"
+  ],
+  "examples": [
+    "自定义Find调用形式：Find(value, array, size)。",
+    "原文指出标准库对应算法为std::find；其具体接口和返回迭代器等内容需结合标准库章节学习。"
+  ],
+  "misconceptions": [
+    "std::find只是自定义Find的另一个名称；二者是不同的函数模板。",
+    "std::find必然返回数组下标；原文只说明它功能更强，没有在此处给出其完整接口。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "原文提到哪个标准库函数比自定义Find功能更强？",
+      "a": "std::find。"
+    },
+    {
+      "q": "自定义Find和std::find是否完全相同？",
+      "a": "不相同。自定义Find在原文中返回索引或NOT_FOUND，而std::find是标准库提供的另一种查找算法。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "函数模板",
+    "C++标准库算法"
+  ],
+  "source_pages": [
+    395,
+    395
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "804_std_find与自定义find函数模板",
+  "_chunk_pages": [
+    393,
+    396
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "title": "expr 命令的表达式书写规则",
+  "definition": "expr 命令用于表达式计算，基本形式为“expr 表达式”。在 expr 的表达式中，变量必须使用“$”进行引用；同时，表达式中的每个元素都必须用空格隔开。",
+  "key_points": [
+    "基本形式是 expr 表达式",
+    "在 expr 表达式中，变量要用 $ 引用",
+    "表达式中每个元素必须用空格隔开"
+  ],
+  "examples": [
+    "expr $a + 1",
+    "expr 3 \\* 4"
+  ],
+  "misconceptions": [
+    "把 let 的变量写法直接套用到 expr 中，不加 $；原文说明 expr 中变量要用 $ 引用",
+    "在 expr 表达式中省略空格；原文明确要求每个元素必须用空格隔开"
+  ],
+  "qa_pairs": [
+    {
+      "q": "expr 命令的基本形式是什么？",
+      "a": "expr 表达式。"
+    },
+    {
+      "q": "在 expr 表达式中引用变量时应怎样写？",
+      "a": "变量要用 $ 进行引用。"
+    },
+    {
+      "q": "expr 表达式在书写格式上有什么要求？",
+      "a": "表达式中每个元素必须用空格隔开。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [],
+  "source_pages": [
+    85,
+    88
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "145_expr_命令的表达式书写规则",
+  "_chunk_pages": [
+    85,
+    88
+  ]
+}

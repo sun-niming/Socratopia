@@ -1,0 +1,41 @@
+{
+  "title": "浏览器内核与显示差异",
+  "definition": "教材列出了浏览器内核：Trident、Gecko、webkit、Blink。由于不同浏览器使用的内核可能不同，同一网页在不同内核的浏览器中渲染效果也可能不同。",
+  "key_points": [
+    "内核是浏览器渲染实现的重要基础。",
+    "不同内核可能导致同一网页显示效果不同。",
+    "教材提到的内核包括 Trident、Gecko、webkit、Blink。"
+  ],
+  "examples": [
+    "同一网页在不同内核的浏览器里渲染效果可能不同。"
+  ],
+  "misconceptions": [
+    "同一个网页在所有浏览器中的显示一定完全一致，这是错误的。",
+    "浏览器名称相同就一定使用相同内核，这不一定成立。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么同一网页在不同浏览器中的显示效果可能不同？",
+      "a": "因为不同浏览器可能使用不同的内核，内核不同会影响渲染效果。"
+    },
+    {
+      "q": "教材中列出的浏览器内核有哪些？",
+      "a": "Trident、Gecko、webkit、Blink。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "浏览器与渲染引擎"
+  ],
+  "source_pages": [
+    17,
+    20
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "026_浏览器内核与显示差异",
+  "_chunk_pages": [
+    17,
+    20
+  ]
+}

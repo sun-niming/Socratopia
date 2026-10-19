@@ -1,0 +1,45 @@
+{
+  "title": "使用折叠表达式打印参数包",
+  "definition": "可以将输出操作与逗号运算符结合，通过一元右折叠一次性打印可变参数模板接收的所有实参。教材中的 `printValues` 会把每个实参写入控制台，并在每个实参后输出换行符，因此调用时可以传入任意数量的实参。",
+  "key_points": [
+    "函数模板可声明为 `template<typename... Values> void printValues(const Values&... values)`。",
+    "折叠表达式 `((cout << values << endl), ...)` 会对参数包中的每个值执行一次输出。",
+    "每个实参后都输出 `endl`，所以不同实参分别占据不同的输出行。",
+    "示例调用可以混合不同类型的实参，例如整数、字符串和浮点数。"
+  ],
+  "examples": [
+    "代码形式：`template<typename... Values> void printValues(const Values&... values) { ((cout << values << endl), ...); }`",
+    "调用：`printValues(1, \"test\", 2.34);`",
+    "三个参数 `v1`、`v2`、`v3` 的展开形式为：$$((cout << v_1 << endl), ((cout << v_2 << endl), (cout << v_3 << endl)))$$"
+  ],
+  "misconceptions": [
+    "该函数不是只能接收同一种类型的参数；参数包可以接收不同类型的实参，只要这些类型支持相应的输出操作。",
+    "换行由每次输出后的 `endl` 产生，而不是由调用者手动插入。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`printValues(1, \"test\", 2.34)` 的作用是什么？",
+      "a": "依次把 `1`、`test` 和 `2.34` 输出到控制台，每个值单独占一行。"
+    },
+    {
+      "q": "为什么 `printValues` 可以接收任意数量的实参？",
+      "a": "因为它使用了可变参数模板和参数包，折叠表达式会对参数包中的每个实参执行输出操作。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "可变参数模板",
+    "折叠表达式"
+  ],
+  "source_pages": [
+    773,
+    773
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1593_使用折叠表达式打印参数包",
+  "_chunk_pages": [
+    773,
+    776
+  ]
+}

@@ -1,0 +1,48 @@
+{
+  "title": "shared_ptr 的共享所有权与基本用法",
+  "definition": "std::shared_ptr 是一种支持共享所有权、可以复制的智能指针。多个 shared_ptr 实例可以共同引用同一资源；只有最后一个引用该资源的 shared_ptr 被销毁或重置时，资源才会被释放。通常使用 make_shared() 创建 shared_ptr，例如 auto mySimpleSmartPtr { make_shared<Simple>() };。",
+  "key_points": [
+    "shared_ptr 可以复制，复制后多个实例共同拥有同一资源。",
+    "类模板参数推断不适用于 shared_ptr，直接声明 shared_ptr 时必须指定模板类型；使用 make_shared() 时可通过函数模板参数推导类型。",
+    "make_shared() 使用值初始化；C++20 提供 make_shared_for_overwrite()，用于不需要值初始化时的默认初始化。",
+    "shared_ptr 支持 get() 和 reset()；调用 reset() 时，只有在当前实例是最后一个拥有者时才会释放资源。",
+    "shared_ptr 不支持 release()；可以使用 use_count() 获取当前共享同一资源的 shared_ptr 实例数量。",
+    "C++20 起可以使用 make_shared() 创建用于动态 C 风格数组的 shared_ptr，但原文仍建议优先使用标准库容器而不是 C 风格数组。"
+  ],
+  "examples": [
+    "auto mySimpleSmartPtr { make_shared<Simple>() };",
+    "auto ptr2 { ptr1 }; // 复制 shared_ptr，两个指针共享所有权。",
+    "auto count { ptr1.use_count() }; // 获取共享同一资源的 shared_ptr 数量。"
+  ],
+  "misconceptions": [
+    "shared_ptr 复制的是资源本身；实际上复制的是智能指针实例，多个实例共享同一资源。",
+    "调用任意一个 shared_ptr 的 reset() 都会立即释放资源；实际上只有最后一个所有者被重置或销毁时才释放。",
+    "shared_ptr 可以像 unique_ptr 一样调用 release()；实际上 shared_ptr 不提供 release()。",
+    "使用 shared_ptr 时不需要指定模板类型；直接声明 shared_ptr 时仍需写出类型，例如 shared_ptr<Simple>。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "shared_ptr 何时释放其管理的资源？",
+      "a": "当最后一个拥有该资源的 shared_ptr 被销毁或重置时，资源才会被释放。"
+    },
+    {
+      "q": "shared_ptr 是否支持 release()？如何查看共享者数量？",
+      "a": "shared_ptr 不支持 release()；可以使用 use_count() 查看共享同一资源的 shared_ptr 实例数量。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "智能指针与资源自动释放"
+  ],
+  "source_pages": [
+    221,
+    221
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "469_shared_ptr_的共享所有权与基本用法",
+  "_chunk_pages": [
+    221,
+    224
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "title": "putback() 将指定字符放回输入流",
+  "definition": "`putback()` 与 `unget()` 都可以使输入流向后移动一个字符，但二者的区别是：`unget()` 放回最近读取的字符，而 `putback()` 接收一个字符参数，并将指定字符放回流中作为下一次读取的内容。",
+  "key_points": [
+    "`putback(c)` 会把参数 `c` 放回输入流。",
+    "放回后，下一次从流中读取时将读到该字符。",
+    "`putback()` 与 `unget()` 都用于在读取过程中回退一个字符，但 `putback()` 允许指定放回的字符。"
+  ],
+  "examples": [
+    "`char c; cin >> c; cin.putback('e');` 执行后，下一次从输入流读取的字符将是 `e`。",
+    "原文示例先读取字符 `c`，再输出该字符，随后调用 `cin.putback('e')`。"
+  ],
+  "misconceptions": [
+    "`putback()` 放回的字符不一定是刚刚读取的字符，因为它由参数指定。",
+    "`putback()` 不是把字符串整体放回流中；原文讨论的是单个字符。",
+    "`putback()` 与 `unget()` 的功能相近，但接口语义不同：前者指定字符，后者回退最近读取的字符。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`unget()` 和 `putback()` 的主要区别是什么？",
+      "a": "`unget()` 将最近读取的字符放回流中；`putback(c)` 将调用者指定的字符 `c` 放回流中。"
+    },
+    {
+      "q": "执行 `cin.putback('e')` 后，下一次读取会得到什么？",
+      "a": "下一次读取会得到字符 `e`。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "unget() 将最近读取的字符放回输入流"
+  ],
+  "source_pages": [
+    420,
+    420
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "852_putback_将指定字符放回输入流",
+  "_chunk_pages": [
+    417,
+    420
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "title": "使用std::tuple_cat串联tuple",
+  "definition": "`std::tuple_cat`可以把两个或多个tuple按参数顺序连接成一个新的tuple。结果tuple中的元素依次来自各个输入tuple，元素数量是所有输入tuple元素数量之和，类型按原元素类型排列。",
+  "key_points": [
+    "串联顺序与传入`std::tuple_cat`的参数顺序一致。",
+    "结果tuple包含所有输入tuple的元素。",
+    "结果类型由各输入tuple的元素类型组合而成。"
+  ],
+  "examples": [
+    "`std::tuple t1 { 16, \"Test\"s, true }; std::tuple t2 { 3.14, \"string 2\"s }; auto t3 = std::tuple_cat(t1, t2);`。",
+    "此时`t3`的类型为`std::tuple<int, std::string, bool, double, std::string>`。"
+  ],
+  "misconceptions": [
+    "`tuple_cat`不会对元素进行排序或合并同类型元素，而是按顺序全部拼接。",
+    "串联后的tuple不是嵌套tuple；输入tuple的元素会展开到结果tuple中。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`std::tuple_cat(t1, t2)`的结果元素顺序是什么？",
+      "a": "先按顺序放入t1的全部元素，再按顺序放入t2的全部元素。"
+    },
+    {
+      "q": "若t1有3个元素、t2有2个元素，串联结果有几个元素？",
+      "a": "有5个元素。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "std::pair与std::tuple的基本特征"
+  ],
+  "source_pages": [
+    712,
+    712
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1481_使用std_tuple_cat串联tuple",
+  "_chunk_pages": [
+    709,
+    712
+  ]
+}

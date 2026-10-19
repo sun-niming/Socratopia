@@ -1,0 +1,36 @@
+{
+  "title": "CSS选择器",
+  "definition": "CSS选择器用于指定CSS规则要应用到哪些HTML元素上。要让样式生效到特定元素，就需要先通过选择器找到这个元素或这一组元素。",
+  "key_points": [
+    "选择器的作用是“定位元素”",
+    "CSS规则会根据选择器匹配到的元素来应用样式"
+  ],
+  "examples": [
+    "body{ color:#111111; font-size:12px; }",
+    "#intro { font-weight:bold; }"
+  ],
+  "misconceptions": [
+    "CSS选择器不是直接给HTML元素“写样式”，而是先选择元素，再应用样式。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "CSS选择器的作用是什么？",
+      "a": "用于指定CSS规则会应用到哪些HTML元素上。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "HTML元素"
+  ],
+  "source_pages": [
+    89,
+    92
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "137_css选择器",
+  "_chunk_pages": [
+    89,
+    92
+  ]
+}

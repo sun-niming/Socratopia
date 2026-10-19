@@ -1,0 +1,46 @@
+{
+  "title": "SSL与TLS对TCP的安全强化",
+  "definition": "SSL（Secure Socket Layer，安全套接字层）是对TCP进行安全强化的协议，可提供机密性、数据完整性和端点鉴别。SSL最初由Netscape设计；SSL版本3的稍加修改版本称为TLS（Transport Layer Security，运输层安全性），并已由IETF标准化。教材指出，SSL已得到流行Web浏览器和Web服务器的支持，并广泛用于因特网商业站点。",
+  "key_points": [
+    "SSL位于应用层安全电子邮件之后、网络层IPsec之前所讨论的协议层次，用于加强TCP连接。",
+    "SSL/TLS提供的安全服务包括机密性、数据完整性和端点鉴别。",
+    "SSL最初由Netscape设计。",
+    "SSL版本3的稍加修改版本称为TLS。",
+    "教材指出TLS已经由IETF标准化，SSL被广泛部署于Web浏览器、Web服务器和商业站点。"
+  ],
+  "examples": [
+    "Web浏览器与Web服务器之间的安全连接可以使用SSL/TLS来获得机密性、完整性和端点鉴别。"
+  ],
+  "misconceptions": [
+    "SSL/TLS不是电子邮件专用协议，它是用于加强TCP连接的安全机制。",
+    "SSL/TLS提供端点鉴别并不意味着所有应用层用户身份问题都自动解决。",
+    "SSL和TLS不是完全无关的两个体系；教材将TLS描述为SSL版本3的稍加修改版本。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "SSL的作用是什么？",
+      "a": "SSL是TCP的安全强化版本，为TCP连接提供机密性、数据完整性和端点鉴别。"
+    },
+    {
+      "q": "TLS与SSL是什么关系？",
+      "a": "教材称SSL版本3的一个稍加修改版本为TLS，TLS已经由IETF标准化。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "TCP连接",
+    "分层安全性",
+    "机密性、完整性和端点鉴别"
+  ],
+  "source_pages": [
+    425,
+    428
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "994_ssl与tls对tcp的安全强化",
+  "_chunk_pages": [
+    425,
+    428
+  ]
+}

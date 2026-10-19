@@ -1,0 +1,53 @@
+{
+  "title": "使用裸指针动态创建和销毁 SpreadsheetCell",
+  "definition": "可以使用 new 动态创建 SpreadsheetCell 对象，并用 SpreadsheetCell* 指针保存其地址。通过指针访问成员时使用 -> 运算符；也可以先用一元 * 解引用指针，再使用点运算符。使用 new 创建的对象应通过 delete 销毁，销毁后可将指针设为 nullptr。",
+  "key_points": [
+    "动态对象示例：SpreadsheetCell* myCellp { new SpreadsheetCell{} };。",
+    "指针成员访问写作 myCellp->setValue(3.7)。",
+    "等价的解引用写法是 (*myCellp).setValue(3.7)。括号不可省略，因为点运算符的优先级高于一元解引用。",
+    "使用 delete myCellp; 释放动态对象；释放后可写 myCellp = nullptr;。",
+    "原文同时展示了输出 getValue() 和 getString() 的写法。"
+  ],
+  "examples": [
+    "代码示例：SpreadsheetCell* myCellp { new SpreadsheetCell{} }; myCellp->setValue(3.7); std::cout << myCellp->getString() << std::endl; delete myCellp; myCellp = nullptr;",
+    "两种成员访问方式等价：$$\\text{myCellp->setValue}(3.7)\\quad\\equiv\\quad (*\\text{myCellp}).\\text{setValue}(3.7)$$",
+    "输出示例：std::cout << \"cell 1: \" << myCellp->getValue() << \" \" << myCellp->getString() << std::endl;"
+  ],
+  "misconceptions": [
+    "new 返回的是对象的指针，不是对象本身。",
+    "delete 不是把指针变量本身删除，而是销毁指针所指向的动态对象。",
+    "delete 之后指针不会自动变成 nullptr，因此原文显式执行 myCellp = nullptr;。",
+    "myCellp.setValue(3.7) 是错误的指针成员访问形式，应使用 myCellp->setValue(3.7) 或 (*myCellp).setValue(3.7)。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "指向 SpreadsheetCell 的指针如何调用 setValue？",
+      "a": "可以写 myCellp->setValue(3.7)，也可以写 (*myCellp).setValue(3.7)。"
+    },
+    {
+      "q": "使用 new 创建的 SpreadsheetCell 应如何释放？",
+      "a": "使用 delete myCellp;，释放后可以把指针设为 nullptr。"
+    },
+    {
+      "q": "myCellp->setValue(3.7) 与 (*myCellp).setValue(3.7) 的关系是什么？",
+      "a": "两者等价，都是先访问指针指向的 SpreadsheetCell，再调用其 setValue 成员函数。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++指针",
+    "new与delete",
+    "对象成员访问运算符"
+  ],
+  "source_pages": [
+    233,
+    236
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "314_使用裸指针动态创建和销毁_spreadsheetcell",
+  "_chunk_pages": [
+    233,
+    236
+  ]
+}

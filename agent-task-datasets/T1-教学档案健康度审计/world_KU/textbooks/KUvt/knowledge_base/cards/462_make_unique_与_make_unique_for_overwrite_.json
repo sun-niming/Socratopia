@@ -1,0 +1,45 @@
+{
+  "title": "make_unique 与 make_unique_for_overwrite 的初始化差异",
+  "definition": "`make_unique()` 使用值初始化：基本类型会初始化为零，对象会进行默认构造。C++20 引入的 `make_unique_for_overwrite()` 使用默认初始化；对于基本类型，这意味着不进行初始化，内存中的原有内容会保留，因此读取这些值前必须先写入有效值。",
+  "key_points": [
+    "`make_unique<T>()` 对基本类型执行值初始化，例如动态分配的 int 会初始化为 0。",
+    "`make_unique<T>()` 对对象执行默认构造。",
+    "`make_unique_for_overwrite<T>()` 适用于不需要值初始化且对性能有严格要求的场景。",
+    "对于基本类型，`make_unique_for_overwrite()` 产生的对象可能包含未初始化值。",
+    "未初始化数据容易造成错误，应谨慎使用 make_unique_for_overwrite。"
+  ],
+  "examples": [
+    "值初始化：`auto p { std::make_unique<int>() };`，其中的 int 初始化为 0。",
+    "C++20 默认初始化：`auto p { std::make_unique_for_overwrite<int>() };`，其中的 int 未初始化，使用前必须先赋值。"
+  ],
+  "misconceptions": [
+    "默认初始化不等于初始化为 0；对基本类型而言，默认初始化可能是不初始化。",
+    "`make_unique_for_overwrite()` 不是一般情况下替代 make_unique 的默认选择。",
+    "对类类型使用默认初始化仍会进行默认构造，但基本类型可能没有初始值。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "make_unique 和 make_unique_for_overwrite 对 int 的初始化有什么区别？",
+      "a": "make_unique 会进行值初始化，使 int 为 0；make_unique_for_overwrite 使用默认初始化，int 不会被初始化。"
+    },
+    {
+      "q": "为什么使用 make_unique_for_overwrite 后必须谨慎？",
+      "a": "因为基本类型可能未初始化，直接读取其值会使用无效或不确定的数据。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "使用 make_unique 创建 unique_ptr"
+  ],
+  "source_pages": [
+    219,
+    220
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "462_make_unique_与_make_unique_for_overwrite_",
+  "_chunk_pages": [
+    217,
+    220
+  ]
+}

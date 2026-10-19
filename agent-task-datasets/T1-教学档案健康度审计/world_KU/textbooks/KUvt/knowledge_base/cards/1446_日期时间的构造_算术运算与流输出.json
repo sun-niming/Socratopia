@@ -1,0 +1,50 @@
+{
+  "title": "日期时间的构造、算术运算与流输出",
+  "definition": "可以用`sys_days`和小时、分钟、秒等持续时间组合出完整的日期时间，也可以对时间点加上`days`、`years`等持续时间进行日期算术。日期对象可以通过插入运算符写入输出流；如果`year_month_day`表示无效日期，输出时会发生错误，教材说明会在无效日期后追加`is not a valid date`字符串。",
+  "key_points": [
+    "完整日期时间可以写成：`sys_days{2020y / June / 22d} + 9h + 35min + 10s`。",
+    "时间点支持加法，例如加上`days{5}`表示增加5天，加上`years{1}`表示增加1年。",
+    "可以使用`cout << yearmonthday << endl;`输出日期。",
+    "无效日期写入流时会报告错误，并追加`is not a valid date`。"
+  ],
+  "examples": [
+    "`auto t2{sys_days{2020y / June / 22d} + 9h + 35min + 10s};`表示`2020-06-22 09:35:10`。",
+    "`auto t3{t2 + days{5}};`表示在`t2`基础上增加5天。",
+    "`auto t4{t3 + years{1}};`表示在`t3`基础上增加1年。",
+    "`cout << yearmonthday << endl;`"
+  ],
+  "misconceptions": [
+    "`days{5}`表示增加一个持续时间，不是把日期的“日字段”简单改成原值加5；跨月、跨年时应由日期时间库处理。",
+    "能构造出`year_month_day`对象不代表日期一定有效；无效日期在输出时会被识别。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何构造`2020-06-22 09:35:10`这一完整时间？",
+      "a": "使用`sys_days{2020y / June / 22d} + 9h + 35min + 10s`。"
+    },
+    {
+      "q": "如何把一个时间点增加5天和1年？",
+      "a": "分别使用`t2 + days{5}`和前一步结果加上`years{1}`。"
+    },
+    {
+      "q": "输出无效`year_month_day`时会发生什么？",
+      "a": "输出会发生错误，教材说明会在无效日期后追加`is not a valid date`。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "sys_days与year_month_day之间的转换",
+    "std::chrono持续时间"
+  ],
+  "source_pages": [
+    693,
+    693
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1446_日期时间的构造_算术运算与流输出",
+  "_chunk_pages": [
+    693,
+    696
+  ]
+}

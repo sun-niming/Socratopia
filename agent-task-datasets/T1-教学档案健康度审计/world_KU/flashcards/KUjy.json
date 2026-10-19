@@ -1,0 +1,1415 @@
+{
+  "textbookId": "KUjy",
+  "updatedAt": "2026-07-10T03:56:47.142Z",
+  "cards": [
+    {
+      "id": "fc_1782898912556_000_6b21806a2833",
+      "question": "多个进程之间通过传递消息来交换数据、表达信息，这对应操作系统的哪一项功能？",
+      "choices": [
+        "进程同步",
+        "进程控制",
+        "进程通信",
+        "进程调度"
+      ],
+      "correctIndex": 2,
+      "explanation": "“信息交换”本质上是把一个进程的数据或消息传给另一个进程，因此属于进程通信，而不是进程同步。同步强调的是进程之间按规则协调执行顺序，避免争用和步调混乱。",
+      "source": {
+        "textbook": "《操作系统》完整讲义",
+        "chapter": "",
+        "textbookSlug": "KUjy"
+      },
+      "created": "2026-07-01T09:41:52.556Z",
+      "conversationId": "lx74RaXh-dCAIDSU8OWJS",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-07-01T09:41:59.134Z",
+          "chosen": 2,
+          "correct": true
+        },
+        {
+          "time": "2026-07-03T00:39:22.084Z",
+          "chosen": 2,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-07-05T16:00:00.000Z",
+      "interval": 3,
+      "ease": 2.7,
+      "repetitions": 2
+    },
+    {
+      "id": "fc_1782898912557_001_3b14078bc355",
+      "question": "在存储器管理中，把逻辑地址转换为物理地址对应哪一项功能？",
+      "choices": [
+        "内存保护",
+        "内存分配",
+        "地址映射",
+        "内存扩充"
+      ],
+      "correctIndex": 2,
+      "explanation": "逻辑地址是程序看到的地址，物理地址是内存中的真实地址；把前者转换成后者，就是地址映射。它解决的是程序如何定位到实际内存单元的问题，而不是分配或保护本身。",
+      "source": {
+        "textbook": "《操作系统》完整讲义",
+        "chapter": "",
+        "textbookSlug": "KUjy"
+      },
+      "created": "2026-07-01T09:41:52.557Z",
+      "conversationId": "lx74RaXh-dCAIDSU8OWJS",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-07-01T09:42:06.033Z",
+          "chosen": 2,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-07-01T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1782898912557_002_d20b94ea1078",
+      "question": "模块化操作系统结构的一个主要缺点是什么？",
+      "choices": [
+        "因为所有模块都必须共享同一段内存，导致无法独立运行",
+        "开始设计时模块划分和接口规定不一定准确，装配成操作系统时可能有困难",
+        "由于层次太少，所以系统无法实现功能分离",
+        "会使系统只能用于单用户环境，无法支持并发"
+      ],
+      "correctIndex": 1,
+      "explanation": "模块化能提高可理解性和可维护性，但它在最初划分模块和规定接口时往往不够精确，后续把这些模块装配成完整系统时可能出现困难。也就是说，它的难点主要在“前期拆分”和“接口设计”。",
+      "source": {
+        "textbook": "《操作系统》完整讲义",
+        "chapter": "",
+        "textbookSlug": "KUjy"
+      },
+      "created": "2026-07-01T09:41:52.557Z",
+      "conversationId": "lx74RaXh-dCAIDSU8OWJS",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-07-01T09:42:18.625Z",
+          "chosen": 1,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-07-01T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1782898912557_003_73294d9563df",
+      "question": "分层式操作系统结构中，每一层遵循的基本原则是什么？",
+      "choices": [
+        "每一层只能使用其底层所提供的功能和服务",
+        "每一层都必须独立完成全部功能，不能依赖其他层",
+        "只有最底层可以调用上层服务，其他层不能交互",
+        "每一层可以直接调用任意更高层的服务以提高效率"
+      ],
+      "correctIndex": 0,
+      "explanation": "分层式结构要求上层只能使用其底层提供的功能和服务，不能越级调用更下层或更外层的实现细节。这样做便于验证和维护，但会带来额外的层间调用开销。",
+      "source": {
+        "textbook": "《操作系统》完整讲义",
+        "chapter": "",
+        "textbookSlug": "KUjy"
+      },
+      "created": "2026-07-01T09:41:52.557Z",
+      "conversationId": "lx74RaXh-dCAIDSU8OWJS",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-07-01T09:42:27.507Z",
+          "chosen": 0,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-07-01T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1782898912557_004_cfe46f06ac28",
+      "question": "系统为每个进程设置 PCB 的主要目的是什么？",
+      "choices": [
+        "把进程之间的消息自动加密",
+        "控制和管理进程",
+        "提高程序编译速度",
+        "让进程脱离操作系统独立运行"
+      ],
+      "correctIndex": 1,
+      "explanation": "PCB 是进程控制块，是操作系统管理进程时的核心数据结构。系统通过 PCB 记录和控制进程的状态、资源和调度信息，因此它的根本目的就是控制和管理进程。",
+      "source": {
+        "textbook": "《操作系统》完整讲义",
+        "chapter": "",
+        "textbookSlug": "KUjy"
+      },
+      "created": "2026-07-01T09:41:52.557Z",
+      "conversationId": "lx74RaXh-dCAIDSU8OWJS",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-07-01T09:42:43.222Z",
+          "chosen": 1,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-07-01T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1782958516516_000_4551439f57f4",
+      "question": "进程终止时，如果被终止进程正处于执行状态，系统应首先如何处理？",
+      "choices": [
+        "立即终止它的执行，并把调度标志置为真",
+        "先把它的PCB移入就绪队列，再由调度器决定是否继续运行",
+        "直接回收其全部资源，随后再判断是否需要重新调度",
+        "先将其状态改为阻塞，等待父进程统一处理"
+      ],
+      "correctIndex": 0,
+      "explanation": "教材强调，若该进程正在执行，就要先立即终止它的执行，并把调度标志置为真，这样系统后续才能重新进行调度。仅仅“标记结束”还不够，必须先打断当前执行。",
+      "source": {
+        "textbook": "《操作系统》完整讲义",
+        "chapter": "",
+        "textbookSlug": "KUjy"
+      },
+      "created": "2026-07-02T02:15:16.516Z",
+      "conversationId": "oLyXWtfoNGW_CzRhTUPZH",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-07-02T02:32:28.734Z",
+          "chosen": 0,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-07-02T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1782958516516_001_348b8961613e",
+      "question": "关于阻塞后的唤醒原语 wakeup，下面哪一项最符合教材中的处理顺序？",
+      "choices": [
+        "先恢复执行态，再检查事件是否真正完成",
+        "从阻塞队列移出，改为就绪态，再插入就绪队列",
+        "从就绪队列移出，改为执行态，直接恢复运行",
+        "从等待队列移出后直接进入阻塞态，等待再次唤醒"
+      ],
+      "correctIndex": 1,
+      "explanation": "wakeup 不是简单地“让它运行”，而是先把进程从对应阻塞队列移出，再把现行状态改为就绪，最后插入就绪队列。这样它只是具备了被调度的资格，还没有立刻占用 CPU。",
+      "source": {
+        "textbook": "《操作系统》完整讲义",
+        "chapter": "",
+        "textbookSlug": "KUjy"
+      },
+      "created": "2026-07-02T02:15:16.516Z",
+      "conversationId": "oLyXWtfoNGW_CzRhTUPZH",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-07-02T02:32:41.669Z",
+          "chosen": 1,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-07-02T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1782958516516_002_7a86fc330c41",
+      "question": "教材中对“间接相互制约关系”和“直接相互制约关系”的对应说明，哪一项是正确的？",
+      "choices": [
+        "间接相互制约关系对应同步，直接相互制约关系对应互斥",
+        "两者本质相同，只是前者发生在资源层面，后者发生在时间层面",
+        "间接相互制约关系只出现在单处理器系统，直接相互制约关系只出现在多处理器系统",
+        "间接相互制约关系对应互斥，直接相互制约关系对应同步"
+      ],
+      "correctIndex": 3,
+      "explanation": "间接相互制约关系是通过争用同一资源产生的，属于互斥；直接相互制约关系是进程之间需要配合先后次序，属于同步。关键区别在于是否通过共享资源发生冲突。",
+      "source": {
+        "textbook": "《操作系统》完整讲义",
+        "chapter": "",
+        "textbookSlug": "KUjy"
+      },
+      "created": "2026-07-02T02:15:16.516Z",
+      "conversationId": "oLyXWtfoNGW_CzRhTUPZH",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-07-02T02:32:58.673Z",
+          "chosen": 3,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-07-02T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1782958516516_003_725ac171293f",
+      "question": "下列哪一项最准确地描述了“临界区”？",
+      "choices": [
+        "进程中访问临界资源的那段代码",
+        "系统中所有必须由单个进程独占的硬件设备",
+        "进程从进入到退出的全部执行过程",
+        "多个进程同时访问共享变量的那一段时间"
+      ],
+      "correctIndex": 0,
+      "explanation": "临界区不是整个进程，而是进程中访问临界资源的那一段代码。也就是说，真正需要互斥控制的是访问共享资源的代码片段，而不是进程的全部行为。",
+      "source": {
+        "textbook": "《操作系统》完整讲义",
+        "chapter": "",
+        "textbookSlug": "KUjy"
+      },
+      "created": "2026-07-02T02:15:16.516Z",
+      "conversationId": "oLyXWtfoNGW_CzRhTUPZH",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-07-02T02:33:04.149Z",
+          "chosen": 0,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-07-02T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1782958516516_004_1f981bb03321",
+      "question": "关于信号量的 P 操作（wait），当执行后 $S<0$ 时，教材中的处理是什么？",
+      "choices": [
+        "进程继续执行，但资源申请失败会被记录下来",
+        "系统自动把 $S$ 重新设为 0，然后允许进程通过",
+        "进程阻塞，并进入该信号量对应的等待队列",
+        "进程立即进入就绪态，等待调度器重新分配资源"
+      ],
+      "correctIndex": 2,
+      "explanation": "P 操作的核心是先申请资源：若资源还够用，进程继续执行；若执行后 $S<0$，说明资源不足，进程不能继续，必须进入阻塞状态并等待对应的信号量队列。这样才能实现对临界资源的有序分配。",
+      "source": {
+        "textbook": "《操作系统》完整讲义",
+        "chapter": "",
+        "textbookSlug": "KUjy"
+      },
+      "created": "2026-07-02T02:15:16.516Z",
+      "conversationId": "oLyXWtfoNGW_CzRhTUPZH",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-07-02T02:33:12.768Z",
+          "chosen": 2,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-07-02T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1783038806077_000_da0917b81767",
+      "question": "关于用户级线程（ULT）和内核支持线程（KST），下列哪一项最能体现两者在“阻塞”问题上的差异？",
+      "choices": [
+        "ULT中一个线程阻塞往往会使整个进程受阻，而KST中内核还能调度同进程的其他线程继续运行",
+        "KST中线程一旦阻塞，整个进程一定立即停止，不能再运行其他线程",
+        "ULT中一个线程阻塞时，内核仍可像KST一样直接改派同进程其他线程运行",
+        "ULT中线程阻塞不会影响进程，因为内核会自动识别并切换到其他线程"
+      ],
+      "correctIndex": 0,
+      "explanation": "纯用户级线程的管理发生在用户空间，内核看不见线程本身，所以一个线程发起阻塞系统调用时，往往会连带把整个进程堵住；而内核支持线程由内核直接感知和调度，一个线程阻塞后，内核通常还能让同进程的其他线程继续运行。",
+      "source": {
+        "textbook": "《操作系统》完整讲义",
+        "chapter": "",
+        "textbookSlug": "KUjy"
+      },
+      "created": "2026-07-03T00:33:26.077Z",
+      "conversationId": "4yZVLTvhtnAcdqLMFRXQd",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-07-03T00:39:00.197Z",
+          "chosen": 0,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-07-03T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1783038806078_001_16bb45bb1fe2",
+      "question": "在组合方式中，LWP（轻型进程）最准确的作用是什么？",
+      "choices": [
+        "作为内核线程的同义词，和内核支持线程没有区别",
+        "作为只保存线程局部数据的容器，不参与线程与内核的连接",
+        "作为用户级线程和内核支持之间的中间接口，把用户线程接到内核调度上",
+        "作为进程资源的唯一拥有者，负责替代进程管理全部资源"
+      ],
+      "correctIndex": 2,
+      "explanation": "LWP处在用户级线程和内核之间，承担连接作用。它既保留一定的用户层灵活性，又能借助内核支持把用户线程接入到内核调度体系中，因此更像“桥梁”或“中间接口”，而不是单纯的资源容器。",
+      "source": {
+        "textbook": "《操作系统》完整讲义",
+        "chapter": "",
+        "textbookSlug": "KUjy"
+      },
+      "created": "2026-07-03T00:33:26.078Z",
+      "conversationId": "4yZVLTvhtnAcdqLMFRXQd",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-07-03T00:39:04.313Z",
+          "chosen": 2,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-07-03T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1783038806078_002_4495255ef3f3",
+      "question": "线程创建时通常需要提供入口指针和堆栈大小，这两个参数最主要分别解决了什么问题？",
+      "choices": [
+        "入口指针决定线程标识符，堆栈大小决定是否可以被终止",
+        "入口指针决定从哪里开始执行，堆栈大小决定运行时可用的栈空间",
+        "入口指针决定线程优先级，堆栈大小决定线程所属进程",
+        "入口指针用于保存局部变量，堆栈大小用于指定CPU个数"
+      ],
+      "correctIndex": 1,
+      "explanation": "入口指针决定线程从哪里开始执行，相当于起跑点；堆栈大小决定运行时可用的栈空间大小，用来保存调用现场、局部变量和返回地址。如果没有这两个信息，线程就很难被正确启动并稳定运行。",
+      "source": {
+        "textbook": "《操作系统》完整讲义",
+        "chapter": "",
+        "textbookSlug": "KUjy"
+      },
+      "created": "2026-07-03T00:33:26.078Z",
+      "conversationId": "4yZVLTvhtnAcdqLMFRXQd",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-07-03T00:39:09.005Z",
+          "chosen": 1,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-07-03T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1783038806078_003_9ff2d6be2b84",
+      "question": "在请求分页系统的调度设计中，为什么“缺页调入完成后的进程”通常要进入高优先就绪队列？",
+      "choices": [
+        "为了尽快恢复因缺页而中断的执行，尽量减少缺页对执行速度的影响",
+        "为了专门提高外部设备利用率，所以必须放到最低优先队列",
+        "为了让它更晚获得CPU，从而避免再次缺页",
+        "为了让它立刻占用所有CPU资源，防止其他进程运行"
+      ],
+      "correctIndex": 0,
+      "explanation": "缺页会直接打断进程连续执行。页面调入后，尽快让它继续运行可以减少缺页带来的停顿和性能损失，所以应把它放入更高优先级的就绪队列，优先获得CPU。",
+      "source": {
+        "textbook": "《操作系统》完整讲义",
+        "chapter": "",
+        "textbookSlug": "KUjy"
+      },
+      "created": "2026-07-03T00:33:26.078Z",
+      "conversationId": "4yZVLTvhtnAcdqLMFRXQd",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-07-03T00:39:13.976Z",
+          "chosen": 0,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-07-03T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1783074508494_000_d32b56e494ee",
+      "question": "下列关于“可重用性资源”和“可消耗性资源”的说法，哪一项最准确？",
+      "choices": [
+        "可重用性资源只能请求、使用、释放；可消耗性资源是在运行中创建并被消耗掉，使用后不再返回资源池",
+        "两者本质上没有区别，只是前者名称偏向硬件，后者名称偏向软件",
+        "可重用性资源会被进程创建和消耗；可消耗性资源只能请求和释放",
+        "两者的区别主要在于可重用性资源可以并发抢占，而可消耗性资源不能"
+      ],
+      "correctIndex": 0,
+      "explanation": "可重用性资源的特点是进程只能请求、使用并释放，用完后还能继续供其他进程使用；可消耗性资源则是在运行中被创建并消耗，使用后不会再返回资源池。二者的关键区别不在于“是否删除”，而在于资源是否会被反复复用。",
+      "source": {
+        "textbook": "《操作系统》完整讲义",
+        "chapter": "",
+        "textbookSlug": "KUjy"
+      },
+      "created": "2026-07-03T10:28:28.494Z",
+      "conversationId": "J37bjGaKfe6ZXM2jVPIBL",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-07-03T10:28:36.161Z",
+          "chosen": 0,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-07-03T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1783074508494_001_9dac9d097455",
+      "question": "教材中对死锁的定义，最核心强调的是哪种等待关系？",
+      "choices": [
+        "系统中可利用资源数少于请求资源数，导致所有进程全部阻塞",
+        "进程等待某种不可抢占资源时，就一定形成死锁",
+        "一组进程中的每一个进程都在等待另一个死锁进程所占有的资源",
+        "一个进程长时间等待资源但最终仍可能自行恢复的状态"
+      ],
+      "correctIndex": 2,
+      "explanation": "死锁不是简单地“系统资源不足”，而是指一组进程中的每一个进程都在等待另一个死锁进程所占有的资源。也就是说，它强调的是进程之间的互相等待，而不是单向等待。",
+      "source": {
+        "textbook": "《操作系统》完整讲义",
+        "chapter": "",
+        "textbookSlug": "KUjy"
+      },
+      "created": "2026-07-03T10:28:28.494Z",
+      "conversationId": "J37bjGaKfe6ZXM2jVPIBL",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-07-03T10:28:41.599Z",
+          "chosen": 2,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-07-03T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1783074508494_002_3486ae37559a",
+      "question": "“对系统所有资源类型进行线性排序，并赋予不同序号”主要是为了破坏死锁的哪个必要条件？",
+      "choices": [
+        "请求和保持条件",
+        "环路等待条件",
+        "互斥条件",
+        "不剥夺条件"
+      ],
+      "correctIndex": 1,
+      "explanation": "对资源编号并要求进程按固定顺序申请资源，可以避免进程形成“你等我、我等你”的循环等待链。因此，这种做法针对的是环路等待条件，而不是互斥或不剥夺条件。",
+      "source": {
+        "textbook": "《操作系统》完整讲义",
+        "chapter": "",
+        "textbookSlug": "KUjy"
+      },
+      "created": "2026-07-03T10:28:28.494Z",
+      "conversationId": "J37bjGaKfe6ZXM2jVPIBL",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-07-03T10:28:47.295Z",
+          "chosen": 1,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-07-03T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1783074508495_003_3abccf4748fd",
+      "question": "在银行家算法中，如果某进程的请求向量 Request_i[j] 大于 Need[i,j]，系统应如何处理？",
+      "choices": [
+        "先试探分配，再看是否能找到安全序列",
+        "直接判错，因为该请求超过了进程声明的最大需求",
+        "回收该进程已分配的全部资源后继续执行",
+        "让进程等待，直到系统资源足够为止"
+      ],
+      "correctIndex": 1,
+      "explanation": "Need 表示进程尚需的最大剩余资源量。如果请求已经超过 Need，说明该进程提出了超过其声明最大需求的非法请求，系统应直接判错，而不是进入试探分配或等待流程。",
+      "source": {
+        "textbook": "《操作系统》完整讲义",
+        "chapter": "",
+        "textbookSlug": "KUjy"
+      },
+      "created": "2026-07-03T10:28:28.495Z",
+      "conversationId": "J37bjGaKfe6ZXM2jVPIBL",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-07-03T10:28:55.921Z",
+          "chosen": 1,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-07-03T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1783074508495_004_e228c52d9a65",
+      "question": "银行家算法中，“安全状态”最准确的含义是什么？",
+      "choices": [
+        "系统当前没有任何进程被阻塞",
+        "系统中每类资源的剩余数量都大于零",
+        "系统能找到一个安全序列，使每个进程都能顺利完成",
+        "任意进程请求资源时都可以立即得到满足"
+      ],
+      "correctIndex": 2,
+      "explanation": "安全状态并不是指资源一定很多，而是指系统能找到一个安全序列，使进程能按某种顺序依次获得所需资源并最终全部完成。若找不到这样的序列，则系统处于不安全状态。",
+      "source": {
+        "textbook": "《操作系统》完整讲义",
+        "chapter": "",
+        "textbookSlug": "KUjy"
+      },
+      "created": "2026-07-03T10:28:28.495Z",
+      "conversationId": "J37bjGaKfe6ZXM2jVPIBL",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-07-03T10:29:01.048Z",
+          "chosen": 2,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-07-03T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1783226336317_000_5372f14a93ba",
+      "question": "动态分区回收时，如果回收区同时与上、下两个空闲区都相邻，系统通常如何处理？",
+      "choices": [
+        "把回收区单独作为一个新的空闲分区插入空闲表",
+        "把回收区与上下两个空闲区合并成一个更大的连续空闲区",
+        "先把回收区拆成两半，分别并入上下两个空闲区",
+        "只与上面的空闲区合并，下面的空闲区仍保持不变"
+      ],
+      "correctIndex": 1,
+      "explanation": "这时不能把回收区单独挂回空闲表，而是应把它与上下两个相邻空闲区合并，形成一个更大的连续空闲区。这样才能减少碎片，并保持空闲区管理的有效性。",
+      "source": {
+        "textbook": "《操作系统》完整讲义",
+        "chapter": "",
+        "textbookSlug": "KUjy"
+      },
+      "created": "2026-07-05T04:38:56.317Z",
+      "conversationId": "ic79mYH3MUDVsp7FzA-mR",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-07-05T04:40:38.202Z",
+          "chosen": 1,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-07-05T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1783226336318_001_3fe0b63d8643",
+      "question": "为什么教材说“紧凑”要依赖动态重定位支持？",
+      "choices": [
+        "因为紧凑会改变进程在内存中的位置，而程序必须在运行时通过重定位寄存器重新换算地址",
+        "因为紧凑只能在文件系统支持下进行，和地址无关",
+        "因为紧凑要求程序提前把所有地址改成绝对地址",
+        "因为紧凑只会改变空闲区的位置，不会影响进程地址"
+      ],
+      "correctIndex": 0,
+      "explanation": "因为紧凑会改变进程在内存中的实际位置，程序如果使用固定物理地址就会失效。动态重定位允许程序用相对地址运行，并在访问内存时由重定位寄存器重新换算实际地址。",
+      "source": {
+        "textbook": "《操作系统》完整讲义",
+        "chapter": "",
+        "textbookSlug": "KUjy"
+      },
+      "created": "2026-07-05T04:38:56.318Z",
+      "conversationId": "ic79mYH3MUDVsp7FzA-mR",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-07-05T04:40:43.577Z",
+          "chosen": 0,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-07-05T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1783226336318_002_083799442efc",
+      "question": "动态重定位中，程序内部保存和使用的通常是哪种地址？",
+      "choices": [
+        "物理地址",
+        "磁盘地址",
+        "相对地址",
+        "页框号"
+      ],
+      "correctIndex": 2,
+      "explanation": "动态重定位的核心是程序不依赖固定物理位置，而是先用相对地址表示访问位置，运行时再由重定位寄存器转换成实际地址。因此程序内部保存的是相对地址。",
+      "source": {
+        "textbook": "《操作系统》完整讲义",
+        "chapter": "",
+        "textbookSlug": "KUjy"
+      },
+      "created": "2026-07-05T04:38:56.318Z",
+      "conversationId": "ic79mYH3MUDVsp7FzA-mR",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-07-05T04:40:50.807Z",
+          "chosen": 2,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-07-05T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1783226336318_003_7c667ad698bb",
+      "question": "在空闲区按大小从小到大寻找、优先使用能满足请求且最小的分区，这对应哪种算法？",
+      "choices": [
+        "首次适应算法",
+        "最坏适应算法",
+        "循环首次适应算法",
+        "最佳适应算法"
+      ],
+      "correctIndex": 3,
+      "explanation": "这是最佳适应算法的典型特征：在所有能够满足请求的空闲区中，选择最小的那一个。它的目标是尽量减少分配后留下的剩余空间，但也可能导致更细碎的空闲块。",
+      "source": {
+        "textbook": "《操作系统》完整讲义",
+        "chapter": "",
+        "textbookSlug": "KUjy"
+      },
+      "created": "2026-07-05T04:38:56.318Z",
+      "conversationId": "ic79mYH3MUDVsp7FzA-mR",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-07-05T04:41:00.534Z",
+          "chosen": 3,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-07-05T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1783226336318_004_f36a373008fa",
+      "question": "分页存储管理中，最后一页常出现页内碎片，根本原因是什么？",
+      "choices": [
+        "因为页内碎片是由磁盘读写速度不一致直接造成的",
+        "因为分页存储一定会把进程切成不连续的多个物理块",
+        "页表项大小固定，而进程控制块大小不固定",
+        "页大小固定，而进程地址空间大小通常不能刚好整除页大小"
+      ],
+      "correctIndex": 3,
+      "explanation": "分页时页大小是固定的，而进程的逻辑空间大小通常不能刚好被页大小整除，所以最后一页往往装不满，从而产生页内碎片。这种碎片位于已经分配出去的页内部，紧凑也无法消除。",
+      "source": {
+        "textbook": "《操作系统》完整讲义",
+        "chapter": "",
+        "textbookSlug": "KUjy"
+      },
+      "created": "2026-07-05T04:38:56.318Z",
+      "conversationId": "ic79mYH3MUDVsp7FzA-mR",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-07-05T04:41:20.266Z",
+          "chosen": 3,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-07-05T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1783332703717_000_644c562fe80a",
+      "question": "在分段系统中，逻辑地址写成 $[s][w]$ 的根本原因是什么？",
+      "choices": [
+        "因为段和页一样都是固定大小的，所以只需要段号和页内位移就能直接计算物理地址",
+        "因为 $[s][w]$ 中的 $s$ 只是用来表示进程号，$w$ 才是唯一真正参与地址变换的部分",
+        "因为分段系统规定所有段都必须先转换成页，再由页号映射到物理块",
+        "因为段按逻辑功能划分且长度不固定，必须先用段号查段表得到段基址和段长，再结合段内位移进行检查和变换"
+      ],
+      "correctIndex": 3,
+      "explanation": "分段按逻辑功能划分，段长不固定，所以必须先用段号 $s$ 查段表，得到该段的基址和段长，再用段内位移 $w$ 做越界检查并完成地址变换。它不是像分页那样依赖固定大小的页。",
+      "source": {
+        "textbook": "《操作系统》完整讲义",
+        "chapter": "",
+        "textbookSlug": "KUjy"
+      },
+      "created": "2026-07-06T10:11:43.717Z",
+      "conversationId": "uLXaxP-jrS_JND4me5rLJ",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-07-06T10:13:05.056Z",
+          "chosen": 3,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-07-06T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1783332703717_001_6cf77e505605",
+      "question": "如果段在内存中，但对该段的访问方式不允许，比如只读段被写入，系统会触发什么中断？",
+      "choices": [
+        "页面故障中断",
+        "分段保护中断",
+        "分段越界中断",
+        "缺段中断"
+      ],
+      "correctIndex": 1,
+      "explanation": "这类错误不是因为段不在内存里，而是因为访问权限不合法，因此应触发分段保护中断。缺段中断对应的是段不在主存，越界中断对应的是段内位移超过段长。",
+      "source": {
+        "textbook": "《操作系统》完整讲义",
+        "chapter": "",
+        "textbookSlug": "KUjy"
+      },
+      "created": "2026-07-06T10:11:43.717Z",
+      "conversationId": "uLXaxP-jrS_JND4me5rLJ",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-07-06T10:13:12.092Z",
+          "chosen": 1,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-07-06T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1783332703717_002_7556f4de37a7",
+      "question": "在共享段回收过程中，如果共享计数 `count` 减到 $0$，系统应如何处理？",
+      "choices": [
+        "只把 `count` 重置为 1，避免共享段过早失效",
+        "只删除当前进程段表中的记录，物理内存继续保留等待下次直接复用",
+        "回收该共享段占用的物理内存，并删除共享段表中的对应表项",
+        "立即触发缺段中断，让下一个进程重新从外存调入该共享段"
+      ],
+      "correctIndex": 2,
+      "explanation": "`count` 表示当前还有多少进程在使用该共享段。只有当它减到 $0$ 时，才说明没有进程再使用它，系统需要回收该共享段占用的物理内存，并删除共享段表中的对应表项。",
+      "source": {
+        "textbook": "《操作系统》完整讲义",
+        "chapter": "",
+        "textbookSlug": "KUjy"
+      },
+      "created": "2026-07-06T10:11:43.717Z",
+      "conversationId": "uLXaxP-jrS_JND4me5rLJ",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-07-06T10:13:19.405Z",
+          "chosen": 2,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-07-06T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1783332703717_003_7b8ddf482f73",
+      "question": "I/O 系统的六项基本功能中，哪一项最符合“让上层程序不用直接面对设备实现细节”的含义？",
+      "choices": [
+        "对 I/O 设备进行控制",
+        "尽可能让处理机和 I/O 设备并行工作，以提高利用率",
+        "隐藏物理设备的细节",
+        "确保对设备的正确共享"
+      ],
+      "correctIndex": 2,
+      "explanation": "这描述的是把底层硬件差异屏蔽起来，让上层看到统一、简化的接口，也就是隐藏物理设备的细节。它强调的是抽象和屏蔽，而不是单纯提高速度或处理错误。",
+      "source": {
+        "textbook": "《操作系统》完整讲义",
+        "chapter": "",
+        "textbookSlug": "KUjy"
+      },
+      "created": "2026-07-06T10:11:43.717Z",
+      "conversationId": "uLXaxP-jrS_JND4me5rLJ",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-07-06T10:13:24.001Z",
+          "chosen": 2,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-07-06T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1783332703717_004_dd5b0ef509a6",
+      "question": "下列关于 I/O 接口与设备类型的对应关系，哪一项是正确的？",
+      "choices": [
+        "块设备接口主要面向键盘和打印机等按字符顺序工作的设备",
+        "网络通信接口主要用于把磁盘的二维结构映射成逻辑块号",
+        "流设备接口又称字符设备接口",
+        "流设备接口的基本操作通常是寻道和旋转延迟控制"
+      ],
+      "correctIndex": 2,
+      "explanation": "教材将 I/O 接口按设备类型分为块设备接口、流设备接口和网络通信接口。其中流设备接口又叫字符设备接口，块设备接口主要面向磁盘等块设备，并会隐藏磁盘的二维结构。",
+      "source": {
+        "textbook": "《操作系统》完整讲义",
+        "chapter": "",
+        "textbookSlug": "KUjy"
+      },
+      "created": "2026-07-06T10:11:43.717Z",
+      "conversationId": "uLXaxP-jrS_JND4me5rLJ",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-07-06T10:13:41.809Z",
+          "chosen": 2,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-07-06T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1783575395879_000_2ab48cec7167",
+      "question": "为什么教材把程序 I/O 方式称为“忙-等待方式”？",
+      "choices": [
+        "CPU 需要不断轮询设备状态，直到设备准备好才能继续执行",
+        "CPU 先发出请求后就可以立刻去执行别的程序，不必再关注设备",
+        "设备会自动把数据缓存起来，CPU 只需在结束时检查一次",
+        "忙等待的含义是 CPU 和设备同时并行工作，但 CPU 仍然保持空闲"
+      ],
+      "correctIndex": 0,
+      "explanation": "因为 CPU 在这种方式下要不断循环测试设备状态，直到设备就绪为止，期间不能去做别的事情。它的核心特征不是“传输慢”，而是“CPU 一直被占着等”。",
+      "source": {
+        "textbook": "《操作系统》完整讲义",
+        "chapter": "",
+        "textbookSlug": "KUjy"
+      },
+      "created": "2026-07-09T05:36:35.879Z",
+      "conversationId": "XYvjKOCYyX90ch8XfSZ3l",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-07-09T05:36:52.894Z",
+          "chosen": 0,
+          "correct": true
+        },
+        {
+          "time": "2026-07-09T05:37:27.600Z",
+          "chosen": 0,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-07-11T16:00:00.000Z",
+      "interval": 3,
+      "ease": 2.7,
+      "repetitions": 2
+    },
+    {
+      "id": "fc_1783575395879_001_e2e87d1e3bdd",
+      "question": "中断驱动 I/O 方式相比程序 I/O 方式，最能体现其优势的描述是哪一项？",
+      "choices": [
+        "设备每传送一个字节都必须打断 CPU，因此 CPU 几乎没有空闲时间",
+        "中断驱动 I/O 的本质是把所有传输都改成由 CPU 直接搬运数据",
+        "CPU 可以先去执行别的任务，等设备完成后再通过中断回来处理",
+        "CPU 必须持续查询设备状态，这样才能保证数据不会丢失"
+      ],
+      "correctIndex": 2,
+      "explanation": "中断驱动 I/O 的关键是 CPU 不必一直等待设备完成，而是可以和 I/O 设备并行推进。设备就绪后再通过中断通知 CPU 回来处理，从而减少忙等。",
+      "source": {
+        "textbook": "《操作系统》完整讲义",
+        "chapter": "",
+        "textbookSlug": "KUjy"
+      },
+      "created": "2026-07-09T05:36:35.879Z",
+      "conversationId": "XYvjKOCYyX90ch8XfSZ3l",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-07-09T05:37:20.353Z",
+          "chosen": 3,
+          "correct": false
+        },
+        {
+          "time": "2026-07-09T05:37:29.814Z",
+          "chosen": 2,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-07-09T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.4,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1783575395879_002_10ff314a4162",
+      "question": "关于 DMA 方式，下列哪一项最准确地说明了它为什么比中断驱动 I/O 对 CPU 的干预更少？",
+      "choices": [
+        "它必须先把所有数据复制到控制器缓冲区，再统一由 CPU 写入内存",
+        "它要求 CPU 为每个字节都发出一次中断，因此比程序 I/O 更省事",
+        "它的主要特点是设备和 CPU 交替独占存储器，彼此不能并发",
+        "它以数据块为单位直接在设备和内存之间交换数据，CPU 只在开始和结束时介入"
+      ],
+      "correctIndex": 3,
+      "explanation": "DMA 以数据块为单位，数据可以直接在设备和内存之间交换，CPU 主要只负责开始前的参数设置和结束后的中断处理，而不需要按每个字节或字逐个介入。",
+      "source": {
+        "textbook": "《操作系统》完整讲义",
+        "chapter": "",
+        "textbookSlug": "KUjy"
+      },
+      "created": "2026-07-09T05:36:35.879Z",
+      "conversationId": "XYvjKOCYyX90ch8XfSZ3l",
+      "status": "deleted",
+      "history": [
+        {
+          "time": "2026-07-09T05:37:45.566Z",
+          "chosen": 3,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-07-09T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1783575395879_003_8f7221ec3401",
+      "question": "DMA 控制器中，哪个寄存器负责记录本次传送的数据字数，并且会在每传送一个字后减 1？",
+      "choices": [
+        "控制状态寄存器 CSR",
+        "数据寄存器 DR",
+        "内存地址寄存器 MAR",
+        "数据计数器 DC"
+      ],
+      "correctIndex": 3,
+      "explanation": "数据计数器 DC 用来记录本次 DMA 传送还剩多少个字（节）。每完成一个字的传送，它就减 1，减到 0 时表示这次块传送接近结束。",
+      "source": {
+        "textbook": "《操作系统》完整讲义",
+        "chapter": "",
+        "textbookSlug": "KUjy"
+      },
+      "created": "2026-07-09T05:36:35.879Z",
+      "conversationId": "XYvjKOCYyX90ch8XfSZ3l",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-07-09T05:38:00.934Z",
+          "chosen": 3,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-07-09T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1783575395879_004_b619fa6459b8",
+      "question": "在设备分配的相关表中，哪一张表主要记录设备类型、设备标识符、设备状态、指向控制器表的指针以及设备队列的队首指针？",
+      "choices": [
+        "逻辑设备表 LUT",
+        "控制器表 COCT",
+        "通道表 CHCT",
+        "设备控制表 DCT"
+      ],
+      "correctIndex": 3,
+      "explanation": "这些信息描述的是“具体设备”本身的属性和排队情况，因此应当记录在设备控制表 DCT 中。控制器信息属于 COCT，通道信息属于 CHCT。",
+      "source": {
+        "textbook": "《操作系统》完整讲义",
+        "chapter": "",
+        "textbookSlug": "KUjy"
+      },
+      "created": "2026-07-09T05:36:35.879Z",
+      "conversationId": "XYvjKOCYyX90ch8XfSZ3l",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-07-09T05:38:14.360Z",
+          "chosen": 3,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-07-09T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1783649406394_000_3d1b5f6342a4",
+      "question": "某文件由大量长度不一的程序代码组成，系统需要通过记录前面的长度信息来确定下一条记录的位置。该文件更适合归为哪一类？",
+      "choices": [
+        "索引顺序文件",
+        "有结构文件，也称记录式文件",
+        "无结构文件，也称流式文件",
+        "直接文件"
+      ],
+      "correctIndex": 2,
+      "explanation": "源程序、可执行文件和库函数通常按连续字符流组织，属于无结构文件，也称流式文件；有结构文件则通常按记录组织。",
+      "source": {
+        "textbook": "《操作系统》完整讲义",
+        "chapter": "",
+        "textbookSlug": "KUjy"
+      },
+      "created": "2026-07-10T02:10:06.394Z",
+      "conversationId": "dZWk1YEnMCeS4wo09c2ef",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-07-10T02:11:18.534Z",
+          "chosen": 0,
+          "correct": false
+        },
+        {
+          "time": "2026-07-10T02:11:38.060Z",
+          "chosen": 2,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-07-10T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.4,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1783649406395_001_9908ebff4749",
+      "question": "在一级索引顺序文件中，为什么通常只为每组的第一条记录建立索引项，而不是为每条记录都建立索引项？",
+      "choices": [
+        "为了保证每组中的记录长度都相同",
+        "先定位分组，再在组内顺序查找，以减少索引表规模",
+        "因为只有每组第一条记录才有物理地址",
+        "因为组内记录不能按关键字排序，只能顺序查找"
+      ],
+      "correctIndex": 1,
+      "explanation": "组首索引可以先快速定位目标记录所在的分组，再在组内顺序查找，从而在索引规模和查找效率之间取得平衡。",
+      "source": {
+        "textbook": "《操作系统》完整讲义",
+        "chapter": "",
+        "textbookSlug": "KUjy"
+      },
+      "created": "2026-07-10T02:10:06.395Z",
+      "conversationId": "dZWk1YEnMCeS4wo09c2ef",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-07-10T02:11:35.834Z",
+          "chosen": 1,
+          "correct": true
+        },
+        {
+          "time": "2026-07-10T02:11:48.605Z",
+          "chosen": 1,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-07-12T16:00:00.000Z",
+      "interval": 3,
+      "ease": 2.7,
+      "repetitions": 2
+    },
+    {
+      "id": "fc_1783649406395_002_9d50aebc5bc9",
+      "question": "某用户目录中的符号链接所指向的目标文件已被文件主删除。用户再次访问该符号链接时，最可能发生什么？",
+      "choices": [
+        "系统仍可通过符号链接直接访问原文件内容",
+        "符号链接会永久指向原索引结点，导致悬空指针",
+        "符号链接自动获得目标文件的全部属性并恢复文件",
+        "系统按路径名重新查找目标，因目标不存在而访问失败"
+      ],
+      "correctIndex": 3,
+      "explanation": "符号链接保存的是目标文件的路径名，而不是目标索引结点的直接指针；访问时系统会重新按路径查找，目标不存在就会访问失败，但不会形成悬空指针。",
+      "source": {
+        "textbook": "《操作系统》完整讲义",
+        "chapter": "",
+        "textbookSlug": "KUjy"
+      },
+      "created": "2026-07-10T02:10:06.395Z",
+      "conversationId": "dZWk1YEnMCeS4wo09c2ef",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-07-10T02:11:58.523Z",
+          "chosen": 3,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-07-10T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1783649406395_003_76cd700bb8a7",
+      "question": "一个进程在整个运行期间始终处于同一个保护域中，即使某些阶段只需要少量权限，它仍保有完整权限。这种静态联系的主要风险是什么？",
+      "choices": [
+        "进程只能通过文件名而不能通过物理地址访问对象",
+        "进程必须为每个对象建立一张独立的索引表",
+        "进程可能长期拥有超过当前任务实际需要的权限",
+        "进程无法访问任何文件或硬件对象"
+      ],
+      "correctIndex": 2,
+      "explanation": "静态联系使进程始终拥有同一组访问权，容易导致权限超过当前任务的实际需要；动态联系则可以按运行阶段切换保护域。",
+      "source": {
+        "textbook": "《操作系统》完整讲义",
+        "chapter": "",
+        "textbookSlug": "KUjy"
+      },
+      "created": "2026-07-10T02:10:06.395Z",
+      "conversationId": "dZWk1YEnMCeS4wo09c2ef",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-07-10T02:12:08.445Z",
+          "chosen": 2,
+          "correct": true
+        },
+        {
+          "time": "2026-07-10T02:12:27.492Z",
+          "chosen": 2,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-07-12T16:00:00.000Z",
+      "interval": 3,
+      "ease": 2.7,
+      "repetitions": 2
+    },
+    {
+      "id": "fc_1783649406395_004_a80deb5318a2",
+      "question": "系统管理员希望针对某个文件，列出不同保护域分别拥有的读、写或执行权限。按照访问矩阵的哪种方式实现最合适？",
+      "choices": [
+        "文件控制块（FCB），按用户目录划分",
+        "访问控制表（ACL），按保护域划分",
+        "访问权限表（Capabilities），按对象划分",
+        "访问控制表（ACL），按对象划分"
+      ],
+      "correctIndex": 3,
+      "explanation": "ACL 按访问矩阵的列、即对象划分，适合回答“谁能访问这个文件以及能做什么”；访问权限表则按行、即保护域划分。",
+      "source": {
+        "textbook": "《操作系统》完整讲义",
+        "chapter": "",
+        "textbookSlug": "KUjy"
+      },
+      "created": "2026-07-10T02:10:06.395Z",
+      "conversationId": "dZWk1YEnMCeS4wo09c2ef",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-07-10T02:12:21.873Z",
+          "chosen": 1,
+          "correct": false
+        },
+        {
+          "time": "2026-07-10T02:12:42.476Z",
+          "chosen": 3,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-07-10T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.4,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1783655720143_000_a07b07b130d7",
+      "question": "如果请求进程所需的数据已经位于磁盘高速缓存中，以下哪种说法正确地区分了“数据交付”和“指针交付”？",
+      "choices": [
+        "数据交付需要复制数据，指针交付直接提供缓存数据的位置",
+        "两者都必须把完整数据复制到请求进程的私有空间中，只是复制时机不同",
+        "指针交付会把数据从磁盘重新读取，而数据交付只访问内存缓存",
+        "数据交付是把磁盘数据读入缓存，指针交付是把缓存数据复制给进程"
+      ],
+      "correctIndex": 0,
+      "explanation": "数据交付会把缓存中的数据复制并传送给请求进程；指针交付则把数据在缓存中的位置交给进程，减少一次复制，但需要更严格地管理缓存数据的生命周期和访问权限。",
+      "source": {
+        "textbook": "《操作系统》完整讲义",
+        "chapter": "",
+        "textbookSlug": "KUjy"
+      },
+      "created": "2026-07-10T03:55:20.143Z",
+      "conversationId": "VECjfpYOyY33y4ExpC4_x",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-07-10T03:55:44.058Z",
+          "chosen": 1,
+          "correct": false
+        },
+        {
+          "time": "2026-07-10T03:55:48.412Z",
+          "chosen": 0,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-07-10T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.4,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1783655720143_001_8670ce28a67a",
+      "question": "某文件系统采用空闲表法，当前有一个空闲区为盘块 $10\\sim14$，现又释放了与其相邻的盘块 $15\\sim18$。此时最合理的处理方式是什么？",
+      "choices": [
+        "只保留较大的空闲区，删除另一个空闲区的记录",
+        "把 $10\\sim14$ 和 $15\\sim18$ 分别改写成两个单独的空闲盘块链",
+        "为 $15\\sim18$ 新建一个独立表项，不改变原有空闲区",
+        "将两个空闲区合并为一个 $10\\sim18$ 的空闲区"
+      ],
+      "correctIndex": 3,
+      "explanation": "空闲表法以连续空闲区为记录单位，相邻的空闲区应合并为一个更大的连续空闲区，以减少表项数量并便于后续连续分配。",
+      "source": {
+        "textbook": "《操作系统》完整讲义",
+        "chapter": "",
+        "textbookSlug": "KUjy"
+      },
+      "created": "2026-07-10T03:55:20.143Z",
+      "conversationId": "VECjfpYOyY33y4ExpC4_x",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-07-10T03:55:46.310Z",
+          "chosen": 3,
+          "correct": true
+        },
+        {
+          "time": "2026-07-10T03:56:05.522Z",
+          "chosen": 3,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-07-12T16:00:00.000Z",
+      "interval": 3,
+      "ease": 2.7,
+      "repetitions": 2
+    },
+    {
+      "id": "fc_1783655720143_002_7acc330a8fd3",
+      "question": "关于空闲盘块链和空闲盘区链，下列哪项最能说明为什么空闲盘区链通常较短？",
+      "choices": [
+        "空闲盘区链会自动把所有不相邻的空闲盘块合并成一个结点",
+        "空闲盘区链以连续空闲盘区为结点，一个结点可以表示多个盘块",
+        "空闲盘块链只能记录已分配盘块，所以空闲盘块结点数量通常更多",
+        "空闲盘区链不需要记录盘区大小，因此每个结点占用空间更小"
+      ],
+      "correctIndex": 1,
+      "explanation": "空闲盘块链把每个盘块分别作为结点，而空闲盘区链把一段连续的空闲盘块作为一个结点，因此后者能用较少结点表示相同数量的空闲空间。",
+      "source": {
+        "textbook": "《操作系统》完整讲义",
+        "chapter": "",
+        "textbookSlug": "KUjy"
+      },
+      "created": "2026-07-10T03:55:20.143Z",
+      "conversationId": "VECjfpYOyY33y4ExpC4_x",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-07-10T03:56:12.745Z",
+          "chosen": 1,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-07-10T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1783655720143_003_cd5f445dd805",
+      "question": "某事务已在系统故障前完成，但其修改结果尚未完全写入稳定存储器。根据 Log 进行恢复时，为什么应执行 $\\operatorname{redo}$ 而不是 $\\operatorname{undo}$？",
+      "choices": [
+        "事务已经完成，恢复时应根据 Log 中的新值补写其修改结果",
+        "事务已经完成，所以必须撤销所有修改，避免重复写入数据",
+        "只要数据尚未写入稳定存储器，就说明事务未完成，应执行 $\\operatorname{undo}$",
+        "执行 $\\operatorname{redo}$ 的目的只是恢复修改前的旧值，防止数据不一致"
+      ],
+      "correctIndex": 0,
+      "explanation": "已完成事务的修改结果应当保留；如果部分结果因故障未写入稳定存储器，就应根据 Log 中的新值重新写入，因此执行 $\\operatorname{redo}$。",
+      "source": {
+        "textbook": "《操作系统》完整讲义",
+        "chapter": "",
+        "textbookSlug": "KUjy"
+      },
+      "created": "2026-07-10T03:55:20.143Z",
+      "conversationId": "VECjfpYOyY33y4ExpC4_x",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-07-10T03:56:30.979Z",
+          "chosen": 0,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-07-10T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1783655720143_004_5c2b9aa2afba",
+      "question": "事务 $T_1$ 和 $T_2$ 都只读取同一个数据对象，而事务 $T_3$ 需要修改该对象。下列哪种锁关系符合共享锁和互斥锁的基本规则？",
+      "choices": [
+        "$T_1$ 和 $T_2$ 不能同时持有共享锁，所有访问都必须串行化",
+        "$T_3$ 可以直接获得互斥锁，因为写操作会自动覆盖共享锁",
+        "$T_1$ 和 $T_2$ 可同时持有共享锁，$T_3$ 必须等待它们释放后再获得互斥锁",
+        "$T_1$ 和 $T_2$ 持有共享锁时，$T_3$ 也可以获得共享锁并执行修改"
+      ],
+      "correctIndex": 2,
+      "explanation": "$T_1$ 和 $T_2$ 可以同时持有共享锁并发读取，但共享锁存在时禁止写入；$T_3$ 只有在所有共享锁释放后，才能获得互斥锁进行修改。",
+      "source": {
+        "textbook": "《操作系统》完整讲义",
+        "chapter": "",
+        "textbookSlug": "KUjy"
+      },
+      "created": "2026-07-10T03:55:20.143Z",
+      "conversationId": "VECjfpYOyY33y4ExpC4_x",
+      "status": "active",
+      "history": [
+        {
+          "time": "2026-07-10T03:56:47.140Z",
+          "chosen": 2,
+          "correct": true
+        }
+      ],
+      "nextReview": "2026-07-10T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    }
+  ]
+}

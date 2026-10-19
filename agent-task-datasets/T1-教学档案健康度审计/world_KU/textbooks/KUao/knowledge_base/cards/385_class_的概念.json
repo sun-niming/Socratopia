@@ -1,0 +1,44 @@
+{
+  "title": "class 的概念",
+  "definition": "在 ES6 中，class 是一种用于创建对象的模板或蓝图，用代码封装数据以便对其进行处理。JavaScript 中的 class 建立在原型之上，同时又提供了一些 class 独有的语法和语义。",
+  "key_points": [
+    "class 用于创建对象，可以理解为模板或蓝图。",
+    "class 的作用是封装数据并对其进行处理。",
+    "JavaScript 的 class 底层建立在原型机制之上。",
+    "class 还提供更简洁直观的语法，以及继承等面向对象特性。"
+  ],
+  "examples": [
+    "ES6 中的 class 可以用来定义对象模板。",
+    "class 是一种更简洁、直观的语法来定义对象。"
+  ],
+  "misconceptions": [
+    "误以为 class 完全脱离原型机制。",
+    "误以为 class 只是普通变量名或普通语法糖而没有对象创建作用。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "ES6 中的 class 是什么？",
+      "a": "class 是用于创建对象的模板或蓝图。"
+    },
+    {
+      "q": "JavaScript 的 class 底层依赖什么机制？",
+      "a": "建立在原型之上。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "对象",
+    "原型"
+  ],
+  "source_pages": [
+    289,
+    292
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "385_class_的概念",
+  "_chunk_pages": [
+    289,
+    292
+  ]
+}

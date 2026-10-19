@@ -1,0 +1,43 @@
+{
+  "title": "typedef 旧式类型别名",
+  "definition": "typedef 为现有类型声明提供一个新名称，功能上与 C++11 的 using 类型别名相同，但语法通常更复杂、可读性更低。由于 typedef 在 C++11 之前被广泛使用，因此阅读遗留代码时仍需要理解它。",
+  "key_points": [
+    "typedef 的基本形式是 typedef 原类型 别名;。",
+    "using IntPtr = int*; 可以改写为 typedef int* IntPtr;。",
+    "typedef 与 using 类型别名具有相同的类型语义：都不会创建新类型。",
+    "typedef 的声明顺序与 using 不同，复杂类型中通常更难阅读。"
+  ],
+  "examples": [
+    "using 写法：\nusing IntPtr = int*;\n\n等价的 typedef 写法：\ntypedef int* IntPtr;\n\n随后可以声明：\nIntPtr p;"
+  ],
+  "misconceptions": [
+    "typedef 不是创建新类型的机制，它只是为现有类型提供别名。",
+    "typedef 与 using 在类型别名功能上等价，主要差异是语法和可读性。",
+    "typedef 并非只能用于基本类型，也可以用于复杂类型，但复杂情况下可读性可能较差。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "typedef int* IntPtr; 与 using IntPtr = int*; 有什么关系？",
+      "a": "二者都为 int* 声明名为 IntPtr 的类型别名，功能和类型语义相同；前者是旧式 typedef 写法，后者是 C++11 引入的 using 写法。"
+    },
+    {
+      "q": "为什么现代 C++ 通常更推荐 using 类型别名？",
+      "a": "using 的语法更直观，尤其在复杂类型和模板类型中通常更容易阅读和管理。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "类型别名"
+  ],
+  "source_pages": [
+    88,
+    88
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "159_typedef_旧式类型别名",
+  "_chunk_pages": [
+    85,
+    88
+  ]
+}

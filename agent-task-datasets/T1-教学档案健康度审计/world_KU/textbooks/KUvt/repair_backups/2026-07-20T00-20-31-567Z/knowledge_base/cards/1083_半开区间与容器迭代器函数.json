@@ -1,0 +1,41 @@
+{
+  "title": "半开区间与容器迭代器函数",
+  "definition": "容器的 begin() 返回指向第一个元素的迭代器，end() 返回位于最后一个元素之后的迭代器。二者共同表示半开区间 $[\\text{begin},\\text{end})$：包含第一个元素，但不包含 end() 所表示的位置。空容器中 begin() 等于 end()。",
+  "key_points": [
+    "半开区间包含起点，不包含终点，即迭代范围满足 `iter != end`。",
+    "空区间可以统一表示为空容器，因为此时 begin() 等于 end()。",
+    "容器还提供 cbegin()、cend()、rbegin()、rend()、crbegin() 和 crend()，分别用于常量、反向以及常量反向遍历。"
+  ],
+  "examples": [
+    "正向只读范围：`[cbegin(values), cend(values))`。",
+    "遍历半开区间：`for (auto iter { begin(values) }; iter != end(values); ++iter) { cout << *iter; }`",
+    "空容器的范围满足：`begin(container) == end(container)`。"
+  ],
+  "misconceptions": [
+    "end() 不指向最后一个元素，而是指向最后一个元素之后的位置。",
+    "半开区间不表示遗漏了最后一个元素；最后一个有效元素位于 end() 的前一个位置。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么标准容器范围通常表示为 $[begin,end)$？",
+      "a": "因为这种表示既包含所有实际元素，又能自然表示空范围；空容器时 begin 等于 end。"
+    },
+    {
+      "q": "cend() 返回什么？",
+      "a": "它返回指向序列最后一个元素之后位置的常量迭代器。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [],
+  "source_pages": [
+    529,
+    529
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1083_半开区间与容器迭代器函数",
+  "_chunk_pages": [
+    529,
+    532
+  ]
+}

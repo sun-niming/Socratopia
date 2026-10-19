@@ -1,0 +1,41 @@
+{
+  "title": "BGP路由的组成与AS-PATH属性",
+  "definition": "在BGP中，前缀及其属性合称为一条路由。每条路由至少包含目的前缀、AS-PATH和NEXT-HOP三个组件。AS-PATH记录该前缀通告已经经过的自治系统（AS）列表；当前缀通过某个AS时，该AS会把自己的ASN加入已有的AS-PATH列表。",
+  "key_points": [
+    "例如，到前缀x的两条路由可以分别具有AS-PATH“AS2 AS3”和“AS3”。",
+    "路由器利用AS-PATH检测并防止通告环路：如果路由器在收到的路径列表中发现包含自己的AS，就拒绝该通告。",
+    "AS-PATH中的长度通常可按经过的AS跳数计算。"
+  ],
+  "examples": [
+    "从AS1到前缀x的两条路径可表示为：AS-PATH“AS2 AS3”和AS-PATH“AS3”。"
+  ],
+  "misconceptions": [
+    "AS-PATH记录的是经过的自治系统列表，不是逐台路由器的完整路径。",
+    "AS-PATH不是目的前缀本身，而是BGP路由的一个属性。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "BGP中的AS-PATH记录什么信息？",
+      "a": "它记录前缀通告已经经过的自治系统列表；每经过一个AS，该AS就把自己的ASN加入列表。"
+    },
+    {
+      "q": "BGP如何利用AS-PATH防止环路？",
+      "a": "如果路由器在收到的AS-PATH中发现自己的AS，就拒绝该路由通告。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "自治系统（AS）与BGP的基本概念"
+  ],
+  "source_pages": [
+    277,
+    280
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "619_bgp路由的组成与as_path属性",
+  "_chunk_pages": [
+    277,
+    280
+  ]
+}

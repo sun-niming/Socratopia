@@ -1,0 +1,52 @@
+{
+  "title": "Logger类的功能与日志过滤",
+  "definition": "Logger是ILogger的具体实现，用于将日志消息写入日志文件。它可以记录带有日志级别的字符串消息，按设置的级别过滤消息，并在写入后刷新输出，使日志立即出现在文件中。",
+  "key_points": [
+    "Logger通过构造函数接收日志文件名，并打开日志文件。",
+    "日志文件以追加方式打开，因此新的日志内容写到已有内容之后。",
+    "日志消息包含可读的日志级别前缀，例如ERROR、INFO或DEBUG。",
+    "Logger默认的日志级别是Error。",
+    "如果日志文件无法正常初始化，构造函数会抛出运行时异常。",
+    "Logger析构时会记录关闭信息并关闭输出流。",
+    "日志写入后使用换行刷新输出流，使内容立即写入文件。"
+  ],
+  "examples": [
+    "日志消息的输出形式可概括为：\n$$\\text{输出} = \\text{日志级别字符串} + \": \" + \\text{消息内容}$$\n例如：`INFO: User logged in`。",
+    "日志级别字符串映射为：\n$$\\text{Error}\\mapsto\\text{\"ERROR\"},\\quad \\text{Info}\\mapsto\\text{\"INFO\"},\\quad \\text{Debug}\\mapsto\\text{\"DEBUG\"}$$"
+  ],
+  "misconceptions": [
+    "日志级别既用于表示单条消息的级别，也用于设置过滤阈值；二者不是同一个参数。",
+    "Logger并不是把日志只保存在内存中；原文说明日志会被刷新到磁盘文件。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "Logger记录一条日志时，输出通常包含哪些内容？",
+      "a": "包含可读的日志级别前缀、冒号和消息内容，例如`INFO: User logged in`。"
+    },
+    {
+      "q": "如果日志文件无法打开，Logger构造函数如何处理？",
+      "a": "构造函数抛出运行时异常，表示Logger初始化失败。"
+    },
+    {
+      "q": "Logger默认的日志级别是什么？",
+      "a": "默认值是LogLevel::Error。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "文件输出流",
+    "枚举类",
+    "接口与多态"
+  ],
+  "source_pages": [
+    943,
+    944
+  ],
+  "needs_verification": true,
+  "verify_query": "Marc Gregoire C++20高级编程 第5版 第943-944页 Logger m_logLevel Error 日志过滤 ofstream app flush 原文",
+  "concept_id": "1946_logger类的功能与日志过滤",
+  "_chunk_pages": [
+    941,
+    944
+  ]
+}

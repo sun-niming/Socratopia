@@ -1,0 +1,44 @@
+{
+  "title": "集合算法",
+  "definition": "集合算法是对序列执行集合操作的特殊修改算法，最适合处理 set 容器中的序列，也可以处理大多数容器中已经排序的序列。教材列出的算法包括 $\\text{inplace_merge()}$、$\\text{merge()}$、$\\text{includes()}$、$\\text{set_union()}$、$\\text{set_intersection()}$、$\\text{set_difference()}$ 和 $\\text{set_symmetric_difference()}$。",
+  "key_points": [
+    "$\\text{inplace_merge()}$ 在原位置合并两个已经排序的序列，教材将其列为线性对数复杂度。",
+    "$\\text{merge()}$ 合并两个已经排序的序列，并把结果复制到新的序列，教材将其列为线性复杂度。",
+    "$\\text{includes()}$ 判断一个序列中的每个元素是否都包含在另一个序列中。",
+    "集合差集、并集、交集和对称差集算法把两个已排序序列进行相应集合操作，并将结果复制到第三个已排序序列中。"
+  ],
+  "examples": [
+    "若两个已排序序列分别为 $[1,2,4]$ 和 $[2,3,4]$，并集结果可表示为 $[1,2,3,4]$，交集结果可表示为 $[2,4]$，差集和对称差集则按对应集合运算生成结果序列。"
+  ],
+  "misconceptions": [
+    "集合算法通常要求输入序列已排序，不能直接把任意无序序列当作集合算法输入。",
+    "merge() 会把结果复制到目标序列，而 inplace_merge() 会在原位置完成合并。",
+    "includes() 不是判断两个序列完全相等，而是判断一个序列是否包含另一个序列的全部元素。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "集合算法适合处理什么样的序列？",
+      "a": "最适合处理 set 容器的序列，也可以处理大多数容器中已经排序的序列。"
+    },
+    {
+      "q": "inplace_merge() 与 merge() 的区别是什么？",
+      "a": "inplace_merge() 在原位置合并两个已排序序列；merge() 将合并结果复制到新的目标序列。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "排序序列",
+    "集合的并集与交集"
+  ],
+  "source_pages": [
+    517,
+    517
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1064_集合算法",
+  "_chunk_pages": [
+    517,
+    520
+  ]
+}

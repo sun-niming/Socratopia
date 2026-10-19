@@ -1,0 +1,47 @@
+{
+  "title": "结构化绑定分解对象",
+  "definition": "C++的结构化绑定可以把一个具有可分解成员的对象（原文示例为`std::pair`）分解成多个具有名称的绑定变量。使用`auto`、`auto&`或`const auto&`会影响这些绑定变量是值、引用还是const引用。",
+  "key_points": [
+    "`auto [theString, theInt] { myPair };`按值分解`myPair`。",
+    "`auto& [theString, theInt] { myPair };`将绑定变量作为对非const成员的引用。",
+    "`const auto& [theString, theInt] { myPair };`将绑定变量作为对const成员的引用。",
+    "原文示例中的`myPair`包含字符串`\"hello\"`和整数`5`。"
+  ],
+  "examples": [
+    "`pair myPair { \"hello\", 5 };`",
+    "`auto [theString, theInt] { myPair }; // Decompose using structured bindings`",
+    "`auto& [theString, theInt] { myPair }; // Decompose using references-to-non-const`",
+    "`const auto& [theString, theInt] { myPair }; // Decompose into references-to-const`"
+  ],
+  "misconceptions": [
+    "结构化绑定不一定都是副本；`auto&`和`const auto&`会建立引用形式的绑定。",
+    "`const auto&`绑定不能通过绑定名称修改底层成员。",
+    "结构化绑定中的每个名称对应被分解对象的一个元素，而不是把整个对象复制到每个名称中。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`auto [theString, theInt] { myPair };`分解出的两个值是什么？",
+      "a": "`theString`对应`\"hello\"`，`theInt`对应`5`。"
+    },
+    {
+      "q": "`auto&`与`const auto&`结构化绑定的主要区别是什么？",
+      "a": "`auto&`建立对非const成员的引用，`const auto&`建立对const成员的引用，后者不能通过绑定名称修改成员。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "引用",
+    "std::pair"
+  ],
+  "source_pages": [
+    77,
+    80
+  ],
+  "needs_verification": true,
+  "verify_query": "C++ structured bindings auto auto& const auto& std::pair 绑定变量类型",
+  "concept_id": "111_结构化绑定分解对象",
+  "_chunk_pages": [
+    77,
+    80
+  ]
+}

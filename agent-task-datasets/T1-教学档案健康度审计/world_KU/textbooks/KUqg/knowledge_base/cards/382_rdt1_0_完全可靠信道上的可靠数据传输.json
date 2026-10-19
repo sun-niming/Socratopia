@@ -1,0 +1,44 @@
+{
+  "title": "rdt1.0：完全可靠信道上的可靠数据传输",
+  "definition": "rdt1.0 是针对完全可靠底层信道的最简单可靠数据传输协议。由于信道不会损坏或丢失分组，发送端只需在收到上层数据后构造并发送分组，接收端收到分组后提取数据并交付给上层，不需要确认、重传或其他反馈机制。",
+  "key_points": [
+    "rdt1.0 的发送端和接收端各自使用一个有限状态机（FSM），且每个 FSM 只有一个状态。",
+    "发送端事件与动作：$rdt\\_send(data)$ 触发 $packet=make\\_pkt(data)$，随后执行 $udt\\_send(packet)$。",
+    "接收端事件与动作：$rdt\\_rcv(packet)$ 触发 $extract(packet,data)$，随后执行 $deliver\\_data(data)$。",
+    "教材还假定接收方处理数据的速率能够跟上发送方，因此不需要请求发送方降低速率。"
+  ],
+  "examples": [
+    "发送端：$$rdt\\_send(data)\\rightarrow packet=make\\_pkt(data)\\rightarrow udt\\_send(packet)$$",
+    "接收端：$$rdt\\_rcv(packet)\\rightarrow extract(packet,data)\\rightarrow deliver\\_data(data)$$"
+  ],
+  "misconceptions": [
+    "rdt1.0 并不是一般信道上的完整可靠协议，它依赖底层信道完全可靠这一前提。",
+    "rdt1.0 不需要 ACK，不是因为确认机制没有用，而是因为完全可靠信道不需要接收方反馈。",
+    "rdt1.0 的一个状态表示协议不需要在多个工作阶段之间切换，并不表示协议没有事件或动作。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "rdt1.0 为什么不需要 ACK 或 NAK？",
+      "a": "因为底层信道被假定为完全可靠，分组不会损坏或丢失，所以接收方无需反馈是否正确收到分组。"
+    },
+    {
+      "q": "rdt1.0 接收端收到分组后执行哪些操作？",
+      "a": "接收端通过 $extract(packet,data)$ 从分组中取出数据，再通过 $deliver\\_data(data)$ 将数据交付给较高层。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "可靠数据传输协议的基本接口与信道假设"
+  ],
+  "source_pages": [
+    153,
+    154
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "382_rdt1_0_完全可靠信道上的可靠数据传输",
+  "_chunk_pages": [
+    153,
+    156
+  ]
+}

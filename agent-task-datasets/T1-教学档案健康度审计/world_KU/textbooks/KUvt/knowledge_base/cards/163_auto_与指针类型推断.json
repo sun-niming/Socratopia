@@ -1,0 +1,51 @@
+{
+  "title": "auto* 与指针类型推断",
+  "definition": "auto 可以用于推断指针类型。教材建议在表示指针时优先使用 auto*，因为这种写法能够更清楚地表明变量是指针，并且与 const 结合时更符合通常对“指向 const 对象”或“const 指针”的表达预期。",
+  "key_points": [
+    "由 int 对象的地址初始化时，auto* 可以推断出 int*。",
+    "auto* 比单独使用 auto 更明确地表示变量是指针。",
+    "const auto* 表示指向 const 对象的指针，例如 const int*。",
+    "const auto* const 表示指向 const 对象且指针本身也不可修改，即 const int* const。",
+    "若需要 const 指针但指向的对象不是 const，应将 const 放在推断出的指针类型之后，例如 auto* const。"
+  ],
+  "examples": [
+    "int i {}; auto* p { &i }; 中 p 的类型是 int*。",
+    "const auto* p3 { &i }; 中 p3 的类型是 const int*。",
+    "const auto* const p5 { &i }; 中 p5 的类型是 const int* const。",
+    "const auto p1 { &i }; 的类型是 int* const：指针本身是 const，但指向的 int 不是 const。"
+  ],
+  "misconceptions": [
+    "const auto p { &i }; 表示 const int*。教材指出它实际表示 int* const。",
+    "const auto* const 只会使指针本身为 const，不会使指向的对象为 const。实际上二者都为 const。",
+    "使用 auto 指针一定会复制被指向的对象。指针初始化保存的是地址，不会复制被指向对象。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "const auto p { &i }; 的类型是什么？",
+      "a": "类型是 int* const，即指向非 const int 的 const 指针。"
+    },
+    {
+      "q": "如何声明一个指向 const int 的指针？",
+      "a": "可以写成 const auto* p { &i };，其类型为 const int*。"
+    },
+    {
+      "q": "如何声明一个指向 const int 且指针本身也不可修改的指针？",
+      "a": "写成 const auto* const p5 { &i };，其类型为 const int* const。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "auto 的基本作用与用途"
+  ],
+  "source_pages": [
+    90,
+    90
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "163_auto_与指针类型推断",
+  "_chunk_pages": [
+    89,
+    92
+  ]
+}

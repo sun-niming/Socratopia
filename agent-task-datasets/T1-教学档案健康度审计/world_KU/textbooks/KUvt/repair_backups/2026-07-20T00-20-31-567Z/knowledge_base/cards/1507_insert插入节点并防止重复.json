@@ -1,0 +1,46 @@
+{
+  "title": "insert插入节点并防止重复",
+  "definition": "directed_graph 的 insert 方法向图中插入节点值。它先使用 findNode 检查相同值的节点是否已经存在；若已存在则返回 false，不插入任何节点；若不存在，则使用 emplace_back 构造新的 graph_node，并返回 true。",
+  "key_points": [
+    "insert 有接收 const T& 的重载和接收 T&& 的重载。",
+    "const T& 重载先复制参数，再将副本移动到右值引用重载。",
+    "右值引用重载通过 m_nodes.emplace_back(this, std::move(node_value)) 构造新节点。",
+    "插入成功返回 true，重复值插入返回 false。"
+  ],
+  "examples": [
+    "右值引用重载的核心逻辑：\n```cpp\nauto iter{findNode(node_value)};\nif (iter != std::end(m_nodes)) {\n    return false;\n}\nm_nodes.emplace_back(this, std::move(node_value));\nreturn true;\n```",
+    "const 引用重载的核心逻辑：\n```cpp\nT copy{node_value};\nreturn insert(std::move(copy));\n```"
+  ],
+  "misconceptions": [
+    "insert 不是无条件追加节点；图中已经存在相同节点值时不会插入。",
+    "emplace_back 在这里构造的是 graph_node，而不是只把 T 值直接放入 vector。",
+    "插入失败的原因是节点值已存在，而不是节点 vector 容量不足。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "向图中插入已经存在的节点值时，insert 返回什么？",
+      "a": "返回 false，并且不插入新节点。"
+    },
+    {
+      "q": "插入新节点时 emplace_back 使用了哪些构造参数？",
+      "a": "传递 directed_graph 的指针 this 和节点值，用于构造新的 graph_node。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "右值引用与std::move",
+    "vector::emplace_back",
+    "重载"
+  ],
+  "source_pages": [
+    726,
+    726
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1507_insert插入节点并防止重复",
+  "_chunk_pages": [
+    725,
+    728
+  ]
+}

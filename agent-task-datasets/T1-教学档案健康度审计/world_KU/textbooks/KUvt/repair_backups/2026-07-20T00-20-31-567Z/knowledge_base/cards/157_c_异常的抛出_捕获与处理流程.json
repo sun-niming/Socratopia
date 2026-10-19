@@ -1,0 +1,57 @@
+{
+  "title": "C++异常的抛出、捕获与处理流程",
+  "definition": "异常是 C++ 用于处理运行期间意外情况的一种机制。当代码检测到错误或异常情形时，可以使用 throw 抛出异常；调用者可以将调用放入 try 块，并使用 catch 捕获异常后执行相应处理。如果函数执行到 throw，该函数会立即结束，不再返回普通返回值；控制流会跳转到能够匹配该异常类型的 catch 块。",
+  "key_points": [
+    "异常可以替代通过 nullptr 或错误代码传递错误的方式。",
+    "std::invalid_argument 定义在 <stdexcept> 中，可用于表示参数无效，例如除数为 0。",
+    "标准库异常类提供 what() 方法，用于返回包含异常简要说明的字符串。",
+    "教材建议通过 const 引用捕获异常，例如 catch (const std::invalid_argument& exception)。",
+    "如果异常没有被捕获，程序将终止；C++ 编译器不会强制程序捕获所有可能发生的异常。",
+    "异常发生后，当前 try 块中位于抛出点之后的语句不会继续执行。"
+  ],
+  "examples": [
+    "函数在分母为 0 时抛出异常：\ndouble divideNumbers(double numerator, double denominator) {\n    if (denominator == 0) {\n        throw std::invalid_argument{\"Denominator cannot be 0.\"};\n    }\n    return numerator / denominator;\n}",
+    "捕获异常：\ntry {\n    std::cout << divideNumbers(2.5, 0.5) << std::endl;\n    std::cout << divideNumbers(2.3, 0) << std::endl;\n    std::cout << divideNumbers(4.5, 2.5) << std::endl;\n} catch (const std::invalid_argument& exception) {\n    std::cout << exception.what();\n}\n\n第二次调用抛出异常后，程序跳转到 catch 块，第三次调用不会执行。"
+  ],
+  "misconceptions": [
+    "throw 抛出异常后，函数不会继续执行，也不会返回一个普通结果。",
+    "catch 块不是在每次调用后都会执行，只有匹配的异常被抛出时才会执行。",
+    "异常未被捕获时不是被编译器自动修复，而是会导致程序终止。",
+    "教材此处只介绍异常的基本流程；异常安全、栈展开和自定义异常类型还需要进一步学习。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "throw 执行后函数会发生什么？",
+      "a": "函数会立即结束，不再返回普通返回值，控制流转移到能够匹配该异常的 catch 块。"
+    },
+    {
+      "q": "为什么示例中的第三次 divideNumbers 调用不会执行？",
+      "a": "第二次调用因分母为 0 抛出异常，程序立即跳转到 catch 块，因此 try 块中后续的第三次调用不会执行。"
+    },
+    {
+      "q": "标准异常对象的 what() 方法有什么作用？",
+      "a": "what() 返回一个字符串，用于提供对异常的简要说明。"
+    },
+    {
+      "q": "教材建议如何捕获标准异常？",
+      "a": "建议通过 const 引用捕获，例如 catch (const std::invalid_argument& exception)。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "函数调用流程",
+    "引用",
+    "标准库异常类型"
+  ],
+  "source_pages": [
+    87,
+    87
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "157_c_异常的抛出_捕获与处理流程",
+  "_chunk_pages": [
+    85,
+    88
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "title": "nth_element的选择与分区",
+  "definition": "nth_element()接收一个范围和指向该范围内第n个位置的迭代器，并重新排列元素，使该位置上的元素等同于整个范围排序后应处于该位置的元素；同时，该位置之前的元素不大于它，该位置之后的元素不小于它。它只保证这种分区关系，不要求整个范围完全有序。",
+  "key_points": [
+    "nth_element()适合寻找第k大或第k小元素。",
+    "使用greater<>时，范围按降序的分区关系处理，因此可以用下标直接取得第几大的元素。",
+    "直接完整排序后再取目标元素需要排序开销，而nth_element()按教材说明在线性时间内完成选择。"
+  ],
+  "examples": [
+    "vector<int> values; populateContainer(values); nth_element(begin(values), begin(values) + 2, end(values), greater<>()); cout << \"3rd largest value: \" << values[2];",
+    "获取前5个最大元素时，可先调用nth_element(begin(values), begin(values) + 4, end(values), greater<>()); 再对begin(values)到begin(values)+5的子范围调用sort()。"
+  ],
+  "misconceptions": [
+    "nth_element()不会把整个范围排序。",
+    "nth_element()中的目标迭代器指向目标排名位置，而不是目标元素值。",
+    "只调用nth_element()后，目标位置前后的元素分别满足分区关系，但各自内部通常不保证有序。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何使用nth_element()寻找第三大的元素？",
+      "a": "对范围使用greater<>，目标迭代器传begin(values)+2；调用后values[2]就是第三大的元素。"
+    },
+    {
+      "q": "为什么寻找前5个最大元素时还要再调用sort()？",
+      "a": "nth_element()只能保证前5个元素处于最大的分区，不能保证这5个元素内部有序；因此还要排序前5个元素的子范围。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "通用排序算法的适用范围"
+  ],
+  "source_pages": [
+    649,
+    649
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 std::nth_element complexity linear time partition guarantees nth position greater comparator",
+  "concept_id": "1358_nth_element的选择与分区",
+  "_chunk_pages": [
+    649,
+    652
+  ]
+}

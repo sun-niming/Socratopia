@@ -1,0 +1,37 @@
+{
+  "title": "Grid容器",
+  "definition": "应用了 display:grid 或 display:inline-grid 的元素称为 Grid 容器（Grid Container）。它是所有网格项的直接父元素。",
+  "key_points": [
+    "display:grid 使元素成为块级 Grid 容器",
+    "display:inline-grid 使元素成为内联级 Grid 容器",
+    "Grid 容器直接包含 Grid 项目"
+  ],
+  "examples": [
+    ".container {\n  display: grid;\n}"
+  ],
+  "misconceptions": [
+    "只要元素里有内容，它就自动是 Grid 容器；实际上必须显式设置 display:grid 或 display:inline-grid。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何把一个元素定义为 Grid 容器？",
+      "a": "给它设置 display:grid 或 display:inline-grid。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "CSS基础",
+    "Grid布局"
+  ],
+  "source_pages": [
+    169,
+    172
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "240_grid容器",
+  "_chunk_pages": [
+    169,
+    172
+  ]
+}

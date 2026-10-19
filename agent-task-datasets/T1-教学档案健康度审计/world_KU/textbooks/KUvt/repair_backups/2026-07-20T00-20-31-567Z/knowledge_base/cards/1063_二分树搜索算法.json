@@ -1,0 +1,45 @@
+{
+  "title": "二分树搜索算法",
+  "definition": "二分树搜索算法通常用于已经排序的序列。从技术上说，序列只需按照待搜索元素进行分区；已经排序的序列自然满足这一条件。教材列出的算法都具有对数复杂度，包括 $\\text{lower_bound()}$、$\\text{upper_bound()}$、$\\text{equal_range()}$ 和 $\\text{binary_search()}$。",
+  "key_points": [
+    "$\\text{lower_bound()}$ 返回序列中第一个不小于给定值的位置，即第一个满足 $x\\geq v$ 的元素。",
+    "$\\text{upper_bound()}$ 返回序列中第一个大于给定值的位置，即第一个满足 $x>v$ 的元素。",
+    "$\\text{equal_range()}$ 以 pair 形式同时返回 lower bound 和 upper bound 的结果。",
+    "$\\text{binary_search()}$ 判断序列中是否存在给定值：找到时返回 true，否则返回 false。",
+    "这些算法要求序列已排序或至少已按搜索值分区；教材将其复杂度概括为对数复杂度。"
+  ],
+  "examples": [
+    "对有序序列 $[1,2,2,4,7]$ 搜索值 $2$：$\\text{lower_bound()}$ 指向第一个 $2$，$\\text{upper_bound()}$ 指向 $4$，$\\text{equal_range()}$ 返回这两个位置组成的范围。"
+  ],
+  "misconceptions": [
+    "binary_search() 返回的是布尔值，不是匹配元素的迭代器。",
+    "lower_bound() 查找的是第一个大于或等于目标值的位置，不一定是等于目标值的位置。",
+    "使用这些算法时，序列不能任意无序；至少必须按照搜索值进行分区。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "lower_bound() 和 upper_bound() 的区别是什么？",
+      "a": "lower_bound() 返回第一个不小于给定值的元素；upper_bound() 返回第一个大于给定值的元素。"
+    },
+    {
+      "q": "equal_range() 返回什么？",
+      "a": "它返回一个 pair，其中包含 lower_bound() 和 upper_bound() 的结果。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "迭代器范围",
+    "排序与分区"
+  ],
+  "source_pages": [
+    517,
+    517
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1063_二分树搜索算法",
+  "_chunk_pages": [
+    517,
+    520
+  ]
+}

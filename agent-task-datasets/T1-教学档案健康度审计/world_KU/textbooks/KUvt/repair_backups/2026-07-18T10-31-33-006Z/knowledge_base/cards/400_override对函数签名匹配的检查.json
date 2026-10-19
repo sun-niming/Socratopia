@@ -1,0 +1,45 @@
+{
+  "title": "override对函数签名匹配的检查",
+  "definition": "在派生类成员函数声明中使用 `override`，表示该函数必须重写基类中的虚函数。若派生类函数与基类虚函数的函数签名不匹配，例如参数类型不同，则它不是正确的重写，使用 `override` 时应导致编译错误，而不是形成预期的多态重写。",
+  "key_points": [
+    "基类和派生类函数必须具有匹配的函数名及参数列表，才能构成重写。",
+    "例如基类声明 `virtual void someMethod(double d);` 时，派生类也必须声明匹配的 `someMethod(double d)` 才能使用 `override` 重写它。",
+    "如果派生类把参数改成其他类型，例如 `someMethod()`，通常会形成另一个重载，而不是重写 `someMethod(double)`；加上 `override` 后编译器会指出不匹配。"
+  ],
+  "examples": [
+    "基类：`virtual void someMethod(double d);`",
+    "正确重写：`void someMethod(double d) override;`",
+    "不匹配示例：基类为 `someMethod(double)`，派生类却声明 `someMethod()`；这不能作为该虚函数的重写。"
+  ],
+  "misconceptions": [
+    "函数名相同不代表一定重写；参数列表不同可能只是重载或隐藏。",
+    "省略 `override` 不会把不匹配的函数自动变成正确重写。",
+    "`override` 不是函数名的一部分，而是 C++ 的特殊说明符，用于表达和检查重写关系。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "基类有 `virtual void someMethod(double d);`，派生类声明 `void someMethod() override;` 是否正确？",
+      "a": "不正确，因为参数列表不匹配；它不能重写基类的 `someMethod(double)`，使用 `override` 时应被编译器拒绝。"
+    },
+    {
+      "q": "为什么推荐在派生类重写虚函数时使用 `override`？",
+      "a": "因为它能明确表达重写意图，并让编译器检查函数签名是否真的匹配基类虚函数。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "虚函数与派生类重写",
+    "C++函数重载"
+  ],
+  "source_pages": [
+    305,
+    308
+  ],
+  "needs_verification": true,
+  "verify_query": "《C++20高级编程》第5版 第308页 override someMethod(double) 派生类 函数签名",
+  "concept_id": "400_override对函数签名匹配的检查",
+  "_chunk_pages": [
+    305,
+    308
+  ]
+}

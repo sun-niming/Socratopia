@@ -1,0 +1,38 @@
+{
+  "title": "class 的两种定义方式",
+  "definition": "class 作为一种特殊的函数，也有两种定义方式：类声明和类表达式。教材指出，class 的定义方式类似于函数声明和函数表达式。",
+  "key_points": [
+    "class 有类声明和类表达式两种定义方式。",
+    "class 实际上是“特殊的函数”。",
+    "类的两种定义方式与函数声明、函数表达式的对应关系相似。"
+  ],
+  "examples": [
+    "类声明",
+    "类表达式"
+  ],
+  "misconceptions": [
+    "误以为 class 只能用一种固定写法定义。",
+    "误以为 class 不是函数类型的特殊形式。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "class 有哪两种定义方式？",
+      "a": "类声明和类表达式。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "class 的概念"
+  ],
+  "source_pages": [
+    289,
+    292
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "387_class_的两种定义方式",
+  "_chunk_pages": [
+    289,
+    292
+  ]
+}

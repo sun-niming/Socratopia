@@ -1,0 +1,2206 @@
+{
+  "version": 2,
+  "generated_at": "2026-06-26T13:49:26.979Z",
+  "segments": [
+    {
+      "page_range": [
+        1,
+        12
+      ],
+      "sequence": [
+        {
+          "phase": 1,
+          "label": "第 1-4 页",
+          "card_ids": [
+            "001_课程基本信息",
+            "002_课程学习与课堂要求",
+            "003_课程联系邮箱与邮件主题格式",
+            "004_课程考核方式与总评成绩构成"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 2,
+          "label": "第 1-6 页",
+          "card_ids": [
+            "005_课堂考勤要求与缺课处理",
+            "006_关于ai学习的课程观点",
+            "007_大模型辅助作业规范",
+            "008_课程培养目标"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 3,
+          "label": "第 6-12 页",
+          "card_ids": [
+            "009_课程内容组成",
+            "010_第1章名称与课时",
+            "011_本部分学习目标",
+            "012_internet"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 4,
+          "label": "第 9-12 页",
+          "card_ids": [
+            "013_www_万维网",
+            "015_万维网的三项关键技术",
+            "017_中国正式接入国际互联网",
+            "014_万维网诞生的背景与提出"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        }
+      ],
+      "generated_by": "deterministic-page-order",
+      "fallback_reason": "llm_map_failed"
+    },
+    {
+      "page_range": [
+        11,
+        24
+      ],
+      "sequence": [
+        {
+          "phase": 1,
+          "label": "Web起源",
+          "card_ids": [
+            "016_第一个浏览器_服务器和网站",
+            "018_蒂姆_伯纳斯_李",
+            "019_w3c万维网联盟",
+            "020_网页的本质"
+          ],
+          "teach_goal": "理解万维网的诞生、网页本质以及早期浏览器、服务器和标准组织。",
+          "branches": [
+            "万维网发展史",
+            "网页标准化"
+          ]
+        },
+        {
+          "phase": 2,
+          "label": "前后端",
+          "card_ids": [
+            "021_客户端与服务器端",
+            "022_前端与后端",
+            "023_前台与后台",
+            "024_前端后端与前台后台的关系",
+            "025_浏览器与渲染引擎",
+            "026_浏览器内核与显示差异",
+            "027_浏览器渲染流程"
+          ],
+          "teach_goal": "区分客户端/服务器端、前端/后端等角色，并理解浏览器渲染机制。",
+          "branches": [
+            "请求响应模型",
+            "浏览器渲染原理"
+          ]
+        },
+        {
+          "phase": 3,
+          "label": "浏览器工具",
+          "card_ids": [
+            "028_常见浏览器",
+            "029_浏览器开发者工具_chrome示例"
+          ],
+          "teach_goal": "认识主流浏览器并学会用开发者工具进行基础调试。",
+          "branches": [
+            "浏览器兼容性",
+            "页面调试"
+          ]
+        },
+        {
+          "phase": 4,
+          "label": "URL入门",
+          "card_ids": [
+            "030_url",
+            "031_url的一般格式与协议名",
+            "032_绝对url"
+          ],
+          "teach_goal": "掌握 URL 的基本结构、协议名和绝对 URL 的写法。",
+          "branches": [
+            "链接与资源定位"
+          ]
+        }
+      ],
+      "generated_by": "llm-validated"
+    },
+    {
+      "page_range": [
+        25,
+        36
+      ],
+      "sequence": [
+        {
+          "phase": 1,
+          "label": "Web入门",
+          "card_ids": [
+            "033_相对url",
+            "035_html_css和javascript的分工",
+            "036_常见web前端开发工具",
+            "034_web标准"
+          ],
+          "teach_goal": "建立Web前端开发的基本认识，理解标准、分工、工具与相对URL的基础作用。",
+          "branches": [
+            "浏览器与页面开发流程",
+            "资源路径与引用"
+          ]
+        },
+        {
+          "phase": 2,
+          "label": "HTML起步",
+          "card_ids": [
+            "038_html基础",
+            "037_html章节概览",
+            "047_html的概念",
+            "048_html的发展历程"
+          ],
+          "teach_goal": "认识HTML的本质、学习范围与基本语法，并了解其发展脉络。",
+          "branches": [
+            "标签语法与文档结构",
+            "HTML版本演进"
+          ]
+        },
+        {
+          "phase": 3,
+          "label": "常用标记",
+          "card_ids": [
+            "039_文本格式标记",
+            "040_列表标记",
+            "043_容器标记",
+            "044_表格标记"
+          ],
+          "teach_goal": "掌握页面排版与组织内容的常用标记，形成基本的结构化表达能力。",
+          "branches": [
+            "文本排版",
+            "内容分组与表格展示"
+          ]
+        },
+        {
+          "phase": 4,
+          "label": "交互与嵌入",
+          "card_ids": [
+            "041_超链接标记",
+            "042_图像标记",
+            "045_表单及其内部元素",
+            "046_iframe标记"
+          ],
+          "teach_goal": "学习网页中的链接、图片、表单和页面嵌入等核心交互与资源引用方式。",
+          "branches": [
+            "页面跳转与资源引用",
+            "用户输入与页面嵌入"
+          ]
+        }
+      ],
+      "generated_by": "llm-validated"
+    },
+    {
+      "page_range": [
+        33,
+        42
+      ],
+      "sequence": [
+        {
+          "phase": 1,
+          "label": "标签入门",
+          "card_ids": [
+            "049_标记",
+            "050_标记属性"
+          ],
+          "teach_goal": "认识HTML标记及其属性，建立页面内容的基本书写单位概念。",
+          "branches": [
+            "标记语法",
+            "属性值写法"
+          ]
+        },
+        {
+          "phase": 2,
+          "label": "元素基础",
+          "card_ids": [
+            "051_html元素",
+            "052_父元素_子元素_兄弟元素",
+            "053_空元素"
+          ],
+          "teach_goal": "理解HTML元素的组成方式以及元素之间的层级和空元素特征。",
+          "branches": [
+            "嵌套结构",
+            "常见空元素"
+          ]
+        },
+        {
+          "phase": 3,
+          "label": "元素分类",
+          "card_ids": [
+            "054_html元素分类",
+            "055_行内元素特点",
+            "056_块级元素特点",
+            "057_行内块元素特点",
+            "058_html4常见标记分类"
+          ],
+          "teach_goal": "掌握HTML元素的分类及行内、块级、行内块元素的基本特点。",
+          "branches": [
+            "元素显示模式",
+            "HTML4传统分类"
+          ]
+        },
+        {
+          "phase": 4,
+          "label": "HTML5结构",
+          "card_ids": [
+            "059_html5新增结构元素",
+            "060_section元素",
+            "061_article元素",
+            "062_aside元素",
+            "063_header元素",
+            "065_footer元素"
+          ],
+          "teach_goal": "认识HTML5新增结构语义元素，并能区分各结构元素在页面中的作用。",
+          "branches": [
+            "语义化布局",
+            "页面结构搭建"
+          ]
+        }
+      ],
+      "generated_by": "llm-validated"
+    },
+    {
+      "page_range": [
+        41,
+        52
+      ],
+      "sequence": [
+        {
+          "phase": 1,
+          "label": "第 41-44 页",
+          "card_ids": [
+            "066_nav元素",
+            "064_hgroup元素",
+            "067_video元素",
+            "068_audio元素"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 2,
+          "label": "第 41-44 页",
+          "card_ids": [
+            "069_main元素",
+            "070_article元素",
+            "071_section元素",
+            "072_aside元素"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 3,
+          "label": "第 41-48 页",
+          "card_ids": [
+            "073_语义化的三大核心价值",
+            "074_html5代码约定",
+            "075_html文档基本结构",
+            "076_head元素"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 4,
+          "label": "第 45-52 页",
+          "card_ids": [
+            "077_body元素",
+            "078_文本格式相关标记",
+            "079_字符实体",
+            "080_html列表标记"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        }
+      ],
+      "generated_by": "deterministic-page-order",
+      "fallback_reason": "llm_map_failed"
+    },
+    {
+      "page_range": [
+        49,
+        64
+      ],
+      "sequence": [
+        {
+          "phase": 1,
+          "label": "第 49-52 页",
+          "card_ids": [
+            "081_无序列表",
+            "082_有序列表",
+            "083_定义列表",
+            "085_href属性"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 2,
+          "label": "第 49-56 页",
+          "card_ids": [
+            "086_超链接的默认外观",
+            "087_url与超链接定位",
+            "084_超链接标签a",
+            "088_href属性"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 3,
+          "label": "第 53-60 页",
+          "card_ids": [
+            "089_相对url示例",
+            "090_target属性",
+            "091_title属性",
+            "092_img标记"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 4,
+          "label": "第 57-64 页",
+          "card_ids": [
+            "093_网页中支持的图像文件格式",
+            "094_div和span通用容器标记",
+            "095_表格的作用与基本标记",
+            "096_表格的附加结构与单元格类型"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        }
+      ],
+      "generated_by": "deterministic-page-order",
+      "fallback_reason": "llm_map_failed"
+    },
+    {
+      "page_range": [
+        65,
+        80
+      ],
+      "sequence": [
+        {
+          "phase": 1,
+          "label": "表格基础",
+          "card_ids": [
+            "097_table的border属性",
+            "098_单元格合并属性colspan与rowspan"
+          ],
+          "teach_goal": "掌握表格边框与单元格合并，能搭建规范的表格结构。",
+          "branches": [
+            "表格样式美化",
+            "复杂报表布局"
+          ]
+        },
+        {
+          "phase": 2,
+          "label": "表单入门",
+          "card_ids": [
+            "099_html表单的作用与组成",
+            "100_form的name属性",
+            "101_form的action属性",
+            "102_form的method属性"
+          ],
+          "teach_goal": "理解表单的作用与提交方式，掌握 form 的基本配置。",
+          "branches": [
+            "表单提交到服务器",
+            "GET与POST区别"
+          ]
+        },
+        {
+          "phase": 3,
+          "label": "表单控件",
+          "card_ids": [
+            "103_input文本框与密码框",
+            "104_单选框与复选框",
+            "105_label标签提升交互",
+            "106_下拉列表select与默认项selected",
+            "107_多行文本域textarea",
+            "108_表单按钮类型",
+            "109_只读与禁用"
+          ],
+          "teach_goal": "认识常用表单控件及其交互特性，能正确选择输入组件并控制可编辑状态。",
+          "branches": [
+            "控件可访问性",
+            "表单验证基础"
+          ]
+        },
+        {
+          "phase": 4,
+          "label": "表单构建",
+          "card_ids": [
+            "110_表单构建流程",
+            "111_用户注册页面控件选型"
+          ],
+          "teach_goal": "按需求完成表单搭建，并能为用户注册页面选择合适控件。",
+          "branches": [
+            "注册/登录页面设计",
+            "表单交互优化"
+          ]
+        },
+        {
+          "phase": 5,
+          "label": "页面嵌入",
+          "card_ids": [
+            "112_iframe标签"
+          ],
+          "teach_goal": "了解 iframe 的作用与基本使用场景，为页面嵌入内容做准备。",
+          "branches": [
+            "嵌入第三方页面",
+            "多页面布局"
+          ]
+        }
+      ],
+      "generated_by": "llm-validated"
+    },
+    {
+      "page_range": [
+        77,
+        84
+      ],
+      "sequence": [
+        {
+          "phase": 1,
+          "label": "iframe基础属性",
+          "card_ids": [
+            "113_iframe的src属性",
+            "114_iframe的width属性",
+            "115_iframe的height属性",
+            "116_iframe的name属性",
+            "117_iframe的frameborder属性",
+            "118_iframe的allowfullscreen属性",
+            "120_iframe的loading属性"
+          ],
+          "teach_goal": "掌握 iframe 的基本使用方式与常用展示属性设置。",
+          "branches": [
+            "结合超链接与嵌入页面示例练习"
+          ]
+        },
+        {
+          "phase": 2,
+          "label": "iframe安全控制",
+          "card_ids": [
+            "119_iframe的sandbox属性"
+          ],
+          "teach_goal": "理解并能使用 sandbox 对嵌入内容进行安全限制。",
+          "branches": [
+            "进一步了解同源策略与权限控制"
+          ]
+        },
+        {
+          "phase": 3,
+          "label": "CSS入门",
+          "card_ids": [
+            "121_css章节概况",
+            "122_css_zen_garden引入网站",
+            "123_css语法"
+          ],
+          "teach_goal": "建立对 CSS 作用、学习路径与基本语法结构的整体认识。",
+          "branches": [
+            "浏览 CSS Zen Garden 体会样式与结构分离"
+          ]
+        },
+        {
+          "phase": 4,
+          "label": "CSS样式布局",
+          "card_ids": [
+            "124_css常用样式",
+            "125_定位与布局",
+            "126_弹性盒子与网格布局",
+            "127_css3",
+            "128_响应式布局"
+          ],
+          "teach_goal": "逐步掌握常用样式、页面布局以及现代响应式开发方法。",
+          "branches": [
+            "继续学习选择器、盒模型与媒体查询"
+          ]
+        }
+      ],
+      "generated_by": "llm-validated"
+    },
+    {
+      "page_range": [
+        85,
+        96
+      ],
+      "sequence": [
+        {
+          "phase": 1,
+          "label": "CSS入门",
+          "card_ids": [
+            "129_css概述",
+            "130_html与css的分离",
+            "133_行内式引入css",
+            "134_嵌入式引入css",
+            "135_链接外部样式表",
+            "136_导入外部样式表"
+          ],
+          "teach_goal": "理解CSS的作用、与HTML分离的意义，以及四种常见引入方式。",
+          "branches": [
+            "CSS应用场景与开发规范"
+          ]
+        },
+        {
+          "phase": 2,
+          "label": "规则与基础选择器",
+          "card_ids": [
+            "131_css样式规则",
+            "132_css声明格式",
+            "137_css选择器",
+            "138_元素选择器",
+            "139_id选择器",
+            "140_class选择器",
+            "141_一个元素可应用多个class样式",
+            "142_通配选择器"
+          ],
+          "teach_goal": "掌握CSS规则的基本写法，并能使用常见基础选择器给元素添加样式。",
+          "branches": [
+            "选择器优先级初步理解"
+          ]
+        },
+        {
+          "phase": 3,
+          "label": "组合选择器",
+          "card_ids": [
+            "143_分组选择器",
+            "144_后代选择器"
+          ],
+          "teach_goal": "学会用分组选择器和后代选择器提高样式编写效率与选择精度。",
+          "branches": [
+            "更复杂的复合选择器"
+          ]
+        }
+      ],
+      "generated_by": "llm-validated"
+    },
+    {
+      "page_range": [
+        93,
+        108
+      ],
+      "sequence": [
+        {
+          "phase": 1,
+          "label": "关系与属性选择器",
+          "card_ids": [
+            "145_子元素选择器",
+            "146_相邻兄弟选择器",
+            "147_通用兄弟选择器",
+            "148_属性选择器"
+          ],
+          "teach_goal": "掌握根据元素层级关系和属性特征进行精准选中。",
+          "branches": [
+            "可延伸到复杂选择器组合与页面结构定位"
+          ]
+        },
+        {
+          "phase": 2,
+          "label": "基础伪类",
+          "card_ids": [
+            "149_伪类选择器",
+            "153_hover_和_active",
+            "154_first_child_和_first_of_type"
+          ],
+          "teach_goal": "理解常用状态伪类与基础结构伪类的用法。",
+          "branches": [
+            "可延伸到交互状态样式和列表首项样式控制"
+          ]
+        },
+        {
+          "phase": 3,
+          "label": "进阶伪类与伪元素",
+          "card_ids": [
+            "152_not_伪类",
+            "155_伪元素选择器",
+            "150_nth_child",
+            "151_nth_of_type"
+          ],
+          "teach_goal": "掌握更复杂的结构筛选、条件排除以及伪元素内容生成。",
+          "branches": [
+            "可延伸到复杂列表排版与样式增强"
+          ]
+        },
+        {
+          "phase": 4,
+          "label": "层叠与继承",
+          "card_ids": [
+            "156_css层叠性",
+            "157_css冲突声明的优先级处理",
+            "158_选择器特殊性的计算",
+            "159_css继承性",
+            "160_绝对单位"
+          ],
+          "teach_goal": "理解样式冲突的决定机制、继承规则及常用长度单位。",
+          "branches": [
+            "可延伸到调试样式冲突与规范化页面尺寸"
+          ]
+        }
+      ],
+      "generated_by": "llm-validated"
+    },
+    {
+      "page_range": [
+        105,
+        112
+      ],
+      "sequence": [
+        {
+          "phase": 1,
+          "label": "长度单位",
+          "card_ids": [
+            "161_相对单位",
+            "162_rem单位"
+          ],
+          "teach_goal": "先掌握CSS中的相对长度单位及rem单位，为后续文本排版和布局设置提供基础。",
+          "branches": [
+            "进一步学习其他长度单位和响应式布局"
+          ]
+        },
+        {
+          "phase": 2,
+          "label": "颜色与变量",
+          "card_ids": [
+            "163_命名颜色",
+            "164_rgb整数颜色值",
+            "165_rgb百分比颜色值",
+            "166_rgba颜色值",
+            "167_transparent关键字",
+            "168_十六进制颜色值",
+            "169_十六进制颜色简写",
+            "170_css自定义属性_css变量",
+            "171_color属性"
+          ],
+          "teach_goal": "理解CSS颜色的多种表示方式，并学会使用color属性与CSS变量来统一管理颜色值。",
+          "branches": [
+            "进一步学习背景色、边框色等颜色相关属性"
+          ]
+        },
+        {
+          "phase": 3,
+          "label": "文本样式",
+          "card_ids": [
+            "172_letter_spacing属性",
+            "173_line_height属性",
+            "174_text_align属性",
+            "175_text_decoration属性",
+            "176_text_indent属性"
+          ],
+          "teach_goal": "掌握常见文本样式属性，能够对文本的间距、对齐、装饰和缩进进行基础排版。",
+          "branches": [
+            "进一步学习字体族、字体大小和文本溢出处理"
+          ]
+        }
+      ],
+      "generated_by": "llm-validated"
+    },
+    {
+      "page_range": [
+        113,
+        120
+      ],
+      "sequence": [
+        {
+          "phase": 1,
+          "label": "字体基础",
+          "card_ids": [
+            "177_css字体属性",
+            "178_font_family_属性",
+            "179_font_size_属性",
+            "180_font_style_属性",
+            "181_font_weight_属性"
+          ],
+          "teach_goal": "掌握 CSS 字体相关的基本属性及其作用，为后续简写属性学习打基础。",
+          "branches": [
+            "CSS 文本样式扩展"
+          ]
+        },
+        {
+          "phase": 2,
+          "label": "字体进阶",
+          "card_ids": [
+            "182_font_简写属性",
+            "183_超链接样式顺序"
+          ],
+          "teach_goal": "理解字体简写的组合写法，并掌握超链接样式书写的顺序规则。",
+          "branches": [
+            "CSS 选择器与伪类样式"
+          ]
+        },
+        {
+          "phase": 3,
+          "label": "背景属性",
+          "card_ids": [
+            "184_background_color_属性",
+            "185_background_image_属性",
+            "186_background_repeat_属性",
+            "187_background_position_属性",
+            "188_background_size_属性",
+            "189_background_简写属性"
+          ],
+          "teach_goal": "按由细到总的顺序学习背景各项属性，最终能够使用 background 简写统一设置背景。",
+          "branches": [
+            "背景图层叠加",
+            "背景适配与响应式"
+          ]
+        },
+        {
+          "phase": 4,
+          "label": "列表样式",
+          "card_ids": [
+            "190_list_style_type",
+            "191_list_style_position",
+            "192_list_style_image"
+          ],
+          "teach_goal": "掌握列表项目符号的类型、位置和自定义图片设置方法。",
+          "branches": [
+            "有序列表与无序列表美化"
+          ]
+        }
+      ],
+      "generated_by": "llm-validated"
+    },
+    {
+      "page_range": [
+        117,
+        128
+      ],
+      "sequence": [
+        {
+          "phase": 1,
+          "label": "表格基础样式",
+          "card_ids": [
+            "194_border",
+            "195_width",
+            "196_height",
+            "199_vertical_align"
+          ],
+          "teach_goal": "掌握表格相关元素的边框、尺寸与对齐等基础样式设置。",
+          "branches": [
+            "表格整体布局调优",
+            "单元格内容对齐控制"
+          ]
+        },
+        {
+          "phase": 2,
+          "label": "表格细节控制",
+          "card_ids": [
+            "193_list_style",
+            "197_border_collapse",
+            "198_caption_side",
+            "200_border_spacing"
+          ],
+          "teach_goal": "理解表格边框合并、标题位置、单元格间距以及列表样式的基本用法。",
+          "branches": [
+            "表格外观精细化",
+            "列表符号样式定制"
+          ]
+        },
+        {
+          "phase": 3,
+          "label": "盒子模型入门",
+          "card_ids": [
+            "201_盒子模型",
+            "202_盒子模型构成",
+            "204_content_box",
+            "205_border_box",
+            "203_box_sizing_属性"
+          ],
+          "teach_goal": "建立盒子模型概念，并掌握 box-sizing 及两种常见取值的含义。",
+          "branches": [
+            "内容区与边框区的关系",
+            "不同 box-sizing 对布局的影响"
+          ]
+        },
+        {
+          "phase": 4,
+          "label": "盒子尺寸计算",
+          "card_ids": [
+            "206_盒子模型的尺寸与占据空间",
+            "207_边框_内边距与边框样式属性",
+            "208_盒子属性的缩写值规则"
+          ],
+          "teach_goal": "学会根据边框和内边距计算元素占据空间，并能正确使用盒子属性缩写。",
+          "branches": [
+            "响应式布局中的尺寸估算",
+            "边框与内边距的快捷写法"
+          ]
+        }
+      ],
+      "generated_by": "llm-validated"
+    },
+    {
+      "page_range": [
+        125,
+        140
+      ],
+      "sequence": [
+        {
+          "phase": 1,
+          "label": "盒子基础",
+          "card_ids": [
+            "209_border_属性的缩写与单边颜色设置",
+            "210_盒子属性的默认值"
+          ],
+          "teach_goal": "先建立盒模型与边框属性的基础概念，为后续页面布局打底。",
+          "branches": [
+            "可继续扩展盒模型的其他属性"
+          ]
+        },
+        {
+          "phase": 2,
+          "label": "文档流与显示",
+          "card_ids": [
+            "211_标准文档流",
+            "212_块元素",
+            "213_行内元素",
+            "214_行内块元素",
+            "215_display属性常用取值",
+            "216_inline_block元素的特点"
+          ],
+          "teach_goal": "理解标准文档流及三类元素的显示方式，并掌握 display 对布局行为的控制。",
+          "branches": [
+            "可延伸到元素的显示切换与布局适配"
+          ]
+        },
+        {
+          "phase": 3,
+          "label": "间距与隐藏",
+          "card_ids": [
+            "217_visibility_hidden与display_none的区别",
+            "218_行内元素之间的水平margin",
+            "219_块级元素之间的竖直margin"
+          ],
+          "teach_goal": "掌握不同类型元素的 margin 表现，并区分两种常见隐藏方式。",
+          "branches": [
+            "可进一步练习间距塌陷与占位效果"
+          ]
+        },
+        {
+          "phase": 4,
+          "label": "定位进阶",
+          "card_ids": [
+            "220_层定位",
+            "221_static_默认定位",
+            "222_fixed_固定定位",
+            "225_sticky_粘性定位",
+            "223_relative_相对定位"
+          ],
+          "teach_goal": "在理解默认定位的基础上，逐步掌握固定、相对与粘性定位的使用场景。",
+          "branches": [
+            "可继续学习 absolute 及更复杂的定位组合"
+          ]
+        }
+      ],
+      "generated_by": "llm-validated"
+    },
+    {
+      "page_range": [
+        138,
+        152
+      ],
+      "sequence": [
+        {
+          "phase": 1,
+          "label": "第 138-144 页",
+          "card_ids": [
+            "224_absolute_绝对定位",
+            "226_固定定位",
+            "227_粘性定位",
+            "228_粘性定位的使用条件"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 2,
+          "label": "第 141-148 页",
+          "card_ids": [
+            "229_浮动定位",
+            "230_float属性",
+            "231_clear属性",
+            "232_clear属性"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 3,
+          "label": "第 145-148 页",
+          "card_ids": [
+            "233_浮动后的盒子显示特征",
+            "234_浮动盒子脱离标准流",
+            "235_未浮动盒子对浮动盒子的环绕",
+            "236_多个浮动元素不相互覆盖"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 4,
+          "label": "第 145-152 页",
+          "card_ids": [
+            "237_容器过窄时浮动换行与卡住现象",
+            "238_子元素全浮动导致父元素高度塌陷及bfc解决",
+            "239_浮动定位的布局应用示意",
+            "240_flex布局概念"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        }
+      ],
+      "generated_by": "deterministic-page-order",
+      "fallback_reason": "llm_map_failed"
+    },
+    {
+      "page_range": [
+        149,
+        168
+      ],
+      "sequence": [
+        {
+          "phase": 1,
+          "label": "入门概念",
+          "card_ids": [
+            "241_设置flex容器",
+            "242_flex容器_项目与轴"
+          ],
+          "teach_goal": "理解Flex布局的基本概念、容器与项目的关系，以及主轴和交叉轴的含义。",
+          "branches": [
+            "为后续容器属性学习建立统一坐标系"
+          ]
+        },
+        {
+          "phase": 2,
+          "label": "容器主轴控制",
+          "card_ids": [
+            "243_弹性盒布局容器属性",
+            "244_flex_direction",
+            "245_flex_wrap",
+            "246_justify_content",
+            "249_flex_flow属性"
+          ],
+          "teach_goal": "掌握Flex容器最核心的布局控制方式：方向、换行、主轴对齐及其简写。",
+          "branches": [
+            "继续扩展交叉轴对齐前，需要先会换行与轴方向"
+          ]
+        },
+        {
+          "phase": 3,
+          "label": "交叉轴与多行对齐",
+          "card_ids": [
+            "247_align_items属性",
+            "248_align_content属性"
+          ],
+          "teach_goal": "理解并能区分单行项目对齐与多行内容对齐，完成容器级的交叉轴布局控制。",
+          "branches": [
+            "多行对齐通常建立在flex-wrap开启的基础上"
+          ]
+        },
+        {
+          "phase": 4,
+          "label": "项目属性",
+          "card_ids": [
+            "250_弹性盒项目的属性概览",
+            "251_flex_grow属性",
+            "252_flex_shrink属性",
+            "253_flex_basis属性",
+            "254_flex简写属性",
+            "255_flex简写属性",
+            "256_order属性"
+          ],
+          "teach_goal": "掌握Flex项目的尺寸伸缩、基准大小、简写设置与排序控制，实现精细化项目布局。",
+          "branches": [
+            "可进一步结合实际案例练习不同项目属性的组合效果"
+          ]
+        }
+      ],
+      "generated_by": "llm-validated"
+    },
+    {
+      "page_range": [
+        165,
+        182
+      ],
+      "sequence": [
+        {
+          "phase": 1,
+          "label": "第 165-172 页",
+          "card_ids": [
+            "257_align_self属性",
+            "258_css_grid_布局",
+            "259_使用_grid_布局的原因",
+            "260_grid_核心概念"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 2,
+          "label": "第 169-176 页",
+          "card_ids": [
+            "261_grid_容器的_display_属性",
+            "262_grid_template_columns_和_grid_template_ro",
+            "263_网格轨道尺寸写法",
+            "264_repeat_函数"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 3,
+          "label": "第 173-180 页",
+          "card_ids": [
+            "265_minmax_函数",
+            "266_grid_template_areas",
+            "267_gap",
+            "270_justify_items"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 4,
+          "label": "第 178-182 页",
+          "card_ids": [
+            "271_align_items",
+            "268_justify_content",
+            "269_align_content",
+            "272_网格线编号与元素定位"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        }
+      ],
+      "generated_by": "deterministic-page-order",
+      "fallback_reason": "llm_map_failed"
+    },
+    {
+      "page_range": [
+        181,
+        196
+      ],
+      "sequence": [
+        {
+          "phase": 1,
+          "label": "网格线定位",
+          "card_ids": [
+            "273_grid_row_start_与_grid_row_end",
+            "274_grid_row_简写",
+            "275_grid_column_start_与_grid_column_end",
+            "276_grid_column_简写与_span_写法"
+          ],
+          "teach_goal": "掌握 Grid 中通过行、列起止线以及简写和 span 方式进行元素定位。",
+          "branches": [
+            "可进一步练习多列多行的综合定位"
+          ]
+        },
+        {
+          "phase": 2,
+          "label": "网格区域与对齐",
+          "card_ids": [
+            "277_grid_area_属性",
+            "278_justify_self_属性",
+            "279_align_self_属性",
+            "280_place_self_属性"
+          ],
+          "teach_goal": "在理解行列定位的基础上，进一步掌握网格项区域指定及单个元素在网格单元中的对齐控制。",
+          "branches": [
+            "可扩展到 grid-template-areas 的整体布局"
+          ]
+        },
+        {
+          "phase": 3,
+          "label": "圆角与阴影基础",
+          "card_ids": [
+            "281_css3新增视觉与动态效果概述",
+            "282_border_radius圆角边框",
+            "283_分别设置元素角的圆角半径",
+            "284_box_shadow盒子阴影",
+            "286_box_shadow_单个阴影参数",
+            "287_box_shadow_多重阴影"
+          ],
+          "teach_goal": "认识 CSS3 视觉效果的常见能力，并学会使用圆角和盒子阴影创建基础视觉样式。",
+          "branches": [
+            "可进一步结合卡片、按钮等组件美化"
+          ]
+        },
+        {
+          "phase": 4,
+          "label": "阴影进阶应用",
+          "card_ids": [
+            "285_box_shadow多重阴影",
+            "288_text_shadow_属性"
+          ],
+          "teach_goal": "在掌握基础阴影语法后，学习更复杂的多重阴影效果及文字阴影的应用。",
+          "branches": [
+            "可用于制作立体标题、发光按钮与层次化界面"
+          ]
+        }
+      ],
+      "generated_by": "llm-validated"
+    },
+    {
+      "page_range": [
+        193,
+        204
+      ],
+      "sequence": [
+        {
+          "phase": 1,
+          "label": "Web字体",
+          "card_ids": [
+            "290_字体文件格式兼容性",
+            "291_font_face_规则",
+            "289_web_字体"
+          ],
+          "teach_goal": "掌握网页中引入自定义字体的基本概念、声明方式及常见格式兼容性问题。",
+          "branches": [
+            "字体资源压缩与加载优化",
+            "字体回退策略"
+          ]
+        },
+        {
+          "phase": 2,
+          "label": "2D变换",
+          "card_ids": [
+            "292_2d变换",
+            "293_translate平移",
+            "294_rotate旋转",
+            "295_scale缩放",
+            "296_skew倾斜",
+            "297_transform_origin基点位置",
+            "299_transform属性"
+          ],
+          "teach_goal": "理解 transform 的基本用法，并能组合平移、旋转、缩放、倾斜及基点控制实现 2D 视觉效果。",
+          "branches": [
+            "多变换函数组合顺序",
+            "动画中的 2D 变换应用"
+          ]
+        },
+        {
+          "phase": 3,
+          "label": "3D变换",
+          "card_ids": [
+            "298_3d变换",
+            "301_transform_style",
+            "302_perspective",
+            "303_perspective_origin",
+            "304_backface_visibility",
+            "300_transform_origin"
+          ],
+          "teach_goal": "建立 3D 变换场景的核心认识，掌握透视、子元素 3D 保留、背面显示与三维基点控制。",
+          "branches": [
+            "3D 立方体与翻转效果",
+            "复杂层级中的 3D 场景搭建"
+          ]
+        }
+      ],
+      "generated_by": "llm-validated"
+    },
+    {
+      "page_range": [
+        201,
+        220
+      ],
+      "sequence": [
+        {
+          "phase": 1,
+          "label": "第 201-208 页",
+          "card_ids": [
+            "305_3d变换方法",
+            "306_3d变换结构",
+            "307_css3过渡",
+            "308_css3动画的设计步骤"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 2,
+          "label": "第 205-212 页",
+          "card_ids": [
+            "309_keyframes规则与动画生效条件",
+            "310_css动画示例_绑定到div并改变背景色",
+            "311_css动画关键帧的_from_to_与百分比",
+            "312_响应式网页设计"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 3,
+          "label": "第 212-216 页",
+          "card_ids": [
+            "313_iphone1屏幕尺寸与分辨率",
+            "317_iphone_4_的_dpr_2_示例",
+            "314_物理像素",
+            "315_css像素"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 4,
+          "label": "第 215-220 页",
+          "card_ids": [
+            "316_设备像素比_dpr",
+            "318_视口",
+            "319_布局视口",
+            "320_理想视口"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        }
+      ],
+      "generated_by": "deterministic-page-order",
+      "fallback_reason": "llm_map_failed"
+    },
+    {
+      "page_range": [
+        217,
+        236
+      ],
+      "sequence": [
+        {
+          "phase": 1,
+          "label": "视口基础",
+          "card_ids": [
+            "321_视觉视口",
+            "322_meta_viewport_设置",
+            "323_视口相关属性设置"
+          ],
+          "teach_goal": "先理解视觉视口与 meta viewport 的作用，再掌握常见视口参数设置，为移动端适配打基础。",
+          "branches": [
+            "移动端页面初始缩放",
+            "设备宽度适配"
+          ]
+        },
+        {
+          "phase": 2,
+          "label": "媒体查询入门",
+          "card_ids": [
+            "324_媒体查询",
+            "325_媒体查询可获取的值",
+            "326_媒体查询基本语法",
+            "327_媒体类型",
+            "328_媒体查询常用属性",
+            "329_媒体查询的两种使用方式"
+          ],
+          "teach_goal": "掌握媒体查询的组成要素、语法规则和使用方式，能够编写基础响应式样式。",
+          "branches": [
+            "断点设计",
+            "条件样式切换"
+          ]
+        },
+        {
+          "phase": 3,
+          "label": "响应式实践",
+          "card_ids": [
+            "330_响应式布局示例_按宽度切换布局"
+          ],
+          "teach_goal": "通过按宽度切换布局的示例，把视口与媒体查询知识应用到实际响应式页面中。",
+          "branches": [
+            "页面布局重构",
+            "响应式案例分析"
+          ]
+        },
+        {
+          "phase": 4,
+          "label": "课程与JS起源",
+          "card_ids": [
+            "331_课程信息",
+            "332_章节范围与学时",
+            "333_本部分主要内容",
+            "334_javascript的起源",
+            "336_es3与es2015",
+            "335_ecmascript标准"
+          ],
+          "teach_goal": "了解本部分课程安排，并建立对 JavaScript 与 ECMAScript 发展脉络的基本认识。",
+          "branches": [
+            "ECMAScript 版本演进",
+            "JavaScript 标准化"
+          ]
+        }
+      ],
+      "generated_by": "llm-validated"
+    },
+    {
+      "page_range": [
+        233,
+        244
+      ],
+      "sequence": [
+        {
+          "phase": 1,
+          "label": "运行环境",
+          "card_ids": [
+            "337_javascript运行环境",
+            "338_node_js运行时",
+            "339_浏览器端javascript的组成",
+            "340_bom",
+            "341_dom"
+          ],
+          "teach_goal": "先认识浏览器端 JavaScript 的组成，再扩展到 JavaScript 的整体运行环境与 Node.js 运行时。",
+          "branches": [
+            "浏览器端与 Node.js 的差异"
+          ]
+        },
+        {
+          "phase": 2,
+          "label": "引入与命名",
+          "card_ids": [
+            "342_javascript脚本插入网页的方法",
+            "343_javascript变量_弱类型与声明关键字",
+            "344_javascript标识符命名规则"
+          ],
+          "teach_goal": "掌握脚本在网页中的引入方式，并建立变量声明与标识符命名的基本规则。",
+          "branches": [
+            "内联、外链与事件处理方式"
+          ]
+        },
+        {
+          "phase": 3,
+          "label": "类型基础",
+          "card_ids": [
+            "345_javascript数据类型分类",
+            "346_typeof运算符",
+            "347_string类型",
+            "348_object类型"
+          ],
+          "teach_goal": "理解 JavaScript 数据类型的分类方式，以及 typeof、String 和 Object 的基础特征。",
+          "branches": [
+            "原始类型与引用类型"
+          ]
+        },
+        {
+          "phase": 4,
+          "label": "数值细节",
+          "card_ids": [
+            "350_nan",
+            "351_infinity和_infinity",
+            "352_number整数表示法",
+            "353_浮点数与科学计数法"
+          ],
+          "teach_goal": "掌握 Number 的常见表示方法，并理解 NaN、Infinity 等特殊数值。",
+          "branches": [
+            "数值计算与异常值"
+          ]
+        }
+      ],
+      "generated_by": "llm-validated"
+    },
+    {
+      "page_range": [
+        243,
+        256
+      ],
+      "sequence": [
+        {
+          "phase": 1,
+          "label": "数据类型入门",
+          "card_ids": [
+            "349_number类型",
+            "354_boolean_数据类型",
+            "355_null_数据类型",
+            "356_undefined_数据类型",
+            "357_symbol_数据类型",
+            "358_bigint_数据类型",
+            "359_object_类型"
+          ],
+          "teach_goal": "掌握 JavaScript 的常见数据类型及其基本分类，为后续表达式和程序控制打下基础。",
+          "branches": [
+            "类型判断与类型转换",
+            "原始类型与引用类型的区别"
+          ]
+        },
+        {
+          "phase": 2,
+          "label": "运算与流程控制",
+          "card_ids": [
+            "360_运算符与操作数",
+            "361_常见运算符分类",
+            "362_顺序结构",
+            "363_选择结构",
+            "364_循环结构",
+            "365_break_和_continue",
+            "366_常见输出方法"
+          ],
+          "teach_goal": "理解表达式计算与程序执行流程，能够使用分支、循环和跳转控制程序运行。",
+          "branches": [
+            "条件表达式",
+            "循环嵌套与调试输出"
+          ]
+        },
+        {
+          "phase": 3,
+          "label": "函数基础",
+          "card_ids": [
+            "367_函数",
+            "368_函数基本语法"
+          ],
+          "teach_goal": "理解函数的作用并掌握函数定义与使用的基本语法，能够用函数组织代码。",
+          "branches": [
+            "参数与返回值",
+            "函数封装与复用"
+          ]
+        }
+      ],
+      "generated_by": "llm-validated"
+    },
+    {
+      "page_range": [
+        253,
+        264
+      ],
+      "sequence": [
+        {
+          "phase": 1,
+          "label": "第 253-256 页",
+          "card_ids": [
+            "369_函数表达式",
+            "370_形参与实参",
+            "371_arguments对象",
+            "372_rest参数"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 2,
+          "label": "第 253-260 页",
+          "card_ids": [
+            "373_默认参数",
+            "374_return语句与函数返回值",
+            "375_函数的动态调用_call与apply",
+            "376_严格模式的作用"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 3,
+          "label": "第 257-264 页",
+          "card_ids": [
+            "377_开启严格模式的方法",
+            "378_this的基本含义",
+            "382_bind预设this",
+            "383_箭头函数的this"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 4,
+          "label": "第 262-264 页",
+          "card_ids": [
+            "379_方法调用中的this",
+            "380_普通函数的默认this",
+            "381_call_apply显式绑定this",
+            "384_非严格模式下thisarg的自动转换"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        }
+      ],
+      "generated_by": "deterministic-page-order",
+      "fallback_reason": "llm_map_failed"
+    },
+    {
+      "page_range": [
+        265,
+        276
+      ],
+      "sequence": [
+        {
+          "phase": 1,
+          "label": "第 265-268 页",
+          "card_ids": [
+            "385_匿名函数",
+            "386_函数嵌套",
+            "387_立即执行函数",
+            "388_箭头函数"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 2,
+          "label": "第 265-272 页",
+          "card_ids": [
+            "389_函数递归",
+            "390_函数递归",
+            "392_变量作用域",
+            "393_全局作用域"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 3,
+          "label": "第 269-274 页",
+          "card_ids": [
+            "394_局部作用域",
+            "395_块作用域",
+            "391_闭包",
+            "396_声明提升"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 4,
+          "label": "第 273-276 页",
+          "card_ids": [
+            "397_var声明提升",
+            "398_let声明与tdz",
+            "399_var与let的差异",
+            "400_对象"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        }
+      ],
+      "generated_by": "deterministic-page-order",
+      "fallback_reason": "llm_map_failed"
+    },
+    {
+      "page_range": [
+        273,
+        292
+      ],
+      "sequence": [
+        {
+          "phase": 1,
+          "label": "第 273-280 页",
+          "card_ids": [
+            "401_对象的创建方式",
+            "402_使用构造函数和new创建对象",
+            "403_自定义构造函数",
+            "404_构造函数中的this"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 2,
+          "label": "第 279-284 页",
+          "card_ids": [
+            "405_字面量对象",
+            "406_object_create创建原型对象",
+            "407_对象属性访问方式",
+            "408_对象的自动垃圾回收"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 3,
+          "label": "第 285-288 页",
+          "card_ids": [
+            "409_原型与_prototype",
+            "410_proto___与原型链",
+            "411_原型链的作用",
+            "412_原型系统的根对象"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 4,
+          "label": "第 285-292 页",
+          "card_ids": [
+            "413_原型扩展",
+            "414_属性查找顺序",
+            "416_原型扩展",
+            "415_构造器_原型的对象定义模式"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        }
+      ],
+      "generated_by": "deterministic-page-order",
+      "fallback_reason": "llm_map_failed"
+    },
+    {
+      "page_range": [
+        289,
+        304
+      ],
+      "sequence": [
+        {
+          "phase": 1,
+          "label": "类基础",
+          "card_ids": [
+            "417_类的概念",
+            "418_class_语法的基本元素",
+            "419_class_中的构造函数_constructor",
+            "420_类的两种定义方式"
+          ],
+          "teach_goal": "建立对 class 的基本认识，掌握类的声明结构、构造函数和定义方式。",
+          "branches": [
+            "ES6 类与函数构造器的对比"
+          ]
+        },
+        {
+          "phase": 2,
+          "label": "类成员",
+          "card_ids": [
+            "421_类字段定义",
+            "422_私有字段",
+            "424_getter_方法",
+            "423_类方法"
+          ],
+          "teach_goal": "掌握类中属性、私有数据、方法与访问器的定义和使用。",
+          "branches": [
+            "setter 方法与属性封装"
+          ]
+        },
+        {
+          "phase": 3,
+          "label": "继承与内置对象",
+          "card_ids": [
+            "425_extends_继承",
+            "426_json对象的方法",
+            "427_ecmascript_本地对象",
+            "430_object对象",
+            "431_object的常用成员",
+            "432_function对象"
+          ],
+          "teach_goal": "理解类继承，并认识常见 ECMAScript 本地对象及其基础用法。",
+          "branches": [
+            "Array、String、Date 等其他本地对象"
+          ]
+        },
+        {
+          "phase": 4,
+          "label": "全局对象",
+          "card_ids": [
+            "428_global对象",
+            "429_globalthis对象"
+          ],
+          "teach_goal": "认识全局作用域相关对象及其统一访问方式。",
+          "branches": [
+            "浏览器环境与 Node.js 环境中的全局对象差异"
+          ]
+        }
+      ],
+      "generated_by": "llm-validated"
+    },
+    {
+      "page_range": [
+        305,
+        312
+      ],
+      "sequence": [
+        {
+          "phase": 1,
+          "label": "数组基础",
+          "card_ids": [
+            "433_array对象与创建方式",
+            "434_数组头尾增删方法",
+            "435_join方法",
+            "437_indexof方法"
+          ],
+          "teach_goal": "掌握数组的创建、增删和基础访问查找，为后续数组处理方法打好基础。",
+          "branches": [
+            "数组长度与遍历的基础理解"
+          ]
+        },
+        {
+          "phase": 2,
+          "label": "数组遍历",
+          "card_ids": [
+            "436_sort方法",
+            "438_map方法",
+            "439_filter方法",
+            "440_foreach方法",
+            "441_some方法",
+            "442_every方法",
+            "443_findindex方法"
+          ],
+          "teach_goal": "学会使用数组遍历与条件判断类方法，实现排序、映射、筛选和查找。",
+          "branches": [
+            "回调函数的写法",
+            "函数式数组处理思路"
+          ]
+        },
+        {
+          "phase": 3,
+          "label": "数组归约",
+          "card_ids": [
+            "444_reduce方法"
+          ],
+          "teach_goal": "理解 reduce 的累积归约思想，能够把数组汇总为单一结果。",
+          "branches": [
+            "累加器与初始值"
+          ]
+        },
+        {
+          "phase": 4,
+          "label": "字符串基础",
+          "card_ids": [
+            "445_字符串字面量与string构造函数",
+            "446_字符串下标访问",
+            "447_模板字符串",
+            "448_string常用方法"
+          ],
+          "teach_goal": "掌握字符串的创建、访问、拼接与常用处理方法。",
+          "branches": [
+            "字符串与数组的联系",
+            "文本处理场景"
+          ]
+        }
+      ],
+      "generated_by": "llm-validated"
+    },
+    {
+      "page_range": [
+        309,
+        328
+      ],
+      "sequence": [
+        {
+          "phase": 1,
+          "label": "Date对象入门",
+          "card_ids": [
+            "449_date对象的创建方式",
+            "450_date对象的常用获取方法",
+            "451_date对象常用设置方法"
+          ],
+          "teach_goal": "掌握Date对象的创建、修改与获取，为时间处理打基础",
+          "branches": [
+            "时间格式化",
+            "时间戳转换"
+          ]
+        },
+        {
+          "phase": 2,
+          "label": "正则创建与规则",
+          "card_ids": [
+            "452_regexp对象的创建",
+            "453_正则表达式的基本元字符与字符集合",
+            "454_正则表达式的简写字符类与分组",
+            "455_位置元字符",
+            "456_频率限定符",
+            "457_匹配参数标志"
+          ],
+          "teach_goal": "学会创建RegExp并用位置、次数、标志和基础语法描述匹配模式",
+          "branches": [
+            "手机号校验",
+            "密码规则"
+          ]
+        },
+        {
+          "phase": 3,
+          "label": "正则匹配方法",
+          "card_ids": [
+            "458_regexp_test_方法",
+            "459_exec_返回匹配结果",
+            "460_match_方法",
+            "463_search_查找位置"
+          ],
+          "teach_goal": "掌握常用匹配与查找方法，并理解不同方法的返回结果",
+          "branches": [
+            "全局匹配",
+            "捕获组提取"
+          ]
+        },
+        {
+          "phase": 4,
+          "label": "正则替换实战",
+          "card_ids": [
+            "461_replace_方法",
+            "462_replace_分组替换手机号",
+            "464_提取查询字符串参数"
+          ],
+          "teach_goal": "能够使用replace完成替换，并在真实场景中提取和重组字符串",
+          "branches": [
+            "敏感词替换",
+            "URL参数解析"
+          ]
+        }
+      ],
+      "generated_by": "llm-validated"
+    },
+    {
+      "page_range": [
+        325,
+        336
+      ],
+      "sequence": [
+        {
+          "phase": 1,
+          "label": "Math基础",
+          "card_ids": [
+            "465_math对象常用属性和方法"
+          ],
+          "teach_goal": "掌握 Math 对象的常用属性和方法，为后续网页编程中的数值处理打基础。",
+          "branches": [
+            "继续学习浏览器环境中的其他内置对象"
+          ]
+        },
+        {
+          "phase": 2,
+          "label": "BOM与window入门",
+          "card_ids": [
+            "466_bom",
+            "467_window对象",
+            "468_全局变量和全局函数属于window对象",
+            "469_window对象的常见用途",
+            "470_window_devicepixelratio",
+            "471_window_innerheight",
+            "472_window_innerwidth",
+            "473_window_visualviewport"
+          ],
+          "teach_goal": "理解 BOM 与 window 对象的关系，并能使用 window 获取浏览器窗口相关信息。",
+          "branches": [
+            "进一步学习窗口交互与浏览器弹窗",
+            "拓展研究响应式布局中的视口概念"
+          ]
+        },
+        {
+          "phase": 3,
+          "label": "窗口交互",
+          "card_ids": [
+            "474_window_open_打开新窗口",
+            "475_alert_对话框",
+            "476_confirm_对话框",
+            "477_prompt_对话框"
+          ],
+          "teach_goal": "掌握常见的窗口操作与三种基础对话框的使用方法。",
+          "branches": [
+            "继续学习浏览器中的定时任务机制",
+            "结合弹窗实现简单交互流程"
+          ]
+        },
+        {
+          "phase": 4,
+          "label": "定时器",
+          "card_ids": [
+            "478_定时操作函数的用途",
+            "479_settimeout_与_cleartimeout",
+            "480_setinterval_与_clearinterval"
+          ],
+          "teach_goal": "理解定时操作的应用场景，并能正确使用一次性定时器和循环定时器。",
+          "branches": [
+            "进一步学习异步编程与事件循环",
+            "结合计时器实现动画和轮播效果"
+          ]
+        }
+      ],
+      "generated_by": "llm-validated"
+    },
+    {
+      "page_range": [
+        337,
+        352
+      ],
+      "sequence": [
+        {
+          "phase": 1,
+          "label": "第 337-340 页",
+          "card_ids": [
+            "481_location对象与href属性",
+            "482_location_replace方法",
+            "483_history对象",
+            "484_history前进_后退与刷新"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 2,
+          "label": "第 337-344 页",
+          "card_ids": [
+            "485_navigator对象与useragent属性",
+            "486_screen对象",
+            "487_dom_文档对象模型",
+            "488_dom的版本演进"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 3,
+          "label": "第 345-348 页",
+          "card_ids": [
+            "489_dom树",
+            "490_dom节点类型",
+            "491_节点关系",
+            "492_document_getelementbyid"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 4,
+          "label": "第 345-352 页",
+          "card_ids": [
+            "493_document_queryselector",
+            "494_document_queryselectorall",
+            "495_nodelist",
+            "496_静态_nodelist"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        }
+      ],
+      "generated_by": "deterministic-page-order",
+      "fallback_reason": "llm_map_failed"
+    },
+    {
+      "page_range": [
+        349,
+        360
+      ],
+      "sequence": [
+        {
+          "phase": 1,
+          "label": "DOM树入门",
+          "card_ids": [
+            "497_遍历_nodelist",
+            "502_基于树中位置的_dom_导航"
+          ],
+          "teach_goal": "理解 DOM 树中的位置关系，并能对获取到的节点集合进行遍历。",
+          "branches": [
+            "可延伸到选择器获取节点集合",
+            "可结合循环与数组方法处理 NodeList"
+          ]
+        },
+        {
+          "phase": 2,
+          "label": "节点关系访问",
+          "card_ids": [
+            "498_父节点访问",
+            "499_子节点集合",
+            "500_首尾子节点",
+            "501_兄弟节点访问"
+          ],
+          "teach_goal": "掌握沿父、子、兄弟方向在 DOM 树中定位和切换节点。",
+          "branches": [
+            "可进一步处理层级嵌套结构",
+            "可用于实现菜单、列表等联动操作"
+          ]
+        },
+        {
+          "phase": 3,
+          "label": "内容与属性操作",
+          "card_ids": [
+            "503_innerhtml属性",
+            "504_textcontent属性",
+            "505_innertext属性",
+            "507_属性操作方法_getattribute_setattribute_hasattr",
+            "508_element_style_修改内联样式",
+            "509_element_classname_获取或设置class属性字符串",
+            "510_element_classlist_类名的便捷操作",
+            "506_标准属性的直接访问与修改"
+          ],
+          "teach_goal": "学会读取与修改元素内容、标准属性、类名和样式等常见 DOM 属性。",
+          "branches": [
+            "可延伸到表单值与链接地址等属性操作",
+            "可结合样式切换实现交互效果"
+          ]
+        },
+        {
+          "phase": 4,
+          "label": "节点增删",
+          "card_ids": [
+            "515_删除dom节点",
+            "511_创建元素节点"
+          ],
+          "teach_goal": "能够动态创建新元素并删除不需要的 DOM 节点。",
+          "branches": [
+            "可用于渲染列表、评论和动态组件",
+            "可结合事件委托管理新增元素"
+          ]
+        }
+      ],
+      "generated_by": "llm-validated"
+    },
+    {
+      "page_range": [
+        357,
+        372
+      ],
+      "sequence": [
+        {
+          "phase": 1,
+          "label": "DOM节点基础",
+          "card_ids": [
+            "512_创建文本节点",
+            "513_传统插入子节点",
+            "514_现代插入节点方法"
+          ],
+          "teach_goal": "掌握文本节点创建与节点插入的基本操作，为后续DOM交互打下基础。",
+          "branches": [
+            "节点与DOM树的关系",
+            "常见节点插入场景"
+          ]
+        },
+        {
+          "phase": 2,
+          "label": "DOM事件入门",
+          "card_ids": [
+            "517_事件源_事件类型与事件监听程序",
+            "516_dom事件",
+            "518_资源加载与卸载事件",
+            "519_表单重置与提交事件",
+            "520_键盘事件",
+            "521_鼠标及相关常用事件"
+          ],
+          "teach_goal": "认识DOM事件及常见事件类型，理解事件源、事件类型和监听程序的基本概念。",
+          "branches": [
+            "常见交互事件分类",
+            "表单与资源相关事件"
+          ]
+        },
+        {
+          "phase": 3,
+          "label": "事件传播机制",
+          "card_ids": [
+            "522_dom事件流",
+            "523_事件冒泡",
+            "524_事件捕获"
+          ],
+          "teach_goal": "理解DOM事件流及事件冒泡、捕获过程，为规范处理复杂交互做准备。",
+          "branches": [
+            "事件委托",
+            "传播阶段判断"
+          ]
+        },
+        {
+          "phase": 4,
+          "label": "事件处理进阶",
+          "card_ids": [
+            "525_dom标准事件模型",
+            "526_事件绑定方式",
+            "527_addeventlistener与removeeventlistener",
+            "528_事件对象"
+          ],
+          "teach_goal": "掌握DOM标准事件模型、事件绑定与事件对象的使用，并能进行监听器的添加与移除。",
+          "branches": [
+            "监听器管理",
+            "事件处理函数参数"
+          ]
+        }
+      ],
+      "generated_by": "llm-validated"
+    },
+    {
+      "page_range": [
+        369,
+        387
+      ],
+      "sequence": [
+        {
+          "phase": 1,
+          "label": "第 369-374 页",
+          "card_ids": [
+            "530_键盘事件和鼠标事件的事件对象属性",
+            "531_事件委托",
+            "529_事件对象的常用属性",
+            "532_事件委托"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 2,
+          "label": "第 373-380 页",
+          "card_ids": [
+            "533_阻止事件的默认行为",
+            "534_onsubmit_表单检查",
+            "535_stoppropagation_阻止事件传播",
+            "536_preventdefault_阻止默认行为"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 3,
+          "label": "第 377-384 页",
+          "card_ids": [
+            "537_stopimmediatepropagation_阻止同元素后续处理器",
+            "538_web_storage_api",
+            "539_localstorage_的持久化存储",
+            "540_localstorage_基本读写"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 4,
+          "label": "第 381-387 页",
+          "card_ids": [
+            "541_localstorage_对象存储需序列化",
+            "542_sessionstorage_的会话隔离",
+            "543_sessionstorage_的方法与_localstorage_相同",
+            "544_localstorage的使用场景"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        }
+      ],
+      "generated_by": "deterministic-page-order",
+      "fallback_reason": "llm_map_failed"
+    },
+    {
+      "page_range": [
+        385,
+        387
+      ],
+      "sequence": [
+        {
+          "phase": 1,
+          "label": "入门认知",
+          "card_ids": [
+            "545_sessionstorage的使用场景"
+          ],
+          "teach_goal": "先了解 sessionStorage 在实际开发中的典型用途与适用时机。",
+          "branches": [
+            "与 localStorage 的使用场景对比"
+          ]
+        },
+        {
+          "phase": 2,
+          "label": "存储基础",
+          "card_ids": [
+            "549_web_storage仅能存储字符串",
+            "550_localstorage和sessionstorage的同源策略限制"
+          ],
+          "teach_goal": "掌握 Web Storage 的数据类型特性以及可访问范围，建立正确的使用前提。",
+          "branches": [
+            "序列化/反序列化处理",
+            "同源策略与跨域访问"
+          ]
+        },
+        {
+          "phase": 3,
+          "label": "限制与注意",
+          "card_ids": [
+            "546_web_storage的安全性注意事项",
+            "547_web_storage的容量限制与quotaexceedederror",
+            "548_web_storage的同步特性与性能影响"
+          ],
+          "teach_goal": "理解 Web Storage 的容量、性能和安全边界，避免在工程中误用。",
+          "branches": [
+            "异常捕获与降级方案",
+            "主线程阻塞与性能优化",
+            "敏感信息存储规范"
+          ]
+        }
+      ],
+      "generated_by": "llm-validated"
+    }
+  ],
+  "fallback_segments": 11
+}

@@ -1,0 +1,37 @@
+{
+  "title": "原型系统的根对象",
+  "definition": "JavaScript 原型系统存在一个根对象：它的原型是 null，因此不属于任何构造函数的实例。教材图示说明这个对象由 JavaScript 引擎在初始化时直接创建，是底层的原型根节点。",
+  "key_points": [
+    "根对象的原型是 null。",
+    "它不属于任何构造函数的实例。",
+    "它由 JavaScript 引擎在初始化时直接创建。"
+  ],
+  "examples": [
+    "图中标出的 proto 对象，其 __proto__ 指向 null。"
+  ],
+  "misconceptions": [
+    "所有对象最终都属于某个构造函数的实例。",
+    "原型链最顶层的对象还会再向上指向别的对象。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么说原型系统的根对象不属于任何构造函数的实例？",
+      "a": "因为它的原型是 null，而不是某个构造函数的 prototype。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "__proto__ 与原型链"
+  ],
+  "source_pages": [
+    285,
+    288
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "412_原型系统的根对象",
+  "_chunk_pages": [
+    285,
+    288
+  ]
+}

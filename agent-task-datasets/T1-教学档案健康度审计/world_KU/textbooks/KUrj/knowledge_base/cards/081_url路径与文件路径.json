@@ -1,0 +1,39 @@
+{
+  "title": "URL路径与文件路径",
+  "definition": "URL 是 HTTP 层的路径，文件路径属于操作系统层。像 /css/style.css 这样的 URL 不能直接当作系统绝对路径使用；静态服务器需要把 URL 映射到 root 目录下的相对文件路径，并在后续加入严格安全检查。",
+  "key_points": [
+    "URL 属于 HTTP 层，文件路径属于操作系统层",
+    "/css/style.css 不能直接当系统绝对路径",
+    "应映射到 root 目录下的相对文件，之后再做安全检查"
+  ],
+  "examples": [
+    "请求 /css/style.css 时，服务器不应直接拿它去 open 系统根目录下的 /css/style.css",
+    "应先把 URL 映射到站点根目录下对应的文件"
+  ],
+  "misconceptions": [
+    "把 URL 当作文件系统绝对路径",
+    "认为只要文件存在就可以直接暴露其真实路径"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么 /css/style.css 不能直接当系统路径用？",
+      "a": "因为它是 HTTP 层的 URL，不是操作系统层的文件路径，必须先映射到 root 目录下的相对文件。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "HTTP基础",
+    "文件路径基础"
+  ],
+  "source_pages": [
+    53,
+    56
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "081_url路径与文件路径",
+  "_chunk_pages": [
+    53,
+    56
+  ]
+}

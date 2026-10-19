@@ -1,0 +1,48 @@
+{
+  "title": "使用 DOT 格式打印有向图",
+  "definition": "DOT 是一种图形描述语言，可用来表示图的节点和边。`to_dot` 函数接收一个有向图和图名称，返回该图的 DOT 格式字符串，通常使用 `digraph 图名 { ... }` 表示有向图。",
+  "key_points": [
+    "函数形式为 `std::wstring to_dot(const directed_graph<T>& graph, std::wstring_view graph_name)`。",
+    "有向边通常输出为 `节点值 -> 节点值`。",
+    "没有相邻节点的节点会单独输出。",
+    "函数遍历图中的节点，并通过 `get_adjacent_nodes_values` 获取每个节点的相邻节点值。"
+  ],
+  "examples": [
+    "DOT 结构示例：`digraph Graph1 { 11 -> 33 22 -> 33 33 }`。",
+    "原文示例中，节点 `22` 的边可输出为：`22 -> 33`、`22 -> 44`、`22 -> 55`。"
+  ],
+  "misconceptions": [
+    "DOT 不是图形图片本身，而是用于描述图的文本格式。",
+    "`to_dot` 的返回值是字符串，不是直接绘制到屏幕上的图像。",
+    "有向边应使用 `->`，不能用无向图常见的 `--` 替代。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "DOT 是什么？",
+      "a": "DOT 是一种图形描述语言，可用文本表示图的节点和边，并可由相关工具转换为图形。"
+    },
+    {
+      "q": "有向图中的边在 DOT 中如何表示？",
+      "a": "通常表示为 `源节点 -> 目标节点`，例如 `11 -> 33`。"
+    },
+    {
+      "q": "`to_dot` 函数返回什么？",
+      "a": "返回给定有向图的 DOT 格式宽字符串。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "有向图的节点与边"
+  ],
+  "source_pages": [
+    730,
+    730
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1520_使用_dot_格式打印有向图",
+  "_chunk_pages": [
+    729,
+    732
+  ]
+}

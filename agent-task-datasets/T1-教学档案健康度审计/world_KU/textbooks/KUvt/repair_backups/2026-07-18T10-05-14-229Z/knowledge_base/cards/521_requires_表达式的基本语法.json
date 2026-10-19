@@ -1,0 +1,43 @@
+{
+  "title": "requires 表达式的基本语法",
+  "definition": "`requires` 表达式用于描述一组必须满足的要求。基本形式是 `requires (parameter-list) { requirements; }`，其中参数列表提供检查表达式时使用的局部参数，花括号中的 requirements 列出要检查的要求。",
+  "key_points": [
+    "参数列表中的参数只用于编译期检查，不需要实际传入运行时对象。",
+    "可以省略参数列表，直接写成 `requires { requirements; }`。",
+    "要求之间通常以分号分隔，每个要求可以检查表达式、类型或其他约束。"
+  ],
+  "examples": [
+    "`requires(T x) { x++; ++x; }`：在假想的 `T x` 上检查前置递增和后置递增。",
+    "`requires { typename T::value_type; }`：检查 `T::value_type` 是否是一个有效的嵌套类型。"
+  ],
+  "misconceptions": [
+    "`requires` 表达式不是普通的函数调用，也不会创建运行时变量。",
+    "`requires(T x)` 中的 `x` 只是用于表达约束的局部符号，不代表调用者必须提供名为 `x` 的对象。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`requires(T x) { x++; ++x; }` 的含义是什么？",
+      "a": "它检查类型 `T` 的对象是否同时支持后置递增和前置递增。"
+    },
+    {
+      "q": "如何用 requires 表达式检查类型是否具有 `value_type`？",
+      "a": "写成 `requires { typename T::value_type; }`。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++20概念",
+    "类型成员"
+  ],
+  "source_pages": [
+    401,
+    404
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "521_requires_表达式的基本语法",
+  "_chunk_pages": [
+    401,
+    404
+  ]
+}

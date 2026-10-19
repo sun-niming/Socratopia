@@ -1,0 +1,44 @@
+{
+  "title": "Null 数据类型",
+  "definition": "Null 是 JavaScript 中只有一个值 null 的数据类型，表示没有保存有效值。它可用于清除变量内容。",
+  "key_points": [
+    "null 是唯一值为 null 的数据类型。",
+    "关键字 null 不能用作函数名或变量名。",
+    "null 表示没有保存有效值。",
+    "可以给变量赋值为 null 来清除变量内容。",
+    "原文指出 typeof 运算符对 null 的返回结果不是 Object 类型。"
+  ],
+  "examples": [
+    "let x = null;",
+    "给变量赋 null 值以清除变量内容"
+  ],
+  "misconceptions": [
+    "null 不是数值、字符串、boolean、数组或对象。",
+    "不要把 null 当作对象本身；它表示“没有有效值”。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "null 在 JavaScript 中表示什么？",
+      "a": "表示没有保存有效值。"
+    },
+    {
+      "q": "能否把 null 作为函数名或变量名？",
+      "a": "不能。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "JavaScript 基本数据类型"
+  ],
+  "source_pages": [
+    245,
+    248
+  ],
+  "needs_verification": true,
+  "verify_query": "JavaScript typeof null 返回 object 还是 null？ 教材原文是否存在笔误？",
+  "concept_id": "340_null_数据类型",
+  "_chunk_pages": [
+    245,
+    248
+  ]
+}

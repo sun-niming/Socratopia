@@ -1,0 +1,39 @@
+{
+  "title": "第2天验收与常见排查",
+  "definition": "第2天验收时，访问 `curl -i http://127.0.0.1:8080/` 应该看到 `HTTP/1.1 200 OK`、`Content-Type: text/html; charset=utf-8`、`Content-Length: ...`、`Connection: close`；对不支持的方法，如 `POST`，应该返回 `405`。如果浏览器显示空白但 `curl` 能看到响应头，优先检查响应头和响应体之间是否有空行、`Content-Length` 是否等于 body 的字节数、发送完后是否关闭了 `client_fd`、响应头里的换行是否统一。",
+  "key_points": [
+    "`GET /` 的验收结果应是 200，并带有正确的 HTML 响应头。",
+    "不支持的方法，例如 `POST`，应返回 405。",
+    "浏览器空白但 `curl` 有头部时，先排查空行、`Content-Length`、连接关闭和换行格式。"
+  ],
+  "examples": [
+    "`curl -i http://127.0.0.1:8080/`",
+    "`curl -i -X POST http://127.0.0.1:8080/`"
+  ],
+  "misconceptions": [
+    "只要浏览器不报错就说明响应一定正确。",
+    "空白页一定是 HTML 内容本身有问题，而不是响应头或连接处理有问题。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "第2天验收时，访问 `/` 需要看到哪些关键响应头？",
+      "a": "至少应看到 `HTTP/1.1 200 OK`、`Content-Type: text/html; charset=utf-8`、`Content-Length: ...`、`Connection: close`。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "HTTP 请求/响应基础",
+    "状态码基础"
+  ],
+  "source_pages": [
+    21,
+    24
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "018_第2天验收与常见排查",
+  "_chunk_pages": [
+    21,
+    24
+  ]
+}

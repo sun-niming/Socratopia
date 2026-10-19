@@ -1,0 +1,45 @@
+{
+  "title": "Visual C++ 2019 Performance Profiler 的主要工具",
+  "definition": "Visual C++ 2019 中提供图形化的 Performance Profiler，可从 Visual Studio 的 Analyze 菜单中打开。原文介绍的工具包括 CPU Usage、GPU Usage、Instrumentation 和 Memory Usage。其中，CPU Usage 以较低开销监测 CPU 执行时间；Instrumentation 会向应用程序加入额外代码，以准确统计函数调用次数并为每次调用计时，但对程序性能影响更大。",
+  "key_points": [
+    "CPU Usage：低开销监测应用程序的 CPU 使用情况，适合初步寻找 CPU 瓶颈。",
+    "GPU Usage：用于分析 DirectX 应用程序中的 GPU 使用情况，帮助判断 CPU 或 GPU 是否为瓶颈。",
+    "Instrumentation：通过插入额外代码，准确获取函数调用次数和调用时间，但剖析开销较大。",
+    "Memory Usage：用于调查内存问题，例如内存泄漏。",
+    "原文建议先使用 CPU Usage；如果信息不足，再尝试 Instrumentation。"
+  ],
+  "examples": [
+    "在 Visual Studio 中依次选择 Analyze → Performance Profiler，勾选 CPU Usage，然后单击 Start 开始剖析。"
+  ],
+  "misconceptions": [
+    "认为 Instrumentation 一定比 CPU Usage 更适合作为第一步；原文建议先用低开销的 CPU Usage。",
+    "认为 CPU Usage 能提供所有函数调用次数的精确统计；原文将精确调用次数和计时归于 Instrumentation。",
+    "认为 GPU Usage 是所有普通 C++ 程序的默认性能分析工具；原文将其用途限定为 DirectX 应用程序。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "CPU Usage 和 Instrumentation 的主要区别是什么？",
+      "a": "CPU Usage 以较低开销监测 CPU 使用情况；Instrumentation 会插入额外代码，以更准确地统计函数调用次数和调用时间，但对目标程序影响更大。"
+    },
+    {
+      "q": "使用 Visual C++ 2019 进行初步瓶颈分析时，原文建议先选择什么工具？",
+      "a": "先选择 CPU Usage；如果得到的信息不足，再尝试 Instrumentation。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "性能瓶颈的基本概念",
+    "Visual Studio 项目基本操作"
+  ],
+  "source_pages": [
+    871,
+    872
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1803_visual_c_2019_performance_profiler_的主要工具",
+  "_chunk_pages": [
+    869,
+    872
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "title": "replace方法",
+  "definition": "字符串的 replace 方法用于把字符串中匹配到的内容替换成新的字符串。原文语法是 str.replace(reg, 'new str')；如果正则表达式能匹配所有目标内容，并带有 g 标志，就可以把多个匹配项都替换掉，例如把字符串中的所有数字删除。",
+  "key_points": [
+    "语法形式：str.replace(reg, 'new str')。",
+    "可以用正则表达式指定要替换的内容。",
+    "把替换内容设为空字符串，可以实现删除匹配项。"
+  ],
+  "examples": [
+    "const regex = /\\d+/g; // 匹配所有数字\nconst str = \"a1b2c3\";\nconst replacedStr = str.replace(regex, \"\"); // 替换所有匹配字符为空字符串\nconsole.log(replacedStr); // \"abc\""
+  ],
+  "misconceptions": [
+    "replace 不只用于替换固定文本，也可以配合正则表达式替换匹配到的一类内容。",
+    "把替换字符串写成空字符串时，效果是删除匹配内容。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何使用 replace 删除字符串中的所有数字？",
+      "a": "使用能够匹配数字的正则表达式，再把替换字符串设为空字符串，例如 str.replace(/\\d+/g, \"\")。"
+    },
+    {
+      "q": "replace 的基本语法是什么？",
+      "a": "str.replace(reg, 'new str')。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "正则表达式基础",
+    "字符串对象"
+  ],
+  "source_pages": [
+    321,
+    324
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "434_replace方法",
+  "_chunk_pages": [
+    321,
+    324
+  ]
+}

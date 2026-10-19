@@ -1,0 +1,50 @@
+{
+  "title": "list双向链表",
+  "definition": "list定义在<list>头文件中，是一种双向链表数据结构。list保存元素序列，但元素不一定存储在连续内存中；每个元素通常通过指针等方式知道如何找到前一个和后一个元素。list查找和访问元素较慢，通常为线性时间；找到插入或删除位置后，插入和删除通常为常量时间。",
+  "key_points": [
+    "list是双向链表，支持向前和向后连接。",
+    "list元素不要求连续存储。",
+    "查找和访问元素通常为线性时间。",
+    "找到相应位置后，插入和删除通常为常量时间。",
+    "虽然list在特定操作上有优势，但实际运行中vector通常可能更快，应通过性能分析确认。"
+  ],
+  "examples": [
+    "代码示例：\nstd::list<int> values{10, 20, 30};\nauto position{std::next(values.begin(), 1)};\nvalues.insert(position, 15);\n// 在已找到位置后插入元素。"
+  ],
+  "misconceptions": [
+    "list不是随机访问容器，不能像vector一样高效地通过下标访问任意位置。",
+    "list插入和删除为常量时间的前提是已经找到相应位置；查找位置本身可能需要线性时间。",
+    "list不一定在总体性能上优于vector。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "list是什么数据结构？",
+      "a": "list是标准库提供的双向链表数据结构。"
+    },
+    {
+      "q": "list的元素访问复杂度通常是多少？",
+      "a": "通常是线性时间。"
+    },
+    {
+      "q": "在已找到位置后，list插入和删除的复杂度是多少？",
+      "a": "通常是常量时间。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "链表",
+    "迭代器",
+    "时间复杂度"
+  ],
+  "source_pages": [
+    508,
+    508
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1036_list双向链表",
+  "_chunk_pages": [
+    505,
+    508
+  ]
+}

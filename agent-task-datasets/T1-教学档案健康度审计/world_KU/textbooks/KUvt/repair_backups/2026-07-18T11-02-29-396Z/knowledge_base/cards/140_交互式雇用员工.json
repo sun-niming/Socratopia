@@ -1,0 +1,49 @@
+{
+  "title": "交互式雇用员工",
+  "definition": "doHire() 从用户读取新员工的姓和名，调用 Database 的 addEmployee() 添加员工，并通过格式化输出报告新员工的姓名和员工编号。",
+  "key_points": [
+    "函数接收一个 Database 对象参数。",
+    "使用两个 string 变量保存 firstName 和 lastName。",
+    "通过标准输入读取名字和姓氏。",
+    "调用 `db.addEmployee(firstName, lastName)` 创建员工，并取得员工对象引用。",
+    "输出内容包括姓名和 `getEmployeeNumber()` 返回的员工编号。"
+  ],
+  "examples": [
+    "核心流程可表示为：\n```cpp\nvoid doHire(Database& db) {\n    std::string firstName;\n    std::string lastName;\n    std::cin >> firstName;\n    std::cin >> lastName;\n    auto& employee{db.addEmployee(firstName, lastName)};\n    std::cout << std::format(\n        \"Hired employee {} {} with employee number {}.\",\n        firstName, lastName, employee.getEmployeeNumber())\n              << std::endl;\n}\n```"
+  ],
+  "misconceptions": [
+    "doHire() 不是直接构造 Employee 对象，而是通过 Database 的 addEmployee() 添加员工。",
+    "员工编号由员工对象的 getEmployeeNumber() 提供，原文没有说明编号的具体生成规则。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "doHire() 如何获得新员工的编号？",
+      "a": "调用 addEmployee() 得到员工对象后，再调用 employee.getEmployeeNumber()。"
+    },
+    {
+      "q": "doHire() 从用户读取哪些数据？",
+      "a": "员工的 firstName 和 lastName。"
+    },
+    {
+      "q": "doHire() 的主要职责是什么？",
+      "a": "读取姓名、向数据库添加员工，并输出雇用结果。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "Database添加员工",
+    "C++字符串与输入",
+    "C++格式化输出"
+  ],
+  "source_pages": [
+    97,
+    100
+  ],
+  "needs_verification": true,
+  "verify_query": "\"C++20高级编程\" \"Hired employee\" \"getEmployeeNumber\" \"doHire\"",
+  "concept_id": "140_交互式雇用员工",
+  "_chunk_pages": [
+    97,
+    100
+  ]
+}

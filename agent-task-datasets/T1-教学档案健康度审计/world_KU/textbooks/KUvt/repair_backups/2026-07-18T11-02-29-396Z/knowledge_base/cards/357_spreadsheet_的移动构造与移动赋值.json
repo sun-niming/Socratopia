@@ -1,0 +1,47 @@
+{
+  "title": "Spreadsheet 的移动构造与移动赋值",
+  "definition": "移动构造函数和移动赋值运算符用于从右值对象取得资源，以避免不必要的深拷贝。原文中的 Spreadsheet 移动构造函数声明为 `Spreadsheet(Spreadsheet&& src) noexcept`，移动赋值运算符声明为 `Spreadsheet::operator=(Spreadsheet&& rhs) noexcept`，其实现使用 `swap(*this, src)` 或等价的交换操作处理资源转移。",
+  "key_points": [
+    "参数类型 `Spreadsheet&&` 表示接收右值或可转换为右值的对象。",
+    "移动操作通常应声明为 `noexcept`，以便标准库容器在扩容或重新分配时优先使用移动操作。",
+    "对临时对象执行 `push_back`、用函数返回值初始化对象或给对象赋值时，可能调用移动构造或移动赋值，而不是复制操作。",
+    "示例中的 `createObject()` 返回一个临时的 `Spreadsheet` 对象：`Spreadsheet createObject() { return Spreadsheet{3, 2}; }`。"
+  ],
+  "examples": [
+    "`std::vector<Spreadsheet> vec; vec.push_back(Spreadsheet{100, 100});`：向容器插入临时 `Spreadsheet` 对象，可能调用移动构造函数。",
+    "`Spreadsheet s{2, 3}; s = createObject();`：函数返回的临时对象可用于移动赋值。",
+    "`Spreadsheet s2{5, 6}; s2 = s;`：`s` 是左值，通常匹配复制赋值运算符，而不是移动赋值运算符。"
+  ],
+  "misconceptions": [
+    "移动操作不等于把源对象销毁；移动后源对象仍然存在，但其值通常处于有效但未指定状态。",
+    "只要写出了 `std::move` 就不一定发生实际资源转移；是否移动还取决于目标类型是否提供可用的移动构造或移动赋值。",
+    "临时对象并不总是必然产生一次实际的移动构造，编译器可能通过返回值优化省略构造。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`Spreadsheet s2{5, 6}; s2 = s;` 中通常匹配复制赋值还是移动赋值？",
+      "a": "通常匹配复制赋值，因为 `s` 是左值；移动赋值通常要求右值参数。"
+    },
+    {
+      "q": "为什么移动构造函数和移动赋值运算符常声明为 `noexcept`？",
+      "a": "因为标准库容器在需要保证异常安全时，通常只有在移动操作不抛异常时才会优先使用移动操作。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "左值与右值",
+    "构造函数与赋值运算符",
+    "C++资源管理"
+  ],
+  "source_pages": [
+    273,
+    274
+  ],
+  "needs_verification": true,
+  "verify_query": "《C++20高级编程》第5版 第273-274页 Spreadsheet 移动构造函数 移动赋值运算符 swap noexcept vector push_back 示例",
+  "concept_id": "357_spreadsheet_的移动构造与移动赋值",
+  "_chunk_pages": [
+    273,
+    276
+  ]
+}

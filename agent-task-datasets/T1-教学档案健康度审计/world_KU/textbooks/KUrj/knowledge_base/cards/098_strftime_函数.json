@@ -1,0 +1,39 @@
+{
+  "title": "strftime 函数",
+  "definition": "`strftime`用于把时间格式化成字符串。原型为`#include <time.h>\nsize_t strftime(char *s, size_t max, const char *format, const struct tm *tm);`。其中`s`是输出缓冲区，`max`是缓冲区大小，`format`是时间格式，`tm`是本地时间结构。返回值是写入的字符数，不包含结尾的`0`。原文把它用于生成日志时间戳。",
+  "key_points": [
+    "作用是把时间转换成指定格式的字符串。",
+    "返回写入字符数，不包含结尾`0`。",
+    "原文用于日志时间戳生成，且建议配合`localtime_r`使用。"
+  ],
+  "examples": [
+    "原文示例：先用`time_t now = time(NULL);`和`localtime_r(&now, &tm_info);`，再调用`strftime(time_buf, sizeof(time_buf), '%Y-%m-%d %H:%M:%S', &tm_info);`。"
+  ],
+  "misconceptions": [
+    "以为`strftime`返回的是缓冲区大小。",
+    "以为时间格式字符串随便写都不会影响输出。",
+    "以为多线程里直接用`localtime`也同样安全。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`strftime`的返回值表示什么？",
+      "a": "表示实际写入的字符数，不包括结尾的`0`。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C 语言基础",
+    "时间与日期基础"
+  ],
+  "source_pages": [
+    57,
+    60
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "098_strftime_函数",
+  "_chunk_pages": [
+    57,
+    60
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "title": "operator[]与at()的边界检查差异",
+  "definition": "directed_graph 当前使用 operator[] 按节点索引访问节点。operator[] 与 vector 的 operator[] 类似，不进行边界检查；使用越界索引访问不是安全的有效访问。directed_graph 还提供 at()，at() 会进行边界检查，传入越界索引时抛出异常。directed_graph 的 at() 实现只是转发到内部 m_nodes 容器的 vector 的 at() 方法。",
+  "key_points": [
+    "operator[] 适合调用者已经确定索引有效的场景，但不会主动检查边界。",
+    "at() 会检查索引是否越界；越界时抛出异常。",
+    "at() 同时提供非 const 和 const 重载，分别返回 reference 和 const_reference。"
+  ],
+  "examples": [
+    "非 const 版本的声明可表示为：`reference at(size_type index);`。",
+    "const 版本的声明可表示为：`const_reference at(size_type index) const;`。",
+    "访问节点时，`graph[index]` 不检查边界；`graph.at(index)` 检查边界，越界会抛出异常。"
+  ],
+  "misconceptions": [
+    "不能认为 operator[] 和 at() 都会检查越界；教材明确区分了二者。",
+    "at() 的边界检查不是返回空节点，而是在索引越界时抛出异常。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "directed_graph 的 operator[] 是否进行边界检查？",
+      "a": "不进行边界检查，它与 vector 的 operator[] 类似。"
+    },
+    {
+      "q": "directed_graph::at(index) 在 index 越界时如何处理？",
+      "a": "进行边界检查，并抛出异常。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++容器元素访问",
+    "异常处理基础"
+  ],
+  "source_pages": [
+    734,
+    734
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1526_operator_与at_的边界检查差异",
+  "_chunk_pages": [
+    733,
+    736
+  ]
+}

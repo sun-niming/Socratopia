@@ -1,0 +1,44 @@
+{
+  "title": "priority_queue按优先级取出元素",
+  "definition": "`priority_queue`定义在`<queue>`头文件中，具有队列的基本功能，但每个元素带有优先级。元素按照优先级被移除；如果多个元素的优先级相同，它们之间的移除顺序没有定义。",
+  "key_points": [
+    "优先级高的元素先于优先级低的元素被移除。",
+    "相同优先级元素的移除顺序没有定义。",
+    "由于需要根据优先级对元素进行重新排序，`priority_queue`的插入和删除通常比普通`queue`慢。",
+    "它适合建模带有优先级的排队系统。"
+  ],
+  "examples": [
+    "银行模拟中，可以把企业账号顾客设置为高优先级，把普通顾客设置为低优先级，使所有企业顾客优先于普通顾客得到服务。",
+    "若企业顾客优先级高于普通顾客，即使普通顾客先到达，也可能在企业顾客之后接受服务。"
+  ],
+  "misconceptions": [
+    "`priority_queue`不一定遵循普通队列的到达先后顺序，而是优先考虑元素优先级。",
+    "优先级相同的元素不保证按照插入顺序移除。",
+    "`priority_queue`不是普通`queue`的简单别名，它需要维护优先级顺序。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`priority_queue`与`queue`的核心区别是什么？",
+      "a": "`queue`按进入顺序提供FIFO语义，而`priority_queue`按元素优先级移除元素。"
+    },
+    {
+      "q": "相同优先级的元素会按照什么顺序移除？",
+      "a": "原文规定其移除顺序没有定义。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "queue的FIFO语义"
+  ],
+  "source_pages": [
+    509,
+    509
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1042_priority_queue按优先级取出元素",
+  "_chunk_pages": [
+    509,
+    512
+  ]
+}

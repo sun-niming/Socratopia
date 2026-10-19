@@ -1,0 +1,38 @@
+{
+  "title": "HTML元素分类",
+  "definition": "教材把HTML元素主要分为行内元素、块状元素和行内块元素三类；使用CSS的display属性可以让这三类元素相互转换。",
+  "key_points": [
+    "三类元素分别是行内元素、块状元素和行内块元素",
+    "可以使用CSS的display属性在三者之间转换"
+  ],
+  "examples": [
+    "display:inline;",
+    "display:block;",
+    "display:inline-block;"
+  ],
+  "misconceptions": [
+    "元素类型一旦确定就不能通过CSS改变",
+    "只有块级元素才能被CSS设置样式"
+  ],
+  "qa_pairs": [
+    {
+      "q": "HTML元素主要分为哪三类？它们能否转换？",
+      "a": "主要分为行内元素、块状元素和行内块元素三类，使用CSS的display属性可以让它们相互转换。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "HTML元素"
+  ],
+  "source_pages": [
+    37,
+    40
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "054_html元素分类",
+  "_chunk_pages": [
+    37,
+    40
+  ]
+}

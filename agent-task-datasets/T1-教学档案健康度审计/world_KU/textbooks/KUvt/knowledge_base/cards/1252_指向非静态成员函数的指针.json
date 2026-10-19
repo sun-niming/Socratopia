@@ -1,0 +1,49 @@
+{
+  "title": "指向非静态成员函数的指针",
+  "definition": "指向非静态成员函数的指针是一种特殊的指针类型，类型中必须包含所属类名。它只能在某个具体对象的上下文中使用：对对象使用 `.*`，或对对象指针使用 `->*`，然后再调用得到的成员函数。",
+  "key_points": [
+    "声明指向 `Employee` 类中、无参数、返回 `int` 且为 `const` 的成员函数的指针可以写成：`int (Employee::*methodPtr)() const { &Employee::getSalary };`。",
+    "使用对象调用：`(employee.*methodPtr)()`；使用对象指针调用：`(employeePtr->*methodPtr)()`。",
+    "调用表达式必须加括号，因为函数调用运算符 `()` 的优先级高于 `.*` 和 `->*`。",
+    "成员函数指针必须指向与其类型匹配的成员函数；示例中它指向 `Employee::getSalary`。"
+  ],
+  "examples": [
+    "`Employee employee { \"John\", \"Doe\" };`",
+    "`int (Employee::*methodPtr)() const { &Employee::getSalary };`",
+    "`cout << (employee.*methodPtr)() << endl;`",
+    "`Employee* employeePtr { new Employee { \"John\", \"Doe\" } };`",
+    "`cout << (employeePtr->*methodPtr)() << endl;`",
+    "也可以使用类型别名或 `auto` 简化定义：`auto methodPtr { &Employee::getSalary };`"
+  ],
+  "misconceptions": [
+    "成员函数指针不是普通函数指针，不能直接像普通函数指针一样调用。",
+    "仅有成员函数指针本身不能访问非静态成员；必须结合某个对象或对象指针。",
+    "不能省略调用表达式外层括号，否则会因运算符优先级导致表达式含义错误。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何通过对象调用指向非静态成员函数的指针？",
+      "a": "使用 `.*`，并将整个成员指针表达式括起来，例如 `(employee.*methodPtr)()`。"
+    },
+    {
+      "q": "如何通过对象指针调用指向非静态成员函数的指针？",
+      "a": "使用 `->*`，例如 `(employeePtr->*methodPtr)()`。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "类的成员函数",
+    "指针和函数指针"
+  ],
+  "source_pages": [
+    609,
+    609
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1252_指向非静态成员函数的指针",
+  "_chunk_pages": [
+    609,
+    612
+  ]
+}

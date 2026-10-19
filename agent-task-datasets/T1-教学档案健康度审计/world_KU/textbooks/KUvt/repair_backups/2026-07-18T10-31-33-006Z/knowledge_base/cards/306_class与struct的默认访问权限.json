@@ -1,0 +1,44 @@
+{
+  "title": "class与struct的默认访问权限",
+  "definition": "C++中，class和struct都可以包含数据成员与成员函数，并使用public、protected和private访问说明符控制访问权限。若没有显式写出访问说明符，class成员默认是private，而struct成员默认是public。显式写出的访问说明符会从该位置开始改变后续成员的访问级别，直到遇到下一个访问说明符。",
+  "key_points": [
+    "public成员可以从类外直接访问。",
+    "private成员通常只能由类自身的成员函数等受控代码访问。",
+    "class的默认成员访问权限是private。",
+    "struct的默认成员访问权限是public。",
+    "可以在同一个类定义中多次使用public、protected和private。"
+  ],
+  "examples": [
+    "export class SpreadsheetCell {\n    void setValue(double value); // 未写访问说明符时，class成员默认是private\npublic:\n    double getValue() const;     // 从此处开始为public\nprivate:\n    double m_value;              // 从此处开始为private\n};\n\nexport struct SpreadsheetCell {\n    void setValue(double value); // struct中未写说明符时默认为public\n    double getValue() const;\nprivate:\n    double m_value;              // 显式改为private\n};"
+  ],
+  "misconceptions": [
+    "class并不是所有成员都默认public；未写访问说明符时默认是private。",
+    "struct并不是不能有private成员；struct也可以显式写private。",
+    "访问说明符只影响其后直到下一个访问说明符之前的成员，不会永久作用于整个类定义。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "C++中class和struct在默认成员访问权限上有什么区别？",
+      "a": "class的默认成员访问权限是private，struct的默认成员访问权限是public。"
+    },
+    {
+      "q": "如何让struct中的m_value成为私有成员？",
+      "a": "在m_value之前写private:，例如private:\\n    double m_value;。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++类与结构体基础"
+  ],
+  "source_pages": [
+    229,
+    232
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "306_class与struct的默认访问权限",
+  "_chunk_pages": [
+    229,
+    232
+  ]
+}

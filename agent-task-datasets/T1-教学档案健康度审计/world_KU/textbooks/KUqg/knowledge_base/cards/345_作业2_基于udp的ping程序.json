@@ -1,0 +1,51 @@
+{
+  "title": "作业2：基于UDP的Ping程序",
+  "definition": "该编程作业要求使用Python编写一个基于UDP的客户程序。客户向目标服务器发送10个ping报文，并为每个报文等待对应的pong报文；客户根据发送ping到接收pong之间的时间计算往返时延。如果等待服务器响应超过1秒仍未收到pong，客户就假定该分组丢失并打印相应信息。",
+  "key_points": [
+    "客户通过UDP向目标服务器发送10个ping报文。",
+    "收到对应pong报文后，客户计算并打印从发送ping到接收pong的往返时延。",
+    "UDP是不可靠协议，发送的分组可能丢失。",
+    "客户对每个ping报文最多等待1秒，不能无限期等待。",
+    "标准操作系统中的ping通常使用ICMP，而本作业实现的是非标准但简单的基于UDP的ping。",
+    "原文将往返时延缩写为“RTI”，该缩写可能是“RTT”的排版或识别错误。"
+  ],
+  "examples": [
+    "一次测量可表示为：$$\\text{RTT}=t_{\\text{接收pong}}-t_{\\text{发送ping}}$$",
+    "如果某个ping报文发送后1秒内没有收到pong，客户应将该报文视为丢失并打印提示，而不是继续等待。"
+  ],
+  "misconceptions": [
+    "UDP Ping不保证每个ping都能收到pong；超时是作业中必须处理的情况。",
+    "该作业的Ping程序使用UDP，不等同于标准ping使用的ICMP。",
+    "往返时延测量的是ping发出到pong返回之间的时间，而不是只测单向发送时间。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "作业2中客户向服务器发送多少个ping报文？",
+      "a": "发送10个ping报文。"
+    },
+    {
+      "q": "如果客户发送ping后超过多长时间没有收到pong，就假定分组丢失？",
+      "a": "最多等待1秒；超过1秒仍未收到响应，就假定分组丢失。"
+    },
+    {
+      "q": "作业2中的Ping程序使用哪一种运输协议？",
+      "a": "使用UDP；原文还指出标准ping通常使用ICMP。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "UDP",
+    "往返时延"
+  ],
+  "source_pages": [
+    137,
+    140
+  ],
+  "needs_verification": true,
+  "verify_query": "Kurose Ross 计算机网络 原书第7版 作业2 UDP ping 往返时延 缩写 RTT RTI 1秒 10个报文",
+  "concept_id": "345_作业2_基于udp的ping程序",
+  "_chunk_pages": [
+    137,
+    140
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "title": "书中较早介绍的C++新特性",
+  "definition": "推荐序指出，除模块外，书中还较早介绍了[[nodiscard]]、std::string_view和结构化绑定等较新的C++特性，并且这些特性会在后续内容中多次出现。",
+  "key_points": [
+    "列举的特性包括[[nodiscard]]、string_view和结构化绑定。",
+    "这些特性不仅被介绍一次，还会在全书多次出现。",
+    "原文将这些内容作为现代C++的重要组成部分来介绍。"
+  ],
+  "examples": [
+    "特性名称可以写作：`[[nodiscard]]`、`std::string_view`、结构化绑定。",
+    "结构化绑定的形式示例：`auto [name, value] = item;`。该代码用于说明名称形式，原文未给出具体代码。"
+  ],
+  "misconceptions": [
+    "不要认为这些特性只在书的某一章短暂出现；推荐序称它们会在书中多次出现。",
+    "不要把`string_view`误写成一种独立的字符串类库名称；原文列出的名称是`string_view`，通常可写作`std::string_view`。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "推荐序列举了哪些较新的C++特性？",
+      "a": "列举了[[nodiscard]]、string_view和结构化绑定。"
+    },
+    {
+      "q": "这些较新特性在书中的安排有什么特点？",
+      "a": "它们较早得到介绍，并且在书中多次出现。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "本书根据C++20全面重写"
+  ],
+  "source_pages": [
+    4,
+    4
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "003_书中较早介绍的c_新特性",
+  "_chunk_pages": [
+    1,
+    4
+  ]
+}

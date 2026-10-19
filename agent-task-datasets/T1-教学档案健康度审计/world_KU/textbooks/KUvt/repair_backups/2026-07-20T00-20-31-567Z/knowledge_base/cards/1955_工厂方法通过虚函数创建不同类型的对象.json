@@ -1,0 +1,46 @@
+{
+  "title": "工厂方法通过虚函数创建不同类型的对象",
+  "definition": "工厂方法是一种通过虚函数把对象创建过程交给具体派生类的设计方式。抽象工厂提供统一的请求方法，例如 requestCar()；该方法负责公共逻辑并调用纯虚拟的 createCar()。具体工厂重写 createCar()，返回相应的具体产品。",
+  "key_points": [
+    "ICar 是汽车产品的抽象接口，示例中通过虚析构函数和纯虚函数 info() 定义共同能力。",
+    "CarFactory 的 requestCar() 负责记录生产数量，然后调用 createCar() 创建并返回新的汽车。",
+    "createCar() 是受保护的纯虚函数，具体工厂通过重写它决定创建 Ford 还是 Toyota。",
+    "基类应提供虚析构函数，以便通过基类指针安全销毁派生对象。"
+  ],
+  "examples": [
+    "核心调用关系可表示为：$$\\text{requestCar()}\\ \\rightarrow\\ \\text{更新生产数量}\\ \\rightarrow\\ \\text{createCar()}$$",
+    "FordFactory 的 createCar() 返回 Ford，ToyotaFactory 的 createCar() 返回 Toyota；调用者统一接收 `std::unique_ptr<ICar>`。"
+  ],
+  "misconceptions": [
+    "requestCar() 和 createCar() 不是同一个职责：前者包含工厂公共逻辑，后者决定具体产品类型。",
+    "工厂方法不是直接在调用者中使用 `new Ford` 或 `new Toyota`；具体创建逻辑被封装在工厂层次结构中。",
+    "工厂方法模式不要求每个产品都必须有复杂的类层次；关键是把创建决策封装并支持多态替换。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "CarFactory::requestCar() 的主要职责是什么？",
+      "a": "它先将该工厂生产的汽车数量加 1，然后调用纯虚函数 createCar() 创建并返回汽车。"
+    },
+    {
+      "q": "为什么 FordFactory 和 ToyotaFactory 只需要重写 createCar()？",
+      "a": "因为基类 CarFactory 已经实现了共同的请求和计数逻辑，派生类只需指定应创建的具体汽车类型。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "多态工厂可在不改变使用方的情况下替换具体工厂",
+    "虚函数与纯虚函数",
+    "智能指针"
+  ],
+  "source_pages": [
+    949,
+    950
+  ],
+  "needs_verification": true,
+  "verify_query": "《C++20高级编程》第5版 工厂方法 CarFactory requestCar createCar FordFactory ToyotaFactory 原文",
+  "concept_id": "1955_工厂方法通过虚函数创建不同类型的对象",
+  "_chunk_pages": [
+    949,
+    952
+  ]
+}

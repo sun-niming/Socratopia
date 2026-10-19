@@ -1,0 +1,47 @@
+{
+  "title": "纯虚方法与抽象基类",
+  "definition": "纯虚方法是在虚方法声明末尾写 `= 0` 的方法，表示基类不提供该方法的实现，而要求派生类提供实现。包含至少一个纯虚方法的类称为抽象类，抽象类不能直接实例化；其派生类只有实现了全部继承而来的纯虚方法后，才可以被实例化。",
+  "key_points": [
+    "纯虚方法的声明形式为：`virtual 返回类型 方法(参数) = 0;`。",
+    "抽象类可以定义公共接口，但不能直接创建该类的对象。",
+    "如果派生类没有实现所有继承的纯虚方法，该派生类仍然是抽象类。",
+    "抽象类可以具有显式默认的虚析构函数，例如：`virtual ~SpreadsheetCell() = default;`。"
+  ],
+  "examples": [
+    "```cpp\nexport class SpreadsheetCell {\npublic:\n    virtual ~SpreadsheetCell() = default;\n    virtual void set(std::string_view value) = 0;\n    virtual std::string getString() const = 0;\n};\n```",
+    "下面的代码错误，因为 SpreadsheetCell 是抽象类：\n\n```cpp\nSpreadsheetCell cell; // Error: cannot instantiate abstract class\n```",
+    "实现了全部纯虚方法的派生类可以通过基类智能指针使用：\n\n```cpp\nstd::unique_ptr<SpreadsheetCell> cell{new StringSpreadsheetCell{}};\n```"
+  ],
+  "misconceptions": [
+    "纯虚方法不是一个“什么都不做”的普通方法；它用来规定接口，并使包含它的类成为抽象类。",
+    "抽象类不能直接实例化，但可以有可实例化的派生类。",
+    "派生类只继承纯虚方法而不实现它时，并不会自动变成可实例化类；它仍然是抽象类。",
+    "将析构函数写成 `= default` 不会使类可以实例化；是否抽象取决于是否存在未实现的纯虚方法。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "什么是纯虚方法？",
+      "a": "纯虚方法是在声明末尾使用 `= 0` 的虚方法，表示该基类不提供其实现，并要求具体派生类实现。"
+    },
+    {
+      "q": "什么条件下一个派生类可以实例化？",
+      "a": "派生类必须实现从基类继承的全部纯虚方法；否则它仍是抽象类，不能实例化。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "虚函数",
+    "继承"
+  ],
+  "source_pages": [
+    323,
+    324
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "660_纯虚方法与抽象基类",
+  "_chunk_pages": [
+    321,
+    324
+  ]
+}

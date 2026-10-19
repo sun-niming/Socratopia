@@ -1,0 +1,43 @@
+{
+  "title": "对象池与对象生命周期的约束",
+  "definition": "使用对象池时，对象池自身必须比它发放的所有对象存活得更久。因为对象通过带自定义删除器的 `std::shared_ptr` 回收到对象池中；如果对象池已经析构，仍存活的对象在引用计数归零时就可能无法安全地回收到池中。",
+  "key_points": [
+    "对象池的寿命必须超出对象池发放的所有对象的寿命。",
+    "对象池发放的 `shared_ptr` 负责在对象不再被引用时触发回收逻辑。",
+    "设计对象池使用范围时，必须同时规划池本身、返回对象和 `shared_ptr` 的生命周期。"
+  ],
+  "examples": [
+    "错误的生命周期关系是：先销毁 `ObjectPool`，之后仍保留它发放的 `std::shared_ptr<T>`。",
+    "安全的关系应满足：$$\\text{lifetime(ObjectPool)} > \\text{lifetime(all objects acquired from the pool)}$$。"
+  ],
+  "misconceptions": [
+    "对象池析构后，仍然存活的池中对象并不一定能够安全地自行回收。",
+    "`shared_ptr` 只管理对象引用计数；它不能自动保证对象池这个外部管理结构仍然存在。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "使用对象池时最重要的生命周期要求是什么？",
+      "a": "对象池自身的寿命必须超出对象池发放的所有对象的寿命。"
+    },
+    {
+      "q": "为什么对象池必须比其发放的对象活得更久？",
+      "a": "因为对象的 `shared_ptr` 在引用计数归零时会执行回收逻辑，而该逻辑需要访问仍然存在的对象池。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "对象生命周期",
+    "std::shared_ptr 引用计数"
+  ],
+  "source_pages": [
+    860,
+    860
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1786_对象池与对象生命周期的约束",
+  "_chunk_pages": [
+    857,
+    860
+  ]
+}

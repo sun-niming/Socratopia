@@ -1,0 +1,40 @@
+{
+  "title": "C++智能指针类型",
+  "definition": "C++提供unique_ptr、shared_ptr和weak_ptr等智能指针，用于辅助管理动态对象生命周期，减少内存泄漏、悬空指针和重复释放等问题。相关智能指针定义在< memory >头文件中，具体内容需结合智能指针的所有权和生命周期规则理解。",
+  "key_points": [
+    "unique_ptr、shared_ptr和weak_ptr都是标准库智能指针类型。",
+    "智能指针通过自动化的生命周期管理降低手动释放内存造成的错误。",
+    "智能指针不能让所有生命周期问题自动消失，仍需正确理解所有权和引用关系。"
+  ],
+  "examples": [
+    "示例：std::unique_ptr<T> p = std::make_unique<T>(); 由智能指针管理对象生命周期。",
+    "示例：std::shared_ptr<T>允许多个智能指针共享对象所有权，std::weak_ptr可用于观察共享对象。"
+  ],
+  "misconceptions": [
+    "使用智能指针后可以随意复制和释放对象；实际上不同智能指针具有不同的所有权规则。",
+    "weak_ptr与shared_ptr一样拥有对象；实际上weak_ptr通常不拥有共享对象。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "C++提供了哪些常见智能指针？",
+      "a": "常见类型包括unique_ptr、shared_ptr和weak_ptr，它们用于辅助管理动态对象生命周期。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "指针基础",
+    "对象生命周期",
+    "动态内存管理"
+  ],
+  "source_pages": [
+    502,
+    502
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 标准库 unique_ptr shared_ptr weak_ptr 线程安全语义 weak_ptr shared_ptr thread safe",
+  "concept_id": "1013_c_智能指针类型",
+  "_chunk_pages": [
+    501,
+    504
+  ]
+}

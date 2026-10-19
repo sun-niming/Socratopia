@@ -1,0 +1,41 @@
+{
+  "title": "使用new[]创建对象数组会调用默认构造函数",
+  "definition": "使用new T[N]分配对象数组时，系统会为N个连续对象分配内存，并自动调用每个元素的无参默认构造函数。因此，对象数组中的每个对象都会被初始化；这与基本类型数组默认不初始化元素的情况不同。",
+  "key_points": [
+    "new T[N]会创建N个对象，而不只是分配一块原始内存。",
+    "每个对象元素的默认构造函数都会被调用一次。",
+    "如果数组长度为N，则默认构造函数调用次数为N。",
+    "返回值是指向数组第0个对象的指针。"
+  ],
+  "examples": [
+    "若Simple具有默认构造函数，执行Simple* mySimpleArray { new Simple[4] };时，Simple构造函数会被调用4次。",
+    "释放对象数组：delete[] mySimpleArray;"
+  ],
+  "misconceptions": [
+    "认为new Simple[4]只调用一次Simple构造函数。",
+    "认为对象数组和基本类型数组在初始化行为上完全相同。",
+    "认为使用普通delete就能正确销毁整个对象数组。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "执行Simple* mySimpleArray { new Simple[4] };时，Simple的默认构造函数会调用几次？",
+      "a": "调用4次，每个数组元素各调用一次。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "构造函数",
+    "动态数组"
+  ],
+  "source_pages": [
+    203,
+    204
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "427_使用new_创建对象数组会调用默认构造函数",
+  "_chunk_pages": [
+    201,
+    204
+  ]
+}

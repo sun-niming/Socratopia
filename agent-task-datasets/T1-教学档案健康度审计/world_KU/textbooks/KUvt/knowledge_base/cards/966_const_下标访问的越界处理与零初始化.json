@@ -1,0 +1,45 @@
+{
+  "title": "const 下标访问的越界处理与零初始化",
+  "definition": "const 版本的 operator[] 不能通过越界访问来扩容。原文给出两种可选策略：索引越界时抛出 `std::out_of_range` 异常，或者返回一个使用 `T{}` 零初始化的静态值。零初始化会使整数等基本类型初始化为 0、浮点类型初始化为 0.0、指针类型初始化为 nullptr。",
+  "key_points": [
+    "抛出异常的策略可以明确报告越界错误。",
+    "返回零初始化值的策略不会扩容，也不会抛出异常，但返回的值不能用于修改数组。",
+    "`T{}` 是通用的值初始化写法；其具体结果取决于 T 的类型。"
+  ],
+  "examples": [
+    "抛出异常的实现形式：\n```cpp\ntemplate <typename T>\nconst T& Array<T>::operator[](size_t x) const {\n    if (x >= m_size) {\n        throw std::out_of_range(\"index out of range\");\n    }\n    return m_elements[x];\n}\n```",
+    "零初始化策略的核心形式：\n```cpp\nstatic T nullValue{};\nreturn nullValue;\n```"
+  ],
+  "misconceptions": [
+    "const 下标访问越界时可以自动扩大数组；错误，这会改变对象状态。",
+    "零初始化意味着所有类型都初始化为整数 0；错误，浮点数为 0.0，指针为 nullptr，类类型则按默认构造规则初始化。",
+    "返回静态零值等同于返回数组中该越界位置的真实元素；错误，它只是一个替代返回值。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么 const operator[] 不能在越界时扩容？",
+      "a": "因为 const 对象的访问不应改变对象状态，而扩容会修改数组的存储空间和大小。"
+    },
+    {
+      "q": "`T{}` 对常见基本类型的初始化结果是什么？",
+      "a": "整数类型初始化为 0，浮点类型初始化为 0.0，指针类型初始化为 nullptr。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "const 成员函数",
+    "异常处理",
+    "值初始化"
+  ],
+  "source_pages": [
+    482,
+    483
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "966_const_下标访问的越界处理与零初始化",
+  "_chunk_pages": [
+    481,
+    484
+  ]
+}

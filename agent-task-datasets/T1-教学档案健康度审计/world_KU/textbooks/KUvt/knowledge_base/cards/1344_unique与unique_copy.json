@@ -1,0 +1,51 @@
+{
+  "title": "unique与unique_copy",
+  "definition": "std::unique 是一种特殊的 remove 算法，用于移除连续重复的元素；它只比较相邻元素，因此通常应先对序列排序，才能把相同值集中为连续区段。unique 的基本形式就地处理范围，unique_copy 则把结果复制到新的目标范围。",
+  "key_points": [
+    "std::unique 删除的是连续重复元素，而不是整个序列中所有相同值。",
+    "通常先对序列排序，再使用 unique 去除重复值。",
+    "std::list 也提供具有相同语义的成员函数 unique。",
+    "unique 就地操作数据；unique_copy 将结果复制到目标范围。",
+    "像 remove 一样，unique 通常需要结合容器 erase 才能真正缩短容器。"
+  ],
+  "examples": [
+    "std::sort(begin(values), end(values)); auto it = std::unique(begin(values), end(values)); values.erase(it, end(values));",
+    "若序列为 {1, 1, 2, 2, 2, 3}，unique 后保留的逻辑结果为 {1, 2, 3}。"
+  ],
+  "misconceptions": [
+    "unique 不会自动删除所有分散在序列中的重复值。",
+    "未排序序列中，不相邻的相同元素不会被 unique 直接合并。",
+    "unique 与容器的 unique 成员函数语义相同，但标准算法适用于迭代器范围。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "std::unique 删除什么样的重复元素？",
+      "a": "删除连续的重复元素。"
+    },
+    {
+      "q": "为什么通常要对序列排序后再使用 unique？",
+      "a": "排序会使相同元素相邻，从而使 unique 能够去除所有重复值。"
+    },
+    {
+      "q": "unique_copy 与 unique 有什么区别？",
+      "a": "unique 就地处理源范围；unique_copy 将去重结果复制到新的目标范围。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "remove算法",
+    "排序",
+    "迭代器范围"
+  ],
+  "source_pages": [
+    644,
+    644
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1344_unique与unique_copy",
+  "_chunk_pages": [
+    641,
+    644
+  ]
+}

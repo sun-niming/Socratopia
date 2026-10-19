@@ -1,0 +1,115 @@
+{
+  "textbook": "Linux.pdf",
+  "title": "Linux",
+  "lang": "zh",
+  "built_at": "2026-06-14T12:45:42",
+  "model": "gpt-5.4",
+  "page_range": [
+    66,
+    95
+  ],
+  "card_count": 10,
+  "needs_verification_count": 1,
+  "cards": [
+    {
+      "concept_id": "001_常用环境变量",
+      "title": "常用环境变量",
+      "difficulty": 1,
+      "source_pages": [
+        66,
+        66
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "002_使用_export_导出变量",
+      "title": "使用 export 导出变量",
+      "difficulty": 1,
+      "source_pages": [
+        67,
+        67
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "003_declare_变量声明",
+      "title": "declare 变量声明",
+      "difficulty": 2,
+      "source_pages": [
+        68,
+        68
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "004_位置参数及其引用",
+      "title": "位置参数及其引用",
+      "difficulty": 1,
+      "source_pages": [
+        69,
+        69
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "005_使用_set_为位置参数赋值",
+      "title": "使用 set 为位置参数赋值",
+      "difficulty": 2,
+      "source_pages": [
+        69,
+        69
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "006_使用_shift_移动位置参数",
+      "title": "使用 shift 移动位置参数",
+      "difficulty": 2,
+      "source_pages": [
+        69,
+        69
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "007_shell位置参数",
+      "title": "Shell位置参数",
+      "difficulty": 1,
+      "source_pages": [
+        70,
+        70
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "008_echo显示命令",
+      "title": "echo显示命令",
+      "difficulty": 1,
+      "source_pages": [
+        71,
+        71
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "009_read读取用户输入",
+      "title": "read读取用户输入",
+      "difficulty": 1,
+      "source_pages": [
+        72,
+        72
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "010_test与_的文件特性检测",
+      "title": "test与[ ]的文件特性检测",
+      "difficulty": 2,
+      "source_pages": [
+        73,
+        73
+      ],
+      "needs_verification": true
+    }
+  ]
+}

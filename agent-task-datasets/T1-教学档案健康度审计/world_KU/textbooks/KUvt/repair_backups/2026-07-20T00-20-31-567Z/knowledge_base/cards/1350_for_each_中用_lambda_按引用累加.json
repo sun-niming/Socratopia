@@ -1,0 +1,51 @@
+{
+  "title": "for_each 中用 lambda 按引用累加",
+  "definition": "在 for_each() 的回调 lambda 中，如果需要让回调对外部变量的修改在 lambda 执行结束后仍然可见，应按引用捕获这些变量。教材示例显式按引用捕获 sum 和 product，分别计算范围内元素的和与积。",
+  "key_points": [
+    "sum 初始值为 $0$，product 初始值为 $1$。",
+    "lambda 按引用捕获 [&sum, &product]，因此对 sum 和 product 的修改会影响 lambda 外部的变量。",
+    "对每个元素 $i$ 执行：$sum \\mathrel{+}= i$，$product \\mathrel{*}= i$。",
+    "显式捕获只列出需要的外部变量，有助于明确 lambda 的依赖。"
+  ],
+  "examples": [
+    "int sum { 0 };",
+    "int product { 1 };",
+    "for_each(cbegin(myVector), cend(myVector), [&sum, &product](int i) { sum += i; product *= i; });",
+    "若范围为 $[2,3,4]$，处理后 $sum=9$，$product=24$。"
+  ],
+  "misconceptions": [
+    "按值捕获 sum 和 product 时，lambda 内的修改不会改变外部变量。",
+    "product 的初始值应为 $1$，而不是 $0$；否则乘积会始终为 $0$。",
+    "lambda 的引用捕获只决定变量如何访问，不会自动改变 for_each 的遍历范围。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么示例 lambda 要按引用捕获 sum 和 product？",
+      "a": "因为需要让 lambda 内对它们的修改在 lambda 外部可见。"
+    },
+    {
+      "q": "求积变量 product 为什么初始化为 1？",
+      "a": "因为 $1$ 是乘法单位元；从 $1$ 开始累乘才不会改变第一个元素的乘积结果。"
+    },
+    {
+      "q": "若 vector 为 $[2,3,4]$，for_each 示例计算的 sum 和 product 分别是多少？",
+      "a": "sum 为 $9$，product 为 $24$。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "lambda 表达式的捕获",
+    "引用语义"
+  ],
+  "source_pages": [
+    646,
+    647
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1350_for_each_中用_lambda_按引用累加",
+  "_chunk_pages": [
+    645,
+    648
+  ]
+}

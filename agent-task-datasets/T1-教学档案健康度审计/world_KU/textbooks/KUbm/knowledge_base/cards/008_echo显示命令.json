@@ -1,0 +1,54 @@
+{
+  "title": "echo显示命令",
+  "definition": "echo 是用于显示输出的命令，格式为：echo [option] [string]。它把 string 的内容按照 option 指定的方法送到屏幕上显示。原文给出的常用选项包括：-n，表示输出后不换行；-e，表示对字符串中的特殊字符进行翻译。原文列出的特殊字符包括：\\n 表示换行，\\t 表示跳格。",
+  "key_points": [
+    "echo 的基本格式是 echo [option] [string]",
+    "echo 用于把字符串内容显示到屏幕上",
+    "-n 表示输出结束后不换行",
+    "-e 表示对字符串中的特殊字符进行翻译",
+    "\\n 表示换行，\\t 表示跳格"
+  ],
+  "examples": [
+    "echo hello",
+    "echo -n hello",
+    "echo -e \"a\\nb\"",
+    "echo -e \"a\\tb\""
+  ],
+  "misconceptions": [
+    "误以为 echo 默认会翻译所有特殊字符，原文说明需要使用 -e",
+    "误以为 -n 是换行选项，实际上原文说明 -n 是输出后不换行"
+  ],
+  "qa_pairs": [
+    {
+      "q": "echo 命令的作用是什么？",
+      "a": "将字符串内容按照选项指定的方法送到屏幕上进行显示。"
+    },
+    {
+      "q": "echo -n 的作用是什么？",
+      "a": "输出后不换行。"
+    },
+    {
+      "q": "echo -e 的作用是什么？",
+      "a": "对字符串中的特殊字符进行翻译。"
+    },
+    {
+      "q": "在原文中，\\n 和 \\t 分别表示什么？",
+      "a": "\\n 表示换行，\\t 表示跳格。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "Linux命令行基本使用"
+  ],
+  "source_pages": [
+    71,
+    71
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "008_echo显示命令",
+  "_chunk_pages": [
+    70,
+    73
+  ]
+}

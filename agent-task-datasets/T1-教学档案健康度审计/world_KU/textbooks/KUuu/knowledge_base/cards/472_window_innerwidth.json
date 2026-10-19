@@ -1,0 +1,36 @@
+{
+  "title": "window.innerWidth",
+  "definition": "window.innerWidth用于获取浏览器窗口内容区域的宽度，包括已渲染的竖直滚动条。",
+  "key_points": [
+    "返回浏览器窗口内容区域的宽度",
+    "包括已渲染的竖直滚动条"
+  ],
+  "examples": [
+    "window.innerWidth"
+  ],
+  "misconceptions": [
+    "它不是整个屏幕的宽度",
+    "它不是页面所有内容的总宽度"
+  ],
+  "qa_pairs": [
+    {
+      "q": "window.innerWidth获取的是什么？",
+      "a": "获取浏览器窗口内容区域的宽度，包括已渲染的竖直滚动条。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "window对象"
+  ],
+  "source_pages": [
+    329,
+    332
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "472_window_innerwidth",
+  "_chunk_pages": [
+    329,
+    332
+  ]
+}

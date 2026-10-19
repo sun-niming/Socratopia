@@ -1,0 +1,45 @@
+{
+  "title": "std::pair 的类模板实参推导（CTAD）",
+  "definition": "在 C++ 中，创建 `std::pair` 对象时可以省略模板实参，让编译器根据初始化器推导 `pair` 的两个元素类型。也可以使用 `std::make_pair` 根据实参生成相应类型的 `pair`。",
+  "key_points": [
+    "显式指定类型时可写 `std::pair<int, double> pair1{1, 2.3};`。",
+    "使用 `std::make_pair(1, 2.3)` 时，返回的类型可由实参推导。",
+    "C++ 的类模板实参推导允许写成 `std::pair pair3{1, 2.3};`，其类型为 `std::pair<int, double>`。",
+    "原文还列出 `Grid`、`std::array`、`std::vector`、`std::unique_ptr` 和 `std::shared_ptr` 等模板名称，说明它们属于类模板类型体系；本卡片仅讨论原文中明确展示的 `std::pair` 推导。"
+  ],
+  "examples": [
+    "显式指定：`std::pair<int, double> pair1{1, 2.3};`",
+    "使用工厂函数：`auto pair2{std::make_pair(1, 2.3)};`",
+    "使用 CTAD：`std::pair pair3{1, 2.3};`，推导结果为 `std::pair<int, double>`。"
+  ],
+  "misconceptions": [
+    "`std::pair pair3{1, 2.3};` 并不是声明了一个没有类型参数的 `pair`，而是由 CTAD 推导出 `std::pair<int, double>`。",
+    "CTAD 不是把所有模板类型都自动转换成任意目标类型；它只根据构造或初始化信息推导模板实参。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`std::pair pair3{1, 2.3};` 的类型是什么？",
+      "a": "根据类模板实参推导，类型是 `std::pair<int, double>`。"
+    },
+    {
+      "q": "`std::make_pair(1, 2.3)` 的作用是什么？",
+      "a": "它根据两个实参生成一个相应类型的 `std::pair`，本例中可得到 `std::pair<int, double>`。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++ 类模板",
+    "初始化列表"
+  ],
+  "source_pages": [
+    385,
+    388
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 std::pair CTAD std::make_pair pair<int double> 示例类模板实参推导",
+  "concept_id": "493_std_pair_的类模板实参推导_ctad",
+  "_chunk_pages": [
+    385,
+    388
+  ]
+}

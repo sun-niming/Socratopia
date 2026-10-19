@@ -1,0 +1,45 @@
+{
+  "title": "多态对象的虚拟 clone 接口",
+  "definition": "当基类指针需要复制其实际指向的派生类对象时，基类可以声明纯虚拟函数 clone()，并让每个派生类使用自身的复制构造函数创建并返回一个新的派生类对象。返回类型通常是 std::unique_ptr<GamePiece>，以便自动管理新对象的生命周期。",
+  "key_points": [
+    "GamePiece 声明了纯虚拟函数：virtual std::unique_ptr<GamePiece> clone() const = 0;，因此 GamePiece 是抽象基类。",
+    "派生类必须重写 clone()，例如 ChessPiece 的实现返回 std::make_unique<ChessPiece>(*this)。",
+    "clone() 使用当前对象的复制构造函数生成副本，并通过基类的 std::unique_ptr<GamePiece> 返回，从而保留实际派生类型。"
+  ],
+  "examples": [
+    "代码示例：std::unique_ptr<GamePiece> clone() const override { return std::make_unique<ChessPiece>(*this); }",
+    "TicTacToePiece 也可以采用相同模式：std::unique_ptr<GamePiece> clone() const override { return std::make_unique<TicTacToePiece>(*this); }"
+  ],
+  "misconceptions": [
+    "clone() 返回的是新对象，而不是当前对象本身。",
+    "仅仅把 GamePiece 指针复制一份不会复制实际的派生对象；需要通过虚拟 clone() 实现多态深复制。",
+    "clone() 的返回类型虽然是 std::unique_ptr<GamePiece>，但实际创建的对象可以是 ChessPiece 或 TicTacToePiece。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么 GamePiece 需要声明纯虚拟 clone() 函数？",
+      "a": "为了让基类接口能够按照对象的实际派生类型复制对象；每个派生类在自己的 clone() 中调用对应的复制构造函数，并返回 std::unique_ptr<GamePiece>。"
+    },
+    {
+      "q": "ChessPiece 的 clone() 如何创建副本？",
+      "a": "它调用 std::make_unique<ChessPiece>(*this)，使用 ChessPiece 的复制构造函数创建当前对象的副本。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++继承与虚函数",
+    "std::unique_ptr的基本用法"
+  ],
+  "source_pages": [
+    373,
+    374,
+    376
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "474_多态对象的虚拟_clone_接口",
+  "_chunk_pages": [
+    373,
+    376
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "title": "构造函数的默认参数",
+  "definition": "构造函数参数可以设置默认值。调用构造函数时，如果调用者没有提供某些参数，就使用相应的默认值。本例中 `Spreadsheet` 的构造函数声明为 `Spreadsheet(size_t width = 100, size_t height = 100);`。",
+  "key_points": [
+    "不提供参数时，`width` 和 `height` 都使用默认值 `100`。",
+    "只提供一个参数时，该参数用于 `width`，`height` 仍使用默认值 `100`。",
+    "提供两个参数时，两个参数分别用于 `width` 和 `height`。",
+    "默认参数使同一个构造函数可以支持多种参数数量的构造方式。"
+  ],
+  "examples": [
+    "构造函数声明：`Spreadsheet(size_t width = 100, size_t height = 100);`。",
+    "`Spreadsheet s1;` 使用 `width = 100`、`height = 100`。",
+    "`Spreadsheet s2{5};` 使用 `width = 5`、`height = 100`。",
+    "`Spreadsheet s3{5, 6};` 使用 `width = 5`、`height = 6`。"
+  ],
+  "misconceptions": [
+    "`Spreadsheet s2{5};` 中的 `5` 对应第一个参数 `width`，不是第二个参数 `height`。",
+    "默认参数不会覆盖调用者显式提供的实参；显式提供的值优先使用。",
+    "`Spreadsheet s1;` 仍然会调用构造函数，只是两个参数都采用默认值。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "根据 `Spreadsheet(size_t width = 100, size_t height = 100);`，`Spreadsheet s1;` 的宽度和高度是多少？",
+      "a": "宽度和高度都为 `100`。"
+    },
+    {
+      "q": "`Spreadsheet s2{5};` 中高度参数是多少？",
+      "a": "高度参数使用默认值 `100`。"
+    },
+    {
+      "q": "`Spreadsheet s3{5, 6};` 中两个实参分别对应什么？",
+      "a": "第一个实参 `5` 对应 `width`，第二个实参 `6` 对应 `height`。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++构造函数",
+    "函数默认参数",
+    "列表初始化"
+  ],
+  "source_pages": [
+    281,
+    284
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "370_构造函数的默认参数",
+  "_chunk_pages": [
+    281,
+    284
+  ]
+}

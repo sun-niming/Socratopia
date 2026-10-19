@@ -1,0 +1,41 @@
+{
+  "title": "Boolean 数据类型",
+  "definition": "Boolean（布尔）数据类型只有两个值：true 和 false。它用来表示一个状态是否为真。按照原文，值为 0、null、未定义或空字符串的表达式会被解释为 false；其他任意非空表达式会被解释为 true。Boolean 类型转为数字时，true 转为 1，false 转为 0。",
+  "key_points": [
+    "布尔类型只有 true 和 false 两个值。",
+    "0、null、未定义、空字符串会被解释为 false。",
+    "其他非空表达式会被解释为 true。",
+    "Boolean 转数字时，true→1，false→0。"
+  ],
+  "examples": [
+    "true",
+    "false",
+    "0  // 按原文会被解释为 false",
+    "Boolean 类型转数字：true -> 1，false -> 0"
+  ],
+  "misconceptions": [
+    "把 0、null、未定义或空字符串误认为会被解释为 true。",
+    "以为 Boolean 只能表示“真/假”字面值，而不能参与数字转换。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "Boolean 数据类型有哪两个值？",
+      "a": "true 和 false。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "JavaScript 基本数据类型"
+  ],
+  "source_pages": [
+    245,
+    248
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "354_boolean_数据类型",
+  "_chunk_pages": [
+    245,
+    248
+  ]
+}

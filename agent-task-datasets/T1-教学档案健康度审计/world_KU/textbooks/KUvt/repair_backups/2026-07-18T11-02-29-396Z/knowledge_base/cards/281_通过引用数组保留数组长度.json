@@ -1,0 +1,42 @@
+{
+  "title": "通过引用数组保留数组长度",
+  "definition": "函数参数写成数组引用时，可以避免数组退化为指针，并保留数组的编译期长度。示例 `void doublelntsStack(int (&theArray)[4]);` 只接受含 4 个 `int` 元素的数组；使用模板参数 `N` 可以让函数适用于不同长度的 `int` 数组。",
+  "key_points": [
+    "`int (&theArray)[4]` 表示对含 4 个 `int` 元素的数组的引用。",
+    "模板形式 `template<size_t N> void doublelntsStack(int (&theArray)[N])` 用 `N` 推导数组长度。",
+    "循环可以使用 `N` 作为边界，而不需要额外传入数组长度。"
+  ],
+  "examples": [
+    "```cpp\nvoid doublelntsStack(int (&theArray)[4]);\n\ntemplate<size_t N>\nvoid doublelntsStack(int (&theArray)[N])\n{\n    for (size_t i { 0 }; i < N; i++) {\n        theArray[i] *= 2;\n    }\n}\n```"
+  ],
+  "misconceptions": [
+    "`int (&theArray)[N]` 不是指向单个 `int` 的普通指针，而是数组引用。",
+    "数组引用参数不会接受任意长度的数组；数组长度必须满足参数类型或由模板参数推导。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`int (&theArray)[4]` 表示什么？",
+      "a": "它表示对一个含 4 个 `int` 元素的数组的引用。"
+    },
+    {
+      "q": "模板参数 `N` 在 `doublelntsStack` 中有什么作用？",
+      "a": "`N` 表示被引用数组的元素个数，用于确定循环边界。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "使用指针参数处理数组",
+    "函数模板基础"
+  ],
+  "source_pages": [
+    209,
+    212
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20教材 doubleIntsStack int (&theArray)[N] 数组引用模板 原文",
+  "concept_id": "281_通过引用数组保留数组长度",
+  "_chunk_pages": [
+    209,
+    212
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "title": "memset初始化内存",
+  "definition": "`memset` 的作用是把一段内存的每个字节都设置为指定值，常用于结构体清零。其原型是 `void *memset(void *s, int c, size_t n);`，返回值是 `s`。",
+  "key_points": [
+    "头文件是 `<string.h>`。",
+    "常用于结构体清零，避免残留随机值。",
+    "本项目中用于初始化 `sockaddr_in`、`sigaction`、`HttpRequest`。",
+    "声明结构体后应立即执行 `memset(&obj, 0, sizeof(obj))`。"
+  ],
+  "examples": [
+    "`memset(&addr, 0, sizeof(addr));`",
+    "`memset(&act, 0, sizeof(act));`"
+  ],
+  "misconceptions": [
+    "只要声明了结构体，里面的字段就是自动为 0 的。",
+    "`memset` 只能设置数组，不能设置结构体。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`memset` 在本项目中的典型用途是什么？",
+      "a": "把 `sockaddr_in`、`sigaction`、`HttpRequest` 等结构体清零，避免未初始化的随机值影响行为。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C语言基础",
+    "指针基础"
+  ],
+  "source_pages": [
+    97,
+    100
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "148_memset初始化内存",
+  "_chunk_pages": [
+    97,
+    100
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "title": "Valgrind 在 Linux 中定位内存泄漏",
+  "definition": "Valgrind 是一个免费的开源 Linux 工具，可以分析程序的动态内存使用情况，并定位分配了内存但未释放的代码位置。教材示例中，Valgrind 检测到两个未释放的内存块，并通过调用栈指出相关分配发生在源代码中的位置。",
+  "key_points": [
+    "Valgrind 可用于查找 Linux 程序中的内存泄漏。",
+    "检测结果可以报告分配次数、释放次数、已分配字节数以及仍未释放的内存块数量。",
+    "输出中的调用栈能够帮助定位执行分配的源代码位置。",
+    "原文示例中，Valgrind 与 Visual C++ 检测结果一致：一个 \\texttt{Simple} 对象没有释放，该对象内部在自由存储区创建的整数也没有释放。",
+    "Valgrind 也不能直接修复泄漏，只能帮助开发者定位问题。"
+  ],
+  "examples": [
+    "原文示例报告了类似信息：\n\\texttt{4 allocs, 2 frees, 16 bytes allocated}，并指出仍有 \\texttt{2 not-freed blocks}。",
+    "Valgrind 输出中的调用栈可以沿着类似 \\texttt{operator new -> Simple::Simple -> main} 的路径追溯动态内存分配位置。"
+  ],
+  "misconceptions": [
+    "Valgrind 不是自动修复器；它只检测并报告问题。",
+    "发现分配次数和释放次数不同，不能只看数字，还要结合调用栈确定哪些对象没有释放。",
+    "Valgrind 是教材中用于 Linux 的工具，不能把它与 Visual C++ 调试库的使用方式混为一谈。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "Valgrind 的主要用途是什么？",
+      "a": "Valgrind 是 Linux 下用于分析程序内存使用并定位内存泄漏的免费开源工具。"
+    },
+    {
+      "q": "Valgrind 如何帮助定位泄漏？",
+      "a": "它通过报告未释放内存块及相关调用栈，指出动态内存分配发生的源代码位置，帮助开发者追踪泄漏原因。"
+    },
+    {
+      "q": "原文示例中 Valgrind 检测到哪些泄漏？",
+      "a": "它检测到两个泄漏：第一个 \\texttt{Simple} 对象没有释放，以及该对象在自由存储区中创建的整数没有释放。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "内存泄漏",
+    "Linux 命令行工具",
+    "调用栈"
+  ],
+  "source_pages": [
+    216,
+    216
+  ],
+  "needs_verification": true,
+  "verify_query": "Valgrind Memcheck Linux memory leak detection definitely lost still reachable documentation",
+  "concept_id": "456_valgrind_在_linux_中定位内存泄漏",
+  "_chunk_pages": [
+    213,
+    216
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "title": "通过迭代器访问对象元素的成员",
+  "definition": "当vector的元素是对象时，可以对迭代器使用箭头运算符->，直接调用当前元素对象的方法或访问其成员。->等价于先解引用迭代器，再使用点运算符访问对象成员。",
+  "key_points": [
+    "it->member用于访问迭代器所指向对象的成员。",
+    "如果需要修改对象成员，迭代器及其所指向元素必须允许写入。",
+    "同样的操作可以用基于范围的for循环，通过引用变量访问元素。"
+  ],
+  "examples": [
+    "文本代码：vector<string> stringVector(10, \"hello\"); for (auto it { begin(stringVector) }; it != end(stringVector); ++it) { it->append(\" there\"); }",
+    "等价的基于范围的for循环：\n文本代码：for (auto& str : stringVector) { str.append(\" there\"); }"
+  ],
+  "misconceptions": [
+    "it->append()调用的是迭代器自身的方法；实际上调用的是迭代器所指向的string对象的方法。",
+    "基于范围的for循环中的auto默认总是复制元素；使用auto&时，循环变量是元素的引用。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何通过迭代器调用vector元素对象的方法？",
+      "a": "使用箭头运算符，例如it->append(\" there\")，它会调用当前迭代器所指向对象的append方法。"
+    },
+    {
+      "q": "it->member与(*it).member有什么关系？",
+      "a": "二者都用于访问迭代器所指向对象的成员，it->member可看作(*it).member的简写。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "迭代器解引用",
+    "对象成员访问运算符"
+  ],
+  "source_pages": [
+    554,
+    554
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1141_通过迭代器访问对象元素的成员",
+  "_chunk_pages": [
+    553,
+    556
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "title": "通过调用栈定位bad_alloc的根源",
+  "definition": "当程序因 std::bad_alloc 崩溃时，GDB 的调用栈可以帮助定位内存分配失败的源代码位置。示例中，main() 按值调用 processCitations()，触发 ArticleCitations 拷贝构造函数；拷贝构造函数调用 copy()，最终在 copy() 中执行 m_citations = new string[m_numCitations] 时发生异常。通过切换到对应栈帧并查看 src 的值，可以发现无引文对象的 m_numCitations 被错误设置为 -1，导致数组分配使用了错误的数量。",
+  "key_points": [
+    "std::bad_alloc 表示动态内存分配失败；示例中 GDB 收到 SIGABRT 并暂停执行。",
+    "调用栈中的 ArticleCitations::copy() 栈帧指向了发生问题的自有代码。",
+    "按值传递 ArticleCitations 参数会触发拷贝构造函数；本例中拷贝构造函数进一步调用 copy()。",
+    "示例指出生产代码应传入 const 引用，以避免不必要的拷贝；但按值传递本身是触发调试路径的原因，不是 bad_alloc 的最终根因。"
+  ],
+  "examples": [
+    "GDB 定位到的关键代码：\nm_citations = new string[m_numCitations];",
+    "示例中 src 的状态包含：\nm_article = \"Author with no citations\"\nm_numCitations = -1",
+    "由于没有引文时 m_numCitations 被错误设置为 -1，后续拷贝操作使用了错误的数组大小，可能导致 std::bad_alloc。"
+  ],
+  "misconceptions": [
+    "误以为所有 std::bad_alloc 都是因为系统确实没有足够内存；本例的直接原因是程序使用了错误的引文数量。",
+    "误以为栈顶的 raise() 或 abort() 就是程序源代码中的根因；应继续向下查找第一个属于自己代码的栈帧。",
+    "误以为按值传递一定会导致内存分配失败；本例中按值传递只是触发了拷贝构造函数，使潜在 bug 暴露出来。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "本例中 std::bad_alloc 最终是在哪一行代码附近暴露的？",
+      "a": "在 ArticleCitations::copy() 中执行 m_citations = new string[m_numCitations]; 时暴露。"
+    },
+    {
+      "q": "为什么按值调用 processCitations() 会进入 ArticleCitations::copy()？",
+      "a": "因为按值传递 ArticleCitations 对象需要构造一个副本，从而触发拷贝构造函数，而拷贝构造函数会调用 copy()。"
+    },
+    {
+      "q": "通过 GDB 查看 src 后发现了什么问题？",
+      "a": "对于内容为 Author with no citations 的文章，src.m_numCitations 被设置成了 -1；没有引文时该值应表示 0。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "GDB调试程序崩溃的基本流程",
+    "C++拷贝构造函数",
+    "动态数组和new[]"
+  ],
+  "source_pages": [
+    918,
+    920
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1901_通过调用栈定位bad_alloc的根源",
+  "_chunk_pages": [
+    917,
+    920
+  ]
+}

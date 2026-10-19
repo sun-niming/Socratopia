@@ -1,0 +1,53 @@
+{
+  "title": "无序关联容器与哈希表",
+  "definition": "标准库提供无序关联容器，也称哈希表，包括`unordered_map`、`unordered_multimap`、`unordered_set`和`unordered_multiset`。其中前两个定义在`<unordered_map>`头文件中，后两个定义在`<unordered_set>`头文件中。它们与对应的有序关联容器功能相似，但不对元素进行排序。",
+  "key_points": [
+    "`unordered_map`对应`map`，但不按键排序。",
+    "`unordered_multimap`对应`multimap`，允许重复键且不排序。",
+    "`unordered_set`对应`set`，保存不重复元素且不排序。",
+    "`unordered_multiset`对应`multiset`，允许重复元素且不排序。",
+    "插入、删除和查找的平均复杂度为常量时间$O(1)$，最坏情况为线性时间$O(N)$。",
+    "无序容器的查找在很多情况下比普通`map`或`set`更快，但实际性能取决于元素本身和具体使用情况。"
+  ],
+  "examples": [
+    "需要通过键查找值，但不要求元素排序时，可以考虑`unordered_map`。",
+    "需要保存不重复元素，且不要求遍历时有序时，可以考虑`unordered_set`。",
+    "复杂度可表示为：平均情况下为$O(1)$，最坏情况下为$O(N)$。"
+  ],
+  "misconceptions": [
+    "“无序”不表示元素完全不能被查找，而是表示容器不按有序关联容器的规则排列元素。",
+    "无序关联容器并不保证所有情况下都是$O(1)$；原文明确指出最坏情况为$O(N)$。",
+    "`unordered_map`不是`map`的排序版本，而是其不排序的对应容器。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "标准库中的四种无序关联容器是什么？",
+      "a": "`unordered_map`、`unordered_multimap`、`unordered_set`和`unordered_multiset`。"
+    },
+    {
+      "q": "无序关联容器的插入、删除和查找复杂度是多少？",
+      "a": "平均情况下为$O(1)$，最坏情况下为$O(N)$。"
+    },
+    {
+      "q": "什么时候优先考虑`unordered_map`而不是`map`？",
+      "a": "当需要键和值的关联以及较快的平均查找、插入和删除，但不要求元素按顺序保存时，可以考虑`unordered_map`。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "map与multimap",
+    "set与multiset",
+    "哈希表基本概念"
+  ],
+  "source_pages": [
+    511,
+    512
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1048_无序关联容器与哈希表",
+  "_chunk_pages": [
+    509,
+    512
+  ]
+}

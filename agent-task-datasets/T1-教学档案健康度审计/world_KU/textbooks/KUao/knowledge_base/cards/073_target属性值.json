@@ -1,0 +1,50 @@
+{
+  "title": "target属性值",
+  "definition": "教材列出了 target 的常见取值：_blank、_self、_parent、_top。它们分别表示在新窗口、当前框架、父框架、顶层窗口中打开被链接文档。教材还说明：HTML 5 中不再允许把框架名称设为目标，因为不再支持 frame 和 frameset；self、parent、top 这三个值大多数时候与 iframe 一起使用。",
+  "key_points": [
+    "_blank：在新窗口中打开被链接文档。",
+    "_self：在被点击时的同一框架中打开被链接文档，默认值。",
+    "_parent：在父框架中打开被链接文档。",
+    "_top：在窗口主体中打开被链接文档。",
+    "HTML 5 中不再允许把框架名称设为目标，因为不再支持 frame 和 frameset。",
+    "self、parent、top 这三个值大多数时候与 iframe 一起使用。"
+  ],
+  "examples": [
+    "<a href=\"xx.html\" target=\"_blank\">在新窗口打开</a>",
+    "<a href=\"xx.html\" target=\"_self\">在当前框架打开</a>"
+  ],
+  "misconceptions": [
+    "以为 _self 不是默认值。",
+    "以为 _blank 是在当前页面打开。",
+    "以为 target 还可以继续把 frame 或 frameset 的名字作为目标。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "target=\"_blank\" 表示什么？",
+      "a": "在新窗口中打开被链接文档。"
+    },
+    {
+      "q": "target=\"_top\" 表示什么？",
+      "a": "在窗口主体中打开被链接文档。"
+    },
+    {
+      "q": "HTML 5 中为什么不再允许把框架名称设为目标？",
+      "a": "因为不再支持 frame 和 frameset。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "target属性"
+  ],
+  "source_pages": [
+    53,
+    56
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "073_target属性值",
+  "_chunk_pages": [
+    53,
+    56
+  ]
+}

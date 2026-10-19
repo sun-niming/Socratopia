@@ -1,0 +1,50 @@
+{
+  "title": "C++标准时钟的基本区别",
+  "definition": "chrono中的clock由时间点和duration共同组成。教材重点介绍三个标准时钟：`system_clock`表示系统实时时钟的真实时间；`steady_clock`保证其时间点不会递减；`high_resolution_clock`具有最小的滴答周期。`high_resolution_clock`在不同编译器中可能是`steady_clock`或`system_clock`的别名。",
+  "key_points": [
+    "`system_clock`反映系统实时时间，但系统时间可能被调整，因此不能保证时间点始终递增。",
+    "`steady_clock`保证其time_point绝不递减，适合需要稳定时间间隔的场景。",
+    "`high_resolution_clock`的滴答周期达到实现所能提供的最小值。",
+    "`high_resolution_clock`可能是`steady_clock`或`system_clock`的别名，具体取决于编译器。",
+    "C++20还增加了`utc_clock`、`tai_clock`、`gps_clock`和`file_clock`等时钟。"
+  ],
+  "examples": [
+    "如果系统管理员调整系统时间，`system_clock`取得的后一个时间点可能早于前一个时间点。",
+    "需要保证计时过程中的时间点不递减时，应关注`steady_clock`的这一性质。",
+    "教材指出，`high_resolution_clock`的具体身份可能因编译器而不同。"
+  ],
+  "misconceptions": [
+    "`system_clock`一定是单调递增的；实际上系统时间可以被调整。",
+    "`high_resolution_clock`一定独立于其他时钟；实际上它可能只是`steady_clock`或`system_clock`的别名。",
+    "clock只由时间点组成；教材说明clock由time_point和duration组成。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`system_clock`和`steady_clock`的关键区别是什么？",
+      "a": "`system_clock`表示系统真实时间但不保证时间点不递减；`steady_clock`保证其时间点绝不递减。"
+    },
+    {
+      "q": "`high_resolution_clock`一定是哪一种时钟？",
+      "a": "不一定；它可能是`steady_clock`或`system_clock`的别名，具体取决于编译器。"
+    },
+    {
+      "q": "C++20新增了哪些教材列出的时钟？",
+      "a": "`utc_clock`、`tai_clock`、`gps_clock`和`file_clock`。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "std::chrono::duration的模板参数与基本功能"
+  ],
+  "source_pages": [
+    688,
+    688
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1436_c_标准时钟的基本区别",
+  "_chunk_pages": [
+    685,
+    688
+  ]
+}

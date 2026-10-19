@@ -1,0 +1,48 @@
+{
+  "title": "std::osyncstream 防止多线程输出交错",
+  "definition": "C++20 引入了 std::basic_osyncstream，并为 char 流和 wchar_t 流分别提供 osyncstream 和 wosyncstream 类型别名，这些类型定义在 <syncstream> 中。通过同步流完成的输出，会在同步流对象销毁时作为整体出现在最终输出流中，从而避免与其他线程的输出交错。",
+  "key_points": [
+    "osyncstream 用于同步多个线程对输出流的写入。",
+    "同一个 osyncstream 对象中的输出在对象销毁时提交到最终输出流。",
+    "同步流保证一段输出不会与其他线程的其他输出交错。",
+    "可以在循环的每次迭代中创建一个临时 osyncstream，也可以创建一个同步流对象后连续写入。"
+  ],
+  "examples": [
+    "每次输出一条完整消息：\n```cpp\nstd::osyncstream{std::cout}\n    << \"Counter \" << id << \" has value \" << value << std::endl;\n```\n临时 osyncstream 销毁时，这条完整输出会提交到 std::cout，避免不同线程的输出内容相互穿插。"
+  ],
+  "misconceptions": [
+    "普通 std::cout 即使不会发生数据竞争，也不等于来自不同线程的多段输出不会交错。",
+    "osyncstream 不是把所有线程的输出合并成一条消息；它保证的是每个同步流对象提交的输出不会与其他输出交错。",
+    "osyncstream 属于 C++20 的同步流功能，相关定义位于 <syncstream>。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "std::osyncstream 解决了多线程输出中的什么问题？",
+      "a": "它保证通过同步流完成的输出在提交到最终输出流时不会与其他线程的输出交错。"
+    },
+    {
+      "q": "osyncstream 的输出通常在什么时候出现在最终输出流中？",
+      "a": "在对应的同步流对象被销毁时。"
+    },
+    {
+      "q": "osyncstream 和 wosyncstream 分别用于什么字符流？",
+      "a": "osyncstream 用于 char 流，wosyncstream 用于 wchar_t 流。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "多线程输出",
+    "C++ 输入输出流"
+  ],
+  "source_pages": [
+    811,
+    811
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1666_std_osyncstream_防止多线程输出交错",
+  "_chunk_pages": [
+    809,
+    812
+  ]
+}

@@ -1,0 +1,50 @@
+{
+  "title": "重载简写算术运算符",
+  "definition": "简写算术运算符包括 `+=`、`-=`、`*=` 和 `/=`。它们会直接修改运算符左侧的对象，并返回被修改对象的引用，因此通常应将其实现为类的成员函数，而不是全局函数。",
+  "key_points": [
+    "简写算术运算符的结果类型通常是类对象的引用，例如 `SpreadsheetCell&`。",
+    "实现通常将基本算术运算和赋值组合起来，例如 `operator+=` 可以先计算两个对象的值之和，再用 `set()` 修改当前对象。",
+    "简写运算符左侧必须是一个对象，因此不能写出 `5.4 += aThirdCell` 这样的表达式。",
+    "如果普通算术运算符和简写算术运算符同时存在，建议基于简写运算符实现普通运算符，以避免重复代码。"
+  ],
+  "examples": [
+    "成员函数声明：`SpreadsheetCell& operator+=(const SpreadsheetCell& rhs);`",
+    "典型实现：`SpreadsheetCell& SpreadsheetCell::operator+=(const SpreadsheetCell& rhs) { set(getValue() + rhs.getValue()); return *this; }`",
+    "使用示例：`SpreadsheetCell myCell{4}, aThirdCell{2}; aThirdCell = myCell; aThirdCell += 5.4;`",
+    "普通加法运算符可以复用简写运算符：`SpreadsheetCell operator+(const SpreadsheetCell& lhs, const SpreadsheetCell& rhs) { SpreadsheetCell result{lhs}; result += rhs; return result; }`"
+  ],
+  "misconceptions": [
+    "实现了 `operator+` 并不会自动得到 `operator+=`，简写算术运算符必须显式重载。",
+    "简写算术运算符不是创建新对象后返回，而是修改左侧对象并返回该对象的引用。",
+    "由于左操作数必须是对象，简写算术运算符通常不适合作为全局函数实现。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么 `operator+=` 通常应实现为成员函数？",
+      "a": "因为简写算术运算符必须有左侧对象，并且会修改左侧对象；成员函数天然可以访问并修改当前对象。"
+    },
+    {
+      "q": "`operator+=` 的返回值通常是什么？",
+      "a": "返回被修改对象的引用，例如 `SpreadsheetCell&`，通常通过 `return *this;` 返回。"
+    },
+    {
+      "q": "编写类的 `operator+` 后，是否会自动获得 `operator+=`？",
+      "a": "不会。`operator+=` 必须显式重载。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "类的成员函数与运算符重载"
+  ],
+  "source_pages": [
+    293,
+    293
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "607_重载简写算术运算符",
+  "_chunk_pages": [
+    293,
+    296
+  ]
+}

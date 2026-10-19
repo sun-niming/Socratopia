@@ -1,0 +1,45 @@
+{
+  "title": "std::string的拼接与追加",
+  "definition": "`std::string`可以使用 `operator+` 创建拼接后的新字符串，也可以使用 `operator+=` 将一个字符串追加到另一个字符串末尾。",
+  "key_points": [
+    "表达式 `c = a + b` 会把 `a` 和 `b`按顺序拼接，并将结果赋给 `c`。",
+    "表达式 `a += b` 会把 `b`追加到 `a`末尾，并修改 `a`。",
+    "例如当 `a`为 `\"12\"`、`b`为 `\"34\"`时，拼接结果为 `\"1234\"`。"
+  ],
+  "examples": [
+    "`std::string a{\"12\"};`",
+    "`std::string b{\"34\"};`",
+    "`std::string c;`",
+    "`c = a + b;` 此时 `c`为 `\"1234\"`。",
+    "`a += b;` 执行后 `a`为 `\"1234\"`。"
+  ],
+  "misconceptions": [
+    "`a + b`通常产生拼接结果，不等同于把 `b`原地追加到 `a`；原地追加应使用 `a += b`。",
+    "字符串拼接按操作数顺序进行，`a + b`与 `b + a`的结果通常不同。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "若 `a`为 `\"12\"`、`b`为 `\"34\"`，执行 `c = a + b`后 `c`是什么？",
+      "a": "`c`为 `\"1234\"`。"
+    },
+    {
+      "q": "执行 `a += b`的作用是什么？",
+      "a": "将 `b`追加到 `a`的末尾，并修改 `a`本身。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "std::string用于管理字符序列"
+  ],
+  "source_pages": [
+    106,
+    107
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "151_std_string的拼接与追加",
+  "_chunk_pages": [
+    105,
+    108
+  ]
+}

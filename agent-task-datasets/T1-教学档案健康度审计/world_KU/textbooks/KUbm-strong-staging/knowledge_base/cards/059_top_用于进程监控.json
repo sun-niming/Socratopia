@@ -1,0 +1,35 @@
+{
+  "title": "top 用于进程监控",
+  "definition": "top 是用于进程监控的命令。教材在“进程监控”下直接给出 top，表示它用于监控系统中的进程情况。",
+  "key_points": [
+    "top 用于进程监控",
+    "它属于进程管理相关命令"
+  ],
+  "examples": [
+    "top"
+  ],
+  "misconceptions": [
+    "不要把 top 与 ps 完全等同；教材分别将 ps 归为查看进程、top 归为进程监控"
+  ],
+  "qa_pairs": [
+    {
+      "q": "Linux 中哪个命令用于进程监控？",
+      "a": "top。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "ps 命令查看进程"
+  ],
+  "source_pages": [
+    29,
+    32
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "059_top_用于进程监控",
+  "_chunk_pages": [
+    29,
+    32
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "title": "StringSpreadsheetCell可以由DoubleSpreadsheetCell构造并支持同类相加",
+  "definition": "StringSpreadsheetCell提供了接受DoubleSpreadsheetCell的构造函数，因此可以把一个双精度电子表格单元格转换或构造成字符串电子表格单元格。它还定义了两个StringSpreadsheetCell对象之间的operator+：将两者的getString()结果拼接起来，并返回新的StringSpreadsheetCell。",
+  "key_points": [
+    "StringSpreadsheetCell声明了接受const DoubleSpreadsheetCell&的构造函数。",
+    "operator+(const StringSpreadsheetCell& lhs, const StringSpreadsheetCell& rhs)返回一个新的StringSpreadsheetCell。",
+    "operator+的实现先创建newCell，再调用newCell.set(lhs.getString() + rhs.getString())，最后返回newCell。",
+    "原文中DoubleSpreadsheetCell到StringSpreadsheetCell的构造函数实现和其中出现的类型转换代码经过OCR后不完整，具体转换方式需要核实。"
+  ],
+  "examples": [
+    "字符串单元格相加的逻辑为：$$\\operatorname{operator+}(lhs,rhs).getString()=lhs.getString()+rhs.getString()$$",
+    "原文示例：\nDoubleSpreadsheetCell myDbl;\nmyDbl.set(8.4);\nStringSpreadsheetCell result{ myDbl + myDbl };",
+    "该示例表明两个DoubleSpreadsheetCell相加后的表达式结果可以用于构造StringSpreadsheetCell；原文显示的字符串内容类似于两个8.4的字符串连接结果。"
+  ],
+  "misconceptions": [
+    "这里的operator+不是把两个double进行数值加法；StringSpreadsheetCell的operator+执行的是字符串拼接。",
+    "operator+返回的是新的StringSpreadsheetCell对象，而不是修改lhs或rhs。",
+    "DoubleSpreadsheetCell能够参与该表达式，依赖于原文所示的类型转换或转换构造函数，不能仅凭普通继承关系断定。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "StringSpreadsheetCell的operator+具体做什么？",
+      "a": "它分别调用左右操作数的getString()，把得到的两个字符串连接起来，设置到一个新的StringSpreadsheetCell中并返回该对象。"
+    },
+    {
+      "q": "原文中的myDbl + myDbl为什么可以用于初始化StringSpreadsheetCell result？",
+      "a": "因为原文为StringSpreadsheetCell提供了相关转换构造函数或转换路径，使该表达式的结果能够用于构造StringSpreadsheetCell；具体实现需以教材原版代码为准。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "C++运算符重载",
+    "转换构造函数",
+    "虚函数与多态"
+  ],
+  "source_pages": [
+    326,
+    327
+  ],
+  "needs_verification": true,
+  "verify_query": "《C++20高级编程》第5版 第326-327页 StringSpreadsheetCell DoubleSpreadsheetCell operator+ reinterpret_cast 转换构造函数 原文",
+  "concept_id": "420_stringspreadsheetcell可以由doublespreadshee",
+  "_chunk_pages": [
+    325,
+    328
+  ]
+}

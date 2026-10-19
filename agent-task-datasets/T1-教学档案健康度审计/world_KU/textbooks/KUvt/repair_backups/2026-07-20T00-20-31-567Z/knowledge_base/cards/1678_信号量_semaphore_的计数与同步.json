@@ -1,0 +1,57 @@
+{
+  "title": "信号量 semaphore 的计数与同步",
+  "definition": "信号量（semaphore）是轻量级同步原语，通过一个计数器表示可用插槽或资源数量。获取一个插槽时计数器减少，释放插槽时计数器增加。std::counting_semaphore 表示非负的资源计数；binary_semaphore 只有一个插槽，该插槽只有可用和不可用两种状态。",
+  "key_points": [
+    "信号量在头文件 <semaphore> 中定义。",
+    "acquire()：计数器大于零时减少计数并继续；计数器为零时阻塞，直到计数器再次增加。",
+    "try_acquire()：尝试减少计数器；如果计数器为零，不阻塞并返回 false，否则减少计数并返回 true。",
+    "try_acquire_for() 和 try_acquire_until() 分别在指定时间段内或截至指定时间尝试获取插槽。",
+    "release()：将计数器增加指定数量，并解除因 acquire() 而阻塞的线程。",
+    "将 counting_semaphore 初始化为 4，可以限制最多 4 个线程同时进入受保护的代码区域。",
+    "将信号量初始化为 0，可以实现线程通知：调用 acquire() 的线程会阻塞，直到其他线程调用 release()。"
+  ],
+  "examples": [
+    "限制并发数量的基本模式：counting_semaphore semaphore{4}; worker 进入受限区域前调用 semaphore.acquire(); 离开后调用 semaphore.release();",
+    "通知模式：semaphore 初始化为 0；等待线程调用 semaphore.acquire()，通知线程完成工作后调用 semaphore.release()。"
+  ],
+  "misconceptions": [
+    "semaphore 的计数器表示可用插槽或资源数量，不是线程数量本身。",
+    "acquire() 在计数器为零时会阻塞；try_acquire() 在计数器为零时立即返回 false。",
+    "binary_semaphore 只有一个插槽，不能表示任意数量的并发资源。",
+    "信号量可以作为 mutex、latch、barrier 等同步机制的构建块，但它本身不等同于 mutex。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "信号量获取和释放插槽时，计数器如何变化？",
+      "a": "获取插槽时计数器减一，释放插槽时计数器增加。"
+    },
+    {
+      "q": "如何使用 counting_semaphore 限制最多 4 个线程并发运行？",
+      "a": "将其初始化为 4；每个线程进入受限区域前调用 acquire()，离开后调用 release()。"
+    },
+    {
+      "q": "try_acquire() 与 acquire() 的主要区别是什么？",
+      "a": "acquire() 在计数器为零时会阻塞；try_acquire() 在计数器为零时不阻塞并返回 false。"
+    },
+    {
+      "q": "如何利用信号量实现线程通知？",
+      "a": "将信号量计数器初始化为 0，让等待线程调用 acquire()；通知线程完成工作后调用 release()，从而解除等待线程的阻塞。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++线程基础",
+    "线程同步的基本概念"
+  ],
+  "source_pages": [
+    817,
+    818
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1678_信号量_semaphore_的计数与同步",
+  "_chunk_pages": [
+    817,
+    820
+  ]
+}

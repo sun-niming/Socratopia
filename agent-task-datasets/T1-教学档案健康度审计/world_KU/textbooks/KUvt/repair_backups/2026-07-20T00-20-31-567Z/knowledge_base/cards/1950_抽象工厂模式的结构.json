@@ -1,0 +1,48 @@
+{
+  "title": "抽象工厂模式的结构",
+  "definition": "抽象工厂模式通过一个抽象工厂接口，提供创建一组相关对象的接口；调用方只依赖该接口，不依赖具体工厂或具体产品。具体工厂实现这些创建接口，并生成同一产品族中的具体产品。汽车示例中，抽象工厂提供创建品牌无关的轿车和 SUV 的操作，FordFactory 创建 Ford 产品，ToyotaFactory 创建 Toyota 产品。",
+  "key_points": [
+    "抽象工厂接口只暴露产品创建操作，例如 makeSedan() 和 makeSuv()。",
+    "具体工厂决定实际创建哪个品牌的具体产品。",
+    "调用方可以通过替换具体工厂，在不修改自身逻辑的情况下切换产品族。",
+    "原文中的产品层次结构包括 ICar、FordSedan、FordSuv、ToyotaSedan 和 ToyotaSuv；工厂层次结构包括 IAbstractCarFactory、FordFactory 和 ToyotaFactory。"
+  ],
+  "examples": [
+    "抽象结构可表示为：$$\\begin{aligned}\\text{IAbstractCarFactory}&\\rightarrow \\{\\text{makeSedan()} ,\\text{makeSuv()}\\}\\\\\\text{FordFactory}&\\rightarrow \\{\\text{FordSedan},\\text{FordSuv}\\}\\\\\\text{ToyotaFactory}&\\rightarrow \\{\\text{ToyotaSedan},\\text{ToyotaSuv}\\}\\end{aligned}$$"
+  ],
+  "misconceptions": [
+    "抽象工厂不是只创建一种具体对象；本例中一个工厂可以创建轿车和 SUV 两类产品。",
+    "调用方不需要知道当前使用的是 FordFactory 还是 ToyotaFactory，也不需要知道具体汽车类。",
+    "抽象工厂与普通工厂的关键区别不在于是否使用了名称为 Factory 的类，而在于它提供了创建相关产品族的抽象接口。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "汽车示例中的抽象工厂接口提供哪些创建操作？",
+      "a": "提供创建品牌无关轿车和 SUV 的操作，即 makeSedan() 和 makeSuv()。"
+    },
+    {
+      "q": "FordFactory 和 ToyotaFactory 的主要区别是什么？",
+      "a": "FordFactory 创建 FordSedan 和 FordSuv，ToyotaFactory 创建 ToyotaSedan 和 ToyotaSuv。"
+    },
+    {
+      "q": "为什么称该示例为抽象工厂？",
+      "a": "因为创建的具体对象类型取决于当前使用的具体工厂，而调用方只通过抽象工厂接口请求产品。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "工厂模式的作用与主要好处",
+    "接口与多态"
+  ],
+  "source_pages": [
+    945,
+    947
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1950_抽象工厂模式的结构",
+  "_chunk_pages": [
+    945,
+    948
+  ]
+}

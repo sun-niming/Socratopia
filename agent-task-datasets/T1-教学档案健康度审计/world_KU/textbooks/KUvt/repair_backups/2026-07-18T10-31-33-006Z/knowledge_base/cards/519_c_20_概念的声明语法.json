@@ -1,0 +1,42 @@
+{
+  "title": "C++20 概念的声明语法",
+  "definition": "C++20 concept（概念）用于命名一组约束。其基本声明形式为：$$\\begin{aligned}\\text{template <parameter-list>}\\\\\\text{concept concept-name = constraints-expression;}\\end{aligned}$$其中，parameter-list 是模板参数列表，concept-name 是概念名称，constraints-expression 是约束表达式。",
+  "key_points": [
+    "概念声明由模板参数列表、concept 关键字、概念名称和约束表达式组成。",
+    "约束表达式用于描述模板参数必须满足的条件。",
+    "概念可以用于约束模板或泛型代码中的类型和参数。"
+  ],
+  "examples": [
+    "概念声明的基本形式：\\ntemplate <parameter-list>\\nconcept concept-name = constraints-expression;"
+  ],
+  "misconceptions": [
+    "concept 不是普通变量或普通函数；它用于定义编译期约束。",
+    "仅写出 concept 名称并不能表达约束条件，必须提供 constraints-expression。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "C++20 概念声明的基本语法是什么？",
+      "a": "基本语法是：\\ntemplate <parameter-list>\\nconcept concept-name = constraints-expression;\\n其中 parameter-list 是参数列表，concept-name 是概念名，constraints-expression 是约束表达式。"
+    },
+    {
+      "q": "概念中的 constraints-expression 用来做什么？",
+      "a": "它描述模板参数需要满足的编译期约束条件。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "模板基础",
+    "C++20 基础"
+  ],
+  "source_pages": [
+    397,
+    400
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "519_c_20_概念的声明语法",
+  "_chunk_pages": [
+    397,
+    400
+  ]
+}

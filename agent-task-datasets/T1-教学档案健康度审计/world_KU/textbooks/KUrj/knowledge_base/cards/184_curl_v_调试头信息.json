@@ -1,0 +1,38 @@
+{
+  "title": "curl -v 调试头信息",
+  "definition": "`curl -v` 可以显示请求头和响应头，适合在排查 HTTP 交互时查看详细的首部信息。",
+  "key_points": [
+    "`-v` 会输出更详细的调试信息。",
+    "可以看到请求头。",
+    "可以看到响应头。"
+  ],
+  "examples": [
+    "`curl -v http://127.0.0.1:8080/`"
+  ],
+  "misconceptions": [
+    "`curl -v` 只看得到响应体。",
+    "`-v` 和 `-i` 的作用完全相同。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么排查 HTTP 问题时常用 `curl -v`？",
+      "a": "因为它能显示请求头和响应头，便于定位问题。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "curl 基础",
+    "HTTP 头部基础"
+  ],
+  "source_pages": [
+    113,
+    116
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "184_curl_v_调试头信息",
+  "_chunk_pages": [
+    113,
+    116
+  ]
+}

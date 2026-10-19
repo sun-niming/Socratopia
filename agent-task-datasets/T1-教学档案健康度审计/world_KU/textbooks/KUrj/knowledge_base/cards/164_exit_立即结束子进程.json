@@ -1,0 +1,45 @@
+{
+  "title": "_exit 立即结束子进程",
+  "definition": "`_exit(int status)` 会立即结束当前进程，并且不执行 `stdio` 清理。它没有返回值。在本项目中，子进程处理完请求后应在关闭客户端连接后调用 `_exit(0)`，避免继续回到父进程逻辑。",
+  "key_points": [
+    "头文件是 `<unistd.h>`。",
+    "它会立即结束当前进程。",
+    "它不会执行 `stdio` 清理。",
+    "子进程处理完请求后应 `close(client_fd)`，再 `_exit(0)`。",
+    "不要在子进程里用 `return` 回到父进程的执行逻辑。"
+  ],
+  "examples": [
+    "`close(client_fd); _exit(0);`"
+  ],
+  "misconceptions": [
+    "误以为 `_exit` 和 `return` 的效果一样。",
+    "误以为子进程结束后可以不关闭客户端文件描述符。",
+    "误以为 `_exit` 会像 `exit` 一样做完整的标准 I/O 清理。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么子进程处理完请求后要用 `_exit(0)`？",
+      "a": "因为 `_exit` 会立即结束当前进程，避免子进程继续回到父进程逻辑。"
+    },
+    {
+      "q": "调用 `_exit` 前要先做什么？",
+      "a": "先关闭客户端文件描述符，如 `close(client_fd)`。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "进程与子进程",
+    "文件描述符"
+  ],
+  "source_pages": [
+    105,
+    108
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "164_exit_立即结束子进程",
+  "_chunk_pages": [
+    105,
+    108
+  ]
+}

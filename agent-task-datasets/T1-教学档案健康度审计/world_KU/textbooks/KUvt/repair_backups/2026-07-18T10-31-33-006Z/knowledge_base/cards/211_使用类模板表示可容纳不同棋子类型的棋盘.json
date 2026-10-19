@@ -1,0 +1,47 @@
+{
+  "title": "使用类模板表示可容纳不同棋子类型的棋盘",
+  "definition": "第149页展示了一个以 `PieceType` 为模板类型参数的 `GameBoard` 类模板：`GameBoard<PieceType>` 可以用不同的棋子类型实例化。该类公开了按二维坐标操作棋子的接口，包括设置棋子和获取棋子；棋盘的具体内部实现被放在 `private` 部分。原文中的部分函数声明因页面识别错误而不完整。",
+  "key_points": [
+    "类模板声明形式为 `template <typename PieceType> class GameBoard`。",
+    "`setPieceAt(size_t x, size_t y, PieceType* piece)` 用于在坐标 $(x,y)$ 处设置一个棋子指针。",
+    "`getPieceAt(size_t x, size_t y) const` 的返回类型在原文片段中显示为 `PieceType*`，用于获取指定坐标处的棋子。",
+    "棋盘位置使用两个 `size_t` 参数表示横、纵坐标。",
+    "类中还出现了一个布尔类型的空位判断函数，但其完整函数名在原文识别结果中不清楚。"
+  ],
+  "examples": [
+    "可按原文结构理解为：\n`template <typename PieceType>\\nclass GameBoard {\\npublic:\\n    void setPieceAt(size_t x, size_t y, PieceType* piece);\\n    PieceType* getPieceAt(size_t x, size_t y) const;\\nprivate:\\n    // Private implementation details...\\n};`",
+    "如果 `PieceType` 为 `ChessPiece`，则可形成 `GameBoard<ChessPiece>`；如果为其他棋子类型，则形成相应的 `GameBoard<其他类型>`。"
+  ],
+  "misconceptions": [
+    "`PieceType` 不是固定的棋子类名，而是类模板的类型参数。",
+    "`GameBoard<ChessPiece>` 与 `GameBoard<其他类型>` 是不同的模板实例化类型。",
+    "`const` 修饰的 `getPieceAt` 表示该成员函数不能通过其自身修改棋盘对象的状态；它不表示返回的棋子指针一定指向常量对象。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "第149页中的 `GameBoard` 为什么要使用 `template <typename PieceType>`？",
+      "a": "为了让棋盘类能够针对不同的棋子类型进行实例化，而不必为每种棋子类型重复编写一套棋盘类。"
+    },
+    {
+      "q": "`setPieceAt` 的参数分别表示什么？",
+      "a": "两个 `size_t` 参数表示棋盘位置的横、纵坐标，`PieceType* piece` 表示要放置的棋子指针。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++类与成员函数",
+    "C++类模板",
+    "指针与const成员函数"
+  ],
+  "source_pages": [
+    149,
+    152
+  ],
+  "needs_verification": true,
+  "verify_query": "《C++20高级编程》第5版 第149页 GameBoard ChessPiece ChessBoard PieceType setPieceAt getPieceAt isEmpty 原文",
+  "concept_id": "211_使用类模板表示可容纳不同棋子类型的棋盘",
+  "_chunk_pages": [
+    149,
+    152
+  ]
+}

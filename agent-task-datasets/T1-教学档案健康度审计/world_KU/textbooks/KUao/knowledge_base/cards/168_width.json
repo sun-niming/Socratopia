@@ -1,0 +1,42 @@
+{
+  "title": "width",
+  "definition": "CSS 的宽度属性，用来设置元素的宽度。教材给出的示例值包括 500px 和 100%。",
+  "key_points": [
+    "用于控制元素宽度",
+    "可以使用像素值",
+    "也可以使用百分比"
+  ],
+  "examples": [
+    "width: 500px;",
+    "width: 100%;"
+  ],
+  "misconceptions": [
+    "width 不是固定只能写像素。",
+    "百分比宽度通常表示相对于包含块的比例。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "width 属性表示什么？",
+      "a": "宽度。"
+    },
+    {
+      "q": "教材给出的 width 示例值有哪些？",
+      "a": "500px 和 100%。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "CSS基础"
+  ],
+  "source_pages": [
+    117,
+    120
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "168_width",
+  "_chunk_pages": [
+    117,
+    120
+  ]
+}

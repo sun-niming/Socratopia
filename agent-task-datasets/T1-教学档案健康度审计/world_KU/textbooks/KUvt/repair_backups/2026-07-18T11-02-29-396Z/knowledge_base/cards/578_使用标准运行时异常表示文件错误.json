@@ -1,0 +1,50 @@
+{
+  "title": "使用标准运行时异常表示文件错误",
+  "definition": "原文使用 `<stdexcept>` 中的标准异常类型表示文件操作错误：文件无法打开时抛出 `runtime_error`，读取文件过程中出现格式或其他读取错误时也抛出 `runtime_error`；调用方通过 `e.what()` 获取异常的文本说明。",
+  "key_points": [
+    "文件打开失败时抛出：`throw runtime_error(\"Unable to open the file.\");`。",
+    "读取整数时，循环使用输入流逐个读取并加入 `vector<int>`。",
+    "读取循环结束后，如果 `!inputStream.eof()`，表示不是正常到达文件末尾，原文将其视为读取错误并抛出 `runtime_error`。",
+    "捕获标准运行时异常时，示例使用 `catch (const exception& e)`，并通过 `e.what()` 输出错误信息。"
+  ],
+  "examples": [
+    "核心读取逻辑可表示为：`while (inputStream >> temp) { integers.push_back(temp); }`。",
+    "读取结束后的错误检查：`if (!inputStream.eof()) { throw runtime_error(\"Error reading the file.\"); }`。",
+    "异常处理示例：`catch (const exception& e) { cerr << e.what() << endl; return 1; }`。"
+  ],
+  "misconceptions": [
+    "输入循环结束不一定表示正常读完文件；原文通过 `!inputStream.eof()` 检查是否因其他错误结束。",
+    "`e.what()` 用于取得异常的文本描述，不是重新抛出异常。",
+    "文件打开失败和读取失败都可以用 `runtime_error` 表示，但原文在后续示例中将打开失败改为使用 `invalid_argument`。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "文件无法打开时，原文如何抛出运行时异常？",
+      "a": "执行 `throw runtime_error(\"Unable to open the file.\");`。"
+    },
+    {
+      "q": "为什么读取循环结束后还要检查 `!inputStream.eof()`？",
+      "a": "因为循环结束可能是由于读取错误，而不是正常到达文件末尾；若 `!inputStream.eof()`，原文就抛出读取错误异常。"
+    },
+    {
+      "q": "如何从捕获的标准异常中获取错误信息？",
+      "a": "通过异常对象的 `what()` 成员函数，例如 `e.what()`。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "异常的抛出与捕获",
+    "C++ 输入流和 vector"
+  ],
+  "source_pages": [
+    442,
+    443
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "578_使用标准运行时异常表示文件错误",
+  "_chunk_pages": [
+    441,
+    444
+  ]
+}

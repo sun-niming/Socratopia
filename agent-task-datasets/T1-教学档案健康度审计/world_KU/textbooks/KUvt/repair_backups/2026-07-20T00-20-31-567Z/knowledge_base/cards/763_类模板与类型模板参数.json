@@ -1,0 +1,42 @@
+{
+  "title": "类模板与类型模板参数",
+  "definition": "类模板是一种用类型参数参数化类定义的机制。声明类模板时，使用 `template <typename T>`，其中 `T` 是模板类型参数的名称，调用者在实例化模板时提供具体类型。`T` 只是惯用名称，也可以改成其他名称。`typename` 在这里也可以用 `class` 替代，但这不表示模板参数必须是类；它可以是类、struct、union 或基本类型（如 `int`、`double`）。",
+  "key_points": [
+    "`template <typename T>` 应用于其后的整个类定义。",
+    "模板类型参数类似于函数参数：函数参数表示调用者传入的值，模板类型参数表示调用者传入的类型。",
+    "`Grid<T>` 表示用类型参数 `T` 表示元素类型的类模板。",
+    "C++ 中也可以写成 `template <class T>`，但 `typename` 更能体现该参数不局限于类类型。"
+  ],
+  "examples": [
+    "声明一个保存任意类型元素的网格：`template <typename T> class Grid { /* ... */ };`",
+    "实例化不同类型的网格：`Grid<int>`、`Grid<double>`、`Grid<SpreadsheetCell>`。"
+  ],
+  "misconceptions": [
+    "`T` 不是固定的特殊名称，不能把它理解为只能代表某一种类型。",
+    "使用 `class` 作为模板参数关键字，并不意味着模板实参必须是 class 类型。",
+    "`Grid` 是类模板名称；具体类型通常要写成 `Grid<int>` 这样的模板 ID。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`template <typename T>` 中的 `T` 表示什么？",
+      "a": "`T` 是模板类型参数，实例化类模板时由调用者提供具体类型，例如 `int` 或 `double`。"
+    },
+    {
+      "q": "模板类型参数是否必须是类类型？",
+      "a": "不是。它可以是类、struct、union 或基本类型，例如 `int`、`double`。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [],
+  "source_pages": [
+    377,
+    378
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "763_类模板与类型模板参数",
+  "_chunk_pages": [
+    377,
+    380
+  ]
+}

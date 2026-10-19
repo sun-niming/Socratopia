@@ -1,0 +1,42 @@
+{
+  "title": "跨MSC切换中的MSC链替代方案",
+  "definition": "除使用固定锚MSC维持从锚MSC到当前MSC的单一跳外，另一种方法是直接连接移动用户访问过的MSC：每当移动用户进入新的MSC覆盖区，旧MSC就把正在进行的呼叫转发给新MSC，从而形成MSC链。原文指出，这种MSC链事实上能够出现在IS-41蜂窝网络中。",
+  "key_points": [
+    "该方法不维持从锚MSC到当前MSC的单一固定跳。",
+    "移动用户进入新MSC后，旧MSC将正在进行的呼叫转发给新MSC。",
+    "多次移动可能形成由多个MSC依次连接的MSC链。",
+    "原文指出，IS-41蜂窝网络中可以出现这种MSC链，并可通过使用最少步骤的可选路径去除锚MSC与当前访问MSC之间的MSC。"
+  ],
+  "examples": [
+    "若移动用户依次从MSC1移动到MSC2再移动到MSC3，呼叫转发关系可形成：$$MSC1\\rightarrow MSC2\\rightarrow MSC3$$"
+  ],
+  "misconceptions": [
+    "MSC链方法不是锚MSC方法的同义说法；前者让旧MSC向新MSC转发，后者通常保持锚MSC不变。",
+    "原文只说明这种MSC链能够出现在IS-41蜂窝网络中，并未说明所有蜂窝网络都采用该方法。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "MSC链方法如何处理移动用户跨越新的MSC覆盖区？",
+      "a": "每当移动用户进入新的MSC覆盖区，旧MSC就把正在进行的呼叫转发给新MSC。"
+    },
+    {
+      "q": "原文指出哪类蜂窝网络中可能出现MSC链？",
+      "a": "IS-41蜂窝网络。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "GSM中的锚MSC与跨MSC切换"
+  ],
+  "source_pages": [
+    393,
+    396
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "925_跨msc切换中的msc链替代方案",
+  "_chunk_pages": [
+    393,
+    396
+  ]
+}

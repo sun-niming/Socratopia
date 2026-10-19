@@ -1,0 +1,38 @@
+{
+  "title": "属性查找顺序",
+  "definition": "对象访问一个属性时，JavaScript 会先检查对象自身是否拥有该属性；如果没有，就到其原型对象上查找；如果还没有，就继续到原型对象的原型对象上查找，直到原型为空。找到则返回该值，否则返回 undefined。",
+  "key_points": [
+    "先查对象自身，再查原型，再向上逐层查找",
+    "查找过程沿原型链进行，直到遇到 null",
+    "若整个链上都没有该属性，结果是 undefined"
+  ],
+  "examples": [
+    "对象自身没有 say 时，可能从 Person 的原型对象中找到 say",
+    "如果原型链上都没有某属性，访问结果为 undefined"
+  ],
+  "misconceptions": [
+    "访问属性时不会只看对象自身，原型链也会参与查找",
+    "找不到属性时不是报错，而是返回 undefined"
+  ],
+  "qa_pairs": [
+    {
+      "q": "对象访问属性时的完整查找顺序是什么？",
+      "a": "先查自身；没有则查原型对象；还没有则继续查原型对象的原型对象，直到原型为空；若仍未找到则返回 undefined。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "原型链"
+  ],
+  "source_pages": [
+    285,
+    288
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "382_属性查找顺序",
+  "_chunk_pages": [
+    285,
+    288
+  ]
+}

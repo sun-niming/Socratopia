@@ -1,0 +1,42 @@
+{
+  "title": "3D变换方法",
+  "definition": "教材列出的常见 3D 变换方法包括三维旋转、移动和缩放。旋转有 rotate3d、rotateX、rotateY、rotateZ；移动有 translate3d、translateX、translateY、translateZ；缩放有 scale3d、scaleX、scaleY、scaleZ。",
+  "key_points": [
+    "三维旋转方法有 rotate3d、rotateX、rotateY、rotateZ。",
+    "三维移动方法有 translate3d、translateX、translateY、translateZ。",
+    "三维缩放方法有 scale3d、scaleX、scaleY、scaleZ。"
+  ],
+  "examples": [
+    "rotate3d(x,y,z,angle)",
+    "translate3d(x,y,z)",
+    "scale3d(x,y,z)",
+    "rotateX(angle)",
+    "translateY(y)",
+    "scaleZ(z)"
+  ],
+  "misconceptions": [
+    "以为 3D 变换只有一个统一方法。",
+    "以为 rotateX、rotateY、rotateZ 只能配合 rotate3d 使用。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "教材中列出的 3D 旋转方法有哪些？",
+      "a": "rotate3d、rotateX、rotateY、rotateZ。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "transform属性"
+  ],
+  "source_pages": [
+    201,
+    204
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "305_3d变换方法",
+  "_chunk_pages": [
+    201,
+    204
+  ]
+}

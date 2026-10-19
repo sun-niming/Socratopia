@@ -1,0 +1,53 @@
+{
+  "title": "sessionStorage 会话存储特性",
+  "definition": "sessionStorage 用于在当前浏览器会话期间存储数据。它只在当前窗口或标签页中有效，关闭窗口或标签页后其中的数据会被清除。不同窗口或标签页之间的 sessionStorage 是隔离的，即使是同源页面也不会共享；在同一个窗口中通过 window.open() 打开的新标签页或窗口，可能会继承父窗口的 sessionStorage，但这一点取决于浏览器实现。sessionStorage 通常容量约为 5MB 左右，并且同样只能存储字符串，存储对象或数组时需要先序列化。",
+  "key_points": [
+    "数据仅在当前浏览器会话中有效。",
+    "关闭窗口或标签页后，sessionStorage 数据会被删除。",
+    "不同窗口或标签页之间的 sessionStorage 相互隔离。",
+    "同一个窗口中通过 window.open() 打开的页面，可能继承父窗口的 sessionStorage，但取决于浏览器实现。",
+    "sessionStorage 通常只能存字符串，存对象或数组要先序列化。"
+  ],
+  "examples": [
+    "sessionStorage.setItem('currentTabId', 'tab-123');",
+    "sessionStorage.setItem('userAction', 'editing');",
+    "const tabId = sessionStorage.getItem('currentTabId'); // \"tab-123\"",
+    "// 在另一个同源标签页中读取 sessionStorage.getItem('currentTabId') 可能得到 null"
+  ],
+  "misconceptions": [
+    "sessionStorage 会像 localStorage 一样在所有同源标签页间共享；实际上它只在当前会话/当前页作用域内有效。",
+    "关闭一个标签页后，里面的 sessionStorage 还会保留；实际上关闭后通常会被清除。",
+    "同源页面一定共享 sessionStorage；实际上不同标签页之间是隔离的。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "sessionStorage 最核心的作用范围是什么？",
+      "a": "当前浏览器会话，且只在创建它的窗口或标签页中可用。"
+    },
+    {
+      "q": "关闭标签页后 sessionStorage 会怎样？",
+      "a": "其中的数据会被清除。"
+    },
+    {
+      "q": "为什么在另一个标签页里读取 currentTabId 会得到 null？",
+      "a": "因为 sessionStorage 在不同标签页之间是隔离的，不共享。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "浏览器标签页/窗口概念",
+    "JavaScript 键值存储基础"
+  ],
+  "source_pages": [
+    382,
+    383,
+    384
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "508_sessionstorage_会话存储特性",
+  "_chunk_pages": [
+    381,
+    384
+  ]
+}

@@ -1,0 +1,141 @@
+{
+  "conversationId": "ucJEBLbqnvI0WG9NkBMBa",
+  "generatedAt": 1782036250952,
+  "pagesRange": null,
+  "sections": [
+    {
+      "type": "tldr",
+      "content": "这一节从 `struct flock` 讲到进程状态：先会用记录锁描述文件区间，再区分标准 I/O、目录操作、链接、文件描述符复制，最后把进程、PID、终止方式和状态理清楚。"
+    },
+    {
+      "type": "narrative",
+      "content": "一开始先把文件区间锁的定位方法弄明白，接着转到带缓存的文件流，再一路进入特殊文件操作。后半段主要在搭进程这条线：进程是什么、PID 怎么区分、哪些终止和状态最常考。"
+    },
+    {
+      "type": "concepts",
+      "items": [
+        {
+          "name": "struct flock",
+          "body": "用于 `fcntl()` 的记录锁，描述要锁哪一段文件。\\n- `l_type`：锁类型，`F_RDLCK`、`F_WRLCK`、`F_UNLCK`\\n- `l_whence`：`l_start` 的基准，`SEEK_SET`、`SEEK_CUR`、`SEEK_END`\\n- `l_start`：起始偏移\\n- `l_len`：锁的长度；`0` 表示一直锁到文件末尾\\n- `l_pid`：持锁进程号，常在查询冲突锁时看"
+        },
+        {
+          "name": "标准 I/O",
+          "body": "也叫带缓存的文件流操作。\\n- 先在内存里设置缓存，再和文件交互\\n- 好处：更方便移植、通常更高效\\n- 常见接口：`fopen`、`fclose`、`fgetc`、`fputc`、`fgets`、`fputs`、`fread`、`fwrite`、`fseek`、`rewind`、`ftell`\\n- 三个标准流：`stdin`、`stdout`、`stderr`"
+        },
+        {
+          "name": "目录操作",
+          "body": "目录也能像文件一样被操作，但读的对象是目录项，不是文件内容。\\n- 头文件：`dirent.h`\\n- `mkdir`：创建目录\\n- `opendir`：打开目录，返回 `DIR *`\\n- `readdir`：一次读取一个目录入口，返回 `struct dirent *`\\n- `closedir`：关闭目录\\n- `struct dirent` 里常看 `d_ino` 和 `d_name`"
+        },
+        {
+          "name": "链接文件",
+          "body": "教材分成软链接和硬链接。\\n- 软链接 `symlink`：独立文件，有自己的 inode，内容保存真实路径；可跨文件系统，原文件可先不存在；原文件没了后可能断链\\n- 硬链接 `link`：和原文件共享同一个 inode，本质上是给同一个文件再加一个名字；不能跨文件系统，原文件必须存在，不能给目录建硬链接"
+        },
+        {
+          "name": "文件描述符复制",
+          "body": "`dup` 和 `dup2` 都不是复制文件内容，而是让新的文件描述符指向同一个文件。\\n- `dup(fno)`：系统自己找一个新的可用描述符\\n- `dup2(oldfno, fno2)`：复制到你指定的描述符号上\\n- 常见用途：重定向、管道通信"
+        },
+        {
+          "name": "进程",
+          "body": "进程是程序在操作系统中的一次执行过程，也是系统进行资源分配和调度的基本单位。\\n- 程序是静态文件和代码\\n- 进程是程序运行起来后的实体\\n- 启动方式：手动启动、调度启动\\n- 手动启动又分前台进程和后台进程\\n- 正常终止：从 `main` 返回、调用 `exit`、调用 `_exit`\\n- 异常终止：被信号终止、调用 `abort` 触发 `SIGABRT`"
+        },
+        {
+          "name": "PID 与特殊进程",
+          "body": "PID 是操作系统内区分进程的唯一编号。\\n- `PID = 0`：调度进程，属于内核的一部分，也叫交换进程、系统进程\\n- `PID = 1`：`init` / `systemd`，内核启动后运行的第一个用户进程，负责初始化，不能随便终止\\n- `PID = 2`：`kthreadd`，负责内核后台操作"
+        },
+        {
+          "name": "进程状态",
+          "body": "这部分重点是分清“等 CPU”还是“等资源”。\\n- 运行态：包括内核运行态、用户运行态、就绪态\\n- 内核运行态和用户运行态：正在 CPU 上执行\\n- 就绪态：条件已满足，只等 CPU 调度\\n- 可中断睡眠态：等待资源或信号，之后可被唤醒到就绪态\\n- 不可中断睡眠态：一般不响应信号，等条件满足才唤醒"
+        }
+      ]
+    },
+    {
+      "type": "key-insight",
+      "content": "标准 I/O 的核心不是改文件内容，而是在内存里先加一层缓冲，把读写的内容先攒起来再处理。",
+      "attribution": "学习者"
+    },
+    {
+      "type": "key-insight",
+      "content": "软链接是指向路径的；硬链接才是共享 inode、相当于给同一个文件再起一个名字。",
+      "attribution": "学习者"
+    },
+    {
+      "type": "key-terms",
+      "items": [
+        {
+          "term": "记录锁",
+          "definition": "用 `fcntl()` 给文件的某一段加锁。"
+        },
+        {
+          "term": "标准 I/O",
+          "definition": "带缓存的文件流操作。"
+        },
+        {
+          "term": "目录流",
+          "definition": "`opendir()` 打开的目录对象，类型是 `DIR *`。"
+        },
+        {
+          "term": "目录项",
+          "definition": "目录里的一个条目，`readdir()` 读出来的就是它。"
+        },
+        {
+          "term": "软链接",
+          "definition": "内容存真实路径的链接文件。"
+        },
+        {
+          "term": "硬链接",
+          "definition": "与原文件共享 inode 的另一个名字。"
+        },
+        {
+          "term": "文件描述符复制",
+          "definition": "让两个描述符指向同一个文件，不复制内容。"
+        },
+        {
+          "term": "PID",
+          "definition": "进程号，操作系统内唯一。"
+        },
+        {
+          "term": "可中断睡眠态",
+          "definition": "等待资源或信号，之后能被唤醒。"
+        },
+        {
+          "term": "不可中断睡眠态",
+          "definition": "一般不响应信号，只等条件满足后唤醒。"
+        },
+        {
+          "term": "就绪态",
+          "definition": "已经准备好，只等 CPU 调度。"
+        }
+      ]
+    },
+    {
+      "type": "review-questions",
+      "items": [
+        {
+          "question": "`struct flock` 里的 `l_whence`、`l_start`、`l_len` 分别做什么？",
+          "hint": "先定基准，再定起点，最后定长度。",
+          "answer": "`l_whence` 决定 `l_start` 从哪里算；`l_start` 是起始偏移；`l_len` 是锁的长度。`l_len = 0` 表示一直锁到文件末尾。"
+        },
+        {
+          "question": "软链接和硬链接的核心区别是什么？",
+          "hint": "一个看路径，一个看 inode。",
+          "answer": "软链接是独立文件，内容保存路径；硬链接和原文件共享同一个 inode，本质上是给同一个文件再加一个名字。"
+        },
+        {
+          "question": "`dup()` 和 `dup2()` 最大的不同是什么？",
+          "hint": "看新描述符是不是你指定的。",
+          "answer": "`dup()` 让系统自己找一个新的可用描述符；`dup2(oldfno, fno2)` 则把 `oldfno` 复制到你指定的 `fno2` 上。它们都不是复制文件内容。"
+        },
+        {
+          "question": "`PID = 0`、`PID = 1`、`PID = 2` 分别是什么进程？",
+          "hint": "0 管调度，1 管初始化，2 管后台内核任务。",
+          "answer": "`PID = 0` 是调度进程；`PID = 1` 是 `init` / `systemd`，负责初始化；`PID = 2` 是 `kthreadd`，负责内核后台操作。"
+        },
+        {
+          "question": "可中断睡眠态、不可中断睡眠态、就绪态的区别是什么？",
+          "hint": "分别想成等资源、等条件、等 CPU。",
+          "answer": "可中断睡眠态是在等资源或信号，能被唤醒；不可中断睡眠态一般不响应信号，要等条件满足才醒；就绪态是已经准备好，只等 CPU 调度。"
+        }
+      ]
+    }
+  ]
+}

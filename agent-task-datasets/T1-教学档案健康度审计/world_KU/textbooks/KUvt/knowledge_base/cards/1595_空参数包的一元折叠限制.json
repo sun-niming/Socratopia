@@ -1,0 +1,47 @@
+{
+  "title": "空参数包的一元折叠限制",
+  "definition": "一元折叠在参数包长度为零时只有部分运算符具有规定的结果。教材指出，空参数包的一元折叠只能与逻辑与 `&&`、逻辑或 `||` 和逗号运算符结合。对于逻辑与，空折叠结果为 `true`；对于逻辑或，空折叠结果为 `false`。",
+  "key_points": [
+    "`(... && values)` 可用于判断所有参数是否为真。",
+    "`(... || values)` 可用于判断是否至少有一个参数为真。",
+    "空参数包进行逻辑与折叠时结果为真，因此 `allTrue()` 返回真。",
+    "空参数包进行逻辑或折叠时结果为假，因此 `anyTrue()` 返回假。",
+    "示例中：`allTrue(1, 1, 0)`、`allTrue(1, 1)`、`allTrue()` 的结果依次为 `0、1、1`；`anyTrue(1, 1, 0)`、`anyTrue(0, 0)`、`anyTrue()` 的结果依次为 `1、0、0`。"
+  ],
+  "examples": [
+    "代码形式：`template<typename... Values> bool allTrue(const Values&... values) { return (... && values); }`",
+    "代码形式：`template<typename... Values> bool anyTrue(const Values&... values) { return (... || values); }`",
+    "调用结果可表示为：`allTrue(1, 1, 0) allTrue(1, 1) allTrue()` 输出 `011`；`anyTrue(1, 1, 0) anyTrue(0, 0) anyTrue()` 输出 `100`。"
+  ],
+  "misconceptions": [
+    "空参数包进行逻辑与折叠的结果不是假，而是真。",
+    "空参数包进行逻辑或折叠的结果不是任意值，而是假。",
+    "并非所有运算符都能对空参数包进行一元折叠；教材明确列出的运算符是 `&&`、`||` 和逗号。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`allTrue()` 为什么返回真？",
+      "a": "因为空参数包的一元逻辑与折叠的结果规定为真。"
+    },
+    {
+      "q": "`anyTrue()` 为什么返回假？",
+      "a": "因为空参数包的一元逻辑或折叠的结果规定为假。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "折叠表达式",
+    "逻辑与和逻辑或"
+  ],
+  "source_pages": [
+    774,
+    774
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1595_空参数包的一元折叠限制",
+  "_chunk_pages": [
+    773,
+    776
+  ]
+}

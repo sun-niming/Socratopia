@@ -1,0 +1,41 @@
+{
+  "title": "iframe的sandbox属性",
+  "definition": "sandbox 属性用于对嵌入内容启用安全沙箱限制，以限制其能力。原文示例中给出了 allow-scripts 和 allow-same-origin。",
+  "key_points": [
+    "用于对嵌入内容启用安全沙箱限制",
+    "可通过值细化允许的能力，如 allow-scripts、allow-same-origin"
+  ],
+  "examples": [
+    "<iframe sandbox=\"allow-scripts allow-same-origin\"></iframe>"
+  ],
+  "misconceptions": [
+    "认为 sandbox 是装饰性属性；原文说明它用于安全限制。",
+    "认为设置 sandbox 后不能再有任何例外；原文示例显示可以通过值允许特定能力。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "sandbox 属性的作用是什么？",
+      "a": "对嵌入内容启用安全沙箱限制。"
+    },
+    {
+      "q": "原文给出的 sandbox 示例值有哪些？",
+      "a": "allow-scripts 和 allow-same-origin。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "iframe标签",
+    "HTML属性"
+  ],
+  "source_pages": [
+    77,
+    80
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "119_iframe的sandbox属性",
+  "_chunk_pages": [
+    77,
+    80
+  ]
+}

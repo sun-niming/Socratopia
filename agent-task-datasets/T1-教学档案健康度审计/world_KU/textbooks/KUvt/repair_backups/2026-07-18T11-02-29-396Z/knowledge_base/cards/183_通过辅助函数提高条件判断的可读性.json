@@ -1,0 +1,44 @@
+{
+  "title": "通过辅助函数提高条件判断的可读性",
+  "definition": "当代码需要判断一个结果是否为偶数时，可以把取模表达式封装为具有明确语义的辅助函数，例如 `bool isEven(int value) { return value % 2 == 0; }`，然后在条件中调用 `isEven(result)`。这种写法用函数名表达业务含义，通常比直接重复底层运算更易读。",
+  "key_points": [
+    "直接判断偶数可以写成 `result % 2 == 0`。",
+    "辅助函数 `isEven` 将“是否为偶数”的含义封装起来：`bool isEven(int value) { return value % 2 == 0; }`。",
+    "调用方式为 `if (isEven(result)) { ... }`，条件本身更接近自然语言。",
+    "原文还展示了计算结果、记录成功或错误日志，以及返回结果的代码流程。"
+  ],
+  "examples": [
+    "直接写法：`if (result % 2 == 0) { logError(); } else { logSuccess(); }`。",
+    "封装后写法：`if (isEven(result)) { ... }`，其中 `isEven` 返回布尔值。"
+  ],
+  "misconceptions": [
+    "`isEven` 并不会改变 `result`，它只根据参数判断结果并返回布尔值。",
+    "使用辅助函数并不改变“偶数”的判断规则，判断仍然基于 `value % 2 == 0`。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何定义一个判断整数是否为偶数的函数？",
+      "a": "可以定义为 `bool isEven(int value) { return value % 2 == 0; }`。"
+    },
+    {
+      "q": "为什么在条件中使用 `isEven(result)`？",
+      "a": "因为函数名直接表达了条件含义，使代码比直接写取模表达式更易读。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++函数与布尔表达式",
+    "取模运算"
+  ],
+  "source_pages": [
+    125,
+    128
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "183_通过辅助函数提高条件判断的可读性",
+  "_chunk_pages": [
+    125,
+    128
+  ]
+}

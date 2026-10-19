@@ -1,0 +1,38 @@
+{
+  "title": "align-self",
+  "definition": "align-self 属性用于规定弹性容器内所选项目的对齐方式，也就是单个项目的对齐设置。",
+  "key_points": [
+    "作用对象是被选中的单个项目",
+    "用于设置项目对齐方式",
+    "属于项目的属性"
+  ],
+  "examples": [
+    "align-self: center;"
+  ],
+  "misconceptions": [
+    "它是给整个容器设置对齐方式；原文强调是“所选项目”",
+    "它是容器属性；原文说项目也拥有对应的属性"
+  ],
+  "qa_pairs": [
+    {
+      "q": "align-self 属性规定什么？",
+      "a": "规定弹性容器内所选项目的对齐方式。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "弹性盒布局基础",
+    "交叉轴"
+  ],
+  "source_pages": [
+    157,
+    160
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "231_align_self",
+  "_chunk_pages": [
+    157,
+    160
+  ]
+}

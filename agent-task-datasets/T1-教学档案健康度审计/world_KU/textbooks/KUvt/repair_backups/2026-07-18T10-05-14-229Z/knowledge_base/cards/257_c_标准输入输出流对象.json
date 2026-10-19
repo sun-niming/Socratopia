@@ -1,0 +1,42 @@
+{
+  "title": "C++ 标准输入输出流对象",
+  "definition": "原文第184页列出了 `cout`、`cerr` 和 `cin`，并将它们与 C++ 的输入输出内容联系在一起。可确认这些名称属于 C++ 常用标准流对象，但给定片段没有完整说明各自的方向和用途。",
+  "key_points": [
+    "`cout`、`cerr` 和 `cin` 是原文列出的 C++ 输入输出流对象名称。",
+    "原文还出现了 Windows GUI 和 `IO`，但没有提供完整上下文。",
+    "不能从片段恢复教材是否正在比较控制台 IO 与 Windows GUI。"
+  ],
+  "examples": [
+    "原文列出的流对象：`cout`、`cerr`、`cin`。",
+    "典型写法示例：`cout << \"text\";`、`cerr << \"error\";`、`cin >> value;`"
+  ],
+  "misconceptions": [
+    "不能把 `cin`、`cout` 和 `cerr` 当作普通字符串变量。",
+    "仅凭片段不能确定教材是否详细讨论了它们的缓冲、重定向或与 GUI 的关系。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "原文列出的三个 C++ 标准流对象是什么？",
+      "a": "`cin`、`cout` 和 `cerr`。"
+    },
+    {
+      "q": "这些名称属于哪一类 C++ 对象？",
+      "a": "属于常用的标准输入输出流对象。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++ 基本输入输出"
+  ],
+  "source_pages": [
+    181,
+    184
+  ],
+  "needs_verification": true,
+  "verify_query": "C++ cin cout cerr 标准输入输出流对象 官方文档",
+  "concept_id": "257_c_标准输入输出流对象",
+  "_chunk_pages": [
+    181,
+    184
+  ]
+}

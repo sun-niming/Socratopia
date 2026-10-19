@@ -1,0 +1,50 @@
+{
+  "title": "ratio 提供 SI 单位制类型别名",
+  "definition": "为方便表示常见的十进制数量级，`ratio` 库预定义了一组 SI（国际单位制）类型别名，例如 `milli` 表示 $\\frac{1}{1000}$、`micro` 表示 $\\frac{1}{1\\,000\\,000}$、`kilo` 表示 $1000$、`mega` 表示 $1\\,000\\,000$。部分别名只有在编译器能够用 `intmax_t` 表示其分子和分母时才会定义。",
+  "key_points": [
+    "小于 1 的 SI 前缀包括 `milli`、`micro`、`nano` 等。",
+    "大于或等于 1 的 SI 前缀包括 `kilo`、`mega`、`giga` 等。",
+    "这些别名本质上是特定分子和分母的 `std::ratio` 类型别名。",
+    "教材指出，带星号标记的 SI 单位只有在编译器可以表示相应 `intmax_t` 分子和分母时才定义。",
+    "这些预定义单位别名会在后续 `duration` 内容中使用。"
+  ],
+  "examples": [
+    "`using milli = std::ratio<1, 1000>;` 表示 $10^{-3}$。",
+    "`using micro = std::ratio<1, 1\\,000\\,000>;` 表示 $10^{-6}$。",
+    "`using kilo = std::ratio<1000, 1>;` 表示 $10^3$。",
+    "`using mega = std::ratio<1\\,000\\,000, 1>;` 表示 $10^6$。"
+  ],
+  "misconceptions": [
+    "SI 类型别名不是运行时数值对象，而是表示特定比例的 ratio 类型。",
+    "并非所有极大或极小数量级的别名在所有编译器上都必然定义；这取决于 `intmax_t` 能否表示相应分子和分母。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`std::ratio` 库为什么提供 `milli` 和 `kilo` 等别名？",
+      "a": "为了方便表示 SI 国际单位制中的常见十进制数量级。"
+    },
+    {
+      "q": "`milli` 和 `kilo` 分别表示什么比例？",
+      "a": "`milli` 表示 $\\frac{1}{1000}$，`kilo` 表示 $1000$。"
+    },
+    {
+      "q": "SI ratio 别名是否在所有编译器上都一定存在？",
+      "a": "不一定。教材指出，部分别名只有在编译器能用 `intmax_t` 表示其常量分子和分母时才会定义。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "std::ratio 表示编译期有理数"
+  ],
+  "source_pages": [
+    684,
+    684
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1427_ratio_提供_si_单位制类型别名",
+  "_chunk_pages": [
+    681,
+    684
+  ]
+}

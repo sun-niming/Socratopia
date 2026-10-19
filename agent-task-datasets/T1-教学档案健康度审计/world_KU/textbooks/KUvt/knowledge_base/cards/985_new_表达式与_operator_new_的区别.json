@@ -1,0 +1,45 @@
+{
+  "title": "new 表达式与 operator new 的区别",
+  "definition": "`new` 表达式完成两个步骤：先调用 `operator new` 为对象分配原始内存，再在该内存上调用对象的构造函数；只有构造函数完成后，`new` 表达式才返回对象指针。可以重载 `operator new` 来定制内存分配，但不能重载 `new` 表达式本身，也不能因此定制构造函数的调用过程。",
+  "key_points": [
+    "`operator new` 负责分配原始内存。",
+    "构造函数负责在已分配的内存中构造对象。",
+    "`new` 表达式把内存分配和对象构造组合起来。",
+    "不能重载 `new` 表达式，只能重载其调用的分配函数。"
+  ],
+  "examples": [
+    "`SpreadsheetCell* cell { new SpreadsheetCell() };` 的逻辑顺序是：先调用 `operator new` 分配空间，再调用 `SpreadsheetCell` 的构造函数，最后返回指针。",
+    "可重载的函数示意：`void* operator new(std::size_t size);` 和 `void* operator new[](std::size_t size);`。"
+  ],
+  "misconceptions": [
+    "`operator new` 本身只负责取得内存，不负责调用类的构造函数。",
+    "重载 `operator new` 不能改变构造函数是否被调用或构造函数的调用规则。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`new SpreadsheetCell()` 依次完成哪些操作？",
+      "a": "先调用 `operator new` 分配内存，再调用 `SpreadsheetCell` 的构造函数，构造成功后返回对象指针。"
+    },
+    {
+      "q": "可以重载 `new` 表达式吗？",
+      "a": "不可以；只能重载 `operator new` 等实际负责内存分配的函数。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "构造函数",
+    "动态内存分配",
+    "运算符重载"
+  ],
+  "source_pages": [
+    490,
+    490
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "985_new_表达式与_operator_new_的区别",
+  "_chunk_pages": [
+    489,
+    492
+  ]
+}

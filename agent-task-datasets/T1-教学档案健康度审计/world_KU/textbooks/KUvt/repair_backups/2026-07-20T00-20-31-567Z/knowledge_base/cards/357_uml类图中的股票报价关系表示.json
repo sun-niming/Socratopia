@@ -1,0 +1,50 @@
+{
+  "title": "UML类图中的股票报价关系表示",
+  "definition": "教材使用 UML 类图表示股票报价对象之间的关系。图中，`StockQuoteCollection` 包含零个或多个 `StockQuote` 对象，而每个 `StockQuote` 对象属于一个 `StockQuoteCollection`。类图还列出类的属性和行为：减号通常标记属性，正号通常标记公开操作。",
+  "key_points": [
+    "关系：`StockQuoteCollection` 与 `StockQuote` 之间是集合与成员对象的包含关系。",
+    "多重性：一个集合可以包含零个或多个股价对象；一个股价对象属于单个集合。",
+    "`StockQuote` 图示属性包括 `m_companyName : string`、`m_tickerSymbol : string`、`m_currentPrice : Currency`。",
+    "`StockQuote` 图示行为包括 `analyze() : void`、`buyShares() : void` 和卖出股票操作。",
+    "`StockQuoteCollection` 图示属性包括 `m_stockQuotes : vector` 和 `m_timestamp : DateTime`，行为包括 `retrieveQuotes() : void` 和 `sortQuotes() : void`。"
+  ],
+  "examples": [
+    "UML类图中的成员可用文字表示：`StockQuote`：`-m_companyName : string`、`-m_tickerSymbol : string`、`-m_currentPrice : Currency`、`+analyze() : void`；`StockQuoteCollection`：`-m_stockQuotes : vector`、`-m_timestamp : DateTime`、`+retrieveQuotes() : void`、`+sortQuotes() : void`。",
+    "对象关系可写为：$$StockQuoteCollection \\;\\xrightarrow{\\text{包含 }0\\text{ 个或多个}}\\; StockQuote$$，并且每个 `StockQuote` 只属于一个 `StockQuoteCollection`。"
+  ],
+  "misconceptions": [
+    "UML 类图中的 `StockQuote` 表示类，不是某一个具体公司的单个报价实例。",
+    "“零个或多个”表示集合可能为空，也可能包含多个股价对象，并不表示集合必须至少包含一个对象。",
+    "图中的属性和方法是对类结构的描述，不是某次运行时对象中唯一可能存在的全部数据。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "UML 类图表达了 `StockQuoteCollection` 和 `StockQuote` 怎样的关系？",
+      "a": "一个 `StockQuoteCollection` 包含零个或多个 `StockQuote` 对象，而每个 `StockQuote` 对象属于一个 `StockQuoteCollection`。"
+    },
+    {
+      "q": "UML 类图中 `-m_currentPrice : Currency` 表示什么？",
+      "a": "它表示 `StockQuote` 类有一个名为 `m_currentPrice` 的属性，其类型为 `Currency`；前面的减号表示该成员的 UML 可见性标记。"
+    },
+    {
+      "q": "`retrieveQuotes()` 和 `sortQuotes()` 属于哪个类的行为？",
+      "a": "它们属于 `StockQuoteCollection` 类，分别表示获取报价和排序报价。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "股票报价示例的面向对象设计",
+    "对象行为与类方法"
+  ],
+  "source_pages": [
+    168,
+    168
+  ],
+  "needs_verification": true,
+  "verify_query": "《C++20高级编程》第5版第168页 图5-1 StockQuoteCollection StockQuote UML类图 sellShares m_stockQuotes 原图",
+  "concept_id": "357_uml类图中的股票报价关系表示",
+  "_chunk_pages": [
+    165,
+    168
+  ]
+}

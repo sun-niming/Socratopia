@@ -1,0 +1,39 @@
+{
+  "title": "sessionStorage 的使用场景",
+  "definition": "sessionStorage 适合保存单次浏览会话内的临时状态数据，关闭标签页后失效，因此常用于表单临时内容、会话状态和当前浏览过程中的导航状态。",
+  "key_points": [
+    "可存储单次会话的用户操作状态，如表单填写到一半的数据。",
+    "可用于临时存储信息，如一次性 token，关闭标签页后失效。",
+    "可记录用户在当前浏览会话中的导航历史或状态。"
+  ],
+  "examples": [
+    "表单填写到一半的数据",
+    "一次性 token",
+    "当前浏览会话中的导航历史"
+  ],
+  "misconceptions": [
+    "sessionStorage 关闭浏览器后仍会长期保留。",
+    "sessionStorage 关闭标签页后失效就意味着可以随意保存真正敏感数据。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "sessionStorage 适合存什么类型的数据？",
+      "a": "适合存储单次会话内的临时状态数据，例如表单中途内容、一次性 token、当前会话导航状态。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "Web Storage"
+  ],
+  "source_pages": [
+    385,
+    387
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "511_sessionstorage_的使用场景",
+  "_chunk_pages": [
+    385,
+    387
+  ]
+}

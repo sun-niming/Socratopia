@@ -1,0 +1,44 @@
+{
+  "title": "修改TCP拥塞控制：乘性增加模型",
+  "definition": "原文提出一种修改后的TCP拥塞控制算法：不采用加性增加，而采用乘性增加；每当TCP收到一个合法ACK时，就按照参数$\\alpha$增加拥塞窗口，其中$0<\\alpha<1$。该习题要求推导丢包率$L$与最大拥塞窗口$W$之间的函数关系，并分析窗口从$W/2$增加到$W$所需的时间。",
+  "key_points": [
+    "参数满足$0<\\alpha<1$。",
+    "该算法的窗口增长规则与传统TCP拥塞避免中的加性增加不同。",
+    "原文要求证明窗口从$W/2$增长到$W$所需的时间与TCP平均吞吐量之间的关系。"
+  ],
+  "examples": [
+    "题设中的窗口变化区间可表示为：$$\\frac{W}{2}\\longrightarrow W$$。",
+    "丢包率与最大拥塞窗口的关系应写成：$$L=f(W)$$，具体函数形式需根据教材对“乘性增加”的精确定义推导。"
+  ],
+  "misconceptions": [
+    "不能把题设中的乘性增加直接等同于传统TCP的每个ACK增加固定的$1/cwnd$；两者的窗口增长规则不同。",
+    "仅凭当前摘录无法确定“每个合法ACK增加一个小正数$\\alpha$”与“乘性增加”之间的精确数学含义。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "该修改算法与传统加性增加的主要区别是什么？",
+      "a": "传统算法采用加性增加；该修改算法采用乘性增加，并在收到合法ACK时按照参数$\\alpha$增加拥塞窗口，其中$0<\\alpha<1$。"
+    },
+    {
+      "q": "该习题要求研究哪两个量之间的关系？",
+      "a": "要求研究丢包率$L$与最大拥塞窗口$W$之间的函数关系。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "TCP拥塞避免",
+    "拥塞窗口",
+    "丢包率"
+  ],
+  "source_pages": [
+    213,
+    216
+  ],
+  "needs_verification": true,
+  "verify_query": "Kurose Ross Computer Networking 7th edition exercise P52 multiplicative increase alpha loss rate L maximum congestion window W exact statement",
+  "concept_id": "494_修改tcp拥塞控制_乘性增加模型",
+  "_chunk_pages": [
+    213,
+    216
+  ]
+}

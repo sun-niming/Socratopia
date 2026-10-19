@@ -1,0 +1,51 @@
+{
+  "title": "std::format的基本格式字符串语法",
+  "definition": "C++20提供std::format用于格式化输出。格式字符串中的替换字段通常写成`{}`；也可以在大括号中指定参数索引和格式说明符，基本形式为`{[index][:specifier]}`。如果要在输出中表示字面量大括号，应使用`{{`或`}}`。",
+  "key_points": [
+    "原文将std::format与C、C#和C++中的I/O或格式化方式进行比较。",
+    "替换字段的基本形式是`{}`。",
+    "替换字段可以包含参数索引`index`以及格式说明符`specifier`，原文给出的结构为`{[index][:specifier]}`。",
+    "格式字符串中的`{`、`}`具有特殊含义；原文列出`{{`和`}}`作为对应的转义写法。",
+    "原文示例`format(L\"{1} {0}\", a, L\"file1.txt\")`表明可以通过索引调整参数输出顺序。"
+  ],
+  "examples": [
+    "按参数默认顺序格式化：`std::format(\"C++ string: {}\", value)`。",
+    "按索引调整参数顺序：`std::format(L\"{1} {0}\", a, L\"file1.txt\")`。",
+    "替换字段的一般结构：`{[index][:specifier]}`。"
+  ],
+  "misconceptions": [
+    "`std::format`中的参数不一定只能按照出现顺序使用；可以通过index指定参数。",
+    "格式字符串中的单个大括号通常用于替换字段；要输出字面量大括号，应使用双大括号。",
+    "`specifier`不是要输出的普通文本，而是用于控制格式的说明部分。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "std::format的基本替换字段如何写？",
+      "a": "最基本的写法是`{}`；包含索引和格式说明符时可写成`{[index][:specifier]}`。"
+    },
+    {
+      "q": "如何在std::format的结果中输出字面量大括号？",
+      "a": "使用`{{`表示左大括号，使用`}}`表示右大括号。"
+    },
+    {
+      "q": "`format(L\"{1} {0}\", a, L\"file1.txt\")`中的索引有什么作用？",
+      "a": "索引用于指定参数位置，因此可以改变参数在输出结果中的顺序。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "函数调用与参数",
+    "字符串字面量"
+  ],
+  "source_pages": [
+    115,
+    116
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 std::format replacement field syntax index specifier escaped braces {{ }} 宽字符示例",
+  "concept_id": "167_std_format的基本格式字符串语法",
+  "_chunk_pages": [
+    113,
+    116
+  ]
+}

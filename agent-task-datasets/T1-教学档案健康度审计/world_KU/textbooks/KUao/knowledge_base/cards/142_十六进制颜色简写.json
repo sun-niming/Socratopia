@@ -1,0 +1,38 @@
+{
+  "title": "十六进制颜色简写",
+  "definition": "对于形如 #aabbcc 的十六进制颜色，如果每一对字符都相同，可以简写成 #abc。",
+  "key_points": [
+    "只有 #aabbcc 这种每两位相同的形式才可以简写。",
+    "简写后保留每一组中的一个字符即可。",
+    "教材给出的例子是 #ff0000 可简写为 #f00。"
+  ],
+  "examples": [
+    "#aabbcc → #abc",
+    "#ff0000 → #f00"
+  ],
+  "misconceptions": [
+    "不是所有十六进制颜色都能简写。",
+    "简写不是随意删字符，而是基于每两位相同的规则。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "#ff0000 为什么可以写成 #f00？",
+      "a": "因为它符合 #aabbcc 可简写为 #abc 的规则，每两位字符相同。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "十六进制颜色值"
+  ],
+  "source_pages": [
+    109,
+    112
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "142_十六进制颜色简写",
+  "_chunk_pages": [
+    109,
+    112
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "title": "position: relative",
+  "definition": "relative 是相对定位，元素的位置相对于它本来该出现的位置发生偏移。",
+  "key_points": [
+    "relative 表示相对定位",
+    "偏移基准是元素原本应该出现的位置"
+  ],
+  "examples": [
+    ".box { position: relative; top: 10px; left: 20px; }"
+  ],
+  "misconceptions": [
+    "relative 是相对于父元素定位",
+    "relative 一定会让元素完全脱离文档流"
+  ],
+  "qa_pairs": [
+    {
+      "q": "相对定位的参照位置是什么？",
+      "a": "元素本来该出现的位置。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "position属性"
+  ],
+  "source_pages": [
+    138,
+    139
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "199_position_relative",
+  "_chunk_pages": [
+    137,
+    140
+  ]
+}

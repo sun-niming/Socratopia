@@ -1,0 +1,51 @@
+{
+  "title": "C++20位操作函数",
+  "definition": "C++20在<bit>头文件中提供了一组位操作函数。原文列出的函数都要求第一个参数是无符号整型，用于判断二的幂、求不超过或不小于给定值的二的幂、计算位宽、旋转位、统计连续的零位或一位，以及统计值中1位的数量。",
+  "key_points": [
+    "std::has_single_bit(x)：当无符号整数x只包含一位1时返回true，此时x是2的整数次幂。",
+    "std::bit_ceil(x)：返回大于或等于x的最小二的幂。",
+    "std::bit_floor(x)：返回小于或等于x的最大二的幂。",
+    "std::bit_width(x)：返回存储给定值所需的位数。",
+    "std::rotl(x,s)和std::rotr(x,s)：分别向左和向右旋转位。",
+    "std::countl_zero、std::countl_one：从最高有效位开始统计连续的0位或1位；std::countr_zero、std::countr_one：从最低有效位开始统计连续的0位或1位。",
+    "std::popcount(x)：返回x的二进制表示中1位的数量。"
+  ],
+  "examples": [
+    "对于8位值$$00001011_2=11$$：$$\\operatorname{bit\\_ceil}(11)=16=00010000_2$$，$$\\operatorname{bit\\_floor}(11)=8=00001000_2$$。",
+    "若value为$$00001011_2$$，则std::popcount(value)的结果为3。",
+    "位旋转示例：对8位值执行rotl(value, 2)，原文示例输出为00100010。"
+  ],
+  "misconceptions": [
+    "bit_ceil返回不大于给定值的二的幂；实际上它返回大于或等于给定值的最小二的幂。",
+    "popcount统计二进制表示中的0位数量；实际上它统计1位数量。",
+    "countl_*和countr_*从同一端开始统计；实际上countl从最高有效位开始，countr从最低有效位开始。",
+    "这些函数可直接把有符号整数作为第一个参数使用；原文说明它们要求无符号整型作为第一个参数。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "对无符号整数11，bit_ceil和bit_floor分别返回什么？",
+      "a": "11的二进制形式是00001011，bit_ceil(11)返回16，即00010000；bit_floor(11)返回8，即00001000。"
+    },
+    {
+      "q": "countl_zero与countr_zero有什么区别？",
+      "a": "countl_zero从最高有效位开始统计连续的0位，countr_zero从最低有效位开始统计连续的0位。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "二进制表示",
+    "位运算基础",
+    "无符号整数"
+  ],
+  "source_pages": [
+    503,
+    504
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1017_c_20位操作函数",
+  "_chunk_pages": [
+    501,
+    504
+  ]
+}

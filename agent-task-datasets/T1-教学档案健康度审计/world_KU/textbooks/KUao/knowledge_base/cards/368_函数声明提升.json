@@ -1,0 +1,36 @@
+{
+  "title": "函数声明提升",
+  "definition": "函数声明会在预编译阶段提升到整个作用域的最前面，因此可以在函数声明之前调用它。",
+  "key_points": [
+    "提升到整个作用域最前面",
+    "函数声明的提升优先级高于变量声明",
+    "可在声明前调用"
+  ],
+  "examples": [
+    "foo(); function foo(){ console.log('ok'); }"
+  ],
+  "misconceptions": [
+    "函数声明不会提升；教材指出函数声明会被提升到作用域最前面"
+  ],
+  "qa_pairs": [
+    {
+      "q": "函数声明提升有什么表现？",
+      "a": "可以在函数声明之前调用该函数，因为函数声明会被提升到整个作用域最前面。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "声明提升"
+  ],
+  "source_pages": [
+    273,
+    276
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "368_函数声明提升",
+  "_chunk_pages": [
+    273,
+    276
+  ]
+}

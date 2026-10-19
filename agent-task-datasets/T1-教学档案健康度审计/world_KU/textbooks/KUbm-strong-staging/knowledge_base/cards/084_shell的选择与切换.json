@@ -1,0 +1,44 @@
+{
+  "title": "Shell的选择与切换",
+  "definition": "教材说明，用户使用哪一种Shell，一般由管理员在创建用户时为其指定，并把该设置保存在/etc/passwd文件中；也可以通过usermod命令进行更改；此外，用户登录后还可以执行相应命令切换Shell。",
+  "key_points": [
+    "Shell可由管理员在创建用户时指定",
+    "Shell信息保存在/etc/passwd文件中",
+    "Shell可通过usermod命令更改",
+    "登录后也可执行相应命令切换Shell"
+  ],
+  "examples": [
+    "教材表述：其保存在/etc/passwd文件中",
+    "教材表述：或通过usermod命令进行更改",
+    "教材表述：也可在登录后执行相应的命令切换Shell"
+  ],
+  "misconceptions": [
+    "误以为Shell只能在安装系统时确定，之后不能改；教材明确说明可以通过usermod命令更改",
+    "误以为Shell选择与用户无关；教材说明它与用户账户配置相关，并保存在/etc/passwd中"
+  ],
+  "qa_pairs": [
+    {
+      "q": "用户的Shell设置通常保存在什么文件中？",
+      "a": "教材指出保存在/etc/passwd文件中。"
+    },
+    {
+      "q": "如果要修改用户的Shell，教材提到了哪种方式？",
+      "a": "可以通过usermod命令进行更改。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "常见Shell种类"
+  ],
+  "source_pages": [
+    45,
+    48
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "084_shell的选择与切换",
+  "_chunk_pages": [
+    45,
+    48
+  ]
+}

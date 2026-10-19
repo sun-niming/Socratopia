@@ -1,0 +1,49 @@
+{
+  "title": "GameBoard继承Grid<T>并提供move操作",
+  "definition": "教材声明了一个模板类GameBoard<T>，它公有继承自Grid<T>，并提供带默认宽度和高度的显式构造函数，以及用于移动元素或棋子位置的move成员函数。构造函数的默认尺寸分别取Grid<T>::DefaultWidth和Grid<T>::DefaultHeight。",
+  "key_points": [
+    "类声明形式为`template <typename T> class GameBoard : public Grid<T>`。",
+    "构造函数参数为width和height，默认值来自Grid<T>::DefaultWidth与Grid<T>::DefaultHeight。",
+    "move函数接收源坐标(xSrc, ySrc)和目标坐标(xDest, yDest)。",
+    "原文在第392页只给出了类声明和move函数签名，没有给出move函数体。"
+  ],
+  "examples": [
+    "move函数签名：`void move(size_t xSrc, size_t ySrc, size_t xDest, size_t yDest);`。",
+    "GameBoard可被理解为在Grid<T>基础上增加棋盘移动操作的派生类。"
+  ],
+  "misconceptions": [
+    "误以为原文已经说明了move如何交换、复制或清空单元；给定内容只展示了声明，没有展示实现。",
+    "误以为GameBoard只能用于某一种棋子类型；类本身是模板，元素类型由T决定。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "GameBoard<T>继承自哪个类？",
+      "a": "它公有继承自Grid<T>。"
+    },
+    {
+      "q": "GameBoard的move函数有哪些参数？",
+      "a": "源坐标xSrc、ySrc，以及目标坐标xDest、yDest。"
+    },
+    {
+      "q": "原文是否给出了move函数的具体实现？",
+      "a": "没有，只给出了函数声明。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "类模板",
+    "公有继承",
+    "二维坐标表示"
+  ],
+  "source_pages": [
+    389,
+    392
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "504_gameboard继承grid_t_并提供move操作",
+  "_chunk_pages": [
+    389,
+    392
+  ]
+}

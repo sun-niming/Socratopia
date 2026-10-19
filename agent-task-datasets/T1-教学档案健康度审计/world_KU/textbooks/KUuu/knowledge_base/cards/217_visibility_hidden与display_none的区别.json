@@ -1,0 +1,42 @@
+{
+  "title": "visibility:hidden与display:none的区别",
+  "definition": "visibility 属性可以控制元素是否可见。元素默认可见；当设置为 visibility:hidden 时，元素会被隐藏，但元素占位仍然保留。与之相比，display:none 表示元素不显示，而且它在文档流中的占位也不存在。",
+  "key_points": [
+    "visibility 用于控制元素是否可见。",
+    "visibility:hidden：元素隐藏，但占位还在。",
+    "display:none：元素不显示，占位也不在文档流中。"
+  ],
+  "examples": [
+    "visibility:hidden;",
+    "display:none;"
+  ],
+  "misconceptions": [
+    "把 visibility:hidden 误认为会让元素从页面中完全消失并且不占位。",
+    "把 display:none 误认为只是让元素变透明。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "visibility:hidden 和 display:none 的区别是什么？",
+      "a": "visibility:hidden 只是隐藏元素但保留占位；display:none 不显示元素，并且占位也从文档流中消失。"
+    },
+    {
+      "q": "元素默认是可见还是不可见？",
+      "a": "默认可见。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "display属性常用取值"
+  ],
+  "source_pages": [
+    133,
+    136
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "217_visibility_hidden与display_none的区别",
+  "_chunk_pages": [
+    133,
+    136
+  ]
+}

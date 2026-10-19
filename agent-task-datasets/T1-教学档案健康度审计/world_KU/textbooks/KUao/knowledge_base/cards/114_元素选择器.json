@@ -1,0 +1,37 @@
+{
+  "title": "元素选择器",
+  "definition": "元素选择器是按HTML标签名来选择元素的选择器，写法就是直接写标签名称。",
+  "key_points": [
+    "写法是标签名{}",
+    "可用于如body、img等元素"
+  ],
+  "examples": [
+    "body{ color:#111111; font-size:12px; }",
+    "img { border-width:0; }"
+  ],
+  "misconceptions": [
+    "元素选择器不是写成.标签名，也不是写成#标签名"
+  ],
+  "qa_pairs": [
+    {
+      "q": "元素选择器如何写？",
+      "a": "直接写HTML标签名称。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "CSS选择器",
+    "HTML元素"
+  ],
+  "source_pages": [
+    89,
+    92
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "114_元素选择器",
+  "_chunk_pages": [
+    89,
+    92
+  ]
+}

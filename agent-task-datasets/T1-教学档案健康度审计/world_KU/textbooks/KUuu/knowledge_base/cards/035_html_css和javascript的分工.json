@@ -1,0 +1,38 @@
+{
+  "title": "HTML、CSS和JavaScript的分工",
+  "definition": "在网页开发中，HTML用于描述文档结构，CSS用于控制文档表现，JavaScript用于控制网页行为。教材强调，HTML决定网页内容，CSS决定页面的表现形式。",
+  "key_points": [
+    "HTML负责文档结构和内容",
+    "CSS负责页面表现和样式",
+    "JavaScript负责网页行为和交互",
+    "HTML和CSS是内容与形式的关系"
+  ],
+  "examples": [
+    "用HTML写标题、段落和列表，用CSS设置颜色和字号，用JavaScript响应点击事件"
+  ],
+  "misconceptions": [
+    "把CSS当作负责网页内容的语言",
+    "把HTML当作负责交互效果的语言"
+  ],
+  "qa_pairs": [
+    {
+      "q": "HTML、CSS和JavaScript各自负责什么？",
+      "a": "HTML负责结构和内容，CSS负责表现和样式，JavaScript负责行为和交互。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "Web标准"
+  ],
+  "source_pages": [
+    25,
+    28
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "035_html_css和javascript的分工",
+  "_chunk_pages": [
+    25,
+    28
+  ]
+}

@@ -1,0 +1,48 @@
+{
+  "title": "用户注册页面控件选型",
+  "definition": "教材示例中的注册页面按功能选用不同控件：用户名用 text，密码用 password，性别用 radio 且同组通常使用相同 name，爱好用 checkbox，城市用 select，自我介绍用 textarea，提交和重置分别用 submit 和 reset。",
+  "key_points": [
+    "用户名 → text",
+    "密码 → password",
+    "性别 → radio（同组通常使用相同 name）",
+    "爱好 → checkbox",
+    "城市 → select",
+    "自我介绍 → textarea",
+    "提交/重置 → submit / reset"
+  ],
+  "examples": [
+    "用户名→text；密码→password；性别→radio；爱好→checkbox；城市→select；自我介绍→textarea；提交/重置→submit / reset"
+  ],
+  "misconceptions": [
+    "以为性别可以随便用多个互不相关的单选按钮",
+    "以为textarea适合单行输入",
+    "以为checkbox和radio没有区别"
+  ],
+  "qa_pairs": [
+    {
+      "q": "教材中的注册页面里，城市字段应该使用什么控件？",
+      "a": "select。"
+    },
+    {
+      "q": "为什么性别的 radio 通常要用相同的 name？",
+      "a": "为了把它们归为同一组单选项。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "HTML表单基础",
+    "表单构建流程",
+    "表单按钮类型"
+  ],
+  "source_pages": [
+    73,
+    76
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "111_用户注册页面控件选型",
+  "_chunk_pages": [
+    73,
+    76
+  ]
+}

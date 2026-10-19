@@ -1,0 +1,294 @@
+{
+  "textbookId": "KUvg",
+  "updatedAt": "2026-10-09T06:22:17.285Z",
+  "cards": [
+    {
+      "id": "fc_1791471716215_000_887f40e7f023",
+      "question": "教材对物理层的定位是「屏蔽掉不同传输媒体和通信手段的差异」，同时又明确写下「物理层不包含传输媒体」。据此，下列哪项陈述反映了物理层与传输媒体的真实关系？",
+      "choices": [
+        "物理层通过把传输媒体纳入协议层次来统一管理所有媒体的差异",
+        "物理层需要针对每种具体的传输媒体设计不同的通信手段",
+        "物理层既包含传输媒体，也包含与媒体接口相关的电气和功能特性",
+        "物理层不包含传输媒体，但负责规定与传输媒体接口有关的各项特性"
+      ],
+      "correctIndex": 3,
+      "explanation": "物理层不包含传输媒体本身，它的职责是规定与传输媒体接口有关的特性（机械、电气、功能、过程），把媒体的具体差异屏蔽在接口之外。传输媒体是「现场」，物理层是「现场接入的接口规则」。",
+      "source": {
+        "textbook": "计算机网络 （第2版）",
+        "chapter": "",
+        "textbookSlug": "KUvg"
+      },
+      "created": "2026-10-08T15:01:56.215Z",
+      "conversationId": "uEtIrCjIb_3DUooR3VMMf",
+      "status": "active",
+      "history": [
+        {
+          "schemaVersion": 2,
+          "time": "2026-10-08T15:02:09.032Z",
+          "chosen": 3,
+          "correct": true,
+          "domainRevision": 1,
+          "answerRecordId": "flashcard:fc_1791471716215_000_887f40e7f023:1"
+        }
+      ],
+      "nextReview": "2026-10-08T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1791471716215_001_fd36f00cf07f",
+      "question": "某物理层接口规范中写着：两根线的电势差小于 1.6V 判为「0」，大于 8V 判为「1」。这组规定属于物理层接口的哪一类特性？",
+      "choices": [
+        "机械特性",
+        "功能特性",
+        "过程特性",
+        "电气特性"
+      ],
+      "correctIndex": 1,
+      "explanation": "功能特性规定某条线上某个电平的电压「意义」是什么，即电压被理解成 0 还是 1、各信号线派什么用场。电气特性管的是电压的范围、阻抗、速率、距离等「本身」属性，而非其含义。",
+      "source": {
+        "textbook": "计算机网络 （第2版）",
+        "chapter": "",
+        "textbookSlug": "KUvg"
+      },
+      "created": "2026-10-08T15:01:56.215Z",
+      "conversationId": "uEtIrCjIb_3DUooR3VMMf",
+      "status": "active",
+      "history": [
+        {
+          "schemaVersion": 2,
+          "time": "2026-10-08T15:02:13.913Z",
+          "chosen": 1,
+          "correct": true,
+          "domainRevision": 1,
+          "answerRecordId": "flashcard:fc_1791471716215_001_fd36f00cf07f:1"
+        },
+        {
+          "schemaVersion": 2,
+          "time": "2026-10-08T15:02:44.808Z",
+          "chosen": 1,
+          "correct": true,
+          "domainRevision": 2,
+          "answerRecordId": "flashcard:fc_1791471716215_001_fd36f00cf07f:2"
+        }
+      ],
+      "nextReview": "2026-10-10T16:00:00.000Z",
+      "interval": 3,
+      "ease": 2.7,
+      "repetitions": 2
+    },
+    {
+      "id": "fc_1791471716215_002_d5d7f5ded5a8",
+      "question": "关于曼彻斯特编码与差分曼彻斯特编码的对比，下列说法正确的是？",
+      "choices": [
+        "两者都靠位中心必跳变获得自同步能力，但曼彻斯特看中心跳变方向，差分曼彻斯特看起始边界有无跳变",
+        "差分曼彻斯特编码不需要中心跳变，因此其信号频率低于不归零制，带宽占用也更小",
+        "不归零制因为有电位跳变，所以也具备自同步能力，且频率低于两种曼彻斯特编码",
+        "两种编码的 0 和 1 都只由位中心跳变的方向决定，区别仅在于是否在位边界处归零"
+      ],
+      "correctIndex": 0,
+      "explanation": "两种编码都保证每位中心必跳变，从而具备自同步能力；但区分 0 和 1 的锚点不同——曼彻斯特看中心跳变的方向，差分曼彻斯特看位起始边界有无跳变。同时自同步的代价是频率升高、占用带宽更宽。",
+      "source": {
+        "textbook": "计算机网络 （第2版）",
+        "chapter": "",
+        "textbookSlug": "KUvg"
+      },
+      "created": "2026-10-08T15:01:56.215Z",
+      "conversationId": "uEtIrCjIb_3DUooR3VMMf",
+      "status": "active",
+      "history": [
+        {
+          "schemaVersion": 2,
+          "time": "2026-10-08T15:02:37.788Z",
+          "chosen": 1,
+          "correct": false,
+          "domainRevision": 1,
+          "answerRecordId": "flashcard:fc_1791471716215_002_d5d7f5ded5a8:1"
+        },
+        {
+          "schemaVersion": 2,
+          "time": "2026-10-08T15:02:48.277Z",
+          "chosen": 0,
+          "correct": true,
+          "domainRevision": 2,
+          "answerRecordId": "flashcard:fc_1791471716215_002_d5d7f5ded5a8:2"
+        }
+      ],
+      "nextReview": "2026-10-08T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.4,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1791526874446_000_de147b5b603e",
+      "question": "在奈氏准则 $C = 2W\\log_2 M$ 与香农公式 $C = W\\log_2(1+S/N)$ 的比较中，当把十六进制编码（$M=16$）、带宽 $4000$ Hz 代入时，奈氏上限为 $32000$ b/s，香农上限为 $28000$ b/s。下列说法哪一项正确？",
+      "choices": [
+        "实际信道容量取 $\\min(32000,\\ 28000)=28000$ b/s，加大 $M$ 能突破奈氏上限但永远撞不过香农极限",
+        "实际信道容量取 $32000$ b/s，因为奈氏准则是编码决定的硬上限，香农只是理论参考",
+        "实际信道容量取两者平均值 $30000$ b/s，因为两条公式分别约束了信道不同的物理特性",
+        "实际信道容量取 $\\max(32000,\\ 28000)=32000$ b/s，因为十六进制编码让每码元携带了更多比特"
+      ],
+      "correctIndex": 0,
+      "explanation": "信道容量取奈氏与香农两者较小值，因为编码方式可以提高每码元携带的比特数（推高奈氏上限），但无法突破由信噪比决定的香农极限。",
+      "source": {
+        "textbook": "计算机网络 （第2版）",
+        "chapter": "",
+        "textbookSlug": "KUvg"
+      },
+      "created": "2026-10-09T06:21:14.446Z",
+      "conversationId": "sQPOYvDYa8CJI1tzErTNr",
+      "status": "active",
+      "history": [
+        {
+          "schemaVersion": 2,
+          "time": "2026-10-09T06:21:27.241Z",
+          "chosen": 0,
+          "correct": true,
+          "domainRevision": 1,
+          "answerRecordId": "flashcard:fc_1791526874446_000_de147b5b603e:1"
+        }
+      ],
+      "nextReview": "2026-10-09T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1791526874447_001_6ca1883c889c",
+      "question": "关于双绞线屏蔽结构的抗干扰能力，教材给出的排序是 U/FTP 优于 F/UTP、F/FTP 最好。其中 U/FTP 优于 F/UTP 的核心物理机制是什么？",
+      "choices": [
+        "U/FTP 的铝箔层更厚，能同时降低衰减和串扰，所以比 F/UTP 效果更好",
+        "F/UTP 只挡电缆外部进来的干扰，线对之间仍会互相串扰；U/FTP 给每一对线单独加屏蔽层，隔离了线对间的串扰",
+        "U/FTP 采用分级防护结构，一对屏蔽层失效时其他线对仍能正常工作，避免了「一处失效处处失效」",
+        "U/FTP 的屏蔽层更靠近信号线，能像天线一样主动抵消外部干扰，而 F/UTP 只能被动阻挡"
+      ],
+      "correctIndex": 1,
+      "explanation": "F/UTP 只在外层包一层铝箔挡外部干扰，线对之间仍会互相电磁耦合；U/FTP 把每一对线单独包起来，隔离了线对之间的近端串扰，因此效果更好。",
+      "source": {
+        "textbook": "计算机网络 （第2版）",
+        "chapter": "",
+        "textbookSlug": "KUvg"
+      },
+      "created": "2026-10-09T06:21:14.447Z",
+      "conversationId": "sQPOYvDYa8CJI1tzErTNr",
+      "status": "active",
+      "history": [
+        {
+          "schemaVersion": 2,
+          "time": "2026-10-09T06:21:35.728Z",
+          "chosen": 1,
+          "correct": true,
+          "domainRevision": 1,
+          "answerRecordId": "flashcard:fc_1791526874447_001_6ca1883c889c:1"
+        }
+      ],
+      "nextReview": "2026-10-09T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1791526874447_002_b72007929339",
+      "question": "同轴电缆的外导体屏蔽层与 F/UTP 中的铝箔层，在「挡干扰」这一角色上属于同类（都靠导电金属层阻挡外部电磁干扰并配合接地导走干扰电流），但两者有一处重要差别。这处差别是什么？",
+      "choices": [
+        "同轴电缆的屏蔽层是绝缘材料，靠反射挡干扰；F/UTP 的铝箔是导电材料，靠吸收挡干扰",
+        "同轴电缆的屏蔽层只挡低频干扰，F/UTP 的铝箔只挡高频干扰，两者适用频段完全不同",
+        "同轴电缆的外导体兼作信号回流路径，本身就是信号回路的一部分；F/UTP 的铝箔是纯屏蔽层，不参与信号回路",
+        "同轴电缆的屏蔽层不需要接地就能挡干扰，而 F/UTP 的铝箔必须接地才有效"
+      ],
+      "correctIndex": 2,
+      "explanation": "同轴电缆的外导体不只是屏蔽层，它本身兼作信号的回流路径，是信号回路的一部分；而 F/UTP 中的铝箔是纯屏蔽层，不参与信号传输。",
+      "source": {
+        "textbook": "计算机网络 （第2版）",
+        "chapter": "",
+        "textbookSlug": "KUvg"
+      },
+      "created": "2026-10-09T06:21:14.447Z",
+      "conversationId": "sQPOYvDYa8CJI1tzErTNr",
+      "status": "active",
+      "history": [
+        {
+          "schemaVersion": 2,
+          "time": "2026-10-09T06:21:53.139Z",
+          "chosen": 2,
+          "correct": true,
+          "domainRevision": 1,
+          "answerRecordId": "flashcard:fc_1791526874447_002_b72007929339:1"
+        }
+      ],
+      "nextReview": "2026-10-09T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1791526874447_003_643fad29d1fe",
+      "question": "多模光纤中，同一束光脉冲沿多条路径传播，到达终点时会发生脉冲展宽并造成失真，因此只适合近距离传输。下列关于展宽机制的说法哪一项正确？",
+      "choices": [
+        "多模光纤中各路光脉冲的传播速率不同，波长较长的分量跑得快、波长短的跑得慢，造成色散展宽",
+        "同一光脉冲沿多条路径传播，各路路径长短不同导致到达时间不同，能量分批到达使输出波形在时间轴上被拉长，高速传输时相邻脉冲重叠造成判决失真",
+        "多模光纤的包层折射率高于纤芯，光在包层中发生多次反射后散射开来，导致脉冲在时间上被摊开",
+        "多模光纤的纤芯直径较小，光在其中传播时被多次折射衰减，导致脉冲能量逐渐分散、波形变胖"
+      ],
+      "correctIndex": 1,
+      "explanation": "多模光纤中沿轴线走的光路径最短先到，斜着反复全反射的光路径更长后到，同一脉冲的能量分批到达，输出波形在时间轴上被拉长，导致相邻脉冲重叠、码元判决出错。",
+      "source": {
+        "textbook": "计算机网络 （第2版）",
+        "chapter": "",
+        "textbookSlug": "KUvg"
+      },
+      "created": "2026-10-09T06:21:14.447Z",
+      "conversationId": "sQPOYvDYa8CJI1tzErTNr",
+      "status": "active",
+      "history": [
+        {
+          "schemaVersion": 2,
+          "time": "2026-10-09T06:22:08.206Z",
+          "chosen": 1,
+          "correct": true,
+          "domainRevision": 1,
+          "answerRecordId": "flashcard:fc_1791526874447_003_643fad29d1fe:1"
+        }
+      ],
+      "nextReview": "2026-10-09T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1791526874447_004_5c5a391eeb8e",
+      "question": "在 CDMA 系统中，每个站分配唯一的 $m$ 位码片序列，且各站码片序列必须互相正交。如果两个站的码片序列没有做到正交，接收端用 $S$ 站码片对收到的混合信号 $S_x + T_x$ 求规格化内积时会发生什么？",
+      "choices": [
+        "$S \\cdot T_x$ 仍然等于零，因为 CDMA 靠的是码片序列本身不同，正交只是理论上更优的选择",
+        "$S \\cdot T_x \\neq 0$，T 站的信号会漏进 S 站的解算结果中，导致信息交叉、无法干净分离出 S 的数据",
+        "两项都会归零，接收端得到 $0$，只能判定两个站都没有发送数据",
+        "$S \\cdot S_x$ 会变为零，S 站自己的信号先丢失，接收端只能收到 T 站的数据"
+      ],
+      "correctIndex": 1,
+      "explanation": "正交时 $S \\cdot T_x = 0$，别人家的信号被完全滤除；若不满足正交，$S \\cdot T_x \\neq 0$，T 站的信号会漏进 S 站的解算结果里，造成信息交叉、无法干净分离。",
+      "source": {
+        "textbook": "计算机网络 （第2版）",
+        "chapter": "",
+        "textbookSlug": "KUvg"
+      },
+      "created": "2026-10-09T06:21:14.447Z",
+      "conversationId": "sQPOYvDYa8CJI1tzErTNr",
+      "status": "active",
+      "history": [
+        {
+          "schemaVersion": 2,
+          "time": "2026-10-09T06:22:17.285Z",
+          "chosen": 1,
+          "correct": true,
+          "domainRevision": 1,
+          "answerRecordId": "flashcard:fc_1791526874447_004_5c5a391eeb8e:1"
+        }
+      ],
+      "nextReview": "2026-10-09T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    }
+  ]
+}

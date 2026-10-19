@@ -1,0 +1,44 @@
+{
+  "title": "Shell 函数的基本格式",
+  "definition": "Shell 函数的基本格式为：function_name(){ command_list [ return n] }。其中，函数体中可以包含命令列表，也可以使用 return n 返回函数的返回码。函数必须先定义后使用。",
+  "key_points": [
+    "函数定义格式为 function_name(){ command_list [ return n] }",
+    "return 用于带回函数的返回码",
+    "函数必须先定义后使用"
+  ],
+  "examples": [
+    "function_name(){ command_list return 0 }",
+    "在函数体末尾使用 return 1 返回返回码 1"
+  ],
+  "misconceptions": [
+    "把 return 当成退出整个脚本的命令；原文说明 return 用于带回函数的返回码",
+    "先调用后定义函数；原文明确要求函数必须先定义后使用"
+  ],
+  "qa_pairs": [
+    {
+      "q": "Shell 函数的基本定义格式是什么？",
+      "a": "function_name(){ command_list [ return n] }。"
+    },
+    {
+      "q": "return n 在函数中有什么作用？",
+      "a": "用于带回函数的返回码。"
+    },
+    {
+      "q": "函数的定义和使用顺序有什么要求？",
+      "a": "函数必须先定义后使用。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [],
+  "source_pages": [
+    85,
+    88
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "141_shell_函数的基本格式",
+  "_chunk_pages": [
+    85,
+    88
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "title": "从客户角度使用派生类对象",
+  "definition": "从客户代码或其他代码的角度看，派生类对象仍然是一个基类对象，因为派生类继承自基类。使用派生类对象时，可以调用基类中可访问的公有成员，也可以调用派生类自己的公有成员；调用者不必知道某个方法究竟定义在继承链中的哪个类里。",
+  "key_points": [
+    "派生类对象可以使用基类的公有方法和数据成员。",
+    "派生类对象也可以使用派生类自己声明的公有方法和数据成员。",
+    "调用方法时，客户代码不必区分该方法是由基类还是派生类定义的，只要该方法对当前表达式可访问即可。"
+  ],
+  "examples": [
+    "`Derived myDerived; myDerived.someMethod(); myDerived.someOtherMethod();`",
+    "其中 `someMethod()` 定义在 `Base` 中，`someOtherMethod()` 定义在 `Derived` 中；二者都可以通过 `myDerived` 调用。"
+  ],
+  "misconceptions": [
+    "“Derived 是 Base”不表示基类对象自动拥有派生类新增的成员。",
+    "派生类对象可使用基类的公有成员，并不意味着基类私有成员对派生类或客户代码都可直接访问。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "通过 Derived 类型对象可以调用 Base 中定义的公有方法吗？",
+      "a": "可以，因为 Derived 继承了 Base 的特性；例如 `Derived myDerived; myDerived.someMethod();`。"
+    },
+    {
+      "q": "客户代码调用派生类对象的方法时，是否必须知道方法定义在哪个类中？",
+      "a": "不必，只要该方法对当前对象可访问即可。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "继承建立“是一个”关系",
+    "成员访问控制"
+  ],
+  "source_pages": [
+    304,
+    304
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "624_从客户角度使用派生类对象",
+  "_chunk_pages": [
+    301,
+    304
+  ]
+}

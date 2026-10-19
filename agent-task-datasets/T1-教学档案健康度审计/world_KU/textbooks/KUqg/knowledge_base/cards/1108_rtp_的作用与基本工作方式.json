@@ -1,0 +1,44 @@
+{
+  "title": "RTP 的作用与基本工作方式",
+  "definition": "RTP（实时传输协议）是定义在 RFC 3550 中的标准分组结构，用于在实时多媒体通信中携带音频或视频数据及其序号、时间戳等信息。RTP 通常运行在 UDP 之上：发送端把媒体块封装进 RTP 分组，再把 RTP 分组封装进 UDP 报文段并交给 IP；接收端按相反顺序提取 RTP 分组和媒体块，再交给媒体播放器解码和呈现。",
+  "key_points": [
+    "RTP 分组可以携带音频/视频数据、序号、时间戳和其他字段。",
+    "RTP 通常位于 UDP 之上，UDP 不负责理解 RTP 字段。",
+    "RTP 可用于 PCM、AAC、MP3、MPEG、H.263 等通用格式，也可用于专用格式。",
+    "示例中，64 kbps PCM 音频按 20 ms 收集一个块，每块包含 160 字节；RTP 首部通常为 12 字节。"
+  ],
+  "examples": [
+    "封装关系可表示为：$$\\text{媒体块}\\rightarrow\\text{RTP 分组}\\rightarrow\\text{UDP 报文段}\\rightarrow\\text{IP 数据报}$$",
+    "64 kbps 的 PCM 音频以 20 ms 为一块时，一个音频块有 160 字节；加上通常为 12 字节的 RTP 首部后形成 RTP 分组。"
+  ],
+  "misconceptions": [
+    "RTP 不是直接替代 UDP 的传输协议；教材说明 RTP 通常运行在 UDP 之上。",
+    "RTP 本身不负责解码媒体内容，接收端仍需由媒体播放器或相关应用进行解码和呈现。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "RTP 分组在发送端和接收端如何处理？",
+      "a": "发送端将媒体块封装进 RTP 分组，再将 RTP 分组封装进 UDP 报文段并交给 IP；接收端从 UDP 报文段中提取 RTP 分组，再提取媒体块并交给播放器解码和呈现。"
+    },
+    {
+      "q": "20 ms 的 64 kbps PCM 音频块包含多少字节？",
+      "a": "教材示例中每个块包含 160 字节。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "UDP",
+    "音频或视频数据封装"
+  ],
+  "source_pages": [
+    473,
+    474
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1108_rtp_的作用与基本工作方式",
+  "_chunk_pages": [
+    473,
+    476
+  ]
+}

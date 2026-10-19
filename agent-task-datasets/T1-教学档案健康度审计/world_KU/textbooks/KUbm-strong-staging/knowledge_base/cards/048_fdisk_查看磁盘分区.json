@@ -1,0 +1,39 @@
+{
+  "title": "fdisk 查看磁盘分区",
+  "definition": "教材在“磁盘操作”中给出磁盘分区命令：fdisk [-l] 设备文件。其中 -l 的作用是打印磁盘分区。也就是说，按教材内容，fdisk 可配合设备文件使用，若加上 -l，则用于输出磁盘分区信息。",
+  "key_points": [
+    "命令格式：fdisk [-l] 设备文件",
+    "-l：打印磁盘分区",
+    "该命令归入“磁盘分区—fdisk”"
+  ],
+  "examples": [
+    "命令格式示例：fdisk [-l] 设备文件"
+  ],
+  "misconceptions": [
+    "不要把 -l 理解为创建分区；教材只说明它用于打印磁盘分区",
+    "不要忽略“设备文件”这个操作对象"
+  ],
+  "qa_pairs": [
+    {
+      "q": "教材中 fdisk 的命令格式是什么？",
+      "a": "fdisk [-l] 设备文件。"
+    },
+    {
+      "q": "fdisk 的 -l 选项有什么作用？",
+      "a": "打印磁盘分区。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [],
+  "source_pages": [
+    25,
+    28
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "048_fdisk_查看磁盘分区",
+  "_chunk_pages": [
+    25,
+    28
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "title": "HTTP请求报文的基本格式",
+  "definition": "HTTP请求报文由请求行、若干首部行以及可选的实体体组成。请求行包含方法字段、URL字段和HTTP版本字段；请求行和首部行均以回车换行符结束，首部行之后通过一个空行与实体体分隔。教材中的典型请求报文使用普通ASCII文本书写。",
+  "key_points": [
+    "请求报文至少包含请求行，也可以包含多个首部行和实体体。",
+    "请求行格式为：$$\\text{方法}\\ \\text{URL}\\ \\text{HTTP版本}$$。",
+    "首部行通常采用“字段名: 值”的形式。",
+    "首部行结束后有一个空行；实体体位于空行之后。"
+  ],
+  "examples": [
+    "典型请求报文：\nGET /somedir/page.html HTTP/1.1\nHost: www.someschool.edu\nConnection: close\nUser-agent: Mozilla/5.0\nAccept-language: fr\n\n",
+    "请求行中的三个字段分别是GET、/somedir/page.html和HTTP/1.1。"
+  ],
+  "misconceptions": [
+    "Host不是请求行的一部分，而是首部行。",
+    "空行不是实体体；它用于分隔首部行和实体体。",
+    "请求报文不一定只有示例中的5行，可以有更多行，也可以至少只有请求行。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "HTTP请求行包含哪三个字段？",
+      "a": "方法字段、URL字段和HTTP版本字段。"
+    },
+    {
+      "q": "HTTP请求报文中首部行与实体体如何分隔？",
+      "a": "首部行之后附加一个空行，再接实体体。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "HTTP请求与响应",
+    "URL"
+  ],
+  "source_pages": [
+    85,
+    86
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "218_http请求报文的基本格式",
+  "_chunk_pages": [
+    85,
+    88
+  ]
+}

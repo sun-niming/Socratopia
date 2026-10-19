@@ -1,0 +1,51 @@
+{
+  "title": "常用内建输入操作算子",
+  "definition": "C++标准库提供了一组可以通过输入流使用的操作算子，用于定制数据的读取方式，例如布尔值格式、整数进制、空白字符处理、货币、时间和带引号字符串的读取。",
+  "key_points": [
+    "`boolalpha`：把字符串 `false` 解析为布尔值 `false`；其他字符串解析为 `true`。`noboolalpha`：`0` 解析为 `false`，其他值解析为 `true`，且默认为此模式。",
+    "`dec`、`hex`、`oct`：分别指定按十进制、十六进制和八进制读取数字。例如十进制 `207` 的十六进制表示为 `\\mathrm{CF}`，八进制表示为 `317`。",
+    "`skipws` 和 `noskipws`：分别指定标记化输入时跳过或不跳过空白字符；默认是 `skipws`。",
+    "`ws`：跳过输入流当前位置的一串空白字符。",
+    "`get_money`：读取格式化的货币值；`get_time`：读取格式化的时间值；`quoted`：读取封装在引号中的字符串，并处理嵌入引号的转义。"
+  ],
+  "examples": [
+    "```cpp\nstd::cin >> std::boolalpha >> flag;\n```\n在 `boolalpha` 模式下，输入字符串 `false` 得到布尔值 `false`。",
+    "```cpp\nstd::cin >> std::hex >> value;\n```\n按十六进制方式读取数字。",
+    "```cpp\nstd::cin >> std::noskipws >> ch;\n```\n读取字符时不跳过空白字符。"
+  ],
+  "misconceptions": [
+    "`boolalpha` 并不是把任意非空字符串都解析为 `false`；原文说明只有字符串 `false` 解析为 `false`，其他字符串解析为 `true`。",
+    "`skipws` 和 `noskipws` 控制的是输入标记化时对空白字符的处理，不是改变空白字符本身。",
+    "`dec`、`hex`、`oct` 指定的是数字的读取进制，不是把已经读取出的数值转换成另一种类型。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "默认情况下，输入流是否跳过空白字符？",
+      "a": "是。默认使用 `skipws`，输入流在标记化时会跳过空白字符。"
+    },
+    {
+      "q": "`noboolalpha` 模式下，输入 `0` 和其他值分别如何解释？",
+      "a": "输入 `0` 解释为 `false`，其他任何值解释为 `true`。"
+    },
+    {
+      "q": "哪个操作算子用于读取带引号并处理嵌入引号转义的字符串？",
+      "a": "`quoted`。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++流操作算子",
+    "整数进制"
+  ],
+  "source_pages": [
+    422,
+    422
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "857_常用内建输入操作算子",
+  "_chunk_pages": [
+    421,
+    424
+  ]
+}

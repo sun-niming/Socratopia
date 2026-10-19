@@ -1,0 +1,49 @@
+{
+  "title": "通过定位操作修改文件内容",
+  "definition": "对于可写文件流，可以先写入内容，再使用 $\\texttt{tellp()}$ 查询当前位置，并使用 $\\texttt{seekp()}$ 将写入位置移动到指定位置，从而覆盖该位置处的已有内容。示例先写入字符串 $\\texttt{\"54321\"}$，再将写入位置移动到偏移量 $2$ 处并写入字符 $\\texttt{'0'}$，最终文件内容为 $\\texttt{\"54021\"}$。",
+  "key_points": [
+    "写入字符串 $\\texttt{\"54321\"}$ 后，写入位置位于位置 $5$；示例使用 $\\texttt{tellp()}$ 验证这一点。",
+    "$\\texttt{fout.seekp(2, ios\\_base::beg)}$ 将写入位置移动到从文件开头计算的偏移量 $2$ 处。",
+    "在该位置写入 $\\texttt{'0'}$ 会覆盖原字符串中位置 $2$ 的字符 $\\texttt{'3'}$，因此结果是 $\\texttt{\"54021\"}$。",
+    "修改完成后应关闭输出流，然后重新以输入流打开文件并读取结果进行验证。"
+  ],
+  "examples": [
+    "ofstream fout { \"test.out\" };\\nfout << \"54321\";\\nstd::streampos curPos { fout.tellp() };\\nfout.seekp(2, ios_base::beg);\\nfout << 0;\\nfout.close();",
+    "读取文件中的第一个整数后，可将其与 $\\texttt{const int expected\\{54021\\};}$ 比较。由于文件内容为 $\\texttt{\"54021\"}$，读取为整数时结果是 $54021$。"
+  ],
+  "misconceptions": [
+    "$\\texttt{seekp(2, ios\\_base::beg)}$ 通常表示偏移量为 $2$ 的位置，即第三个字符的位置；位置偏移从 $0$ 开始。",
+    "在已有文件中定位后写入，通常是覆盖对应位置的内容，而不是自动插入字符并使后续内容整体后移。",
+    "写入完成后应关闭或刷新输出流，再通过输入流读取文件内容进行验证。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "向文件写入 $\\texttt{\"54321\"}$ 后，在偏移量 $2$ 处写入 $\\texttt{'0'}$，文件内容是什么？",
+      "a": "文件内容为 $\\texttt{\"54021\"}$，因为偏移量 $2$ 处原本是字符 $\\texttt{'3'}$，它被覆盖为 $\\texttt{'0'}$。"
+    },
+    {
+      "q": "为什么示例中写入 $\\texttt{\"54321\"}$ 后，$\\texttt{tellp()}$ 应返回位置 $5$？",
+      "a": "因为字符串包含 5 个字符，写入完成后当前位置位于文件末尾，按从开头计算的偏移量为 $5$。"
+    },
+    {
+      "q": "将文件内容 $\\texttt{\"54021\"}$ 作为第一个整数读取时，期望得到什么值？",
+      "a": "期望得到整数 $54021$。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "文件流中的位置定位与查询",
+    "检查文件流是否成功打开"
+  ],
+  "source_pages": [
+    425,
+    428
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 fstream seekp(2, ios_base::beg) overwrite existing file content tellp position after writing 54321 expected 54021",
+  "concept_id": "558_通过定位操作修改文件内容",
+  "_chunk_pages": [
+    425,
+    428
+  ]
+}

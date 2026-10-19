@@ -1,0 +1,48 @@
+{
+  "title": "自定义 formatter 的 parse 方法",
+  "definition": "自定义 formatter 的 `parse()` 方法负责解析格式解析上下文中范围 `[context.begin(), context.end())` 内的格式说明符。它应验证说明符、把解析结果保存到 formatter 的状态中，并返回一个迭代器，指向已解析格式说明符之后的位置；在教材示例中，该位置通常是结束右花括号 `}`。",
+  "key_points": [
+    "通过 `context.begin()` 和 `context.end()` 取得待解析范围。",
+    "空格式说明符 `{}` 可映射到默认输出方式。",
+    "解析到合法选项后，应检查后面是否紧接结束位置，避免接受多余字符。",
+    "遇到未知选项或多余字符时，可抛出 `std::format_error`。",
+    "`parse()` 的返回迭代器用于告知格式库解析停止的位置。"
+  ],
+  "examples": [
+    "在 `KeyValue` formatter 中，`a` 被解析为只输出键，`b` 被解析为只输出值，`c` 和空说明符被解析为同时输出键和值。",
+    "若首字符既不是结束右花括号，也不是 `a`、`b`、`c`，则抛出 `format_error { \"Invalid KeyValue format specifier.\" }`。",
+    "对 `{:cd}`，虽然首字符 `c` 合法，但后面还有额外的 `d`，因此解析器应拒绝该说明符。"
+  ],
+  "misconceptions": [
+    "误以为 `parse()` 直接生成最终字符串；它只解析格式规范并保存状态。",
+    "误以为识别第一个合法字符后可以忽略剩余字符；示例会检查并拒绝额外字符。",
+    "误以为 `parse()` 不需要返回值；它必须返回表示解析结束位置的迭代器。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "自定义 formatter 的 `parse()` 负责什么？",
+      "a": "解析和验证格式说明符，将解析结果保存到 formatter 状态中，并返回解析结束位置的迭代器。"
+    },
+    {
+      "q": "为什么 `{:cd}` 在教材的 `KeyValue` formatter 中无效？",
+      "a": "`c` 后还有额外字符 `d`，而该 formatter 只接受单个选项字符或空说明符。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "通过 std::formatter 支持自定义类型",
+    "C++迭代器",
+    "C++异常处理"
+  ],
+  "source_pages": [
+    119,
+    120
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "231_自定义_formatter_的_parse_方法",
+  "_chunk_pages": [
+    117,
+    120
+  ]
+}

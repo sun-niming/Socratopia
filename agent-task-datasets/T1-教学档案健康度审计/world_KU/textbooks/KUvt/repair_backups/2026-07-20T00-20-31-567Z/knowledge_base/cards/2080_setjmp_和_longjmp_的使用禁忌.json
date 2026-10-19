@@ -1,0 +1,36 @@
+{
+  "title": "setjmp 和 longjmp 的使用禁忌",
+  "definition": "教材明确建议绝不在 C++ 中使用 C 函数 `setjmp()` 和 `longjmp()`。这是一条教材给出的错误处理建议。",
+  "key_points": [
+    "`setjmp()` 和 `longjmp()` 是 C 风格的非局部跳转机制。",
+    "教材将它们列为 C++ 中绝不应使用的函数。",
+    "原文没有进一步解释具体原因。"
+  ],
+  "examples": [
+    "原文中的函数名称为 `setjmp()` 和 `longjmp()`。"
+  ],
+  "misconceptions": [
+    "不能因为它们是 C 标准函数，就认为它们适合现代 C++ 的异常和资源管理模型。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "教材对 `setjmp()` 和 `longjmp()` 的建议是什么？",
+      "a": "绝不在 C++ 中使用这两个 C 函数。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++错误处理基础"
+  ],
+  "source_pages": [
+    1004,
+    1004
+  ],
+  "needs_verification": true,
+  "verify_query": "C++ setjmp longjmp exception handling destructors RAII safety recommendation",
+  "concept_id": "2080_setjmp_和_longjmp_的使用禁忌",
+  "_chunk_pages": [
+    1001,
+    1004
+  ]
+}

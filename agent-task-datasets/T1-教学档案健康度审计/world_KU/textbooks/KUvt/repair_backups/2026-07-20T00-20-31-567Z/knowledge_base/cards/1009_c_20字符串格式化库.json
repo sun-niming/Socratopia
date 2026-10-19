@@ -1,0 +1,38 @@
+{
+  "title": "C++20字符串格式化库",
+  "definition": "C++20提供类型安全且可扩展的字符串格式化库，通过<format>头文件中的std::format访问。该库可以格式化标准类型，并允许为自定义类型添加格式化支持。",
+  "key_points": [
+    "std::format属于C++20新增的字符串格式化能力。",
+    "格式化库强调类型安全。",
+    "格式化库可以扩展以支持自定义类型。"
+  ],
+  "examples": [
+    "示例：std::string text = std::format(\"{} + {} = {}\", 1, 2, 3);"
+  ],
+  "misconceptions": [
+    "std::format只能格式化字符串；实际上它可以根据格式说明处理多种类型。",
+    "格式化库不能支持自定义类型；实际上可以为自定义类型添加支持。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "C++20的字符串格式化库通过什么设施访问？",
+      "a": "通过<format>头文件中的std::format访问。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++字符串基础",
+    "函数模板基础"
+  ],
+  "source_pages": [
+    502,
+    502
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1009_c_20字符串格式化库",
+  "_chunk_pages": [
+    501,
+    504
+  ]
+}

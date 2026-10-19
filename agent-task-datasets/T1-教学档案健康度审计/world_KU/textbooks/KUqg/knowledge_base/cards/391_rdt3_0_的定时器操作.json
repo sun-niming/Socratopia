@@ -1,0 +1,49 @@
+{
+  "title": "rdt3.0 的定时器操作",
+  "definition": "rdt3.0 使用定时器实现基于时间的重传。发送方每次发送数据分组时都启动定时器，包括首次发送和重传；定时器到期时中断发送方，发送方重传当前分组并重新启动定时器；收到正确 ACK 后停止定时器。",
+  "key_points": [
+    "发送一个数据分组后执行 start_timer。",
+    "收到未损坏且序号正确的 ACK 后执行 stop_timer，并转入发送下一分组的状态。",
+    "发生 timeout 时执行 udt_send(sndpkt) 重传当前分组，然后再次执行 start_timer。",
+    "损坏的 ACK 或序号不匹配的 ACK 不会使发送方停止当前定时器并推进状态。"
+  ],
+  "examples": [
+    "发送分组 $0$ 的基本流程可表示为：\\n$\\mathrm{sndpkt}=\\mathrm{make\\_pkt}(0,\\mathrm{data},\\mathrm{checksum})$；\\n$\\mathrm{udt\\_send(sndpkt)}$；\\n$\\mathrm{start\\_timer}$。",
+    "在等待 ACK0 时，若收到满足 $\\mathrm{notcorrupt}(\\mathrm{rcvpkt})\\land\\mathrm{isACK}(\\mathrm{rcvpkt},0)$ 的报文，则执行 $\\mathrm{stop\\_timer}$。",
+    "若发生 timeout，则执行：\\n$\\mathrm{udt\\_send(sndpkt)}$；\\n$\\mathrm{start\\_timer}$。"
+  ],
+  "misconceptions": [
+    "定时器只在首次发送时启动，重传时不需要重新启动；实际上每次发送，包括重传，都需要启动或重新启动定时器。",
+    "收到任意 ACK 都应停止定时器；实际上只有未损坏且确认序号正确的 ACK 才能完成确认。",
+    "超时后只需重传一次；如果仍未收到正确 ACK，协议还需要在后续超时时继续重传。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "rdt3.0 发送方何时启动定时器？",
+      "a": "每次发送一个数据分组时启动，包括第一次发送和超时后的重传。"
+    },
+    {
+      "q": "rdt3.0 发送方何时停止定时器？",
+      "a": "收到未损坏且分组序号与当前等待状态匹配的 ACK 后停止定时器。"
+    },
+    {
+      "q": "定时器超时时发送方做什么？",
+      "a": "重传当前数据分组，并重新启动定时器。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "rdt3.0 对丢包的处理思路"
+  ],
+  "source_pages": [
+    157,
+    160
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "391_rdt3_0_的定时器操作",
+  "_chunk_pages": [
+    157,
+    160
+  ]
+}

@@ -1,0 +1,105 @@
+{
+  "schemaVersion": 1,
+  "status": "committed",
+  "operationId": "endclass:v1:f24348a1fb60e35e11335b3bbae15250:fceac0ecc0a7c7676d6130dc",
+  "operationHash": "3896fce08bcc816849e596802954b002dd5950f97a4bba66594bd9fdbb5fa743",
+  "scope": {
+    "accountId": "local",
+    "profileId": "uolmzgq8",
+    "worldId": "KU",
+    "conversationId": "OSSH0n_WPOFykLhZVr0Wf"
+  },
+  "companion": {
+    "slotId": "npc_b",
+    "companionInstanceId": "ci_31c2bc21896db5f0adf3e8bc",
+    "candidateId": "ct_39tms8rf",
+    "displayName": "宵宫"
+  },
+  "committedAt": "2026-10-12T04:15:26.064Z",
+  "targets": [
+    {
+      "relativePath": "pal_moments.md",
+      "oldHash": "27970a70fd9c01117875370703ff6d0024808e170c8ab3dbe0077031be1bc232",
+      "newHash": "1da67344e9c436f4889536a349a3f46ffb6550eceeb3d162d7dffb5272502da9",
+      "deleting": false
+    },
+    {
+      "relativePath": "textbooks/KUyw/progress.md",
+      "oldHash": "5567cb71112f4419cabc726521a7635c41af0d7d1c47672cdea63d94e5510a5b",
+      "newHash": "752b6a2d9c970ff1f8288c6537ea8df47bee54951a7aad99cffa6b2e33d369e6",
+      "deleting": false
+    },
+    {
+      "relativePath": "diary/2026-10.md",
+      "oldHash": "0953cf43a1dde56adaef3549f1c7eba1afec5a049a7ebd0e3e27e1e8ec9a4af8",
+      "newHash": "fcc2273275478f77d67579db363d70f1d3dd4c8981b7f7b39f05621e9039cc48",
+      "deleting": false
+    },
+    {
+      "relativePath": "relation_npc_b.md",
+      "oldHash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "newHash": "be8130b701758cdd582ccffb6252277393105c1c4eb7cf988fed3d1129190c9f",
+      "deleting": false
+    },
+    {
+      "relativePath": "world_meta.json",
+      "oldHash": "5b71cf29b8daa6411c7bb59bf19979e33dd0527551010795a257a06bb569ea20",
+      "newHash": "94e22381496b6344ca8ab5c46659e31ec6d24b469ff2e297fae502bdae4522c7",
+      "deleting": false
+    },
+    {
+      "relativePath": "world_records.md",
+      "oldHash": "ac528222f04b5d20f1415b225b39ed4e9973018c64a0247253322eb2ae2d4cd1",
+      "newHash": "49b48f3dac375592b50c33981fa7acc9a81b969931a35c9353659a504d00dbd4",
+      "deleting": false
+    },
+    {
+      "relativePath": "textbooks/textbook_index.json",
+      "oldHash": "b5661328e3664977172cdd03e76fd01ddccddbc29b5dd8757fe9160de2e4032d",
+      "newHash": "ddf3b953072b41441bfa91373bae5d6e91682ca4180e89854130627462586f44",
+      "deleting": false
+    },
+    {
+      "relativePath": "textbooks/KUyw/handoff/last_tail.json",
+      "oldHash": "45af8c106695c576f2a1f03878f8fed840e1b9d387db192ac134a8b162fc2ca1",
+      "newHash": "d2fa93a591c26894d56f4d32f639e1c1e965961442b3115f6a0d73c523e91c44",
+      "deleting": false
+    },
+    {
+      "relativePath": "textbooks/KUyw/handoff/last_meta.json",
+      "oldHash": "57d4ea2468340cca1f20ad1204b23a0f6aef3f975a21a9abe648ebacb5554bfb",
+      "newHash": "3a4686d93cae2941964336cdbfebb62df9d2e3f1facd1cfd0dc2f8ad7f30dbe2",
+      "deleting": false
+    },
+    {
+      "relativePath": "conversations/OSSH0n_WPOFykLhZVr0Wf/current_reading.md",
+      "oldHash": "0f2c965a0e59a558ab3bcf875b059521f1225d99e860bae98bacd6466c66f7b1",
+      "newHash": null,
+      "deleting": true
+    },
+    {
+      "relativePath": "textbooks/KUyw/current_reading.md",
+      "oldHash": null,
+      "newHash": null,
+      "deleting": true
+    },
+    {
+      "relativePath": "conversations/OSSH0n_WPOFykLhZVr0Wf/current_reading_summary.json",
+      "oldHash": null,
+      "newHash": null,
+      "deleting": true
+    },
+    {
+      "relativePath": "conversations/OSSH0n_WPOFykLhZVr0Wf/handoff.json",
+      "oldHash": null,
+      "newHash": null,
+      "deleting": true
+    }
+  ],
+  "payload": {
+    "farewell": "*宵宫把笔搁下，靠着椅背伸了个懒腰。*\n\n好呀，就停在这儿。你问的「GOTO 为什么要闭包」「同一个符号怎么回到自己」，都是往核心里扎的问题，我讲得挺带劲。项集族那张图给你留在纸面上了，想接着摸 4.6.5 就翻回来。",
+    "companionNote": "项集族那张图我留在纸面上了。你问「GOTO 为什么要闭包」「符号怎么回到自己」，都是往骨头缝里扎的问题，我喜欢。4.6.5 等你。",
+    "marker": "<!-- continuityEvent:3896fce08bcc816849e59680 companion:ci_31c2bc21896db5f0adf3e8bc mode:classroom -->",
+    "endingPage": 178
+  }
+}

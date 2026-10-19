@@ -1,0 +1,39 @@
+{
+  "title": "setTimeout 与 clearTimeout",
+  "definition": "setTimeout 用于指定在一段特定时间后执行某段程序；clearTimeout 用于终止该定时器。它们通常配合定时器名使用。",
+  "key_points": [
+    "格式： [定时器名=] setTimeout(<表达式或函数对象>，毫秒)",
+    "setTimeout 表示在指定毫秒数后执行一次程序",
+    "clearTimeout(定时器名) 用于终止定时器"
+  ],
+  "examples": [
+    "var t = setTimeout(function(){alert('到时了')}, 3000)\nclearTimeout(t)"
+  ],
+  "misconceptions": [
+    "setTimeout 不是循环执行，只是到时后执行一次。",
+    "clearTimeout 终止的是通过 setTimeout 创建的定时器。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "setTimeout 的作用是什么？",
+      "a": "指定在一段特定的时间后执行某段程序。"
+    },
+    {
+      "q": "clearTimeout 的作用是什么？",
+      "a": "终止定时器。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [],
+  "source_pages": [
+    333,
+    336
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "452_settimeout_与_cleartimeout",
+  "_chunk_pages": [
+    333,
+    336
+  ]
+}

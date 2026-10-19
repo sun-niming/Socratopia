@@ -1,0 +1,48 @@
+{
+  "title": "Database测试程序中的员工操作",
+  "definition": "第97页的测试程序创建一个 Database 对象，并依次添加三名员工：Greg Wallis、Marc White 和 John Doe；随后分别测试解雇、设置工资和晋升操作，最后显示全部员工、当前员工和前员工。",
+  "key_points": [
+    "通过 `Database myDB;` 创建员工数据库对象。",
+    "Greg Wallis 被添加后调用 `fire()`。",
+    "Marc White 被添加后调用 `setSalary(100'000)`。",
+    "John Doe 被添加后调用 `setSalary(10'000)`，随后调用 `promote()`。",
+    "测试程序依次调用 `displayAll()`、`displayCurrent()` 和 `displayFormer()`。"
+  ],
+  "examples": [
+    "原文测试流程可概括为：\n```cpp\nDatabase myDB;\nauto& emp1 = myDB.addEmployee(\"Greg\", \"Wallis\");\nemp1.fire();\nauto& emp2 = myDB.addEmployee(\"Marc\", \"White\");\nemp2.setSalary(100'000);\nauto& emp3 = myDB.addEmployee(\"John\", \"Doe\");\nemp3.setSalary(10'000);\nemp3.promote();\n\nmyDB.displayAll();\nmyDB.displayCurrent();\nmyDB.displayFormer();\n```"
+  ],
+  "misconceptions": [
+    "调用 `fire()` 的员工仍可能保存在数据库集合中；从测试程序同时提供 displayAll、displayCurrent 和 displayFormer 可以看出，员工状态与是否存在于数据库中是不同概念。",
+    "`setSalary(100'000)` 中的单引号是 C++ 数字分隔符，数值表示 100000，而不是字符串。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "测试程序中哪名员工被解雇？",
+      "a": "Greg Wallis。"
+    },
+    {
+      "q": "测试程序中哪名员工被晋升？",
+      "a": "John Doe。"
+    },
+    {
+      "q": "测试程序最后调用了哪些显示函数？",
+      "a": "依次调用 displayAll()、displayCurrent() 和 displayFormer()。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "Database员工添加操作",
+    "员工在职状态"
+  ],
+  "source_pages": [
+    97,
+    100
+  ],
+  "needs_verification": true,
+  "verify_query": "\"C++20高级编程\" \"Greg\" \"Wallis\" \"displayFormer\" DatabaseTest.cpp",
+  "concept_id": "137_database测试程序中的员工操作",
+  "_chunk_pages": [
+    97,
+    100
+  ]
+}

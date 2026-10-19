@@ -1,0 +1,35 @@
+{
+  "title": "URL",
+  "definition": "URL是用于指定Internet上可找到资源位置的文本字符串，通常也被称作网址；浏览器会在地址栏显示URL。原文写作Universal Resource Locator。",
+  "key_points": [
+    "URL表示资源在Internet上的位置",
+    "URL通常被称为网址",
+    "浏览器地址栏显示的就是URL"
+  ],
+  "examples": [
+    "浏览器地址栏中的网址"
+  ],
+  "misconceptions": [
+    "URL只是网页名字，不表示资源位置",
+    "URL不会显示在浏览器地址栏"
+  ],
+  "qa_pairs": [
+    {
+      "q": "教材中对URL的作用是怎么描述的？",
+      "a": "URL是指定在Internet上可以找到资源的位置的文本字符串。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [],
+  "source_pages": [
+    21,
+    24
+  ],
+  "needs_verification": true,
+  "verify_query": "URL 的英文全称是 Universal Resource Locator 还是 Uniform Resource Locator？ 教材《Web前端开发合集》 第23页 URL",
+  "concept_id": "030_url",
+  "_chunk_pages": [
+    21,
+    24
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "title": "Database遍历显示当前员工",
+  "definition": "Database::displayCurrent() 遍历成员集合 m_employees，仅当员工对象的 isHired() 返回 true 时，才调用该员工的 display() 进行显示。",
+  "key_points": [
+    "遍历 m_employees 中的每个员工。",
+    "通过 `employee.isHired()` 判断员工是否仍然在职。",
+    "只有判断结果为 true 的员工才会被显示。"
+  ],
+  "examples": [
+    "核心逻辑可表示为：\n```cpp\nvoid Database::displayCurrent() const {\n    for (const auto& employee : m_employees) {\n        if (employee.isHired()) {\n            employee.display();\n        }\n    }\n}\n```"
+  ],
+  "misconceptions": [
+    "displayCurrent() 不是显示所有员工；它会跳过 isHired() 返回 false 的员工。",
+    "`isHired()` 是状态判断，不是显示函数；真正负责输出员工信息的是 `display()`。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "displayCurrent() 如何筛选员工？",
+      "a": "对每个员工调用 isHired()，只有返回 true 的员工才调用 display()。"
+    },
+    {
+      "q": "如果某员工已经被 fire()，displayCurrent() 是否应显示该员工？",
+      "a": "按原文逻辑，若 fire() 使其 isHired() 返回 false，则不会显示。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "Database遍历显示全部员工",
+    "条件语句if"
+  ],
+  "source_pages": [
+    97,
+    100
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "136_database遍历显示当前员工",
+  "_chunk_pages": [
+    97,
+    100
+  ]
+}

@@ -1,0 +1,54 @@
+{
+  "title": "C++20 的三向比较运算符 operator<=>",
+  "definition": "C++20 引入三向比较运算符 `operator<=>`，也称为宇宙飞船运算符。对于 `SpreadsheetCell`，可以实现 `operator==` 和 `operator<=>`，其中 `operator<=>` 返回 `std::partial_ordering`，然后由编译器自动支持 `<`、`>`、`<=` 和 `>=` 等关系比较。由于 `double` 只有偏序关系，比较 `double` 成员时返回类型应为 `std::partial_ordering`。",
+  "key_points": [
+    "典型声明：`[[nodiscard]] std::partial_ordering operator<=>(const SpreadsheetCell& rhs) const;`。",
+    "典型实现：`return getValue() <=> rhs.getValue();`。",
+    "实现 `operator<=>` 后，编译器可以将 `<`、`>`、`<=` 和 `>=` 的表达式重写为基于三向比较结果的判断。",
+    "例如，`myCell < aThirdCell` 可以视为与 `std::is_lt(myCell <=> aThirdCell)` 等价的形式。",
+    "C++20 不会仅根据 `operator<=>` 重写 `==` 或 `!=`；通常应显式实现 `operator==`，因为显式相等比较可能更高效。",
+    "同时实现 `operator==` 和 `operator<=>` 后，类即可支持完整的 6 个比较运算符。"
+  ],
+  "examples": [
+    "声明：`[[nodiscard]] std::partial_ordering operator<=>(const SpreadsheetCell& rhs) const;`",
+    "实现：`std::partial_ordering SpreadsheetCell::operator<=>(const SpreadsheetCell& rhs) const { return getValue() <=> rhs.getValue(); }`",
+    "关系比较：`if (myCell < aThirdCell) { cout << \"myCell < aThirdCell\\n\"; }`",
+    "概念上的重写：`myCell < aThirdCell` 等价于使用 `std::is_lt(myCell <=> aThirdCell)` 判断。"
+  ],
+  "misconceptions": [
+    "`operator<=>` 不会单独自动生成 `==` 和 `!=`；通常仍需显式实现 `operator==`。",
+    "`std::partial_ordering` 不是任意比较都必须使用的返回类型；这里使用它是因为被比较的值是 `double`，而浮点数只有偏序关系。",
+    "实现 `operator<=>` 后，仍然需要保证类的数据成员具有适合的三向比较能力，才能使用默认生成等进一步功能。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么 `SpreadsheetCell::operator<=>` 返回 `std::partial_ordering`？",
+      "a": "因为 `SpreadsheetCell` 存储的是 `double`，浮点类型只有偏序关系。"
+    },
+    {
+      "q": "只实现 `operator<=>` 是否会自动支持 `==` 和 `!=`？",
+      "a": "不会。C++20 不会仅根据 `operator<=>` 重写 `==` 或 `!=`，通常还要显式实现 `operator==`。"
+    },
+    {
+      "q": "实现 `operator==` 和 `operator<=>` 后，哪些比较运算符可以自动获得支持？",
+      "a": "可以自动支持 `<`、`>`、`<=`、`>=`，再加上显式的 `==` 及其派生的 `!=`，从而支持完整的 6 个比较运算符。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "比较运算符重载",
+    "C++20 operator==",
+    "浮点数偏序关系"
+  ],
+  "source_pages": [
+    295,
+    295
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "610_c_20_的三向比较运算符_operator",
+  "_chunk_pages": [
+    293,
+    296
+  ]
+}

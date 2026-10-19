@@ -1,0 +1,38 @@
+{
+  "title": "stopImmediatePropagation 阻止同元素后续处理器",
+  "definition": "如果要阻止附加到相同元素、相同事件类型的其它事件处理器运行，可以使用 stopImmediatePropagation() 方法。",
+  "key_points": [
+    "作用对象是同一元素上的同类事件处理器",
+    "它用于阻止这些后续处理器运行",
+    "文本中将它作为 stopPropagation() 不能做到的补充方法提及"
+  ],
+  "examples": [
+    "event.stopImmediatePropagation();"
+  ],
+  "misconceptions": [
+    "误以为 stopPropagation() 已经可以阻止同元素上的所有同类处理器",
+    "误以为它的作用是阻止默认行为"
+  ],
+  "qa_pairs": [
+    {
+      "q": "什么时候要考虑使用 stopImmediatePropagation()？",
+      "a": "当需要阻止附加到相同元素的相同事件类型的其它事件处理器运行时。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "stopPropagation 阻止事件传播",
+    "事件处理器"
+  ],
+  "source_pages": [
+    377,
+    380
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "537_stopimmediatepropagation_阻止同元素后续处理器",
+  "_chunk_pages": [
+    377,
+    380
+  ]
+}

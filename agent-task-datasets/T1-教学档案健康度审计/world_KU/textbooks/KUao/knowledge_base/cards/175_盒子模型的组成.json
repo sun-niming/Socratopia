@@ -1,0 +1,42 @@
+{
+  "title": "盒子模型的组成",
+  "definition": "在 CSS 盒子模型中，一个元素从内到外通常由四部分组成：content（主体内容）、padding（内边距/填充）、border（边框）、margin（外边距/边界）。其中每一部分都有对应的四个方向属性。",
+  "key_points": [
+    "content 对应元素的内容区，宽高由 width、height 控制。",
+    "padding 分为 padding-top、padding-right、padding-bottom、padding-left。",
+    "border 分为 border-top、border-right、border-bottom、border-left。",
+    "margin 分为 margin-top、margin-right、margin-bottom、margin-left。"
+  ],
+  "examples": [
+    "padding-top、padding-right、padding-bottom、padding-left",
+    "border-top、border-right、border-bottom、border-left",
+    "margin-top、margin-right、margin-bottom、margin-left"
+  ],
+  "misconceptions": [
+    "把 margin、border、padding、content 混为一体，认为它们没有层次关系。",
+    "认为 width 和 height 直接表示元素包含所有区域的总尺寸。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "盒子模型由哪四部分组成？",
+      "a": "content、padding、border、margin。"
+    },
+    {
+      "q": "padding 的四个方向属性分别是什么？",
+      "a": "padding-top、padding-right、padding-bottom、padding-left。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [],
+  "source_pages": [
+    121,
+    121
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "175_盒子模型的组成",
+  "_chunk_pages": [
+    121,
+    124
+  ]
+}

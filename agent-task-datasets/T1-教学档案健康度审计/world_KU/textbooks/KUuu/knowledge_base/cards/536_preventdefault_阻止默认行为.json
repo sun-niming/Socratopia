@@ -1,0 +1,38 @@
+{
+  "title": "preventDefault 阻止默认行为",
+  "definition": "preventDefault() 方法可以阻止事件触发后浏览器执行默认动作。",
+  "key_points": [
+    "用于阻止默认动作，不是阻止事件传播",
+    "常用于需要取消浏览器默认处理的场景",
+    "与 stopPropagation() 的作用不同"
+  ],
+  "examples": [
+    "event.preventDefault();"
+  ],
+  "misconceptions": [
+    "误以为 stopPropagation() 就能阻止默认行为",
+    "误以为只要阻止了传播，默认动作也会自动停止"
+  ],
+  "qa_pairs": [
+    {
+      "q": "preventDefault() 的作用是什么？",
+      "a": "阻止事件触发后默认动作的发生。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "事件对象",
+    "事件传播"
+  ],
+  "source_pages": [
+    377,
+    380
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "536_preventdefault_阻止默认行为",
+  "_chunk_pages": [
+    377,
+    380
+  ]
+}

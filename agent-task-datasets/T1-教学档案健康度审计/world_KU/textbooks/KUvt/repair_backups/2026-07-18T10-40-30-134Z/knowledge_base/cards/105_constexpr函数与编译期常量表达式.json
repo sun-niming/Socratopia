@@ -1,0 +1,46 @@
+{
+  "title": "constexpr函数与编译期常量表达式",
+  "definition": "在C++中，函数声明为constexpr表示该函数具备在编译期求值的能力。当传入参数和调用环境满足常量表达式要求时，调用结果可以在编译期计算；当参数为运行时值时，同一个函数也可以在运行时计算。",
+  "key_points": [
+    "示例中的constexpr函数`getArraySize()`返回32，因此`int myArray[getArraySize()];`和`int myArray[getArraySize() + 1];`都可以使用其结果确定数组大小。",
+    "示例中的`constexpr double inchToMm(double inch) { return inch * 25.4; }`在传入`constexpr`变量时可在编译期计算。",
+    "同一个constexpr函数不一定每次都在编译期执行；例如传入运行时变量`dynamic_inch`时，结果在运行时计算。"
+  ],
+  "examples": [
+    "`constexpr int getArraySize() { return 32; }`",
+    "`int myArray[getArraySize()];`",
+    "`constexpr double const_inch { 6.0 };`",
+    "`constexpr double mm1 { inchToMm(const_inch) };`",
+    "`double dynamic_inch { 8.0 };`",
+    "`double mm2 { inchToMm(dynamic_inch) };`"
+  ],
+  "misconceptions": [
+    "constexpr函数并不表示所有调用都必须在编译期执行。",
+    "只有把函数结果用于需要常量表达式的场景，并且参数等条件满足时，调用结果才能作为编译期常量。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "constexpr函数的调用是否一定在编译期执行？",
+      "a": "不一定。参数和调用环境满足常量表达式要求时可以在编译期执行；传入运行时值时可以在运行时执行。"
+    },
+    {
+      "q": "为什么`inchToMm(const_inch)`可以初始化constexpr变量？",
+      "a": "因为`const_inch`本身是constexpr变量，调用constexpr函数时可以在编译期计算结果。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "常量表达式和变量初始化"
+  ],
+  "source_pages": [
+    77,
+    80
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "105_constexpr函数与编译期常量表达式",
+  "_chunk_pages": [
+    77,
+    80
+  ]
+}

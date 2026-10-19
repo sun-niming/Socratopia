@@ -1,0 +1,42 @@
+{
+  "title": "函数表达式",
+  "definition": "函数表达式是把函数赋值给变量的一种写法。",
+  "key_points": [
+    "教材中的形式是将匿名函数赋给变量。",
+    "语法写作：var functionName = function (arg1,arg2,...argn) { [statements] [return [expression]] }。",
+    "它和函数声明不同，函数先作为表达式出现，再保存到变量中。"
+  ],
+  "examples": [
+    "var functionName =function (arg1,arg2,...argn)\n{\n[statements]\n[return [expression]]\n}"
+  ],
+  "misconceptions": [
+    "函数只能用 functionName(arg) 这种声明方式定义。",
+    "函数表达式不能带参数。",
+    "函数表达式和函数声明在写法上没有任何区别。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "什么是函数表达式？",
+      "a": "函数表达式是把一个函数赋值给变量的写法。"
+    },
+    {
+      "q": "教材中的函数表达式语法是什么？",
+      "a": "var functionName = function (arg1,arg2,...argn) { [statements] [return [expression]] }。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "JavaScript函数"
+  ],
+  "source_pages": [
+    253,
+    256
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "353_函数表达式",
+  "_chunk_pages": [
+    253,
+    256
+  ]
+}

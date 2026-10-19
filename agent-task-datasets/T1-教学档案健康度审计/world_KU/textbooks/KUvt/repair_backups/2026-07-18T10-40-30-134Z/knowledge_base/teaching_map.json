@@ -1,0 +1,2302 @@
+{
+  "version": 2,
+  "generated_at": "2026-07-12T14:33:27.443Z",
+  "segments": [
+    {
+      "page_range": [
+        1,
+        20
+      ],
+      "sequence": [
+        {
+          "phase": 1,
+          "label": "第 1-12 页",
+          "card_ids": [
+            "001_c_20高级编程_第5版_的书名与作者",
+            "002_本书英文版的版权与授权信息",
+            "003_中文译本的出版信息",
+            "004_c_20中的std_format和std_jthread"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 2,
+          "label": "第 9-16 页",
+          "card_ids": [
+            "005_原文列出的c_标准版本",
+            "006_marc_gregoire的职业与技术背景",
+            "008_c_与相关编程语言",
+            "009_c_程序的main函数"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 3,
+          "label": "第 13-16 页",
+          "card_ids": [
+            "010_c_中的lambda",
+            "011_uml的含义",
+            "012_c_学习参考资源",
+            "013_c_开发环境与编译器"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 4,
+          "label": "第 14-20 页",
+          "card_ids": [
+            "007_c_标准版本演进",
+            "015_c_头文件单元的导入与_visual_c_配置",
+            "014_在_visual_c_中启用_c_20",
+            "016_使用_gcc_编译_c_20_程序"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        }
+      ],
+      "generated_by": "deterministic-page-order",
+      "fallback_reason": "llm_map_failed"
+    },
+    {
+      "page_range": [
+        17,
+        40
+      ],
+      "sequence": [
+        {
+          "phase": 1,
+          "label": "第 17-36 页",
+          "card_ids": [
+            "017_c_20_std_format_与_fmt_库相关内容",
+            "018_c_及其标准库",
+            "020_hello_world程序的基本目的",
+            "021_c_20中的import方式"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 2,
+          "label": "第 33-36 页",
+          "card_ids": [
+            "022_使用_include包含文件",
+            "023_c_标准头文件与c头文件命名形式",
+            "024_使用_define定义宏",
+            "019_c_与bjarne_stroustrup"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 3,
+          "label": "第 37-40 页",
+          "card_ids": [
+            "031_换行符与std_endl",
+            "025_头文件包含保护",
+            "026_使用_pragma_once防止重复包含",
+            "027_main函数的基本形式"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 4,
+          "label": "第 37-40 页",
+          "card_ids": [
+            "028_带命令行参数的main函数",
+            "029_使用std_cout输出",
+            "030_使用std_format格式化字符串",
+            "032_使用std_cin输入"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        }
+      ],
+      "generated_by": "deterministic-page-order",
+      "fallback_reason": "llm_map_failed"
+    },
+    {
+      "page_range": [
+        37,
+        44
+      ],
+      "sequence": [
+        {
+          "phase": 1,
+          "label": "第 37-40 页",
+          "card_ids": [
+            "033_命名空间的定义与限定名调用",
+            "034_using声明",
+            "035_using_namespace指令",
+            "036_嵌套命名空间的简写语法"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 2,
+          "label": "第 37-40 页",
+          "card_ids": [
+            "037_命名空间别名",
+            "038_c_字面量的基本类别",
+            "039_数字分隔符",
+            "040_变量初始化与未初始化变量"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 3,
+          "label": "第 41-44 页",
+          "card_ids": [
+            "041_c_内置数值类型及类型别名",
+            "042_c_字符类型与unicode字符类型",
+            "043_std_byte类型",
+            "044_std_numeric_limits查询数值类型边界"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 4,
+          "label": "第 41-44 页",
+          "card_ids": [
+            "045_变量的值初始化",
+            "046_浮点数与整数之间的显式转换",
+            "047_浮点特殊值infinity与nan",
+            "048_c_基本算术_取模与复合赋值运算符"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        }
+      ],
+      "generated_by": "deterministic-page-order",
+      "fallback_reason": "llm_map_failed"
+    },
+    {
+      "page_range": [
+        45,
+        56
+      ],
+      "sequence": [
+        {
+          "phase": 1,
+          "label": "第 45-48 页",
+          "card_ids": [
+            "049_c_中的算术运算优先级与整数除法",
+            "050_使用static_cast进行显式类型转换",
+            "051_使用const定义不可修改的命名常量",
+            "052_使用enum_class定义强类型枚举"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 2,
+          "label": "第 45-50 页",
+          "card_ids": [
+            "055_if_else_if与else条件分支",
+            "053_c_20的using_enum与枚举项引入",
+            "054_c_模块中的export_module和import",
+            "057_switch语句按case选择分支"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 3,
+          "label": "第 49-52 页",
+          "card_ids": [
+            "056_c_的if_else_if与else语句",
+            "058_switch中的fallthrough与_fallthrough_属性",
+            "059_带初始化器的switch语句",
+            "060_条件运算符"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 4,
+          "label": "第 49-56 页",
+          "card_ids": [
+            "062_三路比较运算符_与比较类别",
+            "061_布尔逻辑运算符与短路求值",
+            "063_c_20三路比较运算符与比较结果判断",
+            "064_函数声明_定义与调用"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        }
+      ],
+      "generated_by": "deterministic-page-order",
+      "fallback_reason": "llm_map_failed"
+    },
+    {
+      "page_range": [
+        53,
+        60
+      ],
+      "sequence": [
+        {
+          "phase": 1,
+          "label": "第 53-56 页",
+          "card_ids": [
+            "065_函数返回值与return语句",
+            "066_使用auto推导函数返回类型",
+            "067_函数重载",
+            "069_nodiscard_属性"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 2,
+          "label": "第 53-56 页",
+          "card_ids": [
+            "070_maybe_unused_属性",
+            "071_noreturn_属性",
+            "072_deprecated_属性",
+            "073_likely_与_unlikely_属性"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 3,
+          "label": "第 54-60 页",
+          "card_ids": [
+            "068_c_属性语法_attribute",
+            "075_c风格数组的初始化",
+            "074_likely_与_unlikely_分支属性",
+            "076_获取内置数组的元素数量"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 4,
+          "label": "第 57-60 页",
+          "card_ids": [
+            "077_二维内置数组及下标访问",
+            "080_std_vector动态序列容器",
+            "082_std_optional表示可选值",
+            "078_std_array固定大小数组"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        }
+      ],
+      "generated_by": "deterministic-page-order",
+      "fallback_reason": "llm_map_failed"
+    },
+    {
+      "page_range": [
+        59,
+        68
+      ],
+      "sequence": [
+        {
+          "phase": 1,
+          "label": "第 59-62 页",
+          "card_ids": [
+            "079_类模板参数推导_ctad",
+            "081_std_pair及其成员访问",
+            "084_while_循环",
+            "085_do_while_循环"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 2,
+          "label": "第 61-64 页",
+          "card_ids": [
+            "086_传统_for_循环",
+            "083_结构化绑定分解对象成员或_pair",
+            "087_范围_for_循环",
+            "089_c_字符串与下标访问"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 3,
+          "label": "第 61-64 页",
+          "card_ids": [
+            "091_类的_public_protected_与_private_访问控制",
+            "092_airlineticket_类的接口与构造函数初始化",
+            "088_std_initializer_list_与花括号初始化",
+            "090_c_20_模块的基本文件组织"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 4,
+          "label": "第 65-68 页",
+          "card_ids": [
+            "094_airlineticket类的封装与票价计算",
+            "093_类数据成员的类内初始化",
+            "095_c_中的作用域解析与同名函数",
+            "097_c_11统一初始化与窄化转换检查"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        }
+      ],
+      "generated_by": "deterministic-page-order",
+      "fallback_reason": "llm_map_failed"
+    },
+    {
+      "page_range": [
+        67,
+        80
+      ],
+      "sequence": [
+        {
+          "phase": 1,
+          "label": "第 67-76 页",
+          "card_ids": [
+            "096_struct与class的默认成员访问权限及初始化",
+            "099_nullptr_与_null_的区别",
+            "098_用_delete_释放动态数组",
+            "100_const_变量"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 2,
+          "label": "第 73-76 页",
+          "card_ids": [
+            "103_const_成员函数与_const_correctness",
+            "104_constexpr_函数与编译期常量表达式",
+            "101_指向_const_对象的指针与_const_指针",
+            "102_const_函数参数与_const_指针参数"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 3,
+          "label": "第 77-80 页",
+          "card_ids": [
+            "105_constexpr函数与编译期常量表达式",
+            "106_constexpr类对象与编译期成员函数",
+            "107_consteval立即函数",
+            "109_const引用的只读性与临时对象绑定"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 4,
+          "label": "第 77-80 页",
+          "card_ids": [
+            "111_结构化绑定分解对象",
+            "112_引用成员的构造函数初始化",
+            "108_引用赋值不会改变引用绑定",
+            "110_引用与指针的关系"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        }
+      ],
+      "generated_by": "deterministic-page-order",
+      "fallback_reason": "llm_map_failed"
+    },
+    {
+      "page_range": [
+        81,
+        92
+      ],
+      "sequence": [
+        {
+          "phase": 1,
+          "label": "第 81-84 页",
+          "card_ids": [
+            "113_非_const_左值引用参数可修改实参",
+            "114_引用参数实现交换两个整数",
+            "115_const_引用参数接收字符串且避免修改",
+            "116_用指针参数修改调用者对象"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 2,
+          "label": "第 83-88 页",
+          "card_ids": [
+            "117_使用输出参数分离奇数数组和偶数数组",
+            "119_使用返回对象分离奇数和偶数",
+            "120_rvo_nrvo与返回值复制省略",
+            "118_使用输出参数分离奇数和偶数"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 3,
+          "label": "第 85-88 页",
+          "card_ids": [
+            "121_const_cast与std_as_const",
+            "122_使用异常处理除数为零错误",
+            "124_typedef定义类型别名",
+            "123_使用using定义类型别名"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 4,
+          "label": "第 89-92 页",
+          "card_ids": [
+            "125_auto类型推导的基本规则",
+            "126_auto与指针_const的组合声明",
+            "128_decltype根据表达式确定类型",
+            "129_c_20命名模块的基本声明与导出"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        }
+      ],
+      "generated_by": "deterministic-page-order",
+      "fallback_reason": "llm_map_failed"
+    },
+    {
+      "page_range": [
+        90,
+        104
+      ],
+      "sequence": [
+        {
+          "phase": 1,
+          "label": "第 90-96 页",
+          "card_ids": [
+            "127_auto与花括号初始化",
+            "130_employee类的接口与数据成员",
+            "131_employee的晋升_降职_雇用与解雇操作",
+            "132_employee_display_输出的员工信息"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 2,
+          "label": "第 93-100 页",
+          "card_ids": [
+            "133_employeetest_cpp中的employee使用示例",
+            "134_database类的员工集合与员工编号分配",
+            "135_database遍历显示全部员工",
+            "136_database遍历显示当前员工"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 3,
+          "label": "第 97-100 页",
+          "card_ids": [
+            "137_database测试程序中的员工操作",
+            "139_员工数据库菜单显示函数",
+            "140_交互式雇用员工",
+            "142_dopromote员工晋升流程"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 4,
+          "label": "第 98-104 页",
+          "card_ids": [
+            "138_交互式员工数据库主循环",
+            "141_解雇员工时的异常处理",
+            "145_复制_c_风格字符串时必须为_nul_预留空间",
+            "146_使用_strcpy_和_strcat_处理_c_风格字符串"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        }
+      ],
+      "generated_by": "deterministic-page-order",
+      "fallback_reason": "llm_map_failed"
+    },
+    {
+      "page_range": [
+        101,
+        112
+      ],
+      "sequence": [
+        {
+          "phase": 1,
+          "label": "第 101-104 页",
+          "card_ids": [
+            "148_字符串字面量应通过只读字符指针访问",
+            "143_c_风格字符串以_nul_字符结尾",
+            "147_c_字符串类型与_c_风格字符串",
+            "144_strlen_与_sizeof_的区别"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 2,
+          "label": "第 105-108 页",
+          "card_ids": [
+            "149_c_原始字符串字面量",
+            "152_std_string的字符串比较",
+            "153_std_string对象的独立拷贝与可修改性",
+            "154_std_string与c风格字符串的转换接口"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 3,
+          "label": "第 105-112 页",
+          "card_ids": [
+            "155_std_string的常用成员函数",
+            "151_std_string的拼接与追加",
+            "150_std_string用于管理字符序列",
+            "156_字符串字面量与_std_string_literals_后缀"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 4,
+          "label": "第 109-112 页",
+          "card_ids": [
+            "157_使用_ctad_推导_std_vector_的元素类型",
+            "158_std_to_string_与字符串到数值的转换函数",
+            "159_std_to_chars_将数值转换为字符序列",
+            "160_浮点数_to_chars_的格式选项"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        }
+      ],
+      "generated_by": "deterministic-page-order",
+      "fallback_reason": "llm_map_failed"
+    },
+    {
+      "page_range": [
+        109,
+        120
+      ],
+      "sequence": [
+        {
+          "phase": 1,
+          "label": "第 109-116 页",
+          "card_ids": [
+            "161_std_from_chars_从字符序列解析数值",
+            "162_std_string_view_的引入",
+            "165_std_string_view与std_string的转换及data",
+            "163_std_string_view的基本用途"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 2,
+          "label": "第 113-116 页",
+          "card_ids": [
+            "164_从原始字符缓冲区构造std_string_view",
+            "168_std_format中的width_fill和align格式控制",
+            "166_std_string_view字面量",
+            "167_std_format的基本格式字符串语法"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 3,
+          "label": "第 117-120 页",
+          "card_ids": [
+            "169_std_format_的对齐_填充与宽度格式说明符",
+            "170_std_format_的符号_进制_类型和替代格式",
+            "171_std_format_的精度与动态格式参数",
+            "172_std_format_中宽度_符号_零填充与进制的组合"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 4,
+          "label": "第 117-120 页",
+          "card_ids": [
+            "173_std_format_error_异常",
+            "176_自定义_formatter_的_format_与_std_format_to",
+            "174_自定义_std_formatter_的基本结构",
+            "175_自定义_formatter_的_parse_解析流程"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        }
+      ],
+      "generated_by": "deterministic-page-order",
+      "fallback_reason": "llm_map_failed"
+    },
+    {
+      "page_range": [
+        121,
+        136
+      ],
+      "sequence": [
+        {
+          "phase": 1,
+          "label": "第 121-124 页",
+          "card_ids": [
+            "178_函数参数可能被函数修改时必须在文档中说明",
+            "180_windows_消息处理函数使用_wparam_lparam_和_lresult",
+            "177_用文档注释说明函数的功能_参数_返回值和异常",
+            "179_接口返回类型和返回值语义应保持一致"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 2,
+          "label": "第 125-128 页",
+          "card_ids": [
+            "181_插入排序的基本思想与循环不变式",
+            "182_插入排序代码中待插入元素的位置更新",
+            "183_通过辅助函数提高条件判断的可读性",
+            "184_复杂业务代码应通过注释说明外部依据"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 3,
+          "label": "第 125-132 页",
+          "card_ids": [
+            "186_文档生成工具与文档格式",
+            "185_代码注释_待办事项与缺陷记录的作用",
+            "187_doxygen参数与异常文档标签",
+            "188_watermelon_构造函数的参数前置条件"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 4,
+          "label": "第 129-136 页",
+          "card_ids": [
+            "189_calculateseedratio_成员函数接口",
+            "190_面向对象重构中的_pull_up_与_push_down",
+            "191_教材中的标识符命名示例",
+            "192_循环索引和数据成员的命名示例"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        }
+      ],
+      "generated_by": "deterministic-page-order",
+      "fallback_reason": "llm_map_failed"
+    },
+    {
+      "page_range": [
+        133,
+        148
+      ],
+      "sequence": [
+        {
+          "phase": 1,
+          "label": "第 133-136 页",
+          "card_ids": [
+            "193_常量命名示例",
+            "194_匈牙利命名法中的类型前缀示例",
+            "195_状态访问器的命名示例",
+            "196_c_标识符的大小写和分隔符命名风格"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 2,
+          "label": "第 133-136 页",
+          "card_ids": [
+            "198_c_常量的声明与数字分隔符",
+            "199_c_20中的std_numbers数学常量",
+            "200_nullptr作为空指针常量",
+            "201_nodiscard_属性"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 3,
+          "label": "第 133-140 页",
+          "card_ids": [
+            "202_if_else语句的花括号格式",
+            "197_c_中的前缀递增与后缀递增",
+            "203_if_条件语句中的比较与赋值",
+            "204_const_成员函数"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 4,
+          "label": "第 137-148 页",
+          "card_ids": [
+            "205_使用_const_auto_遍历容器元素",
+            "206_通过类接口声明员工数据库操作",
+            "207_查找不到员工时抛出逻辑错误",
+            "208_用uml表示棋子类的属性与操作"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        }
+      ],
+      "generated_by": "deterministic-page-order",
+      "fallback_reason": "llm_map_failed"
+    },
+    {
+      "page_range": [
+        145,
+        160
+      ],
+      "sequence": [
+        {
+          "phase": 1,
+          "label": "第 145-152 页",
+          "card_ids": [
+            "209_使用二维指针数组表示8_8棋盘",
+            "210_用chessboard类封装棋盘访问",
+            "211_使用类模板表示可容纳不同棋子类型的棋盘",
+            "212_依赖注入与_errorlogger"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 2,
+          "label": "第 151-156 页",
+          "card_ids": [
+            "213_c_中的框架_api与windows_gui工具",
+            "216_大_o_记号",
+            "214_api",
+            "215_标准输出与标准错误流"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 3,
+          "label": "第 153-156 页",
+          "card_ids": [
+            "217_solaris",
+            "218_程序中的_bug",
+            "219_c_与_web_开发",
+            "220_开源软件与_gnu_开放源代码组织"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 4,
+          "label": "第 157-160 页",
+          "card_ids": [
+            "222_c_c_常用库函数与头文件",
+            "221_开源软件许可证示例",
+            "223_需求规格说明与_uml",
+            "224_mvc_软件架构模式"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        }
+      ],
+      "generated_by": "deterministic-page-order",
+      "fallback_reason": "llm_map_failed"
+    },
+    {
+      "page_range": [
+        159,
+        172
+      ],
+      "sequence": [
+        {
+          "phase": 1,
+          "label": "第 159-164 页",
+          "card_ids": [
+            "225_棋类程序中的模型组件",
+            "226_棋类程序中的棋子继承层次",
+            "227_棋类程序的棋盘视图与棋子视图分层",
+            "228_棋类游戏的一次回合处理流程"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 2,
+          "label": "第 161-168 页",
+          "card_ids": [
+            "229_使用枚举表示扑克牌的点数和花色",
+            "230_算法复杂度的_big_o_表示法",
+            "231_面向对象程序设计的程序组织方式",
+            "232_c_与不同程序设计范式"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 3,
+          "label": "第 165-172 页",
+          "card_ids": [
+            "233_用_uml_表示_stockquotecollection_与_stockquo",
+            "236_用状态类表示棋子的不同状态",
+            "234_uml类图中的类_属性与操作",
+            "235_用类表示网格与棋子对象"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 4,
+          "label": "第 169-172 页",
+          "card_ids": [
+            "237_media_picture与movie的类层次",
+            "240_多态的基本含义",
+            "238_is_a关系与has_a关系",
+            "239_继承的相关术语"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        }
+      ],
+      "generated_by": "deterministic-page-order",
+      "fallback_reason": "llm_map_failed"
+    },
+    {
+      "page_range": [
+        173,
+        184
+      ],
+      "sequence": [
+        {
+          "phase": 1,
+          "label": "第 173-176 页",
+          "card_ids": [
+            "242_通过集合对象为关联数组保存多个值",
+            "241_关联数组与多重关联数组的键值关系",
+            "243_multiassociativearray_与_liskov_替换原则的关系",
+            "244_用层次结构表示类型或组织关系"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 2,
+          "label": "第 177-180 页",
+          "card_ids": [
+            "246_通过组合多个能力构造类型的示例",
+            "245_动物类层次结构示例",
+            "247_mixin_与_able_后缀示例",
+            "248_employee_person_与_manager_的类型关系示例"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 3,
+          "label": "第 177-184 页",
+          "card_ids": [
+            "249_solid_与_dry_设计原则标题",
+            "250_windows_dll_与_linux_so_动态库文件",
+            "251_c_的_public_private_与_protected_访问控制",
+            "252_单一职责原则_srp"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 4,
+          "label": "第 181-184 页",
+          "card_ids": [
+            "253_继承关系与多态示例中的_car_truck_和_vehicle",
+            "254_以模板参数作为基类的_selfdrivable",
+            "255_聚合_aggregation_关系",
+            "256_mvc_架构模式"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        }
+      ],
+      "generated_by": "deterministic-page-order",
+      "fallback_reason": "llm_map_failed"
+    },
+    {
+      "page_range": [
+        181,
+        204
+      ],
+      "sequence": [
+        {
+          "phase": 1,
+          "label": "第 181-188 页",
+          "card_ids": [
+            "257_c_标准输入输出流对象",
+            "258_std_vector_容器与模板参数",
+            "259_std_any_std_variant与void_的类型处理方式",
+            "261_使用虚函数实现基于_shape_的运行时多态"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 2,
+          "label": "第 185-194 页",
+          "card_ids": [
+            "262_c_的_public_protected_和_private_访问控制",
+            "260_开放_封闭原则_ocp",
+            "263_fraction_类型的运算接口示例",
+            "264_solid面向对象设计原则的组成"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 3,
+          "label": "第 197-204 页",
+          "card_ids": [
+            "265_使用_new_动态分配整数对象",
+            "266_使用_delete_释放_new_分配的内存",
+            "268_使用_new_nothrow_处理动态分配失败",
+            "267_malloc_与_new_的区别"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 4,
+          "label": "第 201-204 页",
+          "card_ids": [
+            "269_内置数组的声明_初始化与下标访问",
+            "272_动态创建类对象数组时会调用构造函数和析构函数",
+            "273_动态创建和释放指针数组及其所指向的对象",
+            "270_动态数组的创建与下标访问"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        }
+      ],
+      "generated_by": "deterministic-page-order",
+      "fallback_reason": "llm_map_failed"
+    },
+    {
+      "page_range": [
+        203,
+        216
+      ],
+      "sequence": [
+        {
+          "phase": 1,
+          "label": "第 203-208 页",
+          "card_ids": [
+            "271_动态对象数组必须使用_delete_释放",
+            "275_内置二维数组的声明与下标访问",
+            "274_使用_delete_释放动态数组",
+            "276_使用_char_动态分配二维字符数组"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 2,
+          "label": "第 209-212 页",
+          "card_ids": [
+            "278_用指针参数处理数组",
+            "277_使用指针访问数组元素",
+            "279_动态数组的分配与释放",
+            "280_数组长度的获取与_std_size"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 3,
+          "label": "第 209-212 页",
+          "card_ids": [
+            "281_通过引用数组保留数组长度",
+            "282_数组下标与指针算术的等价形式",
+            "284_c_与带垃圾回收语言的内存管理差异",
+            "283_c_中的宽字符类型_wchar_t"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 4,
+          "label": "第 213-216 页",
+          "card_ids": [
+            "285_使用_strcat_拼接动态字符串可能导致缓冲区溢出",
+            "288_valgrind_可报告动态内存分配_释放和泄漏情况",
+            "286_通过引用传出指针可能泄漏原有对象",
+            "287_visual_c_的_crt_调试堆可以检测内存泄漏"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        }
+      ],
+      "generated_by": "deterministic-page-order",
+      "fallback_reason": "llm_map_failed"
+    },
+    {
+      "page_range": [
+        217,
+        228
+      ],
+      "sequence": [
+        {
+          "phase": 1,
+          "label": "第 217-220 页",
+          "card_ids": [
+            "292_unique_ptr所有权的移动转移",
+            "293_用unique_ptr管理动态数组",
+            "289_std_unique_ptr与raii",
+            "290_std_make_unique创建unique_ptr"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 2,
+          "label": "第 219-224 页",
+          "card_ids": [
+            "291_unique_ptr的访问与资源操作",
+            "294_std_shared_ptr的基本用途与创建方式",
+            "295_shared_ptr的自定义删除器",
+            "297_从同一个裸指针分别构造多个shared_ptr的危险"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 3,
+          "label": "第 221-224 页",
+          "card_ids": [
+            "298_shared_ptr的指针类型转换",
+            "299_shared_ptr的别名构造与get",
+            "300_weak_ptr对shared_ptr资源的弱引用",
+            "296_shared_ptr的引用计数与共享所有权"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 4,
+          "label": "第 225-228 页",
+          "card_ids": [
+            "301_std_enable_shared_from_this_的用途",
+            "302_shared_from_this_未建立共享管理时的异常风险",
+            "303_auto_ptr_被_unique_ptr_和_shared_ptr_取代",
+            "304_动态数组下标越界示例"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        }
+      ],
+      "generated_by": "deterministic-page-order",
+      "fallback_reason": "llm_map_failed"
+    },
+    {
+      "page_range": [
+        229,
+        240
+      ],
+      "sequence": [
+        {
+          "phase": 1,
+          "label": "第 229-232 页",
+          "card_ids": [
+            "305_c_模块中导出类的基本声明",
+            "306_class与struct的默认访问权限",
+            "307_在类定义中直接实现成员函数",
+            "308_在类外定义成员函数与作用域解析运算符"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 2,
+          "label": "第 229-236 页",
+          "card_ids": [
+            "309_使用公有接口和私有辅助函数封装字符串转换",
+            "311_成员函数中使用_this_指针解决同名歧义",
+            "310_spreadsheetcell_的数值与字符串接口",
+            "312_通过_const_引用读取_spreadsheetcell"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 3,
+          "label": "第 233-236 页",
+          "card_ids": [
+            "314_使用裸指针动态创建和销毁_spreadsheetcell",
+            "315_使用_unique_ptr_和_make_unique_管理动态对象",
+            "316_模块中导出_spreadsheetcell_类及其构造函数声明",
+            "313_spreadsheetcell_的栈对象创建与成员调用"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 4,
+          "label": "第 237-240 页",
+          "card_ids": [
+            "317_构造函数不能被显式调用来重新初始化对象",
+            "318_重载构造函数根据初始化实参选择",
+            "319_委托构造函数可复用另一个构造函数的初始化逻辑",
+            "320_数组元素需要可用的构造函数进行初始化"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        }
+      ],
+      "generated_by": "deterministic-page-order",
+      "fallback_reason": "llm_map_failed"
+    },
+    {
+      "page_range": [
+        237,
+        254
+      ],
+      "sequence": [
+        {
+          "phase": 1,
+          "label": "第 237-244 页",
+          "card_ids": [
+            "322_使用智能指针和裸指针动态创建_spreadsheetcell",
+            "321_默认构造函数与最令人_vexing_的解析",
+            "323_显式默认构造函数与显式删除构造函数",
+            "324_构造函数初始化列表"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 2,
+          "label": "第 241-248 页",
+          "card_ids": [
+            "326_拷贝构造函数",
+            "325_数据成员的实际初始化顺序由声明顺序决定",
+            "328_使用花括号初始化_std_vector",
+            "330_使用_default_和_delete_控制拷贝构造函数"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 3,
+          "label": "第 245-252 页",
+          "card_ids": [
+            "331_explicit_构造函数禁止隐式类型转换",
+            "327_使用_std_initializer_list_接受花括号初始化参数",
+            "329_委托构造函数",
+            "332_构造函数的隐式转换与_explicit"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 4,
+          "label": "第 249-254 页",
+          "card_ids": [
+            "334_动态对象的_delete_与指针生命周期",
+            "333_析构函数与对象的自动销毁",
+            "335_复制赋值运算符与赋值链",
+            "337_使用_default_和_delete_控制赋值运算符"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        }
+      ],
+      "generated_by": "deterministic-page-order",
+      "fallback_reason": "llm_map_failed"
+    },
+    {
+      "page_range": [
+        253,
+        272
+      ],
+      "sequence": [
+        {
+          "phase": 1,
+          "label": "第 253-256 页",
+          "card_ids": [
+            "336_赋值运算符中的自赋值检查",
+            "338_复制构造_复制初始化与复制赋值的区别",
+            "340_复制构造函数的基本实现",
+            "339_成员函数返回字符串与返回值优化"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 2,
+          "label": "第 257-262 页",
+          "card_ids": [
+            "342_c_20_模块接口中的导出声明",
+            "343_spreadsheet_的二维动态存储设计",
+            "341_友元函数访问类的私有成员",
+            "344_spreadsheet_单元格访问的坐标范围检查"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 3,
+          "label": "第 261-268 页",
+          "card_ids": [
+            "345_spreadsheet_析构函数释放动态数组",
+            "346_spreadsheet_按值传递和默认拷贝导致的指针共享风险",
+            "347_spreadsheet_的拷贝赋值运算符基本实现",
+            "348_spreadsheet_的_copy_and_swap_拷贝赋值惯用法"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 4,
+          "label": "第 265-272 页",
+          "card_ids": [
+            "350_删除_spreadsheet_的拷贝操作",
+            "351_c_中的左值_右值与右值引用",
+            "349_为资源管理类提供_noexcept_的_swap",
+            "352_左值引用与右值引用重载的选择"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        }
+      ],
+      "generated_by": "deterministic-page-order",
+      "fallback_reason": "llm_map_failed"
+    },
+    {
+      "page_range": [
+        269,
+        284
+      ],
+      "sequence": [
+        {
+          "phase": 1,
+          "label": "第 269-272 页",
+          "card_ids": [
+            "353_命名右值引用必须显式_std_move_才能继续传递为右值",
+            "354_移动构造和移动赋值应使用_noexcept",
+            "355_移动操作中的资源转移_源对象重置与自赋值检查",
+            "356_std_exchange_的取值并替换语义"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 2,
+          "label": "第 273-276 页",
+          "card_ids": [
+            "357_spreadsheet_的移动构造与移动赋值",
+            "359_std_move_与返回值优化_rvo_nrvo",
+            "360_dataholder_的_setdata_参数传递方式",
+            "358_使用复制交换与移动交换实现_swap"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 3,
+          "label": "第 277-280 页",
+          "card_ids": [
+            "361_静态成员函数",
+            "362_const_成员函数",
+            "363_mutable_成员与_const_成员函数中的修改",
+            "364_成员函数重载用于多种设置方式"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 4,
+          "label": "第 277-284 页",
+          "card_ids": [
+            "365_const_与非_const_版本的_getcellat_重载",
+            "366_std_as_const_与_const_cast_实现非_const_重载",
+            "368_使用引用限定符区分左值和右值对象",
+            "367_使用删除函数禁止特定参数类型"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        }
+      ],
+      "generated_by": "deterministic-page-order",
+      "fallback_reason": "llm_map_failed"
+    },
+    {
+      "page_range": [
+        281,
+        296
+      ],
+      "sequence": [
+        {
+          "phase": 1,
+          "label": "第 281-286 页",
+          "card_ids": [
+            "370_构造函数的默认参数",
+            "371_static数据成员与inline_static数据成员",
+            "369_inline成员函数的定义方式",
+            "373_用静态计数器为_spreadsheet_对象分配递增_id"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 2,
+          "label": "第 285-288 页",
+          "card_ids": [
+            "372_使用_const_static_数据成员表示_spreadsheet_的固定尺寸",
+            "374_通过构造函数限制_spreadsheet_的尺寸",
+            "377_cell_的初始值构造函数使用成员初始化器设置数值",
+            "378_getcellat_通过坐标校验后返回单元格"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 3,
+          "label": "第 286-292 页",
+          "card_ids": [
+            "375_spreadsheet_通过构造函数保存_spreadsheetapplicat",
+            "376_在_spreadsheet_中声明并在类外定义嵌套类_cell",
+            "380_用成员函数_add_实现两个_spreadsheetcell_的加法",
+            "379_使用枚举类表示_spreadsheetcell_的颜色"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 4,
+          "label": "第 289-296 页",
+          "card_ids": [
+            "381_通过成员运算符函数重载_operator",
+            "383_使用非成员_operator_重载_spreadsheetcell_的除法并检查",
+            "382_为_spreadsheetcell_提供与_double_混合运算的_opera",
+            "384_为_spreadsheetcell_重载复合赋值运算符"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        }
+      ],
+      "generated_by": "deterministic-page-order",
+      "fallback_reason": "llm_map_failed"
+    },
+    {
+      "page_range": [
+        293,
+        308
+      ],
+      "sequence": [
+        {
+          "phase": 1,
+          "label": "第 293-296 页",
+          "card_ids": [
+            "385_用复合赋值运算符实现普通二元算术运算符",
+            "388_使用默认化的_operator_自动生成比较逻辑",
+            "386_为_spreadsheetcell_提供比较运算符及混合类型比较",
+            "387_使用_c_20_三向比较运算符_operator"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 2,
+          "label": "第 297-300 页",
+          "card_ids": [
+            "389_默认化三向比较运算符的适用范围",
+            "391_c_模块接口与实现文件的分离",
+            "390_pimpl惯用法隐藏实现细节",
+            "392_使用std_unique_ptr管理pimpl对象及特殊成员函数"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 3,
+          "label": "第 301-308 页",
+          "card_ids": [
+            "395_派生类对象与基类指针",
+            "393_c_继承中的基类与派生类",
+            "394_公有继承下的成员访问",
+            "396_派生类对基类成员的访问权限"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 4,
+          "label": "第 305-308 页",
+          "card_ids": [
+            "398_虚函数调用的动态分派",
+            "399_派生类对象赋值给基类对象与对象切片",
+            "400_override对函数签名匹配的检查",
+            "397_虚函数与派生类重写"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        }
+      ],
+      "generated_by": "deterministic-page-order",
+      "fallback_reason": "llm_map_failed"
+    },
+    {
+      "page_range": [
+        309,
+        324
+      ],
+      "sequence": [
+        {
+          "phase": 1,
+          "label": "第 309-315 页",
+          "card_ids": [
+            "401_使用_virtual_实现基类接口的动态多态",
+            "403_基类析构函数应声明为_virtual",
+            "402_虚函数调用中的静态绑定与动态绑定",
+            "405_weatherprediction_天气预测接口类"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 2,
+          "label": "第 313-316 页",
+          "card_ids": [
+            "404_final_防止虚函数继续被重写",
+            "407_重写_showresult_同时显示摄氏度和华氏度",
+            "408_c_构造函数的初始化顺序",
+            "406_myweatherprediction_通过继承扩展天气预测"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 3,
+          "label": "第 317-320 页",
+          "card_ids": [
+            "409_通过基类指针删除派生类对象需要虚析构函数",
+            "410_override说明符用于确认重写虚函数",
+            "411_使用基类限定名调用被重写的基类函数",
+            "413_派生类对象赋值给基类对象会发生对象切片"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 4,
+          "label": "第 319-324 页",
+          "card_ids": [
+            "412_虚函数支持按对象动态类型进行多态调用",
+            "414_static_cast_与_dynamic_cast_的向下转型差异",
+            "416_纯虚函数使_spreadsheetcell_成为抽象类",
+            "417_stringspreadsheetcell_使用_std_optional_st"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        }
+      ],
+      "generated_by": "deterministic-page-order",
+      "fallback_reason": "llm_map_failed"
+    },
+    {
+      "page_range": [
+        322,
+        334
+      ],
+      "sequence": [
+        {
+          "phase": 1,
+          "label": "第 322-328 页",
+          "card_ids": [
+            "415_spreadsheetcell_基类的多态接口设计",
+            "419_用多态容器保存不同类型的电子表格单元格",
+            "418_doublespreadsheetcell使用std_optional_doub",
+            "422_多重继承中同名成员函数会产生调用歧义"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 2,
+          "label": "第 326-332 页",
+          "card_ids": [
+            "420_stringspreadsheetcell可以由doublespreadshee",
+            "421_c_中的公有多重继承",
+            "424_在派生类中覆盖同名函数以解决多重继承歧义",
+            "423_多重继承中的成员函数调用歧义"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 3,
+          "label": "第 329-332 页",
+          "card_ids": [
+            "425_多重继承中的重复基类问题",
+            "426_使用_using_声明选择基类成员函数",
+            "427_纯虚函数接口与多重继承的_dogbird_示例",
+            "429_用_unique_ptr_实现协变返回的资源管理"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 4,
+          "label": "第 329-334 页",
+          "card_ids": [
+            "430_通过基类_unique_ptr_使用派生类工厂函数",
+            "431_工厂返回类型与_liskov_替换原则",
+            "428_协变返回类型",
+            "433_使用_using_base_base_继承基类构造函数"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        }
+      ],
+      "generated_by": "deterministic-page-order",
+      "fallback_reason": "llm_map_failed"
+    },
+    {
+      "page_range": [
+        333,
+        348
+      ],
+      "sequence": [
+        {
+          "phase": 1,
+          "label": "第 333-336 页",
+          "card_ids": [
+            "432_用_using_声明继承基类成员函数重载",
+            "436_派生类构造函数初始化基类子对象和派生类成员",
+            "434_派生类构造函数会隐藏同签名的继承构造函数",
+            "435_多重继承中继承构造函数可能产生二义性"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 2,
+          "label": "第 337-340 页",
+          "card_ids": [
+            "437_静态成员函数与继承层次中的调用",
+            "441_虚函数的协变返回类型",
+            "438_派生类同名函数对基类重载的隐藏",
+            "439_基类私有数据与虚函数访问接口"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 3,
+          "label": "第 339-344 页",
+          "card_ids": [
+            "440_派生类通过重写虚函数实现不同的里程估算",
+            "442_通过基类引用调用受保护的虚函数",
+            "443_使用_using_声明改变继承成员的访问级别",
+            "445_rtti_中使用_typeid_判断对象的运行时类型"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 4,
+          "label": "第 342-348 页",
+          "card_ids": [
+            "444_成员访问权限取决于表达式的静态类型",
+            "446_抽象基类与运行时类型识别",
+            "447_虚基类解决菱形继承中的重复基类",
+            "448_c_中的主要类型转换运算"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        }
+      ],
+      "generated_by": "deterministic-page-order",
+      "fallback_reason": "llm_map_failed"
+    },
+    {
+      "page_range": [
+        345,
+        364
+      ],
+      "sequence": [
+        {
+          "phase": 1,
+          "label": "第 345-352 页",
+          "card_ids": [
+            "450_reinterpret_cast进行低层次指针和引用转换",
+            "449_static_cast的数值转换与继承层次转换",
+            "451_std_bit_cast_的基本用法",
+            "452_dynamic_cast_的指针转换"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 2,
+          "label": "第 349-355 页",
+          "card_ids": [
+            "453_dynamic_cast_的引用转换失败与_std_bad_cast",
+            "454_dynamic_cast_对多态类型的要求",
+            "455_c_模块接口文件与命名模块声明",
+            "456_使用import导入模块和标准库依赖"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 3,
+          "label": "第 353-364 页",
+          "card_ids": [
+            "458_模块接口中的命名空间和类型别名导出",
+            "457_将person类接口与实现分离",
+            "459_模块接口与实现的分离",
+            "460_头文件保护_包含卫士与_pragma_once"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 4,
+          "label": "第 361-364 页",
+          "card_ids": [
+            "461_类的前向声明",
+            "462_使用__has_include检测头文件是否存在",
+            "463_c_特性测试宏与属性检测",
+            "464_文件作用域static与内部链接"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        }
+      ],
+      "generated_by": "deterministic-page-order",
+      "fallback_reason": "llm_map_failed"
+    },
+    {
+      "page_range": [
+        365,
+        376
+      ],
+      "sequence": [
+        {
+          "phase": 1,
+          "label": "第 365-368 页",
+          "card_ids": [
+            "465_使用_extern_声明跨源文件访问的变量",
+            "466_函数中的静态局部变量具有持久化状态",
+            "467_使用_printf_按格式输出不同类型的参数",
+            "468_使用_c_风格可变参数实现_debugout"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 2,
+          "label": "第 365-372 页",
+          "card_ids": [
+            "469_使用_va_arg_依次读取指定数量的可变参数",
+            "470_使用预处理器宏_square",
+            "471_函数式宏参数需要用括号包围",
+            "472_宏可能重复求值_带来副作用和性能问题"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 3,
+          "label": "第 369-376 页",
+          "card_ids": [
+            "473_c_中的泛型编程主题",
+            "474_多态对象的虚拟_clone_接口",
+            "479_const_与非_const_at_重载的实现",
+            "480_gameboard_的_copy_and_swap_复制赋值"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 4,
+          "label": "第 373-376 页",
+          "card_ids": [
+            "481_通过_at_管理棋盘棋子所有权",
+            "476_gameboard_的构造与默认移动操作",
+            "477_gameboard_的多态深复制构造",
+            "475_gameboard_的二维棋盘存储结构"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        }
+      ],
+      "generated_by": "deterministic-page-order",
+      "fallback_reason": "llm_map_failed"
+    },
+    {
+      "page_range": [
+        375,
+        388
+      ],
+      "sequence": [
+        {
+          "phase": 1,
+          "label": "第 375-380 页",
+          "card_ids": [
+            "478_gameboard_的坐标检查与_at_访问",
+            "485_grid_的默认复制_移动和资源管理接口",
+            "483_grid_的构造_尺寸和二维布局",
+            "482_grid_类模板及其单元格类型"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 2,
+          "label": "第 377-384 页",
+          "card_ids": [
+            "484_grid_的坐标检查与_at_访问函数",
+            "486_grid_的类型别名_堆分配和具体用法",
+            "488_grid_的编译期尺寸与_constexpr_要求",
+            "491_grid_的默认模板参数"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 3,
+          "label": "第 381-384 页",
+          "card_ids": [
+            "492_c_20_模块分区的导出与导入",
+            "487_带非类型模板参数的_grid_类模板",
+            "489_grid_单元的_optional_存储与坐标访问",
+            "490_grid_的坐标验证与_at_成员函数实现"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 4,
+          "label": "第 385-388 页",
+          "card_ids": [
+            "493_std_pair_的类模板实参推导_ctad",
+            "494_类模板的显式推导指引",
+            "497_grid_的跨特化赋值运算符",
+            "498_grid_的_swap_函数与_noexcept"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        }
+      ],
+      "generated_by": "deterministic-page-order",
+      "fallback_reason": "llm_map_failed"
+    },
+    {
+      "page_range": [
+        386,
+        398
+      ],
+      "sequence": [
+        {
+          "phase": 1,
+          "label": "第 386-392 页",
+          "card_ids": [
+            "495_不同模板特化之间的_grid_转换构造函数",
+            "496_嵌套模板成员函数的定义语法",
+            "499_grid模板的跨类型或跨尺寸转换构造",
+            "500_grid赋值运算符中的copy_and_swap惯用法"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 2,
+          "label": "第 389-392 页",
+          "card_ids": [
+            "502_grid_const_char_的坐标检查与at访问",
+            "504_gameboard继承grid_t_并提供move操作",
+            "501_grid_const_char_的模板特化及深拷贝存储",
+            "503_c_模块中导出grid_const_char_特化"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 3,
+          "label": "第 393-396 页",
+          "card_ids": [
+            "506_类型别名与别名模板",
+            "505_模板派生类访问依赖基类成员",
+            "508_find模板的类型推导与显式模板实参",
+            "509_通过数组引用推导数组长度"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 4,
+          "label": "第 393-398 页",
+          "card_ids": [
+            "510_非模板函数优先于同样匹配的函数模板",
+            "511_grid加法运算符函数模板",
+            "507_通用find函数模板",
+            "513_函数模板参数顺序与默认模板实参"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        }
+      ],
+      "generated_by": "deterministic-page-order",
+      "fallback_reason": "llm_map_failed"
+    },
+    {
+      "page_range": [
+        397,
+        405
+      ],
+      "sequence": [
+        {
+          "phase": 1,
+          "label": "第 397-400 页",
+          "card_ids": [
+            "512_函数模板显式指定模板实参",
+            "514_函数模板的自动返回类型推导",
+            "516_使用尾置返回类型表达_add_的返回类型",
+            "517_c_20_简写函数模板"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 2,
+          "label": "第 397-404 页",
+          "card_ids": [
+            "518_变量模板表示类型化常量_pi",
+            "519_c_20_概念的声明语法",
+            "515_decltype_与_decltype_auto_的返回类型推导",
+            "520_概念_concept_的基本定义"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 3,
+          "label": "第 401-404 页",
+          "card_ids": [
+            "521_requires_表达式的基本语法",
+            "522_requires_表达式中的类型要求",
+            "523_简单要求与复合要求",
+            "524_嵌套要求_nested_requirement"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 4,
+          "label": "第 401-405 页",
+          "card_ids": [
+            "525_组合概念与标准库概念",
+            "527_在函数模板上使用概念约束",
+            "526_受概念约束的_auto_变量和_lambda_参数",
+            "528_函数模板的约束声明方式"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        }
+      ],
+      "generated_by": "deterministic-page-order",
+      "fallback_reason": "llm_map_failed"
+    },
+    {
+      "page_range": [
+        405,
+        420
+      ],
+      "sequence": [
+        {
+          "phase": 1,
+          "label": "第 405-407 页",
+          "card_ids": [
+            "529_受约束函数模板的重载选择与约束偏序",
+            "530_使用_derived_from_约束类模板",
+            "531_为类模板成员函数单独添加_movable_约束",
+            "532_浮点数查找中的近似相等比较"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 2,
+          "label": "第 409-412 页",
+          "card_ids": [
+            "534_c_标准输入输出流对象",
+            "536_流插入运算符用于_c_输出",
+            "533_c_与_c_的输入输出方式",
+            "535_使用_iostream_引入_c_标准流"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 3,
+          "label": "第 413-416 页",
+          "card_ids": [
+            "537_使用_cout_和_endl_输出文本并换行",
+            "538_使用_put_和_write_写入字符或字符序列",
+            "539_使用_flush_立即刷新输出流",
+            "542_使用_locale_和专用操纵器格式化本地化数据"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 4,
+          "label": "第 414-420 页",
+          "card_ids": [
+            "540_检查输出流状态并处理输出错误",
+            "541_使用布尔值和数值格式化操纵器",
+            "543_使用_cin_提取用户输入并通过_cout_输出",
+            "545_使用_istream_get_逐字符读取输入"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        }
+      ],
+      "generated_by": "deterministic-page-order",
+      "fallback_reason": "llm_map_failed"
+    },
+    {
+      "page_range": [
+        417,
+        432
+      ],
+      "sequence": [
+        {
+          "phase": 1,
+          "label": "第 417-424 页",
+          "card_ids": [
+            "546_使用_noskipws_和_unget_解析并保留下一个字符",
+            "547_使用_putback_将指定字符放回输入流",
+            "544_检查和处理_istream_的输入状态",
+            "548_使用_peek_get_putback_和_unget_进行字符流预读与回退"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 2,
+          "label": "第 421-424 页",
+          "card_ids": [
+            "549_使用_peek_和_noskipws_解析输入中的非数字前缀与数字",
+            "550_使用_getline_读取整行或读取到指定分隔符",
+            "551_常用_c_输入输出格式控制器",
+            "552_locale_对_c_数字输入输出格式的影响"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 3,
+          "label": "第 421-428 页",
+          "card_ids": [
+            "554_使用字符串流_ostringstream_和_istringstream_进行内",
+            "553_printf_不能直接格式化自定义_c_类型",
+            "555_文件流的打开模式",
+            "558_通过定位操作修改文件内容"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 4,
+          "label": "第 426-432 页",
+          "card_ids": [
+            "556_检查文件流是否成功打开",
+            "557_文件流中的位置定位与查询",
+            "559_输入输出流的_tie_关联与自动刷新",
+            "560_使用_fstream_修改文件中的指定记录"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        }
+      ],
+      "generated_by": "deterministic-page-order",
+      "fallback_reason": "llm_map_failed"
+    },
+    {
+      "page_range": [
+        429,
+        442
+      ],
+      "sequence": [
+        {
+          "phase": 1,
+          "label": "第 429-432 页",
+          "card_ids": [
+            "562_path_的路径拼接_append_operator_concat_与_oper",
+            "563_遍历_path_的路径组件",
+            "565_directory_entry_的文件系统属性查询",
+            "566_filesystem_文件系统操作与空间信息"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 2,
+          "label": "第 429-436 页",
+          "card_ids": [
+            "567_recursive_directory_iterator_递归遍历目录",
+            "561_std_filesystem_path_的路径表示与构造",
+            "564_path_的组成部分与属性查询",
+            "568_使用_recursive_directory_iterator_递归遍历目录"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 3,
+          "label": "第 433-440 页",
+          "card_ids": [
+            "569_使用_directory_iterator_手动递归遍历目录",
+            "570_文件系统路径与目录条目状态检查",
+            "573_通过what_获取异常说明",
+            "575_文件打开失败时抛出std_exception"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 4,
+          "label": "第 438-442 页",
+          "card_ids": [
+            "571_c_异常处理的基本机制",
+            "574_使用ifstream读取整数文件",
+            "572_使用std_invalid_argument表示无效参数",
+            "576_异常的抛出与捕获"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        }
+      ],
+      "generated_by": "deterministic-page-order",
+      "fallback_reason": "llm_map_failed"
+    },
+    {
+      "page_range": [
+        441,
+        452
+      ],
+      "sequence": [
+        {
+          "phase": 1,
+          "label": "第 441-444 页",
+          "card_ids": [
+            "577_直接抛出整数或字符串异常",
+            "578_使用标准运行时异常表示文件错误",
+            "580_catch_参数使用_const_引用及捕获顺序",
+            "579_invalid_argument_与_runtime_error_的区分"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 2,
+          "label": "第 445-448 页",
+          "card_ids": [
+            "581_未捕获异常与_terminate",
+            "584_动态异常说明与_noexcept_的关系",
+            "586_std_exception_what_与文件整数读取示例",
+            "582_noexcept函数说明符"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 3,
+          "label": "第 446-452 页",
+          "card_ids": [
+            "583_noexcept_expression_运算符",
+            "585_c_标准异常类型层次",
+            "587_catch处理程序的匹配顺序",
+            "592_c_20的std_source_location信息"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 4,
+          "label": "第 450-452 页",
+          "card_ids": [
+            "588_自定义文件异常类层次",
+            "589_fileerror的错误信息与文件名接口",
+            "590_fileopenerror与filereaderror的专用信息",
+            "591_readintegerfile的文件读取与异常抛出"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        }
+      ],
+      "generated_by": "deterministic-page-order",
+      "fallback_reason": "llm_map_failed"
+    },
+    {
+      "page_range": [
+        453,
+        468
+      ],
+      "sequence": [
+        {
+          "phase": 1,
+          "label": "第 453-456 页",
+          "card_ids": [
+            "594_在自定义异常中保存_source_location",
+            "593_使用_std_source_location_记录日志位置",
+            "596_throw_与_throw_e_的重新抛出区别",
+            "595_使用嵌套异常保存异常原因"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 2,
+          "label": "第 457-460 页",
+          "card_ids": [
+            "598_异常处理期间的栈展开与资源清理",
+            "597_异常的捕获_传播与重新抛出",
+            "601_使用nothrow_new以nullptr表示分配失败",
+            "602_new_handler与动态内存分配失败处理机制"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 3,
+          "label": "第 458-464 页",
+          "card_ids": [
+            "599_使用raii和unique_ptr保证异常安全",
+            "600_默认new和new_分配失败时抛出bad_alloc",
+            "603_使用_std_set_new_handler_设置内存分配失败处理函数",
+            "604_矩阵构造函数中的异常清理"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 4,
+          "label": "第 463-468 页",
+          "card_ids": [
+            "605_构造函数中的_function_try_block",
+            "606_构造函数函数尝试块",
+            "607_noexcept异常说明",
+            "608_查询当前未处理异常数量的函数"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        }
+      ],
+      "generated_by": "deterministic-page-order",
+      "fallback_reason": "llm_map_failed"
+    },
+    {
+      "page_range": [
+        465,
+        484
+      ],
+      "sequence": [
+        {
+          "phase": 1,
+          "label": "第 465-472 页",
+          "card_ids": [
+            "609_logic_error与domain_error的抛出_捕获和重新抛出",
+            "610_运算符重载函数的基本形式",
+            "611_一元运算符与二元运算符的操作数数量",
+            "612_常见运算符重载函数的声明形式"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 2,
+          "label": "第 470-476 页",
+          "card_ids": [
+            "613_运算符重载中的const限定与比较运算符",
+            "614_c_中可重载运算符的常见形式",
+            "615_字符串operator_重载与移动语义",
+            "616_c_运算符优先级层次"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 3,
+          "label": "第 473-480 页",
+          "card_ids": [
+            "617_std_rel_ops提供关系运算符模板",
+            "618_一元正负运算符重载",
+            "619_spreadsheetcell_的前置与后置自增_自减运算符重载",
+            "621_泛型_array_类的接口设计"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 4,
+          "label": "第 477-484 页",
+          "card_ids": [
+            "622_array_动态数组的初始化_析构_移动和扩容实现",
+            "620_为_spreadsheetcell_重载输入输出流运算符",
+            "623_为自定义数组类重载非_const_下标运算符",
+            "626_使用箭头运算符访问指针所指对象的成员"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        }
+      ],
+      "generated_by": "deterministic-page-order",
+      "fallback_reason": "llm_map_failed"
+    },
+    {
+      "page_range": [
+        482,
+        488
+      ],
+      "sequence": [
+        {
+          "phase": 1,
+          "label": "第 482-486 页",
+          "card_ids": [
+            "624_为自定义数组类提供_const_下标运算符重载",
+            "625_重载函数调用运算符_operator",
+            "627_自定义智能指针的解引用运算符_operator",
+            "628_自定义智能指针的成员访问运算符_operator"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 2,
+          "label": "第 485-488 页",
+          "card_ids": [
+            "629_类类型到其他类型的转换函数_operator_type",
+            "630_explicit_转换函数限制隐式转换",
+            "631_使用_nullptr_检查指针是否为空"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        }
+      ],
+      "generated_by": "deterministic-page-order",
+      "fallback_reason": "llm_map_failed"
+    }
+  ],
+  "fallback_segments": 40
+}

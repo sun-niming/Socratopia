@@ -1,0 +1,41 @@
+{
+  "title": "更现代的 DOM 插入方法",
+  "definition": "更现代的 DOM 插入方法不仅可以插入节点，也可以直接插入文本字符串。常见方法包括：append、prepend、before、after，分别用于在父节点末尾、父节点开头、元素之前、元素之后添加内容。",
+  "key_points": [
+    "parentNode.append(nodesOrStrings) 在父节点末尾添加节点或文本字符串",
+    "parentNode.prepend(nodesOrStrings) 在父节点开头添加节点或文本字符串",
+    "element.before(nodesOrStrings) 在元素之前插入内容",
+    "element.after(nodesOrStrings) 在元素之后插入内容",
+    "这些方法都比传统插入写法更现代"
+  ],
+  "examples": [
+    "parentNode.append(nodesOrStrings)",
+    "parentNode.prepend(nodesOrStrings)",
+    "element.before(nodesOrStrings)",
+    "element.after(nodesOrStrings)"
+  ],
+  "misconceptions": [
+    "以为这些方法只能插入节点，不能插入字符串；原文说明它们也可以添加文本字符串。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "append 和 prepend 的位置区别是什么？",
+      "a": "append 加到末尾，prepend 加到开头。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "创建元素节点与文本节点"
+  ],
+  "source_pages": [
+    357,
+    360
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "482_更现代的_dom_插入方法",
+  "_chunk_pages": [
+    357,
+    360
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "title": "函数返回值与return语句",
+  "definition": "函数可以通过 `return` 语句结束当前函数执行，并将一个表达式的结果作为返回值交给调用者。返回值类型应与函数声明或定义中的返回类型一致或能够进行允许的转换。",
+  "key_points": [
+    "示例函数 `int addNumbers(int number1, int number2)` 返回两个整数之和。",
+    "函数体中使用 `return number1 + number2;` 将计算结果返回给调用者。",
+    "调用函数时可以直接使用返回值，例如 `addNumbers(5, 3)` 的结果为 $8$。"
+  ],
+  "examples": [
+    "`int addNumbers(int number1, int number2) { return number1 + number2; }`",
+    "`int result { addNumbers(5, 3) };`"
+  ],
+  "misconceptions": [
+    "函数名后面的参数列表不是返回值；返回类型写在函数名之前。",
+    "`return` 返回的是表达式的值，而不是变量名本身的固定内容。",
+    "如果非 `void` 函数的执行路径没有返回值，程序可能产生编译器诊断或未定义行为风险。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`addNumbers(5, 3)` 的返回值是什么？",
+      "a": "函数将两个整数相加，因此返回值为 $8$。"
+    },
+    {
+      "q": "`return number1 + number2;` 的作用是什么？",
+      "a": "计算 `number1 + number2`，将结果作为函数返回值，并结束当前函数执行。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "函数声明、定义与调用",
+    "C++基本运算符"
+  ],
+  "source_pages": [
+    53,
+    56
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "065_函数返回值与return语句",
+  "_chunk_pages": [
+    53,
+    56
+  ]
+}

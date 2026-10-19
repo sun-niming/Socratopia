@@ -1,0 +1,45 @@
+{
+  "title": "C++20 简化函数模板语法",
+  "definition": "C++20 允许在函数参数中使用 auto，从而省略显式的 template<typename ...> 声明，形成简化函数模板语法。每个使用 auto 的函数参数都会对应一个独立的模板类型参数；这种写法只是语法糖，编译器会将其视为相应的普通函数模板。",
+  "key_points": [
+    "普通写法可以是 template<typename T1, typename T2> decltype(auto) add(const T1& t1, const T2& t2)。",
+    "简化写法可以是 decltype(auto) add(const auto& t1, const auto& t2)。",
+    "每个 auto 参数都会成为不同的模板类型参数。",
+    "如果普通写法要求多个函数参数使用同一个模板类型参数，例如两个参数都是 const T&，就不能直接用两个 auto 替代，因为两个 auto 会产生两个不同的模板类型参数。",
+    "自动导出的模板类型没有可直接使用的名称；如果函数实现必须显式引用该类型，应继续使用普通模板语法，或使用 decltype 确定类型。"
+  ],
+  "examples": [
+    "简化函数模板：\ndecltype(auto) add(const auto& t1, const auto& t2) {\n    return t1 + t2;\n}\n\n普通写法中两个参数共享同一个 T：\ntemplate <typename T>\ndecltype(auto) add(const T& t1, const T& t2) {\n    return t1 + t2;\n}"
+  ],
+  "misconceptions": [
+    "两个 const auto& 参数并不表示它们必须具有相同类型；它们对应两个独立的模板类型参数。",
+    "简化语法不是一种新的模板语义，而是普通函数模板语法的语法糖。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "简化函数模板中，两个 auto 参数是否一定对应同一个模板类型参数？",
+      "a": "不一定。每个 auto 参数都会成为不同的模板类型参数，因此两个参数可以具有不同类型。"
+    },
+    {
+      "q": "什么时候不能用 const auto& 替代 const T&？",
+      "a": "当多个函数参数必须共享同一个模板类型参数、从而必须具有相同的类型时，不能直接用多个 auto 替代。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "函数模板",
+    "模板类型参数",
+    "auto"
+  ],
+  "source_pages": [
+    399,
+    400
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "810_c_20_简化函数模板语法",
+  "_chunk_pages": [
+    397,
+    400
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "title": "align-self属性",
+  "definition": "align-self允许单个弹性项目使用与其他项目不同的对齐方式，可覆盖align-items属性。默认值为auto，表示继承父元素的align-items属性；如果没有父元素，则等同于stretch。该属性共有6个取值，除了auto之外，其余取值都与align-items属性完全一致。",
+  "key_points": [
+    "align-self用于单独设置某个项目的对齐方式",
+    "它可以覆盖align-items对项目的影响",
+    "默认值是auto",
+    "auto表示继承父元素的align-items；若没有父元素，则等同于stretch",
+    "除auto外，其余5个取值都与align-items完全一致"
+  ],
+  "examples": [
+    "align-self: auto;",
+    "align-self取值与align-items相同的其他值"
+  ],
+  "misconceptions": [
+    "不要把align-self理解成只能和其他项目一致，它恰好可以让单个项目不同于其他项目",
+    "auto不是固定对齐方式，而是继承父元素的align-items；没有父元素时才等同于stretch"
+  ],
+  "qa_pairs": [
+    {
+      "q": "align-self的默认值是什么，它和align-items是什么关系？",
+      "a": "默认值是auto；auto表示继承父元素的align-items属性，如果没有父元素，则等同于stretch。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "弹性布局基础"
+  ],
+  "source_pages": [
+    165,
+    168
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "238_align_self属性",
+  "_chunk_pages": [
+    165,
+    168
+  ]
+}

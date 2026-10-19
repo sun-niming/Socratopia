@@ -1,0 +1,38 @@
+{
+  "title": "嵌入式引入CSS",
+  "definition": "嵌入式是指在HTML页面中直接写入CSS样式，原文说明它是在<head>标签中加入；这是把样式写在页面内部的一种方式。",
+  "key_points": [
+    "样式写在HTML页面内部",
+    "位置在<head>标签中",
+    "属于引入CSS的方法之一"
+  ],
+  "examples": [
+    "在<head>标签中加入CSS样式代码"
+  ],
+  "misconceptions": [
+    "嵌入式样式是写在外部.css文件中",
+    "嵌入式和行内式是同一种方式"
+  ],
+  "qa_pairs": [
+    {
+      "q": "嵌入式引入CSS的特点是什么？",
+      "a": "在HTML页面内部写CSS，原文说明是在<head>标签中加入。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "HTML基础",
+    "CSS概述"
+  ],
+  "source_pages": [
+    85,
+    88
+  ],
+  "needs_verification": true,
+  "verify_query": "教材《Web前端开发合集》第87-88页 嵌入式引入CSS 在HTML中直接使用 的完整语法示例是什么？是否是在<head>中使用<style>标签？",
+  "concept_id": "134_嵌入式引入css",
+  "_chunk_pages": [
+    85,
+    88
+  ]
+}

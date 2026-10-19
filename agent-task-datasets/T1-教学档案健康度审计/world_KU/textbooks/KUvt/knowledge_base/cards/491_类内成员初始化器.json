@@ -1,0 +1,41 @@
+{
+  "title": "类内成员初始化器",
+  "definition": "C++允许直接在类定义中为数据成员提供类内初始化器。这样可以为对象的数据成员指定默认初始值。教材建议总是初始化类内的数据成员，以避免对象中的数据成员处于未明确初始化的状态。",
+  "key_points": [
+    "类内初始化器写在数据成员声明处。",
+    "SpreadsheetCell示例将m_value初始化为0。",
+    "类内初始化器为对象构造时提供默认成员初值。"
+  ],
+  "examples": [
+    "class SpreadsheetCell {\nprivate:\n    double m_value{0};\n};"
+  ],
+  "misconceptions": [
+    "声明数据成员不等于为其提供可靠的业务初值；需要显式初始化或通过其他构造机制初始化。",
+    "类内初始化器初始化的是每个对象对应的数据成员，而不是创建一个所有对象共享的普通数据成员。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何在类定义中将SpreadsheetCell的m_value默认初始化为0？",
+      "a": "可以写成double m_value{0};"
+    },
+    {
+      "q": "教材对类内数据成员初始化有什么建议？",
+      "a": "建议总是初始化类内的数据成员。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "类的数据成员"
+  ],
+  "source_pages": [
+    231,
+    231
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "491_类内成员初始化器",
+  "_chunk_pages": [
+    229,
+    232
+  ]
+}

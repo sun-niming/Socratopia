@@ -1,0 +1,51 @@
+{
+  "title": "代码注释、待办事项与缺陷记录的作用",
+  "definition": "代码中的注释可以记录功能或需求编号、已知缺陷、待办事项、版本控制信息、版权声明以及未来需要实现的算法。第126页和第128页展示了这类注释，包括功能标识、bug 编号、TODO、SVN `$Id$`、版权声明以及“实现更新算法”的待办事项。",
+  "key_points": [
+    "功能或需求注释可以关联产品需求版本、功能编号等信息，例如 `Feature: PRD version 3, Feature 5.10`。",
+    "缺陷注释可以记录 bug 编号和修改原因，例如 `bug #142`；但原文中的具体提交者和日期属于代码历史信息。",
+    "TODO 注释用于标记尚未完成或需要检查的工作。",
+    "版本控制系统可能在源代码中插入标识信息，例如 SVN 的 `$Id$`。",
+    "版权注释用于声明代码的版权和保留权利。"
+  ],
+  "examples": [
+    "原文出现功能标记：`Feature: PRD version 3, Feature 5.10`。",
+    "原文出现缺陷相关注释：`Added to address bug #142`。",
+    "原文出现待办事项：`TODO: Implement updated algorithms!`。",
+    "原文出现 SVN 标识：`$Id$`，以及版权声明：`The following code is (c) copyright 2017, FruitSoft, Inc. ALL RIGHTS RESERVED`。"
+  ],
+  "misconceptions": [
+    "TODO 只是提醒尚未完成的工作，不表示该功能已经实现。",
+    "记录 bug 编号或提交者信息不能代替对代码行为的测试和验证。",
+    "版权声明、版本控制标识和功能说明属于不同类型的元信息，作用不能混为一谈。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "TODO 注释的主要作用是什么？",
+      "a": "标记尚未完成、需要补充或需要进一步检查的工作。"
+    },
+    {
+      "q": "`$Id$` 在原文中属于哪类注释信息？",
+      "a": "它是版本控制系统 SVN 相关的标识信息。"
+    },
+    {
+      "q": "`Feature: PRD version 3, Feature 5.10` 用来记录什么？",
+      "a": "用来关联代码所对应的产品需求版本和功能编号。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "源代码注释的基本作用"
+  ],
+  "source_pages": [
+    126,
+    128
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "185_代码注释_待办事项与缺陷记录的作用",
+  "_chunk_pages": [
+    125,
+    128
+  ]
+}

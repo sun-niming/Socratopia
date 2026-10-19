@@ -1,0 +1,52 @@
+{
+  "title": "通过数组引用推导数组长度",
+  "definition": "可以为 `Find` 增加一个接收数组引用的函数模板重载，把数组长度作为非类型模板参数 `N` 自动推导。这样调用者只需传入目标值和原生数组，不必单独传递数组大小；该重载再把实际查找委托给接收指针和大小的三参数版本。",
+  "key_points": [
+    "形参 `const T (&arr)[N]` 表示对包含 `N` 个 `T` 元素的数组的常量引用。",
+    "模板参数 `N` 是非类型模板参数，可从传入的原生数组类型中推导出来。",
+    "数组通过引用传递，因此不会先退化为指针，编译器能够保留并推导数组长度。",
+    "二参数重载内部调用三参数版本 `Find(value, arr, N)`，复用实际查找逻辑。",
+    "该调用形式适用于长度在编译期属于数组类型一部分的原生数组。"
+  ],
+  "examples": [
+    "template <typename T, size_t N>\nsize_t Find(const T& value, const T (&arr)[N])\n{\n    return Find(value, arr, N);\n}",
+    "int myInt{3};\nint intArray[]{1, 2, 3, 4};\nsize_t res{Find(myInt, intArray)};\n\n// 编译器从 intArray 推导出 T=int、N=4。"
+  ],
+  "misconceptions": [
+    "误以为普通指针也携带数组长度；指针本身不包含原始数组的元素个数。",
+    "误以为 `N` 需要调用者手工填写；它可以从数组引用实参自动推导。",
+    "忽略数组引用形参中的括号，把 `const T (&arr)[N]` 错写成含义不同的声明。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么 `Find(myInt, intArray)` 不需要显式传入数组长度？",
+      "a": "因为形参是 `const T (&arr)[N]`，编译器可从原生数组的类型推导非类型模板参数 `N`。"
+    },
+    {
+      "q": "数组引用版本如何避免重复实现查找循环？",
+      "a": "它调用已有的三参数版本：`return Find(value, arr, N);`。"
+    },
+    {
+      "q": "为什么必须通过数组引用而不是普通指针来推导 `N`？",
+      "a": "数组引用保留完整数组类型及长度，而数组转换成普通指针后长度信息会丢失。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "函数模板",
+    "非类型模板参数",
+    "数组引用",
+    "数组到指针退化"
+  ],
+  "source_pages": [
+    393,
+    396
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "509_通过数组引用推导数组长度",
+  "_chunk_pages": [
+    393,
+    396
+  ]
+}

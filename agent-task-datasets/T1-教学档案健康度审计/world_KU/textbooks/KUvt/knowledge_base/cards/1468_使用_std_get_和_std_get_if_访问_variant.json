@@ -1,0 +1,51 @@
+{
+  "title": "使用 std::get 和 std::get_if 访问 variant",
+  "definition": "std::get<index>(v) 或 std::get<T>(v) 用于从 variant 中获取当前保存的值，其中 index 是候选类型索引，T 是候选类型。若索引或类型与当前活动值不匹配，std::get 会抛出 std::bad_variant_access。std::get_if<index>(&v) 或 std::get_if<T>(&v) 接收指向 variant 的指针；匹配时返回指向值的指针，不匹配时返回 nullptr，因此不会因类型不匹配而抛出该异常。",
+  "key_points": [
+    "使用类型访问时，T 必须是 variant 的候选类型，并且当前活动类型必须正是 T。",
+    "使用索引访问时，index 必须对应当前活动类型，否则 std::get 抛出 std::bad_variant_access。",
+    "std::get_if 返回指针，可通过判断指针是否为 nullptr 来安全访问。"
+  ],
+  "examples": [
+    "variant<int, string, float> v; v = \"An std::string.\"s;",
+    "string s = get<string>(v); 可成功获取字符串。",
+    "get<0>(v) 试图按索引 0 获取 int，但当前值是 string，因此会抛出 bad_variant_access。",
+    "string* p = get_if<string>(&v); 若当前值是 string，则 p 指向该字符串；否则 p == nullptr。",
+    "可以写成：cout << (p ? *p : \"null\") << endl;"
+  ],
+  "misconceptions": [
+    "std::get<T> 会自动把当前值转换成 T；实际上类型不匹配时会抛出 std::bad_variant_access。",
+    "std::get_if 返回的是值本身；实际上它返回指向值的指针，失败时返回 nullptr。",
+    "std::get_if 不接收 variant 对象引用，而是接收指向 variant 的指针。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "当前 v 保存 string 时，get<string>(v) 是否能获取值？",
+      "a": "能，因为请求类型与当前活动类型都是 string。"
+    },
+    {
+      "q": "当前 v 保存 string 时，get<0>(v) 会发生什么？",
+      "a": "如果索引 0 对应 int，则类型不匹配，std::get 会抛出 std::bad_variant_access。"
+    },
+    {
+      "q": "如何避免因访问错误类型而抛出异常？",
+      "a": "使用 std::get_if<T>(&v) 或 std::get_if<index>(&v)，并检查返回指针是否为 nullptr。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "std::variant 的含义与类型集合",
+    "查询 variant 的当前类型"
+  ],
+  "source_pages": [
+    707,
+    707
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1468_使用_std_get_和_std_get_if_访问_variant",
+  "_chunk_pages": [
+    705,
+    708
+  ]
+}

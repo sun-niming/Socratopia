@@ -1,0 +1,41 @@
+{
+  "title": "C++中的宽字符类型 wchar_t",
+  "definition": "`wchar_t` 是 C++提供的宽字符类型，教材在 Unicode 相关内容中以 `wchar_t` 和宽字符串指针为例。函数声明 `wchar_t* toCaps(const wchar_t* text);` 表示函数接收指向常量宽字符序列的指针，并返回指向宽字符的指针。",
+  "key_points": [
+    "`const wchar_t*` 表示指向不可通过该指针修改的宽字符序列。",
+    "返回类型 `wchar_t*` 表示函数返回宽字符指针。",
+    "原文示例调用 `toCaps(myString + 7);`，说明可以把宽字符串中的某个偏移位置传给函数。"
+  ],
+  "examples": [
+    "```cpp\nwchar_t* toCaps(const wchar_t* text);\ntoCaps(myString + 7);\n```"
+  ],
+  "misconceptions": [
+    "`wchar_t` 不等同于普通的 `char`；二者是不同的字符类型。",
+    "`const wchar_t*` 限制的是通过该指针修改字符序列，并不表示指针本身不能改变。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`const wchar_t* text` 表示什么？",
+      "a": "表示 `text` 指向一个宽字符序列，并且不能通过 `text` 修改该序列中的字符。"
+    },
+    {
+      "q": "`toCaps(myString + 7)` 中的 `myString + 7` 表示什么？",
+      "a": "表示从 `myString` 所指宽字符序列的起始位置向后偏移 7 个宽字符的位置。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++指针与字符串基础"
+  ],
+  "source_pages": [
+    211,
+    212
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 wchar_t Unicode toCaps(const wchar_t*) myString + 7 教材第7.3.1节",
+  "concept_id": "283_c_中的宽字符类型_wchar_t",
+  "_chunk_pages": [
+    209,
+    212
+  ]
+}

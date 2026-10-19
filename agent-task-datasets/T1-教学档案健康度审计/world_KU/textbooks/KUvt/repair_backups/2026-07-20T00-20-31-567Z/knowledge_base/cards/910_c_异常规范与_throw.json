@@ -1,0 +1,45 @@
+{
+  "title": "C++异常规范与 throw()",
+  "definition": "旧版 C++允许使用动态异常规范（throw list，也称 exception specification）指定函数可以抛出的异常类型。原文指出，C++17以后动态异常规范被正式取消，throw() 与 noexcept 等效，而 C++20 对 throw() 的支持表述存在版本或教材准确性问题，因此使用时应以对应标准版本的规范为准。",
+  "key_points": [
+    "动态异常规范与 noexcept 是不同历史机制：动态异常规范用于列出允许抛出的异常类型，noexcept 用于表达不抛异常保证。",
+    "原文明确表示不再讨论旧式异常规范。",
+    "关于 C++20 是否完全不支持 throw()，原文表述与常见标准资料可能存在冲突，不能未经核实地直接作为标准事实。"
+  ],
+  "examples": [
+    "旧式形式可能写成 throw(SomeException)，而不抛异常的旧式 throw() 在现代 C++中通常被视为与 noexcept 等效的形式；具体可用性应按标准版本核实。"
+  ],
+  "misconceptions": [
+    "不能把旧式动态异常规范当作现代 C++推荐的异常声明方式。",
+    "不能简单断言所有形式的 throw() 在 C++20 中都完全不可用；该点需要结合具体标准版本和编译器核实。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "旧式异常规范的作用是什么？",
+      "a": "用于指定函数或方法可以抛出的异常类型。"
+    },
+    {
+      "q": "现代 C++中通常使用什么替代旧式动态异常规范？",
+      "a": "通常使用 noexcept 表达函数是否保证不抛异常。"
+    },
+    {
+      "q": "原文关于 C++20 与 throw() 的表述是否需要核实？",
+      "a": "需要。原文同时提到 throw() 与 noexcept 等效，又称 C++20 完全不支持 throw()，两种表述可能存在版本或表述冲突。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "noexcept说明符"
+  ],
+  "source_pages": [
+    447,
+    447
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 throw() 是否仍然支持 throw() 等价 noexcept 动态异常规范 C++标准",
+  "concept_id": "910_c_异常规范与_throw",
+  "_chunk_pages": [
+    445,
+    448
+  ]
+}

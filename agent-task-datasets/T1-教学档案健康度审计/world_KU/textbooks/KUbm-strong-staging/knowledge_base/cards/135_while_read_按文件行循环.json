@@ -1,0 +1,38 @@
+{
+  "title": "while read 按文件行循环",
+  "definition": "Shell 中可以使用“while read vars; do command_list; done<file”这种结构按行遍历文件。它会从指定文件中逐行读取内容，每读取一行，就把该行内容作为 read 的输入赋给变量，然后执行一次循环体。",
+  "key_points": [
+    "基本形式为：while read vars do command_list done<file",
+    "数据来源是重定向输入的 file",
+    "循环按“每读一行，执行一次循环体”的方式进行"
+  ],
+  "examples": [
+    "while read vars\ndo\ncommand_list\ndone<file"
+  ],
+  "misconceptions": [
+    "不要把它理解为一次性读取整个文件；该结构是逐行读取并逐次执行循环体。",
+    "不要忽略“done<file”这一输入重定向；没有文件输入时，就不是题述这种按文件行遍历的写法。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "“while read vars ... done<file”这一结构的作用是什么？",
+      "a": "按行遍历 file 中的内容，每读一行就把该行作为 read 的输入赋给变量，并执行一次循环体。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "Shell 循环结构基础",
+    "read 命令基础"
+  ],
+  "source_pages": [
+    81,
+    84
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "135_while_read_按文件行循环",
+  "_chunk_pages": [
+    81,
+    84
+  ]
+}

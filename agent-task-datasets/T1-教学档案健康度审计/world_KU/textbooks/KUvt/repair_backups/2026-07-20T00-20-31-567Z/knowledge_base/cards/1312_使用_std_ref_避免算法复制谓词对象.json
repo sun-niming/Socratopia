@@ -1,0 +1,42 @@
+{
+  "title": "使用 std::ref 避免算法复制谓词对象",
+  "definition": "标准库算法通常会按值接收谓词对象，因此算法内部可能使用谓词对象的副本。如果谓词对象保存了会变化的状态，并且希望算法直接使用原对象，应将谓词包装为 std::ref(predicate)，使算法通过引用访问该对象。",
+  "key_points": [
+    "直接将状态型谓词传给 find_if() 时，算法可能复制该谓词，因此谓词对象内部的状态变化不会反映到外部原对象。",
+    "使用 ref(isPerfectScore) 后，find_if() 直接操作原来的 isPerfectScore 对象，不再复制它。",
+    "原文示例中，直接传递谓词时 find_if() 的输出为 1、2、3，随后显式调用另一个实例又从 1 开始；改用 ref(isPerfectScore) 后输出为 1、2、3、4。"
+  ],
+  "examples": [
+    "auto it { find_if(cbegin(myVector), cend(myVector), ref(isPerfectScore)) };"
+  ],
+  "misconceptions": [
+    "认为把谓词传给算法后，算法一定会修改并保留外部谓词对象的状态。",
+    "认为 std::ref 是复制对象；实际上它用于包装引用，使函数对象按引用方式传递。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么在调用 find_if() 时使用 ref(isPerfectScore)？",
+      "a": "因为 isPerfectScore 是有内部状态的谓词对象，使用 ref() 可以让 find_if() 操作原对象而不是它的副本，从而保留状态变化。"
+    },
+    {
+      "q": "原文中直接传递 isPerfectScore 与传递 ref(isPerfectScore) 的输出有什么区别？",
+      "a": "直接传递时输出为 1、2、3，显式调用另一个实例又从 1 开始；使用 ref(isPerfectScore) 后输出为 1、2、3、4，说明没有复制 isPerfectScore。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "函数对象与谓词",
+    "迭代器范围"
+  ],
+  "source_pages": [
+    633,
+    633
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1312_使用_std_ref_避免算法复制谓词对象",
+  "_chunk_pages": [
+    633,
+    636
+  ]
+}

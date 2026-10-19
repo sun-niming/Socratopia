@@ -26,22 +26,25 @@ check("catalog is structurally valid", () => {
   assert.deepStrictEqual(lib.validateCatalog(catalog), []);
 });
 
-check("exactly 23 emotion-capable voices, 刻律德菈 absent", () => {
+check("exactly 31 emotion-capable voices, 刻律德菈/绘梨衣 只有显示名", () => {
   const ids = Object.keys(catalog.voices);
-  assert.strictEqual(ids.length, 23);
+  assert.strictEqual(ids.length, 31);
+  // voice keys stay latin; 刻律德菈/托帕/队长/绘梨衣 only appear as display names + reference paths
   assert(!ids.includes("刻律德菈"));
-  assert(!JSON.stringify(catalog).includes("刻律德菈"));
+  assert(!ids.includes("绘梨衣"));
+  assert(JSON.stringify(catalog).includes("刻律德菈"));
+  assert(JSON.stringify(catalog).includes("绘梨衣"));
 });
 
-check("13 v4 and 10 v2ProPlus voices", () => {
+check("14 v4 and 17 v2ProPlus voices", () => {
   const versions = Object.values(catalog.voices).map((v) => v.version);
-  assert.strictEqual(versions.filter((v) => v === "v4").length, 13);
-  assert.strictEqual(versions.filter((v) => v === "v2ProPlus").length, 10);
+  assert.strictEqual(versions.filter((v) => v === "v4").length, 14);
+  assert.strictEqual(versions.filter((v) => v === "v2ProPlus").length, 17);
 });
 
-check("62 candidate references after dropping 厌恶/其他", () => {
+check("83 candidate references after dropping 厌恶/其他", () => {
   const all = Object.values(catalog.voices).flatMap((v) => Object.keys(v.references));
-  assert.strictEqual(all.length, 62);
+  assert.strictEqual(all.length, 83);
   for (const banned of ["disgust", "disgusted", "other"]) assert(!all.includes(banned));
 });
 
@@ -109,12 +112,12 @@ check("no voice exposes a forbidden reference id", () => {
 });
 
 // --- 4. playful_angry gating ----------------------------------------------------------
-check("the 5 生气 clips are the only playful_angry candidates and none is enabled", () => {
+check("the 8 生气 clips are the only playful_angry candidates and none is enabled", () => {
   const holders = Object.entries(catalog.voices)
     .filter(([, v]) => v.references.playful_angry)
     .map(([id]) => id)
     .sort();
-  assert.deepStrictEqual(holders, ["cipher", "fu_xuan", "huohuo", "hyacine", "robin"]);
+  assert.deepStrictEqual(holders, ["cerydra", "cipher", "fu_xuan", "huiliyi", "huohuo", "hyacine", "robin", "topaz"]);
   for (const id of holders) {
     const ref = catalog.voices[id].references.playful_angry;
     assert.strictEqual(ref.enabled, false, id + " must stay disabled until auditioned");
@@ -197,7 +200,7 @@ check("cache key separates emotions, voices and versions", () => {
 // --- 8. UI projection -----------------------------------------------------------------
 check("voice picker entries never advertise a blocked emotion", () => {
   const entries = lib.listVoices(catalog);
-  assert.strictEqual(entries.length, 23);
+  assert.strictEqual(entries.length, 31);
   for (const entry of entries) {
     assert(!entry.emotionIds.includes("playful_angry"), entry.key + " advertises 佯怒 before audition");
     assert(!entry.emotionIds.includes("disgust"));

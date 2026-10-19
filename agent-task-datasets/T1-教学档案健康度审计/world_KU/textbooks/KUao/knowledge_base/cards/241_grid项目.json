@@ -1,0 +1,36 @@
+{
+  "title": "Grid项目",
+  "definition": "Grid 容器的直接子元素称为 Grid 项目（Grid Item）。",
+  "key_points": [
+    "只统计 Grid 容器的直接子元素",
+    "Grid 项目参与网格布局",
+    "更深层的后代元素不一定是 Grid 项目"
+  ],
+  "examples": [
+    "<div class=\"container\">\n  <div>01</div>\n  <div>02</div>\n  <div>03</div>\n</div>"
+  ],
+  "misconceptions": [
+    "容器内部所有后代元素都是 Grid 项目；实际上只有直接子元素才是。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "Grid 项目指什么？",
+      "a": "Grid 容器的直接子元素。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "Grid容器"
+  ],
+  "source_pages": [
+    169,
+    172
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "241_grid项目",
+  "_chunk_pages": [
+    169,
+    172
+  ]
+}

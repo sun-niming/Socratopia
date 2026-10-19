@@ -1,0 +1,50 @@
+{
+  "title": "类型 trait 的作用与类别",
+  "definition": "类型 trait 是一组能够在编译时根据类型做出判断、查询或转换的 C++标准库组件。它们可用于判断类型是否为整型、是否为指针、是否从另一个类型派生、是否可转换或可调用，以及执行移除或添加 const、引用、指针等类型变换。与类型 trait 相关的功能定义在 <type_traits> 中。",
+  "key_points": [
+    "类型类别 trait 的例子包括 is_reference、is_object、is_scalar、is_void、is_integral、is_floating_point、is_pointer 和 is_function。",
+    "类型关系 trait 的例子包括 is_same、is_base_of、is_convertible、is_invocable 和 is_nothrow_invocable。",
+    "类型属性 trait 的例子包括 is_const、is_polymorphic、is_unsigned、is_constructible、is_copy_constructible、is_move_constructible 和 is_assignable。",
+    "类型变换 trait 包括 remove_const、add_const、make_signed、make_unsigned、remove_extent、remove_all_extents、remove_reference、add_lvalue_reference、add_rvalue_reference、remove_pointer 和 add_pointer。",
+    "其他类别还包括逻辑运算符 trait、属性查询 trait 和常量评估上下文相关 trait。"
+  ],
+  "examples": [
+    "判断类型是否为整型：\n\n```cpp\nif (is_integral<int>::value) {\n    cout << \"int is integral\" << endl;\n} else {\n    cout << \"int is not integral\" << endl;\n}\n```",
+    "判断 string 是否为类类型：\n\n```cpp\nif (is_class<string>::value) {\n    cout << \"string is a class\" << endl;\n} else {\n    cout << \"string is not a class\" << endl;\n}\n```"
+  ],
+  "misconceptions": [
+    "类型 trait 不是只用于运行时检查；其判断和许多变换发生在编译期。",
+    "不同 trait 的用途不同：有些用于判断，有些用于查询属性，有些用于生成变换后的类型。",
+    "<type_traits> 中的 trait 不需要用户为常见类型手动编写特例化。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "类型 trait 主要解决什么问题？",
+      "a": "它们允许程序在编译时根据类型进行判断、选择或类型变换。"
+    },
+    {
+      "q": "类型 trait 相关功能定义在哪个头文件中？",
+      "a": "定义在 <type_traits> 中。"
+    },
+    {
+      "q": "is_integral 和 is_pointer 分别用于判断什么？",
+      "a": "is_integral 用于判断类型是否为整型，is_pointer 用于判断类型是否为指针类型。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++模板基础",
+    "编译期常量"
+  ],
+  "source_pages": [
+    779,
+    780
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1603_类型_trait_的作用与类别",
+  "_chunk_pages": [
+    777,
+    780
+  ]
+}

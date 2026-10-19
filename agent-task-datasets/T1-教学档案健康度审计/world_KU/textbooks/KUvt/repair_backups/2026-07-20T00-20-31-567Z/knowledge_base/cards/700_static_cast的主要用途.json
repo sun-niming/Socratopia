@@ -1,0 +1,50 @@
+{
+  "title": "static_cast的主要用途",
+  "definition": "`static_cast`用于执行语言规则直接支持的显式转换，也可以利用用户定义的构造函数或转换例程进行转换，并可在继承层次结构中执行基类指针或引用到派生类指针或引用的向下转换。它不执行运行时类型检查。",
+  "key_points": [
+    "在算术表达式中，`static_cast`可以显式把 `int` 转换为 `double`，从而避免整数除法。",
+    "如果存在合适的用户定义构造函数或转换例程，`static_cast`可以执行相应的用户定义类型转换。",
+    "在继承层次结构中，可以使用 `static_cast<Derived*>(basePointer)` 或 `static_cast<Derived&>(baseReference)` 进行向下转换。",
+    "`static_cast`的向下转换不检查对象的运行时真实类型，因此只有在确实知道对象是目标派生类型时才可安全使用。"
+  ],
+  "examples": [
+    "避免整数除法：`double result { static_cast<double>(i) / j };`。将一个操作数转换为 `double` 后，表达式执行浮点数除法。",
+    "向下转换指针：`Base* b { nullptr }; Derived* d { static_cast<Derived*>(b) };`。",
+    "向下转换引用：`Derived& dr { static_cast<Derived&>(br) };`。"
+  ],
+  "misconceptions": [
+    "误以为 `static_cast` 的向下转换会像 `dynamic_cast` 一样进行运行时安全检查。",
+    "误以为任何两个对象类型都可以通过 `static_cast` 转换；转换必须符合 C++ 类型规则，或存在可用的用户定义转换。",
+    "误以为 `static_cast<double>(i) / j` 只是在改变显示格式；它实际会影响运算类型，使除法按浮点数规则执行。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么示例中只需把 `i` 转换为 `double`？",
+      "a": "因为两个操作数中只要有一个是 `double`，除法表达式就会按浮点数规则计算，所以 `static_cast<double>(i) / j` 足以避免整数除法。"
+    },
+    {
+      "q": "`static_cast`从基类指针向下转换时是否执行运行时类型检查？",
+      "a": "不执行。即使对象运行时实际不是目标派生类，转换也可能被编译并执行，因此使用不当会导致未定义行为或严重内存问题。"
+    },
+    {
+      "q": "`static_cast`能否把不相关类型的指针任意转换为另一种指针？",
+      "a": "不能。原文指出，不能使用 `static_cast` 将一种类型的指针转换为另一种不相关类型的指针。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "继承与基类指针",
+    "显式类型转换"
+  ],
+  "source_pages": [
+    347,
+    348
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "700_static_cast的主要用途",
+  "_chunk_pages": [
+    345,
+    348
+  ]
+}

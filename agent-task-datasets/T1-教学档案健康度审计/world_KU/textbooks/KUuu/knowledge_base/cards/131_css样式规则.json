@@ -1,0 +1,37 @@
+{
+  "title": "CSS样式规则",
+  "definition": "CSS样式表由一系列样式规则组成，浏览器会把这些规则应用到相应的元素上。每条规则通常由选择器和声明两部分组成。",
+  "key_points": [
+    "样式表由多条样式规则组成",
+    "浏览器将规则应用到相应元素",
+    "每条规则由选择器和声明组成"
+  ],
+  "examples": [
+    "selector { 属性:值; }"
+  ],
+  "misconceptions": [
+    "一条CSS规则只有声明，没有选择器",
+    "样式表不是规则的集合，而是一段单独的代码"
+  ],
+  "qa_pairs": [
+    {
+      "q": "CSS样式规则由哪两部分组成？",
+      "a": "选择器和声明。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "CSS概述"
+  ],
+  "source_pages": [
+    85,
+    88
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "131_css样式规则",
+  "_chunk_pages": [
+    85,
+    88
+  ]
+}

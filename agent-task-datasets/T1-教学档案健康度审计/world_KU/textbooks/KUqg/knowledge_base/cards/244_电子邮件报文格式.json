@@ -1,0 +1,44 @@
+{
+  "title": "电子邮件报文格式",
+  "definition": "电子邮件报文由报文首部和报文体组成，二者之间用空行（回车换行）分隔。RFC 5322定义了邮件首部行的格式及其语义。首部行采用可读文本形式，通常由关键词、冒号和值组成；每个首部必须包含From:和To:首部行，也可以包含Subject:及其他可选首部行。",
+  "key_points": [
+    "邮件首部位于报文体之前，首部与报文体之间有一个空白行。",
+    "首部行由关键词、冒号和值组成，例如`From:`、`To:`和`Subject:`。",
+    "From:和To:是必需的首部行；Subject:是可选首部行。",
+    "邮件首部行属于邮件报文自身，不是SMTP握手协议中的SMTP命令。",
+    "原文示例的结构可写为：$$\\begin{array}{l}\\text{From: alice@crepes.fr}\\\\\\text{To: bob@hamburger.edu}\\\\\\text{Subject: Searching for the meaning of life.}\\\\[2pt]\\text{空行}\\\\\\text{报文体}\\end{array}$$"
+  ],
+  "examples": [
+    "一个典型邮件报文可表示为：`From: alice@crepes.fr`、`To: bob@hamburger.edu`、`Subject: Searching for the meaning of life.`，随后是空行，再后面是报文体。",
+    "教材建议可以使用命令`telnet serverName 25`连接邮件服务器，并发送包含首部行（包括Subject:）的报文。"
+  ],
+  "misconceptions": [
+    "From:和To:首部行不是SMTP的from和to命令；前者是邮件内容的一部分，后者属于SMTP握手过程。",
+    "首部和报文体不是连续无分隔地排列，中间必须有空行。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "电子邮件报文由哪两部分组成？它们如何分隔？",
+      "a": "由报文首部和报文体组成，二者之间用空行（回车换行）分隔。"
+    },
+    {
+      "q": "哪些邮件首部行是必须存在的？",
+      "a": "From:和To:首部行必须存在；Subject:及其他首部行可以是可选的。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "电子邮件与SMTP的基本概念"
+  ],
+  "source_pages": [
+    97,
+    100
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "244_电子邮件报文格式",
+  "_chunk_pages": [
+    97,
+    100
+  ]
+}

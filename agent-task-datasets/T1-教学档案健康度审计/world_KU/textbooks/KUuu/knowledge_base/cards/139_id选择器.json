@@ -1,0 +1,36 @@
+{
+  "title": "id选择器",
+  "definition": "id选择器通过元素的id属性值来选择元素，写法是在id名前加井号（#）。",
+  "key_points": [
+    "写法形式为 #id值",
+    "用于选择具有指定id的元素"
+  ],
+  "examples": [
+    "<p id=\"intro\">测试文本</p>",
+    "#intro {font-weight:bold;}"
+  ],
+  "misconceptions": [
+    "id选择器不是按class选择，也不是按标签名选择。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "id选择器的写法是什么？",
+      "a": "在id值前加#，如 #intro。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "CSS选择器"
+  ],
+  "source_pages": [
+    89,
+    92
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "139_id选择器",
+  "_chunk_pages": [
+    89,
+    92
+  ]
+}

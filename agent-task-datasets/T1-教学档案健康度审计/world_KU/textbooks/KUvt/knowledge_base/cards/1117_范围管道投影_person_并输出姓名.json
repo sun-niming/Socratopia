@@ -1,0 +1,49 @@
+{
+  "title": "范围管道投影 Person 并输出姓名",
+  "definition": "可以进一步处理包含 Person 和年龄的 pair 向量：从每个 pair 中提取 Person，只保留前 4 个 Person，然后使用 myCopyO 算法将这 4 个人的名字逐行输出到标准输出。还可以构建类似管道，将经过筛选的 Person 投影为姓氏，再用 myCopyO 逐行输出这些姓氏。",
+  "key_points": [
+    "管道需要从 pair 中提取 Person，而不是提取年龄。",
+    "只保留前 4 个 Person。",
+    "myCopyO 用于把姓名或姓氏输出到标准输出，每行一个。",
+    "姓氏输出管道应作用于经过同样筛选的 Person，并将 Person 投影为其姓氏。"
+  ],
+  "examples": [
+    "处理流程可表示为：$$\\text{pair 向量}\\rightarrow\\text{提取 Person}\\rightarrow\\text{取前 4 个}\\rightarrow\\text{投影为名字}\\rightarrow\\text{myCopyO 输出}$$",
+    "姓氏处理流程可表示为：$$\\text{pair 向量}\\rightarrow\\text{提取 Person}\\rightarrow\\text{过滤}\\rightarrow\\text{投影为姓氏}\\rightarrow\\text{myCopyO 输出}$$"
+  ],
+  "misconceptions": [
+    "“前 4 个”表示限制输出数量，不是只保留年龄小于 4 岁的人。",
+    "输出名字和输出姓氏是两个类似但不同的管道。",
+    "原文要求每行显示一个名称或姓氏，不能将所有结果强制输出在同一行。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "练习 17-3 中从 pair 向量提取 Person 后需要保留多少个？",
+      "a": "只保留前 4 个 Person。"
+    },
+    {
+      "q": "练习 17-3 要求如何输出这 4 个人的名字？",
+      "a": "使用 myCopyO 算法将名字输出到标准输出，每行显示一个名称。"
+    },
+    {
+      "q": "如何生成姓氏输出？",
+      "a": "构建类似管道，将筛选后的 Person 投影为姓氏，再使用 myCopyO 逐行输出。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "范围管道处理 pair 向量中的人员年龄",
+    "范围库中的投影与截取"
+  ],
+  "source_pages": [
+    545,
+    545
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 ranges take first 4 Person projection last name myCopyO exercise 17-3 Marc Gregoire",
+  "concept_id": "1117_范围管道投影_person_并输出姓名",
+  "_chunk_pages": [
+    545,
+    548
+  ]
+}

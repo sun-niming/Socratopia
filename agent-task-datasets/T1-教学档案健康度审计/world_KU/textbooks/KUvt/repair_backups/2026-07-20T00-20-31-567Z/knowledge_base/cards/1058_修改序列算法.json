@@ -1,0 +1,55 @@
+{
+  "title": "修改序列算法",
+  "definition": "修改序列算法会改变序列中的部分或全部元素。有些算法直接在原位置修改或移动元素，使原始序列发生变化；另一些算法把结果复制到另一个序列，因此原始序列可以保持不变。教材称表中这些修改算法的最坏复杂度为线性复杂度。",
+  "key_points": [
+    "复制与移动：`copy`、`copy_backward`、`copy_if`、`copy_n`、`move`、`move_backward`。",
+    "填充与生成：`fill`、`fill_n`、`generate`、`generate_n`。",
+    "删除与替换：`remove`、`remove_if`、`remove_copy`、`remove_copy_if`、`replace`、`replace_if`、`replace_copy`、`replace_copy_if`。",
+    "重排与变换：`reverse`、`reverse_copy`、`rotate`、`rotate_copy`、`shuffle`、`transform`、`unique`、`unique_copy`。",
+    "`remove` 类算法可就地删除匹配元素，或通过 `remove_copy` 类算法把结果复制到其他序列。",
+    "`move` 和 `move_backward` 使用移动语义，以高效移动元素。"
+  ],
+  "examples": [
+    "`copy_if` 将谓词返回 true 的元素复制到目标序列，源序列不因复制而改变。",
+    "`reverse` 在原序列中反转元素顺序，`reverse_copy` 则把反转结果复制到另一个序列。",
+    "`unique` 删除序列中连续出现的重复元素；它不是删除所有相同值的非连续出现。",
+    "`transform` 对序列中的每个元素调用一元函数，或对两个序列的对应元素调用二元函数；当源序列和目标序列相同时，可进行原位置转换。"
+  ],
+  "misconceptions": [
+    "带有 `copy` 的算法通常将结果写入其他序列，不应误认为一定会修改源序列。",
+    "`unique` 处理的是连续重复元素，不是任意位置的所有重复元素。",
+    "`remove` 类算法的“删除”应结合目标和算法形式理解；复制形式与原位置形式的行为不同。",
+    "`random_shuffle` 在 C++14 之后已不赞成使用，并在 C++17 中被删除；应使用 `shuffle`。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "修改序列算法有哪两种基本作用方式？",
+      "a": "一种是在原位置修改元素，使原序列发生变化；另一种是把处理结果复制到另一个序列，从而可以保持原序列不变。"
+    },
+    {
+      "q": "`unique` 删除什么样的重复元素？",
+      "a": "它删除序列中连续出现的重复元素。"
+    },
+    {
+      "q": "`random_shuffle` 与 `shuffle` 的关系是什么？",
+      "a": "`random_shuffle` 在 C++14 之后已不赞成使用，并在 C++17 中被删除；应使用 `shuffle`。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "泛型算法",
+    "移动语义",
+    "谓词"
+  ],
+  "source_pages": [
+    515,
+    515
+  ],
+  "needs_verification": true,
+  "verify_query": "C++17 random_shuffle removed C++14 deprecated shuffle unique consecutive duplicates remove algorithm standard",
+  "concept_id": "1058_修改序列算法",
+  "_chunk_pages": [
+    513,
+    516
+  ]
+}

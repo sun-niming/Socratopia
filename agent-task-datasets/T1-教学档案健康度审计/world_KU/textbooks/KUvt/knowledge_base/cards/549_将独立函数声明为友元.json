@@ -1,0 +1,48 @@
+{
+  "title": "将独立函数声明为友元",
+  "definition": "独立的非成员函数也可以成为类的友元。类内的 friend 声明同时用于声明该函数的原型；函数定义写在类外，并且定义时不再重复使用 friend 关键字。该函数虽然不是类的成员函数，却可以直接访问该类的 private 和 protected 成员。",
+  "key_points": [
+    "独立友元函数适合执行不属于类核心职责、但又需要读取类内部数据的操作。",
+    "原型可以在类内写成：`friend void printFoo(const Foo&);`。",
+    "类外定义时写普通函数定义，例如：`void printFoo(const Foo& foo) { /* 可访问 Foo 的 private/protected 成员 */ }`。",
+    "函数定义中不需要再次写 `friend`。"
+  ],
+  "examples": [
+    "可以把打印 Foo 对象全部数据的功能放在 Foo 类外部，同时在 Foo 类中声明：`friend void printFoo(const Foo&);`。然后在类外定义 `void printFoo(const Foo& foo) { ... }`。"
+  ],
+  "misconceptions": [
+    "友元函数不是 Foo 的成员函数，因此不能用 `Foo::printFoo` 的形式定义，也没有隐含的 `this` 指针。",
+    "类外定义友元函数时不应再次把 `friend` 当作函数定义的一部分。",
+    "友元函数虽然不是成员函数，但可以访问声明它的类的非公有成员。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "独立函数如何成为 Foo 的友元？",
+      "a": "在 Foo 类定义中写出其友元声明，例如 `friend void printFoo(const Foo&);`，再在类外按普通函数定义它。"
+    },
+    {
+      "q": "类外定义 `printFoo` 时还需要写 `friend` 吗？",
+      "a": "不需要；`friend` 只用于类内的友元声明。"
+    },
+    {
+      "q": "为什么可以把打印功能写成 Foo 外部的友元函数？",
+      "a": "因为打印不是 Foo 类的核心功能，但该函数仍需要访问 Foo 的内部数据。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "友元的访问权限与适用对象",
+    "非成员函数"
+  ],
+  "source_pages": [
+    259,
+    259
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "549_将独立函数声明为友元",
+  "_chunk_pages": [
+    257,
+    260
+  ]
+}

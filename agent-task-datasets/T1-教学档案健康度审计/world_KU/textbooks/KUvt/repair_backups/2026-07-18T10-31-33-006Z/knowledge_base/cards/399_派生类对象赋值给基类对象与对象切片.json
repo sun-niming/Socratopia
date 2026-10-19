@@ -1,0 +1,47 @@
+{
+  "title": "派生类对象赋值给基类对象与对象切片",
+  "definition": "将派生类对象按值赋给基类对象时，只把其中的基类子对象部分复制到新的基类对象中，派生类新增的数据和行为不会保留；这种现象称为对象切片（object slicing）。例如 `Base assignedObject{myDerived};` 会把 `myDerived` 的基类部分赋给 `assignedObject`。",
+  "key_points": [
+    "代码 `Base assignedObject{myDerived};` 创建的是一个独立的 `Base` 对象。",
+    "赋值或初始化后，`assignedObject` 不再保留 `Derived` 对象的派生类部分。",
+    "这种按值转换会导致对象切片；之后通过 `assignedObject` 调用虚函数时，只能表现为基类对象的行为。",
+    "对象切片与通过基类引用或指针指向派生类对象不同；引用或指针可以保留对原派生类对象的多态访问。"
+  ],
+  "examples": [
+    "`Derived myDerived;`",
+    "`Base assignedObject{myDerived}; // Assigns a Derived to a Base.`",
+    "`assignedObject.someMethod();`：`assignedObject` 是基类对象，因此不会再作为原来的 `Derived` 对象进行动态分派。"
+  ],
+  "misconceptions": [
+    "把派生类对象赋给基类对象并不是让基类对象继续代表原派生类对象，而是创建或得到一个只含基类部分的对象。",
+    "虚函数机制不能阻止按值赋值造成的对象切片。",
+    "基类引用绑定到派生类对象通常不会产生对象切片，但按值构造基类对象会产生对象切片。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`Base assignedObject{myDerived};` 会发生什么？",
+      "a": "会用 `myDerived` 的基类部分初始化一个新的 `Base` 对象，派生类部分被切掉，这称为对象切片。"
+    },
+    {
+      "q": "对象切片后，`assignedObject` 还保持 `Derived` 的完整动态类型吗？",
+      "a": "不保持；它已经是独立的 `Base` 对象，只包含基类部分。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++继承",
+    "虚函数与动态分派",
+    "对象按值初始化"
+  ],
+  "source_pages": [
+    305,
+    308
+  ],
+  "needs_verification": true,
+  "verify_query": "《C++20高级编程》第5版 第308页 Base assignedObject myDerived slicing",
+  "concept_id": "399_派生类对象赋值给基类对象与对象切片",
+  "_chunk_pages": [
+    305,
+    308
+  ]
+}

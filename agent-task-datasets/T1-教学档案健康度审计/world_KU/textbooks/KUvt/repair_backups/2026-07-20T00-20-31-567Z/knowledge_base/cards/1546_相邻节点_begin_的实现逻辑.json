@@ -1,0 +1,46 @@
+{
+  "title": "相邻节点 begin 的实现逻辑",
+  "definition": "directed_graph::begin(const T& node_value) 先通过 findNode(node_value) 查找节点；如果查找失败，则返回默认构造的相邻节点迭代器；如果查找成功，则从该节点的相邻节点索引列表开始构造相邻节点迭代器，并把当前 directed_graph 对象传给迭代器。",
+  "key_points": [
+    "查找结果通过 iter 与 std::end(m_nodes) 比较来判断节点是否存在。",
+    "节点存在时，迭代器从 std::begin(iter->get_adjacent_nodes_indices()) 开始构造。",
+    "该实现只展示了 begin(const T&)；其他相邻节点迭代器方法要么采用类似实现，要么转发到其他方法。"
+  ],
+  "examples": [
+    "核心实现逻辑可表示为：\ntemplate <typename T>\ntypename directed_graph<T>::iterator_adjacent_nodes\ndirected_graph<T>::begin(const T& node_value) noexcept {\n    auto iter { findNode(node_value) };\n    if (iter == std::end(m_nodes)) {\n        return iterator_adjacent_nodes{};\n    }\n    return iterator_adjacent_nodes{\n        std::begin(iter->get_adjacent_nodes_indices()), this\n    };\n}"
+  ],
+  "misconceptions": [
+    "begin(node_value) 返回的是给定节点本身的迭代器，而不是该节点的相邻节点迭代器；它指向相邻节点索引列表的起点。",
+    "默认构造的相邻节点迭代器表示查找失败时的结束状态，不表示一个真实的相邻节点。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "directed_graph::begin(const T&) 的第一步是什么？",
+      "a": "调用 findNode(node_value) 查找给定值的节点。"
+    },
+    {
+      "q": "findNode 找不到节点时，begin(const T&) 如何处理？",
+      "a": "返回默认构造的 iterator_adjacent_nodes。"
+    },
+    {
+      "q": "节点找到后，相邻节点迭代器从哪里开始？",
+      "a": "从该节点 get_adjacent_nodes_indices() 返回的相邻节点索引列表的 begin 位置开始。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "相邻节点迭代器接口",
+    "容器 begin/end 操作"
+  ],
+  "source_pages": [
+    746,
+    746
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1546_相邻节点_begin_的实现逻辑",
+  "_chunk_pages": [
+    745,
+    748
+  ]
+}

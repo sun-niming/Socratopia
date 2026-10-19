@@ -1,0 +1,65 @@
+{
+  "conversationId": "XvvKOykiYoI4vHWP_aarw",
+  "generatedAt": 1789452509434,
+  "pagesRange": "第2章章末题 P8/P14/P22-P24;进入 p.139 第3章",
+  "sections": [
+    {
+      "type": "tldr",
+      "content": "章末题三组收尾,进入第3章运输层开篇。"
+    },
+    {
+      "type": "concepts",
+      "items": [
+        {
+          "name": "P8 三种 HTTP 时延",
+          "body": "9 个对象(HTML+8 引用)。\n- a 非持续无并行: $18\\mathrm{RTT}_0$\n- b 非持续 5 并行: $6\\mathrm{RTT}_0$\n- c 持续: $10\\mathrm{RTT}_0$\n均另加 $\\sum\\mathrm{RTT}_i$。b 比 c 快,因并行能同时开工。"
+        },
+        {
+          "name": "分发时间 (P22-P24)",
+          "body": "客户-服务器: \n\n$$\n\\min=\\max\\left(\\frac{NF}{u_s},\\frac{F}{d_{\\min}}\\right)\n$$\n\n 临界 $N=u_s/d_{\\min}=15$。\\nP2P: 分母换成 $u_s+\\sum u_i$,增长更缓,N 大时趋于稳定;$F/u_s$、$F/d_{\\min}$ 两项保留。"
+        },
+        {
+          "name": "报文边界 (P14)",
+          "body": "SMTP: 单独一行 `.` 终止;空行只分首部与正文。HTTP: `Content-Length` 预报字节数。HTTP 不能照搬句点法——正文可能出现单独 `.` 造成歧义,SMTP 用点填充 (dot-stuffing) 转义解决。"
+        },
+        {
+          "name": "HTTP/1.0 vs 1.1",
+          "body": "1.0 默认非持续(每对象一连接);1.1 默认持续(复用连接)。1.1 强制 `Host`、支持管道化与 chunked。`Connection: close` 在 1.1 偏离默认,`keep-alive` 在 1.0 偏离默认。8 对象示例:1.0 串行 16 RTT,1.1 同连接 9 RTT。"
+        },
+        {
+          "name": "队头阻塞 HOL",
+          "body": "同连接响应排队,队头不结束后面全卡。是 1.1 持续连接的固有毛病;HTTP/2 用多路复用拆掉。"
+        },
+        {
+          "name": "运输层开篇 (p.139)",
+          "body": "为**不同主机上的应用进程**间提供**逻辑通信**。只在端系统实现,路由器不拆运输层字段。与网络层仅差一词:网络层主机到主机,运输层进程到进程。"
+        }
+      ]
+    },
+    {
+      "type": "key-insight",
+      "content": "会,所以没法确定——HTTP 正文里本可能出现单独一行句点,接收方分不清是内容还是终止信号。"
+    },
+    {
+      "type": "open-question",
+      "content": "网络层「主机到主机」与运输层「进程到进程」的一词之差,到底差在哪?另:本书无独立物理层章节,仅 1.2.2 物理媒体涉及。"
+    },
+    {
+      "type": "review-questions",
+      "items": [
+        {
+          "question": "SMTP 与 HTTP 各如何标报文体结束?",
+          "answer": "SMTP: 单独一行 `.`;HTTP: `Content-Length` 报长度。"
+        },
+        {
+          "question": "1.1 默认持续连接,如何显式关闭?1.0 反过来写什么?",
+          "answer": "1.1 写 `Connection: close`;1.0 写 `Connection: keep-alive`。"
+        },
+        {
+          "question": "客户-服务器分发时间的临界 N?($u_s=30,d_{\\min}=2$)",
+          "answer": "$N=u_s/d_{\\min}=15$。"
+        }
+      ]
+    }
+  ]
+}

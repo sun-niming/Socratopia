@@ -1,0 +1,41 @@
+{
+  "title": "ECMAScript 只是语言规范",
+  "definition": "ECMAScript 只是一种语言规范。它规范变量怎么定义、函数怎么定义以及各种语法，但对使用这种语言可以做什么并不作限制。",
+  "key_points": [
+    "ECMAScript 负责规定语言规则",
+    "它会定义变量、函数和语法等内容",
+    "它不限制用这种语言做什么"
+  ],
+  "examples": [
+    "规范变量怎么定义、函数怎么定义、各种语法等"
+  ],
+  "misconceptions": [
+    "ECMAScript 规定了语言只能用于某一种特定场景",
+    "语言规范会限制开发者使用 JS 做什么"
+  ],
+  "qa_pairs": [
+    {
+      "q": "ECMAScript 的本质是什么？",
+      "a": "它只是一种语言规范。"
+    },
+    {
+      "q": "ECMAScript 会不会限制使用这种语言做什么？",
+      "a": "不会，它不限制用途。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "ECMAScript"
+  ],
+  "source_pages": [
+    297,
+    300
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "394_ecmascript_只是语言规范",
+  "_chunk_pages": [
+    297,
+    300
+  ]
+}

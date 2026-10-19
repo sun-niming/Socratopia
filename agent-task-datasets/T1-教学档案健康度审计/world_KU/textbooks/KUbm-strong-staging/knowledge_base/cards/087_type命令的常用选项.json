@@ -1,0 +1,49 @@
+{
+  "title": "type命令的常用选项",
+  "definition": "教材列出type命令的三个常用选项。-t用于显示命令类别，其中file表示外部命令，alias表示别名，builtin表示内部命令；-p用于显示命令的完整路径；-a用于显示所有匹配命令。",
+  "key_points": [
+    "-t：显示类别",
+    "-t的输出类别包括file、alias、builtin",
+    "-p：显示命令完整路径",
+    "-a：显示所有匹配命令"
+  ],
+  "examples": [
+    "type -t command：可显示file、alias或builtin等类别",
+    "type -p command：显示命令完整路径",
+    "type -a command：显示所有匹配命令"
+  ],
+  "misconceptions": [
+    "误以为-t会显示完整路径；教材说明显示完整路径的是-p",
+    "误以为-a只显示一个结果；教材说明-a显示所有匹配命令"
+  ],
+  "qa_pairs": [
+    {
+      "q": "type命令哪个选项用于显示命令完整路径？",
+      "a": "-p。"
+    },
+    {
+      "q": "type -t输出builtin表示什么？",
+      "a": "表示该命令是内部命令。"
+    },
+    {
+      "q": "type -t输出file表示什么？",
+      "a": "表示该命令是外部命令。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "type命令用于查看命令类型",
+    "Linux命令的类别"
+  ],
+  "source_pages": [
+    45,
+    48
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "087_type命令的常用选项",
+  "_chunk_pages": [
+    45,
+    48
+  ]
+}

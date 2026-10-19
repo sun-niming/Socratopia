@@ -1,0 +1,47 @@
+{
+  "title": "转发引用与完美转发",
+  "definition": "当 `T` 是函数模板自身的模板参数时，形如 `T&&` 的参数是转发引用（forwarding reference）。配合 `std::forward<T>(value)`，可以保持实参原本的值类别：传入右值时转发为右值，传入左值时转发为左值，从而避免递归按值传递造成的不必要复制。",
+  "key_points": [
+    "按值递归传递参数可能在每次递归调用时复制参数，复制代价取决于参数类型。",
+    "使用 `T&&` 和 `Tn&&...` 接收参数，并使用 `std::forward<T>(arg)` 转发，可以同时支持左值和右值。",
+    "参数包扩展可以把转发应用到每个参数：`processValues(std::forward<Tn>(args)...);`。",
+    "若 `args` 中有三个参数 `a1`、`a2`、`a3`，其展开形式为：$$\\operatorname{processValues}(\\operatorname{std::forward}<A_1>(a_1),\\operatorname{std::forward}<A_2>(a_2),\\operatorname{std::forward}<A_3>(a_3));$$",
+    "只有当 `T` 是函数模板或成员函数模板自身的模板参数时，`T&&` 才是转发引用；如果 `T` 是类模板参数，`T&&` 通常是普通右值引用。"
+  ],
+  "examples": [
+    "递归处理的典型写法：`template<typename T1, typename... Tn> void processValues(T1&& arg1, Tn&&... args) { handleValue(std::forward<T1>(arg1)); processValues(std::forward<Tn>(args)...); }`。",
+    "无参数基例仍然需要保留：`void processValues() {}`。"
+  ],
+  "misconceptions": [
+    "转发引用不是任何 `T&&` 都自动成立；关键条件是 `T` 必须由当前函数模板推导。",
+    "`std::forward` 不是无条件把参数转换成右值，而是根据模板推导结果恢复实参原本的左值或右值类别。",
+    "仅把参数改成引用而不使用合适的转发，不能完整保持原始值类别。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "完美转发保持什么性质？",
+      "a": "它保持实参的值类别：右值作为右值转发，左值作为左值转发。"
+    },
+    {
+      "q": "为什么 `T&&` 在类模板成员函数中不一定是转发引用？",
+      "a": "如果 `T` 已经是类模板参数，进入该成员函数处理时它通常已经是确定类型，不再由该函数模板推导，因此 `T&&` 是普通右值引用。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "左值与右值",
+    "引用折叠",
+    "可变参数模板"
+  ],
+  "source_pages": [
+    770,
+    771
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1588_转发引用与完美转发",
+  "_chunk_pages": [
+    769,
+    772
+  ]
+}

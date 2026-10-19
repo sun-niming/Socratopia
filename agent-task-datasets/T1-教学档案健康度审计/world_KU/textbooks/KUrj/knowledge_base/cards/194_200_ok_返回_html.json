@@ -1,0 +1,42 @@
+{
+  "title": "200 OK 返回 HTML",
+  "definition": "当 Web Server 返回 HTML 文件时，应使用 HTTP/1.1 200 OK，并设置 `Content-Type: text/html; charset=utf-8`、正确的 `Content-Length` 和 `Connection: close`。正文是 HTML 内容，常用于返回首页、练习页和错误页。",
+  "key_points": [
+    "`Content-Length` 必须等于 HTML 文件的字节数，不是字符数。",
+    "HTML 内建议包含 `<meta charset=\"utf-8\">`。",
+    "适用场景：`index.html`、`practice.html`、`404.html` 等 HTML 文件。"
+  ],
+  "examples": [
+    "HTTP/1.1 200 OK\nContent-Type: text/html; charset=utf-8\nContent-Length: 128\nConnection: close\n\n<!doctype html>\n<html>...</html>"
+  ],
+  "misconceptions": [
+    "认为只要状态码是 200 就可以，不必保证 `Content-Type` 和 `Content-Length` 正确。",
+    "把字符数当作 `Content-Length`。",
+    "以为浏览器一定能自动正确识别 HTML 编码，不需要 `utf-8` 相关声明。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "返回 HTML 文件时，响应头里最关键的 MIME 类型是什么？",
+      "a": "`Content-Type: text/html; charset=utf-8`。"
+    },
+    {
+      "q": "HTML 响应里为什么要特别注意 `Content-Length`？",
+      "a": "它必须等于 HTML 文件的字节数，否则响应格式可能不合格。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "HTTP 响应基础"
+  ],
+  "source_pages": [
+    117,
+    120
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "194_200_ok_返回_html",
+  "_chunk_pages": [
+    117,
+    120
+  ]
+}

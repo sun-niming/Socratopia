@@ -1,0 +1,53 @@
+{
+  "title": "NDGrid调整大小时的递归resize",
+  "definition": "NDGrid的构造函数接收一个大小参数并调用resize。对于N大于1的NDGrid，成员`m_elements`是`std::vector<NDGrid<T, N-1>>`。调用vector的resize时，新建的子网格使用无参数构造函数，因此只会按子网格的默认大小构造，不能自动继承外层传入的新大小。为使每个维度都具有相同大小，NDGrid的resize必须先调整外层vector大小，再遍历每个子网格，显式调用`element.resize(newSize)`，递归调整所有嵌套层。",
+  "key_points": [
+    "一般NDGrid的resize包含两步：调整当前层vector大小，以及递归调整每个子网格。",
+    "vector扩容时通过默认构造函数创建NDGrid子元素，不会把外层resize的参数自动传给子元素。",
+    "该实现让每个维度具有相同的大小。",
+    "维度为1的部分特例化只需对`std::vector<T>`调用resize，不需要继续递归。",
+    "NDGrid的`operator[]`返回`NDGrid<T, N-1>&`或其const引用，而不是直接返回T。"
+  ],
+  "examples": [
+    "一般情形的resize逻辑为：`m_elements.resize(newSize); for (auto& element : m_elements) { element.resize(newSize); }`。",
+    "对于`NDGrid<int, 3>`，调用`resize(20)`会递归调整三维中的每一层，使每个维度大小均为20。",
+    "一般情形的下标运算符返回类型可写为`NDGrid<T, N - 1>& operator[](size_t x)`；维度为1的特例化则返回`T&`。"
+  ],
+  "misconceptions": [
+    "误以为外层vector的resize会自动用同一个newSize构造所有嵌套子网格。",
+    "误以为只调用一次外层`m_elements.resize(newSize)`就能把整个多维网格调整到指定大小。",
+    "误以为所有维度都可以在该实现中分别指定不同大小；教材明确说明该简化实现让各维度大小相同。",
+    "误以为一般NDGrid的operator[]直接返回T；只有维度为1的基本情形才直接返回T。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么NDGrid的resize需要遍历所有子网格并再次调用resize？",
+      "a": "因为vector创建嵌套NDGrid元素时使用无参数构造函数，子网格只按默认大小构造，不会自动获得外层的newSize。"
+    },
+    {
+      "q": "一般NDGrid的operator[]返回什么类型？",
+      "a": "返回`NDGrid<T, N-1>`的引用；只有`NDGrid<T, 1>`的特例化才返回T的引用。"
+    },
+    {
+      "q": "教材中的NDGrid实现能否让每个维度使用不同大小？",
+      "a": "不能。该实现为了简化，让每个维度都使用相同大小；为每个维度指定不同大小会更困难。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "模板递归与基本情形",
+    "std::vector::resize",
+    "引用返回值"
+  ],
+  "source_pages": [
+    767,
+    768
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1584_ndgrid调整大小时的递归resize",
+  "_chunk_pages": [
+    765,
+    768
+  ]
+}

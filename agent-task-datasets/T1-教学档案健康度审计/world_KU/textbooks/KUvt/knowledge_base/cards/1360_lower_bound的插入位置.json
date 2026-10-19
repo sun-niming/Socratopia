@@ -1,0 +1,43 @@
+{
+  "title": "lower_bound的插入位置",
+  "definition": "lower_bound()在有序范围内查找第一个不小于给定值的元素，并返回指向该元素的迭代器。如果所有元素都小于给定值，它返回范围的尾后迭代器。它常用于确定将新值插入有序vector的位置。",
+  "key_points": [
+    "lower_bound()返回的是迭代器，而不是布尔值。",
+    "返回位置上的元素满足大于或等于给定值；返回位置之前的元素都小于给定值。",
+    "将返回的迭代器传给vector.insert()，可以在插入后保持vector有序。",
+    "使用lower_bound()前必须保证范围按相同的排序规则有序。"
+  ],
+  "examples": [
+    "populateContainer(values); sort(begin(values), end(values)); auto iter = lower_bound(begin(values), end(values), number); values.insert(iter, number);"
+  ],
+  "misconceptions": [
+    "lower_bound()查找的不是最后一个小于给定值的位置，而是第一个不小于给定值的位置。",
+    "lower_bound()不会自动插入元素。",
+    "如果范围没有按相应规则排序，返回结果不能用于可靠的有序插入。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "lower_bound()返回哪个位置？",
+      "a": "返回有序范围内第一个不小于给定值的元素的位置。"
+    },
+    {
+      "q": "如何使用lower_bound()将number插入有序vector？",
+      "a": "先令iter等于lower_bound(begin(values), end(values), number)，再调用values.insert(iter, number)。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "二分查找的前提与过程"
+  ],
+  "source_pages": [
+    650,
+    650
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1360_lower_bound的插入位置",
+  "_chunk_pages": [
+    649,
+    652
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "title": "shift_left 和 shift_right 移动元素",
+  "definition": "C++20 的 shift_left() 和 shift_right() 用于把给定范围内的元素整体移动指定的位置数。移动到范围边界之外的元素会被删除；shift_left() 返回移动后新范围的尾后迭代器，shift_right() 返回移动后新范围的起始迭代器。使用后通常需要结合 erase() 删除容器中已经无效或多余的元素。",
+  "key_points": [
+    "shift_left(begin(values), end(values), n) 将元素向左移动 $n$ 个位置。",
+    "shift_right(begin(values), end(values), n) 将元素向右移动 $n$ 个位置。",
+    "移动后，容器的逻辑有效范围需要根据返回的迭代器用 erase() 调整。",
+    "教材示例中，左移后使用 values.erase(newEnd, end(values)); 右移后使用 values.erase(begin(values), newBegin);。"
+  ],
+  "examples": [
+    "vector<int> values { 11, 22, 33, 44, 55 };",
+    "auto newEnd { shift_left(begin(values), end(values), 2) };",
+    "values.erase(newEnd, end(values)); // 删除左移后尾部的多余元素",
+    "auto newBegin { shift_right(begin(values), end(values), 2) };",
+    "values.erase(begin(values), newBegin); // 删除右移后开头的多余元素"
+  ],
+  "misconceptions": [
+    "shift_left() 和 shift_right() 不等同于旋转；移出范围的元素不会从另一端补回。",
+    "算法移动元素后，容器本身的 size 通常不会自动缩小；需要显式调用 erase()。",
+    "返回的迭代器不是任意位置迭代器，而是用于标识移动后有效范围边界的迭代器。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "shift_left() 返回什么？",
+      "a": "返回指向移动后新范围末尾的迭代器，教材示例将其用于 values.erase(newEnd, end(values))。"
+    },
+    {
+      "q": "为什么 shift_left() 后通常要调用 erase()？",
+      "a": "因为移动算法不会自动缩小容器，需要删除移动后范围末尾多余的元素。"
+    },
+    {
+      "q": "shift_right() 后如何删除开头多余的元素？",
+      "a": "先保存其返回的起始迭代器 newBegin，再调用 values.erase(begin(values), newBegin)。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "迭代器范围表示法",
+    "容器的 erase 操作"
+  ],
+  "source_pages": [
+    645,
+    646
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 std::shift_left std::shift_right 返回迭代器 移出范围元素 erase",
+  "concept_id": "1347_shift_left_和_shift_right_移动元素",
+  "_chunk_pages": [
+    645,
+    648
+  ]
+}

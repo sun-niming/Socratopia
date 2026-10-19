@@ -1,0 +1,41 @@
+{
+  "title": "Linux与Windows文本文件换行符区别",
+  "definition": "教材指出，Linux 和 Windows 的文本文件在换行符表示上不同。Linux 使用换行符，Windows 使用回车换行。这意味着同样是文本文件，在两个系统中的换行编码方式并不相同。",
+  "key_points": [
+    "Linux：换行符",
+    "Windows：回车换行",
+    "文本文件在不同系统间使用时要注意换行方式差异"
+  ],
+  "examples": [
+    "教材原文说明：Linux：换行符；Windows：回车换行"
+  ],
+  "misconceptions": [
+    "不要认为 Linux 和 Windows 文本文件的换行表示完全相同",
+    "不要把 Windows 的换行简化为仅有换行符，教材明确写的是回车换行"
+  ],
+  "qa_pairs": [
+    {
+      "q": "教材中 Linux 文本文件使用什么换行方式？",
+      "a": "换行符。"
+    },
+    {
+      "q": "教材中 Windows 文本文件使用什么换行方式？",
+      "a": "回车换行。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "文本文件基本概念"
+  ],
+  "source_pages": [
+    93,
+    95
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "151_linux与windows文本文件换行符区别",
+  "_chunk_pages": [
+    93,
+    95
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "title": "unique_ptr 的解引用与 get",
+  "definition": "unique_ptr 可以使用类似普通指针的 `*` 和 `->` 运算符访问所管理的对象。`get()` 返回其底层原始指针，但不会转移所有权；返回的原始指针只能按照 unique_ptr 的生命周期使用。",
+  "key_points": [
+    "可以通过 `p->member` 调用所管理对象的成员函数。",
+    "也可以通过 `(*p).member` 访问对象成员。",
+    "`p.get()` 返回底层指针，适合传给要求原始指针参数的函数。",
+    "调用 get() 不会释放资源，也不会让调用者获得资源所有权。"
+  ],
+  "examples": [
+    "`mySimpleSmartPtr->go();`",
+    "等价形式：`(*mySimpleSmartPtr).go();`",
+    "若函数声明为 `void processData(Simple* simple);`，可调用 `processData(mySimpleSmartPtr.get());`"
+  ],
+  "misconceptions": [
+    "get() 不会创建新的资源，也不会把 unique_ptr 转换成共享所有权。",
+    "从 get() 得到的原始指针不应在 unique_ptr 仍拥有资源时单独 delete。",
+    "unique_ptr 为空时，不能无条件对其执行解引用。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何把 unique_ptr 管理的对象传给需要 Simple* 的函数？",
+      "a": "调用 `processData(mySimpleSmartPtr.get());`，用 get() 获取底层原始指针。"
+    },
+    {
+      "q": "get() 会转移 unique_ptr 的所有权吗？",
+      "a": "不会。get() 只返回底层指针，所有权仍由 unique_ptr 保持。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "unique_ptr 的唯一所有权与自动释放"
+  ],
+  "source_pages": [
+    219,
+    220
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "464_unique_ptr_的解引用与_get",
+  "_chunk_pages": [
+    217,
+    220
+  ]
+}

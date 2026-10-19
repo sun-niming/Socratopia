@@ -1,0 +1,41 @@
+{
+  "title": "inline-block元素的特点",
+  "definition": "将元素设置为 inline-block 后，它既具有 block 的高宽、边框、边距等特征，又具有 inline 的同行排列特征。原文用 a 元素作示例，说明可以把 a 设为 inline-block。",
+  "key_points": [
+    "inline-block 兼有块元素和行内元素的部分特征。",
+    "它可以表现出高宽、边框、边距等块级特征。",
+    "它又保持同行排列的行内特征。"
+  ],
+  "examples": [
+    "a{display:inline-block;}"
+  ],
+  "misconceptions": [
+    "把 inline-block 误认为完全等同于 block。",
+    "把 inline-block 误认为只能像普通行内元素一样没有高宽、边框、边距特征。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么要把 a 元素设置为 inline-block？",
+      "a": "因为它既能具有 block 的高宽、边框、边距等特征，又能具有 inline 的同行排列特征。"
+    },
+    {
+      "q": "inline-block 的核心特点是什么？",
+      "a": "兼有块元素特征和行内元素特征。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "display属性常用取值"
+  ],
+  "source_pages": [
+    133,
+    136
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "216_inline_block元素的特点",
+  "_chunk_pages": [
+    133,
+    136
+  ]
+}

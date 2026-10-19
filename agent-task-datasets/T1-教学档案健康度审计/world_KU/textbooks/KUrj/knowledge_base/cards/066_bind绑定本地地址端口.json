@@ -1,0 +1,44 @@
+{
+  "title": "bind绑定本地地址端口",
+  "definition": "`bind` 用于把 socket 绑定到本地 IP 地址和端口。对服务器来说，常见做法是把 `struct sockaddr_in` 填好后，强转为 `struct sockaddr *` 传给 `bind`，并常用 `INADDR_ANY:port` 让服务器监听指定端口上的所有本地地址。",
+  "key_points": [
+    "原型是 `int bind(int sockfd, const struct sockaddr *addr, socklen_t addrlen);`。",
+    "`addr` 常由 `struct sockaddr_in` 填充后强转为 `struct sockaddr *`。",
+    "绑定前要先将地址结构清零，并正确设置 `sin_family`、`sin_addr.s_addr`、`sin_port`。",
+    "端口要用 `htons`，地址常用 `htonl(INADDR_ANY)`。",
+    "常见错误包括端口被占用、低端口权限不足、忘记做字节序转换。"
+  ],
+  "examples": [
+    "```c\nstruct sockaddr_in addr;\nmemset(&addr, 0, sizeof(addr));\naddr.sin_family = AF_INET;\naddr.sin_addr.s_addr = htonl(INADDR_ANY);\naddr.sin_port = htons((uint16_t)port);\nif (bind(listen_fd, (struct sockaddr *)&addr, sizeof(addr)) < 0) {\nperror(\"bind\");\nclose(listen_fd);\nreturn -1;\n}\n```"
+  ],
+  "misconceptions": [
+    "以为只要有 socket 就自动绑定好了端口。",
+    "忘记对端口做 `htons`。",
+    "以为 `bind` 可以绕过端口被占用的问题。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`bind` 的作用是什么？",
+      "a": "把 socket 绑定到本地 IP 地址和端口。"
+    },
+    {
+      "q": "为什么要在 `bind` 前把 `sockaddr_in` 清零？",
+      "a": "避免结构体中未初始化字段影响绑定结果。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "socket创建监听端点"
+  ],
+  "source_pages": [
+    45,
+    48
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "066_bind绑定本地地址端口",
+  "_chunk_pages": [
+    45,
+    48
+  ]
+}

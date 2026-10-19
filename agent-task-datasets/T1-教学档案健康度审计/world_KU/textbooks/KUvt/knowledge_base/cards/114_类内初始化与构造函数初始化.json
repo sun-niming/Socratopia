@@ -1,0 +1,42 @@
+{
+  "title": "类内初始化与构造函数初始化",
+  "definition": "如果类的构造函数只负责给数据成员设置初始值，而不执行其他操作，可以直接在类定义中为数据成员提供类内初始化器（in-class initializer），从而省略这种构造函数。若初始化还需要打开文件、分配内存等操作，则仍应编写构造函数。",
+  "key_points": [
+    "类内初始化器直接写在数据成员声明处，例如：std::string m_passengerName { \"Unknown Passenger\" };",
+    "类内初始化适合简单的固定初始值；需要执行额外初始化操作时，应使用构造函数。",
+    "类内初始化器可以为字符串、整数、布尔值等数据成员提供默认初始值。"
+  ],
+  "examples": [
+    "class AirlineTicket {\nprivate:\n    std::string m_passengerName { \"Unknown Passenger\" };\n    int m_numberOfMiles { 0 };\n    bool m_hasEliteSuperRewardsStatus { false };\n};",
+    "如果构造函数只把 m_numberOfMiles 设为 0、把 m_hasEliteSuperRewardsStatus 设为 false，那么可以改为在类定义中直接写出这些初始值。"
+  ],
+  "misconceptions": [
+    "类内初始化不能替代所有构造函数；如果对象创建时需要打开文件、分配资源等操作，仍需要构造函数。",
+    "类内初始化器是给数据成员提供默认初始值，不等于每次都禁止构造函数传入其他值。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "什么时候可以用类内初始化器代替构造函数？",
+      "a": "当构造函数只负责给数据成员设置简单的初始值、而不执行其他操作时，可以改用类内初始化器。"
+    },
+    {
+      "q": "如果对象初始化需要分配内存或打开文件，应如何处理？",
+      "a": "应编写构造函数执行这些初始化操作。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++类和数据成员"
+  ],
+  "source_pages": [
+    65,
+    65
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "114_类内初始化与构造函数初始化",
+  "_chunk_pages": [
+    65,
+    68
+  ]
+}

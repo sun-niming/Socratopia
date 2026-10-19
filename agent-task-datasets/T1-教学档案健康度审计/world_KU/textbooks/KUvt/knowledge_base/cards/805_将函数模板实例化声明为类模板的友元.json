@@ -1,0 +1,43 @@
+{
+  "title": "将函数模板实例化声明为类模板的友元",
+  "definition": "类模板可以把函数模板声明为友元，使该函数模板针对某个类型 T 的函数实例能够访问对应类模板实例的私有成员。例如，Grid<T> 可以将 operator+(const Grid<T>&, const Grid<T>&) 声明为友元。这样，对于每一种具体类型 T，Grid<T> 与 operator+<T> 之间形成一对一的友元映射关系。",
+  "key_points": [
+    "通常需要先声明类模板，再声明函数模板，之后在类模板内部声明对应的函数模板实例为友元。",
+    "友元声明中的显式模板实参 <T> 表示：operator+ 本身是模板，并且当前 Grid<T> 只授予 operator+<T> 访问私有成员的权限。",
+    "该机制解决了非成员运算符模板需要访问 Grid 类私有数据成员 m_cells 的问题。"
+  ],
+  "examples": [
+    "典型结构可写为：\nexport template <typename T> class Grid;\n\ntemplate <typename T>\nGrid<T> operator+(const Grid<T>& lhs, const Grid<T>& rhs);\n\ntemplate <typename T>\nclass Grid {\n    friend Grid<T> operator+<T>(const Grid<T>& lhs, const Grid<T>& rhs);\n};"
+  ],
+  "misconceptions": [
+    "把函数模板声明为友元，并不意味着所有类型的 operator+ 实例都能访问当前 Grid<T> 的私有成员；这里建立的是对应类型之间的一对一友元关系。",
+    "operator+ 是非成员函数模板，不是 Grid 的成员函数。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "Grid<T> 将 operator+<T> 声明为友元的主要作用是什么？",
+      "a": "允许针对类型 T 的 operator+ 函数模板实例访问 Grid<T> 的私有成员，例如 m_cells。"
+    },
+    {
+      "q": "友元声明中的 operator+<T> 表示什么？",
+      "a": "表示 operator+ 本身是函数模板，并且当前类模板实例 Grid<T> 将对应的 operator+<T> 实例声明为友元。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "类模板",
+    "函数模板",
+    "友元函数"
+  ],
+  "source_pages": [
+    397,
+    397
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "805_将函数模板实例化声明为类模板的友元",
+  "_chunk_pages": [
+    397,
+    400
+  ]
+}

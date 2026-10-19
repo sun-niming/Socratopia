@@ -1,0 +1,38 @@
+{
+  "title": "在 Visual C++ Test Explorer 中调试失败的单元测试",
+  "definition": "Visual C++ 测试框架支持直接调试失败的单元测试。Test Explorer 会显示失败测试捕获的栈跟踪，并提供可直接跳转到问题代码行的超链接；如果需要运行时检查变量或逐行执行代码，可以在测试代码中设置断点，然后在 Test Explorer 中右击测试并选择 Debug。",
+  "key_points": [
+    "失败测试可通过栈跟踪定位问题代码行。",
+    "需要检查变量或单步执行时，应在单元测试代码中设置断点。",
+    "在 Test Explorer 中右击目标测试并单击 Debug，测试会在调试器中运行，并在断点处暂停。"
+  ],
+  "examples": [
+    "调试流程：设置断点 → 打开 Test Explorer → 右击单元测试 → 单击 Debug → 在断点处检查变量并单步执行。"
+  ],
+  "misconceptions": [
+    "不能把 Test Explorer 中显示测试失败简单等同于生产代码一定有错；测试本身也可能存在问题。",
+    "运行普通测试只能得到结果，不一定能满足逐行检查变量的调试需求。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何在 Visual C++ 中逐行调试一个单元测试？",
+      "a": "先在单元测试代码中设置断点，再在 Test Explorer 中右击该测试并选择 Debug；测试会在调试器中运行并在断点处暂停，之后可以检查变量和单步执行。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "单元测试基础",
+    "断点与调试器基础"
+  ],
+  "source_pages": [
+    889,
+    889
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1840_在_visual_c_test_explorer_中调试失败的单元测试",
+  "_chunk_pages": [
+    889,
+    892
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "title": "软件随机引擎必须配合分布生成指定范围的数",
+  "definition": "使用基于软件的随机数引擎生成指定范围内的随机数时，需要同时创建引擎和分布。引擎负责产生伪随机序列，分布对象负责描述这些数在特定范围内如何分布。教材示例使用 mt19937 引擎和 uniform_int_distribution<int>，生成 $1$ 到 $99$ 范围内的均匀整数。",
+  "key_points": [
+    "先创建并初始化软件随机引擎。",
+    "再创建分布对象，例如：`std::uniform_int_distribution<int> distribution{1, 99};`。",
+    "调用分布对象的函数调用运算符，并把引擎作为参数传入：`distribution(engine)`。",
+    "引擎和分布承担不同职责：引擎生成原始随机序列，分布将其映射为所需范围和分布形式的结果。"
+  ],
+  "examples": [
+    "```cpp\nstd::mt19937 engine{seed};\nstd::uniform_int_distribution<int> distribution{1, 99};\nstd::cout << distribution(engine) << std::endl;\n```",
+    "上述分布生成的整数范围为：$$1\\le x\\le 99$$"
+  ],
+  "misconceptions": [
+    "仅创建引擎并不能自动得到指定范围内的均匀整数；还需要分布对象。",
+    "`distribution(engine)` 中传入的是引擎对象，而不是一次手动生成的整数。",
+    "均匀整数分布的上下界是分布对象指定的范围，不能根据引擎本身的原始取值范围直接推断。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "在 `distribution(engine)` 中，engine 和 distribution 分别负责什么？",
+      "a": "engine 负责生成伪随机序列，distribution 负责按照指定范围和分布规则产生最终随机数。"
+    },
+    {
+      "q": "如何生成 $1$ 到 $99$ 的均匀整数？",
+      "a": "创建 `std::uniform_int_distribution<int> distribution{1, 99};`，然后调用 `distribution(engine)`。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++ 随机数引擎的主要类型"
+  ],
+  "source_pages": [
+    699,
+    700
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1458_软件随机引擎必须配合分布生成指定范围的数",
+  "_chunk_pages": [
+    697,
+    700
+  ]
+}

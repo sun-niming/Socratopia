@@ -1,0 +1,44 @@
+{
+  "title": "Spreadsheet 单元格访问的坐标范围检查",
+  "definition": "Spreadsheet 通过 setCellAt 和 getCellAt 按坐标访问单元格。访问前必须检查横坐标 x 是否小于表格宽度 m_width，以及纵坐标 y 是否小于表格高度 m_height；任一坐标越界时抛出 std::out_of_range。为避免重复实现检查逻辑，类中提供 verifyCoordinate(size_t x, size_t y) const，并由 setCellAt 和 getCellAt 调用。",
+  "key_points": [
+    "横坐标合法条件是 $x < m\\_width$，纵坐标合法条件是 $y < m\\_height$。",
+    "当 $x \\ge m\\_width$ 或 $y \\ge m\\_height$ 时，应抛出 std::out_of_range。",
+    "通过 verifyCoordinate(x, y) 集中执行边界检查，可让 setCellAt 和 getCellAt 复用同一逻辑。",
+    "边界检查通过后，成员函数直接访问 m_cells[x][y]。"
+  ],
+  "examples": [
+    "典型实现结构：\nvoid Spreadsheet::setCellAt(size_t x, size_t y, const SpreadsheetCell& cell) {\n    verifyCoordinate(x, y);\n    m_cells[x][y] = cell;\n}",
+    "典型读取结构：\nSpreadsheetCell& Spreadsheet::getCellAt(size_t x, size_t y) {\n    verifyCoordinate(x, y);\n    return m_cells[x][y];\n}"
+  ],
+  "misconceptions": [
+    "不能只检查 x 而忽略 y；两个坐标都必须检查。",
+    "坐标等于宽度或高度时也属于越界，因为合法条件是严格小于，而不是小于等于。",
+    "verifyCoordinate 不是替代单元格访问的函数，它负责检查坐标；实际读写仍由 getCellAt 或 setCellAt 完成。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "Spreadsheet 如何判断一个单元格坐标是否越界？",
+      "a": "检查 $x < m\\_width$ 且 $y < m\\_height$。如果 $x \\ge m\\_width$ 或 $y \\ge m\\_height$，就抛出 std::out_of_range。"
+    },
+    {
+      "q": "为什么要单独定义 verifyCoordinate？",
+      "a": "因为 setCellAt 和 getCellAt 都需要进行相同的坐标范围检查，将检查逻辑集中到 verifyCoordinate 可以避免重复代码。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++ 成员函数与异常处理"
+  ],
+  "source_pages": [
+    261,
+    262
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "344_spreadsheet_单元格访问的坐标范围检查",
+  "_chunk_pages": [
+    261,
+    264
+  ]
+}

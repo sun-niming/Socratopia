@@ -1,0 +1,39 @@
+{
+  "title": "候选路径拼接与根目录边界检查",
+  "definition": "在得到相对路径 `rel` 后，程序用 `snprintf(candidate, sizeof(candidate), \"%s/%s\", config->root_real, rel)` 拼出候选路径，然后先 `stat(candidate, &st)` 判断文件是否存在，再用 `realpath(candidate, resolved)` 规范化路径，并通过 `is_under_root(config->root_real, resolved)` 确认最终路径仍在根目录内。若不在根目录内，则返回 `403 Forbidden`。",
+  "key_points": [
+    "候选路径由 `config->root_real` 和 `rel` 拼接得到。",
+    "先 `stat` 再 `realpath`，这样可以先区分文件不存在与越权访问。",
+    "`realpath` 之后必须做根目录边界检查，防止目录穿越。"
+  ],
+  "examples": [
+    "路径穿越尝试若最终解析到根目录外，应返回 `403 Forbidden`，错误信息为 `path outside root`。",
+    "路径拼接时出现双斜杠通常不是关键问题，关键是 `realpath` 和根目录检查的结果。"
+  ],
+  "misconceptions": [
+    "只要字符串看起来在根目录下就安全，实际上必须在 `realpath` 后再判断。",
+    "把 `realpath` 放在 `stat` 前面可以更清晰地处理错误，原文明确指出这样会让不存在文件难以区分 404 和 403。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么在 `stat` 之后还要再做 `realpath` 和根目录检查？",
+      "a": "因为 `stat` 只能判断文件是否存在，`realpath` 可以规范化路径，而 `is_under_root` 能确认最终解析结果没有逃出根目录，从而防止目录穿越。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "文件路径拼接",
+    "根目录边界概念"
+  ],
+  "source_pages": [
+    85,
+    88
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "131_候选路径拼接与根目录边界检查",
+  "_chunk_pages": [
+    85,
+    88
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "title": "Visual C++ 2019 中标准库头文件导入的临时配置",
+  "definition": "在原文所述的 Visual C++ 2019 版本中，模块功能尚未完全支持，直接使用类似 `import <iostream>;` 的标准库头文件导入声明可能无法立即生效。临时解决方法是创建一个单独的头文件，例如 `HeaderUnits.h`，在其中写出需要导入的标准库头文件声明；然后将该文件的 Item Type 设置为 C/C++ Compiler，并将 Compile As 设置为 Compile as C++ Header Unit（`/exportHeader`）。重新编译项目后，该头文件中相应的标准库导入声明即可用于项目。",
+  "key_points": [
+    "示例导入声明为 `import <iostream>;`，也可以导入 `<vector>`、`<optional>` 和 `<utility>` 等头文件。",
+    "`HeaderUnits.h` 可以集中保存需要导入的标准库头文件声明。",
+    "需要在文件属性中设置 Item Type 为 C/C++ Compiler。",
+    "需要在 Configuration Properties | C/C++ | Advanced 中将 Compile As 设置为 Compile as C++ Header Unit（`/exportHeader`）。"
+  ],
+  "examples": [
+    "`HeaderUnits.h` 中的示例内容：\n```text\n#pragma once\nimport <iostream>;\nimport <vector>;\nimport <optional>;\nimport <utility>;\n```"
+  ],
+  "misconceptions": [
+    "标准库头文件的 `import` 声明在当时的 Visual C++ 2019 中并不一定可以直接使用。",
+    "创建头文件本身还不够，还必须正确设置该文件的 Item Type 和 Compile As 属性。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "Visual C++ 2019 中 `import <iostream>;` 无法直接生效时，原文建议如何处理？",
+      "a": "创建类似 `HeaderUnits.h` 的头文件，在其中写入相应的标准库头文件导入声明，并将其 Item Type 设置为 C/C++ Compiler、Compile As 设置为 Compile as C++ Header Unit（`/exportHeader`）。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++ 模块的基本概念",
+    "Visual Studio 文件属性的基本操作"
+  ],
+  "source_pages": [
+    17,
+    18
+  ],
+  "needs_verification": true,
+  "verify_query": "Visual Studio 2019 standard library header units /exportHeader HeaderUnits.h import iostream configuration",
+  "concept_id": "028_visual_c_2019_中标准库头文件导入的临时配置",
+  "_chunk_pages": [
+    17,
+    20
+  ]
+}

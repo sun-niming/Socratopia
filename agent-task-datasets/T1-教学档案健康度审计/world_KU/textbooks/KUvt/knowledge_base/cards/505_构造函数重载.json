@@ -1,0 +1,49 @@
+{
+  "title": "构造函数重载",
+  "definition": "同一个类可以声明多个构造函数。它们都与类同名，但参数数量或参数类型不同。创建对象时，编译器根据实参选择参数匹配的构造函数，这属于函数重载。",
+  "key_points": [
+    "多个构造函数必须具有可区分的参数列表，例如分别接收 double 和 std::string_view。",
+    "使用数值实参时可选择接收 double 的构造函数，使用字符串实参时可选择接收 std::string_view 的构造函数。",
+    "构造函数重载使对象能够用不同形式的初始数据进行初始化。"
+  ],
+  "examples": [
+    "class SpreadsheetCell\n{\npublic:\n    SpreadsheetCell(double initialValue);\n    SpreadsheetCell(std::string_view initialValue);\n};",
+    "SpreadsheetCell aThirdCell{\"test\"};   // 使用字符串参数构造函数\nSpreadsheetCell aFourthCell{4.4};       // 使用 double 参数构造函数\nauto aFifthCellp{std::make_unique<SpreadsheetCell>(\"5.5\")}; // 使用字符串参数构造函数"
+  ],
+  "misconceptions": [
+    "误以为一个类只能有一个构造函数。",
+    "误以为重载构造函数必须使用不同名称；实际上构造函数都与类同名，靠参数列表区分。",
+    "误以为编译器仅根据返回类型区分构造函数；构造函数没有返回类型，重载依靠参数数量或参数类型。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "一个类中的多个构造函数如何相互区分？",
+      "a": "它们具有不同数量的参数或不同的参数类型，编译器根据创建对象时提供的实参选择匹配的构造函数。"
+    },
+    {
+      "q": "SpreadsheetCell cell{\"test\"}; 通常会选择哪一个教材所示的重载？",
+      "a": "选择接收 std::string_view 参数的构造函数。"
+    },
+    {
+      "q": "SpreadsheetCell cell{4.4}; 通常会选择哪一个教材所示的重载？",
+      "a": "选择接收 double 参数的构造函数。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "构造函数",
+    "函数参数",
+    "函数重载"
+  ],
+  "source_pages": [
+    238,
+    238
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "505_构造函数重载",
+  "_chunk_pages": [
+    237,
+    240
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "title": "容器成员版 find() 与泛型 std::find() 的选择",
+  "definition": "某些容器（例如 map 和 set）提供自己的成员函数 find()。如果容器成员函数与泛型算法 std::find() 具有相同功能，应优先使用容器成员函数，因为它通常具有更高效的复杂度。",
+  "key_points": [
+    "对 map 使用泛型 std::find() 时通常需要线性搜索。",
+    "map 的成员函数 find() 具有对数时间复杂度。",
+    "选择算法时不仅要看功能是否相同，还要考虑容器专用实现的复杂度。"
+  ],
+  "examples": [
+    "查找 map 中的键时，应优先使用 map 自身提供的 `find()`，而不是对 map 的迭代器范围调用泛型 `std::find()`。",
+    "泛型算法的复杂度可表示为 $O(n)$；map 成员版 find() 的复杂度为 $O(\\log n)$。"
+  ],
+  "misconceptions": [
+    "只要两个 find() 名称相同，它们的实现效率就相同。",
+    "对 map 使用泛型 std::find() 会自动获得 map 的对数查找效率。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么查找 map 中的元素时应优先使用 map 的成员函数 find()？",
+      "a": "因为泛型 std::find() 对 map 迭代器进行线性搜索，而 map 成员函数 find() 的复杂度是对数时间，通常更快。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "std::find() 的搜索范围与返回值",
+    "算法复杂度"
+  ],
+  "source_pages": [
+    630,
+    630
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 std::map::find complexity versus std::find complexity official reference",
+  "concept_id": "1304_容器成员版_find_与泛型_std_find_的选择",
+  "_chunk_pages": [
+    629,
+    632
+  ]
+}

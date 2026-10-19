@@ -1,0 +1,42 @@
+{
+  "title": "头文件保护：包含卫士与#pragma once",
+  "definition": "头文件保护用于避免同一个头文件在同一编译单元中被重复包含。传统做法是在头文件中使用条件编译宏：先用#ifndef判断宏是否尚未定义，再用#define定义该宏，最后在文件末尾用#endif结束条件编译。示例中的#pragma once也用于表示该头文件只应被包含一次。",
+  "key_points": [
+    "典型包含卫士结构为：#ifndef LOGGER_H、#define LOGGER_H、头文件内容、#endif。",
+    "包含卫士中的宏名应具有足够的唯一性，避免与其他头文件的宏冲突。",
+    "示例中的Logger类声明位于包含保护结构内部。"
+  ],
+  "examples": [
+    "#ifndef LOGGER_H\n#define LOGGER_H\n\nclass Logger { /* … */ };\n\n#endif",
+    "也可以在头文件中使用：#pragma once"
+  ],
+  "misconceptions": [
+    "包含卫士不是为了防止多个源文件分别包含同一个头文件，而是防止同一个编译单元因重复包含而重复处理其内容。",
+    "#pragma once不是把头文件内容变成类或对象；它只是控制头文件的重复包含。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何使用条件编译宏防止头文件被重复包含？",
+      "a": "在头文件开头使用#ifndef LOGGER_H和#define LOGGER_H，在文件末尾使用#endif，将头文件内容包围起来。"
+    },
+    {
+      "q": "示例中的#pragma once起什么作用？",
+      "a": "它表示该头文件在一次编译过程中只应被包含一次，从而避免重复包含。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++头文件与#include的基本用法"
+  ],
+  "source_pages": [
+    361,
+    364
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20教材 第361页 include guard #ifndef #define #endif pragma once Logger.h",
+  "concept_id": "460_头文件保护_包含卫士与_pragma_once",
+  "_chunk_pages": [
+    361,
+    364
+  ]
+}

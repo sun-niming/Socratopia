@@ -1,0 +1,42 @@
+{
+  "title": "Echo Server 验收与排查顺序",
+  "definition": "验证 Echo Server 是否成功时，可以先启动程序，再用 `nc 127.0.0.1 8080` 输入内容测试回显。如果失败，应按顺序检查程序是否启动、端口是否被占用、`bind()` 是否失败、防火墙或 WSL 网络是否影响连接、`accept()` 是否收到连接、`read/recv()` 返回值是否大于 0、`write/send()` 是否报错。",
+  "key_points": [
+    "推荐使用 `nc` 测试，而不是一开始就依赖浏览器。",
+    "排查问题时要按系统调用链路逐项检查。",
+    "不要只看“没有输出”，每个系统调用都要检查返回值。"
+  ],
+  "examples": [
+    "`./webserver -p 8080` 后，在另一个终端执行 `nc 127.0.0.1 8080`，输入 `hello`。"
+  ],
+  "misconceptions": [
+    "连接失败不一定是代码逻辑错误，也可能是端口占用、网络环境或防火墙问题。",
+    "`accept()`、`recv()`、`send()` 都可能失败，不能只检查一处。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "Echo Server 失败时，第一步应该先检查什么？",
+      "a": "程序是否真的启动。"
+    },
+    {
+      "q": "为什么不能只看“没有输出”？",
+      "a": "因为要逐个检查系统调用返回值，才能定位具体失败点。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "Echo Server 的用途",
+    "TCP 连接常用系统调用"
+  ],
+  "source_pages": [
+    13,
+    16
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "005_echo_server_验收与排查顺序",
+  "_chunk_pages": [
+    13,
+    16
+  ]
+}

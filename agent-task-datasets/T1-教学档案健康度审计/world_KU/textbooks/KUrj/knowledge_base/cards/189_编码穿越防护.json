@@ -1,0 +1,38 @@
+{
+  "title": "编码穿越防护",
+  "definition": "对经过 URL 编码的目录穿越路径，如 `/%2e%2e/%2e%2e/etc/passwd`，服务器也必须识别并拦截，预期返回 403 或 400。",
+  "key_points": [
+    "不能只检查未编码的原始路径。",
+    "URL 编码后的 `..` 也要被识别。",
+    "处理结果仍应是拒绝访问。"
+  ],
+  "examples": [
+    "`curl -i http://127.0.0.1:8080/%2e%2e/%2e%2e/etc/passwd`"
+  ],
+  "misconceptions": [
+    "把 `..` 编成 `%2e%2e` 就能绕过安全检查。",
+    "只要 URL 看起来不是 `..` 就一定安全。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么编码后的穿越路径也要拦截？",
+      "a": "因为攻击者可以用 URL 编码隐藏 `..`，服务器必须在解码后仍能识别并拒绝。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "URL 编码基础",
+    "目录穿越防护"
+  ],
+  "source_pages": [
+    113,
+    116
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "189_编码穿越防护",
+  "_chunk_pages": [
+    113,
+    116
+  ]
+}

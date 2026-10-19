@@ -1,0 +1,52 @@
+{
+  "title": "3G UMTS的无线信道共享方式",
+  "definition": "3G UMTS相对于2G GSM的一项重大变化，是不再使用GSM的FDMA/TDMA无线接入方案，而采用直接序列宽带CDMA（Direct Sequence Wideband CDMA，DS-WCDMA）。教材描述该系统还结合时间时隙与多个可用频率，因此综合使用了频率、时间和码三类信道共享方法。与WCDMA规范相关的数据服务称为高速分组接入（High Speed Packet Access，HSPA）。",
+  "key_points": [
+    "2G GSM采用FDMA/TDMA组合方案，而3G UMTS采用DS-WCDMA。",
+    "3G UMTS的信道共享涉及频率、时间和码三种维度。",
+    "无线接入技术的变化要求新的3G无线电接入网与2G BSS无线电网络并行运行。",
+    "HSPA是与WCDMA规范相关的高速数据服务。",
+    "教材给出的HSPA预期下行数据传输率可高达14 Mbps。"
+  ],
+  "examples": [
+    "三类共享维度可概括为：$$\\text{无线资源共享}=\\text{频率划分}+\\text{时间划分}+\\text{码分复用}$$。",
+    "2G与3G无线接入的对比为：$$\\text{2G GSM：FDMA/TDMA}\\qquad\\text{3G UMTS：DS-WCDMA并结合时间与频率资源}$$。"
+  ],
+  "misconceptions": [
+    "错误地认为3G UMTS继续原样使用2G GSM的FDMA/TDMA方案；UMTS改用DS-WCDMA。",
+    "错误地认为CDMA的引入不需要改变无线接入网；教材指出需要新的3G无线接入网与2G BSS并行运行。",
+    "错误地认为HSPA是独立于WCDMA的语音核心网；HSPA是与WCDMA规范相关的数据服务。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "3G UMTS相对于2G GSM在无线接入方案上的重大变化是什么？",
+      "a": "不再使用GSM的FDMA/TDMA方案，而采用DS-WCDMA技术。"
+    },
+    {
+      "q": "教材所述3G UMTS综合使用了哪三类信道共享方法？",
+      "a": "频分、时分和码分三类方法。"
+    },
+    {
+      "q": "HSPA是什么？",
+      "a": "与WCDMA规范相关的高速分组接入数据服务，教材给出的预期下行速率可高达14 Mbps。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "FDMA",
+    "TDMA",
+    "CDMA",
+    "GSM无线接入"
+  ],
+  "source_pages": [
+    377,
+    380
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "889_3g_umts的无线信道共享方式",
+  "_chunk_pages": [
+    377,
+    380
+  ]
+}

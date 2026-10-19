@@ -1,0 +1,38 @@
+{
+  "title": "background-position 背景位置",
+  "definition": "background-position 用于设置背景图片的起始位置。教材说明它由水平方向和垂直方向组成，例如 left center。",
+  "key_points": [
+    "用于指定背景图片的起始位置。",
+    "位置通常由水平位置和垂直位置组成。",
+    "示例写法是 left center。"
+  ],
+  "examples": [
+    "background-position: left center;"
+  ],
+  "misconceptions": [
+    "背景位置只有一个值就够了。",
+    "水平和垂直顺序可以随意交换而不影响理解。",
+    "background-position 只能取像素值。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "background-position 用来设置什么？",
+      "a": "设置背景图片的起始位置，通常包含水平方向和垂直方向。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "background-image 背景图片"
+  ],
+  "source_pages": [
+    113,
+    116
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "160_background_position_背景位置",
+  "_chunk_pages": [
+    113,
+    116
+  ]
+}

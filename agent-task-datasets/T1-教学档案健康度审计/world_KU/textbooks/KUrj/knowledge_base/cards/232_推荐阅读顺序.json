@@ -1,0 +1,40 @@
+{
+  "title": "推荐阅读顺序",
+  "definition": "教材给出了一套按项目实现需要组织的阅读顺序：先看网络编程与最小 TCP 服务端，再看构建工具、HTTP 概念、请求响应格式、文件 I/O、示例项目、目录穿越防护、日志、并发与回收，最后用 curl 做验收测试。这个顺序的核心目标是让学习内容尽量贴近实际实现。",
+  "key_points": [
+    "先看最贴近实现的本地资料和源码，再补官方文档",
+    "阅读顺序覆盖 socket、Makefile、HTTP、文件 I/O、安全、日志、并发、测试"
+  ],
+  "examples": [
+    "1. Beej 官方网络编程：只读 socket、bind、listen、accept、send、recv 相关章节",
+    "2. echo_server.c：看最小 TCP 服务端流程",
+    "11. curl速查表和阮一峰 curl 指南：完成验收测试"
+  ],
+  "misconceptions": [
+    "不是按“资料名气”或“文档长短”随意挑读，而是按实现步骤安排",
+    "不是要求把每份资料从头到尾通读，只读与项目相关部分"
+  ],
+  "qa_pairs": [
+    {
+      "q": "这份讲义建议的阅读顺序总体原则是什么？",
+      "a": "优先读最贴近项目实现的资料，并按实现流程依次学习，而不是随意通读全部资料。"
+    },
+    {
+      "q": "为什么要先看 echo_server.c 和 Beej 相关章节？",
+      "a": "因为它们最接近 socket 服务端的最小实现流程，适合作为后续内容的基础。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [],
+  "source_pages": [
+    133,
+    136
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "232_推荐阅读顺序",
+  "_chunk_pages": [
+    133,
+    136
+  ]
+}

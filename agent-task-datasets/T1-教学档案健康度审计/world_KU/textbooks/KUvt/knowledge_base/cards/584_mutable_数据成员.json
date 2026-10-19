@@ -1,0 +1,49 @@
+{
+  "title": "mutable 数据成员",
+  "definition": "mutable 数据成员允许成员函数在被声明为 const 时修改该成员。它适用于逻辑上不会改变对象对用户可见状态、但实现上需要更新的数据，例如统计成员函数被调用次数的计数器。",
+  "key_points": [
+    "普通 const 成员函数不能修改非 mutable 数据成员。",
+    "将数据成员声明为 mutable 后，const 成员函数可以修改它。",
+    "mutable 适合缓存、访问计数等对对象逻辑状态没有影响的内部实现细节。",
+    "SpreadsheetCell 可以将访问次数计数器声明为 mutable，而将实际单元格值保持为普通数据成员。"
+  ],
+  "examples": [
+    "成员声明：mutable size_t m_numAccesses{0};",
+    "const 成员函数中可以执行：m_numAccesses++;",
+    "getValue() const 和 getString() const 都可以增加 m_numAccesses，但不能修改 m_value。"
+  ],
+  "misconceptions": [
+    "mutable 不是让 const 成员函数可以随意修改所有成员；只有被声明为 mutable 的成员可以这样修改。",
+    "mutable 成员的变化并不表示 const 约束完全失效；const 仍然约束其他非 mutable 数据成员。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么 const 的 getValue() 可以修改访问次数计数器？",
+      "a": "因为该计数器被声明为 mutable，允许 const 成员函数修改它。"
+    },
+    {
+      "q": "mutable 适合用于什么类型的数据？",
+      "a": "适合用于访问计数、缓存等不影响对象逻辑可见状态的内部实现数据。"
+    },
+    {
+      "q": "const 成员函数能否修改普通的非 mutable 数据成员？",
+      "a": "不能。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "const 成员函数",
+    "数据成员"
+  ],
+  "source_pages": [
+    279,
+    279
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "584_mutable_数据成员",
+  "_chunk_pages": [
+    277,
+    280
+  ]
+}

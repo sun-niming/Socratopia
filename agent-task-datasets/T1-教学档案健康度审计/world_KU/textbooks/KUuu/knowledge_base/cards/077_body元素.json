@@ -1,0 +1,40 @@
+{
+  "title": "body元素",
+  "definition": "<body>...</body>是HTML文档的主体区域，用来指明网页实际显示的内容。网页要显示的内容都放在这个标记内，</body>表示主体区域结束。",
+  "key_points": [
+    "body是网页主体区域。",
+    "页面实际显示的内容都应放在body内。"
+  ],
+  "examples": [
+    "<body>\n  <h1>标题</h1>\n  <p>正文内容</p>\n</body>"
+  ],
+  "misconceptions": [
+    "认为body标签里的内容不会显示。",
+    "认为页面可见内容可以主要放在head里。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "<body>标签用于什么？",
+      "a": "用于指明文档的主体区域，网页所要显示的内容都放在这个标记内。"
+    },
+    {
+      "q": "</body>表示什么？",
+      "a": "表示主体区域的结束。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "HTML文档基本结构"
+  ],
+  "source_pages": [
+    45,
+    48
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "077_body元素",
+  "_chunk_pages": [
+    45,
+    48
+  ]
+}

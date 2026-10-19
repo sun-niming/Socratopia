@@ -1,0 +1,41 @@
+{
+  "title": "文件打开失败时抛出异常",
+  "definition": "在读取整数文件的函数中，可以先用 std::ifstream 打开文件，再通过 `inputStream.fail()` 检查打开是否失败。如果失败，就执行 `throw std::exception{};`，函数剩余代码不会执行，控制权转移给最近的匹配异常处理程序。",
+  "key_points": [
+    "`while (inputStream >> temp)` 会持续读取整数，直到到达文件末尾或流发生错误。",
+    "输入运算符遇到错误时会设置 ifstream 对象的错误位，使其 bool 转换结果为 false，从而终止 while 循环。",
+    "文件打开失败属于需要报告给调用者处理的错误，可以在读取前抛出异常。",
+    "如果没有合适的异常处理程序捕获异常，程序将无法继续按正常路径执行。"
+  ],
+  "examples": [
+    "示意代码：`std::vector<int> readIntegerFile(std::string_view filename) { std::ifstream inputStream{filename.data()}; if (inputStream.fail()) { throw std::exception{}; } std::vector<int> integers; int temp; while (inputStream >> temp) { integers.push_back(temp); } return integers; }`"
+  ],
+  "misconceptions": [
+    "while 循环条件为 false 只说明到达文件末尾；教材说明也可能是输入错误导致流错误位被设置。",
+    "throw 执行后函数仍会返回已读取的整数；实际上函数剩余部分会被跳过。",
+    "文件打开失败必须通过返回值表示；也可以通过异常报告。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "readIntegerFile 中为什么在 inputStream.fail() 为真时立即抛出异常？",
+      "a": "因为文件打开失败，函数无法继续可靠读取；抛出异常可以跳过函数剩余代码，并把错误交给最近的匹配异常处理程序。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "std::ifstream",
+    "输入流状态",
+    "throw语句"
+  ],
+  "source_pages": [
+    438,
+    440
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "893_文件打开失败时抛出异常",
+  "_chunk_pages": [
+    437,
+    440
+  ]
+}

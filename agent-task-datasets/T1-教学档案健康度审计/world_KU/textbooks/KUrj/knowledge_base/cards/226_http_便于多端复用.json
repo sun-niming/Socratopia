@@ -1,0 +1,37 @@
+{
+  "title": "HTTP 便于多端复用",
+  "definition": "服务端采用 HTTP 后，浏览器、Electron、移动端、MacOS 客户端都可以通过同样接口访问。客户端形态可以变化，但 HTTP 后端模型可以复用，因此它适合做多端发布的统一后端。",
+  "key_points": [
+    "同一套 HTTP 接口可被多种客户端访问。",
+    "客户端可以换形态，但后端接口可以复用。",
+    "HTTP 适合作为多端发布的统一后端。"
+  ],
+  "examples": [
+    "浏览器、Electron、移动端、MacOS 客户端都能访问同一服务。"
+  ],
+  "misconceptions": [
+    "多端发布不意味着要写多套后端逻辑。",
+    "接口统一后，客户端差异主要在表现层。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "这个项目和多端发布有什么关系？",
+      "a": "使用 HTTP 后，浏览器、Electron、移动端、MacOS 客户端都能通过同样接口访问，后端模型可以复用。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "HTTP 通用协议"
+  ],
+  "source_pages": [
+    129,
+    132
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "226_http_便于多端复用",
+  "_chunk_pages": [
+    129,
+    132
+  ]
+}

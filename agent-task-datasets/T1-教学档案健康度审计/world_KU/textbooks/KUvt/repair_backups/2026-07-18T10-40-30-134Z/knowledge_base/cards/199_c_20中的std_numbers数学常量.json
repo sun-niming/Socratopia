@@ -1,0 +1,44 @@
+{
+  "title": "C++20中的std::numbers数学常量",
+  "definition": "原文指出，C++20 的 `<numbers>` 头文件提供了标准数学常量，例如 `std::numbers::e` 和 `std::numbers::pi`，分别表示自然对数的底 $e$ 和圆周率 $\\pi$。",
+  "key_points": [
+    "使用这些常量需要包含 `<numbers>` 头文件。",
+    "自然对数的底可写作 `std::numbers::e`。",
+    "圆周率可写作 `std::numbers::pi`。",
+    "这些名称位于 `std::numbers` 命名空间中。"
+  ],
+  "examples": [
+    "$$\\texttt{\\#include <numbers>}$$",
+    "$$\\texttt{double\\ x\\ =\\ std::numbers::e;}$$",
+    "$$\\texttt{double\\ y\\ =\\ std::numbers::pi;}$$"
+  ],
+  "misconceptions": [
+    "`std::numbers::e` 和 `std::numbers::pi` 不是全局变量名，完整名称包含命名空间。",
+    "使用数学常量不应把它们误写成未定义的 `e` 或 `pi`，除非程序另行定义了这些名称。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "C++20 中自然对数的底和圆周率的标准名称是什么？",
+      "a": "分别是 `std::numbers::e` 和 `std::numbers::pi`。"
+    },
+    {
+      "q": "使用 std::numbers 中的数学常量需要包含哪个头文件？",
+      "a": "`<numbers>`。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++头文件和命名空间"
+  ],
+  "source_pages": [
+    133,
+    136
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 <numbers> std::numbers::e std::numbers::pi 标准数学常量",
+  "concept_id": "199_c_20中的std_numbers数学常量",
+  "_chunk_pages": [
+    133,
+    136
+  ]
+}

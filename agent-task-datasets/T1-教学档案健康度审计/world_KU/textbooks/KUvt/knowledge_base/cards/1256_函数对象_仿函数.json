@@ -1,0 +1,47 @@
+{
+  "title": "函数对象（仿函数）",
+  "definition": "函数对象是重载了函数调用运算符 `operator()` 的类对象。使用这种对象时，可以像调用函数一样写 `object(args...)`。与简单函数相比，函数对象可以在多次调用之间通过其成员变量保持状态。",
+  "key_points": [
+    "使一个类成为函数对象的基本方法是重载函数调用运算符 `operator()`。",
+    "函数对象可以包含数据成员，并通过构造函数初始化这些数据，从而在调用之间保存状态。",
+    "函数对象可以作为回调传递给接收可调用对象的函数或算法。",
+    "原文示例中的 `IsLargerThan` 保存阈值 `m_value`，并判断两个参数是否都大于该阈值。",
+    "示例中的 `operator()` 标记为 `const`；原文说明这在该例中不是严格要求，但对大多数标准库算法而言，谓词的函数调用运算符必须是 `const`。"
+  ],
+  "examples": [
+    "`class IsLargerThan { public: explicit IsLargerThan(int value) : m_value { value } {} bool operator()(int value1, int value2) const { return value1 > m_value && value2 > m_value; } private: int m_value; };`",
+    "使用函数对象作为回调：`findMatches(values1, values2, IsLargerThan { 100 }, printMatch);`。"
+  ],
+  "misconceptions": [
+    "函数对象不是函数指针；它是一个对象，但由于重载了 `operator()`，可以使用函数调用语法。",
+    "函数对象不只是为了模拟普通函数，还可以通过数据成员保存状态。",
+    "谓词的 `operator()` 是否应为 `const` 不能一概而论；原文指出大多数标准库算法要求谓词调用运算符为 `const`。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何让一个类成为函数对象？",
+      "a": "在类中重载函数调用运算符 `operator()`。"
+    },
+    {
+      "q": "`IsLargerThan { 100 }` 在示例中保存了什么状态？",
+      "a": "它通过成员变量 `m_value` 保存阈值 `100`，调用时判断两个输入是否都大于该阈值。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "类与对象",
+    "运算符重载",
+    "回调函数"
+  ],
+  "source_pages": [
+    611,
+    611
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1256_函数对象_仿函数",
+  "_chunk_pages": [
+    609,
+    612
+  ]
+}

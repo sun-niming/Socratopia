@@ -1,0 +1,44 @@
+{
+  "title": "std::string与std::string_view",
+  "definition": "C++在头文件< string >中提供std::string类，用于管理字符串及其相关操作。std::string负责内存管理，并支持边界检查、赋值、比较、字符串串联、子字符串提取以及字符或子字符串替换。头文件< string_view >中的std::string_view是字符串表示的只读视图，可以在某些场景下替代const std::string&，并且不会复制字符串。",
+  "key_points": [
+    "std::string通常比C风格字符数组字符串更方便，能够自动处理字符串内存管理。",
+    "std::string支持赋值、比较、串联、提取子字符串和替换等操作。",
+    "std::string_view只读且不拥有字符串存储，不会复制字符串；使用时必须保证被查看的字符序列仍然有效。"
+  ],
+  "examples": [
+    "代码示意：std::string s = \"hello\"; std::string_view view = s; 此时view查看s中的字符，不复制字符串。",
+    "字符串串联可以写成：std::string result = first + second;"
+  ],
+  "misconceptions": [
+    "std::string_view会复制一份字符串；实际上它只是字符串的只读视图。",
+    "std::string_view拥有并管理底层字符串的生命周期；实际上底层字符存储必须由其他对象保证有效。",
+    "std::string只能存储英文字符；实际上C++还提供Unicode和本地化相关支持，但具体编码处理需另行考虑。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "std::string_view与std::string的关键区别是什么？",
+      "a": "std::string通常拥有并管理字符串存储，而std::string_view只是字符串的只读视图，不复制字符串，也不负责其生命周期。"
+    },
+    {
+      "q": "std::string提供哪些典型操作？",
+      "a": "它提供内存管理、边界检查、赋值、比较、字符串串联、子字符串提取以及字符或子字符串替换等操作。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++字符串基础",
+    "对象生命周期"
+  ],
+  "source_pages": [
+    501,
+    502
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1008_std_string与std_string_view",
+  "_chunk_pages": [
+    501,
+    504
+  ]
+}

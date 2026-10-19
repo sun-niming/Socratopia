@@ -1,0 +1,51 @@
+{
+  "title": "常用 C++ 输入输出格式控制器",
+  "definition": "C++ 流格式控制器用于改变输入输出的解释或显示方式。原文列出了 boolalpha、noboolalpha、dec、hex、oct、skipws、noskipws、get_time、quoted 和 ws 等控制器。",
+  "key_points": [
+    "boolalpha 和 noboolalpha 控制布尔值是否以单词形式处理或显示；原文列举了 true 和 false 的相关用法。",
+    "dec、hex、oct 分别选择十进制、十六进制和八进制整数格式。",
+    "skipws 和 noskipws 控制格式化输入是否跳过前导空白字符。",
+    "get_time 用于时间相关的格式化输入。",
+    "quoted 用于带引号文本的输入输出处理。",
+    "ws 用于处理输入流中的空白字符。"
+  ],
+  "examples": [
+    "选择十六进制输入输出格式：cin >> hex;",
+    "关闭输入时自动跳过空白：cin >> noskipws;",
+    "布尔值使用单词形式：cout << boolalpha << true;"
+  ],
+  "misconceptions": [
+    "dec、hex、oct 主要控制整数的进制，不是把任意字符串转换成对应进制。",
+    "noskipws 不等于删除空白字符；它只是改变格式化输入是否自动跳过空白。",
+    "boolalpha 控制布尔值的文本表示，不会把任意非空字符串自动变成布尔值。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "哪个控制器用于选择十六进制整数格式？",
+      "a": "hex。"
+    },
+    {
+      "q": "哪个控制器用于关闭格式化输入时的前导空白跳过？",
+      "a": "noskipws。"
+    },
+    {
+      "q": "boolalpha 和 noboolalpha 用于控制什么？",
+      "a": "用于控制布尔值是否采用单词形式（如 true、false）进行处理或显示。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++输入输出流基础"
+  ],
+  "source_pages": [
+    421,
+    424
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 iostream manipulators boolalpha noboolalpha dec hex oct skipws noskipws get_time quoted ws exact behavior",
+  "concept_id": "551_常用_c_输入输出格式控制器",
+  "_chunk_pages": [
+    421,
+    424
+  ]
+}

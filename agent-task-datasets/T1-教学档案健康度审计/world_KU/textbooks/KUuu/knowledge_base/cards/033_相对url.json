@@ -1,0 +1,41 @@
+{
+  "title": "相对URL",
+  "definition": "相对URL是使用不完整URL组成的地址，必须结合参考地址（当前资源的位置）才能确定最终指向。教材指出，相对URL常见的写法包括以“./”“../”或“/”开头的形式。",
+  "key_points": [
+    "相对URL本身不完整，不能脱离参考地址单独确定",
+    "“./”表示当前所在目录，且“./”可以省略",
+    "“../”表示当前目录的上一层目录",
+    "“/”表示当前网页所在网站的根目录"
+  ],
+  "examples": [
+    "./index.html",
+    "../images/logo.png",
+    "/css/style.css"
+  ],
+  "misconceptions": [
+    "以为相对URL不需要基准地址也能唯一确定",
+    "把“/”理解成当前目录"
+  ],
+  "qa_pairs": [
+    {
+      "q": "相对URL为什么要结合参考地址来确定？",
+      "a": "因为它使用的是不完整的URL，只有结合当前资源的位置等参考地址，才能确定最终指向。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "URL基础",
+    "当前资源位置/参考地址"
+  ],
+  "source_pages": [
+    25,
+    28
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "033_相对url",
+  "_chunk_pages": [
+    25,
+    28
+  ]
+}

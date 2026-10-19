@@ -1,0 +1,53 @@
+{
+  "title": "分区算法与分区点",
+  "definition": "分区算法按照谓词重新安排序列，使谓词返回 true 的所有元素位于谓词返回 false 的所有元素之前。满足这一条件时，分界位置称为分区点（partition point）。",
+  "key_points": [
+    "分区点是序列中第一个不满足谓词的元素所在位置，通常以迭代器表示。",
+    "`is_partitioned` 检查序列是否已经满足 true 元素在 false 元素之前。",
+    "`partition` 进行分区但不保持每个分区内原有元素顺序。",
+    "`stable_partition` 进行分区并保持每个分区内原有元素顺序。",
+    "`partition_copy` 按谓词结果把元素复制到两个不同的目标序列。",
+    "`partition_point` 返回一个迭代器，使该迭代器之前的元素都使谓词返回 true，该迭代器之后的元素都使谓词返回 false。"
+  ],
+  "examples": [
+    "若谓词为“元素小于 0”，序列可被分成：先放所有负数，再放所有非负数。",
+    "分区点可表示为：$$[\\text{谓词为 true 的元素} \\mid \\text{谓词为 false 的元素}]$$",
+    "若 `p` 是分区点，则应满足：$$\\forall x\\in[begin,p),\\ pred(x)=true$$ $$\\forall y\\in[p,end),\\ pred(y)=false$$"
+  ],
+  "misconceptions": [
+    "分区不是完整排序；它只保证两个谓词分区的相对位置。",
+    "`partition` 不保证分区内部保持原顺序，只有 `stable_partition` 保持该顺序。",
+    "分区点是第一个不满足谓词的位置，不是最后一个满足谓词的位置。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "什么是分区点？",
+      "a": "分区点是序列中不满足谓词的第一个元素的位置；分区点之前的元素都使谓词返回 true，之后的元素都使谓词返回 false。"
+    },
+    {
+      "q": "`partition` 与 `stable_partition` 的区别是什么？",
+      "a": "二者都把谓词为 true 的元素放在谓词为 false 的元素之前，但 `partition` 不保持分区内原顺序，而 `stable_partition` 保持分区内原顺序。"
+    },
+    {
+      "q": "`partition_copy` 做什么？",
+      "a": "根据谓词返回 true 或 false 的结果，把一个序列中的元素分别复制到两个不同的目标序列。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "谓词",
+    "迭代器",
+    "稳定性概念"
+  ],
+  "source_pages": [
+    516,
+    516
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1060_分区算法与分区点",
+  "_chunk_pages": [
+    513,
+    516
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "title": "自定义 std::formatter 的基本结构",
+  "definition": "要让自定义类型能够作为 std::format 的参数，需要为该类型提供 `std::formatter<T>` 特化。该 formatter 通常实现 `parse()` 解析格式说明符，并实现 `format()` 将对象写入格式化上下文的输出迭代器。",
+  "key_points": [
+    "原文定义了 `KeyValue` 类型，包含字符串键和值为 `int` 的成员，并提供 `getKey()` 和 `getValue()` 访问函数。",
+    "`std::formatter<KeyValue>` 使用枚举 `OutputType` 记录输出模式：只输出键、只输出值，或同时输出键和值。",
+    "`parse(auto& context)` 读取格式字段中的自定义说明符。",
+    "当格式字段为空，即 `{}` 时，原文默认选择 `KeyAndValue` 模式。",
+    "自定义说明符 `a` 表示只输出键，`b` 表示只输出值，`c` 表示同时输出键和值；遇到其他字符时抛出 `format_error`。"
+  ],
+  "examples": [
+    "原文中的自定义类型可概括为：`KeyValue keyValue{\"Key1\", 11};`。",
+    "格式化调用：`std::format(\"{}\", keyValue)` 输出键和值；`std::format(\"{:a}\", keyValue)` 只输出键；`std::format(\"{:b}\", keyValue)` 只输出值；`std::format(\"{:c}\", keyValue)` 输出键和值。",
+    "`std::format(\"{:cd}\", keyValue)` 在 `c` 后仍有多余字符，因此会抛出 `std::format_error`。"
+  ],
+  "misconceptions": [
+    "自定义 formatter 不是只定义一个输出函数；它还需要解析格式字符串中的自定义选项。",
+    "`{}` 与 `{:a}`、`{:b}`、`{:c}` 的含义由该类型的 formatter 自己定义；自定义说明符不一定与内置类型相同。",
+    "解析成功不等于可以忽略格式字段剩余内容；原文要求说明符后应到达 `}`，否则抛出格式错误。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为了让 `KeyValue` 支持 std::format，需要实现什么？",
+      "a": "需要提供 `std::formatter<KeyValue>` 特化，并实现 `parse()` 与 `format()` 等必要接口。"
+    },
+    {
+      "q": "原文自定义格式说明符 `a`、`b`、`c` 分别表示什么？",
+      "a": "`a` 只输出键，`b` 只输出值，`c` 同时输出键和值。"
+    },
+    {
+      "q": "为什么 `{:cd}` 会触发格式错误？",
+      "a": "因为解析完合法说明符 `c` 后仍有字符 `d`，格式字段没有按预期结束，因而被判定为非法说明符。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "std::format 基本用法",
+    "C++ 类与成员函数",
+    "C++ 模板特化基础"
+  ],
+  "source_pages": [
+    119,
+    120
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 custom std::formatter specialization parse format KeyValue OutputType {:a} {:b} {:c} example",
+  "concept_id": "174_自定义_std_formatter_的基本结构",
+  "_chunk_pages": [
+    117,
+    120
+  ]
+}

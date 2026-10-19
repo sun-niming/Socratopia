@@ -1,0 +1,43 @@
+{
+  "title": "stat检查文件状态",
+  "definition": "服务器在确定文件路径后，可以先用 `stat()` 检查文件状态：如果 `stat(path, &st) < 0`，说明文件不存在或无法访问，返回 404；如果 `!S_ISREG(st.st_mode)`，说明它不是普通文件，返回 403。",
+  "key_points": [
+    "`stat()` 用于检查文件是否存在以及文件类型。",
+    "`stat` 失败对应 404。",
+    "不是普通文件时对应 403。",
+    "原文要求只服务普通文件，不服务目录，不执行程序。"
+  ],
+  "examples": [
+    "$$\\begin{aligned}\\text{struct stat } st;\\\\if\\ (stat(path, \\&st) < 0)\\ \\{\\ return\\ 404;\\ \\}\\\\if\\ (!S\\_ISREG(st.st\\_mode))\\ \\{\\ return\\ 403;\\ \\}\\end{aligned}$$"
+  ],
+  "misconceptions": [
+    "只要文件存在就一定可以作为静态资源返回。",
+    "目录也可以像普通文件一样直接作为 HTTP 响应体发送。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`stat(path, &st) < 0` 通常表示什么？",
+      "a": "文件不存在或无法访问，应返回 404。"
+    },
+    {
+      "q": "为什么 `!S_ISREG(st.st_mode)` 要返回 403？",
+      "a": "因为它不是普通文件，静态服务器只服务普通文件。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "URL到文件路径映射",
+    "URL路径与文件路径的区别"
+  ],
+  "source_pages": [
+    25,
+    26
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "030_stat检查文件状态",
+  "_chunk_pages": [
+    25,
+    28
+  ]
+}

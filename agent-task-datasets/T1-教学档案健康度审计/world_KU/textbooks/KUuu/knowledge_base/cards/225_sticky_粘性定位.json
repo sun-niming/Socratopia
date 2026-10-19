@@ -1,0 +1,36 @@
+{
+  "title": "sticky 粘性定位",
+  "definition": "sticky 是粘性定位，元素相对于可以滚动的最近的父元素进行定位。",
+  "key_points": [
+    "sticky 表示粘性定位",
+    "参照物是可以滚动的最近的父元素"
+  ],
+  "examples": [
+    "position: sticky; top: 0;"
+  ],
+  "misconceptions": [
+    "sticky 就是固定定位；原文把它单独列为粘性定位",
+    "sticky 的参照物是浏览器窗口；原文说明是可滚动的最近父元素"
+  ],
+  "qa_pairs": [
+    {
+      "q": "sticky 定位相对于什么进行定位？",
+      "a": "相对于可以滚动的最近的父元素进行定位。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "层定位"
+  ],
+  "source_pages": [
+    137,
+    140
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "225_sticky_粘性定位",
+  "_chunk_pages": [
+    137,
+    140
+  ]
+}

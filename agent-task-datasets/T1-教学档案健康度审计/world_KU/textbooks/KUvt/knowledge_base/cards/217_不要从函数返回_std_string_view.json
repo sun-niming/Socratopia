@@ -1,0 +1,42 @@
+{
+  "title": "不要从函数返回 std::string_view",
+  "definition": "如果函数返回的 `std::string_view` 指向的字符串可能在返回后重新分配、销毁或失效，就会产生悬空视图。因此，返回字符串的函数通常应返回 `std::string`；除非能够确保被引用字符串在调用者使用返回值期间始终有效，否则不应返回 `std::string_view`。",
+  "key_points": [
+    "返回 `std::string_view` 会有视图失效的风险，尤其是视图指向的字符串发生重新分配时。",
+    "将 `const std::string&` 或 `std::string_view` 保存为类的数据成员时，必须确保被引用的字符串在对象生命周期内一直有效。",
+    "如果无法严格保证生命周期，存储 `std::string` 更安全，因为它拥有自己的字符串数据。"
+  ],
+  "examples": [
+    "不安全的设计：函数返回指向局部字符串或可能发生重新分配的字符串的 `std::string_view`。",
+    "更安全的返回类型：`std::string extractExtension(std::string_view filename);`。"
+  ],
+  "misconceptions": [
+    "返回 `std::string_view` 总是比返回 `std::string` 更高效且安全，这是错误的；生命周期不明确时可能产生悬空视图。",
+    "把 `std::string_view` 存为成员变量不会自动延长被引用字符串的生命周期。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么返回字符串的函数通常不应返回 `std::string_view`？",
+      "a": "因为返回的视图可能指向之后被销毁或重新分配的字符串，从而失效；返回 `std::string` 通常更安全。"
+    },
+    {
+      "q": "类中保存 `std::string_view` 成员时必须保证什么？",
+      "a": "必须保证它所引用的字符串在该对象的整个使用期间保持有效；否则应存储 `std::string`。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "std::string_view 的生命周期"
+  ],
+  "source_pages": [
+    114,
+    114
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "217_不要从函数返回_std_string_view",
+  "_chunk_pages": [
+    113,
+    116
+  ]
+}

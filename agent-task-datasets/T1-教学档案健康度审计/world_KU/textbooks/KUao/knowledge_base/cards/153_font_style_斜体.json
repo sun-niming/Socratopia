@@ -1,0 +1,37 @@
+{
+  "title": "font-style 斜体",
+  "definition": "font-style 用于设置字体样式中的斜体属性。教材列出的取值有 normal 表示正常，italic 表示斜体。",
+  "key_points": [
+    "normal 表示正常字体样式。",
+    "italic 表示斜体。"
+  ],
+  "examples": [
+    "font-style: normal;",
+    "font-style: italic;"
+  ],
+  "misconceptions": [
+    "italic 表示加粗。",
+    "normal 表示没有字体样式属性。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "font-style 的 italic 表示什么？",
+      "a": "表示斜体。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "CSS基础"
+  ],
+  "source_pages": [
+    113,
+    114
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "153_font_style_斜体",
+  "_chunk_pages": [
+    113,
+    116
+  ]
+}

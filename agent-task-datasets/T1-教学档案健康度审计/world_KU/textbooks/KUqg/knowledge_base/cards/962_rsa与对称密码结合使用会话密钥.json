@@ -1,0 +1,44 @@
+{
+  "title": "RSA与对称密码结合使用会话密钥",
+  "definition": "由于RSA的指数运算耗时较长，实际应用通常将RSA与对称密钥密码结合：发送方先随机选择一个用于加密大量数据的会话密钥$K_s$，再使用接收方的RSA公钥加密$K_s$并发送；接收方用RSA私钥解密得到$K_s$，随后双方使用该共享会话密钥进行对称加密通信。",
+  "key_points": [
+    "会话密钥$K_s$是用于加密实际数据的对称密钥。",
+    "Alice使用Bob的RSA公钥$(n,e)$计算会话密钥的密文：$c=K_s^e\\bmod n$。",
+    "Bob使用RSA私钥中的$d$解密该密文，从而获得$K_s$。",
+    "RSA负责安全传递会话密钥，对称密码负责高效加密大量数据。"
+  ],
+  "examples": [
+    "通信流程可表示为：Alice选择$K_s$；计算$c=K_s^e\\bmod n$；发送$c$；Bob计算$K_s=c^d\\bmod n$；之后Alice和Bob使用$K_s$通过DES或AES加密数据。",
+    "教材指出，软件实现的DES比RSA快约100倍，硬件实现的DES比RSA快约$1000\\sim10000$倍。"
+  ],
+  "misconceptions": [
+    "会话密钥不是RSA的长期私钥，而是为一次或一段数据传输选择的对称密钥。",
+    "实际应用通常不是用RSA直接加密全部长报文，而是用RSA加密会话密钥。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么实际应用通常不直接用RSA加密大量数据？",
+      "a": "因为RSA所需的指数运算耗时较长；通常用RSA传递会话密钥，再用更高效的对称密码加密大量数据。"
+    },
+    {
+      "q": "Alice如何把会话密钥$K_s$安全地告知Bob？",
+      "a": "Alice使用Bob的RSA公钥计算$c=K_s^e\\bmod n$并发送，Bob使用私钥解密得到$K_s$。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "RSA加密与解密过程",
+    "对称密钥密码"
+  ],
+  "source_pages": [
+    413,
+    414
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "962_rsa与对称密码结合使用会话密钥",
+  "_chunk_pages": [
+    413,
+    416
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "title": "DOM事件流",
+  "definition": "DOM 事件流是指：当 HTML 元素产生事件时，这个事件会在元素节点与根节点之间按特定顺序传播，路径经过的节点都会收到该事件。",
+  "key_points": [
+    "DOM 结构是树型结构，事件会沿树传播",
+    "传播路径经过的节点都会收到该事件",
+    "事件流包括两种类型：事件捕获和事件冒泡"
+  ],
+  "examples": [
+    "点击嵌套在 div 里的按钮时，按钮、父元素、document 可能都会收到该事件",
+    "addEventListener 的事件传播顺序与捕获/冒泡有关"
+  ],
+  "misconceptions": [
+    "事件不会只停留在目标元素上；它还会沿着 DOM 树传播",
+    "事件流不是只有冒泡一种，还有捕获"
+  ],
+  "qa_pairs": [
+    {
+      "q": "什么叫 DOM 事件流？",
+      "a": "事件在元素节点与根节点之间按特定顺序传播的过程。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "DOM树"
+  ],
+  "source_pages": [
+    362,
+    362
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "522_dom事件流",
+  "_chunk_pages": [
+    361,
+    364
+  ]
+}

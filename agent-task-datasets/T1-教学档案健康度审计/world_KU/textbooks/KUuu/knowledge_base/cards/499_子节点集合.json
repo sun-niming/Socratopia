@@ -1,0 +1,37 @@
+{
+  "title": "子节点集合",
+  "definition": "element.childNodes 返回一个动态 NodeList，包含所有类型的子节点（元素、文本、注释）；element.children 返回一个动态 HTMLCollection，只包含元素类型的子节点。",
+  "key_points": [
+    "childNodes 包含所有类型子节点",
+    "children 只包含元素子节点",
+    "两者都是动态集合"
+  ],
+  "examples": [
+    "element.childNodes",
+    "element.children"
+  ],
+  "misconceptions": [
+    "children 会把文本节点和注释节点也算进去。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "childNodes 和 children 的区别是什么？",
+      "a": "childNodes 包含所有类型的子节点；children 只包含元素类型的子节点。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "DOM树"
+  ],
+  "source_pages": [
+    350,
+    352
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "499_子节点集合",
+  "_chunk_pages": [
+    349,
+    352
+  ]
+}

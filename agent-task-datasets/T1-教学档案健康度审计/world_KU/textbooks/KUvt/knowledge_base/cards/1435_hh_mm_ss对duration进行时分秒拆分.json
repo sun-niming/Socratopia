@@ -1,0 +1,44 @@
+{
+  "title": "hh_mm_ss对duration进行时分秒拆分",
+  "definition": "C++20向`chrono`库加入了`hh_mm_ss`类模板。它接收一个duration，并将其拆分为小时、分钟、秒和子秒部分。该类提供`hours()`、`minutes()`、`seconds()`和`subseconds()`等访问函数；这些组成部分总是返回非负值，若原duration为负数，则可通过`is_negative()`判断。",
+  "key_points": [
+    "`hh_mm_ss`用于把一个duration分解成时、分、秒和子秒。",
+    "`hours()`、`minutes()`、`seconds()`和`subseconds()`用于取得各组成部分。",
+    "各组成部分的访问函数返回非负值。",
+    "原duration为负数时，`is_negative()`返回`true`；否则返回`false`。"
+  ],
+  "examples": [
+    "概念性用法：对一个duration构造`hh_mm_ss`对象，然后分别调用`hours()`、`minutes()`、`seconds()`和`subseconds()`取得拆分结果。",
+    "若duration表示负的时间间隔，则先用`is_negative()`判断符号，再读取非负的时、分、秒和子秒组成部分。"
+  ],
+  "misconceptions": [
+    "`hh_mm_ss`不是一个时钟；它是用于拆分duration的类模板。",
+    "组成部分函数不会分别返回负数；负号通过`is_negative()`单独表示。",
+    "`hh_mm_ss`不会把duration转换成日历日期。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`hh_mm_ss`的作用是什么？",
+      "a": "接收一个duration，并把它拆分为小时、分钟、秒和子秒。"
+    },
+    {
+      "q": "如何判断`hh_mm_ss`对应的duration是否为负？",
+      "a": "调用`is_negative()`；返回`true`表示为负，返回`false`表示非负。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "std::chrono::duration的时间周期表示与基本构造"
+  ],
+  "source_pages": [
+    688,
+    688
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1435_hh_mm_ss对duration进行时分秒拆分",
+  "_chunk_pages": [
+    685,
+    688
+  ]
+}

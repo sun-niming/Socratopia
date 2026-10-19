@@ -1,0 +1,45 @@
+{
+  "title": "vector的insert插入操作",
+  "definition": "vector的insert()方法可以在迭代器指定的位置插入一个或多个元素。插入后，原插入位置及其后面的元素会向后移动，为新元素腾出空间。教材指出insert()有5种不同的重载形式，其中包括插入单个元素和插入单个元素的多份副本。",
+  "key_points": [
+    "insert()需要使用迭代器指定插入位置。",
+    "插入操作会使插入位置之后的原有元素向后移动。",
+    "insert()支持多种重载，可以插入单个元素或指定数量的同一元素副本。"
+  ],
+  "examples": [
+    "概念示例：\n文本代码：auto pos { begin(values) + 2 }; values.insert(pos, 99);",
+    "插入多个相同副本的形式：\n文本代码：values.insert(pos, 3, 99); // 在pos处插入3个99"
+  ],
+  "misconceptions": [
+    "insert()只能在vector末尾插入；它可以在迭代器指定的任意位置插入。",
+    "插入元素不会影响后续元素的位置；vector需要将后续元素向后移动。",
+    "insert()只支持插入单个元素；教材指出它有多种重载，包括插入多个副本。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "vector的insert()在哪里插入元素？",
+      "a": "在传入的迭代器所指定的位置插入一个或多个元素。"
+    },
+    {
+      "q": "在vector中间调用insert()会发生什么？",
+      "a": "插入位置及其后面的原有元素会向后移动，为新元素腾出空间。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "vector迭代器",
+    "vector元素插入",
+    "函数重载"
+  ],
+  "source_pages": [
+    556,
+    556
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 std::vector insert overloads five overloads insert single element count copies iterator position",
+  "concept_id": "1148_vector的insert插入操作",
+  "_chunk_pages": [
+    553,
+    556
+  ]
+}

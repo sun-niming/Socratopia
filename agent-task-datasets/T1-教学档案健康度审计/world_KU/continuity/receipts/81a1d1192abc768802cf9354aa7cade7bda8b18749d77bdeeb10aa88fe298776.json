@@ -1,0 +1,105 @@
+{
+  "schemaVersion": 1,
+  "status": "committed",
+  "operationId": "endclass:v1:04f33da60b2c522646d136ce6ce84827:d5cdb2af7dfe25715f064e53",
+  "operationHash": "81a1d1192abc768802cf9354aa7cade7bda8b18749d77bdeeb10aa88fe298776",
+  "scope": {
+    "accountId": "local",
+    "profileId": "uolmzgq8",
+    "worldId": "KU",
+    "conversationId": "vS_1AORhMjQDsRuG5Y3HM"
+  },
+  "companion": {
+    "slotId": "npc_d",
+    "companionInstanceId": "ci_6988246c6ce5fbce05a9b74c",
+    "candidateId": "ct_ahvgk5n4",
+    "displayName": "青衣"
+  },
+  "committedAt": "2026-09-13T05:07:47.792Z",
+  "targets": [
+    {
+      "relativePath": "pal_moments.md",
+      "oldHash": "8084433da2b0bb3bfd8776d5b7d4e396e8eb779aa9bdd6848a3348b14965bbac",
+      "newHash": "a34767c4bfe7dfdc7dfadbca0b282458755286bfd50987373fc9bf286c20c8f2",
+      "deleting": false
+    },
+    {
+      "relativePath": "textbooks/KUqg/progress.md",
+      "oldHash": "c3775db0129993c9a25aac401a2be3f9a0bd708cf5bc0e3f7cbe5f7bdef46eb7",
+      "newHash": "429bbf022023a33a6ab6cd8fae3d45c45aa2366d61d4258c757d187acccdda6d",
+      "deleting": false
+    },
+    {
+      "relativePath": "diary/2026-09.md",
+      "oldHash": "5ccebe780d1b07c7c2d726ab34f5db8237c62a21b5d47bd004edadae92047814",
+      "newHash": "6f0484ab9038df0f6919d85c4ab44dc0eccab6fa73fb113faf5cfcd65fdbdc20",
+      "deleting": false
+    },
+    {
+      "relativePath": "relation_npc_d.md",
+      "oldHash": "90262ade6cfbdbdc6ff1ec5509bdceaa48a2f3030c473ab9557a32bd1c34877e",
+      "newHash": "30ccdcb6902262c985e80e1ee95d15b913d4b744d452c47c2cdb05191cf1c133",
+      "deleting": false
+    },
+    {
+      "relativePath": "world_meta.json",
+      "oldHash": "ccfebad918a1db25f23e3ca436c6c7de4e080e353f7abd35ae4d9397504956f4",
+      "newHash": "6333fa05e9394c103e3d7489f131ed1fc1ed9525885faba168909cbfaf15733e",
+      "deleting": false
+    },
+    {
+      "relativePath": "world_records.md",
+      "oldHash": "d36cae38aa9f190425904648654544dd8dae5b2de0ba1a20de2b61acb6ea8c5b",
+      "newHash": "93b7e5a7222c89b81cac68837d094cc39e72965b985f7665a0c427f916ed7d7e",
+      "deleting": false
+    },
+    {
+      "relativePath": "textbooks/textbook_index.json",
+      "oldHash": "215f3af76a64f2300e47242dab5cca34da042f474f7dcbdaf8f9439b327e1073",
+      "newHash": "3d4add46a3df2949d76cd754d4b85f217985f42e245e2dcb9b1063d3c9c7775e",
+      "deleting": false
+    },
+    {
+      "relativePath": "textbooks/KUqg/handoff/last_tail.json",
+      "oldHash": "859929ee6877e9569200ffae278671519d138a4bb7e5d090c12604da8bba15ba",
+      "newHash": "d4ca065341878b5179ec2ea0a8217f05bd2c893e70d838782ecbd74d003a7c24",
+      "deleting": false
+    },
+    {
+      "relativePath": "textbooks/KUqg/handoff/last_meta.json",
+      "oldHash": "1102484042a3bb8f3b5d0317278cba04efb9c0c4fe77b2d9ccc690e0ea4a912c",
+      "newHash": "0c629d061130dbeab841c55e922fed181ccb12c1b9fb35e1589bca4d97e3b74a",
+      "deleting": false
+    },
+    {
+      "relativePath": "conversations/vS_1AORhMjQDsRuG5Y3HM/current_reading.md",
+      "oldHash": "ae623236e4c2ed8fd4d9522671943619f8d9f38917b9678c3218b28f138758a9",
+      "newHash": null,
+      "deleting": true
+    },
+    {
+      "relativePath": "textbooks/KUqg/current_reading.md",
+      "oldHash": null,
+      "newHash": null,
+      "deleting": true
+    },
+    {
+      "relativePath": "conversations/vS_1AORhMjQDsRuG5Y3HM/current_reading_summary.json",
+      "oldHash": null,
+      "newHash": null,
+      "deleting": true
+    },
+    {
+      "relativePath": "conversations/vS_1AORhMjQDsRuG5Y3HM/handoff.json",
+      "oldHash": null,
+      "newHash": null,
+      "deleting": true
+    }
+  ],
+  "payload": {
+    "farewell": "*青衣没再回头，只把合上的案件夹压在桌角。*\n\n行，停在这儿。今天从 TCP 客户那三处差异一路走到服务器两扇门，收得住。你说的**章末习题**我记下了，下次不开新内容，一题一题过证据。\n\n晚安，逆铭。灯关了再睡。",
+    "companionNote": "两扇门的账你今天算得清。全双工那处回去再想一遍：寄出去的走一条轨，收回来的是另一条。下次章末习题，一题一题来。",
+    "marker": "<!-- continuityEvent:81a1d1192abc768802cf9354 companion:ci_6988246c6ce5fbce05a9b74c mode:classroom -->",
+    "endingPage": 131
+  }
+}

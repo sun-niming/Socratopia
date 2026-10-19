@@ -1,0 +1,53 @@
+{
+  "title": "为自定义数组类提供 const 下标运算符重载",
+  "definition": "为了让 const Array<T> 对象能够通过下标读取元素，类可以额外定义 const 版本的 operator[]：const T& operator[](size_t x) const;。该版本返回 const T&，调用者可以读取元素但不能通过该引用修改元素。原文中的实现还会在下标超出当前范围时抛出 std::out_of_range。",
+  "key_points": [
+    "const 下标运算符的典型声明为：const T& operator[](size_t x) const;",
+    "函数末尾的 const 表示该成员函数不能修改当前对象。",
+    "返回 const T& 可以避免复制元素，同时禁止通过返回值修改元素。",
+    "对 const Array<int>& arr 调用 arr[i] 时，会选择 const 版本的 operator[]。",
+    "原文给出的 const 版本在 x >= m_size 时抛出 std::out_of_range，然后返回 m_elements[x]。"
+  ],
+  "examples": [
+    "const T& operator[](size_t x) const;",
+    "template <typename T> const T& Array<T>::operator[](size_t x) const { if (x >= m_size) { throw std::out_of_range{}; } return m_elements[x]; }",
+    "void printArray(const Array<int>& arr) { for (size_t i { 0 }; i < arr.getSize(); i++) { cout << arr[i] << \" \"; } cout << endl; }"
+  ],
+  "misconceptions": [
+    "仅把返回类型改成 const T& 不能构成有效的函数重载；这里还需要通过成员函数末尾的 const 区分。",
+    "const 对象不能调用非 const 版本的 operator[]，而是调用 const 版本。",
+    "const 版本返回 const T&，因此不能写成 arr[i] = 100;。",
+    "const 成员函数并不意味着返回值一定是副本；原文中返回的是对元素的 const 引用。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么 printArray(const Array<int>& arr) 中的 arr[i] 会调用 const operator[]？",
+      "a": "因为 arr 的类型是 const Array<int>&，所以只能调用声明末尾带 const 的成员函数，即 const 版本的 operator[]。"
+    },
+    {
+      "q": "const operator[] 的典型返回类型是什么？",
+      "a": "const T&，它返回元素的只读引用。"
+    },
+    {
+      "q": "原文的 const operator[] 在下标 x >= m_size 时做什么？",
+      "a": "抛出 std::out_of_range 异常。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "函数重载",
+    "const 成员函数",
+    "引用"
+  ],
+  "source_pages": [
+    482,
+    483
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "624_为自定义数组类提供_const_下标运算符重载",
+  "_chunk_pages": [
+    481,
+    484
+  ]
+}

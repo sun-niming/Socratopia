@@ -1,0 +1,36 @@
+{
+  "title": "history对象",
+  "definition": "history对象包含浏览历史URL等相关信息，可用于访问历史页面。教材指出它可以访问历史页面，但不能获取历史页面的URL。",
+  "key_points": [
+    "history对象和浏览器的历史记录有关。",
+    "可以据此在历史页面之间前进或后退。",
+    "教材说明它不能获取历史页面的URL。"
+  ],
+  "examples": [
+    "history对象包含浏览历史URL等相关信息。"
+  ],
+  "misconceptions": [
+    "以为history对象可以直接读取每个历史页面的完整URL。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "history对象主要与什么信息有关？",
+      "a": "它包含浏览历史URL等相关信息，用于访问历史页面。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "浏览器历史记录"
+  ],
+  "source_pages": [
+    337,
+    340
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "483_history对象",
+  "_chunk_pages": [
+    337,
+    340
+  ]
+}

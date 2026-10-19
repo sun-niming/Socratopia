@@ -1,0 +1,179 @@
+{
+  "chunkId": "chunk-004",
+  "messageRange": [
+    26,
+    33
+  ],
+  "topics": [
+    {
+      "name": "多对多关系与中间表 Ingredient_Ref",
+      "facts": [
+        "一个 Taco 要用多种配料，同一种配料又会出现在很多个 Taco 里，这就是多对多关系。",
+        "在 Taco 表里开一列硬存配料只能装一个值，为每种配料各开一列则列数不固定，无法固定，才是真正的复杂。",
+        "解法是把“一个 Taco 用了哪些配料”单独拎到一张中间表 Ingredient_Ref 里，一行记一条“某 Taco 用了某 Ingredient”，多对多被拆成两组一对多。",
+        "中间表的存在是为了拆关系，不是为了少建表；加一张 Ingredient_Ref 表的数量是多了，不是少了。"
+      ],
+      "examples": [
+        "Ingredient_Ref 表：教材页 85 建表时只列了 ingredient、taco、taco_key 三列，taco_key 用来保留配料在列表里的顺序。",
+        "页 90 的 saveIngredientRefs() 里 key++ 就是用来保留配料在列表里的顺序。"
+      ],
+      "sourceMessageIndexes": [
+        26,
+        27
+      ]
+    },
+    {
+      "name": "schema.sql 与 data.sql 的约定",
+      "facts": [
+        "类路径根目录下放 schema.sql，应用启动时里面的 SQL 会被执行来建表。",
+        "根目录下放 data.sql，里面是 insert 语句，启动时执行来预加载配料数据。",
+        "两个文件都放在项目的 src/main/resources/ 下。",
+        "页 86 的清单 3.10 前四行是 delete from ...，先清空再插入，省得重复启动时数据叠起来。",
+        "这套机制不要求写任何一行“请执行这个文件”的代码，靠在约定位置找约定文件名，属于自动配置。",
+        "这套认领是自动配置的一个实例，也可以用配置项把它关掉、或指定别的文件名。"
+      ],
+      "examples": [
+        "类路径根目录下叫 schema.sql 的，启动时拿去建表；叫 data.sql 的，拿去灌数据。"
+      ],
+      "sourceMessageIndexes": [
+        27,
+        28,
+        29
+      ]
+    },
+    {
+      "name": "OrderRepository 的 save() 与三层写入",
+      "facts": [
+        "OrderRepository 接口一句话：存一个订单，返回存好之后的订单。",
+        "TacoOrder 是聚合根，Taco 不能脱离它单独存在，而每个 Taco 又通过 IngredientRef 挂着若干配料。",
+        "存一个订单是一串连锁动作：存 TacoOrder → 存它的每个 Taco → 存每个 Taco 的 IngredientRef。",
+        "IngredientRef 类只有一个字段：@Data public class IngredientRef { private final String ingredient; }。",
+        "页 84 说 IngredientRef 是 Taco 和 Ingredient 之间的连线，这里落了实：它记的就是“哪个配料”。"
+      ],
+      "examples": [
+        "public interface OrderRepository { TacoOrder save(TacoOrder order); }",
+        "\\[\\text{存 TacoOrder} \\rightarrow \\text{存它的每个 Taco} \\rightarrow \\text{存每个 Taco 的 IngredientRef}\\]"
+      ],
+      "sourceMessageIndexes": [
+        29
+      ]
+    },
+    {
+      "name": "数据库生成键的取回与 GeneratedKeyHolder",
+      "facts": [
+        "建表的 SQL 里 Taco_Order 的 id 那一列写的是 id identity，这个 id 的值不是用户给的，是数据库自己生成的。",
+        "方法最后要 return order，返回的 TacoOrder 得带着 id；数据库生成的键要在插入的同时要回来，而不是插完再 select 一遍。",
+        "JDBC 的 PreparedStatement 在创建语句时声明“我要返回生成的键”，执行完再用 getGeneratedKeys() 取。",
+        "Spring 把这套包装成了 GeneratedKeyHolder。"
+      ],
+      "examples": [
+        "1. 造一个 PreparedStatementCreatorFactory，描述那条 insert 语句，并列明九个输入字段各自的类型（Types.VARCHAR…Types.TIMESTAMP）。",
+        "2. pscf.setReturnGeneratedKeys(true);",
+        "3. 用工厂造出 PreparedStatementCreator，把 order 的各字段值按顺序塞进去。",
+        "4. new GeneratedKeyHolder()，然后 jdbcOperations.update(psc, keyHolder)。",
+        "5. long orderId = keyHolder.getKey().longValue(); order.setId(orderId);",
+        "6. 遍历 tacos，对每个调 saveTaco(orderId, i++, taco)。",
+        "构造函数收的是 JdbcOperations 而不是 JdbcTemplate；JdbcTemplate 是 JdbcOperations 的实现类，写成接口类型更松耦合，测试时也好替换。"
+      ],
+      "sourceMessageIndexes": [
+        30,
+        31
+      ]
+    },
+    {
+      "name": "saveTaco 与 saveIngredientRefs",
+      "facts": [
+        "saveTaco() 结构和 save() 几乎一样：插 Taco、拿回 tacoId、setId，然后调 saveIngredientRefs()。",
+        "saveIngredientRefs() 循环把每条配料插进 Ingredient_Ref，用 key++ 保住配料顺序。",
+        "一条订单存下去，实际是三层写入串起来的结果。",
+        "save() 头上挂着 @Transactional 注解。"
+      ],
+      "examples": [
+        "saveTaco() 插 Taco、拿回 tacoId、setId，再调 saveIngredientRefs()。",
+        "saveIngredientRefs() 用 key++ 保住配料顺序。"
+      ],
+      "sourceMessageIndexes": [
+        31
+      ]
+    }
+  ],
+  "learnerEvidence": [
+    {
+      "kind": "misconception",
+      "content": "学习者说“减少一张表的复杂度”，被指出方向反了半边：加一张 Ingredient_Ref 表的数量是多了，不是少了，“减少复杂度”这个说法站不住。",
+      "sourceMessageIndexes": [
+        26,
+        27
+      ]
+    },
+    {
+      "kind": "correct",
+      "content": "学习者回答“自动配置”，被确认正确。",
+      "sourceMessageIndexes": [
+        28,
+        29
+      ]
+    },
+    {
+      "kind": "confusion",
+      "content": "学习者提出“jdbc查找一下吧”，方向对，但答案不是“插完再 select 一遍把它查回来”。",
+      "sourceMessageIndexes": [
+        30,
+        31
+      ]
+    }
+  ],
+  "keyInsights": [],
+  "openQuestions": [
+    {
+      "content": "“三层写入半途出错会留下什么”——为什么 save() 非得标 @Transactional 不可，留到下次从事务接着算。",
+      "sourceMessageIndexes": [
+        31,
+        33
+      ]
+    }
+  ],
+  "reviewCandidates": [
+    {
+      "question": "为什么在 Taco 和 Ingredient 之间要加中间表 Ingredient_Ref？",
+      "answer": "因为一个 Taco 要用多种配料、同一种配料又会出现在很多个 Taco 里，是多对多关系；在 Taco 表里开列无法固定列数，把“一个 Taco 用了哪些配料”单独放到中间表，多对多就被拆成两组一对多。中间表的存在是为了拆关系，不是为了少建表。",
+      "sourceMessageIndexes": [
+        26,
+        27
+      ]
+    },
+    {
+      "question": "schema.sql 和 data.sql 分别放在哪里、起什么作用？",
+      "answer": "都放在 src/main/resources/ 下；schema.sql 在启动时执行来建表，data.sql 里是 insert 语句，启动时执行来预加载配料数据。",
+      "sourceMessageIndexes": [
+        27,
+        29
+      ]
+    },
+    {
+      "question": "为什么没有写“请执行这个文件”的代码，schema.sql 和 data.sql 也会在启动时执行？",
+      "answer": "因为这是 Spring Boot 的自动配置：靠在约定位置找约定文件名，名字对、位置对就认领，全自动，属于“约定优于配置”。",
+      "sourceMessageIndexes": [
+        27,
+        28,
+        29
+      ]
+    },
+    {
+      "question": "save() 里怎么拿回数据库生成的 id？",
+      "answer": "不是插完再 select 一遍，而是在插入的同时把生成的键要回来：用 PreparedStatementCreatorFactory 并调用 pscf.setReturnGeneratedKeys(true)，执行 update(psc, keyHolder) 后 keyHolder 里就装着数据库生成的 id，再用 keyHolder.getKey().longValue() 取出并 order.setId(orderId)。",
+      "sourceMessageIndexes": [
+        30,
+        31
+      ]
+    },
+    {
+      "question": "一条订单存下去，实际发生哪三层写入？",
+      "answer": "存 TacoOrder → 存它的每个 Taco → 存每个 Taco 的 IngredientRef。",
+      "sourceMessageIndexes": [
+        29,
+        31
+      ]
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "title": "需求规格说明与 UML",
+  "definition": "教材在第 4.6 节中设置了“需求规格说明”（requirements specification）和 UML 相关内容，表明软件需求描述与 UML 建模是该部分讨论的主题。UML 可用于以图示方式表达软件系统的结构或关系。",
+  "key_points": [
+    "第 4.6 节包含“需求规格说明”（requirements specification）这一小节。",
+    "随后出现 UML 相关小节或内容。",
+    "原文强调使用 UML 进行描述，但当前文本中的具体 UML 图例和术语因页本文字识别不完整，不能据此补充更细的定义。"
+  ],
+  "examples": [
+    "术语示例：`requirements specification`。",
+    "建模工具或表示法示例：UML。"
+  ],
+  "misconceptions": [
+    "不要把 UML 误认为一种编程语言。",
+    "不要根据当前片段擅自断定教材在此处介绍了 UML 的全部图类型或完整建模流程。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "第 4.6 节列出了哪两个相关主题？",
+      "a": "需求规格说明（requirements specification）和 UML。"
+    },
+    {
+      "q": "UML 在该片段中承担什么作用？",
+      "a": "用于对软件系统进行图示化描述或建模。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [],
+  "source_pages": [
+    157,
+    160
+  ],
+  "needs_verification": true,
+  "verify_query": "《C++20高级编程》第5版第158页第4.6节 requirements specification UML 小节原文",
+  "concept_id": "223_需求规格说明与_uml",
+  "_chunk_pages": [
+    157,
+    160
+  ]
+}

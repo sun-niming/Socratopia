@@ -1,0 +1,38 @@
+{
+  "title": "align-self 属性",
+  "definition": "align-self 用于设置单个网格元素在单元格内的垂直对齐方式。它的作用对象是某一个 Grid 项目，并且会覆盖容器设置的 align-items 对该项目的对齐效果。",
+  "key_points": [
+    "控制单个网格项的垂直位置",
+    "用法与 align-items 类似",
+    "可取值 start、end、center、stretch"
+  ],
+  "examples": [
+    ".item-c { align-self: center; }"
+  ],
+  "misconceptions": [
+    "误以为 align-self 作用于整个网格容器",
+    "误以为它和 align-items 只能二选一且不会覆盖"
+  ],
+  "qa_pairs": [
+    {
+      "q": "align-self 的作用是什么？",
+      "a": "设置单个网格元素在单元格内的垂直对齐方式。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "CSS 网格布局基础",
+    "网格项目"
+  ],
+  "source_pages": [
+    185,
+    188
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "265_align_self_属性",
+  "_chunk_pages": [
+    185,
+    188
+  ]
+}

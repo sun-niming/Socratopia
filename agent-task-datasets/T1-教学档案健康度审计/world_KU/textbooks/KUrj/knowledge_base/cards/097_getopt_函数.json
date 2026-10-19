@@ -1,0 +1,39 @@
+{
+  "title": "getopt 函数",
+  "definition": "`getopt`用于解析短命令行参数。原型为`#include <unistd.h>\nint getopt(int argc, char * const argv[], const char *optstring);`。`optstring`例如`p:r:i:`表示`p`、`r`、`i`三个选项都需要参数。返回值是选项字符，结束时返回`-1`。原文用它来解析端口、root 和 index。",
+  "key_points": [
+    "它解析短命令行参数。",
+    "`p:r:i:`表示这三个选项后面都必须带值。",
+    "返回选项字符，全部处理完后返回`-1`。"
+  ],
+  "examples": [
+    "原文示例：`while ((opt = getopt(argc, argv, 'p:r:i:')) != -1) { ... }`"
+  ],
+  "misconceptions": [
+    "以为`getopt`会自动检查所有参数是否合法。",
+    "以为`optstring`里带冒号只是装饰。",
+    "以为拿到参数后不需要再检查`optarg`和数值范围。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`optstring`写成`p:r:i:`表示什么？",
+      "a": "表示`p`、`r`、`i`三个短选项都需要带参数值。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C 语言基础",
+    "命令行参数基础"
+  ],
+  "source_pages": [
+    57,
+    60
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "097_getopt_函数",
+  "_chunk_pages": [
+    57,
+    60
+  ]
+}

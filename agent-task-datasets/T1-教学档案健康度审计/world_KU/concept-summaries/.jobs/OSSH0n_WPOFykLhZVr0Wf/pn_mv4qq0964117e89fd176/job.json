@@ -1,0 +1,43 @@
+{
+  "jobId": "pn_mv4qq0964117e89fd176",
+  "traceId": "tr_mv4qq0962f8567b256e2",
+  "conversationId": "OSSH0n_WPOFykLhZVr0Wf",
+  "accountId": "local",
+  "profileId": "uolmzgq8",
+  "worldId": "KU",
+  "idempotencyKey": "local|uolmzgq8|KU|OSSH0n_WPOFykLhZVr0Wf|sha256:7f76bedc65df95c7b7e736274969d0e13dc92e8e60aeacec0f11442daf211f36|post-class-v2",
+  "sourceHash": "sha256:7f76bedc65df95c7b7e736274969d0e13dc92e8e60aeacec0f11442daf211f36",
+  "pipelineVersion": "post-class-v2",
+  "status": "degraded",
+  "stage": "degraded",
+  "createdAt": 1791778610634,
+  "updatedAt": 1791778667261,
+  "mode": "chunked",
+  "language": "chinese",
+  "companionName": "宵宫",
+  "textbookTitle": "编译原理 第二版",
+  "substantiveUserTurns": 35,
+  "estimatedTokens": 21206,
+  "modelCalls": 10,
+  "quality": {
+    "score": 0.6066
+  },
+  "error": null,
+  "degradedReason": "chunk_failures",
+  "sourceMessageCount": 70,
+  "conversationHash": "sha256:f8013495f1e5f4d9",
+  "completedChunks": 5,
+  "runToken": {},
+  "progress": 1,
+  "totalChunks": 7,
+  "chunkFailures": [
+    {
+      "chunkId": "chunk-003",
+      "code": "output_truncated"
+    },
+    {
+      "chunkId": "chunk-004",
+      "code": "output_truncated"
+    }
+  ]
+}

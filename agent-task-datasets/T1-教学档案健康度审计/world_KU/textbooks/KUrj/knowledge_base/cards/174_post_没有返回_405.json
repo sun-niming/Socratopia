@@ -1,0 +1,37 @@
+{
+  "title": "POST 没有返回 405",
+  "definition": "如果对 POST 请求仍返回首页或 200，说明服务器没有在请求行解析后及时检查方法。正确做法是先判断 method，不是 GET 就直接 send_error(405)，不要继续进入文件服务。",
+  "key_points": [
+    "解析请求行后先判断 HTTP 方法。",
+    "非 GET 请求应直接返回 405。",
+    "不要让 POST 继续进入文件服务。"
+  ],
+  "examples": [
+    "curl -i -X POST http://127.0.0.1:8080/"
+  ],
+  "misconceptions": [
+    "把 POST 当成 GET 处理，或者不检查 method。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "POST 请求应该在什么阶段被拦截？",
+      "a": "在解析请求行后先判断 method，不是 GET 就直接 send_error(405)。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "HTTP 请求方法",
+    "请求行解析"
+  ],
+  "source_pages": [
+    109,
+    112
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "174_post_没有返回_405",
+  "_chunk_pages": [
+    109,
+    112
+  ]
+}

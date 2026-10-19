@@ -1,0 +1,49 @@
+{
+  "title": "C++20 的 std::source_location",
+  "definition": "C++20 在标准库中提供了 std::source_location 类，用面向对象的方式获取源代码位置信息，可作为 C++20 之前常用 C 风格预处理宏的替代方案。通过静态方法 current()，可以在调用该方法的源代码位置创建一个 source_location 实例；该类提供访问源文件名、函数名、行号和列号的访问器。",
+  "key_points": [
+    "C++20 之前可使用 __FILE__ 获取当前源代码文件名，使用 __LINE__ 获取当前源代码行号；每个函数还有包含函数名的局部静态字符数组 __func__。",
+    "C++20 提供 std::source_location 作为更面向对象的位置获取方式。",
+    "std::source_location::current() 可以在调用位置创建源代码位置信息对象。",
+    "访问器包括 file_name()、function_name()、line() 和 column()，分别用于获取文件名、函数名、行号和列号。"
+  ],
+  "examples": [
+    "典型使用形式：\n#include <source_location>\n\nvoid log(std::source_location location = std::source_location::current());",
+    "位置访问器示意：\nstd::string_view file = location.file_name();\nstd::string_view function = location.function_name();\nauto line = location.line();\nauto column = location.column();"
+  ],
+  "misconceptions": [
+    "认为 std::source_location 只能获取文件名和行号；教材列出的信息还包括函数名和列号。",
+    "认为 current() 获取的是固定定义位置，而不是调用该方法的源代码位置。",
+    "认为 C++20 的 std::source_location 与 __FILE__、__LINE__ 完全没有关系；它提供的是对类似源代码位置信息的面向对象替代方式。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "C++20 中用于获取源代码位置信息的标准库类型是什么？",
+      "a": "std::source_location。"
+    },
+    {
+      "q": "std::source_location::current() 的作用是什么？",
+      "a": "在调用该静态方法的源代码位置创建一个 source_location 实例。"
+    },
+    {
+      "q": "如何分别获取 source_location 的文件名、函数名、行号和列号？",
+      "a": "分别调用 file_name()、function_name()、line() 和 column()。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++预处理宏",
+    "C++20标准库基础"
+  ],
+  "source_pages": [
+    452,
+    452
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 std::source_location 头文件 <source_location> current() file_name() function_name() line() column() 官方文档",
+  "concept_id": "918_c_20_的_std_source_location",
+  "_chunk_pages": [
+    449,
+    452
+  ]
+}

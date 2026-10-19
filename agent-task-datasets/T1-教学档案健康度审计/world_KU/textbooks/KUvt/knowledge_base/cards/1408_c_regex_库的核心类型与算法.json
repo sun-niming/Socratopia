@@ -1,0 +1,52 @@
+{
+  "title": "C++ regex 库的核心类型与算法",
+  "definition": "C++正则表达式库位于头文件 `<regex>` 和 `std` 名称空间中。核心模板类型包括：`basic_regex`，表示一个正则表达式对象；`match_results`，保存一次匹配的子字符串及所有捕获组；`sub_match`，表示某个捕获组在输入序列中的迭代器范围。核心算法包括 `regex_match()`、`regex_search()` 和 `regex_replace()`，它们提供多个重载，可接受 STL 字符串、C 风格字符串或由开始和结束迭代器表示的字符序列。",
+  "key_points": [
+    "`basic_regex` 用于保存和表示正则表达式。",
+    "`match_results` 是多个 `sub_match` 的集合，用于保存匹配结果和捕获组。",
+    "`sub_match` 通过一对迭代器表示捕获组范围，其 `str()` 方法可将捕获组转换为字符串。",
+    "`regex_match()`、`regex_search()` 和 `regex_replace()` 分别用于匹配整个序列、搜索子序列和替换匹配内容。",
+    "算法输入可以是 STL 字符串、C 风格字符串，或由迭代器对表示的范围；教材指出迭代器可以具有双向迭代器行为。"
+  ],
+  "examples": [
+    "基本类型别名包括：`using regex = basic_regex<char>;`、`using wregex = basic_regex<wchar_t>;`。",
+    "字符指针匹配结果别名包括：`using csub_match = sub_match<const char*>;` 和 `using wcsub_match = sub_match<const wchar_t*>;`。",
+    "字符串迭代器匹配结果别名包括：`using ssub_match = sub_match<string::const_iterator>;`。",
+    "典型使用关系是：先用 `regex` 保存模式，再将其传给 `regex_search()`，并用 `match_results` 保存匹配结果。"
+  ],
+  "misconceptions": [
+    "`regex_search()` 不等同于要求整个输入字符串完全匹配；它用于搜索其中的匹配子串。",
+    "`match_results` 保存的不只是整个匹配，还包括捕获组对应的 `sub_match`。",
+    "正则表达式库并不只支持 `std::string`，还可以接受 C 风格字符串和迭代器范围。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "C++正则表达式库位于哪个头文件和名称空间？",
+      "a": "位于 `<regex>` 头文件和 `std` 名称空间中。"
+    },
+    {
+      "q": "`regex_match()`、`regex_search()` 和 `regex_replace()` 的用途分别是什么？",
+      "a": "分别用于匹配整个字符序列、搜索匹配子串和替换匹配内容。"
+    },
+    {
+      "q": "`sub_match::str()` 的作用是什么？",
+      "a": "将该捕获组对应的迭代器范围转换并返回为字符串。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++模板与名称空间",
+    "C++迭代器"
+  ],
+  "source_pages": [
+    672,
+    672
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1408_c_regex_库的核心类型与算法",
+  "_chunk_pages": [
+    669,
+    672
+  ]
+}

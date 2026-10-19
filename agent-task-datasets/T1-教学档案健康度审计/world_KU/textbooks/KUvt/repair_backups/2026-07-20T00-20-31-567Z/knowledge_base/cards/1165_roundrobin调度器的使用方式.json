@@ -1,0 +1,43 @@
+{
+  "title": "RoundRobin调度器的使用方式",
+  "definition": "示例中的Scheduler内部保存一个RoundRobin<Process>对象。每次调用scheduleTimeSlice()时，调度器通过getNext()取得下一个进程，并让该进程执行一个时间片；当没有可调度进程时，捕获std::out_of_range异常并输出提示。调用removeProcess()可以从调度集合中删除指定进程。",
+  "key_points": [
+    "Process通过doWorkDuringTimeSlice()表示执行一个时间片的工作。",
+    "Scheduler的scheduleTimeSlice()调用m_processes.getNext().doWorkDuringTimeSlice()。",
+    "示例中3个进程按1、2、3、1、3、1、3、1的顺序运行，因为进程2在第一次循环后被移除。",
+    "Process使用C++20的默认比较运算符operator==(const Process&) const = default，以支持RoundRobin::remove()。"
+  ],
+  "examples": [
+    "示例流程：先创建Process { \"1\" }、Process { \"2\" }、Process { \"3\" }，连续调度4次，输出进程1、2、3、1；删除第二个进程后再调度4次，输出进程3、1、3、1。",
+    "当没有可调度进程时，scheduleTimeSlice()捕获std::out_of_range并输出：No more processes to schedule。"
+  ],
+  "misconceptions": [
+    "RoundRobin调度并不意味着每次都重新从第一个进程开始；示例体现的是按轮转顺序选择下一个进程。",
+    "removeProcess()删除的是调度器中的进程，不是只禁止该进程执行一次时间片。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "示例中删除进程2后，后续4次调度的进程顺序是什么？",
+      "a": "进程3、进程1、进程3、进程1。"
+    },
+    {
+      "q": "Scheduler在没有可调度进程时如何处理？",
+      "a": "getNext()抛出std::out_of_range，scheduleTimeSlice()捕获该异常并输出没有更多进程可调度的提示。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++类模板和异常处理"
+  ],
+  "source_pages": [
+    565,
+    566
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1165_roundrobin调度器的使用方式",
+  "_chunk_pages": [
+    565,
+    568
+  ]
+}

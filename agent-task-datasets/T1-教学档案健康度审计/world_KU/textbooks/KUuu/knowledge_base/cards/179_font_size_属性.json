@@ -1,0 +1,37 @@
+{
+  "title": "font-size 属性",
+  "definition": "font-size 用于设置字号。教材给出的值包括像素值、百分比以及一组预设关键字。",
+  "key_points": [
+    "可用像素值表示，如 14px。",
+    "可用百分比表示，如 120%。",
+    "可用关键字表示，如 xx-small、x-small、small、medium、large、x-large、xx-large。"
+  ],
+  "examples": [
+    "font-size: 14px;",
+    "font-size: 120%;"
+  ],
+  "misconceptions": [
+    "字号只能用 px 表示。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "font-size 可以使用哪些类型的值？",
+      "a": "像素值、百分比和 xx-small、x-small、small、medium、large、x-large、xx-large 等关键字。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "CSS字体属性"
+  ],
+  "source_pages": [
+    113,
+    116
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "179_font_size_属性",
+  "_chunk_pages": [
+    113,
+    116
+  ]
+}

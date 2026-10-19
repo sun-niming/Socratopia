@@ -1,0 +1,45 @@
+{
+  "title": "分别设置元素角的圆角半径",
+  "definition": "元素的不同角可以通过border-radius的方向子属性分别设置圆角。例如，border-top-left-radius用于设置左上角圆角，border-bottom-right-radius用于设置右下角圆角。每个角可以写两个值，分别表示该角圆角在水平方向和垂直方向上的半径；如果只写一个值，则水平和垂直方向取值相同。",
+  "key_points": [
+    "border-top-left-radius可设置左上角圆角。",
+    "border-bottom-right-radius可设置右下角圆角。",
+    "一个角写两个值时，分别表示水平半径和垂直半径。",
+    "一个角只写一个值时，可理解为水平和垂直方向取值相同。",
+    "水平半径和垂直半径不同会形成1/4椭圆角；二者相同会形成1/4圆角。"
+  ],
+  "examples": [
+    "div {\nheight: 100px;\nwidth: 150px;\nborder: 1px solid blue;\nborder-top-left-radius: 40px 20px; /*左上角：水平40px，垂直20px，形成1/4椭圆角*/\nborder-bottom-right-radius: 20px; /*右下角：水平20px，垂直20px，形成1/4圆角*/\n}"
+  ],
+  "misconceptions": [
+    "误以为border-top-left-radius: 40px 20px中的两个值表示两个不同角；实际上它们表示同一个角的水平半径和垂直半径。",
+    "误以为border-bottom-right-radius: 20px只设置了一个方向的半径；实际上表示水平和垂直方向都为20px。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "border-top-left-radius: 40px 20px; 表示什么？",
+      "a": "表示左上角圆角的水平半径为40px，垂直半径为20px，形成1/4椭圆角。"
+    },
+    {
+      "q": "border-bottom-right-radius: 20px; 表示什么？",
+      "a": "表示右下角圆角的水平半径和垂直半径都为20px，形成1/4圆角。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "border-radius圆角边框",
+    "CSS选择器",
+    "CSS盒子尺寸"
+  ],
+  "source_pages": [
+    189,
+    192
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "283_分别设置元素角的圆角半径",
+  "_chunk_pages": [
+    189,
+    192
+  ]
+}

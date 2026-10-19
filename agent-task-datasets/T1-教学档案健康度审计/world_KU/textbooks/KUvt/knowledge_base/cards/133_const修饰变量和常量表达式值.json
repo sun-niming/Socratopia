@@ -1,0 +1,45 @@
+{
+  "title": "const修饰变量和常量表达式值",
+  "definition": "const关键字表示被修饰的内容不应被修改。对于变量，const使其成为只读对象：初始化后不能通过该变量改变其值。编译器会检查违反const限制的代码并报错；在启用优化时，编译器还可以利用其不可修改这一性质进行优化。",
+  "key_points": [
+    "const可以修饰基本类型、类类型、全局变量以及类的数据成员。",
+    "const对象通常必须在声明时初始化。",
+    "使用const定义常量可以替代许多使用#define定义的符号常量，并保留类型信息。",
+    "尝试修改const对象会导致编译错误。"
+  ],
+  "examples": [
+    "`const int versionNumberMajor { 2 };`",
+    "`const std::string productName { \"Super Hyper Net Modulator\" };`",
+    "`const double PI { 3.141592653589793238462 };`"
+  ],
+  "misconceptions": [
+    "const表示变量的值在运行期间绝对不可能以任何方式改变；更准确地说，是不能通过该const访问路径进行修改。",
+    "const只是给程序员看的注释，编译器不会检查；实际上编译器会将违反const限制的代码标记为错误。",
+    "const与#define完全相同；const对象具有明确的C++类型，而#define主要是预处理器替换。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "const int versionNumberMajor { 2 };表示什么？",
+      "a": "它定义了一个值为2且不能通过该变量修改的const int对象。"
+    },
+    {
+      "q": "为什么C++通常鼓励用const代替#define定义常量？",
+      "a": "const定义的是具有明确类型的对象，编译器可以检查其使用和修改是否合法。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++变量声明与初始化"
+  ],
+  "source_pages": [
+    74,
+    74
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "133_const修饰变量和常量表达式值",
+  "_chunk_pages": [
+    73,
+    76
+  ]
+}

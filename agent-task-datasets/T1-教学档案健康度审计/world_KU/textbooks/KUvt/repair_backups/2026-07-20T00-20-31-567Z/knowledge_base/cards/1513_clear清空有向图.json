@@ -1,0 +1,42 @@
+{
+  "title": "clear清空有向图",
+  "definition": "directed_graph 的 clear() 方法通过调用 m_nodes.clear() 清空节点 vector，从而删除图中的所有节点及其邻接信息。该方法声明为 noexcept。",
+  "key_points": [
+    "clear 不逐个调用 erase，而是直接清空 m_nodes。",
+    "节点和节点内部的邻接索引集合会随 vector 中节点的清除而被清除。",
+    "方法不接收参数，返回 void。"
+  ],
+  "examples": [
+    "实现：\n```cpp\nvoid directed_graph<T>::clear() noexcept\n{\n    m_nodes.clear();\n}\n```"
+  ],
+  "misconceptions": [
+    "clear 不是删除单条边，也不是只清空邻接表；它清空整个图的节点容器。",
+    "clear 的返回类型是 void，不返回删除了多少个元素。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "directed_graph::clear 做什么？",
+      "a": "调用 m_nodes.clear()，清空整个图。"
+    },
+    {
+      "q": "clear 是否声明为 noexcept？",
+      "a": "是，原文给出的函数声明为 clear() noexcept。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "vector::clear",
+    "异常规范noexcept"
+  ],
+  "source_pages": [
+    728,
+    728
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1513_clear清空有向图",
+  "_chunk_pages": [
+    725,
+    728
+  ]
+}

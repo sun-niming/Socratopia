@@ -1,0 +1,42 @@
+{
+  "title": "C++20三路比较运算符与比较结果判断",
+  "definition": "C++20可以使用三路比较运算符 <=> 比较两个值，并将结果保存为比较类别类型的对象，例如 strong_ordering。随后可以使用 std::is_gt、std::is_eq、std::is_neq、std::is_lt、std::is_lteq 或 std::is_gteq 等函数判断比较结果。",
+  "key_points": [
+    "表达式 $1 <=> 0$ 的结果可以初始化为 strong_ordering 类型对象，例如 `strong_ordering result { 1 <=> 0 };`。",
+    "可以使用 `std::is_gt(result)` 判断比较结果是否表示“大于”。",
+    "比较结果判断函数用于将三路比较结果转换为大于、等于、小于等关系判断。"
+  ],
+  "examples": [
+    "`strong_ordering result { 1 <=> 0 };`",
+    "`if (std::is_gt(result)) { cout << \"greater\" << endl; }`"
+  ],
+  "misconceptions": [
+    "<=> 的结果本身不是简单的 bool，而是比较类别结果，通常需要使用相应的判断函数或进一步比较。",
+    "`std::is_gt` 判断的是比较结果是否表示大于，而不是直接对两个原始操作数进行比较。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何判断 `1 <=> 0` 的结果是否表示大于？",
+      "a": "先将结果保存为比较类别对象，再使用 `std::is_gt(result)` 判断；如果为真，则表示大于。"
+    },
+    {
+      "q": "三路比较运算符的结果是否直接是 bool？",
+      "a": "不是。它产生比较类别结果，例如 `strong_ordering`，可以使用 `std::is_gt` 等函数进行关系判断。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++表达式与关系比较"
+  ],
+  "source_pages": [
+    53,
+    56
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 std::is_gt std::is_eq strong_ordering operator <=> 官方文档",
+  "concept_id": "063_c_20三路比较运算符与比较结果判断",
+  "_chunk_pages": [
+    53,
+    56
+  ]
+}

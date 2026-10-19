@@ -1,0 +1,45 @@
+{
+  "title": "默认化三向比较运算符的适用范围",
+  "definition": "C++20允许使用默认实现的三向比较运算符（`operator<=>`）来自动生成比较逻辑，但默认化的比较运算符必须符合语言对参数类型和成员函数形式的要求。原文示例中，`SpreadsheetCell`之间的默认化比较运算符可以使用，而将参数写成`double`的默认化三向比较运算符被明确标注为“不起作用”。",
+  "key_points": [
+    "同一类型对象之间可以声明默认化的三向比较运算符，例如：`[[nodiscard]] auto operator<=>(const SpreadsheetCell&) const = default;`。",
+    "默认化的`operator<=>`不能直接用于任意异类类型比较；原文明确指出`[[nodiscard]] auto operator<=>(double) const = default;`不起作用。",
+    "如果需要支持`SpreadsheetCell`与`double`比较，应提供非默认化的专门实现，例如原文列出的`bool operator==(double rhs) const;`和`std::partial_ordering operator<=>(double rhs) const;`。"
+  ],
+  "examples": [
+    "同类对象比较：`[[nodiscard]] auto operator<=>(const SpreadsheetCell&) const = default;`",
+    "与`double`比较时，原文采用专门声明：`[[nodiscard]] bool operator==(double rhs) const;`以及`[[nodiscard]] std::partial_ordering operator<=>(double rhs) const;`",
+    "原文标注为无效的形式：`[[nodiscard]] auto operator<=>(double) const = default; // Does not work!`"
+  ],
+  "misconceptions": [
+    "误以为任何参数类型的`operator<=>`都可以写成`= default`。",
+    "误以为默认化的三向比较运算符会自动生成`SpreadsheetCell`与`double`之间的比较逻辑。",
+    "误以为`operator==`和`operator<=>`对异类类型的实现方式与同类对象完全相同。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "原文中哪一种默认化三向比较运算符可以用于`SpreadsheetCell`对象之间的比较？",
+      "a": "`[[nodiscard]] auto operator<=>(const SpreadsheetCell&) const = default;`。"
+    },
+    {
+      "q": "原文对`operator<=>(double) const = default`作出了什么说明？",
+      "a": "原文明确标注该写法不起作用，因此与`double`的比较需要提供专门的非默认化实现。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++运算符重载",
+    "C++20三向比较运算符"
+  ],
+  "source_pages": [
+    297,
+    300
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 defaulted operator<=> parameter double heterogeneous comparison rules defaulted comparison operator",
+  "concept_id": "389_默认化三向比较运算符的适用范围",
+  "_chunk_pages": [
+    297,
+    300
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "title": "使用逗号运算符为 assert 添加自定义消息",
+  "definition": "可以用逗号运算符和额外括号将自定义消息与断言条件组合起来，例如 `assert((\"A custom message\", coordinate.size() == 3));`。逗号运算符会先求值左侧的字符串字面量，再以右侧的布尔表达式作为整个表达式的结果；因此断言是否失败由右侧条件决定，而错误信息中可以包含自定义文本。",
+  "key_points": [
+    "必须使用额外括号，使整个逗号表达式作为 assert 宏的参数。",
+    "断言结果等于逗号运算符右侧表达式的结果。",
+    "左侧字符串字面量用于在断言报告中提供自定义文本，但不改变条件结果。",
+    "示例中的断言条件仍然是 `coordinate.size() == 3`。"
+  ],
+  "examples": [
+    "`assert((\"A custom message\", coordinate.size() == 3));`",
+    "上述表达式在 `coordinate.size() == 3` 为 false 时失败，并生成包含自定义消息和表达式信息的错误报告。"
+  ],
+  "misconceptions": [
+    "逗号左侧的字符串不会被当作布尔条件进行判断；整个逗号表达式的值由右侧表达式决定。",
+    "不能省略外层括号，否则可能与 assert 宏的参数解析方式发生问题。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何给 assert 添加自定义错误消息？",
+      "a": "使用逗号运算符和额外括号，例如 `assert((\"A custom message\", coordinate.size() == 3));`。"
+    },
+    {
+      "q": "在 `assert((\"message\", condition));` 中，断言是否失败由什么决定？",
+      "a": "由逗号运算符右侧的 `condition` 决定。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "assert 宏的基本行为"
+  ],
+  "source_pages": [
+    904,
+    904
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1875_使用逗号运算符为_assert_添加自定义消息",
+  "_chunk_pages": [
+    901,
+    904
+  ]
+}

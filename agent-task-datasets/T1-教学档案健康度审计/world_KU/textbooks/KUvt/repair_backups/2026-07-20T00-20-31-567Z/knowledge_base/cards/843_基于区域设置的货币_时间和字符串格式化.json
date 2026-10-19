@@ -1,0 +1,50 @@
+{
+  "title": "基于区域设置的货币、时间和字符串格式化",
+  "definition": "可以使用流的区域设置（locale）对数字、货币值和时间进行本地化格式化。调用 `cout.imbue(locale { });` 可使流按照当前区域位置格式化数字；`put_money` 输出格式化货币值，`put_time` 输出格式化时间，`quoted` 将字符串放入引号中并转义其中的引号。货币值的具体显示形式取决于区域设置。",
+  "key_points": [
+    "`cout.imbue(locale { });` 用于让流按照相应区域设置格式化数字。",
+    "`put_money` 是参数化操作算子，用于输出格式化货币值。",
+    "`put_time` 是参数化操作算子，用于输出格式化时间值。",
+    "`quoted` 是参数化操作算子，用于给字符串加引号并转义嵌入的引号。",
+    "同一个货币数值在不同区域设置下可能采用不同的格式。"
+  ],
+  "examples": [
+    "```cpp\ncout.imbue(locale { });\ncout << 1234567 << endl;\n```",
+    "```cpp\ntime_t t_t { time(nullptr) };\ntm* t { localtime(&t_t) };\ncout << put_time(t, \"%c\") << endl;\n```",
+    "```cpp\ncout << put_money(\"120000\") << endl;\n```",
+    "```cpp\ncout << quoted(\"Quoted string with \\\"embedded quotes\\\".\") << endl;\n```"
+  ],
+  "misconceptions": [
+    "认为货币值的具体显示格式在所有地区都相同；原文指出其含义和格式取决于区域设置。",
+    "认为 `quoted` 只是简单添加一对引号；它还会转义嵌入的引号。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何让输出流按照区域设置格式化数字？",
+      "a": "调用 `cout.imbue(locale { });`，然后向流输出数字。"
+    },
+    {
+      "q": "`put_money`、`put_time` 和 `quoted` 分别用于什么？",
+      "a": "`put_money` 格式化货币值，`put_time` 格式化时间值，`quoted` 给字符串加引号并转义嵌入的引号。"
+    },
+    {
+      "q": "为什么同一个货币数值的显示形式可能不同？",
+      "a": "因为货币格式取决于所使用的区域设置。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "输出操作算子及其作用范围"
+  ],
+  "source_pages": [
+    416,
+    416
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "843_基于区域设置的货币_时间和字符串格式化",
+  "_chunk_pages": [
+    413,
+    416
+  ]
+}

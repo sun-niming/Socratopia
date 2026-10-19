@@ -1,0 +1,43 @@
+{
+  "title": "使用Visual C++ 2019调试ArticleCitations项目的准备步骤",
+  "definition": "在 Visual C++ 2019 中调试 ArticleCitations 程序，首先创建控制台应用程序项目，然后将源码存档中 06_ArticleCitations\\06_VisualStudio 目录下的所有文件添加到项目中。教材中的基本操作包括创建项目、删除模板自带的 ArticleCitations.cpp 文件、通过 Solution Explorer 使用 Add|Existing Item 添加已有源文件，并确认项目文件已显示在解决方案资源管理器中。",
+  "key_points": [
+    "可从 Visual Studio 2019 欢迎屏幕选择 Create A New Project，或通过 File|New|Project 创建项目。",
+    "在项目模板中搜索带有 Windows 和 Console 标签的控制台应用程序模板。",
+    "项目名称可设置为 ArticleCitations，并选择项目保存目录。",
+    "如果 Solution Explorer 不可见，可通过 View|Solution Explorer 打开。",
+    "删除项目中原有的 ArticleCitations.cpp，再添加源码存档中的对应文件。"
+  ],
+  "examples": [
+    "操作流程：\n1. 创建名为 ArticleCitations 的控制台应用程序项目。\n2. 在 Solution Explorer 中删除模板自带的 ArticleCitations.cpp。\n3. 右击 ArticleCitations 项目，选择 Add|Existing Item。\n4. 添加 06_ArticleCitations\\\\06_VisualStudio 目录中的所有文件。"
+  ],
+  "misconceptions": [
+    "误以为只需新建项目而不需要替换模板自带的源文件。",
+    "误以为 Solution Explorer 不可见时项目创建失败；可以通过 View|Solution Explorer 将其重新打开。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "在 Visual C++ 2019 中如何把教材源码加入 ArticleCitations 项目？",
+      "a": "在 Solution Explorer 中右击 ArticleCitations 项目，选择 Add|Existing Item，然后添加源码存档中 06_ArticleCitations\\\\06_VisualStudio 目录下的所有文件。"
+    },
+    {
+      "q": "为什么要删除项目自带的 ArticleCitations.cpp？",
+      "a": "因为教材要求使用源码存档中的 ArticleCitations.cpp 等文件进行调试，应先删除模板自带的同名文件，避免使用错误或重复的源文件。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "Visual Studio项目和解决方案的基本操作"
+  ],
+  "source_pages": [
+    920,
+    920
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1903_使用visual_c_2019调试articlecitations项目的准备步骤",
+  "_chunk_pages": [
+    917,
+    920
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "title": "DOM中的父子兄弟关系",
+  "definition": "DOM 树中的节点之间存在层级关系，主要包括父节点、子节点和兄弟节点。父子关系描述直接包含关系，兄弟关系描述拥有相同父节点的关系。",
+  "key_points": [
+    "父节点（Parent Node）：直接包含另一个节点的节点。",
+    "子节点（Child Node）：被另一个节点直接包含的节点。",
+    "兄弟节点（Sibling Node）：拥有相同父节点的节点。"
+  ],
+  "examples": [
+    "在 <html> 下，<head> 和 <body> 都是它的子节点；<html> 是它们的父节点。",
+    "<head> 和 <body> 互为兄弟节点，因为它们有相同的父节点 <html>。"
+  ],
+  "misconceptions": [
+    "只要在同一个页面里出现就是兄弟节点；只有拥有相同父节点的节点才是兄弟节点。",
+    "父节点一定比子节点‘更重要’；这里描述的是结构关系，不是重要性。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "什么样的两个节点才算兄弟节点？",
+      "a": "拥有相同父节点的节点。"
+    },
+    {
+      "q": "<html> 与 <body> 是什么关系？",
+      "a": "<html> 是 <body> 的父节点，<body> 是 <html> 的子节点。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "DOM节点类型"
+  ],
+  "source_pages": [
+    345,
+    348
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "464_dom中的父子兄弟关系",
+  "_chunk_pages": [
+    345,
+    348
+  ]
+}

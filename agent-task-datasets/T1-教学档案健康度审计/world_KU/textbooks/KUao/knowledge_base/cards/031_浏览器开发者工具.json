@@ -1,0 +1,45 @@
+{
+  "title": "浏览器开发者工具",
+  "definition": "浏览器开发者工具是用于查看、分析和调试网页的内置工具。以 Chrome 为例，可按 F12 打开；它能查看页面元素和 CSS 样式、测试 CSS 效果，还能通过 Network 选项查看资源是否加载成功，并在 Console 中查看 JavaScript 脚本输出。",
+  "key_points": [
+    "按功能键 F12 可以打开开发者工具。",
+    "可以查看和分析页面元素（标签及 CSS 样式），并测试 CSS 样式效果。",
+    "Network 选项可查看图像、CSS、JavaScript 等文件是否加载成功。",
+    "Console 可查看 JavaScript 脚本实现的浏览器控制台输出。"
+  ],
+  "examples": [
+    "按 F12 打开开发者工具",
+    "在 Network 中检查图片、CSS、JavaScript 是否加载成功",
+    "在 Console 中查看脚本输出"
+  ],
+  "misconceptions": [
+    "误以为开发者工具只能看 HTML，不能看 CSS 或网络资源。",
+    "误以为 Console 只能看报错，不能看脚本输出。",
+    "误以为 Network 只能看网页源码，不能看资源加载情况。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "在 Chrome 中如何打开开发者工具？",
+      "a": "按功能键 F12。"
+    },
+    {
+      "q": "开发者工具中的 Network 选项主要用来做什么？",
+      "a": "查看图像文件、CSS 样式文件和 JavaScript 文件等是否加载成功。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "浏览器的基本概念"
+  ],
+  "source_pages": [
+    21,
+    24
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "031_浏览器开发者工具",
+  "_chunk_pages": [
+    21,
+    24
+  ]
+}

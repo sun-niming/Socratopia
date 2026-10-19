@@ -1,0 +1,44 @@
+{
+  "title": "Grid 的编译期尺寸与 constexpr 要求",
+  "definition": "Grid 的 WIDTH 和 HEIGHT 必须作为模板参数在编译期确定，因此不能直接使用普通运行时变量作为尺寸。原文展示了普通 const 变量不能用于该模板参数，而 constexpr 函数的返回值可以用于模板参数。",
+  "key_points": [
+    "普通的 const 变量不一定能作为非类型模板参数使用；原文示例中的 `height` 会导致模板实例化无法编译。",
+    "使用 constexpr 函数获得编译期常量时，可以将其调用结果作为 HEIGHT。",
+    "原文给出的形式是：\n\n```cpp\nconstexpr size_t getHeight() { return 10; }\nGrid<double, 2, getHeight()> myDoubleGrid;\n```"
+  ],
+  "examples": [
+    "不能编译的示例：\n\n```cpp\nint height = 10;\nGrid<int, 10, height> testGrid;\n```\n\n原文将该示例标注为 `DOES NOT COMPILE`。",
+    "可以编译的示例：\n\n```cpp\nconstexpr size_t getHeight() { return 10; }\nGrid<double, 2, getHeight()> myDoubleGrid;\n```"
+  ],
+  "misconceptions": [
+    "变量带有 const 限定并不自动意味着它一定可以作为模板的非类型参数；必须满足编译期常量表达式等要求。",
+    "constexpr 函数调用并不是运行时才确定的普通函数调用；在满足条件时，其结果可以用于编译期求值。",
+    "WIDTH 和 HEIGHT 不能在运行时通过普通变量改变 Grid 的固定尺寸。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么 `Grid<int, 10, height>` 可能无法编译？",
+      "a": "因为 height 不是可用于该非类型模板参数的编译期常量；原文将这种形式标注为不能编译。"
+    },
+    {
+      "q": "如何让函数返回的尺寸用于 Grid 的模板参数？",
+      "a": "将函数声明为 constexpr，并使其返回编译期可确定的值，例如 `constexpr size_t getHeight() { return 10; }`，然后使用 `Grid<double, 2, getHeight()>`。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "非类型模板参数",
+    "constexpr 与编译期常量"
+  ],
+  "source_pages": [
+    381,
+    384
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "488_grid_的编译期尺寸与_constexpr_要求",
+  "_chunk_pages": [
+    381,
+    384
+  ]
+}

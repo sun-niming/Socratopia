@@ -1,0 +1,46 @@
+{
+  "title": "类模板中的特殊成员函数",
+  "definition": "由于 `Grid<T>` 的成员容器保存的是 `std::optional<T>`，而不是需要特殊复制处理的指针容器，因此编译器生成的复制构造函数和复制赋值运算符通常可以正常工作。教材还指出，一旦类声明了用户声明的析构函数，建议不要依赖编译器隐式生成的复制操作，所以 `Grid` 显式将复制构造、复制赋值、移动构造和移动赋值函数设为 `default`。",
+  "key_points": [
+    "复制构造函数和复制赋值运算符可以显式声明为 `= default`。",
+    "移动构造函数和移动赋值运算符也可以显式声明为 `= default`。",
+    "在类模板内部，复制操作的参数可以写成当前模板实例对应的类型，例如 `const Grid<T>&`。",
+    "类模板内部有时可以使用简写 `Grid`，编译器会按上下文解释为当前的 `Grid<T>`；类模板定义之外通常必须写出 `Grid<T>`。"
+  ],
+  "examples": [
+    "复制构造函数：`Grid(const Grid& src) = default;`",
+    "复制赋值运算符：`Grid<T>& operator=(const Grid<T>& rhs) = default;`",
+    "移动构造函数：`Grid(Grid&& src) = default;`",
+    "移动赋值运算符：`Grid<T>& operator=(Grid<T>&& rhs) = default;`"
+  ],
+  "misconceptions": [
+    "声明析构函数后，不能简单认为所有特殊成员函数都一定会按预期隐式生成。教材建议将复制和移动操作显式设为 `default`。",
+    "`Grid<T>` 的复制操作只能复制同一元素类型的网格，例如 `Grid<int>` 不能直接复制成 `Grid<double>`。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么 `Grid<T>` 可以把复制构造函数和赋值运算符设为 `default`？",
+      "a": "因为其成员容器保存的是 `std::optional<T>` 值，编译器生成的复制操作可以正常处理；教材同时建议在声明析构函数后显式设为 `default`。"
+    },
+    {
+      "q": "类模板定义之外定义成员函数时，类名应如何书写？",
+      "a": "通常必须写成带模板参数的形式，例如 `Grid<T>::at`，而不能只写 `Grid::at`。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "类模板与类型模板参数",
+    "Grid 的值语义与 std::optional"
+  ],
+  "source_pages": [
+    378,
+    378
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "765_类模板中的特殊成员函数",
+  "_chunk_pages": [
+    377,
+    380
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "title": "shared_ptr的引用计数与共享所有权",
+  "definition": "`shared_ptr`通过引用计数管理共享资源。每复制一个指向同一资源的`shared_ptr`，共享所有者数量增加；当某个`shared_ptr`被销毁或重置时，数量减少；当数量降为零时，被管理对象才会被销毁。",
+  "key_points": [
+    "多个`shared_ptr`可以指向同一个对象并共同拥有它。",
+    "引用计数只统计拥有资源的`shared_ptr`，不是普通的裸指针，也不是`weak_ptr`。",
+    "原文用两个裸指针复制示范了错误做法：分别对它们执行`delete`会导致同一对象被删除两次。",
+    "使用`shared_ptr`复制则由智能指针统一管理释放，避免这种手动删除问题。"
+  ],
+  "examples": [
+    "错误的裸指针示例：`Simple* mySimple1 { new Simple{} }; Simple* mySimple2 { mySimple1 }; delete mySimple2; delete mySimple1;`。两个裸指针指向同一对象，分别`delete`会造成重复释放。",
+    "正确的共享指针示例：`auto smartPtr1 { std::make_shared<Simple>() }; auto smartPtr2 { smartPtr1 };`。两个`shared_ptr`共同拥有同一对象。"
+  ],
+  "misconceptions": [
+    "复制裸指针不会产生新的对象，也不会自动建立共享所有权管理。",
+    "不能因为有两个指针变量就对同一个裸指针目标执行两次`delete`。",
+    "`shared_ptr`的引用计数不是对象内部的普通计数；它由智能指针的控制机制维护。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么下面的代码存在问题：`Simple* p1 { new Simple{} }; Simple* p2 { p1 }; delete p1; delete p2;`？",
+      "a": "`p1`和`p2`指向同一个对象，却执行了两次`delete`，会导致重复释放。"
+    },
+    {
+      "q": "多个`shared_ptr`共同管理对象时，什么时候对象会被销毁？",
+      "a": "当最后一个拥有该对象的`shared_ptr`被销毁或重置时。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "shared_ptr的基本用途与创建方式"
+  ],
+  "source_pages": [
+    222,
+    223
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "296_shared_ptr的引用计数与共享所有权",
+  "_chunk_pages": [
+    221,
+    224
+  ]
+}

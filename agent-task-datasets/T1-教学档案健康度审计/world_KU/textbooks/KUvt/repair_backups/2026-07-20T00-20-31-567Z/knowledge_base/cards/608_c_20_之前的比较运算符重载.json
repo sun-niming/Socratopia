@@ -1,0 +1,55 @@
+{
+  "title": "C++20 之前的比较运算符重载",
+  "definition": "比较运算符包括 `==`、`!=`、`<`、`<=`、`>` 和 `>=`，其结果通常为 `bool`。在 C++20 之前，为了支持类对象之间的比较，通常需要分别提供这 6 个比较运算符的重载；这些重载一般实现为全局函数，以便左右操作数都能进行隐式转换。",
+  "key_points": [
+    "比较运算符通常声明为全局函数，例如 `bool operator==(const SpreadsheetCell& lhs, const SpreadsheetCell& rhs);`。",
+    "类对象可以与 `double` 或 `int` 比较，是因为数值可以隐式转换为 `SpreadsheetCell`，但这可能产生临时对象并带来轻微性能开销。",
+    "如果只为 `SpreadsheetCell` 提供重载，为了直接支持与 `double` 的比较，每个比较运算符可能需要 3 个版本：对象与对象、`double` 与对象、对象与 `double`。",
+    "对于 `double`，直接使用 `==` 比较通常不可靠；教材提示应使用 epsilon 测试，但具体内容不在本节讨论范围内。",
+    "当类数据成员较多时，可以先实现 `==` 和 `<`，再用它们推导其他比较运算符，例如 `lhs >= rhs` 可以写成 `!(lhs < rhs)`。"
+  ],
+  "examples": [
+    "比较运算符声明：`bool operator==(const SpreadsheetCell& lhs, const SpreadsheetCell& rhs);`",
+    "比较实现：`bool operator==(const SpreadsheetCell& lhs, const SpreadsheetCell& rhs) { return lhs.getValue() == rhs.getValue(); }`",
+    "根据 `<` 实现 `>=`：`bool operator>=(const SpreadsheetCell& lhs, const SpreadsheetCell& rhs) { return !(lhs < rhs); }`",
+    "与数值比较的 3 类重载形式：`bool operator==(const SpreadsheetCell& lhs, const SpreadsheetCell& rhs);`、`bool operator==(double lhs, const SpreadsheetCell& rhs);`、`bool operator==(const SpreadsheetCell& lhs, double rhs);`",
+    "使用示例：`if (myCell > aThirdCell || myCell < 10) { cout << myCell.getValue() << endl; }`"
+  ],
+  "misconceptions": [
+    "实现一个比较运算符不会自动生成其余 5 个比较运算符。",
+    "比较运算符虽然也可以返回其他类型，但通常应返回 `bool`。",
+    "能够与 `double` 比较不代表一定存在直接接受 `double` 的重载，也可能是通过隐式转换创建临时 `SpreadsheetCell` 对象。",
+    "对 `double` 使用普通 `==` 比较通常不能可靠判断数学意义上的相等。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "C++20 之前，支持 6 个基本比较运算符通常需要多少个重载函数？",
+      "a": "通常需要分别实现 `==`、`!=`、`<`、`<=`、`>` 和 `>=`，共 6 个函数。"
+    },
+    {
+      "q": "为什么比较运算符通常实现为全局函数？",
+      "a": "这样左右两个操作数都可以参与隐式转换，便于支持类对象与其他类型的比较。"
+    },
+    {
+      "q": "为什么直接比较两个 `double` 是否相等可能不可靠？",
+      "a": "浮点数存在表示误差，教材提示通常应使用 epsilon 测试，而不是简单使用 `==`。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "类的运算符重载",
+    "隐式类型转换",
+    "浮点数表示误差"
+  ],
+  "source_pages": [
+    294,
+    294
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "608_c_20_之前的比较运算符重载",
+  "_chunk_pages": [
+    293,
+    296
+  ]
+}

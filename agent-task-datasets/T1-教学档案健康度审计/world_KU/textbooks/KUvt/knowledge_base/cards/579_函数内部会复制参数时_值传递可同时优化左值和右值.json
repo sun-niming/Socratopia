@@ -1,0 +1,54 @@
+{
+  "title": "函数内部会复制参数时，值传递可同时优化左值和右值",
+  "definition": "对于不会在函数内部复制的非基本类型参数，通常使用 const 引用可以避免不必要的复制。但如果函数无论如何都要把参数复制到成员变量或其他对象中，按值传递通常更合适：传入左值时，实参复制到值参数一次，再移动到目标对象；传入右值时，值参数可以由右值移动构造，再移动到目标对象，从而避免额外复制。",
+  "key_points": [
+    "只读且不需要复制的非基本类型参数，仍适合使用 const 引用传递。",
+    "如果函数必然要复制参数，按值传递可以用一个函数版本同时处理左值和右值。",
+    "典型写法：\nvoid setData(std::vector<int> data) {\n    m_data = std::move(data);\n}",
+    "传入左值时，通常发生一次复制：左值复制到 data，再从 data 移动到 m_data。",
+    "传入右值时，data 可以由右值移动构造，随后移动到 m_data，避免深度复制。"
+  ],
+  "examples": [
+    "class DataHolder {\npublic:\n    void setData(std::vector<int> data) {\n        m_data = std::move(data);\n    }\nprivate:\n    std::vector<int> m_data;\n};",
+    "左值调用：\nstd::vector<int> myData{11, 22, 33};\nwrapper.setData(myData);\n会把 myData 复制到值参数 data，再将 data 移动到 m_data。",
+    "右值调用：\nwrapper.setData({22, 33, 44});\n会调用值参数版本，并将临时 vector 的资源移动到目标对象。"
+  ],
+  "misconceptions": [
+    "值传递不是所有参数的默认最佳选择；只有当函数无论如何都要复制该参数时，值传递才具有这里的优势。",
+    "对不需要复制的参数使用值传递可能产生不必要的复制，此时应优先考虑 const 引用。",
+    "值传递并不意味着左值完全不复制；左值传入值参数时仍需先复制一次。",
+    "值传递方案依赖在函数内部对值参数使用 std::move，否则可能再次发生复制。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "什么时候适合用值传递代替 const 引用传递？",
+      "a": "当函数无论如何都要复制参数，例如把参数保存到成员变量时，值传递可以同时较好地处理左值和右值。"
+    },
+    {
+      "q": "向按值接收的 setData 传入左值时发生什么？",
+      "a": "左值先复制到值参数 data，然后 data 再移动到成员变量 m_data。"
+    },
+    {
+      "q": "向按值接收的 setData 传入右值时有什么优势？",
+      "a": "右值可以移动构造值参数 data，随后 data 再移动到 m_data，通常不需要深度复制。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "左值引用与右值引用",
+    "std::move",
+    "拷贝与移动操作",
+    "函数参数传递"
+  ],
+  "source_pages": [
+    276,
+    276
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "579_函数内部会复制参数时_值传递可同时优化左值和右值",
+  "_chunk_pages": [
+    273,
+    276
+  ]
+}

@@ -1,0 +1,387 @@
+{
+  "conversationId": "64KCdn4ZqCUX29tk2G4Hq",
+  "generatedAt": 1790332975816,
+  "pagesRange": null,
+  "sections": [
+    {
+      "type": "tldr",
+      "content": "本节课围绕「语义动作的位置与后缀输出」展开，产生式中的语义动作在所有子树处理完成后执行时，对应后序遍历。。"
+    },
+    {
+      "type": "concepts",
+      "items": [
+        {
+          "name": "语义动作的位置与后缀输出",
+          "body": "- 产生式中的语义动作在所有子树处理完成后执行时，对应后序遍历。\n- 语义动作的位置直接决定翻译结果。\n- 产生式 \u0000\n\n**例子**\n- 产生式 expr $\\rightarrow expr_1 + term \\{\\ print('+')\\ \\}$ 的执行顺序是先翻译左子树，再翻译右子树，最后打印 $+$。\n- 输入 $9-5+2$ 的后缀输出是 $95-2+$。\n- 若把动作放在左子树之后、加号之前，输出就不再是后缀表示。",
+          "sourceMessageIndexes": [
+            1
+          ]
+        },
+        {
+          "name": "自顶向下分析与自底向上分析",
+          "body": "- 自顶向下分析从开始符号对应的根结点出发，逐步展开到叶子。\n- 自底向上分析从输入串对应的叶子出发，逐步归约到根结点。\n- 自顶向下分析根据向前看符号选择产生式。\n- 自顶向下分析通常反复展开最左边尚未展开的非终结符，对应最左推导。\n\n**例子**\n- 自顶向下的方向是 $\\text{根}\\rightarrow\\text{叶子}$，自底向上的方向是 $\\text{叶子}\\rightarrow\\text{根}$。\n- 分析 $for\\ (;\\ expr;\\ expr)\\ other$ 时，开始符号 $stmt$ 根据向前看符号 $for$ 选择生成 $for$ 开头串的产生式。\n- 最左推导的局部顺序是先处理第一个 $optexpr$，再处理分号、后续的 $optexpr$ 和最后的 $stmt$。",
+          "sourceMessageIndexes": [
+            1,
+            3,
+            11
+          ]
+        },
+        {
+          "name": "向前看符号与产生式选择",
+          "body": "- 向前看符号是当前尚未匹配的输入符号。\n- 向前看符号帮助分析器决定当前非终结符应该选择哪条产生式。\n- 如果没有任何产生式能够与向前看符号匹配，就报告语法错误。\n- 选择产生式时，要让产生式生成的终结符序列与输入的向前看符号保持一致。\n\n**例子**\n- 当 $stmt$ 的向前看符号是 $for$ 时，不能选择 $stmt\\rightarrow other$。\n- 当 $optexpr$ 的向前看符号是 $expr$ 时，选择 $optexpr\\rightarrow expr$。\n- 当 $optexpr$ 的向前看符号是分号或右括号时，选择 $optexpr\\rightarrow\\epsilon$。",
+          "sourceMessageIndexes": [
+            1,
+            3,
+            5,
+            15
+          ]
+        },
+        {
+          "name": "空产生式与输入消耗",
+          "body": "- 选择空产生式 $\\epsilon$ 不会消耗输入。\n- 终结符匹配操作才会真正消耗输入。\n- 展开空产生式后，输入指针保持不动。\n- 空产生式负责表示可选内容不存在。\n\n**例子**\n- 在 $for\\ (;\\ expr;\\ expr)\\ other$ 中，第一个 $optexpr$ 选择 $optexpr\\rightarrow\\epsilon$，随后由 $match(';')$ 消耗第一个分号。\n- 局部顺序是 $optexpr\\rightarrow\\epsilon$，然后执行 $match(';')$，再选择 $optexpr\\rightarrow expr$。",
+          "sourceMessageIndexes": [
+            5,
+            7,
+            9,
+            13
+          ]
+        },
+        {
+          "name": "终结符与非终结符",
+          "body": "- $stmt$ 和 $optexpr$ 是非终结符号，因为它们还能继续展开。\n- $for$、左括号、分号、右括号和 $other$ 是终结符号，或者是由词法分析器产生的词法单元。\n- 非终结符过程负责选择和展开产生式，匹配操作负责处理并消耗终结符。\n- 在简化文法中，$match(expr)$ 被当作匹配代表表达式的符号；完整文法会继续调用表达式分析过程。\n\n**例子**\n- 递归下降分析中，$stmt()$ 和 $optexpr()$ 负责处理非终结符。\n- $match(for)$ 和 $match(';')$ 负责匹配终结符。",
+          "sourceMessageIndexes": [
+            7,
+            19
+          ]
+        },
+        {
+          "name": "递归下降分析器",
+          "body": "- 递归下降分析中，每个非终结符对应一个过程。\n- 非终结符对应的过程根据向前看符号选择产生式。\n- 递归下降分析器从开始符号对应的过程出发，递归展开文法并匹配输入。\n- 递归下降分析属于自顶向下分析。\n- `stmt()`处理非终结符，选择并展开产生式。\n- `match()`处理终结符，检查当前输入是否匹配，匹配后向前移动。\n\n**例子**\n- $stmt()$ 根据向前看符号选择 $for$ 产生式、$other$ 产生式或报告语法错误。\n- $optexpr()$ 在向前看符号为 $expr$ 时匹配表达式，在向前看符号为分号或右括号时选择 $\\epsilon$。\n- $match(';')$ 检查当前输入是否为分号，成功后向前移动。",
+          "sourceMessageIndexes": [
+            5,
+            7,
+            18,
+            19,
+            21
+          ]
+        },
+        {
+          "name": "完整输入的接受条件",
+          "body": "- 开始符号必须成功推导出输入串。\n- 所有终结符号必须成功匹配。\n- 输入指针必须到达结束标记，分析器才接受。\n- 如果匹配完一个语句后仍有剩余输入，就必须报告语法错误。\n\n**例子**\n- 匹配完 $for\\ (;\\ expr;\\ expr)\\ other$ 且输入正好结束时，接受。\n- 输入 $for\\ (;\\ expr;\\ expr)\\ other\\ extra$ 中的 $extra$ 未被文法解释，因此报告语法错误。",
+          "sourceMessageIndexes": [
+            17
+          ]
+        },
+        {
+          "name": "自顶向下与自底向上分析方向",
+          "body": "- 自顶向下分析从根结点向叶子结点推进。\n- 自底向上分析从叶子结点向根结点推进。",
+          "sourceMessageIndexes": [
+            20,
+            21
+          ]
+        },
+        {
+          "name": "预测分析法",
+          "body": "- 预测分析法是递归下降分析法的一种简单形式。\n- 预测分析法只看一个当前向前看符号，就能唯一决定使用哪条产生式。\n- 预测分析法不需要回溯。\n- 选定产生式后，非终结符调用对应过程，终结符调用`match`检查并消费。\n- 如果当前向前看符号不能指向任何候选产生式，就报告语法错误。\n- 不同候选产生式必须能根据向前看符号区分开。\n\n**例子**\n- `stmt → expr ;`、`stmt → if ( expr ) stmt`、`stmt → for ( optexpr ; optexpr ; optexpr ) stmt`、`stmt → other`。\n- 向前看符号为`if`时选择`stmt → if ( expr ) stmt`。\n- 向前看符号为`while`时报告语法错误。",
+          "sourceMessageIndexes": [
+            23,
+            25,
+            27
+          ]
+        },
+        {
+          "name": "FIRST集合",
+          "body": "- `FIRST(α)`表示从符号串`α`能推导出的字符串中，可能出现在最左端的终结符号集合。\n- FIRST集合用于帮助预测分析器根据向前看符号选择产生式。\n- FIRST只看最先可能出现的终结符，不看后续位置。\n- 如果符号串能推导出空串，则$\\varepsilon$属于其FIRST集合。\n- 两个非空候选右部的FIRST集合相交时，预测分析器无法仅凭一个向前看符号唯一选择产生式。\n- 预测分析要求不同候选右部的FIRST集合不相交。\n\n**例子**\n- $FIRST(expr\\ ;) = \\{expr\\}$。\n- $FIRST(stmt)=\\{expr,\\ if,\\ for,\\ other\\}$。\n- `(`不属于`FIRST(stmt)`，因为它出现在`if`或`for`之后。",
+          "sourceMessageIndexes": [
+            21,
+            29,
+            31,
+            37
+          ]
+        },
+        {
+          "name": "空产生式与$\\varepsilon$",
+          "body": "- `optexpr`可以推导为`expr`或空串。\n- $FIRST(optexpr)=\\{expr,\\varepsilon\\}$。\n- 看到`;`时选择`optexpr → \\varepsilon`，不是因为`;`属于FIRST集合。\n- 当向前看符号不属于其他非空产生式的FIRST集合，而该非终结符存在$\\varepsilon$产生式时，选择$\\varepsilon$产生式。\n- 选择$\\varepsilon$产生式不会消耗输入。\n- 看到`expr`时选择`optexpr → expr`，不能选择$\\varepsilon$，否则会留下未处理的`expr`。\n\n**例子**\n- `optexpr → expr | ε`。\n- 向前看符号为`;`时：`optexpr → ε`，然后`match(';')`。\n- 向前看符号为`expr`时：选择`optexpr → expr`。",
+          "sourceMessageIndexes": [
+            29,
+            33,
+            35
+          ]
+        },
+        {
+          "name": "左递归",
+          "body": "- 直接左递归的形式是$A\\to A\\alpha$。\n- 左递归会使递归下降分析在尚未匹配终结符时反复调用同一个过程，最终无限递归。\n- 直接左递归可以改写为$A\\to \\beta R$、$R\\to \\alpha R\\mid\\varepsilon$。\n\n**例子**\n- `expr → expr + term | term`会导致`expr()`不断调用`expr()`。\n- 改写后的表达式文法为`expr → term rest`、`rest → + term rest | - term rest | ε`。",
+          "sourceMessageIndexes": [
+            21
+          ]
+        },
+        {
+          "name": "展开非终结符与循环处理 rest",
+          "body": "- 教材把 rest 的过程体直接展开到 expr 中。\n- expr() 先调用 term()，再循环处理后续的 + term 或 - term。\n- 循环中先匹配运算符，再调用 term()，最后输出运算符。\n- 遇到其他符号时退出循环。\n\n**例子**\n- 对输入 9-5+2，执行顺序是 term() 输出 9，匹配 -，term() 输出 5，输出 -，匹配 +，term() 输出 2，输出 +。\n- “非终结字符”应改为“非终结符号”。",
+          "sourceMessageIndexes": [
+            58,
+            59
+          ]
+        },
+        {
+          "name": "term() 中输出数位与 match() 的顺序",
+          "body": "- match(lookahead) 成功后会读取下一个输入字符并改变 lookahead。\n- 程序先输出当前数位，再调用 match(lookahead) 消费它。\n- 如果先调用 match(lookahead)，当前数位会被消费，之后无法正确输出原来的数位。\n- 完整 Java 程序直接在 match 前输出；伪代码可以先保存数位到变量 t，匹配后再输出。\n\n**例子**\n- 代码顺序为 System.out.write((char)lookahead); match(lookahead);。\n- 输入 9+5 时，lookahead 先是 9；输出 9 后，match(9) 使 lookahead 变成 +。",
+          "sourceMessageIndexes": [
+            60,
+            61
+          ]
+        },
+        {
+          "name": "match() 的终结符验证与语法错误",
+          "body": "- match(int t) 的职责是验证当前向前看符号等于预期终结符号。\n- 当 lookahead == t 时，match() 读取下一个输入字符。\n- 当 lookahead != t 时，match() 必须抛出 syntax error。\n- 不匹配时继续读取会悄悄跳过非法输入，破坏语法分析器对输入结构的判断。\n\n**例子**\n- match(int t) 的逻辑是：匹配成功则执行 lookahead = System.in.read()，否则抛出 new Error(\"syntax error\")。\n- 程序期待 )、实际读到 + 时，必须立即报告语法错误。",
+          "sourceMessageIndexes": [
+            62,
+            63
+          ]
+        },
+        {
+          "name": "词法分析器与语法分析器的分工",
+          "body": "- 词法分析器把字符序列转换为词法单元及属性。\n- 语法分析器把词法单元序列转换为语法结构。\n- 语法分析器只需处理抽象的终结符号 num，并通过 value 属性获取数值。\n- 语法分析器不必关心数字的位数、字符组合方式、字符到整数的转换以及数字结束的位置。\n\n**例子**\n- 输入 31 + 28 可转换为 <num, 31> <+> <num, 28>。\n- 输入 31 + 28 + 59 可转换为 <num,31> <+> <num,28> <+> <num,59>，语法分析器看到的是 num + num + num。",
+          "sourceMessageIndexes": [
+            64,
+            65
+          ]
+        },
+        {
+          "name": "词法分析中的空白符处理",
+          "body": "- 词法分析器在生成下一个词法单元前循环跳过空格、制表符和换行符。\n- 语法分析器看不到被词法分析器跳过的空白符，因此不需要把空白符加入文法。\n- 跳过空白符可以使文法只描述有语法意义的结构。\n- 词法分析器可以在跳过换行符时递增行号，用于错误报告。\n\n**例子**\n- 31 + 28 和 31+28 会生成相同的词法单元序列 <num,31> <+> <num,28>。",
+          "sourceMessageIndexes": [
+            66,
+            67
+          ]
+        },
+        {
+          "name": "词法分析中的预读与字符保留",
+          "body": "- 词法分析器有时需要预读一个字符才能确定当前词素。\n- 读到 > 后，如果下一个字符是 =，当前词法单元是 >=。\n- 读到 > 后，如果下一个字符不是 =，当前词法单元是 >，并保留多读的字符供下一次扫描。\n- 词法分析器用 peek 保存预读字符。\n- 返回当前词法单元时，peek 保存该词素之后的字符或空白符。\n\n**例子**\n- 输入 >=x 的词法单元序列是 >= 和 id(x)。\n- 输入 >x 的词法单元序列是 > 和 id(\"x\")。\n- 输入 >x 时，当前扫描返回 >，下一次调用 scan() 才返回 id(\"x\")。",
+          "sourceMessageIndexes": [
+            68,
+            69,
+            70,
+            71
+          ]
+        }
+      ]
+    },
+    {
+      "type": "notes",
+      "title": "学习轨迹",
+      "content": "- **答对**：学习者指出 $stmt\\rightarrow other$ 没有对应 $for$ 的结构。\n- **答对**：学习者判断向前看符号为 $expr$ 时，$optexpr$ 选择 $optexpr\\rightarrow expr$。\n- **误区**：学习者将 $expr$ 称为“中介符号”。\n- **答对**：学习者判断选择 $optexpr\\rightarrow\\epsilon$ 时不会消耗输入。\n- **答对**：学习者判断应先处理左边尚未展开的非终结符。\n- **答对**：学习者判断展开第一个 $optexpr\\rightarrow\\epsilon$ 后，最左边尚未处理的符号是分号。\n- **答对**：学习者判断遇到不符合当前产生式的向前看符号时应报告语法错误。\n- **答对**：学习者判断输入成功匹配并结束时应接受。\n- **答对**：学习者概括：$stmt()$ 负责展开非终结符，$match()$ 负责消费终结符。\n- **答对**：学习者准确概括了`stmt()`负责展开非终结符，`match`负责消费终结符。\n- **误区**：学习者将自顶向下分析的推进方向说成了从叶子结点向根结点。\n- **理解转变**：在纠正后，学习者接受继续按预测分析法和FIRST集合依次学习，并要求不要一次混合多个知识点。\n- **答对**：学习者正确选择了向前看符号为`if`时的产生式：`stmt → if (expr) stmt`。\n- **答对**：学习者正确判断向前看符号为`while`时应报告错误。\n- **答对**：学习者正确判断两个候选产生式可能以同一个向前看符号开头时，不能确定选择哪个产生式。\n- **答对**：学习者正确说明`(`不属于`stmt`的FIRST集合，因为`stmt`产生式的首个终结符号不包含`(`。\n- **误区**：学习者把看到`;`时选择空产生式的原因概括为FIRST可以包含空字符，未说明`;`不属于非空产生式的FIRST集合这一条件。\n- **答对**：学习者正确选择了向前看符号为`expr`时的`optexpr → expr`产生式。\n- **答对**：学习者正确判断FIRST集合相交时无法确定选择哪个产生式。\n- **答对**：学习者指出应展开非终结符并循环处理后续 rest，但将“非终结符号”说成了“非终结字符”。\n- **答对**：学习者知道在 match 消费当前字符前应先打印当前数位。\n- **答对**：学习者知道向前看字符不匹配时应报告语法错误。\n- **答对**：学习者知道词法分析器应让语法分析器不必考虑词法单元的词素表示方式。\n- **答对**：学习者知道词法分析器遇到空格、制表符或换行符时会跳过这些空白符，使语法分析器接收不到空白符。\n- **答对**：学习者判断读到 > 后预读到 = 时，当前词法单元是 >=。\n- **误区**：学习者把输入 >x 当前扫描得到的词法单元回答为 id；实际上当前扫描应返回 >，id 是下一次扫描的结果。"
+    },
+    {
+      "type": "key-insight",
+      "content": "学习者认识到 $stmt\\rightarrow other$ 不能生成以 $for$ 开头的结构。",
+      "sourceMessageIndexes": [
+        2
+      ]
+    },
+    {
+      "type": "open-question",
+      "content": "递归下降分析器是在构造语法分析树的根、内部结点还是叶子结点方向推进？"
+    },
+    {
+      "type": "review-questions",
+      "items": [
+        {
+          "question": "产生式中的语义动作放在所有子树处理完成之后，对应哪种遍历？",
+          "answer": "对应后序遍历。"
+        },
+        {
+          "question": "自顶向下分析和自底向上分析分别从哪里开始构造语法分析树？",
+          "answer": "自顶向下分析从根结点开始向叶子展开；自底向上分析从输入串对应的叶子开始向根结点归约。"
+        },
+        {
+          "question": "当 $optexpr$ 的向前看符号是分号时，应选择哪条产生式？",
+          "answer": "选择 $optexpr\\rightarrow\\epsilon$，因为空产生式不消耗分号，随后由终结符匹配操作消耗分号。"
+        },
+        {
+          "question": "递归下降分析中，非终结符过程和 $match()$ 分别负责什么？",
+          "answer": "非终结符过程负责根据向前看符号选择并展开产生式；$match()$ 检查并消耗匹配的终结符。"
+        },
+        {
+          "question": "什么时候递归下降分析器接受输入？",
+          "answer": "开始符号成功推导输入串、所有终结符成功匹配，并且输入指针到达结束标记时接受。"
+        }
+      ]
+    }
+  ],
+  "generationMeta": {
+    "pipelineVersion": "post-class-v2",
+    "mode": "chunked",
+    "jobId": "pn_mugtvfaz01ee98d8950e",
+    "traceId": "tr_mugtvfaz1e82188a815a",
+    "sourceHash": "sha256:1eb3c7ed1f378b05b35b1a436e63603d743d5666ddd5c2cba250aac52bd3a230",
+    "sourceMessageCount": 73,
+    "chunkCount": 3,
+    "generatedAt": 1790332975816,
+    "decision": "degraded",
+    "quality": {
+      "score": 0.909,
+      "metrics": {
+        "topicCoverage": 1,
+        "learnerEvidenceCoverage": 0.8461538461538461,
+        "explanationCoverage": 0.9444444444444444,
+        "sourceIntegrity": 1,
+        "reviewQuestionDiversity": 0.8461538461538461,
+        "structureValidity": 1,
+        "lengthFitness": 0.26925,
+        "duplicationRatio": 0,
+        "unsupportedTopicRatio": 0,
+        "lengthChars": 6923,
+        "conceptCount": 18,
+        "evidenceTopicCount": 19
+      }
+    },
+    "warnings": [],
+    "evidenceIndex": [
+      {
+        "name": "语义动作的位置与后缀输出",
+        "sourceMessageIndexes": [
+          1
+        ]
+      },
+      {
+        "name": "自顶向下分析与自底向上分析",
+        "sourceMessageIndexes": [
+          1,
+          3,
+          11
+        ]
+      },
+      {
+        "name": "向前看符号与产生式选择",
+        "sourceMessageIndexes": [
+          1,
+          3,
+          5,
+          15
+        ]
+      },
+      {
+        "name": "空产生式与输入消耗",
+        "sourceMessageIndexes": [
+          5,
+          7,
+          9,
+          13
+        ]
+      },
+      {
+        "name": "终结符与非终结符",
+        "sourceMessageIndexes": [
+          7,
+          19
+        ]
+      },
+      {
+        "name": "递归下降分析器",
+        "sourceMessageIndexes": [
+          5,
+          7,
+          19
+        ]
+      },
+      {
+        "name": "完整输入的接受条件",
+        "sourceMessageIndexes": [
+          17
+        ]
+      },
+      {
+        "name": "递归下降分析器的基本结构",
+        "sourceMessageIndexes": [
+          18,
+          19,
+          21
+        ]
+      },
+      {
+        "name": "自顶向下与自底向上分析方向",
+        "sourceMessageIndexes": [
+          20,
+          21
+        ]
+      },
+      {
+        "name": "预测分析法",
+        "sourceMessageIndexes": [
+          23,
+          25,
+          27
+        ]
+      },
+      {
+        "name": "FIRST集合",
+        "sourceMessageIndexes": [
+          21,
+          29,
+          31,
+          37
+        ]
+      },
+      {
+        "name": "空产生式与\\(\\varepsilon\\)",
+        "sourceMessageIndexes": [
+          29,
+          33,
+          35
+        ]
+      },
+      {
+        "name": "左递归",
+        "sourceMessageIndexes": [
+          21
+        ]
+      },
+      {
+        "name": "展开非终结符与循环处理 rest",
+        "sourceMessageIndexes": [
+          58,
+          59
+        ]
+      },
+      {
+        "name": "term() 中输出数位与 match() 的顺序",
+        "sourceMessageIndexes": [
+          60,
+          61
+        ]
+      },
+      {
+        "name": "match() 的终结符验证与语法错误",
+        "sourceMessageIndexes": [
+          62,
+          63
+        ]
+      },
+      {
+        "name": "词法分析器与语法分析器的分工",
+        "sourceMessageIndexes": [
+          64,
+          65
+        ]
+      },
+      {
+        "name": "词法分析中的空白符处理",
+        "sourceMessageIndexes": [
+          66,
+          67
+        ]
+      },
+      {
+        "name": "词法分析中的预读与字符保留",
+        "sourceMessageIndexes": [
+          68,
+          69,
+          70,
+          71
+        ]
+      }
+    ],
+    "degradedReason": "chunk_failures"
+  }
+}

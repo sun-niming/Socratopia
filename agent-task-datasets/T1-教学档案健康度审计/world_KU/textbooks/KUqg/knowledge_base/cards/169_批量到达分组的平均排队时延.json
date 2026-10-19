@@ -1,0 +1,39 @@
+{
+  "title": "批量到达分组的平均排队时延",
+  "definition": "若 $N$ 个长度均为 $L$ 的分组同时到达一条空闲链路，并按到达次序发送，则第 $k$ 个被发送的分组需要等待 $(k-1)L/R$。因此这 $N$ 个分组的平均排队时延为 $$\\bar d_{\\text{queue}}=\\frac{1}{N}\\sum_{k=1}^{N}(k-1)\\frac{L}{R}=\\frac{(N-1)L}{2R}.$$",
+  "key_points": [
+    "第一个分组无需排队，其排队时延为零。",
+    "最后一个分组需要等待前面 $N-1$ 个分组发送。",
+    "平均排队时延是等差数列 $0,L/R,\\ldots,(N-1)L/R$ 的平均值。"
+  ],
+  "examples": [
+    "若 $N=5$，平均排队时延为 $$\\bar d_{\\text{queue}}=\\frac{4L}{2R}=\\frac{2L}{R}.$$"
+  ],
+  "misconceptions": [
+    "误认为所有同时到达的分组具有相同排队时延。",
+    "把平均排队时延误写成 $NL/R$。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "$N$ 个等长分组同时到达空闲链路时，它们的平均排队时延是多少？",
+      "a": "$$\\bar d_{\\text{queue}}=\\frac{(N-1)L}{2R}.$$"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "传输时延",
+    "平均值",
+    "先到先服务队列"
+  ],
+  "source_pages": [
+    65,
+    68
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "169_批量到达分组的平均排队时延",
+  "_chunk_pages": [
+    65,
+    68
+  ]
+}

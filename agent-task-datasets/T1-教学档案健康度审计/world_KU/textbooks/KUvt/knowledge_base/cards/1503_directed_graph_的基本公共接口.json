@@ -1,0 +1,60 @@
+{
+  "title": "directed_graph 的基本公共接口",
+  "definition": "directed_graph 是表示有向图的类模板。教材列出的公共接口支持节点和边的插入、删除与查询，支持清空图、按索引访问节点、比较两个图是否相等、交换两个图的内容、查询节点数以及获取某个节点的相邻节点值集合。节点值的类型由模板参数 T 决定。",
+  "key_points": [
+    "`insert(const T&)` 和 `insert(T&&)`：尝试插入节点；如果图中已经存在相同值的节点，则插入失败并返回 `false`，成功添加新节点时返回 `true`。",
+    "`erase(const T&)`：删除给定节点值对应的节点；成功删除返回 `true`，节点不存在时返回 `false`。",
+    "`insert_edge(from_node_value, to_node_value)`：尝试创建从一个节点到另一个节点的有向边，成功返回 `true`，否则返回 `false`。",
+    "`edge_erase(from_node_value, to_node_value)`：尝试删除给定有向边，成功返回 `true`，否则返回 `false`。",
+    "`clear() noexcept`：移除图中的所有节点。",
+    "`operator[](size_t index)`：按索引返回节点值的引用；接口说明不执行边界检查。",
+    "两个 directed_graph 相等，当且仅当它们具有相同的节点和边；节点和边的添加顺序不影响相等性。",
+    "`swap(directed_graph& other_graph) noexcept` 交换两个图中的所有节点。",
+    "`size() const noexcept` 返回图中的节点数。",
+    "`get_adjacent_nodes_values(...)` 返回指定节点的相邻节点值集合；如果指定节点不存在，则返回空集合。"
+  ],
+  "examples": [
+    "按索引访问节点的接口形式为：`T& operator[](size_t index);` 和 `const T& operator[](size_t index) const;`。",
+    "相等性的判断不依赖插入顺序：如果两个图最终拥有相同的节点集合和相同的有向边集合，则它们相等。"
+  ],
+  "misconceptions": [
+    "`operator[]` 不进行边界检查，使用越界索引可能导致未定义行为，不能把它当作自动检查范围的访问接口。",
+    "两个图的节点或边插入顺序不同，并不意味着它们一定不相等。",
+    "`size()` 返回的是节点数量，不是边数量。",
+    "查询不存在节点的相邻节点值时，接口返回空集合，而不是自动创建该节点。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "directed_graph 的 `insert` 在什么情况下返回 false？",
+      "a": "当图中已经存在相同节点值时，插入不会成功并返回 `false`。"
+    },
+    {
+      "q": "directed_graph 的 `operator[]` 有什么限制？",
+      "a": "它按节点索引返回节点值引用，但不进行边界检查。"
+    },
+    {
+      "q": "两个 directed_graph 何时相等？",
+      "a": "当两个图具有相同的节点和边时相等，节点和边的添加顺序不影响相等性。"
+    },
+    {
+      "q": "如果调用 get_adjacent_nodes_values 查询不存在的节点，会得到什么？",
+      "a": "会得到一个空集合。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "有向图及邻接表",
+    "C++ 类模板和运算符重载"
+  ],
+  "source_pages": [
+    724,
+    724
+  ],
+  "needs_verification": true,
+  "verify_query": "《C++20高级编程》第5版 directed_graph insert_edge edge_erase get_adjacent_nodes_values 公共接口",
+  "concept_id": "1503_directed_graph_的基本公共接口",
+  "_chunk_pages": [
+    721,
+    724
+  ]
+}

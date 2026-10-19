@@ -1,0 +1,42 @@
+{
+  "title": "标准库容器适配器",
+  "definition": "标准库除顺序容器外还提供三种容器适配器：queue、priority_queue和stack。容器适配器是对某种顺序容器的包装，通过简化接口来提供queue或stack等抽象所需的操作。它们可以更换底层容器而不必修改使用适配器的代码，但不提供迭代器，也不提供同时插入或删除多个元素的功能。",
+  "key_points": [
+    "三种标准容器适配器是queue、priority_queue和stack。",
+    "容器适配器依赖底层顺序容器来保存元素。",
+    "适配器只暴露抽象所需的接口，因此接口比底层容器更受限制。",
+    "容器适配器没有迭代器。"
+  ],
+  "examples": [
+    "可以把queue理解为对底层deque或list的包装：使用者通过push、pop、front等队列接口操作，而不直接使用底层容器的全部接口。"
+  ],
+  "misconceptions": [
+    "queue、priority_queue和stack不是普通顺序容器的简单别名，而是具有受限接口的容器适配器。",
+    "不能因为底层容器支持迭代，就认为对应的容器适配器也提供迭代器。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "标准库提供哪三种容器适配器？",
+      "a": "queue、priority_queue和stack。"
+    },
+    {
+      "q": "容器适配器与普通顺序容器相比有什么特点？",
+      "a": "它包装顺序容器并简化接口，只提供特定抽象所需的功能，不提供迭代器，也不提供同时插入或删除多个元素的功能。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "标准库顺序容器"
+  ],
+  "source_pages": [
+    575,
+    575
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1186_标准库容器适配器",
+  "_chunk_pages": [
+    573,
+    576
+  ]
+}

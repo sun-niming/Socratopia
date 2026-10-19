@@ -1,0 +1,43 @@
+{
+  "title": "字符串字面量与String构造函数",
+  "definition": "用双引号或单引号直接写出的字符串，是string基本类型的值；内置对象String是一个构造函数，类型是Function。用new操作符调用String构造函数创建的是String实例对象，类型是Object，不是基本类型。",
+  "key_points": [
+    "双引号或单引号创建的是string类型的值。",
+    "String是构造函数，类型是Function。",
+    "new String(...)创建的是对象，不是基本类型。"
+  ],
+  "examples": [
+    "'abc'",
+    "\"abc\"",
+    "new String('abc')"
+  ],
+  "misconceptions": [
+    "把new String('abc')和'abc'都当成同一种基本字符串值。",
+    "以为String本身是普通对象，而不是构造函数。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "用单引号写出的字符串属于什么类型？",
+      "a": "属于string类型的基本类型值。"
+    },
+    {
+      "q": "new String('abc') 创建的是什么？",
+      "a": "创建的是String实例对象，类型是Object，不是基本类型。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "JavaScript基本类型与对象"
+  ],
+  "source_pages": [
+    309,
+    312
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "445_字符串字面量与string构造函数",
+  "_chunk_pages": [
+    309,
+    312
+  ]
+}

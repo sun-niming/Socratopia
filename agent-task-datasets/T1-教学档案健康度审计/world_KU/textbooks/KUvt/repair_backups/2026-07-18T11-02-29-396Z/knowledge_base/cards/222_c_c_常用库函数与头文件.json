@@ -1,0 +1,46 @@
+{
+  "title": "C/C++ 常用库函数与头文件",
+  "definition": "教材列举了若干 C 或 C++ 程序中常见的库函数和输入输出接口，包括 $abs()$、$sqrt()$、$pow()$、$assert()$、字符串函数 $strlen()$ 与 $strcpy()$，以及 C 风格输入输出函数 $printf()$ 和 $scanf()$。教材还对 C 风格头文件 `<stdio.h>` 与 C++ 风格头文件 `<cstdio>` 作了对照。",
+  "key_points": [
+    "数学或数值函数示例包括 $abs()$、$sqrt()$ 和 $pow()$。",
+    "断言、字符串处理和 C 风格输入输出函数示例包括 $assert()$、$strlen()$、$strcpy()$、$printf()$ 和 $scanf()$。",
+    "原文同时出现 `<stdio.h>` 和 `<cstdio>`，体现了 C 风格头文件与 C++ 风格头文件的并列对照。",
+    "这些函数属于库接口示例，不是用户自定义函数。"
+  ],
+  "examples": [
+    "函数名称：$abs()$、$sqrt()$、$pow()$、$assert()$、$strlen()$、$strcpy()$、$printf()$、$scanf()$。",
+    "头文件名称：`<stdio.h>`、`<cstdio>`。"
+  ],
+  "misconceptions": [
+    "不要认为所有列出的函数都只属于 C++；原文明确把 C 和 C++ 的库接口放在一起讨论。",
+    "不要把 `<stdio.h>` 和 `<cstdio>` 当成两个函数；它们是头文件名称。",
+    "仅根据本页不能确定每个函数的完整参数、返回值和精确命名空间。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "原文列举了哪些 C 风格输入输出函数？",
+      "a": "`printf()` 和 `scanf()`。"
+    },
+    {
+      "q": "原文对照出现了哪些与标准输入输出相关的头文件？",
+      "a": "`<stdio.h>` 和 `<cstdio>`。"
+    },
+    {
+      "q": "原文列举了哪些字符串处理函数？",
+      "a": "`strlen()` 和 `strcpy()`。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [],
+  "source_pages": [
+    157,
+    158
+  ],
+  "needs_verification": true,
+  "verify_query": "《C++20高级编程》第5版第157-158页 abs sqrt pow assert errno strlen strcpy printf scanf stdio.h cstdio 原文",
+  "concept_id": "222_c_c_常用库函数与头文件",
+  "_chunk_pages": [
+    157,
+    160
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "title": "HTTP 请求最小格式",
+  "definition": "一个最小的 HTTP 请求通常包含请求行和若干 Header。请求行由方法、路径、协议版本组成，例如 `GET /index.html HTTP/1.1`。在本项目第一版中只支持 GET；如果方法不是 GET，应返回 405；如果请求行格式错误，应返回 400。HTTP 在这里可以先理解成一种文本格式，服务器需要按空格和换行解析请求。",
+  "key_points": [
+    "请求行格式：方法 路径 协议版本。",
+    "本项目第一版只支持 GET。",
+    "方法不是 GET 返回 405，请求行格式错误返回 400。",
+    "服务器是按文本规则解析 HTTP 请求的。"
+  ],
+  "examples": [
+    "GET /index.html HTTP/1.1\nHost: 127.0.0.1:8080\nUser-Agent: curl/8.0.0"
+  ],
+  "misconceptions": [
+    "浏览器发来的请求不是文本，而是服务器天然能理解的特殊数据。",
+    "只要收到请求就必须接受所有方法。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "HTTP 请求行包含哪三部分？",
+      "a": "方法、路径、协议版本。"
+    },
+    {
+      "q": "本项目第一版不支持的请求方法应该返回什么？",
+      "a": "返回 405 Method Not Allowed。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "HTTP 基础",
+    "文本解析"
+  ],
+  "source_pages": [
+    18,
+    20
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "012_http_请求最小格式",
+  "_chunk_pages": [
+    17,
+    20
+  ]
+}

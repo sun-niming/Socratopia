@@ -1,0 +1,45 @@
+{
+  "title": "replace与replace_if",
+  "definition": "std::replace 和 std::replace_if 用于在一个范围内替换元素。std::replace 按元素值匹配并替换；std::replace_if 根据谓词判断，谓词返回 true 的元素被替换为指定的新值，谓词返回 false 的元素保持不变。两者都直接修改源范围。",
+  "key_points": [
+    "std::replace 的基本形式按指定旧值匹配。",
+    "std::replace_if 接收范围、谓词和新值。",
+    "replace_if 的谓词返回 true 时替换对应元素，返回 false 时保留原值。",
+    "这两个算法直接修改输入范围。"
+  ],
+  "examples": [
+    "replace_if(begin(vec), end(vec), [](int i) { return i % 2 != 0; }, 0);",
+    "上述调用会把范围 vec 中的所有奇数替换为 0，偶数保持不变。"
+  ],
+  "misconceptions": [
+    "replace_if 不是删除满足条件的元素，而是把它们替换为新值。",
+    "谓词返回 false 的元素不会被替换。",
+    "replace 与 replace_copy 的作用不同，前者直接修改源范围，后者把结果复制到目标范围。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何用 replace_if 将容器中的所有奇数替换为 0？",
+      "a": "调用 replace_if(begin(vec), end(vec), [](int i) { return i % 2 != 0; }, 0)。"
+    },
+    {
+      "q": "replace_if 何时替换元素？",
+      "a": "当传入的谓词对该元素返回 true 时。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "迭代器范围",
+    "Lambda表达式"
+  ],
+  "source_pages": [
+    642,
+    642
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1337_replace与replace_if",
+  "_chunk_pages": [
+    641,
+    644
+  ]
+}

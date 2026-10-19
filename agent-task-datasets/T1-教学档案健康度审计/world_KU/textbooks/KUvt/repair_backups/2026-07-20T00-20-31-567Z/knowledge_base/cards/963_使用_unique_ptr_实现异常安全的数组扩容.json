@@ -1,0 +1,41 @@
+{
+  "title": "使用 unique_ptr 实现异常安全的数组扩容",
+  "definition": "数组扩容时，应先创建适当大小的新数组，并用 unique_ptr 暂时管理它；然后将旧数组中的元素复制到新数组。只有在新数组成功创建且所有元素复制完成、整个过程没有抛出异常时，才删除旧数组并接管新数组的所有权。这样，如果复制过程中发生异常，unique_ptr 会自动释放新数组，旧数组仍然保持有效。完成所有权转移时，应使用 release()，否则 unique_ptr 析构时会再次销毁该数组。",
+  "key_points": [
+    "扩容的安全顺序是：分配新数组、复制元素、成功后替换旧数组。",
+    "复制过程中发生异常时，unique_ptr 自动清理新分配的内存。",
+    "将新数组交给成员指针后必须调用 release() 放弃 unique_ptr 的所有权，避免析构时重复释放。"
+  ],
+  "examples": [
+    "伪代码流程：\n```cpp\nstd::unique_ptr<T[]> newElements(new T[newSize]);\n// 将旧数组元素复制到 newElements\n// 全部成功后：\ndelete[] m_elements;\nm_elements = newElements.release();\n```"
+  ],
+  "misconceptions": [
+    "不能先删除旧数组、再分配和复制新数组，否则复制失败时可能丢失原有数据。",
+    "不能在已经把新数组交给 m_elements 后仍让 unique_ptr 保持所有权，否则可能发生重复释放。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么 resize() 要先用 unique_ptr 管理新数组，复制成功后再替换旧数组？",
+      "a": "因为复制过程中可能抛出异常。使用 unique_ptr 可在异常发生时自动释放新数组，而旧数组只有在全部复制成功后才会被删除，因此具有异常安全性。"
+    },
+    {
+      "q": "为什么最终接管新数组时要调用 release()？",
+      "a": "release() 会放弃 unique_ptr 对新数组的所有权；否则 unique_ptr 析构时会销毁该数组，而 m_elements 也指向同一数组，可能导致重复释放。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++动态数组与智能指针"
+  ],
+  "source_pages": [
+    481,
+    481
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "963_使用_unique_ptr_实现异常安全的数组扩容",
+  "_chunk_pages": [
+    481,
+    484
+  ]
+}

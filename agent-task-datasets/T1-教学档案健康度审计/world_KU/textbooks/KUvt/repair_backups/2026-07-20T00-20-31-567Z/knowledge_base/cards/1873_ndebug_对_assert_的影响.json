@@ -1,0 +1,42 @@
+{
+  "title": "NDEBUG 对 assert 的影响",
+  "definition": "标准 `assert` 宏的行为受预处理符号 `NDEBUG` 控制：未定义 `NDEBUG` 时，断言会正常检查表达式；定义 `NDEBUG` 时，断言会被忽略。编译发布版本时编译器通常会定义 `NDEBUG`，因此如果希望发布版本仍保留断言检查，就需要调整编译设置或编写不受 `NDEBUG` 影响的自定义断言。",
+  "key_points": [
+    "开发或调试构建中通常不定义 `NDEBUG`，此时 assert 会执行检查。",
+    "定义 `NDEBUG` 后，标准 assert 会被禁用。",
+    "发布版本是否保留标准断言取决于编译配置。",
+    "不能假设标准 assert 在所有构建配置中都会执行。"
+  ],
+  "examples": [
+    "可以用编译配置控制断言是否启用：未定义 `NDEBUG` 时执行 `assert(condition)`；定义 `NDEBUG` 时标准断言被忽略。"
+  ],
+  "misconceptions": [
+    "写在 `assert` 参数中的表达式不应承担必须执行的业务副作用，因为在定义 `NDEBUG` 的构建中该断言可能被忽略。",
+    "发布版本中没有断言并不表示断言条件永远成立，只表示标准 assert 可能被禁用。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "定义 NDEBUG 后，标准 assert 会怎样？",
+      "a": "标准 assert 会被忽略，不再执行断言检查。"
+    },
+    {
+      "q": "如何让发布版本也保留断言检查？",
+      "a": "可以改变编译器或构建设置，或者编写不受 `NDEBUG` 值影响的自定义断言。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "assert 宏的基本行为"
+  ],
+  "source_pages": [
+    904,
+    904
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1873_ndebug_对_assert_的影响",
+  "_chunk_pages": [
+    901,
+    904
+  ]
+}

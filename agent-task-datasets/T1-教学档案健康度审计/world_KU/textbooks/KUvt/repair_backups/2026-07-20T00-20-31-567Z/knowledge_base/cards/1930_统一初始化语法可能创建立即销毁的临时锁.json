@@ -1,0 +1,45 @@
+{
+  "title": "统一初始化语法可能创建立即销毁的临时锁",
+  "definition": "对 RAII 锁对象使用统一初始化语法时，如果没有为对象指定变量名，可能只会创建一个临时锁对象。该临时对象在语句结束时立即析构，从而立刻释放锁，不能实现预期的持锁效果。",
+  "key_points": [
+    "语句 `unique_lock<mutex>{m_mutex};` 创建的是临时 `unique_lock` 对象，而不是一个持续存在的具名锁对象。",
+    "临时锁对象会在该语句结束时析构，因此锁会立即释放。",
+    "应为 RAII 锁对象指定名称，例如 `unique_lock<mutex> lock{m_mutex};`。",
+    "教材建议 RAII 类避免提供默认构造函数，以减少误用统一初始化语法造成的问题。"
+  ],
+  "examples": [
+    "错误示例：`unique_lock<mutex>{m_mutex};`。它创建临时锁，语句结束时立即释放。",
+    "推荐写法：`unique_lock<mutex> lock{m_mutex};`。锁的生命周期由具名对象 `lock` 管理。"
+  ],
+  "misconceptions": [
+    "误以为只要执行了 `unique_lock<mutex>{m_mutex};`，后续代码就会一直持有互斥锁。",
+    "误以为统一初始化语法必然会产生编译器警告；教材指出这种情况下编译器可能不报警。",
+    "误以为省略变量名只是少写了名称，但不会改变对象生命周期。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么 `unique_lock<mutex>{m_mutex};` 不能持续持有锁？",
+      "a": "因为它创建的是临时 `unique_lock` 对象，临时对象在语句结束时析构，析构时立即释放互斥锁。"
+    },
+    {
+      "q": "如何改写才能让锁对象在后续作用域内继续存在？",
+      "a": "为锁对象指定变量名，例如 `unique_lock<mutex> lock{m_mutex};`。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "RAII资源管理",
+    "C++对象生命周期"
+  ],
+  "source_pages": [
+    933,
+    933
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1930_统一初始化语法可能创建立即销毁的临时锁",
+  "_chunk_pages": [
+    933,
+    936
+  ]
+}

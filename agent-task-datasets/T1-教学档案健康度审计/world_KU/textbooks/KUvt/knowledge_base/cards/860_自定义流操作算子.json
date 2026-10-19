@@ -1,0 +1,38 @@
+{
+  "title": "自定义流操作算子",
+  "definition": "除了标准库提供的内建流操作算子外，C++还允许编写自定义流操作算子，以扩展输入输出流的行为。实现这类操作算子涉及使用 `ios_base` 提供的功能，例如 `xalloc()`、`iword()`、`pword()` 和 `register_callback()`。",
+  "key_points": [
+    "自定义操作算子用于满足标准内建操作算子无法覆盖的特殊需求。",
+    "相关实现会使用 `ios_base` 的流状态存储和回调功能。",
+    "原文指出自定义操作算子很少需要使用，因此未进一步展开。"
+  ],
+  "examples": [
+    "原文列举的相关 `ios_base` 功能包括：`xalloc()`、`iword()`、`pword()` 和 `register_callback()`。"
+  ],
+  "misconceptions": [
+    "自定义流操作算子不是普通的格式化标志组合；它通常需要利用流对象提供的扩展存储和回调机制。",
+    "标准库的内建操作算子已经覆盖许多常见场景，不是遇到任何特殊格式都必须编写自定义操作算子。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "实现自定义流操作算子会涉及哪些 `ios_base` 功能？",
+      "a": "原文列举了 `xalloc()`、`iword()`、`pword()` 和 `register_callback()`。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "C++流操作算子",
+    "ios_base"
+  ],
+  "source_pages": [
+    424,
+    424
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "860_自定义流操作算子",
+  "_chunk_pages": [
+    421,
+    424
+  ]
+}

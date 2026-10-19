@@ -1,0 +1,105 @@
+{
+  "schemaVersion": 1,
+  "status": "committed",
+  "operationId": "endclass:v1:868480707d733d6f6b034610621591c4:175a2556151fa2633a7d461c",
+  "operationHash": "4d99f2ba66c34ebd7517febefdd3bcb9491760f67eca094ef922ad6539b37552",
+  "scope": {
+    "accountId": "local",
+    "profileId": "uolmzgq8",
+    "worldId": "KU",
+    "conversationId": "aN61wqX8BeqcpKs8hXEbd"
+  },
+  "companion": {
+    "slotId": "npc_b",
+    "companionInstanceId": "ci_42a2ec5dfdba2f1795d7bc0b",
+    "candidateId": "ct_ll6szada",
+    "displayName": "纳西妲"
+  },
+  "committedAt": "2026-09-11T10:50:44.878Z",
+  "targets": [
+    {
+      "relativePath": "pal_moments.md",
+      "oldHash": "7275bcf2df6f41e867fc5c30f974644317958330976e9a78d35d1185b68f1f9f",
+      "newHash": "8084433da2b0bb3bfd8776d5b7d4e396e8eb779aa9bdd6848a3348b14965bbac",
+      "deleting": false
+    },
+    {
+      "relativePath": "textbooks/KUyw/progress.md",
+      "oldHash": "3e1b23e9ee357ec4ee9aaae09bded6b6d01f570da8eb2534dc7538794263710d",
+      "newHash": "624364ad1a8713b0fdaabf9efe7474e652a40973764e8d8f581abed63403d4f7",
+      "deleting": false
+    },
+    {
+      "relativePath": "diary/2026-09.md",
+      "oldHash": "60c35202fe845b8e1a693f17c9d1725681dfba3341335b3f4fd1967d2a97a7e5",
+      "newHash": "5ccebe780d1b07c7c2d726ab34f5db8237c62a21b5d47bd004edadae92047814",
+      "deleting": false
+    },
+    {
+      "relativePath": "relation_npc_b.md",
+      "oldHash": "1f36126fb3c0fbb75bfccce0dae5a5fd069c821bd8e08cdddd64484dceebe501",
+      "newHash": "42792a83be32d9663b8f4aa234db2b8b6ba95c209913c7a53321dc780de6b034",
+      "deleting": false
+    },
+    {
+      "relativePath": "world_meta.json",
+      "oldHash": "ccfebad918a1db25f23e3ca436c6c7de4e080e353f7abd35ae4d9397504956f4",
+      "newHash": "ccfebad918a1db25f23e3ca436c6c7de4e080e353f7abd35ae4d9397504956f4",
+      "deleting": false
+    },
+    {
+      "relativePath": "world_records.md",
+      "oldHash": "770f6fc580200b8b9a657a0f1af13192eaad980527e4fd8880f2de584917959f",
+      "newHash": "d36cae38aa9f190425904648654544dd8dae5b2de0ba1a20de2b61acb6ea8c5b",
+      "deleting": false
+    },
+    {
+      "relativePath": "textbooks/textbook_index.json",
+      "oldHash": "cea40c6c2440ffcb4ba4d20292aa2b35e6dba69a931e97d54daba657c5545452",
+      "newHash": "a190e032b5c72dea2bf10fc4d8414594dd0f8d349fd30717c8338671710bed78",
+      "deleting": false
+    },
+    {
+      "relativePath": "textbooks/KUyw/handoff/last_tail.json",
+      "oldHash": null,
+      "newHash": "18cc7b41643cd884c48b32b35f1dbf349a3339c7f4968906b86b0e422780d869",
+      "deleting": false
+    },
+    {
+      "relativePath": "textbooks/KUyw/handoff/last_meta.json",
+      "oldHash": null,
+      "newHash": "ee5dad6ff8428024f1f5ec28cbe5ba3d02cb346d603f637c9146e240642e7967",
+      "deleting": false
+    },
+    {
+      "relativePath": "conversations/aN61wqX8BeqcpKs8hXEbd/current_reading.md",
+      "oldHash": "41eccf5e59e47b0fe4d320dc13abd94e266ca488e886431f8a7d734ccf46ff97",
+      "newHash": null,
+      "deleting": true
+    },
+    {
+      "relativePath": "textbooks/KUyw/current_reading.md",
+      "oldHash": null,
+      "newHash": null,
+      "deleting": true
+    },
+    {
+      "relativePath": "conversations/aN61wqX8BeqcpKs8hXEbd/current_reading_summary.json",
+      "oldHash": null,
+      "newHash": null,
+      "deleting": true
+    },
+    {
+      "relativePath": "conversations/aN61wqX8BeqcpKs8hXEbd/handoff.json",
+      "oldHash": null,
+      "newHash": null,
+      "deleting": true
+    }
+  ],
+  "payload": {
+    "farewell": "好，今天从第 17 页一路走到 1.2.8 节，编译器这个大盒子被我们一层层撬开了。\n我记得你把「符号表」说成「字符表」那一瞬，随后的判断却一点没跑偏——这种时候我总想问下去。\n剩下的那个问题我留着，不急。\n\n*她轻轻把书签夹回页间，像给一株刚冒头的苗盖上薄土。*",
+    "companionNote": "今天你把\"符号表\"说成\"字符表\"那下，我没舍得打断——因为它后面站着的判断是对的。留着的问题，下次我们一起把它想通。",
+    "marker": "<!-- continuityEvent:4d99f2ba66c34ebd7517febe companion:ci_42a2ec5dfdba2f1795d7bc0b mode:classroom -->",
+    "endingPage": 17
+  }
+}

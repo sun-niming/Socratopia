@@ -1,0 +1,43 @@
+{
+  "title": "依赖注入中注入具体日志器",
+  "definition": "依赖注入是指：对象不在内部自行创建所依赖的对象，而由外部把依赖对象传入。例如，Foo 依赖 ILogger，创建 Foo 实例时，可以把具体的 Logger 对象注入进去；Foo 只通过 ILogger 接口使用日志功能。",
+  "key_points": [
+    "具体的 Logger 可以先配置日志文件和日志级别，再注入 Foo。",
+    "Foo 面向 ILogger 接口编程，因此可以替换不同的日志器实现。"
+  ],
+  "examples": [
+    "Logger concreteLogger { \"log.out\" };",
+    "concreteLogger.setLogLevel(ILogger::LogLevel::Debug);",
+    "Foo f { concreteLogger };",
+    "f.doSomething();"
+  ],
+  "misconceptions": [
+    "依赖注入不是让 Foo 自己调用 Logger 的构造函数。",
+    "依赖注入并不要求依赖对象必须是某一个固定的具体类型；通常应通过接口或抽象类型使用依赖。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "示例中 Foo 使用的具体日志器是如何提供的？",
+      "a": "先创建并配置 Logger concreteLogger，再通过 Foo f { concreteLogger }; 将它注入 Foo。"
+    },
+    {
+      "q": "依赖注入带来的直接好处是什么？",
+      "a": "Foo 不必自行创建日志器，可以使用外部提供的具体实现，从而更容易替换依赖。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "接口与多态"
+  ],
+  "source_pages": [
+    945,
+    945
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1948_依赖注入中注入具体日志器",
+  "_chunk_pages": [
+    945,
+    948
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "title": "switch语句按case选择分支",
+  "definition": "C++的switch语句根据控制表达式的值，在多个case标签中选择匹配的分支执行；如果没有case匹配，则执行default分支（如果存在）。通常在case分支末尾使用break跳出switch，避免继续执行后续case中的代码。",
+  "key_points": [
+    "基本结构为：switch (表达式) { case 值: 语句 break; default: 语句 break; }。",
+    "case标签用于匹配switch控制表达式的值。",
+    "default用于处理没有任何case匹配的情况。",
+    "break通常用于结束当前switch，防止执行流继续进入后面的case。",
+    "教材用菜单项示例说明：OpenMenuItem执行打开文件代码，SaveMenuItem执行保存文件代码，其他值执行错误提示代码。"
+  ],
+  "examples": [
+    "switch (menuItem) { case OpenMenuItem: /* Code to open a file */ break; case SaveMenuItem: /* Code to save a file */ break; default: /* Code to give an error message */ break; }"
+  ],
+  "misconceptions": [
+    "switch不会自动把每个case当作相互隔离的代码块；如果没有break，执行流可能继续执行后续case。",
+    "default不是必须的，但存在时用于处理未匹配任何case的值。",
+    "switch和if-else都能实现多分支选择，但switch直接围绕一个表达式的值与case标签进行匹配。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "switch语句中default分支的作用是什么？",
+      "a": "当switch表达式的值不匹配任何case标签时，执行default分支。"
+    },
+    {
+      "q": "为什么通常要在case分支末尾写break？",
+      "a": "break会跳出switch；如果缺少break，执行流可能继续执行后续case，这种行为称为贯穿执行或fallthrough。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "if、else if与else语句"
+  ],
+  "source_pages": [
+    49,
+    50
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "057_switch语句按case选择分支",
+  "_chunk_pages": [
+    49,
+    52
+  ]
+}

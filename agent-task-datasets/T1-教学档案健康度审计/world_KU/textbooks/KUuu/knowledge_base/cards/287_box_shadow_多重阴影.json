@@ -1,0 +1,36 @@
+{
+  "title": "box-shadow 多重阴影",
+  "definition": "如果要给同一个元素添加多个阴影效果，应当使用逗号把每个阴影规则分隔开。",
+  "key_points": [
+    "多个阴影之间用逗号分隔",
+    "每个阴影都按各自的 box-shadow 规则书写"
+  ],
+  "examples": [
+    "box-shadow: 2px 2px 4px #000, 0 0 10px red;"
+  ],
+  "misconceptions": [
+    "把多个阴影写成空格分隔",
+    "以为一个元素只能有一个阴影"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何给同一个元素添加多个阴影？",
+      "a": "使用逗号将每个阴影规则分隔开。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "box-shadow 单个阴影参数"
+  ],
+  "source_pages": [
+    193,
+    196
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "287_box_shadow_多重阴影",
+  "_chunk_pages": [
+    193,
+    196
+  ]
+}

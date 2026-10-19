@@ -1,0 +1,36 @@
+{
+  "title": "typeof运算符",
+  "definition": "typeof运算符可用于判断一个变量的数据类型。",
+  "key_points": [
+    "用于判断变量的数据类型",
+    "可直接配合变量使用，例如console.log(typeof x)"
+  ],
+  "examples": [
+    "var x=\"123\"; console.log(typeof x);"
+  ],
+  "misconceptions": [
+    "typeof只是查看变量的值，不是查看数据类型",
+    "typeof不能用于判断任何变量类型"
+  ],
+  "qa_pairs": [
+    {
+      "q": "在JavaScript中，如何判断一个变量的数据类型？",
+      "a": "可以使用typeof运算符。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "JavaScript数据类型分类"
+  ],
+  "source_pages": [
+    241,
+    244
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "332_typeof运算符",
+  "_chunk_pages": [
+    241,
+    244
+  ]
+}

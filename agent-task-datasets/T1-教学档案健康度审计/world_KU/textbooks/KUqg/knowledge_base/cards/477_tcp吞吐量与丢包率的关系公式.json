@@ -1,0 +1,44 @@
+{
+  "title": "TCP吞吐量与丢包率的关系公式",
+  "definition": "教材指出，可以推导出一条TCP连接平均吞吐量与丢包率$L$、往返时间$RTT$和最大报文段长度$MSS$之间的关系。原文该公式在给定文本中存在OCR缺损，因此公式的精确常数和根号结构需要核实。",
+  "key_points": [
+    "教材明确说明该公式以丢包率$L$、往返时间$RTT$和最大报文段长度$MSS$为变量。",
+    "该公式用于分析TCP连接在丢包率、RTT和MSS变化时的平均吞吐量。",
+    "给定原文中的公式排版为残缺形式，无法仅依据当前OCR文本百分之百确认其完整表达式。"
+  ],
+  "examples": [
+    "可根据原文确定的变量关系框架写作：$$\\text{平均吞吐量}=f(L,RTT,MSS).$$但当前材料不足以可靠恢复$f$的精确形式。"
+  ],
+  "misconceptions": [
+    "不能把当前OCR中残缺的“L 22 x MSS / RTT”直接当作经过核实的完整公式。",
+    "该关系式不是前面理想化模型中$0.75W/RTT$的同一表达式；它进一步尝试用丢包率、RTT和MSS描述吞吐量。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "教材指出TCP连接平均吞吐量与哪些因素有关？",
+      "a": "与丢包率$L$、往返时间$RTT$和最大报文段长度$MSS$有关。"
+    },
+    {
+      "q": "当前原文能否可靠确定该吞吐量公式的完整形式？",
+      "a": "不能。给定文本中的公式存在OCR缺损，需要查阅教材原版或相关标准文献核实。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "TCP吞吐量宏观模型",
+    "丢包率",
+    "RTT",
+    "MSS"
+  ],
+  "source_pages": [
+    197,
+    200
+  ],
+  "needs_verification": true,
+  "verify_query": "Kurose Ross Computer Networking 7th edition TCP throughput formula loss rate L RTT MSS 1.22 MSS RTT sqrt L",
+  "concept_id": "477_tcp吞吐量与丢包率的关系公式",
+  "_chunk_pages": [
+    197,
+    200
+  ]
+}

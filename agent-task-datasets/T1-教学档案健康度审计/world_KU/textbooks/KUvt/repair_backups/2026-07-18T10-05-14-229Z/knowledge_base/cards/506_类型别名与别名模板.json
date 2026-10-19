@@ -1,0 +1,47 @@
+{
+  "title": "类型别名与别名模板",
+  "definition": "C++可以使用 `using` 为类型定义别名。普通类型别名可以替代传统的 `typedef`；当别名本身带有模板参数时，称为别名模板（alias template），可用于固定某个类模板的一部分模板实参。",
+  "key_points": [
+    "普通别名示例为 `using MyInt = int;`。",
+    "可以为某个已经完全实例化的模板类型定义普通别名，例如 `using OtherName = MyTemplateClass<int, double>;`。",
+    "别名模板以 `template <...>` 开头，并用 `using` 定义。",
+    "别名模板可以保留部分模板参数，同时固定其余参数。"
+  ],
+  "examples": [
+    "using MyInt = int;",
+    "template <typename T1, typename T2>\nclass MyTemplateClass\n{\n    // ...\n};\n\nusing OtherName = MyTemplateClass<int, double>;",
+    "template <typename T1>\nusing OtherName = MyTemplateClass<T1, double>;\n\n// OtherName<int> 等价于 MyTemplateClass<int, double>。"
+  ],
+  "misconceptions": [
+    "误以为 `using` 只能为非模板类型创建别名。",
+    "误以为别名模板会定义一个新的类类型；它只是为已有模板实例形式提供别名。",
+    "把完全实例化类型的普通别名与仍带模板参数的别名模板混为一谈。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何定义一个别名模板，使第二个模板参数固定为 `double`？",
+      "a": "可写成 `template <typename T1> using OtherName = MyTemplateClass<T1, double>;`。"
+    },
+    {
+      "q": "`using OtherName = MyTemplateClass<int, double>;` 是别名模板吗？",
+      "a": "不是。它不带模板参数，是一个普通类型别名，表示已经实例化的 `MyTemplateClass<int, double>`。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "类模板",
+    "模板实参",
+    "类型别名"
+  ],
+  "source_pages": [
+    393,
+    394
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "506_类型别名与别名模板",
+  "_chunk_pages": [
+    393,
+    396
+  ]
+}

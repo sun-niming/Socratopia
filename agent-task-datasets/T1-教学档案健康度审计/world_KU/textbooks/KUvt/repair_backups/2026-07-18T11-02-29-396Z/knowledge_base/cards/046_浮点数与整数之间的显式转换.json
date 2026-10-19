@@ -1,0 +1,47 @@
+{
+  "title": "浮点数与整数之间的显式转换",
+  "definition": "可以将`float`值显式转换为`int`。原文列出三种写法：C风格转换`(int)myFloat`、函数式转换`int(myFloat)`以及C++风格转换`static_cast<int>(myFloat)`。还指出，从较小整数类型向较大整数类型转换时，例如从`short`到`long`，通常不需要显式转换。",
+  "key_points": [
+    "C风格写法：`(int)myFloat`。",
+    "函数式写法：`int(myFloat)`。",
+    "C++风格写法：`static_cast<int>(myFloat)`。",
+    "`short`转换为`long`的示例`long someLong{someShort};`不需要显式转换。"
+  ],
+  "examples": [
+    "`float myFloat{3.14f};`",
+    "`int i1{(int)myFloat};`",
+    "`int i2{int(myFloat)};`",
+    "`int i3{static_cast<int>(myFloat)};`",
+    "`long someLong{someShort};`"
+  ],
+  "misconceptions": [
+    "`static_cast<int>(myFloat)`不是把`float`变量转换成字符串，而是转换成`int`。",
+    "三种显式转换写法的语法不同，但原文示例都用于把`myFloat`转换为`int`。",
+    "从`short`到`long`可以隐式转换，并不意味着所有不同数值类型之间都能安全地隐式转换。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "将`float myFloat`显式转换为`int`的C++风格写法是什么？",
+      "a": "`static_cast<int>(myFloat)`。"
+    },
+    {
+      "q": "`long someLong{someShort};`是否必须写显式转换？",
+      "a": "原文示例表示不需要显式转换。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "变量的值初始化"
+  ],
+  "source_pages": [
+    41,
+    44
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "046_浮点数与整数之间的显式转换",
+  "_chunk_pages": [
+    41,
+    44
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "title": "类模板定义在多个文件中的组织方式",
+  "definition": "对于类模板，编译器必须能够从使用该模板的源文件中获取类模板定义以及所需的方法定义。原文介绍了两种组织方式：将方法定义与类模板定义放在同一个模块接口文件中；或者将类模板定义放在一个模块接口分区中，将方法实现放在另一个模块接口分区中，并让实现分区导入定义分区。",
+  "key_points": [
+    "方法定义与模板定义放在同一个模块接口文件中时，使用模板的源文件导入该模块即可获得所需代码。",
+    "如果方法实现位于单独的 implementation 分区，该分区还必须导入包含类模板定义的 definition 分区。",
+    "原文示例中的模块关键字和拼写存在 OCR 异常，表达的结构是主模块导出两个分区：definition 和 implementation。"
+  ],
+  "examples": [
+    "按原文表达的模块组织关系可概括为：\n\n```cpp\n// 主模块接口\nexport import :definition;\nexport import :implementation;\n\n// implementation 分区\nexport module grid:implementation;\nimport :definition;\n```"
+  ],
+  "misconceptions": [
+    "模板方法实现可以像普通非模板类方法一样只放在一个不会被使用方看到的源文件中。",
+    "实现分区不需要知道类模板的定义。",
+    "只要声明了类模板，编译器就不需要访问方法定义。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么使用类模板的源文件必须能够获取模板定义和方法定义？",
+      "a": "因为编译器需要根据具体模板实参生成相应的模板代码。"
+    },
+    {
+      "q": "当模板方法定义放在 implementation 分区时，该分区还需要做什么？",
+      "a": "它需要导入包含类模板定义的 definition 分区。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "类模板",
+    "C++模块与模块分区"
+  ],
+  "source_pages": [
+    381,
+    382
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 modules class template definition implementation module interface partition export import template instantiation",
+  "concept_id": "775_类模板定义在多个文件中的组织方式",
+  "_chunk_pages": [
+    381,
+    384
+  ]
+}

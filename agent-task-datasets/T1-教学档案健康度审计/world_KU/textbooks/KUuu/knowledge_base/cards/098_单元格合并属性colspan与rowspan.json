@@ -1,0 +1,40 @@
+{
+  "title": "单元格合并属性colspan与rowspan",
+  "definition": "colspan和rowspan是表格单元格合并属性，取值表示要合并的单元格数量。colspan用于合并列，也就是横向合并；rowspan用于合并行，也就是纵向合并。",
+  "key_points": [
+    "colspan和rowspan都用于合并单元格。",
+    "它们的取值就是要合并的单元格数量。",
+    "colspan合并列，属于横向合并。",
+    "rowspan合并行，属于纵向合并。"
+  ],
+  "examples": [
+    "<td colspan=\"2\">内容</td>",
+    "<td rowspan=\"3\">内容</td>"
+  ],
+  "misconceptions": [
+    "colspan是合并行。",
+    "rowspan是合并列。",
+    "属性值表示别的含义，不是合并的单元格数量。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "colspan和rowspan分别表示什么？",
+      "a": "colspan用于合并列，rowspan用于合并行；它们的取值表示合并的单元格数量。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "HTML表格"
+  ],
+  "source_pages": [
+    65,
+    68
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "098_单元格合并属性colspan与rowspan",
+  "_chunk_pages": [
+    65,
+    68
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "title": "grid-row 简写",
+  "definition": "grid-row 是 grid-row-start 和 grid-row-end 的统一简写形式，两个值之间用 / 分隔。",
+  "key_points": [
+    "grid-row 用于同时写出行起始和结束位置。",
+    "格式为：grid-row: grid-row-start / grid-row-end;",
+    "简写时两个部分之间用斜杠 / 分隔。"
+  ],
+  "examples": [
+    "grid-row: 1 / 3;"
+  ],
+  "misconceptions": [
+    "grid-row 不是单独表示一条行线。",
+    "简写时不是用逗号分隔，而是用 / 分隔。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "grid-row 的作用是什么？",
+      "a": "它是 grid-row-start 和 grid-row-end 的简写形式，用 / 分隔两个值。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "grid-row-start 与 grid-row-end"
+  ],
+  "source_pages": [
+    181,
+    184
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "260_grid_row_简写",
+  "_chunk_pages": [
+    181,
+    184
+  ]
+}

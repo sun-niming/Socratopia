@@ -1,0 +1,44 @@
+{
+  "title": "媒体查询基本语法",
+  "definition": "媒体查询的基本语法以 @media 开头，后面可跟设备名以及 only、not、and 等逻辑关键字，条件成立时执行大括号内的 CSS 样式规则。",
+  "key_points": [
+    "基本结构是 @media 后跟条件块，再写 CSS 样式规则。",
+    "only 用于限定某种设备，可省略。",
+    "and 表示逻辑与。",
+    "not 表示排除某种设备。",
+    "多种设备用逗号分隔。"
+  ],
+  "examples": [
+    "@media 设备名 only（选取条件）not（选取条件）and（选取条件）{ CSS样式规则 }"
+  ],
+  "misconceptions": [
+    "only 不是必须写的，教材说明它可以省略。",
+    "and 不是普通文本，而是逻辑与关键字。",
+    "not 不是“非样式”，而是用于排除某种设备。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "媒体查询语法中 @media 后面通常接什么？",
+      "a": "接设备名以及 only、not、and 等条件关键字，然后写 CSS 样式规则。"
+    },
+    {
+      "q": "and 在媒体查询中表示什么？",
+      "a": "表示逻辑与。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "媒体查询"
+  ],
+  "source_pages": [
+    221,
+    224
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "326_媒体查询基本语法",
+  "_chunk_pages": [
+    221,
+    224
+  ]
+}

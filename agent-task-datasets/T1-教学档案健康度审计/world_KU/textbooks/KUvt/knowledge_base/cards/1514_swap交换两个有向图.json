@@ -1,0 +1,45 @@
+{
+  "title": "swap交换两个有向图",
+  "definition": "由于 directed_graph 只有一个数据成员 m_nodes，交换两个 directed_graph 对象只需交换它们各自的 m_nodes。类提供公有成员函数 swap，并提供一个独立导出的 swap 函数直接转发到第一个图对象的成员函数。",
+  "key_points": [
+    "成员 swap 调用 m_nodes.swap(other_graph.m_nodes)。",
+    "成员 swap 声明为 noexcept。",
+    "非成员 swap 接收两个 directed_graph<T>&，并执行 first.swap(second)。",
+    "交换的是两个图的全部节点容器及其节点和邻接信息。"
+  ],
+  "examples": [
+    "成员函数：\n```cpp\nvoid directed_graph<T>::swap(directed_graph& other_graph) noexcept\n{\n    m_nodes.swap(other_graph.m_nodes);\n}\n```",
+    "非成员函数：\n```cpp\nexport template <typename T>\nvoid swap(directed_graph<T>& first, directed_graph<T>& second)\n{\n    first.swap(second);\n}\n```"
+  ],
+  "misconceptions": [
+    "swap 不需要逐个交换节点或边；直接交换底层 vector 即可。",
+    "非成员 swap 不是另一套独立实现，而是转发给成员 swap。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么 directed_graph 的 swap 实现很简单？",
+      "a": "因为 directed_graph 只有一个数据成员 m_nodes，交换两个图等价于交换这两个 vector。"
+    },
+    {
+      "q": "非成员 swap 如何实现？",
+      "a": "调用 first.swap(second)。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "成员函数与非成员函数",
+    "vector::swap",
+    "noexcept"
+  ],
+  "source_pages": [
+    728,
+    728
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1514_swap交换两个有向图",
+  "_chunk_pages": [
+    725,
+    728
+  ]
+}

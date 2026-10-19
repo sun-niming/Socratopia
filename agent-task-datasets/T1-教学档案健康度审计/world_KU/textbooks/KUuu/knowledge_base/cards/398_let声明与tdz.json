@@ -1,0 +1,43 @@
+{
+  "title": "let声明与TDZ",
+  "definition": "let 声明的变量一般认为不会提升；即使存在提升，也不会在提升后初始化，而是处于 TDZ（暂时性死区）。因此在声明前访问会报 ReferenceError。",
+  "key_points": [
+    "let 一般认为不提升。",
+    "let 在声明前处于 TDZ，不能被访问。",
+    "声明前访问 let 变量会报 ReferenceError。",
+    "let 是块级作用域。"
+  ],
+  "examples": [
+    "例如：console.log(b); let b = 2; 会报 ReferenceError。"
+  ],
+  "misconceptions": [
+    "误以为 let 和 var 一样，声明前只会得到 undefined。",
+    "误以为 let 可以在任意位置重复声明。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "let 在声明前访问会发生什么？",
+      "a": "会报 ReferenceError。"
+    },
+    {
+      "q": "let 的作用域是什么？",
+      "a": "块级作用域。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "声明提升",
+    "JavaScript作用域"
+  ],
+  "source_pages": [
+    273,
+    276
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "398_let声明与tdz",
+  "_chunk_pages": [
+    273,
+    276
+  ]
+}

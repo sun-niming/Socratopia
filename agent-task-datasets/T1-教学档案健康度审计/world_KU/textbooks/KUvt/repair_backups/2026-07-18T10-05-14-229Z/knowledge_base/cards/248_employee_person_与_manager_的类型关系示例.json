@@ -1,0 +1,47 @@
+{
+  "title": "Employee、Person 与 Manager 的类型关系示例",
+  "definition": "原文第179页展示了 Employee、Person 和 Manager 三个名称，并在图示中出现 Employee ID、Person、Manager 等内容。该示例用于讨论人员与雇员、经理之间的类型或对象关系；但给出的页面片段没有保留完整箭头、代码或说明，因此不能确定 Employee、Person、Manager 之间具体是继承关系、组合关系还是其他关联。",
+  "key_points": [
+    "示例中的主要类型名称是 Employee、Person 和 Manager。",
+    "Employee 相关信息中明确出现 Employee ID。",
+    "页面还标注了 5.6、5-1、5-2、5-3、5-4、5-12 等章节或图表编号。",
+    "片段不足以确认三者之间的精确结构关系。"
+  ],
+  "examples": [
+    "页面可抽取出的实体及属性示意为：$$Employee\\;\\text{包含或关联}\\;Employee\\ ID$$",
+    "页面明确列出类型名称集合：$$\\{Employee,Person,Manager\\}$$"
+  ],
+  "misconceptions": [
+    "不能仅凭名称推断 Manager 必然继承 Employee，也不能推断 Employee 必然继承 Person。",
+    "Employee ID 只能确认是图中出现的信息，不能进一步推断其类型、唯一性或实现方式。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "第179页示例中出现了哪些主要类型名称？",
+      "a": "Employee、Person 和 Manager。"
+    },
+    {
+      "q": "与 Employee 相关的字段或信息名称是什么？",
+      "a": "Employee ID。"
+    },
+    {
+      "q": "能否仅凭给出的片段确定 Employee、Person 和 Manager 的继承方向？",
+      "a": "不能，片段没有保留足够的箭头或文字说明。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "类、对象与继承关系的基本概念"
+  ],
+  "source_pages": [
+    177,
+    180
+  ],
+  "needs_verification": true,
+  "verify_query": "《C++20高级编程》第5版 第179页 Employee ID Person Manager 图 5.6",
+  "concept_id": "248_employee_person_与_manager_的类型关系示例",
+  "_chunk_pages": [
+    177,
+    180
+  ]
+}

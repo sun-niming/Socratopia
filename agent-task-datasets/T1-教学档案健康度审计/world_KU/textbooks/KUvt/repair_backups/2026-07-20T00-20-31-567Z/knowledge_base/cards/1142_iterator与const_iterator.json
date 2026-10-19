@@ -1,0 +1,50 @@
+{
+  "title": "iterator与const_iterator",
+  "definition": "普通iterator通常允许读取和修改它所指向的元素；const_iterator是只读迭代器，不能通过它修改所指向的元素。普通iterator可以转换为const_iterator，但const_iterator不能转换为普通iterator。对const容器调用begin()和end()，或者调用cbegin()和cend()，会得到const_iterator。",
+  "key_points": [
+    "如果不需要修改vector元素，应优先使用const_iterator，以增强代码正确性并可能帮助编译器优化。",
+    "iterator可以转换为const_iterator，反向转换不允许。",
+    "const vector的begin()和end()返回只读迭代器。"
+  ],
+  "examples": [
+    "显式声明只读迭代器：\n文本代码：vector<type>::const_iterator it { begin(myVector) };",
+    "使用cbegin()和cend()确保auto推导出const_iterator：\n文本代码：for (auto iter { cbegin(stringVector) }; iter != cend(stringVector); ++iter) { cout << *iter << endl; }",
+    "基于范围的for循环中使用const auto&实现只读访问：\n文本代码：for (const auto& element : stringVector) { cout << element << endl; }"
+  ],
+  "misconceptions": [
+    "const_iterator表示迭代器本身永远不能移动；它只限制通过迭代器修改元素，迭代器仍可递增等移动操作。",
+    "const_iterator可以随时转换回iterator；教材明确指出这种转换不允许。",
+    "对非const vector使用begin()并配合auto时，auto会自动推导出const_iterator；实际上通常会推导为普通iterator。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "const_iterator与普通iterator的主要区别是什么？",
+      "a": "普通iterator通常可以读写元素，const_iterator只能读取元素，不能通过它修改所引用的元素。"
+    },
+    {
+      "q": "如何在使用auto时确保得到const_iterator？",
+      "a": "使用cbegin()和cend()，例如for (auto iter { cbegin(stringVector) }; iter != cend(stringVector); ++iter)。"
+    },
+    {
+      "q": "为什么不需要修改元素时应使用const_iterator？",
+      "a": "这样可以防止意外修改元素，有助于保证代码正确性，并可能允许编译器进行特定优化。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "auto类型推导",
+    "const修饰符",
+    "vector迭代器"
+  ],
+  "source_pages": [
+    554,
+    555
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1142_iterator与const_iterator",
+  "_chunk_pages": [
+    553,
+    556
+  ]
+}

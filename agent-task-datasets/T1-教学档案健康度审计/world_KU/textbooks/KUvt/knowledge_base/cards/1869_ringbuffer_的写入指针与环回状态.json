@@ -1,0 +1,47 @@
+{
+  "title": "RingBuffer 的写入指针与环回状态",
+  "definition": "原文实现使用 `m_next` 指向下一次写入的位置，使用 `m_wrapped` 表示写入位置是否已经从容器末尾回到开头。添加条目时，先把字符串移动到 `m_next` 指向的位置，再递增 `m_next`；如果递增后到达 `m_entries` 的末尾，就将其重置为 `begin(m_entries)` 并将 `m_wrapped` 设为 true。",
+  "key_points": [
+    "`m_entries` 是保存字符串的 `std::vector<std::string>`，构造时初始化为指定数量的元素。",
+    "`m_next` 初始指向 `begin(m_entries)`。",
+    "每次写入后，`m_next` 指向下一个可写位置。",
+    "`m_wrapped == false` 表示尚未发生从末尾回到开头的环回；`m_wrapped == true` 表示缓冲区已经至少写满并发生过环回。",
+    "构造函数要求容量大于 0；如果 `numEntries == 0`，原文实现抛出 `invalid_argument`，错误消息为 `Number of entries must be > 0.`。"
+  ],
+  "examples": [
+    "写入流程可概括为：`*m_next = std::move(entry); ++m_next; if (m_next == end(m_entries)) { m_next = begin(m_entries); m_wrapped = true; }`。"
+  ],
+  "misconceptions": [
+    "`m_next` 不一定指向最老条目；它表示下一次写入的位置，而在已环回时该位置恰好也是最早条目所在位置。",
+    "容量为 0 的 RingBuffer 不是原文实现允许的有效状态。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "m_next 在 RingBuffer 中表示什么？",
+      "a": "它表示下一次写入条目的位置。"
+    },
+    {
+      "q": "m_wrapped 何时被设置为 true？",
+      "a": "写入后 `m_next` 到达 vector 末尾并被重置到 vector 开头时，`m_wrapped` 被设置为 true。"
+    },
+    {
+      "q": "为什么 RingBuffer 构造函数拒绝 numEntries 为 0？",
+      "a": "因为环形缓冲区必须有至少一个存储条目；原文实现对此抛出 `invalid_argument`。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "环形缓冲区的基本工作方式"
+  ],
+  "source_pages": [
+    902,
+    903
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1869_ringbuffer_的写入指针与环回状态",
+  "_chunk_pages": [
+    901,
+    904
+  ]
+}

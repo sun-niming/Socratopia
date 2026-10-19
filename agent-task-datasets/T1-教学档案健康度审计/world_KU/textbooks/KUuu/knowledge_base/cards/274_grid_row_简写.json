@@ -1,0 +1,36 @@
+{
+  "title": "grid-row 简写",
+  "definition": "grid-row 是 grid-row-start 和 grid-row-end 的统一简写形式，两个值之间用 / 分隔。格式为：grid-row: grid-row-start / grid-row-end;",
+  "key_points": [
+    "grid-row 可以把开始线和结束线写在一条声明里。",
+    "两个值必须用斜杠 / 分隔。",
+    "简写与分别写 grid-row-start、grid-row-end 的效果对应。"
+  ],
+  "examples": [
+    "grid-row: 1 / 3;"
+  ],
+  "misconceptions": [
+    "容易写成 grid-row: 1 3;，但原文要求使用 / 分隔。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "grid-row 的标准简写格式是什么？",
+      "a": "grid-row: grid-row-start / grid-row-end;"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "grid-row-start 与 grid-row-end"
+  ],
+  "source_pages": [
+    181,
+    184
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "274_grid_row_简写",
+  "_chunk_pages": [
+    181,
+    184
+  ]
+}

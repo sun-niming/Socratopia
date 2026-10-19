@@ -1,0 +1,43 @@
+{
+  "title": "C++异常可以是任意类型",
+  "definition": "C++允许抛出任意类型的值或对象，异常不一定必须是 std::exception 的派生对象。例如，可以抛出 int 值，也可以抛出 C 风格字符串 const char*；捕获时必须使用能够匹配被抛出类型的 catch 参数类型。",
+  "key_points": [
+    "异常可以是对象，也可以是简单值。",
+    "可以抛出 int，例如 throw 5，并使用 catch (int e) 捕获。",
+    "可以抛出字符串字面量，并使用 catch (const char* e) 捕获。",
+    "异常类型应在抛出端和捕获端保持匹配。"
+  ],
+  "examples": [
+    "抛出并捕获 int：\nthrow 5;\n\ntry {\n    myInts = readIntegerFile(filename);\n} catch (int e) {\n    // e 的值为 5\n}"
+  ],
+  "misconceptions": [
+    "错误地认为只能抛出 std::exception 或其派生类对象。",
+    "错误地认为抛出 int 后可以直接用 catch (const char* e) 捕获。",
+    "错误地认为所有异常都能被 catch (std::exception&) 捕获；非 std::exception 类型不一定能匹配。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "C++中异常只能是 std::exception 类型的对象吗？",
+      "a": "不是。C++允许抛出任意类型，例如 int、const char* 或对象。"
+    },
+    {
+      "q": "如果代码执行 throw 5，应使用什么类型的 catch 参数直接捕获？",
+      "a": "可以使用 catch (int e)。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++ try、throw 和 catch 的基本语法"
+  ],
+  "source_pages": [
+    441,
+    442
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "896_c_异常可以是任意类型",
+  "_chunk_pages": [
+    441,
+    444
+  ]
+}

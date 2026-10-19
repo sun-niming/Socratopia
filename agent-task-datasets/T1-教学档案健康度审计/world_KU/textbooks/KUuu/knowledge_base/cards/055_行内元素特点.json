@@ -1,0 +1,36 @@
+{
+  "title": "行内元素特点",
+  "definition": "在标准文档流里，行内元素不可设置宽高，上下内边距和上下外边距也无效；左右内边距和左右外边距设置有效。",
+  "key_points": [
+    "不能设置宽高",
+    "上下内、外边距无效，左右内、外边距有效"
+  ],
+  "examples": [
+    "把元素设为display:inline后，width和height通常不起作用"
+  ],
+  "misconceptions": [
+    "行内元素也能像块级元素一样自由设置宽高",
+    "行内元素的上下边距都和左右边距一样有效"
+  ],
+  "qa_pairs": [
+    {
+      "q": "行内元素在标准文档流中的特点是什么？",
+      "a": "行内元素不可设置宽高，上下内边距和上下外边距无效，左右内边距和左右外边距设置有效。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "HTML元素分类"
+  ],
+  "source_pages": [
+    37,
+    40
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "055_行内元素特点",
+  "_chunk_pages": [
+    37,
+    40
+  ]
+}

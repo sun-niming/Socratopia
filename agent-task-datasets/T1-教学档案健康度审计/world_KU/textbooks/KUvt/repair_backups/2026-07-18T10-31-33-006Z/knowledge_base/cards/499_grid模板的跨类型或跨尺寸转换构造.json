@@ -1,0 +1,43 @@
+{
+  "title": "Grid模板的跨类型或跨尺寸转换构造",
+  "definition": "通用Grid模板提供一个模板化构造函数，可以用另一个元素类型为E、宽度为WIDTH2、高度为HEIGHT2的Grid对象src构造当前Grid<T, WIDTH, HEIGHT>对象。构造时遍历当前网格的所有坐标；如果坐标同时位于源网格范围内，则用src.at(i, j)初始化对应单元，否则将该单元重置为空的std::optional。",
+  "key_points": [
+    "目标网格的每个坐标都会被处理。",
+    "当i < WIDTH2且j < HEIGHT2时，目标单元使用src.at(i, j)；否则调用reset()使目标单元为空。",
+    "因此，目标网格与源网格重叠区域会被复制，目标网格超出源网格范围的区域为空。"
+  ],
+  "examples": [
+    "从较小网格构造较大网格时，重叠区域复制源值，新增区域的std::optional为空。",
+    "关键逻辑可表示为：$$m\\_cells[i][j]=\\begin{cases}\\text{src.at}(i,j),&i<\\text{WIDTH2}\\ \\text{且}\\ j<\\text{HEIGHT2}\\\\\\text{空的 std::optional},&\\text{否则}\\end{cases}$$"
+  ],
+  "misconceptions": [
+    "误以为目标网格的所有单元都会从源网格复制；实际上，源网格范围之外的目标单元会被重置为空。",
+    "误以为只有相同元素类型和相同尺寸的Grid才能构造；该构造函数允许元素类型、宽度和高度使用不同的模板参数。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "用Grid<E, WIDTH2, HEIGHT2>构造Grid<T, WIDTH, HEIGHT>时，源网格范围之外的目标单元如何处理？",
+      "a": "这些目标单元调用reset()，成为空的std::optional。"
+    },
+    {
+      "q": "该转换构造函数复制源网格的哪些位置？",
+      "a": "复制当前目标网格与源网格范围重叠的坐标位置。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "类模板与非类型模板参数",
+    "std::optional的基本操作"
+  ],
+  "source_pages": [
+    389,
+    392
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "499_grid模板的跨类型或跨尺寸转换构造",
+  "_chunk_pages": [
+    389,
+    392
+  ]
+}

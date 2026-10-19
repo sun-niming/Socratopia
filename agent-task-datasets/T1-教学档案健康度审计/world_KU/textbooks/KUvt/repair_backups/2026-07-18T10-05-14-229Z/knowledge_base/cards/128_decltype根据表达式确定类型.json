@@ -1,0 +1,44 @@
+{
+  "title": "decltype根据表达式确定类型",
+  "definition": "`decltype`用于根据给定表达式确定类型。它可以用于声明变量，例如`decltype(x) y { 456 };`；也可以用于根据函数调用表达式的返回类型声明变量，例如`decltype(foo()) f2 { foo() };`。与`auto`不同，`decltype`可保留表达式类型中的引用和`const`等属性。",
+  "key_points": [
+    "`decltype(x) y { 456 };`表示变量`y`使用与`x`相应的声明类型。",
+    "如果`foo()`的返回类型是`const string&`，则`decltype(foo())`也是`const string&`。",
+    "因此`decltype(foo()) f2 { foo() };`声明了一个与`foo()`返回类型一致的变量。",
+    "`decltype`常用于需要精确保留表达式类型，包括引用和常量属性的场景。"
+  ],
+  "examples": [
+    "若`foo()`的返回类型为`const string&`，则：`decltype(foo()) f2 { foo() };`中的`f2`类型为`const string&`。",
+    "`decltype(x) y { 456 };`：变量`y`的类型由表达式`x`决定，初值为`456`。"
+  ],
+  "misconceptions": [
+    "`decltype`与`auto`并不完全等价；`decltype`更强调保留表达式的精确类型属性。",
+    "`decltype(foo())`不是简单地取函数名`foo`的类型，而是取函数调用表达式`foo()`的类型。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如果`foo()`返回`const string&`，那么`decltype(foo())`是什么类型？",
+      "a": "是`const string&`。"
+    },
+    {
+      "q": "`decltype(foo()) f2 { foo() };`的用途是什么？",
+      "a": "声明一个类型与`foo()`返回类型一致的变量；若`foo()`返回`const string&`，则`f2`也是`const string&`。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "auto类型推导的基本规则",
+    "C++引用与const"
+  ],
+  "source_pages": [
+    89,
+    92
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "128_decltype根据表达式确定类型",
+  "_chunk_pages": [
+    89,
+    92
+  ]
+}

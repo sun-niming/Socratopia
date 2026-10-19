@@ -1,0 +1,48 @@
+{
+  "title": "标准库算术函数对象",
+  "definition": "标准库在 `<functional>` 中提供了用于常见算术操作的预定义函数对象类模板。二元算术函数对象包括 `plus`、`minus`、`multiplies`、`divides` 和 `modulus`，一元算术函数对象包括 `negate`。它们是相应运算符的包装器，可以作为回调传递。",
+  "key_points": [
+    "这些函数对象根据操作数类型进行模板化，并执行相应运算后返回结果。",
+    "例如 `plus<int> myPlus;` 创建一个执行 `int` 加法的函数对象，`myPlus(4, 5)` 的结果为 `9`。",
+    "它们的主要优势不是替代直接运算符，而是能够作为可调用对象传给其他函数或算法。",
+    "使用这些函数对象时，相关类型必须支持对应的运算符，例如 `multiplies` 要求类型支持 `operator*`。",
+    "可以将算术函数对象作为泛型累加函数的操作参数，例如使用 `multiplies<int>{}` 计算乘积。"
+  ],
+  "examples": [
+    "`plus<int> myPlus; int res { myPlus(4, 5) };`",
+    "`accumulateData(cbegin(values), cend(values), 1, multiplies<int>{})`：使用 `multiplies<int>` 将序列元素累乘。",
+    "`double geometricMean(span<const int> values)` 可以先用 `multiplies<int>{}` 计算所有元素的乘积，再计算 `pow(mult, 1.0 / values.size())`。"
+  ],
+  "misconceptions": [
+    "算术函数对象不是新的算术规则，而是对已有算术运算符的封装。",
+    "直接写 `4 + 5` 通常更简单；使用 `plus` 的主要原因是需要把加法作为回调传递。",
+    "模板参数指定的类型必须支持相应运算，否则函数对象无法完成所需操作。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "标准库提供了哪些主要算术函数对象？",
+      "a": "二元的 `plus`、`minus`、`multiplies`、`divides`、`modulus`，以及一元的 `negate`。"
+    },
+    {
+      "q": "为什么使用 `multiplies<int>{}` 而不是直接写乘法运算符？",
+      "a": "因为函数对象可以作为操作参数传递给 `accumulateData` 等函数或算法，而普通乘法运算符不能直接作为回调传递。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "函数对象",
+    "模板类",
+    "运算符重载"
+  ],
+  "source_pages": [
+    611,
+    612
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1257_标准库算术函数对象",
+  "_chunk_pages": [
+    609,
+    612
+  ]
+}

@@ -1,0 +1,58 @@
+{
+  "title": "C++20的日历日期类型",
+  "definition": "C++20标准库增加了对日历日期的支持。原文指出目前标准库支持Gregorian日历，并在std::chrono中提供用于表示年、月、日、星期以及它们组合关系的多个类型。所有这些日期相关类都提供ok()方法，用于检查对象是否处于有效范围。",
+  "key_points": [
+    "year表示年份，原文给出的范围是$[-32767,32767]$，并提供is_leap()判断闰年以及min()和max()静态方法。",
+    "month表示月份，范围为$[1,12]$，并提供January等月份命名常量。",
+    "day表示一个月中的日期，原文给出的范围为$[1,31]$。",
+    "weekday表示星期，范围为$[0,6]$，其中0表示星期日，并提供Sunday等命名常量。",
+    "weekday_indexed表示某个月的第几个星期几，例如Monday[2]表示该月的第二个星期一；weekday_last表示某月的最后一个星期几。",
+    "month_day、month_day_last、month_weekday、month_weekday_last以及year_month、year_month_day、year_month_day_last、year_month_weekday、year_month_weekday_last分别表示相应的月日、月末日、某月第几个或最后一个工作日，以及年、月、日的组合。",
+    "日期相关对象的ok()返回true表示对象在有效范围内，否则返回false。"
+  ],
+  "examples": [
+    "表示年份、月份和日期：\n```text\nyear y1{2020};\nmonth m1{6};\nday d1{22};\n```",
+    "表示某月第二个星期一：\n```text\nMonday[2]\n```",
+    "有效性检查可写为：\n```text\nsome_date.ok()\n```\n返回true表示日期对象有效，返回false表示无效。"
+  ],
+  "misconceptions": [
+    "weekday的0表示星期一；原文规定0表示星期日。",
+    "month的范围从0到11；原文规定month范围为1到12。",
+    "day在所有月份都固定有效到31日；day类型给出的是一般范围，具体日期是否有效还应通过日期对象的ok()检查。",
+    "ok()只检查类型是否正确，不检查日期组合是否有效；原文说明它用于判断对象是否在有效范围内。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "C++20日期库中的year、month、day和weekday分别表示什么？",
+      "a": "year表示年份，month表示月份，day表示一个月中的日期，weekday表示一周中的一天。"
+    },
+    {
+      "q": "weekday的取值范围是什么？0表示哪一天？",
+      "a": "范围是$[0,6]$，其中0表示星期日。"
+    },
+    {
+      "q": "如何判断一个日期对象是否有效？",
+      "a": "调用该对象的ok()方法；返回true表示有效，返回false表示无效。"
+    },
+    {
+      "q": "Monday[2]表示什么？",
+      "a": "表示一个月中的第二个星期一。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++类与对象",
+    "日期和星期的基本概念"
+  ],
+  "source_pages": [
+    691,
+    692
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1441_c_20的日历日期类型",
+  "_chunk_pages": [
+    689,
+    692
+  ]
+}

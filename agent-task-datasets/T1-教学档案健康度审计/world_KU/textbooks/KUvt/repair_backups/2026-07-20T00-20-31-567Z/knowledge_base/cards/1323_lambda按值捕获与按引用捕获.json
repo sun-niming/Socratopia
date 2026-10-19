@@ -1,0 +1,46 @@
+{
+  "title": "Lambda按值捕获与按引用捕获",
+  "definition": "lambda表达式可以捕获外部作用域中的变量。按值捕获会在闭包中保存变量的值；按引用捕获会在闭包中引用外部变量，因此可以通过lambda修改该变量。原文使用按值捕获value进行条件判断，并使用按引用捕获callCounter统计lambda被调用的次数。",
+  "key_points": [
+    "[value]表示按值捕获value。",
+    "&callCounter表示按引用捕获callCounter。",
+    "count_if会对范围中的每个元素调用谓词；原文中有9个元素，因此lambda被调用9次。",
+    "按引用捕获的变量可以在lambda内部递增。"
+  ],
+  "examples": [
+    "按值捕获：count_if(cbegin(values), cend(values), [value](int i){ return i > value; })。",
+    "按值捕获value、按引用捕获callCounter：count_if(cbegin(values), cend(values), [value, &callCounter](int i){ ++callCounter; return i > value; })。",
+    "对包含9个元素的values执行上述代码后，callCounter为9，统计结果仍为6。"
+  ],
+  "misconceptions": [
+    "[value]不是按引用捕获，lambda内部不会直接引用外部value对象。",
+    "callCounter递增统计的是谓词调用次数，不是满足条件的元素个数。",
+    "count_if对范围内每个元素调用谓词，因此原文示例中调用9次。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "[value]和[value, &callCounter]分别表示什么？",
+      "a": "[value]按值捕获value；[value, &callCounter]按值捕获value并按引用捕获callCounter。"
+    },
+    {
+      "q": "为什么原文示例中的callCounter为9而tally为6？",
+      "a": "范围有9个元素，谓词被调用9次；其中只有6个元素大于3，所以tally为6。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "Lambda表达式和谓词",
+    "count_if统计满足条件的元素"
+  ],
+  "source_pages": [
+    637,
+    638
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1323_lambda按值捕获与按引用捕获",
+  "_chunk_pages": [
+    637,
+    640
+  ]
+}

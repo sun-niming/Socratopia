@@ -1,0 +1,52 @@
+{
+  "title": "指针的引用与引用相关的非法类型",
+  "definition": "引用可以引用任何类型，包括指针类型。对int*类型对象的引用写作int*&，它是“对指向int的指针的引用”。引用的地址等于其所绑定对象的地址，因此可以用取引用地址的结果初始化指向原对象的指针。",
+  "key_points": [
+    "int*&表示对int*变量的引用，而不是指向引用的指针。",
+    "修改指针的引用会修改原指针变量。",
+    "对引用取地址，得到的是被引用对象的地址。",
+    "不能声明“引用的引用”或“引用的指针”；例如int&&和int&*在教材所述语境中不允许。",
+    "指针与引用类型不同：指向int的指针不能与int引用直接进行同类型赋值或比较。"
+  ],
+  "examples": [
+    "int* intP { nullptr };\nint*& ptrRef { intP };\nptrRef = new int;\n*ptrRef = 5; // 通过ptrRef修改intP所指向的对象",
+    "int x { 3 };\nint& xRef { x };\nint* xPtr { &xRef }; // 等价于int* xPtr { &x }\n*xPtr = 100; // x变为100",
+    "// int&& invalid1; // 教材指出不允许\n// int&* invalid2; // 教材指出不允许"
+  ],
+  "misconceptions": [
+    "int*&不是指针的指针，而是对一个指针变量的引用。",
+    "&xRef得到的不是“引用的地址实体”，而是x的地址；它与&x相同。",
+    "引用不能通过声明int&*来构造“指向引用的指针”。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "int*& ptrRef { intP }表示什么？",
+      "a": "表示ptrRef是intP的引用，而intP本身是指向int的指针。"
+    },
+    {
+      "q": "&xRef与&x是否相同？",
+      "a": "相同；对引用取地址得到的是它所引用对象的地址。"
+    },
+    {
+      "q": "为什么xPtr = xRef不能编译？",
+      "a": "xPtr是int*指针，xRef是int引用，二者类型不匹配；但xPtr = &xRef可以编译。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "指针",
+    "引用变量的基本语义",
+    "取地址运算符"
+  ],
+  "source_pages": [
+    79,
+    80
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "144_指针的引用与引用相关的非法类型",
+  "_chunk_pages": [
+    77,
+    80
+  ]
+}

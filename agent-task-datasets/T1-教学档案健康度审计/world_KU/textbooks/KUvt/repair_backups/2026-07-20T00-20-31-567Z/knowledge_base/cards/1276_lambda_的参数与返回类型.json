@@ -1,0 +1,44 @@
+{
+  "title": "lambda 的参数与返回类型",
+  "definition": "lambda 表达式可以声明参数，并通过箭头后的尾返回类型指定返回类型。尾返回类型可以省略；省略时，编译器按照函数返回类型推导规则，根据函数体中的 `return` 表达式推导返回类型。",
+  "key_points": [
+    "带尾返回类型的形式为 `$[](参数列表) -> 返回类型 { 函数体 }$`。",
+    "如果 lambda 只有一个或多个 `return` 表达式且类型推导明确，通常可以省略尾返回类型。",
+    "lambda 的参数会成为其闭包对象的函数调用运算符的参数。",
+    "返回类型推导遵循函数返回类型推导的规则。"
+  ],
+  "examples": [
+    "显式指定返回类型：`auto returningLambda = [](int a, int b) -> int { return a + b; };`。",
+    "省略返回类型：`auto returningLambda = [](int a, int b) { return a + b; };`。",
+    "调用并保存结果：`int sum { returningLambda(11, 22) };`，结果为 `33`。"
+  ],
+  "misconceptions": [
+    "箭头后的类型不是参数类型，而是 lambda 的返回类型。",
+    "省略尾返回类型并不表示 lambda 没有返回值，而是让编译器自动推导返回类型。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何声明一个接收两个 `int` 参数并返回 `int` 的 lambda？",
+      "a": "可以写成 `[](int a, int b) -> int { return a + b; }`，也可以省略 `-> int` 让编译器推导。"
+    },
+    {
+      "q": "示例 `returningLambda(11, 22)` 的结果是什么？",
+      "a": "结果是 `33`。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "lambda 表达式的基本语法"
+  ],
+  "source_pages": [
+    618,
+    618
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1276_lambda_的参数与返回类型",
+  "_chunk_pages": [
+    617,
+    620
+  ]
+}

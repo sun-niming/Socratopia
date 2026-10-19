@@ -1,0 +1,50 @@
+{
+  "title": "函数重载",
+  "definition": "函数重载是指在同一作用域中定义多个同名函数，并让它们具有不同的参数集。调用重载函数时，编译器会根据调用提供的实参选择匹配的函数版本。仅改变返回类型不能构成函数重载。",
+  "key_points": [
+    "重载函数必须同名。",
+    "重载之间必须在参数数量或参数类型上有所不同。",
+    "仅返回类型不同的两个函数不能构成合法重载。",
+    "编译器会根据调用实参的类型和数量选择合适的重载版本。"
+  ],
+  "examples": [
+    "int addNumbers(int a, int b) { return a + b; }",
+    "double addNumbers(double a, double b) { return a + b; }",
+    "addNumbers(1, 2) 调用整数版本。",
+    "addNumbers(1.11, 2.22) 调用 double 版本。"
+  ],
+  "misconceptions": [
+    "函数名相同就一定构成重载；如果参数列表相同而只有返回类型不同，则不能仅靠返回类型重载。",
+    "重载不是在运行时随机选择函数，而是由编译器根据调用参数进行匹配。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "下面两个函数能否仅凭返回类型不同而重载：int f(int); double f(int);？",
+      "a": "不能；参数列表相同，仅返回类型不同不足以构成函数重载。"
+    },
+    {
+      "q": "调用 addNumbers(1, 2) 时，示例中选择哪个版本？",
+      "a": "选择参数为两个 int 的整数版本。"
+    },
+    {
+      "q": "调用 addNumbers(1.11, 2.22) 时，示例中选择哪个版本？",
+      "a": "选择参数为两个 double 的版本。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "函数声明、定义与调用",
+    "类型匹配"
+  ],
+  "source_pages": [
+    54,
+    54
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "087_函数重载",
+  "_chunk_pages": [
+    53,
+    56
+  ]
+}

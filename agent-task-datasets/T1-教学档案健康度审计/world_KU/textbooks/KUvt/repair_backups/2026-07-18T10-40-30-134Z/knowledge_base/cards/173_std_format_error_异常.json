@@ -1,0 +1,45 @@
+{
+  "title": "std::format_error 异常",
+  "definition": "当 std::format 的格式字符串不符合要求时，格式化操作会抛出 std::format_error 异常。程序可以用 `try`-`catch` 捕获该异常，并通过 `what()` 获取错误说明。",
+  "key_points": [
+    "格式字符串中的格式说明符必须完整且合法。",
+    "原文示例调用 `format` 时缺少精度说明符，因而抛出 `format_error`。",
+    "可以使用 `catch (const std::format_error& caught_exception)` 捕获异常。",
+    "异常信息可通过 `caught_exception.what()` 输出；原文示例中的信息为 `missing precision specifier`。"
+  ],
+  "examples": [
+    "异常处理结构：`try { std::cout << std::format(\"...\", 5); } catch (const std::format_error& e) { std::cout << e.what(); }`。",
+    "原文示例捕获格式错误后输出类似 `missing precision specifier` 的错误信息。"
+  ],
+  "misconceptions": [
+    "格式错误不是普通的编译器警告；运行格式化操作时可能以 `std::format_error` 异常报告。",
+    "`what()` 返回的是错误说明文本，不是重新执行格式化操作。",
+    "并非所有运行时输出问题都属于 `format_error`；该异常专门用于格式化参数或格式说明符不合法等错误。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "std::format 格式字符串不合法时可能发生什么？",
+      "a": "格式化操作会抛出 `std::format_error` 异常。"
+    },
+    {
+      "q": "如何读取 std::format_error 的错误信息？",
+      "a": "捕获异常对象后调用其 `what()` 成员函数。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++ 异常处理基础",
+    "std::format 基本用法"
+  ],
+  "source_pages": [
+    117,
+    120
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 std::format_error missing precision specifier what catch example",
+  "concept_id": "173_std_format_error_异常",
+  "_chunk_pages": [
+    117,
+    120
+  ]
+}

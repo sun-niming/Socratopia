@@ -1,0 +1,48 @@
+{
+  "title": "函数返回类型推断",
+  "definition": "在函数定义中将返回类型写为 auto，编译器会根据函数体中 return 语句返回的表达式推导函数的返回类型。多个 return 语句可以存在，但它们必须推导出同一种类型。",
+  "key_points": [
+    "使用 auto 作为函数返回类型，例如 auto addNumbers(int a, int b)。",
+    "编译器依据函数体中 return 语句的表达式推导返回类型。",
+    "多个 return 语句的返回表达式必须解析为同一类型。",
+    "包含递归调用的函数也可以使用返回类型推断，但该函数中的第一个 return 语句必须是非递归调用。"
+  ],
+  "examples": [
+    "auto addNumbers(int number1, int number2) { return number1 + number2; }"
+  ],
+  "misconceptions": [
+    "auto 并不表示函数没有返回类型；编译器仍会根据 return 表达式确定一个具体返回类型。",
+    "多个分支返回不同类型的值时，不能简单地认为编译器一定会自动选择一个共同返回类型。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何让编译器推断函数的返回类型？",
+      "a": "把函数的返回类型写成 auto，并让函数体中的 return 表达式提供可推断的类型。"
+    },
+    {
+      "q": "使用 auto 返回类型的函数中，多个 return 语句需要满足什么条件？",
+      "a": "它们必须全部解析为同一类型。"
+    },
+    {
+      "q": "递归函数使用返回类型推断时有什么额外要求？",
+      "a": "函数中的第一个 return 语句必须是非递归调用。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "函数返回值",
+    "auto 类型推断",
+    "递归函数"
+  ],
+  "source_pages": [
+    54,
+    54
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "085_函数返回类型推断",
+  "_chunk_pages": [
+    53,
+    56
+  ]
+}

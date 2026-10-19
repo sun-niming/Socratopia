@@ -1,0 +1,50 @@
+{
+  "title": "用 UML 序列图描述类之间的交互",
+  "definition": "类、数据结构、算法和模式的汇总表只能说明各部分是什么，不能清楚描述对象之间如何按时间顺序交互。UML 序列图可以表示对象之间的调用顺序、消息传递、条件分支以及调用完成后的后续动作。",
+  "key_points": [
+    "示例序列从 GamePlay 调用 Player 的 TakeTurn 开始。",
+    "Player 询问用户要移动哪个棋子，并通过 GetPieceAt(source) 获取源位置的棋子。",
+    "Player 检查目标位置的棋子，通过 CheckMove 判断移动是否合法；该判断返回 true 或 false。",
+    "如果移动合法，则执行 Move，并通过 SetPieceAt 更新棋盘；随后判断游戏是否结束。",
+    "如果移动不合法，则通知用户重新移动，并重新开始相关序列。",
+    "原图只展示了一次迭代和一次 TakeTurn 调用，因此是部分序列图。"
+  ],
+  "examples": [
+    "可将主要交互抽象为：\n\n$$GamePlay \\rightarrow Player: TakeTurn()$$\n$$Player \\rightarrow ChessBoard: GetPieceAt(source)$$\n$$Player \\rightarrow ChessPiece: CheckMove()$$\n$$\\text{若允许移动：}\\ Player \\rightarrow ChessBoard: SetPieceAt(target)$$\n$$\\text{若不允许移动：通知用户重新移动}$$"
+  ],
+  "misconceptions": [
+    "序列图不仅用于列出类名，还用于表示对象交互的时间顺序。",
+    "图中展示的是部分流程，不代表完整国际象棋规则；例如取走对手棋子和王车易位还需要扩展序列图。",
+    "王车易位涉及同时移动国王和一个车，是需要同时移动两个棋子的行动。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么需要 UML 序列图？",
+      "a": "因为类和子系统汇总表不能充分描述类之间的交互，而 UML 序列图可以可视化对象按时间顺序发送消息和调用方法的过程。"
+    },
+    {
+      "q": "移动不合法时，序列图表示什么处理？",
+      "a": "通知用户移动无效，要求用户重新移动，并重新开始相关序列。"
+    },
+    {
+      "q": "原序列图是否表示完整的游戏流程？",
+      "a": "不是。它只显示了一次迭代和一次从 GamePlay 到 Player 的 TakeTurn 调用，是部分序列图。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "类之间的对象交互",
+    "UML 基本概念"
+  ],
+  "source_pages": [
+    162,
+    162
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "344_用_uml_序列图描述类之间的交互",
+  "_chunk_pages": [
+    161,
+    164
+  ]
+}

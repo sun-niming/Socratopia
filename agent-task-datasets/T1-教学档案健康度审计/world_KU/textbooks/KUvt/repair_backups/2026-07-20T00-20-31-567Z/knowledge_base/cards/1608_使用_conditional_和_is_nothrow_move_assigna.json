@@ -1,0 +1,52 @@
+{
+  "title": "使用 conditional 和 is_nothrow_move_assignable 实现条件移动赋值",
+  "definition": "条件类型 trait 可以根据编译期布尔条件从两个候选类型中选择一个。move_assign_if_noexcept() 使用 is_nothrow_move_assignable_v<T> 判断类型 T 的移动赋值运算符是否标记为 noexcept：如果为 true，就将参数转换为 T&&；否则转换为 const T&，从而在移动赋值可能抛出异常时改用拷贝赋值。",
+  "key_points": [
+    "`std::conditional` 接收三个模板参数：一个布尔条件、条件为 true 时选择的类型、条件为 false 时选择的类型。",
+    "`std::conditional<is_nothrow_move_assignable_v<T>, T&&, const T&>::type` 的结果是 T&& 或 const T&。",
+    "当移动赋值运算符声明为 `noexcept` 时，函数返回右值引用，赋值表达式可以调用移动赋值运算符。",
+    "当移动赋值运算符没有声明为 `noexcept` 时，函数返回 const T&，赋值表达式可以调用拷贝赋值运算符。",
+    "该函数本身声明为 `noexcept`，表示函数选择引用类型和返回 `std::move(t)` 的过程不抛出异常。"
+  ],
+  "examples": [
+    "核心形式：\n$$\\operatorname{conditional\\_t}(\\operatorname{is\\_nothrow\\_move\\_assignable\\_v<T>,T\\&\\&,\\operatorname{const}\\ T\\&)$$",
+    "示意代码：\n```cpp\ntemplate <typename T>\nconstexpr std::conditional_t<\n    std::is_nothrow_move_assignable_v<T>,\n    T&&,\n    const T&>\nmove_assign_if_noexcept(T& t) noexcept {\n    return std::move(t);\n}\n```",
+    "若类型的移动赋值运算符不是 noexcept，`a = move_assign_if_noexcept(b);` 会选择拷贝赋值；若移动赋值运算符是 noexcept，则会选择移动赋值。原文示例输出依次为 `copy assign` 和 `move assign`。"
+  ],
+  "misconceptions": [
+    "is_nothrow_move_assignable_v<T> 判断的是移动赋值是否不会抛出异常，不是判断类型是否支持普通移动构造。",
+    "返回右值引用并不等于函数直接执行了移动赋值；真正选择移动赋值还是拷贝赋值，还取决于目标类型的赋值运算符和表达式重载解析。",
+    "conditional 不在运行时进行条件判断，而是在编译期选择一个类型。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "move_assign_if_noexcept() 在移动赋值运算符为 noexcept 时返回什么类型？",
+      "a": "返回 `T&&`，使调用方可以使用移动赋值运算符。"
+    },
+    {
+      "q": "移动赋值运算符不是 noexcept 时，为什么返回 `const T&`？",
+      "a": "这样可以避免把对象作为可移动的右值传递，从而选择拷贝赋值运算符。"
+    },
+    {
+      "q": "`std::conditional` 的三个模板参数分别是什么？",
+      "a": "第一个是布尔条件，第二个是条件为 true 时选择的类型，第三个是条件为 false 时选择的类型。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "右值引用与 std::move",
+    "noexcept",
+    "类型 trait 基础"
+  ],
+  "source_pages": [
+    782,
+    783
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1608_使用_conditional_和_is_nothrow_move_assigna",
+  "_chunk_pages": [
+    781,
+    784
+  ]
+}

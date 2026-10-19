@@ -1,0 +1,38 @@
+{
+  "title": "P与NP关系",
+  "definition": "P是否等于NP是一个开放问题。若P=NP，则所有NP问题都有多项式求解算法；若P≠NP，则存在验证容易但求解困难的问题。工程上通常默认P≠NP作为直觉。",
+  "key_points": [
+    "P=NP会意味着NP中的问题都能多项式求解",
+    "P≠NP则意味着至少有些问题可快速验证但难以快速求解",
+    "教材提醒：不要把NP完全问题理解成“完全不能解”"
+  ],
+  "examples": [
+    "小规模可精确解，大规模则常改用近似、启发式、随机化或anytime策略"
+  ],
+  "misconceptions": [
+    "把NP完全问题说成完全不能解",
+    "认为NP问题都无法求解"
+  ],
+  "qa_pairs": [
+    {
+      "q": "若P=NP，会产生什么结论？",
+      "a": "所有NP问题都将存在多项式求解算法。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "NP-hard与NP-complete区别",
+    "多项式时间"
+  ],
+  "source_pages": [
+    77,
+    80
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "086_p与np关系",
+  "_chunk_pages": [
+    77,
+    80
+  ]
+}

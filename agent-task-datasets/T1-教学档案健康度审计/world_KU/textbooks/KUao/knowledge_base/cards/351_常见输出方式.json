@@ -1,0 +1,42 @@
+{
+  "title": "常见输出方式",
+  "definition": "教材列出了几种常见的输出方式，包括控制台输出、弹窗输出、页面文档输出，以及向元素的 innerHTML 赋值来输出内容。",
+  "key_points": [
+    "console.log() 用于控制台输出。",
+    "window.alert() 用于弹窗显示。",
+    "document.write() 可向文档写入内容。",
+    "document.getElementById(\"id\").innerHTML = 输出的内容，可修改页面元素内容。"
+  ],
+  "examples": [
+    "console.log('hello');",
+    "window.alert('提示');",
+    "document.write('文本');",
+    "document.getElementById('box').innerHTML = '内容';"
+  ],
+  "misconceptions": [
+    "误以为 console.log() 会直接显示在网页正文中。",
+    "误以为 innerHTML 只能读不能写。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "教材中列出了哪些常见的输出方式？",
+      "a": "console.log()、window.alert()、document.write()、document.getElementById(\"id\").innerHTML=输出内容。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "JavaScript 基础语法",
+    "DOM 基础"
+  ],
+  "source_pages": [
+    249,
+    252
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "351_常见输出方式",
+  "_chunk_pages": [
+    249,
+    252
+  ]
+}

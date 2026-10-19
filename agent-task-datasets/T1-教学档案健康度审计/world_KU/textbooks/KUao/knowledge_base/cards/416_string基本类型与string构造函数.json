@@ -1,0 +1,43 @@
+{
+  "title": "String基本类型与String构造函数",
+  "definition": "在JavaScript中，用一对双引号或单引号创建的值是string类型的值，string表示字符串这种基本类型。内置对象String是一个构造函数，类型是Function，也就是说String本身是Function的实例；如果使用new操作符调用String构造函数创建的是String实例对象，属于Object类型，不是基本类型。",
+  "key_points": [
+    "'abc'或\"abc\"创建的是string基本类型值。",
+    "String是构造函数，类型是Function。",
+    "new String('abc')得到的是对象，不是基本类型字符串。"
+  ],
+  "examples": [
+    "\"hello\"",
+    "'hello'",
+    "new String(\"hello\")"
+  ],
+  "misconceptions": [
+    "把String和string基本类型混为一谈。",
+    "认为new String()创建出来的仍然是基本类型字符串。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "用单引号或双引号创建的字符串属于什么类型？",
+      "a": "属于string基本类型。"
+    },
+    {
+      "q": "new String('abc')创建的是什么？",
+      "a": "创建的是String实例对象，属于Object类型，不是基本类型。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "JavaScript基本类型与对象"
+  ],
+  "source_pages": [
+    309,
+    312
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "416_string基本类型与string构造函数",
+  "_chunk_pages": [
+    309,
+    312
+  ]
+}

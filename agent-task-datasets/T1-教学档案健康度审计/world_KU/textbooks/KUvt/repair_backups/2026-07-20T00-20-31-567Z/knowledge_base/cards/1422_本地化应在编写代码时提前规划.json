@@ -1,0 +1,33 @@
+{
+  "title": "本地化应在编写代码时提前规划",
+  "definition": "编写代码时应考虑本地化需求，例如使用 Unicode 字符并正确使用 locale。提前做好规划后，加入新的语言或 locale 支持会更简单。",
+  "key_points": [
+    "本地化涉及字符表示和区域设置等问题。",
+    "使用 Unicode 字符、注意 locale，有助于后续增加语言或区域支持。"
+  ],
+  "examples": [
+    "在设计需要支持多种语言的程序时，提前采用 Unicode 字符并根据用户环境使用 locale。"
+  ],
+  "misconceptions": [
+    "本地化不是程序开发完成后才能添加的附加功能；如果一开始没有规划，后续支持新语言或 locale 可能更加困难。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么应在编写代码时提前考虑本地化？",
+      "a": "因为提前使用 Unicode 字符并注意 locale，可以使后续加入新的语言或 locale 支持更加简单。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [],
+  "source_pages": [
+    681,
+    681
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1422_本地化应在编写代码时提前规划",
+  "_chunk_pages": [
+    681,
+    684
+  ]
+}

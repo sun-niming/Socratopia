@@ -1,0 +1,43 @@
+{
+  "title": "border-box 盒子模型",
+  "definition": "border-box 是 CSS3 引入的替代盒子模型。在这种模型下，设置的 width 和 height 包含内容区、内边距和边框；因此元素最终的总宽度和总高度就等于你设置的宽高值。",
+  "key_points": [
+    "border-box 用来解决 content-box 计算不直观的问题。",
+    "设置的 width 和 height 已经包含内容区、内边距和边框。",
+    "元素总宽度 = 设置的 width 值。",
+    "元素总高度 = 设置的 height 值。"
+  ],
+  "examples": [
+    "如果设置 width: 200px;，那么元素实际宽度就是 200px。",
+    "教材示例中，内容区宽度会自动计算为 200px - 10px*2 - 2px*2 = 156px。"
+  ],
+  "misconceptions": [
+    "认为 border-box 会把 margin 也包含进 width 和 height。",
+    "认为 border-box 下内容区宽度仍然等于设置的 width。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "border-box 下，元素的总宽度如何计算？",
+      "a": "等于设置的 width 值。"
+    },
+    {
+      "q": "教材说明中，border-box 是否包含 margin？",
+      "a": "不包含 margin。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "box-sizing 属性"
+  ],
+  "source_pages": [
+    124,
+    124
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "178_border_box_盒子模型",
+  "_chunk_pages": [
+    121,
+    124
+  ]
+}

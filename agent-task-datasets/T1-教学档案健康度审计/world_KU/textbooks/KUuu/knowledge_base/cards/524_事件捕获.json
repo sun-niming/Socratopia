@@ -1,0 +1,37 @@
+{
+  "title": "事件捕获",
+  "definition": "事件捕获与事件冒泡相反：事件先由最不具体的节点 document 接收，再逐级向下捕获，直到事件触发的源节点。",
+  "key_points": [
+    "传播方向是自上而下",
+    "起点是 document",
+    "终点是事件触发的源节点，也就是最具体的元素"
+  ],
+  "examples": [
+    "同一个点击事件可以先由 document 接收，再向下到父元素，最后到按钮"
+  ],
+  "misconceptions": [
+    "捕获不是从目标元素往上走，那个过程是冒泡",
+    "捕获的起点不是源节点，而是 document"
+  ],
+  "qa_pairs": [
+    {
+      "q": "事件捕获的起点和方向是什么？",
+      "a": "从 document 开始，逐级向下到源节点。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "DOM事件流"
+  ],
+  "source_pages": [
+    364,
+    364
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "524_事件捕获",
+  "_chunk_pages": [
+    361,
+    364
+  ]
+}

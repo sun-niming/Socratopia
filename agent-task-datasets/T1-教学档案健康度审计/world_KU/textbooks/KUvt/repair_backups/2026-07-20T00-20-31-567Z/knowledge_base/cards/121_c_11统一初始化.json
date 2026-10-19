@@ -1,0 +1,52 @@
+{
+  "title": "C++11统一初始化",
+  "definition": "C++11以后，C++允许使用花括号语法 $\\{...\\}$ 初始化不同类型的对象，包括结构体、类对象和基本类型。对类对象使用花括号时，会自动调用相应的构造函数；等号可以省略。",
+  "key_points": [
+    "结构体和类对象都可以使用花括号初始化。",
+    "类对象使用花括号初始化时，会调用匹配的构造函数。",
+    "等号形式和直接列表初始化形式都可用，例如 T x = { ... }; 与 T x { ... };",
+    "统一初始化也适用于基本类型和 Employee 等结构体。",
+    "空花括号可以进行值初始化；对基本整数类型会得到 0，对浮点类型会得到 0.0，对指针类型会得到 nullptr。"
+  ],
+  "examples": [
+    "struct CircleStruct {\n    int x, y;\n    double radius;\n};\n\nclass CircleClass {\npublic:\n    CircleClass(int x, int y, double radius)\n        : m_x { x }, m_y { y }, m_radius { radius } {}\nprivate:\n    int m_x, m_y;\n    double m_radius;\n};\n\nCircleStruct myCircle1 { 10, 10, 2.5 };\nCircleClass myCircle2 { 10, 10, 2.5 };",
+    "Employee anEmployee { 'J', 'D', 42, 80000 };",
+    "int a = 3;\nint b { 3 };\nint e { };  // e 被值初始化为 0"
+  ],
+  "misconceptions": [
+    "统一初始化不只适用于结构体，也适用于类和基本类型。",
+    "类对象使用花括号初始化并不会绕过构造函数，而是会调用匹配的构造函数。",
+    "等号不是统一初始化的必要部分，T x { ... }; 与 T x = { ... }; 都可以使用。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "C++11以后如何用统一语法初始化 CircleClass 对象？",
+      "a": "可以写成 CircleClass myCircle { 10, 10, 2.5 };，这会调用相应的构造函数。"
+    },
+    {
+      "q": "int e { }; 的结果是什么？",
+      "a": "e 被值初始化为 0。"
+    },
+    {
+      "q": "统一初始化可以用于哪些对象？",
+      "a": "可以用于结构体、类对象以及基本类型等多种对象。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "构造函数",
+    "结构体和类",
+    "基本类型初始化"
+  ],
+  "source_pages": [
+    67,
+    68
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "121_c_11统一初始化",
+  "_chunk_pages": [
+    65,
+    68
+  ]
+}

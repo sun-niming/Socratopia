@@ -1,0 +1,51 @@
+{
+  "title": "文件流中的位置定位与查询",
+  "definition": "C++ 文件流维护当前读写位置。输入流使用 $\\texttt{seekg()}$ 移动读取位置、$\\texttt{tellg()}$ 查询读取位置；输出流使用 $\\texttt{seekp()}$ 移动写入位置、$\\texttt{tellp()}$ 查询写入位置。定位函数可以结合位置基准 $\\texttt{ios\\_base::beg}$、$\\texttt{ios\\_base::cur}$ 和 $\\texttt{ios\\_base::end}$ 使用。",
+  "key_points": [
+    "后缀 $\\texttt{g}$ 表示 get，对应读取位置；后缀 $\\texttt{p}$ 表示 put，对应写入位置。",
+    "$\\texttt{ios\\_base::beg}$ 表示从文件开头计算偏移，$\\texttt{ios\\_base::cur}$ 表示从当前位置计算偏移，$\\texttt{ios\\_base::end}$ 表示从文件末尾计算偏移。",
+    "位置查询函数返回流位置类型，例如 $\\texttt{tellg()}$ 或 $\\texttt{tellp()}$ 的结果可保存为 $\\texttt{std::streampos}$。",
+    "输入流和输出流分别使用读位置和写位置；双向流可能同时具有两类位置操作。"
+  ],
+  "examples": [
+    "std::streampos curPos { inStream.tellg() };",
+    "fout.seekp(2, ios_base::beg);",
+    "上述调用表示将输出流的写入位置移动到相对于文件开头偏移 $2$ 的位置。"
+  ],
+  "misconceptions": [
+    "不能把 $\\texttt{seekg()}$ 和 $\\texttt{seekp()}$ 当作完全相同的函数：前者定位读取位置，后者定位写入位置。",
+    "$\\texttt{tellg()}$ 和 $\\texttt{tellp()}$ 用于查询位置，不是用于移动位置。",
+    "位置偏移的基准由第二个参数决定；$\\texttt{2}$ 配合 $\\texttt{ios\\_base::beg}$ 表示从文件开头偏移，而不是从当前位置偏移。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何将输出流的写入位置移动到文件开头之后的第 2 个位置？",
+      "a": "使用 $\\texttt{fout.seekp(2, ios\\_base::beg);}$。"
+    },
+    {
+      "q": "读取流和输出流分别使用哪些定位与位置查询函数？",
+      "a": "读取流使用 $\\texttt{seekg()}$ 和 $\\texttt{tellg()}$；输出流使用 $\\texttt{seekp()}$ 和 $\\texttt{tellp()}$。"
+    },
+    {
+      "q": "$\\texttt{ios\\_base::cur}$ 表示什么？",
+      "a": "它表示以当前文件位置作为偏移计算的基准。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++文件流的打开模式",
+    "C++输入输出流基础"
+  ],
+  "source_pages": [
+    426,
+    427,
+    428
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "557_文件流中的位置定位与查询",
+  "_chunk_pages": [
+    425,
+    428
+  ]
+}

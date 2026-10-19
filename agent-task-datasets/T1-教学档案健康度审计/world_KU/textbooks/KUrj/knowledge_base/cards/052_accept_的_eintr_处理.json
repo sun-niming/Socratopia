@@ -1,0 +1,37 @@
+{
+  "title": "accept 的 EINTR 处理",
+  "definition": "阻塞中的 accept() 可能被信号打断。这时 accept 返回 -1，errno 为 EINTR，表示被中断而不是严重错误。服务器应继续循环，而不是退出。若 errno 不是 EINTR，再按普通错误处理。",
+  "key_points": [
+    "信号可能打断阻塞中的 accept()",
+    "errno == EINTR 表示被中断，不是致命错误",
+    "不处理 EINTR 可能导致服务器在某个子进程退出后停止 accept"
+  ],
+  "examples": [
+    "if (client_fd < 0) {\n    if (errno == EINTR) continue;\n    perror(\"accept\");\n    continue;\n}"
+  ],
+  "misconceptions": [
+    "accept 返回 -1 就一定是严重错误",
+    "子进程退出不会影响父进程的 accept 循环"
+  ],
+  "qa_pairs": [
+    {
+      "q": "accept() 返回 -1 且 errno == EINTR 时应该怎么做？",
+      "a": "继续循环，重新调用 accept()。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "waitpid 回收子进程"
+  ],
+  "source_pages": [
+    37,
+    40
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "052_accept_的_eintr_处理",
+  "_chunk_pages": [
+    37,
+    40
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "title": "遍历 path 的路径组件",
+  "definition": "`std::filesystem::path` 支持迭代，可以使用范围 `for` 逐个访问路径组件。原文示例遍历 `C:\\Foo\\Bar`，输出根目录或根名称以及后续的 `Foo`、`Bar` 等组件。",
+  "key_points": [
+    "可以使用范围 `for` 遍历 `path`：`for (const auto& component : p)`。",
+    "遍历得到的是路径的组成部分，而不是把整个路径只作为一个字符串返回。",
+    "路径组件的具体表现形式与平台有关；原文在 Windows 环境下展示了类似 `\"C:\"`、`\"Foo\"`、`\"Bar\"` 的输出。"
+  ],
+  "examples": [
+    "`path p{R\"(C:\\Foo\\Bar)\"}; for (const auto& component : p) { cout << component << endl; }`。",
+    "可将遍历结果抽象表示为：$$p=(component_1,component_2,\\ldots,component_n)$$"
+  ],
+  "misconceptions": [
+    "遍历 `path` 得到的是多个路径组件，不是对路径字符串中的每个字符进行遍历。",
+    "组件的输出格式可能包含平台相关的路径分隔符或引号表现，不能把某个平台的显示形式当成所有平台都相同。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何逐个输出路径 `C:\\Foo\\Bar` 的组件？",
+      "a": "使用范围 `for`：`for (const auto& component : p) { cout << component << endl; }`。"
+    },
+    {
+      "q": "遍历 `path` 时得到的是字符还是路径组件？",
+      "a": "得到的是路径组件。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "范围 for 循环",
+    "std::filesystem::path 的构造"
+  ],
+  "source_pages": [
+    429,
+    432
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 std::filesystem::path range for iterate components Windows output",
+  "concept_id": "563_遍历_path_的路径组件",
+  "_chunk_pages": [
+    429,
+    432
+  ]
+}

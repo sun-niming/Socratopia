@@ -1,0 +1,42 @@
+{
+  "title": "grep的-v和-n选项",
+  "definition": "在 grep 命令中，-v 表示显示不匹配的行，-n 表示显示行号。它们用于改变筛选结果的展示方式。",
+  "key_points": [
+    "-v：显示不匹配的行",
+    "-n：显示行号",
+    "二者都是 grep 的常用选项"
+  ],
+  "examples": [
+    "grep -v \"error\" log.txt",
+    "grep -n \"main\" test.c"
+  ],
+  "misconceptions": [
+    "把 -v 误认为“只显示匹配行”是错误的，它的含义正好相反",
+    "认为 -n 会改变匹配规则是不对的，它只是显示行号"
+  ],
+  "qa_pairs": [
+    {
+      "q": "grep 的 -v 选项有什么作用？",
+      "a": "显示不匹配的行。"
+    },
+    {
+      "q": "grep 的 -n 选项有什么作用？",
+      "a": "显示行号。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "grep命令筛选文件内容"
+  ],
+  "source_pages": [
+    17,
+    20
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "039_grep的_v和_n选项",
+  "_chunk_pages": [
+    17,
+    20
+  ]
+}

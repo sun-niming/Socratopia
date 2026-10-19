@@ -1,0 +1,45 @@
+{
+  "title": "UDP客户端套接字的创建与配置",
+  "definition": "UDP客户端首先导入 Python 的 socket 模块，设置服务器主机名或 IP 地址及服务器端口号，然后通过 `socket(AF_INET, SOCK_DGRAM)` 创建 UDP 套接字。`AF_INET` 表示使用 IPv4 地址簇，`SOCK_DGRAM` 表示创建数据报套接字，即 UDP 套接字。客户端创建套接字时不必显式指定本地端口号，操作系统会自动为其分配端口号。",
+  "key_points": [
+    "服务器地址可写成主机名或 IP 地址；使用主机名时，会通过 DNS 查询得到对应的 IP 地址。",
+    "服务器端口号必须与服务器程序绑定并监听的端口号一致；原文示例任意选用 12000。",
+    "`clientSocket = socket(AF_INET, SOCK_DGRAM)` 创建基于 IPv4 的 UDP 客户端套接字。",
+    "UDP客户端通常无需调用 `bind()` 显式指定本地端口，操作系统会自动分配。"
+  ],
+  "examples": [
+    "from socket import *\nserverName = 'hostname'\nserverPort = 12000\nclientSocket = socket(AF_INET, SOCK_DGRAM)",
+    "若服务器地址写为主机名，例如 `cis.poly.edu`，系统会执行 DNS 查询以获得其 IP 地址。"
+  ],
+  "misconceptions": [
+    "误以为 UDP 客户端创建套接字时必须显式指定客户端端口号；原文示例由操作系统自动分配。",
+    "误以为 `SOCK_DGRAM` 创建的是 TCP 套接字；它表示 UDP 数据报套接字。",
+    "误以为服务器主机只能使用 IP 地址表示；也可以使用能够由 DNS 解析的主机名。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`socket(AF_INET, SOCK_DGRAM)` 的两个参数分别表示什么？",
+      "a": "`AF_INET` 表示使用 IPv4 地址簇，`SOCK_DGRAM` 表示创建 UDP 数据报套接字。"
+    },
+    {
+      "q": "UDP客户端示例为什么没有为客户端套接字调用 `bind()`？",
+      "a": "因为客户端本地端口号可以由操作系统自动分配，无需在该示例中显式指定。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "套接字的基本概念",
+    "IP地址与端口号"
+  ],
+  "source_pages": [
+    125,
+    128
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "312_udp客户端套接字的创建与配置",
+  "_chunk_pages": [
+    125,
+    128
+  ]
+}

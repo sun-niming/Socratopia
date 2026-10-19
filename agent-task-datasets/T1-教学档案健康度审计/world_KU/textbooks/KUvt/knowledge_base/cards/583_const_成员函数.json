@@ -1,0 +1,57 @@
+{
+  "title": "const 成员函数",
+  "definition": "const 成员函数是在成员函数声明和定义末尾加上 const 的函数，表示该函数承诺不修改对象内部状态。const 对象、const 对象引用和指向 const 对象的指针只能调用 const 成员函数；非 const 对象既可以调用 const 成员函数，也可以调用非 const 成员函数。",
+  "key_points": [
+    "const 是成员函数类型的一部分，必须同时出现在函数声明和函数定义中。",
+    "const 成员函数不能修改对象的非 mutable 数据成员。",
+    "const 对象只能调用 const 成员函数。",
+    "非 const 对象可以调用 const 成员函数和非 const 成员函数。",
+    "static 成员函数不能声明为 const，因为 static 成员函数没有对象实例状态可修改。",
+    "不修改对象状态的成员函数通常都应声明为 const。"
+  ],
+  "examples": [
+    "声明：double getValue() const;",
+    "定义：double SpreadsheetCell::getValue() const { return m_value; }",
+    "调用关系：SpreadsheetCell myCell{5}; 可以调用 myCell.getValue();；const SpreadsheetCell& ref = myCell; 只能调用 const 成员函数，调用 ref.setString(\"6\") 会编译错误。"
+  ],
+  "misconceptions": [
+    "const 成员函数不是说函数不能修改任何局部变量，而是承诺不修改对象的非 mutable 状态。",
+    "const 对象并不是不能销毁；const 对象仍会调用析构函数，因此析构函数不应标记为 const。",
+    "只在声明处写 const、定义处不写 const 是错误的；声明和定义必须匹配。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "const 成员函数的主要含义是什么？",
+      "a": "它承诺不修改对象的非 mutable 数据成员，因此可以被 const 对象调用。"
+    },
+    {
+      "q": "const 对象能调用非 const 成员函数吗？",
+      "a": "不能，只能调用 const 成员函数。"
+    },
+    {
+      "q": "非 const 对象能调用 const 成员函数吗？",
+      "a": "能。"
+    },
+    {
+      "q": "为什么 static 成员函数不能声明为 const？",
+      "a": "因为 static 成员函数没有特定对象实例，声明 const 没有意义。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "const 对象",
+    "成员函数",
+    "对象生命周期"
+  ],
+  "source_pages": [
+    278,
+    279
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "583_const_成员函数",
+  "_chunk_pages": [
+    277,
+    280
+  ]
+}

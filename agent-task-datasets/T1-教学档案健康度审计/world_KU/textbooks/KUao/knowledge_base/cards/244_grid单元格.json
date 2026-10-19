@@ -1,0 +1,36 @@
+{
+  "title": "Grid单元格",
+  "definition": "Grid 单元格（Grid Cell）是由四条 Grid 线围成的最小单位，类似于表格中的单元格。",
+  "key_points": [
+    "由四条 Grid 线围成",
+    "是网格中的最小单位",
+    "概念上类似表格单元格"
+  ],
+  "examples": [
+    "图中每个编号位置所对应的一个小格子可视为单元格。"
+  ],
+  "misconceptions": [
+    "单元格可以包含多个单元格；实际上它是最小单位。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "Grid 单元格是什么？",
+      "a": "由四条 Grid 线围成的最小单位。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "Grid线"
+  ],
+  "source_pages": [
+    169,
+    172
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "244_grid单元格",
+  "_chunk_pages": [
+    169,
+    172
+  ]
+}

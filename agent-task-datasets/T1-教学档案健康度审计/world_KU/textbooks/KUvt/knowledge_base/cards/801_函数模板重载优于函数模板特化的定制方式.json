@@ -1,0 +1,46 @@
+{
+  "title": "函数模板重载优于函数模板特化的定制方式",
+  "definition": "C++允许对函数模板进行显式特化，但函数模板特化不参与重载解析，可能产生意外行为。因此，当需要针对某种参数形式提供不同处理逻辑时，通常应使用普通非模板函数或辅助函数来重载函数模板，而不是使用函数模板特化。",
+  "key_points": [
+    "函数模板特化与类模板特化在重载行为上不同。",
+    "函数模板特化不参与重载解析。",
+    "针对特定参数类型提供普通函数重载，通常更容易获得预期的重载选择。",
+    "原文以const char*数组为例，使用strcmp比较字符串内容，而不是使用operator==比较指针地址。"
+  ],
+  "examples": [
+    "通用Find可能使用arr[i] == value；但对C风格字符串，应提供重载：size_t Find(const char* value, const char** arr, size_t size)。",
+    "该重载内部应使用strcmp(arr[i], value) == 0来比较字符串内容。",
+    "调用Find(word, words, sizeWords)时，选择const char*的非模板重载。"
+  ],
+  "misconceptions": [
+    "函数模板特化一定会像普通重载一样参与重载解析；原文明确指出并非如此。",
+    "const char*的operator==会比较两个C字符串的文本内容；在这里它比较的是指针地址，因此不能用于按文本内容查找。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么原文建议用函数重载而不是函数模板特化来处理const char*？",
+      "a": "因为函数模板特化不参与重载解析，可能造成意外行为；普通函数重载可以正常参与重载选择。"
+    },
+    {
+      "q": "为什么const char*版本的Find不能直接使用operator==比较元素和值？",
+      "a": "因为const char*是指针，operator==比较的是指针地址，而不是两个C风格字符串的实际文本内容；应使用strcmp比较字符串内容。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "函数模板",
+    "函数重载",
+    "C风格字符串"
+  ],
+  "source_pages": [
+    395,
+    396
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "801_函数模板重载优于函数模板特化的定制方式",
+  "_chunk_pages": [
+    393,
+    396
+  ]
+}

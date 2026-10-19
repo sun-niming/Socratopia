@@ -1,0 +1,48 @@
+{
+  "title": "MVC 软件架构模式",
+  "definition": "教材使用 MVC 说明软件系统的分层组织方式。MVC 将系统划分为 Model（模型）、View（视图）和 Controller（控制器）三个部分；原文配有 MVC 图示，并以棋类程序作为示例。",
+  "key_points": [
+    "MVC 的三个组成部分是 Model、View 和 Controller。",
+    "原文图中还出现 UI 等界面相关标注，说明 View 与用户界面展示有关。",
+    "教材将 MVC 应用于一个包含棋盘、棋子、玩家和游戏过程的示例系统。",
+    "MVC 是一种系统组织或架构方式，不是某个单独的 C++ 类。"
+  ],
+  "examples": [
+    "MVC 三部分可写为：`Model`、`View`、`Controller`。",
+    "棋类示例中的相关名称包括 `GamePlay`、`ChessBoard`、`ChessPiece`、`ChessBoardView`、`ChessPieceView`、`Player` 和 `ErrorLogger`。"
+  ],
+  "misconceptions": [
+    "不要把 MVC 误解为只有 Model 和 View 两部分；Controller 也是 MVC 名称中的组成部分。",
+    "不要把 `ChessBoardView` 或 `ChessPieceView` 误认为整个 MVC 模式；它们只是示例中的视图相关类或组件名称。",
+    "MVC 不等于某一个具体框架；本页是在用它组织示例系统。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "MVC 分别代表哪三个部分？",
+      "a": "Model（模型）、View（视图）和 Controller（控制器）。"
+    },
+    {
+      "q": "教材用什么类型的程序示例说明 MVC？",
+      "a": "棋类程序示例。"
+    },
+    {
+      "q": "棋类 MVC 示例中列出了哪些代表性组件？",
+      "a": "包括 `GamePlay`、`ChessBoard`、`ChessPiece`、`ChessBoardView`、`ChessPieceView`、`Player` 和 `ErrorLogger`。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "面向对象程序设计中的类与对象"
+  ],
+  "source_pages": [
+    159,
+    160
+  ],
+  "needs_verification": true,
+  "verify_query": "《C++20高级编程》第5版第159-160页 MVC Model View Controller ChessBoard ChessPiece GamePlay UML 原图",
+  "concept_id": "224_mvc_软件架构模式",
+  "_chunk_pages": [
+    157,
+    160
+  ]
+}

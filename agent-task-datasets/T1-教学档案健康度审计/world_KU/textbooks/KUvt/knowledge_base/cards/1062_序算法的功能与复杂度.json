@@ -1,0 +1,44 @@
+{
+  "title": "序算法的功能与复杂度",
+  "definition": "序算法用于检查序列是否有序、重新定位某个元素、部分排序或对整个序列排序。原地排序算法会直接修改原序列；复制排序算法会把结果写入新的序列。教材列出的相关算法包括 $\\text{is_sorted()}$、$\\text{is_sorted_until()}$、$\\text{nth_element()}$、$\\text{partial_sort()}$、$\\text{partial_sort_copy()}$、$\\text{stable_sort()}$ 和 $\\text{sort()}$。",
+  "key_points": [
+    "$\\text{is_sorted()}$ 检查序列是否已经排序；$\\text{is_sorted_until()}$ 查找已经保持有序的前缀结束位置。",
+    "$\\text{nth_element()}$ 重新排列序列，使第 $n$ 个位置上的元素成为排序后应位于该位置的元素；它还保证该元素之前的元素不大于它、之后的元素不小于它，但不保证两侧分别完全有序。",
+    "$\\text{partial_sort()}$ 只对指定的前一部分元素排序，其余元素不排序；$\\text{partial_sort_copy()}$ 将排序后的部分结果复制到新序列。",
+    "$\\text{stable_sort()}$ 排序时保留等价元素的相对顺序，$\\text{sort()}$ 不保证保留该顺序。教材将部分排序和整体排序列为线性对数复杂度。"
+  ],
+  "examples": [
+    "若序列为 $[1,3,5,2,4]$，则 $\\text{is_sorted_until()}$ 可用于找到从开头开始仍保持升序的部分。",
+    "对序列调用 $\\text{nth_element(first, nth, last)}$ 后，$*nth$ 是排序后应位于该位置的元素；但 $[first,nth)$ 和 $(nth,last)$ 内部不一定有序。"
+  ],
+  "misconceptions": [
+    "$\\text{nth_element()}$ 不会把整个序列完整排序。",
+    "$\\text{partial_sort()}$ 不是只检查前几个元素，而是会对指定部分进行排序。",
+    "只有 $\\text{stable_sort()}$ 明确保证等价元素的相对顺序不变。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "nth_element() 的核心保证是什么？",
+      "a": "它重新排列序列，使指定位置的元素成为完全排序后应处于该位置的元素，并保证其前面的元素不大于它、后面的元素不小于它；但两侧内部不一定有序。"
+    },
+    {
+      "q": "stable_sort() 与 sort() 的主要区别是什么？",
+      "a": "stable_sort() 保留等价元素的相对顺序，sort() 不保证这一点。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++标准算法与迭代器"
+  ],
+  "source_pages": [
+    517,
+    517
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1062_序算法的功能与复杂度",
+  "_chunk_pages": [
+    517,
+    520
+  ]
+}

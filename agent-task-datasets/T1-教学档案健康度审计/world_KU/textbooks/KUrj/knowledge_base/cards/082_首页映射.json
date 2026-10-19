@@ -1,0 +1,38 @@
+{
+  "title": "首页映射",
+  "definition": "根路径 / 是特殊路径。静态服务器通常把它映射到首页文件，例如 index.html。这样浏览器访问网站根路径时能够返回首页；如果不做映射，通常会得到 404。",
+  "key_points": [
+    "/ 需要特殊处理并映射到首页文件",
+    "常见首页文件是 index.html",
+    "不映射会影响用户体验和演示"
+  ],
+  "examples": [
+    "访问 / 时实际返回 www/index.html",
+    "浏览器打开站点根路径显示首页内容"
+  ],
+  "misconceptions": [
+    "认为 / 就是一个普通文件名",
+    "认为根路径不需要单独处理"
+  ],
+  "qa_pairs": [
+    {
+      "q": "静态服务器为什么常把 / 映射到 index.html？",
+      "a": "因为 / 是特殊路径，映射到首页文件后，用户访问根路径才能直接看到首页，否则往往会返回 404。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "URL路径与文件路径"
+  ],
+  "source_pages": [
+    53,
+    56
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "082_首页映射",
+  "_chunk_pages": [
+    53,
+    56
+  ]
+}

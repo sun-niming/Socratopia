@@ -1,0 +1,42 @@
+{
+  "title": "行内元素之间的水平margin",
+  "definition": "教材说明，行内元素之间可以通过水平方向的margin产生间距，例如一个span设置margin-right，另一个span设置margin-left，可以在两个行内元素之间形成水平空隙。",
+  "key_points": [
+    "适用于行内元素之间的水平间距",
+    "可以使用margin-right设置右侧外边距",
+    "可以使用margin-left设置左侧外边距"
+  ],
+  "examples": [
+    "span.left{margin-right:30px;}\nspan.right{margin-left:40px;}"
+  ],
+  "misconceptions": [
+    "认为行内元素不能通过margin产生水平间距",
+    "把水平margin与垂直margin混为一谈"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何给两个行内元素之间增加水平间距？",
+      "a": "可以给前一个元素设置margin-right，或给后一个元素设置margin-left。"
+    },
+    {
+      "q": "教材中用于演示水平margin的元素是什么？",
+      "a": "span元素。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "CSS外边距margin",
+    "行内元素"
+  ],
+  "source_pages": [
+    133,
+    136
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "193_行内元素之间的水平margin",
+  "_chunk_pages": [
+    133,
+    136
+  ]
+}

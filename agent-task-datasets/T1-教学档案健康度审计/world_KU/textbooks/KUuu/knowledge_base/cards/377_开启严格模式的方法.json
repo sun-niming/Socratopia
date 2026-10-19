@@ -1,0 +1,39 @@
+{
+  "title": "开启严格模式的方法",
+  "definition": "要为整个脚本文件开启严格模式，必须在所有语句之前放一个特定语句\"use strict\";或'use strict';。要为某个函数开启严格模式，必须把该语句放在函数体所有语句之前。",
+  "key_points": [
+    "脚本级严格模式要求directive放在所有语句之前",
+    "函数级严格模式要求directive放在函数体所有语句之前",
+    "\"use strict\";和'use strict';都可以使用"
+  ],
+  "examples": [
+    "\"use strict\";\nvar x = 1;",
+    "function f() {\n  \"use strict\";\n  var y = 2;\n}"
+  ],
+  "misconceptions": [
+    "只要在文件中出现use strict就会自动生效",
+    "strict语句可以放在其他语句后面",
+    "脚本和函数开启严格模式的方法完全没有区别"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何为整个脚本文件开启严格模式？",
+      "a": "在所有语句之前放置\"use strict\";或'use strict';。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "严格模式的作用"
+  ],
+  "source_pages": [
+    257,
+    260
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "377_开启严格模式的方法",
+  "_chunk_pages": [
+    257,
+    260
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "title": "行内块元素",
+  "definition": "行内块元素（inline-block）整体呈现为 inline 特征，但其内容呈现 block 特征。也就是说，多个行内块元素可以在一行排列，并且可以设置高宽、边框、边距等。",
+  "key_points": [
+    "整体上表现为行内特征。",
+    "内部内容呈现块特征。",
+    "多个行内块元素可以在一行排列。",
+    "可以设置高宽、边框、边距等属性。"
+  ],
+  "examples": [
+    "多个 inline-block 元素并排显示",
+    "可设置 width、height、border、margin"
+  ],
+  "misconceptions": [
+    "行内块元素不是纯行内元素，因为它可以设置高宽等块级相关属性。",
+    "行内块元素也不是纯块元素，因为它可以在一行中排列。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "行内块元素有什么特点？",
+      "a": "它整体表现为行内特征，内容呈现块特征，因此多个行内块元素可以在一行排列，并且可以设置高宽、边框、边距等。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "标准文档流"
+  ],
+  "source_pages": [
+    129,
+    132
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "214_行内块元素",
+  "_chunk_pages": [
+    129,
+    132
+  ]
+}

@@ -1,0 +1,156 @@
+{
+  "conversationId": "ptzS6vQIgPgAsgDLZaPH-",
+  "generatedAt": 1782641779145,
+  "pagesRange": null,
+  "sections": [
+    {
+      "type": "tldr",
+      "content": "本节把 Shell 里最常用的三类内容串起来了：变量属性（\\(`declare`\\)）、位置参数/特殊参数（\\(`$0`\\)、\\(`$1`\\)、\\(`$#`\\)、\\(`$?`\\)）和结构控制（\\(`if`\\)、\\(`case`\\)、\\(`while`\\)、\\(`for`\\)）。"
+    },
+    {
+      "type": "narrative",
+      "content": "一开始先抓住 \\(`declare`\\) 的几个常见属性：只读、整数、导出、数组，理解它们分别在“能不能改”“按什么方式算”“能不能传给子 Shell”上起作用。接着把命令行参数、\\(`shift`\\)、返回码这些“脚本运行时最容易混淆的东西”理顺。最后回到结构控制，重点看了 \\(`if`\\)、\\(`case`\\)、\\(`while`\\)、\\(`for`\\) 的基本语法和典型用法。"
+    },
+    {
+      "type": "concepts",
+      "items": [
+        {
+          "name": "declare 的常见属性",
+          "body": "`declare` 可以给变量加属性，课堂里重点记了四个：\n\n- `-a`：数组\n- `-i`：整数\n- `-x`：导出为环境变量\n- `-r`：只读\n\n其中 `-r` 一旦加上，变量后面就不能再改；`-i` 会让右边按整数表达式计算；`-x` 和 `export` 的作用很接近，都是让子 Shell 能继承到这个变量。"
+        },
+        {
+          "name": "整数属性 \\(`-i`\\)",
+          "body": "当变量被声明成整数属性后，赋值时会按算式处理，而不是纯文本拼接。\n\n例如：\n\n```bash\\ndeclare -i n=1\\nn=n+2\n```\n\n这里 `n` 最后会变成 \\(3\\)。\n\n对比普通变量：\n\n```bash\\nn=1\\nn=n+2\n```\n\n这更像把右边当成字符串保存，而不是自动计算。"
+        },
+        {
+          "name": "导出属性 \\(`-x`\\) 与子 Shell 继承",
+          "body": "`declare -x name=Alice` 可以理解为“创建变量并导出”。\n\n- 当前 Shell 里有这个变量\n- 新开的子 Shell 也能继承到它\n\n如果先 `name=Alice`，再 `declare -x name`，只是给原变量加上导出属性，不会改值。"
+        },
+        {
+          "name": "位置参数与特殊参数",
+          "body": "脚本接收命令行参数时，常见几个参数要分清：\n\n- \\(`$0`\\)：脚本名\n- \\(`$1`\\)、\\(`$2`\\)…：第 \\(1\\)、\\(2\\)… 个参数\n- \\(`$#`\\)：参数个数（不含 \\(`$0`\\)）\n- \\(`$?`\\)：上一条命令的返回码\n\n例如：\n\n```bash\\nbash test.sh apple banana\n```\n\n则：\n\n- \\(`$0`\\) = `test.sh`\n- \\(`$1`\\) = `apple`\n- \\(`$2`\\) = `banana`\n- \\(`$#`\\) = \\(2\\)\n\n`\\($?\\)` 要立刻看，因为下一条命令会覆盖它。"
+        },
+        {
+          "name": "shift",
+          "body": "`shift` 的作用是把位置参数整体左移。\n\n- 执行一次：原来的 \\(`$2`\\) 变成新的 \\(`$1`\\)\n- 原来的第一个参数会被丢掉\n- \\(`$0`\\) 不参与移动\n- `shift 2` 表示一次丢掉前两个参数\n\n例如原来是 `apple banana cherry`，执行一次 `shift` 后：\n\n- \\(`$1`\\) = `banana`\n- \\(`$2`\\) = `cherry`\n- \\(`$#`\\) = \\(2\\)"
+        }
+      ]
+    },
+    {
+      "type": "concepts",
+      "items": [
+        {
+          "name": "test / \\([ ]\\) 条件判断",
+          "body": "`test` 和 `[` `]` 常用来做条件判断，课堂里主要提到了文件判断。\n\n例如：\n\n- 判断普通文件：`-f a.txt`\n- 判断目录：`-d logs`\n- 判断执行权限：`-x run.sh`\n\n写成常见形式就是：\n\n```bash\n[ -d logs ]\n```\n\n`if` 判断的是这个测试命令是否成功，而不是“看起来像不像数学式”。"
+        },
+        {
+          "name": "if 结构",
+          "body": "基本结构：\n\n```bash\\nif 条件或命令\\nthen\n  命令列表\\nelse\n  命令列表\\nfi\n```\n\n如果条件成功，就进入 `then`；失败才走 `else`。课堂里举的例子是：如果 `logs` 是目录，就输出 `yes`。"
+        },
+        {
+          "name": "case 结构",
+          "body": "`case` 适合“一个值对应多个分支”的场景，比如菜单选择。\n\n基本骨架：\n\n```bash\\ncase $choice in\n  start) echo starting;;\n  stop) echo stopping;;\n  *) echo unknown;;\\nesac\n```\n\n要点：\n\n- `|` 表示“或者”\n- `*` 是兜底分支\n- `;;` 表示当前分支结束\n- `esac` 是 `case` 的结束标记\n\n还可以配合通配符，比如 `*.c`、`*.txt` 这种模式。"
+        },
+        {
+          "name": "while 结构",
+          "body": "`while` 的核心是：**只要条件成功，就重复执行循环体**。\n\n计数版例子：\n\n```bash\\ncount=3\\nwhile [ $count -gt 0 ]\\ndo\n  echo $count\n  let count=count-1\\ndone\n```\n\n它会输出：\n\n```text\n3\n2\n1\n```\n\n如果一开始就是 \\(0\\)，循环体一次都不会进，因为 `while` 是先判断，再执行。"
+        },
+        {
+          "name": "while read line",
+          "body": "这种写法常用于逐行读文件：\n\n```bash\\nwhile read line\\ndo\n  echo \"$line\"\\ndone < names.txt\n```\n\n要点：\n\n- `< names.txt` 把文件内容送进整个 `while`\n- `read` 每次读一行\n- 循环体每处理一行执行一次\n\n如果文件有三行，就执行三次。"
+        },
+        {
+          "name": "for 的两种常见写法",
+          "body": "课堂里讲了两种 `for`：\n\n1. 显式列表：\n\n```bash\\nfor var in red green blue\\ndo\n  echo \"$var\"\\ndone\n```\n\n`var` 会依次取列表中的值。\n\n2. 省略 `in`：\n\n```bash\\nfor var\\ndo\n  echo \"$var\"\\ndone\n```\n\n这时默认遍历脚本的位置参数（也就是 \\(`$1`\\)、\\(`$2`\\)…），不包含 \\(`$0`\\)。"
+        },
+        {
+          "name": "C 风格 for",
+          "body": "C 风格写法像计数器：\n\n```bash\\nfor ((i=1; i<=3; i++))\\ndo\n  echo \"$i\"\\ndone\n```\n\n结构可以拆成：\n\n- 初始值：\\(`i=1`\\)\n- 继续条件：\\(`i<=3`\\)\n- 每轮更新：\\(`i++`\\)\n\n会输出 \\(1\\)、\\(2\\)、\\(3\\)。"
+        }
+      ]
+    },
+    {
+      "type": "key-terms",
+      "items": [
+        {
+          "term": "只读 \\(`-r`\\)",
+          "definition": "给变量加上只读属性，之后不能再修改。"
+        },
+        {
+          "term": "整数 \\(`-i`\\)",
+          "definition": "让变量按整数表达式处理赋值。"
+        },
+        {
+          "term": "导出 \\(`-x`\\)",
+          "definition": "把变量标记为环境变量，使子 Shell 可继承。"
+        },
+        {
+          "term": "位置参数",
+          "definition": "脚本运行时传入的参数，如 \\(`$1`\\)、\\(`$2`\\) 等。"
+        },
+        {
+          "term": "特殊参数 \\(`$#`\\)、\\(`$?`\\)",
+          "definition": "\\(`$#`\\) 是参数个数，\\(`$?`\\) 是上一条命令返回码。"
+        },
+        {
+          "term": "shift",
+          "definition": "左移位置参数，丢掉最前面的一个或多个参数。"
+        },
+        {
+          "term": "test / \\([ ]\\)",
+          "definition": "用于条件判断的命令/语法。"
+        },
+        {
+          "term": "case",
+          "definition": "多分支匹配结构，适合菜单、模式匹配。"
+        },
+        {
+          "term": "while",
+          "definition": "只要条件成立就重复执行循环。"
+        },
+        {
+          "term": "for",
+          "definition": "遍历列表或按计数循环的结构。"
+        },
+        {
+          "term": "esac",
+          "definition": "`case` 的结束标记。"
+        },
+        {
+          "term": ";;",
+          "definition": "`case` 中一个分支的结束标记。"
+        }
+      ]
+    },
+    {
+      "type": "review-questions",
+      "items": [
+        {
+          "question": "`declare -r` 和 `declare -i` 各表示什么？",
+          "hint": "一个管能不能改，一个管怎么解释赋值。",
+          "answer": "`declare -r` 表示只读，变量后面不能再修改；`declare -i` 表示整数属性，赋值时会按整数表达式计算。"
+        },
+        {
+          "question": "脚本 `bash test.sh apple banana` 中，\\(`$0`\\)、\\(`$1`\\)、\\(`$2`\\)、\\(`$#`\\) 分别是什么？",
+          "hint": "记住 \\(`$0`\\) 是脚本名，\\(`$#`\\) 不算 \\(`$0`\\)。",
+          "answer": "\\(`$0`\\)=`test.sh`，\\(`$1`\\)=`apple`，\\(`$2`\\)=`banana`，\\(`$#`\\)=\\(2\\)。"
+        },
+        {
+          "question": "`shift` 执行一次后，位置参数会发生什么变化？",
+          "hint": "想成“整组往左挪一格”。",
+          "answer": "原来的 \\(`$1`\\) 会被丢掉，原来的 \\(`$2`\\) 变成新的 \\(`$1`\\)，后面的参数整体左移；\\(`$0`\\) 不变。"
+        },
+        {
+          "question": "`case` 里 `;;`、`*`、`esac` 分别做什么？",
+          "hint": "一个是分支结束，一个是兜底，一个是总结束。",
+          "answer": "`;;` 表示当前分支结束，`*` 是兜底匹配，`esac` 是整个 `case` 结构的结束标记。"
+        },
+        {
+          "question": "下面这段 `while` 会输出什么？\n\n```bash\\ncount=3\\nwhile [ $count -gt 0 ]\\ndo\n  echo $count\n  let count=count-1\\ndone\n```",
+          "hint": "先判断，再执行。",
+          "answer": "会依次输出 `3`、`2`、`1`。当 \\(`count`\\) 变成 \\(0\\) 时条件失败，循环结束。"
+        }
+      ]
+    }
+  ]
+}

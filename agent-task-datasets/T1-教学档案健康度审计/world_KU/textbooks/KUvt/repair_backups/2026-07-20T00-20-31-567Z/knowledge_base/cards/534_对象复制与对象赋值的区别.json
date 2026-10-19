@@ -1,0 +1,40 @@
+{
+  "title": "对象复制与对象赋值的区别",
+  "definition": "在 C++ 中，“复制”更准确地指使用一个已有对象初始化一个正在创建的新对象，此时使用拷贝构造函数；“赋值”则是用源对象的值改写一个已经存在的目标对象，此时使用赋值运算符。拷贝构造函数是构造函数，因此只能在创建对象时使用，不能用于给既有对象赋值。",
+  "key_points": [
+    "新对象的初始化属于复制，调用拷贝构造函数。",
+    "已存在对象被改写属于赋值，调用赋值运算符。",
+    "表达式 `anotherCell = myCell;` 中，`anotherCell` 已经存在，因此执行的是赋值而不是拷贝构造。"
+  ],
+  "examples": [
+    "复制初始化示例：`SpreadsheetCell b{a};`，其中 `b` 是新创建的对象，使用拷贝构造函数。",
+    "赋值示例：`SpreadsheetCell myCell{5}, anotherCell; anotherCell = myCell;`，其中 `anotherCell` 已经构造完成，随后调用其赋值运算符。"
+  ],
+  "misconceptions": [
+    "误以为只要一个对象获得另一个对象的值，就一定调用拷贝构造函数。",
+    "误以为 `anotherCell = myCell;` 会重新构造 `anotherCell`；实际上它改写已经存在的对象。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`SpreadsheetCell b{a};` 与先创建 `b` 再执行 `b = a;` 有什么区别？",
+      "a": "前者在创建 `b` 时调用拷贝构造函数；后者对已经存在的 `b` 调用赋值运算符。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "对象初始化",
+    "拷贝构造函数",
+    "运算符重载"
+  ],
+  "source_pages": [
+    251,
+    252
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "534_对象复制与对象赋值的区别",
+  "_chunk_pages": [
+    249,
+    252
+  ]
+}

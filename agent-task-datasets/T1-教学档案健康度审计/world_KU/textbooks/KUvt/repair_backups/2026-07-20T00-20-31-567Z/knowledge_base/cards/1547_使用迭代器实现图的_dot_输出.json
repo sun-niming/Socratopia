@@ -1,0 +1,50 @@
+{
+  "title": "使用迭代器实现图的 DOT 输出",
+  "definition": "to_dot() 可以通过 directed_graph 的节点迭代器和相邻节点迭代器生成 DOT 格式的有向图文本。函数先遍历每个节点，再遍历该节点的所有相邻节点；没有相邻节点的节点单独输出，有相邻节点时输出形如 node -> adjacent_node 的有向边。",
+  "key_points": [
+    "to_dot() 接收 const directed_graph<T>& 和图名称 graph_name，并返回 std::wstring。",
+    "外层循环遍历图中的所有节点：for (auto&& node : graph)。",
+    "内层使用 graph.cbegin(node) 和 graph.cend(node) 遍历当前节点的相邻节点。",
+    "若相邻节点范围为空，即 b == e，则只输出该节点；否则为每个相邻节点输出一条有向边。"
+  ],
+  "examples": [
+    "DOT 边的输出形式为：\nwss << format(L\"{} -> {}\", node, *iter) << std::endl;",
+    "整体逻辑可概括为：\n$$\\text{对每个节点 }u，\\quad\n\\begin{cases}\n\\text{输出 }u, & \\text{若 }u\\text{ 没有相邻节点};\\\\\n\\text{对每个相邻节点 }v\\text{ 输出 }u\\to v, & \\text{否则}.\n\\end{cases}$$"
+  ],
+  "misconceptions": [
+    "to_dot() 输出的是图的 DOT 文本表示，不是直接绘制图形。",
+    "节点没有相邻节点时仍需要输出该节点，否则孤立节点会在 DOT 表示中丢失。",
+    "内层迭代器遍历的是当前节点的相邻节点，而不是再次遍历整个图。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "to_dot() 如何遍历每个节点的相邻节点？",
+      "a": "对每个节点 node 调用 graph.cbegin(node) 和 graph.cend(node)，然后在该范围内递增迭代器。"
+    },
+    {
+      "q": "没有相邻节点的节点在 DOT 输出中如何表示？",
+      "a": "单独输出节点值，而不是输出一条边。"
+    },
+    {
+      "q": "有向边的 DOT 文本形式是什么？",
+      "a": "对于节点 node 及其相邻节点 *iter，输出形如 node -> *iter 的文本。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "有向图的邻接关系",
+    "C++ const 迭代器",
+    "DOT 图描述格式"
+  ],
+  "source_pages": [
+    746,
+    747
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1547_使用迭代器实现图的_dot_输出",
+  "_chunk_pages": [
+    745,
+    748
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "title": "使用 default 和 delete 控制拷贝构造函数",
+  "definition": "类可以显式使用 = default 要求编译器生成默认实现，也可以使用 = delete 禁止某个特殊成员函数。教材片段展示了 SpreadsheetCell 的拷贝构造函数声明形式：SpreadsheetCell(const SpreadsheetCell& src) = default; 以及被删除的形式：SpreadsheetCell(const SpreadsheetCell& src) = delete;。",
+  "key_points": [
+    "= default 表示请求编译器生成该函数的默认实现。",
+    "= delete 表示该函数被明确禁止，调用它会导致编译错误。",
+    "拷贝构造函数通常以 const SpreadsheetCell& 作为参数，用于根据已有对象创建新对象。",
+    "同一个类中不能同时保留两个完全相同参数列表、但分别写成 = default 和 = delete 的拷贝构造函数；实际代码应根据设计目的选择其中一种。"
+  ],
+  "examples": [
+    "允许默认拷贝：SpreadsheetCell(const SpreadsheetCell& src) = default;",
+    "禁止拷贝：SpreadsheetCell(const SpreadsheetCell& src) = delete;",
+    "拷贝构造的典型形式：SpreadsheetCell cell1 { 4 }; SpreadsheetCell cell2 { cell1 };"
+  ],
+  "misconceptions": [
+    "= default 不是删除函数，而是要求编译器生成默认实现。",
+    "= delete 不表示函数没有实现但仍可调用；被删除的函数不能被合法调用。",
+    "拷贝构造函数的参数通常应使用 const 引用，以便从 const 对象或临时对象进行拷贝。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "SpreadsheetCell(const SpreadsheetCell& src) = default; 表示什么？",
+      "a": "表示请求编译器为 SpreadsheetCell 生成该拷贝构造函数的默认实现。"
+    },
+    {
+      "q": "SpreadsheetCell(const SpreadsheetCell& src) = delete; 表示什么？",
+      "a": "表示明确禁止拷贝构造；尝试用一个 SpreadsheetCell 对象拷贝构造另一个对象时会编译失败。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "拷贝构造函数",
+    "C++特殊成员函数"
+  ],
+  "source_pages": [
+    245,
+    246,
+    248
+  ],
+  "needs_verification": true,
+  "verify_query": "《C++20高级编程》第5版 SpreadsheetCell const SpreadsheetCell& default delete 拷贝构造函数 第245-248页",
+  "concept_id": "330_使用_default_和_delete_控制拷贝构造函数",
+  "_chunk_pages": [
+    245,
+    248
+  ]
+}

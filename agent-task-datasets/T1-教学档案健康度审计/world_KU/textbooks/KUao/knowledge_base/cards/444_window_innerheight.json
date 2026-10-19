@@ -1,0 +1,41 @@
+{
+  "title": "window.innerHeight",
+  "definition": "window.innerHeight 用于获取浏览器窗口内容区域的高度，包括已渲染的水平滚动条。",
+  "key_points": [
+    "它返回的是窗口内容区域的高度。",
+    "结果包含已渲染的水平滚动条。",
+    "它描述的是浏览器窗口内部可视内容区域，而不是整个屏幕。"
+  ],
+  "examples": [
+    "例如浏览器内容区域高度为 800 像素时，window.innerHeight 返回相应高度值。"
+  ],
+  "misconceptions": [
+    "innerHeight 不是整个显示器的高度。",
+    "innerHeight 不是页面文档总高度，而是浏览器窗口内容区域高度。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "window.innerHeight 获取的是什么？",
+      "a": "获取浏览器窗口内容区域的高度，包括已渲染的水平滚动条。"
+    },
+    {
+      "q": "window.innerHeight 是屏幕高度吗？",
+      "a": "不是，它是浏览器窗口内容区域的高度。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "window 对象的层级与全局属性"
+  ],
+  "source_pages": [
+    332,
+    332
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "444_window_innerheight",
+  "_chunk_pages": [
+    329,
+    332
+  ]
+}

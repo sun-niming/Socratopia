@@ -1,0 +1,44 @@
+{
+  "title": "std::string_view 的引入",
+  "definition": "std::string_view 是 C++17 引入的字符串视图类型。原文将其放在 std::string 相关内容中，并与 const char*、std::string 以及 std::string 的 c_str()、data() 操作关联介绍。",
+  "key_points": [
+    "std::string_view 的标准版本标记为 C++17。",
+    "它属于字符串处理相关类型，原文将其与 const char*、std::string、c_str() 和 data() 并列讨论。",
+    "仅凭本页原文片段，尚不足以完整确定其所有构造、生命周期和所有权规则。"
+  ],
+  "examples": [
+    "std::string_view view;",
+    "std::string text;",
+    "const char* p = text.c_str();"
+  ],
+  "misconceptions": [
+    "std::string_view 不应在缺少有效底层字符存储时被当作独立拥有字符串的对象使用；但这一页片段未展开说明具体生命周期规则。",
+    "std::string_view 与 std::string 不是同一个类型。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "std::string_view 是从哪个 C++ 标准版本引入的？",
+      "a": "C++17。"
+    },
+    {
+      "q": "第 112 页片段中，std::string_view 与哪些字符串相关对象或操作一起出现？",
+      "a": "与 const char*、std::string、std::string::c_str() 和 data() 一起出现。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "std::string",
+    "C 风格字符串 const char*"
+  ],
+  "source_pages": [
+    109,
+    112
+  ],
+  "needs_verification": true,
+  "verify_query": "C++17 std::string_view const char* std::string c_str data 教材 C++20 高级编程 第5版",
+  "concept_id": "162_std_string_view_的引入",
+  "_chunk_pages": [
+    109,
+    112
+  ]
+}

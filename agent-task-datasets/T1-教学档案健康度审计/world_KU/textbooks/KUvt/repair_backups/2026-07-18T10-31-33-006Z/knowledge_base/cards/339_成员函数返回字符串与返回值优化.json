@@ -1,0 +1,46 @@
+{
+  "title": "成员函数返回字符串与返回值优化",
+  "definition": "`SpreadsheetCell::getString()` 是一个返回 `string` 的常量成员函数，它将成员变量 `m_value` 转换为字符串并返回。调用该函数初始化字符串对象时，编译器可能应用返回值优化（Return Value Optimization，RVO），也称为复制省略，以减少返回临时对象时的不必要复制。",
+  "key_points": [
+    "函数声明形式为 `string SpreadsheetCell::getString() const`。",
+    "函数体通过 `doubleToString(m_value)` 将单元格中的数值转换为字符串并返回。",
+    "例如 `string si; si = myCell2.getString();`，函数返回一个字符串对象。",
+    "RVO 的含义是编译器在符合条件时省略返回对象过程中的拷贝；原文还将其称为 copy elision。"
+  ],
+  "examples": [
+    "函数实现：\n```cpp\nstring SpreadsheetCell::getString() const\n{\n    return doubleToString(m_value);\n}\n```",
+    "调用示例：\n```cpp\nSpreadsheetCell myCell2{5};\nstring si;\nsi = myCell2.getString();\n```"
+  ],
+  "misconceptions": [
+    "`const` 表示该成员函数不会修改调用它的 `SpreadsheetCell` 对象；它不是返回值为常量字符串的意思。",
+    "RVO 是返回值复制的省略，不是把返回类型从 `string` 自动改成引用。",
+    "复制省略与普通复制构造是不同机制；复制省略是在满足条件时直接省去某些对象复制或移动步骤。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`SpreadsheetCell::getString() const` 的作用是什么？",
+      "a": "将成员变量 `m_value` 转换成字符串并返回；末尾的 `const` 表示该成员函数不修改当前对象。"
+    },
+    {
+      "q": "RVO 是什么？",
+      "a": "RVO 是返回值优化（Return Value Optimization），即编译器在适当情况下省略返回对象过程中的不必要复制，也称为复制省略。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++类成员函数",
+    "C++ const 成员函数",
+    "C++对象复制"
+  ],
+  "source_pages": [
+    254,
+    255
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "339_成员函数返回字符串与返回值优化",
+  "_chunk_pages": [
+    253,
+    256
+  ]
+}

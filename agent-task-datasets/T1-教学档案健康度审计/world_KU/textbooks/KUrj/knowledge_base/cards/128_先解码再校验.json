@@ -1,0 +1,43 @@
+{
+  "title": "先解码再校验",
+  "definition": "在处理 URL 路径时，必须先调用 `url_decode`，再调用 `validate_url_path`。原因是像 `%2e%2e` 这样的编码内容，如果不先解码，就不会被 `validate_url_path` 识别成 `..`，从而可能绕过目录穿越检查。",
+  "key_points": [
+    "正确顺序是：先百分号解码，再做路径合法性校验。",
+    "`%2e%2e` 解码后就是 `..`，必须在解码后才能被拒绝。",
+    "如果顺序反过来，编码后的危险片段可能绕过检查。"
+  ],
+  "examples": [
+    "`/%2e%2e/%2e%2e/etc/passwd` 应先解码为 `/../../etc/passwd`，再被拒绝。",
+    "`/../../etc/passwd` 直接会被拒绝。"
+  ],
+  "misconceptions": [
+    "先过滤再解码也一样安全。",
+    "把编码后的 `..` 当作无害文本。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么 `url_decode` 必须在 `validate_url_path` 之前调用？",
+      "a": "因为编码后的 `..` 只有先解码才会显现出来，才能被路径校验拒绝。"
+    },
+    {
+      "q": "`/%2e%2e/%2e%2e/etc/passwd` 为什么危险？",
+      "a": "它解码后会变成 `/../../etc/passwd`，属于目录穿越路径。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "URL 百分号解码",
+    "URL 路径合法性校验"
+  ],
+  "source_pages": [
+    81,
+    84
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "128_先解码再校验",
+  "_chunk_pages": [
+    81,
+    84
+  ]
+}

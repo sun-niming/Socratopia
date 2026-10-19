@@ -1,0 +1,43 @@
+{
+  "title": "flex-grow",
+  "definition": "flex-grow 属性用于控制弹性项目在容器有剩余空间时的放大比例。它决定当主轴方向还有多余空间时，各项目如何分配这些剩余空间。",
+  "key_points": [
+    "默认值为 0，表示即使有剩余空间也不放大。",
+    "如果所有项目的 flex-grow 都为 1，则它们等分剩余空间。",
+    "如果某个项目的 flex-grow 为 2，而其他项目为 1，则该项目分到的剩余空间是其他项目的 2 倍。"
+  ],
+  "examples": [
+    "所有项目的 flex-grow 都设置为 1，容器剩余空间会被平均分配。",
+    "某个项目设置 flex-grow: 2;，其他项目设置 flex-grow: 1;，则前者占据的剩余空间更多。"
+  ],
+  "misconceptions": [
+    "flex-grow 不是控制项目是否显示，而是控制剩余空间的放大分配。",
+    "flex-grow 默认不是 1，而是 0。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "flex-grow 的作用是什么？",
+      "a": "控制项目在容器有剩余空间时的放大比例。"
+    },
+    {
+      "q": "flex-grow 的默认值是多少？",
+      "a": "0。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "Flex 布局基础",
+    "弹性项目"
+  ],
+  "source_pages": [
+    161,
+    164
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "232_flex_grow",
+  "_chunk_pages": [
+    161,
+    164
+  ]
+}

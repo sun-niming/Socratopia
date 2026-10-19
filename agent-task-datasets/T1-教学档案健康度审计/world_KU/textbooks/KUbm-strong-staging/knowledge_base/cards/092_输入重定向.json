@@ -1,0 +1,36 @@
+{
+  "title": "输入重定向",
+  "definition": "输入重定向用于把文件内容作为命令的输入。教材给出的形式是 command <[0] 文件名，其中“<”表示把指定文件重定向为命令输入。教材同时用[0]提示其对应输入方向。",
+  "key_points": [
+    "属于输入输出重定向的一种",
+    "基本形式为 command < 文件名",
+    "教材在形式中标注了[0]"
+  ],
+  "examples": [
+    "command < 文件名"
+  ],
+  "misconceptions": [
+    "不要把“<”误认为输出重定向符号，教材中它表示输入重定向"
+  ],
+  "qa_pairs": [
+    {
+      "q": "教材中输入重定向的基本形式是什么？",
+      "a": "command < 文件名。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "bash基础概念"
+  ],
+  "source_pages": [
+    49,
+    52
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "092_输入重定向",
+  "_chunk_pages": [
+    49,
+    52
+  ]
+}

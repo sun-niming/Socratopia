@@ -1,0 +1,52 @@
+{
+  "title": "全局与类级 operator new/delete 的重载",
+  "definition": "可以替换全局的 `operator new` 和 `operator delete`，此时程序中的各个 `new`、`delete` 表达式通常都会使用这些版本，除非类提供了更专门的版本。也可以只在特定类中重载这些运算符，使其仅在分配或释放该类对象时生效。原文更推荐针对特定类进行重载，并警告全局重载时不能在实现内部再次调用 `new`，否则会造成无限递归。",
+  "key_points": [
+    "全局重载影响范围大，除非存在更专门的类级版本。",
+    "类级 `operator new` 和 `operator delete` 只针对该类对象的分配和释放。",
+    "实现全局 `operator new` 时不能通过 `new` 再次分配，也不应使用可能触发动态分配的输出方式；原文特别指出不能通过 `cout` 向控制台写消息。",
+    "类级重载可以通过调用全局版本 `::operator new(size)` 和 `::operator delete(ptr)` 复用默认实现，同时加入定制逻辑。",
+    "`nothrow` 参数的类型是 `std::nothrow_t`，`std::nothrow` 是该类型的一个变量。"
+  ],
+  "examples": [
+    "类级声明示意：`void* MemoryDemo::operator new(std::size_t size);`、`void MemoryDemo::operator delete(void* ptr) noexcept;`。",
+    "转发到全局版本：`return ::operator new(size);` 和 `::operator delete(ptr);`。",
+    "类级数组版本包括 `operator new[]` 与 `operator delete[]`；nothrow 版本则接收 `const std::nothrow_t&` 参数。"
+  ],
+  "misconceptions": [
+    "类级 `operator new` 不会影响所有类的内存分配，只对该类对象适用。",
+    "在全局 `operator new` 中调用普通 `new` 不是安全的递归实现方式，而可能导致无限循环。",
+    "重载类级分配函数并不意味着可以省略对象构造和析构过程。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "全局重载和类级重载 `operator new` 的影响范围有何不同？",
+      "a": "全局重载通常影响程序中的所有相关 `new` 表达式；类级重载只在分配该特定类对象时使用。"
+    },
+    {
+      "q": "为什么不能在自定义的全局 `operator new` 中调用 `new`？",
+      "a": "因为 `new` 会再次调用该全局 `operator new`，从而形成无限递归。"
+    },
+    {
+      "q": "类级分配函数如何调用全局默认实现？",
+      "a": "使用全局作用域运算符，例如 `return ::operator new(size);`；释放时使用 `::operator delete(ptr);`。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "全局函数与类成员函数",
+    "new/delete 的工作原理",
+    "运算符重载"
+  ],
+  "source_pages": [
+    492,
+    492
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "989_全局与类级_operator_new_delete_的重载",
+  "_chunk_pages": [
+    489,
+    492
+  ]
+}

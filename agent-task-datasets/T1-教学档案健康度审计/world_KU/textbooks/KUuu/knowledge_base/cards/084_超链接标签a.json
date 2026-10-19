@@ -1,0 +1,35 @@
+{
+  "title": "超链接标签a",
+  "definition": "<a> 标签定义超链接，用于从一个页面链接到另一个页面。",
+  "key_points": [
+    "<a> 标签用于定义超链接",
+    "超链接可以把一个页面连接到另一个页面"
+  ],
+  "examples": [
+    "<a href=\"page2.html\">下一页</a>"
+  ],
+  "misconceptions": [
+    "<a> 标签不是普通文本标签，它的核心作用是建立链接"
+  ],
+  "qa_pairs": [
+    {
+      "q": "<a> 标签的作用是什么？",
+      "a": "定义超链接，用于从一个页面链接到另一个页面。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "HTML基础"
+  ],
+  "source_pages": [
+    51,
+    52
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "084_超链接标签a",
+  "_chunk_pages": [
+    49,
+    52
+  ]
+}

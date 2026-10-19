@@ -1,0 +1,44 @@
+{
+  "title": "类模板成员函数的定义方式",
+  "definition": "类模板成员函数的定义前必须再次写出模板声明 `template <typename T>`，并在作用域限定中使用 `Grid<T>::`。类模板方法的实现必须对使用该模板的客户代码可见，通常将方法定义放在与类模板定义相同的文件中。",
+  "key_points": [
+    "每个类模板成员函数的定义前都要写 `template <typename T>`。",
+    "类模板外定义成员函数时，函数名应写成 `Grid<T>::函数名`。",
+    "构造函数定义示例形式为：`template <typename T> Grid<T>::Grid(size_t width, size_t height) { /* ... */ }`。",
+    "模板方法定义通常放在类模板定义所在的文件中，以便实例化时客户代码能够看到实现。"
+  ],
+  "examples": [
+    "模板成员函数定义的基本形式：`template <typename T> const std::optional<T>& Grid<T>::at(size_t x, size_t y) const { /* ... */ }`",
+    "模板成员函数定义前的模板声明：`template <typename T>`。"
+  ],
+  "misconceptions": [
+    "只在类模板定义处写一次 `template <typename T>` 就够了；错误。类模板外定义每个成员函数时，前面都需要再次写模板声明。",
+    "类模板外定义成员函数时不能把类名简单写成 `Grid`；应写成 `Grid<T>`。",
+    "模板成员函数实现若对客户代码不可见，可能无法完成所需实例化。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "在类模板外定义 `Grid<T>` 的成员函数时，需要哪些语法结构？",
+      "a": "成员函数定义前写 `template <typename T>`，函数名使用 `Grid<T>::成员函数名` 的形式。"
+    },
+    {
+      "q": "为什么类模板方法的定义通常要放在与类模板定义相同的文件中？",
+      "a": "因为使用模板的客户代码在实例化模板时必须能够看到方法的实现。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "类模板与类型模板参数"
+  ],
+  "source_pages": [
+    378,
+    379
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "766_类模板成员函数的定义方式",
+  "_chunk_pages": [
+    377,
+    380
+  ]
+}

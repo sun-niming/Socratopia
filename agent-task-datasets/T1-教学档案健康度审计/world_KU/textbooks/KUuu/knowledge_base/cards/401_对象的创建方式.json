@@ -1,0 +1,38 @@
+{
+  "title": "对象的创建方式",
+  "definition": "原文列出了对象的四种创建方式：构造函数、对象字面量、Object.create 方法、使用 class。",
+  "key_points": [
+    "可以通过构造函数创建对象。",
+    "可以通过对象字面量创建对象。",
+    "可以通过 Object.create 方法创建对象。",
+    "可以通过 class 创建对象。"
+  ],
+  "examples": [
+    "例如：{} 是对象字面量的写法；Object.create(proto) 是一种创建对象的方法。"
+  ],
+  "misconceptions": [
+    "误以为对象只能用一种固定方式创建。",
+    "误以为 class 不是创建对象的方法。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "原文中列出的对象创建方式有哪些？",
+      "a": "构造函数、对象字面量、Object.create 方法、使用 class。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "对象"
+  ],
+  "source_pages": [
+    273,
+    276
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "401_对象的创建方式",
+  "_chunk_pages": [
+    273,
+    276
+  ]
+}

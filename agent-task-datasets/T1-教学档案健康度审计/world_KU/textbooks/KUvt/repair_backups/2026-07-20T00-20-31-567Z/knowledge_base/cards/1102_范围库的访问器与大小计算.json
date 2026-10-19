@@ -1,0 +1,42 @@
+{
+  "title": "范围库的访问器与大小计算",
+  "definition": "C++范围库提供了用于访问范围的自由函数，包括 `std::ranges::begin()`、`end()`、`rbegin()`、`empty()`、`data()`、`cdata()` 和 `size()`。这些函数都接收一个范围参数，而不是范围的成员函数。`size()` 只有在能够以常量时间取得范围大小时才适用；否则可以使用 `std::distance(begin(range), end(range))` 计算元素数量。",
+  "key_points": [
+    "范围访问器是独立的自由函数，不是范围类型的成员函数。",
+    "`size()` 的适用前提是范围大小可以在常量时间内取得。",
+    "不能直接使用 `size()` 时，可以通过 begin 和 end 之间的距离计算元素数量：`std::distance(std::ranges::begin(range), std::ranges::end(range))`。"
+  ],
+  "examples": [
+    "计算一般范围的元素数：`auto n = std::distance(std::ranges::begin(range), std::ranges::end(range));`"
+  ],
+  "misconceptions": [
+    "并非所有范围都能保证 `size()` 有效；不能取得常量时间大小的范围应使用 `std::distance()`。",
+    "这些访问器不要求调用范围对象的成员函数。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "范围库中的 begin()、end() 和 size() 是成员函数吗？",
+      "a": "不是，它们是接收范围参数的独立自由函数。"
+    },
+    {
+      "q": "当范围不能以常量时间取得大小时，如何计算元素数量？",
+      "a": "使用 `std::distance(begin(range), end(range))` 计算首尾迭代器之间的距离。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "范围的基本概念",
+    "迭代器的距离计算"
+  ],
+  "source_pages": [
+    537,
+    537
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1102_范围库的访问器与大小计算",
+  "_chunk_pages": [
+    537,
+    540
+  ]
+}

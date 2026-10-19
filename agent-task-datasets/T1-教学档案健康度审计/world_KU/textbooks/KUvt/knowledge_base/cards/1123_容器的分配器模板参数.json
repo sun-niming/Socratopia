@@ -1,0 +1,49 @@
+{
+  "title": "容器的分配器模板参数",
+  "definition": "标准库容器通常包含一个分配器（allocator）模板类型参数。分配器负责为元素分配和释放内存。该类型参数具有默认值，因此大多数情况下可以忽略。以 vector 为例，其模板参数可概念化表示为 $T$ 和默认的 `std::allocator<T>`。",
+  "key_points": [
+    "分配器用于为容器元素分配和释放内存。",
+    "分配器是容器的模板类型参数之一。",
+    "分配器参数有默认值，通常不需要显式指定。",
+    "vector 的相关模板结构可表示为：`template<class T, class Allocator = std::allocator<T>> class vector;`。"
+  ],
+  "examples": [
+    "vector 模板形式：`template<class T, class Allocator = std::allocator<T>> class vector;`",
+    "默认分配器关系可表示为：$$\\text{Allocator}=\\text{std::allocator<T>}$$"
+  ],
+  "misconceptions": [
+    "分配器不是容器中实际保存的元素类型，而是管理元素内存的模板参数。",
+    "通常不需要手动提供分配器，因为容器已经提供默认值。",
+    "分配器负责内存分配和释放，不能据此推断它改变了容器的元素语义。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "标准库容器中的 allocator 用来做什么？",
+      "a": "用来为元素分配和释放内存。"
+    },
+    {
+      "q": "为什么通常可以忽略 allocator 模板参数？",
+      "a": "因为该参数具有默认值。"
+    },
+    {
+      "q": "vector 的默认分配器是什么形式？",
+      "a": "std::allocator<T>。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "类模板参数",
+    "动态内存管理"
+  ],
+  "source_pages": [
+    548,
+    548
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1123_容器的分配器模板参数",
+  "_chunk_pages": [
+    545,
+    548
+  ]
+}

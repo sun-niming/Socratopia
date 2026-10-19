@@ -1,0 +1,42 @@
+{
+  "title": "块元素",
+  "definition": "块元素（block element）一般是其他元素的容器元素，教材举例有 div，另外还有段落标签 p、标题标签 h。",
+  "key_points": [
+    "一般充当其他元素的容器",
+    "div 是常见的块元素",
+    "p 和 h 也是教材列举的块元素"
+  ],
+  "examples": [
+    "div",
+    "p",
+    "h"
+  ],
+  "misconceptions": [
+    "块元素不只是 div；div 只是常见例子"
+  ],
+  "qa_pairs": [
+    {
+      "q": "教材如何描述块元素？",
+      "a": "块元素一般是其他元素的容器元素。"
+    },
+    {
+      "q": "教材举了哪些块元素的例子？",
+      "a": "div、段落标签 p、标题标签 h。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "标准文档流"
+  ],
+  "source_pages": [
+    129,
+    132
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "187_块元素",
+  "_chunk_pages": [
+    129,
+    132
+  ]
+}

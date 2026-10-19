@@ -1,0 +1,42 @@
+{
+  "title": "类定义与模块导出",
+  "definition": "C++类定义以关键字class和类名开始，以分号结束。若类定义位于模块中，并且希望导入该模块的客户可见，需要在class前使用export。类定义主要声明类的成员及其访问权限；成员函数的声明本身不等于成员函数实现。",
+  "key_points": [
+    "类定义结束处必须有分号。",
+    "在模块接口中，export class可使类对导入模块的客户可见。",
+    "类定义可以放在以类命名的文件中，具体文件扩展名取决于编译器或构建环境。"
+  ],
+  "examples": [
+    "export class SpreadsheetCell {\npublic:\n    void setValue(double value);\n    double getValue() const;\nprivate:\n    double m_value;\n};"
+  ],
+  "misconceptions": [
+    "类定义末尾的分号不是可有可无的格式；缺少它会导致编译器报错。",
+    "声明成员函数只提供函数原型，不会自动产生函数体实现。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "类定义末尾为什么必须写分号？",
+      "a": "类定义是一条声明，声明结束必须使用分号。"
+    },
+    {
+      "q": "模块中的类什么时候需要在class前写export？",
+      "a": "当该类需要对导入该模块的客户可见时。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++类声明",
+    "C++20模块基础"
+  ],
+  "source_pages": [
+    229,
+    229
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "487_类定义与模块导出",
+  "_chunk_pages": [
+    229,
+    232
+  ]
+}

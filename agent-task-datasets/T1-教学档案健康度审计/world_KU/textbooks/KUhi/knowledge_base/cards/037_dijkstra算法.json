@@ -1,0 +1,42 @@
+{
+  "title": "Dijkstra算法",
+  "definition": "Dijkstra 算法用于求非负权图中的单源最短路径。它的做法是：每轮从未确定的顶点中选择 dist 最小的顶点，将其加入确定集合，然后松弛它的邻接边。非负权是正确性的关键。",
+  "key_points": [
+    "适用于非负权图的单源最短路径",
+    "每轮选择未确定顶点中 dist 最小的点加入确定集合",
+    "加入后对其邻接边进行松弛，以更新其他顶点的 dist",
+    "非负权是算法正确性的关键条件"
+  ],
+  "examples": [
+    "若有边 S-A=4，S-B=2，B-A=1，B-C=5，A-C=3，则先确定 S，再确定 B，并把 A 更新为 3；再确定 A，把 C 更新为 6。"
+  ],
+  "misconceptions": [
+    "Dijkstra 可以处理负权边",
+    "每轮是选择当前边权最小的边，而不是选择 dist 最小的未确定顶点"
+  ],
+  "qa_pairs": [
+    {
+      "q": "Dijkstra 算法解决什么问题？",
+      "a": "求非负权图中的单源最短路径。"
+    },
+    {
+      "q": "Dijkstra 为什么不能处理负权边？",
+      "a": "因为算法正确性依赖非负权条件，负权边会破坏贪心选择的可靠性。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "贪心法概述"
+  ],
+  "source_pages": [
+    33,
+    36
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "037_dijkstra算法",
+  "_chunk_pages": [
+    33,
+    36
+  ]
+}

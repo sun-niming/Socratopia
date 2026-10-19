@@ -1,0 +1,54 @@
+{
+  "title": "std::string的常用成员函数",
+  "definition": "`std::string`提供多个用于截取、查找、替换和判断前后缀的成员函数，包括 `substr()`、`find()`、`replace()`、`starts_with()`和 `ends_with()`。",
+  "key_points": [
+    "`substr(pos, len)`从指定位置 `pos`开始截取长度为 `len`的子字符串。",
+    "`find(str)`查找子字符串 `str`，并返回其位置；未找到时通常通过与 `std::string::npos`比较来判断。",
+    "`replace(pos, len, str)`用 `str`替换从 `pos`开始、长度为 `len`的子字符串。",
+    "`starts_with(str)`和 `ends_with(str)`分别判断字符串是否以指定字符串开头或结尾，返回布尔值。"
+  ],
+  "examples": [
+    "`auto part = text.substr(pos, len);`",
+    "`auto position = text.find(str);`",
+    "`if (position != std::string::npos) { ... }`",
+    "`text.replace(position, 2, strWorld.substr(3, 6));`",
+    "`if (text.starts_with(str)) { ... }`",
+    "`if (text.ends_with(str)) { ... }`"
+  ],
+  "misconceptions": [
+    "`find()`未找到子字符串时不能简单把返回值当作普通位置使用，应检查是否等于 `std::string::npos`。",
+    "`substr(pos, len)`中的第二个参数表示截取长度，不是结束下标。",
+    "`replace()`会修改字符串对象本身，而 `substr()`通常返回截取出的新字符串。",
+    "`starts_with()`和 `ends_with()`用于判断前缀和后缀，不是查找任意位置的子字符串。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何判断 `find()`是否找到了目标字符串？",
+      "a": "将返回的位置与 `std::string::npos`比较：若 `position != std::string::npos`，说明找到了。"
+    },
+    {
+      "q": "`substr(pos, len)`的两个参数分别表示什么？",
+      "a": "`pos`表示起始位置，`len`表示截取长度。"
+    },
+    {
+      "q": "`starts_with(str)`和 `ends_with(str)`分别判断什么？",
+      "a": "前者判断字符串是否以 `str`开头，后者判断字符串是否以 `str`结尾。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "std::string用于管理字符序列",
+    "字符串下标和位置"
+  ],
+  "source_pages": [
+    105,
+    108
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 std::string substr find replace starts_with ends_with npos 用法 教材 第108页",
+  "concept_id": "155_std_string的常用成员函数",
+  "_chunk_pages": [
+    105,
+    108
+  ]
+}

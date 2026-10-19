@@ -1,0 +1,46 @@
+{
+  "title": "map的erase删除操作",
+  "definition": "`std::map`可以通过`erase`删除元素。根据参数不同，`erase`可以删除指定迭代器位置的一个元素、删除指定迭代器范围内的元素，或者删除与给定键匹配的元素。按键删除时，传入键即可删除该键对应的元素。",
+  "key_points": [
+    "可以使用迭代器删除一个元素。",
+    "可以使用迭代器范围删除一段元素。",
+    "可以使用键删除匹配键的元素，例如`dataMap.erase(1)`。",
+    "对于不允许重复键的`map`，按键删除最多删除一个元素。",
+    "原文记载按迭代器删除单个元素和删除范围的复杂度分别为摊还常量时间和对数时间，但该表述与常见标准库复杂度描述存在疑点，需核实具体版本和译文。"
+  ],
+  "examples": [
+    "按键删除：`map<int, Data> dataMap; dataMap[1] = Data{4}; dataMap.erase(1);`。",
+    "按迭代器删除：`auto it = dataMap.find(1); if (it != dataMap.end()) { dataMap.erase(it); }`。",
+    "按范围删除：`dataMap.erase(dataMap.begin(), dataMap.end());`。"
+  ],
+  "misconceptions": [
+    "`erase(key)`会清空整个`map`；实际上它只删除与该键匹配的元素。",
+    "对不存在的键调用`erase(key)`会抛出异常；通常不会抛出异常，只是不删除任何元素。",
+    "`erase`只能接受迭代器，不能接受键；实际上关联容器提供按键删除形式。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何删除`dataMap`中键为1的元素？",
+      "a": "调用`dataMap.erase(1)`。"
+    },
+    {
+      "q": "`map`中不存在键1时调用`dataMap.erase(1)`会怎样？",
+      "a": "不会删除任何元素。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "std::map的查找操作"
+  ],
+  "source_pages": [
+    586,
+    586
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 std::map erase(iterator) erase(range) erase(key) complexity 标准文档",
+  "concept_id": "1214_map的erase删除操作",
+  "_chunk_pages": [
+    585,
+    588
+  ]
+}

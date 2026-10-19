@@ -1,0 +1,41 @@
+{
+  "title": "confirm 对话框",
+  "definition": "window.confirm([message]) 用于显示确认提示框，包含“确定”和“取消”按钮。用户点击“确定”时返回 true，点击“取消”时返回 false。",
+  "key_points": [
+    "调用形式：window.confirm([message])",
+    "对话框包含“确定”和“取消”按钮",
+    "点击“确定”返回 true，点击“取消”返回 false"
+  ],
+  "examples": [
+    "if (confirm('是否继续？')) { /* 继续 */ } else { /* 取消 */ }"
+  ],
+  "misconceptions": [
+    "confirm 的返回值不是字符串，而是布尔值 true 或 false",
+    "confirm 不是输入框，用户不能在里面输入文本"
+  ],
+  "qa_pairs": [
+    {
+      "q": "confirm() 点击“确定”后返回什么？",
+      "a": "true。"
+    },
+    {
+      "q": "confirm() 点击“取消”后返回什么？",
+      "a": "false。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "window 对象"
+  ],
+  "source_pages": [
+    333,
+    336
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "476_confirm_对话框",
+  "_chunk_pages": [
+    333,
+    336
+  ]
+}

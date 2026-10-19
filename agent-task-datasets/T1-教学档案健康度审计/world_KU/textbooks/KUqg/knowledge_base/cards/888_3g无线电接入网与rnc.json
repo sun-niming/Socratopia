@@ -1,0 +1,53 @@
+{
+  "title": "3G无线电接入网与RNC",
+  "definition": "3G无线电接入网是3G用户所看到的无线第一跳网络。无线电网络控制器（Radio Network Controller，RNC）通常控制多个小区的收发基站；在3G UMTS正式术语中，这种收发基站称为“节点B”（Node B）。每个小区的无线链路位于移动节点与节点B之间。RNC一方面通过MSC连接电路交换蜂窝语音网，另一方面通过SGSN连接分组交换因特网。",
+  "key_points": [
+    "3G无线电接入网构成用户接入网络的无线第一跳或最后一跳。",
+    "RNC通常控制几个小区的节点B。",
+    "移动节点通过无线链路与所在小区的节点B通信。",
+    "RNC通过MSC接入电路交换语音核心网。",
+    "RNC通过SGSN接入分组交换数据核心网。",
+    "3G语音与数据使用不同核心网，但共享同一个第一跳或最后一跳无线电接入网。"
+  ],
+  "examples": [
+    "3G语音路径可抽象为：$$\\text{移动节点}\\leftrightarrow\\text{节点B}\\leftrightarrow\\mathrm{RNC}\\leftrightarrow\\mathrm{MSC}\\leftrightarrow\\text{语音网}$$。",
+    "3G数据路径可抽象为：$$\\text{移动节点}\\leftrightarrow\\text{节点B}\\leftrightarrow\\mathrm{RNC}\\leftrightarrow\\mathrm{SGSN}\\leftrightarrow\\mathrm{GGSN}\\leftrightarrow\\text{因特网}$$。"
+  ],
+  "misconceptions": [
+    "错误地认为3G语音和数据从无线链路开始就使用完全分离的网络；二者共享无线电接入网，只在核心网中采用不同路径。",
+    "错误地认为RNC只连接数据网；它既通过SGSN连接分组数据网，也通过MSC连接电路交换语音网。",
+    "错误地认为节点B就是RNC；节点B是小区的收发基站，而RNC控制多个节点B或小区。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "3G UMTS中收发基站的正式名称是什么？",
+      "a": "节点B（Node B）。"
+    },
+    {
+      "q": "RNC如何分别连接语音网和数据网？",
+      "a": "通过MSC连接电路交换蜂窝语音网，通过SGSN连接分组交换的因特网数据核心网。"
+    },
+    {
+      "q": "3G语音与数据服务共享网络的哪一部分？",
+      "a": "共享第一跳或最后一跳的无线电接入网。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "无线电接入网",
+    "MSC",
+    "SGSN",
+    "电路交换与分组交换"
+  ],
+  "source_pages": [
+    377,
+    380
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "888_3g无线电接入网与rnc",
+  "_chunk_pages": [
+    377,
+    380
+  ]
+}

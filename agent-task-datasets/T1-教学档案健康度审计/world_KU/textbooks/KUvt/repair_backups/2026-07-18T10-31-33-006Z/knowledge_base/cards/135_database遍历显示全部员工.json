@@ -1,0 +1,42 @@
+{
+  "title": "Database遍历显示全部员工",
+  "definition": "Database::displayAll() 用范围 for 循环遍历成员集合 m_employees，并对每个员工对象调用 display()，因此会显示数据库中的所有员工。",
+  "key_points": [
+    "遍历形式为 `for (const auto& employee : m_employees)`。",
+    "循环变量使用 `const auto&`，表示以常量引用方式访问集合中的员工对象。",
+    "每个员工对象都调用 `employee.display()`。"
+  ],
+  "examples": [
+    "核心逻辑可表示为：\n```cpp\nvoid Database::displayAll() const {\n    for (const auto& employee : m_employees) {\n        employee.display();\n    }\n}\n```"
+  ],
+  "misconceptions": [
+    "displayAll() 不是只显示当前在职员工；原文中它对 m_employees 中的每个员工都调用 display()。",
+    "`const auto&` 不会复制员工对象，而是以常量引用访问对象。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "Database::displayAll() 的作用是什么？",
+      "a": "遍历 m_employees 中的所有员工，并对每个员工调用 display()。"
+    },
+    {
+      "q": "displayAll() 是否会根据在职状态筛选员工？",
+      "a": "从原文给出的实现看不会；它直接显示所有员工。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++范围for循环",
+    "C++常量引用"
+  ],
+  "source_pages": [
+    97,
+    100
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "135_database遍历显示全部员工",
+  "_chunk_pages": [
+    97,
+    100
+  ]
+}

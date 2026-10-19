@@ -1,0 +1,43 @@
+{
+  "title": "localStorage",
+  "definition": "localStorage 用于持久性地在用户浏览器中存储数据；即使关闭浏览器窗口或标签页，甚至重启电脑，存储在 localStorage 中的数据仍然存在，直到被明确删除。",
+  "key_points": [
+    "localStorage 具有持久性存储特性。",
+    "关闭浏览器窗口或标签页后，数据仍然保留。",
+    "重启电脑后，数据仍然存在。",
+    "数据会一直保存，直到被明确删除。"
+  ],
+  "examples": [
+    "把用户偏好保存到 localStorage 中，即使关闭浏览器后再打开，数据仍可保留。"
+  ],
+  "misconceptions": [
+    "错误理解：关闭标签页后 localStorage 中的数据会自动清空。",
+    "错误理解：重启电脑后 localStorage 中的数据会丢失。",
+    "错误理解：localStorage 只能临时保存当前会话数据。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "localStorage 的数据什么时候会消失？",
+      "a": "只有在被明确删除时才会消失。"
+    },
+    {
+      "q": "关闭浏览器或重启电脑后，localStorage 中的数据还在吗？",
+      "a": "还在。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "Web Storage API"
+  ],
+  "source_pages": [
+    379,
+    380
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "506_localstorage",
+  "_chunk_pages": [
+    377,
+    380
+  ]
+}

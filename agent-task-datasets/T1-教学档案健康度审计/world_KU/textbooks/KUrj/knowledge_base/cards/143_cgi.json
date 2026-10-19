@@ -1,0 +1,43 @@
+{
+  "title": "CGI",
+  "definition": "CGI 允许 Web Server 执行外部程序来生成动态内容。原文提到 tinyhttpd 包含 CGI 思路，但 CGI 的安全风险和实现复杂度更高，因此本项目只做静态文件，CGI 作为扩展方向。",
+  "key_points": [
+    "CGI 的作用是让 Web Server 执行外部程序生成动态内容。",
+    "它比纯静态文件服务更复杂，也有更高的安全风险。",
+    "原文指出 tinyhttpd 包含 CGI 思路。",
+    "本项目当前只做静态文件，不把 CGI 放进主代码。"
+  ],
+  "examples": [
+    "例如：将请求交给外部程序，由外部程序输出动态页面内容。"
+  ],
+  "misconceptions": [
+    "CGI 就是静态文件访问。",
+    "做 Web Server 一定要先实现 CGI。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "CGI 的核心作用是什么？",
+      "a": "让 Web Server 执行外部程序来生成动态内容。"
+    },
+    {
+      "q": "为什么本项目不把 CGI 放进主代码？",
+      "a": "因为它的安全风险和实现复杂度更高，而本项目只做静态文件。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "Web Server 基础",
+    "进程/程序执行基础"
+  ],
+  "source_pages": [
+    93,
+    96
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "143_cgi",
+  "_chunk_pages": [
+    93,
+    96
+  ]
+}

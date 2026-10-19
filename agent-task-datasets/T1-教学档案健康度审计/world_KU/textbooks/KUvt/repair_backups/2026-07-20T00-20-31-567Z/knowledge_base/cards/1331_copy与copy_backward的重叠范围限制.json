@@ -1,0 +1,46 @@
+{
+  "title": "copy与copy_backward的重叠范围限制",
+  "definition": "copy和copy_backward都可以在满足特定方向限制时处理源范围与目标范围的重叠。对于copy(b,e,d)，当目标起点d位于源范围之前时允许重叠；当d位于$[b,e)$内时行为不确定。对于copy_backward(b,e,d)，当目标终点d位于源范围尾端e之后时允许重叠；当d位于$(b,e]$范围内时行为不确定。",
+  "key_points": [
+    "copy从前向后复制，适合目标区域位于源区域之前的重叠情况。",
+    "copy_backward从后向前复制，适合目标终点位于源范围之后的重叠情况。",
+    "不满足对应重叠限制时，程序行为不确定，不能依赖结果。"
+  ],
+  "examples": [
+    "copy的重叠条件可写为：对于copy(b,e,d)，若$d$在$b$之前则可重叠；若$d\\in[b,e)$，行为不确定。",
+    "copy_backward的重叠条件可写为：对于copy_backward(b,e,d)，若$d$在$e$之后则可正确重叠；若$d\\in(b,e]$，行为不确定。",
+    "原文将copy示例改为copy_backward时，第三个参数从begin(vec2)改为end(vec2)：copy_backward(cbegin(vec1), cend(vec1), end(vec2));"
+  ],
+  "misconceptions": [
+    "copy_backward不是把元素顺序反转，而是从源范围末端开始向后复制，源元素的相对顺序仍保持。",
+    "“可以重叠”不是表示任意重叠都安全，必须满足相应的方向条件。",
+    "copy_backward的第三个参数是目标范围的尾后位置，不是目标范围的起始位置。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "copy_backward与copy的主要区别是什么？",
+      "a": "copy按从前到后的方向复制，copy_backward从源范围末端向前复制，并以目标范围尾后位置作为第三个参数。"
+    },
+    {
+      "q": "对于copy(b,e,d)，当d位于[b,e)内时能否保证结果？",
+      "a": "不能，行为不确定。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "copy算法及目标范围要求",
+    "迭代器范围",
+    "重叠内存区域"
+  ],
+  "source_pages": [
+    640,
+    640
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1331_copy与copy_backward的重叠范围限制",
+  "_chunk_pages": [
+    637,
+    640
+  ]
+}

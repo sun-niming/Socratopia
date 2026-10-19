@@ -1,0 +1,44 @@
+{
+  "title": "带有 _t 后缀的类型 trait 别名模板",
+  "definition": "对于具有类型成员的类型 trait，C++ 标准库提供了同名但带 `_t` 后缀的别名模板，用于直接取得 trait 的嵌套 `type` 类型。例如，`std::conditional_t<条件, T, U>` 等价于 `typename std::conditional<条件, T, U>::type`。",
+  "key_points": [
+    "不带 `_t` 的形式通常需要通过 `::type` 访问嵌套类型。",
+    "带 `_t` 的形式是对应 trait 的类型别名模板，写法更简洁。",
+    "`std::conditional_t<Condition, T, U>` 等价于 `typename std::conditional<Condition, T, U>::type`。",
+    "`_t` 后缀表示取得的是一个类型，而不是直接取得布尔值或 trait 对象。"
+  ],
+  "examples": [
+    "等价写法：\n$$\\operatorname{typename}\\ std::conditional<\\operatorname{is\\_nothrow\\_move\\_assignable\\_v<T>},T\\&\\&,\\operatorname{const}\\ T\\&\\>::type$$\n等价于：\n$$std::conditional\\_t<\\operatorname{is\\_nothrow\\_move\\_assignable\\_v<T>},T\\&\\&,\\operatorname{const}\\ T\\&>$$",
+    "在 move_assign_if_noexcept() 的返回类型中，可以使用 `std::conditional_t<...>` 替代 `typename std::conditional<...>::type`。"
+  ],
+  "misconceptions": [
+    "带 `_t` 的别名模板不是另一个独立的判断 trait，而是对原 trait 的 `::type` 的简写。",
+    "`_t` 与 `_v` 的用途不同：`_t` 通常表示类型别名，`_v` 通常表示变量模板形式的值。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`std::conditional_t<A, B, C>` 等价于什么？",
+      "a": "等价于 `typename std::conditional<A, B, C>::type`。"
+    },
+    {
+      "q": "类型 trait 名称中的 `_t` 通常表示什么？",
+      "a": "表示该名称是用于取得 trait 嵌套类型的别名模板。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "模板类型成员与 typename",
+    "类型 trait 基础"
+  ],
+  "source_pages": [
+    783,
+    783
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1609_带有__t_后缀的类型_trait_别名模板",
+  "_chunk_pages": [
+    781,
+    784
+  ]
+}

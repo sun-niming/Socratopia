@@ -1,0 +1,41 @@
+{
+  "title": "class 语法的基本元素",
+  "definition": "在 ES6 中，class 由 class 关键字、类名、构造函数、方法等基本元素构成。语法上，class 可以看作一种特殊类型的函数，并遵循一定的命名规则和语法结构。",
+  "key_points": [
+    "class 关键字是类定义的起点",
+    "类名、构造函数、方法等属于基本元素",
+    "class 在语法上可看作特殊类型的函数"
+  ],
+  "examples": [
+    "class Person { constructor(name, age) { ... } say(){...} }"
+  ],
+  "misconceptions": [
+    "误以为 class 只是普通对象字面量",
+    "误以为 class 不是函数或与函数毫无关系"
+  ],
+  "qa_pairs": [
+    {
+      "q": "class 的基本语法元素有哪些？",
+      "a": "class 关键字、类名、构造函数、方法等。"
+    },
+    {
+      "q": "从语法上看，class 可以看作什么？",
+      "a": "可以看作一种特殊类型的函数。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "类的概念"
+  ],
+  "source_pages": [
+    289,
+    292
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "418_class_语法的基本元素",
+  "_chunk_pages": [
+    289,
+    292
+  ]
+}

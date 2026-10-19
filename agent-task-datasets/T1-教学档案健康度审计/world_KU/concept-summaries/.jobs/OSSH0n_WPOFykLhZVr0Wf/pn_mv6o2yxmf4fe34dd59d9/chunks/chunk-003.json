@@ -1,0 +1,230 @@
+{
+  "chunkId": "chunk-003",
+  "messageRange": [
+    22,
+    33
+  ],
+  "topics": [
+    {
+      "name": "else 悬空二义性",
+      "facts": [
+        "栈里是 if expr then stmt、输入以 else 开头时，若选归约，else 只能配更外面的 if；但语言想要 else 就近配对",
+        "碰到 else 就选移入，使每个 else 跟前一个未配对的 then 结合",
+        "这类文法本身是二义的，所以不是 LR 的；用遇冲突指定移入的修正技术能驯服它"
+      ],
+      "examples": [
+        "栈模式：if expr then stmt，输入：else",
+        "修正动作：碰到 else 选移入"
+      ],
+      "sourceMessageIndexes": [
+        22,
+        23
+      ]
+    },
+    {
+      "name": "归约/归约冲突与例 4.39",
+      "facts": [
+        "过程调用产生式：stmt -> id ( parameter_list )，parameter -> id",
+        "数组引用产生式：expr -> id ( expr_list )，expr -> id",
+        "输入 p(i,j) 的词法单元流是 id ( id , id )",
+        "分析器移入前三个单元后栈是 ... id ( id，栈顶 id 同时是 parameter -> id 和 expr -> id 的体",
+        "光看栈里符号无法决定该归约到 parameter 还是 expr",
+        "缺的信息在栈外：需要知道 p 是过程名还是数组名，要查符号表",
+        "解法：词法分析器返回单元前先查符号表，是过程名就返回 procid 而不是 id",
+        "栈里出现 ... procid ( id 就选 parameter -> id；出现 ... id ( id 就选 expr -> id",
+        "拍板的是栈顶往下第三个符号 procid，它自己没参与归约"
+      ],
+      "examples": [
+        "输入 id ( id , id ) 对应 p(i,j)",
+        "栈 ... procid ( id -> 用 (5) parameter -> id 归约",
+        "栈 ... id ( id -> 用 (7) expr -> id 归约",
+        "图 4-30 产生式：(1) stmt -> id ( parameter_list )，(2) stmt -> expr := expr，(3) parameter_list -> parameter_list , parameter，(4) parameter_list -> parameter，(5) parameter -> id，(6) expr -> id ( expr_list )，(7) expr -> id，(8) expr_list -> expr_list , expr，(9) expr_list -> expr"
+      ],
+      "sourceMessageIndexes": [
+        23,
+        24,
+        25,
+        26,
+        27
+      ]
+    },
+    {
+      "name": "LR 分析技术介绍与 LR(k) 含义",
+      "facts": [
+        "LR(k) 中 L 表示对输入从左到右扫描",
+        "R 表示反向构造最右推导，即归约序列倒过来写",
+        "k 表示做出分析决定时向前看 k 个输入符号",
+        "k=0 和 k=1 才有实践意义",
+        "编译中真实使用的文法通常落在 LR(1)，向前看一个符号就够",
+        "LR 分析器是表格驱动，结构与非递归 LL 分析器很像：驱动程序加分析表",
+        "能给某文法构造出分析表的，称它是 LR 文法",
+        "LR 分析器优点：几乎所有程序设计语言构造只要能写出上下文无关文法就能构造识别它的 LR 分析器；是已知最通用的无回溯移入-归约技术且效率高；从左到右扫描时尽可能早发现错误；LR 文法是 LL 文法的真超集",
+        "代价是手工构造工作量巨大，得靠 LR 分析器生成工具（4.9 节 Yacc）自动生成"
+      ],
+      "examples": [
+        "LR(1) 最多向前看一个符号",
+        "4.9 节 Yacc"
+      ],
+      "sourceMessageIndexes": [
+        27,
+        28,
+        29
+      ]
+    },
+    {
+      "name": "LR(0) 项",
+      "facts": [
+        "文法 G 的 LR(0) 项是 G 的一条产生式再加一个点，点在体里某个位置",
+        "一条产生式体多长，就能生成多少个项",
+        "点表示我已经看到哪儿了：点在开头表示还没看到，点在最右端表示可以归约成左部",
+        "点跑到体的最右端提示可以下剪子（归约）",
+        "A -> epsilon 只有一个项 A -> ·"
+      ],
+      "examples": [
+        "A -> XYZ 生出四个项：A -> ·XYZ，A -> X·YZ，A -> XY·Z，A -> XYZ·",
+        "A -> epsilon 只有一个项 A -> ·"
+      ],
+      "sourceMessageIndexes": [
+        29,
+        31
+      ]
+    },
+    {
+      "name": "图 4-34 分析表",
+      "facts": [
+        "图 4-34 栈里存状态编号 0、5、3、2、7 等，旁边符号列只是翻出对应文法符号",
+        "每步动作都是拿当前栈顶状态加下一个输入符号去查表定",
+        "状态 5 敢按 F -> id 归约，是因为状态 5 里装着项 F -> id·，点已落到最右端"
+      ],
+      "examples": [
+        "动作栏写着移入到 5、按 F -> id 归约",
+        "状态 5 含项 F -> id·"
+      ],
+      "sourceMessageIndexes": [
+        31
+      ]
+    },
+    {
+      "name": "第 7 章运行时刻环境：栈中非局部数据的访问",
+      "facts": [
+        "第 7 章运行时刻环境对应书上 284 页",
+        "前面问句子合不合文法，这一章起问程序跑起来时变量和数据住在内存哪儿、怎么被找出来",
+        "练习 7.2.6 给 C 函数 f，参数是值参 x、指向 b 的指针 py、指向 a 的指针 ppz，函数体对 **ppz、*py、x 各加 1 再算返回值",
+        "7.3 讲栈中非局部数据的访问，核心是过程 p 里用到不属于 p 的数据时怎么摸到",
+        "7.3.1 没有嵌套过程：C 系列语言变量两种去向——全局变量分配在静态区、编译时刻地址固定；其他变量是栈顶活动的局部变量、顺 top_sp 找",
+        "全局变量静态分配让过程可当参数传递、也可当结果返回，因为非局部变量都指向静态存储，与激活无关",
+        "7.3.2 语言允许嵌套声明过程时变复杂：编译时明知 p 嵌在 q 里，运行时也确定不了活动记录谁高谁低，因为可能递归、栈里同时好几份活动记录"
+      ],
+      "examples": [
+        "练习 7.2.6 的 C 函数 f",
+        "top_sp 指针找局部变量",
+        "静态区放全局变量"
+      ],
+      "sourceMessageIndexes": [
+        33
+      ]
+    }
+  ],
+  "learnerEvidence": [
+    {
+      "kind": "correct",
+      "content": "答出栈里出现 ... procid ( id 时栈顶 id 按 parameter -> id 归约，procid 是从上往下第三个符号",
+      "sourceMessageIndexes": [
+        26
+      ]
+    },
+    {
+      "kind": "correct",
+      "content": "说 R 就是归约方法",
+      "sourceMessageIndexes": [
+        28
+      ]
+    }
+  ],
+  "keyInsights": [
+    {
+      "content": "R 就是归约方法",
+      "sourceMessageIndexes": [
+        28,
+        29
+      ]
+    }
+  ],
+  "openQuestions": [
+    {
+      "content": "例 4.39 里为什么只靠栈里的符号永远分不出该用哪条产生式？缺失的信息本质上属于哪类知识，为什么栈和输入 buffer 装不下它？",
+      "sourceMessageIndexes": [
+        23
+      ]
+    },
+    {
+      "content": "拿表达式文法产生式 E -> E + T，把它的项全写出来，哪一个项表示 E 和 + 都已经拿到手、正等着 T？",
+      "sourceMessageIndexes": [
+        29,
+        31
+      ]
+    },
+    {
+      "content": "递归函数栈里堆了好几份活动记录，执行到读全局变量 v 时，需要像查局部变量那样判断该读哪一份副本吗？为什么？",
+      "sourceMessageIndexes": [
+        33
+      ]
+    }
+  ],
+  "reviewCandidates": [
+    {
+      "question": "碰到 else 时，悬空 else 二义性为什么选移入而不是归约？",
+      "answer": "归约会把 if expr then stmt 收成 stmt，使 else 只能配更外面的 if，与 else 就近配对相反；选移入使 else 跟前一个未配对的 then 结合，实现就近配对。该文法本身二义，不是 LR 的，用遇冲突指定移入的修正技术驯服。",
+      "sourceMessageIndexes": [
+        23
+      ]
+    },
+    {
+      "question": "例 4.39 中输入 p(i,j) 到达栈 ... id ( id 时，为什么光看栈无法决定归约？教材怎么解决？",
+      "answer": "栈顶 id 同时是 parameter -> id 和 expr -> id 的体，需要知道 p 是过程名还是数组名，这要查符号表。解法是让词法分析器先查符号表，过程名返回 procid；栈里出现 ... procid ( id 就用 parameter -> id，出现 ... id ( id 就用 expr -> id。拍板的是栈顶往下第三个符号 procid。",
+      "sourceMessageIndexes": [
+        23,
+        25,
+        26,
+        27
+      ]
+    },
+    {
+      "question": "LR(k) 中 L、R、k 分别是什么意思？R 与归约什么关系？",
+      "answer": "L 是从左到右扫描输入；R 是反向构造最右推导；k 是做出分析决定时向前看 k 个输入符号。归约序列倒过来写就是最右推导，所以 R 对应归约。",
+      "sourceMessageIndexes": [
+        27,
+        28,
+        29
+      ]
+    },
+    {
+      "question": "A -> XYZ 的 LR(0) 项有哪些？点跑到最右端意味着什么？",
+      "answer": "A -> ·XYZ，A -> X·YZ，A -> XY·Z，A -> XYZ·。点跑到最右端意味着 XYZ 全看齐了，是时候归约成 A。",
+      "sourceMessageIndexes": [
+        29
+      ]
+    },
+    {
+      "question": "图 4-34 与图 4-28 在栈的表示上有什么不同？状态 5 为什么敢按 F -> id 归约？",
+      "answer": "图 4-28 栈里存文法符号 id、T、F，图 4-34 栈里存状态编号。状态 5 里装着项 F -> id·，点已落到最右端，所以敢按 F -> id 归约。",
+      "sourceMessageIndexes": [
+        31
+      ]
+    },
+    {
+      "question": "7.3.1 没有嵌套过程时，C 系列语言的变量如何访问？全局变量静态分配有什么好处？",
+      "answer": "全局变量分配在静态区、位置固定、编译时刻直接用静态地址访问；其他变量是栈顶活动的局部变量，顺 top_sp 找。全局变量静态分配让过程可当参数传递、也可当结果返回，因为非局部变量都指向静态存储、与激活无关。",
+      "sourceMessageIndexes": [
+        33
+      ]
+    },
+    {
+      "question": "一旦语言允许嵌套声明过程，访问非局部数据复杂在哪？",
+      "answer": "哪怕编译时明知 p 的声明嵌在 q 里，运行时也确定不了它们的活动记录在栈里谁高谁低，因为 p 或 q 都可能是递归的，栈里可能同时躺着好几份活动记录。",
+      "sourceMessageIndexes": [
+        33
+      ]
+    }
+  ]
+}

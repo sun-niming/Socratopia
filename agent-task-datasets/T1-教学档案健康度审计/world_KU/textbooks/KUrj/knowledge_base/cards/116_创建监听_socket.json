@@ -1,0 +1,45 @@
+{
+  "title": "创建监听 socket",
+  "definition": "创建监听 socket 的标准流程是：先用 `socket` 建立 TCP 套接字，再设置 `SO_REUSEADDR`，然后 `bind` 到指定地址和端口，最后 `listen` 进入监听状态。任何一步失败都应关闭已打开的文件描述符并返回错误。",
+  "key_points": [
+    "`socket(AF_INET, SOCK_STREAM, 0)` 创建 TCP 监听 socket。",
+    "使用 `setsockopt(..., SO_REUSEADDR, ...)` 提高端口复用的便利性。",
+    "`bind` 把 socket 绑定到 `INADDR_ANY` 和指定端口。",
+    "`listen(listen_fd, 64)` 让 socket 开始接受连接。",
+    "`bind` 或 `listen` 失败时要先 `close(listen_fd)` 再返回 `-1`。"
+  ],
+  "examples": [
+    "参考骨架：`int listen_fd = socket(AF_INET, SOCK_STREAM, 0);`",
+    "`setsockopt(listen_fd, SOL_SOCKET, SO_REUSEADDR, &opt, sizeof(opt));`",
+    "`addr.sin_addr.s_addr = htonl(INADDR_ANY);`",
+    "`addr.sin_port = htons((uint16_t)port);`",
+    "`listen(listen_fd, 64);`"
+  ],
+  "misconceptions": [
+    "以为只要 `socket` 成功就已经能对外提供服务。",
+    "以为 `bind` 失败后可以继续用同一个监听 fd。",
+    "以为 `SO_REUSEADDR` 可有可无，完全没有作用。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "创建监听 socket 的顺序是什么？",
+      "a": "先 `socket`，再设置 `SO_REUSEADDR`，然后 `bind`，最后 `listen`。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "socket 编程基础",
+    "IPv4 地址与端口"
+  ],
+  "source_pages": [
+    74,
+    75
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "116_创建监听_socket",
+  "_chunk_pages": [
+    73,
+    76
+  ]
+}

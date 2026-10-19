@@ -1,0 +1,34 @@
+{
+  "title": "CSS字体属性",
+  "definition": "CSS 字体属性用于控制文本的字体相关外观，主要包括字体名、字号、加粗和斜体等。",
+  "key_points": [
+    "常见字体属性有 font-family、font-size、font-style、font-weight 和 font。",
+    "这些属性分别用于设置字体系列、字号、斜体、粗细和字体简写。"
+  ],
+  "examples": [
+    "font-family: \"Microsoft YaHei\", \"微软雅黑\";",
+    "font-size: 14px; font-style: italic; font-weight: bold;"
+  ],
+  "misconceptions": [
+    "字体样式只等于字体名称，实际上还包括字号、粗细和斜体等。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "CSS 字体属性主要控制文本的哪些外观？",
+      "a": "字体名、字号、加粗、斜体等。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [],
+  "source_pages": [
+    113,
+    114
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "177_css字体属性",
+  "_chunk_pages": [
+    113,
+    116
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "title": "TCP的SampleRTT测量",
+  "definition": "SampleRTT是从某个TCP报文段被发出（交给IP层）到该报文段的确认被收到之间的时间量。大多数TCP实现不会在同一时刻为每个已发送报文段都测量SampleRTT，而是在任意时刻只为一个已发送但尚未确认的报文段估计SampleRTT。TCP不为已经重传的报文段计算SampleRTT，只测量只传输过一次的报文段。",
+  "key_points": [
+    "SampleRTT用于估计发送方与接收方之间的往返时间RTT。",
+    "由于路由器拥塞和端系统负载变化，不同报文段的SampleRTT可能发生波动。",
+    "重传报文段的确认无法明确对应原始传输还是重传传输，因此教材规定TCP不为已重传报文段计算SampleRTT。"
+  ],
+  "examples": [
+    "若某报文段交给IP层后，经过一段时间收到对该报文段的确认，则这段时间可作为该报文段的SampleRTT；若该报文段曾被重传，则不采用它计算SampleRTT。"
+  ],
+  "misconceptions": [
+    "SampleRTT不是固定常数，而是会随网络拥塞和端系统负载变化。",
+    "TCP不是为每个已发送报文段都同时设置并测量一个独立的SampleRTT。",
+    "已重传报文段的确认不能直接用于可靠地测量该报文段的SampleRTT。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "SampleRTT的测量区间是什么？",
+      "a": "从某个报文段被发出并交给IP层开始，到收到对该报文段的确认结束。"
+    },
+    {
+      "q": "TCP是否为已经重传的报文段计算SampleRTT？",
+      "a": "不计算；TCP只为传输一次的报文段测量SampleRTT。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "TCP超时与重传"
+  ],
+  "source_pages": [
+    175,
+    176
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "427_tcp的samplertt测量",
+  "_chunk_pages": [
+    173,
+    176
+  ]
+}

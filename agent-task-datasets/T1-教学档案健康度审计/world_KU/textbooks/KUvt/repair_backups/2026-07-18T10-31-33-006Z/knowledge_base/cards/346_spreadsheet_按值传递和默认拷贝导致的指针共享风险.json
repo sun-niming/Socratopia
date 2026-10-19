@@ -1,0 +1,45 @@
+{
+  "title": "Spreadsheet 按值传递和默认拷贝导致的指针共享风险",
+  "definition": "原文展示了函数 void printSpreadsheet(Spreadsheet s) 按值接收 Spreadsheet 对象，以及多个 Spreadsheet 对象之间的拷贝关系。由于 Spreadsheet 含有指针成员 m_cells，若采用编译器生成的默认拷贝方式，拷贝对象可能只复制指针值，使多个对象的 m_cells 指向同一块动态数组。这样会导致对象生命周期和资源释放出现问题，例如一个对象析构后，另一个对象中的 m_cells 可能成为悬空指针；多个对象析构时还可能重复释放同一数组。",
+  "key_points": [
+    "printSpreadsheet(Spreadsheet s) 的参数是按值传递，会产生一个 Spreadsheet 副本。",
+    "Spreadsheet 对象包含动态数组指针 m_cells；浅拷贝会复制指针地址，而不是复制指针指向的数组内容。",
+    "如果原对象和副本共享同一个 m_cells，任一对象释放该数组后，另一个对象的 m_cells 就可能成为悬空指针。",
+    "共享同一动态数组的多个对象在析构时可能重复释放同一资源。"
+  ],
+  "examples": [
+    "原文中的调用形式：\nSpreadsheet s1{4, 3};\nprintSpreadsheet(s1);",
+    "原文还展示了两个对象：\nSpreadsheet s1{2, 2}, s2{4, 3};\n若对象拷贝只复制 m_cells 指针，则可能出现：\n$$m\\_cells(s1) = m\\_cells(s2)$$\n这表示两个对象指向同一动态数组，而不是各自拥有独立数组。"
+  ],
+  "misconceptions": [
+    "按值传递并不保证动态数组内容会被深拷贝；如果类没有自定义拷贝控制，指针成员可能发生浅拷贝。",
+    "两个 Spreadsheet 对象的宽度和高度不同，并不意味着它们的 m_cells 一定指向不同数组。",
+    "悬空指针不是空指针；它仍保存一个地址，但该地址所指向的对象已经被释放。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么 printSpreadsheet(Spreadsheet s) 可能带来资源管理问题？",
+      "a": "因为参数按值传递会创建 Spreadsheet 副本；如果副本对 m_cells 进行浅拷贝，原对象和副本会共享同一动态数组，从而可能产生悬空指针或重复释放。"
+    },
+    {
+      "q": "Spreadsheet 的两个对象如果共享同一个 m_cells，会有什么风险？",
+      "a": "其中一个对象析构并释放数组后，另一个对象的 m_cells 会成为悬空指针；如果两个对象都尝试释放该数组，还可能发生重复释放。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "C++ 指针成员与动态内存管理",
+    "C++ 拷贝构造和按值传递"
+  ],
+  "source_pages": [
+    263,
+    264
+  ],
+  "needs_verification": true,
+  "verify_query": "《C++20高级编程》第5版 第261-264页 Spreadsheet printSpreadsheet 按值传递 m_cells 悬空指针 浅拷贝 析构函数",
+  "concept_id": "346_spreadsheet_按值传递和默认拷贝导致的指针共享风险",
+  "_chunk_pages": [
+    261,
+    264
+  ]
+}

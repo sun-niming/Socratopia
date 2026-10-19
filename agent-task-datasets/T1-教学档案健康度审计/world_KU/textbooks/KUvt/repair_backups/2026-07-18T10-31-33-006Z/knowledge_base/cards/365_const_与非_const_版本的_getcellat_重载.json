@@ -1,0 +1,54 @@
+{
+  "title": "const 与非 const 版本的 getCellAt 重载",
+  "definition": "同一个成员函数可以通过是否带 const 限定，分别提供面向普通对象和 const 对象的重载。原文中的 Spreadsheet::getCellAt(x, y) 有两个版本：普通版本返回 SpreadsheetCell&，const 版本返回 const SpreadsheetCell&。这样，普通 Spreadsheet 可以取得可修改的单元格引用，而 const Spreadsheet 只能取得只读引用。",
+  "key_points": [
+    "两个版本的函数参数列表相同，但成员函数的 const 限定不同，因此可以构成重载。",
+    "const 版本：const SpreadsheetCell& getCellAt(size_t x, size_t y) const;",
+    "非 const 版本：SpreadsheetCell& getCellAt(size_t x, size_t y);",
+    "对普通对象调用时选择非 const 版本；对 const 对象调用时选择 const 版本。",
+    "const 版本先调用 verifyCoordinate(x, y)，再返回 m_cells[x][y]。"
+  ],
+  "examples": [
+    "函数声明：const SpreadsheetCell& getCellAt(size_t x, size_t y) const;",
+    "函数声明：SpreadsheetCell& getCellAt(size_t x, size_t y);",
+    "普通对象调用：Spreadsheet sheet1{5, 6}; SpreadsheetCell& cell1{sheet1.getCellAt(1, 1)};",
+    "const 对象调用：const Spreadsheet sheet2{5, 6}; const SpreadsheetCell& cell2{sheet2.getCellAt(1, 1)};",
+    "const 版本的核心实现：const SpreadsheetCell& Spreadsheet::getCellAt(size_t x, size_t y) const { verifyCoordinate(x, y); return m_cells[x][y]; }"
+  ],
+  "misconceptions": [
+    "返回类型不同本身不能构成重载；这里能够重载的关键是一个成员函数带 const、另一个不带 const。",
+    "const Spreadsheet 调用 getCellAt() 时不会得到可修改的 SpreadsheetCell&，而是 const SpreadsheetCell&。",
+    "const 对象并不是不能调用 getCellAt()；它会调用带 const 限定的版本。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么 Spreadsheet 需要同时提供 const 和非 const 两个 getCellAt 重载？",
+      "a": "普通对象需要通过 SpreadsheetCell& 修改单元格，const 对象只能通过 const SpreadsheetCell& 读取单元格；两个重载分别提供这两种访问权限。"
+    },
+    {
+      "q": "const Spreadsheet 调用 getCellAt(1, 1) 的返回类型是什么？",
+      "a": "返回类型是 const SpreadsheetCell&。"
+    },
+    {
+      "q": "普通 Spreadsheet 调用 getCellAt(1, 1) 的返回类型是什么？",
+      "a": "返回类型是 SpreadsheetCell&。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "const 成员函数",
+    "函数重载",
+    "引用与 const 引用"
+  ],
+  "source_pages": [
+    277,
+    280
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "365_const_与非_const_版本的_getcellat_重载",
+  "_chunk_pages": [
+    277,
+    280
+  ]
+}

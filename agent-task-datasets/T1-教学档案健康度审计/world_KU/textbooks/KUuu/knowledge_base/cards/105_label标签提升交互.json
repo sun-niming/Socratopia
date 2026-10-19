@@ -1,0 +1,42 @@
+{
+  "title": "label标签提升交互",
+  "definition": "label 标签用于增强表单控件的可点击区域。点击 label 文本时，会自动触发它所包裹的控件，从而扩大点击范围，提升用户体验，使操作更便捷。",
+  "key_points": [
+    "点击 label 文本会自动触发被包裹的控件。",
+    "label 可以增大表单控件的点击范围。",
+    "使用 label 能显著提升用户体验（UX）。"
+  ],
+  "examples": [
+    "<label><input type=\"radio\" name=\"sex\" value=\"m\"> 男</label>",
+    "<label><input type=\"checkbox\" name=\"agree\"> 同意协议</label>"
+  ],
+  "misconceptions": [
+    "label 只是装饰文字，没有功能。",
+    "只有点击控件本体才会触发，点击文字不会生效。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么给表单控件加 label？",
+      "a": "因为点击 label 文本会触发被包裹的控件，能增大点击范围并提升用户体验。"
+    },
+    {
+      "q": "label 的主要作用是什么？",
+      "a": "扩大可点击区域并增强交互便捷性。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "HTML表单元素"
+  ],
+  "source_pages": [
+    69,
+    72
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "105_label标签提升交互",
+  "_chunk_pages": [
+    69,
+    72
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "title": "SSL是对TCP的应用层加强",
+  "definition": "TCP和UDP本身都没有提供加密机制。SSL（安全套接字层）是对TCP的加强，不是与TCP和UDP处于同一层次的第三种因特网运输协议。SSL在应用层实现，能够在保留TCP传统功能的基础上提供加密、数据完整性和端点鉴别等进程到进程的安全性服务。",
+  "key_points": [
+    "使用SSL时，发送进程先把明文数据传给SSL套接字。",
+    "发送端SSL负责加密，再把密文传给TCP套接字。",
+    "接收端TCP套接字把密文交给SSL，SSL解密后通过SSL套接字将明文交给接收进程。",
+    "要使用SSL，应用程序客户端和服务器端都需要包含SSL代码，通常利用现有库和类。",
+    "SSL具有类似传统TCP套接字API的套接字API。"
+  ],
+  "examples": [
+    "数据路径可表示为：发送进程明文$\\rightarrow$SSL加密$\\rightarrow$TCP传输$\\rightarrow$接收端SSL解密$\\rightarrow$接收进程明文。",
+    "若应用直接通过TCP发送明文口令，口令可能在发送方与接收方之间的中间链路上被嗅探。"
+  ],
+  "misconceptions": [
+    "SSL是第三种运输层协议；实际上原文明确指出SSL是应用层对TCP的加强。",
+    "TCP会自动加密应用数据；原文明确指出TCP和UDP都没有提供加密机制。",
+    "SSL只负责加密，不负责其他安全属性；原文还列出数据完整性和端点鉴别。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "SSL与TCP、UDP是什么关系？",
+      "a": "SSL不是与TCP和UDP同层次的第三种运输协议，而是在应用层实现的对TCP的加强。"
+    },
+    {
+      "q": "使用SSL时，数据如何从发送进程到达接收进程？",
+      "a": "发送进程把明文交给SSL，SSL加密后交给TCP；接收端TCP把密文交给SSL，SSL解密后再把明文交给接收进程。"
+    },
+    {
+      "q": "TCP和UDP本身是否提供加密？",
+      "a": "不提供。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "TCP",
+    "应用层",
+    "加密"
+  ],
+  "source_pages": [
+    79,
+    80
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "204_ssl是对tcp的应用层加强",
+  "_chunk_pages": [
+    77,
+    80
+  ]
+}

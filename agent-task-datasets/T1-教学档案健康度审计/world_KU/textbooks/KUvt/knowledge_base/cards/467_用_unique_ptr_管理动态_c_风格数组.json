@@ -1,0 +1,51 @@
+{
+  "title": "用 unique_ptr 管理动态 C 风格数组",
+  "definition": "unique_ptr 可以专门用于管理动态分配的 C 风格数组。使用数组形式的 `std::make_unique<T[]>(n)` 创建后，所得类型为 `std::unique_ptr<T[]>`，可以通过下标运算符访问数组元素；unique_ptr 销毁时会自动释放数组资源。教材同时建议优先使用 `std::array` 或 `std::vector` 等标准库容器。",
+  "key_points": [
+    "动态数组的创建形式是 `std::make_unique<T[]>(n)`。",
+    "例如 `std::make_unique<int[]>(10)` 创建包含 10 个 int 的动态数组。",
+    "数组形式的 unique_ptr 支持下标访问，例如 `p[1]`。",
+    "make_unique 对数组元素执行值初始化，基本类型元素会初始化为 0。",
+    "C++20 起可以使用 `make_unique_for_overwrite<T[]>(n)`，但基本类型数组元素不会被初始化。",
+    "即使 unique_ptr 可以管理动态 C 风格数组，教材仍建议优先使用 std::array 或 std::vector。"
+  ],
+  "examples": [
+    "`auto myVariableSizedArray { std::make_unique<int[]>(10) };`",
+    "`myVariableSizedArray[1] = 123;`",
+    "推荐优先考虑 `std::array` 或 `std::vector` 管理数组数据。"
+  ],
+  "misconceptions": [
+    "`std::unique_ptr<int[]>` 与 `std::unique_ptr<int>` 的管理对象不同，前者用于数组。",
+    "make_unique 创建的 int 数组元素不是未初始化的，而是值初始化为 0；只有 make_unique_for_overwrite 可能不初始化基本类型元素。",
+    "使用 unique_ptr 管理数组并不意味着它比 vector 更适合一般数组需求。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何创建一个由 unique_ptr 管理的、包含 10 个 int 的动态数组？",
+      "a": "写成 `auto p { std::make_unique<int[]>(10) };`。"
+    },
+    {
+      "q": "如何访问该数组的第二个元素？",
+      "a": "使用 `p[1]`。"
+    },
+    {
+      "q": "教材建议一般情况下用什么替代动态 C 风格数组？",
+      "a": "建议使用标准库容器，例如 `std::array` 和 `std::vector`。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "使用 make_unique 创建 unique_ptr"
+  ],
+  "source_pages": [
+    220,
+    220
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "467_用_unique_ptr_管理动态_c_风格数组",
+  "_chunk_pages": [
+    217,
+    220
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "title": "some方法",
+  "definition": "`some()` 用于判断数组中是否存在至少一个元素满足条件。它返回布尔类型；一旦回调返回 `true`，循环结束并返回 `true`。",
+  "key_points": [
+    "返回布尔类型",
+    "只要有一个元素满足条件就返回 `true`",
+    "一旦找到满足条件的元素就结束遍历"
+  ],
+  "examples": [
+    "[1,2,3].some(x => x > 2)  // true",
+    "['🐕','🐶','🐕'].some(x => x === '🐶')  // true"
+  ],
+  "misconceptions": [
+    "`some()` 必须所有元素都满足条件才返回 `true`；这是 `every()` 的特征",
+    "`some()` 会继续遍历到最后才停；教材说明回调返回 `true` 就结束"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`some()` 的判断标准是什么？",
+      "a": "只要有一个元素满足条件，就返回 `true`。"
+    },
+    {
+      "q": "`some()` 的返回值类型是什么？",
+      "a": "布尔类型。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "回调函数",
+    "Array对象与创建方式"
+  ],
+  "source_pages": [
+    307,
+    308
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "441_some方法",
+  "_chunk_pages": [
+    305,
+    308
+  ]
+}

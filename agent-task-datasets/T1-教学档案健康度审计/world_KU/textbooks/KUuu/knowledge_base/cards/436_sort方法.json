@@ -1,0 +1,44 @@
+{
+  "title": "sort方法",
+  "definition": "`sort()` 方法对数组元素进行排序，并返回排序后的原数组，排序过程是原地进行的，不会复制新数组。教材说明其默认排序顺序是把元素转换为字符串后按升序排列。教材还给出了比较函数 `compareFun(a,b)` 的返回规则：返回值大于 0 表示已符合要求，不用交换；小于 0 表示不符合要求，需要交换；等于 0 表示不动。",
+  "key_points": [
+    "`sort()` 会原地排序",
+    "`sort()` 默认按字符串升序排序",
+    "默认情况下不会复制新数组",
+    "可通过比较函数 `compareFunction` 控制排序规则",
+    "教材给出的比较函数返回值规则为：`>0` 不交换，`<0` 交换，`=0` 不动"
+  ],
+  "examples": [
+    "[3,12,2].sort()  // 按字符串升序时结果不同于数值升序",
+    "arr.sort([compareFunction])"
+  ],
+  "misconceptions": [
+    "`sort()` 默认按数值大小排序；教材说默认是按字符串升序",
+    "`sort()` 会返回一个全新的数组；教材说明它是原地排序"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`sort()` 的默认排序规则是什么？",
+      "a": "把元素转换为字符串后按升序排序。"
+    },
+    {
+      "q": "`sort()` 会复制数组吗？",
+      "a": "不会，教材说明它是原地排序。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "Array对象与创建方式"
+  ],
+  "source_pages": [
+    305,
+    308
+  ],
+  "needs_verification": true,
+  "verify_query": "JavaScript Array.sort compareFunction 返回值正负与交换规则 教材中 compareFun(a,b) 说法是否准确 默认排序是否为字符串升序",
+  "concept_id": "436_sort方法",
+  "_chunk_pages": [
+    305,
+    308
+  ]
+}

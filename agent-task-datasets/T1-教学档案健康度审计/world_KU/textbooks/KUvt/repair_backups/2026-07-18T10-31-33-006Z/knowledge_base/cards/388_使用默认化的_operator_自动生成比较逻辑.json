@@ -1,0 +1,50 @@
+{
+  "title": "使用默认化的 operator<=> 自动生成比较逻辑",
+  "definition": "C++20 允许在类中将三向比较运算符声明为默认函数，例如 `operator<=> (...) const = default;`。这种写法让编译器根据类的数据成员生成比较逻辑。原文还展示了返回类型为 `std::partial_ordering` 的显式写法，以及使用 `auto` 让编译器推导比较类别的写法。",
+  "key_points": [
+    "显式返回类型的声明示意为：`[[nodiscard]] std::partial_ordering operator<=>(const SpreadsheetCell&) const = default;`。",
+    "也可以写成：`[[nodiscard]] auto operator<=>(const SpreadsheetCell&) const = default;`。",
+    "默认化的比较运算符不需要手写每个数据成员的比较表达式，比较结果由成员类型及成员声明顺序决定。",
+    "原文列举了 `strong_ordering`、`partial_ordering` 和 `weak_ordering` 三种比较类别。",
+    "对于包含 double 等可能产生部分排序结果的成员，原文示例使用 `std::partial_ordering`。"
+  ],
+  "examples": [
+    "显式指定返回类型：`[[nodiscard]] std::partial_ordering operator<=>(const SpreadsheetCell&) const = default;`",
+    "让返回类型自动推导：`[[nodiscard]] auto operator<=>(const SpreadsheetCell&) const = default;`"
+  ],
+  "misconceptions": [
+    "`= default` 不是表示函数没有功能，而是要求编译器生成默认实现。",
+    "`auto` 不是固定等同于 `std::strong_ordering`；比较类别取决于成员比较结果，原文列出了 `strong_ordering`、`partial_ordering` 和 `weak_ordering`。",
+    "默认化 `operator<=>` 与手写比较函数的适用条件不同；只有当类的成员能够进行相应比较时，默认实现才有意义。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "C++20 中 `operator<=> (...) const = default` 的含义是什么？",
+      "a": "表示请求编译器根据类的成员自动生成三向比较运算符的实现。"
+    },
+    {
+      "q": "默认化的 `operator<=>` 可以使用哪些返回类型形式？",
+      "a": "原文展示了显式的 `std::partial_ordering`，以及使用 `auto` 自动推导返回类型的形式。"
+    },
+    {
+      "q": "原文列出了哪三种比较类别？",
+      "a": "`strong_ordering`、`partial_ordering` 和 `weak_ordering`。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "C++20三向比较运算符",
+    "类的默认化特殊成员函数"
+  ],
+  "source_pages": [
+    293,
+    296
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "388_使用默认化的_operator_自动生成比较逻辑",
+  "_chunk_pages": [
+    293,
+    296
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "title": "realpath 不能直接用于所有路径",
+  "definition": "`realpath` 要求目标路径存在，不存在时会失败。如果对所有候选路径直接调用 `realpath`，普通的 404 文件也会因 `realpath` 失败而被误判成 403 或 500。因此应先做基础安全检查和 `stat`，再对存在的文件做 `realpath`。",
+  "key_points": [
+    "`realpath` 需要目标路径存在。",
+    "不存在的普通文件不应被误判为权限错误或服务器错误。",
+    "应先做基础检查和 `stat`，再对存在文件做 `realpath`。"
+  ],
+  "examples": [
+    "请求不存在的文件时，不能因为 `realpath` 失败就直接当成 403。"
+  ],
+  "misconceptions": [
+    "`realpath` 不是万能预处理函数。",
+    "存在性检查和安全路径校验的职责不同，不能混为一谈。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么 `realpath` 不能直接用于所有路径？",
+      "a": "因为 `realpath` 需要目标路径存在；不存在时会失败，若直接对所有路径调用，普通 404 可能被误判。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "先 URL 解码再查穿越"
+  ],
+  "source_pages": [
+    129,
+    132
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "215_realpath_不能直接用于所有路径",
+  "_chunk_pages": [
+    129,
+    132
+  ]
+}

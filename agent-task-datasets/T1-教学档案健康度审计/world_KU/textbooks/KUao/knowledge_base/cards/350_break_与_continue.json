@@ -1,0 +1,38 @@
+{
+  "title": "break 与 continue",
+  "definition": "break 和 continue 是循环中常用的流程控制语句。教材将它们与循环结构一并列出，说明它们用于影响循环执行过程。",
+  "key_points": [
+    "break 用于中断循环。",
+    "continue 用于跳过本次循环后续语句，进入下一次循环。",
+    "它们通常出现在循环结构中。"
+  ],
+  "examples": [
+    "for (var i = 0; i < 10; i++) { if (i === 5) break; }",
+    "for (var i = 0; i < 10; i++) { if (i % 2 === 0) continue; console.log(i); }"
+  ],
+  "misconceptions": [
+    "误以为 break 只能用于 switch。",
+    "误以为 continue 会结束整个循环。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "break 和 continue 在循环中的作用分别是什么？",
+      "a": "break 用于中断循环，continue 用于跳过本次循环并继续下一次循环。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "循环结构"
+  ],
+  "source_pages": [
+    249,
+    252
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "350_break_与_continue",
+  "_chunk_pages": [
+    249,
+    252
+  ]
+}

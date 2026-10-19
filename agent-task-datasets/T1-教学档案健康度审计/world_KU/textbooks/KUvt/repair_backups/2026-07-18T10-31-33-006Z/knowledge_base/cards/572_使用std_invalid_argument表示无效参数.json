@@ -1,0 +1,41 @@
+{
+  "title": "使用std::invalid_argument表示无效参数",
+  "definition": "std::invalid_argument是C++标准异常类型之一，可用于表示函数接收到无效参数。例如，SafeDivide函数在除数为0时抛出std::invalid_argument。",
+  "key_points": [
+    "当函数参数不满足要求时，可以使用throw抛出std::invalid_argument。",
+    "SafeDivide示例中，分母den等于0时被视为无效参数。",
+    "调用方可以通过catch捕获该异常，并输出异常信息。"
+  ],
+  "examples": [
+    "示例逻辑：\ndouble SafeDivide(double num, double den) {\n    if (den == 0) {\n        throw std::invalid_argument(\"Divide by zero\");\n    }\n    return num / den;\n}"
+  ],
+  "misconceptions": [
+    "std::invalid_argument不是表示所有运行时错误的通用名称；它 specifically 用于函数参数无效的情况。",
+    "抛出异常后，当前函数不会继续执行throw之后的正常路径，而会寻找匹配的catch处理程序。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "SafeDivide在什么条件下抛出std::invalid_argument？",
+      "a": "当分母den等于0时抛出std::invalid_argument。"
+    },
+    {
+      "q": "SafeDivide(5, 2)、SafeDivide(10, 0)和SafeDivide(3, 3)的处理有何不同？",
+      "a": "分母非0的调用正常计算并输出结果；SafeDivide(10, 0)因分母为0而抛出异常，由catch处理。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++异常处理的基本机制"
+  ],
+  "source_pages": [
+    439,
+    440
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "572_使用std_invalid_argument表示无效参数",
+  "_chunk_pages": [
+    437,
+    440
+  ]
+}

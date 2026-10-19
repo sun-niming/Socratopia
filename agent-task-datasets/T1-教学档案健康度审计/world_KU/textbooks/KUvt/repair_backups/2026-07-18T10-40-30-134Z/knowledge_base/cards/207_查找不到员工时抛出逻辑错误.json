@@ -1,0 +1,46 @@
+{
+  "title": "查找不到员工时抛出逻辑错误",
+  "definition": "员工数据库按员工编号遍历员工集合；如果找到员工编号匹配的元素，就返回该员工。如果遍历结束仍未找到匹配员工，则抛出逻辑错误异常，教材示例中的异常信息为 `No employee found.`。",
+  "key_points": [
+    "查找过程使用循环逐个检查员工。",
+    "匹配条件是员工对象的员工编号与传入的 `employeeNumber` 相等。",
+    "找到匹配员工时立即返回该员工。",
+    "未找到匹配员工时执行 `throw` 抛出逻辑错误。",
+    "示例异常信息为 `No employee found.`。"
+  ],
+  "examples": [
+    "教材代码意图可表示为：\n```cpp\nEmployee Database::getEmployee(int employeeNumber)\n{\n    for (auto& employee : m_employees) {\n        if (employee.getEmployeeNumber() == employeeNumber) {\n            return employee;\n        }\n    }\n    throw std::logic_error{\"No employee found.\"};\n}\n```"
+  ],
+  "misconceptions": [
+    "认为循环结束后仍会自动返回一个默认员工；示例是在未找到时显式抛出异常。",
+    "认为 `throw` 只是输出错误信息；`throw` 会抛出异常，调用方可以捕获并处理。",
+    "认为找到员工后还会继续遍历；`return` 会立即结束当前函数。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "按员工编号查找时，找到匹配员工后会发生什么？",
+      "a": "函数立即返回该员工，不再继续遍历。"
+    },
+    {
+      "q": "如果遍历完 `m_employees` 仍未找到员工，示例如何处理？",
+      "a": "抛出逻辑错误异常，并使用 `No employee found.` 作为错误信息。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++ 基于范围的 for 循环",
+    "C++ 异常与 throw",
+    "类成员函数"
+  ],
+  "source_pages": [
+    137,
+    140
+  ],
+  "needs_verification": true,
+  "verify_query": "\"Employees Database::getEmployee\" \"No employee found\" C++",
+  "concept_id": "207_查找不到员工时抛出逻辑错误",
+  "_chunk_pages": [
+    137,
+    140
+  ]
+}

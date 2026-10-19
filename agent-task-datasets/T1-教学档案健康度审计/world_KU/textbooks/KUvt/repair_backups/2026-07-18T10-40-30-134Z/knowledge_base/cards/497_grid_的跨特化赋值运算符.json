@@ -1,0 +1,46 @@
+{
+  "title": "Grid 的跨特化赋值运算符",
+  "definition": "除了跨特化构造函数，`Grid<T>` 还可以定义一个成员模板赋值运算符，使目标 `Grid<T>` 能够从源 `Grid<E>` 进行赋值。其声明形式为 `template<typename E> Grid<T>& operator=(const Grid<E>& rhs);`。",
+  "key_points": [
+    "赋值运算符返回 `Grid<T>&`，通常用于支持赋值表达式的链式使用。",
+    "右侧参数是 `const Grid<E>&`，表示源对象可以是不同元素类型的 `Grid` 特化，并且不会在赋值过程中被修改。",
+    "原文将该运算符的实现与 copy-and-swap idiom（拷贝并交换惯用法）联系起来。",
+    "实现过程的核心是先创建临时目标类型对象，再调用 `swap(temp)`；提交修改阶段只使用不抛异常的操作。"
+  ],
+  "examples": [
+    "声明：`template<typename E> Grid<T>& operator=(const Grid<E>& rhs);`",
+    "原文所示实现核心：`template<typename T> template<typename E> Grid<T>& Grid<T>::operator=(const Grid<E>& rhs) { Grid<T> temp{rhs}; swap(temp); return *this; }`。其中具体临时对象声明在原文 OCR 中不完整，但 `swap(temp)` 和 copy-and-swap 关系是明确的。"
+  ],
+  "misconceptions": [
+    "普通的同类型拷贝赋值运算符不等于跨特化赋值运算符；跨特化赋值需要额外的成员模板。",
+    "`swap(temp)` 不是简单丢弃源对象，而是交换当前对象与临时对象的资源，从而让临时对象在函数结束时负责释放旧资源。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "跨特化赋值运算符的典型声明是什么？",
+      "a": "`template<typename E> Grid<T>& operator=(const Grid<E>& rhs);`。"
+    },
+    {
+      "q": "copy-and-swap 实现中为什么先构造临时对象再调用 `swap(temp)`？",
+      "a": "先在临时对象中完成复制或转换，再通过交换提交结果；交换操作被设计为不抛异常，从而使赋值过程更安全。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "运算符重载",
+    "拷贝赋值运算符",
+    "异常安全保证",
+    "swap 惯用法"
+  ],
+  "source_pages": [
+    385,
+    388
+  ],
+  "needs_verification": true,
+  "verify_query": "C++ Grid template cross specialization operator= copy-and-swap template<typename E> Grid<T>& operator=(const Grid<E>& rhs)",
+  "concept_id": "497_grid_的跨特化赋值运算符",
+  "_chunk_pages": [
+    385,
+    388
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "title": "CSS3过渡",
+  "definition": "CSS3过渡可以使元素在规定时间内，从一种样式逐渐改变为另一种样式。要产生过渡效果，必须设置 transition-duration 属性；如果时长为 0，就不会产生过渡效果。",
+  "key_points": [
+    "过渡的作用是让样式变化变得逐渐、平滑。",
+    "transition-duration 必须设置，否则过渡时长为 0。",
+    "时长为 0 时不会产生过渡效果。"
+  ],
+  "examples": [
+    "例如给元素设置 transition-duration 后，再改变元素样式，元素会在规定时间内逐渐变化。"
+  ],
+  "misconceptions": [
+    "只写了过渡相关内容就一定会有过渡效果。",
+    "没有设置 transition-duration 也能自动产生过渡。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "CSS3过渡的作用是什么？",
+      "a": "使元素在规定时间内从一种样式逐渐改变为另一种样式。"
+    },
+    {
+      "q": "为什么设置了过渡却没有效果？",
+      "a": "因为必须设置 transition-duration 属性，否则时长为 0，不会产生过渡效果。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [],
+  "source_pages": [
+    205,
+    208
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "307_css3过渡",
+  "_chunk_pages": [
+    205,
+    208
+  ]
+}

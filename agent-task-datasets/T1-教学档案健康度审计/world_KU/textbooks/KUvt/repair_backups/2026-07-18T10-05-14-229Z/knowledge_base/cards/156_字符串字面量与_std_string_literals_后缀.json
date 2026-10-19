@@ -1,0 +1,43 @@
+{
+  "title": "字符串字面量与 std::string_literals 后缀",
+  "definition": "在 C++ 中，普通字符串字面量如 \"Hello World\" 的类型可视为 C 风格字符串指针；使用标准库字符串字面量后缀 \"s\"，可以直接生成 std::string。该后缀位于命名空间 std::literals::string_literals 中，也可以通过 using 指令引入。",
+  "key_points": [
+    "auto string1 { \"Hello World\" }; 表示使用普通字符串字面量，其类型可推导为 const char*。",
+    "auto string2 { \"Hello World\"s }; 使用 \"s\" 后缀，其类型可推导为 std::string。",
+    "可以使用 using namespace std::literals;、using namespace std::string_literals; 或 using namespace std::literals::string_literals; 引入字符串字面量后缀。"
+  ],
+  "examples": [
+    "auto string1 { \"Hello World\" }; // 可推导为 const char*",
+    "auto string2 { \"Hello World\"s }; // 可推导为 std::string",
+    "using namespace std::literals::string_literals;"
+  ],
+  "misconceptions": [
+    "普通字符串字面量加上 auto 后不会自动推导为 std::string；要直接得到 std::string，可使用 \"s\" 后缀。",
+    "\"s\" 后缀不是普通字符串内容的一部分，而是 C++ 的用户定义字面量后缀。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "auto string1 { \"Hello World\" }; 与 auto string2 { \"Hello World\"s }; 的主要区别是什么？",
+      "a": "前者使用普通字符串字面量，可推导为 const char*；后者使用 std::string 字面量后缀，可推导为 std::string。"
+    },
+    {
+      "q": "std::string 字面量后缀 \"s\" 位于哪个命名空间？",
+      "a": "位于 std::literals::string_literals 命名空间中，也可通过相关 using 指令引入。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++ 类型推导的基本概念"
+  ],
+  "source_pages": [
+    109,
+    112
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 \"Hello World\"s std::string_literals auto string1 const char* string2 std::string 命名空间",
+  "concept_id": "156_字符串字面量与_std_string_literals_后缀",
+  "_chunk_pages": [
+    109,
+    112
+  ]
+}

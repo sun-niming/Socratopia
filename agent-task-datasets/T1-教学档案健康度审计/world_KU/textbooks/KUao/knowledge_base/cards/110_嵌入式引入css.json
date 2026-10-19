@@ -1,0 +1,38 @@
+{
+  "title": "嵌入式引入CSS",
+  "definition": "嵌入式引入 CSS 是指在 HTML 页面内部直接编写样式，通常是在 head 标签中加入 style 标签来定义 CSS。",
+  "key_points": [
+    "样式写在 HTML 页面内部。",
+    "通常放在 head 标签中。",
+    "使用 style 标签承载样式内容。"
+  ],
+  "examples": [
+    "<head><style>/* 在这里编写CSS */</style></head>"
+  ],
+  "misconceptions": [
+    "嵌入式不是把样式写到元素的 style 属性中，那是行内式。",
+    "嵌入式也不是单独放到外部 .css 文件中。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "嵌入式引入 CSS 通常放在哪里？",
+      "a": "通常放在 HTML 的 head 标签中，通过 style 标签编写。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "HTML文档结构",
+    "CSS概述"
+  ],
+  "source_pages": [
+    85,
+    88
+  ],
+  "needs_verification": true,
+  "verify_query": "Web前端开发合集 第87页 嵌入式引入CSS head style 标签 原文",
+  "concept_id": "110_嵌入式引入css",
+  "_chunk_pages": [
+    85,
+    88
+  ]
+}

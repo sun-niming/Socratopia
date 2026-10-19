@@ -1,0 +1,50 @@
+{
+  "title": "交互式员工数据库主循环",
+  "definition": "第98页的 main() 创建 Database employeeDB，并通过布尔变量 done 控制循环。每轮先调用 displayMenu() 获取用户选择，再用 switch 根据选择执行退出、雇用、解雇、晋升或员工列表显示操作。",
+  "key_points": [
+    "初始状态为 `done { false }`，因此循环开始运行。",
+    "循环条件为 `while (!done)`。",
+    "选择 0 时将 done 设为 true，结束循环。",
+    "选择 1 到 6 分别执行雇用、解雇、晋升、显示全部员工、显示当前员工和显示前员工。",
+    "未匹配的选择进入 default，输出 `Unknown command.`。"
+  ],
+  "examples": [
+    "主循环结构可表示为：\n```cpp\nDatabase employeeDB;\nbool done{false};\nwhile (!done) {\n    int selection{displayMenu()};\n    switch (selection) {\n        case 0: done = true; break;\n        case 1: doHire(employeeDB); break;\n        case 2: doFire(employeeDB); break;\n        case 3: doPromote(employeeDB); break;\n        case 4: employeeDB.displayAll(); break;\n        case 5: employeeDB.displayCurrent(); break;\n        case 6: employeeDB.displayFormer(); break;\n        default: std::cerr << \"Unknown command.\" << std::endl; break;\n    }\n}\n```"
+  ],
+  "misconceptions": [
+    "`while (!done)` 不是只执行一次；只要 done 仍为 false，就会反复显示菜单并处理选择。",
+    "switch 的 default 分支不会退出程序，只会报告未知命令，然后循环继续。",
+    "选择 0 是通过修改 done 来退出循环，而不是直接调用 return。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "交互式程序如何结束主循环？",
+      "a": "用户选择 0 时，将 done 设为 true；下一次判断 while (!done) 时条件为 false，循环结束。"
+    },
+    {
+      "q": "菜单选项 4、5、6 分别做什么？",
+      "a": "4 显示全部员工，5 显示当前员工，6 显示前员工。"
+    },
+    {
+      "q": "用户输入未定义的菜单编号时会发生什么？",
+      "a": "执行 default 分支，输出 `Unknown command.`，然后继续循环。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++while循环",
+    "C++switch语句",
+    "函数调用"
+  ],
+  "source_pages": [
+    98,
+    99
+  ],
+  "needs_verification": true,
+  "verify_query": "\"C++20高级编程\" \"Employee Database\" \"Unknown command\" \"doHire\"",
+  "concept_id": "138_交互式员工数据库主循环",
+  "_chunk_pages": [
+    97,
+    100
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "title": "Boolean 数据类型",
+  "definition": "Boolean 是 JavaScript 的布尔数据类型，只有两个取值：true 和 false。它用来表示一个状态是否成立。",
+  "key_points": [
+    "boolean 只有两个值：true 和 false。",
+    "值为 0、null、未定义或空字符串的表达式会被解释为 false。",
+    "其他任意非空表达式会被解释为 true。",
+    "Boolean 类型转为数字时，true 变为 1，false 变为 0。"
+  ],
+  "examples": [
+    "true",
+    "false",
+    "0 解释为 false",
+    "\"abc\" 解释为 true",
+    "true 转为数字是 1，false 转为数字是 0"
+  ],
+  "misconceptions": [
+    "不是所有字符串都会被解释为 false，只有空字符串才会被解释为 false。",
+    "不是所有非零之外的值都为 true；0、null、未定义、空字符串都为 false。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "Boolean 数据类型有哪两个值？",
+      "a": "true 和 false。"
+    },
+    {
+      "q": "哪些表达式会被解释为 false？",
+      "a": "值为 0、null、未定义或空字符串的表达式。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "JavaScript 基本数据类型"
+  ],
+  "source_pages": [
+    245,
+    248
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "339_boolean_数据类型",
+  "_chunk_pages": [
+    245,
+    248
+  ]
+}

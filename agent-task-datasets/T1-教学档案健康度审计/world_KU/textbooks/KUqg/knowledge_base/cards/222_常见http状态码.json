@@ -1,0 +1,49 @@
+{
+  "title": "常见HTTP状态码",
+  "definition": "HTTP响应状态行中的状态码及其短语用于指示请求的结果。教材列举了200、301、400、404和505等常见状态码。",
+  "key_points": [
+    "200 OK：请求成功，信息包含在响应报文中。",
+    "301 Moved Permanently：请求对象已永久转移，新的URL位于Location首部行中，客户软件会自动获取新的URL。",
+    "400 Bad Request：服务器无法理解该请求的通用错误。",
+    "404 Not Found：请求的文档不在服务器上。",
+    "505 HTTP Version Not Supported：服务器不支持请求报文所使用的HTTP协议版本。"
+  ],
+  "examples": [
+    "当服务器找到并返回所请求对象时，可在状态行中返回200 OK。",
+    "对象永久转移时，响应可返回301，并在Location首部中给出新的URL。"
+  ],
+  "misconceptions": [
+    "404表示请求的文档不在服务器上，不等同于服务器一定宕机。",
+    "301表示永久转移，不是普通的请求成功状态。",
+    "状态码和状态短语共同出现在状态行中，但程序通常主要依据状态码判断结果。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "404 Not Found表示什么？",
+      "a": "表示被请求的文档不在服务器上。"
+    },
+    {
+      "q": "301 Moved Permanently时，新的URL通常在哪里？",
+      "a": "在响应报文的Location首部行中。"
+    },
+    {
+      "q": "505 HTTP Version Not Supported表示什么？",
+      "a": "表示服务器不支持请求报文使用的HTTP协议版本。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "HTTP响应报文格式"
+  ],
+  "source_pages": [
+    85,
+    88
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "222_常见http状态码",
+  "_chunk_pages": [
+    85,
+    88
+  ]
+}

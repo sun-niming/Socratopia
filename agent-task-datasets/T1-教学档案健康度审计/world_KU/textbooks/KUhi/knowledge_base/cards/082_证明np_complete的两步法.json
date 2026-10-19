@@ -1,0 +1,37 @@
+{
+  "title": "证明NP-complete的两步法",
+  "definition": "证明一个问题是NP-complete，通常要先证明它属于NP；再从一个已知NP-complete问题多项式归约到它。两步都要做，缺一不可。",
+  "key_points": [
+    "第一步说明给定候选解后能在多项式时间内验证",
+    "第二步用已知NP-complete问题归约到目标问题，证明其至少同样难"
+  ],
+  "examples": [
+    "要证明新问题B是NP-complete：先证B属于NP，再把某个已知NP-complete问题A多项式归约到B"
+  ],
+  "misconceptions": [
+    "只证明问题难就够了",
+    "把归约方向写成B归约到A也能证明B很难"
+  ],
+  "qa_pairs": [
+    {
+      "q": "证明一个问题NP-complete通常分哪两步？",
+      "a": "先证明它属于NP，再从一个已知NP-complete问题多项式归约到它。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "NP-hard与NP-complete区别",
+    "多项式归约"
+  ],
+  "source_pages": [
+    77,
+    80
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "082_证明np_complete的两步法",
+  "_chunk_pages": [
+    77,
+    80
+  ]
+}

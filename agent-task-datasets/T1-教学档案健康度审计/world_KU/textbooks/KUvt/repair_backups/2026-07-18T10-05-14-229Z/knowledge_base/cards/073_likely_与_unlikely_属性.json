@@ -1,0 +1,43 @@
+{
+  "title": "[[likely]]与[[unlikely]]属性",
+  "definition": "`[[likely]]` 和 `[[unlikely]]` 用于向编译器提示某个控制流分支更可能执行或更不可能执行，帮助编译器进行可能的优化。原文在属性列表中列出了这两个属性。",
+  "key_points": [
+    "`[[likely]]` 表示被标记的分支或路径被认为更可能执行。",
+    "`[[unlikely]]` 表示被标记的分支或路径被认为更不可能执行。",
+    "这两个属性是优化提示，不应被当作改变程序逻辑的条件判断。"
+  ],
+  "examples": [
+    "可用属性形式表示分支倾向：`[[likely]]`、`[[unlikely]]`。"
+  ],
+  "misconceptions": [
+    "这些属性不会改变条件表达式的真假，也不会改变程序的逻辑结果。",
+    "`[[likely]]` 不保证分支一定执行，`[[unlikely]]` 也不保证分支不会执行。",
+    "只有在实际分支概率与提示相符时，编译器才可能从提示中获益。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`[[likely]]` 和 `[[unlikely]]` 的作用是什么？",
+      "a": "它们分别向编译器提示某条控制流路径更可能或更不可能执行，主要用于优化。"
+    },
+    {
+      "q": "这些属性会改变 `if` 条件的判断结果吗？",
+      "a": "不会。它们只是优化提示，不改变程序逻辑。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++属性语法[[attribute]]",
+    "条件语句"
+  ],
+  "source_pages": [
+    53,
+    56
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 [[likely]] [[unlikely]] 属性适用语法和标准语义 cppreference",
+  "concept_id": "073_likely_与_unlikely_属性",
+  "_chunk_pages": [
+    53,
+    56
+  ]
+}

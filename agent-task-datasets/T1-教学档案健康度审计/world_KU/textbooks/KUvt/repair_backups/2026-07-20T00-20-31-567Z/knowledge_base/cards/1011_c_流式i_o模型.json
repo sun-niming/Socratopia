@@ -1,0 +1,37 @@
+{
+  "title": "C++流式I/O模型",
+  "definition": "C++库采用基于流的输入输出模型，提供在文件、控制台或键盘以及字符串中读写内建类型的工具，也支持编写读写自定义对象的例程。相关功能分布在<fstream>、<iomanip>、<ios>、<iosfwd>、<iostream>、<istream>、<ostream>、<sstream>和<streambuf>等头文件中。",
+  "key_points": [
+    "流模型统一了不同输入输出目标的操作方式。",
+    "I/O流既能处理内建类型，也能扩展到自定义对象。",
+    "文件流、控制台流和字符串流分别对应不同的流设施。"
+  ],
+  "examples": [
+    "控制台输出常使用std::cout，文件操作可使用<fstream>中的文件流，字符串读写可使用< sstream >中的字符串流。"
+  ],
+  "misconceptions": [
+    "C++流只能读写控制台；实际上还可读写文件和字符串。",
+    "流只能处理内建类型；实际上可以为自定义对象编写相应的读写例程。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "C++流式I/O可以处理哪些数据来源或目标？",
+      "a": "可以处理文件、控制台或键盘以及字符串，并且可以扩展到自定义对象。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++输入输出基础"
+  ],
+  "source_pages": [
+    502,
+    502
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1011_c_流式i_o模型",
+  "_chunk_pages": [
+    501,
+    504
+  ]
+}

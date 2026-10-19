@@ -1,0 +1,42 @@
+{
+  "title": "while 循环",
+  "definition": "while 循环先判断条件；当条件为 true 时执行循环体，条件为 false 时结束循环。循环体中可以使用 break 立即结束循环，也可以使用 continue 跳过本次循环剩余部分并进入下一次条件判断。",
+  "key_points": [
+    "while 的基本结构是 while (条件) { 循环体 }。",
+    "如果条件一开始就是 false，循环体一次也不会执行。",
+    "break 用于立即终止循环；continue 用于结束当前轮次并继续下一轮循环判断。"
+  ],
+  "examples": [
+    "while (true) { cout << \"This is silly.\" << endl; break; }"
+  ],
+  "misconceptions": [
+    "while 循环不是至少执行一次；至少执行一次的是 do/while 循环。",
+    "continue 不会终止整个循环，只会跳过当前轮次的剩余语句。",
+    "while (true) 如果没有 break 或其他终止机制，通常会持续执行。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "while 循环什么时候执行循环体？",
+      "a": "每次先判断条件；只有条件为 true 时才执行循环体，条件为 false 时结束循环。"
+    },
+    {
+      "q": "break 和 continue 在 while 循环中的作用有什么不同？",
+      "a": "break 立即结束整个循环；continue 只结束当前轮次，随后继续进行下一次条件判断。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "布尔条件表达式"
+  ],
+  "source_pages": [
+    61,
+    62
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "084_while_循环",
+  "_chunk_pages": [
+    61,
+    64
+  ]
+}

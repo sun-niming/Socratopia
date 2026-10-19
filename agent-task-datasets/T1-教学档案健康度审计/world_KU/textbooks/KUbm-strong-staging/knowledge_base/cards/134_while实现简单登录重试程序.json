@@ -1,0 +1,50 @@
+{
+  "title": "while实现简单登录重试程序",
+  "definition": "教材给出了一个基于 while 的登录程序示例。程序先设定 count=3，表示有3次尝试机会；在 while [ $count -gt 0 ] 条件下循环读取用户名和密码；若输入的用户名为 root 且密码为 12345，则输出欢迎信息并把 count 置为0，从而结束循环；每轮循环末尾通过 let count=count-1 使计数减1，并执行 sleep 5。这个例子展示了 while、条件测试、逻辑与和计数控制的组合用法。",
+  "key_points": [
+    "初始化 count=3 作为登录尝试次数",
+    "循环条件是 [ $count -gt 0 ]",
+    "每轮循环读取登录名和密码",
+    "使用 [ $logname = \"root\" -a $pwd = \"12345\" ] 进行联合判断",
+    "判断成功后输出 Welcome Here!!! 并把 count 置为0",
+    "每轮末尾 let count=count-1",
+    "每轮末尾 sleep 5"
+  ],
+  "examples": [
+    "#!/bin/sh\ncount=3\nwhile [ $count -gt 0 ]\ndo\necho -en \"Login name:\"\nread logname\necho -en \"Password:\"\nread pwd\n[ $logname = \"root\" -a $pwd = \"12345\" ] && {\necho \"Welcome Here!!!\"\ncount=0\n}\nlet count=count-1\nsleep 5\ndone"
+  ],
+  "misconceptions": [
+    "不要认为登录成功后程序一定依靠自然耗尽次数退出；示例是通过把 count 置为0 提前结束循环",
+    "不要忽略每轮末尾的减1操作；它用于控制尝试次数"
+  ],
+  "qa_pairs": [
+    {
+      "q": "教材示例中初始允许多少次登录尝试？",
+      "a": "3次。"
+    },
+    {
+      "q": "示例中用户名和密码正确时会执行什么关键操作来结束循环？",
+      "a": "输出欢迎信息，并把 count 置为0。"
+    },
+    {
+      "q": "示例中循环条件是什么？",
+      "a": "[ $count -gt 0 ]。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "while循环结构",
+    "if条件判断结构"
+  ],
+  "source_pages": [
+    77,
+    80
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "134_while实现简单登录重试程序",
+  "_chunk_pages": [
+    77,
+    80
+  ]
+}

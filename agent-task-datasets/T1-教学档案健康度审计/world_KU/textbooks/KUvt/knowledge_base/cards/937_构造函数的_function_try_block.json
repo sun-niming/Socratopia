@@ -1,0 +1,45 @@
+{
+  "title": "构造函数的 function-try-block",
+  "definition": "构造函数的 function-try-block 是一种把 try 放在构造函数声明之后、函数体之前的异常处理结构，用于捕获构造函数的成员初始化器或函数体中抛出的异常。它的基本形式是：`MyClass::MyClass() try : m_subObject{42} { /* 函数体 */ } catch (const std::exception& e) { /* 处理异常 */ }`。",
+  "key_points": [
+    "当成员对象没有默认构造函数时，必须在构造函数的成员初始化器中显式初始化该成员，例如 `m_subObject{42}`。",
+    "构造函数的 function-try-block 可以捕获成员初始化器中抛出的异常，而普通函数体内的 try/catch 无法包围成员初始化过程。",
+    "构造函数的 function-try-block 中的 catch 处理完异常后，必须重新抛出当前异常或抛出一个新异常；如果没有显式抛出，C++ 运行时会自动重新抛出当前异常。",
+    "如果类中直接管理裸资源，例如动态分配的数组，function-try-block 中可能需要进行清理；但更推荐使用 `std::unique_ptr` 等 RAII 类型管理资源。"
+  ],
+  "examples": [
+    "示例结构：`MyClass::MyClass() try : m_subObject{42} { /* body */ } catch (const std::exception& e) { delete[] m_data; m_data = nullptr; std::cout << e.what() << std::endl; }`。",
+    "如果 `SubObject` 的构造函数抛出 `Exception by SubObject ctor`，构造函数的 function-try-block 可以先输出该异常信息，随后异常继续传播到外层 `catch`。"
+  ],
+  "misconceptions": [
+    "function-try-block 不只是包围构造函数体；对于构造函数，它还可以处理成员初始化器抛出的异常。",
+    "构造函数的 function-try-block 中的 catch 不能像普通函数的 catch 那样处理完异常后自然结束；若没有显式重新抛出，当前异常会被运行时自动重新抛出。",
+    "使用 function-try-block 并不能替代资源管理；对于动态资源，优先使用 RAII 和智能指针。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么 `SubObject` 没有默认构造函数时，`MyClass` 必须在构造函数成员初始化器中初始化 `m_subObject`？",
+      "a": "因为 `m_subObject` 必须在 `MyClass` 构造函数体执行前完成构造，而 `SubObject` 没有默认构造函数，无法由编译器自动默认构造，所以必须显式提供初始化参数，例如 `m_subObject{42}`。"
+    },
+    {
+      "q": "构造函数的 function-try-block 中，如果 catch 没有执行任何 throw，会发生什么？",
+      "a": "C++ 运行时会自动重新抛出当前异常，使异常继续传播到外层的异常处理器。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++构造函数与成员初始化器",
+    "C++异常处理基础"
+  ],
+  "source_pages": [
+    465,
+    465
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "937_构造函数的_function_try_block",
+  "_chunk_pages": [
+    465,
+    468
+  ]
+}

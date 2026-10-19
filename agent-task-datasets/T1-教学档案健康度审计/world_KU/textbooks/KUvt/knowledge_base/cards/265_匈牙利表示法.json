@@ -1,0 +1,42 @@
+{
+  "title": "匈牙利表示法",
+  "definition": "匈牙利表示法是一种变量和数据成员命名约定，使用较详细的前缀表示变量的类型或其他附加信息，而不是只使用一个简单字母。例如，pszName 中的 psz 表示“指向以零结尾字符串的指针”。教材采用普通前缀约定而不采用匈牙利表示法，认为合理的变量名通常不需要额外的类型编码信息。",
+  "key_points": [
+    "匈牙利表示法通过详细前缀编码变量的附加信息。",
+    "pszName 中，psz 的含义是指向以零结尾字符串的指针。",
+    "这种表示法在 Microsoft Windows 程序员中曾经很流行。",
+    "教材认为良好命名的变量通常不需要匈牙利表示法提供的额外上下文。"
+  ],
+  "examples": [
+    "char* pszName; // psz 表示 pointer to string, zero-terminated"
+  ],
+  "misconceptions": [
+    "匈牙利表示法不是 C++ 语法，而是命名约定。",
+    "使用匈牙利表示法不能替代清晰的变量命名。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "pszName 中的 psz 表示什么？",
+      "a": "表示 pointer to string, zero-terminated，即指向以零结尾字符串的指针。"
+    },
+    {
+      "q": "教材对匈牙利表示法持什么态度？",
+      "a": "教材使用普通前缀而不使用匈牙利表示法，认为合理命名的变量通常不需要额外的类型前缀信息。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "变量名前缀的使用原则"
+  ],
+  "source_pages": [
+    133,
+    134
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "265_匈牙利表示法",
+  "_chunk_pages": [
+    133,
+    136
+  ]
+}

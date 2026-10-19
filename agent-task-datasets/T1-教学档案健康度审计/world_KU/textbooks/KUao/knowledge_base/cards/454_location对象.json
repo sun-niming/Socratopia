@@ -1,0 +1,41 @@
+{
+  "title": "location对象",
+  "definition": "location对象用于分析和设置当前页面的URL地址。它是window对象和document对象的属性，指向同一个对象。通过它可以读取或修改当前文档地址，从而实现页面跳转。",
+  "key_points": [
+    "location对象主要用于分析和设置页面的URL地址。",
+    "它同时是window对象和document对象的属性，二者指向同一个对象。"
+  ],
+  "examples": [
+    "window.location.href = \"http://www.nwafu.edu.cn\""
+  ],
+  "misconceptions": [
+    "location对象只用于读取地址，不能修改地址。",
+    "window.location和document.location是不同对象。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "location对象的主要作用是什么？",
+      "a": "分析和设置页面的URL地址。"
+    },
+    {
+      "q": "window.location和document.location是什么关系？",
+      "a": "它们是同一个对象。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "JavaScript对象",
+    "浏览器窗口对象"
+  ],
+  "source_pages": [
+    337,
+    340
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "454_location对象",
+  "_chunk_pages": [
+    337,
+    340
+  ]
+}

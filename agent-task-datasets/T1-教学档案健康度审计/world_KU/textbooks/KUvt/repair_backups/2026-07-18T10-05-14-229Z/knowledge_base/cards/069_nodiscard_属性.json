@@ -1,0 +1,45 @@
+{
+  "title": "[[nodiscard]]属性",
+  "definition": "`[[nodiscard]]` 用于标记函数等声明，提示调用者不应忽略其返回值。如果调用者直接调用带有该属性的函数却丢弃返回值，编译器可以发出警告。C++还支持为该属性提供说明文字，例如 `[[nodiscard(\"Some explanation\")]]`。",
+  "key_points": [
+    "原文示例使用 `[[nodiscard]] int func()` 声明一个返回整数的函数。",
+    "直接调用 `func();` 而不使用其返回值时，Visual C++示例给出了“discarding return value of function with 'nodiscard' attribute”的警告。",
+    "可以使用 `[[nodiscard(\"Some explanation\")]]` 为诊断提供解释文字。"
+  ],
+  "examples": [
+    "`[[nodiscard]] int func() { return 42; }`",
+    "`int main() { func(); }`",
+    "`[[nodiscard(\"Some explanation\")]] int func();`"
+  ],
+  "misconceptions": [
+    "`[[nodiscard]]` 通常是诊断提示，不等于运行时强制阻止调用者丢弃返回值。",
+    "它关注的是调用者是否使用返回值，而不是函数内部是否执行了 `return`。",
+    "带有 `[[nodiscard]]` 的函数仍然可以被调用；重点是其返回值不应被无视。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "调用 `[[nodiscard]] int func()` 时直接写 `func();` 可能发生什么？",
+      "a": "调用者丢弃了返回值，编译器可能发出警告。"
+    },
+    {
+      "q": "如何为 `[[nodiscard]]` 提供说明文字？",
+      "a": "使用带字符串说明的形式，例如 `[[nodiscard(\"Some explanation\")]]`。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++属性语法[[attribute]]",
+    "函数返回值与return语句"
+  ],
+  "source_pages": [
+    53,
+    56
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "069_nodiscard_属性",
+  "_chunk_pages": [
+    53,
+    56
+  ]
+}

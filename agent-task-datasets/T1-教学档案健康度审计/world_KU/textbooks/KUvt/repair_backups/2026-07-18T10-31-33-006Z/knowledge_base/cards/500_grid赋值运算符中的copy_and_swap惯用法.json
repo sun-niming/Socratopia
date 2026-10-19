@@ -1,0 +1,43 @@
+{
+  "title": "Grid赋值运算符中的copy-and-swap惯用法",
+  "definition": "Grid模板的赋值运算符使用copy-and-swap惯用法：先根据右侧对象rhs构造一个临时Grid对象temp，完成复制或转换工作；然后调用swap(temp)交换当前对象与临时对象的内部数据；最后返回*this。原文明确说明，真正提交赋值结果时只进行不抛出异常的操作。",
+  "key_points": [
+    "临时对象的构造语句为Grid<T, WIDTH, HEIGHT> temp{rhs}。",
+    "交换语句为swap(temp)，用于提交临时对象中的数据。",
+    "赋值运算符最后返回*this。",
+    "该实现把复制工作放在临时对象构造阶段，把最终提交工作放在交换阶段。"
+  ],
+  "examples": [
+    "核心流程：\n1. `Grid<T, WIDTH, HEIGHT> temp{ rhs };`\n2. `swap(temp);`\n3. `return *this;`"
+  ],
+  "misconceptions": [
+    "误以为赋值运算符直接逐个修改当前对象的所有单元；原文展示的实现先构造临时对象，再交换数据。",
+    "误以为copy-and-swap只适用于完全相同类型的对象；本页代码中的rhs类型是Grid<E, WIDTH2, HEIGHT2>，可与目标Grid的模板参数不同。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "Grid赋值运算符为什么先构造temp再调用swap？",
+      "a": "先在临时对象中完成复制或转换，再通过swap提交结果；原文强调提交阶段只使用不抛出异常的操作。"
+    },
+    {
+      "q": "copy-and-swap版本的Grid赋值运算符最后返回什么？",
+      "a": "返回*this。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "拷贝构造函数与赋值运算符",
+    "异常安全基本概念"
+  ],
+  "source_pages": [
+    389,
+    392
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "500_grid赋值运算符中的copy_and_swap惯用法",
+  "_chunk_pages": [
+    389,
+    392
+  ]
+}

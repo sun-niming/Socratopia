@@ -1,0 +1,42 @@
+{
+  "title": "iframe的width属性",
+  "definition": "width 属性用于设置 iframe 框架宽度，取值可以是像素或百分比。",
+  "key_points": [
+    "控制 iframe 的宽度",
+    "可用像素值或百分比值"
+  ],
+  "examples": [
+    "<iframe width=\"600\"></iframe>",
+    "<iframe width=\"100%\"></iframe>"
+  ],
+  "misconceptions": [
+    "认为 width 只能写数字像素；原文还给出了百分比示例。",
+    "认为 width 影响页面整体宽度；它描述的是 iframe 框架宽度。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "iframe 的 width 属性表示什么？",
+      "a": "表示框架宽度。"
+    },
+    {
+      "q": "width 属性可使用哪些形式的值？",
+      "a": "像素或百分比。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "iframe标签",
+    "HTML属性"
+  ],
+  "source_pages": [
+    77,
+    80
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "114_iframe的width属性",
+  "_chunk_pages": [
+    77,
+    80
+  ]
+}

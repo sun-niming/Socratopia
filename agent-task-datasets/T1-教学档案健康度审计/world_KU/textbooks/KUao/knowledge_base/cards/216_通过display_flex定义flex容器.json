@@ -1,0 +1,37 @@
+{
+  "title": "通过display:flex定义Flex容器",
+  "definition": "任何一个容器都可以通过把元素的 display 属性设置为 flex 来定义为Flex布局容器。容器一旦变成Flex布局，其下的项目会自动切换为Flex布局参与排布。",
+  "key_points": [
+    "任意容器都可以指定为Flex布局容器",
+    "设置 display:flex 即可定义Flex布局",
+    "容器下的项目会自动切换为flex布局"
+  ],
+  "examples": [
+    ".box { display: flex; }"
+  ],
+  "misconceptions": [
+    "把元素设为Flex布局后，子元素仍然会按普通文档流方式独立排列"
+  ],
+  "qa_pairs": [
+    {
+      "q": "怎样把一个普通容器变成Flex容器？",
+      "a": "把该元素的 display 属性设置为 flex。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "CSS基础",
+    "Flex布局概念"
+  ],
+  "source_pages": [
+    149,
+    152
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "216_通过display_flex定义flex容器",
+  "_chunk_pages": [
+    149,
+    152
+  ]
+}

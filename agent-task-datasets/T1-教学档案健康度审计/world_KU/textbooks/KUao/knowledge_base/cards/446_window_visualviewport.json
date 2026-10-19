@@ -1,0 +1,40 @@
+{
+  "title": "window.visualViewport",
+  "definition": "window.visualViewport 会返回 VisualViewport 对象，该对象代表一个给定窗口的视觉视口。",
+  "key_points": [
+    "它的返回值是 VisualViewport 对象。",
+    "VisualViewport 对象表示给定窗口的视觉视口。"
+  ],
+  "examples": [
+    "调用 window.visualViewport 可获得当前窗口的视觉视口对象。"
+  ],
+  "misconceptions": [
+    "visualViewport 不是普通尺寸值，而是一个对象。",
+    "它表示的是视觉视口，不是 window.innerWidth 或 window.innerHeight 那样的简单数值。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "window.visualViewport 返回什么？",
+      "a": "返回 VisualViewport 对象。"
+    },
+    {
+      "q": "VisualViewport 对象表示什么？",
+      "a": "表示一个给定窗口的视觉视口。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "window 对象的层级与全局属性"
+  ],
+  "source_pages": [
+    332,
+    332
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "446_window_visualviewport",
+  "_chunk_pages": [
+    329,
+    332
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "title": "visibility属性控制元素可见性",
+  "definition": "CSS的visibility属性可以控制元素是否可见。元素默认可见；当设置为visibility:hidden时，元素会被隐藏。",
+  "key_points": [
+    "visibility属性用于控制元素可见性",
+    "元素默认可见",
+    "visibility:hidden表示元素被隐藏"
+  ],
+  "examples": [
+    "visibility: hidden;"
+  ],
+  "misconceptions": [
+    "把visibility:hidden误认为等同于display:none",
+    "认为元素隐藏后一定不会占据页面空间"
+  ],
+  "qa_pairs": [
+    {
+      "q": "visibility属性的作用是什么？",
+      "a": "控制元素是否可见。"
+    },
+    {
+      "q": "元素默认的可见状态是什么？",
+      "a": "默认可见。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "CSS基础"
+  ],
+  "source_pages": [
+    133,
+    136
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "191_visibility属性控制元素可见性",
+  "_chunk_pages": [
+    133,
+    136
+  ]
+}

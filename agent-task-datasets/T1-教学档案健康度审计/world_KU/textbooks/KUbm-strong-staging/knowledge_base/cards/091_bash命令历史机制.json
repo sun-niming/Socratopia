@@ -1,0 +1,35 @@
+{
+  "title": "bash命令历史机制",
+  "definition": "命令历史机制是教材列出的 bash 基本功能之一。教材同时列出了 history，表示可通过该命令使用或查看与命令历史相关的功能。",
+  "key_points": [
+    "命令历史机制属于 bash 基本功能",
+    "教材列出了 history 命令"
+  ],
+  "examples": [
+    "history"
+  ],
+  "misconceptions": [
+    "不要把 history 误解为普通文本文件名，教材将其作为 bash 基本功能相关命令列出"
+  ],
+  "qa_pairs": [
+    {
+      "q": "教材列出的与 bash 命令历史机制对应的命令是什么？",
+      "a": "history。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "bash基础概念"
+  ],
+  "source_pages": [
+    49,
+    52
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "091_bash命令历史机制",
+  "_chunk_pages": [
+    49,
+    52
+  ]
+}

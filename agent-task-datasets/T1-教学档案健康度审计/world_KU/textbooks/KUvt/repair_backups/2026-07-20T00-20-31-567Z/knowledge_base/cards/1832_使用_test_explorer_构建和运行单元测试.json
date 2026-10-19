@@ -1,0 +1,44 @@
+{
+  "title": "使用 Test Explorer 构建和运行单元测试",
+  "definition": "在 Visual Studio 中，先通过 Build | Build Solution 构建解决方案，再打开 Test | Windows | Test Explorer。构建完成后，Test Explorer 会自动显示已发现的单元测试；单击窗口左上角的 Run All 可运行全部测试，并查看每个测试的成功或失败状态。",
+  "key_points": [
+    "构建解决方案是发现并运行测试的前提步骤。",
+    "Test Explorer 会列出已发现的测试及其所属测试类或命名空间。",
+    "Run All 用于运行窗口中显示的全部单元测试。",
+    "测试结果中通常可以看到测试名称、运行耗时和测试源代码位置。"
+  ],
+  "examples": [
+    "操作流程：`Build | Build Solution` → `Test | Windows | Test Explorer` → 单击 `Run All`。",
+    "一个名为 `testSimple` 的测试成功运行后，Test Explorer 会显示其成功状态、源文件位置和耗时。"
+  ],
+  "misconceptions": [
+    "打开 Test Explorer 不等于已经运行测试；还需要执行 Run All 或运行指定测试。",
+    "测试未显示在 Test Explorer 中时，不能直接认为测试代码不存在，也可能是解决方案尚未成功构建或测试未被发现。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "在 Visual Studio 中运行全部已发现的单元测试需要执行什么操作？",
+      "a": "构建解决方案后打开 Test Explorer，并单击 Run All。"
+    },
+    {
+      "q": "Test Explorer 的主要作用是什么？",
+      "a": "发现、列出、运行单元测试，并显示测试的成功或失败结果及相关诊断信息。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "单元测试的基本概念",
+    "Visual Studio 基本操作"
+  ],
+  "source_pages": [
+    885,
+    885
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1832_使用_test_explorer_构建和运行单元测试",
+  "_chunk_pages": [
+    885,
+    888
+  ]
+}

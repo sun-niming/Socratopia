@@ -1,0 +1,37 @@
+{
+  "title": "网格线编号与元素定位",
+  "definition": "在 CSS 网格布局中，grid-column-* 和 grid-row-* 这一类属性是按“网格线”来放置网格元素的。每条网格线从 1 开始自动编号，元素的位置由指定的网格线决定。",
+  "key_points": [
+    "网格元素不是按单元格内容对齐，而是按网格线编号定位。",
+    "网格线编号从 1 开始自动编号。",
+    "grid-row-* 负责纵向位置，grid-column-* 负责横向位置。"
+  ],
+  "examples": [
+    ".item-a { grid-column-start: 2; grid-column-end: 4; grid-row-start: 1; grid-row-end: 3; }"
+  ],
+  "misconceptions": [
+    "容易误以为这些属性是在设置“第几列/第几行”，实际上设置的是网格线。",
+    "容易忽略网格线编号从 1 开始。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "grid-column-* 和 grid-row-* 属性是依据什么来定位元素的？",
+      "a": "依据网格线来定位，网格线从 1 开始自动编号。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "CSS 网格布局基础"
+  ],
+  "source_pages": [
+    181,
+    182
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "272_网格线编号与元素定位",
+  "_chunk_pages": [
+    181,
+    184
+  ]
+}

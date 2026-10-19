@@ -1,0 +1,42 @@
+{
+  "title": "通过组合多个能力构造类型的示例",
+  "definition": "原文在动物示例中把 Mover、Eater、Walker、Swimmer、Carnivore、FishEater、BigAnimal、SmallAnimal 和 Jumper 等名称单独列出，用于展示把多个能力、特征或分类组合到类型设计中的方式。该页片段没有完整说明这些名称之间究竟采用继承、接口、混入还是其他关系。",
+  "key_points": [
+    "能力或特征名称包括 Mover、Eater、Walker、Swimmer、Carnivore、FishEater、BigAnimal、SmallAnimal 和 Jumper。",
+    "同一示例中还出现 Animal、Monkey、Giraffe、Marsupial、BigCat、WaterAnimal 等动物类型。",
+    "原文片段不足以确认每个能力名称的具体语言实现方式。"
+  ],
+  "examples": [
+    "可将图中信息抽象为能力集合：$$Animal+\\{Walker,Swimmer,Carnivore\\}$$",
+    "例如，图中出现 Jumper 这一能力或特征名称，但该页片段没有给出完整的 C++ 声明。"
+  ],
+  "misconceptions": [
+    "不能仅因名称以名词或动名词形式出现，就断定它们一定是 C++ 基类、接口或 mixin。",
+    "不能从该页片段推断某个具体动物一定同时具有哪些能力。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "原文列出了哪些与动物类型并列的能力或特征名称？",
+      "a": "包括 Mover、Eater、Walker、Swimmer、Carnivore、FishEater、BigAnimal、SmallAnimal 和 Jumper。"
+    },
+    {
+      "q": "能否根据该页片段确定这些名称之间的精确继承关系？",
+      "a": "不能；片段没有提供足够的连线、声明或文字说明。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "面向对象类型与继承层次的基本概念"
+  ],
+  "source_pages": [
+    177,
+    178
+  ],
+  "needs_verification": true,
+  "verify_query": "《C++20高级编程》第5版 第177-178页 Mover Eater Walker Swimmer Carnivore FishEater BigAnimal SmallAnimal Jumper mixin",
+  "concept_id": "246_通过组合多个能力构造类型的示例",
+  "_chunk_pages": [
+    177,
+    180
+  ]
+}

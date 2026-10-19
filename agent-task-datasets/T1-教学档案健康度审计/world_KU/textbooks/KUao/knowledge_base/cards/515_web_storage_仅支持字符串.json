@@ -1,0 +1,39 @@
+{
+  "title": "Web Storage 仅支持字符串",
+  "definition": "Web Storage 中存储的所有值最终都会被转换成字符串；如果要保存对象或其他非字符串数据，必须先用 JSON.stringify() 序列化，读取后再用 JSON.parse() 反序列化。",
+  "key_points": [
+    "所有存储值都会被转换成字符串。",
+    "存储非字符串数据时要先 JSON.stringify()。",
+    "读取后通常需要 JSON.parse() 还原数据。"
+  ],
+  "examples": [
+    "JSON.stringify({name:'A'}) 后再存入 Web Storage",
+    "取出后用 JSON.parse() 恢复对象"
+  ],
+  "misconceptions": [
+    "Web Storage 可以直接原样保存对象、数组等复杂类型。",
+    "存进去是什么类型，取出来就一定是什么类型。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何在 Web Storage 中保存对象？",
+      "a": "先用 JSON.stringify() 转成字符串存入，读取后再用 JSON.parse() 还原。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "Web Storage",
+    "JSON"
+  ],
+  "source_pages": [
+    385,
+    387
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "515_web_storage_仅支持字符串",
+  "_chunk_pages": [
+    385,
+    387
+  ]
+}

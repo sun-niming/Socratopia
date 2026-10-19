@@ -1,0 +1,52 @@
+{
+  "title": "利用多态容纳不同类型的电子表格单元格",
+  "definition": "由于 StringSpreadsheetCell 和 DoubleSpreadsheetCell 都派生自抽象基类 SpreadsheetCell，因此可以使用保存 std::unique_ptr<SpreadsheetCell> 的 vector 统一管理这两种不同类型的对象。通过基类指针调用虚函数时，实际对象会执行各自的重写版本，客户代码不需要知道对象的具体派生类型。",
+  "key_points": [
+    "SpreadsheetCell 是抽象类，不能直接创建 SpreadsheetCell 对象，但可以创建指向它的指针或引用。",
+    "vector 的元素类型可以是 std::unique_ptr<SpreadsheetCell>，其中每个元素实际指向某个派生类对象。",
+    "同一个 vector 可以同时存储 StringSpreadsheetCell 和 DoubleSpreadsheetCell。",
+    "通过基类指针调用虚函数时，会根据实际对象类型执行不同实现，这就是运行时多态。",
+    "使用 std::unique_ptr 可以让 vector 管理派生对象的所有权。"
+  ],
+  "examples": [
+    "示例：\n```cpp\nstd::vector<std::unique_ptr<SpreadsheetCell>> cellArray;\ncellArray.push_back(std::make_unique<StringSpreadsheetCell>());\ncellArray.push_back(std::make_unique<StringSpreadsheetCell>());\ncellArray.push_back(std::make_unique<DoubleSpreadsheetCell>());\n\ncellArray[0]->set(\"hello\");\ncellArray[1]->set(\"10\");\n```\n这些对象都可以通过 `SpreadsheetCell*` 接口调用 `set()` 和 `getString()`。",
+    "如果第三个元素是 DoubleSpreadsheetCell，它的 getString() 会按双精度单元格的规则进行数值到字符串的转换；StringSpreadsheetCell 则返回自身存储的字符串。"
+  ],
+  "misconceptions": [
+    "抽象类不能直接实例化，但可以作为指针或引用的静态类型。",
+    "vector 的元素类型是基类智能指针，并不意味着所有对象都变成了基类对象；对象的实际派生类型仍然存在。",
+    "调用基类指针上的虚函数时，不是固定执行基类版本，而是通常执行实际对象的重写版本。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么 std::vector<std::unique_ptr<SpreadsheetCell>> 可以同时保存两种派生类对象？",
+      "a": "因为两种对象都派生自 SpreadsheetCell，派生类对象的智能指针可以转换为指向基类的智能指针。"
+    },
+    {
+      "q": "通过 cellArray[i]->getString() 调用函数时，程序如何决定执行哪个实现？",
+      "a": "getString() 是虚函数，调用会依据指针实际指向的对象类型进行动态分派。"
+    },
+    {
+      "q": "为什么不能创建 SpreadsheetCell 类型的对象？",
+      "a": "因为 SpreadsheetCell 是抽象类。虽然不能直接创建它的对象，但可以创建指向它的指针或引用。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "继承与派生类",
+    "抽象类",
+    "虚函数",
+    "std::unique_ptr 和 std::vector"
+  ],
+  "source_pages": [
+    325,
+    326
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "664_利用多态容纳不同类型的电子表格单元格",
+  "_chunk_pages": [
+    325,
+    328
+  ]
+}

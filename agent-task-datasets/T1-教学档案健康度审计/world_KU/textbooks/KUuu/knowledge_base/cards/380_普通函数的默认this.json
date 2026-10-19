@@ -1,0 +1,38 @@
+{
+  "title": "普通函数的默认this",
+  "definition": "普通函数如果不是作为对象方法调用，而是在非严格模式下直接调用，那么this会指向全局对象；在浏览器环境中通常是window，也可理解为globalThis。",
+  "key_points": [
+    "直接调用普通函数时会进入默认绑定",
+    "浏览器里默认绑定到window/globalThis",
+    "这解释了为什么函数内this.msg可能取到全局对象上的属性"
+  ],
+  "examples": [
+    "function sayHello(){ console.log(this.msg) }\nsayHello()"
+  ],
+  "misconceptions": [
+    "普通函数直接调用时this一定是undefined",
+    "普通函数的this一定等于定义它的对象"
+  ],
+  "qa_pairs": [
+    {
+      "q": "非严格模式下直接调用 sayHello() 时 this 指向哪里？",
+      "a": "指向全局对象，浏览器中通常是 window（globalThis）。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "this的基本含义",
+    "函数调用"
+  ],
+  "source_pages": [
+    262,
+    264
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "380_普通函数的默认this",
+  "_chunk_pages": [
+    261,
+    264
+  ]
+}

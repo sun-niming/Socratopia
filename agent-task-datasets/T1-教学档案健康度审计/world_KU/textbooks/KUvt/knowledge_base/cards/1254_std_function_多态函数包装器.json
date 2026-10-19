@@ -1,0 +1,49 @@
+{
+  "title": "std::function 多态函数包装器",
+  "definition": "`std::function<R(ArgTypes...)>` 是一个多态函数包装器，可以保存并调用符合指定调用签名的可调用对象，例如普通函数、函数对象或 lambda 表达式。`R` 表示返回类型，`ArgTypes...` 表示按逗号分隔的参数类型列表。",
+  "key_points": [
+    "模板形式为 `std::function<R(ArgTypes...)>`。",
+    "例如 `function<void(int, string_view)>` 表示返回 `void`、接收一个 `int` 和一个 `string_view` 参数的可调用对象包装器。",
+    "`std::function` 实例可以像函数指针一样调用，也可以被传递、存储、赋值和移动。",
+    "可以使用类模板参数推导简化创建，例如 `function f1 { func };`。",
+    "使用 `auto f1 { func };` 得到的是编译器推导出的普通函数指针类型，而不是 `std::function`。"
+  ],
+  "examples": [
+    "`void func(int num, string_view str) { cout << format(\"func({}, {})\", num, str) << endl; }`",
+    "`function<void(int, string_view)> f1 { func };`",
+    "`f1(1, \"test\");`",
+    "简化写法：`function f1 { func };`",
+    "与之不同：`auto f1 { func };`，其类型是类似 `void (*)(int, string_view)` 的函数指针，而不是 `std::function`。"
+  ],
+  "misconceptions": [
+    "`std::function` 和 `auto` 推导出的函数指针不是同一种类型。",
+    "`std::function<R(Args...)>` 中的尖括号内容不是普通的模板类型列表，而是一个完整的函数调用签名。",
+    "`std::function` 不只能够包装普通函数，也能够包装函数对象和 lambda 表达式。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`std::function<void(int, string_view)>` 表示什么？",
+      "a": "它表示一个可调用对象包装器，该对象接收一个 `int` 和一个 `string_view` 参数，并返回 `void`。"
+    },
+    {
+      "q": "`auto f1 { func };` 与 `function f1 { func };` 有什么区别？",
+      "a": "前者推导为普通函数指针类型，后者创建的是 `std::function` 实例。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "函数指针",
+    "函数模板参数推导"
+  ],
+  "source_pages": [
+    609,
+    610
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1254_std_function_多态函数包装器",
+  "_chunk_pages": [
+    609,
+    612
+  ]
+}

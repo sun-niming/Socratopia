@@ -1,0 +1,41 @@
+{
+  "title": "CSS动画示例：绑定到div并改变背景色",
+  "definition": "原文给出一个 CSS 动画示例：把名为“example”的动画绑定到 <div> 元素上，动画持续 4 秒，并让 <div> 的背景颜色从“red”逐渐变为“yellow”。",
+  "key_points": [
+    "动画可以绑定到指定的 HTML 元素上，这里是 <div>。",
+    "该示例中的动画名为“example”。",
+    "动画持续时间为 4 秒，背景色从 red 过渡到 yellow。"
+  ],
+  "examples": [
+    "<div> 绑定“example”动画，4 秒内背景色由 red 变为 yellow。"
+  ],
+  "misconceptions": [
+    "容易误以为动画只能作用于整页，实际上可以绑定到单个元素。",
+    "容易忽略动画时长设置，认为颜色变化是瞬时完成的。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "原文中的动画绑定到了哪个元素上？",
+      "a": "绑定到 <div> 元素上。"
+    },
+    {
+      "q": "该动画的持续时间和颜色变化是什么？",
+      "a": "持续 4 秒，背景颜色从 red 逐渐变为 yellow。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "CSS基础"
+  ],
+  "source_pages": [
+    209,
+    209
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "310_css动画示例_绑定到div并改变背景色",
+  "_chunk_pages": [
+    209,
+    212
+  ]
+}

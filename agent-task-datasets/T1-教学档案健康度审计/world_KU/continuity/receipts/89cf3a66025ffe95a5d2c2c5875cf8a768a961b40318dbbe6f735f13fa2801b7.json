@@ -1,0 +1,105 @@
+{
+  "schemaVersion": 1,
+  "status": "committed",
+  "operationId": "endclass:v1:97c00fb462259b5f8d7022997844c1b7:63e0c919537f97af057d1dae",
+  "operationHash": "89cf3a66025ffe95a5d2c2c5875cf8a768a961b40318dbbe6f735f13fa2801b7",
+  "scope": {
+    "accountId": "local",
+    "profileId": "uolmzgq8",
+    "worldId": "KU",
+    "conversationId": "tUrLvh4daSprJN9Hd2n0h"
+  },
+  "companion": {
+    "slotId": "npc_c",
+    "companionInstanceId": "ci_56a3438b71f0da96c619c733",
+    "candidateId": "ct_kukvemkm",
+    "displayName": "流萤"
+  },
+  "committedAt": "2026-09-17T01:23:47.234Z",
+  "targets": [
+    {
+      "relativePath": "pal_moments.md",
+      "oldHash": "3893052ae98be9ba6a99289c8c42f47d1df5dad40fa778e22e5babfa6d123624",
+      "newHash": "cce3caf7fcd9386e700235d74340c8fd2fcaaeacd787edde56f47c3e04c42743",
+      "deleting": false
+    },
+    {
+      "relativePath": "textbooks/KUbm/progress.md",
+      "oldHash": "b9e59997e819dbd49c497baeb63743a73fcfc6de40045359fada83e86c9f417a",
+      "newHash": "2bb141a7bb14fb39909b7bd0977fbf6246c592f4d5b200ed996fbd1d0322eb79",
+      "deleting": false
+    },
+    {
+      "relativePath": "diary/2026-09.md",
+      "oldHash": "9f2551ff0eafb4891a4af013406b5013f205133bd6a5ee83f4eece72fe90e05b",
+      "newHash": "afb0cf72d88059b2a25dbdc3eb260eb8f799650c783dc7e5809d8684e7377075",
+      "deleting": false
+    },
+    {
+      "relativePath": "relation_npc_c.md",
+      "oldHash": "e555f90955f2dd2b4d9f19b50fbbbfbfd051c81093d38f73bf1fab9aca9293d1",
+      "newHash": "395e2d2eb478cdd726583279db66196ae2e9edc890654360c7e2a28ff39e33c6",
+      "deleting": false
+    },
+    {
+      "relativePath": "world_meta.json",
+      "oldHash": "b362372b9ab43c165d1a3e47772fb9833a9b65d475b8fa4ff697fdbcf8e618ca",
+      "newHash": "ea1de551534674893d887f61d9791979a85cdfb1037b2c7dfa77f49963c0d1aa",
+      "deleting": false
+    },
+    {
+      "relativePath": "world_records.md",
+      "oldHash": "ceb2340b37f27573a797c7aadd6f31f520e40bef0c9b1474f7481bf46e2e15a7",
+      "newHash": "f32ecf4cf3534736deb09c594434c1b664f790adbe3e01b1802d1372047c538f",
+      "deleting": false
+    },
+    {
+      "relativePath": "textbooks/textbook_index.json",
+      "oldHash": "a8bb6d5245396c82926da955db8b149ec22340a8a9d6245306541cb17f691c3b",
+      "newHash": "5795e9519ffa1f0ac6e3ef0e6fa24308caa0c862384ea44a7fbec36ecddf606b",
+      "deleting": false
+    },
+    {
+      "relativePath": "textbooks/KUbm/handoff/last_tail.json",
+      "oldHash": "025566e2e47c6c5b392d55b7a222aa1d730b59656b9515c7c627899d94a1bce3",
+      "newHash": "461767882ddca936d3bedbd1dc576c2f994fb9d27203b653a3e680512f98f14d",
+      "deleting": false
+    },
+    {
+      "relativePath": "textbooks/KUbm/handoff/last_meta.json",
+      "oldHash": "8ec298946ec1965da2674a4aead2b66dcf68de88bec0295f523284ed0a9fb27f",
+      "newHash": "b9c1b174cb3c3e3c17de982783a333bb7f0cf0382aeb183e354da06084f1f318",
+      "deleting": false
+    },
+    {
+      "relativePath": "conversations/tUrLvh4daSprJN9Hd2n0h/current_reading.md",
+      "oldHash": "4dddfa9b3241128369c1065f6f69b7d56b71107c30158d9d11e95356e4a819bb",
+      "newHash": null,
+      "deleting": true
+    },
+    {
+      "relativePath": "textbooks/KUbm/current_reading.md",
+      "oldHash": null,
+      "newHash": null,
+      "deleting": true
+    },
+    {
+      "relativePath": "conversations/tUrLvh4daSprJN9Hd2n0h/current_reading_summary.json",
+      "oldHash": null,
+      "newHash": null,
+      "deleting": true
+    },
+    {
+      "relativePath": "conversations/tUrLvh4daSprJN9Hd2n0h/handoff.json",
+      "oldHash": null,
+      "newHash": null,
+      "deleting": true
+    }
+  ],
+  "payload": {
+    "farewell": "*她轻轻把灯罩往旁边拨了拨，让光落稳。*\n今天你把\"角色\"和\"场景\"这两块摆得很稳，Emma 和 Elena 那一处校准得也快。下次我们接着看后面那两种开发用户故事的方式。",
+    "companionNote": "你今天在 Emma 那处校准得很快，没有硬撑原来的说法。后面那个\"底下要动哪几层\"的判据也切得准。下次我们接着看后面那两种开发用户故事的方式。",
+    "marker": "<!-- continuityEvent:89cf3a66025ffe95a5d2c2c5 companion:ci_56a3438b71f0da96c619c733 mode:classroom -->",
+    "endingPage": 66
+  }
+}

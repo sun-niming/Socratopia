@@ -1,0 +1,47 @@
+{
+  "title": "GameBoard::at返回引用并提供二维数组访问语义",
+  "definition": "GameBoard::at(size_t x, size_t y)返回指定网格位置中std::unique_ptr<GamePiece>的引用，而不是返回棋子对象的副本。这样客户代码可以像访问二维数组元素一样读取、替换或清空该位置的内容。返回的引用不应被客户代码保存供以后使用，因为棋盘内部结构变化后该引用可能失效；应在使用返回引用之前调用at()。",
+  "key_points": [
+    "at(x,y)先验证坐标，再返回m_cells[x][y]。",
+    "非const版本返回std::unique_ptr<GamePiece>&，因此可以修改网格内容。",
+    "const版本返回const std::unique_ptr<GamePiece>&，用于只读访问。",
+    "实现非const at()时，可以通过调用const版本，再用const_cast去除const，以避免重复编写坐标验证和访问逻辑。"
+  ],
+  "examples": [
+    "放置棋子：\nchessBoard.at(0, 0) = std::move(pawn);",
+    "清空网格：\nchessBoard.at(0, 1) = nullptr;",
+    "通过at()直接放入新棋子：\nchessBoard.at(0, 1) = std::make_unique<ChessPiece>();"
+  ],
+  "misconceptions": [
+    "at()返回的不是棋子对象副本，而是保存棋子的unique_ptr的引用。",
+    "调用at()得到引用后，不应长期保存该引用；应在实际使用前重新调用at()。",
+    "const版本的at()不能用于修改网格内容；只有非const棋盘对象才能通过非const版本修改。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "GameBoard::at()为什么返回引用而不是棋子副本？",
+      "a": "因为GameBoard要提供类似二维数组的访问语义，使调用者访问实际网格元素，并能够替换或清空该位置，而不是操作一个副本。"
+    },
+    {
+      "q": "如何清空棋盘坐标(0,1)处的棋子？",
+      "a": "使用chessBoard.at(0, 1) = nullptr;。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "引用",
+    "const成员函数",
+    "std::unique_ptr"
+  ],
+  "source_pages": [
+    374,
+    376
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "759_gameboard_at返回引用并提供二维数组访问语义",
+  "_chunk_pages": [
+    373,
+    376
+  ]
+}

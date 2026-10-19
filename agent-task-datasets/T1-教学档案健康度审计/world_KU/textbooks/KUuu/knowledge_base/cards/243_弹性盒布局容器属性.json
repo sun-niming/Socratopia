@@ -1,0 +1,35 @@
+{
+  "title": "弹性盒布局容器属性",
+  "definition": "在弹性盒布局中，设置在容器上的属性包括：flex-direction、flex-wrap、flex-flow、justify-content、align-items、align-content。原文这一部分是在介绍“容器的属性”。",
+  "key_points": [
+    "这些属性是弹性盒布局容器可以设置的属性。",
+    "原文列出了 6 个容器属性名称。"
+  ],
+  "examples": [
+    "flex-direction、flex-wrap、flex-flow、justify-content、align-items、align-content"
+  ],
+  "misconceptions": [
+    "这些属性都是设置在子项目上的；实际上原文说明它们是“容器的属性”。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "原文中列出的弹性盒布局容器属性有哪些？",
+      "a": "flex-direction、flex-wrap、flex-flow、justify-content、align-items、align-content。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "弹性盒布局"
+  ],
+  "source_pages": [
+    153,
+    156
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "243_弹性盒布局容器属性",
+  "_chunk_pages": [
+    153,
+    156
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "title": "查询当前未处理异常数量的函数",
+  "definition": "C++标准库提供了用于查询当前未处理异常状态的函数。原文列出了 `uncaught_exception()` 和 `uncaught_exceptions()`，并提到相关的 C++17、C++20 信息；这些函数位于异常处理相关的标准库内容中。由于原文 OCR 对函数名、返回类型以及版本变化的描述不完整，具体的弃用状态、返回值含义和标准版本需要进一步核实。",
+  "key_points": [
+    "原文同时出现单数形式 `uncaught_exception()` 和复数形式 `uncaught_exceptions()`。",
+    "该内容与异常传播和异常处理状态有关。",
+    "原文标注了 C++17、C++20 等版本信息，但 OCR 文本不足以准确还原每个版本的规则。"
+  ],
+  "examples": [
+    "原文涉及的函数名：`std::uncaught_exception()`、`std::uncaught_exceptions()`。"
+  ],
+  "misconceptions": [
+    "不能仅根据单数和复数函数名推断二者在所有 C++ 标准版本中的行为完全相同。",
+    "不能把查询未处理异常状态的函数当作捕获异常的替代品；捕获异常仍需使用 `try`-`catch`。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "原文列出了哪些用于查询未处理异常状态的函数？",
+      "a": "原文列出了 `uncaught_exception()` 和 `uncaught_exceptions()`。"
+    },
+    {
+      "q": "这些函数是否等同于异常捕获机制？",
+      "a": "不是。它们用于查询未处理异常状态，而异常捕获需要使用 `try`-`catch`。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "C++异常处理基础",
+    "C++标准库异常支持"
+  ],
+  "source_pages": [
+    465,
+    468
+  ],
+  "needs_verification": true,
+  "verify_query": "C++17 C++20 std::uncaught_exception std::uncaught_exceptions deprecation return value exact standard",
+  "concept_id": "608_查询当前未处理异常数量的函数",
+  "_chunk_pages": [
+    465,
+    468
+  ]
+}

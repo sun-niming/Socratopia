@@ -1,0 +1,47 @@
+{
+  "title": "Math对象的取整方法",
+  "definition": "Math 对象提供多个取整方法。原文列出：Math.ceil(n) 返回大于 n 的最小整数，Math.floor(n) 返回小于 n 的最大整数，Math.round(n) 把 n 四舍五入为最接近的整数。需要注意，关于 ceil 和 floor 在 n 本身为整数时是否包含 n，原文表述可能与标准 JavaScript 定义存在细节差异，需核实。",
+  "key_points": [
+    "Math.ceil(n)：原文表述为返回大于 n 的最小整数。",
+    "Math.floor(n)：原文表述为返回小于 n 的最大整数。",
+    "Math.round(n)：把 n 四舍五入为最接近的整数。",
+    "这些方法都属于 Math 对象，用法形式为 Math.方法名(n)。"
+  ],
+  "examples": [
+    "Math.ceil(3.2) // 按原文含义，返回大于 3.2 的最小整数，即 4\nMath.floor(3.8) // 按原文含义，返回小于 3.8 的最大整数，即 3\nMath.round(3.6) // 四舍五入为最接近的整数"
+  ],
+  "misconceptions": [
+    "误以为 ceil、floor、round 是同一种取整方式；它们分别对应向上取整、向下取整和四舍五入。",
+    "只按“大于”或“小于”理解 ceil/floor 时，可能忽略 n 为整数时的标准定义差异。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "Math.round(n) 的作用是什么？",
+      "a": "把 n 四舍五入为最接近的整数。"
+    },
+    {
+      "q": "按原文说明，Math.ceil(n) 返回什么？",
+      "a": "返回大于 n 的最小整数。"
+    },
+    {
+      "q": "按原文说明，Math.floor(n) 返回什么？",
+      "a": "返回小于 n 的最大整数。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "JavaScript对象",
+    "Math对象"
+  ],
+  "source_pages": [
+    325,
+    328
+  ],
+  "needs_verification": true,
+  "verify_query": "JavaScript Math.ceil Math.floor 定义 大于等于 小于等于 MDN",
+  "concept_id": "439_math对象的取整方法",
+  "_chunk_pages": [
+    325,
+    328
+  ]
+}

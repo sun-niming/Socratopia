@@ -1,0 +1,45 @@
+{
+  "title": "派生类可以改变重写方法的访问级别",
+  "definition": "派生类可以在重写基类虚方法时，为该方法指定不同于基类的访问级别。例如，基类中的 public 虚方法可以在派生类中被重写为 protected。这样通过派生类对象直接调用该方法会因访问控制而编译失败，但通过基类的 public 引用或指针调用时，仍可进行动态绑定并执行派生类的重写版本。",
+  "key_points": [
+    "访问控制和虚函数动态绑定是两个不同机制。",
+    "派生类中将重写方法设为 protected，不会阻止通过基类 public 接口调用它。",
+    "如果基类方法是 public，就不能通过派生类的访问级别设置来完整限制所有访问路径。",
+    "若只想改变访问级别而不改变实现，可在派生类中使用 using 声明。"
+  ],
+  "examples": [
+    "class Gregarious { public: virtual void talk(); }; class Shy : public Gregarious { protected: void talk() override; };",
+    "Shy myShy; myShy.talk(); // 编译错误：尝试访问 protected 方法",
+    "Shy myShy; Gregarious& ref = myShy; ref.talk(); // 合法，执行 Shy::talk()"
+  ],
+  "misconceptions": [
+    "误以为把派生类重写方法设为 protected 后，任何方式都不能调用该方法。",
+    "误以为访问级别会改变虚函数的动态绑定行为。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么 myShy.talk() 可能编译失败，而 Gregarious& ref = myShy; ref.talk() 可以调用？",
+      "a": "前者按 Shy 的接口检查访问权限，talk() 是 protected；后者按 Gregarious 的 public 接口检查访问权限，同时虚函数动态绑定到 Shy::talk()。"
+    },
+    {
+      "q": "派生类把基类 public 虚方法重写为 protected，是否能完全禁止调用？",
+      "a": "不能。只要存在基类的 public 指针或引用，就仍可通过基类接口调用，并执行派生类版本。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "继承中的访问控制",
+    "虚函数重写与动态绑定"
+  ],
+  "source_pages": [
+    341,
+    342
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "689_派生类可以改变重写方法的访问级别",
+  "_chunk_pages": [
+    341,
+    344
+  ]
+}

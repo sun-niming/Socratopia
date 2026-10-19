@@ -1,0 +1,44 @@
+{
+  "title": "std::any、std::variant与void*的类型处理方式",
+  "definition": "原文将 C++ 中的 void*、C++17 引入的 std::any 和 std::variant 放在一起进行类型处理方式的对比。void* 可以指向任意类型的对象，但缺少具体类型信息；std::any 用于保存任意类型的单个值；std::variant 用于在预先指定的若干候选类型中保存其中一种值。",
+  "key_points": [
+    "std::any 和 std::variant 均属于 C++17 的标准库类型工具。",
+    "std::any 表示“可以保存任意一种类型的值”。",
+    "std::variant 表示“只能保存预先列出的候选类型之一”。",
+    "使用 void* 处理任意类型对象时，需要额外处理实际类型；std::any 和 std::variant 提供了更明确的类型抽象。"
+  ],
+  "examples": [
+    "可以用 std::any 表示一个运行时类型不固定的值：文本中将其与 void* 以及其他语言中的通用对象类型进行比较。",
+    "可以用 std::variant<int, std::string> 表示值只能是 int 或 std::string 中的一种。"
+  ],
+  "misconceptions": [
+    "std::variant 并不是可以保存任意类型的容器，它只能保存模板参数中列出的候选类型之一。",
+    "std::any 与 std::variant 不是同一个类型：前者不要求预先列出候选类型，后者要求预先列出候选类型。",
+    "void* 并不会自动保留所指对象的具体类型信息。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "std::any 与 std::variant 的主要区别是什么？",
+      "a": "std::any 可以保存任意类型的单个值；std::variant 只能保存其模板参数预先列出的候选类型之一。"
+    },
+    {
+      "q": "原文列举了哪些用于处理不同类型数据的 C++ 类型或方式？",
+      "a": "原文列举了 void*、C++17 的 std::any 和 std::variant。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++指针与类型基础"
+  ],
+  "source_pages": [
+    185,
+    188
+  ],
+  "needs_verification": true,
+  "verify_query": "《C++20高级编程》第5版 第185页 std::any std::variant void* 类型对比 原文",
+  "concept_id": "259_std_any_std_variant与void_的类型处理方式",
+  "_chunk_pages": [
+    185,
+    188
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "title": "用 unique_ptr 实现协变返回的资源管理",
+  "definition": "在实现返回派生类指针的 pick() 时，可以先使用 std::make_unique<BingCherry>() 创建并管理对象，完成对象操作后调用 release() 将指针所有权移交给函数返回值。",
+  "key_points": [
+    "原文先创建 auto theCherry { make_unique<BingCherry>() };。",
+    "可以在释放所有权前调用 theCherry->polish()。",
+    "theCherry.release() 返回原始 BingCherry*，并将 unique_ptr 放弃所有权。"
+  ],
+  "examples": [
+    "BingCherry* BingCherryTree::pick() { auto theCherry { make_unique<BingCherry>() }; theCherry->polish(); return theCherry.release(); }"
+  ],
+  "misconceptions": [
+    "release() 不会销毁对象；它只是释放 unique_ptr 对对象的所有权并返回原始指针。",
+    "使用 release() 后，返回的原始指针必须由后续代码负责正确释放，否则可能造成内存泄漏。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么在返回前调用 theCherry.release()？",
+      "a": "因为函数返回类型是 BingCherry*，release() 可以移交 unique_ptr 管理对象的所有权并返回原始指针。"
+    },
+    {
+      "q": "release() 会不会删除 BingCherry 对象？",
+      "a": "不会；release() 放弃所有权但不删除对象。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "std::unique_ptr",
+    "协变返回类型",
+    "动态内存管理"
+  ],
+  "source_pages": [
+    329,
+    332
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "429_用_unique_ptr_实现协变返回的资源管理",
+  "_chunk_pages": [
+    329,
+    332
+  ]
+}

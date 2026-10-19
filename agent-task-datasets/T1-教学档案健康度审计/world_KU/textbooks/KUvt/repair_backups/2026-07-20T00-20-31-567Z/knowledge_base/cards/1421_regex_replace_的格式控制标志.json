@@ -1,0 +1,51 @@
+{
+  "title": "regex_replace() 的格式控制标志",
+  "definition": "`regex_replace()` 可以通过格式控制标志改变替换范围以及是否复制未匹配文本。教材重点介绍 `format_default`、`format_no_copy` 和 `format_first_only`。",
+  "key_points": [
+    "`format_default` 是默认行为：替换所有匹配实例，并将不匹配内容复制到结果字符串。",
+    "`format_no_copy` 替换所有匹配实例，但不把不匹配内容复制到结果字符串。",
+    "`format_first_only` 只替换第一个匹配实例。",
+    "使用 `format_no_copy` 时，如果输入字符串中只有匹配部分被替换，结果中不会保留匹配之外的原始文本。"
+  ],
+  "examples": [
+    "默认调用：`string result { regex_replace(str, r, replacement) };`",
+    "不复制未匹配内容：`string result { regex_replace(str, r, replacement, regex_constants::format_no_copy) };`",
+    "对于源字符串 `<body><h1>Header</h1><p>Some text</p></body>`，使用 `format_no_copy` 后，结果可以是 `Hl=Header and P=Some text`，而不会保留外围的 `<body>` 和 `</body>`。",
+    "将每个单词替换为单词加换行符：`regex reg { \"([\\\\w]+)\" }; const string replacement { \"$1\\\\n\" }; regex_replace(str, reg, replacement, regex_constants::format_no_copy);`"
+  ],
+  "misconceptions": [
+    "`format_no_copy` 不是“不进行替换”，而是“不复制不匹配的输入部分”。",
+    "`format_first_only` 只限制替换次数，不表示正则表达式只能匹配输入开头。",
+    "默认标志会保留不匹配文本，因此结果通常包含原输入中未被替换的部分。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "怎样让 `regex_replace()` 只输出替换结果，而不复制输入中的不匹配文本？",
+      "a": "传入 `regex_constants::format_no_copy`。"
+    },
+    {
+      "q": "怎样让 `regex_replace()` 只替换第一个匹配实例？",
+      "a": "使用 `regex_constants::format_first_only`。"
+    },
+    {
+      "q": "教材如何不用显式循环把每个单词放到单独一行？",
+      "a": "使用正则表达式 `([\\\\w]+)` 匹配单词，用 `$1\\n` 作为替换格式，并传入 `format_no_copy`。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "regex_replace() 的功能与两类重载",
+    "regex_replace() 格式化字符串中的转义序列"
+  ],
+  "source_pages": [
+    679,
+    680
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 regex_constants format_default format_no_copy format_first_only regex_replace 标准名称与行为",
+  "concept_id": "1421_regex_replace_的格式控制标志",
+  "_chunk_pages": [
+    677,
+    680
+  ]
+}

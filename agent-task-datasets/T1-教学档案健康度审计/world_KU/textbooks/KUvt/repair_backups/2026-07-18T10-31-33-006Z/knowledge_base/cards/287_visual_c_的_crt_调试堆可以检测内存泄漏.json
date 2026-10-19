@@ -1,0 +1,47 @@
+{
+  "title": "Visual C++ 的 CRT 调试堆可以检测内存泄漏",
+  "definition": "在 Visual C++ 环境中，可以使用 CRT 调试堆记录动态内存分配的位置，并在程序结束时报告未释放的内存。常见做法是在调试构建中把 new 重定义为带有文件名和行号信息的调试版本，并通过 _CrtSetDbgFlag 启用内存泄漏检查。",
+  "key_points": [
+    "原文使用 <cstdlib> 和 <crtdbg.h> 中的 CRT 调试设施。",
+    "通过调试宏把 new 替换为带文件名和行号信息的版本，使泄漏报告能够指出分配位置。",
+    "原文给出的设置形式为：CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);。",
+    "程序退出时可能输出 Detected memory leaks!，并列出源文件、行号、块编号和字节数。",
+    "报告中的块编号可用于进一步定位，例如原文提到 Visual C++ 的 _CrtSetBreakAlloc()。"
+  ],
+  "examples": [
+    "泄漏报告示例包含：Detected memory leaks!、源文件路径、行号、normal block、字节数以及 Data 内容。",
+    "原文提到可使用类似 CrtSetBreakAlloc(147); 的调用，在特定分配块编号处设置断点。"
+  ],
+  "misconceptions": [
+    "误以为 CRT 调试堆会自动修复泄漏；它主要用于记录和报告问题。",
+    "误以为所有构建模式都会产生相同的调试报告；原文中的宏设置针对 DEBUG 调试条件。",
+    "误以为报告中的块编号就是源代码行号；块编号和源代码行号是不同的信息。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "Visual C++ CRT 调试堆报告内存泄漏时通常会提供哪些定位信息？",
+      "a": "通常会提供源文件路径、源代码行号、分配块编号、内存块类型和字节数等信息。"
+    },
+    {
+      "q": "_CRTDBG_LEAK_CHECK_DF 的用途是什么？",
+      "a": "它用于启用程序结束时的 CRT 内存泄漏检查。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "动态内存泄漏",
+    "C++ 预处理宏",
+    "Visual C++ 调试环境"
+  ],
+  "source_pages": [
+    215,
+    216
+  ],
+  "needs_verification": true,
+  "verify_query": "Visual C++ CRTDBG _CrtSetDbgFlag _CRTDBG_LEAK_CHECK_DF _CrtSetBreakAlloc 内存泄漏 第215页 第216页",
+  "concept_id": "287_visual_c_的_crt_调试堆可以检测内存泄漏",
+  "_chunk_pages": [
+    213,
+    216
+  ]
+}

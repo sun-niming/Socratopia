@@ -1,0 +1,44 @@
+{
+  "title": "构造函数函数尝试块",
+  "definition": "构造函数可以使用函数尝试块（function-try-block）把构造函数的成员初始化列表和函数体都纳入同一个异常处理范围。其形式是在构造函数定义后写 `try`，然后写成员初始化列表和函数体，最后写一个或多个 `catch`。如果成员对象在初始化阶段抛出异常，构造函数的函数尝试块也可以捕获该异常；示例中 `SubObject` 的构造函数抛出异常后，`MyClass` 的函数尝试块捕获并输出信息，随后调用方的 `catch` 也捕获到该异常。",
+  "key_points": [
+    "函数尝试块的 `try` 位于构造函数名称和成员初始化列表之间，因此可以覆盖成员初始化过程以及构造函数体。",
+    "成员初始化列表中的 `subObject{42}` 如果抛出异常，可以由构造函数的函数尝试块处理。",
+    "示例中函数尝试块的处理器执行清理操作，例如释放动态数组并将指针置为空。",
+    "调用方仍然可以捕获从构造函数传播出来的异常；原文输出中既有 `function-try-block caught`，又有 `main() caught`。"
+  ],
+  "examples": [
+    "示意形式：`MyClass::MyClass() try : subObject{42} { /* body */ } catch (const std::exception& e) { /* cleanup */ }`。",
+    "调用方示意：`try { MyClass m; } catch (const std::exception& e) { /* handle exception */ }`。"
+  ],
+  "misconceptions": [
+    "函数尝试块并不表示构造函数中的异常一定被彻底吞掉；如果处理器结束后没有使异常终止传播，异常仍可能传播到调用方。",
+    "普通函数体内部的 `try`-`catch` 不能覆盖成员初始化列表；需要使用构造函数函数尝试块才能处理初始化阶段的异常。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "构造函数函数尝试块能够覆盖哪些部分？",
+      "a": "它能够覆盖构造函数的成员初始化列表和函数体，因此成员对象在初始化阶段抛出的异常也可以被捕获。"
+    },
+    {
+      "q": "原文示例中为什么既出现 `function-try-block caught` 又出现 `main() caught`？",
+      "a": "因为构造函数的函数尝试块先捕获并处理了异常，而异常随后继续传播到调用构造函数的 `main` 代码中的 `catch`。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++异常抛出与捕获",
+    "构造函数成员初始化列表"
+  ],
+  "source_pages": [
+    465,
+    468
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 constructor function-try-block member initializer exception rethrow behavior cleanup delete[] example",
+  "concept_id": "606_构造函数函数尝试块",
+  "_chunk_pages": [
+    465,
+    468
+  ]
+}

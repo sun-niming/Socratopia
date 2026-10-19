@@ -1,0 +1,45 @@
+{
+  "title": "使用 nullptr 检查指针是否为空",
+  "definition": "`nullptr` 表示空指针值。对指针进行解引用或其他访问操作前，应先判断指针是否为空。原文展示了两种等价的常见判断方式：`if (ptr != nullptr)` 和 `if (!ptr)`；只有判断结果表明指针非空时，才执行解引用操作。",
+  "key_points": [
+    "`ptr != nullptr` 明确判断 `ptr` 不是空指针。",
+    "`!ptr` 利用指针到布尔值的上下文转换，表示指针为空时条件为真。",
+    "原文示例：`if (ptr != nullptr) { /* Perform some dereferencing action. */ }`。",
+    "原文还示例：`if (!ptr) { /* Do something. */ }`，其代码块在指针为空时执行。"
+  ],
+  "examples": [
+    "```cpp\nif (ptr != nullptr) {\n    // 执行解引用操作\n}\n\nif (!ptr) {\n    // 指针为空时执行相应处理\n}\n```",
+    "若要在空指针时提前处理，可以写成：`if (!ptr) { return; }`，之后再使用 `*ptr` 或 `ptr->member`。"
+  ],
+  "misconceptions": [
+    "`nullptr` 不是指向某个有效对象的指针，不能对空指针进行解引用。",
+    "`if (!ptr)` 表示指针为空，而不是表示指针非空。",
+    "只要指针变量已经声明，就不代表它一定指向有效对象；仍应根据程序逻辑进行空指针检查。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`if (ptr != nullptr)` 检查的是什么？",
+      "a": "它检查 `ptr` 是否为非空指针；只有条件成立时，才适合继续执行依赖该指针的解引用操作。"
+    },
+    {
+      "q": "`if (!ptr)` 在指针判断中是什么意思？",
+      "a": "它表示 `ptr` 为空指针时条件成立，因此代码块会在指针为空时执行。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++指针",
+    "布尔条件判断"
+  ],
+  "source_pages": [
+    485,
+    488
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "631_使用_nullptr_检查指针是否为空",
+  "_chunk_pages": [
+    485,
+    488
+  ]
+}

@@ -1,0 +1,49 @@
+{
+  "title": "刀片服务器与机架顶部交换机",
+  "definition": "数据中心中的主机被称为刀片（blade），通常是包含CPU、内存和磁盘存储的商用主机。刀片被堆叠在机架中，每个机架通常放置20至40台刀片。每个机架顶部部署一台机架顶部交换机（Top of Rack，TOR），用于连接本机架内的主机，并通过额外端口与其他TOR交换机互联。",
+  "key_points": [
+    "每台主机都有一块与TOR交换机相连的网卡。",
+    "每台TOR交换机有额外端口连接其他TOR交换机。",
+    "原文称主机通常以40Gbps以太网连接到TOR交换机。",
+    "每台主机还会分配一个数据中心内部IP地址。",
+    "典型连接关系可以表示为：刀片主机 $\\rightarrow$ 网卡 $\\rightarrow$ TOR交换机 $\\rightarrow$ 其他TOR交换机或边界路由器。"
+  ],
+  "examples": [
+    "一个机架中放置20至40台刀片，这些刀片分别通过网卡连接到机架顶部的TOR交换机；TOR交换机再连接数据中心其他机架的TOR交换机。"
+  ],
+  "misconceptions": [
+    "TOR交换机不是只连接机架外部网络，它首先连接本机架内的主机。",
+    "数据中心主机不仅需要外部可达的地址，还会分配数据中心内部IP地址。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "什么是TOR交换机？",
+      "a": "TOR是机架顶部交换机，部署在机架顶部，连接机架内主机，并通过额外端口连接其他TOR交换机。"
+    },
+    {
+      "q": "数据中心中的刀片通常包含哪些部件？",
+      "a": "通常包含CPU、内存和磁盘存储。"
+    },
+    {
+      "q": "原文给出的主机到TOR交换机的典型连接速率是多少？",
+      "a": "40Gbps以太网。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "以太网交换机",
+    "IP地址",
+    "数据中心网络"
+  ],
+  "source_pages": [
+    337,
+    340
+  ],
+  "needs_verification": true,
+  "verify_query": "Greenberg 2015 data center hosts 40 Gbps Ethernet Top of Rack switch blade servers 20 40 per rack",
+  "concept_id": "779_刀片服务器与机架顶部交换机",
+  "_chunk_pages": [
+    337,
+    340
+  ]
+}

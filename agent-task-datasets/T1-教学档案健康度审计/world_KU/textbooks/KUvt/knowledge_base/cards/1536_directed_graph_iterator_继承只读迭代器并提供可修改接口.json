@@ -1,0 +1,53 @@
+{
+  "title": "directed_graph_iterator 继承只读迭代器并提供可修改接口",
+  "definition": "directed_graph_iterator 是 directed_graph 的非 const 迭代器，公有派生于 const_directed_graph_iterator。它复用基类的比较、赋值、递增和递减逻辑，只重新定义与元素可修改性和返回类型有关的部分：pointer、reference 和 iterator_type 使用非 const 类型；operator* 和 operator-> 不标记为 const；递增和递减返回 directed_graph_iterator 类型。实现中通过 const_cast 将基类访问到的 const 元素转换为非 const 引用或指针。",
+  "key_points": [
+    "directed_graph_iterator 的类型别名包括：pointer = value_type*，reference = value_type&，iterator_type = DirectedGraph::nodes_container_type::iterator。",
+    "它使用 std::bidirectional_iterator_tag，表示支持向前和向后移动。",
+    "operator* 返回 value_type&；operator-> 返回 value_type*。",
+    "operator++ 和 operator-- 通过 this->increment() 与 this->decrement() 复用基类逻辑。",
+    "在类模板派生类中，访问基类模板的成员或方法通常需要显式写成 this->increment() 等形式，以满足 C++ 名称查找规则。"
+  ],
+  "examples": [
+    "构造函数将底层迭代器和图对象转交给基类：const_directed_graph_iterator<DirectedGraph>{ it, graph }。",
+    "解引用的核心逻辑：return const_cast<reference>(this->m_nodeIterator->value());",
+    "箭头运算符的核心逻辑：return const_cast<pointer>(&(this->m_nodeIterator->value()));",
+    "前置递增的核心逻辑：this->increment(); return *this;"
+  ],
+  "misconceptions": [
+    "directed_graph_iterator 并不是完全重新实现了一套迭代器逻辑，而是复用 const_directed_graph_iterator 的遍历和比较功能。",
+    "const_cast 并不会自动保证对象本身确实可修改；这里只是把基类接口得到的 const 访问形式转换成非 const 形式，因此使用场景必须符合容器实际的可修改性约束。",
+    "派生类中不能总是直接写 increment() 访问基类模板成员，教材强调应显式使用 this->increment()。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "directed_graph_iterator 与 const_directed_graph_iterator 的主要区别是什么？",
+      "a": "directed_graph_iterator 使用非 const 的指针、引用和底层迭代器类型，解引用可返回非 const 元素，并且递增递减返回 directed_graph_iterator；其余许多逻辑复用基类。"
+    },
+    {
+      "q": "directed_graph_iterator 为什么使用 const_cast？",
+      "a": "因为它继承的基类访问接口产生 const 形式，非 const 派生迭代器需要将当前元素转换为非 const 引用或指针后返回。"
+    },
+    {
+      "q": "为什么实现中写 this->increment() 而不是直接写 increment()？",
+      "a": "由于基类是类模板，C++ 名称查找规则要求显式使用 this-> 或完整的基类限定名来引用依赖基类中的成员和方法。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "类模板继承",
+    "const_cast",
+    "双向迭代器"
+  ],
+  "source_pages": [
+    738,
+    739
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1536_directed_graph_iterator_继承只读迭代器并提供可修改接口",
+  "_chunk_pages": [
+    737,
+    740
+  ]
+}

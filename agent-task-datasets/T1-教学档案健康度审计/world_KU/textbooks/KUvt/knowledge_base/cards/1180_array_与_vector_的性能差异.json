@@ -1,0 +1,43 @@
+{
+  "title": "array 与 vector 的性能差异",
+  "definition": "array 和 vector 都支持随机访问迭代器，元素也都连续存储，但二者在交换和移动方面存在差异。原文指出，array 的 swap() 具有线性时间复杂度，array 的移动不是常量时间；相比之下，vector 的 swap() 和移动是常量时间。",
+  "key_points": [
+    "array 的元素数量固定，交换 array 通常需要逐个交换元素，因此原文指出其 swap() 是线性时间复杂度。",
+    "原文指出 array 的移动不是常量时间，而 vector 的移动是常量时间。",
+    "array 的连续存储和随机访问能力与 vector 类似，但固定大小并不意味着所有操作都比 vector 更快。"
+  ],
+  "examples": [
+    "对 `std::array<int, 3>` 调用 `swap()` 时，交换固定数量元素；其复杂度随 array 元素数量线性增长。",
+    "vector 的 swap 通常只需交换内部资源管理信息；原文将其复杂度描述为常量时间。"
+  ],
+  "misconceptions": [
+    "array 的所有操作都是常量时间；原文明确指出 array 的 swap() 是线性时间，移动也不是常量时间。",
+    "因为 array 在栈上，所以它在所有方面都比 vector 快；原文只说明了容器结构和若干操作复杂度，不能推出这一结论。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "原文如何比较 array 和 vector 的 swap() 复杂度？",
+      "a": "array 的 swap() 是线性时间复杂度，vector 的 swap() 是常量时间复杂度。"
+    },
+    {
+      "q": "array 的移动操作是否为常量时间？",
+      "a": "不是；原文指出 array 的移动不是常量时间，而 vector 的移动是常量时间。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "array 的固定大小",
+    "时间复杂度"
+  ],
+  "source_pages": [
+    572,
+    572
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1180_array_与_vector_的性能差异",
+  "_chunk_pages": [
+    569,
+    572
+  ]
+}

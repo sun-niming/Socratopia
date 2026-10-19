@@ -1,0 +1,37 @@
+{
+  "title": "Grid布局",
+  "definition": "CSS Grid 布局（CSS Grid Layout）是一种二维、基于网格的布局系统。它与 Flexbox 的一维布局不同，能够同时处理行和列，适合设计复杂网页布局。",
+  "key_points": [
+    "二维布局：同时处理行和列",
+    "基于网格组织页面元素",
+    "适合复杂网页布局"
+  ],
+  "examples": [
+    "网页中的多个模块可以按行和列同时排布，例如将 HTML、CSS、JavaScript 三块内容放入网格中。"
+  ],
+  "misconceptions": [
+    "Grid 只能横向排列或只能纵向排列；实际上它能同时处理行和列。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "Grid 布局与 Flexbox 的主要区别是什么？",
+      "a": "Grid 是二维布局，可同时处理行和列；Flexbox 是一维布局。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "CSS基础",
+    "布局基础"
+  ],
+  "source_pages": [
+    169,
+    172
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "239_grid布局",
+  "_chunk_pages": [
+    169,
+    172
+  ]
+}

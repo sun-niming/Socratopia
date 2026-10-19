@@ -1,0 +1,44 @@
+{
+  "title": "UML类图中的类、属性与操作",
+  "definition": "UML类图可以用一个类框表示对象类型，并在类名下列出属性和操作。原文中的类“Orange”包含属性“seeds: vector”“color: Color”“flavor: Flavor”，以及返回类型为 void 的操作“eat()”“roll()”“toss()”“peel()”“squeeze()”。名称前的“-”表示私有成员，名称前的“+”表示公有成员。",
+  "key_points": [
+    "类名示例为 Orange。",
+    "属性通常写成“名称: 类型”，例如 $seeds: vector$、$color: Color$、$flavor: Flavor$。",
+    "操作通常写成“名称(参数): 返回类型”，例如 $eat(): void$。",
+    "原文中“-”标记的成员为私有成员，“+”标记的成员为公有成员。"
+  ],
+  "examples": [
+    "可将原文类图改写为：\n$$\\begin{array}{|l|}\\hline\\text{Orange}\\\\\\hline-\\ seeds: vector\\\\-\\ color: Color\\\\-\\ flavor: Flavor\\\\\\hline+\\ eat(): void\\\\+\\ roll(): void\\\\+\\ toss(): void\\\\+\\ peel(): void\\\\+\\ squeeze(): void\\\\\\hline\\end{array}$$"
+  ],
+  "misconceptions": [
+    "不要把类图中的属性误认为函数；属性没有括号，操作通常带有括号。",
+    "不要把“-”和“+”理解成减法和加法；在该类图记法中，它们表示成员可见性。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "原文中的 Orange 类有哪些属性？",
+      "a": "有 seeds: vector、color: Color 和 flavor: Flavor。"
+    },
+    {
+      "q": "原文中的 Orange 类有哪些操作？",
+      "a": "有 eat()、roll()、toss()、peel() 和 squeeze()，这些操作的返回类型均标为 void。"
+    },
+    {
+      "q": "UML类图中成员名前的“+”和“-”分别表示什么？",
+      "a": "“+”表示公有成员，“-”表示私有成员。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [],
+  "source_pages": [
+    169,
+    172
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "234_uml类图中的类_属性与操作",
+  "_chunk_pages": [
+    169,
+    172
+  ]
+}

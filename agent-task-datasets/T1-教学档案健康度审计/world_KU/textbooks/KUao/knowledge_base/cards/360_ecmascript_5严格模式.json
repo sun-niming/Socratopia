@@ -1,0 +1,39 @@
+{
+  "title": "ECMAScript 5严格模式",
+  "definition": "严格模式是ECMAScript 5提供的一种限制性JavaScript变体，用来让代码显式地脱离sloppy模式。它的作用包括：通过抛出错误消除一些原有的静默错误，修复一些影响JavaScript引擎优化的缺陷，并禁用未来版本中可能定义的一些语法。",
+  "key_points": [
+    "严格模式是ES5提供的限制性JavaScript变体",
+    "它会通过抛出错误消除一些静默错误",
+    "它可以修复影响引擎优化的缺陷",
+    "它还会禁用未来版本中可能定义的一些语法"
+  ],
+  "examples": [
+    "use strict;"
+  ],
+  "misconceptions": [
+    "严格模式只是代码风格上的约定，没有运行时影响",
+    "严格模式只会带来限制，不会带来任何好处",
+    "严格模式会自动适用于所有脚本和函数"
+  ],
+  "qa_pairs": [
+    {
+      "q": "严格模式的主要作用有哪些？",
+      "a": "抛出错误消除静默错误、修复影响优化的缺陷、禁用未来可能定义的语法。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "JavaScript基础"
+  ],
+  "source_pages": [
+    260,
+    260
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "360_ecmascript_5严格模式",
+  "_chunk_pages": [
+    257,
+    260
+  ]
+}

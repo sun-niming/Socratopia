@@ -1,0 +1,41 @@
+{
+  "title": "资源加载与卸载事件",
+  "definition": "这组事件用于反映资源的加载成功、加载失败、中止，以及页面或文档即将或正在卸载的时机。",
+  "key_points": [
+    "error：资源加载失败时触发",
+    "abort：正在加载的资源被中止时触发",
+    "load：资源及其相关资源已完成加载时触发",
+    "beforeunload：window、document 及其资源即将被卸载时触发",
+    "unload：文档或一个依赖资源正在被卸载时触发"
+  ],
+  "examples": [
+    "img.addEventListener('load', handler)",
+    "window.addEventListener('beforeunload', handler)",
+    "script.addEventListener('error', handler)"
+  ],
+  "misconceptions": [
+    "load 不是“加载失败”，加载失败对应 error",
+    "beforeunload 与 unload 不是“资源完成加载”，而是页面或文档卸载阶段"
+  ],
+  "qa_pairs": [
+    {
+      "q": "哪个事件表示资源加载失败？",
+      "a": "error。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "HTML事件基础"
+  ],
+  "source_pages": [
+    361,
+    361
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "518_资源加载与卸载事件",
+  "_chunk_pages": [
+    361,
+    364
+  ]
+}

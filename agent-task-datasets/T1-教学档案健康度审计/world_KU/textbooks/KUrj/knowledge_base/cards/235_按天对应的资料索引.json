@@ -1,0 +1,42 @@
+{
+  "title": "按天对应的资料索引",
+  "definition": "讲义把五天学习内容与本地资料一一对应起来。每一天都有指定的文件或 PDF，学习时按天查阅即可。这个索引的作用是把学习任务和具体资料绑定，避免盲目找资料。",
+  "key_points": [
+    "第 1 天：Makefile、Beej 网络编程、echo_server/echo_client",
+    "第 2 天：HTTP 请求响应格式、MDN HTTP Overview、tinyhttpd.c",
+    "第 3 天：文件 I/O 参考、tinyhttpd.c、HTTP 请求响应格式",
+    "第 4 天：目录穿越防护、日志 C 代码示例、文件 I/O 参考",
+    "第 5 天：fork 并发服务器、wait/waitpid、curl 速查表与使用指南"
+  ],
+  "examples": [
+    "第 1 天资料：`01-socket/echo_server.c`、`01-socket/echo_client.c`",
+    "第 5 天资料：`05-process/fork并发服务器示例.c`、`07-testing/curl速查表.md`"
+  ],
+  "misconceptions": [
+    "这不是“每一天都必须把所有资料完整读完”的硬性要求，而是查阅索引",
+    "同一份资料可能在不同天重复出现，例如 `tinyhttpd.c` 和 `HTTP请求响应格式.md`"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`tinyhttpd.c` 出现在第几天的资料列表中？",
+      "a": "第 2 天和第 3 天。"
+    },
+    {
+      "q": "第 4 天主要围绕哪些主题？",
+      "a": "目录穿越防护、日志实现和文件 I/O 参考。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [],
+  "source_pages": [
+    133,
+    136
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "235_按天对应的资料索引",
+  "_chunk_pages": [
+    133,
+    136
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "title": "MIME类型表与默认值",
+  "definition": "静态文件服务器通常根据文件扩展名选择 MIME 类型。实现时可先用 `strrchr(path, '.')` 找到最后一个扩展名；如果没有扩展名或扩展名不在表中，就返回默认类型 `application/octet-stream`。",
+  "key_points": [
+    "常见类型包括 .html/.htm、.css、.js、.json、.txt、.png、.jpg/.jpeg、.gif。",
+    "没有扩展名或未知扩展名时，默认返回 `application/octet-stream`。",
+    "代码实现的核心是按扩展名做字符串比较。"
+  ],
+  "examples": [
+    "$$\\begin{aligned}.html,\\ .htm &\\to \\text{text/html; charset=utf-8}\\\\.css &\\to \\text{text/css; charset=utf-8}\\\\.js &\\to \\text{application/javascript; charset=utf-8}\\\\.json &\\to \\text{application/json; charset=utf-8}\\\\.png &\\to \\text{image/png}\\\\\\text{其他} &\\to \\text{application/octet-stream}\\end{aligned}$$",
+    "`get_mime_type(/a/b/style.css)` 返回 `text/css; charset=utf-8`。"
+  ],
+  "misconceptions": [
+    "只要有扩展名，浏览器就一定能自动判断 MIME。",
+    "未知扩展名应该随便返回一种常见文本类型。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "未知扩展名时应返回什么 MIME？",
+      "a": "application/octet-stream。"
+    },
+    {
+      "q": "实现 MIME 表时通常根据什么决定类型？",
+      "a": "根据文件扩展名。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "MIME类型的作用"
+  ],
+  "source_pages": [
+    26,
+    27
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "026_mime类型表与默认值",
+  "_chunk_pages": [
+    25,
+    28
+  ]
+}

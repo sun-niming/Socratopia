@@ -1,0 +1,38 @@
+{
+  "title": "section元素",
+  "definition": "section元素表示一个章节，用于将内容在逻辑上分块，例如产品特性区、关于我们区。",
+  "key_points": [
+    "表示一个章节或分区",
+    "用于内容的逻辑分块",
+    "可用于产品特性区、关于我们区等"
+  ],
+  "examples": [
+    "<section>产品特性区</section>",
+    "<section>关于我们区</section>"
+  ],
+  "misconceptions": [
+    "section不是任意div的直接替代品",
+    "section强调逻辑分块，而不是纯粹外观分区"
+  ],
+  "qa_pairs": [
+    {
+      "q": "section元素的作用是什么？",
+      "a": "将内容在逻辑上分块，例如产品特性区、关于我们区。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "HTML标签基础"
+  ],
+  "source_pages": [
+    41,
+    44
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "071_section元素",
+  "_chunk_pages": [
+    41,
+    44
+  ]
+}

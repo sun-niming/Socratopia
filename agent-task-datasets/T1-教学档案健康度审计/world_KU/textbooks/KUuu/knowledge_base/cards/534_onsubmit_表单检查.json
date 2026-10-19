@@ -1,0 +1,40 @@
+{
+  "title": "onsubmit 表单检查",
+  "definition": "可以用 onsubmit 事件处理程序在表单提交时做简单检查；如果文本字段为空，就调用 e.preventDefault() 阻止提交，并向页面输出提示信息。",
+  "key_points": [
+    "onsubmit 会在表单提交时触发",
+    "可以先判断输入框的 value 是否为空",
+    "如果 first name 或 last name 为空，就阻止提交",
+    "阻止提交后可以显示提示文本，例如 'You need to fill in both names!'"
+  ],
+  "examples": [
+    "form.onsubmit = function(e) {\n  if (fname.value === '' || lname.value === '') {\n    e.preventDefault();\n    para.textContent = 'You need to fill in both names!';\n  }\n};"
+  ],
+  "misconceptions": [
+    "以为只做空值判断就会自动阻止提交",
+    "以为 onsubmit 只能用于发送数据，不能用于校验",
+    "以为只检查一个输入框就足够"
+  ],
+  "qa_pairs": [
+    {
+      "q": "在示例中，两个文本框有一个为空时会发生什么？",
+      "a": "会调用 e.preventDefault() 阻止表单提交，并显示提示信息。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "阻止事件的默认行为",
+    "表单事件"
+  ],
+  "source_pages": [
+    373,
+    376
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "534_onsubmit_表单检查",
+  "_chunk_pages": [
+    373,
+    376
+  ]
+}

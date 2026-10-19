@@ -1,0 +1,43 @@
+{
+  "title": "C 标准头文件的 C++ 命名形式",
+  "definition": "在 C++ 中使用源自 C 标准库的功能时，教材建议采用 C++ 形式的头文件名称。C++ 形式通常移除原来的 .h 后缀并增加前缀 c，例如用 <cstdio> 代替 <stdio.h>。这种形式更符合 C++ 的名称组织方式，并有助于减少名称冲突。",
+  "key_points": [
+    "推荐写法：#include <cstdio>。",
+    "不推荐作为首选的旧式写法：#include <stdio.h>。",
+    "使用 C++ 形式头文件时，相应名称通常在 std 命名空间中提供。"
+  ],
+  "examples": [
+    "代码示例：#include <cstdio>，随后可使用 std::printf(\"hello\\n\");。"
+  ],
+  "misconceptions": [
+    "认为 C++ 程序必须使用带 .h 后缀的 C 头文件。",
+    "认为 <cstdio> 与 <stdio.h> 在名称可见性等方面必然完全相同。",
+    "包含 <cstdio> 后忘记考虑 std 命名空间。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "在 C++ 中需要使用 <stdio.h> 对应功能时，教材推荐包含哪个头文件？",
+      "a": "推荐使用 #include <cstdio>。"
+    },
+    {
+      "q": "为什么推荐使用 C++ 形式的 C 标准库头文件名称？",
+      "a": "因为这种形式符合 C++ 的名称组织方式，并且较不容易发生名称冲突。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++ 头文件",
+    "命名空间"
+  ],
+  "source_pages": [
+    158,
+    158
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "328_c_标准头文件的_c_命名形式",
+  "_chunk_pages": [
+    157,
+    160
+  ]
+}

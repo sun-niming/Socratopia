@@ -1,0 +1,46 @@
+{
+  "title": "使用 cin 提取用户输入并通过 cout 输出",
+  "definition": "`cin` 可以使用提取运算符 `>>` 从标准输入读取数据，并将读取结果存入指定变量；`cout` 可以使用插入运算符 `<<` 输出文本和变量值。多个输入或输出操作可以连续连接。",
+  "key_points": [
+    "字符串输入示例：`string userInput; cin >> userInput;`，随后可用 `cout << \"User input was \" << userInput << endl;` 输出结果。",
+    "整数输入示例：`int userInput; cin >> userInput;`。",
+    "输入操作可以链式连接，例如 `cin >> guestName >> partySize;`，依次读取客人姓名和人数。",
+    "示例函数会根据人数判断是否收取额外小费；原文后续代码使用条件 `partySize > 10`。"
+  ],
+  "examples": [
+    "文本示例：`string userInput; cin >> userInput; cout << \"User input was \" << userInput << endl;`",
+    "文本示例：`void getReservationData() { string guestName; int partySize; cin >> guestName >> partySize; }`",
+    "条件示例：`if (partySize > 10) { cout << \"An extra gratuity will apply.\" << endl; }`"
+  ],
+  "misconceptions": [
+    "`cin >> string变量` 通常读取一个以空白字符分隔的字符串，而不是自动读取整行文本。",
+    "链式写法 `cin >> guestName >> partySize` 表示依次执行两次输入，不是把两个变量作为一个整体读取。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何使用 `cin` 依次读取客人姓名和人数？",
+      "a": "声明 `string guestName;` 和 `int partySize;`，然后使用 `cin >> guestName >> partySize;`。"
+    },
+    {
+      "q": "如何输出整数变量 `userInput` 的值？",
+      "a": "可以使用 `cout << \"User input was \" << userInput << endl;`。"
+    },
+    {
+      "q": "原文示例在什么条件下提示收取额外小费？",
+      "a": "当 `partySize > 10` 时提示收取额外小费。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [],
+  "source_pages": [
+    417,
+    420
+  ],
+  "needs_verification": true,
+  "verify_query": "《C++20高级编程》第5版 第417页 cin cout getReservationData partySize > 10 原文",
+  "concept_id": "543_使用_cin_提取用户输入并通过_cout_输出",
+  "_chunk_pages": [
+    417,
+    420
+  ]
+}

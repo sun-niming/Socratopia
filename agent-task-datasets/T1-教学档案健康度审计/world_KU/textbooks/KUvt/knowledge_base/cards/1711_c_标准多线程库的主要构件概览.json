@@ -1,0 +1,43 @@
+{
+  "title": "C++标准多线程库的主要构件概览",
+  "definition": "本章概览了 C++ 标准线程库中的多个基础构件：使用 `std::thread` 启动线程，使用 C++20 的 `std::jthread` 更容易编写可取消线程，使用原子类型和原子操作或互斥机制同步共享数据，使用 C++20 的 `semaphore`、`latch`、`barrier` 进行线程同步，以及使用 `promise` 和 `future` 表示线程间通信并从后台线程取得结果。",
+  "key_points": [
+    "`std::thread` 可用于启动线程，`std::jthread` 可用于更容易编写可取消的线程。",
+    "原子类型和原子操作可用于共享数据；不能使用时可采用互斥机制。",
+    "C++20 引入或提供了 `semaphore`、`latch` 和 `barrier` 等同步原语。",
+    "`promise` 和 `future` 可表示线程间的通信信道，`future` 可用于从后台线程获得结果。"
+  ],
+  "examples": [
+    "可以将后台线程计算的结果通过 `promise` 设置，再由另一线程通过对应的 `future` 获取。"
+  ],
+  "misconceptions": [
+    "`future` 本身不是后台线程；它主要表示将来可取得的结果。",
+    "`std::jthread` 和 `std::thread` 都用于线程，但教材强调 `std::jthread` 更容易编写可取消线程，并不表示二者完全等价。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "教材列举的 C++20 同步原语有哪些？",
+      "a": "`semaphore`、`latch` 和 `barrier`。"
+    },
+    {
+      "q": "`promise` 和 `future` 在教材中用于什么？",
+      "a": "它们用于表示线程间的通信信道；通过 `future` 可以更简单地从后台线程获得结果。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++线程基础",
+    "原子操作与互斥机制"
+  ],
+  "source_pages": [
+    829,
+    829
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1711_c_标准多线程库的主要构件概览",
+  "_chunk_pages": [
+    829,
+    832
+  ]
+}

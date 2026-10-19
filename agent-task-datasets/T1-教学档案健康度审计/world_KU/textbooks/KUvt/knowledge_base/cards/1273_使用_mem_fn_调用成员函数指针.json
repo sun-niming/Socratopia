@@ -1,0 +1,43 @@
+{
+  "title": "使用 mem_fn 调用成员函数指针",
+  "definition": "普通算法回调通常按函数对象的方式调用，而成员函数指针必须在某个对象上下文中调用。C++ 提供的 `mem_fn` 可以把成员函数指针转换为可调用的函数对象，使其能够作为算法回调使用；它还可以与 `not_fn` 组合来反转调用结果。",
+  "key_points": [
+    "成员函数指针与普通函数指针或仿函数的调用方式不同，必须关联一个对象。",
+    "使用成员函数指针时必须写出完整形式，例如 `&string::empty`，其中 `&string::` 不能省略。",
+    "`not_fn(mem_fn(&string::empty))` 生成一个可调用对象：调用时执行 `empty()`，再将结果取反。",
+    "教材建议优先使用 lambda 表达式实现此类逻辑，因为 lambda 通常更直观、可读性更好。"
+  ],
+  "examples": [
+    "可将成员函数 `string::empty` 包装为回调：`not_fn(mem_fn(&string::empty))`。",
+    "该回调对每个字符串调用 `empty()`，并返回相反结果，因此可用于筛选非空字符串。"
+  ],
+  "misconceptions": [
+    "不能直接把 `&string::empty` 当作普通函数指针传给需要一元回调的算法。",
+    "`mem_fn` 不会自动反转结果；结果反转需要额外使用 `not_fn`。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么成员函数指针不能像普通函数指针一样直接调用？",
+      "a": "因为成员函数必须在某个对象的上下文中调用，而普通函数指针不需要对象上下文。"
+    },
+    {
+      "q": "如何构造一个调用 `string::empty()` 后返回相反结果的回调？",
+      "a": "使用 `not_fn(mem_fn(&string::empty))`。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "函数对象与算法回调"
+  ],
+  "source_pages": [
+    617,
+    617
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1273_使用_mem_fn_调用成员函数指针",
+  "_chunk_pages": [
+    617,
+    620
+  ]
+}

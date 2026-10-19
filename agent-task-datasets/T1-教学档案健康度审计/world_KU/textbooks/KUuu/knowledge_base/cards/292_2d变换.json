@@ -1,0 +1,44 @@
+{
+  "title": "2D变换",
+  "definition": "2D变换是CSS中通过transform属性设置不同变换方法，对元素进行二维空间处理的一类变换，主要包括移动、旋转、缩放和倾斜。",
+  "key_points": [
+    "通过transform属性指定变换方法",
+    "常见方法有translate、rotate、scale、skew",
+    "只涉及二维平面上的变化"
+  ],
+  "examples": [
+    "transform:translate(50px,50px);",
+    "transform:rotate(30deg);",
+    "transform:scale(0.5,2);",
+    "transform:skew(10deg,30deg);"
+  ],
+  "misconceptions": [
+    "2D变换只能做平移，不能做旋转、缩放或倾斜。",
+    "2D变换不需要transform属性。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "2D变换通常通过哪个属性来实现？",
+      "a": "通过transform属性。"
+    },
+    {
+      "q": "2D变换常见的方法有哪些？",
+      "a": "translate、rotate、scale、skew。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "CSS基础"
+  ],
+  "source_pages": [
+    197,
+    198
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "292_2d变换",
+  "_chunk_pages": [
+    197,
+    200
+  ]
+}

@@ -1,0 +1,50 @@
+{
+  "title": "SSL记录的完整性保护与加密流程",
+  "definition": "由于TCP是字节流协议，SSL把应用数据流分割成多个记录。对每条记录，SSL先使用相应的MAC密钥根据记录数据计算MAC，然后把“记录数据+MAC”整体加密，最后把加密结果交给TCP传输。接收端先解密，再使用MAC检查记录数据是否被篡改。",
+  "key_points": [
+    "SSL不必等待整个TCP会话结束才检查完整性，而是逐条记录计算MAC。",
+    "MAC用于检测记录数据是否被修改；加密用于提供机密性。",
+    "类SSL记录包含类型字段、版本字段、长度字段、数据字段和MAC字段。",
+    "类型、版本和长度字段不加密；接收端使用长度字段从TCP字节流中提取SSL记录。"
+  ],
+  "examples": [
+    "发送端处理顺序可表示为：$$\\mathrm{MAC}=H(\\mathrm{data}\\parallel K_{MAC})$$ $$\\mathrm{ciphertext}=E_{K_{enc}}(\\mathrm{data}\\parallel\\mathrm{MAC})$$ 然后将密文交给TCP。",
+    "记录结构可表示为：$$[\\text{类型} \\mid \\text{版本} \\mid \\text{长度} \\mid \\text{数据} \\mid \\text{MAC}]$$"
+  ],
+  "misconceptions": [
+    "SSL只加密应用数据而不做完整性检查；实际上，SSL对每条记录附加MAC。",
+    "MAC字段单独明文发送；原文说明“记录+MAC”整体被加密。",
+    "TCP报文段等同于SSL记录；TCP是字节流，SSL记录是由SSL子层划分和处理的逻辑数据单元。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "SSL为什么要把数据分割成记录并为每条记录计算MAC？",
+      "a": "这样可以在数据传输过程中逐条检查完整性，而不必等到整个TCP会话结束。"
+    },
+    {
+      "q": "SSL记录包含哪些字段？",
+      "a": "类型字段、版本字段、长度字段、数据字段和MAC字段。"
+    },
+    {
+      "q": "接收端如何从TCP字节流中识别一条SSL记录的边界？",
+      "a": "使用记录中的长度字段从到达的TCP字节流中提取记录。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "TCP字节流",
+    "对称加密",
+    "消息认证码MAC"
+  ],
+  "source_pages": [
+    430,
+    431
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1000_ssl记录的完整性保护与加密流程",
+  "_chunk_pages": [
+    429,
+    432
+  ]
+}

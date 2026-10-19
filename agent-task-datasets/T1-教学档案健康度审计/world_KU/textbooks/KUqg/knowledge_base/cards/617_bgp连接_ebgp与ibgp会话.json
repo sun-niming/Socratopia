@@ -1,0 +1,51 @@
+{
+  "title": "BGP连接、eBGP与iBGP会话",
+  "definition": "在BGP中，每对路由器通过使用TCP端口179的半永久TCP连接交换路由选择信息。该直接连接以及通过它发送的BGP报文称为BGP连接。跨越两个不同自治系统的BGP连接称为eBGP连接；同一自治系统内两台路由器之间的BGP会话称为iBGP连接。",
+  "key_points": [
+    "BGP使用TCP端口179建立半永久TCP连接交换路由选择信息。",
+    "不同AS中的网关路由器之间通常建立eBGP连接。",
+    "同一AS内的路由器之间建立iBGP连接。",
+    "原文描述的一种常见配置是在每个AS内部让每对路由器之间建立一条BGP连接，从而形成网状TCP连接。",
+    "iBGP连接不一定对应物理链路。"
+  ],
+  "examples": [
+    "连接分类可写为：$$\\text{不同AS的路由器之间}\\Rightarrow\\text{eBGP}$$ $$\\text{同一AS的路由器之间}\\Rightarrow\\text{iBGP}$$",
+    "图5-8对应的传播中，AS3的网关路由器3a与AS2的网关路由器2c之间建立eBGP；AS2内部通过iBGP传播前缀信息；AS2的2a再与AS1的1e通过eBGP连接。"
+  ],
+  "misconceptions": [
+    "eBGP和iBGP的区别首先在于连接两端是否属于同一个AS，而不是简单地依据是否存在物理直连。",
+    "iBGP连接不一定与物理链路重合。",
+    "BGP连接不仅指物理链路，还包括通过该连接交换BGP报文的逻辑关系。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "eBGP连接和iBGP连接有什么区别？",
+      "a": "跨越两个不同自治系统的BGP连接是eBGP连接；同一自治系统内两台路由器之间的BGP会话是iBGP连接。"
+    },
+    {
+      "q": "BGP使用哪个TCP端口交换路由选择信息？",
+      "a": "BGP使用TCP端口179。"
+    },
+    {
+      "q": "iBGP连接是否总是对应一条物理链路？",
+      "a": "不一定，原文明确指出iBGP连接并不总是与物理链路对应。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "BGP在自治系统间路由选择中的作用",
+    "TCP连接",
+    "网关路由器与内部路由器"
+  ],
+  "source_pages": [
+    273,
+    276
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "617_bgp连接_ebgp与ibgp会话",
+  "_chunk_pages": [
+    273,
+    276
+  ]
+}

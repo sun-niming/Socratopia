@@ -1,0 +1,35 @@
+{
+  "title": "变量作用域",
+  "definition": "变量作用域就是变量可以被引用的有效范围。JavaScript 的作用域分为全局作用域、局部作用域和块作用域。",
+  "key_points": [
+    "作用域描述的是变量“在哪些地方可以被引用”。",
+    "JavaScript 作用域分为全局作用域、局部作用域、块作用域。"
+  ],
+  "examples": [
+    "在函数声明 { } 内部定义的变量，只能在相应的局部作用域中引用。",
+    "if 语句和 for 语句里的 { } 也属于块作用域。"
+  ],
+  "misconceptions": [
+    "作用域不是变量是否“存在”，而是变量可被引用的范围。",
+    "JavaScript 的作用域不只有函数作用域，还包括全局作用域和块作用域。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "什么是变量作用域？",
+      "a": "变量作用域就是变量可以被引用的有效范围。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [],
+  "source_pages": [
+    269,
+    272
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "392_变量作用域",
+  "_chunk_pages": [
+    269,
+    272
+  ]
+}

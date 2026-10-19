@@ -1,0 +1,41 @@
+{
+  "title": "directed_graph 的反向迭代器",
+  "definition": "directed_graph 为图中的节点提供正向、反向以及 const 版本的迭代器。反向迭代器用于从图中最后一个节点开始，按与正向遍历相反的顺序访问节点；const 反向迭代器用于只读遍历。",
+  "key_points": [
+    "rbegin() 返回指向反向遍历起点的迭代器，rend() 返回反向遍历的结束迭代器。",
+    "const 对象可以使用 rbegin()、rend()、crbegin() 和 crend() 进行只读反向遍历。",
+    "实现上，非 const 的 rend() 由 begin() 构造反向迭代器，const 的 rbegin() 由 end() 构造 const 反向迭代器，crbegin() 和 crend() 分别转发到 rbegin() 和 rend()。"
+  ],
+  "examples": [
+    "倒序打印图中的所有节点：\nfor (auto iter { graph.rbegin() }; iter != graph.rend(); ++iter) {\n    std::cout << *iter << \" \";\n}"
+  ],
+  "misconceptions": [
+    "rbegin() 不是指向正向序列的第一个元素，而是指向反向遍历时首先访问的元素，通常对应正向序列的最后一个元素。",
+    "反向迭代器仍然使用 ++iter 向前推进；它会在底层正向序列中向后移动。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何使用 directed_graph 的反向迭代器倒序打印所有节点？",
+      "a": "使用 graph.rbegin() 作为起点、graph.rend() 作为结束条件，并在循环中使用 ++iter 和 *iter：for (auto iter { graph.rbegin() }; iter != graph.rend(); ++iter) { std::cout << *iter << \" \"; }"
+    },
+    {
+      "q": "const directed_graph 可以使用哪些只读反向迭代器接口？",
+      "a": "可以使用 rbegin()、rend()、crbegin() 和 crend() 的 const 版本或显式 const 接口。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++迭代器的基本用法"
+  ],
+  "source_pages": [
+    745,
+    745
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1544_directed_graph_的反向迭代器",
+  "_chunk_pages": [
+    745,
+    748
+  ]
+}

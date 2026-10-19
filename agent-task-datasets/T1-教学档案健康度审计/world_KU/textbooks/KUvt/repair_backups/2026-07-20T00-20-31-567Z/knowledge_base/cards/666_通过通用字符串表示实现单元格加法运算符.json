@@ -1,0 +1,50 @@
+{
+  "title": "通过通用字符串表示实现单元格加法运算符",
+  "definition": "当多个单元格类型都能够转换为 StringSpreadsheetCell 时，可以重载接受两个 StringSpreadsheetCell 参数的 operator+，先分别调用 getString()，再拼接两个字符串并返回新的 StringSpreadsheetCell。编译器可以利用从 DoubleSpreadsheetCell 到 StringSpreadsheetCell 的转换构造函数，自动把双精度单元格转换为字符串单元格后参与运算。",
+  "key_points": [
+    "一种方案是为每种单元格组合分别重载运算符；另一种方案是使用字符串作为统一表示，只实现通用的字符串版本。",
+    "示例中的 operator+ 接收两个 StringSpreadsheetCell，结果也是 StringSpreadsheetCell。",
+    "运算过程是字符串拼接，不是数值加法。",
+    "DoubleSpreadsheetCell 参与该运算时，会先通过转换构造函数转换为 StringSpreadsheetCell。"
+  ],
+  "examples": [
+    "示例实现：\n```cpp\nStringSpreadsheetCell operator+(\n    const StringSpreadsheetCell& lhs,\n    const StringSpreadsheetCell& rhs) {\n    StringSpreadsheetCell newCell;\n    newCell.set(lhs.getString() + rhs.getString());\n    return newCell;\n}\n```",
+    "示例：\n```cpp\nDoubleSpreadsheetCell myDbl;\nmyDbl.set(8.4);\nStringSpreadsheetCell result{myDbl + myDbl};\n```\n按照原文的说明，两个双精度单元格会先分别转换为字符串，再进行字符串拼接，结果字符串为 `8.4000008.400000`。"
+  ],
+  "misconceptions": [
+    "该示例中的 operator+ 不执行数值相加，而执行字符串拼接。",
+    "能参与 operator+ 不代表两个 DoubleSpreadsheetCell 直接执行了 double 加法；它们先被转换成 StringSpreadsheetCell。",
+    "只要存在可用的转换构造函数，编译器才可能自动完成所需的对象类型转换。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "示例中的 StringSpreadsheetCell operator+ 实际执行什么操作？",
+      "a": "分别取得两个单元格的字符串，再用字符串拼接方式连接，返回一个新的 StringSpreadsheetCell。"
+    },
+    {
+      "q": "两个值为 8.4 的 DoubleSpreadsheetCell 使用该 operator+ 后，结果是什么？",
+      "a": "它们先转换为字符串，再拼接，因此结果字符串是 `8.4000008.400000`，而不是数值 16.8。"
+    },
+    {
+      "q": "为什么 DoubleSpreadsheetCell 能参与只接受 StringSpreadsheetCell 的 operator+？",
+      "a": "因为存在接受 DoubleSpreadsheetCell 的 StringSpreadsheetCell 转换构造函数，编译器可以据此进行隐式转换。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "转换构造函数",
+    "运算符重载",
+    "字符串拼接"
+  ],
+  "source_pages": [
+    326,
+    327
+  ],
+  "needs_verification": true,
+  "verify_query": "\"C++20高级编程\" \"8.4000008.400000\" StringSpreadsheetCell operator+",
+  "concept_id": "666_通过通用字符串表示实现单元格加法运算符",
+  "_chunk_pages": [
+    325,
+    328
+  ]
+}

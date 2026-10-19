@@ -1,0 +1,43 @@
+{
+  "title": "perspective与perspective-origin",
+  "definition": "perspective 用来表示眼睛和舞台之间的距离，单位是像素，px 可以省略；值越小，透视效果越明显。perspective-origin 用来表示视线关注的起始点，默认是舞台或者元素中心点。",
+  "key_points": [
+    "perspective 表示观察者与舞台之间的距离。",
+    "它的单位为像素，px 可省略。",
+    "perspective 的值越小，透视效果越明显。",
+    "perspective-origin 表示视线关注的起始点。",
+    "perspective-origin 默认是舞台或元素中心点。"
+  ],
+  "examples": [
+    "perspective",
+    "perspective-origin"
+  ],
+  "misconceptions": [
+    "perspective 不是旋转角度，而是透视距离；perspective-origin 也不是元素的变换起点。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "perspective 的作用是什么？",
+      "a": "表示眼睛和舞台之间的距离，值越小，透视效果越明显。"
+    },
+    {
+      "q": "perspective-origin 的作用是什么？",
+      "a": "表示视线关注的起始点，默认是舞台或者元素中心点。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "transform属性"
+  ],
+  "source_pages": [
+    201,
+    202
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "285_perspective与perspective_origin",
+  "_chunk_pages": [
+    201,
+    204
+  ]
+}

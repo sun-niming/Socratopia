@@ -1,0 +1,44 @@
+{
+  "title": "vector<bool>特化",
+  "definition": "标准库为vector<bool>提供了模板特化，用于对布尔元素进行空间分配优化。标准只要求其具有相应语义，并不规定具体应如何进行空间优化。vector<bool>的大小可以根据需要自动增大或缩小，而bitset的大小是固定的。",
+  "key_points": [
+    "vector<bool>是vector针对bool类型的模板特化。",
+    "该特化旨在优化布尔元素的空间使用。",
+    "标准没有规定具体的空间优化实现方式。",
+    "vector<bool>大小可动态变化；bitset大小固定。"
+  ],
+  "examples": [
+    "代码示例：\nstd::vector<bool> flags{true, false, true};\nflags.push_back(false);\n// flags的大小可以继续变化。"
+  ],
+  "misconceptions": [
+    "vector<bool>不是普通意义上完全等价于vector<T>的特化；标准库对bool提供了专门处理。",
+    "vector<bool>和bitset都可表示布尔位，但前者大小可变，后者大小固定。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "vector<bool>与普通vector相比有什么特殊之处？",
+      "a": "它是针对bool类型的模板特化，旨在优化布尔元素的空间分配。"
+    },
+    {
+      "q": "vector<bool>和bitset在大小方面有什么区别？",
+      "a": "vector<bool>的大小可以动态增大或缩小，而bitset的大小固定。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "类模板特化",
+    "vector",
+    "bitset的基本概念"
+  ],
+  "source_pages": [
+    508,
+    508
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1035_vector_bool_特化",
+  "_chunk_pages": [
+    505,
+    508
+  ]
+}

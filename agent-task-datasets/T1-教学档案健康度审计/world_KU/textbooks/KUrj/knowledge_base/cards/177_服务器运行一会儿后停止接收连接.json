@@ -1,0 +1,37 @@
+{
+  "title": "服务器运行一会儿后停止接收连接",
+  "definition": "这种现象是指服务器刚开始还能正常接受连接，但过一段时间后 curl 卡住或连接失败。教材中给出的常见原因包括：子进程没有退出、父进程 fd 关闭规则错误，以及 accept 被 EINTR 后直接退出循环。",
+  "key_points": [
+    "子进程可能没有正确退出。",
+    "父进程对文件描述符的关闭规则可能有误。",
+    "accept 遇到 EINTR 后不应直接退出循环。"
+  ],
+  "examples": [
+    "前几次请求正常，之后 curl 卡住或连接失败。"
+  ],
+  "misconceptions": [
+    "以为监听 socket 还在，服务器就一定会一直正常接收连接。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "服务器运行一会儿后停止接收连接，常见原因有哪些？",
+      "a": "可能是子进程没有退出、父进程 fd 关闭规则错误，或者 accept 被 EINTR 后直接退出循环。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "多进程服务器",
+    "accept 循环"
+  ],
+  "source_pages": [
+    109,
+    112
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "177_服务器运行一会儿后停止接收连接",
+  "_chunk_pages": [
+    109,
+    112
+  ]
+}

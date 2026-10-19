@@ -1,0 +1,39 @@
+{
+  "title": "Number类型",
+  "definition": "Number类型是JavaScript中的数值型基本数据类型，按64位、IEEE 754方式存储。",
+  "key_points": [
+    "Number属于基本数据类型中的数值型",
+    "采用64位存储",
+    "按IEEE 754存储"
+  ],
+  "examples": [
+    "100",
+    "-3500",
+    "0"
+  ],
+  "misconceptions": [
+    "Number类型只表示整数",
+    "Number类型不是基本数据类型"
+  ],
+  "qa_pairs": [
+    {
+      "q": "JavaScript的Number类型按什么标准存储？",
+      "a": "按64位、IEEE 754方式存储。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "JavaScript数据类型分类"
+  ],
+  "source_pages": [
+    241,
+    244
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "335_number类型",
+  "_chunk_pages": [
+    241,
+    244
+  ]
+}

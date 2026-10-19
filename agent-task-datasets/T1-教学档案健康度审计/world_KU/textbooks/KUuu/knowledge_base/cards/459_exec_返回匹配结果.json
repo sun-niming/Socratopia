@@ -1,0 +1,45 @@
+{
+  "title": "exec 返回匹配结果",
+  "definition": "RegExp.exec(str) 用正则表达式去匹配字符串，并返回“匹配结果”。返回值通常是一个数组；数组第 0 项是完整匹配内容，后续各项是括号分组捕获到的内容。若正则带有全局标志 g，可以反复调用 exec 来依次获取字符串中的多个匹配项。",
+  "key_points": [
+    "返回值是匹配结果数组，不是简单的布尔值。",
+    "数组第 0 项保存整体匹配结果，后面的项保存分组结果。",
+    "配合 g 标志和 while 循环，可连续取出多个匹配。",
+    "若没有匹配到内容，返回 null。"
+  ],
+  "examples": [
+    "let reg2=/\\d+/ig;\nlet str2=\"邮政编码是：712100，电话号码：87092352。\"\nlet r=null\nwhile(r=reg2.exec(str2)){\n  console.log(r, r[0])\n}",
+    "let reg4=/^rgb\\((\\d+),(\\d+),(\\d+)\\)$/ig;\nlet str4=\"rgb(205,7,28)\";\nlet r4=reg4.exec(str4)\nif(r4){\n  console.log(\"整体匹配结果：\"+r4[0])\n  console.log(\"第1组结果：\"+r4[1])\n  console.log(\"第2组结果：\"+r4[2])\n  console.log(\"第3组结果：\"+r4[3])\n}"
+  ],
+  "misconceptions": [
+    "以为 exec 只返回整个匹配字符串，实际上还会返回分组结果。",
+    "以为带 g 的 exec 只能调用一次，实际上可以通过重复调用逐个获取匹配。",
+    "以为 exec 找不到内容时会返回空数组，实际上返回 null。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "exec 方法返回的结果中，r[0] 和 r[1] 分别表示什么？",
+      "a": "r[0] 表示整体匹配结果，r[1] 表示第 1 个分组的匹配结果。"
+    },
+    {
+      "q": "如何用 exec 依次获取字符串中的多个数字匹配？",
+      "a": "给正则加 g 标志，并把 exec 放在 while 循环中反复调用。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "正则表达式基础",
+    "字符串基础"
+  ],
+  "source_pages": [
+    321,
+    322
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "459_exec_返回匹配结果",
+  "_chunk_pages": [
+    321,
+    324
+  ]
+}

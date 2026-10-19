@@ -1,0 +1,44 @@
+{
+  "title": "if条件判断结构",
+  "definition": "Shell中的 if 条件判断结构用于根据命令或条件的执行结果选择不同的命令列表。教材给出的基本形式是：if 命令/条件 then commandlist [elif 命令 then commandlist] else commandlist fi。其中 elif 部分是可选的，用于继续判断其他条件；else 用于当前面条件都不满足时执行另一组命令。",
+  "key_points": [
+    "if 后面可以接“命令/条件”",
+    "条件成立后执行 then 后的命令列表",
+    "elif 是可选分支，用于继续判断",
+    "else 是兜底分支",
+    "整个结构以 fi 结束"
+  ],
+  "examples": [
+    "if 命令/条件\nthen\ncommandlist\n[elif 命令\nthen\ncommandlist]\nelse\ncommandlist\nfi",
+    "#!/bin/bash\necho -n enter filename:\nread fname\necho -n enter words:\nread words\necho $words 2>/dev/null\n>$fname\nif [ $? -eq 0 ]\nthen\necho Write successfully\nelse\necho write error\nfi"
+  ],
+  "misconceptions": [
+    "不要把 then、else、fi 省略；它们是该结构的组成部分",
+    "不要把 elif 当成必选项；教材用方括号表示它是可选的"
+  ],
+  "qa_pairs": [
+    {
+      "q": "if 结构中用于结束整个条件判断的关键字是什么？",
+      "a": "fi。"
+    },
+    {
+      "q": "教材中的 if 结构里，哪个分支是可选的？",
+      "a": "elif 分支是可选的。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "命令返回值"
+  ],
+  "source_pages": [
+    77,
+    80
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "130_if条件判断结构",
+  "_chunk_pages": [
+    77,
+    80
+  ]
+}

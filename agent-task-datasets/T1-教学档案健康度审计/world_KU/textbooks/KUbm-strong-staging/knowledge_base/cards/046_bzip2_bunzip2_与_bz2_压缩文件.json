@@ -1,0 +1,39 @@
+{
+  "title": "bzip2/bunzip2 与 .bz2 压缩文件",
+  "definition": "在 Linux 中文件压缩与解压可使用 bzip2 和 bunzip2。教材明确给出：bzip2/bunzip2 对应的文件扩展名是 bz2。可据此识别这类压缩文件通常以 .bz2 结尾。",
+  "key_points": [
+    "bzip2/bunzip2 用于文件压缩与解压",
+    "对应扩展名为 bz2",
+    "该知识点属于“文件压缩与归档”内容"
+  ],
+  "examples": [
+    "扩展名示例：archive.bz2"
+  ],
+  "misconceptions": [
+    "不要把 bz2 当作普通目录名后缀；教材说明它是 bzip2/bunzip2 对应扩展名",
+    "不要把 bzip2/bunzip2 和 gzip/gunzip 的扩展名混淆"
+  ],
+  "qa_pairs": [
+    {
+      "q": "教材中 bzip2/bunzip2 对应的扩展名是什么？",
+      "a": "bz2。"
+    },
+    {
+      "q": "bzip2/bunzip2 属于哪一类操作？",
+      "a": "文件压缩与解压。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [],
+  "source_pages": [
+    25,
+    28
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "046_bzip2_bunzip2_与_bz2_压缩文件",
+  "_chunk_pages": [
+    25,
+    28
+  ]
+}

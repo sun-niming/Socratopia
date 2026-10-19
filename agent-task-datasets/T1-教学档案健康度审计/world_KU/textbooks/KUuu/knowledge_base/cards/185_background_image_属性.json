@@ -1,0 +1,35 @@
+{
+  "title": "background-image 属性",
+  "definition": "background-image 用于设置背景图片，通常通过 url() 函数指定图片地址。",
+  "key_points": [
+    "背景图片一般用 url() 引入。",
+    "它描述的是元素的背景图像来源。"
+  ],
+  "examples": [
+    "background-image: url(\"bg.jpg\");"
+  ],
+  "misconceptions": [
+    "background-image 直接写文件名就可以，不需要 url()。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "background-image 常用什么方式指定图片地址？",
+      "a": "使用 url() 函数。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "背景样式"
+  ],
+  "source_pages": [
+    113,
+    116
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "185_background_image_属性",
+  "_chunk_pages": [
+    113,
+    116
+  ]
+}

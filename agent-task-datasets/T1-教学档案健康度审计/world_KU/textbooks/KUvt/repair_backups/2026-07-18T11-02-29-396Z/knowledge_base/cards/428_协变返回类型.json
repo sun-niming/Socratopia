@@ -1,0 +1,45 @@
+{
+  "title": "协变返回类型",
+  "definition": "协变返回类型允许派生类覆盖基类虚函数时，将返回类型从基类指针或引用改为派生类指针或引用。原文以 CherryTree::pick() 返回 Cherry*、BingCherryTree::pick() 返回 BingCherry* 为例，其中 BingCherry 是 Cherry 的派生类。",
+  "key_points": [
+    "基类 CherryTree 的 pick() 返回 Cherry*。",
+    "派生类 BingCherryTree 覆盖 pick() 时可以返回更具体的 BingCherry*。",
+    "返回类型的这种派生方向变化称为协变返回类型；它适用于指针或引用形式的返回类型。"
+  ],
+  "examples": [
+    "class CherryTree { public: virtual Cherry* pick(); };",
+    "class BingCherryTree : public CherryTree { public: BingCherry* pick() override; };",
+    "Cherry* CherryTree::pick() { return new Cherry{}; }",
+    "BingCherry* BingCherryTree::pick() { auto theCherry { make_unique<BingCherry>() }; theCherry->polish(); return theCherry.release(); }"
+  ],
+  "misconceptions": [
+    "协变返回类型不是任意改变返回类型；派生类返回类型必须与基类返回类型满足允许的派生关系，并且通常涉及指针或引用。",
+    "覆盖函数的参数列表不能仅靠改变返回类型来区分。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "什么是协变返回类型？",
+      "a": "派生类覆盖基类虚函数时，返回与基类返回类型相关且更具体的派生类指针或引用，例如基类返回 Cherry*，派生类返回 BingCherry*。"
+    },
+    {
+      "q": "BingCherryTree::pick() 相对于 CherryTree::pick() 的返回类型有什么变化？",
+      "a": "基类版本返回 Cherry*，派生类覆盖版本返回 BingCherry*。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "虚函数覆盖",
+    "继承中的基类与派生类关系"
+  ],
+  "source_pages": [
+    331,
+    332
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "428_协变返回类型",
+  "_chunk_pages": [
+    329,
+    332
+  ]
+}

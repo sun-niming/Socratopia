@@ -1,0 +1,43 @@
+{
+  "title": "标准比较函数对象与 priority_queue 排序",
+  "definition": "标准比较运算符可以表示为函数对象，包括 equal_to、not_equal_to、less、greater、less_equal 和 greater_equal。priority_queue 默认使用 std::less，因此元素通常按照较大值优先的顺序从队首移除；将比较器改为 std::greater<>，可以改为较小值优先。",
+  "key_points": [
+    "priority_queue 的比较器模板参数 Compare 位于模板参数列表末尾。",
+    "若显式使用 greater 作为比较器，通常还需要显式指定底层容器类型，例如 vector<int>。",
+    "示例：使用 std::less 时，插入 3、4、2、1 后，元素按降序依次移除；使用 std::greater<> 时，按升序依次移除。",
+    "透明比较器 greater<>、less<> 可以用尖括号留空的形式表示。"
+  ],
+  "examples": [
+    "降序移除：文本表示为 priority_queue<int> myQueue;，依次插入 3、4、2、1 后，移除顺序为 4、3、2、1。",
+    "升序移除：priority_queue<int, vector<int>, greater<>> myQueue;，移除顺序为 1、2、3、4。"
+  ],
+  "misconceptions": [
+    "priority_queue 默认不是按元素插入顺序移除，而是根据比较器确定优先级。",
+    "使用 greater<> 并不是让 priority_queue 失去排序，而是将优先级方向改为较小元素优先。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "priority_queue<int> 默认使用什么比较器，元素通常按什么顺序移除？",
+      "a": "默认使用 std::less，元素通常按从大到小的顺序移除。"
+    },
+    {
+      "q": "如何声明一个较小元素优先的 int 类型 priority_queue？",
+      "a": "可以写成 priority_queue<int, vector<int>, greater<>> myQueue;。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "函数对象与模板参数"
+  ],
+  "source_pages": [
+    613,
+    613
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1259_标准比较函数对象与_priority_queue_排序",
+  "_chunk_pages": [
+    613,
+    616
+  ]
+}

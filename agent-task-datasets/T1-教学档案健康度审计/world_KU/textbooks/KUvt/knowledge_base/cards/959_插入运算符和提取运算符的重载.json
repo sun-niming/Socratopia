@@ -1,0 +1,52 @@
+{
+  "title": "插入运算符和提取运算符的重载",
+  "definition": "可以为自定义类型重载插入运算符 `<<` 和提取运算符 `>>`，使对象能够像内置类型一样通过流进行输出和输入。由于表达式左侧是 `std::ostream` 或 `std::istream` 对象，例如 `std::cout` 或 `std::cin`，而不是自定义类对象，所以这两个运算符通常定义为全局函数。插入运算符的对象参数应为 `const` 引用，因为输出不会修改对象；提取运算符的对象参数必须为非 `const` 引用，因为输入会修改对象。",
+  "key_points": [
+    "插入运算符用于向输出流写入对象，提取运算符用于从输入流读取对象。",
+    "典型声明为：`std::ostream& operator<<(std::ostream& ostr, const SpreadsheetCell& cell);`",
+    "典型声明为：`std::istream& operator>>(std::istream& istr, SpreadsheetCell& cell);`",
+    "两个运算符的第一个参数分别是输出流或输入流的引用，因此可以支持 `cout`、`cin`、文件流和字符串流等多种流。",
+    "插入运算符的对象参数是 `const` 引用；提取运算符的对象参数是非 `const` 引用。",
+    "示例中的 `SpreadsheetCell` 对象与流之间读写的是 `double` 值。"
+  ],
+  "examples": [
+    "插入运算符声明：\n`std::ostream& operator<<(std::ostream& ostr, const SpreadsheetCell& cell);`",
+    "提取运算符声明：\n`std::istream& operator>>(std::istream& istr, SpreadsheetCell& cell);`",
+    "插入运算符可以将单元格值写入流：\n`std::cout << myCell;`",
+    "提取运算符可以从流中读取值并写入单元格：\n`std::cin >> myCell;`",
+    "一种典型实现方式是：\n`std::ostream& operator<<(std::ostream& ostr, const SpreadsheetCell& cell) { ostr << cell.getValue(); return ostr; }`\n`std::istream& operator>>(std::istream& istr, SpreadsheetCell& cell) { double value; istr >> value; cell.set(value); return istr; }`"
+  ],
+  "misconceptions": [
+    "这两个运算符通常不是 `SpreadsheetCell` 的成员函数，因为表达式左侧的对象是流，而不是 `SpreadsheetCell`。",
+    "输出对象时不应要求对象参数为非 `const` 引用，因为插入运算符不修改被输出对象。",
+    "提取运算符不能把对象参数声明为 `const` 引用，因为从流读取数据需要修改对象。",
+    "插入和提取运算符的返回类型不是对象本身，而是相应流的引用。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么自定义类型的 `operator<<` 和 `operator>>` 通常定义为全局函数？",
+      "a": "因为表达式 `stream << object` 或 `stream >> object` 的左操作数是 `std::ostream` 或 `std::istream`，而不是自定义类型对象；同时不能向标准流类添加成员函数，所以通常定义为全局函数。"
+    },
+    {
+      "q": "为什么 `operator<<` 的对象参数通常是 `const` 引用，而 `operator>>` 的对象参数必须是非 `const` 引用？",
+      "a": "插入运算符只读取对象并输出，不修改对象，因此可以使用 `const` 引用；提取运算符要把输入数据写入对象，会修改对象，因此必须使用非 `const` 引用。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "函数参数的引用与 `const`",
+    "C++ 输入输出流基础",
+    "全局运算符重载"
+  ],
+  "source_pages": [
+    478,
+    479
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "959_插入运算符和提取运算符的重载",
+  "_chunk_pages": [
+    477,
+    480
+  ]
+}

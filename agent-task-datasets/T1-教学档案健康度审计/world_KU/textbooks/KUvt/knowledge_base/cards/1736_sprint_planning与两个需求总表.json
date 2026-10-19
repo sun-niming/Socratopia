@@ -1,0 +1,46 @@
+{
+  "title": "Sprint Planning与两个需求总表",
+  "definition": "Sprint开始前召开Sprint Planning会议，由PO和团队共同决定本次Sprint要实现的产品特性。产品特性从带有优先级的产品需求总表中选取，再被分解为更小的任务；这些任务附带工作量估计并放入Sprint需求总表。Sprint开始后，Sprint需求总表被冻结，在该Sprint期间不能修改。",
+  "key_points": [
+    "产品需求总表保存新特性的高层次需求和用户故事，并带有优先级。",
+    "PO与团队讨论产品需求总表中项目的优先级。",
+    "团队把选中的用户故事分解成更小的任务，估计每项任务的工作量。",
+    "分解后的任务放入Sprint需求总表，作为本次Sprint的具体工作内容。",
+    "Sprint开始后，Sprint需求总表冻结，当前Sprint期间不能修改。",
+    "如果Sprint为两周，原文给出的Sprint Planning会议时长为4小时。",
+    "Sprint Planning通常分两部分：PO和团队讨论产品需求总表的优先级，团队再讨论Sprint需求总表的完善。"
+  ],
+  "examples": [
+    "高层次用户故事“用户可以保存对象”可被团队进一步分解为设计保存接口、实现保存逻辑、编写测试等具体任务；这些任务放入Sprint需求总表并估计工作量。"
+  ],
+  "misconceptions": [
+    "产品需求总表和Sprint需求总表不是同一个层次：前者保存高层次、带优先级的需求，后者保存当前Sprint中已分解的具体任务。",
+    "Sprint开始后不能随意把新任务加入当前Sprint需求总表；新需求应进入后续规划。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "Sprint需求总表何时被冻结？",
+      "a": "Sprint周期开始后被冻结，在该Sprint周期中不能修改。"
+    },
+    {
+      "q": "Sprint Planning中用户故事如何变成可执行工作？",
+      "a": "先从产品需求总表中选取用户故事，再将其分解为带工作量估计的更小任务，并放入Sprint需求总表。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "Scrum的迭代与Sprint周期",
+    "Scrum的三个角色"
+  ],
+  "source_pages": [
+    842,
+    842
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1736_sprint_planning与两个需求总表",
+  "_chunk_pages": [
+    841,
+    844
+  ]
+}

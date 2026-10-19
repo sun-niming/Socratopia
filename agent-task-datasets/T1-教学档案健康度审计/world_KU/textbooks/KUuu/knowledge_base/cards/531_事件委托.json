@@ -1,0 +1,39 @@
+{
+  "title": "事件委托",
+  "definition": "事件委托是一种利用事件冒泡的技术：把事件监听器添加到父元素上，而不是直接添加到子元素上。子元素触发事件后，事件会向上冒泡到父元素，父元素通过检查 event.target 判断到底是哪一个子元素触发了事件，并据此执行相应操作。",
+  "key_points": [
+    "事件委托依赖事件冒泡",
+    "监听器设置在父元素上，而不是每个子元素上",
+    "通过 event.target 判断实际触发事件的子元素",
+    "可用 element.matches()、tagName、id、className 等方式做匹配判断"
+  ],
+  "examples": [
+    "divEl.addEventListener('click', function(event) { if (event.target.tagName === 'BUTTON') { /* 执行处理 */ } }, false);"
+  ],
+  "misconceptions": [
+    "事件委托就是把所有子元素都单独绑定一次事件；实际上它是绑定在父元素上。",
+    "处理逻辑应该看 event.currentTarget 来判断具体点击了哪个子元素；原文强调应使用 event.target。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "事件委托为什么要使用 event.target？",
+      "a": "因为 event.target 能获取实际触发事件的最深层元素，便于判断具体是哪个子元素触发了事件。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "事件对象",
+    "事件冒泡"
+  ],
+  "source_pages": [
+    369,
+    372
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "531_事件委托",
+  "_chunk_pages": [
+    369,
+    372
+  ]
+}

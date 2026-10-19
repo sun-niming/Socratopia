@@ -1,0 +1,58 @@
+{
+  "title": "path 的查询与修改接口",
+  "definition": "std::filesystem::path 提供一组用于查询和修改路径组成部分的成员函数，包括获取根名称、父路径、文件名、扩展名和不带扩展名的主文件名，以及判断路径是否为绝对路径或相对路径等。",
+  "key_points": [
+    "root_name 用于获取根名称，parent_path 用于获取父路径。",
+    "filename 用于获取文件名，extension 用于获取扩展名，stem 用于获取不含扩展名的文件名主体。",
+    "has_extension 用于判断路径是否具有扩展名。",
+    "is_absolute 和 is_relative 分别用于判断路径是否为绝对路径或相对路径。",
+    "path 还支持 remove_filename、replace_filename 和 replace_extension 等修改操作。"
+  ],
+  "examples": [
+    "path p{R\"(C:\\Foo\\Bar\\file.txt)\"};",
+    "p.root_name();",
+    "p.parent_path();",
+    "p.filename(); // file.txt",
+    "p.extension(); // .txt",
+    "p.stem(); // file",
+    "p.has_extension();",
+    "p.is_absolute();",
+    "p.is_relative();"
+  ],
+  "misconceptions": [
+    "stem 通常表示不含扩展名的文件名主体，不是完整文件名。",
+    "extension 返回的是扩展名部分，而 filename 返回包含扩展名的文件名。",
+    "is_absolute 和 is_relative 描述的是路径形式，不是目标文件是否存在。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "对于路径 C:\\Foo\\Bar\\file.txt，filename 和 stem 分别表示什么？",
+      "a": "filename 表示 file.txt，stem 表示 file。"
+    },
+    {
+      "q": "如何判断一个 path 是否包含扩展名？",
+      "a": "调用 has_extension()。"
+    },
+    {
+      "q": "如何获得路径的父路径？",
+      "a": "调用 parent_path()。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "std::filesystem::path",
+    "绝对路径与相对路径",
+    "文件名和扩展名"
+  ],
+  "source_pages": [
+    431,
+    432
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "874_path_的查询与修改接口",
+  "_chunk_pages": [
+    429,
+    432
+  ]
+}

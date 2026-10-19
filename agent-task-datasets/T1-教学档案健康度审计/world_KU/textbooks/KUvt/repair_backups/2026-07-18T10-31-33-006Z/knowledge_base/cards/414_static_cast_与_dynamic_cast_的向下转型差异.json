@@ -1,0 +1,45 @@
+{
+  "title": "static_cast 与 dynamic_cast 的向下转型差异",
+  "definition": "当基类指针实际指向某个派生类对象时，可以把基类指针转换为派生类指针。使用 `static_cast<Derived*>(base)` 属于较为武断的转换，代码会直接继续把结果当作 `Derived*` 使用；使用 `dynamic_cast<Derived*>(base)` 会在运行时检查对象类型，转换失败时，对于指针结果返回 `nullptr`。原文还指出，使用 `dynamic_cast` 进行相应的引用转换时，失败会产生 `std::bad_cast`。",
+  "key_points": [
+    "武断转换的典型写法是：`Derived* myDerived{ static_cast<Derived*>(base) };`，随后直接访问 `Derived` 的成员或方法。",
+    "较谨慎的指针转换写法是：`Derived* myDerived{ dynamic_cast<Derived*>(base) };`，必须先检查 `myDerived != nullptr`，再访问派生类成员。",
+    "原文列出 `dynamic_cast` 转换失败的两种结果：指针形式得到 `nullptr`，引用形式得到 `std::bad_cast`。"
+  ],
+  "examples": [
+    "武断的向下转型：`void presumptuous(Base* base) { Derived* myDerived{ static_cast<Derived*>(base) }; /* 继续使用 myDerived */ }`",
+    "较谨慎的向下转型：`void lessPresumptuous(Base* base) { Derived* myDerived{ dynamic_cast<Derived*>(base) }; if (myDerived != nullptr) { /* 继续使用 myDerived */ } }`",
+    "失败结果可概括为：$$\\operatorname{dynamic\\_cast}<Derived*>(base)=nullptr$$；对引用进行失败的 `dynamic_cast` 时会抛出 `std::bad_cast`。"
+  ],
+  "misconceptions": [
+    "不能认为 `static_cast` 会自动检查 `base` 是否确实指向 `Derived` 对象；原文将这种写法称为 presumptuous（武断）。",
+    "使用 `dynamic_cast` 得到指针后不能无条件访问派生类成员，应先判断结果是否为 `nullptr`。",
+    "指针形式和引用形式的失败表现不同：指针得到 `nullptr`，引用形式产生 `std::bad_cast`。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`static_cast<Derived*>(base)` 与 `dynamic_cast<Derived*>(base)` 在原文示例中的主要区别是什么？",
+      "a": "`static_cast` 直接进行武断的向下转型，不展示运行时失败检查；`dynamic_cast` 会进行运行时类型检查，指针转换失败时返回 `nullptr`，因此应先判断结果。"
+    },
+    {
+      "q": "使用 `dynamic_cast` 将 `Base*` 转换为 `Derived*` 后，为什么要检查 `myDerived != nullptr`？",
+      "a": "因为转换可能失败，失败时 `dynamic_cast<Derived*>(base)` 返回 `nullptr`；只有非空时才应继续访问 `Derived` 的成员或方法。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++继承中的基类与派生类指针",
+    "C++多态"
+  ],
+  "source_pages": [
+    321,
+    324
+  ],
+  "needs_verification": true,
+  "verify_query": "Marc Gregoire C++20 Advanced Programming 5th edition page 321 static_cast dynamic_cast presumptuous lessPresumptuous Base Derived std::bad_cast",
+  "concept_id": "414_static_cast_与_dynamic_cast_的向下转型差异",
+  "_chunk_pages": [
+    321,
+    324
+  ]
+}

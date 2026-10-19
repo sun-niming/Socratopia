@@ -1,0 +1,46 @@
+{
+  "title": "智能指针的自定义删除器",
+  "definition": "智能指针可以使用自定义删除器释放不适合用默认 delete 处理的资源，例如由 C 风格分配函数分配的内存、文件指针或网络套接字。unique_ptr 的自定义删除器类型必须作为模板类型参数指定；shared_ptr 则可以在构造时直接传入删除器对象或函数，而不必把删除器类型写入模板参数。",
+  "key_points": [
+    "unique_ptr 的删除器类型属于其类型的一部分，模板参数需要指定一个接收指针参数并返回 void 的函数指针类型；原文示例使用 decltype(&my_free) 获取 my_free() 的函数指针类型。",
+    "shared_ptr 的自定义删除器可直接作为构造函数参数传入，语法比 unique_ptr 更简便。",
+    "自定义删除器不仅可以释放内存，还可以关闭文件、网络套接字等资源。",
+    "删除器必须与被管理资源的释放方式匹配，例如用 fopen() 打开的文件应使用 fclose() 关闭。"
+  ],
+  "examples": [
+    "unique_ptr<int, decltype(&my_free)> myIntSmartPtr { my_alloc(42), my_free };",
+    "shared_ptr<int> myIntSmartPtr { malloc_int(42), my_free };",
+    "void close(FILE* filePtr) { if (filePtr == nullptr) { return; } fclose(filePtr); }；shared_ptr<FILE> filePtr { f, close };"
+  ],
+  "misconceptions": [
+    "所有智能指针都只能使用 delete 或 delete[] 释放资源；实际上可以提供自定义删除器。",
+    "shared_ptr 的自定义删除器也必须写入模板类型参数；原文指出 shared_ptr 不需要这样做。",
+    "只要资源被智能指针管理，就可以使用默认删除器；如果资源来自 C 风格库或特殊分配函数，必须使用匹配的自定义删除器。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "unique_ptr 和 shared_ptr 的自定义删除器在语法上有什么区别？",
+      "a": "unique_ptr 必须将自定义删除器的类型指定为模板类型参数；shared_ptr 可以在构造时直接传入删除器，不必把删除器类型指定为模板参数。"
+    },
+    {
+      "q": "为什么可以用 shared_ptr 包装 FILE*？",
+      "a": "因为可以为 shared_ptr 提供调用 fclose() 的自定义删除器，使 FILE* 在 shared_ptr 销毁且成为最后所有者时被正确关闭。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "unique_ptr 的基本用法",
+    "shared_ptr 的基本用法"
+  ],
+  "source_pages": [
+    221,
+    222
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "470_智能指针的自定义删除器",
+  "_chunk_pages": [
+    221,
+    224
+  ]
+}

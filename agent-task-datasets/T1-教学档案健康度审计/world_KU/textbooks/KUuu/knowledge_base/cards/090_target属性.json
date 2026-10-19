@@ -1,0 +1,45 @@
+{
+  "title": "target属性",
+  "definition": "target 属性用于规定被链接文档在何处打开，也就是超链接的打开方式；它只能在 `href` 属性存在时使用。",
+  "key_points": [
+    "`target` 控制链接打开的位置或方式。",
+    "`target` 只能与 `href` 同时使用。",
+    "教材列出了 `_blank`、`_self`、`_parent`、`_top` 四个常见取值。"
+  ],
+  "examples": [
+    "<a href=\"00.html\" target=\"_blank\">示例链接</a>",
+    "`_blank`：在新窗口中打开",
+    "`_self`：在当前框架中打开（默认）",
+    "`_parent`：在父框架中打开",
+    "`_top`：在窗口主体中打开"
+  ],
+  "misconceptions": [
+    "`target` 可以单独使用，不需要 `href`。",
+    "`_self` 表示新窗口打开。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "target 属性的作用是什么？",
+      "a": "规定被链接文档在何处打开。"
+    },
+    {
+      "q": "target 属性能单独使用吗？",
+      "a": "不能，必须在 `href` 属性存在时使用。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "href属性"
+  ],
+  "source_pages": [
+    53,
+    56
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "090_target属性",
+  "_chunk_pages": [
+    53,
+    56
+  ]
+}

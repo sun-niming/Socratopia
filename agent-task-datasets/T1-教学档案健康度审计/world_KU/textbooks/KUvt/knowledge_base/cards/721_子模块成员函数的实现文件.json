@@ -1,0 +1,43 @@
+{
+  "title": "子模块成员函数的实现文件",
+  "definition": "子模块中的类成员函数实现可以放在该子模块对应的模块实现文件中。实现文件应以对应的子模块名称作为模块声明，并可导入实现所需的标准库内容，然后定义子模块中类的成员函数。",
+  "key_points": [
+    "实现文件使用对应子模块的模块声明，例如 `module datamodel.address;`。",
+    "实现文件可以单独导入实现所需的库，例如 `<iostream>`。",
+    "成员函数定义使用完整限定名，例如 `DataModel::Address::Address()`。"
+  ],
+  "examples": [
+    "假设 `Address` 有一个默认构造函数，可在 `datamodel.address.cpp` 中写：\n`module datamodel.address;`\n`import <iostream>;`\n`using namespace std;`\n`DataModel::Address::Address() { cout << \"Address::Address()\" << endl; }`"
+  ],
+  "misconceptions": [
+    "子模块的实现必须全部写在接口文件中。",
+    "实现文件应声明为主模块 `module datamodel;`，而不能声明为对应的子模块。",
+    "实现子模块成员时不需要使用类和命名空间的限定名。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`datamodel.address` 子模块的成员函数实现文件应使用什么模块声明？",
+      "a": "应使用 `module datamodel.address;`，以表明该文件实现的是 `datamodel.address` 子模块。"
+    },
+    {
+      "q": "如何定义 `DataModel::Address` 的构造函数实现？",
+      "a": "可以在对应实现文件中写 `DataModel::Address::Address() { /* 构造函数实现 */ }`。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++模块实现文件",
+    "C++命名空间和类成员函数定义"
+  ],
+  "source_pages": [
+    358,
+    358
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "721_子模块成员函数的实现文件",
+  "_chunk_pages": [
+    357,
+    360
+  ]
+}

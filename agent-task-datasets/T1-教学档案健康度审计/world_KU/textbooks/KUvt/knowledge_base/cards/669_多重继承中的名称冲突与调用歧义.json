@@ -1,0 +1,49 @@
+{
+  "title": "多重继承中的名称冲突与调用歧义",
+  "definition": "如果多重继承的两个彼此无关的基类都定义了同名成员函数，例如 Dog::eat() 和 Bird::eat()，派生类会同时继承这两个函数。派生类本身仍可以编译，但客户代码直接通过派生类对象调用 `eat()` 时，编译器无法判断应选择哪个基类版本，因此会报告调用有歧义。",
+  "key_points": [
+    "两个不相关基类的同名函数不会自动互相重写，因为它们不在同一条继承关系中。",
+    "如果派生类没有调用这个同名函数，类定义本身可以正常存在。",
+    "通过派生类对象直接写 `myDogBird.eat()` 时，两个候选函数都匹配，调用会产生歧义错误。",
+    "名称冲突需要在派生类中明确消除或在调用时指定基类作用域；原文在此处主要说明歧义现象。"
+  ],
+  "examples": [
+    "示例：\n```cpp\nclass Dog {\npublic:\n    virtual void eat() { std::cout << \"The dog ate.\" << std::endl; }\n};\n\nclass Bird {\npublic:\n    virtual void eat() { std::cout << \"The bird ate.\" << std::endl; }\n};\n\nclass DogBird : public Dog, public Bird {};\n```\n此时：\n```cpp\nDogBird animal;\nanimal.eat(); // 调用有歧义\n```\n因为编译器无法在 `Dog::eat()` 和 `Bird::eat()` 之间自动选择。"
+  ],
+  "misconceptions": [
+    "同名函数存在并不一定导致类定义立即编译失败；通常是在通过派生类对象调用该名称时出现歧义。",
+    "两个基类的同名虚函数不会因为都带有 virtual 就自动合并成一个函数。",
+    "名称相同不等于发生了重写；重写要求处于相应的继承和虚函数关系中。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "Dog 和 Bird 都定义 eat() 时，DogBird.animal.eat() 会发生什么？",
+      "a": "调用产生歧义，编译器不知道应选择 Dog::eat() 还是 Bird::eat()，因此报告错误。"
+    },
+    {
+      "q": "为什么 Dog::eat() 和 Bird::eat() 不会互相重写？",
+      "a": "因为 Dog 和 Bird 彼此无关，不存在它们之间的继承关系。"
+    },
+    {
+      "q": "如果客户代码从不调用 eat()，DogBird 类是否仍能存在？",
+      "a": "可以。两个 eat() 版本会同时存在，但未发生需要选择具体版本的调用。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "多重继承",
+    "虚函数与重写",
+    "名称查找"
+  ],
+  "source_pages": [
+    328,
+    328
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "669_多重继承中的名称冲突与调用歧义",
+  "_chunk_pages": [
+    325,
+    328
+  ]
+}

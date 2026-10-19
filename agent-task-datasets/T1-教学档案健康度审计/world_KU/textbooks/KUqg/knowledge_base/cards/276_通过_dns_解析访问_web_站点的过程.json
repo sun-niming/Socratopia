@@ -1,0 +1,50 @@
+{
+  "title": "通过 DNS 解析访问 Web 站点的过程",
+  "definition": "当客户端访问一个域名对应的 Web 站点时，客户端主机首先向本地 DNS 服务器查询该域名。本地 DNS 服务器必要时依次联系 TLD DNS 服务器和权威 DNS 服务器，获得 Web 服务器的 A 记录及其 IP 地址，再将该地址返回给客户端。客户端随后可以与该 IP 地址建立 TCP 连接，并在连接上发送 HTTP 请求。",
+  "key_points": [
+    "本地 DNS 服务器如果没有缓存 TLD 服务器地址，可能先联系根 DNS 服务器。",
+    "TLD 服务器根据 NS 记录找到该域名的权威 DNS 服务器。",
+    "本地 DNS 服务器向权威 DNS 服务器查询 Web 主机的 A 记录。",
+    "客户端获得 IP 地址后，才向该 IP 地址发起 TCP 连接并发送 HTTP 请求。"
+  ],
+  "examples": [
+    "教材中的示例中，澳大利亚的 Alice 访问 $www.networkutopia.com$：\n$$\n\\text{Alice主机}\\rightarrow\\text{本地DNS服务器}\\rightarrow\\text{com TLD服务器}\\rightarrow\\text{权威DNS服务器}\n$$\n权威 DNS 服务器返回 Web 服务器的 A 记录，例如 IP 地址 $212.212.71.4$；本地 DNS 服务器将该地址返回给 Alice，浏览器再向 $212.212.71.4$ 建立 TCP 连接并发送 HTTP 请求。"
+  ],
+  "misconceptions": [
+    "DNS 查询返回的是主机名对应的 IP 地址，不是 Web 页面内容。",
+    "浏览器不是先建立 TCP 连接再进行 DNS 解析；在该过程的简化描述中，浏览器先获得 IP 地址，然后建立 TCP 连接。",
+    "根服务器不一定每次都会被访问；本地 DNS 服务器可能已经缓存了 TLD 服务器的地址。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "客户端访问一个 Web 域名时，DNS 解析的基本结果是什么？",
+      "a": "获得该 Web 主机的 IP 地址，例如通过 A 记录获得 $212.212.71.4$。"
+    },
+    {
+      "q": "在 DNS 解析完成后，浏览器接下来做什么？",
+      "a": "向获得的 IP 地址建立 TCP 连接，并在该连接上发送 HTTP 请求。"
+    },
+    {
+      "q": "为什么一次域名解析不一定需要访问根 DNS 服务器？",
+      "a": "因为本地 DNS 服务器可能已经缓存了相应 TLD DNS 服务器的 IP 地址。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "DNS 查询过程",
+    "A 记录",
+    "TCP 连接",
+    "HTTP 请求"
+  ],
+  "source_pages": [
+    109,
+    112
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "276_通过_dns_解析访问_web_站点的过程",
+  "_chunk_pages": [
+    109,
+    112
+  ]
+}

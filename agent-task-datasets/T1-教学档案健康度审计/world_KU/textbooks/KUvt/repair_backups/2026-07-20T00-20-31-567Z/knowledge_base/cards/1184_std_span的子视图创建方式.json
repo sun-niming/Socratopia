@@ -1,0 +1,46 @@
+{
+  "title": "std::span的子视图创建方式",
+  "definition": "可以通过构造函数、subspan()、first()和last()为现有连续序列创建部分元素的std::span视图。subspan(offset, count)从指定偏移量开始取count个元素；first(count)返回前count个元素的子视图；last(count)返回后count个元素的子视图。也可以通过首元素地址和元素数量直接构造span。",
+  "key_points": [
+    "subspan的第一个参数是偏移量，第二个参数是子视图包含的元素数量。",
+    "first(count)和last(count)分别取得前count个元素和后count个元素。",
+    "子视图仍然不复制数据，修改子视图中的可写元素会影响原序列。",
+    "直接构造部分视图时，需要提供起始地址和元素数量，例如std::span{v.data() + 2, 3}。"
+  ],
+  "examples": [
+    "std::vector v{11, 22, 33, 44, 55, 66};\nstd::span mySpan{v};\nstd::span subspan{mySpan.subspan(2, 3)}; // 视图包含33、44、55",
+    "print({v.data() + 2, 3}); // 直接创建从第三个元素开始、长度为3的视图，输出33 44 55",
+    "int carr[]{9, 8, 7, 6, 5};\nprint({carr + 2, 3}); // 视图包含7、6、5"
+  ],
+  "misconceptions": [
+    "subspan、first和last返回的是视图，不是独立复制出来的新容器。",
+    "offset表示从序列开头计算的偏移量，不是元素值。",
+    "创建部分span时，元素数量必须与实际可访问的连续范围相匹配。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "mySpan.subspan(2, 3)表示什么？",
+      "a": "表示从mySpan的偏移量2处开始，包含3个元素的子视图。"
+    },
+    {
+      "q": "如何创建包含C风格数组carr从第三个元素开始的3个元素的span？",
+      "a": "可以使用std::span{carr + 2, 3}，或者将其作为参数传给接受span的函数。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "std::span是连续元素序列的非拥有视图",
+    "指针与数组偏移"
+  ],
+  "source_pages": [
+    574,
+    574
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1184_std_span的子视图创建方式",
+  "_chunk_pages": [
+    573,
+    576
+  ]
+}

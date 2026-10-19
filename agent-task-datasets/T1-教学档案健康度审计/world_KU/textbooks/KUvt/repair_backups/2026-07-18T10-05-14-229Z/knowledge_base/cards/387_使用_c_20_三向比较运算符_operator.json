@@ -1,0 +1,51 @@
+{
+  "title": "使用 C++20 三向比较运算符 operator<=>",
+  "definition": "C++20 的三向比较运算符 `operator<=>` 用于一次性描述两个对象的排序关系。SpreadsheetCell 可以通过比较自身数值与另一个 SpreadsheetCell 的数值，返回 `std::partial_ordering`；也可以提供接受 double 的重载。使用三向比较结果时，可以通过 `std::is_lt(...)` 判断左操作数是否小于右操作数。",
+  "key_points": [
+    "SpreadsheetCell 与另一个 SpreadsheetCell 的声明示意为：`[[nodiscard]] std::partial_ordering operator<=>(const SpreadsheetCell& rhs) const;`。",
+    "实现可以直接返回底层数值的三向比较：`return getValue() <=> rhs.getValue();`。",
+    "与 double 比较时，可以声明：`[[nodiscard]] std::partial_ordering operator<=>(double rhs) const;`，实现为 `return getValue() <=> rhs;`。",
+    "原文示例使用 `std::is_lt(myCell <=> aThirdCell)` 判断 `myCell` 是否小于 `aThirdCell`。",
+    "原文列举了由比较运算支持的 `<`、`<=`、`>`、`>=`、`==` 和 `!=` 使用场景；其中相等比较仍在原文中单独声明了 `operator==`。"
+  ],
+  "examples": [
+    "三向比较函数：`[[nodiscard]] std::partial_ordering SpreadsheetCell::operator<=>(const SpreadsheetCell& rhs) const { return getValue() <=> rhs.getValue(); }`",
+    "判断小于：`if (std::is_lt(myCell <=> aThirdCell)) { /* myCell 小于 aThirdCell */ }`",
+    "与 double 三向比较：`if (std::is_lt(myCell <=> 10)) { /* myCell 小于 10 */ }`"
+  ],
+  "misconceptions": [
+    "`operator<=>` 的返回值通常不是 `bool`，原文使用的是 `std::partial_ordering`。",
+    "三向比较表达式 `myCell <=> aThirdCell` 本身表示比较结果，不等同于一个直接的真假值；可使用 `std::is_lt` 等工具进行判断。",
+    "定义 `operator<=>` 后不应忽略 `operator==` 的设计；原文同时展示了单独的 `operator==` 声明。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "SpreadsheetCell 的 `operator<=>` 在原文中返回哪一种类型？",
+      "a": "返回 `std::partial_ordering`。"
+    },
+    {
+      "q": "如何使用三向比较结果判断 `myCell` 是否小于 `aThirdCell`？",
+      "a": "可以写成 `std::is_lt(myCell <=> aThirdCell)`。"
+    },
+    {
+      "q": "SpreadsheetCell 的三向比较实现比较了什么？",
+      "a": "比较当前对象的 `getValue()` 与右操作数对应的数值。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++比较运算符重载",
+    "C++20三向比较运算符基础"
+  ],
+  "source_pages": [
+    295,
+    296
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "387_使用_c_20_三向比较运算符_operator",
+  "_chunk_pages": [
+    293,
+    296
+  ]
+}

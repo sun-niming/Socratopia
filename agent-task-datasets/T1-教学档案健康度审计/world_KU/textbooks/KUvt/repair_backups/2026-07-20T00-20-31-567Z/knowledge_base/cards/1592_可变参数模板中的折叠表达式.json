@@ -1,0 +1,45 @@
+{
+  "title": "可变参数模板中的折叠表达式",
+  "definition": "折叠表达式用于把参数包中的多个参数按照指定运算符组合起来，从而避免手写递归函数模板和基本情形。对逗号运算符使用一元右折叠时，表达式形式为 `(表达式...,)` 的等价写法 `(expr, ...)`，其展开顺序为从左到右嵌套，例如三个参数会展开为 `expr1, (expr2, expr3)`。",
+  "key_points": [
+    "使用折叠表达式处理参数包时，不需要像递归模板那样单独定义停止递归的基本情形。",
+    "一元右折叠 `(handleValue(args), ...)` 会对参数包中的每个参数调用一次 `handleValue`。",
+    "对包含 $a_1,a_2,a_3$ 的参数包，一元右折叠可展开为 `$(handleValue(a_1), (handleValue(a_2), handleValue(a_3)))$`。",
+    "折叠表达式不只可与逗号运算符结合，也可以与其他运算符结合。"
+  ],
+  "examples": [
+    "代码形式：`template<typename... Tn> void processValues(const Tn&... args) { (handleValue(args), ...); }`",
+    "当参数为 `a1`、`a2`、`a3` 时，展开形式为：$$(handleValue(a_1), (handleValue(a_2), handleValue(a_3)))$$"
+  ],
+  "misconceptions": [
+    "折叠表达式不是只能用于逗号运算符；逗号运算符只是教材示例中使用的运算符。",
+    "使用折叠表达式后仍然是对参数包中的每个参数执行操作，并不是只执行一次。",
+    "一元折叠不需要额外的 `Init` 值；需要 `Init` 的是二元折叠。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "使用 `(handleValue(args), ...)` 处理参数包有什么作用？",
+      "a": "它会对参数包中的每个参数调用一次 `handleValue`，并使用逗号运算符将这些调用折叠起来。"
+    },
+    {
+      "q": "包含三个参数时，一元右折叠 `(expr, ...)` 的嵌套方向是什么？",
+      "a": "它从右侧嵌套，形式为 `expr1, (expr2, expr3)`。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "可变参数函数模板",
+    "参数包展开"
+  ],
+  "source_pages": [
+    773,
+    773
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1592_可变参数模板中的折叠表达式",
+  "_chunk_pages": [
+    773,
+    776
+  ]
+}

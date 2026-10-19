@@ -1,0 +1,44 @@
+{
+  "title": "chrono标准用户自定义时间字面量",
+  "definition": "C++标准库提供了用于创建duration的用户自定义字面量，包括`h`、`min`、`s`、`ms`、`us`和`ns`，分别表示小时、分钟、秒、毫秒、微秒和纳秒。使用这些字面量需要能够访问`std::chrono`字面量命名空间。",
+  "key_points": [
+    "`42min`表示42分钟的duration。",
+    "可以通过`using namespace std::chrono_literals;`使用这些字面量。",
+    "教材列出了多种可用方式，包括`std::literals`、`std::chrono_literals`以及`std::literals::chrono_literals`相关命名空间；也可以使用`std::chrono`中的相关名称。",
+    "字面量生成的是duration对象，而不是普通整数。"
+  ],
+  "examples": [
+    "`using namespace std::chrono_literals;`之后，可以写`auto myDuration{42min};`表示42分钟。",
+    "常见字面量包括：`1h`、`23min`、`45s`、`500ms`、`10us`和`20ns`。"
+  ],
+  "misconceptions": [
+    "`42min`不是整数42；它是一个表示42分钟的duration对象。",
+    "使用这些字面量不需要自行定义运算符；它们由标准库提供。",
+    "字面量后缀`min`表示分钟，不能写成普通的`m`来代替。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何用字面量表示42分钟？",
+      "a": "在可访问chrono字面量命名空间的情况下写`42min`。"
+    },
+    {
+      "q": "`500ms`表示什么？",
+      "a": "它表示500毫秒的duration。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "std::chrono::duration的模板参数与基本功能"
+  ],
+  "source_pages": [
+    688,
+    688
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1434_chrono标准用户自定义时间字面量",
+  "_chunk_pages": [
+    685,
+    688
+  ]
+}

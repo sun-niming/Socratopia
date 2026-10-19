@@ -1,0 +1,116 @@
+{
+  "conversationId": "JyYQk02Ziw60ZDaeUE60f",
+  "generatedAt": 1781372546746,
+  "pagesRange": null,
+  "sections": [
+    {
+      "type": "tldr",
+      "content": "这节课的核心是分清三组容易混的东西：`eval` 会让 shell 再解释一遍命令；`source` / `bash test.sh` / `exec` 影响的是不是当前 shell；`bash -n` / `-v` / `-x` 分别是在查语法、看原文、看展开后的实际执行命令。"
+    },
+    {
+      "type": "narrative",
+      "content": "这节课先从一个看起来绕的 `eval echo $i. \\$$i` 入手，把“第一层先拼出命令，第二层再执行命令”看清。接着顺着“谁的环境会被改”这条主线，区分了 `source`、子 shell 和 `exec`。最后又把脚本调试选项 `-n`、`-v`、`-x` 按用途排清楚。"
+    },
+    {
+      "type": "concepts",
+      "items": [
+        {
+          "name": "`eval` 的两层解释",
+          "body": "课堂里的关键句子是：**`eval` 会让 shell 再做一遍解释**。\\n\\n以 `eval echo $i. \\$$i` 为例，若当前 `i=2`：\\n\\n1. **第一层展开**：`$i` 先变成 `2`，`\\$` 把前一个 `$` 暂时保住，于是整句会先变成：\\n   ```bash\\n   echo 2. $2\\n   ```\\n2. **第二层解释**（只有用了 `eval` 才有）：shell 再把上面这条命令当成新命令执行，这时 `$2` 才真正变成第二个位置参数的内容。\\n\\n所以它不是在取变量 `i`，而是在**根据 `i` 动态拼出 `$1`、`$2`、`$3` 这种位置参数形式，再重新解释**。\\n\\n例子：如果脚本参数是\\n```bash\\napple banana cat\\n```\\n那么目标输出就是\\n```bash\\n1. apple\\n2. banana\\n3. cat\\n```"
+        },
+        {
+          "name": "不用 `eval` 时会停在哪一步",
+          "body": "如果没有 `eval`，那程序只会完成**第一层展开**。\\n\\n比如第二轮 `i=2` 时，第一层展开后得到：\\n```bash\\necho 2. $2\\n```\\n没有 `eval`，就不会再把 `$2` 当成位置参数重新解释，所以屏幕上显示的是：\\n```bash\\n2. $2\\n```\\n而不是 `2. banana`。\\n\\n一句话记忆：**先拼命令，再执行命令；`eval` 负责第二步。**"
+        },
+        {
+          "name": "`source`、`bash test.sh`、`exec` 的区别",
+          "body": "这部分的主线是：**命令到底改的是谁的环境**。\\n\\n- `source test.sh`：**在当前 shell 里执行**\\n  - 脚本里改变量、改当前目录，这些改动都可能留在你现在这个终端里\\n- `bash test.sh`：**开一个新的 shell（子 shell）去执行**\\n  - 改动主要留在子 shell 里，执行完回到当前终端时通常不保留\\n- `exec 命令`：**用新命令替换当前 shell 进程**\\n  - 不是“顺手执行一下”，而是把当前 shell 直接顶掉\\n\\n课堂里的典型判断：\\n- 脚本里有 `name=Alice`，执行完还想在当前终端 `echo $name` 看到 `Alice`：选 `source test.sh`\\n- 脚本里有 `cd /tmp`，执行完还想当前终端真的留在 `/tmp`：也要选 `source test.sh`\\n- 如果只是想安全地跑脚本、尽量别弄脏当前终端：更自然的是 `bash test.sh`"
+        },
+        {
+          "name": "“改当前目录”和“不要影响当前环境”为什么冲突",
+          "body": "学习过程中专门收了一个边界：**改当前目录则必定影响当前环境。**\\n\\n原因是当前目录本来就是当前 shell 状态的一部分。\\n\\n所以：\\n- 想让 `cd` 的效果留在当前终端，就必须在当前 shell 里执行，也就是偏向 `source`\\n- 但只要在当前 shell 里执行，就没法保证“一点环境都不碰”\\n\\n这说明这两个目标很难同时完美满足：\\n1. 当前终端目录真的变掉\\n2. 当前终端环境完全不被污染"
+        },
+        {
+          "name": "`bash -n`、`bash -v`、`bash -x` 的用途",
+          "body": "这三个选项是按“你想看哪一层”来区分的：\\n\\n- `bash -n`：**只查语法，不执行**\\n- `bash -v`：**看脚本原始命令**\\n- `bash -x`：**看展开后实际执行的命令**\\n\\n课堂里的对应理解：\\n- 想先检查脚本有没有语法错误，连执行都不想执行：用 `-n`\\n- 想看到脚本里原封不动写的是 `echo $name`：用 `-v`\\n- 想看到变量展开后到底变成 `echo Alice` 还是别的：用 `-x`\\n\\n尤其是怀疑 bug 是在**变量展开之后**才暴露时，应优先用 `bash -x`。"
+        }
+      ]
+    },
+    {
+      "type": "key-insight",
+      "content": "改当前目录则必定影响当前环境",
+      "attribution": "学习者"
+    },
+    {
+      "type": "key-terms",
+      "items": [
+        {
+          "term": "`eval`",
+          "definition": "把第一层展开得到的字符串再交给 shell 解释执行一次。"
+        },
+        {
+          "term": "位置参数",
+          "definition": "shell 脚本收到的参数，如 `$1`、`$2`、`$3`。"
+        },
+        {
+          "term": "当前 shell",
+          "definition": "你眼前这个终端正在运行的 shell 环境。"
+        },
+        {
+          "term": "子 shell",
+          "definition": "由当前 shell 派生出来的新的 shell；其中的改动通常不会自动带回当前 shell。"
+        },
+        {
+          "term": "`source`",
+          "definition": "在当前 shell 中执行脚本，因此变量和目录改动可能保留下来。"
+        },
+        {
+          "term": "`exec`",
+          "definition": "用一个新命令替换当前 shell 进程，而不是在原 shell 里继续往下执行。"
+        },
+        {
+          "term": "`bash -n`",
+          "definition": "仅做语法检查，不执行脚本。"
+        },
+        {
+          "term": "`bash -v`",
+          "definition": "打印脚本里的原始命令行。"
+        },
+        {
+          "term": "`bash -x`",
+          "definition": "打印展开后的实际执行命令，适合排查变量展开问题。"
+        }
+      ]
+    },
+    {
+      "type": "open-question",
+      "content": "下节课刚准备从 `int main(int argc, char *argv[])` 切进 C，并把 `argc` 跟 shell 里的 `$#`、位置参数系统对比；可以从“`argc` 像什么，`argv` 又像什么”继续接。"
+    },
+    {
+      "type": "review-questions",
+      "items": [
+        {
+          "question": "`eval echo $i. \\$$i` 在 `i=1` 时，第一层展开后会变成什么？",
+          "answer": "```bash\\necho 1. $1\\n```"
+        },
+        {
+          "question": "如果脚本参数是 `apple banana`，并且第二轮 `i=2` 时**没有** `eval`，屏幕上会显示什么？",
+          "hint": "先想第一层展开后得到的命令。",
+          "answer": "会显示：\\n```bash\\n2. $2\\n```\\n因为只拼出了命令，没有进行第二次解释。"
+        },
+        {
+          "question": "脚本里只有一行 `name=Alice`。执行完以后想在当前终端里 `echo $name` 看到 `Alice`，该选 `source test.sh` 还是 `bash test.sh`？为什么？",
+          "answer": "选 `source test.sh`。因为它是在当前 shell 里执行，变量改动会留在当前终端；`bash test.sh` 是在子 shell 里执行，结束后变量不会带回来。"
+        },
+        {
+          "question": "如果脚本里写了 `cd /tmp`，执行完后不想让当前终端真的切到 `/tmp`，该怎么运行脚本更自然？",
+          "answer": "更自然的是 `bash test.sh`，因为目录改动会留在子 shell 中，不会影响当前终端。"
+        },
+        {
+          "question": "你怀疑脚本的问题是变量展开后才暴露出来，应该优先用 `bash -v` 还是 `bash -x`？",
+          "answer": "优先用 `bash -x`，因为它显示的是展开后实际执行的命令；`bash -v` 更适合看脚本原文。"
+        }
+      ]
+    }
+  ]
+}

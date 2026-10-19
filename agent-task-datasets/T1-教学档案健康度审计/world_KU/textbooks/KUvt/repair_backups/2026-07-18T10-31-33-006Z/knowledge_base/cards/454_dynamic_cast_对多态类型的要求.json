@@ -1,0 +1,45 @@
+{
+  "title": "dynamic_cast() 对多态类型的要求",
+  "definition": "`dynamic_cast()` 进行运行时类型检查时，需要使用多态类型。原文展示了基类中存在虚函数相关内容，并列出 `vtable`；同时给出了编译器错误：`'dynamic_cast': 'MyClass' is not a polymorphic type.`",
+  "key_points": [
+    "多态类型通常通过包含至少一个虚函数来形成；原文示例中出现了虚析构函数：`virtual ~Derived() = default;`。",
+    "原文提到 `vtable` 与 `dynamic_cast()` 的关系，说明该转换依赖运行时类型信息。",
+    "如果参与转换的类型不是多态类型，编译器可能报告 `not a polymorphic type` 错误。",
+    "原文给出的错误示例为：`error C2683: 'dynamic_cast' : 'MyClass' is not a polymorphic type.`"
+  ],
+  "examples": [
+    "虚析构函数示例：`virtual ~Derived() = default;`",
+    "错误信息：`error C2683: 'dynamic_cast' : 'MyClass' is not a polymorphic type.`"
+  ],
+  "misconceptions": [
+    "不能认为所有包含继承关系的类都能直接用于 `dynamic_cast()`；原文明确指出非多态类型会导致错误。",
+    "仅仅存在基类和派生类关系，并不等于类型已经具备多态性。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "当用于 `dynamic_cast()` 的类型不是多态类型时，原文给出了什么错误信息？",
+      "a": "`'dynamic_cast': 'MyClass' is not a polymorphic type.`"
+    },
+    {
+      "q": "原文提到与 `dynamic_cast()` 运行时机制相关的数据结构是什么？",
+      "a": "`vtable`。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "C++虚函数与多态",
+    "C++继承关系",
+    "C++运行时类型检查"
+  ],
+  "source_pages": [
+    349,
+    352
+  ],
+  "needs_verification": true,
+  "verify_query": "C++ dynamic_cast polymorphic type vtable error C2683 MyClass is not a polymorphic type virtual destructor",
+  "concept_id": "454_dynamic_cast_对多态类型的要求",
+  "_chunk_pages": [
+    349,
+    352
+  ]
+}

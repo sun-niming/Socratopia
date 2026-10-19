@@ -1,0 +1,41 @@
+{
+  "title": "iframe的loading属性",
+  "definition": "loading 属性用于控制 iframe 的加载方式，教材给出的取值是 lazy 和 eager，其中 lazy 表示延迟加载。",
+  "key_points": [
+    "可用来控制加载时机",
+    "教材给出的值有 lazy 和 eager"
+  ],
+  "examples": [
+    "<iframe loading=\"lazy\"></iframe>",
+    "<iframe loading=\"eager\"></iframe>"
+  ],
+  "misconceptions": [
+    "lazy 不是立即加载，而是延迟加载",
+    "loading 不是控制尺寸的属性"
+  ],
+  "qa_pairs": [
+    {
+      "q": "iframe 的 loading 属性有什么作用？",
+      "a": "控制加载方式。"
+    },
+    {
+      "q": "教材中 loading 属性给出了哪两个取值？",
+      "a": "lazy 和 eager。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "iframe标记"
+  ],
+  "source_pages": [
+    77,
+    80
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "102_iframe的loading属性",
+  "_chunk_pages": [
+    77,
+    80
+  ]
+}

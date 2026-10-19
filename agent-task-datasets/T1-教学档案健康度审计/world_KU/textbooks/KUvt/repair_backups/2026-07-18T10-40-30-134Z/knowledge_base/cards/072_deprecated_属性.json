@@ -1,0 +1,44 @@
+{
+  "title": "[[deprecated]]属性",
+  "definition": "`[[deprecated]]` 用于标记不建议继续使用的函数、类型或其他可适用实体。调用或使用被标记的实体时，编译器可以发出弃用警告；也可以通过字符串提供迁移或替代说明。",
+  "key_points": [
+    "原文示例为 `[[deprecated]] void func();`。",
+    "可以写成 `[[deprecated(\"Unsafe method, please use xyz\")]] void func();`，为警告提供说明。",
+    "GCC示例警告指出 `func` 已弃用，并显示说明文字“Unsafe method, please use xyz”。"
+  ],
+  "examples": [
+    "`[[deprecated]] void func();`",
+    "`[[deprecated(\"Unsafe method, please use xyz\")]] void func();`"
+  ],
+  "misconceptions": [
+    "`[[deprecated]]` 通常不会立即删除函数，也不一定阻止程序编译；它主要用于发出诊断。",
+    "弃用不等于函数已经失效，而是表示不建议新代码继续使用。",
+    "括号中的字符串是给开发者看的说明，不是函数参数。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何标记一个不建议继续使用的函数？",
+      "a": "在函数声明前加 `[[deprecated]]`，例如 `[[deprecated]] void func();`。"
+    },
+    {
+      "q": "如何在弃用警告中说明替代方案？",
+      "a": "使用带说明文字的形式，例如 `[[deprecated(\"Unsafe method, please use xyz\")]] void func();`。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++属性语法[[attribute]]",
+    "函数声明、定义与调用"
+  ],
+  "source_pages": [
+    53,
+    56
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "072_deprecated_属性",
+  "_chunk_pages": [
+    53,
+    56
+  ]
+}

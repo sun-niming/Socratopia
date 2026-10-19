@@ -1,0 +1,44 @@
+{
+  "title": "从派生类角度访问基类成员",
+  "definition": "从派生类自身的角度看，派生类仍然像普通类一样定义自己的方法和数据成员。派生类可以访问基类中声明的公有成员和受保护成员，就像这些成员是派生类可使用的继承特性；教材示例中的 `Derived` 通过增加 `someOtherMethod()` 扩展了 `Base`。",
+  "key_points": [
+    "派生类可以声明自己的方法和数据成员。",
+    "派生类可访问基类的 `public` 和 `protected` 方法及数据成员。",
+    "基类的 `private` 成员不能被派生类直接访问。",
+    "通过增加新成员，派生类可以扩展基类的能力。"
+  ],
+  "examples": [
+    "在教材示例中，`Derived` 增加 `void someOtherMethod() {}`，从而扩展 `Base`。",
+    "若基类声明 `protected: int m_protectedInt{0};`，派生类可以直接使用该受保护成员；若基类声明 `private: int m_privateInt{0};`，派生类不能直接使用它。"
+  ],
+  "misconceptions": [
+    "继承基类不等于可以直接访问基类的所有成员；基类私有成员对派生类不可直接访问。",
+    "派生类访问基类成员与客户代码访问成员的权限不同：受保护成员可供派生类使用，但通常不是普通客户代码的公开接口。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "派生类可以访问基类中的哪些成员？",
+      "a": "教材指出，派生类可以访问基类中声明的公有和受保护方法及数据成员；基类私有成员不能被派生类直接访问。"
+    },
+    {
+      "q": "Derived 如何扩展 Base？",
+      "a": "通过在 Derived 中增加自己的方法或数据成员；教材示例中增加了 `someOtherMethod()`。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "继承声明语法",
+    "public、protected、private访问控制"
+  ],
+  "source_pages": [
+    303,
+    304
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "627_从派生类角度访问基类成员",
+  "_chunk_pages": [
+    301,
+    304
+  ]
+}

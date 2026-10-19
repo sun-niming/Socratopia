@@ -1,0 +1,48 @@
+{
+  "title": "const 与遗留接口的兼容处理",
+  "definition": "当一个函数使用 `const` 参数，却必须调用接收非 `const` 参数的遗留函数时，可能发生接口不兼容。如果无法修改遗留代码，并且能够绝对确定遗留函数不会修改该参数，原文指出经验丰富的程序员可使用 `const_cast` 暂时去除变量的 `const` 属性。不能仅为绕过这种局部不兼容，就从上游调用接口中普遍取消 `const`，否则项目可能逐渐不再使用 `const`。",
+  "key_points": [
+    "旧代码或库函数可能没有提供与 `const` 兼容的接口。",
+    "第三方库通常无法由当前项目直接修改。",
+    "只有在绝对确定被调用函数不会修改参数时，原文才允许考虑使用 `const_cast` 进行局部适配。",
+    "局部兼容问题不应演变成全面取消调用链中的 `const`。",
+    "缺乏经验的做法可能造成 `const` 使用逐步退化，最终使程序不再利用 `const`。"
+  ],
+  "examples": [
+    "概念性场景：当前函数持有一个 `const` 参数，但必须调用一个历史遗留函数，而该遗留函数的形参不是 `const`。如果无法修改遗留函数且确定它不会修改实参，可在调用点局部使用 `const_cast`。",
+    "示意代码：\nvoid legacyFunction(Value* value);\n\nvoid currentFunction(const Value* value) {\n    legacyFunction(const_cast<Value*>(value));\n}\n此写法只贴合原文描述的特殊兼容场景，前提是能够绝对确定 `legacyFunction` 不会修改该对象。"
+  ],
+  "misconceptions": [
+    "误以为遇到非 `const` 遗留接口时，应从所有上游函数中删除 `const`。",
+    "误以为 `const_cast` 可以不加判断地用于任何接口不兼容情况；原文要求绝对确定遗留函数不会修改参数。",
+    "误以为第三方库的接口总能直接修改为支持 `const`。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "接收 `const` 参数的函数需要调用接收非 `const` 参数的遗留函数时，原文给出了什么处理前提？",
+      "a": "在无法修改遗留代码，并且绝对确定遗留函数不会修改参数的前提下，可以使用 `const_cast` 暂时去除该变量的 `const` 属性。"
+    },
+    {
+      "q": "为什么不应简单地从调用函数及其上游接口中删除 `const`？",
+      "a": "这种做法会削弱 `const` 约束，并可能使整个程序逐渐不再使用 `const`。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "C++ const限定符",
+    "函数参数",
+    "类型转换",
+    "遗留代码"
+  ],
+  "source_pages": [
+    138,
+    138
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "280_const_与遗留接口的兼容处理",
+  "_chunk_pages": [
+    137,
+    140
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "title": "使用普通目录迭代器手动递归遍历",
+  "definition": "`std::directory_iterator` 只能遍历给定目录的直接内容，不会自动进入子目录。若要递归遍历整个目录树，可以编写递归函数：先处理当前路径，再为当前目录创建 `directory_iterator`，逐项调用自身，并将层级加一。",
+  "key_points": [
+    "递归函数可以接收当前路径和层级参数，例如 `void printDirectoryStructure(const std::filesystem::path& p, std::size_t level = 0)`。",
+    "每深入一层，使用 `level + 1` 递归调用函数，并根据 `level` 生成缩进，例如 `std::string spacer(level * 2, ' ')`。",
+    "当前路径是普通文件时，可以输出其路径和 `file_size(p)`；当前路径是目录时，可以输出目录信息并遍历 `directory_iterator{p}`。",
+    "与 `recursive_directory_iterator` 相比，普通 `directory_iterator` 的递归逻辑需要程序员显式实现。"
+  ],
+  "examples": [
+    "递归结构：`for (auto& entry : std::filesystem::directory_iterator{p}) { printDirectoryStructure(entry, level + 1); }`。",
+    "处理逻辑可概括为：$$\\text{处理}(p, level)=\\begin{cases}\\text{输出文件信息},&p\\text{是普通文件}\\\\\\text{输出目录信息并对每个子项调用 }\\text{处理}(entry,level+1),&p\\text{是目录}\\end{cases}$$"
+  ],
+  "misconceptions": [
+    "`directory_iterator` 不会自动递归进入子目录。",
+    "递归遍历时不能只增加缩进而不改变待处理路径；递归调用必须传入当前目录中的子项。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "普通 `directory_iterator` 与 `recursive_directory_iterator` 在递归能力上的主要区别是什么？",
+      "a": "普通 `directory_iterator` 只遍历当前目录的直接内容，需要手动递归；`recursive_directory_iterator` 会自动递归遍历子目录。"
+    },
+    {
+      "q": "手动递归遍历目录时，为什么要把层级参数加一？",
+      "a": "因为进入了下一层目录，需要用更大的层级值生成更深的缩进，并记录当前递归深度。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "函数递归",
+    "C++文件系统迭代器"
+  ],
+  "source_pages": [
+    433,
+    433
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 directory_iterator manual recursive directory traversal level depth example",
+  "concept_id": "879_使用普通目录迭代器手动递归遍历",
+  "_chunk_pages": [
+    433,
+    436
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "title": "TCP 连接常用系统调用",
+  "definition": "在一个基于 TCP 的简单服务器中，连接建立后常见的 4 个系统调用分工如下：`accept()` 接收客户端连接，`recv()` 或 `read()` 读取客户端数据，`send()` 或 `write()` 返回响应，`close()` 关闭连接。",
+  "key_points": [
+    "`accept()` 返回的是新建立的客户端连接 fd。",
+    "`recv()/read()` 用来从连接中读取字节流。",
+    "`send()/write()` 用来向连接中写回数据。",
+    "`close()` 负责关闭连接。"
+  ],
+  "examples": [
+    "客户端连上后，服务器用 `recv()` 读到 `hello`，再用 `send()` 原样回写 `hello`。"
+  ],
+  "misconceptions": [
+    "`accept()` 不是用来读取数据的，它的作用是接收连接并生成新的连接 fd。",
+    "`send()/write()` 不是“发网页”这个高层动作，而是向已建立的连接写字节。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`accept()` 的返回值是什么？",
+      "a": "客户端连接的文件描述符，不是监听 fd。"
+    },
+    {
+      "q": "`recv()` 和 `send()` 分别做什么？",
+      "a": "`recv()`/`read()` 读取客户端数据，`send()`/`write()` 返回响应。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "TCP 连接"
+  ],
+  "source_pages": [
+    13,
+    16
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "001_tcp_连接常用系统调用",
+  "_chunk_pages": [
+    13,
+    16
+  ]
+}

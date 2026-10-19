@@ -1,0 +1,38 @@
+{
+  "title": "explicit 禁止隐式构造转换",
+  "definition": "在转换构造函数前添加 `explicit`，可以阻止编译器使用该构造函数执行隐式类型转换。此后，调用者必须明确写出类名并直接构造对象。`explicit` 既可用于单参数转换构造函数，也可用于接受多个参数的转换构造函数。",
+  "key_points": [
+    "`explicit MyClass(int)` 禁止从一个整数隐式转换为 `MyClass`。",
+    "`explicit MyClass(int, int)` 禁止从 `{1, 2}` 隐式转换为 `MyClass`。",
+    "标记为 `explicit` 后，仍可通过 `MyClass{...}` 显式构造对象。"
+  ],
+  "examples": [
+    "若构造函数声明为 `explicit MyClass(int) {}` 和 `explicit MyClass(int, int) {}`，则应调用 `process(MyClass{1});` 或 `process(MyClass{1, 2});`，而不能依赖 `process(1);` 或 `process({1, 2});` 进行隐式转换。"
+  ],
+  "misconceptions": [
+    "误以为 `explicit` 会禁止使用该构造函数；它只禁止相应的隐式转换，显式直接构造仍然可用。",
+    "误以为只有单参数构造函数才能添加 `explicit`；原文示例也将多参数转换构造函数标记为 `explicit`。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "构造函数被标记为 `explicit` 后，怎样把 `{1, 2}` 传给 `process(const MyClass&)`？",
+      "a": "显式构造对象，例如 `process(MyClass{1, 2});`。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "转换构造函数",
+    "列表初始化"
+  ],
+  "source_pages": [
+    249,
+    249
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "527_explicit_禁止隐式构造转换",
+  "_chunk_pages": [
+    249,
+    252
+  ]
+}

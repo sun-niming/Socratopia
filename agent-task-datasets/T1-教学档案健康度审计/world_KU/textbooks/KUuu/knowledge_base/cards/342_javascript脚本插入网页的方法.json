@@ -1,0 +1,40 @@
+{
+  "title": "JavaScript脚本插入网页的方法",
+  "definition": "JavaScript要对网页产生作用，必须嵌入到HTML中。教材给出的两种插入方式是：①使用script标记把脚本直接嵌入网页中，称为嵌入式；②通过script标记的src属性链接外部脚本文件，称为链接式。",
+  "key_points": [
+    "JavaScript通常不能脱离HTML单独发挥网页效果，必须通过适当方法引入HTML。",
+    "嵌入式：把脚本直接写在script标记对之间。",
+    "链接式：用script标记的src属性引入外部脚本文件。"
+  ],
+  "examples": [
+    "<script>alert(\"Hello\");</script>",
+    "<script src=\"app.js\"></script>"
+  ],
+  "misconceptions": [
+    "JavaScript可以像普通文本一样直接放在HTML外部而不通过script引入。",
+    "只有嵌入式脚本才有效，外部脚本不能工作。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "HTML中插入JavaScript脚本有哪些方法？",
+      "a": "两种：嵌入式脚本和通过script标签的src属性链接外部脚本文件。"
+    },
+    {
+      "q": "为什么JavaScript需要嵌入到HTML中？",
+      "a": "因为JavaScript要对网页产生作用，必须通过适当方法引入HTML中才能正常工作。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [],
+  "source_pages": [
+    237,
+    237
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "342_javascript脚本插入网页的方法",
+  "_chunk_pages": [
+    237,
+    240
+  ]
+}

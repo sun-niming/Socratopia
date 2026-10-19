@@ -1,0 +1,45 @@
+{
+  "title": "循环结构",
+  "definition": "循环结构用于让程序重复执行。原文指出，主要有 while、do while、for、for...in 和 for...of 循环。",
+  "key_points": [
+    "循环结构用于重复执行。",
+    "原文主要列出 while。",
+    "原文主要列出 do while。",
+    "原文主要列出 for。",
+    "原文主要列出 for...in 和 for...of。"
+  ],
+  "examples": [
+    "while (条件) { ... }",
+    "do { ... } while (条件)",
+    "for (... ) { ... }",
+    "for...in",
+    "for...of"
+  ],
+  "misconceptions": [
+    "循环结构不只一种写法。",
+    "while、do while、for 都属于循环结构。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "原文列出了哪些循环结构？",
+      "a": "while、do while、for、for...in、for...of。"
+    },
+    {
+      "q": "循环结构的作用是什么？",
+      "a": "让程序重复执行。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [],
+  "source_pages": [
+    249,
+    252
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "364_循环结构",
+  "_chunk_pages": [
+    249,
+    252
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "title": "TCP Tahoe与TCP Reno的差异",
+  "definition": "TCP Tahoe和TCP Reno是两种TCP拥塞控制版本。Tahoe无论丢包由超时还是三个冗余ACK指示，都将拥塞窗口降为一个MSS并进入慢启动；Reno对三个冗余ACK采用快速恢复，而对超时仍执行降为一个MSS并进入慢启动的处理。",
+  "key_points": [
+    "TCP Tahoe对超时丢包和三个冗余ACK丢包采用相同处理：$cwnd=1\\times MSS$，进入慢启动。",
+    "TCP Reno综合了快速恢复：三个冗余ACK后先将窗口降到约一半并进入快速恢复；超时后仍将$cwnd$降为一个MSS并进入慢启动。",
+    "在示例中，初始阈值为$8\\times MSS$，前8轮传输中Tahoe和Reno动作相同；第4轮达到阈值后转为线性增长。",
+    "第8轮传输后发生三个冗余ACK，丢包前$cwnd=12\\times MSS$，因此$ssthresh=6\\times MSS$；Reno将$cwnd$设置为$9\\times MSS$后线性增长，Tahoe将$cwnd$设置为$1\\times MSS$后指数增长至阈值。"
+  ],
+  "examples": [
+    "若$ssthresh=8\\times MSS$，慢启动到第4轮达到阈值。发生三个冗余ACK且丢包前$cwnd=12\\times MSS$时：Reno取$cwnd=9\\times MSS$并线性增长；Tahoe取$cwnd=1\\times MSS$并重新慢启动。"
+  ],
+  "misconceptions": [
+    "Reno并不是在所有丢包情况下都使用快速恢复；超时仍会使其进入慢启动。",
+    "Tahoe和Reno在连接初始阶段并非完全不同；在示例的前8轮中它们先采取相同动作，差异主要出现在三个冗余ACK之后。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "Tahoe和Reno对三个冗余ACK的处理有何不同？",
+      "a": "Tahoe将$cwnd$降为一个MSS并进入慢启动；Reno将$ssthresh$设为原$cwnd$的一半，令$cwnd=ssthresh+3\\times MSS$并进入快速恢复。"
+    },
+    {
+      "q": "丢包前$cwnd=12\\times MSS$时，Reno和Tahoe分别如何设置拥塞窗口？",
+      "a": "Reno设置为$9\\times MSS$，然后线性增长；Tahoe设置为$1\\times MSS$，然后慢启动。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "TCP慢启动",
+    "TCP拥塞避免",
+    "TCP快速恢复"
+  ],
+  "source_pages": [
+    197,
+    200
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "473_tcp_tahoe与tcp_reno的差异",
+  "_chunk_pages": [
+    197,
+    200
+  ]
+}

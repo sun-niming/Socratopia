@@ -1,0 +1,46 @@
+{
+  "title": "用统一的坐标校验方法避免代码重复",
+  "definition": "Spreadsheet 的 setCellAt 和 getCellAt 都需要检查给定的 x、y 坐标是否位于电子表格有效范围内。可以把重复的边界检查提取为成员函数 verifyCoordinate(size_t x, size_t y) const；当 x >= m_width 或 y >= m_height 时抛出 std::out_of_range 异常，校验通过后再访问 m_cells[x][y]。",
+  "key_points": [
+    "x 坐标有效的条件是 x < m_width；y 坐标有效的条件是 y < m_height。",
+    "verifyCoordinate 应同时检查 x 和 y，坐标无效时抛出 std::out_of_range。",
+    "setCellAt 和 getCellAt 先调用 verifyCoordinate，再进行写入或读取，从而避免重复实现边界检查。",
+    "直接访问超出数组索引范围的元素可能导致程序故障。"
+  ],
+  "examples": [
+    "成员函数声明：`void verifyCoordinate(size_t x, size_t y) const;`",
+    "校验逻辑：`if (x >= m_width) { throw std::out_of_range(...); } if (y >= m_height) { throw std::out_of_range(...); }`",
+    "设置单元格：`verifyCoordinate(x, y); m_cells[x][y] = cell;`",
+    "获取单元格：`verifyCoordinate(x, y); return m_cells[x][y];`"
+  ],
+  "misconceptions": [
+    "不能只检查 x 而忽略 y；两个坐标都必须验证。",
+    "verifyCoordinate 不是用来修改单元格内容的，它只负责检查坐标并在无效时抛出异常。",
+    "坐标等于宽度或高度时也无效，因为合法下标必须小于对应的宽度或高度。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么要把 setCellAt 和 getCellAt 中重复的坐标检查提取为 verifyCoordinate？",
+      "a": "为了避免重复代码。两个方法都需要检查 x、y 是否有效，因此将检查逻辑集中到 verifyCoordinate 中，可以统一维护。"
+    },
+    {
+      "q": "当 x >= m_width 或 y >= m_height 时应如何处理？",
+      "a": "抛出 std::out_of_range 异常，不能继续访问 m_cells[x][y]。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++成员函数和异常的基本概念"
+  ],
+  "source_pages": [
+    261,
+    262
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "553_用统一的坐标校验方法避免代码重复",
+  "_chunk_pages": [
+    261,
+    264
+  ]
+}

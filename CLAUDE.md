@@ -146,6 +146,17 @@ Server-layer edits need only an app restart; the ASAR is the runtime source for 
   - `staged-ws-runtime-smoke-test.js` needs a *complete* staged release at `release/win-unpacked`; if `release/` is stale or absent, run the staging command first, or point it at the committed snapshot: `node resources/server/lib/staged-ws-runtime-smoke-test.js win-unpacked`.
 - After any change: run the smoke test for the touched module plus `node --check` on every edited file.
 
+## Python 工具环境（永久约定）
+
+**不要往运行时/系统 python 里直接 `pip install`。** 所有临时工具与脚本用 conda 管环境：
+
+- 用 `E:\Py\Miniconda\python.exe`；可复用已有 env（`base` / `Agent` / `Learn_Com` / `Wasi` / `Web`）或新建专用 env。
+- 装包走该 conda：`E:\Py\Miniconda\Scripts\conda.exe run -n <env> python -m pip install <pkg>`。
+
+原因：打包运行时 `D:\model_tts\GPT-SoVITS-1007-cu124\GPT-SoVITS-1007-cu124\runtime\python.exe` 是**部署环境**，不是开发环境。往里装包会连带升级 `numpy`，而 `numba`（`librosa` 依赖）硬性要求 `numpy <= 2.3`：2026-10-13 实测装 `opencv-python-headless` 把 numpy 顶到 2.4.6，`numba` 直接 `ImportError`，且 opencv 5.0 移除了 `cv2.CascadeClassifier`。真要在 runtime 里装就必须锁版本（`numpy==1.26.4` + `opencv-python-headless==4.10.0.84`）。
+
+运行该 runtime 的脚本时仍要给它 `cwd=<TTS>` 与 `PYTHONPATH=<TTS>;<TTS>\GPT_SoVITS` —— 这只影响运行时，不改变装包位置。
+
 ## Never commit
 
 `resources/settings.json` and `resources/set.json` (API keys, teaching-model config), `resources/app.asar`, `resources/rules/*` (except `rules_zh_classroom_compact.md`), or user data. See `.gitignore`.

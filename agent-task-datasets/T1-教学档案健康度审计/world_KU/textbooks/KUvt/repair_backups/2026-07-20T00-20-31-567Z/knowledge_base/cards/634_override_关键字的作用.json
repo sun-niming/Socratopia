@@ -1,0 +1,46 @@
+{
+  "title": "override 关键字的作用",
+  "definition": "`override` 用于明确表示派生类成员函数意图重写基类虚函数。它是可选的，但强烈推荐使用，因为它可以帮助编译器检查重写是否真正匹配基类方法，避免因函数签名不一致而意外创建新的虚方法。",
+  "key_points": [
+    "使用 `override` 时，编译器会检查派生类方法是否确实重写了基类的虚方法。",
+    "如果派生类方法的参数类型等签名与基类不匹配，就可能不是重写，而是另一个方法。",
+    "例如基类声明 `virtual void someMethod(double d);`，派生类若改成 `virtual void someMethod(int d);`，参数类型不同，不能视为对基类 double 版本的正确重写。",
+    "不使用 `override` 时，代码可能仍能编译，但错误的函数签名可能导致动态调用行为与预期不符。"
+  ],
+  "examples": [],
+  "misconceptions": [
+    "`override` 不是让方法具备虚函数性质的唯一条件；基类方法仍应声明为 `virtual`。",
+    "同名不代表重写成功，参数类型等函数签名必须匹配。",
+    "`override` 不是必须书写的关键字，但省略它会失去编译器对重写关系的检查。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么推荐在派生类重写方法时使用 `override`？",
+      "a": "因为它能让编译器检查该方法是否真正重写了基类虚方法，及时发现签名不匹配等错误。"
+    },
+    {
+      "q": "基类有 `virtual void someMethod(double d);`，派生类写 `void someMethod(int d);`，这是否是正确重写？",
+      "a": "不是。参数类型不同，不能正确重写基类的 double 参数版本。"
+    },
+    {
+      "q": "`override` 关键字是否强制要求使用？",
+      "a": "不是，它是可选的，但强烈推荐使用。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "virtual 方法与派生类重写",
+    "函数参数和函数签名"
+  ],
+  "source_pages": [
+    308,
+    308
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "634_override_关键字的作用",
+  "_chunk_pages": [
+    305,
+    308
+  ]
+}

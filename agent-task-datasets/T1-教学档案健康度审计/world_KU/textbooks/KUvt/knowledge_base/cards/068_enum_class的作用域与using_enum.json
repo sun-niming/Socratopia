@@ -1,0 +1,51 @@
+{
+  "title": "enum class的作用域与using enum",
+  "definition": "`enum class` 的枚举成员属于枚举类型自身的作用域，不会自动导出到外层作用域。因此，不同的强类型枚举可以拥有同名成员。C++20提供了 `using enum` 和针对单个成员的 `using` 声明，用于在受控作用域内省略枚举成员的完整限定名。",
+  "key_points": [
+    "不同强类型枚举可以定义同名成员，例如 `State::Unknown` 和 `Error::Unknown`。",
+    "C++20中，`using enum PieceType;` 可以使该枚举的成员在当前作用域中直接使用。",
+    "也可以只引入某个成员，例如 `using PieceType::King;`，此时 `King` 可直接使用，而其他成员仍需写成 `PieceType::Queen`。",
+    "应尽量缩小 `using` 或 `using enum` 声明的作用域，以减少名称冲突风险。"
+  ],
+  "examples": [
+    "`enum class State { Unknown, Started, Finished };`",
+    "`enum class Error { None, BadInput, DiskFull, Unknown };`",
+    "`using enum PieceType;` 后，可以写 `PieceType piece { King };`。",
+    "只引入一个成员：`using PieceType::King; PieceType piece { King }; piece = PieceType::Queen;`"
+  ],
+  "misconceptions": [
+    "`enum class` 的成员默认可以直接写成 `King`；实际上通常必须写成 `PieceType::King`，除非使用 `using` 声明。",
+    "`using enum` 不会把所有枚举成员永久变成全局名称；它只在声明所在的作用域内生效。",
+    "为了省略限定名而扩大 `using enum` 的作用域，可能重新造成名称冲突。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么 `State` 和 `Error` 都可以拥有名为 `Unknown` 的枚举成员？",
+      "a": "因为 `enum class` 的枚举成员属于各自枚举类型的封闭作用域，不会自动导出到外层作用域。"
+    },
+    {
+      "q": "如何在C++20中让 `PieceType` 的枚举成员可以直接使用？",
+      "a": "写 `using enum PieceType;`，之后可以直接使用 `King` 等成员。"
+    },
+    {
+      "q": "如何只省略 `PieceType::King` 的限定名？",
+      "a": "写 `using PieceType::King;`，这样可以直接使用 `King`，而其他成员仍需使用完整名称。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "强类型枚举enum class",
+    "C++作用域"
+  ],
+  "source_pages": [
+    46,
+    47
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "068_enum_class的作用域与using_enum",
+  "_chunk_pages": [
+    45,
+    48
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "title": "button 的可定制性",
+  "definition": "button 内容更灵活，可以包含图标等内容，因此比 input type=\"button\" 更具可定制性。",
+  "key_points": [
+    "button 的内容更灵活",
+    "button 可以包含图标",
+    "它比 input type=\"button\" 更适合做定制化按钮"
+  ],
+  "examples": [
+    "<button><span>🔍</span> 搜索</button>"
+  ],
+  "misconceptions": [
+    "以为所有按钮都只能写纯文字",
+    "以为 button 和 input type=\"button\" 在内容表现上完全一样"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么说 button 比 input type=\"button\" 更具可定制性？",
+      "a": "因为 button 的内容更灵活，可以包含图标等内容。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "按钮类型"
+  ],
+  "source_pages": [
+    73,
+    73
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "090_button_的可定制性",
+  "_chunk_pages": [
+    73,
+    76
+  ]
+}

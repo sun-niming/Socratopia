@@ -1,0 +1,37 @@
+{
+  "title": "函数基本语法",
+  "definition": "JavaScript函数的基本定义形式是使用 function 关键字，后接函数名、括号中的参数列表和函数体；函数体中可以写语句，也可以写 return [expression]。",
+  "key_points": [
+    "基本形式为 function functionName(arg1,arg2,...,argn){...}",
+    "函数体中可以包含 statements",
+    "return [expression] 是可写可不写的部分"
+  ],
+  "examples": [
+    "function functionName(arg1,arg2,...,argn)\n{\n[statements]\n[return [expression]]\n}"
+  ],
+  "misconceptions": [
+    "不是所有函数都必须写 return 才能定义",
+    "参数列表中的参数名不需要指定类型"
+  ],
+  "qa_pairs": [
+    {
+      "q": "函数的基本语法是什么？",
+      "a": "function functionName(arg1,arg2,...,argn){ [statements] [return [expression]] }"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "函数"
+  ],
+  "source_pages": [
+    253,
+    256
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "368_函数基本语法",
+  "_chunk_pages": [
+    253,
+    256
+  ]
+}

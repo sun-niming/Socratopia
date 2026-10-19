@@ -1,0 +1,41 @@
+{
+  "title": "scale缩放",
+  "definition": "scale是2D变换中的缩放方法，用于按比例改变元素的宽度和高度。",
+  "key_points": [
+    "第一个参数控制宽度方向的缩放比例",
+    "第二个参数控制高度方向的缩放比例",
+    "比例可以分别设置为不同数值"
+  ],
+  "examples": [
+    "transform:scale(0.5,2); /*宽度缩小为原来一半，高度放大为原来2倍*/"
+  ],
+  "misconceptions": [
+    "scale只会等比例缩放。",
+    "scale的两个参数分别表示平移距离。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "transform:scale(0.5,2)表示什么？",
+      "a": "宽度缩小为原来一半，高度放大为原来2倍。"
+    },
+    {
+      "q": "scale主要改变元素的什么？",
+      "a": "改变元素的大小。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "2D变换"
+  ],
+  "source_pages": [
+    197,
+    200
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "295_scale缩放",
+  "_chunk_pages": [
+    197,
+    200
+  ]
+}

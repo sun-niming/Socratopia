@@ -1,0 +1,39 @@
+{
+  "title": "this的基本含义",
+  "definition": "this是JavaScript中的特殊关键字，它的值不是固定不变的，而是由函数如何被调用以及所处上下文决定。原文指出，在非严格模式下this总是指向对象，在严格模式下this可以是任意值。",
+  "key_points": [
+    "this的值取决于函数的调用方式",
+    "this会出现在函数、类(或构造函数)或全局上下文中",
+    "非严格模式下this通常表现为对象"
+  ],
+  "examples": [
+    "console.log(this)",
+    "function sayHello(){ console.log(this.msg) }"
+  ],
+  "misconceptions": [
+    "this是一个全局固定不变的值",
+    "this一定只在对象方法里才有意义"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么说this不是固定的？",
+      "a": "因为this的值取决于它出现的上下文以及函数是怎样被调用的。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "函数",
+    "对象"
+  ],
+  "source_pages": [
+    261,
+    264
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "378_this的基本含义",
+  "_chunk_pages": [
+    261,
+    264
+  ]
+}

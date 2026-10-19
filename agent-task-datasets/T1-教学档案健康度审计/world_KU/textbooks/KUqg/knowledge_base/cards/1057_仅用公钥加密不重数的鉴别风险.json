@@ -1,0 +1,44 @@
+{
+  "title": "仅用公钥加密不重数的鉴别风险",
+  "definition": "题设协议让Bob发送不重数$R$，Alice用自己的私钥处理$R$后返回，Bob再使用Alice的公钥验证。原文要求在未使用证书的情况下说明Trudy如何拦截报文并冒充Alice，说明仅有这种公钥操作并不能自动解决身份鉴别问题。",
+  "key_points": [
+    "协议步骤为：Alice向Bob发送“ I am Alice”；Bob选择不重数并发送给Alice；Alice用私钥处理该不重数并返回；Bob用Alice的公钥处理接收值。",
+    "未使用证书时，Bob缺少可靠依据来确认某个公钥确实属于Alice。",
+    "中间人可通过拦截和转发报文，利用公钥身份绑定缺失的问题实施冒充；具体攻击流程需结合教材图示核实。"
+  ],
+  "examples": [
+    "协议可抽象写为：$A\\rightarrow B:\\ \\text{I am Alice}$；$B\\rightarrow A:\\ R$；$A\\rightarrow B:\\ K_A^{-}(R)$；$B$使用$K_A^{+}$验证。这里$K_A^{-}$表示Alice私钥，$K_A^{+}$表示Alice公钥。"
+  ],
+  "misconceptions": [
+    "用私钥处理不重数并不能单独证明公钥属于Alice。",
+    "不使用证书时，公钥密码算法本身不能解决公钥与真实身份之间的绑定问题。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "题设协议中Bob为什么要发送不重数？",
+      "a": "为了让Alice返回一个与当前会话相关的新鲜值，避免直接重放旧响应。"
+    },
+    {
+      "q": "未使用证书会产生什么根本问题？",
+      "a": "Bob无法可靠确认所使用的公钥确实属于Alice，因此中间人可能冒充Alice。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "公钥密码",
+    "数字证书",
+    "不重数",
+    "中间人攻击"
+  ],
+  "source_pages": [
+    453,
+    456
+  ],
+  "needs_verification": true,
+  "verify_query": "《计算机网络 自顶向下方法》第7版 P16 公钥不重数鉴别 未使用证书 Trudy 中间人攻击",
+  "concept_id": "1057_仅用公钥加密不重数的鉴别风险",
+  "_chunk_pages": [
+    453,
+    456
+  ]
+}

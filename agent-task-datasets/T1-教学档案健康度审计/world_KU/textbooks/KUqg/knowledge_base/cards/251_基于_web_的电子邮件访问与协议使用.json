@@ -1,0 +1,42 @@
+{
+  "title": "基于 Web 的电子邮件访问与协议使用",
+  "definition": "基于 Web 的电子邮件服务中，用户通过普通浏览器访问远程邮箱，浏览器与邮件服务器之间使用 HTTP 通信；邮件服务器与其他邮件服务器之间仍使用 SMTP 发送和接收邮件。",
+  "key_points": [
+    "收件人从邮箱读取邮件时，邮件服务器将报文发送到浏览器，使用 HTTP，而不是 POP3 或 IMAP。",
+    "发件人通过浏览器发送邮件时，浏览器将报文发送到其邮件服务器，使用 HTTP，而不是 SMTP。",
+    "邮件服务器之间传递邮件时，仍然使用 SMTP。"
+  ],
+  "examples": [
+    "Bob 读取邮箱中的邮件：邮件服务器 $\\rightarrow$ Bob 的浏览器，使用 HTTP。",
+    "Alice 发送邮件：Alice 的浏览器 $\\rightarrow$ Alice 的邮件服务器，使用 HTTP；邮件服务器之间转发邮件，使用 SMTP。"
+  ],
+  "misconceptions": [
+    "不能认为基于 Web 的电子邮件完全不使用 SMTP；SMTP 仍用于邮件服务器之间的邮件传输。",
+    "POP3 和 IMAP 是传统邮件访问协议，在基于 Web 的浏览器访问方式中，浏览器与邮件服务器之间使用的是 HTTP。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "基于 Web 的电子邮件中，浏览器访问远程邮箱使用什么协议？",
+      "a": "使用 HTTP。"
+    },
+    {
+      "q": "基于 Web 的电子邮件中，邮件服务器之间传输邮件使用什么协议？",
+      "a": "使用 SMTP。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "应用层协议"
+  ],
+  "source_pages": [
+    101,
+    104
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "251_基于_web_的电子邮件访问与协议使用",
+  "_chunk_pages": [
+    101,
+    104
+  ]
+}

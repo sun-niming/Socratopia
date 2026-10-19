@@ -1,0 +1,42 @@
+{
+  "title": "类型萃取",
+  "definition": "类型萃取定义在<type_traits>头文件中，用于在编译期间提供类型信息。它主要用于编写高级模板，使模板能够根据类型的性质进行编译期判断或选择。",
+  "key_points": [
+    "类型萃取提供的是编译期类型信息。",
+    "相关功能定义在<type_traits>头文件中。",
+    "类型萃取常用于高级模板编程。"
+  ],
+  "examples": [
+    "代码示例：\nstatic_assert(std::is_integral_v<int>);\nstatic_assert(!std::is_integral_v<double>);"
+  ],
+  "misconceptions": [
+    "类型萃取不是在程序运行期间动态检查类型的普通工具；其核心用途是编译期类型判断。",
+    "类型萃取不只用于获取类型名称，也可用于判断类型性质。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "类型萃取定义在哪个头文件中？",
+      "a": "定义在<type_traits>头文件中。"
+    },
+    {
+      "q": "类型萃取主要在什么时候提供类型信息？",
+      "a": "在编译期间提供类型信息。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "模板编程",
+    "编译期与运行时的区别"
+  ],
+  "source_pages": [
+    506,
+    506
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1028_类型萃取",
+  "_chunk_pages": [
+    505,
+    508
+  ]
+}

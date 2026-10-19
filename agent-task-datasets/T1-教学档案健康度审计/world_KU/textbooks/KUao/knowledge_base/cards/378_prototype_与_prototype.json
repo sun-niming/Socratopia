@@ -1,0 +1,42 @@
+{
+  "title": "prototype 与 [[Prototype]]",
+  "definition": "JavaScript 是基于原型的语言。每个对象内部都有一个指向其原型对象的内部指针 [[Prototype]]，对象可以通过它访问原型对象上的属性和方法。每个函数都有 prototype 属性，它指向一个对象；当使用 new 创建实例时，实例的 [[Prototype]] 会自动指向构造函数的 prototype。",
+  "key_points": [
+    "对象通过 [[Prototype]] 连接到原型对象并继承其属性和方法",
+    "函数的 prototype 属性指向原型对象",
+    "new 创建实例时，会把实例的 [[Prototype]] 设为构造函数的 prototype"
+  ],
+  "examples": [
+    "function Person(name, age) { this.name = name; this.age = age; }",
+    "let zhang3 = new Person(\"张三\", 18);",
+    "Foobar.prototype === Object.getPrototypeOf(new Foobar)"
+  ],
+  "misconceptions": [
+    "prototype 和 [[Prototype]] 不是同一个概念：prototype 是函数上的属性，[[Prototype]] 是对象内部指针",
+    "new 不是把函数本身变成实例，而是让实例指向构造函数的 prototype"
+  ],
+  "qa_pairs": [
+    {
+      "q": "函数的 prototype 属性和对象的 [[Prototype]] 有什么区别？",
+      "a": "prototype 是函数上的属性，指向一个原型对象；[[Prototype]] 是对象内部指针，指向它的原型对象。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "对象",
+    "函数",
+    "构造函数",
+    "new 运算符"
+  ],
+  "source_pages": [
+    285,
+    288
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "378_prototype_与_prototype",
+  "_chunk_pages": [
+    285,
+    288
+  ]
+}

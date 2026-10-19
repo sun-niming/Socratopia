@@ -1,0 +1,38 @@
+{
+  "title": "不要直接拼接用户 URL",
+  "definition": "安全上不能直接把用户输入的 URL 原样拼接到文件路径中。应先做 URL 解码，再做危险路径检查、root 边界检查和 `realpath` 校验，否则容易产生目录穿越等安全问题。",
+  "key_points": [
+    "用户 URL 不能直接拼接到文件系统路径。",
+    "应先解码，再做路径安全检查。",
+    "`realpath` 和 root 边界检查是重要防线。"
+  ],
+  "examples": [
+    "直接拼接用户 URL 可能导致 `../` 路径穿越。"
+  ],
+  "misconceptions": [
+    "URL 只是字符串，直接拼接就行。",
+    "只要去掉 `../` 就完全安全了。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么不能直接拼接用户 URL？",
+      "a": "因为直接拼接会带来目录穿越等安全问题，应该先 URL 解码，再做危险路径检查和 `realpath` 校验。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "先 URL 解码再查穿越",
+    "root 前缀要检查边界"
+  ],
+  "source_pages": [
+    129,
+    132
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "231_不要直接拼接用户_url",
+  "_chunk_pages": [
+    129,
+    132
+  ]
+}

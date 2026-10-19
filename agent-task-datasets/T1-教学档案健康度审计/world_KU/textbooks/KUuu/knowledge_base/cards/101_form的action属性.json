@@ -1,0 +1,37 @@
+{
+  "title": "form的action属性",
+  "definition": "form标签的action属性规定表单数据发送到什么地方，通常填写后端处理页面的URL。",
+  "key_points": [
+    "action属性用于指定表单数据的发送目标。",
+    "通常填写后端处理页面的URL。",
+    "它决定数据提交到哪里。"
+  ],
+  "examples": [
+    "<form action=\"/submit\"></form>"
+  ],
+  "misconceptions": [
+    "action属性决定表单数据的提交方式。",
+    "action属性可以省略而不影响数据发送目标。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "form标签的action属性表示什么？",
+      "a": "它规定表单数据发送到哪里，通常是后端处理页面的URL。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "HTML表单的作用与组成"
+  ],
+  "source_pages": [
+    65,
+    68
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "101_form的action属性",
+  "_chunk_pages": [
+    65,
+    68
+  ]
+}

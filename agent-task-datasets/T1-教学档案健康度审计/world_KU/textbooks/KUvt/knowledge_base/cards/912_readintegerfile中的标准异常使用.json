@@ -1,0 +1,48 @@
+{
+  "title": "readIntegerFile中的标准异常使用",
+  "definition": "readIntegerFile(filename) 可以在文件打开失败或读取整数过程中发生错误时抛出标准异常，并将文件名包含在错误消息中。打开文件失败时抛出 std::invalid_argument；逐个读取整数时，如果未到达文件末尾却出现读取错误，则抛出 std::runtime_error；读取成功后返回整数向量。",
+  "key_points": [
+    "函数通过 ifstream 打开 filename。",
+    "如果 inputStream.fail() 表明文件打开失败，则构造包含文件名的错误字符串，并抛出 invalid_argument。",
+    "函数逐个读取整数并加入 vector<int>；如果读取停止时并非因为到达文件末尾，则认为发生读取错误并抛出 runtime_error。",
+    "异常对象的构造函数接收错误描述字符串，之后可以通过 what() 获取该描述。"
+  ],
+  "examples": [
+    "vector<int> readIntegerFile(std::string_view filename) 的核心返回类型为 vector<int>。打开失败时可使用：throw std::invalid_argument(error);；读取错误时可使用：throw std::runtime_error(error);"
+  ],
+  "misconceptions": [
+    "inputStream.fail() 不表示一定是文件内容格式错误；在该示例中它首先用于判断文件是否打开失败。",
+    "读取循环结束不一定意味着发生错误；如果已经到达文件末尾，则属于正常结束。",
+    "invalid_argument 与 runtime_error 都是标准异常，但表示的错误场景不同：前者用于示例中的打开失败，后者用于读取过程中的错误。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "readIntegerFile 打开文件失败时抛出哪种异常？",
+      "a": "抛出 std::invalid_argument，并在错误消息中包含文件名。"
+    },
+    {
+      "q": "如何区分正常读到文件末尾和读取错误？",
+      "a": "读取循环结束后检查 inputStream.eof()；如果尚未到达文件末尾却停止读取，则认为发生读取错误并抛出 std::runtime_error。"
+    },
+    {
+      "q": "为什么该函数的异常消息要包含文件名？",
+      "a": "这样错误信息可以指出具体无法打开或读取的是哪个文件，便于诊断问题。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "标准异常层次与多态捕获",
+    "C++文件流"
+  ],
+  "source_pages": [
+    448,
+    448
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 readIntegerFile invalid_argument runtime_error inputStream.fail eof 教材示例",
+  "concept_id": "912_readintegerfile中的标准异常使用",
+  "_chunk_pages": [
+    445,
+    448
+  ]
+}

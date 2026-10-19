@@ -1,0 +1,45 @@
+{
+  "title": "名称空间引入导致的名称歧义",
+  "definition": "如果不同作用域或名称空间中存在同名函数，而代码又没有明确限定作用域，编译器可能无法确定应调用哪个函数，从而产生歧义的名称解析错误。使用 using namespace NS; 可能把 NS 中的名称引入当前查找范围，导致它与全局同名名称发生冲突。",
+  "key_points": [
+    "全局作用域和名称空间中可以分别定义同名函数。",
+    "直接写未限定名称时，若多个候选名称都可匹配，可能产生歧义。",
+    "将名称空间定义为未命名（匿名）名称空间时，也可能与全局同名名称造成歧义。",
+    "使用 using namespace NS; 可能使 NS::get() 与全局 get() 同时成为候选。",
+    "可以使用 NS::get() 或 ::get() 明确指定目标。"
+  ],
+  "examples": [
+    "int get() { return 10; }\nnamespace NS {\n    int get() { return 20; }\n}\n\nusing namespace NS;\n// 此时直接调用 get() 可能在全局 get() 与 NS::get() 之间产生歧义。\n// NS::get() 和 ::get() 可以分别明确指定目标。"
+  ],
+  "misconceptions": [
+    "using namespace NS; 不只是提供简写，也可能扩大未限定名称查找的候选范围。",
+    "名称空间中的同名函数不会自动覆盖全局同名函数；未限定调用可能反而产生歧义。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么 using namespace NS; 之后调用 get() 可能报歧义错误？",
+      "a": "因为全局作用域的 get() 和 NS 名称空间中的 get() 都可能成为匹配候选，编译器无法唯一确定调用目标。"
+    },
+    {
+      "q": "如何避免全局 get() 与 NS::get() 的歧义？",
+      "a": "使用 NS::get() 调用名称空间中的函数，或使用 ::get() 调用全局函数。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "作用域解析运算符",
+    "名称空间",
+    "名称查找"
+  ],
+  "source_pages": [
+    67,
+    67
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "120_名称空间引入导致的名称歧义",
+  "_chunk_pages": [
+    65,
+    68
+  ]
+}

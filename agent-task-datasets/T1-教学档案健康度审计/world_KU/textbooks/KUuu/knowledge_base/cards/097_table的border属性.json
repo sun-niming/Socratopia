@@ -1,0 +1,36 @@
+{
+  "title": "table的border属性",
+  "definition": "在HTML表格中，border属性用于设置表格边框。教材指出，表格默认没有边框显示；如果希望显示边框，可以用CSS设置，也可以直接使用border属性。",
+  "key_points": [
+    "表格默认没有边框显示。",
+    "可以通过CSS设置边框，也可以用border属性设置边框。"
+  ],
+  "examples": [
+    "<table border=\"1\"></table>"
+  ],
+  "misconceptions": [
+    "表格会默认显示边框。",
+    "只能用CSS，不能用border属性来设置表格边框。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "HTML表格如何显示边框？",
+      "a": "可以使用CSS设置，也可以使用border属性，例如 <table border=\"1\"></table>。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "HTML表格"
+  ],
+  "source_pages": [
+    65,
+    68
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "097_table的border属性",
+  "_chunk_pages": [
+    65,
+    68
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "title": "text-decoration属性",
+  "definition": "text-decoration 属性用于设置文本装饰线。",
+  "key_points": [
+    "none 表示无装饰线。",
+    "overline 表示顶部装饰线。",
+    "underline 表示底部装饰线。",
+    "line-through 表示删除线。"
+  ],
+  "examples": [
+    "text-decoration:underline;",
+    "text-decoration:line-through;"
+  ],
+  "misconceptions": [
+    "underline 是底部装饰线，不是上划线；上划线对应 overline。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "text-decoration:line-through 表示什么？",
+      "a": "删除线。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [],
+  "source_pages": [
+    109,
+    112
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "175_text_decoration属性",
+  "_chunk_pages": [
+    109,
+    112
+  ]
+}

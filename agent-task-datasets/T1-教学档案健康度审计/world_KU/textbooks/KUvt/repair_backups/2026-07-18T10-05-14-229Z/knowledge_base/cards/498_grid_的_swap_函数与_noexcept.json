@@ -1,0 +1,47 @@
+{
+  "title": "Grid 的 swap 函数与 noexcept",
+  "definition": "`Grid<T>` 可以提供一个成员 `swap` 函数，用于交换两个同类型 `Grid<T>` 对象的内部状态。原文中的 `swap` 被声明为 `noexcept`，并使用 `std::swap` 交换宽度、高度和单元格存储。",
+  "key_points": [
+    "函数声明形式为 `void swap(Grid& other) noexcept;`。在 `Grid<T>` 类内部，`Grid` 表示当前特化的 `Grid<T>`。",
+    "交换的成员包括 `m_width`、`m_height` 和 `m_cells`。",
+    "实现核心为：`std::swap(m_width, other.m_width); std::swap(m_height, other.m_height); swap(m_cells, other.m_cells);`。",
+    "该 `swap` 被用于跨特化赋值运算符的 copy-and-swap 实现。"
+  ],
+  "examples": [
+    "`template<typename T> void Grid<T>::swap(Grid& other) noexcept { std::swap(m_width, other.m_width); std::swap(m_height, other.m_height); std::swap(m_cells, other.m_cells); }`",
+    "在赋值运算符中调用：`swap(temp);`。"
+  ],
+  "misconceptions": [
+    "`swap` 交换的是对象的内部状态，不是逐个重新复制所有元素。",
+    "`noexcept` 表示该函数承诺不通过异常退出；它不是表示函数永远不会执行失败的泛化保证。",
+    "成员 `swap` 的两个对象必须是同一 `Grid<T>` 特化；原文中的跨特化能力来自构造函数和赋值运算符模板，而不是该 `swap` 本身。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`Grid<T>::swap` 需要交换哪些数据？",
+      "a": "需要交换 `m_width`、`m_height` 和 `m_cells`。"
+    },
+    {
+      "q": "为什么原文把 `swap` 声明为 `noexcept`？",
+      "a": "因为 copy-and-swap 赋值实现依赖交换阶段安全提交修改，原文说明该提交阶段只使用不抛异常的操作。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "成员函数",
+    "std::swap",
+    "noexcept",
+    "资源管理"
+  ],
+  "source_pages": [
+    385,
+    388
+  ],
+  "needs_verification": true,
+  "verify_query": "C++ template Grid swap noexcept m_width m_height m_cells copy-and-swap idiom",
+  "concept_id": "498_grid_的_swap_函数与_noexcept",
+  "_chunk_pages": [
+    385,
+    388
+  ]
+}

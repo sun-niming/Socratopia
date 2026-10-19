@@ -1,0 +1,43 @@
+{
+  "title": "使用vector迭代器遍历元素",
+  "definition": "vector迭代器用于表示vector中的元素位置。通常使用begin(doubleVector)获得指向第一个元素的迭代器，使用end(doubleVector)获得指向尾后位置的迭代器；循环在迭代器不等于尾后迭代器时继续，每次通过递增迭代器移动到下一个元素。",
+  "key_points": [
+    "典型遍历结构是：初始化为begin，条件为不等于end，递增操作为++iter。",
+    "end返回的不是最后一个元素，而是最后一个元素之后的位置。",
+    "解引用迭代器，例如*iter，可以访问迭代器当前指向的元素，并可在迭代器可写时修改该元素。"
+  ],
+  "examples": [
+    "文本代码：for (vector<double>::iterator iter { begin(doubleVector) }; iter != end(doubleVector); ++iter) { /* 使用 *iter 访问当前元素 */ }",
+    "使用auto简化迭代器类型：\n文本代码：for (auto iter { begin(doubleVector) }; iter != end(doubleVector); ++iter) { cout << *iter << endl; }"
+  ],
+  "misconceptions": [
+    "end()返回指向最后一个元素的迭代器；实际上它返回尾后迭代器，不能解引用。",
+    "只要迭代器没有到达end()，就可以无条件解引用；前提是迭代器仍然指向有效元素。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "vector迭代器遍历的标准循环结构是什么？",
+      "a": "从begin()开始，在迭代器不等于end()时循环，每次执行++iter移动到下一个元素。"
+    },
+    {
+      "q": "如何通过迭代器访问当前元素？",
+      "a": "对迭代器进行解引用，例如*iter。普通可写迭代器解引用后可以读取或修改元素。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "vector容器基础",
+    "C++解引用运算符"
+  ],
+  "source_pages": [
+    553,
+    554
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1139_使用vector迭代器遍历元素",
+  "_chunk_pages": [
+    553,
+    556
+  ]
+}

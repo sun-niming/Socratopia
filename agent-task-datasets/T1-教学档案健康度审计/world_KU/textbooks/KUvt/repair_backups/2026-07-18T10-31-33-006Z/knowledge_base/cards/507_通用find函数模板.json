@@ -1,0 +1,56 @@
+{
+  "title": "通用Find函数模板",
+  "definition": "函数模板 `Find` 可在元素类型为 `T` 的数组中顺序查找指定值。它逐个使用 `operator==` 比较数组元素与目标值；找到时返回索引，未找到时返回哨兵值 `NOT_FOUND`。调用时既可以由函数实参推导模板类型，也可以显式指定模板实参。",
+  "key_points": [
+    "函数模板接收目标值、指向数组首元素的指针和数组大小。",
+    "查找过程从索引 `0` 开始，依次检查到 `size - 1`。",
+    "找到匹配元素时立即返回其索引。",
+    "未找到时返回 `NOT_FOUND`，原文将其定义为 `static_cast<size_t>(-1)`。",
+    "模板参数 `T` 可以由调用实参推导，也可以通过 `Find<int>(...)` 等形式显式指定。",
+    "类型 `T` 必须支持代码中使用的相等比较。"
+  ],
+  "examples": [
+    "static const size_t NOT_FOUND = static_cast<size_t>(-1);\n\ntemplate <typename T>\nsize_t Find(const T& value, const T* arr, size_t size)\n{\n    for (size_t i = 0; i < size; ++i) {\n        if (arr[i] == value) {\n            return i;\n        }\n    }\n    return NOT_FOUND;\n}",
+    "int myInt = 3;\nint intArray[] = {1, 2, 3, 4};\nconst size_t sizeIntArray = std::size(intArray);\n\nsize_t res = Find(myInt, intArray, sizeIntArray);       // 推导 T=int\nres = Find<int>(myInt, intArray, sizeIntArray);         // 显式指定 T=int",
+    "double myDouble = 5.6;\ndouble doubleArray[] = {1.2, 3.4, 5.7, 7.5};\nsize_t res = Find(myDouble, doubleArray, std::size(doubleArray)); // 推导 T=double",
+    "SpreadsheetCell cell1(10);\nSpreadsheetCell cellArray[] = {SpreadsheetCell(4), SpreadsheetCell(10)};\nsize_t res = Find(cell1, cellArray, std::size(cellArray));"
+  ],
+  "misconceptions": [
+    "误以为模板参数必须始终显式写出；当实参类型足以确定 `T` 时可以自动推导。",
+    "误以为未找到时返回数组大小；原文实现返回 `NOT_FOUND`。",
+    "误以为任何类型都能直接使用该模板；元素类型至少需要支持代码所要求的 `operator==`。",
+    "误把 `static_cast<size_t>(-1)` 当成普通的有效数组索引。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`Find(myInt, intArray, sizeIntArray)` 中的模板参数 `T` 如何确定？",
+      "a": "编译器根据目标值和数组元素类型推导出 `T=int`。"
+    },
+    {
+      "q": "`Find` 在没有找到目标值时返回什么？",
+      "a": "返回 `NOT_FOUND`，原文将其定义为 `static_cast<size_t>(-1)`。"
+    },
+    {
+      "q": "使用该 `Find` 模板的元素类型需要满足什么基本条件？",
+      "a": "必须能够执行 `arr[i] == value`，即支持相应的相等比较。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "函数模板",
+    "模板参数推导",
+    "数组与指针",
+    "operator=="
+  ],
+  "source_pages": [
+    394,
+    395
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "507_通用find函数模板",
+  "_chunk_pages": [
+    393,
+    396
+  ]
+}

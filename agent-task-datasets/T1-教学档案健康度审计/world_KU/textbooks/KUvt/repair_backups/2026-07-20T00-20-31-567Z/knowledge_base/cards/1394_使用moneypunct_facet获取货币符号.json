@@ -1,0 +1,45 @@
+{
+  "title": "使用moneypunct facet获取货币符号",
+  "definition": "moneypunct是locale标准facet之一，用于定义货币值的格式化参数。通过std::use_facet<std::moneypunct<wchar_t>>()可以从指定locale取得该facet，并调用curr_symbol()获取对应的货币符号。",
+  "key_points": [
+    "美国英语locale通常对应美元符号，英国英语locale通常对应英镑符号。",
+    "宽字符版本使用moneypunct<wchar_t>，返回值可以保存到std::wstring。",
+    "货币符号能否正确显示取决于运行环境的字符处理和字体配置；英国货币符号可能显示为问号、方框或不显示。"
+  ],
+  "examples": [
+    "std::locale locUSEng { \"en-US\" };",
+    "std::locale locBritEng { \"en-GB\" };",
+    "std::wstring dollars { std::use_facet<std::moneypunct<wchar_t>>(locUSEng).curr_symbol() };",
+    "std::wstring pounds { std::use_facet<std::moneypunct<wchar_t>>(locBritEng).curr_symbol() };"
+  ],
+  "misconceptions": [
+    "locale名称只决定货币符号这一项；locale还可以影响字符分类、数字格式、日期时间格式等其他本地化行为。",
+    "终端显示为问号或方框不一定表示facet返回了错误的货币符号，也可能是运行环境无法显示该字符。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何获取某个locale的货币符号？",
+      "a": "获取该locale的std::moneypunct<wchar_t> facet，然后调用其curr_symbol()成员函数。"
+    },
+    {
+      "q": "为什么英国货币符号可能显示为问号或方框？",
+      "a": "原文指出，这可能由环境配置或环境对该符号的处理能力造成；并不必然表示代码逻辑错误。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "通过use_facet获取locale facet",
+    "宽字符串std::wstring基础"
+  ],
+  "source_pages": [
+    666,
+    666
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1394_使用moneypunct_facet获取货币符号",
+  "_chunk_pages": [
+    665,
+    668
+  ]
+}

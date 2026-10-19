@@ -1,0 +1,44 @@
+{
+  "title": "类SSL握手中的服务器鉴别与主密钥交换",
+  "definition": "在类SSL握手中，客户端Bob先建立TCP连接并发送hello报文。服务器Alice返回包含其公钥的证书；由于证书已经由CA证实，Bob据此确认该公钥属于Alice。随后Bob生成本次会话专用的主密钥MS，用Alice的公钥加密为EMS并发送给Alice，Alice用自己的私钥解密EMS得到MS。",
+  "key_points": [
+    "服务器证书把服务器身份与服务器公钥绑定，并由CA进行验证。",
+    "Bob使用Alice的公钥加密主密钥，只有拥有对应私钥的Alice能够解密。",
+    "完成该阶段后，Bob和Alice都知道本次SSL会话的主密钥，其他人不知道该主密钥。"
+  ],
+  "examples": [
+    "主密钥传输关系可表示为：$$\\mathrm{EMS}=E_{K_{Alice}^{+}}(\\mathrm{MS})$$ Alice收到后使用私钥解密：$$\\mathrm{MS}=D_{K_{Alice}^{-}}(\\mathrm{EMS})$$"
+  ],
+  "misconceptions": [
+    "证书本身就是主密钥；证书主要用于证明服务器身份并提供服务器公钥。",
+    "Bob把主密钥明文发送给Alice；实际上，Bob发送的是用Alice公钥加密后的EMS。",
+    "只要知道服务器公钥就能解密EMS；公钥加密的数据应由对应私钥解密。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "Bob如何确认收到的公钥属于Alice？",
+      "a": "Bob验证Alice提供的、由CA证实的证书，从而确认该公钥属于Alice。"
+    },
+    {
+      "q": "为什么Bob要用Alice的公钥加密主密钥？",
+      "a": "这样只有拥有对应私钥的Alice能够解密得到主密钥，避免其他人获得该会话密钥。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "公钥加密",
+    "数字证书与CA",
+    "类SSL的三个阶段"
+  ],
+  "source_pages": [
+    429,
+    430
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "998_类ssl握手中的服务器鉴别与主密钥交换",
+  "_chunk_pages": [
+    429,
+    432
+  ]
+}

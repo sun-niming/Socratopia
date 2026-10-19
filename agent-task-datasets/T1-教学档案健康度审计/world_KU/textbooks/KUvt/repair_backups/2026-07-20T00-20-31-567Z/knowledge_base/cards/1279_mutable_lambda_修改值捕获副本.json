@@ -1,0 +1,42 @@
+{
+  "title": "mutable lambda 修改值捕获副本",
+  "definition": "lambda 的函数调用运算符默认被标记为 `const`。在 lambda 声明中加入 `mutable`，可以使该调用运算符变为非 `const`，从而允许修改按值捕获的变量副本；这种修改不会改变外部原变量。使用 `mutable` 时，即使没有参数，也必须显式写出 `()`。",
+  "key_points": [
+    "`mutable` 只允许修改闭包对象中的值捕获副本。",
+    "按值捕获的变量仍然不会与外部变量共享存储。",
+    "使用 `mutable` 的形式必须包含参数圆括号，例如 `[data]() mutable { ... }`。"
+  ],
+  "examples": [
+    "`double data { 1.23 }; auto capturingLambda = [data]() mutable { data *= 2; };`。",
+    "上述 lambda 调用后，修改的是闭包对象内部的 `data` 副本，外部的 `data` 仍为 `1.23`。"
+  ],
+  "misconceptions": [
+    "`mutable` 不会把值捕获变成引用捕获。",
+    "`mutable` 不会允许 lambda 直接修改外部变量；要修改外部变量，应使用引用捕获。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何让按值捕获的 `data` 在 lambda 内可修改？",
+      "a": "在捕获列表后写显式参数列表和 `mutable`，例如 `[data]() mutable { data *= 2; }`。"
+    },
+    {
+      "q": "修改 `mutable` lambda 中的 `data` 会影响外部的 `data` 吗？",
+      "a": "不会，因为修改的是按值捕获到的闭包副本。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "lambda 的值捕获与闭包状态"
+  ],
+  "source_pages": [
+    620,
+    620
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1279_mutable_lambda_修改值捕获副本",
+  "_chunk_pages": [
+    617,
+    620
+  ]
+}

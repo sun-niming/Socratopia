@@ -1,0 +1,47 @@
+{
+  "title": "模板派生类访问依赖基类成员",
+  "definition": "当类模板从依赖于模板参数的基类继承时，派生类模板中的非限定名称查找不会自动在该依赖基类中查找成员。访问基类成员时，应使用基类限定名（如 `Grid<T>::at(...)`）或通过 `this->` 访问（如 `this->at(...)`）。访问基类的静态成员也可写成 `Grid<T>::DefaultWidth`。",
+  "key_points": [
+    "`GameBoard<T>` 继承自 `Grid<T>`，因此 `Grid<T>` 是依赖基类。",
+    "在成员函数中可写 `Grid<T>::at(x, y)`，也可写 `this->at(x, y)`。",
+    "构造函数可在初始化列表中使用 `Grid<T>{width, height}` 初始化基类子对象。",
+    "移动网格元素后，可对源位置调用 `reset()`，使源单元格恢复为空状态。"
+  ],
+  "examples": [
+    "template <typename T>\nGameBoard<T>::GameBoard(size_t width, size_t height)\n    : Grid<T>{width, height}\n{\n}",
+    "template <typename T>\nvoid GameBoard<T>::move(size_t xSrc, size_t ySrc,\n                        size_t xDest, size_t yDest)\n{\n    Grid<T>::at(xDest, yDest) = std::move(Grid<T>::at(xSrc, ySrc));\n    Grid<T>::at(xSrc, ySrc).reset();\n}",
+    "同一移动逻辑也可以写成：\nthis->at(xDest, yDest) = std::move(this->at(xSrc, ySrc));\nthis->at(xSrc, ySrc).reset();"
+  ],
+  "misconceptions": [
+    "误以为在模板派生类中可以始终直接写 `at(...)`，编译器会自动到依赖基类中查找。",
+    "误以为 `std::move` 会自动清空源单元格；原文代码在移动赋值后仍显式调用 `reset()`。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么 `GameBoard<T>` 的成员函数中使用 `Grid<T>::at(...)` 或 `this->at(...)`？",
+      "a": "因为 `Grid<T>` 是依赖于模板参数的基类，非限定名称查找不会自动在其中查找成员；使用基类限定名或 `this->` 可以明确该成员来自依赖基类。"
+    },
+    {
+      "q": "移动棋子后为什么还要对源位置调用 `reset()`？",
+      "a": "为了显式清空源单元格，使棋子只保留在目标位置。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "类模板",
+    "模板继承",
+    "名称查找",
+    "移动语义"
+  ],
+  "source_pages": [
+    393,
+    396
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "505_模板派生类访问依赖基类成员",
+  "_chunk_pages": [
+    393,
+    396
+  ]
+}

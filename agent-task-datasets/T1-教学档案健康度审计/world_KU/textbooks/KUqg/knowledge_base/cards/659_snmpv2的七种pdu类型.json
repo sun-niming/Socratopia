@@ -1,0 +1,49 @@
+{
+  "title": "SNMPv2的七种PDU类型",
+  "definition": "SNMPv2定义了七种通常称为协议数据单元（PDU）的报文类型：GetRequest、GetNextRequest、GetBulkRequest、InformRequest、SetRequest、Response和SNMPv2-Trap。它们分别用于读取MIB对象、发送管理信息、设置MIB对象、响应请求以及报告异常事件。",
+  "key_points": [
+    "GetRequest、GetNextRequest和GetBulkRequest通常由管理服务器发送给代理。",
+    "InformRequest由一个管理实体发送给另一个远程管理实体，用于通知MIB信息。",
+    "SetRequest由管理服务器发送给代理，用于设置一个或多个MIB对象实例的值。",
+    "Response用于响应GetRequest、GetNextRequest、GetBulkRequest、SetRequest或InformRequest。",
+    "SNMPv2-Trap由代理发送给管理者，用于通知异常事件；陷阱不要求管理服务器返回响应。"
+  ],
+  "examples": [
+    "可以用GetRequest读取任意集合的MIB对象实例值。",
+    "可以用SetRequest设置一个或多个MIB对象实例的值。",
+    "可以用SNMPv2-Trap报告设备冷启动、热启动、链路故障或鉴别失效等事件。"
+  ],
+  "misconceptions": [
+    "GetBulkRequest只能读取单个MIB对象；实际上，它用于以大数据块方式读取值，例如大表中的值。",
+    "所有SNMP PDU都必须由代理发送或接收；实际上，InformRequest是在管理实体之间传递的。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "SNMPv2定义了哪些PDU类型？",
+      "a": "GetRequest、GetNextRequest、GetBulkRequest、InformRequest、SetRequest、Response和SNMPv2-Trap。"
+    },
+    {
+      "q": "哪类PDU用于设置MIB对象值？",
+      "a": "SetRequest。"
+    },
+    {
+      "q": "哪类PDU用于向管理者报告异常事件？",
+      "a": "SNMPv2-Trap。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "SNMP的请求响应模式与陷阱报文"
+  ],
+  "source_pages": [
+    294,
+    295
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "659_snmpv2的七种pdu类型",
+  "_chunk_pages": [
+    293,
+    296
+  ]
+}

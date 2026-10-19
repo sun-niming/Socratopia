@@ -1,0 +1,37 @@
+{
+  "title": "使用#pragma once防止重复包含",
+  "definition": "在头文件开头使用 `#pragma once`，可以指示实现只处理该头文件一次，从而达到防止头文件内容被重复包含的目的。它可作为传统包含保护写法的替代方案。",
+  "key_points": [
+    "`#pragma once` 通常写在头文件开头。",
+    "使用该指令时，不需要手工编写 `#ifndef`、`#define` 和 `#endif` 组成的保护结构。"
+  ],
+  "examples": [
+    "#pragma once\n\n// ... the contents of this header file"
+  ],
+  "misconceptions": [
+    "不要把 `#pragma once` 与普通 C++ 运行时语句混淆；它是预处理指令。",
+    "通常不需要在同一个头文件中同时使用完整的宏保护和 `#pragma once`。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`#pragma once` 在头文件中的作用是什么？",
+      "a": "指示实现只处理该头文件一次，以防止重复包含。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "头文件",
+    "预处理器指令"
+  ],
+  "source_pages": [
+    37,
+    40
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "026_使用_pragma_once防止重复包含",
+  "_chunk_pages": [
+    37,
+    40
+  ]
+}

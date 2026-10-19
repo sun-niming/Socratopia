@@ -1,0 +1,45 @@
+{
+  "title": "forward_list单向链表",
+  "definition": "forward_list定义在<forward_list>头文件中，是一种单向链表。它只支持向前迭代，因此比双向链表list需要更少的内存；在找到相关位置后，可以进行常量时间的插入和删除，但不能快速随机访问元素。",
+  "key_points": [
+    "forward_list是单向链表，list是双向链表。",
+    "forward_list只支持前向迭代。",
+    "forward_list通常比list需要更少的内存。",
+    "找到相关位置后，插入和删除通常为常量时间。",
+    "forward_list不能快速随机访问元素。"
+  ],
+  "examples": [
+    "代码示例：\nstd::forward_list<int> values{10, 20, 30};\nvalues.push_front(5);\n// 只能沿着链表向前迭代。"
+  ],
+  "misconceptions": [
+    "forward_list不是双向链表，不能从节点向后遍历。",
+    "forward_list虽然插入和删除可以很快，但查找位置和随机访问并不快。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "forward_list与list的主要区别是什么？",
+      "a": "forward_list是单向链表，只支持前向迭代，所需内存通常少于双向链表list。"
+    },
+    {
+      "q": "forward_list支持快速随机访问吗？",
+      "a": "不支持。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "单向链表",
+    "双向链表",
+    "迭代器"
+  ],
+  "source_pages": [
+    508,
+    508
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1037_forward_list单向链表",
+  "_chunk_pages": [
+    505,
+    508
+  ]
+}

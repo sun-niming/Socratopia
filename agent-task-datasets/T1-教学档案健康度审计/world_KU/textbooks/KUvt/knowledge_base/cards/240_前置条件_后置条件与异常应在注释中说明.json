@@ -1,0 +1,48 @@
+{
+  "title": "前置条件、后置条件与异常应在注释中说明",
+  "definition": "前置条件是客户代码调用函数之前必须满足的条件；后置条件是函数执行完毕之后必须满足的条件。函数可能抛出的异常及其触发条件，也属于适合在注释中说明的接口行为。",
+  "key_points": [
+    "前置条件描述调用函数前的要求。",
+    "后置条件描述函数执行完成后的保证。",
+    "异常说明应指出可能抛出的异常以及触发该异常的条件。",
+    "例如，saveRecord只有在openDatabase已经调用后才能调用，否则可能抛出DatabaseNotOpenedException。"
+  ],
+  "examples": [
+    "// Throws:\\n// DatabaseNotOpenedException if the openDatabase() method has not\\n// been called yet.\\nRecordID saveRecord(Record record);"
+  ],
+  "misconceptions": [
+    "前置条件和后置条件不是函数参数的同义词；它们描述的是调用前后的约束和保证。",
+    "只写出异常类型而不说明触发条件，可能仍不足以让调用者正确使用接口。",
+    "函数声明本身通常不能完整表达调用顺序限制，因此需要注释补充。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "什么是函数的前置条件？",
+      "a": "前置条件是客户代码调用函数前必须满足的条件。"
+    },
+    {
+      "q": "什么是函数的后置条件？",
+      "a": "后置条件是函数执行完毕后必须满足的条件。"
+    },
+    {
+      "q": "saveRecord可能在什么情况下抛出DatabaseNotOpenedException？",
+      "a": "如果调用saveRecord之前没有调用openDatabase，就可能抛出该异常。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "函数声明基础",
+    "异常基础"
+  ],
+  "source_pages": [
+    123,
+    124
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "240_前置条件_后置条件与异常应在注释中说明",
+  "_chunk_pages": [
+    121,
+    124
+  ]
+}

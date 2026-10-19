@@ -1,0 +1,36 @@
+{
+  "title": "错误请求没有写入日志",
+  "definition": "如果 access.log 只记录 200，不记录 404、403、405，通常是因为错误分支直接 return，或者日志写在成功分支内部。应在 handle_client 中统一维护 HttpResult，并在所有分支结束后统一 write_access_log。",
+  "key_points": [
+    "错误分支不能直接 return 而不记日志。",
+    "日志不应只写在成功分支里。",
+    "建议在 handle_client 末尾统一写访问日志。"
+  ],
+  "examples": [
+    "tail -n 20 logs/access.log"
+  ],
+  "misconceptions": [
+    "以为只有成功请求才需要记录日志。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "怎样保证 404、403、405 也能写入访问日志？",
+      "a": "在 handle_client 里统一维护 HttpResult，所有分支结束后统一 write_access_log。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "访问日志"
+  ],
+  "source_pages": [
+    111,
+    112
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "175_错误请求没有写入日志",
+  "_chunk_pages": [
+    109,
+    112
+  ]
+}

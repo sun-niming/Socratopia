@@ -1,0 +1,42 @@
+{
+  "title": "Windows 消息处理函数使用 WPARAM、LPARAM 和 LRESULT",
+  "definition": "原文给出一个 Windows 消息处理函数的声明：`LRESULT handleMessage(WPARAM wParam, LPARAM lParam);`。其中 `WPARAM` 和 `LPARAM` 是消息处理函数的参数类型，`LRESULT` 是函数返回类型。原文注释还尝试说明 `wParam`、`lParam` 的含义以及返回错误或 `Record` 指针的情况，但片段存在 OCR 错误，具体类型转换和返回语义需要核实。",
+  "key_points": [
+    "函数声明形式为：`LRESULT handleMessage(WPARAM wParam, LPARAM lParam);`。",
+    "`wParam` 和 `lParam` 分别作为消息处理函数的两个参数。",
+    "函数返回类型是 `LRESULT`。",
+    "原文注释中出现了 `(int)`、`(string*)`、`(Record*)` 和 `nullptr` 等内容，但其完整对应关系在所给 OCR 片段中不清楚，不能据此补全具体协议。"
+  ],
+  "examples": [
+    "```cpp\nLRESULT handleMessage(WPARAM wParam, LPARAM lParam);\n```",
+    "原文注释片段意图说明：`wParam` 可表示一个整数，`lParam` 可表示一个字符串指针；返回值可能与错误状态或 `Record*` 指针有关。但这些具体说明应以清晰原文或 Windows API 文档为准。"
+  ],
+  "misconceptions": [
+    "`WPARAM` 和 `LPARAM` 一定分别固定表示某一种业务数据类型。",
+    "函数返回类型为 `LRESULT` 就意味着一定返回整数错误码。",
+    "仅凭函数声明就能确定 `wParam`、`lParam` 的业务含义。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "原文给出的消息处理函数声明是什么？",
+      "a": "`LRESULT handleMessage(WPARAM wParam, LPARAM lParam);`"
+    },
+    {
+      "q": "从该声明本身能确定 `wParam` 和 `lParam` 分别表示什么吗？",
+      "a": "不能。声明只能确定它们的类型名称和参数位置，具体业务含义需要查看函数文档或实现。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [],
+  "source_pages": [
+    121,
+    124
+  ],
+  "needs_verification": true,
+  "verify_query": "\"LRESULT handleMessage(WPARAM wParam, LPARAM lParam)\" \"Record*\"",
+  "concept_id": "180_windows_消息处理函数使用_wparam_lparam_和_lresult",
+  "_chunk_pages": [
+    121,
+    124
+  ]
+}

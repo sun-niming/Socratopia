@@ -1,0 +1,44 @@
+{
+  "title": "使用 atomic_ref 保护已有的共享对象",
+  "definition": "std::atomic_ref 可以在不把原有变量声明为 std::atomic 的情况下，对已有对象提供原子访问。在线程函数中，可以用 std::atomic_ref<int> atomicCounter { counter } 引用传入的 int counter，并通过 atomicCounter 执行递增操作，从而解决对该共享整数的竞争问题。",
+  "key_points": [
+    "atomic_ref 直接引用已有的 counter 对象。",
+    "示例中在 increment() 内创建 std::atomic_ref<int> atomicCounter { counter }。",
+    "后续循环应通过 atomicCounter 执行递增，而不是绕过 atomic_ref 直接修改 counter。",
+    "被 atomic_ref 引用期间，应遵守 atomic_ref 的访问要求。"
+  ],
+  "examples": [
+    "代码核心：\nvoid increment(int& counter) {\n    std::atomic_ref<int> atomicCounter { counter };\n    for (int i { 0 }; i < 100; ++i) {\n        ++atomicCounter;\n    }\n}\nint counter { 0 };"
+  ],
+  "misconceptions": [
+    "atomic_ref 不是把 counter 复制成一个新的原子变量；它引用的仍是原来的 counter。",
+    "只在部分访问中使用 atomic_ref，而其他线程绕过 atomic_ref 直接访问同一对象，仍可能产生数据竞争。",
+    "atomic_ref 不能替代对被引用对象生命周期的管理。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如果已有 int counter，不改变其声明类型，如何用 C++20 使递增操作原子化？",
+      "a": "在函数中创建 std::atomic_ref<int> atomicCounter { counter }，并通过 atomicCounter 执行递增操作。"
+    },
+    {
+      "q": "atomic_ref 示例中的原子操作应作用于 counter 还是 atomicCounter？",
+      "a": "应通过 atomicCounter 进行，因为 atomicCounter 是对 counter 的原子引用。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "std::atomic_ref",
+    "数据竞争"
+  ],
+  "source_pages": [
+    803,
+    804
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 atomic_ref atomic increment existing int object non-atomic access rules",
+  "concept_id": "1649_使用_atomic_ref_保护已有的共享对象",
+  "_chunk_pages": [
+    801,
+    804
+  ]
+}

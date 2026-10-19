@@ -1,0 +1,42 @@
+{
+  "title": "HTML文档基本结构",
+  "definition": "HTML文档通常由<html>、<head>、<body>等部分组成，其中<html>标记表示HTML文档开始和结束的位置，并包含head部分和body部分；<!doctype html>用于声明文档类型。",
+  "key_points": [
+    "<html>…</html>：标明HTML文档的起止，并包含head和body。",
+    "<head>…</head>：文档头部，放置描述信息。",
+    "<body>…</body>：文档主体，放置网页实际显示的内容。",
+    "<!doctype html>：声明文档类型。"
+  ],
+  "examples": [
+    "<html>\n  <head>\n  </head>\n  <body>\n    页面内容\n  </body>\n</html>",
+    "<!doctype html>"
+  ],
+  "misconceptions": [
+    "head中的所有内容都会直接显示在浏览器窗口中。",
+    "body是放置文档描述信息的地方。",
+    "doctype是HTML标签内容的一部分。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "<head>和<body>分别放什么内容？",
+      "a": "<head>放文档的描述信息等；<body>放网页实际显示的内容。"
+    },
+    {
+      "q": "<!doctype html>的作用是什么？",
+      "a": "声明文档类型。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [],
+  "source_pages": [
+    45,
+    48
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "061_html文档基本结构",
+  "_chunk_pages": [
+    45,
+    48
+  ]
+}

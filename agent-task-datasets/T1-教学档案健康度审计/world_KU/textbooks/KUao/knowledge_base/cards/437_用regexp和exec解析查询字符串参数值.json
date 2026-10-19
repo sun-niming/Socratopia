@@ -1,0 +1,50 @@
+{
+  "title": "用RegExp和exec解析查询字符串参数值",
+  "definition": "可以根据参数名动态创建正则表达式，从查询字符串中提取对应参数的值。原文示例函数 getValue(uri,val) 使用 new RegExp(val + \"=([^&]*)\", \"ig\") 创建模式，调用 re.exec(uri) 执行匹配；如果匹配成功则返回 result[1]，即第一个分组捕获到的参数值，否则返回空字符串。",
+  "key_points": [
+    "new RegExp(val + \"=([^&]*)\", \"ig\") 根据传入的参数名 val 动态创建正则表达式。",
+    "模式中的 val + \"=\" 用于定位参数名及等号。",
+    "([^&]*) 用于捕获等号后直到 & 之前的内容，即参数值。",
+    "re.exec(uri) 执行匹配并返回匹配结果。",
+    "result ? result[1] : \"\" 表示匹配成功时返回第一个分组，否则返回空字符串。"
+  ],
+  "examples": [
+    "function getValue(uri,val) {\n  var re = new RegExp(val+ \"=([^&]*)\", \"ig\");\n  var result = re.exec(uri);\n  return result ? result[1] : \"\";\n}\nvar s = \"?name=cie&phone=87092352&code=065\";\nalert(getValue(s,\"name\"));\n// 弹出 cie"
+  ],
+  "misconceptions": [
+    "误以为 exec() 直接返回参数值字符串；本例中参数值在返回结果的第一个分组 result[1] 中。",
+    "误以为 ([^&]*) 会匹配整个查询字符串；它只捕获直到下一个 & 之前的内容。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "在 getValue(uri,val) 示例中，([^&]*) 的作用是什么？",
+      "a": "捕获等号后面直到 & 之前的内容，也就是指定参数的值。"
+    },
+    {
+      "q": "getValue(\"?name=cie&phone=87092352&code=065\", \"name\") 返回什么？",
+      "a": "返回 \"cie\"。"
+    },
+    {
+      "q": "如果 re.exec(uri) 没有匹配到结果，getValue 函数返回什么？",
+      "a": "返回空字符串 \"\"。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "JavaScript函数",
+    "RegExp对象",
+    "正则表达式分组",
+    "查询字符串"
+  ],
+  "source_pages": [
+    325,
+    328
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "437_用regexp和exec解析查询字符串参数值",
+  "_chunk_pages": [
+    325,
+    328
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "title": "接口返回类型和返回值语义应保持一致",
+  "definition": "函数声明中的返回类型应与文档描述的返回值语义一致。原文展示了 `saveRecord` 返回 `int` 并表示已保存记录的 ID，随后又出现返回 `RecordID` 的版本，说明接口设计中可能使用专门的记录 ID 类型来表达该返回值。由于原文片段存在 OCR 错误，`int` 与 `RecordID` 的确切版本关系需要核实。",
+  "key_points": [
+    "原文中的一种声明是 `int saveRecord(Records record);`。",
+    "对应文档说明返回值是表示已保存记录 ID 的整数。",
+    "原文后面又出现 `RecordID saveRecord(Records record);`，其中 `RecordID` 可能是用于表示记录标识符的专用类型。",
+    "不能仅凭该片段确定 `RecordID` 是否为类型别名、类类型，或教材不同示例中的另一版本。"
+  ],
+  "examples": [
+    "```cpp\nint saveRecord(Records record);\n```\n文档语义：返回一个表示已保存记录 ID 的整数。",
+    "```cpp\nRecordID saveRecord(Records record);\n```\n该形式把返回类型写成 `RecordID`，但其具体定义原文片段未给出。"
+  ],
+  "misconceptions": [
+    "函数名相同就一定只有一个固定的返回类型。",
+    "看到 `RecordID` 就可以断定它一定是整数类型。",
+    "返回类型只影响语法，不影响调用者对返回值含义的理解。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "原文中 `saveRecord` 的返回值表示什么？",
+      "a": "表示已保存记录的数据库 ID；在其中一种说明中，该值被描述为整数。"
+    },
+    {
+      "q": "能否仅根据所给片段确定 `RecordID` 的具体定义？",
+      "a": "不能。片段只显示了 `RecordID` 被用作返回类型，没有给出其定义。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "用文档注释说明函数的功能、参数、返回值和异常"
+  ],
+  "source_pages": [
+    123,
+    124
+  ],
+  "needs_verification": true,
+  "verify_query": "《C++20高级编程》第5版 saveRecord RecordID DatabaseNotOpenedException",
+  "concept_id": "179_接口返回类型和返回值语义应保持一致",
+  "_chunk_pages": [
+    121,
+    124
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "title": "使用非成员 operator/ 重载 SpreadsheetCell 的除法并检查除零",
+  "definition": "可以通过非成员函数重载 operator/，对两个 SpreadsheetCell 执行除法。函数先检查右操作数的值是否为 0；如果为 0，则抛出 invalid_argument 异常，否则返回一个值为左操作数除以右操作数的新 SpreadsheetCell。",
+  "key_points": [
+    "非成员除法运算符的参数可以声明为 const SpreadsheetCell& lhs 和 const SpreadsheetCell& rhs。",
+    "除法前应检查 rhs.getValue() == 0。",
+    "右操作数为 0 时抛出 invalid_argument 异常，原文可见异常信息为 Divide by zero。",
+    "除法成功时返回 SpreadsheetCell { lhs.getValue() / rhs.getValue() }。",
+    "该运算符函数不修改 lhs 或 rhs，因此参数使用 const 引用。"
+  ],
+  "examples": [
+    "声明示意：SpreadsheetCell operator/(const SpreadsheetCell& lhs, const SpreadsheetCell& rhs);",
+    "实现示意：SpreadsheetCell operator/(const SpreadsheetCell& lhs, const SpreadsheetCell& rhs) { if (rhs.getValue() == 0) { throw invalid_argument { \"Divide by zero\" }; } return SpreadsheetCell { lhs.getValue() / rhs.getValue() }; }"
+  ],
+  "misconceptions": [
+    "除数为 0 时不能继续计算并返回普通 SpreadsheetCell，原文实现选择抛出 invalid_argument 异常。",
+    "operator/ 的参数是两个 SpreadsheetCell，而不是直接接收两个裸 double。",
+    "检查的是右操作数 rhs 的值，因为它是除数；不能只检查 lhs。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "SpreadsheetCell 的 operator/ 为什么要检查 rhs.getValue() == 0？",
+      "a": "因为 rhs 是除数，除数为 0 时应抛出 invalid_argument 异常，避免执行除零运算。"
+    },
+    {
+      "q": "除法成功时 operator/ 返回什么？",
+      "a": "返回一个新的 SpreadsheetCell，其值为 lhs.getValue() / rhs.getValue()。"
+    },
+    {
+      "q": "除数为 0 时原文实现抛出什么异常？",
+      "a": "抛出 invalid_argument 异常，异常信息为 Divide by zero。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "运算符重载",
+    "C++异常处理",
+    "const引用"
+  ],
+  "source_pages": [
+    289,
+    292
+  ],
+  "needs_verification": true,
+  "verify_query": "《C++20高级编程》第5版 SpreadsheetCell operator/ invalid_argument Divide by zero 第292页",
+  "concept_id": "383_使用非成员_operator_重载_spreadsheetcell_的除法并检查",
+  "_chunk_pages": [
+    289,
+    292
+  ]
+}

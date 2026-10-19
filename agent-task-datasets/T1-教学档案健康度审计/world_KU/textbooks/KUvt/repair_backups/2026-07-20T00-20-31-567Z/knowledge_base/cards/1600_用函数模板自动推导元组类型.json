@@ -1,0 +1,43 @@
+{
+  "title": "用函数模板自动推导元组类型",
+  "definition": "可以把元组对象作为函数模板参数传入，由编译器根据函数参数自动推导元组类型，因此调用 tuplePrint 时不需要显式指定函数模板参数。函数内部再根据 tuple_size<T>::value 实例化用于打印元组元素的辅助模板。",
+  "key_points": [
+    "辅助类模板可以重命名为 TuplePrintHelper，外层函数模板 tuplePrint 接收元组引用。",
+    "调用形式为 tuplePrint(tl)，其中 T 可由参数 tl 自动推导。",
+    "元组大小可通过 tuple_size<T>::value 在编译期获得。"
+  ],
+  "examples": [
+    "示例调用：\n\n```cpp\ntuple tl { 167, \"Testing\"s, false, 2.3 };\ntuplePrint(tl);\n```",
+    "外层函数模板的核心形式：\n\n```cpp\ntemplate <typename T>\nvoid tuplePrint(const T& t) {\n    TuplePrintHelper<T, tuple_size<T>::value> tph{t};\n}\n```"
+  ],
+  "misconceptions": [
+    "调用 tuplePrint(tl) 时不需要手动写出元组的具体类型或模板参数。",
+    "tuple_size<T>::value 表示元组包含的元素个数，不是最后一个元素的下标。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "调用 tuplePrint(tl) 时，为什么可以省略函数模板参数？",
+      "a": "因为编译器能够根据传入的元组对象 tl 自动推导函数模板参数 T。"
+    },
+    {
+      "q": "如何在编译期获得元组 T 的元素数量？",
+      "a": "使用 tuple_size<T>::value。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++函数模板参数推导",
+    "std::tuple的基本用法"
+  ],
+  "source_pages": [
+    777,
+    777
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1600_用函数模板自动推导元组类型",
+  "_chunk_pages": [
+    777,
+    780
+  ]
+}

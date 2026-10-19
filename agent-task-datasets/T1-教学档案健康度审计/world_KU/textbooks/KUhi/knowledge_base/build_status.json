@@ -1,0 +1,568 @@
+{
+  "state": "done",
+  "title": "算法设计与分",
+  "format": "pdf",
+  "updatedAt": "2026-06-27T07:05:20.900Z",
+  "startedAt": "2026-06-27T06:41:37.235Z",
+  "visionFallbackAvailable": false,
+  "premiumEscalationAvailable": true,
+  "cardCount": 108,
+  "chunksDone": 24,
+  "chunksTotal": 24,
+  "log": [
+    {
+      "ts": "2026-06-27T06:41:37.670Z",
+      "type": "chunk_start",
+      "chunk": 1,
+      "pages": [
+        1,
+        4
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-06-27T06:42:07.426Z",
+      "type": "card_text_ok",
+      "chunk": 1,
+      "cardCount": 2
+    },
+    {
+      "ts": "2026-06-27T06:42:07.426Z",
+      "type": "chunk_done",
+      "chunk": 1,
+      "cardCount": 2,
+      "method": "text-only"
+    },
+    {
+      "ts": "2026-06-27T06:42:07.431Z",
+      "type": "chunk_start",
+      "chunk": 2,
+      "pages": [
+        5,
+        8
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-06-27T06:43:04.217Z",
+      "type": "card_text_ok",
+      "chunk": 2,
+      "cardCount": 5
+    },
+    {
+      "ts": "2026-06-27T06:43:04.217Z",
+      "type": "chunk_done",
+      "chunk": 2,
+      "cardCount": 5,
+      "method": "text-only"
+    },
+    {
+      "ts": "2026-06-27T06:43:04.224Z",
+      "type": "chunk_start",
+      "chunk": 3,
+      "pages": [
+        9,
+        12
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-06-27T06:43:41.211Z",
+      "type": "card_text_ok",
+      "chunk": 3,
+      "cardCount": 4
+    },
+    {
+      "ts": "2026-06-27T06:43:41.211Z",
+      "type": "chunk_done",
+      "chunk": 3,
+      "cardCount": 4,
+      "method": "text-only"
+    },
+    {
+      "ts": "2026-06-27T06:43:41.219Z",
+      "type": "chunk_start",
+      "chunk": 4,
+      "pages": [
+        13,
+        16
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-06-27T06:44:22.328Z",
+      "type": "card_text_ok",
+      "chunk": 4,
+      "cardCount": 4
+    },
+    {
+      "ts": "2026-06-27T06:44:22.328Z",
+      "type": "chunk_done",
+      "chunk": 4,
+      "cardCount": 4,
+      "method": "text-only"
+    },
+    {
+      "ts": "2026-06-27T06:44:22.337Z",
+      "type": "chunk_start",
+      "chunk": 5,
+      "pages": [
+        17,
+        20
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-06-27T06:44:56.417Z",
+      "type": "card_text_ok",
+      "chunk": 5,
+      "cardCount": 4
+    },
+    {
+      "ts": "2026-06-27T06:44:56.417Z",
+      "type": "chunk_done",
+      "chunk": 5,
+      "cardCount": 4,
+      "method": "text-only"
+    },
+    {
+      "ts": "2026-06-27T06:44:56.426Z",
+      "type": "chunk_start",
+      "chunk": 6,
+      "pages": [
+        21,
+        24
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-06-27T06:45:29.635Z",
+      "type": "card_text_ok",
+      "chunk": 6,
+      "cardCount": 4
+    },
+    {
+      "ts": "2026-06-27T06:45:29.635Z",
+      "type": "chunk_done",
+      "chunk": 6,
+      "cardCount": 4,
+      "method": "text-only"
+    },
+    {
+      "ts": "2026-06-27T06:45:29.642Z",
+      "type": "chunk_start",
+      "chunk": 7,
+      "pages": [
+        25,
+        28
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-06-27T06:46:04.139Z",
+      "type": "card_text_ok",
+      "chunk": 7,
+      "cardCount": 4
+    },
+    {
+      "ts": "2026-06-27T06:46:04.139Z",
+      "type": "chunk_done",
+      "chunk": 7,
+      "cardCount": 4,
+      "method": "text-only"
+    },
+    {
+      "ts": "2026-06-27T06:46:04.147Z",
+      "type": "chunk_start",
+      "chunk": 8,
+      "pages": [
+        29,
+        32
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-06-27T06:46:51.423Z",
+      "type": "card_text_ok",
+      "chunk": 8,
+      "cardCount": 5
+    },
+    {
+      "ts": "2026-06-27T06:46:51.423Z",
+      "type": "chunk_done",
+      "chunk": 8,
+      "cardCount": 5,
+      "method": "text-only"
+    },
+    {
+      "ts": "2026-06-27T06:46:51.431Z",
+      "type": "chunk_start",
+      "chunk": 9,
+      "pages": [
+        33,
+        36
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-06-27T06:47:56.838Z",
+      "type": "card_text_ok",
+      "chunk": 9,
+      "cardCount": 5
+    },
+    {
+      "ts": "2026-06-27T06:47:56.838Z",
+      "type": "chunk_done",
+      "chunk": 9,
+      "cardCount": 5,
+      "method": "text-only"
+    },
+    {
+      "ts": "2026-06-27T06:47:56.846Z",
+      "type": "chunk_start",
+      "chunk": 10,
+      "pages": [
+        37,
+        40
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-06-27T06:48:39.843Z",
+      "type": "card_text_ok",
+      "chunk": 10,
+      "cardCount": 4
+    },
+    {
+      "ts": "2026-06-27T06:48:39.843Z",
+      "type": "chunk_done",
+      "chunk": 10,
+      "cardCount": 4,
+      "method": "text-only"
+    },
+    {
+      "ts": "2026-06-27T06:48:39.850Z",
+      "type": "chunk_start",
+      "chunk": 11,
+      "pages": [
+        41,
+        44
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-06-27T06:50:09.098Z",
+      "type": "card_text_ok",
+      "chunk": 11,
+      "cardCount": 5
+    },
+    {
+      "ts": "2026-06-27T06:50:09.098Z",
+      "type": "chunk_done",
+      "chunk": 11,
+      "cardCount": 5,
+      "method": "text-only"
+    },
+    {
+      "ts": "2026-06-27T06:50:09.111Z",
+      "type": "chunk_start",
+      "chunk": 12,
+      "pages": [
+        45,
+        48
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-06-27T06:51:00.482Z",
+      "type": "card_text_ok",
+      "chunk": 12,
+      "cardCount": 5
+    },
+    {
+      "ts": "2026-06-27T06:51:00.482Z",
+      "type": "chunk_done",
+      "chunk": 12,
+      "cardCount": 5,
+      "method": "text-only"
+    },
+    {
+      "ts": "2026-06-27T06:51:00.490Z",
+      "type": "chunk_start",
+      "chunk": 13,
+      "pages": [
+        49,
+        52
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-06-27T06:51:36.646Z",
+      "type": "card_text_ok",
+      "chunk": 13,
+      "cardCount": 4
+    },
+    {
+      "ts": "2026-06-27T06:51:36.646Z",
+      "type": "chunk_done",
+      "chunk": 13,
+      "cardCount": 4,
+      "method": "text-only"
+    },
+    {
+      "ts": "2026-06-27T06:51:36.654Z",
+      "type": "chunk_start",
+      "chunk": 14,
+      "pages": [
+        53,
+        56
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-06-27T06:52:09.072Z",
+      "type": "card_text_ok",
+      "chunk": 14,
+      "cardCount": 5
+    },
+    {
+      "ts": "2026-06-27T06:52:09.072Z",
+      "type": "chunk_done",
+      "chunk": 14,
+      "cardCount": 5,
+      "method": "text-only"
+    },
+    {
+      "ts": "2026-06-27T06:52:09.082Z",
+      "type": "chunk_start",
+      "chunk": 15,
+      "pages": [
+        57,
+        60
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-06-27T06:53:02.216Z",
+      "type": "card_text_ok",
+      "chunk": 15,
+      "cardCount": 4
+    },
+    {
+      "ts": "2026-06-27T06:53:02.216Z",
+      "type": "chunk_done",
+      "chunk": 15,
+      "cardCount": 4,
+      "method": "text-only"
+    },
+    {
+      "ts": "2026-06-27T06:53:02.225Z",
+      "type": "chunk_start",
+      "chunk": 16,
+      "pages": [
+        61,
+        64
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-06-27T06:53:47.810Z",
+      "type": "card_text_ok",
+      "chunk": 16,
+      "cardCount": 4
+    },
+    {
+      "ts": "2026-06-27T06:53:47.810Z",
+      "type": "chunk_done",
+      "chunk": 16,
+      "cardCount": 4,
+      "method": "text-only"
+    },
+    {
+      "ts": "2026-06-27T06:53:47.817Z",
+      "type": "chunk_start",
+      "chunk": 17,
+      "pages": [
+        65,
+        68
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-06-27T06:54:25.120Z",
+      "type": "card_text_ok",
+      "chunk": 17,
+      "cardCount": 4
+    },
+    {
+      "ts": "2026-06-27T06:54:25.120Z",
+      "type": "chunk_done",
+      "chunk": 17,
+      "cardCount": 4,
+      "method": "text-only"
+    },
+    {
+      "ts": "2026-06-27T06:54:25.133Z",
+      "type": "chunk_start",
+      "chunk": 18,
+      "pages": [
+        69,
+        72
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-06-27T06:55:20.912Z",
+      "type": "card_text_ok",
+      "chunk": 18,
+      "cardCount": 4
+    },
+    {
+      "ts": "2026-06-27T06:55:20.912Z",
+      "type": "chunk_done",
+      "chunk": 18,
+      "cardCount": 4,
+      "method": "text-only"
+    },
+    {
+      "ts": "2026-06-27T06:55:20.922Z",
+      "type": "chunk_start",
+      "chunk": 19,
+      "pages": [
+        73,
+        76
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-06-27T06:55:48.169Z",
+      "type": "card_text_ok",
+      "chunk": 19,
+      "cardCount": 4
+    },
+    {
+      "ts": "2026-06-27T06:55:48.169Z",
+      "type": "chunk_done",
+      "chunk": 19,
+      "cardCount": 4,
+      "method": "text-only"
+    },
+    {
+      "ts": "2026-06-27T06:55:48.179Z",
+      "type": "chunk_start",
+      "chunk": 20,
+      "pages": [
+        77,
+        80
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-06-27T06:57:22.218Z",
+      "type": "card_text_ok",
+      "chunk": 20,
+      "cardCount": 7
+    },
+    {
+      "ts": "2026-06-27T06:57:22.218Z",
+      "type": "chunk_done",
+      "chunk": 20,
+      "cardCount": 7,
+      "method": "text-only"
+    },
+    {
+      "ts": "2026-06-27T06:57:22.230Z",
+      "type": "chunk_start",
+      "chunk": 21,
+      "pages": [
+        81,
+        84
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-06-27T06:58:15.469Z",
+      "type": "card_text_ok",
+      "chunk": 21,
+      "cardCount": 4
+    },
+    {
+      "ts": "2026-06-27T06:58:15.469Z",
+      "type": "chunk_done",
+      "chunk": 21,
+      "cardCount": 4,
+      "method": "text-only"
+    },
+    {
+      "ts": "2026-06-27T06:58:15.476Z",
+      "type": "chunk_start",
+      "chunk": 22,
+      "pages": [
+        85,
+        88
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-06-27T06:59:04.267Z",
+      "type": "card_text_ok",
+      "chunk": 22,
+      "cardCount": 5
+    },
+    {
+      "ts": "2026-06-27T06:59:04.267Z",
+      "type": "chunk_done",
+      "chunk": 22,
+      "cardCount": 5,
+      "method": "text-only"
+    },
+    {
+      "ts": "2026-06-27T06:59:04.273Z",
+      "type": "chunk_start",
+      "chunk": 23,
+      "pages": [
+        89,
+        92
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-06-27T06:59:34.802Z",
+      "type": "card_text_ok",
+      "chunk": 23,
+      "cardCount": 4
+    },
+    {
+      "ts": "2026-06-27T06:59:34.802Z",
+      "type": "chunk_done",
+      "chunk": 23,
+      "cardCount": 4,
+      "method": "text-only"
+    },
+    {
+      "ts": "2026-06-27T06:59:34.809Z",
+      "type": "chunk_start",
+      "chunk": 24,
+      "pages": [
+        93,
+        93
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-06-27T07:00:24.429Z",
+      "type": "card_text_ok",
+      "chunk": 24,
+      "cardCount": 8
+    },
+    {
+      "ts": "2026-06-27T07:00:24.429Z",
+      "type": "chunk_done",
+      "chunk": 24,
+      "cardCount": 8,
+      "method": "text-only"
+    }
+  ],
+  "needsVerification": 0,
+  "hasTeachingMap": true
+}

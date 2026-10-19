@@ -1,0 +1,43 @@
+{
+  "title": "指针数组中的对象需要逐个释放",
+  "definition": "如果动态分配的是指针数组，例如new Simple*[size]，数组元素本身只是指针，不是Simple对象。因此，delete[]指针数组只能释放这些指针元素组成的数组，不能自动释放每个指针所指向的Simple对象。必须先逐个delete每个指针指向的对象，再使用delete[]释放指针数组。",
+  "key_points": [
+    "new Simple*[size]分配的是包含size个Simple*指针的数组。",
+    "指针数组的元素不是Simple对象，因此delete[]指针数组不会自动删除所指向的对象。",
+    "每个指针若指向通过new创建的对象，都需要单独使用delete释放。",
+    "完成逐个释放后，再使用delete[]释放指针数组本身。"
+  ],
+  "examples": [
+    "分配指针数组：Simple** mySimplePtrArray { new Simple*[size] };",
+    "为每个指针分配对象：for (size_t i { 0 }; i < size; i++) { mySimplePtrArray[i] = new Simple{}; }",
+    "逐个释放对象，再释放指针数组：for (size_t i { 0 }; i < size; i++) { delete mySimplePtrArray[i]; } delete[] mySimplePtrArray; mySimplePtrArray = nullptr;"
+  ],
+  "misconceptions": [
+    "认为delete[]指针数组会自动删除每个指针指向的对象。",
+    "认为指针数组与对象数组的析构行为完全相同。",
+    "认为只要删除了外层数组，就不会发生内存泄漏。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "释放动态指针数组时，为什么既要逐个delete元素，又要delete[]数组本身？",
+      "a": "因为数组元素只是指针，delete[]只能释放指针数组本身；每个指针指向的Simple对象必须分别使用delete释放。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "指针",
+    "动态数组",
+    "delete与delete[]的匹配"
+  ],
+  "source_pages": [
+    204,
+    204
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "429_指针数组中的对象需要逐个释放",
+  "_chunk_pages": [
+    201,
+    204
+  ]
+}

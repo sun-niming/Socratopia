@@ -1,0 +1,50 @@
+{
+  "title": "使用智能指针和裸指针动态创建 SpreadsheetCell",
+  "definition": "可以使用 `std::make_unique<SpreadsheetCell>` 动态创建并由 `std::unique_ptr` 管理的 SpreadsheetCell，也可以使用 `new` 返回裸指针。智能指针在离开作用域时自动释放对象；裸指针则需要显式 `delete`，释放后可将指针设为 `nullptr`。",
+  "key_points": [
+    "使用数值构造函数动态创建智能指针对象：`auto smartCellp{make_unique<SpreadsheetCell>(4)};`。",
+    "使用默认构造函数动态创建智能指针对象：`auto smartCellp{make_unique<SpreadsheetCell>()};`。",
+    "裸指针示例：`SpreadsheetCell* myCellp{new SpreadsheetCell{5}};`。",
+    "裸指针对象使用完毕后必须执行 `delete myCellp;`，并可执行 `myCellp = nullptr;`。",
+    "原文明确将裸指针方式标记为不推荐。"
+  ],
+  "examples": [
+    "推荐：`auto smartCellp{std::make_unique<SpreadsheetCell>(4)};`",
+    "推荐：`auto smartCellp{std::make_unique<SpreadsheetCell>()};`",
+    "不推荐的裸指针方式：`SpreadsheetCell* myCellp{new SpreadsheetCell{5}};`",
+    "释放裸指针：`delete myCellp; myCellp = nullptr;`",
+    "通过智能指针访问成员：`smartCellp->getValue();`"
+  ],
+  "misconceptions": [
+    "调用 `new` 创建的对象不会因为裸指针变量离开作用域而自动释放，必须使用 `delete`。",
+    "`delete` 之后原指针变量仍可能保留旧地址，因此应将其设为 `nullptr`，避免继续使用悬空指针。",
+    "使用 `make_unique` 管理的对象通常不需要手动 `delete`。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "原文为什么更推荐 `make_unique` 而不是裸指针 `new`？",
+      "a": "`make_unique` 返回由 `std::unique_ptr` 管理的对象，通常会自动释放资源；裸指针需要手动 `delete`，更容易造成内存泄漏或悬空指针。"
+    },
+    {
+      "q": "裸指针 `myCellp` 指向的对象使用完后应如何处理？",
+      "a": "先执行 `delete myCellp;` 释放对象，再执行 `myCellp = nullptr;`。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "指针基础",
+    "动态内存管理",
+    "RAII"
+  ],
+  "source_pages": [
+    237,
+    240
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "322_使用智能指针和裸指针动态创建_spreadsheetcell",
+  "_chunk_pages": [
+    237,
+    240
+  ]
+}

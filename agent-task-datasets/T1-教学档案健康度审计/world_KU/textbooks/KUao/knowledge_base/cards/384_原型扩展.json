@@ -1,0 +1,38 @@
+{
+  "title": "原型扩展",
+  "definition": "原型扩展是指直接给构造函数的 prototype 添加成员，从而让由该构造函数创建的实例共享这些方法。教材示例中，Person.prototype.say=function(){...} 就是在给 Person 的原型对象扩展 say 方法。",
+  "key_points": [
+    "通过构造函数名.prototype 可以访问其原型对象。",
+    "向原型对象添加方法后，实例可以共享该方法。",
+    "教材图示中，Person.prototype.say=function(){...} 属于原型扩展。"
+  ],
+  "examples": [
+    "Person.prototype.say = function(){...}",
+    "new Person(\"张三\", 18) 可以通过原型链访问 say 方法"
+  ],
+  "misconceptions": [
+    "误以为原型扩展是在每个实例上单独复制一份方法。",
+    "误以为必须先创建实例后才能给原型添加方法。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "什么是原型扩展？",
+      "a": "给构造函数的 prototype 添加成员，让实例共享这些方法的做法。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "构造器与原型分装方法"
+  ],
+  "source_pages": [
+    289,
+    290
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "384_原型扩展",
+  "_chunk_pages": [
+    289,
+    292
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "title": "multimap 中按键查找元素范围",
+  "definition": "`multimap` 会将所有具有相同键的元素保存在一起。查找某个键对应的全部元素时，应使用 `lower_bound()`、`upper_bound()` 或 `equal_range()` 获取范围迭代器，而不是依赖 `operator[]`。`lower_bound(key)` 返回具有给定键的第一个元素，`upper_bound(key)` 返回具有给定键的最后一个元素之后的位置；如果没有匹配元素，二者返回相等的迭代器。",
+  "key_points": [
+    "`find()` 返回具有给定键的任意一个元素的迭代器，不一定是该键对应元素中的第一个，因此单独使用它不适合遍历全部匹配元素。",
+    "`lower_bound(key)` 返回匹配键的第一个元素的迭代器。",
+    "`upper_bound(key)` 返回匹配键的最后一个元素之后的位置，即 one-past-the-last 迭代器。",
+    "匹配范围可以表示为半开区间 $[\\text{lower_bound}(key),\\text{upper_bound}(key))$。",
+    "`equal_range(key)` 一次返回包含上述两个迭代器的 `pair`，比依次调用 `lower_bound()` 和 `upper_bound()` 更高效。",
+    "如果没有元素匹配给定键，则 `lower_bound(key) == upper_bound(key)`。"
+  ],
+  "examples": [
+    "使用结构化绑定获取范围：`auto [begin, end] = buddies.equal_range(name);`。然后遍历：`for (auto iter = begin; iter != end; ++iter) { /* 处理 iter->second */ }`。",
+    "使用两个边界获取范围：`auto begin = m_buddies.lower_bound(name); auto end = m_buddies.upper_bound(name);`。"
+  ],
+  "misconceptions": [
+    "`find()` 不保证返回某个键对应元素中的第一个元素。",
+    "`upper_bound()` 不是最后一个匹配元素本身，而是最后一个匹配元素之后的位置。",
+    "`equal_range()` 返回的是两个迭代器组成的范围，不是一个元素。",
+    "没有匹配元素时，不能据此认为容器为空；只能说明该键对应的范围为空。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何获取 multimap 中某个键对应的全部元素？",
+      "a": "调用 `equal_range(key)` 获取一对迭代器，并遍历从第一个迭代器到第二个迭代器之前的范围。"
+    },
+    {
+      "q": "lower_bound() 和 upper_bound() 分别返回什么？",
+      "a": "`lower_bound()` 返回第一个匹配元素；`upper_bound()` 返回最后一个匹配元素之后的位置。"
+    },
+    {
+      "q": "没有元素匹配给定键时，lower_bound() 和 upper_bound() 有什么关系？",
+      "a": "二者返回相等的迭代器。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "multimap 的基本特性",
+    "C++ 迭代器范围"
+  ],
+  "source_pages": [
+    589,
+    591
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1220_multimap_中按键查找元素范围",
+  "_chunk_pages": [
+    589,
+    592
+  ]
+}

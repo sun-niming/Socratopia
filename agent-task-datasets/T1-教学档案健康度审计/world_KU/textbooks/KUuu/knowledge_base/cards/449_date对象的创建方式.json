@@ -1,0 +1,46 @@
+{
+  "title": "Date对象的创建方式",
+  "definition": "Date对象由new Date()构造函数创建。教材给出了4种创建新的日期对象的方法：new Date()、new Date(year, month, day, hours, minutes, seconds, milliseconds)、new Date(milliseconds)、new Date(date string)。",
+  "key_points": [
+    "Date对象通过new Date()构造。",
+    "可以只写new Date()创建当前日期时间对象。",
+    "可以用年月日时分秒毫秒参数创建。",
+    "可以用毫秒数创建。",
+    "可以用日期字符串创建。"
+  ],
+  "examples": [
+    "new Date()",
+    "new Date(2024, 0, 1, 12, 30, 0, 0)",
+    "new Date(0)",
+    "new Date('2024-01-01')"
+  ],
+  "misconceptions": [
+    "以为Date只能用一种形式创建。",
+    "以为month参数按1-12表示月份。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "Date对象如何创建？",
+      "a": "通过new Date()构造函数创建。"
+    },
+    {
+      "q": "教材列出了几种创建新的日期对象的方法？",
+      "a": "4种。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "JavaScript构造函数"
+  ],
+  "source_pages": [
+    309,
+    312
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "449_date对象的创建方式",
+  "_chunk_pages": [
+    309,
+    312
+  ]
+}

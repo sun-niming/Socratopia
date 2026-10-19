@@ -1,0 +1,39 @@
+{
+  "title": "realpath 函数",
+  "definition": "`realpath`用于获得规范绝对路径。原型为`#include <stdlib.h>\nchar *realpath(const char *path, char *resolved_path);`。其中`path`是候选路径，`resolved_path`是输出绝对路径缓冲区。成功时返回`resolved_path`，失败时返回`NULL`。原文把它用于确认目标文件最终仍在网站 root 内。",
+  "key_points": [
+    "作用是把路径规范化为绝对路径。",
+    "成功返回`resolved_path`，失败返回`NULL`。",
+    "在本项目中，它用于配合 root 边界判断。"
+  ],
+  "examples": [
+    "原文示例：先准备`char resolved[PATH_MAX];`，再调用`realpath(candidate, resolved)`；若失败则返回错误。"
+  ],
+  "misconceptions": [
+    "以为`realpath`只是简单拼接字符串。",
+    "以为所有路径都能被`realpath`解析成功。",
+    "以为`realpath`本身就等于安全检查，不需要再做 root 边界判断。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`realpath`失败时返回什么？",
+      "a": "返回`NULL`。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "路径字符串基础",
+    "C 语言基础"
+  ],
+  "source_pages": [
+    57,
+    60
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "096_realpath_函数",
+  "_chunk_pages": [
+    57,
+    60
+  ]
+}

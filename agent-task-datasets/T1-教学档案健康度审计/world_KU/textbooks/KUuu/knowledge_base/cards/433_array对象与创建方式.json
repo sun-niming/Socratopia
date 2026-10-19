@@ -1,0 +1,44 @@
+{
+  "title": "Array对象与创建方式",
+  "definition": "在 ECMAScript 中，数组也是对象。教材说明：用方括号 `[]` 创建数组时，也是在创建一个 Array 类的实例。数组可用三种方式创建：`new Array(元素1, 元素2, ..., 元素n)`、`new Array(数组长度)`、`[ 数据元素 ]`。",
+  "key_points": [
+    "数组在 ECMAScript 中也是对象",
+    "可用 `new Array(元素...)` 按元素创建",
+    "可用 `new Array(数组长度)` 按长度创建",
+    "可用方括号字面量 `[ 数据元素 ]` 创建数组"
+  ],
+  "examples": [
+    "var 数组名 = new Array(元素1, 元素2, ..., 元素n);",
+    "var 数组名 = new Array(数组长度);",
+    "var 数组名 = [ 数据元素 ];"
+  ],
+  "misconceptions": [
+    "`new Array(3)` 表示数组里有一个元素 3；实际上教材把它作为按长度创建数组",
+    "数组只能用 `new Array(...)` 创建，不能使用方括号"
+  ],
+  "qa_pairs": [
+    {
+      "q": "教材中数组有哪些创建方式？",
+      "a": "`new Array(元素1, 元素2, ..., 元素n)`、`new Array(数组长度)`、`[ 数据元素 ]`。"
+    },
+    {
+      "q": "教材如何描述方括号创建数组？",
+      "a": "教材说明这相当于创建了 Array 类的实例。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "JavaScript基础对象概念"
+  ],
+  "source_pages": [
+    305,
+    308
+  ],
+  "needs_verification": true,
+  "verify_query": "ECMAScript 方括号 `[]` 创建数组是否等同于调用 Array 构造函数创建实例 教材原文表述是否准确",
+  "concept_id": "433_array对象与创建方式",
+  "_chunk_pages": [
+    305,
+    308
+  ]
+}

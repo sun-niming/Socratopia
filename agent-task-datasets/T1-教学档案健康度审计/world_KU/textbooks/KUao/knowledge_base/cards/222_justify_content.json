@@ -1,0 +1,49 @@
+{
+  "title": "justify-content",
+  "definition": "justify-content 属性定义项目在主轴上的对齐方式。",
+  "key_points": [
+    "其取值与轴的方向有关。",
+    "flex-start：左对齐，默认值。",
+    "flex-end：右对齐。",
+    "center：居中。",
+    "space-between：两端对齐，项目之间的间隔都相等。",
+    "space-around：每个项目两侧的间隔相等，因此项目之间的间隔比项目与边框的间隔大一倍。"
+  ],
+  "examples": [
+    "justify-content: flex-start;",
+    "justify-content: flex-end;",
+    "justify-content: center;",
+    "justify-content: space-between;",
+    "justify-content: space-around;"
+  ],
+  "misconceptions": [
+    "不要把 justify-content 误认为是控制交叉轴上的对齐。",
+    "不要把 space-around 理解成和 space-between 完全相同。",
+    "不要忽略主轴方向不同会影响对齐效果。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "justify-content 属性的作用是什么？",
+      "a": "它定义项目在主轴上的对齐方式。"
+    },
+    {
+      "q": "justify-content 的默认值是什么？",
+      "a": "flex-start。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "CSS 弹性盒布局"
+  ],
+  "source_pages": [
+    153,
+    156
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "222_justify_content",
+  "_chunk_pages": [
+    153,
+    156
+  ]
+}

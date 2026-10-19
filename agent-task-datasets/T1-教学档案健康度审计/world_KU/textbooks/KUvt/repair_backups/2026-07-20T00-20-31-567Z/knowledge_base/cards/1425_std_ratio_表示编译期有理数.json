@@ -1,0 +1,51 @@
+{
+  "title": "std::ratio 表示编译期有理数",
+  "definition": "`<ratio>` 头文件提供了 `std::ratio` 模板，用于在编译期精确表示有限有理数。分子和分母由类型为 `std::intmax_t` 的编译期常量表示，因此用于构造 `ratio` 的数值必须能够在编译期确定。`ratio` 通常通过类型别名使用，而不是像普通对象一样创建并调用成员函数。",
+  "key_points": [
+    "`std::ratio` 的内容定义在 `<ratio>` 头文件和 `std` 命名空间中。",
+    "有理数的分子和分母必须是编译期常量。",
+    "典型写法是 `using r1 = std::ratio<1, 60>;`。",
+    "分子和分母可分别通过 `r1::num` 与 `r1::den` 访问。",
+    "由于它是编译期类型，不能把 `ratio` 对象直接当作普通运行时对象输出。"
+  ],
+  "examples": [
+    "表示 $\\frac{1}{60}$：`using r1 = std::ratio<1, 60>;`。",
+    "读取分子和分母：`std::intmax_t num{r1::num};` 与 `std::intmax_t den{r1::den};`。",
+    "以下写法不正确，因为 `n` 和 `d` 不是编译期常量：`std::intmax_t n{1}; std::intmax_t d{60}; using r1 = std::ratio<n, d>;`。",
+    "将它们声明为常量后才可用于模板参数：`const std::intmax_t n{1}; const std::intmax_t d{60}; using r1 = std::ratio<n, d>;`。"
+  ],
+  "misconceptions": [
+    "`std::ratio<1, 60>`不是保存运行时数值的普通对象，而是描述编译期有理数的类型。",
+    "不能使用运行时变量作为 `std::ratio` 的模板参数。",
+    "不能直接写类似 `std::cout << r1` 来输出 ratio；应分别读取 `r1::num` 和 `r1::den`。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何定义表示 $\\frac{1}{60}$ 的编译期有理数？",
+      "a": "使用类型别名：`using r1 = std::ratio<1, 60>;`。"
+    },
+    {
+      "q": "如何访问 `std::ratio` 的分子和分母？",
+      "a": "分别使用类型成员 `r1::num` 和 `r1::den`。"
+    },
+    {
+      "q": "为什么普通的 `intmax_t n{1};` 不能直接作为 `std::ratio<n, d>` 的模板参数？",
+      "a": "因为 ratio 的分子和分母必须在编译期确定，而普通变量不是编译期常量。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++ 模板参数与类型别名"
+  ],
+  "source_pages": [
+    682,
+    683
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1425_std_ratio_表示编译期有理数",
+  "_chunk_pages": [
+    681,
+    684
+  ]
+}

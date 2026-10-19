@@ -1,0 +1,38 @@
+{
+  "title": "CSS 的 MIME 类型",
+  "definition": "访问 `/css/style.css` 时，响应头里的 `Content-Type` 应为 `text/css`，这样浏览器才能按 CSS 处理该资源。",
+  "key_points": [
+    "路径是 `/css/style.css`。",
+    "响应头应返回 `Content-Type: text/css`。",
+    "MIME 类型会影响浏览器对资源的解析方式。"
+  ],
+  "examples": [
+    "`curl -i http://127.0.0.1:8080/css/style.css`"
+  ],
+  "misconceptions": [
+    "CSS 文件可以随便返回成 `text/html`。",
+    "只要内容正确，Content-Type 不重要。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "CSS 文件的 Content-Type 应该是什么？",
+      "a": "`text/css`。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "HTTP 响应头",
+    "MIME 类型基础"
+  ],
+  "source_pages": [
+    113,
+    116
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "186_css_的_mime_类型",
+  "_chunk_pages": [
+    113,
+    116
+  ]
+}

@@ -1,0 +1,56 @@
+{
+  "title": "std::optional表示可选值",
+  "definition": "`std::optional<T>`表示一个可能包含类型`T`的值、也可能不包含值的对象。它适合表示“结果可能存在，也可能不存在”的情况；没有值时可以使用`std::nullopt`或空花括号进行表示。",
+  "key_points": [
+    "`std::optional<int>`可以保存一个整数，也可以处于无值状态。",
+    "函数可以返回`std::optional<int>`：有数据时返回整数，例如`return 42;`；没有数据时返回`std::nullopt`或`return {};`。",
+    "可以使用`has_value()`检查是否有值，也可以直接在if条件中检查optional。",
+    "有值时可以使用`value()`或解引用运算符`*`获取值。",
+    "对无值的optional调用`value()`会抛出`std::bad_optional_access`；`value_or()`可以在无值时提供备用值。"
+  ],
+  "examples": [
+    "函数示例：`std::optional<int> getData(bool giveIt) { if (giveIt) { return 42; } return std::nullopt; }`",
+    "调用示例：`std::optional<int> data1 { getData(true) };`和`std::optional<int> data2 { getData(false) };`。前者有值42，后者无值。",
+    "检查和访问：`if (data2.has_value()) { cout << data2.value() << endl; }`，也可以写成`if (data1) { cout << *data1 << endl; }`。",
+    "提供默认值：`int value = data2.value_or(0);`，当`data2`无值时结果为0。"
+  ],
+  "misconceptions": [
+    "`std::optional<int>`不是一定包含一个int；它还可以处于无值状态。",
+    "无值状态不是把整数默认为0；如果需要备用值，应使用`value_or(0)`或显式判断。",
+    "在未确认有值时直接调用`value()`可能抛出`std::bad_optional_access`。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`std::optional<int>`可以表示哪两种状态？",
+      "a": "它可以包含一个`int`值，也可以处于不包含任何值的无值状态。"
+    },
+    {
+      "q": "如何判断optional是否包含值？",
+      "a": "可以调用`has_value()`，也可以直接在布尔上下文中使用，例如`if (data1)`。"
+    },
+    {
+      "q": "无值的optional调用`value()`会发生什么？",
+      "a": "会抛出`std::bad_optional_access`异常。"
+    },
+    {
+      "q": "如何在optional无值时返回备用值？",
+      "a": "使用`value_or(备用值)`，例如`data2.value_or(0)`。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++标准库类型",
+    "异常处理基础"
+  ],
+  "source_pages": [
+    57,
+    60
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "082_std_optional表示可选值",
+  "_chunk_pages": [
+    57,
+    60
+  ]
+}

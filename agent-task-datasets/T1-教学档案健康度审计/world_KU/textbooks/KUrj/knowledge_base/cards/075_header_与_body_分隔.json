@@ -1,0 +1,39 @@
+{
+  "title": "Header 与 Body 分隔",
+  "definition": "HTTP 中，Header 的结束位置是空行，实际字节序列通常是 `\\r\\n\\r\\n`。GET 请求通常没有 Body，但 Header 仍然存在。解析时至少要找到第一行；更稳妥的做法是读到空行再处理。",
+  "key_points": [
+    "Header 的结束标志是空行。",
+    "常见分隔序列是 `\\r\\n\\r\\n`。",
+    "GET 请求通常没有 Body，但仍然有 Header。",
+    "解析时至少要找到第一行；更稳妥是读到空行再处理。"
+  ],
+  "examples": [
+    "在字节流中先定位 `\\r\\n\\r\\n`，再判断请求头结束位置。"
+  ],
+  "misconceptions": [
+    "认为 GET 请求没有 Body，就可以忽略 Header。",
+    "把第一行读完就直接当成完整请求。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "HTTP Header 和 Body 如何分隔？",
+      "a": "通常由空行分隔，字节序列常写作 `\\r\\n\\r\\n`。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "HTTP 请求基本结构",
+    "TCP 字节流基础"
+  ],
+  "source_pages": [
+    49,
+    52
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "075_header_与_body_分隔",
+  "_chunk_pages": [
+    49,
+    52
+  ]
+}

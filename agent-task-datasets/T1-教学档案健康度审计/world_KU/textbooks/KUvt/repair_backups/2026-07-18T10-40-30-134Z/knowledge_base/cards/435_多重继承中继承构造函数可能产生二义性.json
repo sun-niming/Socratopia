@@ -1,0 +1,42 @@
+{
+  "title": "多重继承中继承构造函数可能产生二义性",
+  "definition": "在多重继承中，如果派生类分别使用 `using Base1::Base1;` 和 `using Base2::Base2;` 继承两个基类的构造函数，而两个基类都提供相同参数列表的构造函数，则使用该参数构造派生类对象可能产生二义性，编译器无法判断应调用哪个基类构造函数。",
+  "key_points": [
+    "派生类可以分别继承多个基类的构造函数，例如 `using Base1::Base1;` 和 `using Base2::Base2;`。",
+    "若 `Base1(float)` 与 `Base2(float)` 同时存在，`Derived{1.2f}` 无法唯一确定目标构造函数。",
+    "解决方法之一是在派生类中显式声明 `Derived(float)`，明确规定如何初始化两个基类。"
+  ],
+  "examples": [
+    "class Base1 {\npublic:\n    Base1() = default;\n    Base1(float f);\n};\n\nclass Base2 {\npublic:\n    Base2() = default;\n    Base2(std::string_view str);\n    Base2(float f);\n};\n\nclass Derived : public Base1, public Base2 {\npublic:\n    using Base1::Base1;\n    using Base2::Base2;\n    Derived(char c);\n};\n\nDerived d{1.2f}; // 错误：调用存在二义性"
+  ],
+  "misconceptions": [
+    "同时写两个 using 声明不会自动按照某种优先级选择基类构造函数。",
+    "二义性不是因为 `float` 不能转换，而是因为两个基类都提供了同样匹配的构造函数。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么 `Derived d{1.2f};` 会产生二义性？",
+      "a": "因为 `Derived` 同时继承了 `Base1(float)` 和 `Base2(float)`，两个构造函数都能匹配该调用。"
+    },
+    {
+      "q": "如何通过派生类自己的构造函数消除这种二义性？",
+      "a": "在 `Derived` 中显式声明 `Derived(float)`，并在其构造函数初始化器中明确初始化 `Base1` 和 `Base2`。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "多重继承",
+    "继承基类构造函数"
+  ],
+  "source_pages": [
+    335,
+    336
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 multiple inheritance using Base1::Base1 using Base2::Base2 ambiguous constructor float",
+  "concept_id": "435_多重继承中继承构造函数可能产生二义性",
+  "_chunk_pages": [
+    333,
+    336
+  ]
+}

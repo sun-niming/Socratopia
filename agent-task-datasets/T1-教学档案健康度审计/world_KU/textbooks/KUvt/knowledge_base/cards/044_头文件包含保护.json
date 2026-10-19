@@ -1,0 +1,42 @@
+{
+  "title": "头文件包含保护",
+  "definition": "头文件包含保护用于防止同一个头文件被重复包含。典型做法是使用条件预处理指令：先用 #ifndef 检查保护标识符尚未定义，再用 #define 定义该标识符，最后用 #endif 结束条件区域。这样，同一头文件再次被包含时，其内容会被舍弃。",
+  "key_points": [
+    "典型结构为：#ifndef MYHEADER_H、#define MYHEADER_H、头文件内容、#endif。",
+    "如果编译器支持 #pragma once，也可以用它表示该头文件只包含一次。教材指出大多数现代编译器支持 #pragma once。",
+    "教材说明本书使用 C++20 模块，而不是旧式头文件风格。"
+  ],
+  "examples": [
+    "#ifndef MYHEADER_H\n#define MYHEADER_H\n// ... the contents of this header file\n#endif",
+    "#pragma once\n// ... the contents of this header file"
+  ],
+  "misconceptions": [
+    "#ifndef 和 #define 不是普通的 C++函数，而是预处理指令。",
+    "包含保护并不是禁止多个源文件使用同一个头文件，而是防止同一个头文件在一次编译过程中被重复展开。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何使用预处理指令防止头文件被重复包含？",
+      "a": "使用包含保护：先写 #ifndef 保护标识符，再写 #define 保护标识符，放入头文件内容，最后写 #endif。"
+    },
+    {
+      "q": "#pragma once 的作用是什么？",
+      "a": "它表示当前头文件在一次编译过程中只应被包含一次；教材指出大多数现代编译器支持它。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++预处理指令"
+  ],
+  "source_pages": [
+    37,
+    37
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "044_头文件包含保护",
+  "_chunk_pages": [
+    37,
+    40
+  ]
+}

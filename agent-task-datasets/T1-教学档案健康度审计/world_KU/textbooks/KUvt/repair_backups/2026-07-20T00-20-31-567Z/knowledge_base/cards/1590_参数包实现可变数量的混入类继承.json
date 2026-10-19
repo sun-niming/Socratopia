@@ -1,0 +1,49 @@
+{
+  "title": "参数包实现可变数量的混入类继承",
+  "definition": "类模板可以使用类型参数包同时继承可变数量的混入类。声明 `template<typename... Mixins> class MyClass : public Mixins...` 时，`Mixins...` 会展开为对参数包中每个类型分别进行的公开继承；构造函数也可以通过参数包扩展把对应对象传递给各个基类。",
+  "key_points": [
+    "`MyClass` 可以继承零个、一个或多个混入类，继承关系由模板实参决定。",
+    "`public Mixins...` 展开后，相当于对参数包中的每个混入类分别执行 `public` 继承。",
+    "构造函数可以接收与混入类数量对应的参数，并用于初始化各个基类。",
+    "实例对象只能调用其实际继承的混入类成员函数。",
+    "若 `MyClass` 没有继承某个混入类，调用该混入类的成员函数会导致编译错误。"
+  ],
+  "examples": [
+    "定义形式：`template<typename... Mixins> class MyClass : public Mixins... { public: MyClass(const Mixins&... mixins) : Mixins{mixins}... {} };`。",
+    "`MyClass<Mixin1, Mixin2> a{Mixin1{11}, Mixin2{22}};` 可以调用 `a.mixin1Func()` 和 `a.mixin2Func()`。",
+    "`MyClass<Mixin1> b{Mixin1{33}};` 可以调用 `b.mixin1Func()`，但调用 `b.mixin2Func()` 会编译错误。",
+    "`MyClass<> c;` 不继承任何混入类，因此不能调用 `mixin1Func` 或 `mixin2Func`。"
+  ],
+  "misconceptions": [
+    "参数包继承不是继承一个名为 `Mixins` 的单一类型，而是分别继承包中的每一个类型。",
+    "`MyClass<Mixin1>` 并不会自动获得 `Mixin2` 的成员。",
+    "混入类数量和构造参数之间必须匹配，否则基类初始化可能无法完成。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`public Mixins...` 的展开含义是什么？",
+      "a": "它把参数包中的每个类型分别展开为公开基类，例如 `Mixin1, Mixin2` 会形成对 `Mixin1` 和 `Mixin2` 的公开继承。"
+    },
+    {
+      "q": "为什么 `MyClass<Mixin1>` 不能调用 `mixin2Func()`？",
+      "a": "因为该特化只继承 `Mixin1`，没有继承 `Mixin2`，所以不存在 `mixin2Func()` 成员。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "类模板",
+    "继承与基类初始化",
+    "参数包扩展"
+  ],
+  "source_pages": [
+    771,
+    772
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1590_参数包实现可变数量的混入类继承",
+  "_chunk_pages": [
+    769,
+    772
+  ]
+}

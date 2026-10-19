@@ -1,0 +1,44 @@
+{
+  "title": "Logger后台线程的正常关闭机制",
+  "definition": "使用后台线程处理日志时，Logger必须在析构时通知后台线程退出，并等待该线程完全结束，从而避免仍在运行的后台线程导致程序异常终止。常见做法是在Logger中增加布尔退出标志$m\\_exit$，析构函数在持有$m\\_mutex$的情况下将其设为$true$，唤醒条件变量，然后在释放锁后调用后台线程的$join()$。",
+  "key_points": [
+    "如果thread对象析构时仍然是可结合的，即既没有调用$join()$也没有调用$detach()$，其析构函数会调用$std::terminate()$，程序将突然终止。",
+    "析构函数需要设置$m\\_exit=true$并调用条件变量的$notify\\_all()$，使后台线程有机会退出。",
+    "调用$join()$之前必须释放$m\\_mutex$，否则后台线程可能需要该互斥量才能结束，进而形成死锁。",
+    "析构函数可以在持有锁或释放锁后调用$notify\\_all()$，但在调用$join()$前必须释放锁。"
+  ],
+  "examples": [
+    "后台线程关闭流程可概括为：$$\\begin{aligned} &\\text{lock }m\\_mutex;\\\\ &m\\_exit=true;\\\\ &m\\_condVar.notify\\_all();\\\\ &\\text{unlock }m\\_mutex;\\\\ &\\text{backgroundThread.join();}\\end{aligned}$$"
+  ],
+  "misconceptions": [
+    "仅仅设置$m\\_exit=true$而不通知条件变量，后台线程可能仍睡眠在$wait()$中，无法及时退出。",
+    "在持有$m\\_mutex$时直接调用$join()$并不安全，可能造成析构线程等待后台线程，而后台线程等待该互斥量的死锁。",
+    "调用$detach()$可以避免$join()$，但这不等于后台线程已经被正常关闭或其剩余日志已经写入磁盘。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么Logger析构时必须等待后台线程结束？",
+      "a": "因为后台线程可能仍在处理队列中的日志。如果不等待它结束，程序可能在日志写入完成前终止；同时，仍可结合的thread对象析构会调用$std::terminate()$。"
+    },
+    {
+      "q": "Logger析构函数调用$join()$前为什么要释放互斥量？",
+      "a": "后台线程结束前可能需要获得同一个互斥量。如果析构函数持有互斥量并等待$join()$，就可能与后台线程相互等待而死锁。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++线程的join与detach",
+    "互斥量与条件变量"
+  ],
+  "source_pages": [
+    825,
+    826
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1690_logger后台线程的正常关闭机制",
+  "_chunk_pages": [
+    825,
+    828
+  ]
+}

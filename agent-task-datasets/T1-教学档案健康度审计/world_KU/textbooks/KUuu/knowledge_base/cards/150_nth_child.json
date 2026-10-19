@@ -1,0 +1,43 @@
+{
+  "title": ":nth-child",
+  "definition": "`:nth-child(exp)` 用于按子元素顺序进行匹配。根据教材说明，先按父元素下所有子元素的位置计数，再判断该位置上的元素是否为指定类型 E；exp 可以是数字，也可以是 an+b 形式的表达式，其中 a、b 为常量，n 为变量，从 0 开始取值。",
+  "key_points": [
+    "它关注的是“第几个子元素位置”，然后再判断该位置上的元素类型。",
+    "exp 可以是数字，也可以是 an+b 形式。",
+    "插入了其他类型的元素后，计数位置仍然会变化。"
+  ],
+  "examples": [
+    "span:nth-child(2n+1)",
+    "教材示例中，元素间不插入 <em> 时，选中第 1、3、5、7 个子节点。",
+    "教材示例中，元素间插入 <em> 时，span:nth-child(2n+1) 仍按子节点顺序计数，<em> 会被计入位置，但不会因为不是 span 而被选中。"
+  ],
+  "misconceptions": [
+    ":nth-child 不是先筛选同类型元素再计数；那是 :nth-of-type 的思路。",
+    "插入其他标签后，不会影响 nth-child 的位置计数，这个理解是错的。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "span:nth-child(2n+1) 中的 2n+1 表示什么？",
+      "a": "表示按位置匹配第 1、3、5、7……个子元素。"
+    },
+    {
+      "q": ":nth-child 与类型无关吗？",
+      "a": "不是无关；它先按子元素位置计数，再判断位置上的元素是否为指定类型。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "伪类选择器"
+  ],
+  "source_pages": [
+    98,
+    99
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "150_nth_child",
+  "_chunk_pages": [
+    97,
+    100
+  ]
+}

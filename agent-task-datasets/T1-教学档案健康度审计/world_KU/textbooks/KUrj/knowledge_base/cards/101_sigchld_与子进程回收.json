@@ -1,0 +1,38 @@
+{
+  "title": "SIGCHLD 与子进程回收",
+  "definition": "当子进程退出时，父进程会收到 `SIGCHLD` 信号。可以为 `SIGCHLD` 安装处理函数，并在处理函数中循环调用 `waitpid(-1, NULL, WNOHANG)`，把已经退出的子进程一次性回收干净。",
+  "key_points": [
+    "子进程退出会触发父进程收到 `SIGCHLD`。",
+    "回收时通常在信号处理函数里调用 `waitpid(-1, NULL, WNOHANG)`。",
+    "因为一次信号可能对应多个已退出子进程，所以要用 `while` 循环回收。"
+  ],
+  "examples": [
+    "示例处理函数：`void handle_sigchld(int sig) { (void)sig; while (waitpid(-1, NULL, WNOHANG) > 0) { } }`"
+  ],
+  "misconceptions": [
+    "误以为收到一次 `SIGCHLD` 只需要 `waitpid` 一次。",
+    "误以为 `waitpid` 在信号处理函数里一定要阻塞等待。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么 `SIGCHLD` 处理函数里要写 `while (waitpid(-1, NULL, WNOHANG) > 0)`？",
+      "a": "因为一次 `SIGCHLD` 可能对应多个子进程退出，必须循环回收，直到没有已退出子进程可回收为止。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "僵尸进程",
+    "waitpid"
+  ],
+  "source_pages": [
+    61,
+    62
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "101_sigchld_与子进程回收",
+  "_chunk_pages": [
+    61,
+    64
+  ]
+}

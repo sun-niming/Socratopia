@@ -1,0 +1,44 @@
+{
+  "title": "passwd 修改口令",
+  "definition": "教材在“用户管理”中给出改变用户口令命令：passwd [用户名]。默认情况下，该命令改变当前用户口令；只有 root 可以指定用户名，为指定用户设置口令。",
+  "key_points": [
+    "命令格式：passwd [用户名]",
+    "默认改变当前用户口令",
+    "只有 root 可以指定用户名并为指定用户设置口令"
+  ],
+  "examples": [
+    "命令格式示例：passwd",
+    "命令格式示例：passwd 用户名"
+  ],
+  "misconceptions": [
+    "不要认为任何用户都能随意指定其他用户名改口令；教材明确只有 root 可以指定用户名",
+    "不要认为用户名参数一定必填；教材用方括号表示它是可选的"
+  ],
+  "qa_pairs": [
+    {
+      "q": "教材中 passwd 默认改变谁的口令？",
+      "a": "当前用户的口令。"
+    },
+    {
+      "q": "谁可以指定用户名，为指定用户设置口令？",
+      "a": "root。"
+    },
+    {
+      "q": "教材给出的 passwd 命令格式是什么？",
+      "a": "passwd [用户名]。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [],
+  "source_pages": [
+    25,
+    28
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "053_passwd_修改口令",
+  "_chunk_pages": [
+    25,
+    28
+  ]
+}

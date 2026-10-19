@@ -1,0 +1,49 @@
+{
+  "title": "std::any 的含义与基本操作",
+  "definition": "std::any 在头文件 <any> 中定义，是一种可以包含任意类型值的类。可以通过任意构造函数或 std::make_any 创建 any 对象。创建后，可以使用 has_value() 判断是否包含值，使用 type() 查询所包含值的类型；要获取其中的值，需要使用 std::any_cast。",
+  "key_points": [
+    "默认构造的 any 为空，不包含值。",
+    "any 可以包装不同类型的值，例如 int 或 std::string。",
+    "has_value() 返回 whether any 当前包含值的布尔结果。",
+    "type() 返回所包装值的类型信息；示例中的 type().name() 输出形式与编译器相关。"
+  ],
+  "examples": [
+    "any empty;",
+    "any anInt{3};",
+    "any aString{\"An std::string.\"s};",
+    "empty.has_value() 返回 false，anInt.has_value() 返回 true。",
+    "anInt.type().name() 可用于获取所包装类型名称，但具体输出格式与编译器相关。"
+  ],
+  "misconceptions": [
+    "std::any 不是只能保存预先列出的一组类型；它可以包装任意类型的值。",
+    "默认构造 any 不会自动包含某个默认值，而是处于空状态。",
+    "type().name() 的具体字符串格式并不具有跨编译器一致性。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何判断 any 对象是否包含值？",
+      "a": "调用其 has_value() 方法；空 any 返回 false，包含值的 any 返回 true。"
+    },
+    {
+      "q": "如何查看 any 当前包装的类型？",
+      "a": "调用 type() 获取类型信息，例如 type().name() 获取类型名称字符串；其具体格式与编译器相关。"
+    },
+    {
+      "q": "any empty; 的 has_value() 返回什么？",
+      "a": "返回 false。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [],
+  "source_pages": [
+    708,
+    708
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1471_std_any_的含义与基本操作",
+  "_chunk_pages": [
+    705,
+    708
+  ]
+}

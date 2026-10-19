@@ -1,0 +1,46 @@
+{
+  "title": "unordered_map 电话簿示例中的基本操作",
+  "definition": "可以使用 unordered_map<string, string> 表示电话簿，其中人名作为唯一键，电话号码作为与键关联的值。可以通过初始化列表创建电话簿，使用 insert() 添加元素，使用 operator[] 添加或修改元素，使用 erase(key) 删除元素，并使用范围 for 循环遍历键值对。",
+  "key_points": [
+    "键和值的类型可以分别是 string 和 string。",
+    "结构化绑定可以在范围 for 循环中同时取得键和值，例如 for (auto& [key, value] : m)。",
+    "由于 unordered_map 基于哈希表，遍历输出顺序取决于哈希函数和具体实现，在不同系统上可能不同。",
+    "使用 operator[] 给不存在的键赋值时，可以添加新的键值对；对已有键赋值则会修改其值。"
+  ],
+  "examples": [
+    "电话簿的典型声明：\n```text\nunordered_map<string, string> phoneBook{\n    {\"Marc G.\", \"123-456789\"},\n    {\"Scott K.\", \"654-987321\"}\n};\n```",
+    "添加、修改和删除记录：\n```text\nphoneBook.insert(make_pair(\"John D.\", \"321-987654\"));\nphoneBook[\"Johan G.\"] = \"963-258147\";\nphoneBook.erase(\"Freddy K.\");\n```",
+    "遍历电话簿：\n```text\nfor (auto& [key, value] : phoneBook) {\n    // key 是姓名，value 是电话号码\n}\n```"
+  ],
+  "misconceptions": [
+    "不能依赖 unordered_map 的遍历顺序或输出顺序。",
+    "erase(key) 删除的是具有指定键的元素，而不是按插入顺序删除元素。",
+    "unordered_map 的键必须唯一，不能像 unordered_multimap 那样保留多个相同键。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么同一个 unordered_map 电话簿示例在不同系统上的输出顺序可能不同？",
+      "a": "因为输出顺序取决于所使用的哈希函数以及 unordered_map 的具体实现。"
+    },
+    {
+      "q": "在电话簿示例中，如何通过姓名添加或修改电话号码？",
+      "a": "可以使用 phoneBook[\"姓名\"] = \"电话号码\"；键不存在时添加新元素，键已存在时修改对应值。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "unordered_map 的基本用法",
+    "C++ 范围 for 循环和结构化绑定"
+  ],
+  "source_pages": [
+    597,
+    598
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1232_unordered_map_电话簿示例中的基本操作",
+  "_chunk_pages": [
+    597,
+    600
+  ]
+}

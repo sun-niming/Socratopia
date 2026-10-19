@@ -1,0 +1,38 @@
+{
+  "title": "选择结构",
+  "definition": "选择结构是程序控制结构的一种，用于根据条件在不同分支之间做选择。教材中指出，主要形式有 if 和 switch。",
+  "key_points": [
+    "选择结构用于分支判断。",
+    "if 是常见的条件分支语句。",
+    "switch 也是常见的分支结构。"
+  ],
+  "examples": [
+    "if (score >= 60) { console.log('及格'); }",
+    "switch (n) { case 1: ... }"
+  ],
+  "misconceptions": [
+    "误以为选择结构只能处理两条分支。",
+    "误以为 switch 只能用于数字，不能用于其他可比较的值。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "教材中提到的选择结构主要有哪些？",
+      "a": "if 和 switch。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "程序控制结构"
+  ],
+  "source_pages": [
+    249,
+    252
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "348_选择结构",
+  "_chunk_pages": [
+    249,
+    252
+  ]
+}

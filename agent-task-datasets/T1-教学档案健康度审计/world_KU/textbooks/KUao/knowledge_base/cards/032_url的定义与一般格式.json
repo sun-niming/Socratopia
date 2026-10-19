@@ -1,0 +1,44 @@
+{
+  "title": "URL的定义与一般格式",
+  "definition": "URL 是 Universal Resource Locator 的英文缩写，意为统一资源定位器。它是指定 Internet 上资源位置的文本字符串，通常也叫“网址”，浏览器会在地址栏显示 URL。教材给出的 URL 一般格式为：协议名://主机名[:端口号][/文件夹名/文件名][?k1=v1&k2=v2][#SomeText]，其中方括号表示该部分可省略。",
+  "key_points": [
+    "URL 用来表示 Internet 上资源的位置。",
+    "URL 通常也称为网址，浏览器地址栏中显示的就是 URL。",
+    "教材给出的基本结构包含协议名、主机名、端口号、路径、查询参数和片段标识。",
+    "方括号中的端口号、路径、查询参数、片段标识均可按需要省略。"
+  ],
+  "examples": [
+    "https://developer.mozilla.org/zh-CN/docs/Learn/Common_questions/Web_mechanics/What_is_a_URL",
+    "http://主机名:8080/文件夹名/文件名?k1=v1&k2=v2#SomeText"
+  ],
+  "misconceptions": [
+    "误以为 URL 只包含域名，不包含协议、路径和参数。",
+    "误以为地址栏显示的不是 URL。",
+    "误以为方括号内的部分必须全部出现。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "URL 是什么的缩写？",
+      "a": "Universal Resource Locator。"
+    },
+    {
+      "q": "教材中 URL 的一般格式包含哪些部分？",
+      "a": "协议名、主机名、端口号、文件夹名/文件名、查询参数和片段标识。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "浏览器的基本概念"
+  ],
+  "source_pages": [
+    21,
+    24
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "032_url的定义与一般格式",
+  "_chunk_pages": [
+    21,
+    24
+  ]
+}

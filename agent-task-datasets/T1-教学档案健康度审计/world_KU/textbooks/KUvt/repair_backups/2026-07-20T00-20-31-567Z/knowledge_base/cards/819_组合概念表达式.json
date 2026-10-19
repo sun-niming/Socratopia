@@ -1,0 +1,41 @@
+{
+  "title": "组合概念表达式",
+  "definition": "已有的概念表达式可以使用逻辑合取 `&&` 和逻辑析取 `||` 进行组合，从而定义要求多个概念同时满足或至少满足其中一个的更具体概念。",
+  "key_points": [
+    "`A<T> && B<T>` 表示类型 `T` 必须同时满足概念 `A` 和 `B`。",
+    "`A<T> || B<T>` 表示类型 `T` 满足概念 `A` 或概念 `B` 即可。",
+    "组合概念可以减少重复编写底层约束。"
+  ],
+  "examples": [
+    "定义同时支持自增和自减的概念：`template <typename T> concept IncrementableAndDecrementable = Incrementable<T> && Decrementable<T>;`"
+  ],
+  "misconceptions": [
+    "使用 `&&` 组合概念表示两个约束都必须满足，不是二选一。",
+    "组合概念不会改变组成概念本身的定义。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何定义要求类型既可自增又可自减的概念？",
+      "a": "`template <typename T> concept IncrementableAndDecrementable = Incrementable<T> && Decrementable<T>;`"
+    },
+    {
+      "q": "概念表达式可以使用哪些逻辑运算进行组合？",
+      "a": "可以使用合取 `&&` 和析取 `||`。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "概念表达式与概念约束"
+  ],
+  "source_pages": [
+    402,
+    403
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "819_组合概念表达式",
+  "_chunk_pages": [
+    401,
+    404
+  ]
+}

@@ -1,0 +1,189 @@
+{
+  "conversationId": "nxptfPVfsNLM-pi5X9tHt",
+  "generatedAt": 1791623056260,
+  "pagesRange": "第150页至第158页",
+  "sections": [
+    {
+      "type": "tldr",
+      "content": "本节从消除左递归和提取左公因子出发，为自顶向下分析扫清障碍，并建立起以 FIRST 和 FOLLOW 集合为核心的 LL(1) 文法判据与预测分析表构造方法。"
+    },
+    {
+      "type": "narrative",
+      "content": "我们先是延续第150页的内容，处理了直接左递归与间接左递归的消除，并解决了提取左公因子后决策推迟的问题。随后了解到有些语言构造（如标识符的声明与使用匹配）本质上无法用上下文无关文法描述。接着进入4.4节，学习了递归下降分析的基本过程及其在左递归下必然死循环的原因。最后重点落在 FIRST 和 FOLLOW 集合的定义、计算规则，以及如何利用它们判定 LL(1) 文法并构造预测分析表。"
+    },
+    {
+      "type": "concepts",
+      "items": [
+        {
+          "name": "左递归的消除",
+          "body": "左递归指文法中存在 $A \\Rightarrow A\\alpha$ 的推导。\n\n**直接左递归**的消除公式为：\n\n$$\nA \\to A\\alpha \\mid \\beta \\quad\\Longrightarrow\\quad A \\to \\beta A', \\quad A' \\to \\alpha A' \\mid \\epsilon\n$$\n\n**间接左递归**需先代入展开。例如：\n\n$$\nS \\to Aa \\mid b, \\quad A \\to Ac \\mid Sd \\mid \\epsilon\n$$\n\n将 $S \\to Aa \\mid b$ 代入 $A \\to Sd$ 得到 $A \\to Aad \\mid bd$，从而暴露出直接左递归，再用公式消除。",
+          "sourceMessageIndexes": [
+            3,
+            4,
+            5
+          ]
+        },
+        {
+          "name": "提取左公因子",
+          "body": "当多条产生式有公共前缀 $\\alpha$ 时：\n\n$$\nA \\to \\alpha\\beta_1 \\mid \\alpha\\beta_2\n$$\n\n提取后变为：\n\n$$\nA \\to \\alpha A', \\quad A' \\to \\beta_1 \\mid \\beta_2\n$$\n\n用于推迟选择哪条产生式的决定。例如悬空-else 文法：\n\n$$\nstmt \\to \\text{if } expr \\text{ then } stmt\\ S', \\quad S' \\to \\text{else } stmt \\mid \\epsilon\n$$\n\n决定被推迟到读完公共前缀 $\\alpha$、站在新非终结符 $S'$ 面前时才根据下一个输入符号做出选择。",
+          "sourceMessageIndexes": [
+            7,
+            9
+          ]
+        },
+        {
+          "name": "非上下文无关语言的构造",
+          "body": "某些语言无法用上下文无关文法描述，因为它们需要“记忆”不定长信息。例如：\n\n$$\nL_1 = \\{ wcw \\mid w \\in (a|b)^* \\}\n$$\n\n要求第二个 $w$ 与第一个完全一致，但文法无法在推导中记住任意长的 $w$。\n\n$$\nL_2 = \\{ a^n b^m c^n d^m \\mid n \\ge 1, m \\ge 1 \\}\n$$\n\n类比参数个数检查。\n\n因此，实际语言的文法将标识符统一为 $id$，“先声明后使用”等上下文相关检查被推迟到语义分析阶段。",
+          "sourceMessageIndexes": [
+            9,
+            11
+          ]
+        },
+        {
+          "name": "递归下降分析",
+          "body": "每个非终结符对应一个过程，按产生式体顺序处理：遇非终结符则调用其过程，遇终结符则与当前输入符号匹配。\n\n存在问题：若文法有左递归（如 $A \\to A\\alpha$），过程会在未消耗任何输入符号的情况下不断递归调用自身，陷入死循环，回溯也无法挽救（因为没有可退回的输入位置）。\n\n需要回溯的情形示例：\n\n$$\nS \\to cAd, \\quad A \\to ab \\mid a\n$$\n\n输入 $cad$ 时，试 $A \\to ab$ 匹配 $a$ 后，用 $b$ 匹配 $d$ 失败，必须回溯并用 $A \\to a$ 重试。",
+          "sourceMessageIndexes": [
+            11,
+            12,
+            13
+          ]
+        },
+        {
+          "name": "FIRST 集合",
+          "body": "$$\n\\mathrm{FIRST}(\\alpha)\n$$\n\n 是从 $\\alpha$ 能推导出的所有串的首终结符号的集合，若 $\\alpha \\Rightarrow \\epsilon$ 则 $\\epsilon$ 也在其中。\n\n计算规则：\n1. $X$ 是终结符：$\\mathrm{FIRST}(X)=\\{X\\}$。\n2. $X \\to Y_1Y_2\\cdots Y_k$：先加入 $\\mathrm{FIRST}(Y_1)$ 中非 $\\epsilon$ 符号；若 $Y_1 \\Rightarrow \\epsilon$，则继续加入 $\\mathrm{FIRST}(Y_2)$ 的非 $\\epsilon$ 符号；若所有 $Y_i$ 都能推出 $\\epsilon$，则 $\\epsilon$ 也加入。\n3. $X \\to \\epsilon$：$\\epsilon$ 加入 $\\mathrm{FIRST}(X)$。\n\n例：文法 (4.28) 中 $F \\to (E) \\mid id$，所以 $\\mathrm{FIRST}(F)=\\{\\,(\\,,\\ id\\,\\}$。$T \\to FT'$，因 $F$ 不能推出 $\\epsilon$，所以 $\\mathrm{FIRST}(T)=\\mathrm{FIRST}(F)=\\{\\,(\\,,\\ id\\,\\}$。",
+          "sourceMessageIndexes": [
+            13,
+            14,
+            15
+          ]
+        },
+        {
+          "name": "FOLLOW 集合",
+          "body": "$$\n\\mathrm{FOLLOW}(A)\n$$\n\n 是可能在某些句型中紧跟在 $A$ 右侧出现的终结符号的集合。\n\n计算规则：\n1. 把 $\\$$ 放入 $\\mathrm{FOLLOW}(S)$，$S$ 是开始符号。\n2. 对产生式 $A \\to \\alpha B\\beta$，把 $\\mathrm{FIRST}(\\beta)$ 中除 $\\epsilon$ 外的所有符号放入 $\\mathrm{FOLLOW}(B)$。\n3. 对 $A \\to \\alpha B$，或者 $A \\to \\alpha B\\beta$ 且 $\\mathrm{FIRST}(\\beta)$ 含 $\\epsilon$，把 $\\mathrm{FOLLOW}(A)$ 全部放入 $\\mathrm{FOLLOW}(B)$。\n\n例：文法 (4.28) 中 $E \\to TE'$，$E' \\Rightarrow \\epsilon$，所以 $\\mathrm{FOLLOW}(E)$ 应继承给 $\\mathrm{FOLLOW}(T)$。$\\$$ 由规则1进入 $\\mathrm{FOLLOW}(E)$，$)$ 由规则2（来自 $F \\to (E)$）进入 $\\mathrm{FOLLOW}(E)$，再经规则3传递给 $\\mathrm{FOLLOW}(T)$，得到 $\\mathrm{FOLLOW}(T)=\\{\\,+\\,,\\ )\\,,\\ \\$\\,\\}$。",
+          "sourceMessageIndexes": [
+            15,
+            17,
+            18,
+            19
+          ]
+        },
+        {
+          "name": "LL(1) 文法",
+          "body": "名字含义：第一个 L 表示从左到右扫描输入，第二个 L 表示产生最左推导，1 表示每步只需看一个输入符号。\n\n判定条件：对任意两条不同产生式 $A \\to \\alpha \\mid \\beta$，必须满足：\n1. 不存在终结符 $a$ 使 $\\alpha$ 和 $\\beta$ 都能推出以 $a$ 开头的串（即 $\\mathrm{FIRST}(\\alpha) \\cap \\mathrm{FIRST}(\\beta) = \\emptyset$）；\n2. $\\alpha$ 和 $\\beta$ 中最多一个能推出 $\\epsilon$；\n3. 若 $\\beta \\Rightarrow \\epsilon$，则 $\\mathrm{FIRST}(\\alpha)$ 与 $\\mathrm{FOLLOW}(A)$ 不相交，反之亦然。\n\n例：$stmt \\to \\text{if }(expr)\\ stmt \\mid \\text{while }(expr)\\ stmt \\mid \\{\\ stmt\\ \\}$ 是 LL(1) 的，因为 $\\mathrm{FIRST}$ 集合两两不相交。",
+          "sourceMessageIndexes": [
+            19,
+            20,
+            21
+          ]
+        },
+        {
+          "name": "预测分析表的构造",
+          "body": "预测分析表 $M[A,a]$ 的行是非终结符，列是终结符或 $\\$$。\n\n构造算法：对每条产生式 $A \\to \\alpha$：\n1. 对 $\\mathrm{FIRST}(\\alpha)$ 中每个终结符 $a$，把 $A \\to \\alpha$ 填入 $M[A,a]$；\n2. 若 $\\epsilon \\in \\mathrm{FIRST}(\\alpha)$，则对 $\\mathrm{FOLLOW}(A)$ 中每个 $b$，把 $A \\to \\alpha$ 填入 $M[A,b]$。\n\n未填的格子为 error。\n\n例：对 $E' \\to +TE' \\mid \\epsilon$，$+$ 在 $\\mathrm{FIRST}(+TE')$ 中，填 $M[E',+]$；$\\epsilon$ 在 $\\mathrm{FIRST}(\\epsilon)$ 中，查 $\\mathrm{FOLLOW}(E')$，将 $E' \\to \\epsilon$ 填入相应格。",
+          "sourceMessageIndexes": [
+            21,
+            22
+          ]
+        }
+      ]
+    },
+    {
+      "type": "key-insight",
+      "content": "因为会不断调用展开A，陷入死循环，甚至来不及消费向前看字符。",
+      "sourceMessageIndexes": [
+        12
+      ]
+    },
+    {
+      "type": "open-question",
+      "content": "FOLLOW(E') 中除了 $ 和 ) 之外是否还有其他符号？如何根据规则3从 FOLLOW(E) 推出 FOLLOW(E') 包含 ) ？"
+    },
+    {
+      "type": "key-terms",
+      "items": [
+        {
+          "term": "左递归",
+          "definition": "文法中存在 $A \\Rightarrow A\\alpha$ 的推导。"
+        },
+        {
+          "term": "提取左公因子",
+          "definition": "将有公共前缀 $\\alpha$ 的产生式 $A \\to \\alpha\\beta_1 \\mid \\alpha\\beta_2$ 改写为 $A \\to \\alpha A', A' \\to \\beta_1 \\mid \\beta_2$。"
+        },
+        {
+          "term": "FIRST 集合",
+          "definition": "$\\mathrm{FIRST}(\\alpha)$ 是从 $\\alpha$ 可推导出的所有串的首终结符号集合，若 $\\alpha \\Rightarrow \\epsilon$ 则含 $\\epsilon$。"
+        },
+        {
+          "term": "FOLLOW 集合",
+          "definition": "$\\mathrm{FOLLOW}(A)$ 是可能在某些句型中紧跟在 $A$ 右侧的终结符号集合。"
+        },
+        {
+          "term": "LL(1) 文法",
+          "definition": "从左到右扫描、产生最左推导、每步只看一个输入符号即可确定动作的文法。"
+        },
+        {
+          "term": "预测分析表",
+          "definition": "由 FIRST 和 FOLLOW 集合构造的二维表 $M[A,a]$，用于指导非终结符 $A$ 在面对输入 $a$ 时的产生式选择。"
+        }
+      ]
+    },
+    {
+      "type": "review-questions",
+      "items": [
+        {
+          "question": "将文法 $S \\to Aa \\mid b, A \\to Ac \\mid Sd \\mid \\epsilon$ 中的 $S \\to Aa \\mid b$ 代入 $A \\to Sd$，得到哪两条产生式？其中哪一条使 $A$ 成为直接左递归？",
+          "answer": "得到 $A \\to Aad$ 和 $A \\to bd$。$A \\to Aad$ 是直接左递归。"
+        },
+        {
+          "question": "为什么提取左公因子后，选择产生式的决定被推迟了？以悬空-else 文法为例说明。",
+          "answer": "因为公共前缀被提取到新非终结符 $A'$ 之前，必须先读完公共前缀，到达新非终结符 $A'$ 时，才根据下一个输入符号在 $A'$ 的各候选产生式中选择。例如 $stmt \\to \\text{if } expr \\text{ then } stmt\\ S', S' \\to \\text{else } stmt \\mid \\epsilon$，先读完 $\\text{if } expr \\text{ then } stmt$，再看下一个符号是否为 $\\text{else}$ 来决定走哪条。"
+        },
+        {
+          "question": "计算 $\\mathrm{FIRST}(T)$ 时，为什么结果与 $\\mathrm{FIRST}(F)$ 相同？",
+          "answer": "因为 $T \\to FT'$，且 $F$ 不能推出 $\\epsilon$，所以 $T'$ 永远不可能出现在首位，$T$ 的首终结符号完全由 $F$ 决定，故 $\\mathrm{FIRST}(T)=\\mathrm{FIRST}(F)$。"
+        },
+        {
+          "question": "FOLLOW 规则3的内容是什么？它在计算 $\\mathrm{FOLLOW}(T)$ 时如何起作用（以文法 (4.28) 为例）？",
+          "answer": "规则3：对 $A \\to \\alpha B$ 或 $A \\to \\alpha B\\beta$ 且 $\\mathrm{FIRST}(\\beta)$ 含 $\\epsilon$，把 $\\mathrm{FOLLOW}(A)$ 全部放入 $\\mathrm{FOLLOW}(B)$。在 (4.28) 中，$E \\to TE'$，$E' \\Rightarrow \\epsilon$，故 $\\mathrm{FOLLOW}(E)$ 应整体继承给 $\\mathrm{FOLLOW}(T)$。而已知 $\\mathrm{FOLLOW}(E)$ 含 $)$ 和 $\\$$，所以它们进入 $\\mathrm{FOLLOW}(T)$。"
+        },
+        {
+          "question": "预测分析表中，当 $\\epsilon \\in \\mathrm{FIRST}(A \\to \\alpha)$ 时，应如何填写 $M[A,a]$？为什么？",
+          "answer": "应对 $\\mathrm{FOLLOW}(A)$ 中每个符号 $b$，把 $A \\to \\alpha$ 填入 $M[A,b]$。因为 $\\alpha$ 可推导出空串，表示该产生式不消耗任何输入符号，此时是否选用它取决于 $A$ 后面预期出现的符号，即 $\\mathrm{FOLLOW}(A)$。"
+        }
+      ]
+    }
+  ],
+  "generationMeta": {
+    "pipelineVersion": "post-class-v2",
+    "mode": "short",
+    "jobId": "pn_mv263n53f0d9b070e1b5",
+    "traceId": "tr_mv263n53c191253c0b55",
+    "sourceHash": "sha256:7d0767c89a3f8d6016fd0ba5347408184bbf3c33662b3ebe4e950178b7ee1aa5",
+    "sourceMessageCount": 27,
+    "chunkCount": 0,
+    "generatedAt": 1791623056261,
+    "decision": "remerge",
+    "quality": {
+      "score": 0.5147,
+      "metrics": {
+        "topicCoverage": 1,
+        "learnerEvidenceCoverage": 1,
+        "explanationCoverage": 1,
+        "sourceIntegrity": 1,
+        "reviewQuestionDiversity": 0.7468354430379747,
+        "structureValidity": 1,
+        "lengthFitness": 0,
+        "duplicationRatio": 0,
+        "unsupportedTopicRatio": 1,
+        "lengthChars": 5345,
+        "conceptCount": 8,
+        "evidenceTopicCount": 0,
+        "chunkCompleteness": 1
+      }
+    },
+    "warnings": [
+      "8 concept(s) have no chunk-evidence source"
+    ],
+    "evidenceIndex": [],
+    "degradedReason": null
+  }
+}

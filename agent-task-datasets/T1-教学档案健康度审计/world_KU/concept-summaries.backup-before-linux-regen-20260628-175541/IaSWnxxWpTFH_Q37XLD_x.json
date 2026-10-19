@@ -1,0 +1,144 @@
+{
+  "conversationId": "IaSWnxxWpTFH_Q37XLD_x",
+  "generatedAt": 1781060452107,
+  "pagesRange": null,
+  "sections": [
+    {
+      "type": "tldr",
+      "content": "本节课核心：Linux 文件系统从根目录 `/` 开始，掌握路径、通配符和常用目录/文件操作命令，就能在终端里定位、查找、复制、移动和删除文件。"
+    },
+    {
+      "type": "narrative",
+      "content": "一开始把 `/home` 误认为“树根”，后来明确了真正的根目录是 `/`，并能用父目录 `..` 一层层向上退。随后从通配符匹配进入常用命令：`ls`、`pwd`、`cd`、`mkdir`、`rmdir`、`rm`、`mv`、`cp`、`find`，逐步建立起 Linux 目录操作的基本地图。"
+    },
+    {
+      "type": "concepts",
+      "items": [
+        {
+          "name": "Linux 路径与根目录",
+          "body": "Linux 的目录结构像一棵树，真正的树根是最前面的 `/`。\n\n例：\n```bash\n/home/离散数学/docs/a.txt\n```\n可以拆成：\n\n- `/`：根目录\n- `home`：根目录下的目录\n- `离散数学`：`/home` 下的目录\n- `docs`：再下一层目录\n- `a.txt`：文件\n\n容易混淆点：`/home` 很常用，像“家”，但它不是整个系统的根；整个 Linux 的根只有 `/`。"
+        },
+        {
+          "name": "常见系统目录",
+          "body": "本节提到的常见目录：\n\n- `/`：根目录，所有路径的起点\n- `/home`：普通用户主目录通常放在这里\n- `/tmp`：临时目录，通常大家都能读写\n- `/etc`：系统配置文件\n- `/dev`：设备对应的文件\n- `/proc`：当前进程和系统信息，主要存在内存中\n\n例如普通用户 `alice` 的主目录通常是：\n```bash\n/home/alice\n```\n也可以用 `~` 简写表示当前用户的主目录。对 `alice` 来说：\n```bash\n~/docs\n```\n通常等价于：\n```bash\n/home/alice/docs\n```"
+        },
+        {
+          "name": "`.` 与 `..`",
+          "body": "两个重要路径符号：\n\n- `.`：当前目录\n- `..`：父级目录\n\n例如当前目录是：\n```bash\n/home/alice/docs\n```\n那么：\n\n- `..` 指向 `/home/alice`\n- `../pics` 指向 `/home/alice/pics`\n- 执行 `cd ..` 会进入 `/home/alice`\n\n理解技巧：`cd ..` 就是把当前路径最右边那一级删掉。"
+        },
+        {
+          "name": "Shell 文件名通配符",
+          "body": "通配符由 shell 先展开成具体文件名，它不是正则表达式。\n\n常见通配符：\n\n- `*`：匹配任意长度字符串，也可以是空字符串\n- `?`：匹配任意一个字符\n- `[abc]`：匹配括号中任意一个字符\n- `[!abc]`：匹配不在括号中的任意一个字符\n- `[a-c]`：范围写法，等价于 `[abc]`\n\n例：当前目录有：\n```bash\\na.txt\\nab.txt\\nabc.txt\\nb.txt\n```\n\n`a?.txt` 只匹配：\n```bash\\nab.txt\n```\n因为 `?` 只能匹配一个字符。\n\n`a*.txt` 匹配：\n```bash\\na.txt\\nab.txt\\nabc.txt\n```\n因为 `*` 可以匹配任意长度，包括空字符串。\n\n注意：一般情况下，`*` 不会匹配隐藏文件开头的点，所以 `*.txt` 通常不会匹配 `.secret.txt`。"
+        },
+        {
+          "name": "通配符与引号",
+          "body": "如果通配符放在引号里，shell 不会展开它，而是把它当作字面量。\n\n例如当前目录有：\n```bash\\na.txt\\nb.txt\n```\n执行：\n```bash\\nls \"*.txt\"\n```\\nshell 不会把 `*.txt` 展开成 `a.txt b.txt`，而是把字面量 `*.txt` 传给 `ls`。\n\n如果当前目录没有真的叫 `*.txt` 的文件，就会报找不到。"
+        },
+        {
+          "name": "`ls`：列出目录内容",
+          "body": "`ls` 用来列目录内容。\n\n常见参数：\n\n- `-a`：显示所有文件，包括隐藏文件，如 `.config`\n- `-l`：长格式显示，可看到权限、所有者、大小、时间等\n- `-F`：在文件名后加类型标记\n\n组合参数例：\n```bash\\nls -al\n```\n等价于：\n```bash\\nls -a -l\n```\n表示既显示隐藏文件，又用长格式显示。\n\n`ls -F` 的常见标记：\n\n- `docs/`：目录\n- `run.sh*`：可执行文件\n- `link@`：符号链接\n\n符号链接可以先理解成“快捷方式”：它指向另一个文件或目录。"
+        },
+        {
+          "name": "`pwd` 与 `cd`",
+          "body": "`pwd` 显示当前工作目录，也就是“我现在站在哪里”。\n\n例：当前在 `/home/alice/project`，执行：\n```bash\\npwd\n```\n输出：\n```bash\n/home/alice/project\n```\n\n`cd` 用来切换目录。常见写法：\n\n```bash\\ncd /etc\\ncd ..\\ncd\\ncd ~\\ncd -\n```\n\n含义：\n\n- `cd /etc`：进入 `/etc`\n- `cd ..`：进入父目录\n- `cd`：不带参数，回到用户主目录\n- `cd ~`：回到用户主目录\n- `cd -`：回到上一次所在目录\n\n例：\n```bash\n/home/alice/project\\ncd /etc\\ncd -\n```\n会回到：\n```bash\n/home/alice/project\n```\n\n`cd -` 适合在两个目录之间来回切换。"
+        },
+        {
+          "name": "`mkdir`、`rmdir`、`rm -r`",
+          "body": "`mkdir` 用来创建目录。\n\n创建单层目录：\n```bash\\nmkdir test\n```\n\n创建多级目录要用 `-p`：\n```bash\\nmkdir -p aa/bb/cc\n```\n如果不加 `-p`，而 `aa` 和 `bb` 原本都不存在：\n```bash\\nmkdir aa/bb/cc\n```\n会失败，因为前面的路径不存在。\n\n`rmdir` 只能删除空目录：\n```bash\\nrmdir empty\n```\n如果 `logs/` 里面有 `a.log`，执行：\n```bash\\nrmdir logs\n```\n不会成功。\n\n删除非空目录要用更危险的递归删除：\n```bash\\nrm -r logs\n```\n\n`rm -rf logs` 中：\n\n- `-r`：递归删除目录及其内容\n- `-f`：强制删除、忽略不存在文件、不提示\n\n注意：`rm -r` 和 `rm -rf` 很危险，使用前要确认路径。"
+        },
+        {
+          "name": "`mv`：移动或改名",
+          "body": "`mv` 有两个核心用途：改名和移动。\n\n改名：\n```bash\\nmv old.txt new.txt\n```\n如果执行：\n```bash\\nmv report.txt final.txt\n```\n结果是 `report.txt` 改名为 `final.txt`，不是复制一份。\n\n移动到已有目录：\n```bash\\nmv final.txt backup/\n```\n如果 `backup/` 是已经存在的目录，结果是：\n```bash\\nbackup/final.txt\n```\n\n多个文件移动到目录：\n```bash\\nmv a.txt b.txt docs/\n```\n如果 `docs/` 已存在，结果是：\n```bash\\ndocs/a.txt\\ndocs/b.txt\n```\n\n规则：`mv 多个源文件 已有目录/`，最后一个参数必须是目录。"
+        },
+        {
+          "name": "`cp`：复制文件或目录",
+          "body": "`cp` 的核心是复制，和 `mv` 最大区别是：原位置的文件还在。\n\n复制文件到目录：\n```bash\\ncp a.txt docs/\n```\n执行后：\n\n- 当前目录里的 `a.txt` 还在\n- `docs/` 里多出 `docs/a.txt`\n\n复制多个文件：\n```bash\\ncp a.txt b.txt docs/\n```\n结果是 `docs/` 里出现：\n```bash\\na.txt\\nb.txt\n```\n原位置的 `a.txt`、`b.txt` 也还在。\n\n复制目录默认要加 `-r` 或 `-R`：\n```bash\\ncp -r mydir backup/\n```\n如果 `backup/` 已存在，结果是：\n```bash\\nbackup/mydir\n```\n如果 `mydir/` 里有 `a.txt`，复制后路径是：\n```bash\\nbackup/mydir/a.txt\n```\n\n`cp -a` 也能复制目录，并尽量保留原属性，如时间戳、符号链接等。可以先记成：\n\n- `-r`：递归复制目录内容\n- `-a`：像打包搬家一样，尽量保留身份信息\n\n`cp -r project backup/` 与 `mv project backup/` 的区别：\n\n- `cp -r`：复制一份，原来的 `project/` 还在\n- `mv`：移动过去，原位置没有 `project/` 了"
+        },
+        {
+          "name": "`find`：查找文件",
+          "body": "`find` 像“搜索小侦探”，基本形式是：\n```bash\\nfind [目录] [选项] [动作]\n```\n\n例：\n```bash\\nfind /home/alice -name \"*.txt\"\n```\n意思是在 `/home/alice` 下面按名字找所有匹配 `*.txt` 的文件。\n\n重要细节：`\"*.txt\"` 要加引号，否则 shell 可能会先展开通配符，`find` 就拿不到原本的模式。\n\n在当前目录及子目录中查找所有以 `.log` 结尾的文件：\n```bash\\nfind ./ -name \"*.log\"\n```\n其中：\n\n- `./`：从当前目录开始找\n- `-name \"*.log\"`：按文件名匹配以 `.log` 结尾的名字\n\n本节最后还提到可以用 `-type d` 限定只找目录。"
+        }
+      ]
+    },
+    {
+      "type": "key-insight",
+      "content": "“`cp` 是将 `project` 复制一份到 `backup/` 中，`mv` 是将 `project` 移动到 `backup/` 中。”",
+      "attribution": "学习者"
+    },
+    {
+      "type": "key-terms",
+      "items": [
+        {
+          "term": "根目录 `/`",
+          "definition": "Linux 文件系统的最顶层目录，所有绝对路径都从这里开始。"
+        },
+        {
+          "term": "主目录 `~`",
+          "definition": "当前用户的家目录；普通用户 `alice` 通常对应 `/home/alice`。"
+        },
+        {
+          "term": "父目录 `..`",
+          "definition": "当前目录的上一级目录，常用于 `cd ..`。"
+        },
+        {
+          "term": "隐藏文件",
+          "definition": "文件名以点开头的文件，如 `.config`；普通 `ls` 默认不显示，`ls -a` 会显示。"
+        },
+        {
+          "term": "通配符",
+          "definition": "由 shell 用来匹配文件名模式的符号，如 `*`、`?`、`[abc]`。"
+        },
+        {
+          "term": "符号链接",
+          "definition": "类似快捷方式的文件，指向另一个文件或目录；`ls -F` 中常显示为 `@`。"
+        },
+        {
+          "term": "递归删除",
+          "definition": "对目录及其内部所有子目录、文件一起删除；常见命令是 `rm -r`。"
+        },
+        {
+          "term": "递归复制",
+          "definition": "复制目录本身及其内部内容；常见命令是 `cp -r`。"
+        }
+      ]
+    },
+    {
+      "type": "open-question",
+      "content": "下次可以继续完成最后一个自然延伸：如何用 `find ./ -type d -name \"backup\"` 这类写法，在当前目录下只查找名字叫 `backup` 的目录。"
+    },
+    {
+      "type": "review-questions",
+      "items": [
+        {
+          "question": "路径 `/tmp/test.log` 的父目录是什么？",
+          "hint": "注意最前面的 `/` 表示根目录。",
+          "answer": "父目录是：\n```bash\n/tmp\n```\n不是单独的 `tmp`。"
+        },
+        {
+          "question": "当前目录有 `a.txt`、`ab.txt`、`abc.txt`、`b.txt`，`a?.txt` 和 `a*.txt` 分别匹配哪些？",
+          "answer": "`a?.txt` 只匹配：\n```bash\\nab.txt\n```\n因为 `?` 只匹配一个字符。\n\n`a*.txt` 匹配：\n```bash\\na.txt\\nab.txt\\nabc.txt\n```\n因为 `*` 可以匹配任意长度，包括空字符串。"
+        },
+        {
+          "question": "为什么 `ls \"*.txt\"` 不会列出当前目录下所有 `.txt` 文件？",
+          "answer": "因为 `*.txt` 被引号保护起来了，shell 不会展开通配符。`ls` 收到的是字面量文件名：\n```bash\n*.txt\n```\n如果没有真的叫这个名字的文件，就会报错。"
+        },
+        {
+          "question": "当前目录是 `/home/alice/project`，依次执行 `cd /etc`、`cd -`、`cd -`，最后在哪个目录？",
+          "answer": "最后在：\n```bash\n/etc\n```\n过程：先从 `/home/alice/project` 到 `/etc`，第一次 `cd -` 回 `/home/alice/project`，第二次 `cd -` 再回 `/etc`。"
+        },
+        {
+          "question": "`rmdir logs` 和 `rm -r logs` 的区别是什么？",
+          "answer": "`rmdir logs` 只能删除空目录；如果 `logs/` 里有文件或子目录，会失败。\n\n`rm -r logs` 会递归删除 `logs/` 以及里面的内容，所以能删除非空目录，但更危险。"
+        },
+        {
+          "question": "如果 `project/` 里有 `main.c`，执行 `cp -r project backup/` 后，新文件路径是什么？原来的 `project/` 还在吗？",
+          "answer": "新文件路径是：\n```bash\\nbackup/project/main.c\n```\n原来的 `project/` 还在，因为 `cp -r` 是复制，不是移动。"
+        },
+        {
+          "question": "在当前目录及其子目录中查找所有以 `.log` 结尾的文件，命令怎么写？为什么模式要加引号？",
+          "answer": "命令：\n```bash\\nfind ./ -name \"*.log\"\n```\n加引号是为了防止 shell 提前展开 `*.log`，让 `find` 能拿到原始匹配模式。"
+        }
+      ]
+    }
+  ]
+}

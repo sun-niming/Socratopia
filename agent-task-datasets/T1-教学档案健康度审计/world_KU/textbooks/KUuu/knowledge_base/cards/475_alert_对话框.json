@@ -1,0 +1,41 @@
+{
+  "title": "alert 对话框",
+  "definition": "window.alert([message]) 用于弹出消息提示框。它接受一个参数 message，浏览器会创建一个只有一个按钮的消息框。",
+  "key_points": [
+    "调用形式：window.alert([message])",
+    "message 是要显示给用户的内容",
+    "调用后浏览器会创建单按钮消息框"
+  ],
+  "examples": [
+    "alert('操作完成')"
+  ],
+  "misconceptions": [
+    "alert 不是确认框，不提供“确定/取消”两个选项",
+    "alert 只用于显示信息，不返回用户输入"
+  ],
+  "qa_pairs": [
+    {
+      "q": "alert() 会弹出什么类型的对话框？",
+      "a": "单按钮的消息框。"
+    },
+    {
+      "q": "alert() 接受几个参数？",
+      "a": "一个参数，即要显示的内容。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "window 对象"
+  ],
+  "source_pages": [
+    333,
+    336
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "475_alert_对话框",
+  "_chunk_pages": [
+    333,
+    336
+  ]
+}

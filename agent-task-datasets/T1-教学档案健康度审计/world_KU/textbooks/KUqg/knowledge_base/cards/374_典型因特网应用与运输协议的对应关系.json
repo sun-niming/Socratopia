@@ -1,0 +1,46 @@
+{
+  "title": "典型因特网应用与运输协议的对应关系",
+  "definition": "不同应用根据对可靠性、实时性、连接建立时延和拥塞控制等方面的需求，选择TCP或UDP作为下面的运输协议。教材列举的典型对应关系包括：电子邮件使用SMTP over TCP，远程终端访问使用Telnet over TCP，Web使用HTTP over TCP，文件传输使用FTP over TCP，网络管理通常使用SNMP over UDP，名字转换通常使用DNS over UDP；流式多媒体和因特网电话通常可使用专用协议并运行在UDP或TCP之上。",
+  "key_points": [
+    "电子邮件：应用层协议SMTP，下面的运输协议为TCP。",
+    "远程终端访问：Telnet，下面的运输协议为TCP。",
+    "Web：HTTP，下面的运输协议为TCP。",
+    "文件传输：FTP，下面的运输协议为TCP。",
+    "网络管理：SNMP，通常使用UDP。",
+    "名字转换：DNS，通常使用UDP。",
+    "流式多媒体和因特网电话：通常使用专用应用层协议，下面可以是UDP或TCP。"
+  ],
+  "examples": [
+    "可将教材中的关系概括为：$$\\begin{array}{c|c|c} \\text{应用} & \\text{应用层协议} & \\text{运输协议}\\\\ \\hline \\text{电子邮件} & \\text{SMTP} & \\text{TCP}\\\\ \\text{远程终端访问} & \\text{Telnet} & \\text{TCP}\\\\ \\text{Web} & \\text{HTTP} & \\text{TCP}\\\\ \\text{文件传输} & \\text{FTP} & \\text{TCP}\\\\ \\text{网络管理} & \\text{SNMP} & \\text{通常UDP}\\\\ \\text{名字转换} & \\text{DNS} & \\text{通常UDP} \\end{array}$$"
+  ],
+  "misconceptions": [
+    "应用使用UDP并不表示该应用完全没有可靠性要求；应用可以在UDP之上自行实现可靠性。",
+    "流式多媒体和因特网电话并非只能使用UDP，教材指出它们也可能使用TCP。",
+    "运输协议的选择取决于应用需求，不是由应用名称机械决定的。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "教材中DNS通常使用哪一种运输协议？为什么？",
+      "a": "DNS通常使用UDP，主要原因是UDP不需要TCP的连接建立过程，可以避免连接创建时延。"
+    },
+    {
+      "q": "Web通常使用哪一种运输协议？",
+      "a": "Web通常使用TCP，因为Web网页中的文本数据通常需要可靠数据传输。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "TCP与UDP的基本区别"
+  ],
+  "source_pages": [
+    149,
+    150
+  ],
+  "needs_verification": true,
+  "verify_query": "《计算机网络 自顶向下方法》第7版 图3-6 流行的因特网应用及其下面的运输协议 SMTP Telnet HTTP FTP NFS SNMP DNS",
+  "concept_id": "374_典型因特网应用与运输协议的对应关系",
+  "_chunk_pages": [
+    149,
+    152
+  ]
+}

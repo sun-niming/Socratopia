@@ -1,0 +1,43 @@
+{
+  "title": "C++输出流与std::cout",
+  "definition": "std::cout 是连接到用户控制台或标准输出的输出流。使用 << 运算符可以把文本、数字等数据依次放入输出流，因此一条语句可以连续输出多个不同类型的值。",
+  "key_points": [
+    "std::cout 通常用于向标准输出写入数据。",
+    "<< 是流插入运算符，用于把数据送入输出流。",
+    "同一条语句可以连续输出字符串、数字和其他字符串。",
+    "从 C++20 开始，教材推荐使用定义在 <format> 中的 std::format 格式化字符串，再将格式化结果输出。"
+  ],
+  "examples": [
+    "std::cout << \"There are \" << 219 << \" ways I love you.\" << std::endl;",
+    "std::cout << std::format(\"There are {} ways I love you.\", 219) << std::endl;"
+  ],
+  "misconceptions": [
+    "<< 在 std::cout 的语境中不是位移操作，而是把数据插入输出流的运算符。",
+    "std::format 本身负责按格式生成字符串；要显示到控制台，仍可将其结果送入 std::cout。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何使用 std::cout 连续输出文本和数字？",
+      "a": "使用 << 运算符依次插入各项，例如 std::cout << \"There are \" << 219 << \" ways I love you.\" << std::endl;。"
+    },
+    {
+      "q": "C++20 中教材推荐用什么方式格式化输出字符串？",
+      "a": "推荐使用定义在 <format> 中的 std::format，例如 std::format(\"There are {} ways I love you.\", 219)。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++头文件与标准库基础"
+  ],
+  "source_pages": [
+    37,
+    37
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "046_c_输出流与std_cout",
+  "_chunk_pages": [
+    37,
+    40
+  ]
+}

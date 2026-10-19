@@ -1,0 +1,36 @@
+{
+  "title": "std::string 的 constexpr 特性",
+  "definition": "std::string 是 constexpr 类，因此可以在编译期执行相关操作，也可以用于 constexpr 函数和 constexpr 类的实现。",
+  "key_points": [
+    "constexpr 特性表示相关 string 操作可以在编译期求值，但具体操作仍需满足 C++ 的常量表达式规则。",
+    "std::string 的 constexpr 支持使其能够参与 constexpr 函数和类的实现。"
+  ],
+  "examples": [
+    "可以在满足常量表达式要求的 constexpr 函数中使用 std::string 进行编译期字符串操作。"
+  ],
+  "misconceptions": [
+    "std::string 支持 constexpr 并不表示所有运行时字符串操作都必然在编译期执行。",
+    "constexpr 类不等于对象必须是 constexpr 对象。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "原文指出 std::string 的 constexpr 特性意味着什么？",
+      "a": "std::string 可以用于编译期执行操作，并可用于 constexpr 函数和类的实现。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++ constexpr 基本概念"
+  ],
+  "source_pages": [
+    109,
+    109
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "205_std_string_的_constexpr_特性",
+  "_chunk_pages": [
+    109,
+    112
+  ]
+}

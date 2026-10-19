@@ -1,0 +1,37 @@
+{
+  "title": "创建元素节点与文本节点",
+  "definition": "在 DOM 中，可以通过 document.createElement(tagName) 创建一个新的元素节点，通过 document.createTextNode(text) 创建一个新的文本节点。前者用于生成标签节点，后者用于生成纯文本节点。",
+  "key_points": [
+    "document.createElement(tagName) 创建元素节点",
+    "document.createTextNode(text) 创建文本节点",
+    "这两种方法都用于“创建”而不是“插入”节点"
+  ],
+  "examples": [
+    "document.createElement(tagName)",
+    "document.createTextNode(text)"
+  ],
+  "misconceptions": [
+    "以为 createElement 会直接把元素显示到页面上；实际上它只负责创建节点，是否出现在文档中还要再插入。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "document.createElement(tagName) 的作用是什么？",
+      "a": "创建一个新的元素节点。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "DOM 节点"
+  ],
+  "source_pages": [
+    357,
+    358
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "479_创建元素节点与文本节点",
+  "_chunk_pages": [
+    357,
+    360
+  ]
+}

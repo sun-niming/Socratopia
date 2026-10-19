@@ -1,0 +1,42 @@
+{
+  "title": "字节序与监听地址设置",
+  "definition": "在监听 socket 的地址配置中，端口需要用 `htons()` 转换为网络字节序；`htonl(INADDR_ANY)` 表示监听所有网卡上的地址。",
+  "key_points": [
+    "`htons()` 用于端口字节序转换。",
+    "`htonl(INADDR_ANY)` 表示监听所有网卡。",
+    "这些设置通常写入 `sockaddr_in` 结构体后再调用 `bind()`。"
+  ],
+  "examples": [
+    "`addr.sin_port = htons((uint16_t)port);`",
+    "`addr.sin_addr.s_addr = htonl(INADDR_ANY);`"
+  ],
+  "misconceptions": [
+    "`INADDR_ANY` 不是某一块特定网卡，而是所有网卡。",
+    "端口不能直接随便填入结构体，通常要做字节序转换。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`htons()` 用来做什么？",
+      "a": "用于端口字节序转换。"
+    },
+    {
+      "q": "`htonl(INADDR_ANY)` 表示什么？",
+      "a": "表示监听所有网卡。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "监听套接字初始化"
+  ],
+  "source_pages": [
+    13,
+    16
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "004_字节序与监听地址设置",
+  "_chunk_pages": [
+    13,
+    16
+  ]
+}

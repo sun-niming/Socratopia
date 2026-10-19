@@ -1,0 +1,47 @@
+{
+  "title": "TCP接收窗口与发送方发送约束",
+  "definition": "TCP通过接收窗口（receive window，记为 $rwnd$）向发送方通告接收方当前可用的缓存空间，从而实现流量控制。设接收缓存大小为 $RcvBuffer$，应用进程从缓存读出的最后一个字节编号为 $LastByteRead$，已到达网络并放入接收缓存的最后一个字节编号为 $LastByteRcvd$，则接收窗口为缓存中尚未使用的空间：$$rwnd=RcvBuffer-(LastByteRcvd-LastByteRead).$$为避免接收缓存溢出，发送方必须使已发送但尚未确认的数据量不超过接收窗口。",
+  "key_points": [
+    "接收缓存不能溢出，因此必须满足：$$LastByteRcvd-LastByteRead\\le RcvBuffer.$$",
+    "接收窗口的定义为：$$rwnd=RcvBuffer-(LastByteRcvd-LastByteRead).$$",
+    "接收窗口是动态变化的，因为应用读取数据和网络到达数据都会改变缓存占用量。",
+    "接收方把当前的 $rwnd$ 值放入发送给对端的TCP报文段的接收窗口字段中。",
+    "发送方维护 $LastByteSent$ 和 $LastByteAcked$，并须满足：$$LastByteSent-LastByteAcked\\le rwnd.$$",
+    "TCP是全双工的，连接两端的发送方都各自维护一个接收窗口。"
+  ],
+  "examples": [
+    "若 $RcvBuffer=10000$ 字节，缓存中已经到达但应用尚未读取的数据量为 $4000$ 字节，则：$$rwnd=10000-4000=6000\\text{ 字节}.$$",
+    "若发送方的 $LastByteSent=15000$、$LastByteAcked=10000$，则未确认数据量为：$$LastByteSent-LastByteAcked=5000.$$只有当当前通告的 $rwnd\\ge5000$ 时，发送方才满足该发送约束。"
+  ],
+  "misconceptions": [
+    "$rwnd$是固定不变的缓存大小；实际上$rwnd$表示当前可用空间，会随缓存读写动态变化。",
+    "$LastByteSent-LastByteAcked$表示接收缓存中已有的数据量；它表示发送方已发送但尚未被确认的数据量。",
+    "接收窗口只由发送方维护；接收方通告窗口，发送方据此限制未确认数据量，而全双工连接的两端都各自维护窗口。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "TCP接收窗口的计算公式是什么？",
+      "a": "$$rwnd=RcvBuffer-(LastByteRcvd-LastByteRead).$$"
+    },
+    {
+      "q": "发送方为什么必须满足$LastByteSent-LastByteAcked\\le rwnd$？",
+      "a": "因为左侧是已发送但未确认的数据量，将其限制在接收窗口以内，可以避免发送方使接收方的缓存溢出。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "TCP接收缓存",
+    "TCP确认机制"
+  ],
+  "source_pages": [
+    181,
+    184
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "442_tcp接收窗口与发送方发送约束",
+  "_chunk_pages": [
+    181,
+    184
+  ]
+}

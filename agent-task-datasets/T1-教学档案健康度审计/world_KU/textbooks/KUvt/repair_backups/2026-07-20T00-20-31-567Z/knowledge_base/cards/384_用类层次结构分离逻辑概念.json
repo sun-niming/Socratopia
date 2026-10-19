@@ -1,0 +1,45 @@
+{
+  "title": "用类层次结构分离逻辑概念",
+  "definition": "当类中存在可独立变化或可选的逻辑概念时，应通过类层次结构将它们分离，而不是把所有逻辑直接塞进一个基础类。这样，客户只需使用所需的基类或派生类，就可以避免链接和承担不需要的算法及库依赖。",
+  "key_points": [
+    "自动驾驶汽车应作为普通汽车 `Car` 的派生类，而不是把自动驾驶逻辑直接加入 `Car`。",
+    "如果同时存在汽车、卡车以及自动驾驶和非自动驾驶等多个维度，单一线性继承层次会变得复杂。",
+    "原文给出的思路是使用混入类模板，将自动驾驶功能与 `Car`、`Truck` 等基础类型组合。",
+    "这种分离可能需要编写多个类，但有助于明确分离功能。"
+  ],
+  "examples": [
+    "普通汽车和自动驾驶汽车可以表示为：`Car` 是基础类，`SelfDrivingCar` 派生自 `Car`。",
+    "对于多个类型维度，可使用混入类模板：\n`template <typename T>\\nclass SelfDrivable : public T { /* 自动驾驶算法 */ };`\n然后写作：\n`SelfDrivable<Car> selfDrivingCar;\\nSelfDrivable<Truck> selfDrivingTruck;`"
+  ],
+  "misconceptions": [
+    "把自动驾驶功能直接放进基础 `Car` 类并不适合所有程序，因为只需要普通汽车的程序也会被迫依赖自动驾驶相关逻辑和库。",
+    "混入类模板不是简单地把所有功能复制到每个类中，而是通过模板参数将功能组合到不同基础类型上。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么不应把自动驾驶逻辑直接加入普通 `Car` 类？",
+      "a": "因为只需要非自动驾驶汽车的程序也会继承或依赖自动驾驶逻辑，并可能被迫链接 vision、LIDAR 等不必要的库。"
+    },
+    {
+      "q": "`SelfDrivable<Car>` 的含义是什么？",
+      "a": "它表示用 `Car` 替换混入类模板中的类型参数 `T`，从而创建一个继承自 `Car`、并加入自动驾驶功能的类型。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "高内聚与单一责任原则",
+    "C++ 类继承",
+    "C++ 类模板"
+  ],
+  "source_pages": [
+    183,
+    184
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 mixin class template template <typename T> class SelfDrivable : public T 示例",
+  "concept_id": "384_用类层次结构分离逻辑概念",
+  "_chunk_pages": [
+    181,
+    184
+  ]
+}

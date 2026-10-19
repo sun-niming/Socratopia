@@ -1,0 +1,49 @@
+{
+  "title": "Spreadsheet 模块中的模块导入与导出",
+  "definition": "原文展示了 Spreadsheet 模块的基本组织方式：先在全局模块片段中包含定义 `size_t` 的 `<cstddef>`，再声明模块名 `spreadsheet`；由于 Spreadsheet 依赖 SpreadsheetCell，需要导入 `spreadsheet_cell` 模块，并通过导入并导出使 Spreadsheet 模块的用户也能看到 SpreadsheetCell 的模块内容。",
+  "key_points": [
+    "全局模块片段可写为：`module;`，随后包含标准头文件：`#include <cstddef>`。",
+    "模块声明形式为：`export module spreadsheet;`。",
+    "Spreadsheet 依赖 SpreadsheetCell 模块。",
+    "原文展示的转发式导入导出形式意图是：`export import spreadsheet_cell;`，使导入 Spreadsheet 模块的代码也能获得 SpreadsheetCell 模块的可见性。",
+    "`size_t` 定义在 `<cstddef>` 中；原文建议显式包含所需的 C++ 头文件。"
+  ],
+  "examples": [
+    "模块文件开头的示意结构：`module;`；`#include <cstddef>`；`export module spreadsheet;`；`export import spreadsheet_cell;`。"
+  ],
+  "misconceptions": [
+    "`export import` 不只是普通导入，它还把被导入模块的可见接口转发给当前模块的用户。",
+    "模块声明 `export module spreadsheet;` 与普通头文件包含不是同一件事。",
+    "使用 `size_t` 时仍应包含提供其定义的标准头文件，而不应依赖间接包含。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "Spreadsheet 模块为什么需要导入 SpreadsheetCell 模块？",
+      "a": "因为 Spreadsheet 类需要使用 SpreadsheetCell 类型。"
+    },
+    {
+      "q": "`export import spreadsheet_cell;` 的作用是什么？",
+      "a": "导入 spreadsheet_cell 模块，并使 Spreadsheet 模块的用户也能获得该模块的可见内容。"
+    },
+    {
+      "q": "原文中 `size_t` 来自哪个头文件？",
+      "a": "来自 `<cstddef>`。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++20模块基础",
+    "标准头文件包含"
+  ],
+  "source_pages": [
+    260,
+    260
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 modules export import spreadsheet_cell global module fragment cstddef size_t syntax",
+  "concept_id": "552_spreadsheet_模块中的模块导入与导出",
+  "_chunk_pages": [
+    257,
+    260
+  ]
+}

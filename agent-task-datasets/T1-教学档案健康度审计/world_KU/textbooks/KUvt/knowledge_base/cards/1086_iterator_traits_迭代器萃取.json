@@ -1,0 +1,48 @@
+{
+  "title": "iterator_traits 迭代器萃取",
+  "definition": "`iterator_traits` 是一个类模板，用于从迭代器类型中获取算法实现所需的类型信息。教材列出的类型别名包括：value_type（迭代器所指元素的类型）、difference_type（能够表示迭代器距离的类型）、iterator_category（迭代器类别标签）、pointer（元素指针类型）和 reference（元素引用类型）。迭代器类别标签包括 input_iterator_tag、output_iterator_tag、forward_iterator_tag、bidirectional_iterator_tag、random_access_iterator_tag，以及 C++20 的 contiguous_iterator_tag。",
+  "key_points": [
+    "`value_type` 表示迭代器所引用元素的类型。",
+    "`difference_type` 用于表示两个迭代器之间的距离。",
+    "`iterator_category` 描述迭代器支持的遍历类别。",
+    "`pointer` 和 `reference` 分别表示元素指针类型与元素引用类型。"
+  ],
+  "examples": [
+    "获取迭代器指向元素的类型：`typename std::iterator_traits<IteratorType>::value_type`。",
+    "典型声明：`typename std::iterator_traits<IteratorType>::value_type temp;`。",
+    "若 `v` 是 `vector<int>`，调用 `iteratorTraitsTest(cbegin(v))` 时，函数中的 `temp` 类型为 `int`。"
+  ],
+  "misconceptions": [
+    "`iterator_traits<Iter>::value_type` 是类型，不是一个运行时变量；依赖模板参数访问该类型时需要写 `typename`。",
+    "iterator_traits 不会把所有迭代器都变成随机访问迭代器，它只是描述给定迭代器实际提供的类型信息和类别。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何获取模板迭代器 IteratorType 所指元素的类型？",
+      "a": "使用 `typename std::iterator_traits<IteratorType>::value_type`。"
+    },
+    {
+      "q": "为什么访问 `iterator_traits<IteratorType>::value_type` 时需要 `typename`？",
+      "a": "因为该名称依赖模板类型参数，必须显式告诉编译器它表示一个类型。"
+    },
+    {
+      "q": "iterator_traits 的 value_type 表示什么？",
+      "a": "表示迭代器所引用元素的类型。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "容器迭代器类型别名与只读、反向访问"
+  ],
+  "source_pages": [
+    530,
+    530
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 std::iterator_traits value_type difference_type iterator_category pointer reference contiguous_iterator_tag 标准定义",
+  "concept_id": "1086_iterator_traits_迭代器萃取",
+  "_chunk_pages": [
+    529,
+    532
+  ]
+}

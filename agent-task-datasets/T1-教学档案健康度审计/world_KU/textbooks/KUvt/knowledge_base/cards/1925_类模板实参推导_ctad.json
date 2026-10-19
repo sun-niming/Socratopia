@@ -1,0 +1,46 @@
+{
+  "title": "类模板实参推导（CTAD）",
+  "definition": "类模板实参推导（Class Template Argument Deduction，CTAD）允许编译器根据构造函数实参推导类模板参数，因此创建对象时可以省略显式模板实参。对于 `SimpleWrapper<T>`，传入 `int` 对象时可写成 `SimpleWrapper intWrapper { i };`，也可以显式写成 `SimpleWrapper<int> intWrapper { i };`。",
+  "key_points": [
+    "CTAD 允许从构造函数参数推导类模板参数。",
+    "使用 CTAD 时可以省略尖括号中的模板实参。",
+    "不使用 CTAD 时可以显式指定模板实参，例如 `SimpleWrapper<int>`。",
+    "示例中，传入 `int` 变量会推导出 `T` 为 `int`；传入 `string` 变量会推导出 `T` 为 `string`。"
+  ],
+  "examples": [
+    "使用 CTAD：`int i { 7 }; SimpleWrapper intWrapper { i };`。",
+    "显式指定模板实参：`SimpleWrapper<int> intWrapper { i };`。",
+    "字符串示例：`string str { \"test\" }; SimpleWrapper stringWrapper { str };`。"
+  ],
+  "misconceptions": [
+    "CTAD 并不意味着类模板不再有模板参数；只是创建对象时由编译器推导参数。",
+    "CTAD 和函数模板参数推导不是同一个语法机制，但二者都能减少显式指定类型的需要。",
+    "是否能使用 CTAD 取决于类模板的构造函数及相关推导规则。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`SimpleWrapper intWrapper { i };` 中省略了什么？",
+      "a": "省略了类模板实参；编译器根据 `i` 的类型推导出 `SimpleWrapper<int>`。"
+    },
+    {
+      "q": "如何不使用 CTAD 创建包装整数的对象？",
+      "a": "写成 `SimpleWrapper<int> intWrapper { i };`。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++类模板基础",
+    "构造函数基础"
+  ],
+  "source_pages": [
+    930,
+    930
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1925_类模板实参推导_ctad",
+  "_chunk_pages": [
+    929,
+    932
+  ]
+}

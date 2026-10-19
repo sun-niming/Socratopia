@@ -1,0 +1,44 @@
+{
+  "title": "lambda 的值捕获与闭包状态",
+  "definition": "lambda 可以在捕获块中写出外部变量名，以值捕获该变量。值捕获会把变量复制为 lambda 闭包对象的数据成员，因此 lambda 可以使用这份副本；捕获变量的数据成员会具有与被捕获变量相同的 `const` 属性。",
+  "key_points": [
+    "捕获块中写变量名表示按值捕获，例如 `[data]`。",
+    "值捕获保存的是变量的副本，lambda 内对该副本的操作不会直接修改外部原变量。",
+    "捕获变量会成为闭包对象的数据成员。",
+    "未使用 `mutable` 时，lambda 的函数调用运算符默认为 `const`，即使按值捕获的是非 `const` 变量，也不能修改闭包中的副本。",
+    "外部变量本身是 `const` 时，按值捕获得到的数据成员也具有 `const` 属性。"
+  ],
+  "examples": [
+    "按值捕获并读取：`double data { 1.23 }; auto capturingLambda = [data] { cout << \"Data = \" << data << endl; };`。",
+    "可将其理解为闭包对象含有一个名为 `data` 的数据成员，并在 `operator()() const` 中读取该成员。"
+  ],
+  "misconceptions": [
+    "按值捕获不是引用外部变量；它保存的是捕获时的副本。",
+    "按值捕获非 `const` 变量并不意味着可以在 lambda 中修改该副本；默认的 `const` 调用运算符会阻止修改。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`[data]` 表示怎样捕获 `data`？",
+      "a": "表示按值捕获 `data`，把它复制到 lambda 闭包对象中。"
+    },
+    {
+      "q": "按值捕获后，在 lambda 中修改 `data` 会修改外部变量吗？",
+      "a": "不会；按值捕获操作的是闭包中的副本，而且默认调用运算符为 `const`，通常还不能修改该副本。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "lambda 表达式的基本语法"
+  ],
+  "source_pages": [
+    619,
+    620
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1278_lambda_的值捕获与闭包状态",
+  "_chunk_pages": [
+    617,
+    620
+  ]
+}

@@ -1,0 +1,50 @@
+{
+  "title": "多态内存分配器与 memory_resource",
+  "definition": "C++17 引入了多态内存分配器的概念。对于把分配器作为模板参数的容器，如果两个容器使用不同的分配器类型，它们的容器类型也不同，通常不能直接相互赋值。$\\texttt{std::pmr::polymorphic_allocator}$ 通过把分配行为依赖于构造时提供的 $\\texttt{memory_resource}$，而不是依赖于分配器模板类型参数，来缓解这种类型差异问题。因此，不同的多态分配器对象可以具有不同的内存分配行为，同时仍属于相同的分配器类型。",
+  "key_points": [
+    "不同 Allocator 模板类型会导致不同的容器类型。",
+    "$\\texttt{std::pmr::polymorphic_allocator}$ 的具体分配行为由构造时的 $\\texttt{memory_resource}$ 决定。",
+    "不同 $\\texttt{memory_resource}$ 的多态分配器虽然行为可能不同，但其分配器类型可以相同。",
+    "标准库提供了多种内置内存资源，例如同步池资源、非同步池资源和单调缓冲区资源。"
+  ],
+  "examples": [
+    "普通分配器模型中，使用不同 Allocator 类型的容器属于不同类型，不能简单地将一个容器赋值给另一个。",
+    "多态分配器的行为关系可以概括为：$\\texttt{polymorphic\\_allocator}$ 类型相同，但其底层 $\\texttt{memory\\_resource}$ 不同，因此分配和释放行为可以不同。",
+    "原文列举的内置资源包括 $\\texttt{synchronized\\_pool\\_resource}$、$\\texttt{unsynchronized\\_pool\\_resource}$ 和 $\\texttt{monotonic\\_buffer\\_resource}$。"
+  ],
+  "misconceptions": [
+    "多态分配器并不是让所有不同分配器的容器自动变成完全可互换的容器。",
+    "分配器类型相同不意味着不同分配器对象一定使用相同的内存资源。",
+    "$\\texttt{memory_resource}$ 决定的是具体分配行为，不是容器元素类型。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么不同 Allocator 模板参数会造成容器难以互相赋值？",
+      "a": "因为 Allocator 是容器类型的一部分，不同的 Allocator 模板参数会产生不同的容器类型。"
+    },
+    {
+      "q": "$\\texttt{std::pmr::polymorphic_allocator}$ 的分配行为由什么决定？",
+      "a": "由构造时提供的 $\\texttt{memory_resource}$ 决定，而不是由分配器的模板类型参数决定。"
+    },
+    {
+      "q": "多态分配器解决了什么主要问题？",
+      "a": "它使分配器的具体内存资源和行为可以在运行时由 $\\texttt{memory_resource}$ 决定，从而减轻不同分配器类型导致的容器类型差异问题。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "自定义 Allocator 的用途与风险",
+    "类模板类型参数"
+  ],
+  "source_pages": [
+    719,
+    719
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1494_多态内存分配器与_memory_resource",
+  "_chunk_pages": [
+    717,
+    720
+  ]
+}

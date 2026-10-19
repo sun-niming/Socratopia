@@ -1,0 +1,38 @@
+{
+  "title": "fork 与 accept 异常处理",
+  "definition": "服务器在 `fork` 后应让子进程直接用 `_exit(0)` 退出，父进程继续循环处理连接；如果 `accept` 被信号打断并返回 `EINTR`，应继续重试而不是直接失败。",
+  "key_points": [
+    "子进程在 fork 分支中用 `_exit(0)` 结束。",
+    "父进程继续循环接受后续连接。",
+    "`accept` 遇到 `EINTR` 时应 `continue` 重试。"
+  ],
+  "examples": [
+    "`if (pid == 0) { ... _exit(0); } else { while (1) { ... if (errno == EINTR) continue; } }`"
+  ],
+  "misconceptions": [
+    "子进程应该继续执行父进程的主循环。",
+    "`EINTR` 是严重错误，必须立刻退出。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "fork 之后子进程和父进程分别应该怎样处理？",
+      "a": "子进程执行完当前任务后用 `_exit(0)` 退出，父进程继续循环接受连接。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "fork/进程基础",
+    "socket accept 基础"
+  ],
+  "source_pages": [
+    113,
+    116
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "179_fork_与_accept_异常处理",
+  "_chunk_pages": [
+    113,
+    116
+  ]
+}

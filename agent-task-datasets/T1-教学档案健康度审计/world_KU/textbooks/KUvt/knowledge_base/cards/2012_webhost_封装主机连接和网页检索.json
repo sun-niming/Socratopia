@@ -1,0 +1,52 @@
+{
+  "title": "WebHost 封装主机连接和网页检索",
+  "definition": "WebHost 是一个面向对象的 RAII 包装类，用于封装与指定主机的连接以及网页检索。构造函数先创建临时 HostRecord，再使用其句柄建立连接并保存 `ConnectionHandle*`；析构函数关闭连接；`getPage` 检索网页，将 C 风格字符串转换为 `std::string`，释放 C 库分配的网页内存后返回结果。",
+  "key_points": [
+    "WebHost 保存连接句柄：`ConnectionHandle* m_connection { nullptr };`。",
+    "构造函数使用 HostRecord 查找主机；只有在 `hostRecord.get()` 非空时才调用 `connectToHost`。",
+    "HostRecord 是构造函数中的局部 RAII 对象，在构造函数结束时自动销毁；连接本身则保存到 WebHost 成员中供后续 `getPage` 使用。",
+    "析构函数在连接非空时调用 `closeConnection`。",
+    "`getPage` 调用 `retrieveWebPage`，把返回的 `char*` 转换为 `std::string`，然后调用 `freeWebPage` 释放原始内存。",
+    "WebHost 禁止复制构造和复制赋值。"
+  ],
+  "examples": [
+    "客户端用法：`WebHost myHost{\"www.wrox.com\"}; std::string result{myHost.getPage(\"/index.html\")};`。",
+    "`getPage` 的核心流程可表示为：$$\\text{C 字符串结果}\\xrightarrow{\\text{构造}}\\texttt{std::string}\\xrightarrow{\\texttt{freeWebPage}}\\text{释放原始内存}$$。"
+  ],
+  "misconceptions": [
+    "HostRecord 的销毁只释放主机记录句柄，不会关闭 WebHost 保存的连接；连接由 WebHost 析构函数关闭。",
+    "`getPage` 返回 `std::string` 后，调用者不需要再调用 `freeWebPage`。",
+    "WebHost 禁止复制并不表示它不能重复调用 `getPage`；同一对象可以用于检索页面。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "WebHost 构造函数为什么可以使用局部 HostRecord？",
+      "a": "HostRecord 负责在构造期间查找并管理主机记录。构造函数利用其句柄建立连接后，连接句柄被保存到 WebHost 成员中，因此 HostRecord 在构造函数结束时销毁不会影响已保存的连接。"
+    },
+    {
+      "q": "WebHost::getPage 需要执行哪些资源管理操作？",
+      "a": "它调用 `retrieveWebPage` 获取 `char*`，将其内容转换为 `std::string`，再调用 `freeWebPage` 释放 C 库分配的内存，最后返回字符串。"
+    },
+    {
+      "q": "WebHost 析构函数做什么？",
+      "a": "如果连接句柄非空，就调用 `closeConnection(m_connection)` 关闭与主机的连接。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "为 C 库编写面向对象包装器",
+    "RAII 资源管理",
+    "HostRecord 的 RAII 封装"
+  ],
+  "source_pages": [
+    977,
+    978
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "2012_webhost_封装主机连接和网页检索",
+  "_chunk_pages": [
+    977,
+    980
+  ]
+}

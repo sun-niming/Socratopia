@@ -1,0 +1,38 @@
+{
+  "title": "进程与监听检查",
+  "definition": "可以用进程查看命令和端口查看命令确认 webserver 是否已启动并在指定端口监听：`ps -ef | grep webserver` 用来找进程，`ss -lntp | grep 8080` 用来找 8080 端口监听信息。",
+  "key_points": [
+    "`ps -ef | grep webserver` 用于查看 webserver 进程是否存在。",
+    "`ss -lntp | grep 8080` 用于查看 8080 端口是否处于监听状态。",
+    "看到进程不等于一定已监听端口，两个检查要配合看。"
+  ],
+  "examples": [
+    "`ps -ef | grep webserver`",
+    "`ss -lntp | grep 8080`"
+  ],
+  "misconceptions": [
+    "只要有进程就一定能提供服务。",
+    "只查端口不查进程，无法确认到底是不是目标程序在监听。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "怎样同时确认 webserver 进程和 8080 端口监听状态？",
+      "a": "分别执行 `ps -ef | grep webserver` 和 `ss -lntp | grep 8080`。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "Linux 命令基础"
+  ],
+  "source_pages": [
+    113,
+    114
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "178_进程与监听检查",
+  "_chunk_pages": [
+    113,
+    116
+  ]
+}

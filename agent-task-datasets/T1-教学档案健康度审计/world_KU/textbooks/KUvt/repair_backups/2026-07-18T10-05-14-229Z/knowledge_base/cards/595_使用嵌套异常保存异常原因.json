@@ -1,0 +1,53 @@
+{
+  "title": "使用嵌套异常保存异常原因",
+  "definition": "C++ 标准库支持把一个异常作为另一个异常的嵌套异常保存。示例中，doSomething() 先抛出 std::runtime_error，再捕获它，并使用 std::throw_with_nested() 抛出 MyException；这样 MyException 外层保存自己的消息，同时保留原来的 runtime_error 作为嵌套异常。",
+  "key_points": [
+    "std::throw_with_nested(exception) 用于抛出一个带有当前异常作为嵌套异常的新异常。",
+    "示例中 doSomething() 先抛出 runtime_error，再在 catch 中执行 throw_with_nested(MyException{...})。",
+    "捕获外层 MyException 后，可以使用 dynamic_cast<const std::nested_exception*> 检查它是否包含嵌套异常。",
+    "nested_exception::rethrow_nested() 会重新抛出保存的嵌套异常，因此可以在内部 try/catch 中处理 runtime_error。",
+    "std::rethrow_if_nested(e) 可以根据异常对象是否包含嵌套异常来重新抛出嵌套异常。"
+  ],
+  "examples": [
+    "嵌套异常的基本流程：try { throw std::runtime_error{\"Throwing a runtime_error exception\"}; } catch (const std::runtime_error& e) { std::throw_with_nested(MyException{\"MyException with nested runtime error\"}); }",
+    "手动处理嵌套异常：const auto* nested = dynamic_cast<const std::nested_exception*>(&e); if (nested) { try { nested->rethrow_nested(); } catch (const std::runtime_error& e) { /* 处理嵌套异常 */ } }",
+    "也可以使用：try { doSomething(); } catch (const MyException& e) { std::rethrow_if_nested(e); } catch (const std::runtime_error& e) { /* 处理嵌套异常 */ }"
+  ],
+  "misconceptions": [
+    "throw_with_nested() 不是简单地丢弃原异常；它会把当前异常保留为新异常的嵌套异常。",
+    "捕获外层 MyException 不会自动把嵌套的 runtime_error 单独交给另一个 catch 处理；必须使用 rethrow_nested() 或 rethrow_if_nested()。",
+    "dynamic_cast 检查的是异常对象是否实现了 nested_exception 接口，并不直接把任意异常转换成 runtime_error。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "示例中为什么使用 throw_with_nested(MyException{...})？",
+      "a": "为了抛出一个新的 MyException，同时保留之前捕获的 runtime_error 作为嵌套异常。"
+    },
+    {
+      "q": "如何从捕获的 MyException 中重新抛出嵌套异常？",
+      "a": "可以将异常对象转换为 const std::nested_exception*，然后调用 rethrow_nested()；也可以直接调用 std::rethrow_if_nested(e)。"
+    },
+    {
+      "q": "嵌套异常的外层和内层分别是什么？",
+      "a": "示例中外层是 MyException，内层是先前抛出的 std::runtime_error。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "C++异常处理",
+    "继承与 dynamic_cast",
+    "std::exception_ptr"
+  ],
+  "source_pages": [
+    454,
+    455,
+    456
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "595_使用嵌套异常保存异常原因",
+  "_chunk_pages": [
+    453,
+    456
+  ]
+}

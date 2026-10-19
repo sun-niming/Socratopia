@@ -1,0 +1,47 @@
+{
+  "title": "Unicode字符串字面量前缀",
+  "definition": "C++可以通过字符串字面量前缀指定字符串的字符类型或编码：`u8` 表示 UTF-8 字符串，C++20中对应 `char8_t`；`u` 表示 UTF-16 的 `char16_t` 字符串；`U` 表示 UTF-32 的 `char32_t` 字符串；`L` 表示采用编译器相关编码的宽字符串。上述前缀还可以与原始字符串字面量前缀 `R` 组合。",
+  "key_points": [
+    "`u8`：UTF-8 字符串字面量；C++20 中其类型为 `char8_t` 数组。",
+    "`u`：`char16_t` 字符串字面量，采用 UTF-16 编码。",
+    "`U`：`char32_t` 字符串字面量，采用 UTF-32 编码。",
+    "`L`：宽字符串字面量，编码由编译器或平台决定。",
+    "与 `R` 组合时，可写成 `u8R\"(...)\"`、`uR\"(...)\"`、`UR\"(...)\"` 和 `LR\"(...)\"`。"
+  ],
+  "examples": [
+    "`const char8_t* s1 { u8R\"(Raw UTF-8 encoded string literal)\" };`",
+    "`const wchar_t* s2 { LR\"(Raw wide string literal)\" };`",
+    "`const char16_t* s3 { uR\"(Raw char16_t string literal)\" };`",
+    "`const char32_t* s4 { UR\"(Raw char32_t string literal)\" };`"
+  ],
+  "misconceptions": [
+    "`L` 不表示固定的 UTF-16 或 UTF-32；它表示宽字符串，具体编码依赖实现。",
+    "`R` 只表示原始字符串语法，不决定字符串使用哪种字符编码；编码由 `u8`、`u`、`U` 或 `L` 等前缀决定。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何写一个 UTF-32 原始字符串字面量？",
+      "a": "使用 `UR\"(...)\"`，例如 `UR\"(Raw char32_t string literal)\"`。"
+    },
+    {
+      "q": "`L` 和 `u8` 字符串前缀有什么区别？",
+      "a": "`L` 产生采用实现相关编码的宽字符串；`u8` 指定 UTF-8 编码，C++20中对应 `char8_t`。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++字符串字面量",
+    "Unicode字符类型"
+  ],
+  "source_pages": [
+    662,
+    662
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 u8 u U L 字符串字面量类型 char8_t char16_t char32_t wchar_t 原始字符串前缀",
+  "concept_id": "1384_unicode字符串字面量前缀",
+  "_chunk_pages": [
+    661,
+    664
+  ]
+}

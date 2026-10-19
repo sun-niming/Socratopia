@@ -1,0 +1,41 @@
+{
+  "title": "头文件包含保护",
+  "definition": "头文件包含保护通过条件编译指令防止同一个头文件的内容在一个翻译单元中被重复包含。典型做法是：先用 `#ifndef` 检查一个唯一宏是否尚未定义，再用 `#define` 定义该宏，把头文件内容放在其中，最后以 `#endif` 结束。",
+  "key_points": [
+    "`#ifndef 标识符` 表示“如果该标识符尚未定义”。",
+    "保护宏应能够唯一标识该头文件。",
+    "头文件的全部正文应位于 `#define` 与 `#endif` 之间。"
+  ],
+  "examples": [
+    "#ifndef MYHEADER_H\n#define MYHEADER_H\n\n// ... the contents of this header file\n\n#endif"
+  ],
+  "misconceptions": [
+    "误以为 `#define MYHEADER_H` 会导入头文件；它只是定义用于包含保护的宏。",
+    "遗漏 `#endif`，导致条件编译区域没有正确结束。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "头文件包含保护解决什么问题？",
+      "a": "它防止同一个头文件的内容在一个翻译单元中被重复处理。"
+    },
+    {
+      "q": "`#ifndef MYHEADER_H` 的含义是什么？",
+      "a": "如果宏 `MYHEADER_H` 尚未定义，则编译其后的条件区域。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "预处理器指令"
+  ],
+  "source_pages": [
+    37,
+    40
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "025_头文件包含保护",
+  "_chunk_pages": [
+    37,
+    40
+  ]
+}

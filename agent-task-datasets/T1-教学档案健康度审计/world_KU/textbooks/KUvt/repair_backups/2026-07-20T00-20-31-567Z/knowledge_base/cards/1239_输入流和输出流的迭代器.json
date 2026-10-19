@@ -1,0 +1,41 @@
+{
+  "title": "输入流和输出流的迭代器",
+  "definition": "输入流和输出流本身不是标准库容器，因为它们不保存元素；但可以把流看作元素序列。标准库提供了特殊迭代器 `istream_iterator` 和 `ostream_iterator`，用于分别遍历输入流和输出流。",
+  "key_points": [
+    "输入流和输出流具有某些类似标准库容器的使用特性，但不是真正的容器。",
+    "`istream_iterator` 用于从输入流中读取元素，`ostream_iterator` 用于向输出流写入元素。",
+    "这类迭代器可以把流和标准库算法等工具结合使用。"
+  ],
+  "examples": [
+    "可以使用 `istream_iterator` 从标准输入读取一系列元素，并使用 `ostream_iterator` 将元素输出到标准输出。"
+  ],
+  "misconceptions": [
+    "流不是容器；它们不会像 `vector` 或 `list` 那样保存所有元素。",
+    "`istream_iterator` 和 `ostream_iterator` 是标准库提供的迭代器，不是流对象本身的方法。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "输入流和输出流为什么不属于真正的标准库容器？",
+      "a": "因为输入流和输出流并不保存元素；它们只是可以被看作元素序列。"
+    },
+    {
+      "q": "标准库中用于遍历输入流和输出流的特殊迭代器分别是什么？",
+      "a": "输入流使用 `istream_iterator`，输出流使用 `ostream_iterator`。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++迭代器基础"
+  ],
+  "source_pages": [
+    601,
+    601
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1239_输入流和输出流的迭代器",
+  "_chunk_pages": [
+    601,
+    604
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "title": "水平对齐 text-align",
+  "definition": "text-align 用于设置文本的水平对齐方式。教材列出了居中、左对齐、右对齐和两端对齐四种取值。",
+  "key_points": [
+    "center 表示居中对齐。",
+    "left 表示左对齐。",
+    "right 表示右对齐。",
+    "justify 表示两端对齐。"
+  ],
+  "examples": [
+    "text-align: center;",
+    "text-align: justify;"
+  ],
+  "misconceptions": [
+    "justify 不是居中，而是两端对齐。",
+    "text-align 处理的是水平对齐，不是垂直对齐。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "text-align 的 justify 取值表示什么？",
+      "a": "表示两端对齐。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "CSS基础"
+  ],
+  "source_pages": [
+    109,
+    112
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "148_水平对齐_text_align",
+  "_chunk_pages": [
+    109,
+    112
+  ]
+}

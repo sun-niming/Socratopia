@@ -1,0 +1,45 @@
+{
+  "title": "两级指针的存储关系",
+  "definition": "两级指针是指向指针的指针。例如，`handle` 的类型可以是 `int**`：handle 指向自由存储区中的一个指针对象，而该指针对象又指向自由存储区中的一个 int 对象。指针变量本身和它所指向的对象可以位于不同位置。",
+  "key_points": [
+    "`int** handle` 表示 handle 指向一个 `int*` 类型的对象。",
+    "`*handle` 是存储在自由存储区中的一级指针，它可以指向另一个动态分配的 int 对象。",
+    "两级关系可表示为：`handle -> *handle -> int`。",
+    "教材强调，这种结构中一个指针可以保存在栈中，另一个指针可以保存在自由存储区中。"
+  ],
+  "examples": [
+    "教材示例意在表达如下两级指针关系：`int** handle = new int*; *handle = new int;`。此时 `handle` 指向一个动态分配的 `int*` 对象，而 `*handle` 指向另一个动态分配的 `int` 对象。",
+    "结构关系可写为：$$\\texttt{handle}\\;\\longrightarrow\\;\\texttt{*handle}\\;\\longrightarrow\\;\\texttt{int\\ 对象}$$"
+  ],
+  "misconceptions": [
+    "`int**` 不是“两个连续的 int”，而是指向 `int*` 的指针。",
+    "`handle`、`*handle` 和最终的 int 对象是不同层次的实体，不能混为一谈。",
+    "释放两级动态内存时，不能只释放其中一层而忽略另一层。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`int** handle` 表示什么？",
+      "a": "它表示 handle 是一个指向 `int*` 的指针，也就是指向另一个指针的指针。"
+    },
+    {
+      "q": "两级指针的典型指向关系是什么？",
+      "a": "关系为 `handle -> *handle -> int 对象`：handle 指向一个指针对象，该指针对象再指向 int 对象。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "指针变量与对象地址",
+    "动态内存分配"
+  ],
+  "source_pages": [
+    199,
+    200
+  ],
+  "needs_verification": true,
+  "verify_query": "Marc Gregoire C++20高级编程 第5版 两级指针 handle = new int* *handle = new int 图7-3",
+  "concept_id": "418_两级指针的存储关系",
+  "_chunk_pages": [
+    197,
+    200
+  ]
+}

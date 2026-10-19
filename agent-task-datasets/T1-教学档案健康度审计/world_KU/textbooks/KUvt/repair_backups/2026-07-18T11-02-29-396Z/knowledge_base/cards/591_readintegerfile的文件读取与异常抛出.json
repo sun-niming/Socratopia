@@ -1,0 +1,51 @@
+{
+  "title": "readIntegerFile的文件读取与异常抛出",
+  "definition": "readIntegerFile接收文件名并返回vector<int>。函数先用ifstream打开文件；如果打开失败，则抛出FileOpenError。随后逐行读取文件，每行通过istringstream逐个解析整数并追加到vector。如果一行中剩余内容无法继续按整数解析，函数会抛出带文件名和行号的FileReadError。",
+  "key_points": [
+    "打开文件失败时使用throw FileOpenError{filename}报告错误。",
+    "函数使用size_t lineNumber记录行号，并在读取一行后递增。",
+    "每一行先读入string，再用istringstream逐个读取int。",
+    "当整数读取停止但流尚未到达行末时，教材将其视为该行存在读取错误，并抛出FileReadError。",
+    "正常读取的整数被依次加入vector<int>并作为函数结果返回。"
+  ],
+  "examples": [
+    "核心流程可概括为：$$\\text{打开文件}\\rightarrow\\begin{cases}\\text{失败：throw FileOpenError}\\\\\\text{成功：逐行读取并解析整数}\\end{cases}$$",
+    "读取判断的教材逻辑：while (lineStream >> temp) { integers.push_back(temp); } if (!lineStream.eof()) { throw FileReadError{filename, lineNumber}; }"
+  ],
+  "misconceptions": [
+    "ifstream打开成功不代表文件中的每一行都能正确解析为整数；行内容错误会在后续解析阶段通过FileReadError报告。",
+    "lineNumber表示当前读取行的编号，而不是已经成功读取的整数数量。",
+    "解析循环结束后只有在流已到达行末时才表示该行没有额外的非整数错误内容。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "readIntegerFile在文件无法打开时抛出什么异常？",
+      "a": "抛出FileOpenError，并传入filename。"
+    },
+    {
+      "q": "readIntegerFile如何报告某一行包含无法解析的内容？",
+      "a": "当逐个读取整数结束后发现istringstream尚未到达行末时，抛出FileReadError{filename, lineNumber}。"
+    },
+    {
+      "q": "readIntegerFile成功时返回什么？",
+      "a": "返回包含文件中读取到的所有整数的vector<int>。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "ifstream文件输入",
+    "istringstream字符串流",
+    "自定义异常类"
+  ],
+  "source_pages": [
+    451,
+    452
+  ],
+  "needs_verification": true,
+  "verify_query": "Marc Gregoire C++20高级编程 第5版 readIntegerFile FileOpenError FileReadError lineNumber istringstream 原文",
+  "concept_id": "591_readintegerfile的文件读取与异常抛出",
+  "_chunk_pages": [
+    449,
+    452
+  ]
+}

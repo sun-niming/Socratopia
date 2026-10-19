@@ -1,0 +1,42 @@
+{
+  "title": "exec命令",
+  "definition": "exec 是 shell 内置命令。其作用是：用执行某个命令所启动的进程来替代当前 shell 进程。也就是说，执行 exec 后，当前 shell 进程被新启动的进程替换。",
+  "key_points": [
+    "语法形式：exec 命令",
+    "作用：用执行命令所启动的进程替代当前 shell 进程",
+    "属于 shell 内置命令"
+  ],
+  "examples": [
+    "exec 命令"
+  ],
+  "misconceptions": [
+    "误以为 exec 只是从当前 shell 再启动一个普通子进程；原文强调它是“替代当前shell进程”",
+    "误以为 exec 是脚本调试选项；实际上它是 shell 内置命令"
+  ],
+  "qa_pairs": [
+    {
+      "q": "exec 命令的核心作用是什么？",
+      "a": "用执行命令所启动的进程替代当前 shell 进程。"
+    },
+    {
+      "q": "exec 属于外部命令还是 shell 内置命令？",
+      "a": "属于 shell 内置命令。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "Shell内置命令",
+    "进程与Shell的基本概念"
+  ],
+  "source_pages": [
+    89,
+    92
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "147_exec命令",
+  "_chunk_pages": [
+    89,
+    92
+  ]
+}

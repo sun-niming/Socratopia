@@ -1,0 +1,38 @@
+{
+  "title": "fprintf 格式化写入文件",
+  "definition": "fprintf(FILE *stream, const char *format, ...) 用来按格式写入文件流。成功时返回写入的字符数，失败时返回负数。",
+  "key_points": [
+    "在项目中用于写一行访问日志。",
+    "日志字段应固定，便于后续分析和证明状态码。",
+    "常见字段包括时间、IP、方法、路径、状态码、字节数。"
+  ],
+  "examples": [
+    "fprintf(fp, \"%s %s %s %s %d %ld\\n\", time_str, ip, method, path, status, bytes);"
+  ],
+  "misconceptions": [
+    "把 fprintf 当成只能输出到屏幕的函数。",
+    "日志格式随意变化，导致后续无法解析。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "fprintf 成功和失败分别返回什么？",
+      "a": "成功返回写入字符数，失败返回负数。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "文件流",
+    "格式化输出"
+  ],
+  "source_pages": [
+    101,
+    104
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "159_fprintf_格式化写入文件",
+  "_chunk_pages": [
+    101,
+    104
+  ]
+}

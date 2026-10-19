@@ -1,0 +1,44 @@
+{
+  "title": "getline 读取字符缓冲区中的一行",
+  "definition": "`istream::getline()` 可以从输入流中读取一行字符并填充到字符数组中，读取过程在读到行尾或达到指定容量时停止。指定容量包含结尾的空字符 `\\0`，因此字符数组最多读取 `kBufferSize - 1` 个有效字符。行尾字符不会被存入字符缓冲区。",
+  "key_points": [
+    "典型形式为 `cin.getline(buffer, kBufferSize);`。",
+    "指定大小包括结尾的 `\\0` 字符，所以最多读取 `kBufferSize - 1` 个有效字符。",
+    "默认读取到换行处停止，换行序列不会出现在结果字符串中。",
+    "行尾序列与平台有关，例如可能是 `\\r\\n` 或 `\\n`。"
+  ],
+  "examples": [
+    "```cpp\nchar buffer[kBufferSize]{0};\ncin.getline(buffer, kBufferSize);\n```",
+    "当字符数组容量为 `kBufferSize` 时，`getline()` 最多从输入流读取 `kBufferSize - 1` 个有效字符，并在数组末尾保留 `\\0`。"
+  ],
+  "misconceptions": [
+    "指定的大小不是最多可读取的有效字符数，而是包括结尾 `\\0` 在内的缓冲区容量。",
+    "`getline()` 读取到的字符串不包含行尾换行字符。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "字符数组容量为 `kBufferSize` 时，`cin.getline(buffer, kBufferSize)` 最多读取多少个有效字符？",
+      "a": "最多读取 `kBufferSize - 1` 个有效字符，因为容量中还要包含结尾的 `\\0` 字符。"
+    },
+    {
+      "q": "`istream::getline()` 读取结果中是否包含换行符？",
+      "a": "不包含，行尾字符不会出现在字符缓冲区中。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C风格字符数组",
+    "C++输入流"
+  ],
+  "source_pages": [
+    422,
+    422
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "854_getline_读取字符缓冲区中的一行",
+  "_chunk_pages": [
+    421,
+    424
+  ]
+}

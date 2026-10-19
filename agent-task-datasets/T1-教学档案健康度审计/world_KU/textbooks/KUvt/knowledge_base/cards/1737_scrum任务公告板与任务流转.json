@@ -1,0 +1,45 @@
+{
+  "title": "Scrum任务公告板与任务流转",
+  "definition": "Scrum团队使用任务公告板可视化Sprint中的工作状态。最基本的公告板包含To Do（计划事项）、In Progress（开发中）和Done（完成）三列；团队成员不由管理者直接分配任务，而是自行从To Do中挑选任务，移动任务卡片以表示工作状态。公告板也可以使用软件实现虚拟版本，并可按团队需要增加其他列。",
+  "key_points": [
+    "To Do表示当前Sprint计划中尚未开始的任务。",
+    "In Progress表示正在开发中的任务。",
+    "Done表示已完成的任务。",
+    "团队成员从To Do中自行挑选任务并移到In Progress，完成后移到Done。",
+    "公告板帮助团队快速了解未完成、进行中和已完成的工作。",
+    "公告板列不是固定的，团队可以增加In Review、In Testing、In Integration等列。",
+    "常见更细的流转为：开发中 → 代码评审 → QA测试 → 集成 → 完成。"
+  ],
+  "examples": [
+    "一个任务可按如下状态流转：To Do → In Progress → In Review → In Testing → In Integration → Done。"
+  ],
+  "misconceptions": [
+    "Scrum公告板不是由经理把每项任务指派给个人；团队成员自行领取To Do任务。",
+    "Done通常表示任务已经完全实现、评审、测试和集成，而不只是代码写完。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "Scrum公告板最基本的三列是什么？",
+      "a": "To Do、In Progress和Done。"
+    },
+    {
+      "q": "为什么可以增加In Review、In Testing和In Integration列？",
+      "a": "因为三列不是固定不变的，团队可以用附加列表示代码评审、质量保证测试和代码集成等其他步骤。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "Scrum的迭代与Sprint周期"
+  ],
+  "source_pages": [
+    842,
+    843
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1737_scrum任务公告板与任务流转",
+  "_chunk_pages": [
+    841,
+    844
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "title": "CRC校验比特R的计算",
+  "definition": "发送方计算CRC校验比特$R$的方法是：先将数据$D$左移$r$位得到$D\\cdot 2^r$，再用生成多项式$G$进行模2除法，所得余数就是$R$。因此，$$R=\\operatorname{remainder}\\left(\\frac{D\\cdot 2^r}{G}\\right)$$，并将$R$附加到数据后形成发送比特串$D\\cdot 2^r\\mathbin{\\mathrm{XOR}}R$。",
+  "key_points": [
+    "$R$的长度为$r$比特。",
+    "计算$R$时使用模2除法，除法中的减法用XOR完成。",
+    "所得余数$R$满足：$$D\\cdot 2^r\\mathbin{\\mathrm{XOR}}R=nG$$，因此完整发送比特串可被$G$整除。",
+    "接收方采用相同的生成多项式$G$进行除法检查。"
+  ],
+  "examples": [
+    "原文给出的示例为：$D=101110$、$d=6$、$G=1001$、$r=3$。计算得到的传输比特串为$101110011$。"
+  ],
+  "misconceptions": [
+    "不能直接把$D$和任意$r$位序列拼接；$R$必须是$D\\cdot 2^r$除以$G$所得的模2余数。",
+    "CRC除法不是普通整数除法，而是模2除法。",
+    "$R$的位数由生成多项式的长度决定：若$G$为$r+1$比特，则$R$为$r$比特。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何计算CRC校验比特$R$？",
+      "a": "先计算$D\\cdot 2^r$，再用$G$进行模2除法，所得余数就是$R$：$$R=\\operatorname{remainder}\\left(\\frac{D\\cdot 2^r}{G}\\right)$$。"
+    },
+    {
+      "q": "原文示例中$D=101110$、$G=1001$、$r=3$时，发送的9个比特是什么？",
+      "a": "发送的9个比特是$101110011$。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "CRC编码的基本思想",
+    "模2算术"
+  ],
+  "source_pages": [
+    309,
+    312
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "700_crc校验比特r的计算",
+  "_chunk_pages": [
+    309,
+    312
+  ]
+}

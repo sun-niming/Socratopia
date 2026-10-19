@@ -1,0 +1,49 @@
+{
+  "title": "for_each() 返回回调副本以访问状态",
+  "definition": "for_each() 是原文所述的特殊例外：它会将给定的谓词复制一次到算法内部，并在完成时返回这份回调副本。因此，如果回调对象维护了状态，可以通过 for_each() 的返回值访问算法执行期间对该副本所做的修改。",
+  "key_points": [
+    "for_each() 不是简单地返回最后一个元素的迭代器；原文强调它返回回调副本。",
+    "返回的回调副本可以携带算法执行期间累积的状态。",
+    "这与 generate() 和 generate_n() 形成对比：后两者不会返回其内部使用的回调副本。",
+    "如果希望算法直接修改外部回调对象，也可以考虑使用 `std::ref()`。"
+  ],
+  "examples": [
+    "概念性用法：`auto result = for_each(first, last, callback);`，随后通过 `result` 读取 callback 在遍历期间积累的状态。",
+    "若回调对象有计数成员，`result` 可用于读取遍历结束后的计数值。"
+  ],
+  "misconceptions": [
+    "for_each() 返回的不是原始回调对象本身，而是算法内部复制后使用并返回的回调对象。",
+    "不能把 for_each() 的行为推广到所有标准算法；原文特别指出它是例外。",
+    "for_each() 返回回调对象并不意味着其他算法也会返回它们使用的回调副本。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "for_each() 在回调状态方面有什么特殊之处？",
+      "a": "它将回调复制一次，在算法完成时返回这份副本，因此可以通过返回值访问其被修改的状态。"
+    },
+    {
+      "q": "generate() 与 for_each() 在返回回调状态方面有何区别？",
+      "a": "generate() 不返回其内部回调副本；for_each() 会在完成时返回它使用的回调副本。"
+    },
+    {
+      "q": "如果想让算法修改外部原始回调对象，而不是返回副本，应采用什么方式？",
+      "a": "可以使用 `std::ref()` 传递回调的引用。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "标准算法对回调对象的复制与状态限制",
+    "std::ref()"
+  ],
+  "source_pages": [
+    632,
+    632
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 std::for_each return function object copy official reference",
+  "concept_id": "1311_for_each_返回回调副本以访问状态",
+  "_chunk_pages": [
+    629,
+    632
+  ]
+}

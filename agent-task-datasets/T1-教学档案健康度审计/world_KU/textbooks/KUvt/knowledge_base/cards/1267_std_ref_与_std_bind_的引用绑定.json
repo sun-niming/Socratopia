@@ -1,0 +1,45 @@
+{
+  "title": "std::ref 与 std::bind 的引用绑定",
+  "definition": "使用 std::bind 绑定普通对象时，绑定对象通常保存该对象的拷贝；如果需要让绑定后的可调用对象操作原对象，应使用 std::ref 传递非 const 引用，或使用 std::cref 传递 const 引用。",
+  "key_points": [
+    "直接 bind(increment, index) 时，绑定对象保存 index 的拷贝。",
+    "如果函数参数需要 int&，应使用 bind(increment, ref(index))。",
+    "使用 ref 后，绑定函数修改的是原 index，而不是内部拷贝。",
+    "std::cref 用于绑定 const 引用。"
+  ],
+  "examples": [
+    "函数：void increment(int& value) { ++value; }",
+    "错误的引用语义：auto incr = bind(increment, index); incr(); // 增加的是绑定对象中的拷贝。",
+    "正确的引用语义：auto incr = bind(increment, ref(index)); incr(); // 原 index 增加。"
+  ],
+  "misconceptions": [
+    "把对象传给 bind 不会自动保证绑定对象持有原对象的引用。",
+    "std::ref 不是复制对象，而是生成用于引用传递的包装对象。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何让 bind 生成的对象调用 increment 时修改原 index？",
+      "a": "写成 auto incr = bind(increment, ref(index));，然后调用 incr()。"
+    },
+    {
+      "q": "std::ref 和 std::cref 分别用于什么？",
+      "a": "std::ref 用于绑定非 const 引用，std::cref 用于绑定 const 引用。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "std::bind 绑定固定参数",
+    "引用与 const 引用"
+  ],
+  "source_pages": [
+    615,
+    615
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1267_std_ref_与_std_bind_的引用绑定",
+  "_chunk_pages": [
+    613,
+    616
+  ]
+}

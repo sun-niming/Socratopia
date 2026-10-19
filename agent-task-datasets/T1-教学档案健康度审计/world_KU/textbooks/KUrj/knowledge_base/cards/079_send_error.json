@@ -1,0 +1,39 @@
+{
+  "title": "send_error",
+  "definition": "`send_error(int fd, int status, const char *reason, const char *message)` 用于生成合法的 HTTP 错误响应。它把错误信息组织成符合 HTTP 格式的响应，而不是只发送一段错误文字；本项目中的 `400`、`403`、`404`、`405`、`500` 都可以走同一个函数。",
+  "key_points": [
+    "`send_error` 负责生成 HTTP 错误响应。",
+    "错误响应必须符合 HTTP 格式。",
+    "不能只发送错误文字，还要有状态行和正确的 `Content-Length`。",
+    "本项目中 `400`、`403`、`404`、`405`、`500` 可共用该函数。"
+  ],
+  "examples": [
+    "函数原型：\n```c\nvoid send_error(int fd, int status, const char *reason, const char *message)\n```"
+  ],
+  "misconceptions": [
+    "认为错误响应只要发一行错误说明就行。",
+    "忽略 `Content-Length`，导致响应格式不完整。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`send_error` 的作用是什么？",
+      "a": "生成合法的 HTTP 错误响应。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "HTTP 响应基础",
+    "状态码基础"
+  ],
+  "source_pages": [
+    49,
+    52
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "079_send_error",
+  "_chunk_pages": [
+    49,
+    52
+  ]
+}

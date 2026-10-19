@@ -1,0 +1,42 @@
+{
+  "title": "为 C 风格字符串动态分配空间必须额外加一",
+  "definition": "使用 strlen() 得到 C 风格字符串的实际字符数后，若要为整个字符串动态分配存储空间，还必须额外增加 1 个字符的位置，用于保存末尾的 NUL 字符。",
+  "key_points": [
+    "错误做法是使用 $\\texttt{new char[strlen(str)]}$，因为没有为 $\\texttt{\\\\0}$ 留出空间。",
+    "正确做法是使用 $\\texttt{new char[strlen(str) + 1]}$。",
+    "分配空间不足可能导致 strcpy() 写越界，从而产生错误或安全问题。"
+  ],
+  "examples": [
+    "错误：$\\texttt{char* result \\{ new char[strlen(str)] \\};}$",
+    "正确：$\\texttt{char* result \\{ new char[strlen(str) + 1] \\};}$"
+  ],
+  "misconceptions": [
+    "strlen()返回的长度已经包含结尾 NUL，因此不需要加一。",
+    "只有在字符串为空时才需要额外加一；实际上任何合法 C 风格字符串都需要为结尾 NUL 留空间。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么下面的代码有错误：$\\texttt{new char[strlen(str)]}$？",
+      "a": "因为 strlen() 不计算结尾 NUL，分配的空间少 1 个 char，无法完整保存字符串。"
+    },
+    {
+      "q": "动态复制一个 C 风格字符串时，分配空间的通用公式是什么？",
+      "a": "分配空间数量应为 $\\texttt{strlen(str) + 1}$。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C 风格字符串以 NUL 字符结尾"
+  ],
+  "source_pages": [
+    103,
+    103
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "187_为_c_风格字符串动态分配空间必须额外加一",
+  "_chunk_pages": [
+    101,
+    104
+  ]
+}

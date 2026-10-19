@@ -1,0 +1,42 @@
+{
+  "title": "大 O 记号",
+  "definition": "大 O 记号（Big-O Notation）用于表示算法或计算过程随输入规模增长时的渐近增长关系。第153页明确出现“Big-O Notation”，第154至155页列出了若干复杂度形式，但页面文字存在 OCR 识别错误，具体完整列表需要核实。",
+  "key_points": [
+    "原文明确出现术语“Big-O Notation”。",
+    "第154页可辨认出 $O(1)$、$O(\\log n)$、$O(n)$、$O(n\\log n)$、$O(n^2)$ 和 $O(2^n)$ 等形式。",
+    "这些形式用于描述随输入规模 $n$ 增大而变化的增长阶；当前页面没有完整给出各形式的解释或排序。"
+  ],
+  "examples": [
+    "原文中可辨认的复杂度表达式包括：$$O(1),\\quad O(\\log n),\\quad O(n),\\quad O(n\\log n),\\quad O(n^2),\\quad O(2^n)$$"
+  ],
+  "misconceptions": [
+    "大 O 记号描述的是增长阶，不是程序实际运行时间的精确秒数。",
+    "不能仅依据当前 OCR 文本确认教材是否还列出了 $O(n!)$ 等其他复杂度。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "教材第153页出现的算法分析术语是什么？",
+      "a": "Big-O Notation，即大 O 记号。"
+    },
+    {
+      "q": "原文中可辨认出的一个复杂度表达式是什么？",
+      "a": "例如 $O(1)$、$O(\\log n)$、$O(n)$、$O(n\\log n)$、$O(n^2)$ 或 $O(2^n)$。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "算法的输入规模"
+  ],
+  "source_pages": [
+    153,
+    154,
+    155
+  ],
+  "needs_verification": true,
+  "verify_query": "《C++20高级编程》第5版 第153-155页 Big-O Notation 复杂度图表完整内容",
+  "concept_id": "216_大_o_记号",
+  "_chunk_pages": [
+    153,
+    156
+  ]
+}

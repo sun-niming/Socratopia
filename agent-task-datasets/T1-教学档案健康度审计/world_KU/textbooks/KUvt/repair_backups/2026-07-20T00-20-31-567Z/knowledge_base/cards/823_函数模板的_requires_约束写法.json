@@ -1,0 +1,49 @@
+{
+  "title": "函数模板的 requires 约束写法",
+  "definition": "C++20 可以使用 requires 对函数模板的模板参数施加约束。约束可以是概念、产生布尔值的常量表达式、多个约束的合取或析取，也可以使用类型萃取。requires 子句既可以写在模板声明后、函数声明前，也可以写在函数头之后，称为后置 requires 子句。",
+  "key_points": [
+    "使用概念约束：`template <Incrementable T>`。",
+    "使用布尔常量表达式约束：`requires (sizeof(T) == 4)`。",
+    "可以组合约束，例如 `requires Incrementable<T> && Decrementable<T>`。",
+    "可以使用类型萃取，例如 `requires std::is_arithmetic_v<T>`。",
+    "后置 requires 子句写在函数参数列表之后。",
+    "简化函数模板语法可以与类型约束结合；即使省略了 template 声明，函数仍然是函数模板。"
+  ],
+  "examples": [
+    "`template <typename T> requires (sizeof(T) == 4) void process(const T& t);`",
+    "`template <typename T> requires Incrementable<T> && Decrementable<T> void process(const T& t);`",
+    "`template <typename T> void process(const T& t) requires Incrementable<T>;`",
+    "`void process(const Incrementable auto& t);`"
+  ],
+  "misconceptions": [
+    "省略 `template` 关键字并不意味着 `void process(const Incrementable auto& t);` 是普通的非模板函数。",
+    "requires 约束不是运行时检查，而是在编译期检查模板参数是否满足条件。",
+    "多个约束使用 `&&` 时，模板参数必须同时满足所有约束。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "函数模板的后置 requires 子句写在哪里？",
+      "a": "写在函数参数列表之后，例如：`template <typename T> void process(const T& t) requires Incrementable<T>;`"
+    },
+    {
+      "q": "下面的声明是否仍然是函数模板：`void process(const Incrementable auto& t);`？",
+      "a": "是。它使用了 C++20 简化函数模板语法和类型约束，仍然是函数模板。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++函数模板",
+    "C++20概念"
+  ],
+  "source_pages": [
+    405,
+    405
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "823_函数模板的_requires_约束写法",
+  "_chunk_pages": [
+    405,
+    408
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "title": "HTML与CSS的分离",
+  "definition": "HTML负责组织网页的结构和内容，CSS负责决定页面的表现形式；现代Web设计强调把内容放在HTML中、把样式放在CSS中，从而实现内容与表现分离。",
+  "key_points": [
+    "HTML负责结构和内容",
+    "CSS负责表现形式",
+    "当前标准是内容在HTML中、样式在CSS中"
+  ],
+  "examples": [
+    "网页的内容写在HTML中，字体、边框、颜色等样式写在CSS中"
+  ],
+  "misconceptions": [
+    "HTML和CSS可以混在一起而不影响维护；实际上分离更符合现有设计标准",
+    "CSS可以替代HTML来表达内容"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么说HTML和CSS是‘内容’与‘形式’的关系？",
+      "a": "因为HTML负责组织结构和内容，CSS负责决定表现形式。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "HTML基础",
+    "CSS概述"
+  ],
+  "source_pages": [
+    85,
+    88
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "130_html与css的分离",
+  "_chunk_pages": [
+    85,
+    88
+  ]
+}

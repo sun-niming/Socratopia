@@ -1,0 +1,43 @@
+{
+  "title": "RVO、NRVO与返回值复制省略",
+  "definition": "函数返回对象时，C++可以通过复制省略避免不必要的对象复制或移动。RVO（Return Value Optimization，返回值优化）是针对返回临时对象等情形的优化；NRVO（Named Return Value Optimization，具名返回值优化）是针对返回函数内部具名局部对象的优化。原文将 RVO 和 NRVO 作为返回对象示例中的复制省略机制。",
+  "key_points": [
+    "将多个结果封装在一个对象中返回，可以让函数接口更直接。",
+    "RVO 和 NRVO 的共同目的，是减少返回对象过程中的额外复制或移动。",
+    "调用形式可以是 `auto result { separateOddsAndEvens(vecUnSplit) };`。"
+  ],
+  "examples": [
+    "示意：函数内部创建 `OddsAndEvens result` 并执行 `return result;`，这属于可能触发 NRVO 的场景。",
+    "直接返回临时对象，例如 `return OddsAndEvens{odds, evens};`，属于可能触发 RVO 的场景。"
+  ],
+  "misconceptions": [
+    "RVO 和 NRVO 不是两种返回值类型，而是编译器进行对象复制省略的机制。",
+    "返回对象并不表示一定会发生一次可观察的复制；复制省略正是为了避免这类额外操作。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "NRVO 中的 N 代表什么？",
+      "a": "N 代表 Named，即具名对象；NRVO 指对具名返回对象进行的返回值优化。"
+    },
+    {
+      "q": "为什么把 odds 和 evens 封装成一个对象返回？",
+      "a": "因为一个返回对象可以同时携带两个相关的向量，使调用接口更清晰，并可配合 RVO 或 NRVO 减少额外对象复制。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "对象返回值",
+    "复制构造与移动构造"
+  ],
+  "source_pages": [
+    85,
+    86
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "120_rvo_nrvo与返回值复制省略",
+  "_chunk_pages": [
+    85,
+    88
+  ]
+}

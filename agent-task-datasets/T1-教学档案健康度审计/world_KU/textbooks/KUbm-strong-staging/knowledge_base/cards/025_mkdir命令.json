@@ -1,0 +1,47 @@
+{
+  "title": "mkdir命令",
+  "definition": "mkdir 用于创建目录。教材给出的格式是：mkdir [-p] [-m mode] 路径。它既可以创建单级目录，也可以在使用相应选项时创建多级目录，并可在创建时指定权限。",
+  "key_points": [
+    "-p 表示创建多级目录，教材示例为 aa/bb/cc。",
+    "教材给出 [-m mode]，并说明创建时可指定权限，以 nnn 方式指定。",
+    "mkdir 后面要写要创建的目录路径。"
+  ],
+  "examples": [
+    "mkdir test",
+    "mkdir -p aa/bb/cc",
+    "mkdir -m 755 demo"
+  ],
+  "misconceptions": [
+    "认为 mkdir 只能创建一级目录；按教材，使用 -p 可以创建多级目录。",
+    "认为目录权限只能创建后再修改；按教材，创建时可用 -m 指定权限。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "mkdir 的作用是什么？",
+      "a": "创建目录。"
+    },
+    {
+      "q": "mkdir 的哪个选项可以创建多级目录？",
+      "a": "-p。"
+    },
+    {
+      "q": "教材中 mkdir -p 的示例路径是什么？",
+      "a": "aa/bb/cc。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "目录的基本概念"
+  ],
+  "source_pages": [
+    13,
+    16
+  ],
+  "needs_verification": true,
+  "verify_query": "Linux mkdir -m mode 用法 教材中“m 创建时指定权限，以nnn方式指定”是否应为“-m”",
+  "concept_id": "025_mkdir命令",
+  "_chunk_pages": [
+    13,
+    16
+  ]
+}

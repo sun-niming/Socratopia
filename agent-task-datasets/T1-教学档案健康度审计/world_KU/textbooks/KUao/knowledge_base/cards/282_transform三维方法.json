@@ -1,0 +1,38 @@
+{
+  "title": "transform三维方法",
+  "definition": "在3D变换中，transform属性的常见方法可以用于三维旋转、移动和缩放。原文列出的形式包括 rotate3d(x,y,z,angle)、translate3d(x,y,z)、scale3d(x,y,z)，以及按单个坐标轴分别操作的 rotateX/rotateY/rotateZ、translateX/translateY/translateZ、scaleX/scaleY/scaleZ。",
+  "key_points": [
+    "三维旋转、移动、缩放都可以通过 transform 的方法实现。",
+    "rotate3d、translate3d、scale3d 是三维综合写法。",
+    "rotateX/Y/Z、translateX/Y/Z、scaleX/Y/Z 是按单轴分别变换的写法。"
+  ],
+  "examples": [
+    "rotate3d(x,y,z,angle)",
+    "translateX(x)",
+    "scaleZ(z)"
+  ],
+  "misconceptions": [
+    "三维变换只有 rotate3d、translate3d、scale3d，实际上还包括 rotateX/Y/Z、translateX/Y/Z、scaleX/Y/Z。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "transform 属性在 3D 变换中常见哪些方法？",
+      "a": "可用于三维旋转、移动和缩放，如 rotate3d、translate3d、scale3d，以及 rotateX/Y/Z、translateX/Y/Z、scaleX/Y/Z。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "transform属性"
+  ],
+  "source_pages": [
+    201,
+    204
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "282_transform三维方法",
+  "_chunk_pages": [
+    201,
+    204
+  ]
+}

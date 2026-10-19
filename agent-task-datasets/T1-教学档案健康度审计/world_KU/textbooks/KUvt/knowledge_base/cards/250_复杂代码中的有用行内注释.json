@@ -1,0 +1,43 @@
+{
+  "title": "复杂代码中的有用行内注释",
+  "definition": "当代码确实复杂、涉及外部资料或使用不明显的运算时，逐行或近邻注释可以是有价值的。此类注释应解释代码实际上在做什么、所依据的外部规则或计算背景，而不是简单复述语法。",
+  "key_points": [
+    "注释可以指出参数来自哪份外部表格或文档。",
+    "对于按位运算等不直观操作，应说明操作目的及其依据。",
+    "对于神秘公式或领域规则，应引用其名称和相关文档。",
+    "通常没有必要给每行代码加注释，但复杂代码需要时可以这样做。"
+  ],
+  "examples": [
+    "```text\n// Calculate the doodad. The start, end, and offset values come from the\n// table on page 96 of the \"Doodad API v1.6\".\nresult = doodad.calculate(kStart, kEnd, kOffset);\n\n// To determine success or failure, we need to bitwise AND the result with\n// the processor-specific mask (see \"Doodad API v1.6\", page 201).\nresult &= getProcessorMask();\n\n// Set the user field value based on the \"Marigold Formula\".\n// (see \"Doodad API v1.6\", page 136)\nsetUserField((result + kMarigoldOffset) / MarigoldConstant + MarigoldConstant);\n```"
+  ],
+  "misconceptions": [
+    "“每行都有注释”并非绝对错误；关键在于注释是否解释了代码中不明显的背景、目的或外部约束。",
+    "复杂代码的行内注释也不应只重复“调用函数”“执行按位与”等表面动作。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "什么时候逐行注释可能是合理的？",
+      "a": "当代码非常复杂，且每行涉及外部规则、不明显的按位运算、神秘公式或难以从代码本身推断的背景时，逐行注释可能有助于理解。"
+    },
+    {
+      "q": "复杂代码中的注释应重点解释什么？",
+      "a": "应解释代码实际完成的操作、操作目的、外部数据或文档来源，以及相关领域公式或约束。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "按位运算的基本概念",
+    "代码注释的基本用途"
+  ],
+  "source_pages": [
+    127,
+    128
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "250_复杂代码中的有用行内注释",
+  "_chunk_pages": [
+    125,
+    128
+  ]
+}

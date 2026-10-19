@@ -1,0 +1,43 @@
+{
+  "title": "基于范围的 for 循环",
+  "definition": "基于范围的 for 循环用于依次迭代一个范围中的元素，能够方便地遍历 C 风格数组、初始化列表以及具有 `begin()` 和 `end()` 方法的类型，例如 `std::array`、`vector` 和其他标准库容器。",
+  "key_points": [
+    "基本形式是 `for (元素声明 : 范围表达式) { 循环体 }`。",
+    "示例中的元素声明为 `int i` 时，循环变量通常取得范围元素的副本。",
+    "如果不希望在迭代元素时制作副本，应使用引用变量；原文说明引用将在后文讨论。"
+  ],
+  "examples": [
+    "遍历数组：`std::array arr { 1, 2, 3, 4 }; for (int i : arr) { cout << i << endl; }`。",
+    "遍历时使用引用可写为：`for (int& i : arr) { ... }`；使用 const 引用可写为：`for (const int& i : arr) { ... }`。"
+  ],
+  "misconceptions": [
+    "基于范围的 for 循环不只适用于 `std::array`，也适用于 C 风格数组、初始化列表以及具有 `begin()` 和 `end()` 方法的类型。",
+    "`for (int i : arr)` 中的 `i` 是元素副本；修改 `i` 通常不会直接修改数组元素。",
+    "基于范围的 for 循环并不意味着所有元素都必须复制；可以使用引用变量避免复制。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "基于范围的 for 循环可以遍历哪些对象？",
+      "a": "可以遍历 C 风格数组、初始化列表，以及具有 `begin()` 和 `end()` 方法的类型，如 `std::array`、`vector` 和其他标准库容器。"
+    },
+    {
+      "q": "如何避免基于范围的 for 循环复制元素？",
+      "a": "将循环变量声明为引用，例如 `for (int& value : arr)`；只读场景也可使用 `const int&`。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "for 循环"
+  ],
+  "source_pages": [
+    62,
+    62
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "107_基于范围的_for_循环",
+  "_chunk_pages": [
+    61,
+    64
+  ]
+}

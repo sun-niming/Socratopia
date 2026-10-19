@@ -1,0 +1,41 @@
+{
+  "title": "nslookup 查询 DNS 记录",
+  "definition": "nslookup 是一种用于查询 DNS 的工具。它向 DNS 服务器发送查询，并以人类可读的格式显示 DNS 服务器返回的资源记录。查询可以从本地主机运行，也可以通过提供远程 nslookup 服务的网站运行。",
+  "key_points": [
+    "nslookup 可以用于检查域名对应的 DNS 资源记录。",
+    "DNS 查询的目标可以是根 DNS 服务器、顶级域（TLD）DNS 服务器或权威 DNS 服务器。",
+    "DNS 返回结果后，nslookup 会显示回答中包含的记录。"
+  ],
+  "examples": [
+    "使用 nslookup 查询某个域名的 A 记录，工具会显示该域名对应的 IP 地址及其他相关 DNS 信息。"
+  ],
+  "misconceptions": [
+    "nslookup 本身不是 DNS 服务器，而是一个向 DNS 服务器发起查询并显示结果的客户端工具。",
+    "nslookup 显示的是 DNS 服务器返回的记录，不等于它自己保存了整个 DNS 数据库。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "nslookup 的主要用途是什么？",
+      "a": "向 DNS 服务器发送查询，并以人类可读的格式显示服务器返回的资源记录。"
+    },
+    {
+      "q": "nslookup 可以查询哪些类型的 DNS 服务器？",
+      "a": "可以向根 DNS 服务器、TLD DNS 服务器或权威 DNS 服务器查询。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "DNS 资源记录"
+  ],
+  "source_pages": [
+    109,
+    112
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "273_nslookup_查询_dns_记录",
+  "_chunk_pages": [
+    109,
+    112
+  ]
+}

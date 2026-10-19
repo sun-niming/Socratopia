@@ -1,0 +1,52 @@
+{
+  "title": "Grid 的类型别名、堆分配和具体用法",
+  "definition": "Grid 是一个需要提供模板实参的类模板。可以直接写 Grid<int>，也可以使用类型别名简化书写，例如 using IntGrid = Grid<int>。Grid 对象既可以在栈上创建，也可以通过 std::make_unique 在堆上创建；访问堆对象时使用 -> 调用 at。",
+  "key_points": [
+    "仅写 Grid 而不提供模板参数不能形成完整类型；原文中的 Grid test 和 Grid<> test 均标记为 WILL NOT COMPILE。",
+    "类型别名示例：$$\\texttt{using IntGrid = Grid<int>;}$$，之后可用 IntGrid 表示 Grid<int>。",
+    "可以使用 std::make_unique 创建堆上的网格对象。",
+    "对 std::unique_ptr<Grid<int>> 使用 ->at(x,y) 访问网格。"
+  ],
+  "examples": [
+    "类型别名：text code `using IntGrid = Grid<int>;`",
+    "堆分配：text code `auto myGridOnHeap { std::make_unique<Grid<int>>(2, 2) };`",
+    "堆对象访问：text code `myGridOnHeap->at(0, 0) = 10;`",
+    "读取值：$$\\texttt{int x\\{ myGridOnHeap->at(0,0).value\\_or(0) \\};}$$"
+  ],
+  "misconceptions": [
+    "Grid 不是可以直接使用的非模板类；使用时必须指定模板参数，例如 Grid<int>。",
+    "类型别名不会创建新类型；IntGrid 与 Grid<int> 表示同一种类型。",
+    "使用 make_unique 后仍需通过指针运算符 -> 访问对象成员。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么 `Grid test;` 不能编译？",
+      "a": "因为 Grid 是类模板，必须提供模板参数，例如 `Grid<int> test;`。"
+    },
+    {
+      "q": "IntGrid 与 Grid<int> 是什么关系？",
+      "a": "IntGrid 是 Grid<int> 的类型别名。"
+    },
+    {
+      "q": "如何创建一个 2×2 的堆上 Grid<int>？",
+      "a": "可写：text code `auto grid = std::make_unique<Grid<int>>(2, 2);`。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++ 类模板实参",
+    "using 类型别名",
+    "std::unique_ptr 和 std::make_unique"
+  ],
+  "source_pages": [
+    377,
+    380
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "486_grid_的类型别名_堆分配和具体用法",
+  "_chunk_pages": [
+    377,
+    380
+  ]
+}

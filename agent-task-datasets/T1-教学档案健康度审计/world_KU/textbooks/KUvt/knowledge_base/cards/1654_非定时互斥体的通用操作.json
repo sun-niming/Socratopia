@@ -1,0 +1,44 @@
+{
+  "title": "非定时互斥体的通用操作",
+  "definition": "C++ 标准库中的非定时互斥体支持阻塞获取、立即尝试获取和释放锁三类基本操作：lock()、try_lock() 和 unlock()。lock() 在获取锁前可以无限期阻塞；try_lock() 会立即返回成功或失败；unlock() 释放当前调用线程持有的锁。",
+  "key_points": [
+    "lock()：尝试获取锁；如果锁被其他线程持有，则阻塞直到获得锁。",
+    "try_lock()：尝试获取锁；成功时立即返回 true，锁被占用而获取失败时立即返回 false。",
+    "unlock()：释放由当前调用线程持有的锁，使其他线程有机会获取。",
+    "如果需要限制等待时间，应使用定时互斥体或支持超时的锁对象。"
+  ],
+  "examples": [
+    "代码：if (m.try_lock()) { /* 访问共享数据 */ m.unlock(); } else { /* 未获得锁 */ }",
+    "代码：m.lock();\n代码：/* 访问共享数据 */\n代码：m.unlock();"
+  ],
+  "misconceptions": [
+    "try_lock() 失败时不会阻塞等待，而是立即返回 false。",
+    "unlock() 不能替代对共享数据访问前的加锁；它只负责释放已经持有的锁。",
+    "直接手工调用 lock() 和 unlock() 容易因异常、提前返回或控制流分支而忘记释放锁。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "lock() 与 try_lock() 的主要区别是什么？",
+      "a": "lock() 获取不到锁时会阻塞，直到获得锁；try_lock() 获取不到锁时立即返回 false，成功时返回 true。"
+    },
+    {
+      "q": "unlock() 的作用是什么？",
+      "a": "释放当前调用线程持有的互斥体锁，使其他线程可以尝试获取该锁。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "互斥体的基本同步机制"
+  ],
+  "source_pages": [
+    806,
+    806
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1654_非定时互斥体的通用操作",
+  "_chunk_pages": [
+    805,
+    808
+  ]
+}

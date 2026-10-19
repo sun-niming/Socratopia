@@ -1,0 +1,60 @@
+{
+  "title": "CableCompany类的套餐和客户管理接口",
+  "definition": "原文中的 `CableCompany` 类使用两个 `std::map<std::string, std::bitset<NumChannels>>` 管理有线频道套餐和客户订阅信息。它提供添加、删除和查询套餐的接口，也提供创建客户、增删客户频道、添加套餐到客户、删除客户以及查询客户频道的接口。",
+  "key_points": [
+    "`addPackage(packageName, channels)` 可以用 `bitset` 或由 `0`、`1` 字符组成的字符串添加套餐。",
+    "`removePackage(packageName)` 删除指定套餐；`getPackage(packageName)` 查询套餐频道集合。",
+    "`newCustomer(name, package)` 根据已有套餐创建客户；也可以直接传入频道 `bitset` 创建客户。",
+    "如果客户名称已经存在，创建客户会抛出 `invalid_argument`。",
+    "`addChannel(name, channel)` 和 `removeChannel(name, channel)` 分别添加和移除客户的单个频道。",
+    "如果客户名称未知，客户频道相关操作会抛出 `invalid_argument`。",
+    "如果套餐名称无效，涉及套餐查询或添加套餐的操作会抛出 `out_of_range`。",
+    "`deleteCustomer(name)` 删除指定客户，`getCustomerChannels(name)` 查询客户订阅的频道。"
+  ],
+  "examples": [
+    "接口示意：`void addPackage(std::string_view packageName, const std::bitset<NumChannels>& channels);`。",
+    "也可以通过字符串添加套餐：`void addPackage(std::string_view packageName, std::string_view channels);`，例如传入由 `0` 和 `1` 组成的 10 位字符串。",
+    "创建客户可以使用：`newCustomer(\"Alice\", \"SportsPackage\");`，表示使用名为 `SportsPackage` 的套餐作为初始频道集合。"
+  ],
+  "misconceptions": [
+    "`newCustomer` 使用套餐创建客户时，套餐名称必须已经存在；它不是直接把任意字符串当作套餐内容。",
+    "添加客户频道和添加套餐是不同操作：前者设置一个位，后者将整个套餐位集合按位或到客户集合中。",
+    "删除客户与删除套餐是两个独立操作，分别作用于客户映射和套餐映射。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "CableCompany使用什么数据结构保存套餐和客户信息？",
+      "a": "使用两个 `std::map<std::string, std::bitset<NumChannels>>`，分别保存套餐和客户信息。"
+    },
+    {
+      "q": "客户已经存在时调用 `newCustomer` 会怎样？",
+      "a": "会抛出 `invalid_argument`，并且不会改变客户数据库。"
+    },
+    {
+      "q": "套餐名称无效时调用 `getPackage` 会怎样？",
+      "a": "会抛出 `out_of_range`。"
+    },
+    {
+      "q": "客户名称未知时调用 `addChannel` 会怎样？",
+      "a": "会抛出 `invalid_argument`。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "bitset的基本概念和基本操作",
+    "std::map基础",
+    "C++异常处理基础",
+    "std::string_view基础"
+  ],
+  "source_pages": [
+    602,
+    604
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1243_cablecompany类的套餐和客户管理接口",
+  "_chunk_pages": [
+    601,
+    604
+  ]
+}

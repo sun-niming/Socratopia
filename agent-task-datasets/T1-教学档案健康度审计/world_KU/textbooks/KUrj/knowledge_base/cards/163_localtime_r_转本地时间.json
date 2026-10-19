@@ -1,0 +1,45 @@
+{
+  "title": "localtime_r 转本地时间",
+  "definition": "`localtime_r` 是把时间戳转换成本地时间结构的线程安全版本。其原型为 `struct tm *localtime_r(const time_t *timep, struct tm *result);`，成功时返回 `result`。在本项目中，它配合 `strftime` 生成日志时间。",
+  "key_points": [
+    "头文件是 `<time.h>`。",
+    "它把 `time_t` 时间戳转换为本地时间结构 `struct tm`。",
+    "它是线程安全版本，适合多线程扩展场景。",
+    "本项目中与 `strftime` 配合生成日志时间。",
+    "即使项目当前使用 `fork`，也建议直接使用 `localtime_r` 养成好习惯。"
+  ],
+  "examples": [
+    "`struct tm tm_buf; localtime_r(&now, &tm_buf);`"
+  ],
+  "misconceptions": [
+    "误以为 `localtime` 和 `localtime_r` 没区别。",
+    "误以为当前只用 `fork` 就完全不需要考虑线程安全。",
+    "误以为返回值总是新分配的结构体指针。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`localtime_r` 的核心特点是什么？",
+      "a": "它是把时间戳转换成本地时间结构的线程安全版本。"
+    },
+    {
+      "q": "`localtime_r` 在本项目里主要配合什么函数使用？",
+      "a": "配合 `strftime` 生成日志时间。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "time 函数",
+    "struct tm"
+  ],
+  "source_pages": [
+    105,
+    106
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "163_localtime_r_转本地时间",
+  "_chunk_pages": [
+    105,
+    108
+  ]
+}

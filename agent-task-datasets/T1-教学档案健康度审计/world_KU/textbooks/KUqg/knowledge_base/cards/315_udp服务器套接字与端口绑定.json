@@ -1,0 +1,44 @@
+{
+  "title": "UDP服务器套接字与端口绑定",
+  "definition": "UDP服务器通过 `socket(AF_INET, SOCK_DGRAM)` 创建 UDP 套接字，并通过 `bind(('', serverPort))` 将服务器端口号显式绑定到该套接字。原文示例绑定端口 12000。绑定后，发送到该服务器 IP 地址和端口 12000 的 UDP 分组会被导向这个服务器套接字。空字符串 `''` 用作绑定地址，而 `serverPort` 指定服务器端口。",
+  "key_points": [
+    "服务器与客户端都可以使用 `socket(AF_INET, SOCK_DGRAM)` 创建 UDP 套接字。",
+    "与示例客户端不同，服务器代码显式调用 `bind()` 分配固定端口号。",
+    "服务器需要固定、已知的端口号，客户端才能将分组发送给正确的服务器进程。",
+    "套接字地址由 IP 地址和端口号共同标识。"
+  ],
+  "examples": [
+    "from socket import *\nserverPort = 12000\nserverSocket = socket(AF_INET, SOCK_DGRAM)\nserverSocket.bind(('', serverPort))\nprint('The server is ready to receive')"
+  ],
+  "misconceptions": [
+    "误以为服务器端口号只需存入变量而不需要绑定；服务器必须通过 `bind()` 将端口号与套接字关联。",
+    "误以为只要 IP 地址正确，分组就一定能到达目标服务器进程；还必须使用该进程所绑定的正确端口号。",
+    "误以为 UDP 客户端和服务器在端口配置上完全相同；示例客户端由操作系统分配本地端口，而服务器显式绑定固定端口。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "UDP服务器为什么要调用 `bind(('', serverPort))`？",
+      "a": "为了把固定的服务器端口号与服务器套接字绑定，使发往该服务器 IP 地址和该端口的 UDP 分组能够被导向这个套接字。"
+    },
+    {
+      "q": "原文示例中的 UDP 服务器绑定了哪个端口？",
+      "a": "端口 12000。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "UDP客户端套接字的创建与配置",
+    "IP地址与端口号"
+  ],
+  "source_pages": [
+    125,
+    128
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "315_udp服务器套接字与端口绑定",
+  "_chunk_pages": [
+    125,
+    128
+  ]
+}

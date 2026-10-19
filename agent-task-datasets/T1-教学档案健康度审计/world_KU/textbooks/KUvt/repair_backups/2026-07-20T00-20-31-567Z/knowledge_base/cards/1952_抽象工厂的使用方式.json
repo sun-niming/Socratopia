@@ -1,0 +1,48 @@
+{
+  "title": "抽象工厂的使用方式",
+  "definition": "使用抽象工厂时，业务函数接收抽象工厂接口的引用，通过 makeSedan() 和 makeSuv() 创建汽车，再通过 ICar 的 info() 获取信息。该业务函数不需要知道任何具体工厂或具体汽车类型；main() 可以分别传入 FordFactory 和 ToyotaFactory，从而复用同一套创建和处理逻辑。",
+  "key_points": [
+    "业务函数 createSomeCars(IAbstractCarFactory& carFactory) 只依赖抽象工厂接口。",
+    "函数内部取得的 sedan 和 suv 是抽象产品指针，可以调用 info() 而不必判断具体品牌。",
+    "在 main() 中，可以创建 FordFactory 和 ToyotaFactory，并分别调用 createSomeCars()。",
+    "更换具体工厂即可更换创建出的汽车产品族，业务函数本身无需修改。"
+  ],
+  "examples": [
+    "使用方式可概括为：\nvoid createSomeCars(IAbstractCarFactory& carFactory) {\n    auto sedan = carFactory.makeSedan();\n    auto suv = carFactory.makeSuv();\n    std::cout << sedan->info();\n    std::cout << suv->info();\n}\n\nFordFactory fordFactory;\nToyotaFactory toyotaFactory;\ncreateSomeCars(fordFactory);\ncreateSomeCars(toyotaFactory);"
+  ],
+  "misconceptions": [
+    "createSomeCars() 不需要接收 FordFactory 或 ToyotaFactory 的具体类型。",
+    "createSomeCars() 不是直接构造 FordSedan、FordSuv、ToyotaSedan 或 ToyotaSuv。",
+    "传入不同工厂不会改变 createSomeCars() 的代码，只会改变工厂实际创建的产品。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "createSomeCars() 为什么可以同时处理 FordFactory 和 ToyotaFactory？",
+      "a": "因为两个具体工厂都实现了 IAbstractCarFactory 接口，而 createSomeCars() 接收的是该抽象接口的引用。"
+    },
+    {
+      "q": "createSomeCars() 如何创建汽车？",
+      "a": "通过 carFactory.makeSedan() 创建轿车，通过 carFactory.makeSuv() 创建 SUV，再调用返回对象的 info()。"
+    },
+    {
+      "q": "如果要让 createSomeCars() 创建 Toyota 汽车，需要修改它的实现吗？",
+      "a": "不需要，只需向它传入 ToyotaFactory；具体产品类型由传入的具体工厂决定。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "抽象工厂模式的结构",
+    "C++运行时多态"
+  ],
+  "source_pages": [
+    947,
+    947
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1952_抽象工厂的使用方式",
+  "_chunk_pages": [
+    945,
+    948
+  ]
+}

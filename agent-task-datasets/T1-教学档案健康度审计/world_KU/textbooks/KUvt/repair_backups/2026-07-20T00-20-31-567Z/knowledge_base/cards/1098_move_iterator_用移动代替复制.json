@@ -1,0 +1,49 @@
+{
+  "title": "move_iterator 用移动代替复制",
+  "definition": "std::move_iterator 是一种迭代器适配器。它的解引用运算符会自动把取得的左值转换为右值引用，使算法或目标容器能够调用元素的移动构造函数或移动赋值运算符，从而把元素移动到新目标，避免不必要的复制开销。使用它的前提是元素类型支持移动语义。",
+  "key_points": [
+    "std::make_move_iterator() 可以从普通迭代器创建 move_iterator。",
+    "使用 move_iterator 初始化新容器时，元素通常调用移动构造函数，而不是拷贝构造函数。",
+    "也可以使用 move_iterator{iterator}，由 CTAD 推导模板参数。",
+    "移动语义可能改变源对象的状态；教材强调应确保对象支持移动语义。"
+  ],
+  "examples": [
+    "vector<MoveableClass> vecTwo{\n    make_move_iterator(begin(vecSource)),\n    make_move_iterator(end(vecSource))\n};",
+    "vector<MoveableClass> vecTwo{\n    move_iterator{begin(vecSource)},\n    move_iterator{end(vecSource)}\n};"
+  ],
+  "misconceptions": [
+    "move_iterator 并不是复制出一个新的独立元素；它使解引用结果成为可移动的右值引用。",
+    "只有元素类型提供可用的移动构造或移动赋值操作时，使用移动迭代器才有预期效果。",
+    "不使用 move_iterator 从 vecSource 初始化 vecOne 时，教材示例中会对每个元素调用一次拷贝构造函数；使用 move_iterator 后则调用移动构造函数。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "move_iterator 如何减少元素复制？",
+      "a": "它的解引用运算符将元素左值转换为右值引用，使目标容器调用移动构造或移动赋值，而不是普通复制。"
+    },
+    {
+      "q": "如何用 vecSource 中的元素移动构造 vecTwo？",
+      "a": "使用 make_move_iterator(begin(vecSource)) 和 make_move_iterator(end(vecSource)) 作为 vecTwo 的范围构造参数。"
+    },
+    {
+      "q": "使用 move_iterator 的前提是什么？",
+      "a": "元素类型需要支持移动语义，例如提供可用的移动构造函数或移动赋值运算符。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "左值与右值引用",
+    "移动构造函数和移动赋值运算符"
+  ],
+  "source_pages": [
+    535,
+    536
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1098_move_iterator_用移动代替复制",
+  "_chunk_pages": [
+    533,
+    536
+  ]
+}

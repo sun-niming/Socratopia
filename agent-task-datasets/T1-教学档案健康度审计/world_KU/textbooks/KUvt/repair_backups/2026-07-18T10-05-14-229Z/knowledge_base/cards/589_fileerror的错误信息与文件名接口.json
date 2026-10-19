@@ -1,0 +1,45 @@
+{
+  "title": "FileError的错误信息与文件名接口",
+  "definition": "FileError保存发生错误的文件名和错误消息。它通过what()返回错误消息，通过getFilename()返回文件名，并提供受保护的setMessage()供派生类设置更具体的错误描述。what()和getFilename()在教材示例中声明为const noexcept接口。",
+  "key_points": [
+    "FileError构造函数接收文件名，并将其保存到成员变量中。",
+    "what()返回m_message.c_str()，因此返回类型为const char*。",
+    "getFilename()返回保存的文件名。",
+    "setMessage()用于让派生异常类设置具体错误消息，并且该函数为protected，外部调用者不能直接使用。"
+  ],
+  "examples": [
+    "典型接口形式：const char* what() const noexcept override;",
+    "典型接口形式：virtual const string& getFilename() const noexcept;",
+    "派生类可以调用setMessage(format(\"Unable to open {}.\", getFilename()));设置打开失败信息。"
+  ],
+  "misconceptions": [
+    "what()返回的不是std::string对象，而是指向错误消息字符序列的const char*。",
+    "setMessage()不是供普通调用者修改异常信息的公共接口，而是供派生类使用的受保护接口。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "FileError的what()函数返回什么？",
+      "a": "返回错误消息的const char*表示，教材示例中通过m_message.c_str()提供该结果。"
+    },
+    {
+      "q": "为什么setMessage()设计为protected？",
+      "a": "因为它主要用于让FileError的派生类构造具体错误消息，而不是让异常对象的外部使用者任意修改消息。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++继承",
+    "std::exception接口"
+  ],
+  "source_pages": [
+    450,
+    451
+  ],
+  "needs_verification": true,
+  "verify_query": "Marc Gregoire C++20高级编程 第5版 FileError getFilename setMessage what const noexcept 原文",
+  "concept_id": "589_fileerror的错误信息与文件名接口",
+  "_chunk_pages": [
+    449,
+    452
+  ]
+}

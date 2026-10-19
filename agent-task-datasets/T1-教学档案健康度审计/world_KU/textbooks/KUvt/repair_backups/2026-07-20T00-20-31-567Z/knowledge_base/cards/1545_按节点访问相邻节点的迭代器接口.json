@@ -1,0 +1,49 @@
+{
+  "title": "按节点访问相邻节点的迭代器接口",
+  "definition": "directed_graph 可以为给定节点提供遍历其相邻节点的迭代器。接口包括普通、const、反向和 const 反向相邻节点迭代器，并提供 begin、end、cbegin、cend、rbegin、rend、crbegin 和 crend 等方法。",
+  "key_points": [
+    "相邻节点迭代器类型包括 iterator_adjacent_nodes、const_iterator_adjacent_nodes、reverse_iterator_adjacent_nodes 和 const_reverse_iterator_adjacent_nodes。",
+    "调用 begin(node_value) 或 cbegin(node_value) 可以取得给定节点的相邻节点遍历起点；对应的 end、cend 用作结束迭代器。",
+    "如果给定节点不存在，相关方法返回默认构造的相邻节点迭代器，并将其作为结束迭代器。",
+    "相邻节点迭代器的具体实现遵循普通 directed_graph 迭代器的设计原则。"
+  ],
+  "examples": [
+    "只读遍历节点 22 的所有相邻节点：\nauto iterBegin { graph.cbegin(22) };\nauto iterEnd { graph.cend(22) };\nif (iterBegin == directed_graph<int>::const_iterator_adjacent_nodes{}) {\n    std::cout << \"Value 22 not found.\" << std::endl;\n} else {\n    for (auto iter { iterBegin }; iter != iterEnd; ++iter) {\n        std::cout << *iter << \" \";\n    }\n}"
+  ],
+  "misconceptions": [
+    "相邻节点迭代器遍历的不是整个图，而是某一个给定节点的邻接列表。",
+    "找不到节点时不会自动遍历一个空的有效邻接列表；接口返回默认构造的迭代器，调用者应据此判断节点是否存在。",
+    "const_iterator_adjacent_nodes 只能读取相邻节点，不能通过迭代器修改节点值。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何取得节点 22 的相邻节点遍历范围？",
+      "a": "使用 graph.cbegin(22) 获取起点，使用 graph.cend(22) 获取结束迭代器。"
+    },
+    {
+      "q": "如果 directed_graph 中不存在指定节点，begin(const T&) 返回什么？",
+      "a": "返回默认构造的相邻节点迭代器，并将其作为结束迭代器。"
+    },
+    {
+      "q": "相邻节点迭代器接口提供哪些主要方向和权限组合？",
+      "a": "提供普通正向、const 正向、普通反向和 const 反向四类相邻节点迭代器。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++迭代器的基本用法",
+    "const 迭代器",
+    "std::reverse_iterator"
+  ],
+  "source_pages": [
+    745,
+    746
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1545_按节点访问相邻节点的迭代器接口",
+  "_chunk_pages": [
+    745,
+    748
+  ]
+}

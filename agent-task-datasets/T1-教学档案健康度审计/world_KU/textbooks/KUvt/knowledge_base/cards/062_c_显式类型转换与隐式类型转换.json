@@ -1,0 +1,52 @@
+{
+  "title": "C++显式类型转换与隐式类型转换",
+  "definition": "C++可以把一个变量转换为另一种类型。教材列出三种显式转换写法：C 风格转换、函数风格转换和推荐的 `static_cast`。例如把 `float` 转换为 `int` 时，小数部分会被去掉。某些类型之间可以自动进行隐式转换，例如 `short` 可以转换为 `long`。转换可能导致数据丢失或错误结果，因此应了解源类型和目标类型的兼容性。",
+  "key_points": [
+    "三种显式转换形式分别是 `(int)value`、`int(value)` 和 `static_cast<int>(value)`。",
+    "教材推荐使用 `static_cast`，因为它更整洁、意图更明确。",
+    "将浮点数转换为整数会去掉小数部分。",
+    "如果浮点值超出整数类型可表示的范围，转换结果可能完全错误。",
+    "隐式转换可能由编译器自动执行，但可能引发数据丢失；不兼容时编译器可能警告或报错。"
+  ],
+  "examples": [
+    "`float myFloat {3.14f};`",
+    "`int i1 {(int)myFloat};`",
+    "`int i2 {int(myFloat)};`",
+    "`int i3 {static_cast<int>(myFloat)};`",
+    "`long someLong {someShort};`"
+  ],
+  "misconceptions": [
+    "`static_cast<int>(3.14f)` 会四舍五入为 `3`；教材说明是去掉小数部分，结果为 `3`，不能理解为四舍五入。",
+    "所有隐式转换都安全；实际上转换可能造成精度或范围上的数据丢失。",
+    "目标类型能容纳某个值，就意味着所有同类型转换都不会丢失信息；浮点转整数仍会丢失小数部分。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "把 `float myFloat {3.14f};` 转换为 `int` 时，推荐使用什么写法？",
+      "a": "推荐使用 `static_cast<int>(myFloat)`。"
+    },
+    {
+      "q": "浮点数转换为整数会发生什么？",
+      "a": "小数部分会被去掉；若数值超出整数类型的可表示范围，结果可能完全错误。"
+    },
+    {
+      "q": "`short` 转换为 `long` 是否一定需要显式转换？",
+      "a": "教材给出的例子中可以自动进行隐式转换，因此不需要显式转换。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++常见基本变量类型"
+  ],
+  "source_pages": [
+    43,
+    43
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "062_c_显式类型转换与隐式类型转换",
+  "_chunk_pages": [
+    41,
+    44
+  ]
+}

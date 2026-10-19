@@ -1,0 +1,51 @@
+{
+  "title": "组合概念与标准库概念",
+  "definition": "概念可以通过逻辑运算组合，也可以复用标准库 `<concepts>` 和 `<iterator>` 中提供的概念，从而构造更具体的类型约束。",
+  "key_points": [
+    "可以使用 `&&` 组合多个概念，例如同时要求类型可递增和可递减。",
+    "标准库概念包括 `std::same_as`、`std::convertible_to`、`std::integral`、`std::floating_point`、`std::copy_constructible`、`std::equality_comparable`、`std::totally_ordered`、`std::movable`、`std::copyable` 和 `std::invocable` 等。",
+    "迭代器相关概念包括 `std::forward_iterator` 和 `std::random_access_iterator`。"
+  ],
+  "examples": [
+    "`template <typename T> concept IncrementableAndDecrementable = Incrementable<T> && Decrementable<T>;` 表示 `T` 同时满足 `Incrementable` 和 `Decrementable`。",
+    "`template <typename T> concept IsDerivedFromFoo = std::derived_from<T, Foo>;` 表示 `T` 派生自 `Foo`。",
+    "`template <typename T> concept IsConvertibleToBool = std::convertible_to<T, bool>;` 表示 `T` 可转换为 `bool`。",
+    "`template <typename T> concept DefaultAndCopyConstructible = std::default_initializable<T> && std::copy_constructible<T>;` 表示 `T` 可默认初始化且可复制构造。"
+  ],
+  "misconceptions": [
+    "使用 `&&` 组合概念表示所有条件都必须满足，不是满足任意一个即可。",
+    "`std::convertible_to<T, bool>` 表示可转换为 `bool`，不等价于类型本身就是 `bool`。",
+    "标准库概念仍然是在编译期进行约束检查，不是运行时类型检查。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何定义一个同时要求类型可递增和可递减的概念？",
+      "a": "写成 `template <typename T> concept IncrementableAndDecrementable = Incrementable<T> && Decrementable<T>;`。"
+    },
+    {
+      "q": "`std::derived_from<T, Foo>` 检查什么？",
+      "a": "它检查类型 `T` 是否派生自 `Foo`。"
+    },
+    {
+      "q": "`DefaultAndCopyConstructible` 概念要求什么？",
+      "a": "要求类型同时满足 `std::default_initializable<T>` 和 `std::copy_constructible<T>`。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++20概念",
+    "逻辑与运算",
+    "标准库类型约束"
+  ],
+  "source_pages": [
+    401,
+    404
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "525_组合概念与标准库概念",
+  "_chunk_pages": [
+    401,
+    404
+  ]
+}

@@ -1,0 +1,49 @@
+{
+  "title": "lambda 表达式的基本语法",
+  "definition": "lambda 表达式以捕获块方括号 `[]` 开始，后面通常是参数列表和函数体。其基本形式为 `$[捕获列表](参数列表) -> 返回类型 { 函数体 }$`，其中参数列表、尾返回类型和捕获内容可以按需要省略。",
+  "key_points": [
+    "空捕获块 `[]` 表示不从外部闭包作用域捕获变量。",
+    "如果 lambda 不接收参数，可以写空括号 `()`，也可以直接省略括号；但使用 `mutable` 时必须显式写圆括号。",
+    "lambda 可以像普通函数一样调用，例如 `basicLambda()`。",
+    "编译器会把 lambda 转换为一个具有唯一编译器生成类型的函数对象，也称为 lambda 闭包。",
+    "编译器生成的闭包通常包含一个函数调用运算符 `operator()`；教材示例中该运算符默认为 `const`。"
+  ],
+  "examples": [
+    "无参数 lambda：`auto basicLambda = [] { cout << \"Hello from Lambda\" << endl; };`，调用：`basicLambda();`。",
+    "带参数 lambda：`auto parametersLambda = [](int value) { cout << \"The value is \" << value << endl; };`，调用：`parametersLambda(42);`。",
+    "等价的闭包调用运算符可理解为：`auto operator()(int value) const { cout << \"The value is \" << value << endl; }`。"
+  ],
+  "misconceptions": [
+    "方括号 `[]` 不是可省略的；它是 lambda 语法的起始部分，并表示捕获列表。",
+    "lambda 的编译器生成类型名称不需要、也通常无法由程序员直接写出，因此常使用 `auto` 保存它。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`[]` 在 lambda 表达式中表示什么？",
+      "a": "它表示 lambda 的捕获列表；空列表表示不捕获外部变量。"
+    },
+    {
+      "q": "下面 lambda 如何调用：`auto f = [](int x) { cout << x; };`？",
+      "a": "使用普通函数调用语法 `f(42);`。"
+    },
+    {
+      "q": "lambda 表达式在编译器内部通常会转换成什么？",
+      "a": "转换成一个具有唯一编译器生成类型的函数对象，即 lambda 闭包。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "函数对象与算法回调"
+  ],
+  "source_pages": [
+    618,
+    618
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1275_lambda_表达式的基本语法",
+  "_chunk_pages": [
+    617,
+    620
+  ]
+}

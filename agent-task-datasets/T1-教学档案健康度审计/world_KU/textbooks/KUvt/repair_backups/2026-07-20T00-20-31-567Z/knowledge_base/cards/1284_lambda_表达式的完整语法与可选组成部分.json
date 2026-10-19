@@ -1,0 +1,46 @@
+{
+  "title": "lambda 表达式的完整语法与可选组成部分",
+  "definition": "C++ lambda 表达式的完整语法可概括为：`[capture_block] <template_params> (parameters) mutable constexpr noexcept attributes -> return_type requires { body }`。其中捕获块和主体是核心部分，其余组成部分通常都是可选的。",
+  "key_points": [
+    "捕获块，也称 lambda 导入器，用于指定从闭包作用域捕获哪些变量以及如何捕获。",
+    "C++20 的模板参数列表用于创建模板化 lambda。",
+    "参数列表类似普通函数的参数列表；只有在不需要参数且未指定其他相关说明符时，参数列表才可以省略。",
+    "`mutable` 允许 lambda 修改按值捕获的数据成员。",
+    "`constexpr` 允许 lambda 在编译期计算；即使省略，只要满足 constexpr 函数约束，lambda 也可能隐式成为 constexpr。",
+    "`noexcept` 用于指定异常保证，返回类型可以省略并由编译器推导，`requires` 用于添加模板类型约束。"
+  ],
+  "examples": [
+    "完整结构示意：`[capture] <typename T>(T value) mutable constexpr noexcept -> int requires /*约束*/ { /*主体*/ }`。",
+    "不捕获、无参数的简单 lambda：`[] { return 42; }`。"
+  ],
+  "misconceptions": [
+    "误以为 lambda 必须显式写出参数列表；在满足条件时，空参数列表可以省略。",
+    "误以为省略返回类型就不能返回值；编译器可以按照普通函数返回类型推导规则推导 lambda 的返回类型。",
+    "误以为省略 `constexpr` 后 lambda 一定不能在编译期执行；满足 constexpr 函数约束时，它可以隐式成为 constexpr。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "lambda 完整语法中，哪些部分是核心的？",
+      "a": "捕获块和主体是核心部分，模板参数、参数列表、`mutable`、`constexpr`、`noexcept`、属性、返回类型和 `requires` 等通常是可选的。"
+    },
+    {
+      "q": "lambda 的返回类型省略时如何确定？",
+      "a": "由编译器按照与普通函数返回类型推导相同的规则进行推导。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "lambda 表达式的基本语法"
+  ],
+  "source_pages": [
+    621,
+    621
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1284_lambda_表达式的完整语法与可选组成部分",
+  "_chunk_pages": [
+    621,
+    624
+  ]
+}

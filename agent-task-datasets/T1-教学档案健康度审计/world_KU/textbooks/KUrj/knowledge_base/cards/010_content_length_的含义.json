@@ -1,0 +1,44 @@
+{
+  "title": "Content-Length 的含义",
+  "definition": "Content-Length 表示 HTTP 响应体的字节数，不是字符数。对 UTF-8 文本，英文字符通常占 1 字节，中文通常占 3 字节；因此对以 C 字符串形式保存的 UTF-8 文本，可以用 strlen(body) 计算长度。但如果发送的是图片、二进制文件或未以字符串形式保存的数据，就不能用 strlen()，应使用实际字节数或文件大小（如 stat.st_size）。",
+  "key_points": [
+    "Content-Length 统计的是字节长度，不是字符个数。",
+    "strlen() 返回的是字节长度，适合以 \\0 结尾的 UTF-8 字符串。",
+    "二进制数据不能用 strlen()，要用真实字节数。"
+  ],
+  "examples": [
+    "const char *body = \"你好\"; printf(\"%zu\\n\", strlen(body)); // UTF-8 下通常输出 6",
+    "发送图片时应使用 stat.st_size 或实际读取到的字节数，而不是 strlen()"
+  ],
+  "misconceptions": [
+    "Content-Length 统计的是字符数。",
+    "任何数据都可以直接用 strlen() 计算长度。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "Content-Length 表示什么？",
+      "a": "表示响应体的字节数，不是字符数。"
+    },
+    {
+      "q": "为什么 UTF-8 中文字符串常常可以直接用 strlen() 计算长度？",
+      "a": "因为 strlen() 返回字节长度，而 UTF-8 中文通常占 3 个字节。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C 字符串",
+    "UTF-8 编码",
+    "HTTP 响应"
+  ],
+  "source_pages": [
+    17,
+    19
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "010_content_length_的含义",
+  "_chunk_pages": [
+    17,
+    20
+  ]
+}

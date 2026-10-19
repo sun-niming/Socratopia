@@ -1,0 +1,40 @@
+{
+  "title": "TCP骨架最小流程",
+  "definition": "做一个可运行的 TCP 服务器骨架时，最小流程包括：先写 `Makefile` 保证能够 `make clean && make`，再封装 `create_listen_socket(port)` 完成 `socket`、`setsockopt`、`bind`、`listen`，然后写 `accept` 循环接收客户端连接，最后实现 Echo 逻辑，把客户端发来的数据原样发回。",
+  "key_points": [
+    "先保证项目能正常编译运行。",
+    "`create_listen_socket(port)` 要封装 `socket`、`setsockopt`、`bind`、`listen`。",
+    "服务器需要写 `accept` 循环接收一个客户端连接。",
+    "Echo 逻辑是把客户端数据原样发回。",
+    "实践中要记录错误，例如 `Address already in use`、`Permission denied`。"
+  ],
+  "examples": [
+    "实践任务：\n1. 写 `Makefile`。\n2. 写 `create_listen_socket(port)`。\n3. 写 `accept` 循环。\n4. 写 Echo 逻辑。"
+  ],
+  "misconceptions": [
+    "认为只要写了 `accept` 就算完成 TCP 服务器。",
+    "忽略编译与运行检查，直接进入业务开发。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "TCP 骨架最小流程中，`create_listen_socket(port)` 通常封装哪些步骤？",
+      "a": "`socket`、`setsockopt`、`bind`、`listen`。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "socket 基础",
+    "bind/listen/accept 基础"
+  ],
+  "source_pages": [
+    49,
+    52
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "072_tcp骨架最小流程",
+  "_chunk_pages": [
+    49,
+    52
+  ]
+}

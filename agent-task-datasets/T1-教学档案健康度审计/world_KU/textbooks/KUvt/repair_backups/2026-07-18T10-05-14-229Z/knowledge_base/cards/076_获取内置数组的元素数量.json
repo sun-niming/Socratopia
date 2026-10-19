@@ -1,0 +1,43 @@
+{
+  "title": "获取内置数组的元素数量",
+  "definition": "对于内置数组，可以使用C++的`std::size(myArray)`获取数组元素数量，也可以使用传统表达式`sizeof(myArray) / sizeof(myArray[0])`计算元素数量。",
+  "key_points": [
+    "`std::size(myArray)`直接返回数组包含的元素数量，结果类型示例为`size_t`。",
+    "传统计算方法是数组总字节数除以单个元素的字节数：$$\\text{arraySize}=\\frac{\\operatorname{sizeof}(myArray)}{\\operatorname{sizeof}(myArray[0])}$$。",
+    "对于示例中的`int myArray[3]`，两种方法都得到3。"
+  ],
+  "examples": [
+    "`size_t arraySize { std::size(myArray) };`",
+    "`size_t arraySize { sizeof(myArray) / sizeof(myArray[0]) };`"
+  ],
+  "misconceptions": [
+    "`sizeof(myArray)`得到的是整个数组占用的字节数，不是数组元素个数。",
+    "计算元素数量时不能只写`sizeof(myArray[0])`，必须用整个数组的字节数除以单个元素的字节数。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何用`sizeof`计算内置数组的元素数量？",
+      "a": "使用`sizeof(myArray) / sizeof(myArray[0])`，即用整个数组的字节数除以一个元素的字节数。"
+    },
+    {
+      "q": "`std::size(myArray)`返回什么？",
+      "a": "返回数组的元素数量，示例中其结果类型使用`size_t`。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++内置数组",
+    "sizeof运算符"
+  ],
+  "source_pages": [
+    57,
+    60
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "076_获取内置数组的元素数量",
+  "_chunk_pages": [
+    57,
+    60
+  ]
+}

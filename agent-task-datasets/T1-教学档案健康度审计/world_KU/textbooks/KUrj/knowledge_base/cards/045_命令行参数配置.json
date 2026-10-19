@@ -1,0 +1,45 @@
+{
+  "title": "命令行参数配置",
+  "definition": "Web Server 应支持通过命令行参数配置端口、网站根目录和首页文件，而不是把这些值写死在代码里。可用 `getopt()` 解析 `-p`、`-r`、`-i` 等参数，并对端口做合法性检查。",
+  "key_points": [
+    "示例启动方式：`./webserver -p 8080 -r ./www -i index.html`。",
+    "`getopt()` 可解析 `-p`、`-r`、`-i` 这样的选项。",
+    "`-p` 通常用于设置端口，`-r` 设置网站根目录，`-i` 设置默认首页。",
+    "端口必须满足 `1 <= port <= 65535`。",
+    "命令行参数让程序从“写死 demo”变成“可配置服务”。"
+  ],
+  "examples": [
+    "参数解析示例：\n```c\nint opt;\nwhile ((opt = getopt(argc, argv, \"p:r:i:\")) != -1) {\n    switch (opt) {\n    case 'p':\n        config->port = atoi(optarg);\n        break;\n    case 'r':\n        strncpy(config->root, optarg, sizeof(config->root) - 1);\n        break;\n    case 'i':\n        strncpy(config->index, optarg, sizeof(config->index) - 1);\n        break;\n    default:\n        return -1;\n    }\n}\n```",
+    "端口检查示例：\n```c\nif (port <= 0 || port > 65535) {\n    fprintf(stderr, \"invalid port\\n\");\n    return -1;\n}\n```"
+  ],
+  "misconceptions": [
+    "端口写成 8080 就够了，不需要做参数化配置。",
+    "只要 `atoi()` 能转成整数，就一定是合法端口。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`./webserver -p 8080 -r ./www -i index.html` 分别设置了什么？",
+      "a": "端口、网站根目录和默认首页文件。"
+    },
+    {
+      "q": "端口为什么要检查到 `65535`？",
+      "a": "因为端口号的合法范围是 1 到 65535。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C 语言基础",
+    "命令行参数基础"
+  ],
+  "source_pages": [
+    34,
+    35
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "045_命令行参数配置",
+  "_chunk_pages": [
+    33,
+    36
+  ]
+}

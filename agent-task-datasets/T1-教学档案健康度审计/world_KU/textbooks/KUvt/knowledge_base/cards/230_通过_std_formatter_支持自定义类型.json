@@ -1,0 +1,47 @@
+{
+  "title": "通过 std::formatter 支持自定义类型",
+  "definition": "C++20 格式库可以通过为自定义类型编写 `std::formatter` 类模板特化来增加格式化支持。一个自定义 formatter 主要提供 `parse()` 和 `format()`：前者解析自定义格式说明符并保存解析结果，后者按照该结果格式化对象并写入输出上下文。",
+  "key_points": [
+    "需要针对目标自定义类型特化 `std::formatter`。",
+    "formatter 通常包含 `parse()` 和 `format()` 两个成员函数模板。",
+    "formatter 可以定义自有的格式说明符语义，而不局限于内置类型的格式规则。",
+    "解析结果可保存在 formatter 的数据成员中，供后续 `format()` 使用。",
+    "自定义格式化仍保持类型安全。"
+  ],
+  "examples": [
+    "教材为 `KeyValue` 类型编写 formatter，使 `{}`、`{:a}`、`{:b}` 和 `{:c}` 具有不同输出行为。",
+    "结构示意：`template<> class std::formatter<KeyValue> { /* parse()、format() 和解析状态 */ };`。"
+  ],
+  "misconceptions": [
+    "误以为自定义类型只能先转换成字符串才能传给 `std::format`；实际上可以特化 `std::formatter`。",
+    "误以为只需实现 `format()`；若要支持自定义格式说明符，还必须在 `parse()` 中解析它们。",
+    "误以为自定义格式说明符可完全跳过合法性检查；formatter 应主动拒绝非法说明符。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "要让 `std::format` 直接格式化自定义类型，核心做法是什么？",
+      "a": "为该自定义类型编写 `std::formatter` 类模板特化，并实现 `parse()` 和 `format()`。"
+    },
+    {
+      "q": "自定义 formatter 应把格式说明符的解析结果保存在哪里？",
+      "a": "可保存在 formatter 对象的数据成员中，供 `format()` 使用。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "C++类与成员函数",
+    "C++模板特化",
+    "C++20 std::format 基本格式说明符"
+  ],
+  "source_pages": [
+    118,
+    119
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "230_通过_std_formatter_支持自定义类型",
+  "_chunk_pages": [
+    117,
+    120
+  ]
+}

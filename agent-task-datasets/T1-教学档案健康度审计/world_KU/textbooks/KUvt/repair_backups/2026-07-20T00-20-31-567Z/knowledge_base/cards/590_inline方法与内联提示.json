@@ -1,0 +1,51 @@
+{
+  "title": "inline方法与内联提示",
+  "definition": "在函数或方法定义前使用 `inline`，可以向编译器提示：调用该函数时可以直接将函数体插入调用位置，而不是生成常规函数调用。`inline` 只是提示，编译器会根据性能、代码膨胀等因素决定是否真正内联。",
+  "key_points": [
+    "内联的目标是减少函数调用开销，但实际是否内联由编译器决定。",
+    "在调用内联函数或方法的源文件中，内联函数的定义必须对编译器有效；因此通常把定义放在类定义所在的头文件中。",
+    "在 C++20 模块之外，直接在类定义中定义的方法会隐式具有 `inline` 属性；教材指出，对于从 C++20 模块导出的类，如果希望方法内联，需要显式使用 `inline`。",
+    "链接时代码生成等高级编译器优化也可能内联没有声明为 `inline`、或定义不在头文件中的小函数。",
+    "调试器单步执行内联函数时可能跳转到函数源代码位置，但这不代表程序实际进行了普通函数调用。"
+  ],
+  "examples": [
+    "```cpp\ninline double SpreadsheetCell::getValue() const {\n    ++m_numAccesses;\n    return m_value;\n}\n\ninline std::string SpreadsheetCell::getString() const {\n    ++m_numAccesses;\n    return doubleToString(m_value);\n}\n```",
+    "在类定义中直接定义方法时，教材给出的形式是：\n```cpp\nexport class SpreadsheetCell {\npublic:\n    inline double getValue() const {\n        ++m_numAccesses;\n        return m_value;\n    }\n};\n```"
+  ],
+  "misconceptions": [
+    "写了 `inline` 不等于编译器一定会把函数体展开到调用处；编译器可以忽略这一提示。",
+    "没有写 `inline` 也不等于函数绝不会被内联；现代编译器可能基于优化分析自动内联函数。",
+    "内联主要是编译器的代码生成优化，不是改变函数语义的关键字。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`inline` 关键字是否保证函数一定会被内联？",
+      "a": "不保证。它只是对编译器的提示，编译器会根据性能收益、代码膨胀等因素决定是否内联。"
+    },
+    {
+      "q": "为什么通常要让内联函数的定义在调用它的源文件中可见？",
+      "a": "因为编译器需要看到函数体，才能用函数体替换调用位置；因此通常将定义放在类定义所在的头文件中。"
+    },
+    {
+      "q": "在类定义中直接定义的方法是否自动具有 `inline` 属性？",
+      "a": "在 C++20 模块之外，教材指出这类方法会隐式标记为 `inline`；对于从 C++20 模块导出的类，教材要求需要内联时显式写出 `inline`。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "函数定义与声明",
+    "编译器优化",
+    "C++20模块"
+  ],
+  "source_pages": [
+    282,
+    283
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 模块中导出的类成员函数在类定义内定义时是否隐式 inline，C++ 标准 inline member function module export 规则",
+  "concept_id": "590_inline方法与内联提示",
+  "_chunk_pages": [
+    281,
+    284
+  ]
+}

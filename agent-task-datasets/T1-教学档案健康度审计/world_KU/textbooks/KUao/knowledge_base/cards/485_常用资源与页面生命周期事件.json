@@ -1,0 +1,38 @@
+{
+  "title": "常用资源与页面生命周期事件",
+  "definition": "当资源加载失败、中止、完成加载，或 window、document 及其资源即将卸载、正在卸载时触发的一组事件。",
+  "key_points": [
+    "error：资源加载失败时触发。",
+    "abort：正在加载的资源已经被中止时触发。",
+    "load：资源及其相关资源已完成加载时触发。",
+    "beforeunload：window、document 及其资源即将被卸载时触发。",
+    "unload：文档或一个依赖资源正在被卸载时触发。"
+  ],
+  "examples": [
+    "图片或脚本加载失败时触发 error",
+    "页面关闭前可触发 beforeunload"
+  ],
+  "misconceptions": [
+    "load 不是“开始加载”时触发，而是加载完成后触发。",
+    "abort 与 error 不是同一个时机，abort 指加载被中止。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "资源及其相关资源已完成加载时触发哪个事件？",
+      "a": "load"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [],
+  "source_pages": [
+    361,
+    364
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "485_常用资源与页面生命周期事件",
+  "_chunk_pages": [
+    361,
+    364
+  ]
+}

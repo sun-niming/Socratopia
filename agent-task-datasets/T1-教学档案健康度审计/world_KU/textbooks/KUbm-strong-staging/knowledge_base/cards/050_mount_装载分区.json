@@ -1,0 +1,39 @@
+{
+  "title": "mount 装载分区",
+  "definition": "教材在“磁盘操作”中给出分区装载命令：mount 分区设备文件 安装点。按教材内容，mount 用于把指定分区设备文件装载到指定安装点。",
+  "key_points": [
+    "用途：分区装载",
+    "命令格式：mount 分区设备文件 安装点",
+    "需要同时给出分区设备文件和安装点"
+  ],
+  "examples": [
+    "命令格式示例：mount 分区设备文件 安装点"
+  ],
+  "misconceptions": [
+    "不要把安装点写成设备文件；教材将两者分开给出",
+    "不要把 mount 与 umount 混淆，前者是装载"
+  ],
+  "qa_pairs": [
+    {
+      "q": "教材中 mount 的命令格式是什么？",
+      "a": "mount 分区设备文件 安装点。"
+    },
+    {
+      "q": "mount 命令中的第二个主要位置参数是什么？",
+      "a": "安装点。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [],
+  "source_pages": [
+    25,
+    28
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "050_mount_装载分区",
+  "_chunk_pages": [
+    25,
+    28
+  ]
+}

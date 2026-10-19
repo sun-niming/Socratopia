@@ -1,0 +1,143 @@
+{
+  "conversationId": "WzF-cY7R6WOcpdzX5CoBj",
+  "generatedAt": 1782208501431,
+  "pagesRange": "p.217-221",
+  "sections": [
+    {
+      "type": "tldr",
+      "content": "这一段把三种进程间通信主线串起来了：无名管道靠 `pipe()` 和 `fork()` 继承，命名管道 FIFO 先建特殊文件再 `open()`，消息队列则先用 `ftok()` 造 `key`，再用 `msgget()` 找到同一个队列。"
+    },
+    {
+      "type": "narrative",
+      "content": "一开始先把无名管道的读写端、返回值和关闭场景捋清楚，再接到 `popen()` 这种把管道、子进程和 shell 命令打包好的接口。随后转到 FIFO，重点是“先创建特殊文件，再让不同进程通过它通信”，并记住它默认阻塞。最后进入消息队列，核心转折是先有 `key` 才能让不同进程定位同一个队列，然后才谈 `msgget()`、`msgsnd()` 和 `msgrcv()`。"
+    },
+    {
+      "type": "concepts",
+      "items": [
+        {
+          "name": "无名管道 `pipe()`",
+          "body": "- 作用：创建一条**无名管道**。\n- 形式：`pipe(int fds[2])`，成功返回 `0`，失败返回 `-1`。\n- 结果：`fds[0]` 是**读端**，`fds[1]` 是**写端**。\n- 典型特点：没有路径名，通常靠 `fork()` 让子进程继承后使用。\n- 细节：\n  - 读端读到所有写端都关闭时，会返回 `0`，表示文件结尾。\n  - 写端在没有读端时继续写，通常返回 `-1`，很多时候还会伴随 `SIGPIPE`。"
+        },
+        {
+          "name": "`popen()` 和 `pclose()`",
+          "body": "- `popen(cmd, type)` 会先创建管道，再 `fork()`，并在子进程里用 shell 执行命令。\n- 返回的是 `FILE *`，不是两个文件描述符。\n- `type = r`：父进程**读**命令输出，子进程负责**写**。\n- `type = w`：父进程**写**入命令输入，子进程负责**读**。\n- 关闭时用 `pclose(FILE *stream)`。\n- 你可以把它理解成“把管道 + 子进程 + 命令执行封装好”的高级接口。"
+        },
+        {
+          "name": "命名管道 FIFO",
+          "body": "- FIFO 的核心是：**先创建一个特殊文件，再让不同进程读写它**。\n- 创建方式：\n  - `mkfifo()`：专门创建命名管道，更直接。\n  - `mknod()`：也能创建特殊文件，FIFO 只是其中一种。\n- 创建好后通常按这个流程用：`open()` → `read()` / `write()` → `close()`。\n- FIFO 有路径名，所以**互不相关的进程**也能通过它通信。\n- 它受权限控制，像普通文件一样可通过文件名打开。\n- 默认读写是**阻塞**的，通常要等两端都打开后才能真正通信。"
+        },
+        {
+          "name": "消息队列里的 `key` 和 `id`",
+          "body": "- 消息队列不是靠路径名认门，而是先靠 `key`。\n- `ftok(pathname, proj_id)` 的作用是生成 `key_t key`。\n- `msgget(key, msgflg)` 再根据这个 `key` 创建或打开消息队列，返回的是**消息队列标识 `id`**。\n- 直觉上可以理解为：\n  - `key` 像门牌号。\n  - `id` 像系统真正给你的队列编号。\n- 两个进程想操作同一个消息队列，最少要共享同一个 `key`。"
+        },
+        {
+          "name": "消息队列的发送与接收",
+          "body": "- `msgsnd()`：发送消息。\n- `msgrcv()`：接收消息。\n- 教材里强调消息体里要有 `mtype`，也就是**消息类型**。\n- `msgget()` 后到底发还是收，要看进程自己的需求；队列只是先被创建或打开。"
+        },
+        {
+          "name": "`msgget()` 的常见标志",
+          "body": "- `IPC_CREAT`：如果队列不存在，就创建。\n- `IPC_EXCL`：通常和 `IPC_CREAT` 一起用，表示如果已经存在就失败。\n- `IPC_CREAT | 0666`：创建时顺便指定权限。\n- 这一组标志决定的是：是创建、打开，还是带什么权限去创建。"
+        }
+      ]
+    },
+    {
+      "type": "key-terms",
+      "items": [
+        {
+          "term": "无名管道",
+          "definition": "没有路径名的管道，通常靠 `fork()` 继承后使用。"
+        },
+        {
+          "term": "读端 / 写端",
+          "definition": "`pipe()` 返回的两个文件描述符；读端是 `fds[0]`，写端是 `fds[1]`。"
+        },
+        {
+          "term": "`popen()`",
+          "definition": "创建管道并在子进程里执行命令，父进程拿到 `FILE *` 进行读或写。"
+        },
+        {
+          "term": "`pclose()`",
+          "definition": "关闭 `popen()` 打开的文件流。"
+        },
+        {
+          "term": "FIFO",
+          "definition": "命名管道，先创建特殊文件，再让不同进程通过文件名读写。"
+        },
+        {
+          "term": "`mkfifo()`",
+          "definition": "专门创建 FIFO 的接口。"
+        },
+        {
+          "term": "`mknod()`",
+          "definition": "创建特殊文件的接口，也可以用于 FIFO。"
+        },
+        {
+          "term": "阻塞",
+          "definition": "FIFO 默认的读写行为；通常要等两端都打开后才能进行通信。"
+        },
+        {
+          "term": "`ftok()`",
+          "definition": "根据路径名和 `proj_id` 生成 `key_t key`。"
+        },
+        {
+          "term": "`msgget()`",
+          "definition": "根据 `key` 创建或打开消息队列，返回 `id`。"
+        },
+        {
+          "term": "`msgsnd()`",
+          "definition": "向消息队列发送消息。"
+        },
+        {
+          "term": "`msgrcv()`",
+          "definition": "从消息队列接收消息。"
+        },
+        {
+          "term": "`mtype`",
+          "definition": "消息体里的类型字段，用来标识消息类型。"
+        },
+        {
+          "term": "`IPC_CREAT`",
+          "definition": "消息队列不存在时就创建。"
+        },
+        {
+          "term": "`IPC_EXCL`",
+          "definition": "常与 `IPC_CREAT` 配合，表示已存在则失败。"
+        }
+      ]
+    },
+    {
+      "type": "review-questions",
+      "items": [
+        {
+          "question": "`pipe()` 创建出来的两个文件描述符，哪个是读端，哪个是写端？",
+          "hint": "回忆 `fds[0]` 和 `fds[1]` 的对应关系。",
+          "answer": "`fds[0]` 是读端，`fds[1]` 是写端。"
+        },
+        {
+          "question": "`popen(cmd, type)` 里，`type = r` 时父进程和子进程分别在做什么？",
+          "hint": "抓住“父读子写”这个记法。",
+          "answer": "`type = r` 时，父进程读命令输出，子进程写；`type = w` 时则相反，父进程写，子进程读。"
+        },
+        {
+          "question": "为什么 FIFO 常说默认是阻塞的？",
+          "hint": "想想“什么时候才能真正开始读写”。",
+          "answer": "因为 FIFO 通常要等两端都打开后才能进行读写，所以默认会阻塞。"
+        },
+        {
+          "question": "`ftok()`、`msgget()` 分别做什么？",
+          "hint": "一个负责造 `key`，一个负责用 `key` 找队列。",
+          "answer": "`ftok()` 负责生成 `key`；`msgget()` 根据这个 `key` 创建或打开消息队列，并返回 `id`。"
+        },
+        {
+          "question": "消息队列里，`msgsnd()` 和 `msgrcv()` 分别对应什么动作？",
+          "hint": "函数名里已经藏着方向。",
+          "answer": "`msgsnd()` 是发送消息，`msgrcv()` 是接收消息。"
+        }
+      ]
+    },
+    {
+      "type": "open-question",
+      "content": "消息队列里，`msgrcv()` 具体是怎样根据 `mtype` 取到指定类型消息的？如果后面继续学参数设计，这一块会是下一步重点。"
+    }
+  ]
+}

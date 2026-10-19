@@ -1,0 +1,46 @@
+{
+  "title": "flex-direction",
+  "definition": "flex-direction 属性决定主轴的方向，也就是项目的排列方向。",
+  "key_points": [
+    "row：主轴为水平方向，起点在左端，且是默认值。",
+    "row-reverse：主轴为水平方向，起点在右端。",
+    "column：主轴为垂直方向，起点在上沿。",
+    "column-reverse：主轴为垂直方向，起点在下沿。"
+  ],
+  "examples": [
+    "flex-direction: row;",
+    "flex-direction: row-reverse;",
+    "flex-direction: column;",
+    "flex-direction: column-reverse;"
+  ],
+  "misconceptions": [
+    "不要把 row/row-reverse 误认为是垂直方向。",
+    "不要把 column/column-reverse 误认为是水平方向。",
+    "不要把主轴方向和项目的交叉轴方向混淆。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "flex-direction 属性的作用是什么？",
+      "a": "它决定主轴的方向，也就是项目的排列方向。"
+    },
+    {
+      "q": "flex-direction 的默认值是什么？",
+      "a": "row。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "CSS 弹性盒布局"
+  ],
+  "source_pages": [
+    153,
+    156
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "220_flex_direction",
+  "_chunk_pages": [
+    153,
+    156
+  ]
+}

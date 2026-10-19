@@ -1,0 +1,107 @@
+{
+  "conversationId": "JyYQk02Ziw60ZDaeUE60f",
+  "generatedAt": 1782641149425,
+  "pagesRange": null,
+  "sections": [
+    {
+      "type": "tldr",
+      "content": "本节抓住了三件事：`eval` 会让 shell 把命令再解释一遍；`source`、`bash`、`exec` 分别对应当前 shell、子 shell、进程替换；`bash -n`、`-v`、`-x` 是三种不同层次的脚本检查/调试方式。"
+    },
+    {
+      "type": "narrative",
+      "content": "一开始重点在看懂 `eval echo $i. \\$$i` 这类写法：先拼出命令字符串，再由 `eval` 重新交给 shell 执行。接着把视角转到脚本执行方式，区分了 `source`、`bash test.sh` 和 `exec` 对当前 shell 环境的影响。最后顺着调试需求，整理出 `bash -n`、`bash -v`、`bash -x` 各自适合看的东西。"
+    },
+    {
+      "type": "concepts",
+      "items": [
+        {
+          "name": "`eval` 的两层解释",
+          "body": "`eval` 的作用不是“执行一条普通命令”那么简单，而是：\n\n1. 先让 shell 做**第一轮展开**，把变量替换、转义等处理完。\n2. 再把得到的那串文本当成新命令，交给 shell **第二次解释**。\n\n课堂里的例子是：\n\n```bash\\neval echo $i. \\$$i\n```\n\n当 `i=1` 时，第一轮展开后会变成：\n\n```bash\\necho 1. $1\n```\n\n如果没有 `eval`，就停在这里；有了 `eval`，`$1` 才会继续被当成位置参数展开，最后可能得到 `1. apple` 这样的结果。\n\n**直觉**：`eval` 像“先拼装，再执行拼好的命令”。"
+        },
+        {
+          "name": "`source`、`bash`、`exec` 的区别",
+          "body": "这三个命令最重要的区别在于：**到底改的是谁的 shell 环境**。\n\n- `source test.sh`：在**当前 shell** 里执行脚本，所以脚本里改的变量、目录等，可能会留在当前终端里。\n- `bash test.sh`：开一个**子 shell** 去执行，脚本里的改动通常不会带回当前终端。\n- `exec ls`：不是“跑一个新命令后回来”，而是直接用新命令**替换当前 shell 进程**。\n\n课堂里反复强调的判断标准是：\n- 想让脚本影响当前终端，用 `source`。\n- 想安全地执行脚本、尽量不污染当前终端，用 `bash test.sh`。\n- `exec` 更像“把当前 shell 顶掉”，不是普通地执行命令。"
+        },
+        {
+          "name": "`bash -n`、`bash -v`、`bash -x` 的用途",
+          "body": "这三个选项是看脚本的不同角度：\n\n- `bash -n`：只做**语法检查**，不真正执行脚本。\n- `bash -v`：显示脚本里**原样写出来**的命令行。\n- `bash -x`：显示变量替换后、shell **实际拿去执行**的命令。\n\n课堂里的结论很清楚：如果怀疑问题出在“展开之后才暴露”，优先用 `-x`；如果只想确认有没有语法错误，用 `-n`；如果想看原始脚本文字，用 `-v`。"
+        }
+      ]
+    },
+    {
+      "type": "key-insight",
+      "content": "改当前目录则必定影响当前环境。",
+      "attribution": "学习者"
+    },
+    {
+      "type": "key-terms",
+      "items": [
+        {
+          "term": "eval",
+          "definition": "让 shell 对已经展开出来的文本再解释一次的命令。"
+        },
+        {
+          "term": "source",
+          "definition": "在当前 shell 中执行脚本。"
+        },
+        {
+          "term": "subshell",
+          "definition": "由 `bash test.sh` 这类方式启动、只影响自身的子 shell。"
+        },
+        {
+          "term": "exec",
+          "definition": "用新命令替换当前 shell 进程。"
+        },
+        {
+          "term": "current shell",
+          "definition": "当前终端里正在工作的那个 shell 环境。"
+        },
+        {
+          "term": "position parameters",
+          "definition": "脚本或函数收到的参数，如 `$1`、`$2` 等。"
+        },
+        {
+          "term": "`bash -n`",
+          "definition": "只检查语法，不执行脚本。"
+        },
+        {
+          "term": "`bash -v`",
+          "definition": "输出脚本原始命令行。"
+        },
+        {
+          "term": "`bash -x`",
+          "definition": "输出展开后的实际执行命令。"
+        }
+      ]
+    },
+    {
+      "type": "review-questions",
+      "items": [
+        {
+          "question": "`eval` 在课堂里的核心作用是什么？",
+          "hint": "想一想它会不会“再解释一次”。",
+          "answer": "它会先让 shell 完成第一轮展开，再把展开后的文本当作新命令重新交给 shell 解释执行。"
+        },
+        {
+          "question": "`source test.sh` 和 `bash test.sh` 的最大区别是什么？",
+          "hint": "看脚本改动会留在哪里。",
+          "answer": "`source` 在当前 shell 中执行，所以变量、目录等改动可能保留在当前终端；`bash test.sh` 在子 shell 中执行，改动通常不会带回当前终端。"
+        },
+        {
+          "question": "为什么课堂上说 `exec ls` 不是“执行完再回来”？",
+          "hint": "想想它是“追加”还是“替换”。",
+          "answer": "因为 `exec` 会直接用新命令替换当前 shell 进程，原来的 shell 不再继续存在。"
+        },
+        {
+          "question": "如果只想检查脚本有没有语法错误，应该用 `bash -n`、`bash -v` 还是 `bash -x`？为什么？",
+          "hint": "哪个最“克制”。",
+          "answer": "用 `bash -n`，因为它只检查语法，不真正执行脚本。"
+        }
+      ]
+    },
+    {
+      "type": "open-question",
+      "content": "课堂最后提到的 C 程序入口 `int main(int argc, char *argv[])`，其中 `argc` 和 shell 里的 `$#`、`$1`、`$2` 之间具体怎么对应，还没有继续展开。"
+    }
+  ]
+}

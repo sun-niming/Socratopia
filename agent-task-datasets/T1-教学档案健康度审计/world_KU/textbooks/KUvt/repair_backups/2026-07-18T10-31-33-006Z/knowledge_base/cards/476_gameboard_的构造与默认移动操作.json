@@ -1,0 +1,46 @@
+{
+  "title": "GameBoard 的构造与默认移动操作",
+  "definition": "GameBoard 的普通构造函数接收 width 和 height，保存棋盘尺寸，并将二维单元格容器调整为相应大小。类中还将移动构造函数和移动赋值运算符显式默认化，以支持 GameBoard 对象资源的移动。",
+  "key_points": [
+    "普通构造函数先设置 m_width 和 m_height，再执行 m_cells.resize(m_width)，并对每一列执行 column.resize(m_height)。",
+    "如果未提供尺寸，构造函数使用 DefaultWidth 和 DefaultHeight；原文中二者均为 10。",
+    "GameBoard 声明了默认化的移动构造函数：GameBoard(GameBoard&& src) = default;",
+    "GameBoard 声明了默认化的移动赋值运算符：GameBoard& operator=(GameBoard&& src) = default;"
+  ],
+  "examples": [
+    "构造 8×8 棋盘：GameBoard chessBoard{8, 8};",
+    "构造默认尺寸棋盘：GameBoard board{};，其尺寸使用 DefaultWidth 和 DefaultHeight。",
+    "二维容器的尺寸调整逻辑可概括为：先让外层大小等于 width，再让每个内层 vector 的大小等于 height。"
+  ],
+  "misconceptions": [
+    "resize(m_width) 只调整外层列数；还必须对每一列执行 resize(m_height) 才能形成完整的二维布局。",
+    "默认移动操作与复制操作不同：移动通常转移资源，而不是为每个棋子调用 clone() 创建独立副本。",
+    "width 和 height 是棋盘的逻辑尺寸，不能据此推断坐标从 1 开始；原文示例使用了坐标 0。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "GameBoard 构造函数如何建立二维单元格容器？",
+      "a": "先将 m_cells 调整为 width 个元素，再将每个列 vector 调整为 height 个元素，即形成 m_cells[x][y] 的二维结构。"
+    },
+    {
+      "q": "GameBoard 是否提供移动构造和移动赋值操作？",
+      "a": "提供；移动构造函数和移动赋值运算符都被显式声明为 = default。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "std::vector的resize",
+    "C++移动构造函数与移动赋值"
+  ],
+  "source_pages": [
+    374,
+    375
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "476_gameboard_的构造与默认移动操作",
+  "_chunk_pages": [
+    373,
+    376
+  ]
+}

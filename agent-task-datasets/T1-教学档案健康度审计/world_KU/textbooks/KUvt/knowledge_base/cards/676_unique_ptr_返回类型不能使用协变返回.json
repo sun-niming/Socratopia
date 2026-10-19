@@ -1,0 +1,45 @@
+{
+  "title": "unique_ptr 返回类型不能使用协变返回",
+  "definition": "当基类虚方法返回 unique_ptr<Cherry> 时，派生类重写方法不能把返回类型改成 unique_ptr<BingCherry>。原因是 unique_ptr<Cherry> 和 unique_ptr<BingCherry> 是类模板的两个不同实例，它们是完全不同且不相关的类型，不满足协变返回类型要求。",
+  "key_points": [
+    "协变返回类型适用于相关类的原始指针或引用，而不是任意包装类型。",
+    "unique_ptr<Cherry> 与 unique_ptr<BingCherry> 是不同的模板实例，不能作为重写方法的协变返回类型。",
+    "如果基类方法返回 unique_ptr<Cherry>，派生类重写方法也必须使用兼容的基类返回类型声明，而不能改为 unique_ptr<BingCherry>。",
+    "原文示例使用普通指针实现协变返回，并建议调用者应立即将结果存入智能指针以管理资源。"
+  ],
+  "examples": [
+    "class CherryTree {\npublic:\n    virtual unique_ptr<Cherry> pick() {\n        return make_unique<Cherry>();\n    }\n};\n\nclass BingCherryTree : public CherryTree {\npublic:\n    unique_ptr<BingCherry> pick() override { /* 编译错误 */ }\n};"
+  ],
+  "misconceptions": [
+    "因为 BingCherry 是 Cherry 的派生类，所以 unique_ptr<BingCherry> 不会自动成为 unique_ptr<Cherry> 的协变返回类型。",
+    "模板实例之间是否相关不能仅由模板参数之间的继承关系决定；本例中两个 unique_ptr 实例被视为完全不同的类型。",
+    "使用智能指针并不意味着可以任意改变虚函数的返回类型。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么 unique_ptr<BingCherry> 不能作为返回 unique_ptr<Cherry> 的虚方法的重写返回类型？",
+      "a": "因为 unique_ptr<Cherry> 和 unique_ptr<BingCherry> 是类模板的不同实例，属于完全不同且不相关的类型，不满足协变返回类型规则。"
+    },
+    {
+      "q": "协变返回类型为什么可以用于 Cherry* 和 BingCherry*？",
+      "a": "因为它们是相关类的指针类型，且 BingCherry 是 Cherry 的派生类。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "协变返回类型",
+    "类模板实例化",
+    "智能指针"
+  ],
+  "source_pages": [
+    332,
+    332
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "676_unique_ptr_返回类型不能使用协变返回",
+  "_chunk_pages": [
+    329,
+    332
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "title": "浏览器",
+  "definition": "浏览器用于解析 Web 服务器返回的响应信息，并通过渲染把页面呈现给用户。常见浏览器包括 IE、Edge、Firefox、Chrome、Safari、Opera。",
+  "key_points": [
+    "浏览器负责解析服务器响应。",
+    "浏览器负责渲染并呈现页面。",
+    "常见浏览器有 IE、Edge、Firefox、Chrome、Safari、Opera。"
+  ],
+  "examples": [
+    "Chrome 解析服务器返回的网页内容并显示页面。"
+  ],
+  "misconceptions": [
+    "浏览器只是一个显示窗口，不负责解析。",
+    "只要能打开网页的软件都一定不是浏览器。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "浏览器的主要作用是什么？",
+      "a": "解析 Web 服务器响应信息，并渲染呈现页面。"
+    },
+    {
+      "q": "请举出一种常见浏览器。",
+      "a": "IE、Edge、Firefox、Chrome、Safari、Opera 中的任意一种。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "客户端与服务器端"
+  ],
+  "source_pages": [
+    17,
+    20
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "027_浏览器",
+  "_chunk_pages": [
+    17,
+    20
+  ]
+}

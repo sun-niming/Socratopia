@@ -1,0 +1,38 @@
+{
+  "title": "目录穿越",
+  "definition": "目录穿越是指请求如 /../../etc/passwd 或其 URL 编码形式时，服务器没有正确阻止越权读取。正确处理流程是先做 URL 解码，再拒绝危险路径；对存在的文件用 realpath；并检查最终 path 是否在 root 目录内，且前缀判断要有边界。",
+  "key_points": [
+    "要先 URL 解码，再判断是否包含危险路径。",
+    "对存在的文件使用 realpath 做归一化。",
+    "检查最终路径必须位于 root 内，并且前缀判断要有边界。"
+  ],
+  "examples": [
+    "curl -i http://127.0.0.1:8080/../../etc/passwd",
+    "curl -i http://127.0.0.1:8080/%2e%2e/%2e%2e/etc/passwd"
+  ],
+  "misconceptions": [
+    "只检查原始 URL 就足够，忽略了 URL 解码后的路径。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "防止目录穿越时，路径处理的顺序是什么？",
+      "a": "先 URL 解码，再拒绝危险路径；对存在文件用 realpath；最后确认 path 在 root 内且边界正确。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "URL 编码",
+    "文件系统路径"
+  ],
+  "source_pages": [
+    109,
+    112
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "172_目录穿越",
+  "_chunk_pages": [
+    109,
+    112
+  ]
+}

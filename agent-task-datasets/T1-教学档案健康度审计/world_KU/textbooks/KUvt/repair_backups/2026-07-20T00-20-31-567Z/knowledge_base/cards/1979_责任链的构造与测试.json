@@ -1,0 +1,44 @@
+{
+  "title": "责任链的构造与测试",
+  "definition": "责任链通过让每个处理程序在构造时接收下一个处理程序的地址来建立。链尾处理程序的下一个指针设为 `nullptr`。向链头调用 `handleMessage` 后，事件会按照链的连接顺序依次传递，直到某个对象处理它或到达链尾。",
+  "key_points": [
+    "示例中先创建链尾 Application，再创建指向 Application 的 Window，最后创建指向 Window 的 Shape。",
+    "链的连接关系为：$\\text{Shape} \\rightarrow \\text{Window} \\rightarrow \\text{Application} \\rightarrow \\text{nullptr}$。",
+    "从 Shape 调用 `handleMessage` 可以测试事件在链中的处理和转发。",
+    "例如左键按下由 Shape 处理，左键抬起由 Window 处理；右键按下则会继续传给 Application。"
+  ],
+  "examples": [
+    "构造链：`Application application{nullptr}; Window window{&application}; Shape shape{&window};`。",
+    "测试调用：`shape.handleMessage(Event::LeftMouseButtonDown);` 和 `shape.handleMessage(Event::LeftMouseButtonUp);`。"
+  ],
+  "misconceptions": [
+    "创建顺序与事件传递方向不同：对象可以先创建链尾，再逐层创建指向已存在对象的前置处理程序。",
+    "`nullptr` 表示 Application 后面没有处理程序，不表示 Application 一定处理所有事件。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么 Application 的下一个处理程序是 `nullptr`？",
+      "a": "Application 是示例责任链的最终处理程序，后面没有其他对象可继续接收事件。"
+    },
+    {
+      "q": "调用 `shape.handleMessage(Event::LeftMouseButtonUp)` 时，事件经过哪些对象？",
+      "a": "先到 Shape，Shape 转发给 Window，Window 处理该事件，因此不需要继续传给 Application。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "责任链模式的基本思想",
+    "Handler 基类与事件转发机制"
+  ],
+  "source_pages": [
+    964,
+    964
+  ],
+  "needs_verification": true,
+  "verify_query": "《C++20高级编程》第5版 第964页 责任链测试 Application Window Shape 构造代码",
+  "concept_id": "1979_责任链的构造与测试",
+  "_chunk_pages": [
+    961,
+    964
+  ]
+}

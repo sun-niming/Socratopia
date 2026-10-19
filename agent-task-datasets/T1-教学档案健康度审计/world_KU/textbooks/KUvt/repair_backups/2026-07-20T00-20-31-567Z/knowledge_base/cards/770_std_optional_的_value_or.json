@@ -1,0 +1,42 @@
+{
+  "title": "std::optional 的 value_or()",
+  "definition": "`Grid<T>::at()` 返回 `std::optional<T>` 的引用。调用 optional 的 `value_or(defaultValue)` 时，如果 optional 包含值，就返回其中的值；如果 optional 为空，就返回传入的默认值。",
+  "key_points": [
+    "`value_or()` 同时处理 optional 有值和无值两种情况。",
+    "optional 有值时，返回其中保存的值。",
+    "optional 无值时，返回调用者提供的实参。",
+    "该方法适合在读取可能为空的网格单元时提供默认结果。"
+  ],
+  "examples": [
+    "`int x { myIntGrid.at(0, 0).value_or(0) };`：单元有值时得到该 `int`，为空时得到 `0`。"
+  ],
+  "misconceptions": [
+    "`value_or()` 不会在 optional 为空时抛出异常；它会返回提供的默认值。",
+    "传给 `value_or()` 的参数不是只有 optional 为空时才有意义的赋值操作；它表示空值情况下的返回结果。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "当 optional 为空时，`value_or(0)` 返回什么？",
+      "a": "返回传给 `value_or()` 的默认实参 `0`。"
+    },
+    {
+      "q": "当 optional 包含值时，`value_or(0)` 返回什么？",
+      "a": "返回 optional 中保存的值，而不是默认值 `0`。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "Grid 的值语义与 std::optional"
+  ],
+  "source_pages": [
+    379,
+    380
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "770_std_optional_的_value_or",
+  "_chunk_pages": [
+    377,
+    380
+  ]
+}

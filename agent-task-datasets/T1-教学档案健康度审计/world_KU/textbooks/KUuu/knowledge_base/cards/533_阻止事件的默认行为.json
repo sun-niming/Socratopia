@@ -1,0 +1,41 @@
+{
+  "title": "阻止事件的默认行为",
+  "definition": "事件的默认行为是指浏览器在事件传递并处理完成后，通常会自动执行的与该事件相关的动作；可以通过 event.preventDefault()，或者在事件处理函数中返回 false 来阻止默认行为。",
+  "key_points": [
+    "默认行为是在事件处理完成后由浏览器自动执行的",
+    "调用 event 对象的 preventDefault() 方法可以阻止默认行为",
+    "某些事件句柄返回 false 也可以阻止浏览器继续执行下一步操作",
+    "教材中还提到 HTML 标记的事件句柄属性可通过 return 的返回值控制是否执行默认操作"
+  ],
+  "examples": [
+    "e.preventDefault();",
+    "function handler() {\n  return false;\n}"
+  ],
+  "misconceptions": [
+    "以为事件处理完以后一定不会再有后续动作",
+    "以为只有 preventDefault() 才能阻止默认行为",
+    "以为返回 true 和返回 false 的效果相同"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何阻止表单提交时的默认动作？",
+      "a": "可以在提交事件处理函数中调用 event.preventDefault()，或者让事件处理函数返回 false。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "事件对象",
+    "事件处理函数"
+  ],
+  "source_pages": [
+    373,
+    376
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "533_阻止事件的默认行为",
+  "_chunk_pages": [
+    373,
+    376
+  ]
+}

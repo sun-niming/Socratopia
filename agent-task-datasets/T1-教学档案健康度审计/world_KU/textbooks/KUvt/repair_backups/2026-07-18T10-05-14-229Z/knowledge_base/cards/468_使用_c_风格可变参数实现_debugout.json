@@ -1,0 +1,50 @@
+{
+  "title": "使用 C 风格可变参数实现 debugOut",
+  "definition": "C 风格可变参数函数可以在固定参数之后使用 `...` 接收数量不固定的参数。原文示例声明 `debugOut(const char* str, ...)`，以格式字符串 `str` 作为固定参数，并通过 `<cstdarg>` 中的可变参数机制访问后续参数；当全局布尔变量 `debug` 为真时，函数调用 `vfprintf(stderr, str, ap)` 将格式化信息输出到标准错误流。",
+  "key_points": [
+    "函数形参列表中的 `...` 表示固定参数之后还可以传入数量不固定的参数。",
+    "使用可变参数时，需要借助 `va_list`、`va_start` 和 `va_end` 管理参数访问过程。",
+    "原文示例以 `debug` 控制是否输出：`debug` 为假时不执行调试输出，为真时调用 `vfprintf`。",
+    "`vfprintf` 接收一个流、格式字符串和可变参数列表；原文使用的流是 `stderr`。"
+  ],
+  "examples": [
+    "```text\n#include <cstdarg>\n\nbool debug { false };\n\nvoid debugOut(const char* str, ...)\n{\n    if (debug) {\n        va_list ap;\n        va_start(ap, str);\n        vfprintf(stderr, str, ap);\n        va_end(ap);\n    }\n}\n```",
+    "当 `debug = true` 时，可以调用：`debugOut(\"int %d\\n\", 5);`。"
+  ],
+  "misconceptions": [
+    "认为 `...` 可以让函数自动知道所有后续参数的数量和类型；C 风格可变参数机制本身不提供这种类型信息。",
+    "认为只要声明了 `...` 就可以直接读取参数，而不需要初始化和结束参数列表。",
+    "把 `vfprintf` 与 `printf` 混为一谈；`vfprintf` 额外接收一个输出流和一个已建立的参数列表。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`debugOut(const char* str, ...)` 中的 `...` 表示什么？",
+      "a": "表示在固定参数 `str` 之后，可以传入数量不固定的参数。"
+    },
+    {
+      "q": "原文中的 `debugOut` 在什么条件下输出调试信息？",
+      "a": "只有当布尔变量 `debug` 为 `true` 时，才通过 `vfprintf(stderr, str, ap)` 输出到标准错误流。"
+    },
+    {
+      "q": "访问 C 风格可变参数时，原文涉及哪些参数管理对象或操作？",
+      "a": "涉及 `va_list`、`va_start` 和 `va_end`；参数列表先初始化，使用后结束。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "函数参数",
+    "printf 格式字符串",
+    "标准错误流"
+  ],
+  "source_pages": [
+    365,
+    368
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 cstdarg va_list va_start va_end vfprintf 实现 debugOut 示例",
+  "concept_id": "468_使用_c_风格可变参数实现_debugout",
+  "_chunk_pages": [
+    365,
+    368
+  ]
+}

@@ -1,0 +1,49 @@
+{
+  "title": "std::pair 的基本用途",
+  "definition": "pair 是定义在 <utility> 头文件中的类模板，用于把两个可能属于不同类型的值组合成一个对象。pair 的两个公共数据成员分别是 first 和 second，可以通过它们访问这两个值；比较运算符支持对 first 值和 second 值进行比较。",
+  "key_points": [
+    "pair 可以组合两个类型可能不同的值。",
+    "pair 定义在 <utility> 头文件中。",
+    "第一个值通过公共成员 first 访问，第二个值通过公共成员 second 访问。",
+    "pair 支持双参数构造和默认构造，教材示例使用 pair<string, int>。"
+  ],
+  "examples": [
+    "声明一个字符串和整数构成的 pair：pair<string, int> myOtherPair;",
+    "访问 pair 的两个成员：myOtherPair.first 和 myOtherPair.second。"
+  ],
+  "misconceptions": [
+    "误以为 pair 中的两个值必须具有相同类型。",
+    "误以为 pair 的成员名称是 key 和 value；教材中使用的是 first 和 second。",
+    "误以为 pair 定义在关联容器头文件中；教材指出它定义在 <utility> 中。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "std::pair 用于解决什么问题？",
+      "a": "它把两个可能属于不同类型的值组合成一个对象。"
+    },
+    {
+      "q": "如何访问 pair 中的两个值？",
+      "a": "通过公共数据成员 first 和 second 访问。"
+    },
+    {
+      "q": "pair 定义在哪个头文件中？",
+      "a": "定义在 <utility> 头文件中。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "类模板",
+    "C++头文件"
+  ],
+  "source_pages": [
+    580,
+    580
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1198_std_pair_的基本用途",
+  "_chunk_pages": [
+    577,
+    580
+  ]
+}

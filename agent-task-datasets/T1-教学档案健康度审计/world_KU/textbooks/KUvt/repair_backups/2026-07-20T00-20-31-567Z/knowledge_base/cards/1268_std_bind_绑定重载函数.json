@@ -1,0 +1,45 @@
+{
+  "title": "std::bind 绑定重载函数",
+  "definition": "将重载函数传给 std::bind 时，编译器可能无法根据占位符调用推断应选择哪个重载，因此必须显式指定目标重载的函数类型。",
+  "key_points": [
+    "存在多个同名重载函数时，直接将函数名传给 bind 可能导致编译失败。",
+    "可以使用函数指针类型转换明确选择某个重载。",
+    "选择 float 版本的示例类型为 void(*)(float)。"
+  ],
+  "examples": [
+    "重载函数：void overloaded(int num) {}；void overloaded(float f) {}。",
+    "无法确定重载：auto f3 = bind(overloaded, placeholders::_1); // 编译错误。",
+    "明确选择 float 重载：auto f4 = bind((void(*)(float))overloaded, placeholders::_1);"
+  ],
+  "misconceptions": [
+    "占位符本身不能总是帮助编译器确定重载函数的目标版本。",
+    "显式转换中的函数指针类型必须与目标重载的参数和返回类型匹配。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么 auto f3 = bind(overloaded, placeholders::_1) 可能无法编译？",
+      "a": "因为 overloaded 有多个重载，bind 无法仅凭函数名和占位符确定要绑定哪一个。"
+    },
+    {
+      "q": "如何明确绑定接收 float 参数的 overloaded 重载？",
+      "a": "可以将其转换为 void(*)(float)，例如 bind((void(*)(float))overloaded, placeholders::_1)。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "std::bind 绑定固定参数",
+    "函数重载",
+    "函数指针"
+  ],
+  "source_pages": [
+    616,
+    616
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1268_std_bind_绑定重载函数",
+  "_chunk_pages": [
+    613,
+    616
+  ]
+}

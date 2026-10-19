@@ -1,0 +1,47 @@
+{
+  "title": "用多态和clone实现可复制的通用棋盘",
+  "definition": "在不使用模板时，可以用多态实现通用棋盘：定义抽象基类GamePiece，让ChessPiece等具体棋子类继承它；GameBoard使用std::unique_ptr<GamePiece>保存棋子。由于unique_ptr不能直接复制，GamePiece基类声明纯虚clone()方法，派生类通过复制构造函数创建自身副本，从而支持GameBoard的深复制。",
+  "key_points": [
+    "GamePiece是抽象基类，其clone()声明为纯虚函数，并返回std::unique_ptr<GamePiece>。",
+    "具体派生类必须实现clone()，通常通过std::make_unique<派生类>(*this)调用复制构造函数复制当前对象。",
+    "GameBoard使用std::vector<std::vector<std::unique_ptr<GamePiece>>>保存二维棋盘中的棋子。",
+    "复制GameBoard时，不能只复制unique_ptr本身，而要对每个非空棋子调用clone()，复制其实际派生类型的对象。"
+  ],
+  "examples": [
+    "代码示意：\nclass ChessPiece : public GamePiece {\npublic:\n    std::unique_ptr<GamePiece> clone() const override {\n        return std::make_unique<ChessPiece>(*this);\n    }\n};",
+    "复制棋盘时，对每个位置执行：\nif (src.m_cells[i][j]) {\n    m_cells[i][j] = src.m_cells[i][j]->clone();\n}"
+  ],
+  "misconceptions": [
+    "clone()不是返回当前对象的引用，而是创建并返回一个新的对象副本。",
+    "复制unique_ptr不会复制它所拥有的棋子对象；这里必须通过虚函数clone()实现多态深复制。",
+    "GamePiece是抽象基类，不能直接实例化；ChessPiece等具体类需要实现clone()。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么GamePiece需要声明clone()纯虚函数？",
+      "a": "因为GameBoard保存的是unique_ptr<GamePiece>，复制棋盘时需要在不知道具体派生类型的情况下复制实际棋子对象；虚函数clone()可以通过动态分派完成这一点。"
+    },
+    {
+      "q": "ChessPiece的clone()如何复制当前棋子？",
+      "a": "调用std::make_unique<ChessPiece>(*this)，使用ChessPiece的复制构造函数创建当前对象的副本，并以std::unique_ptr<GamePiece>返回。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "继承与多态",
+    "纯虚函数",
+    "std::unique_ptr",
+    "复制构造函数"
+  ],
+  "source_pages": [
+    373,
+    375
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "758_用多态和clone实现可复制的通用棋盘",
+  "_chunk_pages": [
+    373,
+    376
+  ]
+}

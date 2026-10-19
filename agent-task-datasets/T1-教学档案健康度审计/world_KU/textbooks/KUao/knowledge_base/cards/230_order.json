@@ -1,0 +1,37 @@
+{
+  "title": "order",
+  "definition": "order 用于定义弹性项目的排列顺序。",
+  "key_points": [
+    "作用对象是项目（子元素）",
+    "决定项目的排列顺序",
+    "属于项目的属性"
+  ],
+  "examples": [
+    "order: 2;"
+  ],
+  "misconceptions": [
+    "它用来控制项目大小；原文说它定义排列顺序",
+    "它是容器属性；原文说这些属性设置作用在项目上"
+  ],
+  "qa_pairs": [
+    {
+      "q": "order 属性的作用是什么？",
+      "a": "定义项目的排列顺序。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "弹性盒布局基础"
+  ],
+  "source_pages": [
+    157,
+    160
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "230_order",
+  "_chunk_pages": [
+    157,
+    160
+  ]
+}

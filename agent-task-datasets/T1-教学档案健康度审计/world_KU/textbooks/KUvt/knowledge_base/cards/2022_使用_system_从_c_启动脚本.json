@@ -1,0 +1,45 @@
+{
+  "title": "使用 system() 从 C++ 启动脚本",
+  "definition": "C++ 可以通过 <cstdlib> 中定义的 system() 函数执行外部命令，例如启动 Python、Perl 或 Shell 脚本。system() 接收一个表示待执行命令的字符串参数。",
+  "key_points": [
+    "典型调用形式为 system(\"命令字符串\");。",
+    "system() 需要创建一个完整的新进程来执行脚本，因此会产生较大的性能开销。",
+    "如果脚本执行出错，调用者获得的错误信息可能不一致，且脚本错误可能导致程序行为难以控制。",
+    "对于文件系统、网络、串口或字符串处理等任务，优先考虑 C++ 标准库或可移植的库，而不是通过 system() 启动脚本。"
+  ],
+  "examples": [
+    "system(\"python my_python_script.py\");",
+    "system(\"perl my_perl_script.pl\");",
+    "使用 <filesystem> 处理文件系统，使用 C++ 正则表达式库处理字符串，通常比启动外部脚本更合适。"
+  ],
+  "misconceptions": [
+    "system() 不是轻量级的函数调用，而通常涉及创建外部进程。",
+    "能够启动脚本不代表 system() 是完成任务的最佳方案；性能、错误处理和可移植性都需要考虑。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "C++ 中如何使用 system() 启动 Python 脚本？",
+      "a": "包含 <cstdlib> 后调用 system(\"python my_python_script.py\");。"
+    },
+    {
+      "q": "为什么不应无条件地使用 system() 调用脚本？",
+      "a": "因为它通常需要创建完整的新进程，性能开销较大；此外，脚本错误处理可能不可靠，且 C++ 标准库或可移植库往往能更好地完成相同任务。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++函数调用",
+    "操作系统进程的基本概念"
+  ],
+  "source_pages": [
+    985,
+    985
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "2022_使用_system_从_c_启动脚本",
+  "_chunk_pages": [
+    985,
+    988
+  ]
+}

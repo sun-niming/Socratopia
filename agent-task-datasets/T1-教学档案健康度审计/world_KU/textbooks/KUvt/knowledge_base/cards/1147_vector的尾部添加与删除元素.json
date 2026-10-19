@@ -1,0 +1,43 @@
+{
+  "title": "vector的尾部添加与删除元素",
+  "definition": "vector可以使用push_back()在尾部追加元素，使用pop_back()删除尾部元素。pop_back()只执行删除操作，不返回被删除的元素；如果需要先访问最后一个元素，应在调用pop_back()之前使用back()获取它。",
+  "key_points": [
+    "push_back()用于在vector末尾追加元素。",
+    "pop_back()删除末尾元素，但不返回该元素。",
+    "访问将被删除的末尾元素应先调用back()，再调用pop_back()。"
+  ],
+  "examples": [
+    "文本代码：\nvector<int> values;\nvalues.push_back(10);\nint last { values.back() };\nvalues.pop_back();",
+    "调用pop_back()后，不能再依靠pop_back()的返回值取得被删除元素，因为该方法不返回元素。"
+  ],
+  "misconceptions": [
+    "pop_back()会返回被删除的元素；教材明确指出它不会返回。",
+    "可以在空vector上安全调用pop_back()；使用前应保证容器中存在元素。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何删除vector的最后一个元素？",
+      "a": "调用pop_back()。"
+    },
+    {
+      "q": "如果需要取得即将删除的最后一个元素，应如何操作？",
+      "a": "先调用back()取得最后一个元素，再调用pop_back()删除它。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "vector容器基础",
+    "成员函数调用"
+  ],
+  "source_pages": [
+    556,
+    556
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1147_vector的尾部添加与删除元素",
+  "_chunk_pages": [
+    553,
+    556
+  ]
+}

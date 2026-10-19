@@ -1,0 +1,46 @@
+{
+  "title": "全局 operator+ 支持加法交换两侧的操作数",
+  "definition": "如果希望 SpreadsheetCell 既能位于加号左侧，也能位于加号右侧，应定义不依赖某个特定左对象的全局 operator+ 函数。该函数接收两个 SpreadsheetCell 参数，并返回它们的值之和。这样在存在适当转换构造函数时，`SpreadsheetCell + 数值` 和 `数值 + SpreadsheetCell` 都可以工作。",
+  "key_points": [
+    "全局运算符函数可以声明为 `SpreadsheetCell operator+(const SpreadsheetCell& lhs, const SpreadsheetCell& rhs);`。",
+    "实现可以写成 `return SpreadsheetCell { lhs.getValue() + rhs.getValue() };`。",
+    "全局函数不要求左操作数本身是 SpreadsheetCell，因此可以处理 `5.6 + myCell` 和 `4 + myCell`。",
+    "如果运算符要在模块接口文件中供外部使用，需要导出该运算符声明。"
+  ],
+  "examples": [
+    "典型实现：`SpreadsheetCell operator+(const SpreadsheetCell& lhs, const SpreadsheetCell& rhs) { return SpreadsheetCell { lhs.getValue() + rhs.getValue() }; }`",
+    "在适当隐式转换可用时，以下表达式都可工作：`myCell + 5.6`、`myCell + 4`、`5.6 + myCell`、`4 + myCell`。"
+  ],
+  "misconceptions": [
+    "成员 operator+ 不能自动解决数值位于左侧的问题；`5.6 + myCell` 不会因为存在 `myCell.operator+(...)` 而自动变成成员调用。",
+    "定义全局 operator+ 并不会让两个普通 double 相加时调用它；`4.5 + 5.5` 会先按内置 double 加法计算。",
+    "加法交换性是运算含义上的性质，但是否能写出两种操作数顺序还取决于运算符重载形式。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么全局 operator+ 能支持 `5.6 + myCell`？",
+      "a": "因为全局 operator+ 不需要在 SpreadsheetCell 对象上调用，两个操作数都可以通过允许的类型转换转换为 SpreadsheetCell 后传入函数。"
+    },
+    {
+      "q": "`4.5 + 5.5` 会调用为 SpreadsheetCell 定义的全局 operator+ 吗？",
+      "a": "不会。两个操作数都是 double 时，编译器使用内置的 double 加法，先得到 10，再根据赋值需要将结果转换为 SpreadsheetCell。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "全局函数",
+    "隐式类型转换",
+    "运算符重载"
+  ],
+  "source_pages": [
+    291,
+    292
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "604_全局_operator_支持加法交换两侧的操作数",
+  "_chunk_pages": [
+    289,
+    292
+  ]
+}

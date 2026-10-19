@@ -1,0 +1,56 @@
+{
+  "title": "在栈和自由存储区中调用构造函数",
+  "definition": "创建对象时会调用相应的构造函数。在栈中定义对象时，可以在对象名后使用圆括号或统一初始化的花括号传递构造参数；在自由存储区中动态创建对象时，可以使用 make_unique 或 new，并在类型名后提供构造参数。构造函数由对象创建语法触发，不能使用对象名显式调用。",
+  "key_points": [
+    "栈对象可使用 SpreadsheetCell myCell(5); 或 SpreadsheetCell myCell{5};。",
+    "自由存储区对象可优先使用 make_unique<SpreadsheetCell>(4)，无需手动 delete 智能指针。",
+    "使用原始指针时，可以写 new SpreadsheetCell{5}，但必须在使用后 delete。",
+    "可以先声明一个指向对象的指针而暂不创建对象；与之不同，栈对象在声明时就会调用构造函数。",
+    "指针应始终初始化为有效地址或 nullptr。"
+  ],
+  "examples": [
+    "SpreadsheetCell myCell(5), anotherCell(4);",
+    "SpreadsheetCell myCell{5}, anotherCell{4};",
+    "auto smartCellp{std::make_unique<SpreadsheetCell>(4)};",
+    "SpreadsheetCell* myCellp{new SpreadsheetCell{5}};\ndelete myCellp;\nmyCellp = nullptr;",
+    "SpreadsheetCell* anotherCellp{nullptr};\nanotherCellp = new SpreadsheetCell{4};\ndelete anotherCellp;\nanotherCellp = nullptr;"
+  ],
+  "misconceptions": [
+    "错误写法 SpreadsheetCell myCell.SpreadsheetCell(5); 不会编译。",
+    "对象创建后不能通过 myCell.SpreadsheetCell(5); 再次调用构造函数。",
+    "误以为声明原始指针时一定会创建对象；仅声明并初始化为 nullptr 不会创建 SpreadsheetCell 对象。",
+    "误以为使用 new 创建的原始指针对象会自动释放；原始指针需要配对使用 delete。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何用统一初始化语法在栈中创建初始值为 5 的 SpreadsheetCell？",
+      "a": "写作 SpreadsheetCell myCell{5};。"
+    },
+    {
+      "q": "能否在对象创建后执行 myCell.SpreadsheetCell(5); 来重新调用构造函数？",
+      "a": "不能。构造函数由对象创建过程调用，不能像普通成员函数那样通过对象名显式调用。"
+    },
+    {
+      "q": "为什么教材更推荐 make_unique 而不是直接使用 new？",
+      "a": "make_unique 返回智能指针，对象的释放由智能指针管理，不需要手动 delete；使用原始指针则必须自行释放。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "构造函数",
+    "栈对象",
+    "自由存储区",
+    "指针与智能指针"
+  ],
+  "source_pages": [
+    237,
+    237
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "504_在栈和自由存储区中调用构造函数",
+  "_chunk_pages": [
+    237,
+    240
+  ]
+}

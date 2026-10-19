@@ -1,0 +1,41 @@
+{
+  "title": "基于范围的 for 循环初始化器",
+  "definition": "从 C++20 开始，基于范围的 for 循环可以在范围表达式之前加入初始化器。初始化器中声明的变量只在该基于范围的 for 循环内部可用，不能在循环之外使用。",
+  "key_points": [
+    "语法为 `for (<initializer>; <for-range-declaration> : <for-range-initializer>) { <body> }`。",
+    "初始化器通常用于在循环开始前创建供范围表达式使用的临时变量。",
+    "初始化器中引入的变量作用域限于该循环。"
+  ],
+  "examples": [
+    "`for (std::array arr { 1, 2, 3, 4 }; int i : arr) { cout << i << endl; }`：先定义 `arr`，再遍历 `arr` 中的元素。"
+  ],
+  "misconceptions": [
+    "初始化器中的变量不能在循环结束后继续使用。",
+    "该语法中的分号用于分隔初始化器和范围 for 的其余部分，不是普通三段式 for 循环的第二个条件表达式。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "C++20 基于范围的 for 初始化器中声明的变量在哪里有效？",
+      "a": "只在该基于范围的 for 循环内部有效，循环之外不能使用。"
+    },
+    {
+      "q": "如何在基于范围的 for 循环中先定义数组再遍历它？",
+      "a": "可写为 `for (std::array arr { 1, 2, 3, 4 }; int i : arr) { ... }`。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "基于范围的 for 循环"
+  ],
+  "source_pages": [
+    62,
+    62
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "108_基于范围的_for_循环初始化器",
+  "_chunk_pages": [
+    61,
+    64
+  ]
+}

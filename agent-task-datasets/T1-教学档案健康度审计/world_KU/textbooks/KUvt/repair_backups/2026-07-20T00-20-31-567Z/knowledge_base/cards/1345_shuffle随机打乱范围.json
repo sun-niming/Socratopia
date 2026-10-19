@@ -1,0 +1,50 @@
+{
+  "title": "shuffle随机打乱范围",
+  "definition": "std::shuffle 以随机顺序重新安排一个范围内的元素，时间复杂度为线性时间 $O(n)$。它接收范围的首尾迭代器以及一个统一随机数生成器对象，由该生成器决定随机数的产生方式。",
+  "key_points": [
+    "调用形式为 std::shuffle(first, last, generator)。",
+    "shuffle 会直接修改给定范围内元素的排列顺序。",
+    "其复杂度为线性时间 $O(n)$。",
+    "随机数生成器对象用于决定乱序过程产生的随机数。",
+    "可用于实现洗牌等任务；随机种子的设置会影响结果。"
+  ],
+  "examples": [
+    "vector<int> values { 1, 2, 3, 4, 5, 6 }; default_random_engine engine(seed); shuffle(begin(values), end(values), engine);",
+    "同一个范围多次调用 shuffle，通常会得到不同的元素排列；具体结果取决于随机数生成器及其种子。"
+  ],
+  "misconceptions": [
+    "shuffle 不会改变元素集合，只会改变元素排列顺序。",
+    "shuffle 不是排序算法，结果不保证升序或降序。",
+    "使用同一个随机数引擎和相同种子时，结果可能具有可重复性。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "std::shuffle 的时间复杂度是多少？",
+      "a": "线性时间复杂度 $O(n)$。"
+    },
+    {
+      "q": "std::shuffle 需要哪些参数？",
+      "a": "范围的首迭代器、尾迭代器，以及一个统一随机数生成器对象。"
+    },
+    {
+      "q": "std::shuffle 主要用于什么任务？",
+      "a": "以随机顺序重新排列范围中的元素，例如实现洗牌。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "迭代器范围",
+    "随机数生成器"
+  ],
+  "source_pages": [
+    644,
+    644
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1345_shuffle随机打乱范围",
+  "_chunk_pages": [
+    641,
+    644
+  ]
+}

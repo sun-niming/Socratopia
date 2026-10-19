@@ -1,0 +1,50 @@
+{
+  "title": "BGP前缀可达性信息的传播过程",
+  "definition": "BGP通过eBGP和iBGP会话逐级传播前缀的可达性信息，并在通告中携带到达该前缀所经过的自治系统路径。以AS3中的前缀$x$为例，AS3先向AS2通告$x$，AS2再向AS1通告经过AS2和AS3到达$x$的路径。",
+  "key_points": [
+    "高层次描述中，AS3向AS2通告“AS3 x”，表示前缀$x$位于AS3；AS2向AS1通告“AS2 AS3 x”，表示可先经过AS2再进入AS3到达$x$。",
+    "严格来说，BGP报文不是由自治系统整体发送，而是由具体路由器通过BGP会话发送。",
+    "传播顺序为：3a通过eBGP向2c发送“AS3 x”；2c通过iBGP向AS2内其他路由器发送“AS3 x”；2a通过eBGP向1e发送“AS2 AS3 x”；1e再通过iBGP向AS1内其他路由器发送该信息。",
+    "传播完成后，AS1和AS2中的每台路由器都知道前缀$x$存在，并知道通往$x$的自治系统路径。"
+  ],
+  "examples": [
+    "前缀$x$的传播可表示为：$$3a\\xrightarrow{eBGP}2c\\xrightarrow{iBGP}\\text{AS2内其他路由器}\\xrightarrow{eBGP}1e\\xrightarrow{iBGP}\\text{AS1内其他路由器}$$",
+    "路径通告内容依次为：$$\\text{AS3 }x\\quad\\rightarrow\\quad\\text{AS2 AS3 }x$$"
+  ],
+  "misconceptions": [
+    "BGP不是由整个自治系统作为一个实体直接发送报文，而是由自治系统中的具体路由器通过BGP会话交换信息。",
+    "AS2向AS1通告的不只是“前缀$x$存在”，还包括通往$x$所经过的AS路径“AS2 AS3”。",
+    "iBGP用于在同一AS内部传播从外部获得的可达性信息，eBGP用于不同AS之间的传播。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "在原文的三自治系统例子中，AS2向AS1通告什么信息？",
+      "a": "AS2向AS1通告“AS2 AS3 x”，表示前缀$x$存在，并且可以先经过AS2、再进入AS3到达$x$。"
+    },
+    {
+      "q": "为什么说“自治系统向另一个自治系统发送BGP报文”只是高层次的简化描述？",
+      "a": "因为实际发送BGP报文的是自治系统中的具体路由器，报文通过路由器之间的eBGP或iBGP会话传输。"
+    },
+    {
+      "q": "完成传播后，AS1中的路由器知道哪些信息？",
+      "a": "AS1中的路由器知道前缀$x$存在，并知道通往$x$的自治系统路径为AS2、AS3。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "BGP连接、eBGP与iBGP会话",
+    "BGP以CIDR前缀作为路由目的地",
+    "自治系统路径"
+  ],
+  "source_pages": [
+    275,
+    276
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "618_bgp前缀可达性信息的传播过程",
+  "_chunk_pages": [
+    273,
+    276
+  ]
+}

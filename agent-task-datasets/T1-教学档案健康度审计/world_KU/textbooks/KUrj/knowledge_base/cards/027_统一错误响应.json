@@ -1,0 +1,43 @@
+{
+  "title": "统一错误响应",
+  "definition": "静态文件服务器应通过统一的 `send_error()` 返回合法 HTTP 错误响应，而不是只打印一句话或直接断开连接。错误响应需要包含状态行、`Content-Type`、`Content-Length`、`Connection` 等信息，并携带 HTML 错误页面。",
+  "key_points": [
+    "建议所有错误都走 `send_error()`。",
+    "常见状态码：400 请求格式错误，403 路径非法/不是普通文件/权限不足，404 文件不存在，405 方法不是 GET，500 服务器内部错误。",
+    "统一错误响应便于 curl 测试、浏览器显示、日志记录和报告截图。"
+  ],
+  "examples": [
+    "404 页面可以返回形如 `<html><body><h1>404 Not Found</h1><p>文件不存在</p></body></html>` 的 HTML。",
+    "响应头示例应包含 `HTTP/1.1 404 Not Found`、`Content-Type: text/html; charset=utf-8`、`Content-Length`、`Connection: close`。"
+  ],
+  "misconceptions": [
+    "错误时只要关闭连接就够了。",
+    "错误页只返回一行纯文本也算完整 HTTP 响应。",
+    "403、404、405 的区别不重要。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么错误响应要统一生成？",
+      "a": "这样 curl 测试、浏览器显示、日志记录和报告截图都更清楚，且返回的状态码更准确。"
+    },
+    {
+      "q": "405 表示什么错误？",
+      "a": "方法不是 GET。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "MIME类型的作用"
+  ],
+  "source_pages": [
+    25,
+    27
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "027_统一错误响应",
+  "_chunk_pages": [
+    25,
+    28
+  ]
+}

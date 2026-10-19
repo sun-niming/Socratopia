@@ -1,0 +1,35 @@
+{
+  "title": "Windows DLL 与 Linux .so 动态库文件",
+  "definition": "原文在第181页列出 Windows 的 DLL 文件和 Linux 的 .so 文件，表示不同操作系统中常见的动态链接库文件形式。",
+  "key_points": [
+    "Windows 使用 DLL 作为动态链接库文件的一种常见扩展名。",
+    "Linux 使用 .so 作为共享库文件的一种常见扩展名。",
+    "原文未进一步说明动态库的生成、加载或链接方式。"
+  ],
+  "examples": [
+    "Windows 动态库文件示例：`example.dll`",
+    "Linux 共享库文件示例：`libexample.so`"
+  ],
+  "misconceptions": [
+    "不能仅根据原文断定 DLL 只能用于 Windows，或 .so 只能用于 Linux；原文只是列举了常见对应关系。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "原文列出的 Windows 和 Linux 动态库文件形式分别是什么？",
+      "a": "Windows 是 DLL，Linux 是 .so。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [],
+  "source_pages": [
+    181,
+    184
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "250_windows_dll_与_linux_so_动态库文件",
+  "_chunk_pages": [
+    181,
+    184
+  ]
+}

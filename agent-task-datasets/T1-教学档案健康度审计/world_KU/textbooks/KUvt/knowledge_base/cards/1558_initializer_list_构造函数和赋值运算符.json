@@ -1,0 +1,45 @@
+{
+  "title": "initializer_list 构造函数和赋值运算符",
+  "definition": "directed_graph 可以提供接收 std::initializer_list<T> 的构造函数和赋值运算符，从而支持使用花括号列表直接构造图或替换图中的内容。构造函数可把初始化列表转发给 assign，赋值运算符可使用临时对象和 swap 完成赋值。",
+  "key_points": [
+    "构造函数形式可写为：`directed_graph(std::initializer_list<T> init, const A& allocator);`。",
+    "构造函数可以先保存分配器，再调用 `assign(std::begin(init), std::end(init));`。",
+    "赋值运算符可以构造临时 `directed_graph new_graph{init};`，再调用 `swap(new_graph)`，最后返回 `*this`。",
+    "临时对象加 swap 的 copy-and-swap 风格可使提交阶段只进行不抛异常的交换操作，从而保证强异常安全保证。"
+  ],
+  "examples": [
+    "统一初始化构造：\n```cpp\ndirected_graph<int> graph{11, 22, 33};\n```",
+    "列表赋值：\n```cpp\ngraph = {66, 77, 88};\n```"
+  ],
+  "misconceptions": [
+    "initializer_list 赋值不是向原图末尾追加元素，而是通过赋值操作替换对象内容。",
+    "copy-and-swap 的关键不是直接修改当前对象，而是先在临时对象中完成工作，再交换结果。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何用花括号列表构造 directed_graph？",
+      "a": "为 directed_graph 提供 `std::initializer_list<T>` 构造函数，例如 `directed_graph<int> graph{11, 22, 33};`。"
+    },
+    {
+      "q": "原文中的 initializer_list 赋值运算符如何实现强异常安全？",
+      "a": "先用初始化列表构造临时图 `new_graph`，再调用 `swap(new_graph)` 提交结果，最后返回 `*this`；实际修改工作在临时对象中完成。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "std::initializer_list",
+    "强异常安全保证",
+    "copy-and-swap"
+  ],
+  "source_pages": [
+    753,
+    753
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1558_initializer_list_构造函数和赋值运算符",
+  "_chunk_pages": [
+    753,
+    756
+  ]
+}

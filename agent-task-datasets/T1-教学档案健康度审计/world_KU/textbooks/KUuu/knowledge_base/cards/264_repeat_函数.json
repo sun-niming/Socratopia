@@ -1,0 +1,37 @@
+{
+  "title": "repeat() 函数",
+  "definition": "repeat() 是 CSS 网格布局中的函数，用于把同样的轨道定义重复多次，从而简洁地创建重复的列或行。",
+  "key_points": [
+    "repeat() 用于创建重复的轨道。",
+    "它常用于批量生成相同尺寸的列或行。",
+    "写法中第一个参数通常表示重复次数，第二个参数表示重复的轨道定义。"
+  ],
+  "examples": [
+    "grid-template-columns: repeat(4, 1fr);"
+  ],
+  "misconceptions": [
+    "repeat() 不是单纯的注释写法，而是实际生效的 CSS 函数。",
+    "repeat() 的作用是简化重复轨道的书写，不是改变网格布局的基本规则。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "repeat(4, 1fr) 的作用是什么？",
+      "a": "创建 4 个宽度都为 1fr 的列。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "网格轨道尺寸写法"
+  ],
+  "source_pages": [
+    173,
+    176
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "264_repeat_函数",
+  "_chunk_pages": [
+    173,
+    176
+  ]
+}

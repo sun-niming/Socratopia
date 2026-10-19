@@ -1,0 +1,44 @@
+{
+  "title": "委托构造函数",
+  "definition": "委托构造函数是指一个构造函数在成员初始化列表中调用同一个类的另一个构造函数，从而复用已有的初始化逻辑。语法是在初始化列表中写出类名及参数，例如 SpreadsheetCell::SpreadsheetCell(std::string_view initialValue) : SpreadsheetCell{ stringToDouble(initialValue) } {}。",
+  "key_points": [
+    "委托构造函数通过类名调用同类的另一个构造函数。",
+    "SpreadsheetCell 的 std::string_view 构造函数把字符串视图转换为 double，再委托给 double 构造函数。",
+    "委托目标构造函数负责对象的核心初始化；委托构造函数的函数体可以为空或只执行额外操作。"
+  ],
+  "examples": [
+    "SpreadsheetCell::SpreadsheetCell(std::string_view initialValue) : SpreadsheetCell{ stringToDouble(initialValue) } {}",
+    "自定义类型的示例：MyClass(char c) : MyClass{ 1.2 } { }；MyClass(double d) : MyClass{ 'm' } { }。"
+  ],
+  "misconceptions": [
+    "委托构造不是继承父类构造函数；它是在同一个类的构造函数之间复用初始化逻辑。",
+    "委托构造的目标必须是同一个类的另一个构造函数，而不是普通成员函数。",
+    "在一个构造函数的成员初始化列表中，委托给同类构造函数后，不能再同时初始化其他数据成员；其他初始化应由被委托的构造函数完成。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "SpreadsheetCell 的 std::string_view 构造函数如何复用 double 构造函数？",
+      "a": "可以写成 SpreadsheetCell::SpreadsheetCell(std::string_view initialValue) : SpreadsheetCell{ stringToDouble(initialValue) } {}。"
+    },
+    {
+      "q": "委托构造函数的主要作用是什么？",
+      "a": "复用同一个类中已有构造函数的初始化逻辑，避免重复编写初始化代码。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "构造函数成员初始化列表",
+    "std::string_view"
+  ],
+  "source_pages": [
+    247,
+    248
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "329_委托构造函数",
+  "_chunk_pages": [
+    245,
+    248
+  ]
+}

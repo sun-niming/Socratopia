@@ -1,0 +1,42 @@
+{
+  "title": "标准库容器的主要类别",
+  "definition": "容器可以分为纯顺序容器、无序关联容器和有序关联容器。实现某一类标准库兼容容器时，需要遵循该类别规定的一组特定要求。原文以 deque、map 和 unordered_map 分别说明这些类别。",
+  "key_points": [
+    "deque 是顺序容器的示例。",
+    "map 是有序关联容器的示例。",
+    "unordered_map 是无序关联容器的示例。",
+    "directed_graph 基本上是顺序容器，但由于图的特性，也实现了关联容器的一些功能，例如 insert 的返回类型。"
+  ],
+  "examples": [
+    "分类示例：\n$$\n\\begin{array}{c|c}\n\\text{容器类别} & \\text{示例}\\\\\n\\hline\n\\text{顺序容器} & \\texttt{deque}\\\\\n\\text{有序关联容器} & \\texttt{map}\\\\\n\\text{无序关联容器} & \\texttt{unordered\\_map}\n\\end{array}\n$$"
+  ],
+  "misconceptions": [
+    "有序关联容器和无序关联容器不是同一类：`map` 与 `unordered_map` 的组织方式不同。",
+    "directed_graph 并不是标准意义上的纯关联容器；原文将其基本归为顺序容器，同时指出它借鉴了关联容器的部分接口行为。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "map 和 unordered_map 分别属于哪类容器？",
+      "a": "`map` 是有序关联容器，`unordered_map` 是无序关联容器。"
+    },
+    {
+      "q": "directed_graph 在容器分类上有什么特点？",
+      "a": "它基本上是顺序容器，但由于图的本质，实现了关联容器的一些功能，例如 insert 的返回类型。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++ 标准库容器分类"
+  ],
+  "source_pages": [
+    754,
+    755
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1564_标准库容器的主要类别",
+  "_chunk_pages": [
+    753,
+    756
+  ]
+}

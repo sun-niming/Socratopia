@@ -1,0 +1,45 @@
+{
+  "title": "Visual C++ 测试类及初始化清理方法",
+  "definition": "Visual C++ 内置测试框架使用带有特殊宏的测试类，以便框架自动发现测试。测试类可以定义初始化方法和清理方法：初始化方法在测试类中的测试运行前执行，清理方法在测试运行后执行。对于简单且相互独立的 ObjectPool 测试，setUp() 和 tearDown() 可以为空，甚至可以删除。",
+  "key_points": [
+    "测试类使用 TEST_CLASS 宏定义。",
+    "测试方法属于测试类，并使用测试框架规定的声明方式。",
+    "初始化方法用于测试运行前的准备工作。",
+    "清理方法用于测试运行后的清理工作。",
+    "ObjectPool 示例中，setUp() 和 tearDown() 的空定义已经足够。"
+  ],
+  "examples": [
+    "测试类名称为 ObjectPoolTest；其初始化和清理方法可写成空函数：`void ObjectPoolTest::setUp() { }` 和 `void ObjectPoolTest::tearDown() { }`。"
+  ],
+  "misconceptions": [
+    "初始化和清理方法必须包含实际代码。",
+    "测试类只是一组普通 C++ 方法，不需要测试框架的特殊宏。",
+    "每个测试都必须依赖初始化方法和清理方法。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "Visual C++ 测试框架中的初始化方法和清理方法分别何时执行？",
+      "a": "初始化方法在运行测试类中的测试前执行，清理方法在测试运行后执行。"
+    },
+    {
+      "q": "ObjectPool 示例是否必须保留有实际操作的 setUp() 和 tearDown()？",
+      "a": "不必须；由于测试简单且独立，空定义即可，甚至可以完全删除。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++ 类与成员函数",
+    "单元测试的基本概念"
+  ],
+  "source_pages": [
+    884,
+    884
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1830_visual_c_测试类及初始化清理方法",
+  "_chunk_pages": [
+    881,
+    884
+  ]
+}

@@ -1,0 +1,49 @@
+{
+  "title": "C++ 头文件单元的导入与 Visual C++ 配置",
+  "definition": "原文展示了使用 import 语句导入标准库头文件，并给出了将头文件配置为 C/C++ Header Unit 的 Visual C++ 项目属性设置。示例中包括 import <iostream>;、import <vector>、import <optional> 和 import <utility>;。",
+  "key_points": [
+    "原文使用模块式导入语法 import，而不是传统的 #include 语法。",
+    "示例导入的标准库头文件包括 <iostream>、<vector>、<optional> 和 <utility>。",
+    "Visual C++ 属性页中出现了 C/C++ → Advanced → Compile As → C++ Header Unit(/exportHeader) 设置。",
+    "原文还出现了 Compile as C++ Module Internal Partition(/internalPartition) 选项，但其具体适用场景需要结合完整上下文确认。"
+  ],
+  "examples": [
+    "头文件单元导入示例：import <iostream>;",
+    "多个头文件导入示例：import <vector>; import <optional>; import <utility>;"
+  ],
+  "misconceptions": [
+    "import <iostream>; 与 #include <iostream> 不是同一种预处理器指令；前者是模块或头文件单元相关的导入语法。",
+    "将文件设置为 C++ Header Unit 不等于该文件自动成为完整的命名模块。",
+    "不能仅依据该页确定所有编译器都以相同方式支持这些头文件单元设置。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "原文给出的头文件单元导入语句有哪些？",
+      "a": "包括 import <iostream>;、import <vector>、import <optional> 和 import <utility>;。"
+    },
+    {
+      "q": "Visual C++ 中与头文件单元相关的 Compile As 设置是什么？",
+      "a": "原文列出 C++ Header Unit(/exportHeader)。"
+    },
+    {
+      "q": "原文是否只列出了头文件单元设置？",
+      "a": "不是；原文还列出了 C++ Module Internal Partition(/internalPartition)，但其具体作用和适用场景需要进一步核实。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++ 预处理器 include",
+    "C++ 模块基础"
+  ],
+  "source_pages": [
+    17,
+    18
+  ],
+  "needs_verification": true,
+  "verify_query": "Visual Studio C++ Header Unit /exportHeader Compile As C++ Module Internal Partition /internalPartition import standard headers C++20",
+  "concept_id": "015_c_头文件单元的导入与_visual_c_配置",
+  "_chunk_pages": [
+    17,
+    20
+  ]
+}

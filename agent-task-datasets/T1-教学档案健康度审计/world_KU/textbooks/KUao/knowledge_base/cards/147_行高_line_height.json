@@ -1,0 +1,37 @@
+{
+  "title": "行高 line-height",
+  "definition": "line-height 用于设置行高。教材给出的示例说明 1.5em 表示 1.5 倍行高。",
+  "key_points": [
+    "line-height 控制文本行高。",
+    "可使用 em 等单位表示。",
+    "1.5em 表示 1.5 倍行高。"
+  ],
+  "examples": [
+    "line-height: 1.5em;"
+  ],
+  "misconceptions": [
+    "line-height 不是字符间距。",
+    "它调整的是行与行之间的垂直空间，不是字体大小本身。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "line-height: 1.5em 表示什么？",
+      "a": "表示 1.5 倍行高。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "CSS基础"
+  ],
+  "source_pages": [
+    109,
+    112
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "147_行高_line_height",
+  "_chunk_pages": [
+    109,
+    112
+  ]
+}

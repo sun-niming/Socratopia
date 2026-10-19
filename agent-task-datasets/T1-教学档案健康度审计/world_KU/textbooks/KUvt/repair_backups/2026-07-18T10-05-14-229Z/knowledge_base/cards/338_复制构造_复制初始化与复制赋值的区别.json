@@ -1,0 +1,49 @@
+{
+  "title": "复制构造、复制初始化与复制赋值的区别",
+  "definition": "用已有对象创建新对象时，会调用复制构造函数；让已有对象接收另一个已有对象的值时，会调用复制赋值运算符。原文中的 `anotherCell`、`aThirdCell` 和后续赋值分别展示了这两类操作。",
+  "key_points": [
+    "`SpreadsheetCell anotherCell{myCell};` 使用复制构造函数创建新对象。",
+    "`SpreadsheetCell aThirdCell = myCell;` 是复制初始化，创建对象时调用复制构造函数，而不是赋值运算符。",
+    "`SpreadsheetCell aThirdCell(myCell);` 是直接初始化，同样调用复制构造函数。",
+    "`anotherCell = myCell;` 发生在对象已经存在之后，因此调用复制赋值运算符。"
+  ],
+  "examples": [
+    "复制构造或复制初始化：\n```cpp\nSpreadsheetCell myCell{5};\nSpreadsheetCell anotherCell{myCell};\nSpreadsheetCell aThirdCell = myCell;\nSpreadsheetCell aFourthCell(myCell);\n```",
+    "复制赋值：\n```cpp\nanotherCell = myCell; // 对已经存在的 anotherCell 调用赋值运算符\n```"
+  ],
+  "misconceptions": [
+    "`SpreadsheetCell aThirdCell = myCell;` 虽然写有等号，但它是在创建新对象，调用的是复制构造函数，不是复制赋值运算符。",
+    "只有当左侧对象已经完成构造并执行 `=` 操作时，才属于复制赋值。",
+    "复制构造函数负责创建新对象，复制赋值运算符负责更新已有对象；二者不能混为一谈。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`SpreadsheetCell anotherCell{myCell};` 调用复制构造函数还是复制赋值运算符？",
+      "a": "调用复制构造函数，因为 `anotherCell` 是由 `myCell` 创建的新对象。"
+    },
+    {
+      "q": "`anotherCell = myCell;` 调用什么函数？",
+      "a": "调用 `anotherCell` 的复制赋值运算符，因为 `anotherCell` 已经存在。"
+    },
+    {
+      "q": "为什么 `SpreadsheetCell aThirdCell = myCell;` 不是复制赋值？",
+      "a": "因为该语句正在创建 `aThirdCell`，属于复制初始化，调用复制构造函数。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++对象初始化",
+    "C++运算符重载"
+  ],
+  "source_pages": [
+    253,
+    256
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "338_复制构造_复制初始化与复制赋值的区别",
+  "_chunk_pages": [
+    253,
+    256
+  ]
+}

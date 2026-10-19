@@ -1,0 +1,48 @@
+{
+  "title": "GSM中的锚MSC与跨MSC切换",
+  "definition": "锚MSC是呼叫首次开始时移动用户所访问的MSC，并在整个呼叫持续期间保持不变。当移动用户在不同MSC覆盖区之间移动时，呼叫从归属MSC路由到锚MSC，再由锚MSC重路由到当前所在的被访MSC。",
+  "key_points": [
+    "锚MSC在呼叫开始时确定，并在该呼叫持续期间保持不变。",
+    "移动用户跨越MSC覆盖区后，正在进行的呼叫从锚MSC重路由到包含新基站的新被访MSC。",
+    "无论移动用户进行了多少次MSC间切换，通信者与移动用户之间至多有三个MSC：归属MSC、锚MSC和当前被访MSC。",
+    "采用锚MSC可以避免因多次移动而不断增加从归属MSC到当前MSC的中间MSC数量。"
+  ],
+  "examples": [
+    "跨MSC切换后的路径可表示为：$$\\text{归属MSC}\\rightarrow\\text{锚MSC}\\rightarrow\\text{当前被访MSC}\\rightarrow\\text{新基站}\\rightarrow\\text{移动用户}$$"
+  ],
+  "misconceptions": [
+    "锚MSC不是每次跨MSC切换后都会改变的MSC；它在整个呼叫期间保持不变。",
+    "当前被访MSC可以变化，但锚MSC不变。",
+    "归属MSC、锚MSC和当前被访MSC并不一定是同一个MSC。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "什么是GSM中的锚MSC？",
+      "a": "锚MSC是呼叫首次开始时移动用户所访问的MSC，并在整个呼叫持续期间保持不变。"
+    },
+    {
+      "q": "跨MSC切换时，呼叫通常如何路由？",
+      "a": "呼叫从归属MSC路由到锚MSC，再从锚MSC路由到移动用户当前所在的被访MSC。"
+    },
+    {
+      "q": "使用锚MSC时，通信者和移动用户之间至多有几个MSC？",
+      "a": "至多有三个：归属MSC、锚MSC和当前被访MSC。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "GSM切换的含义与触发原因",
+    "同一MSC下GSM切换的八个步骤"
+  ],
+  "source_pages": [
+    395,
+    396
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "924_gsm中的锚msc与跨msc切换",
+  "_chunk_pages": [
+    393,
+    396
+  ]
+}

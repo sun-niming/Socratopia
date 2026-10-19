@@ -1,0 +1,49 @@
+{
+  "title": "Vi的C语言格式自动缩进配置与保存位置",
+  "definition": "教材给出了一组用于设置 C 语言格式自动缩进的 Vi 配置：set nu、set cindent、set shiftwidth=4、set softtabstop=4、set tabstop=4、set autoindent、set smartindent。这些配置既可以在末行模式中直接输入，使当前编辑会话生效；也可以保存在用户主目录下的 .vimrc 文件中，便于以后自动使用。",
+  "key_points": [
+    "set cindent、set autoindent、set smartindent 用于配合缩进",
+    "set shiftwidth=4 指定缩进宽度为 4",
+    "set softtabstop=4 与 set tabstop=4 都设置为 4",
+    "set nu 会同时打开行号显示",
+    "配置可临时在末行模式输入，也可写入 ~/.vimrc 保存"
+  ],
+  "examples": [
+    "一组教材给出的配置为：set nu；set cindent；set shiftwidth=4；set softtabstop=4；set tabstop=4；set autoindent；set smartindent",
+    "如果希望每次启动后都生效，可把这些设置写入用户主目录中的 .vimrc"
+  ],
+  "misconceptions": [
+    "误以为这些配置只能临时输入；教材明确说也可保存在 .vimrc 中",
+    "把 tabstop、softtabstop、shiftwidth 当成完全相同的设置；教材只是同时给出它们都设为 4",
+    "误以为只设置一个缩进选项就等同于教材中的整套 C 语言格式配置"
+  ],
+  "qa_pairs": [
+    {
+      "q": "教材中用于设置 C 语言格式自动缩进的配置保存在哪里？",
+      "a": "可以保存在用户主目录中的 .vimrc 文件中。"
+    },
+    {
+      "q": "教材给出的缩进宽度相关参数值是多少？",
+      "a": "shiftwidth=4，softtabstop=4，tabstop=4。"
+    },
+    {
+      "q": "这些配置除了写入 .vimrc，还可以怎样使用？",
+      "a": "可以在末行模式直接输入。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "Vi的基础显示与编辑配置"
+  ],
+  "source_pages": [
+    41,
+    44
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "080_vi的c语言格式自动缩进配置与保存位置",
+  "_chunk_pages": [
+    41,
+    44
+  ]
+}

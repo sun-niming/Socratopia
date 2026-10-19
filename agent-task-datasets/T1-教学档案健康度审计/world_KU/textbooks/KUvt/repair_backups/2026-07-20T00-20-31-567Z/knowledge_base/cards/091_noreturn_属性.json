@@ -1,0 +1,48 @@
+{
+  "title": "[[noreturn]] 属性",
+  "definition": "[[noreturn]] 属性表示被标记的函数不会把控制权返回到调用点。此类函数通常会终止进程或线程，或者抛出异常。编译器利用这一信息分析控制流，从而避免某些警告或错误。",
+  "key_points": [
+    "[[noreturn]] 描述的是函数不会正常返回到调用者。",
+    "典型用途是标记调用 std::exit() 等终止函数的函数，或标记总会抛出异常的函数。",
+    "如果编译器不知道某个分支中的函数不会返回，可能错误地认为后续路径缺少返回值。"
+  ],
+  "examples": [
+    "[[noreturn]] void forceProgramTermination() { std::exit(1); }",
+    "bool isFeatureLicensed(int featureId) { if (!isDongleAvailable()) { forceProgramTermination(); } else { bool isLicensed { featureId == 42 }; return isLicensed; } }"
+  ],
+  "misconceptions": [
+    "[[noreturn]] 不是让函数返回特殊值，而是声明函数不会把控制权交还给调用者。",
+    "如果一个标记为 [[noreturn]] 的函数实际上返回，程序行为不符合该属性的要求。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "[[noreturn]] 表示什么？",
+      "a": "表示函数永远不会将控制权返回给调用点。"
+    },
+    {
+      "q": "为什么 forceProgramTermination() 需要 [[noreturn]]？",
+      "a": "因为它调用 std::exit(1) 终止程序，不会返回到调用者；编译器据此能够正确分析后续控制流。"
+    },
+    {
+      "q": "删除示例中的 [[noreturn]] 可能产生什么警告？",
+      "a": "编译器可能认为 isFeatureLicensed() 存在没有返回值的控制路径，并发出“并非所有控制路径都返回值”的警告。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++ 属性的标准化语法",
+    "控制流与返回值",
+    "异常或程序终止"
+  ],
+  "source_pages": [
+    56,
+    56
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "091_noreturn_属性",
+  "_chunk_pages": [
+    53,
+    56
+  ]
+}

@@ -1,0 +1,49 @@
+{
+  "title": "在vector中存储引用的reference_wrapper",
+  "definition": "vector不能直接把普通引用作为元素类型保存时，可以使用std::reference_wrapper包装对象引用，再将reference_wrapper存入vector。std::ref()用于创建非const引用包装器，std::cref()用于创建const引用包装器，get()用于访问被包装的对象；使用这些功能需要包含<functional>头文件。",
+  "key_points": [
+    "reference_wrapper使容器能够保存对已有对象的引用语义，而不是保存对象副本。",
+    "std::ref(obj)创建非const引用包装器，std::cref(obj)创建const引用包装器。",
+    "通过包装器的get()方法访问被引用对象。"
+  ],
+  "examples": [
+    "文本代码：\n#include <functional>\nvector<reference_wrapper<string>> vec{ ref(str1) };\nvec.push_back(ref(str2));\nvec[1].get();",
+    "如果需要包装const对象，应使用std::cref(obj)，并通过得到的包装器进行只读访问。"
+  ],
+  "misconceptions": [
+    "vector<reference_wrapper<T>>会复制T对象；reference_wrapper保存的是对已有对象的引用包装。",
+    "vec[1]本身就是string对象；它是reference_wrapper，需要使用get()访问被包装的string。",
+    "std::ref()和std::cref()都产生可修改引用；cref用于const引用，不能通过它修改对象。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何在vector中保存对string对象的引用？",
+      "a": "使用vector<reference_wrapper<string>>，并用ref(str)创建包装器，例如vector<reference_wrapper<string>> vec{ ref(str1) }。"
+    },
+    {
+      "q": "如何访问reference_wrapper包装的对象？",
+      "a": "调用其get()方法，例如vec[1].get()。"
+    },
+    {
+      "q": "std::ref()和std::cref()有什么区别？",
+      "a": "std::ref()创建非const引用包装器，std::cref()创建const引用包装器。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "vector容器",
+    "引用与const引用",
+    "函数对象库<functional>"
+  ],
+  "source_pages": [
+    556,
+    556
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1146_在vector中存储引用的reference_wrapper",
+  "_chunk_pages": [
+    553,
+    556
+  ]
+}

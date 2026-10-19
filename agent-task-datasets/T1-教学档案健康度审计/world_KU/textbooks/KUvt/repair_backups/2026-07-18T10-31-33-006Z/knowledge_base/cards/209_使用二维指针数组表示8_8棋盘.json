@@ -1,0 +1,49 @@
+{
+  "title": "使用二维指针数组表示8×8棋盘",
+  "definition": "原文使用`ChessPiece* chessBoard[8][8]{}`声明一个8行8列的二维数组。数组的每个元素都是指向`ChessPiece`对象的指针，因而可用于表示棋盘每个格子上的棋子对象；末尾的`{}`表示对数组进行零初始化。",
+  "key_points": [
+    "数组类型是`ChessPiece* [8][8]`，即每个格子保存一个`ChessPiece*`指针。",
+    "数组具有8×8共64个元素，对应棋盘的64个位置。",
+    "声明末尾的`{}`会对数组进行值初始化；指针元素被初始化为空指针。"
+  ],
+  "examples": [
+    "```cpp\nChessPiece* chessBoard[8][8]{}; // 零初始化数组\n```",
+    "向左上角位置放置一个新建的车对象：\n```cpp\nchessBoard[0][0] = new Rook{};\n```"
+  ],
+  "misconceptions": [
+    "`chessBoard[0][0]`保存的是指针，不是直接保存一个`ChessPiece`对象。",
+    "`{}`初始化数组元素为空指针，并不表示已经创建了64个棋子对象。",
+    "使用`new Rook{}`动态创建对象后，还需要在适当时机负责对象的生命周期管理；原文片段没有说明释放方式。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`ChessPiece* chessBoard[8][8]{}`声明了什么？",
+      "a": "它声明了一个8×8的二维数组，每个元素都是指向`ChessPiece`的指针，并对数组进行零初始化。"
+    },
+    {
+      "q": "执行`chessBoard[0][0] = new Rook{};`后，`chessBoard[0][0]`保存的是什么？",
+      "a": "它保存了指向动态创建的`Rook`对象的指针。"
+    },
+    {
+      "q": "该棋盘数组共有多少个元素？",
+      "a": "共有$8\\times8=64$个元素。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++数组",
+    "C++指针",
+    "动态对象创建"
+  ],
+  "source_pages": [
+    145,
+    148
+  ],
+  "needs_verification": true,
+  "verify_query": "《C++20高级编程》第5版 第148页 \"ChessPiece* chessBoard[8][8]{}\" \"new Rook{}\"",
+  "concept_id": "209_使用二维指针数组表示8_8棋盘",
+  "_chunk_pages": [
+    145,
+    148
+  ]
+}

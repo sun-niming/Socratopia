@@ -1,0 +1,45 @@
+{
+  "title": "new 分配失败时抛出 bad_alloc",
+  "definition": "默认情况下，如果 `new` 或 `new[]` 无法分配所需内存，它们会抛出 `bad_alloc` 类型的异常。`bad_alloc` 定义在 `<new>` 中。程序可以通过捕获该异常来处理内存分配失败。",
+  "key_points": [
+    "内存分配失败在移动设备或传统系统中更需要考虑，不能因为常见的 64 位平台上较少发生就完全忽略。",
+    "应使用 `catch (const bad_alloc& e)` 捕获默认 `new` 或 `new[]` 抛出的内存分配异常。",
+    "不必把所有 `new` 和 `new[]` 调用都放进 `try/catch`，但至少应考虑对大块内存分配进行处理。",
+    "即使使用异常记录错误，也要注意记录错误本身可能需要额外分配内存；内存耗尽时记录操作可能失败。"
+  ],
+  "examples": [
+    "基本形式：`try { ptr = new int[integerCount]; } catch (const bad_alloc& e) { /* 处理内存分配失败 */ }`。",
+    "异常对象的 `what()` 可用于获取错误说明，例如输出 `e.what()`。"
+  ],
+  "misconceptions": [
+    "默认 `new` 分配失败时不是返回 `nullptr`，而是抛出 `bad_alloc`。",
+    "捕获 `bad_alloc` 后不能假定分配已经成功；失败路径必须采取返回、降级或其他错误处理措施。",
+    "内存分配异常不仅可能发生在桌面平台之外；程序设计仍应明确其处理策略。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "默认的 `new` 和 `new[]` 分配失败时会发生什么？",
+      "a": "它们会抛出定义在 `<new>` 中的 `bad_alloc` 异常。"
+    },
+    {
+      "q": "如何捕获默认 `new` 抛出的内存分配异常？",
+      "a": "可以使用 `catch (const bad_alloc& e)` 捕获，并在处理程序中执行相应的错误处理。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++异常捕获",
+    "动态内存分配"
+  ],
+  "source_pages": [
+    459,
+    460
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "929_new_分配失败时抛出_bad_alloc",
+  "_chunk_pages": [
+    457,
+    460
+  ]
+}

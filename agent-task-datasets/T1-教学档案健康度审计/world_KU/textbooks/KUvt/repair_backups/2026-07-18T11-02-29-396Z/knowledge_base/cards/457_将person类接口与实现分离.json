@@ -1,0 +1,54 @@
+{
+  "title": "将Person类接口与实现分离",
+  "definition": "原文以`Person`类演示模块化程序的接口与实现分离：模块接口文件中导出类、构造函数、访问器和私有数据成员的声明；另一个`Person.cpp`文件中定义构造函数和成员函数的具体实现。",
+  "key_points": [
+    "接口部分示例包含`export class Person`以及构造函数、`getFirstName()`、`getLastName()`等成员声明。",
+    "`Person`对象保存两个字符串成员：`m_firstName`和`m_lastName`。",
+    "实现部分定义构造函数，并使用成员初始化列表初始化两个成员。原文示例为`: m_firstName { move(firstName) }, m_lastName { move(lastName) }`。",
+    "访问器函数返回对应成员：`getFirstName()`返回`m_firstName`，`getLastName()`返回`m_lastName`。",
+    "测试代码通过构造`Person person { \"Kole\", \"Webb\" };`，再调用访问器输出姓和名。"
+  ],
+  "examples": [
+    "接口声明示例：`export class Person { public: Person(std::string firstName, std::string lastName); const std::string& getFirstName() const; private: std::string m_firstName; std::string m_lastName; };`",
+    "实现示例：`Person::Person(std::string firstName, std::string lastName) : m_firstName { move(firstName) }, m_lastName { move(lastName) } {}`。",
+    "使用示例：`Person person { \"Kole\", \"Webb\" };`；`person.getLastName() << \", \" << person.getFirstName() << endl;`"
+  ],
+  "misconceptions": [
+    "类接口中的成员声明与成员函数的具体实现可以分开，不能把接口声明误认为完整的函数实现。",
+    "`private`数据成员不能由模块使用者直接访问，通常通过公开的访问器读取。",
+    "原文中的`move`写法表明构造函数实现尝试移动传入的字符串参数；不能据此把`move`误解为复制操作。",
+    "访问器声明末尾的`const`表示该成员函数不会修改对象的逻辑状态；不能省略后就认为语义完全相同。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`Person`类的接口和实现分别放在哪里？",
+      "a": "原文将类接口放在模块接口示例中，将构造函数和访问器的函数体放在`Person.cpp`中。"
+    },
+    {
+      "q": "`Person`构造函数如何初始化两个姓名成员？",
+      "a": "使用成员初始化列表：`: m_firstName { move(firstName) }, m_lastName { move(lastName) }`。"
+    },
+    {
+      "q": "如何取得`Person`对象的姓和名？",
+      "a": "分别调用`getLastName()`和`getFirstName()`。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++类的访问控制",
+    "构造函数与成员初始化列表",
+    "C++模块接口与import"
+  ],
+  "source_pages": [
+    354,
+    355,
+    356
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 modules separate module interface unit and implementation unit export class Person module person syntax",
+  "concept_id": "457_将person类接口与实现分离",
+  "_chunk_pages": [
+    353,
+    356
+  ]
+}

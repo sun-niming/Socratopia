@@ -1,0 +1,39 @@
+{
+  "title": "pop()",
+  "definition": "`pop()` 方法从数组中删除最后一个元素，并返回该元素的值；它会更改数组的长度。",
+  "key_points": [
+    "删除的是数组最后一个元素",
+    "返回值是被删除的元素",
+    "会修改原数组长度"
+  ],
+  "examples": [
+    "var arr = [1, 2, 3];",
+    "var x = arr.pop(); // x 为 3，arr 变为 [1, 2]"
+  ],
+  "misconceptions": [
+    "以为 `pop()` 返回的是新数组",
+    "以为 `pop()` 删除的是第一个元素",
+    "以为 `pop()` 不会改变原数组"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`pop()` 的返回值是什么？",
+      "a": "数组最后一个被删除的元素。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "Array对象与创建方式"
+  ],
+  "source_pages": [
+    305,
+    308
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "402_pop",
+  "_chunk_pages": [
+    305,
+    308
+  ]
+}

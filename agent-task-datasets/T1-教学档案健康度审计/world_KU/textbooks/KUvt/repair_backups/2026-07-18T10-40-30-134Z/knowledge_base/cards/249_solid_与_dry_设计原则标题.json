@@ -1,0 +1,47 @@
+{
+  "title": "SOLID 与 DRY 设计原则标题",
+  "definition": "原文第180页出现“SOLID”和“DRY (Don’t Repeat Yourself,”。因此可以确认该页开始或列出了 SOLID 与 DRY 两组软件设计原则名称，其中 DRY 的英文展开为“Don’t Repeat Yourself”。给出的片段在 DRY 展开后被截断，也没有提供 SOLID 五个字母分别代表的完整内容。",
+  "key_points": [
+    "页面明确出现 SOLID。",
+    "页面明确出现 DRY。",
+    "DRY 的原文展开是 “Don’t Repeat Yourself”。",
+    "原文片段没有给出 SOLID 各字母的具体展开，也没有给出 DRY 的完整中文解释。"
+  ],
+  "examples": [
+    "可按原文保留缩写及展开：$$DRY=\\text{Don't Repeat Yourself}$$",
+    "页面中的设计原则名称集合可写为：$$\\{SOLID,DRY\\}$$"
+  ],
+  "misconceptions": [
+    "不能根据本页片段自行补充 SOLID 五个字母各自代表的原则。",
+    "不能把 DRY 的英文展开误写成其他相近表述；原文显示的是“Don’t Repeat Yourself”。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "第180页出现了哪些设计原则缩写？",
+      "a": "SOLID 和 DRY。"
+    },
+    {
+      "q": "DRY 的英文展开是什么？",
+      "a": "Don’t Repeat Yourself。"
+    },
+    {
+      "q": "本页片段是否给出了 SOLID 五个字母的完整含义？",
+      "a": "没有，给出的片段只显示了 SOLID 这一缩写。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "软件设计原则的基本概念"
+  ],
+  "source_pages": [
+    177,
+    180
+  ],
+  "needs_verification": true,
+  "verify_query": "《C++20高级编程》第5版 第180页 SOLID DRY Don't Repeat Yourself",
+  "concept_id": "249_solid_与_dry_设计原则标题",
+  "_chunk_pages": [
+    177,
+    180
+  ]
+}

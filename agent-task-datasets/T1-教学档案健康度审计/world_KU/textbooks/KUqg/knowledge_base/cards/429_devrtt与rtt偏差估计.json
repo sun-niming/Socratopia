@@ -1,0 +1,48 @@
+{
+  "title": "DevRTT与RTT偏差估计",
+  "definition": "DevRTT是TCP用于估计SampleRTT通常偏离EstimatedRTT程度的指标。它是SampleRTT与EstimatedRTT之间绝对差值的指数加权移动平均，更新公式为：$$\\mathrm{DevRTT}_{\\mathrm{new}}=(1-\\beta)\\cdot\\mathrm{DevRTT}_{\\mathrm{old}}+\\beta\\cdot\\left|\\mathrm{SampleRTT}-\\mathrm{EstimatedRTT}\\right|$$教材给出的$\\beta$推荐值为$0.25$。",
+  "key_points": [
+    "DevRTT衡量SampleRTT相对于EstimatedRTT的典型偏离程度。",
+    "SampleRTT波动较小时，DevRTT较小；SampleRTT波动较大时，DevRTT较大。",
+    "DevRTT使用的是绝对差值$|\\mathrm{SampleRTT}-\\mathrm{EstimatedRTT}|$，再进行EWMA更新。",
+    "DevRTT与EstimatedRTT都是对RTT相关特征的估计，但EstimatedRTT估计平均水平，DevRTT估计波动或偏差程度。"
+  ],
+  "examples": [
+    "若旧DevRTT为10毫秒，$\\beta=0.25$，某次SampleRTT为140毫秒而EstimatedRTT为100毫秒，则：$$\\mathrm{DevRTT}_{\\mathrm{new}}=0.75\\times10+0.25\\times|140-100|=17.5\\text{毫秒}$$"
+  ],
+  "misconceptions": [
+    "DevRTT不是SampleRTT本身，也不是SampleRTT与EstimatedRTT的有符号差值。",
+    "DevRTT越大表示RTT样本波动或偏离程度越大，不表示平均RTT越大。",
+    "DevRTT的更新也采用EWMA，不是每次直接替换为当前绝对差值。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "DevRTT主要用于估计什么？",
+      "a": "用于估计SampleRTT通常偏离EstimatedRTT的程度。"
+    },
+    {
+      "q": "DevRTT的更新公式中为什么使用绝对值？",
+      "a": "因为它要衡量偏离程度，不区分SampleRTT高于还是低于EstimatedRTT。"
+    },
+    {
+      "q": "教材给出的$\\beta$推荐值是多少？",
+      "a": "$\\beta=0.25$。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "TCP的SampleRTT测量",
+    "EstimatedRTT与EWMA"
+  ],
+  "source_pages": [
+    173,
+    176
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "429_devrtt与rtt偏差估计",
+  "_chunk_pages": [
+    173,
+    176
+  ]
+}

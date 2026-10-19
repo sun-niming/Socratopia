@@ -1,0 +1,51 @@
+{
+  "title": "3G核心网中的GGSN",
+  "definition": "网关GPRS支持节点（Gateway GPRS Support Node，GGSN）是3G核心数据网通向更大因特网的网关。它连接多个SGSN；对于来自移动节点并将进入公共因特网的数据报，GGSN是该数据报离开3G基础设施前所经过的最后一个3G组件。对外部网络而言，GGSN表现得像普通网络路由器，并把其内部3G节点的移动性隐藏在网关之后。",
+  "key_points": [
+    "GGSN把多个SGSN连接到更大的因特网。",
+    "GGSN承担3G网络的因特网网关角色。",
+    "从移动节点发往公共因特网的数据报在进入外部因特网前会经过GGSN。",
+    "外部网络把GGSN视为普通路由器，无需直接处理GGSN背后3G节点的移动性。"
+  ],
+  "examples": [
+    "上行数据报的逻辑路径为：$$\\text{移动节点}\\rightarrow\\mathrm{SGSN}\\rightarrow\\mathrm{GGSN}\\rightarrow\\text{公共因特网}$$。",
+    "从公共因特网观察3G网络时，外部路由器主要面对GGSN，而不用直接了解移动节点正处于哪个小区。"
+  ],
+  "misconceptions": [
+    "错误地认为GGSN直接控制每个无线小区；无线接入和小区控制不由GGSN直接承担。",
+    "错误地认为外部因特网必须跟踪每个3G移动节点的小区位置；GGSN将内部移动性隐藏起来。",
+    "错误地混淆SGSN和GGSN：SGSN面向无线电接入网并维护移动节点状态，GGSN面向公共因特网并承担网关作用。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "GGSN在3G网络中的核心作用是什么？",
+      "a": "作为网关，把多个SGSN及其移动节点连接到更大的公共因特网。"
+    },
+    {
+      "q": "外部网络如何看待GGSN？",
+      "a": "把它看作普通网络路由器，GGSN背后的3G节点移动性对外部网络被隐藏。"
+    },
+    {
+      "q": "来自移动节点的数据报进入公共因特网前经过的最后一个3G基础设施组件是什么？",
+      "a": "GGSN。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "SGSN",
+    "IP路由器",
+    "网络网关",
+    "移动性管理"
+  ],
+  "source_pages": [
+    377,
+    380
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "887_3g核心网中的ggsn",
+  "_chunk_pages": [
+    377,
+    380
+  ]
+}

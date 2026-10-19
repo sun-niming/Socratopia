@@ -1,0 +1,44 @@
+{
+  "title": "输入流视图",
+  "definition": "输入流视图用于把输入流中的数据表示为一个范围。它通过输入流的提取运算符 >> 逐个读取元素，因此可以将标准输入等输入流接入范围管道，再使用 filter、transform、take_while 等适配器处理输入。",
+  "key_points": [
+    "输入流视图从底层输入流中逐个读取元素。",
+    "读取操作使用提取运算符 >>。",
+    "可以在管道中先使用 views::take_while 设置终止条件，再使用 views::transform 转换满足条件的元素。",
+    "原文示例的逻辑是：持续读取整数；对于小于 5 的输入，将其加倍并输出；一旦读到 5 或更大的数，循环停止并输出 Terminating...。"
+  ],
+  "examples": [
+    "原文示例的处理逻辑可表示为：\nstd::cin | views::take_while([](const auto& v) { return v < 5; }) | views::transform([](const auto& v) { return v * 2; });\n输入 1、2、4、5 时，前三个小于 5 的数被处理，读到 5 后停止，并输出 Terminating...。"
+  ],
+  "misconceptions": [
+    "输入流视图不是一次性把所有输入读入容器，而是在迭代时逐个读取。",
+    "take_while 会在谓词第一次返回 false 时停止，不会继续跳过该元素寻找后续满足条件的元素。",
+    "输入流视图的元素来源是输入流，不是预先存在的 vector。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "输入流视图如何获得元素？",
+      "a": "它通过底层输入流的提取运算符 >> 逐个读取元素。"
+    },
+    {
+      "q": "示例在什么条件下停止读取？",
+      "a": "当读到一个大于或等于 5 的数字时，take_while 的条件 v < 5 为 false，循环停止。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "范围视图的惰性求值",
+    "范围适配器的管道组合"
+  ],
+  "source_pages": [
+    544,
+    544
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 std::ranges::istream_view basic_istream_view views::istream take_while 官方文档",
+  "concept_id": "1115_输入流视图",
+  "_chunk_pages": [
+    541,
+    544
+  ]
+}

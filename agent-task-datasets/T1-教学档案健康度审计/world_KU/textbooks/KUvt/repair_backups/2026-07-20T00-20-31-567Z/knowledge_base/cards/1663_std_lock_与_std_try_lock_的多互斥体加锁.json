@@ -1,0 +1,48 @@
+{
+  "title": "std::lock 与 std::try_lock 的多互斥体加锁",
+  "definition": "std::lock 和 std::try_lock 用于一次处理多个互斥体对象。std::lock 会以避免死锁的方式获取所有给定互斥体的锁；如果加锁过程中抛出异常，会对已经获得的锁调用 unlock。std::try_lock 按顺序对每个互斥体调用 try_lock：全部成功时返回 -1；任一调用失败时，释放此前已经获得的锁，并返回加锁失败的互斥体参数位置索引，索引从 0 开始。",
+  "key_points": [
+    "std::lock 不要求调用者按照某个固定顺序手动获取多个锁，因此可避免因加锁顺序不一致导致的死锁。",
+    "std::try_lock 的返回值为 -1 表示所有互斥体都加锁成功；非负返回值表示对应位置的互斥体加锁失败。",
+    "使用 std::unique_lock 配合 std::defer_lock 可以先构造不持有锁的 unique_lock，再调用 std::lock 一次性获取多个锁。",
+    "unique_lock 离开作用域时会自动释放其持有的锁。"
+  ],
+  "examples": [
+    "示例：先延迟加锁，再通过 std::lock 获取两个互斥体的锁：\n```cpp\nstd::mutex mutex1, mutex2;\nstd::unique_lock lock1{mutex1, std::defer_lock};\nstd::unique_lock lock2{mutex2, std::defer_lock};\nstd::lock(lock1, lock2);\n// 此处两个锁都已获得\n// 离开作用域时，lock1 和 lock2 自动释放\n```",
+    "std::try_lock(mutex1, mutex2) 的返回结果可理解为：\n$$\n\\text{return value}=\\begin{cases}\n-1,&\\text{两个互斥体都加锁成功}\\\\\ni,&\\text{第 }i\\text{ 个互斥体加锁失败，且此前获得的锁已释放}\n\\end{cases}\n$$"
+  ],
+  "misconceptions": [
+    "std::lock 并不是按照调用参数的普通顺序简单地依次调用 lock；它的目的之一就是避免多个互斥体之间的死锁。",
+    "std::try_lock 返回 0 不表示全部成功，而表示第 0 个互斥体加锁失败；全部成功时返回 -1。",
+    "传入 std::defer_lock 的 unique_lock 在构造时不会获得互斥体的锁。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "std::try_lock 返回 -1 表示什么？",
+      "a": "表示所有给定的互斥体都成功加锁。"
+    },
+    {
+      "q": "std::try_lock 返回 2 表示什么？",
+      "a": "表示第 2 个参数位置的互斥体加锁失败；此前已经获得的锁会被释放。"
+    },
+    {
+      "q": "为什么示例中的 unique_lock 使用 std::defer_lock？",
+      "a": "为了让 unique_lock 构造时不立即加锁，随后交给 std::lock 以避免死锁的方式同时获取多个锁。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "互斥体与 RAII 加锁"
+  ],
+  "source_pages": [
+    809,
+    809
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1663_std_lock_与_std_try_lock_的多互斥体加锁",
+  "_chunk_pages": [
+    809,
+    812
+  ]
+}

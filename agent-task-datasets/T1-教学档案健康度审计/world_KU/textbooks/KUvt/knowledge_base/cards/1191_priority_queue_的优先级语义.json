@@ -1,0 +1,42 @@
+{
+  "title": "priority_queue 的优先级语义",
+  "definition": "优先队列是一种按优先级保存元素的队列。它不保证严格的先进先出（FIFO）顺序，而是保证任意时刻位于队列头部的元素具有最高优先级。最高优先级元素可能是最早加入的元素，也可能是最新加入的元素；当两个元素优先级相等时，它们的相对顺序未确定。",
+  "key_points": [
+    "priority_queue 的核心保证是队首元素优先级最高，而不是严格 FIFO。",
+    "默认情况下，元素优先级通过比较运算符确定，通常较大的元素位于队首。",
+    "优先级相同的元素之间没有确定的先后顺序。"
+  ],
+  "examples": [
+    "向优先队列加入优先级分别为 $3$、$1$、$10$ 的错误事件，取出顺序为优先级 $10$、$3$、$1$。"
+  ],
+  "misconceptions": [
+    "误以为 priority_queue 总是按照元素进入的先后顺序取出。",
+    "误以为优先级相等的元素一定按照 FIFO 顺序取出。",
+    "误以为队首元素一定是最早加入的元素。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "priority_queue 与 queue 在元素取出顺序上的主要区别是什么？",
+      "a": "queue 保证 FIFO 顺序；priority_queue 保证优先级最高的元素位于队首，不保证 FIFO。"
+    },
+    {
+      "q": "如果两个元素的优先级相等，priority_queue 是否规定它们的取出顺序？",
+      "a": "不规定，它们在队列中的相对顺序未确定。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "队列的 FIFO 语义"
+  ],
+  "source_pages": [
+    577,
+    577
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1191_priority_queue_的优先级语义",
+  "_chunk_pages": [
+    577,
+    580
+  ]
+}

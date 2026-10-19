@@ -1,0 +1,38 @@
+{
+  "title": "使用 cout 和 endl 输出文本并换行",
+  "definition": "`cout` 是标准输出流对象，使用插入运算符 `<<` 将文本、变量或操纵器输出到标准输出。`endl` 用于写入换行并刷新输出流，因此连续插入多个 `endl` 可以输出多行内容。",
+  "key_points": [
+    "变量可以直接插入输出流，例如 `int j { 11 }; cout << \"The value of j is \" << j << '!' << endl;`。",
+    "多个输出项可以连续使用 `<<` 连接。",
+    "`endl` 表示换行，并会刷新输出流。"
+  ],
+  "examples": [
+    "```text\nint j { 11 };\ncout << \"The value of j is \" << j << '!' << endl;\n```\n输出：`The value of j is 11!`。",
+    "```text\ncout << \"Line 1\" << endl << \"Line 2\" << endl << \"Line 3\" << endl;\n```\n输出三行：`Line 1`、`Line 2`、`Line 3`。"
+  ],
+  "misconceptions": [
+    "`endl` 不只是普通的换行符；原文将其与刷新输出流联系在一起。",
+    "不能把 `endl` 当作变量或字符串使用；它是流操纵器，应通过 `<<` 插入流。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "下面代码的输出是什么：`cout << \"Line 1\" << endl << \"Line 2\" << endl;`？",
+      "a": "输出两行，第一行是 `Line 1`，第二行是 `Line 2`；每个 `endl` 都会换行并刷新输出流。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++基本输出语句"
+  ],
+  "source_pages": [
+    413,
+    416
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "537_使用_cout_和_endl_输出文本并换行",
+  "_chunk_pages": [
+    413,
+    416
+  ]
+}

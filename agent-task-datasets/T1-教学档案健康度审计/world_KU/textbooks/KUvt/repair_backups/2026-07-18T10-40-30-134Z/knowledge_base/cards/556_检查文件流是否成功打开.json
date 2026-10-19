@@ -1,0 +1,43 @@
+{
+  "title": "检查文件流是否成功打开",
+  "definition": "创建文件输入流或输出流后，应检查流对象的状态，确认文件是否成功打开；如果打开失败，应进行错误处理并避免继续读写。可以使用流对象的布尔转换，也可以使用成员函数 $\\texttt{good()}$ 检查流状态。",
+  "key_points": [
+    "示例中使用 $\\texttt{if (!outFile.good())}$ 检查输出文件是否成功打开。",
+    "也可以使用 $\\texttt{if (!fout)}$ 或 $\\texttt{if (!fin)}$ 判断文件流是否处于失败状态。",
+    "打开失败时，示例通过 $\\texttt{cerr}$ 输出错误信息，并返回非零值终止程序。"
+  ],
+  "examples": [
+    "ofstream outFile { \"test.txt\", ios_base::trunc };\\nif (!outFile.good()) {\\n    cerr << \"Error while opening output file!\" << endl;\\n    return -1;\\n}",
+    "ifstream fin { \"test.out\" };\\nif (!fin) {\\n    cerr << \"Error opening test.out for reading\" << endl;\\n    return 1;\\n}"
+  ],
+  "misconceptions": [
+    "成功构造文件流对象不一定意味着文件已经成功打开，因此仍应检查流状态。",
+    "$\\texttt{good()}$ 检查的是流状态，不是文件中是否存在某个特定内容。",
+    "打开失败后不应继续对该流执行正常的读写操作。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "打开输出文件后，如何判断打开失败并处理？",
+      "a": "使用类似 $\\texttt{if (!outFile.good())\\{\\ cerr << \"Error while opening output file!\" << endl; return -1;\\ \\}}$ 的代码检查并处理。"
+    },
+    {
+      "q": "为什么读取文件前要检查 $\\texttt{ifstream}$ 的状态？",
+      "a": "因为文件可能不存在、无法访问或因其他原因打开失败；检查状态可以避免在无效流上继续读取。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++文件流的打开模式"
+  ],
+  "source_pages": [
+    426,
+    428
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "556_检查文件流是否成功打开",
+  "_chunk_pages": [
+    425,
+    428
+  ]
+}

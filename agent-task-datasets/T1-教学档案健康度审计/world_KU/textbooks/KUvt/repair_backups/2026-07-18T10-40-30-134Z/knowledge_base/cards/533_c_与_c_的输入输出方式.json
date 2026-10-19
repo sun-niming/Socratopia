@@ -1,0 +1,40 @@
+{
+  "title": "C 与 C++ 的输入输出方式",
+  "definition": "C 语言常用基于函数的输入输出接口，例如 `printf()`、`scanf()`；C++ 提供基于流（stream）的输入输出方式，例如使用 `cout` 输出、使用 `cin` 输入。",
+  "key_points": [
+    "C 输入输出接口包括 `printf()`、`scanf()` 等函数。",
+    "C++ 输入输出接口以流为基础，常用对象包括 `cout` 和 `cin`。",
+    "原文将 C 的输入输出函数与 C++ 的流式输入输出进行对比。"
+  ],
+  "examples": [
+    "C 风格输出：`printf(\"value = %d\", value);`",
+    "C++ 风格输出：`cout << value;`"
+  ],
+  "misconceptions": [
+    "C++ 流式输入输出不是把 `printf()` 或 `scanf()` 改名，而是另一套以流对象和运算符为基础的接口。",
+    "不能把 `cout`、`cin` 当作普通函数调用；典型用法是与流插入或提取运算符结合。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "原文对比了哪两类 C++ 与 C 的输入输出方式？",
+      "a": "C 常用 `printf()`、`scanf()` 等函数；C++ 常用基于流的输入输出方式，例如 `cout` 和 `cin`。"
+    },
+    {
+      "q": "C++ 中通常使用哪个对象进行输出？",
+      "a": "通常使用 `cout`，并通过 `<<` 输出数据。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [],
+  "source_pages": [
+    410,
+    412
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "533_c_与_c_的输入输出方式",
+  "_chunk_pages": [
+    409,
+    412
+  ]
+}

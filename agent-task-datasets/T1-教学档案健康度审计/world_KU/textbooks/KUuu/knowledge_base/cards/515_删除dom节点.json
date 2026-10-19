@@ -1,0 +1,39 @@
+{
+  "title": "删除DOM节点",
+  "definition": "删除 DOM 节点有两种教材中给出的方法：parentNode.removeChild(childNode) 表示从父节点中移除其子节点 childNode；element.remove() 表示直接把 element 从其父节点中移除。",
+  "key_points": [
+    "removeChild 需要先获取父节点",
+    "removeChild 删除的是父节点中的某个子节点",
+    "remove 直接作用于元素本身，更现代也更简单"
+  ],
+  "examples": [
+    "parentNode.removeChild(childNode);",
+    "element.remove();"
+  ],
+  "misconceptions": [
+    "removeChild 不能直接对孤立节点调用，必须从父节点删除",
+    "element.remove() 不需要先手动找到父节点"
+  ],
+  "qa_pairs": [
+    {
+      "q": "删除一个元素时，传统方法和现代方法分别是什么？",
+      "a": "传统方法是 parentNode.removeChild(childNode)；现代方法是 element.remove()。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "父节点与子节点",
+    "DOM节点"
+  ],
+  "source_pages": [
+    357,
+    358
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "515_删除dom节点",
+  "_chunk_pages": [
+    357,
+    360
+  ]
+}

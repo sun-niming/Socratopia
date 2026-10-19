@@ -1,0 +1,48 @@
+{
+  "title": "原子类型的无锁性与自定义类型限制",
+  "definition": "std::atomic提供原子操作，但某种类型的原子操作不一定是无锁的。可以通过原子对象的is_lock_free()方法查询其底层是否支持无锁操作；无锁操作表示运行时底层没有使用显式同步机制。std::atomic不仅可以用于整数，也可以用于其他类型，但类型必须满足可平凡复制要求，具体是否无锁还取决于类型的大小和目标硬件。",
+  "key_points": [
+    "如果目标硬件没有以原子方式执行某种操作的指令，原子类型的实现可能在底层使用互斥对象等同步机制。",
+    "is_lock_free()返回该原子对象是否支持无锁操作。",
+    "std::atomic<T>可用于非整数类型，例如std::atomic<double>或std::atomic<MyType>，但MyType必须具有is_trivially_copyable特性。",
+    "原文示例中，Foo含有较大的int数组，Bar仅含有一个int成员；两者都满足std::is_trivially_copyable_v<T>为true，但示例输出显示std::atomic<Foo>不是无锁的，而std::atomic<Bar>是无锁的。"
+  ],
+  "examples": [
+    "原文示例的结构：\n```cpp\nclass Foo { private: int mArray[123]; };\nclass Bar { private: int mInt; };\n\nstd::atomic<Foo> f;\n// std::is_trivially_copyable_v<Foo>为1，f.is_lock_free()为0\n\nstd::atomic<Bar> b;\n// std::is_trivially_copyable_v<Bar>为1，b.is_lock_free()为1\n```"
+  ],
+  "misconceptions": [
+    "原子类型不等于无锁类型；原子操作可能通过底层锁来实现。",
+    "满足可平凡复制要求只说明该类型可以用于std::atomic<T>，不保证其原子操作一定无锁。",
+    "is_lock_free()查询的是具体原子对象在目标平台上的无锁支持情况，不能仅根据类型名称武断判断。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何判断某个原子对象是否支持无锁操作？",
+      "a": "调用该原子对象的is_lock_free()方法；返回真表示支持无锁操作，返回假表示底层可能使用显式同步机制。"
+    },
+    {
+      "q": "std::atomic<MyType>对MyType有什么要求？",
+      "a": "MyType必须具有可平凡复制特性，即满足std::is_trivially_copyable_v<MyType>。"
+    },
+    {
+      "q": "为什么atomic<Foo>可能不是无锁，而atomic<Bar>可能是无锁？",
+      "a": "原文指出两者都可平凡复制，但Foo较大、Bar较小；是否无锁取决于类型大小以及目标硬件是否提供相应的原子指令。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "std::atomic保证并发访问的原子性",
+    "类型特征std::is_trivially_copyable_v"
+  ],
+  "source_pages": [
+    800,
+    800
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1640_原子类型的无锁性与自定义类型限制",
+  "_chunk_pages": [
+    797,
+    800
+  ]
+}

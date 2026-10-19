@@ -1,0 +1,49 @@
+{
+  "title": "IPsec ESP报文的组成与处理流程",
+  "definition": "ESP（Encapsulating Security Payload，封装安全载荷）将初始IP数据报和ESP尾部级联后加密，并在加密单元前添加明文ESP首部、后附加鉴别MAC。接收方依据ESP首部中的SPI确定安全关联（SA），验证完整性、检查序号、解密并删除填充，最后恢复初始IP数据报并转发。",
+  "key_points": [
+    "ESP尾部包含填充长度字段和下一个首部字段。填充长度字段说明需要删除多少填充；下一个首部字段说明载荷数据的类型，例如UDP。",
+    "ESP首部以明文发送，由SPI字段和序号字段组成。SPI用于指示数据报所属的SA；序号字段用于防御重放攻击。",
+    "发送方跨越整个待保护结构计算MAC，该结构包括ESP首部、初始IP数据报和ESP尾部。",
+    "接收方通常按以下顺序处理：使用SPI查找SA；计算并验证MAC；检查序号是否为新的；使用SA关联的算法和密钥解密；删除填充并提取初始IP数据报；转发该数据报。",
+    "IP首部中的协议字段为50时，接收方知道应对该数据报执行IPsec ESP处理。"
+  ],
+  "examples": [
+    "发送方可将结构表示为：$$\\text{ESP首部}\\;||\\;\\text{加密单元}\\;||\\;\\text{ESP尾部信息}\\;||\\;\\text{MAC}$$其中加密单元由初始IP数据报与ESP尾部级联后加密得到。",
+    "接收方处理流程：$$\\text{SPI查找SA}\\rightarrow\\text{验证MAC}\\rightarrow\\text{检查序号}\\rightarrow\\text{解密}\\rightarrow\\text{删除填充}\\rightarrow\\text{提取初始IP数据报}$$"
+  ],
+  "misconceptions": [
+    "SPI本身不是加密密钥，而是用于在SAD中索引和查找适当SA的信息。",
+    "序号字段主要用于检测重放，不能单独提供数据完整性；完整性验证依赖MAC。",
+    "ESP首部不是全部加密内容，原文明确说明ESP首部以明文发送。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "ESP中的SPI字段有什么作用？",
+      "a": "SPI指示接收方该数据报属于哪个SA，接收方使用它在SAD中查找相应的鉴别算法、解密算法和密钥。"
+    },
+    {
+      "q": "接收方为什么要检查ESP序号？",
+      "a": "为了判断数据报是否为新的，从而防御攻击者重复发送旧数据报的重放攻击。"
+    },
+    {
+      "q": "R2收到协议字段为50的IP数据报后，主要执行哪些ESP处理？",
+      "a": "R2使用SPI查找SA，验证MAC，检查序号，使用SA关联的算法和密钥解密，删除填充、提取初始IP数据报，并将其转发到最终目的地。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "安全关联SA与安全关联数据库SAD"
+  ],
+  "source_pages": [
+    437,
+    440
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1014_ipsec_esp报文的组成与处理流程",
+  "_chunk_pages": [
+    437,
+    440
+  ]
+}

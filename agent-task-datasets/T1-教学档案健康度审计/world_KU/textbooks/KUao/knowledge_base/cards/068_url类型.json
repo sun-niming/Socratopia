@@ -1,0 +1,42 @@
+{
+  "title": "URL类型",
+  "definition": "教材指出，超链接通过URL（统一资源定位器）来定位目标信息，URL分为绝对URL和相对URL。",
+  "key_points": [
+    "URL用于定位目标信息",
+    "URL是超链接定位目标的依据",
+    "URL分为绝对URL和相对URL"
+  ],
+  "examples": [
+    "绝对URL：https://www.example.com/a.html",
+    "相对URL：a.html"
+  ],
+  "misconceptions": [
+    "以为URL只有一种写法",
+    "把绝对URL和相对URL混为一谈"
+  ],
+  "qa_pairs": [
+    {
+      "q": "教材把URL分成哪两类？",
+      "a": "绝对URL和相对URL。"
+    },
+    {
+      "q": "URL在超链接中起什么作用？",
+      "a": "用于定位目标信息。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "超链接标签<a>"
+  ],
+  "source_pages": [
+    49,
+    52
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "068_url类型",
+  "_chunk_pages": [
+    49,
+    52
+  ]
+}

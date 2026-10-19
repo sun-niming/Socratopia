@@ -1,0 +1,46 @@
+{
+  "title": "Shell脚本的三种执行方式",
+  "definition": "教材给出了 Shell 脚本的三种执行方式。第一种是把脚本内容作为标准输入重定向给 bash 执行，写法为“bash<脚本名”。第二种是把脚本名作为 bash 的参数执行，写法为“bash 脚本名 [参数]”。第三种是先为脚本添加可执行权限，再直接执行，先用“chmod a+x 脚本名”赋予可执行权限，然后用“./脚本名 [参数]”运行。",
+  "key_points": [
+    "输入重定向执行：bash<脚本名",
+    "作为 bash 参数执行：bash 脚本名 [参数]",
+    "直接执行前需要先添加可执行权限",
+    "直接执行使用相对路径形式：./脚本名 [参数]"
+  ],
+  "examples": [
+    "bash<myscript.sh",
+    "bash myscript.sh arg1",
+    "chmod a+x myscript.sh",
+    "./myscript.sh arg1"
+  ],
+  "misconceptions": [
+    "误以为脚本只能用一种方式执行，实际上教材列出了三种方式",
+    "误以为直接执行脚本前不需要授权，教材明确要求先执行 chmod a+x",
+    "把“bash<脚本名”误写成“bash < 脚本名”之外的其他命令形式，教材给出的核心方式是输入重定向到 bash"
+  ],
+  "qa_pairs": [
+    {
+      "q": "教材中 Shell 脚本有哪三种执行方式？",
+      "a": "一是输入重定向到脚本：bash<脚本名；二是将脚本作为 bash 的参数：bash 脚本名 [参数]；三是先 chmod a+x 脚本名，再用 ./脚本名 [参数] 直接执行。"
+    },
+    {
+      "q": "直接执行脚本前，教材要求先做什么？",
+      "a": "先为脚本添加可执行权限，即执行 chmod a+x 脚本名。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "Shell脚本"
+  ],
+  "source_pages": [
+    57,
+    60
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "104_shell脚本的三种执行方式",
+  "_chunk_pages": [
+    57,
+    60
+  ]
+}

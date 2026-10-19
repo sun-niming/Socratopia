@@ -1,0 +1,40 @@
+{
+  "title": "删除特定参数类型的重载",
+  "definition": "可以使用删除函数语法 `= delete` 显式禁止某个参数类型对函数或方法的调用。被删除的函数仍参与重载匹配，但一旦调用匹配到它，编译器就会报告错误。",
+  "key_points": [
+    "例如，类中已有 `setValue(double)` 时，声明 `void setValue(int) = delete;` 可以禁止以 `int` 为参数调用 `setValue`。",
+    "如果没有删除 `int` 重载，调用 `setValue(123)` 时，编译器会把整数 `123` 转换为 `double`，再调用 `setValue(double)`。"
+  ],
+  "examples": [
+    "```cpp\nexport class SpreadsheetCell {\npublic:\n    void setValue(double value);\n    void setValue(int) = delete;\n};\n\nSpreadsheetCell cell;\ncell.setValue(1.23); // 合法\ncell.setValue(123);  // 编译错误\n```"
+  ],
+  "misconceptions": [
+    "`= delete` 不是函数体为空，也不是运行时错误；它会使匹配到该函数的调用在编译阶段报错。",
+    "删除 `setValue(int)` 后，并不表示所有整数都能自动安全地转换为 `double` 并调用其他重载；对于精确匹配的 `int` 调用，编译器会优先匹配被删除的函数并报错。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何禁止 `SpreadsheetCell::setValue` 接收整型参数？",
+      "a": "在类中声明 `void setValue(int) = delete;`。这样以 `int` 为参数调用 `setValue` 时会产生编译错误。"
+    },
+    {
+      "q": "如果只有 `void setValue(double)`，调用 `setValue(123)` 会发生什么？",
+      "a": "编译器会将整型值 `123` 转换为 `double`，然后调用 `setValue(double)`。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++函数重载"
+  ],
+  "source_pages": [
+    281,
+    281
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "588_删除特定参数类型的重载",
+  "_chunk_pages": [
+    281,
+    284
+  ]
+}

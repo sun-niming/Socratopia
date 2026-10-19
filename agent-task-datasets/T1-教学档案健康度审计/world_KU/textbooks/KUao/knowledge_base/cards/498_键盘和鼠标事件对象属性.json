@@ -1,0 +1,41 @@
+{
+  "title": "键盘和鼠标事件对象属性",
+  "definition": "不同类型的事件对象还会携带专门属性。教材列出：键盘事件的事件对象属性包括 keyCode、ctrlKey、key 等；鼠标事件的事件对象属性包括 clientX、clientY、offsetX、offsetY 等。",
+  "key_points": [
+    "键盘事件对象可能包含 keyCode、ctrlKey、key 等属性。",
+    "鼠标事件对象可能包含 clientX、clientY、offsetX、offsetY 等属性。",
+    "这些属性用于获取按键或鼠标位置等更具体的信息。"
+  ],
+  "examples": [
+    "// 键盘事件示意\nfunction(event){ console.log(event.key); console.log(event.ctrlKey); }\n// 鼠标事件示意\nfunction(event){ console.log(event.clientX, event.clientY); }"
+  ],
+  "misconceptions": [
+    "误以为所有事件对象都有同样的专用属性；实际上不同事件类型拥有不同属性。",
+    "误以为这些属性都属于普通 DOM 元素，而不是事件对象。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "键盘事件对象中教材列出了哪些属性？",
+      "a": "keyCode、ctrlKey、key 等。"
+    },
+    {
+      "q": "鼠标事件对象中教材列出了哪些属性？",
+      "a": "clientX、clientY、offsetX、offsetY 等。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "事件对象"
+  ],
+  "source_pages": [
+    369,
+    372
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "498_键盘和鼠标事件对象属性",
+  "_chunk_pages": [
+    369,
+    372
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "title": "Wireshark实验对UDP的分析内容",
+  "definition": "UDP Wireshark实验要求捕获并分析使用UDP的应用程序产生的分组，例如DNS或Skype等多媒体应用，并研究UDP报文段中的各个首部字段以及检验和计算。",
+  "key_points": [
+    "实验对象是实际使用UDP的应用程序流量。",
+    "DNS和Skype被原文列为示例。",
+    "分析内容包括UDP首部字段和UDP检验和计算。",
+    "原文将UDP描述为一种简单的、不提供不必要服务的运输协议。"
+  ],
+  "examples": [
+    "可分析的应用示例包括DNS查询和某些多媒体应用产生的UDP流量。",
+    "UDP实验关注的结构包括：$$\\text{UDP报文段}=\\text{UDP首部}+\\text{应用数据}$$。"
+  ],
+  "misconceptions": [
+    "UDP并不提供TCP式的可靠数据传输、连接建立或拥塞控制服务；本页只明确强调其简单性和不提供不必要服务。",
+    "UDP Wireshark实验的重点不是TCP窗口，而是UDP首部字段和检验和。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "UDP Wireshark实验主要分析什么？",
+      "a": "主要分析使用UDP的应用程序流量、UDP报文段中的各个首部字段以及检验和计算。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "UDP",
+    "UDP首部",
+    "检验和",
+    "Wireshark"
+  ],
+  "source_pages": [
+    213,
+    216
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "500_wireshark实验对udp的分析内容",
+  "_chunk_pages": [
+    213,
+    216
+  ]
+}

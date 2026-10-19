@@ -1,0 +1,41 @@
+{
+  "title": "head标记的作用",
+  "definition": "<head>…</head>是HTML文档的头部标记，提供文档的描述信息；它内部的内容不会显示在浏览器窗口中。",
+  "key_points": [
+    "head部分属于文档头部。",
+    "head中的内容不直接显示在浏览器窗口中。",
+    "head中可以放页面标题、页面类型、字符集以及外部脚本或样式文件的链接等。"
+  ],
+  "examples": [
+    "<head>\n  <title>页面标题</title>\n  <meta charset=\"utf-8\">\n  <link rel=\"stylesheet\" href=\"style.css\">\n</head>"
+  ],
+  "misconceptions": [
+    "head标签里的内容会作为正文显示出来。",
+    "head只能放标题，不能放其他信息。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么<head>里的内容不会直接显示在页面中？",
+      "a": "因为<head>用于提供文档描述信息，不是正文显示区域。"
+    },
+    {
+      "q": "head中可以放哪些内容？",
+      "a": "页面标题、页面类型、字符集，以及外部脚本或样式文件的链接等。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "HTML文档基本结构"
+  ],
+  "source_pages": [
+    45,
+    48
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "062_head标记的作用",
+  "_chunk_pages": [
+    45,
+    48
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "title": "鉴别协议ap2.0与IP地址欺骗",
+  "definition": "鉴别协议ap2.0尝试通过检查鉴别报文所在IP数据报的源IP地址是否等于Alice的已知IP地址来鉴别Alice。但IP源地址可以被伪造，攻击者能够构造源地址填写为Alice地址的IP数据报，因此Bob仍可能把Trudy误认为Alice。这种攻击称为IP欺骗。",
+  "key_points": [
+    "ap2.0的基本假设是Alice拥有一个通信中始终使用的周知网络地址，例如IP地址。",
+    "攻击者可以构造IP数据报，并在其中填入任意希望的源地址。",
+    "伪造源地址的数据报仍可能经链路层协议发送到第一跳路由器，并继续转发给Bob。",
+    "若网络管理员配置第一跳路由器，只转发源地址适当的数据报，可以减少IP欺骗；教材指出该措施未得到广泛采用或强制实施。"
+  ],
+  "examples": [
+    "ap2.0的鉴别逻辑为：$$\\text{若}\\ \\mathrm{SrcIP}(packet)=\\mathrm{IP}_{Alice},\\ \\text{则认为发送者是Alice}$$Trudy可以构造：$$\\mathrm{SrcIP}(packet)=\\mathrm{IP}_{Alice}$$但实际发送者仍是Trudy，因此该判断不可靠。"
+  ],
+  "misconceptions": [
+    "IP数据报中的源地址不是由网络自动可靠地证明的发送者身份。",
+    "验证源IP地址与Alice的已知地址匹配，并不能抵御能够构造IP数据报的攻击者。",
+    "IP欺骗不是把数据报发送到错误目的地，而是伪造数据报中的源地址。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么ap2.0不能可靠鉴别Alice？",
+      "a": "因为Trudy可以伪造IP数据报的源地址，使其看起来像来自Alice的已知IP地址。"
+    },
+    {
+      "q": "什么是IP欺骗？",
+      "a": "攻击者构造IP数据报并把源地址字段填写成另一个实体的地址，以冒充该实体发送数据。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "IP数据报",
+    "端点鉴别与鉴别协议"
+  ],
+  "source_pages": [
+    421,
+    424
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "982_鉴别协议ap2_0与ip地址欺骗",
+  "_chunk_pages": [
+    421,
+    424
+  ]
+}

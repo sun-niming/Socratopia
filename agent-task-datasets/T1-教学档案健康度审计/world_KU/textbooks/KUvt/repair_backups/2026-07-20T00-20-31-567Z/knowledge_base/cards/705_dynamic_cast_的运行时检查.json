@@ -1,0 +1,55 @@
+{
+  "title": "dynamic_cast 的运行时检查",
+  "definition": "dynamic_cast 用于继承层次结构中的指针或引用转换，并在运行时根据对象的运行时类型信息检查转换是否有效。指针转换失败时返回空指针；引用转换失败时抛出 std::bad_cast 异常。",
+  "key_points": [
+    "dynamic_cast 会执行运行时的动态类型检查。",
+    "对指针使用 dynamic_cast 时，转换失败返回空指针。",
+    "对引用使用 dynamic_cast 时，转换失败抛出 std::bad_cast 异常，因此通常需要使用 try-catch 处理。",
+    "要使用 dynamic_cast，相关类必须具有 vtable；教材说明类中至少需要有一个虚方法，通常可通过虚析构函数实现。",
+    "与 dynamic_cast 不同，static_cast 和 reinterpret_cast 不进行这种运行时检查，即使转换类型错误也会执行强制转换。"
+  ],
+  "examples": [
+    "指针转换：`Derived* d = dynamic_cast<Derived*>(b);`。如果 `b` 指向的对象实际不是 Derived 对象，转换结果为空指针。",
+    "引用转换：`Derived& dr { dynamic_cast<Derived&>(br) };`。如果 `br` 引用的对象不是 Derived 对象，会抛出 `std::bad_cast`，可使用如下结构处理：\n`try { /* dynamic_cast */ } catch (const std::bad_cast&) { /* 处理转换失败 */ }`"
+  ],
+  "misconceptions": [
+    "dynamic_cast 失败时总是返回空指针。实际上，指针转换失败返回空指针，引用转换失败抛出 std::bad_cast。",
+    "只要两个类存在继承关系，dynamic_cast 就一定可以使用。相关类必须具有虚函数形成的多态类型。",
+    "static_cast 与 dynamic_cast 都会检查对象的实际运行时类型。实际上，教材明确区分了二者：dynamic_cast 执行运行时检查，static_cast 不执行这种检查。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "dynamic_cast 对指针转换失败时返回什么？",
+      "a": "返回空指针。"
+    },
+    {
+      "q": "dynamic_cast 对引用转换失败时会发生什么？",
+      "a": "抛出 std::bad_cast 异常。"
+    },
+    {
+      "q": "使用 dynamic_cast 的类为什么需要虚方法？",
+      "a": "因为运行时类型信息存储在对象的 vtable 中；教材要求相关类至少具有一个虚方法。"
+    },
+    {
+      "q": "dynamic_cast 与 static_cast 在继承层次结构转换中的主要区别是什么？",
+      "a": "dynamic_cast 执行运行时动态类型检查；static_cast 不执行这种检查，即使转换类型错误也会强制转换。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "继承与派生类",
+    "虚函数与多态",
+    "C++ 异常"
+  ],
+  "source_pages": [
+    349,
+    350
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "705_dynamic_cast_的运行时检查",
+  "_chunk_pages": [
+    349,
+    352
+  ]
+}

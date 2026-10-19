@@ -1,0 +1,52 @@
+{
+  "title": "输出流状态检查",
+  "definition": "当输出流处于正常可用状态时，称其为“好的”。可以通过流状态方法检查输出是否出现错误：`good()` 在流状态正常时返回 `true`；`bad()` 在发生致命错误时返回 `true`；`fail()` 在最近一次操作失败时返回 `true`。流还提供可转换为 `bool` 的转换运算符，其结果等价于调用 `!fail()`。遇到文件结束标记时，`good()` 和 `fail()` 都返回 `false`，并满足关系：$$good() = (!fail() \\mathbin{\\&\\&} !eof())$$",
+  "key_points": [
+    "`good()` 可判断流当前是否处于正常状态，但不能说明流不可用的具体原因。",
+    "`bad()` 表示发生了致命错误。",
+    "`fail()` 表示最近一次操作失败，但不能说明下一次操作是否也会失败。",
+    "在对输出流执行 `flush()` 后，可以调用 `fail()` 检查刷新是否失败。",
+    "可以直接写 `if (!cout)`，其效果等价于根据 `!cout.fail()` 判断流状态。",
+    "`clear()` 可以重置流的错误状态。"
+  ],
+  "examples": [
+    "```cpp\nif (cout.good()) {\n    cout << \"All good\" << endl;\n}\n```",
+    "```cpp\ncout.flush();\nif (cout.fail()) {\n    cerr << \"Unable to flush to standard out\" << endl;\n}\n```",
+    "上述代码也可以写成：\n```cpp\ncout.flush();\nif (!cout) {\n    cerr << \"Unable to flush to standard out\" << endl;\n}\n```",
+    "流状态关系：\n$$good() = (!fail() \\mathbin{\\&\\&} !eof())$$"
+  ],
+  "misconceptions": [
+    "认为 `good()` 能直接说明错误原因；原文指出它只能提供基本状态信息。",
+    "认为 `fail()` 返回 `true` 就能确定所有后续操作都会失败；原文只说明它表示最近一次操作失败。",
+    "认为 `!cout` 表示与 `cout.fail()` 相同；实际上流的布尔转换结果等价于 `!cout.fail()`。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`good()`、`bad()` 和 `fail()` 分别表示什么？",
+      "a": "`good()` 表示流当前正常可用；`bad()` 表示发生致命错误；`fail()` 表示最近一次操作失败。"
+    },
+    {
+      "q": "如何检查 `cout.flush()` 是否失败？",
+      "a": "调用 `cout.fail()`，或使用等价的 `if (!cout)` 判断。"
+    },
+    {
+      "q": "如何重置流的错误状态？",
+      "a": "调用 `cout.clear()`。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "输出流与缓冲区刷新"
+  ],
+  "source_pages": [
+    414,
+    415
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "839_输出流状态检查",
+  "_chunk_pages": [
+    413,
+    416
+  ]
+}

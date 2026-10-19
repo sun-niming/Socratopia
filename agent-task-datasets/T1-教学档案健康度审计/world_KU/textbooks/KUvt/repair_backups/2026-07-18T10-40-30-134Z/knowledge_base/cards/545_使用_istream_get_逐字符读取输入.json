@@ -1,0 +1,47 @@
+{
+  "title": "使用 istream::get() 逐字符读取输入",
+  "definition": "`istream::get()` 可以从输入流中读取字符。无参数版本返回 `int`，因此能够返回特殊的文件结束值 `std::char_traits<char>::eof()`；带有 `char&` 参数的版本将读取到的字符写入参数，并通过流状态判断读取是否成功。",
+  "key_points": [
+    "无参数形式 `int next = stream.get();` 返回读取到的字符值，遇到输入结束时返回 `std::char_traits<char>::eof()`。",
+    "读取到的整数值可以使用 `static_cast<char>(next)` 转换为字符后追加到字符串。",
+    "带字符引用参数的形式为 `stream.get(next)`，成功读取时流条件为真。",
+    "原文给出了两种逐字符读取循环：显式比较 EOF，以及直接使用 `while (stream.get(next))`。"
+  ],
+  "examples": [
+    "显式检查 EOF：`string name; while (stream) { int next = stream.get(); if (next == std::char_traits<char>::eof()) break; name += static_cast<char>(next); } return name;`",
+    "字符引用版本：`string name; char next; while (stream.get(next)) { name += next; } return name;`"
+  ],
+  "misconceptions": [
+    "无参数 `get()` 返回的是 `int`，不能简单地把它的返回值直接当作普通 `char` 而忽略 EOF。",
+    "`get()` 与使用 `>>` 读取字符串的方式不同；原文示例使用 `get()` 逐个读取字符并自行追加到字符串。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么无参数 `get()` 的返回类型是 `int` 而不是 `char`？",
+      "a": "因为它除了返回字符值，还需要返回特殊的输入结束值 `std::char_traits<char>::eof()`。"
+    },
+    {
+      "q": "如何使用 `get(char&)` 逐字符读取并拼接字符串？",
+      "a": "声明 `char next;`，循环执行 `while (stream.get(next))`，每次将 `next` 追加到字符串，例如 `name += next;`。"
+    },
+    {
+      "q": "无参数 `get()` 读到 EOF 时应如何判断？",
+      "a": "将返回值与 `std::char_traits<char>::eof()` 比较；相等时表示到达输入结束。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "检查和处理 istream 的输入状态"
+  ],
+  "source_pages": [
+    417,
+    420
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "545_使用_istream_get_逐字符读取输入",
+  "_chunk_pages": [
+    417,
+    420
+  ]
+}

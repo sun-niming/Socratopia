@@ -1,0 +1,44 @@
+{
+  "title": "GameBoard坐标越界检查",
+  "definition": "GameBoard通过verifyCoordinate(size_t x, size_t y)检查二维网格坐标是否有效。当x大于或等于棋盘宽度，或y大于或等于棋盘高度时，函数抛出std::out_of_range异常；只有坐标满足$0\\le x<m_width$且$0\\le y<m_height$时，才能访问对应单元格。",
+  "key_points": [
+    "横坐标有效条件是$x<m_width$。",
+    "纵坐标有效条件是$y<m_height$。",
+    "x或y越界时抛出std::out_of_range。",
+    "at()在访问m_cells[x][y]之前调用verifyCoordinate(x,y)。"
+  ],
+  "examples": [
+    "坐标有效条件可以写为：\n$$0\\le x<m_{\\text{width}},\\qquad 0\\le y<m_{\\text{height}}$$",
+    "当x >= m_width时抛出std::out_of_range；当y >= m_height时也抛出std::out_of_range。"
+  ],
+  "misconceptions": [
+    "合法坐标的上界不包含m_width或m_height；例如宽度为8时，x的合法范围是0到7。",
+    "坐标检查不是只检查x或只检查y，而是两个坐标都必须满足范围条件。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "宽度为8、高度为8的棋盘中，坐标(7,7)是否合法？",
+      "a": "合法，因为$0\\le7<8$同时满足横坐标和纵坐标的范围要求。"
+    },
+    {
+      "q": "访问坐标(8,0)会发生什么？",
+      "a": "由于$x=8\\ge m_width=8$，坐标越界检查会抛出std::out_of_range异常。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "二维数组下标",
+    "C++异常"
+  ],
+  "source_pages": [
+    375,
+    376
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "761_gameboard坐标越界检查",
+  "_chunk_pages": [
+    373,
+    376
+  ]
+}

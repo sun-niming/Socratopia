@@ -1,0 +1,46 @@
+{
+  "title": "Burndown图与Sprint结束会议",
+  "definition": "Scrum团队通常每天创建一幅Burndown图，横轴表示Sprint周期的天数，纵轴表示剩余开发小时数，用于快速概括进展并判断计划任务能否在Sprint内完成。Sprint结束时召开Sprint Review和Sprint Retrospective：前者展示并讨论Sprint结果，后者反思过程并改进下一个Sprint。",
+  "key_points": [
+    "Burndown图的横轴是Sprint周期的天数。",
+    "Burndown图的纵轴是剩余开发小时数。",
+    "Burndown图可用于判断Sprint内计划任务是否可能全部完成。",
+    "Sprint Review向相关人员演示Sprint结果和当前软件状态，并讨论已完成、未完成任务及原因。",
+    "两周Sprint的Sprint Review通常为2小时。",
+    "Sprint Retrospective用于反思前一个Sprint的执行情况，识别过程缺点并调整下一个Sprint。",
+    "回顾会议关注“哪些进展顺利”“哪些可以改进”“开始做什么、继续做什么、停止做什么”。",
+    "每个Sprint后分析并改进过程称为持续改进。"
+  ],
+  "examples": [
+    "Burndown图可表示为：横轴为天数，纵轴为剩余开发小时数；随着任务完成，剩余小时数应总体下降。"
+  ],
+  "misconceptions": [
+    "Burndown图的纵轴表示剩余工作量，而不是已经完成的代码行数。",
+    "Sprint Review用于展示和讨论产品结果，Sprint Retrospective主要用于改进开发过程，二者目的不同。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "Burndown图的两个坐标轴分别表示什么？",
+      "a": "横轴表示Sprint周期的天数，纵轴表示剩余的开发小时数。"
+    },
+    {
+      "q": "Sprint Review和Sprint Retrospective有什么区别？",
+      "a": "Sprint Review展示并讨论Sprint结果和软件状态；Sprint Retrospective反思过程执行情况并提出下一个Sprint的改进措施。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "Scrum任务公告板与任务流转"
+  ],
+  "source_pages": [
+    843,
+    843
+  ],
+  "needs_verification": true,
+  "verify_query": "Scrum burndown chart x-axis sprint days y-axis remaining development hours Sprint Review Retrospective duration two-week sprint textbook",
+  "concept_id": "1738_burndown图与sprint结束会议",
+  "_chunk_pages": [
+    841,
+    844
+  ]
+}

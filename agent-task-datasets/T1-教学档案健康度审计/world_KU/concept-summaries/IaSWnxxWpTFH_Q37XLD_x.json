@@ -1,0 +1,119 @@
+{
+  "conversationId": "IaSWnxxWpTFH_Q37XLD_x",
+  "generatedAt": 1782641108544,
+  "pagesRange": null,
+  "sections": [
+    {
+      "type": "tldr",
+      "content": "这一节主要把 Linux 的**路径观**和**基础文件操作**连起来了：先认清目录树里的位置关系，再掌握通配符、`ls`、`cd`、`mkdir`、`rm`、`mv`、`cp`、`find` 这些常用命令的基本用法。"
+    },
+    {
+      "type": "narrative",
+      "content": "一开始围绕“路径怎么拆”展开：从根目录 `/` 出发，分清绝对路径、`~`、`.`、`..`、`pwd` 和 `cd` 的含义。接着进入文件名匹配和目录操作，慢慢区分了通配符、隐藏文件、目录标记，以及创建、删除、移动、复制和查找文件的常用命令。"
+    },
+    {
+      "type": "concepts",
+      "items": [
+        {
+          "name": "Linux 目录树与路径",
+          "body": "- **根目录**：`/` 是所有路径的起点。\n- **常见目录**：`/home` 通常放普通用户主目录，`/tmp` 是临时目录，`/etc` 是配置文件，`/dev` 是设备文件，`/proc` 是系统与进程信息。\n- **绝对路径**：以 `/` 开头，例如 `/home/alice/docs`。\n- **家目录简写**：`~` 通常表示当前用户的主目录，例如 `~/docs` 常等价于 `/home/alice/docs`。\n- **相对路径符号**：` . ` 表示当前目录，`..` 表示父目录。\n- **查看当前位置**：`pwd` 会输出当前工作目录。\n- **切换目录**：`cd ..` 回到父目录，`cd` 或 `cd ~` 回到主目录，`cd -` 在当前目录和上一次目录之间切换。"
+        },
+        {
+          "name": "文件名通配符",
+          "body": "通配符是 shell 用来**模糊匹配文件名**的，不是正则表达式。\n\n- `*`：匹配任意长度字符串，甚至空字符串。\n  - 例：`a*.txt` 可匹配 `a.txt`、`ab.txt`、`abc.txt`\n- `?`：匹配任意**一个**字符。\n  - 例：`a?.txt` 可匹配 `ab.txt`\n- `[abc]`：匹配方括号内任意一个字符。\n  - 例：`[abc].txt` 匹配 `a.txt`、`b.txt`、`c.txt`\n- `[!abc]`：匹配**不在**括号内的任意一个字符。\n  - 例：`[!abc].txt` 可匹配 `d.txt`\n- `[a-z]`：匹配一个范围内的字符。\n\n**注意**：通配符放在引号里时，shell 不会展开它。\n\n```bash\\nls \"*.txt\"\n```\n\n这时 `*.txt` 会被当成字面量，而不是展开成一堆文件名。"
+        },
+        {
+          "name": "查看目录内容与文件类型标记",
+          "body": "- `ls -a`：显示所有文件，包括隐藏文件。\n- `ls -l`：长格式显示，能看到权限、所有者、大小、时间等信息。\n- `ls -F`：在文件名后加类型标记。\n  - 目录：`/`\n  - 可执行文件：`*`\n  - 符号链接：`@`\n\n例：\n```bash\\nls -al\n```\n表示同时显示隐藏文件并使用长格式。"
+        },
+        {
+          "name": "创建、删除、移动、复制",
+          "body": "- `mkdir test`：创建目录 `test`。\n- `mkdir -p aa/bb/cc`：递归创建多级目录，缺的父目录会一起补出来。\n- `rmdir`：只能删除**空目录**。\n- `rm -r`：递归删除目录及其内容，危险。\n- `rm -rf`：强制递归删除，更危险。\n- `mv`：移动或改名。\n  - `mv old.txt new.txt`：改名\n  - `mv a.txt docs/`：移动到目录中\n- `cp`：复制。\n  - `cp a.txt docs/`：复制普通文件\n  - `cp -r mydir backup/`：复制目录\n  - `cp -a`：尽量保留原有属性地复制\n\n**对比**：\n- `mv` = 搬走\n- `cp` = 克隆一份\n\n```bash\\nmv report.txt final.txt\\ncp -r project backup/\n```"
+        },
+        {
+          "name": "查找文件",
+          "body": "`find` 用来按条件搜索文件或目录。\n\n基本形式：\n```bash\\nfind [目录] [选项] [动作]\n```\n\n课堂里主要出现了：\n- `find ./ -name \"*.log\"`：从当前目录开始，按名字找所有 `.log` 文件。\n- `-name` 后面的通配模式通常要加引号，避免 shell 先展开。\n- 还提到了 `-type d`，其中 `d` 表示目录。"
+        }
+      ]
+    },
+    {
+      "type": "key-terms",
+      "items": [
+        {
+          "term": "根目录",
+          "definition": "`/`，Linux 文件系统树的起点。"
+        },
+        {
+          "term": "绝对路径",
+          "definition": "以 `/` 开头的完整路径。"
+        },
+        {
+          "term": "主目录",
+          "definition": "普通用户的个人目录，通常是 `/home/用户名`，也可用 `~` 表示。"
+        },
+        {
+          "term": "当前目录",
+          "definition": "你此刻所在的目录，用 `.` 表示。"
+        },
+        {
+          "term": "父目录",
+          "definition": "当前目录的上一级，用 `..` 表示。"
+        },
+        {
+          "term": "隐藏文件",
+          "definition": "文件名以 `.` 开头的文件，`ls -a` 才能看到。"
+        },
+        {
+          "term": "通配符",
+          "definition": "shell 用来模糊匹配文件名的符号，如 `*`、`?`、`[abc]`。"
+        },
+        {
+          "term": "递归删除",
+          "definition": "`rm -r`，连目录及其内部内容一起删除。"
+        },
+        {
+          "term": "符号链接",
+          "definition": "类似快捷方式的链接文件，`ls -F` 后面会显示 `@`。"
+        },
+        {
+          "term": "查找命令",
+          "definition": "`find`，可按名称、类型等条件搜索文件或目录。"
+        }
+      ]
+    },
+    {
+      "type": "open-question",
+      "content": "`find` 里提到的 `-type d` 已经知道是“找目录”，但还可以怎样和 `-name` 组合，精确找到某个目录名？"
+    },
+    {
+      "type": "review-questions",
+      "items": [
+        {
+          "question": "如果当前目录是 `/home/alice/docs`，执行 `cd ..` 后会到哪里？",
+          "hint": "删掉路径最右边那一级。",
+          "answer": "会到 `/home/alice`。"
+        },
+        {
+          "question": "`a?.txt` 会匹配 `a.txt`、`ab.txt`、`abc.txt` 里的哪一个？",
+          "hint": "`?` 只能代表一个字符。",
+          "answer": "只会匹配 `ab.txt`。"
+        },
+        {
+          "question": "`ls -F` 看到 `backup/`，这个名字后面的 `/` 表示什么？",
+          "hint": "它说明这个对象能不能 `cd` 进去。",
+          "answer": "表示它是一个目录。"
+        },
+        {
+          "question": "为什么 `cp mydir backup/` 可能失败，而 `cp -r mydir backup/` 可以？",
+          "hint": "目录和普通文件的复制方式不一样。",
+          "answer": "因为 `mydir` 是目录，`cp` 默认不递归复制目录；加上 `-r` 才会把整个目录树复制过去。"
+        },
+        {
+          "question": "`find ./ -name \"*.log\"` 里为什么要给 `*.log` 加引号？",
+          "hint": "防止 shell 提前展开。",
+          "answer": "因为加引号后 shell 不会先把通配符展开，`find` 才能收到原始模式并按名字匹配。"
+        }
+      ]
+    }
+  ]
+}

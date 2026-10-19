@@ -1,0 +1,42 @@
+{
+  "title": "send_all 的作用",
+  "definition": "send_all() 是一个专门用于把缓冲区中的所有字节尽量完整发送出去的函数。由于 socket 是流式传输，send(fd, buf, len, 0) 一次返回的字节数可能小于 len；send_all() 需要在还有未发送字节时持续调用 send()，直到全部发送完成或发生错误。",
+  "key_points": [
+    "send() 的返回值可能小于请求发送的长度。",
+    "send_all() 的职责只有一个：剩余字节未发完就继续发。",
+    "发送响应头、错误页面、文件块时都应该使用 send_all()。"
+  ],
+  "examples": [
+    "ssize_t send_all(int fd, const void *buf, size_t len) {\n  const char *p = (const char *)buf;\n  size_t sent = 0;\n  while (sent < len) {\n    ssize_t n = send(fd, p + sent, len - sent, 0);\n    if (n <= 0) return -1;\n    sent += (size_t)n;\n  }\n  return (ssize_t)sent;\n}"
+  ],
+  "misconceptions": [
+    "一次 send() 就一定能把所有数据发完。",
+    "只有大文件才需要考虑分多次发送。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么需要 send_all()？",
+      "a": "因为 send() 可能只发送部分数据，必须循环发送剩余部分。"
+    },
+    {
+      "q": "send_all() 的核心职责是什么？",
+      "a": "只要还有字节没发完，就继续 send；出错则返回失败。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "socket 流式传输",
+    "send() 函数"
+  ],
+  "source_pages": [
+    17,
+    20
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "011_send_all_的作用",
+  "_chunk_pages": [
+    17,
+    20
+  ]
+}

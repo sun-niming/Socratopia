@@ -1,0 +1,45 @@
+{
+  "title": "explicit 转换函数限制隐式转换",
+  "definition": "在转换函数前加上 `explicit`，可以限制该转换函数只能在显式转换语境中使用，从而避免对象被编译器自动转换为目标类型。原文给出 C++11 风格的声明 `explicit operator double() const;`，用于将 `SpreadsheetCell` 显式转换为 `double`。",
+  "key_points": [
+    "声明形式为 `explicit operator double() const;`。",
+    "加上 `explicit` 后，不能依赖该转换函数进行一般的隐式类型转换。",
+    "需要转换时，应使用显式转换语法，例如 `static_cast<double>(cell)`。",
+    "该机制主要用于减少意外的自动类型转换。"
+  ],
+  "examples": [
+    "```cpp\nclass SpreadsheetCell {\npublic:\n    explicit operator double() const;\n};\n\nSpreadsheetCell cell{6.6};\ndouble value{static_cast<double>(cell)};\n```",
+    "显式转换写法：`double value = static_cast<double>(cell);`。"
+  ],
+  "misconceptions": [
+    "`explicit` 不会删除转换函数，也不会阻止所有形式的显式转换；它主要限制隐式转换。",
+    "声明了 `explicit operator double()` 后，不能据此断言 `double value = cell;` 一定合法；通常应使用 `static_cast<double>(cell)`。",
+    "`explicit` 修饰的是转换函数的隐式使用方式，不是把目标类型改成另一种类型。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么要在 `operator double()` 前加 `explicit`？",
+      "a": "为了禁止 `SpreadsheetCell` 在一般表达式或初始化中被自动隐式转换为 `double`，要求调用者明确写出转换操作。"
+    },
+    {
+      "q": "有了 `explicit operator double() const` 后，如何把 `cell` 转换为 `double`？",
+      "a": "使用 `static_cast<double>(cell)`，例如 `double value{static_cast<double>(cell)};`。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "用户定义转换函数",
+    "static_cast"
+  ],
+  "source_pages": [
+    485,
+    488
+  ],
+  "needs_verification": true,
+  "verify_query": "C++11 explicit conversion operator double implicit conversion rules Marc Gregoire Professional C++ 5th edition page 488",
+  "concept_id": "630_explicit_转换函数限制隐式转换",
+  "_chunk_pages": [
+    485,
+    488
+  ]
+}

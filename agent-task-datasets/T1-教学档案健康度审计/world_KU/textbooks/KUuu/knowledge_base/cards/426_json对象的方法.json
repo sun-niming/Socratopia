@@ -1,0 +1,39 @@
+{
+  "title": "JSON对象的方法",
+  "definition": "JavaScript 中的 JSON 对象包含两个方法：parse() 用于解析 JSON，stringify() 用于把对象或值转换为 JSON 字符串。",
+  "key_points": [
+    "parse() 用于解析 JSON",
+    "stringify() 用于将对象/值转换为 JSON 字符串",
+    "JSON 对象本身提供这两个核心方法"
+  ],
+  "examples": [
+    "JSON.parse('{\"name\":\"Tom\"}')",
+    "JSON.stringify({name:'Tom'})"
+  ],
+  "misconceptions": [
+    "parse() 不是把对象转成字符串，而是把 JSON 文本解析成数据",
+    "stringify() 不是解析 JSON，而是序列化为 JSON 字符串"
+  ],
+  "qa_pairs": [
+    {
+      "q": "JSON 对象的两个方法分别做什么？",
+      "a": "parse() 用于解析 JSON；stringify() 用于将对象或值转换为 JSON 字符串。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "JSON",
+    "对象"
+  ],
+  "source_pages": [
+    297,
+    300
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "426_json对象的方法",
+  "_chunk_pages": [
+    297,
+    300
+  ]
+}

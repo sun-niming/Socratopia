@@ -1,0 +1,50 @@
+{
+  "title": "SpreadsheetCell 的数值与字符串接口",
+  "definition": "SpreadsheetCell 用成员变量 m_value 保存单元格的数值。setValue(double value) 直接设置数值；getValue() const 返回当前数值；setString(string_view value) 将字符串转换为 double 后保存；getString() const 将当前数值转换为字符串后返回。",
+  "key_points": [
+    "setValue(double value) 的作用是把传入的 value 保存到 m_value。",
+    "getValue() const 只读取并返回 m_value，不修改对象。",
+    "setString(string_view value) 通过 stringToDouble(value) 把字符串转换成数值后保存。",
+    "getString() const 通过 doubleToString(m_value) 把数值转换成字符串。",
+    "doubleToString(double value) 的原文实现使用 to_string(value)；stringToDouble(string_view value) 使用 from_chars 将字符范围转换为数值。"
+  ],
+  "examples": [
+    "代码示例：SpreadsheetCell cell; cell.setValue(6); double number = cell.getValue();",
+    "代码示例：SpreadsheetCell cell; cell.setString(\"3.7\"); string text = cell.getString();",
+    "转换关系可表示为：$$\\text{setString}(s):\\quad m\\_value=\\text{stringToDouble}(s)$$ $$\\text{getString}():\\quad \\text{return }\\text{doubleToString}(m\\_value)$$"
+  ],
+  "misconceptions": [
+    "getString() 返回的不是原始输入字符串，而是由当前数值重新转换得到的字符串。",
+    "setString() 不会把字符串直接保存为字符串成员，而是先转换成 double。",
+    "getValue() 和 getString() 都是读取接口，但返回类型不同，前者返回 double，后者返回 string。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "SpreadsheetCell 的 setString(string_view value) 做什么？",
+      "a": "它调用 stringToDouble(value) 将字符串转换为 double，并把结果保存到 m_value。"
+    },
+    {
+      "q": "getString() const 如何得到返回值？",
+      "a": "它调用 doubleToString(m_value)，把当前数值转换为字符串后返回。"
+    },
+    {
+      "q": "原文中 doubleToString(double value) 使用了什么标准库函数？",
+      "a": "使用 std::to_string(value)。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++类的成员函数"
+  ],
+  "source_pages": [
+    233,
+    236
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "310_spreadsheetcell_的数值与字符串接口",
+  "_chunk_pages": [
+    233,
+    236
+  ]
+}

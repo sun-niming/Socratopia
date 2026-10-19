@@ -1,0 +1,45 @@
+{
+  "title": "全局locale与已有标准库对象",
+  "definition": "`std::locale::global()` 可以用给定的locale替换应用程序的全局C++ locale。`std::locale` 的默认构造函数会复制当前全局locale。但是，诸如 `cout` 等使用locale的标准库对象通常在构造时保存全局locale的副本；之后修改全局locale不会自动影响已经创建的对象，如有需要必须对对象调用 `imbue()`。",
+  "key_points": [
+    "`std::locale::global(loc)` 用于设置全局locale。",
+    "`std::locale{}` 的默认构造结果是当前全局locale的拷贝。",
+    "标准库流等对象可能在创建时保存全局locale的拷贝。",
+    "修改全局locale不会自动更新已经存在的流对象。",
+    "可以通过对象的 `imbue()` 方法显式设置新的locale。"
+  ],
+  "examples": [
+    "概念性代码：`std::locale::global(std::locale{ \"en-US\" });`",
+    "对已有流重新设置：`wcout.imbue(std::locale{ \"en-US\" });`"
+  ],
+  "misconceptions": [
+    "修改全局locale不意味着所有已经创建的流都会立即采用新locale。",
+    "全局locale与某个具体流当前使用的locale不是完全等价的概念。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "修改全局locale后，已经创建的 `cout` 会自动使用新locale吗？",
+      "a": "不会。已有流通常保存创建时的locale副本；需要时应对该流调用 `imbue()`。"
+    },
+    {
+      "q": "哪个函数用于替换应用程序的全局locale？",
+      "a": "`std::locale::global()`。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "locale与facet",
+    "将locale关联到I/O流"
+  ],
+  "source_pages": [
+    664,
+    664
+  ],
+  "needs_verification": true,
+  "verify_query": "C++ std::locale::global 标准流构造时 locale 副本 imbue 已有流行为",
+  "concept_id": "1390_全局locale与已有标准库对象",
+  "_chunk_pages": [
+    661,
+    664
+  ]
+}

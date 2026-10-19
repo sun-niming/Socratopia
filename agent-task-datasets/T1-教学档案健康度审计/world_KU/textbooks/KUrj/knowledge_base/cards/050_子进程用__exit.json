@@ -1,0 +1,38 @@
+{
+  "title": "子进程用 _exit",
+  "definition": "子进程在完成客户端处理后，更稳妥的做法是调用 _exit(0) 而不是 exit(0)。因为 exit() 会执行标准库清理动作，例如刷新 stdio 缓冲区；fork 后子进程继承了父进程的缓冲区，在复杂场景下可能造成重复刷新。课程项目里 exit(0) 通常也能运行，但 _exit(0) 更安全。",
+  "key_points": [
+    "exit() 可能刷新 stdio 缓冲区",
+    "fork 后子进程继承父进程的缓冲区",
+    "子进程在关闭必要 fd 并完成日志后，再调用 _exit(0) 更稳妥"
+  ],
+  "examples": [
+    "close(client_fd); _exit(0);"
+  ],
+  "misconceptions": [
+    "exit() 和 _exit() 完全等价",
+    "子进程不用管缓冲区问题"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么课程项目里更推荐子进程用 _exit(0)？",
+      "a": "因为它不会像 exit() 那样执行标准库清理和刷新缓冲区，能避免 fork 后继承缓冲区导致的重复刷新问题。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "fork 的返回值与复制",
+    "父子进程的 fd 关闭规则"
+  ],
+  "source_pages": [
+    38,
+    40
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "050_子进程用__exit",
+  "_chunk_pages": [
+    37,
+    40
+  ]
+}

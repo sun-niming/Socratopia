@@ -1,0 +1,39 @@
+{
+  "title": "push()",
+  "definition": "`push()` 方法向数组末尾添加一个或多个元素，并返回该数组的新长度。",
+  "key_points": [
+    "添加位置是数组末尾",
+    "可以一次添加一个或多个元素",
+    "返回值是添加后的新长度"
+  ],
+  "examples": [
+    "var arr = [1, 2];",
+    "var len = arr.push(3, 4); // len 为 4，arr 为 [1, 2, 3, 4]"
+  ],
+  "misconceptions": [
+    "以为 `push()` 返回的是被添加的元素",
+    "以为 `push()` 只能添加一个元素",
+    "以为 `push()` 不会修改原数组"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`push()` 执行后返回什么？",
+      "a": "数组的新长度。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "Array对象与创建方式"
+  ],
+  "source_pages": [
+    305,
+    308
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "403_push",
+  "_chunk_pages": [
+    305,
+    308
+  ]
+}

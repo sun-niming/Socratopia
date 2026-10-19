@@ -1,0 +1,41 @@
+{
+  "title": "noexcept说明符",
+  "definition": "函数默认可以抛出异常。使用 noexcept 标记函数，表示该函数不应抛出异常；如果带有 noexcept 的函数仍以某种方式抛出异常，C++会调用 terminate() 终止应用。",
+  "key_points": [
+    "典型声明为：void printValues(const std::vector<int>& values) noexcept;。",
+    "noexcept 是对函数异常行为的承诺，不是用于捕获异常的机制。",
+    "在派生类重写虚函数时，派生类版本可以比基类版本更严格地标记为 noexcept；如果基类版本不是 noexcept，派生类可以标记为 noexcept，但反方向不允许。"
+  ],
+  "examples": [
+    "void printValues(const std::vector<int>& values) noexcept; 表示 printValues() 不应抛出异常。"
+  ],
+  "misconceptions": [
+    "noexcept 不会把异常转化为普通返回值；如果异常实际逃出 noexcept 函数，会调用 terminate()。",
+    "派生类重写虚函数时，不能把基类的 noexcept 保证削弱为可能抛异常。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "函数声明中的 noexcept 表示什么？",
+      "a": "表示该函数不应抛出异常；如果异常从该函数逃出，C++会调用 terminate()。"
+    },
+    {
+      "q": "派生类重写虚函数时，异常说明能否比基类更严格？",
+      "a": "可以。例如基类版本不是 noexcept，派生类重写版本可以标记为 noexcept；反过来不能削弱基类已有的 noexcept 保证。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++异常抛出与捕获"
+  ],
+  "source_pages": [
+    446,
+    446
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "907_noexcept说明符",
+  "_chunk_pages": [
+    445,
+    448
+  ]
+}

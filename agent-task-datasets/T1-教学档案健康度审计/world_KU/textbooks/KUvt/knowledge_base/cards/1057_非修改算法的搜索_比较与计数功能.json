@@ -1,0 +1,48 @@
+{
+  "title": "非修改算法的搜索、比较与计数功能",
+  "definition": "非修改算法可以分别用于搜索元素、比较两个序列以及统计满足条件的元素。搜索算法寻找值、谓词匹配元素或子序列；比较算法判断序列是否相等、找出不匹配位置或比较词典序；计数算法判断逻辑条件或统计匹配元素数量。",
+  "key_points": [
+    "`find` 查找第一个匹配给定值的元素，`find_if` 查找第一个使谓词返回 true 的元素。",
+    "`equal` 判断两个序列是否相等，`mismatch` 查找第一个不匹配位置。",
+    "`lexicographical_compare` 按词典序比较两个序列。",
+    "`all_of`、`any_of`、`none_of` 分别判断全部、至少一个、全部不满足谓词的情况；空序列时，`all_of` 和 `none_of` 返回 true。",
+    "`count` 和 `count_if` 统计匹配给定值或满足谓词的元素个数。"
+  ],
+  "examples": [
+    "对序列 `[1,2,3]` 使用“元素大于 0”的谓词：`all_of` 返回 true，`any_of` 返回 true，`none_of` 返回 false。",
+    "对两个字符序列进行词典序比较时，先比较对应位置元素；若元素相等，再继续比较下一个位置。",
+    "C++20 的三向词典序比较可返回 `strong_ordering`、`weak_ordering` 或 `partial_ordering` 等比较类别。"
+  ],
+  "misconceptions": [
+    "`any_of` 不是要求所有元素都满足谓词，而是只要求至少一个满足。",
+    "`none_of` 在空序列上返回 true，这是“没有元素违反条件”的逻辑结果。",
+    "词典序比较不是按序列长度直接比较，而是从对应位置依次比较元素。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`all_of`、`any_of` 和 `none_of` 分别表示什么？",
+      "a": "`all_of` 判断所有元素是否都使谓词返回 true；`any_of` 判断至少一个元素是否使谓词返回 true；`none_of` 判断所有元素是否都使谓词返回 false。"
+    },
+    {
+      "q": "两个序列进行词典序比较时遵循什么规则？",
+      "a": "依次比较两个序列对应位置的元素；如果某个位置的元素不同，则元素较小的序列按词典序排在前面；如果相等，则继续比较下一个位置。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "谓词",
+    "序列比较",
+    "布尔逻辑"
+  ],
+  "source_pages": [
+    514,
+    514
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 all_of any_of none_of 空序列返回值 lexicographical_compare_three_way 比较类别 strong_ordering weak_ordering partial_ordering 标准库算法",
+  "concept_id": "1057_非修改算法的搜索_比较与计数功能",
+  "_chunk_pages": [
+    513,
+    516
+  ]
+}

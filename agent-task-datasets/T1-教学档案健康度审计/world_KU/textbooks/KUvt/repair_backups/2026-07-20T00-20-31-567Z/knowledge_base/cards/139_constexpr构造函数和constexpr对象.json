@@ -1,0 +1,43 @@
+{
+  "title": "constexpr构造函数和constexpr对象",
+  "definition": "用户自定义类型可以通过constexpr构造函数创建常量表达式对象。若对象及其调用满足编译期求值条件，则可以在编译期调用该对象的constexpr成员函数并使用结果。",
+  "key_points": [
+    "类可以定义constexpr构造函数，使构造过程具备编译期求值能力。",
+    "类的成员函数也可以声明为constexpr，以便在编译期进行计算。",
+    "constexpr对象的成员函数结果可以用于需要常量表达式的场合，例如数组长度。",
+    "constexpr类和constexpr构造函数受到一定限制，教材未展开具体限制。"
+  ],
+  "examples": [
+    "class Rect {\npublic:\n    constexpr Rect(size_t width, size_t height)\n        : m_width { width }, m_height { height } {}\n    constexpr size_t getArea() const {\n        return m_width * m_height;\n    }\nprivate:\n    size_t m_width { 0 };\n    size_t m_height { 0 };\n};\n\nconstexpr Rect r { 8, 2 };\nint myArray[r.getArea()]; // OK，数组长度可在编译期确定"
+  ],
+  "misconceptions": [
+    "只有内置类型才能作为constexpr对象；实际上，满足条件的用户自定义类型也可以创建constexpr对象。",
+    "声明了constexpr对象并不意味着类的所有成员函数都自动成为constexpr；需要相应成员函数具备constexpr声明和条件。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何让Rect对象能够在编译期计算面积？",
+      "a": "为Rect提供constexpr构造函数，并将getArea()声明为constexpr，然后声明constexpr Rect对象，例如constexpr Rect r { 8, 2 }。"
+    },
+    {
+      "q": "r.getArea()为什么可以用作数组长度？",
+      "a": "因为r是constexpr对象，getArea()是constexpr成员函数，所以r.getArea()可以在编译期求值。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "constexpr函数",
+    "常量表达式"
+  ],
+  "source_pages": [
+    77,
+    77
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "139_constexpr构造函数和constexpr对象",
+  "_chunk_pages": [
+    77,
+    80
+  ]
+}

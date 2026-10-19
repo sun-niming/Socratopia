@@ -1,0 +1,49 @@
+{
+  "title": "使用高精度时钟测量代码执行时间",
+  "definition": "可以调用high_resolution_clock::now()分别记录待测代码开始和结束时的时间点，用两次时间点之差得到持续时间，再将该duration转换为毫秒等单位并通过count()输出。若被测代码执行时间过短，计时结果可能因操作系统定时器更新频率有限而不准确。",
+  "key_points": [
+    "开始时间和结束时间都可通过high_resolution_clock::now()获取。",
+    "结束时间减去开始时间得到表示执行耗时的duration。",
+    "可使用duration<double, milli>{...}.count()把耗时转换并输出为毫秒。",
+    "为减小误差，应让被测计算跨越较多的基本定时器滴答；如果毫秒差值很小，应增加循环迭代次数。"
+  ],
+  "examples": [
+    "测量一段代码的耗时：\n```text\nauto start{high_resolution_clock::now()};\n// 执行待测代码\nauto end{high_resolution_clock::now()};\nauto diff{end - start};\ncout << duration<double, milli>{diff}.count() << \"ms\" << endl;\n```",
+    "原文用包含大量算术运算的循环延长被测代码的执行时间，例如反复计算sqrt()、sin()和cos()。"
+  ],
+  "misconceptions": [
+    "定时器标称精度为毫秒，就意味着每次测量都能准确到1毫秒；实际上操作系统定时器的更新频率可能低于此精度。",
+    "一次很短的测量结果为0毫秒，就表示代码没有执行时间；它可能只是短于一个定时器滴答。",
+    "增加输出格式的小数位数就能消除定时器分辨率造成的误差。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何用high_resolution_clock测量代码执行时间并输出毫秒数？",
+      "a": "在代码前后分别调用high_resolution_clock::now()，计算结束时间减开始时间得到duration，然后使用duration<double, milli>{diff}.count()输出毫秒数。"
+    },
+    {
+      "q": "为什么需要增加被测循环的迭代次数？",
+      "a": "因为操作系统定时器的实际更新时间间隔可能是10毫秒或15毫秒等。被测时间太短时，门限错误会使结果严重失真；延长执行时间可使误差相对减小。"
+    },
+    {
+      "q": "什么是门限错误？",
+      "a": "当计时器以离散的滴答更新时，短于一个滴答的事件可能显示为0个时间单位，处于1到2个滴答之间的事件可能显示为1个时间单位。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "duration与time_point",
+    "C++标准时钟"
+  ],
+  "source_pages": [
+    689,
+    690
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1438_使用高精度时钟测量代码执行时间",
+  "_chunk_pages": [
+    689,
+    692
+  ]
+}

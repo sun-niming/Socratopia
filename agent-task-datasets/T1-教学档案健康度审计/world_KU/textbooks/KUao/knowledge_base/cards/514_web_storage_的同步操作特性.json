@@ -1,0 +1,38 @@
+{
+  "title": "Web Storage 的同步操作特性",
+  "definition": "Web Storage 的 API 是同步的，主线程上大量读写会阻塞页面渲染，影响用户体验；如果需要处理大量数据，应考虑使用 IndexedDB 等异步存储方案。",
+  "key_points": [
+    "Web Storage API 是同步的。",
+    "在主线程上大量读写会阻塞页面渲染。",
+    "大量数据存储可考虑使用 IndexedDB 等异步方案。"
+  ],
+  "examples": [
+    "在主线程频繁读写 localStorage 导致渲染变慢",
+    "大量数据改用 IndexedDB"
+  ],
+  "misconceptions": [
+    "Web Storage 的读写不会影响页面性能。",
+    "所有前端存储方案都是同步的。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么不建议在主线程上大量使用 Web Storage？",
+      "a": "因为它的 API 是同步的，大量读写会阻塞页面渲染，影响用户体验。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "Web Storage"
+  ],
+  "source_pages": [
+    385,
+    387
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "514_web_storage_的同步操作特性",
+  "_chunk_pages": [
+    385,
+    387
+  ]
+}

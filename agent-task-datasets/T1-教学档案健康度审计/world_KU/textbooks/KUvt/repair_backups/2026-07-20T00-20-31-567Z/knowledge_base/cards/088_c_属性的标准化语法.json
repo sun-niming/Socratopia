@@ -1,0 +1,42 @@
+{
+  "title": "C++ 属性的标准化语法",
+  "definition": "属性是一种向源代码添加可选信息或特定于编译器信息的机制。C++11 开始，C++ 标准支持使用双方括号语法 [[attribute]] 表示属性。属性可以向编译器传达警告、优化或代码使用状态等信息。",
+  "key_points": [
+    "属性的基本写法是 [[attribute]]。",
+    "属性可以附加到特定的声明或定义上。",
+    "原文提到 [[fallthrough]] 可用于表示 switch 的 case 分支是有意贯穿到下一个分支，从而避免相关编译器警告。"
+  ],
+  "examples": [
+    "[[fallthrough]]"
+  ],
+  "misconceptions": [
+    "属性不是普通函数调用，也不是预处理器宏的唯一形式。",
+    "属性通常用于向编译器提供额外信息，并不等同于改变程序的核心业务逻辑。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "C++11 开始，标准属性使用什么语法？",
+      "a": "使用双方括号语法，例如 [[attribute]]。"
+    },
+    {
+      "q": "[[fallthrough]] 的用途是什么？",
+      "a": "表示 switch 的 case 分支有意继续执行下一个分支，以避免编译器针对贯穿行为发出警告。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++ 基本声明语法",
+    "switch 语句"
+  ],
+  "source_pages": [
+    54,
+    55
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "088_c_属性的标准化语法",
+  "_chunk_pages": [
+    53,
+    56
+  ]
+}

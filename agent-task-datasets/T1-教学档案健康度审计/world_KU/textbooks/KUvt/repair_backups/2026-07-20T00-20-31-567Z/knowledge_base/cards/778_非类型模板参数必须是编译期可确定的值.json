@@ -1,0 +1,45 @@
+{
+  "title": "非类型模板参数必须是编译期可确定的值",
+  "definition": "用于非类型模板参数的值必须在编译期确定。非常量整数变量不能直接作为模板参数；将该变量声明为 const，或者使用返回合适类型的 constexpr 函数，则可以作为模板参数。",
+  "key_points": [
+    "非常量整数变量不能用于 WIDTH 或 HEIGHT 等非类型模板参数。",
+    "const 变量可以用于非类型模板参数。",
+    "返回 size_t 等适当类型的 constexpr 函数，其调用结果可以用于非类型模板参数。"
+  ],
+  "examples": [
+    "非常量变量的形式不能编译：\n\n```cpp\nGrid<int, 10, height> testGrid;\n```",
+    "如果 height 是 const，则可以使用：\n\n```cpp\nconst size_t height = 10;\nGrid<int, 10, height> testGrid;\n```",
+    "constexpr 函数示例：\n\n```cpp\nconstexpr size_t getHeight() { return 10; }\nGrid<double, 2, getHeight()> myDoubleGrid;\n```"
+  ],
+  "misconceptions": [
+    "只要变量的当前值不变，就可以作为非类型模板参数。",
+    "非类型模板参数可以在运行期通过普通函数计算。",
+    "constexpr 函数只能返回字面量，不能用于模板参数。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么普通的非常量整数变量不能作为 Grid 的高度参数？",
+      "a": "因为非类型模板参数必须在编译期确定，而非常量变量的值可能在运行期改变。"
+    },
+    {
+      "q": "什么样的函数返回值可以用于 Grid 的非类型模板参数？",
+      "a": "返回类型合适且函数为 constexpr 的函数，其调用结果可以用于非类型模板参数，例如 getHeight()。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "非类型模板参数",
+    "const 与 constexpr"
+  ],
+  "source_pages": [
+    384,
+    384
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "778_非类型模板参数必须是编译期可确定的值",
+  "_chunk_pages": [
+    381,
+    384
+  ]
+}

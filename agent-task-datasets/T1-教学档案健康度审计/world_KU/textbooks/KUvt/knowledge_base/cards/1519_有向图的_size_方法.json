@@ -1,0 +1,42 @@
+{
+  "title": "有向图的 size 方法",
+  "definition": "有向图的 `size()` 方法返回图中节点的数量，而不是边的数量。该方法通常声明为 `noexcept`，并直接返回内部节点容器的大小。",
+  "key_points": [
+    "返回类型为 `size_t`，或使用容器类型别名后的 `size_type`。",
+    "返回值等于 `m_nodes.size()`。",
+    "`size()` 统计节点数，不统计有向边数。"
+  ],
+  "examples": [
+    "典型实现：`size_t directed_graph<T>::size() const noexcept { return m_nodes.size(); }`",
+    "如果图中有节点 `11、22、33、44、55`，则 `graph.size()` 的结果为 `5`；删除节点 `44` 后结果为 `4`。"
+  ],
+  "misconceptions": [
+    "`size()` 不表示图中边的数量。",
+    "删除一条边通常不会改变图的节点数量。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "directed_graph 的 `size()` 返回什么？",
+      "a": "返回图中的节点数。"
+    },
+    {
+      "q": "`size()` 是否统计边的数量？",
+      "a": "不统计；它返回内部节点容器的大小。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "有向图的节点与边"
+  ],
+  "source_pages": [
+    730,
+    731
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1519_有向图的_size_方法",
+  "_chunk_pages": [
+    729,
+    732
+  ]
+}

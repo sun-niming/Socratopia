@@ -1,0 +1,44 @@
+{
+  "title": "多态基类中的虚析构函数",
+  "definition": "如果一个类可能被其他类继承，通常应将其析构函数声明为 virtual，以便通过基类指针销毁派生类对象时执行正确的析构过程。如果不希望类被继承，可以将类声明为 final，此时析构函数可以保持非 virtual。若虚析构函数不需要自定义代码，可以写成 virtual ~ClassName() = default。",
+  "key_points": [
+    "基类的虚析构函数用于支持通过基类接口安全销毁派生类对象。",
+    "教材建议：只要类可能被继承，通常至少应将析构函数设置为 virtual。",
+    "如果类被标记为 final，其他类不能从它派生，因此可以不使用虚析构函数。",
+    "不需要析构逻辑时，可以显式使用 = default。"
+  ],
+  "examples": [
+    "默认化虚析构函数：\n```text\nclass Simple {\npublic:\n    virtual ~Simple() = default;\n};\n```\n禁止派生的类：\n```text\nclass FinalClass final {\npublic:\n    ~FinalClass() = default;\n};\n```"
+  ],
+  "misconceptions": [
+    "virtual 析构函数不是说析构函数一定包含自定义资源释放代码；它也可以使用 = default。",
+    "将析构函数声明为 virtual 并不能自动使所有成员函数都成为 virtual。",
+    "final 的作用之一是禁止派生，但它不表示对象不能被创建。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么可被继承的基类通常应有虚析构函数？",
+      "a": "这样通过基类指针销毁派生类对象时，可以进行正确的多态析构，避免只调用基类析构函数。"
+    },
+    {
+      "q": "什么时候可以保留非 virtual 析构函数？",
+      "a": "当类被声明为 final、明确不允许其他类从它派生时，可以保留非 virtual 析构函数。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "继承与多态",
+    "虚函数"
+  ],
+  "source_pages": [
+    926,
+    926
+  ],
+  "needs_verification": true,
+  "verify_query": "C++ 基类 virtual 析构函数 final = default 教材《C++20高级编程》第5版 第926页",
+  "concept_id": "1917_多态基类中的虚析构函数",
+  "_chunk_pages": [
+    925,
+    928
+  ]
+}

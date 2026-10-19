@@ -1,0 +1,52 @@
+{
+  "title": "基于 const 的成员函数重载",
+  "definition": "成员函数可以根据 const 限定进行重载：同名、参数列表相同的两个成员函数中，一个为 const 版本，一个为非 const 版本。调用时，const 对象选择 const 版本，非 const 对象选择非 const 版本。",
+  "key_points": [
+    "const 和非 const 成员函数可以构成重载，区别在于成员函数末尾是否有 const。",
+    "const 对象调用 const 版本，非 const 对象调用非 const 版本。",
+    "常见设计是让非 const 版本返回可修改的引用，让 const 版本返回 const 引用。",
+    "Spreadsheet 的 getCellAt() 可以分别返回 SpreadsheetCell& 和 const SpreadsheetCell&。"
+  ],
+  "examples": [
+    "声明：SpreadsheetCell& getCellAt(size_t x, size_t y);",
+    "声明：const SpreadsheetCell& getCellAt(size_t x, size_t y) const;",
+    "非 const 对象示例：Spreadsheet sheet1{5, 6}; SpreadsheetCell& cell1 = sheet1.getCellAt(1, 1);",
+    "const 对象示例：const Spreadsheet sheet2{5, 6}; const SpreadsheetCell& cell2 = sheet2.getCellAt(1, 1);"
+  ],
+  "misconceptions": [
+    "const 版本和非 const 版本不是普通的重复声明；成员函数末尾的 const 会参与成员函数重载。",
+    "const 对象调用 getCellAt() 后不能获得可修改的 SpreadsheetCell&，只能获得 const SpreadsheetCell&。",
+    "仅仅返回类型不同不能构成重载；这里之所以可以重载，是因为成员函数是否为 const 不同。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "const 对象调用 const/非 const 重载成员函数时会选择哪一个版本？",
+      "a": "选择 const 版本。"
+    },
+    {
+      "q": "非 const 对象调用基于 const 的重载时通常选择哪一个版本？",
+      "a": "通常选择非 const 版本。"
+    },
+    {
+      "q": "为什么 getCellAt() 要提供 const 和非 const 两个版本？",
+      "a": "非 const 对象需要返回可修改的 SpreadsheetCell&，const 对象则只能安全地返回 const SpreadsheetCell&。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "const 成员函数",
+    "函数重载",
+    "引用返回"
+  ],
+  "source_pages": [
+    280,
+    280
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "586_基于_const_的成员函数重载",
+  "_chunk_pages": [
+    277,
+    280
+  ]
+}

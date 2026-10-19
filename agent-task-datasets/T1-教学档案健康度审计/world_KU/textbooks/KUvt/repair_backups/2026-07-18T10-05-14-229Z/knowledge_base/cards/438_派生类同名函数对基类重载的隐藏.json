@@ -1,0 +1,50 @@
+{
+  "title": "派生类同名函数对基类重载的隐藏",
+  "definition": "当派生类声明了与基类同名的成员函数时，派生类作用域中的同名声明会隐藏基类中同名的其他重载版本。因此，即使基类具有参数不同的重载函数，通过派生类对象直接调用时，也可能无法找到基类版本。",
+  "key_points": [
+    "如果 `Base` 提供 `void overload(int)`，而 `Derived` 只提供 `void overload()`，则 `Derived` 作用域中的 `overload` 会隐藏基类的 `overload(int)`。",
+    "例如 `Derived myDerived; myDerived.overload(2);` 会因为派生类可见的 `overload()` 不接受一个 `int` 参数而报错。",
+    "基类版本可以使用声明 `using Base::overload;` 引入派生类作用域，使基类重载重新可见。",
+    "引入后，派生类对象可以根据参数选择合适的重载；例如 `myDerived.overload(2);` 可以调用 `Base::overload(int)`。"
+  ],
+  "examples": [
+    "隐藏基类重载的形式：`class Derived : public Base { public: void overload() override; };`。此时 `myDerived.overload(2);` 可能报错，因为基类的 `overload(int)` 被隐藏。",
+    "恢复基类重载可见性：`class Derived : public Base { public: using Base::overload; void overload() override; };`。"
+  ],
+  "misconceptions": [
+    "派生类声明一个同名函数，并不只是重写与其签名完全相同的基类函数；它还可能隐藏基类中其他参数列表不同的重载。",
+    "`using Base::overload;` 不是创建一个新的函数实现，而是把基类同名成员引入派生类作用域以参与名字查找。",
+    "函数重载按参数列表区分，不能仅根据返回类型区分。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "基类有 `overload(int)`，派生类有 `overload()`，为什么 `Derived` 对象调用 `overload(2)` 会报错？",
+      "a": "因为派生类声明的同名函数隐藏了基类的同名重载，名字查找只看到 `Derived::overload()`，它不接受一个 `int` 参数。"
+    },
+    {
+      "q": "如何让派生类对象重新看到基类的同名重载？",
+      "a": "在派生类中写 `using Base::overload;`。"
+    },
+    {
+      "q": "`using Base::overload;` 会不会把基类函数复制成派生类的新实现？",
+      "a": "不会。它主要是将基类同名成员引入派生类作用域，使其参与名字查找和重载决议。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "继承中的成员函数",
+    "函数重载",
+    "using 声明"
+  ],
+  "source_pages": [
+    338,
+    339
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "438_派生类同名函数对基类重载的隐藏",
+  "_chunk_pages": [
+    337,
+    340
+  ]
+}

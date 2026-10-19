@@ -1,0 +1,38 @@
+{
+  "title": "非持续HTTP连接的响应时间",
+  "definition": "使用非持续连接的HTTP访问一个对象时，浏览器通常需要先为该对象建立一个TCP连接，再发送HTTP请求并接收对象。TCP三次握手的前两个部分约占用一个RTT，请求与响应对象的传输又约占用一个RTT，因此总响应时间可粗略表示为两个RTT加上服务器传输HTML文件的时间。",
+  "key_points": [
+    "三次握手的前两个部分耗时约一个RTT。",
+    "HTTP请求和对象响应过程耗时约另一个RTT。",
+    "粗略总响应时间为：$$T\\approx 2\\,RTT+T_{\\text{传输HTML文件}}$$。"
+  ],
+  "examples": [
+    "浏览器首次请求HTML基本文件时，先建立TCP连接，再发送HTTP请求；服务器收到请求后发送HTML文件。"
+  ],
+  "misconceptions": [
+    "三次握手本身不是完整响应时间的全部；还要加上请求和接收对象所需的时间。",
+    "两个RTT是教材给出的粗略估计，不表示所有网络环境下都严格等于两个RTT。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "非持续HTTP连接获取一个对象时，响应时间为什么粗略为两个RTT加文件传输时间？",
+      "a": "一个RTT用于TCP连接建立过程，另一个RTT用于发送HTTP请求并开始接收对象，此外还要加上服务器传输HTML文件本身的时间。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "TCP三次握手",
+    "往返时间RTT"
+  ],
+  "source_pages": [
+    85,
+    88
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "216_非持续http连接的响应时间",
+  "_chunk_pages": [
+    85,
+    88
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "title": "rdt2.0：具有比特差错信道的停等协议",
+  "definition": "rdt2.0 是针对分组可能发生比特差错、但分组仍按发送顺序到达的信道所设计的可靠数据传输协议。发送方发送带检验和的数据分组后，必须等待接收方返回 ACK 或 NAK；收到 ACK 后才发送新数据，收到 NAK 后重传最近发送的数据分组。因此，rdt2.0 属于停等（stop-and-wait）协议。",
+  "key_points": [
+    "rdt2.0 发送端有两个状态：等待来自上层的数据、等待 ACK 或 NAK。",
+    "发送端收到上层数据后，执行 $sndpkt=make\\_pkt(data,checksum)$，再执行 $udt\\_send(sndpkt)$。",
+    "若收到 ACK，发送端返回等待上层数据的状态；若收到 NAK，发送端重传保存的 $sndpkt$。",
+    "发送端在等待 ACK 或 NAK 时不能接受上层的新数据，只有确认当前分组处理完毕后才能发送下一块数据。",
+    "rdt2.0 接收端只有一个状态：收到未损坏分组则提取并交付数据，然后发送 ACK；收到受损分组则发送 NAK。"
+  ],
+  "examples": [
+    "发送端逻辑：$$\\begin{aligned}rdt\\_send(data)&\\rightarrow sndpkt=make\\_pkt(data,checksum)\\\\&\\rightarrow udt\\_send(sndpkt)\\\\rdt\\_rcv(rcvpkt)\\land isACK(rcvpkt)&\\rightarrow\\text{发送下一块数据}\\\\rdt\\_rcv(rcvpkt)\\land isNAK(rcvpkt)&\\rightarrow udt\\_send(sndpkt)\\end{aligned}$$",
+    "接收端逻辑：$$\\begin{cases}notcorrupt(rcvpkt):&extract(rcvpkt,data),\\ deliver\\_data(data),\\ 发送ACK\\\\corrupt(rcvpkt):&发送NAK\\end{cases}$$"
+  ],
+  "misconceptions": [
+    "停等不是指信道停止工作，而是发送方发送一个分组后必须等待其 ACK 或 NAK。",
+    "收到 NAK 后不是丢弃当前数据，而是重传最近保存的数据分组。",
+    "rdt2.0 能处理数据分组中的比特差错，但原始版本没有处理 ACK 或 NAK 自身受损的问题。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么 rdt2.0 被称为停等协议？",
+      "a": "因为发送方发送一个数据分组后必须等待 ACK 或 NAK，在收到确认前不能从上层获得并发送新的数据。"
+    },
+    {
+      "q": "rdt2.0 接收端对未损坏和受损分组分别如何处理？",
+      "a": "未损坏时提取并交付数据，然后发送 ACK；受损时不交付数据，而是发送 NAK。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "ARQ：具有比特差错信道的可靠传输机制",
+    "有限状态机（FSM）基础"
+  ],
+  "source_pages": [
+    154,
+    155
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "384_rdt2_0_具有比特差错信道的停等协议",
+  "_chunk_pages": [
+    153,
+    156
+  ]
+}

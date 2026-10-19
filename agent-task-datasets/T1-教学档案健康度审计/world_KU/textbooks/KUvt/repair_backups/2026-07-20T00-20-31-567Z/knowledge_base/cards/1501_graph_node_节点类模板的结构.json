@@ -1,0 +1,54 @@
+{
+  "title": "graph_node 节点类模板的结构",
+  "definition": "graph_node 是 directed_graph 内部使用的节点类模板。每个 graph_node 保存一个节点值和相邻节点索引集合；它提供构造函数、value() 访问器和相等比较运算，并将 directed_graph<T> 声明为友元，使有向图类能够访问节点的邻接节点索引。该类位于 details 名称空间中，且不从模块导出，因此不 intended 作为有向图用户直接使用的接口。",
+  "key_points": [
+    "节点值由模板类型 T 决定，并保存在数据成员 `m_data` 中。",
+    "邻接表使用 `std::set<size_t>` 保存相邻节点的索引，集合可以避免重复的相邻索引。",
+    "提供两个构造函数，分别接受 `const T&` 和 `T&&`，以支持拷贝构造值和移动构造值。",
+    "`value() noexcept` 提供非常量和常量两个重载，分别返回 `T&` 和 `const T&`。",
+    "使用 C++20 默认的 `operator==` 比较 graph_node 的数据成员。",
+    "`directed_graph<T>` 是 graph_node 的友元，以便访问其私有邻接索引集合。"
+  ],
+  "examples": [
+    "邻接索引集合的类型别名为：`using adjacency_list_type = std::set<size_t>;`。",
+    "访问器的核心形式为：`T& value() noexcept;` 和 `const T& value() const noexcept;`。",
+    "节点可以抽象表示为：\n\n$$\\text{graph\\_node} = (\\text{节点值},\\ \\text{相邻节点索引集合})$$"
+  ],
+  "misconceptions": [
+    "邻接表保存的是相邻节点的索引集合，而不是直接保存相邻 graph_node 对象。",
+    "`std::set<size_t>` 的用途之一是防止同一个相邻节点索引重复出现。",
+    "graph_node 位于 details 名称空间且未导出，说明它主要是 directed_graph 的实现细节，而不是用户直接操作的公共类型。",
+    "`value()` 的 const 重载返回 `const T&`，不能通过它修改节点值。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么 graph_node 使用 `std::set<size_t>` 保存邻接节点？",
+      "a": "因为它保存相邻节点的索引，并且集合能够确保同一个相邻索引不会重复存储。"
+    },
+    {
+      "q": "graph_node 为什么把 directed_graph<T> 声明为友元？",
+      "a": "因为 directed_graph<T> 需要访问 graph_node 的私有邻接节点索引集合。"
+    },
+    {
+      "q": "graph_node 的两个构造函数分别解决什么问题？",
+      "a": "一个接受 `const T&`，用于从左值构造节点值；另一个接受 `T&&`，用于移动构造节点值。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++ 类模板",
+    "C++ 访问控制和友元",
+    "std::set"
+  ],
+  "source_pages": [
+    722,
+    723
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1501_graph_node_节点类模板的结构",
+  "_chunk_pages": [
+    721,
+    724
+  ]
+}

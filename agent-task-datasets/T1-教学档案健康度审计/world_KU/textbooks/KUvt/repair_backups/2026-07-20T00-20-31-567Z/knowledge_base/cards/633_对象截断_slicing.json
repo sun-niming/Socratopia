@@ -1,0 +1,50 @@
+{
+  "title": "对象截断 slicing",
+  "definition": "将派生类对象按值转换或赋值给基类对象时，只会保留其中的基类部分，派生类特有的数据成员和重写方法不会保留；这种派生类信息的丢失称为截断（slicing）。",
+  "key_points": [
+    "派生类对象包含基类部分以及派生类新增的部分，因此通常比基类对象包含更多信息。",
+    "基类指针或引用指向派生类对象时，派生类对象本身不会被截断，仍保留派生类数据和重写方法。",
+    "将 Derived 对象按值赋给 Base 对象时，会创建一个独立的 Base 对象，只保留 Base 部分。",
+    "截断会导致派生类特有数据和重写方法的信息丢失。"
+  ],
+  "examples": [
+    "按值赋值会发生截断：`Derived myDerived; Base assignedObject = myDerived;`。此时 `assignedObject` 是一个 Base 对象，派生类的独有特征已经丢失。",
+    "若 `assignedObject.someMethod();`，调用的是该 Base 对象中的 Base 版本，而不是原始 Derived 对象的派生类版本。",
+    "与按值赋值不同，`Base& ref = myDerived;` 或指向该对象的基类指针不会因为引用或指针本身而截断 Derived 对象。"
+  ],
+  "misconceptions": [
+    "把派生类对象绑定到基类引用或让基类指针指向它，不等于发生截断；截断发生在按值转换或按值赋值为基类对象时。",
+    "截断不是只丢失派生类数据成员，也会使派生类重写的方法不再属于新创建的基类对象。",
+    "Derived 是一种 Base 并不意味着按值赋给 Base 后还能保留全部 Derived 特征。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "什么是对象截断（slicing）？",
+      "a": "将派生类对象按值转换或赋值给基类对象时，派生类特有的数据成员和重写方法丢失，只保留基类部分的现象。"
+    },
+    {
+      "q": "`Base& ref = myDerived;` 会导致 Derived 对象被截断吗？",
+      "a": "不会。基类引用仍指向原来的 Derived 对象，派生类数据和重写方法仍然保留。"
+    },
+    {
+      "q": "`Base assignedObject = myDerived;` 的结果是什么？",
+      "a": "创建一个只包含基类部分的 Base 对象，Derived 的独有特征被截断。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "虚方法的动态调用",
+    "C++对象按值赋值"
+  ],
+  "source_pages": [
+    308,
+    308
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "633_对象截断_slicing",
+  "_chunk_pages": [
+    305,
+    308
+  ]
+}

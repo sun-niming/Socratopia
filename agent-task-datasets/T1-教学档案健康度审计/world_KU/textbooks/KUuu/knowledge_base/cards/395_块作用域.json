@@ -1,0 +1,45 @@
+{
+  "title": "块作用域",
+  "definition": "块作用域由 { } 构成，包括 if 语句和 for 语句里面的 { } 也属于块作用域；教材注明它是 ES6 引入的，通常与使用 let 或 const 创建的标识符有关。",
+  "key_points": [
+    "块作用域由 { } 构成。",
+    "if 语句和 for 语句中的 { } 也属于块作用域。",
+    "教材标注块作用域是 ES6 引入，使用 let 或 const 创建的标识符。"
+  ],
+  "examples": [
+    "if (...) { ... } 中的 { } 属于块作用域。",
+    "for (...) { ... } 中的 { } 也属于块作用域。"
+  ],
+  "misconceptions": [
+    "块作用域不只是函数内部的作用域。",
+    "if 和 for 里的代码块也可能形成独立的块作用域。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "块作用域由什么构成？",
+      "a": "由 { } 构成。"
+    },
+    {
+      "q": "哪些语句里的 { } 也属于块作用域？",
+      "a": "if 语句和 for 语句里面的 { }。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "变量作用域",
+    "ES6",
+    "let",
+    "const"
+  ],
+  "source_pages": [
+    269,
+    272
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "395_块作用域",
+  "_chunk_pages": [
+    269,
+    272
+  ]
+}

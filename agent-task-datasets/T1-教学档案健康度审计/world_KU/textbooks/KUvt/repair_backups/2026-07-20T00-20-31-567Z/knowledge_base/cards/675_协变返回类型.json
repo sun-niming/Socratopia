@@ -1,0 +1,49 @@
+{
+  "title": "协变返回类型",
+  "definition": "协变返回类型允许派生类重写基类虚方法时，将返回类型从基类类型的指针或引用改为派生类类型的指针或引用。返回类型必须保持在同一继承层次中，并且派生类返回类型应能替代基类返回类型。教材以 CherryTree::pick() 返回 Cherry*、BingCherryTree::pick() 返回 BingCherry* 为例说明这一特性。",
+  "key_points": [
+    "普通情况下，重写方法应使用与基类一致的方法声明；协变返回类型是指针或引用返回类型的例外。",
+    "基类方法可以返回 Cherry*，派生类重写方法可以返回 BingCherry*，因为 BingCherry 是 Cherry 的派生类。",
+    "这种特性在两个相关但相互独立的平行类层次结构中较为便利，例如 Cherry/BingCherry 与 CherryTree/BingCherryTree。",
+    "不能把返回类型改为完全无关的类型，例如 void*。",
+    "调用者如果按基类接口使用 Cherry*，仍然可以调用 Cherry 中声明的方法，因为派生类对象也是基类对象。"
+  ],
+  "examples": [
+    "class CherryTree {\npublic:\n    virtual Cherry* pick();\n};\n\nclass BingCherryTree : public CherryTree {\npublic:\n    BingCherry* pick() override;\n};"
+  ],
+  "misconceptions": [
+    "协变返回类型不是任意修改返回类型；它只适用于相关类的指针或引用。",
+    "派生类返回 BingCherry* 并不意味着基类接口失效，因为 BingCherry* 可以作为 Cherry* 使用。",
+    "协变返回类型不能直接推广到任意类模板实例。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "CherryTree::pick() 返回 Cherry* 时，BingCherryTree::pick() 能否返回 BingCherry*？",
+      "a": "可以，只要 BingCherry 是 Cherry 的派生类，并且基类方法是可重写的虚方法。"
+    },
+    {
+      "q": "派生类能否把 Cherry* 的返回类型改成 void*？",
+      "a": "不能，因为 void* 与 Cherry* 不属于符合协变返回规则的相关类类型，重写会编译失败。"
+    },
+    {
+      "q": "什么是平行类层次结构？",
+      "a": "指两个类层次结构彼此不相交，但存在对应或关联关系，例如 Cherry 与 BingCherry，以及 CherryTree 与 BingCherryTree。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "虚函数重写",
+    "基类指针与派生类指针转换"
+  ],
+  "source_pages": [
+    331,
+    332
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "675_协变返回类型",
+  "_chunk_pages": [
+    329,
+    332
+  ]
+}

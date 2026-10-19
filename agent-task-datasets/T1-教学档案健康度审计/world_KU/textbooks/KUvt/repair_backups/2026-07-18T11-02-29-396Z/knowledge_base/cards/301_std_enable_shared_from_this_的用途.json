@@ -1,0 +1,48 @@
+{
+  "title": "std::enable_shared_from_this 的用途",
+  "definition": "std::enable_shared_from_this<T> 用于让一个由 std::shared_ptr 管理的对象，在其成员函数内部安全地获得指向自身的 std::shared_ptr 或 std::weak_ptr。相关成员函数包括 shared_from_this() 和 weak_from_this()，其中 shared_from_this() 返回 std::shared_ptr，weak_from_this() 返回 std::weak_ptr。",
+  "key_points": [
+    "类可以继承 std::enable_shared_from_this<T>，从而获得 shared_from_this() 和 weak_from_this() 成员函数。",
+    "shared_from_this() 用于获得指向当前对象的 std::shared_ptr。",
+    "weak_from_this() 用于获得指向当前对象的 std::weak_ptr。",
+    "该机制与对象已经由 std::shared_ptr 管理这一前提相关。"
+  ],
+  "examples": [
+    "原文示意：Foo 类提供 getPointer()，在成员函数中返回 shared_from_this()：\n\n```cpp\nclass Foo : public std::enable_shared_from_this<Foo> {\npublic:\n    std::shared_ptr<Foo> getPointer() {\n        return shared_from_this();\n    }\n};\n\nint main() {\n    auto ptr1 = std::make_shared<Foo>();\n    auto ptr2 = ptr1->getPointer();\n}\n```",
+    "也可以通过 weak_from_this() 获得当前对象对应的 std::weak_ptr：\n\n```cpp\nstd::weak_ptr<Foo> getWeakPointer() {\n    return weak_from_this();\n}\n```"
+  ],
+  "misconceptions": [
+    "不能简单地在成员函数中直接写 std::shared_ptr<T>(this) 来代替 shared_from_this()。",
+    "shared_from_this() 和 weak_from_this() 的返回类型不同：前者是 std::shared_ptr，后者是 std::weak_ptr。",
+    "仅仅继承 std::enable_shared_from_this<T>，并不意味着对象可以脱离 std::shared_ptr 管理后仍然安全调用 shared_from_this()。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "std::enable_shared_from_this<T> 的主要作用是什么？",
+      "a": "让由 std::shared_ptr 管理的对象能够在成员函数内部通过 shared_from_this() 获取指向自身的 std::shared_ptr，或通过 weak_from_this() 获取指向自身的 std::weak_ptr。"
+    },
+    {
+      "q": "shared_from_this() 与 weak_from_this() 的返回类型分别是什么？",
+      "a": "shared_from_this() 返回 std::shared_ptr，weak_from_this() 返回 std::weak_ptr。"
+    },
+    {
+      "q": "为什么不应使用 std::shared_ptr<T>(this) 代替 shared_from_this()？",
+      "a": "因为 std::shared_ptr<T>(this) 可能为同一个对象创建新的独立控制块，导致重复释放等所有权管理问题；应使用 shared_from_this() 获取已有共享所有权体系中的智能指针。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "std::shared_ptr、std::weak_ptr 的基本概念"
+  ],
+  "source_pages": [
+    225,
+    226
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 std::enable_shared_from_this shared_from_this weak_from_this shared_ptr(this) bad_weak_ptr 官方文档",
+  "concept_id": "301_std_enable_shared_from_this_的用途",
+  "_chunk_pages": [
+    225,
+    228
+  ]
+}

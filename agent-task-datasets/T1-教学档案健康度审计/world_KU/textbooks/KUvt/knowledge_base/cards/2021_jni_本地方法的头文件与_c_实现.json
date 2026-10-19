@@ -1,0 +1,53 @@
+{
+  "title": "JNI 本地方法的头文件与 C++实现",
+  "definition": "JNI 本地方法通常需要一个与 Java 类和方法对应的 C/C++函数实现。教材示例先编译 Java 源文件，再使用 `javah` 生成包含本地函数声明的头文件，最后在 C++中包含 `jni.h` 和生成的头文件，并实现具有 JNI 调用约定的函数。",
+  "key_points": [
+    "Java 源文件可先使用 `javac HelloCpp.java` 编译。",
+    "教材示例使用 `javah HelloCpp` 为本地方法生成头文件 `HelloCpp.h`。",
+    "生成的头文件中包含与 Java 方法对应的函数声明，例如 `Java_HelloCpp_callCpp`。",
+    "示例本地函数原型为 `JNIEXPORT void JNICALL Java_HelloCpp_callCpp(JNIEnv*, jclass);`。",
+    "C++实现需要包含 JNI 头文件和由 Java 类生成的头文件：`#include <jni.h>` 与 `#include \"HelloCpp.h\"`。",
+    "在 Linux 等环境中，将 C++代码编译为共享库时，通常还需要调整编译器设置，使其能够找到 JNI 头文件；具体编译命令取决于环境。"
+  ],
+  "examples": [
+    "教材给出的 JNI 函数原型：`JNIEXPORT void JNICALL Java_HelloCpp_callCpp(JNIEnv*, jclass);`。",
+    "C++实现示意：`JNIEXPORT void JNICALL Java_HelloCpp_callCpp(JNIEnv*, jclass) { std::cout << \"Hello from C++!\" << std::endl; }`。",
+    "教材示例流程：`javac HelloCpp.java`，然后 `javah HelloCpp`，再在 C++中包含 `jni.h` 和 `HelloCpp.h` 并实现函数。"
+  ],
+  "misconceptions": [
+    "JNI函数名不是任意取的；示例中它必须与 Java 类名和本地方法名对应。",
+    "`JNIEnv*` 和 `jclass` 是 JNI 调用接口使用的参数，不是业务方法中任意定义的普通参数。",
+    "生成头文件后仍然需要编写并编译 C++实现，`javah` 不会自动生成完整的本地功能。",
+    "本地库能否成功编译还取决于 JDK/JNI 头文件路径、编译器和操作系统设置。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "教材示例中，生成 JNI 头文件使用了什么命令？",
+      "a": "使用 `javah HelloCpp`。"
+    },
+    {
+      "q": "示例中 C++实现的 JNI 函数原型是什么？",
+      "a": "`JNIEXPORT void JNICALL Java_HelloCpp_callCpp(JNIEnv*, jclass);`。"
+    },
+    {
+      "q": "C++实现 JNI 函数时至少需要包含哪些头文件？",
+      "a": "需要包含 JNI 头文件 `jni.h` 和由 Java 类生成的头文件 `HelloCpp.h`。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "JNI 从 Java 调用本地代码的基本流程",
+    "C/C++头文件与函数声明基础"
+  ],
+  "source_pages": [
+    984,
+    984
+  ],
+  "needs_verification": true,
+  "verify_query": "Java 8 及以后版本 javah 命令是否仍可用于生成 JNI 头文件，JNIEXPORT JNICALL Java_HelloCpp_callCpp 的标准函数命名与原型是什么",
+  "concept_id": "2021_jni_本地方法的头文件与_c_实现",
+  "_chunk_pages": [
+    981,
+    984
+  ]
+}

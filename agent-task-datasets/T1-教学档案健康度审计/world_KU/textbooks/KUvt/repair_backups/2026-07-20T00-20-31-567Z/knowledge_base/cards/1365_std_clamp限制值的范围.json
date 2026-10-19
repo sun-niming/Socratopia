@@ -1,0 +1,42 @@
+{
+  "title": "std::clamp限制值的范围",
+  "definition": "std::clamp()定义在<algorithm>中，用于把值v限制在给定的闭区间[lo, hi]内。若v<lo，则返回对lo的引用；若v>hi，则返回对hi的引用；否则返回对v的引用。",
+  "key_points": [
+    "std::clamp(v, lo, hi)要求给定的上下界构成有效范围。",
+    "当v小于下界时结果为lo；当v大于上界时结果为hi；当v位于区间内时结果为v。",
+    "该函数返回的是引用，因此其返回对象的生命周期和可修改性需要符合引用使用规则。"
+  ],
+  "examples": [
+    "std::clamp(-3, 1, 10); // 结果为1\nstd::clamp(3, 1, 10);  // 结果为3\nstd::clamp(22, 1, 10); // 结果为10"
+  ],
+  "misconceptions": [
+    "std::clamp()不是把值循环映射到区间内，而是把超出边界的值截取为边界值。",
+    "当v已经位于[lo, hi]内时，结果不会被改成lo或hi。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "std::clamp(22, 1, 10)返回什么？",
+      "a": "返回10，因为22大于上界10。"
+    },
+    {
+      "q": "std::clamp(-3, 1, 10)返回什么？",
+      "a": "返回1，因为-3小于下界1。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "函数调用与引用",
+    "C++标准库<algorithm>"
+  ],
+  "source_pages": [
+    654,
+    654
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 std::clamp 返回引用 参数超出上下界 示例 std::clamp(-3, 1, 10)",
+  "concept_id": "1365_std_clamp限制值的范围",
+  "_chunk_pages": [
+    653,
+    656
+  ]
+}

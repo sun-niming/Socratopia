@@ -1,0 +1,41 @@
+{
+  "title": "下拉列表select与默认项selected",
+  "definition": "下拉列表由 select 和 option 组合实现。每个可选项写在 option 中，在 option 上加 selected 可以设置该项为默认选中项。下拉列表适合城市选择、日期选择等需要节省空间的场景。",
+  "key_points": [
+    "下拉列表使用 select 和 option 实现。",
+    "selected 用在 option 上，用于设置默认项。",
+    "适合城市选择、日期选择等节省空间的场景。"
+  ],
+  "examples": [
+    "<select name=\"city\"> <option value=\"bj\">北京</option> <option value=\"sh\" selected=\"selected\">上海</option> </select>"
+  ],
+  "misconceptions": [
+    "selected 应该写在 select 上，这是错误的。",
+    "下拉列表只适合城市选择，不适合其他场景。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "下拉列表主要由哪两个标签实现？",
+      "a": "select 和 option。"
+    },
+    {
+      "q": "如何设置下拉框的默认选项？",
+      "a": "在对应的 option 上加 selected=\"selected\"。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "HTML表单元素"
+  ],
+  "source_pages": [
+    69,
+    72
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "106_下拉列表select与默认项selected",
+  "_chunk_pages": [
+    69,
+    72
+  ]
+}

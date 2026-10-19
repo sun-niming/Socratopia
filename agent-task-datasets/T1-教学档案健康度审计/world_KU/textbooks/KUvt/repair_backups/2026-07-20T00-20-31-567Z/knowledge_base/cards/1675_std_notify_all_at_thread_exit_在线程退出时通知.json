@@ -1,0 +1,46 @@
+{
+  "title": "std::notify_all_at_thread_exit 在线程退出时通知",
+  "definition": "`std::notify_all_at_thread_exit(cond, lk)` 是标准库辅助函数，其中 `cond` 是条件变量，`lk` 是一个 `std::unique_lock<std::mutex>` 实例。调用线程应当已经获得 `lk` 对应的锁；在线程退出时，系统会自动先执行 `lk.unlock()`，再执行 `cond.notify_all()`，从而通知所有等待线程。",
+  "key_points": [
+    "调用该函数的线程应已经获得传入的锁。",
+    "通知动作被延迟到调用线程退出时执行。",
+    "线程退出时的效果可概括为：\n$$\n\\texttt{lk.unlock();}\\n\\texttt{cond.notify\\_all();}\n$$",
+    "锁会一直保持锁定到线程退出，因此必须注意锁顺序和潜在死锁。"
+  ],
+  "examples": [
+    "```cpp\nstd::notify_all_at_thread_exit(cond, std::move(lock));\n```",
+    "教材描述的线程退出效果是：\n```cpp\nlk.unlock();\ncond.notify_all();\n```"
+  ],
+  "misconceptions": [
+    "该函数不是立即调用 notify_all()；通知发生在线程退出时。",
+    "它不会自动解决所有死锁问题；如果锁顺序设计错误，仍可能造成死锁。",
+    "调用前必须满足锁已由当前线程获得的要求。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "std::notify_all_at_thread_exit 的作用是什么？",
+      "a": "在线程退出时自动释放指定的 unique_lock，并调用条件变量的 notify_all() 通知所有等待线程。"
+    },
+    {
+      "q": "使用 std::notify_all_at_thread_exit 时需要注意什么？",
+      "a": "调用线程应已获得该锁，并应确保把锁保持到线程退出不会导致死锁，例如不会因错误的锁顺序形成死锁。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "条件变量通知",
+    "unique_lock",
+    "死锁基础"
+  ],
+  "source_pages": [
+    815,
+    816
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1675_std_notify_all_at_thread_exit_在线程退出时通知",
+  "_chunk_pages": [
+    813,
+    816
+  ]
+}

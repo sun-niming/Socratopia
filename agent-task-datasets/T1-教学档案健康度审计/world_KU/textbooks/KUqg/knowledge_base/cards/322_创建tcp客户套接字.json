@@ -1,0 +1,45 @@
+{
+  "title": "创建TCP客户套接字",
+  "definition": "TCP客户程序使用 `socket(AF_INET, SOCK_STREAM)` 创建套接字。`AF_INET` 表示使用 IPv4 地址族，`SOCK_STREAM` 表示创建面向字节流的 TCP 套接字。创建客户套接字时，程序可以不显式指定本地端口号，而由操作系统进行分配。",
+  "key_points": [
+    "示例代码为 `clientSocket = socket(AF_INET, SOCK_STREAM)`。",
+    "`SOCK_STREAM` 对应 TCP 套接字，而不是 UDP 套接字。",
+    "创建套接字本身并未建立客户与服务器之间的 TCP 连接。",
+    "客户端未显式指定本地端口号时，由操作系统为其选择端口。"
+  ],
+  "examples": [
+    "`clientSocket = socket(AF_INET, SOCK_STREAM)` 创建一个基于 IPv4 的 TCP客户套接字。"
+  ],
+  "misconceptions": [
+    "误以为调用 `socket()` 后，客户与服务器之间的 TCP 连接已经建立。",
+    "误以为 TCP 客户程序必须在创建套接字时显式指定自己的本地端口号。",
+    "误把 `SOCK_STREAM` 理解为 UDP 套接字类型。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "在 `socket(AF_INET, SOCK_STREAM)` 中，两个参数分别表示什么？",
+      "a": "`AF_INET` 表示使用 IPv4 地址族，`SOCK_STREAM` 表示创建 TCP 字节流套接字。"
+    },
+    {
+      "q": "TCP客户套接字的本地端口号一定要由应用程序显式指定吗？",
+      "a": "不一定。原文示例没有显式指定本地端口号，而是让操作系统进行分配。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "IPv4基本概念",
+    "TCP与UDP的基本区别",
+    "套接字基本概念"
+  ],
+  "source_pages": [
+    129,
+    132
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "322_创建tcp客户套接字",
+  "_chunk_pages": [
+    129,
+    132
+  ]
+}

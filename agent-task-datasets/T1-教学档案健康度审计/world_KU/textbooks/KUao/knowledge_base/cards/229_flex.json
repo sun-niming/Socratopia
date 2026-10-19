@@ -1,0 +1,39 @@
+{
+  "title": "flex",
+  "definition": "flex 是前面 3 个属性的简写，指的是 flex-grow、flex-shrink 和 flex-basis。",
+  "key_points": [
+    "是三个属性的简写",
+    "简写对象是 flex-grow、flex-shrink、flex-basis",
+    "属于项目属性"
+  ],
+  "examples": [
+    "flex: 1 1 auto;"
+  ],
+  "misconceptions": [
+    "它只等于一个属性的设置；原文说明它是前面 3 个属性的简写",
+    "它是容器属性；原文说这些是项目上的属性"
+  ],
+  "qa_pairs": [
+    {
+      "q": "flex 是哪几个属性的简写？",
+      "a": "flex-grow、flex-shrink 和 flex-basis。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "flex-grow",
+    "flex-shrink",
+    "flex-basis"
+  ],
+  "source_pages": [
+    157,
+    160
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "229_flex",
+  "_chunk_pages": [
+    157,
+    160
+  ]
+}

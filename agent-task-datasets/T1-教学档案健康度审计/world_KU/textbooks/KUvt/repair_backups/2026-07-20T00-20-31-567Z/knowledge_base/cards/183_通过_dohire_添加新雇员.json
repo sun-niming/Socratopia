@@ -1,0 +1,44 @@
+{
+  "title": "通过 doHire 添加新雇员",
+  "definition": "doHire() 获取用户输入的雇员姓和名，将这两个字符串传给 Database::addEmployee() 添加新雇员，并输出新雇员的姓名和雇员编号。",
+  "key_points": [
+    "函数先读取 firstName，再读取 lastName。",
+    "调用 db.addEmployee(firstName, lastName) 完成添加。",
+    "原文使用 auto& 保存 addEmployee() 返回的雇员对象。",
+    "成功后使用格式化输出报告雇用结果和 employee number。"
+  ],
+  "examples": [
+    "核心逻辑可表示为：\n```cpp\nvoid doHire(Database& db) {\n    std::string firstName;\n    std::string lastName;\n    std::cin >> firstName;\n    std::cin >> lastName;\n    auto& employee{db.addEmployee(firstName, lastName)};\n    std::cout << std::format(\n        \"Hired employee {} {} with employee number {}.\",\n        firstName, lastName, employee.getEmployeeNumber())\n        << std::endl;\n}\n```"
+  ],
+  "misconceptions": [
+    "doHire() 不直接构造并管理雇员数据库记录，而是委托 Database::addEmployee() 完成添加。",
+    "雇员编号不是由用户在菜单中输入的；示例中编号从新增雇员对象的 getEmployeeNumber() 获取。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "doHire() 的主要处理流程是什么？",
+      "a": "读取姓名，调用 Database::addEmployee() 添加雇员，然后输出姓名和新雇员编号。"
+    },
+    {
+      "q": "为什么 doHire() 调用 getEmployeeNumber()？",
+      "a": "为了在成功消息中显示新添加雇员的雇员编号。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "std::string",
+    "函数参数",
+    "Database 的 addEmployee()"
+  ],
+  "source_pages": [
+    99,
+    99
+  ],
+  "needs_verification": true,
+  "verify_query": "\"doHire\" \"Hired employee\" \"getEmployeeNumber\" C++ Database",
+  "concept_id": "183_通过_dohire_添加新雇员",
+  "_chunk_pages": [
+    97,
+    100
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "title": "面向对象程序设计的程序组织方式",
+  "definition": "面向对象程序设计（Object-Oriented Programming，OOP）是一种以对象及其协作为核心来组织程序的程序设计方式。原文通过一个股票报价处理示例说明：程序入口 main() 可以依次调用 retrieveQuotes()、sortQuotes()、analyzeQuotes() 和 outputRecommendations() 等操作来完成业务流程。",
+  "key_points": [
+    "示例程序的入口是 main()。",
+    "股票报价示例包含获取报价 retrieveQuotes()、排序报价 sortQuotes()、分析报价 analyzeQuotes() 和输出推荐 outputRecommendations() 等步骤。",
+    "这些操作可以作为后续对象或组件职责划分的基础。"
+  ],
+  "examples": [
+    "股票报价处理流程可表示为：$$main()\\rightarrow retrieveQuotes()\\rightarrow sortQuotes()\\rightarrow analyzeQuotes()\\rightarrow outputRecommendations()$$",
+    "代码形式的示意：main() 调用 retrieveQuotes()、sortQuotes()、analyzeQuotes() 和 outputRecommendations()。"
+  ],
+  "misconceptions": [
+    "OOP 不等于只把所有函数简单地放进类中；原文示例还体现了对程序职责和对象协作的组织。",
+    "main() 本身不一定完成所有股票报价处理逻辑；示例中它负责调用多个具体操作。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "原文股票报价示例中，main() 依次涉及哪些处理操作？",
+      "a": "涉及 retrieveQuotes()（获取报价）、sortQuotes()（排序报价）、analyzeQuotes()（分析报价）和 outputRecommendations()（输出推荐）。"
+    },
+    {
+      "q": "如何用流程箭头表示该示例的调用关系？",
+      "a": "可表示为 $$main()\\rightarrow retrieveQuotes()\\rightarrow sortQuotes()\\rightarrow analyzeQuotes()\\rightarrow outputRecommendations()$$。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "函数调用和程序入口的基本概念"
+  ],
+  "source_pages": [
+    165,
+    168
+  ],
+  "needs_verification": true,
+  "verify_query": "《C++20高级编程》第5版 第166页 OOP main retrieveQuotes sortQuotes analyzeQuotes outputRecommendations 原文",
+  "concept_id": "231_面向对象程序设计的程序组织方式",
+  "_chunk_pages": [
+    165,
+    168
+  ]
+}

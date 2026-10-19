@@ -1,0 +1,40 @@
+{
+  "title": "if语句条件表达式的布尔求值",
+  "definition": "C++的if语句要求圆括号中的条件表达式具有布尔意义：表达式本身可以是布尔值，也可以是能够求值为布尔结果的表达式。值为0表示false，非0值表示true。",
+  "key_points": [
+    "条件为true时执行if语句体；条件为false时跳过该语句体或继续判断else if、else分支。",
+    "整数等非布尔值在条件语境中会转换为布尔意义：0为false，非0为true。",
+    "逻辑比较运算符的结果是true或false，可以直接用作if条件。"
+  ],
+  "examples": [
+    "if (i) { /* i非0时执行 */ }",
+    "if (i > 2) { /* i大于2时执行 */ }"
+  ],
+  "misconceptions": [
+    "if条件不一定必须写成字面量true或false；能够转换为布尔意义的表达式也可以作为条件。",
+    "非0并不表示某个特定的真值数值，而是在条件判断中被视为true。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "在C++的if条件中，0和非0值分别表示什么？",
+      "a": "0表示false，非0值表示true。"
+    },
+    {
+      "q": "比较表达式i > 2的结果能否直接作为if条件？",
+      "a": "可以，因为逻辑比较表达式的结果是布尔值true或false。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [],
+  "source_pages": [
+    49,
+    49
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "073_if语句条件表达式的布尔求值",
+  "_chunk_pages": [
+    49,
+    52
+  ]
+}

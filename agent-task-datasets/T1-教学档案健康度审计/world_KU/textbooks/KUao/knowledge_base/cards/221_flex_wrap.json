@@ -1,0 +1,43 @@
+{
+  "title": "flex-wrap",
+  "definition": "flex-wrap 属性定义：当一条轴线排不下时，项目如何换行。默认情况下，项目都排在一条线（轴线）上。",
+  "key_points": [
+    "nowrap：不换行，是默认值。",
+    "wrap：换行，第一行在上方。",
+    "wrap-reverse：换行，第一行在下方。"
+  ],
+  "examples": [
+    "flex-wrap: nowrap;",
+    "flex-wrap: wrap;",
+    "flex-wrap: wrap-reverse;"
+  ],
+  "misconceptions": [
+    "不要把 nowrap 理解为会自动换行。",
+    "不要把 wrap-reverse 误认为是不换行。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "flex-wrap 属性用来做什么？",
+      "a": "它定义当一条轴线排不下时，项目如何换行。"
+    },
+    {
+      "q": "flex-wrap 的默认值是什么？",
+      "a": "nowrap。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "CSS 弹性盒布局"
+  ],
+  "source_pages": [
+    153,
+    156
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "221_flex_wrap",
+  "_chunk_pages": [
+    153,
+    156
+  ]
+}

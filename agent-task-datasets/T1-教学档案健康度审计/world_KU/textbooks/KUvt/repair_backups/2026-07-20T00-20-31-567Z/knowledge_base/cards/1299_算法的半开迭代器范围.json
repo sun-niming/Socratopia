@@ -1,0 +1,44 @@
+{
+  "title": "算法的半开迭代器范围",
+  "definition": "标准库算法通常接收一个迭代器范围。对大部分容器而言，该范围是半开区间 `[first, last)`：包含首迭代器 `first` 指向的元素，但不包含尾迭代器 `last` 指向的位置。尾迭代器是最后一个元素之后的 past-the-end 标记，不能解引用。",
+  "key_points": [
+    "半开区间的数学表示为 $[first,last)$。",
+    "范围包含 `first` 指向的第一个元素。",
+    "范围不包含 `last` 指向的位置。",
+    "`last` 通常是最后一个元素之后的位置，用作范围结束标记。"
+  ],
+  "examples": [
+    "```cpp\nstd::vector<int> values{10, 20, 30};\nstd::sort(values.begin(), values.end());\n```\n这里排序范围是 $[\\text{values.begin()},\\text{values.end()})$，包含 10、20、30，但不包含 `end()` 所表示的 past-the-end 位置。"
+  ],
+  "misconceptions": [
+    "`end()` 通常不指向最后一个元素，而是指向最后一个元素之后的位置。",
+    "半开区间不是首尾元素都包含；结束迭代器所表示的位置不属于范围。",
+    "尾迭代器不能作为普通元素直接解引用。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "标准库算法中的半开迭代器范围 $[first,last)$ 包含哪些位置？",
+      "a": "包含 `first` 以及其后的元素，但不包含 `last` 所表示的位置。"
+    },
+    {
+      "q": "容器的 `end()` 迭代器通常表示什么？",
+      "a": "它表示最后一个元素之后的 past-the-end 位置，是范围结束标记。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "迭代器",
+    "容器的 begin/end"
+  ],
+  "source_pages": [
+    628,
+    628
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1299_算法的半开迭代器范围",
+  "_chunk_pages": [
+    625,
+    628
+  ]
+}

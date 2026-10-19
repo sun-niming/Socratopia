@@ -1,0 +1,41 @@
+{
+  "title": "kill 命令向进程发送信号",
+  "definition": "kill 用于向指定进程发送信号，命令格式为 kill [-信号值] PID。其中，-9 表示强行杀死指定进程。",
+  "key_points": [
+    "kill 的作用是向指定进程发送信号",
+    "命令格式：kill [-信号值] PID",
+    "-9 表示强行杀死指定进程"
+  ],
+  "examples": [
+    "kill -9 PID"
+  ],
+  "misconceptions": [
+    "不要把 kill 只理解为‘删除进程’，教材表述是向指定进程发送信号",
+    "不要忽略 PID，它用于指定目标进程"
+  ],
+  "qa_pairs": [
+    {
+      "q": "kill 命令的基本格式是什么？",
+      "a": "kill [-信号值] PID。"
+    },
+    {
+      "q": "kill -9 的作用是什么？",
+      "a": "强行杀死指定进程。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "ps 命令查看进程"
+  ],
+  "source_pages": [
+    29,
+    32
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "060_kill_命令向进程发送信号",
+  "_chunk_pages": [
+    29,
+    32
+  ]
+}

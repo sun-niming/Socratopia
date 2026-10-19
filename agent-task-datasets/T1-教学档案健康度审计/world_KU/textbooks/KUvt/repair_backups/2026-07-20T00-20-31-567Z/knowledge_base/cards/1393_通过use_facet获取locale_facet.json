@@ -1,0 +1,44 @@
+{
+  "title": "通过use_facet获取locale facet",
+  "definition": "std::use_facet()是一个函数模板，用于从指定locale中获取某一种facet。模板类型参数指定要获取的facet类型，函数参数指定目标locale。facet封装了某个locale相关的格式化、解析、比较或转换规则。",
+  "key_points": [
+    "基本形式为：$\\texttt{std::use\\_facet<FacetType>(locale)}$。",
+    "例如，moneypunct<wchar_t> facet提供宽字符环境下与货币格式相关的信息，包括货币符号。",
+    "嵌套模板类型中的字符类型决定facet处理的字符类型，例如moneypunct<wchar_t>使用宽字符。",
+    "标准facet类别包括ctype、codecvt、collate、time_get、time_put、num_get、num_put、numpunct、money_get、money_put和moneypunct。"
+  ],
+  "examples": [
+    "auto& facet { std::use_facet<std::moneypunct<wchar_t>>(std::locale { \"en-GB\" }) };",
+    "std::wstring pounds { std::use_facet<std::moneypunct<wchar_t>>(locBritEng).curr_symbol() };"
+  ],
+  "misconceptions": [
+    "use_facet()不是创建新的locale，也不是直接传入facet对象；它是在指定locale中检索指定类型的facet。",
+    "模板参数中的<wchar_t>不是locale名称，而是facet使用的字符类型。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "std::use_facet()的模板参数和函数参数分别表示什么？",
+      "a": "模板参数表示要检索的facet类型，函数参数表示要从哪个locale中检索facet。"
+    },
+    {
+      "q": "如何从英国英语locale中取得货币符号？",
+      "a": "可从std::moneypunct<wchar_t> facet调用curr_symbol()，例如：std::use_facet<std::moneypunct<wchar_t>>(locBritEng).curr_symbol()。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++模板基础",
+    "C++ locale对象基础"
+  ],
+  "source_pages": [
+    665,
+    666
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1393_通过use_facet获取locale_facet",
+  "_chunk_pages": [
+    665,
+    668
+  ]
+}

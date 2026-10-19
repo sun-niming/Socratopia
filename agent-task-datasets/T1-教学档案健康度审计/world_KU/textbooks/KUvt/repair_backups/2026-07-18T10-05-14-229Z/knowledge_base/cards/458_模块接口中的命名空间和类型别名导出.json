@@ -1,0 +1,46 @@
+{
+  "title": "模块接口中的命名空间和类型别名导出",
+  "definition": "原文展示了在模块接口中使用命名空间组织并导出声明的形式：可以写出`export namespace DataModel { ... }`，在其中声明`Person`类，并定义类型别名`using Persons = std::vector<Person>;`，从而将相关数据模型类型集中在同一命名空间中。",
+  "key_points": [
+    "原文示例使用`export namespace DataModel`声明并导出`DataModel`命名空间。",
+    "命名空间中可以包含`class Person { /* ... */ };`等类型声明。",
+    "原文给出的类型别名是`using Persons = std::vector<Person>;`，表示`Persons`是`std::vector<Person>`的别名。",
+    "使用`std::vector<Person>`前需要有相应的vector声明或导入；原文上下文同时出现了`<vector>`。"
+  ],
+  "examples": [
+    "命名空间与类型别名示例：`export namespace DataModel { class Person { /* ... */ }; using Persons = std::vector<Person>; }`。",
+    "类型别名关系：`Persons`等价于`std::vector<Person>`，但它不是一个新的容器类型。"
+  ],
+  "misconceptions": [
+    "类型别名`Persons`不会创建新的独立容器类型，它只是`std::vector<Person>`的另一个名称。",
+    "把类放入`DataModel`命名空间后，使用时通常需要写出相应的限定名，不能把它与全局命名空间中的同名类混淆。",
+    "`export namespace DataModel`与单独导出某个类的写法在组织接口范围上不同；不能据此断言命名空间内所有内容在所有编译器中都具有完全相同的导出行为。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "原文中`Persons`是什么类型？",
+      "a": "`Persons`是`std::vector<Person>`的类型别名，声明为`using Persons = std::vector<Person>;`。"
+    },
+    {
+      "q": "为什么使用`DataModel`命名空间？",
+      "a": "原文用它组织数据模型相关声明，例如`Person`类和`Persons`类型别名，避免相关名称散落在全局作用域。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++命名空间",
+    "C++ using类型别名",
+    "std::vector基础用法"
+  ],
+  "source_pages": [
+    353,
+    356
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 modules export namespace type alias std::vector<Person> module interface syntax",
+  "concept_id": "458_模块接口中的命名空间和类型别名导出",
+  "_chunk_pages": [
+    353,
+    356
+  ]
+}

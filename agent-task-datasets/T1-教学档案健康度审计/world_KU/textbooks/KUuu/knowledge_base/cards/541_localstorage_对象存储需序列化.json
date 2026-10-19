@@ -1,0 +1,46 @@
+{
+  "title": "localStorage 对象存储需序列化",
+  "definition": "localStorage 适合直接保存字符串；如果要保存对象或数组，必须先用 JSON.stringify 把它序列化成字符串，取出后再用 JSON.parse 反序列化还原成对象。",
+  "key_points": [
+    "对象不能直接按原样存入，需先转成字符串。",
+    "取出后如果要恢复对象结构，需用 JSON.parse。",
+    "示例中 settings 保存的是 userSettings 的 JSON 字符串。"
+  ],
+  "examples": [
+    "const userSettings = { fontSize: 14, notifications: true };",
+    "localStorage.setItem('settings', JSON.stringify(userSettings));",
+    "const storedSettings = localStorage.getItem('settings');",
+    "const settingsObject = JSON.parse(storedSettings);"
+  ],
+  "misconceptions": [
+    "以为 localStorage 可以直接保存 JavaScript 对象并原样取回。",
+    "以为 JSON.stringify 和 JSON.parse 只能用于网络请求，不能用于本地存储。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么对象保存到 localStorage 前要先 JSON.stringify？",
+      "a": "因为 localStorage 不能直接保存对象，必须先把对象序列化成字符串。"
+    },
+    {
+      "q": "取出后怎样恢复对象？",
+      "a": "用 JSON.parse 把字符串反序列化为对象。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "localStorage 基本读写",
+    "JSON.stringify",
+    "JSON.parse"
+  ],
+  "source_pages": [
+    381,
+    384
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "541_localstorage_对象存储需序列化",
+  "_chunk_pages": [
+    381,
+    384
+  ]
+}

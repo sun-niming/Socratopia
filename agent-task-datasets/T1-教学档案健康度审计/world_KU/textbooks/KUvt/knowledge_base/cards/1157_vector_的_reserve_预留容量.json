@@ -1,0 +1,45 @@
+{
+  "title": "vector 的 reserve 预留容量",
+  "definition": "reserve() 用于让 vector 预先分配足够的存储空间，以容纳指定数量的元素。reserve() 改变的是 vector 的容量 capacity，而不是大小 size；它不会创建实际元素。预留容量可以减少后续插入时的重分配，从而提高效率并降低因重分配导致的迭代器失效风险。",
+  "key_points": [
+    "reserve(n) 请求 vector 预先准备至少能够容纳 n 个元素的空间。",
+    "reserve() 不会增加 size()，也不会创建元素。",
+    "调用 reserve() 后，不能因为容量增加就直接访问原 size() 范围之外的下标。",
+    "如果预先知道 vector 可能保存的元素数量，reserve() 可以减少后续扩容和元素搬移。"
+  ],
+  "examples": [
+    "vector<int> values;\nvalues.reserve(100); // 预留可容纳至少 100 个元素的空间",
+    "vector<int> values;\nvalues.reserve(10);\n// 此时 values.size() 仍为 0，不能访问 values[0]，因为尚未创建元素"
+  ],
+  "misconceptions": [
+    "reserve(10) 不会创建 10 个默认元素；若要创建元素，应使用改变 size 的操作。",
+    "capacity() 增加后，不能访问超出 size() 的下标。",
+    "reserve() 可以减少重分配，但不能把 vector 变成非连续存储容器。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "调用 values.reserve(100) 后，values.size() 会变成多少？",
+      "a": "如果调用前为空，size() 仍为 0；reserve() 只改变容量，不创建实际元素。"
+    },
+    {
+      "q": "为什么使用 reserve() 可能提高 vector 的插入效率？",
+      "a": "因为它可以提前分配足够空间，减少后续插入时的重分配以及元素复制或移动。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "vector 的 size 与 capacity",
+    "vector 重分配"
+  ],
+  "source_pages": [
+    560,
+    560
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1157_vector_的_reserve_预留容量",
+  "_chunk_pages": [
+    557,
+    560
+  ]
+}

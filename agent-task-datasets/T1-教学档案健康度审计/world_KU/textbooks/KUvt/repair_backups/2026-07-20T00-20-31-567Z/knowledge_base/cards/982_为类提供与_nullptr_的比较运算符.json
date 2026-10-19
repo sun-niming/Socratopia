@@ -1,0 +1,45 @@
+{
+  "title": "为类提供与 nullptr 的比较运算符",
+  "definition": "如果类定义了 `operator bool()`，又希望支持对象与 `nullptr` 的直接比较，可以为该类提供接收类对象和 `std::nullptr_t` 的非成员比较运算符，例如将 `operator!=` 声明为类的友元，并比较对象内部指针与 `nullptr` 是否不同。",
+  "key_points": [
+    "比较运算符可以声明为类模板的友元函数。",
+    "典型签名为 `template <typename T> friend bool operator!=(const Pointer<T>& lhs, std::nullptr_t rhs);`。",
+    "实现中可以返回 `lhs.m_ptr != rhs`，从而明确处理类对象与 `nullptr` 的比较。"
+  ],
+  "examples": [
+    "声明示意：`template <typename T> friend bool operator!=(const Pointer<T>& lhs, std::nullptr_t rhs);`",
+    "实现示意：`template <typename T> bool operator!=(const Pointer<T>& lhs, std::nullptr_t rhs) { return lhs.m_ptr != rhs; }`",
+    "提供该重载后，可以写：`if (p != nullptr) { cout << \"not nullptr\" << endl; }`。"
+  ],
+  "misconceptions": [
+    "只定义 `operator bool()` 并不会自动生成类对象与 `nullptr` 的 `operator!=`。",
+    "该比较运算符的参数类型必须包含 `std::nullptr_t`，不能只把 `nullptr` 当作普通整数处理。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何让 `Pointer<T>` 支持 `p != nullptr`？",
+      "a": "为 `Pointer<T>` 提供接收 `const Pointer<T>&` 和 `std::nullptr_t` 的 `operator!=`，通常可将其声明为类模板的友元。"
+    },
+    {
+      "q": "该比较运算符的核心实现可以是什么？",
+      "a": "`return lhs.m_ptr != rhs;`，即比较对象内部指针与 `nullptr` 是否不同。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "operator bool 与 nullptr 比较",
+    "友元函数模板",
+    "运算符重载"
+  ],
+  "source_pages": [
+    489,
+    490
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "982_为类提供与_nullptr_的比较运算符",
+  "_chunk_pages": [
+    489,
+    492
+  ]
+}

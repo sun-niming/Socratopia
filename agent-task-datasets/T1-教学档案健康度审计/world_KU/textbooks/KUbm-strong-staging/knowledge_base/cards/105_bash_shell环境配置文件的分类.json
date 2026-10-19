@@ -1,0 +1,46 @@
+{
+  "title": "Bash shell环境配置文件的分类",
+  "definition": "教材将 Bash shell 环境配置文件分为两类：全局配置文件和用户配置文件。全局配置文件包括“/etc/profile”和“/etc/bashrc”；用户配置文件包括“~/.bash_profile”、“~/.bash_login”、“~/.profile”、“~/.bashrc”和“~/.bash_logout”。",
+  "key_points": [
+    "Bash shell 环境配置文件分为全局配置文件和用户配置文件两类",
+    "全局配置文件：/etc/profile、/etc/bashrc",
+    "用户配置文件：~/.bash_profile、~/.bash_login、~/.profile、~/.bashrc、~/.bash_logout"
+  ],
+  "examples": [
+    "全局配置文件示例：/etc/profile",
+    "用户配置文件示例：~/.bashrc"
+  ],
+  "misconceptions": [
+    "误以为所有配置文件都在同一类中，教材明确分为全局和用户两类",
+    "误以为 ~/.bashrc 属于全局配置文件，教材将其列为用户配置文件"
+  ],
+  "qa_pairs": [
+    {
+      "q": "教材中 Bash shell 环境配置文件分为哪两类？",
+      "a": "分为全局配置文件和用户配置文件。"
+    },
+    {
+      "q": "教材列出的全局配置文件有哪些？",
+      "a": "有 /etc/profile 和 /etc/bashrc。"
+    },
+    {
+      "q": "教材列出的用户配置文件有哪些？",
+      "a": "有 ~/.bash_profile、~/.bash_login、~/.profile、~/.bashrc、~/.bash_logout。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "Bash shell"
+  ],
+  "source_pages": [
+    57,
+    60
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "105_bash_shell环境配置文件的分类",
+  "_chunk_pages": [
+    57,
+    60
+  ]
+}

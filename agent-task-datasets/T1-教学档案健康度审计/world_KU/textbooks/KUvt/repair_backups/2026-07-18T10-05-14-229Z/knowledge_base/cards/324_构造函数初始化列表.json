@@ -1,0 +1,44 @@
+{
+  "title": "构造函数初始化列表",
+  "definition": "构造函数初始化列表位于构造函数参数列表之后、函数体之前，用于初始化基类和非静态数据成员。成员在进入构造函数体之前就已经完成初始化；函数体中的赋值发生在初始化之后。",
+  "key_points": [
+    "初始化列表的基本形式是 `构造函数(参数) : 成员1{初值}, 成员2{初值} { 函数体 }`。",
+    "使用初始化列表可以直接用构造函数参数初始化数据成员，例如 `m_value{value}`。",
+    "类成员应优先在初始化列表中初始化，而不是先默认构造再在函数体中赋值。"
+  ],
+  "examples": [
+    "`Foo::Foo(double value) : m_value{value} {}`",
+    "`MyClass::MyClass(double value) : m_value{value}, m_foo{m_value} {}`",
+    "对于 `MyClass instance{1.2};`，若初始化顺序和声明顺序正确，成员可以得到值 `1.2`。"
+  ],
+  "misconceptions": [
+    "初始化列表不是在构造函数体执行之后才运行，而是在函数体执行之前运行。",
+    "初始化列表中的写法不是普通赋值；它直接完成成员初始化。",
+    "成员初始化的实际顺序不由初始化列表中的书写顺序决定。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "构造函数初始化列表位于哪里？",
+      "a": "它位于构造函数参数列表之后、函数体之前。"
+    },
+    {
+      "q": "`Foo::Foo(double value) : m_value{value} {}` 中 `m_value{value}` 的作用是什么？",
+      "a": "在构造函数体执行前，使用参数 `value` 直接初始化成员 `m_value`。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++类与构造函数基础"
+  ],
+  "source_pages": [
+    241,
+    244
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "324_构造函数初始化列表",
+  "_chunk_pages": [
+    241,
+    244
+  ]
+}

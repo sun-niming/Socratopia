@@ -1,0 +1,39 @@
+{
+  "title": "C++中应使用new/delete而不是malloc/free",
+  "definition": "在C++中，new不仅分配能够容纳对象的内存，还会调用对象的构造函数；delete不仅释放内存，还会调用对象的析构函数。malloc()只分配指定字节数的原始内存，不会构造对象；free()释放内存时也不会调用析构函数。因此，C++程序通常应使用new和delete，而不要使用malloc()和free()。",
+  "key_points": [
+    "使用malloc()为类对象分配内存后，得到的只是未构造的原始内存，不能视为已经正常构造的对象。",
+    "使用new创建对象时，会分配合适大小的内存并调用相应构造函数。",
+    "使用delete释放对象时，会调用析构函数完成清理。",
+    "通过new分配的内存必须通过delete释放；数组形式的new[]必须通过delete[]释放。"
+  ],
+  "examples": [
+    "Foo* myFoo { (Foo*)malloc(sizeof(Foo)) };：这只分配了足够容纳Foo的内存，并没有构造Foo对象。",
+    "使用new创建单个对象：Foo* myFoo { new Foo{} };",
+    "使用delete释放单个对象：delete myFoo;"
+  ],
+  "misconceptions": [
+    "认为malloc(sizeof(Foo))会自动调用Foo的构造函数。",
+    "认为free()和delete的作用完全相同。",
+    "认为只要内存大小足够，未调用构造函数的内存就可以直接当作C++对象使用。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么C++中通常不应使用malloc()和free()来管理对象？",
+      "a": "因为malloc()只分配原始内存而不调用构造函数，free()只释放内存而不调用析构函数；而new和delete分别负责对象的构造和析构。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [],
+  "source_pages": [
+    201,
+    201
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "421_c_中应使用new_delete而不是malloc_free",
+  "_chunk_pages": [
+    201,
+    204
+  ]
+}

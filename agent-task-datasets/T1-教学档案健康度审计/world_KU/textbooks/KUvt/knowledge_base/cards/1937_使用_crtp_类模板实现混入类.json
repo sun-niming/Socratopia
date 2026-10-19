@@ -1,0 +1,46 @@
+{
+  "title": "使用 CRTP 类模板实现混入类",
+  "definition": "CRTP（奇怪的重复模板模式）是使用类模板实现混入类的一种方式。混入类模板接收一个类型参数，并从该类型派生出自身的类模板，从而把附加功能添加到现有类型上，而不必修改这些现有类。",
+  "key_points": [
+    "CRTP 混入类本身是一个类模板。",
+    "典型定义形式是：\n$$\\texttt{template <typename T> class SelfDrivable : public T \\{ /* ... */ \\};}$$",
+    "模板参数 T 可以是不同的现有类，因此同一个混入类模板可以向 Car、Truck 等类型添加相同类别的功能。",
+    "CRTP 的使用方式是在具体对象类型中实例化混入类模板。"
+  ],
+  "examples": [
+    "定义自动驾驶混入类模板：\ntemplate <typename T>\nclass SelfDrivable : public T {\n    /* 自动驾驶功能 */\n};\n",
+    "为 Car 和 Truck 分别添加自动驾驶功能：\nSelfDrivable<Car> selfDrivingCar;\nSelfDrivable<Truck> selfDrivingTruck;\n"
+  ],
+  "misconceptions": [
+    "CRTP 混入类不是把功能直接复制粘贴到 Car 或 Truck 的类定义中，而是通过模板继承生成新的组合类型。",
+    "使用 SelfDrivable<Car> 不等于修改了 Car 类本身；原文强调这种方式可以在不修改现有类的情况下添加功能。",
+    "CRTP 与多继承混入是两种主要实现方式，不能把二者混为同一种语法机制。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "CRTP 实现混入类的典型类定义是什么？",
+      "a": "典型形式是：$$\\texttt{template <typename T> class Mixin : public T \\{ /* 功能实现 */ \\};}$$"
+    },
+    {
+      "q": "如何分别创建自动驾驶汽车和自动驾驶卡车？",
+      "a": "可以使用 SelfDrivable<Car> selfDrivingCar; 和 SelfDrivable<Truck> selfDrivingTruck;。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "类模板",
+    "模板参数",
+    "继承"
+  ],
+  "source_pages": [
+    939,
+    939
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1937_使用_crtp_类模板实现混入类",
+  "_chunk_pages": [
+    937,
+    940
+  ]
+}

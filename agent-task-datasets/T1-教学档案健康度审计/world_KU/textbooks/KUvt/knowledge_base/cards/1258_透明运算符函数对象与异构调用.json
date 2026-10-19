@@ -1,0 +1,47 @@
+{
+  "title": "透明运算符函数对象与异构调用",
+  "definition": "透明运算符函数对象使用 `void` 作为模板参数，例如 `multiplies<void>{}`，也常写作 `multiplies<>{}`。它们不预先固定操作数类型，因此可以在调用时根据实际参数进行操作，支持不同类型操作数之间的异构运算。",
+  "key_points": [
+    "`multiplies<>{}` 是 `multiplies<void>{}` 的简写。",
+    "透明函数对象比指定类型的版本更简洁，并且具有异构调用的功能优势。",
+    "当初始值为 `double`、序列元素为 `int` 时，透明的 `multiplies<>` 可以使累积结果保持为 `double`。",
+    "原文示例中，初始值 `1.1` 与整数序列相乘，结果为 `6.6`；若使用 `multiplies<int>{}`，累积结果会是 `int`，得到 `6`，并可能产生数据丢失警告。"
+  ],
+  "examples": [
+    "`auto mult { accumulateData(cbegin(values), cend(values), 1, multiplies<>{}) };`",
+    "异构累积示例：`double result { accumulateData(cbegin(values), cend(values), 1.1, multiplies<>{}) };`，若整数序列的乘积为 `6`，结果为 `6.6`。",
+    "非透明版本对比：`double result { accumulateData(cbegin(values), cend(values), 1.1, multiplies<int>{}) };`，原文说明其计算结果会是 `int` 类型的 `6`。"
+  ],
+  "misconceptions": [
+    "透明函数对象不只是省略模板参数的语法糖；原文强调它还支持异构操作数。",
+    "使用 `double` 变量接收结果，并不一定能阻止中间计算在 `int` 类型中进行；函数对象的类型参数会影响累积运算的结果类型。",
+    "`multiplies<>` 并不表示只能处理 `double`，而是允许根据实际调用参数进行类型适配。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`multiplies<>` 与 `multiplies<int>` 的主要区别是什么？",
+      "a": "`multiplies<>` 是透明函数对象，不预先固定操作数类型并支持异构调用；`multiplies<int>` 将操作固定在 `int` 类型语境中。"
+    },
+    {
+      "q": "为什么使用初始值 `1.1` 和 `multiplies<>` 时，整数序列的累积结果可以是 `6.6`？",
+      "a": "因为透明 `multiplies<>` 能根据实际操作数进行异构运算，`double` 初始值使累积计算保持为 `double` 类型。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "函数对象",
+    "模板参数",
+    "隐式类型转换"
+  ],
+  "source_pages": [
+    612,
+    612
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1258_透明运算符函数对象与异构调用",
+  "_chunk_pages": [
+    609,
+    612
+  ]
+}

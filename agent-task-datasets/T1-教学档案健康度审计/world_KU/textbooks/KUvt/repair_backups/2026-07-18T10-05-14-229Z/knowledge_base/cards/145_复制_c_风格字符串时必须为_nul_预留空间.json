@@ -1,0 +1,45 @@
+{
+  "title": "复制 C 风格字符串时必须为 NUL 预留空间",
+  "definition": "使用动态字符数组复制 C 风格字符串时，分配空间的大小必须至少是 `strlen(str) + 1`，因为除了字符串内容外，还要存储结尾的 NUL 字符。原文先给出了使用 `strlen(str)` 分配空间的代码，并标注其存在一个少分配一个字符的错误。",
+  "key_points": [
+    "错误写法是 `new char[strlen(str)]`，它没有为结尾的 `\\0` 预留空间。",
+    "正确写法是 `new char[strlen(str) + 1]`。",
+    "分配空间后可以使用 `strcpy(result, str)` 复制字符串，包括结尾的 NUL 字符。",
+    "动态分配的字符数组使用完毕后需要释放；原文片段主要说明空间计算错误，未展开释放代码。"
+  ],
+  "examples": [
+    "错误示例：\n```cpp\nchar* result { new char[strlen(str)] }; // BUG：少分配一个字符\nstrcpy(result, str);\n```",
+    "修正示例：\n```cpp\nchar* copyString(const char* str) {\n    char* result { new char[strlen(str) + 1] };\n    strcpy(result, str);\n    return result;\n}\n```"
+  ],
+  "misconceptions": [
+    "`strlen(str)` 的结果只表示有效字符数量，不包含结尾的 NUL，因此不能直接作为字符数组的分配长度。",
+    "`strcpy` 不会自动扩展目标数组；目标数组必须事先有足够空间。",
+    "少分配一个字符可能导致越界写入，而不是仅仅造成字符串显示不完整。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么复制 `str` 时应分配 `strlen(str) + 1` 个字符？",
+      "a": "因为 `strlen(str)` 不包括结尾的 NUL 字符，额外的 `1` 用于存放 `\\0`。"
+    },
+    {
+      "q": "原文中 `new char[strlen(str)]` 的问题是什么？",
+      "a": "它少分配了存放结尾 NUL 字符所需的一个字符位置，随后使用 `strcpy` 可能发生越界写入。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C 风格字符串以 NUL 字符结尾",
+    "`strlen` 与 `sizeof` 的区别"
+  ],
+  "source_pages": [
+    101,
+    104
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "145_复制_c_风格字符串时必须为_nul_预留空间",
+  "_chunk_pages": [
+    101,
+    104
+  ]
+}

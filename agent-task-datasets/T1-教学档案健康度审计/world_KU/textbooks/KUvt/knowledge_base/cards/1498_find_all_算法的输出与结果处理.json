@@ -1,0 +1,44 @@
+{
+  "title": "find_all 算法的输出与结果处理",
+  "definition": "find_all 算法用于查找序列中满足给定谓词的所有元素，并将匹配元素的迭代器写入输出序列。该算法只覆盖输出序列中已有的元素，因此调用者必须保证输出序列容量足够，或者使用 back_inserter 等输出迭代器适配器动态追加结果。算法完成后，可以通过结果容器的大小得到匹配元素的数量，并通过保存的迭代器访问匹配元素及其在原序列中的位置。",
+  "key_points": [
+    "输出容器必须能够容纳所有写入的迭代器；可以预先分配足够空间，也可以使用 back_inserter。",
+    "结果容器保存的是匹配元素的迭代器，而不是匹配元素的副本。",
+    "迭代器之间的差值可以用于计算匹配元素在原 vector 中的位置，例如位置可写为 $it-\\operatorname{cbegin}(vec)$。"
+  ],
+  "examples": [
+    "示例：对 vector 中的元素执行 find_all，并把值为 5 的匹配元素迭代器追加到 matches：文本形式为 `find_all(begin(vec), end(vec), back_inserter(matches), [](int i){ return i == 5; });`。",
+    "对于 `vector<int> vec {3, 4, 5, 4, 5, 6, 5, 8};`，结果包含 3 个匹配元素，其值和位置分别为：`5 at position 2`、`5 at position 4`、`5 at position 6`。"
+  ],
+  "misconceptions": [
+    "find_all 不会自动扩大普通输出容器的容量；使用普通迭代器输出时，必须确保目标范围足够大。",
+    "matches 中保存的是迭代器，因此访问元素时要对迭代器解引用，例如 `*it`。",
+    "匹配结果的顺序与原序列中的遍历顺序一致；该示例并不是把匹配元素排序后输出。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么 find_all 调用中使用 back_inserter(matches)？",
+      "a": "因为 find_all 会向输出序列写入匹配元素的迭代器，back_inserter 可以把结果追加到 matches 末尾，避免调用者预先确定并分配结果数量。"
+    },
+    {
+      "q": "示例中如何得到匹配元素在 vec 中的位置？",
+      "a": "对匹配迭代器 it 计算 `it - cbegin(vec)`，所得差值就是该元素相对于 vec 起始位置的索引。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++ 迭代器",
+    "标准库算法和输出迭代器适配器"
+  ],
+  "source_pages": [
+    721,
+    721
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 find_all 算法 back_inserter matches vector iterator 示例 lambda i == 5",
+  "concept_id": "1498_find_all_算法的输出与结果处理",
+  "_chunk_pages": [
+    721,
+    724
+  ]
+}

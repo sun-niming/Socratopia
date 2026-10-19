@@ -1,0 +1,49 @@
+{
+  "title": "C++标准库中的随机数分布类别",
+  "definition": "教材列举了多类可用的C++随机数分布，包括均匀分布、伯努利分布、正态分布和采样分布等。不同分布通过不同的构造参数描述不同的随机数产生规律。教材还列出了 uniform_int_distribution、uniform_real_distribution、bernoulli_distribution、binomial_distribution、geometric_distribution、negative_binomial_distribution、poisson_distribution、exponential_distribution、gamma_distribution、weibull_distribution、extreme_value_distribution、normal_distribution、lognormal_distribution、chi_squared_distribution、cauchy_distribution、fisher_f_distribution、student_t_distribution、discrete_distribution、piecewise_constant_distribution 和 piecewise_linear_distribution 等类型。",
+  "key_points": [
+    "均匀分布包括 uniform_int_distribution 和 uniform_real_distribution，分别用于整数和实数类型的均匀分布。",
+    "伯努利相关分布包括 bernoulli_distribution、binomial_distribution、geometric_distribution 和 negative_binomial_distribution。",
+    "教材列举了正态分布相关类型，包括 normal_distribution、lognormal_distribution、chi_squared_distribution、cauchy_distribution、fisher_f_distribution 和 student_t_distribution。",
+    "采样分布包括 discrete_distribution、piecewise_constant_distribution 和 piecewise_linear_distribution。",
+    "每个分布都有自己的构造参数；本节不详细解释这些数学参数。"
+  ],
+  "examples": [
+    "整数均匀分布的构造形式可写为：`std::uniform_int_distribution<IntType> distribution(IntType a = 0, IntType b = std::numeric_limits<IntType>::max());`",
+    "实数均匀分布的构造形式可写为：`std::uniform_real_distribution<RealType> distribution(RealType a = 0.0, RealType b = 1.0);`",
+    "正态分布示例：`std::normal_distribution<double> distribution{50, 10};`"
+  ],
+  "misconceptions": [
+    "不同分布只是名称不同、生成效果相同；实际上，不同分布会导致随机数在范围内呈现不同的集中或离散规律。",
+    "分布的构造参数可以完全忽略；实际上，参数决定分布的具体数学特征。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "教材列举的两种均匀分布是什么？",
+      "a": "uniform_int_distribution 和 uniform_real_distribution。"
+    },
+    {
+      "q": "教材列举的三种采样分布是什么？",
+      "a": "discrete_distribution、piecewise_constant_distribution 和 piecewise_linear_distribution。"
+    },
+    {
+      "q": "正态分布对象的示例构造语句是什么？",
+      "a": "`std::normal_distribution<double> distribution{50, 10};`"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++随机数分布的作用"
+  ],
+  "source_pages": [
+    701,
+    702
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 <random> 标准库随机数分布分类及各分布的标准构造函数 bernoulli binomial poisson normal piecewise_constant piecewise_linear",
+  "concept_id": "1462_c_标准库中的随机数分布类别",
+  "_chunk_pages": [
+    701,
+    704
+  ]
+}

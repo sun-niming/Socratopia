@@ -1,0 +1,38 @@
+{
+  "title": "fork 的返回值与复制",
+  "definition": "fork() 会复制当前进程，产生父进程和子进程。两边都会从 fork() 返回处继续执行，但返回值不同：子进程中返回 0，父进程中返回子进程 pid，失败返回 -1。fork 后文件描述符也会被复制，因此父子进程都会持有原来的监听 fd 和客户端 fd。",
+  "key_points": [
+    "fork 后父子进程都继续执行同一段代码",
+    "通过返回值区分子进程、父进程和失败",
+    "fork 会复制文件描述符，父子进程都会暂时持有相同的 fd"
+  ],
+  "examples": [
+    "if (pid == 0) { /* 子进程 */ } else if (pid > 0) { /* 父进程 */ } else { /* 失败 */ }"
+  ],
+  "misconceptions": [
+    "fork 后只有父进程继续执行",
+    "fork 会自动关闭不需要的文件描述符"
+  ],
+  "qa_pairs": [
+    {
+      "q": "fork() 在子进程、父进程和失败时分别返回什么？",
+      "a": "子进程返回 0，父进程返回子进程 pid，失败返回 -1。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "进程",
+    "文件描述符"
+  ],
+  "source_pages": [
+    37,
+    40
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "048_fork_的返回值与复制",
+  "_chunk_pages": [
+    37,
+    40
+  ]
+}

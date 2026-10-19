@@ -1,0 +1,46 @@
+{
+  "title": "char类型、编码字符类型与std::byte",
+  "definition": "`char`、`signed char` 和 `unsigned char` 是不同的类型。`char` 应主要用于表示字符；根据编译器实现，普通 `char` 既可能是有符号的，也可能是无符号的，因此不应依赖它表示有符号或无符号字符。C++20 还提供 `char8_t`、`char16_t` 和 `char32_t`，用于表示单个 UTF 编码字符；`wchar_t` 用于表示单个宽字符，其大小取决于编译器。C++17 起，`std::byte` 可用于明确表示内存中的单个字节。",
+  "key_points": [
+    "`char` 不等同于 `signed char` 或 `unsigned char`。",
+    "`char8_t`、`char16_t`、`char32_t` 分别对应 8 位、16 位和 32 位 UTF 编码字符。",
+    "`std::byte` 定义在 `<cstddef>` 中，用于表达“一个字节”的意图，而不是把字节当作字符处理。"
+  ],
+  "examples": [
+    "`char ch {'m'};`",
+    "`char8_t c8 {u8'm'};`",
+    "`char16_t c16 {u'm'};`",
+    "`char32_t c32 {U'm'};`",
+    "`wchar_t w {L'm'};`",
+    "`std::byte b {42};`"
+  ],
+  "misconceptions": [
+    "`char` 一定是有符号类型；实际上其有无符号性取决于编译器。",
+    "`std::byte` 是字符类型；它用于表示字节，不用于表达字符。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么不应使用普通 `char` 表示有符号或无符号字符？",
+      "a": "因为普通 `char` 的有符号性取决于编译器实现，不能依赖其表示有符号或无符号值。"
+    },
+    {
+      "q": "`std::byte` 的用途是什么？",
+      "a": "它用于表示内存中的单个字节，并明确表达该值是字节而不是字符。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++常见基本变量类型"
+  ],
+  "source_pages": [
+    41,
+    42
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "058_char类型_编码字符类型与std_byte",
+  "_chunk_pages": [
+    41,
+    44
+  ]
+}

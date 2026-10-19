@@ -1,0 +1,46 @@
+{
+  "title": "最小值、最大值及范围极值算法",
+  "definition": "C++标准库提供用于查找最小值和最大值的算法。std::min()和std::max()比较两个或多个值并分别返回较小值或较大值的const引用；std::minmax()返回一个std::pair，其中first是最小值、second是最大值。std::min_element()和std::max_element()接收一个迭代器范围，分别返回指向范围内最小元素或最大元素的迭代器；std::minmax_element()返回一对迭代器，分别指向范围内最小和最大的元素。默认比较通常使用operator<，也可以传入用户提供的二元谓词。",
+  "key_points": [
+    "std::min()、std::max()和std::minmax()直接处理值，不接收迭代器参数。",
+    "std::min_element()、std::max_element()和std::minmax_element()处理由迭代器定义的范围。",
+    "std::minmax()的返回结果可用p.first和p.second访问，也可使用C++17结构化绑定。",
+    "对范围使用std::minmax_element()时，返回值是两个迭代器，而不是两个元素值。"
+  ],
+  "examples": [
+    "int x{4}, y{5};\nstd::min(x, y);   // 4\nstd::max(x, y);   // 5",
+    "int x1{2}, x2{9}, x3{3}, x4{12};\nauto p{std::minmax({x1, x2, x3, x4})};\n// p.first == 2, p.second == 12",
+    "std::vector<int> values{11, 33, 22};\nauto [mini, maxi]{std::minmax_element(std::cbegin(values), std::cend(values));}\n// *mini == 11, *maxi == 33"
+  ],
+  "misconceptions": [
+    "std::minmax()返回的不是两个独立返回值，而是包含最小值和最大值的std::pair。",
+    "std::minmax_element()返回的是迭代器对，使用元素值时通常需要解引用。",
+    "std::min_element()和std::max_element()并不返回元素本身。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "std::minmax({2, 9, 3, 12})的结果是什么？",
+      "a": "返回一个std::pair，最小值为2，最大值为12，即first为2、second为12。"
+    },
+    {
+      "q": "std::minmax_element()与std::minmax()的主要区别是什么？",
+      "a": "std::minmax()直接处理值并返回值组成的pair；std::minmax_element()处理迭代器范围并返回指向最小元素和最大元素的迭代器。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++标准库算法的基本调用方式",
+    "迭代器范围"
+  ],
+  "source_pages": [
+    653,
+    654
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1364_最小值_最大值及范围极值算法",
+  "_chunk_pages": [
+    653,
+    656
+  ]
+}

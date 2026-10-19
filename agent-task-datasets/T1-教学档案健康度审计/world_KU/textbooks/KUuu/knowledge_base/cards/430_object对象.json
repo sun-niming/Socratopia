@@ -1,0 +1,43 @@
+{
+  "title": "Object对象",
+  "definition": "Object是所有JavaScript对象的超类（基类）。Object.prototype定义了JavaScript对象的基本方法和属性。Object本身既是一个对象，也是一个构造函数。",
+  "key_points": [
+    "Object是所有JavaScript对象的超类（基类）。",
+    "Object.prototype定义了对象的基本方法和属性。",
+    "Object具有constructor属性和prototype属性。",
+    "constructor属性引用创建对象的构造函数。",
+    "prototype属性引用该对象的原型。"
+  ],
+  "examples": [
+    "Object.prototype",
+    "Object的constructor属性",
+    "Object的prototype属性"
+  ],
+  "misconceptions": [
+    "以为Object只是普通数据类型，不是所有对象的基类。",
+    "以为prototype只属于实例对象，不属于构造函数对象。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "Object.prototype的作用是什么？",
+      "a": "它定义JavaScript对象的基本方法和属性。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "JavaScript对象",
+    "构造函数",
+    "原型"
+  ],
+  "source_pages": [
+    301,
+    304
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "430_object对象",
+  "_chunk_pages": [
+    301,
+    304
+  ]
+}

@@ -1,0 +1,49 @@
+{
+  "title": "标准异常层次与多态捕获",
+  "definition": "C++允许抛出任意类型的异常，但类对象通常是最有用的异常类型。标准异常类通常形成继承层次结构，因此捕获异常时可以利用多态性。标准库抛出的异常属于标准异常层次中的类，并且这些类支持 what() 方法，用于返回描述异常的 const char* 字符串。",
+  "key_points": [
+    "标准异常层次的根类是 std::exception。",
+    "std::runtime_error 和 std::logic_error 等类派生自标准异常体系；图中还列出了 invalid_argument、out_of_range、overflow_error、underflow_error、bad_cast、bad_alloc、system_error、future_error 等异常类。",
+    "每个异常类支持 what() 方法，可将其返回的字符串用于错误信息。",
+    "某些异常类要求在构造对象时提供 what() 返回的描述字符串，例如 runtime_error 和 invalid_argument。"
+  ],
+  "examples": [
+    "try { /* 可能抛出异常的代码 */ } catch (const std::exception& e) { std::cout << e.what(); }",
+    "抛出带描述信息的异常：throw std::invalid_argument(error); 或 throw std::runtime_error(error);"
+  ],
+  "misconceptions": [
+    "异常不一定必须是某个标准异常类，但类对象通常比基本类型更适合作为异常。",
+    "what() 返回的是 const char* 描述字符串，不是异常类型名称本身。",
+    "捕获 std::exception 的引用可以处理其派生类异常，但会丢失只在具体派生类中提供的额外信息。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "标准异常层次结构的根类是什么？",
+      "a": "std::exception。"
+    },
+    {
+      "q": "如何取得标准异常的文本描述？",
+      "a": "调用异常对象的 what() 方法，它返回一个描述异常的 const char* 字符串。"
+    },
+    {
+      "q": "为什么可以用 const std::exception& 捕获多种标准异常？",
+      "a": "因为标准异常类通常具有继承层次结构，具体异常类派生自 std::exception，可以利用多态性通过基类引用捕获。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++异常抛出与捕获",
+    "C++继承与多态"
+  ],
+  "source_pages": [
+    447,
+    448
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "911_标准异常层次与多态捕获",
+  "_chunk_pages": [
+    445,
+    448
+  ]
+}

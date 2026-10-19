@@ -1,0 +1,42 @@
+{
+  "title": "有向图不等运算符转发给相等运算符",
+  "definition": "有向图的 `operator!=` 可以直接使用相等运算符的结果实现：两个图不相等，当且仅当它们不满足相等条件。典型实现是 `return !(*this == rhs);`。",
+  "key_points": [
+    "`operator!=` 不需要重复实现节点集合和边集合的比较逻辑。",
+    "实现中先调用 `operator==`，再对结果取逻辑非。",
+    "这种写法可以避免两个比较运算符的判断规则不一致。"
+  ],
+  "examples": [
+    "典型实现：`bool operator!=(const directed_graph& rhs) const { return !(*this == rhs); }`",
+    "逻辑关系为：$$a\\ne b \\iff \\neg(a=b)$$"
+  ],
+  "misconceptions": [
+    "`operator!=` 不是简单比较对象地址。",
+    "不能把 `operator!=` 实现成只比较节点数量不同；节点数量相同但边不同的图也可能不相等。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "directed_graph 的 `operator!=` 如何实现？",
+      "a": "直接返回相等运算符结果的逻辑非，即 `return !(*this == rhs);`。"
+    },
+    {
+      "q": "将 `operator!=` 转发给 `operator==` 的好处是什么？",
+      "a": "避免重复编写比较逻辑，并确保相等和不等的判定规则保持一致。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "有向图相等比较的判定规则"
+  ],
+  "source_pages": [
+    729,
+    730
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1517_有向图不等运算符转发给相等运算符",
+  "_chunk_pages": [
+    729,
+    732
+  ]
+}

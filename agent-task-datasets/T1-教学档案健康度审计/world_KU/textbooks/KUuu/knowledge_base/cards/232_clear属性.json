@@ -1,0 +1,44 @@
+{
+  "title": "clear属性",
+  "definition": "clear 是 CSS 中用于清除浮动影响的属性，基本语法为 clear:left|right|both|none。它只影响自身，不会对其他相邻元素造成影响。",
+  "key_points": [
+    "left：不允许在该元素左边有浮动元素。",
+    "right：不允许在该元素右边有浮动元素。",
+    "both：该元素左右两边都不允许有浮动元素。",
+    "none：该元素左右两边都允许有浮动元素。",
+    "清除的是浮动元素对自身的影响，不能改变其他元素的浮动状态。"
+  ],
+  "examples": [
+    "clear: both;",
+    "clear: left;"
+  ],
+  "misconceptions": [
+    "以为 clear 会让前面的浮动元素失效；实际上 clear 只作用于自身。",
+    "以为 clear 会影响其他相邻元素的位置；实际上它不影响其他元素本身，只限制自身周围的浮动。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "clear: both 表示什么？",
+      "a": "表示该元素左右两边都不允许有浮动元素。"
+    },
+    {
+      "q": "clear 和 float 的作用对象有什么不同？",
+      "a": "float 会影响其他相邻元素；clear 只影响自身。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "浮动定位基础"
+  ],
+  "source_pages": [
+    145,
+    148
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "232_clear属性",
+  "_chunk_pages": [
+    145,
+    148
+  ]
+}

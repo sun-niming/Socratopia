@@ -1,0 +1,51 @@
+{
+  "title": "为容器类型参数提供默认值",
+  "definition": "类模板的模板参数可以具有默认值。Grid 可以把第二个模板参数的默认值设为使用 `T` 的 vector，例如 `std::vector<std::optional<T>>`，这样用户既可以只写 `Grid<int>` 使用默认底层容器，也可以显式指定 deque 等其他容器。",
+  "key_points": [
+    "默认参数可以使用前面模板参数中的类型 T。",
+    "概念上可写为：\n```cpp\ntemplate <typename T,\n          ContainerType Container = std::vector<std::optional<T>>>\nclass Grid;\n```",
+    "有默认值后，`Grid<int>` 等价于使用 `std::vector<std::optional<int>>` 作为底层容器。",
+    "在类模板的成员函数定义的模板声明中，不能重复写已经在主模板声明中指定的默认模板参数。",
+    "标准库的 `std::stack`、`std::queue` 和 `std::priority_queue` 也使用带默认值的 Container 模板类型参数。"
+  ],
+  "examples": [
+    "显式指定 deque：`Grid<int, std::deque<std::optional<int>>> myDequeGrid;`。",
+    "显式指定 vector：`Grid<int, std::vector<std::optional<int>>> myVectorGrid;`。",
+    "使用默认容器：`Grid<int> myVectorGrid2;`，其默认底层容器为 `std::vector<std::optional<int>>`。"
+  ],
+  "misconceptions": [
+    "有默认值并不意味着不能显式指定 Container；用户仍然可以选择 vector、deque 或其他满足约束的容器。",
+    "默认值不是简单固定写成 `std::vector<T>`；原文的网格单元使用 `std::optional<T>`，因此默认容器类型是 `std::vector<std::optional<T>>`。",
+    "默认模板参数只应在主模板声明中指定，成员函数定义的模板头中不能重复指定默认值。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`Grid<int>` 使用什么底层容器？",
+      "a": "使用默认的 `std::vector<std::optional<int>>` 作为 Container。"
+    },
+    {
+      "q": "默认模板参数可以引用前面的模板参数吗？",
+      "a": "可以。Grid 的第二个模板参数默认值可以使用第一个模板参数 T，例如 `std::vector<std::optional<T>>`。"
+    },
+    {
+      "q": "为什么成员函数定义的模板声明中不能重复默认参数？",
+      "a": "C++ 语法要求默认模板参数在主模板声明中指定，方法定义的模板头不能再次重复指定。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "类模板的默认模板参数",
+    "std::optional 的基本用法"
+  ],
+  "source_pages": [
+    758,
+    759
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1571_为容器类型参数提供默认值",
+  "_chunk_pages": [
+    757,
+    760
+  ]
+}

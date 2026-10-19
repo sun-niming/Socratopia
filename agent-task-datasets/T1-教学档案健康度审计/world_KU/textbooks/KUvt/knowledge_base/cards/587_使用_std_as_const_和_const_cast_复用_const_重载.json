@@ -1,0 +1,56 @@
+{
+  "title": "使用 std::as_const 和 const_cast 复用 const 重载实现",
+  "definition": "Scott Meyers 的 const_cast 模式用于减少 const 和非 const 重载之间的重复代码。通常先实现 const 版本，再在非 const 版本中通过 std::as_const(*this) 调用 const 版本，最后使用 const_cast 去除返回引用上的 const，从而得到非 const 引用。",
+  "key_points": [
+    "const 版本通常负责实际逻辑和边界检查。",
+    "std::as_const(*this) 将当前对象视为 const 对象，以便调用 const 重载。",
+    "const 版本返回 const 引用后，可使用 const_cast 将其转换为非 const 引用。",
+    "只有在确认实际对象不是 const、且被转换的对象原本允许修改时，才能安全地去除 const。"
+  ],
+  "examples": [
+    "const 版本：const SpreadsheetCell& Spreadsheet::getCellAt(size_t x, size_t y) const { verifyCoordinate(x, y); return m_cells[x][y]; }",
+    "非 const 版本：SpreadsheetCell& Spreadsheet::getCellAt(size_t x, size_t y) { return const_cast<SpreadsheetCell&>(std::as_const(*this).getCellAt(x, y)); }",
+    "std::as_const 定义在 <utility> 中。"
+  ],
+  "misconceptions": [
+    "const_cast 不是把真正的 const 对象安全地变成可修改对象；如果原对象本身是 const，之后通过非 const 引用修改它会导致未定义行为。",
+    "这个模式的目的主要是复用实现、避免代码重复，而不是绕过 const 安全性。",
+    "std::as_const(*this) 先调用的是 const 重载，不能直接调用非 const 重载。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "Scott Meyers 的 const_cast 模式通常先实现哪个版本？",
+      "a": "通常先实现 const 版本。"
+    },
+    {
+      "q": "非 const getCellAt() 如何复用 const 版本？",
+      "a": "使用 std::as_const(*this) 调用 const 版本，再用 const_cast 将返回的 const SpreadsheetCell& 转换为 SpreadsheetCell&。"
+    },
+    {
+      "q": "std::as_const 定义在哪个头文件中？",
+      "a": "定义在 <utility> 中。"
+    },
+    {
+      "q": "为什么这个模式可以减少代码重复？",
+      "a": "因为边界检查和实际访问逻辑只需在 const 版本中实现，非 const 版本直接转调它。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "const 成员函数重载",
+    "引用与类型转换",
+    "std::as_const",
+    "const_cast"
+  ],
+  "source_pages": [
+    280,
+    280
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 std::as_const const_cast const overload Scott Meyers pattern 安全用法 cppreference",
+  "concept_id": "587_使用_std_as_const_和_const_cast_复用_const_重载",
+  "_chunk_pages": [
+    277,
+    280
+  ]
+}

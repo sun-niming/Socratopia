@@ -1,0 +1,45 @@
+{
+  "title": "使用多继承实现混入类",
+  "definition": "使用多继承实现混入类时，具体类一方面从主对象层次结构中的父类派生，另一方面从表示附加能力的混入类派生。混入类通常实现一项定义明确且可复用的功能，并可提供一种表示该能力的类型。",
+  "key_points": [
+    "混入类的实现方式与普通类类似，通常包含该功能的实际代码。",
+    "使用混入类的语法与多重继承相同：具体类同时继承主层次结构的父类和混入类。",
+    "混入类不仅复用功能，还可以使程序按该能力识别或组织对象，而不必关心对象所属的具体派生类。"
+  ],
+  "examples": [
+    "一个表示可移动能力的混入类可以写成：\nclass Movable {\npublic:\n    virtual void move() { /* 移动物品的实现 */ }\n};\n",
+    "让 FloatingCastle 同时继承 Castle 和 Movable：\nclass FloatingCastle : public Castle, public Movable {\n    /* ... */\n};\n",
+    "这样，FloatingCastle 仍位于 Castle 所在的主层次结构中，同时获得 Movable 提供的移动功能。"
+  ],
+  "misconceptions": [
+    "多继承中的所有父类都不必属于同一条主对象层次结构；其中一个父类可以专门作为能力混入类。",
+    "混入类不是只声明接口而不提供实现；原文强调混入类可以包含可复用的实际代码。",
+    "使用混入类不会改变具体类在主层次结构中的合理位置。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何让 FloatingCastle 获得 Movable 的功能，同时保留其 Castle 身份？",
+      "a": "令 FloatingCastle 同时公开继承 Castle 和 Movable：class FloatingCastle : public Castle, public Movable { /* ... */ };"
+    },
+    {
+      "q": "Movable 混入类除了提供移动代码，还能提供什么？",
+      "a": "它还能为可移动对象提供一种共同类型，使程序可以组织一组可移动对象，而不必了解它们的具体派生类。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "多继承",
+    "虚函数与派生类"
+  ],
+  "source_pages": [
+    938,
+    939
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1936_使用多继承实现混入类",
+  "_chunk_pages": [
+    937,
+    940
+  ]
+}

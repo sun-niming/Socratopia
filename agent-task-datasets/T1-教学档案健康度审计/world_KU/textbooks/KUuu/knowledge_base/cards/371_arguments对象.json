@@ -1,0 +1,37 @@
+{
+  "title": "arguments对象",
+  "definition": "函数内部会把传入的实参保存在名为 arguments 的类数组对象中，因此可以在函数内部通过它访问所有传递的实参。",
+  "key_points": [
+    "arguments 存放的是调用时传入的实参",
+    "arguments 是类数组对象，不是普通数组",
+    "函数内部可以通过 arguments 访问所有实参"
+  ],
+  "examples": [
+    "function demo(a,b){\n  console.log(arguments);\n}"
+  ],
+  "misconceptions": [
+    "arguments 不是普通数组，而是类数组对象",
+    "arguments 里保存的是实参，不是形参"
+  ],
+  "qa_pairs": [
+    {
+      "q": "arguments 对象中保存的是什么？",
+      "a": "它保存函数调用时传入的所有实参，是一个类数组对象。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "形参与实参"
+  ],
+  "source_pages": [
+    253,
+    256
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "371_arguments对象",
+  "_chunk_pages": [
+    253,
+    256
+  ]
+}

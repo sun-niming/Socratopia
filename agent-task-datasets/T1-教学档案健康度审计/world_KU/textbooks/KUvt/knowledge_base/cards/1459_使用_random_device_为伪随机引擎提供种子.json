@@ -1,0 +1,44 @@
+{
+  "title": "使用 random_device 为伪随机引擎提供种子",
+  "definition": "现代 C++ 中，教材建议优先使用 random_device 生成伪随机引擎的种子，而不是单纯使用当前时间。示例先检查 `seeder.entropy()`：如果熵非零，就使用 `seeder()` 的结果；否则退回使用 `time(nullptr)`。随后把种子转换为 mt19937 的 result_type，并用于构造引擎。",
+  "key_points": [
+    "种子决定软件伪随机引擎从哪个状态开始生成序列。",
+    "示例代码使用条件表达式选择种子：`seeder.entropy() ? seeder() : time(nullptr)`。",
+    "种子可能需要转换为引擎要求的结果类型：`static_cast<std::mt19937::result_type>(seed)`。",
+    "random_device 速度较慢，因此适合用于初始化伪随机引擎，而不是替代引擎生成大量结果。"
+  ],
+  "examples": [
+    "```cpp\nstd::random_device seeder;\nconst auto seed{seeder.entropy() ? seeder() : time(nullptr)};\nstd::mt19937 engine{\n    static_cast<std::mt19937::result_type>(seed)\n};\n```"
+  ],
+  "misconceptions": [
+    "使用 random_device 作为种子并不会让 mt19937 变成硬件真随机引擎；mt19937 仍然是软件伪随机引擎。",
+    "代码中的 `time(nullptr)` 是 random_device 不可用或熵为零时的回退方案，不是教材首选方案。",
+    "种子只负责初始化序列；要生成特定范围的结果，仍然需要分布对象。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "教材示例如何选择伪随机引擎的种子？",
+      "a": "先创建 `random_device seeder`，如果 `seeder.entropy()` 非零则使用 `seeder()`，否则使用 `time(nullptr)`。"
+    },
+    {
+      "q": "为什么要把种子转换为 `mt19937::result_type`？",
+      "a": "为了使种子的类型符合 mt19937 引擎构造函数所要求的结果类型。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "random_device 的用途与熵",
+    "软件随机引擎必须配合分布生成指定范围的数"
+  ],
+  "source_pages": [
+    699,
+    700
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 random_device entropy 0.0 硬件熵 time(nullptr) mt19937 seed 推荐实践",
+  "concept_id": "1459_使用_random_device_为伪随机引擎提供种子",
+  "_chunk_pages": [
+    697,
+    700
+  ]
+}

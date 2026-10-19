@@ -1,0 +1,44 @@
+{
+  "title": "strcmp比较字符串是否相等",
+  "definition": "`strcmp` 用来比较两个字符串是否完全相同，原型是 `int strcmp(const char *s1, const char *s2);`。在本项目中，它常用于判断 `method` 是否为 `GET`，以及扩展名是否为 `.html` 或 `.css`。`strcmp` 相等时返回 `0`。",
+  "key_points": [
+    "头文件是 `<string.h>`。",
+    "相等时返回 `0`，不是“真”。",
+    "判断相等时应写成 `strcmp(a, b) == 0`。",
+    "不能把返回值直接当布尔值来理解。"
+  ],
+  "examples": [
+    "`if (strcmp(method, \"GET\") == 0) { ... }`",
+    "`if (strcmp(ext, \".html\") == 0) { ... }`"
+  ],
+  "misconceptions": [
+    "`strcmp` 返回非 0 表示相等。",
+    "`if (strcmp(a, b))` 可以表示相等。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`strcmp(a, b)` 什么时候表示两个字符串相等？",
+      "a": "当返回值等于 `0` 时表示相等。"
+    },
+    {
+      "q": "判断 `method` 是否为 `GET`，应如何写？",
+      "a": "`strcmp(method, \"GET\") == 0`。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C语言基础",
+    "字符串比较基础"
+  ],
+  "source_pages": [
+    97,
+    100
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "151_strcmp比较字符串是否相等",
+  "_chunk_pages": [
+    97,
+    100
+  ]
+}

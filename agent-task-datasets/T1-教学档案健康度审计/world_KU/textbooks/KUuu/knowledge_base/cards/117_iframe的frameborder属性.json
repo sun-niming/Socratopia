@@ -1,0 +1,42 @@
+{
+  "title": "iframe的frameborder属性",
+  "definition": "frameborder 属性用于控制是否显示边框；原文说明它已废弃，建议用 CSS 代替。",
+  "key_points": [
+    "原意是控制边框显示与否",
+    "原文注明该属性已废弃，建议用 CSS 代替"
+  ],
+  "examples": [
+    "<iframe frameborder=\"0\"></iframe>",
+    "<iframe frameborder=\"1\"></iframe>"
+  ],
+  "misconceptions": [
+    "认为 frameborder 仍然是推荐做法；原文明确写出已废弃。",
+    "认为边框显示只能靠 frameborder 控制；原文建议用 CSS 代替。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "iframe 的 frameborder 属性用于什么？",
+      "a": "用于控制是否显示边框。"
+    },
+    {
+      "q": "原文对 frameborder 有什么说明？",
+      "a": "它已废弃，应该用 CSS 代替。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "iframe标签",
+    "HTML属性"
+  ],
+  "source_pages": [
+    77,
+    80
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "117_iframe的frameborder属性",
+  "_chunk_pages": [
+    77,
+    80
+  ]
+}

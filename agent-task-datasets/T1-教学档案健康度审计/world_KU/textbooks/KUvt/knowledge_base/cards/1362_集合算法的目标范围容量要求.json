@@ -1,0 +1,42 @@
+{
+  "title": "集合算法的目标范围容量要求",
+  "definition": "set_union()、set_intersection()、set_difference()和set_symmetric_difference()会把结果写入目标范围，因此调用者必须预先提供足够大的目标存储空间。教材给出的结果大小上限是：并集和对称差集不超过两个输入范围大小之和，交集不超过两个输入范围大小中的较小者，差集不超过第一个输入范围的大小。",
+  "key_points": [
+    "可以先使用result.resize(size(vec1) + size(vec2))为最宽情况分配空间。",
+    "集合算法返回一个输出迭代器，通常指向实际结果的尾后位置；应使用该迭代器限定输出范围。",
+    "不能使用关联容器包括set的迭代器范围作为结果保存区域，因为这些容器不允许修改键。"
+  ],
+  "examples": [
+    "vector<int> result; result.resize(size(vec1) + size(vec2)); auto newEnd = set_union(cbegin(vec1), cend(vec1), cbegin(vec2), cend(vec2), begin(result)); DumpRange(\"The union is: \", begin(result), newEnd);"
+  ],
+  "misconceptions": [
+    "仅声明vector<int> result而不调整大小，不能直接把begin(result)作为有效输出位置。",
+    "result的容量足够不等于已经存在可写元素；使用begin(result)输出前应确保目标范围具有足够大小。",
+    "set的迭代器不能作为这些算法的结果输出范围。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么示例先执行result.resize(size(vec1) + size(vec2))？",
+      "a": "为了确保目标范围足够大，能够保存集合运算结果。"
+    },
+    {
+      "q": "集合算法返回的newEnd有什么用途？",
+      "a": "它标记实际结果的尾后位置，输出结果时应使用begin(result)到newEnd的范围。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "集合算法的运算含义"
+  ],
+  "source_pages": [
+    651,
+    652
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1362_集合算法的目标范围容量要求",
+  "_chunk_pages": [
+    649,
+    652
+  ]
+}

@@ -1,0 +1,64 @@
+{
+  "title": "构造函数的 function-try-block",
+  "definition": "构造函数的 function-try-block 是一种把 try 放在构造函数 ctor-initializer 之前、把 catch 放在构造函数体右花括号之后的异常处理结构。它可以捕获构造函数体以及构造函数初始化器直接或间接抛出的异常。",
+  "key_points": [
+    "基本语法为：MyClass::MyClass() try <ctor-initializer> { /* 构造函数体 */ } catch (const Exception& e) { /* 处理 */ }。",
+    "try 关键字必须紧接在构造函数的 ctor-initializer 之前，catch 位于构造函数体外部。",
+    "catch 可以捕获构造函数体或 ctor-initializer 直接、间接抛出的异常。",
+    "catch 必须重新抛出当前异常或抛出新异常；如果没有显式抛出，运行时会自动重新抛出当前异常。",
+    "catch 可以访问传给构造函数的参数，但不应访问对象成员变量，因为已构造的对象部分会在执行 catch 前销毁。",
+    "如果对象含有在异常发生前已初始化的非类数据成员，例如裸指针资源，则可以在 catch 中访问并释放这些资源。",
+    "function-try-block 中的函数不能使用 return 返回值；构造函数本身没有返回值，因此不受返回值问题影响。",
+    "它主要适用于转换 ctor-initializer 抛出的异常、记录日志，以及释放初始化器中提前分配的裸资源。"
+  ],
+  "examples": [
+    "基本形式：$$\\begin{aligned}\\text{MyClass::MyClass()}\\\\[-2pt]&\\quad\\text{try : }\\langle\\text{ctor-initializer}\\rangle\\\\[-2pt]&\\quad\\{\\ \\text{ /* constructor body */ }\\ \\}\\\\[-2pt]&\\text{catch (const Exception\\& e)}\\\\[-2pt]&\\quad\\{\\ \\text{ /* handle or rethrow */ }\\ \\}\\end{aligned}$$",
+    "若成员 SubObject 的构造函数抛出异常，MyClass 的构造函数 function-try-block 可以捕获该异常并记录日志或转换后重新抛出。",
+    "示例异常：SubObject(int i) { throw std::runtime_error{\"Exception by SubObject ctor\"}; }"
+  ],
+  "misconceptions": [
+    "普通的构造函数体内 try-catch 不能捕获成员初始化器中抛出的异常；要处理初始化器异常，应使用构造函数 function-try-block。",
+    "function-try-block 的 catch 不是在一个完整可用的对象上执行；已构造的对象部分会在进入 catch 前销毁，因此通常不能访问成员变量。",
+    "catch 不会正常地把构造函数变成成功返回；异常若未被转换为其他异常，最终仍会重新抛出。",
+    "function-try-block 并非只能用于普通函数，教材指出普通函数和构造函数都可以使用，但本节重点是构造函数。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "构造函数 function-try-block 中 try 应放在哪里？",
+      "a": "应紧接在构造函数的 ctor-initializer 之前；对应的 catch 放在构造函数体右花括号之后。"
+    },
+    {
+      "q": "构造函数 function-try-block 能捕获哪些异常？",
+      "a": "能捕获构造函数体以及 ctor-initializer 直接或间接抛出的异常。"
+    },
+    {
+      "q": "为什么 function-try-block 的 catch 中通常不能访问对象成员变量？",
+      "a": "因为已构造的对象部分会在执行 catch 之前销毁。"
+    },
+    {
+      "q": "如果 function-try-block 的 catch 没有显式重新抛出异常，会怎样？",
+      "a": "运行时会自动重新抛出当前异常。"
+    },
+    {
+      "q": "构造函数 function-try-block 的典型用途有哪些？",
+      "a": "转换 ctor-initializer 抛出的异常、记录日志，以及释放在 ctor-initializer 中提前分配的裸资源。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "构造函数初始化器",
+    "C++异常处理基础",
+    "对象构造与析构顺序"
+  ],
+  "source_pages": [
+    463,
+    464
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "936_构造函数的_function_try_block",
+  "_chunk_pages": [
+    461,
+    464
+  ]
+}

@@ -1,0 +1,49 @@
+{
+  "title": "在 Spreadsheet 中声明并在类外定义嵌套类 Cell",
+  "definition": "Spreadsheet 可以在类内部声明嵌套类 `Cell`，再使用限定名 `Spreadsheet::Cell` 在类外定义该嵌套类。原文先在 Spreadsheet 类中写 `class Cell;`，随后定义 `class Spreadsheet::Cell`。",
+  "key_points": [
+    "Spreadsheet 内部的 `class Cell;` 是嵌套类的声明。",
+    "类外定义时必须使用限定名 `class Spreadsheet::Cell`，表明 Cell 属于 Spreadsheet。",
+    "嵌套类可以拥有自己的构造函数和成员，例如默认构造函数 `Cell() = default;` 以及接收初始值的构造函数 `Cell(double initialValue);`。"
+  ],
+  "examples": [
+    "声明嵌套类：`export class Spreadsheet { public: class Cell; Spreadsheet(size_t width, size_t height, const SpreadsheetApplication& theApp); };`",
+    "类外定义：`class Spreadsheet::Cell { public: Cell() = default; Cell(double initialValue); };`"
+  ],
+  "misconceptions": [
+    "`Cell` 不是与 Spreadsheet 完全无关的普通全局类；它是声明在 Spreadsheet 内部的嵌套类，完整名称为 `Spreadsheet::Cell`。",
+    "`class Cell;` 只是声明，不是完整的类定义；成员和实现可以在后面补充。",
+    "嵌套类的名称不能在类外直接写成 `class Cell` 来代替 `class Spreadsheet::Cell`。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何在 Spreadsheet 中声明一个嵌套类 Cell？",
+      "a": "在 Spreadsheet 类内部写 `class Cell;`。"
+    },
+    {
+      "q": "如何在类外定义 Spreadsheet 的嵌套类 Cell？",
+      "a": "写成 `class Spreadsheet::Cell { ... };`，使用 `Spreadsheet::Cell` 这一限定名称。"
+    },
+    {
+      "q": "原文中 Cell 提供了哪些构造函数？",
+      "a": "提供了默认构造函数 `Cell() = default;`，以及接收 `double initialValue` 的构造函数 `Cell(double initialValue);`。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++ 类声明与定义",
+    "嵌套类",
+    "作用域限定符 `::`"
+  ],
+  "source_pages": [
+    287,
+    288
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "376_在_spreadsheet_中声明并在类外定义嵌套类_cell",
+  "_chunk_pages": [
+    285,
+    288
+  ]
+}

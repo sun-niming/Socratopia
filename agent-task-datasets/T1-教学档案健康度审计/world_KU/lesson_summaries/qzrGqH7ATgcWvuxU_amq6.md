@@ -1,0 +1,2 @@
+<!-- windowStart: 10 -->
+对话从《Spring实战》3.2.3延续，讨论了Spring Data JDBC的实体注解。学习者答出默认规则"类名对同名表"，理解了@Table用法，并正确回答窄接口动机（只暴露需要的功能），伙伴补充错误在编译期暴露；也答出宽接口因方便少写重复代码。进入3.2.4，伙伴讲解CommandLineRunner/ApplicationRunner预加载数据，学习者答出data.sql在非关系数据库卡在SQL不匹配。随后进入3.3 JPA，伙伴提问规范与实现分层的意义。

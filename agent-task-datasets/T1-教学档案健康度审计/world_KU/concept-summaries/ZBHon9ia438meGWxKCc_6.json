@@ -1,0 +1,139 @@
+{
+  "conversationId": "ZBHon9ia438meGWxKCc_6",
+  "generatedAt": 1782641648531,
+  "pagesRange": "p.66",
+  "sections": [
+    {
+      "type": "tldr",
+      "content": "这一节把 Shell 里最常见的三件事串起来了：用测试表达式做判断、用 `while` / `read` 读数据、用环境变量理解终端和命令查找的行为。"
+    },
+    {
+      "type": "narrative",
+      "content": "一开始主要在练 `if` 里的条件判断：`-o`、`-a`、`!`，以及文件属性和整数比较。接着把这些判断放进 `while`，再结合 `read`、`IFS` 逐行读文件、按字段拆分输入。最后回到第 66 页，把 `$HOME`、`$PWD`、`$USER`、`$SHELL`、`$PATH`、`$PS1`、`$PS2`、`$IFS` 这些常用环境变量重新按“我是谁 / 我在哪 / 命令去哪找 / 提示符怎么显示”整理了一遍。"
+    },
+    {
+      "type": "concepts",
+      "items": [
+        {
+          "name": "Shell 条件测试",
+          "body": "`if [ 条件 ]` 的核心是：条件成立，测试命令返回成功状态 `0`，就进 `then`；不成立就走 `else`。\n\n常见写法：\n\n```bash\\nif [ -f a.txt -o -d a.txt ]\\nthen\n    echo ok\\nelse\n    echo bad\\nfi\n```\n\n- `-o`：或，任一条件成立就算真\n- `-a`：且，两个条件都成立才算真\n- `!`：取反，把真变假、假变真\n- `-f`：普通文件\n- `-d`：目录\n- `-r`：可读\n- `-w`：可写\n- `-x`：可执行\n- `-gt`：整数大于\n- `-eq`：整数等于\n\n一个很重要的小点：Shell 里“成功”对应的是返回码 `0`，不是“数字零变量”，所以要把“条件真假”和“返回码是否为 `0`”连起来看。"
+        },
+        {
+          "name": "`while` 和 `read`",
+          "body": "`while` 负责重复执行，`read` 负责把输入读进变量。最常见的组合是逐行读文件：\n\n```bash\\nwhile read line\\ndo\n    echo \"[$line]\"\\ndone < a.txt\n```\n\n这里 `done < a.txt` 表示把文件内容送给 `read`，每次读一行。\n\n几个规律：\n\n- `read line`：一行放进 `line`\n- `read first last`：按字段拆，前面的变量先拿，最后一个变量会接住剩下的全部内容\n- 如果变量比字段多，拿不到值的变量会变成空字符串\n- `while` 里的条件每轮都会重新判断，所以常用于计数循环\n\n例如：\n\n```bash\\ncount=3\\nwhile [ $count -gt 0 ]\\ndo\n    echo $count\n    let count=count-1\\ndone\n```\n\n会输出 `3`、`2`、`1`。"
+        },
+        {
+          "name": "`IFS` 和字段拆分",
+          "body": "`IFS` 是字段分隔符。`read` 拆字段时会参考它。\n\n默认情况下，`IFS` 包含空格、Tab、换行，所以：\n\n```bash\\nread a b c\n```\n\n遇到 `red   green` 这种输入时，连续空白通常会被折叠，不会凭空生成一个空字段。\n\n如果改成逗号分隔：\n\n```bash\\nIFS=,\\nread a b\n```\n\n输入 `red,blue,green` 时，`a=red`，`b=blue,green`，因为最后一个变量会接住剩余内容。\n\n另一个常见细节：\n\n- 空白分隔符通常会折叠连续空白\n- 像逗号这样的非空白分隔符，会保留空字段\n\n所以 `red,,green` 里间隔的空字段会真的读出来，可能出现某个变量为空字符串。"
+        },
+        {
+          "name": "常用环境变量",
+          "body": "这一页把几个最常见的环境变量串成了一张速查表：\n\n```bash\n$HOME   用户主目录\n$PWD    当前所在目录\n$USER   当前用户名\n$SHELL  当前用户使用的 shell\n$PATH   命令查找路径\n$PS1    主提示符\n$PS2    副提示符\n$IFS    字段分隔符\n```\n\n直觉记法：\n\n- `$HOME`：家在哪\n- `$PWD`：现在在哪\n- `$USER`：我是谁\n- `$SHELL`：我默认用哪个 shell\n- `$PATH`：Shell 去哪些目录找命令\n- `$PS1`：平时等你输入命令时看到的提示符\n- `$PS2`：命令没写完、继续输入时的提示符\n- `$IFS`：`read` 拆字段时的分隔规则\n\n`$PATH` 是一串用冒号分隔的目录，Shell 会从左到右找命令。`$PS1` / `$PS2` 则影响的是提示符长什么样，不影响命令本身的结果。\n\n这一节还刚提到 `export`：它的作用是把普通变量变成环境变量，让子进程也能继承到。"
+        }
+      ]
+    },
+    {
+      "type": "key-terms",
+      "items": [
+        {
+          "term": "`-o`",
+          "definition": "`OR`，两边任一条件成立就为真。"
+        },
+        {
+          "term": "`-a`",
+          "definition": "`AND`，两边都成立才为真。"
+        },
+        {
+          "term": "`!`",
+          "definition": "取反。"
+        },
+        {
+          "term": "`-f`",
+          "definition": "判断是否为普通文件。"
+        },
+        {
+          "term": "`-d`",
+          "definition": "判断是否为目录。"
+        },
+        {
+          "term": "`-r`",
+          "definition": "判断是否可读。"
+        },
+        {
+          "term": "`-w`",
+          "definition": "判断是否可写。"
+        },
+        {
+          "term": "`-x`",
+          "definition": "判断是否可执行。"
+        },
+        {
+          "term": "`-gt`",
+          "definition": "整数大于。"
+        },
+        {
+          "term": "`-eq`",
+          "definition": "整数等于。"
+        },
+        {
+          "term": "`read`",
+          "definition": "从输入中读取一行或若干字段到变量里。"
+        },
+        {
+          "term": "`IFS`",
+          "definition": "字段分隔符，决定 `read` 怎么切分输入。"
+        },
+        {
+          "term": "`PATH`",
+          "definition": "命令搜索路径，Shell 按顺序在这里找可执行文件。"
+        },
+        {
+          "term": "`PS1`",
+          "definition": "主提示符。"
+        },
+        {
+          "term": "`PS2`",
+          "definition": "副提示符，用在命令未写完时。"
+        },
+        {
+          "term": "`export`",
+          "definition": "把变量导出为环境变量，供子进程继承。"
+        }
+      ]
+    },
+    {
+      "type": "open-question",
+      "content": "`export` 之后进入一个新的 `bash`，这个变量为什么还能被看到？它和普通变量的边界到底在哪里？"
+    },
+    {
+      "type": "review-questions",
+      "items": [
+        {
+          "question": "`[ -f a.txt -o -d a.txt ]` 这句条件在判断什么？",
+          "hint": "先分别理解 `-f` 和 `-d`，再看 `-o`。",
+          "answer": "它在判断 `a.txt` 是否是普通文件**或者**目录；只要有一个条件成立，就进入 `then`。"
+        },
+        {
+          "question": "`count=3`，循环体是先 `echo $count`，再 `let count=count-1`，会依次输出什么？",
+          "hint": "注意每一轮先打印，再减一。",
+          "answer": "会输出 `3`、`2`、`1`。当 `count` 变成 `0` 后，下一轮判断失败，循环结束，不会输出 `0`。"
+        },
+        {
+          "question": "`IFS=, read a b`，输入是 `red,blue,green`，`a` 和 `b` 分别是什么？",
+          "hint": "记住最后一个变量会接住剩余内容。",
+          "answer": "`a=red`，`b=blue,green`。"
+        },
+        {
+          "question": "`$HOME` 和 `$PWD` 的区别是什么？",
+          "hint": "一个表示“家”，一个表示“现在站的位置”。",
+          "answer": "`$HOME` 是用户主目录；`$PWD` 是当前所在目录，`cd` 之后会变，`$HOME` 一般不变。"
+        },
+        {
+          "question": "`$PS2` 控制的是什么？",
+          "hint": "想一想命令还没写完时，Shell 让你继续输入的那个提示符。",
+          "answer": "`$PS2` 控制副提示符，也就是命令未结束、需要继续输入时显示的提示符。"
+        }
+      ]
+    }
+  ]
+}

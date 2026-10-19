@@ -1,0 +1,44 @@
+{
+  "title": "exec返回匹配结果",
+  "definition": "RegExp.exec(字符串) 会在字符串中执行正则匹配，并返回一个“匹配结果数组”。其中 r[0] 表示整个匹配到的文本，r[1]、r[2]、r[3] 等依次表示各个捕获组的内容。若正则带有 g 标志，并配合 while 循环反复调用 exec，可以依次取得多个匹配结果；当没有可匹配内容时返回 null。",
+  "key_points": [
+    "返回的是匹配结果数组，而不是布尔值。",
+    "r[0] 是整体匹配结果，后续下标是分组结果。",
+    "正则带 g 时可重复调用 exec 逐个取出匹配项，直到返回 null。"
+  ],
+  "examples": [
+    "let reg4=/^rgb\\((\\d+),(\\d+),(\\d+)\\)$/ig;\nlet str4=\"rgb(205,7,28)\"\nlet r4=reg4.exec(str4)\nif(r4){\n    console.log(\"整体匹配结果：\"+r4[0])\n    console.log(\"第1组结果：\"+r4[1])\n    console.log(\"第2组结果：\"+r4[2])\n    console.log(\"第3组结果：\"+r4[3])\n}",
+    "let reg2=/\\d+/ig;\nlet str2=\"邮政编码是：712100，电话号码：87092352。\"\nlet r=null\nwhile(r=reg2.exec(str2)){\n    console.log(r, r[0])\n}"
+  ],
+  "misconceptions": [
+    "exec 不是直接返回所有文本，而是返回当前一次匹配的结果。",
+    "r[0] 不是第 1 个分组，而是整个匹配串。",
+    "没有匹配时不会返回空字符串，而是返回 null。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "exec 返回结果中 r[0] 和 r[1] 分别表示什么？",
+      "a": "r[0] 表示整个匹配结果，r[1] 表示第 1 个捕获组的内容。"
+    },
+    {
+      "q": "为什么 exec 常和 while 一起使用？",
+      "a": "因为带 g 标志时，while 可以反复调用 exec 依次取得后续匹配，直到返回 null。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "正则表达式基础",
+    "字符串与正则对象"
+  ],
+  "source_pages": [
+    321,
+    322
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "432_exec返回匹配结果",
+  "_chunk_pages": [
+    321,
+    324
+  ]
+}

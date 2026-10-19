@@ -1,0 +1,43 @@
+{
+  "title": "Shell变量的两大类型",
+  "definition": "教材指出，shell 变量分为两类。第一类是标准 shell 变量，即用户登录时，Shell 为建立用户环境而注册的变量，也称环境变量。第二类是用户自己定义的变量，即用户变量，教材括注为临时变量。",
+  "key_points": [
+    "Shell 变量分为标准 shell 变量和用户变量两类",
+    "标准 shell 变量是在用户登录时由 Shell 为建立用户环境而注册的变量",
+    "标准 shell 变量也称环境变量",
+    "用户自己定义的变量称用户变量，教材括注为临时变量"
+  ],
+  "examples": [
+    "环境变量：用户登录时由 Shell 注册，用于建立用户环境",
+    "用户变量：用户自己定义的临时变量"
+  ],
+  "misconceptions": [
+    "误以为 Shell 变量只有用户自己定义的变量，教材还列出了环境变量",
+    "误以为环境变量和标准 shell 变量是两类不同变量，教材说明前者也称后者"
+  ],
+  "qa_pairs": [
+    {
+      "q": "Shell 变量分为哪两类？",
+      "a": "分为标准 shell 变量和用户变量两类。"
+    },
+    {
+      "q": "什么是环境变量？",
+      "a": "教材中环境变量指标准 shell 变量，即用户登录时 Shell 为建立用户环境而注册的变量。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "Shell变量"
+  ],
+  "source_pages": [
+    57,
+    60
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "106_shell变量的两大类型",
+  "_chunk_pages": [
+    57,
+    60
+  ]
+}

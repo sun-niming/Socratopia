@@ -1,0 +1,38 @@
+{
+  "title": "sigaction 安装信号处理",
+  "definition": "`sigaction()` 用于安装更可靠的信号处理方式。本讲义中为 `SIGCHLD` 安装处理函数：先把 `struct sigaction sa` 清零，设置 `sa.sa_handler`，清空 `sa.sa_mask`，并设置 `sa.sa_flags = SA_RESTART`，最后调用 `sigaction(SIGCHLD, &sa, NULL)`。",
+  "key_points": [
+    "原型：`int sigaction(int signum, const struct sigaction *act, struct sigaction *oldact);`",
+    "项目中把 `SIGCHLD` 绑定到子进程回收函数。",
+    "建议设置 `SA_RESTART`，但仍要处理可能出现的 `EINTR`。"
+  ],
+  "examples": [
+    "示例：`struct sigaction sa; memset(&sa, 0, sizeof(sa)); sa.sa_handler = handle_sigchld; sigemptyset(&sa.sa_mask); sa.sa_flags = SA_RESTART; sigaction(SIGCHLD, &sa, NULL);`"
+  ],
+  "misconceptions": [
+    "误以为 `signal()` 和 `sigaction()` 完全等价。",
+    "误以为设置了 `SA_RESTART` 就永远不会出现 `EINTR`。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么这里推荐用 `sigaction` 处理 `SIGCHLD`？",
+      "a": "因为它提供更可靠、可控的信号处理方式，适合安装子进程回收函数，并且可以设置 `SA_RESTART`。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "信号",
+    "SIGCHLD"
+  ],
+  "source_pages": [
+    61,
+    64
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "105_sigaction_安装信号处理",
+  "_chunk_pages": [
+    61,
+    64
+  ]
+}

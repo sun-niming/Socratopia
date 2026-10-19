@@ -1,0 +1,44 @@
+{
+  "title": "固定 HTML 响应",
+  "definition": "在还没有读取文件时，可以先返回一段固定的 HTML 页面。做法是先构造响应头字符串，写入状态行、`Content-Type`、`Content-Length` 和 `Connection: close`，再用 `send_all()` 依次发送响应头和 Body。这里的 Body 可以是一个固定的 HTML 字符串。",
+  "key_points": [
+    "可以先不读文件，直接返回固定 HTML。",
+    "响应头里要写 `Content-Length` 和 `Connection: close`。",
+    "先发送 header，再发送 body。",
+    "发送时不要假设一次 `send()` 就能发完。"
+  ],
+  "examples": [
+    "const char *body = \"<html><body><h1>Hello Web Server</h1></body></html>\";\nchar header[512];\nsnprintf(header, sizeof(header),\n\"HTTP/1.1 200 OK\\r\\n\"\n\"Content-Type: text/html; charset=utf-8\\r\\n\"\n\"Content-Length: %zu\\r\\n\"\n\"Connection: close\\r\\n\"\n\"\\r\\n\",\nstrlen(body));\nsend_all(client_fd, header, strlen(header));\nsend_all(client_fd, body, strlen(body));"
+  ],
+  "misconceptions": [
+    "只有读取文件后才能返回网页。",
+    "响应头和响应体必须一次性拼成一个大字符串再发送。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "固定 HTML 响应发送时通常分几步？",
+      "a": "两步：先发响应头，再发 body。"
+    },
+    {
+      "q": "为什么这里也要写 Content-Length？",
+      "a": "让客户端知道响应体有多少字节，便于稳定接收。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "HTTP 响应最小格式",
+    "Content-Length 的含义",
+    "send_all 的作用"
+  ],
+  "source_pages": [
+    17,
+    20
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "016_固定_html_响应",
+  "_chunk_pages": [
+    17,
+    20
+  ]
+}

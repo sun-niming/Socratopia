@@ -1,0 +1,44 @@
+{
+  "title": "Windows和GNU宏可能干扰std::min和std::max",
+  "definition": "某些平台头文件可能定义名为min和max的非标准宏，例如Windows头文件中的min()和max()。宏可能对参数进行多次求值，从而与C++标准库的std::min()和std::max()产生冲突。使用标准库版本时，应明确写出std::min和std::max；如果宏仍然干扰，可以在函数名外再加一对括号，或在包含Windows头文件前定义NOMINMAX以禁用相关宏。",
+  "key_points": [
+    "非标准min和max宏可能与std::min()和std::max()冲突。",
+    "宏参数可能被多次展开和求值，而std::min()和std::max()对每个参数只求值一次。",
+    "可使用(std::max)(1, 2)这种写法避免函数名被宏替换。",
+    "也可以在包含Windows头文件之前定义NOMINMAX来禁用Windows的min和max宏。"
+  ],
+  "examples": [
+    "auto maxValue = {(std::max)(1, 2)};",
+    "在包含Windows头文件之前定义：\n#define NOMINMAX"
+  ],
+  "misconceptions": [
+    "写出min(1, 2)并不一定调用std::min()，在某些平台上它可能被宏替换。",
+    "宏和函数不是同一种机制；宏不会遵循函数只对参数求值一次的语义。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么推荐明确使用std::min()和std::max()？",
+      "a": "因为平台头文件可能定义同名宏，明确使用标准库名称可以减少冲突，并避免宏参数可能被多次求值的问题。"
+    },
+    {
+      "q": "如何用额外括号避免max宏干扰？",
+      "a": "可以写成(std::max)(1, 2)，使宏无法匹配函数名max。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "宏替换",
+    "命名空间与std::限定"
+  ],
+  "source_pages": [
+    654,
+    654
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1366_windows和gnu宏可能干扰std_min和std_max",
+  "_chunk_pages": [
+    653,
+    656
+  ]
+}

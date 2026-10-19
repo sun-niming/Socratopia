@@ -1,0 +1,42 @@
+{
+  "title": "for 循环格式3：C 风格写法",
+  "definition": "Shell 还支持格式3的 for 循环，写作“for ((e1;e2;e3)); do 命令列表; done”。教材说明这种语法同 C 语言中的 for，因此它采用与 C 风格相似的三段表达式形式。",
+  "key_points": [
+    "基本形式为：for ((e1;e2;e3)) do 命令列表 done",
+    "这是 Shell 中的第三种 for 写法",
+    "教材明确说明：语法同 C 中的 For"
+  ],
+  "examples": [
+    "for ((e1;e2;e3))\ndo\n命令列表\ndone"
+  ],
+  "misconceptions": [
+    "不要把这种写法与“for var in word_list”混为一谈；它是另一种独立格式。",
+    "不要遗漏双小括号；格式3的标志就是“for ((...))”。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "Shell 中 for 循环格式3的写法是什么？",
+      "a": "for ((e1;e2;e3)) do 命令列表 done。"
+    },
+    {
+      "q": "教材如何描述 for 循环格式3的语法特点？",
+      "a": "语法同 C 中的 For。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "Shell 循环结构基础",
+    "C 风格 for 循环的基本印象"
+  ],
+  "source_pages": [
+    81,
+    84
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "139_for_循环格式3_c_风格写法",
+  "_chunk_pages": [
+    81,
+    84
+  ]
+}

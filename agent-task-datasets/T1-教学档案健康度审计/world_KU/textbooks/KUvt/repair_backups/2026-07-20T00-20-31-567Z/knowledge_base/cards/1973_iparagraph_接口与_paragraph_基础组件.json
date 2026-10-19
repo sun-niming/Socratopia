@@ -1,0 +1,43 @@
+{
+  "title": "IParagraph 接口与 Paragraph 基础组件",
+  "definition": "装饰器模式首先定义一个公共组件接口 IParagraph。该接口声明虚析构函数和纯虚函数 `getHTML()`；Paragraph 类实现该接口，保存段落文本，并将文本包装为段落 HTML。",
+  "key_points": [
+    "IParagraph 至少声明：`virtual ~IParagraph() = default;` 和 `virtual std::string getHTML() const = 0;`。",
+    "将析构函数声明为虚函数，可以通过 IParagraph 接口安全地销毁派生类对象。",
+    "Paragraph 是被装饰的基础组件，其 `getHTML()` 返回包含段落标签的字符串。"
+  ],
+  "examples": [
+    "接口的核心形式为：`class IParagraph { public: virtual ~IParagraph() = default; virtual std::string getHTML() const = 0; };`。",
+    "Paragraph 的核心逻辑可表示为：`getHTML()` 返回 `\"<P>\" + m_text + \"</P>\"`。"
+  ],
+  "misconceptions": [
+    "IParagraph 不是具体段落对象，而是 Paragraph 和各个装饰器共同遵守的接口。",
+    "`getHTML()` 是纯虚函数，不能直接通过 IParagraph 创建对象。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "IParagraph 接口中的 `getHTML()` 有什么作用？",
+      "a": "它定义了所有段落组件和装饰器生成 HTML 字符串的统一操作。"
+    },
+    {
+      "q": "为什么 IParagraph 的析构函数应当是虚函数？",
+      "a": "因为 IParagraph 会被派生类继承，虚析构函数可以保证通过基类接口销毁派生类对象时行为正确。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++抽象类与纯虚函数",
+    "C++虚析构函数"
+  ],
+  "source_pages": [
+    962,
+    962
+  ],
+  "needs_verification": true,
+  "verify_query": "《C++20高级编程》第5版 第962页 IParagraph Paragraph getHTML virtual destructor 装饰器模式 原文",
+  "concept_id": "1973_iparagraph_接口与_paragraph_基础组件",
+  "_chunk_pages": [
+    961,
+    964
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "title": "C++特性测试宏与属性检测",
+  "definition": "特性测试宏用于在预处理阶段判断编译器或标准库是否支持某项C++语言特性。原文列举了__cpp_range_based_for、__cpp_consteval和__cpp_coroutines等特性宏；还列举了用于检测属性支持情况的__has_cpp_attribute，例如检测fallthrough和nodiscard属性。",
+  "key_points": [
+    "__cpp_range_based_for用于表示基于范围的for循环特性。",
+    "__cpp_consteval用于表示consteval相关特性。",
+    "__cpp_coroutines用于表示协程相关特性。",
+    "__has_cpp_attribute(fallthrough)可用于检测编译器是否支持[[fallthrough]]。",
+    "__has_cpp_attribute(nodiscard)可用于检测编译器是否支持[[nodiscard]]。",
+    "原文还展示了带理由文本的形式：[[nodiscard(\"Reason\")]]。"
+  ],
+  "examples": [
+    "#if defined(__cpp_range_based_for)\n// 编译器支持基于范围的for循环\n#endif",
+    "#if __has_cpp_attribute(nodiscard)\n[[nodiscard]] int compute();\n#endif",
+    "带理由的nodiscard属性示例：[[nodiscard(\"Reason\")]]"
+  ],
+  "misconceptions": [
+    "特性测试宏用于检测支持情况，不是用来开启对应语言特性的普通变量。",
+    "检测到某个宏或属性支持，并不表示程序自动使用了该特性；代码仍需实际采用相应语法。",
+    "[[nodiscard]]是属性语法，而__has_cpp_attribute(nodiscard)是用于检测该属性是否受支持的预处理表达式。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "__cpp_range_based_for、__cpp_consteval和__cpp_coroutines的共同用途是什么？",
+      "a": "它们是用于判断相应C++语言特性是否受支持的特性测试宏。"
+    },
+    {
+      "q": "如何检测[[nodiscard]]属性是否受支持？",
+      "a": "可以使用__has_cpp_attribute(nodiscard)。"
+    },
+    {
+      "q": "原文展示了哪种带理由的nodiscard写法？",
+      "a": "[[nodiscard(\"Reason\")]]。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++预处理器条件编译",
+    "C++属性语法"
+  ],
+  "source_pages": [
+    362,
+    363
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 feature test macros __cpp_range_based_for __cpp_consteval __cpp_coroutines __has_cpp_attribute nodiscard fallthrough",
+  "concept_id": "463_c_特性测试宏与属性检测",
+  "_chunk_pages": [
+    361,
+    364
+  ]
+}

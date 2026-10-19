@@ -1,0 +1,42 @@
+{
+  "title": "forEach方法",
+  "definition": "`forEach()` 用于遍历数组，对每个元素依次执行回调函数；它没有返回值。",
+  "key_points": [
+    "用于遍历数组",
+    "对每个元素依次执行回调",
+    "没有返回值"
+  ],
+  "examples": [
+    "[1,2,3].forEach(x => console.log(x))"
+  ],
+  "misconceptions": [
+    "`forEach()` 会返回新数组；实际上没有返回值",
+    "`forEach()` 适合做映射或过滤；教材把它归为遍历"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`forEach()` 的作用是什么？",
+      "a": "遍历数组。"
+    },
+    {
+      "q": "`forEach()` 有返回值吗？",
+      "a": "没有。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "回调函数",
+    "Array对象与创建方式"
+  ],
+  "source_pages": [
+    307,
+    308
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "440_foreach方法",
+  "_chunk_pages": [
+    305,
+    308
+  ]
+}

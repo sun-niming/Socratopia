@@ -1,0 +1,40 @@
+{
+  "title": "lambda 作为函数参数的两种方式",
+  "definition": "lambda 表达式可以作为函数参数传递，教材列出两种方式：使用与 lambda 调用签名匹配的 `std::function` 参数，或使用模板类型参数接收 lambda 对象。",
+  "key_points": [
+    "`std::function` 通过统一的函数包装类型接收可调用对象，参数类型必须与 lambda 签名兼容。",
+    "模板参数可以直接接收 lambda 的具体闭包类型，适合泛型函数。",
+    "lambda 可以作为回调传递给类似 `findMatches` 的函数。"
+  ],
+  "examples": [
+    "使用回调参数的形式可概括为：`findMatches(values1, values2, [](int value1, int value2) { return value1 == value2; }, printMatch);`。",
+    "函数可以使用类似 `std::function<bool(int, int)>` 的参数接收该 lambda。"
+  ],
+  "misconceptions": [
+    "误以为 lambda 只能通过 `std::function` 传递；模板参数同样可以接收 lambda。",
+    "误以为所有 lambda 的具体类型都能直接写出来；lambda 的闭包类型由编译器生成，通常通过模板参数或 `std::function` 使用。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "教材介绍了哪两种向函数传递 lambda 的方式？",
+      "a": "使用与 lambda 签名匹配的 `std::function` 参数，或使用模板类型参数接收 lambda。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "lambda 表达式",
+    "函数对象",
+    "函数模板"
+  ],
+  "source_pages": [
+    622,
+    622
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1286_lambda_作为函数参数的两种方式",
+  "_chunk_pages": [
+    621,
+    624
+  ]
+}

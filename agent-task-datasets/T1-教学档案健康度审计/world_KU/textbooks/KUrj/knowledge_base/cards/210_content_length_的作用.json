@@ -1,0 +1,38 @@
+{
+  "title": "Content-Length 的作用",
+  "definition": "Content-Length 用来告诉客户端响应体有多少字节。没有它时，客户端往往只能依赖连接关闭判断响应结束；写出 Content-Length 可以让 curl 和浏览器更明确地处理响应，也便于检查文件是否发送完整。",
+  "key_points": [
+    "Content-Length 表示响应体的字节数。",
+    "有了 Content-Length，客户端更容易判断响应结束。",
+    "Content-Length 还能帮助检查文件是否完整发送。"
+  ],
+  "examples": [
+    "响应头中写入 `Content-Length: 1234`。",
+    "curl 和浏览器都能根据 Content-Length 更明确地处理响应。"
+  ],
+  "misconceptions": [
+    "Content-Length 不是可有可无的装饰项。",
+    "不能把“连接关闭了”当成总是可靠的结束标志。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么要写 Content-Length？",
+      "a": "因为它告诉客户端响应体有多少字节，便于客户端判断响应结束，也能检查文件是否发送完整。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "HTTP 通用协议"
+  ],
+  "source_pages": [
+    129,
+    132
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "210_content_length_的作用",
+  "_chunk_pages": [
+    129,
+    132
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "title": "extends 继承",
+  "definition": "在 JavaScript 中，extends 关键字用于类声明或类表达式中，用来创建一个类作为另一个构造函数（类或函数）的子类。也就是说，它表达了类之间的继承关系。",
+  "key_points": [
+    "extends 可以出现在类声明或类表达式中",
+    "它用于把一个类定义为另一个构造函数的子类",
+    "类的一个关键特性是继承"
+  ],
+  "examples": [
+    "class B extends A {}",
+    "const B = class extends A {}"
+  ],
+  "misconceptions": [
+    "extends 不是用来创建普通对象的关键字，而是专门用于类继承",
+    "继承关系可以作用于类，也可以作用于函数构造器，不只限于 class"
+  ],
+  "qa_pairs": [
+    {
+      "q": "extends 关键字在类定义中有什么作用？",
+      "a": "用于创建一个类作为另一个构造函数（类或函数）的子类，从而建立继承关系。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "类",
+    "构造函数"
+  ],
+  "source_pages": [
+    297,
+    300
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "425_extends_继承",
+  "_chunk_pages": [
+    297,
+    300
+  ]
+}

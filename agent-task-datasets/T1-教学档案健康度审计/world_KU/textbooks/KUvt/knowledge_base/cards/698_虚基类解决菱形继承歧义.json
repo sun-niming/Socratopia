@@ -1,0 +1,46 @@
+{
+  "title": "虚基类解决菱形继承歧义",
+  "definition": "当多个基类共同继承同一个基类时，如果这些继承不是虚继承，最下层派生类通常会包含该公共基类的多个子对象，从而访问公共基类成员产生歧义。将共享的基类作为虚基类继承，例如使用 `public virtual Animal`，可以使最下层派生类只包含一个共享的基类子对象，从而消除这类歧义。",
+  "key_points": [
+    "非虚继承时，`DogBird : public Dog, public Bird` 会分别通过 `Dog` 和 `Bird` 包含两个 `Animal` 子对象。",
+    "如果 `Animal` 提供 `sleep()`，直接调用 `DogBird` 对象的 `sleep()` 会因存在两条继承路径而产生歧义。",
+    "将 `Dog` 和 `Bird` 声明为 `public virtual Animal` 的派生类后，`DogBird` 只包含一个 `Animal` 子对象。",
+    "虚基类适合解决共享公共基类导致的歧义，但原文指出这一概念许多 C++ 程序员并不熟悉。"
+  ],
+  "examples": [
+    "继承声明：`class Dog : public virtual Animal {};` 和 `class Bird : public virtual Animal {};`。",
+    "`class DogBird : public Dog, public Bird {};`。使用虚基类后，`DogBird myConfusedAnimal; myConfusedAnimal.sleep();` 不会因 `Animal` 子对象重复而产生歧义。",
+    "结构关系可表示为：$$\\begin{array}{c} & Animal \\\\ / & \\quad \\\\ Dog & Bird \\\\ \\backslash & / \\\\ & DogBird \\end{array}$$；虚继承使 `DogBird` 共享一个 `Animal` 子对象。"
+  ],
+  "misconceptions": [
+    "误以为多重继承必然导致歧义；只有在多个基类路径共同包含同一公共基类且访问成员时，才会出现这里讨论的歧义。",
+    "误以为在 `DogBird` 中重新定义某个成员就自动解决所有公共基类成员的重复问题。",
+    "误以为 `virtual` 只表示成员函数是虚函数；在 `public virtual Animal` 中，它表示虚继承。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么非虚继承的 `DogBird` 调用 `sleep()` 会产生歧义？",
+      "a": "因为 `DogBird` 通过 `Dog` 和 `Bird` 各拥有一个 `Animal` 子对象，编译器无法判断应调用哪一个 `Animal::sleep()`。"
+    },
+    {
+      "q": "虚继承如何解决上述歧义？",
+      "a": "把共享基类 `Animal` 声明为虚基类后，最下层的 `DogBird` 只包含一个共享的 `Animal` 子对象，因此调用 `sleep()` 时不再有两个候选子对象。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "多重继承",
+    "虚函数与继承"
+  ],
+  "source_pages": [
+    346,
+    346
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "698_虚基类解决菱形继承歧义",
+  "_chunk_pages": [
+    345,
+    348
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "title": "多态性使不同派生类可通过共同基类互换使用",
+  "definition": "多态性是指具有共同父类的不同对象可以被互换使用，并可通过父类类型的接口操作。对于 SpreadsheetCell 示例，StringSpreadsheetCell 和 DoubleSpreadsheetCell 都继承自 SpreadsheetCell，因此使用 SpreadsheetCell 的代码无需知道实际对象属于哪个派生类；调用虚方法时，会根据对象的实际类型执行正确的派生类实现。",
+  "key_points": [
+    "不同派生类应支持由共同基类定义的同一接口（方法集）。",
+    "使用基类对象、基类指针或基类引用的代码可以调用公共接口，而不必知道具体派生类。",
+    "虚方法会根据对象所属的实际类调用正确的实现。",
+    "其他数据结构可以通过基类类型保存多种派生类对象，从而实现异构集合。"
+  ],
+  "examples": [
+    "SpreadsheetCell 层次结构可以设计为：\n\n```text\nSpreadsheetCell\n├── StringSpreadsheetCell\n└── DoubleSpreadsheetCell\n```",
+    "使用 `SpreadsheetCell` 类型的代码可以统一调用：`cell.set(\"42\");` 和 `cell.getString();`，而不需要判断 `cell` 实际是字符串单元格还是双精度值单元格。"
+  ],
+  "misconceptions": [
+    "多态性不是要求所有派生类内部用相同的数据表示；字符串单元格和双精度单元格可以使用不同的内部存储和实现。",
+    "使用共同基类并不表示一个派生类必须是另一个派生类；StringSpreadsheetCell 和 DoubleSpreadsheetCell 在更合理的设计中是地位等同的兄弟类。",
+    "只有声明为虚函数的接口才能根据对象的实际类型进行动态分派。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么 StringSpreadsheetCell 和 DoubleSpreadsheetCell 可以通过 SpreadsheetCell 互换使用？",
+      "a": "因为它们都继承自 SpreadsheetCell，并支持由 SpreadsheetCell 定义的共同接口；通过虚方法调用时会执行各自的正确实现。"
+    },
+    {
+      "q": "多态设计对 Spreadsheet 类等其他数据结构有什么好处？",
+      "a": "这些数据结构可以通过基类类型引用或保存一组不同派生类的单元格，而不需要分别处理每一种具体单元格类型。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "继承中的基类与派生类关系",
+    "虚函数"
+  ],
+  "source_pages": [
+    321,
+    322
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "658_多态性使不同派生类可通过共同基类互换使用",
+  "_chunk_pages": [
+    321,
+    324
+  ]
+}

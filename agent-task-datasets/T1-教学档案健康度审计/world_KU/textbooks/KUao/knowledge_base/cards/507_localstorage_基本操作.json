@@ -1,0 +1,53 @@
+{
+  "title": "localStorage 基本操作",
+  "definition": "localStorage 是浏览器提供的本地存储接口，可以用键值对保存数据。它的常用操作包括：setItem 用于保存数据，getItem 用于读取数据，removeItem 用于删除某个键，clear 用于清空所有数据，length 用于获取当前存储项数量。读取不存在的键时，getItem 返回 null。",
+  "key_points": [
+    "保存字符串键值数据时，直接使用 localStorage.setItem(key, value) 和 localStorage.getItem(key) 即可。",
+    "如果要存储对象，需要先用 JSON.stringify 序列化；取出后再用 JSON.parse 反序列化。",
+    "localStorage.length 可以查看当前存储的项数。",
+    "localStorage.removeItem(key) 删除指定项，localStorage.clear() 清空所有数据。"
+  ],
+  "examples": [
+    "localStorage.setItem('username', 'JohnDoe');",
+    "localStorage.setItem('theme', 'dark');",
+    "const userSettings = { fontSize: 14, notifications: true }; localStorage.setItem('settings', JSON.stringify(userSettings));",
+    "const username = localStorage.getItem('username'); // \"JohnDoe\"",
+    "const nonExistent = localStorage.getItem('color'); // null",
+    "console.log(localStorage.length);"
+  ],
+  "misconceptions": [
+    "localStorage 只能存字符串，不能存对象；实际上对象可以先序列化为 JSON 字符串。",
+    "getItem 取不到值时不会返回空字符串，而是返回 null。",
+    "clear 只会清空某一个键；实际上它会清空全部数据。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "localStorage 读取一个不存在的键会返回什么？",
+      "a": "返回 null。"
+    },
+    {
+      "q": "如果要把对象存入 localStorage，应该怎么做？",
+      "a": "先使用 JSON.stringify 把对象转换成字符串再存入；取出后用 JSON.parse 还原。"
+    },
+    {
+      "q": "localStorage 常见的删除和清空方法分别是什么？",
+      "a": "删除单个键用 removeItem(key)，清空全部数据用 clear()。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "JavaScript 基本语法",
+    "JSON 序列化与反序列化"
+  ],
+  "source_pages": [
+    381,
+    384
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "507_localstorage_基本操作",
+  "_chunk_pages": [
+    381,
+    384
+  ]
+}

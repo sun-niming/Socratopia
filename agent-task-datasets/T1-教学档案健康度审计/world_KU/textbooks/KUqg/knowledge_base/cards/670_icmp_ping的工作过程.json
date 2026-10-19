@@ -1,0 +1,48 @@
+{
+  "title": "ICMP Ping的工作过程",
+  "definition": "Ping通过向目标主机发送ICMP回显请求分组，并监听目标主机返回的ICMP回显响应分组来工作。一次回显请求与对应回显响应构成一次ping-pong交换，可用于计算往返时间。",
+  "key_points": [
+    "发送方发出ICMP回显请求，即ping分组。",
+    "发送方监听ICMP回显响应，即pong分组。",
+    "请求发出到对应响应返回之间的时间可作为一次往返时间。",
+    "若未收到对应响应，可记录为分组丢失。"
+  ],
+  "examples": [
+    "一次交换可表示为：$$\\text{客户主机}\\xrightarrow{\\text{ICMP回显请求}}\\text{目标主机}\\xrightarrow{\\text{ICMP回显响应}}\\text{客户主机}.$$若请求发送时刻为 $t_s$，响应接收时刻为 $t_r$，则往返时间为：$$RTT=t_r-t_s.$$"
+  ],
+  "misconceptions": [
+    "误以为目标主机主动周期性发送回显响应；响应是针对收到的回显请求返回的。",
+    "误以为往返时间只包含请求单向传输时间；它覆盖请求到达目标并由响应返回客户主机的整个过程。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "Ping向目标主机发送什么类型的ICMP分组？",
+      "a": "ICMP回显请求分组。"
+    },
+    {
+      "q": "目标主机以什么分组响应Ping请求？",
+      "a": "ICMP回显响应分组。"
+    },
+    {
+      "q": "若请求发送时间为 $t_s$、响应接收时间为 $t_r$，往返时间如何计算？",
+      "a": "$$RTT=t_r-t_s.$$"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "ICMP",
+    "网络分组",
+    "往返时间"
+  ],
+  "source_pages": [
+    297,
+    300
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "670_icmp_ping的工作过程",
+  "_chunk_pages": [
+    297,
+    300
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "title": "使用 dynamic_cast 进行安全向下转型",
+  "definition": "向下转型是把基类指针或引用转换为派生类指针或引用。C++ 中应优先使用 dynamic_cast，因为它会利用对象的运行时类型信息检查转换是否合理；转换失败时，指针结果为 nullptr，引用转换则抛出 std::bad_cast 异常。dynamic_cast 通常要求相关类具有运行时类型信息，即至少包含一个虚函数。",
+  "key_points": [
+    "基类指针向派生类指针转换可写为：`Derived* myDerived = dynamic_cast<Derived*>(base);`。",
+    "指针形式的 dynamic_cast 失败时返回 nullptr，调用派生类成员前应先判断：`if (myDerived != nullptr) { /* 使用 myDerived */ }`。",
+    "引用形式的 dynamic_cast 转换失败时抛出 `std::bad_cast`。",
+    "向下转型通常说明设计可能不够合理；如果函数实际上只接受 Derived 对象，应直接把参数类型声明为 `Derived*`。"
+  ],
+  "examples": [
+    "```cpp\nvoid lessPresumptuous(Base* base)\n{\n    Derived* myDerived = dynamic_cast<Derived*>(base);\n    if (myDerived != nullptr) {\n        // 使用 myDerived 访问 Derived 的方法\n    }\n}\n```",
+    "如果函数只用于 Derived 类型对象，更合理的接口是：`void f(Derived* value);`，这样调用者无需传入 `Base*`，函数内部也不需要向下转型。"
+  ],
+  "misconceptions": [
+    "dynamic_cast 不是把任意 Base 对象都强行变成 Derived 对象；只有对象的实际运行时类型适合转换时才会成功。",
+    "dynamic_cast 失败时，指针不会指向某个无意义的数据，而是得到 nullptr。",
+    "能够使用向下转型不等于设计合理；教材强调应仅在必要时使用。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "对 Base* 使用 dynamic_cast<Derived*> 转换失败时，结果是什么？",
+      "a": "结果是 nullptr，因此应在使用转换结果前检查是否为 nullptr。"
+    },
+    {
+      "q": "为什么向下转型通常被视为设计不良的标志？",
+      "a": "因为它往往说明函数本应直接接收派生类类型，或者类之间应通过多态接口协作，而不是让调用者或函数依赖具体派生类。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "继承中的基类与派生类关系",
+    "虚函数与运行时类型信息"
+  ],
+  "source_pages": [
+    321,
+    321
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "657_使用_dynamic_cast_进行安全向下转型",
+  "_chunk_pages": [
+    321,
+    324
+  ]
+}

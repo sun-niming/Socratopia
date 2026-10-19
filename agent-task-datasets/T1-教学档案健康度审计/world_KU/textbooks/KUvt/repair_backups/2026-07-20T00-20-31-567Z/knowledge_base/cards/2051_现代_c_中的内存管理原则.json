@@ -1,0 +1,51 @@
+{
+  "title": "现代 C++ 中的内存管理原则",
+  "definition": "现代 C++ 的内存管理应优先使用智能指针和标准库容器，尽量避免直接调用底层内存分配与释放函数。默认情况下使用 `std::unique_ptr` 表示独占所有权；需要共享所有权时使用 `std::shared_ptr`。智能指针能够在适当时机自动清理所管理的内存或其他资源。",
+  "key_points": [
+    "优先使用 `std::unique_ptr`，只有在确实需要共享所有权时才使用 `std::shared_ptr`。",
+    "分别使用 `std::make_unique()` 和 `std::make_shared()` 创建智能指针。",
+    "教材建议避免直接使用 `new`、`delete`、`new[]`、`delete[]`、`malloc()` 和 `free()`。",
+    "标准库容器（例如 `std::vector`）通常比 C 风格数组更适合管理动态内存。",
+    "应理解栈和自由存储区的结构，以便分析对象创建、销毁和指针指向关系。"
+  ],
+  "examples": [
+    "推荐的独占所有权写法：`auto p = std::make_unique<int>(42);`。",
+    "推荐的共享所有权写法：`auto p = std::make_shared<int>(42);`。",
+    "与手动管理动态数组相比，可优先使用 `std::vector<int>` 自动管理元素存储。"
+  ],
+  "misconceptions": [
+    "使用智能指针并不意味着所有指针都应改成 `std::shared_ptr`；默认应优先考虑独占所有权。",
+    "智能指针不能修复所有逻辑错误，循环引用等问题仍需设计时注意。",
+    "使用指针数组时，数组分配语法不会自动为每个指针所指向的对象分配内存。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "现代 C++ 中默认应使用哪种智能指针？什么时候使用 `std::shared_ptr`？",
+      "a": "默认使用 `std::unique_ptr`；当多个对象确实需要共享同一个对象的所有权时使用 `std::shared_ptr`。"
+    },
+    {
+      "q": "创建 `unique_ptr` 和 `shared_ptr` 时，教材推荐使用什么函数？",
+      "a": "分别推荐使用 `std::make_unique()` 和 `std::make_shared()`。"
+    },
+    {
+      "q": "为什么标准库容器通常优于 C 风格数组？",
+      "a": "标准库容器能够自动处理内存管理，减少手动分配、释放和越界管理带来的问题。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "指针与动态内存",
+    "栈与自由存储区"
+  ],
+  "source_pages": [
+    998,
+    998
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "2051_现代_c_中的内存管理原则",
+  "_chunk_pages": [
+    997,
+    1000
+  ]
+}

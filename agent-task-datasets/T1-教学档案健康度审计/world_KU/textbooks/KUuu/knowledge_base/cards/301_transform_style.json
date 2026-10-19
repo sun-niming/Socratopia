@@ -1,0 +1,36 @@
+{
+  "title": "transform-style",
+  "definition": "transform-style 属性在取值为 preserve-3d 时，可以产生 3D 变换效果。",
+  "key_points": [
+    "该属性与 3D 变换效果有关。",
+    "取值 preserve-3d 时可产生 3D 变换效果。"
+  ],
+  "examples": [
+    "transform-style: preserve-3d;"
+  ],
+  "misconceptions": [
+    "以为只要设置了 3D 变换方法就一定能看到 3D 效果。",
+    "以为 transform-style 的所有取值都能产生 3D 效果。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "transform-style 取什么值时可以产生 3D 变换效果？",
+      "a": "取值为 preserve-3d 时。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "transform属性"
+  ],
+  "source_pages": [
+    201,
+    202
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "301_transform_style",
+  "_chunk_pages": [
+    201,
+    204
+  ]
+}

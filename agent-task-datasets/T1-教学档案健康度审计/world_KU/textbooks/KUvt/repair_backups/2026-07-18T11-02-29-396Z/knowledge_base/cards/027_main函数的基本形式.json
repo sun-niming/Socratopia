@@ -1,0 +1,41 @@
+{
+  "title": "main函数的基本形式",
+  "definition": "C++ 程序以 `main()` 函数作为入口。`main()` 的返回类型为 `int`。教材给出的基本形式是 `int main()`；执行到 `main()` 末尾时可结束程序，也可以使用 `return` 返回状态值。",
+  "key_points": [
+    "`main()` 是程序入口函数。",
+    "`main()` 的返回类型是 `int`。",
+    "基本声明形式为 `int main()`。"
+  ],
+  "examples": [
+    "int main()\n{\n    return 0;\n}"
+  ],
+  "misconceptions": [
+    "不能省略 `main()` 的 `int` 返回类型。",
+    "不要把 `main()` 当成需要由程序员手工调用的普通启动函数。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "C++ 程序的入口函数叫什么？",
+      "a": "`main()`。"
+    },
+    {
+      "q": "`main()` 的返回类型是什么？",
+      "a": "`int`。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "函数基础"
+  ],
+  "source_pages": [
+    37,
+    40
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "027_main函数的基本形式",
+  "_chunk_pages": [
+    37,
+    40
+  ]
+}

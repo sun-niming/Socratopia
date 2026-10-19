@@ -1,0 +1,38 @@
+{
+  "title": "目录穿越防护",
+  "definition": "服务器应阻止目录穿越请求，例如 `../../etc/passwd` 不能被当作普通文件路径直接访问，预期应返回 403 或 400。",
+  "key_points": [
+    "要拦截 `..` 形式的路径穿越。",
+    "返回状态码可以是 403 或 400。",
+    "目标是防止越权读取文件系统。"
+  ],
+  "examples": [
+    "`curl -i http://127.0.0.1:8080/../../etc/passwd`"
+  ],
+  "misconceptions": [
+    "URL 里的相对路径可以直接拼接到文件系统路径。",
+    "只要路径里有文件名就一定合法。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "目录穿越请求应怎样处理？",
+      "a": "应拒绝访问，返回 403 或 400。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "路径处理基础",
+    "HTTP 状态码"
+  ],
+  "source_pages": [
+    113,
+    116
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "188_目录穿越防护",
+  "_chunk_pages": [
+    113,
+    116
+  ]
+}

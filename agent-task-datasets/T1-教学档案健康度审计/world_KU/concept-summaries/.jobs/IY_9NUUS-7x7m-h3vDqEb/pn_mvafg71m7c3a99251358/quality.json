@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "pipelineVersion": "post-class-v3",
+  "sourceHash": "sha256:8008a9a0639f4b9d442fa01783969831d9f322b1fd25c571d2f5909ae8b7b0c6",
+  "sourceMessageCount": 37,
+  "chunkCount": 3,
+  "score": 0.7601,
+  "metrics": {
+    "topicCoverage": 0.8571428571428571,
+    "learnerEvidenceCoverage": 0.3157894736842105,
+    "explanationCoverage": 1,
+    "sourceIntegrity": 1,
+    "reviewQuestionDiversity": 0.8979591836734694,
+    "structureValidity": 1,
+    "lengthFitness": 0,
+    "duplicationRatio": 0,
+    "unsupportedTopicRatio": 0.08333333333333333,
+    "lengthChars": 6682,
+    "conceptCount": 12,
+    "evidenceTopicCount": 14,
+    "chunkCompleteness": 1
+  },
+  "warnings": [
+    "1 concept(s) have no chunk-evidence source"
+  ],
+  "decision": "repair"
+}

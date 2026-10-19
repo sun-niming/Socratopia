@@ -1,0 +1,51 @@
+{
+  "title": "flex简写属性",
+  "definition": "flex 是一个简写属性，用于统一设置 flex-grow、flex-shrink 和 flex-basis 三个子属性，以控制弹性项目在容器内的伸缩行为。",
+  "key_points": [
+    "它是 flex-grow、flex-shrink、flex-basis 的简写。",
+    "可通过不同的单值或双值写法，快速指定项目的放大、缩小和基础大小。",
+    "单值语法中，flex: 1 等效于 1 1 0%，flex: auto 等效于 1 1 auto，flex: none 等效于 0 0 auto。",
+    "双值语法中，flex: 1 2 等效于 1 2 0%；flex: 200px 0 等效于 0 1 200px。"
+  ],
+  "examples": [
+    "flex: 1;",
+    "flex: auto;",
+    "flex: none;",
+    "flex: 1 2;",
+    "flex: 200px 0;"
+  ],
+  "misconceptions": [
+    "flex 不是单独控制一个属性，而是同时设置三个子属性。",
+    "flex: none 并不表示元素消失，而是表示不放大也不缩小，保持原始尺寸。",
+    "flex: 1 不等于简单的 width: 1，它实际等效于 1 1 0%。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "flex 属性的作用是什么？",
+      "a": "它是 flex-grow、flex-shrink 和 flex-basis 的简写，用来控制弹性项目在容器内的伸缩行为。"
+    },
+    {
+      "q": "flex: 1 等效于什么？",
+      "a": "等效于 1 1 0%。"
+    },
+    {
+      "q": "flex: none 等效于什么？",
+      "a": "等效于 0 0 auto。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "弹性布局基础"
+  ],
+  "source_pages": [
+    165,
+    166
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "255_flex简写属性",
+  "_chunk_pages": [
+    165,
+    168
+  ]
+}

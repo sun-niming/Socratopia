@@ -1,0 +1,40 @@
+{
+  "title": "iframe标签",
+  "definition": "iframe（Inline Frame，内联框架）是 HTML 提供的一个标签，用于在当前页面中嵌套显示另一个独立的 HTML 页面或资源，如视频、地图、文档等。嵌入内容拥有独立的浏览上下文，与父页面相互隔离。",
+  "key_points": [
+    "用于在当前页面内嵌入外部页面或资源",
+    "嵌入内容与父页面是相互隔离的独立浏览上下文"
+  ],
+  "examples": [
+    "<iframe src=\"01.html\"></iframe>"
+  ],
+  "misconceptions": [
+    "认为 iframe 只是普通图片或静态容器；实际上它能承载独立页面或资源。",
+    "认为 iframe 内部内容与父页面共享同一浏览上下文；原文强调二者相互隔离。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "iframe 标签的作用是什么？",
+      "a": "在当前页面中嵌套显示另一个独立的 HTML 页面或资源。"
+    },
+    {
+      "q": "iframe 内嵌内容与父页面的关系是什么？",
+      "a": "它们拥有独立的浏览上下文，并且相互隔离。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "HTML标签"
+  ],
+  "source_pages": [
+    77,
+    80
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "112_iframe标签",
+  "_chunk_pages": [
+    77,
+    80
+  ]
+}

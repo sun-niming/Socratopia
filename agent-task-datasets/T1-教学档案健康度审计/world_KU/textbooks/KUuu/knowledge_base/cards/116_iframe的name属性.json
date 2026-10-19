@@ -1,0 +1,42 @@
+{
+  "title": "iframe的name属性",
+  "definition": "name 属性用于给 iframe 设置框架名称，常配合链接的 target 使用。",
+  "key_points": [
+    "用于标识 iframe 的名称",
+    "可与链接的 target 配合使用"
+  ],
+  "examples": [
+    "<iframe name=\"myFrame\"></iframe>"
+  ],
+  "misconceptions": [
+    "认为 name 只是普通备注文字；原文说明它用于配合链接 target。",
+    "认为 name 和 src 是同一作用；二者分别用于命名和指定嵌入地址。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "iframe 的 name 属性有什么作用？",
+      "a": "给框架命名。"
+    },
+    {
+      "q": "name 属性常和什么一起使用？",
+      "a": "和链接的 target 一起使用。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "iframe标签",
+    "HTML属性",
+    "超链接标记"
+  ],
+  "source_pages": [
+    77,
+    80
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "116_iframe的name属性",
+  "_chunk_pages": [
+    77,
+    80
+  ]
+}

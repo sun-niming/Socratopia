@@ -1,0 +1,38 @@
+{
+  "title": "HMAC",
+  "definition": "HMAC是一种报文鉴别码标准。原文指出，HMAC能够与MD5或SHA-1一起使用，实际上是让散列函数对数据和鉴别密钥运行两次，以生成报文鉴别结果。",
+  "key_points": [
+    "HMAC属于MAC的一种标准。",
+    "HMAC可以与MD5或SHA-1散列算法配合使用。",
+    "原文将HMAC概括为通过散列函数对数据和鉴别密钥运行两次。"
+  ],
+  "examples": [
+    "可以把HMAC理解为：将报文数据和鉴别密钥结合后，通过规定的两层散列计算生成鉴别值。"
+  ],
+  "misconceptions": [
+    "HMAC不是公钥数字签名；它依赖通信双方共享的鉴别密钥。",
+    "HMAC的目标是报文鉴别和完整性，不是单独提供机密性。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "HMAC是什么？",
+      "a": "HMAC是一种报文鉴别码标准，能够与MD5或SHA-1等散列算法配合使用，通过对数据和鉴别密钥进行规定的散列处理生成鉴别值。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "报文鉴别码（MAC）的生成与验证",
+    "散列函数"
+  ],
+  "source_pages": [
+    417,
+    420
+  ],
+  "needs_verification": true,
+  "verify_query": "HMAC 标准 RFC 2104 是否通过散列函数对数据和密钥进行两次处理，HMAC-MD5 和 HMAC-SHA-1 的定义与当前适用性",
+  "concept_id": "972_hmac",
+  "_chunk_pages": [
+    417,
+    420
+  ]
+}

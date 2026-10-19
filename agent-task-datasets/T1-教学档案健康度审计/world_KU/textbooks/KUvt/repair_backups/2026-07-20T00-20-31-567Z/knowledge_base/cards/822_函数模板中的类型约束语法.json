@@ -1,0 +1,54 @@
+{
+  "title": "函数模板中的类型约束语法",
+  "definition": "函数模板可以通过多种语法声明类型约束。教材介绍的两种方式是：在模板参数列表中直接使用概念名称替代 `typename` 或 `class`，以及在模板参数列表后使用 `requires` 子句。约束不满足时，函数模板不会作为可行候选，编译器会报告约束不满足。",
+  "key_points": [
+    "直接使用概念约束的形式是 `template <Concept T>`。",
+    "例如：`template <Incrementable T> void process(const T& t);`。",
+    "也可以写成 `template <typename T> requires ConstraintExpression void process(const T& t);`。",
+    "`requires` 子句中的约束表达式可以是概念表达式、标准概念或 requires 表达式。",
+    "调用不满足约束的类型时，编译器会给出约束不满足的诊断信息。"
+  ],
+  "examples": [
+    "直接使用概念：`template <convertible_to<bool> T> void handle(const T& t);`",
+    "直接使用概念：`template <Incrementable T> void process(const T& t);`",
+    "使用概念表达式作为 requires 子句：`template <typename T> requires Incrementable<T> void process(const T& t);`",
+    "使用标准概念：`template <typename T> requires convertible_to<T, bool> void process(const T& t);`",
+    "使用 requires 表达式：`template <typename T> requires requires(T x) { x++; ++x; } void process(const T& t);`"
+  ],
+  "misconceptions": [
+    "`template <Concept T>` 与 `template <typename T> requires Concept<T>` 都是在编译期约束模板参数，但语法位置不同。",
+    "约束不满足不是运行时错误，而是在模板候选筛选或编译阶段被拒绝。",
+    "调用 `process(std::string)` 失败的原因不是函数体内部错误，而是 `std::string` 不满足 `Incrementable`，因为其对象不能进行所要求的自增操作。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "函数模板直接使用概念约束的语法是什么？",
+      "a": "例如 `template <Incrementable T> void process(const T& t);`。"
+    },
+    {
+      "q": "如何使用 requires 子句要求模板参数满足 `Incrementable`？",
+      "a": "`template <typename T> requires Incrementable<T> void process(const T& t);`。"
+    },
+    {
+      "q": "如果用 `std::string` 调用要求 `Incrementable` 的 `process`，会发生什么？",
+      "a": "调用无法匹配满足约束的函数模板，编译器会报告约束不满足；原因是 `std::string` 不支持所要求的前缀和后缀自增表达式。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "概念表达式与概念约束",
+    "requires 表达式的基本结构",
+    "函数模板"
+  ],
+  "source_pages": [
+    404,
+    404
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 constrained function template syntax template <Incrementable T> requires Incrementable<T> diagnostic std::string",
+  "concept_id": "822_函数模板中的类型约束语法",
+  "_chunk_pages": [
+    401,
+    404
+  ]
+}

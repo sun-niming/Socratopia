@@ -1,0 +1,47 @@
+{
+  "title": "模块分区与子模块的区别",
+  "definition": "模块分区是把一个模块拆分为多个内部组成部分的机制；子模块则是对模块用户可见、允许用户选择性导入的层次化模块。分区名称使用冒号连接模块名和分区名，例如 `datamodel:person`。分区用于模块内部构造，用户不能直接导入具体分区，只能导入整个模块。",
+  "key_points": [
+    "子模块对模块用户可见，用户可以选择导入某个子模块或整个上层模块。",
+    "分区主要用于模块内部组织实现，对模块用户不公开。",
+    "模块接口分区中声明的内容最终必须由主模块接口文件直接或间接导出。",
+    "分区名称使用冒号，例如 `datamodel:person` 和 `datamodel:address`。",
+    "模块通常有一个主模块接口文件，其中包含导出模块名称的声明。"
+  ],
+  "examples": [
+    "分区接口声明的形式：\n`export module datamodel:person;`\n`export namespace DataModel { class Person { /* ... */ }; }`",
+    "地址分区可以声明：\n`export module datamodel:address;`\n`export namespace DataModel { class Address { public: Address(); }; }`",
+    "用户使用分区构造的模块时，只导入主模块：\n`import datamodel;`\n`int main() { DataModel::Address a; }`"
+  ],
+  "misconceptions": [
+    "分区和子模块只是名称写法不同，用户可以用 `import datamodel:person;` 直接导入分区。",
+    "主模块接口不需要导出接口分区。原文要求每个模块接口分区最终必须由主模块接口直接或间接导出。",
+    "分区是公开的模块层次，用户可以像使用子模块一样选择性导入。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "子模块和分区对模块用户而言最重要的区别是什么？",
+      "a": "子模块对用户可见，用户可以选择导入特定子模块；分区只用于模块内部构造，对用户不可见，用户只能导入整个模块。"
+    },
+    {
+      "q": "用户要使用由 `datamodel:person` 和 `datamodel:address` 分区组成的模块，应导入什么？",
+      "a": "用户应导入主模块 `datamodel`，而不能直接导入具体分区。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++模块接口",
+    "C++模块导入与导出"
+  ],
+  "source_pages": [
+    358,
+    359
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "722_模块分区与子模块的区别",
+  "_chunk_pages": [
+    357,
+    360
+  ]
+}

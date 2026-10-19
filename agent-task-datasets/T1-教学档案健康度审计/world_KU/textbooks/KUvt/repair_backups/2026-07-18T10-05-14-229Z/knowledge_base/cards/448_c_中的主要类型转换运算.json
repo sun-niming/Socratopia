@@ -1,0 +1,47 @@
+{
+  "title": "C++中的主要类型转换运算",
+  "definition": "原文列出了 C++ 中的几种类型转换方式：`const_cast`、`static_cast`、`reinterpret_cast`、`dynamic_cast`，以及 C++20 的 `std::bit_cast()`。其中，原文重点示例说明了 `static_cast` 和 `reinterpret_cast` 的用法。",
+  "key_points": [
+    "`static_cast` 用于编译期可检查的显式类型转换，例如数值类型转换和相关继承层次中的指针、引用转换。",
+    "`reinterpret_cast` 用于重新解释对象的底层表示或指针、引用类型，原文示例涉及无关类之间以及 `void*` 与对象指针之间的转换。",
+    "`const_cast`、`dynamic_cast` 和 C++20 的 `std::bit_cast()` 在原文中被列出，但本页片段没有展开说明其具体规则。"
+  ],
+  "examples": [
+    "原文列出的转换形式包括：\n```cpp\nconst_cast<T>(expression)\nstatic_cast<T>(expression)\nreinterpret_cast<T>(expression)\ndynamic_cast<T>(expression)\nstd::bit_cast<T>(value) // C++20\n```"
+  ],
+  "misconceptions": [
+    "这些转换运算符并不具有相同的安全性和适用场景，不能互相任意替代。",
+    "`static_cast` 和 `reinterpret_cast` 都能写出指针转换，并不意味着二者语义相同。",
+    "原文列出某种转换运算符，不代表该页已经说明了它的全部使用限制。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "原文列出了哪些主要的 C++ 类型转换运算？",
+      "a": "`const_cast`、`static_cast`、`reinterpret_cast`、`dynamic_cast`，以及 C++20 的 `std::bit_cast()`。"
+    },
+    {
+      "q": "原文重点展开了哪两种转换？",
+      "a": "`static_cast` 和 `reinterpret_cast`。"
+    },
+    {
+      "q": "`std::bit_cast()` 属于哪个标准版本新增的功能？",
+      "a": "原文将其标为 C++20。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++基本类型",
+    "指针与引用"
+  ],
+  "source_pages": [
+    345,
+    348
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "448_c_中的主要类型转换运算",
+  "_chunk_pages": [
+    345,
+    348
+  ]
+}

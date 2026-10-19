@@ -1,0 +1,39 @@
+{
+  "title": "font 简写属性",
+  "definition": "font 是字体属性的简写形式，可以在一个声明中同时设置斜体、粗体、字号/行高和字体系列。其属性值有先后顺序，且必须包含 font-size 和 font-family；字号与行高之间可以用 / 分隔。",
+  "key_points": [
+    "font 简写的属性值有固定顺序，不能随意颠倒。",
+    "必须包含 font-size 和 font-family。",
+    "字号和行高可以写成 16px/1.5em 这样的形式。"
+  ],
+  "examples": [
+    "font: italic bold 16px/1.5em \"宋体\";",
+    "font: bold 18px '幼圆';"
+  ],
+  "misconceptions": [
+    "font 简写可以只写字体名称。",
+    "字号和行高不能用 / 连接。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "font 简写至少必须包含哪两个值？",
+      "a": "font-size 和 font-family。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "font-size 属性",
+    "font-family 属性"
+  ],
+  "source_pages": [
+    113,
+    116
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "182_font_简写属性",
+  "_chunk_pages": [
+    113,
+    116
+  ]
+}

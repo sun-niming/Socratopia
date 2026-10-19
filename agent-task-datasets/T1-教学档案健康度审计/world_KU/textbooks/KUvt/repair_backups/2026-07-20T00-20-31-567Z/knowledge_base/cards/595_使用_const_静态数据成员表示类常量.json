@@ -1,0 +1,51 @@
+{
+  "title": "使用 const 静态数据成员表示类常量",
+  "definition": "如果某个常量只适用于某个类，可以将其声明为 static const 数据成员，也称为类常量，而不是定义为全局常量。类中的 const 数据成员在创建并初始化后不能再改变。整型和枚举类型的 static const 数据成员可以直接在类定义中定义和初始化，不需要声明为内联变量。",
+  "key_points": [
+    "const 数据成员初始化后不能被修改。",
+    "static const 数据成员由类的所有对象共享，适合表示只属于该类的固定限制值。",
+    "整型和枚举类型的 static const 数据成员可以在类定义内部直接初始化。",
+    "类常量可以在类的其他成员函数中使用，也可以作为构造函数参数的默认值。"
+  ],
+  "examples": [
+    "`export class Spreadsheet { public: static const size_t MaxHeight { 100 }; static const size_t MaxWidth { 100 }; };`",
+    "构造函数中限制电子表格尺寸：`m_width { std::min(width, MaxWidth) }, m_height { std::min(height, MaxHeight) }`。其中 `std::min()` 的使用需要包含 `<algorithm>`。",
+    "可将类常量用作默认参数：`Spreadsheet(size_t width = MaxWidth, size_t height = MaxHeight);`"
+  ],
+  "misconceptions": [
+    "static const 数据成员不是全局常量；它仍属于该类，并受类的访问控制限制。",
+    "const 数据成员不能在构造函数体中再赋值；必须在类定义内部或构造函数初始化器中初始化。",
+    "把超出限制的宽度或高度自动截断为最大值，并不是唯一处理方式；原文还指出也可以抛出异常。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么可以用 static const 成员表示电子表格的最大高度和最大宽度？",
+      "a": "因为这些值只适用于 Spreadsheet 类，并且所有 Spreadsheet 对象共享同一组不可修改的限制值。"
+    },
+    {
+      "q": "下面的声明是否合法：`static const size_t MaxHeight { 100 };`？",
+      "a": "在类定义中，这种整型 static const 数据成员的定义和初始化是合法的。"
+    },
+    {
+      "q": "构造函数能否使用 `MaxWidth` 和 `MaxHeight` 作为默认参数？",
+      "a": "可以，例如 `Spreadsheet(size_t width = MaxWidth, size_t height = MaxHeight);`。默认参数必须从最右侧开始连续指定。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++类的静态数据成员",
+    "const 数据成员",
+    "构造函数默认参数"
+  ],
+  "source_pages": [
+    285,
+    286
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "595_使用_const_静态数据成员表示类常量",
+  "_chunk_pages": [
+    285,
+    288
+  ]
+}

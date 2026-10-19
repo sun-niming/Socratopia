@@ -1,0 +1,39 @@
+{
+  "title": "stat 的作用与普通文件判断",
+  "definition": "`stat(path, &st)` 可以告诉你文件是否存在、文件大小 `st.st_size`、文件类型 `st.st_mode`、文件权限和时间信息。在本项目中，若 `stat` 失败通常返回 404；若不是普通文件 `S_ISREG(st.st_mode)`，则返回 403。静态 Web Server 只应该返回普通文件，而不应返回目录、设备文件、管道等特殊文件。",
+  "key_points": [
+    "`stat(path, &st)` 可获取存在性、大小、类型、权限和时间信息。",
+    "`stat()` 失败时，原文示例返回 404。",
+    "`!S_ISREG(st.st_mode)` 时返回 403。",
+    "目录列表看似方便，但会暴露文件结构，不适合这个项目。"
+  ],
+  "examples": [
+    "```c\nstruct stat st;\nif (stat(path, &st) < 0) {\n    return 404;\n}\nif (!S_ISREG(st.st_mode)) {\n    return 403;\n}\n```"
+  ],
+  "misconceptions": [
+    "以为只要路径存在就可以直接返回，不必区分文件类型。",
+    "以为目录、设备文件或管道也可以像普通静态文件一样对外返回。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么静态 Web Server 要判断 `S_ISREG(st.st_mode)`？",
+      "a": "因为它只应该返回普通文件；目录、设备文件、管道等特殊文件不应直接作为静态文件返回。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "文件类型基础",
+    "stat 系统调用基础"
+  ],
+  "source_pages": [
+    21,
+    24
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "021_stat_的作用与普通文件判断",
+  "_chunk_pages": [
+    21,
+    24
+  ]
+}

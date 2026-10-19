@@ -1,0 +1,41 @@
+{
+  "title": "window.devicePixelRatio",
+  "definition": "window.devicePixelRatio 表示当前显示器中物理像素和设备独立像素之间的比率。",
+  "key_points": [
+    "它描述的是一个比率，而不是具体的尺寸值。",
+    "它反映物理像素与设备独立像素之间的关系。",
+    "它与当前显示器有关。"
+  ],
+  "examples": [
+    "例如在高分屏设备上，window.devicePixelRatio 可能大于 1。"
+  ],
+  "misconceptions": [
+    "devicePixelRatio 不是屏幕宽高，也不是窗口尺寸。",
+    "它不是像素数量本身，而是两种像素之间的比例。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "window.devicePixelRatio 表示什么？",
+      "a": "表示当前显示器中物理像素和设备独立像素之间的比率。"
+    },
+    {
+      "q": "window.devicePixelRatio 是尺寸还是比例？",
+      "a": "是比例。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "window 对象的层级与全局属性"
+  ],
+  "source_pages": [
+    332,
+    332
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "443_window_devicepixelratio",
+  "_chunk_pages": [
+    329,
+    332
+  ]
+}

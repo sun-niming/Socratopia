@@ -1,0 +1,41 @@
+{
+  "title": "CSS相对单位",
+  "definition": "相对单位是相对于其他长度或元素的属性来计算的。教材列出的常用相对单位包括em、rem、ex、%、vh、vw。",
+  "key_points": [
+    "相对单位不是固定值，而是按参照对象计算",
+    "参照对象可以是其他长度或元素属性",
+    "常用相对单位包括em、rem、ex、%、vh、vw"
+  ],
+  "examples": [
+    "em、rem、ex、%、vh、vw"
+  ],
+  "misconceptions": [
+    "误以为相对单位与任何环境下都对应固定长度",
+    "误以为所有相对单位都以同一个参照对象计算"
+  ],
+  "qa_pairs": [
+    {
+      "q": "什么是CSS相对单位？",
+      "a": "相对单位是相对于其他长度或元素的属性来计算的。"
+    },
+    {
+      "q": "教材中常用的相对单位有哪些？",
+      "a": "em、rem、ex、%、vh、vw。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "CSS基础"
+  ],
+  "source_pages": [
+    105,
+    108
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "137_css相对单位",
+  "_chunk_pages": [
+    105,
+    108
+  ]
+}

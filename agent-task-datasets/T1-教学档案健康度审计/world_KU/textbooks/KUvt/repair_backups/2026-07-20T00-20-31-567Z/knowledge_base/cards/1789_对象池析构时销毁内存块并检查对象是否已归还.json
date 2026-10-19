@@ -1,0 +1,50 @@
+{
+  "title": "对象池析构时销毁内存块并检查对象是否已归还",
+  "definition": "对象池析构函数负责释放所有已分配的内存块，并使用与分配时对应的分配器调用 deallocate()。教材中的实现假设对象池销毁时，所有借出的对象都已经通过 shared_ptr 的自定义删除器归还；因此先用断言检查空闲对象数量是否等于所有已分配块中的对象总数。",
+  "key_points": [
+    "对象池析构前要求所有从池中获取的对象都已归还，否则断言失败。",
+    "若初始块大小为 initialChunkSize，且已经分配了 m_pool.size() 个、大小依次加倍的块，则所有对象总数为：\n$$\\text{initialChunkSize}\\times\\left(2^{|m\\_pool|}-1\\right)$$",
+    "析构时从 initialChunkSize 开始遍历内存块，每释放一个块后将 chunkSize 加倍。",
+    "释放内存必须使用与分配相匹配的分配器。",
+    "清空 m_pool，表示对象池不再持有这些块。"
+  ],
+  "examples": [
+    "教材中的完整性检查可写为：\n$$m\\_freeObjects.size()=initialChunkSize\\times\\left(\\operatorname{pow}(2,m\\_pool.size())-1\\right)$$\n释放逻辑可表示为：\n```cpp\nsize_t chunkSize { initialChunkSize };\nfor (auto* chunk : m_pool) {\n    m_allocator.deallocate(chunk, chunkSize);\n    chunkSize *= 2;\n}\nm_pool.clear();\n```"
+  ],
+  "misconceptions": [
+    "shared_ptr 离开作用域只表示对象被归还；对象池析构时仍需释放对象池持有的原始内存块。",
+    "如果仍有对象借出，不能安全地销毁对象池；教材实现通过断言检测这种情况。",
+    "每个块的大小相同是错误的；本实现中后续块大小依次加倍。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "对象池析构时为什么检查 m_freeObjects.size()？",
+      "a": "为了确认所有借出的对象都已归还；教材实现假设池销毁前所有对象都在空闲列表中。"
+    },
+    {
+      "q": "若初始块大小为 initialChunkSize，块大小每次加倍，m_pool 中有 n 个块，则总对象数是多少？",
+      "a": "总数是 $$initialChunkSize\\times(2^n-1)$$。"
+    },
+    {
+      "q": "对象池析构时为什么要使用 m_allocator.deallocate()？",
+      "a": "因为内存是由该分配器分配的，释放时应使用相应的分配器和对应的块大小。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "对象池通过placement new获取并构造对象",
+    "分配器的allocate/deallocate匹配规则",
+    "等比数列求和"
+  ],
+  "source_pages": [
+    862,
+    862
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1789_对象池析构时销毁内存块并检查对象是否已归还",
+  "_chunk_pages": [
+    861,
+    864
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "title": "按 const 引用捕获异常对象",
+  "definition": "捕获异常对象时可以按值、按非 const 引用或按 const 引用进行捕获。教材建议使用 const 引用，例如 catch (const exception& e)，因为按值捕获可能发生对象截断；使用 const 引用既避免复制，又能保留派生异常对象的完整类型信息。",
+  "key_points": [
+    "按值捕获的形式是 catch (exception e)。",
+    "按非 const 引用捕获的形式是 catch (exception& e)。",
+    "推荐按 const 引用捕获：catch (const exception& e)。",
+    "按值捕获异常对象时可能发生对象截断。"
+  ],
+  "examples": [
+    "推荐的捕获形式：\ntry {\n    myInts = readIntegerFile(filename);\n} catch (const exception& e) {\n    cerr << e.what() << endl;\n}"
+  ],
+  "misconceptions": [
+    "错误地认为异常只能按值捕获。",
+    "错误地认为 catch (exception e) 一定能保留派生异常对象的全部信息。",
+    "错误地认为 const 会阻止异常类型匹配。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "教材推荐使用什么方式捕获异常对象？",
+      "a": "推荐按 const 引用捕获，例如 catch (const exception& e)。"
+    },
+    {
+      "q": "按值捕获异常对象可能有什么问题？",
+      "a": "可能发生对象截断，使派生异常对象的派生类部分丢失。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "继承与多态",
+    "C++异常捕获语法"
+  ],
+  "source_pages": [
+    442,
+    442
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "898_按_const_引用捕获异常对象",
+  "_chunk_pages": [
+    441,
+    444
+  ]
+}

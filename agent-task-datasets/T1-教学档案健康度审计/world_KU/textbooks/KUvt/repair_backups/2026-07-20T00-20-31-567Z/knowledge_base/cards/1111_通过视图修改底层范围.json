@@ -1,0 +1,45 @@
+{
+  "title": "通过视图修改底层范围",
+  "definition": "只要底层范围不是只读的，并且视图迭代产生的是可修改的元素引用，就可以通过视图修改底层范围中的元素。基于范围的 for 循环使用 auto& 遍历视图时，对元素的赋值会反映到底层 vector 中。",
+  "key_points": [
+    "视图通常不拥有底层数据，而是提供对底层元素的访问。",
+    "示例中 values 是可修改的 vector，filter、drop 和 reverse 组成的视图仍然可以访问其可修改元素。",
+    "使用 for (auto& value : result3) { value *= 10; } 可以修改视图所引用的底层元素。",
+    "示例中经过过滤、删除和反转后，被修改的是原 vector 中的偶数 6、8、10，结果分别变为 60、80、100。",
+    "若视图产生的是临时转换值而不是底层元素引用，则不能通过该视图修改底层范围；原文以 views::transform 的乘 2.0 示例说明这种情况。"
+  ],
+  "examples": [
+    "vector values{1, 2, 3, 4, 5, 6, 7, 8, 9, 10};\nauto result{values | views::filter([](const auto& value) { return value % 2 == 0; }) | views::drop(2) | views::reverse};\nfor (auto& value : result) { value *= 10; }\n此时 values 变为：1 2 3 4 5 6 60 7 80 9 100。"
+  ],
+  "misconceptions": [
+    "修改视图中的元素并不一定只修改视图对象；如果视图引用底层元素，修改会直接改变底层范围。",
+    "views::reverse 只改变访问顺序，不会把底层 vector 的存储顺序反转。",
+    "不能因为所有视图都可遍历，就认为所有视图都可写。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何通过视图将筛选出的后 3 个偶数乘以 10？",
+      "a": "先用 views::filter 保留偶数，再用 views::drop(2) 删除前两个偶数，然后用范围 for 循环以 auto& 遍历结果视图并执行 value *= 10。"
+    },
+    {
+      "q": "通过可写视图修改元素后，底层 vector 会发生什么？",
+      "a": "如果视图返回的是底层元素的可修改引用，修改会直接反映到底层 vector 中。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "范围适配器的管道组合",
+    "范围视图的惰性求值"
+  ],
+  "source_pages": [
+    542,
+    542
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1111_通过视图修改底层范围",
+  "_chunk_pages": [
+    541,
+    544
+  ]
+}

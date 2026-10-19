@@ -1,0 +1,45 @@
+{
+  "title": "伪类选择器",
+  "definition": "伪类选择器用于选择处于特定状态的元素。它的表现像是给文档中的某个部分应用了一个类，因此代码更灵活、也更易维护；伪类选择器以单冒号“:”开头。",
+  "key_points": [
+    "用于选择处于特定状态的元素。",
+    "其表现像是为文档的某个部分应用了一个类。",
+    "伪类选择器的前缀是单冒号“:”。",
+    "常见伪类包括 :nth-child、:nth-of-type、:not、:hover、:active、:first-child、:first-of-type。"
+  ],
+  "examples": [
+    ":hover",
+    "li:first-child",
+    "span:nth-child(2n+1)",
+    "E:not(selector)"
+  ],
+  "misconceptions": [
+    "伪类不是给元素添加真实的 class 名称。",
+    "伪类通常描述状态或结构关系，不是创建新的 DOM 元素。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "伪类选择器的作用是什么？",
+      "a": "用于选择处于特定状态的元素。"
+    },
+    {
+      "q": "伪类选择器的书写前缀是什么？",
+      "a": "单冒号“:”。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "CSS选择器"
+  ],
+  "source_pages": [
+    97,
+    100
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "125_伪类选择器",
+  "_chunk_pages": [
+    97,
+    100
+  ]
+}

@@ -1,0 +1,50 @@
+{
+  "title": "使用虚函数实现基于 Shape 的运行时多态",
+  "definition": "原文通过 Shape、Square、Circle 和 Renderer 展示运行时多态。Shape 声明纯虚函数 `render()`；Square 和 Circle 继承 Shape，并分别重写该函数。Renderer 保存或接收 Shape 指针集合，遍历集合并调用每个对象的 `render()`，因此同一段 Renderer 代码可以处理不同的具体形状。",
+  "key_points": [
+    "Shape 是抽象基类，因为其中声明了纯虚函数 `virtual void render() = 0`。",
+    "Square 和 Circle 都是 Shape 的派生类，并使用 `void render() override` 提供各自实现。",
+    "Renderer 通过 `Shape*` 访问对象，而不需要知道对象究竟是 Square 还是 Circle。",
+    "调用 `object->render()` 时，会根据对象的实际派生类型选择相应的重写函数。"
+  ],
+  "examples": [
+    "核心结构可写为：`class Shape { public: virtual void render() = 0; };`。",
+    "派生类示例：`class Square : public Shape { public: void render() override { /* Render square... */ } };`。",
+    "另一个派生类示例：`class Circle : public Shape { public: void render() override { /* Render circle... */ } };`。",
+    "Renderer 示例：`void render(const vector<Shape*>& objects) { for (auto* object : objects) { object->render(); } }`。"
+  ],
+  "misconceptions": [
+    "Shape 的纯虚函数声明不会自动提供 Square 或 Circle 的具体绘制行为，具体行为需要由派生类实现。",
+    "Renderer 不需要分别接收 `vector<Square>` 和 `vector<Circle>`，它可以接收统一的 `vector<Shape*>`。",
+    "`override` 表示派生类函数重写基类虚函数，并不是创建一个与基类无关的新函数。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么 Shape 可以作为 Square 和 Circle 的统一接口？",
+      "a": "因为 Square 和 Circle 都公有继承 Shape，并实现 Shape 声明的纯虚函数 render()。"
+    },
+    {
+      "q": "Renderer 如何对不同形状执行各自的绘制逻辑？",
+      "a": "Renderer 遍历 Shape 指针集合，对每个元素调用 `object->render()`；虚函数机制会调用实际对象类型的重写版本。"
+    },
+    {
+      "q": "为什么不能直接实例化包含 `virtual void render() = 0` 的 Shape？",
+      "a": "因为包含纯虚函数的类是抽象类，不能直接实例化。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++继承与虚函数"
+  ],
+  "source_pages": [
+    185,
+    188
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "261_使用虚函数实现基于_shape_的运行时多态",
+  "_chunk_pages": [
+    185,
+    188
+  ]
+}

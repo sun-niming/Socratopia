@@ -1,0 +1,43 @@
+{
+  "title": "静态成员函数与继承层次中的调用",
+  "definition": "静态成员函数属于类而不是某个对象实例，不能依靠对象的运行时类型实现动态绑定。在继承层次中，通过派生类对象调用静态成员函数，以及通过基类类型的引用调用同名静态成员函数，调用结果可能依据表达式的静态类型确定，而不是依据对象的实际派生类型确定。原文示例涉及 `BaseStatic`、`DerivedStatic`、静态成员函数 `beStatic()`，以及绑定到派生类对象的 `BaseStatic&` 引用。",
+  "key_points": [
+    "静态成员函数不具有隐含的 `this` 指针，因此不能直接访问某个对象的非静态成员。",
+    "静态成员函数不是虚函数，不能像普通虚成员函数那样通过基类引用实现运行时多态。",
+    "若基类和派生类定义同名静态成员函数，应根据调用表达式的静态类型判断调用哪个函数；例如 `myDerivedStatic.beStatic();` 与 `ref.beStatic();` 可能调用不同类中的同名函数。"
+  ],
+  "examples": [
+    "原文涉及如下调用关系：`DerivedStatic myDerivedStatic;`、`BaseStatic& ref{ myDerivedStatic };`、`myDerivedStatic.beStatic();`、`ref.beStatic();`。",
+    "静态成员函数也可以使用类名限定调用，例如 `BaseStatic::beStatic();` 或 `DerivedStatic::beStatic();`。"
+  ],
+  "misconceptions": [
+    "不能因为基类引用实际绑定到派生类对象，就认为静态成员函数会自动进行动态分派。",
+    "静态成员函数不等于普通成员函数；它不依赖具体对象状态，也不能使用 `this`。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "静态成员函数能否通过基类引用实现运行时多态？",
+      "a": "不能。静态成员函数不是虚函数，调用通常依据表达式的静态类型或显式类名限定确定。"
+    },
+    {
+      "q": "如果 `BaseStatic& ref` 绑定到 `DerivedStatic` 对象，调用 `ref.beStatic()` 是否必然调用 `DerivedStatic::beStatic()`？",
+      "a": "不必然。静态成员函数不进行动态绑定，调用结果依据静态类型等规则确定。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "继承与基类引用",
+    "静态成员函数"
+  ],
+  "source_pages": [
+    337,
+    338
+  ],
+  "needs_verification": true,
+  "verify_query": "Marc Gregoire C++20 Advanced Programming 第337页 DerivedStatic BaseStatic beStatic 静态成员函数 继承 ref.beStatic",
+  "concept_id": "437_静态成员函数与继承层次中的调用",
+  "_chunk_pages": [
+    337,
+    340
+  ]
+}

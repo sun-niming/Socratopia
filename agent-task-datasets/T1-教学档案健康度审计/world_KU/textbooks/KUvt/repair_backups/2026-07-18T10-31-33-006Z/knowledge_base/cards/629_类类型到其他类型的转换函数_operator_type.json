@@ -1,0 +1,45 @@
+{
+  "title": "类类型到其他类型的转换函数 operator type",
+  "definition": "类可以定义转换函数，将类对象隐式或显式转换为指定类型。原文以 `SpreadsheetCell` 为例，声明 `operator double() const`，其函数体返回 `getValue()`，因此可将 `SpreadsheetCell` 对象转换为 `double`。还展示了转换为 `std::string` 的 `operator std::string() const`。转换函数没有显式的返回类型，目标类型写在 `operator` 后面。",
+  "key_points": [
+    "典型声明形式为 `operator double() const;`，定义形式可写为 `SpreadsheetCell::operator double() const { return getValue(); }`。",
+    "转换函数的目标类型由 `operator` 后的类型决定，例如 `double` 或 `std::string`。",
+    "转换函数通常没有普通函数形式的返回类型；目标类型不是写在函数名前面的返回类型位置。",
+    "原文指出，定义转换函数后，可以进行相应的类型转换；例如 `static_cast<string>(cell)`。"
+  ],
+  "examples": [
+    "```cpp\nclass SpreadsheetCell {\npublic:\n    operator double() const;\n    operator std::string() const;\n};\n\nSpreadsheetCell::operator double() const {\n    return getValue();\n}\n\nSpreadsheetCell::operator std::string() const {\n    return doubleToString(getValue());\n}\n\nSpreadsheetCell cell{1.23};\nstd::string str2{static_cast<std::string>(cell)};\n```",
+    "转换为 `double` 的目标是让 `SpreadsheetCell` 对象能够作为数值使用，例如：`double d{static_cast<double>(cell)};`"
+  ],
+  "misconceptions": [
+    "转换函数不是写成普通的 `double operator double()`；`operator double()` 本身就是函数声明形式。",
+    "拥有转换函数不等于所有上下文都一定能无歧义地完成隐式转换；多个可行转换可能导致二义性。",
+    "`static_cast` 明确指定了转换方向，但它仍然要求类中存在可用的目标类型转换路径。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`SpreadsheetCell::operator double() const` 表示什么？",
+      "a": "它是 `SpreadsheetCell` 到 `double` 的用户定义转换函数，调用时返回该单元格的数值，例如通过 `getValue()` 获得。"
+    },
+    {
+      "q": "如何显式地把 `cell` 转换为字符串？",
+      "a": "可以写成 `std::string str2{static_cast<std::string>(cell)};`，它会调用 `SpreadsheetCell` 到 `std::string` 的转换函数。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++类与成员函数",
+    "C++类型转换"
+  ],
+  "source_pages": [
+    485,
+    488
+  ],
+  "needs_verification": true,
+  "verify_query": "Marc Gregoire Professional C++ 5th edition 15.8 SpreadsheetCell operator double operator string exact example",
+  "concept_id": "629_类类型到其他类型的转换函数_operator_type",
+  "_chunk_pages": [
+    485,
+    488
+  ]
+}

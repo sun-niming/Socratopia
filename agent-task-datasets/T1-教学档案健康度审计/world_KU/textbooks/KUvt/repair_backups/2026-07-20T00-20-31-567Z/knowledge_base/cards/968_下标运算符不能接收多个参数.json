@@ -1,0 +1,44 @@
+{
+  "title": "下标运算符不能接收多个参数",
+  "definition": "C++ 的下标运算符 operator[] 不能被重载为接收多个参数。如果需要通过多个索引实现二维或多维访问，应重载函数调用运算符 operator()，例如使用 `myArray(3, 4) = 6` 表示访问二维数组中的一个元素。",
+  "key_points": [
+    "operator[] 不能提供多个下标参数。",
+    "operator() 可以接收多个参数，因此适合实现多维数组访问。",
+    "多维访问的调用形式可以是 `myArray(3, 4)`，而不是 `myArray[3, 4]`。"
+  ],
+  "examples": [
+    "二维数组访问示例：\n```cpp\nmyArray(3, 4) = 6;\n```",
+    "与嵌套数组的另一种形式对比：\n```cpp\nArray<Array<int>> a;\na[2][4] = 24;\n```"
+  ],
+  "misconceptions": [
+    "可以把 operator[] 重载成任意多个参数的形式；错误，原文明确指出不能这样做。",
+    "多维数组只能使用嵌套的 operator[]；错误，也可以通过 operator() 接收多个索引。",
+    "`myArray(3, 4)` 一定是普通函数调用；如果类重载了 operator()，它就是函数调用运算符调用。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如果需要让下标访问接收多个索引，应使用哪个运算符？",
+      "a": "应使用函数调用运算符 `operator()`，例如 `myArray(3, 4) = 6`。"
+    },
+    {
+      "q": "为什么不能写一个接收多个参数的 operator[]？",
+      "a": "C++ 不允许将下标运算符重载为接收多个参数的形式。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "运算符重载基础",
+    "多维数组表示"
+  ],
+  "source_pages": [
+    483,
+    484
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "968_下标运算符不能接收多个参数",
+  "_chunk_pages": [
+    481,
+    484
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "title": "vector 的 size、capacity、empty 与 ssize",
+  "definition": "vector 的 size() 返回当前实际元素个数，capacity() 返回在下一次重分配之前可以容纳的元素数量。当前仍可在不重分配的情况下插入的元素数量为 $capacity()-size()$。empty() 用于判断 vector 是否为空；非成员函数 std::size()、std::empty() 可用于多种容器，std::ssize() 以有符号整型返回大小。",
+  "key_points": [
+    "size() 描述实际存在的元素数量。",
+    "capacity() 描述已分配存储空间能够容纳的元素数量，通常满足 capacity() >= size()。",
+    "在不发生重分配的前提下，剩余可容纳数量为 $$capacity()-size()$$。",
+    "std::size() 和 std::empty() 是非成员辅助函数，也可以用于静态分配的 C 风格数组和 initializer_list。",
+    "std::ssize() 返回有符号类型的大小，适合需要有符号索引或避免无符号比较问题的场景。"
+  ],
+  "examples": [
+    "cout << std::size(vec) << endl;\ncout << std::empty(vec) << endl;",
+    "auto s1 = std::size(vec); // 原文示例说明其类型为 size_t，即无符号类型\nauto s2 = std::ssize(vec); // 原文示例说明其类型为有符号整型"
+  ],
+  "misconceptions": [
+    "size() 和 capacity() 不一定相等；vector 可以有未使用的预留容量。",
+    "capacity() 表示已有元素数量是错误的，已有元素数量应使用 size() 查询。",
+    "empty() 判断的是 size() 是否为 0，而不是 capacity() 是否为 0。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如果 vector 的 size() 为 7、capacity() 为 10，在不重分配时还能容纳多少个元素？",
+      "a": "还能容纳 $10-7=3$ 个元素。"
+    },
+    {
+      "q": "size() 与 capacity() 的区别是什么？",
+      "a": "size() 返回当前实际元素个数；capacity() 返回不发生重分配时最多可容纳的元素个数。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "vector 基本操作"
+  ],
+  "source_pages": [
+    560,
+    560
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 std::vector size capacity empty std::size std::empty std::ssize 返回类型 capacity 可以为 0 标准文档",
+  "concept_id": "1156_vector_的_size_capacity_empty_与_ssize",
+  "_chunk_pages": [
+    557,
+    560
+  ]
+}

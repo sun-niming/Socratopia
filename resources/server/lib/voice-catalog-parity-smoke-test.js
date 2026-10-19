@@ -99,7 +99,7 @@ async function withVoiceModule(options, fn) {
 }
 
 // --- 1. the picker merges the catalog into the bundled snapshot -----------------------
-check("the catalog fetch adds the 23 voices without dropping the bundled style voices", async () => {
+check("the catalog fetch adds the 31 voices without dropping the bundled style voices", async () => {
   await withVoiceModule({ loadCatalog: false }, async (voice, requests) => {
     const before = Array.from(voice.VOICE_LIBRARY);
     assert.strictEqual(before.length, voice.BUNDLED_SNAPSHOT.length, "the bundled snapshot is the initial picker list");
@@ -111,7 +111,7 @@ check("the catalog fetch adds the 23 voices without dropping the bundled style v
     assert(!requests.some((r) => r.url.includes("/api/")), "the picker must not call a protected route");
 
     const after = Array.from(voice.VOICE_LIBRARY);
-    assert.strictEqual(after.length, before.length + 23, "the fetch must add exactly the 23 catalog voices");
+    assert.strictEqual(after.length, before.length + 31, "the fetch must add exactly the 31 catalog voices");
     assert.deepStrictEqual(after.slice(0, before.length), before, "the bundled style voices must survive the merge");
     assert.deepStrictEqual(after.slice(before.length), lib.listVoices(catalog),
       "the picker projection must match listVoices()");
@@ -180,7 +180,7 @@ check("the browser posts exactly the reference the server lib resolves, for ever
   assert.strictEqual(compared, modes.length * VOICES.length * EMOTIONS.length);
 });
 
-check("13 voices speak v4 and 10 speak v2ProPlus, on the wire", async () => {
+check("14 voices speak v4 and 17 speak v2ProPlus, on the wire", async () => {
   await withVoiceModule({}, async (voice, requests) => {
     const versions = {};
     for (const voiceId of VOICES) {
@@ -190,8 +190,8 @@ check("13 voices speak v4 and 10 speak v2ProPlus, on the wire", async () => {
       assert(sent, voiceId + " must post a synthesis request (captured " + (requests.length - before) + " calls)");
       versions[voiceId] = sent.body.version;
     }
-    assert.strictEqual(Object.values(versions).filter((v) => v === "v4").length, 13);
-    assert.strictEqual(Object.values(versions).filter((v) => v === "v2ProPlus").length, 10);
+    assert.strictEqual(Object.values(versions).filter((v) => v === "v4").length, 14);
+    assert.strictEqual(Object.values(versions).filter((v) => v === "v2ProPlus").length, 17);
     assert(!Object.values(versions).some((v) => v === undefined), "no voice may fall back to the legacy version");
   });
 });

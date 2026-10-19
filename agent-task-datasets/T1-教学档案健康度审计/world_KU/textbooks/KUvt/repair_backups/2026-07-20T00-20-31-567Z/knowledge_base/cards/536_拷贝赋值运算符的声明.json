@@ -1,0 +1,46 @@
+{
+  "title": "拷贝赋值运算符的声明",
+  "definition": "类的拷贝赋值运算符是对 `operator=` 的重载。典型声明接受源对象的 `const` 引用，并返回调用对象自身的非 const 引用。参数常命名为 `rhs`，表示等号右边的对象；调用该成员函数的对象则是等号左边的目标对象。",
+  "key_points": [
+    "典型签名为 `ClassName& operator=(const ClassName& rhs);`。",
+    "使用 `const` 引用参数可读取源对象而不修改它。",
+    "返回类型是当前类对象的引用。",
+    "`rhs` 只是表示 right-hand side 的常用参数名，可以换成其他合法名称。"
+  ],
+  "examples": [
+    "`SpreadsheetCell` 的声明为：`SpreadsheetCell& operator=(const SpreadsheetCell& rhs);`。",
+    "表达式 `anotherCell = myCell;` 可理解为成员函数调用：`anotherCell.operator=(myCell);`。"
+  ],
+  "misconceptions": [
+    "误以为赋值运算符是普通构造函数；它是名为 `operator=` 的运算符重载成员函数。",
+    "误以为参数名必须是 `rhs`；该名称只是表示“右边对象”的惯例。",
+    "误以为赋值运算符应按值接收源对象；原文给出的典型形式使用 `const` 引用。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "怎样声明 `SpreadsheetCell` 的典型拷贝赋值运算符？",
+      "a": "`SpreadsheetCell& operator=(const SpreadsheetCell& rhs);`。"
+    },
+    {
+      "q": "表达式 `anotherCell = myCell;` 中，哪个对象调用 `operator=`？",
+      "a": "左边的 `anotherCell` 调用 `operator=`，右边的 `myCell` 作为参数传入。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "对象赋值",
+    "const 引用",
+    "运算符重载"
+  ],
+  "source_pages": [
+    252,
+    252
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "536_拷贝赋值运算符的声明",
+  "_chunk_pages": [
+    249,
+    252
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "title": "粘性定位",
+  "definition": "粘性定位（position: sticky）相对于可以滚动的最近父元素定位，可以看作相对定位和固定定位的混合：元素在跨越特定阈值前表现为相对定位，之后表现为固定定位。",
+  "key_points": [
+    "定位参考对象是可以滚动的最近父元素",
+    "跨越特定阈值前为相对定位，之后为固定定位",
+    "设置 position: sticky 时，必须同时设置 top、bottom、right、left 中的至少一个，否则该元素仍为相对定位"
+  ],
+  "examples": [
+    "position: sticky; top: 0;"
+  ],
+  "misconceptions": [
+    "认为 sticky 不需要设置任何偏移属性也能生效",
+    "认为 sticky 总是直接固定在页面上，不会先表现为相对定位"
+  ],
+  "qa_pairs": [
+    {
+      "q": "粘性定位可以看作哪两种定位的混合？",
+      "a": "相对定位和固定定位的混合。"
+    },
+    {
+      "q": "使用 position: sticky 时，至少要配合什么属性之一？",
+      "a": "top、bottom、right、left 中的至少一个。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "定位方式（层定位）"
+  ],
+  "source_pages": [
+    141,
+    144
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "203_粘性定位",
+  "_chunk_pages": [
+    141,
+    144
+  ]
+}

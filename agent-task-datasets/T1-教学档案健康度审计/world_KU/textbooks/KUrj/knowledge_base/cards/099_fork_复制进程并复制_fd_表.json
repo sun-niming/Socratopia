@@ -1,0 +1,39 @@
+{
+  "title": "fork 复制进程并复制 fd 表",
+  "definition": "在 Unix/Linux 中，`fork()` 创建子进程时，会把父进程的进程上下文复制给子进程；在本讲义的服务器场景里，父子进程都会持有 `listen_fd` 和 `client_fd` 的副本。因此，`fork()` 之后必须按职责关闭不需要的文件描述符：父进程关闭 `client_fd`，子进程关闭 `listen_fd`。",
+  "key_points": [
+    "fork 后父子进程都会有同一组文件描述符的副本。",
+    "父进程负责继续监听，子进程负责处理当前客户端连接。",
+    "如果 fd 不及时关闭，会造成资源浪费或逻辑混乱。"
+  ],
+  "examples": [
+    "示例职责分工：父进程关闭 `client_fd`，子进程关闭 `listen_fd`。",
+    "项目内最小示例：`pid_t pid = fork(); if (pid == 0) { close(listen_fd); handle_client(client_fd, &client_addr); close(client_fd); _exit(0); } else if (pid > 0) { close(client_fd); } else { perror(\"fork\"); close(client_fd); }`"
+  ],
+  "misconceptions": [
+    "误以为 `fork()` 只复制进程，不会影响文件描述符。",
+    "误以为父子进程都可以一直保留所有 fd 而不关闭。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "fork 之后为什么要让父子进程分别关闭不同的 fd？",
+      "a": "因为父子进程都复制了 fd 表，父进程应关闭 `client_fd`，子进程应关闭 `listen_fd`，以便各自只保留自己需要的连接。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "进程",
+    "文件描述符"
+  ],
+  "source_pages": [
+    61,
+    62
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "099_fork_复制进程并复制_fd_表",
+  "_chunk_pages": [
+    61,
+    64
+  ]
+}

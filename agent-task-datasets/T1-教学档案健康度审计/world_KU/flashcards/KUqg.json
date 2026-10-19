@@ -1,0 +1,1691 @@
+{
+  "textbookId": "KUqg",
+  "updatedAt": "2026-09-15T06:06:53.224Z",
+  "cards": [
+    {
+      "id": "fc_1787556342948_000_76fd5f3626fe",
+      "question": "某住宅接入网络从电缆头端到地区枢纽使用光纤，从地区枢纽到各家庭使用同轴电缆。对该网络结构最准确的描述是什么？",
+      "choices": [
+        "混合光纤同轴（HFC）系统",
+        "电缆因特网接入的所有可能结构",
+        "数字用户线接入复用（DSLAM）系统",
+        "被动光纤网络（PON）系统"
+      ],
+      "correctIndex": 0,
+      "explanation": "这种前段使用光纤、入户段使用同轴电缆的结构称为混合光纤同轴（HFC）系统；“电缆因特网接入”是更宽泛的接入方式名称。",
+      "source": {
+        "textbook": "计算机网络（原书第7版） 自顶向下方法 (James F. Kurose Keith W. Ross) (z-library.sk  1lib.sk  z-lib.sk)(1)(1)",
+        "chapter": "",
+        "textbookSlug": "KUqg"
+      },
+      "created": "2026-08-24T07:25:42.948Z",
+      "conversationId": "a7jcBAaKJydSBKo-I7e7T",
+      "status": "active",
+      "history": [
+        {
+          "schemaVersion": 2,
+          "time": "2026-08-24T07:49:07.354Z",
+          "chosen": 0,
+          "correct": true,
+          "domainRevision": 1,
+          "answerRecordId": "flashcard:fc_1787556342948_000_76fd5f3626fe:1"
+        }
+      ],
+      "nextReview": "2026-08-24T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1787556342949_001_bf456ce5a362",
+      "question": "多个家庭连接在同一段作为共享媒体的同轴电缆上。当一个家庭发送数据时，下列理解哪一项正确？",
+      "choices": [
+        "所有设备不仅能收到信号，而且必须把其中的数据交给应用程序",
+        "共享媒体能够保证多台设备同时发送时不会发生冲突",
+        "只有目标设备在物理层能够收到信号，其他设备完全感知不到",
+        "其他设备可能收到传播的信号，但不一定会接受并处理其中的数据"
+      ],
+      "correctIndex": 3,
+      "explanation": "共享媒体上的信号可能传播到多个连接设备，但设备是否继续接受和处理数据，还要由寻址及其他协议规则决定。",
+      "source": {
+        "textbook": "计算机网络（原书第7版） 自顶向下方法 (James F. Kurose Keith W. Ross) (z-library.sk  1lib.sk  z-lib.sk)(1)(1)",
+        "chapter": "",
+        "textbookSlug": "KUqg"
+      },
+      "created": "2026-08-24T07:25:42.949Z",
+      "conversationId": "a7jcBAaKJydSBKo-I7e7T",
+      "status": "active",
+      "history": [],
+      "nextReview": "2026-08-24T07:25:42.949Z",
+      "interval": 0,
+      "ease": 2.5,
+      "repetitions": 0
+    },
+    {
+      "id": "fc_1787556342949_002_e42cbd8443fe",
+      "question": "一根 UTP 电缆连接电脑和以太网交换机时，为什么它属于导引型媒体？",
+      "choices": [
+        "它使用的电磁信号不会受到任何外界干扰",
+        "它只能用于固定设备之间的通信",
+        "它通过交换机引导分组选择网络路径",
+        "信号沿双绞铜线这一固体介质传播"
+      ],
+      "correctIndex": 3,
+      "explanation": "UTP 中的电磁信号沿双绞铜线这一固体介质传播，因此属于导引型媒体；是否连接交换机并不改变其物理媒体类别。",
+      "source": {
+        "textbook": "计算机网络（原书第7版） 自顶向下方法 (James F. Kurose Keith W. Ross) (z-library.sk  1lib.sk  z-lib.sk)(1)(1)",
+        "chapter": "",
+        "textbookSlug": "KUqg"
+      },
+      "created": "2026-08-24T07:25:42.949Z",
+      "conversationId": "a7jcBAaKJydSBKo-I7e7T",
+      "status": "active",
+      "history": [],
+      "nextReview": "2026-08-24T07:25:42.949Z",
+      "interval": 0,
+      "ease": 2.5,
+      "repetitions": 0
+    },
+    {
+      "id": "fc_1787556342949_003_004bd0887e2f",
+      "question": "一条 DSL 线路能够同时承载电话、上行数据和下行数据，而且标称下行速率高于上行速率。对此最准确的解释是什么？",
+      "choices": [
+        "DSLAM 会让每个家庭的实际速率始终等于标称速率",
+        "不同业务占用不同频段，而上下行分配的速率通常不同",
+        "电话与数据轮流独占整条线路，下行轮到线路的时间更长",
+        "电话和数据使用完全不同的入户线缆，因此互不影响"
+      ],
+      "correctIndex": 1,
+      "explanation": "DSL 利用频分复用把电话、上行和下行安排在不同频段，从而支持同时使用；下行与上行速率不同且通常下行更快，因此属于不对称接入。",
+      "source": {
+        "textbook": "计算机网络（原书第7版） 自顶向下方法 (James F. Kurose Keith W. Ross) (z-library.sk  1lib.sk  z-lib.sk)(1)(1)",
+        "chapter": "",
+        "textbookSlug": "KUqg"
+      },
+      "created": "2026-08-24T07:25:42.949Z",
+      "conversationId": "a7jcBAaKJydSBKo-I7e7T",
+      "status": "active",
+      "history": [],
+      "nextReview": "2026-08-24T07:25:42.949Z",
+      "interval": 0,
+      "ease": 2.5,
+      "repetitions": 0
+    },
+    {
+      "id": "fc_1787556342949_004_a85508c7b739",
+      "question": "在 PON 光纤接入中，家庭设备需要接入光纤网络，而中心局需要汇集多户连接并与外部网络相连。ONT 和 OLT 的位置与职责应如何对应？",
+      "choices": [
+        "ONT 位于家庭侧，OLT 位于中心局侧",
+        "ONT 和 OLT 都位于光纤分配器中，家庭与中心局无需端接设备",
+        "OLT 位于家庭侧，ONT 位于中心局侧",
+        "ONT 和 OLT 都位于家庭侧，只是分别处理上行与下行"
+      ],
+      "correctIndex": 0,
+      "explanation": "ONT 位于家庭侧，负责端接用户光纤并连接家庭设备；OLT 位于中心局侧，汇集用户连接并连接运营商网络。",
+      "source": {
+        "textbook": "计算机网络（原书第7版） 自顶向下方法 (James F. Kurose Keith W. Ross) (z-library.sk  1lib.sk  z-lib.sk)(1)(1)",
+        "chapter": "",
+        "textbookSlug": "KUqg"
+      },
+      "created": "2026-08-24T07:25:42.949Z",
+      "conversationId": "a7jcBAaKJydSBKo-I7e7T",
+      "status": "active",
+      "history": [],
+      "nextReview": "2026-08-24T07:25:42.949Z",
+      "interval": 0,
+      "ease": 2.5,
+      "repetitions": 0
+    },
+    {
+      "id": "fc_1787931886692_000_2f981cc74c8c",
+      "question": "某手机接收到同一基站信号的多个副本：一个沿直线路径到达，另外几个经建筑物反射后稍晚到达，导致接收质量下降。这一现象主要属于什么？",
+      "choices": [
+        "电磁干扰",
+        "路径损耗",
+        "遮挡衰落",
+        "多径衰落"
+      ],
+      "correctIndex": 3,
+      "explanation": "这是多径衰落，因为同一信号经反射沿不同长度的路径到达接收端，各副本的到达时间和相位不同，叠加后可能削弱信号。它不同于单纯由距离或遮挡导致的路径损耗，也不是其他无线信号造成的干扰。",
+      "source": {
+        "textbook": "计算机网络（原书第7版） 自顶向下方法 (James F. Kurose Keith W. Ross) (z-library.sk  1lib.sk  z-lib.sk)(1)(1)",
+        "chapter": "",
+        "textbookSlug": "KUqg"
+      },
+      "created": "2026-08-28T15:44:46.692Z",
+      "conversationId": "Nwha6-3fsGMsuE__qwYY0",
+      "status": "active",
+      "history": [
+        {
+          "schemaVersion": 2,
+          "time": "2026-08-28T15:44:52.267Z",
+          "chosen": 3,
+          "correct": true,
+          "domainRevision": 1,
+          "answerRecordId": "flashcard:fc_1787931886692_000_2f981cc74c8c:1"
+        }
+      ],
+      "nextReview": "2026-08-28T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1788239297412_000_35cdf82f41cf",
+      "question": "在电路交换中，如果一条链路的 4 条电路都已被占用，第 5 个连接请求到达时，最符合教材描述的情况是什么？",
+      "choices": [
+        "第 5 个连接暂时无法建立，会被阻塞",
+        "第 5 个连接会立即建立，只是其数据可能产生较大的排队时延",
+        "第 5 个连接可以进入缓存，等待某条电路空闲",
+        "第 5 个连接可以与已有连接共享一条电路，但速率会降低"
+      ],
+      "correctIndex": 0,
+      "explanation": "电路交换在建立连接时就要预留固定资源。资源全部被占用时，新连接无法获得所需电路，因此会被阻塞，而不是像分组交换那样先进入缓存排队。",
+      "source": {
+        "textbook": "计算机网络（原书第7版） 自顶向下方法 (James F. Kurose Keith W. Ross) (z-library.sk  1lib.sk  z-lib.sk)(1)(1)",
+        "chapter": "1.5 协议层次及其服务模型",
+        "textbookSlug": "KUqg"
+      },
+      "created": "2026-09-01T05:08:17.412Z",
+      "conversationId": "9WoMeQMvO7fOrwAEZmUxj",
+      "status": "active",
+      "history": [
+        {
+          "schemaVersion": 2,
+          "time": "2026-09-01T05:08:23.900Z",
+          "chosen": 0,
+          "correct": true,
+          "domainRevision": 1,
+          "answerRecordId": "flashcard:fc_1788239297412_000_35cdf82f41cf:1"
+        }
+      ],
+      "nextReview": "2026-09-01T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1788239297412_001_25f121b6c2f4",
+      "question": "关于 FDM 和 TDM，下列哪项最准确地描述了二者的资源划分方式？",
+      "choices": [
+        "FDM 和 TDM 都是按时间轮流使用整条链路，只是时隙长度不同",
+        "FDM 按时间划分资源，TDM 按频率划分资源",
+        "FDM 和 TDM 都是把链路划成固定频段，只是连接分配方式不同",
+        "FDM 按频率划分资源，TDM 按时间划分资源"
+      ],
+      "correctIndex": 3,
+      "explanation": "FDM 将链路频谱划分为不同频段，使连接能够在不同频率上同时传输；TDM 则将时间划分为时隙，让不同连接在不同时间使用链路。",
+      "source": {
+        "textbook": "计算机网络（原书第7版） 自顶向下方法 (James F. Kurose Keith W. Ross) (z-library.sk  1lib.sk  z-lib.sk)(1)(1)",
+        "chapter": "1.5 协议层次及其服务模型",
+        "textbookSlug": "KUqg"
+      },
+      "created": "2026-09-01T05:08:17.412Z",
+      "conversationId": "9WoMeQMvO7fOrwAEZmUxj",
+      "status": "active",
+      "history": [
+        {
+          "schemaVersion": 2,
+          "time": "2026-09-01T05:08:31.136Z",
+          "chosen": 3,
+          "correct": true,
+          "domainRevision": 1,
+          "answerRecordId": "flashcard:fc_1788239297412_001_25f121b6c2f4:1"
+        }
+      ],
+      "nextReview": "2026-09-01T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1788239297412_002_f866b5c8d4fb",
+      "question": "某链路的传输速率为 $R=1\\text{ Mbps}$，分组长度为 $L=1000$ 比特，平均到达速率为 $a=1000$ 个分组/秒，因此流量强度为 $\\frac{La}{R}=1$。如果这些分组以突发方式到达，最可能出现什么情况？",
+      "choices": [
+        "平均速率相等，但突发到达仍可能造成明显的排队时延",
+        "流量强度等于 1，因此队列必然始终为空",
+        "只要流量强度不超过 1，就不会发生任何排队",
+        "突发到达只会增加传播时延，不会影响排队时延"
+      ],
+      "correctIndex": 0,
+      "explanation": "流量强度等于 1 只说明平均到达能力与平均传输能力相等，并不能排除短时间内的大量分组同时到达。突发到达会使分组暂时排队，从而显著增加排队时延。",
+      "source": {
+        "textbook": "计算机网络（原书第7版） 自顶向下方法 (James F. Kurose Keith W. Ross) (z-library.sk  1lib.sk  z-lib.sk)(1)(1)",
+        "chapter": "1.5 协议层次及其服务模型",
+        "textbookSlug": "KUqg"
+      },
+      "created": "2026-09-01T05:08:17.412Z",
+      "conversationId": "9WoMeQMvO7fOrwAEZmUxj",
+      "status": "active",
+      "history": [
+        {
+          "schemaVersion": 2,
+          "time": "2026-09-01T05:08:48.337Z",
+          "chosen": 0,
+          "correct": true,
+          "domainRevision": 1,
+          "answerRecordId": "flashcard:fc_1788239297412_002_f866b5c8d4fb:1"
+        }
+      ],
+      "nextReview": "2026-09-01T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1788239297412_003_0755d425060d",
+      "question": "一个分组到达路由器时，输出链路处于空闲状态，但路由器仍需检查分组首部并决定转发到哪条出链路。这段时间应归入哪种时延？",
+      "choices": [
+        "传输时延",
+        "传播时延",
+        "排队时延",
+        "处理时延"
+      ],
+      "correctIndex": 3,
+      "explanation": "检查首部、检测差错和决定转发方向属于路由器对分组进行处理的过程，因此是处理时延。只有因输出链路忙而在队列中等待，才属于排队时延。",
+      "source": {
+        "textbook": "计算机网络（原书第7版） 自顶向下方法 (James F. Kurose Keith W. Ross) (z-library.sk  1lib.sk  z-lib.sk)(1)(1)",
+        "chapter": "1.5 协议层次及其服务模型",
+        "textbookSlug": "KUqg"
+      },
+      "created": "2026-09-01T05:08:17.412Z",
+      "conversationId": "9WoMeQMvO7fOrwAEZmUxj",
+      "status": "active",
+      "history": [
+        {
+          "schemaVersion": 2,
+          "time": "2026-09-01T05:08:54.574Z",
+          "chosen": 3,
+          "correct": true,
+          "domainRevision": 1,
+          "answerRecordId": "flashcard:fc_1788239297412_003_0755d425060d:1"
+        }
+      ],
+      "nextReview": "2026-09-01T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1788239297412_004_e15b58d38037",
+      "question": "教材用航空系统说明分层思想。把票务、行李、登机和飞行等功能划分给不同环节，主要是为了什么？",
+      "choices": [
+        "将复杂系统拆成职责明确的部分，便于协作、维护和局部修改",
+        "让每个环节都独立完成全部流程，避免依赖其他环节",
+        "通过增加环节数量，使每次通信都必须经过更多处理步骤",
+        "保证所有环节使用完全相同的技术和操作方式"
+      ],
+      "correctIndex": 0,
+      "explanation": "分层的核心是把复杂系统拆分为职责清楚的部分，使每层负责特定功能并与其他层协作。这样可以降低系统复杂性，也使局部修改和维护更容易。",
+      "source": {
+        "textbook": "计算机网络（原书第7版） 自顶向下方法 (James F. Kurose Keith W. Ross) (z-library.sk  1lib.sk  z-lib.sk)(1)(1)",
+        "chapter": "1.5 协议层次及其服务模型",
+        "textbookSlug": "KUqg"
+      },
+      "created": "2026-09-01T05:08:17.412Z",
+      "conversationId": "9WoMeQMvO7fOrwAEZmUxj",
+      "status": "active",
+      "history": [
+        {
+          "schemaVersion": 2,
+          "time": "2026-09-01T05:09:02.989Z",
+          "chosen": 0,
+          "correct": true,
+          "domainRevision": 1,
+          "answerRecordId": "flashcard:fc_1788239297412_004_e15b58d38037:1"
+        }
+      ],
+      "nextReview": "2026-09-01T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1788584925980_000_fbb4e977220f",
+      "question": "某 HFC 接入网络的下行带宽由多个家庭用户共享。为什么下行信道通常不会发生这些用户之间的发送碰撞？",
+      "choices": [
+        "下行数据由头端统一发送，用户只共同接收",
+        "每个用户实际上拥有完全独立的下行物理信道",
+        "下行信道使用 TCP，所以能从根本上避免碰撞",
+        "用户发送的数据会自动改走不共享的下行信道"
+      ],
+      "correctIndex": 0,
+      "explanation": "下行数据由有线头端统一发送，家庭用户只在该方向接收数据，因此不会有多个用户同时向下行信道发送。共享带宽并不意味着一定会发生碰撞。",
+      "source": {
+        "textbook": "计算机网络（原书第7版） 自顶向下方法 (James F. Kurose Keith W. Ross) (z-library.sk  1lib.sk  z-lib.sk)(1)(1)",
+        "chapter": "课后习题和问题",
+        "textbookSlug": "KUqg"
+      },
+      "created": "2026-09-05T05:08:45.980Z",
+      "conversationId": "HJbXZ7IXh_JqbW3VQczUA",
+      "status": "active",
+      "history": [
+        {
+          "schemaVersion": 2,
+          "time": "2026-09-05T05:10:31.805Z",
+          "chosen": 0,
+          "correct": true,
+          "domainRevision": 1,
+          "answerRecordId": "flashcard:fc_1788584925980_000_fbb4e977220f:1"
+        }
+      ],
+      "nextReview": "2026-09-05T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1788584925981_001_f7e0ef2bc4b4",
+      "question": "为什么 WiFi 通常不应与 3G/4G 一起归入广域无线接入？",
+      "choices": [
+        "WiFi 通常覆盖局部区域，而 3G/4G 可提供大范围蜂窝接入",
+        "WiFi 的速率通常更高，因此不能被归类为无线接入",
+        "WiFi 只能连接公司服务器，而 3G/4G 可以连接任意服务器",
+        "WiFi 使用有线链路传输，而 3G/4G 才使用无线链路"
+      ],
+      "correctIndex": 0,
+      "explanation": "WiFi 通常通过无线接入点覆盖家庭、办公室或校园等局部区域，属于无线局域网技术；3G/4G 依靠蜂窝基础设施提供大范围移动接入。",
+      "source": {
+        "textbook": "计算机网络（原书第7版） 自顶向下方法 (James F. Kurose Keith W. Ross) (z-library.sk  1lib.sk  z-lib.sk)(1)(1)",
+        "chapter": "课后习题和问题",
+        "textbookSlug": "KUqg"
+      },
+      "created": "2026-09-05T05:08:45.981Z",
+      "conversationId": "HJbXZ7IXh_JqbW3VQczUA",
+      "status": "active",
+      "history": [
+        {
+          "schemaVersion": 2,
+          "time": "2026-09-05T05:10:40.081Z",
+          "chosen": 0,
+          "correct": true,
+          "domainRevision": 1,
+          "answerRecordId": "flashcard:fc_1788584925981_001_f7e0ef2bc4b4:1"
+        }
+      ],
+      "nextReview": "2026-09-05T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1788584925981_002_f8c0b5a016a1",
+      "question": "关于因特网与万维网的关系，下列哪项理解最准确？",
+      "choices": [
+        "因特网与万维网只是同一系统的两个不同名称",
+        "因特网是通信基础设施，万维网是运行在其上的一种应用",
+        "万维网是通信基础设施，因特网是运行在其上的浏览应用",
+        "万维网只负责 DNS 解析，而因特网只负责显示网页"
+      ],
+      "correctIndex": 1,
+      "explanation": "因特网是连接大量网络并传输数据的基础设施，万维网则是运行在其上的应用，利用浏览器、服务器、网页和超链接提供信息访问。",
+      "source": {
+        "textbook": "计算机网络（原书第7版） 自顶向下方法 (James F. Kurose Keith W. Ross) (z-library.sk  1lib.sk  z-lib.sk)(1)(1)",
+        "chapter": "课后习题和问题",
+        "textbookSlug": "KUqg"
+      },
+      "created": "2026-09-05T05:08:45.981Z",
+      "conversationId": "HJbXZ7IXh_JqbW3VQczUA",
+      "status": "active",
+      "history": [
+        {
+          "schemaVersion": 2,
+          "time": "2026-09-05T05:10:48.923Z",
+          "chosen": 1,
+          "correct": true,
+          "domainRevision": 1,
+          "answerRecordId": "flashcard:fc_1788584925981_002_f8c0b5a016a1:1"
+        }
+      ],
+      "nextReview": "2026-09-05T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1788584925981_003_dfc03f79c55b",
+      "question": "两家不同厂商开发的浏览器和 Web 服务器能够正常交换请求与响应，协议标准在其中主要发挥了什么作用？",
+      "choices": [
+        "保证任何网络连接都不会出现丢包或时延",
+        "要求所有网络软件必须由同一家厂商开发",
+        "规定共同的通信规则，使不同系统能够互操作",
+        "让通信双方无须解析报文就能理解所有数据"
+      ],
+      "correctIndex": 2,
+      "explanation": "协议标准统一了报文格式、字段含义、交换顺序和响应行为，从而使不同厂商开发的系统具备互操作性。",
+      "source": {
+        "textbook": "计算机网络（原书第7版） 自顶向下方法 (James F. Kurose Keith W. Ross) (z-library.sk  1lib.sk  z-lib.sk)(1)(1)",
+        "chapter": "课后习题和问题",
+        "textbookSlug": "KUqg"
+      },
+      "created": "2026-09-05T05:08:45.981Z",
+      "conversationId": "HJbXZ7IXh_JqbW3VQczUA",
+      "status": "active",
+      "history": [
+        {
+          "schemaVersion": 2,
+          "time": "2026-09-05T05:10:57.524Z",
+          "chosen": 2,
+          "correct": true,
+          "domainRevision": 1,
+          "answerRecordId": "flashcard:fc_1788584925981_003_dfc03f79c55b:1"
+        }
+      ],
+      "nextReview": "2026-09-05T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1788584925981_004_e66fbc71bf0c",
+      "question": "用户已知某服务器的 IP 地址，因此尝试绕过 DNS 直接连接。下列哪项对此描述最准确？",
+      "choices": [
+        "绕过 DNS 后只能发送数据，不能接收服务器的响应",
+        "一定可以正常访问，因为域名在获得 IP 后不再有任何作用",
+        "完全不可以，因为所有 TCP/IP 通信都必须先经过 DNS",
+        "理论上可以绕过 DNS，但部分服务仍可能因依赖域名而无法正常访问"
+      ],
+      "correctIndex": 3,
+      "explanation": "DNS 的主要职责是把域名解析为 IP 地址；已知 IP 时理论上可直接建立网络连接，但现实中的虚拟主机选择或证书校验可能仍依赖域名。",
+      "source": {
+        "textbook": "计算机网络（原书第7版） 自顶向下方法 (James F. Kurose Keith W. Ross) (z-library.sk  1lib.sk  z-lib.sk)(1)(1)",
+        "chapter": "课后习题和问题",
+        "textbookSlug": "KUqg"
+      },
+      "created": "2026-09-05T05:08:45.981Z",
+      "conversationId": "HJbXZ7IXh_JqbW3VQczUA",
+      "status": "active",
+      "history": [
+        {
+          "schemaVersion": 2,
+          "time": "2026-09-05T05:11:09.261Z",
+          "chosen": 3,
+          "correct": true,
+          "domainRevision": 1,
+          "answerRecordId": "flashcard:fc_1788584925981_004_e66fbc71bf0c:1"
+        }
+      ],
+      "nextReview": "2026-09-05T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1788708005705_000_75ae5e95f003",
+      "question": "在一个 P2P 文件共享系统中，对等方 A 正从 B 下载文件，同时向 C 上传另一文件。如何理解 A 的角色？",
+      "choices": [
+        "A 对 B 是服务器，对 C 是客户",
+        "A 对 B 是客户，对 C 是服务器",
+        "A 既不是客户也不是服务器，因为 P2P 中没有这两种角色",
+        "A 始终是客户，因为它首先进行了下载"
+      ],
+      "correctIndex": 1,
+      "explanation": "客户与服务器是针对具体通信会话定义的：发起请求的一方是客户，响应请求并提供服务的一方是服务器。因此，A 在与 B 的会话中是客户，在与 C 的会话中是服务器。",
+      "source": {
+        "textbook": "计算机网络（原书第7版） 自顶向下方法 (James F. Kurose Keith W. Ross) (z-library.sk  1lib.sk  z-lib.sk)(1)(1)",
+        "chapter": "2.1.2 进程通信",
+        "textbookSlug": "KUqg"
+      },
+      "created": "2026-09-06T15:20:05.705Z",
+      "conversationId": "xzE4jMrdKfLVr6wH4Yo9L",
+      "status": "active",
+      "history": [
+        {
+          "schemaVersion": 2,
+          "time": "2026-09-06T15:20:37.186Z",
+          "chosen": 1,
+          "correct": true,
+          "domainRevision": 1,
+          "answerRecordId": "flashcard:fc_1788708005705_000_75ae5e95f003:1"
+        }
+      ],
+      "nextReview": "2026-09-06T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1788708005707_001_3bf35931d115",
+      "question": "浏览器进程需要通过 TCP 向 Web 服务器发送 HTTP 请求。套接字在这一过程中承担什么作用？",
+      "choices": [
+        "为 HTTP 请求选择网络中每一台路由器的转发路径",
+        "作为应用进程与运输层之间的接口，将应用报文交给 TCP",
+        "代替 TCP 保证所有报文都可靠且按时到达",
+        "仅用于把域名转换成服务器的 IP 地址"
+      ],
+      "correctIndex": 1,
+      "explanation": "套接字是应用层与运输层之间的接口，也是应用程序使用网络服务的 API。浏览器进程通过套接字把 HTTP 请求交给 TCP，但不能借此直接控制网络中的路由器如何转发分组。",
+      "source": {
+        "textbook": "计算机网络（原书第7版） 自顶向下方法 (James F. Kurose Keith W. Ross) (z-library.sk  1lib.sk  z-lib.sk)(1)(1)",
+        "chapter": "2.1.2 进程通信",
+        "textbookSlug": "KUqg"
+      },
+      "created": "2026-09-06T15:20:05.707Z",
+      "conversationId": "xzE4jMrdKfLVr6wH4Yo9L",
+      "status": "active",
+      "history": [
+        {
+          "schemaVersion": 2,
+          "time": "2026-09-06T15:22:46.280Z",
+          "chosen": 1,
+          "correct": true,
+          "domainRevision": 1,
+          "answerRecordId": "flashcard:fc_1788708005707_001_3bf35931d115:1"
+        }
+      ],
+      "nextReview": "2026-09-06T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1788708005707_002_c460bae8826b",
+      "question": "一台服务器同时运行 Web 服务和邮件服务。发送方使用了正确的服务器 IP 地址，却把原本发给 Web 服务的报文目的端口写成邮件服务的端口。最可能发生什么？",
+      "choices": [
+        "报文到达正确主机，但被交给邮件服务对应的接收套接字",
+        "报文会同时交给 Web 服务和邮件服务，由两个进程自行判断",
+        "报文无法到达服务器，因为端口号也用于在网络中定位主机",
+        "报文会由 IP 地址自动纠正端口并交给 Web 服务"
+      ],
+      "correctIndex": 0,
+      "explanation": "IP 地址负责定位目标主机，目的端口号负责定位该主机上的接收套接字。因而报文能到达正确主机，却会按照错误端口被交给邮件服务，而不是 Web 服务。",
+      "source": {
+        "textbook": "计算机网络（原书第7版） 自顶向下方法 (James F. Kurose Keith W. Ross) (z-library.sk  1lib.sk  z-lib.sk)(1)(1)",
+        "chapter": "2.1.2 进程通信",
+        "textbookSlug": "KUqg"
+      },
+      "created": "2026-09-06T15:20:05.707Z",
+      "conversationId": "xzE4jMrdKfLVr6wH4Yo9L",
+      "status": "active",
+      "history": [
+        {
+          "schemaVersion": 2,
+          "time": "2026-09-06T15:23:00.080Z",
+          "chosen": 0,
+          "correct": true,
+          "domainRevision": 1,
+          "answerRecordId": "flashcard:fc_1788708005707_002_c460bae8826b:1"
+        }
+      ],
+      "nextReview": "2026-09-06T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1788708005707_003_3a1e9d156b49",
+      "question": "在线游戏中，玩家按键后操作数据始终完整到达服务器，但画面要到 $2\\ \\text{s}$ 后才响应。该应用最主要缺少哪类运输服务？",
+      "choices": [
+        "安全性，因为延迟通常意味着端点鉴别失败",
+        "可靠数据传输，因为任何较慢的数据都应视为丢失",
+        "更高吞吐量，因为吞吐量足够就必然能保证每个操作及时到达",
+        "定时保证，即数据需在规定的时延上限内到达"
+      ],
+      "correctIndex": 3,
+      "explanation": "数据没有丢失说明问题不主要在可靠性，而固定且过长的响应延迟表明应用缺少定时保证。实时交互应用需要数据在规定的时间上限内到达。",
+      "source": {
+        "textbook": "计算机网络（原书第7版） 自顶向下方法 (James F. Kurose Keith W. Ross) (z-library.sk  1lib.sk  z-lib.sk)(1)(1)",
+        "chapter": "2.1.2 进程通信",
+        "textbookSlug": "KUqg"
+      },
+      "created": "2026-09-06T15:20:05.707Z",
+      "conversationId": "xzE4jMrdKfLVr6wH4Yo9L",
+      "status": "active",
+      "history": [
+        {
+          "schemaVersion": 2,
+          "time": "2026-09-06T15:23:11.934Z",
+          "chosen": 3,
+          "correct": true,
+          "domainRevision": 1,
+          "answerRecordId": "flashcard:fc_1788708005707_003_3a1e9d156b49:1"
+        }
+      ],
+      "nextReview": "2026-09-06T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1788924764858_000_e287c1f1066f",
+      "question": "在 DNS 分层结构中，根 DNS 服务器和顶级域（TLD）DNS 服务器的主要区别是什么？",
+      "choices": [
+        "根服务器指路到 TLD 服务器，TLD 服务器再指路到权威服务器",
+        "根服务器负责返回具体主机的 IP，TLD 服务器负责返回邮件服务器地址",
+        "根服务器存储所有顶级域的完整 IP 映射，TLD 服务器存储具体主机的 IP",
+        "根服务器和 TLD 服务器都可以直接返回权威服务器的 IP 地址"
+      ],
+      "correctIndex": 0,
+      "explanation": "根服务器只负责指向负责某个顶级域（如 .com）的 TLD 服务器，而 TLD 服务器负责指向具体域（如 example.com）的权威 DNS 服务器。两者都不直接存储具体主机的 IP 地址映射。",
+      "source": {
+        "textbook": "计算机网络（原书第7版） 自顶向下方法 (James F. Kurose Keith W. Ross) (z-library.sk  1lib.sk  z-lib.sk)(1)(1)",
+        "chapter": "2.4.3 DNS记录和报文",
+        "textbookSlug": "KUqg"
+      },
+      "created": "2026-09-09T03:32:44.858Z",
+      "conversationId": "OiAHH-VXyUf5_GIdndLOV",
+      "status": "active",
+      "history": [
+        {
+          "schemaVersion": 2,
+          "time": "2026-09-09T03:33:42.230Z",
+          "chosen": 0,
+          "correct": true,
+          "domainRevision": 1,
+          "answerRecordId": "flashcard:fc_1788924764858_000_e287c1f1066f:1"
+        }
+      ],
+      "nextReview": "2026-09-09T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1788924764859_001_bd6da0eeab24",
+      "question": "为什么 CNAME 和 MX 记录的 Value 字段填的是主机名而不是 IP 地址？",
+      "choices": [
+        "为了减少 DNS 服务器的存储空间占用",
+        "因为 DNS 协议规定 CNAME 和 MX 记录不能直接存储数字形式的 IP",
+        "避免 IP 分散在多条记录中导致更新时容易遗漏旧地址",
+        "因为主机名比 IP 地址更短，传输时更节省带宽"
+      ],
+      "correctIndex": 2,
+      "explanation": "这是一种'活扣'设计：IP 只在 A 记录中存一份，CNAME 和 MX 存稳定主机名。服务器换 IP 时只需修改一处 A 记录，所有引用自动跟随，避免出现废弃 IP 被错误使用的情况。",
+      "source": {
+        "textbook": "计算机网络（原书第7版） 自顶向下方法 (James F. Kurose Keith W. Ross) (z-library.sk  1lib.sk  z-lib.sk)(1)(1)",
+        "chapter": "2.4.3 DNS记录和报文",
+        "textbookSlug": "KUqg"
+      },
+      "created": "2026-09-09T03:32:44.859Z",
+      "conversationId": "OiAHH-VXyUf5_GIdndLOV",
+      "status": "active",
+      "history": [
+        {
+          "schemaVersion": 2,
+          "time": "2026-09-09T03:34:00.368Z",
+          "chosen": 2,
+          "correct": true,
+          "domainRevision": 1,
+          "answerRecordId": "flashcard:fc_1788924764859_001_bd6da0eeab24:1"
+        }
+      ],
+      "nextReview": "2026-09-09T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1788924764859_002_5b60012d384c",
+      "question": "假设某公司的 Web 服务器从旧 IP 换到新 IP，而权威 DNS 服务器上已经更新了对应的 A 记录。此时一个本地 DNS 服务器的缓存中仍存有旧 IP 且 TTL 尚未过期。当用户访问该网站时会发生什么？",
+      "choices": [
+        "用户被连接到新 IP，因为权威服务器已经更新了记录",
+        "用户被连接到旧 IP，直到 TTL 到期后缓存被清除",
+        "用户无法连接，因为新旧 IP 冲突导致 DNS 解析失败",
+        "DNS 会随机选择新旧 IP 之一返回给用户"
+      ],
+      "correctIndex": 1,
+      "explanation": "本地 DNS 服务器会直接返回缓存中的旧 IP，因为 TTL 未到期，它不会向上层查询新记录。用户会被连接到旧地址，直到缓存过期。",
+      "source": {
+        "textbook": "计算机网络（原书第7版） 自顶向下方法 (James F. Kurose Keith W. Ross) (z-library.sk  1lib.sk  z-lib.sk)(1)(1)",
+        "chapter": "2.4.3 DNS记录和报文",
+        "textbookSlug": "KUqg"
+      },
+      "created": "2026-09-09T03:32:44.859Z",
+      "conversationId": "OiAHH-VXyUf5_GIdndLOV",
+      "status": "active",
+      "history": [
+        {
+          "schemaVersion": 2,
+          "time": "2026-09-09T03:34:12.373Z",
+          "chosen": 1,
+          "correct": true,
+          "domainRevision": 1,
+          "answerRecordId": "flashcard:fc_1788924764859_002_5b60012d384c:1"
+        }
+      ],
+      "nextReview": "2026-09-09T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1788924764859_003_01e7d1fb2884",
+      "question": "在 DNS 资源记录中，哪一种记录的 Value 字段直接包含 IP 地址，因而成为解析链的最终'落地'记录？",
+      "choices": [
+        "A 记录",
+        "CNAME 记录",
+        "MX 记录",
+        "NS 记录"
+      ],
+      "correctIndex": 0,
+      "explanation": "A 记录的 Value 是 IP 地址。NS 记录的 Value 是权威服务器的主机名，CNAME 和 MX 的 Value 也都是主机名，需要再查一次 A 记录才能拿到 IP。",
+      "source": {
+        "textbook": "计算机网络（原书第7版） 自顶向下方法 (James F. Kurose Keith W. Ross) (z-library.sk  1lib.sk  z-lib.sk)(1)(1)",
+        "chapter": "2.4.3 DNS记录和报文",
+        "textbookSlug": "KUqg"
+      },
+      "created": "2026-09-09T03:32:44.859Z",
+      "conversationId": "OiAHH-VXyUf5_GIdndLOV",
+      "status": "active",
+      "history": [
+        {
+          "schemaVersion": 2,
+          "time": "2026-09-09T03:34:35.804Z",
+          "chosen": 0,
+          "correct": true,
+          "domainRevision": 1,
+          "answerRecordId": "flashcard:fc_1788924764859_003_01e7d1fb2884:1"
+        }
+      ],
+      "nextReview": "2026-09-09T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1788924764859_004_b126eb042742",
+      "question": "注册登记机构在用户注册域名时，会向 TLD 服务器中写入什么内容？为什么只写到这一层就停手？",
+      "choices": [
+        "写入该域所有主机名的完整映射，减少查询层级",
+        "写入指向权威服务器的 NS 记录和对应 A 记录，只声明'谁负责这个域'",
+        "写入该域所有邮件服务器的 MX 记录，保证邮件正常收发",
+        "写入 www 主机的 A 记录，方便用户直接解析网站 IP"
+      ],
+      "correctIndex": 1,
+      "explanation": "注册登记机构写入的是指向用户权威 DNS 服务器的 NS 记录和对应的 A 记录，即'谁负责这个域'。具体主机（如 www）的 IP 映射由公司自己的权威服务器维护，这样主机 IP 变更时无需惊动 TLD 服务器。",
+      "source": {
+        "textbook": "计算机网络（原书第7版） 自顶向下方法 (James F. Kurose Keith W. Ross) (z-library.sk  1lib.sk  z-lib.sk)(1)(1)",
+        "chapter": "2.4.3 DNS记录和报文",
+        "textbookSlug": "KUqg"
+      },
+      "created": "2026-09-09T03:32:44.859Z",
+      "conversationId": "OiAHH-VXyUf5_GIdndLOV",
+      "status": "active",
+      "history": [
+        {
+          "schemaVersion": 2,
+          "time": "2026-09-09T03:35:06.196Z",
+          "chosen": 1,
+          "correct": true,
+          "domainRevision": 1,
+          "answerRecordId": "flashcard:fc_1788924764859_004_b126eb042742:1"
+        }
+      ],
+      "nextReview": "2026-09-09T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1788925204437_000_76d42e6b9a89",
+      "question": "在电子邮件系统中，用户代理访问邮件服务器（如浏览器收发邮件）和邮件服务器之间转发邮件时，分别使用什么协议？",
+      "choices": [
+        "前者使用 HTTP，后者使用 SMTP",
+        "两者都使用 HTTP",
+        "前者使用 SMTP，后者使用 HTTP",
+        "两者都使用 SMTP"
+      ],
+      "correctIndex": 0,
+      "explanation": "Web 邮箱场景下，用户代理到邮件服务器使用 HTTP 协议；而邮件服务器之间互相转发邮件使用 SMTP 协议，两者参与者不同，协议也不同。",
+      "source": {
+        "textbook": "计算机网络（原书第7版） 自顶向下方法 (James F. Kurose Keith W. Ross) (z-library.sk  1lib.sk  z-lib.sk)(1)(1)",
+        "chapter": "",
+        "textbookSlug": "KUqg"
+      },
+      "created": "2026-09-09T03:40:04.437Z",
+      "conversationId": "OiAHH-VXyUf5_GIdndLOV",
+      "status": "active",
+      "history": [
+        {
+          "schemaVersion": 2,
+          "time": "2026-09-09T03:40:22.719Z",
+          "chosen": 0,
+          "correct": true,
+          "domainRevision": 1,
+          "answerRecordId": "flashcard:fc_1788925204437_000_76d42e6b9a89:1"
+        }
+      ],
+      "nextReview": "2026-09-09T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1788925204437_001_4c2434655224",
+      "question": "DNS 资源记录中，CNAME 和 MX 的 Value 字段都只填主机名而不是 IP 地址，这样设计的主要目的是什么？",
+      "choices": [
+        "让 IP 只存一份，换 IP 时只需改一处，其他引用自动跟随",
+        "使权威服务器不必维护 NS 记录",
+        "避免在查询 CNAME 或 MX 时多进行一次 A 记录查询",
+        "减少 DNS 服务器的存储压力，节省磁盘空间"
+      ],
+      "correctIndex": 0,
+      "explanation": "如果直接填 IP，服务器换 IP 时每一条引用它的 CNAME/MX 记录都要改，容易漏改导致用户被引到废弃地址。只填稳定主机名，IP 只在 A 记录中存一份，更换时只改一处即可。",
+      "source": {
+        "textbook": "计算机网络（原书第7版） 自顶向下方法 (James F. Kurose Keith W. Ross) (z-library.sk  1lib.sk  z-lib.sk)(1)(1)",
+        "chapter": "",
+        "textbookSlug": "KUqg"
+      },
+      "created": "2026-09-09T03:40:04.437Z",
+      "conversationId": "OiAHH-VXyUf5_GIdndLOV",
+      "status": "active",
+      "history": [
+        {
+          "schemaVersion": 2,
+          "time": "2026-09-09T03:40:28.525Z",
+          "chosen": 0,
+          "correct": true,
+          "domainRevision": 1,
+          "answerRecordId": "flashcard:fc_1788925204437_001_4c2434655224:1"
+        }
+      ],
+      "nextReview": "2026-09-09T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1788925204437_002_bc1a4d055694",
+      "question": "发件方 SMTP 服务器向 example.com 投递邮件时，DNS 查询过程最准确的说法是什么？",
+      "choices": [
+        "先查 A 记录得到邮件服务器主机名，再查 MX 记录得到 IP",
+        "直接查 CNAME 记录得到邮件服务器的规范主机名",
+        "先查 MX 记录得到邮件服务器主机名，再查 A 记录得到 IP",
+        "只查 MX 记录就能得到邮件服务器的 IP 地址"
+      ],
+      "correctIndex": 2,
+      "explanation": "SMTP 服务器先查 example.com 的 MX 记录，得到收件邮件服务器的主机名（如 mail.example.com），但主机名不能直接用于投递，还需要再查这个主机名的 A 记录才能拿到 IP 地址。",
+      "source": {
+        "textbook": "计算机网络（原书第7版） 自顶向下方法 (James F. Kurose Keith W. Ross) (z-library.sk  1lib.sk  z-lib.sk)(1)(1)",
+        "chapter": "",
+        "textbookSlug": "KUqg"
+      },
+      "created": "2026-09-09T03:40:04.437Z",
+      "conversationId": "OiAHH-VXyUf5_GIdndLOV",
+      "status": "active",
+      "history": [
+        {
+          "schemaVersion": 2,
+          "time": "2026-09-09T03:40:36.434Z",
+          "chosen": 2,
+          "correct": true,
+          "domainRevision": 1,
+          "answerRecordId": "flashcard:fc_1788925204437_002_bc1a4d055694:1"
+        }
+      ],
+      "nextReview": "2026-09-09T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1788925204437_003_2758046b05da",
+      "question": "如果本地 DNS 服务器缓存了 example.com 的旧 IP，且该记录 TTL 未到期，而权威服务器已经更新了 example.com 的 IP 地址，此时用户访问 example.com 会发生什么？",
+      "choices": [
+        "本地 DNS 服务器会忽略缓存，强制查询新 IP",
+        "用户无法访问，因为新旧 IP 冲突",
+        "用户连接到旧 IP，因为缓存记录仍有效",
+        "用户连接到新 IP，因为权威服务器已经更新"
+      ],
+      "correctIndex": 2,
+      "explanation": "TTL 未到期时，本地 DNS 服务器不会向上层重新查询，会直接把缓存中仍然存活的旧 IP 返回给用户，因此用户连接的是旧 IP，直到 TTL 到期后缓存被丢弃，新 IP 才能被查询到。",
+      "source": {
+        "textbook": "计算机网络（原书第7版） 自顶向下方法 (James F. Kurose Keith W. Ross) (z-library.sk  1lib.sk  z-lib.sk)(1)(1)",
+        "chapter": "",
+        "textbookSlug": "KUqg"
+      },
+      "created": "2026-09-09T03:40:04.437Z",
+      "conversationId": "OiAHH-VXyUf5_GIdndLOV",
+      "status": "active",
+      "history": [
+        {
+          "schemaVersion": 2,
+          "time": "2026-09-09T03:40:40.714Z",
+          "chosen": 2,
+          "correct": true,
+          "domainRevision": 1,
+          "answerRecordId": "flashcard:fc_1788925204437_003_2758046b05da:1"
+        },
+        {
+          "schemaVersion": 2,
+          "time": "2026-09-09T03:40:50.125Z",
+          "chosen": 2,
+          "correct": true,
+          "domainRevision": 2,
+          "answerRecordId": "flashcard:fc_1788925204437_003_2758046b05da:2"
+        }
+      ],
+      "nextReview": "2026-09-11T16:00:00.000Z",
+      "interval": 3,
+      "ease": 2.7,
+      "repetitions": 2
+    },
+    {
+      "id": "fc_1788925204437_004_554381c7d9a7",
+      "question": "注册登记机构为一个新域名在 TLD 服务器中写入记录时，通常写入的是哪类信息？这样做的原因是什么？",
+      "choices": [
+        "该域所有主机的完整 A 记录集合",
+        "指向该域权威服务器的 NS 记录和对应 A 记录",
+        "该域 www 主机的 A 记录和 MX 记录",
+        "域名的购买日期和过期时间"
+      ],
+      "correctIndex": 1,
+      "explanation": "注册商只在 TLD 服务器中写入指向该域权威服务器的 NS 记录和对应 A 记录，向全世界宣告“谁负责这个域”。域内具体主机（如 www）的映射由公司自己的权威服务器维护，这样主机换 IP 时只需修改权威服务器内部记录，不用惊动上层。",
+      "source": {
+        "textbook": "计算机网络（原书第7版） 自顶向下方法 (James F. Kurose Keith W. Ross) (z-library.sk  1lib.sk  z-lib.sk)(1)(1)",
+        "chapter": "",
+        "textbookSlug": "KUqg"
+      },
+      "created": "2026-09-09T03:40:04.437Z",
+      "conversationId": "OiAHH-VXyUf5_GIdndLOV",
+      "status": "active",
+      "history": [
+        {
+          "schemaVersion": 2,
+          "time": "2026-09-09T03:40:47.840Z",
+          "chosen": 2,
+          "correct": false,
+          "domainRevision": 1,
+          "answerRecordId": "flashcard:fc_1788925204437_004_554381c7d9a7:1"
+        },
+        {
+          "schemaVersion": 2,
+          "time": "2026-09-09T03:40:52.744Z",
+          "chosen": 1,
+          "correct": true,
+          "domainRevision": 2,
+          "answerRecordId": "flashcard:fc_1788925204437_004_554381c7d9a7:2"
+        }
+      ],
+      "nextReview": "2026-09-09T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.4,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1788929021661_000_5235125ec7e6",
+      "question": "在 DNS 中，权威 DNS 服务器与根 DNS 服务器、TLD DNS 服务器的职责有何不同？",
+      "choices": [
+        "权威 DNS 服务器存储域内主机名到 IP 的最终映射，根和 TLD 服务器只提供指向下一级的指引",
+        "权威 DNS 服务器只负责解析顶级域，根和 TLD 服务器存储所有具体主机的 IP",
+        "根、TLD 和权威服务器都存储相同的完整主机名到 IP 的映射，只是大小不同",
+        "根服务器存储所有 www 主机的 IP，权威服务器只负责邮件地址的解析"
+      ],
+      "correctIndex": 0,
+      "explanation": "权威 DNS 服务器存放特定域的主机名到 IP 的最终映射（如 A、MX、CNAME 记录），是解析的终点；根和 TLD 服务器只提供指向下一层的指引，并不存储具体的 A 记录。",
+      "source": {
+        "textbook": "计算机网络（原书第7版） 自顶向下方法 (James F. Kurose Keith W. Ross) (z-library.sk  1lib.sk  z-lib.sk)(1)(1)",
+        "chapter": "",
+        "textbookSlug": "KUqg"
+      },
+      "created": "2026-09-09T04:43:41.661Z",
+      "conversationId": "OiAHH-VXyUf5_GIdndLOV",
+      "status": "active",
+      "history": [
+        {
+          "schemaVersion": 2,
+          "time": "2026-09-09T04:43:59.298Z",
+          "chosen": 0,
+          "correct": true,
+          "domainRevision": 1,
+          "answerRecordId": "flashcard:fc_1788929021661_000_5235125ec7e6:1"
+        }
+      ],
+      "nextReview": "2026-09-09T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1788929021661_001_9b1d754a1db2",
+      "question": "为什么 DNS 设计者在 CNAME 和 MX 记录中只存放主机名，而不直接存放 IP 地址？",
+      "choices": [
+        "为了减少 DNS 服务器的存储空间占用",
+        "为了在服务器更换 IP 时只需修改一处 A 记录，避免多处引用被遗漏而指向陈旧地址",
+        "为了加快 DNS 查询的响应速度，省去逐层解析的过程",
+        "为了确保每条记录都独立可缓存，不受其他记录变化影响"
+      ],
+      "correctIndex": 1,
+      "explanation": "如果 CNAME 和 MX 中直接写入 IP，服务器更换 IP 时就需要修改所有引用它的记录，容易漏改导致用户被带到旧地址；只存主机名，IP 只在 A 记录中存一份，换 IP 时只需改这一处，其他引用自动跟随。",
+      "source": {
+        "textbook": "计算机网络（原书第7版） 自顶向下方法 (James F. Kurose Keith W. Ross) (z-library.sk  1lib.sk  z-lib.sk)(1)(1)",
+        "chapter": "",
+        "textbookSlug": "KUqg"
+      },
+      "created": "2026-09-09T04:43:41.661Z",
+      "conversationId": "OiAHH-VXyUf5_GIdndLOV",
+      "status": "active",
+      "history": [
+        {
+          "schemaVersion": 2,
+          "time": "2026-09-09T04:44:15.072Z",
+          "chosen": 1,
+          "correct": true,
+          "domainRevision": 1,
+          "answerRecordId": "flashcard:fc_1788929021661_001_9b1d754a1db2:1"
+        }
+      ],
+      "nextReview": "2026-09-09T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1788929021661_002_d162c5b91d1f",
+      "question": "当本地 DNS 服务器的缓存中某条记录的 TTL 未到期时，用户访问该域名会发生什么？",
+      "choices": [
+        "本地 DNS 服务器等待 TTL 到期后才响应，期间用户请求被挂起",
+        "本地 DNS 服务器会先咨询权威服务器确认记录是否过期，再决定是否返回缓存结果",
+        "本地 DNS 服务器直接返回缓存中的记录，不重新向上层查询，用户可能被引导至旧 IP",
+        "本地 DNS 服务器强制丢弃缓存，重新向根服务器查询，确保获取最新 IP"
+      ],
+      "correctIndex": 2,
+      "explanation": "TTL 标识记录可缓存的时间长度；未到期时，本地 DNS 服务器直接使用缓存中的记录，不会向上层重新查询，因此用户收到的可能是旧 IP。",
+      "source": {
+        "textbook": "计算机网络（原书第7版） 自顶向下方法 (James F. Kurose Keith W. Ross) (z-library.sk  1lib.sk  z-lib.sk)(1)(1)",
+        "chapter": "",
+        "textbookSlug": "KUqg"
+      },
+      "created": "2026-09-09T04:43:41.661Z",
+      "conversationId": "OiAHH-VXyUf5_GIdndLOV",
+      "status": "active",
+      "history": [
+        {
+          "schemaVersion": 2,
+          "time": "2026-09-09T04:44:36.475Z",
+          "chosen": 2,
+          "correct": true,
+          "domainRevision": 1,
+          "answerRecordId": "flashcard:fc_1788929021661_002_d162c5b91d1f:1"
+        }
+      ],
+      "nextReview": "2026-09-09T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1788929021661_003_77e819085cfd",
+      "question": "注册登记机构在 TLD 服务器中为某新注册域名写入记录时，为什么不把 www 主机的 IP 一并填入，而只登记权威 DNS 服务器的 NS 和对应 A 记录？",
+      "choices": [
+        "因为 www 主机的 IP 地址本来就储存在本地 DNS 服务器中，无需登记到 TLD 层",
+        "因为 TLD 服务器的存储容量有限，无法容纳所有具体主机的 A 记录",
+        "为了将域内主机 IP 的变更限制在权威服务器内部，避免每次改动都要修改全球 TLD 服务器中的记录",
+        "因为注册登记机构无权访问 TLD 服务器，只能写入自己的权威服务器"
+      ],
+      "correctIndex": 2,
+      "explanation": "分层设计让 TLD 服务器只维护\"哪个权威服务器负责这个域\"的指向，域内具体主机（如 www）的变更由权威服务器局部处理，不需要每次都通知 TLD，保持了变更的局部性和灵活性。",
+      "source": {
+        "textbook": "计算机网络（原书第7版） 自顶向下方法 (James F. Kurose Keith W. Ross) (z-library.sk  1lib.sk  z-lib.sk)(1)(1)",
+        "chapter": "",
+        "textbookSlug": "KUqg"
+      },
+      "created": "2026-09-09T04:43:41.661Z",
+      "conversationId": "OiAHH-VXyUf5_GIdndLOV",
+      "status": "active",
+      "history": [
+        {
+          "schemaVersion": 2,
+          "time": "2026-09-09T04:44:51.443Z",
+          "chosen": 2,
+          "correct": true,
+          "domainRevision": 1,
+          "answerRecordId": "flashcard:fc_1788929021661_003_77e819085cfd:1"
+        },
+        {
+          "schemaVersion": 2,
+          "time": "2026-09-09T04:45:06.958Z",
+          "chosen": 2,
+          "correct": true,
+          "domainRevision": 2,
+          "answerRecordId": "flashcard:fc_1788929021661_003_77e819085cfd:2"
+        }
+      ],
+      "nextReview": "2026-09-11T16:00:00.000Z",
+      "interval": 3,
+      "ease": 2.7,
+      "repetitions": 2
+    },
+    {
+      "id": "fc_1788929021661_004_39c75e923ca9",
+      "question": "SMTP 服务器需要发送一封邮件给 friend@example.com，它应依次查询哪种类型的 DNS 资源记录以完成投递？",
+      "choices": [
+        "先查询 NS 记录定位权威服务器，再直接使用其中的 MX 记录中的 IP 地址",
+        "先查询 MX 记录得到邮件服务器主机名，再查询该主机名的 A 记录获得 IP",
+        "只查询 A 记录就能直接获得 example.com 的邮件服务器 IP",
+        "只查询 MX 记录就能直接获得邮件服务器的 IP 地址"
+      ],
+      "correctIndex": 1,
+      "explanation": "SMTP 服务器需先查 MX 记录得到负责该域的邮件服务器主机名，再查 A 记录获取该主机名的 IP，才能真正建立连接并投递邮件。",
+      "source": {
+        "textbook": "计算机网络（原书第7版） 自顶向下方法 (James F. Kurose Keith W. Ross) (z-library.sk  1lib.sk  z-lib.sk)(1)(1)",
+        "chapter": "",
+        "textbookSlug": "KUqg"
+      },
+      "created": "2026-09-09T04:43:41.661Z",
+      "conversationId": "OiAHH-VXyUf5_GIdndLOV",
+      "status": "active",
+      "history": [
+        {
+          "schemaVersion": 2,
+          "time": "2026-09-09T04:45:01.189Z",
+          "chosen": 0,
+          "correct": false,
+          "domainRevision": 1,
+          "answerRecordId": "flashcard:fc_1788929021661_004_39c75e923ca9:1"
+        },
+        {
+          "schemaVersion": 2,
+          "time": "2026-09-09T04:45:08.819Z",
+          "chosen": 1,
+          "correct": true,
+          "domainRevision": 2,
+          "answerRecordId": "flashcard:fc_1788929021661_004_39c75e923ca9:2"
+        }
+      ],
+      "nextReview": "2026-09-09T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.4,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1789234087786_000_ca39e5741453",
+      "question": "教材用「一对程序」来界定一个网络应用。据此判断，下面哪个说法正确？",
+      "choices": [
+        "客户程序和服务器程序运行在两个不同的端系统上，运行时生成两个进程，靠套接字读写数据通信。",
+        "「客户-服务器」指的是两台主机之间的硬件连接关系，与运行什么程序无关。",
+        "客户和服务器其实是同一个进程的两个线程，运行在同一台端系统上。",
+        "客户程序和服务器程序通常运行在同一台主机上，靠不同端口区分彼此。"
+      ],
+      "correctIndex": 0,
+      "explanation": "教材说一个典型网络应用是一对程序——客户程序和服务器程序，分别运行在两个不同的端系统上；运行时生成客户进程和服务器进程，二者通过从套接字读写数据来通信。程序是代码，进程是运行实例，教材明确用「两个不同的端系统」来区分。",
+      "source": {
+        "textbook": "计算机网络（原书第7版） 自顶向下方法 (James F. Kurose Keith W. Ross) (z-library.sk  1lib.sk  z-lib.sk)(1)(1)",
+        "chapter": "2.7.2 TCP套接字编程",
+        "textbookSlug": "KUqg"
+      },
+      "created": "2026-09-12T17:28:07.786Z",
+      "conversationId": "vS_1AORhMjQDsRuG5Y3HM",
+      "status": "active",
+      "history": [
+        {
+          "schemaVersion": 2,
+          "time": "2026-09-12T17:28:39.499Z",
+          "chosen": 0,
+          "correct": true,
+          "domainRevision": 1,
+          "answerRecordId": "flashcard:fc_1789234087786_000_ca39e5741453:1"
+        }
+      ],
+      "nextReview": "2026-09-13T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1789234087786_001_830a70ed0927",
+      "question": "开放协议与专用协议的差别，落在开发者能否互通上。对这个差别的理解，哪一项正确？",
+      "choices": [
+        "开放协议的客户和服务器必须由同一家公司维护，才能保证正确互通。",
+        "专用应用的协议没有公开，但只要两端的端口号约定一致，任何开发者都能写出互通版本。",
+        "开放协议的规则公开人人共知，因此不同开发者可独立写出互通的两端；专用应用的协议不外流，外人写不出能互通的版本。",
+        "开放协议与专用协议的区别在于使用 TCP 还是 UDP 作为运输层协议。"
+      ],
+      "correctIndex": 2,
+      "explanation": "开放协议的规则公开、人人共知，因此两个互不相识的程序员各写一头也能对上话；专用应用的协议不外流，外人看不见规则，所以写不出能与之互通的代码。教材原话即「其他独立的开发者将不能开发出和该应用程序交互的代码」。",
+      "source": {
+        "textbook": "计算机网络（原书第7版） 自顶向下方法 (James F. Kurose Keith W. Ross) (z-library.sk  1lib.sk  z-lib.sk)(1)(1)",
+        "chapter": "2.7.2 TCP套接字编程",
+        "textbookSlug": "KUqg"
+      },
+      "created": "2026-09-12T17:28:07.786Z",
+      "conversationId": "vS_1AORhMjQDsRuG5Y3HM",
+      "status": "active",
+      "history": [
+        {
+          "schemaVersion": 2,
+          "time": "2026-09-12T17:28:57.439Z",
+          "chosen": 2,
+          "correct": true,
+          "domainRevision": 1,
+          "answerRecordId": "flashcard:fc_1789234087786_001_830a70ed0927:1"
+        }
+      ],
+      "nextReview": "2026-09-13T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1789234087786_002_ae749d389aa0",
+      "question": "TCP 与 UDP 在「报文边界」上的差别，哪一项描述正确？",
+      "choices": [
+        "TCP 只保证字节按序到达，但 recv(1024) 中的 1024 表示发送方那条消息的长度，所以边界仍由协议划定。",
+        "TCP 保留报文边界（recv 每次恰好取回一条 send 的内容），UDP 把数据当无边界字节流。",
+        "TCP 和 UDP 都保留报文边界，区别只在于 TCP 额外提供可靠性保证。",
+        "UDP 保留应用层报文边界，一次 sendto 对应对端一次 recvfrom；TCP 只保证字节按序到达，边界需应用自己维护。"
+      ],
+      "correctIndex": 3,
+      "explanation": "教材题面即：因特网 TCP 套接字将数据处理为字节流，而 UDP 套接字识别报文边界。UDP 一次 sendto 出去一个数据报，对端一次 recvfrom 就取回那一个；TCP 只保证字节按序到达，不保证「写一次读一次」，边界要应用自己画。",
+      "source": {
+        "textbook": "计算机网络（原书第7版） 自顶向下方法 (James F. Kurose Keith W. Ross) (z-library.sk  1lib.sk  z-lib.sk)(1)(1)",
+        "chapter": "2.7.2 TCP套接字编程",
+        "textbookSlug": "KUqg"
+      },
+      "created": "2026-09-12T17:28:07.786Z",
+      "conversationId": "vS_1AORhMjQDsRuG5Y3HM",
+      "status": "active",
+      "history": [
+        {
+          "schemaVersion": 2,
+          "time": "2026-09-12T17:29:12.450Z",
+          "chosen": 3,
+          "correct": true,
+          "domainRevision": 1,
+          "answerRecordId": "flashcard:fc_1789234087786_002_ae749d389aa0:1"
+        }
+      ],
+      "nextReview": "2026-09-13T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1789234087786_003_13684b17372f",
+      "question": "TCP 服务器一侧，欢迎套接字与连接套接字的分工与命运，哪一项正确？",
+      "choices": [
+        "欢迎套接字只有一扇且始终不关，accept 为每个客户新开一扇连接套接字；同时服务 n 个客户时服务器握着 n+1 个套接字。",
+        "欢迎套接字只负责敲门握手，敲完之后它自己也承载数据，因此不必再开连接套接字。",
+        "每来一个客户就从欢迎套接字派生一个连接套接字，与此同时欢迎套接字必须关闭以释放端口。",
+        "同时服务 n 个客户时服务器共握有 n 个套接字，因为欢迎套接字在第一次客户的连接建立后就转为连接套接字。"
+      ],
+      "correctIndex": 0,
+      "explanation": "教材说 serverSocket 是欢迎套接字，所有客户的起始接触点，只有一扇；connectionSocket 是为每个客户新生成的连接套接字，承载该客户的数据。服务器循环里 close 掉的是连接套接字，欢迎套接字从头到尾不开不关，所以同时服务 n 个并行客户时服务器握着 n+1 个套接字。",
+      "source": {
+        "textbook": "计算机网络（原书第7版） 自顶向下方法 (James F. Kurose Keith W. Ross) (z-library.sk  1lib.sk  z-lib.sk)(1)(1)",
+        "chapter": "2.7.2 TCP套接字编程",
+        "textbookSlug": "KUqg"
+      },
+      "created": "2026-09-12T17:28:07.786Z",
+      "conversationId": "vS_1AORhMjQDsRuG5Y3HM",
+      "status": "active",
+      "history": [
+        {
+          "schemaVersion": 2,
+          "time": "2026-09-12T17:29:27.614Z",
+          "chosen": 0,
+          "correct": true,
+          "domainRevision": 1,
+          "answerRecordId": "flashcard:fc_1789234087786_003_13684b17372f:1"
+        }
+      ],
+      "nextReview": "2026-09-13T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1789234087786_004_54c085e26031",
+      "question": "把本章各协议摊开，按教材 1.1 节对协议的定义归纳，协议共同规定的是哪一组内容？",
+      "choices": [
+        "客户-服务器与 P2P 两种体系结构的选择方式。",
+        "可靠性、时延、吞吐量和安全性这四类服务保证。",
+        "端口号、IP 地址、主机名三者之间的映射规则。",
+        "报文的格式、报文的次序、收发报文时所采取的动作。"
+      ],
+      "correctIndex": 3,
+      "explanation": "教材 1.1 节给协议下的定义是：在两个或多个通信实体之间交换报文的格式和次序，以及对某报文或其他事件传输和/或接收所采取的动作。章末小结说本章为这个定义加入了相当可观的实质性内容，即各协议都在规定格式、次序与动作这三样。可靠性、时延、吞吐量、安全性是运输协议可提供的服务类型，属于另一个问题。",
+      "source": {
+        "textbook": "计算机网络（原书第7版） 自顶向下方法 (James F. Kurose Keith W. Ross) (z-library.sk  1lib.sk  z-lib.sk)(1)(1)",
+        "chapter": "2.7.2 TCP套接字编程",
+        "textbookSlug": "KUqg"
+      },
+      "created": "2026-09-12T17:28:07.786Z",
+      "conversationId": "vS_1AORhMjQDsRuG5Y3HM",
+      "status": "active",
+      "history": [
+        {
+          "schemaVersion": 2,
+          "time": "2026-09-12T17:29:38.453Z",
+          "chosen": 3,
+          "correct": true,
+          "domainRevision": 1,
+          "answerRecordId": "flashcard:fc_1789234087786_004_54c085e26031:1"
+        }
+      ],
+      "nextReview": "2026-09-13T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1789276055592_000_c4fc173f88fe",
+      "question": "教材在讨论 CDN 的「深入」部署策略时，认为它改善端用户到 CDN 集群之间时延和吞吐量的根本原因是什么？",
+      "choices": [
+        "用 P2P 方式让邻近端用户互相分发内容，绕开 CDN 服务器",
+        "通过 DNS 重定向把请求动态分配给负载最低的集群，从而降低排队时延",
+        "在 IXP 位置部署机架，借助 BGP 路由策略优先转发 CDN 流量",
+        "减少了端用户与 CDN 集群之间的链路和路由器数量，即缩短了「距离」"
+      ],
+      "correctIndex": 3,
+      "explanation": "深入策略的核心收益在于减少了端用户到 CDN 集群之间的链路和路由器数量，即「距离」变短；而代价是节点分散导致维护管理开销上升。定位原则本质是「离用户近」与「好管理」之间的取舍。",
+      "source": {
+        "textbook": "计算机网络（原书第7版） 自顶向下方法 (James F. Kurose Keith W. Ross) (z-library.sk  1lib.sk  z-lib.sk)(1)(1)",
+        "chapter": "2.7.2 TCP套接字编程",
+        "textbookSlug": "KUqg"
+      },
+      "created": "2026-09-13T05:07:35.592Z",
+      "conversationId": "vS_1AORhMjQDsRuG5Y3HM",
+      "status": "active",
+      "history": [],
+      "nextReview": "2026-09-13T05:07:35.592Z",
+      "interval": 0,
+      "ease": 2.5,
+      "repetitions": 0
+    },
+    {
+      "id": "fc_1789276055592_001_464b397a45a1",
+      "question": "关于 CDN 的集群选择策略，下列哪项准确描述了「地理上最邻近」策略的缺陷？",
+      "choices": [
+        "该策略依赖 DNS 重定向，而 DNS 解析结果可能被中间解析器缓存导致失效",
+        "地理上的近并不等于网络路径上的近，地理位置数据库无法反映路由绕行和跳数",
+        "地理位置数据库本身精度不够，经常把同一区域的 IP 映射到错误的城市",
+        "该策略需要实时探测各集群的时延和丢包，而许多 LDNS 被配置为不回探测分组"
+      ],
+      "correctIndex": 1,
+      "explanation": "地理数据库只做 IP 到地理位置的映射，二者并非网络路径长度，所以可能出现地理近但路径绕远的情况；此外 LDNS 可能位于远地，且该策略是静态的。B 项错误地把「地理位置」当成「网络路径长度」的度量；C、D 项描述的并非地理最邻近策略的缺陷。",
+      "source": {
+        "textbook": "计算机网络（原书第7版） 自顶向下方法 (James F. Kurose Keith W. Ross) (z-library.sk  1lib.sk  z-lib.sk)(1)(1)",
+        "chapter": "2.7.2 TCP套接字编程",
+        "textbookSlug": "KUqg"
+      },
+      "created": "2026-09-13T05:07:35.592Z",
+      "conversationId": "vS_1AORhMjQDsRuG5Y3HM",
+      "status": "active",
+      "history": [],
+      "nextReview": "2026-09-13T05:07:35.592Z",
+      "interval": 0,
+      "ease": 2.5,
+      "repetitions": 0
+    },
+    {
+      "id": "fc_1789276055592_002_faea5641187f",
+      "question": "在环形 DHT 中，每个对等方只认识自己的直接后继。此时一次查询在最坏情况下需要转发的次数，以及这个数字带来的主要问题是什么？",
+      "choices": [
+        "最多 $N/2$ 跳，整体 $O(N^2)$，主要问题是带宽消耗而非查询时延",
+        "最多 $O(1)$ 跳，因为每个对等方都认识自己的前驱和后继，可以双向查找",
+        "最多 $N-1$ 跳，整体 $O(N)$，在大型洪流中查询过慢且易因节点离开而中断",
+        "最多 $\\log_2 N$ 跳，整体 $O(\\log N)$，但需要每个对等方维护一张完整路由表"
+      ],
+      "correctIndex": 2,
+      "explanation": "只认识直接后继时，查询最坏要顺着环绕一整圈，即 $N-1$ 跳，平均 $N/2$ 跳，整体为 $O(N)$。在成千上万个对等方的洪流中，这意味着查询要经过大量节点，且中间节点离开会断链。",
+      "source": {
+        "textbook": "计算机网络（原书第7版） 自顶向下方法 (James F. Kurose Keith W. Ross) (z-library.sk  1lib.sk  z-lib.sk)(1)(1)",
+        "chapter": "2.7.2 TCP套接字编程",
+        "textbookSlug": "KUqg"
+      },
+      "created": "2026-09-13T05:07:35.592Z",
+      "conversationId": "vS_1AORhMjQDsRuG5Y3HM",
+      "status": "active",
+      "history": [],
+      "nextReview": "2026-09-13T05:07:35.592Z",
+      "interval": 0,
+      "ease": 2.5,
+      "repetitions": 0
+    },
+    {
+      "id": "fc_1789276055592_003_3624c6bd8b57",
+      "question": "在 UDP 客户-服务器程序中，客户的套接字不需要 `bind`，而服务器的套接字必须 `bind`。对这一不对称最准确的解释是？",
+      "choices": [
+        "服务器作为被动方需要一个确定的、双方预先知道的端口号以便客户定位；客户的源端口由操作系统自动分配即可",
+        "服务器需要绑定端口是为了识别来自哪个客户，而客户端只有一个对端所以不需要识别",
+        "服务器绑定的是 IP 地址而非端口号，客户端不绑定是因为它一开始就知道服务器的 IP",
+        "服务器必须绑定端口才能把返回地址填进 `sendto`，客户端的返回地址由 `recvfrom` 提供"
+      ],
+      "correctIndex": 0,
+      "explanation": "服务器是被动一侧，必须让素不相识的客户在开口前就知道该敲哪扇门，因此要显式绑定一个双方约定的固定端口。客户是发起方，其源端口无须预先被任何一方知道，操作系统会在第一次 `sendto` 时自动分配临时端口。",
+      "source": {
+        "textbook": "计算机网络（原书第7版） 自顶向下方法 (James F. Kurose Keith W. Ross) (z-library.sk  1lib.sk  z-lib.sk)(1)(1)",
+        "chapter": "2.7.2 TCP套接字编程",
+        "textbookSlug": "KUqg"
+      },
+      "created": "2026-09-13T05:07:35.592Z",
+      "conversationId": "vS_1AORhMjQDsRuG5Y3HM",
+      "status": "active",
+      "history": [],
+      "nextReview": "2026-09-13T05:07:35.592Z",
+      "interval": 0,
+      "ease": 2.5,
+      "repetitions": 0
+    },
+    {
+      "id": "fc_1789276055592_004_f51025f0419d",
+      "question": "关于 TCP 套接字的字节流特性，下列哪项描述正确？",
+      "choices": [
+        "TCP 不保留应用层的报文边界，一次 `recv(1024)` 可能拿到多次 `send` 合并后的字节，$1024$ 只是缓冲区大小",
+        "TCP 不保留报文边界，但保证一次 `recv` 至少返回对端一次 `send` 的全部字节",
+        "TCP 会保留报文边界，一次 `recv` 恰好对应对端的一次 `send`，$1024$ 是单条消息的上限",
+        "TCP 与 UDP 一样识别报文边界，区别只在于 TCP 额外提供可靠性和按序交付"
+      ],
+      "correctIndex": 0,
+      "explanation": "TCP 只保证字节按发送顺序可靠到达，不保留应用层的报文边界，所以一次 `recv(1024)` 拿回的可能是两次 `send` 合并后的内容，也可能只是其中一部分；$1024$ 只是缓冲区大小而非消息长度。UDP 才会识别报文边界。",
+      "source": {
+        "textbook": "计算机网络（原书第7版） 自顶向下方法 (James F. Kurose Keith W. Ross) (z-library.sk  1lib.sk  z-lib.sk)(1)(1)",
+        "chapter": "2.7.2 TCP套接字编程",
+        "textbookSlug": "KUqg"
+      },
+      "created": "2026-09-13T05:07:35.592Z",
+      "conversationId": "vS_1AORhMjQDsRuG5Y3HM",
+      "status": "active",
+      "history": [],
+      "nextReview": "2026-09-13T05:07:35.592Z",
+      "interval": 0,
+      "ease": 2.5,
+      "repetitions": 0
+    },
+    {
+      "id": "fc_1789291121788_000_9a08365b0bb7",
+      "question": "在 TCP 客户/服务器程序中，为什么服务器程序必须先于客户程序启动，而 UDP 版本中客户程序可以先于服务器程序启动？",
+      "choices": [
+        "TCP 客户的 connect() 需要服务器已在欢迎端口上监听，否则连接被拒绝；UDP 客户无需建立连接，sendto 不要求服务器在线",
+        "TCP 客户需要先知道服务器端口号，UDP 客户使用固定端口所以随时可用",
+        "TCP 是可靠协议所以必须提前建立路由；UDP 不可靠协议允许数据报在服务器不在时被缓存",
+        "TCP 客户的套接字由服务器分配，所以服务器必须先启动；UDP 套接字由客户自行分配"
+      ],
+      "correctIndex": 0,
+      "explanation": "TCP 客户执行 connect() 时会对服务器绑定的欢迎端口发起三次握手。如果服务器尚未运行，该端口未被占用，connect() 会收到拒绝并报错；UDP 客户无连接，sendto 只是把数据报发出去，无需服务器在场。",
+      "source": {
+        "textbook": "计算机网络（原书第7版） 自顶向下方法 (James F. Kurose Keith W. Ross) (z-library.sk  1lib.sk  z-lib.sk)(1)(1)",
+        "chapter": "2.7.2 TCP套接字编程",
+        "textbookSlug": "KUqg"
+      },
+      "created": "2026-09-13T09:18:41.788Z",
+      "conversationId": "H_CUtB_3Dt0vQR7wLaGnV",
+      "status": "active",
+      "history": [
+        {
+          "schemaVersion": 2,
+          "time": "2026-09-13T09:19:12.110Z",
+          "chosen": 0,
+          "correct": true,
+          "domainRevision": 1,
+          "answerRecordId": "flashcard:fc_1789291121788_000_9a08365b0bb7:1"
+        }
+      ],
+      "nextReview": "2026-09-13T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1789291121788_002_782047b78a7e",
+      "question": "HTTP、SMTP、POP3 都选择运行在 TCP 之上而不是 UDP。它们共同需要而 UDP 无法提供的核心特性是什么？",
+      "choices": [
+        "面向连接的信道，使得服务器能够主动向客户发起通信",
+        "可靠的、按序的字节流，保证所有字节到达且顺序正确",
+        "拥塞控制机制，使发送速率不超过接收方的处理速度",
+        "加密传输能力，防止邮件和网页内容在链路中被窃听"
+      ],
+      "correctIndex": 1,
+      "explanation": "这三个协议传输的都是完整对象（网页、邮件），字节丢失或乱序都会破坏内容，因此需要 TCP 的可靠、按序字节流。UDP 把这些责任交给应用层，所以它们选了更省事的 TCP。",
+      "source": {
+        "textbook": "计算机网络（原书第7版） 自顶向下方法 (James F. Kurose Keith W. Ross) (z-library.sk  1lib.sk  z-lib.sk)(1)(1)",
+        "chapter": "2.7.2 TCP套接字编程",
+        "textbookSlug": "KUqg"
+      },
+      "created": "2026-09-13T09:18:41.788Z",
+      "conversationId": "H_CUtB_3Dt0vQR7wLaGnV",
+      "status": "active",
+      "history": [
+        {
+          "schemaVersion": 2,
+          "time": "2026-09-13T09:19:17.187Z",
+          "chosen": 1,
+          "correct": true,
+          "domainRevision": 1,
+          "answerRecordId": "flashcard:fc_1789291121788_002_782047b78a7e:1"
+        }
+      ],
+      "nextReview": "2026-09-13T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1789452077158_000_72491efa0839",
+      "question": "在HTTP/1.1默认持续连接下，获取一个包含1个HTML文件、3个内嵌图片、3个CSS文件和1个JavaScript文件的Web页面（共8个对象），忽略发送时间且无并行连接，大约需要多少RTT₀？",
+      "choices": [
+        "约8 RTT₀",
+        "约9 RTT₀",
+        "约2 RTT₀",
+        "约16 RTT₀"
+      ],
+      "correctIndex": 1,
+      "explanation": "HTTP/1.1默认持续连接，只需在开始时建立一次TCP连接（1 RTT₀握手），之后8个对象在同一条连接上依次请求和接收，每个对象额外花费1 RTT₀，总时延为1 + 8 = 9 RTT₀。而HTTP/1.0默认非持续连接，每个对象都需要单独建连（1 RTT₀握手）+ 请求响应（1 RTT₀），共16 RTT₀。",
+      "source": {
+        "textbook": "计算机网络（原书第7版） 自顶向下方法 (James F. Kurose Keith W. Ross) (z-library.sk  1lib.sk  z-lib.sk)(1)(1)",
+        "chapter": "第3章 运输层",
+        "textbookSlug": "KUqg"
+      },
+      "created": "2026-09-15T06:01:17.158Z",
+      "conversationId": "XvvKOykiYoI4vHWP_aarw",
+      "status": "active",
+      "history": [
+        {
+          "schemaVersion": 2,
+          "time": "2026-09-15T06:05:47.420Z",
+          "chosen": 1,
+          "correct": true,
+          "domainRevision": 1,
+          "answerRecordId": "flashcard:fc_1789452077158_000_72491efa0839:1"
+        }
+      ],
+      "nextReview": "2026-09-15T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1789452077159_001_96e56751461c",
+      "question": "在客户－服务器分发模式中，设文件大小为F，服务器上载带宽为u_s，每个对等方下载带宽为d_min，对等方数量为N。当N增大时，下列哪项正确描述了最小分发时间的行为？",
+      "choices": [
+        "分发时间始终由下载最慢的对等方决定，公式为 F/d_min，与N无关",
+        "由于对等方之间可以相互上传，分发时间随N增大而趋于稳定，不超过 F/u_s",
+        "临界点出现在 N = 25 附近，之后由服务器上载带宽主导",
+        "当N超过 u_s/d_min 后，分发时间由服务器上载带宽线性限制，公式为 NF/u_s"
+      ],
+      "correctIndex": 3,
+      "explanation": "客户－服务器模式的最小分发时间公式为 max(NF/u_s, F/d_min)。当N较小时，F/d_min占主导；当N超过临界值 u_s/d_min 后，NF/u_s 随N线性增长并成为瓶颈，最终分发时间由服务器上载带宽限制，无法通过增加对等方来改善。",
+      "source": {
+        "textbook": "计算机网络（原书第7版） 自顶向下方法 (James F. Kurose Keith W. Ross) (z-library.sk  1lib.sk  z-lib.sk)(1)(1)",
+        "chapter": "第3章 运输层",
+        "textbookSlug": "KUqg"
+      },
+      "created": "2026-09-15T06:01:17.159Z",
+      "conversationId": "XvvKOykiYoI4vHWP_aarw",
+      "status": "active",
+      "history": [
+        {
+          "schemaVersion": 2,
+          "time": "2026-09-15T06:06:16.121Z",
+          "chosen": 3,
+          "correct": true,
+          "domainRevision": 1,
+          "answerRecordId": "flashcard:fc_1789452077159_001_96e56751461c:1"
+        }
+      ],
+      "nextReview": "2026-09-15T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1789452077159_002_6dc285676c3e",
+      "question": "关于SMTP和HTTP标识邮件或响应报文体结束的方式，下列哪项说法正确？",
+      "choices": [
+        "SMTP用单独一行句点作为结束标记，并用点填充处理正文中的点行；HTTP用Content-Length声明长度，不能用句点终止行",
+        "SMTP和HTTP都可以使用单独一行句点来标识报文体结束，因为两者正文都不会出现单独的点行",
+        "SMTP用一个空行分隔首部和正文，并用空行标识正文结束；HTTP同样用空行标识正文结束",
+        "HTTP使用Connection: close首部来标识报文体结束，SMTP使用Content-Length来标识"
+      ],
+      "correctIndex": 0,
+      "explanation": "SMTP用一行仅包含英文句点‘.’的行作为报文体结束标记，但正文中若恰好出现这样的行，必须进行点填充（dot-stuffing）转义。HTTP则通过首部字段 Content-Length 事先声明报文体字节数，接收方数够字节即认为结束，不需要终止符。HTTP不能直接照搬SMTP的点终止行，因为其正文可能天然包含单独的点行，造成边界歧义。",
+      "source": {
+        "textbook": "计算机网络（原书第7版） 自顶向下方法 (James F. Kurose Keith W. Ross) (z-library.sk  1lib.sk  z-lib.sk)(1)(1)",
+        "chapter": "第3章 运输层",
+        "textbookSlug": "KUqg"
+      },
+      "created": "2026-09-15T06:01:17.159Z",
+      "conversationId": "XvvKOykiYoI4vHWP_aarw",
+      "status": "active",
+      "history": [
+        {
+          "schemaVersion": 2,
+          "time": "2026-09-15T06:06:34.526Z",
+          "chosen": 0,
+          "correct": true,
+          "domainRevision": 1,
+          "answerRecordId": "flashcard:fc_1789452077159_002_6dc285676c3e:1"
+        }
+      ],
+      "nextReview": "2026-09-15T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    },
+    {
+      "id": "fc_1789452077159_003_b724798eb098",
+      "question": "关于运输层提供的逻辑通信，下列哪项描述准确？",
+      "choices": [
+        "运输层提供主机到主机的逻辑通信，中间路由器需要检查运输层端口号进行转发",
+        "运输层提供进程到进程的逻辑通信，且只在端系统实现，中间路由器不处理运输层首部",
+        "运输层提供主机到主机的逻辑通信，与网络层的区别仅在于封装格式不同",
+        "运输层提供进程到进程的逻辑通信，但中间路由器需要解析运输层首部以决定路径"
+      ],
+      "correctIndex": 1,
+      "explanation": "运输层为运行在不同主机上的应用进程之间提供逻辑通信，即进程到进程的通信；网络层则提供主机到主机的逻辑通信。运输层协议只在端系统中实现，中间路由器不处理运输层首部，因此运输层的逻辑通信是端到端的，不涉及中间路由器。",
+      "source": {
+        "textbook": "计算机网络（原书第7版） 自顶向下方法 (James F. Kurose Keith W. Ross) (z-library.sk  1lib.sk  z-lib.sk)(1)(1)",
+        "chapter": "第3章 运输层",
+        "textbookSlug": "KUqg"
+      },
+      "created": "2026-09-15T06:01:17.159Z",
+      "conversationId": "XvvKOykiYoI4vHWP_aarw",
+      "status": "active",
+      "history": [
+        {
+          "schemaVersion": 2,
+          "time": "2026-09-15T06:06:53.224Z",
+          "chosen": 1,
+          "correct": true,
+          "domainRevision": 1,
+          "answerRecordId": "flashcard:fc_1789452077159_003_b724798eb098:1"
+        }
+      ],
+      "nextReview": "2026-09-15T16:00:00.000Z",
+      "interval": 1,
+      "ease": 2.6,
+      "repetitions": 1
+    }
+  ]
+}

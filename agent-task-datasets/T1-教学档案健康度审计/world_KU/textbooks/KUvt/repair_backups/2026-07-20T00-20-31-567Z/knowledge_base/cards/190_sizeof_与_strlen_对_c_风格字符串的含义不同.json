@@ -1,0 +1,49 @@
+{
+  "title": "sizeof 与 strlen 对 C 风格字符串的含义不同",
+  "definition": "sizeof 和 strlen() 都可能用于与字符串有关的长度或大小判断，但含义不同：strlen()计算以 NUL 结尾的 C 风格字符串中的实际字符数，不包含 NUL；sizeof根据对象的类型和存储形式计算对象或指针本身占用的大小。",
+  "key_points": [
+    "对于字符数组 $\\texttt{char text1[] = \\\"abcdef\\\";}$，sizeof(text1)为 7，因为数组包含 6 个字符和 1 个 NUL。",
+    "同一数组上 strlen(text1)为 6，因为它不计算 NUL。",
+    "如果字符串通过 $\\texttt{char*}$ 或 $\\texttt{const char*}$ 指针访问，sizeof(pointer)返回的是指针大小，而不是所指字符串的长度。",
+    "指针大小依平台和编译模式而不同；教材举例说明 32 位模式可能为 4，64 位模式可能为 8。"
+  ],
+  "examples": [
+    "$\\texttt{char text1[] = \\\"abcdef\\\";}$",
+    "$\\texttt{sizeof(text1)} = 7$，而 $\\texttt{strlen(text1)} = 6$。",
+    "若有指针 $\\texttt{const char* text2 = \\\"abcdef\\\";}$，则 $\\texttt{strlen(text2)} = 6$，但 $\\texttt{sizeof(text2)}$ 是该指针的大小，而不是 6 或 7。"
+  ],
+  "misconceptions": [
+    "sizeof()总能返回字符串的字符数。",
+    "对 char* 使用 sizeof() 会得到所指字符串的存储空间。",
+    "sizeof(text1)和strlen(text1)在字符数组上总是相等。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "对于 $\\texttt{char text1[] = \\\"abcdef\\\";}$，sizeof(text1)和strlen(text1)分别是多少？",
+      "a": "sizeof(text1)为 7，包含 6 个实际字符和 1 个 NUL；strlen(text1)为 6。"
+    },
+    {
+      "q": "为什么对 char* 使用 sizeof()不能得到 C 风格字符串的长度？",
+      "a": "因为 sizeof()此时计算的是指针对象本身的大小，而不是指针所指字符序列的大小。"
+    },
+    {
+      "q": "获取 C 风格字符串实际字符数应使用 sizeof()还是 strlen()？",
+      "a": "应使用 strlen()；它返回实际字符数，不包括结尾 NUL。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C 风格字符串以 NUL 字符结尾"
+  ],
+  "source_pages": [
+    103,
+    104
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "190_sizeof_与_strlen_对_c_风格字符串的含义不同",
+  "_chunk_pages": [
+    101,
+    104
+  ]
+}

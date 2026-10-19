@@ -1,0 +1,41 @@
+{
+  "title": "element.className：获取或设置class属性字符串",
+  "definition": "`element.className`用于获取或设置元素的`class`属性字符串。设置时会覆盖元素现有的所有类名。",
+  "key_points": [
+    "可以直接读写元素的`class`属性字符串。",
+    "设置`className`会完全替换原有类名。",
+    "适合整体替换类名，但不适合增删单个类。"
+  ],
+  "examples": [
+    "element.className = 'new-class another-class';"
+  ],
+  "misconceptions": [
+    "认为给`className`赋值会在原有类后追加；实际上会覆盖全部原类名。",
+    "认为它和`classList.add()`一样是增量操作；实际上不是。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "设置`element.className`时会发生什么？",
+      "a": "会覆盖元素所有现有类名。"
+    },
+    {
+      "q": "如果只想添加一个类，`className`是不是最佳选择？",
+      "a": "不是，通常更适合用`classList.add()`。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "标准属性的直接访问与修改"
+  ],
+  "source_pages": [
+    353,
+    356
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "509_element_classname_获取或设置class属性字符串",
+  "_chunk_pages": [
+    353,
+    356
+  ]
+}

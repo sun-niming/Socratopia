@@ -1,0 +1,43 @@
+{
+  "title": "标准文档流",
+  "definition": "标准文档流（也叫标准流或文档流）是指在不使用其他与排列和定位相关的特殊 CSS 规则时，各种元素默认遵循的排列规则；浏览器会按 HTML 中出现的顺序，并结合块元素或行内元素的特性，依次排列这些盒子。教材还指出，这种方式可用 CSS 的 position: static 控制。",
+  "key_points": [
+    "是默认的元素排列规则",
+    "按 HTML 中出现顺序排列",
+    "会结合块元素和行内元素的特性",
+    "可用 position: static 控制"
+  ],
+  "examples": [
+    "HTML 中的元素在没有特殊 CSS 规则时，浏览器会一个接一个地排列",
+    "position: static"
+  ],
+  "misconceptions": [
+    "标准文档流不是某种额外布局技巧，而是默认排版方式",
+    "position: static 表示元素处于标准流中"
+  ],
+  "qa_pairs": [
+    {
+      "q": "什么是标准文档流？",
+      "a": "在不使用其他特殊 CSS 排列和定位规则时，元素默认遵循的排列规则。"
+    },
+    {
+      "q": "标准文档流通常由什么决定排列顺序？",
+      "a": "由元素在 HTML 中出现的顺序决定，并结合元素类型特性依次排列。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "HTML和CSS基础"
+  ],
+  "source_pages": [
+    129,
+    132
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "186_标准文档流",
+  "_chunk_pages": [
+    129,
+    132
+  ]
+}

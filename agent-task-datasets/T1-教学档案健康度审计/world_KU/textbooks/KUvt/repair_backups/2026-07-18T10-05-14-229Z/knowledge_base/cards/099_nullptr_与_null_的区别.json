@@ -1,0 +1,43 @@
+{
+  "title": "nullptr 与 NULL 的区别",
+  "definition": "nullptr 是 C++11 引入的空指针字面量，专门用于表示空指针；传统的 NULL 通常被定义为整数常量 0，因此在函数重载场景中可能选择整数参数版本，而 nullptr 会优先匹配指针参数版本。",
+  "key_points": [
+    "NULL 在 C++中通常等价于 0，具有整数类型语义。",
+    "nullptr 具有空指针语义，可转换为指针或成员指针，但不是普通整数。",
+    "在存在重载时，调用 func(NULL) 可能选择 func(int)，而调用 func(nullptr) 可选择指针参数版本。"
+  ],
+  "examples": [
+    "void func(int i) { cout << \"func(int)\" << endl; }\n\nfunc(NULL); // 传统 NULL 通常按整数 0 处理，可能调用 func(int)\nfunc(nullptr); // nullptr 表示空指针"
+  ],
+  "misconceptions": [
+    "NULL 并不是在所有情况下都具有专门的空指针类型；它通常只是整数常量 0。",
+    "nullptr 不是整数 0，不能把它简单理解为普通整数。",
+    "使用 nullptr 并不表示创建了一个实际的对象；它只表示空指针值。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么 C++11 代码通常推荐使用 nullptr 而不是 NULL？",
+      "a": "因为 nullptr 是专门的空指针字面量，不会像通常的 NULL（整数 0）那样在函数重载中优先匹配整数参数。"
+    },
+    {
+      "q": "若函数存在 int 参数重载，func(NULL) 可能调用哪个版本？",
+      "a": "可能调用 func(int)，因为传统 NULL 通常按整数常量 0 处理。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "函数重载",
+    "指针"
+  ],
+  "source_pages": [
+    73,
+    74
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "099_nullptr_与_null_的区别",
+  "_chunk_pages": [
+    73,
+    76
+  ]
+}

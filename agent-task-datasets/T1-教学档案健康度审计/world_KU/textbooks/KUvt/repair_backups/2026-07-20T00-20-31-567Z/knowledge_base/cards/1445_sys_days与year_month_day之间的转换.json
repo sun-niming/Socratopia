@@ -1,0 +1,44 @@
+{
+  "title": "sys_days与year_month_day之间的转换",
+  "definition": "可以使用`sys_days`把由年、月、日构成的日期转换为基于`system_clock`的天精度时间点；也可以先用`floor<days>`把时间点截短到整天，再用`year_month_day`构造函数把它转换为日期字段对象。`floor<days>`用于将时间点截短到精确的天。",
+  "key_points": [
+    "日期到系统时间点的转换示例：`sys_days{2020y / June / 22d}`。",
+    "系统时间点到日期的转换通常先执行`floor<days>(time_point)`，再构造`year_month_day`。",
+    "截短到天会去除当天以内的时、分、秒等更小时间单位。"
+  ],
+  "examples": [
+    "`std::chrono::system_clock::time_point t1{std::chrono::sys_days{2020y / June / 22d}};`",
+    "`year_month_day ymd{std::chrono::floor<days>(t1)};`",
+    "`year_month_day today2{std::chrono::floor<days>(std::chrono::system_clock::now())};`"
+  ],
+  "misconceptions": [
+    "`floor<days>`不是把日期转换成字符串，而是把时间点的精度截短到天。",
+    "从时间点转换为`year_month_day`时，不能忽略先按天截短这一过程，否则时间点中剩余的时分秒可能影响转换。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何把`2020年6月22日`构造成系统时间点？",
+      "a": "可以先构造`sys_days{2020y / June / 22d}`，再用它初始化`system_clock::time_point`。"
+    },
+    {
+      "q": "如何把一个系统时间点转换为`year_month_day`？",
+      "a": "先执行`floor<days>(time_point)`将其截短为整天，再用该结果构造`year_month_day`。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "std::chrono::sys_time及其精度别名",
+    "日期字面量与year_month_day"
+  ],
+  "source_pages": [
+    693,
+    693
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1445_sys_days与year_month_day之间的转换",
+  "_chunk_pages": [
+    693,
+    696
+  ]
+}

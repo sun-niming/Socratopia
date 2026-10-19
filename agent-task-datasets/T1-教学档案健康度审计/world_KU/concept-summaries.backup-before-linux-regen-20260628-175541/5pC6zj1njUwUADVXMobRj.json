@@ -1,0 +1,127 @@
+{
+  "conversationId": "5pC6zj1njUwUADVXMobRj",
+  "generatedAt": 1782444505273,
+  "pagesRange": "p.205",
+  "sections": [
+    {
+      "type": "tldr",
+      "content": "这一节把 **2D 变换 → 3D 变换 → 过渡与动画** 串起来了：先分清 `scale`、`rotate`、`skew`、`translate` 的作用，再抓住 `transform-origin`、`perspective` 和 `preserve-3d` 这几个决定“怎么转、绕哪转、看起来有多立体”的核心点，最后进入 `transition` 和 `animation` 的写法与节奏控制。"
+    },
+    {
+      "type": "narrative",
+      "content": "一开始主要在纠正常见误区：`scale(2)` 不是只放大宽度，而是宽高一起放大；`translate(20px)` 和 `translateX(20px)` 在单参数时看起来一样，但本质写法不同。接着把 3D 变换的关键线索串起来：多了 Z 轴，`perspective` 决定视角，`transform-style: preserve-3d` 负责保留子元素的三维层次。最后进入过渡和动画，区分了 `transition-duration`、`cubic-bezier(...)`、`@keyframes`、`animation`，以及 `from/to` 和百分比关键帧的用法。"
+    },
+    {
+      "type": "concepts",
+      "items": [
+        {
+          "name": "2D 变换函数",
+          "body": "这一部分主要在分辨几个常见的 `transform` 写法：\n\n- `scale(...)`：缩放。`scale(2)` 表示 **X、Y 方向一起放大**；`scale(2, 1.5)` 则是第一个值管 X 方向，第二个值管 Y 方向。\n- `rotate(...)`：旋转。`rotate(45deg)` 就是旋转 45°。\n- `skew(...)`：倾斜，不是缩放。`skew(20deg, 10deg)` 可以理解为分别对 X、Y 方向做倾斜。\n- `skewX(...)` / `skewY(...)`：单独控制某一个方向的倾斜。\n- `translate(...)`：位移。写一个值时，通常可理解为 X 方向位移，Y 方向默认不动；`translateX(...)` 只管 X 方向。\n\n记忆重点：\n- `scale` 是放大/缩小\n- `rotate` 是转\n- `skew` 是歪\n- `translate` 是挪"
+        },
+        {
+          "name": "transform-origin",
+          "body": "`transform-origin` 不是“怎么变形”，而是“**绕哪里变形**”。\n\n- 默认通常绕元素中心点变化\n- 可以改成左上角、右下角等位置\n- 它最常和 `rotate()` 配合使用\n\n课堂里强调的核心句是：**`transform-origin` 决定变形时的参考点。**\n\n直觉理解：\n- 支点在中心：像原地转\n- 支点在角上：像从那个角“甩出去”\n\n常见写法可以理解为：\n- `center center`\n- `left top`\n- `right bottom`"
+        },
+        {
+          "name": "3D 变换",
+          "body": "3D 变换比 2D 多了一条 **Z 轴**，也就是前后深度。\n\n核心理解：\n- 2D 只有 X、Y\n- 3D 额外有 Z\n- `translateZ(...)`：沿 Z 轴前后移动\n- `rotateX(...)`：绕 X 轴旋转\n- `rotateY(...)`：绕 Y 轴旋转\n- `rotateZ(...)`：绕 Z 轴旋转，效果接近平面内旋转\n\n最重要的两个 3D 相关概念：\n\n### `perspective`\n- 控制的是 **看起来有多立体**，不是把元素真的推到前后\n- 可以理解成“镜头距离”\n- 一般写在父元素上，更像是给整个场景设置视角\n\n### `transform-style: preserve-3d`\n- 作用是 **让子元素保留 3D 层次**\n- 如果没有它，子元素容易被拍扁到同一个平面里\n\n一句话记忆：\n- `perspective`：负责“怎么看”\n- `preserve-3d`：负责“空间层次别丢”\n- `translateZ(...)`：负责前后移动\n\n课堂上反复强调的结论是：**3D 的关键不是只有旋转，而是要有视角。**"
+        },
+        {
+          "name": "过渡与动画",
+          "body": "这一部分把“平滑变化”和“真正的动画”区分清楚了。\n\n### 过渡 `transition`\n- 重点是让属性变化时“慢慢变”\n- `transition-duration` 必须有时间，否则变化会几乎瞬间完成，看不出过渡效果\n- `cubic-bezier(...)` 用来控制节奏，也就是这段时间里速度怎么分配\n\n可以这样理解：\n- `transition-duration` 决定“动多久”\n- `cubic-bezier(...)` 决定“怎么动”\n\n### 动画 `animation`\n动画是更完整的一套机制，典型流程是：\n1. 用 `@keyframes` **定义**动画\n2. 用 `animation` **调用**动画\n3. 绑定到某个元素上，动画才会真正生效\n\n### 关键帧写法\n- `from` / `to`：表示开始和结束\n- 百分比：表示动画过程中的不同阶段，比如 `0%`、`50%`、`100%`\n\n课堂上特别强调：\n- `@keyframes` 只是定义，不会自己播放\n- 百分比写法更灵活，因为可以在中间插入更多变化点\n- `animation: move 2s;` 里，`move` 是动画名，`2s` 是持续时间\n\n一句话总结：\n- `transition` 更像“属性变化的平滑过渡”\n- `animation` 更像“按关键帧设计出来的一整段动作”"
+        }
+      ]
+    },
+    {
+      "type": "key-terms",
+      "items": [
+        {
+          "term": "scale",
+          "definition": "缩放；`scale(2)` 表示宽高一起放大 2 倍。"
+        },
+        {
+          "term": "rotate",
+          "definition": "旋转；如 `rotate(45deg)`。"
+        },
+        {
+          "term": "skew",
+          "definition": "倾斜，不是缩放。"
+        },
+        {
+          "term": "translate",
+          "definition": "位移；可沿 X、Y、Z 方向移动。"
+        },
+        {
+          "term": "transform-origin",
+          "definition": "变形时的参考点／支点。"
+        },
+        {
+          "term": "perspective",
+          "definition": "控制 3D 的视角强弱，也就是看起来有多立体。"
+        },
+        {
+          "term": "preserve-3d",
+          "definition": "让子元素保留 3D 层次，不要被拍扁。"
+        },
+        {
+          "term": "transition-duration",
+          "definition": "过渡持续时间。"
+        },
+        {
+          "term": "cubic-bezier",
+          "definition": "控制过渡或动画的速度节奏。"
+        },
+        {
+          "term": "@keyframes",
+          "definition": "定义 CSS 动画关键帧。"
+        },
+        {
+          "term": "animation",
+          "definition": "把定义好的动画用到元素上。"
+        },
+        {
+          "term": "from / to",
+          "definition": "关键帧的开始和结束写法。"
+        },
+        {
+          "term": "百分比关键帧",
+          "definition": "用 `0%`、`50%`、`100%` 等表示动画过程中的阶段。"
+        }
+      ]
+    },
+    {
+      "type": "review-questions",
+      "items": [
+        {
+          "question": "`scale(2)` 表示什么？",
+          "hint": "注意不是只改宽度。",
+          "answer": "表示 **X、Y 方向一起放大 2 倍**，也就是宽高一起变大。"
+        },
+        {
+          "question": "`transform-origin` 的作用是什么？",
+          "hint": "想想“绕哪里变形”。",
+          "answer": "它决定变形时的 **参考点／支点**，比如中心点、左上角或右下角。"
+        },
+        {
+          "question": "`perspective` 和 `translateZ(...)` 有什么区别？",
+          "hint": "一个管“看起来”，一个管“真的动”。",
+          "answer": "`perspective` 控制的是 **看起来有多立体**，也就是视角；`translateZ(...)` 才是 **沿 Z 轴前后移动**。"
+        },
+        {
+          "question": "如果只写 `@keyframes`，但没有用 `animation` 绑定到元素上，会怎样？",
+          "hint": "定义和调用要分开。",
+          "answer": "动画 **不会自动播放**，因为只完成了定义，还没有真正调用并绑定到元素上。"
+        },
+        {
+          "question": "如果想在动画中间加一个变化点，应该用什么写法？",
+          "hint": "不是只有开始和结束。",
+          "answer": "用 **百分比关键帧**，比如 `50%`，这样可以在中间插入新的样式变化。"
+        }
+      ]
+    },
+    {
+      "type": "open-question",
+      "content": "除了 `animation` 的名字和时长以外，它还有哪些常用子属性，比如控制延迟、循环次数、方向、播放状态的部分？这些属性组合起来会怎样影响一个动画的整体观感？"
+    }
+  ]
+}

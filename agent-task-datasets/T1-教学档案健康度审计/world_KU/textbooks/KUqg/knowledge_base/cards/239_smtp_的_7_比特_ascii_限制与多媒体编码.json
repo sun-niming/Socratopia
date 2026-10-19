@@ -1,0 +1,44 @@
+{
+  "title": "SMTP 的 7 比特 ASCII 限制与多媒体编码",
+  "definition": "原文指出，SMTP 的传统限制是邮件报文的体部分（不仅是首部）只能采用简单的 7 比特 ASCII 表示。因此，在通过 SMTP 传输二进制多媒体数据之前，需要先将其编码为 ASCII；传输后再将 ASCII 邮件解码，还原为多媒体数据。",
+  "key_points": [
+    "SMTP 的 7 比特 ASCII 限制适用于邮件报文体部分，而不只是邮件首部。",
+    "图片、声音、视频等二进制多媒体数据不能直接按原始二进制形式满足该限制，需要编码成 ASCII。",
+    "接收方在 SMTP 传输之后需要进行相应解码，恢复原来的多媒体数据。",
+    "原文将此限制与 HTTP 对比：使用 HTTP 传送前不需要将多媒体数据编码为 ASCII。"
+  ],
+  "examples": [
+    "发送带图片的邮件时，可以抽象表示为：\n$$\\text{二进制多媒体数据}\\xrightarrow{\\text{编码}}\\text{ASCII 数据}\\xrightarrow{\\text{SMTP 传输}}\\text{ASCII 数据}\\xrightarrow{\\text{解码}}\\text{原多媒体数据}$$"
+  ],
+  "misconceptions": [
+    "7 比特 ASCII 限制不是只针对邮件主题或首部，而是包括邮件体部分。",
+    "编码成 ASCII 不等于多媒体数据本身变成了文本内容，而是为了满足 SMTP 传输表示的限制。",
+    "原文比较的是传送前的编码要求：HTTP 传送前不需要进行这种 ASCII 编码。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么通过 SMTP 发送二进制图片通常需要先编码？",
+      "a": "因为原文所述 SMTP 限制邮件体部分只能使用简单的 7 比特 ASCII 表示，所以二进制图片需要先编码为 ASCII，接收后再解码。"
+    },
+    {
+      "q": "原文指出 HTTP 和 SMTP 在多媒体数据传送前有什么区别？",
+      "a": "使用 SMTP 传送前需要将二进制多媒体数据编码为 ASCII；使用 HTTP 传送前不需要这样编码。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "SMTP 的作用及其客户端—服务器角色",
+    "字符编码与二进制数据"
+  ],
+  "source_pages": [
+    94,
+    95
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "239_smtp_的_7_比特_ascii_限制与多媒体编码",
+  "_chunk_pages": [
+    93,
+    96
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "title": "路径校验与 realpath",
+  "definition": "路径校验的最低策略是：解码后的路径必须以 `/` 开头，拒绝 `..`、反斜杠 `\\`、NUL 字节和绝对路径形式，并使用 `realpath()` 确认最终路径仍位于网站根目录内。",
+  "key_points": [
+    "解码后的路径必须以 `/` 开头。",
+    "拒绝 `..`、`\\`、`NUL` 字节和绝对路径形式。",
+    "使用 `realpath()` 校验最终路径是否仍在网站根目录内。",
+    "前缀判断不能只写 `strncmp(resolved, root, strlen(root)) == 0`，因为 `/home/www2/a.html` 也会匹配 `/home/www`。",
+    "正确边界判断是：前缀匹配后，下一个字符必须是 `/` 或字符串结束。",
+    "`realpath()` 在目标文件不存在时会失败，因此要注意 404 与 403 的处理顺序。"
+  ],
+  "examples": [
+    "正确边界判断示例：\n```c\nint is_under_root(const char *root, const char *path) {\n    size_t n = strlen(root);\n    if (strncmp(root, path, n) != 0) return 0;\n    return path[n] == '\\0' || path[n] == '/';\n}\n```",
+    "错误前缀示例：`/home/www2/a.html` 不能算作 `/home/www` 的子路径。"
+  ],
+  "misconceptions": [
+    "只要 `strncmp` 前缀相同，就一定在根目录内。",
+    "`realpath()` 失败就应该把所有不存在文件都当成 403。",
+    "文件不存在时也一定能直接用 `realpath()` 做最终校验。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么前缀判断后还要检查下一个字符？",
+      "a": "因为仅看前缀会把 `/home/www2` 误判为 `/home/www` 的内部路径，必须保证下一个字符是 `/` 或字符串结束。"
+    },
+    {
+      "q": "`realpath()` 为什么要结合文件存在性一起处理？",
+      "a": "因为 `realpath()` 在目标文件不存在时可能失败，若不区分会把正常的 404 误当成 403。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "路径安全防护",
+    "URL 解码顺序"
+  ],
+  "source_pages": [
+    33,
+    36
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "044_路径校验与_realpath",
+  "_chunk_pages": [
+    33,
+    36
+  ]
+}

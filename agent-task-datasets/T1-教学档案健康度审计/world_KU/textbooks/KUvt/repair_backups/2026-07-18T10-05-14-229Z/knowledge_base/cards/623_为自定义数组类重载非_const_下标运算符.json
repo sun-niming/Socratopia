@@ -1,0 +1,45 @@
+{
+  "title": "为自定义数组类重载非 const 下标运算符",
+  "definition": "类可以通过成员函数 operator[](size_t x) 定义下标访问语法。对于非 const 的 Array<T> 对象，operator[] 返回 T&，因此既可以读取元素，也可以通过下标直接修改元素。原文中的实现通过 m_elements[x] 返回对应元素，并在访问前执行扩容逻辑。",
+  "key_points": [
+    "典型声明为：T& operator[](size_t x);",
+    "返回 T& 意味着表达式 arr[x] 可以出现在赋值号左侧，例如 arr[i] = 100;",
+    "使用 myArray[i] 等价于调用 myArray.operator[](i)。",
+    "原文示例使用 Array<int> myArray; 通过 myArray[i] = 100; 设置元素，再通过 cout 输出元素。"
+  ],
+  "examples": [
+    "Array<int> myArray; for (size_t i { 0 }; i < 10; i++) { myArray[i] = 100; }",
+    "template <typename T> T& Array<T>::operator[](size_t x) { resize(x + AllocSize); return m_elements[x]; }"
+  ],
+  "misconceptions": [
+    "operator[] 不是只能读取元素；当返回类型为 T& 时，也可以修改元素。",
+    "myArray[i] 不是数组内置语法专属，也可以由用户自定义类型通过重载 operator[] 提供。",
+    "operator[] 返回引用不等于返回元素副本；返回引用允许直接操作原对象中的元素。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么原文中的 myArray[i] = 100; 可以修改 Array<int> 对象中的元素？",
+      "a": "因为非 const 版本的 operator[] 返回 T&，即元素的引用，所以赋值会直接修改对应元素。"
+    },
+    {
+      "q": "Array<T> 的非 const 下标运算符通常声明为什么形式？",
+      "a": "通常声明为 T& operator[](size_t x);"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "类成员函数",
+    "引用"
+  ],
+  "source_pages": [
+    481,
+    482
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "623_为自定义数组类重载非_const_下标运算符",
+  "_chunk_pages": [
+    481,
+    484
+  ]
+}

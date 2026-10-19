@@ -1,0 +1,38 @@
+{
+  "title": "链接外部样式表",
+  "definition": "链接外部样式表是把CSS写在独立的 .css 文件中，并在HTML的 head 标签里用 link 元素把它链接进来；原文给出的属性包括 href 和 rel。",
+  "key_points": [
+    "外部样式表是独立的 .css 文件",
+    "在 head 标签中使用 link 元素",
+    "href 指定被链接资源的 URL，rel 指定链接文档与当前文档的关系"
+  ],
+  "examples": [
+    "<link href=\"your-stylesheet.css\" rel=\"stylesheet\" />"
+  ],
+  "misconceptions": [
+    "link 标签只用于超链接，不用于引入样式表",
+    "href 只能写绝对URL，不能写相对URL"
+  ],
+  "qa_pairs": [
+    {
+      "q": "link 标签引入外部样式表时，href 和 rel 分别表示什么？",
+      "a": "href 指定被链接资源的 URL；rel 命名链接文档与当前文档的关系。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "HTML基础",
+    "CSS概述"
+  ],
+  "source_pages": [
+    85,
+    88
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "135_链接外部样式表",
+  "_chunk_pages": [
+    85,
+    88
+  ]
+}

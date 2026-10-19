@@ -1,0 +1,62 @@
+{
+  "title": "test与[ ]的文件特性检测",
+  "definition": "test 和 [ ] 用于进行条件测试。原文给出的格式是：test 条件，或者 [ 条件 ]。在文件特性检测方面，原文列出了以下条件：-f 表示普通文件，-d 表示目录，-s 表示文件大小非零，-r 表示可读，-w 表示可写，-x 表示可执行，-L/h 表示符号链接文件。",
+  "key_points": [
+    "条件测试可以使用 test 条件 的形式",
+    "也可以使用 [ 条件 ] 的形式",
+    "-f 检测普通文件",
+    "-d 检测目录",
+    "-s 检测文件大小是否非零",
+    "-r、-w、-x 分别检测可读、可写、可执行",
+    "原文将 -L/h 记为符号链接文件检测"
+  ],
+  "examples": [
+    "test -f file1",
+    "[ -d dir1 ]",
+    "test -s data.txt",
+    "[ -r file1 ]",
+    "[ -w file1 ]",
+    "[ -x script.sh ]"
+  ],
+  "misconceptions": [
+    "误以为 test 和 [ ] 是两类完全不同的测试方式，原文说明它们都可用于条件测试",
+    "误以为 -s 检测的是文件是否存在，原文说明它检测文件大小是否非零"
+  ],
+  "qa_pairs": [
+    {
+      "q": "test 命令与 [ ] 的用途是什么？",
+      "a": "用于进行条件测试。"
+    },
+    {
+      "q": "如何用原文给出的两种格式书写条件测试？",
+      "a": "可以写成 test 条件，或者 [ 条件 ]。"
+    },
+    {
+      "q": "-f、-d、-s 分别表示什么？",
+      "a": "-f 表示普通文件，-d 表示目录，-s 表示文件大小非零。"
+    },
+    {
+      "q": "-r、-w、-x 分别检测什么？",
+      "a": "分别检测可读、可写、可执行。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "Linux文件基本类型",
+    "Linux命令行基本使用"
+  ],
+  "source_pages": [
+    73,
+    73
+  ],
+  "needs_verification": false,
+  "verify_query": "Linux shell test -L -h 符号链接 文件特性检测 区别",
+  "concept_id": "010_test与_的文件特性检测",
+  "_chunk_pages": [
+    70,
+    73
+  ],
+  "verified": true,
+  "verify_note": "核实:bash test 中 -L 与 -h 等价,均为\"文件存在且为符号链接\"且检测链接本身(不跟随)。-L 为 POSIX 推荐写法,-h 为向后兼容别名。教材表述无误。",
+  "verify_method": "established-knowledge (本会话 WebSearch 未返回实时结果)"
+}

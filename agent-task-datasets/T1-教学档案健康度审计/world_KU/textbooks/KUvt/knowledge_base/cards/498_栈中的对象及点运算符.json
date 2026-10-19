@@ -1,0 +1,47 @@
+{
+  "title": "栈中的对象及点运算符",
+  "definition": "可以像声明普通变量一样声明类类型变量，从而创建通常位于栈中的对象。通过对象名后的点运算符 `.` 可以访问该对象的公有成员或调用其公有成员函数。",
+  "key_points": [
+    "类类型变量的声明会创建对应的对象。",
+    "对象名后使用点运算符 `.` 访问成员。",
+    "原文示例使用 `setValue` 设置对象状态，并使用 `getValue` 或 `getString` 读取状态。",
+    "不推荐直接暴露公有数据成员，通常应通过公有成员函数访问对象状态。"
+  ],
+  "examples": [
+    "`SpreadsheetCell myCell, anotherCell;`",
+    "`myCell.setValue(6);`",
+    "`std::cout << myCell.getValue() << std::endl;`",
+    "`std::cout << anotherCell.getValue() << std::endl;`"
+  ],
+  "misconceptions": [
+    "点运算符用于对象，不是用于指向对象的指针；指针访问成员通常使用箭头运算符 `->`。",
+    "声明两个对象不会让它们共享同一个对象状态；它们是两个独立对象。",
+    "可以访问公有数据成员不代表应当把数据成员设计为公有；原文明确不推荐这样做。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何调用栈对象 `myCell` 的 `setValue` 成员函数？",
+      "a": "使用点运算符：`myCell.setValue(6);`"
+    },
+    {
+      "q": "对象和指针访问成员分别使用什么运算符？",
+      "a": "对象使用点运算符 `.`，指向对象的指针使用箭头运算符 `->`。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "类是对象的蓝图",
+    "成员函数的调用"
+  ],
+  "source_pages": [
+    234,
+    235
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "498_栈中的对象及点运算符",
+  "_chunk_pages": [
+    233,
+    236
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "title": "使用指针访问数组元素",
+  "definition": "数组名可以用于初始化指向其首元素的指针；通过该指针使用下标运算符，可以访问和修改数组元素。例如，若 `mylntPtr` 指向 `myIntArray` 的首元素，则 `mylntPtr[4]` 表示数组的第 5 个元素。",
+  "key_points": [
+    "`int myIntArray[10] {};` 定义并值初始化一个含 10 个 `int` 元素的数组。",
+    "`int* mylntPtr { myIntArray };` 使指针指向数组首元素。",
+    "`mylntPtr[4] = 5;` 可以通过指针修改数组元素。"
+  ],
+  "examples": [
+    "```cpp\nint myIntArray[10] {};\nint* mylntPtr { myIntArray };\nmylntPtr[4] = 5;\n```"
+  ],
+  "misconceptions": [
+    "指针变量本身不是整个数组；它只保存数组首元素的地址。",
+    "下标 `4` 表示第 5 个元素，因为数组下标从 `0` 开始。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`mylntPtr[4] = 5;` 的作用是什么？",
+      "a": "通过指向 `myIntArray` 首元素的指针，将数组第 5 个元素修改为 `5`。"
+    },
+    {
+      "q": "`int* mylntPtr { myIntArray };` 中指针指向哪里？",
+      "a": "它指向 `myIntArray` 的首元素。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++数组与指针基础"
+  ],
+  "source_pages": [
+    209,
+    212
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "277_使用指针访问数组元素",
+  "_chunk_pages": [
+    209,
+    212
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "title": "使用 regex_token_iterator 进行字段分解和标记化",
+  "definition": "当 `regex_token_iterator` 的捕获组索引指定为 `-1` 时，它进入标记化模式，遍历输入字符串中所有不匹配正则表达式的子字符串。将分隔符及其两侧的空白写入正则表达式，就可以按照分隔符切分字符串，并同时去除分隔符周围的空白。",
+  "key_points": [
+    "`-1` 是 `regex_token_iterator` 的特殊 `SubMatches` 值，表示遍历正则表达式匹配之间的非匹配部分。",
+    "例如，正则表达式 `\\s*[,;]\\s*` 匹配：零个或多个空白字符、一个逗号或分号、零个或多个空白字符。",
+    "因为迭代器输出的是不匹配部分，所以逗号、分号及其周围的空白不会出现在输出标记中。",
+    "这种方式可用于字段分解和标记化；教材指出，它比传统 C 函数 `strtok()` 更灵活、更安全。"
+  ],
+  "examples": [
+    "分隔符正则表达式：`regex reg { R\"(\\s*[,;]\\s*)\" };`",
+    "标记化代码：`const sregex_token_iterator end; for (sregex_token_iterator iter { cbegin(str), cend(str), reg, -1 }; iter != end; ++iter) { cout << iter->str() << endl; }`",
+    "输入 `This is, a; test string.` 时，输出的标记可表示为 `This is`、`a`、`test string.`；逗号和分号以及它们周围的空白被作为分隔部分消耗掉。"
+  ],
+  "misconceptions": [
+    "指定 `-1` 后，迭代器不是遍历分隔符本身，而是遍历正则表达式匹配之间的非匹配子字符串。",
+    "正则表达式 `\\s*[,;]\\s*` 不仅匹配逗号和分号，还匹配它们两侧的任意数量空白字符。",
+    "`regex_token_iterator` 的标记化模式不要求使用循环手动查找每个分隔符。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何让 `regex_token_iterator` 遍历分隔符之间的文本，而不是遍历分隔符？",
+      "a": "将 `SubMatches` 指定为 `-1`，例如 `sregex_token_iterator iter { cbegin(str), cend(str), reg, -1 };`。"
+    },
+    {
+      "q": "正则表达式 `R\"(\\s*[,;]\\s*)\"` 用作分隔符时匹配什么？",
+      "a": "它匹配零个或多个空白字符、一个逗号或分号、以及零个或多个空白字符。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "regex_token_iterator 的作用与构造参数",
+    "正则表达式量词与字符类"
+  ],
+  "source_pages": [
+    678,
+    679
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1418_使用_regex_token_iterator_进行字段分解和标记化",
+  "_chunk_pages": [
+    677,
+    680
+  ]
+}

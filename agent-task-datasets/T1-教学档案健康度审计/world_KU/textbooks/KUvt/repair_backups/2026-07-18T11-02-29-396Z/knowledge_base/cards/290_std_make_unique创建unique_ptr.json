@@ -1,0 +1,49 @@
+{
+  "title": "std::make_unique创建unique_ptr",
+  "definition": "std::make_unique()用于创建对象，并返回一个管理该对象的std::unique_ptr。它可以避免直接写new，使创建unique_ptr的代码更简洁。原文示例使用std::make_unique<Simple>()创建Simple对象，并用auto接收返回的std::unique_ptr。",
+  "key_points": [
+    "典型写法是auto ptr { std::make_unique<Type>(构造函数参数) };。",
+    "无构造参数时可写作std::make_unique<Simple>()；有构造参数时，可将参数传给模板函数，例如std::make_unique<Bar>(data())。",
+    "在调用需要unique_ptr参数的函数时，可以直接传入std::make_unique()的结果。",
+    "原文指出，C++17提供std::make_unique()；C++20还提供std::make_unique_for_overwrite()。"
+  ],
+  "examples": [
+    "创建Simple对象：代码形式为auto mySimpleSmartPtr { std::make_unique<Simple>() };。",
+    "将智能指针传给函数：代码形式为foo(std::make_unique<Simple>(), std::make_unique<Bar>(data()));。",
+    "直接使用类型和new也可以构造unique_ptr：代码形式为std::unique_ptr<Simple> p { new Simple{} };，但原文随后以std::make_unique()作为更简洁的写法。"
+  ],
+  "misconceptions": [
+    "std::make_unique()返回的是std::unique_ptr，而不是裸指针。",
+    "调用std::make_unique<Simple>()后不需要再对返回对象调用delete。",
+    "make_unique()的模板实参表示要创建的对象类型，例如std::make_unique<Simple>()中的Simple。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何使用std::make_unique创建一个Simple对象并让auto变量接管它？",
+      "a": "可写为：auto mySimpleSmartPtr { std::make_unique<Simple>() };。"
+    },
+    {
+      "q": "如何把两个由make_unique创建的对象传给foo函数？",
+      "a": "可写为：foo(std::make_unique<Simple>(), std::make_unique<Bar>(data()));。"
+    },
+    {
+      "q": "原文提到哪个版本开始提供std::make_unique()？",
+      "a": "原文指出从C++17开始提供std::make_unique()。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "std::unique_ptr与RAII"
+  ],
+  "source_pages": [
+    218,
+    219
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "290_std_make_unique创建unique_ptr",
+  "_chunk_pages": [
+    217,
+    220
+  ]
+}

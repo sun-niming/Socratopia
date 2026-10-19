@@ -1,0 +1,53 @@
+{
+  "title": "按优先级解析name=value中的variant值",
+  "definition": "练习24-2要求编写函数解析单个`name=value`形式的命令行参数，并返回一个包含参数名称和`variant`的`pair`。值的解析规则是：如果可以解析为布尔值，就保存为布尔值；否则如果可以解析为整数，就保存为整数；否则保存为字符串。解析结果需要使用`holds_alternative()`输出；练习24-3要求改用访问者输出。",
+  "key_points": [
+    "先拆分字符串，得到参数名称和参数值。",
+    "参数值的类型判断顺序为：布尔值、整数、字符串。",
+    "解析结果可以表示为包含名称和variant的`pair`。",
+    "练习24-2要求使用`holds_alternative()`检查variant当前保存的类型；练习24-3要求改用访问者输出。",
+    "拆分`name=value`可以使用正则表达式，整数解析可以使用前文介绍的函数。"
+  ],
+  "examples": [
+    "可将结果抽象表示为：`std::pair<std::string, std::variant<bool, int, std::string>>`。",
+    "例如，`enabled=true`可解析为`std::pair{\"enabled\", true}`，`count=42`可解析为`std::pair{\"count\", 42}`，`name=Alice`可解析为`std::pair{\"name\", std::string{\"Alice\"}}`。",
+    "类型判断规则可写为：$$parse(value)=\\begin{cases}\\text{bool},&value\\text{可解析为布尔值}\\\\\\text{int},&value\\text{不可解析为布尔值但可解析为整数}\\\\\\text{string},&\\text{其他情况}\\end{cases}$$"
+  ],
+  "misconceptions": [
+    "解析顺序不是整数优先，而是布尔值优先、整数其次、字符串最后。",
+    "`variant`只能保存其中一种候选类型的当前值，不会同时保存布尔值、整数和字符串三个值。",
+    "练习24-3不是改变解析规则，而是改变输出variant内容的方式：从`holds_alternative()`改为访问者。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "练习24-2要求把命令行参数解析成什么结果？",
+      "a": "解析成一个包含参数名称和variant值的`pair`。"
+    },
+    {
+      "q": "解析值时，布尔值、整数和字符串的判断顺序是什么？",
+      "a": "先判断能否解析为布尔值；否则判断能否解析为整数；两者都不能时按字符串处理。"
+    },
+    {
+      "q": "练习24-3相对于练习24-2修改了什么？",
+      "a": "不再使用`holds_alternative()`输出解析结果，而是使用访问者输出。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "pair",
+    "variant",
+    "正则表达式",
+    "命令行参数"
+  ],
+  "source_pages": [
+    714,
+    714
+  ],
+  "needs_verification": true,
+  "verify_query": "《C++20高级编程》第5版 练习24-2 holds_alternative variant name=value 布尔 整数 字符串",
+  "concept_id": "1488_按优先级解析name_value中的variant值",
+  "_chunk_pages": [
+    713,
+    716
+  ]
+}

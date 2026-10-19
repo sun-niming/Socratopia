@@ -1,0 +1,50 @@
+{
+  "title": "Date对象的常用获取方法",
+  "definition": "Date对象提供一组获取当前日期时间各部分的方法。原文列出：getDate()返回天（1-31），getDay()返回周名/星期值（0-6），getFullYear()返回四位年份（yyyy），getHours()返回小时（0-23），getMilliseconds()返回毫秒（0-999），getMinutes()返回分（0-59），getMonth()返回月（0-11），getSeconds()返回秒（0-59），getTime()返回从1970年1月1日至今的时间。",
+  "key_points": [
+    "getDate()：获取日，范围1-31。",
+    "getDay()：获取星期值，范围0-6。",
+    "getFullYear()：获取四位年份。",
+    "getHours()/getMinutes()/getSeconds()：分别获取小时、分钟、秒。",
+    "getMilliseconds()：获取毫秒，范围0-999。",
+    "getMonth()：获取月，范围0-11。",
+    "getTime()：获取从1970年1月1日至今的时间。"
+  ],
+  "examples": [
+    "const d = new Date(); d.getFullYear(); d.getMonth(); d.getDate(); d.getTime();"
+  ],
+  "misconceptions": [
+    "把getMonth()的月份范围误认为1-12。",
+    "把getDay()当成“几号”而不是星期值。",
+    "以为getTime()返回的是可读日期字符串。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "getFullYear()返回什么？",
+      "a": "返回四位的年份（yyyy）。"
+    },
+    {
+      "q": "getMonth()返回的月份范围是多少？",
+      "a": "0-11。"
+    },
+    {
+      "q": "getTime()返回什么？",
+      "a": "返回从1970年1月1日至今的时间。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "Date对象的创建"
+  ],
+  "source_pages": [
+    309,
+    312
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "421_date对象的常用获取方法",
+  "_chunk_pages": [
+    309,
+    312
+  ]
+}

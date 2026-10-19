@@ -1,0 +1,51 @@
+{
+  "title": "typeid 的使用规则与适用场景",
+  "definition": "typeid 运算符可以在运行时比较对象的类型。例如，可以比较 typeid(animal) 和 typeid(Dog)，根据对象的实际类型执行不同代码。但教材强调，这类基于 typeid 的分支通常应改写为基类中的虚方法及派生类重写，以符合面向对象设计。typeid 正常用于多态对象时，类至少应有一个虚方法；此外，typeid 会从实参类型中去除引用和 const 限定符。教材还指出，typeid 的主要价值之一是日志记录和调试。",
+  "key_points": [
+    "典型形式是 if (typeid(animal) == typeid(Dog))，根据运行时类型进行判断。",
+    "如果行为本质上属于对象自身，应该把行为放入基类虚方法，并由派生类重写。",
+    "多态场景下，类至少应有一个虚方法，才能通过虚表获得运行时类型视角。",
+    "typeid 会去除实参的引用和 const 限定符。",
+    "日志记录和调试是 typeid 的重要适用场景。"
+  ],
+  "examples": [
+    "不推荐的类型分支形式：if (typeid(animal) == typeid(Dog)) { 输出 Woof! } else if (typeid(animal) == typeid(Bird)) { 输出 Chirp! }。",
+    "更适合面向对象的形式是：Animal 声明虚函数 speak()；Dog 重写 speak() 输出 Woof!；Bird 重写 speak() 输出 Chirp!。",
+    "typeid 的类型规范化可表示为：$$\\operatorname{typeid}(T\\&)=\\operatorname{typeid}(T\\ \\text{const})=\\operatorname{typeid}(T)$$"
+  ],
+  "misconceptions": [
+    "误以为 typeid 判断类型是实现多态行为的首选方式。",
+    "误以为 typeid 会把引用或 const 限定符当作不同的运行时类型。",
+    "误以为只要写出 typeid 表达式，就能在没有虚函数的类上可靠获得多态对象的实际类型。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么教材不推荐用 typeid 分支实现 Dog 和 Bird 的不同 speak 行为？",
+      "a": "因为更好的设计是在 Animal 中声明虚拟 speak()，由 Dog 和 Bird 分别重写，把与对象有关的行为交给对象自身。"
+    },
+    {
+      "q": "typeid 的两个重要使用场景是什么？",
+      "a": "日志记录和调试。"
+    },
+    {
+      "q": "typeid 会如何处理引用和 const 限定符？",
+      "a": "它会从实参的类型中去除引用和 const 限定符。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "RTTI",
+    "虚函数与多态"
+  ],
+  "source_pages": [
+    344,
+    344
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "695_typeid_的使用规则与适用场景",
+  "_chunk_pages": [
+    341,
+    344
+  ]
+}

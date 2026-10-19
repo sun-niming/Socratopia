@@ -1,0 +1,43 @@
+{
+  "title": "函数模板的自动返回类型推导",
+  "definition": "函数模板可以使用 $auto$ 作为返回类型，让编译器根据 return 语句中的表达式推导返回类型。例如，$auto\\ add(const\\ T1\\&\\ t1,\\ const\\ T2\\&\\ t2)$ 的返回类型由表达式 $t1+t2$ 的类型决定。",
+  "key_points": [
+    "使用 auto 返回类型时，函数体中的 return 表达式必须能够用于推导返回类型。",
+    "对于 add 函数，返回类型由 $t1+t2$ 的结果类型决定。",
+    "这种写法可以避免手动写出复杂或依赖模板参数的返回类型。"
+  ],
+  "examples": [
+    "template<typename T1, typename T2>\\nauto add(const T1& t1, const T2& t2) {\\n    return t1 + t2;\\n}",
+    "调用示例：\\nauto result { add(1, 2) };"
+  ],
+  "misconceptions": [
+    "auto 返回类型不是运行时动态类型；返回类型仍然在编译期确定。",
+    "auto 返回类型并不等同于 decltype(auto)；两者对返回表达式的类型推导规则可能不同。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "下面函数的返回类型根据什么确定？\\ntemplate<typename T1, typename T2> auto add(const T1& t1, const T2& t2) { return t1 + t2; }",
+      "a": "根据 return 语句中的表达式 $t1+t2$ 推导。"
+    },
+    {
+      "q": "auto 作为函数返回类型是在运行时决定类型吗？",
+      "a": "不是。返回类型在编译期根据函数返回表达式推导。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "函数模板基础",
+    "auto 类型推导"
+  ],
+  "source_pages": [
+    397,
+    400
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "514_函数模板的自动返回类型推导",
+  "_chunk_pages": [
+    397,
+    400
+  ]
+}

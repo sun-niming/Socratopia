@@ -1,0 +1,51 @@
+{
+  "title": "catch 参数使用 const 引用及捕获顺序",
+  "definition": "原文展示了使用 `const` 引用捕获异常，例如 `catch (const runtime_error& e)` 和 `catch (const invalid_argument& e)`。当多个 `catch` 处理不同异常类型时，应先写更具体的异常类型，再写能够处理更广泛类型的捕获；最后可以使用 `catch (...)` 处理其他未匹配的异常。",
+  "key_points": [
+    "标准异常的常见捕获形式为 `catch (const ExceptionType& e)`。",
+    "`const` 表示处理异常时不修改异常对象。",
+    "`&` 表示通过引用捕获异常对象，原文示例使用了这种形式。",
+    "多个 `catch` 按书写顺序尝试匹配，因此具体异常处理应放在通用处理之前。",
+    "`catch (...)` 可以作为最后一个处理器，用于处理其他未被前面类型匹配的异常。"
+  ],
+  "examples": [
+    "具体异常分别处理：`catch (const invalid_argument& e) { ... } catch (const runtime_error& e) { ... }`。",
+    "通用兜底处理：`catch (...) { cerr << \"Error reading or opening file \" << fileName << endl; return 1; }`。",
+    "原文还展示了 `catch (const exception& e)`，用于处理标准异常并调用 `e.what()`。"
+  ],
+  "misconceptions": [
+    "`catch (...)` 不是只捕获某一种异常，而是用于匹配其他未被前面处理器匹配的异常。",
+    "不能把通用捕获放在具体捕获之前，否则具体处理器可能无法获得匹配机会。",
+    "原文展示的推荐形式包含 `const` 和引用；`catch (runtime_error& e)` 与 `catch (const runtime_error& e)`并不完全相同，后者不会修改异常对象。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么通常把 `catch (const invalid_argument& e)` 等具体捕获写在 `catch (...)` 之前？",
+      "a": "因为 `catch` 按书写顺序匹配；先写具体类型，才能让具体处理逻辑先执行，最后再用 `catch (...)` 兜底。"
+    },
+    {
+      "q": "`catch (...)` 的作用是什么？",
+      "a": "处理所有未被前面 `catch` 类型匹配的其他异常。"
+    },
+    {
+      "q": "原文中捕获标准异常的典型形式是什么？",
+      "a": "例如 `catch (const exception& e)`，并通过 `e.what()` 输出错误信息。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "使用标准运行时异常表示文件错误",
+    "异常的抛出与捕获"
+  ],
+  "source_pages": [
+    442,
+    444
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "580_catch_参数使用_const_引用及捕获顺序",
+  "_chunk_pages": [
+    441,
+    444
+  ]
+}

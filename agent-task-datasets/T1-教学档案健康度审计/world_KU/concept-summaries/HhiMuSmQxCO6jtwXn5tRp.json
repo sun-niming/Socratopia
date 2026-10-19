@@ -1,0 +1,131 @@
+{
+  "conversationId": "HhiMuSmQxCO6jtwXn5tRp",
+  "generatedAt": 1782641073729,
+  "pagesRange": null,
+  "sections": [
+    {
+      "type": "tldr",
+      "content": "这节课把 Linux 里最容易混淆的几组操作分开了：目录权限 vs 文件权限、`chown` vs `chmod`、`echo` 的转义、网络排查命令，以及 Vim 的模式与常用编辑/退出命令。"
+    },
+    {
+      "type": "narrative",
+      "content": "一开始先卡在“目录的 `x` 到底是不是执行”的误区里，随后把目录权限和文件权限的关系理顺，尤其是“删文件看目录，不看文件本身”。接着又把所有者/所属组、`chown`/`chmod`、`echo` 的换行与转义、`ping` 和 `netstat/ss` 的用途一一分开，最后落到 Vim 的命令模式、插入模式和常见编辑退出键。"
+    },
+    {
+      "type": "concepts",
+      "items": [
+        {
+          "name": "目录权限",
+          "body": "目录上的三个权限分别对应：\n- `r`：能列出目录里的名字\n- `w`：能新增、删除、重命名目录项\n- `x`：能进入目录，或通过已知路径访问里面的东西\n\n最容易反直觉的是 `x`：它更像“通行权”，没有 `x`，`cd` 进不去目录。另一个重点是删除文件：**能不能删一个文件，主要看它所在目录有没有 `w+x`，不是看文件自己有没有写权限。**"
+        },
+        {
+          "name": "`chown` 与 `chmod`",
+          "body": "`chown` 管的是**归属**，`chmod` 管的是**权限位**。\n\n- `chown alice a.txt`：只改所有者为 `alice`，所属组通常不变\n- `chown alice.staff a.txt`：所有者改成 `alice`，所属组改成 `staff`\n- `chmod`：修改 `rwx` 权限，比如把 `rw-r--r--` 改成 `rwxr-xr-x`\n- 数字权限里，`rwx` = `7`，`r-x` = `5`，所以 `rwxr-xr-x` = `755`"
+        },
+        {
+          "name": "`echo`",
+          "body": "`echo` 的作用是把给定字符串显示出来。\n\n- `echo -n hello`：显示 `hello`，但**不输出结尾换行**\n- `echo -e \"hello\\\\nworld\"`：让 `\\\\n` 生效，显示两行\n- 不加 `-e` 时，`\\\\n` 会被当成普通字符原样输出\n\n记忆点：`-n` 管“最后那个换行”，`-e` 管“转义符翻译”。"
+        },
+        {
+          "name": "网络命令：`ping`、`netstat`、`ss`",
+          "body": "这几类命令关注点不同：\n\n- `ping`：测**连通性**，比如 `ping baidu.com`\n- 如果 `ping` 一个 IP 能通、域名不通，常常指向 **DNS 解析问题**\n- `netstat` / `ss`：看本机**连接状态**和**监听端口**，不是用来测网站通不通的\n\n常见选项：\n- `-a`：显示所有连接/监听\n- `-r`：看路由表\n- `-n`：数字显示地址和端口，不做名字解析\n\n例子：`netstat -an`、`netstat -rn`、`ss -an`"
+        },
+        {
+          "name": "Vim 基础操作",
+          "body": "Vim 打开后先在**命令模式**，想输入内容要切到输入模式。\n\n- `i`：在当前字符前插入\n- `a`：在当前字符后插入\n- `o`：在当前行下方开新行并进入输入模式\n- `O`：在当前行上方开新行并进入输入模式\n- `Esc`：回到命令模式\n\n退出与保存：\n- `:q`：没修改时直接退出\n- `:q!`：强制退出，不保存\n- `:wq`：保存并退出\n\n常用编辑：\n- `3x`：删除从光标开始的 `3` 个字符\n- `5dd`：删除从当前行开始的 `5` 行\n- `d$`：删除到行末\n- `ra`：把光标所在的一个字符替换成 `a`\n- `R`：进入覆盖替换模式\n- `u`：撤销上一步\n- `Ctrl+r`：重做"
+        },
+        {
+          "name": "Vim 的“状态感”",
+          "body": "这节课里 Vim 最关键的不是单个按键，而是“我现在在哪个模式”。\n\n- 在输入模式时，先按 `Esc` 回到命令模式\n- 再用 `:wq`、`:q`、`:q!` 这类末行命令处理保存和退出\n- 编辑命令大多遵循“数字 + 命令”的写法，比如 `3x`、`5dd`"
+        }
+      ]
+    },
+    {
+      "type": "key-terms",
+      "items": [
+        {
+          "term": "目录的 `x`",
+          "definition": "目录的“通行权”，决定能不能进入或穿过目录"
+        },
+        {
+          "term": "目录的 `w`",
+          "definition": "修改目录项的权限，例如新建、删除、重命名文件名"
+        },
+        {
+          "term": "所有者",
+          "definition": "文件的拥有者，由 `chown` 里的 `user` 部分修改"
+        },
+        {
+          "term": "所属组",
+          "definition": "文件所属的组，由 `chown` 里的 `group` 部分修改"
+        },
+        {
+          "term": "`chown`",
+          "definition": "修改文件的所有者/所属组"
+        },
+        {
+          "term": "`chmod`",
+          "definition": "修改文件权限位（`rwx`）"
+        },
+        {
+          "term": "`ping`",
+          "definition": "测试网络连通性与响应情况"
+        },
+        {
+          "term": "`netstat` / `ss`",
+          "definition": "查看连接状态、监听端口、路由等网络信息"
+        },
+        {
+          "term": "命令模式",
+          "definition": "Vim 默认模式，适合执行命令，不是直接输入正文"
+        },
+        {
+          "term": "输入模式",
+          "definition": "Vim 中用于正常输入文字的模式"
+        },
+        {
+          "term": "末行模式",
+          "definition": "Vim 中以 `:` 开头输入保存、退出等命令的模式"
+        },
+        {
+          "term": "撤销/重做",
+          "definition": "`u` 撤销上一步，`Ctrl+r` 重做"
+        }
+      ]
+    },
+    {
+      "type": "open-question",
+      "content": "Vim 里如果想复制当前这一整行，通常该用什么命令？"
+    },
+    {
+      "type": "review-questions",
+      "items": [
+        {
+          "question": "目录权限只有 `r--` 时，能不能 `cd` 进去？为什么？",
+          "hint": "想想目录的“通行权”是谁。",
+          "answer": "不能。因为目录缺少 `x`，没有进入/穿过目录的权限。"
+        },
+        {
+          "question": "删除 `dir/a.txt` 时，关键看的是文件 `a.txt` 的权限，还是 `dir` 的权限？",
+          "hint": "删除动作发生在哪里？",
+          "answer": "看 `dir` 的权限。删除文件本质上是修改目录里的名单，所以主要看所在目录是否有 `w+x`。"
+        },
+        {
+          "question": "`chown alice a.txt` 会改哪一部分？`chown alice.staff a.txt` 又会改哪一部分？",
+          "hint": "区分 owner 和 group。",
+          "answer": "`chown alice a.txt` 只改所有者为 `alice`；`chown alice.staff a.txt` 会把所有者改成 `alice`，所属组改成 `staff`。"
+        },
+        {
+          "question": "`echo \"hello\\\\nworld\"` 不加 `-e` 时会输出什么？加上 `-e` 又会怎样？",
+          "hint": "区分字面字符和转义。",
+          "answer": "不加 `-e` 时会原样输出 `hello\\\\nworld`；加上 `-e` 后，`\\\\n` 会被解释成换行，显示成两行。"
+        },
+        {
+          "question": "如果想看路由表并尽量用数字显示，`netstat` 应该怎么写？",
+          "hint": "把 `-r` 和 `-n` 组合起来。",
+          "answer": "可以写成 `netstat -rn`。"
+        }
+      ]
+    }
+  ]
+}

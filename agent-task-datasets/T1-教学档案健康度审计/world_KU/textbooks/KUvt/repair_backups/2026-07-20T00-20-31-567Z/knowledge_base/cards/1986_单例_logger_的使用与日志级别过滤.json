@@ -1,0 +1,46 @@
+{
+  "title": "单例 Logger 的使用与日志级别过滤",
+  "definition": "教材示例要求先设置日志文件名，再通过 `Logger::instance()` 获取唯一 Logger 对象，设置日志级别并写入日志。日志消息带有日志级别前缀；当当前级别设为 Error 时，Debug 级别消息会被忽略。",
+  "key_points": [
+    "必须在第一次调用 `Logger::instance()` 前设置日志文件名。",
+    "可以通过单例引用设置日志级别并记录消息。",
+    "示例先将日志级别设为 Debug，因此 Debug 消息会写入文件。",
+    "随后将级别设为 Error，再记录 Debug 消息，该消息会被忽略。",
+    "示例执行后，`log.out` 至少包含 `DEBUG: test message`；教材还展示了关闭时的 `Logger shutting down.`。"
+  ],
+  "examples": [
+    "```cpp\nLogger::setLogFilename(\"log.out\");\nLogger::instance().setLogLevel(Logger::LogLevel::Debug);\nLogger::instance().log(\"test message\", Logger::LogLevel::Debug);\nLogger::instance().setLogLevel(Logger::LogLevel::Error);\nLogger::instance().log(\"A debug message\", Logger::LogLevel::Debug);\n```",
+    "输出示例：\n```text\nDEBUG: test message\nLogger shutting down.\n```"
+  ],
+  "misconceptions": [
+    "把当前日志级别设为 Error 后，不是所有日志都停止记录；教材明确说明此时 Debug 消息会被忽略。",
+    "调用 `Logger::instance()` 之前设置日志文件名是初始化前提，不能随意调换顺序。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "示例中为什么 `A debug message` 没有出现在日志文件中？",
+      "a": "因为记录该消息前日志级别已经设置为 Error，Debug 级别消息会被忽略。"
+    },
+    {
+      "q": "使用 Logger 单例记录日志的正确顺序是什么？",
+      "a": "先调用 `setLogFilename` 设置日志文件名，再调用 `instance()` 获取对象，设置日志级别，最后调用 `log` 记录消息。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "单例模式的使用",
+    "枚举类型",
+    "日志级别"
+  ],
+  "source_pages": [
+    968,
+    968
+  ],
+  "needs_verification": true,
+  "verify_query": "C++ Logger singleton setLogFilename instance setLogLevel Debug Error log.out DEBUG test message Logger shutting down",
+  "concept_id": "1986_单例_logger_的使用与日志级别过滤",
+  "_chunk_pages": [
+    965,
+    968
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "title": "std::string与C风格字符串的比较",
+  "definition": "在C++中，`std::string` 是用于表示和管理字符串的标准类，适合进行字符串拼接等操作，并会自动处理相关内存管理。面试中应将它与C风格字符串进行比较，并说明为什么通常应避免直接使用C风格字符串。",
+  "key_points": [
+    "`std::string` 可用于连接两个字符串。",
+    "`std::string` 会自动处理字符串相关的内存管理操作。",
+    "回答字符串问题时，应说明C++字符串类与C风格字符串之间的区别。"
+  ],
+  "examples": [
+    "使用 `std::string` 拼接两个字符串：`std::string result = first + second;`。",
+    "可以围绕“两个字符串如何串联”说明：使用 `std::string` 的 `+` 运算，而不是手动管理C风格字符数组的存储。"
+  ],
+  "misconceptions": [
+    "认为C++中只能使用以空字符结尾的C风格字符数组。",
+    "认为使用C风格字符串时，字符串内存管理会自动由 `std::string` 完成。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何在C++中串联两个字符串？",
+      "a": "可以使用 `std::string`，例如 `std::string result = first + second;`；`std::string` 还会自动处理相关内存管理。"
+    },
+    {
+      "q": "为什么面试回答字符串拼接时还应比较C风格字符串？",
+      "a": "因为这不仅考察拼接语法，还考察对 `std::string` 与C风格字符串在内存管理和使用方式上的区别，以及对避免C风格字符串的理解。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++字符串基本概念"
+  ],
+  "source_pages": [
+    994,
+    994
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "2039_std_string与c风格字符串的比较",
+  "_chunk_pages": [
+    993,
+    996
+  ]
+}

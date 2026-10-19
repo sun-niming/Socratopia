@@ -1,0 +1,39 @@
+{
+  "title": "shift()",
+  "definition": "`shift()` 方法从数组中删除第一个元素，并返回该元素的值；它会更改数组的长度。",
+  "key_points": [
+    "删除的是数组第一个元素",
+    "返回值是被删除的元素",
+    "会修改原数组长度"
+  ],
+  "examples": [
+    "var arr = [1, 2, 3];",
+    "var x = arr.shift(); // x 为 1，arr 变为 [2, 3]"
+  ],
+  "misconceptions": [
+    "以为 `shift()` 删除的是最后一个元素",
+    "以为 `shift()` 返回的是新数组",
+    "以为 `shift()` 不会改变数组长度"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`shift()` 和 `pop()` 删除的位置有什么不同？",
+      "a": "`shift()` 删除第一个元素，`pop()` 删除最后一个元素。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "Array对象与创建方式"
+  ],
+  "source_pages": [
+    305,
+    308
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "404_shift",
+  "_chunk_pages": [
+    305,
+    308
+  ]
+}

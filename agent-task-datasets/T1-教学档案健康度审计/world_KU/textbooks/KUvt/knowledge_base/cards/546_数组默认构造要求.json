@@ -1,0 +1,45 @@
+{
+  "title": "数组默认构造要求",
+  "definition": "声明对象数组而不提供初始化值时，例如 `Person phoneBook[3];`，数组中的每个元素都必须能够被默认构造。因此，如果 `Person` 只提供接收名字和姓氏的双参数构造函数，而没有无参数默认构造函数，这条声明就无法编译。",
+  "key_points": [
+    "`Person phoneBook[3];` 会尝试默认构造 3 个 `Person` 对象。",
+    "只有带两个必需参数的构造函数不能作为默认构造函数使用。",
+    "要使该数组声明成功，必须为 `Person` 提供无参数构造函数，或改用为每个数组元素提供初始化值的写法。"
+  ],
+  "examples": [
+    "可能导致无法编译的代码：`class Person { public: Person(string firstName, string lastName); }; Person phoneBook[3];`。",
+    "一种修改方向是提供默认构造函数：`Person();`，使每个数组元素都能被无参数构造。"
+  ],
+  "misconceptions": [
+    "对象数组声明并不会自动为每个元素调用带必需参数的构造函数。",
+    "编译器生成默认构造函数的前提并不是类完全没有任何构造函数；如果类已经声明了构造函数，不能想当然地认为仍会有可用的无参数构造函数。",
+    "`Person phoneBook[3];` 不是只构造一个 `Person`，而是需要构造三个元素。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么只有双参数构造函数的 `Person` 类不能声明 `Person phoneBook[3];`？",
+      "a": "因为该数组声明需要无参数默认构造三个 `Person` 对象，而双参数构造函数缺少所需参数，不能用于默认构造。"
+    },
+    {
+      "q": "如何修改 `Person` 类以支持 `Person phoneBook[3];`？",
+      "a": "为 `Person` 提供可调用的无参数默认构造函数，例如声明并实现 `Person();`。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "构造函数",
+    "默认构造函数",
+    "对象数组"
+  ],
+  "source_pages": [
+    256,
+    256
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "546_数组默认构造要求",
+  "_chunk_pages": [
+    253,
+    256
+  ]
+}

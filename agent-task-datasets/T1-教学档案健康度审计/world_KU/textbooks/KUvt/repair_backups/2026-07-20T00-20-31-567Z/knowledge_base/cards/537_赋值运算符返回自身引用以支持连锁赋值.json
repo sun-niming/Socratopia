@@ -1,0 +1,48 @@
+{
+  "title": "赋值运算符返回自身引用以支持连锁赋值",
+  "definition": "赋值运算符通常返回调用对象自身的引用，从而使一次赋值表达式的结果可继续作为另一次赋值的右操作数。这使 `myCell = anotherCell = aThirdCell;` 之类的连锁赋值成为可能。正确的返回结果是完成赋值后的调用对象本身，通常由实现代码中的 `return *this;` 返回。",
+  "key_points": [
+    "连锁赋值从内层的右侧赋值开始理解。",
+    "`anotherCell = aThirdCell` 的结果必须能继续传给 `myCell` 的赋值运算符。",
+    "将运算符调用展开后，可写成 `myCell.operator=(anotherCell.operator=(aThirdCell));`。",
+    "赋值运算符在语法上可以返回其他类型甚至 `void`，但为了符合调用者对赋值表达式的通常预期，应返回调用对象的引用。"
+  ],
+  "examples": [
+    "连锁赋值：`myCell = anotherCell = aThirdCell;`。",
+    "等价的成员函数调用形式：`myCell.operator=(anotherCell.operator=(aThirdCell));`。",
+    "典型实现的结尾应返回当前对象：`return *this;`。"
+  ],
+  "misconceptions": [
+    "误以为连锁赋值会先执行最左边的赋值；展开为函数调用后可以看出，内部的 `anotherCell.operator=(aThirdCell)` 先产生结果。",
+    "误以为赋值运算符返回 `void` 不影响使用；返回 `void` 将无法把该次赋值结果继续用于外层赋值。",
+    "误以为赋值运算符应返回右边的源对象；通常应返回完成赋值后的左边调用对象自身。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么拷贝赋值运算符通常返回类对象的引用？",
+      "a": "为了让赋值表达式产生可继续使用的结果，从而支持 `a = b = c;` 这样的连锁赋值。"
+    },
+    {
+      "q": "在 `myCell = anotherCell = aThirdCell;` 中，`anotherCell` 的赋值运算符应返回什么？",
+      "a": "应返回完成赋值后的 `anotherCell` 自身的引用，使其能作为 `myCell` 赋值运算符的参数。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "拷贝赋值运算符",
+    "成员函数调用",
+    "this 指针",
+    "引用返回值"
+  ],
+  "source_pages": [
+    252,
+    252
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "537_赋值运算符返回自身引用以支持连锁赋值",
+  "_chunk_pages": [
+    249,
+    252
+  ]
+}

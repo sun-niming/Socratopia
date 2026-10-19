@@ -1,0 +1,49 @@
+{
+  "title": "accept创建客户专用连接套接字",
+  "definition": "TCP服务器在欢迎套接字上调用 `accept()`，从待处理连接中接受一个客户连接，并返回一个新的连接套接字以及客户地址。新的连接套接字专用于服务器与该客户之间的数据收发；原来的欢迎套接字继续监听其他客户的连接请求。",
+  "key_points": [
+    "示例代码为 `connectionSocket, addr = serverSocket.accept()`。",
+    "`connectionSocket` 是与当前特定客户通信的连接套接字。",
+    "`addr` 保存对端客户的地址信息。",
+    "欢迎套接字 `serverSocket` 与连接套接字 `connectionSocket` 的职责不同。",
+    "服务器通过 `connectionSocket.recv()` 和 `connectionSocket.send()` 与该客户交换数据。"
+  ],
+  "examples": [
+    "服务器执行 `connectionSocket, addr = serverSocket.accept()` 后，可通过 `sentence = connectionSocket.recv(1024).decode()` 接收该客户的句子。"
+  ],
+  "misconceptions": [
+    "误以为 `accept()` 返回的仍是原来的欢迎套接字。",
+    "误以为服务器应通过欢迎套接字直接与每个已连接客户交换应用数据。",
+    "误以为关闭一个客户的 `connectionSocket` 会同时关闭负责监听的 `serverSocket`。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`serverSocket.accept()` 返回什么？",
+      "a": "返回一个与特定客户连接对应的新连接套接字，以及该客户的地址信息。"
+    },
+    {
+      "q": "为什么TCP服务器同时需要欢迎套接字和连接套接字？",
+      "a": "欢迎套接字负责监听和接受新连接；连接套接字负责与某个已经连接的客户交换数据。"
+    },
+    {
+      "q": "服务器应使用哪个套接字调用 `recv()` 来接收特定客户的数据？",
+      "a": "应使用 `accept()` 返回的 `connectionSocket`。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "TCP服务器的欢迎套接字",
+    "TCP客户通过connect建立连接"
+  ],
+  "source_pages": [
+    129,
+    132
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "327_accept创建客户专用连接套接字",
+  "_chunk_pages": [
+    129,
+    132
+  ]
+}

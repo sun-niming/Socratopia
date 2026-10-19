@@ -1,0 +1,39 @@
+{
+  "title": "String类型",
+  "definition": "String类型用来表示JavaScript中的文本，是排在一起的一串零个或多个字符，字符可以是字母、数字和标点符号。字符串要放在一对匹配的单引号或双引号中。",
+  "key_points": [
+    "String表示文本",
+    "字符串可以由零个或多个字符组成",
+    "字符串必须用匹配的单引号或双引号包围"
+  ],
+  "examples": [
+    "\"42\"",
+    "\"Happy am I; from care I’m free!\"",
+    "'\"Avast, ye lubbers!\" roared the technician.'"
+  ],
+  "misconceptions": [
+    "字符串里的内容一定不能包含引号",
+    "字符串只能用单引号或只能用双引号"
+  ],
+  "qa_pairs": [
+    {
+      "q": "String类型在JavaScript中用来表示什么？",
+      "a": "用来表示文本。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "JavaScript数据类型分类"
+  ],
+  "source_pages": [
+    241,
+    244
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "333_string类型",
+  "_chunk_pages": [
+    241,
+    244
+  ]
+}

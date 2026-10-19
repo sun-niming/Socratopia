@@ -1,0 +1,36 @@
+{
+  "title": "list-style-type",
+  "definition": "list-style-type 用来设置列表项标号的类型。原文给出的示例中，无序列表可用 disc（实心圆）、circle（空心圆）、square（实心方块）；有序列表可用 decimal（数字）、lower-alpha（小写字母）。",
+  "key_points": [
+    "用于控制列表项前面的标号样式",
+    "无序列表与有序列表可用的标号类型不同",
+    "可选值包括 disc、circle、square、decimal、lower-alpha"
+  ],
+  "examples": [
+    "list-style-type: square;",
+    "list-style-type: decimal;"
+  ],
+  "misconceptions": [
+    "误以为 list-style-type 只能用于无序列表",
+    "误以为它是在设置列表内容的字体或颜色"
+  ],
+  "qa_pairs": [
+    {
+      "q": "list-style-type 的作用是什么？",
+      "a": "设置列表项标号的类型。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [],
+  "source_pages": [
+    117,
+    120
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "190_list_style_type",
+  "_chunk_pages": [
+    117,
+    120
+  ]
+}

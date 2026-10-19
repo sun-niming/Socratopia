@@ -1,0 +1,51 @@
+{
+  "title": "使用 recursive_directory_iterator 递归遍历目录",
+  "definition": "C++ 文件系统库中的 recursive_directory_iterator 可以从指定路径开始，按目录层级递归访问目录及其子目录中的条目。遍历时，解引用迭代器可得到当前目录条目；通过 depth() 可以获得当前条目的递归深度。",
+  "key_points": [
+    "先判断路径是否存在；如果不存在则直接返回。",
+    "使用 recursive_directory_iterator 从给定路径开始遍历，并在迭代器递增时访问后续条目。",
+    "通过 is_regular_file(entry) 判断条目是否为普通文件，通过 is_directory(entry) 判断条目是否为目录。",
+    "可使用 entry.path() 获取条目路径，使用 file_size(entry) 获取普通文件的大小。",
+    "可以根据递归深度生成缩进，例如使用长度为 $2\\times\\text{depth}$ 的空格字符串表示目录层级。"
+  ],
+  "examples": [
+    "示例逻辑：对每个条目执行以下判断：如果是普通文件，输出 `File: 路径 (文件大小 bytes)`；如果是目录，输出 `Dir: 路径`。",
+    "目录层级缩进可表示为：$\\text{缩进长度}=2\\times\\text{iter.depth()}$。",
+    "原文示例使用类似 `path p { R\"(D:\\Foo\\Bar)\" };` 的路径作为遍历起点。"
+  ],
+  "misconceptions": [
+    "recursive_directory_iterator 不只是遍历指定目录的直接子项，还会递归访问其子目录。",
+    "depth() 表示当前条目相对于遍历起点的目录深度，不是文件大小或路径长度。",
+    "目录条目本身不等同于普通文件；应分别使用 is_regular_file 和 is_directory 判断其类型。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "recursive_directory_iterator 与普通 directory_iterator 的主要区别是什么？",
+      "a": "recursive_directory_iterator 会自动递归访问子目录中的条目，而 directory_iterator 通常只访问指定目录的直接条目。"
+    },
+    {
+      "q": "如何在递归遍历中获得当前条目的目录层级？",
+      "a": "对递归迭代器调用 `depth()`，例如使用 `iter.depth()`。"
+    },
+    {
+      "q": "遍历到普通文件时，原文示例输出哪些信息？",
+      "a": "输出文件路径和文件大小，形式类似 `File: 路径 (大小 bytes)`。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++ 迭代器的基本使用",
+    "文件系统路径与目录条目"
+  ],
+  "source_pages": [
+    433,
+    436
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "568_使用_recursive_directory_iterator_递归遍历目录",
+  "_chunk_pages": [
+    433,
+    436
+  ]
+}

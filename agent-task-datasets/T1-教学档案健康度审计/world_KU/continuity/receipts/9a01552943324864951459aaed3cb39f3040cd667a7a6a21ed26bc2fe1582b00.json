@@ -1,0 +1,105 @@
+{
+  "schemaVersion": 1,
+  "status": "committed",
+  "operationId": "endclass:v1:08081f77154c01b81eac83b5e292a2d4:47dfd2b502c4ebee0c758a25",
+  "operationHash": "9a01552943324864951459aaed3cb39f3040cd667a7a6a21ed26bc2fe1582b00",
+  "scope": {
+    "accountId": "local",
+    "profileId": "uolmzgq8",
+    "worldId": "KU",
+    "conversationId": "f6fnljAYbbqYmGuo1rrgU"
+  },
+  "companion": {
+    "slotId": "npc_b",
+    "companionInstanceId": "ci_4f6a8835694e0f5966ae5aff",
+    "candidateId": "ct_m6lg815y",
+    "displayName": "八重神子"
+  },
+  "committedAt": "2026-09-27T09:32:12.167Z",
+  "targets": [
+    {
+      "relativePath": "pal_moments.md",
+      "oldHash": "2e0e1361ba72e83b2545536ab342d0e2fcdfb3cffa184b59c9af76553cdc6312",
+      "newHash": "75d18fbe6c98f455d2856953717de6ac6b50cda96c8280d1056fe33d6f3ec8a0",
+      "deleting": false
+    },
+    {
+      "relativePath": "textbooks/KUyw/progress.md",
+      "oldHash": "fbc0edb6274ebe7a9e748682865c71db5c0d43651a9bdfafa106f44a272d9311",
+      "newHash": "64a4b3816282d41feb41cf044428ab898be3c7485cd98d820e65db2f8cdac88f",
+      "deleting": false
+    },
+    {
+      "relativePath": "diary/2026-09.md",
+      "oldHash": "a44d3aa7dcd068be6706096b12d5beac25647a98b9ebe8aba0f77ea2722460e7",
+      "newHash": "3f8416a09e39d51af52e322cf355664ebd05907889dd292eb3cddf7b743f4971",
+      "deleting": false
+    },
+    {
+      "relativePath": "relation_npc_b.md",
+      "oldHash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "newHash": "9b71b50ca9aae9cab33f11a9eacfd653dddd75a438ea09ba42814b23887c8405",
+      "deleting": false
+    },
+    {
+      "relativePath": "world_meta.json",
+      "oldHash": "1d8838e8e11f14cc6ac06b53735338f71818e94cd6681e91c1ef399dedb45b73",
+      "newHash": "0cf8551b49ef87fe2b63b644fe1deed69c416001bb182c14104076d0329d563e",
+      "deleting": false
+    },
+    {
+      "relativePath": "world_records.md",
+      "oldHash": "322fb78247ac36e94a095c154adf9c72a854c1c0f3ac6b5e0a2d7ed43bd59cf3",
+      "newHash": "17edf67a068e02e2b35717ad704718830c1094a7e7aa80959b624ad544f49022",
+      "deleting": false
+    },
+    {
+      "relativePath": "textbooks/textbook_index.json",
+      "oldHash": "6e63aeda0cd95a25c88abc5e871a91320e1cb39b1e8b0d3437a7fe4faf4be7d0",
+      "newHash": "3ac3d40d492975025f9866438c71b3938285e502ad7f48bd12bcd8775768b369",
+      "deleting": false
+    },
+    {
+      "relativePath": "textbooks/KUyw/handoff/last_tail.json",
+      "oldHash": "6f39d3b7d69664fb8e02af17079dadfd4e7d2e1fe28717acfd398886e9982bdf",
+      "newHash": "bc29ab5639e67b19435056317455532bffb7933d05604dd6826b84939911b3e7",
+      "deleting": false
+    },
+    {
+      "relativePath": "textbooks/KUyw/handoff/last_meta.json",
+      "oldHash": "48e2192e54dd3a5700c9c1dc4d231c40c69860c8d0d6ae57102bac630410fbaa",
+      "newHash": "77a660997839bcd14bdd0f771c83772fac71d1b2b1248d7299fe36cd4afc9a0c",
+      "deleting": false
+    },
+    {
+      "relativePath": "conversations/f6fnljAYbbqYmGuo1rrgU/current_reading.md",
+      "oldHash": "dd5b492cb91cb9b462c03186d9d59cbad896784bbf84756dd8c7e75f3221efe5",
+      "newHash": null,
+      "deleting": true
+    },
+    {
+      "relativePath": "textbooks/KUyw/current_reading.md",
+      "oldHash": null,
+      "newHash": null,
+      "deleting": true
+    },
+    {
+      "relativePath": "conversations/f6fnljAYbbqYmGuo1rrgU/current_reading_summary.json",
+      "oldHash": null,
+      "newHash": null,
+      "deleting": true
+    },
+    {
+      "relativePath": "conversations/f6fnljAYbbqYmGuo1rrgU/handoff.json",
+      "oldHash": null,
+      "newHash": null,
+      "deleting": true
+    }
+  ],
+  "payload": {
+    "farewell": "*宫司大人把书页轻轻合上，指尖在封面上停了一瞬。*\n\n今天这一路推得挺稳，小家伙。那句\"叶子还是内部结点\"你改口改得快，比背定义利索多了——把话拨正的时候最见功底。\n\n悬空 else 正中间那条禁令你答了个\"不知道\"，我不催你，两棵树一摊你不也自己看明白了。",
+    "companionNote": "今天你在\"叶子还是内部结点\"那里栽了一小下，却把悬空 else 那条线走通了。提取左公因子还欠着，我等你回来对账。",
+    "marker": "<!-- continuityEvent:9a01552943324864951459aa companion:ci_4f6a8835694e0f5966ae5aff mode:classroom -->",
+    "endingPage": 163
+  }
+}

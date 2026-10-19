@@ -1,0 +1,40 @@
+{
+  "title": "C++中的lambda",
+  "definition": "原文在介绍C++内容时出现了“lambda”，指向C++中的lambda表达式这一语言特性；当前原文没有给出其语法、捕获方式或使用示例。",
+  "key_points": [
+    "原文明确出现了lambda这一术语。",
+    "当前材料不足以确定教材在此处强调的是lambda表达式的哪一方面。"
+  ],
+  "examples": [
+    "原文术语：lambda"
+  ],
+  "misconceptions": [
+    "不能把lambda理解为一种独立的编程语言。",
+    "不能仅凭该词推断具体的lambda表达式语法。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "原文中出现了哪个与匿名函数相关的C++术语？",
+      "a": "lambda。"
+    },
+    {
+      "q": "当前原文是否给出了lambda表达式的具体语法？",
+      "a": "没有。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++函数"
+  ],
+  "source_pages": [
+    13,
+    16
+  ],
+  "needs_verification": true,
+  "verify_query": "《C++20高级编程 第5版》第15页 lambda 原文内容",
+  "concept_id": "010_c_中的lambda",
+  "_chunk_pages": [
+    13,
+    16
+  ]
+}

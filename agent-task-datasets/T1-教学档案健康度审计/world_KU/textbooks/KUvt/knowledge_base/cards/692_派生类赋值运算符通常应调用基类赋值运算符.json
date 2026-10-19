@@ -1,0 +1,44 @@
+{
+  "title": "派生类赋值运算符通常应调用基类赋值运算符",
+  "definition": "如果派生类自定义了拷贝赋值运算符 operator=，通常需要显式调用基类版本的 operator=，以完成基类部分的赋值；然后再处理派生类自己的数据成员。只有在确实只想为对象的一部分赋值等特殊情况下，才可能不调用基类版本。自赋值检查通常应在赋值操作前进行。",
+  "key_points": [
+    "派生类赋值包含基类部分和派生类部分。",
+    "自定义 Derived::operator= 时，通常应调用 Base::operator=。",
+    "不调用基类赋值运算符可能导致基类部分未被正确赋值。",
+    "如果派生类没有自定义 operator=，编译器生成的版本会使用基类的 operator= 处理基类部分。"
+  ],
+  "examples": [
+    "典型结构为：Derived& operator=(const Derived& rhs) { if (&rhs == this) return *this; Base::operator=(rhs); /* 给 Derived 成员赋值 */ return *this; }",
+    "赋值流程可表示为：$$\\text{Derived 赋值}=\\text{Base::operator=}+\\text{派生类成员赋值}$$"
+  ],
+  "misconceptions": [
+    "误以为重写或自定义派生类 operator= 后，基类赋值会自动发生。",
+    "误以为调用基类 operator= 后就不需要再处理派生类自己的成员。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "派生类自定义 operator= 时通常需要做什么？",
+      "a": "先处理自赋值，再显式调用基类的 operator= 赋值基类部分，最后给派生类成员赋值。"
+    },
+    {
+      "q": "什么情况下可能不调用基类 operator=？",
+      "a": "只有在特殊情况下，例如赋值时确实只想给对象的一部分赋值。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "赋值运算符",
+    "继承与基类子对象"
+  ],
+  "source_pages": [
+    343,
+    344
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "692_派生类赋值运算符通常应调用基类赋值运算符",
+  "_chunk_pages": [
+    341,
+    344
+  ]
+}

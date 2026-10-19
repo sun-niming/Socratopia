@@ -1,0 +1,42 @@
+{
+  "title": "使用auto推导函数返回类型",
+  "definition": "函数的返回类型可以使用 `auto` 表示，让编译器根据函数体中的返回表达式推导返回类型。例如，返回两个 `int` 相加结果的函数可以写成 `auto addNumbers(int number1, int number2)`，其返回类型会根据 `return number1 + number2;` 推导。",
+  "key_points": [
+    "使用 `auto` 时，函数必须能够根据返回语句推导出返回类型。",
+    "原文中的 `addNumbers` 返回两个 `int` 参数的和，因此推导出的返回类型为 `int`。",
+    "`auto` 只用于推导函数返回类型，不会省略函数参数的类型；参数仍写为 `int number1` 和 `int number2`。"
+  ],
+  "examples": [
+    "`auto addNumbers(int number1, int number2) { return number1 + number2; }`"
+  ],
+  "misconceptions": [
+    "函数返回类型使用 `auto` 不表示返回类型永远是任意类型；具体类型仍由编译器根据返回语句推导。",
+    "参数类型仍然需要明确写出，不能因为返回类型使用 `auto` 就省略参数类型。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "下面函数的返回类型如何确定：`auto addNumbers(int a, int b) { return a + b; }`？",
+      "a": "编译器根据 `a + b` 的类型推导返回类型；由于 `a` 和 `b` 是 `int`，返回类型为 `int`。"
+    },
+    {
+      "q": "使用 `auto` 作为函数返回类型时，函数体中通常需要什么？",
+      "a": "需要有能够确定返回类型的 `return` 语句。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "函数返回值与return语句",
+    "C++类型推导"
+  ],
+  "source_pages": [
+    53,
+    56
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "066_使用auto推导函数返回类型",
+  "_chunk_pages": [
+    53,
+    56
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "title": "const_cast与std::as_const",
+  "definition": "`const_cast` 是 C++ 的类型转换，用于添加或移除表达式类型中的 `const` 或相关 cv 限定。原文以第三方函数要求 `char*`、而当前函数接收 `const char*` 为例，使用 `const_cast<char*>(str)` 调用第三方函数；C++20 还提供 `std::as_const(obj)`，用于获得对象的 const 引用。",
+  "key_points": [
+    "第三方函数声明为 `void ThirdPartyLibraryMethod(char* str);`，而调用方可能只有 `const char* str`。",
+    "转换写法为 `ThirdPartyLibraryMethod(const_cast<char*>(str));`。",
+    "`std::as_const(obj)` 可写成 `const_cast<const T&>(obj)` 所表达的效果，用于以 const 方式访问对象。",
+    "原文示例为 `const auto constStr { std::as_const(str) };`。"
+  ],
+  "examples": [
+    "`void f(const char* str) { ThirdPartyLibraryMethod(const_cast<char*>(str)); }`。",
+    "对对象使用 const 视图：`const auto constStr { std::as_const(str) };`。"
+  ],
+  "misconceptions": [
+    "`const_cast` 只能改变类型的 const 限定，不能把一个真正的常量对象安全地变成可修改对象。",
+    "`std::as_const` 的用途是添加 const 访问限制，而不是移除 const。",
+    "使用 `const_cast` 后并不代表第三方函数就一定可以修改数据；是否安全取决于底层对象本身是否原来就是非 const。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何将 `const char* str` 转换为第三方函数所需的 `char*`？",
+      "a": "使用 `const_cast<char*>(str)`。"
+    },
+    {
+      "q": "`std::as_const(str)` 的作用是什么？",
+      "a": "返回 `str` 的 const 引用，使后续访问以只读的 const 方式进行。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "const限定符",
+    "C++类型转换",
+    "引用"
+  ],
+  "source_pages": [
+    85,
+    88
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "121_const_cast与std_as_const",
+  "_chunk_pages": [
+    85,
+    88
+  ]
+}

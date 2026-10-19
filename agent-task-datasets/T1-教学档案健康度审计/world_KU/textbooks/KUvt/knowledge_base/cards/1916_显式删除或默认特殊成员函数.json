@@ -1,0 +1,44 @@
+{
+  "title": "显式删除或默认特殊成员函数",
+  "definition": "C++允许使用 = delete 和 = default 显式控制特殊成员函数。将拷贝构造函数或拷贝赋值运算符声明为 = delete，可以禁止对象被拷贝；将移动构造函数或移动赋值运算符声明为 = default，可以请求编译器生成默认的移动操作。",
+  "key_points": [
+    "= delete 表示该函数被明确禁止调用；尝试执行相应操作通常会导致编译错误。",
+    "= default 表示请求编译器使用默认实现，适用于不需要自定义实现的特殊成员函数。",
+    "教材示例将拷贝构造函数和拷贝赋值运算符删除，以防止拷贝、按值传递等涉及拷贝的操作。",
+    "教材示例显式默认移动构造函数和移动赋值运算符，并将其标记为 noexcept。"
+  ],
+  "examples": [
+    "典型声明形式：\n```text\nSimple(const Simple& src) = delete;\nSimple& operator=(const Simple& rhs) = delete;\nSimple(Simple&& src) noexcept = default;\nSimple& operator=(Simple&& rhs) noexcept = default;\n```"
+  ],
+  "misconceptions": [
+    "= default 不是删除函数，而是要求编译器生成默认实现。",
+    "删除拷贝构造函数和拷贝赋值运算符并不等于删除移动操作；移动操作可以单独声明和默认化。",
+    "按值传递参数通常需要拷贝或移动构造，因此删除拷贝构造函数可能使某些按值传递用法无法编译。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何禁止一个类被拷贝？",
+      "a": "将拷贝构造函数和拷贝赋值运算符声明为 = delete，例如 Simple(const Simple&) = delete; 和 Simple& operator=(const Simple&) = delete;。"
+    },
+    {
+      "q": "= default 的作用是什么？",
+      "a": "显式请求编译器为该特殊成员函数生成默认实现。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++类的特殊成员函数",
+    "左值、右值与移动语义"
+  ],
+  "source_pages": [
+    925,
+    926
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 = delete = default 拷贝构造函数 移动构造函数 noexcept 教材《C++20高级编程》第5版 第925-926页",
+  "concept_id": "1916_显式删除或默认特殊成员函数",
+  "_chunk_pages": [
+    925,
+    928
+  ]
+}

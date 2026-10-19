@@ -1,0 +1,42 @@
+{
+  "title": "基于树中位置的 DOM 导航",
+  "definition": "获取到一个元素节点后，可以根据它在 DOM 树中的位置，继续访问它的父节点、子节点和兄弟节点，从而完成 DOM 导航。",
+  "key_points": [
+    "先获得一个元素节点，再沿树结构访问相关节点",
+    "可沿父子关系导航",
+    "也可沿兄弟关系导航"
+  ],
+  "examples": [
+    "let middleItem = document.querySelector('.list-item.active');",
+    "let parentList = middleItem.parentElement;",
+    "let nextItem = middleItem.nextElementSibling;",
+    "let prevItem = middleItem.previousElementSibling;"
+  ],
+  "misconceptions": [
+    "访问相关节点只能重新用选择器查找，不能从已有节点出发。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "什么叫基于节点在树中的位置进行 DOM 导航？",
+      "a": "就是先拿到一个节点，再根据它在树中的位置访问它的父节点、子节点或兄弟节点。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "DOM元素选择",
+    "父节点访问",
+    "子节点集合",
+    "兄弟节点访问"
+  ],
+  "source_pages": [
+    350,
+    352
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "502_基于树中位置的_dom_导航",
+  "_chunk_pages": [
+    349,
+    352
+  ]
+}

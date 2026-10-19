@@ -1,0 +1,43 @@
+{
+  "title": "auto_ptr 被 unique_ptr 和 shared_ptr 取代",
+  "definition": "原文说明，auto_ptr 是旧式智能指针：C++11 中已被弃用，C++14 仍处于弃用状态，C++17 中被移除；在现代 C++ 中应使用 unique_ptr 或 shared_ptr 等替代方案。",
+  "key_points": [
+    "C++11：auto_ptr 被弃用。",
+    "C++14：auto_ptr 仍处于弃用状态。",
+    "C++17：auto_ptr 被移除。",
+    "原文将 unique_ptr 和 shared_ptr 作为 auto_ptr 的替代方向。"
+  ],
+  "examples": [
+    "旧代码中的 `auto_ptr` 不应作为现代 C++ 的首选智能指针。",
+    "对于独占所有权场景，应考虑 `std::unique_ptr<T>`；需要共享所有权时，应考虑 `std::shared_ptr<T>`。"
+  ],
+  "misconceptions": [
+    "auto_ptr 只是改名为 unique_ptr；实际上二者的所有权转移语义不同，不能简单视为同一个类型。",
+    "C++17 以后仍可无条件使用标准库中的 auto_ptr；原文明确指出 C++17 已移除 auto_ptr。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "auto_ptr 在 C++11、C++14 和 C++17 中分别处于什么状态？",
+      "a": "C++11 中被弃用，C++14 中仍被弃用，C++17 中被移除。"
+    },
+    {
+      "q": "现代 C++ 中通常用哪些类型替代 auto_ptr？",
+      "a": "根据所有权需求使用 std::unique_ptr 或 std::shared_ptr。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "智能指针的基本概念"
+  ],
+  "source_pages": [
+    225,
+    228
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "303_auto_ptr_被_unique_ptr_和_shared_ptr_取代",
+  "_chunk_pages": [
+    225,
+    228
+  ]
+}

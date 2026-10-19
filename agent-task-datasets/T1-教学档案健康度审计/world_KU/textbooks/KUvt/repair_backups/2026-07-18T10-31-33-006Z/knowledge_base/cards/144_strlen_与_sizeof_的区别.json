@@ -1,0 +1,43 @@
+{
+  "title": "`strlen` 与 `sizeof` 的区别",
+  "definition": "对 C 风格字符串相关对象使用 `strlen()` 和 `sizeof`，得到的含义不同：`strlen()` 计算以 NUL 结尾的字符串中、NUL 之前的字符数量；`sizeof` 计算对象或数组所占的字节数。对于包含完整字符串字面量的字符数组，`sizeof` 通常包括结尾的 NUL 字符。",
+  "key_points": [
+    "若 `char text1[] { \"abcdef\" };`，则 `sizeof(text1)` 为 `7`，而 `strlen(text1)` 为 `6`。",
+    "`sizeof` 不会像 `strlen` 那样沿着字符查找 NUL；它根据表达式的类型和对象本身计算大小。",
+    "当操作数是字符指针而不是字符数组时，`sizeof(pointer)` 得到的是指针对象的大小，而不是所指字符串的长度；原文指出该大小与平台有关。"
+  ],
+  "examples": [
+    "```cpp\nchar text1[] { \"abcdef\" };\nsize_t s1 { sizeof(text1) };  // 7\nsize_t s2 { strlen(text1) };  // 6\n```",
+    "若 `text2` 是指向 `\"abcdef\"` 的字符指针，则：\n```cpp\nsize_t s3 { sizeof(text2) };  // 指针大小，平台相关\nsize_t s4 { strlen(text2) };  // 6\n```"
+  ],
+  "misconceptions": [
+    "不能用 `sizeof` 普遍替代 `strlen` 来求 C 风格字符串的字符长度。",
+    "字符数组中的 `sizeof` 结果可能包含结尾的 NUL 字符，而 `strlen` 不包含它。",
+    "对指针使用 `sizeof` 不会得到指针所指字符串的长度。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "对于 `char text1[] { \"abcdef\" };`，`sizeof(text1)` 和 `strlen(text1)` 分别是多少？",
+      "a": "`sizeof(text1)` 为 `7`，因为包括结尾的 NUL 字符；`strlen(text1)` 为 `6`，因为不包括 NUL 字符。"
+    },
+    {
+      "q": "为什么对字符指针使用 `sizeof` 不能得到字符串长度？",
+      "a": "因为此时 `sizeof` 计算的是指针对象本身的大小，而不是它所指向的字符序列；字符串长度应使用 `strlen()`。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C 风格字符串以 NUL 字符结尾"
+  ],
+  "source_pages": [
+    103,
+    104
+  ],
+  "needs_verification": true,
+  "verify_query": "C++ sizeof 字符数组与字符指针 strlen 区别 text1 sizeof 7 strlen 6 教材",
+  "concept_id": "144_strlen_与_sizeof_的区别",
+  "_chunk_pages": [
+    101,
+    104
+  ]
+}

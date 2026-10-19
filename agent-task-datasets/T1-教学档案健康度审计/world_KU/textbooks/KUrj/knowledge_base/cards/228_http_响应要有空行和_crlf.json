@@ -1,0 +1,37 @@
+{
+  "title": "HTTP 响应要有空行和 CRLF",
+  "definition": "HTTP 响应头和响应体之间必须有空行分隔，且行结束建议统一使用 `\r\n`。如果少了空行，或者 `\n` 使用混乱，客户端可能无法正确解析响应。",
+  "key_points": [
+    "响应头和响应体之间必须有空行。",
+    "行结束符建议统一用 `\r\n`。",
+    "格式错误会影响客户端解析。"
+  ],
+  "examples": [
+    "Header 与 Body 之间的空行必须存在。"
+  ],
+  "misconceptions": [
+    "只要内容发出去了，格式细节就不重要。",
+    "`\n` 和 `\r\n` 在 HTTP 中可以随意混用。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "HTTP 响应里为什么要有空行并统一使用 CRLF？",
+      "a": "因为头部和身体之间需要空行分隔，行结束建议统一为 `\r\n`，否则客户端可能无法正确解析。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "HTTP 通用协议"
+  ],
+  "source_pages": [
+    129,
+    132
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "228_http_响应要有空行和_crlf",
+  "_chunk_pages": [
+    129,
+    132
+  ]
+}

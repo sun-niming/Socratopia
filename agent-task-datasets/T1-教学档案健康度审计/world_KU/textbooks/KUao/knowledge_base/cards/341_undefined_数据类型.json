@@ -1,0 +1,43 @@
+{
+  "title": "Undefined 数据类型",
+  "definition": "Undefined 是 JavaScript 中只有一个值 undefined 的数据类型，表示“未定义”。它常出现在对象属性不存在，或者变量已经声明但从未赋值的情况下。",
+  "key_points": [
+    "undefined 是唯一值为 undefined 的数据类型。",
+    "undefined 的含义是“未定义”。",
+    "对象属性不存在时，可能出现 undefined。",
+    "变量声明了但从未赋值时，变量值可能是 undefined。"
+  ],
+  "examples": [
+    "对象不存在某个属性时得到 undefined",
+    "let a; // a 为 undefined"
+  ],
+  "misconceptions": [
+    "undefined 不等于 null；二者表示的含义不同。",
+    "变量只要声明了，不一定就有确定值，未赋值时可能是 undefined。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "undefined 表示什么？",
+      "a": "表示“未定义”。"
+    },
+    {
+      "q": "在哪两种情况下会出现 undefined？",
+      "a": "对象属性不存在，以及声明了变量但从未赋值。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "JavaScript 基本数据类型"
+  ],
+  "source_pages": [
+    245,
+    248
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "341_undefined_数据类型",
+  "_chunk_pages": [
+    245,
+    248
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "title": "window.visualViewport",
+  "definition": "window.visualViewport会返回VisualViewport对象，表示给定窗口的视觉视口。",
+  "key_points": [
+    "返回VisualViewport对象",
+    "表示给定窗口的视觉视口"
+  ],
+  "examples": [
+    "window.visualViewport"
+  ],
+  "misconceptions": [
+    "它返回的不是数值，而是对象",
+    "视觉视口不等同于窗口内容区域"
+  ],
+  "qa_pairs": [
+    {
+      "q": "window.visualViewport返回什么？",
+      "a": "返回VisualViewport对象，代表一个给定窗口的视觉视口。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "window对象"
+  ],
+  "source_pages": [
+    329,
+    332
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "473_window_visualviewport",
+  "_chunk_pages": [
+    329,
+    332
+  ]
+}

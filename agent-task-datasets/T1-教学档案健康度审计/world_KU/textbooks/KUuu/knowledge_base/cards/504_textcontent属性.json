@@ -1,0 +1,42 @@
+{
+  "title": "textContent属性",
+  "definition": "`element.textContent`用于获取或设置元素内部的纯文本内容。读取时返回文本；设置时会把内容当作文本处理，HTML标签会被忽略或移除。",
+  "key_points": [
+    "可用于获取元素内部的纯文本内容。",
+    "可用于设置文本内容，不会按HTML解析。",
+    "通常比`innerHTML`更安全，适合显示用户输入的文本。"
+  ],
+  "examples": [
+    "let text = element.textContent;",
+    "element.textContent = 'New plain text content';"
+  ],
+  "misconceptions": [
+    "认为`textContent`会保留HTML标签；实际上标签会被当作普通文本处理。",
+    "以为它和`innerHTML`一样会渲染标签；不会。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`textContent`适合处理什么类型的内容？",
+      "a": "适合处理纯文本内容。"
+    },
+    {
+      "q": "为什么说`textContent`更安全？",
+      "a": "因为它不会把输入当作HTML解析。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "DOM元素基础"
+  ],
+  "source_pages": [
+    353,
+    354
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "504_textcontent属性",
+  "_chunk_pages": [
+    353,
+    356
+  ]
+}

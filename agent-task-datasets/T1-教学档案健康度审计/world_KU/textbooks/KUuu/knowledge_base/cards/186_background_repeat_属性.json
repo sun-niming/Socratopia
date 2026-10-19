@@ -1,0 +1,39 @@
+{
+  "title": "background-repeat 属性",
+  "definition": "background-repeat 用于控制背景图片的重复方式。repeat 表示平铺重复，repeat-x 表示水平方向重复，repeat-y 表示垂直方向重复，no-repeat 表示不重复。",
+  "key_points": [
+    "repeat 表示横纵方向都重复填充。",
+    "repeat-x 只在水平方向重复。",
+    "repeat-y 只在垂直方向重复。",
+    "no-repeat 表示背景图只显示一次。"
+  ],
+  "examples": [
+    "background-repeat: no-repeat;",
+    "background-repeat: repeat-x;"
+  ],
+  "misconceptions": [
+    "repeat-x 表示垂直重复。",
+    "no-repeat 仍然会平铺背景图。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "no-repeat 的含义是什么？",
+      "a": "背景图片不重复，只显示一次。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "背景样式"
+  ],
+  "source_pages": [
+    113,
+    116
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "186_background_repeat_属性",
+  "_chunk_pages": [
+    113,
+    116
+  ]
+}

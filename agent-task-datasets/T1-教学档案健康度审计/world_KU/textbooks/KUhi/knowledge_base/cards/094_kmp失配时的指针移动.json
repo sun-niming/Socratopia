@@ -1,0 +1,37 @@
+{
+  "title": "KMP失配时的指针移动",
+  "definition": "在KMP中，当文本串T[i]与模式串P[j]失配时，不回退文本指针i，而是根据next[j]调整模式指针j继续比较。这样做的原因是，已经匹配上的那一段字符的后缀，与模式串的某个前缀相同，可以直接复用。",
+  "key_points": [
+    "失配时文本指针i不回退",
+    "模式指针j按next[j]跳转",
+    "已匹配部分的后缀可与模式前缀复用"
+  ],
+  "examples": [
+    "模式 ababaca 已匹配 ababa 后失配时，因为后缀 aba 等于前缀 aba，所以模式可以滑到可复用的位置继续比较"
+  ],
+  "misconceptions": [
+    "一旦失配就必须把文本起点整体回退重来",
+    "KMP和朴素匹配在失配处理上没有区别"
+  ],
+  "qa_pairs": [
+    {
+      "q": "KMP中为什么i不需要回退？",
+      "a": "因为失配后，已经匹配的那段后缀可以和模式串的前缀复用，所以只需调整j，不必重新扫描已比较过的文本字符。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "next数组的含义"
+  ],
+  "source_pages": [
+    85,
+    88
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "094_kmp失配时的指针移动",
+  "_chunk_pages": [
+    85,
+    88
+  ]
+}

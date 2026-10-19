@@ -1,0 +1,38 @@
+{
+  "title": "并发访问稳定性",
+  "definition": "服务器在并发请求下应保持稳定，不应崩溃。实验中通过同时发起 20 个后台 `curl` 请求并 `wait` 来检查这一点。",
+  "key_points": [
+    "需要支持并发访问。",
+    "并发压力下服务器不应崩溃。",
+    "可以用多个后台 `curl` 进行简单并发测试。"
+  ],
+  "examples": [
+    "`for i in $(seq 1 20); do curl -s http://127.0.0.1:8080/ > /dev/null & done; wait`"
+  ],
+  "misconceptions": [
+    "单个请求成功就说明并发一定没问题。",
+    "并发测试只是多开几个浏览器窗口即可。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "并发测试的预期结果是什么？",
+      "a": "服务器不崩溃。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "并发基础",
+    "HTTP 服务基础"
+  ],
+  "source_pages": [
+    113,
+    116
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "191_并发访问稳定性",
+  "_chunk_pages": [
+    113,
+    116
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "title": "HTML属性书写规则",
+  "definition": "HTML5代码约定要求属性名使用小写，属性值加引号；引号可以使用双引号或单引号，原文还展示了某些属性值可不加引号的写法。",
+  "key_points": [
+    "属性名使用小写。",
+    "属性值应加引号。",
+    "引号形式可以是双引号或单引号。",
+    "原文示例中也出现了未加引号的属性值写法。"
+  ],
+  "examples": [
+    "<input type=\"text\" size='20' value=123 disabled>"
+  ],
+  "misconceptions": [
+    "“属性值加引号”是推荐规范，但原文示例同时展示了未加引号的写法。不要把示例误读成只有一种唯一写法。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "HTML5中属性名应如何书写？",
+      "a": "使用小写属性名。"
+    },
+    {
+      "q": "属性值可以使用哪些引号？",
+      "a": "可以使用双引号或单引号。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "HTML元素名与闭合规则"
+  ],
+  "source_pages": [
+    41,
+    44
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "060_html属性书写规则",
+  "_chunk_pages": [
+    41,
+    44
+  ]
+}

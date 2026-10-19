@@ -1,0 +1,49 @@
+{
+  "title": "构造函数的隐式转换与 explicit",
+  "definition": "当类具有可用单参数构造函数，或具有可用的多参数构造函数且调用时提供完整参数列表时，C++可能使用该构造函数把实参隐式转换为类对象。例如，参数类型为 const MyClass& 的函数可以接受整数或花括号初始化列表，并由构造函数临时构造 MyClass 对象。将构造函数声明为 explicit 后，该构造函数不能用于这种隐式转换，调用者必须显式写出 MyClass 对象的构造。",
+  "key_points": [
+    "未声明为 explicit 的构造函数可能参与隐式类型转换。示例中，process(1)、process({1}) 和 process({1, 2}) 都可以通过构造 MyClass 对象调用 process。",
+    "声明为 explicit 的构造函数仍然可以直接构造对象，但不能把整数或初始化列表隐式转换为 MyClass。此时应写成 process(MyClass{1}) 或 process(MyClass{1, 2})。",
+    "C++20 支持带布尔条件的 explicit 说明符，例如 explicit(true)；条件为 true 时构造函数具有 explicit 效果。"
+  ],
+  "examples": [
+    "class MyClass {\npublic:\n    MyClass(int) { }\n    MyClass(int, int) { }\n};\nvoid process(const MyClass& c) { }\nprocess(1);\nprocess({1});\nprocess({1, 2});",
+    "class MyClass {\npublic:\n    explicit MyClass(int) { }\n    explicit MyClass(int, int) { }\n};\nprocess(MyClass{1});\nprocess(MyClass{1, 2});",
+    "C++20 条件形式：explicit(true) MyClass(int);"
+  ],
+  "misconceptions": [
+    "explicit 并不是禁止直接构造对象；MyClass{1} 这样的显式构造仍然允许。",
+    "参数为 const MyClass& 并不意味着整数一定能传入；只有存在可用于隐式转换的非 explicit 构造函数时才可以。",
+    "explicit(true) 不是普通函数调用，而是 C++20 中控制构造函数是否显式的说明形式。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "未声明为 explicit 的 MyClass(int) 对 process(1) 有什么作用？",
+      "a": "它允许编译器把整数 1 隐式转换为临时 MyClass 对象，再传给参数为 const MyClass& 的 process。"
+    },
+    {
+      "q": "如果 MyClass(int) 声明为 explicit，为什么应写 process(MyClass{1})？",
+      "a": "因为 explicit 构造函数不能参与从 int 到 MyClass 的隐式转换，所以必须显式构造 MyClass 对象。"
+    },
+    {
+      "q": "explicit(true) 的效果是什么？",
+      "a": "条件表达式为 true 时，该构造函数具有 explicit 效果，不能用于相应的隐式转换。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "构造函数",
+    "函数参数类型转换"
+  ],
+  "source_pages": [
+    249,
+    252
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 explicit(bool) 条件 explicit 构造函数 MyClass process({1, 2}) 教材第249页",
+  "concept_id": "332_构造函数的隐式转换与_explicit",
+  "_chunk_pages": [
+    249,
+    252
+  ]
+}

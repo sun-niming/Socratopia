@@ -1,0 +1,49 @@
+{
+  "title": "AirlineTicket 类的接口与构造函数初始化",
+  "definition": "原文中的 AirlineTicket 类以 public 区域声明构造函数、价格计算函数、乘客姓名的 getter/setter、里程的 getter/setter 以及精英会员状态的 getter/setter；以 private 区域保存三个数据成员：乘客姓名、里程和精英会员状态。构造函数使用成员初始化列表为这些数据成员设置默认值。",
+  "key_points": [
+    "类的公共接口包括 AirlineTicket();、calculatePriceInDollars();、getPassengerName();、setPassengerName(std::string name);、getNumberOfMiles();、setNumberOfMiles(int miles);、hasEliteSuperRewardsStatus(); 和 setHasEliteSuperRewardsStatus(bool status)。",
+    "私有数据成员包括 std::string m_passengerName、int m_numberOfMiles 和 bool m_hasEliteSuperRewardsStatus。",
+    "原文构造函数初始化列表给出的默认值是：乘客姓名为 \"Unknown Passenger\"，里程为 0，精英会员状态为 false。",
+    "实现文件中使用 AirlineTicket::AirlineTicket() 定义类外构造函数，并在构造函数体执行前初始化成员。"
+  ],
+  "examples": [
+    "AirlineTicket::AirlineTicket() : m_passengerName { \"Unknown Passenger\" }, m_numberOfMiles { 0 }, m_hasEliteSuperRewardsStatus { false } { }"
+  ],
+  "misconceptions": [
+    "成员初始化列表不是在构造函数体中进行普通赋值；它用于直接初始化数据成员。",
+    "类外定义成员函数时，需要使用 AirlineTicket:: 成员作用域限定。",
+    "构造函数名称与类名相同，且没有返回类型。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "AirlineTicket 构造函数把乘客姓名初始化为什么？",
+      "a": "初始化为 \"Unknown Passenger\"。"
+    },
+    {
+      "q": "AirlineTicket 构造函数把里程和精英会员状态初始化为什么？",
+      "a": "里程初始化为 0，精英会员状态初始化为 false。"
+    },
+    {
+      "q": "类外定义 AirlineTicket 的构造函数时使用什么作用域限定？",
+      "a": "使用 AirlineTicket::AirlineTicket()。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++类与对象",
+    "构造函数",
+    "成员初始化列表"
+  ],
+  "source_pages": [
+    61,
+    64
+  ],
+  "needs_verification": true,
+  "verify_query": "Marc Gregoire C++20 Advanced Programming 5th edition AirlineTicket constructor m_passengerName Unknown Passenger m_numberOfMiles exact code",
+  "concept_id": "092_airlineticket_类的接口与构造函数初始化",
+  "_chunk_pages": [
+    61,
+    64
+  ]
+}

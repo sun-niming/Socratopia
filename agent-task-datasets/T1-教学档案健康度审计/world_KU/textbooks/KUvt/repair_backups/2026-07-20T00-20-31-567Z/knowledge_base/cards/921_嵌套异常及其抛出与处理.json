@@ -1,0 +1,50 @@
+{
+  "title": "嵌套异常及其抛出与处理",
+  "definition": "C++ 的嵌套异常机制允许在处理一个异常时，将原异常嵌入一个新的异常中，从而在抛出新异常后仍保留原异常信息。std::throw_with_nested() 用于抛出带有当前异常嵌套信息的新异常；处理时可以通过 std::nested_exception::rethrow_nested() 再次抛出内部异常，或使用 std::rethrow_if_nested() 自动检查并重新抛出嵌套异常。",
+  "key_points": [
+    "嵌套异常适合在异常类型转换场景中使用，例如捕获第三方库异常 A 后，包装成程序自己的异常 B，同时保留 A。",
+    "在 catch 块中调用 std::throw_with_nested(new_exception)，会将当前正在处理的异常嵌套到新异常中。",
+    "实现嵌套异常的对象同时具有新异常类型和 std::nested_exception 的能力，因此涉及多重继承机制。",
+    "可以使用 dynamic_cast<const std::nested_exception*> 检测异常对象是否包含嵌套异常。",
+    "检测到 nested_exception 后，调用 rethrow_nested() 会重新抛出内部异常，并应在另一个 try/catch 块中处理。",
+    "std::rethrow_if_nested(e) 是检测并重新抛出嵌套异常的辅助函数，可减少手动 dynamic_cast 的代码。"
+  ],
+  "examples": [
+    "包装异常：\nvoid doSomething() {\n    try {\n        throw std::runtime_error{\"Throwing a runtime_error exception\"};\n    } catch (const std::runtime_error& e) {\n        std::cout << \"doSomething caught a runtime_error\" << std::endl;\n        std::cout << \"doSomething throwing MyException\" << std::endl;\n        std::throw_with_nested(MyException{\"MyException with nested runtime_error\"});\n    }\n}\n\n使用 rethrow_nested() 处理内部异常：\ntry {\n    doSomething();\n} catch (const MyException& e) {\n    const auto* nested = dynamic_cast<const std::nested_exception*>(&e);\n    if (nested) {\n        try {\n            nested->rethrow_nested();\n        } catch (const std::runtime_error& e) {\n            std::cout << \"Nested exception: \" << e.what() << std::endl;\n        }\n    }\n}\n\n也可以使用：\ntry {\n    std::rethrow_if_nested(e);\n} catch (const std::runtime_error& e) {\n    // 处理内部异常\n}"
+  ],
+  "misconceptions": [
+    "错误理解：throw_with_nested() 会丢弃原异常。实际它的目的就是把当前异常保存在新异常的嵌套信息中。",
+    "错误理解：捕获外层异常后调用 e.what() 就能得到所有嵌套异常信息。实际 e.what() 通常只描述当前外层异常，内部异常需要重新抛出后单独处理。",
+    "错误理解：rethrow_nested() 返回一个异常对象。实际它会重新抛出嵌套异常，因此应在 try/catch 结构中调用。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何把当前正在处理的异常嵌入一个新的 MyException 中？",
+      "a": "在处理原异常的 catch 块中调用 std::throw_with_nested(MyException{\"...\"})。"
+    },
+    {
+      "q": "如何手动检测并处理 MyException 中的嵌套异常？",
+      "a": "先将 MyException 对象通过 dynamic_cast 转换为 const std::nested_exception*；如果转换成功，则在 try 块中调用 rethrow_nested()，再用相应的 catch 块捕获内部异常。"
+    },
+    {
+      "q": "std::rethrow_if_nested() 的作用是什么？",
+      "a": "它用于检查给定异常对象是否包含嵌套异常；如果包含，就重新抛出该嵌套异常。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "C++异常捕获与重新抛出",
+    "C++多态与dynamic_cast"
+  ],
+  "source_pages": [
+    454,
+    456
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "921_嵌套异常及其抛出与处理",
+  "_chunk_pages": [
+    453,
+    456
+  ]
+}

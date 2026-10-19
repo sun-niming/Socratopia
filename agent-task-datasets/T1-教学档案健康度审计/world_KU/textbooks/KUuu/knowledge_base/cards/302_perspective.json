@@ -1,0 +1,38 @@
+{
+  "title": "perspective",
+  "definition": "perspective 表示眼睛和舞台之间的距离，单位是像素，写法中可以省略 px。它的值越小，透视效果越明显。",
+  "key_points": [
+    "表示观察者到舞台的距离。",
+    "单位为像素，px 可以省略。",
+    "数值越小，透视效果越明显。"
+  ],
+  "examples": [
+    "perspective: 800;",
+    "perspective: 300px;"
+  ],
+  "misconceptions": [
+    "以为 perspective 越大，透视效果越明显。",
+    "以为这个属性表示元素自身的大小。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "perspective 的值越小会怎样？",
+      "a": "透视效果越明显。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "3D变换基础"
+  ],
+  "source_pages": [
+    201,
+    202
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "302_perspective",
+  "_chunk_pages": [
+    201,
+    204
+  ]
+}

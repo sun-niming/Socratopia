@@ -1,0 +1,44 @@
+{
+  "title": "TCP客户通过connect建立连接",
+  "definition": "TCP客户在发送应用数据之前，必须通过 `connect((serverName, serverPort))` 向指定服务器发起连接。参数给出服务器的主机名和端口号；调用将触发 TCP 连接建立过程，包括三次握手。连接建立后，客户和服务器才能通过该 TCP 连接相互传输字节。",
+  "key_points": [
+    "示例代码为 `clientSocket.connect((serverName, serverPort))`。",
+    "`connect()` 的目标由服务器主机名 `serverName` 和服务器端口 `serverPort` 标识。",
+    "TCP是面向连接的协议，应用数据发送前需要先建立连接。",
+    "原文指出，执行该调用后将进行三次握手并建立 TCP 连接。"
+  ],
+  "examples": [
+    "服务器地址为 `servername`、端口为 `12000` 时，可调用 `clientSocket.connect(('servername', 12000))` 发起连接。"
+  ],
+  "misconceptions": [
+    "误以为 TCP 客户可以像无连接通信一样，在未建立连接时直接发送应用数据。",
+    "误以为 `connect()` 只记录服务器地址，不会触发 TCP 握手。",
+    "误以为 `connect()` 的参数是客户自己的地址。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "TCP客户为什么要在发送数据前调用 `connect()`？",
+      "a": "因为 TCP 是面向连接的协议，客户和服务器必须先通过包括三次握手在内的连接建立过程创建 TCP 连接。"
+    },
+    {
+      "q": "`connect((serverName, serverPort))` 中的地址属于哪一端？",
+      "a": "属于服务器端，用服务器主机名和服务器端口号标识。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "创建TCP客户套接字",
+    "TCP面向连接服务"
+  ],
+  "source_pages": [
+    129,
+    132
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "323_tcp客户通过connect建立连接",
+  "_chunk_pages": [
+    129,
+    132
+  ]
+}

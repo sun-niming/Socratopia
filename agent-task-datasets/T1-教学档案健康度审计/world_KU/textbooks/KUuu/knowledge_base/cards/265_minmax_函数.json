@@ -1,0 +1,38 @@
+{
+  "title": "minmax() 函数",
+  "definition": "minmax() 是 CSS 网格布局中的函数，用于为一个轨道设置最小值和最大值范围，轨道尺寸会被限制在这个区间内变化。",
+  "key_points": [
+    "minmax() 用于定义一个长度范围。",
+    "函数形式为 minmax(min, max)。",
+    "它可以用来让轨道至少达到某个最小尺寸，并允许在条件合适时自动增大。"
+  ],
+  "examples": [
+    "grid-template-rows: minmax(100px, auto);",
+    "minmax(min, max)"
+  ],
+  "misconceptions": [
+    "minmax() 不是写成 minmax(max, min)。",
+    "minmax() 不是固定死尺寸，而是规定可变化的上下限。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "minmax(100px, auto) 表示什么？",
+      "a": "表示该轨道至少为 100px，且可以自动伸展。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "网格轨道尺寸写法"
+  ],
+  "source_pages": [
+    173,
+    176
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "265_minmax_函数",
+  "_chunk_pages": [
+    173,
+    176
+  ]
+}

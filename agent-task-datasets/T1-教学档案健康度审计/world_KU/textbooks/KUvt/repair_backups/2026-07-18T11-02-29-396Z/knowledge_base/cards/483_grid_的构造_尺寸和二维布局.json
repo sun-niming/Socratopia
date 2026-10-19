@@ -1,0 +1,45 @@
+{
+  "title": "Grid 的构造、尺寸和二维布局",
+  "definition": "Grid 通过宽度和高度构造二维网格。构造函数声明为 $$\\texttt{explicit Grid(size\\_t width = DefaultWidth, size\\_t height = DefaultHeight);}$$。对象内部保存 m_width 和 m_height，并按宽度和高度调整二维单元格容器的大小；访问时使用坐标 $(x,y)$。",
+  "key_points": [
+    "构造函数接受 width 和 height 两个 size_t 参数，并支持默认参数。",
+    "原文明确显示 DefaultHeight 的值为 10；DefaultWidth 的具体初始化值在给出的文字中不完整。",
+    "构造函数实现中先将外层容器调整为 m_width 个元素，再将每个列容器调整为 m_height 个元素，可按 m_cells[x][y] 访问。",
+    "坐标的第一维是 x，必须小于 m_width；第二维是 y，必须小于 m_height。"
+  ],
+  "examples": [
+    "Grid<double> myDoubleGrid { 11, 11 };",
+    "对一个宽度为 $w$、高度为 $h$ 的网格，其合法坐标满足：$$0 \\le x < w,\\qquad 0 \\le y < h.$$"
+  ],
+  "misconceptions": [
+    "width 和 height 不是坐标的最大值；合法坐标范围分别是 $0$ 到 $width-1$、$0$ 到 $height-1$。",
+    "根据实现中的 m_cells[x][y]，不能把 x、y 的含义随意交换。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "Grid<double> myDoubleGrid { 11, 11 } 表示什么？",
+      "a": "它表示一个宽度为 11、高度为 11 的 Grid<double> 对象。"
+    },
+    {
+      "q": "宽度为 3、高度为 4 的网格中，(2,3) 是否为合法坐标？",
+      "a": "是，因为 $0\\le2<3$ 且 $0\\le3<4$；(3,0) 不合法，因为 $3$ 不小于宽度 $3$。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++ 类模板",
+    "二维数组或二维容器"
+  ],
+  "source_pages": [
+    377,
+    378,
+    379
+  ],
+  "needs_verification": true,
+  "verify_query": "\"C++20高级编程\" 第5版 Grid DefaultWidth DefaultHeight m_cells resize m_width m_height",
+  "concept_id": "483_grid_的构造_尺寸和二维布局",
+  "_chunk_pages": [
+    377,
+    380
+  ]
+}

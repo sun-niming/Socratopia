@@ -1,0 +1,45 @@
+{
+  "title": "noskipws 使输入运算符读取空白字符",
+  "definition": "`noskipws` 输入操作算子用于通知输入流：使用输入流运算符读取字符时，不要跳过空白字符，而应像读取其他字符一样处理空格、换行等空白。",
+  "key_points": [
+    "默认情况下，字符输入通常会跳过前导空白；设置 `noskipws` 后则不会跳过。",
+    "典型用法是先执行 `cin >> noskipws`，再使用 `cin >> ch` 逐字符读取。",
+    "结合 `isdigit(ch)` 和 `unget()`，可以扫描一段包含空格的姓名，直到遇到表示人数的数字。",
+    "读取完成后，如果流没有处于错误状态，可以继续使用 `cin >> partySize` 读取整数。"
+  ],
+  "examples": [
+    "`char ch; cin >> noskipws; while (cin >> ch) { if (isdigit(ch)) { cin.unget(); break; } guestName += ch; }`。",
+    "如果输入为 `Alice Smith 12`，启用 `noskipws` 后，姓名中的空格可以被读取并加入 `guestName`，遇到数字 `1` 时将其放回，再读取 `partySize`。"
+  ],
+  "misconceptions": [
+    "`noskipws` 不会把空白字符变成普通字母；它只是禁止输入操作跳过这些字符。",
+    "只使用 `cin >> ch` 而不设置 `noskipws` 时，前导空白可能被跳过。",
+    "设置 `noskipws` 后仍需考虑换行等空白字符可能被读入。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何让 `cin >> ch` 读取空格等空白字符？",
+      "a": "先执行 `cin >> noskipws`，再使用 `cin >> ch` 读取字符。"
+    },
+    {
+      "q": "在读取姓名直到遇到人数时，为什么要将数字字符 `unget()`？",
+      "a": "数字字符属于后续的整数输入，应放回流中，以便后续 `cin >> partySize` 读取。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "输入流运算符读取数据并按空白分词",
+    "unget() 将最近读取的字符放回输入流"
+  ],
+  "source_pages": [
+    420,
+    420
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "851_noskipws_使输入运算符读取空白字符",
+  "_chunk_pages": [
+    417,
+    420
+  ]
+}

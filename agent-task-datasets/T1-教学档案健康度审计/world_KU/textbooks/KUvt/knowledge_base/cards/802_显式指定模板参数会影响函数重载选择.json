@@ -1,0 +1,43 @@
+{
+  "title": "显式指定模板参数会影响函数重载选择",
+  "definition": "当同名函数中同时存在普通非模板函数和函数模板时，普通调用会根据重载解析选择最佳匹配；但如果调用者显式指定模板参数，例如Find<const char*>(...)，调用表达式明确要求使用函数模板，从而不会调用同参数形式的非模板重载。",
+  "key_points": [
+    "Find(word, words, sizeWords)可选择const char*的非模板重载。",
+    "Find<const char*>(word, words, sizeWords)显式指定了函数模板参数T=const char*，因此调用函数模板。",
+    "显式模板参数不是对普通重载的提示，而是选择模板候选的一部分语法。"
+  ],
+  "examples": [
+    "普通调用：const char* word{\"two\"}; const char* words[]{\"one\", \"two\", \"three\", \"four\"}; size_t result{Find(word, words, std::size(words))};",
+    "显式调用模板：size_t result{Find<const char*>(word, words, std::size(words))};"
+  ],
+  "misconceptions": [
+    "显式写出<const char*>仍会优先调用const char*的普通重载；实际上它明确要求调用函数模板。",
+    "自动推导和显式指定模板参数在所有情况下都完全等价；在存在普通重载时，二者可能选择不同函数。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "Find(word, words, sizeWords)调用哪个函数？",
+      "a": "调用const char*参数形式的非模板Find重载。"
+    },
+    {
+      "q": "Find<const char*>(word, words, sizeWords)调用哪个函数？",
+      "a": "调用T=const char*的函数模板，而不是const char*的非模板重载。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "函数模板",
+    "函数重载与重载解析"
+  ],
+  "source_pages": [
+    396,
+    396
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "802_显式指定模板参数会影响函数重载选择",
+  "_chunk_pages": [
+    393,
+    396
+  ]
+}

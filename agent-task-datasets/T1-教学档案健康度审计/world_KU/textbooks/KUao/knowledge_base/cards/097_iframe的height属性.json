@@ -1,0 +1,40 @@
+{
+  "title": "iframe的height属性",
+  "definition": "height 属性用于设置 iframe 框架高度，教材给出的单位说明是像素。",
+  "key_points": [
+    "用于设置框架高度",
+    "教材示例与说明均指向像素值"
+  ],
+  "examples": [
+    "<iframe height=\"300\"></iframe>"
+  ],
+  "misconceptions": [
+    "height 不是宽度属性",
+    "不要把 height 和百分比宽度混淆"
+  ],
+  "qa_pairs": [
+    {
+      "q": "iframe 的 height 属性表示什么？",
+      "a": "表示框架高度。"
+    },
+    {
+      "q": "教材中 height 属性的示例值是什么？",
+      "a": "300。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "iframe标记"
+  ],
+  "source_pages": [
+    77,
+    80
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "097_iframe的height属性",
+  "_chunk_pages": [
+    77,
+    80
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "title": "有序性检查算法",
+  "definition": "is_sorted()用于判断一个范围是否已经有序：如果范围有序则返回true，否则返回false。is_sorted_until()返回一个迭代器，该迭代器之前的元素仍然构成有序范围。",
+  "key_points": [
+    "这两个算法用于检查范围的有序状态，而不是对范围进行排序。",
+    "判断所依据的顺序可以使用默认比较规则或相应的比较器。",
+    "is_sorted_until()适合定位范围从哪里开始不再有序。"
+  ],
+  "examples": [
+    "if (is_sorted(cbegin(values), cend(values))) { cout << \"The range is sorted.\"; }",
+    "auto iter = is_sorted_until(cbegin(values), cend(values));"
+  ],
+  "misconceptions": [
+    "is_sorted()返回的不是第一个无序元素的迭代器，而是布尔值。",
+    "is_sorted_until()不会自动把整个范围排序。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如果给定范围已经有序，is_sorted()返回什么？",
+      "a": "返回true。"
+    },
+    {
+      "q": "is_sorted_until()返回什么？",
+      "a": "返回一个迭代器；该迭代器之前的元素构成有序范围。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++标准库算法的迭代器范围"
+  ],
+  "source_pages": [
+    649,
+    649
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1357_有序性检查算法",
+  "_chunk_pages": [
+    649,
+    652
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "title": "Grid的跨尺寸模板化拷贝构造函数",
+  "definition": "Grid类可以定义一个模板化的拷贝构造函数，使Grid<T, WIDTH, HEIGHT>能够从元素类型或尺寸不同的Grid<E, WIDTH2, HEIGHT2>对象构造。构造时只复制目标网格范围内、且源网格实际存在的元素；目标网格中超出源网格范围的位置则通过std::optional::reset()置为空。",
+  "key_points": [
+    "模板化拷贝构造函数的源对象类型可以写成Grid<E, WIDTH2, HEIGHT2>，其中E、WIDTH2和HEIGHT2可以与目标Grid的模板参数不同。",
+    "复制范围受目标网格尺寸限制：循环只遍历目标的WIDTH和HEIGHT，因此源网格即使更大，也不会把超出目标范围的元素复制过来。",
+    "如果源网格在某个维度上小于目标网格，则目标网格对应的附加位置调用reset()，使其中的std::optional不包含值。",
+    "当目标和源网格尺寸相同时，该操作具有与普通拷贝构造相同的网格复制语义。"
+  ],
+  "examples": [
+    "可用如下逻辑表示复制过程：\n$$\n\\text{目标}[i][j]=\n\\begin{cases}\n\\text{源}.at(i,j),& i<WIDTH2\\land j<HEIGHT2\\\\\n\\text{空的 }std::optional,& \\text{否则}\n\\end{cases}\n$$",
+    "核心循环的含义是：\n```text\nfor i = 0; i < WIDTH; ++i:\n    for j = 0; j < HEIGHT; ++j:\n        if (i < WIDTH2 && j < HEIGHT2):\n            m_cells[i][j] = src.at(i, j)\n        else:\n            m_cells[i][j].reset()\n```"
+  ],
+  "misconceptions": [
+    "它不是只支持完全相同类型和尺寸的Grid之间复制；源元素类型和源网格尺寸都可以不同。",
+    "源网格更大时，不会自动扩大目标网格，也不会复制超出目标尺寸的部分。",
+    "源网格更小时，目标网格多出来的位置不是保留未定义内容，而是被reset为空的std::optional。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "Grid<T, WIDTH, HEIGHT>从Grid<E, WIDTH2, HEIGHT2>构造时，哪些源元素会被复制？",
+      "a": "只复制同时满足i<WIDTH、j<HEIGHT、i<WIDTH2和j<HEIGHT2的元素；超出目标范围的源元素不复制。"
+    },
+    {
+      "q": "当源网格的宽或高小于目标网格时，目标网格多出的单元如何处理？",
+      "a": "对这些单元的std::optional调用reset()，使其为空。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "类模板与非类型模板参数",
+    "std::optional的基本用法"
+  ],
+  "source_pages": [
+    389,
+    389
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "790_grid的跨尺寸模板化拷贝构造函数",
+  "_chunk_pages": [
+    389,
+    392
+  ]
+}

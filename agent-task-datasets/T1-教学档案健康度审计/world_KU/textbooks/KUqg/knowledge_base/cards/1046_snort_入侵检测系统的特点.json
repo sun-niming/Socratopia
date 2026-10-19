@@ -1,0 +1,42 @@
+{
+  "title": "Snort 入侵检测系统的特点",
+  "definition": "Snort 是一种公共域开放源码的入侵检测系统，能够运行在 Linux、UNIX 和 Windows 平台上，并使用通用的分组嗅探接口 libpcap。它通过特征匹配检测攻击，并在匹配时生成告警。",
+  "key_points": [
+    "Snort 能够使用 libpcap 嗅探经过网络接口的分组。",
+    "教材指出，Snort 可以较容易地处理 100 Mbps 的流量；在千兆比特每秒的流量速率下工作需要多个 Snort 传感器。",
+    "Snort 的特征由安全专家社区维护；新攻击出现后，社区可能较快编写并发布相应特征。",
+    "网络管理员可以修改已有特征或创建新特征，以适应本机构的需求。"
+  ],
+  "examples": [
+    "教材给出的 Snort 特征可规范写作：\n\n`alert icmp $EXTERNAL_NET any -> $HOME_NET any (msg:\"ICMP PING NMAP\"; dsize:0; itype:8;)`\n\n它匹配从外部网络进入机构内部网络的 ICMP 分组，要求 ICMP 类型为 8 且载荷长度为 0，并在匹配时产生包含相应消息的告警。"
+  ],
+  "misconceptions": [
+    "Snort 的特征不是固定不可修改的；网络管理员可以根据机构需要定制特征。",
+    "Snort 使用特征检测攻击，因此仍具有基于特征 IDS 依赖已知攻击特征的基本限制。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "Snort 使用什么接口嗅探网络分组？",
+      "a": "Snort 使用通用的分组嗅探接口 libpcap。"
+    },
+    {
+      "q": "教材示例中的 Snort 特征要检测什么行为？",
+      "a": "它检测从外部网络进入机构网络、类型为 8、载荷为空的 ICMP ping 分组；教材将其用于检测 nmap 的 ping 扫描。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "基于特征的入侵检测系统的工作方式与局限"
+  ],
+  "source_pages": [
+    449,
+    452
+  ],
+  "needs_verification": true,
+  "verify_query": "Snort alert icmp $EXTERNAL_NET any -> $HOME_NET any msg ICMP PING NMAP dsize 0 itype 8 规则语法及检测含义",
+  "concept_id": "1046_snort_入侵检测系统的特点",
+  "_chunk_pages": [
+    449,
+    452
+  ]
+}

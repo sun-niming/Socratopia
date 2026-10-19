@@ -1,0 +1,40 @@
+{
+  "title": "循环索引和数据成员的命名示例",
+  "definition": "原文通过若干标识符示例说明命名应体现变量用途和所属范围：嵌套循环可使用 $i$、$j$ 作为外层和内层循环索引；与行、列相关的变量可使用 row、column；数据成员示例包括 mData 和 msLookupTable。",
+  "key_points": [
+    "嵌套循环中，外层索引和内层索引可以分别命名为 $i$ 和 $j$。",
+    "与二维数据相关的变量名应能体现行、列或数据表等含义，例如 row、column、mData、msLookupTable。",
+    "前缀 m、ms 等示例用于区分特定类别的数据成员，但具体前缀规则应以项目或教材完整约定为准。"
+  ],
+  "examples": [
+    "嵌套循环索引：外层循环使用 $i$，内层循环使用 $j$。",
+    "二维数据相关名称：row、column、mData、msLookupTable。"
+  ],
+  "misconceptions": [
+    "$i$ 和 $j$ 并不适合所有变量；它们主要适用于含义局部且明确的循环索引。",
+    "仅凭名称 mData 或 msLookupTable，不能断定所有 C++ 项目都必须使用 m、ms 前缀。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "原文给出的嵌套循环索引命名示例是什么？",
+      "a": "外层循环索引可命名为 $i$，内层循环索引可命名为 $j$。"
+    },
+    {
+      "q": "原文给出了哪些体现行、列或数据表含义的命名示例？",
+      "a": "包括 row、column、mData 和 msLookupTable。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [],
+  "source_pages": [
+    133,
+    136
+  ],
+  "needs_verification": true,
+  "verify_query": "《C++20高级编程》第5版 第133页 命名约定 i j outer loop index inner loop index row column mData msLookupTable",
+  "concept_id": "192_循环索引和数据成员的命名示例",
+  "_chunk_pages": [
+    133,
+    136
+  ]
+}

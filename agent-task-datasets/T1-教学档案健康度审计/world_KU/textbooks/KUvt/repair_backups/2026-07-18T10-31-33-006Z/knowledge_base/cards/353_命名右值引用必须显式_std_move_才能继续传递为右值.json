@@ -1,0 +1,45 @@
+{
+  "title": "命名右值引用必须显式 std::move 才能继续传递为右值",
+  "definition": "函数参数若声明为右值引用，例如 `void handleMessage(std::string&& message)`，参数 `message` 虽然类型是右值引用，但由于它是一个有名字的变量，表达式 `message` 是左值。若要把它继续传递给只接受右值引用的函数，通常必须写成 `std::move(message)`。",
+  "key_points": [
+    "在 `void handleMessage(std::string&& message)` 的函数体内，直接写 `helper(message)` 时，`message` 按左值表达式处理。",
+    "使用 `helper(std::move(message))`，才能把该参数重新转换为右值类别。",
+    "右值引用参数通常表示函数可以接管实参资源，因此移动后源对象仍必须保持有效，但其具体值可能已改变。"
+  ],
+  "examples": [
+    "如果辅助函数要求右值引用：`void helper(std::string&& message) { }`。",
+    "错误或不匹配的传递方式：`void handleMessage(std::string&& message) { helper(message); }`，因为命名参数 `message` 是左值表达式。",
+    "正确的传递方式：`void handleMessage(std::string&& message) { helper(std::move(message)); }`。"
+  ],
+  "misconceptions": [
+    "参数声明为 `std::string&&` 并不使函数体内的 `message` 自动成为右值。",
+    "`std::move(message)` 不是把对象复制或移动到新变量，而是改变表达式的值类别，使移动构造或移动赋值等操作能够被选中。",
+    "调用 `std::move` 后不应再假定源对象保留原来的内容。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么 `helper(message)` 不能像 `helper(std::move(message))` 那样把 `message` 传给 `helper(std::string&&)`？",
+      "a": "因为命名的右值引用参数 `message` 在表达式中是左值；`std::move(message)` 才会将它转换为右值类别。"
+    },
+    {
+      "q": "下面哪种写法用于把右值引用参数继续按右值传递？",
+      "a": "`helper(std::move(message));`。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "左值引用与右值引用重载的选择",
+    "std::move 的作用"
+  ],
+  "source_pages": [
+    269,
+    272
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "353_命名右值引用必须显式_std_move_才能继续传递为右值",
+  "_chunk_pages": [
+    269,
+    272
+  ]
+}

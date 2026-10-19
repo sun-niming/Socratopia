@@ -1,0 +1,45 @@
+{
+  "title": "雇员记录系统的功能与程序分层",
+  "definition": "教材中的第一个大型 C++ 程序是一个雇员数据库，用于管理公司雇员记录。系统支持添加和解雇雇员、晋升和降级，以及分别查看所有雇员、当前雇员和以前雇员。程序分为 Employee、Database 和 UserInterface 三个部分，分别负责单个雇员信息、全部雇员管理和用户交互。",
+  "key_points": [
+    "系统功能包括添加雇员和解雇雇员。",
+    "系统支持雇员晋升和降级。",
+    "系统可以查看所有雇员、所有当前雇员和所有以前雇员。",
+    "Employee 类封装单个雇员的信息。",
+    "Database 类管理公司的所有雇员。",
+    "UserInterface 负责程序的交互接口。"
+  ],
+  "examples": [
+    "可以将系统职责表示为：Employee 负责单个雇员；Database 负责雇员集合；UserInterface 负责与用户交互。"
+  ],
+  "misconceptions": [
+    "Employee 类负责管理公司的全部雇员。教材将全部雇员的管理职责分配给 Database 类。",
+    "UserInterface 负责保存每个雇员的全部业务数据。教材将单个雇员信息封装在 Employee 类中。",
+    "该示例只支持查看当前雇员。教材还列出了查看过去雇员和所有雇员的功能。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "雇员记录系统包含哪些主要功能？",
+      "a": "添加和解雇雇员、雇员晋升和降级、查看所有雇员、查看所有当前雇员以及查看所有以前雇员。"
+    },
+    {
+      "q": "雇员记录程序的三个主要部分及职责是什么？",
+      "a": "Employee 类封装单个雇员的信息，Database 类管理公司的所有雇员，UserInterface 提供程序的交互接口。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++ 类的基本概念"
+  ],
+  "source_pages": [
+    92,
+    92
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "167_雇员记录系统的功能与程序分层",
+  "_chunk_pages": [
+    89,
+    92
+  ]
+}

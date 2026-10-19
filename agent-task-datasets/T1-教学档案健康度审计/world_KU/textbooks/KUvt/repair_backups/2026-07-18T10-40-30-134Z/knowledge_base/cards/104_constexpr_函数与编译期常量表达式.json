@@ -1,0 +1,47 @@
+{
+  "title": "constexpr 函数与编译期常量表达式",
+  "definition": "constexpr 用于声明可在满足条件时进行编译期求值的函数或变量。仅将函数返回类型写成 const，并不能使函数调用成为编译期常量表达式；例如 `const int getArraySize() { return 32; }` 不能作为 C++内置数组的编译期长度，而应使用 `constexpr int getArraySize() { return 32; }`。",
+  "key_points": [
+    "`const` 与 `constexpr` 作用不同：const 主要表示对象不能通过该名称修改，constexpr 表示其值可作为编译期常量使用（在满足条件时）。",
+    "普通的 const 返回值函数不等同于 constexpr 函数。",
+    "需要编译期数组长度时，应使用 constexpr 函数或其他编译期常量表达式。"
+  ],
+  "examples": [
+    "const int getArraySize() { return 32; }\nint main()\n{\n    // int myArray[getArraySize()]; // 在 C++中无效\n}\n\nconstexpr int getArraySize() { return 32; }\nint main()\n{\n    int myArray[getArraySize()]; // getArraySize() 可作为编译期数组长度\n}"
+  ],
+  "misconceptions": [
+    "函数返回类型前的 const 不会自动使函数调用成为 constexpr 表达式。",
+    "constexpr 不只是表示运行时结果不会改变；它强调在满足条件时可在编译期求值。",
+    "C++标准内置数组不能使用运行时才确定的长度。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么 `const int getArraySize() { return 32; }` 不能用于定义 `int myArray[getArraySize()];`？",
+      "a": "因为该函数只是返回 const int，并未声明为 constexpr，函数调用不被视为所需的编译期常量表达式。"
+    },
+    {
+      "q": "应如何修改 getArraySize，使其可用于编译期数组长度？",
+      "a": "声明为 `constexpr int getArraySize() { return 32; }`。"
+    },
+    {
+      "q": "const 和 constexpr 的核心区别是什么？",
+      "a": "const 主要限制对象修改；constexpr 表示变量或函数结果能够在满足条件时作为编译期常量使用。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "const 变量",
+    "函数"
+  ],
+  "source_pages": [
+    73,
+    76
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "104_constexpr_函数与编译期常量表达式",
+  "_chunk_pages": [
+    73,
+    76
+  ]
+}

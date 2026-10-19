@@ -1,0 +1,42 @@
+{
+  "title": "行内元素之间的水平margin",
+  "definition": "行内元素之间可以通过水平外边距 margin 来拉开距离。原文用 span.left 设置 margin-right:30px，span.right 设置 margin-left:40px 作为示例，说明行内元素之间可以分别用左、右外边距控制水平间隔。",
+  "key_points": [
+    "适用于行内元素之间的水平间距。",
+    "可以用 margin-right 控制右侧空隙。",
+    "可以用 margin-left 控制左侧空隙。"
+  ],
+  "examples": [
+    "span.left{margin-right:30px;}",
+    "span.right{margin-left:40px;}"
+  ],
+  "misconceptions": [
+    "以为只有块级元素才能设置 margin。",
+    "以为行内元素之间不能通过 margin 调整水平距离。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "行内元素之间的水平间距可以用什么属性控制？",
+      "a": "可以用 margin-left 或 margin-right 控制。"
+    },
+    {
+      "q": "示例中 span.left 设置了什么外边距？",
+      "a": "margin-right:30px。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "CSS属性"
+  ],
+  "source_pages": [
+    133,
+    136
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "218_行内元素之间的水平margin",
+  "_chunk_pages": [
+    133,
+    136
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "title": "通过 at() 管理棋盘棋子所有权",
+  "definition": "GameBoard::at() 返回单元格中 std::unique_ptr<GamePiece> 的可修改引用，因此可以把新创建的派生棋子移动到棋盘中，也可以通过赋值 nullptr 清空单元格。向棋盘放入 unique_ptr 时应使用 std::move，将其所有权转移给棋盘。",
+  "key_points": [
+    "std::make_unique<ChessPiece>() 创建一个由 unique_ptr 管理的 ChessPiece。",
+    "将 unique_ptr 赋给 chessBoard.at(0, 0) 时使用 std::move(pawn)，表示把 pawn 管理对象的所有权转移给棋盘单元格。",
+    "所有权转移后，原来的 pawn 不再拥有该棋子，通常为空 unique_ptr。",
+    "对单元格赋值 nullptr 可以清空该单元格并释放原来由它拥有的棋子。"
+  ],
+  "examples": [
+    "放入棋子：GameBoard chessBoard{8, 8}; auto pawn{std::make_unique<ChessPiece>()}; chessBoard.at(0, 0) = std::move(pawn);",
+    "清空单元格：chessBoard.at(0, 1) = nullptr;",
+    "也可以直接放入临时 unique_ptr：chessBoard.at(0, 1) = std::make_unique<ChessPiece>();"
+  ],
+  "misconceptions": [
+    "不能复制 std::unique_ptr 来共享同一个棋子；应使用 std::move 转移所有权。",
+    "std::move(pawn) 本身不移动对象，它将 pawn 转换为可移动来源，实际转移发生在赋值操作中。",
+    "把单元格设为 nullptr 不只是改变标志，还会使该 unique_ptr 释放其当前拥有的棋子。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么示例中使用 chessBoard.at(0, 0) = std::move(pawn)？",
+      "a": "因为 std::unique_ptr 不能复制，只能移动；std::move 将 pawn 的棋子所有权转移给棋盘单元格。"
+    },
+    {
+      "q": "如何清空棋盘中的一个棋子单元格？",
+      "a": "将对应的 unique_ptr 赋值为 nullptr，例如 chessBoard.at(0, 1) = nullptr;。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "std::unique_ptr所有权转移",
+    "std::move",
+    "std::make_unique"
+  ],
+  "source_pages": [
+    373,
+    376
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "481_通过_at_管理棋盘棋子所有权",
+  "_chunk_pages": [
+    373,
+    376
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "title": "while循环结构",
+  "definition": "Shell中的 while 结构用于在条件命令成立时反复执行一组命令。教材给出的形式是：while command do command_list done。只要 while 后面的命令满足循环条件，就持续执行 do 与 done 之间的命令列表。",
+  "key_points": [
+    "while 后接命令作为循环条件",
+    "循环体写在 do 和 done 之间",
+    "条件持续成立时循环继续执行"
+  ],
+  "examples": [
+    "while command\ndo\ncommand_list\ndone"
+  ],
+  "misconceptions": [
+    "不要把 while 的循环体写在 then 后面；while 使用的是 do...done 结构",
+    "不要遗漏 done；它用于结束循环"
+  ],
+  "qa_pairs": [
+    {
+      "q": "while 结构中，循环体由哪两个关键字包围？",
+      "a": "do 和 done。"
+    },
+    {
+      "q": "while 后面跟的是什么？",
+      "a": "命令。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "命令返回值"
+  ],
+  "source_pages": [
+    77,
+    80
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "133_while循环结构",
+  "_chunk_pages": [
+    77,
+    80
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "title": "流运算符返回流引用以支持链式调用",
+  "definition": "重载的插入运算符和提取运算符都应返回作为第一个参数传入的流对象的引用。这样一次运算符调用的返回流可以作为下一次调用的左操作数，从而支持连续的链式输入或输出。",
+  "key_points": [
+    "提取表达式 `cin >> a >> b >> c` 可以看作多次全局函数调用的嵌套。",
+    "其等价形式为：\n`operator>>(operator>>(operator>>(cin, a), b), c);`",
+    "第一次调用返回的流引用会成为第二次调用的第一个参数。",
+    "如果不返回流引用，返回值就不能继续作为下一次链式调用的输入，嵌套调用可能无法编译。",
+    "插入运算符同样依靠返回流引用支持 `cout << a << b` 形式的连续输出。"
+  ],
+  "examples": [
+    "链式输入：\n`std::cin >> myCell >> anotherCell >> aThirdCell;`",
+    "链式输入的函数调用形式：\n`operator>>(operator>>(operator>>(std::cin, myCell), anotherCell), aThirdCell);`",
+    "典型返回语句：\n`return istr;`\n或\n`return ostr;`"
+  ],
+  "misconceptions": [
+    "`cin >> a >> b` 不是一次把所有对象传入一个运算符函数，而是多个运算符调用按照从左到右的结果继续嵌套。",
+    "流运算符返回的不是被读写的对象，而是第一个参数对应的输入流或输出流的引用。",
+    "只要运算符能够处理单个对象并不意味着能够链式调用；链式调用要求返回流引用。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么重载的流插入和提取运算符必须返回流的引用？",
+      "a": "因为链式表达式中，前一次运算符调用的返回值要作为下一次调用的左操作数。返回流的引用后，`cin >> a >> b` 或 `cout << a << b` 才能继续进行。"
+    },
+    {
+      "q": "`cin >> a >> b` 可以展开成什么形式？",
+      "a": "可以展开为 `operator>>(operator>>(cin, a), b)`；如果还有第三个对象，则为 `operator>>(operator>>(operator>>(cin, a), b), c)`。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "插入运算符和提取运算符的重载",
+    "函数返回引用"
+  ],
+  "source_pages": [
+    478,
+    479
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "960_流运算符返回流引用以支持链式调用",
+  "_chunk_pages": [
+    477,
+    480
+  ]
+}

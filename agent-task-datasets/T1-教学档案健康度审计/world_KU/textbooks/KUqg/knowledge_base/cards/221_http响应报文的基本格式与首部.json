@@ -1,0 +1,53 @@
+{
+  "title": "HTTP响应报文的基本格式与首部",
+  "definition": "HTTP响应报文由状态行、首部行、空行和实体体组成。状态行包含HTTP协议版本、状态码和相应状态信息；首部行描述响应的连接、生成时间、服务器类型、对象修改时间、对象长度和对象类型等；实体体通常包含服务器返回的请求对象。",
+  "key_points": [
+    "状态行格式可概括为：$$\\text{HTTP版本}\\ \\text{状态码}\\ \\text{状态短语}$$。",
+    "Connection: close表示服务器发送完报文后将关闭TCP连接。",
+    "Date表示服务器生成并发送响应报文的日期和时间，不是对象创建或最后修改时间。",
+    "Server表示产生该响应的Web服务器软件。",
+    "Last-Modified表示对象创建或最后修改的日期和时间，对缓存很重要。",
+    "Content-Length表示被发送对象的字节数。",
+    "Content-Type表示实体体中对象的媒体类型，例如HTML文本；对象类型应由该首部指示，而不是仅由文件扩展名指示。"
+  ],
+  "examples": [
+    "响应示例的状态行为HTTP/1.1 200 OK，表示服务器找到对象并正在发送。",
+    "Content-Length: 6821表示被发送对象包含6821字节。",
+    "Content-Type: text/html表示实体体中的对象是HTML文本。"
+  ],
+  "misconceptions": [
+    "Date不是对象最后修改时间；对象最后修改时间由Last-Modified表示。",
+    "Content-Length表示对象字节数，不是响应报文所有部分的总行数。",
+    "Content-Type不是根据文件扩展名推断出的唯一依据；响应中应通过该首部指示对象类型。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "HTTP响应报文的三个主要部分是什么？",
+      "a": "状态行、首部行和实体体；状态行与首部行之后有空行，实体体位于空行之后。"
+    },
+    {
+      "q": "Date与Last-Modified分别表示什么？",
+      "a": "Date表示服务器生成并发送响应报文的时间；Last-Modified表示对象创建或最后修改的时间。"
+    },
+    {
+      "q": "Content-Length和Content-Type分别有什么作用？",
+      "a": "Content-Length指示被发送对象的字节数，Content-Type指示实体体中对象的类型。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "HTTP请求报文格式",
+    "HTTP状态码"
+  ],
+  "source_pages": [
+    85,
+    88
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "221_http响应报文的基本格式与首部",
+  "_chunk_pages": [
+    85,
+    88
+  ]
+}

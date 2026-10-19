@@ -1,0 +1,51 @@
+{
+  "title": "RoundRobin时间片轮转调度",
+  "definition": "时间片轮转调度是一种循环分配有限资源的方法：资源列表中的对象按顺序依次获得一个时间片，处理到列表末尾后再回到第一个对象，如此循环。教材用RoundRobin类模板包装std::vector，为任意类型的资源提供添加、删除和循环取得下一个资源的功能。",
+  "key_points": [
+    "RoundRobin支持add()、remove()和getNext()三个核心操作。",
+    "资源按加入列表中的顺序轮流返回；到达最后一个资源后，下一次返回第一个资源。",
+    "资源保存在std::vector<T> m_elements中。",
+    "迭代器m_nextElement始终指向下一次调用getNext()时应返回的元素；尚未调用getNext()时，它指向begin(m_elements)。",
+    "构造函数可以接收预计元素数量，并用reserve()预留空间以提高效率。"
+  ],
+  "examples": [
+    "3个资源的返回顺序为：第1个、第2个、第3个、第1个、第2个……",
+    "一个典型接口可表示为：void add(const T& element); void remove(const T& element); T& getNext();",
+    "若没有元素，getNext()抛出std::out_of_range异常。"
+  ],
+  "misconceptions": [
+    "时间片轮转不是每次都从列表第一个元素重新开始，而是持续保存下一次应访问的位置。",
+    "getNext()返回的是当前资源的引用，并推进下一次访问位置。",
+    "RoundRobin不仅是一个普通vector，还维护了循环访问所需的迭代器状态。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "RoundRobin的getNext()按照什么顺序返回资源？",
+      "a": "从第一个资源开始按顺序返回，到达末尾后回到第一个资源，循环往复。"
+    },
+    {
+      "q": "当RoundRobin中没有资源时调用getNext()会怎样？",
+      "a": "会抛出std::out_of_range异常。"
+    },
+    {
+      "q": "RoundRobin为什么维护m_nextElement？",
+      "a": "它用于记录下一次调用getNext()应返回的元素位置。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "std::vector",
+    "迭代器基础"
+  ],
+  "source_pages": [
+    562,
+    564
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1162_roundrobin时间片轮转调度",
+  "_chunk_pages": [
+    561,
+    564
+  ]
+}

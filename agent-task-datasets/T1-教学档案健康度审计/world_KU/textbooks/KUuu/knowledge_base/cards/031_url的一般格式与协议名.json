@@ -1,0 +1,43 @@
+{
+  "title": "URL的一般格式与协议名",
+  "definition": "URL的一般格式为：协议名://主机名[:端口号][/文件夹名/文件名][?k1=v1&k2=v2][#SomeText]。原文给出的协议名示例包括http、https和mailto；其中http用于传送网页，mailto用于打开邮件客户端。",
+  "key_points": [
+    "协议名、主机名、端口号、路径、查询参数、片段标识符都可能出现在URL中",
+    "方括号中的部分表示可选项",
+    "http和https可用于传送网页",
+    "mailto用于打开邮件客户端"
+  ],
+  "examples": [
+    "http://主机名/文件夹名/文件名?k1=v1&k2=v2#SomeText",
+    "mailto:user@example.com"
+  ],
+  "misconceptions": [
+    "URL中的端口号、查询参数、锚点都必须出现",
+    "mailto只能用于打开网页"
+  ],
+  "qa_pairs": [
+    {
+      "q": "URL的一般格式是什么？",
+      "a": "协议名://主机名[:端口号][/文件夹名/文件名][?k1=v1&k2=v2][#SomeText]。"
+    },
+    {
+      "q": "教材举出的协议名示例有哪些？",
+      "a": "http、https、mailto。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "URL"
+  ],
+  "source_pages": [
+    21,
+    24
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "031_url的一般格式与协议名",
+  "_chunk_pages": [
+    21,
+    24
+  ]
+}

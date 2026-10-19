@@ -1,0 +1,48 @@
+{
+  "title": "grid-template-areas",
+  "definition": "grid-template-areas 是 CSS 网格容器属性，用于通过命名区域来定义网格布局。通过在字符串中排列区域名称，可以直观地描述网格中各区域的占位；原文示例还说明点号 . 表示空单元格。",
+  "key_points": [
+    "grid-template-areas 通过命名区域定义网格布局。",
+    "这种写法非常直观。",
+    "每一行用一个字符串表示，字符串中的名称对应网格区域。",
+    "点号 . 表示空单元格。"
+  ],
+  "examples": [
+    ".container {\n  display: grid;\n  grid-template-columns: repeat(4, 1fr);\n  grid-template-rows: auto 1fr auto;\n  grid-template-areas:\n    \"header header header header\"\n    \"main   main   .      sidebar\" /* . 表示空单元格 */\n    \"footer footer footer footer\";\n}"
+  ],
+  "misconceptions": [
+    "不要认为 grid-template-areas 是用数值尺寸来定义轨道；原文强调它是通过命名区域来定义网格布局。",
+    "不要把 . 当作区域名称；原文注释说明 . 表示空单元格。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "grid-template-areas 的作用是什么？",
+      "a": "通过命名区域来定义网格布局。"
+    },
+    {
+      "q": "在 grid-template-areas 中，点号 . 表示什么？",
+      "a": "表示空单元格。"
+    },
+    {
+      "q": "原文为什么说 grid-template-areas 直观？",
+      "a": "因为它通过命名区域的排列来描述网格布局。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "CSS 网格布局",
+    "网格容器",
+    "grid-template-columns 与 grid-template-rows"
+  ],
+  "source_pages": [
+    173,
+    176
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "252_grid_template_areas",
+  "_chunk_pages": [
+    173,
+    176
+  ]
+}

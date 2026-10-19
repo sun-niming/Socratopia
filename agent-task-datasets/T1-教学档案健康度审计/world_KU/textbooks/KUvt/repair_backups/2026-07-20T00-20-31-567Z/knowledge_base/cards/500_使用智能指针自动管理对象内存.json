@@ -1,0 +1,49 @@
+{
+  "title": "使用智能指针自动管理对象内存",
+  "definition": "使用智能指针管理动态创建的对象时，智能指针会在适当时机自动释放所管理的对象，因此通常不需要手动调用 `delete`。原文以 `std::make_unique<SpreadsheetCell>()` 创建由 `std::unique_ptr` 管理的 `SpreadsheetCell` 对象，并仍使用 `->` 访问其成员。",
+  "key_points": [
+    "原文推荐使用智能指针，以避免手动内存管理导致的错误。",
+    "`make_unique<SpreadsheetCell>()` 可创建一个由 `std::unique_ptr<SpreadsheetCell>` 管理的对象。",
+    "智能指针可以像普通对象指针一样使用箭头运算符访问成员。",
+    "使用智能指针时不需要手动释放其管理的对象。"
+  ],
+  "examples": [
+    "推荐写法：\n`auto myCellp{ std::make_unique<SpreadsheetCell>() };`\n`myCellp->setValue(3.7);`\n`std::cout << myCellp->getValue() << std::endl;`",
+    "原文给出的等价思路是：\n`std::unique_ptr<SpreadsheetCell> myCellp{ new SpreadsheetCell{} };`"
+  ],
+  "misconceptions": [
+    "使用智能指针并不意味着不能使用 `->`；智能指针通常通过 `->` 访问所管理对象的成员。",
+    "使用 `make_unique` 管理的对象通常不应再对同一对象手动调用 `delete`。",
+    "智能指针自动管理的是其所拥有的对象，不是任意一个与它无关的裸指针对象。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么原文建议使用智能指针？",
+      "a": "因为智能指针可以自动释放所管理对象的内存，减少忘记 `delete` 和由此产生的内存错误。"
+    },
+    {
+      "q": "如何创建一个由 `unique_ptr` 管理的 `SpreadsheetCell`？",
+      "a": "可以写作 `auto myCellp{ std::make_unique<SpreadsheetCell>() };`。"
+    },
+    {
+      "q": "使用智能指针访问对象成员时应使用什么运算符？",
+      "a": "使用箭头运算符 `->`，例如 `myCellp->setValue(3.7);`。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "自由存储区对象的访问与释放",
+    "指针与解引用"
+  ],
+  "source_pages": [
+    235,
+    235
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "500_使用智能指针自动管理对象内存",
+  "_chunk_pages": [
+    233,
+    236
+  ]
+}

@@ -1,0 +1,50 @@
+{
+  "title": "nmap基于TCP报文段的端口扫描",
+  "definition": "nmap可以通过向目标主机的特定TCP端口发送特殊TCP SYN报文段，并根据目标的响应判断端口状态。若收到SYNACK，通常判定端口打开；若收到RST，判定目标没有运行使用该端口的TCP应用，但说明报文到达了目标且未被路径中的防火墙阻挡；若什么也没有收到，则很可能是SYN被中间防火墙阻挡。",
+  "key_points": [
+    "扫描目标端口时，nmap向该端口发送TCP SYN。",
+    "收到SYNACK表示目标端口上有应用程序使用TCP监听，nmap报告“打开”。",
+    "收到RST表示报文到达目标，但目标端口没有运行相应TCP应用。",
+    "没有收到响应可能表示SYN被中间防火墙阻挡。",
+    "原文还指出，nmap不仅可扫描TCP和UDP端口，也可侦察防火墙配置、应用程序版本和操作系统。"
+  ],
+  "examples": [
+    "扫描目标TCP端口6789时：$$\\text{SYNACK}\\Rightarrow\\text{端口6789打开}$$ $$\\text{RST}\\Rightarrow\\text{报文到达但端口6789没有相应TCP应用}$$ $$\\text{无响应}\\Rightarrow\\text{很可能被中间防火墙阻挡}$$"
+  ],
+  "misconceptions": [
+    "收到RST不等于端口被防火墙阻挡；原文认为RST说明SYN已经到达目标主机。",
+    "没有收到响应只能说明很可能存在防火墙阻挡，不能据此绝对确定目标端口关闭。",
+    "nmap的功能不只包括扫描打开的TCP端口。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "nmap扫描某TCP端口时收到SYNACK，说明什么？",
+      "a": "说明目标主机上有应用程序使用该TCP端口运行，nmap将其报告为打开。"
+    },
+    {
+      "q": "nmap扫描某TCP端口时收到RST，说明什么？",
+      "a": "说明SYN已经到达目标主机，但目标主机没有运行使用该TCP端口的应用程序。"
+    },
+    {
+      "q": "nmap扫描时什么也没有收到，通常意味着什么？",
+      "a": "很可能是SYN报文段被中间的防火墙阻挡，无法到达目标主机。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "TCP三次握手",
+    "TCP RST报文段",
+    "端口与套接字"
+  ],
+  "source_pages": [
+    185,
+    188
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "453_nmap基于tcp报文段的端口扫描",
+  "_chunk_pages": [
+    185,
+    188
+  ]
+}

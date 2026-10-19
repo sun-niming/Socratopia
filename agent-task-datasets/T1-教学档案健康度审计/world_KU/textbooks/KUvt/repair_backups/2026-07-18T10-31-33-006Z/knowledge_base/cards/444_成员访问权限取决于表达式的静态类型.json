@@ -1,0 +1,45 @@
+{
+  "title": "成员访问权限取决于表达式的静态类型",
+  "definition": "访问类成员时，编译器依据访问表达式的静态类型检查 public、protected 和 private 权限，而不是依据对象运行时的实际派生类型。即使派生类通过 public using 声明重新公开了基类的 protected 成员，当同一个对象被当作基类引用或基类指针使用时，仍不能通过该基类类型访问原本受保护的成员。",
+  "key_points": [
+    "Blabber 对象可以通过 Blabber 类型的 public 接口访问被重新公开的 dontTell。",
+    "如果将该对象绑定为 Secret&，例如 Secret& ref { myBlabber };，则 ref.dontTell() 会报错。",
+    "如果将其地址保存为 Secret*，例如 Secret* ptr { &myBlabber };，则 ptr->dontTell() 也会报错。",
+    "运行时对象确实是 Blabber，并不会改变 Secret 类型接口中的 protected 访问限制。"
+  ],
+  "examples": [
+    "class Secret {\nprotected:\n    void dontTell();\n};\n\nclass Blabber : public Secret {\npublic:\n    using Secret::dontTell;\n};\n\nBlabber myBlabber;\nSecret& ref { myBlabber };\nSecret* ptr { &myBlabber };\n\nref.dontTell();   // 错误：尝试访问 protected 方法\nptr->dontTell();  // 错误：尝试访问 protected 方法"
+  ],
+  "misconceptions": [
+    "对象的实际类型是 Blabber，并不意味着通过 Secret& 或 Secret* 就能使用 Blabber 重新公开的成员。",
+    "public 继承不会把基类的 protected 成员自动变成 public；需要在派生类中显式使用合适访问区域的 using 声明。",
+    "访问权限不是根据指针或引用运行时指向的对象类型决定的，而是根据指针或引用表达式的静态类型决定的。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么 Secret& ref { myBlabber }; ref.dontTell() 会报错？",
+      "a": "因为 ref 的静态类型是 Secret，Secret::dontTell() 是 protected。访问检查依据 Secret 类型进行，而不是依据它实际引用的 Blabber 对象进行。"
+    },
+    {
+      "q": "为什么 ptr->dontTell() 也会报错？",
+      "a": "ptr 的静态类型是 Secret*，通过它访问成员时依据 Secret 的访问权限检查，因此不能访问 Secret::dontTell() 这个 protected 成员。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++继承中的访问控制",
+    "C++ using声明改变成员访问级别",
+    "C++引用和指针的静态类型"
+  ],
+  "source_pages": [
+    342,
+    343
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "444_成员访问权限取决于表达式的静态类型",
+  "_chunk_pages": [
+    341,
+    344
+  ]
+}

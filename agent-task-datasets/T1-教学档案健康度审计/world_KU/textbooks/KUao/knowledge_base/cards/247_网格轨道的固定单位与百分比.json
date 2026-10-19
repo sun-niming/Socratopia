@@ -1,0 +1,41 @@
+{
+  "title": "网格轨道的固定单位与百分比",
+  "definition": "定义网格轨道尺寸时，可以使用固定长度单位和百分比。原文列出的固定单位包括 px、em、rem；百分比使用 % 表示。它们都可作为 grid-template-columns 或 grid-template-rows 的轨道尺寸值。",
+  "key_points": [
+    "固定单位示例包括 px、em、rem。",
+    "百分比单位使用 %。",
+    "这些单位用于指定网格列或行的轨道尺寸。"
+  ],
+  "examples": [
+    ".container {\n  grid-template-columns: 100px 1fr 2fr;\n  grid-template-rows: 50px 50px;\n}"
+  ],
+  "misconceptions": [
+    "不要把 px、em、rem、% 看成只能用于普通盒模型尺寸；在原文中它们也用于定义网格轨道尺寸。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "原文列出的定义网格轨道的固定单位有哪些？",
+      "a": "px、em、rem。"
+    },
+    {
+      "q": "定义网格轨道时，百分比单位如何表示？",
+      "a": "使用 % 表示。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "CSS 长度单位",
+    "CSS 网格布局"
+  ],
+  "source_pages": [
+    173,
+    176
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "247_网格轨道的固定单位与百分比",
+  "_chunk_pages": [
+    173,
+    176
+  ]
+}

@@ -1,0 +1,48 @@
+{
+  "title": "使用static指定内部链接",
+  "definition": "在函数或全局变量的声明前使用static，可以将其链接属性指定为内部链接，使该名称只在当前源文件中有效。只要static出现在函数名称第一次声明之前，通常不需要在该函数定义前再次重复写static。若另一个源文件试图调用该内部链接函数，程序可能在编译各源文件时没有问题，但会在链接时失败。",
+  "key_points": [
+    "static用于文件作用域函数或全局变量时，可以限制名称的链接范围。",
+    "内部链接意味着其他源文件不能使用该名称。",
+    "函数声明中的static属性应在函数名称第一次出现之前指定。",
+    "仅在定义处使用static而让其他文件按外部函数调用，可能导致链接失败。"
+  ],
+  "examples": [
+    "AnotherFile.cpp：\nstatic void f();\n\nvoid f() {\n    // 函数定义处不必再次写static\n}\n\n如果FirstFile.cpp尝试调用f，由于f在AnotherFile.cpp中具有内部链接，链接会失败。"
+  ],
+  "misconceptions": [
+    "这里的static不是让函数成为类的静态成员函数；文件作用域的static用于指定内部链接。",
+    "各源文件能够分别编译成功，不代表跨文件调用一定能在链接阶段成功。",
+    "函数定义处不重复写static的前提是此前已经在函数名称第一次声明处指定了static。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "在文件作用域函数声明前加static有什么效果？",
+      "a": "使该函数具有内部链接，只能在当前源文件中使用。"
+    },
+    {
+      "q": "为什么FirstFile.cpp调用AnotherFile.cpp中的static函数会导致链接失败？",
+      "a": "因为该函数具有内部链接，FirstFile.cpp无法从其他源文件引用它。"
+    },
+    {
+      "q": "如果static已经写在函数的首次声明前，定义处还需要重复写吗？",
+      "a": "不需要。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "外部链接与内部链接",
+    "函数声明与定义"
+  ],
+  "source_pages": [
+    363,
+    364
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "735_使用static指定内部链接",
+  "_chunk_pages": [
+    361,
+    364
+  ]
+}

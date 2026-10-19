@@ -1,0 +1,52 @@
+{
+  "title": "std::accumulate() 使用自定义二元操作",
+  "definition": "std::accumulate() 的另一种重载允许调用者提供一个二元操作，用它替代默认的加法。该操作接收当前累计值和范围中的下一个元素，并返回新的累计值。",
+  "key_points": [
+    "自定义操作可以是普通函数、函数对象或 lambda 表达式。",
+    "计算乘积时，初始值应使用乘法的恒等值 $1$。",
+    "对 $m$ 个数求几何平均数时，先计算乘积，再计算乘积的 $m$ 次方根：$$G=\\left(\\prod_{i=1}^{m}x_i\\right)^{1/m}$$。",
+    "原文示例使用 `pow(mult, 1.0 / values.size())` 计算几何平均数，`pow()` 需要 `<cmath>`。"
+  ],
+  "examples": [
+    "使用普通函数计算乘积：`int product(int value1, int value2) { return value1 * value2; }`，然后调用 `accumulate(cbegin(values), cend(values), 1, product)`。",
+    "使用 lambda：`accumulate(cbegin(values), cend(values), 1, [](int value1, int value2) { return value1 * value2; })`。",
+    "使用透明函数对象：`accumulate(cbegin(values), cend(values), 1, multiplies<>{})`。"
+  ],
+  "misconceptions": [
+    "自定义二元操作不是只接收一个元素；它需要参与更新累计值。",
+    "计算乘积时不能把初始值设为 0，否则整个乘积会变成 0。",
+    "几何平均数不是简单的算术平均数，而是乘积的 $m$ 次方根。",
+    "`accumulate()` 的自定义操作不会自动改变为乘法；必须显式传入操作。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何使用 std::accumulate() 计算一组数的乘积？",
+      "a": "将初始值设为 1，并传入乘法函数、乘法 lambda 或 `multiplies<>{}`，例如 `accumulate(first, last, 1, multiplies<>{})`。"
+    },
+    {
+      "q": "包含 $m$ 个数字的几何平均数如何计算？",
+      "a": "先求所有数字的乘积 $P=\\prod_{i=1}^{m}x_i$，再计算 $P^{1/m}$，即 $G=\\left(\\prod_{i=1}^{m}x_i\\right)^{1/m}$。"
+    },
+    {
+      "q": "std::accumulate() 的自定义操作可以用哪些形式提供？",
+      "a": "可以使用普通函数、函数对象或 lambda 表达式。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "std::accumulate() 的求和与初始值",
+    "lambda 表达式",
+    "函数对象"
+  ],
+  "source_pages": [
+    631,
+    632
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 std::accumulate binary operation argument order and multiplies official reference",
+  "concept_id": "1307_std_accumulate_使用自定义二元操作",
+  "_chunk_pages": [
+    629,
+    632
+  ]
+}

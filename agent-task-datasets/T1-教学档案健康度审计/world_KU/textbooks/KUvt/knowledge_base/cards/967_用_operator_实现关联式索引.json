@@ -1,0 +1,44 @@
+{
+  "title": "用 operator[] 实现关联式索引",
+  "definition": "下标运算符的参数不必是整数，也可以是任意适合作为键的类型。此时，operator[] 可以看作从键域到值域的映射：输入一个键，得到对应的值。标准库关联容器如 `std::map` 就采用了这种思想，因此可以构造使用字符串或 `std::string_view` 作为键的关联数组。",
+  "key_points": [
+    "线性数组是关联映射的特例，其键只是元素位置。",
+    "自定义关联数组可以让 operator[] 接收字符串或 `std::string_view`。",
+    "键的类型不必是整数类型。"
+  ],
+  "examples": [
+    "概念性用法：\n```cpp\nAssociativeArray<int> values;\nvalues[\"apple\"] = 10;\nstd::cout << values[\"apple\"];\n```",
+    "标准库中的类似思想是：\n```cpp\nstd::map<std::string, int> values;\n```"
+  ],
+  "misconceptions": [
+    "operator[] 的参数只能是 `size_t` 或其他整数；错误，关联式索引可以使用字符串等键类型。",
+    "所有使用 operator[] 的容器都是线性数组；错误，关联容器把键映射到值。",
+    "键和值必须是同一种类型；错误，键类型和值类型可以不同。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何理解 operator[] 在关联数组中的作用？",
+      "a": "可以把它理解为从键域到值域的映射：给定一个键，operator[] 返回与该键关联的值。"
+    },
+    {
+      "q": "关联数组的 operator[] 参数可以使用什么类型？",
+      "a": "可以使用任意合适的键类型，例如字符串或 `std::string_view`，不必是整数。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "运算符重载基础",
+    "关联容器与键值映射"
+  ],
+  "source_pages": [
+    483,
+    483
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "967_用_operator_实现关联式索引",
+  "_chunk_pages": [
+    481,
+    484
+  ]
+}

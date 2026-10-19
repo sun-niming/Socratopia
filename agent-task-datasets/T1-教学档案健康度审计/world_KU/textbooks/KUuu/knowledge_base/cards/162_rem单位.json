@@ -1,0 +1,36 @@
+{
+  "title": "rem单位",
+  "definition": "原文将rem说明为相对根元素字体尺寸；但截图中同时出现“（相对父元素尺寸）”的括注，表述存在歧义，需进一步核实教材原意。",
+  "key_points": [
+    "rem被列为常用相对单位之一。",
+    "原文对rem的解释存在歧义，需要核实。"
+  ],
+  "examples": [
+    "rem"
+  ],
+  "misconceptions": [
+    "把rem直接当作绝对单位。",
+    "不加核实就把括注中的说法当作确定结论。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "原文中对rem的说明是什么？",
+      "a": "原文写作“rem 相对根元素字体尺寸”，但截图中还出现“（相对父元素尺寸）”的括注，表述有歧义，需核实。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "相对单位"
+  ],
+  "source_pages": [
+    105,
+    108
+  ],
+  "needs_verification": true,
+  "verify_query": "CSS rem 单位 相对根元素字体尺寸 还是 相对父元素尺寸 教材 原文 核实",
+  "concept_id": "162_rem单位",
+  "_chunk_pages": [
+    105,
+    108
+  ]
+}

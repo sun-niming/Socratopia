@@ -1,0 +1,49 @@
+{
+  "title": "引用限定方法",
+  "definition": "引用限定符（ref-qualifier）用于限制非静态成员方法只能由特定类别的对象调用：在方法末尾添加 `&`，表示只能由非临时对象（左值对象）调用；添加 `&&`，表示只能由临时对象或通过 `std::move` 转换得到的右值对象调用。可以为同名方法分别提供 `&` 和 `&&` 版本。",
+  "key_points": [
+    "`&` 限定的方法适用于非临时实例，例如具有名称的普通对象。",
+    "`&&` 限定的方法适用于临时实例，以及使用 `std::move` 转换后的对象。",
+    "同名的 `&` 和 `&&` 方法可以根据调用对象是左值还是右值自动选择。",
+    "示例中的 `&` 版本返回成员字符串的 `const` 引用；`&&` 版本返回成员字符串的右值引用，以便从临时对象中移动字符串。"
+  ],
+  "examples": [
+    "```cpp\nclass TextHolder {\npublic:\n    TextHolder(std::string text) : m_text{std::move(text)} {}\n\n    const std::string& getText() const & { return m_text; }\n    std::string&& getText() && { return std::move(m_text); }\n\nprivate:\n    std::string m_text;\n};\n\nTextHolder textHolder{\"Hello world!\"};\ntextHolder.getText();                       // 调用 & 版本\nTextHolder{\"Hello world!\"}.getText();      // 调用 && 版本\nstd::move(textHolder).getText();            // 调用 && 版本\n```"
+  ],
+  "misconceptions": [
+    "普通成员方法默认既可以由非临时对象调用，也可以由临时对象调用；只有添加引用限定符后，才能限制调用对象类别。",
+    "`std::move` 本身不移动对象；它将表达式转换为右值类别，使其能够匹配 `&&` 限定的方法，并允许方法内部执行移动。",
+    "`&&` 限定并不表示方法返回值一定是右值引用；它限制的是方法的调用对象类别。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`getText() const &` 可以由哪些对象调用？",
+      "a": "只能由非临时对象、也就是左值对象调用。"
+    },
+    {
+      "q": "下面三次调用分别选择哪个重载：`textHolder.getText()`、`TextHolder{\"Hello world!\"}.getText()`、`std::move(textHolder).getText()`？",
+      "a": "第一次选择 `&` 限定版本；第二次和第三次选择 `&&` 限定版本。"
+    },
+    {
+      "q": "为什么示例中的 `&&` 版本返回 `std::string&&`？",
+      "a": "因为它针对临时 `TextHolder` 或可被移动的右值对象，返回成员字符串的右值引用，从而可以将成员字符串移出对象。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "左值与右值",
+    "成员函数重载",
+    "移动语义"
+  ],
+  "source_pages": [
+    281,
+    282
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "589_引用限定方法",
+  "_chunk_pages": [
+    281,
+    284
+  ]
+}

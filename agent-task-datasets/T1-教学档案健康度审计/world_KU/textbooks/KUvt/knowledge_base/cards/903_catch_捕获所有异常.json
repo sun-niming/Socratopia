@@ -1,0 +1,49 @@
+{
+  "title": "catch (...) 捕获所有异常",
+  "definition": "catch (...) 是C++中匹配所有异常类型的通配 catch 处理程序。它可以作为默认处理程序，捕获前面没有被特定类型 catch 处理的其他异常。由于它无法区分异常类型，因此当已知可能抛出的异常集合时，通常应优先显式匹配具体异常类型并采取针对性处理。",
+  "key_points": [
+    "catch (...) 中的三个点是与所有异常类型匹配的通配符，不是语法错误。",
+    "它通常放在具体类型 catch 之后。",
+    "异常会按照 catch 的书写顺序匹配。",
+    "catch (...) 适合调用缺乏文档的代码时作为兜底处理程序。",
+    "如果异常类型信息完整，显式匹配通常比统一处理所有异常更好。"
+  ],
+  "examples": [
+    "具体处理已知异常，并用通配 catch 兜底：\ntry {\n    // 可能抛出异常的代码\n} catch (const invalid_argument& e) {\n    // 处理 invalid_argument\n} catch (const runtime_error& e) {\n    // 处理 runtime_error\n} catch (...) {\n    // 处理其他所有异常\n}"
+  ],
+  "misconceptions": [
+    "错误地认为 catch (...) 只能捕获 exception 派生类。实际上它可以匹配所有异常类型，包括 int 等异常。",
+    "错误地把 catch (...) 放在具体 catch 前面，导致后面的具体处理程序无法匹配。",
+    "错误地认为 catch (...) 能直接提供异常对象的具体类型或错误信息。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "catch (...) 的作用是什么？",
+      "a": "它匹配所有异常类型，可作为默认或兜底的 catch 处理程序。"
+    },
+    {
+      "q": "catch (...) 应该放在具体类型的 catch 前面还是后面？",
+      "a": "通常应放在具体类型 catch 后面，否则它会先匹配所有异常，使后面的具体 catch 无法执行。"
+    },
+    {
+      "q": "为什么不能总是只使用 catch (...)？",
+      "a": "因为它把所有异常一视同仁，无法针对不同异常类型采取恰当操作；已知异常类型时应显式匹配。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "多个 catch 的匹配顺序",
+    "异常类型"
+  ],
+  "source_pages": [
+    444,
+    444
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "903_catch_捕获所有异常",
+  "_chunk_pages": [
+    441,
+    444
+  ]
+}

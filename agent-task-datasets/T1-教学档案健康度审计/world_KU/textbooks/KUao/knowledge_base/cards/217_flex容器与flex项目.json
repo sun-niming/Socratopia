@@ -1,0 +1,36 @@
+{
+  "title": "Flex容器与Flex项目",
+  "definition": "采用Flex布局的元素称为Flex容器（flex container，简称容器）。容器中的所有子元素会自动成为Flex项目（flex item，简称项目）。",
+  "key_points": [
+    "Flex布局元素叫做Flex容器",
+    "Flex容器的所有子元素自动成为Flex项目",
+    "容器与项目是Flex布局中的基本角色区分"
+  ],
+  "examples": [
+    "<div style=\"display:flex\"><div>A</div><div>B</div></div> 其中外层div是Flex容器，内层两个div是Flex项目。"
+  ],
+  "misconceptions": [
+    "只有手动指定某些子元素才会成为Flex项目"
+  ],
+  "qa_pairs": [
+    {
+      "q": "Flex容器和Flex项目分别指什么？",
+      "a": "采用Flex布局的元素叫Flex容器，容器中的所有子元素自动成为Flex项目。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "通过display:flex定义Flex容器"
+  ],
+  "source_pages": [
+    149,
+    152
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "217_flex容器与flex项目",
+  "_chunk_pages": [
+    149,
+    152
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "title": "使用 new(nothrow) 处理动态分配失败",
+  "definition": "C++ 支持使用 new(std::nothrow) 进行动态内存分配。与普通 new 在分配失败时抛出异常不同，new(std::nothrow) 在分配失败时返回 nullptr，因此调用者应检查返回的指针是否为 nullptr。",
+  "key_points": [
+    "new(std::nothrow) 可以在分配失败时返回 nullptr。",
+    "使用 new(std::nothrow) 后应检查所得指针，避免对 nullptr 解引用。",
+    "该形式既可用于单个对象，也可用于动态数组。"
+  ],
+  "examples": [
+    "单个整数的分配：int* ptr { new(std::nothrow) int };",
+    "动态数组的分配：int* myArrayPtr { new(std::nothrow) int[5] };",
+    "使用前应检查：if (myArrayPtr != nullptr) { /* 使用数组 */ }"
+  ],
+  "misconceptions": [
+    "new(std::nothrow) 并不保证分配一定成功；它只是把失败结果表示为 nullptr。",
+    "new(std::nothrow) 返回 nullptr 后不能直接解引用。",
+    "new(std::nothrow) 仍然是 new 表达式，释放方式仍应与对象或数组形式匹配。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "new(std::nothrow) 分配失败时会发生什么？",
+      "a": "分配失败时返回 nullptr，而不是像普通 new 那样抛出异常。"
+    },
+    {
+      "q": "为什么使用 new(std::nothrow) 后要检查 nullptr？",
+      "a": "因为分配可能失败并返回 nullptr，如果不检查就解引用该指针，会造成错误。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "new 与 delete",
+    "nullptr 与指针判空"
+  ],
+  "source_pages": [
+    201,
+    203
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 new(std::nothrow) 分配失败 nullptr 普通 new 抛出异常 教材第201页第203页",
+  "concept_id": "268_使用_new_nothrow_处理动态分配失败",
+  "_chunk_pages": [
+    201,
+    204
+  ]
+}

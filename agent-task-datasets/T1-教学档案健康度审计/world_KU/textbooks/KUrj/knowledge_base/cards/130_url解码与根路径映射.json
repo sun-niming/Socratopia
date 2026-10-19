@@ -1,0 +1,39 @@
+{
+  "title": "URL解码与根路径映射",
+  "definition": "在发送静态文件前，先对 `url_path` 调用 `url_decode` 得到 `decoded`，再调用 `validate_url_path` 做基础安全检查。若任一步失败，就返回 `403 Forbidden`。随后令 `rel = decoded + 1`，即去掉开头的 `/`；如果 `decoded[1] == '\\0'`，说明请求路径是根路径 `/`，此时实际相对路径改用 `config->index`。",
+  "key_points": [
+    "`url_decode(url_path, decoded, sizeof(decoded))` 失败时应直接拒绝。",
+    "`validate_url_path(decoded)` 失败时应直接返回 403。",
+    "普通路径通过 `rel = decoded + 1` 转成相对路径；根路径 `/` 映射到 `config->index`。"
+  ],
+  "examples": [
+    "`/` 会被映射为 `config->index`。",
+    "`/practice.html` 会先解码，再把去掉首字符后的相对路径用于后续拼接。"
+  ],
+  "misconceptions": [
+    "直接拿原始 URL 拼接本地路径是不安全的。",
+    "根路径 `/` 不是拼成空字符串，而是显式使用 `config->index`。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么访问 `/` 时不会使用空相对路径，而是使用 `config->index`？",
+      "a": "因为代码检查到 `decoded[1] == '\\0'` 时会把相对路径改为 `config->index`，也就是让根路径返回首页文件。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "HTTP URL 基础",
+    "路径安全校验"
+  ],
+  "source_pages": [
+    85,
+    88
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "130_url解码与根路径映射",
+  "_chunk_pages": [
+    85,
+    88
+  ]
+}

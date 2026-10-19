@@ -1,0 +1,37 @@
+{
+  "title": "next数组的含义",
+  "definition": "next数组记录模式串内部的最长相等前后缀信息；教材强调它只依赖模式串本身，与文本串无关。它的作用是为KMP匹配中的跳转提供依据。",
+  "key_points": [
+    "next数组由模式串单独决定",
+    "next数组本质上体现模式串的自重复结构",
+    "它用于支持匹配过程中的跳转与复用"
+  ],
+  "examples": [
+    "模式 ababaca 的相关前后缀长度信息可写成 0,0,1,2,3,0,1"
+  ],
+  "misconceptions": [
+    "next数组需要先看文本串才能计算",
+    "next数组记录的是字符是否相等的全部历史，而不是前后缀复用信息"
+  ],
+  "qa_pairs": [
+    {
+      "q": "next数组为什么与文本无关？",
+      "a": "因为它描述的是模式串自身的最长相等前后缀信息，只反映模式串内部结构，不依赖文本串。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "前缀、后缀与最长相等前后缀"
+  ],
+  "source_pages": [
+    85,
+    88
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "093_next数组的含义",
+  "_chunk_pages": [
+    85,
+    88
+  ]
+}

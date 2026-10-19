@@ -1,0 +1,41 @@
+{
+  "title": "graph_node 原始内存分配实现的异常安全问题",
+  "definition": "如果 graph_node 先通过分配器分配一块用于存放 $T$ 的原始内存，再使用 placement new 构造 $T$，而 $T$ 的构造函数抛出异常，那么 graph_node 对象尚未完成构造，其析构函数不会被调用，已分配的内存可能无法释放，从而造成资源泄漏。",
+  "key_points": [
+    "原始实现大致为：先执行 $\\texttt{m_data = m_allocator.allocate(1);}$，再执行 $\\texttt{new(m_data) T\\\\{t\\\\};}$。",
+    "如果第二步构造 $T$ 抛出异常，graph_node 的析构函数不会执行。",
+    "由于析构函数没有机会释放 $m_data$，前一步分配的存储就可能泄漏。",
+    "该问题属于异常安全问题，核心是资源分配与对象构造之间缺少异常发生时的清理机制。"
+  ],
+  "examples": [
+    "可能产生问题的顺序：$\\texttt{m_data = m_allocator.allocate(1);}$；随后 $\\texttt{new(m_data) T\\\\{t\\\\};}$。若 $T$ 构造函数抛异常，graph_node 析构函数不会被调用。"
+  ],
+  "misconceptions": [
+    "分配成功并不代表对象已经完全构造成功。",
+    "构造函数抛异常时，正在构造对象自身的析构函数不会被调用；已经完成构造的基类子对象则会被销毁。",
+    "不能只依赖 graph_node 的析构函数来处理构造阶段发生的异常。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "原始 graph_node 实现为什么不是异常安全的？",
+      "a": "因为它先分配 $m_data$，再构造 $T$。如果 $T$ 的构造函数抛出异常，graph_node 尚未完成构造，graph_node 的析构函数不会被调用，因此已分配的内存可能无法释放。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++对象构造与析构顺序",
+    "placement new",
+    "C++异常安全"
+  ],
+  "source_pages": [
+    750,
+    750
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1553_graph_node_原始内存分配实现的异常安全问题",
+  "_chunk_pages": [
+    749,
+    752
+  ]
+}

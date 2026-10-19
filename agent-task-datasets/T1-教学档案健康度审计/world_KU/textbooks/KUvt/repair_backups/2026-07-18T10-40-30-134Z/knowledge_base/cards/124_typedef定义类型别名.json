@@ -1,0 +1,45 @@
+{
+  "title": "typedef定义类型别名",
+  "definition": "`typedef` 也可以为已有类型定义别名。原文中 `typedef int* IntPtr;` 与 `using IntPtr = int*;` 表示相同的类型别名关系，二者都使 `IntPtr` 表示 `int*`。",
+  "key_points": [
+    "`typedef` 的基本形式为 `typedef 原类型 别名;`。",
+    "`typedef int* IntPtr;` 等价于 `using IntPtr = int*;`。",
+    "`typedef` 与 `using` 创建的都是类型别名，而不是新类型。",
+    "原文将 `using` 形式与传统 `typedef` 形式并列对比。"
+  ],
+  "examples": [
+    "`typedef int* IntPtr; IntPtr p;` 等价于 `int* p;`。",
+    "两种写法对比：`using IntPtr = int*;` 与 `typedef int* IntPtr;`。"
+  ],
+  "misconceptions": [
+    "`typedef` 不是定义变量；它定义的是类型名称。",
+    "`typedef int* IntPtr;` 中 `IntPtr` 是指针类型别名，不是 int 类型别名。",
+    "`using` 和 `typedef` 在这里不是定义两个不同类型，而是为同一个底层类型提供别名。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何用 typedef 为 `int*` 定义别名 `IntPtr`？",
+      "a": "写作 `typedef int* IntPtr;`。"
+    },
+    {
+      "q": "`typedef int* IntPtr;` 与 `using IntPtr = int*;` 有什么关系？",
+      "a": "两者都把 `IntPtr` 定义为 `int*` 的类型别名。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "类型声明",
+    "指针"
+  ],
+  "source_pages": [
+    85,
+    88
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "124_typedef定义类型别名",
+  "_chunk_pages": [
+    85,
+    88
+  ]
+}

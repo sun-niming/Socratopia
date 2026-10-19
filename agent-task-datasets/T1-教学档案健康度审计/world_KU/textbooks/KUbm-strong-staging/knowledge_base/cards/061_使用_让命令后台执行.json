@@ -1,0 +1,38 @@
+{
+  "title": "使用 & 让命令后台执行",
+  "definition": "在命令后加上 &，可将命令放到后台执行，从而释放 shell 提示符。教材给出的形式是“命令 &”。",
+  "key_points": [
+    "写法：命令 &",
+    "作用：将命令放到后台执行",
+    "效果：释放 shell 提示符"
+  ],
+  "examples": [
+    "命令 &"
+  ],
+  "misconceptions": [
+    "不要把 & 误解为结束命令；教材说明它的作用是让命令在后台执行"
+  ],
+  "qa_pairs": [
+    {
+      "q": "怎样把一个命令放到后台执行？",
+      "a": "在命令后加上 &。"
+    },
+    {
+      "q": "命令后加 & 有什么效果？",
+      "a": "将命令放到后台执行，释放 shell 提示符。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [],
+  "source_pages": [
+    29,
+    32
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "061_使用_让命令后台执行",
+  "_chunk_pages": [
+    29,
+    32
+  ]
+}

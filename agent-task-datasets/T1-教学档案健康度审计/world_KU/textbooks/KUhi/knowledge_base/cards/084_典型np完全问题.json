@@ -1,0 +1,37 @@
+{
+  "title": "典型NP完全问题",
+  "definition": "课程中常见的典型NP完全问题包括SAT、团、顶点覆盖、哈密顿回路、TSP判定版等。对这类问题，算法设计课强调理解其往往需要指数搜索、近似或启发式方法。",
+  "key_points": [
+    "这些问题是理解NP完全性的代表性例子",
+    "对大规模实例，直接精确求解通常代价很高",
+    "学习重点不只是证明，而是理解求解思路为什么会转向指数搜索、近似或启发式"
+  ],
+  "examples": [
+    "SAT、团、顶点覆盖、哈密顿回路、TSP判定版"
+  ],
+  "misconceptions": [
+    "以为教材列出的这些问题都必须会完整证明",
+    "以为NP完全问题只能靠一个固定的精确算法解决"
+  ],
+  "qa_pairs": [
+    {
+      "q": "教材中提到的典型NP完全问题有哪些？",
+      "a": "SAT、团、顶点覆盖、哈密顿回路、TSP判定版等。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "NP-hard与NP-complete区别"
+  ],
+  "source_pages": [
+    77,
+    80
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "084_典型np完全问题",
+  "_chunk_pages": [
+    77,
+    80
+  ]
+}

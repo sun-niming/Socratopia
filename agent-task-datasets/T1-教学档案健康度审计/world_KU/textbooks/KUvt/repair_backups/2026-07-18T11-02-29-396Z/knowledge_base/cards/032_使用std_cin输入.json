@@ -1,0 +1,42 @@
+{
+  "title": "使用std::cin输入",
+  "definition": "`std::cin` 是标准输入流对象，可以使用提取运算符 `>>` 从标准输入读取数据，并将转换后的值存入变量。变量的类型决定了输入数据应如何被解释。",
+  "key_points": [
+    "`std::cin` 位于 `std` 命名空间中。",
+    "输入运算符为 `>>`。",
+    "运算符右侧通常是接收输入值的变量。"
+  ],
+  "examples": [
+    "int value;\nstd::cin >> value;"
+  ],
+  "misconceptions": [
+    "不要把 `std::cin` 的运算符写成输出用的 `<<`。",
+    "输入目标应是可写变量，不能把普通数值字面量放在 `>>` 右侧接收输入。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何从标准输入读取一个整数并保存到变量 `value`？",
+      "a": "先声明 `int value;`，再执行 `std::cin >> value;`。"
+    },
+    {
+      "q": "`std::cin` 使用哪个运算符读取数据？",
+      "a": "提取运算符 `>>`。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "变量",
+    "基本数据类型"
+  ],
+  "source_pages": [
+    37,
+    40
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "032_使用std_cin输入",
+  "_chunk_pages": [
+    37,
+    40
+  ]
+}

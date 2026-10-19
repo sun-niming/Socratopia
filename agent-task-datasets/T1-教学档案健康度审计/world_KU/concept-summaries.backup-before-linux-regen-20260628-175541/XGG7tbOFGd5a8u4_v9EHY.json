@@ -1,0 +1,152 @@
+{
+  "conversationId": "XGG7tbOFGd5a8u4_v9EHY",
+  "generatedAt": 1781171364588,
+  "pagesRange": null,
+  "sections": [
+    {
+      "type": "tldr",
+      "content": "本节核心：掌握 Vim 的复制范围与常用配置写法，并理解 Bash 如何解释命令、查找命令、使用补全/别名/历史命令。"
+    },
+    {
+      "type": "narrative",
+      "content": "这节课先从 Vim 的复制命令开始，把按字符范围、按行号范围、按结构范围的复制区别梳理清楚；随后进入 Vim 配置，区分临时末行命令和永久写入 `.vimrc` 的写法。后半段切到 Shell，围绕“Shell 如何解释并组织命令执行”，学习了管道、重定向、命令查找顺序、`type`、补全、别名和历史命令。"
+    },
+    {
+      "type": "concepts",
+      "items": [
+        {
+          "name": "Vim 复制命令：按当前位置与文本对象复制",
+          "body": "常见复制命令：\n\n```vim\\nyy    复制当前行\n3yy   从当前行开始复制 3 行\\np     粘贴到下面\\nP     粘贴到上面\\ny$    从当前位置复制到行尾\\ny^    从当前位置复制到行首的第一个非空白字符\\ny0    从当前位置复制到真正行首\\nyw    从当前位置复制到一个单词的末尾\\ny%    复制到与当前括号匹配的位置\n```\n\n重点区别：\n\n- `y^`：复制到**第一个非空白字符**，不包含行首缩进。\n- `y0`：复制到**真正行首**，如果前面有缩进，会把缩进也带上。\n- `y$`：复制到行尾。\n- `yw`：偏向复制单词范围。\n- `y%`：偏向复制括号等匹配结构。"
+        },
+        {
+          "name": "Vim 末行模式按行号范围复制",
+          "body": "格式：\n\n```vim\n:起始行,结束行y\n```\n\n例子：\n\n```vim\n:10,15y   复制第 10 行到第 15 行\n:1,20y    复制第 1 行到第 20 行\n:.,12y    从当前行复制到第 12 行\n:.,$y     从当前行复制到最后一行\n:%y       复制全文\n```\n\n符号含义：\n\n- `.`：当前行。\n- `$`：最后一行。\n- `%`：整个文件范围。\n- 行号范围中间用英文逗号 `,`，不是点号 `.`。"
+        },
+        {
+          "name": "Vim 常用显示与编辑配置",
+          "body": "临时设置：在 Vim 末行模式中输入，要带英文半角冒号 `:`。\n\n```vim\n:set nu          \" 显示行号\n:set number      \" 显示行号，完整写法\n:set nonu        \" 取消行号\n:set nonumber    \" 取消行号，完整写法\n:set ts=4        \" Tab 显示宽度设为 4\n:set tabstop=4   \" Tab 显示宽度设为 4，完整写法\n:set sm          \" 开启括号匹配\n:set showmatch   \" 开启括号匹配，完整写法\n```\n\n注意：\n\n- `ts` 是 `tabstop`，表示 Tab 的**显示宽度**，不等于一定真的插入对应数量的空格。\n- `:set ts=4` 中等号两边不要加空格。\n- 末行模式用英文半角 `:`，不是中文全角 `：`。"
+        },
+        {
+          "name": "`.vimrc`：让 Vim 配置永久生效",
+          "body": "如果只在 Vim 里临时输入 `:set ...`，关闭 Vim 后设置可能失效。若想每次启动 Vim 都自动生效，要写进用户主目录下的 `.vimrc`。\n\n`.vimrc` 中一般不写前面的冒号：\n\n```vim\\nset nu\\nset ts=4\\nset sm\n```\n\n对应含义：\n\n- `set nu`：启动时显示行号。\n- `set ts=4`：Tab 显示宽度固定为 `4`。\n- `set sm`：开启括号匹配。\n\n写配置文件时通常一条配置占一行，不建议写成 `set nu; set ts=4; set sm`。"
+        },
+        {
+          "name": "Shell 的核心作用：解释命令并组织执行",
+          "body": "Shell 是用户和内核之间的接口。它把用户输入的命令解释成系统能执行的请求，并在执行前处理一些特殊结构，例如：\n\n- 通配符\n- 变量替换\n- 重定向\n- 管道\n- 作业控制\n\n课堂中对 Shell 的理解是：它让用户更方便地操作系统，但要注意 Shell 不一定保证“安全”；危险命令如果输入了，它也可能照样执行。更准确地说，Shell 的核心是**解释命令并组织执行**。"
+        },
+        {
+          "name": "管道与重定向",
+          "body": "例子：\n\n```bash\\ngrep \"love\" a.txt | wc -l > count.txt\n```\n\\nShell 在执行前会识别两个关键结构：\n\n- `|`：管道，把前一个命令的输出交给后一个命令。\n- `>`：输出重定向，把标准输出覆盖写入文件。\n\n这条命令的过程：\n\n1. `grep \"love\" a.txt`：找出 `a.txt` 中包含 `love` 的行。\n2. `wc -l`：统计这些行的行数。\n3. `> count.txt`：把统计结果覆盖保存到 `count.txt`。"
+        },
+        {
+          "name": "Bash 查找命令的顺序与 `type`",
+          "body": "Bash 遇到一个命令名时，大致按这个顺序查找：\n\n1. 别名\n2. 内置命令\n3. `PATH` 里的外部命令\n\n例如设置：\n\n```bash\\nalias ls='ls --color=auto'\n```\n\n之后输入 `ls` 时，Bash 会先展开别名，而不是直接执行 `/bin/ls`。\n\n`type` 可以查看命令类别或路径：\n\n```bash\\ntype -t cd   # 只显示类别，例如 builtin\\ntype -p ls   # 显示外部命令完整路径，例如 /bin/ls\\ntype -a ls   # 显示所有匹配结果，包括别名、内置、外部路径\n```\n\n记法：\n\n- `-t`：看 type，类别。\n- `-p`：看 path，路径。\n- `-a`：看 all，全部。\n\n如果想绕过 `ls` 的别名，直接运行外部程序，可以输入：\n\n```bash\n/bin/ls\n```"
+        },
+        {
+          "name": "Bash 名称补全",
+          "body": "按 `Tab` 可以让 Bash 尝试自动补全命令名或文件名。\n\n核心规则：\n\n- 如果只有一个候选，就直接补全。\n- 如果有多个候选，就不会擅自替你决定，可能停住或列出候选。\n\n例子：当前目录有：\n\n```bash\\nmain.c\\nmain.o\\nmakefile\n```\n\n输入：\n\n```bash\\nma\n```\n\n再按 `Tab`，因为 `main.c`、`main.o`、`makefile` 都匹配，所以不能唯一补全。\n\n如果输入：\n\n```bash\\nmain.\n```\n\n仍然不能唯一补全，因为 `main.c` 和 `main.o` 都匹配。\n\n如果当前目录只有一个 `manual.txt` 符合 `man`，输入 `man` 后按 `Tab` 就会补成：\n\n```bash\\nmanual.txt\n```"
+        },
+        {
+          "name": "Bash 别名与取消别名",
+          "body": "设置别名格式：\n\n```bash\\nalias 别名='原命令'\n```\n\n例子：\n\n```bash\\nalias ll='ls -l'\\nalias la='ls -a'\n```\n\n之后：\n\n- 输入 `ll` 等于执行 `ls -l`。\n- 输入 `la` 等于执行 `ls -a`。\n\n取消别名用 `unalias`，只写别名本身：\n\n```bash\\nunalias ll\\nunalias la\n```\n\n注意：`ll` 是两个小写字母 `l`，不要写成 `l1`。"
+        },
+        {
+          "name": "Bash 历史命令",
+          "body": "查看历史命令：\n\n```bash\\nhistory\n```\n\n历史命令前面通常带编号。按编号重新执行：\n\n```bash\n!25\n!108\n```\n\n含义：执行历史列表中对应编号的命令。\n\n重新执行上一条命令：\n\n```bash\n!!\n```\n\n例子：如果上一条命令是：\n\n```bash\\ncat a.txt\n```\n\n输入 `!!` 实际会再次执行：\n\n```bash\\ncat a.txt\n```\n\n注意：`!!` 很方便但也危险。如果上一条是删除、覆盖等命令，例如：\n\n```bash\\nrm temp.txt\n```\n\n再输入 `!!` 就会再次执行删除操作。"
+        }
+      ]
+    },
+    {
+      "type": "key-insight",
+      "content": "Shell 是在“简化，让用户可以安全的简化的操纵内核”。课堂中进一步修正为：Shell 更核心的是解释命令并组织执行，安全性不能完全依赖 Shell。",
+      "attribution": "学习者"
+    },
+    {
+      "type": "key-terms",
+      "items": [
+        {
+          "term": "`y$`",
+          "definition": "Vim 中从光标当前位置复制到行尾。"
+        },
+        {
+          "term": "`y^`",
+          "definition": "Vim 中从当前位置复制到行首第一个非空白字符，不包含行首缩进。"
+        },
+        {
+          "term": "`y0`",
+          "definition": "Vim 中从当前位置复制到真正行首，可能包含行首空白。"
+        },
+        {
+          "term": "`.`",
+          "definition": "在 Vim 行号范围中表示当前行。"
+        },
+        {
+          "term": "`$`",
+          "definition": "在 Vim 行号范围中表示最后一行；在 `y$` 中表示行尾。"
+        },
+        {
+          "term": "`%`",
+          "definition": "在 Vim 末行范围中表示整个文件；在 `y%` 中用于匹配括号结构。"
+        },
+        {
+          "term": "`tabstop` / `ts`",
+          "definition": "Vim 中设置 Tab 显示宽度的选项。"
+        },
+        {
+          "term": "`showmatch` / `sm`",
+          "definition": "Vim 中开启括号匹配提示的选项。"
+        },
+        {
+          "term": "管道 `|`",
+          "definition": "Shell 中把前一个命令的输出交给后一个命令。"
+        },
+        {
+          "term": "输出重定向 `>`",
+          "definition": "Shell 中把标准输出覆盖写入指定文件。"
+        },
+        {
+          "term": "别名 alias",
+          "definition": "给一段命令起一个短名字，输入别名时会按原命令执行。"
+        },
+        {
+          "term": "`history`",
+          "definition": "查看最近执行过的 Shell 命令列表。"
+        },
+        {
+          "term": "`!!`",
+          "definition": "重新执行上一条历史命令。"
+        }
+      ]
+    },
+    {
+      "type": "review-questions",
+      "items": [
+        {
+          "question": "在 Vim 中，`y^` 和 `y0` 的区别是什么？",
+          "hint": "想一想行首如果有缩进时会怎样。",
+          "answer": "`y^` 复制到行首第一个非空白字符，不包含前面的缩进；`y0` 复制到真正行首，如果前面有空格或 Tab，也会包含进去。"
+        },
+        {
+          "question": "如果要复制 Vim 中第 `10` 行到第 `15` 行，应该输入什么？",
+          "answer": "```vim\n:10,15y\n```\n\n注意中间是英文逗号 `,`，不是点号。"
+        },
+        {
+          "question": "把“显示行号、Tab 宽度为 `4`、开启括号匹配”永久写入 `.vimrc`，应该写哪三行？",
+          "answer": "```vim\\nset nu\\nset ts=4\\nset sm\n```\n\n写进 `.vimrc` 时一般不加冒号 `:`。"
+        },
+        {
+          "question": "`grep \"love\" a.txt | wc -l > count.txt` 中，`|` 和 `>` 分别做什么？",
+          "answer": "`|` 是管道，把 `grep \"love\" a.txt` 的输出交给 `wc -l`；`>` 是输出重定向，把最终结果覆盖写入 `count.txt`。"
+        },
+        {
+          "question": "如果想确认 `ls` 有没有别名，同时也想看到它的外部命令路径，应该用什么命令？",
+          "answer": "```bash\\ntype -a ls\n```\n\n`-a` 表示显示所有匹配结果，包括别名、内置命令和外部路径。"
+        },
+        {
+          "question": "如果历史命令编号 `108` 是 `grep \"love\" a.txt`，怎样重新执行它？如果想重新执行上一条命令呢？",
+          "answer": "重新执行编号 `108`：\n\n```bash\n!108\n```\n\n重新执行上一条命令：\n\n```bash\n!!\n```\n\n但如果上一条是删除或覆盖类命令，使用 `!!` 前要特别小心。"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "title": "异常应捕获为 const 引用",
+  "definition": "教材将“将异常捕获为 `const` 引用”列为错误处理的应掌握内容。这样可以避免不必要的异常对象复制，并允许以只读方式处理异常对象。",
+  "key_points": [
+    "捕获异常时应优先考虑 `const` 引用形式。",
+    "该写法同时表达了不修改异常对象的意图。",
+    "教材还建议使用异常层次结构，而不是几个通用异常。"
+  ],
+  "examples": [
+    "典型形式：`catch (const std::exception& e) { ... }`。"
+  ],
+  "misconceptions": [
+    "不应把所有异常都按值捕获并认为这是唯一或最佳方式。",
+    "捕获为 `const` 引用不等于忽略异常类型层次；仍应根据异常类型进行合理处理。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "教材建议如何捕获异常？",
+      "a": "建议将异常捕获为 `const` 引用，例如 `catch (const std::exception& e)`。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++异常基础"
+  ],
+  "source_pages": [
+    1003,
+    1004
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "2074_异常应捕获为_const_引用",
+  "_chunk_pages": [
+    1001,
+    1004
+  ]
+}

@@ -1,0 +1,48 @@
+{
+  "title": "重写基类的 private 虚方法可以改变基类公共方法的行为",
+  "definition": "在 C++ 中，基类成员函数的访问控制与虚函数重写机制是两回事：派生类不能直接调用基类的 private 方法，但如果该 private 方法是虚函数，派生类仍可以提供重写版本。基类的公共方法可以调用这个虚方法，因此在基类公共算法不变的情况下，派生类能够改变算法中某个步骤的具体行为。",
+  "key_points": [
+    "private 访问说明符限制的是谁能直接访问该成员，不必然阻止派生类重写虚函数。",
+    "模板方法通常在基类中定义算法骨架，并调用虚方法获取可变的具体信息。",
+    "基类的公共 `getMilesLeft()` 可执行固定计算：\n$$\\text{milesLeft}=\\text{milesPerGallon}\\times\\text{gallonsLeft}$$",
+    "派生类可以重写私有的 `getMilesPerGallon()`，从而改变基类 `getMilesLeft()` 的结果，而无需修改该公共方法。",
+    "原文示例中，`MilesEstimator` 通过汽油消耗效率和剩余汽油量计算剩余里程；更高效的派生类通过重写效率查询方法改变结果。"
+  ],
+  "examples": [
+    "基类的模板方法结构可表示为：\n```cpp\nclass MilesEstimator {\npublic:\n    int getMilesLeft() const {\n        return getMilesPerGallon() * getGallonsLeft();\n    }\n\n    virtual void setGallonsLeft(int gallons);\n    virtual int getGallonsLeft() const;\n\nprivate:\n    virtual int getMilesPerGallon() const;\n    int m_gallonsLeft{0};\n};\n```",
+    "使用基类对象设置两加仑汽油：\n```cpp\nMilesEstimator estimator;\nestimator.setGallonsLeft(2);\nestimator.getMilesLeft();\n```",
+    "派生类只重写效率方法即可改变公共计算：\n```cpp\nclass EfficientCarMilesEstimator : public MilesEstimator {\nprivate:\n    int getMilesPerGallon() const override;\n};\n```\n此时调用 `getMilesLeft()` 时，基类方法中的虚调用会使用派生类的 `getMilesPerGallon()` 实现。"
+  ],
+  "misconceptions": [
+    "派生类不能直接调用基类 private 方法，不代表派生类不能重写基类的 private 虚方法。",
+    "重写 private 虚方法不会改变基类公共方法的源代码，但可能改变该公共方法运行时得到的结果。",
+    "模板方法的固定算法骨架通常位于基类；派生类主要改变其中由虚方法提供的具体步骤。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "基类的 private 虚方法能否在派生类中重写？",
+      "a": "在 C++ 中可以。private 限制直接访问，但不阻止派生类提供同一虚函数的重写版本。"
+    },
+    {
+      "q": "为什么 `EfficientCarMilesEstimator` 重写私有的 `getMilesPerGallon()` 后，基类的 `getMilesLeft()` 行为会改变？",
+      "a": "因为 `getMilesLeft()` 是基类中定义的公共模板方法，但它调用了虚方法 `getMilesPerGallon()`；运行时该虚调用可以分派到派生类的重写版本。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "C++访问说明符",
+    "C++虚函数与动态分派",
+    "模板方法模式"
+  ],
+  "source_pages": [
+    339,
+    340
+  ],
+  "needs_verification": true,
+  "verify_query": "C++ private virtual function derived class override 是否允许 模板方法模式",
+  "concept_id": "686_重写基类的_private_虚方法可以改变基类公共方法的行为",
+  "_chunk_pages": [
+    337,
+    340
+  ]
+}

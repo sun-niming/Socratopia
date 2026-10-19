@@ -1,0 +1,43 @@
+{
+  "title": "事件对象常用属性",
+  "definition": "事件对象中常用的三个属性是 currentTarget、target 和 type。currentTarget 表示当前事件处理程序所在的元素；target 表示引发事件的元素；type 表示被触发的事件类型。",
+  "key_points": [
+    "currentTarget：当前事件处理程序所在的元素。",
+    "target：引发事件的元素，也就是事件目标。",
+    "type：被触发的事件类型。"
+  ],
+  "examples": [
+    "div 上监听 click 时：event.target 可能是 BUTTON，而 event.currentTarget 是 DIV。",
+    "console.log('target = ' + event.target.tagName);",
+    "console.log('currentTarget = ' + event.currentTarget.tagName);"
+  ],
+  "misconceptions": [
+    "误以为 target 和 currentTarget 总是相同；在事件冒泡场景下它们可能不同。",
+    "误以为 type 是元素的类型；实际上它是事件类型。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "event.target 和 event.currentTarget 的区别是什么？",
+      "a": "target 是实际触发事件的元素，currentTarget 是当前事件处理程序所在的元素。"
+    },
+    {
+      "q": "event.type 表示什么？",
+      "a": "表示被触发的事件类型。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "事件对象"
+  ],
+  "source_pages": [
+    370,
+    371
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "497_事件对象常用属性",
+  "_chunk_pages": [
+    369,
+    372
+  ]
+}

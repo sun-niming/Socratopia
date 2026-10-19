@@ -1,0 +1,55 @@
+{
+  "title": "使用模板元编程递归打印 std::tuple",
+  "definition": "`std::tuple`可以保存固定数量且类型各不相同的值，其大小和值类型在编译期确定，但没有提供直接遍历所有元素的内置机制。教材通过类模板递归和部分特例化，在编译期按索引访问并打印元组元素：`TuplePrint<TupleType, n>`递归实例化 `TuplePrint<TupleType, n-1>`，然后使用 `get<n-1>(t)` 打印对应元素；`TuplePrint<TupleType, 0>`负责停止递归。",
+  "key_points": [
+    "`TuplePrint`接收两个模板参数：元组类型和表示当前递归规模的整数 `n`。",
+    "递归模板每次将 `n` 减小 $1$，并使用 `get<n-1>(t)` 访问元组元素。",
+    "`TuplePrint<TupleType, 0>`是停止递归的部分特例化。",
+    "元组大小可通过 `tuple_size<MyTuple>::value` 在编译期获得。",
+    "示例元组类型为 `tuple<int, string, bool>`，可以用 `TuplePrint<MyTuple, tuple_size<MyTuple>::value>` 启动递归打印。",
+    "辅助函数模板可以自动推导元组类型和大小，从而简化调用代码。"
+  ],
+  "examples": [
+    "类型别名：`using MyTuple = tuple<int, string, bool>;`",
+    "启动递归的形式：`TuplePrint<MyTuple, tuple_size<MyTuple>::value> tp{t1};`",
+    "递归访问的索引形式为：$$get<n-1>(t)$$",
+    "递归规模关系可表示为：$$n\\rightarrow n-1\\rightarrow n-2\\rightarrow\\cdots\\rightarrow0$$"
+  ],
+  "misconceptions": [
+    "`std::tuple`虽然支持按索引访问元素，但不能像普通容器那样直接使用运行时循环遍历不同类型的元素。",
+    "`TuplePrint<TupleType, 0>`不是要打印第一个元素，而是递归停止条件。",
+    "元组元素的类型可以不同，因此打印机制不能简单地假定所有元素具有同一类型。",
+    "调用 `TuplePrint` 时直接指定元组类型和大小较复杂，辅助函数模板的作用是自动推导这些模板参数，而不是改变元组本身的结构。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么需要模板元编程来遍历 `std::tuple`？",
+      "a": "因为元组元素数量和类型在编译期确定，且没有用于直接遍历所有元素的内置机制；模板递归可以在编译期逐个访问它们。"
+    },
+    {
+      "q": "`TuplePrint<TupleType, 0>`的作用是什么？",
+      "a": "它是部分特例化的停止条件，表示递归不再继续。"
+    },
+    {
+      "q": "`get<n-1>(t)`为什么使用 `n-1` 而不是 `n`？",
+      "a": "因为当递归规模为元组大小时，最后一个有效下标是大小减一。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "std::tuple",
+    "模板递归",
+    "模板部分特例化"
+  ],
+  "source_pages": [
+    776,
+    776
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1599_使用模板元编程递归打印_std_tuple",
+  "_chunk_pages": [
+    773,
+    776
+  ]
+}

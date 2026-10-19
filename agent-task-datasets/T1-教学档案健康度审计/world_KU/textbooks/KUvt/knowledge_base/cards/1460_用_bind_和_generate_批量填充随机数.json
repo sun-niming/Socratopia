@@ -1,0 +1,49 @@
+{
+  "title": "用 bind 和 generate 批量填充随机数",
+  "definition": "可以使用 std::bind 把分布对象和随机数引擎绑定起来，生成一个不需要参数即可调用的生成器。然后把这个生成器传给 std::generate，就能为已有容器中的每个元素生成并写入一个随机值。std::generate 只改写已有元素，不会自动扩展容器，因此 vector 必须预先设置为足够大的大小。",
+  "key_points": [
+    "绑定后的生成器可写为：`auto generator{std::bind(distribution, engine)};`。",
+    "调用 `generator()` 时，会自动调用绑定的分布，并使用 engine 生成一个随机数。",
+    "`std::generate(begin(values), end(values), generator);` 会依次改写 `[begin(values), end(values))` 范围内的元素。",
+    "如果要填充 10 个元素，必须先创建大小为 10 的 vector，而不是创建空 vector 后直接调用 generate。"
+  ],
+  "examples": [
+    "```cpp\nstd::vector<int> values(10);\nauto generator{std::bind(distribution, engine)};\nstd::generate(std::begin(values), std::end(values), generator);\nfor (auto i : values) {\n    std::cout << i << std::endl;\n}\n```",
+    "生成器也可以作为函数参数传递：```cpp\nvoid fillVector(std::vector<int>& values,\n                const std::function<int()>& generator) {\n    std::generate(std::begin(values), std::end(values), generator);\n}\n```",
+    "若不想使用 `std::function`，也可以使用函数模板：```cpp\ntemplate<typename T>\nvoid fillVector(std::vector<int>& values, const T& generator) {\n    std::generate(std::begin(values), std::end(values), generator);\n}\n```"
+  ],
+  "misconceptions": [
+    "std::generate 不会向 vector 插入新元素，只会改写迭代器范围内已经存在的元素。",
+    "绑定 generator 后仍然使用原来的引擎和分布，只是调用时不必再次显式传入参数。",
+    "生成器的具体闭包类型未知时，可以使用 `std::function<int()>` 或函数模板接收它。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么调用 std::generate 前要先把 vector 设置为足够大的大小？",
+      "a": "因为 std::generate 只改写已有元素，不会插入或扩展新元素。"
+    },
+    {
+      "q": "使用 std::bind 绑定 distribution 和 engine 后，如何生成一个随机数？",
+      "a": "调用无参数的 `generator()` 即可，它会使用已绑定的分布和引擎生成随机数。"
+    },
+    {
+      "q": "未知生成器的具体类型时，有哪两种方式可以把它传给函数？",
+      "a": "可以使用 `std::function<int()>` 作为参数类型，也可以使用函数模板参数。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "软件随机引擎必须配合分布生成指定范围的数"
+  ],
+  "source_pages": [
+    700,
+    700
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1460_用_bind_和_generate_批量填充随机数",
+  "_chunk_pages": [
+    697,
+    700
+  ]
+}

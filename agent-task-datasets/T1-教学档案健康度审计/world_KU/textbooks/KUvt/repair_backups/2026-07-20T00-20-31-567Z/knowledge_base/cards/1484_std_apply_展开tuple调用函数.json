@@ -1,0 +1,43 @@
+{
+  "title": "std::apply()展开tuple调用函数",
+  "definition": "`std::apply()`调用给定的函数、lambda表达式或函数对象，并把给定tuple中的元素按顺序展开，作为该可调用对象的实参。典型形式为：`std::apply(callable, tuple_object)`。该函数在泛型代码和模板元编程中尤其有用。",
+  "key_points": [
+    "第一个参数是要调用的函数、lambda表达式或函数对象。",
+    "第二个参数提供调用所需的参数，通常是tuple；其元素会按顺序展开。",
+    "调用结果就是被调用对象处理这些展开参数后的返回值。"
+  ],
+  "examples": [
+    "若`add`是一个可以接收两个整数并返回其和的函数，则：`std::cout << std::apply(add, std::tuple{39, 3}) << std::endl;`会调用`add(39, 3)`并输出结果。",
+    "也可以使用lambda：`auto result = std::apply([](int a, int b) { return a + b; }, std::tuple{39, 3});`"
+  ],
+  "misconceptions": [
+    "`std::apply()`不是把tuple作为一个整体传给函数，而是把tuple的各个元素分别作为函数参数传入。",
+    "它不只支持普通函数，也支持lambda表达式和函数对象。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`std::apply()`做什么？",
+      "a": "它将tuple中的元素按顺序展开，并把这些元素作为参数调用给定的函数、lambda表达式或函数对象。"
+    },
+    {
+      "q": "`std::apply(add, std::tuple{39, 3})`等价于什么形式的调用？",
+      "a": "在`add`接受两个对应类型参数的前提下，它等价于调用`add(39, 3)`。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "tuple的基本用法",
+    "可调用对象"
+  ],
+  "source_pages": [
+    713,
+    713
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1484_std_apply_展开tuple调用函数",
+  "_chunk_pages": [
+    713,
+    716
+  ]
+}

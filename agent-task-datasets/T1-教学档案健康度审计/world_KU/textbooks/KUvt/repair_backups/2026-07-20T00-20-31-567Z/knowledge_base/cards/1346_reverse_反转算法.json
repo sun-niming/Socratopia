@@ -1,0 +1,47 @@
+{
+  "title": "reverse 反转算法",
+  "definition": "reverse()用于就地反转一个范围内元素的顺序。它交换范围首元素与尾元素、次首元素与次尾元素，依次进行，直到范围反转完成。该算法接收范围的首迭代器和尾后迭代器。",
+  "key_points": [
+    "reverse()直接修改原范围，不创建新范围。",
+    "调用形式为 reverse(begin, end)，其中 end 是尾后迭代器。",
+    "教材还提到 reverse_copy()：它把反转后的结果复制到新的目标范围，需要源范围首尾迭代器和目标范围起始迭代器；目标范围必须足够大。"
+  ],
+  "examples": [
+    "vector<int> values; populateContainer(values); reverse(begin(values), end(values));",
+    "若范围为 $[1,2,3,4]$，反转后为 $[4,3,2,1]$。"
+  ],
+  "misconceptions": [
+    "reverse()不会自动创建或返回一个新的容器。",
+    "范围的尾迭代器指向最后一个元素之后的位置，不是最后一个元素本身。",
+    "使用 reverse_copy() 时，目标范围不会自动扩容，必须预先提供足够空间。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "reverse()的作用是什么？",
+      "a": "它就地反转给定范围内元素的顺序。"
+    },
+    {
+      "q": "reverse()需要哪些参数？",
+      "a": "范围的首迭代器和尾后迭代器。"
+    },
+    {
+      "q": "reverse()与 reverse_copy()的主要区别是什么？",
+      "a": "reverse()就地修改原范围；reverse_copy()把反转结果复制到另一个目标范围。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "迭代器范围表示法"
+  ],
+  "source_pages": [
+    645,
+    645
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 std::reverse std::reverse_copy 参数 返回值 目标范围要求",
+  "concept_id": "1346_reverse_反转算法",
+  "_chunk_pages": [
+    645,
+    648
+  ]
+}

@@ -1,0 +1,53 @@
+{
+  "title": "文件系统路径与目录条目状态检查",
+  "definition": "目录遍历代码通过文件系统路径表示待访问的位置，并使用状态检查函数判断路径或目录条目的存在性及类型。常见检查包括 exists、is_regular_file 和 is_directory；普通文件还可以使用 file_size 获取其大小。",
+  "key_points": [
+    "path 用于表示文件或目录的位置。",
+    "exists(p) 用于判断路径是否存在；不存在时可以直接结束处理。",
+    "is_regular_file(x) 用于判断路径或目录条目是否为普通文件。",
+    "is_directory(x) 用于判断路径或目录条目是否为目录。",
+    "file_size(x) 用于获取普通文件的大小，并可在输出中显示字节数。",
+    "目录条目可以通过 entry.path() 转换或取得对应的路径。"
+  ],
+  "examples": [
+    "示例判断结构：`if (!exists(p)) { return; }`。",
+    "普通文件处理：`if (is_regular_file(p)) { 输出 p.string() 和 file_size(p); }`。",
+    "目录处理：`else if (is_directory(p)) { 输出 p.string(); }`。",
+    "路径转换为字符串可使用类似 `p.string()` 或 `entry.path().string()` 的表达式。"
+  ],
+  "misconceptions": [
+    "exists 只表示路径是否存在，不能说明该路径一定是文件或一定是目录。",
+    "is_regular_file 返回真时，路径表示普通文件；它不表示目录。",
+    "file_size 应用于普通文件的大小获取，不能把目录当作普通文件处理。",
+    "directory_entry 是目录条目对象，若要获得其路径，应使用其 path() 信息。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何判断一个路径是否存在？",
+      "a": "使用 `exists(p)`；如果结果为假，可以直接返回。"
+    },
+    {
+      "q": "如何区分普通文件和目录？",
+      "a": "分别使用 `is_regular_file(p)` 和 `is_directory(p)` 判断。"
+    },
+    {
+      "q": "如何获取普通文件的大小？",
+      "a": "使用 `file_size(p)` 或对目录条目使用相应的文件大小查询，并以字节数输出。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++ 文件系统路径的基本概念"
+  ],
+  "source_pages": [
+    433,
+    436
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "570_文件系统路径与目录条目状态检查",
+  "_chunk_pages": [
+    433,
+    436
+  ]
+}

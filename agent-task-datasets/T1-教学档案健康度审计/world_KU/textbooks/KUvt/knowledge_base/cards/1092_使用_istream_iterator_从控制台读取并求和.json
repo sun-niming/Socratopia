@@ -1,0 +1,42 @@
+{
+  "title": "使用 istream_iterator 从控制台读取并求和",
+  "definition": "istream_iterator<int> 可以把输入流中的整数视为一个输入迭代器序列。以 cin 构造的迭代器从控制台读取整数；默认构造的 istream_iterator<int> 表示流末尾的 end 迭代器。将这两个迭代器传给 sum 算法，即可读取任意数量的整数并求和，而不需要显式编写循环。",
+  "key_points": [
+    "输入整数通常以空白字符分隔。",
+    "Windows 上可按 Ctrl+Z 后按 Enter 表示输入结束；Linux 上可按 Enter 后按 Ctrl+D 表示输入结束。",
+    "默认构造的 istream_iterator 是 end 迭代器。"
+  ],
+  "examples": [
+    "istream_iterator<int> numbersIter{cin};\nistream_iterator<int> endIter;\nint result{sum(numbersIter, endIter)};"
+  ],
+  "misconceptions": [
+    "istream_iterator 的默认构造对象不是从标准输入读取数据的普通迭代器，而是表示输入序列末尾。",
+    "使用输入迭代器并不意味着必须显式编写 for 或 while 循环；算法可以直接消费该迭代器范围。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何使用 istream_iterator 读取控制台中的任意数量整数并计算总和？",
+      "a": "用 istream_iterator<int> numbersIter{cin} 读取输入，用默认构造的 istream_iterator<int> endIter 表示结束位置，再调用 sum(numbersIter, endIter)。"
+    },
+    {
+      "q": "istream_iterator<int> 的默认构造函数创建什么？",
+      "a": "创建表示流末尾的 end 迭代器。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "迭代器范围",
+    "输入流 cin"
+  ],
+  "source_pages": [
+    533,
+    533
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1092_使用_istream_iterator_从控制台读取并求和",
+  "_chunk_pages": [
+    533,
+    536
+  ]
+}

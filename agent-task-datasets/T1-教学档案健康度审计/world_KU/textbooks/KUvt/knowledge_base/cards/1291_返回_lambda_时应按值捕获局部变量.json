@@ -1,0 +1,47 @@
+{
+  "title": "返回 lambda 时应按值捕获局部变量",
+  "definition": "函数可以返回 lambda，通常通过 `std::function` 或 `auto` 表示返回结果。若返回的 lambda 以后才执行，函数中的局部变量必须按值捕获；按引用捕获会产生悬空引用，因为函数返回后局部变量的生命周期已经结束。",
+  "key_points": [
+    "返回的 lambda 可以通过值捕获保存函数参数的副本。",
+    "例如返回类型 `std::function<int(void)>` 表示一个不接收参数、返回 `int` 的可调用对象。",
+    "函数返回类型也可以使用 `auto`，让编译器推导实际的 lambda 闭包类型。",
+    "不能用 `[&x]` 返回一个以后执行的 lambda，因为函数结束后对局部参数 `x` 的引用不再有效。"
+  ],
+  "examples": [
+    "安全写法：`std::function<int(void)> multiplyBy2Lambda(int x) { return [x] { return 2 * x; }; }`。",
+    "调用：`std::function<int(void)> fn{multiplyBy2Lambda(5)}; std::cout << fn() << std::endl;`，输出为 `10`。",
+    "也可以写：`auto fn{multiplyBy2Lambda(5)}; std::cout << fn() << std::endl;`。",
+    "错误写法：`auto multiplyBy2Lambda(int x) { return [&x] { return 2 * x; }; }`，返回后执行 lambda 时会访问已经失效的引用。"
+  ],
+  "misconceptions": [
+    "误以为函数返回后，lambda 按引用捕获的局部变量仍然存在；函数结束后局部变量的生命周期已结束。",
+    "误以为返回 lambda 必须声明为 `std::function`；教材还展示了使用 `auto` 接收返回值，以及让函数返回类型由 `auto` 推导。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么返回的 lambda 应按值捕获函数参数 `x`？",
+      "a": "因为 lambda 可能在函数返回后执行，按值捕获会保存 `x` 的副本，而按引用捕获会引用已经销毁的局部变量。"
+    },
+    {
+      "q": "`multiplyBy2Lambda(5)` 返回的 lambda 调用结果是多少？",
+      "a": "结果是 `10`。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "lambda 捕获方式",
+    "对象生命周期",
+    "std::function"
+  ],
+  "source_pages": [
+    624,
+    624
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1291_返回_lambda_时应按值捕获局部变量",
+  "_chunk_pages": [
+    621,
+    624
+  ]
+}

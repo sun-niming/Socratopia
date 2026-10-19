@@ -1,0 +1,44 @@
+{
+  "title": "在 Visual Studio 中启用 C++20 并运行调试示例",
+  "definition": "对于使用 C++20 特性的 Visual C++ 项目，需要在项目属性中选择相应的 C++语言标准，然后以 Debug 配置编译和调试。原文以 ArticleCitations 项目为例：在 Solution Explorer 中右击项目并打开 Properties，进入 Configuration Properties | C/C++ | Language，设置 C++ Language Standard；随后选择 Debug 配置，执行 Build | Build Solution，将测试文件复制到包含项目文件 ArticleCitations.vcxproj 的目录，再通过 Debug | Start Debugging 运行。",
+  "key_points": [
+    "语言标准设置位于项目属性的 Configuration Properties | C/C++ | Language。",
+    "应确认当前配置是 Debug，而不是 Release，以便进行调试。",
+    "测试输入文件应复制到包含 ArticleCitations.vcxproj 的项目目录。",
+    "原文针对 Visual C++ 2019，建议选择当时可用的 ISO C++20 标准或 Preview-Features From The Latest C++ Working Draft；具体选项会随 Visual Studio 版本变化。"
+  ],
+  "examples": [
+    "以 ArticleCitations 为例：先用 paper1.txt 验证正常输入，再用 paper2.txt 触发异常并进入调试器。"
+  ],
+  "misconceptions": [
+    "误以为 Visual Studio 的所有版本都默认启用 C++20 特性。",
+    "误以为只要把测试文件放入解决方案目录即可；原文要求放入包含 ArticleCitations.vcxproj 的项目目录。",
+    "使用 Release 配置后仍期望获得与 Debug 配置完全相同的调试体验。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "原文中应通过哪条属性路径设置项目使用的 C++语言标准？",
+      "a": "在项目 Properties 中进入 Configuration Properties | C/C++ | Language，然后设置 C++ Language Standard。"
+    },
+    {
+      "q": "为什么运行示例前要确认配置为 Debug？",
+      "a": "因为该示例需要使用调试器定位异常和检查变量，Debug 配置更适合这一过程。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "Visual Studio 项目与解决方案",
+    "Debug 与 Release 配置"
+  ],
+  "source_pages": [
+    921,
+    921
+  ],
+  "needs_verification": true,
+  "verify_query": "Visual Studio 2019 C++ Language Standard ISO C++20 Preview Features Latest C++ Working Draft 项目属性选项",
+  "concept_id": "1904_在_visual_studio_中启用_c_20_并运行调试示例",
+  "_chunk_pages": [
+    921,
+    924
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "title": "文本颜色 color",
+  "definition": "color 属性用于设置文本颜色，属性值可以写成颜色名、十六进制颜色值或 rgb() 等颜色值。",
+  "key_points": [
+    "color 控制文本颜色。",
+    "它可以取颜色名、十六进制颜色值、rgb() 等。"
+  ],
+  "examples": [
+    "color: red;",
+    "color: #f00;",
+    "color: rgb(255,0,0);"
+  ],
+  "misconceptions": [
+    "color 不是设置背景颜色，背景颜色通常是另一个属性。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "CSS 中哪个属性用于设置文本颜色？",
+      "a": "color。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "CSS颜色值"
+  ],
+  "source_pages": [
+    109,
+    112
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "145_文本颜色_color",
+  "_chunk_pages": [
+    109,
+    112
+  ]
+}

@@ -1,0 +1,49 @@
+{
+  "title": "Application、Window 和 Shape 的具体事件职责",
+  "definition": "在示例责任链中，Application、Window 和 Shape 都派生自 Handler，并各自处理一种事件：Application 处理 `RightMouseButtonDown`，Window 处理 `LeftMouseButtonUp`，Shape 处理 `LeftMouseButtonDown`。遇到其他事件时，它们调用基类逻辑继续转发。",
+  "key_points": [
+    "Application 的专属事件是 `Event::RightMouseButtonDown`。",
+    "Window 的专属事件是 `Event::LeftMouseButtonUp`。",
+    "Shape 的专属事件是 `Event::LeftMouseButtonDown`。",
+    "每个具体处理程序处理自己的事件后不再向后转发；不匹配时才调用 `Handler::handleMessage`。"
+  ],
+  "examples": [
+    "链条可按如下顺序连接：`Application application{nullptr}; Window window{&application}; Shape shape{&window};`。",
+    "调用 `shape.handleMessage(Event::LeftMouseButtonDown)` 时，Shape 可以直接处理该事件。",
+    "调用 `shape.handleMessage(Event::LeftMouseButtonUp)` 时，Shape 不处理并转发给 Window，由 Window 处理。"
+  ],
+  "misconceptions": [
+    "Shape 并不是只能接收鼠标事件；它可以接收链上传来的所有 Event，只是示例中只处理左键按下事件。",
+    "事件从 Shape 开始并不意味着 Shape 必须处理事件；它可以把事件继续传递给 Window 或 Application。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "在该示例中，哪个对象处理 `Event::LeftMouseButtonUp`？",
+      "a": "Window 处理该事件。"
+    },
+    {
+      "q": "在该示例中，哪个对象处理 `Event::RightMouseButtonDown`？",
+      "a": "Application 处理该事件。"
+    },
+    {
+      "q": "Shape 收到 `Event::LeftMouseButtonUp` 时会发生什么？",
+      "a": "Shape 发现该事件不是自己负责的事件，于是调用基类转发逻辑，将事件传给 Window。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "Handler 基类与事件转发机制",
+    "责任链模式的基本思想"
+  ],
+  "source_pages": [
+    963,
+    964
+  ],
+  "needs_verification": true,
+  "verify_query": "《C++20高级编程》第5版 第963-964页 Application Window Shape 事件处理职责",
+  "concept_id": "1978_application_window_和_shape_的具体事件职责",
+  "_chunk_pages": [
+    961,
+    964
+  ]
+}

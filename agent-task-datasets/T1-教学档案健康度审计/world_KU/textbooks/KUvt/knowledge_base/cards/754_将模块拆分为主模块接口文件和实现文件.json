@@ -1,0 +1,43 @@
+{
+  "title": "将模块拆分为主模块接口文件和实现文件",
+  "definition": "模块练习要求把单文件模块拆分为多个文件：一个不包含任何实现的主模块接口文件，以及两个模块实现文件，分别实现 `CarSimulator` 类和 `BikeSimulator` 类。",
+  "key_points": [
+    "主模块接口文件只承担模块接口作用，不包含实现代码。",
+    "需要两个模块实现文件。",
+    "一个实现文件负责 `CarSimulator` 类，另一个负责 `BikeSimulator` 类。",
+    "拆分后应保持模块对外提供相应类，并在 `main()` 中测试解决方案。"
+  ],
+  "examples": [
+    "文件组织可表示为：主模块接口文件 `Simulator`；实现文件一负责 `CarSimulator`；实现文件二负责 `BikeSimulator`。具体文件扩展名和导入写法应按所用编译器的C++20模块支持方式确定。"
+  ],
+  "misconceptions": [
+    "认为主模块接口文件必须包含所有类的完整实现。",
+    "认为拆分为多个文件后，类仍然必须全部写在同一个实现文件中。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "练习要求如何拆分单文件模块？",
+      "a": "拆分为一个不含实现的主模块接口文件，以及两个模块实现文件，分别实现 `CarSimulator` 和 `BikeSimulator`。"
+    },
+    {
+      "q": "两个模块实现文件分别负责什么？",
+      "a": "一个负责 `CarSimulator` 类的实现，另一个负责 `BikeSimulator` 类的实现。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++20模块基础",
+    "模块接口与实现的区别"
+  ],
+  "source_pages": [
+    369,
+    369
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "754_将模块拆分为主模块接口文件和实现文件",
+  "_chunk_pages": [
+    369,
+    372
+  ]
+}

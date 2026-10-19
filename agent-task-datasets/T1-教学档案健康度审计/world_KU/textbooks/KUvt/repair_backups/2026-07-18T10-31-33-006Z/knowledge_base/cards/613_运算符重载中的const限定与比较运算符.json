@@ -1,0 +1,51 @@
+{
+  "title": "运算符重载中的const限定与比较运算符",
+  "definition": "原文第470-472页多次出现`const`，并列出了带有`const`参数或尾部`const`限定的运算符函数声明。`const`参数表示函数不会通过该参数修改传入对象；成员运算符函数声明末尾的`const`表示该成员函数不会修改调用它的对象。原文还列出了返回`bool`的比较运算符形式，以及C++20的`operator<=>`形式。",
+  "key_points": [
+    "参数写成`const T&`时，表示以常量引用方式接收`T`对象，通常用于避免复制并禁止通过该参数修改对象。",
+    "成员运算符函数末尾的`const`，例如`auto operator<=>(const T&) const;`，表示该函数不会修改隐含的左操作数对象。",
+    "比较运算符的典型返回类型是`bool`，原文列出了`bool operator==(const T&) const;`等形式。",
+    "原文扫描文本中部分比较运算符符号被识别错误，因此具体是`==`、`!=`或其他比较符号应以教材原页版式为准。"
+  ],
+  "examples": [
+    "带常量引用参数的运算符函数：`T operator+(const T& lhs, const T& rhs);`",
+    "带尾部`const`的成员比较运算符：`bool operator==(const T& rhs) const;`",
+    "C++20三路比较运算符：`auto operator<=>(const T& rhs) const;`"
+  ],
+  "misconceptions": [
+    "参数上的`const`与成员函数末尾的`const`含义不同：前者约束参数对象，后者约束调用该成员函数的对象。",
+    "成员函数末尾的`const`不会让函数返回值自动变成常量，也不等同于把所有局部变量都声明为`const`。",
+    "比较运算符的返回类型不应仅凭运算符名称猜测；原文中普通比较运算符列出了`bool`，而`operator<=>`列出了`auto`。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`const T&`作为运算符函数参数有什么含义？",
+      "a": "表示以常量引用接收一个`T`对象，避免复制，并且不能通过该引用修改对象。"
+    },
+    {
+      "q": "成员运算符函数声明末尾的`const`表示什么？",
+      "a": "表示该成员函数不会修改调用它的对象，即不会修改隐含的左操作数。"
+    },
+    {
+      "q": "为什么`operator<=>`的声明末尾可能有`const`？",
+      "a": "因为它可以作为不修改对象状态的成员比较函数，末尾的`const`表示调用比较时不会修改左操作数对象。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++const限定",
+    "C++引用",
+    "运算符重载函数的基本形式"
+  ],
+  "source_pages": [
+    470,
+    472
+  ],
+  "needs_verification": true,
+  "verify_query": "《C++20高级编程》第5版 第470-472页 运算符重载 const operator== operator<=> 原文",
+  "concept_id": "613_运算符重载中的const限定与比较运算符",
+  "_chunk_pages": [
+    469,
+    472
+  ]
+}

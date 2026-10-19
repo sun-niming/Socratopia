@@ -1,0 +1,50 @@
+{
+  "title": "calculateSeedRatio 成员函数接口",
+  "definition": "`calculateSeedRatio(bool slow)` 是 Watermelon 类的公共成员函数，用于使用 Marigold 算法计算种子比例，并返回 `double` 类型的结果。参数 `slow` 用于表示是否使用较慢的计算方式。",
+  "key_points": [
+    "函数签名为 `double calculateSeedRatio(bool slow);`。",
+    "返回值类型是 `double`，文档将其称为 marigold ratio。",
+    "函数用途是使用 Marigold 算法计算种子比例。",
+    "参数 `slow` 表示是否使用较慢的计算方式。"
+  ],
+  "examples": [
+    "函数声明：`double calculateSeedRatio(bool slow);`",
+    "参数说明可写为：`@param slow Whether or not to use long calculations.`",
+    "返回值说明可写为：`@return The marigold ratio.`"
+  ],
+  "misconceptions": [
+    "`slow` 是布尔参数，不是表示计算结果数值大小的参数。",
+    "该函数返回的是 `double` 类型的种子比例，不是整数种子数量。",
+    "从给定原文不能推断 Marigold 算法的具体计算公式。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`calculateSeedRatio` 返回什么类型的结果？",
+      "a": "返回 `double` 类型的结果，即文档所称的 marigold ratio。"
+    },
+    {
+      "q": "`calculateSeedRatio` 的 `slow` 参数表示什么？",
+      "a": "表示是否使用较慢的计算方式。"
+    },
+    {
+      "q": "该函数使用什么算法计算种子比例？",
+      "a": "原文称其使用 Marigold 算法，但没有给出算法的具体公式或步骤。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++类成员函数",
+    "C++布尔类型和返回值"
+  ],
+  "source_pages": [
+    129,
+    132
+  ],
+  "needs_verification": true,
+  "verify_query": "《C++20高级编程》第5版 calculateSeedRatio(bool slow) Marigold algorithm marigold ratio",
+  "concept_id": "189_calculateseedratio_成员函数接口",
+  "_chunk_pages": [
+    129,
+    132
+  ]
+}

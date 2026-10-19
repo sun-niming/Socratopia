@@ -1,0 +1,51 @@
+{
+  "title": "virtual 方法与派生类重写",
+  "definition": "如果希望派生类能够替换基类方法的行为，基类中的该方法必须声明为 `virtual`。派生类在重新声明该方法时，应使用 `override` 表明它要重写基类的虚方法；方法定义中不需要重复写 `virtual`。",
+  "key_points": [
+    "只有基类中声明为 `virtual` 的方法，才能被派生类正确重写。",
+    "派生类中的重写声明应与基类方法匹配，并添加 `override`。",
+    "如果派生类继续允许后续派生类重写该方法，即使省略 `virtual`，该方法仍保持虚函数性质。",
+    "在方法定义中不需要重复写 `virtual`。"
+  ],
+  "examples": [
+    "基类可以声明：`virtual void someMethod();`。",
+    "派生类可以声明：`void someMethod() override;`。",
+    "派生类的方法定义可以写成：`void Derived::someMethod() { /* Derived 的实现 */ }`。",
+    "也可以写成 `virtual void someMethod() override;`，但在已经使用 `override` 的情况下，额外写 `virtual` 是多余的。"
+  ],
+  "misconceptions": [
+    "仅仅在派生类中写出同名方法，并不能保证发生正确的重写；基类方法必须是 virtual。",
+    "方法定义处不需要再次写 `virtual`；`virtual` 主要出现在声明中。",
+    "派生类省略 `virtual` 关键字不会使继承来的虚函数失去 virtual 性质。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "基类方法要满足什么条件，派生类才能正确重写它？",
+      "a": "基类方法必须声明为 `virtual`。"
+    },
+    {
+      "q": "派生类重写基类虚方法时推荐使用什么关键字？",
+      "a": "使用 `override`，例如 `void someMethod() override;`。"
+    },
+    {
+      "q": "派生类方法的定义处是否必须重复写 `virtual`？",
+      "a": "不需要。`virtual` 通常写在方法声明处。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++类继承的基本语法",
+    "基类成员的访问控制"
+  ],
+  "source_pages": [
+    306,
+    307
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "631_virtual_方法与派生类重写",
+  "_chunk_pages": [
+    305,
+    308
+  ]
+}

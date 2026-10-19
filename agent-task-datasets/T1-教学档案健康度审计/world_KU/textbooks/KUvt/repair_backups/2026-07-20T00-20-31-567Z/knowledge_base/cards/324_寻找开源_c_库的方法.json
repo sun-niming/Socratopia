@@ -1,0 +1,38 @@
+{
+  "title": "寻找开源 C++ 库的方法",
+  "definition": "开源 C++ 库通常可以通过互联网搜索和开源项目托管或组织网站寻找。搜索时可组合语言、许可属性和任务名称，例如使用“open-source C++ library XML parsing”寻找 XML 解析库。",
+  "key_points": [
+    "搜索关键词应同时描述技术语言和目标功能。",
+    "教材列举的资源包括 Boost、GNU、GitHub 的开源资源页面和 SourceForge。",
+    "找到库之后，还要继续检查许可协议、维护状态、质量和支持情况，不能只依据搜索结果决定使用。"
+  ],
+  "examples": [
+    "搜索示例：open-source C++ library XML parsing。",
+    "教材列举的网站：www.boost.org、www.gnu.org、github.com/open-source、www.sourceforge.net。"
+  ],
+  "misconceptions": [
+    "认为搜索到一个开源库后即可直接加入产品，无须检查许可和维护情况。",
+    "认为只有一个固定网站能够找到开源 C++ 库。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "搜索面向特定任务的开源 C++ 库时，关键词应包含哪些信息？",
+      "a": "应包含开放源代码属性、编程语言和目标任务，例如“open-source C++ library XML parsing”。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "开源库的主要收益"
+  ],
+  "source_pages": [
+    157,
+    157
+  ],
+  "needs_verification": true,
+  "verify_query": "Boost GNU GitHub open-source SourceForge 当前开源 C++ 项目查找入口 github.com/open-source 是否仍为有效资源页",
+  "concept_id": "324_寻找开源_c_库的方法",
+  "_chunk_pages": [
+    157,
+    160
+  ]
+}

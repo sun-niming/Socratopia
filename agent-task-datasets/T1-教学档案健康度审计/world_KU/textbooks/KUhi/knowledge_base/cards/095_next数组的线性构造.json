@@ -1,0 +1,38 @@
+{
+  "title": "next数组的线性构造",
+  "definition": "构造next数组本身也可以用类似匹配的思想在线性时间完成。做法是维护当前最长前后缀长度j，并扫描模式串位置i：若字符相等，则j增加；若不相等，则沿next回退j，继续尝试。这样避免重复比较。",
+  "key_points": [
+    "构造next时也要避免重复比较",
+    "维护当前最长前后缀长度j",
+    "相等就扩展，不等就沿next回退"
+  ],
+  "examples": [
+    "手工构造模式 ababaca 的 next 数组时，可以按扫描与回退的过程逐步得到结果"
+  ],
+  "misconceptions": [
+    "构造next必须对每个前缀暴力枚举所有前后缀",
+    "构造next与匹配过程完全无关"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么构造next数组可以做到线性时间？",
+      "a": "因为扫描过程中要么推进i，要么通过next回退j，不会对同一对字符做重复比较，所以总体是线性时间。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "next数组的含义",
+    "KMP失配时的指针移动"
+  ],
+  "source_pages": [
+    85,
+    88
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "095_next数组的线性构造",
+  "_chunk_pages": [
+    85,
+    88
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "title": "strtol 更可靠地转整数",
+  "definition": "strtol(const char *nptr, char **endptr, int base) 是更可靠的字符串转长整数函数。它返回转换结果，endptr 会指向未转换部分，便于判断是否把整串都成功转换了。",
+  "key_points": [
+    "可替代 atoi 用来解析端口。",
+    "如果 *endptr 不是 '\\0'，说明还有未转换字符，例如 \"8080abc\"。",
+    "还需要检查结果是否在 1 到 65535 之间。"
+  ],
+  "examples": [
+    "char *endptr; long port = strtol(s, &endptr, 10); if (*endptr != '\\0' || port < 1 || port > 65535) { /* 错误 */ }"
+  ],
+  "misconceptions": [
+    "只看返回值，不看 endptr。",
+    "以为 strtol 自动保证结果在端口合法范围内。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "strtol 里 endptr 的作用是什么？",
+      "a": "endptr 指向未转换部分，可用来判断字符串是否存在多余字符。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "字符串转整数",
+    "整数范围"
+  ],
+  "source_pages": [
+    101,
+    104
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "157_strtol_更可靠地转整数",
+  "_chunk_pages": [
+    101,
+    104
+  ]
+}

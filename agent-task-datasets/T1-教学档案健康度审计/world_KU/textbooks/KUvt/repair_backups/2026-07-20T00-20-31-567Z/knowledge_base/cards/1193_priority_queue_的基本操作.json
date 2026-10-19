@@ -1,0 +1,44 @@
+{
+  "title": "priority_queue 的基本操作",
+  "definition": "priority_queue 提供 push() 和 emplace() 用于插入元素，pop() 用于删除队首元素，top() 用于获得队首元素的 const 引用；它还支持 size()、empty()、swap() 以及标准比较运算符。priority_queue 不提供访问或获得尾元素的机制。pop() 不返回被删除的元素，如果需要保存该元素，必须先通过 top() 获取副本，再调用 pop()。",
+  "key_points": [
+    "top() 返回当前最高优先级元素的 const 引用。",
+    "pop() 只删除队首元素，不返回该元素。",
+    "需要保存弹出元素时，应先执行类似 Error top = errors.top();，再执行 errors.pop();。",
+    "priority_queue 支持 size()、empty()、swap() 和标准比较运算符。"
+  ],
+  "examples": [
+    "保存并删除队首元素：Error top = errors.top(); errors.pop(); return top;",
+    "处理所有元素的典型结构：while (!errors.empty()) { auto& e = errors.top(); errors.pop(); }"
+  ],
+  "misconceptions": [
+    "误以为 pop() 会返回被删除的元素。",
+    "误以为可以通过 top() 修改 priority_queue 中的元素；top() 返回的是 const 引用。",
+    "误以为 priority_queue 提供访问尾元素的方法。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何从 priority_queue 中取出并保存队首元素？",
+      "a": "先通过 top() 获取或复制队首元素，再调用 pop() 删除它。"
+    },
+    {
+      "q": "priority_queue 的 top() 返回什么？",
+      "a": "返回队首元素的 const 引用。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "priority_queue 的优先级语义"
+  ],
+  "source_pages": [
+    578,
+    579
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1193_priority_queue_的基本操作",
+  "_chunk_pages": [
+    577,
+    580
+  ]
+}

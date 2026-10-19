@@ -1,0 +1,46 @@
+{
+  "title": "terminate_handler与 set_terminate",
+  "definition": "set_terminate() 用于设置程序在发生未捕获异常时调用的 terminate_handler。terminate_handler 是一个无参数、无返回值的回调函数指针。terminate_handler 作用于整个程序；调用 set_terminate() 设置新处理器时，会返回原来的处理器。",
+  "key_points": [
+    "terminate_handler 可以在程序终止前输出错误信息，或生成崩溃转储。",
+    "terminate_handler 最终必须终止程序，例如调用 abort() 或 _Exit()；不能真正忽略错误后继续正常运行。",
+    "如果只在程序的一部分临时设置新的 terminate_handler，应保存 set_terminate() 返回的旧处理器，并在适当时恢复。",
+    "崩溃转储通常可以包含未捕获异常发生时的调用栈和局部变量，但其生成方式依赖平台。"
+  ],
+  "examples": [
+    "自定义处理器的形式可以是：[[noreturn]] void terminateHandler() { std::cout << \"Uncaught exception!\" << std::endl; std::_Exit(1); }。然后通过 set_terminate(terminateHandler) 注册它。"
+  ],
+  "misconceptions": [
+    "terminate_handler 不是用于恢复程序执行的普通异常处理器；它必须使进程终止。",
+    "set_terminate() 设置的处理器不是线程或局部作用域专属设置，而是对整个程序生效。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "set_terminate() 的参数是什么？",
+      "a": "是一个无参数、无返回值的 terminate_handler 回调函数指针。"
+    },
+    {
+      "q": "为什么设置临时 terminate_handler 时要保存旧处理器？",
+      "a": "因为 terminate_handler 对整个程序生效；临时代码结束后应恢复原来的处理器，避免影响程序其他部分。"
+    },
+    {
+      "q": "terminate_handler 能否处理错误后让程序继续运行？",
+      "a": "不能。原文指出回调函数必须终止程序，例如调用 abort() 或 _Exit()。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "未捕获异常与 terminate"
+  ],
+  "source_pages": [
+    445,
+    446
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "905_terminate_handler与_set_terminate",
+  "_chunk_pages": [
+    445,
+    448
+  ]
+}

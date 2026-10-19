@@ -1,0 +1,43 @@
+{
+  "title": "非修改序列算法",
+  "definition": "非修改序列算法用于查找元素或获取有关元素的信息，但不会改变序列中元素的值或顺序。教材将其概括为搜索算法、比较算法和计数算法。",
+  "key_points": [
+    "非修改算法只读取序列，不修改元素值和元素顺序。",
+    "搜索算法通常不要求源序列有序。",
+    "这类算法可以减少为遍历元素序列而手写 for 循环的需要。"
+  ],
+  "examples": [
+    "搜索类算法包括 `adjacent_find`、`find`、`find_if`、`find_first_of`、`find_end`、`search` 和 `search_n`。",
+    "比较类算法包括 `equal`、`mismatch`、`lexicographical_compare` 和 `lexicographical_compare_three_way`。"
+  ],
+  "misconceptions": [
+    "非修改算法不会改变序列，不代表它不会返回迭代器、计数或比较结果。",
+    "搜索算法不要求序列有序，不能把它们都误认为二分查找。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "非修改序列算法会改变序列中的元素吗？",
+      "a": "不会。它们不会改变序列中元素的值或顺序。"
+    },
+    {
+      "q": "搜索算法是否通常要求源序列已经排序？",
+      "a": "教材列出的搜索算法不要求源序列有序。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "泛型算法",
+    "迭代器"
+  ],
+  "source_pages": [
+    513,
+    514
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1056_非修改序列算法",
+  "_chunk_pages": [
+    513,
+    516
+  ]
+}

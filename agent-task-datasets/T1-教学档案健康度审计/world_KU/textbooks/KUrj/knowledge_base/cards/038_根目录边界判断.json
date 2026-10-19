@@ -1,0 +1,39 @@
+{
+  "title": "根目录边界判断",
+  "definition": "检查路径是否在 root 下时，不能只做前缀匹配。错误做法是仅判断 path 是否以 root 开头；正确做法是：前缀匹配后，紧跟的字符必须是路径分隔符 / 或字符串结束符，才能说明 path 真正位于 root 内。",
+  "key_points": [
+    "仅用前缀判断会把 /home/user/www2 误判为 /home/user/www 的子目录。",
+    "正确逻辑是：strncmp(path, root, n) == 0 后，再检查 path[n]。",
+    "path[n] 必须是 '\\0' 或 '/'。"
+  ],
+  "examples": [
+    "root = /home/user/www",
+    "/home/user/www/index.html -> 合法",
+    "/home/user/www2/a.html -> 不合法"
+  ],
+  "misconceptions": [
+    "只要字符串前缀相同，就一定在同一目录下。",
+    "root=/a 时，/ab 也应该算在 /a 下面。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么不能只用前缀检查判断路径是否在 root 内？",
+      "a": "因为像 /home/user/www2/a.html 也会通过 /home/user/www 的前缀检查，所以还必须检查前缀后面的字符是 / 或字符串结束。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "realpath 的正确使用"
+  ],
+  "source_pages": [
+    29,
+    32
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "038_根目录边界判断",
+  "_chunk_pages": [
+    29,
+    32
+  ]
+}

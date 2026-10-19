@@ -1,0 +1,42 @@
+{
+  "title": "find的-name按名称查找",
+  "definition": "在 find 命令中，-name 表示按名称查找。教材说明可以使用通配符，但必须用引号括起来。",
+  "key_points": [
+    "-name 用于按名称查找",
+    "可以配合通配符使用",
+    "通配符表达式必须用引号括起来"
+  ],
+  "examples": [
+    "find . -name \"*.c\"",
+    "find /tmp -name \"test*\""
+  ],
+  "misconceptions": [
+    "使用通配符时不加引号，不符合教材给出的写法要求",
+    "把 -name 误认为只能精确匹配固定文件名是不完整的，教材允许使用通配符"
+  ],
+  "qa_pairs": [
+    {
+      "q": "find 的 -name 选项有什么作用？",
+      "a": "按名称查找。"
+    },
+    {
+      "q": "教材对 -name 使用通配符有什么要求？",
+      "a": "可以使用通配符，但必须用引号括起来。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "find命令搜索文件"
+  ],
+  "source_pages": [
+    17,
+    20
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "034_find的_name按名称查找",
+  "_chunk_pages": [
+    17,
+    20
+  ]
+}

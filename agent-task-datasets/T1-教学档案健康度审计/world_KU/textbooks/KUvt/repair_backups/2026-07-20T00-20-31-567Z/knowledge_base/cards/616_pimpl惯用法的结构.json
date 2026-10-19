@@ -1,0 +1,53 @@
+{
+  "title": "pimpl惯用法的结构",
+  "definition": "pimpl（private implementation，私有实现）惯用法，也称 bridge 模式，是将一个类拆分为接口类和实现类：接口类保留稳定的 public 方法，但只保存一个指向实现类对象的指针；实现类包含具体的数据成员和实现细节，接口类的方法再转发调用实现类的对应方法。",
+  "key_points": [
+    "为一个逻辑类定义接口类和实现类两个类。",
+    "接口类公开与原类相同或基本相同的 public 方法。",
+    "接口类通常只包含一个指向实现类对象的指针，例如 `std::unique_ptr<Impl> m_impl`。",
+    "实现类可以作为接口类的 private 嵌套类，并且不导出给用户。",
+    "接口类方法的实现通常只是调用 `m_impl` 指向的实现对象的等价方法。",
+    "实现类按值嵌入接口类时，实现定义变化仍可能暴露给客户；原文强调应使用指向实现类的指针。"
+  ],
+  "examples": [
+    "接口类的核心成员可写成：`class Impl; std::unique_ptr<Impl> m_impl;`。",
+    "接口类方法转发示例：`void Spreadsheet::setCellAt(size_t x, size_t y, const SpreadsheetCell& cell) { m_impl->setCellAt(x, y, cell); }`。",
+    "获取方法转发示例：`SpreadsheetCell& Spreadsheet::getCellAt(size_t x, size_t y) { return m_impl->getCellAt(x, y); }`。"
+  ],
+  "misconceptions": [
+    "pimpl 不是简单地把所有成员函数移到另一个文件，而是要由接口类通过指针持有实现类对象。",
+    "如果实现类对象作为接口类的数据成员按值保存，实现类定义的变化仍可能要求客户重新编译。",
+    "实现类的 public 接口不需要直接暴露给用户；原文建议将 `Impl` 隐藏在接口类内部，并且不导出它。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "pimpl 惯用法中接口类的核心数据成员是什么？",
+      "a": "一个指向实现类对象的指针，例如 `std::unique_ptr<Impl> m_impl`。"
+    },
+    {
+      "q": "pimpl 如何降低实现变化对客户代码的影响？",
+      "a": "客户只依赖接口类的公共定义，实现类的具体数据成员和方法隐藏在实现文件中；只要公共接口不变，实现类变化通常无需客户代码重新编译。"
+    },
+    {
+      "q": "为什么不能把实现类对象直接按值放入接口类？",
+      "a": "因为实现类定义会成为接口类定义的一部分；实现类发生变化时，客户代码仍可能需要重新编译。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "封装",
+    "前置声明",
+    "std::unique_ptr"
+  ],
+  "source_pages": [
+    298,
+    299
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "616_pimpl惯用法的结构",
+  "_chunk_pages": [
+    297,
+    300
+  ]
+}

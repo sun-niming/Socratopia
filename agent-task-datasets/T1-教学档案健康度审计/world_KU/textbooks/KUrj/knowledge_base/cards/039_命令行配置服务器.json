@@ -1,0 +1,38 @@
+{
+  "title": "命令行配置服务器",
+  "definition": "课程项目中的服务器不应把端口和目录硬编码死，而应通过命令行参数配置。建议把端口、网站根目录、首页文件和日志路径放入配置结构体，并允许用命令行覆盖默认值，这样程序才能从 demo 变成可用工具。",
+  "key_points": [
+    "不要把端口和目录写死在代码里。",
+    "可配置项包括 port、root、index、log_path。",
+    "命令行参数应覆盖默认值。"
+  ],
+  "examples": [
+    "默认值：port=8080，root=./www，index=index.html，log_path=./logs/access.log",
+    "命令行示例：./webserver -p 8081 -r ./www -i index.html"
+  ],
+  "misconceptions": [
+    "硬编码配置更简单，所以更适合正式项目。",
+    "只有端口需要可配置，其他路径都可以写死。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么要用命令行配置服务器参数？",
+      "a": "因为命令行参数能覆盖默认值，让程序从 demo 变成可用工具，便于配置端口、根目录、首页和日志路径。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "程序参数"
+  ],
+  "source_pages": [
+    31,
+    32
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "039_命令行配置服务器",
+  "_chunk_pages": [
+    29,
+    32
+  ]
+}

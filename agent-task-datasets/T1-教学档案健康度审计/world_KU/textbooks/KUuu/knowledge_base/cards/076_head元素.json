@@ -1,0 +1,40 @@
+{
+  "title": "head元素",
+  "definition": "<head>...</head>是HTML文档的头部标记，用来提供文档的描述信息。它内部的内容不会显示在浏览器窗口中，可放置页面标题、页面类型、字符集、链接的脚本或样式文件等信息。",
+  "key_points": [
+    "head部分的内容不会显示在浏览器窗口中。",
+    "可在head中放置标题、页面类型、字符集、脚本和样式文件等信息。"
+  ],
+  "examples": [
+    "<head>\n  <title>网页标题</title>\n</head>"
+  ],
+  "misconceptions": [
+    "把<head>当成页面可见内容的一部分。",
+    "认为head只能放标题，不能放其他描述信息。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "<head>标签的主要作用是什么？",
+      "a": "提供文档的描述信息，并且其中的内容不会显示在浏览器窗口中。"
+    },
+    {
+      "q": "head部分可以放哪些内容？",
+      "a": "页面标题、页面类型、使用的字符集、链接的脚本或样式文件等。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "HTML文档基本结构"
+  ],
+  "source_pages": [
+    45,
+    48
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "076_head元素",
+  "_chunk_pages": [
+    45,
+    48
+  ]
+}

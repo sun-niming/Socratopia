@@ -1,0 +1,51 @@
+{
+  "title": "filesystem 辅助函数与空间查询",
+  "definition": "std::filesystem 提供多种用于操作和查询文件系统的非成员辅助函数，包括复制文件或目录的 copy、创建目录的 create_directory、判断路径是否存在的 exists、获取文件大小的 file_size、获取最后修改时间的 last_write_time、删除文件的 remove、获取临时目录路径的 temp_directory_path，以及查询可用空间的 space。",
+  "key_points": [
+    "copy 可复制文件或目录，create_directory 可创建目录，remove 可删除文件。",
+    "exists 用于查询给定文件或目录是否存在。",
+    "file_size 获取文件大小，last_write_time 获取最后修改时间。",
+    "temp_directory_path 返回适合存储临时文件的目录。",
+    "space 返回空间信息，可用于查询文件系统容量和剩余空间。"
+  ],
+  "examples": [
+    "space_info s{space(\"c:\\\\\")};",
+    "cout << \"Capacity: \" << s.capacity << endl;",
+    "cout << \"Available: \" << s.available << endl;"
+  ],
+  "misconceptions": [
+    "space 返回的是空间信息结构，不是单个整数。",
+    "file_size 用于获取文件大小，不是目录中文件数量。",
+    "temp_directory_path 返回临时目录路径，并不会自动创建临时文件。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "哪个函数用于查询文件系统的容量和可用空间？",
+      "a": "space 函数。"
+    },
+    {
+      "q": "哪个函数用于创建目录？",
+      "a": "create_directory 函数。"
+    },
+    {
+      "q": "哪个函数用于获取文件最后修改的时间？",
+      "a": "last_write_time 函数。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "std::filesystem 基础",
+    "文件和目录操作"
+  ],
+  "source_pages": [
+    432,
+    432
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "876_filesystem_辅助函数与空间查询",
+  "_chunk_pages": [
+    429,
+    432
+  ]
+}

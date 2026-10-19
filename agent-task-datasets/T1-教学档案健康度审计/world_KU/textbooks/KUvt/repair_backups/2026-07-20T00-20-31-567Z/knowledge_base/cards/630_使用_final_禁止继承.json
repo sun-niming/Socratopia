@@ -1,0 +1,41 @@
+{
+  "title": "使用 final 禁止继承",
+  "definition": "C++允许使用 `final` 将一个类标记为不可继承。类名后直接写 `final`，任何试图从该类派生的代码都会导致编译错误。",
+  "key_points": [
+    "`final` 写在类名之后。",
+    "被标记为 `final` 的类不能作为其他类的基类。",
+    "从 `final` 类继承会导致编译错误。"
+  ],
+  "examples": [
+    "类声明可以写成：`class Foo final { };`。任何试图写出 `class Bar : public Foo { };` 的代码都会编译失败。"
+  ],
+  "misconceptions": [
+    "`final` 不是运行时限制，而是在编译阶段禁止继承。",
+    "`final` 标记的是整个类不可被继承，不是把某个普通成员自动变成 private。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何声明一个不能被继承的类？",
+      "a": "在类名后添加 `final`，例如 `class Foo final { };`。"
+    },
+    {
+      "q": "从 `final` 类继承会发生什么？",
+      "a": "会导致编译错误。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++类继承的基本语法"
+  ],
+  "source_pages": [
+    306,
+    306
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "630_使用_final_禁止继承",
+  "_chunk_pages": [
+    305,
+    308
+  ]
+}

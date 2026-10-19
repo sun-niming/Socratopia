@@ -1,0 +1,55 @@
+{
+  "title": "Array 动态数组的初始化、析构、移动和扩容实现",
+  "definition": "`Array<T>` 使用动态分配的 `T` 数组保存元素，并通过析构函数释放资源。默认构造函数将数组大小初始化为 `AllocSize`，使用 `new T[m_size]{}` 分配数组，使元素进行值初始化；析构函数使用 `delete[]` 释放数组。移动构造函数和移动赋值运算符通过 `std::exchange` 接管源对象的指针和大小，并将源对象置为空状态。扩容函数 `resize` 创建更大的、值初始化的数组，复制旧数组元素，释放旧数组，再更新成员指针和大小。",
+  "key_points": [
+    "默认构造函数将 `m_size` 设置为初始容量，并执行 `m_elements = new T[m_size]{}`；花括号初始化使内置类型元素被初始化为零。",
+    "析构函数使用 `delete[] m_elements` 释放动态数组，避免内存泄漏。",
+    "移动构造函数通过 `std::exchange(src.m_elements, nullptr)` 接管源数组指针，并通过 `std::exchange(src.m_size, 0)` 将源对象大小置为 0。",
+    "移动赋值运算符先检查自赋值；若不是自赋值，则释放当前资源，再接管右侧对象的指针和大小，并将右侧对象置为空状态。",
+    "`resize(size_t newSize)` 使用 `std::make_unique<T[]>(newSize)` 创建新数组，复制旧元素后释放旧数组，并通过 `release()` 转移新数组的所有权。",
+    "扩容时新数组的大小必须大于旧的 `m_size`；新增加的元素会进行值初始化。"
+  ],
+  "examples": [
+    "默认构造的核心代码：`m_size = AllocSize; m_elements = new T[m_size]{};`。对于内置数值类型，新增元素会初始化为 `0`。",
+    "移动构造的核心逻辑：`m_elements{std::exchange(src.m_elements, nullptr)}, m_size{std::exchange(src.m_size, 0)}`。",
+    "扩容的核心流程：`auto newArray = std::make_unique<T[]>(newSize);`，复制 `m_elements[i]` 到 `newArray[i]`，然后执行 `delete[] m_elements; m_size = newSize; m_elements = newArray.release();`。"
+  ],
+  "misconceptions": [
+    "移动操作不是复制每一个元素，而是转移动态数组的所有权。",
+    "移动后源对象仍然是有效对象，但其数组指针被置为 `nullptr`、大小被置为 `0`。",
+    "`new T[m_size]{}` 中的 `{}` 不是省略初始化，而是要求数组元素进行值初始化。",
+    "扩容时不能在释放旧数组后再读取旧元素，因此必须先把旧元素复制到新数组。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么 `Array` 的析构函数必须使用 `delete[]` 而不是 `delete`？",
+      "a": "因为成员是通过数组形式 `new T[m_size]` 分配的动态数组，所以必须使用匹配的数组释放形式 `delete[]`。"
+    },
+    {
+      "q": "移动构造完成后，源 `Array` 对象的主要状态是什么？",
+      "a": "源对象的 `m_elements` 被置为 `nullptr`，`m_size` 被置为 `0`，而新对象接管原来的动态数组资源。"
+    },
+    {
+      "q": "`resize` 为什么要先创建新数组并复制元素，再释放旧数组？",
+      "a": "因为必须保留旧数组中的元素；先复制到新数组后才能安全释放旧数组，并将新数组设置为当前存储。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "动态数组与 RAII",
+    "析构函数",
+    "移动构造与移动赋值",
+    "智能指针"
+  ],
+  "source_pages": [
+    477,
+    480
+  ],
+  "needs_verification": true,
+  "verify_query": "《C++20高级编程》第5版 第480页 Array<T> 构造函数 析构函数 移动语义 resize std::exchange 完整源码",
+  "concept_id": "622_array_动态数组的初始化_析构_移动和扩容实现",
+  "_chunk_pages": [
+    477,
+    480
+  ]
+}

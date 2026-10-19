@@ -1,0 +1,43 @@
+{
+  "title": "GSM中的移动站点漫游号码（MSRN）",
+  "definition": "移动站点漫游号码（MSRN）是移动用户进入被访网络后临时获得的号码，用于帮助归属MSC将呼叫路由到被访网络的MSC。它不同于与归属网络关联的永久电话号码，并且对通信者和移动用户不可见。",
+  "key_points": [
+    "MSRN是临时号码，移动用户进入被访网络后被分配。",
+    "MSRN承担的作用类似于移动IP中的转交地址（COA）。",
+    "归属MSC可以根据HLR返回的MSRN到达被访网络的MSC。",
+    "如果HLR暂时没有MSRN，则可返回被访网络VLR的地址，由归属MSC查询VLR以获取MSRN。"
+  ],
+  "examples": [
+    "呼叫定位时，HLR直接返回MSRN，归属MSC据此将呼叫路由到被访网络的MSC；若HLR只返回VLR地址，则归属MSC先查询VLR。"
+  ],
+  "misconceptions": [
+    "MSRN不是移动用户的永久电话号码。",
+    "MSRN不是用户或通信者主动使用的可见号码，而是网络内部用于路由选择的临时地址信息。",
+    "HLR不一定总是直接返回MSRN；在原文描述的情况下，它也可能返回VLR地址。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "MSRN与移动用户永久电话号码有什么区别？",
+      "a": "永久电话号码与移动用户的归属网络相关联且长期不变；MSRN是在用户进入被访网络后临时分配、用于呼叫路由选择的号码。"
+    },
+    {
+      "q": "如果HLR没有移动用户的MSRN，归属MSC怎么办？",
+      "a": "HLR返回被访网络中VLR的地址，归属MSC再查询该VLR以获取移动用户的MSRN。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "GSM对移动用户呼叫的间接路由选择"
+  ],
+  "source_pages": [
+    393,
+    394
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "920_gsm中的移动站点漫游号码_msrn",
+  "_chunk_pages": [
+    393,
+    396
+  ]
+}

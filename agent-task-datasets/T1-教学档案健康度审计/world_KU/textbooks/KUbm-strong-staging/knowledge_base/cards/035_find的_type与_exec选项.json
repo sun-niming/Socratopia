@@ -1,0 +1,43 @@
+{
+  "title": "find的-type与-exec选项",
+  "definition": "在 find 命令中，-type 表示按类型查找；-exec 表示对查找到的目标进行进一步处理。教材说明，在 -exec 后面跟处理命令，命令中用 {} 引用被找到的文件，并且整个命令必须以“\\;”结束。",
+  "key_points": [
+    "-type：按类型查找",
+    "-exec：对查找到的目标继续处理",
+    "在 -exec 的命令中，{} 表示被找到的文件",
+    "-exec 后面的命令必须以“\\;”结束"
+  ],
+  "examples": [
+    "find . -type d",
+    "find . -name \"*.log\" -exec rm {} \\;"
+  ],
+  "misconceptions": [
+    "把 -exec 当成独立命令使用是不对的，它是 find 查找后的处理动作",
+    "忘记在 -exec 命令中使用 {} 引用目标，或忘记用“\\;”结束，都不符合教材说明"
+  ],
+  "qa_pairs": [
+    {
+      "q": "find 的 -type 选项有什么作用？",
+      "a": "按类型查找。"
+    },
+    {
+      "q": "find 的 -exec 中，{} 和“\\;”分别表示什么？",
+      "a": "{} 用来引用被找到的文件，“\\;”用来结束处理命令。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "find命令搜索文件"
+  ],
+  "source_pages": [
+    17,
+    20
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "035_find的_type与_exec选项",
+  "_chunk_pages": [
+    17,
+    20
+  ]
+}

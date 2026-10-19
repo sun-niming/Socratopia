@@ -1,0 +1,43 @@
+{
+  "title": "vector 插入和删除使用的迭代器范围",
+  "definition": "传递给 vector 的 insert() 或 erase() 的迭代器范围是半开区间 [first,last)：包含 first 所指元素，但不包含 last 所指元素。范围操作要求 first 和 last 指向同一个容器，并且 last 指向 first 所在位置或其后的位置。",
+  "key_points": [
+    "半开区间 [first,last) 包含起点，不包含终点。",
+    "insert(pos,first,last) 会把 [first,last) 中的元素插入到 pos 所指元素之前。",
+    "范围操作的头、尾迭代器必须属于同一个容器。",
+    "如果迭代器范围不满足这些前提，insert() 或 erase() 不能正常工作。"
+  ],
+  "examples": [
+    "vectorOne.insert(cend(vectorOne), cbegin(vectorTwo), cend(vectorTwo)); // 将 vectorTwo 的全部元素插入 vectorOne 尾部",
+    "vector<int> v{1, 2, 3, 4, 5};\nv.erase(cbegin(v) + 1, cbegin(v) + 5); // 删除 2、3、4、5，不删除位置 5 的尾迭代器"
+  ],
+  "misconceptions": [
+    "把 last 当作范围内最后一个要处理的元素是错误的；last 是排除在范围之外的边界。",
+    "不能随意把一个容器的起始迭代器和另一个容器的末尾迭代器组成一个范围。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "半开区间 [first,last) 包含哪些元素？",
+      "a": "包含 first 所指元素以及其后的元素，但不包含 last 所指位置的元素。"
+    },
+    {
+      "q": "insert(cend(vectorOne), cbegin(vectorTwo), cend(vectorTwo)) 的作用是什么？",
+      "a": "将 vectorTwo 的全部元素按原顺序插入到 vectorOne 的尾部。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "迭代器与半开区间"
+  ],
+  "source_pages": [
+    557,
+    558
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1150_vector_插入和删除使用的迭代器范围",
+  "_chunk_pages": [
+    557,
+    560
+  ]
+}

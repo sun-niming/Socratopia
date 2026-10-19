@@ -1,0 +1,44 @@
+{
+  "title": "C++20中的import方式",
+  "definition": "教材第36页介绍了C++20语境下的`import`写法，并将其与传统的`#include`写法进行对照。示例形式为`import <iostream>;`。这里应理解为教材所展示的代码组织或导入方式；具体编译器支持情况和该示例的准确标准分类需要结合教材版本及实现文档核实。",
+  "key_points": [
+    "教材展示了`import <iostream>;`这一形式。",
+    "`import`与`#include`是教材在第36页中对照介绍的两种写法。",
+    "示例中的`iostream`是C++输入输出相关的标准库名称。",
+    "不要把`import`和`#include`误认为字符完全相同的语法。"
+  ],
+  "examples": [
+    "教材展示的形式：`import <iostream>;`。",
+    "传统形式：`#include <iostream>`。"
+  ],
+  "misconceptions": [
+    "不能把`import <iostream>;`写成没有分号的形式而仍称为教材中的同一示例。",
+    "不能简单认为所有旧版C++编译器都支持教材展示的C++20导入方式。",
+    "`import`不是把`#include`单纯改名；两者的处理机制和语言规则不同。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "教材展示的C++20导入iostream的写法是什么？",
+      "a": "`import <iostream>;`。"
+    },
+    {
+      "q": "教材将import与哪一种传统写法进行比较？",
+      "a": "与`#include <iostream>`进行比较。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "Hello World程序的基本目的"
+  ],
+  "source_pages": [
+    33,
+    36
+  ],
+  "needs_verification": true,
+  "verify_query": "《C++20高级编程》第5版第36页 C++20 import <iostream> #include <iostream> 标准语法",
+  "concept_id": "021_c_20中的import方式",
+  "_chunk_pages": [
+    33,
+    36
+  ]
+}

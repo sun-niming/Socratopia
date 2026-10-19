@@ -1,0 +1,44 @@
+{
+  "title": "带内存大小参数的 operator delete",
+  "definition": "可以定义接收两个参数的 operator delete：待释放内存的指针和要释放的内存大小。其典型形式是：$$\\texttt{void operator delete(void* ptr, std::size\\_t size) noexcept;}$$这种形式允许释放函数获得对象内存大小，可用于更复杂的自定义内存分配和释放方案。",
+  "key_points": [
+    "带大小参数的 operator delete 比普通 operator delete 多接收一个 std::size_t 参数。",
+    "原文示例中，该函数内部调用不带大小参数的全局 operator delete，因为原文指出不存在接收该大小参数的全局 operator delete。",
+    "原文警告：如果类同时声明不带大小参数和带大小参数的同一形式 operator delete，则不带大小参数的版本总是会被调用；若需要使用带大小参数的版本，应只编写该版本。",
+    "该功能主要用于复杂的自定义内存分配和释放方案。"
+  ],
+  "examples": [
+    "声明形式：\\n\\texttt{void operator delete(void* ptr, std::size\\_t size) noexcept;}",
+    "实现示意：\\n\\texttt{void MemoryDemo::operator delete(void* ptr, std::size\\_t size) noexcept \\\\{\\\\n    std::cout << \"operator delete with size \" << size << std::endl;\\\\n    ::operator delete(ptr);\\\\n\\\\}}"
+  ],
+  "misconceptions": [
+    "带大小参数的 operator delete 不是另一个全局 operator delete 的调用形式；原文示例调用的是不带大小参数的全局函数。",
+    "声明带大小参数版本并不意味着在同时存在无大小版本时它一定会被选择。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "带大小参数的 operator delete 的参数是什么？",
+      "a": "参数是待释放内存的指针和内存大小，即通常写作 \\texttt{void operator delete(void*, std::size\\_t) noexcept}。"
+    },
+    {
+      "q": "如果类同时声明带大小参数和不带大小参数的同一版本 operator delete，原文说哪个版本会被调用？",
+      "a": "原文说不带大小参数的版本总是会被调用；若要使用带大小参数的版本，应只编写该版本。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "operator delete重载",
+    "std::size_t"
+  ],
+  "source_pages": [
+    495,
+    495
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 sized deallocation class-specific operator delete unsized sized overload selection rule",
+  "concept_id": "993_带内存大小参数的_operator_delete",
+  "_chunk_pages": [
+    493,
+    496
+  ]
+}

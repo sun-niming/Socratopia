@@ -1,0 +1,42 @@
+{
+  "title": "动态对象数组与资源释放责任",
+  "definition": "可以使用new T[num]在自由存储区中创建包含num个对象的数组。数组中的对象连续存储，并且每个对象的默认构造函数会自动调用。返回的指针指向第0个对象。调用者必须使用delete[]释放该数组；如果函数返回动态数组，通常由调用者负责执行对应的delete[]。",
+  "key_points": [
+    "new T[num]会为num个对象分配连续内存。",
+    "对于对象数组，数组中的每个元素都会进行默认构造。",
+    "动态数组本身分配后大小不会自动变化。",
+    "C风格数组通常不保存自身元素数量，因此仅凭返回的指针无法知道数组长度。",
+    "通过函数返回动态数组时，必须明确由谁负责使用delete[]释放内存。"
+  ],
+  "examples": [
+    "函数根据运行时数量创建Document数组：Document* createDocArray() { size_t numDocs { askUserForNumberOfDocuments() }; Document* docArray { new Document[numDocs] }; return docArray; }",
+    "调用者释放返回的数组：Document* docs { createDocArray() }; /* 使用docs */ delete[] docs;"
+  ],
+  "misconceptions": [
+    "认为动态分配的数组会自动记录长度并能通过指针查询元素数量。",
+    "认为函数返回动态数组后，数组会自动释放。",
+    "认为new T[num]只分配内存而不构造对象。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么仅通过createDocArray()返回的Document*无法知道数组中有多少个元素？",
+      "a": "因为返回的是指向数组第0个元素的指针，而C风格数组通常不保存自身长度信息；调用者必须另外传递或保存元素数量。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "动态数组",
+    "对象构造与析构"
+  ],
+  "source_pages": [
+    203,
+    203
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "425_动态对象数组与资源释放责任",
+  "_chunk_pages": [
+    201,
+    204
+  ]
+}

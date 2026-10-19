@@ -1,0 +1,45 @@
+{
+  "title": "使用 virtual 实现基类接口的动态多态",
+  "definition": "在 C++ 中，基类成员函数如果声明为 virtual，派生类可以提供同名且签名匹配的重写版本。当通过基类引用或基类指针调用该虚函数时，实际执行的函数由对象的动态类型决定，因此可以调用派生类版本。",
+  "key_points": [
+    "基类中的虚函数为派生类提供可重写的接口。",
+    "派生类重写虚函数时，应使用 override 明确表示这是对基类虚函数的重写。",
+    "通过基类引用或基类指针调用虚函数时，若对象实际是派生类对象，会执行派生类的重写版本。",
+    "派生类对象直接调用成员函数时，也会调用派生类中可见的同名版本。"
+  ],
+  "examples": [
+    "示例结构：文本形式可表示为 `class Base { public: virtual void go(); }; class Derived : public Base { public: void go() override; };`。",
+    "`Derived myDerived; myDerived.go();` 调用 `Derived::go()`。",
+    "`Base& ref = myDerived; ref.go();` 由于 `go()` 是虚函数，调用的仍是 `Derived::go()`，而不是 `Base::go()`。"
+  ],
+  "misconceptions": [
+    "只有在基类函数声明为 virtual，并且通过基类引用或指针进行调用时，才会发生基于动态类型的虚函数分派。",
+    "派生类函数名相同并不一定表示成功重写；参数列表等函数签名必须匹配，使用 override 可以让编译器检查这一点。",
+    "将对象赋值或转换为基类对象后，不能据此认为仍然保留完整的派生类对象行为；原文示例强调的是基类引用指向派生类对象的情况。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "当 `Base& ref` 引用一个实际类型为 `Derived` 的对象，并调用基类中声明为 `virtual` 的 `go()` 时，执行哪个版本？",
+      "a": "执行 `Derived::go()`，因为虚函数调用根据对象的动态类型进行分派。"
+    },
+    {
+      "q": "派生类重写基类虚函数时，`override` 的作用是什么？",
+      "a": "它明确表示该函数意图重写基类虚函数，并由编译器检查是否确实存在匹配的可重写函数。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++类的继承与成员函数调用"
+  ],
+  "source_pages": [
+    309,
+    310
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "401_使用_virtual_实现基类接口的动态多态",
+  "_chunk_pages": [
+    309,
+    312
+  ]
+}

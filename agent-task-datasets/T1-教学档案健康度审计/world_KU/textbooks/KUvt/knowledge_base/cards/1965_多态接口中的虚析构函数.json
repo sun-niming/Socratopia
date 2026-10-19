@@ -1,0 +1,42 @@
+{
+  "title": "多态接口中的虚析构函数",
+  "definition": "当一个类作为多态接口使用、并可能通过基类指针删除派生类对象时，接口应声明虚析构函数。原文在 Logger、NewLoggerInterface、IPlayer 等接口或基类示例中都特别标注应使用虚析构函数。",
+  "key_points": [
+    "多态接口通常包含至少一个纯虚函数，例如 virtual void log(...) = 0。",
+    "接口的析构函数应声明为 virtual，以便通过基类指针销毁派生类对象时进行正确的析构。",
+    "原文示例使用类似 virtual ~IPlayer() = default; 和 virtual ~NewLoggerInterface() = default; 的形式。"
+  ],
+  "examples": [
+    "抽象接口示例：class IPlayer { public: virtual ~IPlayer() = default; virtual std::string getName() const = 0; };",
+    "Logger 接口示例：virtual ~Logger() = default;"
+  ],
+  "misconceptions": [
+    "有纯虚函数并不意味着析构函数可以省略虚函数属性；多态基类仍应考虑虚析构函数。",
+    "虚析构函数不会让接口自动完成业务逻辑，它主要影响对象销毁时的析构行为。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么多态接口通常要有虚析构函数？",
+      "a": "因为对象可能通过基类指针销毁；虚析构函数可以确保先调用派生类析构函数，再调用基类析构函数。"
+    },
+    {
+      "q": "原文中的接口如何声明默认虚析构函数？",
+      "a": "可以写成 virtual ~IPlayer() = default;，类似地，其他多态接口也可使用 virtual ~InterfaceName() = default;。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++ 多态接口"
+  ],
+  "source_pages": [
+    954,
+    956
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1965_多态接口中的虚析构函数",
+  "_chunk_pages": [
+    953,
+    956
+  ]
+}

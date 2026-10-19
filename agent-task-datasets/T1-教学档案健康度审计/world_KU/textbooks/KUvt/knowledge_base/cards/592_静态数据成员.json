@@ -1,0 +1,52 @@
+{
+  "title": "静态数据成员",
+  "definition": "静态数据成员使用 `static` 声明，属于类本身而不是某个对象，因此该类的所有对象共享同一个静态数据成员。它适合表示类级别的共享状态，例如为所有 `Spreadsheet` 对象维护一个统一的对象编号计数器。",
+  "key_points": [
+    "静态数据成员不属于每个对象各自独立的数据副本，而是类共享的一份数据。",
+    "除非采用类内定义的内联静态数据成员等形式，静态数据成员通常还需要在类外定义，以便分配存储空间。",
+    "类外定义静态数据成员时，要使用作用域解析运算符，例如 `Spreadsheet::ms_counter`。",
+    "教材指出，静态数据成员默认初始化为 `0`；静态指针默认初始化为 `nullptr`。",
+    "在类方法内部，可以像使用普通数据成员一样直接访问静态数据成员。"
+  ],
+  "examples": [
+    "```cpp\nexport class Spreadsheet {\nprivate:\n    static std::size_t ms_counter;\n};\n\n// 在类外定义并初始化\nstd::size_t Spreadsheet::ms_counter{0};\n```",
+    "静态成员适合保存所有对象共享的计数器：\n```cpp\nclass Spreadsheet {\nprivate:\n    static std::size_t ms_counter;\n    std::size_t m_id;\n};\n```\n构造对象时可使用共享的 `ms_counter` 为对象生成唯一编号。"
+  ],
+  "misconceptions": [
+    "静态数据成员不是每个对象都拥有一份副本；同一类的对象共享它。",
+    "只在类定义中声明静态数据成员，通常并不等于已经完成存储空间定义；还需要类外定义，除非使用内联静态数据成员等方式。",
+    "静态数据成员属于类，但仍受访问控制符限制；声明为 `private` 时，类外不能任意访问。",
+    "静态数据成员与静态局部变量不同：这里讨论的是类的成员，并通过类作用域组织。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么用静态数据成员保存 `Spreadsheet` 对象计数器？",
+      "a": "因为计数器需要被所有 `Spreadsheet` 对象共享并保持同步，不应让每个对象各自保存一份副本。"
+    },
+    {
+      "q": "如何在类外定义 `Spreadsheet` 的静态成员 `ms_counter`？",
+      "a": "使用 `std::size_t Spreadsheet::ms_counter{0};`，其中 `Spreadsheet::` 表示该变量属于 `Spreadsheet` 类。"
+    },
+    {
+      "q": "在类方法内部如何访问静态数据成员？",
+      "a": "可以像访问普通数据成员一样直接使用其名称。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "类成员",
+    "对象生命周期",
+    "作用域解析运算符"
+  ],
+  "source_pages": [
+    283,
+    284
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "592_静态数据成员",
+  "_chunk_pages": [
+    281,
+    284
+  ]
+}

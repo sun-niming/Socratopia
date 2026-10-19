@@ -1,0 +1,46 @@
+{
+  "title": "vector 构造函数与元素初始化",
+  "definition": "vector 可以使用不同构造方式创建。默认构造函数创建空 vector；指定一个数量可以创建相应数量的元素；同时指定数量和值可以创建指定数量且每个元素都具有该值的 vector。若没有提供默认值，新元素会进行值初始化：基本整数类型初始化为 0，基本浮点类型初始化为 0.0，指针类型初始化为 `nullptr`。vector 的元素也可以是 `string` 或用户自定义类型。",
+  "key_points": [
+    "`vector<int> v;` 创建 0 个元素的 vector。",
+    "`vector<int> v(10, 100);` 创建 10 个 int 元素，且每个元素值为 100。",
+    "`vector<int> v(10);` 创建 10 个 int 元素，按教材所述进行值初始化，值为 0。",
+    "`vector<string> v(10, \"hello\");` 创建 10 个值为 `\"hello\"` 的 string 元素。",
+    "用户自定义类只要满足相应的构造和析构要求，也可以作为 vector 的元素类型。"
+  ],
+  "examples": [
+    "`vector<int> intVector(10, 100);` 的结果是：$[100,100,100,100,100,100,100,100,100,100]$。",
+    "`vector<int> intVector(10);` 的结果是包含 10 个 0 的 vector。",
+    "`vector<string> stringVector(10, \"hello\");` 的结果是包含 10 个 `\"hello\"` 的 vector。"
+  ],
+  "misconceptions": [
+    "`vector<int>(10, 100)` 不是创建两个元素 10 和 100，而是创建 10 个值为 100 的元素。",
+    "未提供初始值时，基本类型元素不会保留未初始化的随机值；教材所述整数为 0、浮点数为 0.0、指针为 nullptr。",
+    "vector 的元素类型不局限于 int 或 double，也可以是 string 和用户自定义类。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`vector<int> v(10, 100)` 包含多少个元素？每个元素是什么值？",
+      "a": "包含 10 个元素，每个元素的值都是 100。"
+    },
+    {
+      "q": "`vector<int> v(10)` 中元素的初始值是什么？",
+      "a": "按教材所述，int 元素进行值初始化，初始值为 0。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "vector 的模板参数与默认分配器"
+  ],
+  "source_pages": [
+    551,
+    551
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1134_vector_构造函数与元素初始化",
+  "_chunk_pages": [
+    549,
+    552
+  ]
+}

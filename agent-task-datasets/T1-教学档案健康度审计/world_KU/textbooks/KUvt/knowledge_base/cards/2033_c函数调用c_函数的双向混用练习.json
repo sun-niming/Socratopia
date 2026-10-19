@@ -1,0 +1,50 @@
+{
+  "title": "C函数调用C++函数的双向混用练习",
+  "definition": "教材指出，混用C和C++的示例不仅可以是从C++调用C代码，也可以反过来由C调用C++代码。练习要求编写一个名为writeTextFromC(const char*)的C函数，该函数调用名为writeTextFromCpp(const char*)的C++函数；后者使用cout将给定字符串打印到标准输出。最后在C++中编写main函数，调用C函数writeTextFromC进行测试。",
+  "key_points": [
+    "调用方向是：C++中的main调用C函数writeTextFromC，writeTextFromC再调用C++函数writeTextFromCpp。",
+    "两个函数都接收`const char*`类型的字符串参数。",
+    "writeTextFromCpp使用`cout`将字符串输出到标准输出。",
+    "测试代码中的main函数应位于C++部分，并调用writeTextFromC。"
+  ],
+  "examples": [
+    "调用关系可表示为：$$\\text{main}_{\\mathrm{C++}}\\rightarrow\\text{writeTextFromC}_{\\mathrm{C}}\\rightarrow\\text{writeTextFromCpp}_{\\mathrm{C++}}\\rightarrow\\text{cout}$$",
+    "函数接口按原文可写为：`void writeTextFromC(const char* text);`和`void writeTextFromCpp(const char* text);`。"
+  ],
+  "misconceptions": [
+    "C与C++混用不只有“C++调用C”这一种方向，也可以设计为C函数调用C++函数。",
+    "writeTextFromC负责发起对C++函数的调用，而实际使用cout输出字符串的是writeTextFromCpp。",
+    "测试入口main是在C++中编写的，不是由C代码单独完成。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "练习要求的调用链是什么？",
+      "a": "C++中的main调用C函数writeTextFromC，writeTextFromC再调用C++函数writeTextFromCpp，最后由writeTextFromCpp使用cout输出字符串。"
+    },
+    {
+      "q": "writeTextFromCpp的作用是什么？",
+      "a": "接收一个const char*字符串，并使用cout将它打印到标准输出。"
+    },
+    {
+      "q": "如何测试这组C/C++混合代码？",
+      "a": "在C++中编写main函数，并在main中调用C函数writeTextFromC。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "C与C++混合编程",
+    "函数声明与调用",
+    "标准输出流cout"
+  ],
+  "source_pages": [
+    989,
+    989
+  ],
+  "needs_verification": true,
+  "verify_query": "\"writeTextFromC\" \"writeTextFromCpp\" cout C++ C interoperability",
+  "concept_id": "2033_c函数调用c_函数的双向混用练习",
+  "_chunk_pages": [
+    989,
+    992
+  ]
+}

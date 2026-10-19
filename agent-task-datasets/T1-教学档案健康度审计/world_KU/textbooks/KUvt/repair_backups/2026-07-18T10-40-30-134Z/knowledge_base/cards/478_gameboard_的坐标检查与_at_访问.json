@@ -1,0 +1,47 @@
+{
+  "title": "GameBoard 的坐标检查与 at() 访问",
+  "definition": "GameBoard 通过 verifyCoordinate(size_t x, size_t y) 检查坐标是否越过棋盘边界。若 x 大于等于棋盘宽度或 y 大于等于棋盘高度，就抛出 std::out_of_range。at() 在访问前执行该检查，然后返回指定单元格的 unique_ptr 引用。",
+  "key_points": [
+    "合法坐标必须满足 $0 \\le x < m\\_width$ 且 $0 \\le y < m\\_height$。",
+    "当 x >= m_width 时抛出 std::out_of_range；当 y >= m_height 时也抛出 std::out_of_range。",
+    "at() 返回单元格的 std::unique_ptr<GamePiece> 引用，因此调用者可以读取、替换或清空单元格中的棋子。",
+    "const 版本的 at() 返回 const std::unique_ptr<GamePiece>&，用于 const GameBoard 上的只读访问。"
+  ],
+  "examples": [
+    "坐标合法条件：$$\\begin{cases}0\\le x<m\\_width\\\\0\\le y<m\\_height\\end{cases}$$",
+    "对 8×8 棋盘，(0,0) 和 (7,7) 是边界内坐标，而 x=8 或 y=8 会触发 std::out_of_range。",
+    "错误处理逻辑：if (x >= m_width) throw std::out_of_range{...}; if (y >= m_height) throw std::out_of_range{...};"
+  ],
+  "misconceptions": [
+    "边界检查使用的是大于等于，即 x == m_width 已经越界，最大合法 x 是 m_width - 1。",
+    "at() 返回的是 unique_ptr 的引用，不是棋子对象的引用；若要访问具体棋子，需要进一步解引用并注意空指针。",
+    "坐标越界与单元格为空是两种不同情况：前者抛出异常，后者返回值为 nullptr 的 unique_ptr。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "宽度为 8 的棋盘上，x=8 是否是合法坐标？",
+      "a": "不合法，因为合法条件是 x < m_width；x == 8 时会抛出 std::out_of_range。"
+    },
+    {
+      "q": "at() 在返回单元格前做什么？",
+      "a": "先调用 verifyCoordinate(x, y) 检查坐标是否越界，然后返回 m_cells[x][y]。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++异常与std::out_of_range",
+    "const成员函数",
+    "引用返回"
+  ],
+  "source_pages": [
+    375,
+    376
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "478_gameboard_的坐标检查与_at_访问",
+  "_chunk_pages": [
+    373,
+    376
+  ]
+}

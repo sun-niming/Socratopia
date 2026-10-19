@@ -1,0 +1,44 @@
+{
+  "title": "Database 类的数据组织与自动分配雇员编号",
+  "definition": "Database 类使用 `std::vector<Employee>` 集中存储所有 Employee 对象，并用 m_nextEmployeeNumber 跟踪下一个要分配的雇员编号。该编号从 FirstEmployeeNumber 开始；每添加一名雇员，就使用当前编号并将 m_nextEmployeeNumber 递增。",
+  "key_points": [
+    "数据库是所有雇员记录的中心存储库。",
+    "数据成员 `m_employees` 的类型为 `std::vector<Employee>`。",
+    "数据成员 `m_nextEmployeeNumber` 使用 FirstEmployeeNumber 初始化。",
+    "自动编号逻辑可表示为：$$\\text{新雇员编号}=m\\_nextEmployeeNumber;\\quad m\\_nextEmployeeNumber\\leftarrow m\\_nextEmployeeNumber+1$$"
+  ],
+  "examples": [
+    "若 FirstEmployeeNumber 为 11000，则第一次添加的雇员使用 11000；添加后下一个雇员将获得 11001。",
+    "典型成员声明：`std::vector<Employee> m_employees; int m_nextEmployeeNumber { FirstEmployeeNumber };`"
+  ],
+  "misconceptions": [
+    "m_nextEmployeeNumber 表示下一个可分配的编号，不是当前已添加雇员的数量。",
+    "雇员编号由 Database 自动指定，不需要由调用 addEmployee 的外部代码提供。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "Database 使用什么容器保存雇员？",
+      "a": "使用 `std::vector<Employee>` 保存 Employee 对象。"
+    },
+    {
+      "q": "添加一名雇员后 m_nextEmployeeNumber 如何变化？",
+      "a": "使用当前值分配给新雇员后，m_nextEmployeeNumber 递增 1，供下一名雇员使用。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "std::vector",
+    "类的数据成员"
+  ],
+  "source_pages": [
+    95,
+    96
+  ],
+  "needs_verification": true,
+  "verify_query": "\"C++20高级编程\" \"FirstEmployeeNumber\" \"11000\" Database Employee",
+  "concept_id": "176_database_类的数据组织与自动分配雇员编号",
+  "_chunk_pages": [
+    93,
+    96
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "title": "未捕获异常与 terminate",
+  "definition": "如果程序抛出的异常没有被捕获，程序会终止。遇到未捕获异常时，C++会调用内建的 terminate() 函数；默认情况下，terminate() 会调用 <cstdlib> 中的 abort() 来终止程序。",
+  "key_points": [
+    "应尽量在适当位置捕获并处理程序可能抛出的异常，以便处理或修正错误情况。",
+    "可以在 main() 外层使用 try/catch 结构，作为捕获未经处理异常的最后一道防线。",
+    "未捕获异常会改变程序的正常执行流程，并最终导致进程终止。"
+  ],
+  "examples": [
+    "可在程序入口外围建立异常处理边界：try { main(argc, argv); } catch (...) { /* 处理异常 */ }。原文强调的重点是：不要让异常在程序中无人处理。"
+  ],
+  "misconceptions": [
+    "未捕获异常不会被程序自动忽略；它会导致 terminate()，通常进而终止进程。",
+    "在 main() 外层统一捕获异常不能替代各个模块中针对具体异常的精确处理。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "未捕获异常时，C++通常会调用什么函数？",
+      "a": "会调用 terminate()；默认的 terminate() 会调用 abort() 终止程序。"
+    },
+    {
+      "q": "为什么建议捕获并处理程序中可能抛出的异常？",
+      "a": "因为异常的作用是给程序机会处理和修正错误情况；如果异常未被捕获，程序会终止。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++异常抛出与捕获"
+  ],
+  "source_pages": [
+    445,
+    446
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "904_未捕获异常与_terminate",
+  "_chunk_pages": [
+    445,
+    448
+  ]
+}

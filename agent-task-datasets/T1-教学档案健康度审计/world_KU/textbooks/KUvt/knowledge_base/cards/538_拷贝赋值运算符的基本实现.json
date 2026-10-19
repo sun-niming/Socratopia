@@ -1,0 +1,44 @@
+{
+  "title": "拷贝赋值运算符的基本实现",
+  "definition": "拷贝赋值运算符用于把一个已经存在的对象的当前值替换为另一个对象的值。典型声明为 `SpreadsheetCell& operator=(const SpreadsheetCell& rhs)`，函数体通常为每个数据成员执行赋值，最后返回当前对象 `*this` 的引用。",
+  "key_points": [
+    "拷贝构造函数用于初始化尚未有有效值的目标对象；拷贝赋值运算符用于改写已经存在对象的当前值。",
+    "赋值运算符通常返回 `*this`，返回类型为类类型的引用，例如 `SpreadsheetCell&`，这样可以与声明匹配。",
+    "对于只包含基本类型数据成员的简单类，编译器生成的默认拷贝赋值运算符通常已经足够，它会逐个成员赋值。"
+  ],
+  "examples": [
+    "典型实现：`SpreadsheetCell& SpreadsheetCell::operator=(const SpreadsheetCell& rhs) { m_value = rhs.m_value; return *this; }`",
+    "调用示例：`SpreadsheetCell anotherCell{5}; SpreadsheetCell myCell{6}; anotherCell = myCell;`"
+  ],
+  "misconceptions": [
+    "拷贝赋值运算符不是在对象声明并初始化时调用的；声明初始化通常调用拷贝构造函数。",
+    "赋值运算符不应返回一个新的独立对象，而应返回当前对象 `*this` 的引用。",
+    "简单类不一定必须手写拷贝赋值运算符。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "拷贝赋值运算符和拷贝构造函数的主要区别是什么？",
+      "a": "拷贝构造函数在创建并初始化新对象时使用；拷贝赋值运算符在两个对象都已经存在时，用右侧对象的值改写左侧对象。"
+    },
+    {
+      "q": "为什么拷贝赋值运算符通常返回 `*this`？",
+      "a": "因为它通常声明为返回当前类对象的引用，例如 `SpreadsheetCell&`，而 `*this` 就是执行该方法的当前对象，返回它的引用即可匹配返回类型。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "类与对象的基本语法",
+    "引用和this指针"
+  ],
+  "source_pages": [
+    253,
+    253
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "538_拷贝赋值运算符的基本实现",
+  "_chunk_pages": [
+    253,
+    256
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "title": "handle_client 总控流程",
+  "definition": "handle_client 是一次 HTTP 请求的总控函数：先用 recv 读取请求，再解析请求行；如果方法不支持就返回 405，如果请求无效就返回 400，如果解析成功就分发静态文件或错误响应；最后统一写访问日志。",
+  "key_points": [
+    "函数内部通常同时维护 HttpRequest req 和 HttpResult result。",
+    "recv 返回值小于等于 0 时应直接返回。",
+    "无论成功还是失败，都要在最后统一写日志。"
+  ],
+  "examples": [
+    "流程可概括为：recv -> parse_request_line -> send_error 或 send_static_file -> inet_ntop -> write_access_log。"
+  ],
+  "misconceptions": [
+    "只有成功响应才需要写日志",
+    "失败后就不用做统一收尾"
+  ],
+  "qa_pairs": [
+    {
+      "q": "handle_client 的核心职责是什么？",
+      "a": "集中处理一次请求，并在成功或失败后统一得到 result，再写访问日志。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "访问日志检查"
+  ],
+  "source_pages": [
+    90,
+    91
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "135_handle_client_总控流程",
+  "_chunk_pages": [
+    89,
+    92
+  ]
+}

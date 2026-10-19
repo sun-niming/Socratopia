@@ -1,0 +1,45 @@
+{
+  "title": "通过基类 unique_ptr 使用派生类工厂函数",
+  "definition": "当派生类对象由派生类工厂函数创建后，可以用 std::unique_ptr<Cherry> 接收其返回的 BingCherry*，因为 BingCherry 是 Cherry 的派生类。随后可通过基类指针调用 Cherry 接口中的成员函数。",
+  "key_points": [
+    "原文创建 BingCherryTree 对象 theTree。",
+    "调用 theTree.pick() 后，用 unique_ptr<Cherry> 接收返回结果。",
+    "随后可以调用 theCherry->printType()，体现通过基类接口使用派生类对象。"
+  ],
+  "examples": [
+    "BingCherryTree theTree;",
+    "unique_ptr<Cherry> theCherry { theTree.pick() };",
+    "theCherry->printType();"
+  ],
+  "misconceptions": [
+    "unique_ptr<Cherry> 并不表示对象一定是 Cherry 的直接实例；它也可以管理可转换为 Cherry* 的 BingCherry 对象。",
+    "能否通过基类 unique_ptr 正确释放派生对象，与基类析构函数的设计有关；原文片段未展开该条件。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么 BingCherryTree::pick() 返回的 BingCherry* 可以初始化 unique_ptr<Cherry>？",
+      "a": "因为 BingCherry 是 Cherry 的派生类，BingCherry* 可以向上转换为 Cherry*，从而初始化 unique_ptr<Cherry>。"
+    },
+    {
+      "q": "theCherry->printType() 通过什么接口调用？",
+      "a": "通过 Cherry 类型的基类接口调用。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "继承中的向上转换",
+    "std::unique_ptr",
+    "协变返回类型"
+  ],
+  "source_pages": [
+    329,
+    332
+  ],
+  "needs_verification": true,
+  "verify_query": "C++ unique_ptr<Base> 接收 Derived* 协变返回类型 虚析构函数 规则",
+  "concept_id": "430_通过基类_unique_ptr_使用派生类工厂函数",
+  "_chunk_pages": [
+    329,
+    332
+  ]
+}

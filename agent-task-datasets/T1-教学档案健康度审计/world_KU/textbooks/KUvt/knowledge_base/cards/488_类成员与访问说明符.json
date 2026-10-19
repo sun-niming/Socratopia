@@ -1,0 +1,42 @@
+{
+  "title": "类成员与访问说明符",
+  "definition": "类成员可以是成员函数、成员变量、成员枚举、类型别名或嵌套类等。每个成员受public、protected或private三种访问说明符之一控制。访问说明符对其后声明的所有成员生效，直到遇到下一个访问说明符。C++类的默认访问说明符是private。",
+  "key_points": [
+    "public成员可以被类的外部客户直接访问。",
+    "private成员只能由类自身的成员函数等受允许的类内部代码访问。",
+    "protected访问说明符主要与继承有关。",
+    "在第一个访问说明符之前声明的类成员默认是private。"
+  ],
+  "examples": [
+    "class SpreadsheetCell {\n    void privateFunction(); // 默认是private\npublic:\n    void setValue(double value);\nprivate:\n    double m_value;\n};"
+  ],
+  "misconceptions": [
+    "访问说明符不是只修饰紧随其后的一行，而是持续作用到下一个访问说明符。",
+    "把成员函数声明为public，不会自动使其访问的private数据成员也变成public。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如果类中第一个访问说明符之前声明了成员，该成员默认具有什么访问权限？",
+      "a": "private。"
+    },
+    {
+      "q": "访问说明符的作用范围是什么？",
+      "a": "从该说明符开始，持续到遇到下一个访问说明符为止。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++类定义"
+  ],
+  "source_pages": [
+    230,
+    230
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "488_类成员与访问说明符",
+  "_chunk_pages": [
+    229,
+    232
+  ]
+}

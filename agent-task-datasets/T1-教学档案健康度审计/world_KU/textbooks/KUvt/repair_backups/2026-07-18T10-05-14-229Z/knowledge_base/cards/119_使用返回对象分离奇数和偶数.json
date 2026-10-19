@@ -1,0 +1,45 @@
+{
+  "title": "使用返回对象分离奇数和偶数",
+  "definition": "更简洁的做法是定义一个包含两个整数向量的对象，例如 OddsAndEvens，其中 odds 保存奇数，evens 保存偶数；函数接收输入 `vector<int>`，遍历元素后将结果写入对应向量，并返回这个对象。",
+  "key_points": [
+    "函数可以声明为 `OddsAndEvens separateOddsAndEvens(const vector<int>& arr)`。",
+    "遍历输入向量时，奇数使用 `odds.push_back(i)`，偶数使用 `evens.push_back(i)`。",
+    "调用方可以使用 `auto OddsAndEvens { separateOddsAndEvens(vecUnSplit) };`，再访问 `OddsAndEvens.odds` 和 `OddsAndEvens.evens`。",
+    "输入示例为 `{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}`，结果对象分别保存奇数序列和偶数序列。"
+  ],
+  "examples": [
+    "示意代码：`struct OddsAndEvens { vector<int> odds; vector<int> evens; };`",
+    "函数核心逻辑：`OddsAndEvens separateOddsAndEvens(const vector<int>& arr) { vector<int> odds, evens; for (int i : arr) { if (i % 2 == 1) { odds.push_back(i); } else { evens.push_back(i); } } return OddsAndEvens{odds, evens}; }`。"
+  ],
+  "misconceptions": [
+    "返回一个包含两个向量的对象，并不意味着只能返回一个结果；对象可以封装多个相关结果。",
+    "`const vector<int>&` 表示函数通过常量引用读取输入向量，不应在函数中修改输入向量。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`separateOddsAndEvens` 返回的 OddsAndEvens 对象包含什么？",
+      "a": "包含两个整数向量：`odds` 保存奇数，`evens` 保存偶数。"
+    },
+    {
+      "q": "调用分离函数后如何访问结果？",
+      "a": "例如使用 `result.odds` 访问奇数向量，使用 `result.evens` 访问偶数向量。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "std::vector",
+    "范围 for 循环",
+    "结构体或类对象"
+  ],
+  "source_pages": [
+    85,
+    86
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "119_使用返回对象分离奇数和偶数",
+  "_chunk_pages": [
+    85,
+    88
+  ]
+}

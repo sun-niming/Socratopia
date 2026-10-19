@@ -1,0 +1,36 @@
+{
+  "title": "table边框属性border",
+  "definition": "table默认没有边框显示；如果希望表格显示边框，可以使用CSS设置，或者直接使用border属性，例如 <table border=\"1\"></table>。",
+  "key_points": [
+    "表格默认没有边框",
+    "可以用CSS或border属性设置边框"
+  ],
+  "examples": [
+    "<table border=\"1\"></table>"
+  ],
+  "misconceptions": [
+    "以为表格天生就有边框",
+    "以为只能通过CSS设置边框"
+  ],
+  "qa_pairs": [
+    {
+      "q": "table标签默认会显示边框吗？",
+      "a": "不会，默认没有边框显示；可用CSS或border属性设置。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "table标签"
+  ],
+  "source_pages": [
+    65,
+    68
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "081_table边框属性border",
+  "_chunk_pages": [
+    65,
+    68
+  ]
+}

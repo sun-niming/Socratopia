@@ -1,0 +1,52 @@
+{
+  "title": "stoi 等整数转换函数的进制规则",
+  "definition": "stoi、stol、stoul、stoll 和 stoull 用于把字符串转换为整数，并接受 base 参数指定进制。base 默认是 10；当 base 为 0 时，函数根据字符串前缀自动判断进制。",
+  "key_points": [
+    "base 为 10 时按十进制解析；base 为 16 时按十六进制解析。",
+    "当 base 为 0 且字符串以 0x 或 0X 开头时，按十六进制解析。",
+    "当 base 为 0 且字符串以 0 开头时，按八进制解析。",
+    "当 base 为 0 且不符合前述前缀时，按十进制解析。",
+    "浮点转换函数 stof 和 stold 不接受 base 参数。"
+  ],
+  "examples": [
+    "stoi(\"101\", nullptr, 2); // 按二进制解析",
+    "stoi(\"0x10\", nullptr, 0); // 按十六进制解析，结果为 16",
+    "stoi(\"010\", nullptr, 0); // 按八进制解析，结果为 8",
+    "stoi(\"10\", nullptr, 0); // 按十进制解析，结果为 10"
+  ],
+  "misconceptions": [
+    "base 为 0 并不表示不进行进制解析，而是启用基于前缀的自动判断。",
+    "只有整数转换函数使用 base 参数；stof 和 stold 不使用 base。",
+    "字符串以 0 开头时，在 base 为 0 的规则下会按八进制解释。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "stoi 等函数的 base 参数默认值是多少？",
+      "a": "默认值为 10。"
+    },
+    {
+      "q": "当 base 为 0 且字符串以 0X 开头时，使用什么进制？",
+      "a": "使用十六进制。"
+    },
+    {
+      "q": "当 base 为 0 且字符串以 0 开头但不是 0x 或 0X 开头时，使用什么进制？",
+      "a": "使用八进制。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "字符串转整数",
+    "整数进制表示"
+  ],
+  "source_pages": [
+    110,
+    110
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "209_stoi_等整数转换函数的进制规则",
+  "_chunk_pages": [
+    109,
+    112
+  ]
+}

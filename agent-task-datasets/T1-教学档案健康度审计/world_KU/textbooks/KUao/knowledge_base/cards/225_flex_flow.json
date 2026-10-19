@@ -1,0 +1,40 @@
+{
+  "title": "flex-flow",
+  "definition": "flex-flow 是 flex-direction 和 flex-wrap 的合集，写法是把两个值按顺序写在一起，用来同时设置主轴方向和是否换行。",
+  "key_points": [
+    "是 flex-direction 与 flex-wrap 的简写/合集",
+    "语法格式为 flex-flow: flex-direction flex-wrap;",
+    "默认值是 row nowrap",
+    "row nowrap 表示主轴方向水平向右且不换行"
+  ],
+  "examples": [
+    "flex-flow: row nowrap;",
+    "flex-flow: column wrap;"
+  ],
+  "misconceptions": [
+    "它不是单独的新属性，而是两个属性的组合",
+    "默认值不是随意排列，而是 row nowrap"
+  ],
+  "qa_pairs": [
+    {
+      "q": "flex-flow 的默认值是什么？",
+      "a": "row nowrap。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "flex-direction",
+    "flex-wrap"
+  ],
+  "source_pages": [
+    157,
+    160
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "225_flex_flow",
+  "_chunk_pages": [
+    157,
+    160
+  ]
+}

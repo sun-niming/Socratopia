@@ -1,0 +1,43 @@
+{
+  "title": "BigInt 数据类型",
+  "definition": "BigInt 是 ES2020 中引入的新的原始数据类型。它是 JavaScript 的数字原始类型，可以表示任意大小的整数，因此可以安全地存储和操作非常大的整数，即使它们超过 Number 的安全整数限制（Number.MAX_SAFE_INTEGER）。",
+  "key_points": [
+    "BigInt 是 ES2020 引入的原始数据类型。",
+    "它用于表示任意大小的整数。",
+    "它可以安全处理超过 Number 安全整数限制的大整数。",
+    "创建方式是整数末尾加 n，或者调用 BigInt() 函数。"
+  ],
+  "examples": [
+    "123n",
+    "BigInt(123)",
+    "9007199254740993n"
+  ],
+  "misconceptions": [
+    "BigInt 不是普通的 Number 类型。",
+    "BigInt 主要用于整数，不是用来表示小数。",
+    "不是所有数字字面量都能直接当作 BigInt，必须加 n 或用 BigInt() 创建。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "BigInt 的主要用途是什么？",
+      "a": "表示任意大小的整数，尤其是超出 Number 安全整数范围的大整数。"
+    },
+    {
+      "q": "BigInt 可以怎样创建？",
+      "a": "可以在整数末尾添加 n，或者调用 BigInt() 函数。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [],
+  "source_pages": [
+    249,
+    252
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "358_bigint_数据类型",
+  "_chunk_pages": [
+    249,
+    252
+  ]
+}

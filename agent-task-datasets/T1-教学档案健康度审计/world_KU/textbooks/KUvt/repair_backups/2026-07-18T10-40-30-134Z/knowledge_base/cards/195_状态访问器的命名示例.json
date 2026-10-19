@@ -1,0 +1,40 @@
+{
+  "title": "状态访问器的命名示例",
+  "definition": "原文列出了状态数据成员及其访问函数的命名示例：数据成员为 m_status，读取状态的函数为 getStatus，设置状态的函数为 setStatus；还出现了 isRunning 形式的布尔状态查询命名。",
+  "key_points": [
+    "状态数据成员示例为 m_status。",
+    "获取状态的成员函数示例为 getStatus。",
+    "设置状态的成员函数示例为 setStatus。",
+    "表示真假状态的查询函数可以使用 is 开头的名称，例如 isRunning。"
+  ],
+  "examples": [
+    "状态访问器名称：m_status、getStatus、setStatus、isRunning。"
+  ],
+  "misconceptions": [
+    "getStatus 和 setStatus 不是 C++ 关键字，只是常见的函数命名方式。",
+    "isRunning 通常表示查询状态，但名称本身不会强制函数返回 bool。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "原文给出的状态数据成员、获取函数和设置函数名称分别是什么？",
+      "a": "分别是 m_status、getStatus 和 setStatus。"
+    },
+    {
+      "q": "表示运行状态查询的函数可以采用什么命名形式？",
+      "a": "可以采用 isRunning 这样的 is 开头命名。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [],
+  "source_pages": [
+    133,
+    136
+  ],
+  "needs_verification": true,
+  "verify_query": "《C++20高级编程》第5版 第134页 m_status getStatus setStatus isRunning 命名规范",
+  "concept_id": "195_状态访问器的命名示例",
+  "_chunk_pages": [
+    133,
+    136
+  ]
+}

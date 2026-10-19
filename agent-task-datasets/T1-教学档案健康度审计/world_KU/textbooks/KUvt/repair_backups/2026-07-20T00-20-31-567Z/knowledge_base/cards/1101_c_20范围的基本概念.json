@@ -1,0 +1,41 @@
+{
+  "title": "C++20范围的基本概念",
+  "definition": "范围（range）是对可迭代元素的数据结构或类型要求的抽象概念。能够支持自由函数 `begin()` 和 `end()` 的数据结构可以作为范围使用。范围库在迭代器之上提供抽象层，使算法能够直接接收一个范围，而不必分别传入 begin 和 end 迭代器。",
+  "key_points": [
+    "范围通常由指向首元素的 begin 迭代器和指向末元素之后位置的 end 迭代器界定。",
+    "有效范围的例子包括 `std::array`、`std::vector`、`std::string_view`、`std::span` 和固定大小的 C 风格数组。",
+    "范围库可减少 begin/end 不匹配的错误，并支持范围算法、投影、视图和工厂等组件。"
+  ],
+  "examples": [
+    "传统算法通常写成：`sort(begin(data), end(data));`。范围算法可以直接写成：`std::ranges::sort(data);`"
+  ],
+  "misconceptions": [
+    "范围不等于容器；容器拥有元素，而视图也可以是范围但通常不拥有元素。",
+    "范围不是只能由标准容器构成；只要满足 begin/end 等迭代要求的数据结构都可能是范围。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "什么是范围？",
+      "a": "范围是定义了可迭代元素要求的抽象概念；支持 begin() 和 end() 的数据结构可以作为范围。"
+    },
+    {
+      "q": "范围库相对于直接使用迭代器对解决了什么问题？",
+      "a": "它允许算法直接接收范围，减少了传递不匹配 begin 和 end 迭代器的错误。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "迭代器的基本用法"
+  ],
+  "source_pages": [
+    537,
+    537
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1101_c_20范围的基本概念",
+  "_chunk_pages": [
+    537,
+    540
+  ]
+}

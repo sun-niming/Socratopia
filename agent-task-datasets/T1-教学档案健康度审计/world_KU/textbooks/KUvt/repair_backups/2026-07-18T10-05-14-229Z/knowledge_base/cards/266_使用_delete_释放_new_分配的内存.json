@@ -1,0 +1,48 @@
+{
+  "title": "使用 delete 释放 new 分配的内存",
+  "definition": "使用 new 动态分配的对象不再需要时，应使用 delete 释放对应的动态内存。释放后，可以将指针重新设置为 nullptr，以避免继续使用已经释放的地址。若遗漏释放操作，动态分配的内存会成为孤立内存并造成内存泄漏。",
+  "key_points": [
+    "对单个由 new 分配的 int 对象，可以使用 delete ptr; 释放它。",
+    "释放后可写 ptr = nullptr;，表示该指针当前不再指向有效的动态对象。",
+    "函数中执行 new 却没有相应的 delete，会导致动态内存泄漏；原文将这种情况标记为 BUG，并称其为孤立或泄漏的内存。",
+    "原文还指出 delete nullptr；该点涉及对空指针执行 delete 的行为。"
+  ],
+  "examples": [
+    "存在内存泄漏的示例：void leaky() { int* ptr { new int }; }",
+    "释放动态对象的示例：int* ptr { new int }; delete ptr; ptr = nullptr;"
+  ],
+  "misconceptions": [
+    "执行 delete ptr; 释放的是 ptr 指向的动态对象，不是把指针变量 ptr 本身从作用域中删除。",
+    "delete 不能替代 new；通常需要对由 new 获得的动态对象进行对应释放。",
+    "释放后不应继续通过原指针访问已释放对象；将指针设为 nullptr 可以降低误用风险，但不会恢复已释放对象。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么 void leaky() 会造成内存泄漏？",
+      "a": "因为函数中使用 new int 动态分配了一个 int 对象，但函数结束前没有使用 delete 释放该对象，导致这块动态内存成为孤立或泄漏的内存。"
+    },
+    {
+      "q": "如何释放由 new int 分配的对象，并处理原指针？",
+      "a": "先执行 delete ptr; 释放对象，再执行 ptr = nullptr; 让指针不再指向已释放的地址。"
+    },
+    {
+      "q": "原文对 delete nullptr 有什么说明？",
+      "a": "原文列出了 delete nullptr 这一情况；其具体语言规则表述建议结合该教材的完整排版或 C++ 标准进一步核实。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "使用 new 动态分配整数对象"
+  ],
+  "source_pages": [
+    197,
+    200
+  ],
+  "needs_verification": true,
+  "verify_query": "C++ delete nullptr 行为 标准 delete 空指针 是否安全",
+  "concept_id": "266_使用_delete_释放_new_分配的内存",
+  "_chunk_pages": [
+    197,
+    200
+  ]
+}

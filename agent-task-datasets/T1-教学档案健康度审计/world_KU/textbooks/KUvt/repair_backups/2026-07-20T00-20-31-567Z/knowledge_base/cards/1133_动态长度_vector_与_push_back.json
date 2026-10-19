@@ -1,0 +1,45 @@
+{
+  "title": "动态长度 vector 与 push_back",
+  "definition": "vector 可以从空容器开始，并在运行过程中动态增加元素。默认构造函数创建一个不包含元素的 vector；每读取到一个新值，可以调用 `push_back()` 将该值添加到 vector 的尾部，vector 会为新元素分配存储空间。",
+  "key_points": [
+    "`vector<double> doubleVector;` 创建一个初始包含 0 个元素的 vector。",
+    "`push_back(value)` 将新元素添加到 vector 尾部。",
+    "使用 `push_back()` 后，vector 的元素数量增加。",
+    "已有的范围 for 循环通常无需因为 vector 长度动态变化而修改。"
+  ],
+  "examples": [
+    "`vector<double> scores;` 创建空 vector。",
+    "读取到分数后执行 `scores.push_back(temp);`，即可把分数追加到尾部。",
+    "可以先不断调用 `push_back()` 收集任意数量的分数，再使用 `for (auto& element : scores)` 遍历这些分数。"
+  ],
+  "misconceptions": [
+    "空 vector 不是不能使用，而是可以通过 `push_back()` 动态添加元素。",
+    "`push_back()` 添加元素的位置是尾部，不是任意中间位置。",
+    "动态长度 vector 不需要预先知道最终元素数量。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何创建一个初始为空的 vector？",
+      "a": "使用默认构造函数，例如 `vector<double> scores;`。"
+    },
+    {
+      "q": "如何向 vector 尾部添加一个元素？",
+      "a": "调用 `push_back(value)`，例如 `scores.push_back(temp);`。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "顺序容器与 vector 的基本特性"
+  ],
+  "source_pages": [
+    550,
+    551
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1133_动态长度_vector_与_push_back",
+  "_chunk_pages": [
+    549,
+    552
+  ]
+}

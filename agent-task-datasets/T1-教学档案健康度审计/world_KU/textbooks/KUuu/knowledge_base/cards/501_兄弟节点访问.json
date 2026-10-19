@@ -1,0 +1,39 @@
+{
+  "title": "兄弟节点访问",
+  "definition": "element.previousSibling 和 element.nextSibling 分别返回前一个和后一个兄弟节点，类型可以是任何节点；element.previousElementSibling 和 element.nextElementSibling 分别返回前一个和后一个元素兄弟节点。",
+  "key_points": [
+    "previousSibling/nextSibling 面向所有节点类型",
+    "previousElementSibling/nextElementSibling 只面向元素兄弟节点",
+    "兄弟节点是同一层级上的相邻节点"
+  ],
+  "examples": [
+    "middleItem.previousElementSibling",
+    "middleItem.nextElementSibling",
+    "element.previousSibling",
+    "element.nextSibling"
+  ],
+  "misconceptions": [
+    "兄弟节点方法总是跳过文本节点。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "previousSibling 和 previousElementSibling 的区别是什么？",
+      "a": "previousSibling 返回前一个兄弟节点，可能是任何类型；previousElementSibling 只返回前一个元素兄弟节点。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "DOM树"
+  ],
+  "source_pages": [
+    351,
+    352
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "501_兄弟节点访问",
+  "_chunk_pages": [
+    349,
+    352
+  ]
+}

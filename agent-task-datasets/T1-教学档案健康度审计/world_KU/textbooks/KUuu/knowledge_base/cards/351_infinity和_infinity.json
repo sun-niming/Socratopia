@@ -1,0 +1,38 @@
+{
+  "title": "Infinity和-Infinity",
+  "definition": "Infinity表示正无穷大，用于表示过大的正数；-Infinity表示负无穷大，用于表示过大的负数。",
+  "key_points": [
+    "Infinity表示正无穷大",
+    "-Infinity表示负无穷大",
+    "教材把它们作为JavaScript中的特殊数字值"
+  ],
+  "examples": [
+    "Infinity",
+    "-Infinity"
+  ],
+  "misconceptions": [
+    "以为Infinity是普通字符串",
+    "以为只有正数才可能出现无穷大表示"
+  ],
+  "qa_pairs": [
+    {
+      "q": "JavaScript中表示负无穷大的是哪个值？",
+      "a": "-Infinity。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "Number类型"
+  ],
+  "source_pages": [
+    241,
+    244
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "351_infinity和_infinity",
+  "_chunk_pages": [
+    241,
+    244
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "title": "获取器和设置器的作用",
+  "definition": "获取器（getter）用于读取对象数据，设置器（setter）用于修改对象数据。即使某些获取器和设置器的实现很简单，使用它们仍比公开数据成员更有利，因为以后可以在设置器中加入边界检查、通过设置断点简化调试，并在不改变类外部使用代码的情况下修改内部存储方式。",
+  "key_points": [
+    "`setFirstName` 为 m_firstName 赋值，`getFirstName` 返回 m_firstName。",
+    "获取器通常不修改对象状态，因此本例中的获取器声明为 const。",
+    "设置器可以成为数据合法性检查的集中位置，例如将来可在 setSalary 中进行边界检查。",
+    "如果类内部改变数据的存储方式，只需调整获取器和设置器，使用该类的其他代码可以保持不变。"
+  ],
+  "examples": [
+    "`void Employee::setFirstName(const std::string firstName) { m_firstName = firstName; }`",
+    "`const std::string Employee::getFirstName() const { return m_firstName; }`",
+    "外部代码使用 `emp.setSalary(501000);` 设置薪资，使用 `emp.getSalary()` 查询薪资，而不是直接访问 `m_salary`。"
+  ],
+  "misconceptions": [
+    "获取器和设置器并非没有价值；即使当前只是一行赋值或返回语句，也能提供边界检查、调试和封装方面的扩展点。",
+    "将数据成员设为 private 后，外部代码不是无法访问数据，而是应通过 public 的 getter 或 setter 间接访问。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么使用 getter 和 setter 优于将数据成员设为 public？",
+      "a": "它们可以集中实现边界检查，便于设置断点调试，并允许类改变内部数据存储方式而不影响外部使用代码。"
+    },
+    {
+      "q": "`getFirstName() const` 中末尾的 const 表示什么？",
+      "a": "表示该获取器不会修改调用它的 Employee 对象状态。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "封装",
+    "const成员函数"
+  ],
+  "source_pages": [
+    94,
+    94
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "174_获取器和设置器的作用",
+  "_chunk_pages": [
+    93,
+    96
+  ]
+}

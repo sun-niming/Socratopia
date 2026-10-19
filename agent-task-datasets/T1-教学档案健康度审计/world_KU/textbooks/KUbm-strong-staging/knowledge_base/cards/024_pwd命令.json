@@ -1,0 +1,35 @@
+{
+  "title": "pwd命令",
+  "definition": "pwd 用于显示当前工作目录。当前工作目录就是用户当前所在、正在进行操作的目录位置。",
+  "key_points": [
+    "pwd 的作用是显示当前工作目录。",
+    "它用于确认当前所在路径。"
+  ],
+  "examples": [
+    "pwd"
+  ],
+  "misconceptions": [
+    "把 pwd 误认为是切换目录命令；它只是显示当前工作目录，不负责切换。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "pwd 命令的作用是什么？",
+      "a": "显示当前工作目录。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "目录的基本概念"
+  ],
+  "source_pages": [
+    13,
+    16
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "024_pwd命令",
+  "_chunk_pages": [
+    13,
+    16
+  ]
+}

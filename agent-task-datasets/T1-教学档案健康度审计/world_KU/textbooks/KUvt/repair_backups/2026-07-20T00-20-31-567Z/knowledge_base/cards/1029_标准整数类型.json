@@ -1,0 +1,42 @@
+{
+  "title": "标准整数类型",
+  "definition": "<cstdint>头文件定义了大量具有明确位宽的标准整数类型，例如int8_t和int64_t，同时提供指定这些类型最小值和最大值的多个宏。这些类型适合用于需要跨平台明确整数宽度的代码。",
+  "key_points": [
+    "常见类型包括int8_t和int64_t。",
+    "头文件还提供相关类型的最小值和最大值宏。",
+    "明确宽度的整数类型适合跨平台、跨语言程序。"
+  ],
+  "examples": [
+    "代码示例：\nstd::int8_t smallValue{};\nstd::int64_t largeValue{};"
+  ],
+  "misconceptions": [
+    "int8_t和int64_t表示的是明确宽度的整数类型，不应简单等同于所有平台上大小都相同的普通int。",
+    "<cstdint>不仅定义整数类型，也提供与其范围相关的宏。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "int8_t和int64_t定义在哪个头文件中？",
+      "a": "定义在<cstdint>头文件中。"
+    },
+    {
+      "q": "为什么跨平台代码常使用这些标准整数类型？",
+      "a": "因为它们可以表达明确的整数宽度，有利于编写跨平台代码。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "整数类型",
+    "头文件"
+  ],
+  "source_pages": [
+    506,
+    506
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1029_标准整数类型",
+  "_chunk_pages": [
+    505,
+    508
+  ]
+}

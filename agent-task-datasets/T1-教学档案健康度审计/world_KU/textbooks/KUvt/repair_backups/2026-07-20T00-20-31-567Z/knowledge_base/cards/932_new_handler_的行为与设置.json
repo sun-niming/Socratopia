@@ -1,0 +1,56 @@
+{
+  "title": "new handler 的行为与设置",
+  "definition": "当动态内存分配失败时，C++可以调用当前注册的 new handler。new handler 必须是无参数、无返回值的函数；如果它不抛出异常、终止程序或采取其他方式使分配能够继续，分配失败可能反复调用该处理函数而形成无限循环。new handler 若抛出异常，该异常必须是 std::bad_alloc 或其派生类。可用 set_new_handler() 设置、替换或恢复 new handler。",
+  "key_points": [
+    "new handler 的函数类型不接受参数，也不返回值。",
+    "new handler 抛出的异常必须是 std::bad_alloc 或其派生类。",
+    "如果某次内存分配不希望调用自定义 new handler，可以在调用 new 前暂时将 new handler 设置为 nullptr。",
+    "set_new_handler() 返回设置前的旧处理函数指针，因此可以保存旧处理函数，并在分配操作后恢复它。",
+    "如果 new handler 只是返回而没有解决分配失败问题，运行时可能再次调用它，导致无限循环。"
+  ],
+  "examples": [
+    "定义一个派生自 std::bad_alloc 的异常：class please_terminate_me : public std::bad_alloc {};",
+    "无参数、无返回值的 new handler 示例：void myNewHandler() { std::cerr << \"Unable to allocate memory.\" << std::endl; throw please_terminate_me(); }",
+    "设置并保存旧处理函数：std::new_handler oldHandler{std::set_new_handler(myNewHandler)};",
+    "完成特定分配操作后恢复旧处理函数：std::set_new_handler(oldHandler);"
+  ],
+  "misconceptions": [
+    "new handler 不是普通的带参数错误回调函数，不能通过参数接收分配大小，也不能返回错误码。",
+    "设置了 new handler 并不意味着它可以安全地返回；如果内存分配条件没有改变，返回后可能再次失败并重复调用。",
+    "new handler 抛出的异常不能任意指定为普通异常类型；教材要求其为 std::bad_alloc 或派生类。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "new handler 的函数签名有什么限制？",
+      "a": "它不接受参数，也不返回值。"
+    },
+    {
+      "q": "new handler 抛出的异常应满足什么条件？",
+      "a": "必须是 std::bad_alloc 或其派生类。"
+    },
+    {
+      "q": "如何临时避免某次 new 调用自定义 new handler？",
+      "a": "在调用 new 前将 new handler 设置为 nullptr，完成后再按需要恢复原处理函数。"
+    },
+    {
+      "q": "set_new_handler() 返回什么，为什么通常要保存它？",
+      "a": "它返回设置前的旧 new handler，保存后可以在特定分配操作完成时恢复原处理函数。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++异常处理基础",
+    "动态内存分配失败"
+  ],
+  "source_pages": [
+    461,
+    461
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "932_new_handler_的行为与设置",
+  "_chunk_pages": [
+    461,
+    464
+  ]
+}

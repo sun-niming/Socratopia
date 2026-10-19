@@ -1,0 +1,49 @@
+{
+  "title": "ostream_iterator 与通用复制函数",
+  "definition": "`ostream_iterator<T>` 是输出流迭代器类模板，模板参数 T 表示输出元素类型。其构造函数接收一个输出流和一个分隔符字符串；通过对输出迭代器执行赋值或输出操作，可以把元素写入该流，并在每个元素后写入分隔符。它可以作为通用复制函数的目标迭代器。",
+  "key_points": [
+    "`ostream_iterator<int>{ cout, \" \" }` 表示向 `cout` 输出 int，并在每个元素后写入一个空格。",
+    "`myCopy` 可以从输入范围逐个读取元素，并通过目标迭代器写出：`*target = *iter`。",
+    "将容器复制到另一个 vector 时，目标范围必须足够大。",
+    "将 `ostream_iterator` 作为目标时，不需要预先创建目标容器。"
+  ],
+  "examples": [
+    "通用复制函数：`template <typename InputIter, typename OutputIter> void myCopy(InputIter begin, InputIter end, OutputIter target) { for (auto iter { begin }; iter != end; ++iter, ++target) { *target = *iter; } }`",
+    "复制到足够大的 vector：`vector<int> vectorCopy(myVector.size()); myCopy(cbegin(myVector), cend(myVector), begin(vectorCopy));`",
+    "直接输出：`myCopy(cbegin(myVector), cend(myVector), ostream_iterator<int>{ cout, \" \" });`"
+  ],
+  "misconceptions": [
+    "使用 `myCopy` 写入 vector 时，目标迭代器必须指向已经存在且足够大的目标范围；仅创建空 vector 并传入 begin 通常不够。",
+    "分隔符是写入每个元素之后的字符串，不是输入元素的一部分。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何使用 ostream_iterator 将 vector 的元素输出到 cout？",
+      "a": "将 `ostream_iterator<int>{ cout, \" \" }` 作为复制函数的目标迭代器，例如 `myCopy(cbegin(myVector), cend(myVector), ostream_iterator<int>{ cout, \" \" });`。"
+    },
+    {
+      "q": "使用 myCopy 将元素写入另一个 vector 时有什么要求？",
+      "a": "目标范围必须足够大，并且传入指向目标范围的迭代器。"
+    },
+    {
+      "q": "ostream_iterator 的构造函数接收哪些信息？",
+      "a": "接收一个输出流和一个用于写在每个元素后面的分隔符字符串。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "流迭代器的作用与种类",
+    "使用 != 判断迭代器范围结束"
+  ],
+  "source_pages": [
+    532,
+    532
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1090_ostream_iterator_与通用复制函数",
+  "_chunk_pages": [
+    529,
+    532
+  ]
+}

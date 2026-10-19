@@ -1,0 +1,46 @@
+{
+  "title": "test 的整数比较",
+  "definition": "使用 test 或 [ ] 可以进行整数比较。教材给出的对应关系是：-eq 表示等于（=），-gt 表示大于（>），-ge 表示大于等于（>=），-ne 表示不等于（<>），-lt 表示小于（<），-le 表示小于等于（<=）。",
+  "key_points": [
+    "-eq：等于",
+    "-gt：大于",
+    "-ge：大于等于",
+    "-ne：不等于",
+    "-lt：小于",
+    "-le：小于等于"
+  ],
+  "examples": [
+    "[ $a -eq 10 ]",
+    "[ $x -gt 5 ]",
+    "[ $n -le 100 ]"
+  ],
+  "misconceptions": [
+    "把字符串比较和整数比较混用",
+    "把 -ge、-gt、-le、-lt 的大小关系记错"
+  ],
+  "qa_pairs": [
+    {
+      "q": "教材中哪个整数比较条件表示“大于等于”？",
+      "a": "-ge。"
+    },
+    {
+      "q": "如果要判断两个整数不等于，应使用哪个条件？",
+      "a": "-ne。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "test 与 [ ] 的基本用途和格式"
+  ],
+  "source_pages": [
+    73,
+    76
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "127_test_的整数比较",
+  "_chunk_pages": [
+    73,
+    76
+  ]
+}

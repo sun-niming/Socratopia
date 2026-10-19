@@ -1,0 +1,46 @@
+{
+  "title": "curl Connection refused 排错",
+  "definition": "当 `curl` 显示 `Failed to connect` 或 `Connection refused` 时，说明客户端无法连到服务器。常见原因包括：服务器没有启动、端口写错、程序在 `bind/listen` 失败后退出、或者在 WSL/虚拟机中端口访问方式不对。排查时应先确认服务器进程是否还在、端口是否正在监听，不要先改 HTTP 代码。",
+  "key_points": [
+    "现象是 `curl` 无法连接服务器，提示 `Failed to connect` 或 `Connection refused`。",
+    "常见原因包括服务器未启动、端口写错、`bind/listen` 失败后退出、WSL 或虚拟机端口访问方式不对。",
+    "先看服务器进程和监听端口，再考虑应用层 HTTP 代码。",
+    "可用 `ss -lntp | grep 8080`、`curl -v http://127.0.0.1:8080/` 等命令检查。"
+  ],
+  "examples": [
+    "`ss -lntp | grep 8080`",
+    "`./webserver -p 8080 -r ./www -i index.html`",
+    "`curl -v http://127.0.0.1:8080/`"
+  ],
+  "misconceptions": [
+    "误以为 `Connection refused` 一定是 HTTP 逻辑写错了。",
+    "误以为只要请求命令正确，服务器就一定能连上。",
+    "误以为先改业务代码就能解决连接失败问题。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`curl` 提示 `Connection refused` 时，优先检查什么？",
+      "a": "先确认服务器进程还在、端口正在监听，再检查 socket 或环境问题。"
+    },
+    {
+      "q": "为什么不应该先改 HTTP 代码？",
+      "a": "因为连接都没建立时，问题通常在 socket 或环境，而不是 HTTP 业务逻辑。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "socket 基础",
+    "端口与监听"
+  ],
+  "source_pages": [
+    105,
+    108
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "166_curl_connection_refused_排错",
+  "_chunk_pages": [
+    105,
+    108
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "title": "相对URL示例",
+  "definition": "相对URL是相对于当前页面位置来写的链接地址。教材给出了几个相对URL写法示例，用来说明同一类链接可以指向不同层级位置的文件。",
+  "key_points": [
+    "相对URL可以直接写同级文件名。",
+    "相对URL也可以写子目录路径。",
+    "相对URL可以用 `../` 返回上一级目录。"
+  ],
+  "examples": [
+    "href=\"yule/news.html\"",
+    "href=\"../oa.html\"",
+    "href=\"pop.html\""
+  ],
+  "misconceptions": [
+    "相对URL必须写成完整的 `http://` 网址。",
+    "`../` 表示当前目录。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "教材中给出的相对URL示例有哪些？",
+      "a": "`yule/news.html`、`../oa.html`、`pop.html`。"
+    },
+    {
+      "q": "相对URL和完整网址有什么不同？",
+      "a": "相对URL是相对于当前页面位置来写的，不一定包含完整域名和协议。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "href属性"
+  ],
+  "source_pages": [
+    53,
+    56
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "089_相对url示例",
+  "_chunk_pages": [
+    53,
+    56
+  ]
+}

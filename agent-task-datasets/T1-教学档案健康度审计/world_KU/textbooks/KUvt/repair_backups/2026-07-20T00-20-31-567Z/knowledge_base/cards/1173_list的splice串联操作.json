@@ -1,0 +1,50 @@
+{
+  "title": "list的splice串联操作",
+  "definition": "list提供splice()，可以把一个list的全部元素、某个元素或某个范围的元素插入到另一个list的任意位置。由于list是链表，这类串联操作的复杂度为常量时间；被转移的元素会从源list中删除，因此splice()对作为参数传入的源list具有破坏性。",
+  "key_points": [
+    "splice()可以把整个源list接入目标list的指定位置。",
+    "splice()也有只转移源list中某一个元素或某个范围元素的形式。",
+    "splice()不会复制被转移的元素，而是将其从源list移入目标list。",
+    "教材指出在另一个list的任意位置进行串联或插入整个list的复杂度是常量时间。",
+    "调用后，源list不再包含已经被转移的元素。"
+  ],
+  "examples": [
+    "若dictionary包含aardvark、ambulance、canticle、consumerism，bWords包含bathos、balderdash，则在合适位置执行dictionary.splice(it, bWords)后，dictionary可得到：aardvark、ambulance、bathos、balderdash、canticle、consumerism；bWords中的元素已被移除。",
+    "抽象形式：dictionary.splice(it, bWords)，其中it是目标list中的插入位置，bWords是被转移元素的源list。"
+  ],
+  "misconceptions": [
+    "splice()不是复制操作；被转移的元素会从源list删除。",
+    "splice()本身的常量时间复杂度不包括寻找目标位置所需的遍历时间。",
+    "splice()不只支持转移整个list，也支持转移单个元素或一个元素范围。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "执行dictionary.splice(it, bWords)后，bWords中的元素会怎样？",
+      "a": "bWords中的元素会被转移到dictionary，并从bWords中删除。"
+    },
+    {
+      "q": "list的splice()有哪些基本用途？",
+      "a": "可以在目标list的指定位置插入另一个list的全部元素、某个元素或某个元素范围。"
+    },
+    {
+      "q": "为什么list的splice()可以高效地串联元素？",
+      "a": "因为list是链表，可以重新连接节点，而不必逐个复制元素。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "list的基本特征与访问方式",
+    "链表节点连接"
+  ],
+  "source_pages": [
+    568,
+    568
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1173_list的splice串联操作",
+  "_chunk_pages": [
+    565,
+    568
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "title": "日期对象设置方法",
+  "definition": "JavaScript 的 Date 对象提供一组用于修改日期/时间各组成部分的设置方法。页面所列方法包括：setDate()、setFullYear()、setHours()、setMilliseconds()、setMinutes()、setMonth()、setSeconds()、setTime()。它们分别用于设置日、年、小时、毫秒、分钟、月、秒和时间值。",
+  "key_points": [
+    "setDate()：以数值 1-31 设置“日”。",
+    "setFullYear()：设置“年”，也可选传入“月”和“日”。",
+    "setHours()：设置小时，范围 0-23。",
+    "setMilliseconds()：设置毫秒，范围 0-999。",
+    "setMinutes()：设置分，范围 0-59。",
+    "setMonth()：设置月，范围 0-11。",
+    "setSeconds()：设置秒，范围 0-59。",
+    "setTime()：设置时间，单位是从 1970 年 1 月 1 日至今的毫秒数。"
+  ],
+  "examples": [
+    "date.setDate(15)",
+    "date.setFullYear(2024, 6, 1)",
+    "date.setHours(18)",
+    "date.setTime(1700000000000)"
+  ],
+  "misconceptions": [
+    "setMonth() 的取值不是 1-12，而是 0-11。",
+    "setTime() 不是直接设置“日期字符串”，而是设置自 1970 年 1 月 1 日以来的毫秒数。",
+    "setDate() 设置的是“日”，不是“星期”。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "setMonth() 的取值范围是多少？",
+      "a": "0-11。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "Date对象基础"
+  ],
+  "source_pages": [
+    313,
+    313
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "422_日期对象设置方法",
+  "_chunk_pages": [
+    313,
+    316
+  ]
+}

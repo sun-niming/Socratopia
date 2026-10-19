@@ -1,0 +1,45 @@
+{
+  "title": "element.style：修改内联样式",
+  "definition": "`element.style`用于访问元素的内联样式（inline style）。通过它可以直接设置样式属性，但CSS属性名要转换为驼峰式命名，且设置值通常是字符串。",
+  "key_points": [
+    "只能修改元素的内联样式。",
+    "CSS属性名要写成驼峰式命名，如`background-color`对应`backgroundColor`，`font-size`对应`fontSize`。",
+    "设置的值是字符串。",
+    "示例包括修改颜色、外边距和显示方式。",
+    "这种方式通常不如通过CSS类灵活、可维护。"
+  ],
+  "examples": [
+    "element.style.color = 'blue';",
+    "element.style.marginTop = '10px';",
+    "element.style.display = 'none';"
+  ],
+  "misconceptions": [
+    "认为`style`可以直接修改所有CSS规则；它主要是修改内联样式。",
+    "认为CSS属性名可以直接用连字符写法；在JS里通常要用驼峰命名。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`element.style.display = 'none'`表示什么？",
+      "a": "把元素设置为不显示。"
+    },
+    {
+      "q": "为什么`background-color`在JS里要写成`backgroundColor`？",
+      "a": "因为`element.style`使用驼峰式命名。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "标准属性的直接访问与修改"
+  ],
+  "source_pages": [
+    353,
+    356
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "508_element_style_修改内联样式",
+  "_chunk_pages": [
+    353,
+    356
+  ]
+}

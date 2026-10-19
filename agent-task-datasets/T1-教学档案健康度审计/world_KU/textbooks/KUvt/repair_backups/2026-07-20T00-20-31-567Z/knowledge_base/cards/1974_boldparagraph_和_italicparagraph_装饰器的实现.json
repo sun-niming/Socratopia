@@ -1,0 +1,44 @@
+{
+  "title": "BoldParagraph 和 ItalicParagraph 装饰器的实现",
+  "definition": "BoldParagraph 和 ItalicParagraph 都从 IParagraph 派生，并持有一个被包装的 IParagraph 对象。它们各自重写 `getHTML()`：先调用被包装对象的 `getHTML()`，再在结果外层添加粗体或斜体标签。",
+  "key_points": [
+    "装饰器通过 IParagraph 类型保存被包装对象，因此可以包装 Paragraph 或其他 IParagraph 装饰器。",
+    "BoldParagraph 的结果可表示为 `\"<B>\" + m_wrapped.getHTML() + \"</B>\"`。",
+    "ItalicParagraph 的结果可表示为 `\"<I>\" + m_wrapped.getHTML() + \"</I>\"`。",
+    "由于每次调用都会委托给内部对象，多个装饰器可以递归组合。"
+  ],
+  "examples": [
+    "装饰器的核心结构可写为：`class BoldParagraph : public IParagraph { const IParagraph& m_wrapped; };`。",
+    "若 `p` 是一个 Paragraph，则 `ItalicParagraph{BoldParagraph{p}}.getHTML()` 的逻辑结果是：`<I><B>段落文本</B></I>`。"
+  ],
+  "misconceptions": [
+    "装饰器不是复制并重新实现基础对象的全部逻辑，而是把工作委托给被包装对象，再增加自己的处理。",
+    "装饰器添加标签的顺序取决于嵌套顺序；外层装饰器生成最外层标签。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "BoldParagraph 的 `getHTML()` 为什么要先调用 `m_wrapped.getHTML()`？",
+      "a": "因为它需要保留被包装对象已经生成的内容和样式，然后在其外层添加粗体标签。"
+    },
+    {
+      "q": "如果先用 BoldParagraph 装饰 Paragraph，再用 ItalicParagraph 装饰结果，HTML 标签的外层顺序是什么？",
+      "a": "斜体标签在外层，粗体标签在内层，即逻辑结果为 `<I><B>文本</B></I>`。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "装饰器模式解决样式组合问题",
+    "C++继承与多态"
+  ],
+  "source_pages": [
+    962,
+    962
+  ],
+  "needs_verification": true,
+  "verify_query": "《C++20高级编程》第5版 第962页 BoldParagraph ItalicParagraph getHTML m_wrapped 完整代码",
+  "concept_id": "1974_boldparagraph_和_italicparagraph_装饰器的实现",
+  "_chunk_pages": [
+    961,
+    964
+  ]
+}

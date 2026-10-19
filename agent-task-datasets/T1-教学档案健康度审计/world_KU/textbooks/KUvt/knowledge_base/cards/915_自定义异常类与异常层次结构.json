@@ -1,0 +1,51 @@
+{
+  "title": "自定义异常类与异常层次结构",
+  "definition": "程序可以定义自己的异常类，以便为特定错误提供更有意义的类型名称，并在异常对象中携带标准异常类通常没有的附加信息。教材建议自定义异常类直接或间接继承自 std::exception，使程序中的异常能够通过 std::exception 或项目定义的公共基类进行多态处理。自定义 std::exception 派生类时，应重写 what() 方法；what() 返回的 const char* 字符串必须在异常对象销毁前保持有效。",
+  "key_points": [
+    "自定义异常类可以使用具有业务含义的名称，例如 FileError、FileOpenError 和 FileReadError。",
+    "FileError 可以继承 std::exception，并保存文件名和错误消息。",
+    "FileError 的派生类可以通过受保护的 setMessage() 设置错误消息，并通过 getFilename() 获取文件名。",
+    "FileOpenError 可表示文件无法打开；FileReadError 可表示文件内容无法正确读取，并额外保存出错行号。",
+    "what() 应返回在异常对象销毁前一直有效的 const char* 字符串，示例中该字符串来自对象的消息成员。"
+  ],
+  "examples": [
+    "class FileError : public std::exception {\npublic:\n    explicit FileError(std::string filename)\n        : m_filename(std::move(filename)) {}\n\n    const char* what() const noexcept override {\n        return m_message.c_str();\n    }\n\n    virtual const std::string& getFilename() const noexcept {\n        return m_filename;\n    }\n\nprotected:\n    virtual void setMessage(std::string message) {\n        m_message = std::move(message);\n    }\n\nprivate:\n    std::string m_filename;\n    std::string m_message;\n};",
+    "class FileReadError : public FileError {\npublic:\n    FileReadError(std::string filename, std::size_t lineNumber)\n        : FileError(std::move(filename)), m_lineNumber(lineNumber) {\n        setMessage(std::format(\"Error reading {}, line {}\", getFilename(), lineNumber));\n    }\n\n    virtual std::size_t getLineNumber() const noexcept {\n        return m_lineNumber;\n    }\n\nprivate:\n    std::size_t m_lineNumber{0};\n};"
+  ],
+  "misconceptions": [
+    "认为只能使用标准库提供的异常类型，不能定义项目自己的异常类型。",
+    "认为自定义异常只需保存错误字符串，不能携带文件名、行号等附加信息。",
+    "认为重写 what() 时可以返回临时字符串的 c_str()；返回的字符串必须在异常对象销毁前保持有效。",
+    "认为所有文件错误都适合用 std::invalid_argument 或 std::runtime_error 表示；教材示例强调可用更具体的 FileError 层次结构表示文件错误。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "定义自定义异常类有什么好处？",
+      "a": "一是可以用更有意义的类名表示特定错误，而不是使用通用异常名；二是可以在异常对象中加入文件名、行号等自定义信息。"
+    },
+    {
+      "q": "为什么 FileError 要继承 std::exception？",
+      "a": "这样 FileError 及其派生类就能作为标准异常层次结构的一部分，并可通过 std::exception 或 FileError 的引用进行多态捕获。"
+    },
+    {
+      "q": "自定义 std::exception 派生类时，what() 应满足什么要求？",
+      "a": "应重写 what()，返回一个在异常对象销毁之前始终有效的 const char* 字符串。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++异常处理基础",
+    "C++继承与虚函数"
+  ],
+  "source_pages": [
+    450,
+    452
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "915_自定义异常类与异常层次结构",
+  "_chunk_pages": [
+    449,
+    452
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "title": "shared_mutex 的读锁与写锁",
+  "definition": "std::shared_mutex 支持两类锁：独占锁和共享锁。独占锁只有在没有其他线程持有独占或共享所有权时才能获得；共享锁只要求当前没有线程持有独占所有权，并且允许多个线程同时持有共享所有权。",
+  "key_points": [
+    "独占锁使用 lock()、try_lock() 和 unlock() 获取、尝试获取和释放。",
+    "共享锁使用 lock_shared()、try_lock_shared() 和 unlock_shared() 获取、尝试获取和释放。",
+    "多个线程可以同时持有共享锁，因此共享锁适合并发读取。",
+    "已经在 shared_mutex 上拥有锁的线程不允许在该互斥体上获取第二个锁，否则可能导致死锁。"
+  ],
+  "examples": [
+    "读操作使用共享锁的逻辑：\n代码：m.lock_shared();\n代码：/* 读取共享数据 */\n代码：m.unlock_shared();\n写操作使用独占锁的逻辑：\n代码：m.lock();\n代码：/* 修改共享数据 */\n代码：m.unlock();"
+  ],
+  "misconceptions": [
+    "共享锁并不等同于没有同步；它仍然会阻止独占写锁在读取期间进入。",
+    "共享锁允许多个读者同时进入，但不允许读者与写者同时进入。",
+    "已经持有共享锁的线程不能简单地在同一 shared_mutex 上再次获取第二个锁。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "shared_mutex 的共享锁何时可以获得？",
+      "a": "只要当前没有其他线程拥有独占所有权，就可以尝试获得共享所有权。"
+    },
+    {
+      "q": "shared_mutex 的独占锁何时可以获得？",
+      "a": "只有在没有任何线程拥有独占所有权或共享所有权时，才能获得独占锁。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "三种非定时互斥体类"
+  ],
+  "source_pages": [
+    806,
+    807
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1656_shared_mutex_的读锁与写锁",
+  "_chunk_pages": [
+    805,
+    808
+  ]
+}

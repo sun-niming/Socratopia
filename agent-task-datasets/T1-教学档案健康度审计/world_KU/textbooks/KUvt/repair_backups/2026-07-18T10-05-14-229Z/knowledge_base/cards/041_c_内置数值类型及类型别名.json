@@ -1,0 +1,42 @@
+{
+  "title": "C++内置数值类型及类型别名",
+  "definition": "C++提供多种内置数值类型。`int`、`short`、`long`和`long long`表示不同的整数类型；每种整数类型都可以使用`signed`或`unsigned`修饰，其中`signed`表示有符号整数，`unsigned`表示无符号整数。`float`、`double`和`long double`表示不同精度的浮点类型。某些写法是同一类型的等价写法，例如`signed int`、`signed`和`int`都表示有符号`int`，`unsigned`等价于`unsigned int`。",
+  "key_points": [
+    "有符号整数可以写作`signed int`、`signed`或`int`；无符号整数可以写作`unsigned int`或`unsigned`。",
+    "整数类型包括`short`、`int`、`long`和`long long`，并可与`signed`或`unsigned`组合。",
+    "浮点类型包括`float`、`double`和`long double`。",
+    "整数字面量可以使用后缀表示类型，例如`7U`表示无符号整数，`-7L`或`14LL`用于表示带有`long`或`long long`后缀的整数，`7.2f`表示`float`，`16.98L`表示`long double`。"
+  ],
+  "examples": [
+    "`signed int i{-7};`、`signed i{-5};`和`int i{-7};`表示有符号整数声明的不同写法。",
+    "`unsigned int i{2U};`、`unsigned j{5U};`和`unsigned long long ll{140ULL};`表示无符号整数。",
+    "`float f{7.2f};`、`double d{7.2};`和`long double ld{16.98L};`分别声明三种浮点类型。"
+  ],
+  "misconceptions": [
+    "`unsigned`不是一种独立于`unsigned int`之外的基本整数类型名称；在这里它是`unsigned int`的简写。",
+    "`float`、`double`和`long double`不是同一种浮点类型的不同变量名，而是不同的类型。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`signed i{-5};`和`unsigned j{5U};`分别表示什么类型？",
+      "a": "前者表示有符号`int`，后者表示无符号`int`。"
+    },
+    {
+      "q": "哪个字面量表示`float`类型：`7.2`还是`7.2f`？",
+      "a": "`7.2f`表示`float`；不带`f`的`7.2`通常表示`double`。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [],
+  "source_pages": [
+    41,
+    44
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "041_c_内置数值类型及类型别名",
+  "_chunk_pages": [
+    41,
+    44
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "title": "使用 atomic<int> 解决共享计数器竞争",
+  "definition": "将共享计数器从普通 int 改为 std::atomic<int>，并让 increment() 接收 std::atomic<int>&，即可使对计数器的递增成为原子操作。对原子计数器执行 ++counter 时，加载、递增和保存会作为不可被其他线程打断的原子事务完成，因此 10 个线程各递增 100 次时结果稳定为 1000。",
+  "key_points": [
+    "需要包含 <atomic>。",
+    "共享变量声明为 std::atomic<int> counter { 0 }。",
+    "increment() 的参数改为 std::atomic<int>& counter。",
+    "使用原子类型后，无需在示例中显式添加其他同步机制即可避免该计数器上的数据竞争。",
+    "10 个线程各执行 100 次递增，最终结果为 1000。"
+  ],
+  "examples": [
+    "代码核心：\nvoid increment(std::atomic<int>& counter) {\n    for (int i { 0 }; i < 100; ++i) {\n        ++counter;\n    }\n}\nstd::atomic<int> counter { 0 };\n运行 10 个线程后：\n$$counter = 10 \\times 100 = 1000$$"
+  ],
+  "misconceptions": [
+    "将变量声明为 atomic 并不意味着程序中所有共享数据都自动安全；这里只保护了 counter 的原子递增。",
+    "原子操作保证单次递增不会丢失，但不等于所有复杂的多步业务逻辑都自动具有所需同步语义。",
+    "atomic<int> 与普通 int 的接口相似，但其访问具有原子性。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何修改共享计数器程序，使 10 个线程各递增 100 次后稳定得到 1000？",
+      "a": "包含 <atomic>，将 counter 声明为 std::atomic<int>，并将 increment() 的参数改为 std::atomic<int>&，在线程中继续执行 ++counter。"
+    },
+    {
+      "q": "为什么使用 atomic<int> 后不会丢失计数？",
+      "a": "因为对原子类型执行 ++counter 时，加载值、递增值和保存值会作为不可被打断的原子事务完成。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "原子类型",
+    "数据竞争"
+  ],
+  "source_pages": [
+    803,
+    803
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1648_使用_atomic_int_解决共享计数器竞争",
+  "_chunk_pages": [
+    801,
+    804
+  ]
+}

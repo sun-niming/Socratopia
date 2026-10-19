@@ -1,0 +1,43 @@
+{
+  "title": "函数模板参数的显式指定与类型推导",
+  "definition": "调用函数模板时，模板参数既可以由调用者显式指定，也可以由编译器根据函数实参推导。只有出现在函数参数列表中的模板类型参数通常能够从函数实参推导；不能从函数实参推导的模板参数必须显式指定，除非它具有默认模板实参。",
+  "key_points": [
+    "例如 add 的模板参数为返回类型 RetType、操作数类型 T1 和 T2 时，T1、T2 可根据函数实参推导，而 RetType 通常不能推导。",
+    "可以显式指定全部模板参数：add<long long, int, int>(1, 2)。",
+    "也可以只显式指定位于模板参数列表前部的 RetType，让后面的 T1、T2 由实参推导：add<long long>(1, 2)。",
+    "当必须显式指定的参数位于模板参数列表中间时，不能跳过它而只指定后面的参数；前面的模板参数也必须显式指定。"
+  ],
+  "examples": [
+    "template <typename RetType, typename T1, typename T2>\nRetType add(const T1& t1, const T2& t2) { return t1 + t2; }\n\n调用方式：\nadd<long long, int, int>(1, 2);\nadd<long long>(1, 2);"
+  ],
+  "misconceptions": [
+    "函数模板的返回类型通常不能仅根据返回表达式自动推导，除非使用 auto 或 decltype(auto) 等返回类型推导机制。",
+    "不能在模板参数列表中直接跳过一个无法推导的中间参数，只显式填写后面的参数。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "在 add<RetType, T1, T2>(1, 2) 中，哪些模板参数可以由编译器根据实参推导？",
+      "a": "T1 和 T2 可以根据实参 1 和 2 推导；RetType 通常不能从函数实参推导，需要显式指定或提供默认值。"
+    },
+    {
+      "q": "为什么可以调用 add<long long>(1, 2)？",
+      "a": "因为 RetType 已显式指定为 long long，T1 和 T2 位于其后且能根据函数实参 1 和 2 推导。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "函数模板",
+    "模板参数"
+  ],
+  "source_pages": [
+    397,
+    397
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "806_函数模板参数的显式指定与类型推导",
+  "_chunk_pages": [
+    397,
+    400
+  ]
+}

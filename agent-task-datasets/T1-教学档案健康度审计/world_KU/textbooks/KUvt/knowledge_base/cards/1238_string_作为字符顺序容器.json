@@ -1,0 +1,45 @@
+{
+  "title": "string 作为字符顺序容器",
+  "definition": "C++ 的 string 可以看作字符的顺序容器。它提供 begin() 和 end() 迭代器，以及 insert()、push_back()、erase()、size()、empty() 等基本顺序容器操作；还提供 reserve() 和 capacity()，因此在容器使用方式上与 vector 很接近。",
+  "key_points": [
+    "string 的元素是字符，能够通过迭代器按顺序遍历。",
+    "可以使用 insert() 在指定位置插入字符，也可以使用 push_back() 在末尾追加字符。",
+    "string 支持 erase()、size() 和 empty() 等常见顺序容器操作。",
+    "string 还提供 reserve() 和 capacity()，可用于管理容量。"
+  ],
+  "examples": [
+    "逐个构造字符串并遍历：\n```text\nstring myString;\nmyString.insert(cend(myString), 'h');\nmyString.insert(cend(myString), 'e');\nmyString.push_back('l');\nmyString.push_back('l');\nmyString.push_back('o');\nfor (const auto& letter : myString) {\n    cout << letter;\n}\n```",
+    "也可以使用迭代器遍历：\n```text\nfor (auto it = cbegin(myString); it != cend(myString); ++it) {\n    cout << *it;\n}\n```"
+  ],
+  "misconceptions": [
+    "string 不只是只能通过下标访问的特殊文本类型，它也提供顺序容器式的迭代器和修改操作。",
+    "capacity() 表示当前已分配的容量，不是字符串中实际字符数；实际字符数由 size() 表示。",
+    "string 虽然与 vector 在容器接口上很接近，但它的元素类型是字符。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么说 string 可以看作字符的顺序容器？",
+      "a": "因为 string 按顺序存储字符，并提供 begin()、end()、insert()、push_back()、erase()、size()、empty() 等顺序容器式接口。"
+    },
+    {
+      "q": "string 中 size() 和 capacity() 的作用有何不同？",
+      "a": "size() 表示当前包含的字符数；capacity() 表示当前容量，即在通常无需重新分配的情况下可容纳的存储量。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "顺序容器的基本操作",
+    "迭代器的基本用法"
+  ],
+  "source_pages": [
+    600,
+    600
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1238_string_作为字符顺序容器",
+  "_chunk_pages": [
+    597,
+    600
+  ]
+}

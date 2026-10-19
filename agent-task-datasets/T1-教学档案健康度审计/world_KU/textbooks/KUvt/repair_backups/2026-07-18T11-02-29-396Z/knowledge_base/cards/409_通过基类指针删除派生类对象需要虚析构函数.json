@@ -1,0 +1,43 @@
+{
+  "title": "通过基类指针删除派生类对象需要虚析构函数",
+  "definition": "当对象通过基类指针进行动态分配，并且随后使用该基类指针执行 delete 时，基类应声明虚析构函数，例如 virtual ~Base() = default;。这样删除基类指针所指向的派生类对象时，析构过程能够按动态类型正确处理。",
+  "key_points": [
+    "基类析构函数声明为 virtual 后，通过 Base* 删除 Derived 对象才具有多态析构语义。",
+    "典型形式是：class Base { public: virtual ~Base() = default; };",
+    "示例中的操作是：Base* ptr{new Derived{}}; delete ptr;。"
+  ],
+  "examples": [
+    "class Base { public: virtual ~Base() = default; };",
+    "Base* ptr{new Derived{}}; delete ptr;"
+  ],
+  "misconceptions": [
+    "只要基类存在析构函数，就可以安全地通过 Base* 删除 Derived 对象；实际上，基类析构函数需要是虚函数。",
+    "virtual 只影响普通虚成员函数；实际上，析构函数也可以声明为 virtual。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么基类通常需要声明虚析构函数？",
+      "a": "因为对象可能通过 Base* 指向 Derived，并通过该指针执行 delete；将基类析构函数声明为 virtual，才能使这种多态删除具有正确的析构语义。"
+    },
+    {
+      "q": "给出通过基类指针删除派生类对象的典型代码。",
+      "a": "class Base { public: virtual ~Base() = default; }; Base* ptr{new Derived{}}; delete ptr;"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "继承",
+    "基类指针与派生类对象"
+  ],
+  "source_pages": [
+    317,
+    320
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "409_通过基类指针删除派生类对象需要虚析构函数",
+  "_chunk_pages": [
+    317,
+    320
+  ]
+}

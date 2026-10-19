@@ -1,0 +1,45 @@
+{
+  "title": "std::getline 读取 std::string",
+  "definition": "`std::getline()` 是用于 C++ 字符串的非成员函数，定义在 `<string>` 头文件和 `std` 命名空间中。它接收输入流引用和字符串引用，从流中读取一行文本并存入 `std::string`，不需要调用者指定字符缓冲区大小。",
+  "key_points": [
+    "基本形式为 `getline(cin, myString);`。",
+    "它直接填充 `std::string`，避免了手动指定字符数组容量。",
+    "默认分隔符是换行符 `\\n`。",
+    "可以通过最后一个参数指定其他分隔符。"
+  ],
+  "examples": [
+    "```cpp\n#include <string>\n\nstd::string myString;\nstd::getline(std::cin, myString);\n```",
+    "使用 `@` 作为分隔符读取多行文本：\n```cpp\nstd::string myString;\nstd::getline(std::cin, myString, '@');\n```\n该调用会持续读取文本，直到遇到 `@`。"
+  ],
+  "misconceptions": [
+    "`std::getline()` 不要求提供字符数组大小，因为目标对象是能够自动管理长度的 `std::string`。",
+    "第三个参数是分隔符，不是要读取的最大字符数。",
+    "默认分隔符是 `\\n`，但可以显式改成例如 `@`。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "使用 `std::getline(cin, myString)` 的主要优点是什么？",
+      "a": "它直接把输入内容存入 `std::string`，不需要调用者指定字符缓冲区大小。"
+    },
+    {
+      "q": "如何让 `std::getline()` 读取到 `@` 字符时停止？",
+      "a": "调用 `std::getline(cin, myString, '@');`，把 `@` 作为最后一个参数传入。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "std::string",
+    "C++输入流"
+  ],
+  "source_pages": [
+    422,
+    422
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "856_std_getline_读取_std_string",
+  "_chunk_pages": [
+    421,
+    424
+  ]
+}

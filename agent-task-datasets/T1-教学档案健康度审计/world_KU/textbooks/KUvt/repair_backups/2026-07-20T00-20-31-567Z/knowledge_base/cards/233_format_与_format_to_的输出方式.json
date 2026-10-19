@@ -1,0 +1,45 @@
+{
+  "title": "format 与 format_to 的输出方式",
+  "definition": "`std::format()` 生成并返回一个新的字符串对象；`std::format_to()` 则把格式化结果写入第一个参数指定的输出位置，并返回输出结束位置。因此，在自定义 formatter 中可以使用 `std::format_to(context.out(), ...)`，直接把内容写入格式上下文，而不必先创建中间字符串。",
+  "key_points": [
+    "`std::format()` 的结果是字符串对象。",
+    "`std::format_to()` 的第一个参数指定写入位置。",
+    "`std::format_to()` 适合把结果写入已有缓冲区或输出迭代器。",
+    "自定义 formatter 可将 `context.out()` 传给 `std::format_to()`。"
+  ],
+  "examples": [
+    "普通格式化：`string result = format(\"{} - {}\", key, value);`。",
+    "写入格式上下文：`return format_to(context.out(), \"{} - {}\", kv.getKey(), kv.getValue());`。"
+  ],
+  "misconceptions": [
+    "误以为 `format_to()` 也会返回一个新字符串；它把结果写入给定输出位置。",
+    "误以为自定义 formatter 必须先调用 `format()` 创建字符串再复制到上下文；可以直接调用 `format_to()`。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`std::format()` 与 `std::format_to()` 的核心区别是什么？",
+      "a": "`std::format()` 创建并返回字符串；`std::format_to()` 将结果写入给定输出位置并返回输出结束迭代器。"
+    },
+    {
+      "q": "为什么自定义 formatter 常使用 `format_to(context.out(), ...)`？",
+      "a": "因为它可以直接把结果写入格式上下文，避免先创建中间字符串。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++字符串",
+    "C++输出迭代器",
+    "C++20 std::format 基本用法"
+  ],
+  "source_pages": [
+    120,
+    120
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "233_format_与_format_to_的输出方式",
+  "_chunk_pages": [
+    117,
+    120
+  ]
+}

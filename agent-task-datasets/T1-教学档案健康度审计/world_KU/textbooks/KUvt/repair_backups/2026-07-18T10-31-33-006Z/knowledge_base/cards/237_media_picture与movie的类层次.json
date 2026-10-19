@@ -1,0 +1,43 @@
+{
+  "title": "Media、Picture与Movie的类层次",
+  "definition": "原文在面向对象示例中出现了 Media、Picture 和 Movie，并以类图形式展示它们的层次关系。结合页面上出现的“is-a”以及 Media、Picture、Movie 的排列，可以确认该示例用于说明媒体类型及其具体类型之间的面向对象关系；但给定文本无法可靠恢复完整的继承箭头和成员定义。",
+  "key_points": [
+    "原文出现 Media、Picture 和 Movie。",
+    "Media 可理解为较一般的媒体类型名称，Picture 和 Movie 是更具体的媒体类型名称。",
+    "该示例与页面上的“is-a”术语相关，用于说明类型之间的分类关系。",
+    "具体是单继承、继承方向以及各类成员，需根据完整图示核实。"
+  ],
+  "examples": [
+    "原文可辨识的类型名称为：Media、Picture、Movie。",
+    "若类图关系确认为继承关系，可用抽象结构表示：\n$$Media \\rightarrow \\{Picture,\\ Movie\\}$$\n其中箭头方向和是否为直接继承关系需核实。"
+  ],
+  "misconceptions": [
+    "不能把 Picture 和 Movie 误认为 Media 的两个对象实例；在该示例中它们表现为类型名称。",
+    "不能仅凭名称断定 Media 一定是 C++ 中的抽象类。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "原文媒体类示例中出现了哪些类名？",
+      "a": "Media、Picture 和 Movie。"
+    },
+    {
+      "q": "Media、Picture、Movie这一示例主要用于说明什么？",
+      "a": "用于说明媒体类型之间的面向对象分类或 is-a 关系；完整继承结构需核实。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "UML类图中的类、属性与操作"
+  ],
+  "source_pages": [
+    169,
+    172
+  ],
+  "needs_verification": true,
+  "verify_query": "《C++20高级编程》第5版 第170页 Media Picture Movie is-a UML 继承关系",
+  "concept_id": "237_media_picture与movie的类层次",
+  "_chunk_pages": [
+    169,
+    172
+  ]
+}

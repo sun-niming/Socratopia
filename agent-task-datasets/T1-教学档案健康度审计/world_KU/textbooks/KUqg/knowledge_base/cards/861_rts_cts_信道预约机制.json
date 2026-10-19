@@ -1,0 +1,49 @@
+{
+  "title": "RTS/CTS 信道预约机制",
+  "definition": "RTS/CTS 是 IEEE 802.11 中可选的信道预约方案，用于帮助缓解隐藏终端导致的碰撞。发送方在发送 DATA 帧前，先向 AP 发送 RTS（Request to Send，请求发送）控制帧，说明发送 DATA 帧及其 ACK 所需的总时间。AP 收到 RTS 后广播 CTS（Clear to Send，允许发送）控制帧。CTS 一方面明确许可发送方发送，另一方面通知其他站点在预约期内不要发送。",
+  "key_points": [
+    "基本交换顺序为：RTS、CTS、DATA、ACK。",
+    "RTS 由发送方发给 AP，并指示 DATA 与 ACK 所需的总时间。",
+    "AP 广播 CTS，使发送方获得发送许可，并让其他能够听到 CTS 的站点在预约期内抑制发送。",
+    "RTS/CTS 能缓解隐藏终端问题，因为长 DATA 帧只有在预约成功后才传输。",
+    "RTS/CTS 帧较短，即使它们发生碰撞，碰撞通常只持续短控制帧的持续时间；若 RTS 和 CTS 正确传输，后续 DATA 和 ACK 应能无碰撞发送。"
+  ],
+  "examples": [
+    "在 H1、H2 和 AP 的隐藏终端场景中，H1 先发送 RTS；AP 广播 CTS，H2 听到 CTS 后在 CTS 指示的时间内抑制发送；随后 H1 发送 DATA，AP 返回 ACK。"
+  ],
+  "misconceptions": [
+    "错误理解：RTS 只是在发送 DATA 前做一次普通的询问。实际上，CTS 还会通知其他站点在预约期内不要发送。",
+    "错误理解：使用 RTS/CTS 后任何碰撞都不可能发生。它主要缓解隐藏终端问题，不能保证绝对无碰撞。",
+    "错误理解：RTS/CTS 总能提高性能。它会引入时延并消耗信道资源，因此不适合所有帧。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "RTS/CTS 交换的顺序是什么？",
+      "a": "发送方先发送 RTS，AP 返回 CTS，发送方发送 DATA，AP 返回 ACK。"
+    },
+    {
+      "q": "CTS 帧的两个主要作用是什么？",
+      "a": "向 RTS 发送方明确发送许可，并通知其他站点在预约期内不要发送。"
+    },
+    {
+      "q": "RTS/CTS 为什么能缓解隐藏终端问题？",
+      "a": "隐藏终端可能听不到发送方的 RTS，但通常可以听到 AP 广播的 CTS；听到 CTS 后会在预约期内抑制发送，从而避免与长 DATA 帧碰撞。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "隐藏终端问题",
+    "802.11 的 CSMA/CA 发送流程"
+  ],
+  "source_pages": [
+    369,
+    372
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "861_rts_cts_信道预约机制",
+  "_chunk_pages": [
+    369,
+    372
+  ]
+}

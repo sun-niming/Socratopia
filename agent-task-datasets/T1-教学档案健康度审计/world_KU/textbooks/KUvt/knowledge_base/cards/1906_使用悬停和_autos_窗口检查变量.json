@@ -1,0 +1,44 @@
+{
+  "title": "使用悬停和 Autos 窗口检查变量",
+  "definition": "在 Visual Studio 调试器暂停执行时，可以将鼠标悬停在变量名称上查看变量值，也可以打开 Debug | Windows | Autos 窗口查看当前上下文中的变量列表。对于对象变量，可以在 Autos 窗口中展开对象，检查其数据成员。",
+  "key_points": [
+    "鼠标悬停适合快速查看某个变量的当前值。",
+    "Autos 窗口集中显示与当前执行位置相关的变量。",
+    "对象可以展开，以检查其内部数据成员。",
+    "原文示例展开 src 后发现其 m_numCitations 数据成员为 -1，这为分析异常原因提供了关键线索。"
+  ],
+  "examples": [
+    "在 ArticleCitations 示例中，将鼠标悬停在 src 上，或在 Autos 窗口中展开 src，都可以看到 src.m_numCitations 的值为 -1。"
+  ],
+  "misconceptions": [
+    "认为只能通过添加输出语句才能查看运行时变量值。",
+    "只检查对象变量本身，而不展开查看其数据成员。",
+    "看到异常后只关注异常消息，忽略异常发生前对象的内部状态。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "Visual Studio 中有哪些方式可以在暂停时检查变量值？",
+      "a": "可以将鼠标悬停在变量名称上，也可以使用 Debug | Windows | Autos 窗口。"
+    },
+    {
+      "q": "原文中检查 src 后发现了什么关键状态？",
+      "a": "发现 src 的 m_numCitations 数据成员为 -1。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "Visual Studio 断点调试",
+    "对象与数据成员"
+  ],
+  "source_pages": [
+    922,
+    922
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1906_使用悬停和_autos_窗口检查变量",
+  "_chunk_pages": [
+    921,
+    924
+  ]
+}

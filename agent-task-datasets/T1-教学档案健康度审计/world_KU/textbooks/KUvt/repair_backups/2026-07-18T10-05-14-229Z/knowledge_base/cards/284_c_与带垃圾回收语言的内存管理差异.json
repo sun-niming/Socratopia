@@ -1,0 +1,42 @@
+{
+  "title": "C++与带垃圾回收语言的内存管理差异",
+  "definition": "原文将 C++ 的 `new`、`delete` 与 C#、Java 等语言的自动垃圾回收机制进行对比：C++ 中使用动态内存后通常需要程序员显式管理释放；C# 等语言采用标记-清除等垃圾回收机制，一般不要求使用者用 `delete` 释放普通托管对象。",
+  "key_points": [
+    "C++动态分配通常使用 `new`，释放通常使用匹配的 `delete` 或 `delete[]`。",
+    "原文提到 C#、Java、C# 等语言使用 `shared_ptr` 的表述存在 OCR 损坏，具体对比对象需要核实。",
+    "垃圾回收通常通过追踪对象是否仍可达来回收不再使用的内存，原文出现了“mark”和“sweep”字样。"
+  ],
+  "examples": [
+    "C++动态数组示例：```cpp\nint* p { new int[8] };\ndelete[] p;\np = nullptr;\n```",
+    "垃圾回收术语：`mark`（标记）与 `sweep`（清除）。"
+  ],
+  "misconceptions": [
+    "C++不会自动为所有通过 `new` 分配的对象执行垃圾回收；使用者需要正确管理其生命周期。",
+    "`shared_ptr` 是 C++ 的智能指针，不是 C# 或 Java 的垃圾回收机制本身。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "C++动态内存管理与垃圾回收语言的主要差异是什么？",
+      "a": "C++通常要求程序员显式使用匹配的释放操作管理动态对象；垃圾回收语言通常由运行时自动回收不可达对象。"
+    },
+    {
+      "q": "原文提到的垃圾回收两个阶段术语是什么？",
+      "a": "`mark` 和 `sweep`，即标记与清除。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "动态数组的分配与释放"
+  ],
+  "source_pages": [
+    209,
+    212
+  ],
+  "needs_verification": true,
+  "verify_query": "《C++20高级编程》第7.3.3节 C++ new delete shared_ptr 与 C# Java 垃圾回收 mark sweep 原文",
+  "concept_id": "284_c_与带垃圾回收语言的内存管理差异",
+  "_chunk_pages": [
+    209,
+    212
+  ]
+}

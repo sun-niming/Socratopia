@@ -1,0 +1,312 @@
+{
+  "chunkId": "chunk-003",
+  "messageRange": [
+    16,
+    27
+  ],
+  "topics": [
+    {
+      "name": "Optional 的作用",
+      "facts": [
+        "Optional 把有可能找不到这件事直接写进方法的签名里",
+        "返回类型是 Optional<Ingredient> 时，调用方必须显式面对可能为空的情况",
+        "如果直接返回 Ingredient，签名上看不出任何暗示，调用方可能一路无视直到运行时抛出 NullPointerException",
+        "Optional 把运行时的隐患提前变成签名上看得见、必须交代的东西"
+      ],
+      "examples": [
+        "orElse 兜底",
+        "orElseThrow 抛错",
+        "isPresent 先问一句",
+        "清单 3.1 中的 Optional 不是随手加的"
+      ],
+      "sourceMessageIndexes": [
+        16,
+        17
+      ]
+    },
+    {
+      "name": "接口与实现分离",
+      "facts": [
+        "教材先把存储库该有哪些本事整理成接口 IngredientRepository，三条操作一条一句方法声明，接口正文留空",
+        "要把什么和怎么做到被切成两半，怎么连库、怎么拼 SQL 留给实现类去填"
+      ],
+      "examples": [
+        "IngredientRepository 接口的三条方法声明"
+      ],
+      "sourceMessageIndexes": [
+        17
+      ]
+    },
+    {
+      "name": "依赖注入 JdbcTemplate",
+      "facts": [
+        "Spring 在启动时做组件扫描，扫到存储库实现类，在实例化时把需要的 JdbcTemplate 一并交到它手里",
+        "private JdbcTemplate jdbcTemplate 字段从没亲手赋过值，却在对象一出生时就已经有值了",
+        "常见的交付方式有两种：把依赖写进构造器参数，Spring 先备好一个 JdbcTemplate 的 bean 再拿它去 new 这个存储库；或直接标在字段上让它自己填",
+        "构造函数注入更受推崇，因为依赖一眼可见、对象也更容易在测试里被替换"
+      ],
+      "examples": [
+        "private JdbcTemplate jdbcTemplate;",
+        "构造器注入",
+        "字段注入"
+      ],
+      "sourceMessageIndexes": [
+        18,
+        19
+      ]
+    },
+    {
+      "name": "IngredientRepository 接口与 JdbcIngredientRepository 实现",
+      "facts": [
+        "页 80 给出接口正文，三条方法声明：findAll 返回 Iterable，findById 返回 Optional，save 返回 Ingredient",
+        "三处签名各有讲究：查所有返回 Iterable；查单个返回 Optional（把可能找不到写进签名）；保存返回 Ingredient 本身",
+        "@Repository 是 Spring 定义的原型注解之一，跟 @Controller、@Component 同族，给这个类的身份是仓储，Spring 组件扫描时自动发现它，在应用上下文里生成一个 bean",
+        "注入靠构造函数：JdbcTemplate 作为构造参数进来，赋给实例变量",
+        "教材说单构造函数时可以省掉 @Autowired；想显式写、或是存在多个构造函数时，才把它标上"
+      ],
+      "examples": [
+        "public interface IngredientRepository { Iterable<Ingredient> findAll(); Optional<Ingredient> findById(String id); Ingredient save(Ingredient ingredient); }",
+        "@Repository public class JdbcIngredientRepository implements IngredientRepository { private JdbcTemplate jdbcTemplate; public JdbcIngredientRepository(JdbcTemplate jdbcTemplate) { this.jdbcTemplate = jdbcTemplate; } }"
+      ],
+      "sourceMessageIndexes": [
+        21
+      ]
+    },
+    {
+      "name": "query 方法和 RowMapper",
+      "facts": [
+        "query() 的用法：第一个参数是 SQL，第二个是 Spring 的 RowMapper（负责把结果集的每一行变成一个对象），后面再跟 SQL 需要的参数",
+        "findAll() 没有参数，因为它没有 where 条件",
+        "findById() 有参数"
+      ],
+      "examples": [
+        "jdbcTemplate.query(\"select id, name, type from Ingredient\", this::mapRowToIngredient)",
+        "jdbcTemplate.query(\"select id, name, type from Ingredient where id=?\", this::mapRowToIngredient, id)"
+      ],
+      "sourceMessageIndexes": [
+        21
+      ]
+    },
+    {
+      "name": "RowMapper 是函数式接口",
+      "facts": [
+        "RowMapper 是函数式接口，它只有一个抽象方法 mapRow(ResultSet, int)",
+        "mapRowToIngredient(ResultSet row, int rowNum) 的参数表和方法名对得上，签名严丝合缝，所以方法引用能直接站到需要一个 RowMapper 实现的位置上去",
+        "方法引用本身就是 lambda 的简写形式，编译时它直接充当那个单抽象方法的实现，中间不必真去造一个匿名内部类",
+        "教材页 81 给的显式 new RowMapper<>(){...} 代码是拿来对照如果我偏要老老实实手写的样子，两版做的事相同"
+      ],
+      "examples": [
+        "mapRow(ResultSet, int)",
+        "mapRowToIngredient(ResultSet row, int rowNum)",
+        "new RowMapper<>(){...}"
+      ],
+      "sourceMessageIndexes": [
+        22,
+        24,
+        25
+      ]
+    },
+    {
+      "name": "存储库接入原有流程",
+      "facts": [
+        "清单 3.7：DesignTacoController 里注入 IngredientRepository，addIngredientsToModel() 改成调用 ingredientRepo.findAll()，第 2 章那份硬编码的配料清单就此退役",
+        "清单 3.8：IngredientByIdConverter 简化成一句 ingredientRepo.findById(id).orElse(null)，原来那张手搭的 Map 也删了",
+        "findById 返回 Optional，转换器想拿回一个普通 Ingredient，于是用 orElse(null) 把找不到这层壳拆掉",
+        "谁调用谁负责交代空值"
+      ],
+      "examples": [
+        "ingredientRepo.findAll()",
+        "ingredientRepo.findById(id).orElse(null)"
+      ],
+      "sourceMessageIndexes": [
+        25
+      ]
+    },
+    {
+      "name": "数据库表结构与聚合",
+      "facts": [
+        "图 3.1 给出 Taco Cloud 需要的四张表：Taco_Order 存订单细节（收货信息、支付信息、下单时间），Taco 存每个玉米卷设计的信息，Ingredient_Ref 把 Taco 行连到 Ingredient 行，Ingredient 存原料信息",
+        "Taco 不能脱离 Taco_Order 存在，所以 Taco_Order 和 Taco 是一个聚合，Taco_Order 是聚合根",
+        "Ingredient 是自己聚合里的唯一成员，能独立存在，Taco 通过 Ingredient_Ref 引用它"
+      ],
+      "examples": [
+        "Taco_Order 表",
+        "Taco 表",
+        "Ingredient_Ref 表",
+        "Ingredient 表"
+      ],
+      "sourceMessageIndexes": [
+        25
+      ]
+    },
+    {
+      "name": "中间表 Ingredient_Ref 的必要性",
+      "facts": [
+        "一个 Taco 要用多种配料，同一种配料又会出现在很多个 Taco 里，这就是多对多",
+        "要是在 Taco 表里开一列硬存配料，一列只能装一个值，为每种配料各开一列的话列的数目得随配料数量变，完全没法固定",
+        "解法是把一个 Taco 用了哪些配料这件事单独拎到一张中间表里：Ingredient_Ref，一行记一条某 Taco 用了某 Ingredient，多对多就被拆成了两组一对多",
+        "页 85 建 Ingredient_Ref 表时只列了 ingredient、taco、taco_key 三列，taco_key 用来保留配料在列表里的顺序",
+        "页 90 那个 saveIngredientRefs() 里 key++ 就是干保留顺序这个的",
+        "中间表的存在是为了拆关系，不是为了少建表"
+      ],
+      "examples": [
+        "Ingredient_Ref 三列：ingredient、taco、taco_key",
+        "saveIngredientRefs() 里 key++"
+      ],
+      "sourceMessageIndexes": [
+        25,
+        26,
+        27
+      ]
+    },
+    {
+      "name": "schema.sql 与 data.sql 约定",
+      "facts": [
+        "清单 3.9 是建表 SQL 本体，都是 create table 建列、末尾几条 alter table ... add foreign key 立外键",
+        "类路径根目录下放一个 schema.sql，应用启动时里面的 SQL 会被执行来建表",
+        "根目录下再放一个 data.sql，里面是 insert 语句（清单 3.10），启动时执行来预加载配料数据",
+        "两个文件都放在项目的 src/main/resources/ 下",
+        "页 86 的清单 3.10 前四行还是 delete from ...，先清空再插入，省得重复启动时数据叠起来",
+        "这套机制里没有写任何一行请执行这个文件的代码，没在某个配置类里调它，也没手工去跑"
+      ],
+      "examples": [
+        "schema.sql",
+        "data.sql",
+        "src/main/resources/",
+        "清单 3.10 前四行 delete from ..."
+      ],
+      "sourceMessageIndexes": [
+        27
+      ]
+    }
+  ],
+  "learnerEvidence": [
+    {
+      "kind": "correct",
+      "content": "防止调用方忘记处理空可能结果",
+      "sourceMessageIndexes": [
+        16
+      ]
+    },
+    {
+      "kind": "correct",
+      "content": "Spring扫描后给他注入的值？",
+      "sourceMessageIndexes": [
+        18
+      ]
+    },
+    {
+      "kind": "correct",
+      "content": "RowMapper接口是单函数接口，因此方法引用实际上是将这个方法用lambda包装成一个RowMapper类型的匿名内部类",
+      "sourceMessageIndexes": [
+        22,
+        24
+      ]
+    },
+    {
+      "kind": "misconception",
+      "content": "减少一张表的复杂度",
+      "sourceMessageIndexes": [
+        26
+      ]
+    },
+    {
+      "kind": "shift",
+      "content": "我们继续从下一页看起，第80页",
+      "sourceMessageIndexes": [
+        20
+      ]
+    }
+  ],
+  "keyInsights": [
+    {
+      "content": "Optional 的作用是防止调用方忘记处理空可能结果",
+      "sourceMessageIndexes": [
+        16
+      ]
+    },
+    {
+      "content": "Spring 扫描后给 JdbcTemplate 字段注入值",
+      "sourceMessageIndexes": [
+        18
+      ]
+    },
+    {
+      "content": "RowMapper 是单函数接口，方法引用实际上是将这个方法用 lambda 包装成一个 RowMapper 类型的匿名内部类",
+      "sourceMessageIndexes": [
+        22,
+        24
+      ]
+    }
+  ],
+  "openQuestions": [
+    {
+      "content": "实现类要真把 SQL 跑起来，它总得先拿到一个 JdbcTemplate 对象，这个对象从哪儿来？",
+      "sourceMessageIndexes": [
+        17
+      ]
+    },
+    {
+      "content": "具体这份实现用哪种写法、三个方法各自怎么落到 SQL？",
+      "sourceMessageIndexes": [
+        19
+      ]
+    },
+    {
+      "content": "为什么中间还要多插一张 Ingredient_Ref，而不干脆在 Taco 表里开一列，把配料直接存进去？",
+      "sourceMessageIndexes": [
+        25
+      ]
+    },
+    {
+      "content": "这套机制里没有写任何一行请执行这个文件的代码，它凭什么在启动时自己就执行了？这属于 Spring Boot 的哪个核心思路？",
+      "sourceMessageIndexes": [
+        27
+      ]
+    }
+  ],
+  "reviewCandidates": [
+    {
+      "question": "Optional 作为返回类型相比直接返回对象有什么好处？",
+      "answer": "把有可能找不到这件事直接写进方法签名，调用方必须显式面对可能为空的情况，把运行时的隐患提前变成签名上看得见、必须交代的东西。",
+      "sourceMessageIndexes": [
+        16,
+        17
+      ]
+    },
+    {
+      "question": "JdbcIngredientRepository 中的 JdbcTemplate 字段是如何被赋值的？",
+      "answer": "Spring 启动时组件扫描发现该类，在实例化时通过构造函数注入一个 JdbcTemplate bean。",
+      "sourceMessageIndexes": [
+        18,
+        19,
+        21
+      ]
+    },
+    {
+      "question": "RowMapper 为什么可以用方法引用来传入？",
+      "answer": "RowMapper 是函数式接口，只有一个抽象方法 mapRow(ResultSet, int)，方法引用本身就是 lambda 的简写形式，编译时直接充当该单抽象方法的实现。",
+      "sourceMessageIndexes": [
+        22,
+        24,
+        25
+      ]
+    },
+    {
+      "question": "为什么需要 Ingredient_Ref 中间表？",
+      "answer": "因为 Taco 和 Ingredient 是多对多关系，中间表把多对多拆成两组一对多，并可用 taco_key 保留配料顺序。",
+      "sourceMessageIndexes": [
+        25,
+        26,
+        27
+      ]
+    },
+    {
+      "question": "schema.sql 和 data.sql 放在哪里，作用是什么？",
+      "answer": "都放在 src/main/resources/ 下；schema.sql 启动时执行建表，data.sql 启动时执行 insert 预加载数据。",
+      "sourceMessageIndexes": [
+        27
+      ]
+    }
+  ]
+}

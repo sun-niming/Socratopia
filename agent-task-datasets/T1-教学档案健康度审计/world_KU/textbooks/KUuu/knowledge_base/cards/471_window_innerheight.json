@@ -1,0 +1,36 @@
+{
+  "title": "window.innerHeight",
+  "definition": "window.innerHeight用于获取浏览器窗口内容区域的高度，包括已渲染的水平滚动条。",
+  "key_points": [
+    "返回浏览器窗口内容区域的高度",
+    "包括已渲染的水平滚动条"
+  ],
+  "examples": [
+    "window.innerHeight"
+  ],
+  "misconceptions": [
+    "它不是整个屏幕的高度",
+    "它不是页面所有内容的总高度"
+  ],
+  "qa_pairs": [
+    {
+      "q": "window.innerHeight获取的是什么？",
+      "a": "获取浏览器窗口内容区域的高度，包括已渲染的水平滚动条。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "window对象"
+  ],
+  "source_pages": [
+    329,
+    332
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "471_window_innerheight",
+  "_chunk_pages": [
+    329,
+    332
+  ]
+}

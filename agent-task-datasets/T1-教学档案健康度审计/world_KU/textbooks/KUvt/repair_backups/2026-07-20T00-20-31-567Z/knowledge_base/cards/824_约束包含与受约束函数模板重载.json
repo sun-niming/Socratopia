@@ -1,0 +1,47 @@
+{
+  "title": "约束包含与受约束函数模板重载",
+  "definition": "当多个函数模板具有不同约束时，编译器会优先选择约束更具体的模板。一个约束包含另一个约束，表示前者要求更多条件、能够暗示后者。编译器通过规范化约束表达式，并依据约束中合取和析取的语法结构判断这种包含关系。",
+  "key_points": [
+    "更具体的约束通常是较宽泛约束再加上额外条件。",
+    "例如，`integral<T> && sizeof(T) == 4` 比单独的 `integral<T>` 更具体。",
+    "规范化约束时，概念表达式会递归展开，直到形成由常量布尔表达式的合取和析取组成的表达式。",
+    "约束包含推理只依据语法结构，而不是依据语义上的强弱。",
+    "包含关系的判断使用合取和析取，不通过否定来证明包含。"
+  ],
+  "examples": [
+    "`template <typename T> requires std::integral<T> void process(const T& t) { /* ... */ }`",
+    "`template <typename T> requires (std::integral<T> && sizeof(T) == 4) void process(const T& t) { /* ... */ }`",
+    "在典型的 `int` 为 32 位、`short` 为 16 位的系统中：`process(int{1});` 选择带有 `std::integral<T> && sizeof(T) == 4` 的重载；`process(short{2});` 选择只有 `std::integral<T>` 的重载。"
+  ],
+  "misconceptions": [
+    "编译器不是简单地根据人类理解的数学强弱来判断约束谁更具体。",
+    "即使一个条件在语义上看起来更严格，也不一定在 C++ 的约束包含规则中构成包含关系。",
+    "约束包含用于选择更合适的重载，不是对所有候选函数进行运行时排序。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "对于同时满足 `std::integral<T>` 和 `sizeof(T) == 4` 的类型，以下两个重载中通常选择哪一个：仅要求 `std::integral<T>` 的重载，还是同时要求二者的重载？",
+      "a": "选择同时要求 `std::integral<T> && sizeof(T) == 4` 的、更具体的重载。"
+    },
+    {
+      "q": "C++20 约束包含判断主要依据语义还是语法？",
+      "a": "主要依据规范化后的语法结构，而不是一般意义上的语义强弱。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++20 requires约束",
+    "函数模板重载"
+  ],
+  "source_pages": [
+    405,
+    406
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "824_约束包含与受约束函数模板重载",
+  "_chunk_pages": [
+    405,
+    408
+  ]
+}

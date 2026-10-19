@@ -1,0 +1,46 @@
+{
+  "title": "本书的编译器与标准范围",
+  "definition": "本书只关注标准C++，不涉及编译器厂商提供的扩展。读者可以使用任意C++编译器；教材举例介绍Microsoft Visual C++和GCC，也提到Windows上可使用Microsoft Visual Studio Community Edition，Linux上可使用GCC或Clang。这些工具均可免费获得或使用。",
+  "key_points": [
+    "本书关注C++标准部分，不依赖特定编译器厂商的扩展。",
+    "可使用任意C++编译器学习本书。",
+    "教材将简要介绍Microsoft Visual C++和GCC。",
+    "Windows示例编译环境是Microsoft Visual Studio Community Edition；Linux示例编译器包括GCC或Clang。",
+    "使用其他编译器时，应查阅该编译器自带的文档。"
+  ],
+  "examples": [
+    "Windows环境可以选择Microsoft Visual Studio Community Edition，其中包含Visual C++。",
+    "Linux环境可以选择GCC或Clang。"
+  ],
+  "misconceptions": [
+    "学习本书不要求必须使用Microsoft Visual C++或GCC，教材允许使用任意C++编译器。",
+    "本书中的标准C++内容与某个厂商的专有扩展不是同一回事。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "本书是否依赖某个特定的C++编译器？",
+      "a": "不依赖。本书关注标准C++，可以使用任意C++编译器。"
+    },
+    {
+      "q": "Windows和Linux分别可以使用哪些教材举例的编译环境？",
+      "a": "Windows可以使用Microsoft Visual Studio Community Edition，其中包含Visual C++；Linux可以使用GCC或Clang。"
+    },
+    {
+      "q": "如果使用教材没有介绍的编译器，应查阅什么？",
+      "a": "应查阅该编译器的相关文档。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [],
+  "source_pages": [
+    16,
+    16
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "025_本书的编译器与标准范围",
+  "_chunk_pages": [
+    13,
+    16
+  ]
+}

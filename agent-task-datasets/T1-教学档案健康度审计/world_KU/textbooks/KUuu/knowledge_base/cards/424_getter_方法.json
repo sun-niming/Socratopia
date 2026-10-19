@@ -1,0 +1,44 @@
+{
+  "title": "getter 方法",
+  "definition": "getter 方法是用于读取属性值的访问器方法。它使用 get 关键字定义，访问时像读取属性一样使用，而不是像普通函数那样加括号调用。教材示例中，getter area 会返回通过 this.calcArea() 计算出的结果，因此可以直接通过 square.area 读取面积。",
+  "key_points": [
+    "getter 使用 get 关键字定义",
+    "访问 getter 时像访问属性一样，不需要写括号",
+    "getter 常用于返回计算得到的值",
+    "示例中 area 的值由 calcArea() 计算得到"
+  ],
+  "examples": [
+    "get area() { return this.calcArea(); }",
+    "console.log(square.area);"
+  ],
+  "misconceptions": [
+    "getter 必须像普通函数一样用 square.area() 调用",
+    "getter 只能返回存储在字段中的原始值",
+    "getter 访问的是普通数据属性，不会执行代码"
+  ],
+  "qa_pairs": [
+    {
+      "q": "getter 方法如何定义？",
+      "a": "使用 get 关键字定义。"
+    },
+    {
+      "q": "访问 getter 时要不要加括号？",
+      "a": "不要，像访问属性一样直接写名称即可。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "类方法"
+  ],
+  "source_pages": [
+    293,
+    296
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "424_getter_方法",
+  "_chunk_pages": [
+    293,
+    296
+  ]
+}

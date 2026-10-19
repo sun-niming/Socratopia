@@ -1,0 +1,35 @@
+{
+  "title": "border",
+  "definition": "border 用来设置边框，属性值通常由宽度、线条类型和颜色组成。原文示例是 1px solid blue。",
+  "key_points": [
+    "border 同时涉及宽度、线条类型、颜色",
+    "可以直接写成一个简写形式",
+    "原文示例表示 1px 蓝色实线边框"
+  ],
+  "examples": [
+    "border: 1px solid blue;"
+  ],
+  "misconceptions": [
+    "误以为 border 只能设置颜色",
+    "误以为边框只能是实线"
+  ],
+  "qa_pairs": [
+    {
+      "q": "border 这个属性由哪些部分组成？",
+      "a": "宽度、线条类型和颜色。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [],
+  "source_pages": [
+    117,
+    120
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "194_border",
+  "_chunk_pages": [
+    117,
+    120
+  ]
+}

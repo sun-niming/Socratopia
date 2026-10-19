@@ -1,0 +1,44 @@
+{
+  "title": "auto类型推导的基本规则",
+  "definition": "使用`auto`声明变量时，编译器根据初始化表达式推导变量类型。`auto`通常推导出对象的值类型，不会仅因为初始化表达式是引用或`const`对象就自动保留引用和顶层`const`；如果需要保留这些性质，应显式写出`auto&`、`const auto&`等形式。",
+  "key_points": [
+    "`auto`必须结合初始化表达式使用，类型由初始化表达式推导。",
+    "使用`auto&`可以声明引用类型；使用`const auto&`可以声明指向常量对象的引用。",
+    "函数返回类型也可以使用`auto`，但必须能够根据函数定义推导出返回类型。",
+    "lambda表达式通常与`auto`配合使用，以保存无法直接书写的闭包类型。"
+  ],
+  "examples": [
+    "`auto result { as_const(str) };`：按值初始化变量，通常不会保留`as_const(str)`返回结果的引用属性。",
+    "`const string& f2 { foo() };`：显式声明为指向常量字符串的引用。",
+    "`const auto& f2 { foo() };`：使用`auto`推导对象的基础类型，同时显式保留常量引用形式。"
+  ],
+  "misconceptions": [
+    "`auto`不是任意情况下都能保留初始化表达式的完整类型属性；顶层`const`和引用通常需要显式写出。",
+    "`auto`并不表示动态类型；变量类型仍在编译期确定。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何使用`auto`声明一个指向常量对象的引用？",
+      "a": "使用`const auto&`，例如`const auto& f2 { foo() };`。"
+    },
+    {
+      "q": "`auto`推导的类型是在运行时确定的吗？",
+      "a": "不是。`auto`类型推导在编译期完成。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++变量声明与初始化"
+  ],
+  "source_pages": [
+    89,
+    90
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "125_auto类型推导的基本规则",
+  "_chunk_pages": [
+    89,
+    92
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "title": "vector<bool>的空间优化特化",
+  "definition": "C++标准库对vector<bool>提供了部分特化。由于布尔值只有true和false两种状态，vector<bool>可以用位来打包存储多个布尔值，从而节省空间；它并不是像普通vector<T>那样直接存储一组独立的bool对象。",
+  "key_points": [
+    "一个位可以表示true或false，因此vector<bool>能够以位为单位压缩布尔元素。",
+    "vector<bool>的空间占用通常小于按普通对象方式存储布尔值的容器。",
+    "vector<bool>仍然能够动态改变大小，这是其相对于bitset的优势。",
+    "bitset也是位字段实现，但通常用于固定大小；vector<bool>适合需要动态大小的位字段。"
+  ],
+  "examples": [
+    "可以把vector<bool>理解为动态位序列，例如：vector<bool> flags { true, false, true };。其元素概念上是布尔值，但底层可能按位打包。"
+  ],
+  "misconceptions": [
+    "vector<bool>不是普通vector模板对bool类型的简单实例化，而是标准库规定的特殊部分特化。",
+    "vector<bool>的每个元素并不一定占用一个完整字节或一个完整的bool对象大小。",
+    "vector<bool>不等同于bitset：前者可以动态改变大小，后者更适合固定大小的位集合。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么标准库要对vector<bool>进行部分特化？",
+      "a": "因为bool只有true和false两种状态，可以用一个位表示一个布尔值，从而通过位打包节省空间。"
+    },
+    {
+      "q": "vector<bool>相对于bitset的主要优势是什么？",
+      "a": "vector<bool>可以动态改变大小。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "vector容器基础",
+    "布尔值表示"
+  ],
+  "source_pages": [
+    566,
+    566
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1166_vector_bool_的空间优化特化",
+  "_chunk_pages": [
+    565,
+    568
+  ]
+}

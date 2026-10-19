@@ -1,0 +1,49 @@
+{
+  "title": "std::format中的width、fill和align格式控制",
+  "definition": "std::format的格式说明符可以控制输出宽度、填充字符和对齐方式。原文给出的格式说明结构为`[[fill]align][sign][#][0][width][.precision][type]`，其中width表示字段宽度，fill和align用于控制填充字符及对齐方式。",
+  "key_points": [
+    "原文列出width作为格式说明的一部分，表示输出字段的宽度。",
+    "原文列出`[fill]align`，说明可以指定填充字符和对齐方式。",
+    "原文还列出sign、#、0、precision和type等格式说明部分。",
+    "原文通过格式字符串`{:<7}`展示了设置字段宽度为7并使用左对齐的形式。"
+  ],
+  "examples": [
+    "格式说明符结构：`[[fill]align][sign][#][0][width][.precision][type]`。",
+    "左对齐、字段宽度为7的示例：`std::format(\"|{:<7}|\", i)`。",
+    "原文还展示了普通字段宽度示例：`std::format(\"|{:7}|\", i)`。"
+  ],
+  "misconceptions": [
+    "width表示格式化字段的宽度，不是改变原始数值本身。",
+    "`<`表示左对齐；设置宽度后，剩余位置会按照格式规则进行填充。",
+    "格式说明符应写在替换字段的大括号内部，并以冒号与参数索引或空字段分隔。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "std::format格式说明中的width表示什么？",
+      "a": "width表示格式化输出字段的宽度。"
+    },
+    {
+      "q": "如何使用std::format把参数按宽度7进行左对齐？",
+      "a": "可以使用`std::format(\"|{:<7}|\", i)`，其中`<`表示左对齐，`7`表示字段宽度。"
+    },
+    {
+      "q": "原文给出的std::format格式说明结构是什么？",
+      "a": "原文给出的是`[[fill]align][sign][#][0][width][.precision][type]`。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "std::format的基本格式字符串语法"
+  ],
+  "source_pages": [
+    113,
+    116
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 std::format format specifier grammar fill align sign alternate zero width precision type {:<7}",
+  "concept_id": "168_std_format中的width_fill和align格式控制",
+  "_chunk_pages": [
+    113,
+    116
+  ]
+}

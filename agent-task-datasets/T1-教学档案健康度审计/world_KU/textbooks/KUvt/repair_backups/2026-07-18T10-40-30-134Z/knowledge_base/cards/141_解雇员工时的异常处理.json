@@ -1,0 +1,50 @@
+{
+  "title": "解雇员工时的异常处理",
+  "definition": "doFire() 从用户读取员工编号，通过 Database::getEmployee() 查找员工并调用 fire()；如果查找或相关操作抛出 std::logic_error，则捕获异常并输出无法解雇员工及异常信息。",
+  "key_points": [
+    "先读取整数 employeeNumber。",
+    "调用 `db.getEmployee(employeeNumber)` 获取员工对象。",
+    "对得到的员工调用 `emp.fire()`。",
+    "成功时输出员工已终止的信息。",
+    "使用 `catch (const std::logic_error& exception)` 捕获逻辑错误，并通过 `exception.what()` 获取错误说明。"
+  ],
+  "examples": [
+    "核心流程可表示为：\n```cpp\nvoid doFire(Database& db) {\n    int employeeNumber;\n    std::cin >> employeeNumber;\n    try {\n        auto& emp{db.getEmployee(employeeNumber)};\n        emp.fire();\n        std::cout << std::format(\n            \"Employee {} terminated.\", employeeNumber)\n                  << std::endl;\n    } catch (const std::logic_error& exception) {\n        std::cerr << std::format(\n            \"Unable to terminate employee: {}\", exception.what())\n                  << std::endl;\n    }\n}\n```"
+  ],
+  "misconceptions": [
+    "`getEmployee()` 查找失败时，程序不一定直接终止；原文使用 try-catch 捕获 std::logic_error。",
+    "`exception.what()` 返回的是异常说明文本，不是员工编号。",
+    "成功输出和错误输出使用不同的流：成功信息使用 cout，错误信息使用 cerr。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "doFire() 查找员工使用哪个函数？",
+      "a": "使用 db.getEmployee(employeeNumber)。"
+    },
+    {
+      "q": "doFire() 捕获哪种异常？",
+      "a": "捕获 const std::logic_error& 类型的异常。"
+    },
+    {
+      "q": "发生逻辑错误时如何获得具体错误信息？",
+      "a": "调用 exception.what()。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++异常处理",
+    "std::logic_error",
+    "员工解雇操作"
+  ],
+  "source_pages": [
+    99,
+    100
+  ],
+  "needs_verification": true,
+  "verify_query": "\"C++20高级编程\" \"Unable to terminate employee\" \"logic_error\"",
+  "concept_id": "141_解雇员工时的异常处理",
+  "_chunk_pages": [
+    97,
+    100
+  ]
+}

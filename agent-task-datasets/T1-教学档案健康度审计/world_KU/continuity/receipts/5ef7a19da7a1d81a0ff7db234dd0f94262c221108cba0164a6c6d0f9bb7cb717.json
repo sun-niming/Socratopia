@@ -1,0 +1,105 @@
+{
+  "schemaVersion": 1,
+  "status": "committed",
+  "operationId": "endclass:v1:9841ac8d5ddc11cd2a196c1c699fb0da:bde5731b9ce2250dc518af89",
+  "operationHash": "5ef7a19da7a1d81a0ff7db234dd0f94262c221108cba0164a6c6d0f9bb7cb717",
+  "scope": {
+    "accountId": "local",
+    "profileId": "uolmzgq8",
+    "worldId": "KU",
+    "conversationId": "xTl_QQfSq3RSON8sIKJh5"
+  },
+  "companion": {
+    "slotId": "npc_a",
+    "companionInstanceId": "ci_7c38648f75727584bacedbcf",
+    "candidateId": "ct_xwxrb0v3",
+    "displayName": "三月七"
+  },
+  "committedAt": "2026-09-11T01:23:07.777Z",
+  "targets": [
+    {
+      "relativePath": "pal_moments.md",
+      "oldHash": "3bd634ff06063c257417dacf22175cc31ef70869fafda911d2e0c55c1a8af547",
+      "newHash": "64e52f4a7c80996a53799a451d36794bec4e0a5f466db72afb484f829a5dc431",
+      "deleting": false
+    },
+    {
+      "relativePath": "textbooks/KUqg/progress.md",
+      "oldHash": "e897a8ca0b8e9b9e684eb471ea643a262c3403397e450145f1b713a9852997e6",
+      "newHash": "cd15316e837e2c0ce9fcf072900439977a84c14029b7ddb2d0fbb8886ad07ef7",
+      "deleting": false
+    },
+    {
+      "relativePath": "diary/2026-09.md",
+      "oldHash": "8aaa6ad41aa6742753e644f184fe0a22150dc0d8c1f1c641b5d670009b693c65",
+      "newHash": "ec39d8bd0ac1eb322e7a6e8fdbb4f261b1b42079e92f99cf68eec0c5d286001e",
+      "deleting": false
+    },
+    {
+      "relativePath": "relation_npc_a.md",
+      "oldHash": "d0d8278f0fd798560120c0673995a59f5c6837d5fcc2c5df6097aadefed059c6",
+      "newHash": "f5d700b867ccfbcd2bbd1497a7457847ed9301ae57b9d3bb1a6f837cf55fbf41",
+      "deleting": false
+    },
+    {
+      "relativePath": "world_meta.json",
+      "oldHash": "fed64256e37b182b2625ed332544dd1deec0de0f87625d660bf93f225c51746c",
+      "newHash": "ccfebad918a1db25f23e3ca436c6c7de4e080e353f7abd35ae4d9397504956f4",
+      "deleting": false
+    },
+    {
+      "relativePath": "world_records.md",
+      "oldHash": "d74064cbe465495dd77aba9b18e78bdc67dea167fae83f0adfcd929795a16270",
+      "newHash": "10c8cfa527aa5554aa4ef204496090976262a81209ec700b8e1ca60578a96491",
+      "deleting": false
+    },
+    {
+      "relativePath": "textbooks/textbook_index.json",
+      "oldHash": "ca2a21548df8f938b54d813c4f8a125d52ad1ea928b9ead8cd78a5c7c70c61d3",
+      "newHash": "a42f64abbe0e6c4505ce084e0009396bdf107a2350b6ad54a3e2d0c17fd8d505",
+      "deleting": false
+    },
+    {
+      "relativePath": "textbooks/KUqg/handoff/last_tail.json",
+      "oldHash": "5475b8ff2394677957bc9e6bb33ee57affb92ad6aa804e25ddb1932b7516b680",
+      "newHash": "859929ee6877e9569200ffae278671519d138a4bb7e5d090c12604da8bba15ba",
+      "deleting": false
+    },
+    {
+      "relativePath": "textbooks/KUqg/handoff/last_meta.json",
+      "oldHash": "9ae7cba49189e26a2d94c79cd804bd002836692d2d25a494842529f8d93b4321",
+      "newHash": "1102484042a3bb8f3b5d0317278cba04efb9c0c4fe77b2d9ccc690e0ea4a912c",
+      "deleting": false
+    },
+    {
+      "relativePath": "conversations/xTl_QQfSq3RSON8sIKJh5/current_reading.md",
+      "oldHash": "115c3760a8fc9d4f82144a117420a8151deeca19649ce5739972b9e3bfb704ab",
+      "newHash": null,
+      "deleting": true
+    },
+    {
+      "relativePath": "textbooks/KUqg/current_reading.md",
+      "oldHash": null,
+      "newHash": null,
+      "deleting": true
+    },
+    {
+      "relativePath": "conversations/xTl_QQfSq3RSON8sIKJh5/current_reading_summary.json",
+      "oldHash": null,
+      "newHash": null,
+      "deleting": true
+    },
+    {
+      "relativePath": "conversations/xTl_QQfSq3RSON8sIKJh5/handoff.json",
+      "oldHash": null,
+      "newHash": null,
+      "deleting": true
+    }
+  ],
+  "payload": {
+    "farewell": "行，相册我先合上。DHT 那句「刚好算出来文件在下线的对等方身上」，我拍得挺满意，焦点很准。你欠我那道 DASH 的题（凭什么知道点哪份）我先记着，下回跟流萤跑的时候也别忘了。",
+    "companionNote": "相册先合上啦。你还欠我一道 DASH 的题：客户端凭什么知道该点哪份？下次见面我还记着，别再叫我广告商了。",
+    "marker": "<!-- continuityEvent:5ef7a19da7a1d81a0ff7db23 companion:ci_7c38648f75727584bacedbcf mode:classroom -->",
+    "endingPage": 112
+  }
+}

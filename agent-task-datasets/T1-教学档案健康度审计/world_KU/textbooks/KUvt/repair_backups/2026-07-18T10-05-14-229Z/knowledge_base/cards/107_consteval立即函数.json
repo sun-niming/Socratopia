@@ -1,0 +1,40 @@
+{
+  "title": "consteval立即函数",
+  "definition": "原文在C++20相关内容中引入了`consteval`，并将其标注为“immediate function”（立即函数）。该节展示了名为`inchToMm`的相关函数主题，但给出的节选没有完整函数定义和调用规则。",
+  "key_points": [
+    "`consteval`出现在原文的C++20内容中。",
+    "原文把`consteval`函数称为immediate function，即立即函数。",
+    "当前节选不足以完整核实其语法、调用限制以及与`constexpr`的全部区别。"
+  ],
+  "examples": [
+    "原文出现了`consteval`和`immediate function`的标题性内容。"
+  ],
+  "misconceptions": [
+    "不能仅根据本节选把`consteval`简单理解为普通的`constexpr`；两者的编译期求值要求可能不同。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "原文如何称呼`consteval`函数？",
+      "a": "称为“immediate function”，中文可译为“立即函数”。"
+    },
+    {
+      "q": "给出的节选是否包含完整的`consteval`示例和全部语义说明？",
+      "a": "没有，节选主要出现标题和函数名称，完整规则需要核实。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "constexpr函数与编译期常量表达式"
+  ],
+  "source_pages": [
+    77,
+    80
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 consteval immediate function 与 constexpr 的区别 立即函数 调用规则",
+  "concept_id": "107_consteval立即函数",
+  "_chunk_pages": [
+    77,
+    80
+  ]
+}

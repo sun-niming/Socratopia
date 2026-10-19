@@ -1,0 +1,49 @@
+{
+  "title": "结构体struct封装多个字段",
+  "definition": "结构体（`struct`）允许把一个或多个已有类型的字段封装到一个新类型中。声明为该结构体类型的变量会拥有结构体中定义的全部字段，并可使用成员访问运算符 `.` 访问和修改这些字段。结构体适合表示具有多个相关属性的数据记录。",
+  "key_points": [
+    "结构体可以把多个相关数据组织成一个新的复合类型。",
+    "结构体变量通过 `.` 运算符访问字段，例如 `anEmployee.salary`。",
+    "示例中的 `Employee` 结构体包含两个 `char` 字段和两个 `int` 字段：姓名首字母、员工编号和薪水。",
+    "结构体常用于表示数据库记录或员工记录等数据实体。"
+  ],
+  "examples": [
+    "`struct Employee { char firstInitial; char lastInitial; int employeeNumber; int salary; };`",
+    "创建并填写员工记录：`Employee anEmployee; anEmployee.firstInitial = 'J'; anEmployee.lastInitial = 'D'; anEmployee.employeeNumber = 42; anEmployee.salary = 80000;`",
+    "访问字段：`anEmployee.employeeNumber` 和 `anEmployee.salary`。"
+  ],
+  "misconceptions": [
+    "结构体不是只能包含一个字段；它可以封装多个已有类型的字段。",
+    "访问结构体字段时，应使用成员访问运算符 `.`，而不是把字段当作独立的全局变量使用。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何声明一个包含员工姓名首字母、编号和薪水的结构体？",
+      "a": "例如：`struct Employee { char firstInitial; char lastInitial; int employeeNumber; int salary; };`。"
+    },
+    {
+      "q": "如何把员工编号设置为 `42`？",
+      "a": "先声明 `Employee anEmployee;`，然后写 `anEmployee.employeeNumber = 42;`。"
+    },
+    {
+      "q": "结构体变量如何访问其字段？",
+      "a": "使用点运算符 `.`，例如 `anEmployee.salary`。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++基本类型",
+    "变量声明"
+  ],
+  "source_pages": [
+    47,
+    48
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "070_结构体struct封装多个字段",
+  "_chunk_pages": [
+    45,
+    48
+  ]
+}

@@ -1,0 +1,49 @@
+{
+  "title": "Grid 核心概念",
+  "definition": "Grid 布局中有几个核心概念：Grid 容器、Grid 项目、Grid 线、Grid 轨道、Grid 单元格和 Grid 区域。它们分别描述了网格容器本身、容器的直接子元素、构成网格的分界线、两条相邻网格线之间的空间、由四条网格线围成的最小单位，以及由四条网格线围成、可包含一个或多个单元格的矩形区域。",
+  "key_points": [
+    "Grid 容器：应用了 display: grid 或 display: inline-grid 的元素，是所有网格项的直接父元素。",
+    "Grid 项目：Grid 容器的直接子元素。",
+    "Grid 线：构成网格的水平和垂直分界线，从 1 开始编号。",
+    "Grid 轨道：两条相邻 Grid 线之间的空间，即网格的行或列。",
+    "Grid 单元格：由四条 Grid 线围成的最小单位，类似表格中的单元格。",
+    "Grid 区域：由任意四条 Grid 线围成的矩形区域，可以包含一个或多个单元格。"
+  ],
+  "examples": [
+    "<div class=\"container\">",
+    "  <div>01</div>",
+    "  ……",
+    "  <div>09</div>",
+    "</div>"
+  ],
+  "misconceptions": [
+    "误以为 Grid 单元格和 Grid 区域是同一个概念。",
+    "误以为 Grid 线的编号不是从 1 开始。",
+    "误以为 Grid 容器的子元素之外的元素也属于 Grid 项目。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "Grid 容器和 Grid 项目分别是什么？",
+      "a": "Grid 容器是应用了 display: grid 或 display: inline-grid 的元素；Grid 项目是 Grid 容器的直接子元素。"
+    },
+    {
+      "q": "Grid 单元格和 Grid 区域有什么区别？",
+      "a": "Grid 单元格是由四条 Grid 线围成的最小单位；Grid 区域是由任意四条 Grid 线围成的矩形区域，可以包含一个或多个单元格。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "CSS Grid 布局"
+  ],
+  "source_pages": [
+    169,
+    172
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "260_grid_核心概念",
+  "_chunk_pages": [
+    169,
+    172
+  ]
+}

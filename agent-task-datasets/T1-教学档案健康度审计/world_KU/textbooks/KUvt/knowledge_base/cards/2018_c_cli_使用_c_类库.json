@@ -1,0 +1,54 @@
+{
+  "title": "C++/CLI 使用 C# 类库",
+  "definition": "C++/CLI 是 Microsoft 提供的、支持公共语言基础设施（CLI）的 C++方言，可让 C++程序使用由 C#等 .NET 语言编写的功能。使用 C++/CLI 时，CLI 对象由垃圾回收器管理，托管对象通常通过 `gcnew` 创建，并使用句柄而不是普通 C++指针或标准 C++智能指针保存。",
+  "key_points": [
+    "CLI 是 .NET 语言（如 C#、Visual Basic .NET）的共同基础设施。",
+    "C++/CLI 可以在 C++代码中引用并使用 C#类库。",
+    "托管对象应使用 `gcnew` 创建，而不是标准 C++的 `new`。",
+    "托管对象的引用使用句柄表示，示意写法为 `MyClass^`；`^`通常称为句柄符号，读作“hat”。",
+    "托管对象不能简单地存储在普通的 `MyClass*` 或 `std::unique_ptr<MyClass>` 中。",
+    "C++/CLI 可能落后于最新的 C++标准，因此不一定支持所有最新 C++特性；原文还指出其不一定支持所有最新 C#特性。"
+  ],
+  "examples": [
+    "假设 C#类库中定义：`public class MyClass { public double DoubleIt(double value) { return value * 2.0; } }`。",
+    "C++/CLI 中使用该类的核心代码：`MyClass^ instance = gcnew MyClass(); auto result = instance->DoubleIt(1.2);`。",
+    "上述调用结果为 `2.4`，因为 C#方法将输入值乘以 `2.0`。"
+  ],
+  "misconceptions": [
+    "`gcnew` 不是普通 C++标准中的关键字，而是 C++/CLI 用来创建托管对象的语法。",
+    "句柄 `MyClass^` 不等同于普通 C++指针 `MyClass*`。",
+    "托管对象不应直接用 `std::unique_ptr` 等标准 C++智能指针管理，因为其生命周期由 CLI 垃圾回收器管理。",
+    "C++/CLI 不等于标准 C++；它是面向 CLI/.NET 互操作的扩展语言。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "在 C++/CLI 中，如何创建 C#类库中的托管对象？",
+      "a": "使用 `gcnew`，例如 `MyClass^ instance = gcnew MyClass();`。"
+    },
+    {
+      "q": "C++/CLI 中的 `^` 用来表示什么？",
+      "a": "它表示托管对象的句柄，例如 `MyClass^`；句柄通常读作“hat”。"
+    },
+    {
+      "q": "为什么不能用普通 `new` 创建并用 `std::unique_ptr` 保存 CLI 托管对象？",
+      "a": "因为 CLI 对象由垃圾回收器管理，C++/CLI 使用 `gcnew` 创建并用句柄引用，而不是使用普通 C++指针或标准 C++智能指针。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C# 类和类库基础",
+    "C++ 指针与动态内存基础",
+    "垃圾回收的基本概念"
+  ],
+  "source_pages": [
+    982,
+    982
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "2018_c_cli_使用_c_类库",
+  "_chunk_pages": [
+    981,
+    984
+  ]
+}

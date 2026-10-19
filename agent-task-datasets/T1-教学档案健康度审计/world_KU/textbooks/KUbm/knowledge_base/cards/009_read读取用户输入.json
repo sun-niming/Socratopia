@@ -1,0 +1,48 @@
+{
+  "title": "read读取用户输入",
+  "definition": "read 命令用于从键盘读取用户输入并保存到变量中。原文给出的格式有两种：read 变量名列表；read 变量名列表 < file。前者表示从键盘读取输入到变量中，后者表示从文件中读取内容并赋给变量名列表中的变量。",
+  "key_points": [
+    "read 用于把输入读入变量",
+    "基本格式是 read 变量名列表",
+    "也可以使用输入重定向形式 read 变量名列表 < file"
+  ],
+  "examples": [
+    "read name",
+    "read x y",
+    "read name age < file"
+  ],
+  "misconceptions": [
+    "误以为 read 只能从键盘读取，原文还给出了从文件读取的形式",
+    "误以为 read 不需要变量名，实际上原文格式中要求给出变量名列表"
+  ],
+  "qa_pairs": [
+    {
+      "q": "read 命令的作用是什么？",
+      "a": "从键盘读取用户输入到变量中。"
+    },
+    {
+      "q": "read 的基本格式是什么？",
+      "a": "read 变量名列表。"
+    },
+    {
+      "q": "原文中 read 变量名列表 < file 表示什么？",
+      "a": "表示从文件读取内容并赋给变量名列表中的变量。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "变量基本概念",
+    "Linux输入输出基础"
+  ],
+  "source_pages": [
+    72,
+    72
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "009_read读取用户输入",
+  "_chunk_pages": [
+    70,
+    73
+  ]
+}

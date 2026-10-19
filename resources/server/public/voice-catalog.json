@@ -1158,6 +1158,402 @@
           "enabled": true
         }
       }
+    },
+    "cerydra": {
+      "voiceId": "cerydra",
+      "displayName": "刻律德菈",
+      "gender": "female",
+      "group": "[已修改]中文女声",
+      "language": "zh",
+      "version": "v2ProPlus",
+      "gptModelName": "【经典】刻律德菈-e10",
+      "sovitsModelName": "【经典】刻律德菈_e10_s120",
+      "weightRevision": "dd3d889eba13-f424b720a75a",
+      "defaultReferenceId": "default",
+      "defaultEmotion": "default",
+      "references": {
+        "default": {
+          "sourceEmotion": "默认",
+          "label": "默认",
+          "audioPath": "./参考音频/刻律德菈/【默认】免礼。天光甚好，对弈一局如何？.wav",
+          "promptText": "免礼。天光甚好，对弈一局如何？",
+          "promptLanguage": "中文",
+          "audioRevision": "fb1e2dab99e6",
+          "promptTextSource": "filename",
+          "promptTextNote": null,
+          "auditionStatus": "pending",
+          "auditionNote": null,
+          "enabled": true
+        },
+        "neutral": {
+          "sourceEmotion": "中立",
+          "label": "中立",
+          "audioPath": "./参考音频/刻律德菈/【中立】塔兰顿已死。现在，我即是「律法」——.wav",
+          "promptText": "塔兰顿已死。现在，我即是「律法」——",
+          "promptLanguage": "中文",
+          "audioRevision": "23f64dd89dc8",
+          "promptTextSource": "filename",
+          "promptTextNote": null,
+          "auditionStatus": "pending",
+          "auditionNote": null,
+          "enabled": true
+        },
+        "happy": {
+          "sourceEmotion": "开心",
+          "label": "开心",
+          "audioPath": "./参考音频/刻律德菈/【开心】呵，你这位跟班着实懂得如何讨人欢喜啊。.wav",
+          "promptText": "呵，你这位跟班着实懂得如何讨人欢喜啊。",
+          "promptLanguage": "中文",
+          "audioRevision": "b16ae9acfe1a",
+          "promptTextSource": "filename",
+          "promptTextNote": null,
+          "auditionStatus": "pending",
+          "auditionNote": null,
+          "enabled": true
+        },
+        "surprised": {
+          "sourceEmotion": "吃惊",
+          "label": "吃惊",
+          "audioPath": "./参考音频/刻律德菈/【吃惊】…哦？你们当下需要的…是「律法」的力量？.wav",
+          "promptText": "…哦？你们当下需要的…是「律法」的力量？",
+          "promptLanguage": "中文",
+          "audioRevision": "ab9302c5f75a",
+          "promptTextSource": "filename",
+          "promptTextNote": null,
+          "auditionStatus": "pending",
+          "auditionNote": null,
+          "enabled": true
+        },
+        "playful_angry": {
+          "sourceEmotion": "生气",
+          "label": "佯怒",
+          "audioPath": "./参考音频/刻律德菈/【生气】别说废话。简洁、具体，我不会提醒第二次。.wav",
+          "promptText": "别说废话。简洁、具体，我不会提醒第二次。",
+          "promptLanguage": "中文",
+          "audioRevision": "77bdd7ef3f23",
+          "promptTextSource": "filename",
+          "promptTextNote": null,
+          "auditionStatus": "pending",
+          "auditionNote": null,
+          "enabled": false,
+          "enabledReason": "audition_pending"
+        },
+        "sad": {
+          "sourceEmotion": "难过",
+          "label": "难过",
+          "audioPath": "./参考音频/刻律德菈/【难过】银河…我无法踏足的疆场啊…….wav",
+          "promptText": "银河…我无法踏足的疆场啊……",
+          "promptLanguage": "中文",
+          "audioRevision": "4d7f22abff0b",
+          "promptTextSource": "filename",
+          "promptTextNote": null,
+          "auditionStatus": "pending",
+          "auditionNote": null,
+          "enabled": true
+        }
+      }
+    },
+    "topaz": {
+      "voiceId": "topaz",
+      "displayName": "托帕",
+      "gender": "female",
+      "group": "[已修改]中文女声",
+      "language": "zh",
+      "version": "v2ProPlus",
+      "gptModelName": "【经典】托帕&账账-e10",
+      "sovitsModelName": "【经典】托帕&账账_e10_s160",
+      "weightRevision": "ad2f31ba7476-81d318ec9611",
+      "defaultReferenceId": "happy",
+      "defaultEmotion": "happy",
+      "references": {
+        "surprised": {
+          "sourceEmotion": "吃惊",
+          "label": "吃惊",
+          "audioPath": "./参考音频/托帕&账账/【吃惊】嗨，好久不见！最近怎么样？工作忙不忙，加班多吗？.wav",
+          "promptText": "嗨，好久不见！最近怎么样？工作忙不忙，加班多吗？",
+          "promptLanguage": "中文",
+          "audioRevision": "3940c8b3d820",
+          "promptTextSource": "filename",
+          "promptTextNote": null,
+          "auditionStatus": "pending",
+          "auditionNote": null,
+          "enabled": true
+        },
+        "happy": {
+          "sourceEmotion": "开心",
+          "label": "开心",
+          "audioPath": "./参考音频/托帕&账账/【开心】不出意外的话，他应该会在晚些时候联系你们，告诉你们后续的安排…….wav",
+          "promptText": "不出意外的话，他应该会在晚些时候联系你们，告诉你们后续的安排……",
+          "promptLanguage": "中文",
+          "audioRevision": "8099f64b0ebe",
+          "promptTextSource": "filename",
+          "promptTextNote": null,
+          "auditionStatus": "pending",
+          "auditionNote": null,
+          "enabled": true
+        },
+        "playful_angry": {
+          "sourceEmotion": "生气",
+          "label": "佯怒",
+          "audioPath": "./参考音频/托帕&账账/【生气】——请你个大头鬼！这群记吃不记打的家伙，都说了工作时间不要乱喝东西！.wav",
+          "promptText": "——请你个大头鬼！这群记吃不记打的家伙，都说了工作时间不要乱喝东西！",
+          "promptLanguage": "中文",
+          "audioRevision": "d6fc14648900",
+          "promptTextSource": "filename",
+          "promptTextNote": null,
+          "auditionStatus": "pending",
+          "auditionNote": null,
+          "enabled": false,
+          "enabledReason": "audition_pending"
+        },
+        "sad": {
+          "sourceEmotion": "难过",
+          "label": "难过",
+          "audioPath": "./参考音频/托帕&账账/【难过】但也正因如此，我相信你一定会做出正确的决定——能让你的子民真正从中获益的决定。.wav",
+          "promptText": "但也正因如此，我相信你一定会做出正确的决定——能让你的子民真正从中获益的决定。",
+          "promptLanguage": "中文",
+          "audioRevision": "57fc450f9f5c",
+          "promptTextSource": "filename",
+          "promptTextNote": null,
+          "auditionStatus": "pending",
+          "auditionNote": null,
+          "enabled": true
+        }
+      }
+    },
+    "capitano": {
+      "voiceId": "capitano",
+      "displayName": "队长",
+      "gender": "male",
+      "group": "[已修改]中文男声",
+      "language": "zh",
+      "version": "v4",
+      "gptModelName": "【经典】「队长」_ZH-e10",
+      "sovitsModelName": "【经典】「队长」_ZH_e10_s130_l32",
+      "weightRevision": "026b7439a88e-3efa450c1cfd",
+      "defaultReferenceId": "default",
+      "defaultEmotion": "default",
+      "references": {
+        "default": {
+          "sourceEmotion": "默认",
+          "label": "默认",
+          "audioPath": "./参考音频/「队长」_ZH/【默认】终有一日，我会将你们带到约定的地方。.wav",
+          "promptText": "终有一日，我会将你们带到约定的地方。",
+          "promptLanguage": "中文",
+          "audioRevision": "2b3e59b26e26",
+          "promptTextSource": "filename",
+          "promptTextNote": null,
+          "auditionStatus": "pending",
+          "auditionNote": null,
+          "enabled": true
+        }
+      }
+    },
+    "huiliyi": {
+      "voiceId": "huiliyi",
+      "displayName": "绘梨衣",
+      "gender": "female",
+      "group": "[已修改]中文女声",
+      "language": "zh",
+      "version": "v2ProPlus",
+      "gptModelName": "huiliyi-e12",
+      "sovitsModelName": "huiliyi_e10_s530",
+      "weightRevision": "a5a778639c46-1a7a0e52823c",
+      "defaultReferenceId": "default",
+      "defaultEmotion": "default",
+      "references": {
+        "default": {
+          "sourceEmotion": "默认",
+          "label": "默认",
+          "audioPath": "./参考音频/绘梨衣/【默认】新的一年开心就好了，开心是最重要的。.wav",
+          "promptText": "新的一年开心就好了，开心是最重要的。",
+          "promptLanguage": "中文",
+          "audioRevision": "c958ef41f069",
+          "promptTextSource": "filename",
+          "promptTextNote": null,
+          "auditionStatus": "pending",
+          "auditionNote": null,
+          "enabled": true
+        },
+        "neutral": {
+          "sourceEmotion": "中立",
+          "label": "中立",
+          "audioPath": "./参考音频/绘梨衣/【中立】红灯笼很漂亮，烟火也很漂亮。.wav",
+          "promptText": "红灯笼很漂亮，烟火也很漂亮。",
+          "promptLanguage": "中文",
+          "audioRevision": "3979ac99c1c7",
+          "promptTextSource": "filename",
+          "promptTextNote": null,
+          "auditionStatus": "pending",
+          "auditionNote": null,
+          "enabled": true
+        },
+        "happy": {
+          "sourceEmotion": "开心",
+          "label": "开心",
+          "audioPath": "./参考音频/绘梨衣/【开心】新年快乐，我们都要一直开心。.wav",
+          "promptText": "新年快乐，我们都要一直开心。",
+          "promptLanguage": "中文",
+          "audioRevision": "ebaba652c62c",
+          "promptTextSource": "filename",
+          "promptTextNote": null,
+          "auditionStatus": "pending",
+          "auditionNote": null,
+          "enabled": true
+        },
+        "sad": {
+          "sourceEmotion": "难过",
+          "label": "难过",
+          "audioPath": "./参考音频/绘梨衣/【难过】世界不喜欢我。.wav",
+          "promptText": "世界不喜欢我。",
+          "promptLanguage": "中文",
+          "audioRevision": "7b3bd297e890",
+          "promptTextSource": "filename",
+          "promptTextNote": null,
+          "auditionStatus": "pending",
+          "auditionNote": null,
+          "enabled": true
+        },
+        "surprised": {
+          "sourceEmotion": "吃惊",
+          "label": "吃惊",
+          "audioPath": "./参考音频/绘梨衣/【吃惊】原来外面的世界是这个样子的。.wav",
+          "promptText": "原来外面的世界是这个样子的。",
+          "promptLanguage": "中文",
+          "audioRevision": "9381f219cea5",
+          "promptTextSource": "filename",
+          "promptTextNote": null,
+          "auditionStatus": "pending",
+          "auditionNote": null,
+          "enabled": true
+        },
+        "playful_angry": {
+          "sourceEmotion": "生气",
+          "label": "佯怒",
+          "audioPath": "./参考音频/绘梨衣/【生气】挡在前面的解决掉就好了。.wav",
+          "promptText": "挡在前面的解决掉就好了。",
+          "promptLanguage": "中文",
+          "audioRevision": "228d9ee831a1",
+          "promptTextSource": "filename",
+          "promptTextNote": null,
+          "auditionStatus": "pending",
+          "auditionNote": null,
+          "enabled": false,
+          "enabledReason": "audition_pending"
+        }
+      }
+    },
+    "xiami": {
+      "voiceId": "xiami",
+      "displayName": "夏弥",
+      "gender": "female",
+      "group": "[已修改]中文女声",
+      "language": "zh",
+      "version": "v2ProPlus",
+      "gptModelName": "xiami-e12",
+      "sovitsModelName": "xiami_e10_s310",
+      "weightRevision": "334f9ff9ac5a-0f7c822b18ea",
+      "defaultReferenceId": "default",
+      "defaultEmotion": "default",
+      "references": {
+        "default": {
+          "sourceEmotion": "默认",
+          "label": "默认",
+          "audioPath": "./参考音频/夏弥/【默认】喜欢我的新裙子是吗？你真有眼光。.wav",
+          "promptText": "喜欢我的新裙子是吗？你真有眼光。",
+          "promptLanguage": "中文",
+          "audioRevision": "1a265ef8aee6",
+          "promptTextSource": "filename",
+          "promptTextNote": null,
+          "auditionStatus": "pending",
+          "auditionNote": null,
+          "enabled": true
+        }
+      }
+    },
+    "nuonuo": {
+      "voiceId": "nuonuo",
+      "displayName": "诺诺",
+      "gender": "female",
+      "group": "[已修改]中文女声",
+      "language": "zh",
+      "version": "v2ProPlus",
+      "gptModelName": "nuonuo-e12",
+      "sovitsModelName": "nuonuo_e10_s460",
+      "weightRevision": "f4a77a519759-4333ef719e0d",
+      "defaultReferenceId": "default",
+      "defaultEmotion": "default",
+      "references": {
+        "default": {
+          "sourceEmotion": "默认",
+          "label": "默认",
+          "audioPath": "./参考音频/诺诺/【默认】喂，要不要当我的小弟师姐叫你。.wav",
+          "promptText": "喂，要不要当我的小弟师姐叫你。",
+          "promptLanguage": "中文",
+          "audioRevision": "754160036857",
+          "promptTextSource": "filename",
+          "promptTextNote": null,
+          "auditionStatus": "pending",
+          "auditionNote": null,
+          "enabled": true
+        }
+      }
+    },
+    "ling": {
+      "voiceId": "ling",
+      "displayName": "零",
+      "gender": "female",
+      "group": "[已修改]中文女声",
+      "language": "zh",
+      "version": "v2ProPlus",
+      "gptModelName": "ling-e12",
+      "sovitsModelName": "ling_e10_s220",
+      "weightRevision": "46fade629581-e58729d60136",
+      "defaultReferenceId": "default",
+      "defaultEmotion": "default",
+      "references": {
+        "default": {
+          "sourceEmotion": "默认",
+          "label": "默认",
+          "audioPath": "./参考音频/零/【默认】你来的很早，但对我来说有点太早了。.wav",
+          "promptText": "你来的很早，但对我来说有点太早了。",
+          "promptLanguage": "中文",
+          "audioRevision": "141c46de76dc",
+          "promptTextSource": "filename",
+          "promptTextNote": null,
+          "auditionStatus": "pending",
+          "auditionNote": null,
+          "enabled": true
+        }
+      }
+    },
+    "paxi": {
+      "voiceId": "paxi",
+      "displayName": "帕西",
+      "gender": "male",
+      "group": "[已修改]中文男声",
+      "language": "zh",
+      "version": "v2ProPlus",
+      "gptModelName": "paxi-e12",
+      "sovitsModelName": "paxi_e10_s220",
+      "weightRevision": "0d6eb508be10-f05034f97ec7",
+      "defaultReferenceId": "default",
+      "defaultEmotion": "default",
+      "references": {
+        "default": {
+          "sourceEmotion": "默认",
+          "label": "默认",
+          "audioPath": "./参考音频/帕西/【默认】我本是被诅咒的武器，却在您的手中绽放出荣光。.wav",
+          "promptText": "我本是被诅咒的武器，却在您的手中绽放出荣光。",
+          "promptLanguage": "中文",
+          "audioRevision": "87e9a57c0517",
+          "promptTextSource": "filename",
+          "promptTextNote": null,
+          "auditionStatus": "pending",
+          "auditionNote": null,
+          "enabled": true
+        }
+      }
     }
   }
 }

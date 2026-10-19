@@ -1,0 +1,47 @@
+{
+  "title": "标准库容器的性质与分类",
+  "definition": "标准库容器是适合保存数据集合的泛型数据结构，通常以类模板形式实现，可以用满足容器要求的类型进行实例化。除 array 和 bitset 外，大部分标准库容器的大小可以自动增长或收缩。教材将标准库容器分为顺序容器、关联容器、无序关联容器（哈希表）和容器适配器四大类。",
+  "key_points": [
+    "标准库容器是泛型数据结构，主要用于保存数据集合。",
+    "容器通过类模板实现。",
+    "除 array 和 bitset 外，大部分容器大小可动态变化。",
+    "四大类及典型成员为：顺序容器包括 vector、deque、list、forward_list、array；关联容器包括 map、multimap、set、multiset；无序关联容器包括 unordered_map、unordered_multimap、unordered_set、unordered_multiset；容器适配器包括 queue、priority_queue、stack。",
+    "教材称标准库提供 16 个容器；string 和流在某种程度上也可作为容器，bitset 可存储固定数目的位。"
+  ],
+  "examples": [
+    "四类容器可以表示为：$$\\text{标准库容器}=\\{\\text{顺序容器，关联容器，无序关联容器，容器适配器}\\}$$",
+    "固定大小的 array 和 bitset 与大多数可自动增长或收缩的容器不同。"
+  ],
+  "misconceptions": [
+    "并非所有标准库容器都能自动改变大小，array 和 bitset 是原文列出的例外。",
+    "容器适配器是容器类别之一，但 queue、priority_queue 和 stack 是适配器，不是普通顺序容器。",
+    "string、流和 bitset 与标准容器的关系有所不同，原文只说它们在某种程度上具有容器用途。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "标准库容器主要用于什么？",
+      "a": "用于保存数据集合的泛型数据结构。"
+    },
+    {
+      "q": "标准库容器分为哪四大类？",
+      "a": "顺序容器、关联容器、无序关联容器（哈希表）和容器适配器。"
+    },
+    {
+      "q": "哪些类型是大多数可动态调整大小的标准库容器的例外？",
+      "a": "array 和 bitset。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [],
+  "source_pages": [
+    546,
+    547
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1119_标准库容器的性质与分类",
+  "_chunk_pages": [
+    545,
+    548
+  ]
+}

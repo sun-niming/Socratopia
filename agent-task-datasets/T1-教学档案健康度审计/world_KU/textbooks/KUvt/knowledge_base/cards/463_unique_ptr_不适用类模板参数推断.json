@@ -1,0 +1,40 @@
+{
+  "title": "unique_ptr 不适用类模板参数推断",
+  "definition": "对于 `unique_ptr`，不能依靠类模板参数推断（CTAD）省略模板类型参数。创建 unique_ptr 时必须明确写出所管理对象的类型，例如 `std::unique_ptr<Simple>`；而 `make_unique<Simple>()` 也必须在函数模板参数中指定 `Simple`。",
+  "key_points": [
+    "CTAD 通常可以根据构造函数参数推断类模板类型。",
+    "教材指出 CTAD 不适用于 unique_ptr。",
+    "不能写成省略类型参数的 unique_ptr 构造形式来代替 `std::unique_ptr<Simple>`。",
+    "使用 make_unique 时，模板参数仍需写明，例如 `std::make_unique<Simple>()`。"
+  ],
+  "examples": [
+    "正确：`std::unique_ptr<Simple> p { new Simple{} };`",
+    "正确：`auto p { std::make_unique<Simple>() };`",
+    "错误思路：试图写一个不带 `<Simple>` 的 unique_ptr 类型。"
+  ],
+  "misconceptions": [
+    "`auto` 可以推断变量类型，但不能因此省略 make_unique 的模板类型参数。",
+    "CTAD 并不是所有类模板都支持，教材明确指出 unique_ptr 不适用该机制。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "使用 unique_ptr 时能否像某些类模板那样依靠 CTAD 省略模板参数？",
+      "a": "不能。教材指出 CTAD 不适用于 unique_ptr，因此必须明确指定模板类型。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "使用 make_unique 创建 unique_ptr"
+  ],
+  "source_pages": [
+    219,
+    219
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "463_unique_ptr_不适用类模板参数推断",
+  "_chunk_pages": [
+    217,
+    220
+  ]
+}

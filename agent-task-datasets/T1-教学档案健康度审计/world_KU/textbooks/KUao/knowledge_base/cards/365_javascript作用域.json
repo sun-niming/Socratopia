@@ -1,0 +1,50 @@
+{
+  "title": "JavaScript作用域",
+  "definition": "变量作用域是变量可以被引用的有效范围。教材中将 JavaScript 作用域分为全局作用域、局部作用域和块作用域。",
+  "key_points": [
+    "全局作用域：由整个 JavaScript 执行环境构成",
+    "局部作用域：也称函数作用域，由函数声明的 {} 构成",
+    "块作用域：由 {} 构成，if 语句和 for 语句里的 {} 也属于块作用域",
+    "块作用域是 ES6 引入的，通常与 let 或 const 创建的标识符相关"
+  ],
+  "examples": [
+    "全局作用域：整个页面/程序环境中的变量",
+    "局部作用域：function test() { let a = 1; }",
+    "块作用域：if (true) { let b = 2; }"
+  ],
+  "misconceptions": [
+    "局部作用域不等于任意大括号，教材中特别指出它是函数作用域",
+    "if 和 for 里的花括号不仅是代码块，也可能形成块作用域"
+  ],
+  "qa_pairs": [
+    {
+      "q": "JavaScript 作用域是什么？",
+      "a": "变量可以被引用的有效范围。"
+    },
+    {
+      "q": "教材中提到 JavaScript 作用域分为哪三类？",
+      "a": "全局作用域、局部作用域和块作用域。"
+    },
+    {
+      "q": "块作用域由什么构成？",
+      "a": "由 {} 构成，if 和 for 语句中的 {} 也属于块作用域。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "变量",
+    "函数",
+    "代码块"
+  ],
+  "source_pages": [
+    269,
+    272
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "365_javascript作用域",
+  "_chunk_pages": [
+    269,
+    272
+  ]
+}

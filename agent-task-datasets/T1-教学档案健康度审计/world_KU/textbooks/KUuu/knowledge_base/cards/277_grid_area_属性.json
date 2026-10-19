@@ -1,0 +1,40 @@
+{
+  "title": "grid-area 属性",
+  "definition": "grid-area 是网格项目的简写属性，既可以用于在 `grid-template-areas` 中指定项目所属的区域名，也可以作为 `grid-row-start / grid-column-start / grid-row-end / grid-column-end` 的简写，用四个位置值一次性指定网格项的位置范围。",
+  "key_points": [
+    "当值写成区域名时，表示把项目分配到该名称对应的网格区域。",
+    "当值写成四个用斜杠分隔的值时，依次表示 row-start、col-start、row-end、col-end。",
+    "它属于网格项目属性，不是容器属性。"
+  ],
+  "examples": [
+    ".item-b { grid-area: main; }",
+    " .item-b { grid-area: 1 / 2 / 3 / 4; } /* row-start / col-start / row-end / col-end */"
+  ],
+  "misconceptions": [
+    "容易把 grid-area 只理解为“区域名”，忽略它还可以作为位置简写。",
+    "容易把它当成网格容器的属性，其实它作用于单个网格项目。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "grid-area 有哪两种常见用法？",
+      "a": "一是作为 grid-template-areas 中的区域名；二是作为 grid-row-start / grid-column-start / grid-row-end / grid-column-end 的简写。"
+    },
+    {
+      "q": "grid-area: 1 / 2 / 3 / 4; 四个值分别代表什么？",
+      "a": "依次代表 row-start、col-start、row-end、col-end。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [],
+  "source_pages": [
+    185,
+    188
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "277_grid_area_属性",
+  "_chunk_pages": [
+    185,
+    188
+  ]
+}

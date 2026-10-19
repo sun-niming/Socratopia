@@ -1,0 +1,51 @@
+{
+  "title": "map迭代器访问键值对",
+  "definition": "map迭代器的使用方式类似顺序容器迭代器，但map迭代器指向的是键/值对，而不是单独的值。通过迭代器访问元素时，可以使用first访问键，使用second访问值。",
+  "key_points": [
+    "map迭代器引用的元素可理解为pair<Key, T>。",
+    "访问键使用iter->first，访问值使用iter->second。",
+    "如果值类型有成员函数，可以继续通过iter->second调用，例如iter->second.getValue()。",
+    "可以使用cbegin和cend遍历map。"
+  ],
+  "examples": [
+    "for (auto iter{cbegin(dataMap)}; iter != cend(dataMap); ++iter) {",
+    "    cout << iter->second.getValue() << endl;",
+    "}",
+    "访问值的表达式为iter->second.getValue()。"
+  ],
+  "misconceptions": [
+    "map迭代器解引用后不是值对象本身，而是键/值对。",
+    "访问map元素的值不能直接假设使用iter->value，应使用second。",
+    "iter->second.getValue()中，second是pair的成员，getValue()才是值对象Data的成员函数。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "map迭代器指向什么？",
+      "a": "指向一个键/值对，可理解为pair<Key, T>。"
+    },
+    {
+      "q": "如何通过map迭代器访问值？",
+      "a": "使用iter->second；如果值对象有成员函数，可以写成iter->second.getValue()。"
+    },
+    {
+      "q": "如何遍历示例中的dataMap？",
+      "a": "可以从cbegin(dataMap)开始，递增迭代器直到cend(dataMap)，例如for (auto iter{cbegin(dataMap)}; iter != cend(dataMap); ++iter)。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "迭代器的基本使用",
+    "pair的成员访问"
+  ],
+  "source_pages": [
+    584,
+    584
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1211_map迭代器访问键值对",
+  "_chunk_pages": [
+    581,
+    584
+  ]
+}

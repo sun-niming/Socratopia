@@ -1,0 +1,41 @@
+{
+  "title": "for 循环格式1：遍历 word_list",
+  "definition": "Shell 的 for 循环格式1写作“for var in word_list; do command_list; done”。它会让变量 var 依次取得 word_list 中的各个值，并在每次取值后执行一次循环体。",
+  "key_points": [
+    "基本形式为：for var in word_list do command_list done",
+    "循环变量是 var",
+    "数据来源是 in 后面的 word_list"
+  ],
+  "examples": [
+    "for var in word_list\ndo\ncommand_list\ndone"
+  ],
+  "misconceptions": [
+    "不要把 word_list 误解为只能是文件；这里表示一组待遍历的词或值。",
+    "不要漏写 in word_list；这是格式1区别于其他 for 写法的重要部分。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "for 循环格式1的基本写法是什么？",
+      "a": "for var in word_list do command_list done。"
+    },
+    {
+      "q": "在 for var in word_list 中，var 的作用是什么？",
+      "a": "var 是循环变量，会依次取得 word_list 中的各个值。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "Shell 循环结构基础"
+  ],
+  "source_pages": [
+    81,
+    84
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "136_for_循环格式1_遍历_word_list",
+  "_chunk_pages": [
+    81,
+    84
+  ]
+}

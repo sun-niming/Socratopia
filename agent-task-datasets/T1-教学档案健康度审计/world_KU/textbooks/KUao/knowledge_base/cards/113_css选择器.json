@@ -1,0 +1,39 @@
+{
+  "title": "CSS选择器",
+  "definition": "CSS选择器是用来指定CSS规则要应用到哪些HTML元素的方式；先通过选择器找到元素，再让样式作用到这些元素上。",
+  "key_points": [
+    "要想使CSS样式应用到特定的HTML元素，需要找到这个元素",
+    "CSS选择器规定了CSS规则会被应用到哪些元素上"
+  ],
+  "examples": [
+    "body { color:#111111; font-size:12px; }",
+    "img { border-width:0; }"
+  ],
+  "misconceptions": [
+    "选择器不是CSS规则本身，而是用来指明规则作用对象的部分"
+  ],
+  "qa_pairs": [
+    {
+      "q": "CSS选择器的作用是什么？",
+      "a": "它用来规定CSS规则会应用到哪些HTML元素上。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "HTML元素",
+    "CSS样式规则"
+  ],
+  "source_pages": [
+    89,
+    90,
+    91,
+    92
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "113_css选择器",
+  "_chunk_pages": [
+    89,
+    92
+  ]
+}

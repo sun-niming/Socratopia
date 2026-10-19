@@ -1,0 +1,41 @@
+{
+  "title": "navigator对象",
+  "definition": "navigator对象用于检测客户端浏览器的类型、版本以及操作系统等信息。它的常用属性userAgent可以用于判断浏览器和操作系统。",
+  "key_points": [
+    "navigator对象用于获取客户端浏览器类型、版本和操作系统等信息。",
+    "userAgent是navigator对象最常用的属性之一。",
+    "可以通过document.write(navigator.userAgent)输出userAgent。"
+  ],
+  "examples": [
+    "document.write(navigator.userAgent);"
+  ],
+  "misconceptions": [
+    "navigator对象可以直接修改浏览器或操作系统信息。",
+    "userAgent只能用于获取网页内容，不能用于识别环境。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "navigator对象的用途是什么？",
+      "a": "检测客户端浏览器的类型、版本以及操作系统等信息。"
+    },
+    {
+      "q": "navigator对象最常用的属性是什么？",
+      "a": "userAgent。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "浏览器对象模型"
+  ],
+  "source_pages": [
+    337,
+    340
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "458_navigator对象",
+  "_chunk_pages": [
+    337,
+    340
+  ]
+}

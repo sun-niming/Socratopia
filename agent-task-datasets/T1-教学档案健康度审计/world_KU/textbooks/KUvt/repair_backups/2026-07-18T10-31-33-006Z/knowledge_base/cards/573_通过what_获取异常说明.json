@@ -1,0 +1,41 @@
+{
+  "title": "通过what()获取异常说明",
+  "definition": "捕获异常后，可以调用异常对象的what()成员函数获取异常说明。原文示例中，捕获到异常后输出e.what()，结果为“Divide by zero”。what()返回的类型为const char*。",
+  "key_points": [
+    "catch处理程序可以接收异常对象名称，例如e。",
+    "e.what()用于获取异常的文字说明。",
+    "原文示例的异常说明输出为：Caught exception: Divide by zero。"
+  ],
+  "examples": [
+    "示例结构：\ncatch (const std::invalid_argument& e) {\n    std::cout << \"Caught exception: \" << e.what() << std::endl;\n}"
+  ],
+  "misconceptions": [
+    "what()用于获取异常说明，不是重新抛出异常。",
+    "只有在异常对象包含相应说明时，what()的文本才会提供具体错误原因；不能假设所有异常都返回同样的文字。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何输出捕获到的异常说明？",
+      "a": "在catch中调用异常对象的what()成员函数，例如e.what()，并将返回的const char*输出。"
+    },
+    {
+      "q": "原文示例捕获除零异常时输出什么？",
+      "a": "Caught exception: Divide by zero。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++异常处理的基本机制"
+  ],
+  "source_pages": [
+    437,
+    440
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "573_通过what_获取异常说明",
+  "_chunk_pages": [
+    437,
+    440
+  ]
+}

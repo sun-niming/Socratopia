@@ -1,0 +1,45 @@
+{
+  "title": "shared_ptr的指针类型转换",
+  "definition": "`shared_ptr`提供了与原始指针转换相对应的类型转换函数，用于在不同的`shared_ptr`类型之间进行转换，包括`const_pointer_cast()`、`dynamic_pointer_cast()`、`static_pointer_cast()`和`reinterpret_pointer_cast()`。这些函数分别对应`const_cast`、`dynamic_cast`、`static_cast`和`reinterpret_cast`的用途。",
+  "key_points": [
+    "`const_pointer_cast()`对应去除或添加`const`限定的转换。",
+    "`dynamic_pointer_cast()`用于需要运行时类型检查的多态类型转换。",
+    "`static_pointer_cast()`用于静态类型转换。",
+    "`reinterpret_pointer_cast()`用于重新解释指针类型。",
+    "这些函数转换的是`shared_ptr`，不是先取裸指针后再手动拼接一个新的独立控制块。"
+  ],
+  "examples": [
+    "形式示例：`auto derivedPtr { std::dynamic_pointer_cast<Derived>(basePtr) };`。",
+    "形式示例：`auto nonConstPtr { std::const_pointer_cast<T>(constPtr) };`。"
+  ],
+  "misconceptions": [
+    "不能把`shared_ptr`类型转换简单等同于直接转换裸指针；应使用标准库提供的对应转换函数。",
+    "`dynamic_pointer_cast()`与`static_pointer_cast()`的安全性和适用条件不同，不能无条件互换。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`shared_ptr`有哪些常见的指针转换函数？",
+      "a": "`const_pointer_cast()`、`dynamic_pointer_cast()`、`static_pointer_cast()`和`reinterpret_pointer_cast()`。"
+    },
+    {
+      "q": "`dynamic_pointer_cast()`大致对应哪一种裸指针转换？",
+      "a": "大致对应`dynamic_cast`，用于运行时检查的多态类型转换。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++类型转换",
+    "shared_ptr的基本用途与创建方式"
+  ],
+  "source_pages": [
+    221,
+    224
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "298_shared_ptr的指针类型转换",
+  "_chunk_pages": [
+    221,
+    224
+  ]
+}

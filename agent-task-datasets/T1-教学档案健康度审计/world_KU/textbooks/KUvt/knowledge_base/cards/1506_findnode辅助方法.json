@@ -1,0 +1,52 @@
+{
+  "title": "findNode辅助方法",
+  "definition": "findNode 是 directed_graph 的私有辅助方法，用于在节点 vector 中查找值等于给定 node_value 的节点。找到时返回指向该节点的迭代器，找不到时返回 m_nodes 的 end 迭代器；类中同时提供非 const 和 const 版本。",
+  "key_points": [
+    "非 const 版本返回 nodes_container_type::iterator。",
+    "const 版本返回 nodes_container_type::const_iterator。",
+    "实现使用标准库 std::find_if 遍历 m_nodes，并比较 node.value() 与 node_value。",
+    "依赖模板参数的嵌套类型前需要 typename，例如 $\\texttt{typename directed_graph<T>::nodes_container_type::iterator}$。",
+    "const 版本通过 const_cast 将 this 转为非 const directed_graph 指针，然后转调用非 const 版本，以避免重复实现。"
+  ],
+  "examples": [
+    "查找逻辑可概括为：\n```cpp\nreturn std::find_if(std::begin(m_nodes), std::end(m_nodes),\n    [&node_value](const auto& node) {\n        return node.value() == node_value;\n    });\n```",
+    "查找结果判断：\n```cpp\nif (iter != std::end(m_nodes)) {\n    // 找到了节点\n}\n```"
+  ],
+  "misconceptions": [
+    "std::find_if 找不到元素时不是返回空指针，而是返回给定范围的 end 迭代器。",
+    "typename 在这里不是声明新类型，而是告诉编译器依赖于模板参数的名称是类型。",
+    "findNode 只按节点值查找，不是按节点索引查找。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "findNode 找不到节点时返回什么？",
+      "a": "返回 m_nodes 的 end 迭代器。"
+    },
+    {
+      "q": "为什么 findNode 的返回类型前需要 typename？",
+      "a": "因为 nodes_container_type::iterator 和 const_iterator 依赖模板参数 T，必须用 typename 指明它们是类型。"
+    },
+    {
+      "q": "const 版 findNode 如何避免代码重复？",
+      "a": "它通过 const_cast 将当前对象转为非 const directed_graph 指针，再调用非 const 版 findNode。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++迭代器",
+    "std::find_if",
+    "依赖名称与typename",
+    "const成员函数"
+  ],
+  "source_pages": [
+    725,
+    725
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1506_findnode辅助方法",
+  "_chunk_pages": [
+    725,
+    728
+  ]
+}

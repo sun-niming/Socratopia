@@ -1,0 +1,43 @@
+{
+  "title": "C++的显式类型转换运算符",
+  "definition": "C++提供了多种具有明确语义的类型转换工具，包括 `const_cast`、`static_cast`、`reinterpret_cast`、`dynamic_cast`，以及从 C++20 开始提供的 `std::bit_cast`。相比旧式 C 风格强制转换，例如 `(int)myFloat`，C++风格转换在语法上更突出，转换意图更明确，也更容易检查。",
+  "key_points": [
+    "原文列出五种特定的 C++ 类型转换：`const_cast`、`static_cast`、`reinterpret_cast`、`dynamic_cast` 和 C++20 起的 `std::bit_cast`。",
+    "旧式 C 风格强制转换可能涵盖多种 C++ 转换的效果，因此转换目标不明显，更容易产生意外结果。",
+    "原文强烈建议新代码使用 C++ 风格的显式转换，而不是 C 风格强制转换。"
+  ],
+  "examples": [
+    "旧式写法：`(int)myFloat`。",
+    "C++ 风格写法示例：`static_cast<int>(myFloat)`。"
+  ],
+  "misconceptions": [
+    "误以为五种转换可以互相完全替代；不同转换具有不同的适用范围和安全性。",
+    "误以为 C 风格强制转换更简洁就更安全；原文明确指出它更容易出错。",
+    "误以为 `std::bit_cast` 在所有 C++版本中都存在；原文说明它从 C++20 开始提供。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "原文列出的 C++ 特定类型转换有哪些？",
+      "a": "`const_cast`、`static_cast`、`reinterpret_cast`、`dynamic_cast` 和从 C++20 开始的 `std::bit_cast`。"
+    },
+    {
+      "q": "为什么新代码应优先使用 C++ 风格转换？",
+      "a": "因为 C++ 风格转换在语法上更突出，转换意图更明确，通常也比旧式 C 风格强制转换更容易检查和控制。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++基本类型转换"
+  ],
+  "source_pages": [
+    347,
+    347
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "699_c_的显式类型转换运算符",
+  "_chunk_pages": [
+    345,
+    348
+  ]
+}

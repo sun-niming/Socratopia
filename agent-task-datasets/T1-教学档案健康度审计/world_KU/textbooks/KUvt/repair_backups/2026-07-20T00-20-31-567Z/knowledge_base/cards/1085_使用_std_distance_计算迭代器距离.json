@@ -1,0 +1,42 @@
+{
+  "title": "使用 std::distance 计算迭代器距离",
+  "definition": "`std::distance` 用于计算同一容器或同一范围中两个迭代器之间的距离，返回一个能够表示该距离的迭代器差值类型。它常用于把查找到的迭代器转换为相对于范围起点的位置。",
+  "key_points": [
+    "距离通常写作 `distance(first, last)`，表示从 first 到 last 的元素间距离。",
+    "在查找结果不是 end 迭代器时，可以用 `distance(cbegin(container), result)` 得到结果位置。",
+    "距离的具体返回类型由迭代器的 difference_type 表示。"
+  ],
+  "examples": [
+    "`auto position { distance(cbegin(values), result) };`",
+    "教材中的查找输出形式：`format(\"Found value at position {}\", distance(cbegin(values), result))`。"
+  ],
+  "misconceptions": [
+    "迭代器距离通常不是通过迭代器对象相减来计算的，因为并非所有迭代器都支持减法运算。",
+    "距离表示的是从第一个迭代器到第二个迭代器经过的元素数量，不等同于第二个迭代器所指元素的值。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何计算 result 在容器 values 中相对于起点的位置？",
+      "a": "使用 `distance(cbegin(values), result)`。"
+    },
+    {
+      "q": "哪个迭代器相关函数用于计算两个迭代器之间的距离？",
+      "a": "`std::distance`。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "半开区间与容器迭代器函数"
+  ],
+  "source_pages": [
+    530,
+    531
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1085_使用_std_distance_计算迭代器距离",
+  "_chunk_pages": [
+    529,
+    532
+  ]
+}

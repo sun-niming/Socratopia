@@ -1,0 +1,41 @@
+{
+  "title": "type命令用于查看命令类型",
+  "definition": "type命令用于查看某个命令属于什么类型。教材给出的基本形式是：type [option] command。它可用于判断命令是内部命令、外部命令或别名，并可显示路径等信息。",
+  "key_points": [
+    "基本格式：type [option] command",
+    "用于查看命令类型",
+    "可配合不同选项显示类别、路径或所有匹配结果"
+  ],
+  "examples": [
+    "命令格式：type [option] command"
+  ],
+  "misconceptions": [
+    "误以为type用于执行命令；教材中它的用途是查看命令类型",
+    "误以为type只能判断内部或外部命令；教材还指出它能识别alias并显示路径"
+  ],
+  "qa_pairs": [
+    {
+      "q": "type命令的基本用法是什么？",
+      "a": "教材给出的格式是：type [option] command。"
+    },
+    {
+      "q": "type命令的作用是什么？",
+      "a": "用于查看命令的类型。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "Linux命令的类别"
+  ],
+  "source_pages": [
+    45,
+    48
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "086_type命令用于查看命令类型",
+  "_chunk_pages": [
+    45,
+    48
+  ]
+}

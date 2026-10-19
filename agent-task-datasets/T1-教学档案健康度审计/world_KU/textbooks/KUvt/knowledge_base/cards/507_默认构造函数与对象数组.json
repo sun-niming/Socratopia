@@ -1,0 +1,54 @@
+{
+  "title": "默认构造函数与对象数组",
+  "definition": "默认构造函数是不接收参数的构造函数，也称无参构造函数。创建未显式提供逐元素初始化器的对象数组时，需要为数组中的每个对象调用默认构造函数，因此元素类型必须具有可用的默认构造函数。也可以为每个数组元素显式提供初始化器，从而使用其他构造函数。",
+  "key_points": [
+    "默认构造函数的声明形式为 SpreadsheetCell();。",
+    "创建对象数组包括为连续存储的所有元素分配空间，并分别构造每个元素。",
+    "SpreadsheetCell cells[3]; 会尝试为三个元素分别调用默认构造函数。",
+    "动态数组 new SpreadsheetCell[10] 同样需要为每个元素调用默认构造函数。",
+    "可以通过逐元素初始化绕过对默认构造函数的需求，例如分别用 0、23、41 构造三个元素。"
+  ],
+  "examples": [
+    "class SpreadsheetCell\n{\npublic:\n    SpreadsheetCell();\n};",
+    "SpreadsheetCell::SpreadsheetCell()\n{\n    m_value = 0;\n}",
+    "SpreadsheetCell cells[3]; // 对三个元素分别调用默认构造函数",
+    "SpreadsheetCell* cells{new SpreadsheetCell[10]};\ndelete[] cells;",
+    "SpreadsheetCell cells[3]{SpreadsheetCell{0}, SpreadsheetCell{23}, SpreadsheetCell{41}};"
+  ],
+  "misconceptions": [
+    "误以为定义对象数组只分配内存，不会调用构造函数。",
+    "误以为对象数组在任何情况下都必须有默认构造函数；如果为所有元素显式提供了其他构造函数所需的初始化器，可以不依赖默认构造函数。",
+    "误将默认构造函数理解为具有默认参数的任意构造函数；本段教材所说的默认构造函数是没有参数的构造函数。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "什么是默认构造函数？",
+      "a": "默认构造函数是没有参数的构造函数，也称无参构造函数。"
+    },
+    {
+      "q": "为什么 SpreadsheetCell cells[3]; 通常要求 SpreadsheetCell 具有默认构造函数？",
+      "a": "因为数组创建时必须分别构造三个元素，而声明没有为元素提供其他构造参数，所以会对每个元素调用默认构造函数。"
+    },
+    {
+      "q": "没有默认构造函数时，如何创建包含三个 SpreadsheetCell 对象的数组？",
+      "a": "可以显式初始化每个元素，例如 SpreadsheetCell cells[3]{SpreadsheetCell{0}, SpreadsheetCell{23}, SpreadsheetCell{41}};。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "默认构造函数",
+    "对象数组",
+    "动态数组"
+  ],
+  "source_pages": [
+    238,
+    239
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "507_默认构造函数与对象数组",
+  "_chunk_pages": [
+    237,
+    240
+  ]
+}

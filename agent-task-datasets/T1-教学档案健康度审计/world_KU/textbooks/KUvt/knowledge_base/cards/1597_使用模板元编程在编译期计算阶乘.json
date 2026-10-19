@@ -1,0 +1,54 @@
+{
+  "title": "使用模板元编程在编译期计算阶乘",
+  "definition": "可以通过模板递归在编译期计算阶乘。递归模板根据数学递推关系计算 $f! = f\\times(f-1)!$，并使用 `Factorial<0>` 的特例化作为基本情形；由于 $0! = 1$，该特例化将结果设为 $1$。计算结果可通过 `Factorial<f>::value` 访问。",
+  "key_points": [
+    "阶乘的基本情形为：$$0! = 1$$。",
+    "递归情形可表示为：$$f! = f\\times(f-1)!$$。",
+    "`Factorial<0>` 停止模板递归，其他 `Factorial<f>` 依赖 `Factorial<f-1>` 的值。",
+    "例如 $6! = 1\\times2\\times3\\times4\\times5\\times6 = 720$。",
+    "通过 `::value` 可以访问编译期计算出的静态常量值。",
+    "教材指出，这个示例也可以用 C++20 的 `consteval` immediate 函数实现；`consteval` 函数保证在编译期执行。"
+  ],
+  "examples": [
+    "数学形式：$$Factorial<f>::value=f\\times Factorial<f-1>::value$$",
+    "基本情形：$$Factorial<0>::value=1$$",
+    "示例：$$6!=1\\times2\\times3\\times4\\times5\\times6=720$$",
+    "访问结果的形式：`Factorial<6>::value`。"
+  ],
+  "misconceptions": [
+    "`Factorial<0>`不是普通运行时分支，而是用于停止模板递归的特例化。",
+    "`::value`访问的是编译期计算得到的静态常量值，不是每次运行时重新递归计算。",
+    "使用模板元编程计算阶乘并不是 C++20 中唯一的编译期实现方式，教材还提到可以使用 `consteval` 函数。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么 `Factorial<0>` 的值设为 `1`？",
+      "a": "因为数学上规定 $0! = 1$，同时它作为模板递归的基本情形。"
+    },
+    {
+      "q": "`Factorial<6>::value` 的结果是什么？",
+      "a": "结果是 $720$。"
+    },
+    {
+      "q": "`consteval` 函数与普通函数调用的关键区别是什么？",
+      "a": "`consteval` 函数保证在编译期执行。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "模板递归",
+    "模板特例化",
+    "编译期常量"
+  ],
+  "source_pages": [
+    774,
+    775
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1597_使用模板元编程在编译期计算阶乘",
+  "_chunk_pages": [
+    773,
+    776
+  ]
+}

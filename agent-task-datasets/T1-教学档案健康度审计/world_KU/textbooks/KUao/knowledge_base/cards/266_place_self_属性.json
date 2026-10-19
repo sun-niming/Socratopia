@@ -1,0 +1,40 @@
+{
+  "title": "place-self 属性",
+  "definition": "place-self 是 align-self 和 justify-self 的合并简写形式，用于同时设置单个网格元素的垂直对齐和水平对齐。",
+  "key_points": [
+    "是 align-self 与 justify-self 的合并简写",
+    "一次性设置单个网格项的两个方向对齐",
+    "原文给出的写法顺序是先 align-self，后 justify-self"
+  ],
+  "examples": [
+    "place-self: align-self属性 justify-self属性;"
+  ],
+  "misconceptions": [
+    "误以为 place-self 只能控制一个方向",
+    "误以为它是容器级属性而不是单个网格项属性"
+  ],
+  "qa_pairs": [
+    {
+      "q": "place-self 是哪两个属性的简写？",
+      "a": "align-self 和 justify-self。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "CSS 网格布局基础",
+    "网格项目",
+    "justify-self 属性",
+    "align-self 属性"
+  ],
+  "source_pages": [
+    185,
+    188
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "266_place_self_属性",
+  "_chunk_pages": [
+    185,
+    188
+  ]
+}

@@ -1,0 +1,53 @@
+{
+  "title": "std::to_chars：将数值转换为字符序列",
+  "definition": "std::to_chars 将整数或浮点数写入调用者提供的字符缓冲区。它返回 std::to_chars_result，其中 ptr 指向转换结束位置，ec 表示错误状态；当 ec 等于默认构造的 std::errc{} 时，表示转换成功。",
+  "key_points": [
+    "整数重载的基本形式为 $$\\text{to\\_chars\\_result to\\_chars(char* first, char* last, IntegerT value, int base = 10)}$$。",
+    "浮点数重载可以接收浮点值、格式 chars_format，以及可选的精度 precision。",
+    "返回类型可表示为：$$\\begin{bmatrix}\\text{char* ptr}\\\\\\text{errc ec}\\end{bmatrix}$$，其中 ptr 是转换结果位置，ec 是错误码。",
+    "调用者需要先提供字符缓冲区，例如 string out(BufferSize, ' ');，再把 out.data() 和 out.data() + out.size() 作为范围传给 to_chars。",
+    "当缓冲区不足时，ec 可能为 std::errc::value_too_large；成功时可判断 error == std::errc{}。",
+    "整数转换可通过 base 指定进制，默认进制为 10。"
+  ],
+  "examples": [
+    "const size_t BufferSize { 50 };",
+    "string out(BufferSize, ' '); // 创建包含 BufferSize 个空格的字符串缓冲区",
+    "auto [ptr, error] { to_chars(out.data(), out.data() + out.size(), 12345) };",
+    "if (error == errc{}) { cout << out << endl; }"
+  ],
+  "misconceptions": [
+    "std::to_chars 不会自动为调用者分配输出字符串；必须先提供足够大的字符缓冲区。",
+    "to_chars 的成功与否应通过返回结果中的 ec 判断，而不是仅凭输出缓冲区内容判断。",
+    "返回的 ptr 和 ec 是结果结构的两个成员；也可以使用结构化绑定直接取得它们。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "std::to_chars 的 first 和 last 参数表示什么？",
+      "a": "它们表示目标字符缓冲区的半开区间 [first, last)，转换结果写入这个范围内。"
+    },
+    {
+      "q": "如何判断 to_chars 转换成功？",
+      "a": "检查返回结果的 ec 是否等于 std::errc{}，例如 if (error == errc{})。"
+    },
+    {
+      "q": "to_chars 返回结果包含哪些成员？",
+      "a": "std::to_chars_result 包含 char* ptr 和 std::errc ec。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "字符缓冲区与指针范围",
+    "结构化绑定"
+  ],
+  "source_pages": [
+    109,
+    112
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 std::to_chars to_chars_result ptr errc value_too_large IntegerT FloatT chars_format BufferSize 12345",
+  "concept_id": "159_std_to_chars_将数值转换为字符序列",
+  "_chunk_pages": [
+    109,
+    112
+  ]
+}

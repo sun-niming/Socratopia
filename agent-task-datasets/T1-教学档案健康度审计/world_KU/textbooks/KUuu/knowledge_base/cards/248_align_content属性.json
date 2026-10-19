@@ -1,0 +1,48 @@
+{
+  "title": "align-content属性",
+  "definition": "align-content 属性只适用于多行的 flex 容器；当容器在交叉轴上存在多余空间时，它用于将项目作为一个整体进行对齐。",
+  "key_points": [
+    "只对多行 flex 容器有效。",
+    "作用对象是整个项目集合，而不是单个项目。",
+    "只有交叉轴上有多余空间时才会体现效果。",
+    "可取 6 个值：flex-start、flex-end、center、space-between、space-around、stretch。",
+    "space-between 表示两端对齐，轴线之间间隔平均分布；space-around 表示每根轴线两侧间隔相等，轴线之间间隔比轴线与边框的间隔大一倍。",
+    "stretch 为默认值，表示轴线占满整个交叉轴。"
+  ],
+  "examples": [
+    "align-content: flex-start;",
+    "align-content: space-between;",
+    "align-content: stretch;"
+  ],
+  "misconceptions": [
+    "align-content 不是单个项目的对齐属性；单个项目对齐通常看 align-items 或 align-self。",
+    "align-content 在单行 flex 容器中通常不起作用。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "align-content 适用于什么类型的 flex 容器？",
+      "a": "适用于多行的 flex 容器。"
+    },
+    {
+      "q": "align-content 的默认值是什么？",
+      "a": "stretch。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "弹性盒模型基础",
+    "交叉轴",
+    "多行 flex 容器"
+  ],
+  "source_pages": [
+    157,
+    160
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "248_align_content属性",
+  "_chunk_pages": [
+    157,
+    160
+  ]
+}

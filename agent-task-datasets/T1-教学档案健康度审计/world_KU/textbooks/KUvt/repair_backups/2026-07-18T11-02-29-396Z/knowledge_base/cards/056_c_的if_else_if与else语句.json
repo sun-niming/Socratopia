@@ -1,0 +1,44 @@
+{
+  "title": "C++的if、else if与else语句",
+  "definition": "C++使用if语句根据条件表达式的结果决定是否执行代码块。条件为真时执行if主体；可以使用一个或多个else if分支继续判断其他条件；当此前所有条件都为假时，可以执行else主体。C++还允许在if语句中先声明并初始化一个变量，该变量的作用域覆盖后续的条件和各分支主体。",
+  "key_points": [
+    "基本形式为：if (条件表达式) { if主体 } else if (其他条件表达式) { 分支主体 } else { 其他主体 }。",
+    "if条件表达式的结果按布尔语义判断：真则进入对应分支，假则继续检查后续分支。",
+    "可以使用带初始化器的if语句：$$\\text{if }(\\text{初始化器};\\ \\text{条件表达式})\\{\\text{主体}\\}$$",
+    "示例中的带初始化器写法为：if (Employee employee { getEmployee() }; employee.salary > 1000) { ... }。"
+  ],
+  "examples": [
+    "if (Employee employee { getEmployee() }; employee.salary > 1000) { ... }",
+    "if (condition) { /* if主体 */ } else if (otherCondition) { /* else if主体 */ } else { /* else主体 */ }"
+  ],
+  "misconceptions": [
+    "else if不是一种独立于if的基本控制结构，而是前一个if语句的后续分支形式。",
+    "带初始化器的if语句中，初始化的变量并非在整个函数中可见，其作用域限于该if语句及其分支。",
+    "else只会在前面的if和else if条件全部为假时执行。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "C++中if、else if和else的执行关系是什么？",
+      "a": "先判断if条件；若为真则执行if主体并结束该组分支。若为假，则依次判断else if条件；如果所有条件都为假且存在else，则执行else主体。"
+    },
+    {
+      "q": "带初始化器的if语句中，初始化变量的作用域是什么？",
+      "a": "变量从初始化器开始，在该if语句的条件表达式以及相应的if、else if和else分支中可用。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "布尔条件表达式"
+  ],
+  "source_pages": [
+    49,
+    52
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "056_c_的if_else_if与else语句",
+  "_chunk_pages": [
+    49,
+    52
+  ]
+}

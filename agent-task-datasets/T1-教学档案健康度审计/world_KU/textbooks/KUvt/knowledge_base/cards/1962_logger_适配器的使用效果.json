@@ -1,0 +1,42 @@
+{
+  "title": "Logger 适配器的使用效果",
+  "definition": "客户端使用适配器提供的新接口，而不直接依赖原 Logger 的复杂接口。创建适配器时会先构造其内部 Logger，再构造适配器；调用适配器的 log 方法会输出固定为 INFO 级别的日志。",
+  "key_points": [
+    "客户端代码只需要创建适配器对象并调用单参数的 log 方法。",
+    "适配器隐藏了原 Logger 的日志级别参数。",
+    "原文示例的输出依次包含 Logger 构造函数信息、适配器构造函数信息和日志内容。"
+  ],
+  "examples": [
+    "客户端调用：NewLoggerAdapter logger; logger.log(\"Testing the logger.\");",
+    "原文示例输出：Logger constructor；NewLoggerAdapter constructor；INFO: Testing the logger."
+  ],
+  "misconceptions": [
+    "客户端不需要直接调用 Logger，也不需要显式传入 Logger::LogLevel::Info。",
+    "构造函数输出是示例中用于跟踪构造过程的文本，不是适配器模式必须产生的输出。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "使用 Logger 适配器时，客户端如何记录一条日志？",
+      "a": "创建 NewLoggerAdapter 对象，然后调用 logger.log(\"Testing the logger.\")，只传入消息即可。"
+    },
+    {
+      "q": "示例中日志最终为什么显示 INFO？",
+      "a": "因为适配器在转发调用时把日志级别硬编码为 Logger::LogLevel::Info。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "用适配器简化 Logger 接口"
+  ],
+  "source_pages": [
+    955,
+    955
+  ],
+  "needs_verification": true,
+  "verify_query": "《C++20高级编程》第5版 NewLoggerAdapter constructor INFO Testing the logger 输出",
+  "concept_id": "1962_logger_适配器的使用效果",
+  "_chunk_pages": [
+    953,
+    956
+  ]
+}

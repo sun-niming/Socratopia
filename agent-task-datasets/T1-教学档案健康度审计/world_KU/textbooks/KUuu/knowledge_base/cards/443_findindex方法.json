@@ -1,0 +1,43 @@
+{
+  "title": "findIndex方法",
+  "definition": "`findIndex()` 用于获取数组中第一个满足条件的元素位置，也就是下标。它返回数字；回调一旦返回 `true`，循环结束并返回对应索引。",
+  "key_points": [
+    "返回值是数字索引",
+    "获取第一个符合条件的元素位置",
+    "回调返回 `true` 时结束遍历"
+  ],
+  "examples": [
+    "[1,2,3].findIndex(x => x === 3)  // 2",
+    "['🐕','🐕','🐶','🐕'].findIndex(el => el === '🐶')  // 2"
+  ],
+  "misconceptions": [
+    "`findIndex()` 返回的是元素本身；实际上返回的是下标",
+    "`findIndex()` 会继续找后面的匹配项；教材说明找到第一个就结束"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`findIndex()` 返回什么？",
+      "a": "第一个满足条件的元素位置下标。"
+    },
+    {
+      "q": "`findIndex()` 找到第一个符合条件的元素后会怎样？",
+      "a": "结束循环并返回该位置。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "回调函数",
+    "Array对象与创建方式"
+  ],
+  "source_pages": [
+    307,
+    308
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "443_findindex方法",
+  "_chunk_pages": [
+    305,
+    308
+  ]
+}

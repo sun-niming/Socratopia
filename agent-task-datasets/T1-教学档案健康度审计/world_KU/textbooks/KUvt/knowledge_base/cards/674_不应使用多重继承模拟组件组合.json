@@ -1,0 +1,42 @@
+{
+  "title": "不应使用多重继承模拟组件组合",
+  "definition": "对于由多个组件构成的对象，虽然可以让主类通过多重继承获得各组件的行为和属性，但这种做法会把“有一个”（has-a）关系与表示“是一个”（is-a）关系的继承混淆。教材以飞机为例，建议让 Airplane 包含 Engine、Fuselage 和 Controls 类型的数据成员，而不是从这些组件类继承。",
+  "key_points": [
+    "飞机可以由引擎、机身、控制系统等组件组成。",
+    "使用多重继承让 Airplane 继承 Engine、Fuselage 和 Controls，虽然能够获得组件的行为和属性，但不推荐。",
+    "更合适的解决方案是组合：将 Engine、Fuselage 和 Controls 作为 Airplane 的数据成员。",
+    "继承通常用于表达“是一个”关系，组合通常用于表达“有一个”关系。"
+  ],
+  "examples": [
+    "不推荐：class Airplane : public Engine, public Fuselage, public Controls { };\n推荐：class Airplane {\n    Engine engine;\n    Fuselage fuselage;\n    Controls controls;\n};"
+  ],
+  "misconceptions": [
+    "只要一个类需要使用另一个类的行为，就应该继承它；组件建模通常应优先考虑组合。",
+    "多重继承能够复用组件实现，但能够复用并不表示类之间具有正确的“是一个”关系。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么不推荐让 Airplane 多重继承 Engine、Fuselage 和 Controls？",
+      "a": "因为飞机与这些对象是“有一个”组件的关系，而不是“是一个”关系；用继承会混淆两种关系。"
+    },
+    {
+      "q": "如何更恰当地建模 Airplane 的组件？",
+      "a": "让 Airplane 包含 Engine、Fuselage 和 Controls 类型的数据成员。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "继承与组合的区别"
+  ],
+  "source_pages": [
+    331,
+    331
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "674_不应使用多重继承模拟组件组合",
+  "_chunk_pages": [
+    329,
+    332
+  ]
+}

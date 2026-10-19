@@ -1,0 +1,49 @@
+{
+  "title": "for_each_n 处理前 n 个元素",
+  "definition": "for_each_n() 从指定的起始迭代器开始，对范围中的前 $n$ 个元素执行回调。它需要起始迭代器、要处理的元素数量和回调函数，并返回等于起始迭代器加 $n$ 的迭代器，即 begin + n。教材指出，它通常不执行边界检查，因此调用者必须确保从起始位置起确实存在至少 $n$ 个可访问元素。",
+  "key_points": [
+    "调用形式为 for_each_n(begin, n, callback)。",
+    "它只处理前 $n$ 个元素，而不是从起点到某个尾迭代器的全部元素。",
+    "返回迭代器满足 $result = begin + n$。",
+    "通常不执行边界检查，$n$ 超出可用元素数量可能导致未定义行为。"
+  ],
+  "examples": [
+    "for_each_n(cbegin(myMap), 2, [](const auto& p) { cout << p.first << p.second << endl; });",
+    "若范围为 $[a,b,c,d]$ 且 $n=2$，只处理 $a,b$，返回指向 $c$ 的位置迭代器。"
+  ],
+  "misconceptions": [
+    "for_each_n() 的第二个参数不是尾迭代器，而是元素数量 $n$。",
+    "for_each_n() 不会自动把 $n$ 限制在容器大小以内。",
+    "返回值不是最后一个已处理元素的迭代器，而是起始迭代器向后 $n$ 个位置的迭代器。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "for_each_n() 与 for_each() 的主要区别是什么？",
+      "a": "for_each() 处理由首尾迭代器确定的整个范围；for_each_n() 从起点开始只处理前 $n$ 个元素。"
+    },
+    {
+      "q": "for_each_n() 返回什么迭代器？",
+      "a": "返回等于起始迭代器加 $n$ 的迭代器，即 $begin+n$。"
+    },
+    {
+      "q": "使用 for_each_n() 时为什么要自行保证元素数量足够？",
+      "a": "因为它通常不执行边界检查，若可用元素少于 $n$，访问范围外元素可能产生未定义行为。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "for_each 算法",
+    "迭代器运算"
+  ],
+  "source_pages": [
+    647,
+    648
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1352_for_each_n_处理前_n_个元素",
+  "_chunk_pages": [
+    645,
+    648
+  ]
+}

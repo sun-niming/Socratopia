@@ -1,0 +1,44 @@
+{
+  "title": "C++20 的 atomic<shared_ptr<T>>",
+  "definition": "C++20 通过 <memory> 支持 std::atomic<std::shared_ptr<T>>。普通 shared_ptr 的控制块中的引用计数操作是线程安全的，这保证所指向对象只被删除一次；但同一个 shared_ptr 实例的其他操作并不全部线程安全。使用同一个 atomic<shared_ptr<T>> 实例时，即使调用非 const 的 shared_ptr 操作，也能进行线程安全的原子访问。不过，atomic<shared_ptr<T>> 所指向对象本身的非 const 操作仍然不是线程安全的，需要手动同步。",
+  "key_points": [
+    "普通 shared_ptr 的引用计数控制块是线程安全的。",
+    "同一个普通 shared_ptr 实例上并发调用非 const 方法，例如 reset()，可能造成数据竞争。",
+    "同一个 atomic<shared_ptr<T>> 实例支持对共享指针本身进行线程安全的原子访问。",
+    "原子化 shared_ptr 不会自动保护 shared_ptr 所指向对象的内容。"
+  ],
+  "examples": [
+    "普通 shared_ptr 实例：多个线程同时对同一个实例调用 reset()，可能发生数据竞争。",
+    "原子 shared_ptr 实例：多个线程使用同一个 atomic<shared_ptr<T>> 对共享指针进行原子访问；但如果多个线程同时修改所指对象，仍需额外同步。"
+  ],
+  "misconceptions": [
+    "shared_ptr 的引用计数线程安全，不代表同一个 shared_ptr 实例的所有操作都线程安全。",
+    "atomic<shared_ptr<T>> 只原子化共享指针本身，不会使被指向对象的成员读写自动安全。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "普通 shared_ptr 的哪些部分是线程安全的？",
+      "a": "其控制块中的引用计数操作是线程安全的，这保证所指对象只被删除一次；同一个 shared_ptr 实例的其他内容和非 const 操作不一定线程安全。"
+    },
+    {
+      "q": "使用 atomic<shared_ptr<T>> 是否能保护所指对象的非 const 操作？",
+      "a": "不能。它只能保证共享指针本身的原子访问；对所指对象执行非 const 操作仍需手动同步。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "std::shared_ptr",
+    "原子类型"
+  ],
+  "source_pages": [
+    802,
+    802
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1645_c_20_的_atomic_shared_ptr_t",
+  "_chunk_pages": [
+    801,
+    804
+  ]
+}

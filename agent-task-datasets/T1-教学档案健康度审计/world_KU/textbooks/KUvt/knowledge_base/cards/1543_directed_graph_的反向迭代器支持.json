@@ -1,0 +1,49 @@
+{
+  "title": "directed_graph 的反向迭代器支持",
+  "definition": "如果容器提供双向迭代器或随机访问迭代器，就可以支持反向遍历。directed_graph 的迭代器是双向迭代器，因此应提供反向迭代器类型别名和对应的反向遍历函数。反向迭代器通过标准库的 `std::reverse_iterator` 适配器，将普通迭代器转换为从尾部向头部遍历的迭代器。",
+  "key_points": [
+    "容器应提供 `reverse_iterator` 和 `const_reverse_iterator` 两个类型别名。",
+    "还应提供 `rbegin()`、`rend()`、`crbegin()` 和 `crend()`。",
+    "`reverse_iterator` 通常基于普通 iterator：`using reverse_iterator = std::reverse_iterator<iterator>;`。",
+    "`const_reverse_iterator` 基于 const_iterator：`using const_reverse_iterator = std::reverse_iterator<const_iterator>;`。",
+    "`rbegin()` 通常由 `end()` 构造反向迭代器：`reverse_iterator rbegin() noexcept { return reverse_iterator { end() }; }`。",
+    "反向迭代器的尾端对应普通迭代器的起始位置。"
+  ],
+  "examples": [
+    "相关类型定义：`using reverse_iterator = std::reverse_iterator<iterator>; using const_reverse_iterator = std::reverse_iterator<const_iterator>;`",
+    "反向遍历接口可以写成：`reverse_iterator rbegin() noexcept; reverse_iterator rend() noexcept; const_reverse_iterator rbegin() const noexcept; const_reverse_iterator rend() const noexcept; const_reverse_iterator crbegin() const noexcept; const_reverse_iterator crend() const noexcept;`",
+    "若普通遍历顺序为 `A, B, C`，反向遍历顺序为 `C, B, A`。"
+  ],
+  "misconceptions": [
+    "反向迭代器不是从普通容器中复制出一份倒序数据，而是对普通迭代器进行适配。",
+    "`rbegin()` 对应普通迭代器的 `end()`，而不是普通迭代器的 `begin()`。",
+    "只有双向迭代器或随机访问迭代器容器才适合提供反向遍历；单向迭代器不能直接支持这种接口。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "directed_graph 为什么应该支持反向迭代？",
+      "a": "因为它的迭代器是双向迭代器，双向迭代器容器可以从尾部向头部遍历。"
+    },
+    {
+      "q": "rbegin() 为什么使用 end() 构造反向迭代器？",
+      "a": "反向迭代器的起点对应普通迭代器的尾后位置，因此由普通的 end() 构造。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "双向迭代器",
+    "std::reverse_iterator",
+    "容器 begin/end 接口"
+  ],
+  "source_pages": [
+    744,
+    744
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1543_directed_graph_的反向迭代器支持",
+  "_chunk_pages": [
+    741,
+    744
+  ]
+}

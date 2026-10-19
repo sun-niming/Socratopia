@@ -1,0 +1,50 @@
+{
+  "title": "迭代器相等比较与友元声明",
+  "definition": "const_directed_graph_iterator 的相等比较要求两个迭代器的所有相关状态都相等，包括它们所关联的 directed_graph 对象以及底层节点迭代器 m_nodeIterator。operator!= 通过对 operator== 的结果取反实现。由于迭代器需要使用 directed_graph 的私有节点容器类型别名，directed_graph 类模板必须将 const_directed_graph_iterator<directed_graph> 声明为友元。",
+  "key_points": [
+    "相等判断的逻辑可写为：$$it_1 == it_2 \\iff (it_1.m\\_graph == it_2.m\\_graph) \\land (it_1.m\\_nodeIterator == it_2.m\\_nodeIterator)$$。",
+    "operator!= 的实现是 return !(*this == rhs);。",
+    "比较来自不同 directed_graph 对象的迭代器时，即使底层迭代器位置看似相同，也不应视为相等，因为 m_graph 也必须相等。",
+    "友元声明使迭代器能够访问 directed_graph 的私有节点容器类型等成员。"
+  ],
+  "examples": [
+    "相等比较的核心代码：return (m_graph == rhs.m_graph && m_nodeIterator == rhs.m_nodeIterator);",
+    "不等比较的核心代码：return !(*this == rhs);",
+    "友元声明形式：friend class const_directed_graph_iterator<directed_graph>;"
+  ],
+  "misconceptions": [
+    "只比较底层节点迭代器 m_nodeIterator 就足够，这是错误的；还必须比较关联的 directed_graph。",
+    "operator!= 不需要重新编写一套独立的比较规则，它可以直接对 operator== 的结果取反。",
+    "声明友元不是为了让迭代器拥有更强的遍历能力，而是为了访问 directed_graph 的私有类型或成员。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "const_directed_graph_iterator 的 operator== 需要比较哪些内容？",
+      "a": "需要比较关联的 directed_graph 对象以及底层节点迭代器 m_nodeIterator；两者都相等时迭代器才相等。"
+    },
+    {
+      "q": "operator!= 如何实现？",
+      "a": "通过 return !(*this == rhs); 对相等比较结果取反。"
+    },
+    {
+      "q": "为什么 directed_graph 必须把 const_directed_graph_iterator 声明为友元？",
+      "a": "因为迭代器需要使用或访问 directed_graph 的私有节点容器类型等成员。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++类模板友元声明",
+    "迭代器比较运算符"
+  ],
+  "source_pages": [
+    738,
+    738
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1535_迭代器相等比较与友元声明",
+  "_chunk_pages": [
+    737,
+    740
+  ]
+}

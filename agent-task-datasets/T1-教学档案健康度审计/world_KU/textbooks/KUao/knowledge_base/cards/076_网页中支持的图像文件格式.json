@@ -1,0 +1,47 @@
+{
+  "title": "网页中支持的图像文件格式",
+  "definition": "教材指出，网页中可以插入的图像文件类型主要有`jpg`、`gif`、`png`三种。`jpg`适合用于网页中较大尺寸的真彩色图片，属于有损压缩格式；`gif`一般用于较小尺寸的图片，属于无损压缩格式，可以实现GIF动画和GIF透明图像，但只支持256色；`png`可以用于alpha透明效果，现在推荐使用。",
+  "key_points": [
+    "网页中主要支持的图像格式有`jpg`、`gif`、`png`。",
+    "`jpg`适合较大尺寸的真彩色图片，属于有损压缩。",
+    "`gif`适合较小尺寸图片，属于无损压缩。",
+    "`gif`可以实现动画和透明图像，但只支持256色。",
+    "`png`支持alpha透明效果，教材中说现在推荐使用。"
+  ],
+  "examples": [
+    "<img src=\"banner.jpg\" alt=\"横幅图片\">",
+    "<img src=\"icon.gif\" alt=\"动态图标\">",
+    "<img src=\"transparent.png\" alt=\"透明背景图片\">"
+  ],
+  "misconceptions": [
+    "`gif`并不适合表现大量颜色的真彩色大图，因为它只支持256色。",
+    "`png`不是只能用来做普通图片，它还支持alpha透明效果。",
+    "`jpg`不是无损压缩格式，而是有损压缩格式。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "教材中列出的网页常用图像格式有哪些？",
+      "a": "jpg、gif、png。"
+    },
+    {
+      "q": "哪种格式适合真彩色的大尺寸图片？",
+      "a": "jpg格式。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "HTML基础",
+    "img图像标记"
+  ],
+  "source_pages": [
+    57,
+    60
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "076_网页中支持的图像文件格式",
+  "_chunk_pages": [
+    57,
+    60
+  ]
+}

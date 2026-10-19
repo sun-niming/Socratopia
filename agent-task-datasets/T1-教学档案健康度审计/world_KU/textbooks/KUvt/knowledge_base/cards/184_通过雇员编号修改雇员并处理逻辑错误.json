@@ -1,0 +1,51 @@
+{
+  "title": "通过雇员编号修改雇员并处理逻辑错误",
+  "definition": "doFire() 和 doPromote() 先获取用户输入的雇员编号，再通过 Database 根据编号查找雇员，随后调用 Employee 对象的 public 方法进行解雇或晋升。查找或操作失败时，程序捕获 std::logic_error，并输出包含异常信息的错误消息。",
+  "key_points": [
+    "雇员编号用于定位 Database 中的雇员记录。",
+    "doFire() 查找到雇员后调用 emp.fire()。",
+    "doPromote() 查找到雇员后调用 emp.promote(raiseAmount)，其中 raiseAmount 表示加薪金额；原文代码在该处存在 OCR 截断。",
+    "操作放在 try 代码块中，并用 catch (const std::logic_error& exception) 捕获逻辑错误。",
+    "错误消息使用 exception.what() 获取异常说明。"
+  ],
+  "examples": [
+    "解雇操作的结构可表示为：\n```cpp\ntry {\n    auto& emp{db.getEmployee(employeeNumber)};\n    emp.fire();\n    std::cout << std::format(\n        \"Employee {} terminated.\", employeeNumber)\n        << std::endl;\n} catch (const std::logic_error& exception) {\n    std::cerr << std::format(\n        \"Unable to terminate employee: {}\", exception.what())\n        << std::endl;\n}\n```",
+    "晋升操作的核心结构可表示为：\n```cpp\ntry {\n    auto& emp{db.getEmployee(employeeNumber)};\n    emp.promote(raiseAmount);\n} catch (const std::logic_error& exception) {\n    std::cerr << std::format(\n        \"Unable to promote employee: {}\", exception.what())\n        << std::endl;\n}\n```"
+  ],
+  "misconceptions": [
+    "doFire() 和 doPromote() 不是直接按雇员姓名查找，而是按雇员编号查找。",
+    "catch 块不是表示操作一定失败；它只在 try 块中抛出 std::logic_error 时执行。",
+    "Database 负责查找记录，Employee 的 public 方法负责执行具体的状态修改。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "doFire() 如何找到要解雇的雇员？",
+      "a": "读取雇员编号，调用 Database::getEmployee(employeeNumber) 获取雇员对象，再调用其 fire() 方法。"
+    },
+    {
+      "q": "如果 getEmployee() 找不到雇员，程序如何处理？",
+      "a": "捕获 std::logic_error，并使用 exception.what() 输出错误原因。"
+    },
+    {
+      "q": "doPromote() 与 doFire() 的共同点是什么？",
+      "a": "二者都按雇员编号查找记录，并通过 Employee 的 public 方法修改雇员；同时都使用逻辑错误异常处理。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "异常处理",
+    "引用返回值",
+    "Employee 的 fire() 与 promote()"
+  ],
+  "source_pages": [
+    99,
+    100
+  ],
+  "needs_verification": true,
+  "verify_query": "\"doFire\" \"Unable to terminate employee\" \"doPromote\" \"raiseAmount\" C++20",
+  "concept_id": "184_通过雇员编号修改雇员并处理逻辑错误",
+  "_chunk_pages": [
+    97,
+    100
+  ]
+}

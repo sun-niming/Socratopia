@@ -1,0 +1,39 @@
+{
+  "title": "perror打印系统调用错误",
+  "definition": "在本项目中，像 socket、bind、listen、accept、open、stat 等系统调用失败后，应该用 `perror(\"函数名\")` 打印失败原因。这样可以把 `errno` 对应的具体错误信息输出出来，便于判断到底是端口占用、权限问题还是其他错误。",
+  "key_points": [
+    "系统调用失败后不要只打印“失败”，还要打印错误原因。",
+    "`perror(\"函数名\")` 可以直接输出与当前 `errno` 对应的错误信息。",
+    "每个关键系统调用的失败分支都应该调用 `perror`。"
+  ],
+  "examples": [
+    "`if (bind(fd, ... ) < 0) { perror(\"bind\"); }`",
+    "`if (open(path, O_RDONLY) < 0) { perror(\"open\"); }`"
+  ],
+  "misconceptions": [
+    "只打印“失败”就足够定位问题。",
+    "系统调用失败时不需要关心 `errno`。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "系统调用失败后，为什么要用 `perror(\"函数名\")`？",
+      "a": "因为它能打印 `errno` 对应的具体错误原因，方便判断失败是端口占用、权限问题还是其他原因。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C语言基础",
+    "系统调用基础"
+  ],
+  "source_pages": [
+    97,
+    100
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "147_perror打印系统调用错误",
+  "_chunk_pages": [
+    97,
+    100
+  ]
+}

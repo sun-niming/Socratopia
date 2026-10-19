@@ -1,0 +1,42 @@
+{
+  "title": "pair与tuple的异构存储",
+  "definition": "<utility>头文件定义了pair类模板，用于在一个对象中保存两个可能完全不同类型的元素。<tuple>头文件定义的tuple是pair的泛化，它是固定大小的异构元素序列；tuple中元素的数量和类型在编译期确定。",
+  "key_points": [
+    "pair恰好保存两个元素，两个元素可以是不同类型。",
+    "tuple可以保存固定数量的多个元素，元素类型可以不同。",
+    "pair和tuple都能在一个对象中保存异构元素，而标准库容器通常保存同一种元素类型。"
+  ],
+  "examples": [
+    "代码示例：\nstd::pair<int, std::string> p{1, \"one\"};\nstd::tuple<int, double, std::string> t{1, 3.14, \"pi\"};"
+  ],
+  "misconceptions": [
+    "tuple不是大小可以运行时任意变化的集合；其元素数量和类型在编译期固定。",
+    "pair不是只能保存相同类型的两个元素。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "pair可以保存什么？",
+      "a": "pair可以在一个对象中保存两个元素，这两个元素可以属于不同类型。"
+    },
+    {
+      "q": "tuple与pair的关系是什么？",
+      "a": "tuple是pair的一种泛化，可以保存固定数量的多个异构元素；pair只保存两个元素。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "类模板",
+    "模板参数"
+  ],
+  "source_pages": [
+    505,
+    505
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1023_pair与tuple的异构存储",
+  "_chunk_pages": [
+    505,
+    508
+  ]
+}

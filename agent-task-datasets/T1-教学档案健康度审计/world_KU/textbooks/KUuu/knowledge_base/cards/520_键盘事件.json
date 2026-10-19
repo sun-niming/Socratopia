@@ -1,0 +1,39 @@
+{
+  "title": "键盘事件",
+  "definition": "键盘交互主要通过 keydown、keypress、keyup 三个事件表示按下、按住连续触发和释放按键的过程。",
+  "key_points": [
+    "keydown：按下任意按键时触发",
+    "keypress：除 Shift、Fn、CapsLock 外的任意键被按住时触发，并且会连续触发",
+    "keyup：释放任意按键时触发"
+  ],
+  "examples": [
+    "input.addEventListener('keydown', handler)",
+    "input.addEventListener('keypress', handler)",
+    "input.addEventListener('keyup', handler)"
+  ],
+  "misconceptions": [
+    "keypress 不是对所有按键都一样触发；原文明确排除了 Shift、Fn、CapsLock",
+    "keyup 不是按下时触发，而是释放时触发"
+  ],
+  "qa_pairs": [
+    {
+      "q": "哪个键盘事件表示按键被释放？",
+      "a": "keyup。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "HTML事件基础"
+  ],
+  "source_pages": [
+    361,
+    361
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "520_键盘事件",
+  "_chunk_pages": [
+    361,
+    364
+  ]
+}

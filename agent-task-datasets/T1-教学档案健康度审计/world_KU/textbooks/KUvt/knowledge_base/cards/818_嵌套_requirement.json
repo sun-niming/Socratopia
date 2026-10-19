@@ -1,0 +1,42 @@
+{
+  "title": "嵌套 requirement",
+  "definition": "嵌套 requirement 是写在 requires 表达式主体内部、以 `requires` 开头的 requirement。它用于在其他需求之外继续检查一个概念表达式或布尔常量表达式。",
+  "key_points": [
+    "嵌套 requirement 的形式通常为 `requires constraint-expression;`。",
+    "它可以与简单、类型或复合 requirement 一起出现在同一个 requires 表达式中。",
+    "例如可以同时检查类型大小和运算符支持情况。"
+  ],
+  "examples": [
+    "要求类型 `T` 的对象大小为 4 字节：`template <typename T> concept C = requires (T t) { requires sizeof(t) == 4; };`"
+  ],
+  "misconceptions": [
+    "嵌套 requirement 中的 `requires` 不是新的 requires 表达式主体，而是对约束表达式进行嵌套检查。",
+    "`sizeof(t) == 4` 检查的是对象表示大小是否为 4 字节，不是运行时测量。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "嵌套 requirement 通常采用什么形式？",
+      "a": "`requires constraint-expression;`，例如 `requires sizeof(t) == 4;`。"
+    },
+    {
+      "q": "如何在概念中要求类型对象大小为 4 字节？",
+      "a": "`template <typename T> concept C = requires (T t) { requires sizeof(t) == 4; };`"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "requires 表达式的基本结构",
+    "常量表达式"
+  ],
+  "source_pages": [
+    402,
+    402
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 nested requirement requires sizeof(t) == 4 syntax",
+  "concept_id": "818_嵌套_requirement",
+  "_chunk_pages": [
+    401,
+    404
+  ]
+}

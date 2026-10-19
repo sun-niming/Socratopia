@@ -1,0 +1,48 @@
+{
+  "title": "模块中导出 SpreadsheetCell 类及其构造函数声明",
+  "definition": "原文展示了在 C++ 模块接口中使用 export class SpreadsheetCell 导出类声明，并在 public 区域声明 SpreadsheetCell(double initialValue) 构造函数。类的其余定义在原文中被省略。",
+  "key_points": [
+    "export class SpreadsheetCell 表示该类声明被导出，供模块外部使用。",
+    "构造函数声明 SpreadsheetCell(double initialValue) 接受一个 double 类型的初始值参数。",
+    "原文明确说明类定义的其余部分为简略省略内容。",
+    "同一页还出现 import <string>;，表明模块代码可以导入 string 相关内容。"
+  ],
+  "examples": [
+    "代码结构：export class SpreadsheetCell { public: SpreadsheetCell(double initialValue); // Remainder of the class definition omitted for brevity };"
+  ],
+  "misconceptions": [
+    "SpreadsheetCell(double initialValue) 是构造函数声明，不是普通成员函数调用。",
+    "原文只展示了构造函数的声明，没有给出该构造函数的函数体或具体初始化实现。",
+    "export class 与普通 class 的区别在于模块可见性，而不是把类变成一个新的数据类型。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "原文如何声明可导出的 SpreadsheetCell 类？",
+      "a": "使用 export class SpreadsheetCell。"
+    },
+    {
+      "q": "原文展示的 SpreadsheetCell 构造函数接受什么参数？",
+      "a": "接受一个 double 类型的 initialValue 参数。"
+    },
+    {
+      "q": "原文是否给出了 SpreadsheetCell(double initialValue) 的实现？",
+      "a": "没有，只给出了构造函数声明，并说明其余类定义为简略省略。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++类与构造函数",
+    "C++20模块基础"
+  ],
+  "source_pages": [
+    233,
+    236
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "316_模块中导出_spreadsheetcell_类及其构造函数声明",
+  "_chunk_pages": [
+    233,
+    236
+  ]
+}

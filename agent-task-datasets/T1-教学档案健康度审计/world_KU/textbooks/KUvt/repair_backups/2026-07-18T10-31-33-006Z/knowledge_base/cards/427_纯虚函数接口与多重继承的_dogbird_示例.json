@@ -1,0 +1,50 @@
+{
+  "title": "纯虚函数接口与多重继承的 DogBird 示例",
+  "definition": "可以先定义包含纯虚函数的抽象基类 Animal，再让 Dog 和 Bird 分别继承 Animal 并实现 eat()，最后让 DogBird 同时继承 Dog 和 Bird。由于 DogBird 获得了两个 Animal 子对象以及两个 eat() 实现，需要进一步处理成员调用歧义。",
+  "key_points": [
+    "Animal 声明纯虚函数 virtual void eat() = 0，因此 Animal 是抽象类。",
+    "Dog 和 Bird 都实现 eat() override，并分别输出狗和鸟进食的信息。",
+    "DogBird 同时继承 Dog 和 Bird，并可通过 using Dog::eat; 选择 Dog 版本。"
+  ],
+  "examples": [
+    "class Animal { public: virtual void eat() = 0; };",
+    "class Dog : public Animal { public: virtual void bark() { cout << \"Woof!\" << endl; } void eat() override { cout << \"The dog ate.\" << endl; } };",
+    "class Bird : public Animal { public: virtual void chirp() { cout << \"Chirp!\" << endl; } void eat() override { cout << \"The bird ate.\" << endl; } };",
+    "class DogBird : public Dog, public Bird { public: using Dog::eat; };"
+  ],
+  "misconceptions": [
+    "Animal 中的纯虚函数 eat() 不能直接通过 Animal 对象调用，因为 Animal 是抽象类。",
+    "DogBird 同时继承 Dog 和 Bird 后，不会自动知道应调用 Dog::eat() 还是 Bird::eat()；原文通过 using Dog::eat; 进行选择。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么 Animal 是抽象类？",
+      "a": "因为 Animal 声明了纯虚函数 virtual void eat() = 0。"
+    },
+    {
+      "q": "Dog 和 Bird 对 eat() 的实现有什么区别？",
+      "a": "Dog::eat() 输出“The dog ate.”，Bird::eat() 输出“The bird ate.”。"
+    },
+    {
+      "q": "DogBird 如何选择 Dog 的 eat()？",
+      "a": "在 DogBird 中写 using Dog::eat;。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "纯虚函数与抽象类",
+    "虚函数覆盖",
+    "多重继承"
+  ],
+  "source_pages": [
+    329,
+    332
+  ],
+  "needs_verification": true,
+  "verify_query": "C++ Animal virtual void eat() = 0 Dog Bird DogBird using Dog::eat 多重继承 示例",
+  "concept_id": "427_纯虚函数接口与多重继承的_dogbird_示例",
+  "_chunk_pages": [
+    329,
+    332
+  ]
+}

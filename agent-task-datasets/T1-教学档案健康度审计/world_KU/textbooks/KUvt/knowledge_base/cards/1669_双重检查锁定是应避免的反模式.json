@@ -1,0 +1,44 @@
+{
+  "title": "双重检查锁定是应避免的反模式",
+  "definition": "双重检查锁定（double-checked locking）是一种试图减少互斥体使用、确保共享资源只初始化一次的并发模式。它先在获得锁之前检查初始化标志，只有未初始化时才加锁；获得锁后再检查一次，确认没有其他线程已经完成初始化。教材明确指出该模式容易产生竞争条件、难以正确修复，在新代码中应避免使用。",
+  "key_points": [
+    "第一次检查用于避免获取不必要的锁。",
+    "第二次检查用于防止其他线程在第一次检查与获得锁之间完成初始化。",
+    "示例使用 atomic<bool> 保存初始化状态、使用 mutex 保护初始化过程。",
+    "教材建议优先考虑简单锁、原子变量、std::call_once 或 magic static 等机制；其中 relaxed atomic 或普通 Boolean 等不当优化可能导致错误。"
+  ],
+  "examples": [
+    "典型结构可表示为：\n```cpp\nif (!g_initialized) {\n    std::unique_lock lock{g_mutex};\n    if (!g_initialized) {\n        initializeSharedResources();\n        g_initialized = true;\n    }\n}\n```",
+    "在教材示例中，多个线程调用 processingFunction，但共享资源只执行一次初始化。"
+  ],
+  "misconceptions": [
+    "双重检查锁定并不是天然高效或天然正确的并发优化。",
+    "只把 atomic<bool> 替换成普通 Boolean 不能保证线程安全。",
+    "第一次检查通过并不意味着线程可以跳过第二次检查；第二次检查用于处理加锁前后的竞争。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "双重检查锁定为什么要检查初始化标志两次？",
+      "a": "第一次检查用于避免获得不必要的锁；第二次检查用于确认没有其他线程在第一次检查和获得锁之间完成初始化。"
+    },
+    {
+      "q": "教材对新代码使用双重检查锁定的建议是什么？",
+      "a": "应避免使用双重检查锁定，改用简单锁、原子变量、std::call_once 或 magic static 等机制。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "互斥体与原子变量的基本用法"
+  ],
+  "source_pages": [
+    813,
+    814
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1669_双重检查锁定是应避免的反模式",
+  "_chunk_pages": [
+    813,
+    816
+  ]
+}

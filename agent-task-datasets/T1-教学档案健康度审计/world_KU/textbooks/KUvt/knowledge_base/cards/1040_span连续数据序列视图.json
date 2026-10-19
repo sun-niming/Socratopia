@@ -1,0 +1,45 @@
+{
+  "title": "span连续数据序列视图",
+  "definition": "`span`是C++20引入的、定义在`<span>`头文件中的连续数据序列视图。它本身表示对底层连续数据的观察，可以是只读视图，也可以拥有对底层元素的读写访问权限。",
+  "key_points": [
+    "`span`表示连续数据序列的视图，而不是独立拥有数据的容器。",
+    "同一个函数可以通过接收`span`参数来处理来自`vector`、`array`和C风格数组的数据序列。",
+    "`span`还可以表示底层序列的子视图。",
+    "如果函数原本接收`const vector<T>&`，可以考虑改为接收只读的`span<const T>`，从而扩大可接受的数据来源。"
+  ],
+  "examples": [
+    "函数参数可以设计为`span<const T>`，这样同一个函数即可处理`vector`、`array`、C风格数组及其子序列视图。",
+    "只读视图参数示意：`void process(std::span<const int> values);`"
+  ],
+  "misconceptions": [
+    "`span`不是只能绑定`vector`；它也可以表示`array`和C风格数组等连续数据的视图。",
+    "`span`表示视图，不应理解为自动复制并拥有一份独立数据。",
+    "`span`要求数据是连续序列；不能把任意非连续容器都直接当作`span`使用。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "使用`span`作为函数参数有什么主要好处？",
+      "a": "一个函数可以统一处理来自`vector`、`array`、C风格数组以及它们的子视图的连续数据序列。"
+    },
+    {
+      "q": "`span<const T>`表示什么？",
+      "a": "它表示元素类型为`T`的只读连续数据序列视图，函数不能通过该视图修改底层元素。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++容器与引用参数",
+    "连续内存序列"
+  ],
+  "source_pages": [
+    509,
+    509
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1040_span连续数据序列视图",
+  "_chunk_pages": [
+    509,
+    512
+  ]
+}

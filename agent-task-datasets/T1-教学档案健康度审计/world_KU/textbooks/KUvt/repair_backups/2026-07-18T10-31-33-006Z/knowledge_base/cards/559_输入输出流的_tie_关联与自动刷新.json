@@ -1,0 +1,43 @@
+{
+  "title": "输入输出流的 tie 关联与自动刷新",
+  "definition": "流对象可以通过 tie 机制建立关联，使一个流的输入或其他指定操作触发与其关联的输出流刷新。原文示例把输入文件流 inFile 与输出文件流 outFile 关联：先向 outFile 写入文本但不调用 std::endl，因此输出内容尚未刷新；随后从 inFile 读取内容时，会触发关联输出流 outFile 的刷新。",
+  "key_points": [
+    "可用 tie 机制把一个输入流与一个输出流关联，典型写法为 inFile.tie(&outFile)。",
+    "仅向输出流写入文本且没有发送 std::endl 时，原文说明 outFile 尚未刷新。",
+    "从已关联的输入流读取内容时，会触发关联输出流的刷新。",
+    "示例关系可表示为：$$\\text{从 }inFile\\text{ 读取}\\ \\Longrightarrow\\ \\text{刷新 }outFile$$"
+  ],
+  "examples": [
+    "示例代码：`ifstream inFile{\"input.txt\"}; ofstream outFile{\"output.txt\"}; inFile.tie(&outFile); outFile << \"Hello there!\"; string nextToken; inFile >> nextToken;`",
+    "在上述流程中，执行 `outFile << \"Hello there!\"` 后尚未刷新；执行 `inFile >> nextToken` 时，关联的 `outFile` 被刷新。"
+  ],
+  "misconceptions": [
+    "建立 tie 关联并不意味着每次向输出流插入内容后都会立即刷新；原文强调没有发送 `std::endl` 时输出流尚未刷新。",
+    "tie 关联的作用不是把两个文件的内容自动复制，而是建立与刷新相关的流关联。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "原文示例中，为什么从 inFile 读取 nextToken 会导致 outFile 被刷新？",
+      "a": "因为 inFile 与 outFile 通过 tie 机制关联，关联输入流执行读取时会触发关联输出流 outFile 的刷新。"
+    },
+    {
+      "q": "向 outFile 写入文本但不发送 std::endl 后，outFile 是否已经刷新？",
+      "a": "没有。原文明确说明此时 outFile 尚未刷新。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++ 输入流与输出流的基本使用"
+  ],
+  "source_pages": [
+    429,
+    432
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 std::istream tie associated output stream input operation flush std::endl example inFile.tie outFile",
+  "concept_id": "559_输入输出流的_tie_关联与自动刷新",
+  "_chunk_pages": [
+    429,
+    432
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "title": "indexOf()",
+  "definition": "`indexOf()` 方法返回数组中可以找到的某个给定元素的第一个索引；如果不存在，则返回 `-1`。",
+  "key_points": [
+    "返回第一次出现的位置",
+    "找不到时返回 `-1`",
+    "用于判断元素是否存在于数组中"
+  ],
+  "examples": [
+    "[1, 2, 3, 2].indexOf(2) // 1",
+    "[1, 2, 3].indexOf(4) // -1"
+  ],
+  "misconceptions": [
+    "以为 `indexOf()` 返回最后一次出现的位置",
+    "以为找不到时返回 `0`",
+    "以为返回的是元素本身"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`indexOf()` 找不到元素时返回什么？",
+      "a": "`-1`。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "Array对象与创建方式"
+  ],
+  "source_pages": [
+    305,
+    308
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "408_indexof",
+  "_chunk_pages": [
+    305,
+    308
+  ]
+}

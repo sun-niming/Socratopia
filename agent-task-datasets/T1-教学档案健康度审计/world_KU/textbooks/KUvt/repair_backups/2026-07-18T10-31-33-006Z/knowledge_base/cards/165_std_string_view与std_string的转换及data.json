@@ -1,0 +1,46 @@
+{
+  "title": "std::string_view与std::string的转换及data()",
+  "definition": "std::string_view可以用于构造std::string；原文特别展示了显式构造形式`std::string{sv}`。std::string_view的data()返回底层字符数据指针，但调用data()得到的指针不应被无条件当作以NUL结尾的C字符串使用。",
+  "key_points": [
+    "原文展示了将string_view显式转换为std::string的写法：`std::string{ extractExtension(\"my file.ext\") }`。",
+    "原文还展示了调用`.data()`：`extractExtension(\"my file.ext\").data()`。",
+    "原文提到NUL问题，说明string_view表示的字符范围与C风格NUL结尾字符串不能简单等同。",
+    "如果目标接口需要std::string，应明确构造std::string；如果目标接口需要字符指针，则必须确认data()所指区域满足该接口对结尾NUL字符的要求。"
+  ],
+  "examples": [
+    "显式构造std::string：`handleExtension(std::string{ extractExtension(\"my file.ext\") });`",
+    "访问底层字符数据：`handleExtension(extractExtension(\"my file.ext\").data());`",
+    "若要把视图完整复制为字符串，可使用`std::string{sv}`，其中`sv`是std::string_view。"
+  ],
+  "misconceptions": [
+    "`string_view::data()`返回指针并不自动保证该指针指向以NUL结尾的独立C字符串。",
+    "从std::string_view构造std::string会产生一个std::string对象；它不是把string_view本身变成拥有字符数据的对象。",
+    "调用data()不能替代需要长度信息的字符串接口。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何把一个std::string_view显式转换为std::string？",
+      "a": "使用`std::string{sv}`，例如`std::string{ extractExtension(\"my file.ext\") }`。"
+    },
+    {
+      "q": "使用string_view::data()时需要注意什么？",
+      "a": "data()返回底层字符数据指针，但不能无条件假设它指向以NUL字符结尾的C字符串；是否安全取决于底层数据和目标接口的要求。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "std::string_view的基本用途",
+    "C风格字符串和NUL字符"
+  ],
+  "source_pages": [
+    113,
+    114
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 std::string_view::data 是否保证 NUL 结尾 std::string_view 显式构造 std::string 教材",
+  "concept_id": "165_std_string_view与std_string的转换及data",
+  "_chunk_pages": [
+    113,
+    116
+  ]
+}

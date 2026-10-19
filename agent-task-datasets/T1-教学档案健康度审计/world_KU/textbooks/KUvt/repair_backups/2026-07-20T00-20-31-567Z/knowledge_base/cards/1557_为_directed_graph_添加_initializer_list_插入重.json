@@ -1,0 +1,38 @@
+{
+  "title": "为 directed_graph 添加 initializer_list 插入重载",
+  "definition": "为了支持使用花括号一次插入多个节点，directed_graph 可以提供接收 std::initializer_list<T> 的 insert 重载。该重载将初始化列表的首尾迭代器转发给已有的范围插入操作。",
+  "key_points": [
+    "函数形式可写为：`void insert(std::initializer_list<T> init);`",
+    "实现可以调用 `insert(std::begin(init), std::end(init));`。",
+    "调用示例：`graph.insert({66, 77, 88});`"
+  ],
+  "examples": [
+    "```cpp\ngraph.insert({66, 77, 88});\n```"
+  ],
+  "misconceptions": [
+    "initializer_list 重载不是替代普通的单元素 insert，而是为花括号列表提供批量插入接口。",
+    "initializer_list 中的元素范围应通过 `std::begin(init)` 和 `std::end(init)` 传递。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何让 directed_graph 支持 `graph.insert({66, 77, 88});` 这种调用？",
+      "a": "为 directed_graph 添加 `insert(std::initializer_list<T>)` 重载，并在实现中将初始化列表的首尾迭代器转发给已有的范围插入操作。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "迭代器范围插入",
+    "std::initializer_list"
+  ],
+  "source_pages": [
+    753,
+    753
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1557_为_directed_graph_添加_initializer_list_插入重",
+  "_chunk_pages": [
+    753,
+    756
+  ]
+}

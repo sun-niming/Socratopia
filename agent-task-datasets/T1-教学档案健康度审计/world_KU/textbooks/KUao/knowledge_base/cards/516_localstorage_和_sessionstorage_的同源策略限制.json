@@ -1,0 +1,39 @@
+{
+  "title": "localStorage 和 sessionStorage 的同源策略限制",
+  "definition": "localStorage 和 sessionStorage 都受同源策略限制，只能被同源环境访问。",
+  "key_points": [
+    "localStorage 受同源策略限制。",
+    "sessionStorage 也受同源策略限制。",
+    "不同源之间不能直接共享彼此的 Web Storage 数据。"
+  ],
+  "examples": [
+    "同一站点下可访问同源的 localStorage",
+    "不同协议、域名或端口通常不能直接互相访问 Web Storage"
+  ],
+  "misconceptions": [
+    "只要是同一个浏览器，就能访问任意网站的 Web Storage。",
+    "localStorage 可以被跨域页面随意读取。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "localStorage 和 sessionStorage 受什么限制？",
+      "a": "都受同源策略限制。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "Web Storage",
+    "同源策略"
+  ],
+  "source_pages": [
+    385,
+    387
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "516_localstorage_和_sessionstorage_的同源策略限制",
+  "_chunk_pages": [
+    385,
+    387
+  ]
+}

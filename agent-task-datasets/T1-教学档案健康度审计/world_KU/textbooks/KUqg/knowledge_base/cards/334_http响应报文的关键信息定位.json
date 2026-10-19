@@ -1,0 +1,60 @@
+{
+  "title": "HTTP响应报文的关键信息定位",
+  "definition": "HTTP响应报文由状态行、响应首部和实体主体组成。状态行用于说明协议版本和请求处理结果；Date、Last-Modified、Content-Length、Content-Type与Connection等首部分别描述响应生成时间、资源最后修改时间、实体长度、媒体类型和连接管理方式。首部之后的空行标志实体主体开始。",
+  "key_points": [
+    "状态行“HTTP/1.1 200 OK”表示服务器成功处理请求并返回文档。",
+    "Date首部给出服务器生成或发送该响应的时间：Tue, 07 Mar 2008 12:39:45 GMT。",
+    "Last-Modified首部给出文档最后修改时间：Sat, 10 Dec 2005 18:27:46 GMT。",
+    "Content-Length为3874，表示返回实体主体的长度为3874字节。",
+    "空行后的实体主体以“<!doctype...”开始，因此返回文档的前5个字节对应字符“<!doc”。",
+    "“Connection: Keep-Alive”表示服务器同意保持持续连接。",
+    "“Content-Type: text/html; charset=ISO-8859-1”表示主体是HTML文本，字符集为ISO-8859-1。"
+  ],
+  "examples": [
+    "状态行：HTTP/1.1 200 OK",
+    "文档长度：Content-Length: 3874",
+    "实体主体开头：<!doctype html ...",
+    "前5个字符：<!doc",
+    "连接首部：Connection: Keep-Alive"
+  ],
+  "misconceptions": [
+    "Date首部表示响应生成或发送的时间，不是文档最后修改时间；文档最后修改时间由Last-Modified给出。",
+    "Content-Length描述实体主体的字节数，不包括状态行和响应首部。",
+    "200 OK表示请求成功，不能将其误解为重定向或资源不存在。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "服务器是否成功找到了并返回文档？依据是什么？",
+      "a": "是。状态行为“HTTP/1.1 200 OK”，其中状态码200表示请求成功。"
+    },
+    {
+      "q": "文档最后修改时间由哪个首部给出？具体时间是什么？",
+      "a": "由Last-Modified首部给出，时间是Sat, 10 Dec 2005 18:27:46 GMT。"
+    },
+    {
+      "q": "响应中返回了多少字节的实体主体？",
+      "a": "3874字节，由“Content-Length: 3874”给出。"
+    },
+    {
+      "q": "服务器是否同意持续连接？",
+      "a": "同意，依据是“Connection: Keep-Alive”。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "HTTP响应报文",
+    "HTTP状态码",
+    "HTTP首部"
+  ],
+  "source_pages": [
+    133,
+    136
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "334_http响应报文的关键信息定位",
+  "_chunk_pages": [
+    133,
+    136
+  ]
+}

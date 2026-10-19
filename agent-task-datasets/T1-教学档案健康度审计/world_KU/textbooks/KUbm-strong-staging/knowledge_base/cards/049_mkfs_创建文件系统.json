@@ -1,0 +1,39 @@
+{
+  "title": "mkfs 创建文件系统",
+  "definition": "教材在“磁盘操作”中给出创建文件系统的命令：mkfs 分区设备名。按教材表述，mkfs 用于在指定分区设备上创建文件系统。",
+  "key_points": [
+    "用途：创建文件系统",
+    "命令格式：mkfs 分区设备名",
+    "操作对象是分区设备名"
+  ],
+  "examples": [
+    "命令格式示例：mkfs 分区设备名"
+  ],
+  "misconceptions": [
+    "不要把 mkfs 误认为分区命令；教材明确把它归为“创建文件系统”",
+    "不要把“分区设备名”理解成安装点"
+  ],
+  "qa_pairs": [
+    {
+      "q": "教材中用于创建文件系统的命令是什么？",
+      "a": "mkfs。"
+    },
+    {
+      "q": "教材给出的 mkfs 使用格式是什么？",
+      "a": "mkfs 分区设备名。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [],
+  "source_pages": [
+    25,
+    28
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "049_mkfs_创建文件系统",
+  "_chunk_pages": [
+    25,
+    28
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "title": "operator* 应返回底层对象的引用",
+  "definition": "对于模拟指针的类，operator* 应返回其内部原始指针所指向对象的引用。这样，使用者既可以读取对象，也可以在对象可修改时直接修改该对象。通常应同时提供 const 和非 const 重载：非 const 对象返回非 const 引用，const 对象返回 const 引用。",
+  "key_points": [
+    "非 const 版本可写成：$T\\&\\ operator*()\\ \\{\\ return\\ *m\\_ptr;\\ \\}$。",
+    "const 版本可写成：$const\\ T\\&\\ operator*()\\ const\\ \\{\\ return\\ *m\\_ptr;\\ \\}$。",
+    "返回引用而不是值，可以让解除引用表达式直接代表底层对象，并避免不必要的对象拷贝。"
+  ],
+  "examples": [
+    "template <typename T> class Pointer { public: T& operator*() { return *m_ptr; } const T& operator*() const { return *m_ptr; } private: T* m_ptr { nullptr }; };",
+    "Pointer<int> p { new int };",
+    "*p = 5;"
+  ],
+  "misconceptions": [
+    "operator* 返回的是底层对象的副本，而不是底层对象本身的引用。",
+    "const 版本也应返回 T&，否则 const Pointer 对象仍可能通过解除引用修改底层对象。",
+    "只提供非 const 版本就足够；教材指出同时提供 const 和非 const 版本很有用。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么 Pointer<T>::operator* 通常返回引用？",
+      "a": "因为解除引用后应直接访问内部原始指针所指向的对象；返回引用可以读取或修改该对象，并避免返回副本。"
+    },
+    {
+      "q": "const 版本的 operator* 应返回什么类型？",
+      "a": "应返回 const T&，并且成员函数本身应标记为 const。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++引用",
+    "const 成员函数",
+    "运算符重载"
+  ],
+  "source_pages": [
+    486,
+    486
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "973_operator_应返回底层对象的引用",
+  "_chunk_pages": [
+    485,
+    488
+  ]
+}

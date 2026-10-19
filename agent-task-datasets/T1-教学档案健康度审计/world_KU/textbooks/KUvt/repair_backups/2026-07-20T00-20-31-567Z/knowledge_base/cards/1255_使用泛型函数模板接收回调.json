@@ -1,0 +1,48 @@
+{
+  "title": "使用泛型函数模板接收回调",
+  "definition": "接收回调的函数不一定要把参数声明为 `std::function`。可以将回调类型作为函数模板参数，由编译器根据调用实参推导出具体类型；在 C++20 中，还可以使用简化函数模板语法，直接把参数写成 `auto`。",
+  "key_points": [
+    "传统写法可以为匹配器和处理器分别设置模板类型参数：`template <typename Matcher, typename MatchHandler>`。",
+    "示例形式为：`void findMatches(span<const int> values1, span<const int> values2, Matcher matcher, MatchHandler handler)`。",
+    "C++20 简化写法为：`void findMatches(span<const int> values1, span<const int> values2, auto matcher, auto handler)`。",
+    "由于函数模板参数推导，调用这个泛型版本时可以直接传入不同类型的可调用对象。",
+    "原文指出，这种函数模板或简化函数模板通常是实现回调参数的推荐方式；当回调需要存储为类的数据成员时，`std::function` 更有用。"
+  ],
+  "examples": [
+    "回调类型别名形式：`using Matcher = function<bool(int, int)>;` 和 `using MatchHandler = function<void(size_t, int, int)>;`。",
+    "泛型模板形式：`template <typename Matcher, typename MatchHandler> void findMatches(span<const int> values1, span<const int> values2, Matcher matcher, MatchHandler handler) { /* ... */ }`。",
+    "C++20 形式：`void findMatches(span<const int> values1, span<const int> values2, auto matcher, auto handler) { /* ... */ }`。"
+  ],
+  "misconceptions": [
+    "接收回调的函数必须使用 `std::function`；原文说明函数模板可以直接接收任意合适的回调类型。",
+    "使用 `auto` 作为函数参数时不是普通函数，而是 C++20 的简化函数模板语法。",
+    "泛型函数模板和 `std::function` 的用途完全相同；原文特别指出，回调需要作为类数据成员存储时，`std::function` 更有用。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何不用 `std::function` 为 `findMatches` 接收两个回调？",
+      "a": "把两个回调类型设为函数模板参数，例如 `template <typename Matcher, typename MatchHandler>`，再将参数声明为 `Matcher matcher` 和 `MatchHandler handler`。"
+    },
+    {
+      "q": "C++20 中如何进一步简化回调参数的函数模板写法？",
+      "a": "直接把回调参数写成 `auto`，例如 `void findMatches(..., auto matcher, auto handler)`。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "函数模板",
+    "函数参数类型推导",
+    "回调函数"
+  ],
+  "source_pages": [
+    610,
+    611
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1255_使用泛型函数模板接收回调",
+  "_chunk_pages": [
+    609,
+    612
+  ]
+}

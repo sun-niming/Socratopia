@@ -1,0 +1,139 @@
+{
+  "conversationId": "PZVQelpofaMnjfQE2L5yK",
+  "generatedAt": 1781196553220,
+  "pagesRange": null,
+  "sections": [
+    {
+      "type": "tldr",
+      "content": "本节核心：Shell 里 `#`、引号、变量替换、脚本执行方式和返回码都在围绕一个问题——**Shell 到底把这一段当命令、字符串、变量名，还是状态结果来解释**。"
+    },
+    {
+      "type": "narrative",
+      "content": "这节课从 `#` 注释是否执行开始，先分清了普通字符、注释和引号保护的边界；接着进入变量替换，比较了双引号、单引号、转义符和 `${}` 的作用。后半段补上 Shell 脚本结构、执行方式、位置参数和 `$?` 返回码，最后自然引到下节的 `if` 如何根据命令返回码判断。"
+    },
+    {
+      "type": "concepts",
+      "items": [
+        {
+          "name": "`#` 注释与引号保护",
+          "body": "在 Shell 中，`#` 只有在**不被引号保护**时，才会开启注释。\n\n- 整行从 `#` 开始：整行不执行。\n- 命令后面出现未被引号保护的 `#`：从 `#` 到行尾都被当作注释。\n- `#` 在双引号或单引号里：只是普通字符。\n\n例子：\n\n```bash\n# echo danger\n```\n不会执行。\n\n```bash\\necho hello # world\n```\n输出：\n\n```bash\\nhello\n```\n\n```bash\\necho \"hello # world\"\n```\n输出：\n\n```bash\\nhello # world\n```"
+        },
+        {
+          "name": "单引号、双引号与变量替换",
+          "body": "双引号和单引号对变量替换的态度不同。\n\n假设：\n\n```bash\\nname=Linux\n```\n\n双引号允许变量替换：\n\n```bash\\necho \"$name\"\n```\n输出：\n\n```bash\\nLinux\n```\n\n单引号会禁止变量替换：\n\n```bash\\necho '$name'\n```\n输出：\n\n```bash\n$name\n```\n\n可以记成：\n\n- 双引号：里面的 `$name` 仍然会变成变量值。\n- 单引号：里面的 `$name` 会被原样保留。"
+        },
+        {
+          "name": "双引号中的转义符 `\\`",
+          "body": "双引号里不是“什么都不变”：变量替换仍然存在，但反斜杠 `\\` 可以保护某些特殊字符。\n\n假设：\n\n```bash\\nname=Linux\n```\n\n```bash\\necho \"\\$name\"\n```\n输出：\n\n```bash\n$name\n```\n\n原因：`\\$` 中的 `\\` 保护了 `$`，所以 `$name` 不做变量替换。\n\n再看：\n\n```bash\\necho \"\\\\$name\"\n```\n输出：\n\n```bash\n\\Linux\n```\n\n可以拆成：\n\n- `\\\\` 变成一个普通反斜杠 `\\`\n- `$name` 仍然做变量替换，变成 `Linux`"
+        },
+        {
+          "name": "`${变量名}`：给变量名画边界",
+          "body": "`${}` 的重要作用之一是明确变量名的边界，避免 Shell 把后面的字母也当作变量名的一部分。\n\n假设：\n\n```bash\\na=\"/e\"\n```\n\n如果想拼出：\n\n```bash\n/etc/httpd\n```\n\n应该写：\n\n```bash\\necho \"${a}tc/httpd\"\n```\n\n输出：\n\n```bash\n/etc/httpd\n```\n\n如果写成：\n\n```bash\\necho \"$atc/httpd\"\n```\n\\nShell 会把 `$atc` 当成变量 `atc`，而不是变量 `a` 后面接字符串 `tc`。如果 `atc` 没定义，`$atc` 会替换成空字符串，结果变成：\n\n```bash\n/httpd\n```"
+        },
+        {
+          "name": "默认值替换：`${var:-str}`",
+          "body": "`${var:-str}` 的意思是：如果变量不存在或为空，就**临时使用** `str`；但不会改变变量本身。\n\n例子：\n\n```bash\\nname=\"\"\\necho \"${name:-Linux}\"\\necho \"$name\"\n```\n\n输出：\n\n```bash\\nLinux\n\n```\n\n第一行输出 `Linux`，第二行仍然是空字符串。也就是说，`:-` 只是“临时借用默认值”，不会写回变量。"
+        },
+        {
+          "name": "默认值并赋值：`${var:=str}`",
+          "body": "`${var:=str}` 的意思是：如果变量不存在或为空，就使用 `str`，并且把 `str` **赋值给变量**。\n\n例子：\n\n```bash\\nname=\"\"\\necho \"${name:=Linux}\"\\necho \"$name\"\n```\n\n输出：\n\n```bash\\nLinux\\nLinux\n```\n\n如果变量已经非空，则不会修改：\n\n```bash\\nname=\"Unix\"\\necho \"${name:=Linux}\"\\necho \"$name\"\n```\n\n输出：\n\n```bash\\nUnix\\nUnix\n```"
+        },
+        {
+          "name": "非空时替换：`${var:+str}`",
+          "body": "`${var:+str}` 的逻辑和默认值替换有点反过来：如果变量存在且非空，就返回 `str`；如果变量为空或不存在，就返回空字符串。\n\n例子：\n\n```bash\\nname=\"Unix\"\\necho \"${name:+Linux}\"\\necho \"$name\"\n```\n\n输出：\n\n```bash\\nLinux\\nUnix\n```\n\n注意：`:+` 不会把变量改掉。\n\n如果变量为空：\n\n```bash\\nname=\"\"\\necho \"${name:+Linux}\"\n```\n\n输出为空字符串。"
+        },
+        {
+          "name": "Shell 脚本基本结构",
+          "body": "一个最基本的 Shell 脚本可以长这样：\n\n```bash\n#!/bin/bash\n# 这是注释\\necho \"hello\"\n```\n\n三部分含义：\n\n1. `#!/bin/bash`：叫 **shebang**，告诉系统这个脚本交给 `/bin/bash` 解释执行。通常必须放在脚本第一行。\n2. `# 这是注释`：注释，不执行。\n3. `echo \"hello\"`：真正会执行的命令语句。\n\n例子：\n\n```bash\n#!/bin/bash\n# echo danger\\necho hello\n```\n\n真正执行的是：\n\n```bash\\necho hello\n```"
+        },
+        {
+          "name": "Shell 脚本的三种执行方式",
+          "body": "本节提到三类执行脚本的方式：\n\n```bash\\nbash < 脚本名\\nbash 脚本名 [参数]\\nchmod a+x 脚本名\n./脚本名 [参数]\n```\n\n区别：\n\n- `bash 脚本名`：把脚本作为 `bash` 的参数执行，不要求脚本本身有执行权限。\n- `bash < 脚本名`：输入重定向，把脚本内容作为 `bash` 的标准输入。\n- `./脚本名`：把脚本当作可执行文件直接运行，需要执行权限，也依赖脚本开头的 shebang 来找到解释器。\n\n如果 `hello.sh` 没有执行权限：\n\n```bash\\nbash hello.sh\n```\n可以运行；\n\n```bash\n./hello.sh\n```\n通常不行，需要先：\n\n```bash\\nchmod a+x hello.sh\n```"
+        },
+        {
+          "name": "位置参数：`$0`、`$1`、`$2`、`$#`",
+          "body": "用 `bash 脚本名 参数1 参数2` 运行脚本时，Shell 会把命令行参数放进特殊变量。\n\n例子：\n\n```bash\\nbash test.sh a b\n```\n\n对应关系：\n\n```bash\n$0  -> test.sh\n$1  -> a\n$2  -> b\n$#  -> 2\n```\n\n其中：\n\n- `$0`：脚本名。\n- `$1`、`$2`：第一个、第二个参数。\n- `$#`：参数个数，不包括脚本名本身。\n\n再如：\n\n```bash\\nbash backup.sh src/ dst/\n```\n\n则：\n\n```bash\n$0  -> backup.sh\n$1  -> src/\n$2  -> dst/\n$#  -> 2\n```"
+        },
+        {
+          "name": "`$?`：上一条命令的返回码",
+          "body": "`$?` 表示**最后一次执行命令的返回码**。\n\n基本判断：\n\n```bash\n0      成功\n非 0   不成功 / 异常 / 没达成目标\n```\n\n例子：\n\n```bash\\ngrep \"love\" a.txt\\necho $?\n```\n\n如果 `a.txt` 里找到了 `love`，`echo $?` 输出：\n\n```bash\n0\n```\n\n如果没有找到，输出非 `0`。\n\n再如：\n\n```bash\\nls no_such_file\\necho $?\n```\n\n文件不存在，所以返回失败码，也就是非 `0`。\n\n注意区分：\n\n- `$0`：脚本名。\n- `$?`：上一条命令的返回码。"
+        }
+      ]
+    },
+    {
+      "type": "key-insight",
+      "content": "“没有写 `#!/bin/bash`，内核无法标识解释脚本。”",
+      "attribution": "学习者"
+    },
+    {
+      "type": "key-terms",
+      "items": [
+        {
+          "term": "注释",
+          "definition": "Shell 中未被引号保护的 `#` 及其后内容会被跳过，不参与执行。"
+        },
+        {
+          "term": "变量替换",
+          "definition": "Shell 在执行前把 `$name` 这类变量引用替换成变量的值。"
+        },
+        {
+          "term": "转义符",
+          "definition": "反斜杠 `\\` 可让后面的特殊字符失去特殊含义，例如在双引号中保护 `$`。"
+        },
+        {
+          "term": "变量名边界",
+          "definition": "`${a}tc` 用大括号明确变量名是 `a`，后面的 `tc` 是普通字符串。"
+        },
+        {
+          "term": "shebang",
+          "definition": "脚本第一行的 `#!/bin/bash`，用于告诉系统用哪个解释器执行脚本。"
+        },
+        {
+          "term": "输入重定向",
+          "definition": "`<` 把文件内容作为命令的标准输入，例如 `bash < test.sh`。"
+        },
+        {
+          "term": "位置参数",
+          "definition": "脚本运行时接收的参数，如 `$1`、`$2`，以及参数个数 `$#`。"
+        },
+        {
+          "term": "返回码",
+          "definition": "命令执行后的状态码，`$?` 可查看上一条命令的返回码；`0` 通常表示成功，非 `0` 表示失败或未达成目标。"
+        }
+      ]
+    },
+    {
+      "type": "open-question",
+      "content": "下节自然延伸：Shell 的 `if` 不是直接看“真假单词”，而是看命令返回码；例如 `if grep \"love\" a.txt ...` 中，`grep` 返回 `0` 时会进入 `then`，返回非 `0` 时会进入 `else`。"
+    },
+    {
+      "type": "review-questions",
+      "items": [
+        {
+          "question": "执行 `echo \"hello # world\"` 会输出什么？为什么？",
+          "answer": "输出：\n\n```bash\\nhello # world\n```\n\n因为 `#` 在双引号里面，被当作普通字符，不会开启注释。"
+        },
+        {
+          "question": "假设 `name=Linux`，分别执行 `echo \"$name\"` 和 `echo '$name'`，输出有什么不同？",
+          "answer": "```bash\\necho \"$name\"\n```\n输出：\n\n```bash\\nLinux\n```\n\n因为双引号允许变量替换。\n\n```bash\\necho '$name'\n```\n输出：\n\n```bash\n$name\n```\n\n因为单引号禁止变量替换。"
+        },
+        {
+          "question": "为什么 `echo \"${a}tc/httpd\"` 比 `echo \"$atc/httpd\"` 更适合拼接 `/etc/httpd`？",
+          "answer": "因为 `${a}` 明确变量名是 `a`，后面的 `tc/httpd` 是普通字符串。若 `a=\"/e\"`，则 `${a}tc/httpd` 会变成 `/etc/httpd`。\n\n而 `$atc/httpd` 会把 `atc` 当成变量名；如果 `atc` 未定义，`$atc` 是空字符串，结果只剩 `/httpd`。"
+        },
+        {
+          "question": "比较 `${name:-Linux}` 和 `${name:=Linux}`：当 `name` 为空时，它们的区别是什么？",
+          "answer": "当 `name` 为空时：\n\n- `${name:-Linux}`：临时返回 `Linux`，但不改变 `name`。\n- `${name:=Linux}`：返回 `Linux`，并把 `Linux` 赋值给 `name`。\n\n所以 `:=` 会写回变量，`:-` 不会。"
+        },
+        {
+          "question": "如果运行 `bash backup.sh src/ dst/`，`$0`、`$1`、`$2`、`$#` 分别是什么？",
+          "answer": "```bash\n$0  -> backup.sh\n$1  -> src/\n$2  -> dst/\n$#  -> 2\n```\n\n`$#` 是参数个数，不包括脚本名。"
+        },
+        {
+          "question": "`$?` 表示什么？如果刚执行 `ls no_such_file`，再执行 `echo $?`，会得到成功码还是失败码？",
+          "answer": "`$?` 表示上一条命令的返回码。\n\n`ls no_such_file` 中目标文件不存在，所以命令失败，`echo $?` 会输出失败码，也就是非 `0`。"
+        }
+      ]
+    }
+  ]
+}

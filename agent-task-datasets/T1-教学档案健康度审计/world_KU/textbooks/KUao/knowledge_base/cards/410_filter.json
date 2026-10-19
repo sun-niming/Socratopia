@@ -1,0 +1,38 @@
+{
+  "title": "filter()",
+  "definition": "`filter()` 用于过滤数组：它会把满足条件的元素保留下来，形成一个新数组。教材表格说明，回调返回 `true` 的元素会被添加到新数组中。",
+  "key_points": [
+    "返回值是新数组",
+    "只有回调返回 `true` 的元素才会保留",
+    "常用于筛选满足条件的数据"
+  ],
+  "examples": [
+    "['🐕', '🐶', '🐕'].filter(el => el === '🐶') // ['🐶']"
+  ],
+  "misconceptions": [
+    "以为 `filter()` 会修改原数组",
+    "以为返回的是布尔值",
+    "以为回调返回 `false` 的元素会保留下来"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`filter()` 回调返回什么时，元素会被加入新数组？",
+      "a": "返回 `true` 时。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "Array对象与创建方式"
+  ],
+  "source_pages": [
+    307,
+    308
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "410_filter",
+  "_chunk_pages": [
+    305,
+    308
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "title": "std::thread线程参数默认按值复制",
+  "definition": "传递给std::thread线程函数的参数，默认会被复制到线程的内部存储中。若希望以引用方式传递参数，应使用<functional>中的std::ref()或std::cref()包装参数。",
+  "key_points": [
+    "默认传参方式是复制，而不是直接传递原对象的引用。",
+    "std::ref()用于按引用传递；std::cref()用于按const引用传递。",
+    "使用引用传递时，被引用对象必须在线程使用期间保持有效。"
+  ],
+  "examples": [
+    "按引用传递可写对象：\nint value{0};\nthread t{someFunction, ref(value)};\nt.join();\n\n按const引用传递：\nthread t{someFunction, cref(value)};"
+  ],
+  "misconceptions": [
+    "仅仅把线程函数参数声明为引用，并不会自动使std::thread传入原对象；通常还需要使用std::ref()。",
+    "复制参数意味着线程函数修改默认传入的参数副本时，不会直接修改原对象。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "std::thread默认如何保存线程函数的参数？",
+      "a": "参数默认会被复制到thread的内部存储中。"
+    },
+    {
+      "q": "怎样让std::thread按引用传递参数？",
+      "a": "使用std::ref()；如果需要按const引用传递，则使用std::cref()。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "std::thread启动线程",
+    "C++引用"
+  ],
+  "source_pages": [
+    794,
+    794
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1627_std_thread线程参数默认按值复制",
+  "_chunk_pages": [
+    793,
+    796
+  ]
+}

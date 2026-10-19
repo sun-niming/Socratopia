@@ -1,0 +1,52 @@
+{
+  "title": "directed_graph 的迭代器类型别名与 begin/end 接口",
+  "definition": "directed_graph 通过类型别名和成员函数向用户提供迭代器访问。教材给出的当前实现中，iterator 和 const_iterator 都是 const_directed_graph_iterator<directed_graph> 的别名，因此通过 directed_graph 迭代器访问节点时不能修改节点值，这与 std::set 的元素访问原则一致。由于节点实际存储在 vector 中，begin() 和 end() 将 m_nodes 的 std::begin 和 std::end 结果包装成图迭代器返回；cbegin() 和 cend() 提供 const 迭代器接口。",
+  "key_points": [
+    "当前实现中的别名关系可写为：$$\\text{iterator}=\\text{const\\_directed\\_graph\\_iterator<directed\\_graph>},\\quad \\text{const\\_iterator}=\\text{const\\_directed\\_graph\\_iterator<directed\\_graph>。}$$",
+    "begin() 返回包装 std::begin(m_nodes) 的迭代器；end() 返回包装 std::end(m_nodes) 的迭代器。",
+    "这些迭代器方法声明为 noexcept。",
+    "当前实现使用邻接表中的索引，因此不允许通过迭代器修改节点；如果以后修改实现使节点可修改，iterator 类型别名可以改为 directed_graph_iterator。",
+    "directed_graph 还需要将 directed_graph_iterator 声明为友元。"
+  ],
+  "examples": [
+    "非 const begin() 的核心逻辑：return iterator{ std::begin(m_nodes), this };",
+    "非 const end() 的核心逻辑：return iterator{ std::end(m_nodes), this };",
+    "可用关系表示访问接口：$$\\text{begin()}\\rightarrow\\text{包装 }\\mathrm{std::begin}(m\\_nodes)，\\qquad \\text{end()}\\rightarrow\\text{包装 }\\mathrm{std::end}(m\\_nodes)。$$",
+    "典型接口包括：iterator begin() noexcept; iterator end() noexcept; const_iterator begin() const noexcept; const_iterator end() const noexcept; const_iterator cbegin() const noexcept; const_iterator cend() const noexcept;"
+  ],
+  "misconceptions": [
+    "名称为 iterator 并不必然意味着元素可修改；本教材所述当前实现中，iterator 和 const_iterator 都指向 const_directed_graph_iterator。",
+    "end() 返回的是尾后迭代器，不是最后一个节点。",
+    "directed_graph 的迭代器不是直接暴露 vector 的原始迭代器，而是将 vector 迭代器和所属图对象一起包装起来。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "当前 directed_graph 的 iterator 类型别名是什么？",
+      "a": "当前实现中 iterator 是 const_directed_graph_iterator<directed_graph> 的别名，因此不能通过它修改节点值。"
+    },
+    {
+      "q": "begin() 和 end() 如何构造迭代器？",
+      "a": "它们分别调用 std::begin(m_nodes) 和 std::end(m_nodes)，再将底层迭代器与 this 一起包装成图迭代器返回。"
+    },
+    {
+      "q": "为什么当前 iterator 不允许修改节点？",
+      "a": "因为当前 directed_graph 使用邻接表中的索引，实现要求节点不能通过迭代器修改；这也遵循类似 std::set 的只读元素访问原则。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++类型别名",
+    "容器的 begin/end 迭代器接口"
+  ],
+  "source_pages": [
+    740,
+    740
+  ],
+  "needs_verification": true,
+  "verify_query": "\"C++20高级编程\" \"directed_graph\" \"const_directed_graph_iterator\" iterator const_iterator begin end",
+  "concept_id": "1537_directed_graph_的迭代器类型别名与_begin_end_接口",
+  "_chunk_pages": [
+    737,
+    740
+  ]
+}

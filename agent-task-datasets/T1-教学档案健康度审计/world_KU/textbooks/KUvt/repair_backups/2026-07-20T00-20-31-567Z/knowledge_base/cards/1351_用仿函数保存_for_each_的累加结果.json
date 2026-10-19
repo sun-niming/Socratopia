@@ -1,0 +1,51 @@
+{
+  "title": "用仿函数保存 for_each 的累加结果",
+  "definition": "可以定义一个带有 operator() 的仿函数对象，让 for_each() 每处理一个元素时更新对象的成员变量，从而同时保存累加信息。由于 for_each() 会复制传入的仿函数并返回处理后的副本，必须接收其返回值，才能读取包含最终结果的对象。",
+  "key_points": [
+    "SumAndProduct 示例用 m_sum 保存和，用 m_product 保存积。",
+    "operator()(int value) 对每个元素执行 m_sum += value 和 m_product *= value。",
+    "getSum() 和 getProduct() 以 const 成员函数形式返回计算结果。",
+    "正确写法是 calculator = for_each(cbegin(myVector), cend(myVector), calculator);。",
+    "如果忽略 for_each() 的返回值，之后读取原 calculator 可能得不到处理后的结果。"
+  ],
+  "examples": [
+    "class SumAndProduct { public: void operator()(int value) { m_sum += value; m_product *= value; } int getSum() const { return m_sum; } int getProduct() const { return m_product; } private: int m_sum { 0 }; int m_product { 1 }; };",
+    "SumAndProduct calculator;",
+    "calculator = for_each(cbegin(myVector), cend(myVector), calculator);"
+  ],
+  "misconceptions": [
+    "for_each() 不一定直接原地更新传入的仿函数对象；教材强调它会复制仿函数并返回副本。",
+    "只写 for_each(..., calculator) 而不保存返回值，不能保证原 calculator 含有最终累加结果。",
+    "仿函数必须通过 operator() 提供可调用行为。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么必须保存 for_each() 的返回值？",
+      "a": "因为 for_each() 会复制仿函数，并返回处理完成后的副本；只有接收返回值才能获得更新后的累加状态。"
+    },
+    {
+      "q": "SumAndProduct 仿函数的两个成员变量分别表示什么？",
+      "a": "m_sum 保存元素之和，m_product 保存元素之积。"
+    },
+    {
+      "q": "如何正确获得 for_each() 处理后的仿函数对象？",
+      "a": "将返回值赋回对象，例如 calculator = for_each(cbegin(myVector), cend(myVector), calculator);。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "函数对象或仿函数",
+    "for_each 算法"
+  ],
+  "source_pages": [
+    647,
+    647
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 std::for_each 函数对象复制 返回值 仿函数状态是否必须接收返回值",
+  "concept_id": "1351_用仿函数保存_for_each_的累加结果",
+  "_chunk_pages": [
+    645,
+    648
+  ]
+}

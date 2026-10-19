@@ -1,0 +1,46 @@
+{
+  "title": "dynamic_cast() 的引用转换失败与 std::bad_cast",
+  "definition": "当使用 `dynamic_cast()` 将基类引用转换为派生类引用时，如果实际对象不适合目标派生类型，转换会失败并抛出 `std::bad_cast`。原文使用 `try`/`catch` 捕获 `const bad_cast&`，并输出 `Bad cast!`。",
+  "key_points": [
+    "原文示例先定义 `Base base;` 和 `Derived derived;`，再令 `Base& br { base };`。",
+    "随后执行 `Derived& dr { dynamic_cast<Derived&>(br) };`，把基类引用 `br` 转换为派生类引用。",
+    "失败情况通过 `catch (const bad_cast&)` 捕获，并输出 `Bad cast!`。",
+    "与指针转换不同，原文片段明确展示了引用转换失败时的异常处理。"
+  ],
+  "examples": [
+    "`Base base;`",
+    "`Base& br { base };`",
+    "`try { Derived& dr { dynamic_cast<Derived&>(br) }; } catch (const bad_cast&) { cout << \"Bad cast!\" << endl; }`",
+    "失败时输出：`Bad cast!`。"
+  ],
+  "misconceptions": [
+    "不能认为引用形式的 `dynamic_cast()` 失败时会返回空引用；原文示例通过捕获 `bad_cast` 处理失败。",
+    "`Base& br { base };` 中引用绑定到的是 `Base` 对象，而不是 `Derived` 对象，因此转换为 `Derived&` 会触发失败处理。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`dynamic_cast<Derived&>(br)` 转换失败时，原文捕获了什么异常？",
+      "a": "捕获 `const bad_cast&`，即 `std::bad_cast` 类型的异常。"
+    },
+    {
+      "q": "原文在捕获转换异常后输出什么文本？",
+      "a": "输出 `Bad cast!`。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++继承与基类引用",
+    "C++异常处理"
+  ],
+  "source_pages": [
+    349,
+    352
+  ],
+  "needs_verification": true,
+  "verify_query": "C++ dynamic_cast reference failure std::bad_cast Base& Derived& example Bad cast",
+  "concept_id": "453_dynamic_cast_的引用转换失败与_std_bad_cast",
+  "_chunk_pages": [
+    349,
+    352
+  ]
+}

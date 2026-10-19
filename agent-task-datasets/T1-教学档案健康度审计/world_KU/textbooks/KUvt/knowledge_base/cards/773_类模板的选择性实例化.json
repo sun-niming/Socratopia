@@ -1,0 +1,44 @@
+{
+  "title": "类模板的选择性实例化",
+  "definition": "类模板只有在被实例化为某个具体类型时，相关代码才会生成。对于隐式实例化，编译器会为类模板的所有虚方法生成代码，但只会为实际被调用的非虚方法生成代码；未被使用的非虚方法通常不会被编译。该行为称为选择性实例化。若程序中没有将类模板实例化为任何类型，类方法的定义也不会被编译。",
+  "key_points": [
+    "例如只调用 Grid<int> 对象的 at() 方法时，编译器可能只生成 int 版本的构造函数、析构函数和非 const at() 方法。",
+    "未调用的拷贝构造函数、赋值运算符、getHeight() 等非虚方法可能不会生成代码，因此其中的编译错误可能被忽略。",
+    "可以使用显式实例化强制编译某个具体类型的类模板的所有方法，例如：\n\n```cpp\ntemplate class Grid<int>;\n```",
+    "进行显式实例化测试时，除了 int 等基本类型，也应尝试 string 等更复杂的类型，以暴露更多问题。"
+  ],
+  "examples": [
+    "如果 main() 中只有：\n\n```cpp\nmyIntGrid.at(0, 0) = 10;\n```\n\n则通常只需要生成实际使用到的 Grid<int> 方法。",
+    "显式实例化：\n\n```cpp\ntemplate class Grid<int>;\n```"
+  ],
+  "misconceptions": [
+    "类模板定义一出现，所有成员方法就一定都会被编译。",
+    "未被调用的方法没有编译错误，因此它们一定是正确的。",
+    "显式实例化只会生成已经调用过的方法。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "什么是类模板的选择性实例化？",
+      "a": "它是指编译器只为具体实例中实际使用的非虚方法生成代码，而不是为所有非虚方法都生成代码；虚方法会按原文所述生成代码。"
+    },
+    {
+      "q": "如何强制编译 Grid<int> 的所有类模板方法？",
+      "a": "使用显式实例化语句：\n\n```cpp\ntemplate class Grid<int>;\n```"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "类模板与模板实例化"
+  ],
+  "source_pages": [
+    381,
+    381
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 class template implicit instantiation selective instantiation virtual non-virtual member functions explicit instantiation all members standard",
+  "concept_id": "773_类模板的选择性实例化",
+  "_chunk_pages": [
+    381,
+    384
+  ]
+}

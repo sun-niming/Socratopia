@@ -1,0 +1,42 @@
+{
+  "title": "使用 flush 立即刷新输出流",
+  "definition": "`cout.flush()` 用于刷新标准输出流，使已经插入流中的内容被写出。原文示例先输出 `abc` 并调用 `cout.flush()`，然后输出 `def` 并使用 `endl`。",
+  "key_points": [
+    "`cout << \"abc\"; cout.flush();` 用于刷新已经写入流中的 `abc`。",
+    "`endl` 也具有刷新输出流的作用。",
+    "原文将 `flush()` 与输出是否已经写到控制台联系起来。"
+  ],
+  "examples": [
+    "```text\ncout << \"abc\";\ncout.flush();\ncout << \"def\" << endl;\n```\n原文注释说明：`abc` 在刷新时写入控制台，`def` 在随后使用 `endl` 时写入控制台。"
+  ],
+  "misconceptions": [
+    "仅把字符插入 `cout` 并不等同于显式调用 `flush()`；显式刷新应调用 `cout.flush()`。",
+    "`flush()` 不负责添加换行；需要换行时应另行输出换行符或使用 `endl`。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何显式刷新 `cout`？",
+      "a": "调用 `cout.flush()`。"
+    },
+    {
+      "q": "`endl` 与 `flush()` 的关系是什么？",
+      "a": "原文说明 `endl` 会刷新输出流；`flush()` 则是显式执行刷新操作。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++标准输出流",
+    "endl"
+  ],
+  "source_pages": [
+    413,
+    416
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "539_使用_flush_立即刷新输出流",
+  "_chunk_pages": [
+    413,
+    416
+  ]
+}

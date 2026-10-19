@@ -1,0 +1,45 @@
+{
+  "title": "在C++代码中使用C字符串库",
+  "definition": "练习要求说明如何在C++代码中使用一个提供reverseString和freeString函数的C库。使用时，应根据C库接口调用reverseString获得反转后的新字符串，并在使用完毕后调用freeString释放该字符串所占用的内存。",
+  "key_points": [
+    "C++代码需要按照C库公开的函数声明调用函数。",
+    "reverseString返回的新字符串由C库分配，调用方负责按约定释放。",
+    "调用方应保持从分配到使用再到释放的完整生命周期。",
+    "该练习属于C与C++混用场景，重点是正确使用跨语言库接口和内存所有权约定。"
+  ],
+  "examples": [
+    "使用流程可写成：`char* reversed = reverseString(source);`；使用`reversed`；最后执行`freeString(reversed);`。",
+    "如果C++代码调用该C库，应确保传入参数符合函数声明中的`char*`要求，并遵守库注释中关于释放返回内存的约定。"
+  ],
+  "misconceptions": [
+    "调用方不能因为代码运行在C++中，就直接用不匹配的释放方式替代库接口约定。",
+    "reverseString得到的字符串不能在释放后继续使用。",
+    "跨语言调用不仅要关注函数名和参数类型，还要遵守被调用库规定的内存管理方式。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "在C++中调用reverseString后，返回的字符串如何处理？",
+      "a": "先使用该字符串；使用完毕后调用freeString释放由reverseString分配的内存。"
+    },
+    {
+      "q": "使用这个C库时最重要的资源管理规则是什么？",
+      "a": "reverseString分配的内存必须由freeString释放，不能遗忘释放或在释放后继续使用。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C与C++混合编程",
+    "动态内存管理"
+  ],
+  "source_pages": [
+    989,
+    989
+  ],
+  "needs_verification": true,
+  "verify_query": "\"reverseString\" \"freeString\" C++ calling C library memory management",
+  "concept_id": "2032_在c_代码中使用c字符串库",
+  "_chunk_pages": [
+    989,
+    992
+  ]
+}

@@ -1,0 +1,50 @@
+{
+  "title": "[[noreturn]]属性",
+  "definition": "`[[noreturn]]` 用于标记不会把控制流正常返回给调用者的函数。原文使用该属性标记 `forceProgramTermination`，函数内部调用 `std::exit(1)` 终止程序执行。",
+  "key_points": [
+    "原文声明为 `[[noreturn]] void forceProgramTermination()`。",
+    "函数内部调用 `std::exit(1)`，其中 `std::exit` 定义在 `<cstdlib>` 中。",
+    "在授权检查示例中，如果没有找到许可 dongle，就调用 `forceProgramTermination()` 终止程序；否则继续执行并返回授权检查结果。",
+    "如果编译器无法确认某个非 `void` 函数的所有控制路径都返回值，可能发出“not all control paths return a value”警告。"
+  ],
+  "examples": [
+    "`[[noreturn]] void forceProgramTermination() { std::exit(1); }`",
+    "`if (!isDongleAvailable()) { forceProgramTermination(); } else { ... }`"
+  ],
+  "misconceptions": [
+    "`[[noreturn]]` 不是表示函数返回类型为 `void`；它表示函数不会正常返回到调用点。",
+    "标记为 `[[noreturn]]` 的函数不应存在能够正常返回的执行路径。",
+    "调用 `[[noreturn]]` 函数后，控制流分析可以据此认为该路径不会继续执行。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`[[noreturn]]` 表示什么？",
+      "a": "表示被标记的函数不会正常返回到调用者。"
+    },
+    {
+      "q": "原文中的 `forceProgramTermination` 为什么适合使用 `[[noreturn]]`？",
+      "a": "因为它调用 `std::exit(1)` 终止程序，不会正常返回到调用它的代码位置。"
+    },
+    {
+      "q": "`std::exit(1)` 定义在哪个头文件中？",
+      "a": "原文指出它定义在 `<cstdlib>` 中。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++属性语法[[attribute]]",
+    "函数返回值与return语句",
+    "条件语句"
+  ],
+  "source_pages": [
+    53,
+    56
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "071_noreturn_属性",
+  "_chunk_pages": [
+    53,
+    56
+  ]
+}

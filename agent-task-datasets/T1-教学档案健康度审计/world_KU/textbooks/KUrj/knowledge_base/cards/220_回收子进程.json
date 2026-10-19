@@ -1,0 +1,37 @@
+{
+  "title": "回收子进程",
+  "definition": "子进程结束后，如果父进程不读取其退出状态，就会留下僵尸进程。并发请求多了以后，僵尸进程会堆积；使用 `SIGCHLD` 配合 `waitpid(-1, NULL, WNOHANG)` 可以非阻塞回收子进程。",
+  "key_points": [
+    "不回收子进程会产生僵尸进程。",
+    "并发请求多时，僵尸进程可能堆积。",
+    "可用 `SIGCHLD` 和 `waitpid(-1, NULL, WNOHANG)` 非阻塞回收。"
+  ],
+  "examples": [
+    "`waitpid(-1, NULL, WNOHANG)` 用于回收已退出的子进程。"
+  ],
+  "misconceptions": [
+    "子进程退出后资源不会自动全部清理干净，父进程仍需回收。",
+    "僵尸进程不是“活着的子进程”，而是退出后未被回收的记录。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么要回收子进程？",
+      "a": "因为子进程结束后若父进程不读取退出状态，会留下僵尸进程；可用 `SIGCHLD` 和 `waitpid(-1, NULL, WNOHANG)` 非阻塞回收。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "fork 后子进程关 listen_fd"
+  ],
+  "source_pages": [
+    129,
+    132
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "220_回收子进程",
+  "_chunk_pages": [
+    129,
+    132
+  ]
+}

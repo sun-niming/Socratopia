@@ -1,0 +1,44 @@
+{
+  "title": "std::string_view 与 std::string 的显式转换",
+  "definition": "不能从 `std::string_view` 隐式构造 `std::string`。当函数要求 `const std::string&` 或需要一个拥有字符串数据的 `std::string` 时，应使用显式的 `std::string` 构造函数，或在确实满足接口要求时使用 `string_view::data()`。",
+  "key_points": [
+    "若函数声明为 `void handleExtension(const std::string& extension)`，不能直接传入 `extractExtension(\"my file.ext\")` 这样的 `std::string_view` 返回值。",
+    "可通过显式构造转换：`handleExtension(std::string{extractExtension(\"my file.ext\")});`。",
+    "也可以传递 `extractExtension(\"my file.ext\").data()`，但这要求被调用函数把参数当作以 NUL 终止的字符序列使用；`data()` 本身不保证 NUL 终止。",
+    "`std::string` 与 `std::string_view` 不能直接使用需要同类对象的连接操作；可以使用 `append(data, size)` 等接口。"
+  ],
+  "examples": [
+    "显式转换为 `std::string`：`handleExtension(std::string{extractExtension(\"my file.ext\")});`。",
+    "将视图内容追加到字符串：`std::string result2; result2.append(sv.data(), sv.size());`。"
+  ],
+  "misconceptions": [
+    "`std::string_view` 可以隐式转换为 `std::string`，这是错误的；教材要求使用显式构造。",
+    "直接使用 `data()` 就一定安全，这是错误的；必须确认目标接口需要的字符序列形式与视图的实际存储状态相容。",
+    "显式构造 `std::string` 会创建字符串副本，这与仅传递 `std::string_view` 不同。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何把 `std::string_view sv` 显式转换为 `std::string`？",
+      "a": "使用显式构造函数：`std::string{sv}`。"
+    },
+    {
+      "q": "如何把 `std::string_view` 的全部内容追加到 `std::string result`？",
+      "a": "使用带指针和长度的接口：`result.append(sv.data(), sv.size());`。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "std::string_view 的用途与特性"
+  ],
+  "source_pages": [
+    113,
+    114
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 std::string_view 到 std::string 显式构造 data append data size 标准文档",
+  "concept_id": "216_std_string_view_与_std_string_的显式转换",
+  "_chunk_pages": [
+    113,
+    116
+  ]
+}

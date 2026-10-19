@@ -1,0 +1,44 @@
+{
+  "title": "Simon S. Lam访谈中的网络发展观点",
+  "definition": "教材访谈介绍了 Simon S. Lam 的网络研究经历和观点：早期分组网络研究涉及时隙 ALOHA 的回退算法、ALOHA 的不稳定性和自适应回退；他认为 ARPANET、分组卫星和分组无线电等网络的发展推动了互联策略的需求。",
+  "key_points": [
+    "Lam 在 UCLA 的 ARPA 网络测量中心从事卫星和无线电分组交换方面的工作。",
+    "他参与了时隙 ALOHA 协议简单实用回退算法的研究。",
+    "ALOHA 的不稳定性和自适应回退需求构成其学位论文研究的核心。",
+    "随着 ARPANET、分组卫星和分组无线电等多个分组网络的发展，网络互联策略变得必要。"
+  ],
+  "examples": [
+    "教材描述的历史发展链条是：ARPANET 最初用于让科学家远程使用昂贵计算机；分组卫星项目和分组无线电项目启动后，网络数量和类型增加，因而需要研究网络互联策略。"
+  ],
+  "misconceptions": [
+    "ARPANET 最初的目标并不是直接构建今天规模的全球因特网，而是提供远程访问昂贵计算机的手段。",
+    "网络互联需求是在多个不同分组网络出现并发展后变得更加迫切的。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "ARPANET 最初规定的目标是什么？",
+      "a": "提供从远程位置接入昂贵计算机的手段，使许多科学家能够使用这些计算机。"
+    },
+    {
+      "q": "为什么网络互联策略变得必要？",
+      "a": "因为分组卫星和分组无线电等项目启动后，ARPA 同时建造了多个不同的分组网络，需要将它们互联。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "分组交换",
+    "ARPANET",
+    "ALOHA协议"
+  ],
+  "source_pages": [
+    353,
+    356
+  ],
+  "needs_verification": true,
+  "verify_query": "Simon S. Lam UCLA ARPA network measurement center slotted ALOHA backoff algorithm 1972 biography",
+  "concept_id": "827_simon_s_lam访谈中的网络发展观点",
+  "_chunk_pages": [
+    353,
+    356
+  ]
+}

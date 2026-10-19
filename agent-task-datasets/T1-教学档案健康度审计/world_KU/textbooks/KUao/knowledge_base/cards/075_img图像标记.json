@@ -1,0 +1,46 @@
+{
+  "title": "img图像标记",
+  "definition": "`<img>`是HTML中用于在网页中插入图片的标记，它是行内元素。常用属性包括：`src`、`alt`、`title`、`align`、`width`、`height`。其中，`src`用于指定图片文件的URL地址，`alt`用于图片无法显示时的替换文字，`title`用于鼠标停留在图片上时显示的说明文字，`align`用于设置图片对齐方式，默认是基线对齐，`width`和`height`用于设置图片在网页中的宽和高。",
+  "key_points": [
+    "`<img>`用于在网页中插入图片，且是行内元素。",
+    "`src`指定图片文件的URL地址。",
+    "`alt`是在图片无法显示时显示的替换文字。",
+    "`title`是在鼠标停留在图片上时显示的说明文字。",
+    "`align`控制图片对齐方式，默认是基线对齐。",
+    "`width`和`height`控制图片显示宽度和高度。"
+  ],
+  "examples": [
+    "<img src=\"photo.jpg\" alt=\"风景图\" title=\"点击查看\" width=\"300\" height=\"200\">",
+    "<img src=\"logo.png\" alt=\"网站标志\">"
+  ],
+  "misconceptions": [
+    "`alt`不是鼠标悬停提示文字，悬停提示文字是`title`。",
+    "`<img>`不是块级元素，而是行内元素。",
+    "`width`和`height`描述的是网页中显示出来的尺寸，不是图片文件本身一定被永久改成这个大小。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`<img>`标签的主要作用是什么？",
+      "a": "用于在网页中插入图片。"
+    },
+    {
+      "q": "图片无法显示时，浏览器会显示哪个属性的内容？",
+      "a": "`alt`属性的替换文字。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "HTML基础"
+  ],
+  "source_pages": [
+    57,
+    60
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "075_img图像标记",
+  "_chunk_pages": [
+    57,
+    60
+  ]
+}

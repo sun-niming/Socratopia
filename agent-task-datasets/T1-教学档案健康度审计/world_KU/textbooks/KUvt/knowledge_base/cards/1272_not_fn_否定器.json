@@ -1,0 +1,43 @@
+{
+  "title": "not_fn 否定器",
+  "definition": "not_fn 是一种否定器适配器，用于对可调用对象每次调用的结果取逻辑补值。如果原可调用对象返回 true，not_fn 结果为 false；如果原结果为 false，not_fn 结果为 true。",
+  "key_points": [
+    "not_fn 可以包装函数对象、函数指针或其他可调用对象。",
+    "它不改变原可调用对象的参数传递方式，只补充其返回结果。",
+    "教材示例使用 not_fn(intEqual) 查找不相等的值对。"
+  ],
+  "examples": [
+    "findMatches(values1, values2, not_fn(intEqual), printMatch);",
+    "如果 intEqual(a, b) 返回 true，则 not_fn(intEqual)(a, b) 返回 false；反之亦然。"
+  ],
+  "misconceptions": [
+    "not_fn 不是把参数取反，而是把可调用对象的返回结果取逻辑反值。",
+    "使用 not_fn 需要原可调用对象能够被正常调用，并具有可转换为逻辑值的结果。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "not_fn(intEqual) 的作用是什么？",
+      "a": "它对 intEqual 的每次调用结果取逻辑补值，因此可用于匹配不相等的值对。"
+    },
+    {
+      "q": "如果 intEqual(3, 3) 返回 true，那么 not_fn(intEqual)(3, 3) 返回什么？",
+      "a": "返回 false。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "函数对象适配器",
+    "逻辑非运算"
+  ],
+  "source_pages": [
+    616,
+    616
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1272_not_fn_否定器",
+  "_chunk_pages": [
+    613,
+    616
+  ]
+}

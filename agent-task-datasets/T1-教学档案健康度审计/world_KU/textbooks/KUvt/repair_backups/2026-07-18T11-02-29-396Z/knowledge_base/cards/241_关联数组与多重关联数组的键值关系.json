@@ -1,0 +1,46 @@
+{
+  "title": "关联数组与多重关联数组的键值关系",
+  "definition": "关联数组（AssociativeArray）按照键保存值，一个键通常对应一个值；多重关联数组（MultiAssociativeArray）允许同一个键对应多个值。原文中的接口对比显示，关联数组提供 `insert(key, value)` 和 `get(key)`，多重关联数组提供 `insert(key, value)` 和 `getAll(key)`，其中 `getAll(key)` 用于取得某个键对应的全部值。",
+  "key_points": [
+    "AssociativeArray 的典型操作是 `insert(key, value)` 和 `get(key)`。",
+    "MultiAssociativeArray 的典型操作是 `insert(key, value)` 和 `getAll(key)`。",
+    "原文将 `MultiAssociativeArray` 与 C++ 的 `multimap` 联系起来，将 `AssociativeArray` 与 C++ 的 `map` 联系起来。",
+    "根据原文图示，MultiAssociativeArray 与 AssociativeArray 具有相近的插入接口，但读取结果的语义不同：前者读取多个值，后者读取单个值。"
+  ],
+  "examples": [
+    "关联数组示例：键 `14534` 对应一个值：`14534 -> \"Kleper, Scott\"`。",
+    "多重关联数组示例：键 `14534` 对应多个值：$$14534\\mapsto\\{\\text{\"Kleper, Scott\"},\\text{\"Kleper, Marni\"}\\}$$",
+    "对应的 C++ 容器示例：`std::map` 通常表示一个键关联一个值，`std::multimap` 可表示一个键关联多个值。"
+  ],
+  "misconceptions": [
+    "不要把 `getAll(key)` 理解为只返回一个值；原文将它作为 MultiAssociativeArray 的读取操作。",
+    "不要认为 MultiAssociativeArray 只是把多个值拼接成一个字符串；原文示例显示它保存的是多个独立元素。",
+    "`map` 与 `multimap` 的具体标准库接口和重复键行为需要结合 C++ 标准库定义理解，不能仅凭图中文字推断全部细节。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "AssociativeArray 和 MultiAssociativeArray 的主要区别是什么？",
+      "a": "AssociativeArray 通常使一个键对应一个值，并通过 `get(key)` 取得该值；MultiAssociativeArray 允许一个键对应多个值，并通过 `getAll(key)` 取得全部值。"
+    },
+    {
+      "q": "原文中的键 `14534` 最终关联了哪些值？",
+      "a": "原文示例最终显示它关联了 `\"Kleper, Scott\"` 和 `\"Kleper, Marni\"`。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "键值对和关联容器的基本概念"
+  ],
+  "source_pages": [
+    173,
+    174,
+    175
+  ],
+  "needs_verification": true,
+  "verify_query": "《C++20高级编程》第5版 第173-175页 AssociativeArray MultiAssociativeArray getAll map multimap LSP 原文",
+  "concept_id": "241_关联数组与多重关联数组的键值关系",
+  "_chunk_pages": [
+    173,
+    176
+  ]
+}

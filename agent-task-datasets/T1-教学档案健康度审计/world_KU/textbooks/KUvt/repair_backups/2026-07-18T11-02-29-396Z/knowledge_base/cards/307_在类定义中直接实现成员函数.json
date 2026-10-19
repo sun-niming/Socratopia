@@ -1,0 +1,45 @@
+{
+  "title": "在类定义中直接实现成员函数",
+  "definition": "成员函数既可以只在类定义中声明，也可以直接在类定义的函数体中实现。在类定义中直接实现的成员函数，其函数体写在声明后面；示例中setValue把参数赋给m_value，getValue返回m_value，且m_value使用花括号初始化为0。",
+  "key_points": [
+    "成员函数定义需要包含函数体。",
+    "setValue(double value)的作用是执行m_value = value。",
+    "getValue() const的作用是返回m_value。",
+    "double m_value { 0 };表示对象构造时将m_value初始化为0。",
+    "类内定义与类外定义都可以实现成员函数，但具体组织方式不同。"
+  ],
+  "examples": [
+    "export module spreadsheet_cell;\nexport class SpreadsheetCell {\npublic:\n    void setValue(double value) { m_value = value; }\n    double getValue() const { return m_value; }\nprivate:\n    double m_value { 0 };\n};"
+  ],
+  "misconceptions": [
+    "只写函数声明（例如void setValue(double value);）并不等于已经提供了函数实现。",
+    "getValue() const不能随意修改m_value，因为const成员函数承诺不修改对象状态。",
+    "m_value { 0 }是成员初始化，不是每次调用getValue时才赋值。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "类内定义的setValue函数执行什么操作？",
+      "a": "执行m_value = value，将传入的double参数保存到对象的m_value成员中。"
+    },
+    {
+      "q": "示例中m_value的初始值是什么？",
+      "a": "m_value使用花括号初始化为0，即double m_value { 0 };。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++类成员函数",
+    "C++成员初始化"
+  ],
+  "source_pages": [
+    229,
+    232
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "307_在类定义中直接实现成员函数",
+  "_chunk_pages": [
+    229,
+    232
+  ]
+}

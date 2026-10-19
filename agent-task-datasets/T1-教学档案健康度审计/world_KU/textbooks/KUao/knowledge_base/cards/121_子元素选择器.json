@@ -1,0 +1,37 @@
+{
+  "title": "子元素选择器",
+  "definition": "子元素选择器用于只匹配某个元素的直接子元素。它由两个选择器用大于号 > 连接，表示第二个选择器匹配的元素必须是第一个选择器匹配元素的直接子元素。",
+  "key_points": [
+    "格式：选择器1 > 选择器2 { 属性:值; }",
+    "连接符号是 >（大于号）",
+    "只匹配直接子元素，不匹配更深层的后代",
+    "选择器可以是标签名，也可以是 id 或 class 名称"
+  ],
+  "examples": [
+    "p > strong { color: blue; }\nHTML：<p><em>天使<strong>投资</strong></em>是<strong>投资</strong>方式的一种</p>"
+  ],
+  "misconceptions": [
+    "误以为子元素选择器可以匹配所有后代；实际上它只匹配直接子元素。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "子元素选择器与后代选择器的核心区别是什么？",
+      "a": "子元素选择器只匹配直接子元素；后代选择器可以匹配任意层级的后代元素。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "CSS选择器"
+  ],
+  "source_pages": [
+    93,
+    96
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "121_子元素选择器",
+  "_chunk_pages": [
+    93,
+    96
+  ]
+}

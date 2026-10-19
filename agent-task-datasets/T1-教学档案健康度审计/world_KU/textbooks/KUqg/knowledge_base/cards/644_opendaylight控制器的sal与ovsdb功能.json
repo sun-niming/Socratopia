@@ -1,0 +1,42 @@
+{
+  "title": "OpenDaylight控制器的SAL与OVSDB功能",
+  "definition": "OpenDaylight（ODL）的基本网络服务功能是控制器的核心，密切对应于网络范围状态管理能力。服务抽象层（SAL）是控制器的神经中枢，允许控制器组件和应用程序相互调用服务、订阅服务产生的事件，并在通信层为底层协议提供统一的抽象接口。SAL支持的底层通信协议包括OpenFlow和SNMP。OVSDB是用于管理数据中心交换的协议，数据中心交换是SDN技术的重要应用领域。",
+  "key_points": [
+    "SAL允许控制器组件和应用程序相互调用服务。",
+    "SAL支持对事件进行订阅，使组件和应用程序能够获得相关状态变化通知。",
+    "SAL对OpenFlow、SNMP等底层通信协议提供统一抽象接口。",
+    "OVSDB用于管理数据中心交换。"
+  ],
+  "examples": [
+    "控制器应用程序可以通过SAL调用网络服务，而不必直接处理OpenFlow或SNMP的具体通信细节。"
+  ],
+  "misconceptions": [
+    "SAL不是一种具体的底层交换协议，而是控制器内部提供服务调用和协议抽象的中枢。",
+    "OVSDB不是用于所有网络设备的一般性协议，原文明确将其与数据中心交换管理联系起来。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "SAL在OpenDaylight控制器中起什么作用？",
+      "a": "SAL是控制器的神经中枢，允许控制器组件和应用程序相互调用服务、订阅事件，并为OpenFlow、SNMP等底层协议提供统一抽象接口。"
+    },
+    {
+      "q": "OVSDB主要用于管理什么？",
+      "a": "OVSDB主要用于管理数据中心交换。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "软件定义网络控制平面"
+  ],
+  "source_pages": [
+    289,
+    292
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "644_opendaylight控制器的sal与ovsdb功能",
+  "_chunk_pages": [
+    289,
+    292
+  ]
+}

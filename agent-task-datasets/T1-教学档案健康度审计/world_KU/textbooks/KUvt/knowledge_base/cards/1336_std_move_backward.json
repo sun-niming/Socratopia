@@ -1,0 +1,43 @@
+{
+  "title": "std::move_backward",
+  "definition": "std::move_backward 使用与 std::move 相同的移动机制，但按照从范围末尾到范围开头的逆序移动元素。它适用于需要从后向前处理元素的范围移动场景。",
+  "key_points": [
+    "std::move_backward 的移动方向是从最后一个元素到第一个元素。",
+    "它与 std::move 一样通过移动赋值等移动机制处理元素。",
+    "在满足与 std::copy 和 std::copy_backward 相同的范围重叠限制时，源范围和目标范围可以重叠。"
+  ],
+  "examples": [
+    "std::move_backward(begin(source), end(source), end(destination));",
+    "若源范围和目标范围重叠，应按照与 std::copy_backward 相同的规则选择范围关系，以避免覆盖尚未移动的元素。"
+  ],
+  "misconceptions": [
+    "std::move_backward 不是把移动后的对象恢复到原位置，而是逆序执行范围移动。",
+    "允许范围重叠并不意味着所有重叠方式都安全，仍须满足相应的范围限制。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "std::move_backward 按什么顺序移动元素？",
+      "a": "从最后一个元素向第一个元素移动。"
+    },
+    {
+      "q": "std::move_backward 的范围重叠限制与哪些算法相同？",
+      "a": "与 std::copy 和 std::copy_backward 的相应限制相同。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "std::move算法",
+    "迭代器范围"
+  ],
+  "source_pages": [
+    642,
+    642
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1336_std_move_backward",
+  "_chunk_pages": [
+    641,
+    644
+  ]
+}

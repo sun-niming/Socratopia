@@ -1,0 +1,45 @@
+{
+  "title": "文件作用域static与内部链接",
+  "definition": "在C++中，文件作用域的static声明可使名称具有内部链接，使该名称只能在当前翻译单元中使用，不能被其他源文件直接引用。原文通过FirstFile.cpp和AnotherFile.cpp中的函数示例说明了这种可见范围限制。",
+  "key_points": [
+    "在源文件作用域定义static函数时，该函数通常只在定义它的源文件内可见。",
+    "不同源文件可以各自定义同名的文件作用域static函数，因为它们属于不同的翻译单元。",
+    "例如FirstFile.cpp中的static void f()不能被AnotherFile.cpp直接调用。",
+    "这种static与函数体内部局部变量的static含义不同：此处重点是文件作用域名称的链接属性。"
+  ],
+  "examples": [
+    "FirstFile.cpp：\nstatic void f()\n{\n    // 只能在FirstFile.cpp中使用\n}",
+    "AnotherFile.cpp可以定义自己的同名函数：\nstatic void f()\n{\n    // 与FirstFile.cpp中的static f相互独立\n}"
+  ],
+  "misconceptions": [
+    "文件作用域static函数不是整个程序只能存在一个；不同翻译单元可以各自拥有同名的static函数。",
+    "static函数不能被其他源文件直接调用，并不表示函数不能在当前源文件内多次调用。",
+    "这里的static主要体现内部链接和文件范围，而不是把函数变成类的静态成员函数。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "FirstFile.cpp中的static函数f能否被AnotherFile.cpp直接调用？",
+      "a": "不能。文件作用域static使f具有内部链接，只能在FirstFile.cpp这个翻译单元中使用。"
+    },
+    {
+      "q": "FirstFile.cpp和AnotherFile.cpp能否分别定义同名的文件作用域static函数？",
+      "a": "可以。两个函数分别属于不同翻译单元，具有各自的内部链接，彼此独立。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "编译单元与链接",
+    "C++函数声明与定义"
+  ],
+  "source_pages": [
+    363,
+    364
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 文件作用域 static 内部链接 FirstFile.cpp AnotherFile.cpp static void f 教材第363-364页",
+  "concept_id": "464_文件作用域static与内部链接",
+  "_chunk_pages": [
+    361,
+    364
+  ]
+}

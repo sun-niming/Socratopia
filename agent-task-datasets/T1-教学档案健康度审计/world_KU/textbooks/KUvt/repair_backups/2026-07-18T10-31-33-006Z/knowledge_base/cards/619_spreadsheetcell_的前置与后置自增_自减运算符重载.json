@@ -1,0 +1,45 @@
+{
+  "title": "SpreadsheetCell 的前置与后置自增、自减运算符重载",
+  "definition": "类可以通过重载成员运算符，为 SpreadsheetCell 提供前置和后置自增、自减操作。前置自增通常声明为 `SpreadsheetCell& operator++()`，先将单元格值加 1，再返回当前对象的引用；后置自增通常声明为 `SpreadsheetCell operator++(int)`，其中形参 `int` 仅用于区分后置形式，返回自增前对象的副本。自减运算符遵循相同的前置/后置区分方式。",
+  "key_points": [
+    "前置自增的典型声明是 `SpreadsheetCell& operator++()`，返回引用，表示先修改对象再返回修改后的对象。",
+    "后置自增的典型声明是 `SpreadsheetCell operator++(int)`，形参 `int` 是区分后置形式的占位参数，调用时不需要显式传入。",
+    "后置自增可以先保存旧对象，再通过前置自增完成实际递增，最后返回旧对象副本。",
+    "原文中的递增逻辑是将单元格值设置为原值加 1，即 `set(getValue() + 1)`。"
+  ],
+  "examples": [
+    "前置自增的使用：`SpreadsheetCell c2{4}; ++c2;`，执行后 `c2` 的值增加 1。",
+    "后置自增的典型实现逻辑：`auto oldCell(*this); ++(*this); return oldCell;`。"
+  ],
+  "misconceptions": [
+    "后置自增声明中的 `int` 不是要求调用者传入一个整数，而是 C++ 用来区分前置和后置运算符的特殊占位参数。",
+    "前置自增和后置自增都可以修改对象，但前置形式返回修改后的对象，后置形式返回修改前的副本。",
+    "后置自增的返回类型通常不是引用，因为它需要表示递增前的旧值。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "SpreadsheetCell 的前置自增和后置自增在函数声明上有什么区别？",
+      "a": "前置自增声明为 `SpreadsheetCell& operator++()`；后置自增声明为 `SpreadsheetCell operator++(int)`，后者带有一个仅用于区分形式的 `int` 参数。"
+    },
+    {
+      "q": "为什么后置自增实现中要先保存 `oldCell`？",
+      "a": "因为后置自增表达式的结果应当是递增前的旧值，所以需要先复制当前对象，再执行递增并返回旧对象副本。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++ 运算符重载",
+    "引用返回与对象拷贝"
+  ],
+  "source_pages": [
+    477,
+    480
+  ],
+  "needs_verification": true,
+  "verify_query": "《C++20高级编程》第5版 第477页 SpreadsheetCell operator++ operator-- 前置后置自增完整代码",
+  "concept_id": "619_spreadsheetcell_的前置与后置自增_自减运算符重载",
+  "_chunk_pages": [
+    477,
+    480
+  ]
+}

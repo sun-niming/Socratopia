@@ -1,0 +1,54 @@
+{
+  "title": "从函数返回局部对象时不要滥用 std::move",
+  "definition": "当函数直接使用 return object; 返回局部变量、函数参数或临时值时，编译器可以将其作为右值处理，并可能应用返回值优化（RVO）或命名返回值优化（NRVO）。RVO 和 NRVO 属于复制省略，可以避免返回对象时的复制和移动。若改写为 return std::move(object);，编译器不能再应用 RVO 或 NRVO，只能在支持时使用移动语义，否则使用复制语义。因此，返回局部变量或参数时通常应直接写 return object;。",
+  "key_points": [
+    "RVO 是返回值优化，NRVO 是命名返回值优化；二者都属于复制省略。",
+    "直接写 return object; 时，局部变量或参数可按右值表达式处理。",
+    "写成 return std::move(object); 会阻止编译器对该返回语句应用 RVO 或 NRVO。",
+    "推荐规则：从函数返回局部变量或参数时写 return object;，不要额外写 std::move。",
+    "(N)RVO 只适用于符合条件的局部变量或函数参数；返回对象的数据成员不会触发 (N)RVO。",
+    "条件表达式 return condition ? object1 : object2; 不是直接 return object; 的形式，因此不会触发 (N)RVO；可以改写为条件分支分别返回对象。"
+  ],
+  "examples": [
+    "推荐写法：\nSpreadsheet createObject() {\n    Spreadsheet object{3, 2};\n    return object;\n}",
+    "不推荐写法：\nreturn std::move(object);\n这种写法会阻止 RVO/NRVO。",
+    "条件返回可改写为：\nif (condition) {\n    return object1;\n}\nreturn object2;"
+  ],
+  "misconceptions": [
+    "std::move 并不总能提高返回对象的性能；在返回局部变量时，它可能阻止复制省略。",
+    "RVO 和 NRVO 不是两种移动操作，而是编译器省略复制或移动的优化机制。",
+    "返回数据成员与返回局部变量不同，不能因为表达式中出现对象就认为一定会触发 (N)RVO。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么不建议写 return std::move(object); 返回局部变量？",
+      "a": "因为这种写法会使编译器无法应用 RVO 或 NRVO；随后只能尝试移动，若不能移动则会复制，可能降低性能。"
+    },
+    {
+      "q": "从函数返回局部变量时推荐怎样写？",
+      "a": "直接写 return object;。"
+    },
+    {
+      "q": "条件表达式 return condition ? object1 : object2; 是否会触发 NRVO？",
+      "a": "不会，因为它不是直接返回单个局部对象的 return object; 形式。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "左值与右值",
+    "std::move",
+    "复制省略",
+    "返回值优化"
+  ],
+  "source_pages": [
+    275,
+    275
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "578_从函数返回局部对象时不要滥用_std_move",
+  "_chunk_pages": [
+    273,
+    276
+  ]
+}

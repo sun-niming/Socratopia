@@ -1,0 +1,50 @@
+{
+  "title": "使用字符串流 ostringstream 和 istringstream 进行内存中的格式化输入输出",
+  "definition": "std::ostringstream 和 std::istringstream 是基于内存字符串的流：ostringstream 用于把格式化输出写入内存字符串，istringstream 用于从内存字符串中进行格式化输入。它们分别继承或提供 ostream、istream 的流式操作能力，相关声明位于 <sstream>。",
+  "key_points": [
+    "std::ostringstream 适合在内存中逐步构造字符串；可使用 << 写入数据。",
+    "std::istringstream 适合从已有字符串中按流格式提取数据；可使用 >> 读取数据。",
+    "ostringstream 可通过 str() 获取或设置其内部字符串；原文提到 str()。",
+    "内存流不依赖终端输入输出设备，适合在程序内部进行字符串和数值之间的格式化转换。"
+  ],
+  "examples": [
+    "构造输出字符串：\n```cpp\nostringstream outStream;\noutStream << nextToken << \"\\t\";\nstring result = outStream.str();\n```",
+    "从字符串读取下一个 token：\n```cpp\nistringstream inStream(\"one two three\");\nstring nextToken;\ninStream >> nextToken;\n```",
+    "原文示意的循环逻辑是不断读取 nextToken，并在输入失败或读到终止标记 \"done\" 时停止，然后把 token 和制表符写入 outStream：\n$$\n\\text{if }(!cin\\ ||\\ nextToken == \"done\")\\ \\text{break};\n$$"
+  ],
+  "misconceptions": [
+    "ostringstream 和 istringstream 都是在内存字符串上工作的流，不是直接连接到终端的 cin 或 cout。",
+    "ostringstream 的输出不会自动显示在屏幕上，需要通过 str() 取得字符串后再使用。",
+    "istringstream 的 >> 仍然遵循流式提取规则，例如按空白分隔读取 token。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "ostringstream 和 istringstream 的用途分别是什么？",
+      "a": "ostringstream 把格式化输出写入内存字符串；istringstream 从内存字符串中进行格式化输入。"
+    },
+    {
+      "q": "如何取得 ostringstream 当前保存的字符串？",
+      "a": "调用 outStream.str()。"
+    },
+    {
+      "q": "原文示意代码在什么情况下停止读取 token？",
+      "a": "当输入流处于错误状态，或 nextToken 等于终止标记 \"done\" 时停止。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++流式输入输出",
+    "std::string"
+  ],
+  "source_pages": [
+    421,
+    424
+  ],
+  "needs_verification": true,
+  "verify_query": "Marc Gregoire C++20 Advanced Programming 5th edition pages 424 ostringstream istringstream str done nextToken outStream",
+  "concept_id": "554_使用字符串流_ostringstream_和_istringstream_进行内",
+  "_chunk_pages": [
+    421,
+    424
+  ]
+}

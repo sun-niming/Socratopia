@@ -1,0 +1,45 @@
+{
+  "title": "使用Telnet手工查看HTTP响应",
+  "definition": "可以通过Telnet连接Web服务器的80端口，并手工输入HTTP请求报文，从而直接观察服务器返回的HTTP响应报文。请求报文最后输入两次回车，以表示首部结束。若只想查看HTTP报文行而不获取对象本身，可以使用HEAD代替GET。",
+  "key_points": [
+    "先使用Telnet连接目标主机的80端口，即建立到该主机的TCP连接。",
+    "随后输入GET请求行和Host首部行，构造HTTP请求报文。",
+    "输入最后一行后连续按两次回车。",
+    "将GET替换为HEAD可以只查看响应报文行而不获取对象本身。"
+  ],
+  "examples": [
+    "教材示例命令和请求可概括为：\n文本：telnet gaia.cs.umass.edu 80\n文本：GET /kurose_ross/interactive/index.php HTTP/1.1\n文本：Host: gaia.cs.umass.edu\n文本：空行\n",
+    "连接80端口后，服务器会返回包含指定基本HTML文件的响应报文。"
+  ],
+  "misconceptions": [
+    "Telnet在此处不是HTTP客户端专用工具，而是用于建立TCP连接并手工输入HTTP报文。",
+    "只输入请求行而不输入Host首部，不能视为教材示例中的完整HTTP/1.1请求。",
+    "HEAD仍然会得到HTTP响应，但不返回请求对象实体。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何用Telnet手工观察HTTP响应？",
+      "a": "连接Web服务器的80端口，输入包含请求行和Host首部的HTTP请求，并在最后一行后连续按两次回车。"
+    },
+    {
+      "q": "如果只想查看响应报文行而不获取对象，应使用GET还是HEAD？",
+      "a": "使用HEAD。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "HTTP请求报文格式",
+    "TCP端口"
+  ],
+  "source_pages": [
+    85,
+    88
+  ],
+  "needs_verification": true,
+  "verify_query": "Kurose Ross Computer Networking 7th edition Telnet gaia.cs.umass.edu HTTP HEAD example pages 85 88",
+  "concept_id": "223_使用telnet手工查看http响应",
+  "_chunk_pages": [
+    85,
+    88
+  ]
+}

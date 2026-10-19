@@ -1,0 +1,42 @@
+{
+  "title": "CSS动画的设计步骤与生效条件",
+  "definition": "教材中的动画设计分为两个步骤：先使用 @keyframes 规则对动画命名并定义动画的关键帧，再使用 animation 属性调用动画。要使动画生效，必须将动画绑定到某个元素。",
+  "key_points": [
+    "先用 @keyframes 定义并命名关键帧",
+    "再用 animation 属性调用动画",
+    "动画必须绑定到某个元素才能生效"
+  ],
+  "examples": [
+    "@keyframes move { ... }\n.box { animation: move 2s; }"
+  ],
+  "misconceptions": [
+    "只写 @keyframes 就会自动播放",
+    "animation 属性只能定义关键帧",
+    "动画不需要绑定元素也能生效"
+  ],
+  "qa_pairs": [
+    {
+      "q": "CSS动画设计有哪两个步骤？",
+      "a": "第一步用 @keyframes 规则对动画命名并定义关键帧；第二步使用 animation 属性调用动画。"
+    },
+    {
+      "q": "要使动画生效，还必须满足什么条件？",
+      "a": "必须将动画绑定到某个元素。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "CSS动画与关键帧"
+  ],
+  "source_pages": [
+    207,
+    208
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "292_css动画的设计步骤与生效条件",
+  "_chunk_pages": [
+    205,
+    208
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "title": "send_all 必要性",
+  "definition": "在真实的 socket 编程中，`send()` 的返回值表示“本次实际发送了多少字节”，它可能小于你要求发送的长度。因此不能默认一次 `send()` 就把整段响应发完；应该使用 `send_all()` 之类的封装，循环发送直到全部数据发出。",
+  "key_points": [
+    "`send()` 可能短发送，返回值是实际发送字节数，不一定等于请求发送长度。",
+    "HTML 很小时不容易暴露问题，但图片或稍大的 CSS 文件更容易因为短发送而出错。",
+    "`send_all()` 的职责就是把一段数据完整发送出去。"
+  ],
+  "examples": [
+    "发送响应体时不要只调用一次 `send(client_fd, buf, len)`，而应使用 `send_all(client_fd, buf, len)` 或循环调用 `send()` 直到全部字节发送完毕。"
+  ],
+  "misconceptions": [
+    "以为 `send()` 一定会一次性发送完整数据。",
+    "以为只有大文件才需要考虑发送不完整，小文件可以忽略。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么真实 socket 编程里不能只调用一次 `send()`？",
+      "a": "因为 `send()` 可能只发送了部分字节，返回值表示本次实际发送量，不能保证一次发完。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "socket 基础",
+    "HTTP 响应发送"
+  ],
+  "source_pages": [
+    21,
+    24
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "017_send_all_必要性",
+  "_chunk_pages": [
+    21,
+    24
+  ]
+}

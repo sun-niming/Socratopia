@@ -1,0 +1,45 @@
+{
+  "title": "默认new和new[]分配失败时抛出bad_alloc",
+  "definition": "使用普通的new或new[]进行动态内存分配时，如果无法满足分配请求，C++会报告内存分配失败；教材示例使用catch (const bad_alloc& e)捕获这种失败。bad_alloc来自标准库，用于表示动态内存分配失败。",
+  "key_points": [
+    "new和new[]都可能因为请求的内存量过大而分配失败。",
+    "教材示例通过numeric_limits<size_t>::max()构造极大的integerCount，然后尝试执行ptr = new int[integerCount];。",
+    "分配失败时，可以使用catch (const bad_alloc& e)捕获异常，并通过e.what()获取说明信息。",
+    "捕获分配失败后，应执行相应的错误处理，例如输出错误信息并从当前函数返回。"
+  ],
+  "examples": [
+    "示例代码结构：try { ptr = new int[integerCount]; } catch (const bad_alloc& e) { cerr << e.what() << endl; return; }",
+    "教材示例使用numeric_limits<size_t>::max()作为integerCount，表示尝试为极大量的整数分配空间，以演示分配失败处理。"
+  ],
+  "misconceptions": [
+    "认为new分配失败时一定返回nullptr；普通new失败时教材示例采用捕获bad_alloc异常的方式处理。",
+    "认为只有new[]会分配失败；普通new和new[]都可能报告内存分配失败。",
+    "认为捕获bad_alloc后程序可以无条件继续使用ptr；分配失败后应先执行错误处理，不能假定内存已经成功分配。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "普通new或new[]分配失败时，教材示例捕获什么异常？",
+      "a": "捕获const bad_alloc&类型的异常。"
+    },
+    {
+      "q": "bad_alloc异常被捕获后通常需要做什么？",
+      "a": "输出或记录分配失败信息，并执行错误处理，例如返回当前函数，避免继续执行依赖成功分配的代码。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++异常处理基础",
+    "动态内存分配"
+  ],
+  "source_pages": [
+    459,
+    460
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "600_默认new和new_分配失败时抛出bad_alloc",
+  "_chunk_pages": [
+    457,
+    460
+  ]
+}

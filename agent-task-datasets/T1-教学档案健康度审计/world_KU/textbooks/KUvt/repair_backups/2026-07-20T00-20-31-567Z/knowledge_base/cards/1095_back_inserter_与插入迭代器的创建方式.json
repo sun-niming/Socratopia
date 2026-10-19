@@ -1,0 +1,43 @@
+{
+  "title": "back_inserter 与插入迭代器的创建方式",
+  "definition": "std::back_inserter() 是创建 back_insert_iterator 的实用函数。它可以用目标容器直接生成适合算法使用的尾部插入迭代器。C++ 的类模板实参推导（CTAD）也允许直接用 back_insert_iterator{container} 创建对象。",
+  "key_points": [
+    "std::back_inserter(vectorTwo) 等价于为 vectorTwo 创建 back_insert_iterator。",
+    "使用 back_inserter 时不必单独声明插入迭代器变量。",
+    "也可以使用 back_insert_iterator{vectorTwo}，由 CTAD 推导模板参数。"
+  ],
+  "examples": [
+    "myCopy(cbegin(vectorOne), cend(vectorOne), back_inserter(vectorTwo));",
+    "myCopy(cbegin(vectorOne), cend(vectorOne), back_insert_iterator{vectorTwo});"
+  ],
+  "misconceptions": [
+    "back_inserter() 不是把元素立即插入容器的函数；它创建的是一个插入迭代器，实际插入发生在算法向该迭代器写入元素时。",
+    "back_insert_iterator{vectorTwo} 依赖类模板实参推导，不是要求手动写出完整模板参数的唯一形式。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何不声明单独的 inserter 变量，直接把 vectorOne 的元素复制到 vectorTwo 的尾部？",
+      "a": "调用 myCopy(cbegin(vectorOne), cend(vectorOne), back_inserter(vectorTwo))。"
+    },
+    {
+      "q": "如何利用 CTAD 创建 back_insert_iterator？",
+      "a": "使用 back_insert_iterator{vectorTwo}。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "插入迭代器",
+    "类模板实参推导 CTAD"
+  ],
+  "source_pages": [
+    534,
+    534
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1095_back_inserter_与插入迭代器的创建方式",
+  "_chunk_pages": [
+    533,
+    536
+  ]
+}

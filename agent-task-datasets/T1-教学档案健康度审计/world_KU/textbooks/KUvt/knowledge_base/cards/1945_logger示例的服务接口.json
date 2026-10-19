@@ -1,0 +1,44 @@
+{
+  "title": "Logger示例的服务接口",
+  "definition": "日志依赖注入示例使用ILogger接口抽象日志服务。需要记录日志的代码只依赖ILogger，而不直接依赖具体的Logger类。ILogger提供日志级别类型、设置日志级别的方法以及记录指定级别消息的方法。",
+  "key_points": [
+    "ILogger包含虚析构函数，以便通过接口指针或引用安全地销毁派生类对象。",
+    "日志级别枚举LogLevel包含Error、Info和Debug。",
+    "setLogLevel用于设置Logger所接受的日志级别。",
+    "log接收一条字符串消息和该消息的LogLevel，并记录该消息。",
+    "客户端依赖ILogger接口，因此可以在不修改客户端代码的情况下替换具体Logger。"
+  ],
+  "examples": [
+    "接口的核心形式可概括为：\n```text\nclass ILogger {\npublic:\n    virtual ~ILogger() = default;\n    enum class LogLevel { Error, Info, Debug };\n    virtual void setLogLevel(LogLevel level) = 0;\n    virtual void log(std::string_view message, LogLevel logLevel) = 0;\n};\n```"
+  ],
+  "misconceptions": [
+    "客户端不应把具体Logger类作为唯一依赖，否则会降低替换实现和模拟测试的便利性。",
+    "setLogLevel设置的是日志过滤级别，不是某一条日志消息本身的级别；单条消息的级别由log调用参数给出。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么Foo等客户端应依赖ILogger而不是直接依赖Logger？",
+      "a": "依赖ILogger可以隐藏具体实现，并允许生产环境和测试环境注入不同的日志实现，而无需修改客户端代码。"
+    },
+    {
+      "q": "ILogger::log需要哪些参数？",
+      "a": "需要一条字符串消息和该消息对应的LogLevel。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "抽象类与纯虚函数",
+    "依赖注入"
+  ],
+  "source_pages": [
+    943,
+    943
+  ],
+  "needs_verification": true,
+  "verify_query": "Marc Gregoire C++20高级编程 第5版 第943页 ILogger LogLevel setLogLevel log std::string_view 原文",
+  "concept_id": "1945_logger示例的服务接口",
+  "_chunk_pages": [
+    941,
+    944
+  ]
+}

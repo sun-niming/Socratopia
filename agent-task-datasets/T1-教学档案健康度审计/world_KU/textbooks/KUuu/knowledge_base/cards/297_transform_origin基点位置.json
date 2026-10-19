@@ -1,0 +1,44 @@
+{
+  "title": "transform-origin基点位置",
+  "definition": "transform-origin属性用于设置变换元素的基点位置，也就是元素进行2D变换时所围绕的参考点。",
+  "key_points": [
+    "用于设置变化元素的基点位置",
+    "x-axis用于定义视图被置于X轴的何处",
+    "y-axis用于定义视图被置于Y轴的何处",
+    "x-axis可取left、center、right、length、%",
+    "y-axis可取top、center、bottom、length、%"
+  ],
+  "examples": [
+    "x-axis: left / center / right / length / %",
+    "y-axis: top / center / bottom / length / %"
+  ],
+  "misconceptions": [
+    "transform-origin会改变元素内容本身的大小。",
+    "transform-origin只支持一种固定写法。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "transform-origin属性的作用是什么？",
+      "a": "用于设置变化元素的基点位置。"
+    },
+    {
+      "q": "x-axis和y-axis分别可取哪些值？",
+      "a": "x-axis可取left、center、right、length、%；y-axis可取top、center、bottom、length、%。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "2D变换"
+  ],
+  "source_pages": [
+    197,
+    200
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "297_transform_origin基点位置",
+  "_chunk_pages": [
+    197,
+    200
+  ]
+}

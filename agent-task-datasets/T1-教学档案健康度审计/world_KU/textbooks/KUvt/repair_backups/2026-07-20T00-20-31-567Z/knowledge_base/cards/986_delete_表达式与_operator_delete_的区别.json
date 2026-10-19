@@ -1,0 +1,45 @@
+{
+  "title": "delete 表达式与 operator delete 的区别",
+  "definition": "`delete` 表达式先调用对象的析构函数，再调用 `operator delete` 释放内存；`delete[]` 则对应数组形式。可以重载 `operator delete` 和 `operator delete[]` 来定制内存释放，但不能重载 `delete` 表达式本身，也不能因此定制析构函数的调用过程。",
+  "key_points": [
+    "析构函数先于内存释放函数执行。",
+    "单对象通常使用 `delete` 和 `operator delete`。",
+    "数组通常使用 `delete[]` 和 `operator delete[]`。",
+    "正常删除指针时不会调用 nothrow 或 placement 形式的 `operator delete`。"
+  ],
+  "examples": [
+    "`delete cell;` 的逻辑顺序是：先调用 `cell` 指向对象的析构函数，再调用 `operator delete` 释放内存。",
+    "可重载的释放函数示意：`void operator delete(void* ptr) noexcept;` 和 `void operator delete[](void* ptr) noexcept;`。"
+  ],
+  "misconceptions": [
+    "`operator delete` 不负责调用析构函数；析构函数由 `delete` 表达式在释放内存前调用。",
+    "`delete` 与 `operator delete` 不是同一个概念，前者是表达式，后者是可重载的函数。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "执行 `delete cell` 时，析构函数和 `operator delete` 的调用顺序是什么？",
+      "a": "先调用对象的析构函数，再调用 `operator delete` 释放内存。"
+    },
+    {
+      "q": "正常的 `delete` 会调用 nothrow 形式的 `operator delete` 吗？",
+      "a": "不会。正常删除时会调用普通的 `operator delete` 或 `operator delete[]`；nothrow 和 placement 形式主要用于构造函数抛出异常时的清理。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "析构函数",
+    "动态内存释放",
+    "new 表达式与 operator new"
+  ],
+  "source_pages": [
+    490,
+    491
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "986_delete_表达式与_operator_delete_的区别",
+  "_chunk_pages": [
+    489,
+    492
+  ]
+}

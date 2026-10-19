@@ -1,0 +1,54 @@
+{
+  "title": "默认构造的正确语法与最头疼的解析",
+  "definition": "在栈中默认构造对象时，可以只写类型和对象名，也可以使用空花括号。不能写成 Type object();，因为这种形式会被编译器解析为函数声明：函数名为 object、没有参数、返回 Type。这种歧义称为“最头疼的解析”（most vexing parse）。",
+  "key_points": [
+    "SpreadsheetCell myCell; 会创建对象并调用默认构造函数。",
+    "SpreadsheetCell myCell{}; 使用统一初始化语法调用默认构造函数。",
+    "SpreadsheetCell myCell(); 不会创建对象，而是声明一个无参数、返回 SpreadsheetCell 的函数。",
+    "将被解析为函数的 myCell 当作对象调用 setValue 或 getValue 时会导致编译错误。",
+    "自由存储区中的默认构造可以使用 make_unique<SpreadsheetCell>() 或 new SpreadsheetCell{}。"
+  ],
+  "examples": [
+    "SpreadsheetCell myCell;\nmyCell.setValue(6);",
+    "SpreadsheetCell myCell{}; // 调用默认构造函数",
+    "SpreadsheetCell myCell(); // 错误意图：实际被解析为函数声明\n// myCell.setValue(6); 会编译失败，因为 myCell 不是对象。",
+    "auto smartCellp{std::make_unique<SpreadsheetCell>()};",
+    "SpreadsheetCell* myCellp{new SpreadsheetCell{}};\ndelete myCellp;\nmyCellp = nullptr;"
+  ],
+  "misconceptions": [
+    "误以为 SpreadsheetCell myCell(); 与其他带参数构造语法一致，因此会创建默认构造的对象。",
+    "误以为第一行 SpreadsheetCell myCell(); 能编译就证明对象已创建；它能编译是因为它是合法的函数声明。",
+    "误以为空花括号和空圆括号在默认构造的变量声明中总是等价。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "SpreadsheetCell myCell(); 声明的是对象还是函数？",
+      "a": "它声明一个名为 myCell、没有参数并返回 SpreadsheetCell 的函数。"
+    },
+    {
+      "q": "如何明确使用统一初始化语法调用默认构造函数？",
+      "a": "写作 SpreadsheetCell myCell{};。"
+    },
+    {
+      "q": "在栈中默认构造对象时，除了空花括号还可以怎样写？",
+      "a": "可以省略括号，写作 SpreadsheetCell myCell;。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "默认构造函数",
+    "函数声明",
+    "统一初始化"
+  ],
+  "source_pages": [
+    239,
+    240
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "508_默认构造的正确语法与最头疼的解析",
+  "_chunk_pages": [
+    237,
+    240
+  ]
+}

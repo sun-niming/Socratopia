@@ -1,0 +1,49 @@
+{
+  "title": "noexcept异常说明",
+  "definition": "`noexcept` 用于声明函数是否允许异常从函数边界向外传播。`noexcept(true)` 表示函数承诺不让异常传播出去，通常可简写为 `noexcept`；`noexcept(false)` 表示函数允许异常传播。`noexcept(expression)` 是条件形式，根据表达式的布尔结果决定函数是否为非异常函数。若违反非异常保证而让异常离开 `noexcept(true)` 函数，程序会调用 `std::terminate()`。",
+  "key_points": [
+    "`noexcept` 与 `noexcept(true)` 表示函数不允许异常传播出函数。",
+    "`noexcept(false)` 表示函数允许异常传播。",
+    "`noexcept(expression)` 根据表达式的结果决定异常说明。",
+    "原文将 `std::terminate()` 与违反 `noexcept` 保证的情况联系起来。"
+  ],
+  "examples": [
+    "`void f() noexcept;` 等价于声明该函数为 `noexcept(true)`。",
+    "`void g() noexcept(false);` 表示该函数允许异常传播。",
+    "条件形式：`void h() noexcept(sizeof(int) == 4);`；当表达式为 `true` 时，相当于 `noexcept(true)`，否则相当于 `noexcept(false)`。"
+  ],
+  "misconceptions": [
+    "写出 `noexcept` 并不是表示函数内部绝对不会发生异常，而是表示异常不能从该函数向外传播。",
+    "`noexcept(false)` 不是禁止异常，而是明确表示该函数不是非异常函数。",
+    "违反 `noexcept(true)` 保证时，不能指望调用方通过普通 `catch` 捕获从该函数逃出的异常；程序会进入终止处理。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`noexcept` 与 `noexcept(false)` 有什么区别？",
+      "a": "`noexcept` 等价于 `noexcept(true)`，表示异常不能传播出函数；`noexcept(false)` 表示函数允许异常传播。"
+    },
+    {
+      "q": "如果异常从 `noexcept(true)` 函数中逃出，会发生什么？",
+      "a": "程序会调用 `std::terminate()`。"
+    },
+    {
+      "q": "`noexcept(expression)` 的作用是什么？",
+      "a": "它根据 `expression` 的布尔值决定函数是否为非异常函数：表达式为真时相当于 `noexcept(true)`，为假时相当于 `noexcept(false)`。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++异常处理基础"
+  ],
+  "source_pages": [
+    465,
+    468
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 noexcept noexcept(true) noexcept(false) noexcept(expression) std::terminate exact rules",
+  "concept_id": "607_noexcept异常说明",
+  "_chunk_pages": [
+    465,
+    468
+  ]
+}

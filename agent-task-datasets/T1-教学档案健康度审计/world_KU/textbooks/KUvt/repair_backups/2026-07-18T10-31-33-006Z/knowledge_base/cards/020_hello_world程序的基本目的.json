@@ -1,0 +1,48 @@
+{
+  "title": "Hello World程序的基本目的",
+  "definition": "“Hello World”程序是用于展示一个最基本可运行程序的示例，其核心效果是向输出设备输出文本“Hello, World!”。教材第35页使用C++示例介绍了这一程序，并涉及iostream、main函数以及输出语句；由于当前文字识别结果不完整，示例代码的每个字符应以清晰页面核实。",
+  "key_points": [
+    "示例输出的文本是“Hello, World!”。",
+    "程序使用iostream相关内容进行输入输出。",
+    "C++程序通常从main函数开始执行；但教材页面中的具体函数写法在当前OCR文本中不完整。",
+    "示例代码的完整语法不能仅根据当前乱码版本确定。"
+  ],
+  "examples": [
+    "教材示例的核心意图可表示为：程序启动后输出 `Hello, World!`。",
+    "与教材意图相符的典型结构是：`import <iostream>;`，定义`main`函数，并在其中输出`Hello, World!`；该代码仅作结构性示例，具体版本需核实。"
+  ],
+  "misconceptions": [
+    "“Hello World”不是C++语言关键字，而是输出示例使用的普通文本。",
+    "不能因为程序很短就认为它不需要main函数或输出库。",
+    "不能把当前OCR中无法辨认的字符擅自还原成确定代码。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "教材中的“Hello World”示例要输出什么内容？",
+      "a": "输出“Hello, World!”。"
+    },
+    {
+      "q": "该示例涉及哪个标准输入输出相关头文件或模块名称？",
+      "a": "涉及iostream。"
+    },
+    {
+      "q": "为什么不能直接把当前材料中的完整Hello World代码当作已核实代码？",
+      "a": "因为提供的第35页文字存在OCR乱码，main函数和部分符号无法可靠辨认。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++及其标准库"
+  ],
+  "source_pages": [
+    33,
+    36
+  ],
+  "needs_verification": true,
+  "verify_query": "《C++20高级编程》第5版第35页 Hello World import iostream main 输出完整代码",
+  "concept_id": "020_hello_world程序的基本目的",
+  "_chunk_pages": [
+    33,
+    36
+  ]
+}

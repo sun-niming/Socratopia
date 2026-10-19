@@ -1,0 +1,56 @@
+{
+  "title": "Grid加法运算符函数模板",
+  "definition": "可以为类模板 `Grid<T>` 定义非成员加法运算符函数模板。原文实现创建一个结果网格，其宽度和高度分别取两个操作数对应尺寸的较小值；随后遍历重叠区域，只有当同一坐标上的左右两个可选单元格都包含值时，才把两者之和写入结果网格。",
+  "key_points": [
+    "结果宽度为 `std::min(lhs.getWidth(), rhs.getWidth())`。",
+    "结果高度为 `std::min(lhs.getHeight(), rhs.getHeight())`。",
+    "只遍历两个网格共同覆盖的矩形区域。",
+    "通过 `std::optional::has_value()` 检查单元格是否包含值。",
+    "只有左右单元格都有值时，才计算 `leftElement.value() + rightElement.value()`。",
+    "元素类型 `T` 必须支持实现中使用的加法操作，并且加法结果必须可赋给结果网格的单元格。"
+  ],
+  "examples": [
+    "template <typename T>\nGrid<T> operator+(const Grid<T>& lhs, const Grid<T>& rhs)\n{\n    size_t minWidth{std::min(lhs.getWidth(), rhs.getWidth())};\n    size_t minHeight{std::min(lhs.getHeight(), rhs.getHeight())};\n    Grid<T> result{minWidth, minHeight};\n\n    for (size_t y{0}; y < minHeight; ++y) {\n        for (size_t x{0}; x < minWidth; ++x) {\n            const auto& leftElement{lhs.m_cells[x][y]};\n            const auto& rightElement{rhs.m_cells[x][y]};\n            if (leftElement.has_value() && rightElement.has_value()) {\n                result.at(x, y) = leftElement.value() + rightElement.value();\n            }\n        }\n    }\n    return result;\n}",
+    "若左网格尺寸为 $5\\times4$，右网格尺寸为 $3\\times6$，则结果网格尺寸为：\n$$\\min(5,3)\\times\\min(4,6)=3\\times4$$",
+    "若坐标 $(x,y)$ 上左单元格值为 $a$、右单元格值为 $b$，则结果可表示为：\n$$R(x,y)=\\begin{cases}a+b,&L(x,y)\\text{ 和 }Q(x,y)\\text{ 都有值}\\cr\\text{空},&\\text{至少一个单元格为空}\\end{cases}$$"
+  ],
+  "misconceptions": [
+    "误以为结果网格尺寸取两个操作数尺寸的较大值；原文实现取对应维度的较小值。",
+    "误以为只要一侧单元格有值就会复制到结果中；原文仅在两侧都有值时写入和。",
+    "误以为空单元格会自动按零参与加法；原文没有这样处理。",
+    "误以为任意 `T` 都能使用该运算符；`T` 必须支持相应的加法及结果赋值。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "两个不同尺寸的 `Grid<T>` 相加时，结果网格的尺寸如何确定？",
+      "a": "宽度取两个网格宽度的较小值，高度取两个网格高度的较小值。"
+    },
+    {
+      "q": "什么情况下结果网格的某个单元格会被写入值？",
+      "a": "当左右两个网格在该坐标上的单元格都包含值时，写入两者之和。"
+    },
+    {
+      "q": "为什么循环只遍历 `minWidth` 和 `minHeight` 范围？",
+      "a": "因为该范围是两个网格共同拥有的重叠区域，可避免访问任一网格范围之外的位置。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "类模板",
+    "运算符重载",
+    "函数模板",
+    "std::optional",
+    "std::min"
+  ],
+  "source_pages": [
+    393,
+    396
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "511_grid加法运算符函数模板",
+  "_chunk_pages": [
+    393,
+    396
+  ]
+}

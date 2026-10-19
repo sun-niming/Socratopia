@@ -1,0 +1,50 @@
+{
+  "title": "变量初始化与未初始化变量",
+  "definition": "定义基本类型变量时，可以同时提供初始值。教材使用花括号初始化形式 `int initializedInt { 7 };`。如果局部基本类型变量只声明而没有初始化，例如 `int uninitializedInt;`，随后读取它会产生不可预测结果，属于程序缺陷；因此应在使用前明确初始化变量。",
+  "key_points": [
+    "`int initializedInt { 7 };` 把变量初始化为 7。",
+    "`int uninitializedInt;` 没有为局部整数提供确定的初始值。",
+    "不得通过输出或其他表达式读取未初始化局部变量的值。",
+    "初始化变量有助于避免由不确定值引发的程序错误。"
+  ],
+  "examples": [
+    "int uninitializedInt;\nint initializedInt { 7 };\n\n// 错误示范：读取未初始化变量\nstd::cout << std::format(\"{} is a random value\", uninitializedInt) << std::endl;\n\n// initializedInt 已明确初始化\nstd::cout << std::format(\"{} was assigned an initial value\", initializedInt) << std::endl;"
+  ],
+  "misconceptions": [
+    "误以为 `int uninitializedInt;` 会自动把局部变量初始化为 0。",
+    "误以为未初始化变量中所谓的“随机值”是可以安全使用的随机数；读取未初始化局部变量不是随机数生成方式。",
+    "误以为声明变量后只要能够编译，就可以在赋值前读取它。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`int initializedInt { 7 };` 完成了什么操作？",
+      "a": "它定义一个 `int` 变量 `initializedInt`，并将其初始化为 7。"
+    },
+    {
+      "q": "为什么不应输出刚由 `int uninitializedInt;` 声明的局部变量？",
+      "a": "因为该变量没有确定的初始值，在赋值前读取它会产生未定义行为。"
+    },
+    {
+      "q": "未初始化整数中的值能否当作随机数使用？",
+      "a": "不能。未初始化值不是可靠或合法的随机数来源。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "变量",
+    "整数类型",
+    "使用std::cout输出",
+    "使用std::format格式化字符串"
+  ],
+  "source_pages": [
+    37,
+    40
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "040_变量初始化与未初始化变量",
+  "_chunk_pages": [
+    37,
+    40
+  ]
+}

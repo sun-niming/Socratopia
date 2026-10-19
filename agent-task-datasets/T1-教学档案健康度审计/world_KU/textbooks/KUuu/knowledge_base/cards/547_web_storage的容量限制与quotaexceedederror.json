@@ -1,0 +1,39 @@
+{
+  "title": "Web Storage的容量限制与QuotaExceededError",
+  "definition": "Web Storage 的可用容量虽然比 cookie 大，但仍然有容量限制。超过限制时，调用 setItem 会抛出 QuotaExceededError 错误。",
+  "key_points": [
+    "Web Storage 不是无限存储",
+    "容量通常比 cookie 大，但仍有限制",
+    "写入超限时 setItem 会抛出 QuotaExceededError"
+  ],
+  "examples": [
+    "调用 setItem 时超出容量限制",
+    "触发 QuotaExceededError"
+  ],
+  "misconceptions": [
+    "Web Storage 可以一直存到磁盘满为止",
+    "容量限制超过后会自动覆盖旧数据",
+    "setItem 超限时不会报错"
+  ],
+  "qa_pairs": [
+    {
+      "q": "当 Web Storage 超出容量限制时，通常会发生什么？",
+      "a": "调用 setItem 时会抛出 QuotaExceededError 错误。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "Web Storage"
+  ],
+  "source_pages": [
+    385,
+    387
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "547_web_storage的容量限制与quotaexceedederror",
+  "_chunk_pages": [
+    385,
+    387
+  ]
+}

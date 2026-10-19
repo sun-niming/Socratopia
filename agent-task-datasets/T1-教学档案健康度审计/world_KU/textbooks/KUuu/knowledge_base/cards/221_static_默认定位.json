@@ -1,0 +1,41 @@
+{
+  "title": "static 默认定位",
+  "definition": "static 是 position 属性的默认值，表示没有定位，元素仍然出现在正常的文档流中。在这种定位方式下，top、bottom、left、right 和 z-index 等属性无效。",
+  "key_points": [
+    "static 是 position 的默认值",
+    "元素按正常文档流排列",
+    "top、bottom、left、right、z-index 无效"
+  ],
+  "examples": [
+    "position: static;"
+  ],
+  "misconceptions": [
+    "static 也能通过 top 或 left 改变位置；实际上这些属性无效",
+    "static 代表元素脱离文档流；实际上它仍在正常文档流中"
+  ],
+  "qa_pairs": [
+    {
+      "q": "position: static 表示什么？",
+      "a": "表示没有定位，元素出现在正常的文档流中。"
+    },
+    {
+      "q": "static 下哪些属性无效？",
+      "a": "top、bottom、left、right、z-index 等属性无效。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "层定位"
+  ],
+  "source_pages": [
+    137,
+    140
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "221_static_默认定位",
+  "_chunk_pages": [
+    137,
+    140
+  ]
+}

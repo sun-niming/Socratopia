@@ -1,0 +1,48 @@
+{
+  "title": "简化TCP发送方的三类主要事件",
+  "definition": "在只使用超时恢复丢失报文段的简化TCP发送方中，发送和重传相关的主要事件有三类：从上层应用接收数据、重传定时器超时、收到包含有效ACK字段值的确认报文段。发送方根据事件更新序号、定时器和确认状态。",
+  "key_points": [
+    "收到上层数据时，TCP生成带有NextSeqNum序号的报文段，将其交给IP，并令$$\\text{NextSeqNum}=\\text{NextSeqNum}+\\text{length(data)}.$$",
+    "如果当前没有定时器运行，发送新的报文段时启动定时器。",
+    "定时器超时时，TCP重传最小序号的未确认报文段，并重新启动定时器。",
+    "收到ACK值为$y$的确认时，若$y>\\text{SendBase}$，则更新SendBase；如果仍有未确认报文段，则重新启动定时器。"
+  ],
+  "examples": [
+    "简化发送方的核心流程可表示为：$$\\text{收到数据}\\rightarrow\\text{封装报文段并发送}\\rightarrow\\text{必要时启动定时器}.$$ $$\\text{超时}\\rightarrow\\text{重传最小序号的未确认报文段}\\rightarrow\\text{重启定时器}.$$"
+  ],
+  "misconceptions": [
+    "收到任意ACK都一定会更新SendBase；只有当ACK值$y>\\text{SendBase}$时才更新。",
+    "超时后不是重传所有未确认报文段，而是重传最小序号的未确认报文段。",
+    "发送一个新报文段时并非每次都启动新定时器；若已有定时器运行，则不再重复启动。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "简化TCP发送方需要处理哪三类主要事件？",
+      "a": "从上层应用接收数据、重传定时器超时、收到包含有效ACK字段值的确认报文段。"
+    },
+    {
+      "q": "定时器超时时，简化TCP发送方执行什么操作？",
+      "a": "重传具有最小序号但仍未被确认的报文段，然后重新启动定时器。"
+    },
+    {
+      "q": "收到ACK值为$y$时，什么条件下TCP更新SendBase？",
+      "a": "当$y>\\text{SendBase}$时，TCP将SendBase更新为$y$。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "TCP序号与确认",
+    "TCP重传定时器"
+  ],
+  "source_pages": [
+    178,
+    179
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "433_简化tcp发送方的三类主要事件",
+  "_chunk_pages": [
+    177,
+    180
+  ]
+}

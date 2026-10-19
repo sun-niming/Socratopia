@@ -1,0 +1,38 @@
+{
+  "title": "浏览器会连续请求多个静态资源",
+  "definition": "浏览器打开首页时，通常不会只请求一个文件，而是可能连续发起多个请求，例如首页 HTML、CSS、favicon，甚至图片。于是服务器不能只会处理 `/`，还必须能根据 HTML 中的引用返回对应的静态文件，并设置正确的 MIME 类型。",
+  "key_points": [
+    "浏览器可能依次请求 `/`、`/css/style.css`、`/favicon.ico`、图片路径等。",
+    "如果页面有内容但没有样式，优先检查 CSS 文件路径和 CSS 请求是否成功。",
+    "静态资源返回时必须配合正确的 `Content-Type`，否则浏览器可能报 MIME 错误。"
+  ],
+  "examples": [
+    "浏览器可能发出：`GET / HTTP/1.1`、`GET /css/style.css HTTP/1.1`、`GET /favicon.ico HTTP/1.1`。"
+  ],
+  "misconceptions": [
+    "以为网页只要返回首页 HTML 就够了。",
+    "以为 CSS 和图片会自动被浏览器“猜出来”并正确加载。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么静态 Web 服务器不能只处理 `/`？",
+      "a": "因为浏览器加载页面时常会继续请求 CSS、favicon、图片等资源，服务器必须能返回这些静态文件并设置正确 MIME。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "HTTP 请求基础",
+    "静态文件概念"
+  ],
+  "source_pages": [
+    22,
+    23
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "019_浏览器会连续请求多个静态资源",
+  "_chunk_pages": [
+    21,
+    24
+  ]
+}

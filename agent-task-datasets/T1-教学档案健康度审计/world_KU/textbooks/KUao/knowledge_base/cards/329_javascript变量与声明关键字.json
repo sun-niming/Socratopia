@@ -1,0 +1,50 @@
+{
+  "title": "JavaScript变量与声明关键字",
+  "definition": "JavaScript的变量是弱类型变量，意思是变量本身没有固定类型，声明后可以初始化为任意值，并且其中存储的数据类型可以随时改变。教材中说明，早期常用var声明变量；ES6还可以用let和const：let声明的作用域是当前块或全局，var声明的作用域是当前函数或全局；const用于声明常量，表示运行时保持不变的标识符的值。",
+  "key_points": [
+    "JavaScript变量是弱类型变量，没有固定类型限制。",
+    "var关键字可以声明变量，变量可初始化为任意值。",
+    "变量中存储的数据类型可以随时改变。",
+    "ES6中let的作用域是当前块或全局。",
+    "ES6中var的作用域是当前函数或全局。",
+    "const用于声明常量，表示运行时保持不变的值。"
+  ],
+  "examples": [
+    "var name = \"Wang Wu\";",
+    "var age = 28;",
+    "var school = \"NWAFU\";",
+    "var flag = true;",
+    "let x = 10;",
+    "const PI = 3.14;"
+  ],
+  "misconceptions": [
+    "JavaScript变量一旦声明就必须保持同一种数据类型。",
+    "let和var的作用域完全相同。",
+    "const声明的是可以随意修改的普通变量。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "什么是JavaScript的弱类型变量？",
+      "a": "指变量没有特定固定类型，声明后可以赋任何值，并且其存储的数据类型可以随时改变。"
+    },
+    {
+      "q": "let、var、const在教材中的作用分别是什么？",
+      "a": "let用于声明作用域为当前块或全局的变量，var用于声明作用域为当前函数或全局的变量，const用于声明运行时保持不变的常量。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "JavaScript基本语法"
+  ],
+  "source_pages": [
+    237,
+    240
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "329_javascript变量与声明关键字",
+  "_chunk_pages": [
+    237,
+    240
+  ]
+}

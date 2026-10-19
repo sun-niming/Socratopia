@@ -1,0 +1,38 @@
+{
+  "title": "箭头函数的this",
+  "definition": "箭头函数不绑定自己的this，它会捕获其定义位置所在上下文的this，并将其作为自己的this；因此箭头函数的this在定义时就确定了，不再随调用方式改变。",
+  "key_points": [
+    "箭头函数没有自己的this绑定",
+    "this来自定义位置的外层上下文",
+    "调用箭头函数不能像普通函数那样重新改变this"
+  ],
+  "examples": [
+    "const fn = () => { console.log(this) }\nfn()"
+  ],
+  "misconceptions": [
+    "箭头函数的this由调用对象决定",
+    "箭头函数可以通过call/apply改变this"
+  ],
+  "qa_pairs": [
+    {
+      "q": "箭头函数的this从哪里来？",
+      "a": "来自它定义时所在的外层上下文。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "this的基本含义",
+    "函数上下文"
+  ],
+  "source_pages": [
+    261,
+    264
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "383_箭头函数的this",
+  "_chunk_pages": [
+    261,
+    264
+  ]
+}

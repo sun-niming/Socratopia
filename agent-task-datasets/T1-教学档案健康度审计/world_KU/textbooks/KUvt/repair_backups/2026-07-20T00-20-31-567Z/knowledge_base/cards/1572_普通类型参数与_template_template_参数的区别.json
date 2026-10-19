@@ -1,0 +1,51 @@
+{
+  "title": "普通类型参数与 template template 参数的区别",
+  "definition": "普通类型模板参数接收一个已经确定的类型，例如 `std::vector<std::optional<int>>`；template template 参数接收一个模板本身，例如 `std::vector` 或 `std::deque`，并允许外层模板根据自己的类型参数 T 生成具体容器类型。因为 `std::vector` 本身是模板而不是类型，所以必须使用 template template 参数才能直接写出 `Grid<int, std::vector>`。",
+  "key_points": [
+    "使用普通类型参数时，必须在传入 Grid 前先写完整容器类型，因此元素类型可能重复：`Grid<int, std::vector<std::optional<int>>>`。",
+    "如果希望写成 `Grid<int, std::vector>`，第二个参数必须声明为 template template 参数。",
+    "vector 和 deque 的模板参数形式可抽象为：\n```cpp\ntemplate <typename E,\n          typename Allocator = std::allocator<E>>\nclass Container;\n```",
+    "相应的 Grid 声明可写为：\n```cpp\nexport template <typename T,\n    template <typename E,\n              typename Allocator = std::allocator<E>>\n    class Container>\nclass Grid;\n```",
+    "template template 参数的默认值是模板 `std::vector`，不是具体类型 `std::vector<T>`。"
+  ],
+  "examples": [
+    "普通类型参数的写法：`Grid<int, std::vector<std::optional<int>>> myIntGrid;`。",
+    "普通类型参数不能直接接收模板本身：`Grid<int, std::vector> myIntGrid;` 在这种模板声明下不合法，因为 `std::vector` 是模板，不是已实例化类型。",
+    "template template 参数版本可以写：`Grid<int, std::vector> myGrid;`、`Grid<int, std::deque> myDequeGrid;`。"
+  ],
+  "misconceptions": [
+    "`std::vector` 和 `std::vector<int>` 不是同一种东西：前者是模板，后者是具体类型。",
+    "template template 参数不是把模板当作普通类型传递，而是在参数声明中再次描述该模板所需的模板参数列表。",
+    "使用 template template 参数后并不是完全忽略元素类型；Grid 仍会把 `std::optional<T>` 作为元素类型传给 Container。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么普通类型参数不能接收 `std::vector`？",
+      "a": "因为普通类型参数要求传入一个具体类型，而 `std::vector` 是尚未实例化的类模板，不是具体类型。"
+    },
+    {
+      "q": "template template 参数解决了什么问题？",
+      "a": "它允许 Grid 接收 `std::vector` 或 `std::deque` 这样的模板本身，再由 Grid 根据 T 构造 `Container<std::optional<T>>`，避免重复书写元素类型。"
+    },
+    {
+      "q": "`Grid<int, std::vector>` 中的 `std::vector` 是什么？",
+      "a": "它是作为 template template 参数传入的容器模板，而不是 `std::vector<int>` 之类的具体容器类型。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "类模板的模板参数",
+    "标准容器模板的模板参数列表"
+  ],
+  "source_pages": [
+    759,
+    760
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1572_普通类型参数与_template_template_参数的区别",
+  "_chunk_pages": [
+    757,
+    760
+  ]
+}

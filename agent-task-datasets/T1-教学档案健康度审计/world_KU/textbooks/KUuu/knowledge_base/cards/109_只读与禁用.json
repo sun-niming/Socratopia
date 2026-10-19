@@ -1,0 +1,39 @@
+{
+  "title": "只读与禁用",
+  "definition": "readonly表示控件只读：外观正常、可以点击获得焦点、内容可以复制，并且会随表单提交；disabled表示控件禁用：外观置灰、不能点击或获得焦点，且不会随表单提交。",
+  "key_points": [
+    "readonly：只读，外观正常，可点击/复制，数据会提交",
+    "disabled：禁用，外观置灰，不能获取焦点，数据不会提交",
+    "两者的核心区别之一是是否参与表单提交"
+  ],
+  "examples": [
+    "<input type=\"text\" readonly>",
+    "<input type=\"text\" disabled>"
+  ],
+  "misconceptions": [
+    "以为readonly和disabled只是视觉颜色不同",
+    "以为disabled控件的值也会被表单提交",
+    "以为readonly控件不能被选中或复制"
+  ],
+  "qa_pairs": [
+    {
+      "q": "哪个属性表示禁用，并且不会随表单提交？",
+      "a": "disabled。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "HTML表单基础"
+  ],
+  "source_pages": [
+    73,
+    76
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "109_只读与禁用",
+  "_chunk_pages": [
+    73,
+    76
+  ]
+}

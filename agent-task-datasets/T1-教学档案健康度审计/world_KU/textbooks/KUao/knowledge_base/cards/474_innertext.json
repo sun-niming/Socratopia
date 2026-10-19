@@ -1,0 +1,37 @@
+{
+  "title": "innerText",
+  "definition": "element.innerText 用于获取或设置元素内部的可见文本内容。它与 textContent 类似，但会考虑 CSS 样式，通常不会返回隐藏元素中的文本；设置时也可能影响布局，性能通常不如 textContent。",
+  "key_points": [
+    "和 textContent 类似，但会考虑 CSS 显示效果",
+    "通常不返回隐藏元素的文本",
+    "设置时可能影响页面布局，性能通常不如 textContent"
+  ],
+  "examples": [
+    "let t = element.innerText;"
+  ],
+  "misconceptions": [
+    "innerText 和 textContent 完全一样；实际上 innerText 会受 CSS 和可见性影响"
+  ],
+  "qa_pairs": [
+    {
+      "q": "innerText 和 textContent 的主要区别是什么？",
+      "a": "innerText 会考虑 CSS 和可见性，通常只返回可见文本；textContent 则返回所有文本节点内容，不考虑样式。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "DOM元素",
+    "纯文本内容"
+  ],
+  "source_pages": [
+    353,
+    356
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "474_innertext",
+  "_chunk_pages": [
+    353,
+    356
+  ]
+}

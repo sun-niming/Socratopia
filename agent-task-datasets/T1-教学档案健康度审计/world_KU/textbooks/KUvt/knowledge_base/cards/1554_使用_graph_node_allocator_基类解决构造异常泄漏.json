@@ -1,0 +1,49 @@
+{
+  "title": "使用 graph_node_allocator 基类解决构造异常泄漏",
+  "definition": "为提高异常安全性，可以把原始存储的分配和释放移动到基类 graph_node_allocator 中。基类构造函数负责分配存储，基类析构函数负责释放存储；graph_node 只负责在这块存储上构造和销毁 $T$。如果 $T$ 的构造函数抛出异常，已完成构造的基类子对象仍会被销毁，从而释放已分配的存储。",
+  "key_points": [
+    "graph_node_allocator 保存 $A\\ m_allocator$ 和 $T^*\\ m_data$，其中 $m_data$ 初始为 nullptr。",
+    "基类构造函数使用 $m_allocator.allocate(1)$ 分配一个 $T$ 对象所需的存储。",
+    "graph_node 私有继承 graph_node_allocator：$\\texttt{class graph_node : private graph_node_allocator<T, A>}$。",
+    "graph_node 构造函数先构造基类，再执行 placement new：$\\texttt{new(this->m_data) T\\\\{t\\\\};}$。",
+    "graph_node_allocator 的拷贝构造函数、拷贝赋值运算符和移动赋值运算符被删除；移动构造函数通过 $\\texttt{std::exchange(src.m_data, nullptr)}$ 转移指针所有权。",
+    "graph_node 析构函数只调用 $T$ 的析构函数，不再释放存储；存储释放由基类析构函数负责。"
+  ],
+  "examples": [
+    "移动构造中的所有权转移：$\\texttt{m_data\\\\{std::exchange(src.m_data, nullptr)\\\\}}$。",
+    "graph_node 构造函数：$\\texttt{: m_graph\\\\{graph\\\\}, graph_node_allocator<T, A>\\\\{allocator\\\\} \\\\{ new(this->m_data) T\\\\{t\\\\}; \\\\}}$。",
+    "graph_node 析构函数只销毁对象：$\\texttt{if (this->m_data) \\\\{ this->m_data->~T(); \\\\}}$。"
+  ],
+  "misconceptions": [
+    "基类负责的是原始存储的分配与释放，不是 $T$ 对象生命周期中的析构调用。",
+    "placement new 构造出的 $T$ 仍需显式调用析构函数；释放原始存储不能代替调用 $T$ 的析构函数。",
+    "使用私有继承的目的主要是复用和封装分配器资源管理，并不是表示 graph_node 是一种可公开替换的 graph_node_allocator。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "graph_node_allocator 如何解决 $T$ 构造函数抛异常时的内存泄漏？",
+      "a": "它把存储分配放在基类构造函数中，把存储释放放在基类析构函数中。即使 graph_node 构造函数中构造 $T$ 失败，已经完成构造的基类子对象仍会析构，因此基类可以释放已分配的存储。"
+    },
+    {
+      "q": "graph_node 和 graph_node_allocator 分别负责什么？",
+      "a": "graph_node_allocator 负责分配和释放存放 $T$ 的原始存储；graph_node 负责在该存储上构造 $T$，并在析构时调用 $T$ 的析构函数。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "C++异常安全",
+    "基类与派生类构造析构顺序",
+    "placement new与显式析构"
+  ],
+  "source_pages": [
+    750,
+    751
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1554_使用_graph_node_allocator_基类解决构造异常泄漏",
+  "_chunk_pages": [
+    749,
+    752
+  ]
+}

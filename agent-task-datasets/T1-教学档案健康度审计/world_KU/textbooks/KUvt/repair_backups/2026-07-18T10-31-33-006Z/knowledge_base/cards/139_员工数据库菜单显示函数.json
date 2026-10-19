@@ -1,0 +1,47 @@
+{
+  "title": "员工数据库菜单显示函数",
+  "definition": "displayMenu() 向标准输出打印员工数据库的操作菜单，使用标准输入读取用户选择的整数，并返回该整数。菜单包括雇用、解雇、晋升、列出全部员工、列出当前员工、列出前员工和退出。",
+  "key_points": [
+    "函数返回类型为 int。",
+    "菜单通过 cout 输出，选择通过 cin 读入。",
+    "选项含义为：1 雇用新员工，2 解雇员工，3 晋升员工，4 列出全部员工，5 列出当前员工，6 列出前员工，0 退出。",
+    "函数最后返回读取到的 selection。"
+  ],
+  "examples": [
+    "菜单函数的核心结构为：\n```cpp\nint displayMenu() {\n    int selection;\n    // 输出菜单\n    std::cin >> selection;\n    return selection;\n}\n```"
+  ],
+  "misconceptions": [
+    "displayMenu() 只负责显示菜单并读取选择，不负责执行雇用、解雇或显示员工等具体业务操作。",
+    "返回值是用户输入的菜单编号，而不是菜单文本。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "displayMenu() 返回什么？",
+      "a": "返回从标准输入读取到的整数 selection。"
+    },
+    {
+      "q": "菜单编号 2 对应什么操作？",
+      "a": "解雇一名员工。"
+    },
+    {
+      "q": "菜单编号 0 对应什么操作？",
+      "a": "退出程序。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++标准输入输出",
+    "函数返回值"
+  ],
+  "source_pages": [
+    97,
+    100
+  ],
+  "needs_verification": true,
+  "verify_query": "\"C++20高级编程\" \"Hire a new employee\" \"List all former employees\"",
+  "concept_id": "139_员工数据库菜单显示函数",
+  "_chunk_pages": [
+    97,
+    100
+  ]
+}

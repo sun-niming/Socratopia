@@ -1,0 +1,44 @@
+{
+  "title": "random_device 的用途与熵",
+  "definition": "std::random_device 是 <random> 中的一种随机数引擎接口，优先用于获取非确定性的随机数，通常依赖计算机连接的硬件随机源。若系统没有这类硬件，标准库可以选择使用软件算法替代，具体算法由库实现者决定。random_device::entropy() 返回对随机源熵的估计：使用软件伪随机算法时返回 0.0，使用硬件随机设备时通常返回非零值。",
+  "key_points": [
+    "创建 random_device 不需要指定复杂的数学模板参数，例如：`std::random_device rnd;`。",
+    "random_device 可能依赖硬件产生不确定性随机数，也可能在硬件不可用时退化为软件算法。",
+    "`rnd.entropy()` 可用于判断是否存在非零熵来源，但其具体含义取决于实现。",
+    "random_device 通常比软件伪随机引擎慢，适合用于生成种子，不适合直接生成大量随机数。"
+  ],
+  "examples": [
+    "```cpp\nstd::random_device rnd;\nstd::cout << \"Entropy: \" << rnd.entropy() << std::endl;\nstd::cout << \"Random number: \" << rnd() << std::endl;\n```",
+    "教材给出的示例输出包括：`Entropy: 32`、`Min value: 0`、`Max value: 4294967295`，以及一个随机数。"
+  ],
+  "misconceptions": [
+    "random_device 不一定在所有平台上都使用硬件随机源；没有硬件设备时，库可以使用软件算法。",
+    "entropy() 非零并不表示返回值本身就是随机数质量的完整证明，它只是对熵的估计。",
+    "因为 random_device 更接近非确定性随机源，所以它不一定适合生成海量随机数。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "random_device::entropy() 返回 0.0 通常说明什么？",
+      "a": "说明该 random_device 可能使用了软件伪随机数生成器，而不是可用的硬件随机设备。"
+    },
+    {
+      "q": "为什么通常不直接用 random_device 生成大量随机数？",
+      "a": "因为 random_device 通常比伪随机数引擎慢，教材建议使用它为伪随机引擎生成种子。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "伪随机数与真随机数"
+  ],
+  "source_pages": [
+    697,
+    698
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1454_random_device_的用途与熵",
+  "_chunk_pages": [
+    697,
+    700
+  ]
+}

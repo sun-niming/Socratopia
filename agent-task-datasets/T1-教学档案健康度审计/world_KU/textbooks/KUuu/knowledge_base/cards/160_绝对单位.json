@@ -1,0 +1,38 @@
+{
+  "title": "绝对单位",
+  "definition": "绝对单位是固定的，不会因为其他元素的尺寸变化而改变。教材给出的例子包括像素单位px，以及英寸in、厘米cm、毫米mm、磅pt和皮卡pc等物理单位。",
+  "key_points": [
+    "绝对单位的值是固定的。",
+    "它不会随其他元素尺寸变化而变化。",
+    "常见示例有px、in、cm、mm、pt、pc。"
+  ],
+  "examples": [
+    "像素单位：px",
+    "物理单位：in、cm、mm、pt、pc"
+  ],
+  "misconceptions": [
+    "以为绝对单位会随父元素或其他元素的变化而缩放。",
+    "以为px也属于会随布局自动变化的相对单位。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "绝对单位的特点是什么？",
+      "a": "绝对单位是固定的，不会因为其他元素的尺寸变化而改变。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "CSS基础"
+  ],
+  "source_pages": [
+    105,
+    108
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "160_绝对单位",
+  "_chunk_pages": [
+    105,
+    108
+  ]
+}

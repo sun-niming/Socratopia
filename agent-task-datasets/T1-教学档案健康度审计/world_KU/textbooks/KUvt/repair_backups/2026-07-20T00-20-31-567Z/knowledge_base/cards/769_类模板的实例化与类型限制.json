@@ -1,0 +1,52 @@
+{
+  "title": "类模板的实例化与类型限制",
+  "definition": "创建 `Grid` 对象时必须指定其元素类型，例如 `Grid<int>` 或 `Grid<double>`；使用某个具体类型生成模板类对象的过程称为模板实例化。实例化后，网格的元素类型就确定了，`Grid<int>` 只能保存 `int` 类型元素，不能保存 `SpreadsheetCell` 或 `ChessPiece` 等其他类型。",
+  "key_points": [
+    "`Grid` 不能单独作为完整对象类型使用，必须提供模板参数列表。",
+    "`Grid<>` 也不能使用，因为模板参数列表中缺少所需的类型参数。",
+    "同一个具体实例化类型的对象可以进行复制和赋值，例如 `Grid<int>` 对象之间可以复制和赋值。",
+    "元素类型可以是基本类型、类类型、指针类型，甚至可以是另一个模板的实例化类型。"
+  ],
+  "examples": [
+    "使用默认构造参数创建 `Grid<int>`：`Grid<int> myIntGrid;`",
+    "创建指定大小的 `Grid<double>`：`Grid<double> myDoubleGrid { 11, 11 };`",
+    "以下声明无法编译：`Grid test;`、`Grid<> test;`。",
+    "`Grid<SpreadsheetCell> mySpreadsheet;`。",
+    "`Grid<const char*> myStringGrid;`。",
+    "保存另一个模板类型：`Grid<std::vector<int>> gridOfVectors;`。"
+  ],
+  "misconceptions": [
+    "`Grid` 不是可以直接声明对象的普通类型名称；它是类模板名称。",
+    "`Grid<>` 并不表示让编译器自动推断模板参数；本教材给出的模板没有可供此处使用的默认类型参数。",
+    "实例化 `Grid<int>` 后，不能把任意其他类型的对象赋给其单元。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "什么是模板实例化？",
+      "a": "为模板类型参数提供具体类型，从而生成具体模板类类型的过程，例如由 `Grid<T>` 生成 `Grid<int>`。"
+    },
+    {
+      "q": "下面两行为什么不能编译：`Grid test;` 和 `Grid<> test;`？",
+      "a": "第一行没有提供模板参数列表，第二行的模板参数太少；该 `Grid` 模板需要指定元素类型。"
+    },
+    {
+      "q": "`Grid<T>` 的模板参数可以是哪些类型？",
+      "a": "可以是基本类型、类类型、指针类型，也可以是另一个模板实例化类型，例如 `std::vector<int>`。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "类模板与类型模板参数"
+  ],
+  "source_pages": [
+    379,
+    380
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "769_类模板的实例化与类型限制",
+  "_chunk_pages": [
+    377,
+    380
+  ]
+}

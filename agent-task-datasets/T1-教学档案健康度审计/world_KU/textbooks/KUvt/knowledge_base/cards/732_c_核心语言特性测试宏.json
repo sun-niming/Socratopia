@@ -1,0 +1,49 @@
+{
+  "title": "C++核心语言特性测试宏",
+  "definition": "C++20提供了特性测试宏，用于检测编译器是否支持某些核心语言特性。这些宏通常以__cpp_或__has_cpp_attribute等形式开头。宏的值通常是一个形如YYYYMM的数字，表示相应特性被加入或更新的年份和月份。标准库特性也有类似的特性测试宏。",
+  "key_points": [
+    "特性测试宏可用于根据编译器支持情况选择不同代码路径。",
+    "原文举例包括基于范围的for循环、consteval、协程以及属性fallthrough的测试宏。",
+    "日期值采用YYYYMM格式，例如201603表示2016年3月。",
+    "__has_cpp_attribute(nodiscard)的值可表示[[nodiscard]]属性首次引入或后来更新的时间。",
+    "除非正在编写非常通用的跨平台、跨编译器库，否则通常不需要使用这些宏。"
+  ],
+  "examples": [
+    "概念性用法：\n#if __cpp_consteval >= 某个版本值\n// 使用consteval相关实现\n#else\n// 使用兼容实现\n#endif"
+  ],
+  "misconceptions": [
+    "特性测试宏的数值不是特性版本号，而是表示特性加入或更新的年月。",
+    "检测到宏存在不等于所有相关实现细节完全一致；它主要用于判断标准特性的支持情况。",
+    "特性测试宏不仅用于标准库，也用于核心语言特性；标准库另有类似宏。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "C++特性测试宏的用途是什么？",
+      "a": "用于检测当前编译器支持哪些核心语言特性。"
+    },
+    {
+      "q": "特性测试宏的值201907通常表示什么？",
+      "a": "表示相应特性在2019年7月被加入或更新。"
+    },
+    {
+      "q": "普通项目是否通常需要大量使用特性测试宏？",
+      "a": "通常不需要；原文指出除非编写非常通用的跨平台、跨编译器库，否则几乎不需要使用它们。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "预处理器条件编译",
+    "C++语言特性"
+  ],
+  "source_pages": [
+    362,
+    363
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 feature-test macros __cpp_rangebasedfor __cpp_consteval __cpp_coroutines __has_cpp_attribute nodiscard YYYYMM official standard",
+  "concept_id": "732_c_核心语言特性测试宏",
+  "_chunk_pages": [
+    361,
+    364
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "title": "vector 的 emplace_back 和 emplace",
+  "definition": "emplace 操作表示“放置到位”。emplace_back() 在 vector 内部为新元素分配空间，并直接使用传入的参数构造元素，避免先创建一个独立对象再复制或移动它。emplace() 可在 vector 的指定位置就地构造对象，并返回所插入元素的迭代器。",
+  "key_points": [
+    "emplace_back() 的参数会被转发给 vector 元素类型的构造函数。",
+    "emplace_back() 以变参模板形式接收数量可变的构造参数。",
+    "从 C++17 开始，emplace_back() 返回新插入元素的引用；C++17 之前返回 void。",
+    "emplace() 在指定位置就地构造对象，并返回所插入元素的迭代器。",
+    "emplace_back() 与使用移动语义的 push_back() 的性能差异取决于具体编译器实现；原文认为多数情况下可按编程偏好选择。"
+  ],
+  "examples": [
+    "vector<string> vec;\nvec.emplace_back(5, 'a'); // 直接在 vector 中构造一个由 5 个 'a' 组成的 string",
+    "vec.emplace(cbegin(vec) + 1, 3, 'b'); // 在指定位置就地构造 string"
+  ],
+  "misconceptions": [
+    "emplace_back(5, 'a') 不是插入两个参数，而是把 5 和 'a' 作为 string 构造函数的参数。",
+    "emplace_back() 并不保证在所有实现和所有类型上都明显快于移动版 push_back()。",
+    "emplace_back() 是在尾部就地构造，emplace() 才是可以指定插入位置的操作。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "vec.emplace_back(5, 'a') 做了什么？",
+      "a": "它把 5 和 'a' 转发给 string 的构造函数，在 vector 尾部直接构造一个包含 5 个字符 'a' 的 string。"
+    },
+    {
+      "q": "C++17 中 emplace_back() 的返回值是什么？",
+      "a": "返回新插入元素的引用。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "构造函数",
+    "移动语义",
+    "变参模板基础"
+  ],
+  "source_pages": [
+    559,
+    559
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1153_vector_的_emplace_back_和_emplace",
+  "_chunk_pages": [
+    557,
+    560
+  ]
+}

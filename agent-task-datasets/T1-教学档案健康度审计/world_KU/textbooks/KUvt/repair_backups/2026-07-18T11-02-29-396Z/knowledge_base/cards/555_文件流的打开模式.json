@@ -1,0 +1,43 @@
+{
+  "title": "文件流的打开模式",
+  "definition": "C++ 文件流可以通过打开模式指定文件的打开方式。常见模式包括：$\\texttt{ios\\_base::in}$ 表示输入，$\\texttt{ios\\_base::out}$ 表示输出，$\\texttt{ios\\_base::app}$ 表示追加写入，$\\texttt{ios\\_base::ate}$ 表示打开后将位置置于文件末尾，$\\texttt{ios\\_base::binary}$ 表示以二进制模式打开，$\\texttt{ios\\_base::trunc}$ 表示打开时清空原有文件内容。多个模式可以使用按位或运算符 $\\texttt{|}$ 组合。",
+  "key_points": [
+    "$\\texttt{ifstream}$ 通常用于输入，默认包含 $\\texttt{ios\\_base::in}$；$\\texttt{ofstream}$ 通常用于输出，默认包含 $\\texttt{ios\\_base::out}$。",
+    "例如，$\\texttt{ios\\_base::out | ios\\_base::binary | ios\\_base::trunc}$ 表示以输出、二进制并截断文件的方式打开。",
+    "$\\texttt{app}$ 与 $\\texttt{ate}$ 都涉及文件末尾，但含义不同：$\\texttt{app}$ 使写入追加到末尾，$\\texttt{ate}$ 主要表示打开后初始位置位于末尾。"
+  ],
+  "examples": [
+    "ofstream outFile { \"test.txt\", ios_base::trunc };",
+    "ofstream binaryFile { \"data.bin\", ios_base::out | ios_base::binary | ios_base::trunc };"
+  ],
+  "misconceptions": [
+    "$\\texttt{binary}$ 不表示只能读二进制数据；它表示采用二进制文件模式，避免文本模式下的某些转换。",
+    "$\\texttt{ate}$ 不等同于 $\\texttt{app}$；使用 $\\texttt{ate}$ 后仍可通过定位操作改变当前位置，而 $\\texttt{app}$ 的写入具有追加语义。",
+    "组合打开模式时不是用逻辑或 $\\texttt{||}$，而是用按位或 $\\texttt{|}$。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何以输出、二进制并清空原文件的方式打开文件？",
+      "a": "使用 $\\texttt{ofstream outFile\\{\"data.bin\", ios\\_base::out | ios\\_base::binary | ios\\_base::trunc\\};}$。"
+    },
+    {
+      "q": "$\\texttt{ios\\_base::trunc}$ 的作用是什么？",
+      "a": "打开文件时截断原有内容，使文件原有内容被清空。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++输入输出流基础"
+  ],
+  "source_pages": [
+    425,
+    428
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "555_文件流的打开模式",
+  "_chunk_pages": [
+    425,
+    428
+  ]
+}

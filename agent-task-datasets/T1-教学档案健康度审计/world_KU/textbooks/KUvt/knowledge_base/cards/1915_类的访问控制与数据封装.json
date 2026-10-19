@@ -1,0 +1,43 @@
+{
+  "title": "类的访问控制与数据封装",
+  "definition": "C++类可以使用 public、protected 和 private 三种访问控制区域。public 成员可被外部代码访问，protected 成员可被派生类及相关成员访问，private 成员通常只能由本类成员访问。教材强调，类应封装其数据，通常应将数据成员设为 private，并通过 public 或 protected 的 getter、setter 方法提供受控访问。",
+  "key_points": [
+    "类定义可以包含构造函数、析构函数、普通成员函数、数据成员、常量和静态数据成员。",
+    "public 或 protected 数据成员虽然语法上允许，但教材不推荐在自定义类中这样设计。",
+    "封装的常见做法是：数据成员使用 private，访问和修改通过成员函数完成。",
+    "类可以在 C++20 模块接口文件中导出，例如使用 export module 声明模块，并使用 export class 导出类。"
+  ],
+  "examples": [
+    "概念性类结构：\n```text\nexport class Simple {\npublic:\n    Simple();\n    virtual ~Simple() = default;\n    void publicMethod();\nprotected:\n    void protectedMethod();\nprivate:\n    void privateMethod();\n    int m_privateInteger{42};\n};\n```"
+  ],
+  "misconceptions": [
+    "protected 数据成员并不等同于 public 数据成员；类的外部普通代码不能像访问 public 成员那样直接访问 protected 成员。",
+    "使用 private 数据成员并不意味着对象不能被外部使用，而是应通过成员函数提供受控访问。",
+    "模块接口文件中的类定义不要求一定拆分到单独的模块实现文件中。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "C++类为什么通常应将数据成员声明为 private？",
+      "a": "为了封装对象状态，避免外部代码直接任意修改数据，并通过 getter、setter 等成员函数提供受控访问。"
+    },
+    {
+      "q": "public、protected 和 private 的主要区别是什么？",
+      "a": "它们规定成员的可访问范围：public 可被外部访问，protected 主要供本类及派生类使用，private 通常仅供本类使用。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++类和成员的基本概念"
+  ],
+  "source_pages": [
+    925,
+    926
+  ],
+  "needs_verification": true,
+  "verify_query": "《C++20高级编程》第5版 第925页 Simple 类 public protected private 数据封装 export module 原文",
+  "concept_id": "1915_类的访问控制与数据封装",
+  "_chunk_pages": [
+    925,
+    928
+  ]
+}

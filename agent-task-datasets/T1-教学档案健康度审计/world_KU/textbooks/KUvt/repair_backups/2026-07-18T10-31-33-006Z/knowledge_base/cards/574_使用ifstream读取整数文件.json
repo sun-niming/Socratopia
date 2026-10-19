@@ -1,0 +1,44 @@
+{
+  "title": "使用ifstream读取整数文件",
+  "definition": "readIntegerFile函数从指定文件中读取整数，并将读取到的整数保存到vector<int>中后返回。函数使用ifstream打开文件，并通过while (inputStream >> temp)循环逐个读取整数；当输入操作失败时，流在布尔语境中为false，循环结束。",
+  "key_points": [
+    "函数参数可以使用string_view表示文件名。",
+    "ifstream inputStream { filename.data() };用于根据文件名创建输入文件流。",
+    "while (inputStream >> temp)在每次循环中尝试读取一个整数；读取成功则继续循环。",
+    "读取到的整数通过integers.push_back(temp)加入vector<int>。",
+    "读取完成后返回保存整数的容器。"
+  ],
+  "examples": [
+    "函数核心结构：\nvector<int> readIntegerFile(string_view filename) {\n    ifstream inputStream{filename.data()};\n    vector<int> integers;\n    int temp;\n    while (inputStream >> temp) {\n        integers.push_back(temp);\n    }\n    return integers;\n}"
+  ],
+  "misconceptions": [
+    "while循环不是按固定次数执行，而是持续到整数读取失败为止。",
+    "读取失败可能发生在输入结束或输入内容无法按要求转换为整数时；循环结束后不会再把失败的输入加入vector。",
+    "ifstream对象创建成功不等于文件一定成功打开，因此需要检查流状态。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "readIntegerFile函数返回什么？",
+      "a": "返回一个vector<int>，其中包含从指定文件成功读取的所有整数。"
+    },
+    {
+      "q": "while (inputStream >> temp)的条件表示什么？",
+      "a": "它尝试从输入文件流读取一个整数到temp；读取成功时条件为真并执行循环体，读取失败时条件为假并结束循环。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++异常处理的基本机制"
+  ],
+  "source_pages": [
+    438,
+    439
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "574_使用ifstream读取整数文件",
+  "_chunk_pages": [
+    437,
+    440
+  ]
+}

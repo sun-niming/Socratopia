@@ -1,0 +1,46 @@
+{
+  "title": "HttpRequest 结构体与解析",
+  "definition": "请求解析时可以把请求行中的信息保存到一个结构体中，例如 `method`、`path`、`version`。解析思路是：先从客户端读取请求数据到 buffer，再找到第一行结束位置，然后用 `sscanf()` 或手动扫描提取 `method`、`path`、`version`。需要检查 method 是否为 GET，并检查 path 是否以 `/` 开头。",
+  "key_points": [
+    "可以用结构体保存 method、path、version。",
+    "先读到 buffer，再解析第一行。",
+    "可用 `sscanf()` 或手动扫描取出三个字段。",
+    "必须检查 method 是否为 GET。",
+    "必须检查 path 是否以 `/` 开头。",
+    "请求解析阶段不必解析所有 Header，也不必处理 POST Body。"
+  ],
+  "examples": [
+    "typedef struct {\n  char method[16];\n  char path[1024];\n  char version[16];\n} HttpRequest;\n\nint parse_request_line(const char *buf, HttpRequest *req) {\n  if (sscanf(buf, \"%15s %1023s %15s\", req->method, req->path, req->version) != 3) {\n    return -1;\n  }\n  if (strcmp(req->method, \"GET\") != 0) {\n    return 405;\n  }\n  if (req->path[0] != '/') {\n    return -1;\n  }\n  return 0;\n}"
+  ],
+  "misconceptions": [
+    "必须先解析完所有 Header 才能处理请求行。",
+    "路径只要是字符串就行，不需要检查是否以 `/` 开头。",
+    "宽度限制的 `sscanf()` 就一定不会出问题。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "这个项目里的请求解析最少需要拿到哪两个信息？",
+      "a": "method 和 path。"
+    },
+    {
+      "q": "为什么 `sscanf()` 里要写宽度限制？",
+      "a": "为了避免字段过长导致缓冲区溢出或截断后误判。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "HTTP 请求最小格式",
+    "C 字符串处理"
+  ],
+  "source_pages": [
+    17,
+    20
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "015_httprequest_结构体与解析",
+  "_chunk_pages": [
+    17,
+    20
+  ]
+}

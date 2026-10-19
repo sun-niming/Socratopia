@@ -1,0 +1,42 @@
+{
+  "title": "fr 单位",
+  "definition": "fr 是 fraction（片段）单位，用于 CSS 网格布局的轨道尺寸定义，表示网格容器中可用空间的一等份。多个 fr 值会按份数分配可用空间，例如 1fr 和 2fr 分别表示占可用空间的 1 份和 2 份。",
+  "key_points": [
+    "fr 的全称含义是 fraction（片段）。",
+    "fr 表示网格容器中可用空间的一等份。",
+    "在 grid-template-columns: 100px 1fr 2fr; 中，第一列固定为 100px，第二列占剩余空间 1 份，第三列占剩余空间 2 份。"
+  ],
+  "examples": [
+    ".container {\n  /* 创建三列，第一列 100px，第二列占剩余空间的 1 份，第三列占 2 份 */\n  grid-template-columns: 100px 1fr 2fr;\n}"
+  ],
+  "misconceptions": [
+    "不要把 1fr 理解为固定长度；原文说明 fr 表示网格容器中可用空间的一等份。",
+    "不要认为 2fr 等于 2px 或 2%；它表示可用空间中的 2 份。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "fr 单位表示什么？",
+      "a": "fr 是 fraction（片段）单位，表示网格容器中可用空间的一等份。"
+    },
+    {
+      "q": "grid-template-columns: 100px 1fr 2fr; 中第三列表示什么？",
+      "a": "第三列占剩余可用空间的 2 份。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "CSS 网格布局",
+    "grid-template-columns 与 grid-template-rows"
+  ],
+  "source_pages": [
+    173,
+    174
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "248_fr_单位",
+  "_chunk_pages": [
+    173,
+    176
+  ]
+}

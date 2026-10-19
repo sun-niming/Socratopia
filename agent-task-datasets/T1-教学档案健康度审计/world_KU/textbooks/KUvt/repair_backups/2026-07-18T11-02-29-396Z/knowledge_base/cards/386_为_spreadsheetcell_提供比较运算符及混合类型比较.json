@@ -1,0 +1,53 @@
+{
+  "title": "为 SpreadsheetCell 提供比较运算符及混合类型比较",
+  "definition": "SpreadsheetCell 可以重载比较运算符，使两个 SpreadsheetCell 对象之间能够进行相等、不等和大小比较；还可以额外提供 SpreadsheetCell 与 double 之间的混合类型比较运算符。比较实现通常基于对象的数值，例如通过 `getValue()` 取得内部 double 值。",
+  "key_points": [
+    "两个 SpreadsheetCell 的相等比较可写成：`bool operator==(const SpreadsheetCell& lhs, const SpreadsheetCell& rhs);`，并比较 `lhs.getValue()` 与 `rhs.getValue()`。",
+    "原文给出了混合类型比较的三种函数形式：`operator<op>(const SpreadsheetCell&, const SpreadsheetCell&)`、`operator<op>(double, const SpreadsheetCell&)`、`operator<op>(const SpreadsheetCell&, double)`。其中 `<op>` 表示具体比较运算符。",
+    "同时提供左右两种操作数顺序的重载，才能支持 `myCell < 10` 和 `10 < myCell` 这两种写法。",
+    "原文示例使用了 `myCell > aThirdCell`、`myCell < 10`、`10 < myCell` 和 `10 != myCell` 等表达式。",
+    "原文提到相等比较涉及 epsilon test，但给出的代码在转录中不完整；浮点数相等判断的具体阈值不能仅依据该转录确定。"
+  ],
+  "examples": [
+    "两个单元格比较：`if (myCell > aThirdCell) { /* ... */ }`",
+    "SpreadsheetCell 与 double 比较：`if (myCell < 10) { /* ... */ }`",
+    "反向混合比较：`if (10 < myCell) { /* ... */ }`",
+    "比较函数声明示意：`bool operator==(const SpreadsheetCell& lhs, const SpreadsheetCell& rhs);`、`bool operator==(double lhs, const SpreadsheetCell& rhs);`、`bool operator==(const SpreadsheetCell& lhs, double rhs);`"
+  ],
+  "misconceptions": [
+    "只重载 `operator<(const SpreadsheetCell&, double)` 并不能自动保证 `10 < myCell` 可用；通常还需要提供反向操作数顺序的重载。",
+    "浮点数相等比较通常不能简单理解为数学上的绝对精确相等；原文提到 epsilon test，但没有给出完整阈值。",
+    "`operator>=` 的实现不能脱离所采用的比较定义；原文示例用 `!(lhs < rhs)` 表示大于等于。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么要同时提供 `SpreadsheetCell` 与 `double` 的两种操作数顺序的比较重载？",
+      "a": "为了同时支持 `myCell < 10` 和 `10 < myCell` 这样的表达式。"
+    },
+    {
+      "q": "两个 SpreadsheetCell 比较时，原文示例比较的是什么？",
+      "a": "比较它们通过 `getValue()` 取得的数值。"
+    },
+    {
+      "q": "原文对浮点数相等比较是否给出了完整 epsilon 阈值？",
+      "a": "没有。转录只显示提到 epsilon test，具体判断代码和阈值不完整，因此不能据此确定具体数值。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++比较运算符重载",
+    "浮点数比较基础"
+  ],
+  "source_pages": [
+    294,
+    295,
+    296
+  ],
+  "needs_verification": true,
+  "verify_query": "《C++20高级编程》第5版 SpreadsheetCell epsilon test operator== getValue 比较运算符 第294页",
+  "concept_id": "386_为_spreadsheetcell_提供比较运算符及混合类型比较",
+  "_chunk_pages": [
+    293,
+    296
+  ]
+}

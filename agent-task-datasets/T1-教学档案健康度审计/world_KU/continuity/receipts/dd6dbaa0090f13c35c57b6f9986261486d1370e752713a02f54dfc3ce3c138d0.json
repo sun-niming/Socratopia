@@ -1,0 +1,105 @@
+{
+  "schemaVersion": 1,
+  "status": "committed",
+  "operationId": "endclass:v1:b40d622f8fa474ba13608a22146603b0:c33a7421d239553dfd6db56b",
+  "operationHash": "dd6dbaa0090f13c35c57b6f9986261486d1370e752713a02f54dfc3ce3c138d0",
+  "scope": {
+    "accountId": "local",
+    "profileId": "uolmzgq8",
+    "worldId": "KU",
+    "conversationId": "-2XQLVh8h2i2jLrYN_muT"
+  },
+  "companion": {
+    "slotId": "npc_c",
+    "companionInstanceId": "ci_56a3438b71f0da96c619c733",
+    "candidateId": "ct_kukvemkm",
+    "displayName": "流萤"
+  },
+  "committedAt": "2026-09-08T01:15:25.761Z",
+  "targets": [
+    {
+      "relativePath": "pal_moments.md",
+      "oldHash": "362ada686ca263bda94a9d6d3974087ce51480b38c259bc698a3a7e574226cbc",
+      "newHash": "d6fa155122d88f2b0ed147426db1b2d22f58c4dc7ceee58c92b30c76cce7a922",
+      "deleting": false
+    },
+    {
+      "relativePath": "textbooks/KUqg/progress.md",
+      "oldHash": "a8b1639f36b29fbb9a06d633e14bad6b51ab79ec20708507a7e6a253362830be",
+      "newHash": "3faee10b3db8fb4d63adb45a72d646c09618569349d4443fd5311a56416fde1f",
+      "deleting": false
+    },
+    {
+      "relativePath": "diary/2026-09.md",
+      "oldHash": "46b7534e3ad0e0ac74538ebe633587ae6a6e339f588d31089b96dc0e3d0eef3c",
+      "newHash": "fe29a90496ab316bd0c59dd0045d92a15e97f5561a5ac058c19c9df2a55b9424",
+      "deleting": false
+    },
+    {
+      "relativePath": "relation_npc_c.md",
+      "oldHash": "d731c6f22af48f88c3e42649d3f25b097a99fc2f83c209bbfc6669d35e9ea985",
+      "newHash": "e555f90955f2dd2b4d9f19b50fbbbfbfd051c81093d38f73bf1fab9aca9293d1",
+      "deleting": false
+    },
+    {
+      "relativePath": "world_meta.json",
+      "oldHash": "003063581d64249ce42ae9fc8d7244c49a78c69af00c62f45ff657c24467eed0",
+      "newHash": "5ddb51cb77161d33dbdaa301ff555e2de9dec74911d19048bff620c28bdde258",
+      "deleting": false
+    },
+    {
+      "relativePath": "world_records.md",
+      "oldHash": "ef08f8132a19b08478a82d33fbc88e03e9ed00055f9fe02e9343d271562bfebb",
+      "newHash": "d4075ad533228e297563ff801d2bff0ad56863d7877c19c6d8c504579ea29e00",
+      "deleting": false
+    },
+    {
+      "relativePath": "textbooks/textbook_index.json",
+      "oldHash": "8784df10173636dac859916d84f84f3db62c85845f3fe0457d9e2640424012ce",
+      "newHash": "b3c7369011b1f018814a0653c4d677998d1d5bad2aa20e8a237b6e2cc6d2c3cb",
+      "deleting": false
+    },
+    {
+      "relativePath": "textbooks/KUqg/handoff/last_tail.json",
+      "oldHash": "7fc45bd7731483685dd572d7ab674d4d8f6f9b8d402ea15cef8637373fc18d4b",
+      "newHash": "089f9688c96c2da3b0679ca30d94e10fbe0e725c803bdcf04f24dcc51d8973ce",
+      "deleting": false
+    },
+    {
+      "relativePath": "textbooks/KUqg/handoff/last_meta.json",
+      "oldHash": "57f08039fcc2596a3130c9a4c39cd9b90ab3eb76adfe133b6daaafe6e593c4b2",
+      "newHash": "e99301387d1f60434b0d7f424afbda983e342048763687f4bd3e23a2c23676aa",
+      "deleting": false
+    },
+    {
+      "relativePath": "conversations/-2XQLVh8h2i2jLrYN_muT/current_reading.md",
+      "oldHash": "d9533f2236ccb2f6e9ce2522bc6102de78892550fb55a342eac0732edda682e5",
+      "newHash": null,
+      "deleting": true
+    },
+    {
+      "relativePath": "textbooks/KUqg/current_reading.md",
+      "oldHash": null,
+      "newHash": null,
+      "deleting": true
+    },
+    {
+      "relativePath": "conversations/-2XQLVh8h2i2jLrYN_muT/current_reading_summary.json",
+      "oldHash": null,
+      "newHash": null,
+      "deleting": true
+    },
+    {
+      "relativePath": "conversations/-2XQLVh8h2i2jLrYN_muT/handoff.json",
+      "oldHash": null,
+      "newHash": null,
+      "deleting": true
+    }
+  ],
+  "payload": {
+    "farewell": "*她轻轻点了点头。*\n\n今天先记住这条线：服务器用 `Set-Cookie` 把识别码交给浏览器，之后浏览器再用 `Cookie` 带回去。我们把进度稳稳留在这里。",
+    "companionNote": "你答出的“Set-Cookie”很准确。先把这枚小小的识别码记住，HTTP 的记忆就有了落脚点。",
+    "marker": "<!-- continuityEvent:dd6dbaa0090f13c35c57b6f9 companion:ci_56a3438b71f0da96c619c733 mode:classroom -->",
+    "endingPage": 89
+  }
+}

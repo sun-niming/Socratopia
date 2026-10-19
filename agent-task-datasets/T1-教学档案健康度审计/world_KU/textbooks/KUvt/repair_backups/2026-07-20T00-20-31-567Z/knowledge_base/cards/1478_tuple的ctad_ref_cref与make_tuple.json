@@ -1,0 +1,50 @@
+{
+  "title": "tuple的CTAD、ref、cref与make_tuple",
+  "definition": "构造tuple时可以使用类模板参数推导（CTAD），让编译器根据实参自动推导元素类型。若希望tuple包含引用，不能仅依靠普通的构造函数参数推导，而应使用`std::ref`生成可修改引用包装器，或使用`std::cref`生成常量引用包装器。也可以使用`std::make_tuple`通过函数模板参数推导创建tuple。",
+  "key_points": [
+    "使用CTAD可以省略tuple的模板类型参数。",
+    "字符串字面量若要推导为`std::string`，原文示例使用`\"Test\"s`。",
+    "`std::ref(d)`用于在推导出的tuple中保存对d的可修改引用。",
+    "`std::cref(d)`用于保存对d的常量引用，不能通过该引用修改d。",
+    "`std::make_tuple`根据传入实参自动推导tuple类型。"
+  ],
+  "examples": [
+    "`double d { 3.14 }; std::tuple t2 { 16, std::ref(d), std::cref(d), std::ref(str1) };`，其类型为`std::tuple<int, double&, const double&, std::string&>`。",
+    "使用`std::ref(d)`得到的元素可通过`std::get<1>(t2)`修改d；使用`std::cref(d)`得到的元素不能被修改。",
+    "`auto t2 = std::make_tuple(16, std::ref(d), std::cref(d), std::ref(str1));`。"
+  ],
+  "misconceptions": [
+    "普通CTAD不会自动把所有实参都变成引用元素；需要使用`std::ref`或`std::cref`表达引用意图。",
+    "`std::cref`表示常量引用，不能通过对应tuple元素修改被引用对象。",
+    "`std::make_tuple`不是只能创建同类型元素的tuple，它可以推导出异构元素类型。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何让CTAD创建的tuple包含对double变量d的可修改引用？",
+      "a": "在构造时使用`std::ref(d)`，例如`std::tuple t { 16, std::ref(d) };`。"
+    },
+    {
+      "q": "`std::ref(d)`和`std::cref(d)`有什么区别？",
+      "a": "`std::ref(d)`提供可修改引用，`std::cref(d)`提供常量引用，后者不能通过tuple元素修改d。"
+    },
+    {
+      "q": "如何使用函数模板推导创建tuple？",
+      "a": "使用`std::make_tuple`，例如`auto t = std::make_tuple(16, std::ref(d));`。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "std::pair与std::tuple的基本特征"
+  ],
+  "source_pages": [
+    710,
+    711
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1478_tuple的ctad_ref_cref与make_tuple",
+  "_chunk_pages": [
+    709,
+    712
+  ]
+}

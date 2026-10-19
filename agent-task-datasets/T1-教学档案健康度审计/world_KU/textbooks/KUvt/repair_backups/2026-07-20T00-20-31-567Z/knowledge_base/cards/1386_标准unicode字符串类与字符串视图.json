@@ -1,0 +1,46 @@
+{
+  "title": "标准Unicode字符串类与字符串视图",
+  "definition": "除 `std::string` 外，C++标准库还提供与不同字符类型对应的字符串类：`std::wstring`、`std::u8string`、`std::u16string` 和 `std::u32string`。这些类型本质上分别是不同字符类型的 `basic_string` 特化；标准库还提供对应的 `basic_string_view` 字符串视图类型。",
+  "key_points": [
+    "`using string = basic_string<char>;`",
+    "`using wstring = basic_string<wchar_t>;`",
+    "`using u8string = basic_string<char8_t>;`",
+    "`using u16string = basic_string<char16_t>;`",
+    "`using u32string = basic_string<char32_t>;`",
+    "对应的字符串视图包括 `string_view`、`wstring_view`、`u8string_view`、`u16string_view` 和 `u32string_view`。"
+  ],
+  "examples": [
+    "`std::u8string text;` 表示以 `char8_t` 为元素类型的字符串。",
+    "`std::u16string_view view;` 表示以 `char16_t` 为元素类型的字符串视图。"
+  ],
+  "misconceptions": [
+    "`u16string` 和 `u32string` 不是普通 `string` 的别名，而是分别基于 `char16_t` 和 `char32_t` 的字符串类型。",
+    "字符串视图不是拥有字符串数据的字符串容器，而是基于 `basic_string_view` 的非拥有视图。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`std::u32string` 的本质是什么？",
+      "a": "它是 `basic_string<char32_t>` 的类型别名。"
+    },
+    {
+      "q": "与 `std::u16string` 对应的字符串视图类型是什么？",
+      "a": "是 `std::u16string_view`，其底层是 `basic_string_view<char16_t>`。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++模板与类型别名",
+    "Unicode字符类型"
+  ],
+  "source_pages": [
+    662,
+    662
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 std::u8string std::u16string std::u32string 定义 basic_string char8_t string_view",
+  "concept_id": "1386_标准unicode字符串类与字符串视图",
+  "_chunk_pages": [
+    661,
+    664
+  ]
+}

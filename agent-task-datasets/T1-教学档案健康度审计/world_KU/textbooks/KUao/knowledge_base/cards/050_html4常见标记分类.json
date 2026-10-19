@@ -1,0 +1,50 @@
+{
+  "title": "HTML4常见标记分类",
+  "definition": "教材将HTML4常见标记按用途分为10类：结构标记、头部标记、文本标记、段落及标题标记、列表标记、超链接标记、图像及媒体元素标记、表格标记、表单标记和容器标记。",
+  "key_points": [
+    "结构标记：html、head、body。",
+    "头部标记：title、meta、link、style。",
+    "文本标记：strong、em、ruby（rp、rt）。",
+    "段落及标题标记：p、h1~h6、br。",
+    "列表标记：ul、ol、li、dl、dt、dd。",
+    "超链接标记：a、map、area。",
+    "图像及媒体元素标记：img、embed、object。",
+    "表格标记：table、tr、td、th、thead、tbody、tfoot。",
+    "表单标记：form、input、textarea、select、option、label。",
+    "容器标记：div、span。"
+  ],
+  "examples": [
+    "结构标记：<html><head></head><body></body></html>",
+    "表单标记：<form><input><label></label></form>",
+    "容器标记：<div><span>内容</span></div>"
+  ],
+  "misconceptions": [
+    "这些标记不是随意混放的，每一类有其典型用途。",
+    "容器标记本身通常不表示具体语义内容，主要用于组织页面结构。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "教材把HTML4常见标记分为几类？",
+      "a": "10类。"
+    },
+    {
+      "q": "div和span属于哪一类标记？",
+      "a": "容器标记。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "HTML元素"
+  ],
+  "source_pages": [
+    39,
+    39
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "050_html4常见标记分类",
+  "_chunk_pages": [
+    37,
+    40
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "title": "数据成员和方法的封装建议",
+  "definition": "为了提高封装性，类的数据成员通常应默认声明为 private；如果需要允许外部代码或派生类访问，应通过 public 或 protected 的 getter 和 setter 提供受控接口。方法也应默认设为 private，仅将客户需要调用的方法设为 public，将仅供派生类使用的方法设为 protected。",
+  "key_points": [
+    "将数据成员设为 private，可以隐藏数据表示方式，使内部表示改变时不必改变 public 或 protected 接口。",
+    "getter 和 setter 可以替代外部或派生类对数据成员的直接访问。",
+    "setter 中可以加入对输入数据的检查。",
+    "方法也应遵循最小暴露原则：客户需要的方法设为 public，派生类需要的方法设为 protected，其余方法设为 private。"
+  ],
+  "examples": [
+    "如果希望客户访问某个数据成员，不应直接把数据成员设为 public，而可以提供 `public` 的 getter 和 setter。",
+    "如果只希望派生类访问某个数据成员，可以将数据成员保持为 private，并提供 `protected` 的 getter 和 setter。"
+  ],
+  "misconceptions": [
+    "提供 protected getter 或 setter 不等于把数据成员本身声明为 protected；数据成员仍可以保持 private。",
+    "封装不仅是隐藏数据成员，还包括控制方法的可见范围和通过 setter 检查输入数据。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么建议将数据成员默认声明为 private？",
+      "a": "因为这样可以提供更高程度的封装，隐藏数据表示方式，并允许通过 getter 和 setter 控制访问、检查输入。"
+    },
+    {
+      "q": "如果只希望派生类访问某个数据，推荐怎样设计？",
+      "a": "将数据成员保持为 private，并提供 protected 的 getter 和 setter。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "基类成员的访问控制"
+  ],
+  "source_pages": [
+    305,
+    305
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "629_数据成员和方法的封装建议",
+  "_chunk_pages": [
+    305,
+    308
+  ]
+}

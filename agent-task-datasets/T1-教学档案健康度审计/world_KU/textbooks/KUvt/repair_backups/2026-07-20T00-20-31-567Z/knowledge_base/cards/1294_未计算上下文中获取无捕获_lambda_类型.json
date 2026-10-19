@@ -1,0 +1,42 @@
+{
+  "title": "未计算上下文中获取无捕获 lambda 类型",
+  "definition": "在未计算上下文中，可以使用 decltype 对无捕获 lambda 表达式的类型进行命名，而不会实际执行该 lambda。得到的 lambda 类型可以用于函数返回类型；对于无捕获 lambda，在题述 C++20 用法中可以进行默认构造。",
+  "key_points": [
+    "decltype 中的 lambda 表达式处于未计算上下文，不会执行 lambda 的函数体。",
+    "可以使用别名模板或 using 声明保存该 lambda 的闭包类型。",
+    "无捕获 lambda 类型可用默认构造表达式生成对象。"
+  ],
+  "examples": [
+    "使用类型别名保存无捕获 lambda 的类型：\n```cpp\nusing LambdaType = decltype([](int a, int b) { return a + b; });\n\nLambdaType getLambda() {\n    return LambdaType{};\n}\n```"
+  ],
+  "misconceptions": [
+    "decltype 中出现 lambda 并不表示会调用或执行该 lambda。",
+    "该用法针对无捕获 lambda；不能据此推断任意带捕获 lambda 都可以默认构造。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何在未计算上下文中获得一个无捕获 lambda 的类型？",
+      "a": "可以使用 decltype，例如 `using LambdaType = decltype([](int a, int b) { return a + b; });`。"
+    },
+    {
+      "q": "为什么 decltype 中的 lambda 不会被执行？",
+      "a": "因为 decltype 的操作数处于未计算上下文，只用于确定类型，不会进行求值。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "lambda 表达式",
+    "decltype 与未计算上下文"
+  ],
+  "source_pages": [
+    625,
+    625
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 decltype lambda expression unevaluated context no-capture lambda default constructible closure type",
+  "concept_id": "1294_未计算上下文中获取无捕获_lambda_类型",
+  "_chunk_pages": [
+    625,
+    628
+  ]
+}

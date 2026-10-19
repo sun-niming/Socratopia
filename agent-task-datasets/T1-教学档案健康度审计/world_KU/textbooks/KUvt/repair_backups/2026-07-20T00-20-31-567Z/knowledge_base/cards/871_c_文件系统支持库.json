@@ -1,0 +1,51 @@
+{
+  "title": "C++ 文件系统支持库",
+  "definition": "C++ 标准库提供文件系统支持库，定义在 <filesystem> 头文件中，主要位于 std::filesystem 命名空间。该库用于编写可移植的文件系统操作代码，可以处理路径、查询文件或目录、遍历目录以及获取文件信息。",
+  "key_points": [
+    "使用文件系统库前通常需要包含 <filesystem>。",
+    "相关类型和函数位于 std::filesystem 命名空间。",
+    "文件系统库可以处理路径、目录条目、目录遍历和常见文件操作。",
+    "它可以查询某个路径对应的是目录还是文件，并获取文件大小、扩展名、最后修改时间等信息。"
+  ],
+  "examples": [
+    "#include <filesystem>",
+    "using namespace std::filesystem;",
+    "path p{\"data.txt\"};",
+    "directory_entry entry{p};"
+  ],
+  "misconceptions": [
+    "path 只是表示一个路径，不代表该路径一定存在。",
+    "文件系统库并不只用于打开文件，也支持目录查询、路径操作、复制、删除和空间查询等操作。",
+    "使用 std::filesystem 不等于路径格式在所有平台上完全相同；路径分隔符等细节与平台有关。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "C++ 文件系统支持库定义在哪个头文件和命名空间中？",
+      "a": "定义在 <filesystem> 头文件中，主要位于 std::filesystem 命名空间。"
+    },
+    {
+      "q": "文件系统库可以用于哪些任务？",
+      "a": "可以处理路径，查询文件或目录，遍历目录，以及获取文件大小、扩展名和最后修改时间等信息。"
+    },
+    {
+      "q": "一个 path 对象是否一定对应实际存在的文件或目录？",
+      "a": "不一定。path 只表示一个可能指向文件或目录的路径，目标可以不存在。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++ 命名空间与头文件",
+    "文件和目录的基本概念"
+  ],
+  "source_pages": [
+    430,
+    430
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "871_c_文件系统支持库",
+  "_chunk_pages": [
+    429,
+    432
+  ]
+}

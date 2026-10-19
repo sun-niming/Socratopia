@@ -1,0 +1,44 @@
+{
+  "title": "read 从输入读取到变量",
+  "definition": "read 用于从键盘读取用户输入到变量中。教材给出的格式有两种：read 变量名列表；read 变量名列表 < file。前者表示从键盘读取输入，后者表示通过输入重定向从文件读取内容到变量。",
+  "key_points": [
+    "read 用于把输入读入变量",
+    "格式一：read 变量名列表",
+    "格式二：read 变量名列表 < file",
+    "可从键盘读取，也可借助重定向从文件读取"
+  ],
+  "examples": [
+    "read name",
+    "read 变量名列表",
+    "read 变量名列表 < file"
+  ],
+  "misconceptions": [
+    "认为 read 只能从键盘读取；教材还给出了从文件读取的形式",
+    "忽略变量名列表的写法；原文明确采用“变量名列表”格式"
+  ],
+  "qa_pairs": [
+    {
+      "q": "read 命令的作用是什么？",
+      "a": "从键盘读取用户输入到变量中。"
+    },
+    {
+      "q": "教材中 read 的两种格式是什么？",
+      "a": "read 变量名列表；read 变量名列表 < file。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "输入/输出基础"
+  ],
+  "source_pages": [
+    69,
+    72
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "123_read_从输入读取到变量",
+  "_chunk_pages": [
+    69,
+    72
+  ]
+}

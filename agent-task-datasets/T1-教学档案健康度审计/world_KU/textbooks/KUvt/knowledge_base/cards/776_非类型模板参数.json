@@ -1,0 +1,44 @@
+{
+  "title": "非类型模板参数",
+  "definition": "非类型模板参数是模板参数列表中的值参数，而不是类型参数。原文列举的非类型模板参数包括整数类型、枚举类型、指针、引用、std::nullptr_t、auto、auto& 和 auto*；从 C++20 开始，浮点型以及在限制条件下的类类型也可以作为非类型模板参数。非类型模板参数的值在编译代码之前就已确定。",
+  "key_points": [
+    "非类型模板参数可以把网格的宽度和高度直接写入模板参数列表，而不是在构造函数中传入。",
+    "由于宽度和高度在编译期已知，模板实现可以使用固定大小的二维数组，而不是动态分配的 vector of vector。",
+    "非类型模板参数的值会参与模板实例化，并成为实例化类型的一部分。"
+  ],
+  "examples": [
+    "网格模板可以写成：\n\n```cpp\ntemplate <typename T, size_t WIDTH, size_t HEIGHT>\nclass Grid;\n```",
+    "实例化一个宽度为 10、高度为 10 的网格：\n\n```cpp\nGrid<int, 10, 10> myGrid;\n```"
+  ],
+  "misconceptions": [
+    "所有运行期变量都可以直接作为非类型模板参数。",
+    "非类型模板参数只影响对象的初始值，不影响对象的类型。",
+    "使用非类型模板参数后，宽度和高度仍然只是构造函数参数。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "非类型模板参数与普通类型模板参数有什么区别？",
+      "a": "类型模板参数表示一种类型，例如 typename T；非类型模板参数表示一个编译期值，例如 size_t WIDTH 或 size_t HEIGHT。"
+    },
+    {
+      "q": "将网格宽度和高度设为非类型模板参数有什么主要好处？",
+      "a": "编译器在生成代码前就知道宽度和高度，因此可以使用固定大小的二维数组，而不必动态分配 vector 的 vector。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "模板参数",
+    "编译期常量"
+  ],
+  "source_pages": [
+    382,
+    383
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 non-type template parameters permitted types integral enumeration pointer reference nullptr_t auto floating point structural class type",
+  "concept_id": "776_非类型模板参数",
+  "_chunk_pages": [
+    381,
+    384
+  ]
+}

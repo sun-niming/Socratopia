@@ -1,0 +1,45 @@
+{
+  "title": "input文本框与密码框",
+  "definition": "在HTML中，`input` 标签可通过 `type` 属性创建不同输入控件：`type=\"text\"` 表示常规文本输入框，`type=\"password\"` 表示密码输入框，密码内容会以掩码方式显示。`value` 属性可设置输入框内的初始内容（默认值）。",
+  "key_points": [
+    "`input type=\"text\"` 用于输入普通文本。",
+    "`input type=\"password\"` 用于输入密码，显示时会被掩码。",
+    "`value` 可以为输入框预设初始内容。",
+    "给输入框添加 `name` 属性，便于后端识别和接收数据。"
+  ],
+  "examples": [
+    "<input type=\"text\" name=\"username\" value=\"张三\">",
+    "<input type=\"password\" name=\"pwd\" value=\"123456\">"
+  ],
+  "misconceptions": [
+    "密码框只是显示方式不同，不代表输入内容不会被提交。",
+    "`value` 不是标签内容，而是输入框的默认值。",
+    "只有写了 `name`，后端才能区分并获取该字段的数据。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`input type=\"password\"` 的主要作用是什么？",
+      "a": "创建密码输入框，并以掩码方式显示输入内容。"
+    },
+    {
+      "q": "`value` 属性在输入框中表示什么？",
+      "a": "表示输入框内的初始内容，也就是默认值。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "HTML基础",
+    "input标签"
+  ],
+  "source_pages": [
+    69,
+    72
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "085_input文本框与密码框",
+  "_chunk_pages": [
+    69,
+    72
+  ]
+}

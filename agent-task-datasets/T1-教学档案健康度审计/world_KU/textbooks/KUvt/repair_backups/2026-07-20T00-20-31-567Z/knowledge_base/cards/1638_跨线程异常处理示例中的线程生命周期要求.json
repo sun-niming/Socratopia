@@ -1,0 +1,43 @@
+{
+  "title": "跨线程异常处理示例中的线程生命周期要求",
+  "definition": "在跨线程传递异常的示例中，主线程创建执行threadFunc()的新线程，并把std::exception_ptr对象按引用传入；随后必须调用join()等待线程结束，再检查exception_ptr并在主线程中重新抛出异常。即使采用消息传递在线程间通信，也必须确保每个创建的线程最终调用join()或detach()。",
+  "key_points": [
+    "工作线程在自己的try/catch中捕获异常，并把std::current_exception()的结果写入主线程提供的exception_ptr。",
+    "主线程通过t.join()等待工作线程完成，之后再检查error。",
+    "如果error非空，主线程调用std::rethrow_exception(error)，异常便从工作线程转移到主线程的异常处理流程。",
+    "GUI等应用程序中不宜长时间阻塞主线程；原文建议此时可使用消息传递在线程间通信，但线程仍需调用join()或detach()。"
+  ],
+  "examples": [
+    "主线程处理线程异常的控制流程：\n$$\n\\text{创建线程}\\rightarrow\\texttt{join()}\\rightarrow\\text{检查 }\\texttt{exception\\_ptr}\\rightarrow\\texttt{rethrow\\_exception()}\\rightarrow\\text{主线程catch}\n$$"
+  ],
+  "misconceptions": [
+    "调用join()不仅是为了等待结果，也是为了正确完成线程生命周期管理；不能因为使用了exception_ptr就省略join()或detach()。",
+    "主线程重新抛出异常并不意味着原异常在两个线程中同时继续执行，而是让主线程重新进入自己的异常处理流程。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么示例中要先join()再检查exception_ptr？",
+      "a": "因为必须先等待工作线程完成，确保工作线程已经写入最终的exception_ptr结果，然后主线程再判断并重新抛出异常。"
+    },
+    {
+      "q": "如果不想阻塞GUI主线程，原文建议采用什么通信方式？",
+      "a": "可以使用消息传递范型在线程之间通信，例如向UI线程发送包含current_exception()结果副本的消息；同时仍须对创建的线程调用join()或detach()。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "exception_ptr在不同线程间复制和重新抛出异常",
+    "std::thread的生命周期管理"
+  ],
+  "source_pages": [
+    799,
+    799
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1638_跨线程异常处理示例中的线程生命周期要求",
+  "_chunk_pages": [
+    797,
+    800
+  ]
+}

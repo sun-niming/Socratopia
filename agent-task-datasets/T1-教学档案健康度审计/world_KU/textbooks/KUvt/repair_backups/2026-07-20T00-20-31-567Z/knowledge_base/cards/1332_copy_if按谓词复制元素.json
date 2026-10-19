@@ -1,0 +1,47 @@
+{
+  "title": "copy_if按谓词复制元素",
+  "definition": "copy_if接收源范围、目标范围起始迭代器和一个谓词，只把源范围中满足谓词的元素依次复制到目标范围。它不会创建或扩大目标容器，因此目标范围必须预先足够大。copy_if返回目标范围内最后一个被复制元素后面的位置，可用于删除目标容器中未使用的尾部空间。",
+  "key_points": [
+    "典型形式为copy_if(b,e,d,p)。",
+    "只有谓词返回true的源元素会被复制。",
+    "复制不会创建或扩大容器。",
+    "返回值是最后一个复制元素后面的位置，可作为erase的第一个参数。"
+  ],
+  "examples": [
+    "只复制偶数：auto endIterator { copy_if(cbegin(vec1), cend(vec1), begin(vec2), [](int i){ return i % 2 == 0; }) };",
+    "删除vec2中复制结果之后的多余元素：vec2.erase(endIterator, end(vec2));",
+    "若vec1为$[1,2,3,4]$，vec2预先有足够空间，则有效结果为$[2,4]$。"
+  ],
+  "misconceptions": [
+    "copy_if不会自动把vec2缩小到实际复制数量。",
+    "copy_if的返回值不是复制的元素个数，而是目标范围中最后一个复制元素后的位置。",
+    "目标空间不足时，copy_if不会自动扩容来解决问题。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "copy_if如何只复制偶数？",
+      "a": "传入谓词[](int i){ return i % 2 == 0; }，只有该谓词返回true的元素会被复制。"
+    },
+    {
+      "q": "为什么copy_if之后可以调用vec2.erase(endIterator, end(vec2))？",
+      "a": "因为endIterator指向最后一个复制元素后的位置，后面的元素是未使用的多余空间，可以删除。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "copy算法及目标范围要求",
+    "谓词",
+    "迭代器返回值"
+  ],
+  "source_pages": [
+    640,
+    640
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1332_copy_if按谓词复制元素",
+  "_chunk_pages": [
+    637,
+    640
+  ]
+}

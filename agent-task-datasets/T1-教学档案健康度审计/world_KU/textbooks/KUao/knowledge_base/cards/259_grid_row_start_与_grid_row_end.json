@@ -1,0 +1,41 @@
+{
+  "title": "grid-row-start 与 grid-row-end",
+  "definition": "grid-row-start 用来指定元素上边框所在的水平网格线；grid-row-end 用来指定元素下边框所在的水平网格线，或者用 span 表示跨越的单元格数。",
+  "key_points": [
+    "grid-row-start 对应元素上边框所在的水平网格线。",
+    "grid-row-end 对应元素下边框所在的水平网格线。",
+    "grid-row-end 也可以写成跨越 span 的单元格数。"
+  ],
+  "examples": [
+    "grid-row-start: 1;\ngrid-row-end: 3;"
+  ],
+  "misconceptions": [
+    "grid-row-start 不是设置元素高度。",
+    "grid-row-end 不只是“结束位置”，教材还说明它可以表示 span 的单元格数。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "grid-row-start 表示什么？",
+      "a": "表示元素上边框所在的水平网格线。"
+    },
+    {
+      "q": "grid-row-end 还可以表示什么？",
+      "a": "还可以表示跨越 span 的单元格数。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "网格线编号与定位"
+  ],
+  "source_pages": [
+    181,
+    184
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "259_grid_row_start_与_grid_row_end",
+  "_chunk_pages": [
+    181,
+    184
+  ]
+}

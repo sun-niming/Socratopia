@@ -1,0 +1,48 @@
+{
+  "title": "operator-> 的重载规则",
+  "definition": "C++允许类重载 operator->，使类对象可以使用箭头运算符访问底层对象的成员或方法。对类对象执行 obj->member 时，C++会调用 obj.operator->()，然后对该运算符返回的结果继续应用 ->。因此，模拟指针的 operator-> 通常返回底层对象的指针。",
+  "key_points": [
+    "非 const 版本通常返回 T*：$T*\\ operator\\text{-\\string greater}()\\ \\{\\ return\\ m\\_ptr;\\ \\}$。",
+    "const 版本通常返回 const T*：$const\\ T*\\ operator\\text{-\\string greater}()\\ const\\ \\{\\ return\\ m\\_ptr;\\ }$。",
+    "表达式 smartCell->set(5) 可理解为：$smartCell.operator\\text{-\\string greater}()->set(5)$。",
+    "operator* 返回引用，而 operator-> 返回指针；二者的返回类型并不对称。"
+  ],
+  "examples": [
+    "Pointer<SpreadsheetCell> smartCell { new SpreadsheetCell };",
+    "smartCell->set(5);",
+    "std::cout << smartCell->getValue() << std::endl;",
+    "const Pointer<SpreadsheetCell> p { new SpreadsheetCell };",
+    "const SpreadsheetCell* raw = p.operator->();"
+  ],
+  "misconceptions": [
+    "operator-> 应返回对象引用；按照教材示例，它应返回指向对象的指针。",
+    "C++允许直接重载 operator. 来实现成员访问；教材说明 operator. 不允许重载。",
+    "operator-> 只会被调用一次；对于重载的 operator->，C++会对返回结果继续应用 ->。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "Pointer<T>::operator-> 为什么要返回 T*？",
+      "a": "因为箭头表达式需要对返回结果继续应用 ->，而返回底层对象的指针才能访问该对象的成员或方法。"
+    },
+    {
+      "q": "smartCell->set(5) 可展开为什么形式？",
+      "a": "可理解为 $smartCell.operator\\text{-\\string greater}()->set(5)$。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "指针成员访问运算符 ->",
+    "运算符重载"
+  ],
+  "source_pages": [
+    486,
+    486
+  ],
+  "needs_verification": true,
+  "verify_query": "C++ 重载 operator-> 返回类型 const 版本 递归调用 标准规则 教材示例",
+  "concept_id": "974_operator_的重载规则",
+  "_chunk_pages": [
+    485,
+    488
+  ]
+}

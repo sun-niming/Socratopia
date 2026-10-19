@@ -1,0 +1,49 @@
+{
+  "title": "C++20 的 atomic_ref",
+  "definition": "std::atomic_ref<T> 是 C++20 引入的原子引用类型。它基本使用与 std::atomic 类似，但 atomic_ref 引用已有对象，而 std::atomic 通常存储传入值的副本。atomic_ref 实例本身应比其引用的对象存活时间短；它可以复制，并且可以创建多个 atomic_ref 实例引用同一个对象。对象被 atomic_ref 引用后，教材要求不要绕过 atomic_ref 直接访问该对象。",
+  "key_points": [
+    "atomic_ref 操作的是已有对象，而不是像 atomic 那样保存一个独立副本。",
+    "atomic_ref 的生命周期应短于被引用对象的生命周期。",
+    "atomic_ref 可复制，同一对象可以被多个 atomic_ref 实例引用。",
+    "教材指出，atomic_ref<T> 可用于简单可复制类型 T；标准库还为指针、整数和浮点类型提供相应特化操作。",
+    "指针特化支持 fetch_add() 和 fetch_sub()；整数特化支持 fetch_add()、fetch_sub()、fetch_and()、fetch_or() 和 fetch_xor()；浮点特化支持 fetch_add() 和 fetch_sub()。"
+  ],
+  "examples": [
+    "示例结构：\nint counter { 0 };\nstd::atomic_ref<int> atomicCounter { counter };\n此后可通过 atomicCounter 对 counter 执行原子递增操作。"
+  ],
+  "misconceptions": [
+    "atomic_ref 不会创建被引用对象的副本；它直接关联已有对象。",
+    "atomic_ref 的存在不会延长被引用对象的生命周期。",
+    "创建 atomic_ref 后，不能一边通过 atomic_ref 访问对象，一边绕过它直接进行不受保护的访问。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "atomic_ref 与 atomic 的主要区别是什么？",
+      "a": "atomic_ref 引用一个已有对象并对其执行原子操作，而 atomic 通常保存传入值的副本。"
+    },
+    {
+      "q": "atomic_ref 的生命周期与被引用对象有什么关系？",
+      "a": "atomic_ref 实例的生命周期应短于被引用对象的生命周期。"
+    },
+    {
+      "q": "同一个对象可以有多个 atomic_ref 吗？",
+      "a": "可以。atomic_ref 可复制，也可以创建任意多个 atomic_ref 实例引用同一个对象。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "原子类型",
+    "引用和对象生命周期"
+  ],
+  "source_pages": [
+    802,
+    802
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 std::atomic_ref trivially copyable type lifetime direct non-atomic access requirements",
+  "concept_id": "1646_c_20_的_atomic_ref",
+  "_chunk_pages": [
+    801,
+    804
+  ]
+}

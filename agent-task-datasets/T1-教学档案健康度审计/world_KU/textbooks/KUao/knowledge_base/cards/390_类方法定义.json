@@ -1,0 +1,46 @@
+{
+  "title": "类方法定义",
+  "definition": "类方法定义在类实例的原型上，并且会被所有实例共享。方法不仅可以写成普通函数，还可以写成异步函数、生成器函数或异步生成器函数。",
+  "key_points": [
+    "方法定义在类实例的原型上，而不是每个实例各自保存一份。",
+    "所有实例共享同一个方法。",
+    "方法可以是普通函数、异步函数、生成器函数或异步生成器函数。"
+  ],
+  "examples": [
+    "class Rectangle {\n  constructor(height, width) {\n    this.height = height;\n    this.width = width;\n  }\n  showName() {\n    console.log('Rectangle');\n  }\n  async load() {\n    return 1;\n  }\n  *iter() {\n    yield this.height;\n  }\n}",
+    "class Rectangle {\n  get area() {\n    return this.calcArea();\n  }\n  calcArea() {\n    return this.height * this.width;\n  }\n}"
+  ],
+  "misconceptions": [
+    "每个实例都会单独复制一份方法。",
+    "类方法只能写成普通函数，不能写成异步函数或生成器函数。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "类方法定义在哪里？",
+      "a": "定义在类实例的原型上。"
+    },
+    {
+      "q": "类方法是否被所有实例共享？",
+      "a": "是，方法会被所有实例共享。"
+    },
+    {
+      "q": "类方法可以有哪些形式？",
+      "a": "普通函数、异步函数、生成器函数或异步生成器函数。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "JavaScript 类基础"
+  ],
+  "source_pages": [
+    295,
+    296
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "390_类方法定义",
+  "_chunk_pages": [
+    293,
+    296
+  ]
+}

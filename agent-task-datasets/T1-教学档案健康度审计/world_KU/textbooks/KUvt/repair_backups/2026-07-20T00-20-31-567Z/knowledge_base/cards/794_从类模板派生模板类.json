@@ -1,0 +1,52 @@
+{
+  "title": "从类模板派生模板类",
+  "definition": "可以从类模板派生新的类模板。如果派生类继承的是通用类模板本身，那么派生类也必须是模板，并且基类写成带模板实参的具体实例，例如GameBoard<T>继承Grid<T>。这样，GameBoard<T>的每个实例都会继承对应类型的Grid<T>实例。",
+  "key_points": [
+    "派生类模板的声明示例为：\n```cpp\nexport template <typename T>\nclass GameBoard : public Grid<T> {\npublic:\n    explicit GameBoard(\n        size_t width = Grid<T>::DefaultWidth,\n        size_t height = Grid<T>::DefaultHeight);\n    void move(size_t xSrc, size_t ySrc,\n              size_t xDest, size_t yDest);\n};\n```",
+    "GameBoard<T>不是直接从一个不带实参的“通用Grid”继承，而是对每个T分别从Grid<T>继承。",
+    "GameBoard继承Grid的公共功能，因此可以直接获得at()、getHeight()、getWidth()等方法，不需要重新实现。",
+    "GameBoard只增加棋盘专用的move()方法，用于把棋子从源坐标移动到目标坐标。",
+    "原文指出，GameBoard没有动态分配的内存，因此不需要额外添加拷贝构造函数、赋值运算符或析构函数。",
+    "访问依赖模板基类中的静态成员时，需要写Grid<T>::DefaultWidth和Grid<T>::DefaultHeight。"
+  ],
+  "examples": [
+    "若T为ChessPiece，则实例化关系为：\n$$\nGameBoard<ChessPiece>\\ \\text{继承}\\ Grid<ChessPiece>\n$$",
+    "构造函数默认参数可写为：\n```cpp\nexplicit GameBoard(\n    size_t width = Grid<T>::DefaultWidth,\n    size_t height = Grid<T>::DefaultHeight);\n```"
+  ],
+  "misconceptions": [
+    "GameBoard<T>不是从未实例化的Grid模板直接继承，而是从Grid<T>这个具体模板实例继承。",
+    "继承类模板的派生类不一定总是模板；本页讨论的情形是从通用模板派生，因此派生类也声明为模板。",
+    "GameBoard不需要重写Grid已有的at()和尺寸访问方法，除非有意改变其行为。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么GameBoard的基类写成Grid<T>而不是Grid？",
+      "a": "因为GameBoard<T>的每个实例都应继承与自身T相对应的Grid<T>实例，而不是一个没有确定模板实参的通用模板。"
+    },
+    {
+      "q": "GameBoard从Grid继承了哪些功能？",
+      "a": "它继承Grid已有的功能，例如at()、getHeight()和getWidth()，并可以在此基础上增加move()方法。"
+    },
+    {
+      "q": "如果使用ChessPiece实例化GameBoard，其基类是什么？",
+      "a": "基类是Grid<ChessPiece>。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "类模板实例化",
+    "C++继承",
+    "依赖名与模板基类成员访问"
+  ],
+  "source_pages": [
+    392,
+    392
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "794_从类模板派生模板类",
+  "_chunk_pages": [
+    389,
+    392
+  ]
+}

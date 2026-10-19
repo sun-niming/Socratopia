@@ -1,0 +1,43 @@
+{
+  "title": "Visual C++单元测试断言",
+  "definition": "Visual C++测试框架在 Microsoft::VisualStudio::CppUnitTestFramework 名称空间中提供 Assert 类，用于验证测试条件。Assert::IsTrue(expression) 会检查表达式是否为 true；若结果为 false，当前单元测试失败。框架还提供 AreEqual、IsNull、Fail、ExpectException 等辅助断言函数。",
+  "key_points": [
+    "Assert::IsTrue(expression) 适合验证布尔条件。",
+    "断言条件为 false 时，测试失败；为 true 时，该断言通过。",
+    "常见单元测试模式是先执行计算，再用断言检查结果是否符合预期。",
+    "Visual C++测试框架会按需要捕获并报告测试期间的异常。"
+  ],
+  "examples": [
+    "`Assert::IsTrue(0 < 1);`：因为条件为 true，所以测试通过。",
+    "将断言改为 `Assert::IsTrue(1 < 0);` 后，条件为 false，测试失败。"
+  ],
+  "misconceptions": [
+    "Assert::IsTrue 不是用来执行被测试逻辑的，而是用来验证条件是否满足。",
+    "单元测试不应只包含断言；通常还需要先创建对象、调用方法或执行计算。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "Assert::IsTrue(expression) 在表达式为 false 时会发生什么？",
+      "a": "当前单元测试失败，测试框架会报告失败信息。"
+    },
+    {
+      "q": "如何用 Visual C++测试框架验证 0 小于 1？",
+      "a": "使用 `Assert::IsTrue(0 < 1);`。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++函数调用和布尔表达式"
+  ],
+  "source_pages": [
+    885,
+    885
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1831_visual_c_单元测试断言",
+  "_chunk_pages": [
+    885,
+    888
+  ]
+}

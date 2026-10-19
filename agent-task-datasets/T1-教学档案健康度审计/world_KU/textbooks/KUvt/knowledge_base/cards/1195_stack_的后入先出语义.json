@@ -1,0 +1,45 @@
+{
+  "title": "stack 的后入先出语义",
+  "definition": "stack 是一种具有后入先出（LIFO，也称先入后出 FILO）语义的容器适配器。新元素总是在栈顶加入，删除操作也从栈顶进行，因此最近插入的元素会最先被删除。stack 定义在 <stack> 头文件中。",
+  "key_points": [
+    "stack 遵循 LIFO/FILO，而不是 FIFO。",
+    "push() 把新元素放到栈顶，并将之前插入的元素视为位于其下方。",
+    "pop() 删除栈顶元素，栈顶元素就是最近插入的元素。",
+    "vector、list 和 deque 都可以作为 stack 的底层容器。"
+  ],
+  "examples": [
+    "依次执行 push(1)、push(2)、push(3) 后，连续执行 pop() 的顺序是 $3 \\rightarrow 2 \\rightarrow 1$。",
+    "可以用 stack 替换错误相关器中的 priority_queue，使错误按照最近加入的顺序处理。"
+  ],
+  "misconceptions": [
+    "误以为 stack 会优先删除最早加入的元素；那是 FIFO 队列的行为。",
+    "误以为 stack 的元素可以从任意位置删除；stack 只能从顶部操作。",
+    "误以为 stack 只能使用 vector 作为底层容器；教材还列出了 list 和 deque。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "stack 的元素取出顺序是什么？",
+      "a": "后入先出（LIFO）：最近插入的元素最先被删除。"
+    },
+    {
+      "q": "依次压入 1、2、3 后，stack 的弹出顺序是什么？",
+      "a": "3、2、1。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "容器适配器",
+    "队列的 FIFO 语义"
+  ],
+  "source_pages": [
+    580,
+    580
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1195_stack_的后入先出语义",
+  "_chunk_pages": [
+    577,
+    580
+  ]
+}

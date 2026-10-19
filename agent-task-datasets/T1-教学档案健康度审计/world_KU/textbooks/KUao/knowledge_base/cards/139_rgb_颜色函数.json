@@ -1,0 +1,39 @@
+{
+  "title": "rgb()颜色函数",
+  "definition": "rgb() 用红、绿、蓝三个基本颜色分量合成颜色。教材给出的分量取值方式有两种：整数形式 0-255，或百分比形式 0%-100%。",
+  "key_points": [
+    "rgb(x,x,x) 中的三个分量分别表示 red、green、blue。",
+    "整数形式每个分量取值范围是 0-255。",
+    "百分比形式每个分量取值范围是 0%-100%。"
+  ],
+  "examples": [
+    "rgb(255,0,0)",
+    "rgb(66,66,66)",
+    "rgb(100%,0%,0%)"
+  ],
+  "misconceptions": [
+    "rgb() 不是只用来表示灰色，三种分量都可以组合出各种颜色。",
+    "rgb() 的分量值不能随意超出规定范围。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "rgb() 颜色函数的基本原理是什么？",
+      "a": "按红、绿、蓝三个基本颜色分量混合得到颜色。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "CSS基础"
+  ],
+  "source_pages": [
+    109,
+    112
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "139_rgb_颜色函数",
+  "_chunk_pages": [
+    109,
+    112
+  ]
+}

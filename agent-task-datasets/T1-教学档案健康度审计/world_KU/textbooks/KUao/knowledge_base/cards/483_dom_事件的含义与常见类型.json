@@ -1,0 +1,38 @@
+{
+  "title": "DOM 事件的含义与常见类型",
+  "definition": "事件是系统内发生的动作或事情。系统在事件出现时会产生或触发某种信号，并提供一种自动执行动作的机制；JavaScript 可以监听这些事件，并在事件发生时执行代码，这段代码称为事件处理程序或事件监听器。",
+  "key_points": [
+    "事件是系统内部发生的动作或事情",
+    "事件发生时，系统会触发信号并可自动执行某种动作",
+    "JavaScript 可以监听事件，并在事件发生时执行代码",
+    "常见事件包括用户交互事件和浏览器行为事件"
+  ],
+  "examples": [
+    "用户交互：click、mouseover、keydown、submit",
+    "浏览器行为：load、DOMContentLoaded"
+  ],
+  "misconceptions": [
+    "以为事件只指用户点击；实际上页面加载、DOM 构建完成等浏览器行为也属于事件。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "什么是事件处理程序或事件监听器？",
+      "a": "它是 JavaScript 在事件发生时执行的代码。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "JavaScript 基础"
+  ],
+  "source_pages": [
+    359,
+    360
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "483_dom_事件的含义与常见类型",
+  "_chunk_pages": [
+    357,
+    360
+  ]
+}

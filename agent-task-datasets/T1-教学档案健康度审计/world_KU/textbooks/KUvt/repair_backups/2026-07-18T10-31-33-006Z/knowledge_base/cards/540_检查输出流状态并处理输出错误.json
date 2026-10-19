@@ -1,0 +1,52 @@
+{
+  "title": "检查输出流状态并处理输出错误",
+  "definition": "输出流可以通过状态函数检查操作是否正常。`good()` 表示流处于良好状态；`fail()` 用于检查是否发生失败状态。也可以通过流对象的布尔转换进行判断，或通过 `clear()` 清除错误状态。",
+  "key_points": [
+    "可以使用 `if (cout.good())` 判断 `cout` 是否处于良好状态。",
+    "可以使用 `cout.fail()` 判断流是否处于失败状态；也可以使用 `if (!cout)` 检查流是否不可用。",
+    "`cout.clear()` 用于清除流的错误状态。",
+    "可以使用 `cout.exceptions(ios::failbit | ios::badbit | ios::eofbit);` 设置在指定状态位出现时抛出异常。",
+    "异常类型示例为 `ios_base::failure`，可以通过 `what()` 获取说明，并通过 `code()` 获取错误码。"
+  ],
+  "examples": [
+    "```text\nif (cout.good()) {\n    cout << \"All good\" << endl;\n}\n```",
+    "```text\ncout.flush();\nif (cout.fail()) {\n    cerr << \"Unable to flush to standard out\" << endl;\n}\n```",
+    "```text\ncout.flush();\nif (!cout) {\n    cerr << \"Unable to flush to standard out\" << endl;\n}\n```",
+    "```text\ncout.exceptions(ios::failbit | ios::badbit | ios::eofbit);\ntry {\n    cout << \"Hello World.\" << endl;\n} catch (const ios_base::failure& ex) {\n    cerr << \"Caught exception: \" << ex.what()\n         << \", error code = \" << ex.code() << endl;\n}\ncout.clear();\n```"
+  ],
+  "misconceptions": [
+    "`good()` 和 `fail()` 不是同一个含义：前者检查流是否处于良好状态，后者检查是否发生失败。",
+    "设置异常掩码不会把所有输出操作都变成异常；它指定在相应流状态位出现时抛出异常。",
+    "捕获流异常后，原文示例还调用了 `cout.clear()` 清除流状态；捕获异常本身不等于自动清除状态。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何判断 `cout` 是否处于良好状态？",
+      "a": "使用 `cout.good()`，例如 `if (cout.good()) { ... }`。"
+    },
+    {
+      "q": "如何在输出失败时报告错误？",
+      "a": "调用 `cout.fail()` 或使用 `if (!cout)` 判断，然后通过 `cerr` 输出错误信息。"
+    },
+    {
+      "q": "如何让流在 `failbit`、`badbit` 或 `eofbit` 出现时抛出异常？",
+      "a": "调用 `cout.exceptions(ios::failbit | ios::badbit | ios::eofbit);`。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++输入输出流",
+    "异常处理"
+  ],
+  "source_pages": [
+    414,
+    415
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "540_检查输出流状态并处理输出错误",
+  "_chunk_pages": [
+    413,
+    416
+  ]
+}

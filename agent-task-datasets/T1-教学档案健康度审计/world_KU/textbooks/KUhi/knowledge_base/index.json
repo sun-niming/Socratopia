@@ -1,0 +1,1095 @@
+{
+  "textbook": "算法设计与分.pdf",
+  "title": "算法设计与分",
+  "lang": "zh",
+  "built_at": "2026-06-27T07:00:24.444Z",
+  "updated_at": "2026-06-27T07:00:24.444Z",
+  "model": "gpt-5.4-mini",
+  "vision_fallback": null,
+  "premium_escalation": "gpt-5.5",
+  "format": "pdf",
+  "card_count": 108,
+  "needs_verification_count": 0,
+  "cards": [
+    {
+      "concept_id": "001_算法_程序与输入规模",
+      "title": "算法、程序与输入规模",
+      "difficulty": 1,
+      "source_pages": [
+        1,
+        4
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "002_时间复杂度分析模板",
+      "title": "时间复杂度分析模板",
+      "difficulty": 2,
+      "source_pages": [
+        1,
+        4
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "003_对数复杂度",
+      "title": "对数复杂度",
+      "difficulty": 1,
+      "source_pages": [
+        5,
+        5
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "004_指数_阶乘复杂度",
+      "title": "指数/阶乘复杂度",
+      "difficulty": 2,
+      "source_pages": [
+        5,
+        5
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "005_递归式的建立",
+      "title": "递归式的建立",
+      "difficulty": 2,
+      "source_pages": [
+        6,
+        6
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "006_递归树方法",
+      "title": "递归树方法",
+      "difficulty": 2,
+      "source_pages": [
+        7,
+        7
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "007_空间复杂度",
+      "title": "空间复杂度",
+      "difficulty": 1,
+      "source_pages": [
+        8,
+        8
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "008_伪代码复杂度分析",
+      "title": "伪代码复杂度分析",
+      "difficulty": 2,
+      "source_pages": [
+        9,
+        12
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "009_算法正确性说明",
+      "title": "算法正确性说明",
+      "difficulty": 2,
+      "source_pages": [
+        9,
+        12
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "010_常见复杂度阶与工程含义",
+      "title": "常见复杂度阶与工程含义",
+      "difficulty": 1,
+      "source_pages": [
+        9,
+        12
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "011_复杂度题答题模板",
+      "title": "复杂度题答题模板",
+      "difficulty": 1,
+      "source_pages": [
+        9,
+        12
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "012_分治法三步",
+      "title": "分治法三步",
+      "difficulty": 1,
+      "source_pages": [
+        13,
+        16
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "013_二分查找",
+      "title": "二分查找",
+      "difficulty": 1,
+      "source_pages": [
+        13,
+        16
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "014_归并排序",
+      "title": "归并排序",
+      "difficulty": 2,
+      "source_pages": [
+        13,
+        16
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "015_快速排序",
+      "title": "快速排序",
+      "difficulty": 2,
+      "source_pages": [
+        13,
+        16
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "016_线性时间选择",
+      "title": "线性时间选择",
+      "difficulty": 2,
+      "source_pages": [
+        17,
+        20
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "017_循环日程赛",
+      "title": "循环日程赛",
+      "difficulty": 2,
+      "source_pages": [
+        17,
+        20
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "018_棋盘覆盖",
+      "title": "棋盘覆盖",
+      "difficulty": 2,
+      "source_pages": [
+        17,
+        20
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "019_大整数乘法与_karatsuba",
+      "title": "大整数乘法与 Karatsuba",
+      "difficulty": 2,
+      "source_pages": [
+        17,
+        20
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "020_分治法的正确性与复杂度分析",
+      "title": "分治法的正确性与复杂度分析",
+      "difficulty": 2,
+      "source_pages": [
+        21,
+        24
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "021_本章答题模板",
+      "title": "本章答题模板",
+      "difficulty": 1,
+      "source_pages": [
+        21,
+        24
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "022_动态规划与分治的区别",
+      "title": "动态规划与分治的区别",
+      "difficulty": 1,
+      "source_pages": [
+        21,
+        24
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "023_动态规划五步法",
+      "title": "动态规划五步法",
+      "difficulty": 2,
+      "source_pages": [
+        21,
+        24
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "024_矩阵连乘",
+      "title": "矩阵连乘",
+      "difficulty": 2,
+      "source_pages": [
+        25,
+        28
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "025_最长公共子序列_lcs",
+      "title": "最长公共子序列 LCS",
+      "difficulty": 2,
+      "source_pages": [
+        25,
+        28
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "026_0_1_背包",
+      "title": "0-1 背包",
+      "difficulty": 2,
+      "source_pages": [
+        25,
+        28
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "027_备忘录与自底向上",
+      "title": "备忘录与自底向上",
+      "difficulty": 2,
+      "source_pages": [
+        25,
+        28
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "030_区间dp家族的共同结构",
+      "title": "区间DP家族的共同结构",
+      "difficulty": 2,
+      "source_pages": [
+        29,
+        30
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "028_最优二叉查找树",
+      "title": "最优二叉查找树",
+      "difficulty": 2,
+      "source_pages": [
+        29,
+        32
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "029_凸多边形最优三角剖分",
+      "title": "凸多边形最优三角剖分",
+      "difficulty": 2,
+      "source_pages": [
+        29,
+        32
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "031_dp复杂度分析与空间优化",
+      "title": "DP复杂度分析与空间优化",
+      "difficulty": 2,
+      "source_pages": [
+        29,
+        32
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "032_动态规划综合题答题模板",
+      "title": "动态规划综合题答题模板",
+      "difficulty": 1,
+      "source_pages": [
+        29,
+        32
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "033_贪心法概述",
+      "title": "贪心法概述",
+      "difficulty": 1,
+      "source_pages": [
+        33,
+        36
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "034_贪心选择性质",
+      "title": "贪心选择性质",
+      "difficulty": 2,
+      "source_pages": [
+        33,
+        36
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "035_交换论证",
+      "title": "交换论证",
+      "difficulty": 2,
+      "source_pages": [
+        33,
+        36
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "036_会场安排",
+      "title": "会场安排",
+      "difficulty": 2,
+      "source_pages": [
+        33,
+        36
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "037_dijkstra算法",
+      "title": "Dijkstra算法",
+      "difficulty": 2,
+      "source_pages": [
+        33,
+        36
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "038_哈夫曼编码",
+      "title": "哈夫曼编码",
+      "difficulty": 2,
+      "source_pages": [
+        37,
+        40
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "039_最小生成树",
+      "title": "最小生成树",
+      "difficulty": 2,
+      "source_pages": [
+        37,
+        40
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "040_贪心反例训练",
+      "title": "贪心反例训练",
+      "difficulty": 1,
+      "source_pages": [
+        37,
+        40
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "041_贪心正确性写法",
+      "title": "贪心正确性写法",
+      "difficulty": 2,
+      "source_pages": [
+        37,
+        40
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "042_贪心算法的复杂度来源",
+      "title": "贪心算法的复杂度来源",
+      "difficulty": 1,
+      "source_pages": [
+        41,
+        44
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "043_dijkstra_的实现与复杂度",
+      "title": "Dijkstra 的实现与复杂度",
+      "difficulty": 2,
+      "source_pages": [
+        41,
+        44
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "044_贪心题的答题模板",
+      "title": "贪心题的答题模板",
+      "difficulty": 2,
+      "source_pages": [
+        41,
+        44
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "045_回溯法概述",
+      "title": "回溯法概述",
+      "difficulty": 1,
+      "source_pages": [
+        41,
+        44
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "046_解空间树的类型",
+      "title": "解空间树的类型",
+      "difficulty": 2,
+      "source_pages": [
+        41,
+        44
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "047_回溯法通用框架",
+      "title": "回溯法通用框架",
+      "difficulty": 1,
+      "source_pages": [
+        45,
+        48
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "048_n后问题",
+      "title": "n后问题",
+      "difficulty": 2,
+      "source_pages": [
+        45,
+        48
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "049_约束条件与限界条件的区别",
+      "title": "约束条件与限界条件的区别",
+      "difficulty": 2,
+      "source_pages": [
+        45,
+        48
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "050_0_1_背包回溯",
+      "title": "0-1 背包回溯",
+      "difficulty": 2,
+      "source_pages": [
+        45,
+        48
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "051_图着色回溯",
+      "title": "图着色回溯",
+      "difficulty": 2,
+      "source_pages": [
+        45,
+        48
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "052_作业调度的排列树建模",
+      "title": "作业调度的排列树建模",
+      "difficulty": 2,
+      "source_pages": [
+        49,
+        52
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "053_回溯复杂度",
+      "title": "回溯复杂度",
+      "difficulty": 2,
+      "source_pages": [
+        49,
+        52
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "054_回溯中的递归状态维护",
+      "title": "回溯中的递归状态维护",
+      "difficulty": 2,
+      "source_pages": [
+        49,
+        52
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "055_回溯题答题模板",
+      "title": "回溯题答题模板",
+      "difficulty": 1,
+      "source_pages": [
+        49,
+        52
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "056_分支限界法概述",
+      "title": "分支限界法概述",
+      "difficulty": 1,
+      "source_pages": [
+        53,
+        56
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "057_活结点_扩展结点与死结点",
+      "title": "活结点、扩展结点与死结点",
+      "difficulty": 1,
+      "source_pages": [
+        53,
+        56
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "058_分支限界法与回溯法比较",
+      "title": "分支限界法与回溯法比较",
+      "difficulty": 1,
+      "source_pages": [
+        53,
+        56
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "059_队列式分支限界",
+      "title": "队列式分支限界",
+      "difficulty": 2,
+      "source_pages": [
+        53,
+        56
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "060_优先队列式分支限界",
+      "title": "优先队列式分支限界",
+      "difficulty": 2,
+      "source_pages": [
+        53,
+        56
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "061_布线问题",
+      "title": "布线问题",
+      "difficulty": 1,
+      "source_pages": [
+        57,
+        60
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "062_0_1背包分支限界",
+      "title": "0-1背包分支限界",
+      "difficulty": 2,
+      "source_pages": [
+        57,
+        60
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "063_tsp分支限界",
+      "title": "TSP分支限界",
+      "difficulty": 2,
+      "source_pages": [
+        57,
+        60
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "064_界函数设计",
+      "title": "界函数设计",
+      "difficulty": 2,
+      "source_pages": [
+        57,
+        60
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "065_分支限界法的复杂度与存储",
+      "title": "分支限界法的复杂度与存储",
+      "difficulty": 2,
+      "source_pages": [
+        61,
+        64
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "066_分支限界法答题模板",
+      "title": "分支限界法答题模板",
+      "difficulty": 1,
+      "source_pages": [
+        61,
+        64
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "067_随机化算法概述",
+      "title": "随机化算法概述",
+      "difficulty": 2,
+      "source_pages": [
+        61,
+        64
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "068_三类随机化算法",
+      "title": "三类随机化算法",
+      "difficulty": 2,
+      "source_pages": [
+        61,
+        64
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "069_随机快速排序",
+      "title": "随机快速排序",
+      "difficulty": 2,
+      "source_pages": [
+        65,
+        68
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "070_舍伍德算法",
+      "title": "舍伍德算法",
+      "difficulty": 2,
+      "source_pages": [
+        65,
+        68
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "071_拉斯维加斯算法",
+      "title": "拉斯维加斯算法",
+      "difficulty": 2,
+      "source_pages": [
+        65,
+        68
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "072_蒙特卡罗算法",
+      "title": "蒙特卡罗算法",
+      "difficulty": 2,
+      "source_pages": [
+        65,
+        68
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "073_miller_rabin概率素性测试",
+      "title": "Miller-Rabin概率素性测试",
+      "difficulty": 2,
+      "source_pages": [
+        69,
+        72
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "074_期望复杂度",
+      "title": "期望复杂度",
+      "difficulty": 2,
+      "source_pages": [
+        69,
+        72
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "075_错误概率放大",
+      "title": "错误概率放大",
+      "difficulty": 2,
+      "source_pages": [
+        69,
+        72
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "076_随机化算法答题模板",
+      "title": "随机化算法答题模板",
+      "difficulty": 1,
+      "source_pages": [
+        69,
+        72
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "077_输入规模与多项式时间",
+      "title": "输入规模与多项式时间",
+      "difficulty": 1,
+      "source_pages": [
+        73,
+        76
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "078_p类问题",
+      "title": "P类问题",
+      "difficulty": 1,
+      "source_pages": [
+        73,
+        76
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "079_np类问题",
+      "title": "NP类问题",
+      "difficulty": 2,
+      "source_pages": [
+        73,
+        76
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "080_判定问题",
+      "title": "判定问题",
+      "difficulty": 1,
+      "source_pages": [
+        73,
+        76
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "081_np_hard与np_complete区别",
+      "title": "NP-hard与NP-complete区别",
+      "difficulty": 2,
+      "source_pages": [
+        77,
+        80
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "082_证明np_complete的两步法",
+      "title": "证明NP-complete的两步法",
+      "difficulty": 2,
+      "source_pages": [
+        77,
+        80
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "083_多项式归约",
+      "title": "多项式归约",
+      "difficulty": 2,
+      "source_pages": [
+        77,
+        80
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "084_典型np完全问题",
+      "title": "典型NP完全问题",
+      "difficulty": 1,
+      "source_pages": [
+        77,
+        80
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "085_tsp的求解难度",
+      "title": "TSP的求解难度",
+      "difficulty": 2,
+      "source_pages": [
+        77,
+        80
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "086_p与np关系",
+      "title": "P与NP关系",
+      "difficulty": 2,
+      "source_pages": [
+        77,
+        80
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "087_np完全问题的工程处理",
+      "title": "NP完全问题的工程处理",
+      "difficulty": 2,
+      "source_pages": [
+        77,
+        80
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "088_np难问题的工程处理策略",
+      "title": "NP难问题的工程处理策略",
+      "difficulty": 2,
+      "source_pages": [
+        81,
+        84
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "089_本章答题模板",
+      "title": "本章答题模板",
+      "difficulty": 2,
+      "source_pages": [
+        81,
+        84
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "090_串匹配问题",
+      "title": "串匹配问题",
+      "difficulty": 1,
+      "source_pages": [
+        81,
+        84
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "091_朴素匹配",
+      "title": "朴素匹配",
+      "difficulty": 2,
+      "source_pages": [
+        81,
+        84
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "092_前缀_后缀与最长相等前后缀",
+      "title": "前缀、后缀与最长相等前后缀",
+      "difficulty": 1,
+      "source_pages": [
+        85,
+        88
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "093_next数组的含义",
+      "title": "next数组的含义",
+      "difficulty": 1,
+      "source_pages": [
+        85,
+        88
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "094_kmp失配时的指针移动",
+      "title": "KMP失配时的指针移动",
+      "difficulty": 2,
+      "source_pages": [
+        85,
+        88
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "095_next数组的线性构造",
+      "title": "next数组的线性构造",
+      "difficulty": 2,
+      "source_pages": [
+        85,
+        88
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "096_kmp匹配伪代码流程",
+      "title": "KMP匹配伪代码流程",
+      "difficulty": 2,
+      "source_pages": [
+        85,
+        88
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "097_kmp时间与空间复杂度",
+      "title": "KMP时间与空间复杂度",
+      "difficulty": 1,
+      "source_pages": [
+        89,
+        92
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "098_kmp与lcs的区别",
+      "title": "KMP与LCS的区别",
+      "difficulty": 1,
+      "source_pages": [
+        89,
+        92
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "099_kmp图表题的解题要求",
+      "title": "KMP图表题的解题要求",
+      "difficulty": 2,
+      "source_pages": [
+        89,
+        92
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "100_kmp答题模板",
+      "title": "KMP答题模板",
+      "difficulty": 2,
+      "source_pages": [
+        89,
+        92
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "101_分治",
+      "title": "分治",
+      "difficulty": 1,
+      "source_pages": [
+        93,
+        93
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "102_动态规划",
+      "title": "动态规划",
+      "difficulty": 2,
+      "source_pages": [
+        93,
+        93
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "103_贪心",
+      "title": "贪心",
+      "difficulty": 2,
+      "source_pages": [
+        93,
+        93
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "104_回溯",
+      "title": "回溯",
+      "difficulty": 1,
+      "source_pages": [
+        93,
+        93
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "105_分支限界",
+      "title": "分支限界",
+      "difficulty": 2,
+      "source_pages": [
+        93,
+        93
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "106_随机化",
+      "title": "随机化",
+      "difficulty": 2,
+      "source_pages": [
+        93,
+        93
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "107_np与npc",
+      "title": "NP与NPC",
+      "difficulty": 2,
+      "source_pages": [
+        93,
+        93
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "108_kmp",
+      "title": "KMP",
+      "difficulty": 2,
+      "source_pages": [
+        93,
+        93
+      ],
+      "needs_verification": false
+    }
+  ]
+}

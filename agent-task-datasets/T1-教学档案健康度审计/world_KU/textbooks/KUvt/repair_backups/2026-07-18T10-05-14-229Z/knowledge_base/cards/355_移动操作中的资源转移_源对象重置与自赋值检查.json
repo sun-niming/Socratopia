@@ -1,0 +1,53 @@
+{
+  "title": "移动操作中的资源转移、源对象重置与自赋值检查",
+  "definition": "`Spreadsheet` 的移动实现通过 `moveFrom` 转移资源所有权：将源对象的宽度、高度和 `m_cells` 指针赋给目标对象，然后把源对象的宽度和高度置零，并把源对象的 `m_cells` 设为 `nullptr`。移动赋值前先调用 `cleanup()` 释放目标对象原有资源，并用 `if (this != &rhs)` 防止自赋值。",
+  "key_points": [
+    "`cleanup()` 遍历并释放每一列的动态数组，随后释放 `m_cells`，再把 `m_cells` 设为 `nullptr`，并把 `m_width`、`m_height` 设为 `0`。",
+    "`moveFrom` 对资源句柄进行浅层转移：`m_cells = src.m_cells`，而不是复制整个动态数组。",
+    "资源转移后必须重置源对象，否则目标对象和源对象可能同时认为自己拥有同一资源，造成重复释放。",
+    "移动赋值运算符的基本流程是：检查 `this != &rhs`、清理当前资源、转移源对象资源、返回 `*this`。"
+  ],
+  "examples": [
+    "资源清理的核心逻辑可表示为：`delete[] m_cells[i];`，随后执行 `delete[] m_cells;`，再设置 `m_cells = nullptr;` 和 `m_width = m_height = 0;`。",
+    "资源转移的基本逻辑：`m_width = src.m_width; m_height = src.m_height; m_cells = src.m_cells;`。",
+    "源对象重置：`src.m_width = 0; src.m_height = 0; src.m_cells = nullptr;`。",
+    "移动赋值的结构：`if (this != &rhs) { cleanup(); moveFrom(std::move(rhs)); } return *this;`。"
+  ],
+  "misconceptions": [
+    "浅层复制指针后并不等于完成安全复制；必须同时转移所有权并清空源对象的指针。",
+    "移动后的源对象不是被销毁的对象，仍然必须处于可析构、可再次赋值等有效状态。",
+    "没有自赋值检查时，对象可能先清理掉自己唯一的资源，再尝试从已经被清理的对象转移资源。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`moveFrom` 为什么要把 `src.m_cells` 设置为 `nullptr`？",
+      "a": "因为资源所有权已经转移给目标对象；将源指针置空可避免源对象析构时再次释放同一块动态内存。"
+    },
+    {
+      "q": "移动赋值为什么先 `cleanup()` 再 `moveFrom()`？",
+      "a": "目标对象原本可能已经拥有资源，必须先释放这些资源，才能接管源对象的资源并避免内存泄漏。"
+    },
+    {
+      "q": "移动赋值中的 `if (this != &rhs)` 用来解决什么问题？",
+      "a": "用来防止对象对自身进行移动赋值；自赋值时跳过清理和转移操作。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "移动构造和移动赋值应使用 noexcept",
+    "动态内存与资源所有权",
+    "析构函数和资源清理"
+  ],
+  "source_pages": [
+    270,
+    271,
+    272
+  ],
+  "needs_verification": true,
+  "verify_query": "《C++20高级编程》第5版 第270-272页 Spreadsheet cleanup moveFrom move assignment self assignment 原文代码",
+  "concept_id": "355_移动操作中的资源转移_源对象重置与自赋值检查",
+  "_chunk_pages": [
+    269,
+    272
+  ]
+}

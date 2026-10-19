@@ -1,0 +1,37 @@
+{
+  "title": "globalThis对象",
+  "definition": "globalThis对象提供了一种标准方式，用来获取不同运行环境下的全局this对象，也就是全局对象自身。",
+  "key_points": [
+    "它是获取全局this对象的标准方式。",
+    "它适用于不同环境，而不局限于浏览器。",
+    "它指向全局对象自身。"
+  ],
+  "examples": [
+    "在不同环境中，都可以用globalThis来访问全局对象。"
+  ],
+  "misconceptions": [
+    "以为globalThis只是浏览器专有对象。",
+    "以为globalThis和局部this一定相同。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "globalThis对象的主要作用是什么？",
+      "a": "提供获取不同环境下全局this对象的标准方式。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "Global对象"
+  ],
+  "source_pages": [
+    301,
+    304
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "429_globalthis对象",
+  "_chunk_pages": [
+    301,
+    304
+  ]
+}

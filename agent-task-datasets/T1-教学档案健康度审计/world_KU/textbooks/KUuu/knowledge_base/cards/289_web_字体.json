@@ -1,0 +1,37 @@
+{
+  "title": "Web 字体",
+  "definition": "Web 字体是把字体文件放在服务器端，页面渲染时由客户端请求下载并使用的字体。在没有 @font-face 规则之前，font-family 能否正确显示，取决于该字体文件是否预装在客户端。",
+  "key_points": [
+    "没有 @font-face 时，font-family 的显示取决于客户端是否预装字体",
+    "@font-face 允许把字体文件放在服务器端",
+    "页面渲染时客户端会请求下载字体文件再使用"
+  ],
+  "examples": [
+    "先用 @font-face 引入服务器端字体，再在 font-family 中使用"
+  ],
+  "misconceptions": [
+    "认为写了 font-family 就一定能显示目标字体",
+    "认为 Web 字体必须先安装到本机"
+  ],
+  "qa_pairs": [
+    {
+      "q": "没有 @font-face 规则时，font-family 是否能正确显示某字体主要取决于什么？",
+      "a": "取决于该字体文件是否预装在客户端。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "font-family"
+  ],
+  "source_pages": [
+    195,
+    196
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "289_web_字体",
+  "_chunk_pages": [
+    193,
+    196
+  ]
+}

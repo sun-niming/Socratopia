@@ -1,0 +1,45 @@
+{
+  "title": "send_all 循环发送",
+  "definition": "`send_all` 是一个发送包装函数，用来保证把指定长度的缓冲区全部发出去。它不断调用 `send`，累计已经发送的字节数；只要还有未发送完的数据，就继续发送。只要某次 `send` 返回 `<= 0`，就认为发送失败并返回 `-1`。",
+  "key_points": [
+    "使用 `size_t sent = 0` 记录已发送字节数。",
+    "循环条件是 `sent < len`。",
+    "每次调用 `send(fd, p + sent, len - sent, 0)` 发送剩余部分。",
+    "如果 `send` 返回 `<= 0`，立刻返回 `-1`。",
+    "全部发送完成后返回 `0`。"
+  ],
+  "examples": [
+    "伪代码：`while (sent < len) { n = send(...); if (n <= 0) return -1; sent += (size_t)n; } return 0;`"
+  ],
+  "misconceptions": [
+    "以为一次 `send` 就一定能发完全部数据。",
+    "以为 `send` 返回正数就可以不管剩余字节。",
+    "以为只要发送失败一次还可以继续当成功处理。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`send_all` 和直接调用一次 `send` 的区别是什么？",
+      "a": "`send_all` 会处理部分发送，直到全部数据发送完；一次 `send` 可能只发送了部分数据。"
+    },
+    {
+      "q": "`send` 返回 `0` 或负数时该怎么办？",
+      "a": "`send_all` 直接判定失败并返回 `-1`。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "套接字发送",
+    "循环与指针运算"
+  ],
+  "source_pages": [
+    79,
+    80
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "121_send_all_循环发送",
+  "_chunk_pages": [
+    77,
+    80
+  ]
+}

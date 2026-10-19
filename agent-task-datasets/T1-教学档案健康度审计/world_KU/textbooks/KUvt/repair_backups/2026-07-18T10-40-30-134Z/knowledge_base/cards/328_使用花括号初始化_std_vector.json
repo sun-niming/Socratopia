@@ -1,0 +1,43 @@
+{
+  "title": "使用花括号初始化 std::vector",
+  "definition": "std::vector 可以直接使用花括号和一组元素进行列表初始化，也可以先创建空 vector，再使用 push_back() 逐个添加元素。教材中的两种写法都用于创建包含三个字符串的 vector。",
+  "key_points": [
+    "直接列表初始化的形式是 std::vector<std::string> myVec { \"String 1\", \"String 2\", \"String 3\" };。",
+    "逐个添加的形式是先声明 std::vector<std::string> myVec;，再依次调用 myVec.push_back(...)。",
+    "两种写法都可以得到包含相同三个字符串的 vector。"
+  ],
+  "examples": [
+    "列表初始化：std::vector<std::string> myVec { \"String 1\", \"String 2\", \"String 3\" };",
+    "逐个添加：myVec.push_back(\"String 1\"); myVec.push_back(\"String 2\"); myVec.push_back(\"String 3\");"
+  ],
+  "misconceptions": [
+    "使用 push_back() 不是 vector 初始化的唯一方式；当元素已知时，可以直接使用 initializer-list 列表初始化。",
+    "花括号中的多个字符串会分别成为 vector 的元素，而不是自动拼接成一个字符串。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何用一条声明语句创建包含三个字符串的 vector？",
+      "a": "可以写成 std::vector<std::string> myVec { \"String 1\", \"String 2\", \"String 3\" };。"
+    },
+    {
+      "q": "不用列表初始化时，如何向空 vector 中加入三个字符串？",
+      "a": "先声明 std::vector<std::string> myVec;，再依次调用三次 push_back()。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "std::vector 的基本用法",
+    "C++花括号初始化"
+  ],
+  "source_pages": [
+    245,
+    248
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "328_使用花括号初始化_std_vector",
+  "_chunk_pages": [
+    245,
+    248
+  ]
+}

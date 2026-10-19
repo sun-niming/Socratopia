@@ -1,0 +1,41 @@
+{
+  "title": "@font-face规则",
+  "definition": "@font-face规则用于定义Web字体。其使用顺序是：先用@font-face定义字体名称和来源，再用font-family引用该字体。",
+  "key_points": [
+    "先定义字体名称和来源，再在font-family中引用",
+    "@font-face是Web字体的定义方式",
+    "它把字体资源和页面中的字体名建立对应关系"
+  ],
+  "examples": [
+    "先用@font-face定义一款名为“MyFont”的字体来源，再在标题样式中用font-family引用“MyFont”"
+  ],
+  "misconceptions": [
+    "以为只写font-family就能直接加载网络字体",
+    "以为@font-face只是给字体改名，不能关联来源"
+  ],
+  "qa_pairs": [
+    {
+      "q": "Web字体首先用什么规则定义字体名称和来源？",
+      "a": "用@font-face规则。"
+    },
+    {
+      "q": "定义后再通过什么属性引用该字体？",
+      "a": "通过font-family引用。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "Web字体的工作方式"
+  ],
+  "source_pages": [
+    193,
+    196
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "274_font_face规则",
+  "_chunk_pages": [
+    193,
+    196
+  ]
+}

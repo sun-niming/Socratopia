@@ -1,0 +1,44 @@
+{
+  "title": "使用输出参数分离奇数和偶数",
+  "definition": "可以编写函数，把输入整数数组中的奇数和偶数分别复制到两个输出数组中。函数先统计奇数和偶数的数量，再分别动态分配大小合适的数组，并使用两个位置索引依次写入结果。",
+  "key_points": [
+    "奇数判断条件为 $arr[i] \\% 2 == 1$，否则归入偶数数组。",
+    "oddsPos 和 evensPos 分别表示下一个奇数和偶数的写入位置，写入后位置索引递增。",
+    "这种接口需要通过输出参数返回 odds、evens 以及对应的数量，例如：`void separateOddsAndEvens(const int arr[], size_t size, int*& odds, size_t& numOdds, int*& evens, size_t& numEvens)`。"
+  ],
+  "examples": [
+    "输入数组 `{1, 2, 3, 4, 5, 6}`，分离后奇数为 `{1, 3, 5}`，偶数为 `{2, 4, 6}`。",
+    "核心写入逻辑：`if (arr[i] % 2 == 1) { odds[oddsPos++] = arr[i]; } else { evens[evensPos++] = arr[i]; }`。"
+  ],
+  "misconceptions": [
+    "oddsPos 和 evensPos 不是元素总数，而是当前写入位置索引。",
+    "分离操作不会改变输入数组的原有顺序；奇数和偶数在各自数组中通常保持输入顺序。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何判断一个整数应写入 odds 还是 evens？",
+      "a": "计算 `arr[i] % 2`；结果为 1 时写入 odds，否则写入 evens。"
+    },
+    {
+      "q": "为什么需要分别维护 oddsPos 和 evensPos？",
+      "a": "因为奇数和偶数分别写入不同数组，需要各自独立记录下一个可写位置。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++数组和指针",
+    "动态内存分配",
+    "取模运算"
+  ],
+  "source_pages": [
+    85,
+    88
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "118_使用输出参数分离奇数和偶数",
+  "_chunk_pages": [
+    85,
+    88
+  ]
+}

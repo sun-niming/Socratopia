@@ -1,0 +1,45 @@
+{
+  "title": "priority_queue 的模板参数与底层容器",
+  "definition": "priority_queue 是一个容器适配器，模板参数包括元素类型 $T$、底层容器类型 $Container$ 和比较类型 $Compare$。底层容器默认是 vector，也可以使用 deque；不能使用 list，因为 priority_queue 要求底层容器支持随机访问。Compare 用于确定元素的优先级，默认比较方式基于 less<T>，通常要求元素类型正确定义比较运算符。",
+  "key_points": [
+    "$T$ 表示 priority_queue 保存的元素类型。",
+    "$Container$ 表示 priority_queue 适配的底层容器，默认使用 vector，也可使用 deque。",
+    "list 不能作为 priority_queue 的底层容器，因为它不支持随机访问。",
+    "$Compare$ 决定元素的优先级顺序。"
+  ],
+  "examples": [
+    "可用的底层容器形式包括：priority_queue<int>，以及指定 deque 作为底层容器的 priority_queue<int, deque<int>>。",
+    "若元素类型为 Error，则需要为 Error 定义能够比较两个 Error 的运算符，例如 C++20 的 operator<=>。"
+  ],
+  "misconceptions": [
+    "误以为所有顺序容器都可以作为 priority_queue 的底层容器。",
+    "误以为 Compare 只用于判断元素是否相等；实际上它决定优先级顺序。",
+    "误以为 priority_queue 可以直接使用 list 作为底层容器。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么 list 不能作为 priority_queue 的底层容器？",
+      "a": "因为 priority_queue 要求底层容器支持随机访问，而 list 不支持随机访问。"
+    },
+    {
+      "q": "priority_queue 的 Compare 参数有什么作用？",
+      "a": "Compare 用于比较元素并确定它们的优先级，从而决定哪个元素位于队首。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "容器适配器",
+    "比较运算符"
+  ],
+  "source_pages": [
+    578,
+    578
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1192_priority_queue_的模板参数与底层容器",
+  "_chunk_pages": [
+    577,
+    580
+  ]
+}

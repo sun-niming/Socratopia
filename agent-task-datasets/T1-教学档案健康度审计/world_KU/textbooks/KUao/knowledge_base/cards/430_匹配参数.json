@@ -1,0 +1,39 @@
+{
+  "title": "匹配参数",
+  "definition": "正则表达式可以带匹配参数（标志）来改变匹配行为。原文列出 g、I、m 三项：g 表示全局匹配，I 表示忽略大小写，m 表示多行匹配。示例中使用了 /\\s+/gi。",
+  "key_points": [
+    "g：全局匹配。",
+    "I：忽略大小写。",
+    "m：多行匹配。",
+    "示例 /\\s+/gi 同时使用了 g 和 i 两个标志。"
+  ],
+  "examples": [
+    "var regExp=/\\s+/gi;"
+  ],
+  "misconceptions": [
+    "以为匹配参数只能写一个。",
+    "把 g 当作“匹配任意字符”。",
+    "把 m 误解为“匹配多个字符”，而不是多行模式。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "正则表达式中的 g、I、m 分别表示什么？",
+      "a": "g 表示全局匹配，I 表示忽略大小写，m 表示多行匹配。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "正则表达式基础"
+  ],
+  "source_pages": [
+    317,
+    320
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "430_匹配参数",
+  "_chunk_pages": [
+    317,
+    320
+  ]
+}

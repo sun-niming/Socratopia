@@ -1,0 +1,50 @@
+{
+  "title": "noexcept运算符",
+  "definition": "noexcept(expression) 运算符用于判断一个表达式是否被认为不会抛出异常。如果表达式带有 noexcept 保证，则运算结果为 true，否则为 false。该运算符在编译期求值。",
+  "key_points": [
+    "它与函数声明中的条件 noexcept 说明符写法相同，但用途不同：运算符用于查询表达式的异常属性。",
+    "查询结果是编译期布尔值，可以用于另一个函数的条件 noexcept 说明符。",
+    "原文示例的输出为 1010，依次对应 noexcept(f1())、noexcept(f2())、noexcept(f3()) 和 noexcept(f4())。"
+  ],
+  "examples": [
+    "void f1() noexcept {}",
+    "void f2() noexcept(false) {}",
+    "void f3() noexcept(noexcept(f1())) {}",
+    "void f4() noexcept(noexcept(f2())) {}",
+    "std::cout << noexcept(f1()) << noexcept(f2()) << noexcept(f3()) << noexcept(f4()); 的输出为 1010。"
+  ],
+  "misconceptions": [
+    "noexcept(expression) 运算符不会执行 expression；它是在编译期检查表达式的异常保证。",
+    "运算结果为 true 只表示表达式具有不抛异常保证，不表示表达式一定会完成预期业务结果。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "noexcept(f1()) 的结果为什么为 true？",
+      "a": "因为 f1() 被显式声明为 noexcept。"
+    },
+    {
+      "q": "为什么原文示例的四个 noexcept 查询结果是 1010？",
+      "a": "f1() 为 true，f2() 为 false；f3() 依赖 f1() 因而为 true，f4() 依赖 f2() 因而为 false。"
+    },
+    {
+      "q": "noexcept 运算符何时求值？",
+      "a": "在编译期求值。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "条件 noexcept 说明符",
+    "noexcept说明符"
+  ],
+  "source_pages": [
+    447,
+    447
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "909_noexcept运算符",
+  "_chunk_pages": [
+    445,
+    448
+  ]
+}

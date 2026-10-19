@@ -1,0 +1,43 @@
+{
+  "title": "引用参数实现交换两个整数",
+  "definition": "函数可以使用两个非 `const` 引用参数直接交换调用者中的两个整数。例如 `void swap(int& first, int& second)` 中，`first` 和 `second` 分别引用两个实参，交换它们的值就会改变调用者中的两个变量。也可以把指针解引用后的对象作为引用参数传入，例如 `swap(*xp, *yp)`。",
+  "key_points": [
+    "引用参数允许函数直接修改调用者的变量。",
+    "交换函数的典型接口是 `void swap(int& first, int& second)`。",
+    "若 `xp` 和 `yp` 是指向整数的指针，可以通过 `swap(*xp, *yp)` 交换两个指针所指向的整数。"
+  ],
+  "examples": [
+    "函数接口：`void swap(int& first, int& second)`。",
+    "若 `x` 为 `1`、`y` 为 `2`，调用 `swap(x, y);` 后，`x` 为 `2`、`y` 为 `1`。",
+    "若 `int* xp` 和 `int* yp` 分别指向两个整数，可调用 `swap(*xp, *yp);`。"
+  ],
+  "misconceptions": [
+    "调用交换函数时交换的是变量的值，而不是变量名或指针本身。",
+    "使用引用参数时，调用者通常直接传入变量；只有在实参本身是指针时，才需要先使用 `*` 解引用。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么 `swap(x, y)` 能改变调用者中 `x` 和 `y` 的值？",
+      "a": "因为 `first` 和 `second` 是分别绑定到 `x`、`y` 的非 `const` 引用，函数对它们的操作会直接作用于原变量。"
+    },
+    {
+      "q": "如果 `xp`、`yp` 是指向两个整数的指针，如何调用引用版本的交换函数？",
+      "a": "调用 `swap(*xp, *yp);`，把两个指针所指向的整数作为引用实参传入。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "非 const 左值引用参数可修改实参"
+  ],
+  "source_pages": [
+    81,
+    84
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "114_引用参数实现交换两个整数",
+  "_chunk_pages": [
+    81,
+    84
+  ]
+}

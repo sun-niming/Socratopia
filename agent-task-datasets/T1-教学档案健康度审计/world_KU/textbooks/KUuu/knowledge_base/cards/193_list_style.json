@@ -1,0 +1,39 @@
+{
+  "title": "list-style",
+  "definition": "list-style 是列表样式的统一设置属性，可同时设置标号类型、标号位置和标号图像。",
+  "key_points": [
+    "可合并设置 list-style-type、list-style-position、list-style-image",
+    "一次写法能同时控制多个列表标记相关属性",
+    "原文示例给出了类型、位置和图像的组合写法"
+  ],
+  "examples": [
+    "list-style: square inside url(\"bullet.gif\");"
+  ],
+  "misconceptions": [
+    "误以为 list-style 只能设置一种效果",
+    "误以为它与单独设置 list-style-type 等属性无关"
+  ],
+  "qa_pairs": [
+    {
+      "q": "list-style 可以统一设置哪些内容？",
+      "a": "标号类型、标号位置、标号图像。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "list-style-type",
+    "list-style-position",
+    "list-style-image"
+  ],
+  "source_pages": [
+    117,
+    120
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "193_list_style",
+  "_chunk_pages": [
+    117,
+    120
+  ]
+}

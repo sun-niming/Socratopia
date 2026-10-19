@@ -1,0 +1,50 @@
+{
+  "title": "用正态分布生成集中在中间的随机数",
+  "definition": "将均匀分布示例中的分布对象替换为 `normal_distribution<double> distribution{50, 10};`，即可根据正态分布生成随机数。由于正态分布生成的是 double 值，因此调用 generator 后需要将结果转换为 int。与均匀分布相比，正态分布生成的大部分随机数集中在范围中间附近。",
+  "key_points": [
+    "示例正态分布的参数写作均值50、标准差10：`normal_distribution<double> distribution{50, 10};`。",
+    "由于分布结果是 double，示例将生成结果转换为 int：`int randomNumber{static_cast<int>(generator())};`。",
+    "教材观察到值50约被选中40,000次，而值20和80仅约被选中500次。",
+    "直方图可以直观显示正态分布中间高、两侧低的特征。"
+  ],
+  "examples": [
+    "分布对象：`normal_distribution<double> distribution{50, 10};`。",
+    "生成并转换为整数：`int randomNumber{static_cast<int>(generator())};`。",
+    "正态分布的典型形状可概括为：中间数值出现次数较多，远离中间的数值出现次数较少。"
+  ],
+  "misconceptions": [
+    "正态分布会让所有随机数都等于50；实际上，50附近的数值更常出现，但仍会生成其他数值。",
+    "把 double 转换为 int 会改变分布对象本身；实际上，转换只改变保存或统计时的结果类型。",
+    "正态分布与均匀分布的差别只是数据类型不同；更重要的差别是数值出现频率的分布形状不同。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何把均匀分布示例改为正态分布？",
+      "a": "将分布对象改为 `normal_distribution<double> distribution{50, 10};`。"
+    },
+    {
+      "q": "为什么正态分布示例需要使用 static_cast<int>？",
+      "a": "因为正态分布使用 double 类型生成数值，而示例的 randomNumber 变量是 int 类型。"
+    },
+    {
+      "q": "正态分布示例中哪些数值出现得更多？",
+      "a": "中间附近的数值出现得更多；教材具体观察到50约出现40,000次，而20和80约出现500次。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++随机数分布的作用",
+    "直方图观察随机数分布"
+  ],
+  "source_pages": [
+    703,
+    703
+  ],
+  "needs_verification": true,
+  "verify_query": "《C++20高级编程》第5版第23章 normal_distribution<double> distribution 50 10 40000 500 直方图",
+  "concept_id": "1464_用正态分布生成集中在中间的随机数",
+  "_chunk_pages": [
+    701,
+    704
+  ]
+}

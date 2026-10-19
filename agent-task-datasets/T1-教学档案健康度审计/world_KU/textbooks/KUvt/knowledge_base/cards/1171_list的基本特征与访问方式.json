@@ -1,0 +1,46 @@
+{
+  "title": "list的基本特征与访问方式",
+  "definition": "std::list定义在<list>头文件中，是标准库提供的双向链表。它支持在链表中已定位的位置进行常量时间的插入和删除，但不支持随机访问；访问第一个和最后一个元素可以使用front()和back()，其他元素需要通过迭代器访问。",
+  "key_points": [
+    "list是双向链表，元素不要求连续存储。",
+    "front()和back()都以常量时间返回首元素或尾元素的引用。",
+    "list没有operator[]等随机访问操作。",
+    "list支持cbegin()、cend()、rbegin()、rend()、crbegin()和crend()等迭代器相关操作。",
+    "单独访问非首尾元素通常需要沿链表移动迭代器，因此复杂度为线性时间。"
+  ],
+  "examples": [
+    "若p是list<int>::iterator，可以通过++p或--p在链表中前后移动；不能使用p + n或p - n进行随机跳转。",
+    "list<int> values {1, 2, 3}; 可使用values.front()取得1、values.back()取得3，但不能使用values[1]取得2。"
+  ],
+  "misconceptions": [
+    "list不是支持随机访问的数组式容器，不能使用下标表达式访问元素。",
+    "list的插入删除常量时间并不意味着从头找到目标位置也是常量时间；必须先通过迭代器定位位置。",
+    "list迭代器是双向迭代器，不是随机访问迭代器。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "list如何访问第一个和最后一个元素？复杂度是多少？",
+      "a": "分别使用front()和back()，二者的复杂度都是常量时间。"
+    },
+    {
+      "q": "list迭代器为什么不能使用p+n？",
+      "a": "因为list迭代器是双向迭代器，只支持递增和递减遍历，不支持随机访问迭代器的加减和其他指针运算。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "双向链表",
+    "C++迭代器分类"
+  ],
+  "source_pages": [
+    567,
+    567
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1171_list的基本特征与访问方式",
+  "_chunk_pages": [
+    565,
+    568
+  ]
+}

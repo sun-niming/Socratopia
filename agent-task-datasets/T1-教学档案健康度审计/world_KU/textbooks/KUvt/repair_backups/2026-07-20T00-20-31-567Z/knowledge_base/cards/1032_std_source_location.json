@@ -1,0 +1,48 @@
+{
+  "title": "std::source_location",
+  "definition": "C++20新增的std::source_location类定义在<source_location>头文件中，用于查询源代码位置相关信息，例如文件名、函数名、行号和列号。它可以在记录消息或抛出异常时提供源代码信息，并可用于替换旧式C风格宏_FILE_等。",
+  "key_points": [
+    "std::source_location属于C++20。",
+    "它定义在<source_location>头文件中。",
+    "它可以获取文件名、函数名、行号和列号等源代码信息。",
+    "典型用途包括日志记录和异常抛出。"
+  ],
+  "examples": [
+    "代码示例：\nvoid log(std::string_view message,\n         std::source_location location = std::source_location::current()) {\n    // 可使用location.file_name()、location.function_name()、\n    // location.line()和location.column()获取源代码位置。\n}"
+  ],
+  "misconceptions": [
+    "std::source_location不是用来定位运行时内存地址的工具，而是记录源代码位置的信息。",
+    "它不只提供文件名和行号，还可以提供函数名和列号。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "std::source_location定义在哪个头文件中？",
+      "a": "定义在<source_location>头文件中。"
+    },
+    {
+      "q": "std::source_location可以查询哪些信息？",
+      "a": "例如文件名、函数名、行号和列号。"
+    },
+    {
+      "q": "std::source_location的典型用途是什么？",
+      "a": "在记录消息或抛出异常时提供源代码信息。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++20特性",
+    "函数参数默认值",
+    "异常或日志的基本概念"
+  ],
+  "source_pages": [
+    507,
+    507
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1032_std_source_location",
+  "_chunk_pages": [
+    505,
+    508
+  ]
+}

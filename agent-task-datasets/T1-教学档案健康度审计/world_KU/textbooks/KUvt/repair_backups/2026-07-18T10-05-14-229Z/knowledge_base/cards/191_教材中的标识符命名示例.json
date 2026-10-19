@@ -1,0 +1,54 @@
+{
+  "title": "教材中的标识符命名示例",
+  "definition": "第 132 页列举了若干标识符命名示例，覆盖变量名、全局设置名、成员名、函数名、类型相关名称以及带有个人情绪色彩的名称。给定片段主要提供名称样例，未完整说明这些样例对应的命名规则。",
+  "key_points": [
+    "普通名称示例包括 `sourceName`、`destinationName`、`thingK` 和 `thing2`。",
+    "全局或设置相关名称示例包括 `g_Settings` 和 `globalUserSpecificSettingsAndPreferences`。",
+    "成员或计数器名称示例包括 `mnameCounter` 和 `mNC`。",
+    "函数名称示例包括 `calculateMarigoldOffset()` 和 `doAction()`。",
+    "类型或字符串相关名称示例包括 `mTypeString` 和 `typeSTR256`。",
+    "原文还列出了 `mIHateLarry` 这一带有个人化表达的名称。"
+  ],
+  "examples": [
+    "`sourceName`、`destinationName`",
+    "`g_Settings`、`globalUserSpecificSettingsAndPreferences`",
+    "`mnameCounter`、`mNC`",
+    "`calculateMarigoldOffset()`、`doAction()`",
+    "`mTypeString`、`typeSTR256`",
+    "`mIHateLarry`"
+  ],
+  "misconceptions": [
+    "不能仅根据这些示例确定教材完整规定了某一种统一命名法。",
+    "示例中的前缀、缩写和大小写形式不应在没有完整上下文时被直接当作普遍适用的 C++ 或 C# 语法规则。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "原文列出的函数名示例有哪些？",
+      "a": "`calculateMarigoldOffset()` 和 `doAction()`。"
+    },
+    {
+      "q": "原文列出的全局设置相关名称示例有哪些？",
+      "a": "`g_Settings` 和 `globalUserSpecificSettingsAndPreferences`。"
+    },
+    {
+      "q": "给定片段是否完整说明了这些命名示例背后的规则？",
+      "a": "没有；片段主要列出示例，缺少完整的规则说明。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "标识符",
+    "变量、成员和函数的基本概念"
+  ],
+  "source_pages": [
+    129,
+    132
+  ],
+  "needs_verification": true,
+  "verify_query": "《C++20高级编程》第5版 第132页 sourceName destinationName g_Settings mnameCounter calculateMarigoldOffset 命名规则",
+  "concept_id": "191_教材中的标识符命名示例",
+  "_chunk_pages": [
+    129,
+    132
+  ]
+}

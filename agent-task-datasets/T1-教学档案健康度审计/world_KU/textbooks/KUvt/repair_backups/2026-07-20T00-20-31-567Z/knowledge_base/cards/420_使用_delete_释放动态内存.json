@@ -1,0 +1,52 @@
+{
+  "title": "使用 delete 释放动态内存",
+  "definition": "对于通过 new 分配并由原始指针保存的动态对象，应使用 delete 并传入指向该对象的指针，以释放其占用的自由存储区内存。释放后，建议立即将指针设置为 nullptr，避免继续使用指向已释放对象的悬空指针。",
+  "key_points": [
+    "单个对象由 `new` 分配时，应使用 `delete` 释放。",
+    "典型顺序是：分配、使用、释放、置空。",
+    "示例：`int* ptr { new int }; delete ptr; ptr = nullptr;`。",
+    "delete 后原指针不再指向有效对象；将其置为 nullptr 可降低误用风险。",
+    "对 nullptr 调用 delete 不会执行任何操作。",
+    "教材给出的经验法则是：每写一行使用 new、并用原始指针保存结果的代码，就应有一行 delete 释放同一块内存的对应代码。"
+  ],
+  "examples": [
+    "正确的基本形式：`int* ptr { new int }; delete ptr; ptr = nullptr;`。",
+    "释放流程可写为：$$\\text{new 分配}\\;\\rightarrow\\;\\text{使用对象}\\;\\rightarrow\\;\\text{delete 释放}\\;\\rightarrow\\;\\text{ptr = nullptr}$$"
+  ],
+  "misconceptions": [
+    "delete 释放的是指针变量本身，而不是指针所指向的动态对象；准确地说，delete 释放指针所指向的动态对象占用的内存。",
+    "delete 后不能继续把原指针当作有效对象指针使用。",
+    "把指针设置为 nullptr 不是释放内存的替代操作；应先 delete，再置空。",
+    "单个 `new` 对象不能用 `delete[]` 释放；本页示例针对的是 `new int` 与 `delete` 的配对。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何释放 `int* ptr { new int };` 分配的内存？",
+      "a": "先执行 `delete ptr;`，然后建议执行 `ptr = nullptr;`。"
+    },
+    {
+      "q": "为什么释放内存后要把指针设置为 nullptr？",
+      "a": "这样可以避免无意中使用指向已释放内存的指针；对 nullptr 执行 delete 也不会产生作用。"
+    },
+    {
+      "q": "new 和 delete 的基本配对关系是什么？",
+      "a": "使用 `new` 分配单个对象时，应使用 `delete` 释放该对象；使用数组形式 `new[]` 时则应对应使用 `delete[]`。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "动态内存分配",
+    "指针变量与对象地址"
+  ],
+  "source_pages": [
+    200,
+    200
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "420_使用_delete_释放动态内存",
+  "_chunk_pages": [
+    197,
+    200
+  ]
+}

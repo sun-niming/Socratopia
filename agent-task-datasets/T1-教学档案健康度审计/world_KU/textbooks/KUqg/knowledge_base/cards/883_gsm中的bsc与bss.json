@@ -1,0 +1,51 @@
+{
+  "title": "GSM中的BSC与BSS",
+  "definition": "基站控制器（Base Station Controller，BSC）负责管理一组收发基站（BTS）。其职责包括为移动用户分配BTS无线信道、执行寻呼以确定移动用户所在的小区，以及执行移动用户在小区或基站之间的切换。一个BSC及其控制的全部BTS共同构成基站系统（Base Station System，BSS）。",
+  "key_points": [
+    "一个BSC通常服务几十个BTS。",
+    "BSC为移动用户分配无线信道。",
+    "BSC执行寻呼，即寻找移动用户当前所在的小区。",
+    "BSC负责移动用户的切换。",
+    "结构关系可表示为：$$\\mathrm{BSS}=\\mathrm{BSC}+\\text{其控制的若干BTS}$$。"
+  ],
+  "examples": [
+    "当网络需要向某个移动用户建立呼叫时，BSC可以通过寻呼确定该用户当前位于哪个小区。",
+    "当用户从一个小区移动到另一个小区时，BSC参与执行连接的切换。"
+  ],
+  "misconceptions": [
+    "错误地认为BSS只是一个基站；BSS由一个BSC及其控制的多个BTS组成。",
+    "错误地把寻呼理解为给用户分配电话号码；这里的寻呼是查找移动用户所在的小区。",
+    "错误地认为BTS负责所有资源管理；BSC承担信道分配、寻呼和切换等控制职责。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "GSM中的BSS由哪些部分构成？",
+      "a": "由一个基站控制器BSC及其控制的若干收发基站BTS构成。"
+    },
+    {
+      "q": "BSC的三项主要职责是什么？",
+      "a": "为移动用户分配BTS无线信道、执行寻呼以找出用户所在小区、执行移动用户的切换。"
+    },
+    {
+      "q": "GSM中的寻呼是指什么？",
+      "a": "寻找某个移动用户当前所在的小区。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "收发基站BTS",
+    "蜂窝小区",
+    "无线信道分配"
+  ],
+  "source_pages": [
+    377,
+    380
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "883_gsm中的bsc与bss",
+  "_chunk_pages": [
+    377,
+    380
+  ]
+}

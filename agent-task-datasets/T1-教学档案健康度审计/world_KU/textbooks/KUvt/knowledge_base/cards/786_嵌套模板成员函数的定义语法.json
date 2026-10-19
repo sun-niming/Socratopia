@@ -1,0 +1,44 @@
+{
+  "title": "嵌套模板成员函数的定义语法",
+  "definition": "定义类模板中的成员模板时，需要为外层类模板和内层成员模板分别写出模板参数声明。外层模板参数声明必须写在内层成员模板参数声明之前，不能把两者合并成一个模板参数列表。",
+  "key_points": [
+    "Grid<T> 的成员模板拷贝构造函数定义需要两行模板声明：先声明 T，再声明 E。",
+    "规范形式为：$\\texttt{template<typename T>}$$\\texttt{template<typename E>}$$\\texttt{Grid<T>::Grid(const Grid<E>\\& src)\\{\\}}$。",
+    "不能写成 $\\texttt{template<typename T, typename E> Grid<T>::Grid(const Grid<E>\\& src)}$；这种写法不是嵌套模板成员的正确语法。",
+    "成员模板定义中，类名应写成带外层参数的 $\\texttt{Grid<T>}$。"
+  ],
+  "examples": [
+    "正确结构：$$\\begin{aligned}\\texttt{template <typename T>}\\\\\\texttt{template <typename E>}\\\\\\texttt{Grid<T>::Grid(const Grid<E>\\& src)}\\end{aligned}$$",
+    "错误结构：$\\texttt{template<typename T, typename E> Grid<T>::Grid(const Grid<E>\\& src)}$。"
+  ],
+  "misconceptions": [
+    "T 和 E 虽然都属于模板参数，但 T 属于外层类模板，E 属于内层成员模板，不能合并声明。",
+    "成员模板的定义不是只需要声明 E；定义外层类模板成员时仍必须先声明 T。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "定义 Grid<T> 的成员模板拷贝构造函数时，模板声明的顺序是什么？",
+      "a": "先写 $\\texttt{template<typename T>}$，再写 $\\texttt{template<typename E>}$，然后定义 $\\texttt{Grid<T>::Grid(const Grid<E>\\& src)}$。"
+    },
+    {
+      "q": "为什么不能把 T 和 E 合并为 $\\texttt{template<typename T, typename E>}$？",
+      "a": "因为 T 是外层类模板参数，E 是嵌套成员模板参数；两者属于不同层级，必须分别声明。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "类模板中的跨类型拷贝构造函数",
+    "成员函数模板"
+  ],
+  "source_pages": [
+    387,
+    388
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "786_嵌套模板成员函数的定义语法",
+  "_chunk_pages": [
+    385,
+    388
+  ]
+}

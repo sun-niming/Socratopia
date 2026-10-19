@@ -1,0 +1,47 @@
+{
+  "title": "将locale关联到I/O流",
+  "definition": "使用C++ I/O流进行格式化时，可以把一个 `std::locale` 对象关联到流。`imbue` 方法用于为流设置locale；设置后，流输出的数据会依据该locale的格式化规则表示。使用 `locale { \"\" }` 构造locale时，程序会根据用户环境创建locale。",
+  "key_points": [
+    "`locale` 定义在 `<locale>` 头文件中。",
+    "`wcout.imbue(locale { \"\" });` 可将用户环境对应的locale设置给 `wcout`。",
+    "同一个数字在不同locale下可能使用不同的千位分隔符。",
+    "教材示例中，美式英语locale输出 `32767` 为 `32,767`，比利时荷兰语locale输出为 `32.767`。",
+    "locale名称格式与实现有关；POSIX常见形式如 `en_US`、`en_GB`，Windows常见形式如 `en-US`。"
+  ],
+  "examples": [
+    "`wcout.imbue(locale { \"\" });`",
+    "`wcout << 32767 << endl;`",
+    "设置为用户locale后，输出格式取决于用户环境，例如可能显示为 `32,767` 或 `32.767`。"
+  ],
+  "misconceptions": [
+    "`locale { \"\" }` 不是经典C locale，而是尝试根据用户环境创建locale。",
+    "locale名称并非所有平台都相同，POSIX与Windows可能使用不同格式。",
+    "设置locale只影响关联流及其格式化行为，不会把所有已有字符串自动翻译成另一种语言。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何让 `wcout` 使用用户环境的locale？",
+      "a": "执行 `wcout.imbue(locale { \"\" });`，然后通过该流输出内容。"
+    },
+    {
+      "q": "为什么数字32767在不同locale下可能显示不同？",
+      "a": "因为不同locale的数字格式规则不同，例如千位分隔符可能是逗号或句点。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "locale与facet",
+    "C++输入输出流"
+  ],
+  "source_pages": [
+    663,
+    663
+  ],
+  "needs_verification": true,
+  "verify_query": "C++ std::locale imbue locale(\"\") 用户环境 Windows POSIX en-US en_US 数字格式",
+  "concept_id": "1388_将locale关联到i_o流",
+  "_chunk_pages": [
+    661,
+    664
+  ]
+}

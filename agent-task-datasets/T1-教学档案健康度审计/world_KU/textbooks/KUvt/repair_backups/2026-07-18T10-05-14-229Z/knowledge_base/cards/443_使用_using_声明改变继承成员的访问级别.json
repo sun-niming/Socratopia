@@ -1,0 +1,43 @@
+{
+  "title": "使用 using 声明改变继承成员的访问级别",
+  "definition": "派生类可以在自己的 public、protected 或 private 区域中使用 using 声明引入基类成员，从而在派生类接口中重新规定该成员的可访问级别。将基类的 protected 成员写在派生类的 public 区域中的 using 声明之后，可以使该成员通过派生类对象的 public 接口访问。",
+  "key_points": [
+    "典型写法是：class Blabber : public Secret { public: using Secret::dontTell; };。",
+    "using 声明不会创建新的函数，而是将基类成员引入派生类作用域。",
+    "成员在派生类中的可访问性取决于 using 声明所在的访问区域。",
+    "如果没有通过 public 区域的 using 声明重新公开，基类的 protected 成员仍不能从类外直接访问。"
+  ],
+  "examples": [
+    "示例结构：\nclass Secret {\nprotected:\n    void dontTell();\n};\n\nclass Blabber : public Secret {\npublic:\n    using Secret::dontTell;\n};\n\nBlabber myBlabber;\nmyBlabber.dontTell();  // 通过 Blabber 的 public using 声明访问"
+  ],
+  "misconceptions": [
+    "using Secret::dontTell; 不是定义一个同名的新函数，也不是改变 Secret 类本身的访问权限。",
+    "只有通过 Blabber 类型的 public 接口访问时，重新公开才生效；将对象视为 Secret 后，访问权限仍依据 Secret 类型检查。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何把基类的 protected 成员 dontTell 作为派生类的 public 成员使用？",
+      "a": "在派生类的 public 区域写 using Secret::dontTell;。"
+    },
+    {
+      "q": "using Secret::dontTell; 会不会生成一个新的 dontTell 函数？",
+      "a": "不会。它只是把基类成员引入派生类作用域，并按照 using 声明所在区域提供访问权限。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++继承中的public、protected和private",
+    "C++ using声明"
+  ],
+  "source_pages": [
+    341,
+    344
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "443_使用_using_声明改变继承成员的访问级别",
+  "_chunk_pages": [
+    341,
+    344
+  ]
+}

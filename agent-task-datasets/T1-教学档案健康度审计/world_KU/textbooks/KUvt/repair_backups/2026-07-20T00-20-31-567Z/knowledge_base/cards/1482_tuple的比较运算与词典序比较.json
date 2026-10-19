@@ -1,0 +1,46 @@
+{
+  "title": "tuple的比较运算与词典序比较",
+  "definition": "std::tuple支持比较运算符，但tuple中存储的元素类型也必须支持相应的比较操作。多元素tuple的比较按词典序进行：先比较第一个元素，只有当前面元素相等时才比较后面的元素。tuple比较可以用于方便实现自定义类型的词典序比较运算符。",
+  "key_points": [
+    "tuple可以使用包括`<`、`>`在内的比较运算。",
+    "元素类型必须支持所使用的比较操作。",
+    "比较多个元素时遵循词典序，前面位置的元素优先决定结果。",
+    "C++20的三向比较运算符`operator<=>`可以结合`std::tie`，用一行代码实现按成员词典序比较。"
+  ],
+  "examples": [
+    "`std::tuple t1 { 123, \"def\" }; std::tuple t2 { 123, \"abc\" };`比较时第一个元素相等，再比较字符串；因为`\"def\"`不小于`\"abc\"`，所以` t1 < t2`为假。",
+    "自定义类型可写成：`auto operator<=>(const Foo& rhs) const { return std::tie(m_int, m_str, m_bool) <=> std::tie(rhs.m_int, rhs.m_str, rhs.m_bool); }`。",
+    "原文示例：`Foo f1 { 42, \"Hello\", false }; Foo f2 { 42, \"World\", false };`，因此`f1 < f2`和`f2 > f1`都输出1。"
+  ],
+  "misconceptions": [
+    "tuple比较不是只比较元素数量，也不是无序比较；它按元素顺序进行词典序比较。",
+    "只有前一个位置的元素相等时，比较才会继续到下一个位置。",
+    "使用tuple比较实现自定义类型时，参与比较的成员类型仍必须支持相应比较运算。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "对于`std::tuple{123, \"def\"}`和`std::tuple{123, \"abc\"}`，为什么前者不小于后者？",
+      "a": "第一个元素都为123而相等，因此比较第二个元素；字符串`\"def\"`大于`\"abc\"`，所以前一个tuple不小于后一个。"
+    },
+    {
+      "q": "如何用std::tie和operator<=>实现Foo的按成员词典序比较？",
+      "a": "返回`std::tie(m_int, m_str, m_bool) <=> std::tie(rhs.m_int, rhs.m_str, rhs.m_bool)`。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "std::tie分解tuple并忽略元素",
+    "C++20三向比较运算符"
+  ],
+  "source_pages": [
+    712,
+    712
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1482_tuple的比较运算与词典序比较",
+  "_chunk_pages": [
+    709,
+    712
+  ]
+}

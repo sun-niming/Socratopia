@@ -1,0 +1,50 @@
+{
+  "title": "std::barrier 的阶段性线程协调",
+  "definition": "std::barrier 是 C++20 提供的可重用线程协调机制。它把线程同步组织成一系列阶段：线程到达 barrier 点后会减少当前阶段的计数并阻塞；当达到预期数量的线程后，执行完成阶段的回调，解除被阻塞线程，并进入下一阶段。因此，barrier 特别适合让多个线程在循环的每次迭代之间同步。",
+  "key_points": [
+    "barrier 在头文件 <barrier> 中定义，常用类型是 std::barrier。",
+    "arrive_and_wait() 会使调用线程到达当前阶段、减少计数器，并等待当前阶段完成。",
+    "当预期数量的线程都到达后，会执行完成阶段的回调，然后所有等待线程继续执行下一阶段。",
+    "典型用途是：多个线程分别完成本轮计算，barrier 的完成回调集中处理结果，随后所有线程开始下一轮计算。"
+  ],
+  "examples": [
+    "概念性代码：barrier barrierPoint{numberOfThreads, completionFunction};",
+    "线程循环中使用：while (!token.stop_requested()) { /* 执行本轮计算 */ barrierPoint.arrive_and_wait(); }",
+    "其中 completionFunction() noexcept 可用于在每个阶段结束时处理各线程产生的结果。"
+  ],
+  "misconceptions": [
+    "barrier 不是只能使用一次的同步点；它可以在多个阶段中重复使用。",
+    "线程到达 barrier 后不会立即继续执行，而是要等待当前阶段完成。",
+    "barrier 的完成回调不是每个线程各执行一次，而是在当前阶段完成时执行一次。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "std::barrier 的主要作用是什么？",
+      "a": "它用于协调多个线程，使线程在每个阶段的 barrier 点等待，直到预期数量的线程都到达后再一起进入下一阶段。"
+    },
+    {
+      "q": "arrive_and_wait() 做了什么？",
+      "a": "它使当前线程到达 barrier、减少当前阶段的计数，并阻塞当前线程，直到该阶段完成。"
+    },
+    {
+      "q": "为什么 barrier 适合用于循环？",
+      "a": "因为它可以重复使用，使多个线程在每轮计算结束后同步，然后再共同开始下一轮计算。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++线程基础",
+    "线程同步的基本概念"
+  ],
+  "source_pages": [
+    817,
+    817
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1677_std_barrier_的阶段性线程协调",
+  "_chunk_pages": [
+    817,
+    820
+  ]
+}

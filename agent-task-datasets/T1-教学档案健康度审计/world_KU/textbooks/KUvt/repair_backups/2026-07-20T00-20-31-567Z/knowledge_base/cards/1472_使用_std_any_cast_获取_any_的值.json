@@ -1,0 +1,48 @@
+{
+  "title": "使用 std::any_cast 获取 any 的值",
+  "definition": "std::any_cast<T> 用于从 std::any 中获取类型为 T 的值。只有当 any 当前包装的值类型与请求类型匹配时，转换才能成功；如果转换失败，std::any_cast 会抛出 std::bad_any_cast 异常。",
+  "key_points": [
+    "any_cast<T>(a) 的 T 应与 a 当前包装的类型匹配。",
+    "成功时 any_cast 返回请求类型的值。",
+    "类型不匹配时会抛出 std::bad_any_cast。"
+  ],
+  "examples": [
+    "any anInt{3};",
+    "int theInt{any_cast<int>(anInt)}; 执行成功，theInt 的值为 3。",
+    "any aString{\"An std::string.\"s};",
+    "any_cast<int>(aString) 类型不匹配，会抛出 bad_any_cast；示例捕获该异常并输出异常信息。"
+  ],
+  "misconceptions": [
+    "any_cast<int> 会把字符串等其他类型自动转换成 int；实际上类型不匹配时会抛出 std::bad_any_cast。",
+    "any_cast 失败时返回默认值；实际上失败会抛出异常。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "any anInt{3}; 后，any_cast<int>(anInt) 的结果是什么？",
+      "a": "转换成功，结果为整数 3。"
+    },
+    {
+      "q": "对包装字符串的 any 调用 any_cast<int> 会发生什么？",
+      "a": "由于请求类型与实际包装类型不匹配，会抛出 std::bad_any_cast。"
+    },
+    {
+      "q": "如何处理 any_cast 的类型转换失败？",
+      "a": "使用 try-catch 捕获 std::bad_any_cast 异常。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "std::any 的含义与基本操作"
+  ],
+  "source_pages": [
+    708,
+    708
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1472_使用_std_any_cast_获取_any_的值",
+  "_chunk_pages": [
+    705,
+    708
+  ]
+}

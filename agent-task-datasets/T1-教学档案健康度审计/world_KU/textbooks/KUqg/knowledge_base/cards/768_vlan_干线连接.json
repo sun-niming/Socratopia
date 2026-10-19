@@ -1,0 +1,50 @@
+{
+  "title": "VLAN 干线连接",
+  "definition": "VLAN 干线连接是一种可扩展地互联多台 VLAN 交换机的方法。每台交换机使用一个特殊的干线端口连接到另一台交换机；该干线端口属于所有 VLAN，发送到任意 VLAN 的帧都可以经过干线链路转发到另一台交换机。与为每个 VLAN 单独使用一条互联电缆相比，干线连接避免了端口数量随 VLAN 数量线性增加。",
+  "key_points": [
+    "每台 VLAN 交换机配置一个干线端口，用于连接其他 VLAN 交换机。",
+    "干线端口属于所有 VLAN。",
+    "发送到任何 VLAN 的帧都可以经由干线链路转发到另一台交换机。",
+    "如果为每个 VLAN 单独建立端口互联，交换机上有 $N$ 个 VLAN 就需要 $N$ 个互联端口；干线连接更具扩展性。",
+    "教材原文在第 336 页末尾提出了“干线端口收到的帧如何识别所属 VLAN”的问题，但给定原文在此处截断，未提供后续解决机制。"
+  ],
+  "examples": [
+    "两台交换机各有多个 VLAN 时，可以分别配置一个干线端口，例如左侧交换机端口 16、右侧交换机端口 1，再用一条干线链路互联。",
+    "若有 $N$ 个 VLAN，逐 VLAN 直连需要 $N$ 个端口互联；采用干线连接则可用一个干线端口承载所有 VLAN 的流量。"
+  ],
+  "misconceptions": [
+    "干线端口不是只属于某一个 VLAN，而是属于所有 VLAN。",
+    "VLAN 干线连接不是为每个 VLAN 单独铺设一条交换机间电缆。",
+    "给定原文只说明了干线端口承载多个 VLAN 的帧，并未在截取内容中说明帧如何携带 VLAN 标识。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么 VLAN 干线连接比逐 VLAN 直连更具扩展性？",
+      "a": "逐 VLAN 直连时，$N$ 个 VLAN 需要 $N$ 个交换机间互联端口；干线连接使用一个属于所有 VLAN 的干线端口即可承载多个 VLAN 的流量。"
+    },
+    {
+      "q": "VLAN 干线端口属于哪些 VLAN？",
+      "a": "干线端口属于所有 VLAN。"
+    },
+    {
+      "q": "VLAN 干线链路的作用是什么？",
+      "a": "它在多台 VLAN 交换机之间转发属于不同 VLAN 的帧，使各 VLAN 能通过一条共享的交换机间链路延伸到其他交换机。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "基于端口的 VLAN",
+    "交换机互联"
+  ],
+  "source_pages": [
+    333,
+    336
+  ],
+  "needs_verification": true,
+  "verify_query": "Kurose Ross Computer Networking A Top-Down Approach 7th edition VLAN trunking trunk port belongs to all VLANs how frames identify VLAN IEEE standard",
+  "concept_id": "768_vlan_干线连接",
+  "_chunk_pages": [
+    333,
+    336
+  ]
+}

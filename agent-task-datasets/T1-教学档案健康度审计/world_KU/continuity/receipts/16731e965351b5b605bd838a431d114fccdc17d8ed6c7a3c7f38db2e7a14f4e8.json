@@ -1,0 +1,105 @@
+{
+  "schemaVersion": 1,
+  "status": "committed",
+  "operationId": "endclass:v1:2b5a5fc08b02fdea7a3cbda413fbe9c0:332e1fb386cc22bd5dc2d732",
+  "operationHash": "16731e965351b5b605bd838a431d114fccdc17d8ed6c7a3c7f38db2e7a14f4e8",
+  "scope": {
+    "accountId": "local",
+    "profileId": "uolmzgq8",
+    "worldId": "KU",
+    "conversationId": "EJCMdZUMLRh0uIgZkHKXm"
+  },
+  "companion": {
+    "slotId": "npc_a",
+    "companionInstanceId": "ci_7c38648f75727584bacedbcf",
+    "candidateId": "ct_xwxrb0v3",
+    "displayName": "三月七"
+  },
+  "committedAt": "2026-09-21T09:13:33.216Z",
+  "targets": [
+    {
+      "relativePath": "pal_moments.md",
+      "oldHash": "cce3caf7fcd9386e700235d74340c8fd2fcaaeacd787edde56f47c3e04c42743",
+      "newHash": "19c749823b931be63159908fb2fc9504cd144cda1a9d937a0066081b102ad65e",
+      "deleting": false
+    },
+    {
+      "relativePath": "textbooks/KUyw/progress.md",
+      "oldHash": "32afe816ef382f4c03206e8afc55fe5c4664952202a4095061fbee0d8fe9da26",
+      "newHash": "269e6cdc43c35f1952e245baf85fb5123eff958a15130be6ca3e7df74142339c",
+      "deleting": false
+    },
+    {
+      "relativePath": "diary/2026-09.md",
+      "oldHash": "afb0cf72d88059b2a25dbdc3eb260eb8f799650c783dc7e5809d8684e7377075",
+      "newHash": "5164784429d8f019578c4c2a84a95793a6fdfe5ace63c1c6bed72f6620d8d403",
+      "deleting": false
+    },
+    {
+      "relativePath": "relation_npc_a.md",
+      "oldHash": "1f1e0f2b53bdaea218f659c943f49b23a3a3c8d0c334f5f6c965e4e43394b75f",
+      "newHash": "88d456f9237d579c4ff1e77a704d5717dfb9ed08fa0344b4ea3f2ce5d617595b",
+      "deleting": false
+    },
+    {
+      "relativePath": "world_meta.json",
+      "oldHash": "ea1de551534674893d887f61d9791979a85cdfb1037b2c7dfa77f49963c0d1aa",
+      "newHash": "50f632f30649f677f13a2f39d061a36b5fb890be226c1bac676a80649c250b6c",
+      "deleting": false
+    },
+    {
+      "relativePath": "world_records.md",
+      "oldHash": "f32ecf4cf3534736deb09c594434c1b664f790adbe3e01b1802d1372047c538f",
+      "newHash": "93ce1ef0bbcf75df1982760a8fcac91cd38a8678945e114cebc5cd0196043df3",
+      "deleting": false
+    },
+    {
+      "relativePath": "textbooks/textbook_index.json",
+      "oldHash": "eafd7578e1238d023defee28016317f29f76f293bfbcd33f9f25217150398589",
+      "newHash": "bb78df5d2d9d7e1ebd9b30917dc3f602eaeae80aba52db2c77ddc881db3344be",
+      "deleting": false
+    },
+    {
+      "relativePath": "textbooks/KUyw/handoff/last_tail.json",
+      "oldHash": "8c10c220180ca7b2dc05edc3ccc6f2764d778e200915418b1a5d7308e8c0b53d",
+      "newHash": "27d5c0a78851f669b87b531db35cbb9b75cfaf2d4c96376f14ac42554b3ce37f",
+      "deleting": false
+    },
+    {
+      "relativePath": "textbooks/KUyw/handoff/last_meta.json",
+      "oldHash": "aeee1fd177d16b59222a38a9bb54ac758603726758370117b5331881ee654bf1",
+      "newHash": "cde8d3c276b95d4b875fe403b3fce14c5bf828e0099fedb472f313a943979997",
+      "deleting": false
+    },
+    {
+      "relativePath": "conversations/EJCMdZUMLRh0uIgZkHKXm/current_reading.md",
+      "oldHash": "a5dddb8cf4edeee3b266de2976c6b5e109c18cd79e3f30a4cc95b6ffd4d298b6",
+      "newHash": null,
+      "deleting": true
+    },
+    {
+      "relativePath": "textbooks/KUyw/current_reading.md",
+      "oldHash": null,
+      "newHash": null,
+      "deleting": true
+    },
+    {
+      "relativePath": "conversations/EJCMdZUMLRh0uIgZkHKXm/current_reading_summary.json",
+      "oldHash": null,
+      "newHash": null,
+      "deleting": true
+    },
+    {
+      "relativePath": "conversations/EJCMdZUMLRh0uIgZkHKXm/handoff.json",
+      "oldHash": null,
+      "newHash": null,
+      "deleting": true
+    }
+  ],
+  "payload": {
+    "farewell": "*三月七把相机慢慢合上，抱在怀里。*\n\n今天这一路的照片翻下来，最舍不得删的是你自己推出来那句\"缺了状态集合\"——从 NFA 的赌注到 DFA 的 $2^n$，你是自己把桥搭过去的。最后那道合并 NFA 为什么留好几个接受状态，先挂在这张没对上焦的底片上，下次我们把它拍清楚。",
+    "companionNote": "今天最舍不得删的一张，是你自己说出\"缺了状态集合\"那一瞬——NFA 的赌注、DFA 的展开，桥是你搭的。合并 NFA 那台好几个出口的机器，先给它留着位置，下次我们把它拍清楚。",
+    "marker": "<!-- continuityEvent:16731e965351b5b605bd838a companion:ci_7c38648f75727584bacedbcf mode:classroom -->",
+    "endingPage": 121
+  }
+}

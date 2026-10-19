@@ -1,0 +1,50 @@
+{
+  "title": "MyWeatherPrediction 通过继承扩展天气预测",
+  "definition": "`MyWeatherPrediction` 是从 `WeatherPrediction` 公有继承得到的派生类。它在基类以华氏度为单位的接口之外，增加了以摄氏度设置当前温度和获取明天温度的接口，并通过静态转换函数在摄氏度与华氏度之间进行转换。",
+  "key_points": [
+    "`MyWeatherPrediction : public WeatherPrediction` 表示公有继承。",
+    "`setCurrentTempCelsius(int temp)` 接收摄氏温度，并将其转换为华氏温度后调用基类的 `setCurrentTempFahrenheit`。",
+    "`getTomorrowTempCelsius() const` 先调用基类的 `getTomorrowTempFahrenheit()`，再将结果转换为摄氏温度。",
+    "类中声明了静态转换函数 `convertCelsiusToFahrenheit(int Celsius)` 和 `convertFahrenheitToCelsius(int fahrenheit)`。"
+  ],
+  "examples": [
+    "设置摄氏温度的实现逻辑：\nvoid MyWeatherPrediction::setCurrentTempCelsius(int temp) {\n    int fahrenheitTemp{convertCelsiusToFahrenheit(temp)};\n    setCurrentTempFahrenheit(fahrenheitTemp);\n}",
+    "获取摄氏温度的实现逻辑：\nint MyWeatherPrediction::getTomorrowTempCelsius() const {\n    int fahrenheitTemp{getTomorrowTempFahrenheit()};\n    return convertFahrenheitToCelsius(fahrenheitTemp);\n}"
+  ],
+  "misconceptions": [
+    "派生类的摄氏温度接口不是独立计算天气预测，而是通过转换单位复用基类的华氏温度接口。",
+    "`convertCelsiusToFahrenheit` 和 `convertFahrenheitToCelsius` 是静态成员函数，用于单位转换；原文没有给出具体转换公式，因此不能仅依据此处原文补写公式。",
+    "公有继承表示 `MyWeatherPrediction` 是一种 `WeatherPrediction`，但不表示两个类的所有实现都完全相同。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`setCurrentTempCelsius` 如何复用基类功能？",
+      "a": "先用 `convertCelsiusToFahrenheit` 把摄氏温度转换为华氏温度，再调用基类的 `setCurrentTempFahrenheit`。"
+    },
+    {
+      "q": "`getTomorrowTempCelsius` 的处理步骤是什么？",
+      "a": "先调用 `getTomorrowTempFahrenheit()` 获取华氏温度，再通过 `convertFahrenheitToCelsius` 转换为摄氏温度并返回。"
+    },
+    {
+      "q": "为什么 MyWeatherPrediction 需要两个温度转换函数？",
+      "a": "因为它增加了摄氏温度接口，而基类接口使用华氏温度，所以需要在两种单位之间转换。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++ 公有继承",
+    "C++ 虚函数",
+    "温度单位转换"
+  ],
+  "source_pages": [
+    314,
+    315
+  ],
+  "needs_verification": true,
+  "verify_query": "\"MyWeatherPrediction\" \"setCurrentTempCelsius\" \"getTomorrowTempCelsius\"",
+  "concept_id": "406_myweatherprediction_通过继承扩展天气预测",
+  "_chunk_pages": [
+    313,
+    316
+  ]
+}

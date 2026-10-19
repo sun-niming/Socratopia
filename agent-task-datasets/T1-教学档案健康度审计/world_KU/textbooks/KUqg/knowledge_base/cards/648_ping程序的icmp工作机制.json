@@ -1,0 +1,47 @@
+{
+  "title": "Ping程序的ICMP工作机制",
+  "definition": "Ping通过ICMP回显请求和回显回答测试目标主机是否能够响应网络层报文。Ping客户端向指定主机发送一个ICMP类型8、编码0的回显请求；目标主机收到后返回一个ICMP类型0、编码0的回显回答。大多数TCP/IP实现直接在操作系统中支持ping服务器，该服务器不是一个独立进程。",
+  "key_points": [
+    "Ping请求报文：ICMP类型8、编码0。",
+    "Ping回答报文：ICMP类型0、编码0。",
+    "目标主机的回显回答表明其能够对该ICMP请求作出响应。",
+    "大多数TCP/IP实现将ping服务器功能直接放在操作系统中，而不是作为独立进程运行。"
+  ],
+  "examples": [
+    "执行ping时，客户端请求操作系统生成类型8编码0的ICMP报文；目标主机操作系统收到后生成类型0编码0的回显回答。"
+  ],
+  "misconceptions": [
+    "Ping发送的不是TCP报文或UDP报文，而是ICMP回显请求。",
+    "Ping服务器通常不是一个普通用户态进程，而是由操作系统直接支持。",
+    "回显请求和回显回答不是同一种ICMP类型。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "Ping客户端发送什么ICMP报文？",
+      "a": "发送ICMP类型8、编码0的回显请求。"
+    },
+    {
+      "q": "目标主机如何回答ping？",
+      "a": "返回ICMP类型0、编码0的回显回答。"
+    },
+    {
+      "q": "Ping服务器通常以什么形式运行？",
+      "a": "大多数TCP/IP实现直接在操作系统中支持ping服务器，它不是一个独立进程。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "ICMP常见报文类型与编码"
+  ],
+  "source_pages": [
+    289,
+    292
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "648_ping程序的icmp工作机制",
+  "_chunk_pages": [
+    289,
+    292
+  ]
+}

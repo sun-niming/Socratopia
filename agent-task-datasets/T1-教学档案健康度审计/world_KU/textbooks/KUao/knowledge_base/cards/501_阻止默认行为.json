@@ -1,0 +1,45 @@
+{
+  "title": "阻止默认行为",
+  "definition": "浏览器在事件传递并处理完后，通常会执行该事件关联的默认动作；可以通过调用 event 对象的 preventDefault() 方法，或者让事件处理函数返回 false，来阻止默认动作继续执行。",
+  "key_points": [
+    "默认行为是浏览器对某些事件预设的后续动作",
+    "调用 event.preventDefault() 可以阻止默认行为",
+    "某些事件处理函数返回 false 也能阻止浏览器继续执行默认操作",
+    "当返回值为 true 时，通常继续执行默认操作"
+  ],
+  "examples": [
+    "e.preventDefault();",
+    "事件处理函数返回 false"
+  ],
+  "misconceptions": [
+    "以为阻止默认行为就等于停止事件传播",
+    "以为只有 preventDefault() 一种方式可以阻止默认行为",
+    "以为返回 false 和返回 true 的效果一样"
+  ],
+  "qa_pairs": [
+    {
+      "q": "怎样阻止事件的默认行为？",
+      "a": "可以调用 event.preventDefault()，也可以让事件处理函数返回 false。"
+    },
+    {
+      "q": "返回 true 和返回 false 分别会怎样？",
+      "a": "返回 true 时通常执行默认操作；返回 false 时阻止浏览器的下一步默认操作。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "事件对象",
+    "事件处理程序"
+  ],
+  "source_pages": [
+    375,
+    376
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "501_阻止默认行为",
+  "_chunk_pages": [
+    373,
+    376
+  ]
+}

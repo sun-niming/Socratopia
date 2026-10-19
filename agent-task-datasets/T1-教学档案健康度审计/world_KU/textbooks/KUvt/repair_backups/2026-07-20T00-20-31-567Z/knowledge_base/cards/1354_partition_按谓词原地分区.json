@@ -1,0 +1,50 @@
+{
+  "title": "partition 按谓词原地分区",
+  "definition": "partition() 对一个序列进行原地分区：使谓词返回 true 的元素位于前部，使谓词返回 false 的元素位于后部。它不保证每个分区内保留元素原来的相对顺序。",
+  "key_points": [
+    "partition() 直接重新排列源范围中的元素，不需要两个目标容器。",
+    "谓词为 true 的元素被放到前面，谓词为 false 的元素被放到后面。",
+    "每个分区内部的原始顺序不保留。",
+    "教材示例使用谓词 $(i \\bmod 2)==0$，将偶数放在前面、奇数放在后面。"
+  ],
+  "examples": [
+    "vector<int> values; populateContainer(values);",
+    "partition(begin(values), end(values), [](int i){ return i % 2 == 0; });",
+    "若输入为 $[55,44,33,22,11]$，分区结果满足“偶数在前、奇数在后”，但同一分区内的具体顺序不应依赖。"
+  ],
+  "misconceptions": [
+    "partition() 不是稳定分区；不能假定偶数或奇数在分区内仍保持原顺序。",
+    "partition() 不会把结果复制到两个新 vector 中；它会直接重排原序列。",
+    "谓词返回 true 的元素在前，返回 false 的元素在后。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "partition() 的分区规则是什么？",
+      "a": "谓词返回 true 的元素放在前面，返回 false 的元素放在后面。"
+    },
+    {
+      "q": "partition() 是否保持每个分区内元素的原始相对顺序？",
+      "a": "不保持；教材明确指出每个分区内的原始顺序不保留。"
+    },
+    {
+      "q": "用什么谓词可以把整数分为偶数在前、奇数在后？",
+      "a": "使用 [](int i){ return i % 2 == 0; }。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "谓词函数",
+    "迭代器范围表示法"
+  ],
+  "source_pages": [
+    648,
+    648
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1354_partition_按谓词原地分区",
+  "_chunk_pages": [
+    645,
+    648
+  ]
+}

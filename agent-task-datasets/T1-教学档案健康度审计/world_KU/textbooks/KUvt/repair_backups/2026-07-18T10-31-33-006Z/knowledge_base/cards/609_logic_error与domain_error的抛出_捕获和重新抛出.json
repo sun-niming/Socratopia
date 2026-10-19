@@ -1,0 +1,57 @@
+{
+  "title": "logic_error与domain_error的抛出、捕获和重新抛出",
+  "definition": "程序可以使用标准异常类型表达不同的错误。原文示例中，`verifyDataSize` 在数据点数量不是偶数时抛出 `logic_error`；`processData` 先调用该函数，在 `catch (const logic_error&)` 中输出错误信息并重新抛出异常。随后 `processData` 检查数据点，如果发现负数，则抛出 `domain_error`。`main` 根据异常类型分别捕获 `logic_error` 和 `domain_error`，并输出 `what()` 返回的错误说明。",
+  "key_points": [
+    "`logic_error` 可用于表示数据或程序逻辑方面的无效条件；示例消息是数据点数量必须为偶数。",
+    "`domain_error` 可用于表示参数值超出允许域；示例中负数据点会触发该异常。",
+    "通过 `catch (const logic_error& caughtException)` 可以先记录错误，再使用 `throw caughtException;` 将异常重新抛出。",
+    "`what()` 用于取得异常的说明文本。",
+    "示例数据 `{1, 2, 3, -5, 6, 9}` 的元素数量为 6，是偶数，因此会通过数量检查；随后遇到 `-5`，会抛出 `domain_error`。"
+  ],
+  "examples": [
+    "示意代码：`void verifyDataSize(const std::vector<int>& data) { if (data.size() % 2 != 0) throw std::logic_error{\"Number of data points must be even.\"}; }`。",
+    "示意代码：`if (value < 0) throw std::domain_error{\"Negative datapoints not allowed.\"};`。",
+    "重新抛出示意：`catch (const std::logic_error& caughtException) { std::cerr << caughtException.what() << std::endl; throw caughtException; }`。",
+    "调用方示意：`try { processData(data); } catch (const std::logic_error& e) { ... } catch (const std::domain_error& e) { ... }`。"
+  ],
+  "misconceptions": [
+    "`logic_error` 和 `domain_error` 不是关键字，而是标准库提供的异常类。",
+    "捕获异常后执行输出并不等于异常已经自动解决；示例中显式重新抛出后，异常仍会传播到上层。",
+    "异常处理器的匹配取决于异常类型；不能认为所有标准异常都会进入同一个专门的 `domain_error` 处理器。",
+    "在该示例中，数据点数量检查发生在负数检查之前；如果数量检查失败，后面的负数检查不会执行。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`verifyDataSize` 在什么条件下抛出 `logic_error`？",
+      "a": "当数据集中的数据点数量不是偶数时。"
+    },
+    {
+      "q": "`processData` 在什么条件下抛出 `domain_error`？",
+      "a": "当数据集中的某个数据点小于 0 时。"
+    },
+    {
+      "q": "`processData` 捕获 `logic_error` 后做了什么？",
+      "a": "它先向标准错误输出错误信息，然后使用 `throw caughtException;` 重新抛出该异常。"
+    },
+    {
+      "q": "原文示例数据 `{1, 2, 3, -5, 6, 9}` 最终会触发哪种异常？",
+      "a": "数据有 6 个元素，数量为偶数，因此会继续检查数值；遇到 `-5` 时抛出 `domain_error`。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++异常抛出与捕获",
+    "标准库容器vector"
+  ],
+  "source_pages": [
+    465,
+    468
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 std::logic_error std::domain_error example throw caught exception rethrow catch behavior",
+  "concept_id": "609_logic_error与domain_error的抛出_捕获和重新抛出",
+  "_chunk_pages": [
+    465,
+    468
+  ]
+}

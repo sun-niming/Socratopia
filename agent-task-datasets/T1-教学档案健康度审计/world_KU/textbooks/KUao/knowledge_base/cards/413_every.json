@@ -1,0 +1,38 @@
+{
+  "title": "every()",
+  "definition": "`every()` 用于判断数组中所有元素是否都符合条件；教材表格给出的返回值类型是布尔类型，并说明回调返回 `true` 时循环继续。",
+  "key_points": [
+    "返回值是布尔类型",
+    "用于判断“所有”元素是否都满足条件",
+    "回调返回 `true` 时循环继续"
+  ],
+  "examples": [
+    "[1, 2, 3].every(x => x > 0) // true"
+  ],
+  "misconceptions": [
+    "以为 `every()` 只要有一个元素满足条件就返回 `true`",
+    "以为 `every()` 返回的是数组",
+    "以为 `every()` 只检查第一个元素"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`every()` 判断的是什么？",
+      "a": "判断所有元素是否符合条件。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "Array对象与创建方式"
+  ],
+  "source_pages": [
+    307,
+    308
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "413_every",
+  "_chunk_pages": [
+    305,
+    308
+  ]
+}

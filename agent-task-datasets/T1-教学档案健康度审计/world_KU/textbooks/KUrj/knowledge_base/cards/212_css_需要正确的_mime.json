@@ -1,0 +1,38 @@
+{
+  "title": "CSS 需要正确的 MIME",
+  "definition": "浏览器会根据 `Content-Type` 判断响应体类型。CSS 应返回 `text/css`；如果服务器把 CSS 当成 `text/html` 或 `application/octet-stream`，浏览器可能拒绝把它作为样式表应用，于是页面有内容但没有样式。",
+  "key_points": [
+    "浏览器通过 `Content-Type` 识别资源类型。",
+    "CSS 应返回 `text/css`。",
+    "MIME 错误会导致样式表不被应用。"
+  ],
+  "examples": [
+    "`Content-Type: text/css`。",
+    "把 CSS 返回成 `text/html` 可能出现“页面有内容但没样式”。"
+  ],
+  "misconceptions": [
+    "文件能下载成功，不代表浏览器就会把它当成正确类型使用。",
+    "MIME 错误不一定是 CSS 文件本身坏了，可能是响应头类型写错了。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么 CSS 加载失败通常和 MIME 有关？",
+      "a": "因为浏览器根据 `Content-Type` 判断类型，CSS 应该是 `text/css`；类型写错会导致样式表不能被正常应用。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "HTTP 通用协议"
+  ],
+  "source_pages": [
+    129,
+    132
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "212_css_需要正确的_mime",
+  "_chunk_pages": [
+    129,
+    132
+  ]
+}

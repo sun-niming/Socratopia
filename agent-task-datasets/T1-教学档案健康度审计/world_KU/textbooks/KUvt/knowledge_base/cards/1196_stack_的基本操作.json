@@ -1,0 +1,44 @@
+{
+  "title": "stack 的基本操作",
+  "definition": "stack 提供 push()、emplace() 和 pop() 操作，并支持 top()、empty()、size()、swap() 及标准比较运算符。push() 或 emplace() 在栈顶添加元素，pop() 删除栈顶元素但不返回它。top() 在 const stack 上返回顶部元素的 const 引用，在非 const stack 上返回顶部元素的非 const 引用。",
+  "key_points": [
+    "push() 和 emplace() 用于在栈顶添加元素。",
+    "pop() 删除栈顶元素，但不返回被删除的元素。",
+    "调用 pop() 前，如果需要保存栈顶元素，必须先通过 top() 获取它。",
+    "top() 的返回引用类型取决于 stack 对象是否为 const。"
+  ],
+  "examples": [
+    "保存并弹出栈顶元素：auto top = myStack.top(); myStack.pop();",
+    "非 const 栈可以通过 top() 返回的非 const 引用修改栈顶元素；const 栈的 top() 返回 const 引用，不能修改。"
+  ],
+  "misconceptions": [
+    "误以为 pop() 会返回栈顶元素。",
+    "误以为 const stack 的 top() 返回可修改引用。",
+    "误以为 stack 没有 empty() 或 size() 等状态查询操作。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何在删除 stack 栈顶元素前保存它？",
+      "a": "先调用 top() 获取栈顶元素或其副本，再调用 pop()。"
+    },
+    {
+      "q": "const stack 和非 const stack 调用 top() 时返回值有什么区别？",
+      "a": "const stack 返回顶部元素的 const 引用，非 const stack 返回顶部元素的非 const 引用。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "stack 的后入先出语义"
+  ],
+  "source_pages": [
+    580,
+    580
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1196_stack_的基本操作",
+  "_chunk_pages": [
+    577,
+    580
+  ]
+}

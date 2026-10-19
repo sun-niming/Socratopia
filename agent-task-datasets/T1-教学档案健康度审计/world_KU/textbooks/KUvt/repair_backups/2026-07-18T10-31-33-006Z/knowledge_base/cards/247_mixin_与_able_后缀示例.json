@@ -1,0 +1,47 @@
+{
+  "title": "mixin 与 able 后缀示例",
+  "definition": "原文第178页出现“(mixin)”和“able”，并以“share-with”作为说明，还列出 Pettable、Clickable、Draggable 等名称。该页面用 Image、PictureButton、Image Button 等名称展示这些能力或特征可附加到对象上的示例。根据页面片段可以确认这是一个 mixin/能力名称示例，但无法仅凭片段确定完整的 C++ 代码和各类型之间的精确关系。",
+  "key_points": [
+    "页面明确出现“(mixin)”标记。",
+    "页面出现以 able 结尾的能力命名示例：Pettable、Clickable、Draggable。",
+    "图中出现 Image、PictureButton、Image Button 等类型或对象名称。",
+    "原文片段不足以确认 mixin 的完整实现语法。"
+  ],
+  "examples": [
+    "图中可见的能力组合名称包括：$$Pettable+Clickable$$",
+    "图中还出现如下名称组合：Image、PictureButton、Image Button、Draggable、Clickable。"
+  ],
+  "misconceptions": [
+    "“able”后缀在此处只能确认是页面中的命名示例，不能据此断定 C++ 语言有名为 able 的关键字。",
+    "mixin 不等同于普通的单继承基类；但本页片段没有给出足够内容来说明其具体实现机制。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "第178页明确标注了哪一种设计形式？",
+      "a": "明确标注了 mixin。"
+    },
+    {
+      "q": "页面中出现了哪些以能力形式命名的示例？",
+      "a": "出现了 Pettable、Clickable 和 Draggable。"
+    },
+    {
+      "q": "页面中出现了哪些图像相关名称？",
+      "a": "出现了 Image、PictureButton 和 Image Button。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "面向对象继承与组合的基本概念"
+  ],
+  "source_pages": [
+    177,
+    180
+  ],
+  "needs_verification": true,
+  "verify_query": "《C++20高级编程》第5版 第178页 mixin able Pettable Clickable Draggable PictureButton Image Button",
+  "concept_id": "247_mixin_与_able_后缀示例",
+  "_chunk_pages": [
+    177,
+    180
+  ]
+}

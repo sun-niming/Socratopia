@@ -1,0 +1,46 @@
+{
+  "title": "regex_replace() 的功能与两类重载",
+  "definition": "`std::regex_replace()` 根据正则表达式查找输入序列中的匹配子字符串，并使用格式化字符串替换这些匹配。它既有返回新字符串的重载，也有把结果写入输出迭代器的重载。",
+  "key_points": [
+    "返回字符串的重载形式可概括为：`string regex_replace(InputSequence, RegEx, FormatString [, Flags]);`。",
+    "输出迭代器重载形式可概括为：`OutputIterator regex_replace(OutputIterator, BidirectionalIterator first, BidirectionalIterator last, RegEx, FormatString [, Flags]);`。",
+    "输入序列和格式化字符串可以使用 `std::string` 或 C 风格字符串；`RegEx` 是用于查找匹配的正则表达式。",
+    "默认情况下，算法替换匹配模式的所有实例，并把所有不匹配的内容复制到结果中。",
+    "`regex_replace()` 不需要调用者手动循环处理每一个匹配；算法会按照正则表达式和格式化字符串完成替换。"
+  ],
+  "examples": [
+    "返回字符串的用法：`string result { regex_replace(str, r, replacement) };`",
+    "输出迭代器版本的结构：`regex_replace(output, first, last, r, replacement);`",
+    "若源字符串为 `<body><h1>Header</h1><p>Some text</p></body>`，正则表达式匹配标题和段落内容，则可以用替换格式字符串把它们改写为类似 `Hl=Header and P=Some text` 的文本。"
+  ],
+  "misconceptions": [
+    "`regex_replace()` 默认并非只替换第一个匹配，而是替换所有匹配实例。",
+    "默认结果会保留未匹配文本；只有使用 `format_no_copy` 等标志时，才会改变这一行为。",
+    "返回新字符串的重载和输出迭代器重载的主要区别是结果输出方式，不是正则表达式匹配规则。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`regex_replace()` 的默认行为是什么？",
+      "a": "替换正则表达式匹配到的所有实例，并将输入中不匹配的内容复制到结果字符串。"
+    },
+    {
+      "q": "`regex_replace()` 有哪两大类重载？",
+      "a": "一类接收输入序列并返回替换后的字符串；另一类接收输出迭代器、输入序列首尾迭代器并把结果写入输出迭代器。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++正则表达式匹配与捕获组基础"
+  ],
+  "source_pages": [
+    679,
+    680
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1419_regex_replace_的功能与两类重载",
+  "_chunk_pages": [
+    677,
+    680
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "title": "函数模板及其类型推导",
+  "definition": "函数模板是可用于多种类型的独立函数模板。编译器可以根据函数实参推导模板参数，也可以在调用时使用尖括号显式指定模板参数。原文中的Find函数在数组中查找给定值，找到时返回索引，找不到时返回NOT_FOUND。",
+  "key_points": [
+    "基本形式为：template <typename T> size_t Find(const T& value, const T* arr, size_t size)。",
+    "Find要求value、数组元素和模板参数T相匹配；例如int值应与int数组配合使用。",
+    "调用Find(mylInt, intArray, sizeIntArray)时，编译器可以自动推导T=int。",
+    "也可以显式调用Find<int>(mylInt, intArray, sizeIntArray)。",
+    "找不到元素时返回static_cast<size_t>(-1)定义的NOT_FOUND；调用者可据此判断是否找到。"
+  ],
+  "examples": [
+    "定义未找到标记：static const size_t NOT_FOUND = static_cast<size_t>(-1);",
+    "查找整数：int myInt = 3; int intArray[] = {1, 2, 3, 4}; size_t result = Find(myInt, intArray, std::size(intArray));",
+    "自动推导和显式指定分别为：Find(myInt, intArray, std::size(intArray)); Find<int>(myInt, intArray, std::size(intArray));",
+    "当result != NOT_FOUND时，result是找到元素的下标；否则表示未找到。"
+  ],
+  "misconceptions": [
+    "函数模板不是只能处理一种固定类型；每种实际类型都可以形成相应的实例化。",
+    "自动推导失败时，显式指定模板参数并不一定能解决所有类型不匹配问题；函数参数仍必须能够转换或匹配。",
+    "Find返回的是数组下标，不是找到的元素本身。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "Find函数模板在数组中找到元素时返回什么？找不到时返回什么？",
+      "a": "找到时返回元素的索引；找不到时返回NOT_FOUND，即static_cast<size_t>(-1)转换得到的size_t值。"
+    },
+    {
+      "q": "Find(mylInt, intArray, sizeIntArray)和Find<int>(mylInt, intArray, sizeIntArray)有什么区别？",
+      "a": "前者让编译器根据实参自动推导T=int，后者显式指定T=int；两者在该示例中的效果相同。"
+    },
+    {
+      "q": "为什么Find(mylInt, doubleArray, sizeDoubleArray)不能编译？",
+      "a": "因为函数模板的参数要求同一个T同时匹配value和数组元素类型，而mylInt是int、doubleArray的元素是double，实参类型不一致。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "函数参数",
+    "类模板与函数模板基础"
+  ],
+  "source_pages": [
+    394,
+    395
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "798_函数模板及其类型推导",
+  "_chunk_pages": [
+    393,
+    396
+  ]
+}

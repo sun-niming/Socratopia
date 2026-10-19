@@ -1,0 +1,48 @@
+{
+  "title": "在不同时区之间转换时间",
+  "definition": "`time_zone`对象可以把系统时间转换为该时区的本地时间，也可以把本地时间转换为系统时间。教材示例使用GMT和布鲁塞尔时区：通过`gmt->to_local(system_clock::now())`把当前系统时间转换为GMT本地时间；通过`brussels->to_local(t)`把一个UTC系统时间转换为布鲁塞尔本地时间。",
+  "key_points": [
+    "系统时间到指定时区本地时间：调用时区对象的`to_local()`。",
+    "本地时间到系统时间：调用时区对象的`to_sys()`。",
+    "系统时间通常用于表示跨时区统一的时间点，本地时间则体现指定时区的当地时间。"
+  ],
+  "examples": [
+    "`gmt->to_local(system_clock::now());`把当前系统时间转换为GMT时间。",
+    "`auto t{sys_days{2020y / June / 22d} + 9h + 35min + 10s};`构造一个UTC系统时间。",
+    "`brussels->to_local(t);`把该时间转换为布鲁塞尔当地时间。"
+  ],
+  "misconceptions": [
+    "时区转换不是简单地给小时数加上固定值；应通过对应的`time_zone`对象进行转换。",
+    "`to_local()`的结果是指定时区的本地时间，不是另一个独立的UTC时间点。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何把当前系统时间转换为GMT本地时间？",
+      "a": "调用`gmt->to_local(system_clock::now())`。"
+    },
+    {
+      "q": "如何把一个系统时间转换为布鲁塞尔时间？",
+      "a": "调用`brussels->to_local(t)`。"
+    },
+    {
+      "q": "`to_sys()`和`to_local()`分别用于什么？",
+      "a": "`to_sys()`把本地时间转换为系统时间，`to_local()`把系统时间转换为指定时区的本地时间。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "按名称获取当前时区和指定时区",
+    "sys_days与year_month_day之间的转换"
+  ],
+  "source_pages": [
+    694,
+    694
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1449_在不同时区之间转换时间",
+  "_chunk_pages": [
+    693,
+    696
+  ]
+}

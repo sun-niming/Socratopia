@@ -1,0 +1,47 @@
+{
+  "title": "new/delete 的形式及 placement new",
+  "definition": "原文介绍了多种 `new` 表达式及其对应的 `operator new`：单对象、数组、nothrow 单对象、nothrow 数组，以及在已分配内存上构造对象的 placement new。placement new 不分配内存，只在给定地址调用构造函数；对应的 placement `operator new` 和 `operator new[]` 由 C++ 标准提供且禁止重载。",
+  "key_points": [
+    "常见形式包括 `new`、`new[]`、`new (std::nothrow)` 和 `new (std::nothrow)[]`。",
+    "placement new 在已有内存中构造对象，不负责取得内存。",
+    "placement new 适合内存池等场景：同一块内存可以反复构造和销毁不同对象，而不必每次重新分配。",
+    "对应签名包括 `void* operator new(std::size_t size, void* p) noexcept;` 和数组版本；原文指出这两个函数禁止重载。"
+  ],
+  "examples": [
+    "普通分配：`SpreadsheetCell* cell { new SpreadsheetCell() };`",
+    "placement new 示意：`void* ptr { allocateMemorySomehow() };`，然后在该地址构造对象：`SpreadsheetCell* cell { new (ptr) SpreadsheetCell() };`",
+    "placement new 只调用构造函数，不分配内存；对象销毁后，原始内存是否回收需要由内存管理代码另行处理。"
+  ],
+  "misconceptions": [
+    "placement new 不是一种自动分配内存的 new；它要求调用者已经准备好一块合适的内存。",
+    "使用 placement new 后不能把这块内存当作普通 `new` 分配的内存随意释放。",
+    "placement new 的 `operator new` 不能像普通 `operator new` 那样由用户重载。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "placement new 与普通 `new` 的主要区别是什么？",
+      "a": "普通 `new` 会分配内存并调用构造函数；placement new 不分配内存，只在调用者提供的已有内存中调用构造函数。"
+    },
+    {
+      "q": "placement new 为什么适合内存池？",
+      "a": "因为内存池可以预先分配并重复使用内存块，在不重复分配内存的情况下反复构造和销毁对象。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "new 表达式与 operator new",
+    "对象生命周期",
+    "内存池"
+  ],
+  "source_pages": [
+    491,
+    491
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "987_new_delete_的形式及_placement_new",
+  "_chunk_pages": [
+    489,
+    492
+  ]
+}

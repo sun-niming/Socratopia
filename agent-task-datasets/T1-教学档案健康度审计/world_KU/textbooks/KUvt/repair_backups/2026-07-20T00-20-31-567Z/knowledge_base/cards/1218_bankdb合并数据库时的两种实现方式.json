@@ -1,0 +1,46 @@
+{
+  "title": "BankDB合并数据库时的两种实现方式",
+  "definition": "银行数据库类可以通过`std::map::merge`把另一个数据库的账户结点转移到当前数据库。原文还给出了使用迭代器范围`insert`的替代写法：先把源数据库的元素插入目标数据库，再清空源数据库。两种写法在重复账号的处理方式和是否真正转移结点方面可能不同，因此应区分使用。",
+  "key_points": [
+    "结点合并写法是`m_accounts.merge(db.m_accounts);`。",
+    "原文给出的替代写法是`m_accounts.insert(begin(db.m_accounts), end(db.m_accounts));`，随后执行`db.m_accounts.clear();`。",
+    "使用`merge`时，目标中已有的重复键不会从源数据库移除。",
+    "如果使用“范围插入后无条件清空源数据库”的写法，可能会丢失目标中已存在重复键的源元素；因此应核实原文意图及标准行为。"
+  ],
+  "examples": [
+    "推荐的结点合并：`void BankDB::mergeDatabase(BankDB& db) { m_accounts.merge(db.m_accounts); }`。",
+    "原文替代写法：`m_accounts.insert(begin(db.m_accounts), end(db.m_accounts)); db.m_accounts.clear();`。",
+    "若目标和源都存在账号键2，`merge`后目标保留原有键2，源中的键2仍保留。"
+  ],
+  "misconceptions": [
+    "所有数据库合并实现都会保留源数据库中的重复账号；使用插入后直接`clear`源数据库的写法不一定保留。",
+    "`insert`范围操作和`merge`在结点所有权与重复键处理上完全等价；原文把它们作为替代写法，但具体语义仍需结合标准核实。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "BankDB合并另一个数据库时，原文推荐使用哪个C++17操作？",
+      "a": "使用`m_accounts.merge(db.m_accounts)`。"
+    },
+    {
+      "q": "如果目标数据库已经有某个账号，而源数据库也有同一账号，`merge`后源账号会怎样？",
+      "a": "该源结点无法插入目标数据库，因此仍留在源数据库中。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "std::map::merge",
+    "std::map范围插入",
+    "重复键处理"
+  ],
+  "source_pages": [
+    588,
+    588
+  ],
+  "needs_verification": true,
+  "verify_query": "C++17 std::map merge 与 insert(first,last) 重复键行为；《C++20高级编程》第18章 BankDB mergeDatabase 原版代码",
+  "concept_id": "1218_bankdb合并数据库时的两种实现方式",
+  "_chunk_pages": [
+    585,
+    588
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "title": "locale与facet",
+  "definition": "C++中的 `locale` 是一组与特定文化环境相关的数据和规则的集合，例如语言、日期格式、时间格式、数字格式和货币格式。locale中的独立组件称为 `facet`，例如负责日期格式或数字格式的组件。locale可以使用标准库提供的facet，也可以自定义和添加facet。",
+  "key_points": [
+    "locale表示一整套文化和区域规则。",
+    "facet是locale中的独立功能组件。",
+    "即使字符集相似，不同国家或地区的数据表示方式也可能不同，例如日期和货币格式。",
+    "`<locale>`头文件提供locale相关功能。",
+    "第三方库如 Boost 可结合 ICU，提供更丰富的排序、转换和全球化功能。"
+  ],
+  "examples": [
+    "U.S. English 是一个 locale 实例。",
+    "日期显示格式可以看作一个 facet 实例。"
+  ],
+  "misconceptions": [
+    "locale 不仅决定字符集，还可能影响日期、时间、数字、货币等数据的格式化。",
+    "facet 不是另一种字符编码，而是 locale 中负责某一类文化规则的组件。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "C++中locale是什么？",
+      "a": "locale是一组与特定文化环境相关的数据和规则的集合，例如日期、时间、数字和货币格式。"
+    },
+    {
+      "q": "什么是facet？",
+      "a": "facet是locale中的独立组件，例如日期格式或数字格式组件。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "字符集与字符编码",
+    "软件本地化基本概念"
+  ],
+  "source_pages": [
+    663,
+    663
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1387_locale与facet",
+  "_chunk_pages": [
+    661,
+    664
+  ]
+}

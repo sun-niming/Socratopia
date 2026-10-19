@@ -1,0 +1,41 @@
+{
+  "title": "动态数组的分配与释放",
+  "definition": "C++可以使用 `new[]` 在动态存储区创建数组，并用 `delete[]` 释放该数组占用的存储空间。使用 `new[]` 创建的数组必须使用匹配的 `delete[]` 释放；释放后将指针设为 `nullptr` 可以避免继续通过该指针访问已释放对象。",
+  "key_points": [
+    "示例使用 `new int[arrSize]{ 1, 5, 3, 4 }` 创建动态数组并进行初始化。",
+    "动态数组应使用 `delete[] freeStoreArray;` 释放，而不是普通的 `delete`。",
+    "释放后可写成 `freeStoreArray = nullptr;`。"
+  ],
+  "examples": [
+    "```cpp\nint* freeStoreArray { new int[arrSize]{ 1, 5, 3, 4 } };\ndoublelnts(freeStoreArray, arrSize);\ndelete[] freeStoreArray;\nfreeStoreArray = nullptr;\n```"
+  ],
+  "misconceptions": [
+    "`delete` 与 `delete[]` 不能随意互换；数组形式的 `new[]` 应匹配数组形式的 `delete[]`。",
+    "将指针设为 `nullptr` 不会释放内存；释放动作由 `delete[]` 完成。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "用 `new[]` 创建的动态数组应该如何释放？",
+      "a": "使用匹配的 `delete[]`，例如 `delete[] freeStoreArray;`。"
+    },
+    {
+      "q": "释放动态数组后为什么常把指针设为 `nullptr`？",
+      "a": "为了避免指针继续保留已释放对象的地址并被误用。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "使用指针参数处理数组"
+  ],
+  "source_pages": [
+    209,
+    212
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20教材 new int[arrSize]{1, 5, 3, 4} delete[] 指针置 nullptr 原文",
+  "concept_id": "279_动态数组的分配与释放",
+  "_chunk_pages": [
+    209,
+    212
+  ]
+}

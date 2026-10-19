@@ -1,0 +1,45 @@
+{
+  "title": "addEventListener与removeEventListener",
+  "definition": "在支持DOM 2级标准的浏览器中，可以用addEventListener方法注册事件监听器，它既支持冒泡型事件处理，也支持捕获型事件处理。移除已注册的事件监听器时，使用removeEventListener方法，且传入的参数应相同；绑定和解除时必须使用同一个函数对象。addEventListener接受三个参数：事件类型名、回调处理函数，以及说明在捕获阶段还是冒泡阶段调用的布尔值。第三个参数为false时表示在事件冒泡阶段调用，为true时表示创建捕获事件监听器。",
+  "key_points": [
+    "addEventListener可注册事件监听器",
+    "addEventListener既支持冒泡型处理，也支持捕获型处理",
+    "removeEventListener用于移除已注册的监听器",
+    "绑定和解除必须使用同一个函数对象",
+    "第三个参数用于指定捕获阶段或冒泡阶段"
+  ],
+  "examples": [
+    "element.addEventListener(\"click\", fn, false)",
+    "element.removeEventListener(\"click\", fn, false)"
+  ],
+  "misconceptions": [
+    "以为removeEventListener只要事件类型相同就能移除",
+    "以为绑定时和解绑时可以换成另一个函数对象",
+    "以为addEventListener只有两个参数"
+  ],
+  "qa_pairs": [
+    {
+      "q": "addEventListener方法的第三个参数有什么作用？",
+      "a": "用于指定回调函数是在捕获阶段调用还是在冒泡阶段调用。"
+    },
+    {
+      "q": "removeEventListener移除监听器时需要满足什么条件？",
+      "a": "参数要相同，而且绑定和解除必须使用同一个函数对象。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "事件绑定方式"
+  ],
+  "source_pages": [
+    367,
+    368
+  ],
+  "needs_verification": true,
+  "verify_query": "Web前端开发合集 第368页 addEventListener 第三个参数 false true 捕获 冒泡 removeEventListener 同一个函数对象",
+  "concept_id": "527_addeventlistener与removeeventlistener",
+  "_chunk_pages": [
+    365,
+    368
+  ]
+}

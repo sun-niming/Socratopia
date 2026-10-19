@@ -1,0 +1,52 @@
+{
+  "title": "noexcept(expression)运算符",
+  "definition": "noexcept(expression) 是一个编译期布尔运算符，用于判断表达式是否被视为不会抛出异常。若表达式具有不抛出异常保证，结果为 true；否则结果为 false。",
+  "key_points": [
+    "运算符的结果是布尔值 true 或 false，可用于条件式 noexcept 说明符。",
+    "形式 noexcept(noexcept(expr)) 中，内层 noexcept(expr) 先得到布尔值，外层 noexcept(...) 再判断该运算本身；教材示例将其用于条件式函数异常说明。",
+    "条件式异常说明符的形式为 noexcept(condition)，condition 为 true 时函数被声明为 noexcept，为 false 时函数被声明为 noexcept(false)。"
+  ],
+  "examples": [
+    "void f1() noexcept {}\nvoid f2() noexcept(false) {}\nvoid f3() noexcept(noexcept(f1())) {}\nvoid f4() noexcept(noexcept(f2())) {}",
+    "对上述函数：\n$$\\begin{aligned}\n\\operatorname{noexcept}(f1())&=\\text{true}\\\\\n\\operatorname{noexcept}(f2())&=\\text{false}\\\\\n\\operatorname{noexcept}(f3())&=\\text{true}\\\\\n\\operatorname{noexcept}(f4())&=\\text{false}\n\\end{aligned}$$",
+    "原因是 f1() 被声明为 noexcept，而 f2() 被声明为 noexcept(false)；因此 f3() 的条件为 true，f4() 的条件为 false。"
+  ],
+  "misconceptions": [
+    "noexcept(expr) 检查的是表达式的异常保证，不是执行表达式并观察是否真的抛出异常。",
+    "noexcept(expression) 的结果是编译期布尔值，不是异常处理语句。",
+    "noexcept(false) 明确表示函数不具有不抛出异常保证，并不表示函数一定会抛异常。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "noexcept(f1()) 的结果是什么？",
+      "a": "true，因为 f1() 被声明为 noexcept。"
+    },
+    {
+      "q": "noexcept(f2()) 的结果是什么？",
+      "a": "false，因为 f2() 被声明为 noexcept(false)。"
+    },
+    {
+      "q": "为什么 f3() 的异常说明为 noexcept(true)？",
+      "a": "f3() 写成 noexcept(noexcept(f1()))，而 noexcept(f1()) 为 true。"
+    },
+    {
+      "q": "为什么 f4() 的异常说明为 noexcept(false)？",
+      "a": "f4() 写成 noexcept(noexcept(f2()))，而 noexcept(f2()) 为 false。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "noexcept函数说明符"
+  ],
+  "source_pages": [
+    446,
+    447
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "583_noexcept_expression_运算符",
+  "_chunk_pages": [
+    445,
+    448
+  ]
+}

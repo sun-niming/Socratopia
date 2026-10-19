@@ -1,0 +1,52 @@
+{
+  "title": "用成员函数 add 实现两个 SpreadsheetCell 的加法",
+  "definition": "SpreadsheetCell 可以提供成员函数 add(const SpreadsheetCell& cell) const，用于把当前单元格的值与参数 cell 的值相加，并返回一个保存相加结果的新 SpreadsheetCell 对象。该函数通过 getValue() 读取两个单元格的数值。",
+  "key_points": [
+    "函数声明形式为 SpreadsheetCell add(const SpreadsheetCell& cell) const;。",
+    "参数使用 const SpreadsheetCell&，表示以常量引用传入另一个单元格，避免不必要的复制且不允许在函数中修改参数。",
+    "返回类型是 SpreadsheetCell，表示加法结果被封装为新的单元格对象。",
+    "典型实现为 return SpreadsheetCell { getValue() + cell.getValue() };。",
+    "函数末尾的 const 表示加法操作不修改参与调用的当前对象。"
+  ],
+  "examples": [
+    "成员函数实现：SpreadsheetCell SpreadsheetCell::add(const SpreadsheetCell& cell) const { return SpreadsheetCell { getValue() + cell.getValue() }; }",
+    "调用示例：SpreadsheetCell myCell { 4 }, anotherCell { 5 }; SpreadsheetCell aThirdCell { myCell.add(anotherCell) };",
+    "链式调用示例：auto aFourthCell { aThirdCell.add(anotherCell) };"
+  ],
+  "misconceptions": [
+    "add() 返回的是新 SpreadsheetCell，而不是直接返回一个裸的 double 或 int。",
+    "add() 是成员函数，因此调用形式是 myCell.add(anotherCell)，而不是 add(myCell, anotherCell)。",
+    "const 成员函数并不表示返回值是 const，只表示该函数不修改调用它的对象。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "myCell 的值为 4、anotherCell 的值为 5 时，myCell.add(anotherCell) 返回什么？",
+      "a": "返回一个值为 9 的新 SpreadsheetCell 对象。"
+    },
+    {
+      "q": "add 成员函数为什么将参数声明为 const SpreadsheetCell&？",
+      "a": "它以常量引用接收另一个单元格，避免复制，并保证不会修改该参数。"
+    },
+    {
+      "q": "add 成员函数为什么声明为 const？",
+      "a": "因为计算加法只读取当前单元格的值，不应修改当前对象。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++类的成员函数",
+    "const成员函数",
+    "引用参数"
+  ],
+  "source_pages": [
+    289,
+    290
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "380_用成员函数_add_实现两个_spreadsheetcell_的加法",
+  "_chunk_pages": [
+    289,
+    292
+  ]
+}

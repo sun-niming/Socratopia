@@ -1,0 +1,44 @@
+{
+  "title": "测试矩阵",
+  "definition": "测试矩阵是用来系统记录服务器测试情况的表格，至少包含测试项、命令或操作、期望结果。讲义建议不要只测首页，而要覆盖正常页面、缺失文件、非法方法、目录穿越、URL 编码目录穿越以及并发访问，并记录日志中的状态码。",
+  "key_points": [
+    "测试要覆盖不同 HTTP 行为，而不是只测首页",
+    "应记录测试项、命令或操作、期望结果",
+    "要包含状态码、目录穿越和并发稳定性检查"
+  ],
+  "examples": [
+    "首页 | curl -i / | 200",
+    "练习页 | curl -i /practice.html | 200",
+    "CSS | curl -i /css/style.css | 200 text/css",
+    "不存在文件 | curl -i /not-found.html | 404",
+    "非法方法 | curl -i -X POST / | 405",
+    "目录穿越 | curl -i /../../etc/passwd | 403 或 400",
+    "URL 编码目录穿越 | curl -i /%2e%2e/%2e%2e/etc/passwd | 403 或 400",
+    "并发 | 20 个 curl 后台请求 | 不崩溃"
+  ],
+  "misconceptions": [
+    "只测首页就足够了",
+    "只要返回 200 就说明服务完全正确"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么测试矩阵里要专门测 404、405、403？",
+      "a": "因为它们分别用于验证不存在文件、非法方法和目录穿越等访问控制或错误处理是否正确。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "HTTP 状态码"
+  ],
+  "source_pages": [
+    37,
+    40
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "054_测试矩阵",
+  "_chunk_pages": [
+    37,
+    40
+  ]
+}

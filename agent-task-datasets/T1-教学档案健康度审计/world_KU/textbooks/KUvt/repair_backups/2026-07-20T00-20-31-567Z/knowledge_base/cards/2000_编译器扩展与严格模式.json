@@ -1,0 +1,45 @@
+{
+  "title": "编译器扩展与严格模式",
+  "definition": "编译器扩展是编译器额外支持、但不属于标准 C++语言的功能。某些编译器既支持 C 又支持 C++，因此可能允许在 C++代码中使用 C 语言功能，例如变长数组（VLA）。为了发现这类非标准代码，可以使用编译器的 strict 模式或相关警告选项。",
+  "key_points": [
+    "VLA，即 Variable-Length stack-based Array，原文将其说明为 C 语言功能而非 C++语言功能。",
+    "g++ 等编译器可能在 C++代码中扩展支持 VLA。",
+    "示例 `char myStackArray[i];` 不是标准 C++语言功能。",
+    "使用 g++ 的 `-pedantic` 选项编译时，示例代码会产生关于 ISO C++ 禁止变长数组的警告。",
+    "编译器扩展可能有用，但会降低代码在不同编译器之间的可移植性。"
+  ],
+  "examples": [
+    "非标准 C++示例：\\n```cpp\\nchar myStackArray[i]; // 非标准 C++语言功能\\n```\\n使用 g++ 的 `-pedantic` 选项时，原文给出的警告含义是：ISO C++ 禁止变长数组 `myStackArray`。"
+  ],
+  "misconceptions": [
+    "某个编译器能够编译代码，不代表该代码就是标准 C++代码。",
+    "VLA 在 C++编译器中能够工作，可能只是编译器扩展，而不是 C++标准保证的行为。",
+    "开启严格模式的目的不是禁止所有有用功能，而是帮助发现依赖编译器扩展的代码。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "VLA 是标准 C++功能吗？",
+      "a": "原文指出 VLA 是 C 语言功能，不属于标准 C++语言功能；某些编译器可能通过扩展在 C++中支持它。"
+    },
+    {
+      "q": "如何借助 g++ 发现示例中的 VLA 不是标准 C++？",
+      "a": "可以使用 `-pedantic` 选项编译，编译器会警告 ISO C++ 禁止变长数组。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++标准语言功能",
+    "编译器选项"
+  ],
+  "source_pages": [
+    974,
+    974
+  ],
+  "needs_verification": true,
+  "verify_query": "GCC C++ -pedantic variable length array VLA 非标准 C++ 官方文档",
+  "concept_id": "2000_编译器扩展与严格模式",
+  "_chunk_pages": [
+    973,
+    976
+  ]
+}

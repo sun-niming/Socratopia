@@ -1,0 +1,37 @@
+{
+  "title": "inet_ntop 替代 inet_ntoa",
+  "definition": "在把 IPv4 地址转换成字符串时，不要继续依赖 `inet_ntoa` 的静态缓冲区；在复杂场景下应改用 `inet_ntop(AF_INET, &client_addr.sin_addr, ip, sizeof(ip))`，把结果写入调用者提供的缓冲区中。",
+  "key_points": [
+    "`inet_ntoa` 依赖静态缓冲区，在复杂场景下不稳定。",
+    "使用 `inet_ntop` 时，需要传入地址族、地址指针、输出缓冲区和缓冲区大小。",
+    "本项目中用于把客户端地址转换为可记录的 IP 字符串。"
+  ],
+  "examples": [
+    "`inet_ntop(AF_INET, &client_addr.sin_addr, ip, sizeof(ip));`"
+  ],
+  "misconceptions": [
+    "误以为 `inet_ntoa` 在任何场景下都安全可用。",
+    "误以为只要能转成字符串，就不需要关心缓冲区来源。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么这里建议用 `inet_ntop` 而不是 `inet_ntoa`？",
+      "a": "因为 `inet_ntoa` 使用静态缓冲区，在复杂场景下不稳定；`inet_ntop` 由调用者提供输出缓冲区，更稳妥。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "网络地址与字符串转换"
+  ],
+  "source_pages": [
+    105,
+    108
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "161_inet_ntop_替代_inet_ntoa",
+  "_chunk_pages": [
+    105,
+    108
+  ]
+}

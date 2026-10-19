@@ -1,0 +1,53 @@
+{
+  "title": "类模板中的友元函数模板实现运算符重载",
+  "definition": "在类模板中重载运算符时，可以定义独立的函数模板作为友元或相关非成员操作。原文以Grid<T>的加法为例：结果网格的宽度和高度分别取两个操作数中较小的值；只有两个网格对应位置都包含实际值时，才将这两个值相加并写入结果网格。",
+  "key_points": [
+    "独立运算符函数模板的参数可以是const Grid<T>& lhs和const Grid<T>& rhs，返回Grid<T>。",
+    "结果尺寸为：minWidth = std::min(lhs.getWidth(), rhs.getWidth())，minHeight = std::min(lhs.getHeight(), rhs.getHeight())。",
+    "遍历范围为0 <= x < minWidth和0 <= y < minHeight。",
+    "使用std::optional的has_value()判断单元格是否包含实际值，使用value()取得实际值。",
+    "只有leftElement.has_value() && rightElement.has_value()时，才计算result.at(x, y) = leftElement.value() + rightElement.value()。"
+  ],
+  "examples": [
+    "尺寸公式：$$\\text{minWidth}=\\min(\\text{lhs.getWidth()},\\text{rhs.getWidth()})$$ $$\\text{minHeight}=\\min(\\text{lhs.getHeight()},\\text{rhs.getHeight()})$$",
+    "核心条件可写为：if (leftElement.has_value() && rightElement.has_value()) { result.at(x, y) = leftElement.value() + rightElement.value(); }",
+    "逻辑可概括为：$$result(x,y)=\\begin{cases}lhs(x,y)+rhs(x,y),&\\text{两个网格在}(x,y)\\text{处都包含实际值}\\\\\\text{空值},&\\text{否则}\\end{cases}$$"
+  ],
+  "misconceptions": [
+    "结果网格尺寸不是两个操作数尺寸的最大值，而是宽度和高度分别取较小值。",
+    "只要一个网格位置有值就进行相加；原文要求两个对应位置都包含实际值。",
+    "has_value()返回的是单元格中的实际值；它只用于判断optional是否有值，实际值应通过value()取得。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "两个Grid<T>相加时，结果网格的宽度和高度如何确定？",
+      "a": "结果宽度取两个网格宽度的较小值，结果高度取两个网格高度的较小值。"
+    },
+    {
+      "q": "什么时候会把两个网格对应单元格相加？",
+      "a": "只有当左、右两个对应单元格的std::optional都包含实际值时，才执行相加并写入结果。"
+    },
+    {
+      "q": "如何判断std::optional是否包含实际值并取得该值？",
+      "a": "使用has_value()判断是否包含值，使用value()取得值。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "类模板",
+    "函数模板",
+    "运算符重载",
+    "std::optional"
+  ],
+  "source_pages": [
+    396,
+    396
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 模板 Grid operator+ std::optional has_value value 类模板友元函数模板 示例",
+  "concept_id": "803_类模板中的友元函数模板实现运算符重载",
+  "_chunk_pages": [
+    393,
+    396
+  ]
+}

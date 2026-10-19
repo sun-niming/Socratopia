@@ -1,0 +1,37 @@
+{
+  "title": "NaN",
+  "definition": "NaN表示“不是数”。当数据进行数学运算时，参与运算的数据不符合条件，结果会返回NaN。教材还指出，NaN与任何数都不相等，与自己也不相等。",
+  "key_points": [
+    "NaN的含义是不是数",
+    "不符合数学运算条件时可能得到NaN",
+    "NaN不等于任何数，也不等于它自己"
+  ],
+  "examples": [
+    "某些不符合条件的数学运算结果可能是NaN"
+  ],
+  "misconceptions": [
+    "以为NaN和任何值都相等",
+    "以为NaN只是普通数字0"
+  ],
+  "qa_pairs": [
+    {
+      "q": "NaN是什么意思？",
+      "a": "不是数。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "Number类型"
+  ],
+  "source_pages": [
+    241,
+    244
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "350_nan",
+  "_chunk_pages": [
+    241,
+    244
+  ]
+}

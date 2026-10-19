@@ -1,0 +1,42 @@
+{
+  "title": ":hover伪类",
+  "definition": ":hover 用于表示鼠标悬停在元素 E 上时的状态。",
+  "key_points": [
+    "语法形式是 E:hover。",
+    "当鼠标悬停在元素 E 上时，该状态生效。",
+    "它是伪类选择器的一种。"
+  ],
+  "examples": [
+    "a:hover",
+    "button:hover"
+  ],
+  "misconceptions": [
+    ":hover 不只限于链接元素。",
+    "它描述的是交互状态，不是元素本身的静态属性。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "E:hover 表示什么？",
+      "a": "表示鼠标悬停在元素 E 上时的状态。"
+    },
+    {
+      "q": ":hover 属于哪类选择器？",
+      "a": "伪类选择器。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "伪类选择器"
+  ],
+  "source_pages": [
+    97,
+    100
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "129_hover伪类",
+  "_chunk_pages": [
+    97,
+    100
+  ]
+}

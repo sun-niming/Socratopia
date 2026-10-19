@@ -1,0 +1,44 @@
+{
+  "title": "带非类型模板参数的 Grid 类模板",
+  "definition": "Grid 是一个类模板，模板参数包括元素类型 T，以及表示网格宽度和高度的两个 std::size_t 非类型模板参数 WIDTH 和 HEIGHT。其基本声明形式为：\n\n```cpp\nexport template <typename T, size_t WIDTH, size_t HEIGHT>\nclass Grid;\n```\n\n因此，WIDTH 和 HEIGHT 是模板类型的一部分，用于确定具体 Grid 实例的固定尺寸。",
+  "key_points": [
+    "T 是类型模板参数，例如 int 或 double。",
+    "WIDTH 和 HEIGHT 是 std::size_t 类型的非类型模板参数，表示网格的宽度和高度。",
+    "具体类型 Grid<int, 10, 10> 与 Grid<int, 20, 10> 不同。",
+    "类中使用 m_cells[WIDTH][HEIGHT] 保存网格单元。"
+  ],
+  "examples": [
+    "```cpp\nGrid<int, 10, 10> myGrid;\nGrid<double, 2, getHeight()> myDoubleGrid;\n```",
+    "网格内部的存储结构可表示为：\n\n$$m\\_cells[WIDTH][HEIGHT]$$"
+  ],
+  "misconceptions": [
+    "WIDTH 和 HEIGHT 不是运行时传入的普通构造函数参数，而是模板参数。",
+    "Grid<int, 10, 10> 不等同于 Grid<int, 10, 20>，即使两者的元素类型相同。",
+    "T、WIDTH、HEIGHT 都不是对象创建后可以随意修改的普通成员变量。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "Grid 类模板的三个模板参数分别是什么？",
+      "a": "T 是元素类型，WIDTH 是网格宽度，HEIGHT 是网格高度；其中 WIDTH 和 HEIGHT 的类型为 std::size_t，属于非类型模板参数。"
+    },
+    {
+      "q": "Grid<int, 10, 10> 表示什么？",
+      "a": "它表示元素类型为 int、宽度为 10、高度为 10 的 Grid 具体类型。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++ 类模板与模板参数"
+  ],
+  "source_pages": [
+    383,
+    384
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "487_带非类型模板参数的_grid_类模板",
+  "_chunk_pages": [
+    381,
+    384
+  ]
+}

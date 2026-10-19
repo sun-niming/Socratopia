@@ -1,0 +1,46 @@
+{
+  "title": "map的emplace、emplace_hint与try_emplace",
+  "definition": "map支持emplace和emplace_hint方法，可以在容器内部原地构造元素，作用类似于顺序容器的emplace。map还支持try_emplace：只有当指定键不存在时才原地插入元素；如果该键已经存在，则什么也不做。",
+  "key_points": [
+    "emplace在map内部原地构造元素。",
+    "emplace_hint也支持原地构造，并可接收位置提示。",
+    "try_emplace只在键不存在时插入；键已存在时不修改已有元素。",
+    "try_emplace适合希望避免覆盖已有键/值对的场景。"
+  ],
+  "examples": [
+    "dataMap.emplace(1, Data{4});",
+    "dataMap.emplace_hint(dataMap.begin(), 2, Data{6});",
+    "dataMap.try_emplace(1, Data{8}); // 若键1已存在，则不做任何操作"
+  ],
+  "misconceptions": [
+    "try_emplace不是遇到重复键就覆盖；它会保持已有元素不变。",
+    "emplace表示原地构造，不等于允许重复键；map仍然要求键唯一。",
+    "emplace_hint中的提示位置不是保证插入位置。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "try_emplace在键已经存在时会怎样？",
+      "a": "什么也不做，不会替换已有元素。"
+    },
+    {
+      "q": "emplace和emplace_hint的共同特点是什么？",
+      "a": "都支持在map内部原地构造元素。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "map的唯一键约束",
+    "map的insert方法与返回值"
+  ],
+  "source_pages": [
+    584,
+    584
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1210_map的emplace_emplace_hint与try_emplace",
+  "_chunk_pages": [
+    581,
+    584
+  ]
+}

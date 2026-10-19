@@ -1,0 +1,41 @@
+{
+  "title": "rotate旋转",
+  "definition": "rotate是2D变换中的旋转方法，用于让元素按指定角度旋转。",
+  "key_points": [
+    "参数使用角度值",
+    "原文示例为顺时针旋转30°",
+    "属于二维平面变换"
+  ],
+  "examples": [
+    "transform:rotate(30deg); /*顺时针旋转30°*/"
+  ],
+  "misconceptions": [
+    "rotate只适用于3D变换。",
+    "rotate参数不是角度值。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "transform:rotate(30deg)表示什么？",
+      "a": "顺时针旋转30°。"
+    },
+    {
+      "q": "rotate属于哪类变换？",
+      "a": "属于2D变换。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "2D变换"
+  ],
+  "source_pages": [
+    197,
+    200
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "294_rotate旋转",
+  "_chunk_pages": [
+    197,
+    200
+  ]
+}

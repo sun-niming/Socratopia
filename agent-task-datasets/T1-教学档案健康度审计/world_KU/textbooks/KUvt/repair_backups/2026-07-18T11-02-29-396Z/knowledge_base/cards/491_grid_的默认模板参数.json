@@ -1,0 +1,45 @@
+{
+  "title": "Grid 的默认模板参数",
+  "definition": "原文在模块导出的 Grid 类模板声明中为模板参数提供了默认值：元素类型 T 默认是 int，WIDTH 默认是 10，HEIGHT 默认是 10。声明形式为：\n\n```cpp\nexport template <typename T = int, size_t WIDTH = 10, size_t HEIGHT = 10>\nclass Grid;\n```",
+  "key_points": [
+    "省略 T 时，默认元素类型为 int。",
+    "省略 WIDTH 时，默认宽度为 10。",
+    "省略 HEIGHT 时，默认高度为 10。",
+    "默认模板参数允许使用更简短的 Grid 类型写法。"
+  ],
+  "examples": [
+    "完整指定参数：\n\n```cpp\nGrid<int, 10, 10> myGrid;\n```",
+    "根据原文声明，理论上可以使用默认参数形成默认的 Grid 类型：\n\n```cpp\nGrid<> defaultGrid;\n```"
+  ],
+  "misconceptions": [
+    "默认模板参数不是运行时默认构造参数。",
+    "给某个模板参数提供默认值，并不表示所有模板参数都必须省略；也可以显式指定部分或全部参数。",
+    "默认的 T、WIDTH、HEIGHT 分别是 int、10、10。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "Grid 模板参数的默认值是什么？",
+      "a": "T 的默认值是 int，WIDTH 的默认值是 10，HEIGHT 的默认值是 10。"
+    },
+    {
+      "q": "`Grid<>` 根据原文会表示什么？",
+      "a": "它使用全部默认模板参数，即元素类型为 int、宽度为 10、高度为 10 的 Grid。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "类模板",
+    "默认模板参数"
+  ],
+  "source_pages": [
+    381,
+    384
+  ],
+  "needs_verification": true,
+  "verify_query": "Marc Gregoire C++20 Advanced Programming 5th edition Grid default template parameters typename T = int size_t WIDTH = 10 HEIGHT = 10",
+  "concept_id": "491_grid_的默认模板参数",
+  "_chunk_pages": [
+    381,
+    384
+  ]
+}

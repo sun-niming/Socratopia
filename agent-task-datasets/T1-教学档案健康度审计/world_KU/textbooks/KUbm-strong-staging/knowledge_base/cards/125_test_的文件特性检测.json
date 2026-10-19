@@ -1,0 +1,52 @@
+{
+  "title": "test 的文件特性检测",
+  "definition": "使用 test 或 [ ] 可以检测文件的特性。教材列出的常见检测项包括：-f 表示普通文件，-d 表示目录，-s 表示文件大小非零，-r 表示可读，-w 表示可写，-x 表示可执行，-L/h 表示符号链接文件。",
+  "key_points": [
+    "-f：普通文件",
+    "-d：目录",
+    "-s：文件大小非零",
+    "-r、-w、-x：分别表示可读、可写、可执行",
+    "-L/h：符号链接文件"
+  ],
+  "examples": [
+    "[ -f a.txt ]",
+    "test -d /etc",
+    "[ -s data.log ]",
+    "[ -x run.sh ]",
+    "[ -L linkfile ]"
+  ],
+  "misconceptions": [
+    "把 -f 误解为“文件存在”而不是“普通文件”",
+    "把 -d 和 -f 混用",
+    "认为 -s 是检测文件是否存在，而教材写的是“文件大小非零”"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何用教材中的条件判断一个路径是否为目录？",
+      "a": "使用 -d，例如 [ -d /path ]。"
+    },
+    {
+      "q": "哪个条件用于判断文件大小非零？",
+      "a": "-s。"
+    },
+    {
+      "q": "教材中哪个条件用于判断普通文件？",
+      "a": "-f。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "test 与 [ ] 的基本用途和格式"
+  ],
+  "source_pages": [
+    73,
+    76
+  ],
+  "needs_verification": true,
+  "verify_query": "Linux test -L -h symbolic link difference test命令 -L -h 是否都表示符号链接",
+  "concept_id": "125_test_的文件特性检测",
+  "_chunk_pages": [
+    73,
+    76
+  ]
+}

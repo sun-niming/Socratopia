@@ -1,0 +1,45 @@
+{
+  "title": "视口相关属性设置",
+  "definition": "视口相关属性用于设置页面的 layout viewport 宽度、高度、初始缩放值、最小/最大缩放值，以及是否允许用户缩放。",
+  "key_points": [
+    "width：设置 layout viewport 的宽度，值可以是一个正整数或字符串“width-device”。",
+    "height：设置 layout viewport 的高度，值可以是一个正整数或字符串“height-device”。",
+    "initial-scale：设置页面的初始缩放值，可以是带小数的数字。",
+    "minimum-scale / maximum-scale：分别设置用户允许的最小、最大缩放值，可以是带小数的数字。",
+    "user-scalable：控制是否允许用户缩放，取值为 yes 或 no。"
+  ],
+  "examples": [
+    "width、initial-scale、minimum-scale、maximum-scale、height、user-scalable",
+    "user-scalable=no 表示不允许用户进行缩放"
+  ],
+  "misconceptions": [
+    "initial-scale 不是最小缩放值或最大缩放值，它表示初始缩放值。",
+    "user-scalable=no 的含义是禁止用户缩放，不是禁止页面显示。",
+    "width 和 height 设定的是 layout viewport 的尺寸，不是元素本身的宽高。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "user-scalable 取 no 表示什么？",
+      "a": "表示不允许用户进行缩放。"
+    },
+    {
+      "q": "initial-scale 的作用是什么？",
+      "a": "设置页面的初始缩放值。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "HTML 元标签"
+  ],
+  "source_pages": [
+    221,
+    224
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "323_视口相关属性设置",
+  "_chunk_pages": [
+    221,
+    224
+  ]
+}

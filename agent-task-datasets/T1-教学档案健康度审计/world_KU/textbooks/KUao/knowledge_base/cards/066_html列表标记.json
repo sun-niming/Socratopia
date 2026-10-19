@@ -1,0 +1,43 @@
+{
+  "title": "HTML列表标记",
+  "definition": "HTML中用于组织文本内容的列表标记共有三种：无序列表、有序列表和定义列表。教材给出的对应标签分别是无序列表<ul>配合<li>，有序列表<ol>配合<li>，定义列表<dl>配合<dt>和<dd>。",
+  "key_points": [
+    "无序列表使用<ul>和<li>表示",
+    "有序列表使用<ol>和<li>表示",
+    "定义列表使用<dl>、<dt>、<dd>表示"
+  ],
+  "examples": [
+    "<ul><li>项目1</li><li>项目2</li></ul>",
+    "<ol><li>第一项</li><li>第二项</li></ol>",
+    "<dl><dt>术语</dt><dd>解释内容</dd></dl>"
+  ],
+  "misconceptions": [
+    "以为HTML只有无序列表和有序列表，忽略了定义列表",
+    "把<ul>、<ol>、<dl>都当成直接放文本的标签，而不知道它们要配合<li>、<dt>、<dd>使用"
+  ],
+  "qa_pairs": [
+    {
+      "q": "HTML中可以使用哪三种列表标记？",
+      "a": "无序列表、有序列表和定义列表。"
+    },
+    {
+      "q": "无序列表和有序列表分别使用哪些标签？",
+      "a": "无序列表使用<ul>和<li>，有序列表使用<ol>和<li>。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "HTML基础"
+  ],
+  "source_pages": [
+    49,
+    52
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "066_html列表标记",
+  "_chunk_pages": [
+    49,
+    52
+  ]
+}

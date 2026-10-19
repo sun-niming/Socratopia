@@ -1,0 +1,36 @@
+{
+  "title": "行内块元素特点",
+  "definition": "行内块元素既可以设置宽高、内边距和外边距，又可以与其他行内元素共处一行。",
+  "key_points": [
+    "可以设置宽高、内边距和外边距",
+    "可以与其他行内元素共处一行"
+  ],
+  "examples": [
+    "display:inline-block;"
+  ],
+  "misconceptions": [
+    "行内块元素只能单独换行显示",
+    "行内块元素不能设置宽高"
+  ],
+  "qa_pairs": [
+    {
+      "q": "行内块元素有什么特点？",
+      "a": "行内块元素可以设置宽高、内边距和外边距，并且可以与其他行内元素共处一行。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "HTML元素分类"
+  ],
+  "source_pages": [
+    37,
+    40
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "057_行内块元素特点",
+  "_chunk_pages": [
+    37,
+    40
+  ]
+}

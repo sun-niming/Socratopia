@@ -1,0 +1,45 @@
+{
+  "title": "erase_edge删除有向边",
+  "definition": "erase_edge(from_node_value, to_node_value) 删除从起始节点到目标节点的有向边。它先查找起点和终点；若任一节点不存在则返回 false。若两者都存在，则计算目标节点索引，并从起点的邻接索引集合中删除该索引，然后返回 true。",
+  "key_points": [
+    "删除操作只修改起始节点的邻接索引集合。",
+    "from 或 to 节点不存在时返回 false。",
+    "目标节点存在时，通过 get_index_of_node 获得其索引。",
+    "原文代码在两个节点都找到时直接返回邻接 set 的 erase 结果。"
+  ],
+  "examples": [
+    "核心逻辑：\n```cpp\nconst auto from{findNode(from_node_value)};\nconst auto to{findNode(to_node_value)};\nif (from == std::end(m_nodes) || to == std::end(m_nodes)) {\n    return false;\n}\nconst std::size_t to_index{get_index_of_node(to)};\nfrom->get_adjacent_nodes_indices().erase(to_index);\nreturn true;\n```"
+  ],
+  "misconceptions": [
+    "erase_edge 不删除起点或终点节点，只删除二者之间的边。",
+    "删除边时不需要遍历所有节点，因为只需从起点的邻接表中删除目标索引。",
+    "有向边的删除不是自动删除反向边。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "erase_edge 在什么情况下返回 false？",
+      "a": "当起点或终点节点不在图中时返回 false。"
+    },
+    {
+      "q": "erase_edge 从哪个邻接表中删除索引？",
+      "a": "从起始节点 from_node_value 的邻接索引集合中删除目标节点的索引。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "有向图的边",
+    "set::erase",
+    "findNode辅助方法"
+  ],
+  "source_pages": [
+    728,
+    728
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1512_erase_edge删除有向边",
+  "_chunk_pages": [
+    725,
+    728
+  ]
+}

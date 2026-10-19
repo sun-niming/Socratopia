@@ -1,0 +1,45 @@
+{
+  "title": "用户管理相关配置文件",
+  "definition": "Linux 用户管理常用的相关配置文件包括：/etc/passwd，用于保存用户信息；/etc/shadow，用于保存加密口令；/etc/group，用于保存组信息。教材将这些文件作为用户管理的基础配置文件进行介绍。",
+  "key_points": [
+    "/etc/passwd 是用户信息文件",
+    "/etc/shadow 保存加密口令",
+    "/etc/group 是组信息文件"
+  ],
+  "examples": [
+    "用户信息文件：/etc/passwd",
+    "加密口令文件：/etc/shadow",
+    "组信息文件：/etc/group"
+  ],
+  "misconceptions": [
+    "不要把 /etc/passwd 误认为是加密口令文件",
+    "不要把 /etc/group 误认为是用户个人信息文件"
+  ],
+  "qa_pairs": [
+    {
+      "q": "Linux 中保存用户信息的文件是什么？",
+      "a": "是 /etc/passwd。"
+    },
+    {
+      "q": "Linux 中保存加密口令的文件是什么？",
+      "a": "是 /etc/shadow。"
+    },
+    {
+      "q": "Linux 中保存组信息的文件是什么？",
+      "a": "是 /etc/group。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [],
+  "source_pages": [
+    29,
+    32
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "055_用户管理相关配置文件",
+  "_chunk_pages": [
+    29,
+    32
+  ]
+}

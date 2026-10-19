@@ -1,0 +1,123 @@
+{
+  "conversationId": "WiinMvkFkteefv9Q8tr8u",
+  "generatedAt": 1782444754091,
+  "pagesRange": "p.188-196",
+  "sections": [
+    {
+      "type": "tldr",
+      "content": "这一段主要抓住两件事：CSS3 常见新特性要会认会用（如 `text-shadow`、`border-radius`、`box-shadow`、过渡和浏览器前缀），以及用 `@font-face` 把字体名和字体文件关联起来，方便网页调用自定义字体。"
+    },
+    {
+      "type": "narrative",
+      "content": "前面先把网格布局里“起止线、跨度、区域”这些定位思路顺了一遍，随后进入 CSS3 新特性：文字阴影、圆角、盒子阴影、过渡效果和浏览器前缀。再往后就转到字体部分，重点是用 `@font-face` 声明字体来源，并通过 `font-family` 在页面中调用。"
+    },
+    {
+      "type": "concepts",
+      "items": [
+        {
+          "name": "`text-shadow`",
+          "body": "给**文字**加阴影，不是给盒子加阴影。常见格式：\n\n```css\\ntext-shadow: 水平偏移 垂直偏移 模糊距离 颜色;\n```\n\n例如：\n\n```css\\nh1 {\n  text-shadow: 2px 2px 4px #000;\n}\n```\n\n理解要点：前两个值决定阴影往哪儿偏，后面的值影响阴影的模糊程度和颜色。"
+        },
+        {
+          "name": "`border-radius`",
+          "body": "给元素做**圆角**。最简单的写法是一个值，表示四个角都用同样的圆角半径：\n\n```css\\nborder-radius: 20px;\n```\n\n也可以写成“水平半径 / 垂直半径”的形式：\n\n```css\\nborder-radius: 40px / 20px;\n```\n\n这表示圆角不一定是正圆，还可以更像椭圆。斜杠 `/` 的作用就是分隔水平半径和竖直半径。"
+        },
+        {
+          "name": "浏览器前缀",
+          "body": "为了兼容不同浏览器对新特性的支持，某些 CSS 属性前面会加浏览器前缀，例如：\n\n```css\n-webkit-border-radius: 20px;\n-moz-border-radius: 20px;\\nborder-radius: 20px;\n```\n\n前缀不是功能本体，而是给新特性加的“临时标签”或“兼容写法”。`-webkit-`、`-moz-` 这类前缀的作用，是让不同浏览器先能识别这个新属性。"
+        },
+        {
+          "name": "`box-shadow`",
+          "body": "给**盒子**加阴影，和 `text-shadow` 的区别在于对象不同：\n\n- `text-shadow`：文字阴影\n- `box-shadow`：盒子阴影\n\n常见写法包含水平偏移、垂直偏移、模糊距离和颜色，例如：\n\n```css\\nbox-shadow: 2px 2px 5px #666;\n```\n\n理解要点：前两个值主要控制阴影方向，第三个值主要控制阴影的虚实/模糊程度。"
+        },
+        {
+          "name": "过渡（`transition`）",
+          "body": "过渡的作用是让属性变化**平滑发生**，不要一下子“啪”地切换。课堂里重点先抓住两个常见属性：\n\n- `transition-property`：指定要过渡的是哪个属性\n- `transition-duration`：指定过渡持续多久\n\n例如：\n\n```css\\nbutton {\n  transition-property: background-color;\n  transition-duration: 0.3s;\n}\n```\n\n核心理解：先说“谁要变”，再说“变多快”。"
+        },
+        {
+          "name": "`@font-face`",
+          "body": "`@font-face` 用来把**字体名字**和**字体文件**对应起来，这样页面就能使用自定义字体。常见结构：\n\n```css\n@font-face {\n  font-family: \"MyFont\";\n  src: url(\"MyFont.woff\") format(\"woff\");\n}\n```\n\n这里：\n\n- `font-family`：给字体起名\n- `src`：字体文件地址\n- `format(...)`：字体格式说明\n\n使用时，页面里的 `font-family` 要和 `@font-face` 中定义的名字一致。"
+        },
+        {
+          "name": "多字体格式支持",
+          "body": "同一种字体通常会准备多个格式文件，因为不同浏览器对字体文件格式的支持可能不同。`src` 可以写多个来源，浏览器会按顺序尝试：\n\n```css\n@font-face {\n  font-family: \"MyFont\";\n  src: url(\"MyFont.woff2\") format(\"woff2\"),\n       url(\"MyFont.woff\") format(\"woff\");\n}\n```\n\n理解要点：更优先、更现代的格式通常放前面；如果浏览器不认识前面的格式，会继续尝试后面的备选地址。"
+        }
+      ]
+    },
+    {
+      "type": "key-terms",
+      "items": [
+        {
+          "term": "`text-shadow`",
+          "definition": "给文字加阴影的属性。"
+        },
+        {
+          "term": "`box-shadow`",
+          "definition": "给盒子加阴影的属性。"
+        },
+        {
+          "term": "`border-radius`",
+          "definition": "设置元素圆角的属性。"
+        },
+        {
+          "term": "浏览器前缀",
+          "definition": "如 `-webkit-`、`-moz-`，用于兼容不同浏览器对新特性的支持。"
+        },
+        {
+          "term": "`transition-property`",
+          "definition": "指定哪个属性参与过渡。"
+        },
+        {
+          "term": "`transition-duration`",
+          "definition": "指定过渡持续时间。"
+        },
+        {
+          "term": "`@font-face`",
+          "definition": "声明自定义字体及其字体文件来源的规则。"
+        },
+        {
+          "term": "`font-family`",
+          "definition": "字体名字；在 `@font-face` 中用于定义字体名，在页面中用于调用字体。"
+        },
+        {
+          "term": "`src`",
+          "definition": "字体文件地址。"
+        },
+        {
+          "term": "`format(...)`",
+          "definition": "字体文件格式说明。"
+        }
+      ]
+    },
+    {
+      "type": "review-questions",
+      "items": [
+        {
+          "question": "`text-shadow` 和 `box-shadow` 分别是给什么加阴影？",
+          "hint": "一个管文字，一个管盒子。",
+          "answer": "`text-shadow` 是给**文字**加阴影；`box-shadow` 是给**盒子**加阴影。"
+        },
+        {
+          "question": "`border-radius: 20px;` 的效果是什么？",
+          "hint": "想想四个角。",
+          "answer": "四个角都会变成半径为 `20px` 的圆角。"
+        },
+        {
+          "question": "`border-radius` 里写成 `40px / 20px` 时，斜杠 `/` 的作用是什么？",
+          "hint": "看成横向和竖向两部分。",
+          "answer": "`/` 用来分隔**水平半径**和**垂直半径**，让圆角可以做成椭圆效果。"
+        },
+        {
+          "question": "`@font-face` 的作用是什么？",
+          "hint": "它把什么和什么连起来？",
+          "answer": "它用来把**字体名字**和**字体文件来源**对应起来，方便页面后面通过 `font-family` 调用自定义字体。"
+        },
+        {
+          "question": "为什么 `src` 里常常会写多个字体地址？",
+          "hint": "和浏览器兼容性有关。",
+          "answer": "因为不同浏览器对字体文件格式的支持不同，写多个地址可以让浏览器按顺序尝试，选择自己能识别的格式。"
+        }
+      ]
+    }
+  ]
+}

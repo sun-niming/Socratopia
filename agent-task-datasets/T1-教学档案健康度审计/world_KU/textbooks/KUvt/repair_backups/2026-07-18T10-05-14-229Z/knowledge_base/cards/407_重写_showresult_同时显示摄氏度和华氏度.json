@@ -1,0 +1,49 @@
+{
+  "title": "重写 showResult 同时显示摄氏度和华氏度",
+  "definition": "`MyWeatherPrediction` 重写基类的 `showResult() const`，在输出明天温度时同时显示摄氏度和华氏度，并输出降雨概率。当降雨概率大于 0.5 时，还会提示用户携带雨伞。",
+  "key_points": [
+    "派生类声明 `void showResult() const override;`，表示它重写了基类的 `showResult`。",
+    "输出内容包括 `getTomorrowTempCelsius()`、`getTomorrowTempFahrenheit()` 和 `getChanceOfRain() * 100`。",
+    "降雨概率大于 0.5 时输出 `Bring an umbrella!`。",
+    "原文中的格式字符串表示结果类似于：`Tomorrow's temperature will be ... degrees Celsius ... degrees Fahrenheit`，以及 `Chance of rain is ...%`。"
+  ],
+  "examples": [
+    "核心逻辑可整理为：\nvoid MyWeatherPrediction::showResult() const {\n    cout << format(\n        \"Tomorrow's temperature will be {} degrees Celsius {} degrees Fahrenheit\",\n        getTomorrowTempCelsius(),\n        getTomorrowTempFahrenheit());\n    cout << format(\"Chance of rain is {}%\", getChanceOfRain() * 100) << endl;\n    if (getChanceOfRain() > 0.5) {\n        cout << \"Bring an umbrella!\";\n    }\n}"
+  ],
+  "misconceptions": [
+    "`getChanceOfRain() * 100` 只是把概率转换成百分数形式用于显示；判断是否带伞时仍使用原始概率值 `getChanceOfRain() > 0.5`。",
+    "`showResult` 的 `const` 限定表示该成员函数不应修改对象状态；`override` 表示它重写了基类虚函数。",
+    "原文展示的是输出逻辑，不足以确定 `format` 的具体库来源或所有标点格式。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "MyWeatherPrediction 的 `showResult` 显示哪些温度单位？",
+      "a": "同时显示明天的摄氏温度和华氏温度。"
+    },
+    {
+      "q": "为什么输出降雨概率时要乘以 100？",
+      "a": "因为 `getChanceOfRain()` 返回 0 到 1 形式的概率，乘以 100 后可按百分数显示。"
+    },
+    {
+      "q": "在什么条件下会输出 `Bring an umbrella!`？",
+      "a": "当 `getChanceOfRain()` 大于 0.5 时。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "MyWeatherPrediction 继承 WeatherPrediction",
+    "C++ override 说明符",
+    "概率与百分数表示"
+  ],
+  "source_pages": [
+    313,
+    316
+  ],
+  "needs_verification": true,
+  "verify_query": "\"MyWeatherPrediction::showResult\" \"Bring an umbrella\"",
+  "concept_id": "407_重写_showresult_同时显示摄氏度和华氏度",
+  "_chunk_pages": [
+    313,
+    316
+  ]
+}

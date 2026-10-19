@@ -1,0 +1,44 @@
+{
+  "title": "std::move将左值转换为可移动的右值",
+  "definition": "`std::move()` 的作用是将一个左值转换为右值引用，使编译器能够选择接收右值引用的重载并执行移动操作。`std::move()` 本身不执行实际的数据移动；真正的移动由被调用的移动构造函数、移动赋值运算符或其他移动操作完成。",
+  "key_points": [
+    "对命名变量调用右值引用重载时，可以使用 `std::move(variable)`。",
+    "`std::move()` 只是类型转换，不保证对象的资源已经被移动。",
+    "调用移动操作后，源对象通常仍处于有效但内容可能已被置空或改变的状态，只有在确认源对象不再需要原有资源时才适合移动。",
+    "右值引用参数具有名称，因此在函数体内使用参数名时仍是左值；若要继续传递为右值，必须再次使用 `std::move()`。"
+  ],
+  "examples": [
+    "```text\nhandleMessage(std::move(b));\n```\n这会使编译器选择接收 `std::string&&` 的 `handleMessage` 重载。",
+    "错误写法：\n```text\nvoid handleMessage(std::string&& message) {\n    helper(message); // message 是左值，不能绑定到 std::string&&\n}\n```\n正确写法：\n```text\nvoid handleMessage(std::string&& message) {\n    helper(std::move(message));\n}\n```"
+  ],
+  "misconceptions": [
+    "`std::move()` 不会自动搬运内存，也不会本身调用移动构造函数。",
+    "把对象传给 `std::move()` 后，不能再假定源对象保持原来的值或资源状态。",
+    "右值引用参数不是在函数体内天然保持右值类别；有名称的参数表达式是左值。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`std::move()` 的核心作用是什么？",
+      "a": "将左值转换为右值引用，使其可以匹配右值引用重载并触发后续的移动操作。"
+    },
+    {
+      "q": "为什么 `helper(message)` 编译失败，而 `helper(std::move(message))` 可以编译？",
+      "a": "因为命名的 `message` 是左值，不能绑定到 `std::string&&`；使用 `std::move(message)` 后才将其转换为右值引用。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "左值、右值与右值引用重载"
+  ],
+  "source_pages": [
+    269,
+    269
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "566_std_move将左值转换为可移动的右值",
+  "_chunk_pages": [
+    269,
+    272
+  ]
+}

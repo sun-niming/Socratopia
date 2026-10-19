@@ -1,0 +1,44 @@
+{
+  "title": "简单要求与复合要求",
+  "definition": "简单要求用于检查一个表达式是否合法，例如 `x++`。复合要求可以进一步检查表达式是否不抛出异常，以及表达式结果是否满足指定类型约束，基本形式为 `{ expression } noexcept -> type-constraint;`。",
+  "key_points": [
+    "简单要求只关心表达式是否有效，例如 `x++` 或 `++x`。",
+    "复合要求中的 `noexcept` 表示被检查的表达式必须保证不抛出异常。",
+    "复合要求中的 `-> type-constraint` 用于约束表达式结果类型，例如要求结果满足 `convertible_to<bool>`。"
+  ],
+  "examples": [
+    "`requires(T x, T y) { swap(x, y) noexcept; }`：要求 `swap(x, y)` 有效且不抛出异常。",
+    "`requires(const T a, const T b) { { a == b } -> std::convertible_to<bool>; { a < b } -> std::convertible_to<bool>; };`：要求比较表达式有效，并且其结果可转换为 `bool`。"
+  ],
+  "misconceptions": [
+    "`noexcept` 在复合要求中不是在调用表达式，而是在检查该表达式是否被保证不抛出异常。",
+    "`-> std::convertible_to<bool>` 不是要求结果类型必须恰好是 `bool`，而是要求结果可转换为 `bool`。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何检查 `swap(x, y)` 不抛出异常？",
+      "a": "在 requires 表达式中写 `{ swap(x, y) } noexcept;` 或按原文形式写 `swap(x, y) noexcept;`，核心要求是表达式带有 `noexcept` 检查。"
+    },
+    {
+      "q": "`{ a == b } -> std::convertible_to<bool>;` 表示什么？",
+      "a": "它要求 `a == b` 是有效表达式，并且表达式结果满足 `std::convertible_to<bool>`，即可转换为 `bool`。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "requires 表达式",
+    "异常规范noexcept",
+    "类型约束"
+  ],
+  "source_pages": [
+    401,
+    404
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 requires expression compound requirement exact syntax noexcept type-constraint swap(x, y)",
+  "concept_id": "523_简单要求与复合要求",
+  "_chunk_pages": [
+    401,
+    404
+  ]
+}

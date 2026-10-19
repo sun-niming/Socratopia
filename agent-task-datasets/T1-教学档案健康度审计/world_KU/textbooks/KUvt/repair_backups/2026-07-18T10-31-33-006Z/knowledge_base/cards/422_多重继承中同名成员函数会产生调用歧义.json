@@ -1,0 +1,47 @@
+{
+  "title": "多重继承中同名成员函数会产生调用歧义",
+  "definition": "如果多个基类都定义了同名成员函数，派生类同时继承这些基类后，直接通过派生类对象调用该函数可能产生歧义，因为编译器无法确定应该使用哪个基类版本。原文中的Dog和Bird都定义了eat()，因此DogBird对象直接调用eat()时存在歧义。",
+  "key_points": [
+    "Dog定义virtual void eat()，输出The dog ate.。",
+    "Bird也定义virtual void eat()，输出The bird ate.。",
+    "DogBird同时继承Dog和Bird，因此DogBird对象中存在两个同名的eat()候选成员函数。",
+    "直接写myConfusedAnimal.eat()不能明确选择Dog::eat还是Bird::eat；通常需要使用限定名明确指定基类。"
+  ],
+  "examples": [
+    "两个基类分别定义：\nclass Dog {\npublic:\n    virtual void eat() { cout << \"The dog ate.\" << endl; }\n};\nclass Bird {\npublic:\n    virtual void eat() { cout << \"The bird ate.\" << endl; }\n};",
+    "若对象类型为DogBird，可以通过限定名选择实现：\nmyConfusedAnimal.Dog::eat();\nmyConfusedAnimal.Bird::eat();",
+    "前者调用Dog::eat，后者调用Bird::eat。"
+  ],
+  "misconceptions": [
+    "同名函数不会因为返回类型相同就自动合并为一个函数。",
+    "Dog::eat和Bird::eat虽然函数名相同，但它们属于不同的基类子对象。",
+    "发生调用歧义不代表多重继承本身非法，而是表示当前调用缺少明确的成员选择。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么DogBird对象直接调用eat()会产生歧义？",
+      "a": "因为Dog和Bird都提供了名为eat()的成员函数，而DogBird同时继承两者，编译器无法仅根据eat()确定要调用哪个版本。"
+    },
+    {
+      "q": "如何明确调用DogBird对象继承的两个eat()版本？",
+      "a": "使用基类限定名，例如myConfusedAnimal.Dog::eat()调用Dog版本，myConfusedAnimal.Bird::eat()调用Bird版本。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++多重继承",
+    "成员函数调用限定名",
+    "名称查找与歧义"
+  ],
+  "source_pages": [
+    325,
+    328
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "422_多重继承中同名成员函数会产生调用歧义",
+  "_chunk_pages": [
+    325,
+    328
+  ]
+}

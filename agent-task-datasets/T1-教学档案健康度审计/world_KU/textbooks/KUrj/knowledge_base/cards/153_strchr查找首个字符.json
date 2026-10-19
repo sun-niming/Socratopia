@@ -1,0 +1,44 @@
+{
+  "title": "strchr查找首个字符",
+  "definition": "`strchr` 用来查找字符串中第一次出现的某个字符，原型是 `char *strchr(const char *s, int c);`。找到时返回指针，找不到时返回 `NULL`。",
+  "key_points": [
+    "头文件是 `<string.h>`。",
+    "可用于检查反斜杠、查找空格、查找 Header 换行。",
+    "返回值可能是 `NULL`，所以每次调用后都要先判断返回值。",
+    "如果不判断 `NULL` 就直接解引用，可能出错。"
+  ],
+  "examples": [
+    "`char *p = strchr(buf, ' ');`",
+    "`if (p != NULL) { /* 再使用 p */ }`"
+  ],
+  "misconceptions": [
+    "`strchr` 一定能找到字符。",
+    "返回值可以直接解引用，不需要判空。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`strchr` 找不到字符时返回什么？",
+      "a": "返回 `NULL`。"
+    },
+    {
+      "q": "为什么调用 `strchr` 后要先判断返回值？",
+      "a": "因为找不到字符时会返回 `NULL`，如果直接解引用会出错。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C语言基础",
+    "字符串基础"
+  ],
+  "source_pages": [
+    97,
+    100
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "153_strchr查找首个字符",
+  "_chunk_pages": [
+    97,
+    100
+  ]
+}

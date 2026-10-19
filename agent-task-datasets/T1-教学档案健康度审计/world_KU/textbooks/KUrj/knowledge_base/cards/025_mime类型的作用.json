@@ -1,0 +1,39 @@
+{
+  "title": "MIME类型的作用",
+  "definition": "MIME类型告诉浏览器“这段字节应该按什么类型解释”。静态文件服务器必须为文件返回正确的 MIME，否则浏览器可能把样式、图片等资源当成别的类型处理，导致页面看起来有内容但样式不生效，或图片无法显示。",
+  "key_points": [
+    "MIME 不是装饰功能，而是静态文件服务器的必做项。",
+    "返回错误的 MIME 可能让 CSS 无法作为样式加载，图片也可能显示不出来。"
+  ],
+  "examples": [
+    "CSS 文件如果返回成 text/html; charset=utf-8，浏览器可能拒绝作为样式加载。",
+    "图片类型错误时，页面可能显示不出来。"
+  ],
+  "misconceptions": [
+    "只要文件内容正确，MIME 写错也没关系。",
+    "MIME 只是附加信息，不影响浏览器行为。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "MIME 类型的主要作用是什么？",
+      "a": "告诉浏览器应按什么类型解释这段字节。"
+    },
+    {
+      "q": "为什么静态文件服务器必须处理 MIME？",
+      "a": "因为 MIME 错误会影响 CSS、图片等资源的加载和显示。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [],
+  "source_pages": [
+    25,
+    27
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "025_mime类型的作用",
+  "_chunk_pages": [
+    25,
+    28
+  ]
+}

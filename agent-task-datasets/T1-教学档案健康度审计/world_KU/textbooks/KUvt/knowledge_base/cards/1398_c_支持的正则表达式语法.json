@@ -1,0 +1,50 @@
+{
+  "title": "C++支持的正则表达式语法",
+  "definition": "C++正则表达式库支持多种语法，通过syntax_option_type指定所使用的语法。支持的语法包括ECMAScript、basic、extended、awk、grep和egrep；默认语法是ECMAScript。",
+  "key_points": [
+    "ECMAScript语法基于ECMA-262标准，JavaScript、ActionScript和JScript等语言使用该语言标准。",
+    "basic和extended是POSIX正则表达式语法。",
+    "awk、grep和egrep分别对应POSIX工具相关语法，其中egrep对应带-E选项的grep语法。",
+    "如果使用者已经熟悉这些语法之一，只需在C++正则表达式库中指定相应语法选项即可。",
+    "原文后续重点讲解默认的ECMAScript语法。"
+  ],
+  "examples": [
+    "默认构造正则表达式时使用ECMAScript语法。",
+    "需要指定其他语法时，应通过正则表达式库的syntax_option_type相关选项进行设置。"
+  ],
+  "misconceptions": [
+    "C++并不只支持ECMAScript一种正则表达式语法。",
+    "ECMAScript是默认语法，但不是所有正则表达式实现中的默认语法都相同；这里的结论针对C++标准库。",
+    "不同语法的特殊字符和语义可能不同，不能把一种语法的规则无条件套用到另一种语法。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "C++正则表达式库默认使用哪种语法？",
+      "a": "默认使用ECMAScript语法。"
+    },
+    {
+      "q": "C++支持哪些正则表达式语法？",
+      "a": "支持ECMAScript、basic、extended、awk、grep和egrep语法。"
+    },
+    {
+      "q": "如何选择C++正则表达式语法？",
+      "a": "通过正则表达式库的syntax_option_type相关语法选项指定。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "正则表达式的用途与基本术语",
+    "C++模板和库接口基础"
+  ],
+  "source_pages": [
+    667,
+    667
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1398_c_支持的正则表达式语法",
+  "_chunk_pages": [
+    665,
+    668
+  ]
+}

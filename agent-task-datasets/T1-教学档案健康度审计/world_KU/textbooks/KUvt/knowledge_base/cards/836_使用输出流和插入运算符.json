@@ -1,0 +1,50 @@
+{
+  "title": "使用输出流和插入运算符<<",
+  "definition": "输出流定义在<iostream>头文件中，而<iostream>又包含输入流和输出流相关头文件，并声明预定义流实例。使用输出流最简单的方法是使用插入运算符<<。该运算符可以输出C++基本类型（如int、指针、double和字符），也可以输出C++ string类对象和C风格字符串。",
+  "key_points": [
+    "程序通常包含<iostream>以使用输入输出流及预定义流实例。",
+    "插入运算符<<把数据写入输出流。",
+    "<<支持int、指针、double、字符等C++基本类型。",
+    "C++的string类以及C风格字符串也可以通过<<输出。",
+    "多个<<可以连续使用，以依次输出多个对象。"
+  ],
+  "examples": [
+    "输出整数并换行：cout << i << endl;",
+    "输出字符串并换行：cout << myString << endl;",
+    "连续输出多个值：cout << \"value=\" << i << endl;"
+  ],
+  "misconceptions": [
+    "<<在这里是插入运算符，用于把数据写入输出流；它不表示左移运算的语义。",
+    "输出string对象不需要先转换成C风格字符串。",
+    "包含<iostream>并不意味着所有输出都会自动显示在图形用户界面上。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "使用输出流最简单的方法是什么？",
+      "a": "使用插入运算符<<，例如cout << i << endl;。"
+    },
+    {
+      "q": "<<可以输出哪些数据？",
+      "a": "它可以输出int、指针、double、字符等基本类型，也可以输出C++ string对象和C风格字符串。"
+    },
+    {
+      "q": "使用cout输出变量i并换行应如何写？",
+      "a": "cout << i << endl;"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++预定义标准流"
+  ],
+  "source_pages": [
+    412,
+    412
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 iostream operator<< cout string C 风格字符串 endl 输出类型",
+  "concept_id": "836_使用输出流和插入运算符",
+  "_chunk_pages": [
+    409,
+    412
+  ]
+}

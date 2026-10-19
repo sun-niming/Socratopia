@@ -1,0 +1,48 @@
+{
+  "title": "std::call_once 与 std::once_flag 保证只初始化一次",
+  "definition": "将 std::call_once 与同一个 std::once_flag 配合使用，可以保证某个函数或方法在多个线程同时尝试调用时只真正执行一次。某次调用执行的函数如果正常返回，该调用就是有效的 call_once 调用；同一个 once_flag 上的其他调用会等待有效调用完成。如果函数抛出异常，异常传回当前调用者，并允许另一个调用者再次尝试执行该函数。",
+  "key_points": [
+    "只有一个 call_once 调用会真正执行给定函数，其他线程不会重复执行该函数。",
+    "在有效调用完成之前，同一个 once_flag 上的其他 call_once 调用会阻塞。",
+    "如果初始化函数抛出异常，这次调用不算有效调用，异常传给调用者，其他调用可以继续尝试。",
+    "初始化成功后，所有线程都可以继续执行后续工作，并使用已经初始化的共享资源。"
+  ],
+  "examples": [
+    "共享资源初始化示例：\n```cpp\nstd::once_flag g_onceFlag;\n\nvoid initializeSharedResources()\n{\n    // 初始化供多个线程使用的共享资源\n}\n\nvoid processingFunction()\n{\n    std::call_once(g_onceFlag, initializeSharedResources);\n    // 只有一个线程执行初始化；所有线程随后继续处理\n}\n```\n启动 3 个线程调用 processingFunction 时，初始化消息只输出一次，而 Processing 可以输出三次。"
+  ],
+  "misconceptions": [
+    "std::call_once 不是保证每个线程都执行一次函数，而是保证同一个 once_flag 对应的函数最多成功执行一次。",
+    "如果初始化函数抛出异常，不能把这次调用视为已经完成；其他线程仍可能再次尝试初始化。",
+    "once_flag 必须在这些线程之间共享；如果每个线程使用不同的 once_flag，就不能实现共同的一次性初始化。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "三个线程同时调用 std::call_once(g_onceFlag, initializeSharedResources) 时，initializeSharedResources 执行几次？",
+      "a": "成功初始化时只执行一次。"
+    },
+    {
+      "q": "初始化函数在 call_once 中抛出异常会怎样？",
+      "a": "异常传回执行该调用的线程；这次调用不是有效调用，其他线程可以选择再次执行该初始化函数。"
+    },
+    {
+      "q": "同一个 once_flag 上的其他线程在有效 call_once 调用完成前会怎样？",
+      "a": "它们会阻塞，直到有效调用结束。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "线程同步",
+    "异常处理"
+  ],
+  "source_pages": [
+    809,
+    810
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1665_std_call_once_与_std_once_flag_保证只初始化一次",
+  "_chunk_pages": [
+    809,
+    812
+  ]
+}

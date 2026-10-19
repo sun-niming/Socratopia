@@ -1,0 +1,40 @@
+{
+  "title": "分组选择器",
+  "definition": "分组选择器是把多个选择器用逗号分隔写在一起，让它们共享同一组声明。它也叫选择器列表或并集选择器。",
+  "key_points": [
+    "多个选择器之间用逗号连接",
+    "多个选择器共享相同声明时可用分组选择器",
+    "选择器可以是标签名，也可以是id或class名称"
+  ],
+  "examples": [
+    "h1,h2 { color:red; }",
+    "选择器1,选择器2,...{ 属性:值; }"
+  ],
+  "misconceptions": [
+    "分组选择器不是表示层层包含关系，也不是表示必须同时满足多个条件。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "分组选择器有什么作用？",
+      "a": "让多个选择器共享相同的CSS声明。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "CSS选择器",
+    "元素选择器",
+    "id选择器",
+    "class选择器"
+  ],
+  "source_pages": [
+    89,
+    92
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "143_分组选择器",
+  "_chunk_pages": [
+    89,
+    92
+  ]
+}

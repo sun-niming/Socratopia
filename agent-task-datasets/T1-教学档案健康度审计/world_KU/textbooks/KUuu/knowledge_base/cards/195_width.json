@@ -1,0 +1,36 @@
+{
+  "title": "width",
+  "definition": "width 用来设置元素的宽度，原文给出的值示例有 500px 和 100%。",
+  "key_points": [
+    "用于控制元素的宽度",
+    "可使用像素值",
+    "也可使用百分比值"
+  ],
+  "examples": [
+    "width: 500px;",
+    "width: 100%;"
+  ],
+  "misconceptions": [
+    "误以为 width 只能写固定像素值",
+    "误以为 100% 是相对页面固定值而不是相对容器"
+  ],
+  "qa_pairs": [
+    {
+      "q": "width 属性表示什么？",
+      "a": "元素的宽度。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [],
+  "source_pages": [
+    117,
+    120
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "195_width",
+  "_chunk_pages": [
+    117,
+    120
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "title": "使用构造函数和new创建对象",
+  "definition": "在 JavaScript 中，可以使用构造函数配合 new 关键字来创建对象。基本语法是：`var 对象名 = new 构造函数();`。这种方式与大多数面向对象语言中“用 new 实例化类并创建对象”的思路一致。",
+  "key_points": [
+    "语法形式是 `var 对象名 = new 构造函数();`",
+    "`new` 用于实例化并创建该构造函数对应的对象",
+    "示例中可以是内置构造函数，也可以是自定义构造函数"
+  ],
+  "examples": [
+    "var obj1 = new String();",
+    "var obj2 = new Object();",
+    "var obj3 = new Person('张三');"
+  ],
+  "misconceptions": [
+    "误以为 `new` 只能用于内置对象构造函数，其实也可以用于自定义构造函数",
+    "误以为创建对象时不需要构造函数，实际上这里强调的是用构造函数配合 `new` 创建对象"
+  ],
+  "qa_pairs": [
+    {
+      "q": "JavaScript 中使用构造函数创建对象的基本语法是什么？",
+      "a": "`var 对象名 = new 构造函数();`"
+    },
+    {
+      "q": "`new` 在这里的作用是什么？",
+      "a": "用来实例化构造函数并创建该构造函数的对象。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "构造函数",
+    "对象"
+  ],
+  "source_pages": [
+    277,
+    280
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "402_使用构造函数和new创建对象",
+  "_chunk_pages": [
+    277,
+    280
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "title": "范围适配器的管道组合",
+  "definition": "C++20 范围库可以使用范围适配器对一个范围进行连续处理，并通过管道运算符 | 将多个操作组合成一个视图。常见适配器包括 views::filter、views::transform、views::drop、views::take 和 views::reverse。每个适配器接收前一步的范围，并产生下一步的视图。",
+  "key_points": [
+    "views::filter 根据谓词保留满足条件的元素。",
+    "views::transform 将每个元素映射为另一个值。",
+    "views::drop(n) 删除范围开头的 n 个元素；views::take(n) 保留前 n 个元素。",
+    "views::reverse 以逆序访问视图中的元素。",
+    "多个适配器可以写成管道：$$\\text{range} \\mid \\text{filter} \\mid \\text{transform} \\mid \\text{drop} \\mid \\text{reverse}$$"
+  ],
+  "examples": [
+    "对 1 到 10 的整数依次过滤偶数、乘以 2、删除前两个元素并反转：\nvector values{1, 2, 3, 4, 5, 6, 7, 8, 9, 10};\nauto result{values | views::filter([](const auto& value) { return value % 2 == 0; }) | views::transform([](const auto& value) { return value * 2.0; }) | views::drop(2) | views::reverse};\n结果为：20 16 12。"
+  ],
+  "misconceptions": [
+    "管道中的每个操作不是立即生成一个新的、已计算完成的容器；它们通常生成视图。",
+    "views::drop(2) 删除的是当前管道结果的前两个元素，而不是原始范围的前两个元素。",
+    "views::transform 不一定保持元素类型不变。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何用范围适配器得到序列 20 16 12？",
+      "a": "从 1 到 10 的范围开始，使用 views::filter 保留偶数，再用 views::transform 将元素乘以 2，然后用 views::drop(2) 删除前两个元素，最后用 views::reverse 反转。"
+    },
+    {
+      "q": "范围适配器可以如何组合？",
+      "a": "使用管道运算符 | 按处理顺序连接，例如 values | views::filter(predicate) | views::transform(function)。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++范围和视图的基本概念"
+  ],
+  "source_pages": [
+    541,
+    542
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1109_范围适配器的管道组合",
+  "_chunk_pages": [
+    541,
+    544
+  ]
+}

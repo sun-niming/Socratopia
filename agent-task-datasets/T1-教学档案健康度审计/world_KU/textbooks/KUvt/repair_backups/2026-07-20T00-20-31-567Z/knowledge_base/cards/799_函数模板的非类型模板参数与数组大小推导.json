@@ -1,0 +1,48 @@
+{
+  "title": "函数模板的非类型模板参数与数组大小推导",
+  "definition": "函数模板不仅可以接收类型模板参数，还可以接收非类型模板参数。原文通过数组引用参数T(&arr)[N]让编译器从栈数组的实际长度推导出N，因此调用Find时不必单独传递数组大小。",
+  "key_points": [
+    "重载版本的形式为：template <typename T, size_t N> size_t Find(const T& value, const T(&arr)[N])。",
+    "N是非类型模板参数，表示数组长度。",
+    "参数const T(&arr)[N]是对长度为N的数组的引用，不会把数组退化为指针，因此可以保留长度信息。",
+    "该版本内部把调用转发给前一个带size参数的Find：return Find(value, arr, N);",
+    "这种写法适用于编译器能够知道确切大小的数组，例如基于栈的内置数组。"
+  ],
+  "examples": [
+    "定义：template <typename T, size_t N> size_t Find(const T& value, const T(&arr)[N]) { return Find(value, arr, N); }",
+    "调用：int myInt{3}; int intArray[]{1, 2, 3, 4}; size_t result{Find(myInt, intArray)};",
+    "对于intArray[]{1, 2, 3, 4}，编译器可推导出T=int、N=4。"
+  ],
+  "misconceptions": [
+    "N不是运行时传入的普通函数参数，而是编译期推导出的非类型模板参数。",
+    "如果参数写成普通的const T*，数组大小信息会丢失，不能仅凭该参数推导N。",
+    "该技巧针对数组本身的编译期长度，不等同于对动态分配数组或已经退化为指针的对象自动获取长度。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么Find(value, arr)不需要显式传递数组大小？",
+      "a": "因为参数const T(&arr)[N]通过数组引用保留了数组长度，编译器可以将数组长度推导为非类型模板参数N，并在函数内部调用Find(value, arr, N)。"
+    },
+    {
+      "q": "在int intArray[]{1, 2, 3, 4}上调用Find(myInt, intArray)时，N是多少？",
+      "a": "N是4。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "函数模板",
+    "数组与数组引用",
+    "模板参数推导"
+  ],
+  "source_pages": [
+    395,
+    395
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "799_函数模板的非类型模板参数与数组大小推导",
+  "_chunk_pages": [
+    393,
+    396
+  ]
+}

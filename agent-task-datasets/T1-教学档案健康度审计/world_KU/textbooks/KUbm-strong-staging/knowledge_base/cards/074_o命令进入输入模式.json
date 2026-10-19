@@ -1,0 +1,37 @@
+{
+  "title": "o命令进入输入模式",
+  "definition": "在命令模式下按 o，会在当前行之下插入一个新行，并进入输入模式。",
+  "key_points": [
+    "o 只能从命令模式进入输入模式",
+    "会在当前行下面新建一行",
+    "执行后进入输入模式"
+  ],
+  "examples": [
+    "当前光标位于某行时按 o，在该行下方新增一行并开始输入"
+  ],
+  "misconceptions": [
+    "认为 o 是在当前行上方新建一行",
+    "认为 o 只移动光标而不会创建新行"
+  ],
+  "qa_pairs": [
+    {
+      "q": "在 Vim 中，o 的作用是什么？",
+      "a": "在当前行之下插入一个新行，并进入输入模式。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "Vim的工作模式"
+  ],
+  "source_pages": [
+    37,
+    40
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "074_o命令进入输入模式",
+  "_chunk_pages": [
+    37,
+    40
+  ]
+}

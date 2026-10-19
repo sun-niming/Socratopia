@@ -1,0 +1,37 @@
+{
+  "title": "bind预设this",
+  "definition": "bind方法可以为函数预先设置this值，使函数后续如何被调用都按这个this执行，不再依赖调用形式。",
+  "key_points": [
+    "bind用于固定函数的this",
+    "之后的调用方式不会改变已绑定的this",
+    "适合需要长期保留某个上下文的场景"
+  ],
+  "examples": [
+    "const f = sayHello.bind(obj1)\nf()"
+  ],
+  "misconceptions": [
+    "bind会立刻执行函数",
+    "bind只能用于对象方法"
+  ],
+  "qa_pairs": [
+    {
+      "q": "bind和call/apply在this处理上有什么区别？",
+      "a": "bind是预先设置this，后续调用仍使用该this；call/apply是在调用当次指定this。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "call/apply显式绑定this"
+  ],
+  "source_pages": [
+    261,
+    264
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "382_bind预设this",
+  "_chunk_pages": [
+    261,
+    264
+  ]
+}

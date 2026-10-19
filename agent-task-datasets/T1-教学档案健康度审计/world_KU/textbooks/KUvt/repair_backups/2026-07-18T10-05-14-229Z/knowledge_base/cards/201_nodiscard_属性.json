@@ -1,0 +1,42 @@
+{
+  "title": "[[nodiscard]]属性",
+  "definition": "原文列出了 `[[nodiscard]]`。该 C++ 属性用于提示编译器：函数或类型产生的结果不应被无视；当调用者丢弃被标记结果时，编译器通常会发出警告。",
+  "key_points": [
+    "`[[nodiscard]]` 是方括号属性语法。",
+    "它用于提醒调用者检查函数返回值或对象结果。",
+    "它通常产生编译器警告，而不是自动阻止程序编译。"
+  ],
+  "examples": [
+    "函数声明示例：`[[nodiscard]] int calculate();`。",
+    "调用 `calculate();` 而不使用返回值时，编译器可能发出警告。"
+  ],
+  "misconceptions": [
+    "[[nodiscard]] 通常是警告性约束，不等同于运行时异常。",
+    "该属性不会自动改变函数的返回值，也不会替调用者处理结果。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "[[nodiscard]] 的作用是什么？",
+      "a": "提示调用者不要忽略函数或类型产生的结果；忽略时编译器通常会给出警告。"
+    },
+    {
+      "q": "[[nodiscard]] 能否保证调用者一定使用返回值？",
+      "a": "不能；它主要提供编译器诊断提示。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++函数声明和属性"
+  ],
+  "source_pages": [
+    133,
+    136
+  ],
+  "needs_verification": true,
+  "verify_query": "《C++20高级编程》第5版 第135页 [[nodiscard]] C++ 属性",
+  "concept_id": "201_nodiscard_属性",
+  "_chunk_pages": [
+    133,
+    136
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "title": "利用DNS截获并重定向CDN请求",
+  "definition": "CDN通常利用DNS截获用户的视频请求，并把用户定向到合适的CDN内容服务器。以NetCinema和KingCDN为例：用户访问视频URL后，用户主机先查询视频主机名；NetCinema的权威DNS服务器不直接返回内容服务器IP地址，而是返回KingCDN域中的主机名；用户的本地DNS服务器（LDNS）再查询该主机名，KingCDN的DNS系统最终返回一个CDN内容服务器的IP地址；用户主机随后与该IP地址建立TCP连接并发送HTTP GET请求。",
+  "key_points": [
+    "DNS重定向使内容提供商可以把请求交给CDN处理。",
+    "NetCinema权威DNS服务器通过返回KingCDN的主机名，把后续解析交给KingCDN的DNS基础设施。",
+    "KingCDN DNS系统根据请求选择一个内容服务器，并向LDNS返回该服务器的IP地址。",
+    "得到IP地址后，用户主机直接与该CDN服务器建立TCP连接并发送HTTP GET请求。",
+    "如果使用DASH，服务器可以先发送包含不同视频版本URL的告示文件，客户再动态选择不同版本的视频块。"
+  ],
+  "examples": [
+    "典型流程：用户查询 $video.netcinema.com$；NetCinema权威DNS返回类似 $a1105.kingcdn.com$ 的主机名；LDNS继续查询该主机名；KingCDN返回内容服务器IP；用户主机连接该IP并发送HTTP GET。"
+  ],
+  "misconceptions": [
+    "NetCinema权威DNS服务器在该流程中不直接返回最终视频服务器的IP地址，而是返回KingCDN域中的主机名。",
+    "DNS重定向完成服务器定位后，实际视频内容仍由用户主机与CDN内容服务器之间的直接TCP连接传输。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "CDN如何利用DNS把用户请求重定向到CDN服务器？",
+      "a": "用户查询视频主机名时，内容提供商的权威DNS服务器返回CDN域中的主机名；LDNS继续查询该主机名，CDN的DNS系统返回合适内容服务器的IP地址；用户主机随后与该服务器建立TCP连接并发送HTTP GET请求。"
+    },
+    {
+      "q": "使用DASH时，CDN服务器可能先向客户发送什么？",
+      "a": "服务器可能先发送包含视频各个版本URL的告示文件，客户根据当前条件动态选择不同版本的视频块。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "DNS名称解析",
+    "TCP连接",
+    "HTTP请求",
+    "DASH自适应流媒体"
+  ],
+  "source_pages": [
+    118,
+    119
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "295_利用dns截获并重定向cdn请求",
+  "_chunk_pages": [
+    117,
+    120
+  ]
+}

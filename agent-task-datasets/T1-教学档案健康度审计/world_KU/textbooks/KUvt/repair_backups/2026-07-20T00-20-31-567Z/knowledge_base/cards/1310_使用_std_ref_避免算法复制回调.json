@@ -1,0 +1,49 @@
+{
+  "title": "使用 std::ref() 避免算法复制回调",
+  "definition": "std::ref() 是一个辅助函数，可以把回调对象包装成引用包装器并传给标准算法，从而使算法使用同一个回调对象，而不是复制出多个独立的回调副本。这样可以观察或维护回调对象本身的状态。",
+  "key_points": [
+    "默认情况下，算法可能复制回调。",
+    "使用 `std::ref(callback)` 可以向算法传递对已有回调对象的引用。",
+    "使用 `std::ref()` 时，算法对不同元素调用的是同一个回调对象。",
+    "即使使用引用传递，也必须考虑算法何时调用回调以及算法可能提前停止。"
+  ],
+  "examples": [
+    "若回调存储在 `isPerfectScore` 中，可写成：`auto it = find_if(cbegin(myVector), endIt, std::ref(isPerfectScore));`。",
+    "一个统计调用次数的可变 lambda 可以通过 `std::ref(isPerfectScore)` 传给算法，使算法修改外部的 `isPerfectScore` 对象，而不是修改算法内部副本。"
+  ],
+  "misconceptions": [
+    "std::ref() 会复制对象并同步状态；它的作用是包装引用，避免按值复制回调。",
+    "使用 std::ref() 不会让 find_if() 检查所有元素；找到首个满足条件的元素后，find_if() 仍会停止。",
+    "回调通过引用传递后，仍需保证被引用对象在算法执行期间有效。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何避免标准算法复制一个回调对象？",
+      "a": "使用 `std::ref()` 将回调包装为引用，例如 `find_if(first, last, std::ref(callback))`。"
+    },
+    {
+      "q": "std::ref(callback) 的主要效果是什么？",
+      "a": "让算法使用同一个 callback 对象，而不是使用该回调的独立副本。"
+    },
+    {
+      "q": "为什么统计回调调用次数时适合使用 std::ref()？",
+      "a": "因为它使算法修改外部的同一个回调对象，算法结束后可以读取该对象的状态。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "标准算法对回调对象的复制与状态限制",
+    "引用包装器"
+  ],
+  "source_pages": [
+    632,
+    632
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 std::ref algorithm function object reference_wrapper official reference",
+  "concept_id": "1310_使用_std_ref_避免算法复制回调",
+  "_chunk_pages": [
+    629,
+    632
+  ]
+}

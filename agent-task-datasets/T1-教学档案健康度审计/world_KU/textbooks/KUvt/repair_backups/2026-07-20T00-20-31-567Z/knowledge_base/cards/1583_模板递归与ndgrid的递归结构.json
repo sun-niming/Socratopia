@@ -1,0 +1,51 @@
+{
+  "title": "模板递归与NDGrid的递归结构",
+  "definition": "模板递归是指一个模板实例的定义依赖于另一个更低层次的模板实例，类似函数递归依赖自身调用。NDGrid使用元素类型T和维度N作为模板参数：对于一般的N，NDGrid的元素类型是`NDGrid<T, N-1>`，因此N维网格可以看作由许多(N-1)维网格组成。递归必须有基本情形；教材将`NDGrid<T, 1>`部分特例化，使其元素类型直接为T，从而结束递归。",
+  "key_points": [
+    "一般情形的递归元素类型为`NDGrid<T, N-1>`。",
+    "基本情形是`NDGrid<T, 1>`，其元素类型直接为T。",
+    "可以用统一的形式声明不同维度：`NDGrid<int, 1>`、`NDGrid<int, 2>`、`NDGrid<int, 3>`。",
+    "三维网格的递归结构可表示为：三维网格由二维网格组成，二维网格由一维网格组成，一维网格由int元素组成。"
+  ],
+  "examples": [
+    "统一的声明形式为：`NDGrid<int, 1> singleDGrid;`、`NDGrid<int, 2> twoDGrid;`、`NDGrid<int, 3> threeDGrid;`。",
+    "一般模板的成员可以抽象表示为：`std::vector<NDGrid<T, N - 1>> m_elements;`。",
+    "基本情形的成员可以抽象表示为：`std::vector<T> m_elements;`。"
+  ],
+  "misconceptions": [
+    "误以为模板递归是在运行时反复调用同一个函数；这里主要是模板实例化时形成的类型递归。",
+    "误以为所有NDGrid实例都把元素类型直接设为T；当N大于1时，元素类型是`NDGrid<T, N-1>`。",
+    "误以为递归不需要结束条件；没有`NDGrid<T, 1>`这样的基本情形，模板递归将无法正确结束。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "NDGrid的递归步骤是什么？",
+      "a": "对于维度N，元素类型为`NDGrid<T, N-1>`，因此N维网格由多个(N-1)维网格组成。"
+    },
+    {
+      "q": "NDGrid的基本情形是什么？",
+      "a": "`NDGrid<T, 1>`的元素类型直接是T，不再嵌套另一个NDGrid。"
+    },
+    {
+      "q": "为什么需要对NDGrid进行维度为1的部分特例化？",
+      "a": "因为递归必须有终止条件；维度为1时直接存储T，递归在此结束。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "类模板部分特例化",
+    "模板参数",
+    "std::vector"
+  ],
+  "source_pages": [
+    767,
+    768
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1583_模板递归与ndgrid的递归结构",
+  "_chunk_pages": [
+    765,
+    768
+  ]
+}

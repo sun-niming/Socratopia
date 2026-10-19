@@ -1,0 +1,50 @@
+{
+  "title": "vector 的复制、赋值、assign 与 swap",
+  "definition": "vector 保存元素对象的副本，并在销毁时调用每个元素对象的析构函数。vector 的拷贝构造函数和赋值运算符会复制 vector 中的所有元素。vector 还提供 `assign()` 用于删除现有元素并填入新元素，以及 `swap()` 用于交换两个 vector 的内容。",
+  "key_points": [
+    "vector 的拷贝构造和赋值会对所有元素进行深度复制。",
+    "由于复制 vector 可能产生效率开销，向函数传递 vector 时通常应使用非 const 引用或 const 引用，而不是按值传递。",
+    "`assign(count, value)` 会删除原有元素，并创建 count 个值为 value 的元素。",
+    "`assign(initializer_list)` 会删除原有元素，并用初始化列表中的元素替换它们。",
+    "`swap()` 交换两个 vector 的内容，复杂度为常量时间，即 $O(1)$。"
+  ],
+  "examples": [
+    "`vector<int> intVector(10); intVector.assign(5, 100);` 执行后，intVector 包含 5 个值为 100 的元素。",
+    "`intVector.assign({1, 2, 3, 4});` 执行后，intVector 包含 4 个元素：$[1,2,3,4]$。",
+    "若 `vectorOne` 初始包含 10 个 0，`vectorTwo` 包含 5 个 100，执行 `vectorOne.swap(vectorTwo);` 后，vectorOne 包含 5 个 100，vectorTwo 包含 10 个 0。"
+  ],
+  "misconceptions": [
+    "`assign()` 不是在原有元素后追加，而是先删除所有现有元素再填入新元素。",
+    "vector 的普通复制不是只复制内部指针，而是复制其中的所有元素。",
+    "`swap()` 交换的是两个 vector 的内容，不是把一个 vector 的元素复制到另一个 vector。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`assign(5, 100)` 对原 vector 做什么？",
+      "a": "删除原有的所有元素，然后创建 5 个值为 100 的元素。"
+    },
+    {
+      "q": "`swap()` 的复杂度是多少？",
+      "a": "常量时间复杂度，即 $O(1)$。"
+    },
+    {
+      "q": "为什么通常不应按值传递 vector？",
+      "a": "因为 vector 的拷贝构造或赋值会复制所有元素，可能产生不必要的效率开销；通常应使用非 const 引用或 const 引用。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "vector 构造函数与元素初始化"
+  ],
+  "source_pages": [
+    552,
+    552
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1136_vector_的复制_赋值_assign_与_swap",
+  "_chunk_pages": [
+    549,
+    552
+  ]
+}

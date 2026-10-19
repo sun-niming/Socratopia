@@ -1,0 +1,48 @@
+{
+  "title": "用共享互斥体和 lock_guard 保护流输出",
+  "definition": "如果不能使用同步流，可以使用互斥体保护多个线程对同一个输出流的访问。为了保证 Counter 类的所有实例使用同一把锁，应将互斥体声明为静态成员。每次写入 std::cout 前创建 std::lock_guard，利用其构造和析构自动完成加锁与解锁。",
+  "key_points": [
+    "所有可能同时写入同一输出流的 Counter 实例应共享同一个互斥体。",
+    "静态互斥体成员可以让同一个类的所有实例使用同一把锁。",
+    "std::lock_guard 应在执行受保护的输出操作之前创建。",
+    "应尽可能缩短持有锁的时间；原文示例在 for 循环的每次迭代中创建 lock_guard。"
+  ],
+  "examples": [
+    "典型写法：\n```cpp\nclass Counter {\npublic:\n    void operator()() const\n    {\n        for (int i{0}; i < m_numIterations; ++i) {\n            std::lock_guard lock{m_mutex};\n            std::cout << \"Counter \" << m_id\n                      << \" has value \" << i << std::endl;\n        }\n    }\n\nprivate:\n    int m_id;\n    int m_numIterations;\n    inline static std::mutex m_mutex;\n};\n```"
+  ],
+  "misconceptions": [
+    "仅仅使用 std::cout 并不能保证不同线程输出的多段内容不交错。",
+    "如果每个 Counter 实例各自拥有一把互斥体，就不能保护它们之间对同一个 std::cout 的并发访问。",
+    "不能在整个 for 循环开始前就创建一次 lock_guard，否则一个线程会在整个循环期间持有锁，其他线程只能等待。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么 Counter 的互斥体应声明为静态成员？",
+      "a": "因为 Counter 的所有实例都需要使用同一个互斥体，以共同保护对 std::cout 的访问。"
+    },
+    {
+      "q": "为什么示例在 for 循环的每次迭代中创建 lock_guard？",
+      "a": "这样每次只在实际写入输出时持有锁，能够尽可能缩短阻塞其他线程的时间。"
+    },
+    {
+      "q": "如果在 for 循环之前创建一个 lock_guard，会有什么问题？",
+      "a": "该线程会在整个循环执行期间持有锁，其他线程会长时间等待，从而基本失去多线程并发的效果。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "互斥体与 RAII 加锁",
+    "std::lock_guard"
+  ],
+  "source_pages": [
+    811,
+    812
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1667_用共享互斥体和_lock_guard_保护流输出",
+  "_chunk_pages": [
+    809,
+    812
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "title": "从 C# 通过 P/Invoke 调用 C++ DLL",
+  "definition": "在 Windows 上，可以把 C++函数编译为 DLL，并在 C# 中通过平台调用（P/Invoke）机制导入和调用该函数。C++函数需要以适合导出的方式编译，C# 端使用 `DllImport` 声明 DLL 名称、字符集、函数原型等信息。",
+  "key_points": [
+    "C++实现的是库函数，不是独立程序，因此通常不需要 `main()` 函数。",
+    "在 Microsoft Visual C++ 中，可将项目配置为 Dynamic Library（.dll），并使用 `__declspec(dllexport)` 告知链接器导出函数。其他链接器可能使用不同的导出机制。",
+    "示例函数接收 Unicode 宽字符串 `const wchar_t*`，将字符串输出到控制台，并返回整数 42。",
+    "C# 端需要引入 `System.Runtime.InteropServices`，并使用 `[DllImport(\"HelloCpp.dll\", CharSet = CharSet.Unicode)]` 声明外部函数。",
+    "C++端和 C# 端的函数名、参数类型、返回类型以及字符集设置必须相互匹配。"
+  ],
+  "examples": [
+    "C++ 导出函数的核心形式：`extern \"C\" __declspec(dllexport) int functionInDLL(const wchar_t* p)`。该函数输出收到的字符串，并返回 `42`。",
+    "C# 导入声明：`[DllImport(\"HelloCpp.dll\", CharSet = CharSet.Unicode)] public static extern int functionInDLL(string s);`",
+    "C# 调用示例：`int result = functionInDLL(\"Some string from C#.\");`"
+  ],
+  "misconceptions": [
+    "C++ DLL 中不一定要有 `main()`；这里编译的是供其他程序调用的库。",
+    "`DllImport` 不是 C++ 语法，而是 C# 用来声明外部函数的特性。",
+    "仅仅把 C++源文件编译成 DLL 并不等于 C# 一定能调用；还必须正确导出函数，并使两端函数签名和字符集匹配。",
+    "`__declspec(dllexport)` 是 Microsoft Visual C++ 常见的导出方式，不应误认为是所有 C++编译器通用的标准语法。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "C# 调用 C++ DLL 时，C# 端通常使用什么特性声明外部函数？",
+      "a": "使用 `System.Runtime.InteropServices` 中的 `DllImport` 特性，并用 `public static extern` 声明函数原型。"
+    },
+    {
+      "q": "示例中的 C++函数接收什么参数并返回什么值？",
+      "a": "它接收一个 Unicode 宽字符串指针 `const wchar_t*`，把字符串输出到控制台，并返回整数 `42`。"
+    },
+    {
+      "q": "为什么示例中的 C++库函数不需要 `main()`？",
+      "a": "因为它是供 C#程序调用的库函数实现，不是独立运行的程序。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "动态链接库的基本概念",
+    "C# 方法声明基础"
+  ],
+  "source_pages": [
+    981,
+    982
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "2017_从_c_通过_p_invoke_调用_c_dll",
+  "_chunk_pages": [
+    981,
+    984
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "version": 3,
+  "ordering": "chunk-ordinal-then-source-page",
+  "generated_at": "2026-09-14T01:18:50.688Z",
+  "segments": [
+    {
+      "page_range": [
+        66,
+        73
+      ],
+      "sequence": [
+        {
+          "phase": 1,
+          "label": "第 66-69 页",
+          "card_ids": [
+            "001_常用环境变量",
+            "002_使用_export_导出变量",
+            "003_declare_变量声明",
+            "004_位置参数及其引用"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 2,
+          "label": "第 69-71 页",
+          "card_ids": [
+            "005_使用_set_为位置参数赋值",
+            "006_使用_shift_移动位置参数",
+            "007_shell位置参数",
+            "008_echo显示命令"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        },
+        {
+          "phase": 3,
+          "label": "第 72-73 页",
+          "card_ids": [
+            "009_read读取用户输入",
+            "010_test与_的文件特性检测"
+          ],
+          "teach_goal": "按教材页序讲清本阶段知识点。",
+          "branches": []
+        }
+      ],
+      "generated_by": "runtime-repair"
+    }
+  ],
+  "fallback_segments": 1
+}

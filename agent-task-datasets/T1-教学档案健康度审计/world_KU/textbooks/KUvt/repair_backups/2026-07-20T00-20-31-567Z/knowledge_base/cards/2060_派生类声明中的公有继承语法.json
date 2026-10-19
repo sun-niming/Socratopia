@@ -1,0 +1,35 @@
+{
+  "title": "派生类声明中的公有继承语法",
+  "definition": "声明一个以公有方式继承基类的派生类时，应在派生类名称和基类名称之间写出 `public` 关键字，形式为 `class Derived : public Base`。公有继承是教材在面试场景中重点提醒的常见形式。",
+  "key_points": [
+    "基本形式：`class Derived : public Base { ... };`。",
+    "教材指出，面试中不太可能要求执行非 `public` 继承，但仍应知道继承访问说明符的作用。"
+  ],
+  "examples": [
+    "`class Derived : public Base { };` 表示 `Derived` 公有继承 `Base`。"
+  ],
+  "misconceptions": [
+    "把 `class Derived : Base` 直接当成明确的公有继承；对于 `class` 声明，省略继承访问说明符时默认继承方式并不是 `public`。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何写出一个公有继承 `Base` 的 `Derived` 类？",
+      "a": "写作 `class Derived : public Base { };`。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++类定义"
+  ],
+  "source_pages": [
+    1001,
+    1001
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "2060_派生类声明中的公有继承语法",
+  "_chunk_pages": [
+    1001,
+    1004
+  ]
+}

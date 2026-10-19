@@ -1,0 +1,44 @@
+{
+  "title": "标准库迭代器适配器的五种类型",
+  "definition": "迭代器适配器是定义在 <iterator> 中的特殊迭代器。教材将标准库迭代器适配器分为两组：第一组从容器创建，通常作为输出迭代器，用于向容器插入元素；第二组通过另一个迭代器创建，通常作为输入迭代器，用于改变遍历顺序或移动元素。",
+  "key_points": [
+    "back_insert_iterator 使用 push_back() 向容器插入元素。",
+    "front_insert_iterator 使用 push_front() 向容器插入元素。",
+    "insert_iterator 使用 insert() 向容器插入元素。",
+    "reverse_iterator 反转另一个迭代器的迭代顺序。",
+    "move_iterator 的解引用运算符会自动把左值转换为右值引用，以便移动到新目标。"
+  ],
+  "examples": [
+    "五种适配器可概括为：back_insert_iterator、front_insert_iterator、insert_iterator、reverse_iterator 和 move_iterator。"
+  ],
+  "misconceptions": [
+    "迭代器适配器不是普通容器；它们通过提供迭代器接口，使已有算法能够以特定方式访问或写入元素。",
+    "三种插入迭代器虽然都用于插入元素，但使用的容器操作不同：push_back()、push_front() 和 insert()。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "标准库迭代器适配器分为哪两组？",
+      "a": "第一组从容器创建，通常作为输出迭代器，包括 back_insert_iterator、front_insert_iterator 和 insert_iterator；第二组通过另一个迭代器创建，通常作为输入迭代器，包括 reverse_iterator 和 move_iterator。"
+    },
+    {
+      "q": "move_iterator 的解引用操作有什么特殊作用？",
+      "a": "它会自动将左值转换为右值引用，使元素可以移动到新目标而不是进行普通复制。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "迭代器的输入与输出类别",
+    "容器插入操作"
+  ],
+  "source_pages": [
+    533,
+    533
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1093_标准库迭代器适配器的五种类型",
+  "_chunk_pages": [
+    533,
+    536
+  ]
+}

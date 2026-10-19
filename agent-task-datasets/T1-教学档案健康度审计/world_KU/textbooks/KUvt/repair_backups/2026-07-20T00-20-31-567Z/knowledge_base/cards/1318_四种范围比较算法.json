@@ -1,0 +1,51 @@
+{
+  "title": "四种范围比较算法",
+  "definition": "标准库可以通过 equal()、mismatch()、lexicographical_compare() 和 C++20 的 lexicographical_compare_three_way() 比较两个范围中对应位置的元素。这些算法适合比较不同容器中的元素序列、子范围以及 C 风格数组，尤其适用于顺序容器。",
+  "key_points": [
+    "equal() 判断两个范围的对应元素是否全部相等。",
+    "mismatch() 找到两个范围中第一个不匹配的对应位置，并返回各范围对应的迭代器。",
+    "lexicographical_compare() 按字典序比较两个范围，返回布尔值。",
+    "lexicographical_compare_three_way() 按字典序执行 C++20 三路比较，返回比较类别结果而不是布尔值。",
+    "如果比较两个同类型容器的完整元素序列，可以优先考虑容器支持的比较运算符；这些算法适合不同容器类型、子范围或 C 风格数组。"
+  ],
+  "examples": [
+    "可比较 vector<int> 和 list<int> 中的元素序列，即使二者是不同类型的容器。",
+    "lexicographical_compare() 的判断规则：若第一个不相等元素满足 $a_i<b_i$，则第一个范围较小；如果一个范围是另一个范围相等前缀的更短范围，则较短范围较小。"
+  ],
+  "misconceptions": [
+    "lexicographical_compare() 只能比较字符串；实际上它可以比较任意适合比较的对象类型序列。",
+    "mismatch() 返回一个布尔值；实际上它返回每个范围对应的不匹配位置迭代器。",
+    "三路比较算法返回 true 或 false；原文说明它返回比较类别类型。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "equal() 的作用是什么？",
+      "a": "判断两个范围中所有对应位置的元素是否都相等。"
+    },
+    {
+      "q": "lexicographical_compare() 何时返回 true？",
+      "a": "当第一个范围的第一个不相等元素小于第二个范围的对应元素，或者第一个范围是第二个范围相等前缀的更短范围时，返回 true。"
+    },
+    {
+      "q": "为什么这些比较算法可以比较 vector 和 list？",
+      "a": "因为它们通过迭代器比较两个范围中的对应元素，不要求两个范围来自同一种容器。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "迭代器范围",
+    "字典序比较",
+    "三路比较"
+  ],
+  "source_pages": [
+    635,
+    636
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 lexicographical_compare_three_way 返回类型 strong_ordering weak_ordering partial_ordering 标准定义",
+  "concept_id": "1318_四种范围比较算法",
+  "_chunk_pages": [
+    633,
+    636
+  ]
+}

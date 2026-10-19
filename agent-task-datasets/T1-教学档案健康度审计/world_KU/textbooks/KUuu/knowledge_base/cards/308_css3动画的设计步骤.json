@@ -1,0 +1,39 @@
+{
+  "title": "CSS3动画的设计步骤",
+  "definition": "动画是由静态图片连续播放而成，静态图片称为关键帧（Key Frame）。动画的设计分为两个步骤：先使用 @keyframes 规则对动画命名并定义动画的关键帧，再使用 animation 属性调用动画。",
+  "key_points": [
+    "动画可以看作静态图片连续播放的结果。",
+    "静态图片称为关键帧（Key Frame）。",
+    "设计动画分两步：先定义关键帧并命名，再调用动画。"
+  ],
+  "examples": [
+    "先使用 @keyframes 规则定义关键帧并命名，再用 animation 属性调用该动画。"
+  ],
+  "misconceptions": [
+    "只定义了关键帧，动画就会自动播放。",
+    "动画设计只需要一个步骤。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "动画设计分哪两个步骤？",
+      "a": "第一步用 @keyframes 规则对动画命名并定义关键帧；第二步使用 animation 属性调用动画。"
+    },
+    {
+      "q": "静态图片在动画中叫什么？",
+      "a": "关键帧（Key Frame）。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [],
+  "source_pages": [
+    205,
+    208
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "308_css3动画的设计步骤",
+  "_chunk_pages": [
+    205,
+    208
+  ]
+}

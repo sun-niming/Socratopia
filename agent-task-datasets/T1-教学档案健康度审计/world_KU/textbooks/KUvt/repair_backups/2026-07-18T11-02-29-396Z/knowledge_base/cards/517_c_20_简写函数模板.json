@@ -1,0 +1,44 @@
+{
+  "title": "C++20 简写函数模板",
+  "definition": "C++20 允许在函数参数中使用受约束的 abbreviated function template 语法，例如 $const\\ auto\\&$。参数中的 auto 会使函数成为模板，编译器为每个参数推导相应类型。对多个 auto 参数而言，各参数可以分别推导类型；这种写法可以替代显式声明模板类型参数的部分场景。",
+  "key_points": [
+    "$const\\ auto\\&$ 参数表示一个按 const 引用接收、类型由调用实参推导的参数。",
+    "可以使用多个 auto 参数表达泛型函数。",
+    "示例中的 C++20 写法可以替代显式写出 $T1$ 和 $T2$ 的函数模板声明。"
+  ],
+  "examples": [
+    "C++20 简写形式：\\ndecltype(auto) add(const auto& t1, const auto& t2) {\\n    return t1 + t2;\\n}",
+    "等价的显式模板形式：\\ntemplate<typename T1, typename T2>\\ndecltype(auto) add(const T1& t1, const T2& t2) {\\n    return t1 + t2;\\n}"
+  ],
+  "misconceptions": [
+    "函数参数中的 auto 并不表示只能传入一种固定类型；它表示由调用点推导类型的模板参数。",
+    "简写函数模板并不自动产生运行时多态；它仍属于编译期模板机制。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "C++20 中如何用简写函数模板写出接收两个 const 引用参数的 add？",
+      "a": "可以写成：$decltype(auto)\\ add(const\\ auto\\&\\ t1,\\ const\\ auto\\&\\ t2)\\ \\{\\ return\\ t1+t2;\\ \\}$。"
+    },
+    {
+      "q": "下面两种 add 声明表达的主要含义是否相同：显式 T1、T2 模板参数与两个 const auto& 参数？",
+      "a": "在该示例场景下，二者都表示参数类型由调用实参推导的函数模板；C++20 的 const auto& 形式更简洁。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "函数模板",
+    "auto 类型推导",
+    "C++20 基础"
+  ],
+  "source_pages": [
+    397,
+    400
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "517_c_20_简写函数模板",
+  "_chunk_pages": [
+    397,
+    400
+  ]
+}

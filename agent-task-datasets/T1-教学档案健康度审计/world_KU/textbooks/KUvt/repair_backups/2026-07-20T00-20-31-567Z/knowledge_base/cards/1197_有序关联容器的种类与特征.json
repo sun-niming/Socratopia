@@ -1,0 +1,44 @@
+{
+  "title": "有序关联容器的种类与特征",
+  "definition": "有序关联容器不像顺序容器那样以线性方式保存元素，而是将键映射到值，并把元素保存在类似树的有序数据结构中。标准库提供四种有序关联容器：map、multimap、set 和 multiset。教材还指出，有序关联容器通常具有相等的插入、删除和查找时间；无序关联容器包括 unordered_map、unordered_multimap、unordered_set 和 unordered_multiset。",
+  "key_points": [
+    "有序关联容器按照有序、类似树的结构保存元素。",
+    "map、multimap、set 和 multiset 属于有序关联容器。",
+    "unordered_map、unordered_multimap、unordered_set 和 unordered_multiset 属于无序关联容器。",
+    "有序关联容器的核心关系是键与值之间的映射。"
+  ],
+  "examples": [
+    "四种有序关联容器名称：map、multimap、set、multiset。",
+    "四种无序关联容器名称：unordered_map、unordered_multimap、unordered_set、unordered_multiset。"
+  ],
+  "misconceptions": [
+    "误以为 map、set 等有序关联容器按照插入顺序保存元素。",
+    "误以为 multimap 和 multiset 属于无序关联容器。",
+    "误以为所有关联容器都只保存单个值而不涉及键。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "标准库中的四种有序关联容器是什么？",
+      "a": "map、multimap、set 和 multiset。"
+    },
+    {
+      "q": "有序关联容器与顺序容器在保存方式上的主要区别是什么？",
+      "a": "顺序容器通常以线性方式保存元素；有序关联容器把键映射到值，并使用类似树的有序数据结构保存元素。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "顺序容器"
+  ],
+  "source_pages": [
+    580,
+    580
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1197_有序关联容器的种类与特征",
+  "_chunk_pages": [
+    577,
+    580
+  ]
+}

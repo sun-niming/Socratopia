@@ -1,0 +1,38 @@
+{
+  "title": "迭代器前递增与后递增",
+  "definition": "递增迭代器时，通常应尽量使用前递增运算符++iter，而不是后递增运算符iter++。教材指出，前递增至少不会比后递增效率低，并且可能更高效。",
+  "key_points": [
+    "++iter先递增迭代器，再产生结果。",
+    "iter++先产生递增前的结果，再递增迭代器。",
+    "在只需要移动迭代器、不需要保存递增前值的循环中，优先使用++iter。"
+  ],
+  "examples": [
+    "文本代码：for (auto iter { begin(doubleVector) }; iter != end(doubleVector); ++iter) { /* 循环体 */ }"
+  ],
+  "misconceptions": [
+    "前递增和后递增在所有场景下都完全没有区别；二者的表达式结果语义不同，而且后递增可能需要保存旧值。",
+    "只有整数变量才能使用前递增；迭代器通常也重载了递增运算符。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "遍历vector时为什么通常推荐使用前递增？",
+      "a": "因为前递增至少不会比后递增效率低，并且可能更高效；遍历时通常只需要递增后的迭代器。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++递增运算符",
+    "vector迭代器"
+  ],
+  "source_pages": [
+    554,
+    554
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1140_迭代器前递增与后递增",
+  "_chunk_pages": [
+    553,
+    556
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "title": "Break、Continue、Exit 控制语句",
+  "definition": "在 Shell 脚本中，break、continue、exit 用于控制循环或脚本的执行流程。break [n] 表示退出 n 层循环；continue [n] 表示跳到第 n 层循环继续执行；exit [n] 表示退出整个脚本，并设置退出码。",
+  "key_points": [
+    "break [n] 用于退出循环，n 表示退出的循环层数",
+    "continue [n] 用于跳过本次后续操作，转到第 n 层循环继续执行",
+    "exit [n] 用于退出脚本，并设置退出码"
+  ],
+  "examples": [
+    "break 2 表示退出 2 层循环",
+    "continue 1 表示在当前层循环继续下一次迭代",
+    "exit 0 表示退出脚本并设置退出码为 0"
+  ],
+  "misconceptions": [
+    "把 exit 误认为只退出当前循环；实际上它退出的是整个脚本",
+    "把 break 和 continue 混淆；break 是退出循环，continue 是继续循环"
+  ],
+  "qa_pairs": [
+    {
+      "q": "break [n] 的作用是什么？",
+      "a": "退出 n 层循环。"
+    },
+    {
+      "q": "continue [n] 和 break [n] 的区别是什么？",
+      "a": "continue [n] 是跳到第 n 层循环继续执行，break [n] 是退出 n 层循环。"
+    },
+    {
+      "q": "exit [n] 的作用是什么？",
+      "a": "退出脚本，并设置退出码。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [],
+  "source_pages": [
+    85,
+    88
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "140_break_continue_exit_控制语句",
+  "_chunk_pages": [
+    85,
+    88
+  ]
+}

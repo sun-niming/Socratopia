@@ -1,0 +1,49 @@
+{
+  "title": "指向 const 对象的指针与 const 指针",
+  "definition": "指针声明中，const 的位置决定限制的是被指向对象还是指针本身。`const int* ip` 表示指向 const int 的指针，不能通过 ip 修改所指整数，但 ip 可以改为指向别处；`int* const ip` 表示 const 指针，ip 不能改指向别处，但可以通过 ip 修改所指 int；`const int* const ip` 同时限制两者。",
+  "key_points": [
+    "`const int* ip` 与 `int const* ip` 等价，都是“指向 const int 的指针”。",
+    "`int* const ip` 是“const 指针”，指针本身必须初始化，之后不能改变地址。",
+    "`const int* const ip` 同时表示指向 const int 的 const 指针。",
+    "指向 const 的指针不能执行 `ip[4] = 5` 这类修改所指对象的操作。"
+  ],
+  "examples": [
+    "int* ip;\nip = new int[10];\nip[4] = 5; // 可以修改所指数组元素\n\nconst int* ip2 { nullptr };\nip2 = new int[10];\n// ip2[4] = 5; // 不能编译：不能通过 ip2 修改元素\n\nint* const ip3 { nullptr };\n// ip3 = new int[10]; // 不能编译：ip3 本身不能改指向\n\nconst int* const ip4 { nullptr }; // 指针和所指对象都具有限制"
+  ],
+  "misconceptions": [
+    "`const int*` 并不表示指针 ip 本身不能改变；它只限制通过 ip 修改所指对象。",
+    "`int* const` 并不表示所指整数是 const；只限制指针本身不能改指向。",
+    "`const int* const` 不是“只有一个 const”；它同时约束指针和所指对象。",
+    "把指针设为 nullptr 不会自动分配数组，也不能通过它访问元素。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`const int* ip` 能否执行 `ip = new int[10]`？",
+      "a": "可以，因为 ip 本身不是 const；但不能通过 ip 修改所指整数。"
+    },
+    {
+      "q": "`const int* ip` 能否执行 `ip[4] = 5`？",
+      "a": "不能，因为 ip 指向 const int，不能通过 ip 修改所指元素。"
+    },
+    {
+      "q": "`int* const ip` 的限制对象是什么？",
+      "a": "限制指针本身：ip 初始化后不能改为指向其他地址；所指 int 仍可通过 ip 修改。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "指针",
+    "const 变量"
+  ],
+  "source_pages": [
+    74,
+    75
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "101_指向_const_对象的指针与_const_指针",
+  "_chunk_pages": [
+    73,
+    76
+  ]
+}

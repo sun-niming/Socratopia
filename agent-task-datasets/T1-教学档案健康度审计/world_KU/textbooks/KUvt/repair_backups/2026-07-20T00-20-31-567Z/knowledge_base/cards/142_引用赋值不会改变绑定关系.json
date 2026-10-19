@@ -1,0 +1,44 @@
+{
+  "title": "引用赋值不会改变绑定关系",
+  "definition": "对引用进行赋值时，赋值表达式操作的是引用所绑定的原变量，而不是改变引用的绑定关系。因此，把一个引用赋给另一个引用，实际效果是把被引用对象的值复制给另一个引用所指向的对象。",
+  "key_points": [
+    "引用一旦绑定变量，就不能通过赋值改为绑定其他变量。",
+    "如果两个引用分别绑定x和z，执行zRef = xRef时，会把x的值赋给z，而不是让zRef改为绑定x。",
+    "尝试使用另一个变量的地址给int&引用赋值会类型不匹配，因为地址是int*，而引用类型是int&。"
+  ],
+  "examples": [
+    "int x { 3 }, z { 5 };\nint& xRef { x };\nint& zRef { z };\nzRef = xRef; // 将x的值3赋给z，z变为3；zRef仍然引用z",
+    "int y { 7 };\n// xRef = &y; // 编译失败：&y的类型是int*，而xRef是int&"
+  ],
+  "misconceptions": [
+    "zRef = xRef不是“让zRef引用xRef”，而是把xRef所引用对象的值赋给zRef所引用对象。",
+    "引用不能通过赋值运算符重新绑定。",
+    "变量地址不能直接赋给普通对象引用；地址的类型是指针类型。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "若x为3、z为5，执行zRef = xRef后，x和z分别是多少？",
+      "a": "x仍为3，z变为3；zRef仍然引用z。"
+    },
+    {
+      "q": "为什么不能执行xRef = &y来让xRef引用y？",
+      "a": "因为&y是指向y的指针，类型为int*；xRef是int&，两者类型不匹配，而且引用不能通过赋值重新绑定。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "引用变量的基本语义",
+    "赋值运算符"
+  ],
+  "source_pages": [
+    78,
+    79
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "142_引用赋值不会改变绑定关系",
+  "_chunk_pages": [
+    77,
+    80
+  ]
+}

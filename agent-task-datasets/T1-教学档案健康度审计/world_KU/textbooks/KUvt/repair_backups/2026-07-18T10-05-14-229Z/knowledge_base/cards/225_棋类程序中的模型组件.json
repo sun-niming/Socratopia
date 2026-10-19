@@ -1,0 +1,49 @@
+{
+  "title": "棋类程序中的模型组件",
+  "definition": "在教材给出的 MVC 棋类示例中，`GamePlay`、`ChessBoard`、`ChessPiece` 和 `Player` 等名称表示游戏过程、棋盘、棋子和玩家相关的程序组件。第 160 页的关系图还显示了若干与棋盘和棋子有关的操作名称，如 `GetPieceAt`、`SetPieceAt`，以及与玩家行动检查有关的 `Move`、`CheckMove`。",
+  "key_points": [
+    "`ChessBoard` 表示棋盘相关组件，`ChessPiece` 表示棋子相关组件。",
+    "`GamePlay` 表示游戏过程相关组件，`Player` 表示玩家相关组件。",
+    "关系图中出现 `GetPieceAt` 和 `SetPieceAt`，它们与通过棋盘获取或设置棋子有关。",
+    "关系图中出现 `Move` 和 `CheckMove`，与玩家移动及移动检查有关。"
+  ],
+  "examples": [
+    "关系图中的操作名称可写为：`GetPieceAt`、`SetPieceAt`、`Move`、`CheckMove`。",
+    "示例组件名称：`GamePlay`、`Player`、`ChessBoard`、`ChessPiece`。"
+  ],
+  "misconceptions": [
+    "不要把 `ChessBoardView` 和 `ChessBoard` 当成同一个名称；前者带有 `View` 后缀，是视图相关组件名称。",
+    "不要把 `GetPieceAt`、`SetPieceAt`、`Move`、`CheckMove` 当成 C++ 关键字；它们是图中出现的操作或方法名称示例。",
+    "当前 OCR 文本不足以确定这些类之间每一条关系的精确方向、继承关系或参数列表。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "棋类示例中表示棋盘和棋子的组件名称是什么？",
+      "a": "分别是 `ChessBoard` 和 `ChessPiece`。"
+    },
+    {
+      "q": "关系图中哪些操作与棋盘上的棋子访问有关？",
+      "a": "`GetPieceAt` 和 `SetPieceAt`。"
+    },
+    {
+      "q": "关系图中哪些操作与玩家移动及移动检查有关？",
+      "a": "`Move` 和 `CheckMove`。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "MVC 软件架构模式",
+    "面向对象程序设计中的类与方法"
+  ],
+  "source_pages": [
+    159,
+    160
+  ],
+  "needs_verification": true,
+  "verify_query": "《C++20高级编程》第5版第159-160页 ChessBoard ChessPiece GetPieceAt SetPieceAt Move CheckMove UML 类图原文",
+  "concept_id": "225_棋类程序中的模型组件",
+  "_chunk_pages": [
+    157,
+    160
+  ]
+}

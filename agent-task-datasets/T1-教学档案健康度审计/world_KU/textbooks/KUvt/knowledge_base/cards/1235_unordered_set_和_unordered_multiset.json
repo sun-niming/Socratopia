@@ -1,0 +1,44 @@
+{
+  "title": "unordered_set 和 unordered_multiset",
+  "definition": "<unordered_set> 头文件定义了 unordered_set 和 unordered_multiset。它们分别类似于 set 和 multiset，但不对键进行排序，而是使用哈希函数组织元素。unordered_set 与 unordered_map 的区别类似于 set 与 map 的区别：unordered_set 只保存键，而 unordered_map 保存键和值。",
+  "key_points": [
+    "unordered_set 类似于 set，但不对元素排序并使用哈希函数。",
+    "unordered_multiset 类似于 multiset，允许多个元素具有相同的键。",
+    "unordered_set 和 unordered_multiset 的元素顺序不应视为有序顺序。",
+    "unordered_set 与 unordered_map 的主要区别是是否保存与键关联的值。"
+  ],
+  "examples": [
+    "头文件和容器类型：\n```text\n#include <unordered_set>\nunordered_set<int> values;\nunordered_multiset<int> repeatedValues;\n```"
+  ],
+  "misconceptions": [
+    "unordered_set 不是 set 的有序版本；它不会按键排序。",
+    "unordered_multiset 与 unordered_set 的区别不只是名称，它允许重复元素。",
+    "unordered_map 不是 unordered_set 的简单别名，unordered_map 还保存键关联的值。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "unordered_set 与 set 的主要区别是什么？",
+      "a": "unordered_set 不对键进行排序，而是使用哈希函数；set 会按键排序。"
+    },
+    {
+      "q": "unordered_multiset 与 unordered_set 的主要区别是什么？",
+      "a": "unordered_multiset 允许多个元素具有相同的键，而 unordered_set 中的键应唯一。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "set、multiset 和 map 的基本区别",
+    "哈希容器的基本概念"
+  ],
+  "source_pages": [
+    599,
+    599
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1235_unordered_set_和_unordered_multiset",
+  "_chunk_pages": [
+    597,
+    600
+  ]
+}

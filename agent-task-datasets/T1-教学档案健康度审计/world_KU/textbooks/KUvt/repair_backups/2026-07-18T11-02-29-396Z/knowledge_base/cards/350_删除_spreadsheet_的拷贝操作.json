@@ -1,0 +1,45 @@
+{
+  "title": "删除 Spreadsheet 的拷贝操作",
+  "definition": "如果一个类不允许被拷贝，可以在类定义中使用 `= delete` 显式删除拷贝构造函数和拷贝赋值运算符。这样，尝试复制该类对象或将一个对象赋值给另一个对象时，编译器会报告错误。",
+  "key_points": [
+    "删除拷贝构造函数的形式为：`Spreadsheet(const Spreadsheet& src) = delete;`。",
+    "删除拷贝赋值运算符的形式为：`Spreadsheet& operator=(const Spreadsheet& rhs) = delete;`。",
+    "`= delete` 是对外明确表达“该操作禁止使用”的接口声明，而不是在函数体中运行时拒绝。",
+    "删除拷贝操作常用于不应复制或复制语义不明确的资源管理类。"
+  ],
+  "examples": [
+    "类接口可以写成：`class Spreadsheet { public: Spreadsheet(const Spreadsheet& src) = delete; Spreadsheet& operator=(const Spreadsheet& rhs) = delete; };`。",
+    "以下类型的操作会被禁止：`Spreadsheet a; Spreadsheet b{a};` 以及 `b = a;`。"
+  ],
+  "misconceptions": [
+    "删除拷贝构造函数不会自动删除移动构造函数或移动赋值运算符；这些特殊成员函数需要分别考虑。",
+    "`= delete` 与将函数声明为 private 不完全相同；现代 C++ 通常使用 `= delete` 直接表达禁止调用，并能在重载解析后报告明确错误。",
+    "删除拷贝操作并不等于对象不能创建；它只禁止相应的拷贝行为。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何显式禁止 Spreadsheet 的拷贝构造和拷贝赋值？",
+      "a": "分别声明 `Spreadsheet(const Spreadsheet& src) = delete;` 和 `Spreadsheet& operator=(const Spreadsheet& rhs) = delete;`。"
+    },
+    {
+      "q": "删除拷贝构造函数后，能否继续默认构造 Spreadsheet 对象？",
+      "a": "可以；删除拷贝构造函数只禁止通过另一个 Spreadsheet 对象进行拷贝构造。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "拷贝构造函数",
+    "拷贝赋值运算符"
+  ],
+  "source_pages": [
+    265,
+    268
+  ],
+  "needs_verification": true,
+  "verify_query": "\"Spreadsheet(const Spreadsheet&\" \"operator=\" \"= delete\" C++20高级编程",
+  "concept_id": "350_删除_spreadsheet_的拷贝操作",
+  "_chunk_pages": [
+    265,
+    268
+  ]
+}

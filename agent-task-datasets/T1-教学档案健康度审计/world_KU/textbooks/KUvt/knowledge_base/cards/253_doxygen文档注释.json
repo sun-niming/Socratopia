@@ -1,0 +1,43 @@
+{
+  "title": "Doxygen文档注释",
+  "definition": "Doxygen是一类能够识别C++语法和特定注释指令的文档生成工具。开发者可以在代码注释中使用如@param、@throws等指令，Doxygen据此生成定制的HTML类参考文档，展示类的说明、构造函数、成员函数、参数和异常等信息。",
+  "key_points": [
+    "特定注释指令可以补充参数、异常和成员函数说明。",
+    "生成的HTML类参考便于开发人员浏览类及类之间关系的高层描述。",
+    "团队也可以定制类似Doxygen的工具，以处理本团队采用的注释格式。"
+  ],
+  "examples": [
+    "示例注释：`* @param initialSeeds The starting number of seeds, must be > 5.`",
+    "示例注释：`* @throws invalid_argument if initialSeeds <= 5.`",
+    "示例声明：`Watermelon(size_t initialSeeds);`"
+  ],
+  "misconceptions": [
+    "使用Doxygen并不意味着所有代码注释都必须写得很长。",
+    "自动生成文档有助于开发，但不能替代有意义、准确的注释。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "Doxygen注释中的@param和@throws通常分别用于说明什么？",
+      "a": "@param用于说明参数，@throws用于说明函数或构造函数可能抛出的异常。"
+    },
+    {
+      "q": "Doxygen可以生成什么类型的文档？",
+      "a": "可以根据代码和特定注释指令生成定制的文档，例如HTML类参考文档。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++函数和类的基本概念"
+  ],
+  "source_pages": [
+    129,
+    130
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "253_doxygen文档注释",
+  "_chunk_pages": [
+    129,
+    132
+  ]
+}

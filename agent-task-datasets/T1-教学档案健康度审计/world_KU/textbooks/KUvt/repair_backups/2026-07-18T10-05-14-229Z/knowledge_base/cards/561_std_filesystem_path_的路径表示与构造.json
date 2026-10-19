@@ -1,0 +1,47 @@
+{
+  "title": "std::filesystem::path 的路径表示与构造",
+  "definition": "`std::filesystem::path` 用于表示文件系统路径。路径可以由原生字符串、普通字符串或使用正斜杠的路径字符串构造；原文示例展示了 Windows 路径和 Unix 风格路径的写法，并指出输出路径时会体现相应平台的路径表示。",
+  "key_points": [
+    "路径对象可用 `path p{\"...\"};` 构造。",
+    "Windows 路径可以写成原始字符串，例如 `R\"(D:\\Foo\\Bar)\"`，也可以写成包含正斜杠的字符串，例如 `\"D:/Foo/Bar\"`。",
+    "使用普通 C++ 字符串表示反斜杠路径时，需要对反斜杠进行转义，例如 `\"D:\\\\Foo\\\\Bar\"`。",
+    "`path` 的输出形式与平台有关；原文在 Windows 环境下展示了 Windows 路径输出。"
+  ],
+  "examples": [
+    "`path p1{R\"(D:\\Foo\\Bar)\"};`",
+    "`path p2{\"D:/Foo/Bar\"};`",
+    "`path p3{\"D:/Foo/Bar/MyFile.txt\"};`",
+    "Unix 风格示例：`path p5{\"/usr/lib/X11\"};`"
+  ],
+  "misconceptions": [
+    "原始字符串字面量中的反斜杠通常不需要像普通字符串那样成对转义。",
+    "路径中的目录分隔符写法与操作系统有关，不能假定所有平台都输出完全相同的字符串。",
+    "`std::filesystem::path` 表示路径，不等于已经打开文件或已经存在的文件。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何构造一个表示 `D:\\Foo\\Bar` 的 `path`？",
+      "a": "可以使用 `path p{R\"(D:\\Foo\\Bar)\"};`，也可以使用 `path p{\"D:/Foo/Bar\"};`。"
+    },
+    {
+      "q": "普通 C++ 字符串中如何表示 Windows 路径中的反斜杠？",
+      "a": "反斜杠需要转义，例如 `\"D:\\\\Foo\\\\Bar\"`。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++ 字符串字面量",
+    "文件路径基本概念"
+  ],
+  "source_pages": [
+    430,
+    431
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 std::filesystem::path raw string Windows path D Foo Bar output platform",
+  "concept_id": "561_std_filesystem_path_的路径表示与构造",
+  "_chunk_pages": [
+    429,
+    432
+  ]
+}

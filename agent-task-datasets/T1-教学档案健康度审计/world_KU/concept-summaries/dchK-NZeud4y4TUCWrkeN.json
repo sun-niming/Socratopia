@@ -1,0 +1,113 @@
+{
+  "conversationId": "dchK-NZeud4y4TUCWrkeN",
+  "generatedAt": 1785692724153,
+  "pagesRange": "p.105-111",
+  "sections": [
+    {
+      "type": "tldr",
+      "content": "本次课程从原始字符串字面量推进到 \u0001std::string\u0001 的操作、数值转换和 \u0001std::string_view\u0001，核心是理解字符串的存储、转换边界以及对象生命周期。"
+    },
+    {
+      "type": "narrative",
+      "content": "课程先从 C 风格字符串的容量与 \u0001'\\\\0'\u0001 结尾出发，进入原始字符串字面量和 \u0001std::string\u0001 的安全、便捷操作。随后学习了字符串查找与替换、用户定义字面量、CTAD 陷阱、\u0001stoi\u0001 和 \u0001charconv\u0001 的数值转换，最后以 \u0001std::string_view\u0001 的非拥有语义和生命周期风险收束。"
+    },
+    {
+      "type": "concepts",
+      "items": [
+        {
+          "name": "原始字符串字面量",
+          "body": "原始字符串以 `R\"(... )\"` 形式书写，内部内容基本按原样保存，不会把 `\\\\n` 等序列解释为换行，也通常不需要转义双引号。\n\n```cpp\\nR\"(hello\\\\nworld)\"\n```\n\n上例保存的是字符 `\\\\` 和 `n`，不是换行。\n\n如果内容本身包含 `)\"`，可以使用自定义分隔符：\n\n```cpp\\nR\"TAG(内容)\")TAG\"\n```\n\n开头和结尾的分隔符必须完全一致，且分隔符最长为 $16$ 个字符。"
+        },
+        {
+          "name": "C 风格字符串的容量边界",
+          "body": "C 风格字符串由实际字符和结尾的 `\\\\0` 组成。保存长度为 $n$ 的完整字符串，数组至少需要 $n+1$ 个 `char` 空间。\n\n- `strcpy()` 只负责复制，不检查目标缓冲区容量；\n- 目标空间不足会导致缓冲区溢出；\n- 拼接多个字符串时，容量应为所有实际字符总数加最后一个 `\\\\0`；\n- `strlen()` 不计入 `\\\\0`，字符数组上的 `sizeof` 通常会计入它；\n- `std::string` 通常能自动管理空间，因而比手写 `strcpy()` 更安全。"
+        },
+        {
+          "name": "std::string 的基本操作",
+          "body": "`std::string` 是标准库提供的字符串类，需要包含 `<string>`。它拥有自己的字符串内容和存储空间，支持自然的拼接、比较、复制与追加。\n\n```cpp\\nstd::string first{\"hello\"};\\nstd::string second{\" world\"};\\nstd::string result{first + second};\\nfirst += second;\n```\n\n`+` 产生拼接结果，`+=` 直接修改左侧对象。复制一个 `std::string` 后，修改副本不会改变原对象。\n\n常见操作包括：\n\n- `substr(pos, len)`：从 `pos` 开始截取 `len` 个字符，第二个参数是长度而不是结束下标；\n- `find(str)`：返回首次出现位置，找不到时返回 `std::string::npos`；\n- `replace(pos, len, str)`：替换指定范围；\n- `starts_with(str)`、`ends_with(str)`：返回布尔值，判断前缀或后缀；\n- `size()`：返回字符数，不计结尾的 `\\\\0`。"
+        },
+        {
+          "name": "字符串字面量、用户定义字面量与 CTAD",
+          "body": "普通字符串字面量并不自动成为 `std::string`。使用字符串用户定义字面量后缀 `s`，可以直接构造 `std::string`：\n\n```cpp\\nusing namespace std::string_literals;\\nauto text{\"C++20\"s};\n```\n\n此时 `text` 的类型是 `std::string`。\n\\nCTAD 也有一个容易混淆的地方：\n\n```cpp\\nstd::vector values{\"one\", \"two\"};\n```\n\n普通字符串字面量通常会使元素类型推导为 `const char*`，而不是 `std::string`。若希望得到字符串对象，应写成：\n\n```cpp\\nstd::vector values{\"one\"s, \"two\"s};\n```\n\n其中元素类型才是 `std::string`。"
+        },
+        {
+          "name": "高级与低级数值转换",
+          "body": "高级转换函数如 `std::stoi()` 直接把字符串转换为数值：\n\n```cpp\\nstd::stoi(\"123\");\\nstd::stoi(\"10\", nullptr, 2);\n```\n\n省略进制时默认按十进制解析；第三个参数可以指定进制，因此 `\"10\"` 按二进制解析的结果是 $2$。相关函数还包括 `stol`、`stoll`、`stoul`、`stof` 和 `stod`。\n\n低级转换函数位于 `<charconv>`：\n\n- `std::to_chars()`：把数值写入调用者提供的字符缓存区；\n- `std::from_chars()`：从调用者提供的字符区间解析数值。\n\n`to_chars()` 不分配缓存区，返回的 `ptr` 指向已写入内容末尾后一位；必须检查错误码 `ec`。缓存区不足时，`ec` 为 `std::errc::value_too_large`。\n\n`from_chars()` 的 `ptr` 指向第一个未转换字符。例如解析 `\"123abc\"` 后，数值为 $123$，`ptr` 指向 `a`。它不会自动跳过前导空白；没有任何字符可转换时，错误码为 `std::errc::invalid_argument`；超出目标类型范围时为 `std::errc::result_out_of_range`。"
+        },
+        {
+          "name": "std::string_view 的非拥有语义",
+          "body": "`std::string_view` 只是观察一段字符的只读窗口，不拥有也不管理字符存储空间，因此通常可以避免不必要的字符串构造或复制：\n\n```cpp\\nvoid print(std::string_view text);\n```\n\n它可以接受字符串字面量、`std::string` 和其他 `std::string_view`。其关键限制是：被观察的字符必须在视图使用期间保持有效。\n\n危险情况包括：\n\n```cpp\\nstd::string_view getText() {\n    std::string text{\"hello\"};\n    return text;\n}\n```\n\n函数返回后局部字符串已经销毁，视图变成悬空视图。临时 `std::string` 也不能被长期观察。\n\n`string_view` 的 `substr()` 仍然只创建视图，不复制字符。后缀 `sv` 可直接构造字符串视图：\n\n```cpp\\nusing namespace std::literals;\\nauto text{\"C++20\"sv};\n```\n\n此时 `text` 的类型是 `std::string_view`。"
+        }
+      ]
+    },
+    {
+      "type": "key-insight",
+      "content": "“视图不拥有数据，数据先没了，视图也就无处可看。”",
+      "attribution": "胡桃对学习内容的忠实概括"
+    },
+    {
+      "type": "key-terms",
+      "items": [
+        {
+          "term": "原始字符串字面量",
+          "definition": "以 `R\"(... )\"` 形式书写、基本按原样保存内容的字符串字面量。"
+        },
+        {
+          "term": "std::string::npos",
+          "definition": "`find()` 找不到目标时返回的特殊位置值。"
+        },
+        {
+          "term": "用户定义字面量 `s`",
+          "definition": "使字符串字面量直接构造为 `std::string` 的后缀。"
+        },
+        {
+          "term": "用户定义字面量 `sv`",
+          "definition": "使字符串字面量直接构造为 `std::string_view` 的后缀。"
+        },
+        {
+          "term": "std::to_chars()",
+          "definition": "将数值写入调用者提供的字符缓存区的低级转换函数。"
+        },
+        {
+          "term": "std::from_chars()",
+          "definition": "从调用者提供的字符区间解析数值的低级转换函数。"
+        },
+        {
+          "term": "悬空视图",
+          "definition": "`std::string_view` 仍保存着地址，但其观察的字符已经销毁或失效的状态。"
+        }
+      ]
+    },
+    {
+      "type": "open-question",
+      "content": "最后留下的检查题是：`auto text{\"C++20\"sv};` 中的 `text` 类型是 `std::string` 还是 `std::string_view`？下一次应从这里开始确认，并继续检查字符串视图字面量的生命周期与使用边界。"
+    },
+    {
+      "type": "review-questions",
+      "items": [
+        {
+          "question": "为什么 `strcpy()` 复制字符串时必须提前保证目标数组足够大？复制长度为 $n$ 的完整 C 风格字符串至少需要多少个 `char` 空间？",
+          "hint": "别忘了结尾的 `\\\\0`。",
+          "answer": "`strcpy()` 不检查容量，也不会自动扩容，因此目标数组必须由调用者预先提供足够空间。完整字符串需要 $n+1$ 个 `char` 空间。"
+        },
+        {
+          "question": "`std::string text{\"hello world\"};` 执行 `text.replace(6, 5, \"C++\")` 后，内容是什么？",
+          "answer": "结果是 `\"hello C++\"`。`replace()` 从下标 $6$ 开始替换长度为 $5$ 的子串 `\"world\"`。"
+        },
+        {
+          "question": "`std::stoi(\"10\", nullptr, 2)` 和 `std::stoi(\"10\")` 的结果分别是什么？",
+          "answer": "前者按二进制解析，结果为 $2$；后者默认按十进制解析，结果为 $10$。"
+        },
+        {
+          "question": "用 `std::from_chars()` 解析字符区间 `\"123abc\"` 时，成功后数值和 `ptr` 分别表示什么？",
+          "answer": "数值为 $123$，`ptr` 指向第一个未转换的字符 `a`。若要确认整个区间都被解析，还应检查 `ptr == last`。"
+        },
+        {
+          "question": "为什么不能从函数返回指向局部 `std::string` 的 `std::string_view`？",
+          "hint": "关注函数返回后局部变量的生命周期。",
+          "answer": "`std::string_view` 不拥有字符存储空间。函数返回后局部 `std::string` 已经销毁，视图仍保存的地址失效，因此会形成悬空视图。"
+        }
+      ]
+    }
+  ]
+}

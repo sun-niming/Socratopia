@@ -1,0 +1,38 @@
+{
+  "title": "textContent",
+  "definition": "element.textContent 用于获取或设置元素内部的纯文本内容。它会忽略或移除所有 HTML 标签，因此更适合处理文本数据。",
+  "key_points": [
+    "可用于读取或设置元素内部的纯文本",
+    "所有 HTML 标签都会被忽略或移除",
+    "相比 innerHTML，通常更安全，适合直接处理用户输入的文本"
+  ],
+  "examples": [
+    "let text = element.textContent;",
+    "element.textContent = 'New plain text content';"
+  ],
+  "misconceptions": [
+    "textContent 会保留并渲染 HTML 标签；实际上它只保留纯文本"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么通常更推荐用 textContent 处理用户输入？",
+      "a": "因为它只处理纯文本，不会把 HTML 标签当成可执行的标记解析，安全性更高。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "DOM元素",
+    "HTML标签"
+  ],
+  "source_pages": [
+    353,
+    356
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "473_textcontent",
+  "_chunk_pages": [
+    353,
+    356
+  ]
+}

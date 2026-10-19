@@ -1,0 +1,257 @@
+{
+  "chunkId": "chunk-002",
+  "messageRange": [
+    8,
+    17
+  ],
+  "topics": [
+    {
+      "name": "JSP 与容器实现",
+      "facts": [
+        "JSP 规范是由 servlet 容器自己实现的，内嵌 Tomcat 默认就带有 JSP 支持。",
+        "使用 JSP 时构建里不需要再补依赖，因为 JSP 是容器自带的支持。",
+        "servlet 容器习惯在 /WEB-INF 目录下找 JSP。",
+        "如果应用被打成可执行 JAR 文件，就无法满足“去 /WEB-INF 找”的要求。",
+        "想用 JSP，就得把应用打成 WAR，部署到传统的 servlet 容器里。",
+        "可执行 JAR 是 Spring Boot 的主流玩法，走这条路就得放弃 JSP，选择 Thymeleaf、FreeMarker、Mustache 等模板。"
+      ],
+      "examples": [
+        "一句话总结：JSP 免依赖，但挑部署形式；别的模板要依赖，但不挑打包方式。"
+      ],
+      "sourceMessageIndexes": [
+        8,
+        9
+      ]
+    },
+    {
+      "name": "缓存模板（2.5.1）",
+      "facts": [
+        "模板默认解析一次就缓存起来，后面都吃缓存。",
+        "生产环境缓存模板是好事，省得每个请求都重新解析一遍。",
+        "开发时缓存会导致改完模板、刷新浏览器看到的还是旧版本，非得重启应用才生效。",
+        "解法是关掉对应模板引擎的缓存。",
+        "DevTools 在开发时自动关掉所有模板缓存，部署时又自动失效、把缓存重新打开。",
+        "项目里挂了 DevTools，就不用再手写 spring.thymeleaf.cache = false，那是没挂 DevTools 时的备用手段，两条路二选一。",
+        "DevTools 只在开发时管事，本质上是开发期工具，生产包里不该留它。"
+      ],
+      "examples": [
+        "FreeMarker 缓存使能属性：spring.freemarker.cache",
+        "Groovy Templates 缓存使能属性：spring.groovy.template.cache",
+        "Mustache 缓存使能属性：spring.mustache.cache",
+        "Thymeleaf 缓存使能属性：spring.thymeleaf.cache",
+        "关闭 Thymeleaf 缓存：spring.thymeleaf.cache = false",
+        "上线前一定要把这一行删掉，或者改回 true。",
+        "善后方案：用 profile 文件分散配置（第 5 章要讲），或用第 1 章勾选的 DevTools。"
+      ],
+      "sourceMessageIndexes": [
+        9,
+        10,
+        11
+      ]
+    },
+    {
+      "name": "第 3 章动机与 JDBC/JPA 两条路",
+      "facts": [
+        "应用光有界面不够，数据才是它和静态网页的分界线。",
+        "Taco Cloud 要留住食材、玉米卷、订单，没有数据库在第 2 章那个界面上就再也推不动了。",
+        "处理关系数据，Java 开发者有两条主流路：JDBC 和 JPA，Spring 对这两条都做了抽象。",
+        "第 3 章先讲 JDBC。"
+      ],
+      "examples": [],
+      "sourceMessageIndexes": [
+        11
+      ]
+    },
+    {
+      "name": "不用 JdbcTemplate 的朴素 JDBC 查询（清单 3.1）",
+      "facts": [
+        "真正的查询只占几行，却被一堆开连接、建语句、关资源的代码埋在里头。",
+        "创建连接、执行查询随时可能出问题，需要接住 SQLException，而它是受检异常，非在 catch 里处理不可。",
+        "常见错误（连不上库、查询打错字）在 catch 块里根本处理不了，最后还是得往上抛。"
+      ],
+      "examples": [
+        "清单 3.1 包含 Connection、PreparedStatement、ResultSet 的声明，dataSource.getConnection()、prepareStatement、setString、executeQuery、逐行拼成 Ingredient 对象、catch SQLException、finally 中逐个 close 并各自再套一层 try/catch。"
+      ],
+      "sourceMessageIndexes": [
+        11
+      ]
+    },
+    {
+      "name": "使用 JdbcTemplate（清单 3.2）",
+      "facts": [
+        "不用亲手敲开连接、建语句、关资源的代码。",
+        "那些活儿不是没发生，是挪了位置——从方法体搬进了 JdbcTemplate 内部。",
+        "这既是省了打字，也是位置的转移。",
+        "JdbcTemplate 把受检异常替你转成它自己的一套运行时异常，所以不用在每个方法里接 SQLException。"
+      ],
+      "examples": [
+        "清单 3.2：jdbcTemplate.query(\"select id, name, type from Ingredient where id=?\", this::mapRowToIngredient ...)",
+        "清单 3.2 一开头有 private JdbcTemplate jdbcTemplate;"
+      ],
+      "sourceMessageIndexes": [
+        11,
+        12,
+        13,
+        17
+      ]
+    },
+    {
+      "name": "为持久化改造领域实体（3.1.1）",
+      "facts": [
+        "要把对象存进数据库，第一件事是让它可被唯一认出来。",
+        "持久化时通常最好有一个唯一标识对象的字段。",
+        "Ingredient 早就有 id，Taco 和 TacoOrder 还没有，得补上。",
+        "除了声明字段，什么都不用做，Lombok 的 @Data 会在运行时自动生成 getter/setter。",
+        "不用 Lombok 的话，这些方法就得自己写。"
+      ],
+      "examples": [
+        "清单 3.3 给 Taco 加了 private Long id; 和 private Date createdAt;。",
+        "TacoOrder 加 id 和 placedAt（下单时间，与 createdAt 同类，只是叫法不同）。",
+        "TacoOrder 还带了 implements Serializable 和 serialVersionUID，为序列化留口子。"
+      ],
+      "sourceMessageIndexes": [
+        13
+      ]
+    },
+    {
+      "name": "使用 JdbcTemplate 的备料（3.1.2）",
+      "facts": [
+        "三步：加依赖 spring-boot-starter-jdbc。",
+        "备一个数据库：开发阶段嵌入式数据库就够，书上选了 H2，加 com.h2database:h2 依赖。",
+        "配数据源：H2 默认会随机生成数据库名，让连接 URL 变得难确定。",
+        "固定名字后数据库名是 tacocloud，URL 是 jdbc:h2:mem:tacocloud，在 H2 控制台里照着填就能连上。",
+        "愿意的话也能把 application.properties 改名成 application.yml，用 YAML 写，效果一样，本书后面统一用 YAML。"
+      ],
+      "examples": [
+        "spring.datasource.generate-unique-name=false",
+        "spring.datasource.name=tacocloud"
+      ],
+      "sourceMessageIndexes": [
+        13,
+        14,
+        15
+      ]
+    },
+    {
+      "name": "定义 JDBC 存储库与 Optional 返回值",
+      "facts": [
+        "教材先把“要有哪些本事”想清楚，再动手写代码。",
+        "Ingredient 的存储库被要求干三件事：查询所有 Ingredient、通过 id 查询单个 Ingredient、保存一个 Ingredient 对象。",
+        "做法是先把三件事写成一份接口 IngredientRepository，每个操作一条方法声明，接口正文先空着。",
+        "具体怎么连数据库、怎么拼 SQL，留到实现类里去填。",
+        "Optional 的作用是把“有可能找不到”直接写进方法的签名里。",
+        "返回类型是 Optional<Ingredient>，调用方想拿出里面的东西就必须显式面对“万一它是空的”——用 orElse 兜底、用 orElseThrow 抛错、用 isPresent 先问一句。",
+        "直接返回 Ingredient 的签名看不出任何暗示，跟“我保证一定能找到”长得一模一样，调用方可能直到运行时炸出 NullPointerException。",
+        "Optional 不只是提醒你别忘，更是把运行时的隐患提前变成签名上看得见、必须交代的东西。"
+      ],
+      "examples": [
+        "清单 3.1 的签名：public Optional<Ingredient> findById(String id)。"
+      ],
+      "sourceMessageIndexes": [
+        15,
+        16,
+        17
+      ]
+    }
+  ],
+  "learnerEvidence": [
+    {
+      "kind": "correct",
+      "content": "嵌入式的 Tomcat 就提供了 JSP",
+      "sourceMessageIndexes": [
+        8
+      ]
+    },
+    {
+      "kind": "correct",
+      "content": "（回答 DevTools 是否已解决 2.5.1 问题）算",
+      "sourceMessageIndexes": [
+        10
+      ]
+    },
+    {
+      "kind": "correct",
+      "content": "（回答“不用写”这半句）不用写",
+      "sourceMessageIndexes": [
+        12
+      ]
+    },
+    {
+      "kind": "correct",
+      "content": "（回答固定数据库名卡住哪一步）登录 h2 控制台",
+      "sourceMessageIndexes": [
+        14
+      ]
+    },
+    {
+      "kind": "correct",
+      "content": "防止调用方忘记处理空可能结果",
+      "sourceMessageIndexes": [
+        16
+      ]
+    }
+  ],
+  "keyInsights": [
+    {
+      "content": "Optional 的作用是防止调用方忘记处理空可能结果。",
+      "sourceMessageIndexes": [
+        16
+      ]
+    }
+  ],
+  "openQuestions": [
+    {
+      "content": "实现类要真把 SQL 跑起来，总得先拿到一个 JdbcTemplate 对象，这个字段是怎么被填上值的？",
+      "sourceMessageIndexes": [
+        17
+      ]
+    }
+  ],
+  "reviewCandidates": [
+    {
+      "question": "为什么想用 JSP 就得把应用打成 WAR？",
+      "answer": "servlet 容器习惯在 /WEB-INF 目录下找 JSP，而可执行 JAR 无法满足这种查找方式，所以要用 JSP 就得打成 WAR 部署到传统 servlet 容器。",
+      "sourceMessageIndexes": [
+        9
+      ]
+    },
+    {
+      "question": "开发时模板缓存带来什么问题？怎么解决？",
+      "answer": "改完模板、刷新浏览器看到的还是旧版本，非得重启应用才生效；解法是关掉对应模板引擎的缓存，比如 spring.thymeleaf.cache = false，或用 DevTools 在开发时自动关缓存。",
+      "sourceMessageIndexes": [
+        9
+      ]
+    },
+    {
+      "question": "项目里挂了 DevTools 还需要手写 spring.thymeleaf.cache = false 吗？",
+      "answer": "不需要。DevTools 在开发时自动关掉所有模板缓存，部署时又自动失效、把缓存重新打开，两条路二选一。",
+      "sourceMessageIndexes": [
+        11
+      ]
+    },
+    {
+      "question": "为什么书上要给 H2 数据库起一个固定名字而不是随机生成？",
+      "answer": "随机生成的名字让连接 URL 无法事先确定，卡住登录 H2 控制台这一步；固定成 tacocloud 后 URL 为 jdbc:h2:mem:tacocloud，控制台才连得上。",
+      "sourceMessageIndexes": [
+        13,
+        15
+      ]
+    },
+    {
+      "question": "findById 为什么返回 Optional<Ingredient> 而不是直接返回 Ingredient？",
+      "answer": "Optional 把“有可能找不到”写进方法签名，强制调用方显式处理空的情况（orElse、orElseThrow、isPresent），避免像直接返回 Ingredient 那样在运行时才炸出 NullPointerException。",
+      "sourceMessageIndexes": [
+        15,
+        17
+      ]
+    },
+    {
+      "question": "JdbcTemplate 相比朴素 JDBC 省掉了什么？",
+      "answer": "省掉了亲手开连接、建语句、关资源的代码，这些动作搬进了 JdbcTemplate 内部；它还把受检异常转成自己的运行时异常，方法里不用再接 SQLException。",
+      "sourceMessageIndexes": [
+        11,
+        13
+      ]
+    }
+  ]
+}

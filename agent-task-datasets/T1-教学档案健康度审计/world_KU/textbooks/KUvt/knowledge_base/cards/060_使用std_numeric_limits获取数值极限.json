@@ -1,0 +1,51 @@
+{
+  "title": "使用std::numeric_limits获取数值极限",
+  "definition": "C++提供了标准方式获取某种数值类型在当前平台上的取值极限。推荐使用定义在 `<limits>` 中的类模板 `std::numeric_limits<T>`，其中 `T` 是要查询的类型。常用成员函数包括 `max()`、`min()` 和 `lowest()`。",
+  "key_points": [
+    "`std::numeric_limits<T>::max()` 返回类型 `T` 可表示的最大值。",
+    "`std::numeric_limits<T>::min()` 对整数类型表示最小值；对浮点类型表示最小的正数。",
+    "`std::numeric_limits<T>::lowest()` 返回类型 `T` 可表示的最低值，即最小的负值；对于整数类型通常与 `min()` 相同。",
+    "数值极限取决于当前平台和类型实现。"
+  ],
+  "examples": [
+    "`std::numeric_limits<int>::max()`",
+    "`std::numeric_limits<int>::min()`",
+    "`std::numeric_limits<int>::lowest()`",
+    "`std::numeric_limits<double>::max()`",
+    "`std::numeric_limits<double>::min()`",
+    "`std::numeric_limits<double>::lowest()`"
+  ],
+  "misconceptions": [
+    "对浮点类型而言，`min()` 不是最小负数，而是最小正数。",
+    "`min()` 和 `lowest()` 对所有类型都含义相同；它们对浮点类型的含义不同。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何获取 `int` 类型的最大值？",
+      "a": "使用 `std::numeric_limits<int>::max()`。"
+    },
+    {
+      "q": "浮点类型的 `min()` 与 `lowest()` 有什么区别？",
+      "a": "`min()` 返回该类型能表示的最小正数，`lowest()` 返回该类型能表示的最小负数。"
+    },
+    {
+      "q": "整数类型的 `min()` 和 `lowest()` 有什么关系？",
+      "a": "对于整数类型，最小值与最低值相同。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++常见基本变量类型"
+  ],
+  "source_pages": [
+    42,
+    42
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "060_使用std_numeric_limits获取数值极限",
+  "_chunk_pages": [
+    41,
+    44
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "title": "handle_client 自查点",
+  "definition": "检查 handle_client 时，要确认成功、404、405、403 都会写日志；recv 返回 0 时是否直接返回；请求缓冲区是否预留字符串结尾空间并正确补上结尾终止符；错误分支不要遗漏日志；解析失败后不要使用未初始化的 req。",
+  "key_points": [
+    "成功、404、405、403 都应进入写日志流程。",
+    "recv 返回 0 时应直接返回，不要继续处理。",
+    "请求缓冲区要能容纳结尾终止符，避免越界。",
+    "parse 失败后不能继续使用未初始化的 req。"
+  ],
+  "examples": [
+    "例如，先判断 recv 的返回值，再补上请求缓冲区结尾终止符，然后再做解析。"
+  ],
+  "misconceptions": [
+    "错误分支发送响应后就可以不写日志",
+    "parse 失败后仍可直接读取 req 中的路径"
+  ],
+  "qa_pairs": [
+    {
+      "q": "检查 handle_client 时，最容易遗漏的两件事是什么？",
+      "a": "一是错误分支也要写日志，二是 parse 失败后不能使用未初始化的 req。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "handle_client 总控流程"
+  ],
+  "source_pages": [
+    89,
+    92
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "137_handle_client_自查点",
+  "_chunk_pages": [
+    89,
+    92
+  ]
+}

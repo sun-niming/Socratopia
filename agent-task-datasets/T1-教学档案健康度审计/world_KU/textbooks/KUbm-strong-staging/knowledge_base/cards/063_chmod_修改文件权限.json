@@ -1,0 +1,44 @@
+{
+  "title": "chmod 修改文件权限",
+  "definition": "在 Linux 中，可使用“chmod”改变文件权限。教材给出两种写法：一种是数字方式“chmod nnn [-R] 文件列表”，另一种是符号方式“chmod [augo][+-=][rwx] 文件列表”。其中“[-R]”表示该选项可出现。",
+  "key_points": [
+    "改变文件权限使用“chmod”",
+    "数字方式语法：chmod nnn [-R] 文件列表",
+    "符号方式语法：chmod [augo][+-=][rwx] 文件列表"
+  ],
+  "examples": [
+    "chmod nnn 文件列表",
+    "chmod nnn -R 文件列表",
+    "chmod [augo][+-=][rwx] 文件列表"
+  ],
+  "misconceptions": [
+    "认为 chmod 只有一种写法；教材明确给出了数字方式和符号方式两种写法",
+    "把 chmod 与 chown 混淆；chmod 用于改权限，不是改所有者"
+  ],
+  "qa_pairs": [
+    {
+      "q": "教材中，chmod 有哪两种基本写法？",
+      "a": "一种是“chmod nnn [-R] 文件列表”，另一种是“chmod [augo][+-=][rwx] 文件列表”。"
+    },
+    {
+      "q": "哪个命令用于改变文件权限？",
+      "a": "chmod。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "Linux 基本命令",
+    "使用 ls -l 查询文件权限"
+  ],
+  "source_pages": [
+    33,
+    36
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "063_chmod_修改文件权限",
+  "_chunk_pages": [
+    33,
+    36
+  ]
+}

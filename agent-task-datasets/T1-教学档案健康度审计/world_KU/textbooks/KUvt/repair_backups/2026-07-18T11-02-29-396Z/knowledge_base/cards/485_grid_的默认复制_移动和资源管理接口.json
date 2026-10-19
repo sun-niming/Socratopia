@@ -1,0 +1,51 @@
+{
+  "title": "Grid 的默认复制、移动和资源管理接口",
+  "definition": "Grid 显式使用 = default 默认化了复制构造函数、复制赋值运算符、移动构造函数和移动赋值运算符，并将析构函数声明为 virtual ~Grid() = default。因此，Grid 对象可以使用编译器生成的默认复制和移动操作。",
+  "key_points": [
+    "复制构造函数形式为：$$\\texttt{Grid(const Grid\\& src) = default;}$$",
+    "复制赋值运算符形式为：$$\\texttt{Grid\\& operator=(const Grid\\& rhs) = default;}$$",
+    "移动构造函数形式为：$$\\texttt{Grid(Grid\\&\\& src) = default;}$$",
+    "移动赋值运算符形式为：$$\\texttt{Grid\\& operator=(Grid\\&\\& rhs) = default;}$$",
+    "原文示例展示了先复制构造 Grid<int>，再使用复制赋值运算符进行赋值。"
+  ],
+  "examples": [
+    "复制构造：text code `Grid<int> grid2 { myIntGrid };`",
+    "复制赋值：text code `anotherIntGrid = grid2;`",
+    "这些操作的具体可用性还取决于模板参数 T 及其成员是否支持相应操作。"
+  ],
+  "misconceptions": [
+    "= default 并不表示复制和移动操作被禁用，而是要求编译器生成默认实现。",
+    "复制构造与复制赋值是两种不同的操作：前者创建新对象，后者给已有对象赋值。",
+    "Grid 的移动操作不等于所有 T 都无条件支持移动；最终仍受成员类型可移动性的影响。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "Grid<int> grid2 { myIntGrid }; 调用的是哪种特殊成员函数？",
+      "a": "调用 Grid<int> 的复制构造函数。"
+    },
+    {
+      "q": "anotherIntGrid = grid2; 调用的是哪种特殊成员函数？",
+      "a": "调用 Grid<int> 的复制赋值运算符。"
+    },
+    {
+      "q": "Grid 中 = default 的作用是什么？",
+      "a": "请求编译器为相应特殊成员函数生成默认实现。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++ 拷贝构造与拷贝赋值",
+    "C++ 移动语义"
+  ],
+  "source_pages": [
+    377,
+    378
+  ],
+  "needs_verification": true,
+  "verify_query": "\"Grid(const Grid& src) = default\" \"Grid(Grid&& src) = default\" C++",
+  "concept_id": "485_grid_的默认复制_移动和资源管理接口",
+  "_chunk_pages": [
+    377,
+    380
+  ]
+}

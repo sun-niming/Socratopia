@@ -1,0 +1,52 @@
+{
+  "title": "Employee的晋升、降职、雇用与解雇操作",
+  "definition": "Employee类通过成员函数改变员工的薪资或在职状态。promote(int raiseAmount)将当前薪资增加raiseAmount；demote(int demeritAmount)将当前薪资减少demeritAmount；hire()把在职标志设置为true；fire()把在职标志设置为false。promote和demote的参数具有默认值DefaultRaiseAndDemeritAmount，因此可以不传参数调用。",
+  "key_points": [
+    "promote的逻辑等价于setSalary(getSalary() + raiseAmount)。",
+    "demote的逻辑等价于setSalary(getSalary() - demeritAmount)。",
+    "hire()执行m_hired = true。",
+    "fire()执行m_hired = false。",
+    "不带参数调用promote()或demote()时使用默认的加薪或扣薪数额。"
+  ],
+  "examples": [
+    "调用默认额度晋升：emp.promote();",
+    "调用指定额度晋升：emp.promote(50);",
+    "若当前薪资为$1000且raiseAmount为$50，则执行后薪资为$1050：$$1000+50=1050$$",
+    "雇用和解雇：emp.hire(); emp.fire();"
+  ],
+  "misconceptions": [
+    "promote()不是只改变职位名称；源码中它实际修改的是薪资。",
+    "hire()和fire()不负责创建或删除Employee对象，只修改员工的在职状态。",
+    "promote(50)中的50是加到当前薪资上的数额，不是新的总薪资。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "promote(int raiseAmount)如何计算新的薪资？",
+      "a": "新的薪资等于当前薪资加上raiseAmount，即setSalary(getSalary() + raiseAmount)。"
+    },
+    {
+      "q": "调用emp.promote()时没有传入参数，会发生什么？",
+      "a": "使用DefaultRaiseAndDemeritAmount作为默认加薪数额。"
+    },
+    {
+      "q": "hire()和fire()分别把在职状态设置为什么？",
+      "a": "hire()将m_hired设置为true，fire()将m_hired设置为false。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "Employee类的接口与数据成员",
+    "C++成员函数和默认参数"
+  ],
+  "source_pages": [
+    93,
+    94
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20高级编程第5版 Employee::promote demote DefaultRaiseAndDemeritAmount hire fire 源码",
+  "concept_id": "131_employee的晋升_降职_雇用与解雇操作",
+  "_chunk_pages": [
+    93,
+    96
+  ]
+}

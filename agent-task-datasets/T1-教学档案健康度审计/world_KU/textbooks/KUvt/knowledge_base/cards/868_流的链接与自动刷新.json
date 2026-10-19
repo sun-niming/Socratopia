@@ -1,0 +1,52 @@
+{
+  "title": "流的链接与自动刷新",
+  "definition": "可以使用输入流的 tie 方法把一个输出流链接到输入流：对输入流调用 tie，并传入输出流的地址，例如 inFile.tie(&outFile)。链接后，每次从输入流读取数据前，都会先刷新被链接的输出流；传入 nullptr 可以解除链接。ostream 基类也提供 tie，因此输出流也可以链接到另一个输出流。",
+  "key_points": [
+    "输入流链接输出流的形式是 inFile.tie(&outFile)，解除链接的形式是 inFile.tie(nullptr)。",
+    "从输入流读取数据时，会先刷新与其链接的输出流，以保证输出内容及时写出。",
+    "输出流之间也可以建立链接；写入一个输出流时，会刷新与之链接的另一个输出流的缓存数据。",
+    "标准流中，cin 与 cout 之间存在链接；cerr 与 cout 之间也存在链接，而 clog 未链接到 cout。宽字符流具有类似关系。"
+  ],
+  "examples": [
+    "ifstream inFile{\"input.txt\"};",
+    "ofstream outFile{\"output.txt\"};",
+    "inFile.tie(&outFile);",
+    "outFile << \"Hello there!\";",
+    "string nextToken;",
+    "inFile >> nextToken; // 读取前会刷新 outFile"
+  ],
+  "misconceptions": [
+    "tie 不是把两个流合并成一个流，而是建立刷新关联。",
+    "写入输出流后不一定立即写入文件；只有发生刷新、关闭流或其他适当操作时，缓存内容才会写出。",
+    "解除链接时应传入 nullptr，而不是再次传入原输出流。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何把 outFile 链接到 inFile，使从 inFile 读取前自动刷新 outFile？",
+      "a": "调用 inFile.tie(&outFile)。"
+    },
+    {
+      "q": "如何解除输入流与输出流之间的链接？",
+      "a": "对输入流调用 tie(nullptr)，例如 inFile.tie(nullptr)。"
+    },
+    {
+      "q": "cin 和 cout 的链接有什么作用？",
+      "a": "每次从 cin 读取数据时，会自动刷新 cout，保证提示信息等输出先显示。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++输入流与输出流的基本用法"
+  ],
+  "source_pages": [
+    429,
+    429
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "868_流的链接与自动刷新",
+  "_chunk_pages": [
+    429,
+    432
+  ]
+}

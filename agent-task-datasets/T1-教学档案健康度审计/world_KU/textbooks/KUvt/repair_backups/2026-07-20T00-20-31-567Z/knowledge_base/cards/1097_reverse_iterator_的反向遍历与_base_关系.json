@@ -1,0 +1,49 @@
+{
+  "title": "reverse_iterator 的反向遍历与 base() 关系",
+  "definition": "std::reverse_iterator 是一种以相反方向遍历双向迭代器或随机访问迭代器的适配器。可逆容器通常提供 rbegin() 和 rend()：rbegin() 返回指向最后一个元素的反向迭代器，rend() 返回指向第一个元素之前位置的反向迭代器。对 reverse_iterator 使用递增操作时，底层容器迭代器执行递减操作。",
+  "key_points": [
+    "可逆容器提供 rbegin() 和 rend() 以表示反向范围。",
+    "rbegin() 指向容器的最后一个元素；rend() 表示反向范围的末端。",
+    "reverse_iterator 适合传给没有反向等价版本的标准算法或自定义函数。",
+    "reverse_iterator 的 base() 返回底层迭代器，但该底层迭代器指向反向迭代器所指元素的下一个正向位置；若要得到同一个元素，通常需要对 base() 的结果减 1。"
+  ],
+  "examples": [
+    "vector<int> myVector{11, 22, 33, 22, 11};\nauto it2{myFind(rbegin(myVector), rend(myVector), 22)};\nif (it2 != rend(myVector)) {\n    auto sameElement{it2.base() - 1};\n}",
+    "对序列 {11, 22, 33, 22, 11} 反向查找 22 时，找到的是从后往前遇到的第一个 22；其正向位置为 3。"
+  ],
+  "misconceptions": [
+    "reverse_iterator 的 base() 并不直接指向 reverse_iterator 当前指向的同一个元素，而是指向其正向后继位置。",
+    "rbegin() 不是指向第一个正向元素；它指向最后一个元素。",
+    "使用反向迭代器调用算法后，算法返回的通常也是 reverse_iterator，而不是普通正向迭代器。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "reverse_iterator 的 rbegin() 和 rend() 分别表示什么？",
+      "a": "rbegin() 指向容器最后一个元素；rend() 表示容器第一个元素之前的反向结束位置。"
+    },
+    {
+      "q": "如何从 reverse_iterator 得到它所指向的同一个元素对应的正向迭代器？",
+      "a": "先调用 base()，再对返回的底层迭代器减 1，即 it.base() - 1。"
+    },
+    {
+      "q": "为什么 reverse_iterator 的递增操作对应底层迭代器的递减操作？",
+      "a": "因为 reverse_iterator 按与底层容器相反的方向遍历序列。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "双向迭代器",
+    "迭代器范围和算法返回值"
+  ],
+  "source_pages": [
+    534,
+    535
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1097_reverse_iterator_的反向遍历与_base_关系",
+  "_chunk_pages": [
+    533,
+    536
+  ]
+}

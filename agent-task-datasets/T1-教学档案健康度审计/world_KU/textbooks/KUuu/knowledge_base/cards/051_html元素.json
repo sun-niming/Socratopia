@@ -1,0 +1,37 @@
+{
+  "title": "HTML元素",
+  "definition": "HTML元素是把HTML标记和标记之间的内容组合起来形成的基本单位，元素通常呈现嵌套结构。",
+  "key_points": [
+    "元素由标签和标签之间的内容共同组成",
+    "HTML元素之间可以形成嵌套层次结构"
+  ],
+  "examples": [
+    "<p>这是段落</p>",
+    "<div><span>文本</span></div>"
+  ],
+  "misconceptions": [
+    "元素不只是标签本身，标签之间的内容也属于元素的一部分",
+    "HTML元素不是只能平铺排列，很多元素可以嵌套"
+  ],
+  "qa_pairs": [
+    {
+      "q": "什么叫HTML元素？",
+      "a": "HTML元素是由HTML标记和标记之间的内容组合而成的基本单位，通常具有嵌套结构。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "HTML标记"
+  ],
+  "source_pages": [
+    37,
+    40
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "051_html元素",
+  "_chunk_pages": [
+    37,
+    40
+  ]
+}

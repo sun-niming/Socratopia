@@ -1,0 +1,44 @@
+{
+  "title": "queue的先进先出语义与底层容器要求",
+  "definition": "std::queue是标准库中的容器适配器，提供“先入先出”（FIFO）语义：先加入队列的元素先被取出。queue的元素类型由模板参数指定，底层容器由另一个模板参数指定。由于queue需要底层顺序容器同时支持push_back()和pop_front()，标准库内建可选底层容器为deque和list，默认通常使用deque。",
+  "key_points": [
+    "queue从尾部添加元素，从头部移除元素。",
+    "底层容器必须支持push_back()和pop_front()。",
+    "deque和list是queue可使用的内建底层容器，默认底层容器通常是deque。",
+    "queue适合按到达顺序处理任务或数据。"
+  ],
+  "examples": [
+    "使用默认底层容器的声明：\nstd::queue<int> q;\nq.push(1);\nq.push(2);\nq.pop(); // 移除1，体现先进先出"
+  ],
+  "misconceptions": [
+    "queue不是后进先出结构；后进先出是stack的语义。",
+    "queue的pop()移除的是队头元素，不是队尾元素。",
+    "并非所有顺序容器都能作为queue的底层容器；必须支持push_back()和pop_front()。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "std::queue遵循什么处理顺序？",
+      "a": "遵循先入先出（FIFO），最早加入的元素最先被移除。"
+    },
+    {
+      "q": "queue为什么只能使用deque或list作为标准内建底层容器？",
+      "a": "因为queue要求底层容器同时支持push_back()和pop_front()，原文列出的内建选项是deque和list。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "容器适配器",
+    "队列的先进先出概念"
+  ],
+  "source_pages": [
+    575,
+    575
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1187_queue的先进先出语义与底层容器要求",
+  "_chunk_pages": [
+    573,
+    576
+  ]
+}

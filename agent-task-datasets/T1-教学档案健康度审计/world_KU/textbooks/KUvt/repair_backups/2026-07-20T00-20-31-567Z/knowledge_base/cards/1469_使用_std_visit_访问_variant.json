@@ -1,0 +1,42 @@
+{
+  "title": "使用 std::visit 访问 variant",
+  "definition": "std::visit 是用于处理 variant 当前值的辅助函数。传给 std::visit 的 visitor 必须是可调用对象，并且能够处理 variant 的每一种可能类型。调用 std::visit(visitor, v) 时，会根据 v 当前保存的类型，调用 visitor 中与该类型匹配的重载。",
+  "key_points": [
+    "visitor 可以通过多个重载的函数调用运算符 operator() 处理不同候选类型。",
+    "visitor 应为 variant 的每一种可能类型提供可调用处理方式。",
+    "std::visit 会根据当前活动类型自动选择相应重载。"
+  ],
+  "examples": [
+    "class MyVisitor { public: void operator()(int i) { cout << \"int \" << i << endl; } void operator()(const string& s) { cout << \"string \" << s << endl; } void operator()(float f) { cout << \"float \" << f << endl; } };",
+    "对 variant<int, string, float> v 调用 visit(MyVisitor{}, v); 时，如果 v 当前保存字符串，就调用 operator()(const string&)。"
+  ],
+  "misconceptions": [
+    "std::visit 不是依次访问 variant 的所有候选类型，而是只处理当前实际保存的那个值。",
+    "visitor 不能只随意处理一种类型；按照原文要求，它应能接收 variant 可能存储的任何类型。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "std::visit(MyVisitor{}, v) 如何决定调用哪个函数？",
+      "a": "它检查 v 当前保存的实际类型，并调用 MyVisitor 中与该类型匹配的 operator() 重载。"
+    },
+    {
+      "q": "如果 v 当前保存 string，示例中的 visitor 会调用哪个重载？",
+      "a": "调用处理 string 的 operator()(const string& s) 重载。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "std::variant 的含义与类型集合"
+  ],
+  "source_pages": [
+    707,
+    708
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1469_使用_std_visit_访问_variant",
+  "_chunk_pages": [
+    705,
+    708
+  ]
+}

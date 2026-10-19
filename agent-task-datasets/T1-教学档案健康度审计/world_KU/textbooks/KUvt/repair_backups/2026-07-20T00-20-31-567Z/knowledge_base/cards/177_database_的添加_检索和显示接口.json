@@ -1,0 +1,54 @@
+{
+  "title": "Database 的添加、检索和显示接口",
+  "definition": "Database 提供 addEmployee 方法添加雇员，并提供两个 getEmployee 重载：一个按雇员编号检索，另一个按姓名检索。它还提供 displayAll、displayCurrent 和 displayFormer，分别用于输出全部雇员、当前在职雇员和已离职雇员。addEmployee 会创建 Employee、分配编号、将其设为在职、保存到 vector，并返回最新添加雇员的引用。",
+  "key_points": [
+    "按编号检索的接口形式为 `getEmployee(int employeeNumber)`。",
+    "按姓名检索的接口形式为 `getEmployee(const std::string firstName, const std::string lastName)`。",
+    "addEmployee 接收名和姓，不要求调用者提供雇员编号。",
+    "addEmployee 使用 `m_employees.push_back(theEmployee)` 保存对象，并通过 `m_employees.back()` 返回最后一个元素的引用。",
+    "getEmployee 的实现使用基于范围的 for 循环遍历 m_employees；找不到匹配项时会引发异常。",
+    "displayAll、displayCurrent 和 displayFormer 分别面向全部、在职和离职雇员。"
+  ],
+  "examples": [
+    "添加雇员的核心流程：`Employee theEmployee { firstName, lastName }; theEmployee.setEmployeeNumber(m_nextEmployeeNumber++); theEmployee.hire(); m_employees.push_back(theEmployee); return m_employees.back();`",
+    "检索调用示例：`database.getEmployee(11000)` 按编号检索；`database.getEmployee(\"Jane\", \"Doe\")` 按姓名检索。"
+  ],
+  "misconceptions": [
+    "getEmployee 有两个重载，并不是只有按雇员编号检索的版本。",
+    "addEmployee 返回的是新添加 Employee 的引用，不是雇员编号。",
+    "找不到匹配雇员时不是返回一个默认 Employee；原文说明该方法会引发异常。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "Database 如何添加一名新雇员？",
+      "a": "先构造 Employee，使用 m_nextEmployeeNumber++ 分配编号，将其设置为在职，再放入 m_employees，并返回 vector 最后一个元素的引用。"
+    },
+    {
+      "q": "Database 如何按姓名检索雇员？",
+      "a": "调用按姓名重载的 `getEmployee`，传入 firstName 和 lastName；实现会遍历 m_employees，查找姓名匹配的 Employee。"
+    },
+    {
+      "q": "找不到指定雇员时 getEmployee 会怎样？",
+      "a": "会引发异常。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "函数重载",
+    "std::vector",
+    "引用",
+    "基于范围的for循环",
+    "异常"
+  ],
+  "source_pages": [
+    96,
+    96
+  ],
+  "needs_verification": true,
+  "verify_query": "\"Database::addEmployee\" \"m_nextEmployeeNumber++\" \"m_employees.back\" Employee C++",
+  "concept_id": "177_database_的添加_检索和显示接口",
+  "_chunk_pages": [
+    93,
+    96
+  ]
+}

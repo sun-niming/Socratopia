@@ -1,0 +1,43 @@
+{
+  "title": "VLAN的其他定义方式",
+  "definition": "除了基于端口的VLAN外，VLAN还可以依据设备的MAC地址、网络层协议或其他准则定义。基于MAC的VLAN由网络管理员指定属于各个VLAN的MAC地址集合；设备连接到端口时，端口根据设备的MAC地址把设备接入相应VLAN。VLAN还可以跨越IP路由器扩展，把多个LAN孤岛连接成一个能够跨越较大地理范围的逻辑单一LAN。",
+  "key_points": [
+    "基于端口的VLAN根据交换机端口确定设备所属VLAN。",
+    "基于MAC的VLAN根据设备MAC地址确定其所属VLAN，与设备连接到哪个端口有关。",
+    "VLAN也可以根据IPv4、IPv6、AppleTalk等网络层协议或其他准则定义。",
+    "VLAN跨越IP路由器扩展后，可以连接多个LAN孤岛。"
+  ],
+  "examples": [
+    "若管理员把某设备的MAC地址加入VLAN 10的MAC地址集合，则该设备连接到端口时，交换机可以根据其MAC地址将其划入VLAN 10。"
+  ],
+  "misconceptions": [
+    "VLAN并不只能按照交换机端口划分。",
+    "基于MAC的VLAN不是根据端口号，而是根据接入设备的MAC地址进行划分。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "基于端口的VLAN与基于MAC的VLAN有什么区别？",
+      "a": "基于端口的VLAN按交换机端口划分；基于MAC的VLAN按设备MAC地址划分。"
+    },
+    {
+      "q": "VLAN能否跨越IP路由器扩展？",
+      "a": "可以，多个LAN孤岛可以通过这种方式连接成一个逻辑上的单一LAN。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "VLAN与VLAN干线",
+    "MAC地址"
+  ],
+  "source_pages": [
+    337,
+    340
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "770_vlan的其他定义方式",
+  "_chunk_pages": [
+    337,
+    340
+  ]
+}

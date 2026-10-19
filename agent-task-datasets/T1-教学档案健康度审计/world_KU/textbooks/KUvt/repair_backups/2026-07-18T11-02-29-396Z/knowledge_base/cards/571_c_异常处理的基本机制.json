@@ -1,0 +1,40 @@
+{
+  "title": "C++异常处理的基本机制",
+  "definition": "C++异常处理用于把可能出错的代码与出错后的响应代码分开。可能抛出异常的代码放在try语句块中；使用throw表达式抛出异常；一个或多个catch处理程序负责捕获并响应相应类型的异常。",
+  "key_points": [
+    "try语句块包含可能抛出异常的代码。",
+    "throw用于抛出异常对象或异常值。",
+    "catch语句块用于捕获指定类型的异常并执行响应逻辑。",
+    "try后面可以连接多个catch，以处理不同类型的异常。"
+  ],
+  "examples": [
+    "通用结构：\ntry {\n    // 可能抛出异常的代码\n} catch (exception-type1 exception-name) {\n    // 处理类型1的异常\n} catch (exception-type2 exception-name) {\n    // 处理类型2的异常\n}"
+  ],
+  "misconceptions": [
+    "try语句块本身不会自动处理异常；必须有匹配的catch处理程序或由更外层继续处理。",
+    "catch不是普通的条件分支，它只会处理从对应try语句块中抛出且类型匹配的异常。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "C++异常处理通常由哪些关键字组成？",
+      "a": "主要由try、throw和catch组成：try包围可能出错的代码，throw抛出异常，catch捕获并处理异常。"
+    },
+    {
+      "q": "一个try语句块后面能否有多个catch？",
+      "a": "可以。多个catch可以分别处理不同类型的异常。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [],
+  "source_pages": [
+    438,
+    439
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "571_c_异常处理的基本机制",
+  "_chunk_pages": [
+    437,
+    440
+  ]
+}

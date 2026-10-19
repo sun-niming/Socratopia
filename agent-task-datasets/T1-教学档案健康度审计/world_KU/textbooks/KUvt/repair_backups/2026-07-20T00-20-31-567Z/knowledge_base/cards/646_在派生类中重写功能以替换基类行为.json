@@ -1,0 +1,45 @@
+{
+  "title": "在派生类中重写功能以替换基类行为",
+  "definition": "派生类可以重写基类的虚方法，以替换该方法原有的行为。MyWeatherPrediction 重写 showResult()，同时显示摄氏温度和华氏温度，并显示降雨概率；当降雨概率大于 $0.5$ 时，还提示用户携带雨伞。",
+  "key_points": [
+    "重写方法应与基类中的虚方法匹配，并可使用 override 明确表示重写。",
+    "MyWeatherPrediction::showResult() 调用摄氏和华氏温度获取方法，以及降雨概率获取方法。",
+    "降雨提示的条件是 $\\text{getChanceOfRain()} > 0.5$。",
+    "对于 MyWeatherPrediction 对象，客户调用 showResult() 时使用的是派生类的新实现。"
+  ],
+  "examples": [
+    "void MyWeatherPrediction::showResult() const { cout << format(\"Tomorrow's temperature will be {} degrees Celsius ({} degrees Fahrenheit)\", getTomorrowTempCelsius(), getTomorrowTempFahrenheit()); cout << format(\"Chance of rain is {}%\", getChanceOfRain() * 100) << endl; if (getChanceOfRain() > 0.5) { cout << \"Bring an umbrella!\"; } }"
+  ],
+  "misconceptions": [
+    "重写 showResult() 不会删除基类的其他功能；MyWeatherPrediction 仍然可以使用继承来的功能。",
+    "重写后的方法不是额外创建一个必须由客户手动选择的普通方法；对 MyWeatherPrediction 对象调用该方法时，会执行派生类实现。",
+    "降雨概率大于 $0.5$ 才触发携带雨伞提示，不是大于或等于 $0.5$。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "MyWeatherPrediction 重写 showResult() 后改变了什么？",
+      "a": "它同时显示明天的摄氏温度、华氏温度和降雨概率，并在降雨概率大于 $0.5$ 时提示“Bring an umbrella!”。"
+    },
+    {
+      "q": "为什么说重写 showResult() 可以替换基类行为？",
+      "a": "因为对 MyWeatherPrediction 对象调用 showResult() 时，会执行派生类提供的新实现，而不是原来的显示方式。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++虚函数",
+    "方法重写",
+    "通过继承添加功能"
+  ],
+  "source_pages": [
+    315,
+    315
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "646_在派生类中重写功能以替换基类行为",
+  "_chunk_pages": [
+    313,
+    316
+  ]
+}

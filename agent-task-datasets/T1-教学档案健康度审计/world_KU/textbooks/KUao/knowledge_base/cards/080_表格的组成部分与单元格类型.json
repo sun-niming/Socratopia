@@ -1,0 +1,47 @@
+{
+  "title": "表格的组成部分与单元格类型",
+  "definition": "表格table可以由标题caption、表头thead、表体tbody、表尾tfoot构成。表格按行tr存储，行由单元格构成；单元格分为表头单元格th和数据单元格td，其中默认表头单元格会加粗显示。",
+  "key_points": [
+    "table可由caption、thead、tbody、tfoot构成。",
+    "表格按行tr存储，行由单元格构成。",
+    "单元格分为th和td两类。",
+    "th默认加粗显示。"
+  ],
+  "examples": [
+    "<table><caption>成绩表</caption><thead><tr><th>姓名</th><th>分数</th></tr></thead><tbody><tr><td>张三</td><td>95</td></tr></tbody></table>"
+  ],
+  "misconceptions": [
+    "错误理解为caption、thead、tbody、tfoot都是必须同时出现的。",
+    "错误理解为th和td没有区别。",
+    "错误理解为表头单元格默认不带任何特殊显示效果。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "表格table可以由哪些部分构成？",
+      "a": "caption、thead、tbody、tfoot。"
+    },
+    {
+      "q": "表头单元格和数据单元格分别是什么标签？",
+      "a": "表头单元格是th，数据单元格是td。"
+    },
+    {
+      "q": "th默认的显示特点是什么？",
+      "a": "默认表头单元格加粗显示。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "表格标记的作用与基本结构"
+  ],
+  "source_pages": [
+    61,
+    64
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "080_表格的组成部分与单元格类型",
+  "_chunk_pages": [
+    61,
+    64
+  ]
+}

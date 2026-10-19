@@ -1,0 +1,51 @@
+{
+  "title": "使用 index_sequence 和折叠表达式遍历元组",
+  "definition": "std::integer_sequence 是定义在 <utility> 中的编译期整数序列工具；std::index_sequence 是其常用于生成 size_t 索引序列的形式。std::index_sequence_for<Args...>() 可以生成一个与参数包 Args... 等长的索引序列。结合变参数模板和折叠表达式，可以按索引展开并打印元组的全部元素，而不需要显式的模板递归。",
+  "key_points": [
+    "std::index_sequence<Indices...> 保存编译期索引序列。",
+    "std::index_sequence_for<Args...>() 生成与 Args... 参数包长度相同的索引序列。",
+    "tuplePrintHelper 使用 get<Indices>(t) 访问元组中各个编译期索引对应的元素。",
+    "示例使用一元右折叠表达式，把多个输出表达式通过逗号运算符连接起来。"
+  ],
+  "examples": [
+    "元组打印程序的结构：\n\n```cpp\ntemplate <typename Tuple, size_t... Indices>\nvoid tuplePrintHelper(const Tuple& t, index_sequence<Indices...>) {\n    ((cout << get<Indices>(t) << endl), ...);\n}\n\ntemplate <typename... Args>\nvoid tuplePrint(const tuple<Args...>& t) {\n    tuplePrintHelper(t, index_sequence_for<Args...>());\n}\n```",
+    "对于包含 4 个元素的元组，折叠表达式展开为：\n\n$$\n(((cout << get<0>(t) << endl),\n  (cout << get<1>(t) << endl)),\n  (cout << get<2>(t) << endl)),\n  (cout << get<3>(t) << endl))\n$$\n\n原文给出的展开结构本质上是按索引 0、1、2、3 依次执行输出。"
+  ],
+  "misconceptions": [
+    "index_sequence_for<Args...>() 不是运行时容器，而是编译期索引序列。",
+    "get<Indices>(t) 中的 Indices 必须是编译期索引。",
+    "折叠表达式并不是随机访问元组，而是把参数包中的索引逐个展开。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "std::index_sequence_for<Args...>() 的作用是什么？",
+      "a": "它生成一个与 Args... 参数包等长的 size_t 索引序列，通常用于展开元组索引。"
+    },
+    {
+      "q": "四元素元组使用 get<Indices>(t) 展开时会使用哪些索引？",
+      "a": "使用索引 0、1、2、3。"
+    },
+    {
+      "q": "这段代码为什么不需要模板递归？",
+      "a": "因为参数包中的索引由 index_sequence 生成，并通过折叠表达式一次性展开。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "变参数模板",
+    "参数包展开",
+    "std::tuple的基本用法",
+    "折叠表达式"
+  ],
+  "source_pages": [
+    778,
+    778
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1602_使用_index_sequence_和折叠表达式遍历元组",
+  "_chunk_pages": [
+    777,
+    780
+  ]
+}

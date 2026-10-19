@@ -1,0 +1,41 @@
+{
+  "title": "RTS 门限值",
+  "definition": "RTS 门限值是无线站点决定是否使用 RTS/CTS 序列的帧长度阈值。只有当待发送帧的长度超过该门限值时，站点才使用 RTS/CTS 预约信道；帧长不超过门限值时则跳过 RTS/CTS。由于 RTS/CTS 会引入时延并消耗信道资源，它通常只用于较长的数据帧。",
+  "key_points": [
+    "RTS/CTS 的使用由帧长与 RTS 门限值的比较结果决定。",
+    "实际中，许多无线站点的默认 RTS 门限值大于最大帧长。",
+    "当默认门限值大于最大帧长时，所有 DATA 帧都会跳过 RTS/CTS 序列。"
+  ],
+  "examples": [
+    "若站点设置的 RTS 门限值为 1000 字节，则长度超过 1000 字节的帧使用 RTS/CTS，长度不超过 1000 字节的帧跳过 RTS/CTS。"
+  ],
+  "misconceptions": [
+    "错误理解：802.11 每次发送 DATA 帧都必须先进行 RTS/CTS。RTS/CTS 是可选机制，并且通常只用于超过门限值的长帧。",
+    "错误理解：RTS 门限值越小一定越好。教材指出 RTS/CTS 会增加时延并消耗信道资源。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "无线站点何时使用 RTS/CTS？",
+      "a": "当待发送帧的长度超过预先设置的 RTS 门限值时。"
+    },
+    {
+      "q": "为什么不对所有帧都使用 RTS/CTS？",
+      "a": "因为 RTS/CTS 会引入额外时延并消耗信道资源，通常只为长数据帧预约信道。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "RTS/CTS 信道预约机制"
+  ],
+  "source_pages": [
+    369,
+    372
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "862_rts_门限值",
+  "_chunk_pages": [
+    369,
+    372
+  ]
+}

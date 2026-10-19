@@ -1,0 +1,43 @@
+{
+  "title": "继承关系与多态示例中的 Car、Truck 和 Vehicle",
+  "definition": "原文第183页出现了 `Car`、`Truck`、`Vehicle`、`SelfDrivingCar` 和 `SelfDrivable`，并配有类似继承关系的箭头或层次结构。可确认这些类型被用于讨论车辆类之间的关系，但给定文字无法完全恢复图中每条继承边及其方向。",
+  "key_points": [
+    "原文同时列出了基类候选 `Vehicle` 以及派生类候选 `Car`、`Truck`。",
+    "原文还列出了 `SelfDrivingCar`、`SelfDrivable` 和 `SelfDrivable<T>`，说明示例涉及自驾驶车辆与模板封装。",
+    "图形中的箭头方向和完整类层次在给定文本中不清晰，不能据此断言所有继承关系。"
+  ],
+  "examples": [
+    "原文出现的类型名称：`Vehicle`、`Car`、`Truck`、`SelfDrivingCar`。",
+    "原文还出现了模板类形式：`template <typename T> class SelfDrivable : public T`。"
+  ],
+  "misconceptions": [
+    "不能仅凭类型名称断言 `Car` 和 `Truck` 一定都直接继承 `Vehicle`。",
+    "不能把原文中的类名关系自动解释为对象组合关系；继承和聚合是不同关系。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "第183页列出了哪些与车辆相关的类型名称？",
+      "a": "包括 `Vehicle`、`Car`、`Truck`、`SelfDrivingCar` 和 `SelfDrivable`。"
+    },
+    {
+      "q": "原文中的模板类声明使用了什么继承形式？",
+      "a": "`class SelfDrivable : public T`，即模板类公开继承模板参数类型 `T`。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++ 类与继承",
+    "C++ 模板"
+  ],
+  "source_pages": [
+    181,
+    184
+  ],
+  "needs_verification": true,
+  "verify_query": "《C++20高级编程》第5版 第183页 Car Truck Vehicle SelfDrivable 类图 继承关系",
+  "concept_id": "253_继承关系与多态示例中的_car_truck_和_vehicle",
+  "_chunk_pages": [
+    181,
+    184
+  ]
+}

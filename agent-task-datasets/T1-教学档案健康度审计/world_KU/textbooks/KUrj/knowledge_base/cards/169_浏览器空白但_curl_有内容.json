@@ -1,0 +1,37 @@
+{
+  "title": "浏览器空白但 curl 有内容",
+  "definition": "如果 curl 能看到响应，但浏览器页面空白或加载异常，优先检查 HTTP 响应格式是否正确：响应头和响应体之间必须有空行，Content-Length 不能错，连接要按预期关闭，HTML 内容本身也必须完整。",
+  "key_points": [
+    "检查响应头和响应体之间是否存在空行 \\r\\n\\r\\n。",
+    "核对 Content-Length、连接关闭与 HTML 完整性。",
+    "可用 curl -i 和 curl -v 查看原始响应。"
+  ],
+  "examples": [
+    "curl -i http://127.0.0.1:8080/",
+    "curl -v http://127.0.0.1:8080/"
+  ],
+  "misconceptions": [
+    "以为 curl 有内容就说明浏览器一定能正常显示。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "浏览器空白但 curl 有内容时，首先要检查什么？",
+      "a": "检查响应格式，特别是响应头和响应体之间是否有空行 \\r\\n\\r\\n，以及 Content-Length、连接关闭和 HTML 是否完整。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "HTTP 响应格式"
+  ],
+  "source_pages": [
+    109,
+    112
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "169_浏览器空白但_curl_有内容",
+  "_chunk_pages": [
+    109,
+    112
+  ]
+}

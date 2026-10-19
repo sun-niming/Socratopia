@@ -1,0 +1,37 @@
+{
+  "title": "background-color 属性",
+  "definition": "background-color 用于设置元素的背景颜色，颜色值可以写成颜色名、十六进制值、rgb() 或 rgba() 等形式。",
+  "key_points": [
+    "可以使用颜色名，如 red。",
+    "可以使用十六进制颜色值，如 #f00。",
+    "可以使用 rgb() 和 rgba()。"
+  ],
+  "examples": [
+    "background-color: red;",
+    "background-color: rgba(255,0,0,0.5);"
+  ],
+  "misconceptions": [
+    "background-color 只能写英文颜色名。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "background-color 可以写哪些类型的颜色值？",
+      "a": "颜色名、十六进制值、rgb()、rgba() 等。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "背景样式"
+  ],
+  "source_pages": [
+    113,
+    116
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "184_background_color_属性",
+  "_chunk_pages": [
+    113,
+    116
+  ]
+}

@@ -1,0 +1,54 @@
+{
+  "title": "用户注册页面中的控件映射",
+  "definition": "用户注册页面可将不同信息映射为不同表单控件：用户名用 text，密码用 password，性别用 radio，爱好用 checkbox，城市用 select，自我介绍用 textarea，提交与重置分别用 submit 和 reset；其中性别的单选项属于同一组时应使用相同 name。",
+  "key_points": [
+    "用户名对应 text",
+    "密码对应 password",
+    "性别对应 radio，且同组单选项使用相同 name",
+    "爱好对应 checkbox",
+    "城市对应 select",
+    "自我介绍对应 textarea",
+    "提交/重置按钮对应 submit / reset"
+  ],
+  "examples": [
+    "用户名 -> text",
+    "密码 -> password",
+    "性别 -> radio（相同 name）",
+    "爱好 -> checkbox",
+    "城市 -> select",
+    "自我介绍 -> textarea",
+    "提交 -> submit",
+    "重置 -> reset"
+  ],
+  "misconceptions": [
+    "把性别做成 checkbox，而不是单选 radio",
+    "把城市做成文本输入而不是选择框 select",
+    "把自我介绍做成单行输入框而不是 textarea"
+  ],
+  "qa_pairs": [
+    {
+      "q": "注册页面中，性别、城市、自我介绍分别适合用什么控件？",
+      "a": "性别用 radio，城市用 select，自我介绍用 textarea。"
+    },
+    {
+      "q": "为什么性别的 radio 要放在同一组？",
+      "a": "因为同组单选项应使用相同的 name，才能实现互斥选择。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "输入控件类型",
+    "表单开发流程"
+  ],
+  "source_pages": [
+    75,
+    76
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "093_用户注册页面中的控件映射",
+  "_chunk_pages": [
+    73,
+    76
+  ]
+}

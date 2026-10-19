@@ -1,0 +1,45 @@
+{
+  "title": "Find模板的类型推导与显式模板实参",
+  "definition": "在 `Find(const T& value, const T* arr, size_t size)` 中，目标值和数组元素都参与模板参数 `T` 的推导。如果它们推导出的类型不同，调用会因无法得到唯一的 `T` 而失败；调用者也可以显式指定 `T`，使实参按该类型要求进行转换或匹配。",
+  "key_points": [
+    "目标值参数要求与 `T` 对应，数组参数要求数组元素类型与 `T` 对应。",
+    "若目标值为 `int` 而数组元素为 `double`，自动推导会分别得到 `T=int` 和 `T=double`，造成冲突。",
+    "显式调用 `Find<double>(myInt, doubleArray, size)` 可固定 `T=double`，此时 `myInt` 可转换为 `double` 后参与查找。",
+    "显式指定模板参数能够解决某些推导冲突，但仍须满足函数参数的类型转换规则。"
+  ],
+  "examples": [
+    "int myInt = 3;\ndouble doubleArray[] = {1.2, 3.4, 5.7, 7.5};\nconst size_t sizeDoubleArray = std::size(doubleArray);\n\n// Find(myInt, doubleArray, sizeDoubleArray); // 不能编译：T 的推导结果冲突\nsize_t res = Find<double>(myInt, doubleArray, sizeDoubleArray);"
+  ],
+  "misconceptions": [
+    "误以为编译器会在 `int` 和 `double` 之间自动选择一个作为推导结果；同一模板参数从不同实参推导出冲突类型时，推导会失败。",
+    "误以为显式指定模板参数只是语法上的另一种写法；它还可以固定类型并改变实参匹配与转换过程。",
+    "误以为显式指定 `T` 后任何实参都必然有效；实参仍必须能绑定或转换到对应的形参类型。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么 `Find(myInt, doubleArray, sizeDoubleArray)` 不能通过模板参数推导？",
+      "a": "因为第一个实参使 `T` 被推导为 `int`，数组实参使 `T` 被推导为 `double`，两个推导结果冲突。"
+    },
+    {
+      "q": "如何按原文方式让一个 `int` 目标值在 `double` 数组中参与查找？",
+      "a": "显式固定模板参数为 `double`：`Find<double>(myInt, doubleArray, sizeDoubleArray)`。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "通用Find函数模板",
+    "模板参数推导",
+    "隐式类型转换"
+  ],
+  "source_pages": [
+    393,
+    396
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "508_find模板的类型推导与显式模板实参",
+  "_chunk_pages": [
+    393,
+    396
+  ]
+}

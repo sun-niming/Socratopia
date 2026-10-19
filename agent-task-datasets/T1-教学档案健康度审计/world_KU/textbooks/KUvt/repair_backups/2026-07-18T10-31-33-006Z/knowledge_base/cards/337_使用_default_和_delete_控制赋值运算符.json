@@ -1,0 +1,44 @@
+{
+  "title": "使用 default 和 delete 控制赋值运算符",
+  "definition": "C++11 允许在特殊成员函数声明后使用 `= default` 或 `= delete`。`= default` 表示请求编译器生成该函数的默认实现；`= delete` 表示明确禁止调用该函数。它们可用于控制类的复制赋值行为。",
+  "key_points": [
+    "默认复制赋值运算符可以声明为 `SpreadsheetCell& operator=(const SpreadsheetCell& rhs) = default;`。",
+    "删除复制赋值运算符可以声明为 `SpreadsheetCell& operator=(const SpreadsheetCell& rhs) = delete;`。",
+    "`= default` 与 `= delete` 都属于函数声明的一部分，不是普通函数体中的语句。"
+  ],
+  "examples": [
+    "允许编译器生成默认复制赋值运算符：\n```cpp\nSpreadsheetCell& operator=(const SpreadsheetCell& rhs) = default;\n```",
+    "禁止复制赋值：\n```cpp\nSpreadsheetCell& operator=(const SpreadsheetCell& rhs) = delete;\n```"
+  ],
+  "misconceptions": [
+    "`= delete` 不是删除源代码文件中的函数，而是使该函数不可调用；对被删除函数的调用会导致编译错误。",
+    "`= default` 不是表示函数没有作用，而是要求编译器提供默认实现。",
+    "是否允许复制赋值，与是否允许复制构造是两个可以分别控制的接口。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何让编译器生成默认的复制赋值运算符？",
+      "a": "在复制赋值运算符声明末尾写 `= default`。"
+    },
+    {
+      "q": "如何禁止类对象进行复制赋值？",
+      "a": "将复制赋值运算符声明为 `= delete`。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++特殊成员函数",
+    "C++运算符重载"
+  ],
+  "source_pages": [
+    253,
+    254
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "337_使用_default_和_delete_控制赋值运算符",
+  "_chunk_pages": [
+    253,
+    256
+  ]
+}

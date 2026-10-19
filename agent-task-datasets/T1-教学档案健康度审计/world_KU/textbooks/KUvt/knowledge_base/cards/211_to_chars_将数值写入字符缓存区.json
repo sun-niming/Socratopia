@@ -1,0 +1,58 @@
+{
+  "title": "to_chars：将数值写入字符缓存区",
+  "definition": "to_chars 将整数或浮点数转换为字符序列并写入调用者提供的半开区间缓存区 $[first,last)$，返回 to_chars_result。返回结果的 ptr 指向已写入字符末尾的下一个位置；如果缓存区不足，ptr 等于 last，错误码为 errc::value_too_large。",
+  "key_points": [
+    "整数重载为 to_chars_result to_chars(char* first, char* last, IntegerT value, int base = 10);",
+    "IntegerT 可以是有符号整数、无符号整数或 char 类型。",
+    "浮点重载可以指定 chars_format，也可以进一步指定 precision。",
+    "chars_format 包括 scientific、fixed、hex 和 general，其中 general = fixed | scientific。",
+    "默认浮点格式是 general，生成最短的十进制表示；如果指定格式但未指定精度，则自动确定最简表示，原文说明最大精度为 6 个数字。",
+    "to_chars_result 可表示为 $$\\begin{bmatrix}\\text{char* ptr}\\\\\\text{errc ec}\\end{bmatrix}$$。"
+  ],
+  "examples": [
+    "const size_t BufferSize { 50 };",
+    "string out(BufferSize, ' ');",
+    "auto [ptr, error] { to_chars(out.data(), out.data() + out.size(), 12345) };",
+    "if (error == errc{}) { /* 转换成功，ptr 指向结果末尾 */ }",
+    "double value { 0.314 };",
+    "auto [ptr, error] { to_chars(out.data(), out.data() + out.size(), value) };"
+  ],
+  "misconceptions": [
+    "to_chars 不返回一个新建的 std::string，而是把结果写入 first 到 last 指定的缓存区。",
+    "ptr 指向的是最后一个有效字符之后的位置，不是最后一个有效字符本身。",
+    "缓存区不足时不能把结果当作成功结果使用，应检查 ec。",
+    "to_chars 的浮点输出格式不等同于固定小数位输出；默认 general 可能使用普通小数或指数形式。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "to_chars 成功时 ptr 指向哪里？",
+      "a": "ptr 指向所写入字符末尾后一位置。"
+    },
+    {
+      "q": "to_chars 失败且原因是缓存区太小时，ptr 和 ec 分别是什么？",
+      "a": "ptr 等于 last，ec 等于 errc::value_too_large。"
+    },
+    {
+      "q": "如何使用结构化绑定接收 to_chars 的结果？",
+      "a": "可以写成 auto [ptr, error] { to_chars(first, last, value) };。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "<charconv>",
+    "字符指针与半开区间",
+    "结构化绑定",
+    "浮点格式"
+  ],
+  "source_pages": [
+    111,
+    112
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 std::to_chars chars_format general 默认浮点格式 精度最大 6 个数字 标准文档",
+  "concept_id": "211_to_chars_将数值写入字符缓存区",
+  "_chunk_pages": [
+    109,
+    112
+  ]
+}

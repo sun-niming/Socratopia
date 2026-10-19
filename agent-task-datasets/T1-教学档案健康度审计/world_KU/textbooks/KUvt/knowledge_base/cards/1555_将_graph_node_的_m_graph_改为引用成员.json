@@ -1,0 +1,47 @@
+{
+  "title": "将 graph_node 的 m_graph 改为引用成员",
+  "definition": "graph_node 可以把表示所属有向图的指针成员改为引用成员：$\\texttt{directed_graph<T, A>& m_graph;}$。由于引用成员必须在构造时绑定且之后不能改绑，采用引用后需要提供适当的拷贝构造、移动构造、拷贝赋值和移动赋值操作。",
+  "key_points": [
+    "graph_node 通过私有继承 $\\texttt{graph_node_allocator<T, A>}$ 管理节点存储。",
+    "所属图成员由指针改为引用：$\\texttt{directed_graph<T, A>& m_graph;}$。",
+    "接口提供接收左值 $\\texttt{const T&}$ 和右值 $\\texttt{T&&}$ 的构造函数，并分别提供带分配器和不带分配器的版本。",
+    "引用数据成员会使编译器隐式生成的某些赋值运算符被删除，因此需要自定义拷贝/移动构造函数和拷贝/移动赋值运算符。",
+    "insert(T&&) 必须传入图对象本身，而不是图对象指针。"
+  ],
+  "examples": [
+    "引用成员：$\\texttt{directed_graph<T, A>& m_graph;}$。",
+    "修改后的插入调用：$\\texttt{m_nodes.emplace_back(*this, std::move(node_value), m_allocator);}$。"
+  ],
+  "misconceptions": [
+    "将指针改为引用不是简单地把 $\\texttt{->}$ 改成 $\\texttt{.}$；还会影响拷贝和赋值操作。",
+    "引用成员不能改为绑定到另一个 graph，因此对象赋值时必须特别设计赋值运算符的行为。",
+    "传给 graph_node 构造函数的 $\\texttt{*this}$ 是图对象本身，不是指针。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么 graph_node 使用引用成员后需要自定义拷贝/移动操作？",
+      "a": "因为含有引用数据成员的类，其编译器生成的某些拷贝赋值和移动赋值运算符会被自动删除；同时引用必须在构造时绑定，不能通过普通赋值重新绑定，所以需要自定义相关操作。"
+    },
+    {
+      "q": "m_graph 从指针改为引用后，insert(T&&) 的 emplace_back 调用如何修改？",
+      "a": "由传入图指针改为传入图对象本身：$\\texttt{m_nodes.emplace_back(*this, std::move(node_value), m_allocator);}$。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "C++引用数据成员",
+    "拷贝构造与赋值运算符",
+    "移动语义"
+  ],
+  "source_pages": [
+    751,
+    752
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1555_将_graph_node_的_m_graph_改为引用成员",
+  "_chunk_pages": [
+    749,
+    752
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "title": "文件流与文件打开模式",
+  "definition": "C++通过 `std::ifstream` 和 `std::ofstream` 提供文件输入输出功能，这两个类定义在 `<fstream>` 中。文件流构造函数可以接收文件名和打开模式；文件操作必须检查打开、读取或写入过程中可能出现的错误。",
+  "key_points": [
+    "`std::ifstream`用于从文件输入，`std::ofstream`用于向文件输出。",
+    "`ofstream`默认包含 `ios_base::out` 模式，从文件开头写入，并会覆盖已有数据；使用 `ios_base::app` 可按追加模式打开输出文件。",
+    "常用打开模式包括：`ios_base::app`（每次写入前移到文件末尾）、`ios_base::ate`（打开后立即移到文件末尾）、`ios_base::binary`（二进制模式）、`ios_base::in`（从开头读取）、`ios_base::out`（从开头写入）、`ios_base::trunc`（打开时截断已有数据）。",
+    "打开模式可以用按位或组合，例如：`ios_base::out | ios_base::binary | ios_base::trunc`。",
+    "`ifstream`自动包含 `ios_base::in`，`ofstream`自动包含 `ios_base::out`，即使没有显式指定也一样。",
+    "文件流对象析构时会自动关闭底层文件，因此通常不必显式调用 `close()`；示例中也可以显式关闭。"
+  ],
+  "examples": [
+    "以输出、二进制并截断已有内容的方式打开文件：`ofstream outFile{\"test.bin\", ios_base::out | ios_base::binary | ios_base::trunc};`。",
+    "打开输出文件后应检查状态：`if (!outFile) { /* 处理打开失败 */ }`。"
+  ],
+  "misconceptions": [
+    "`ios_base::app`不是只在打开时定位到末尾，而是在每次写操作之前移到文件末尾。",
+    "`ios_base::ate`与 `ios_base::app`不同：`ate`只保证打开后立即位于末尾，不表示每次写入前都强制移到末尾。",
+    "文件流打开失败时不能继续假定读写成功，必须检查流状态。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何以输出、二进制并截断已有文件的方式打开文件？",
+      "a": "使用 `ios_base::out | ios_base::binary | ios_base::trunc` 组合打开模式。"
+    },
+    {
+      "q": "`ifstream`和`ofstream`是否必须显式指定`ios_base::in`或`ios_base::out`？",
+      "a": "不必须。`ifstream`自动包含 `ios_base::in`，`ofstream`自动包含 `ios_base::out`。"
+    },
+    {
+      "q": "为什么文件操作需要进行错误检测？",
+      "a": "文件可能位于暂时离线的网络存储中、磁盘可能已满，或者用户可能没有访问权限，因此打开、读取和写入都可能失败。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++流状态",
+    "文件读写基础"
+  ],
+  "source_pages": [
+    425,
+    426
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "863_文件流与文件打开模式",
+  "_chunk_pages": [
+    425,
+    428
+  ]
+}

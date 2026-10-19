@@ -1,0 +1,48 @@
+{
+  "title": "通过引用传递固定长度数组与模板推断长度",
+  "definition": "可以使用数组引用参数接收长度固定的栈数组，例如 `int (&theArray)[4]` 只接受包含 4 个 `int` 元素的栈数组。还可以使用函数模板 `template<size_t N>`，让编译器从数组实参自动推断数组长度，从而编写适用于不同长度栈数组的函数。",
+  "key_points": [
+    "`int (&theArray)[4]` 表示对“含 4 个 `int` 的数组”的引用。",
+    "这种数组引用参数只适用于栈数组，不适用于自由存储区数组指针。",
+    "模板参数 `N` 可以自动推断传入栈数组的元素个数。",
+    "模板函数中的循环边界可以直接使用推断出的 `N`。"
+  ],
+  "examples": [
+    "固定长度数组引用：`void doubleIntsStack(int (&theArray)[4]);`",
+    "自动推断数组长度：`template<size_t N> void doubleIntsStack(int (&theArray)[N]) { for (size_t i { 0 }; i < N; i++) { theArray[i] *= 2; } }`"
+  ],
+  "misconceptions": [
+    "数组引用参数不是普通指针参数，不会把任意长度数组都视为同一种参数。",
+    "`int (&theArray)[4]` 不能接收长度不是 4 的栈数组。",
+    "这种数组引用模板的用途是保留栈数组长度信息，不是为动态数组指针自动推断长度。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`int (&theArray)[4]` 能接收什么参数？",
+      "a": "只能接收含有 4 个 `int` 元素的栈数组的引用。"
+    },
+    {
+      "q": "如何让函数模板自动获得栈数组长度？",
+      "a": "使用 `template<size_t N>`，并把参数声明为 `int (&theArray)[N]`，由编译器推断 `N`。"
+    },
+    {
+      "q": "教材指出固定长度数组引用参数适用于自由存储区数组吗？",
+      "a": "不适用；教材说明这种写法用于已知长度的栈数组。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "数组作为函数参数时按指针语义传递"
+  ],
+  "source_pages": [
+    210,
+    210
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "444_通过引用传递固定长度数组与模板推断长度",
+  "_chunk_pages": [
+    209,
+    212
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "title": "创建元素节点",
+  "definition": "document.createElement(tagName) 用于创建一个新的元素节点。创建出来的是 DOM 中的元素对象，之后通常还要把它插入到文档树中才能显示出来。",
+  "key_points": [
+    "参数 tagName 表示要创建的标签名，如 div、li、p 等",
+    "它创建的是元素节点，不是文本节点"
+  ],
+  "examples": [
+    "const li = document.createElement('li');"
+  ],
+  "misconceptions": [
+    "不要把它和 createTextNode 混淆；createElement 不是用来直接创建文字内容的"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何创建一个新的元素节点？",
+      "a": "使用 document.createElement(tagName)，例如 document.createElement('div')。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "DOM节点"
+  ],
+  "source_pages": [
+    357,
+    360
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "511_创建元素节点",
+  "_chunk_pages": [
+    357,
+    360
+  ]
+}

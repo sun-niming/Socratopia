@@ -1,0 +1,46 @@
+{
+  "title": "Grid赋值运算符中的copy-and-swap惯用法",
+  "definition": "Grid的模板化赋值运算符使用copy-and-swap惯用法：先利用右值rhs构造一个临时对象temp，再调用swap(temp)交换当前对象与临时对象的内容，最后返回*this。这样复制工作在临时对象中完成，提交阶段只进行不抛出异常的交换操作。",
+  "key_points": [
+    "赋值运算符先执行Grid<T, WIDTH, HEIGHT> temp { rhs};，由临时对象完成从rhs的复制或转换。",
+    "随后调用swap(temp)，把临时对象的内容交换到当前对象中。",
+    "交换完成后，临时对象持有当前对象原来的内容，并在离开作用域时自动销毁。",
+    "swap通过std::swap(m_cells, other.m_cells)交换网格存储，并声明为noexcept。",
+    "原文还说明，由于用户声明了析构函数，非模板化的拷贝构造函数和拷贝赋值运算符需要显式设置为default。"
+  ],
+  "examples": [
+    "赋值运算符的核心结构为：\n```text\nGrid<T, WIDTH, HEIGHT> temp { rhs };\nswap(temp);\nreturn *this;\n```",
+    "其操作顺序可概括为：\n$$\n\\text{复制到临时对象}\\rightarrow\\text{交换}\\rightarrow\\text{销毁旧内容}\n$$"
+  ],
+  "misconceptions": [
+    "copy-and-swap不是先直接修改当前对象再处理异常，而是先在临时对象中完成复制。",
+    "swap不是重新逐个复制所有单元，而是交换m_cells的内容。",
+    "临时对象不是多余的永久对象；它在赋值运算符结束时自动销毁。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "Grid赋值运算符为什么先构造temp，再调用swap？",
+      "a": "这样可以先在临时对象中完成复制工作，随后通过noexcept的swap提交结果，从而避免在当前对象处于部分修改状态时发生问题。"
+    },
+    {
+      "q": "Grid的swap方法交换了什么？",
+      "a": "它使用std::swap交换当前对象与other对象的m_cells。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "拷贝构造函数与赋值运算符",
+    "异常安全基本概念"
+  ],
+  "source_pages": [
+    389,
+    390
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "791_grid赋值运算符中的copy_and_swap惯用法",
+  "_chunk_pages": [
+    389,
+    392
+  ]
+}

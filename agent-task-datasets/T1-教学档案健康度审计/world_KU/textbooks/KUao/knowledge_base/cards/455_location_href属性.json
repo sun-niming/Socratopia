@@ -1,0 +1,40 @@
+{
+  "title": "location.href属性",
+  "definition": "location对象的href属性表示当前文档的URL地址。给href赋值可以让浏览器跳转到新的URL。",
+  "key_points": [
+    "href表示当前文档的URL地址。",
+    "修改href会导致页面跳转到指定地址。"
+  ],
+  "examples": [
+    "window.location.href = \"http://www.nwafu.edu.cn\""
+  ],
+  "misconceptions": [
+    "href只是普通字符串，修改它不会影响页面。",
+    "只能通过表单提交才能跳转页面。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "location.href表示什么？",
+      "a": "当前文档的URL地址。"
+    },
+    {
+      "q": "给location.href赋值会发生什么？",
+      "a": "浏览器会跳转到指定的URL。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "location对象"
+  ],
+  "source_pages": [
+    337,
+    340
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "455_location_href属性",
+  "_chunk_pages": [
+    337,
+    340
+  ]
+}

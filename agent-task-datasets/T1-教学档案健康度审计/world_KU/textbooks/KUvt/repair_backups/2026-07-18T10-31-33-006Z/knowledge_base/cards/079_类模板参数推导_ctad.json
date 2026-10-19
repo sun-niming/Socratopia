@@ -1,0 +1,43 @@
+{
+  "title": "类模板参数推导（CTAD）",
+  "definition": "CTAD（Class Template Argument Deduction，类模板参数推导）允许编译器根据对象的初始化表达式推导类模板的模板参数，因此在某些场景下可以省略模板参数。原文将其应用于`std::array`和`std::pair`等类型。",
+  "key_points": [
+    "使用CTAD时，通常仍需提供初始化值，编译器根据这些值推断模板参数。",
+    "例如，`std::pair myPair { 1.23, 5 };`可以根据初始化值推断为`std::pair<double, int>`。",
+    "CTAD的作用是省略书写模板实参，并不等于类型不再存在。"
+  ],
+  "examples": [
+    "显式写出类型：`std::pair<double, int> myPair { 1.23, 5 };`",
+    "使用CTAD：`std::pair myPair { 1.23, 5 };`"
+  ],
+  "misconceptions": [
+    "CTAD不是把模板变成非模板类型，而是让编译器从初始化信息推导模板参数。",
+    "使用CTAD时，初始化值的类型仍会影响最终推导出的模板类型。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`std::pair myPair { 1.23, 5 };`会推导出什么类型？",
+      "a": "根据初始化值推导为`std::pair<double, int>`。"
+    },
+    {
+      "q": "CTAD的主要作用是什么？",
+      "a": "根据初始化表达式自动推导类模板参数，从而允许省略部分或全部模板参数。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "类模板",
+    "模板参数"
+  ],
+  "source_pages": [
+    59,
+    60
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "079_类模板参数推导_ctad",
+  "_chunk_pages": [
+    57,
+    60
+  ]
+}

@@ -1,0 +1,49 @@
+{
+  "title": "使用 vector 返回结果并避免输出参数",
+  "definition": "当函数需要产生多个结果时，可以将这些结果封装在一个结构体中并按值返回，而不是通过指针、引用或容器输出参数修改调用者的对象。对于局部对象、函数参数或临时对象，使用 return object 可能触发返回值优化（RVO）；局部变量使用命名返回值优化（NRVO）。RVO 和 NRVO 都属于复制省略，可避免返回对象时的复制，实现高效的按值返回。",
+  "key_points": [
+    "使用动态分配的数组需要手动管理内存；使用 std::vector 时，内存分配和释放由 vector 自动完成。",
+    "相比输出参数，直接返回包含多个结果的对象通常更易使用、更安全，也更易读。",
+    "RVO 和 NRVO 是复制省略的形式，编译器可以避免复制函数返回的对象。",
+    "可以使用 C++20 指派初始化器构造返回结果结构体。"
+  ],
+  "examples": [
+    "可以将奇数和偶数分别保存到两个 vector 中，并通过结构体返回：\nstruct OddsAndEvens {\n    std::vector<int> odds;\n    std::vector<int> evens;\n};\n\nOddsAndEvens separateOddsAndEvens(const std::vector<int>& arr) {\n    std::vector<int> odds, evens;\n    for (int i : arr) {\n        if (i % 2 == 1) {\n            odds.push_back(i);\n        } else {\n            evens.push_back(i);\n        }\n    }\n    return { .odds = odds, .evens = evens };\n}",
+    "调用方式可以写成：\nauto result = separateOddsAndEvens(vecUnSplit);\n// 使用 result.odds 和 result.evens"
+  ],
+  "misconceptions": [
+    "使用 vector 并不意味着函数一定要通过输出参数返回结果；更推荐直接返回包含 vector 的对象。",
+    "按值返回对象不等于一定会发生昂贵复制；RVO、NRVO 和复制省略可以避免相关复制。",
+    "vector 自动管理其内部内存，但这不代表所有动态资源都能自动管理；这里指的是 vector 容器自身的内存。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么教材建议避免使用输出参数？",
+      "a": "如果函数需要返回结果，通常应直接返回结果，而不是通过指针、引用或容器输出参数修改调用者对象。直接返回通常更易读、更易使用，并且 RVO、NRVO 和复制省略可以使按值返回非常高效。"
+    },
+    {
+      "q": "RVO 和 NRVO 是什么？",
+      "a": "RVO 是返回值优化，NRVO 是命名返回值优化；二者都属于复制省略，可让编译器避免复制函数返回的对象。"
+    },
+    {
+      "q": "为什么使用 vector 比动态数组更安全？",
+      "a": "vector 自动负责其内存的分配和释放，因此调用者不需要手动释放 odds 和 evens 容器。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++函数参数与返回值",
+    "std::vector基础"
+  ],
+  "source_pages": [
+    85,
+    86
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "154_使用_vector_返回结果并避免输出参数",
+  "_chunk_pages": [
+    85,
+    88
+  ]
+}

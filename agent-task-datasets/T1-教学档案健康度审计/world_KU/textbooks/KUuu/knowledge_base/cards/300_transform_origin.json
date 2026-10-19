@@ -1,0 +1,40 @@
+{
+  "title": "transform-origin",
+  "definition": "transform-origin 是变换的起始点，也就是变换的基点；默认值是元素中心点。它可以写成 x y 的形式，其中 x、y 可取 px、%、left、right、top、bottom、center 等。",
+  "key_points": [
+    "表示元素进行变换时的起始点/基点。",
+    "默认值是元素中心点。",
+    "x 和 y 可以使用长度、百分比或关键字。"
+  ],
+  "examples": [
+    "transform-origin: 50% 50%;",
+    "transform-origin: left top;",
+    "transform-origin: left;"
+  ],
+  "misconceptions": [
+    "以为旋转、缩放永远都围绕元素左上角进行。",
+    "以为 transform-origin 只能写百分比。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "transform-origin 的作用是什么？",
+      "a": "它用来设置元素变换的起始点，默认是元素中心点。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "transform属性"
+  ],
+  "source_pages": [
+    201,
+    202,
+    204
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "300_transform_origin",
+  "_chunk_pages": [
+    201,
+    204
+  ]
+}

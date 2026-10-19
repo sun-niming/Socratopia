@@ -1,0 +1,46 @@
+{
+  "title": "transform的二元形式",
+  "definition": "transform的二元形式同时读取两个范围中的元素，并对对应元素调用二元函数，将结果写入目标范围。原文调用transform(begin(vec1), end(vec1), begin(vec2), begin(vec1), [](int a, int b){ return a + b; })，把两个vector对应位置元素的和写回vec1。",
+  "key_points": [
+    "参数包括第一个范围的首尾迭代器、第二个范围的首迭代器、目标范围的首迭代器和二元函数。",
+    "第二个范围至少要有与第一个范围相对应的元素，否则会越界访问。",
+    "原文在计算前检查vec2.size()是否小于vec1.size()；若小于则报错并返回。",
+    "示例中vec1为$[1,2]$、vec2为$[11,22,33]$，结果vec1变为$[12,24]$，vec2不变。"
+  ],
+  "examples": [
+    "transform(begin(vec1), end(vec1), begin(vec2), begin(vec1), [](int a, int b){ return a + b; });",
+    "对应位置计算为：$$\\begin{bmatrix}1\\\\2\\end{bmatrix}+\\begin{bmatrix}11\\\\22\\end{bmatrix}=\\begin{bmatrix}12\\\\24\\end{bmatrix}$$"
+  ],
+  "misconceptions": [
+    "二元transform不会自动按照两个容器中较短者安全截断；应保证第二个范围足够长。",
+    "目标范围可以与第一个源范围相同，原文就是把结果写回vec1。",
+    "vec2中多出的元素不会参与计算，也不会被修改。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "二元transform对vec1=[1,2]和vec2=[11,22,33]求和并写回vec1后，vec1是什么？",
+      "a": "vec1为[12,24]，vec2仍为[11,22,33]。"
+    },
+    {
+      "q": "为什么示例要求vec2至少与vec1一样长？",
+      "a": "因为算法会为vec1的每个元素从vec2读取对应元素；vec2过短会导致无效范围访问。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "一元transform",
+    "迭代器范围",
+    "Lambda表达式和谓词"
+  ],
+  "source_pages": [
+    639,
+    639
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1328_transform的二元形式",
+  "_chunk_pages": [
+    637,
+    640
+  ]
+}

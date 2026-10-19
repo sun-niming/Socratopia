@@ -1,0 +1,44 @@
+{
+  "title": "locale 对 C++ 数字输入输出格式的影响",
+  "definition": "可以通过 cin.imbue(locale{...}) 为输入流设置区域设置（locale）。区域设置会影响数字的格式化输入和输出，例如千位分隔符和小数分隔符可能因地区不同而不同。原文对比了美国英语和比利时荷兰语环境下的数字表示。",
+  "key_points": [
+    "设置 locale 的示意形式是 cin.imbue(locale{ /* locale 名称或配置 */ });。",
+    "原文表格显示，美国英语环境使用逗号作为千位分隔符、句点作为小数分隔符；比利时荷兰语环境使用句点作为千位分隔符、逗号作为小数分隔符。",
+    "区域设置会影响流对数字文本的解释，因此同一段数字文本在不同 locale 下可能有不同含义或解析结果。"
+  ],
+  "examples": [
+    "原文给出的对比可写为：\n$$\n\\begin{array}{c|cc}\n\\text{区域设置} & \\text{千位分隔符示例} & \\text{小数分隔符示例}\\\\\n\\hline\n\\text{U.S. English} & 1,000 & 1.000\\\\\n\\text{Dutch Belgium} & 1.000 & 1,000\n\\end{array}\n$$",
+    "设置流的区域设置：cin.imbue(locale{/* locale 配置 */});"
+  ],
+  "misconceptions": [
+    "locale 不只是改变界面语言，也可能改变数字、日期等数据的格式化规则。",
+    "不能假定所有地区都使用逗号作千位分隔符、句点作小数分隔符。",
+    "仅调用 imbue 并不能保证系统一定存在指定的 locale；具体可用名称取决于系统环境。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何为 cin 设置一个 locale？",
+      "a": "调用 cin.imbue(locale{/* locale 配置 */})。"
+    },
+    {
+      "q": "原文中美国英语和比利时荷兰语对数字分隔符的差异是什么？",
+      "a": "美国英语使用逗号作千位分隔符、句点作小数分隔符；比利时荷兰语使用句点作千位分隔符、逗号作小数分隔符。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++输入输出流基础",
+    "C++ locale 基础"
+  ],
+  "source_pages": [
+    421,
+    424
+  ],
+  "needs_verification": true,
+  "verify_query": "Marc Gregoire C++20 Advanced Programming 5th edition pages 423 locale U.S. English Dutch Belgium 1,000 1.000 table",
+  "concept_id": "552_locale_对_c_数字输入输出格式的影响",
+  "_chunk_pages": [
+    421,
+    424
+  ]
+}

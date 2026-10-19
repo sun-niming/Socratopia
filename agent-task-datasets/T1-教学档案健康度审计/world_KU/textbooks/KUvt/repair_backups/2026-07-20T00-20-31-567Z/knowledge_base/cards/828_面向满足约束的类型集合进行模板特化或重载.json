@@ -1,0 +1,48 @@
+{
+  "title": "面向满足约束的类型集合进行模板特化或重载",
+  "definition": "类模板可以针对满足特定约束的类型集合编写特化，函数模板则可以针对满足特定约束的类型集合编写重载，从而为这些类型提供不同的实现。教材以 `Find` 函数为例：通用版本使用 `==` 比较值，浮点类型版本则使用 epsilon 检测辅助函数进行比较。",
+  "key_points": [
+    "类模板可以为满足特定约束的类型集合编写特化。",
+    "函数模板通常通过重载为满足特定约束的类型集合提供专门实现。",
+    "通用 `Find` 可以对元素使用 `==` 运算符比较。",
+    "浮点类型不建议简单使用 `==` 判断相等，教材为浮点类型提供了使用 epsilon 检测的专门重载。",
+    "浮点类型重载可以使用 `std::floating_point` 约束。"
+  ],
+  "examples": [
+    "通用版本的核心逻辑：遍历数组，当 `arr[i] == value` 时返回对应下标。",
+    "浮点类型重载的形式：`template <std::floating_point T> size_t Find(const T& value, const T* arr, size_t size) { /* 使用 AreEqual(arr[i], value) */ }`。",
+    "辅助函数声明形式：`template <std::floating_point T> bool AreEqual(T x, T y, int precision = 2);`"
+  ],
+  "misconceptions": [
+    "函数模板不能针对满足某个概念的类型集合提供专门实现。",
+    "浮点数使用 `==` 比较与整数比较完全没有区别。",
+    "约束重载改变的是运行时算法，而不是编译期根据实参类型选择不同的函数模板。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "教材中的浮点类型 `Find` 重载为什么不直接使用 `==`？",
+      "a": "因为通常不建议使用 `==` 判断浮点类型是否相等，而应使用 epsilon 检测。"
+    },
+    {
+      "q": "怎样限制 `Find` 的专门版本只接受浮点类型？",
+      "a": "可以使用 `template <std::floating_point T>` 约束模板参数。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "函数模板重载",
+    "C++20概念",
+    "浮点数比较"
+  ],
+  "source_pages": [
+    407,
+    407
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "828_面向满足约束的类型集合进行模板特化或重载",
+  "_chunk_pages": [
+    405,
+    408
+  ]
+}

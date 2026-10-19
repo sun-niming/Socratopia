@@ -1,0 +1,35 @@
+{
+  "title": "首行缩进 text-indent",
+  "definition": "text-indent 用于设置段落首行缩进。教材示例 text-indent: 2em 表示首行缩进 2 个字符。",
+  "key_points": [
+    "text-indent 控制首行缩进。",
+    "2em 表示首行缩进 2 个字符。"
+  ],
+  "examples": [
+    "text-indent: 2em;"
+  ],
+  "misconceptions": [
+    "text-indent 缩进的是首行，不是整段所有行。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "text-indent: 2em 表示什么？",
+      "a": "表示首行缩进 2 个字符。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "CSS基础"
+  ],
+  "source_pages": [
+    109,
+    112
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "150_首行缩进_text_indent",
+  "_chunk_pages": [
+    109,
+    112
+  ]
+}

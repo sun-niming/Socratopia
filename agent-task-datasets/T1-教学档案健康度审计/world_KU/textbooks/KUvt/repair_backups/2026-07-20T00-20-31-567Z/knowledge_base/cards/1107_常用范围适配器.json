@@ -1,0 +1,56 @@
+{
+  "title": "常用范围适配器",
+  "definition": "范围适配器接收一个范围（也可以是另一个视图）以及可选参数，并返回一个新视图。适配器对象通常通过 `std::ranges::views` 或其别名 `std::views` 使用，并可通过 `|` 组成操作管道。",
+  "key_points": [
+    "`views::all`：创建包含范围全部元素的视图。",
+    "`views::filter`：根据谓词保留元素，谓词返回 `true` 时保留。",
+    "`views::transform`：对每个元素应用回调，将元素转换为其他值。",
+    "`views::take`：创建范围前 $N$ 个元素的视图。",
+    "`views::take_while`：保留初始元素，直到谓词首次返回 `false`。",
+    "`views::drop`：跳过前 $N$ 个元素。",
+    "`views::drop_while`：跳过初始元素，直到谓词首次返回 `false`。",
+    "`views::reverse`：以相反顺序迭代元素，底层范围必须是双向范围。",
+    "`views::elements<N>`：从类似 tuple 的元素中提取第 $N$ 个元素。`views::keys` 和 `views::values` 分别提取类似 pair 元素的第一个和第二个元素。",
+    "`views::common`：把 begin 和 end 返回不同类型的范围转换为 begin/end 类型相同的普通范围。"
+  ],
+  "examples": [
+    "适配器的一般构造形式可表示为：`std::ranges::operation_view{range, arguments...}`。",
+    "通常使用管道形式：`range | std::views::operation(arguments...)`。",
+    "例如：`data | std::views::drop(2) | std::views::take(3)` 表示跳过前两个元素后取三个元素。"
+  ],
+  "misconceptions": [
+    "范围适配器通常返回视图，而不是立即创建并拥有数据副本的容器。",
+    "`views::reverse` 不是对任意范围都可用；教材指出底层范围必须是双向范围。",
+    "`views::take(N)` 与 `views::take_while(predicate)` 不同：前者按数量截取，后者按谓词是否继续为真截取。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`views::filter` 和 `views::transform` 的作用分别是什么？",
+      "a": "`views::filter` 根据谓词筛选并保留元素；`views::transform` 对每个元素应用回调并把它转换为其他值。"
+    },
+    {
+      "q": "哪个适配器可以把 begin 和 end 类型不同的范围转换为二者类型相同的范围？",
+      "a": "`views::common`。"
+    },
+    {
+      "q": "使用 `views::reverse` 有什么范围要求？",
+      "a": "底层范围必须是双向范围。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "范围视图的性质与操作管道",
+    "迭代器类别"
+  ],
+  "source_pages": [
+    539,
+    540
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 std::ranges::views all filter transform take take_while drop drop_while reverse elements keys values common exact semantics",
+  "concept_id": "1107_常用范围适配器",
+  "_chunk_pages": [
+    537,
+    540
+  ]
+}

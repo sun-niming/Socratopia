@@ -1,0 +1,238 @@
+{
+  "chunkId": "chunk-001",
+  "messageRange": [
+    0,
+    9
+  ],
+  "topics": [
+    {
+      "name": "验证错误处理：Errors 参数的位置规则",
+      "facts": [
+        "被验证对象与接收错误的 Errors 参数必须紧挨排列。",
+        "Errors 参数本身没有写入任何名字去指明它属于哪个对象。",
+        "Spring 靠“Errors 紧跟在被验证对象后面”这个位置关系来判断配对。",
+        "@Valid 只负责触发验证，它本身不指明与谁配对。",
+        "把顺序倒过来后，Spring 无法把错误对象接到 order 身上。"
+      ],
+      "examples": [
+        "public String processOrder(@Valid TacoOrder order, Errors errors) 是正确顺序。",
+        "public String processOrder(Errors errors, @Valid TacoOrder order) 是错误顺序。"
+      ],
+      "sourceMessageIndexes": [
+        1,
+        2,
+        3
+      ]
+    },
+    {
+      "name": "在 Thymeleaf 中显示验证错误",
+      "facts": [
+        "控制器发现错误时 return \"orderForm\"，把请求打回表单。",
+        "th:if=\"${#fields.hasErrors('ccNumber')}\" 用于判断某字段是否有错。",
+        "有错时该 <span> 才渲染，没有错时整个元素不出现。",
+        "th:errors=\"*{ccNumber}\" 会用该字段的验证消息替换 <span> 里的占位文字。",
+        "其他字段各自配一个自己的 <span>。",
+        "hasErrors() 括号里不带字段名，问的是整个表单有没有任何错误。",
+        "hasErrors('ccNumber') 带字段名，问的是这一个字段有没有错。"
+      ],
+      "examples": [
+        "清单 2.15 的 span：th:if=\"${#fields.hasErrors('ccNumber')}\"、th:errors=\"*{ccNumber}\"，占位文字为 CC Num Error，实际消息为 \"Not a valid credit card number\"。",
+        "页 60 的总提示 <div th:if=\"${#fields.hasErrors()}\">。",
+        "页 68 图 2.5 满屏红字的效果。",
+        "用户只留空城市字段、卡号填对时：总 <div> 显示，ccNumber 的 <span> 不显示。"
+      ],
+      "sourceMessageIndexes": [
+        3,
+        4,
+        5
+      ]
+    },
+    {
+      "name": "2.4 使用视图控制器",
+      "facts": [
+        "HomeController 不填模型、不处理输入，只把 / 请求转发到一个首页视图。",
+        "可以用 WebMvcConfigurer 的 addViewControllers 替代这类只转发的控制器。",
+        "addViewController(\"/\") 登记谁来处理 / 这个 GET 请求，返回一个登记对象。",
+        ".setViewName(\"home\") 告诉它把 / 转发到名叫 home 的视图。",
+        "配置好之后，HomeController 就可以删掉，行为一模一样。",
+        "WebMvcConfigurer 是接口，教材说只需覆盖需要的方法。",
+        "Java 8 开始用 default 方法允许接口方法带默认实现，实现类可以不覆盖这些方法。",
+        "WebMvcConfigurer 把所有方法都给了默认空实现。",
+        "替代写法：把 implements WebMvcConfigurer 挂到启动类 TacoCloudApplication 上，省掉 WebConfig 类。",
+        "作者偏好 web、数据、安全各建一个配置类，让启动类保持干净，这是口味问题不是对错。"
+      ],
+      "examples": [
+        "清单 2.16：@Configuration class WebConfig implements WebMvcConfigurer 中重写 addViewControllers(ViewControllerRegistry registry)，调用 registry.addViewController(\"/\").setViewName(\"home\")。"
+      ],
+      "sourceMessageIndexes": [
+        5,
+        6,
+        7
+      ]
+    },
+    {
+      "name": "2.5 选择视图模板库",
+      "facts": [
+        "这一节讲的是 Spring Boot 怎么把模板引擎接进来。",
+        "套路三步：把模板库 starter 加进构建；在 src/main/resources/templates 下写模板；Spring Boot 启动时自动检测并自动配好组件。",
+        "表 2.2 列了五种模板选择。",
+        "JSP 的依赖那栏写的是 None，由 Tomcat 或 Jetty 提供。",
+        "其他模板都要专门加 starter。",
+        "JSP 规范由 servlet 容器自己实现，默认内嵌 Tomcat 已带 JSP 支持。",
+        "servlet 容器习惯在 /WEB-INF 目录下找 JSP。",
+        "如果应用被打成可执行 JAR，就没法满足去 /WEB-INF 找 JSP 的要求。",
+        "想用 JSP 就得把应用打成 WAR，部署到传统 servlet 容器里。",
+        "JSP 免依赖，但挑部署形式；别的模板要依赖，但不挑打包方式。"
+      ],
+      "examples": [
+        "表 2.2：FreeMarker 用 spring-boot-starter-freemarker；Groovy Templates 用 spring-boot-starter-groovy-templates；JSP 为 None；Mustache 用 spring-boot-starter-mustache；Thymeleaf 用 spring-boot-starter-thymeleaf。",
+        "Taco Cloud 用 Thymeleaf，靠第 1 章勾选复选框让 starter 自动进 pom.xml。",
+        "换 Mustache 需换依赖并把模板语法从 th:* 改成 {{...}}，页 72 有 {{#wrap}} 的例子。"
+      ],
+      "sourceMessageIndexes": [
+        7,
+        8,
+        9
+      ]
+    },
+    {
+      "name": "2.5.1 缓存模板",
+      "facts": [
+        "模板默认解析一次就缓存起来，后面都吃缓存。",
+        "生产环境缓存是好事，省得每个请求都重新解析。",
+        "开发时缓存会导致改完模板、刷新浏览器还是旧版本，非得重启应用才生效。",
+        "解法是关掉对应模板引擎的缓存。",
+        "上线前一定要把关闭缓存的配置删掉，或改回 true。",
+        "善后方案一：用 profile 文件分散配置（第 5 章要讲）。",
+        "善后方案二：用第 1 章勾选的 DevTools，开发时自动关掉所有模板缓存，部署时自动失效、把缓存重新打开。"
+      ],
+      "examples": [
+        "表 2.3：FreeMarker 用 spring.freemarker.cache；Groovy Templates 用 spring.groovy.template.cache；Mustache 用 spring.mustache.cache；Thymeleaf 用 spring.thymeleaf.cache。",
+        "关 Thymeleaf 缓存：在 application.properties 里写 spring.thymeleaf.cache = false。"
+      ],
+      "sourceMessageIndexes": [
+        9
+      ]
+    }
+  ],
+  "learnerEvidence": [
+    {
+      "kind": "correct",
+      "content": "不能（把顺序倒过来 Spring 无法把校验错误好好塞进 errors），应该是靠 errors 前面紧邻的 @Valid 判断。",
+      "sourceMessageIndexes": [
+        2
+      ]
+    },
+    {
+      "kind": "correct",
+      "content": "总 <div> 会显示，ccNumber 不会显示。",
+      "sourceMessageIndexes": [
+        4
+      ]
+    },
+    {
+      "kind": "correct",
+      "content": "Java 8 开始，使用 default 方法实现。",
+      "sourceMessageIndexes": [
+        6
+      ]
+    },
+    {
+      "kind": "correct",
+      "content": "嵌入式的 Tomcat 就提供了 JSP。",
+      "sourceMessageIndexes": [
+        8
+      ]
+    }
+  ],
+  "keyInsights": [
+    {
+      "content": "Errors 参数的配对靠“紧邻被验证对象”这一位置规则，而不是靠 @Valid 指明配对对象。",
+      "sourceMessageIndexes": [
+        2,
+        3
+      ]
+    },
+    {
+      "content": "hasErrors() 不带字段名守全局，hasErrors('字段名') 守单点。",
+      "sourceMessageIndexes": [
+        4,
+        5
+      ]
+    },
+    {
+      "content": "Java 8 的 default 方法让实现类可以只覆盖接口中真正要改的方法。",
+      "sourceMessageIndexes": [
+        6,
+        7
+      ]
+    },
+    {
+      "content": "JSP 免依赖是因为 servlet 容器自带 JSP 支持；但用 JSP 就得打 WAR，不能走可执行 JAR。",
+      "sourceMessageIndexes": [
+        8,
+        9
+      ]
+    }
+  ],
+  "openQuestions": [
+    {
+      "content": "如果项目里挂了 DevTools，还需不需要自己动手在 application.properties 里写 spring.thymeleaf.cache = false？DevTools 是否算把 2.5.1 整节要解决的问题彻底解决了？",
+      "sourceMessageIndexes": [
+        9
+      ]
+    }
+  ],
+  "reviewCandidates": [
+    {
+      "question": "processOrder(Errors errors, @Valid TacoOrder order) 这种参数顺序为什么不行？",
+      "answer": "Errors 参数没有写入指明所属对象的名字，Spring 靠“Errors 紧跟在被验证对象后面”这一位置关系配对；顺序倒过来后它前面站的是别的参数，无法把错误对象接到 order 上。",
+      "sourceMessageIndexes": [
+        1,
+        2,
+        3
+      ]
+    },
+    {
+      "question": "th:if=\"${#fields.hasErrors('ccNumber')}\" 与 th:errors=\"*{ccNumber}\" 各负责什么？",
+      "answer": "前者判断 ccNumber 字段是否有错，有错才渲染该 <span>；后者在有错时把该字段的验证消息替换掉 <span> 里的占位文字。",
+      "sourceMessageIndexes": [
+        3
+      ]
+    },
+    {
+      "question": "用户只把城市字段留空、卡号填对时，总提示 <div> 和 ccNumber 的 <span> 各会不会显示？",
+      "answer": "总 <div> 显示（hasErrors() 不带字段名，测的是整个表单有无任何错误）；ccNumber 的 <span> 不显示（该字段无错）。",
+      "sourceMessageIndexes": [
+        3,
+        4,
+        5
+      ]
+    },
+    {
+      "question": "视图控制器配置利用了 Java 的什么机制让接口可以只实现一部分方法？",
+      "answer": "Java 8 的 default 方法；WebMvcConfigurer 的所有方法都有默认空实现，实现类只覆盖 addViewControllers 即可。",
+      "sourceMessageIndexes": [
+        5,
+        6,
+        7
+      ]
+    },
+    {
+      "question": "JSP 为什么在表 2.2 里不需要 starter 依赖？它的代价是什么？",
+      "answer": "JSP 规范由 servlet 容器自己实现，默认内嵌 Tomcat 已带 JSP 支持，所以不需要 starter。代价是容器习惯在 /WEB-INF 下找 JSP，可执行 JAR 无法满足，想用 JSP 就得打成 WAR 部署到传统 servlet 容器里。",
+      "sourceMessageIndexes": [
+        7,
+        8,
+        9
+      ]
+    },
+    {
+      "question": "开发时模板改动不生效的原因和解决办法是什么？",
+      "answer": "模板默认解析一次就缓存；开发时改模板刷浏览器仍是旧版本，需重启应用。办法是关掉对应模板引擎的缓存，如 Thymeleaf 用 spring.thymeleaf.cache = false；上线前删掉或改回 true，也可用 profile 或 DevTools 自动处理。",
+      "sourceMessageIndexes": [
+        9
+      ]
+    }
+  ]
+}

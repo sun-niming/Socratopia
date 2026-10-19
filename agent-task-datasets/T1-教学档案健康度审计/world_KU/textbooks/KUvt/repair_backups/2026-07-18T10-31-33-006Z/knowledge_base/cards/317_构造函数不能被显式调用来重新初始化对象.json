@@ -1,0 +1,41 @@
+{
+  "title": "构造函数不能被显式调用来重新初始化对象",
+  "definition": "构造函数用于对象创建时的初始化，不能像普通成员函数一样对已经存在的对象再次调用。若对象已经创建，应使用普通成员函数（例如 setValue）修改其状态。",
+  "key_points": [
+    "创建对象时可以直接提供构造函数参数，例如 SpreadsheetCell myCell(5); 或 SpreadsheetCell myCell{5};。",
+    "表达式 myCell.SpreadsheetCell(5); 试图对已有对象显式调用构造函数，不能通过编译。",
+    "若先默认构造对象，再设置数值，应写成 SpreadsheetCell myCell{}; myCell.setValue(5);。"
+  ],
+  "examples": [
+    "正确：`SpreadsheetCell myCell(5);`",
+    "正确：`SpreadsheetCell myCell{5};`",
+    "错误：`SpreadsheetCell myCell; myCell.SpreadsheetCell(5);`",
+    "错误：`SpreadsheetCell myCell.SpreadsheetCell(5);`",
+    "修改已有对象：`SpreadsheetCell myCell{}; myCell.setValue(5);`"
+  ],
+  "misconceptions": [
+    "构造函数不是普通成员函数，不能在对象创建后通过点运算符再次调用。",
+    "给已有对象重新赋初值不能靠再次调用构造函数，而应使用赋值运算符或类提供的修改成员函数。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "能否通过 `myCell.SpreadsheetCell(5);` 把已有 SpreadsheetCell 对象重新初始化为 5？",
+      "a": "不能。构造函数不能像普通成员函数一样被显式调用；应在创建时传入 5，或对已有对象调用 `setValue(5)`。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++类与对象的基本概念"
+  ],
+  "source_pages": [
+    237,
+    240
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "317_构造函数不能被显式调用来重新初始化对象",
+  "_chunk_pages": [
+    237,
+    240
+  ]
+}

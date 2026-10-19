@@ -1,0 +1,41 @@
+{
+  "title": "parse_request_line",
+  "definition": "`parse_request_line(const char *buf, HttpRequest *req)` 用于解析 HTTP 请求第一行。它从 `recv` 得到的请求文本中提取 `method`、`path`、`version`：成功返回 `0`，格式错误返回 `-1`，方法不支持可返回 `405`。该函数只解析第一行，不处理 Body。",
+  "key_points": [
+    "输入 `buf` 是 `recv` 得到的请求文本。",
+    "输出到 `req` 中的 `method`、`path`、`version`。",
+    "成功返回 `0`；格式错误返回 `-1`；方法不支持可返回 `405`。",
+    "本项目只解析第一行，不处理 Body。",
+    "使用 `sscanf` 时必须限制宽度，避免缓冲区溢出。"
+  ],
+  "examples": [
+    "项目内最小示例：\n```c\nint parse_request_line(const char *buf, HttpRequest *req) {\n    if (sscanf(buf, \"%15s %1023s %15s\", req->method, req->path, req->version) != 3)\n        return -1;\n    if (strcmp(req->method, \"GET\") != 0)\n        return 405;\n    if (req->path[0] != '/')\n        return -1;\n    return 0;\n}\n```"
+  ],
+  "misconceptions": [
+    "把整个请求体都交给这个函数处理。",
+    "使用不带宽度限制的 `sscanf`，导致路径过长时溢出。",
+    "把非 `GET` 方法也当作正常请求。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`parse_request_line` 的主要作用是什么？",
+      "a": "解析 HTTP 请求第一行，提取方法、路径和版本。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "请求行三个字段",
+    "C 字符串处理"
+  ],
+  "source_pages": [
+    49,
+    52
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "078_parse_request_line",
+  "_chunk_pages": [
+    49,
+    52
+  ]
+}

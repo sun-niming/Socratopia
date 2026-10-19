@@ -1,0 +1,41 @@
+{
+  "title": "background-color 背景颜色",
+  "definition": "background-color 用于设置元素背景颜色。教材给出的颜色值示例包括颜色名、十六进制颜色值、rgb() 和 rgba()。",
+  "key_points": [
+    "可使用颜色名设置背景色。",
+    "可使用十六进制颜色值设置背景色。",
+    "可使用 rgb() 或 rgba() 设置背景色。"
+  ],
+  "examples": [
+    "background-color: red;",
+    "background-color: #f00;",
+    "background-color: rgb(255,0,0);",
+    "background-color: rgba(255,0,0,0.5);"
+  ],
+  "misconceptions": [
+    "背景色只能写英文颜色名。",
+    "rgba() 不能用于背景颜色。",
+    "十六进制颜色值不能用于 background-color。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "background-color 可以使用哪些类型的颜色值？",
+      "a": "可以使用颜色名、#f00 这类十六进制值、rgb() 和 rgba()。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "CSS颜色基础"
+  ],
+  "source_pages": [
+    113,
+    116
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "157_background_color_背景颜色",
+  "_chunk_pages": [
+    113,
+    116
+  ]
+}

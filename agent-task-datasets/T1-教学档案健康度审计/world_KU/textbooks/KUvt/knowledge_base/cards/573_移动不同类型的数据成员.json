@@ -1,0 +1,49 @@
+{
+  "title": "移动不同类型的数据成员",
+  "definition": "实现类的移动操作时，基本类型和指针成员可以通过直接赋值或 `std::exchange` 转移，并将源成员重置；如果类含有其他对象类型的数据成员，则应对这些成员使用 `std::move()`，以调用它们的移动操作。",
+  "key_points": [
+    "基本类型成员可以使用 `std::exchange(src.member, default_value)`。",
+    "指针成员可以使用 `std::exchange(src.pointer, nullptr)`，以转移指针并清空源指针。",
+    "对象类型成员，例如 `std::string`，应使用 `std::move(src.member)` 移动。",
+    "源对象的基本成员和指针成员通常要被重置为默认值或空指针。"
+  ],
+  "examples": [
+    "假设 `Spreadsheet` 有 `std::string m_name` 成员：\n```text\nvoid Spreadsheet::moveFrom(Spreadsheet&& src) noexcept {\n    m_name = std::move(src.m_name);\n    m_width = std::exchange(src.m_width, 0);\n    m_height = std::exchange(src.m_height, 0);\n    m_cells = std::exchange(src.m_cells, nullptr);\n}\n```"
+  ],
+  "misconceptions": [
+    "对所有成员都进行浅复制并不等于正确移动；对象类型成员通常需要调用其移动操作。",
+    "对 `std::string` 等对象成员使用 `std::move()` 后，不能假定源字符串仍保留原内容。",
+    "`std::move()` 和 `std::exchange()` 的职责不同：前者将表达式转换为右值，后者用新值替换旧值并返回旧值。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "移动 `std::string` 数据成员时应使用什么方式？",
+      "a": "使用 `std::move(src.m_name)`，例如 `m_name = std::move(src.m_name);`。"
+    },
+    {
+      "q": "移动整数宽度成员时为什么可以使用 `std::exchange`？",
+      "a": "因为整数是基本类型，可以取出源成员的旧值并同时将源成员重置为 `0`。"
+    },
+    {
+      "q": "移动指针成员后通常将源指针设为什么？",
+      "a": "通常设为 `nullptr`，以表示源对象不再拥有该资源。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "std::move",
+    "std::exchange",
+    "移动语义的实现要求"
+  ],
+  "source_pages": [
+    272,
+    272
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "573_移动不同类型的数据成员",
+  "_chunk_pages": [
+    269,
+    272
+  ]
+}

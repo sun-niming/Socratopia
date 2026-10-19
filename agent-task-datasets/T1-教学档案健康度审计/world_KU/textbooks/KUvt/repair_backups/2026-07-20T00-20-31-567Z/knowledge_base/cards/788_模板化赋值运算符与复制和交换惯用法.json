@@ -1,0 +1,51 @@
+{
+  "title": "模板化赋值运算符与复制和交换惯用法",
+  "definition": "Grid<T> 可以定义一个接收 Grid<E> 的成员模板赋值运算符：$\\texttt{template<typename E> Grid<T>\\& operator=(const Grid<E>\\& rhs);}$。该运算符先利用模板化拷贝构造函数把 Grid<E> 转换为临时的 Grid<T>，再通过只交换同类型对象的 swap() 完成赋值，采用的是复制和交换惯用法。",
+  "key_points": [
+    "模板化赋值运算符接收 $\\texttt{const Grid<E>\\&}$，但返回 $\\texttt{Grid<T>\\&}$。",
+    "先创建一个由 rhs 转换而来的临时 Grid<T>，再调用 $\\texttt{swap(temp)}$。",
+    "swap() 只能交换同类网格，但临时对象已经是 Grid<T>，而当前对象也是 Grid<T>，因此可以交换。",
+    "复制和交换惯用法把提交阶段限制为非抛出操作；原文将其描述为使用非抛出操作完成提交。"
+  ],
+  "examples": [
+    "赋值运算符声明：$\\texttt{template<typename E> Grid<T>\\& operator=(const Grid<E>\\& rhs);}$",
+    "核心逻辑可表示为：$$\\texttt{Grid<T> temp\\{rhs\\};}\\\\\\texttt{swap(temp);}$$",
+    "其中第一步通过模板化拷贝构造函数把 Grid<E> 转换为 Grid<T>，第二步交换当前对象与临时对象。"
+  ],
+  "misconceptions": [
+    "赋值运算符的返回类型不是 Grid<E>&，而是目标类型 Grid<T>&。",
+    "swap() 本身不负责把 Grid<E> 转换成 Grid<T>；转换由模板化拷贝构造函数先完成。",
+    "复制和交换不是直接修改源对象，而是先生成目标类型的临时副本，再交换资源。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "模板化赋值运算符的参数和返回类型分别是什么？",
+      "a": "参数是 $\\texttt{const Grid<E>\\&}$，返回类型是 $\\texttt{Grid<T>\\&}$。"
+    },
+    {
+      "q": "为什么 Grid<T> 的 swap() 可以用于来自 Grid<E> 的赋值？",
+      "a": "因为赋值运算符先通过模板化拷贝构造函数把源对象转换成临时 Grid<T>，随后交换的是两个同类型的 Grid<T> 对象。"
+    },
+    {
+      "q": "复制和交换惯用法在该赋值运算符中如何工作？",
+      "a": "先根据 rhs 创建临时 Grid<T>，再调用 swap(temp) 交换当前对象与临时对象；临时对象销毁时释放原有资源。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "类模板中的跨类型拷贝构造函数",
+    "复制和交换惯用法",
+    "赋值运算符"
+  ],
+  "source_pages": [
+    388,
+    388
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "788_模板化赋值运算符与复制和交换惯用法",
+  "_chunk_pages": [
+    385,
+    388
+  ]
+}

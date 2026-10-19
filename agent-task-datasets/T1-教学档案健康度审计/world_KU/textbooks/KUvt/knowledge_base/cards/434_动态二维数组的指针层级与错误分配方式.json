@@ -1,0 +1,45 @@
+{
+  "title": "动态二维数组的指针层级与错误分配方式",
+  "definition": "运行时确定二维数组的维度时，可以在自由存储区动态分配。按原文所述，二维动态数组通常通过指向指针的指针（如 `char**`）访问：第一层数组的每个元素指向一个子数组。直接写成 `char** board { new char[i][j] };` 是错误的，不能通过编译。",
+  "key_points": [
+    "一维动态数组通常通过指针访问；二维动态数组若采用分散子数组布局，通常使用指针的指针，如 `char**`。",
+    "第一层数组保存若干个指针，每个指针指向一个子数组。",
+    "编译器不会因为声明了 `char**` 就自动为所有子数组分配内存。",
+    "原文给出的 `new char[i][j]` 形式不能按 `char**` 方式直接完成这种动态分配。"
+  ],
+  "examples": [
+    "错误示例：\n```text\nchar** board { new char[i][j] }; // BUG! Does not compile\n```",
+    "分散布局可抽象为：\n$$\\text{board}\\rightarrow[\\text{board}[0],\\text{board}[1],\\ldots]\\rightarrow\\text{各个子数组}$$"
+  ],
+  "misconceptions": [
+    "`char**` 不等于一块自动分配好的连续二维字符矩阵。",
+    "只分配第一层指针数组并不能分配每一行的字符存储空间；每个子数组仍需单独分配。",
+    "动态二维数组的所有元素不一定连续存放，取决于具体分配方案。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么 `char** board { new char[i][j] };` 不能正确分配动态二维数组？",
+      "a": "这种写法不能按 `char**` 所需的指针数组加子数组结构进行分配，原文指出该代码无法编译。"
+    },
+    {
+      "q": "采用 `char**` 表示动态二维数组时，第一层数组的元素通常是什么？",
+      "a": "每个元素通常是指向一个子数组的指针。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "指针与动态内存分配",
+    "多维数组的子数组模型"
+  ],
+  "source_pages": [
+    206,
+    207
+  ],
+  "needs_verification": true,
+  "verify_query": "C++ char** board new char[i][j] cannot compile dynamic 2D array textbook",
+  "concept_id": "434_动态二维数组的指针层级与错误分配方式",
+  "_chunk_pages": [
+    205,
+    208
+  ]
+}

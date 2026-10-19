@@ -1,0 +1,36 @@
+{
+  "title": "全局对象在程序启动前已创建",
+  "definition": "在程序开始运行之前，Global对象就已经被系统创建，并且它的属性也已经被赋值，所以程序中可以直接使用一些内置函数，例如 parseInt。",
+  "key_points": [
+    "全局对象在程序运行前已存在。",
+    "全局对象的属性在程序开始前已经赋值。",
+    "因此可以直接使用 parseInt 等函数。"
+  ],
+  "examples": [
+    "程序中可以直接调用 parseInt。"
+  ],
+  "misconceptions": [
+    "误以为必须先手动创建全局对象或导入后才能使用 parseInt。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么程序中可以直接使用 parseInt？",
+      "a": "因为在程序开始运行之前，全局对象已经被系统创建，而且它的属性也已经被赋值。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "Global对象"
+  ],
+  "source_pages": [
+    301,
+    304
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "397_全局对象在程序启动前已创建",
+  "_chunk_pages": [
+    301,
+    304
+  ]
+}

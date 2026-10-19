@@ -1,0 +1,46 @@
+{
+  "title": "移动构造和移动赋值应使用 noexcept",
+  "definition": "可移动类型通常将移动构造函数和移动赋值运算符声明为 `noexcept`，表示这些操作不会通过异常向外传播。原文以 `Spreadsheet` 为例，声明了 `Spreadsheet(Spreadsheet&& src) noexcept` 和 `Spreadsheet& operator=(Spreadsheet&& rhs) noexcept`，并将资源清理和资源转移辅助函数也声明为 `noexcept`。",
+  "key_points": [
+    "移动构造函数负责用源对象的资源初始化新对象。",
+    "移动赋值运算符负责先释放当前对象已有资源，再接管源对象资源。",
+    "原文中的资源包括宽度、高度以及动态分配的单元数组指针 `m_cells`。",
+    "`cleanup()` 和 `moveFrom()` 被声明为 `noexcept`，以支持移动操作的异常安全保证。"
+  ],
+  "examples": [
+    "典型声明：`Spreadsheet(Spreadsheet&& src) noexcept;`。",
+    "典型声明：`Spreadsheet& operator=(Spreadsheet&& rhs) noexcept;`。",
+    "辅助函数声明：`void cleanup() noexcept;` 与 `void moveFrom(Spreadsheet&& src) noexcept;`。"
+  ],
+  "misconceptions": [
+    "声明 `noexcept` 不会自动让函数具备移动语义；仍然必须实现资源转移和源对象重置。",
+    "移动操作不是把所有成员都逐个复制一份；对指针等资源句柄，通常是转移所有权。",
+    "移动构造和移动赋值都需要正确处理源对象被移动后的状态。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "原文示例中的 `Spreadsheet` 移动构造函数如何声明？",
+      "a": "`Spreadsheet(Spreadsheet&& src) noexcept;`。"
+    },
+    {
+      "q": "为什么 `cleanup()` 也声明为 `noexcept`？",
+      "a": "因为它是移动赋值等操作使用的资源清理辅助函数，原文要求其不通过异常向外传播。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "移动构造函数与移动赋值运算符",
+    "异常规范 noexcept"
+  ],
+  "source_pages": [
+    269,
+    272
+  ],
+  "needs_verification": true,
+  "verify_query": "《C++20高级编程》第5版 第270页 Spreadsheet move constructor move assignment noexcept cleanup moveFrom 原文签名",
+  "concept_id": "354_移动构造和移动赋值应使用_noexcept",
+  "_chunk_pages": [
+    269,
+    272
+  ]
+}

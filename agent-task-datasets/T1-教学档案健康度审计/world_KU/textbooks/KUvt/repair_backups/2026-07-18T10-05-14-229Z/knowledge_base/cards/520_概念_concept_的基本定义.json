@@ -1,0 +1,43 @@
+{
+  "title": "概念（concept）的基本定义",
+  "definition": "C++20 的概念是一个编译期谓词，用于表达类型或表达式必须满足的约束。概念通常使用 `template <typename T> concept 概念名 = 约束表达式;` 定义；约束表达式应当能够在编译期判断为布尔值。",
+  "key_points": [
+    "概念名称后可以带参数列表，例如 `concept-name<argument-list>`。",
+    "概念可以直接由常量表达式定义，例如 `template <typename T> concept C = sizeof(T) == 4;`。",
+    "概念也可以使用 `requires` 表达式检查类型是否支持指定的操作。"
+  ],
+  "examples": [
+    "`template <typename T> concept C = sizeof(T) == 4;` 表示类型 `T` 的大小必须为 4 字节。",
+    "`template <typename T> concept Incrementable = requires(T x) { x++; ++x; };` 表示类型 `T` 的对象既支持后置递增 `x++`，也支持前置递增 `++x`。"
+  ],
+  "misconceptions": [
+    "概念不是运行时函数；它主要用于编译期约束检查。",
+    "概念表达式中的操作不一定会在运行时执行；`requires` 表达式主要检查这些操作是否合法。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何定义一个要求类型大小为 4 字节的概念？",
+      "a": "可以写成 `template <typename T> concept C = sizeof(T) == 4;`。"
+    },
+    {
+      "q": "`Incrementable` 概念检查什么？",
+      "a": "它检查类型 `T` 的对象是否同时支持 `x++` 和 `++x`。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++模板和类型参数",
+    "编译期常量表达式"
+  ],
+  "source_pages": [
+    401,
+    404
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "520_概念_concept_的基本定义",
+  "_chunk_pages": [
+    401,
+    404
+  ]
+}

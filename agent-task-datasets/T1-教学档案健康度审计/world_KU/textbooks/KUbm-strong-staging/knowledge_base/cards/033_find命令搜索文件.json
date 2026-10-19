@@ -1,0 +1,40 @@
+{
+  "title": "find命令搜索文件",
+  "definition": "find 用于搜索文件，教材给出的基本格式是：find [目录] [选项] [动作]。它表示在指定目录中，按照给定选项进行查找，并可对查找到的目标执行后续动作。",
+  "key_points": [
+    "基本格式：find [目录] [选项] [动作]",
+    "先指定查找目录，再指定查找条件",
+    "查找到目标后可以接动作进行处理"
+  ],
+  "examples": [
+    "find /home -name \"*.txt\"",
+    "find . -type f"
+  ],
+  "misconceptions": [
+    "把 find 只理解成“按文件名查找”是不完整的，教材还给出了按类型和执行动作",
+    "忽略“动作”部分，会漏掉 find 的进一步处理能力"
+  ],
+  "qa_pairs": [
+    {
+      "q": "教材中 find 的基本语法是什么？",
+      "a": "find [目录] [选项] [动作]。"
+    },
+    {
+      "q": "find 命令的主要用途是什么？",
+      "a": "用于文件搜索。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [],
+  "source_pages": [
+    17,
+    20
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "033_find命令搜索文件",
+  "_chunk_pages": [
+    17,
+    20
+  ]
+}

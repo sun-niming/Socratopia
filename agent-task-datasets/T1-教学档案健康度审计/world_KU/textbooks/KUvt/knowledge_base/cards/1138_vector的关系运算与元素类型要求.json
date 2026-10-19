@@ -1,0 +1,42 @@
+{
+  "title": "vector的关系运算与元素类型要求",
+  "definition": "比较两个vector时，比较操作会按元素进行。因此，vector中的元素类型必须支持所使用的比较运算符：判断相等需要支持operator==；进行不等比较或关系比较时，需要支持相应的比较运算符。若vector保存自定义类对象，必须为该类型提供这些运算符。",
+  "key_points": [
+    "vector的比较不是只比较大小或元素数量，而是需要逐个元素进行比较。",
+    "自定义元素类型若缺少所需的比较运算符，相关vector比较操作将无法使用或无法编译。"
+  ],
+  "examples": [
+    "对于元素类型为int的两个vector，可以使用相等比较：\n文本代码：if (vectorOne == vectorTwo) { cout << \"equal!\" << endl; } else { cout << \"not equal!\" << endl; }",
+    "如果vector保存自定义类型T，则T需要提供比较所需的运算符，例如operator==。"
+  ],
+  "misconceptions": [
+    "vector相等比较只比较两个vector的长度；实际上还需要比较对应位置的元素。",
+    "只要元素类型能输出到cout，就一定能比较两个vector；输出运算符与比较运算符是不同的要求。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "比较两个vector时，对元素类型有什么要求？",
+      "a": "元素类型必须支持所使用的比较运算符；相等比较需要operator==，其他比较需要相应的关系比较运算符。"
+    },
+    {
+      "q": "vector保存自定义类对象时，为什么通常要为该类编写比较运算符？",
+      "a": "因为vector的比较操作会比较其中的元素，若自定义类型没有相应的比较运算符，vector之间的比较就无法进行。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++运算符重载",
+    "vector容器基础"
+  ],
+  "source_pages": [
+    553,
+    553
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 std::vector operator== operator!= operator< operator> operator<= operator>= element type comparison requirements",
+  "concept_id": "1138_vector的关系运算与元素类型要求",
+  "_chunk_pages": [
+    553,
+    556
+  ]
+}

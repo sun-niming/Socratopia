@@ -1,0 +1,42 @@
+{
+  "title": "std::array的std::get编译期索引访问",
+  "definition": "可以使用非成员函数模板std::get<I>(array)从std::array中获取索引为I的元素。索引I必须是编译期常量表达式，不能使用运行时循环变量。编译器会在编译期检查索引是否越界，越界会导致编译错误。",
+  "key_points": [
+    "调用形式为std::get<I>(myArray)，其中I是编译期常量索引。",
+    "索引越界不会等到运行时处理，而是在编译阶段导致错误。",
+    "这种访问方式适合索引已知且固定的场景；运行时索引应使用operator[]等其他方式。"
+  ],
+  "examples": [
+    "代码示例：array<int, 3> myArray{11, 22, 33};\ncout << std::get<1>(myArray) << endl; // 输出22",
+    "错误示例：std::get<10>(myArray); // myArray只有3个元素，编译错误"
+  ],
+  "misconceptions": [
+    "std::get<I>中的I不是普通运行时变量，不能直接使用循环变量。",
+    "std::get<I>越界不是运行时异常，而是编译错误。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "std::get<I>访问std::array时，I有什么限制？",
+      "a": "I必须是编译期常量表达式，并且必须是有效索引；越界会导致编译错误。"
+    },
+    {
+      "q": "对array<int, 3>调用std::get<10>(myArray)会发生什么？",
+      "a": "由于索引10越界，程序会在编译阶段报错。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "std::array的基本用法"
+  ],
+  "source_pages": [
+    573,
+    573
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1181_std_array的std_get编译期索引访问",
+  "_chunk_pages": [
+    573,
+    576
+  ]
+}

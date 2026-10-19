@@ -1,0 +1,58 @@
+{
+  "title": "教材中对象池模板的结构",
+  "definition": "原文给出的 `ObjectPool` 是一个类模板，通过类型参数 `T` 指定池中对象类型，通过 `Allocator` 指定分配和释放内存块所使用的分配器类型。对象池使用一个 vector 记录内存块，以及另一个 vector 记录当前空闲对象的指针；调用 `acquireObject()` 获取对象，并返回带有自定义删除器的 `std::shared_ptr<T>`，使对象在共享指针引用计数归零时自动回收到池中。",
+  "key_points": [
+    "模板参数包括对象类型 `T` 和默认值为 `std::allocator<T>` 的分配器类型 `Allocator`。",
+    "池中保存对象块的记录，例如用于记录各块首对象指针的 `std::vector<T*> m_pool`。",
+    "池中还保存空闲对象指针列表，例如 `std::vector<T*> m_freeObjects`。",
+    "初始块大小在原文代码中设置为 5；新分配块的大小在每次创建新块后加倍。",
+    "`acquireObject()` 支持向 `T` 的构造函数转发参数，并返回 `std::shared_ptr<T>`。",
+    "该实现允许移动构造和移动赋值，但删除了拷贝构造和拷贝赋值。",
+    "对象池使用 `vector` 且没有同步操作，因此原文明确指出该版本不是线程安全的。"
+  ],
+  "examples": [
+    "接口结构可概括为：`template<typename... Args> std::shared_ptr<T> acquireObject(Args... args);`，用于获取对象并向对象构造函数提供参数。",
+    "对象池状态可抽象表示为：$$\\text{池内存块记录}\\rightarrow m\\_pool,\\qquad \\text{空闲对象指针}\\rightarrow m\\_freeObjects$$。",
+    "原文代码中的初始块大小为：`ms_initialChunkSize { 5 }`；新块大小在分配新块后扩大为原来的两倍。"
+  ],
+  "misconceptions": [
+    "返回 `shared_ptr` 不表示对象被普通地销毁；自定义删除器会在引用计数归零时把对象放回对象池。",
+    "该对象池实现不是线程安全的，不能因为使用了 `shared_ptr` 就认为整个对象池支持并发访问。",
+    "对象池只会增长，使用完对象后是回收到空闲列表中，而不是立即从池的内存块中移除。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`ObjectPool` 的两个主要模板参数是什么？",
+      "a": "`T` 表示池中存储的对象类型；`Allocator` 表示分配和释放内存块的分配器类型，默认是 `std::allocator<T>`。"
+    },
+    {
+      "q": "`acquireObject()` 返回什么？",
+      "a": "它返回一个带自定义删除器的 `std::shared_ptr<T>`，并可将参数转发给 `T` 的构造函数。"
+    },
+    {
+      "q": "为什么原文说该对象池版本不是线程安全的？",
+      "a": "因为它使用 `vector` 管理数据，但没有执行任何同步操作。"
+    },
+    {
+      "q": "对象池何时把对象重新放回池中？",
+      "a": "当返回的 `shared_ptr` 被销毁且其引用计数达到 0 时，自定义删除器会自动将对象放回对象池。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "类模板",
+    "std::shared_ptr 与自定义删除器",
+    "内存分配器"
+  ],
+  "source_pages": [
+    859,
+    860
+  ],
+  "needs_verification": true,
+  "verify_query": "Marc Gregoire C++20高级编程 第5版 ObjectPool ms_initialChunkSize 5 m_newChunkSize shared_ptr custom deleter acquireObject 源码",
+  "concept_id": "1785_教材中对象池模板的结构",
+  "_chunk_pages": [
+    857,
+    860
+  ]
+}

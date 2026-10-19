@@ -1,0 +1,37 @@
+{
+  "title": "全局变量和全局函数属于window对象",
+  "definition": "在浏览器中，使用var声明的全局变量属于window对象的属性；全局函数也属于window对象的属性。",
+  "key_points": [
+    "var声明的全局变量会成为window对象的属性",
+    "全局函数也属于window对象的属性"
+  ],
+  "examples": [
+    "var a = 1; 其中a属于window对象的属性",
+    "function test(){}; test属于window对象的属性"
+  ],
+  "misconceptions": [
+    "全局变量和全局函数在浏览器中不一定独立于window存在",
+    "var声明的全局变量不会自动挂到window上"
+  ],
+  "qa_pairs": [
+    {
+      "q": "浏览器中var声明的全局变量属于哪个对象？",
+      "a": "属于window对象的属性。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "window对象"
+  ],
+  "source_pages": [
+    329,
+    332
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "468_全局变量和全局函数属于window对象",
+  "_chunk_pages": [
+    329,
+    332
+  ]
+}

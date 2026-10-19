@@ -1,0 +1,45 @@
+{
+  "title": "vector数据区的直接访问",
+  "definition": "std::vector的元素在内存中连续存储，可以通过成员函数data()获取指向其数据区的指针，也可以通过非成员函数std::data()获取数据指针。对于空vector，不建议使用&vec[0]获取地址，因为这种写法不安全；应使用data()。",
+  "key_points": [
+    "vec.data()返回指向vector数据区的指针。",
+    "std::data(vec)也可以获取vector的数据指针；std::data()还可用于数组、字符串、静态分配的C风格数组和initializer_list等对象。",
+    "vector的连续存储特性支持通过指针访问其底层数据。",
+    "空vector不应使用&vec[0]获取数据指针。"
+  ],
+  "examples": [
+    "获取vector数据指针：int* data1{vec.data()};",
+    "使用非成员函数获取数据指针：int* data2{std::data(vec)};",
+    "不推荐的写法：&vec[0]，因为vec为空时不安全。"
+  ],
+  "misconceptions": [
+    "data()返回的不是vector对象本身的地址，而是其连续元素存储区的地址。",
+    "虽然vector连续存储，但不能因此忽略空vector情况下的指针访问安全性。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "获取std::vector底层连续数据区指针的推荐方法是什么？",
+      "a": "使用vec.data()，也可以使用std::data(vec)。"
+    },
+    {
+      "q": "为什么不推荐对空vector使用&vec[0]？",
+      "a": "因为空vector没有第一个元素，对vec[0]的访问不安全；应使用data()。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "std::vector的连续存储",
+    "指针与引用"
+  ],
+  "source_pages": [
+    561,
+    561
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1159_vector数据区的直接访问",
+  "_chunk_pages": [
+    561,
+    564
+  ]
+}

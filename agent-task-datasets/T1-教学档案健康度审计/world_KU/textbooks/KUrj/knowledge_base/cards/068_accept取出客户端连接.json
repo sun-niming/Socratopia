@@ -1,0 +1,45 @@
+{
+  "title": "accept取出客户端连接",
+  "definition": "`accept` 用来从监听队列中取出一个客户端连接，并返回一个新的 `client_fd`。这个返回的 fd 才能用于后续对该客户端的读写；`listen_fd` 仍然是监听用的 fd。",
+  "key_points": [
+    "原型是 `int accept(int sockfd, struct sockaddr *addr, socklen_t *addrlen);`。",
+    "`sockfd` 传入的是监听 fd，不是客户端 fd。",
+    "`addr` 用来输出客户端地址，`addrlen` 是输入输出参数。",
+    "成功时返回新的连接 fd，失败时返回 -1。",
+    "主循环中通常反复 `accept`，然后把新连接交给处理函数。"
+  ],
+  "examples": [
+    "```c\nstruct sockaddr_in client_addr;\nsocklen_t len = sizeof(client_addr);\nint client_fd = accept(listen_fd, (struct sockaddr *)&client_addr, &len);\nif (client_fd < 0) {\nif (errno == EINTR) {\ncontinue;\n}\nperror(\"accept\");\ncontinue;\n}\n```"
+  ],
+  "misconceptions": [
+    "把 `accept` 的返回值覆盖成监听 fd。",
+    "以为 `listen_fd` 可以直接拿来读写客户端数据。",
+    "忽略 `EINTR` 导致连接处理异常。",
+    "忘记关闭 `client_fd`。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`accept` 返回的是什么？",
+      "a": "返回一个新的客户端连接 fd。"
+    },
+    {
+      "q": "为什么不能用 `listen_fd` 去收 HTTP 请求？",
+      "a": "因为 `listen_fd` 只用于监听，真正能读写客户端数据的是 `accept` 返回的 `client_fd`。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "listen进入监听状态"
+  ],
+  "source_pages": [
+    45,
+    48
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "068_accept取出客户端连接",
+  "_chunk_pages": [
+    45,
+    48
+  ]
+}

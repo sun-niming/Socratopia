@@ -1,0 +1,56 @@
+{
+  "title": "C++20 std::format 与 fmt 库相关内容",
+  "definition": "原文在格式化功能部分出现了 std::format，并同时列出了 fmt 库的相关内容，包括网址 https://fmt.dev/、头文件 format.h、宏 FMT_HEADER_ONLY、头文件包含语句 #include \"fmt/format.h\"，以及 fmt::format、fmt::format_error 和 fmt::formatter 的 using 声明。",
+  "key_points": [
+    "原文出现标准库格式化函数 std::format。",
+    "原文列出的 fmt 库网址为 https://fmt.dev/。",
+    "fmt 库示例中出现 #define FMT_HEADER_ONLY。",
+    "fmt 库示例中出现 #include \"fmt/format.h\"。",
+    "原文列出的 using 声明为 using fmt::format;、using fmt::format_error; 和 using fmt::formatter;。"
+  ],
+  "examples": [
+    "标准库格式化名称：std::format",
+    "fmt 库示例：#define FMT_HEADER_ONLY",
+    "fmt 库示例：#include \"fmt/format.h\"",
+    "fmt 库名称引入：using fmt::format; using fmt::format_error; using fmt::formatter;"
+  ],
+  "misconceptions": [
+    "std::format 与 fmt::format 的名称不同，不能在未作声明或 using 声明时混用。",
+    "FMT_HEADER_ONLY 是原文示例中的宏定义，不能据此推断所有 fmt 版本或所有配置都必须定义该宏。",
+    "原文只列出了相关名称、文件和配置片段，没有完整说明 std::format 或 fmt::format 的参数规则。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "原文出现的标准库格式化函数是什么？",
+      "a": "std::format。"
+    },
+    {
+      "q": "fmt 库示例包含哪个头文件？",
+      "a": "#include \"fmt/format.h\"。"
+    },
+    {
+      "q": "原文列出了哪些 fmt 名称的 using 声明？",
+      "a": "using fmt::format;、using fmt::format_error; 和 using fmt::formatter;。"
+    },
+    {
+      "q": "原文示例中出现了什么宏？",
+      "a": "#define FMT_HEADER_ONLY。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++ 头文件与宏",
+    "命名空间与 using 声明"
+  ],
+  "source_pages": [
+    17,
+    20
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 std::format fmt.dev FMT_HEADER_ONLY fmt/format.h fmt::format_error fmt::formatter",
+  "concept_id": "017_c_20_std_format_与_fmt_库相关内容",
+  "_chunk_pages": [
+    17,
+    20
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "title": "cp的-a保留属性选项",
+  "definition": "在 cp 命令中，-a 表示复制时保留源文件属性。教材明确列出的属性包括时间戳和符号链接。",
+  "key_points": [
+    "-a 用于复制时保留源文件属性",
+    "教材列出的保留内容包括时间戳",
+    "教材列出的保留内容包括符号链接"
+  ],
+  "examples": [
+    "cp -a src/ dst/",
+    "cp -a file.txt backup/"
+  ],
+  "misconceptions": [
+    "把 -a 仅理解为“普通复制”是不对的，它强调保留源文件属性",
+    "复制后属性完全按默认方式变化的说法不符合教材对 -a 的说明"
+  ],
+  "qa_pairs": [
+    {
+      "q": "cp 的 -a 选项有什么作用？",
+      "a": "复制时保留源文件属性。"
+    },
+    {
+      "q": "教材中举出的 -a 会保留哪些属性？",
+      "a": "时间戳和符号链接。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "cp命令复制文件"
+  ],
+  "source_pages": [
+    17,
+    20
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "032_cp的_a保留属性选项",
+  "_chunk_pages": [
+    17,
+    20
+  ]
+}

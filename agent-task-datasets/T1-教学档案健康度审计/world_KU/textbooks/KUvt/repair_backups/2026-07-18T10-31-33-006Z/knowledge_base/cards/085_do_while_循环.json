@@ -1,0 +1,41 @@
+{
+  "title": "do/while 循环",
+  "definition": "do/while 循环先执行一次循环体，再判断条件。因此，即使条件第一次判断时为 false，循环体也至少执行一次。基本形式是 $$\\begin{aligned}\\text{do}\\ \\{\\ \\text{循环体}\\ \\}\\ \\text{while (条件);}\\end{aligned}$$。",
+  "key_points": [
+    "do/while 的判断发生在循环体执行之后。",
+    "循环体至少执行一次。",
+    "原文示例中 int i { 100 }; do { 输出文本; ++i; } while (i < 5);，由于先执行循环体，再判断 i < 5，因此循环体执行一次。"
+  ],
+  "examples": [
+    "int i { 100 }; do { cout << \"This is silly.\" << endl; ++i; } while (i < 5);"
+  ],
+  "misconceptions": [
+    "do/while 不是先判断条件再执行；它是先执行、后判断。",
+    "条件为 false 并不意味着循环体执行零次；在 do/while 中仍会执行一次。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "do/while 循环至少执行多少次循环体？",
+      "a": "至少执行一次，因为它在第一次条件判断前就先执行循环体。"
+    },
+    {
+      "q": "原文中 i 初始值为 100 且条件为 i < 5 时，do/while 循环体执行几次？",
+      "a": "执行一次；执行循环体并将 i 增加到 101 后，i < 5 为 false，循环结束。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "while 循环"
+  ],
+  "source_pages": [
+    61,
+    62
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "085_do_while_循环",
+  "_chunk_pages": [
+    61,
+    64
+  ]
+}

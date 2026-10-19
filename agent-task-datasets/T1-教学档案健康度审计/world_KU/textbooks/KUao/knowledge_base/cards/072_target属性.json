@@ -1,0 +1,41 @@
+{
+  "title": "target属性",
+  "definition": "target 属性用于规定被链接文档在何处打开，并且只能在 href 属性存在时使用。",
+  "key_points": [
+    "target 属性决定链接打开的位置。",
+    "target 只能与 href 同时使用。",
+    "它描述的是“打开方式/打开位置”，不是链接内容本身。"
+  ],
+  "examples": [
+    "<a href=\"00.html\" target=\"_blank\">示例链接</a>"
+  ],
+  "misconceptions": [
+    "以为 target 可以单独使用。",
+    "以为 target 是链接地址本身。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "target 属性规定什么？",
+      "a": "规定在何处打开被链接文档。"
+    },
+    {
+      "q": "target 属性能单独使用吗？",
+      "a": "不能，只能在 href 属性存在时使用。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "href属性"
+  ],
+  "source_pages": [
+    53,
+    56
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "072_target属性",
+  "_chunk_pages": [
+    53,
+    56
+  ]
+}

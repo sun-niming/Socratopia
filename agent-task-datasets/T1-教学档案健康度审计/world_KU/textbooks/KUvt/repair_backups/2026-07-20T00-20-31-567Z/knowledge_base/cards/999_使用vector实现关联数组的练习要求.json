@@ -1,0 +1,46 @@
+{
+  "title": "使用vector实现关联数组的练习要求",
+  "definition": "练习15-1要求实现一个AssociativeArray类：类内部使用vector存储大量由键和值组成的元素，键固定为字符串，值的类型通过模板类型参数指定，并重载下标运算符，使程序能够根据字符串键检索元素。教材同时指出，实际编程中应优先使用标准库的std::map来实现关联数组。",
+  "key_points": [
+    "AssociativeArray中的每个元素由键和值组成。",
+    "键的类型固定为字符串。",
+    "值的类型应通过模板类型参数指定。",
+    "需要重载下标运算符，使其能够接受元素的键而不只是整数下标。",
+    "该练习主要用于练习使用非整数下标实现下标运算符；实际应用中应使用std::map。"
+  ],
+  "examples": [
+    "目标使用形式可以类似于：AssociativeArray<int> values; values[\"answer\"] = 42;",
+    "更实际的标准库实现可以使用std::map<std::string, int>。"
+  ],
+  "misconceptions": [
+    "题目要求用vector实现只是练习目的，并不表示vector通常优于std::map实现关联数组。",
+    "下标运算符并不只能接受整数；对于自定义类型，可以重载为接受字符串键等其他参数类型。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "AssociativeArray类中键和值的类型分别如何确定？",
+      "a": "键固定为字符串，值的类型通过模板类型参数指定。"
+    },
+    {
+      "q": "实际应用中实现关联数组应优先使用什么？",
+      "a": "应优先使用标准库提供的std::map类模板。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++模板类",
+    "C++运算符重载",
+    "std::vector"
+  ],
+  "source_pages": [
+    497,
+    497
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "999_使用vector实现关联数组的练习要求",
+  "_chunk_pages": [
+    497,
+    500
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "title": "构造函数中的 function-try-block",
+  "definition": "function-try-block 是把 try 放在函数定义开头、覆盖函数的整个函数体以及构造函数初始化列表的异常处理结构。对构造函数而言，它不仅可以捕获构造函数体中的异常，还可以捕获构造函数初始化列表或基类、成员子对象构造函数抛出的异常。",
+  "key_points": [
+    "构造函数 function-try-block 的形式是在构造函数名后写 `try`，然后写构造函数初始化列表和函数体，最后写 catch 子句。",
+    "普通构造函数体内的 try-catch 无法捕获初始化列表中基类或成员子对象构造函数抛出的异常；function-try-block 可以捕获这些异常。",
+    "catch 子句位于整个构造函数定义之后，用于处理初始化列表或函数体中的异常。",
+    "如果构造函数初始化失败，对象本身并未成功构造；function-try-block 的 catch 主要用于记录、转换或重新抛出异常，而不是让该对象继续作为已构造对象使用。"
+  ],
+  "examples": [
+    "构造函数 function-try-block 的一般形式：\n```cpp\nMyClass::MyClass()\ntry\n    : <ctor-initializer>\n{\n    // constructor body\n}\ncatch (const std::exception& e) {\n    // handle an exception from the initializer or constructor body\n}\n```",
+    "教材中的成员子对象示例：\n```cpp\nclass SubObject {\npublic:\n    SubObject(int i) {\n        throw std::runtime_error{\"Exception by SubObject ctor\"};\n    }\n};\n```",
+    "当 MyClass 的成员是 SubObject 时，如果该成员在构造函数初始化阶段抛出异常，MyClass 的 function-try-block 可以捕获该异常。"
+  ],
+  "misconceptions": [
+    "构造函数体内部普通的 try-catch 并不能捕获成员初始化列表阶段发生的异常。",
+    "function-try-block 不会让抛出异常的成员子对象成功构造，也不会使整体构造自动恢复为成功。",
+    "构造函数的 function-try-block 不只覆盖函数体，它还覆盖构造函数初始化列表以及其中子对象的构造过程。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "构造函数 function-try-block 与函数体内的普通 try-catch 有什么关键区别？",
+      "a": "function-try-block 覆盖整个构造函数，包括初始化列表和函数体，因此能捕获基类或成员子对象构造函数抛出的异常；函数体内的普通 try-catch 不能捕获初始化列表阶段的异常。"
+    },
+    {
+      "q": "如果 SubObject 的构造函数在 MyClass 初始化成员时抛出异常，MyClass 的 function-try-block 能否捕获？",
+      "a": "能。构造函数 function-try-block 覆盖成员子对象的初始化过程，因此可以捕获该异常。"
+    },
+    {
+      "q": "构造函数 function-try-block 捕获异常后，对象是否已经成功构造？",
+      "a": "没有。既然构造过程抛出了异常，对象未完成构造；catch 可以处理或重新抛出异常，但不能把未完成构造的对象当作正常对象使用。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "构造函数初始化列表",
+    "成员子对象构造",
+    "C++ 异常处理"
+  ],
+  "source_pages": [
+    463,
+    464
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "605_构造函数中的_function_try_block",
+  "_chunk_pages": [
+    461,
+    464
+  ]
+}

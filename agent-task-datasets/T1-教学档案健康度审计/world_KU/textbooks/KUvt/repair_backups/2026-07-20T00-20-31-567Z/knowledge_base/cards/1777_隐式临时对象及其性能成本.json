@@ -1,0 +1,51 @@
+{
+  "title": "隐式临时对象及其性能成本",
+  "definition": "当表达式或函数调用需要把一种类型的值转换为另一种类类型时，编译器可能通过目标类的转换构造函数创建一个临时的无名对象。这个临时对象需要经历构造和销毁，从而产生额外成本；因此通常应避免不必要地迫使编译器创建临时对象，并在分析性能时意识到该行为。",
+  "key_points": [
+    "具有可接受单个 `double` 参数的构造函数时，`double` 值可以隐式转换为对应的类对象。",
+    "对重载运算符传递不同类型的操作数时，编译器可能为操作数创建临时类对象。",
+    "向 `void doSomething(const SpreadsheetCell& s);` 传入 `5.56` 时，编译器可以先用 `double` 构造函数生成临时 `SpreadsheetCell`，再将其绑定到 const 引用。",
+    "如果函数参数去掉 `const`，则不能再用常量临时对象调用该函数，必须传入可修改的变量。",
+    "移动语义可以使临时对象相关操作更高效，但不能说明临时对象完全没有构造和销毁成本。"
+  ],
+  "examples": [
+    "假设存在构造函数 `SpreadsheetCell(double initialValue);` 和运算符：`SpreadsheetCell operator+(const SpreadsheetCell& lhs, const SpreadsheetCell& rhs);`。则 `SpreadsheetCell myCell{4}, aThirdCell; aThirdCell = myCell + 5.6;` 中，`5.6` 可被转换为临时 `SpreadsheetCell`，再参与 `operator+` 运算。",
+    "函数声明为 `void doSomething(const SpreadsheetCell& s);` 时，`doSomething(5.56);` 会先由 `5.56` 构造临时 `SpreadsheetCell`，再传入函数。"
+  ],
+  "misconceptions": [
+    "认为按引用传递就绝不会产生临时对象；实参类型转换仍可能先创建临时对象。",
+    "认为临时对象都是程序员显式写出来的对象。",
+    "认为移动语义会完全消除临时对象的构造和析构。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "调用 `doSomething(5.56)` 时，为什么可能创建临时 `SpreadsheetCell` 对象？",
+      "a": "因为函数参数类型是 `const SpreadsheetCell&`，而实参是 `double`；编译器会调用 `SpreadsheetCell(double)` 将 `5.56` 转换为临时 `SpreadsheetCell`，再绑定到 const 引用。"
+    },
+    {
+      "q": "为什么 `doSomething(5.56)` 在参数去掉 `const` 后不能继续这样调用？",
+      "a": "因为非常量引用不能绑定到这种转换产生的临时常量对象；此时必须传入一个可修改的 `SpreadsheetCell` 变量。"
+    },
+    {
+      "q": "如何减少临时对象带来的性能影响？",
+      "a": "应避免不必要的类型转换和会迫使编译器创建临时对象的表达式，同时为类提供移动语义以降低相关操作成本。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "转换构造函数",
+    "函数参数引用绑定",
+    "移动语义"
+  ],
+  "source_pages": [
+    856,
+    856
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1777_隐式临时对象及其性能成本",
+  "_chunk_pages": [
+    853,
+    856
+  ]
+}

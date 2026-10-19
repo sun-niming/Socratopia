@@ -1,0 +1,52 @@
+{
+  "title": "<cstdint>中的定宽整数类型",
+  "definition": "C++ 在 `<cstdint>` 头文件中定义了多种明确指定宽度或用途的整数类型。定宽类型包括指定宽度的有符号类型、以速度优先的 `int_fastN_t` 类型、以占用空间优先的 `int_leastN_t` 类型、可表示最大宽度整数的 `intmax_t`，以及足以存储指针的 `intptr_t`。相应的无符号版本也存在，例如 `uint8_t` 和 `uint_fast8_t`。",
+  "key_points": [
+    "`int8_t`、`int16_t`、`int32_t`、`int64_t` 表示宽度分别为 8、16、32、64 位的有符号整数类型；这些类型在标准中是可选的。",
+    "`int_fast8_t`、`int_fast16_t`、`int_fast32_t`、`int_fast64_t` 表示至少具有相应宽度且实现选择速度较快的有符号整数类型。",
+    "`int_least8_t`、`int_least16_t`、`int_least32_t`、`int_least64_t` 表示至少具有相应宽度且实现选择占用空间最小的有符号整数类型。",
+    "`intmax_t` 是能够表示实现所支持的最大宽度整数的整数类型。",
+    "`intptr_t` 是大小至少足以存储一个指针的整数类型；该类型在 C++ 标准中是可选的，但大多数编译器支持它。",
+    "跨平台代码中，教材建议使用 `<cstdint>` 中的类型替代基本整数类型。"
+  ],
+  "examples": [
+    "代码示例：`#include <cstdint>`；使用 `std::int32_t value;` 表示需要 32 位有符号整数的对象。",
+    "需要保存指针的整数形式时，可使用 `std::intptr_t`，前提是实现提供该可选类型。",
+    "相应无符号类型示例：`std::uint8_t`、`std::uint_fast8_t`。"
+  ],
+  "misconceptions": [
+    "所有实现都必须提供 `int8_t`、`int16_t`、`int32_t` 和 `int64_t`。",
+    "`int_fastN_t` 表示占用空间最小的类型。",
+    "`int_leastN_t` 表示运行速度最快的类型。",
+    "`intptr_t` 一定在所有 C++ 实现中存在。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么跨平台代码适合使用 `<cstdint>` 中的定宽整数类型？",
+      "a": "因为这些类型可以表达所需的位宽或用途，减少对基本整数类型实际大小的依赖。"
+    },
+    {
+      "q": "`int_fast32_t` 和 `int_least32_t` 的区别是什么？",
+      "a": "`int_fast32_t` 优先选择满足要求且速度较快的类型；`int_least32_t` 优先选择满足至少 32 位要求且占用空间最小的类型。"
+    },
+    {
+      "q": "`intptr_t` 用于什么目的？",
+      "a": "它是一种大小至少足以存储一个指针的整数类型。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "标准整数类型的大小关系"
+  ],
+  "source_pages": [
+    971,
+    971
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1992_cstdint_中的定宽整数类型",
+  "_chunk_pages": [
+    969,
+    972
+  ]
+}

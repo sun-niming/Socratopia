@@ -1,0 +1,52 @@
+{
+  "title": "RoundRobin中add和remove对迭代器位置的维护",
+  "definition": "RoundRobin使用m_nextElement记录下一次要返回的元素，但vector的push_back()可能触发重新分配并使所有迭代器失效，erase()也会使被删除位置及其后的迭代器失效。因此，add()和remove()不能直接依赖旧迭代器，而要先记录下一位置的整数索引，在vector操作完成后重新从begin(m_elements)计算m_nextElement。",
+  "key_points": [
+    "add()在push_back()之前计算m_nextElement相对于begin(m_elements)的位置：$$pos=m\\_nextElement-begin(m\\_elements)$$",
+    "push_back()后重新设置：$$m\\_nextElement=begin(m\\_elements)+pos$$",
+    "remove()删除元素前，根据待删除元素it与m_nextElement的相对位置计算删除后的新索引newPos。",
+    "如果删除的是最后一个元素，下一位置需要回到索引0。",
+    "如果下一元素位于被删除元素之前，删除不会改变其索引；如果下一元素位于被删除元素之后或正好是被删除元素，索引需要相应调整。"
+  ],
+  "examples": [
+    "add()的核心思路：记录pos；调用m_elements.push_back(element)；再执行m_nextElement=begin(m_elements)+pos。",
+    "remove()中可用迭代器差值表示位置：$$m\\_nextElement-begin(m\\_elements)$$。",
+    "删除当前列表最后一个元素后，将下一位置设置为0，以实现循环。"
+  ],
+  "misconceptions": [
+    "vector迭代器不是永久有效的；push_back()可能因扩容使其失效，erase()也会使相关迭代器失效。",
+    "仅保存旧迭代器并在push_back()或erase()后继续使用是不安全的。",
+    "维护的是下一次访问位置，而不是简单地维护最近一次返回元素的位置。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么RoundRobin::add()不能在push_back()后直接继续使用原来的m_nextElement？",
+      "a": "因为push_back()可能触发vector重新分配，从而使原有迭代器失效。"
+    },
+    {
+      "q": "RoundRobin::add()如何避免push_back()导致的迭代器失效？",
+      "a": "先记录m_nextElement相对于begin(m_elements)的整数位置，push_back()后再用begin(m_elements)+该位置重建迭代器。"
+    },
+    {
+      "q": "删除元素后，为什么remove()需要重新计算m_nextElement的位置？",
+      "a": "因为erase()会使相关迭代器失效，并且删除元素会改变其后元素的索引位置。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "vector迭代器失效规则",
+    "随机访问迭代器",
+    "迭代器差值"
+  ],
+  "source_pages": [
+    563,
+    564
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 std::vector erase push_back iterator invalidation RoundRobin m_nextElement remove newPos implementation",
+  "concept_id": "1164_roundrobin中add和remove对迭代器位置的维护",
+  "_chunk_pages": [
+    561,
+    564
+  ]
+}

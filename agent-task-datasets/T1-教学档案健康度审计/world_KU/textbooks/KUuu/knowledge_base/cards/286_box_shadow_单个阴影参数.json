@@ -1,0 +1,44 @@
+{
+  "title": "box-shadow 单个阴影参数",
+  "definition": "box-shadow 用于给元素添加阴影。给出 2～4 个 <length> 值时，前两个值分别表示水平偏移和垂直偏移；第三个值表示 <blur-radius>；第四个值表示 <spread-radius>。此外，还可以可选地写 inset 关键字和 <color> 值。",
+  "key_points": [
+    "两个长度值按 <offset-x> 和 <offset-y> 解释",
+    "第三个长度值按 <blur-radius> 解释，第四个长度值按 <spread-radius> 解释",
+    "inset 关键字和颜色值都是可选的"
+  ],
+  "examples": [
+    "box-shadow: 2px 2px 4px #000;",
+    "box-shadow: 2px 2px 4px 1px inset red;"
+  ],
+  "misconceptions": [
+    "把第三个值误认为水平或垂直偏移",
+    "认为 inset 必须写",
+    "认为颜色值不能省略或只能放在固定位置"
+  ],
+  "qa_pairs": [
+    {
+      "q": "box-shadow 给出两个长度值时分别表示什么？",
+      "a": "分别表示水平偏移和垂直偏移。"
+    },
+    {
+      "q": "box-shadow 的第三个长度值表示什么？",
+      "a": "表示 blur-radius（模糊半径）。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "CSS 长度值",
+    "CSS 颜色值"
+  ],
+  "source_pages": [
+    193,
+    196
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "286_box_shadow_单个阴影参数",
+  "_chunk_pages": [
+    193,
+    196
+  ]
+}

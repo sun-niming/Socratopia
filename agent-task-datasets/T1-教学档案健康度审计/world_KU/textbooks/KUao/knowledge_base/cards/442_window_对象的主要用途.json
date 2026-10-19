@@ -1,0 +1,43 @@
+{
+  "title": "window 对象的主要用途",
+  "definition": "教材指出，window 对象可用于打开新窗口、显示系统提示框以及进行定时操作。",
+  "key_points": [
+    "window 可以用于打开新窗口。",
+    "window 可以用于系统提示框。",
+    "window 可以用于定时操作。"
+  ],
+  "examples": [
+    "通过 window 实现打开新窗口。",
+    "通过 window 实现系统提示框。",
+    "通过 window 实现定时操作。"
+  ],
+  "misconceptions": [
+    "window 不只是保存全局变量的容器，也承担浏览器窗口相关操作。",
+    "定时操作并不只属于页面逻辑，也可以由 window 提供支持。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "教材中列出的 window 对象的三类主要用途是什么？",
+      "a": "打开新窗口、系统提示框、定时操作。"
+    },
+    {
+      "q": "window 对象是否只用于读取属性？",
+      "a": "不是，教材说明它还可用于打开新窗口、显示系统提示框和进行定时操作。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "window 对象的层级与全局属性"
+  ],
+  "source_pages": [
+    331,
+    331
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "442_window_对象的主要用途",
+  "_chunk_pages": [
+    329,
+    332
+  ]
+}

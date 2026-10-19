@@ -1,0 +1,38 @@
+{
+  "title": "fork 场景下的日志写法",
+  "definition": "如果后续实现 fork，每个子进程都可能写日志。课程项目里更简单、稳定的做法是：每次请求都打开日志文件，以追加模式写入一行，然后关闭文件。这样避免多个进程共享同一个 FILE * 带来的复杂性。",
+  "key_points": [
+    "fork 后每个子进程都可能写日志。",
+    "简单做法是每次请求 fopen(log_path, \"a\")，写完后 fclose(fp)。",
+    "课程项目更重视稳定和清楚，不以性能为重点。"
+  ],
+  "examples": [
+    "FILE *fp = fopen(log_path, \"a\");\nif (fp) {\n    fprintf(fp, \"...\\n\");\n    fclose(fp);\n}"
+  ],
+  "misconceptions": [
+    "多个进程共享一个 FILE * 一定更高效、更适合课程项目。",
+    "日志写入一定要用复杂的锁机制才能完成。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "fork 场景下为什么建议每次请求单独打开并追加日志？",
+      "a": "因为这样实现更简单，多个进程不必共享同一个 FILE *，更稳定也更清楚，适合课程项目。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "访问日志的基本字段",
+    "命令行配置服务器"
+  ],
+  "source_pages": [
+    29,
+    32
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "041_fork_场景下的日志写法",
+  "_chunk_pages": [
+    29,
+    32
+  ]
+}

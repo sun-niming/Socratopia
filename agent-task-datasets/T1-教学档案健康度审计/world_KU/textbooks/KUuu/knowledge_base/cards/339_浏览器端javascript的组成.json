@@ -1,0 +1,39 @@
+{
+  "title": "浏览器端JavaScript的组成",
+  "definition": "在浏览器端，JavaScript由ECMAScript、BOM和DOM三部分相关内容构成：ECMAScript描述基本语法规则，BOM用于操作浏览器窗口，DOM用于操作HTML文档结构、样式和内容。",
+  "key_points": [
+    "ECMAScript管基本语法规则",
+    "BOM管浏览器窗口操作",
+    "DOM管HTML文档结构、样式和内容"
+  ],
+  "examples": [
+    "修改文字颜色",
+    "控制浏览器跳转",
+    "获取分辨率"
+  ],
+  "misconceptions": [
+    "ECMAScript等于整个JavaScript运行环境",
+    "BOM和DOM是同一个东西"
+  ],
+  "qa_pairs": [
+    {
+      "q": "浏览器端JavaScript通常由哪三部分构成？",
+      "a": "ECMAScript、BOM、DOM。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "JavaScript运行环境"
+  ],
+  "source_pages": [
+    233,
+    236
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "339_浏览器端javascript的组成",
+  "_chunk_pages": [
+    233,
+    236
+  ]
+}

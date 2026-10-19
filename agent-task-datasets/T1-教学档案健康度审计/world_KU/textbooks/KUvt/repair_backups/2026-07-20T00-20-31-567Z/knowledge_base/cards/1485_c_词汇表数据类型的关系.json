@@ -1,0 +1,44 @@
+{
+  "title": "C++词汇表数据类型的关系",
+  "definition": "本章小结指出，`std::variant`和`std::any`属于词汇表数据类型，并且是对`std::optional`词汇表类型的补充；`std::tuple`是`std::pair`的泛化。词汇表数据类型用于以标准化方式表达常见的可选值、异构值或多元素组合。",
+  "key_points": [
+    "`std::variant`和`std::any`被概括为词汇表数据类型。",
+    "`std::variant`和`std::any`与`std::optional`互为补充，分别适合表达不同的数据需求。",
+    "`std::tuple`可以看作`std::pair`的推广，能够保存多个可能类型不同的元素，而不局限于两个元素。"
+  ],
+  "examples": [
+    "`std::pair<int, std::string>`表示包含两个元素的组合；`std::tuple<int, std::string, double>`表示包含三个元素的组合。",
+    "`std::optional<T>`表示一个值可能存在或不存在；`std::variant<T1, T2>`表示值属于若干候选类型之一；`std::any`可保存任意类型的值。"
+  ],
+  "misconceptions": [
+    "`std::tuple`并不要求所有元素类型相同。",
+    "`std::tuple`不是只能保存两个元素；`std::pair`可以视为它的特例或受限形式。",
+    "`std::variant`、`std::any`和`std::optional`并不是同一种类型，它们表达的数据语义不同。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "本章小结如何概括`std::tuple`与`std::pair`的关系？",
+      "a": "`std::tuple`是`std::pair`的泛化，可以表示多个元素的组合，而不仅是两个元素。"
+    },
+    {
+      "q": "本章将哪些类型概括为对`std::optional`的补充？",
+      "a": "`std::variant`和`std::any`。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "pair和tuple的基本概念",
+    "optional、variant和any的基本概念"
+  ],
+  "source_pages": [
+    713,
+    713
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1485_c_词汇表数据类型的关系",
+  "_chunk_pages": [
+    713,
+    716
+  ]
+}

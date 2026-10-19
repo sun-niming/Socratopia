@@ -1,0 +1,45 @@
+{
+  "title": "使用 peek 和 noskipws 解析输入中的非数字前缀与数字",
+  "definition": "可以先使用 cin >> noskipws 关闭提取运算符默认的空白字符跳过行为，再通过 cin.peek() 查看下一个字符：如果下一个字符是数字，就停止读取前缀；如果不是数字，就用 cin >> ch 读取该字符并追加到字符串中。前缀读取结束后，再使用 cin >> partySize 读取数字。",
+  "key_points": [
+    "cin >> noskipws 使后续格式化字符提取不再自动跳过空白字符。",
+    "isdigit(ch) 可用于判断当前字符是否为数字；调用前应将读取结果转换为适当的 char 类型。",
+    "peek() 先查看字符，只有确认它不是数字时才调用 cin >> ch 将其真正读取。",
+    "读取过程中要检查流状态；流进入错误状态时应停止或报告错误。",
+    "原文的示例流程是读取 guestName，再读取 partySize，并在读取失败时输出错误信息。"
+  ],
+  "examples": [
+    "原文示意代码可整理为：\n```cpp\nstring guestName;\nint partySize{0};\nchar ch;\ncin >> noskipws;\nwhile (true) {\n    ch = static_cast<char>(cin.peek());\n    if (!cin) break;\n    if (isdigit(ch)) break;\n    cin >> ch;\n    if (!cin) break;\n    guestName += ch;\n}\nif (cin) cin >> partySize;\nif (!cin) {\n    cerr << \"Error getting party size.\" << endl;\n    return;\n}\ncout << format(\"Thank you '{}', party of {}\", guestName, partySize) << endl;\n```"
+  ],
+  "misconceptions": [
+    "noskipws 只影响后续格式化输入对空白字符的处理，不会自动把已有输入转换为字符串。",
+    "peek() 发现数字后只是停止读取前缀，并不会自动读取这个数字；数字仍需由后续的 cin >> partySize 完成。",
+    "读取失败后不能继续假定 partySize 已经成功获得，应先检查流状态。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么示例在读取 guestName 前使用 cin >> noskipws？",
+      "a": "为了让后续字符提取不自动跳过空白字符，从而按字符处理输入中的空白。"
+    },
+    {
+      "q": "示例如何判断 guestName 的读取应当结束？",
+      "a": "先用 cin.peek() 查看下一个字符；如果 isdigit(ch) 为真，就停止读取前缀。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "peek、get、putback 和 unget 进行字符流预读与回退",
+    "C++输入流状态"
+  ],
+  "source_pages": [
+    421,
+    424
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "549_使用_peek_和_noskipws_解析输入中的非数字前缀与数字",
+  "_chunk_pages": [
+    421,
+    424
+  ]
+}

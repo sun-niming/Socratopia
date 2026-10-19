@@ -1,0 +1,35 @@
+{
+  "title": "vertical-align",
+  "definition": "vertical-align 用来设置文本在单元格内部的垂直对齐方式。原文给出的取值有 top、center、bottom，分别表示居上、居中、居下。",
+  "key_points": [
+    "用于单元格内部文本的垂直对齐",
+    "top 表示居上",
+    "center 表示居中，bottom 表示居下"
+  ],
+  "examples": [
+    "vertical-align: center;"
+  ],
+  "misconceptions": [
+    "误以为 vertical-align 只能用于图片",
+    "误以为它是水平居中属性"
+  ],
+  "qa_pairs": [
+    {
+      "q": "vertical-align 在表格单元格中表示什么？",
+      "a": "文本在单元格内部的垂直对齐方式。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [],
+  "source_pages": [
+    117,
+    120
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "199_vertical_align",
+  "_chunk_pages": [
+    117,
+    120
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "title": "load_config 负责默认值与命令行覆盖",
+  "definition": "配置模块把默认值和命令行覆盖集中管理。`load_config` 先设置默认值，再用 `getopt` 解析 `-p`、`-r`、`-i`，从而允许命令行覆盖默认配置。",
+  "key_points": [
+    "先调用 `set_defaults` 设置默认配置。",
+    "用 `getopt(argc, argv, \"p:r:i:\")` 解析参数。",
+    "`-p` 设置端口，`-r` 设置根目录，`-i` 设置首页文件。",
+    "遇到不支持的参数应返回 `-1`。"
+  ],
+  "examples": [
+    "`case 'p': config->port = atoi(optarg); break;`",
+    "`case 'r': snprintf(config->root, sizeof(config->root), \"%s\", optarg); break;`",
+    "`case 'i': snprintf(config->index, sizeof(config->index), \"%s\", optarg); break;`"
+  ],
+  "misconceptions": [
+    "必须先读取命令行再设置默认值。",
+    "命令行参数只要出现就一定合法。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "load_config 为什么要先设置默认值？",
+      "a": "这样即使用户没有传参数，程序也能使用稳定的默认配置。"
+    },
+    {
+      "q": "load_config 支持哪些命令行选项？",
+      "a": "支持 `-p`、`-r`、`-i`。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C 语言基础"
+  ],
+  "source_pages": [
+    69,
+    72
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "112_load_config_负责默认值与命令行覆盖",
+  "_chunk_pages": [
+    69,
+    72
+  ]
+}

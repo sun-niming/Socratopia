@@ -1,0 +1,42 @@
+{
+  "title": "innerHTML属性",
+  "definition": "`element.innerHTML`用于获取或设置元素内部的HTML内容。读取时返回元素内的HTML字符串；设置时会把传入内容当作HTML解析并渲染。",
+  "key_points": [
+    "可用于获取元素内部的HTML内容。",
+    "可用于设置元素内部的HTML内容，支持HTML标签。",
+    "如果内容来自用户输入，直接使用`innerHTML`有XSS风险，因为其中的`<script>`等标签可能被执行。"
+  ],
+  "examples": [
+    "let content = element.innerHTML;",
+    "element.innerHTML = 'New <strong>HTML</strong> content';"
+  ],
+  "misconceptions": [
+    "把`innerHTML`当作纯文本属性使用；实际上它会按HTML解析。",
+    "认为所有场景都适合直接用`innerHTML`接收用户输入；这可能引发跨站脚本攻击。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`innerHTML`和普通文本设置有什么关键区别？",
+      "a": "`innerHTML`会把字符串当作HTML解析，保留并渲染标签。"
+    },
+    {
+      "q": "为什么设置`innerHTML`时要注意安全？",
+      "a": "因为可能执行其中的脚本，带来XSS风险。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "DOM元素基础"
+  ],
+  "source_pages": [
+    353,
+    354
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "503_innerhtml属性",
+  "_chunk_pages": [
+    353,
+    356
+  ]
+}

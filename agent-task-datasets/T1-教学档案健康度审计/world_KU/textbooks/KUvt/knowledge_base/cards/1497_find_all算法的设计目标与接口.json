@@ -1,0 +1,57 @@
+{
+  "title": "find_all算法的设计目标与接口",
+  "definition": "当需要在一个输入范围内找出满足谓词的所有元素时，标准库中的 $\\texttt{find}$ 和 $\\texttt{find\\_if}$ 只能返回一个匹配元素的迭代器；使用 $\\texttt{copy\\_if}$ 可以复制所有匹配元素，但不能同时直接给出这些元素在输入序列中的位置。为避免复制并获得所有匹配位置，可以编写自定义算法 $\\texttt{find\\_all}$。该算法接收输入范围、输出迭代器和谓词，把每个匹配元素的输入迭代器写入输出序列，并返回指向输出序列中最后一个已写入元素之后位置的输出迭代器。",
+  "key_points": [
+    "$\\texttt{find}$ 和 $\\texttt{find\\_if}$ 只处理或返回一个匹配位置。",
+    "$\\texttt{copy\\_if}$ 可以收集所有匹配元素的副本，但不直接收集它们的输入迭代器位置。",
+    "$\\texttt{find\\_all}$ 使用三个类型参数：输入迭代器类型、输出迭代器类型和谓词类型。",
+    "算法参数依次表示输入范围首迭代器、输入范围尾后迭代器、输出序列首迭代器和谓词对象。",
+    "返回值是输出迭代器，指向输出序列中最后一个输出元素之后的位置。"
+  ],
+  "examples": [
+    "函数原型：$$\\texttt{template <typename InputIterator, typename OutputIterator, typename Predicate>}\\\\ \\texttt{OutputIterator find\\_all(InputIterator first, InputIterator last,}\\\\ \\texttt{\\ \\ \\ \\ OutputIterator dest, Predicate pred);}$$",
+    "算法逻辑可概括为：遍历 $[\\texttt{first},\\texttt{last})$ 中的每个元素；若 $\\texttt{pred(*first)}$ 为真，则把当前输入迭代器写入输出序列，并递增输出迭代器；随后继续遍历。",
+    "例如，对一个整数序列使用判断偶数的谓词，$\\texttt{find\\_all}$ 输出的是所有偶数元素在原序列中的迭代器，而不是偶数值的副本。"
+  ],
+  "misconceptions": [
+    "$\\texttt{find\\_all}$ 的输出不是匹配元素值本身，而是指向匹配元素的输入迭代器。",
+    "返回的输出迭代器不是最后一个匹配元素的位置，而是输出序列尾后位置。",
+    "$\\texttt{find\\_if}$ 不能一次返回指定范围内所有匹配元素的迭代器。",
+    "忽略输出迭代器、改为返回一个能够遍历所有匹配元素的输入迭代器，需要额外编写自定义迭代器类。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么需要编写 $\\texttt{find\\_all}$？",
+      "a": "因为 $\\texttt{find}$ 和 $\\texttt{find\\_if}$ 不能返回所有匹配元素的迭代器，而 $\\texttt{copy\\_if}$ 虽能收集匹配元素副本，却不能直接提供这些元素的位置。"
+    },
+    {
+      "q": "$\\texttt{find\\_all}$ 的三个模板类型参数分别是什么？",
+      "a": "输入迭代器类型 $\\texttt{InputIterator}$、输出迭代器类型 $\\texttt{OutputIterator}$ 和谓词类型 $\\texttt{Predicate}$。"
+    },
+    {
+      "q": "$\\texttt{find\\_all}$ 成功返回时，返回的输出迭代器指向哪里？",
+      "a": "它指向输出序列中最后一个已存储元素后面的那个位置。"
+    },
+    {
+      "q": "如果不使用输出迭代器，而是想通过一个迭代器遍历所有匹配元素，需要增加什么工作？",
+      "a": "需要编写一个自定义的迭代器类。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "标准库算法与迭代器",
+    "谓词",
+    "输出迭代器"
+  ],
+  "source_pages": [
+    720,
+    720
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1497_find_all算法的设计目标与接口",
+  "_chunk_pages": [
+    717,
+    720
+  ]
+}

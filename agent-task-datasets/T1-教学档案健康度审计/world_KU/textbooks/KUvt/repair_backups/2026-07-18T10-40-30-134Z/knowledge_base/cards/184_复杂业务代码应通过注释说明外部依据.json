@@ -1,0 +1,50 @@
+{
+  "title": "复杂业务代码应通过注释说明外部依据",
+  "definition": "当代码中的参数、位运算、常量或公式依赖外部接口文档、处理器规范或业务规则时，应在注释中说明这些值和操作的来源。第127页的示例通过注释指出计算参数来自《Doodad API v1.6》第96页，处理器掩码的依据来自该文档第201页，用户字段公式来自“Marigold Formula”及其相关说明。",
+  "key_points": [
+    "计算步骤可以分为：调用 `doodad.calculate(kStart, kEnd, kOffset)` 得到结果。",
+    "随后使用处理器专用掩码进行按位与：`result &= getProcessorMask();`。",
+    "最后依据“Marigold Formula”设置用户字段：`setUserField((result + kMarigoldOffset) / MarigoldConstant + MarigoldConstant);`。",
+    "注释应指出外部资料的名称和页码，使维护者能够追溯参数和公式的来源。"
+  ],
+  "examples": [
+    "原文注明 `kStart`、`kEnd` 和 `kOffset` 来自《Doodad API v1.6》第96页。",
+    "原文注明需要将结果与处理器专用掩码进行按位与，依据是《Doodad API v1.6》第201页。",
+    "原文给出的用户字段赋值形式为：$$\\text{userField} = \\frac{result + kMarigoldOffset}{MarigoldConstant} + MarigoldConstant$$"
+  ],
+  "misconceptions": [
+    "按位与操作 `&=` 不是普通的算术乘法，也不是逻辑与 `&&`。",
+    "注释指出外部来源并不等于代码已经证明公式或掩码正确；外部文档仍需能够被查阅和核对。",
+    "变量名和常量名本身不能替代对关键业务公式来源的说明。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "第127页示例中，如何对计算结果应用处理器掩码？",
+      "a": "使用按位与赋值：`result &= getProcessorMask();`。"
+    },
+    {
+      "q": "为什么要在复杂代码旁注明外部文档页码？",
+      "a": "因为参数、掩码和公式依赖外部规范；页码便于维护者追溯和核实其来源。"
+    },
+    {
+      "q": "原文给出的设置用户字段的表达式是什么？",
+      "a": "`setUserField((result + kMarigoldOffset) / MarigoldConstant + MarigoldConstant);`。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++按位运算",
+    "代码注释与外部接口文档"
+  ],
+  "source_pages": [
+    125,
+    128
+  ],
+  "needs_verification": true,
+  "verify_query": "《C++20高级编程》第5版 第127页 Doodad API v1.6 Marigold Formula result &= getProcessorMask 原文",
+  "concept_id": "184_复杂业务代码应通过注释说明外部依据",
+  "_chunk_pages": [
+    125,
+    128
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "title": "C++模块中导出Grid<const char*>特化",
+  "definition": "教材示例将Grid<const char*>的特化放在模块分区中实现。模块分区grid:string导出该特化，并要求原始Grid模板在使用特化时也必须可见。主模块grid通过export import :main;和export import :string;同时导出主实现和字符串特化。",
+  "key_points": [
+    "字符串特化所在模块分区示例为grid:string。",
+    "使用模板特化时，原始Grid模板必须可见。",
+    "主模块示例使用`export module grid;`、`export import :main;`和`export import :string;`。",
+    "客户端可以写`Grid<const char*> stringGrid1{2, 2};`来使用该特化。"
+  ],
+  "examples": [
+    "模块分区中的关键组织形式：`export module grid:string;`，随后导出Grid<const char*>特化。",
+    "主模块重新导出分区：`export module grid;`、`export import :main;`、`export import :string;`。"
+  ],
+  "misconceptions": [
+    "误以为只导出Grid<const char*>特化就足够；原文特别指出使用模板特化时原始模板也必须可见。",
+    "误以为模块分区会自动替代原始模板；示例仍然需要导出主模板所在的main分区。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "使用Grid<const char*>特化时，原始Grid模板是否必须可见？",
+      "a": "必须可见，原文明确说明了这一点。"
+    },
+    {
+      "q": "主模块如何重新导出字符串特化所在分区？",
+      "a": "使用`export import :string;`。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++20模块与模块分区",
+    "类模板显式特化"
+  ],
+  "source_pages": [
+    390,
+    391
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "503_c_模块中导出grid_const_char_特化",
+  "_chunk_pages": [
+    389,
+    392
+  ]
+}

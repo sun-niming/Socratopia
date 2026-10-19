@@ -1,0 +1,51 @@
+{
+  "title": "const_directed_graph_iterator 的递增、递减与解引用",
+  "definition": "const_directed_graph_iterator 是 directed_graph 的只读迭代器。它通过保存节点容器的底层迭代器来定位元素：operator++ 和 operator-- 分别移动到底层容器的下一个和上一个元素，operator* 返回当前节点值的只读引用，operator-> 返回当前节点值的只读指针。前置和后置递增都将实际移动操作委托给 increment() 辅助方法，递减操作同理委托给 decrement()。",
+  "key_points": [
+    "前置递增 operator++() 先调用 increment()，再返回当前迭代器的引用。",
+    "后置递增 operator++(int) 先保存当前迭代器副本，再调用 increment()，最后返回旧副本。",
+    "increment() 的实现是 ++m_nodeIterator；decrement() 的实现是 --m_nodeIterator。",
+    "对已经是尾后迭代器的迭代器递增，或对已经指向首元素的迭代器递减，行为未定义；实现不要求像某些安全迭代器那样进行错误检查。",
+    "operator-> 返回当前元素地址，使调用者可以使用 it->member 访问元素成员。"
+  ],
+  "examples": [
+    "前置递增的逻辑可表示为：先执行 increment()，再 return *this。",
+    "后置递增的逻辑可表示为：auto oldIt { *this }; increment(); return oldIt;",
+    "increment() 的核心实现：++m_nodeIterator;",
+    "decrement() 的核心实现：--m_nodeIterator;"
+  ],
+  "misconceptions": [
+    "后置递增返回的不是递增后的迭代器，而是递增前保存的副本。",
+    "迭代器递增越过尾后位置并不会自动抛出错误；在这种情况下行为未定义。",
+    "const_directed_graph_iterator 的 const 指的是通过迭代器不能修改节点值，并不意味着迭代器对象本身不能移动。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "const_directed_graph_iterator 的前置递增和后置递增有什么区别？",
+      "a": "前置递增先移动迭代器并返回自身的引用；后置递增先保存旧迭代器副本，再移动当前迭代器，最后返回旧副本。"
+    },
+    {
+      "q": "increment() 和 decrement() 分别做什么？",
+      "a": "increment() 执行 ++m_nodeIterator，使迭代器指向下一个元素；decrement() 执行 --m_nodeIterator，使迭代器指向前一个元素。"
+    },
+    {
+      "q": "对尾后迭代器执行递增是否会被实现检查？",
+      "a": "不会被要求检查；对尾后迭代器递增的行为未定义。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++迭代器的前置递增与后置递增"
+  ],
+  "source_pages": [
+    737,
+    737
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1534_const_directed_graph_iterator_的递增_递减与解引用",
+  "_chunk_pages": [
+    737,
+    740
+  ]
+}

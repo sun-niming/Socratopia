@@ -1,0 +1,45 @@
+{
+  "title": "DNS查询的生成与UDP封装",
+  "definition": "浏览器访问以主机名表示的Web服务器之前，需要获得该主机名对应的IP地址。操作系统生成DNS查询报文，把目标主机名放入DNS报文的问题段，并将DNS报文封装到目的端口为53的UDP报文段中。UDP报文段再封装到以DNS服务器为目的地址的IP数据报中。",
+  "key_points": [
+    "DNS提供从主机名到IP地址的转换服务。",
+    "DNS查询报文中的问题段包含待解析的主机名。",
+    "原文示例的DNS查询使用UDP目的端口53。",
+    "DNS服务器地址由此前收到的DHCP ACK提供。"
+  ],
+  "examples": [
+    "Bob便携机查询www.google.com时，生成包含该名字的DNS查询报文。",
+    "原文示例中，IP数据报的源IP地址为68.85.2.101，目的IP地址为DNS服务器68.87.71.226。"
+  ],
+  "misconceptions": [
+    "误以为浏览器仅凭www.google.com这样的主机名就能直接建立IP连接；建立连接前通常需要通过DNS获得服务器IP地址。",
+    "误以为DNS服务器地址就是目标Web服务器地址；DNS服务器负责查询映射，Web服务器是最终通信目标。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "原文示例中的DNS查询报文被封装到哪个传输层协议中，使用哪个目的端口？",
+      "a": "被封装到UDP报文段中，目的端口为53。"
+    },
+    {
+      "q": "Bob便携机从哪里获得DNS服务器的IP地址？",
+      "a": "从此前DHCP服务器返回的DHCP ACK报文中获得。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "DNS",
+    "UDP端口",
+    "DHCP ACK提供网络配置"
+  ],
+  "source_pages": [
+    345,
+    346
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "793_dns查询的生成与udp封装",
+  "_chunk_pages": [
+    345,
+    348
+  ]
+}

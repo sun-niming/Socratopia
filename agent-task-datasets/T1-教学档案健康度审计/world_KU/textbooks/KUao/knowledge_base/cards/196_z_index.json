@@ -1,0 +1,36 @@
+{
+  "title": "z-index",
+  "definition": "z-index 属性用于决定元素的上下层叠顺序，z-index 值大的元素会显示在上面。",
+  "key_points": [
+    "z-index 决定元素的层叠先后",
+    "z-index 值越大，元素越靠上显示"
+  ],
+  "examples": [
+    ".a { position: absolute; z-index: 1; } .b { position: absolute; z-index: 2; }"
+  ],
+  "misconceptions": [
+    "z-index 数值越小，元素越会显示在上面",
+    "z-index 只要设置了就一定生效，不受定位方式影响"
+  ],
+  "qa_pairs": [
+    {
+      "q": "z-index 的作用是什么？",
+      "a": "它用来决定元素的上下层叠顺序，值大的显示在上面。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "层定位"
+  ],
+  "source_pages": [
+    137,
+    138
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "196_z_index",
+  "_chunk_pages": [
+    137,
+    140
+  ]
+}

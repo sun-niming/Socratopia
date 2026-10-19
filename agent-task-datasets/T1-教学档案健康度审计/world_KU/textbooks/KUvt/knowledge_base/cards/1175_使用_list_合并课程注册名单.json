@@ -1,0 +1,51 @@
+{
+  "title": "使用 list 合并课程注册名单",
+  "definition": "可以使用元素为 list 的 vector 表示多个课程的学生名单，再使用一个 list 保存所有课程中的学生。处理流程是：先把每门课程的名单追加到总名单中；然后排序并调用 unique() 删除重复学生；最后遍历退学学生名单，调用 remove() 删除这些学生，从而得到所有课程中未退学且不重复的学生名单。",
+  "key_points": [
+    "标准库容器可以嵌套使用，例如使用 `vector<list<string>>` 表示多个课程的学生名单。",
+    "使用 `insert()` 将每个课程的 list 中的元素追加到总 list 的末尾。",
+    "先调用 `sort()`，再调用 `unique()`，可将多门课程中重复出现的学生合并为一个名单项。",
+    "遍历退学学生名单，对总名单逐个调用 `remove()`，可以删除未缴学费而退学的学生。",
+    "原文指出，虽然该示例适合演示 list 特定算法，但实际的学生注册问题通常建议使用 vector，并结合泛型标准库算法。"
+  ],
+  "examples": [
+    "核心处理逻辑可写为：`std::list<std::string> allStudents; for (auto& lst : courseStudents) { allStudents.insert(allStudents.cend(), lst.cbegin(), lst.cend()); } allStudents.sort(); allStudents.unique(); for (auto& student : droppedStudents) { allStudents.remove(student); } return allStudents;`",
+    "若课程名单分别为 `{\"Alice\", \"Bob\"}` 和 `{\"Bob\", \"Carol\"}`，排序后调用 `unique()`，再删除退学学生 `\"Carol\"`，结果名单为 `{\"Alice\", \"Bob\"}`。"
+  ],
+  "misconceptions": [
+    "vector 不能包含 list；标准库容器可以嵌套，`vector<list<string>>` 是合法的表示方式。",
+    "只调用 unique() 就能删除所有重复学生；应先排序，使相同姓名相邻，unique() 才能去除这些连续重复项。",
+    "remove() 只能删除一个匹配元素；list 的 remove() 会删除 list 中符合条件的元素。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "课程注册示例中，为什么要在 unique() 前调用 sort()？",
+      "a": "因为 unique() 删除的是连续重复元素；排序可以使相同学生姓名相邻，从而去除跨课程产生的重复项。"
+    },
+    {
+      "q": "如何从总注册名单中排除退学学生？",
+      "a": "遍历 droppedStudents，对每个学生姓名调用 allStudents.remove(student)。"
+    },
+    {
+      "q": "课程注册示例使用了哪种嵌套容器？",
+      "a": "使用 `vector<list<string>>`，vector 的每个元素是一门课程的学生 list。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "std::list 的成员算法",
+    "容器嵌套",
+    "迭代器范围"
+  ],
+  "source_pages": [
+    569,
+    570
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1175_使用_list_合并课程注册名单",
+  "_chunk_pages": [
+    569,
+    572
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "title": "screen对象",
+  "definition": "screen对象用于返回当前渲染窗口中与屏幕有关的属性。它主要用来获取用户电脑的屏幕信息，例如屏幕分辨率、屏幕颜色位数，以及窗口可显示的最大尺寸。",
+  "key_points": [
+    "screen对象关注的是屏幕信息，而不是网页内容本身。",
+    "它可用于获取屏幕分辨率、颜色位数和窗口可显示的最大尺寸。"
+  ],
+  "examples": [
+    "例如：获取用户电脑的屏幕分辨率。",
+    "例如：查看屏幕的颜色位数和窗口可显示的最大尺寸。"
+  ],
+  "misconceptions": [
+    "误以为screen对象用于操作网页元素；实际上它主要提供屏幕相关信息。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "screen对象主要用于获取什么信息？",
+      "a": "用于获取用户电脑的屏幕信息，如分辨率、颜色位数和窗口可显示的最大尺寸。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "JavaScript对象"
+  ],
+  "source_pages": [
+    341,
+    344
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "459_screen对象",
+  "_chunk_pages": [
+    341,
+    344
+  ]
+}

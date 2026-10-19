@@ -1,0 +1,44 @@
+{
+  "title": "socket() 函数",
+  "definition": "socket() 用来创建通信端点，成功时返回一个新的文件描述符。原型为 int socket(int domain, int type, int protocol);，失败时返回 -1 并设置 errno。",
+  "key_points": [
+    "domain 表示协议族，项目使用 AF_INET，表示 IPv4。",
+    "type 表示通信语义，项目使用 SOCK_STREAM，表示可靠的 TCP 字节流。",
+    "protocol 写 0，表示让系统选择默认 TCP。",
+    "socket() 返回的是 fd，不是直接可用的网络连接。"
+  ],
+  "examples": [
+    "#include <sys/socket.h> int socket(int domain, int type, int protocol);",
+    "int listen_fd = socket(AF_INET, SOCK_STREAM, 0);"
+  ],
+  "misconceptions": [
+    "误以为 socket() 直接创建的是完整连接。",
+    "误以为 protocol 不能写 0。",
+    "误以为 socket() 的返回值不是文件描述符。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "socket() 的作用是什么？",
+      "a": "创建通信端点，成功返回一个新的文件描述符。"
+    },
+    {
+      "q": "项目中 AF_INET、SOCK_STREAM、0 分别表示什么？",
+      "a": "AF_INET 表示 IPv4，SOCK_STREAM 表示 TCP 字节流，0 表示让系统选择默认协议。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "文件描述符 fd"
+  ],
+  "source_pages": [
+    41,
+    44
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "062_socket_函数",
+  "_chunk_pages": [
+    41,
+    44
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "title": "遍历 NodeList",
+  "definition": "NodeList 可以使用 forEach 方法进行遍历，从而逐个处理集合中的节点。",
+  "key_points": [
+    "可以直接使用 forEach",
+    "遍历时每次处理一个节点",
+    "适合对查询结果逐个执行操作"
+  ],
+  "examples": [
+    "allLinksInNav.forEach(link => { console.log(link.href); });"
+  ],
+  "misconceptions": [
+    "NodeList 不能直接遍历，必须先转成数组。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何遍历 NodeList？",
+      "a": "可以直接使用 forEach 方法遍历 NodeList。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "NodeList"
+  ],
+  "source_pages": [
+    349,
+    352
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "497_遍历_nodelist",
+  "_chunk_pages": [
+    349,
+    352
+  ]
+}

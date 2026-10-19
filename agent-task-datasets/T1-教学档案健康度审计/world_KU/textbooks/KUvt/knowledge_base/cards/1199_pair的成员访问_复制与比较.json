@@ -1,0 +1,46 @@
+{
+  "title": "pair的成员访问、复制与比较",
+  "definition": "std::pair是保存两个可能类型不同的对象的类模板实例。其两个成员分别通过first和second访问；可以直接修改这两个成员，也可以用一个pair对象复制构造另一个pair对象。pair支持比较运算，例如operator<和operator==。",
+  "key_points": [
+    "可以通过myPair.first和myPair.second分别访问或修改pair的两个成员。",
+    "可以使用另一个pair对象复制构造新的pair，例如pair<string, int> myThirdPair{myOtherPair};。",
+    "pair支持operator<和operator==等比较运算，具体比较结果由标准库为pair提供的运算符定义。"
+  ],
+  "examples": [
+    "pair<string, int> myOtherPair{\"hello\", 6};",
+    "myOtherPair.first = \"hello\";",
+    "myOtherPair.second = 6;",
+    "pair<string, int> myThirdPair{myOtherPair};",
+    "if (myOtherPair == myThirdPair) { /* 两个pair相等 */ }"
+  ],
+  "misconceptions": [
+    "pair的first和second不是函数，访问时不需要加括号。",
+    "pair只能保存相同类型的两个值是错误的；两个元素类型可以不同。",
+    "复制构造pair不会只复制其中一个成员，而是复制两个成员。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何访问和修改pair的两个元素？",
+      "a": "使用first访问第一个元素，使用second访问第二个元素，例如myPair.first和myPair.second。"
+    },
+    {
+      "q": "如何用已有pair构造另一个pair？",
+      "a": "可以使用复制构造，例如pair<string, int> myThirdPair{myOtherPair};。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "类模板的基本使用"
+  ],
+  "source_pages": [
+    581,
+    581
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1199_pair的成员访问_复制与比较",
+  "_chunk_pages": [
+    581,
+    584
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "title": "错误格式说明符与 format_error",
+  "definition": "格式说明符必须遵循规定的语法。教材指出，格式说明符存在错误时会产生 `std::format_error` 异常，可通过 `try` 和 `catch (const std::format_error&)` 捕获，并通过异常对象的 `what()` 获取错误说明。对于字符串字面量格式串，具体错误是在编译期被诊断还是在运行期抛出异常，可能受所用标准接口及实现方式影响。",
+  "key_points": [
+    "异常类型为 `std::format_error`。",
+    "可调用捕获到的异常对象的 `what()` 输出诊断信息。",
+    "教材示例中的错误信息为 `missing precision specifier`，表示缺少精度值。",
+    "格式说明符具有严格语法，不能只写精度标志 `.` 而不给出合法精度。"
+  ],
+  "examples": [
+    "概念性捕获方式：`try { /* 执行格式化 */ } catch (const std::format_error& e) { cout << e.what(); }`。",
+    "教材中的错误精度说明符会产生类似 `missing precision specifier` 的诊断信息。"
+  ],
+  "misconceptions": [
+    "误以为错误格式说明符会被自动忽略；实际上它会被诊断为格式错误。",
+    "误以为所有无效格式串都必然在同一阶段抛出运行期异常；字符串字面量格式串还可能接受编译期检查。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "C++20 格式库使用什么异常类型报告格式错误？",
+      "a": "`std::format_error`。"
+    },
+    {
+      "q": "如何取得格式异常的文字说明？",
+      "a": "捕获 `std::format_error` 后调用其 `what()` 方法。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++异常处理",
+    "C++20 std::format 基本格式说明符"
+  ],
+  "source_pages": [
+    118,
+    118
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 std::format 无效字符串字面量格式说明符 std::format_error 编译期检查 运行期异常 format_string",
+  "concept_id": "229_错误格式说明符与_format_error",
+  "_chunk_pages": [
+    117,
+    120
+  ]
+}

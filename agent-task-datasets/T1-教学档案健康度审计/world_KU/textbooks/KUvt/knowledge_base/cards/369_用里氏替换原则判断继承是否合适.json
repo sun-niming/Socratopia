@@ -1,0 +1,50 @@
+{
+  "title": "用里氏替换原则判断继承是否合适",
+  "definition": "里氏替换原则（Liskov Substitution Principle，LSP）要求：在不改变程序行为的情况下，派生类对象应能够替代基类对象。若把派生类放到原来使用基类的地方会导致行为改变，则继承关系不适合，通常应考虑“有一个”关系或其他设计。",
+  "key_points": [
+    "判断继承关系时，不能只看概念上是否相似，还要看派生类能否保持基类的行为契约。",
+    "AssociativeArray 对同一个键再次插入值时会删除或替换旧值。",
+    "MultiAssociativeArray 对同一个键再次插入值时会保留旧值并增加新值。",
+    "由于两者对相同操作的行为不同，MultiAssociativeArray 不能在不改变行为的情况下替代 AssociativeArray。",
+    "教材据此认为本例中“有一个”关系更合适，并建议实际设计中通常优先考虑组合而非继承。"
+  ],
+  "examples": [
+    "若某段程序依赖 `AssociativeArray.insert(14534, \"Kleper, Scott\")` 后再插入 `\"Kleper, Marni\"` 会只保留后一个值，那么把 MultiAssociativeArray 替换进去后会得到两个值，程序行为发生改变，因此不满足 LSP。",
+    "可以用替换测试表达判断：$$\\text{用派生类替代基类} \\Rightarrow \\text{外部可观察行为不改变}$$；若该条件不成立，则不应使用这种继承关系。"
+  ],
+  "misconceptions": [
+    "LSP 不是要求派生类与基类内部实现相同，而是要求在基类使用场景中保持可接受的外部行为。",
+    "只要派生类拥有基类的全部方法，就不代表它满足 LSP。",
+    "继承关系在语法上成立，不代表在设计语义上就是正确的。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "LSP 对派生类替代基类提出了什么要求？",
+      "a": "派生类对象应能在原来使用基类的地方替代基类对象，并且不改变程序行为。"
+    },
+    {
+      "q": "为什么 MultiAssociativeArray 不能满足本例中的 LSP？",
+      "a": "因为 AssociativeArray 对重复键会替换旧值，而 MultiAssociativeArray 会保留旧值并增加新值；相同操作产生不同结果。"
+    },
+    {
+      "q": "根据教材，本例应优先选择哪种关系？",
+      "a": "应优先选择“有一个”关系，即让 MultiAssociativeArray 包含或使用 AssociativeArray，而不是直接继承它。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "“是一个”关系与“有一个”关系",
+    "继承和基类、派生类"
+  ],
+  "source_pages": [
+    175,
+    175
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "369_用里氏替换原则判断继承是否合适",
+  "_chunk_pages": [
+    173,
+    176
+  ]
+}

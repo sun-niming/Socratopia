@@ -1,0 +1,41 @@
+{
+  "title": "switch语句初始化器及其作用域",
+  "definition": "C++允许在switch语句中使用初始化器，语法形式为：$$\\text{switch }(\\text{initializer};\\ \\text{expression})\\ \\{\\ \\text{body}\\ \\}$$初始化器中引入的变量可在switch表达式和switch语句体中使用，但在switch语句之外不可用。",
+  "key_points": [
+    "初始化器与switch表达式之间使用分号分隔。",
+    "初始化器先执行，再计算switch表达式并选择匹配的case。",
+    "初始化器中的变量作用域限于该switch语句的表达式和语句体。"
+  ],
+  "examples": [
+    "switch (auto value { getValue() }; value) { case 1: /* ... */ break; default: /* ... */ break; }"
+  ],
+  "misconceptions": [
+    "初始化器中声明的变量不会在switch语句结束后继续存在于可见作用域中。",
+    "switch初始化器不是给每一个case单独初始化变量，而是属于整个switch语句。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "switch初始化器与switch表达式之间用什么分隔？",
+      "a": "用分号分隔。"
+    },
+    {
+      "q": "switch初始化器中声明的变量在哪里可用？",
+      "a": "在switch表达式和switch语句体中可用，在switch语句之外不可用。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "switch语句的多分支选择"
+  ],
+  "source_pages": [
+    50,
+    50
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 switch statement with initializer syntax scope cppreference",
+  "concept_id": "077_switch语句初始化器及其作用域",
+  "_chunk_pages": [
+    49,
+    52
+  ]
+}

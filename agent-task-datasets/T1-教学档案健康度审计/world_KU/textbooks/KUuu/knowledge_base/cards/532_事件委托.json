@@ -1,0 +1,38 @@
+{
+  "title": "事件委托",
+  "definition": "事件委托是把事件监听器绑定到父容器上，由父容器统一处理其内部子元素的事件；在回调中通常通过 event.target 获取真正被点击的元素，再对该元素进行处理。",
+  "key_points": [
+    "在父容器上添加监听器，而不是给每个子元素单独绑定",
+    "event.target 表示实际被点击的元素",
+    "可以在父容器回调中直接修改被点击元素的样式或状态"
+  ],
+  "examples": [
+    "const gridContainer = document.querySelector('#grid-container');\ngridContainer.addEventListener('click', function(event) {\n  console.log('Clicked square:', event.target);\n  event.target.style.backgroundColor = getRandomColor();\n});"
+  ],
+  "misconceptions": [
+    "以为必须给每个子元素分别绑定事件监听器",
+    "以为 event.target 指向的是绑定监听器的父元素"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么把 click 事件绑在父容器上也能处理子方块的点击？",
+      "a": "因为父容器的回调可以通过 event.target 获取实际被点击的子元素，并对它进行处理。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "事件监听器",
+    "事件对象"
+  ],
+  "source_pages": [
+    373,
+    374
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "532_事件委托",
+  "_chunk_pages": [
+    373,
+    376
+  ]
+}

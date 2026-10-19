@@ -1,0 +1,44 @@
+{
+  "title": "Vim的退出命令",
+  "definition": "教材给出了两种退出相关命令：在末行模式中输入“:wq [文件名]”可保存并退出；输入“:q!”可强制退出。",
+  "key_points": [
+    "退出命令在末行模式中使用",
+    "\":wq [文件名]\"表示保存并退出",
+    "\":q!\"表示强制退出"
+  ],
+  "examples": [
+    ":wq test.txt",
+    ":q!"
+  ],
+  "misconceptions": [
+    "把 wq 和 q! 当成命令模式下直接输入的普通字符",
+    "认为 :q! 会先保存再退出",
+    "把 [文件名] 中的方括号当成实际输入内容"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何在 Vim 中保存并退出？",
+      "a": "在末行模式输入 :wq [文件名]。"
+    },
+    {
+      "q": "如何强制退出 Vim？",
+      "a": "在末行模式输入 :q!。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "Vim的工作模式",
+    "Vim的启动命令"
+  ],
+  "source_pages": [
+    37,
+    40
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "071_vim的退出命令",
+  "_chunk_pages": [
+    37,
+    40
+  ]
+}

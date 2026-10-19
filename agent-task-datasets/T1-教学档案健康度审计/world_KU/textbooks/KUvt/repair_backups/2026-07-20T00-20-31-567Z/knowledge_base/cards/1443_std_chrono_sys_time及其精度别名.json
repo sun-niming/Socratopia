@@ -1,0 +1,45 @@
+{
+  "title": "std::chrono::sys_time及其精度别名",
+  "definition": "`sys_time<Duration>`是基于`std::chrono::system_clock`、持续时间精度为`Duration`的`time_point`类型别名。标准库还定义了两个常用别名：`sys_seconds`表示精度为秒的系统时间点，`sys_days`表示精度为天的系统时间点。类似地，本地时间有`local_time`、`local_seconds`和`local_days`等类型。",
+  "key_points": [
+    "其定义可表示为：$$\\text{sys\\_time<Duration>} = \\text{std::chrono::time\\_point<system\\_clock, Duration>}$$",
+    "`sys_days`表示自`system_clock`纪元以来经过的天数，因此属于基于串行值的时间类型。",
+    "`sys_seconds`的时间精度为秒；`sys_days`的时间精度为天。",
+    "本地时间类型与系统时间类型相对应，但用于表示本地时间。"
+  ],
+  "examples": [
+    "`using sys_seconds = sys_time<std::chrono::seconds>;`",
+    "`using sys_days = sys_time<std::chrono::days>;`",
+    "`auto today = std::chrono::floor<std::chrono::days>(std::chrono::system_clock::now());`"
+  ],
+  "misconceptions": [
+    "`sys_days`不是把年、月、日分别保存为三个字段，而是以相对于系统时钟纪元的天数表示时间点。",
+    "`sys_time`本身不是固定只有一种精度的类型，其精度由模板参数`Duration`决定。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`sys_days`表示什么？",
+      "a": "`sys_days`是基于`system_clock`且精度为天的`time_point`类型，表示自系统时钟纪元以来经过的天数。"
+    },
+    {
+      "q": "`sys_seconds`与`sys_days`的主要区别是什么？",
+      "a": "二者都基于`system_clock`，但`sys_seconds`精度为秒，`sys_days`精度为天。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++类型别名",
+    "std::chrono时间点与持续时间"
+  ],
+  "source_pages": [
+    693,
+    693
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1443_std_chrono_sys_time及其精度别名",
+  "_chunk_pages": [
+    693,
+    696
+  ]
+}

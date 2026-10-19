@@ -1,0 +1,52 @@
+{
+  "title": "多态棋盘的局限与模板Grid的优势",
+  "definition": "使用多态实现的GameBoard只能通过std::unique_ptr<GamePiece>保存对象，因此元素必须是GamePiece的派生类，并且调用at()后得到的是std::unique_ptr<GamePiece>。若要使用ChessPiece或TicTacToePiece的特定功能，客户必须记住网格中的实际类型并进行向下转型。模板Grid则允许客户指定具体元素类型，使网格能够按值保存ChessPiece、SpreadsheetCell、int或double等类型，并在使用时保持类型安全。",
+  "key_points": [
+    "多态GameBoard总是存储指向GamePiece的指针，不能按值存储元素。",
+    "多态方案不能直接用于存储int或double，因为这些类型不派生自GamePiece。",
+    "同一个多态棋盘可以同时存储ChessPiece和TicTacToePiece，但调用at()后只能得到抽象基类指针。",
+    "使用模板Grid时，客户指定具体类型，类及其方法使用具体类型而非抽象基类类型。",
+    "模板方案的主要优势是类型安全，并减少为不同元素类型重复编写容器类的需要。"
+  ],
+  "examples": [
+    "多态方案中，同一棋盘可以存储不同派生类型：\nchessBoard.at(0, 0) = std::make_unique<ChessPiece>();\nchessBoard.at(0, 1) = std::make_unique<TicTacToePiece>();",
+    "模板Grid的使用目标是让网格分别保存具体类型，例如Grid<ChessPiece>、Grid<SpreadsheetCell>、Grid<int>或Grid<double>。"
+  ],
+  "misconceptions": [
+    "多态能够让同一棋盘保存不同派生类对象，但不代表调用at()后自动得到具体派生类类型。",
+    "模板Grid的类型安全并不是要求所有元素都继承同一个基类，而是由实例化时指定的具体类型决定接口中的元素类型。",
+    "GameBoard不能存储int或double，不是因为这些类型不能放进二维结构，而是因为该实现要求存储类型派生自GamePiece。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么多态GameBoard使用ChessPiece时可能需要向下转型？",
+      "a": "因为at()返回的是std::unique_ptr<GamePiece>，而不是std::unique_ptr<ChessPiece>；要调用ChessPiece特有功能，必须把得到的GamePiece指针转换为相应的派生类型。"
+    },
+    {
+      "q": "模板Grid相比多态GameBoard的主要类型安全优势是什么？",
+      "a": "模板Grid实例化后使用客户指定的具体元素类型，访问元素时直接得到该具体类型，而不是抽象的GamePiece类型，因此通常不需要向下转型。"
+    },
+    {
+      "q": "为什么多态GameBoard不能用于存储int？",
+      "a": "因为它的网格元素类型固定为std::unique_ptr<GamePiece>，而int不派生自GamePiece。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "类模板",
+    "继承与多态",
+    "向下转型",
+    "类型安全"
+  ],
+  "source_pages": [
+    376,
+    376
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "762_多态棋盘的局限与模板grid的优势",
+  "_chunk_pages": [
+    373,
+    376
+  ]
+}

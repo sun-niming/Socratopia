@@ -1,0 +1,55 @@
+{
+  "title": "history对象",
+  "definition": "history对象包含浏览历史URL等相关信息，可以用于控制浏览器在历史页面之间前进、后退或刷新当前页。教材中给出的操作包括后退一页、前进一页和刷新当前页。",
+  "key_points": [
+    "history对象包含浏览历史URL等相关信息。",
+    "可以后退、前进或刷新当前页。",
+    "教材给出的操作包括history.go(-1)、history.back()、history.go(1)、history.forward()、history.go(0)、history.refresh。"
+  ],
+  "examples": [
+    "history.go(-1);",
+    "history.back();",
+    "history.go(1);",
+    "history.forward();",
+    "history.go(0);",
+    "history.refresh"
+  ],
+  "misconceptions": [
+    "history对象可以直接获取任意历史页面的URL。",
+    "history对象只能后退，不能前进或刷新。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "history对象的作用是什么？",
+      "a": "包含浏览历史URL等相关信息，并可控制历史页面导航。"
+    },
+    {
+      "q": "如何返回前一页？",
+      "a": "可以用history.go(-1)或history.back()。"
+    },
+    {
+      "q": "如何前进一页？",
+      "a": "可以用history.go(1)或history.forward()。"
+    },
+    {
+      "q": "如何刷新显示当前页？",
+      "a": "可以用history.go(0)或history.refresh。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "浏览器历史记录",
+    "history对象"
+  ],
+  "source_pages": [
+    337,
+    340
+  ],
+  "needs_verification": true,
+  "verify_query": "JavaScript History 对象 refresh 方法 是否存在 history.refresh 还是 location.reload 站点:developer.mozilla.org OR 站点:developer.mozilla.org/history refresh 方法",
+  "concept_id": "457_history对象",
+  "_chunk_pages": [
+    337,
+    340
+  ]
+}

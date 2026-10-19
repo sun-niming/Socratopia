@@ -1,0 +1,46 @@
+{
+  "title": "使用 shared_future 同时唤醒多个线程",
+  "definition": "多个线程可以共享同一个 `std::shared_future`，并在各自线程中调用 `get()` 等待同一个结果。当关联的 promise 调用 `set_value(value)` 设置结果后，等待该 shared future 的多个线程都可以继续执行。",
+  "key_points": [
+    "每个等待线程都可以持有同一个 shared future 的副本。",
+    "等待线程调用 `signalFuture.get()` 时，如果结果尚未设置，就会阻塞。",
+    "主线程可以先等待各工作线程通过各自的 promise 报告“已启动”，再调用 `signalPromise.set_value(42)`，从而释放多个等待线程。",
+    "示例中两个 lambda 分别在由 `std::async(std::launch::async, ...)` 启动的线程中执行。"
+  ],
+  "examples": [
+    "核心流程可表示为：\n```cpp\nstd::promise<int> signalPromise;\nauto signalFuture = signalPromise.get_future().share();\n\n// 多个线程中：\nint parameter = signalFuture.get();\n\n// 主线程中：\nsignalPromise.set_value(42);\n```",
+    "主线程可以先等待：\n```cpp\nthread1Started.get_future().wait();\nthread2Started.get_future().wait();\n```\n然后设置共享信号：`signalPromise.set_value(42);`"
+  ],
+  "misconceptions": [
+    "误以为普通 `std::future` 可以安全地被多个线程重复调用 `get()`。",
+    "误以为调用 `set_value(42)` 只会唤醒一个等待线程；本例使用 shared future 的目的就是让多个线程共享同一结果。",
+    "误以为启动异步线程后就能立即假设线程已经开始执行；示例通过 started promise 等待线程报告已启动。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何让多个线程等待同一个参数并在参数设置后继续执行？",
+      "a": "让多个线程共享同一个 `std::shared_future`，各自调用 `get()`；当关联的 promise 调用 `set_value()` 设置结果后，多个线程即可继续执行。"
+    },
+    {
+      "q": "示例为什么还要使用 `thread1Started` 和 `thread2Started` 两个 promise？",
+      "a": "用于让主线程确认两个工作线程都已启动并进入等待状态，然后再设置共享参数。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "std::shared_future",
+    "std::promise 与 std::future",
+    "std::async"
+  ],
+  "source_pages": [
+    821,
+    822
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1686_使用_shared_future_同时唤醒多个线程",
+  "_chunk_pages": [
+    821,
+    824
+  ]
+}

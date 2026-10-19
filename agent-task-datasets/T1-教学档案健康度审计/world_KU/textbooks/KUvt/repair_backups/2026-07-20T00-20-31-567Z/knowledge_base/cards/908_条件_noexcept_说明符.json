@@ -1,0 +1,44 @@
+{
+  "title": "条件 noexcept 说明符",
+  "definition": "noexcept(expression) 是函数声明中的条件异常说明符：当且仅当 expression 的值为 true 时，该函数才被标记为 noexcept。noexcept 等价于 noexcept(true)，而 noexcept(false) 表示函数可以抛出异常。",
+  "key_points": [
+    "表达式的结果决定函数是否具有 noexcept 保证。",
+    "noexcept(false) 不表示函数绝对会抛出异常，而是表示函数没有“不抛异常”的保证。",
+    "条件 noexcept 常用于根据被调用函数的异常属性来决定当前函数的异常属性。"
+  ],
+  "examples": [
+    "void f1() noexcept {}",
+    "void f2() noexcept(false) {}",
+    "void f3() noexcept(noexcept(f1())) {}",
+    "在上述示例中，f1() 和 f3() 被标记为 noexcept，而 f2() 不具有 noexcept 保证。"
+  ],
+  "misconceptions": [
+    "noexcept(false) 不是一种强制抛异常的声明；它只是允许抛出异常。",
+    "条件 noexcept 的括号表达式不是运行时异常处理，而是在函数类型和异常保证层面进行判断。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "什么时候 noexcept(expression) 会把函数标记为 noexcept？",
+      "a": "当 expression 的值为 true 时。"
+    },
+    {
+      "q": "noexcept(false) 表示什么？",
+      "a": "表示该函数可以抛出异常，不具有 noexcept 保证。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "noexcept说明符"
+  ],
+  "source_pages": [
+    446,
+    447
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "908_条件_noexcept_说明符",
+  "_chunk_pages": [
+    445,
+    448
+  ]
+}

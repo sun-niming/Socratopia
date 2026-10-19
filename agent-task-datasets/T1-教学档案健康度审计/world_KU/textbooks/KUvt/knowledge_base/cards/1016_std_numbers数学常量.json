@@ -1,0 +1,43 @@
+{
+  "title": "std::numbers数学常量",
+  "definition": "C++20在<numbers>头文件的std::numbers命名空间中提供数学常量。原文列举了pi、inv_pi、sqrt2、e和phi等常量，并给出它们的近似值。",
+  "key_points": [
+    "数学常量位于std::numbers命名空间。",
+    "相关头文件是<numbers>。",
+    "原文列举的近似值包括：$$\\pi\\approx3.141593$$、$$1/\\pi\\approx0.318310$$、$$\\sqrt{2}\\approx1.414214$$、$$e\\approx2.718282$$、黄金比例$$\\varphi\\approx1.618034$$。"
+  ],
+  "examples": [
+    "示例：std::numbers::pi_v<double>表示double类型的圆周率常量。",
+    "数学关系：$$\\mathrm{inv\\_pi}=\\frac{1}{\\pi}$$。"
+  ],
+  "misconceptions": [
+    "这些常量只能通过手工定义数值获得；实际上C++20提供了标准库常量。",
+    "std::numbers中的常量只有一种固定浮点类型；实际使用时可使用相应的类型版本，例如pi_v<double>。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "C++20标准数学常量定义在哪里？",
+      "a": "定义在<numbers>头文件中的std::numbers命名空间中。"
+    },
+    {
+      "q": "原文列举了哪些数学常量？",
+      "a": "包括pi、inv_pi、sqrt2、e和phi。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "命名空间基础",
+    "浮点数基础"
+  ],
+  "source_pages": [
+    503,
+    503
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1016_std_numbers数学常量",
+  "_chunk_pages": [
+    501,
+    504
+  ]
+}

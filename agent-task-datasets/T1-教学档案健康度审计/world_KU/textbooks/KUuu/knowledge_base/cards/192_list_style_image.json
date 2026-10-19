@@ -1,0 +1,35 @@
+{
+  "title": "list-style-image",
+  "definition": "list-style-image 用来把列表项标号显示为图像。",
+  "key_points": [
+    "用于用图片替代默认列表标号",
+    "属性值通常写成 url(...)",
+    "它关注的是标号图片而不是列表内容图片"
+  ],
+  "examples": [
+    "list-style-image: url(\"images/bullet.gif\");"
+  ],
+  "misconceptions": [
+    "误以为它是给整个列表添加背景图",
+    "误以为它会改变列表内容文本"
+  ],
+  "qa_pairs": [
+    {
+      "q": "list-style-image 的作用是什么？",
+      "a": "把列表项标号以图像显示。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [],
+  "source_pages": [
+    117,
+    120
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "192_list_style_image",
+  "_chunk_pages": [
+    117,
+    120
+  ]
+}

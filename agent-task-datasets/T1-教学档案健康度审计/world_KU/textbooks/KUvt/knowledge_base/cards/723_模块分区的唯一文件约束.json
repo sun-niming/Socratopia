@@ -1,0 +1,44 @@
+{
+  "title": "模块分区的唯一文件约束",
+  "definition": "每个特定的模块分区名称只能对应一个文件。不能让多个文件声明相同名称的模块接口分区，也不能再为同一分区名称提供重复的实现文件。若某个分区的实现不适合放在唯一的分区实现文件中，可以把它放入主模块的实现文件，但此时应使用主模块的模块声明，而不是该分区的模块声明。",
+  "key_points": [
+    "相同分区名不能出现在多个模块接口分区文件中。",
+    "分区接口中声明的实现不能再出现在另一个具有相同分区名的实现文件中。",
+    "可以把 `address` 分区的实现放入 `datamodel` 模块实现文件。",
+    "放入主模块实现文件时，应写 `module datamodel;`，不能写 `module datamodel:address;`。"
+  ],
+  "examples": [
+    "主模块实现文件中的写法：\n`module datamodel;`\n`import <iostream>;`\n`DataModel::Address::Address() { cout << \"Address::Address()\" << endl; }`"
+  ],
+  "misconceptions": [
+    "可以为同一个分区名创建多个实现文件，再由编译器合并它们。",
+    "把地址分区实现放入主模块实现文件时，仍必须声明为 `module datamodel:address;`。",
+    "同一分区名称在接口文件和实现文件中重复出现不会造成问题。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "同一个模块分区名称能否用于多个文件？",
+      "a": "不能。每个特定分区名称只能用于唯一的文件。"
+    },
+    {
+      "q": "将 `datamodel:address` 分区的构造函数实现放在主模块实现文件中时，应使用什么声明？",
+      "a": "应使用 `module datamodel;`，而不是 `module datamodel:address;`。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++模块分区",
+    "C++模块实现文件"
+  ],
+  "source_pages": [
+    358,
+    359
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "723_模块分区的唯一文件约束",
+  "_chunk_pages": [
+    357,
+    360
+  ]
+}

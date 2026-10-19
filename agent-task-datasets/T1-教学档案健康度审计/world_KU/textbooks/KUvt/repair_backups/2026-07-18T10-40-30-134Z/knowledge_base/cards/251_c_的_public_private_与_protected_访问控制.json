@@ -1,0 +1,36 @@
+{
+  "title": "C++ 的 public、private 与 protected 访问控制",
+  "definition": "原文提到 C++ 中的 `public`、`private` 和 `protected`，它们是用于控制类成员访问权限的关键字。由于给定原文片段没有完整说明三者的具体访问规则，本卡片只确认其作为 C++ 访问控制关键字出现。",
+  "key_points": [
+    "`public`、`private` 和 `protected` 都与 C++ 类成员的访问控制有关。",
+    "原文片段还出现了 `handle` 和 `bug` 等不完整内容，无法据此确定完整示例或上下文。"
+  ],
+  "examples": [
+    "访问控制说明的基本形式：`class A { public: int x; private: int y; protected: int z; };`"
+  ],
+  "misconceptions": [
+    "不能把 `public`、`private` 和 `protected` 当作普通变量类型。",
+    "仅凭给定片段不能完整推出三种访问权限对类内、派生类和类外代码的全部规则。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "原文提到的 `public`、`private` 和 `protected` 在 C++ 中用于什么？",
+      "a": "它们用于控制类成员的访问权限。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++ 类与对象"
+  ],
+  "source_pages": [
+    181,
+    184
+  ],
+  "needs_verification": true,
+  "verify_query": "C++ public private protected 访问权限 类内 派生类 类外 官方文档",
+  "concept_id": "251_c_的_public_private_与_protected_访问控制",
+  "_chunk_pages": [
+    181,
+    184
+  ]
+}

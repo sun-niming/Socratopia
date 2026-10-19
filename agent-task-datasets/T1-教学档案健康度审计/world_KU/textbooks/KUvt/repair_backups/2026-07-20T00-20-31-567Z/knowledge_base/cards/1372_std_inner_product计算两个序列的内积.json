@@ -1,0 +1,50 @@
+{
+  "title": "std::inner_product计算两个序列的内积",
+  "definition": "<numeric>中的std::inner_product()用于计算两个序列的内积：将第一个序列和第二个序列中对应位置的元素相乘，再把这些乘积累加到初始值上。默认情况下，外层累加运算使用operator+，对应元素的组合运算使用operator*。该算法不支持并行执行；若需要并行版本，应使用std::transform_reduce()。",
+  "key_points": [
+    "调用形式通常为std::inner_product(first1, last1, first2, init)。",
+    "第一个序列由[first1,last1)定义，第二个序列从first2开始，长度应足够覆盖第一个序列。",
+    "默认计算形式为：$$init+(a_0\\times b_0)+(a_1\\times b_1)+\\cdots+(a_{n-1}\\times b_{n-1})$$。",
+    "教材指出std::inner_product()需要两个二元运算符，默认分别是operator+和operator*。"
+  ],
+  "examples": [
+    "std::vector<int> v1{1, 2, 3, 4};\nstd::vector<int> v2{9, 8, 7, 6};\nint result{std::inner_product(std::cbegin(v1), std::cend(v1), std::cbegin(v2), 0)};\n// result = 1*9 + 2*8 + 3*7 + 4*6 = 70",
+    "对应计算可写为：\n$$0+(1\\times9)+(2\\times8)+(3\\times7)+(4\\times6)=70$$"
+  ],
+  "misconceptions": [
+    "std::inner_product()不是只计算两个向量的逐元素乘积，它还会把这些乘积归约为一个结果。",
+    "第四个参数是初始值，不是第二个序列的结束迭代器。",
+    "std::inner_product()不支持并行执行；需要并行归约时应考虑std::transform_reduce()。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "v1={1,2,3,4}、v2={9,8,7,6}，以0为初始值调用std::inner_product()的结果是什么？",
+      "a": "结果为70，因为$1\\times9+2\\times8+3\\times7+4\\times6=70$。"
+    },
+    {
+      "q": "std::inner_product()默认使用哪两个二元运算符？",
+      "a": "默认使用operator+累加各项，并使用operator*计算两个序列对应元素的乘积。"
+    },
+    {
+      "q": "需要并行计算内积时应使用什么算法？",
+      "a": "应使用std::transform_reduce()。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "迭代器范围",
+    "二元运算",
+    "归约算法"
+  ],
+  "source_pages": [
+    656,
+    656
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1372_std_inner_product计算两个序列的内积",
+  "_chunk_pages": [
+    653,
+    656
+  ]
+}

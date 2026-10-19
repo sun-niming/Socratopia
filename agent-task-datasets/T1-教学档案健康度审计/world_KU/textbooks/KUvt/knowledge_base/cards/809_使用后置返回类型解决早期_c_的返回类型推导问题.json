@@ -1,0 +1,43 @@
+{
+  "title": "使用后置返回类型解决早期 C++ 的返回类型推导问题",
+  "definition": "在 C++14 之前，函数不能直接使用自动返回类型推导和 decltype(auto)。如果返回类型依赖函数参数表达式，例如 decltype(t1 + t2)，可以使用替代函数语法：函数声明开头写 auto，在参数列表之后使用 -> 指定后置返回类型。这样解析后置返回类型时，函数参数名称已经可见。",
+  "key_points": [
+    "直接把 decltype(t1 + t2) 放在函数声明开头是错误的，因为此时参数 t1 和 t2 尚未声明。",
+    "后置返回类型写在参数列表之后，此时 t1 和 t2 已经在作用域中，可以用于 decltype。",
+    "教材建议在现代 C++ 中优先使用自动返回类型推导或 decltype(auto)，而不是后置返回类型语法。"
+  ],
+  "examples": [
+    "template <typename T1, typename T2>\nauto add(const T1& t1, const T2& t2)\n    -> decltype(t1 + t2)\n{\n    return t1 + t2;\n}"
+  ],
+  "misconceptions": [
+    "后置返回类型不是让返回类型变成运行时动态类型，而是改变返回类型声明的位置，使参数名称在返回类型表达式中可用。",
+    "错误写法是把 decltype(t1 + t2) 放在参数列表之前，而不是使用后置返回类型。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么不能直接写 decltype(t1 + t2) 作为函数声明开头的返回类型？",
+      "a": "因为解析函数声明开头时，参数 t1 和 t2 还没有声明，语义分析器无法识别它们。"
+    },
+    {
+      "q": "后置返回类型如何解决这个问题？",
+      "a": "先写 auto 和完整参数列表，再在 -> 后写 decltype(t1 + t2)；此时参数名称已经可见。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "decltype",
+    "函数模板",
+    "函数声明语法"
+  ],
+  "source_pages": [
+    399,
+    399
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "809_使用后置返回类型解决早期_c_的返回类型推导问题",
+  "_chunk_pages": [
+    397,
+    400
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "title": "Handler 基类与事件转发机制",
+  "definition": "Handler 是责任链中的处理程序基类，保存指向下一个处理程序的指针，并提供虚函数 `handleMessage(Event message)`。基类默认行为是：如果存在下一个处理程序，就把事件转发给它。",
+  "key_points": [
+    "事件类型可以用 `enum class Event` 定义，例如左键按下、左键抬起、右键按下和右键抬起。",
+    "Handler 的构造函数接收下一个处理程序的指针，并将其保存为成员变量。",
+    "基类 `handleMessage` 不处理具体事件，只在 `m_nextHandler` 非空时调用下一个处理程序的 `handleMessage`。",
+    "具体处理程序通过重写 `handleMessage` 判断事件类型；不匹配时调用 `Handler::handleMessage(message)`。"
+  ],
+  "examples": [
+    "事件枚举可表示为：`enum class Event { LeftMouseButtonDown, LeftMouseButtonUp, RightMouseButtonDown, RightMouseButtonUp };`。",
+    "转发逻辑可表示为：`if (m_nextHandler) { m_nextHandler->handleMessage(message); }`。"
+  ],
+  "misconceptions": [
+    "Handler 基类并不自动决定哪个具体类应该处理事件；具体类需要在重写函数中判断事件类型。",
+    "下一个处理程序为空时，事件不会继续传递。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "Handler 基类在 `handleMessage` 中的默认职责是什么？",
+      "a": "如果存在下一个处理程序，就把消息转发给下一个处理程序；否则不再继续传递。"
+    },
+    {
+      "q": "具体处理程序如何把不认识的事件传给链中的下一个对象？",
+      "a": "在事件不匹配时调用基类实现，例如 `Handler::handleMessage(message)`。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "责任链模式的基本思想",
+    "C++虚函数与重写"
+  ],
+  "source_pages": [
+    963,
+    964
+  ],
+  "needs_verification": true,
+  "verify_query": "《C++20高级编程》第5版 第963-964页 Handler Event handleMessage 责任链完整代码",
+  "concept_id": "1977_handler_基类与事件转发机制",
+  "_chunk_pages": [
+    961,
+    964
+  ]
+}

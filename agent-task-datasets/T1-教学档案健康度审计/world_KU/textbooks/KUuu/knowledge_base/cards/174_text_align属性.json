@@ -1,0 +1,36 @@
+{
+  "title": "text-align属性",
+  "definition": "text-align 属性用于设置文本的水平对齐方式。",
+  "key_points": [
+    "center 表示居中对齐。",
+    "left 表示左对齐。",
+    "right 表示右对齐。",
+    "justify 表示两端对齐。"
+  ],
+  "examples": [
+    "text-align:center;",
+    "text-align:justify;"
+  ],
+  "misconceptions": [
+    "justify 不是居中，而是两端对齐。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "text-align 的 justify 取值表示什么？",
+      "a": "两端对齐。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [],
+  "source_pages": [
+    109,
+    112
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "174_text_align属性",
+  "_chunk_pages": [
+    109,
+    112
+  ]
+}

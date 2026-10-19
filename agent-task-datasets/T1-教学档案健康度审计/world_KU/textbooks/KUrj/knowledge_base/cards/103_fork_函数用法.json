@@ -1,0 +1,37 @@
+{
+  "title": "fork 函数用法",
+  "definition": "`fork()` 用于创建子进程。它没有参数；在父进程中返回子进程的 `pid`，在子进程中返回 `0`，失败时返回 `-1`。在本项目中，通常把每个客户端连接交给一个子进程处理。",
+  "key_points": [
+    "原型：`pid_t fork(void);`",
+    "父进程返回子进程 `pid`，子进程返回 `0`，失败返回 `-1`。",
+    "项目中常用来实现“每个连接一个子进程”的并发处理方式。"
+  ],
+  "examples": [
+    "示例：`pid_t pid = fork(); if (pid == 0) { ... } else if (pid > 0) { ... } else { perror(\"fork\"); }`"
+  ],
+  "misconceptions": [
+    "误以为父子进程中 `fork()` 的返回值相同。",
+    "误以为 `fork()` 失败时会返回 `0`。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`fork()` 在父进程、子进程和失败时分别返回什么？",
+      "a": "父进程返回子进程的 `pid`，子进程返回 `0`，失败返回 `-1`。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "进程"
+  ],
+  "source_pages": [
+    61,
+    62
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "103_fork_函数用法",
+  "_chunk_pages": [
+    61,
+    64
+  ]
+}

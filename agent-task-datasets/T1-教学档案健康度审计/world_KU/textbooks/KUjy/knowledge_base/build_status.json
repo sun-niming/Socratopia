@@ -1,0 +1,5446 @@
+{
+  "state": "done",
+  "title": "《操作系统》完整讲义",
+  "format": "pdf",
+  "updatedAt": "2026-06-29T01:53:10.841Z",
+  "startedAt": "2026-06-29T01:41:00.636Z",
+  "visionFallbackAvailable": false,
+  "premiumEscalationAvailable": true,
+  "cardCount": 0,
+  "chunksDone": 144,
+  "chunksTotal": 144,
+  "log": [
+    {
+      "ts": "2026-06-29T01:41:09.760Z",
+      "type": "chunk_start",
+      "chunk": 1,
+      "pages": [
+        1,
+        4
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-06-29T01:44:09.765Z",
+      "type": "card_text_fail",
+      "chunk": 1,
+      "error": "timeout 180000ms"
+    },
+    {
+      "ts": "2026-06-29T01:44:09.766Z",
+      "type": "card_premium_escalate",
+      "chunk": 1,
+      "model": "gpt-5.5",
+      "reason": "mini_zero_cards"
+    },
+    {
+      "ts": "2026-06-29T01:47:09.771Z",
+      "type": "card_premium_fail",
+      "chunk": 1,
+      "error": "timeout 180000ms"
+    },
+    {
+      "ts": "2026-06-29T01:47:09.772Z",
+      "type": "chunk_done",
+      "chunk": 1,
+      "cardCount": 0,
+      "method": "none"
+    },
+    {
+      "ts": "2026-06-29T01:47:09.774Z",
+      "type": "chunk_start",
+      "chunk": 2,
+      "pages": [
+        5,
+        8
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-06-29T01:50:09.776Z",
+      "type": "card_text_fail",
+      "chunk": 2,
+      "error": "timeout 180000ms"
+    },
+    {
+      "ts": "2026-06-29T01:50:09.776Z",
+      "type": "card_premium_escalate",
+      "chunk": 2,
+      "model": "gpt-5.5",
+      "reason": "mini_zero_cards"
+    },
+    {
+      "ts": "2026-06-29T01:53:09.791Z",
+      "type": "card_premium_fail",
+      "chunk": 2,
+      "error": "timeout 180000ms"
+    },
+    {
+      "ts": "2026-06-29T01:53:09.791Z",
+      "type": "chunk_done",
+      "chunk": 2,
+      "cardCount": 0,
+      "method": "none"
+    },
+    {
+      "ts": "2026-06-29T01:53:09.792Z",
+      "type": "chunk_start",
+      "chunk": 3,
+      "pages": [
+        9,
+        12
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-06-29T01:53:09.796Z",
+      "type": "card_text_fail",
+      "chunk": 3,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:09.796Z",
+      "type": "card_premium_escalate",
+      "chunk": 3,
+      "model": "gpt-5.5",
+      "reason": "mini_zero_cards"
+    },
+    {
+      "ts": "2026-06-29T01:53:09.801Z",
+      "type": "card_premium_fail",
+      "chunk": 3,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:09.801Z",
+      "type": "chunk_done",
+      "chunk": 3,
+      "cardCount": 0,
+      "method": "none"
+    },
+    {
+      "ts": "2026-06-29T01:53:09.803Z",
+      "type": "chunk_start",
+      "chunk": 4,
+      "pages": [
+        13,
+        16
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-06-29T01:53:09.806Z",
+      "type": "card_text_fail",
+      "chunk": 4,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:09.806Z",
+      "type": "card_premium_escalate",
+      "chunk": 4,
+      "model": "gpt-5.5",
+      "reason": "mini_zero_cards"
+    },
+    {
+      "ts": "2026-06-29T01:53:09.808Z",
+      "type": "card_premium_fail",
+      "chunk": 4,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:09.808Z",
+      "type": "chunk_done",
+      "chunk": 4,
+      "cardCount": 0,
+      "method": "none"
+    },
+    {
+      "ts": "2026-06-29T01:53:09.810Z",
+      "type": "chunk_start",
+      "chunk": 5,
+      "pages": [
+        17,
+        20
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-06-29T01:53:09.813Z",
+      "type": "card_text_fail",
+      "chunk": 5,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:09.814Z",
+      "type": "card_premium_escalate",
+      "chunk": 5,
+      "model": "gpt-5.5",
+      "reason": "mini_zero_cards"
+    },
+    {
+      "ts": "2026-06-29T01:53:09.815Z",
+      "type": "card_premium_fail",
+      "chunk": 5,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:09.815Z",
+      "type": "chunk_done",
+      "chunk": 5,
+      "cardCount": 0,
+      "method": "none"
+    },
+    {
+      "ts": "2026-06-29T01:53:09.822Z",
+      "type": "chunk_start",
+      "chunk": 6,
+      "pages": [
+        21,
+        24
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-06-29T01:53:09.824Z",
+      "type": "card_text_fail",
+      "chunk": 6,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:09.825Z",
+      "type": "card_premium_escalate",
+      "chunk": 6,
+      "model": "gpt-5.5",
+      "reason": "mini_zero_cards"
+    },
+    {
+      "ts": "2026-06-29T01:53:09.827Z",
+      "type": "card_premium_fail",
+      "chunk": 6,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:09.827Z",
+      "type": "chunk_done",
+      "chunk": 6,
+      "cardCount": 0,
+      "method": "none"
+    },
+    {
+      "ts": "2026-06-29T01:53:09.829Z",
+      "type": "chunk_start",
+      "chunk": 7,
+      "pages": [
+        25,
+        28
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-06-29T01:53:09.831Z",
+      "type": "card_text_fail",
+      "chunk": 7,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:09.831Z",
+      "type": "card_premium_escalate",
+      "chunk": 7,
+      "model": "gpt-5.5",
+      "reason": "mini_zero_cards"
+    },
+    {
+      "ts": "2026-06-29T01:53:09.833Z",
+      "type": "card_premium_fail",
+      "chunk": 7,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:09.833Z",
+      "type": "chunk_done",
+      "chunk": 7,
+      "cardCount": 0,
+      "method": "none"
+    },
+    {
+      "ts": "2026-06-29T01:53:09.834Z",
+      "type": "chunk_start",
+      "chunk": 8,
+      "pages": [
+        29,
+        32
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-06-29T01:53:09.836Z",
+      "type": "card_text_fail",
+      "chunk": 8,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:09.836Z",
+      "type": "card_premium_escalate",
+      "chunk": 8,
+      "model": "gpt-5.5",
+      "reason": "mini_zero_cards"
+    },
+    {
+      "ts": "2026-06-29T01:53:09.838Z",
+      "type": "card_premium_fail",
+      "chunk": 8,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:09.838Z",
+      "type": "chunk_done",
+      "chunk": 8,
+      "cardCount": 0,
+      "method": "none"
+    },
+    {
+      "ts": "2026-06-29T01:53:09.839Z",
+      "type": "chunk_start",
+      "chunk": 9,
+      "pages": [
+        33,
+        36
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-06-29T01:53:09.840Z",
+      "type": "card_text_fail",
+      "chunk": 9,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:09.840Z",
+      "type": "card_premium_escalate",
+      "chunk": 9,
+      "model": "gpt-5.5",
+      "reason": "mini_zero_cards"
+    },
+    {
+      "ts": "2026-06-29T01:53:09.841Z",
+      "type": "card_premium_fail",
+      "chunk": 9,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:09.841Z",
+      "type": "chunk_done",
+      "chunk": 9,
+      "cardCount": 0,
+      "method": "none"
+    },
+    {
+      "ts": "2026-06-29T01:53:09.843Z",
+      "type": "chunk_start",
+      "chunk": 10,
+      "pages": [
+        37,
+        40
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-06-29T01:53:09.845Z",
+      "type": "card_text_fail",
+      "chunk": 10,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:09.845Z",
+      "type": "card_premium_escalate",
+      "chunk": 10,
+      "model": "gpt-5.5",
+      "reason": "mini_zero_cards"
+    },
+    {
+      "ts": "2026-06-29T01:53:09.846Z",
+      "type": "card_premium_fail",
+      "chunk": 10,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:09.846Z",
+      "type": "chunk_done",
+      "chunk": 10,
+      "cardCount": 0,
+      "method": "none"
+    },
+    {
+      "ts": "2026-06-29T01:53:09.848Z",
+      "type": "chunk_start",
+      "chunk": 11,
+      "pages": [
+        41,
+        44
+      ],
+      "imageCount": 1
+    },
+    {
+      "ts": "2026-06-29T01:53:09.852Z",
+      "type": "card_multimodal_fail",
+      "chunk": 11,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:09.853Z",
+      "type": "card_text_fail",
+      "chunk": 11,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:09.853Z",
+      "type": "card_premium_escalate",
+      "chunk": 11,
+      "model": "gpt-5.5",
+      "reason": "mini_zero_cards"
+    },
+    {
+      "ts": "2026-06-29T01:53:09.857Z",
+      "type": "card_premium_fail",
+      "chunk": 11,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:09.857Z",
+      "type": "chunk_done",
+      "chunk": 11,
+      "cardCount": 0,
+      "method": "none"
+    },
+    {
+      "ts": "2026-06-29T01:53:09.859Z",
+      "type": "chunk_start",
+      "chunk": 12,
+      "pages": [
+        45,
+        48
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-06-29T01:53:09.860Z",
+      "type": "card_text_fail",
+      "chunk": 12,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:09.860Z",
+      "type": "card_premium_escalate",
+      "chunk": 12,
+      "model": "gpt-5.5",
+      "reason": "mini_zero_cards"
+    },
+    {
+      "ts": "2026-06-29T01:53:09.862Z",
+      "type": "card_premium_fail",
+      "chunk": 12,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:09.862Z",
+      "type": "chunk_done",
+      "chunk": 12,
+      "cardCount": 0,
+      "method": "none"
+    },
+    {
+      "ts": "2026-06-29T01:53:09.864Z",
+      "type": "chunk_start",
+      "chunk": 13,
+      "pages": [
+        49,
+        52
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-06-29T01:53:09.865Z",
+      "type": "card_text_fail",
+      "chunk": 13,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:09.865Z",
+      "type": "card_premium_escalate",
+      "chunk": 13,
+      "model": "gpt-5.5",
+      "reason": "mini_zero_cards"
+    },
+    {
+      "ts": "2026-06-29T01:53:09.866Z",
+      "type": "card_premium_fail",
+      "chunk": 13,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:09.866Z",
+      "type": "chunk_done",
+      "chunk": 13,
+      "cardCount": 0,
+      "method": "none"
+    },
+    {
+      "ts": "2026-06-29T01:53:09.869Z",
+      "type": "chunk_start",
+      "chunk": 14,
+      "pages": [
+        53,
+        56
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-06-29T01:53:09.870Z",
+      "type": "card_text_fail",
+      "chunk": 14,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:09.870Z",
+      "type": "card_premium_escalate",
+      "chunk": 14,
+      "model": "gpt-5.5",
+      "reason": "mini_zero_cards"
+    },
+    {
+      "ts": "2026-06-29T01:53:09.871Z",
+      "type": "card_premium_fail",
+      "chunk": 14,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:09.871Z",
+      "type": "chunk_done",
+      "chunk": 14,
+      "cardCount": 0,
+      "method": "none"
+    },
+    {
+      "ts": "2026-06-29T01:53:09.873Z",
+      "type": "chunk_start",
+      "chunk": 15,
+      "pages": [
+        57,
+        60
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-06-29T01:53:09.874Z",
+      "type": "card_text_fail",
+      "chunk": 15,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:09.874Z",
+      "type": "card_premium_escalate",
+      "chunk": 15,
+      "model": "gpt-5.5",
+      "reason": "mini_zero_cards"
+    },
+    {
+      "ts": "2026-06-29T01:53:09.876Z",
+      "type": "card_premium_fail",
+      "chunk": 15,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:09.876Z",
+      "type": "chunk_done",
+      "chunk": 15,
+      "cardCount": 0,
+      "method": "none"
+    },
+    {
+      "ts": "2026-06-29T01:53:09.878Z",
+      "type": "chunk_start",
+      "chunk": 16,
+      "pages": [
+        61,
+        64
+      ],
+      "imageCount": 2
+    },
+    {
+      "ts": "2026-06-29T01:53:09.883Z",
+      "type": "card_multimodal_fail",
+      "chunk": 16,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:09.885Z",
+      "type": "card_text_fail",
+      "chunk": 16,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:09.885Z",
+      "type": "card_premium_escalate",
+      "chunk": 16,
+      "model": "gpt-5.5",
+      "reason": "mini_zero_cards"
+    },
+    {
+      "ts": "2026-06-29T01:53:09.890Z",
+      "type": "card_premium_fail",
+      "chunk": 16,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:09.890Z",
+      "type": "chunk_done",
+      "chunk": 16,
+      "cardCount": 0,
+      "method": "none"
+    },
+    {
+      "ts": "2026-06-29T01:53:09.892Z",
+      "type": "chunk_start",
+      "chunk": 17,
+      "pages": [
+        65,
+        68
+      ],
+      "imageCount": 2
+    },
+    {
+      "ts": "2026-06-29T01:53:09.897Z",
+      "type": "card_multimodal_fail",
+      "chunk": 17,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:09.899Z",
+      "type": "card_text_fail",
+      "chunk": 17,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:09.899Z",
+      "type": "card_premium_escalate",
+      "chunk": 17,
+      "model": "gpt-5.5",
+      "reason": "mini_zero_cards"
+    },
+    {
+      "ts": "2026-06-29T01:53:09.905Z",
+      "type": "card_premium_fail",
+      "chunk": 17,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:09.905Z",
+      "type": "chunk_done",
+      "chunk": 17,
+      "cardCount": 0,
+      "method": "none"
+    },
+    {
+      "ts": "2026-06-29T01:53:09.909Z",
+      "type": "chunk_start",
+      "chunk": 18,
+      "pages": [
+        69,
+        72
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-06-29T01:53:09.911Z",
+      "type": "card_text_fail",
+      "chunk": 18,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:09.911Z",
+      "type": "card_premium_escalate",
+      "chunk": 18,
+      "model": "gpt-5.5",
+      "reason": "mini_zero_cards"
+    },
+    {
+      "ts": "2026-06-29T01:53:09.913Z",
+      "type": "card_premium_fail",
+      "chunk": 18,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:09.913Z",
+      "type": "chunk_done",
+      "chunk": 18,
+      "cardCount": 0,
+      "method": "none"
+    },
+    {
+      "ts": "2026-06-29T01:53:09.915Z",
+      "type": "chunk_start",
+      "chunk": 19,
+      "pages": [
+        73,
+        76
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-06-29T01:53:09.923Z",
+      "type": "card_text_fail",
+      "chunk": 19,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:09.923Z",
+      "type": "card_premium_escalate",
+      "chunk": 19,
+      "model": "gpt-5.5",
+      "reason": "mini_zero_cards"
+    },
+    {
+      "ts": "2026-06-29T01:53:09.924Z",
+      "type": "card_premium_fail",
+      "chunk": 19,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:09.924Z",
+      "type": "chunk_done",
+      "chunk": 19,
+      "cardCount": 0,
+      "method": "none"
+    },
+    {
+      "ts": "2026-06-29T01:53:09.926Z",
+      "type": "chunk_start",
+      "chunk": 20,
+      "pages": [
+        77,
+        80
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-06-29T01:53:09.928Z",
+      "type": "card_text_fail",
+      "chunk": 20,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:09.928Z",
+      "type": "card_premium_escalate",
+      "chunk": 20,
+      "model": "gpt-5.5",
+      "reason": "mini_zero_cards"
+    },
+    {
+      "ts": "2026-06-29T01:53:09.929Z",
+      "type": "card_premium_fail",
+      "chunk": 20,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:09.929Z",
+      "type": "chunk_done",
+      "chunk": 20,
+      "cardCount": 0,
+      "method": "none"
+    },
+    {
+      "ts": "2026-06-29T01:53:09.931Z",
+      "type": "chunk_start",
+      "chunk": 21,
+      "pages": [
+        81,
+        84
+      ],
+      "imageCount": 1
+    },
+    {
+      "ts": "2026-06-29T01:53:09.933Z",
+      "type": "card_multimodal_fail",
+      "chunk": 21,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:09.935Z",
+      "type": "card_text_fail",
+      "chunk": 21,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:09.935Z",
+      "type": "card_premium_escalate",
+      "chunk": 21,
+      "model": "gpt-5.5",
+      "reason": "mini_zero_cards"
+    },
+    {
+      "ts": "2026-06-29T01:53:09.936Z",
+      "type": "card_premium_fail",
+      "chunk": 21,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:09.936Z",
+      "type": "chunk_done",
+      "chunk": 21,
+      "cardCount": 0,
+      "method": "none"
+    },
+    {
+      "ts": "2026-06-29T01:53:09.938Z",
+      "type": "chunk_start",
+      "chunk": 22,
+      "pages": [
+        85,
+        88
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-06-29T01:53:09.939Z",
+      "type": "card_text_fail",
+      "chunk": 22,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:09.939Z",
+      "type": "card_premium_escalate",
+      "chunk": 22,
+      "model": "gpt-5.5",
+      "reason": "mini_zero_cards"
+    },
+    {
+      "ts": "2026-06-29T01:53:09.941Z",
+      "type": "card_premium_fail",
+      "chunk": 22,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:09.941Z",
+      "type": "chunk_done",
+      "chunk": 22,
+      "cardCount": 0,
+      "method": "none"
+    },
+    {
+      "ts": "2026-06-29T01:53:09.942Z",
+      "type": "chunk_start",
+      "chunk": 23,
+      "pages": [
+        89,
+        92
+      ],
+      "imageCount": 1
+    },
+    {
+      "ts": "2026-06-29T01:53:09.944Z",
+      "type": "card_multimodal_fail",
+      "chunk": 23,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:09.945Z",
+      "type": "card_text_fail",
+      "chunk": 23,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:09.945Z",
+      "type": "card_premium_escalate",
+      "chunk": 23,
+      "model": "gpt-5.5",
+      "reason": "mini_zero_cards"
+    },
+    {
+      "ts": "2026-06-29T01:53:09.947Z",
+      "type": "card_premium_fail",
+      "chunk": 23,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:09.947Z",
+      "type": "chunk_done",
+      "chunk": 23,
+      "cardCount": 0,
+      "method": "none"
+    },
+    {
+      "ts": "2026-06-29T01:53:09.949Z",
+      "type": "chunk_start",
+      "chunk": 24,
+      "pages": [
+        93,
+        96
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-06-29T01:53:09.951Z",
+      "type": "card_text_fail",
+      "chunk": 24,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:09.951Z",
+      "type": "card_premium_escalate",
+      "chunk": 24,
+      "model": "gpt-5.5",
+      "reason": "mini_zero_cards"
+    },
+    {
+      "ts": "2026-06-29T01:53:09.953Z",
+      "type": "card_premium_fail",
+      "chunk": 24,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:09.953Z",
+      "type": "chunk_done",
+      "chunk": 24,
+      "cardCount": 0,
+      "method": "none"
+    },
+    {
+      "ts": "2026-06-29T01:53:09.955Z",
+      "type": "chunk_start",
+      "chunk": 25,
+      "pages": [
+        97,
+        100
+      ],
+      "imageCount": 2
+    },
+    {
+      "ts": "2026-06-29T01:53:09.957Z",
+      "type": "card_multimodal_fail",
+      "chunk": 25,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:09.959Z",
+      "type": "card_text_fail",
+      "chunk": 25,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:09.959Z",
+      "type": "card_premium_escalate",
+      "chunk": 25,
+      "model": "gpt-5.5",
+      "reason": "mini_zero_cards"
+    },
+    {
+      "ts": "2026-06-29T01:53:09.960Z",
+      "type": "card_premium_fail",
+      "chunk": 25,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:09.960Z",
+      "type": "chunk_done",
+      "chunk": 25,
+      "cardCount": 0,
+      "method": "none"
+    },
+    {
+      "ts": "2026-06-29T01:53:09.962Z",
+      "type": "chunk_start",
+      "chunk": 26,
+      "pages": [
+        101,
+        104
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-06-29T01:53:09.963Z",
+      "type": "card_text_fail",
+      "chunk": 26,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:09.963Z",
+      "type": "card_premium_escalate",
+      "chunk": 26,
+      "model": "gpt-5.5",
+      "reason": "mini_zero_cards"
+    },
+    {
+      "ts": "2026-06-29T01:53:09.965Z",
+      "type": "card_premium_fail",
+      "chunk": 26,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:09.965Z",
+      "type": "chunk_done",
+      "chunk": 26,
+      "cardCount": 0,
+      "method": "none"
+    },
+    {
+      "ts": "2026-06-29T01:53:09.967Z",
+      "type": "chunk_start",
+      "chunk": 27,
+      "pages": [
+        105,
+        108
+      ],
+      "imageCount": 1
+    },
+    {
+      "ts": "2026-06-29T01:53:09.969Z",
+      "type": "card_multimodal_fail",
+      "chunk": 27,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:09.970Z",
+      "type": "card_text_fail",
+      "chunk": 27,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:09.970Z",
+      "type": "card_premium_escalate",
+      "chunk": 27,
+      "model": "gpt-5.5",
+      "reason": "mini_zero_cards"
+    },
+    {
+      "ts": "2026-06-29T01:53:09.972Z",
+      "type": "card_premium_fail",
+      "chunk": 27,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:09.972Z",
+      "type": "chunk_done",
+      "chunk": 27,
+      "cardCount": 0,
+      "method": "none"
+    },
+    {
+      "ts": "2026-06-29T01:53:09.974Z",
+      "type": "chunk_start",
+      "chunk": 28,
+      "pages": [
+        109,
+        112
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-06-29T01:53:09.975Z",
+      "type": "card_text_fail",
+      "chunk": 28,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:09.975Z",
+      "type": "card_premium_escalate",
+      "chunk": 28,
+      "model": "gpt-5.5",
+      "reason": "mini_zero_cards"
+    },
+    {
+      "ts": "2026-06-29T01:53:09.976Z",
+      "type": "card_premium_fail",
+      "chunk": 28,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:09.976Z",
+      "type": "chunk_done",
+      "chunk": 28,
+      "cardCount": 0,
+      "method": "none"
+    },
+    {
+      "ts": "2026-06-29T01:53:09.978Z",
+      "type": "chunk_start",
+      "chunk": 29,
+      "pages": [
+        113,
+        116
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-06-29T01:53:09.979Z",
+      "type": "card_text_fail",
+      "chunk": 29,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:09.979Z",
+      "type": "card_premium_escalate",
+      "chunk": 29,
+      "model": "gpt-5.5",
+      "reason": "mini_zero_cards"
+    },
+    {
+      "ts": "2026-06-29T01:53:09.980Z",
+      "type": "card_premium_fail",
+      "chunk": 29,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:09.980Z",
+      "type": "chunk_done",
+      "chunk": 29,
+      "cardCount": 0,
+      "method": "none"
+    },
+    {
+      "ts": "2026-06-29T01:53:09.983Z",
+      "type": "chunk_start",
+      "chunk": 30,
+      "pages": [
+        117,
+        120
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-06-29T01:53:09.984Z",
+      "type": "card_text_fail",
+      "chunk": 30,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:09.984Z",
+      "type": "card_premium_escalate",
+      "chunk": 30,
+      "model": "gpt-5.5",
+      "reason": "mini_zero_cards"
+    },
+    {
+      "ts": "2026-06-29T01:53:09.985Z",
+      "type": "card_premium_fail",
+      "chunk": 30,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:09.985Z",
+      "type": "chunk_done",
+      "chunk": 30,
+      "cardCount": 0,
+      "method": "none"
+    },
+    {
+      "ts": "2026-06-29T01:53:09.987Z",
+      "type": "chunk_start",
+      "chunk": 31,
+      "pages": [
+        121,
+        124
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-06-29T01:53:09.988Z",
+      "type": "card_text_fail",
+      "chunk": 31,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:09.989Z",
+      "type": "card_premium_escalate",
+      "chunk": 31,
+      "model": "gpt-5.5",
+      "reason": "mini_zero_cards"
+    },
+    {
+      "ts": "2026-06-29T01:53:09.990Z",
+      "type": "card_premium_fail",
+      "chunk": 31,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:09.990Z",
+      "type": "chunk_done",
+      "chunk": 31,
+      "cardCount": 0,
+      "method": "none"
+    },
+    {
+      "ts": "2026-06-29T01:53:09.992Z",
+      "type": "chunk_start",
+      "chunk": 32,
+      "pages": [
+        125,
+        128
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-06-29T01:53:09.993Z",
+      "type": "card_text_fail",
+      "chunk": 32,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:09.993Z",
+      "type": "card_premium_escalate",
+      "chunk": 32,
+      "model": "gpt-5.5",
+      "reason": "mini_zero_cards"
+    },
+    {
+      "ts": "2026-06-29T01:53:09.994Z",
+      "type": "card_premium_fail",
+      "chunk": 32,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:09.994Z",
+      "type": "chunk_done",
+      "chunk": 32,
+      "cardCount": 0,
+      "method": "none"
+    },
+    {
+      "ts": "2026-06-29T01:53:09.996Z",
+      "type": "chunk_start",
+      "chunk": 33,
+      "pages": [
+        129,
+        132
+      ],
+      "imageCount": 2
+    },
+    {
+      "ts": "2026-06-29T01:53:10.000Z",
+      "type": "card_multimodal_fail",
+      "chunk": 33,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.002Z",
+      "type": "card_text_fail",
+      "chunk": 33,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.002Z",
+      "type": "card_premium_escalate",
+      "chunk": 33,
+      "model": "gpt-5.5",
+      "reason": "mini_zero_cards"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.008Z",
+      "type": "card_premium_fail",
+      "chunk": 33,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.008Z",
+      "type": "chunk_done",
+      "chunk": 33,
+      "cardCount": 0,
+      "method": "none"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.011Z",
+      "type": "chunk_start",
+      "chunk": 34,
+      "pages": [
+        133,
+        136
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-06-29T01:53:10.012Z",
+      "type": "card_text_fail",
+      "chunk": 34,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.012Z",
+      "type": "card_premium_escalate",
+      "chunk": 34,
+      "model": "gpt-5.5",
+      "reason": "mini_zero_cards"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.014Z",
+      "type": "card_premium_fail",
+      "chunk": 34,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.014Z",
+      "type": "chunk_done",
+      "chunk": 34,
+      "cardCount": 0,
+      "method": "none"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.017Z",
+      "type": "chunk_start",
+      "chunk": 35,
+      "pages": [
+        137,
+        140
+      ],
+      "imageCount": 2
+    },
+    {
+      "ts": "2026-06-29T01:53:10.021Z",
+      "type": "card_multimodal_fail",
+      "chunk": 35,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.023Z",
+      "type": "card_text_fail",
+      "chunk": 35,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.023Z",
+      "type": "card_premium_escalate",
+      "chunk": 35,
+      "model": "gpt-5.5",
+      "reason": "mini_zero_cards"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.027Z",
+      "type": "card_premium_fail",
+      "chunk": 35,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.027Z",
+      "type": "chunk_done",
+      "chunk": 35,
+      "cardCount": 0,
+      "method": "none"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.029Z",
+      "type": "chunk_start",
+      "chunk": 36,
+      "pages": [
+        141,
+        144
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-06-29T01:53:10.030Z",
+      "type": "card_text_fail",
+      "chunk": 36,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.030Z",
+      "type": "card_premium_escalate",
+      "chunk": 36,
+      "model": "gpt-5.5",
+      "reason": "mini_zero_cards"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.033Z",
+      "type": "card_premium_fail",
+      "chunk": 36,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.033Z",
+      "type": "chunk_done",
+      "chunk": 36,
+      "cardCount": 0,
+      "method": "none"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.035Z",
+      "type": "chunk_start",
+      "chunk": 37,
+      "pages": [
+        145,
+        148
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-06-29T01:53:10.036Z",
+      "type": "card_text_fail",
+      "chunk": 37,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.036Z",
+      "type": "card_premium_escalate",
+      "chunk": 37,
+      "model": "gpt-5.5",
+      "reason": "mini_zero_cards"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.039Z",
+      "type": "card_premium_fail",
+      "chunk": 37,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.039Z",
+      "type": "chunk_done",
+      "chunk": 37,
+      "cardCount": 0,
+      "method": "none"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.041Z",
+      "type": "chunk_start",
+      "chunk": 38,
+      "pages": [
+        149,
+        152
+      ],
+      "imageCount": 1
+    },
+    {
+      "ts": "2026-06-29T01:53:10.044Z",
+      "type": "card_multimodal_fail",
+      "chunk": 38,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.045Z",
+      "type": "card_text_fail",
+      "chunk": 38,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.045Z",
+      "type": "card_premium_escalate",
+      "chunk": 38,
+      "model": "gpt-5.5",
+      "reason": "mini_zero_cards"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.046Z",
+      "type": "card_premium_fail",
+      "chunk": 38,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.046Z",
+      "type": "chunk_done",
+      "chunk": 38,
+      "cardCount": 0,
+      "method": "none"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.049Z",
+      "type": "chunk_start",
+      "chunk": 39,
+      "pages": [
+        153,
+        156
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-06-29T01:53:10.050Z",
+      "type": "card_text_fail",
+      "chunk": 39,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.050Z",
+      "type": "card_premium_escalate",
+      "chunk": 39,
+      "model": "gpt-5.5",
+      "reason": "mini_zero_cards"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.051Z",
+      "type": "card_premium_fail",
+      "chunk": 39,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.051Z",
+      "type": "chunk_done",
+      "chunk": 39,
+      "cardCount": 0,
+      "method": "none"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.054Z",
+      "type": "chunk_start",
+      "chunk": 40,
+      "pages": [
+        157,
+        160
+      ],
+      "imageCount": 1
+    },
+    {
+      "ts": "2026-06-29T01:53:10.060Z",
+      "type": "card_multimodal_fail",
+      "chunk": 40,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.063Z",
+      "type": "card_text_fail",
+      "chunk": 40,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.063Z",
+      "type": "card_premium_escalate",
+      "chunk": 40,
+      "model": "gpt-5.5",
+      "reason": "mini_zero_cards"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.066Z",
+      "type": "card_premium_fail",
+      "chunk": 40,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.066Z",
+      "type": "chunk_done",
+      "chunk": 40,
+      "cardCount": 0,
+      "method": "none"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.069Z",
+      "type": "chunk_start",
+      "chunk": 41,
+      "pages": [
+        161,
+        164
+      ],
+      "imageCount": 1
+    },
+    {
+      "ts": "2026-06-29T01:53:10.072Z",
+      "type": "card_multimodal_fail",
+      "chunk": 41,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.082Z",
+      "type": "card_text_fail",
+      "chunk": 41,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.082Z",
+      "type": "card_premium_escalate",
+      "chunk": 41,
+      "model": "gpt-5.5",
+      "reason": "mini_zero_cards"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.084Z",
+      "type": "card_premium_fail",
+      "chunk": 41,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.084Z",
+      "type": "chunk_done",
+      "chunk": 41,
+      "cardCount": 0,
+      "method": "none"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.086Z",
+      "type": "chunk_start",
+      "chunk": 42,
+      "pages": [
+        165,
+        168
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-06-29T01:53:10.087Z",
+      "type": "card_text_fail",
+      "chunk": 42,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.087Z",
+      "type": "card_premium_escalate",
+      "chunk": 42,
+      "model": "gpt-5.5",
+      "reason": "mini_zero_cards"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.087Z",
+      "type": "card_premium_fail",
+      "chunk": 42,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.087Z",
+      "type": "chunk_done",
+      "chunk": 42,
+      "cardCount": 0,
+      "method": "none"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.088Z",
+      "type": "chunk_start",
+      "chunk": 43,
+      "pages": [
+        169,
+        172
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-06-29T01:53:10.089Z",
+      "type": "card_text_fail",
+      "chunk": 43,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.089Z",
+      "type": "card_premium_escalate",
+      "chunk": 43,
+      "model": "gpt-5.5",
+      "reason": "mini_zero_cards"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.090Z",
+      "type": "card_premium_fail",
+      "chunk": 43,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.090Z",
+      "type": "chunk_done",
+      "chunk": 43,
+      "cardCount": 0,
+      "method": "none"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.092Z",
+      "type": "chunk_start",
+      "chunk": 44,
+      "pages": [
+        173,
+        176
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-06-29T01:53:10.093Z",
+      "type": "card_text_fail",
+      "chunk": 44,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.093Z",
+      "type": "card_premium_escalate",
+      "chunk": 44,
+      "model": "gpt-5.5",
+      "reason": "mini_zero_cards"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.094Z",
+      "type": "card_premium_fail",
+      "chunk": 44,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.094Z",
+      "type": "chunk_done",
+      "chunk": 44,
+      "cardCount": 0,
+      "method": "none"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.095Z",
+      "type": "chunk_start",
+      "chunk": 45,
+      "pages": [
+        177,
+        180
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-06-29T01:53:10.096Z",
+      "type": "card_text_fail",
+      "chunk": 45,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.096Z",
+      "type": "card_premium_escalate",
+      "chunk": 45,
+      "model": "gpt-5.5",
+      "reason": "mini_zero_cards"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.097Z",
+      "type": "card_premium_fail",
+      "chunk": 45,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.097Z",
+      "type": "chunk_done",
+      "chunk": 45,
+      "cardCount": 0,
+      "method": "none"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.100Z",
+      "type": "chunk_start",
+      "chunk": 46,
+      "pages": [
+        181,
+        184
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-06-29T01:53:10.100Z",
+      "type": "card_text_fail",
+      "chunk": 46,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.101Z",
+      "type": "card_premium_escalate",
+      "chunk": 46,
+      "model": "gpt-5.5",
+      "reason": "mini_zero_cards"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.102Z",
+      "type": "card_premium_fail",
+      "chunk": 46,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.102Z",
+      "type": "chunk_done",
+      "chunk": 46,
+      "cardCount": 0,
+      "method": "none"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.104Z",
+      "type": "chunk_start",
+      "chunk": 47,
+      "pages": [
+        185,
+        188
+      ],
+      "imageCount": 1
+    },
+    {
+      "ts": "2026-06-29T01:53:10.106Z",
+      "type": "card_multimodal_fail",
+      "chunk": 47,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.107Z",
+      "type": "card_text_fail",
+      "chunk": 47,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.107Z",
+      "type": "card_premium_escalate",
+      "chunk": 47,
+      "model": "gpt-5.5",
+      "reason": "mini_zero_cards"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.109Z",
+      "type": "card_premium_fail",
+      "chunk": 47,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.109Z",
+      "type": "chunk_done",
+      "chunk": 47,
+      "cardCount": 0,
+      "method": "none"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.112Z",
+      "type": "chunk_start",
+      "chunk": 48,
+      "pages": [
+        189,
+        192
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-06-29T01:53:10.113Z",
+      "type": "card_text_fail",
+      "chunk": 48,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.113Z",
+      "type": "card_premium_escalate",
+      "chunk": 48,
+      "model": "gpt-5.5",
+      "reason": "mini_zero_cards"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.115Z",
+      "type": "card_premium_fail",
+      "chunk": 48,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.115Z",
+      "type": "chunk_done",
+      "chunk": 48,
+      "cardCount": 0,
+      "method": "none"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.117Z",
+      "type": "chunk_start",
+      "chunk": 49,
+      "pages": [
+        193,
+        196
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-06-29T01:53:10.118Z",
+      "type": "card_text_fail",
+      "chunk": 49,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.118Z",
+      "type": "card_premium_escalate",
+      "chunk": 49,
+      "model": "gpt-5.5",
+      "reason": "mini_zero_cards"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.119Z",
+      "type": "card_premium_fail",
+      "chunk": 49,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.119Z",
+      "type": "chunk_done",
+      "chunk": 49,
+      "cardCount": 0,
+      "method": "none"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.122Z",
+      "type": "chunk_start",
+      "chunk": 50,
+      "pages": [
+        197,
+        200
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-06-29T01:53:10.123Z",
+      "type": "card_text_fail",
+      "chunk": 50,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.123Z",
+      "type": "card_premium_escalate",
+      "chunk": 50,
+      "model": "gpt-5.5",
+      "reason": "mini_zero_cards"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.124Z",
+      "type": "card_premium_fail",
+      "chunk": 50,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.124Z",
+      "type": "chunk_done",
+      "chunk": 50,
+      "cardCount": 0,
+      "method": "none"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.126Z",
+      "type": "chunk_start",
+      "chunk": 51,
+      "pages": [
+        201,
+        204
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-06-29T01:53:10.127Z",
+      "type": "card_text_fail",
+      "chunk": 51,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.127Z",
+      "type": "card_premium_escalate",
+      "chunk": 51,
+      "model": "gpt-5.5",
+      "reason": "mini_zero_cards"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.128Z",
+      "type": "card_premium_fail",
+      "chunk": 51,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.128Z",
+      "type": "chunk_done",
+      "chunk": 51,
+      "cardCount": 0,
+      "method": "none"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.130Z",
+      "type": "chunk_start",
+      "chunk": 52,
+      "pages": [
+        205,
+        208
+      ],
+      "imageCount": 1
+    },
+    {
+      "ts": "2026-06-29T01:53:10.132Z",
+      "type": "card_multimodal_fail",
+      "chunk": 52,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.133Z",
+      "type": "card_text_fail",
+      "chunk": 52,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.133Z",
+      "type": "card_premium_escalate",
+      "chunk": 52,
+      "model": "gpt-5.5",
+      "reason": "mini_zero_cards"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.135Z",
+      "type": "card_premium_fail",
+      "chunk": 52,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.135Z",
+      "type": "chunk_done",
+      "chunk": 52,
+      "cardCount": 0,
+      "method": "none"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.137Z",
+      "type": "chunk_start",
+      "chunk": 53,
+      "pages": [
+        209,
+        212
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-06-29T01:53:10.139Z",
+      "type": "card_text_fail",
+      "chunk": 53,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.139Z",
+      "type": "card_premium_escalate",
+      "chunk": 53,
+      "model": "gpt-5.5",
+      "reason": "mini_zero_cards"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.140Z",
+      "type": "card_premium_fail",
+      "chunk": 53,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.140Z",
+      "type": "chunk_done",
+      "chunk": 53,
+      "cardCount": 0,
+      "method": "none"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.142Z",
+      "type": "chunk_start",
+      "chunk": 54,
+      "pages": [
+        213,
+        216
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-06-29T01:53:10.144Z",
+      "type": "card_text_fail",
+      "chunk": 54,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.144Z",
+      "type": "card_premium_escalate",
+      "chunk": 54,
+      "model": "gpt-5.5",
+      "reason": "mini_zero_cards"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.145Z",
+      "type": "card_premium_fail",
+      "chunk": 54,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.145Z",
+      "type": "chunk_done",
+      "chunk": 54,
+      "cardCount": 0,
+      "method": "none"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.148Z",
+      "type": "chunk_start",
+      "chunk": 55,
+      "pages": [
+        217,
+        220
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-06-29T01:53:10.149Z",
+      "type": "card_text_fail",
+      "chunk": 55,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.149Z",
+      "type": "card_premium_escalate",
+      "chunk": 55,
+      "model": "gpt-5.5",
+      "reason": "mini_zero_cards"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.150Z",
+      "type": "card_premium_fail",
+      "chunk": 55,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.150Z",
+      "type": "chunk_done",
+      "chunk": 55,
+      "cardCount": 0,
+      "method": "none"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.153Z",
+      "type": "chunk_start",
+      "chunk": 56,
+      "pages": [
+        221,
+        224
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-06-29T01:53:10.154Z",
+      "type": "card_text_fail",
+      "chunk": 56,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.154Z",
+      "type": "card_premium_escalate",
+      "chunk": 56,
+      "model": "gpt-5.5",
+      "reason": "mini_zero_cards"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.155Z",
+      "type": "card_premium_fail",
+      "chunk": 56,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.155Z",
+      "type": "chunk_done",
+      "chunk": 56,
+      "cardCount": 0,
+      "method": "none"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.157Z",
+      "type": "chunk_start",
+      "chunk": 57,
+      "pages": [
+        225,
+        228
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-06-29T01:53:10.159Z",
+      "type": "card_text_fail",
+      "chunk": 57,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.159Z",
+      "type": "card_premium_escalate",
+      "chunk": 57,
+      "model": "gpt-5.5",
+      "reason": "mini_zero_cards"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.160Z",
+      "type": "card_premium_fail",
+      "chunk": 57,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.160Z",
+      "type": "chunk_done",
+      "chunk": 57,
+      "cardCount": 0,
+      "method": "none"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.162Z",
+      "type": "chunk_start",
+      "chunk": 58,
+      "pages": [
+        229,
+        232
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-06-29T01:53:10.164Z",
+      "type": "card_text_fail",
+      "chunk": 58,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.164Z",
+      "type": "card_premium_escalate",
+      "chunk": 58,
+      "model": "gpt-5.5",
+      "reason": "mini_zero_cards"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.165Z",
+      "type": "card_premium_fail",
+      "chunk": 58,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.165Z",
+      "type": "chunk_done",
+      "chunk": 58,
+      "cardCount": 0,
+      "method": "none"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.167Z",
+      "type": "chunk_start",
+      "chunk": 59,
+      "pages": [
+        233,
+        236
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-06-29T01:53:10.169Z",
+      "type": "card_text_fail",
+      "chunk": 59,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.169Z",
+      "type": "card_premium_escalate",
+      "chunk": 59,
+      "model": "gpt-5.5",
+      "reason": "mini_zero_cards"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.170Z",
+      "type": "card_premium_fail",
+      "chunk": 59,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.170Z",
+      "type": "chunk_done",
+      "chunk": 59,
+      "cardCount": 0,
+      "method": "none"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.173Z",
+      "type": "chunk_start",
+      "chunk": 60,
+      "pages": [
+        237,
+        240
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-06-29T01:53:10.174Z",
+      "type": "card_text_fail",
+      "chunk": 60,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.174Z",
+      "type": "card_premium_escalate",
+      "chunk": 60,
+      "model": "gpt-5.5",
+      "reason": "mini_zero_cards"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.176Z",
+      "type": "card_premium_fail",
+      "chunk": 60,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.176Z",
+      "type": "chunk_done",
+      "chunk": 60,
+      "cardCount": 0,
+      "method": "none"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.179Z",
+      "type": "chunk_start",
+      "chunk": 61,
+      "pages": [
+        241,
+        244
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-06-29T01:53:10.180Z",
+      "type": "card_text_fail",
+      "chunk": 61,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.180Z",
+      "type": "card_premium_escalate",
+      "chunk": 61,
+      "model": "gpt-5.5",
+      "reason": "mini_zero_cards"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.182Z",
+      "type": "card_premium_fail",
+      "chunk": 61,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.182Z",
+      "type": "chunk_done",
+      "chunk": 61,
+      "cardCount": 0,
+      "method": "none"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.185Z",
+      "type": "chunk_start",
+      "chunk": 62,
+      "pages": [
+        245,
+        248
+      ],
+      "imageCount": 1
+    },
+    {
+      "ts": "2026-06-29T01:53:10.188Z",
+      "type": "card_multimodal_fail",
+      "chunk": 62,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.190Z",
+      "type": "card_text_fail",
+      "chunk": 62,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.190Z",
+      "type": "card_premium_escalate",
+      "chunk": 62,
+      "model": "gpt-5.5",
+      "reason": "mini_zero_cards"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.191Z",
+      "type": "card_premium_fail",
+      "chunk": 62,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.191Z",
+      "type": "chunk_done",
+      "chunk": 62,
+      "cardCount": 0,
+      "method": "none"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.196Z",
+      "type": "chunk_start",
+      "chunk": 63,
+      "pages": [
+        249,
+        252
+      ],
+      "imageCount": 1
+    },
+    {
+      "ts": "2026-06-29T01:53:10.198Z",
+      "type": "card_multimodal_fail",
+      "chunk": 63,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.198Z",
+      "type": "card_text_fail",
+      "chunk": 63,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.198Z",
+      "type": "card_premium_escalate",
+      "chunk": 63,
+      "model": "gpt-5.5",
+      "reason": "mini_zero_cards"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.200Z",
+      "type": "card_premium_fail",
+      "chunk": 63,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.200Z",
+      "type": "chunk_done",
+      "chunk": 63,
+      "cardCount": 0,
+      "method": "none"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.203Z",
+      "type": "chunk_start",
+      "chunk": 64,
+      "pages": [
+        253,
+        256
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-06-29T01:53:10.204Z",
+      "type": "card_text_fail",
+      "chunk": 64,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.204Z",
+      "type": "card_premium_escalate",
+      "chunk": 64,
+      "model": "gpt-5.5",
+      "reason": "mini_zero_cards"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.207Z",
+      "type": "card_premium_fail",
+      "chunk": 64,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.207Z",
+      "type": "chunk_done",
+      "chunk": 64,
+      "cardCount": 0,
+      "method": "none"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.210Z",
+      "type": "chunk_start",
+      "chunk": 65,
+      "pages": [
+        257,
+        260
+      ],
+      "imageCount": 1
+    },
+    {
+      "ts": "2026-06-29T01:53:10.212Z",
+      "type": "card_multimodal_fail",
+      "chunk": 65,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.214Z",
+      "type": "card_text_fail",
+      "chunk": 65,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.214Z",
+      "type": "card_premium_escalate",
+      "chunk": 65,
+      "model": "gpt-5.5",
+      "reason": "mini_zero_cards"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.217Z",
+      "type": "card_premium_fail",
+      "chunk": 65,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.217Z",
+      "type": "chunk_done",
+      "chunk": 65,
+      "cardCount": 0,
+      "method": "none"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.222Z",
+      "type": "chunk_start",
+      "chunk": 66,
+      "pages": [
+        261,
+        264
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-06-29T01:53:10.223Z",
+      "type": "card_text_fail",
+      "chunk": 66,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.223Z",
+      "type": "card_premium_escalate",
+      "chunk": 66,
+      "model": "gpt-5.5",
+      "reason": "mini_zero_cards"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.224Z",
+      "type": "card_premium_fail",
+      "chunk": 66,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.224Z",
+      "type": "chunk_done",
+      "chunk": 66,
+      "cardCount": 0,
+      "method": "none"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.227Z",
+      "type": "chunk_start",
+      "chunk": 67,
+      "pages": [
+        265,
+        268
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-06-29T01:53:10.229Z",
+      "type": "card_text_fail",
+      "chunk": 67,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.229Z",
+      "type": "card_premium_escalate",
+      "chunk": 67,
+      "model": "gpt-5.5",
+      "reason": "mini_zero_cards"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.230Z",
+      "type": "card_premium_fail",
+      "chunk": 67,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.230Z",
+      "type": "chunk_done",
+      "chunk": 67,
+      "cardCount": 0,
+      "method": "none"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.234Z",
+      "type": "chunk_start",
+      "chunk": 68,
+      "pages": [
+        269,
+        272
+      ],
+      "imageCount": 1
+    },
+    {
+      "ts": "2026-06-29T01:53:10.236Z",
+      "type": "card_multimodal_fail",
+      "chunk": 68,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.237Z",
+      "type": "card_text_fail",
+      "chunk": 68,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.237Z",
+      "type": "card_premium_escalate",
+      "chunk": 68,
+      "model": "gpt-5.5",
+      "reason": "mini_zero_cards"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.239Z",
+      "type": "card_premium_fail",
+      "chunk": 68,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.239Z",
+      "type": "chunk_done",
+      "chunk": 68,
+      "cardCount": 0,
+      "method": "none"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.241Z",
+      "type": "chunk_start",
+      "chunk": 69,
+      "pages": [
+        273,
+        276
+      ],
+      "imageCount": 1
+    },
+    {
+      "ts": "2026-06-29T01:53:10.244Z",
+      "type": "card_multimodal_fail",
+      "chunk": 69,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.245Z",
+      "type": "card_text_fail",
+      "chunk": 69,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.245Z",
+      "type": "card_premium_escalate",
+      "chunk": 69,
+      "model": "gpt-5.5",
+      "reason": "mini_zero_cards"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.246Z",
+      "type": "card_premium_fail",
+      "chunk": 69,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.246Z",
+      "type": "chunk_done",
+      "chunk": 69,
+      "cardCount": 0,
+      "method": "none"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.251Z",
+      "type": "chunk_start",
+      "chunk": 70,
+      "pages": [
+        277,
+        280
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-06-29T01:53:10.252Z",
+      "type": "card_text_fail",
+      "chunk": 70,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.252Z",
+      "type": "card_premium_escalate",
+      "chunk": 70,
+      "model": "gpt-5.5",
+      "reason": "mini_zero_cards"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.253Z",
+      "type": "card_premium_fail",
+      "chunk": 70,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.253Z",
+      "type": "chunk_done",
+      "chunk": 70,
+      "cardCount": 0,
+      "method": "none"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.256Z",
+      "type": "chunk_start",
+      "chunk": 71,
+      "pages": [
+        281,
+        284
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-06-29T01:53:10.258Z",
+      "type": "card_text_fail",
+      "chunk": 71,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.258Z",
+      "type": "card_premium_escalate",
+      "chunk": 71,
+      "model": "gpt-5.5",
+      "reason": "mini_zero_cards"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.259Z",
+      "type": "card_premium_fail",
+      "chunk": 71,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.259Z",
+      "type": "chunk_done",
+      "chunk": 71,
+      "cardCount": 0,
+      "method": "none"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.261Z",
+      "type": "chunk_start",
+      "chunk": 72,
+      "pages": [
+        285,
+        288
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-06-29T01:53:10.263Z",
+      "type": "card_text_fail",
+      "chunk": 72,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.263Z",
+      "type": "card_premium_escalate",
+      "chunk": 72,
+      "model": "gpt-5.5",
+      "reason": "mini_zero_cards"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.264Z",
+      "type": "card_premium_fail",
+      "chunk": 72,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.264Z",
+      "type": "chunk_done",
+      "chunk": 72,
+      "cardCount": 0,
+      "method": "none"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.267Z",
+      "type": "chunk_start",
+      "chunk": 73,
+      "pages": [
+        289,
+        292
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-06-29T01:53:10.268Z",
+      "type": "card_text_fail",
+      "chunk": 73,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.268Z",
+      "type": "card_premium_escalate",
+      "chunk": 73,
+      "model": "gpt-5.5",
+      "reason": "mini_zero_cards"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.270Z",
+      "type": "card_premium_fail",
+      "chunk": 73,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.270Z",
+      "type": "chunk_done",
+      "chunk": 73,
+      "cardCount": 0,
+      "method": "none"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.273Z",
+      "type": "chunk_start",
+      "chunk": 74,
+      "pages": [
+        293,
+        296
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-06-29T01:53:10.274Z",
+      "type": "card_text_fail",
+      "chunk": 74,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.274Z",
+      "type": "card_premium_escalate",
+      "chunk": 74,
+      "model": "gpt-5.5",
+      "reason": "mini_zero_cards"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.275Z",
+      "type": "card_premium_fail",
+      "chunk": 74,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.275Z",
+      "type": "chunk_done",
+      "chunk": 74,
+      "cardCount": 0,
+      "method": "none"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.278Z",
+      "type": "chunk_start",
+      "chunk": 75,
+      "pages": [
+        297,
+        300
+      ],
+      "imageCount": 2
+    },
+    {
+      "ts": "2026-06-29T01:53:10.289Z",
+      "type": "card_multimodal_fail",
+      "chunk": 75,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.291Z",
+      "type": "card_text_fail",
+      "chunk": 75,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.291Z",
+      "type": "card_premium_escalate",
+      "chunk": 75,
+      "model": "gpt-5.5",
+      "reason": "mini_zero_cards"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.298Z",
+      "type": "card_premium_fail",
+      "chunk": 75,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.299Z",
+      "type": "chunk_done",
+      "chunk": 75,
+      "cardCount": 0,
+      "method": "none"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.302Z",
+      "type": "chunk_start",
+      "chunk": 76,
+      "pages": [
+        301,
+        304
+      ],
+      "imageCount": 1
+    },
+    {
+      "ts": "2026-06-29T01:53:10.304Z",
+      "type": "card_multimodal_fail",
+      "chunk": 76,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.305Z",
+      "type": "card_text_fail",
+      "chunk": 76,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.305Z",
+      "type": "card_premium_escalate",
+      "chunk": 76,
+      "model": "gpt-5.5",
+      "reason": "mini_zero_cards"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.307Z",
+      "type": "card_premium_fail",
+      "chunk": 76,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.308Z",
+      "type": "chunk_done",
+      "chunk": 76,
+      "cardCount": 0,
+      "method": "none"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.312Z",
+      "type": "chunk_start",
+      "chunk": 77,
+      "pages": [
+        305,
+        308
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-06-29T01:53:10.315Z",
+      "type": "card_text_fail",
+      "chunk": 77,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.315Z",
+      "type": "card_premium_escalate",
+      "chunk": 77,
+      "model": "gpt-5.5",
+      "reason": "mini_zero_cards"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.316Z",
+      "type": "card_premium_fail",
+      "chunk": 77,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.316Z",
+      "type": "chunk_done",
+      "chunk": 77,
+      "cardCount": 0,
+      "method": "none"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.319Z",
+      "type": "chunk_start",
+      "chunk": 78,
+      "pages": [
+        309,
+        312
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-06-29T01:53:10.321Z",
+      "type": "card_text_fail",
+      "chunk": 78,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.321Z",
+      "type": "card_premium_escalate",
+      "chunk": 78,
+      "model": "gpt-5.5",
+      "reason": "mini_zero_cards"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.323Z",
+      "type": "card_premium_fail",
+      "chunk": 78,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.323Z",
+      "type": "chunk_done",
+      "chunk": 78,
+      "cardCount": 0,
+      "method": "none"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.325Z",
+      "type": "chunk_start",
+      "chunk": 79,
+      "pages": [
+        313,
+        316
+      ],
+      "imageCount": 1
+    },
+    {
+      "ts": "2026-06-29T01:53:10.327Z",
+      "type": "card_multimodal_fail",
+      "chunk": 79,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.329Z",
+      "type": "card_text_fail",
+      "chunk": 79,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.330Z",
+      "type": "card_premium_escalate",
+      "chunk": 79,
+      "model": "gpt-5.5",
+      "reason": "mini_zero_cards"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.331Z",
+      "type": "card_premium_fail",
+      "chunk": 79,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.331Z",
+      "type": "chunk_done",
+      "chunk": 79,
+      "cardCount": 0,
+      "method": "none"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.334Z",
+      "type": "chunk_start",
+      "chunk": 80,
+      "pages": [
+        317,
+        320
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-06-29T01:53:10.336Z",
+      "type": "card_text_fail",
+      "chunk": 80,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.336Z",
+      "type": "card_premium_escalate",
+      "chunk": 80,
+      "model": "gpt-5.5",
+      "reason": "mini_zero_cards"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.337Z",
+      "type": "card_premium_fail",
+      "chunk": 80,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.337Z",
+      "type": "chunk_done",
+      "chunk": 80,
+      "cardCount": 0,
+      "method": "none"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.340Z",
+      "type": "chunk_start",
+      "chunk": 81,
+      "pages": [
+        321,
+        324
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-06-29T01:53:10.342Z",
+      "type": "card_text_fail",
+      "chunk": 81,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.342Z",
+      "type": "card_premium_escalate",
+      "chunk": 81,
+      "model": "gpt-5.5",
+      "reason": "mini_zero_cards"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.343Z",
+      "type": "card_premium_fail",
+      "chunk": 81,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.343Z",
+      "type": "chunk_done",
+      "chunk": 81,
+      "cardCount": 0,
+      "method": "none"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.346Z",
+      "type": "chunk_start",
+      "chunk": 82,
+      "pages": [
+        325,
+        328
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-06-29T01:53:10.347Z",
+      "type": "card_text_fail",
+      "chunk": 82,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.347Z",
+      "type": "card_premium_escalate",
+      "chunk": 82,
+      "model": "gpt-5.5",
+      "reason": "mini_zero_cards"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.348Z",
+      "type": "card_premium_fail",
+      "chunk": 82,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.348Z",
+      "type": "chunk_done",
+      "chunk": 82,
+      "cardCount": 0,
+      "method": "none"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.352Z",
+      "type": "chunk_start",
+      "chunk": 83,
+      "pages": [
+        329,
+        332
+      ],
+      "imageCount": 1
+    },
+    {
+      "ts": "2026-06-29T01:53:10.354Z",
+      "type": "card_multimodal_fail",
+      "chunk": 83,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.354Z",
+      "type": "card_text_fail",
+      "chunk": 83,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.354Z",
+      "type": "card_premium_escalate",
+      "chunk": 83,
+      "model": "gpt-5.5",
+      "reason": "mini_zero_cards"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.357Z",
+      "type": "card_premium_fail",
+      "chunk": 83,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.357Z",
+      "type": "chunk_done",
+      "chunk": 83,
+      "cardCount": 0,
+      "method": "none"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.361Z",
+      "type": "chunk_start",
+      "chunk": 84,
+      "pages": [
+        333,
+        336
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-06-29T01:53:10.363Z",
+      "type": "card_text_fail",
+      "chunk": 84,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.363Z",
+      "type": "card_premium_escalate",
+      "chunk": 84,
+      "model": "gpt-5.5",
+      "reason": "mini_zero_cards"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.365Z",
+      "type": "card_premium_fail",
+      "chunk": 84,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.365Z",
+      "type": "chunk_done",
+      "chunk": 84,
+      "cardCount": 0,
+      "method": "none"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.368Z",
+      "type": "chunk_start",
+      "chunk": 85,
+      "pages": [
+        337,
+        340
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-06-29T01:53:10.369Z",
+      "type": "card_text_fail",
+      "chunk": 85,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.369Z",
+      "type": "card_premium_escalate",
+      "chunk": 85,
+      "model": "gpt-5.5",
+      "reason": "mini_zero_cards"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.370Z",
+      "type": "card_premium_fail",
+      "chunk": 85,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.370Z",
+      "type": "chunk_done",
+      "chunk": 85,
+      "cardCount": 0,
+      "method": "none"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.373Z",
+      "type": "chunk_start",
+      "chunk": 86,
+      "pages": [
+        341,
+        344
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-06-29T01:53:10.374Z",
+      "type": "card_text_fail",
+      "chunk": 86,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.374Z",
+      "type": "card_premium_escalate",
+      "chunk": 86,
+      "model": "gpt-5.5",
+      "reason": "mini_zero_cards"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.376Z",
+      "type": "card_premium_fail",
+      "chunk": 86,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.376Z",
+      "type": "chunk_done",
+      "chunk": 86,
+      "cardCount": 0,
+      "method": "none"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.379Z",
+      "type": "chunk_start",
+      "chunk": 87,
+      "pages": [
+        345,
+        348
+      ],
+      "imageCount": 1
+    },
+    {
+      "ts": "2026-06-29T01:53:10.381Z",
+      "type": "card_multimodal_fail",
+      "chunk": 87,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.382Z",
+      "type": "card_text_fail",
+      "chunk": 87,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.382Z",
+      "type": "card_premium_escalate",
+      "chunk": 87,
+      "model": "gpt-5.5",
+      "reason": "mini_zero_cards"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.384Z",
+      "type": "card_premium_fail",
+      "chunk": 87,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.384Z",
+      "type": "chunk_done",
+      "chunk": 87,
+      "cardCount": 0,
+      "method": "none"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.387Z",
+      "type": "chunk_start",
+      "chunk": 88,
+      "pages": [
+        349,
+        352
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-06-29T01:53:10.388Z",
+      "type": "card_text_fail",
+      "chunk": 88,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.388Z",
+      "type": "card_premium_escalate",
+      "chunk": 88,
+      "model": "gpt-5.5",
+      "reason": "mini_zero_cards"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.390Z",
+      "type": "card_premium_fail",
+      "chunk": 88,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.390Z",
+      "type": "chunk_done",
+      "chunk": 88,
+      "cardCount": 0,
+      "method": "none"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.393Z",
+      "type": "chunk_start",
+      "chunk": 89,
+      "pages": [
+        353,
+        356
+      ],
+      "imageCount": 1
+    },
+    {
+      "ts": "2026-06-29T01:53:10.397Z",
+      "type": "card_multimodal_fail",
+      "chunk": 89,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.398Z",
+      "type": "card_text_fail",
+      "chunk": 89,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.398Z",
+      "type": "card_premium_escalate",
+      "chunk": 89,
+      "model": "gpt-5.5",
+      "reason": "mini_zero_cards"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.402Z",
+      "type": "card_premium_fail",
+      "chunk": 89,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.402Z",
+      "type": "chunk_done",
+      "chunk": 89,
+      "cardCount": 0,
+      "method": "none"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.406Z",
+      "type": "chunk_start",
+      "chunk": 90,
+      "pages": [
+        357,
+        360
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-06-29T01:53:10.408Z",
+      "type": "card_text_fail",
+      "chunk": 90,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.408Z",
+      "type": "card_premium_escalate",
+      "chunk": 90,
+      "model": "gpt-5.5",
+      "reason": "mini_zero_cards"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.409Z",
+      "type": "card_premium_fail",
+      "chunk": 90,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.409Z",
+      "type": "chunk_done",
+      "chunk": 90,
+      "cardCount": 0,
+      "method": "none"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.412Z",
+      "type": "chunk_start",
+      "chunk": 91,
+      "pages": [
+        361,
+        364
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-06-29T01:53:10.413Z",
+      "type": "card_text_fail",
+      "chunk": 91,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.413Z",
+      "type": "card_premium_escalate",
+      "chunk": 91,
+      "model": "gpt-5.5",
+      "reason": "mini_zero_cards"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.414Z",
+      "type": "card_premium_fail",
+      "chunk": 91,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.414Z",
+      "type": "chunk_done",
+      "chunk": 91,
+      "cardCount": 0,
+      "method": "none"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.418Z",
+      "type": "chunk_start",
+      "chunk": 92,
+      "pages": [
+        365,
+        368
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-06-29T01:53:10.421Z",
+      "type": "card_text_fail",
+      "chunk": 92,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.421Z",
+      "type": "card_premium_escalate",
+      "chunk": 92,
+      "model": "gpt-5.5",
+      "reason": "mini_zero_cards"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.422Z",
+      "type": "card_premium_fail",
+      "chunk": 92,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.422Z",
+      "type": "chunk_done",
+      "chunk": 92,
+      "cardCount": 0,
+      "method": "none"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.425Z",
+      "type": "chunk_start",
+      "chunk": 93,
+      "pages": [
+        369,
+        372
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-06-29T01:53:10.426Z",
+      "type": "card_text_fail",
+      "chunk": 93,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.426Z",
+      "type": "card_premium_escalate",
+      "chunk": 93,
+      "model": "gpt-5.5",
+      "reason": "mini_zero_cards"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.427Z",
+      "type": "card_premium_fail",
+      "chunk": 93,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.427Z",
+      "type": "chunk_done",
+      "chunk": 93,
+      "cardCount": 0,
+      "method": "none"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.429Z",
+      "type": "chunk_start",
+      "chunk": 94,
+      "pages": [
+        373,
+        376
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-06-29T01:53:10.430Z",
+      "type": "card_text_fail",
+      "chunk": 94,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.430Z",
+      "type": "card_premium_escalate",
+      "chunk": 94,
+      "model": "gpt-5.5",
+      "reason": "mini_zero_cards"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.432Z",
+      "type": "card_premium_fail",
+      "chunk": 94,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.432Z",
+      "type": "chunk_done",
+      "chunk": 94,
+      "cardCount": 0,
+      "method": "none"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.434Z",
+      "type": "chunk_start",
+      "chunk": 95,
+      "pages": [
+        377,
+        380
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-06-29T01:53:10.435Z",
+      "type": "card_text_fail",
+      "chunk": 95,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.435Z",
+      "type": "card_premium_escalate",
+      "chunk": 95,
+      "model": "gpt-5.5",
+      "reason": "mini_zero_cards"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.436Z",
+      "type": "card_premium_fail",
+      "chunk": 95,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.436Z",
+      "type": "chunk_done",
+      "chunk": 95,
+      "cardCount": 0,
+      "method": "none"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.439Z",
+      "type": "chunk_start",
+      "chunk": 96,
+      "pages": [
+        381,
+        384
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-06-29T01:53:10.440Z",
+      "type": "card_text_fail",
+      "chunk": 96,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.440Z",
+      "type": "card_premium_escalate",
+      "chunk": 96,
+      "model": "gpt-5.5",
+      "reason": "mini_zero_cards"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.441Z",
+      "type": "card_premium_fail",
+      "chunk": 96,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.441Z",
+      "type": "chunk_done",
+      "chunk": 96,
+      "cardCount": 0,
+      "method": "none"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.444Z",
+      "type": "chunk_start",
+      "chunk": 97,
+      "pages": [
+        385,
+        388
+      ],
+      "imageCount": 1
+    },
+    {
+      "ts": "2026-06-29T01:53:10.446Z",
+      "type": "card_multimodal_fail",
+      "chunk": 97,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.448Z",
+      "type": "card_text_fail",
+      "chunk": 97,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.448Z",
+      "type": "card_premium_escalate",
+      "chunk": 97,
+      "model": "gpt-5.5",
+      "reason": "mini_zero_cards"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.450Z",
+      "type": "card_premium_fail",
+      "chunk": 97,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.450Z",
+      "type": "chunk_done",
+      "chunk": 97,
+      "cardCount": 0,
+      "method": "none"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.452Z",
+      "type": "chunk_start",
+      "chunk": 98,
+      "pages": [
+        389,
+        392
+      ],
+      "imageCount": 1
+    },
+    {
+      "ts": "2026-06-29T01:53:10.456Z",
+      "type": "card_multimodal_fail",
+      "chunk": 98,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.457Z",
+      "type": "card_text_fail",
+      "chunk": 98,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.457Z",
+      "type": "card_premium_escalate",
+      "chunk": 98,
+      "model": "gpt-5.5",
+      "reason": "mini_zero_cards"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.464Z",
+      "type": "card_premium_fail",
+      "chunk": 98,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.464Z",
+      "type": "chunk_done",
+      "chunk": 98,
+      "cardCount": 0,
+      "method": "none"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.468Z",
+      "type": "chunk_start",
+      "chunk": 99,
+      "pages": [
+        393,
+        396
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-06-29T01:53:10.469Z",
+      "type": "card_text_fail",
+      "chunk": 99,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.469Z",
+      "type": "card_premium_escalate",
+      "chunk": 99,
+      "model": "gpt-5.5",
+      "reason": "mini_zero_cards"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.470Z",
+      "type": "card_premium_fail",
+      "chunk": 99,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.470Z",
+      "type": "chunk_done",
+      "chunk": 99,
+      "cardCount": 0,
+      "method": "none"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.473Z",
+      "type": "chunk_start",
+      "chunk": 100,
+      "pages": [
+        397,
+        400
+      ],
+      "imageCount": 1
+    },
+    {
+      "ts": "2026-06-29T01:53:10.476Z",
+      "type": "card_multimodal_fail",
+      "chunk": 100,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.486Z",
+      "type": "card_text_fail",
+      "chunk": 100,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.486Z",
+      "type": "card_premium_escalate",
+      "chunk": 100,
+      "model": "gpt-5.5",
+      "reason": "mini_zero_cards"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.488Z",
+      "type": "card_premium_fail",
+      "chunk": 100,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.488Z",
+      "type": "chunk_done",
+      "chunk": 100,
+      "cardCount": 0,
+      "method": "none"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.492Z",
+      "type": "chunk_start",
+      "chunk": 101,
+      "pages": [
+        401,
+        404
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-06-29T01:53:10.493Z",
+      "type": "card_text_fail",
+      "chunk": 101,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.493Z",
+      "type": "card_premium_escalate",
+      "chunk": 101,
+      "model": "gpt-5.5",
+      "reason": "mini_zero_cards"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.493Z",
+      "type": "card_premium_fail",
+      "chunk": 101,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.493Z",
+      "type": "chunk_done",
+      "chunk": 101,
+      "cardCount": 0,
+      "method": "none"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.496Z",
+      "type": "chunk_start",
+      "chunk": 102,
+      "pages": [
+        405,
+        408
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-06-29T01:53:10.497Z",
+      "type": "card_text_fail",
+      "chunk": 102,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.497Z",
+      "type": "card_premium_escalate",
+      "chunk": 102,
+      "model": "gpt-5.5",
+      "reason": "mini_zero_cards"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.498Z",
+      "type": "card_premium_fail",
+      "chunk": 102,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.498Z",
+      "type": "chunk_done",
+      "chunk": 102,
+      "cardCount": 0,
+      "method": "none"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.501Z",
+      "type": "chunk_start",
+      "chunk": 103,
+      "pages": [
+        409,
+        412
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-06-29T01:53:10.502Z",
+      "type": "card_text_fail",
+      "chunk": 103,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.502Z",
+      "type": "card_premium_escalate",
+      "chunk": 103,
+      "model": "gpt-5.5",
+      "reason": "mini_zero_cards"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.503Z",
+      "type": "card_premium_fail",
+      "chunk": 103,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.504Z",
+      "type": "chunk_done",
+      "chunk": 103,
+      "cardCount": 0,
+      "method": "none"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.506Z",
+      "type": "chunk_start",
+      "chunk": 104,
+      "pages": [
+        413,
+        416
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-06-29T01:53:10.507Z",
+      "type": "card_text_fail",
+      "chunk": 104,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.507Z",
+      "type": "card_premium_escalate",
+      "chunk": 104,
+      "model": "gpt-5.5",
+      "reason": "mini_zero_cards"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.508Z",
+      "type": "card_premium_fail",
+      "chunk": 104,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.508Z",
+      "type": "chunk_done",
+      "chunk": 104,
+      "cardCount": 0,
+      "method": "none"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.512Z",
+      "type": "chunk_start",
+      "chunk": 105,
+      "pages": [
+        417,
+        420
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-06-29T01:53:10.513Z",
+      "type": "card_text_fail",
+      "chunk": 105,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.513Z",
+      "type": "card_premium_escalate",
+      "chunk": 105,
+      "model": "gpt-5.5",
+      "reason": "mini_zero_cards"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.514Z",
+      "type": "card_premium_fail",
+      "chunk": 105,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.514Z",
+      "type": "chunk_done",
+      "chunk": 105,
+      "cardCount": 0,
+      "method": "none"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.517Z",
+      "type": "chunk_start",
+      "chunk": 106,
+      "pages": [
+        421,
+        424
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-06-29T01:53:10.518Z",
+      "type": "card_text_fail",
+      "chunk": 106,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.518Z",
+      "type": "card_premium_escalate",
+      "chunk": 106,
+      "model": "gpt-5.5",
+      "reason": "mini_zero_cards"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.519Z",
+      "type": "card_premium_fail",
+      "chunk": 106,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.519Z",
+      "type": "chunk_done",
+      "chunk": 106,
+      "cardCount": 0,
+      "method": "none"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.524Z",
+      "type": "chunk_start",
+      "chunk": 107,
+      "pages": [
+        425,
+        428
+      ],
+      "imageCount": 1
+    },
+    {
+      "ts": "2026-06-29T01:53:10.527Z",
+      "type": "card_multimodal_fail",
+      "chunk": 107,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.528Z",
+      "type": "card_text_fail",
+      "chunk": 107,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.528Z",
+      "type": "card_premium_escalate",
+      "chunk": 107,
+      "model": "gpt-5.5",
+      "reason": "mini_zero_cards"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.530Z",
+      "type": "card_premium_fail",
+      "chunk": 107,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.530Z",
+      "type": "chunk_done",
+      "chunk": 107,
+      "cardCount": 0,
+      "method": "none"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.533Z",
+      "type": "chunk_start",
+      "chunk": 108,
+      "pages": [
+        429,
+        432
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-06-29T01:53:10.535Z",
+      "type": "card_text_fail",
+      "chunk": 108,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.535Z",
+      "type": "card_premium_escalate",
+      "chunk": 108,
+      "model": "gpt-5.5",
+      "reason": "mini_zero_cards"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.536Z",
+      "type": "card_premium_fail",
+      "chunk": 108,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.536Z",
+      "type": "chunk_done",
+      "chunk": 108,
+      "cardCount": 0,
+      "method": "none"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.540Z",
+      "type": "chunk_start",
+      "chunk": 109,
+      "pages": [
+        433,
+        436
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-06-29T01:53:10.541Z",
+      "type": "card_text_fail",
+      "chunk": 109,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.542Z",
+      "type": "card_premium_escalate",
+      "chunk": 109,
+      "model": "gpt-5.5",
+      "reason": "mini_zero_cards"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.542Z",
+      "type": "card_premium_fail",
+      "chunk": 109,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.542Z",
+      "type": "chunk_done",
+      "chunk": 109,
+      "cardCount": 0,
+      "method": "none"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.546Z",
+      "type": "chunk_start",
+      "chunk": 110,
+      "pages": [
+        437,
+        440
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-06-29T01:53:10.547Z",
+      "type": "card_text_fail",
+      "chunk": 110,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.547Z",
+      "type": "card_premium_escalate",
+      "chunk": 110,
+      "model": "gpt-5.5",
+      "reason": "mini_zero_cards"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.548Z",
+      "type": "card_premium_fail",
+      "chunk": 110,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.548Z",
+      "type": "chunk_done",
+      "chunk": 110,
+      "cardCount": 0,
+      "method": "none"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.551Z",
+      "type": "chunk_start",
+      "chunk": 111,
+      "pages": [
+        441,
+        444
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-06-29T01:53:10.552Z",
+      "type": "card_text_fail",
+      "chunk": 111,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.553Z",
+      "type": "card_premium_escalate",
+      "chunk": 111,
+      "model": "gpt-5.5",
+      "reason": "mini_zero_cards"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.553Z",
+      "type": "card_premium_fail",
+      "chunk": 111,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.553Z",
+      "type": "chunk_done",
+      "chunk": 111,
+      "cardCount": 0,
+      "method": "none"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.557Z",
+      "type": "chunk_start",
+      "chunk": 112,
+      "pages": [
+        445,
+        448
+      ],
+      "imageCount": 2
+    },
+    {
+      "ts": "2026-06-29T01:53:10.560Z",
+      "type": "card_multimodal_fail",
+      "chunk": 112,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.561Z",
+      "type": "card_text_fail",
+      "chunk": 112,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.561Z",
+      "type": "card_premium_escalate",
+      "chunk": 112,
+      "model": "gpt-5.5",
+      "reason": "mini_zero_cards"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.565Z",
+      "type": "card_premium_fail",
+      "chunk": 112,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.565Z",
+      "type": "chunk_done",
+      "chunk": 112,
+      "cardCount": 0,
+      "method": "none"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.568Z",
+      "type": "chunk_start",
+      "chunk": 113,
+      "pages": [
+        449,
+        452
+      ],
+      "imageCount": 1
+    },
+    {
+      "ts": "2026-06-29T01:53:10.570Z",
+      "type": "card_multimodal_fail",
+      "chunk": 113,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.572Z",
+      "type": "card_text_fail",
+      "chunk": 113,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.572Z",
+      "type": "card_premium_escalate",
+      "chunk": 113,
+      "model": "gpt-5.5",
+      "reason": "mini_zero_cards"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.573Z",
+      "type": "card_premium_fail",
+      "chunk": 113,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.573Z",
+      "type": "chunk_done",
+      "chunk": 113,
+      "cardCount": 0,
+      "method": "none"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.577Z",
+      "type": "chunk_start",
+      "chunk": 114,
+      "pages": [
+        453,
+        456
+      ],
+      "imageCount": 1
+    },
+    {
+      "ts": "2026-06-29T01:53:10.579Z",
+      "type": "card_multimodal_fail",
+      "chunk": 114,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.580Z",
+      "type": "card_text_fail",
+      "chunk": 114,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.580Z",
+      "type": "card_premium_escalate",
+      "chunk": 114,
+      "model": "gpt-5.5",
+      "reason": "mini_zero_cards"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.582Z",
+      "type": "card_premium_fail",
+      "chunk": 114,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.582Z",
+      "type": "chunk_done",
+      "chunk": 114,
+      "cardCount": 0,
+      "method": "none"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.585Z",
+      "type": "chunk_start",
+      "chunk": 115,
+      "pages": [
+        457,
+        460
+      ],
+      "imageCount": 2
+    },
+    {
+      "ts": "2026-06-29T01:53:10.590Z",
+      "type": "card_multimodal_fail",
+      "chunk": 115,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.591Z",
+      "type": "card_text_fail",
+      "chunk": 115,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.591Z",
+      "type": "card_premium_escalate",
+      "chunk": 115,
+      "model": "gpt-5.5",
+      "reason": "mini_zero_cards"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.596Z",
+      "type": "card_premium_fail",
+      "chunk": 115,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.596Z",
+      "type": "chunk_done",
+      "chunk": 115,
+      "cardCount": 0,
+      "method": "none"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.598Z",
+      "type": "chunk_start",
+      "chunk": 116,
+      "pages": [
+        461,
+        464
+      ],
+      "imageCount": 1
+    },
+    {
+      "ts": "2026-06-29T01:53:10.600Z",
+      "type": "card_multimodal_fail",
+      "chunk": 116,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.603Z",
+      "type": "card_text_fail",
+      "chunk": 116,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.603Z",
+      "type": "card_premium_escalate",
+      "chunk": 116,
+      "model": "gpt-5.5",
+      "reason": "mini_zero_cards"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.605Z",
+      "type": "card_premium_fail",
+      "chunk": 116,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.605Z",
+      "type": "chunk_done",
+      "chunk": 116,
+      "cardCount": 0,
+      "method": "none"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.610Z",
+      "type": "chunk_start",
+      "chunk": 117,
+      "pages": [
+        465,
+        468
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-06-29T01:53:10.611Z",
+      "type": "card_text_fail",
+      "chunk": 117,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.611Z",
+      "type": "card_premium_escalate",
+      "chunk": 117,
+      "model": "gpt-5.5",
+      "reason": "mini_zero_cards"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.612Z",
+      "type": "card_premium_fail",
+      "chunk": 117,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.612Z",
+      "type": "chunk_done",
+      "chunk": 117,
+      "cardCount": 0,
+      "method": "none"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.616Z",
+      "type": "chunk_start",
+      "chunk": 118,
+      "pages": [
+        469,
+        472
+      ],
+      "imageCount": 1
+    },
+    {
+      "ts": "2026-06-29T01:53:10.622Z",
+      "type": "card_multimodal_fail",
+      "chunk": 118,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.623Z",
+      "type": "card_text_fail",
+      "chunk": 118,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.623Z",
+      "type": "card_premium_escalate",
+      "chunk": 118,
+      "model": "gpt-5.5",
+      "reason": "mini_zero_cards"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.628Z",
+      "type": "card_premium_fail",
+      "chunk": 118,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.628Z",
+      "type": "chunk_done",
+      "chunk": 118,
+      "cardCount": 0,
+      "method": "none"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.632Z",
+      "type": "chunk_start",
+      "chunk": 119,
+      "pages": [
+        473,
+        476
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-06-29T01:53:10.633Z",
+      "type": "card_text_fail",
+      "chunk": 119,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.633Z",
+      "type": "card_premium_escalate",
+      "chunk": 119,
+      "model": "gpt-5.5",
+      "reason": "mini_zero_cards"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.635Z",
+      "type": "card_premium_fail",
+      "chunk": 119,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.635Z",
+      "type": "chunk_done",
+      "chunk": 119,
+      "cardCount": 0,
+      "method": "none"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.640Z",
+      "type": "chunk_start",
+      "chunk": 120,
+      "pages": [
+        477,
+        480
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-06-29T01:53:10.641Z",
+      "type": "card_text_fail",
+      "chunk": 120,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.641Z",
+      "type": "card_premium_escalate",
+      "chunk": 120,
+      "model": "gpt-5.5",
+      "reason": "mini_zero_cards"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.643Z",
+      "type": "card_premium_fail",
+      "chunk": 120,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.643Z",
+      "type": "chunk_done",
+      "chunk": 120,
+      "cardCount": 0,
+      "method": "none"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.647Z",
+      "type": "chunk_start",
+      "chunk": 121,
+      "pages": [
+        481,
+        484
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-06-29T01:53:10.648Z",
+      "type": "card_text_fail",
+      "chunk": 121,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.648Z",
+      "type": "card_premium_escalate",
+      "chunk": 121,
+      "model": "gpt-5.5",
+      "reason": "mini_zero_cards"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.650Z",
+      "type": "card_premium_fail",
+      "chunk": 121,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.650Z",
+      "type": "chunk_done",
+      "chunk": 121,
+      "cardCount": 0,
+      "method": "none"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.653Z",
+      "type": "chunk_start",
+      "chunk": 122,
+      "pages": [
+        485,
+        488
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-06-29T01:53:10.655Z",
+      "type": "card_text_fail",
+      "chunk": 122,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.655Z",
+      "type": "card_premium_escalate",
+      "chunk": 122,
+      "model": "gpt-5.5",
+      "reason": "mini_zero_cards"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.657Z",
+      "type": "card_premium_fail",
+      "chunk": 122,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.657Z",
+      "type": "chunk_done",
+      "chunk": 122,
+      "cardCount": 0,
+      "method": "none"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.661Z",
+      "type": "chunk_start",
+      "chunk": 123,
+      "pages": [
+        489,
+        492
+      ],
+      "imageCount": 1
+    },
+    {
+      "ts": "2026-06-29T01:53:10.664Z",
+      "type": "card_multimodal_fail",
+      "chunk": 123,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.665Z",
+      "type": "card_text_fail",
+      "chunk": 123,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.665Z",
+      "type": "card_premium_escalate",
+      "chunk": 123,
+      "model": "gpt-5.5",
+      "reason": "mini_zero_cards"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.667Z",
+      "type": "card_premium_fail",
+      "chunk": 123,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.667Z",
+      "type": "chunk_done",
+      "chunk": 123,
+      "cardCount": 0,
+      "method": "none"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.670Z",
+      "type": "chunk_start",
+      "chunk": 124,
+      "pages": [
+        493,
+        496
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-06-29T01:53:10.672Z",
+      "type": "card_text_fail",
+      "chunk": 124,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.672Z",
+      "type": "card_premium_escalate",
+      "chunk": 124,
+      "model": "gpt-5.5",
+      "reason": "mini_zero_cards"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.673Z",
+      "type": "card_premium_fail",
+      "chunk": 124,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.673Z",
+      "type": "chunk_done",
+      "chunk": 124,
+      "cardCount": 0,
+      "method": "none"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.678Z",
+      "type": "chunk_start",
+      "chunk": 125,
+      "pages": [
+        497,
+        500
+      ],
+      "imageCount": 1
+    },
+    {
+      "ts": "2026-06-29T01:53:10.680Z",
+      "type": "card_multimodal_fail",
+      "chunk": 125,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.682Z",
+      "type": "card_text_fail",
+      "chunk": 125,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.682Z",
+      "type": "card_premium_escalate",
+      "chunk": 125,
+      "model": "gpt-5.5",
+      "reason": "mini_zero_cards"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.685Z",
+      "type": "card_premium_fail",
+      "chunk": 125,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.685Z",
+      "type": "chunk_done",
+      "chunk": 125,
+      "cardCount": 0,
+      "method": "none"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.690Z",
+      "type": "chunk_start",
+      "chunk": 126,
+      "pages": [
+        501,
+        504
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-06-29T01:53:10.691Z",
+      "type": "card_text_fail",
+      "chunk": 126,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.691Z",
+      "type": "card_premium_escalate",
+      "chunk": 126,
+      "model": "gpt-5.5",
+      "reason": "mini_zero_cards"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.693Z",
+      "type": "card_premium_fail",
+      "chunk": 126,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.693Z",
+      "type": "chunk_done",
+      "chunk": 126,
+      "cardCount": 0,
+      "method": "none"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.697Z",
+      "type": "chunk_start",
+      "chunk": 127,
+      "pages": [
+        505,
+        508
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-06-29T01:53:10.699Z",
+      "type": "card_text_fail",
+      "chunk": 127,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.699Z",
+      "type": "card_premium_escalate",
+      "chunk": 127,
+      "model": "gpt-5.5",
+      "reason": "mini_zero_cards"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.700Z",
+      "type": "card_premium_fail",
+      "chunk": 127,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.700Z",
+      "type": "chunk_done",
+      "chunk": 127,
+      "cardCount": 0,
+      "method": "none"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.704Z",
+      "type": "chunk_start",
+      "chunk": 128,
+      "pages": [
+        509,
+        512
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-06-29T01:53:10.706Z",
+      "type": "card_text_fail",
+      "chunk": 128,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.706Z",
+      "type": "card_premium_escalate",
+      "chunk": 128,
+      "model": "gpt-5.5",
+      "reason": "mini_zero_cards"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.708Z",
+      "type": "card_premium_fail",
+      "chunk": 128,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.708Z",
+      "type": "chunk_done",
+      "chunk": 128,
+      "cardCount": 0,
+      "method": "none"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.712Z",
+      "type": "chunk_start",
+      "chunk": 129,
+      "pages": [
+        513,
+        516
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-06-29T01:53:10.713Z",
+      "type": "card_text_fail",
+      "chunk": 129,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.713Z",
+      "type": "card_premium_escalate",
+      "chunk": 129,
+      "model": "gpt-5.5",
+      "reason": "mini_zero_cards"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.713Z",
+      "type": "card_premium_fail",
+      "chunk": 129,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.713Z",
+      "type": "chunk_done",
+      "chunk": 129,
+      "cardCount": 0,
+      "method": "none"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.717Z",
+      "type": "chunk_start",
+      "chunk": 130,
+      "pages": [
+        517,
+        520
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-06-29T01:53:10.719Z",
+      "type": "card_text_fail",
+      "chunk": 130,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.719Z",
+      "type": "card_premium_escalate",
+      "chunk": 130,
+      "model": "gpt-5.5",
+      "reason": "mini_zero_cards"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.720Z",
+      "type": "card_premium_fail",
+      "chunk": 130,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.721Z",
+      "type": "chunk_done",
+      "chunk": 130,
+      "cardCount": 0,
+      "method": "none"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.724Z",
+      "type": "chunk_start",
+      "chunk": 131,
+      "pages": [
+        521,
+        524
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-06-29T01:53:10.725Z",
+      "type": "card_text_fail",
+      "chunk": 131,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.725Z",
+      "type": "card_premium_escalate",
+      "chunk": 131,
+      "model": "gpt-5.5",
+      "reason": "mini_zero_cards"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.726Z",
+      "type": "card_premium_fail",
+      "chunk": 131,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.726Z",
+      "type": "chunk_done",
+      "chunk": 131,
+      "cardCount": 0,
+      "method": "none"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.729Z",
+      "type": "chunk_start",
+      "chunk": 132,
+      "pages": [
+        525,
+        528
+      ],
+      "imageCount": 2
+    },
+    {
+      "ts": "2026-06-29T01:53:10.732Z",
+      "type": "card_multimodal_fail",
+      "chunk": 132,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.733Z",
+      "type": "card_text_fail",
+      "chunk": 132,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.733Z",
+      "type": "card_premium_escalate",
+      "chunk": 132,
+      "model": "gpt-5.5",
+      "reason": "mini_zero_cards"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.736Z",
+      "type": "card_premium_fail",
+      "chunk": 132,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.736Z",
+      "type": "chunk_done",
+      "chunk": 132,
+      "cardCount": 0,
+      "method": "none"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.740Z",
+      "type": "chunk_start",
+      "chunk": 133,
+      "pages": [
+        529,
+        532
+      ],
+      "imageCount": 1
+    },
+    {
+      "ts": "2026-06-29T01:53:10.742Z",
+      "type": "card_multimodal_fail",
+      "chunk": 133,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.743Z",
+      "type": "card_text_fail",
+      "chunk": 133,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.743Z",
+      "type": "card_premium_escalate",
+      "chunk": 133,
+      "model": "gpt-5.5",
+      "reason": "mini_zero_cards"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.746Z",
+      "type": "card_premium_fail",
+      "chunk": 133,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.746Z",
+      "type": "chunk_done",
+      "chunk": 133,
+      "cardCount": 0,
+      "method": "none"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.750Z",
+      "type": "chunk_start",
+      "chunk": 134,
+      "pages": [
+        533,
+        536
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-06-29T01:53:10.752Z",
+      "type": "card_text_fail",
+      "chunk": 134,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.752Z",
+      "type": "card_premium_escalate",
+      "chunk": 134,
+      "model": "gpt-5.5",
+      "reason": "mini_zero_cards"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.754Z",
+      "type": "card_premium_fail",
+      "chunk": 134,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.754Z",
+      "type": "chunk_done",
+      "chunk": 134,
+      "cardCount": 0,
+      "method": "none"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.757Z",
+      "type": "chunk_start",
+      "chunk": 135,
+      "pages": [
+        537,
+        540
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-06-29T01:53:10.758Z",
+      "type": "card_text_fail",
+      "chunk": 135,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.758Z",
+      "type": "card_premium_escalate",
+      "chunk": 135,
+      "model": "gpt-5.5",
+      "reason": "mini_zero_cards"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.760Z",
+      "type": "card_premium_fail",
+      "chunk": 135,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.760Z",
+      "type": "chunk_done",
+      "chunk": 135,
+      "cardCount": 0,
+      "method": "none"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.763Z",
+      "type": "chunk_start",
+      "chunk": 136,
+      "pages": [
+        541,
+        544
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-06-29T01:53:10.767Z",
+      "type": "card_text_fail",
+      "chunk": 136,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.767Z",
+      "type": "card_premium_escalate",
+      "chunk": 136,
+      "model": "gpt-5.5",
+      "reason": "mini_zero_cards"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.768Z",
+      "type": "card_premium_fail",
+      "chunk": 136,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.768Z",
+      "type": "chunk_done",
+      "chunk": 136,
+      "cardCount": 0,
+      "method": "none"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.772Z",
+      "type": "chunk_start",
+      "chunk": 137,
+      "pages": [
+        545,
+        548
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-06-29T01:53:10.773Z",
+      "type": "card_text_fail",
+      "chunk": 137,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.773Z",
+      "type": "card_premium_escalate",
+      "chunk": 137,
+      "model": "gpt-5.5",
+      "reason": "mini_zero_cards"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.774Z",
+      "type": "card_premium_fail",
+      "chunk": 137,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.774Z",
+      "type": "chunk_done",
+      "chunk": 137,
+      "cardCount": 0,
+      "method": "none"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.778Z",
+      "type": "chunk_start",
+      "chunk": 138,
+      "pages": [
+        549,
+        552
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-06-29T01:53:10.778Z",
+      "type": "card_text_fail",
+      "chunk": 138,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.778Z",
+      "type": "card_premium_escalate",
+      "chunk": 138,
+      "model": "gpt-5.5",
+      "reason": "mini_zero_cards"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.779Z",
+      "type": "card_premium_fail",
+      "chunk": 138,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.779Z",
+      "type": "chunk_done",
+      "chunk": 138,
+      "cardCount": 0,
+      "method": "none"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.784Z",
+      "type": "chunk_start",
+      "chunk": 139,
+      "pages": [
+        553,
+        556
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-06-29T01:53:10.785Z",
+      "type": "card_text_fail",
+      "chunk": 139,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.785Z",
+      "type": "card_premium_escalate",
+      "chunk": 139,
+      "model": "gpt-5.5",
+      "reason": "mini_zero_cards"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.787Z",
+      "type": "card_premium_fail",
+      "chunk": 139,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.787Z",
+      "type": "chunk_done",
+      "chunk": 139,
+      "cardCount": 0,
+      "method": "none"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.790Z",
+      "type": "chunk_start",
+      "chunk": 140,
+      "pages": [
+        557,
+        560
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-06-29T01:53:10.791Z",
+      "type": "card_text_fail",
+      "chunk": 140,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.791Z",
+      "type": "card_premium_escalate",
+      "chunk": 140,
+      "model": "gpt-5.5",
+      "reason": "mini_zero_cards"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.792Z",
+      "type": "card_premium_fail",
+      "chunk": 140,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.792Z",
+      "type": "chunk_done",
+      "chunk": 140,
+      "cardCount": 0,
+      "method": "none"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.797Z",
+      "type": "chunk_start",
+      "chunk": 141,
+      "pages": [
+        561,
+        564
+      ],
+      "imageCount": 1
+    },
+    {
+      "ts": "2026-06-29T01:53:10.799Z",
+      "type": "card_multimodal_fail",
+      "chunk": 141,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.800Z",
+      "type": "card_text_fail",
+      "chunk": 141,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.800Z",
+      "type": "card_premium_escalate",
+      "chunk": 141,
+      "model": "gpt-5.5",
+      "reason": "mini_zero_cards"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.803Z",
+      "type": "card_premium_fail",
+      "chunk": 141,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.803Z",
+      "type": "chunk_done",
+      "chunk": 141,
+      "cardCount": 0,
+      "method": "none"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.807Z",
+      "type": "chunk_start",
+      "chunk": 142,
+      "pages": [
+        565,
+        568
+      ],
+      "imageCount": 1
+    },
+    {
+      "ts": "2026-06-29T01:53:10.810Z",
+      "type": "card_multimodal_fail",
+      "chunk": 142,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.811Z",
+      "type": "card_text_fail",
+      "chunk": 142,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.811Z",
+      "type": "card_premium_escalate",
+      "chunk": 142,
+      "model": "gpt-5.5",
+      "reason": "mini_zero_cards"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.815Z",
+      "type": "card_premium_fail",
+      "chunk": 142,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.815Z",
+      "type": "chunk_done",
+      "chunk": 142,
+      "cardCount": 0,
+      "method": "none"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.820Z",
+      "type": "chunk_start",
+      "chunk": 143,
+      "pages": [
+        569,
+        572
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-06-29T01:53:10.821Z",
+      "type": "card_text_fail",
+      "chunk": 143,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.821Z",
+      "type": "card_premium_escalate",
+      "chunk": 143,
+      "model": "gpt-5.5",
+      "reason": "mini_zero_cards"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.822Z",
+      "type": "card_premium_fail",
+      "chunk": 143,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.822Z",
+      "type": "chunk_done",
+      "chunk": 143,
+      "cardCount": 0,
+      "method": "none"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.826Z",
+      "type": "chunk_start",
+      "chunk": 144,
+      "pages": [
+        573,
+        575
+      ],
+      "imageCount": 0
+    },
+    {
+      "ts": "2026-06-29T01:53:10.827Z",
+      "type": "card_text_fail",
+      "chunk": 144,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.827Z",
+      "type": "card_premium_escalate",
+      "chunk": 144,
+      "model": "gpt-5.5",
+      "reason": "mini_zero_cards"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.828Z",
+      "type": "card_premium_fail",
+      "chunk": 144,
+      "error": "getaddrinfo ENOTFOUND api.nwafu-ai.cn"
+    },
+    {
+      "ts": "2026-06-29T01:53:10.828Z",
+      "type": "chunk_done",
+      "chunk": 144,
+      "cardCount": 0,
+      "method": "none"
+    }
+  ],
+  "needsVerification": 0,
+  "hasTeachingMap": false
+}

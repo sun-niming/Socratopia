@@ -1,0 +1,44 @@
+{
+  "title": "bind Address already in use 排错",
+  "definition": "当服务器启动时 `bind` 失败并提示 `Address already in use`，通常表示端口已被占用，或者上一次程序退出后端口短时间不可复用，也可能是没有设置 `SO_REUSEADDR`。排查时可先查看该端口是否已有进程监听。",
+  "key_points": [
+    "现象是启动服务器时 `bind` 失败，提示地址已被使用。",
+    "常见原因包括：已有另一个进程监听同一端口、上一次程序退出后端口短时间不可复用、没有设置 `SO_REUSEADDR`。",
+    "可用 `ss -lntp | grep 8080`、`lsof -i :8080` 检查端口占用。"
+  ],
+  "examples": [
+    "`ss -lntp | grep 8080`",
+    "`lsof -i :8080`"
+  ],
+  "misconceptions": [
+    "误以为 `bind` 失败一定是地址字符串写错。",
+    "误以为端口一旦退出就立刻可以被任何程序复用。",
+    "误以为只要程序能编译通过，就不会出现端口占用问题。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`bind` 报 `Address already in use` 最常见说明什么？",
+      "a": "通常说明端口已被占用，或者端口暂时不可复用。"
+    },
+    {
+      "q": "可以用什么命令检查 8080 端口是否被占用？",
+      "a": "可以用 `ss -lntp | grep 8080` 或 `lsof -i :8080`。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "socket 基础",
+    "端口占用概念"
+  ],
+  "source_pages": [
+    105,
+    108
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "167_bind_address_already_in_use_排错",
+  "_chunk_pages": [
+    105,
+    108
+  ]
+}

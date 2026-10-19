@@ -1,0 +1,42 @@
+{
+  "title": "div与span的区别",
+  "definition": "div和span的唯一区别是：div是块级元素，span是行内元素。div默认占据整个一行；span默认只占据行内的一部分，其宽度由内容多少决定。",
+  "key_points": [
+    "div是块级容器，默认占据整行。",
+    "span是行内容器，默认只占据所在行的一部分。",
+    "两者的区别在于块级与行内的默认显示方式。"
+  ],
+  "examples": [
+    "<div>块级容器</div>",
+    "<span>行内容器</span>"
+  ],
+  "misconceptions": [
+    "错误理解为div和span在语义上不同。",
+    "错误理解为span会默认独占一整行。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "div和span的区别是什么？",
+      "a": "div是块级元素，span是行内元素。"
+    },
+    {
+      "q": "div默认的占位方式是什么？",
+      "a": "div默认占据整个一行。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "div和span容器标记"
+  ],
+  "source_pages": [
+    61,
+    64
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "078_div与span的区别",
+  "_chunk_pages": [
+    61,
+    64
+  ]
+}

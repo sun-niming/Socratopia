@@ -1,0 +1,41 @@
+{
+  "title": "preventDefault",
+  "definition": "preventDefault() 是 event 对象的方法，用来阻止事件触发后默认动作的发生。",
+  "key_points": [
+    "当需要停止事件的默认行为时，调用 event.preventDefault()。",
+    "它针对的是默认动作，而不是事件在 DOM 中的传播。"
+  ],
+  "examples": [
+    "点击链接时调用 event.preventDefault()，可以阻止链接的默认跳转行为。"
+  ],
+  "misconceptions": [
+    "错误理解：preventDefault() 会自动阻止事件冒泡或捕获。",
+    "错误理解：preventDefault() 和 stopPropagation() 是同一个作用。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "preventDefault() 的作用是什么？",
+      "a": "阻止事件触发后默认动作的发生。"
+    },
+    {
+      "q": "如果既想阻止默认行为，又想阻止事件继续传播，应该怎么做？",
+      "a": "分别使用 preventDefault() 和 stopPropagation()。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "事件对象",
+    "默认行为"
+  ],
+  "source_pages": [
+    377,
+    380
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "504_preventdefault",
+  "_chunk_pages": [
+    377,
+    380
+  ]
+}

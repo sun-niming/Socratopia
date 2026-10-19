@@ -1,0 +1,52 @@
+{
+  "title": "媒体类型",
+  "definition": "媒体类型（media type）用于描述设备的一般类别；除非使用 not 或 only 逻辑运算符，否则媒体类型可以省略，并且会隐式应用 all 类型。",
+  "key_points": [
+    "媒体类型用于描述设备的一般类别。",
+    "all 表示适用于所有设备。",
+    "print 表示适用于在打印预览模式下在屏幕上查看的分页材料和文档。",
+    "screen 表示主要用于屏幕。",
+    "在不使用 not 或 only 时，媒体类型是可选的，并会隐式应用 all。"
+  ],
+  "examples": [
+    "all",
+    "print",
+    "screen",
+    "@media print { ... }",
+    "@media screen { ... }"
+  ],
+  "misconceptions": [
+    "all 不是指“所有 CSS 规则”，而是指适用于所有设备。",
+    "screen 不是专指某一种浏览器，而是主要用于屏幕的媒体类型。",
+    "媒体类型在某些情况下可以省略，不一定每次都必须显式写出。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "all 媒体类型表示什么？",
+      "a": "适用于所有设备。"
+    },
+    {
+      "q": "screen 媒体类型表示什么？",
+      "a": "主要用于屏幕。"
+    },
+    {
+      "q": "print 媒体类型适用于什么？",
+      "a": "适用于在打印预览模式下在屏幕上查看的分页材料和文档。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "媒体查询基本语法"
+  ],
+  "source_pages": [
+    221,
+    224
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "327_媒体类型",
+  "_chunk_pages": [
+    221,
+    224
+  ]
+}

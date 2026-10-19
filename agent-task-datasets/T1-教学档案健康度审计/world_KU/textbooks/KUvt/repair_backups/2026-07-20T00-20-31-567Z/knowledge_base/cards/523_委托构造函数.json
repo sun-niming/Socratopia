@@ -1,0 +1,49 @@
+{
+  "title": "委托构造函数",
+  "definition": "委托构造函数允许一个构造函数调用同一个类中的另一个构造函数。委托调用必须写在构造函数初始化器中，且必须是初始化器列表中唯一的成员初始化器，不能写在构造函数体内。",
+  "key_points": [
+    "委托构造函数首先把构造工作交给目标构造函数。",
+    "目标构造函数执行完毕后，再执行委托构造函数自己的函数体。",
+    "SpreadsheetCell的 string_view 构造函数可以委托给 double 构造函数。",
+    "使用委托构造函数时必须避免构造函数之间形成递归委托。"
+  ],
+  "examples": [
+    "代码：SpreadsheetCell::SpreadsheetCell(string_view initialValue) : SpreadsheetCell{stringToDouble(initialValue)} {}。这里 string_view 构造函数把构造工作委托给 double 构造函数。",
+    "委托目标必须是同一个类的其他构造函数，不能把委托调用写成构造函数体中的普通函数调用。"
+  ],
+  "misconceptions": [
+    "委托构造函数不是在构造函数体内调用另一个构造函数，而是在初始化器中指定委托目标。",
+    "委托构造函数的初始化器列表不能同时初始化其他数据成员；委托构造函数必须是其中唯一的成员初始化器。",
+    "委托给另一个构造函数后，委托构造函数自己的函数体仍会执行，但发生在目标构造函数完成之后。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "委托构造函数的调用必须写在哪里？",
+      "a": "必须写在构造函数初始化器中，并且是初始化器列表中唯一的成员初始化器。"
+    },
+    {
+      "q": "SpreadsheetCell的 string_view 构造函数委托给哪个构造函数？",
+      "a": "它通过 stringToDouble(initialValue) 将构造工作委托给 double 构造函数。"
+    },
+    {
+      "q": "委托构造函数和目标构造函数的执行顺序是什么？",
+      "a": "先执行目标构造函数，目标构造函数返回后，再执行委托构造函数的函数体。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "构造函数初始化器",
+    "构造函数重载"
+  ],
+  "source_pages": [
+    247,
+    248
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "523_委托构造函数",
+  "_chunk_pages": [
+    245,
+    248
+  ]
+}

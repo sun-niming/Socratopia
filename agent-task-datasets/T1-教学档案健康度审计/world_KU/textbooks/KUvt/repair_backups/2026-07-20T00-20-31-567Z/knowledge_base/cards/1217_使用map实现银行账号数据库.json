@@ -1,0 +1,60 @@
+{
+  "title": "使用map实现银行账号数据库",
+  "definition": "可以使用`std::map<int, BankAccount>`实现简单的银行账号数据库，其中账号号码作为键，`BankAccount`对象作为值。数据库可以提供添加账号、按账号删除、按账号查找、按客户姓名线性查找，以及把另一个数据库中的账号合并进来的操作。添加账号时使用账号号码作为键，并根据`emplace`返回结果的`bool`字段判断插入是否成功；如果该账号号码已经存在，则不会重复添加。",
+  "key_points": [
+    "数据库的核心数据成员可以定义为`std::map<int, BankAccount> m_accounts;`。",
+    "`addAccount`使用`emplace(account.getAccountNumber(), account)`插入账号，并返回插入结果的布尔字段。",
+    "按账号查找时使用`find`，成功后返回`it->second`，找不到则抛出`std::out_of_range`。",
+    "按客户姓名查找不是按`map`键查找，需要遍历所有元素，因此是线性搜索。",
+    "`mergeDatabase(BankDB& db)`可以使用`m_accounts.merge(db.m_accounts)`将另一个数据库中的可插入结点转移过来；目标中已有相同账号时，该账号不会被转移。"
+  ],
+  "examples": [
+    "核心成员：`std::map<int, BankAccount> m_accounts;`。",
+    "添加账号：`auto res = m_accounts.emplace(account.getAccountNumber(), account); return res.second;`。",
+    "按账号查找：`auto it = m_accounts.find(accountNumber); if (it == m_accounts.end()) { throw std::out_of_range(\"No account with that number.\"); } return it->second;`。",
+    "按姓名查找：`for (auto& [accountNumber, account] : m_accounts) { if (account.getClientName() == name) { return account; } } throw std::out_of_range(\"No account with that name.\");`。",
+    "合并数据库：`m_accounts.merge(db.m_accounts);`。"
+  ],
+  "misconceptions": [
+    "账号号码只是`BankAccount`对象的普通字段，不能作为`map`键；实际上可以把该字段作为键，同时对象中仍保留账号号码字段。",
+    "`emplace`插入失败时会覆盖已有账号；对于`map`的重复键，插入失败且已有元素不会被覆盖。",
+    "按客户姓名查找也能直接使用`map.find(name)`；本例的键是整数账号号码，姓名不是键，因此需要遍历。",
+    "按账号查找失败会返回一个无效的`BankAccount`引用；原文设计为抛出`std::out_of_range`。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "BankDB为什么使用`std::map<int, BankAccount>`？",
+      "a": "因为账号号码可以作为唯一键，用于按账号快速定位对应的`BankAccount`对象。"
+    },
+    {
+      "q": "`addAccount`如何判断账号是否成功添加？",
+      "a": "检查`emplace`返回的结果对中的`second`布尔字段；为`true`表示插入成功。"
+    },
+    {
+      "q": "为什么按客户姓名查找需要线性遍历？",
+      "a": "因为姓名不是该`map`的键，不能直接按姓名进行键查找，只能逐个检查账号对象的客户姓名。"
+    },
+    {
+      "q": "按账号查找不到账户时，示例代码如何处理？",
+      "a": "抛出`std::out_of_range`异常。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "std::map的唯一键与插入",
+    "std::map的find",
+    "C++异常处理",
+    "结构化绑定"
+  ],
+  "source_pages": [
+    586,
+    588
+  ],
+  "needs_verification": true,
+  "verify_query": "《C++20高级编程》第18章 BankAccount BankDB 示例第586-588页 原版代码；BankDB findAccount mergeDatabase emplace 返回值",
+  "concept_id": "1217_使用map实现银行账号数据库",
+  "_chunk_pages": [
+    585,
+    588
+  ]
+}

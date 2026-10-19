@@ -1,0 +1,48 @@
+{
+  "title": "DNS 的定义与基本通信参数",
+  "definition": "域名系统（Domain Name System，DNS）主要负责将主机名转换为对应的 IP 地址。DNS 由分层的 DNS 服务器实现分布式数据库，同时也是一种让主机能够查询该分布式数据库的应用层协议。教材指出，DNS 协议运行在 UDP 之上，使用端口号 53。",
+  "key_points": [
+    "DNS 包含两个方面：分层 DNS 服务器组成的分布式数据库，以及查询该数据库的应用层协议。",
+    "DNS 的主要任务是进行主机名到 IP 地址的转换。",
+    "DNS 服务器通常运行在使用 BIND 软件的 UNIX 机器上。",
+    "DNS 报文使用 UDP 传输，并使用端口 53。"
+  ],
+  "examples": [
+    "主机名 $\\texttt{www.google.com}$ 可以通过 DNS 查询其对应的 IP 地址。",
+    "DNS 通信的基本形式为：DNS 客户端 $\\xrightarrow[\\text{UDP，端口 53}]{}$ DNS 服务器。"
+  ],
+  "misconceptions": [
+    "DNS 不是直接面向用户交互的 Web、文件传输或电子邮件应用；它主要为这些应用提供名字到地址的转换功能。",
+    "DNS 不只是一个单独的服务器，而是由分层、分布式的服务器体系和协议共同组成。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "DNS 的主要任务是什么？",
+      "a": "将主机名转换为对应的 IP 地址。"
+    },
+    {
+      "q": "DNS 使用哪种运输层协议和端口号？",
+      "a": "使用 UDP，端口号为 53。"
+    },
+    {
+      "q": "DNS 为什么属于应用层协议？",
+      "a": "因为它以客户—服务器模式运行在通信端系统之间，并通过端到端运输协议传送 DNS 报文。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "应用层协议",
+    "运输层协议"
+  ],
+  "source_pages": [
+    101,
+    102
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "254_dns_的定义与基本通信参数",
+  "_chunk_pages": [
+    101,
+    104
+  ]
+}

@@ -1,0 +1,50 @@
+{
+  "title": "OpenDaylight控制器的平台接口",
+  "definition": "OpenDaylight Lithium是一个开源SDN控制器平台。其主要组件与典型SDN控制器架构中的组件相对应，网络服务应用程序负责决定受控交换机如何实现数据平面转发以及防火墙、负载均衡等其他服务。与规范化的控制器架构不同，OpenDaylight提供两类应用程序接口：外部应用程序通过运行在HTTP之上的REST请求—响应API与控制器模块通信；内部应用程序通过服务抽象层（SAL）相互通信。",
+  "key_points": [
+    "网络服务应用程序可以决定数据平面转发、防火墙和负载均衡等服务如何在受控交换机中完成。",
+    "外部应用程序使用REST请求—响应API与控制器模块通信。",
+    "REST通信运行在HTTP之上。",
+    "内部应用程序通过服务抽象层（SAL）相互通信。",
+    "控制器应用程序采用外部实现还是内部实现，由应用程序设计者选择。"
+  ],
+  "examples": [
+    "外部网络管理程序可以通过REST API向OpenDaylight控制器模块发送请求；控制器内部的多个应用程序则可以通过SAL互相通信。",
+    "接口关系可表示为：$$\\text{外部应用程序}\\xrightarrow[\\text{HTTP之上}]{\\text{REST API}}\\text{控制器模块}$$ $$\\text{内部应用程序}\\xrightarrow{\\text{SAL}}\\text{内部应用程序}$$"
+  ],
+  "misconceptions": [
+    "REST API和SAL不是同一个接口：REST主要用于外部应用程序，SAL主要用于内部应用程序之间通信。",
+    "OpenDaylight中的应用程序不一定都必须在控制器内部实现，应用程序设计者可以选择外部或内部实现。",
+    "OpenDaylight不仅负责通信，也支持由网络服务应用程序决定转发、防火墙和负载均衡等网络服务。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "OpenDaylight中外部应用程序如何与控制器模块通信？",
+      "a": "通过运行在HTTP之上的REST请求—响应API通信。"
+    },
+    {
+      "q": "OpenDaylight中内部应用程序如何互相通信？",
+      "a": "通过服务抽象层（SAL）互相通信。"
+    },
+    {
+      "q": "OpenDaylight的网络服务应用程序可以决定哪些功能？",
+      "a": "可以决定数据平面转发以及防火墙、负载均衡等其他服务如何在受控交换机中完成。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "SDN控制器的北向接口",
+    "REST API基础"
+  ],
+  "source_pages": [
+    285,
+    288
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "643_opendaylight控制器的平台接口",
+  "_chunk_pages": [
+    285,
+    288
+  ]
+}

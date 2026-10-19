@@ -1,0 +1,45 @@
+{
+  "title": "TCP服务器处理并返回大写句子",
+  "definition": "示例TCP服务器接受客户连接后，从该连接套接字读取字节，将字节解码为字符串，使用字符串的 `upper()` 方法转换为大写，再将结果编码为字节并通过同一连接套接字返回客户。处理完该客户后，服务器关闭该客户专用的连接套接字。",
+  "key_points": [
+    "接收与解码：`sentence = connectionSocket.recv(1024).decode()`。",
+    "转换为大写：`capitalizedSentence = sentence.upper()`。",
+    "编码并发送：`connectionSocket.send(capitalizedSentence.encode())`。",
+    "完成响应后执行 `connectionSocket.close()`。",
+    "外层 `while True` 使服务器在处理完一个客户后继续等待后续客户。"
+  ],
+  "examples": [
+    "若客户发送字符串 `network`，服务器执行 `sentence.upper()` 后得到 `NETWORK`，编码后通过 `connectionSocket` 返回。"
+  ],
+  "misconceptions": [
+    "误以为字符串可以不编码就直接作为网络字节发送。",
+    "误以为服务器返回结果后必须关闭欢迎套接字。",
+    "误以为示例中的 `while True` 会为每个客户自动创建并行处理线程；原文代码是逐次接受和处理连接。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "服务器如何把客户发送的小写句子转换后返回？",
+      "a": "先通过连接套接字接收并解码字节，调用 `upper()` 转为大写，再编码为字节并通过同一连接套接字发送。"
+    },
+    {
+      "q": "处理完一个客户后，服务器关闭哪个套接字？",
+      "a": "关闭该客户专用的 `connectionSocket`，而欢迎套接字 `serverSocket` 保持打开。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "accept创建客户专用连接套接字",
+    "字符编码与解码"
+  ],
+  "source_pages": [
+    129,
+    132
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "328_tcp服务器处理并返回大写句子",
+  "_chunk_pages": [
+    129,
+    132
+  ]
+}

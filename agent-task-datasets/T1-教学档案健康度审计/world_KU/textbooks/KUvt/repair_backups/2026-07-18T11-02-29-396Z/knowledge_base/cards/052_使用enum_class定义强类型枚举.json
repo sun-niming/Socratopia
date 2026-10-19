@@ -1,0 +1,51 @@
+{
+  "title": "使用enum class定义强类型枚举",
+  "definition": "`enum class`用于定义作用域枚举。枚举项属于枚举类型的作用域，使用时通常写成`枚举类型::枚举项`，例如`PieceType::King`。这种写法可避免枚举项直接泄漏到外部作用域，并减少不同枚举类型之间同名枚举项发生冲突的问题。",
+  "key_points": [
+    "基本语法是：`enum class PieceType { King, Queen, Rook, Pawn };`。",
+    "使用枚举项时可以写`PieceType::King`。",
+    "枚举变量可以这样初始化：`PieceType piece { PieceType::King };`。",
+    "枚举项可以显式指定值；未指定值的后续枚举项通常按递增规则取得值，例如：`King = 1, Queen, Rook = 10, Pawn`。",
+    "可以指定枚举的底层整数类型，例如：`enum class PieceType : unsigned long { King = 1, Queen, Rook = 10, Pawn };`。"
+  ],
+  "examples": [
+    "`enum class PieceType { King, Queen, Rook, Pawn };`",
+    "`PieceType piece { PieceType::King };`",
+    "`enum class PieceType { King = 1, Queen, Rook = 10, Pawn };`"
+  ],
+  "misconceptions": [
+    "`enum class`中的枚举项不能像普通非限定枚举项那样直接当作全局名称使用，通常需要写`PieceType::Queen`。",
+    "`enum class`变量不是普通`int`变量，不能把任意整数直接当作该枚举类型使用。",
+    "不同枚举类型可以拥有同名枚举项，因为枚举项受各自的枚举类型作用域限制。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何定义包含`King`、`Queen`、`Rook`和`Pawn`的作用域枚举？",
+      "a": "写作：`enum class PieceType { King, Queen, Rook, Pawn };`。"
+    },
+    {
+      "q": "如何初始化一个值为`King`的`PieceType`变量？",
+      "a": "写作：`PieceType piece { PieceType::King };`。"
+    },
+    {
+      "q": "如何指定`PieceType`的底层类型为`unsigned long`？",
+      "a": "写作：`enum class PieceType : unsigned long { King = 1, Queen, Rook = 10, Pawn };`。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++变量与类型",
+    "C++作用域"
+  ],
+  "source_pages": [
+    45,
+    48
+  ],
+  "needs_verification": true,
+  "verify_query": "Marc Gregoire C++20高级编程 第5版 enum class PieceType unsigned long King Queen Rook Pawn 第46页",
+  "concept_id": "052_使用enum_class定义强类型枚举",
+  "_chunk_pages": [
+    45,
+    48
+  ]
+}

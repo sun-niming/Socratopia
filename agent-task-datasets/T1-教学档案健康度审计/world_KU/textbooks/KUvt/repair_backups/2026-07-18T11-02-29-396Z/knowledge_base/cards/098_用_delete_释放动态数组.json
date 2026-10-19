@@ -1,0 +1,42 @@
+{
+  "title": "用 delete[] 释放动态数组",
+  "definition": "使用 new[] 动态分配的数组，必须使用 delete[] 释放；不能用普通 delete 代替。释放后可将指针设为 nullptr，表示该指针当前不再指向有效的动态数组。",
+  "key_points": [
+    "数组分配与释放形式必须匹配：new[] 对应 delete[]，单个对象的 new 对应 delete。",
+    "delete[] 会释放通过 new[] 分配的动态数组。",
+    "释放后执行 myVariableSizedArray = nullptr; 可避免指针继续保存已释放地址。"
+  ],
+  "examples": [
+    "int* myVariableSizedArray = new int[8];\nmyVariableSizedArray[3] = 2;\ndelete[] myVariableSizedArray;\nmyVariableSizedArray = nullptr;"
+  ],
+  "misconceptions": [
+    "不能因为指针类型是 int*，就认为 delete 和 delete[] 可以互换。",
+    "delete[] 只适用于通过 new[] 分配的数组；普通 new 分配的单个对象应使用 delete。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "使用 new int[10] 分配的数组应如何释放？",
+      "a": "应使用 delete[]，例如 delete[] ip;。"
+    },
+    {
+      "q": "释放动态数组后为什么常把指针设为 nullptr？",
+      "a": "为了明确表示该指针不再指向有效对象，避免继续使用已释放的地址。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++指针",
+    "动态内存分配"
+  ],
+  "source_pages": [
+    73,
+    76
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "098_用_delete_释放动态数组",
+  "_chunk_pages": [
+    73,
+    76
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "title": "HostRecord 的 RAII 封装",
+  "definition": "HostRecord 是一个用于封装主机查找结果的 RAII 类。构造函数调用 `lookupHostByName` 获取 `HostHandle`，析构函数在对象销毁时调用 `freeHostHandle` 释放该句柄；该类禁止复制构造和复制赋值，并通过 `get()` 提供底层句柄。",
+  "key_points": [
+    "构造函数接收 `std::string_view`，调用主机查找函数并保存返回的 `HostHandle*`。",
+    "析构函数仅在句柄非空时调用 `freeHostHandle`。",
+    "复制构造和复制赋值被删除，以避免多个对象错误地管理同一个底层句柄。",
+    "`get() const noexcept` 返回底层 `HostHandle*`，供其他 C 库函数使用。",
+    "由于底层 C 库可能要求可修改的 `char*`，而 `std::string_view::data()` 通常提供 `const char*`，示例使用 `const_cast<char*>` 适配该非 const-correct 接口。"
+  ],
+  "examples": [
+    "核心接口可概括为：`explicit HostRecord(std::string_view host); ~HostRecord(); HostRecord(const HostRecord&) = delete; HostRecord& operator=(const HostRecord&) = delete; HostHandle* get() const noexcept;`。",
+    "典型析构逻辑为：`if (m_hostHandle) freeHostHandle(m_hostHandle);`。"
+  ],
+  "misconceptions": [
+    "`get()` 返回底层句柄并不意味着调用者获得了句柄的所有权；句柄仍由 HostRecord 的生命周期管理。",
+    "删除复制操作是为了避免资源的重复释放，不是因为类不能被构造。",
+    "`const_cast` 只是弥补底层库接口缺少 const-correct；如果底层函数实际修改传入字符串，直接转换可能存在风险。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "HostRecord 如何实现 RAII？",
+      "a": "构造函数获取 `HostHandle*`，析构函数在对象销毁时自动调用 `freeHostHandle` 释放它，因此资源的获取和释放绑定到对象生命周期。"
+    },
+    {
+      "q": "为什么 HostRecord 删除复制构造和复制赋值？",
+      "a": "因为多个 HostRecord 对象若持有同一个底层句柄，析构时可能重复释放资源；删除复制操作可以避免这种所有权问题。"
+    },
+    {
+      "q": "HostRecord 的 `get()` 方法有什么作用？",
+      "a": "它返回保存的底层 `HostHandle*`，使包装器内部能够把句柄传给需要该句柄的 C 库函数。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "RAII 资源管理",
+    "std::string_view",
+    "C++特殊成员函数"
+  ],
+  "source_pages": [
+    977,
+    977
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "2011_hostrecord_的_raii_封装",
+  "_chunk_pages": [
+    977,
+    980
+  ]
+}

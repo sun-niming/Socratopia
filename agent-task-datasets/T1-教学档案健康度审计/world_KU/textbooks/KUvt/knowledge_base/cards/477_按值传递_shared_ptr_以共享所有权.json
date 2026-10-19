@@ -1,0 +1,45 @@
+{
+  "title": "按值传递 shared_ptr 以共享所有权",
+  "definition": "当函数需要共享 shared_ptr 的所有权时，应按值接受 shared_ptr 参数。按值传递会产生一个新的 shared_ptr 实例，该实例与调用方的 shared_ptr 共同拥有同一资源；函数参数离开作用域时，其所有权被释放，但只有在没有其他 shared_ptr 所有者时资源才会销毁。",
+  "key_points": [
+    "只有涉及所有权转移或所有权共享时，接受指针参数的函数才应接受智能指针。",
+    "要共享 shared_ptr 的所有权，函数参数应按值传递 shared_ptr。",
+    "按值传递 shared_ptr 会增加共享所有者数量，参数销毁时会减少该数量。",
+    "原文在第 224 页末尾开始讨论向函数传递 unique_ptr，但相关内容在给定摘录中不完整，因此本卡片只说明其中完整出现的 shared_ptr 规则。"
+  ],
+  "examples": [
+    "void useShared(shared_ptr<Simple> resource) { /* 函数体内与调用方共享资源 */ }",
+    "调用 useShared(mySharedPtr) 时，函数参数是一个新的 shared_ptr 实例；函数返回后该参数销毁，但 mySharedPtr 仍然可以继续拥有资源。"
+  ],
+  "misconceptions": [
+    "按值传递 shared_ptr 会复制被管理对象；实际上只会复制 shared_ptr 实例并共享资源。",
+    "函数参数销毁后资源一定被释放；只有不存在其他 shared_ptr 所有者时才会释放。",
+    "任何接收指针的函数都应该接受智能指针；原文限定为涉及所有权转移或共享的情况。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "函数需要共享 shared_ptr 的所有权时，应如何声明参数？",
+      "a": "应按值传递 shared_ptr，例如 void useShared(shared_ptr<Simple> resource)。"
+    },
+    {
+      "q": "按值传递 shared_ptr 后，函数返回时会发生什么？",
+      "a": "函数参数这个 shared_ptr 实例被销毁，引用计数减少；如果调用方仍有其他 shared_ptr，资源不会被释放。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "shared_ptr 的共享所有权与基本用法",
+    "shared_ptr 的引用计数机制"
+  ],
+  "source_pages": [
+    224,
+    224
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "477_按值传递_shared_ptr_以共享所有权",
+  "_chunk_pages": [
+    221,
+    224
+  ]
+}

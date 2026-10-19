@@ -1,0 +1,38 @@
+{
+  "title": "flex-basis",
+  "definition": "flex-basis 用于设置项目在主轴上的空间，即项目在主轴方向上的基准尺寸。",
+  "key_points": [
+    "作用对象是项目（子元素）",
+    "设置的是主轴上的空间",
+    "属于项目的属性"
+  ],
+  "examples": [
+    "flex-basis: 200px;"
+  ],
+  "misconceptions": [
+    "它设置的是交叉轴空间；原文说明是主轴上的空间",
+    "它是容器属性；原文说它是项目属性"
+  ],
+  "qa_pairs": [
+    {
+      "q": "flex-basis 用于设置项目的什么？",
+      "a": "设置项目在主轴上的空间。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "弹性盒布局基础",
+    "主轴与交叉轴"
+  ],
+  "source_pages": [
+    157,
+    160
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "228_flex_basis",
+  "_chunk_pages": [
+    157,
+    160
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "title": "不同周期duration的运算与自动转换",
+  "definition": "不同周期的`duration`可以进行比较和加法等运算。进行运算时，C++会根据周期对时间进行统一换算；运算结果还可以保存到指定周期的duration中。例如，分钟duration与秒duration相加后，可以保存为分钟，也可以保存为秒。",
+  "key_points": [
+    "比较不同周期的duration时，比较的是它们表示的实际时间，而不是原始滴答数。",
+    "加法结果可以转换为目标duration的周期。",
+    "保存到浮点型分钟duration时，可以保留小数分钟；保存到整数型秒duration时，结果可以表示为整数秒。",
+    "对duration进行自增、自减、乘法、除法等运算时，运算对象仍遵循其自身的滴答单位。"
+  ],
+  "examples": [
+    "`std::chrono::duration<long, std::ratio<60>> d3{10};`表示10分钟，`std::chrono::duration<long> d4{14};`表示14秒；因此`d3 > d4`为真。",
+    "`++d4;`把14秒增加为15秒；`d4 *= 2;`把15秒变为30秒。",
+    "若`d3`为10分钟、`d4`为30秒，则可以得到：`std::chrono::duration<double, std::ratio<60>> d5{d3 + d4};`，其值为10.5分钟；也可以得到：`std::chrono::duration<long> d6{d3 + d4};`，其值为630秒。"
+  ],
+  "misconceptions": [
+    "比较duration时不能直接比较滴答数；必须考虑各自的周期。",
+    "10分钟加30秒不是10.30分钟，而是10.5分钟。",
+    "将结果保存为分钟或秒不会改变实际时间，只会改变表示单位。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "10分钟和14秒比较时，哪一个更大？",
+      "a": "10分钟更大，因此表示10分钟的duration大于表示14秒的duration。"
+    },
+    {
+      "q": "10分钟加30秒保存为秒时是多少？",
+      "a": "是630秒。保存为浮点分钟时是10.5分钟。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "std::chrono::duration的时间周期表示与基本构造"
+  ],
+  "source_pages": [
+    686,
+    686
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1431_不同周期duration的运算与自动转换",
+  "_chunk_pages": [
+    685,
+    688
+  ]
+}

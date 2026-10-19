@@ -1,0 +1,50 @@
+{
+  "title": "用层次结构表示类型或组织关系",
+  "definition": "第176页展示了多个层次结构示例：音乐分类、公司组织结构以及动物类型分类。这些图形通过从上到下的层级关系表示一般概念与更具体概念之间的关系，例如 `Music` 下有 `Rock` 和 `Jazz`，`Animal` 下有 `Monkey`、`Giraffe`、`Penguin`、`Kangaroo` 等。页面还展示了更深层的动物分类，如 `BigCat`、`WaterAnimal` 和 `Marsupial`，并在括号中标出 `Dolphin`、`Penguin` 等具体类型。",
+  "key_points": [
+    "音乐示例体现分类层次：`Music` 可细分为 `Rock`、`Jazz` 等；`Rock` 下还列出 `Blues`、`Folk Rock`、`Smooth Jazz` 等词条，但原图的精确连线关系需核实。",
+    "组织结构示例从 `CEO` 向下分为 `VP of Sales` 和 `VP of Engineering`，再继续连接到销售、预售、项目负责人和工程师等职位。",
+    "动物示例以 `Animal` 为上层概念，并列出 `Monkey`、`Giraffe`、`Penguin`、`Kangaroo`、`Lion`、`Panther` 等更具体类型。",
+    "页面还显示 `BigCat`、`WaterAnimal`、`Marsupial` 等中间分类，说明一个具体动物类型可能处于多层分类结构中。"
+  ],
+  "examples": [
+    "音乐层次可概括写为：$$Music\\rightarrow\\{Rock, Jazz\\}$$",
+    "组织层次可概括写为：$$CEO\\rightarrow\\{VP\\ of\\ Sales,VP\\ of\\ Engineering\\}$$",
+    "动物分类中可见的上层关系包括：$$Animal\\rightarrow\\{Monkey,Giraffe,Penguin,Kangaroo\\}$$以及更深层的分类词 `BigCat`、`WaterAnimal`、`Marsupial`。"
+  ],
+  "misconceptions": [
+    "这些图展示的是层次关系示例，不能仅凭页面片段断定每条连线都表示 C++ 的公有继承。",
+    "不能把组织结构中的上下级关系直接等同于面向对象中的类继承关系。",
+    "原文 OCR 中部分音乐名称和动物分类的连线、层级及拼写不清晰，不能据此补全完整分类树。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "第176页用哪些类型的示例展示了层次结构？",
+      "a": "展示了音乐分类、公司组织结构和动物分类三类层次结构示例。"
+    },
+    {
+      "q": "动物层次结构中可辨认出的上层类型是什么？",
+      "a": "可辨认出的上层类型是 `Animal`。"
+    },
+    {
+      "q": "公司组织结构示例中 CEO 下方列出了哪些职位层级？",
+      "a": "图中可辨认出 `VP of Sales` 和 `VP of Engineering`，下方还包括销售助理、预售、项目负责人和工程师等职位。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "分类层次结构",
+    "面向对象中的类与对象"
+  ],
+  "source_pages": [
+    173,
+    176
+  ],
+  "needs_verification": true,
+  "verify_query": "《C++20高级编程》第5版 第176页 Music Rock Jazz CEO VP of Sales Animal Monkey Giraffe Penguin Kangaroo BigCat WaterAnimal Marsupial 原图",
+  "concept_id": "244_用层次结构表示类型或组织关系",
+  "_chunk_pages": [
+    173,
+    176
+  ]
+}

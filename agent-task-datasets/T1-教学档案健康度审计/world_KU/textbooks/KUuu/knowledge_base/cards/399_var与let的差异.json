@@ -1,0 +1,42 @@
+{
+  "title": "var与let的差异",
+  "definition": "原文从提升、初始化、声明前访问结果、作用域和重复声明五个方面对比了 var 和 let：var 会提升并初始化为 undefined，作用域是函数作用域，允许重复声明；let 一般认为不提升，提升后不初始化处于 TDZ，声明前访问报 ReferenceError，作用域是块级作用域，重复声明会报错。",
+  "key_points": [
+    "var：是提升、初始化为 undefined、声明前访问为 undefined、函数作用域、允许重复声明。",
+    "let：一般认为不提升、处于 TDZ、声明前访问报 ReferenceError、块级作用域、重复声明报错。"
+  ],
+  "examples": [
+    "var x = 1; // 函数作用域，允许重复声明",
+    "let y = 2; // 块级作用域，重复声明报错"
+  ],
+  "misconceptions": [
+    "误以为 var 和 let 只有写法不同，行为没有本质差异。",
+    "误以为 let 只是不能重复赋值。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "var 和 let 在作用域上有什么区别？",
+      "a": "var 是函数作用域，let 是块级作用域。"
+    },
+    {
+      "q": "var 和 let 在重复声明上有什么区别？",
+      "a": "var 允许重复声明，let 重复声明会报错。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "var声明提升",
+    "let声明与TDZ"
+  ],
+  "source_pages": [
+    273,
+    276
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "399_var与let的差异",
+  "_chunk_pages": [
+    273,
+    276
+  ]
+}

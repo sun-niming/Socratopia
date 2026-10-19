@@ -1,0 +1,47 @@
+{
+  "title": "std::span是连续元素序列的非拥有视图",
+  "definition": "std::span是C++20引入、定义在<span>头文件中的连续元素序列视图。它可以用一个函数统一处理std::vector、C风格数组和任意大小的std::array。span不拥有也不复制底层数据，基本上只保存指向序列首元素的指针以及元素数量，因此复制成本很低，通常按值传递。",
+  "key_points": [
+    "std::span可以表示vector、C风格数组或std::array的全部元素，也可以表示其中一部分连续元素。",
+    "span不负责管理底层数据的生命周期，底层序列必须在span使用期间保持有效。",
+    "span提供类似容器的接口，包括begin()、end()、rbegin()、rend()、front()、back()、operator[]、data()、size()和empty()。",
+    "适合将函数参数声明为统一的序列视图，避免分别为vector、数组和std::array编写多个重载。"
+  ],
+  "examples": [
+    "统一打印函数：\nvoid print(std::span<int> values) {\n    for (const auto& value : values) {\n        std::cout << value << ' ';\n    }\n    std::cout << std::endl;\n}",
+    "该函数可以接收：\nstd::vector v{11, 22, 33, 44, 55, 66};\nstd::array arr{5, 4, 3, 2, 1};\nint carr[]{9, 8, 7, 6, 5};\nprint(v);\nprint(arr);\nprint(carr);"
+  ],
+  "misconceptions": [
+    "std::span不是容器，不拥有底层元素，也不会复制元素。",
+    "span本身不能延长或缩短底层序列；它只是描述一段已有的连续元素。",
+    "span能否安全使用取决于底层数据的生命周期，不能让span长期指向已经销毁的容器或数组。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "std::span的主要作用是什么？",
+      "a": "它提供一个不拥有数据的连续元素序列视图，使同一个函数能够处理vector、C风格数组和任意大小的std::array。"
+    },
+    {
+      "q": "复制一个std::span会复制底层元素吗？",
+      "a": "不会。span只复制视图信息，例如首元素指针和元素数量，不复制底层数据。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "std::vector",
+    "std::array",
+    "C风格数组",
+    "连续内存序列"
+  ],
+  "source_pages": [
+    573,
+    574
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1183_std_span是连续元素序列的非拥有视图",
+  "_chunk_pages": [
+    573,
+    576
+  ]
+}

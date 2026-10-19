@@ -1,0 +1,51 @@
+{
+  "title": "常见错误响应码",
+  "definition": "当请求或资源出现不同类型的问题时，服务器应返回匹配的 HTTP 错误状态码。原文给出 400、403、404、405 四种常见响应：分别对应请求格式错误、禁止访问、文件不存在、方法不允许。",
+  "key_points": [
+    "`400 Bad Request`：请求行不完整、URL 编码非法、路径不以 `/` 开头。",
+    "`403 Forbidden`：目录穿越、非普通文件、`realpath` 后不在 root 内。",
+    "`404 Not Found`：文件不存在，和非法路径不是一回事。",
+    "`405 Method Not Allowed`：如 POST、PUT、DELETE、HEAD 等方法不可用时返回。",
+    "`405` 可以加 `Allow: GET`，告诉客户端服务器允许的方法。"
+  ],
+  "examples": [
+    "HTTP/1.1 400 Bad Request\nContent-Type: text/html; charset=utf-8\nContent-Length: 80\nConnection: close\n\n<html><body><h1>400 Bad Request</h1></body></html>",
+    "HTTP/1.1 403 Forbidden\nContent-Type: text/html; charset=utf-8\nContent-Length: 78\nConnection: close\n\n<html><body><h1>403 Forbidden</h1></body></html>",
+    "HTTP/1.1 404 Not Found\nContent-Type: text/html; charset=utf-8\nContent-Length: 76\nConnection: close\n\n<html><body><h1>404 Not Found</h1></body></html>",
+    "HTTP/1.1 405 Method Not Allowed\nContent-Type: text/html; charset=utf-8\nContent-Length: 96\nConnection: close\nAllow: GET\n\n<html><body><h1>405 Method Not Allowed</h1></body></html>"
+  ],
+  "misconceptions": [
+    "把“文件不存在”和“路径非法/越权访问”混为一谈。",
+    "认为所有非 GET 请求都应该返回 400。",
+    "认为 405 不需要说明允许的方法。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "请求行不完整或 URL 编码非法时，应该返回什么状态码？",
+      "a": "`400 Bad Request`。"
+    },
+    {
+      "q": "目录穿越或 `realpath` 后不在 root 内时，应该返回什么状态码？",
+      "a": "`403 Forbidden`。"
+    },
+    {
+      "q": "当客户端使用 POST、PUT、DELETE、HEAD 等不被允许的方法时，应该返回什么状态码？",
+      "a": "`405 Method Not Allowed`，并可附加 `Allow: GET`。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "HTTP 状态码"
+  ],
+  "source_pages": [
+    117,
+    120
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "197_常见错误响应码",
+  "_chunk_pages": [
+    117,
+    120
+  ]
+}

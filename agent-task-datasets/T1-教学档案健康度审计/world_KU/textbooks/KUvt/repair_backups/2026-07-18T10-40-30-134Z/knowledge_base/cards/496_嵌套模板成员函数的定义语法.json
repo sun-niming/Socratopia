@@ -1,0 +1,45 @@
+{
+  "title": "嵌套模板成员函数的定义语法",
+  "definition": "当类模板包含一个自身也是模板的成员函数时，类外定义需要写两层模板声明：第一层声明类模板参数，第二层声明成员函数模板参数。对于 `Grid<T>` 中的 `template<typename E> Grid(const Grid<E>& src)`，正确形式是 `template<typename T> template<typename E> Grid<T>::Grid(const Grid<E>& src)`。",
+  "key_points": [
+    "第一层 `template<typename T>` 对应外层类模板 `Grid<T>`。",
+    "第二层 `template<typename E>` 对应成员函数或成员构造函数自身的模板参数。",
+    "原文明确指出，写成 `template<typename T, typename E>` 对这种嵌套模板构造函数是错误的。",
+    "成员函数模板的类外定义必须同时限定外层模板和内层模板。"
+  ],
+  "examples": [
+    "正确的构造函数定义：`template<typename T> template<typename E> Grid<T>::Grid(const Grid<E>& src) { /* ... */ }`",
+    "错误形式：`template<typename T, typename E> Grid<T>::Grid(const Grid<E>& src) { /* ... */ }`；原文将这种写法标记为嵌套模板构造函数的错误写法。"
+  ],
+  "misconceptions": [
+    "两个模板参数并不总能合并到同一个 `template<...>` 声明中；外层类模板和内层成员模板必须分别声明。",
+    "第二个 `template<typename E>` 不是重复声明 `T`，而是声明源对象 `Grid<E>` 所使用的独立类型参数。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么 `Grid<T>` 的模板构造函数类外定义需要两个 `template` 声明？",
+      "a": "因为它同时属于一个类模板，并且自身也是成员模板：第一层声明 `T`，第二层声明 `E`。"
+    },
+    {
+      "q": "下面哪种形式正确：`template<typename T, typename E>`，还是 `template<typename T> template<typename E>`？",
+      "a": "对于原文所示的嵌套模板构造函数，正确形式是 `template<typename T> template<typename E>`。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "类模板成员函数类外定义",
+    "函数模板",
+    "模板参数作用域"
+  ],
+  "source_pages": [
+    387,
+    388
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "496_嵌套模板成员函数的定义语法",
+  "_chunk_pages": [
+    385,
+    388
+  ]
+}

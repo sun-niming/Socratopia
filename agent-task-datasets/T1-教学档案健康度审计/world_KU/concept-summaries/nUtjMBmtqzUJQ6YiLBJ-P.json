@@ -1,0 +1,880 @@
+{
+  "conversationId": "nUtjMBmtqzUJQ6YiLBJ-P",
+  "generatedAt": 1791217616656,
+  "pagesRange": null,
+  "sections": [
+    {
+      "type": "tldr",
+      "content": "本节课围绕「1.3.1 处理 web 请求：控制器与首页」展开，控制器是一个处理请求、并用某种信息作出回应的类。。"
+    },
+    {
+      "type": "concepts",
+      "items": [
+        {
+          "name": "1.3.1 处理 web 请求：控制器与首页",
+          "body": "- 控制器是一个处理请求、并用某种信息作出回应的类。",
+          "sourceMessageIndexes": [
+            1
+          ]
+        },
+        {
+          "name": "pom.xml 与 starter 依赖",
+          "body": "- <parent> 声明 spring-boot-starter-parent 作为父 POM，版本号 2.5.3。",
+          "sourceMessageIndexes": [
+            3
+          ]
+        },
+        {
+          "name": "引导类与 @SpringBootApplication",
+          "body": "- @SpringBootApplication 是复合注解，叠了 @SpringBootConfiguration、@EnableAutoConfiguration、@ComponentScan 三个。",
+          "sourceMessageIndexes": [
+            5,
+            7
+          ]
+        },
+        {
+          "name": "测试应用程序",
+          "body": "- 手动测试：先 ./mvnw package 打包，再 java -jar 跑，或者用 ./mvnw spring-boot:run；教材说手动测试有人为因素，会出错、也不一致。",
+          "sourceMessageIndexes": [
+            7,
+            8,
+            9
+          ]
+        },
+        {
+          "name": "主页视图模板与静态资源",
+          "body": "- 1.3 节给应用加主页会产出两样东西：一个处理请求的控制器类，和一个定义页面外观的视图模板，外加一份测试。",
+          "sourceMessageIndexes": [
+            9,
+            10,
+            11
+          ]
+        },
+        {
+          "name": "@WebMvcTest 与控制器测试",
+          "body": "- 测试 web 应用在断言 HTML 内容时比较棘手，Spring 给了测试支持。",
+          "sourceMessageIndexes": [
+            11,
+            12,
+            13
+          ]
+        },
+        {
+          "name": "@WebMvcTest 与 @SpringBootTest 的加载范围",
+          "body": "- @WebMvcTest 是切片测试注解，只装配 web 层的东西。",
+          "sourceMessageIndexes": [
+            12,
+            13,
+            14,
+            15
+          ]
+        },
+        {
+          "name": "运行应用与嵌入式 Tomcat",
+          "body": "- 教材给出的测试命令是 ./mvnw test，也可以在 IDE 里跑。",
+          "sourceMessageIndexes": [
+            15,
+            17
+          ]
+        },
+        {
+          "name": "starter 依赖与嵌入式 Tomcat 的来源",
+          "body": "- 在 pom.xml 里声明 Web 和 Thymeleaf 启动器依赖，会带来一串东西，包括 Spring MVC 框架和嵌入式 Tomcat。",
+          "sourceMessageIndexes": [
+            18,
+            19
+          ]
+        },
+        {
+          "name": "Spring Boot DevTools",
+          "body": "- DevTools 提供四件事：代码更改时自动重启应用；浏览器资源变化时自动刷新浏览器；自动禁用模板缓存；使用 H2 数据库时自动开启 H2 控制台。",
+          "sourceMessageIndexes": [
+            19,
+            20,
+            21
+          ]
+        },
+        {
+          "name": "模板缓存与浏览器自动刷新",
+          "body": "- Thymeleaf、FreeMarker 这类模板引擎默认会缓存模板解析结果。",
+          "sourceMessageIndexes": [
+            21,
+            22,
+            23
+          ]
+        },
+        {
+          "name": "第一章回顾与自动配置",
+          "body": "- 教材第 34 页回顾：用 Initializr 建项目、写控制器处理主页请求、定义视图模板、写测试验证。",
+          "sourceMessageIndexes": [
+            23,
+            24,
+            25
+          ]
+        },
+        {
+          "name": "第二章开头：展示信息与 MVC 分工",
+          "body": "- Taco Cloud 想让顾客自己设计玉米卷，从一堆配料里挑，需要一个页面把可选的配料列出来。",
+          "sourceMessageIndexes": [
+            25
+          ]
+        },
+        {
+          "name": "Spring Boot 自动配置的触发条件",
+          "body": "- 自动配置通过观察 classpath 上是否存在相应库，并配合条件注解来判断是否进行配置。",
+          "sourceMessageIndexes": [
+            24,
+            25
+          ]
+        },
+        {
+          "name": "Taco Cloud 展示配料页面的分工",
+          "body": "- 教材强调配料会变化，不应硬编码到 HTML 页面中。",
+          "sourceMessageIndexes": [
+            25
+          ]
+        },
+        {
+          "name": "俯瞰 Spring 风景线与 Spring 核心框架",
+          "body": "- Spring Initializr 完整版表单上有一百多个依赖项。",
+          "sourceMessageIndexes": [
+            26,
+            27,
+            28,
+            29
+          ]
+        },
+        {
+          "name": "Spring Boot 的两大本事与四样附加能力",
+          "body": "- Spring Boot 的两大本事是起步依赖 (starter) 和自动配置。",
+          "sourceMessageIndexes": [
+            29,
+            30,
+            31
+          ]
+        },
+        {
+          "name": "Spring Data",
+          "body": "- Spring Data 把对数据存储的访问抽象成简单的 Java 接口。",
+          "sourceMessageIndexes": [
+            31,
+            32,
+            33
+          ]
+        },
+        {
+          "name": "Spring Security",
+          "body": "- 教材判断应用安全性一直重要，而且一天比一天重要。",
+          "sourceMessageIndexes": [
+            33,
+            34,
+            35
+          ]
+        },
+        {
+          "name": "Spring Integration 与 Spring Batch",
+          "body": "- 大多数应用迟早要跟别的应用集成，甚至跟同一个应用里的其他组件集成。",
+          "sourceMessageIndexes": [
+            35,
+            36,
+            37
+          ]
+        },
+        {
+          "name": "Spring Cloud",
+          "body": "- 应用不再被当成单个部署单元来开发，而是拆成几个各自独立部署的小单元，叫微服务 (microservices)。",
+          "sourceMessageIndexes": [
+            37
+          ]
+        },
+        {
+          "name": "Spring Native",
+          "body": "- Spring Native 是实验性项目。",
+          "sourceMessageIndexes": [
+            37,
+            38,
+            39
+          ]
+        },
+        {
+          "name": "1.5 小结：Spring、Spring Boot、Spring Initializr、bean 装配",
+          "body": "- Spring 的目标是让开发人员轻松应对建 web 应用、用数据库、保护应用、用微服务等挑战",
+          "sourceMessageIndexes": [
+            39
+          ]
+        },
+        {
+          "name": "为什么设计玉米卷页面不能只靠静态 HTML",
+          "body": "- 用户的第一印象来自界面，很多应用里这个界面就是浏览器里的 web 应用",
+          "sourceMessageIndexes": [
+            39,
+            40,
+            42,
+            43
+          ]
+        },
+        {
+          "name": "2.1 展示信息与 Spring MVC 请求流程",
+          "body": "- Taco Cloud 的目标包括让顾客表达创意，从丰富的配料里设计出定制款",
+          "sourceMessageIndexes": [
+            43,
+            44,
+            45
+          ]
+        },
+        {
+          "name": "2.1.1 建立领域实体（Ingredient、Taco、TacoOrder）",
+          "body": "- 领域实体是应用所处理的主题领域，即影响应用理解的那些思想和概念",
+          "sourceMessageIndexes": [
+            45,
+            46,
+            47,
+            48,
+            49
+          ]
+        },
+        {
+          "name": "2.1.2 创建控制器类",
+          "body": "- 控制器是 Spring MVC 框架的主要参与者",
+          "sourceMessageIndexes": [
+            49
+          ]
+        },
+        {
+          "name": "TacoOrder 嵌套数据结构",
+          "body": "- tacos 是 List<Taco> 类型",
+          "sourceMessageIndexes": [
+            48,
+            49
+          ]
+        },
+        {
+          "name": "控制器的两类职责",
+          "body": "- 控制器是 Spring MVC 框架的主要参与者",
+          "sourceMessageIndexes": [
+            49,
+            51
+          ]
+        },
+        {
+          "name": "DesignTacoController 的需求",
+          "body": "- 需要一个简单的控制器",
+          "sourceMessageIndexes": [
+            49
+          ]
+        },
+        {
+          "name": "类级注解 @Slf4j / @Controller / @RequestMapping",
+          "body": "- @Slf4j 是 Lombok 注解，运行时自动生成一个 SLF4J 记录器",
+          "sourceMessageIndexes": [
+            51,
+            53
+          ]
+        },
+        {
+          "name": "方法级请求映射与表 2.1",
+          "body": "- @GetMapping 标在方法上指定由哪个 HTTP 动作触发",
+          "sourceMessageIndexes": [
+            53,
+            55
+          ]
+        },
+        {
+          "name": "showDesignForm() 与 Model",
+          "body": "- showDesignForm() 实际上没做多少工作，主要返回字符串 \"design\"",
+          "sourceMessageIndexes": [
+            55
+          ]
+        },
+        {
+          "name": "逻辑名到模板文件的转换",
+          "body": "- Spring 拿到逻辑名后按一套规则拼出真正的模板位置",
+          "sourceMessageIndexes": [
+            57
+          ]
+        },
+        {
+          "name": "视图技术选择与 Thymeleaf",
+          "body": "- Spring 给视图提供好几个选择：JSP、Thymeleaf、FreeMarker、Mustache、基于 Groovy 的模板",
+          "sourceMessageIndexes": [
+            57,
+            59
+          ]
+        },
+        {
+          "name": "Thymeleaf 模板语法 th:text 与 th:each",
+          "body": "- Thymeleaf 模板只是 HTML，外加一些额外的元素属性，用来指导模板渲染请求数据",
+          "sourceMessageIndexes": [
+            59
+          ]
+        },
+        {
+          "name": "Model 数据复制到请求属性",
+          "body": "- Spring 在把请求递给视图之前，会先把 Model 里的数据复制到请求属性中。",
+          "sourceMessageIndexes": [
+            59
+          ]
+        },
+        {
+          "name": "Thymeleaf 模板本质与 th:text",
+          "body": "- Thymeleaf 模板只是 HTML，外加一些额外元素属性，用来指导渲染请求数据。",
+          "sourceMessageIndexes": [
+            59
+          ]
+        },
+        {
+          "name": "th:each 与变量绑定",
+          "body": "- th:each 遍历集合，为集合里每个元素把那块 HTML 渲染一次。",
+          "sourceMessageIndexes": [
+            59
+          ]
+        },
+        {
+          "name": "wrap 集合含义与 ingredient.id 每圈不同",
+          "body": "- wrap 装的是某一类配料，即 WRAP 那一组玉米饼。",
+          "sourceMessageIndexes": [
+            61
+          ]
+        },
+        {
+          "name": "清单 2.5 完整 design-a-taco 页面结构",
+          "body": "- 整张模板是之前 <div> 片段的展开。",
+          "sourceMessageIndexes": [
+            61
+          ]
+        },
+        {
+          "name": "五个集合名来自 Ingredient.Type 枚举",
+          "body": "- 五个集合名不是模板里随手起的，是从 Ingredient 里定义的 Type 枚举流出来的。",
+          "sourceMessageIndexes": [
+            63
+          ]
+        },
+        {
+          "name": "启动应用与 HTTP 405 错误",
+          "body": "- 控制器和视图都齐了，可以启动应用。",
+          "sourceMessageIndexes": [
+            63
+          ]
+        },
+        {
+          "name": "2.2 处理表单提交与 @PostMapping",
+          "body": "- 需要补一个能接 POST 的处理方法。",
+          "sourceMessageIndexes": [
+            65
+          ]
+        },
+        {
+          "name": "表单字段与 Taco 属性的绑定卡点",
+          "body": "- 表单里 name 文本输入框对 Taco.name，类型 String，正好。",
+          "sourceMessageIndexes": [
+            65
+          ]
+        },
+        {
+          "name": "转换器与 ConversionService",
+          "body": "- 转换器里备着一张 id 到对象的映射表：键是配料 id，值是完整的 Ingredient 对象。",
+          "sourceMessageIndexes": [
+            67
+          ]
+        },
+        {
+          "name": "设计流程闭合",
+          "body": "- GET 到 /design：showDesignForm() 渲染出表单。",
+          "sourceMessageIndexes": [
+            67
+          ]
+        },
+        {
+          "name": "OrderController 与路径前缀接法",
+          "body": "- 第 59 页教材第一句点破：还没有一个控制器来处理 /orders/current 请求。",
+          "sourceMessageIndexes": [
+            67
+          ]
+        },
+        {
+          "name": "id到对象的映射表与Converter",
+          "body": "- 转换器（Converter）里备着一张id到对象的映射表，键是配料的id（如\"FLTO\"），值是完整的Ingredient对象",
+          "sourceMessageIndexes": [
+            66,
+            67
+          ]
+        },
+        {
+          "name": "Spring MVC自动调用ConversionService进行绑定",
+          "body": "- 不用在控制器里手动调转换器",
+          "sourceMessageIndexes": [
+            67
+          ]
+        },
+        {
+          "name": "OrderController（清单2.8）",
+          "body": "- 类上挂@Controller和@RequestMapping(\"/orders\")：这个控制器里所有请求处理方法，都处理以/orders开头的请求",
+          "sourceMessageIndexes": [
+            67
+          ]
+        },
+        {
+          "name": "类级前缀与完整路径的关系",
+          "body": "- 把\"/orders/current\"整条写在方法级上，照样能映射成功，不是非错不可",
+          "sourceMessageIndexes": [
+            68,
+            69
+          ]
+        },
+        {
+          "name": "orderForm.html表单action（清单2.9）",
+          "body": "- orderForm.html基本就是典型的HTML/Thymeleaf，没什么稀奇",
+          "sourceMessageIndexes": [
+            69,
+            70
+          ]
+        },
+        {
+          "name": "processOrder()与POST /orders（清单2.10）",
+          "body": "- 配对关系跟上一处一模一样：类级@RequestMapping(\"/orders\")加方法级@PostMapping，合起来就是接/orders的POST请求",
+          "sourceMessageIndexes": [
+            71
+          ]
+        },
+        {
+          "name": "表单提交落点规律",
+          "body": "- 表单提交的落点由action决定，不写就回显它自己的地址",
+          "sourceMessageIndexes": [
+            70,
+            71
+          ]
+        },
+        {
+          "name": "错误信息进入与缺失的验证",
+          "body": "- 第62页教师跑起来试了一遍（图2.4那张订单表单），随便填了些字段、按下Submit Order",
+          "sourceMessageIndexes": [
+            71,
+            72,
+            73
+          ]
+        },
+        {
+          "name": "验证实现方式对比（if/then vs Java Bean Validation）",
+          "body": "- 可以在processDesign()和processOrder()里堆一堆if/then，一个字段一个字段手动查",
+          "sourceMessageIndexes": [
+            73
+          ]
+        },
+        {
+          "name": "校验starter的版本差异",
+          "body": "- 教材紧跟着挂了个注：这是Spring Boot早期版本的情况",
+          "sourceMessageIndexes": [
+            73
+          ]
+        },
+        {
+          "name": "应用验证的四个步骤",
+          "body": "- 1. 工程里加上Spring校验starter",
+          "sourceMessageIndexes": [
+            73
+          ]
+        },
+        {
+          "name": "声明验证规则（清单2.11，@NotNull与@Size）",
+          "body": "- 第64页2.3.1声明验证规则，清单2.11给Taco类挂注解",
+          "sourceMessageIndexes": [
+            74,
+            75,
+            76,
+            77
+          ]
+        },
+        {
+          "name": "TacoOrder验证规则（清单2.12）",
+          "body": "- 第64页底到第65页，清单2.12把同一套手法用到TacoOrder上，分了两个档次",
+          "sourceMessageIndexes": [
+            77
+          ]
+        },
+        {
+          "name": "@NotNull 与 @Size 的分工",
+          "body": "- null 没有长度，@Size 无法对 null 进行长度判断",
+          "sourceMessageIndexes": [
+            76,
+            77
+          ]
+        },
+        {
+          "name": "@NotBlank 与 @NotNull 的区别",
+          "body": "- @NotBlank 来自 Hibernate Validator，不是标准 JSR-303 那批",
+          "sourceMessageIndexes": [
+            77,
+            78,
+            79
+          ]
+        },
+        {
+          "name": "TacoOrder 支付字段的专门验证注解",
+          "body": "- ccNumber 使用 @CreditCardNumber，声明该值必须能通过 Luhn 算法校验",
+          "sourceMessageIndexes": [
+            77
+          ]
+        },
+        {
+          "name": "控制器中 @Valid 与 Errors 执行验证",
+          "body": "- Taco 和 TacoOrder 上的注解只是声明，需要控制器指明何时执行检查",
+          "sourceMessageIndexes": [
+            79
+          ]
+        }
+      ]
+    },
+    {
+      "type": "notes",
+      "title": "学习轨迹",
+      "content": "- **误区**：把 starter 说成'无需管理，直接获得数据库服务'，误以为 starter 本身提供数据库服务。\n- **答对**：答出负责自动发现 @Controller 的是 @ComponentScan，机制是组件扫描并注册。\n- **答对**：空测试失败说明应用无法启动，至少系统初始化有问题。\n- **答对**：答出图标应放在 static/images 下。\n- **困惑**：把 @WebMvcTest 的作用答成'可以模拟 Spring MVC 机制'，混淆了 MockMvc 的模拟驱动与注解的加载范围。\n- **答对**：@WebMvcTest 可以模拟 Spring MVC 机制。\n- **答对**：测跟数据库打交道的 Service 类时 @WebMvcTest 不合适，因为不加载数据库相关的依赖。\n- **困惑**：Tomcat 是什么我先问一句。\n- **答对**：自带的 Tomcat 是 starter.web 依赖拉进来的。\n- **答对**：改动 pom.xml 加新依赖时 DevTools 自动重启不能生效，因为依赖类加载器没有重启。\n- **答对**：生产环境可以不用解析每个请求，节省性能，开发时需要即改即看。\n- **答对**：删掉 web starter 后自动配置不能配出嵌入式 Tomcat 和 Spring MVC，靠依赖和注解判断。\n- **答对**：自动配置靠的是依赖和注解，不是别的。\n- **理解转变**：在讨论 Spring 核心框架为后续项目提供什么时，学习者先说“框架”，随后在追问下修正为依赖注入和配置。\n- **误区**：学习者把“依赖注入”归为 Spring Boot 提供的能力，说 Boot 省掉的活是“依赖注入和配置”。\n- **答对**：学习者说 Spring Data 只写接口、不写实现时，问是谁把实现补齐并交到手里，回答“组件？”（方向对，但没说出容器和 DI）。\n- **答对**：学习者回答身份验证是验证访问者是否有资格继续访问页面，授权是授予一定访问权限给指定用户。\n- **答对**：学习者正确判断每天凌晨批量处理订单用 Spring Batch，订单一产生就立刻推送用 Spring Integration。\n- **答对**：批量集成的 Spring Batch，而一产生就需要推送的就是实时集成，需要 Spring Integration\n- **答对**：实验性项目不能直接放心用到生产环境\n- **答对**：玉米卷内容需要有变化\n- **答对**：玉米卷内容需要有变化，所以缺的是动态\n- **答对**：浏览器先向控制器发出请求，控制器获取和处理数据后交给视图模板，然后视图模板将 HTML 发给浏览器\n- **误区**：三大 final 属性是最终属性，“不运行更改”（应为不能更改）\n- **答对**：tacos 是 List<Taco> 类型的，穿两层数组可以得到 Ingredient\n- **答对**：tacos 是 List<Taco> 类型，穿两层数组可以得到 Ingredient\n- **困惑**：说第一类控制器需要视图帮忙，但理由说成\"通过向响应体写数据完成任务\"，把第二类的特征安到了第一类头上\n- **答对**：@Controller 触发的是组件扫描\n- **答对**：@PostMapping；因为 @GetMapping 会处理 GET 方式的请求，POST 方式提交表单的请求不能用它\n- **答对**：应该不是写死的，而是在 src 里面找逻辑名匹配的 html 文件\n- **答对**：将 Model 里的数据复制到请求属性中\n- **答对**：wrap 装的是某一类配料。\n- **答对**：${ingredient.id} 每圈渲染出来的值各不相同，因为循环是对同一类的配料进行列举，而不是对同一配料列举，配料 id 总归不同。\n- **答对**：五个集合名是从 Ingredient 类内定义的枚举类 Type 那里来的。\n- **答对**：需要补一个 POST 请求处理。\n- **答对**：转换器至少需要一张一个 id 到对象的映射表。\n- **答对**：一个id到对象的映射表\n- **困惑**：不行，省去了orders的url地址（说\"不行\"，但实际整条写在方法级上照样能映射成功）\n- **答对**：不写@{/orders}的话，表单的提交会被打给orders/current，但是我们需要在/orders处理这个表单请求\n- **答对**：数据合法性验证\n- **答对**：注解？（对声明规则形式的回答）\n- **答对**：挡不住，因为null甚至没有字数，所以min=5连判断都无法判断\n- **误区**：@NotNull守护的是非空，@Size守护的是正确格式（被纠正为：@NotNull守\"有没有\"即存在，@Size守\"多大\"即规模）\n- **答对**：null 没有字数，min=5 连判断都无法判断；@NotNull 守护非空，@Size 守护正确格式\n- **答对**：拦住不，@NotBlank 可以拦住，前者会允许通过，后者不会允许通过"
+    },
+    {
+      "type": "key-insight",
+      "content": "直接去找一个数据库的 starter 更省事，不用自己管理依赖。",
+      "sourceMessageIndexes": [
+        4
+      ]
+    },
+    {
+      "type": "open-question",
+      "content": "假如要测的是一个跟数据库打交道的 Service 类，@WebMvcTest 合适吗？为什么？"
+    },
+    {
+      "type": "review-questions",
+      "items": [
+        {
+          "question": "starter 的作用是什么？它本身提供库代码吗？",
+          "answer": "starter 本身通常没有任何库代码，它的作用是间接把别的库拉进来；好处是构建文件更小好管理、可按功能挑依赖、不用操心版本兼容。它不提供数据库服务，只是拉进兼容的库。"
+        },
+        {
+          "question": "@SpringBootApplication 由哪三个子注解构成，各自作用是什么？",
+          "answer": "@SpringBootConfiguration 标成配置类；@EnableAutoConfiguration 启用自动配置；@ComponentScan 启用组件扫描，让 @Component、@Controller、@Service 等类被自动发现注册成 bean。"
+        }
+      ]
+    }
+  ],
+  "generationMeta": {
+    "pipelineVersion": "post-class-v2",
+    "mode": "chunked",
+    "jobId": "pn_muvgo1vd8160309126ca",
+    "traceId": "tr_muvgo1vd549039cc53ff",
+    "sourceHash": "sha256:b356b04118cc3c83a7fb5c192e2ef888d571e56ba43492b3fd582369cfe4f3aa",
+    "sourceMessageCount": 81,
+    "chunkCount": 8,
+    "generatedAt": 1791217616656,
+    "decision": "degraded",
+    "quality": {
+      "score": 0.834,
+      "metrics": {
+        "topicCoverage": 1,
+        "learnerEvidenceCoverage": 1,
+        "explanationCoverage": 0.07692307692307693,
+        "sourceIntegrity": 1,
+        "reviewQuestionDiversity": 0.9122807017543859,
+        "structureValidity": 1,
+        "lengthFitness": 0.6252,
+        "duplicationRatio": 0,
+        "unsupportedTopicRatio": 0,
+        "lengthChars": 6874,
+        "conceptCount": 65,
+        "evidenceTopicCount": 69,
+        "chunkCompleteness": 1
+      }
+    },
+    "warnings": [
+      "degraded note is 6874 characters, still above the 4000-5000 target"
+    ],
+    "evidenceIndex": [
+      {
+        "name": "1.3.1 处理 web 请求：控制器与首页",
+        "sourceMessageIndexes": [
+          1
+        ]
+      },
+      {
+        "name": "pom.xml 与 starter 依赖",
+        "sourceMessageIndexes": [
+          3
+        ]
+      },
+      {
+        "name": "引导类与 @SpringBootApplication",
+        "sourceMessageIndexes": [
+          5,
+          7
+        ]
+      },
+      {
+        "name": "测试应用程序",
+        "sourceMessageIndexes": [
+          7,
+          8,
+          9
+        ]
+      },
+      {
+        "name": "主页视图模板与静态资源",
+        "sourceMessageIndexes": [
+          9,
+          10,
+          11
+        ]
+      },
+      {
+        "name": "@WebMvcTest 与控制器测试",
+        "sourceMessageIndexes": [
+          11,
+          12,
+          13
+        ]
+      },
+      {
+        "name": "@WebMvcTest 与 @SpringBootTest 的加载范围",
+        "sourceMessageIndexes": [
+          12,
+          13,
+          14,
+          15
+        ]
+      },
+      {
+        "name": "运行应用与嵌入式 Tomcat",
+        "sourceMessageIndexes": [
+          15,
+          17
+        ]
+      },
+      {
+        "name": "starter 依赖与嵌入式 Tomcat 的来源",
+        "sourceMessageIndexes": [
+          18,
+          19
+        ]
+      },
+      {
+        "name": "Spring Boot DevTools",
+        "sourceMessageIndexes": [
+          19,
+          20,
+          21
+        ]
+      },
+      {
+        "name": "模板缓存与浏览器自动刷新",
+        "sourceMessageIndexes": [
+          21,
+          22,
+          23
+        ]
+      },
+      {
+        "name": "第一章回顾与自动配置",
+        "sourceMessageIndexes": [
+          23,
+          24,
+          25
+        ]
+      },
+      {
+        "name": "第二章开头：展示信息与 MVC 分工",
+        "sourceMessageIndexes": [
+          25
+        ]
+      },
+      {
+        "name": "Spring Boot 自动配置的触发条件",
+        "sourceMessageIndexes": [
+          24,
+          25
+        ]
+      },
+      {
+        "name": "Taco Cloud 展示配料页面的分工",
+        "sourceMessageIndexes": [
+          25
+        ]
+      },
+      {
+        "name": "俯瞰 Spring 风景线与 Spring 核心框架",
+        "sourceMessageIndexes": [
+          26,
+          27,
+          28,
+          29
+        ]
+      },
+      {
+        "name": "Spring Boot 的两大本事与四样附加能力",
+        "sourceMessageIndexes": [
+          29,
+          30,
+          31
+        ]
+      },
+      {
+        "name": "Spring Data",
+        "sourceMessageIndexes": [
+          31,
+          32,
+          33
+        ]
+      },
+      {
+        "name": "Spring Security",
+        "sourceMessageIndexes": [
+          33,
+          34,
+          35
+        ]
+      },
+      {
+        "name": "Spring Integration 与 Spring Batch",
+        "sourceMessageIndexes": [
+          35,
+          36,
+          37
+        ]
+      },
+      {
+        "name": "Spring Cloud",
+        "sourceMessageIndexes": [
+          37
+        ]
+      },
+      {
+        "name": "Spring Native",
+        "sourceMessageIndexes": [
+          37
+        ]
+      },
+      {
+        "name": "Spring Batch 与 Spring Integration 的区别",
+        "sourceMessageIndexes": [
+          36,
+          37
+        ]
+      },
+      {
+        "name": "Spring Cloud",
+        "sourceMessageIndexes": [
+          37
+        ]
+      },
+      {
+        "name": "Spring Native",
+        "sourceMessageIndexes": [
+          37,
+          38,
+          39
+        ]
+      },
+      {
+        "name": "1.5 小结：Spring、Spring Boot、Spring Initializr、bean 装配",
+        "sourceMessageIndexes": [
+          39
+        ]
+      },
+      {
+        "name": "为什么设计玉米卷页面不能只靠静态 HTML",
+        "sourceMessageIndexes": [
+          39,
+          40,
+          42,
+          43
+        ]
+      },
+      {
+        "name": "2.1 展示信息与 Spring MVC 请求流程",
+        "sourceMessageIndexes": [
+          43,
+          44,
+          45
+        ]
+      },
+      {
+        "name": "2.1.1 建立领域实体（Ingredient、Taco、TacoOrder）",
+        "sourceMessageIndexes": [
+          45,
+          46,
+          47,
+          48,
+          49
+        ]
+      },
+      {
+        "name": "2.1.2 创建控制器类",
+        "sourceMessageIndexes": [
+          49
+        ]
+      },
+      {
+        "name": "TacoOrder 嵌套数据结构",
+        "sourceMessageIndexes": [
+          48,
+          49
+        ]
+      },
+      {
+        "name": "控制器的两类职责",
+        "sourceMessageIndexes": [
+          49,
+          51
+        ]
+      },
+      {
+        "name": "DesignTacoController 的需求",
+        "sourceMessageIndexes": [
+          49
+        ]
+      },
+      {
+        "name": "类级注解 @Slf4j / @Controller / @RequestMapping",
+        "sourceMessageIndexes": [
+          51,
+          53
+        ]
+      },
+      {
+        "name": "方法级请求映射与表 2.1",
+        "sourceMessageIndexes": [
+          53,
+          55
+        ]
+      },
+      {
+        "name": "showDesignForm() 与 Model",
+        "sourceMessageIndexes": [
+          55
+        ]
+      },
+      {
+        "name": "逻辑名到模板文件的转换",
+        "sourceMessageIndexes": [
+          57
+        ]
+      },
+      {
+        "name": "视图技术选择与 Thymeleaf",
+        "sourceMessageIndexes": [
+          57,
+          59
+        ]
+      },
+      {
+        "name": "Thymeleaf 模板语法 th:text 与 th:each",
+        "sourceMessageIndexes": [
+          59
+        ]
+      },
+      {
+        "name": "Model 数据复制到请求属性",
+        "sourceMessageIndexes": [
+          59
+        ]
+      }
+    ],
+    "degradedReason": "schema_invalid"
+  }
+}

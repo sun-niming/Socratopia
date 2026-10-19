@@ -1,0 +1,1533 @@
+{
+  "textbook": "Linux.pdf",
+  "title": "Linux",
+  "lang": "zh",
+  "built_at": "2026-06-21T07:35:14.919Z",
+  "model": "gpt-5.4",
+  "vision_fallback": null,
+  "format": "pdf",
+  "card_count": 152,
+  "needs_verification_count": 7,
+  "cards": [
+    {
+      "concept_id": "001_linux常用命令的学习范围",
+      "title": "Linux常用命令的学习范围",
+      "difficulty": 1,
+      "source_pages": [
+        1,
+        4
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "002_学习linux命令的要点",
+      "title": "学习Linux命令的要点",
+      "difficulty": 1,
+      "source_pages": [
+        1,
+        4
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "003_linux命令的基本格式",
+      "title": "Linux命令的基本格式",
+      "difficulty": 1,
+      "source_pages": [
+        1,
+        4
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "004_命令名与大小写敏感",
+      "title": "命令名与大小写敏感",
+      "difficulty": 1,
+      "source_pages": [
+        1,
+        4
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "005_选项_开关_的作用与形式",
+      "title": "选项（开关）的作用与形式",
+      "difficulty": 1,
+      "source_pages": [
+        1,
+        4
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "006_参数的作用与特殊字符处理",
+      "title": "参数的作用与特殊字符处理",
+      "difficulty": 1,
+      "source_pages": [
+        1,
+        4
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "007_命令执行结果的整数返回值",
+      "title": "命令执行结果的整数返回值",
+      "difficulty": 2,
+      "source_pages": [
+        1,
+        4
+      ],
+      "needs_verification": true
+    },
+    {
+      "concept_id": "008_man_命令的作用与基本格式",
+      "title": "man 命令的作用与基本格式",
+      "difficulty": 1,
+      "source_pages": [
+        5,
+        8
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "009_man_命令的_a_与_s_选项",
+      "title": "man 命令的 -a 与 -s 选项",
+      "difficulty": 1,
+      "source_pages": [
+        5,
+        8
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "010_info_命令的作用",
+      "title": "info 命令的作用",
+      "difficulty": 1,
+      "source_pages": [
+        5,
+        8
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "011_命令帮助的_help_与_help_方式",
+      "title": "命令帮助的 help 与 --help 方式",
+      "difficulty": 1,
+      "source_pages": [
+        5,
+        8
+      ],
+      "needs_verification": true
+    },
+    {
+      "concept_id": "012_linux_文件命名规则",
+      "title": "Linux 文件命名规则",
+      "difficulty": 1,
+      "source_pages": [
+        5,
+        8
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "013_linux_常见文件类型及标识",
+      "title": "Linux 常见文件类型及标识",
+      "difficulty": 1,
+      "source_pages": [
+        5,
+        8
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "014_linux_文件系统的树形目录结构与挂载点",
+      "title": "Linux 文件系统的树形目录结构与挂载点",
+      "difficulty": 2,
+      "source_pages": [
+        5,
+        8
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "015_linux根目录与常见系统目录_第1组",
+      "title": "Linux根目录与常见系统目录（第1组）",
+      "difficulty": 1,
+      "source_pages": [
+        9,
+        12
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "016_linux常见系统目录_第2组",
+      "title": "Linux常见系统目录（第2组）",
+      "difficulty": 1,
+      "source_pages": [
+        9,
+        12
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "017_用户主目录",
+      "title": "用户主目录",
+      "difficulty": 1,
+      "source_pages": [
+        9,
+        12
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "018_当前目录与目录层级标记",
+      "title": "当前目录与目录层级标记",
+      "difficulty": 1,
+      "source_pages": [
+        9,
+        12
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "019_通配符_的匹配规则",
+      "title": "通配符*的匹配规则",
+      "difficulty": 1,
+      "source_pages": [
+        9,
+        12
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "020_通配符_的匹配规则",
+      "title": "通配符?的匹配规则",
+      "difficulty": 1,
+      "source_pages": [
+        9,
+        12
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "021_字符组通配符_与取反符号",
+      "title": "字符组通配符[]与取反符号!",
+      "difficulty": 2,
+      "source_pages": [
+        9,
+        12
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "022_引号会阻止shell展开通配符",
+      "title": "引号会阻止Shell展开通配符",
+      "difficulty": 2,
+      "source_pages": [
+        9,
+        12
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "023_ls命令",
+      "title": "ls命令",
+      "difficulty": 1,
+      "source_pages": [
+        13,
+        16
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "024_pwd命令",
+      "title": "pwd命令",
+      "difficulty": 1,
+      "source_pages": [
+        13,
+        16
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "025_mkdir命令",
+      "title": "mkdir命令",
+      "difficulty": 1,
+      "source_pages": [
+        13,
+        16
+      ],
+      "needs_verification": true
+    },
+    {
+      "concept_id": "026_rmdir命令",
+      "title": "rmdir命令",
+      "difficulty": 1,
+      "source_pages": [
+        13,
+        16
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "027_cd命令",
+      "title": "cd命令",
+      "difficulty": 1,
+      "source_pages": [
+        13,
+        16
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "028_mv命令",
+      "title": "mv命令",
+      "difficulty": 1,
+      "source_pages": [
+        13,
+        16
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "029_rm命令",
+      "title": "rm命令",
+      "difficulty": 1,
+      "source_pages": [
+        13,
+        16
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "030_cp命令复制文件",
+      "title": "cp命令复制文件",
+      "difficulty": 1,
+      "source_pages": [
+        17,
+        20
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "031_cp的_r或_r递归复制选项",
+      "title": "cp的-r或-R递归复制选项",
+      "difficulty": 1,
+      "source_pages": [
+        17,
+        20
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "032_cp的_a保留属性选项",
+      "title": "cp的-a保留属性选项",
+      "difficulty": 1,
+      "source_pages": [
+        17,
+        20
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "033_find命令搜索文件",
+      "title": "find命令搜索文件",
+      "difficulty": 1,
+      "source_pages": [
+        17,
+        20
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "034_find的_name按名称查找",
+      "title": "find的-name按名称查找",
+      "difficulty": 1,
+      "source_pages": [
+        17,
+        20
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "035_find的_type与_exec选项",
+      "title": "find的-type与-exec选项",
+      "difficulty": 2,
+      "source_pages": [
+        17,
+        20
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "036_文件内容显示命令组",
+      "title": "文件内容显示命令组",
+      "difficulty": 1,
+      "source_pages": [
+        17,
+        20
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "037_wc命令统计文件内容",
+      "title": "wc命令统计文件内容",
+      "difficulty": 1,
+      "source_pages": [
+        17,
+        20
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "038_grep命令筛选文件内容",
+      "title": "grep命令筛选文件内容",
+      "difficulty": 1,
+      "source_pages": [
+        17,
+        20
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "039_grep的_v和_n选项",
+      "title": "grep的-v和-n选项",
+      "difficulty": 1,
+      "source_pages": [
+        17,
+        20
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "040_grep元字符",
+      "title": "grep元字符：^、$、.、*",
+      "difficulty": 1,
+      "source_pages": [
+        21,
+        24
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "041_grep元字符_x_z_x_z",
+      "title": "grep元字符：[ ]、[x-z]、[^x-z]、\\",
+      "difficulty": 1,
+      "source_pages": [
+        21,
+        24
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "042_管道",
+      "title": "管道",
+      "difficulty": 1,
+      "source_pages": [
+        21,
+        24
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "043_输出重定向",
+      "title": "输出重定向",
+      "difficulty": 1,
+      "source_pages": [
+        21,
+        24
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "044_使用ln_s创建符号链接",
+      "title": "使用ln -s创建符号链接",
+      "difficulty": 1,
+      "source_pages": [
+        21,
+        24
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "045_gzip_gunzip_与_gz_压缩文件",
+      "title": "gzip/gunzip 与 .gz 压缩文件",
+      "difficulty": 1,
+      "source_pages": [
+        25,
+        28
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "046_bzip2_bunzip2_与_bz2_压缩文件",
+      "title": "bzip2/bunzip2 与 .bz2 压缩文件",
+      "difficulty": 1,
+      "source_pages": [
+        25,
+        28
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "047_tar_归档命令格式与常用选项",
+      "title": "tar 归档命令格式与常用选项",
+      "difficulty": 2,
+      "source_pages": [
+        25,
+        28
+      ],
+      "needs_verification": true
+    },
+    {
+      "concept_id": "048_fdisk_查看磁盘分区",
+      "title": "fdisk 查看磁盘分区",
+      "difficulty": 1,
+      "source_pages": [
+        25,
+        28
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "049_mkfs_创建文件系统",
+      "title": "mkfs 创建文件系统",
+      "difficulty": 1,
+      "source_pages": [
+        25,
+        28
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "050_mount_装载分区",
+      "title": "mount 装载分区",
+      "difficulty": 1,
+      "source_pages": [
+        25,
+        28
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "051_umount_卸载分区",
+      "title": "umount 卸载分区",
+      "difficulty": 1,
+      "source_pages": [
+        25,
+        28
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "052_useradd_添加用户",
+      "title": "useradd 添加用户",
+      "difficulty": 1,
+      "source_pages": [
+        25,
+        28
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "053_passwd_修改口令",
+      "title": "passwd 修改口令",
+      "difficulty": 1,
+      "source_pages": [
+        25,
+        28
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "054_userdel_删除用户",
+      "title": "userdel 删除用户",
+      "difficulty": 1,
+      "source_pages": [
+        25,
+        28
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "055_用户管理相关配置文件",
+      "title": "用户管理相关配置文件",
+      "difficulty": 1,
+      "source_pages": [
+        29,
+        32
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "056_su_用户身份切换命令",
+      "title": "su 用户身份切换命令",
+      "difficulty": 1,
+      "source_pages": [
+        29,
+        32
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "057_who_和_w_用于显示在线用户",
+      "title": "who 和 w 用于显示在线用户",
+      "difficulty": 1,
+      "source_pages": [
+        29,
+        32
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "058_ps_命令查看进程",
+      "title": "ps 命令查看进程",
+      "difficulty": 2,
+      "source_pages": [
+        29,
+        32
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "059_top_用于进程监控",
+      "title": "top 用于进程监控",
+      "difficulty": 1,
+      "source_pages": [
+        29,
+        32
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "060_kill_命令向进程发送信号",
+      "title": "kill 命令向进程发送信号",
+      "difficulty": 1,
+      "source_pages": [
+        29,
+        32
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "061_使用_让命令后台执行",
+      "title": "使用 & 让命令后台执行",
+      "difficulty": 1,
+      "source_pages": [
+        29,
+        32
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "062_使用_ls_l_查询文件权限",
+      "title": "使用 ls -l 查询文件权限",
+      "difficulty": 1,
+      "source_pages": [
+        33,
+        36
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "063_chmod_修改文件权限",
+      "title": "chmod 修改文件权限",
+      "difficulty": 2,
+      "source_pages": [
+        33,
+        36
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "064_chown_修改文件所有者",
+      "title": "chown 修改文件所有者",
+      "difficulty": 2,
+      "source_pages": [
+        33,
+        36
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "065_echo_命令用于字符显示",
+      "title": "echo 命令用于字符显示",
+      "difficulty": 1,
+      "source_pages": [
+        33,
+        36
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "066_echo_的_n_与_e_选项",
+      "title": "echo 的 -n 与 -e 选项",
+      "difficulty": 1,
+      "source_pages": [
+        33,
+        36
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "067_linux_常见网络命令分类",
+      "title": "Linux 常见网络命令分类",
+      "difficulty": 1,
+      "source_pages": [
+        33,
+        36
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "068_netstat_命令及_a_r_n_选项",
+      "title": "netstat 命令及 -a -r -n 选项",
+      "difficulty": 2,
+      "source_pages": [
+        33,
+        36
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "069_vim的工作模式",
+      "title": "Vim的工作模式",
+      "difficulty": 1,
+      "source_pages": [
+        37,
+        40
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "070_vim的启动命令",
+      "title": "Vim的启动命令",
+      "difficulty": 1,
+      "source_pages": [
+        37,
+        40
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "071_vim的退出命令",
+      "title": "Vim的退出命令",
+      "difficulty": 1,
+      "source_pages": [
+        37,
+        40
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "072_i命令进入输入模式",
+      "title": "i命令进入输入模式",
+      "difficulty": 1,
+      "source_pages": [
+        37,
+        40
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "073_a命令进入输入模式",
+      "title": "a命令进入输入模式",
+      "difficulty": 1,
+      "source_pages": [
+        37,
+        40
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "074_o命令进入输入模式",
+      "title": "o命令进入输入模式",
+      "difficulty": 1,
+      "source_pages": [
+        37,
+        40
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "075_o命令进入输入模式",
+      "title": "O命令进入输入模式",
+      "difficulty": 1,
+      "source_pages": [
+        37,
+        40
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "076_vi中的删除与替换命令",
+      "title": "Vi中的删除与替换命令",
+      "difficulty": 1,
+      "source_pages": [
+        41,
+        44
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "077_vi中的撤销_重复与恢复撤销",
+      "title": "Vi中的撤销、重复与恢复撤销",
+      "difficulty": 1,
+      "source_pages": [
+        41,
+        44
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "078_vi中的复制与粘贴命令",
+      "title": "Vi中的复制与粘贴命令",
+      "difficulty": 2,
+      "source_pages": [
+        41,
+        44
+      ],
+      "needs_verification": true
+    },
+    {
+      "concept_id": "079_vi的基础显示与编辑配置",
+      "title": "Vi的基础显示与编辑配置",
+      "difficulty": 1,
+      "source_pages": [
+        41,
+        44
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "080_vi的c语言格式自动缩进配置与保存位置",
+      "title": "Vi的C语言格式自动缩进配置与保存位置",
+      "difficulty": 2,
+      "source_pages": [
+        41,
+        44
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "081_shell的概念",
+      "title": "Shell的概念",
+      "difficulty": 1,
+      "source_pages": [
+        45,
+        48
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "082_shell的主要任务",
+      "title": "Shell的主要任务",
+      "difficulty": 1,
+      "source_pages": [
+        45,
+        48
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "083_常见shell种类",
+      "title": "常见Shell种类",
+      "difficulty": 1,
+      "source_pages": [
+        45,
+        48
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "084_shell的选择与切换",
+      "title": "Shell的选择与切换",
+      "difficulty": 2,
+      "source_pages": [
+        45,
+        48
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "085_linux命令的类别",
+      "title": "Linux命令的类别",
+      "difficulty": 1,
+      "source_pages": [
+        45,
+        48
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "086_type命令用于查看命令类型",
+      "title": "type命令用于查看命令类型",
+      "difficulty": 1,
+      "source_pages": [
+        45,
+        48
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "087_type命令的常用选项",
+      "title": "type命令的常用选项",
+      "difficulty": 2,
+      "source_pages": [
+        45,
+        48
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "088_bash命令查找顺序",
+      "title": "bash命令查找顺序",
+      "difficulty": 1,
+      "source_pages": [
+        49,
+        52
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "089_bash名称补全",
+      "title": "bash名称补全",
+      "difficulty": 1,
+      "source_pages": [
+        49,
+        52
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "090_bash命令别名",
+      "title": "bash命令别名",
+      "difficulty": 1,
+      "source_pages": [
+        49,
+        52
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "091_bash命令历史机制",
+      "title": "bash命令历史机制",
+      "difficulty": 1,
+      "source_pages": [
+        49,
+        52
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "092_输入重定向",
+      "title": "输入重定向",
+      "difficulty": 1,
+      "source_pages": [
+        49,
+        52
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "093_标准输出与标准错误重定向",
+      "title": "标准输出与标准错误重定向",
+      "difficulty": 1,
+      "source_pages": [
+        49,
+        52
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "094_指定文件描述符的输出重定向",
+      "title": "指定文件描述符的输出重定向",
+      "difficulty": 2,
+      "source_pages": [
+        49,
+        52
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "095_here_document",
+      "title": "Here Document",
+      "difficulty": 2,
+      "source_pages": [
+        49,
+        52
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "096_管道",
+      "title": "管道",
+      "difficulty": 1,
+      "source_pages": [
+        49,
+        52
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "097_shell通配元字符",
+      "title": "Shell通配元字符",
+      "difficulty": 1,
+      "source_pages": [
+        53,
+        56
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "098_变量引用_命令替换与引号规则",
+      "title": "变量引用、命令替换与引号规则",
+      "difficulty": 1,
+      "source_pages": [
+        53,
+        56
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "099_shell控制元字符_注释_后台_分组与转义",
+      "title": "Shell控制元字符：注释、后台、分组与转义",
+      "difficulty": 2,
+      "source_pages": [
+        53,
+        54
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "100_命令的顺序执行",
+      "title": "命令的顺序执行",
+      "difficulty": 1,
+      "source_pages": [
+        53,
+        56
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "101_shell条件执行与返回码判断",
+      "title": "Shell条件执行与返回码判断",
+      "difficulty": 2,
+      "source_pages": [
+        53,
+        56
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "102_shell脚本首行与_的作用",
+      "title": "Shell脚本首行与#!的作用",
+      "difficulty": 1,
+      "source_pages": [
+        53,
+        56
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "103_shell脚本的组成与注释形式",
+      "title": "Shell脚本的组成与注释形式",
+      "difficulty": 1,
+      "source_pages": [
+        53,
+        56
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "104_shell脚本的三种执行方式",
+      "title": "Shell脚本的三种执行方式",
+      "difficulty": 1,
+      "source_pages": [
+        57,
+        60
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "105_bash_shell环境配置文件的分类",
+      "title": "Bash shell环境配置文件的分类",
+      "difficulty": 1,
+      "source_pages": [
+        57,
+        60
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "106_shell变量的两大类型",
+      "title": "Shell变量的两大类型",
+      "difficulty": 1,
+      "source_pages": [
+        57,
+        60
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "107_shell变量命名规则",
+      "title": "Shell变量命名规则",
+      "difficulty": 1,
+      "source_pages": [
+        57,
+        60
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "108_shell变量赋值格式",
+      "title": "Shell变量赋值格式",
+      "difficulty": 1,
+      "source_pages": [
+        57,
+        60
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "109_shell变量引用",
+      "title": "Shell变量引用",
+      "difficulty": 1,
+      "source_pages": [
+        61,
+        64
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "110_shell变量替换_默认值与条件替换",
+      "title": "Shell变量替换：默认值与条件替换",
+      "difficulty": 2,
+      "source_pages": [
+        61,
+        64
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "111_shell变量替换_长度与头尾删除",
+      "title": "Shell变量替换：长度与头尾删除",
+      "difficulty": 2,
+      "source_pages": [
+        61,
+        64
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "112_bash一维数组的基本用法",
+      "title": "Bash一维数组的基本用法",
+      "difficulty": 1,
+      "source_pages": [
+        61,
+        64
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "113_环境变量的含义与继承特性",
+      "title": "环境变量的含义与继承特性",
+      "difficulty": 1,
+      "source_pages": [
+        65,
+        68
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "114_常用环境变量",
+      "title": "常用环境变量",
+      "difficulty": 1,
+      "source_pages": [
+        65,
+        68
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "115_用_export_导出变量",
+      "title": "用 export 导出变量",
+      "difficulty": 1,
+      "source_pages": [
+        65,
+        68
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "116_用_declare_声明变量类型或属性",
+      "title": "用 declare 声明变量类型或属性",
+      "difficulty": 1,
+      "source_pages": [
+        65,
+        68
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "117_位置参数的含义与引用",
+      "title": "位置参数的含义与引用",
+      "difficulty": 1,
+      "source_pages": [
+        69,
+        70
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "118_用_set_为位置参数赋值",
+      "title": "用 set 为位置参数赋值",
+      "difficulty": 1,
+      "source_pages": [
+        69,
+        72
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "119_shift_移动位置参数",
+      "title": "shift 移动位置参数",
+      "difficulty": 1,
+      "source_pages": [
+        69,
+        72
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "120_shell_常用特殊参数",
+      "title": "Shell 常用特殊参数",
+      "difficulty": 2,
+      "source_pages": [
+        69,
+        72
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "121_echo_显示命令",
+      "title": "echo 显示命令",
+      "difficulty": 1,
+      "source_pages": [
+        69,
+        72
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "122_echo_中的常见特殊字符",
+      "title": "echo 中的常见特殊字符",
+      "difficulty": 1,
+      "source_pages": [
+        69,
+        72
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "123_read_从输入读取到变量",
+      "title": "read 从输入读取到变量",
+      "difficulty": 1,
+      "source_pages": [
+        69,
+        72
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "124_test_与_的基本用途和格式",
+      "title": "test 与 [ ] 的基本用途和格式",
+      "difficulty": 1,
+      "source_pages": [
+        73,
+        76
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "125_test_的文件特性检测",
+      "title": "test 的文件特性检测",
+      "difficulty": 1,
+      "source_pages": [
+        73,
+        76
+      ],
+      "needs_verification": true
+    },
+    {
+      "concept_id": "126_test_的字符串比较",
+      "title": "test 的字符串比较",
+      "difficulty": 1,
+      "source_pages": [
+        73,
+        76
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "127_test_的整数比较",
+      "title": "test 的整数比较",
+      "difficulty": 1,
+      "source_pages": [
+        73,
+        76
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "128_test_的逻辑运算与括号优先级",
+      "title": "test 的逻辑运算与括号优先级",
+      "difficulty": 2,
+      "source_pages": [
+        75,
+        76
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "129_shell中的特殊条件测试命令",
+      "title": "Shell中的特殊条件测试命令",
+      "difficulty": 1,
+      "source_pages": [
+        77,
+        80
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "130_if条件判断结构",
+      "title": "if条件判断结构",
+      "difficulty": 1,
+      "source_pages": [
+        77,
+        80
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "131_用_判断上一条命令是否成功",
+      "title": "用$?判断上一条命令是否成功",
+      "difficulty": 2,
+      "source_pages": [
+        77,
+        80
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "132_case多分支结构",
+      "title": "case多分支结构",
+      "difficulty": 1,
+      "source_pages": [
+        77,
+        80
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "133_while循环结构",
+      "title": "while循环结构",
+      "difficulty": 1,
+      "source_pages": [
+        77,
+        80
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "134_while实现简单登录重试程序",
+      "title": "while实现简单登录重试程序",
+      "difficulty": 2,
+      "source_pages": [
+        77,
+        80
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "135_while_read_按文件行循环",
+      "title": "while read 按文件行循环",
+      "difficulty": 1,
+      "source_pages": [
+        81,
+        84
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "136_for_循环格式1_遍历_word_list",
+      "title": "for 循环格式1：遍历 word_list",
+      "difficulty": 1,
+      "source_pages": [
+        81,
+        84
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "137_for_循环格式2_遍历位置变量",
+      "title": "for 循环格式2：遍历位置变量",
+      "difficulty": 1,
+      "source_pages": [
+        81,
+        84
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "138_用_for_遍历目录并复制满足条件的文件",
+      "title": "用 for 遍历目录并复制满足条件的文件",
+      "difficulty": 2,
+      "source_pages": [
+        81,
+        84
+      ],
+      "needs_verification": true
+    },
+    {
+      "concept_id": "139_for_循环格式3_c_风格写法",
+      "title": "for 循环格式3：C 风格写法",
+      "difficulty": 1,
+      "source_pages": [
+        81,
+        84
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "140_break_continue_exit_控制语句",
+      "title": "Break、Continue、Exit 控制语句",
+      "difficulty": 1,
+      "source_pages": [
+        85,
+        88
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "141_shell_函数的基本格式",
+      "title": "Shell 函数的基本格式",
+      "difficulty": 1,
+      "source_pages": [
+        85,
+        88
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "142_shell_函数的运行环境与参数传递",
+      "title": "Shell 函数的运行环境与参数传递",
+      "difficulty": 2,
+      "source_pages": [
+        85,
+        88
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "143_let_命令进行数值处理",
+      "title": "let 命令进行数值处理",
+      "difficulty": 2,
+      "source_pages": [
+        85,
+        88
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "144_表达式_算术扩展",
+      "title": "$((表达式)) 算术扩展",
+      "difficulty": 1,
+      "source_pages": [
+        85,
+        88
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "145_expr_命令的表达式书写规则",
+      "title": "expr 命令的表达式书写规则",
+      "difficulty": 2,
+      "source_pages": [
+        85,
+        88
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "146_eval命令",
+      "title": "eval命令",
+      "difficulty": 2,
+      "source_pages": [
+        89,
+        92
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "147_exec命令",
+      "title": "exec命令",
+      "difficulty": 2,
+      "source_pages": [
+        89,
+        92
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "148_source命令",
+      "title": "source命令",
+      "difficulty": 1,
+      "source_pages": [
+        89,
+        92
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "149_使用bash_n_v_x跟踪与调试shell脚本",
+      "title": "使用bash -n -v -x跟踪与调试Shell脚本",
+      "difficulty": 2,
+      "source_pages": [
+        89,
+        92
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "150_linux下c程序的main函数基本格式",
+      "title": "Linux下C程序的main函数基本格式",
+      "difficulty": 1,
+      "source_pages": [
+        93,
+        95
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "151_linux与windows文本文件换行符区别",
+      "title": "Linux与Windows文本文件换行符区别",
+      "difficulty": 1,
+      "source_pages": [
+        93,
+        95
+      ],
+      "needs_verification": false
+    },
+    {
+      "concept_id": "152_gcc编译流程",
+      "title": "gcc编译流程",
+      "difficulty": 2,
+      "source_pages": [
+        93,
+        95
+      ],
+      "needs_verification": false
+    }
+  ]
+}

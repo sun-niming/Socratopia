@@ -1,0 +1,48 @@
+{
+  "title": "动态对象数组必须使用 delete[] 释放",
+  "definition": "使用 new[] 创建动态数组时，释放操作必须使用 delete[]；使用 new 创建单个对象时，释放操作使用 delete。new[] 与 delete[] 配对，new 与 delete 配对。对于类对象数组，delete[] 还会对数组中的对象逐个调用析构函数。",
+  "key_points": [
+    "new T[N] 与 delete[] 指针配对。",
+    "new T 与 delete 指针配对。",
+    "不能将 delete 用于由 new[] 创建的数组，也不能将 delete[] 用于由普通 new 创建的单个对象。",
+    "动态数组使用完毕后应及时释放，并可将指针设为 nullptr。"
+  ],
+  "examples": [
+    "动态数组的正确释放：Simple* mySimpleArray { new Simple[4] }; delete[] mySimpleArray; mySimpleArray = nullptr;",
+    "单个对象的正确释放：Simple* p { new Simple{} }; delete p;"
+  ],
+  "misconceptions": [
+    "delete 和 delete[] 只是写法不同、效果相同；这是错误的，二者必须与对应的分配形式匹配。",
+    "释放动态数组时只调用一次 delete 就足够；对于 new[] 分配的数组，应使用 delete[]。",
+    "将指针设为 nullptr 能代替释放内存；实际上仍必须先执行正确的释放操作。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "new[] 应该与哪种释放操作配对？",
+      "a": "new[] 应该与 delete[] 配对。"
+    },
+    {
+      "q": "new 和 new[] 的释放方式有什么区别？",
+      "a": "new 创建单个对象，使用 delete；new[] 创建数组，使用 delete[]。"
+    },
+    {
+      "q": "释放动态数组后为什么常把指针设为 nullptr？",
+      "a": "为了避免指针继续指向已经释放的内存，降低误用悬空指针的风险；设为 nullptr 不能代替 delete[]。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "动态数组的创建与下标访问"
+  ],
+  "source_pages": [
+    203,
+    204
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "271_动态对象数组必须使用_delete_释放",
+  "_chunk_pages": [
+    201,
+    204
+  ]
+}

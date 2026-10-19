@@ -1,0 +1,38 @@
+{
+  "title": "图片或大文件只返回一半",
+  "definition": "如果图片损坏或大文件只返回部分内容，常见原因是只调用了一次 send、把文件内容当字符串用 strlen 发送，或者 read/send 的循环写错了。正确做法是所有发送都走 send_all，文件块按 read 的返回值发送，不要用 strlen 处理文件数据。",
+  "key_points": [
+    "一次 send 不一定能发完全部数据。",
+    "文件或二进制数据不能用 strlen 计算长度。",
+    "按 read 的返回值分块发送，必要时使用 send_all。"
+  ],
+  "examples": [
+    "curl -o out.bin http://127.0.0.1:8080/image.png",
+    "ls -l out.bin"
+  ],
+  "misconceptions": [
+    "以为调用一次 send 就一定能把完整文件发出去。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "图片或大文件只返回一半时，教材建议怎么做？",
+      "a": "所有发送都走 send_all，文件块按 read 返回值发送，不使用 strlen。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "文件读取",
+    "网络发送"
+  ],
+  "source_pages": [
+    109,
+    112
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "171_图片或大文件只返回一半",
+  "_chunk_pages": [
+    109,
+    112
+  ]
+}

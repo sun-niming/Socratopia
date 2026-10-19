@@ -1,0 +1,37 @@
+{
+  "title": "fork 后父进程关 client_fd",
+  "definition": "`fork` 之后，父进程只负责继续 `accept` 新连接，不处理当前客户端，因此应关闭当前连接的 `client_fd`。如果父进程也保留该描述符，连接引用不能及时释放，可能导致客户端等待或资源泄漏。",
+  "key_points": [
+    "父进程负责继续接受新连接。",
+    "父进程不处理当前客户端时，应关闭 `client_fd`。",
+    "不关闭会造成引用不释放和资源泄漏。"
+  ],
+  "examples": [
+    "父进程在 `fork` 后关闭 `client_fd`，子进程继续处理请求。"
+  ],
+  "misconceptions": [
+    "父子进程都持有同一个连接描述符并不意味着“更安全”。",
+    "描述符不关闭，连接资源不会自动立即消失。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么 fork 后父进程要关闭 client_fd？",
+      "a": "因为父进程只负责继续 accept 新连接，不处理当前客户端；若不关闭，会造成连接引用不释放和资源泄漏。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "SO_REUSEADDR 的作用"
+  ],
+  "source_pages": [
+    129,
+    132
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "218_fork_后父进程关_client_fd",
+  "_chunk_pages": [
+    129,
+    132
+  ]
+}

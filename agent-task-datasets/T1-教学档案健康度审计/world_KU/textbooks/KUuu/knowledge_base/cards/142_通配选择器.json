@@ -1,0 +1,36 @@
+{
+  "title": "通配选择器",
+  "definition": "通配选择器用星号（*）表示，可以匹配任意类型的HTML元素。与其他简单选择器配合时，省略*通常效果相同。",
+  "key_points": [
+    "*可以匹配任意HTML元素",
+    "在如 *.warning 这样的写法中，*常可省略，效果与 .warning 相同"
+  ],
+  "examples": [
+    "* { font-weight:bold; }",
+    "*.warning 和 .warning 的效果完全相同"
+  ],
+  "misconceptions": [
+    "通配选择器只匹配某一种标签。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "通配选择器的符号是什么？",
+      "a": "星号 *。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "CSS选择器"
+  ],
+  "source_pages": [
+    89,
+    92
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "142_通配选择器",
+  "_chunk_pages": [
+    89,
+    92
+  ]
+}

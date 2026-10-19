@@ -1,0 +1,49 @@
+{
+  "title": "电子表格示例的对象模型",
+  "definition": "教材中的电子表格示例用于说明类和对象。电子表格是一个二维单元格网格，每个单元格包含一个数字或字符串。示例使用 Spreadsheet、SpreadsheetCell 和 SpreadsheetApplication 三个基本类：每个 Spreadsheet 对象包含若干 SpreadsheetCell 对象，SpreadsheetApplication 类管理 Spreadsheet 对象的集合。本章重点介绍 SpreadsheetCell 类，第 9 章继续开发 Spreadsheet 和 SpreadsheetApplication 类。",
+  "key_points": [
+    "电子表格可以抽象为二维的单元格网格。",
+    "每个单元格可以保存数字或字符串。",
+    "Spreadsheet 由若干 SpreadsheetCell 对象组成。",
+    "SpreadsheetApplication 管理 Spreadsheet 对象的集合。",
+    "本章重点是 SpreadsheetCell；第 9 章开发 Spreadsheet 和 SpreadsheetApplication。"
+  ],
+  "examples": [
+    "二维电子表格可抽象为按行和列组织的单元格集合：每个位置对应一个 SpreadsheetCell。",
+    "类之间的关系可概括为：Spreadsheet 包含多个 SpreadsheetCell；SpreadsheetApplication 管理多个 Spreadsheet。"
+  ],
+  "misconceptions": [
+    "该示例不是要实现完整的 Microsoft Excel，而是用来说明类和对象。",
+    "SpreadsheetCell 不是整个电子表格，Spreadsheet 才是包含多个单元格的对象。",
+    "SpreadsheetApplication 管理的是 Spreadsheet 对象集合，而不是单个单元格。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "电子表格示例中的一个 Spreadsheet 对象包含什么？",
+      "a": "包含若干 SpreadsheetCell 对象。"
+    },
+    {
+      "q": "SpreadsheetApplication 类负责什么？",
+      "a": "负责管理 Spreadsheet 对象的集合。"
+    },
+    {
+      "q": "电子表格示例中的每个单元格可以包含什么？",
+      "a": "可以包含一个数字或一个字符串。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "类与对象的基本概念"
+  ],
+  "source_pages": [
+    228,
+    228
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "485_电子表格示例的对象模型",
+  "_chunk_pages": [
+    225,
+    228
+  ]
+}

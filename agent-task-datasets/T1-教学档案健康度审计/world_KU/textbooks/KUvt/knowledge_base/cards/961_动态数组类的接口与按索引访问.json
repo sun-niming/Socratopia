@@ -1,0 +1,56 @@
+{
+  "title": "动态数组类的接口与按索引访问",
+  "definition": "教材示例中的模板类 `Array<T>` 用动态分配的数组存储元素，并通过索引访问、设置元素和自动扩容来隐藏内存管理细节。构造时创建默认大小为 4 的数组，元素进行零初始化；`getElementAt` 用于读取指定索引处的元素，索引越界时抛出 `std::out_of_range`；`setElementAt` 用于设置指定索引处的元素，如果索引超出当前范围，则分配更大的空间使该索引有效；`getSize` 返回当前数组大小。",
+  "key_points": [
+    "`Array<T>` 是一个类模板，可以存储任意满足相关操作要求的类型 `T`。",
+    "默认构造函数分配大小为 `4` 的数组，并使用 `new T[m_size]{}` 对元素进行零初始化。",
+    "`const T& getElementAt(std::size_t x) const` 返回指定索引处元素的常量引用。",
+    "如果 `x >= m_size`，`getElementAt` 会抛出 `std::out_of_range` 异常。",
+    "`void setElementAt(std::size_t x, const T& value)` 设置指定索引处的值；索引越界时会自动扩容。",
+    "`std::size_t getSize() const noexcept` 返回当前数组包含的元素数量。",
+    "该接口允许客户直接设置索引为 1、100 或 1000 的元素，而不必自行管理底层内存。"
+  ],
+  "examples": [
+    "典型接口：\n`template <typename T> class Array { public: Array(); const T& getElementAt(std::size_t x) const; void setElementAt(std::size_t x, const T& value); std::size_t getSize() const noexcept; };`",
+    "创建数组并设置远大于初始范围的元素：\n`Array<int> values;`\n`values.setElementAt(1, 10);`\n`values.setElementAt(100, 20);`\n`values.setElementAt(1000, 30);`",
+    "读取元素：\n`const int& value = values.getElementAt(100);`",
+    "访问越界示意：\n`values.getElementAt(values.getSize());` 会抛出 `std::out_of_range`。"
+  ],
+  "misconceptions": [
+    "`getElementAt` 越界时不会自动扩容；自动扩容由 `setElementAt` 在设置越界索引时完成。",
+    "`getSize()` 返回的是当前已分配数组的大小，不是最后一次设置的索引值。",
+    "数组初始大小为 4 不代表只能存储 4 个元素；设置更大的索引可以触发扩容。",
+    "该节展示的是通过 `getElementAt` 和 `setElementAt` 访问元素的接口，不能据此断定原文已经提供了 `operator[]` 的实现。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`Array<T>::getElementAt` 在索引越界时有什么行为？",
+      "a": "当 `x >= m_size` 时，`getElementAt(x)` 抛出类型为 `std::out_of_range` 的异常；否则返回 `m_elements[x]`。"
+    },
+    {
+      "q": "`Array<T>::setElementAt` 如何处理超出当前范围的索引？",
+      "a": "它会分配更大的存储空间，使目标索引进入有效范围，然后将给定值设置到该索引处。"
+    },
+    {
+      "q": "动态数组类的默认构造函数做了什么？",
+      "a": "将数组大小设置为 4，并执行 `new T[m_size]{}` 分配数组；花括号初始化使元素进行零初始化。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "类模板",
+    "动态内存分配",
+    "异常处理与 `std::out_of_range`"
+  ],
+  "source_pages": [
+    479,
+    480
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "961_动态数组类的接口与按索引访问",
+  "_chunk_pages": [
+    477,
+    480
+  ]
+}

@@ -1,0 +1,49 @@
+{
+  "title": "operator delete 的六种形式与异常清理",
+  "definition": "原文列出六种 `operator delete` 重载：普通单对象、普通数组、nothrow 单对象、nothrow 数组、placement 单对象和 placement 数组。`delete` 表达式本身只有 `delete` 和 `delete[]` 两种形式，没有 nothrow 或 placement 形式。nothrow 和 placement 版本的 `operator delete` 主要用于构造函数抛出异常时匹配清理先前由相应 `operator new` 分配的资源。",
+  "key_points": [
+    "六种原型分别是普通单对象、普通数组、nothrow 单对象、nothrow 数组、placement 单对象和 placement 数组。",
+    "正常执行 `delete` 时，调用普通的 `operator delete` 或 `operator delete[]`。",
+    "如果构造函数在分配后抛出异常，系统会调用与分配阶段相匹配的释放函数进行清理。",
+    "placement new 没有分配内存，因此对应的 placement delete 通常应为空操作。",
+    "原文指出，从 `delete` 调用的析构函数中抛出异常的行为是未定义的，因此析构函数不应抛出异常。"
+  ],
+  "examples": [
+    "普通版本：`void operator delete(void* ptr) noexcept;`、`void operator delete[](void* ptr) noexcept;`",
+    "nothrow 版本：`void operator delete(void* ptr, const std::nothrow_t&) noexcept;`",
+    "placement 版本：`void operator delete(void* p, void*) noexcept;`",
+    "数组 placement 版本：`void operator delete[](void* p, void*) noexcept;`"
+  ],
+  "misconceptions": [
+    "`delete` 表达式的形式数量与 `operator delete` 重载数量相同；实际上前者只有两种，后者可有六种。",
+    "placement delete 的存在不表示 placement new 分配过内存；它主要用于构造失败时的匹配清理，而且通常不释放内存。",
+    "nothrow 形式并不是正常 `delete` 的常规调用路径。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么 `operator delete` 有六种形式，而 `delete` 表达式只有两种？",
+      "a": "`delete` 表达式只有单对象和数组两种正常删除形式；nothrow 和 placement 版本的释放函数主要用于构造函数抛出异常时的匹配清理。"
+    },
+    {
+      "q": "placement delete 通常为什么应为空操作？",
+      "a": "因为 placement new 没有分配内存，只是在已有内存中构造对象，因此不需要通过 placement delete 释放内存。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "placement new",
+    "异常处理",
+    "delete 表达式与 operator delete"
+  ],
+  "source_pages": [
+    491,
+    491
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "988_operator_delete_的六种形式与异常清理",
+  "_chunk_pages": [
+    489,
+    492
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "title": "flex-shrink",
+  "definition": "flex-shrink 用于设置弹性项目的缩小系数，也就是项目在空间不足时的收缩能力。",
+  "key_points": [
+    "作用对象是项目（子元素）",
+    "用于设置缩小系数",
+    "属于项目的属性，不是容器属性"
+  ],
+  "examples": [
+    "flex-shrink: 0;"
+  ],
+  "misconceptions": [
+    "它是用来放大项目的；原文对应的是缩小系数",
+    "它是容器属性；原文说它是项目属性"
+  ],
+  "qa_pairs": [
+    {
+      "q": "flex-shrink 用来设置什么？",
+      "a": "设置项目的缩小系数。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "弹性盒布局基础"
+  ],
+  "source_pages": [
+    157,
+    160
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "227_flex_shrink",
+  "_chunk_pages": [
+    157,
+    160
+  ]
+}

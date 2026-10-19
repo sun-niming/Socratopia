@@ -1,0 +1,50 @@
+{
+  "title": "用ChessBoard类封装棋盘访问",
+  "definition": "原文展示了一个`ChessBoard`类的接口草图。该类提供`setPieceAt`用于设置指定坐标处的棋子指针，提供`getPieceAt`用于读取指定坐标处的棋子指针；这两个函数都使用`size_t`表示坐标，并且读取函数带有`const`限定，表示读取操作不会修改棋盘对象。",
+  "key_points": [
+    "`setPieceAt(size_t x, size_t y, ChessPiece* piece)`接收横坐标、纵坐标和棋子指针，用于设置棋盘位置。",
+    "`ChessPiece* getPieceAt(size_t x, size_t y) const`返回指定位置的`ChessPiece*`。",
+    "`getPieceAt`末尾的`const`表示该成员函数承诺不修改当前`ChessBoard`对象。",
+    "原文将棋盘数据放在类的`private`区域，将访问函数放在`public`区域。"
+  ],
+  "examples": [
+    "接口可写为：\n```cpp\nclass ChessBoard {\npublic:\n    void setPieceAt(size_t x, size_t y, ChessPiece* piece);\n    ChessPiece* getPieceAt(size_t x, size_t y) const;\nprivate:\n    // 棋盘数据\n};\n```",
+    "调用形式示例：\n```cpp\nboard.setPieceAt(0, 0, new Rook{});\nChessPiece* piece = board.getPieceAt(0, 0);\n```"
+  ],
+  "misconceptions": [
+    "`getPieceAt`的`const`只限制成员函数对棋盘对象本身的修改，不等于返回的`ChessPiece*`指向的对象一定不可修改。",
+    "原文只展示了接口声明，没有给出这两个函数的具体实现，也没有明确说明坐标范围检查方式。",
+    "不能仅凭接口断定棋盘内部一定使用名为`chessBoard`的数组；该数组在原文中另有展示，但两段代码的对应关系仍需以完整页面为准。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`ChessBoard::setPieceAt`的作用是什么？",
+      "a": "在指定的`x`、`y`坐标处设置一个`ChessPiece*`棋子指针。"
+    },
+    {
+      "q": "为什么`getPieceAt`声明为`const`成员函数？",
+      "a": "因为它用于读取棋盘位置，并承诺不修改当前`ChessBoard`对象。"
+    },
+    {
+      "q": "`getPieceAt`的返回类型是什么？",
+      "a": "返回类型是`ChessPiece*`，即指向`ChessPiece`的指针。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++类与访问控制",
+    "C++成员函数的const限定",
+    "C++指针"
+  ],
+  "source_pages": [
+    145,
+    148
+  ],
+  "needs_verification": true,
+  "verify_query": "《C++20高级编程》第5版 第148页 ChessBoard setPieceAt getPieceAt ChessPiece size_t 原始代码",
+  "concept_id": "210_用chessboard类封装棋盘访问",
+  "_chunk_pages": [
+    145,
+    148
+  ]
+}

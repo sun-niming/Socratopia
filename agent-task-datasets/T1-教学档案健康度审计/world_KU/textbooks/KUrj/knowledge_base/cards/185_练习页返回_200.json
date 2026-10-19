@@ -1,0 +1,38 @@
+{
+  "title": "练习页返回 200",
+  "definition": "访问 `/practice.html` 时，服务器应能正确映射并返回该静态页面，预期状态码是 200。",
+  "key_points": [
+    "路径是 `/practice.html`。",
+    "响应应是 200。",
+    "说明静态页面映射正常。"
+  ],
+  "examples": [
+    "`curl -i http://127.0.0.1:8080/practice.html`"
+  ],
+  "misconceptions": [
+    "静态页面必须和首页一样只能通过 `/` 访问。",
+    "文件存在也可能返回 404，说明映射规则不正确。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "访问 `/practice.html` 的预期结果是什么？",
+      "a": "应返回 200。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "HTTP 状态码",
+    "静态文件服务基础"
+  ],
+  "source_pages": [
+    113,
+    116
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "185_练习页返回_200",
+  "_chunk_pages": [
+    113,
+    116
+  ]
+}

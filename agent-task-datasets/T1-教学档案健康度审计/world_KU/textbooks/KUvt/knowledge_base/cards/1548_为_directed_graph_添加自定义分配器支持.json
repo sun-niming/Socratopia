@@ -1,0 +1,52 @@
+{
+  "title": "为 directed_graph 添加自定义分配器支持",
+  "definition": "为了像标准库容器一样支持自定义内存分配器，directed_graph 及其 graph_node 需要使用分配器类型管理节点内存。教材将实现分为 native 版本和适当的最终版本两个阶段，并首先修改 graph_node。",
+  "key_points": [
+    "graph_node 增加第二个模板类型参数 A，用于指定分配器类型，默认类型为 std::allocator<T>。",
+    "需要增加接收显式分配器的构造函数，并修改原有构造函数，使其使用指定分配器。",
+    "由于默认的拷贝/移动操作不适合自定义分配器，需要显式提供拷贝构造、移动构造、拷贝赋值和移动赋值。",
+    "graph_node 需要析构函数，以便使用相应分配器释放节点内存。",
+    "graph_node 增加分配器数据成员 m_allocator，并将 m_data 从保存对象值改为保存 T* 指针。",
+    "由于分配器状态可能影响对象复制、移动和比较，赋值运算符以及运算符 == 和 != 不能简单依赖默认实现。"
+  ],
+  "examples": [
+    "模板声明的核心形式为：\ntemplate <typename T, typename A = std::allocator<T>>\nclass graph_node { /* ... */ };",
+    "关键数据成员包括：\nA m_allocator;\nT* m_data{ nullptr };"
+  ],
+  "misconceptions": [
+    "指定分配器并不意味着分配器直接构造了 T 对象；分配和对象构造是两个不同步骤。",
+    "仅把分配器作为模板参数加入还不够，还必须调整构造、析构、复制、移动以及赋值逻辑。",
+    "m_data 保存的是指向动态分配对象的指针，而不是直接保存一个 T 值。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为 graph_node 增加自定义分配器支持需要保存哪些分配器相关状态？",
+      "a": "需要增加分配器模板参数，并增加 A 类型的成员 m_allocator。"
+    },
+    {
+      "q": "为什么 graph_node 不能完全使用默认的拷贝和移动操作？",
+      "a": "因为默认操作不一定能正确处理自定义分配器及其分配器状态，所以需要显式实现拷贝构造、移动构造、拷贝赋值和移动赋值。"
+    },
+    {
+      "q": "支持自定义分配器后，m_data 的类型发生了什么变化？",
+      "a": "m_data 从保存 T 对象的值改为保存 T* 指针。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "C++类模板",
+    "标准库分配器",
+    "拷贝与移动语义"
+  ],
+  "source_pages": [
+    747,
+    748
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1548_为_directed_graph_添加自定义分配器支持",
+  "_chunk_pages": [
+    745,
+    748
+  ]
+}

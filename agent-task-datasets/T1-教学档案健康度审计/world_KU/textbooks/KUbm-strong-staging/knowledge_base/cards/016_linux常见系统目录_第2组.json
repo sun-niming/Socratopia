@@ -1,0 +1,50 @@
+{
+  "title": "Linux常见系统目录（第2组）",
+  "definition": "教材给出的另一组常见Linux系统目录包括：/usr，是综合目录，用于存放用户使用的命令及应用程序；/sbin，用于存放系统管理命令；/var，是可变目录，用于存放变动较频繁的文件，如日志；/root，是root用户的主目录；/lib，用于存放共享库；/lost+found，用于存放文件系统检测产生的碎片文件。",
+  "key_points": [
+    "/usr存放用户使用的命令及应用程序",
+    "/sbin存放系统管理命令",
+    "/var存放变化频繁的文件，如日志",
+    "/root是root用户主目录",
+    "/lib用于存放共享库",
+    "/lost+found存放文件系统检测产生的碎片文件"
+  ],
+  "examples": [
+    "日志文件按教材归入可变目录的典型例子：/var",
+    "root用户主目录：/root"
+  ],
+  "misconceptions": [
+    "不要把/root与根目录“/”混为一谈，/root是root用户的主目录",
+    "不要把/var理解为固定不变的目录，教材强调它用于存放经常变动的文件",
+    "不要把/sbin与普通用户应用程序目录混同，教材将其用于系统管理命令"
+  ],
+  "qa_pairs": [
+    {
+      "q": "哪个目录通常用于存放日志这类经常变化的文件？",
+      "a": " /var。"
+    },
+    {
+      "q": "root用户的主目录是哪个？",
+      "a": " /root。"
+    },
+    {
+      "q": "哪个目录用于存放共享库？",
+      "a": " /lib。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "Linux根目录与常见系统目录（第1组）"
+  ],
+  "source_pages": [
+    9,
+    12
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "016_linux常见系统目录_第2组",
+  "_chunk_pages": [
+    9,
+    12
+  ]
+}

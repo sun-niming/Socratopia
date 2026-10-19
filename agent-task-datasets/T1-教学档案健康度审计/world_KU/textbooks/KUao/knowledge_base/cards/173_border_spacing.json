@@ -1,0 +1,43 @@
+{
+  "title": "border-spacing",
+  "definition": "CSS 的表格属性，用来指定相邻单元格边框之间的距离。教材注明它只适用于边框分离模式。",
+  "key_points": [
+    "用于设置相邻单元格边框之间的距离",
+    "只适用于边框分离模式",
+    "与 border-collapse 的分离模式有关"
+  ],
+  "examples": [
+    "border-spacing: 10px;"
+  ],
+  "misconceptions": [
+    "它不是在合并边框模式下生效。",
+    "它控制的是单元格边框之间的间距，不是内容边距。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "border-spacing 的作用是什么？",
+      "a": "指定相邻单元格边框之间的距离。"
+    },
+    {
+      "q": "border-spacing 适用于什么模式？",
+      "a": "只适用于边框分离模式。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "border-collapse",
+    "表格基础",
+    "CSS基础"
+  ],
+  "source_pages": [
+    117,
+    120
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "173_border_spacing",
+  "_chunk_pages": [
+    117,
+    120
+  ]
+}

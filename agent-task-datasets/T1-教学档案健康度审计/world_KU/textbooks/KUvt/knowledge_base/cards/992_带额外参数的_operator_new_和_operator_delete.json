@@ -1,0 +1,48 @@
+{
+  "title": "带额外参数的 operator new 和 operator delete",
+  "definition": "除了标准形式外，还可以定义带额外参数的 operator new 和 operator delete。额外参数可用于向内存分配例程传递标志、计数器，或在调试模式下传递文件名和行号等信息。调用带额外参数的 operator new 时，额外参数以函数调用形式写在 new 表达式中。",
+  "key_points": [
+    "带额外参数的分配函数可用于记录或传递内存分配相关信息。",
+    "例如可以定义带 int 参数的释放函数：\\n$$\\texttt{void operator delete(void* ptr, int extra) noexcept;}$$",
+    "使用额外参数时，new 表达式采用类似 nothrow new 的函数调用语法。",
+    "原文指出定义带额外参数的 operator new 时，还应定义带相应额外参数的 operator delete。"
+  ],
+  "examples": [
+    "调用带 int 参数的分配形式：\\n\\texttt{MemoryDemo* memp\\\\{ new(5) MemoryDemo() \\\\};}",
+    "示例中的对应函数形式为：\\n\\texttt{void operator delete(void* ptr, int extra) noexcept;}"
+  ],
+  "misconceptions": [
+    "额外参数不是传给类构造函数的普通构造参数，而是传给内存分配函数的参数。",
+    "带额外参数的 operator delete 不能由程序员像普通函数一样直接用于常规释放；原文说明它只会在特定异常情形下被调用。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "带额外参数的 operator new 有什么用途？",
+      "a": "可以向内存分配例程传递标志、计数器，或调试所需的文件名、行号等信息。"
+    },
+    {
+      "q": "如何在 new 表达式中传递额外整数参数 5？",
+      "a": "使用函数调用形式，例如：\\texttt{new(5) MemoryDemo()}。"
+    },
+    {
+      "q": "带额外参数的 operator delete 何时会被调用？",
+      "a": "原文说明，只有使用了带额外参数的 operator new，且对象构造函数抛出异常时，才会调用这种 operator delete。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "operator new 与 operator delete",
+    "new表达式与构造函数异常"
+  ],
+  "source_pages": [
+    494,
+    495
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 带额外参数的 class-specific operator new operator delete 构造函数抛出异常 调用规则",
+  "concept_id": "992_带额外参数的_operator_new_和_operator_delete",
+  "_chunk_pages": [
+    493,
+    496
+  ]
+}

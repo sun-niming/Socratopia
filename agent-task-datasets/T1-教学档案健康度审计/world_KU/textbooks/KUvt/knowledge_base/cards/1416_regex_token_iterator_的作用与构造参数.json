@@ -1,0 +1,44 @@
+{
+  "title": "regex_token_iterator 的作用与构造参数",
+  "definition": "`std::regex_token_iterator` 是一种正则表达式迭代器，用于在输入序列中遍历正则表达式匹配结果中的指定捕获组。它的构造通常需要输入序列的首迭代器和尾迭代器、一个正则表达式，以及可选的捕获组索引集合和匹配标志。",
+  "key_points": [
+    "基本构造形式为：`regex_token_iterator(BidirectionalIterator first, BidirectionalIterator last, const regex_type& re, SubMatches submatches = 0, regex_constants::match_flag_type flags = ...)`。",
+    "`SubMatches` 可以是一个整数、一个 `vector<int>`、一个 `initializer_list` 或一个包含捕获组索引的 C 风格数组。",
+    "省略 `SubMatches` 或将其指定为 `0` 时，迭代器遍历索引为 `0` 的匹配结果；索引 `0` 表示整个正则表达式匹配到的字符串，而不是某个括号捕获组。",
+    "与 `regex_iterator` 每次产生一个 `match_results` 对象不同，`regex_token_iterator` 可以直接遍历选定捕获组的文本，通常通过 `iter->str()` 获取当前结果。"
+  ],
+  "examples": [
+    "遍历正则表达式匹配到的完整单词：`regex reg { \"[\\\\w]+\" }; const sregex_token_iterator end; for (sregex_token_iterator iter { cbegin(str), cend(str), reg }; iter != end; ++iter) { cout << iter->str() << endl; }`",
+    "遍历第 2、3 个捕获组：`vector<int> indices { 2, 3 }; sregex_token_iterator iter { cbegin(str), cend(str), reg, indices };`"
+  ],
+  "misconceptions": [
+    "`regex_token_iterator` 不只用于遍历完整匹配，也可以指定一个或多个捕获组。",
+    "捕获组索引 `0` 表示整个正则表达式的匹配结果；第一个括号捕获组通常从索引 `1` 开始。",
+    "不能使用临时 `regex` 对象构造 `regex_iterator` 或 `regex_token_iterator`，因为这些迭代器内部保存指向正则表达式对象的指针，并显式删除了接收右值 `regex` 的构造函数。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`regex_token_iterator` 的 `SubMatches` 参数可以用哪些形式指定？",
+      "a": "可以指定为一个整数、一个 `vector<int>`、一个 `initializer_list`，或一个包含捕获组索引的 C 风格数组。"
+    },
+    {
+      "q": "`regex_token_iterator` 默认遍历哪个捕获组？",
+      "a": "默认遍历索引为 `0` 的结果，即整个正则表达式匹配到的字符串。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++正则表达式与捕获组基础"
+  ],
+  "source_pages": [
+    677,
+    678
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1416_regex_token_iterator_的作用与构造参数",
+  "_chunk_pages": [
+    677,
+    680
+  ]
+}

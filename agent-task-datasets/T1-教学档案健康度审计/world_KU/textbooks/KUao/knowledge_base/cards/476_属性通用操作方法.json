@@ -1,0 +1,47 @@
+{
+  "title": "属性通用操作方法",
+  "definition": "getAttribute(name)、setAttribute(name, value)、hasAttribute(name)、removeAttribute(name) 是操作元素属性的通用方法。它们既能处理标准属性，也能处理自定义属性。",
+  "key_points": [
+    "getAttribute(name) 获取指定属性的值，返回字符串",
+    "setAttribute(name, value) 设置指定属性；属性存在则更新，不存在则创建",
+    "hasAttribute(name) 用于检查元素是否具有指定属性，返回布尔值",
+    "removeAttribute(name) 用于删除指定属性",
+    "这些方法适用于所有属性，包括自定义属性"
+  ],
+  "examples": [
+    "let v = element.getAttribute('data-id');",
+    "element.setAttribute('title', 'hello');",
+    "let ok = element.hasAttribute('disabled');",
+    "element.removeAttribute('title');"
+  ],
+  "misconceptions": [
+    "setAttribute 只能修改不能新增；实际上属性不存在时也会创建新属性",
+    "getAttribute 返回的不是字符串；原文说明其值是字符串"
+  ],
+  "qa_pairs": [
+    {
+      "q": "setAttribute(name, value) 在属性不存在时会怎样？",
+      "a": "会创建这个新属性。"
+    },
+    {
+      "q": "hasAttribute(name) 的返回值是什么？",
+      "a": "布尔值。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "DOM元素",
+    "HTML属性"
+  ],
+  "source_pages": [
+    353,
+    356
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "476_属性通用操作方法",
+  "_chunk_pages": [
+    353,
+    356
+  ]
+}

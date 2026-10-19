@@ -1,0 +1,43 @@
+{
+  "title": "unique_ptr 和 shared_ptr 禁用 CTAD",
+  "definition": "std::unique_ptr 和 std::shared_ptr 禁用了类模板实参推导。原因是如果构造函数接收一个 T*，编译器可能需要在推导 $T$ 和 $T[]$ 之间作选择，而这种选择可能产生危险的结果。因此，创建它们时应继续使用 std::make_unique 和 std::make_shared。",
+  "key_points": [
+    "std::unique_ptr 和 std::shared_ptr 不依赖传入 T* 自动推导其模板参数。",
+    "教材建议使用 $\\texttt{std::make\\_unique<...>()}$ 和 $\\texttt{std::make\\_shared<...>()}$ 创建智能指针。",
+    "涉及数组类型和非数组类型时，T 与 T[] 的选择可能导致错误，因此标准库禁用了这两类智能指针的 CTAD。"
+  ],
+  "examples": [
+    "创建普通对象的典型形式：$\\texttt{auto p\\{std::make\\_unique<MyType>(...)\\};}$",
+    "创建共享对象的典型形式：$\\texttt{auto p\\{std::make\\_shared<MyType>(...)\\};}$"
+  ],
+  "misconceptions": [
+    "不能因为其他标准库类支持 CTAD，就认为 std::unique_ptr 和 std::shared_ptr 也支持 CTAD。",
+    "教材强调的是继续使用 make_unique 和 make_shared，而不是直接把 T* 交给智能指针构造函数来推导类型。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么 std::unique_ptr 和 std::shared_ptr 禁用 CTAD？",
+      "a": "因为传入 T* 时，编译器可能无法安全地区分应推导为 T 还是 T[]，这种选择可能出错。"
+    },
+    {
+      "q": "创建 std::unique_ptr 和 std::shared_ptr 时应使用什么辅助函数？",
+      "a": "分别使用 std::make_unique 和 std::make_shared。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "类模板实参推导（CTAD）",
+    "智能指针基础"
+  ],
+  "source_pages": [
+    385,
+    385
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "782_unique_ptr_和_shared_ptr_禁用_ctad",
+  "_chunk_pages": [
+    385,
+    388
+  ]
+}

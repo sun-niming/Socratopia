@@ -1,0 +1,44 @@
+{
+  "title": "Shell中的特殊条件测试命令",
+  "definition": "教材列出了3个可直接用于条件判断的特殊命令：\":\" 不做任何事并返回0；\"true\" 总是返回0；\"false\" 总是返回255。它们可被当作条件测试使用，核心区别在于返回状态不同。",
+  "key_points": [
+    "\":\" 命令本身不执行实际操作，只返回状态0",
+    "true 命令总是返回0",
+    "false 命令总是返回255",
+    "这些命令的用途在于提供固定结果的条件测试"
+  ],
+  "examples": [
+    ":",
+    "true",
+    "false"
+  ],
+  "misconceptions": [
+    "不要把 true 和 false 理解成输出字符串的命令；教材强调的是它们的返回值",
+    "不要认为 false 返回1；本教材此处明确写的是返回255"
+  ],
+  "qa_pairs": [
+    {
+      "q": "教材中哪个特殊命令不做任何事但返回0？",
+      "a": "\":\" 命令。"
+    },
+    {
+      "q": "true 和 false 的返回值分别是什么？",
+      "a": "true 总是返回0，false 总是返回255。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "命令返回值"
+  ],
+  "source_pages": [
+    77,
+    80
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "129_shell中的特殊条件测试命令",
+  "_chunk_pages": [
+    77,
+    80
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "title": "article元素",
+  "definition": "article元素表示独立的文章内容，即使把这块内容单独拆出来放在别的网站，也能读通。",
+  "key_points": [
+    "表示独立的文章内容",
+    "内容可以单独拆出后仍然可理解",
+    "适合能独立成篇的内容"
+  ],
+  "examples": [
+    "<article>即使拆到别的网站也能读通的内容</article>"
+  ],
+  "misconceptions": [
+    "article不只用于传统新闻文章",
+    "article不是任何一段内容都能随便用"
+  ],
+  "qa_pairs": [
+    {
+      "q": "article元素适合什么内容？",
+      "a": "适合独立的文章内容，即使单独拆出来放到别的网站，也能读通。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "HTML标签基础"
+  ],
+  "source_pages": [
+    41,
+    44
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "070_article元素",
+  "_chunk_pages": [
+    41,
+    44
+  ]
+}

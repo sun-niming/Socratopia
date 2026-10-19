@@ -1,0 +1,41 @@
+{
+  "title": "var声明提升",
+  "definition": "使用 var 声明的变量会被提升到所在作用域的前面，并且在提升后会自动初始化为 undefined。",
+  "key_points": [
+    "var 声明会提升。",
+    "提升后会初始化为 undefined。",
+    "在声明前访问 var 变量，结果通常是 undefined。"
+  ],
+  "examples": [
+    "例如：console.log(a); var a = 1; 这里 a 在声明前访问结果为 undefined。"
+  ],
+  "misconceptions": [
+    "误以为 var 变量在声明前访问会直接报错。",
+    "误以为 var 的提升后就已经具有赋值后的具体值。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "var 声明的变量在提升后会被初始化成什么？",
+      "a": "undefined。"
+    },
+    {
+      "q": "var 变量在声明前访问通常会得到什么结果？",
+      "a": "undefined。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "声明提升"
+  ],
+  "source_pages": [
+    273,
+    274
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "397_var声明提升",
+  "_chunk_pages": [
+    273,
+    276
+  ]
+}

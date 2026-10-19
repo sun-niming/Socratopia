@@ -1,0 +1,48 @@
+{
+  "title": "BitTorrent中的追踪器、邻近对等方与连接",
+  "definition": "当新对等方Alice加入一个BitTorrent洪流时，追踪器从当前参与对等方中随机选择一个子集，并把这些对等方的IP地址发送给Alice。Alice尝试与列表中的对等方建立并行TCP连接；与她成功建立TCP连接的对等方称为邻近对等方。邻近对等方集合会随时间变化。",
+  "key_points": [
+    "原文示例中，追踪器向Alice发送50个对等方的IP地址。",
+    "Alice尝试与这些对等方建立并行TCP连接。",
+    "成功建立TCP连接的对等方构成Alice的邻近对等方。",
+    "原先列表之外的其他对等方也可能随后尝试与Alice建立连接，因此邻近对等方会动态变化。",
+    "Alice会周期性询问每个邻近对等方拥有的文件块列表。"
+  ],
+  "examples": [
+    "如果Alice有$L$个邻居，她可以获得$L$个块列表；根据这些列表，她知道哪些邻居拥有自己尚未获得的块，并向相应邻居请求这些块。"
+  ],
+  "misconceptions": [
+    "追踪器并不直接向Alice发送整个文件，而是提供一组参与该洪流的对等方IP地址。",
+    "邻近对等方不等于追踪器随机返回的全部对等方，因为只有成功建立TCP连接的对等方才是邻近对等方。",
+    "邻近对等方集合不是永久固定的，会随着对等方加入和离开而变化。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "BitTorrent中的“邻近对等方”如何定义？",
+      "a": "指Alice根据追踪器提供的对等方列表尝试建立连接后，所有与Alice成功建立TCP连接的对等方。"
+    },
+    {
+      "q": "Alice为什么要周期性询问邻近对等方的块列表？",
+      "a": "为了了解每个邻居拥有哪些块，从而请求自己还没有的块。"
+    },
+    {
+      "q": "如果Alice有$L$个邻居，她将获得多少个块列表？",
+      "a": "她将获得$L$个块列表，每个邻居提供一个列表。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "BitTorrent洪流、文件块与对等方"
+  ],
+  "source_pages": [
+    113,
+    114
+  ],
+  "needs_verification": true,
+  "verify_query": "BitTorrent tracker randomly selects peer subset 50 IP addresses neighboring peers TCP connections textbook Kurose Ross 7th edition",
+  "concept_id": "284_bittorrent中的追踪器_邻近对等方与连接",
+  "_chunk_pages": [
+    113,
+    116
+  ]
+}

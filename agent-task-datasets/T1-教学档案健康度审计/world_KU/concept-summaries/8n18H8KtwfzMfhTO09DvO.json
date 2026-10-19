@@ -1,0 +1,115 @@
+{
+  "conversationId": "8n18H8KtwfzMfhTO09DvO",
+  "generatedAt": 1782640860907,
+  "pagesRange": "p.94",
+  "sections": [
+    {
+      "type": "tldr",
+      "content": "这节课把 Linux 下 C 程序从命令行参数到 `gcc` 编译流程串起来了：`argv`/位置参数要分清，`-E`、`-S`、`-c`、`-o` 要分清，宏展开、头文件保护和前置声明都服务于这条链。"
+    },
+    {
+      "type": "narrative",
+      "content": "一开始先把 `argv` 和 shell 位置参数的视角分开：一个按数组下标取，一个按脚本收到的实参看。接着一路顺着 `gcc` 的四步流程走到预处理、编译、汇编、链接，再把 `#include`、`#define`、头文件保护宏和 `struct A;` 这种前置声明串到同一张图里。"
+    },
+    {
+      "type": "concepts",
+      "items": [
+        {
+          "name": "`argv` 与 shell 位置参数",
+          "body": "- `argv` 是参数数组，按下标取值，从 `argv[0]` 开始。\n- shell 的位置参数看的是脚本收到的实参：`$1`、`$2`...；`$0` 更像脚本名字，不算进位置参数个数。\n- 例子：执行 `./myprog hello world` 时，`argc = 3`，`argv[0] = \"./myprog\"`，`argv[1] = \"hello\"`，`argv[2] = \"world\"`。"
+        },
+        {
+          "name": "`gcc` 编译流水线",
+          "body": "`gcc` 从源码到可执行文件通常要经过四步：\n\n1. 预处理：展开 `#include` 和 `#define`，产物通常是 `.i`\n2. 编译：把 C 代码转成汇编，产物是 `.s`\n3. 汇编：把汇编转成目标文件，产物是 `.o`\n4. 链接：把多个 `.o` 和库连成可执行文件，Linux 下默认常见 `a.out`\n\n常用参数：\n- `-E`：只到预处理\n- `-S`：只到编译，停在 `.s`\n- `-c`：编译 + 汇编，不链接，停在 `.o`\n- `-o`：指定输出文件名，不决定走到哪一步"
+        },
+        {
+          "name": "预处理与宏展开",
+          "body": "- `#include` / `#define` 属于文本层面的展开，不是在做 C 语义理解。\n- `#include` 找不到头文件，通常是预处理阶段报错。\n- 宏要先定义、后使用；如果宏名还原样留着，先检查是否根本没展开。\n- 常见原因：定义在后面、没包含头文件、拼写不一致、被条件编译挡住、或展开后结果碰巧看起来没变。\n\n例子：\n```c\n#define N 10\\nint a = N + 1;\n```\n第一段会展开；如果写成先用后定义，`N` 就不会被展开。"
+        },
+        {
+          "name": "头文件保护宏",
+          "body": "- `#ifndef` / `#define` / `#endif` 是为了让同一个头文件只展开一次。\n- 它检查的是“这个宏名是否已被定义”，不是自动区分不同文件。\n- 如果两个头文件用了同一个保护宏名，第二个文件可能整段被跳过，导致声明缺失。\n- 所以保护宏名要足够独特。"
+        },
+        {
+          "name": "前置声明与不完整类型",
+          "body": "- `struct A;` 只是先告诉编译器“有这个类型名”，这叫前置声明。\n- `struct A *p;` 通常可以，因为指针本身大小固定，不需要知道完整结构体。\n- `sizeof(struct A)` 不行，`struct A a;` 不行，`p->x` 也不行；这些都需要完整定义。\n- 一旦写出完整定义，比如 `struct A { int x; };`，就可以定义对象、算大小、访问成员。"
+        }
+      ]
+    },
+    {
+      "type": "key-insight",
+      "content": "`argv` 是数组索引制，Shell 重点是位置参数，而 `\\$0` 更像脚本名字，不算进参数个数。",
+      "attribution": "学习者"
+    },
+    {
+      "type": "key-terms",
+      "items": [
+        {
+          "term": "`argc`",
+          "definition": "参数个数，通常不把 `argv[0]` 算进位置参数里"
+        },
+        {
+          "term": "`argv`",
+          "definition": "命令行参数数组，按下标访问"
+        },
+        {
+          "term": "位置参数",
+          "definition": "Shell 脚本收到的实参，如 `$1`、`$2`、`$#`"
+        },
+        {
+          "term": "预处理",
+          "definition": "在真正编译前做 `#include`、`#define` 的展开"
+        },
+        {
+          "term": "目标文件",
+          "definition": "汇编后的中间产物，通常是 `.o`"
+        },
+        {
+          "term": "头文件保护宏",
+          "definition": "用 `#ifndef` / `#define` / `#endif` 防止头文件重复展开"
+        },
+        {
+          "term": "前置声明",
+          "definition": "先声明类型名，如 `struct A;`，但还没有完整定义"
+        },
+        {
+          "term": "不完整类型",
+          "definition": "只有名字、没有完整结构信息的类型，不能随便 `sizeof` 或访问成员"
+        },
+        {
+          "term": "链接",
+          "definition": "把多个目标文件和库合成最终可执行文件的步骤"
+        }
+      ]
+    },
+    {
+      "type": "open-question",
+      "content": "下一步要接上的主线是：`-I`、`-L`、`-l` 分别怎么配合头文件路径、库文件路径和链接阶段使用？"
+    },
+    {
+      "type": "review-questions",
+      "items": [
+        {
+          "question": "执行 `./myprog hello world` 时，`argc` 和 `argv[0..2]` 分别是什么？",
+          "answer": "`argc = 3`，`argv[0] = \"./myprog\"`，`argv[1] = \"hello\"`，`argv[2] = \"world\"`。"
+        },
+        {
+          "question": "把 `-E`、`-S`、`-c`、默认 `gcc test.c` 分别对应到哪一步和哪种输出？",
+          "answer": "`-E`：停在预处理，通常得到 `.i`；`-S`：停在编译，得到 `.s`；`-c`：停在汇编后、链接前，得到 `.o`；默认 `gcc test.c`：继续到链接，得到可执行文件，Linux 下默认常见 `a.out`。"
+        },
+        {
+          "question": "为什么 `#include` 找不到头文件通常是预处理阶段报错，而少分号通常是编译阶段报错？",
+          "answer": "因为 `#include` 属于预处理阶段的文本展开，文件找不到就连展开都做不成；少分号属于 C 语法问题，要等到真正编译时才会被检查出来。"
+        },
+        {
+          "question": "为什么 `struct A *p;` 能写，但 `sizeof(struct A)` 不能？",
+          "answer": "因为 `struct A *p;` 只需要知道这是一个指针，指针大小固定；而 `sizeof(struct A)` 需要知道 `struct A` 的完整大小，前置声明 `struct A;` 还不够。"
+        },
+        {
+          "question": "如果两个头文件用了同一个保护宏名，会发生什么？",
+          "answer": "后面那个头文件可能会因为保护宏已经被定义而整段跳过，导致它里面的声明和定义根本没展开进来。"
+        }
+      ]
+    }
+  ]
+}

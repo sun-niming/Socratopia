@@ -1,0 +1,44 @@
+{
+  "title": "const迭代器及其与非const迭代器的关系",
+  "definition": "容器需要提供 const 迭代器，以便在只读上下文中遍历容器。非 const 迭代器必须能够转换为 const 迭代器。教材通过类模板 const_directed_graph_iterator 定义 directed_graph 的 const 迭代器，并将具体的 DirectedGraph 类型作为模板参数，从而使每个 const_directed_graph_iterator 对象对应 directed_graph 的某个具体实例。",
+  "key_points": [
+    "const 迭代器只能通过迭代器访问 const 元素，不能借此修改元素。",
+    "const_directed_graph_iterator 必须是类模板，因为它需要与某个具体的 DirectedGraph 类型建立一对一映射。",
+    "非 const 迭代器转换为 const 迭代器是容器迭代器设计中的要求。"
+  ],
+  "examples": [
+    "const 迭代器的类型别名可以写成：`using pointer = const value_type*;` 和 `using reference = const value_type&;`。",
+    "一个普通迭代器可以转换成指向同一容器元素的 const 迭代器，但反向从 const 迭代器转换为可修改的非 const 迭代器是不允许的。"
+  ],
+  "misconceptions": [
+    "const 迭代器中的 const 主要限制迭代器所访问的元素，而不是表示迭代器对象自身永远不能递增或递减。",
+    "非 const 迭代器可以转换为 const 迭代器，但不能据此推断 const 迭代器可以安全地转换回非 const 迭代器。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么 const_directed_graph_iterator 要设计成类模板？",
+      "a": "因为每个迭代器对象都必须对应 directed_graph 的某个具体实例，所以需要把 DirectedGraph 类型作为模板参数。"
+    },
+    {
+      "q": "非 const 迭代器与 const 迭代器之间应具有什么转换关系？",
+      "a": "非 const 迭代器必须能够转换为 const 迭代器。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "const正确性",
+    "C++模板",
+    "迭代器"
+  ],
+  "source_pages": [
+    735,
+    735
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1529_const迭代器及其与非const迭代器的关系",
+  "_chunk_pages": [
+    733,
+    736
+  ]
+}

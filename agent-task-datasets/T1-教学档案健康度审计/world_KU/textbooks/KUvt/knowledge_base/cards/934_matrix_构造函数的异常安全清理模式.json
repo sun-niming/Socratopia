@@ -1,0 +1,54 @@
+{
+  "title": "Matrix 构造函数的异常安全清理模式",
+  "definition": "教材中的 Matrix 类使用裸指针表示二维动态数组。其构造函数先分配并零初始化指针数组，再逐行分配元素数组；如果后续分配失败，就捕获所有异常、调用 cleanup() 释放已经成功分配的部分，并使用 std::throw_with_nested(std::bad_alloc()) 将原异常嵌套在 std::bad_alloc 中。",
+  "key_points": [
+    "先执行 m_matrix = new T*[width]{};，花括号使指针数组进行零初始化，每个元素初始为 nullptr。",
+    "只有 m_matrix 分配成功后，才设置 m_width 和 m_height。",
+    "逐行执行 m_matrix[i] = new T[height];；后续任一行分配失败，都必须清理此前已分配的行。",
+    "cleanup() 遍历每一行并执行 delete[] m_matrix[i]，然后执行 delete[] m_matrix。对 nullptr 执行 delete[] 是安全的，因此零初始化简化了清理逻辑。",
+    "清理完成后将 m_matrix 设为 nullptr，并将 m_width 和 m_height 设为 0。",
+    "教材明确指出，生产级代码应避免使用裸指针，优先使用标准库容器。"
+  ],
+  "examples": [
+    "矩阵指针数组的零初始化：$$\\text{m\\_matrix} = \\operatorname{new}\\ T^*[\\text{width}]\\{\\};$$",
+    "清理逻辑可概括为：$$\\text{for } i=0\\ldots \\text{m\\_width}-1:\\quad \\operatorname{delete[]}\\ \\text{m\\_matrix}[i];\\qquad \\operatorname{delete[]}\\ \\text{m\\_matrix};$$",
+    "构造函数异常处理的核心形式：try { for (...) { m_matrix[i] = new T[height]; } } catch (...) { cleanup(); std::throw_with_nested(std::bad_alloc()); }"
+  ],
+  "misconceptions": [
+    "不能只释放最外层的 m_matrix 指针数组；还必须释放已经成功分配的每一行。",
+    "不要在 m_matrix 分配失败时执行依赖 m_matrix 的清理；此时尚未获得需要释放的矩阵资源。",
+    "将指针数组写成 new T*[width]{} 的目的之一是把元素初始化为 nullptr，而不是初始化矩阵元素本身。",
+    "该示例使用裸指针是为了演示异常清理问题，不代表生产代码推荐使用裸指针。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么 Matrix 构造函数先将 m_matrix 分配为 new T*[width]{}？",
+      "a": "这样指针数组会被零初始化，每个元素都是 nullptr，从而即使部分行尚未分配，cleanup() 也可以对这些 nullptr 执行 delete[]。"
+    },
+    {
+      "q": "如果 Matrix 后续某一行的 new T[height] 失败，应做什么？",
+      "a": "捕获异常，调用 cleanup() 释放已经分配的行和指针数组，然后将异常嵌套在 std::bad_alloc 中重新抛出。"
+    },
+    {
+      "q": "为什么 m_width 和 m_height 应在 m_matrix 分配成功后再设置？",
+      "a": "因为只有指针数组分配成功后，矩阵才拥有可用于清理的基础资源；这样可以避免在首次分配失败时留下不一致的状态。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "构造函数异常安全",
+    "动态数组与 delete[]",
+    "std::bad_alloc"
+  ],
+  "source_pages": [
+    462,
+    463
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "934_matrix_构造函数的异常安全清理模式",
+  "_chunk_pages": [
+    461,
+    464
+  ]
+}

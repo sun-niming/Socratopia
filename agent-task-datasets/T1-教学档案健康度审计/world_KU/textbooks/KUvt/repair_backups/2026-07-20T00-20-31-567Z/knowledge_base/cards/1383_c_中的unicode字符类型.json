@@ -1,0 +1,46 @@
+{
+  "title": "C++中的Unicode字符类型",
+  "definition": "C++提供了多种用于表示字符或编码单元的类型：`char`、`char8_t`、`char16_t`、`char32_t` 和 `wchar_t`。其中，`char8_t`、`char16_t` 和 `char32_t` 分别适合作为 UTF-8、UTF-16 和 UTF-32 编码的基本构建单位；`wchar_t` 用于宽字符，但其大小和编码依赖编译器或平台。",
+  "key_points": [
+    "`char` 为 8 位类型，可保存 ASCII 字符，也可作为 UTF-8 编码的基本构建单位。",
+    "`char8_t`、`char16_t` 和 `char32_t` 分别对应 UTF-8、UTF-16 和 UTF-32 的编码单元。",
+    "教材指出 `char8_t` 至少为 8 位，`char16_t` 至少为 16 位，`char32_t` 至少为 32 位；C++标准还规定了这些类型与对应编码的关系。",
+    "`wchar_t` 的大小和编码取决于编译器；教材以 Windows 上为 16 位、其他平台可能为 32 位为例。",
+    "使用定宽语义的 `char8_t`、`char16_t` 和 `char32_t`，可避免依赖 `wchar_t` 的平台大小。"
+  ],
+  "examples": [
+    "`char` 可作为 UTF-8 编码的基本构建单位，一个 Unicode 字符可能由 1 到 4 个 `char` 表示。",
+    "`char16_t` 可作为 UTF-16 编码的基本构建单位，一个 Unicode 字符最多使用两个 `char16_t`。",
+    "`char32_t` 可作为 UTF-32 编码的基本构建单位，一个 Unicode 字符使用一个 `char32_t`。"
+  ],
+  "misconceptions": [
+    "`wchar_t` 并不是跨平台固定宽度的 Unicode 类型。",
+    "一个 `char` 不一定表示一个完整的 Unicode 字符；在 UTF-8 中，一个字符可能由多个 `char` 组成。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么跨平台代码中不能假设 `wchar_t` 总是 16 位？",
+      "a": "因为 C++标准没有规定 `wchar_t` 的固定大小；不同平台和编译器可能使用不同大小。"
+    },
+    {
+      "q": "哪三种类型分别适合作为 UTF-8、UTF-16 和 UTF-32 的编码单元？",
+      "a": "分别是 `char8_t`、`char16_t` 和 `char32_t`。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "UCS、Unicode与Unicode编码",
+    "C++基本字符类型"
+  ],
+  "source_pages": [
+    662,
+    662
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 char8_t char16_t char32_t wchar_t 标准规定大小 UTF-8 UTF-16 UTF-32 编码单元",
+  "concept_id": "1383_c_中的unicode字符类型",
+  "_chunk_pages": [
+    661,
+    664
+  ]
+}

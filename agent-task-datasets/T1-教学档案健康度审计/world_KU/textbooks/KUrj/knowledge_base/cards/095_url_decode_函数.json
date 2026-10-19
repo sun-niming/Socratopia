@@ -1,0 +1,39 @@
+{
+  "title": "url_decode 函数",
+  "definition": "`url_decode`用于把 URL 中的百分号编码还原成原始字符。原型为`int url_decode(const char *src, char *dst, size_t dst_len);`。其中`src`是原始 URL 路径，`dst`是输出缓冲区，`dst_len`是缓冲区大小。成功返回 0；如果编码非法或输出空间不足，返回 -1。原文要求在路径安全检查前调用它。",
+  "key_points": [
+    "作用是还原 URL 中的百分号编码。",
+    "必须在路径安全检查之前调用。",
+    "返回值约定：成功返回 0，非法编码或空间不足返回 -1。"
+  ],
+  "examples": [
+    "原文示例：`if (url_decode(req.path, decoded, sizeof(decoded)) < 0) { send_error(fd, 400, 'Bad Request', 'bad url encoding'); return; }`"
+  ],
+  "misconceptions": [
+    "以为可以先检查`..`再解码。",
+    "以为只要解码成功就一定安全。",
+    "以为输出缓冲区大小不重要。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`url_decode`为什么必须早于目录穿越检查？",
+      "a": "因为攻击者可能把危险片段编码起来，必须先还原，再做安全检查，才能发现真正的路径内容。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "URL 编码基础",
+    "C 语言基础"
+  ],
+  "source_pages": [
+    57,
+    58
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "095_url_decode_函数",
+  "_chunk_pages": [
+    57,
+    60
+  ]
+}

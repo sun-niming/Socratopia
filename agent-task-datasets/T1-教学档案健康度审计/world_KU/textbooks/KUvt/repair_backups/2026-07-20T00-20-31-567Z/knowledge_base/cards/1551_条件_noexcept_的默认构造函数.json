@@ -1,0 +1,38 @@
+{
+  "title": "条件 noexcept 的默认构造函数",
+  "definition": "directed_graph 的默认构造函数可以使用条件异常说明，使其仅在分配器类型 $A$ 的默认构造函数不会抛出异常时才声明为 $\\texttt{noexcept}$。典型写法是 $\\texttt{directed_graph() noexcept(noexcept(A\\\\{\\\\})) = default;}$。",
+  "key_points": [
+    "内层的 $\\texttt{noexcept(A\\\\{\\\\})}$ 用于判断表达式 $\\texttt{A\\\\{\\\\}}$ 是否不会抛出异常。",
+    "外层的 $\\texttt{noexcept(...)}$ 将这个判断结果作为 directed_graph 默认构造函数的异常保证。",
+    "因此，当 $A$ 的默认构造函数为 noexcept 时，directed_graph 的默认构造函数也为 noexcept；否则不作无异常承诺。"
+  ],
+  "examples": [
+    "$\\texttt{directed_graph() noexcept(noexcept(A\\\\{\\\\})) = default;}$$。"
+  ],
+  "misconceptions": [
+    "这不是无条件的 $\\texttt{noexcept}$；它的结果取决于 $A$ 的默认构造是否可能抛出异常。",
+    "外层和内层的两个 $\\texttt{noexcept}$ 作用不同：内层检查表达式，外层声明函数的异常属性。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么 directed_graph 的默认构造函数写成 $\\texttt{noexcept(noexcept(A\\\\{\\\\}))}$？",
+      "a": "为了让异常说明反映分配器 $A$ 的默认构造行为：只有当 $A\\\\{\\\\}$ 不会抛出异常时，directed_graph 默认构造函数才是 noexcept。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++异常说明 noexcept",
+    "C++默认构造函数"
+  ],
+  "source_pages": [
+    749,
+    749
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1551_条件_noexcept_的默认构造函数",
+  "_chunk_pages": [
+    749,
+    752
+  ]
+}

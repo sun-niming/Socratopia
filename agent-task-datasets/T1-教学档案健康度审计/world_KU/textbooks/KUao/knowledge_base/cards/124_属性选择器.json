@@ -1,0 +1,52 @@
+{
+  "title": "属性选择器",
+  "definition": "CSS属性选择器用于匹配具有特定属性或属性值的元素。定义时用方括号“[]”把属性包围起来；如果要同时约束多个属性，需要分别写多个“[]”。",
+  "key_points": [
+    "基本形式是 [属性名]{ CSS声明; }。",
+    "[attribute] 选取带有指定属性的元素。",
+    "[attribute=value] 选取带有指定属性和值的元素。",
+    "[attribute~=value] 选取属性值中包含指定词汇的元素（属性值按空格分隔成字词列表）。",
+    "[attribute|=value] 选取属性值等于 value 或以“value-”开头的元素。",
+    "[attribute^=value] 匹配属性值以指定值开头的元素。",
+    "[attribute$=value] 匹配属性值以指定值结尾的元素。",
+    "[attribute*=value] 匹配属性值中包含指定值的元素。"
+  ],
+  "examples": [
+    "[href]",
+    "[type=\"text\"]",
+    "[class~=\"btn\"]",
+    "[lang|=\"zh\"]",
+    "[src^=\"https\"]",
+    "[src$=\".png\"]",
+    "[data-id*=\"item\"]"
+  ],
+  "misconceptions": [
+    "属性选择器不等于类选择器；它是按属性及属性值匹配元素。",
+    "多个属性条件不能写成一个方括号里随便拼接，原文要求多个属性需使用多个“[]”。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "属性选择器的基本书写符号是什么？",
+      "a": "方括号“[]”."
+    },
+    {
+      "q": "[attribute$=value] 的作用是什么？",
+      "a": "匹配属性值以指定值结尾的每个元素。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "CSS选择器"
+  ],
+  "source_pages": [
+    97,
+    100
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "124_属性选择器",
+  "_chunk_pages": [
+    97,
+    100
+  ]
+}

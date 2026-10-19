@@ -1,0 +1,45 @@
+{
+  "title": "派生类通过重写虚函数实现不同的里程估算",
+  "definition": "在里程估算示例中，基类 `MilesEstimator` 提供统一的 `getMilesLeft()` 接口和剩余油量访问接口；派生类 `EfficientCarMilesEstimator` 通过重写用于计算每加仑里程的虚函数，得到不同的剩余里程结果。派生类仍可以使用继承来的 `setGallonsLeft(2)` 和 `getMilesLeft()`，而具体计算效果由派生类的虚函数实现决定。",
+  "key_points": [
+    "基类接口可以封装共同算法，例如通过 `getMilesPerGallon() * getGallonsLeft()` 计算剩余里程。",
+    "派生类可以提供更高燃油效率的实现，从而在相同剩余油量下得到更大的 `getMilesLeft()` 结果。",
+    "基类指针或引用调用虚函数时，若函数被正确重写，将使用实际对象对应的派生类实现。",
+    "原文示例使用 `EfficientCarMilesEstimator myEstimator;`，设置两加仑剩余油量后调用 `myEstimator.getMilesLeft()` 输出高效估算结果。"
+  ],
+  "examples": [
+    "原文示例的使用方式：`EfficientCarMilesEstimator myEstimator;`、`myEstimator.setGallonsLeft(2);`、`myEstimator.getMilesLeft()`。",
+    "计算结构可表示为：$$\\text{EfficientCarMilesEstimator::getMilesLeft()}=\\text{派生类的每加仑里程}\\times 2$$。"
+  ],
+  "misconceptions": [
+    "派生类不一定要重写整个 `getMilesLeft()`；它可以只重写被 `getMilesLeft()` 调用的虚函数，从而改变计算的一部分。",
+    "同样的剩余油量并不意味着所有派生类对象的剩余里程相同，因为不同估算器可能使用不同的燃油效率。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`EfficientCarMilesEstimator` 如何在不改变调用方式的情况下实现更高的剩余里程估算？",
+      "a": "它重写用于确定每加仑行驶里程的虚函数；基类的 `getMilesLeft()` 仍按“每加仑里程乘剩余油量”计算，但虚函数调用会使用派生类实现。"
+    },
+    {
+      "q": "为什么 `EfficientCarMilesEstimator` 仍然可以调用 `setGallonsLeft(2)`？",
+      "a": "因为该函数由基类提供且可访问，派生类对象继承了这个接口。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "虚函数与动态绑定",
+    "基类接口与派生类重写",
+    "封装"
+  ],
+  "source_pages": [
+    339,
+    340
+  ],
+  "needs_verification": true,
+  "verify_query": "Marc Gregoire C++20 Advanced Programming 第340页 EfficientCarMilesEstimator getMilesPerGallon getMilesLeft virtual override",
+  "concept_id": "440_派生类通过重写虚函数实现不同的里程估算",
+  "_chunk_pages": [
+    337,
+    340
+  ]
+}

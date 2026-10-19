@@ -1,0 +1,41 @@
+{
+  "title": "Echo Server 的用途",
+  "definition": "Echo Server 是最小的网络闭环：客户端发什么，服务器就回什么。它用于先验证 TCP 通路是否正常，再继续实现 HTTP、文件读取等更上层功能。",
+  "key_points": [
+    "它只验证“连通性”和“回显”，不涉及 HTTP。",
+    "它不涉及文件，不涉及 MIME。",
+    "先让 Echo Server 稳定，后面的 Web Server 才更容易定位问题。"
+  ],
+  "examples": [
+    "用 `nc` 或 `telnet` 连到服务器后输入 `hello`，若服务器回显 `hello`，说明基础 TCP 通路可用。"
+  ],
+  "misconceptions": [
+    "Echo Server 不是 Web Server，也不是完整 HTTP 服务器。",
+    "如果 Echo Server 都不稳定，先做浏览器页面只会把问题藏得更深。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么建议先写 Echo Server？",
+      "a": "因为它是最小网络闭环，可以先证明 TCP 通了，再排查更复杂的 HTTP 和文件逻辑。"
+    },
+    {
+      "q": "Echo Server 会处理 HTTP 吗？",
+      "a": "不会，它只做输入什么回什么的回显。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "TCP 连接常用系统调用"
+  ],
+  "source_pages": [
+    13,
+    14
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "002_echo_server_的用途",
+  "_chunk_pages": [
+    13,
+    16
+  ]
+}

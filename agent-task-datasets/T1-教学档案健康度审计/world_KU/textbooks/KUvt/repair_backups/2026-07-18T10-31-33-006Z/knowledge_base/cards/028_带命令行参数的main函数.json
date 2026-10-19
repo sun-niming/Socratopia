@@ -1,0 +1,43 @@
+{
+  "title": "带命令行参数的main函数",
+  "definition": "`main()` 可以接收命令行参数，形式为 `int main(int argc, char* argv[])`。其中 `argc` 表示参数数量，`argv` 是指向各参数字符串的数组；`argv[0]` 对应程序调用时的程序名或程序路径表示。",
+  "key_points": [
+    "`argc` 用于记录命令行参数的数量。",
+    "`argv` 保存命令行参数字符串。",
+    "`argv[0]` 是命令行参数数组中的第一个字符串，通常表示被调用的程序。"
+  ],
+  "examples": [
+    "int main(int argc, char* argv[])\n{\n    // argc 是参数数量，argv 保存参数字符串\n    return 0;\n}"
+  ],
+  "misconceptions": [
+    "不要把 `argc` 理解为参数文本；它是数量。",
+    "不要把 `argv` 理解为单个字符串；它是参数字符串的数组。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "在 `int main(int argc, char* argv[])` 中，`argc` 和 `argv` 分别表示什么？",
+      "a": "`argc` 表示命令行参数数量，`argv` 保存各个命令行参数字符串。"
+    },
+    {
+      "q": "`argv[0]` 通常是什么？",
+      "a": "通常是程序调用时的程序名或程序路径表示。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "main函数的基本形式",
+    "数组",
+    "指针"
+  ],
+  "source_pages": [
+    37,
+    40
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "028_带命令行参数的main函数",
+  "_chunk_pages": [
+    37,
+    40
+  ]
+}

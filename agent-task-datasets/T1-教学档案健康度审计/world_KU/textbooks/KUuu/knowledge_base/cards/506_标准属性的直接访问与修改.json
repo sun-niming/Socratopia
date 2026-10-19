@@ -1,0 +1,45 @@
+{
+  "title": "标准属性的直接访问与修改",
+  "definition": "对于常见的标准HTML属性，可以像访问普通对象属性一样直接读取和修改，例如`id`、`className`、`src`、`href`、`value`。",
+  "key_points": [
+    "标准HTML属性可直接通过元素对象属性访问。",
+    "适用于常见属性，如`id`、`className`、`src`、`href`、`value`。",
+    "这是操作标准属性的简便方式。"
+  ],
+  "examples": [
+    "imgElement.src = 'new_image.jpg';",
+    "linkElement.href = 'https://new-url.com';",
+    "inputElement.value = 'New value';",
+    "element.id = 'new-id';",
+    "element.className = 'class1 class2';"
+  ],
+  "misconceptions": [
+    "认为所有属性都能用这种方式处理；实际上教材强调的是标准HTML属性。",
+    "把`className`误认为单个类名；它对应的是整个`class`属性字符串。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "哪些属性可以直接像对象属性一样访问和修改？",
+      "a": "如`id`、`className`、`src`、`href`、`value`等标准HTML属性。"
+    },
+    {
+      "q": "`element.className`表示什么？",
+      "a": "表示元素的`class`属性字符串。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "DOM元素基础"
+  ],
+  "source_pages": [
+    354,
+    355
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "506_标准属性的直接访问与修改",
+  "_chunk_pages": [
+    353,
+    356
+  ]
+}

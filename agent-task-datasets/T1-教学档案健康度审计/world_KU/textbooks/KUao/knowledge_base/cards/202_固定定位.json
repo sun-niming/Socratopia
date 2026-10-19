@@ -1,0 +1,41 @@
+{
+  "title": "固定定位",
+  "definition": "固定定位（position: fixed）是相对于视口（viewport，浏览器窗口）进行偏移的定位方式，定位基点是浏览器窗口。不管视口如何滚动，元素的位置始终不变。",
+  "key_points": [
+    "定位基点是视口而不是文档中的普通位置",
+    "页面滚动时，固定定位元素的位置保持不变",
+    "如果与 top、bottom、left、right 四个属性一起使用，元素的初始位置基于视口计算；否则初始位置是元素的默认位置"
+  ],
+  "examples": [
+    "position: fixed; top: 0; right: 0;"
+  ],
+  "misconceptions": [
+    "认为固定定位会随着页面滚动而移动",
+    "认为 fixed 的初始位置一定来自视口，即使没有设置 top/bottom/left/right"
+  ],
+  "qa_pairs": [
+    {
+      "q": "固定定位是相对于什么进行偏移的？",
+      "a": "相对于视口（浏览器窗口）进行偏移。"
+    },
+    {
+      "q": "fixed 元素在页面滚动时会怎样？",
+      "a": "位置始终不变。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "定位方式（层定位）"
+  ],
+  "source_pages": [
+    141,
+    144
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "202_固定定位",
+  "_chunk_pages": [
+    141,
+    144
+  ]
+}

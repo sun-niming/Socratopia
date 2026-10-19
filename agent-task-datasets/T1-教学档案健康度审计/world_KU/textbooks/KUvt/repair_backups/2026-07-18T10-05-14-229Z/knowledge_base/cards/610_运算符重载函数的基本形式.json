@@ -1,0 +1,43 @@
+{
+  "title": "运算符重载函数的基本形式",
+  "definition": "C++允许为自定义类型定义运算符函数，使运算符能够作用于该类型的对象。运算符函数的名称由关键字`operator`和运算符符号组成，例如`operator+`表示重载加法运算符。原文给出了`SpreadsheetCell`类型的运算符函数声明示例：`SpreadsheetCell operator.(const SpreadsheetCell& lhs, const SpreadsheetCell& rhs);`，但其中的运算符符号在原文扫描文本中存在明显识别错误。",
+  "key_points": [
+    "运算符重载函数使用`operator`加运算符符号命名，例如`operator+`、`operator/`。",
+    "运算符重载函数可以接收自定义类型对象作为参数，并返回自定义类型或其他类型。",
+    "原文示例中的`SpreadsheetCell`、`lhs`和`rhs`分别表示自定义类型、左操作数和右操作数。"
+  ],
+  "examples": [
+    "典型的二元运算符重载声明形式为：`SpreadsheetCell operator+(const SpreadsheetCell& lhs, const SpreadsheetCell& rhs);`",
+    "其中`lhs`和`rhs`分别表示表达式左侧和右侧的操作数。"
+  ],
+  "misconceptions": [
+    "运算符重载不是创造新的运算符，而是为已有运算符定义其用于自定义类型时的行为。",
+    "`operator+`中的`+`不是普通函数名的一部分，而是运算符函数名称的组成部分。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "C++中如何命名一个用于重载加法运算符的函数？",
+      "a": "使用`operator+`作为函数名，例如`SpreadsheetCell operator+(const SpreadsheetCell& lhs, const SpreadsheetCell& rhs);`。"
+    },
+    {
+      "q": "在二元运算符函数中，`lhs`和`rhs`通常表示什么？",
+      "a": "`lhs`表示左操作数，`rhs`表示右操作数。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "C++函数声明",
+    "C++类与对象"
+  ],
+  "source_pages": [
+    469,
+    472
+  ],
+  "needs_verification": true,
+  "verify_query": "《C++20高级编程》第5版 第469页 运算符重载 SpreadsheetCell operator lhs rhs operator+ 原文",
+  "concept_id": "610_运算符重载函数的基本形式",
+  "_chunk_pages": [
+    469,
+    472
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "title": "img标记",
+  "definition": "`<img>` 是 HTML 中用于插入图片的标记，它是行内元素。常见属性包括：`src`、`alt`、`title`、`align`、`width`、`height`。",
+  "key_points": [
+    "`src` 用来指定图片文件的 URL 地址。",
+    "`alt` 在图片无法显示时显示替换文字。",
+    "`title` 在鼠标停留在图片上时显示说明文字。",
+    "`align` 用来设置图片对齐方式，默认是基线对齐，即图片下边缘与文字下边缘对齐。",
+    "`width`、`height` 用来设置图片在网页中的宽和高。"
+  ],
+  "examples": [
+    "`<img src=\"photo.jpg\" alt=\"风景图\" title=\"点击查看风景\" width=\"300\" height=\"200\">`"
+  ],
+  "misconceptions": [
+    "`<img>` 不是块级元素，而是行内元素。",
+    "`alt` 不是图片标题，它是在图片无法显示时替代显示的文字。",
+    "`width` 和 `height` 是图片在网页中的显示尺寸，不是图片文件本身的内容。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`<img>` 标记的作用是什么？",
+      "a": "用于在网页中插入图片。"
+    },
+    {
+      "q": "`alt` 属性的作用是什么？",
+      "a": "当图片无法显示时，显示替换文字。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "HTML基础"
+  ],
+  "source_pages": [
+    57,
+    60
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "092_img标记",
+  "_chunk_pages": [
+    57,
+    60
+  ]
+}

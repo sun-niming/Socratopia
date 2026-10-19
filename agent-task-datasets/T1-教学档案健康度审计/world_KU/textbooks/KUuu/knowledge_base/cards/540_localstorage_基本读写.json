@@ -1,0 +1,44 @@
+{
+  "title": "localStorage 基本读写",
+  "definition": "localStorage 是浏览器提供的本地存储对象，按“键-值”方式保存数据。常用 setItem 写入数据，getItem 读取数据；如果读取的键不存在，返回 null。它还提供 removeItem 删除单个键、clear 清空全部数据、length 查看已保存的项数。",
+  "key_points": [
+    "用键名保存和读取数据，如 username、theme、settings。",
+    "getItem 取不到对应键时返回 null。",
+    "length 表示当前存储了多少项。"
+  ],
+  "examples": [
+    "localStorage.setItem('username', 'JohnDoe');",
+    "const theme = localStorage.getItem('theme');",
+    "const color = localStorage.getItem('color'); // null",
+    "console.log(localStorage.length);"
+  ],
+  "misconceptions": [
+    "以为 localStorage 只能写不能读。",
+    "以为读取不存在的键会报错，其实返回 null。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "localStorage 读取不到某个键时会返回什么？",
+      "a": "返回 null。"
+    },
+    {
+      "q": "localStorage 用来统计已保存项数的属性是什么？",
+      "a": "length。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "键值对存储"
+  ],
+  "source_pages": [
+    381,
+    384
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "540_localstorage_基本读写",
+  "_chunk_pages": [
+    381,
+    384
+  ]
+}

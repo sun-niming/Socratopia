@@ -1,0 +1,45 @@
+{
+  "title": "std::rel_ops提供关系运算符模板",
+  "definition": "`std::rel_ops` 位于 `<utility>` 中，原文展示了其中可由已有运算符推导其他关系运算符的模板。模板要求类型 `T` 至少提供某些基础比较运算符，然后根据这些运算符生成 `!=`、`>`、`<=` 和 `>=` 等比较操作。",
+  "key_points": [
+    "原文展示的模板形式为 `template<class T> bool operator!=(const T& a, const T& b);`，并注明需要已有的相等运算符。",
+    "原文还展示了 `operator>`、`operator<=` 和 `operator>=` 的模板，并注明它们需要已有的 `operator<`。",
+    "这些模板位于 `std::rel_ops` 命名空间或相关作用域中，使用时需要注意命名空间。",
+    "该机制的核心思想是：只实现一部分基本关系运算符，就可以由库模板补充其他关系运算符。"
+  ],
+  "examples": [
+    "原文列出的形式包括：`template<class T> bool operator!=(const T& a, const T& b);`，其注释说明需要 `operator==`。",
+    "原文列出的形式还包括：`template<class T> bool operator>(const T& a, const T& b);`、`operator<=` 和 `operator>=`，这些模板的注释说明需要 `operator<`。"
+  ],
+  "misconceptions": [
+    "`std::rel_ops` 不会凭空知道任意类型的比较关系；它依赖类型已经提供的基础比较运算符。",
+    "使用关系运算符模板不代表所有比较操作都具有独立的自定义实现，它们可能是由其他运算符组合推导出来的。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "原文中 `std::rel_ops` 的 `operator!=` 模板依赖什么运算符？",
+      "a": "它依赖类型已有的 `operator==`。"
+    },
+    {
+      "q": "原文中 `operator>`、`operator<=` 和 `operator>=` 模板依赖什么运算符？",
+      "a": "它们依赖类型已有的 `operator<`。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "函数模板",
+    "运算符重载",
+    "命名空间"
+  ],
+  "source_pages": [
+    473,
+    476
+  ],
+  "needs_verification": true,
+  "verify_query": "C++20 std::rel_ops operator!= operator> operator<= operator>= requires operator< utility",
+  "concept_id": "617_std_rel_ops提供关系运算符模板",
+  "_chunk_pages": [
+    473,
+    476
+  ]
+}

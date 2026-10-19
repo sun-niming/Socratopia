@@ -1,0 +1,42 @@
+{
+  "title": "replace 方法",
+  "definition": "字符串对象的 replace 方法用于把字符串中匹配到的内容替换成新的字符串。教材给出的语法是 str.replace(reg, 'new str')，其中 reg 可以是正则表达式。",
+  "key_points": [
+    "语法：str.replace(reg, 'new str')。",
+    "可用正则表达式一次替换多个符合条件的内容。",
+    "替换为空字符串时，常用于删除某类字符。"
+  ],
+  "examples": [
+    "const regex = /\\d+/g; // 匹配所有数字\nconst str = \"a1b2c3\";\nconst replacedStr = str.replace(regex, \"\"); // 替换所有匹配字符为空字符串\nconsole.log(replacedStr); // \"abc\""
+  ],
+  "misconceptions": [
+    "以为 replace 只能替换第一个匹配项，实际上配合全局正则可以替换所有匹配项。",
+    "以为替换后必须是更长的字符串，实际上也可以替换为空字符串实现删除。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "replace 方法的基本语法是什么？",
+      "a": "str.replace(reg, 'new str')。"
+    },
+    {
+      "q": "如何用 replace 去除字符串中的所有数字？",
+      "a": "使用匹配数字的正则表达式，并把替换内容设为空字符串。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "正则表达式基础",
+    "字符串基础"
+  ],
+  "source_pages": [
+    321,
+    324
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "461_replace_方法",
+  "_chunk_pages": [
+    321,
+    324
+  ]
+}

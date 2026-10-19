@@ -1,0 +1,43 @@
+{
+  "title": "用$?判断上一条命令是否成功",
+  "definition": "教材示例在 if 语句中使用 \"$?\" 判断前一条命令的返回状态。示例先执行文件相关操作，再用 \"[ $? -eq 0 ]\" 判断上一条命令返回值是否等于0；若为0，则输出 \"Write successfully\"，否则输出 \"write error\"。这说明可以借助 \"$?\" 把前一条命令的执行结果接入条件判断。",
+  "key_points": [
+    "$? 表示上一条命令的返回状态",
+    "示例中使用 [ $? -eq 0 ] 进行比较",
+    "返回值为0时进入成功分支",
+    "返回值非0时进入失败分支"
+  ],
+  "examples": [
+    ">$fname\nif [ $? -eq 0 ]\nthen\necho Write successfully\nelse\necho write error\nfi"
+  ],
+  "misconceptions": [
+    "不要把 $? 理解成当前 if 语句本身的结果；它表示前一条命令的返回状态",
+    "不要忽略比较步骤；示例是先取 $? ，再与0比较"
+  ],
+  "qa_pairs": [
+    {
+      "q": "教材示例中用什么变量获取上一条命令的返回状态？",
+      "a": "$?。"
+    },
+    {
+      "q": "示例中当 $? 等于0时输出什么？",
+      "a": "输出 \"Write successfully\"。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "if条件判断结构",
+    "命令返回值"
+  ],
+  "source_pages": [
+    77,
+    80
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "131_用_判断上一条命令是否成功",
+  "_chunk_pages": [
+    77,
+    80
+  ]
+}

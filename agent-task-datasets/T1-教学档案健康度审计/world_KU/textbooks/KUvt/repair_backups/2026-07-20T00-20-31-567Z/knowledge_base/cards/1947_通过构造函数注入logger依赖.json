@@ -1,0 +1,44 @@
+{
+  "title": "通过构造函数注入Logger依赖",
+  "definition": "如果Foo类需要日志功能，可以通过构造函数接收ILogger引用，并将该引用保存为成员变量。这样Foo只依赖ILogger接口，具体日志实现由创建Foo的代码提供。",
+  "key_points": [
+    "构造函数参数类型是ILogger&，表示Foo依赖ILogger接口。",
+    "构造函数使用成员初始化列表，将传入的logger绑定到成员变量m_logger。",
+    "Foo不需要在内部创建Logger对象。",
+    "外部可以向Foo注入真实Logger或测试用的模拟ILogger。"
+  ],
+  "examples": [
+    "构造函数注入的形式为：\n```text\nclass Foo {\npublic:\n    explicit Foo(ILogger& logger) : m_logger{logger} {}\nprivate:\n    ILogger& m_logger;\n};\n```"
+  ],
+  "misconceptions": [
+    "Foo保存的是ILogger引用，不是必须保存具体Logger对象。",
+    "构造函数注入要求在创建Foo时提供一个有效的ILogger对象；Foo不能在没有日志依赖的情况下按该构造函数形式创建。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "Foo如何通过构造函数获得日志服务？",
+      "a": "Foo的构造函数接收ILogger&参数，并通过成员初始化列表将其保存到m_logger中。"
+    },
+    {
+      "q": "测试Foo时可以注入什么对象？",
+      "a": "可以注入ILogger接口的模拟实现，以验证Foo是否记录了正确的信息。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "引用成员",
+    "构造函数成员初始化列表",
+    "依赖注入"
+  ],
+  "source_pages": [
+    943,
+    944
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1947_通过构造函数注入logger依赖",
+  "_chunk_pages": [
+    941,
+    944
+  ]
+}

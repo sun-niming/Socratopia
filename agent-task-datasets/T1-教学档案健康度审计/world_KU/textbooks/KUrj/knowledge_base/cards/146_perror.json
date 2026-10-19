@@ -1,0 +1,44 @@
+{
+  "title": "perror",
+  "definition": "`perror(const char *s)` 用于把当前 `errno` 对应的错误信息打印到标准错误。它没有返回值，且依赖全局 `errno`，所以要在失败后尽快调用。",
+  "key_points": [
+    "头文件是 `<stdio.h>`。",
+    "原型是 `void perror(const char *s);`。",
+    "作用是打印当前 `errno` 对应的错误信息到标准错误。",
+    "它没有返回值。",
+    "因为读取的是全局 `errno`，所以应该在失败后尽快调用。"
+  ],
+  "examples": [
+    "例如：`perror(\"open\");` 会把与当前 `errno` 对应的错误原因打印出来。"
+  ],
+  "misconceptions": [
+    "`perror` 可以随便延迟很久再调用，输出仍然准确。",
+    "`perror` 是用来传入自定义错误码的。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`perror` 是根据什么来输出错误信息的？",
+      "a": "根据当前全局 `errno`。"
+    },
+    {
+      "q": "为什么要在失败后尽快调用 `perror`？",
+      "a": "因为它读取的是全局 `errno`，拖得太久可能被后续操作改掉。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "errno 基础",
+    "标准错误输出基础"
+  ],
+  "source_pages": [
+    93,
+    96
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "146_perror",
+  "_chunk_pages": [
+    93,
+    96
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "title": "检查和处理 istream 的输入状态",
+  "definition": "C++ 输入流可以通过 `good()`、`bad()`、`fail()` 和 `eof()` 检查当前状态。读取操作失败后，应根据状态判断是到达输入结束、遇到错误，还是发生不可恢复的流错误；对于可恢复的格式输入错误，可以调用 `clear()` 清除失败状态，再读取并丢弃错误输入。",
+  "key_points": [
+    "`good()` 用于判断流是否处于正常状态。",
+    "`bad()` 表示流处于严重错误状态；原文示例在 `!cin.bad()` 时继续循环。",
+    "`fail()` 表示输入操作失败，例如输入内容无法转换为目标类型。",
+    "`eof()` 表示到达文件或标准输入的末尾。",
+    "输入循环可以写成 `while (cin) { ... }` 或 `while (cin >> ch) { ... }`。",
+    "调用 `cin.clear()` 只能清除流的错误状态；之后还需要读取并消费造成失败的错误输入，否则下一次读取仍可能继续失败。",
+    "原文示例使用 Linux/UNIX 的 Control+D，Windows 的 Control+Z 表示输入结束；原文还说明 Windows 通常需要随后按 Enter。"
+  ],
+  "examples": [
+    "输入求和程序的核心逻辑：`int sum = 0; while (!cin.bad()) { int number; cin >> number; if (cin.good()) { sum += number; } else if (cin.eof()) { break; } else if (cin.fail()) { cin.clear(); string badToken; cin >> badToken; cerr << \"WARNING: Bad input encountered: \" << badToken << endl; } }`",
+    "原文运行示例中输入 `2`、`test`、`3` 时，程序报告 `test` 是错误输入，并最终得到 `The sum is 6`。"
+  ],
+  "misconceptions": [
+    "输入失败后只调用 `clear()` 并不会自动删除错误输入；还必须消费或跳过错误的输入内容。",
+    "`eof()` 不等于普通的成功读取；到达输入末尾时，后续读取可能使流进入失败状态。",
+    "`bad()` 和 `fail()` 不表示完全相同的情况：原文将 `bad()` 作为严重流错误检查，将 `fail()` 作为输入失败分支处理。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "输入整数失败后，原文示例如何恢复并继续处理？",
+      "a": "先调用 `cin.clear()` 清除失败状态，再用 `string badToken; cin >> badToken;` 读取并消费错误输入，然后输出警告。"
+    },
+    {
+      "q": "如何判断输入是否到达末尾？",
+      "a": "使用 `cin.eof()` 检查；在原文示例中，检测到 `eof()` 后执行 `break` 结束循环。"
+    },
+    {
+      "q": "原文示例在 Linux/UNIX 和 Windows 中分别用什么结束标准输入？",
+      "a": "Linux/UNIX 使用 Control+D；Windows 使用 Control+Z，原文说明随后按 Enter。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "使用 cin 提取用户输入并通过 cout 输出"
+  ],
+  "source_pages": [
+    418,
+    419
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "544_检查和处理_istream_的输入状态",
+  "_chunk_pages": [
+    417,
+    420
+  ]
+}

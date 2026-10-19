@@ -1,0 +1,52 @@
+{
+  "title": "矩阵构造函数中的异常清理",
+  "definition": "当 Matrix 构造函数需要分多步动态分配资源时，前面已经成功分配的资源必须在后续分配失败时释放。教材中的 Matrix 先分配一个指针数组，再逐行分配元素数组；如果某一行的 new 抛出异常，构造函数在 catch(...) 中调用 cleanup()，释放已成功分配的资源，然后继续传播异常。",
+  "key_points": [
+    "Matrix 的成员包括宽度 m_width、高度 m_height 和二维动态数组指针 m_matrix。",
+    "先执行 `m_matrix = new T*[width]{};`；花括号使指针数组进行值初始化，指针初始为 nullptr。",
+    "只有顶层指针数组分配成功后，才设置 m_width 和 m_height。这样 cleanup() 可以根据已经保存的宽度清理已分配的行。",
+    "逐行执行 `m_matrix[i] = new T[height];` 时，任意一行分配都可能抛出 std::bad_alloc。",
+    "catch(...) 中调用 cleanup()，然后通过 `std::throw_with_nested(std::bad_alloc())` 将异常嵌套在一个 std::bad_alloc 中继续抛出。"
+  ],
+  "examples": [
+    "构造函数的核心结构：\n```cpp\ntemplate <typename T>\nMatrix<T>::Matrix(std::size_t width, std::size_t height)\n{\n    m_matrix = new T*[width]{};\n    m_width = width;\n    m_height = height;\n\n    try {\n        for (std::size_t i{0}; i < width; ++i) {\n            m_matrix[i] = new T[height];\n        }\n    } catch (...) {\n        std::cerr << \"Exception caught in constructor, cleaning up \"\n                  << std::endl;\n        cleanup();\n        std::throw_with_nested(std::bad_alloc());\n    }\n}\n```",
+    "清理函数的结构：\n```cpp\ntemplate <typename T>\nvoid Matrix<T>::cleanup()\n{\n    for (std::size_t i{0}; i < m_width; ++i) {\n        delete[] m_matrix[i];\n    }\n    delete[] m_matrix;\n    m_matrix = nullptr;\n    m_width = m_height = 0;\n}\n```"
+  ],
+  "misconceptions": [
+    "只要构造函数抛出异常，就不需要释放构造函数中已经成功分配的资源；这是错误的，构造函数体中的裸指针资源仍需显式清理。",
+    "不能在顶层指针数组分配成功前依赖未正确初始化的 m_width 和 m_height 进行清理。",
+    "释放二维动态数组时，不能只执行一次 `delete[] m_matrix`；还必须对每个已分配的行执行 `delete[] m_matrix[i]`。",
+    "catch(...) 清理资源后如果直接结束构造函数，就会让对象看似构造成功；清理后还应继续传播异常。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么 Matrix 构造函数在分配顶层指针数组成功后才设置 m_width 和 m_height？",
+      "a": "因为只有顶层数组分配成功后才有可清理的矩阵结构；将宽度和高度设置在此之后，可以让 cleanup() 使用有效的成员状态清理已经分配的行。"
+    },
+    {
+      "q": "如果 Matrix 的第 i 行分配失败，cleanup() 应清理什么？",
+      "a": "它应删除此前已成功分配的各行数组，删除顶层指针数组，将 m_matrix 设为 nullptr，并将 m_width 和 m_height 设为 0。"
+    },
+    {
+      "q": "`std::throw_with_nested(std::bad_alloc())` 在该构造函数中起什么作用？",
+      "a": "它在完成清理后继续抛出一个 std::bad_alloc，并把当前捕获的异常嵌套进去，从而同时保留分配失败的统一异常类型和原始异常信息。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "构造函数异常处理",
+    "new[] 与 delete[]",
+    "异常传播"
+  ],
+  "source_pages": [
+    462,
+    463
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "604_矩阵构造函数中的异常清理",
+  "_chunk_pages": [
+    461,
+    464
+  ]
+}

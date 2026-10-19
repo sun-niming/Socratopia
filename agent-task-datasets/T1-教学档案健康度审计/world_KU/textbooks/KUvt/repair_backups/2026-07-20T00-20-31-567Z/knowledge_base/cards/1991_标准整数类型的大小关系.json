@@ -1,0 +1,43 @@
+{
+  "title": "标准整数类型的大小关系",
+  "definition": "C++ 标准定义了 5 种标准有符号整数类型：$signed\\ char$、$short\\ int$、$int$、$long\\ int$ 和 $long\\ long\\ int$。标准规定后面的类型所占存储空间大于或等于前面的类型，但不规定这些类型的确切字节数或位数，实际大小取决于编译器和平台。",
+  "key_points": [
+    "标准整数类型的顺序为：$signed\\ char$、$short\\ int$、$int$、$long\\ int$、$long\\ long\\ int$。",
+    "相邻类型之间满足存储空间关系：$sizeof(short)\\le sizeof(int)\\le sizeof(long)\\le sizeof(long\\ long)$；该关系表达的是标准要求的大小顺序。",
+    "不能在跨平台代码中盲目假设这些类型具有固定的字节数。"
+  ],
+  "examples": [
+    "不能仅凭变量声明为 $int$ 就假设它在所有平台上都是 4 字节。",
+    "需要明确整数宽度时，应考虑使用 `<cstdint>` 中的定宽整数类型，而不是直接依赖基本整数类型。"
+  ],
+  "misconceptions": [
+    "$int$ 在所有编译器和平台上都一定是 32 位。",
+    "$long\\ long$ 的确切大小在所有平台上都由 C++ 标准固定。",
+    "类型顺序关系等同于每种类型都有固定的字节数。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "C++ 标准是否规定 $int$ 一定占用 4 字节？",
+      "a": "不规定。标准没有给出标准整数类型的确切大小，实际大小取决于编译器和平台。"
+    },
+    {
+      "q": "标准有符号整数类型的存储空间顺序是什么？",
+      "a": "从小到大依次为 $signed\\ char$、$short\\ int$、$int$、$long\\ int$、$long\\ long\\ int$，后者占用空间大于或等于前者。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "平台的含义"
+  ],
+  "source_pages": [
+    971,
+    971
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1991_标准整数类型的大小关系",
+  "_chunk_pages": [
+    969,
+    972
+  ]
+}

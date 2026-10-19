@@ -138,7 +138,7 @@ flowchart TD
 建议参数：
 
 ```js
-maxTokens: 4096
+maxTokens: 4096   // 实现（post-class-v3）取 6144
 responseFormat: "json_object"
 timeoutMs: 120000
 visibleLength: 中文 1200～2500 字符 / 英文 700～1400 words
@@ -191,7 +191,7 @@ visibleLength: 中文 1200～2500 字符 / 英文 700～1400 words
 最终合并只读取分段证据 JSON，不再重新发送完整原始课堂。建议参数：
 
 ```js
-maxTokens: 4096
+maxTokens: 4096   // 实现（post-class-v3）取 8192：合并要重写整篇，4096 会被截断并降级
 responseFormat: "json_object"
 timeoutMs: 150000
 visibleLength: 中文 3000～5000 字符 / 英文 1500～2500 words

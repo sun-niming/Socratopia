@@ -1,0 +1,43 @@
+{
+  "title": "zoned_time用于表示带时区的时间",
+  "definition": "`zoned_time`类用于构造和表示带有时区信息的时间。它可以使用一个时区对象指针和本地时间构造，也可以使用目标时区名称和已有的`zoned_time`对象，把时间转换到另一个时区。",
+  "key_points": [
+    "可以用时区指针和本地时间构造`zoned_time`。",
+    "可以用时区名称和已有的`zoned_time`构造目标时区的时间。",
+    "教材示例先在布鲁塞尔时区构造时间，再转换为纽约时间。"
+  ],
+  "examples": [
+    "`zoned_time<hours> brusselsTime{brussels, local_days{2020y / June / 22d} + 9h};`",
+    "`zoned_time<hours> newYorkTime{\"America/New_York\", brusselsTime};`"
+  ],
+  "misconceptions": [
+    "`zoned_time`不只是一个不带时区的普通时间点，它还关联一个时区。",
+    "从布鲁塞尔时间转换到纽约时间时，应指定纽约的时区标识符`America/New_York`，不能只修改显示的小时数。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "如何在布鲁塞尔时区构造一个特定时间？",
+      "a": "可以使用`zoned_time<hours>{brussels, local_days{2020y / June / 22d} + 9h}`。"
+    },
+    {
+      "q": "如何把布鲁塞尔时间转换为纽约时间？",
+      "a": "使用`zoned_time<hours> newYorkTime{\"America/New_York\", brusselsTime};`。"
+    }
+  ],
+  "difficulty": 3,
+  "prerequisites": [
+    "在不同时区之间转换时间",
+    "按名称获取当前时区和指定时区"
+  ],
+  "source_pages": [
+    694,
+    694
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1450_zoned_time用于表示带时区的时间",
+  "_chunk_pages": [
+    693,
+    696
+  ]
+}

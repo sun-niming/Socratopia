@@ -1,0 +1,50 @@
+{
+  "title": "弹性盒项目的属性概览",
+  "definition": "在弹性盒布局中，前面介绍的属性主要作用于容器；而项目元素（子元素）也有自己的属性。教材列出了 6 个作用于项目的属性：flex-grow、flex-shrink、flex-basis、flex、order、align-self。",
+  "key_points": [
+    "flex-grow：设置项目的放大系数。",
+    "flex-shrink：设置项目的缩小系数。",
+    "flex-basis：设置项目在主轴上的空间。",
+    "flex：前面 3 个属性的简写。",
+    "order：定义项目的排列顺序。",
+    "align-self：规定弹性容器内所选项目的对齐方式。"
+  ],
+  "examples": [
+    "flex-grow: 1;",
+    "flex-shrink: 0;",
+    "flex-basis: 200px;",
+    "flex: 1 0 auto;",
+    "order: 2;",
+    "align-self: center;"
+  ],
+  "misconceptions": [
+    "这些属性是作用在项目上，不是作用在容器上。",
+    "flex 不是一个独立的新概念，而是 flex-grow、flex-shrink、flex-basis 的简写。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "弹性盒布局中，哪些属性是作用在项目上的？",
+      "a": "flex-grow、flex-shrink、flex-basis、flex、order、align-self。"
+    },
+    {
+      "q": "align-self 的作用是什么？",
+      "a": "规定弹性容器内所选项目的对齐方式。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "弹性盒模型基础",
+    "弹性容器与项目"
+  ],
+  "source_pages": [
+    157,
+    160
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "250_弹性盒项目的属性概览",
+  "_chunk_pages": [
+    157,
+    160
+  ]
+}

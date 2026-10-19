@@ -1,0 +1,42 @@
+{
+  "title": "location.replace方法",
+  "definition": "location.replace方法用于跳转到指定页面，但不会把当前页面保留在历史记录中，因此用户不能通过“后退”按钮回到原来的页面。它适合用于不希望用户返回上一页的场景，例如注册成功后。",
+  "key_points": [
+    "replace方法可以跳转到指定页面。",
+    "跳转后不能用“后退”按钮返回原页面。",
+    "常用于注册成功后禁止返回填写信息页面的场景。"
+  ],
+  "examples": [
+    "window.location.replace(\"http://www.nwafu.edu.cn\")"
+  ],
+  "misconceptions": [
+    "replace和普通跳转一样，后退按钮仍然可以回到原页。",
+    "replace只是替换页面内容，不会改变浏览器地址。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "location.replace方法的特点是什么？",
+      "a": "可以跳转，但不会留下可后退返回的历史记录。"
+    },
+    {
+      "q": "什么时候常用replace方法？",
+      "a": "在不希望用户返回上一页的场景，如注册成功后。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "location对象",
+    "浏览器历史记录"
+  ],
+  "source_pages": [
+    337,
+    340
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "456_location_replace方法",
+  "_chunk_pages": [
+    337,
+    340
+  ]
+}

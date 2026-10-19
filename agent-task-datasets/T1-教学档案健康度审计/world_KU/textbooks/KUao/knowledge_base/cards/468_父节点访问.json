@@ -1,0 +1,43 @@
+{
+  "title": "父节点访问",
+  "definition": "获取到一个元素节点后，可以通过它在 DOM 树中的位置访问父节点。教材给出了两个属性：`parentNode` 和 `parentElement`。`parentNode` 用来获取直接父节点，父节点通常是元素节点，但也可能是文档节点；`parentElement` 只获取直接父元素节点，如果父节点不是元素则返回 `null`。",
+  "key_points": [
+    "`parentNode` 获取直接父节点。",
+    "`parentElement` 获取直接父元素节点。",
+    "`parentNode` 的父节点不一定是元素，也可能是文档节点。",
+    "如果父节点不是元素，`parentElement` 返回 `null`。"
+  ],
+  "examples": [
+    "let parentList = middleItem.parentElement;"
+  ],
+  "misconceptions": [
+    "认为 `parentNode` 和 `parentElement` 完全等价。",
+    "认为 `parentElement` 一定能返回值，不会是 `null`。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "`parentElement` 和 `parentNode` 的区别是什么？",
+      "a": "`parentElement` 只返回父元素；`parentNode` 返回直接父节点，范围更大。"
+    },
+    {
+      "q": "如果一个节点的父节点不是元素，`parentElement` 会怎样？",
+      "a": "返回 `null`。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "DOM树",
+    "元素节点"
+  ],
+  "source_pages": [
+    349,
+    352
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "468_父节点访问",
+  "_chunk_pages": [
+    349,
+    352
+  ]
+}

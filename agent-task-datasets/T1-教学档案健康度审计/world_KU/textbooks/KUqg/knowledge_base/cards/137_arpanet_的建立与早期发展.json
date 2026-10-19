@@ -1,0 +1,55 @@
+{
+  "title": "ARPAnet 的建立与早期发展",
+  "definition": "ARPAnet 是第一个分组交换计算机网络，也是今天公共因特网的直接祖先。其总体计划由 Lawrence Roberts 公布；1969 年首批四个节点分别位于 UCLA、SRI、UC Santa Barbara 和犹他大学。到 1972 年，ARPAnet 约有 15 个节点，并完成了主机到主机协议 NCP。",
+  "key_points": [
+    "ARPAnet 的总体计划由 ARPA 计算机科学计划负责人 Lawrence Roberts 公布。",
+    "1969 年，第一台分组交换机在美国加州大学洛杉矶分校（UCLA）安装，随后在斯坦福研究所（SRI）、加州大学圣巴巴拉分校和犹他大学安装了另外三台。",
+    "ARPAnet 到 1969 年年底有 4 个节点。",
+    "原文称该网络最初的应用是从 UCLA 到 SRI 执行远程注册，但首次尝试导致系统崩溃。",
+    "到 1972 年，ARPAnet 约有 15 个节点，并首次由 Robert Kahn 公开演示。",
+    "ARPAnet 端系统之间的第一台主机到主机协议是网络控制协议（NCP）。",
+    "NCP 完成后，端到端协议可用，应用程序开始能够被编写；1972 年 Ray Tomlinson 编写了第一个电子邮件程序。"
+  ],
+  "examples": [
+    "1969 年底的 ARPAnet 可概括为四节点网络：UCLA、SRI、UC Santa Barbara 和犹他大学。",
+    "ARPAnet 的发展链条为：分组交换机和节点建立 → 主机到主机协议 NCP 完成 → 可以编写网络应用 → 1972 年出现电子邮件程序。"
+  ],
+  "misconceptions": [
+    "ARPAnet 不是今天公共因特网本身，而是公共因特网的直接祖先。",
+    "NCP 是早期 ARPAnet 的主机到主机协议，不是今天互联网中 TCP/IP 协议组的名称。",
+    "ARPAnet 在 1969 年年底并非已经拥有大量节点，原文给出的数量是 4 个；到 1972 年约为 15 个。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "ARPAnet 在因特网历史中是什么地位？",
+      "a": "它是第一个分组交换计算机网络，也是今天公共因特网的直接祖先。"
+    },
+    {
+      "q": "1969 年底 ARPAnet 有哪些四个节点所在地？",
+      "a": "UCLA、SRI、UC Santa Barbara 和犹他大学。"
+    },
+    {
+      "q": "ARPAnet 早期的主机到主机协议是什么？",
+      "a": "网络控制协议（NCP）。"
+    },
+    {
+      "q": "1972 年网络应用方面出现了什么重要事件？",
+      "a": "Ray Tomlinson 编写了第一个电子邮件程序。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "分组交换的起源与动因"
+  ],
+  "source_pages": [
+    59,
+    60
+  ],
+  "needs_verification": true,
+  "verify_query": "ARPAnet 1969 四节点 UCLA SRI UCSB Utah 1972 15 节点 NCP Ray Tomlinson 第一封电子邮件",
+  "concept_id": "137_arpanet_的建立与早期发展",
+  "_chunk_pages": [
+    57,
+    60
+  ]
+}

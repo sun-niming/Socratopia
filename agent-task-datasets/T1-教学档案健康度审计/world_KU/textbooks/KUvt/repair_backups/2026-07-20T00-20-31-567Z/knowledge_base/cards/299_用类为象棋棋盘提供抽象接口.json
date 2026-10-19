@@ -1,0 +1,49 @@
+{
+  "title": "用类为象棋棋盘提供抽象接口",
+  "definition": "直接把象棋棋盘暴露为二维数组会让所有使用者依赖具体实现，并要求使用者处理相关细节。更好的做法是定义 `ChessBoard` 类，通过公开成员函数提供棋盘操作接口，把底层存储方式隐藏在类内部。",
+  "key_points": [
+    "直接暴露棋盘实现的示例是：`ChessPiece* chessBoard[8][8]{};`，并通过 `chessBoard[0][0] = new Rook{};` 操作棋盘。",
+    "直接使用二维数组时，使用者知道并依赖棋盘是二维数组；若改为一维、大小为 64 的数组，就可能需要修改程序中所有使用棋盘的代码。",
+    "直接暴露数组还会让每个使用者承担恰当管理内存的责任。",
+    "抽象后的接口可以写成：`void setPieceAt(size_t x, size_t y, ChessPiece* piece);` 和 `ChessPiece* getPieceAt(size_t x, size_t y) const;`。",
+    "`ChessBoard` 的底层实现可以是二维数组，也可以是其他结构；改变实现不应要求改变接口，还可以在类内部增加边界检测等功能。"
+  ],
+  "examples": [
+    "直接暴露实现：\n`ChessPiece* chessBoard[8][8]{};`\n`chessBoard[0][0] = new Rook{};`",
+    "抽象接口：\n`class ChessBoard {`\n`public:`\n`    void setPieceAt(size_t x, size_t y, ChessPiece* piece);`\n`    `ChessPiece* getPieceAt(size_t x, size_t y) const;`\n`};`"
+  ],
+  "misconceptions": [
+    "把数据结构放入类中并不自动完成抽象；关键是使用者通过稳定的公开接口操作，而不是直接依赖内部存储结构。",
+    "抽象接口不必规定底层一定使用二维数组；同一接口可以对应不同实现。",
+    "抽象不能保证所有实现细节都不变，而是减少使用者对这些细节的依赖。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么直接使用 `ChessPiece* chessBoard[8][8]{}` 不符合抽象思想？",
+      "a": "因为所有使用者都知道并依赖棋盘是二维数组，改变存储方式会迫使程序中大量修改相关代码，而且使用者还需要管理内存。"
+    },
+    {
+      "q": "`ChessBoard` 类如何实现接口与实现的分离？",
+      "a": "通过 `setPieceAt` 和 `getPieceAt` 等公开成员函数提供操作接口，而把棋盘究竟使用二维数组还是其他存储结构隐藏在类内部。"
+    },
+    {
+      "q": "改变 `ChessBoard` 的底层实现时，理想情况下需要改变调用者代码吗？",
+      "a": "不需要，只要公开接口保持不变，调用者代码就不应因底层实现改变而修改。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "抽象：分离接口与实现"
+  ],
+  "source_pages": [
+    148,
+    148
+  ],
+  "needs_verification": true,
+  "verify_query": "《C++20高级编程》第5版 第4章 ChessBoard setPieceAt getPieceAt ChessPiece 棋盘抽象 原文",
+  "concept_id": "299_用类为象棋棋盘提供抽象接口",
+  "_chunk_pages": [
+    145,
+    148
+  ]
+}

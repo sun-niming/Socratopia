@@ -1,0 +1,45 @@
+{
+  "title": "epoll",
+  "definition": "epoll 是 Linux 的高并发 IO 多路复用机制，适合处理大量连接。但它通常需要配合非阻塞 IO、事件循环和状态机使用。对于五天项目，原文建议用 fork 更稳，epoll 更适合作为后续扩展方向。",
+  "key_points": [
+    "它是 Linux 的高并发 IO 多路复用机制。",
+    "适合大量连接场景。",
+    "通常需要非阻塞 IO、事件循环、状态机配合。",
+    "在本项目中更适合作为后续用来替代多进程模型的扩展。"
+  ],
+  "examples": [
+    "报告里可以这样写：后续可用 epoll 替代多进程模型，提高大量并发连接下的资源利用率。"
+  ],
+  "misconceptions": [
+    "epoll 一引入就一定自动高并发。",
+    "epoll 和线程池是同一个概念。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么原文说五天项目用 fork 更稳？",
+      "a": "因为 epoll 还要配合非阻塞 IO、事件循环和状态机，整体实现复杂度更高。"
+    },
+    {
+      "q": "epoll 适合什么场景？",
+      "a": "适合大量连接的高并发 IO 场景。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "Linux IO 基础",
+    "非阻塞 IO",
+    "事件循环",
+    "状态机"
+  ],
+  "source_pages": [
+    93,
+    96
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "141_epoll",
+  "_chunk_pages": [
+    93,
+    96
+  ]
+}

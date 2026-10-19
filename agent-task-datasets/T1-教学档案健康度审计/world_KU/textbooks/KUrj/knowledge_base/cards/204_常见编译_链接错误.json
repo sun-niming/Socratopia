@@ -1,0 +1,49 @@
+{
+  "title": "常见编译/链接错误",
+  "definition": "编译或链接 Web 服务器项目时，常见错误包括：`undefined reference`、`implicit declaration of function`、`missing separator`、`No such file or directory` 和 `Permission denied`。这些报错通常分别对应链接缺失、头文件或声明缺失、Makefile 缩进错误、路径或文件名错误、权限问题。",
+  "key_points": [
+    "`undefined reference`：函数声明有了，但对应的 `.c` 没有参与链接，检查 `SRCS`。",
+    "`implicit declaration of function`：缺少头文件或函数声明。",
+    "`missing separator`：Makefile 里的命令前不是 Tab。",
+    "`No such file or directory`：include 路径或文件名错误。",
+    "`Permission denied`：可执行文件权限问题或端口权限问题。"
+  ],
+  "examples": [
+    "`undefined reference`",
+    "`implicit declaration of function`",
+    "`missing separator`",
+    "`No such file or directory`",
+    "`Permission denied`"
+  ],
+  "misconceptions": [
+    "`undefined reference` 一定是语法写错了。",
+    "`missing separator` 是代码逻辑错误，不是 Makefile 缩进问题。",
+    "`No such file or directory` 只和文件不存在有关，不可能是路径写错。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "Makefile 中出现 `missing separator` 通常是什么原因？",
+      "a": "命令前不是 Tab。"
+    },
+    {
+      "q": "`implicit declaration of function` 通常说明什么？",
+      "a": "缺少对应头文件或函数声明。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "Makefile基础",
+    "C语言头文件与链接基础"
+  ],
+  "source_pages": [
+    125,
+    128
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "204_常见编译_链接错误",
+  "_chunk_pages": [
+    125,
+    128
+  ]
+}

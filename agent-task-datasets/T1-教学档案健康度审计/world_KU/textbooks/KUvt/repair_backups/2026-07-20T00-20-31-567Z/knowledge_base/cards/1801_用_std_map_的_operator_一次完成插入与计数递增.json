@@ -1,0 +1,45 @@
+{
+  "title": "用 std::map 的 operator[] 一次完成插入与计数递增",
+  "definition": "在进一步改进中，可以使用单行表达式 `++m_names[name];` 同时完成查找、必要时插入以及计数递增。若姓名已存在，operator[] 返回其对应值并将其加一；若姓名不存在，operator[] 先插入该姓名，并将对应的 int 值初始化为 0，然后再递增为 1。",
+  "key_points": [
+    "`operator[]` 在键不存在时会创建对应元素。",
+    "新元素的 int 值先初始化为 0。",
+    "前置递增后，新姓名的计数变为 1，已有姓名的计数增加 1。",
+    "采用该写法后，可以删除 nameExistsAndIncrement 和 addNewName 两个辅助方法。"
+  ],
+  "examples": [
+    "$$\n++m\\_names[name];\n$$",
+    "处理输入的核心逻辑可以写为：\n```text\nwhile (inputFile >> name) {\n    ++m_names[name];\n}\n```"
+  ],
+  "misconceptions": [
+    "认为对不存在的键使用 operator[] 会报错；对于 std::map，它会插入该键并值初始化。",
+    "认为新姓名插入后计数仍为 0；前置递增会立即将计数从 0 变为 1。",
+    "认为 operator[] 只负责查询而不会修改容器。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "当 name 不在 m_names 中时，`++m_names[name]` 的执行结果是什么？",
+      "a": "先插入键 name，并将 int 值初始化为 0，再递增该值，因此最终计数为 1。"
+    },
+    {
+      "q": "使用 `++m_names[name]` 后可以删除哪些方法？",
+      "a": "可以删除 nameExistsAndIncrement 和 addNewName 方法。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "std::map 的 operator[]",
+    "C++ 前置递增运算符"
+  ],
+  "source_pages": [
+    870,
+    871
+  ],
+  "needs_verification": true,
+  "verify_query": "C++ std::map operator[] missing key value-initialized int preincrement",
+  "concept_id": "1801_用_std_map_的_operator_一次完成插入与计数递增",
+  "_chunk_pages": [
+    869,
+    872
+  ]
+}

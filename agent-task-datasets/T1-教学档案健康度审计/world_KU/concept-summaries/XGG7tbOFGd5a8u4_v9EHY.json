@@ -1,0 +1,136 @@
+{
+  "conversationId": "XGG7tbOFGd5a8u4_v9EHY",
+  "generatedAt": 1782641495731,
+  "pagesRange": null,
+  "sections": [
+    {
+      "type": "tldr",
+      "content": "这节课主要练了两块：一是 Vim 里各种复制范围的写法和行号、Tab、括号匹配等常用设置；二是 Shell 里命令是怎么被解析的，以及别名、补全、历史命令这些高频快捷操作。"
+    },
+    {
+      "type": "narrative",
+      "content": "一开始围着 Vim 的复制范围打转，从 `y$`、`y^`、`y0` 这种行内复制，到 `:10,15y`、`:.,$y` 这种按行号复制，慢慢把范围感建立起来。接着又把常用配置补齐：显示行号、设置 Tab 宽度、开启括号匹配，并区分了临时设置和写进 `.vimrc` 的永久设置。后半段转到 Shell，重点摸清了它如何解释命令、如何识别别名和外部命令，以及 `Tab` 补全、`history`、`!n`、`!!` 这些提速手段。"
+    },
+    {
+      "type": "concepts",
+      "items": [
+        {
+          "name": "Vim 复制范围与常见动作",
+          "body": "- 行复制：\n  - `yy`：复制当前行\n  - `3yy`：从当前行开始复制三行\n  - `p`：粘贴到下面\n  - `P`：粘贴到上面\n- 行内复制：\n  - `y$`：从光标复制到行尾\n  - `y^`：从光标复制到第一个非空白字符\n  - `y0`：从光标复制到真正行首\n- 其他常见范围：\n  - `yw`：复制到一个单词末尾\n  - `y%`：复制到匹配的括号位置\n  - `:10,15y`：复制第 `10` 行到第 `15` 行\n  - `:.,12y`：从当前行复制到第 `12` 行\n  - `:.,$y`：从当前行复制到最后一行\n  - `:%y`：复制全文\n\n记号速记：\n- `.` = 当前行\n- `$` = 最后一行\n- `%` = 整个文件"
+        },
+        {
+          "name": "Vim 显示与编辑器配置",
+          "body": "- 临时设置：在 Vim 末行模式里输入，前面要加 `:`。\n- 写进 `.vimrc`：通常不加 `:`，启动时自动生效。\n\n常用配置：\n- 显示行号：`set nu` 或 `set number`\n- 取消行号：`set nonu` 或 `set nonumber`\n- Tab 宽度：`set ts=4` 或 `set tabstop=4`\n- 括号匹配提示：`set sm` 或 `set showmatch`\n\n一个小习惯：\n- 临时设置看当前效果\n- `.vimrc` 里写固定配置，方便以后每次都生效"
+        },
+        {
+          "name": "Shell、命令查找与快捷操作",
+          "body": "- Shell 的作用：在用户和内核之间充当接口，负责解释命令并组织执行。\n- 它会处理一些特殊结构，比如管道 `|` 和重定向 `>`。\n\n命令查找顺序：\n1. 别名\n2. 内置命令\n3. `PATH` 里的外部命令\n\n常用查看命令：\n- `type -t cmd`：看命令类别\n- `type -p cmd`：看外部命令路径\n- `type -a cmd`：看所有匹配结果\n\n常用快捷功能：\n- `Tab`：自动补全\n- `alias ll='ls -l'`：设置别名\n- `unalias ll`：取消别名\n- `history`：查看历史命令\n- `!108`：执行编号为 `108` 的历史命令\n- `!!`：执行上一条命令\n\n补充：如果想绕开别名，直接写完整路径，比如 `/bin/ls`。"
+        }
+      ]
+    },
+    {
+      "type": "key-insight",
+      "content": "Shell 的核心是简化用户对内核的操作，让用户通过一层接口去操纵内核。",
+      "attribution": "学习者"
+    },
+    {
+      "type": "key-terms",
+      "items": [
+        {
+          "term": "`^`",
+          "definition": "行首第一个非空白字符的位置。"
+        },
+        {
+          "term": "`.`",
+          "definition": "当前行。"
+        },
+        {
+          "term": "`$`",
+          "definition": "最后一行，或一行的行尾语境。"
+        },
+        {
+          "term": "`%`",
+          "definition": "整个文件范围。"
+        },
+        {
+          "term": "`set nu`",
+          "definition": "显示行号。"
+        },
+        {
+          "term": "`set ts=4`",
+          "definition": "把 Tab 的显示宽度设为 `4`。"
+        },
+        {
+          "term": "`set sm`",
+          "definition": "开启括号匹配提示。"
+        },
+        {
+          "term": "`alias`",
+          "definition": "给命令起别名。"
+        },
+        {
+          "term": "`unalias`",
+          "definition": "取消别名。"
+        },
+        {
+          "term": "`type -t`",
+          "definition": "查看命令类别，比如 `alias`、`builtin`、`file`。"
+        },
+        {
+          "term": "`type -p`",
+          "definition": "查看外部命令的完整路径。"
+        },
+        {
+          "term": "`type -a`",
+          "definition": "列出所有匹配到的结果。"
+        },
+        {
+          "term": "`history`",
+          "definition": "查看历史命令列表。"
+        },
+        {
+          "term": "`!!`",
+          "definition": "执行上一条命令。"
+        },
+        {
+          "term": "`!n`",
+          "definition": "执行历史中编号为 `n` 的命令。"
+        },
+        {
+          "term": "`Tab`",
+          "definition": "命令或文件名补全键。"
+        }
+      ]
+    },
+    {
+      "type": "review-questions",
+      "items": [
+        {
+          "question": "如果一行前面有缩进，`y^` 和 `y0` 有什么区别？",
+          "hint": "看它们会不会把前面的空格一起带走。",
+          "answer": "`y^` 只复制到第一个非空白字符，不带前面的缩进；`y0` 会一直到真正行首，所以会把前面的空格也包含进去。"
+        },
+        {
+          "question": "怎样从当前行复制到最后一行？",
+          "hint": "用当前行符号和最后一行符号。",
+          "answer": "输入 `:.,$y`。` . ` 表示当前行，`$` 表示最后一行。"
+        },
+        {
+          "question": "如果想让 Vim 启动时一直显示行号，应该把哪一行写进 `.vimrc`？",
+          "hint": "不要写前面的 `:`。",
+          "answer": "写 `set nu`，也可以写完整一点 `set number`。"
+        },
+        {
+          "question": "怎样判断 `cd` 是不是 Shell 内置命令，并查看 `ls` 的所有匹配结果？",
+          "hint": "一个看类别，一个看全部。",
+          "answer": "用 `type -t cd` 看类别，通常会得到 `builtin`；用 `type -a ls` 看 `ls` 的所有匹配结果。"
+        },
+        {
+          "question": "怎样重新执行历史编号 `108` 的命令？怎样执行上一条命令？",
+          "hint": "一个带编号，一个不带编号。",
+          "answer": "执行编号 `108` 用 `!108`；执行上一条命令用 `!!`。"
+        }
+      ]
+    }
+  ]
+}

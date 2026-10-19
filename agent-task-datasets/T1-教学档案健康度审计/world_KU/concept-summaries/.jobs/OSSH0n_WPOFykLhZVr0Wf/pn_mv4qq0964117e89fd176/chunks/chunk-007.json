@@ -1,0 +1,119 @@
+{
+  "chunkId": "chunk-007",
+  "messageRange": [
+    64,
+    71
+  ],
+  "topics": [
+    {
+      "name": "GOTO 函数为什么需要闭包",
+      "facts": [
+        "点跨过某文法符号得到新项后，如果点后面是非终结符，需要再求闭包。",
+        "闭包把「我在等某个非终结符」翻译成「我实际能移入哪些终结符」。",
+        "若点跨过 ( 后得到 \\(F\\to(\\cdot E)\\)，点贴着非终结符 \\(E\\)。",
+        "跨过 ( 后若不求闭包，该状态只有孤零零一项，没有通往 id 也没有通往 ( 的箭头。",
+        "分析器在一对括号里造 \\(E\\) 时，第一步必须移入 id 或 (，没有箭头就会卡死。"
+      ],
+      "examples": [
+        "\\[I_4=\\text{CLOSURE}(\\{F\\to(\\cdot E)\\})\\] 求出后才长出对 ( 、 id 的箭头。",
+        "\\[\\text{GOTO}(I_6,T)\\]：跨过 \\(T\\) 得 \\(E\\to E+T\\cdot\\) 和 \\(T\\to T\\cdot*F\\)，两项点后都不是非终结符，加不进新项。",
+        "\\[I_9=\\{E\\to E+T\\cdot,\\ T\\to T\\cdot*F\\}\\]"
+      ],
+      "sourceMessageIndexes": [
+        64,
+        67
+      ]
+    },
+    {
+      "name": "GOTO 状态转移图",
+      "facts": [
+        "每个圆圈是一个状态，箭头上的标签是跨过的文法符号，也就是 GOTO 的第二个参数。",
+        "棕色实线是向前转移，蓝色虚线是绕回去的回边。",
+        "状态出的箭头标签各不相同。",
+        "\\[I_3=\\{T\\to F\\cdot\\}\\] 一条箭头都没有，因为点已落在最右端，GOTO 没得可移。"
+      ],
+      "examples": [
+        "\\[I_6\\to I_5\\] 标 id。",
+        "\\[I_4\\to I_2\\] 标 \\(T\\)。",
+        "\\[I_4\\] 同时有 \\(E\\)、\\(T\\)、\\(F\\)、(、id 五条出去的箭头。",
+        "图里 \\[I_4\\] 有一支箭头标 ( ，回到它自己。"
+      ],
+      "sourceMessageIndexes": [
+        66,
+        67
+      ]
+    }
+  ],
+  "learnerEvidence": [
+    {
+      "kind": "correct",
+      "content": "学习者问「GOTO 为什么需要闭包」并追问 GOTO 状态转移图，说明其在尝试理解闭包与 GOTO 的关系。",
+      "sourceMessageIndexes": [
+        64,
+        66
+      ]
+    },
+    {
+      "kind": "confusion",
+      "content": "学习者对「同一个符号如何能回到自己」有疑问。",
+      "sourceMessageIndexes": [
+        67,
+        71
+      ]
+    },
+    {
+      "kind": "shift",
+      "content": "学习者在 4.6.5 节前主动叫停，说这节课先停在这里。",
+      "sourceMessageIndexes": [
+        68
+      ]
+    }
+  ],
+  "keyInsights": [
+    {
+      "content": "闭包把「我在等某个非终结符」翻译成「我实际能移入哪些终结符」。",
+      "sourceMessageIndexes": [
+        67
+      ]
+    }
+  ],
+  "openQuestions": [
+    {
+      "content": "一个状态为什么能沿同一个符号回到自己？",
+      "sourceMessageIndexes": [
+        67
+      ]
+    },
+    {
+      "content": "4.6.5 节尚未开始。",
+      "sourceMessageIndexes": [
+        68,
+        71
+      ]
+    }
+  ],
+  "reviewCandidates": [
+    {
+      "question": "GOTO 后为什么必须求闭包？",
+      "answer": "跨过符号后点可能贴在非终结符前，此时若不求闭包，状态里没有可移入的终结符箭头，分析器会卡死；闭包把点后面的非终结符能开头的产生式展开，从而补出实际可移入的终结符箭头。",
+      "sourceMessageIndexes": [
+        64,
+        67
+      ]
+    },
+    {
+      "question": "\\[\\text{GOTO}(I_6,T)\\] 得到哪个状态？",
+      "answer": "\\[I_9=\\{E\\to E+T\\cdot,\\ T\\to T\\cdot*F\\}\\]，此时两项的点后都不是非终结符，闭包加不进新项。",
+      "sourceMessageIndexes": [
+        67
+      ]
+    },
+    {
+      "question": "状态 \\[I_3=\\{T\\to F\\cdot\\}\\] 为什么没有出去的 GOTO 箭头？",
+      "answer": "因为它的点已经落在产生式最右端，GOTO 没得可移。",
+      "sourceMessageIndexes": [
+        67
+      ]
+    }
+  ]
+}

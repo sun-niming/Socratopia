@@ -1,0 +1,37 @@
+{
+  "title": "__proto__ 与原型链",
+  "definition": "每个实例对象都有一个私有属性 __proto__，它指向该实例对应的构造函数原型对象（prototype）。原型对象本身也有自己的 __proto__，会继续指向更上层的原型对象，层层向上，直到某个对象的原型为 null。null 没有原型，是原型链中的最后一个环节。",
+  "key_points": [
+    "实例对象的 __proto__ 指向构造函数的 prototype。",
+    "原型对象也有 __proto__，可以继续向上连接。",
+    "原型链最终会到达 null，null 不再指向任何原型。"
+  ],
+  "examples": [
+    "zhang3.__proto__ -> Person.prototype -> Object.prototype -> null"
+  ],
+  "misconceptions": [
+    "__proto__ 只是普通的数据属性。",
+    "原型链会无限向上延伸，没有终点。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "原型链为什么会在 null 处结束？",
+      "a": "因为 null 没有原型，是原型链中的最后一个环节。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "原型与 [[Prototype]]"
+  ],
+  "source_pages": [
+    285,
+    287
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "410_proto___与原型链",
+  "_chunk_pages": [
+    285,
+    288
+  ]
+}

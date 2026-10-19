@@ -1,0 +1,43 @@
+{
+  "title": "三种非定时互斥体类",
+  "definition": "教材列出的三种非定时互斥体类是 std::mutex、std::recursive_mutex 和 std::shared_mutex。前两者定义在 <mutex> 中，std::shared_mutex 定义在 <shared_mutex> 中。它们提供不同的锁所有权语义。",
+  "key_points": [
+    "std::mutex 具有独占所有权语义，同一时刻只能有一个线程拥有锁。已经拥有 std::mutex 的线程不能再次对它调用 lock() 或 try_lock()，否则可能导致死锁。",
+    "std::recursive_mutex 允许已经拥有该互斥体的线程再次调用 lock() 或 try_lock()；但每次成功加锁都必须对应一次 unlock()。",
+    "std::shared_mutex 支持独占所有权和共享所有权，常称为 readers-writers lock（读者-写者锁）。",
+    "std::shared_mutex 的独占锁相当于写锁，共享锁相当于读锁。"
+  ],
+  "examples": [
+    "递归互斥体的锁定次数必须匹配：\n代码：recursive_mutex.lock();\n代码：recursive_mutex.lock();\n代码：recursive_mutex.unlock();\n代码：recursive_mutex.unlock();"
+  ],
+  "misconceptions": [
+    "std::mutex 不是递归互斥体；同一线程重复加锁可能导致死锁。",
+    "std::recursive_mutex 允许同一线程重复加锁，但并不意味着可以少调用 unlock()；加锁和解锁次数必须相等。",
+    "std::shared_mutex 的共享锁不是无限制的：当有线程持有独占锁时，其他线程不能获得共享所有权。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "std::mutex 与 std::recursive_mutex 的关键区别是什么？",
+      "a": "std::mutex 不允许已经拥有锁的线程再次加锁；std::recursive_mutex 允许同一线程多次加锁，但必须调用相同次数的 unlock()。"
+    },
+    {
+      "q": "std::shared_mutex 的独占所有权和共享所有权分别对应什么？",
+      "a": "独占所有权对应写锁，共享所有权对应读锁。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "非定时互斥体的通用操作"
+  ],
+  "source_pages": [
+    806,
+    807
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1655_三种非定时互斥体类",
+  "_chunk_pages": [
+    805,
+    808
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "title": "重载 operator new 时应提供对应形式的 operator delete",
+  "definition": "类重载某种形式的 operator new 时，应同时重载与其对应形式的 operator delete，例如普通形式、数组形式和带 std::nothrow_t 参数的形式。否则，内存可能按一种方式分配，却按内建语义释放，导致分配与释放方式不一致或不兼容。若不希望某种分配形式被使用，可以使用 =delete 显式删除对应函数。",
+  "key_points": [
+    "可以分别重载普通对象分配、数组分配以及 nothrow 分配对应的 operator new 和 operator delete。",
+    "示例中的形式包括 $$\\texttt{operator new(size\\_t)}$$、$$\\texttt{operator delete(void*)}$$、$$\\texttt{operator new[](size\\_t)}$$ 和 $$\\texttt{operator delete[](void*)}$$，以及带 $$\\texttt{std::nothrow\\_t\\&}$$ 参数的版本。",
+    "重载 operator new 时，最好重载所有相关形式，或者用 =delete 明确禁止不需要的形式。"
+  ],
+  "examples": [
+    "MemoryDemo 可以定义：\\n\\texttt{void* operator new(std::size\\_t size);}\\n\\texttt{void operator delete(void* ptr) noexcept;}\\n\\texttt{void* operator new[](std::size\\_t size);}\\n\\texttt{void operator delete[](void* ptr) noexcept;}",
+    "示例程序分别执行普通对象、数组对象、nothrow 对象和 nothrow 数组的分配与释放，输出中出现：\\n\\texttt{operator new}\\n\\texttt{operator delete}\\n\\texttt{operator new[]}\\n\\texttt{operator delete[]}\\n\\texttt{operator new nothrow}\\n\\texttt{operator delete[] nothrow}"
+  ],
+  "misconceptions": [
+    "只重载 operator new 而不重载对应 operator delete，并不意味着释放时会自动调用自定义的匹配版本。",
+    "普通对象的 operator new 与数组对象的 operator new[] 不是同一个函数，不能混为一谈。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么重载 operator new 时还应重载对应的 operator delete？",
+      "a": "因为分配和释放形式应保持匹配，否则内存可能按自定义方式分配，却按不兼容的内建语义释放。"
+    },
+    {
+      "q": "如果不希望类支持某种动态分配形式，应如何处理？",
+      "a": "可以使用 =delete 显式删除对应的 operator new 或 operator new[]。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++动态内存分配与释放",
+    "函数重载"
+  ],
+  "source_pages": [
+    493,
+    493
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "990_重载_operator_new_时应提供对应形式的_operator_delet",
+  "_chunk_pages": [
+    493,
+    496
+  ]
+}

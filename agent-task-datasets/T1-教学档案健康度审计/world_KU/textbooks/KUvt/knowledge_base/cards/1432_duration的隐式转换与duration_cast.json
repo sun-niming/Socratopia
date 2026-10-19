@@ -1,0 +1,51 @@
+{
+  "title": "duration的隐式转换与duration_cast",
+  "definition": "不同周期的`duration`可以相互转换，但转换是否允许取决于目标表示类型是否能够安全表示转换结果。特别是从较小单位转换到较大单位时，结果可能出现非整数；如果目标`Rep`是整数类型，直接构造可能被禁止，此时可以使用`duration_cast`强制转换。",
+  "key_points": [
+    "将30秒转换为分钟，结果是0.5分钟，因此目标duration使用浮点表示类型时可以直接构造。",
+    "若目标duration使用整数表示类型，而转换可能产生非整数结果，直接构造会产生编译错误。",
+    "`duration_cast`可以强制进行这种转换。",
+    "使用整数表示类型进行`duration_cast`时，结果按整数除法处理；30秒转换为整数分钟得到0分钟。",
+    "从分钟转换为秒时，若源值和目标值均为整数且转换结果总是整数，则可以直接构造。"
+  ],
+  "examples": [
+    "可以直接转换：`std::chrono::duration<long> d7{30}; std::chrono::duration<double, std::ratio<60>> d8{d7};`，其中`d8.count()`为0.5。",
+    "下面的直接转换不能成功编译：`std::chrono::duration<long> d7{30}; std::chrono::duration<long, std::ratio<60>> d8{d7};`。",
+    "强制转换写法：`auto d8{std::chrono::duration_cast<std::chrono::duration<long, std::ratio<60>>>(d7)};`；由于使用整数表示，30秒转换结果为0分钟。",
+    "`std::chrono::duration<long, std::ratio<60>> d9{10}; std::chrono::duration<long> d10{d9};`表示把10分钟转换为600秒。"
+  ],
+  "misconceptions": [
+    "`duration_cast`不会自动保留小数；目标表示类型为整数时，结果会按整数规则处理。",
+    "即使某一次转换恰好得到整数，标准转换规则仍可能因为该转换类型一般可能产生非整数而禁止直接构造，例如教材中所示的60秒到整数分钟转换。",
+    "从秒到分钟和从分钟到秒不是对称的：前者可能丢失小数，后者通常能得到整数秒。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "为什么30秒不能直接转换为整数分钟duration？",
+      "a": "因为30秒等于0.5分钟，转换结果可能是非整数，而目标`Rep`为整数类型。"
+    },
+    {
+      "q": "如何把30秒强制转换为整数分钟？结果是什么？",
+      "a": "使用`duration_cast`；结果按整数除法得到0分钟。"
+    },
+    {
+      "q": "10分钟转换为整数秒是多少？",
+      "a": "600秒，因为10分钟等于600秒，结果为整数。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "不同周期duration的运算与自动转换"
+  ],
+  "source_pages": [
+    686,
+    688
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1432_duration的隐式转换与duration_cast",
+  "_chunk_pages": [
+    685,
+    688
+  ]
+}

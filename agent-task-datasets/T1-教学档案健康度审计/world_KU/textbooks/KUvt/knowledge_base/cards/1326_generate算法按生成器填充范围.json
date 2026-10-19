@@ -1,0 +1,43 @@
+{
+  "title": "generate算法按生成器填充范围",
+  "definition": "generate算法接收一个迭代器范围和一个生成函数或lambda表达式，并把该函数每次调用返回的值依次写入范围内的元素，从而就地替换整个范围。",
+  "key_points": [
+    "generate的操作对象是一个范围，不需要单独的目标范围。",
+    "生成器通常不接收当前元素，而是返回要写入的值。",
+    "目标范围必须已经包含可写的元素位置。"
+  ],
+  "examples": [
+    "vector<int> vec(10); int value { 1 }; generate(begin(vec), end(vec), [&value]{ value *= 2; return value; });",
+    "上述代码依次把vec填充为：$2,4,8,16,32,64,128,256,512,1024$。递推关系可以写为：$$v_0=1,\\quad v_k=2v_{k-1}\\ (k\\ge 1)$$"
+  ],
+  "misconceptions": [
+    "generate不是向容器追加元素，而是改写给定范围中的已有元素。",
+    "生成器的返回值才是写入容器的值；外部value在示例中通过引用捕获并被递增。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "generate做什么？",
+      "a": "对给定范围中的每个位置调用生成器，并将生成器返回的值写入该位置。"
+    },
+    {
+      "q": "原文generate示例的第一个和最后一个值分别是什么？",
+      "a": "第一个值是2，最后一个值是1024。"
+    }
+  ],
+  "difficulty": 1,
+  "prerequisites": [
+    "修改序列算法的基本特点",
+    "Lambda表达式和谓词"
+  ],
+  "source_pages": [
+    638,
+    638
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1326_generate算法按生成器填充范围",
+  "_chunk_pages": [
+    637,
+    640
+  ]
+}

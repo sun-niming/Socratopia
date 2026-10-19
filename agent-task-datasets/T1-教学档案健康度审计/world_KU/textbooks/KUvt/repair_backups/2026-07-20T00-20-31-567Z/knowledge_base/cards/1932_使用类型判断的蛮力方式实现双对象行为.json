@@ -1,0 +1,45 @@
+{
+  "title": "使用类型判断的蛮力方式实现双对象行为",
+  "definition": "实现依赖两个对象运行时类型的行为时，一种直接方法是在一个对象的成员函数中接收另一个对象的基类引用，并使用一系列 `if/else` 和 `typeid` 判断参数对象的实际类型，再返回对应结果。",
+  "key_points": [
+    "基类可以声明纯虚函数，例如 `virtual bool eats(const Animal& prey) const = 0;`。",
+    "每个派生类分别实现 `eats`，并通过 `typeid(prey)` 判断被捕食对象的实际类型。",
+    "如果类型数量较少，这种方式直观且可行。",
+    "类型增多时，条件分支会越来越杂乱，而且新增派生类时，已有类的代码可能不会被强制更新。"
+  ],
+  "examples": [
+    "示意代码：`bool Bear::eats(const Animal& prey) const { if (typeid(prey) == typeid(Fish)) return true; if (typeid(prey) == typeid(Dinosaur)) return false; return false; }`。",
+    "若新增 `Donkey` 类型而没有在 `Bear::eats` 中增加对应分支，旧代码仍可能编译，但会得到不符合预期的默认结果。"
+  ],
+  "misconceptions": [
+    "误以为使用 `typeid` 检查类型就能自动获得开放、可扩展的面向对象设计。",
+    "误以为新增派生类后，所有已有的类型判断代码都会自动提示需要修改。",
+    "误以为这种方案完全不可用；教材指出当类的数量不多时，它可能是最直接的实现方式。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "蛮力方式如何根据被捕食者类型决定结果？",
+      "a": "在 `eats(const Animal& prey)` 中使用 `typeid(prey)` 与各个具体类型比较，并在相应分支中返回结果。"
+    },
+    {
+      "q": "这种方式的主要扩展性问题是什么？",
+      "a": "新增类型时，已有派生类的 `if/else` 类型判断可能不需要修改也能编译，因而容易遗漏新类型的行为规则。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "RTTI与typeid",
+    "纯虚函数"
+  ],
+  "source_pages": [
+    934,
+    934
+  ],
+  "needs_verification": false,
+  "verify_query": "",
+  "concept_id": "1932_使用类型判断的蛮力方式实现双对象行为",
+  "_chunk_pages": [
+    933,
+    936
+  ]
+}

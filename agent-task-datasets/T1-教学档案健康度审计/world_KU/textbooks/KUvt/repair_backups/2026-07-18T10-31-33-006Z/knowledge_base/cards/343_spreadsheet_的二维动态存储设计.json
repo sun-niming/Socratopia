@@ -1,0 +1,57 @@
+{
+  "title": "Spreadsheet 的二维动态存储设计",
+  "definition": "原文中的 Spreadsheet 类表示一个电子表格，使用宽度和高度构造，并通过 setCellAt 和 getCellAt 按二维坐标访问 SpreadsheetCell。其成员 m_cells 的类型为 SpreadsheetCell**，初始化为 nullptr；构造函数为每个外层元素分配一个 SpreadsheetCell 指针数组，再为每个元素分配 SpreadsheetCell 数组，从而形成动态二维存储。",
+  "key_points": [
+    "Spreadsheet 的构造函数接收两个 std::size_t 参数：width 和 height。",
+    "setCellAt(std::size_t x, std::size_t y, const SpreadsheetCell& cell) 用于在坐标 x、y 处设置单元格。",
+    "getCellAt(std::size_t x, std::size_t y) 返回 SpreadsheetCell&，用于访问坐标 x、y 处的单元格。",
+    "类中有 private 的 inRange(std::size_t value, std::size_t upper) const，用于检查坐标或索引是否处于有效范围。",
+    "m_cells 声明为 SpreadsheetCell** m_cells { nullptr };，表示它保存动态分配的 SpreadsheetCell 指针结构。",
+    "原文展示的构造过程先分配 m_cells 的外层指针数组，再对每个 i 分配 m_cells[i] = new SpreadsheetCell[m_height];。"
+  ],
+  "examples": [
+    "类接口可写为：class Spreadsheet {\\npublic:\\n    Spreadsheet(std::size_t width, std::size_t height);\\n    void setCellAt(std::size_t x, std::size_t y, const SpreadsheetCell& cell);\\n    SpreadsheetCell& getCellAt(std::size_t x, std::size_t y);\\nprivate:\\n    bool inRange(std::size_t value, std::size_t upper) const;\\n    SpreadsheetCell** m_cells{nullptr};\\n};",
+    "原文所示的二维动态分配思路：m_cells = new SpreadsheetCell*[m_width];\\nfor (std::size_t i = 0; i < m_width; ++i) {\\n    m_cells[i] = new SpreadsheetCell[m_height];\\n}"
+  ],
+  "misconceptions": [
+    "SpreadsheetCell** 不是一个已经自动包含二维数组的类型；它只是指向 SpreadsheetCell 指针的指针，仍需分别分配外层和内层存储。",
+    "new SpreadsheetCell*[m_width] 只分配外层指针数组，并没有分配所有 SpreadsheetCell 对象。",
+    "坐标范围检查不是由 std::size_t 自动完成的；无符号索引仍可能超出数组边界，因此需要 inRange 等检查。",
+    "getCellAt 返回 SpreadsheetCell&，表示返回对象的引用，而不是返回一个新的 SpreadsheetCell 副本。"
+  ],
+  "qa_pairs": [
+    {
+      "q": "Spreadsheet 构造函数接收哪些参数？",
+      "a": "接收 std::size_t 类型的 width 和 height，分别表示表格的宽度和高度。"
+    },
+    {
+      "q": "Spreadsheet 如何表示其动态二维单元格存储？",
+      "a": "使用 SpreadsheetCell** 类型的 m_cells，并先分配外层指针数组，再为每个外层元素分配 SpreadsheetCell 数组。"
+    },
+    {
+      "q": "m_cells = new SpreadsheetCell*[m_width]; 完成了什么？",
+      "a": "它只分配了长度为 m_width 的 SpreadsheetCell* 指针数组，还没有分配每一行或每一列中的 SpreadsheetCell 对象。"
+    },
+    {
+      "q": "getCellAt 的返回类型是什么？这意味着什么？",
+      "a": "返回 SpreadsheetCell&，表示返回指定位置单元格对象的引用，调用者可以通过该引用访问该对象。"
+    }
+  ],
+  "difficulty": 2,
+  "prerequisites": [
+    "C++ 动态内存分配",
+    "C++ 指针与引用",
+    "C++ 类的 public/private 访问控制"
+  ],
+  "source_pages": [
+    257,
+    260
+  ],
+  "needs_verification": true,
+  "verify_query": "《C++20高级编程》第5版 第260页 SpreadsheetCell** m_cells new SpreadsheetCell m_width m_height setCellAt getCellAt inRange 构造函数",
+  "concept_id": "343_spreadsheet_的二维动态存储设计",
+  "_chunk_pages": [
+    257,
+    260
+  ]
+}
