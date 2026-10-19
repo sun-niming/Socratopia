@@ -29,7 +29,7 @@ function test(name, fn) {
 
 console.log("chat/route.js figure catalogue");
 
-var START = "{if(global.__ASSETS_SERIALIZE__&&O)";
+var START = "if(global.__ASSETS_SERIALIZE__&&O)";
 var END = "_energyTail&&(b+=_energyTail)";
 
 function snippet() {
@@ -37,12 +37,12 @@ function snippet() {
   assert.ok(start >= 0, "the catalogue block must be present");
   var end = routeSrc.indexOf(END, start);
   assert.ok(end > start, "the catalogue block must close before the energy tail");
-  return routeSrc.slice(start, end);
+  return "{" + routeSrc.slice(start, end);
 }
 
 test("the block sits in the prompt assembly, after the reading snapshot", function () {
   var start = routeSrc.indexOf(START);
-  var snapshotAt = routeSrc.indexOf("_readingSnapshotPreamble(_advanceTurn,X)", start - 4000);
+  var snapshotAt = routeSrc.indexOf("_readingSnapshotPreamble(_advanceTurn,X", start - 4000);
   var bodyAt = routeSrc.indexOf("b=H&&C?await (0,n._)", start - 20000);
   assert.ok(snapshotAt > 0 && snapshotAt < start, "snapshot is appended before the catalogue");
   assert.ok(bodyAt > 0 && bodyAt < start, "the base prompt is built before the catalogue");

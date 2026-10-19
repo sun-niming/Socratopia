@@ -571,13 +571,14 @@ check("every known section lands in its §5.4 band", function () {
 
 // ---- handler-side splice: the reading snapshot lands in the resource band ----
 var spliceSrc = blockFrom(routeSrc, routeSrc.indexOf('{const _CTX_SENT="<!--CTX_RESOURCE_BOUNDARY-->"'));
-var splice = new Function("b", "_readingSnapshot", "_readingSnapshotPreamble", "_advanceTurn", "X",
+var splice = new Function("b", "_readingSnapshot", "_readingSnapshotPreamble", "_advanceTurn", "X", "_paceProfile",
   spliceSrc + "; return b;");
 var preamble = function () { return "[WINDOW v2]"; };
+var pace = { id: "normal", guidance: "", guidanceZhTw: "", guidanceEn: "" };
 
 check("the reading snapshot is spliced into the resource band, not appended", function () {
   var b = "RULES" + SEP + "## 世界背景\n\nW" + SEP + SENT + SEP + "## 当前关系状态\n\nR";
-  var prompt = splice(b, "PAGES 163-192", preamble, {}, "chinese");
+  var prompt = splice(b, "PAGES 163-192", preamble, {}, "chinese", pace);
   assert.ok(prompt.indexOf("PAGES 163-192") < prompt.indexOf("## 当前关系状态\n\nR"),
     "the snapshot must come before live state");
   assert.ok(prompt.indexOf("RULES") < prompt.indexOf("PAGES 163-192"),
@@ -588,14 +589,14 @@ check("the reading snapshot is spliced into the resource band, not appended", fu
 
 check("a missing snapshot drops the resource band without leaving a gap", function () {
   var withEmptySnapshot = splice("RULES" + SEP + "## 世界背景\n\nW" + SEP + "## 当前关系状态\n\nR",
-    "", preamble, {}, "chinese");
+    "", preamble, {}, "chinese", pace);
   assert.strictEqual(withEmptySnapshot, "RULES" + SEP + "## 世界背景\n\nW" + SEP + "## 当前关系状态\n\nR",
     "no snapshot must collapse cleanly, got: " + JSON.stringify(withEmptySnapshot));
 });
 
 check("a prompt without the boundary marker still gets the snapshot appended", function () {
   // nuwa mode builds the prompt through a different module and carries no marker.
-  var prompt = splice("RULES", "PAGES 1-5", preamble, {}, "chinese");
+  var prompt = splice("RULES", "PAGES 1-5", preamble, {}, "chinese", pace);
   assert.ok(prompt.indexOf("PAGES 1-5") > 0, "snapshot must still reach the prompt");
   assert.ok(prompt.indexOf(SEP + "[WINDOW v2]") >= 0, "appended with a separator, got: " + JSON.stringify(prompt));
 });

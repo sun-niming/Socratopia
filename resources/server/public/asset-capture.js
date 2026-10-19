@@ -311,6 +311,25 @@
   }
   api._blobUrl = blobUrl;
 
+  // `blobCache` is keyed by the REQUEST url, not by the object URL it resolves to,
+  // so invalidating has to start from the request url: delete that entry and revoke
+  // whatever object URL it produced. Revoking only the object URL leaves the cached
+  // (already revoked) URL in place, and the next viewer of that page gets it back
+  // and cannot decode it.
+  function releaseBlob(assetUrl) {
+    if (!assetUrl) return;
+    var pending = blobCache[assetUrl];
+    if (!pending) return;
+    delete blobCache[assetUrl];
+    Promise.resolve(pending).then(function (objectUrl) {
+      if (!objectUrl) return;
+      try {
+        window.URL.revokeObjectURL(objectUrl);
+      } catch (_) {}
+    }, function () {});
+  }
+  api._releaseBlob = releaseBlob;
+
   // Converts rendered asset <img> elements (markdown thumbnails) to blob URLs.
   // Accepts an explicit list so the smoke test can drive it without a real DOM.
   // Two DOM shapes must be caught:
