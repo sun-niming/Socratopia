@@ -196,6 +196,11 @@ function validateSvg(svgSource) {
   var bytes = Buffer.byteLength(svgSource, "utf8");
   if (bytes > MAX_SVG_BYTES) throw codedError("asset_svg_too_large", "SVG exceeds 512 KB", 413);
   if (!/<svg[\s>]/i.test(svgSource)) throw codedError("asset_svg_invalid", "SVG source has no <svg> root");
+  // Served as <img src> (and rasterized by sharp): without the namespace the browser
+  // decodes it to a 0×0 broken image. The model is never told to write one.
+  if (svgSource.indexOf("xmlns") < 0) {
+    return svgSource.replace(/<svg/i, '<svg xmlns="http://www.w3.org/2000/svg"');
+  }
   return svgSource;
 }
 

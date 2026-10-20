@@ -94,11 +94,20 @@ function parseRect(raw) {
 function validateSvgSource(source) {
   var svg = String(source || "").trim();
   if (!svg) return { invalid: "empty" };
-  if (!/^<svg[\s>]/i.test(svg)) return { invalid: "not an <svg> root" };
+  // The guide tells the model to put `<!-- title: … -->` on the first line, so the
+  // root is rarely the very first bytes. Leading comments and the XML declaration
+  // are stripped before the root check (and kept in the value), otherwise every
+  // correctly-authored fence was rejected as "not an <svg> root".
+  var head = svg.replace(/^(?:<\?xml[^>]*\?>\s*|<!--[\s\S]*?-->\s*)+/i, "");
+  if (!/^<svg[\s>]/i.test(head)) return { invalid: "not an <svg> root" };
   if (!/<\/svg>\s*$/i.test(svg)) return { invalid: "unclosed <svg>" };
   if (!/\sviewBox\s*=/.test(svg)) return { invalid: "no viewBox" };
   if (Buffer.byteLength(svg, "utf8") > MAX_SVG_BYTES) return { invalid: "larger than 96 KB" };
   if (/<script[\s>]/i.test(svg)) return { invalid: "contains <script>" };
+  // A data-URI <img> (and the live renderer) needs the namespace; models omit it.
+  if (svg.indexOf("xmlns") < 0) {
+    svg = svg.replace(/<svg/i, '<svg xmlns="http://www.w3.org/2000/svg"');
+  }
   return { value: svg };
 }
 

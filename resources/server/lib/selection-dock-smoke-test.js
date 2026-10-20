@@ -248,6 +248,20 @@ assert.strictEqual(
   assert(figure.includes("data:image/svg+xml;base64,"), "svg must be inlined as a data URI");
   assert(figure.includes('width="120"') && figure.includes('height="60"'), "viewBox must size the figure");
   assert(fn("not svg").includes("<pre><code>"), "a non-svg fence must fall back to code");
+  // Models never write xmlns; without it a data-URI <img> decodes to naturalWidth 0.
+  var src = function (markup) {
+    return Buffer.from(fn(markup).split("base64,")[1].split('"')[0], "base64").toString("utf8");
+  };
+  assert(src('<svg viewBox="0 0 10 10"><rect/></svg>').includes('xmlns="http://www.w3.org/2000/svg"'), "a missing xmlns must be added");
+  assert.strictEqual(
+    (src('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10"><rect/></svg>').match(/xmlns=/g) || []).length,
+    1,
+    "xmlns must not be doubled"
+  );
+  // The title comment must stay in front of the root, never behind it.
+  var titled = src('<!-- title: 图 -->\n<svg viewBox="0 0 10 10"><rect/></svg>');
+  assert(titled.indexOf("<!-- title:") === 0, "the title comment must stay first");
+  assert(titled.indexOf('<svg xmlns=') > 0, "xmlns must land on the svg tag");
   var render = dock.slice(dock.indexOf("function renderMarkdown"), dock.indexOf("function speakText"));
   assert(render.indexOf("svg[^\\n]*\\n") < render.indexOf("/\\\\\\$/g"), "svg fences must be lifted before math");
   assert(render.includes("SOCRSVG"), "svg placeholders must be restored after rendering");

@@ -1168,6 +1168,12 @@
   function svgFigure(tex) {
     var source = String(tex).trim();
     if (source.indexOf("<svg") < 0) return "<pre><code>" + escapeHtml(source) + "</code></pre>";
+    // 模型几乎从不写 xmlns，而 <img> 里的 data-URI SVG 少了命名空间会解码成长宽 0 的破图
+    // （实测缺 xmlns → naturalWidth 0，补上 → 300）。注释/XML 声明要留在最前面，
+    // 所以只替换 <svg 这个开标签，不动其它位置。
+    if (source.indexOf("xmlns") < 0) {
+      source = source.replace(/<svg/i, '<svg xmlns="http://www.w3.org/2000/svg"');
+    }
     var box = /viewBox\s*=\s*["']([^"']+)["']/i.exec(source);
     var parts = box ? String(box[1]).trim().split(/[\s,]+/) : [];
     var width = Number(parts[2]) > 0 ? Math.round(Number(parts[2])) : 0;

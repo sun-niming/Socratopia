@@ -173,6 +173,38 @@ function order(text, scope, extra) {
     assert.strictEqual(await order(scripted, scope), scripted);
   });
 
+  // The guide tells the model to open with `<!-- title: … -->`, and models never write
+  // `xmlns`. A leading comment (or XML declaration) must not be mistaken for a bad root,
+  // and added xmlns must reach the stored file — without it a data-URI <img> decodes to 0×0.
+  await test("a title comment before the root is accepted, and xmlns is added", async function () {
+    var scope = makeWorld("w7b");
+    var fig = "<svg viewBox=\"0 0 40 20\"><rect width=\"40\" height=\"20\"/></svg>";
+    var raw = "<!-- title: 有注释的图 -->\n" + fig;
+    assert.strictEqual(intents.validateSvgSource(raw).invalid, undefined, "a leading comment must not reject the root");
+    var bare = fs.readFileSync(
+      (function () {
+        var tmp = path.join(os.tmpdir(), "intents-svg-" + process.pid + ".txt");
+        fs.writeFileSync(tmp, fig);
+        return tmp;
+      })(),
+      "utf8"
+    );
+    assert.ok(intents.validateSvgSource(bare).value.indexOf("xmlns=") > 0, "validate must add xmlns");
+    var out = await order("看：\n\n```svg\n" + raw + "\n```", scope);
+    assert.ok(out.indexOf("```svg") < 0, "a titled fence must still materialize");
+    var id = /asset:\/\/(ast_[0-9a-f]{16})/.exec(out);
+    assert.ok(id, "titled svg must be anchored, got: " + out);
+    var stored = fs.readFileSync(store.readAssetFile(id[1], null, scope).path, "utf8");
+    assert.ok(/<svg xmlns="http:\/\/www\.w3\.org\/2000\/svg"/.test(stored), "stored svg must carry xmlns");
+    var already = await order("```svg\n<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 1 1\"><rect/></svg>\n```", scope);
+    assert.ok(already.indexOf("```svg") < 0, "an svg that already has xmlns still works");
+    assert.strictEqual(
+      (intents.validateSvgSource("<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 1 1\"><rect/></svg>").value.match(/xmlns=/g) || []).length,
+      1,
+      "xmlns must not be added twice"
+    );
+  });
+
   await test("at most four orders are materialized per message", async function () {
     var scope = makeWorld("w8");
     var lines = [];
