@@ -2,7 +2,23 @@
 
 Socratopia 是一款 Windows 桌面端「苏格拉底式教学」应用（Electron + Next.js）：一本教材、一个 NPC 教师、一堂可被追问的课。本仓库同时保存**可运行的打包运行时**、**全部产品与研究文档**、**世界设定与角色素材的取证档案**。
 
-> 私密仓库。里面既有源码性质的补丁面，也有真实教学档案与素材。
+> 公开仓库，记录一次「没有源码、没有构建链路」的系统上做的工程实践：打包产物的外科式补丁、LLM 调用的成本与缓存优化、Windows 文件锁死循环的根因定位，以及一套可直接投喂被测 agent 的评测任务包。运行所需的 `resources/settings.json` / `set.json` 不入库（见「配置与密钥」）。
+
+## 从简历点进来的话
+
+| 想看的 | 去哪儿 |
+|---|---|
+| 项目全貌与时间线 | [`docs/project-reconstruction/00-phase-a-project-map.md`](docs/project-reconstruction/00-phase-a-project-map.md)、[`03-timeline.md`](docs/project-reconstruction/03-timeline.md) |
+| BUG 台账（22 个，含证据与复现） | [`docs/project-reconstruction/04-bug-ledger.md`](docs/project-reconstruction/04-bug-ledger.md) |
+| 技术债与风险清单 | [`docs/project-reconstruction/05-tech-debt-and-risks.md`](docs/project-reconstruction/05-tech-debt-and-risks.md) |
+| 哪些是本分支做的（量化边界） | [`docs/project-reconstruction/09-original-vs-branch-boundary.md`](docs/project-reconstruction/09-original-vs-branch-boundary.md) |
+| 账单反解与缓存命中率优化 | [`docs/llm-cost-and-cache-optimization.md`](docs/llm-cost-and-cache-optimization.md) |
+| 教材插图两级缓存 | [`IMAGE_ASSET_LAYER_T13_COMPLETION_REPORT.md`](IMAGE_ASSET_LAYER_T13_COMPLETION_REPORT.md) |
+| 数学公式朗读引擎 | [`MATH_SPEECH_CORE_COMPLETION_REPORT.md`](MATH_SPEECH_CORE_COMPLETION_REPORT.md) |
+| Agent 评测任务包 | [`agent-task-datasets/`](agent-task-datasets/)（三套；含评分方锚点答案） |
+| 验证基线（356 个冒烟测试怎么跑） | [`docs/project-reconstruction/10-verification-baseline.md`](docs/project-reconstruction/10-verification-baseline.md) |
+
+> 全部数字都在对应文档里有取证路径；`09-original-vs-branch-boundary.md` 明确区分了「本体自带」与「本分支新增」，引用时请以它为准。
 
 ## 这是什么形态的仓库
 
