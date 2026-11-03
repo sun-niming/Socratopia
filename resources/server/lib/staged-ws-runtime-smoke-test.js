@@ -6,10 +6,21 @@ var fs = require("fs");
 var path = require("path");
 
 var workspaceRoot = path.resolve(__dirname, "..", "..", "..");
-var releaseRoot = path.resolve(process.argv[2] || path.join(workspaceRoot, "release", "win-unpacked"));
+var stagedRoot = path.join(workspaceRoot, "release", "win-unpacked");
+var snapshotRoot = path.join(workspaceRoot, "win-unpacked");
+// Default target order: explicit argument > staged release tree > committed snapshot.
+// `release/` is gitignored and regenerable (`node tools/stage-clean-win-release.js stage . release/win-unpacked`),
+// so a cleaned workspace must still be able to run this test against the committed `win-unpacked/` snapshot.
+var releaseRoot = process.argv[2]
+  ? path.resolve(process.argv[2])
+  : (fs.existsSync(stagedRoot) ? stagedRoot : snapshotRoot);
 var serverRoot = path.join(releaseRoot, "resources", "server");
 var nodeModules = path.join(serverRoot, ".next", "node_modules");
-assert(fs.statSync(releaseRoot).isDirectory(), "staged release directory is required");
+assert(
+  fs.existsSync(releaseRoot) && fs.statSync(releaseRoot).isDirectory(),
+  "staged release directory is required (looked for " + stagedRoot + " and " + snapshotRoot + ")"
+);
+console.log("staged ws runtime target: " + releaseRoot);
 assert(!fs.existsSync(path.join(serverRoot, "node_modules")), "clean staging must not depend on outer development node_modules");
 
 var probe = childProcess.spawnSync(process.execPath, ["-e", [

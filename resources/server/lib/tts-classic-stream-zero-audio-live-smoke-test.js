@@ -1,5 +1,13 @@
 "use strict";
 
+// Opt-in like its sibling live TTS checks: without a real local TTS service on
+// http://127.0.0.1:8000 this test can only observe a transport failure, not the
+// zero-audio protocol contract, so it skips instead of failing the smoke matrix.
+if (process.env.SOCRATOPIA_RUN_TTS_LIVE !== "1") {
+  console.log("SKIP tts classic stream zero-audio live check: set SOCRATOPIA_RUN_TTS_LIVE=1 to use a real local TTS service");
+  process.exit(0);
+}
+
 const assert = require("assert");
 
 const baseUrl = process.env.SOCRATOPIA_TTS_BASE_URL || "http://127.0.0.1:8000";
