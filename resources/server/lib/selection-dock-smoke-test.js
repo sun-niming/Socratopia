@@ -35,6 +35,11 @@ assert(dock.includes("voicePlayer.stop()"), "dock stops through the shared playe
   "data-socratopia-source-prev",
   "data-socratopia-source-next",
   "data-socratopia-source-counter",
+  "data-socratopia-source-total",
+  "data-socratopia-source-slider",
+  "jumpToTyped",
+  "paintCounter",
+  "paintSlider",
   "data-socratopia-source-close",
   "getSelection",
   "selectionchange",
@@ -96,7 +101,21 @@ assert(dock.includes('setAttribute("data-socratopia-selection-action", "close")'
 // cards over the reading column: the main column gives up room, a divider drags
 // the boundary, and the width survives a reload.
 assert(dock.includes("function ensureSplit("), "windows must sit in a split layout");
-assert(dock.includes('"socratopia.split.width"'), "split width must persist");
+assert(dock.includes('"socratopia.split.layout"'), "pane geometry must persist");
+// The pane is a real, self-placed container: it can be dragged anywhere, docked
+// back to an edge by dropping it in the side strip, and resized from all eight
+// directions - not just the one column divider.
+assert(dock.includes("function applyLayout("), "the pane layout must be applicable on demand");
+assert(dock.includes("function beginGesture("), "moving and resizing share one gesture");
+assert(dock.includes("data-socratopia-split-grip"), "the pane needs corner and edge grips");
+assert(/GRIP_BOX\s*=\s*\{[^}]*\bn:\s*"/.test(dock), "all eight grips must be declared");
+assert(dock.includes('dir.indexOf("w") >= 0'), "west grabs must move the left edge");
+assert(dock.includes("DOCK_SNAP"), "dropping near either edge must dock the pane");
+assert(dock.includes('layout.mode = "left"'), "the pane must be dockable on the left too");
+assert(dock.includes("upEvent.clientX"), "docking must follow the pointer, not the pane centre");
+assert(dock.includes('layout.mode = "float"'), "the pane must float freely between the edges");
+assert(dock.includes('splitPane.style.position = "fixed"'), "a floating pane leaves the column alone");
+assert(dock.includes("var layout = readLayout()"), "the pane layout must be stateful");
 assert(dock.includes("mountPane("), "both windows must mount into the split pane");
 assert(dock.includes("data-socratopia-split-tabs"), "the split pane must be tabbed");
 assert(dock.includes("teardownSplit"), "closing the last tab must restore the layout");
@@ -106,7 +125,7 @@ assert(
   "Escape must close only the active pane"
 );
 assert(!/right:0;bottom:0;width:min/.test(dock), "windows must not be pinned over the column");
-assert(dock.includes("clampRect") || dock.includes("Math.max(300"), "split width must stay in bounds");
+assert(dock.includes("MIN_W") && dock.includes("MIN_H"), "both pane dimensions must stay in bounds");
 // The page's own fixed action buttons sit at the viewport edge and would be
 // covered by the pane; they have to move with it and come back on teardown.
 assert(dock.includes("offsetFloaters("), "fixed page buttons must clear the pane");
@@ -151,6 +170,58 @@ assert(dock.includes("teachingLanguage: teachingLanguage(scope)"), "teaching lan
 assert(dock.includes('"/api/world?profileId="'), "world language has to be fetched");
 assert(dock.includes("renderMarkdown(selection.text, quote)"), "panel quote must render markdown");
 assert(dock.includes("renderMarkdown(quoted, quote)"), "source quote must render markdown");
+
+// "原文" has to follow the teaching turn, not the reading cursor. The tutor tags
+// every quote with a `socratopia:page#N` chip in the same message, so that chip is
+// the authoritative page. The reading cursor lags the conversation by turns.
+assert(dock.includes('a[href^="socratopia:page#"]'), "page chip selector must exist");
+assert(dock.includes("paragraphChipPage(selection)"), "source must prefer the quote's own page chip");
+assert(dock.includes("chipPage(host)"), "chips must be read off the selected paragraph");
+assert(dock.includes("host.closest(MESSAGE_SELECTOR)"), "chip lookup must scope to the message, not the whole page");
+assert(dock.includes("latestTaughtChipPage()"), "source must fall back to the newest taught page chip");
+// bubbles carry data-msg-id in the shipped build; data-message-id survives in older ones
+assert(dock.includes('var MESSAGE_SELECTOR = "[data-msg-id],[data-message-id]"'), "chip lookup must match both message markers");
+(function () {
+  var at = dock.indexOf('if (action === "source")');
+  var body = dock.slice(at, dock.indexOf("dock = null;", at));
+  assert(body.indexOf("paragraphChipPage") < body.indexOf("locate=1"), "quoted chip must win over text locating");
+  assert(body.indexOf("locate=1") < body.indexOf("latestTaughtChipPage"), "locating must win over the newest chip");
+  assert(body.indexOf("latestTaughtChipPage") < body.indexOf("/api/reading-context"), "cursor is the last resort");
+})();
+
+// Paging has to land on the page image first; the text column is a click away.
+// Toggles therefore sit image-then-text, and a fetched page text must not flip
+// the view out from under the reader.
+(function () {
+  assert(dock.indexOf("toolRow.appendChild(imageToggle)") < dock.indexOf("toolRow.appendChild(textToggle)"),
+    "page image toggle must come before the text toggle");
+  assert(dock.includes("setView(view);"), "fetching page text must not force the text view");
+  var at = dock.indexOf("function load(targetPage)");
+  var body = dock.slice(at, dock.indexOf("function fetchText(", at));
+  assert(body.includes('setView("image");'), "turning a page must land back on the page image");
+})();
+
+// A page number you can type and a slider that spans the whole book: clicking ‹
+// twenty times is not a jump. Typing out of range must clamp instead of loading
+// page 0, and landing on the current page must not refetch it.
+(function () {
+  assert(dock.includes('counter.type = "text"'), "the counter is an input, not a label");
+  assert(dock.includes('slider.type = "range"'), "a page slider exists");
+  assert(dock.includes('slider.max = String(total)'), "the slider spans the book");
+  assert(dock.includes('event.key === "Enter"'), "Enter jumps");
+  assert(dock.includes('event.key === "Escape"'), "Esc restores the typed-over page");
+  assert(dock.includes("event.stopPropagation()"), "Esc in the field must not close the whole drawer");
+  assert(dock.includes("parseInt(String(counter.value)"), "typed input is parsed to a number");
+  var jump = dock.slice(dock.indexOf("function jumpToTyped()"), dock.indexOf("counter.addEventListener(\"keydown\""));
+  assert(jump.includes("typed < 1"), "page below 1 clamps back");
+  assert(jump.includes("typed > total"), "page past the book clamps back");
+  assert(jump.includes("typed === page"), "the current page is not refetched");
+  assert(dock.includes('slider.addEventListener("change"'), "the slider only loads on release");
+  var change = dock.slice(dock.indexOf('slider.addEventListener("change"'), dock.indexOf("function paintSlider()"));
+  assert(!change.includes('slider.addEventListener("input"'), "dragging alone must not fire a render per pixel");
+  var paint = dock.slice(dock.indexOf("function paintSlider()"), dock.indexOf("foot.insertBefore(slider"));
+  assert(paint.includes('slider.disabled = true'), "a book with no known length disables the slider");
+})();
 
 // The dock has to survive a scroll while the selection is still on screen
 // (dragging a selection and smooth scrolling both fire scroll), but still get
@@ -262,6 +333,13 @@ assert.strictEqual(
   var titled = src('<!-- title: 图 -->\n<svg viewBox="0 0 10 10"><rect/></svg>');
   assert(titled.indexOf("<!-- title:") === 0, "the title comment must stay first");
   assert(titled.indexOf('<svg xmlns=') > 0, "xmlns must land on the svg tag");
+  // A data-URI <img> holds the SVG document and nothing else: prose the model writes
+  // above or below the root inside the same fence makes the decode fail (0×0).
+  assert.strictEqual(src('先看这张图\n<svg viewBox="0 0 10 10"><rect/></svg>').indexOf("先看这张图"), -1, "leading prose must be cut");
+  var trailing = src('<svg viewBox="0 0 10 10"><rect/></svg>\n\n后面还有 **加粗** 一段');
+  assert(trailing.includes("</svg>"), "the svg must survive");
+  assert.strictEqual(trailing.indexOf("后面还有"), -1, "trailing prose must be cut away");
+  assert(/<\/svg>$/.test(trailing), "the payload must end at the closing tag");
   var render = dock.slice(dock.indexOf("function renderMarkdown"), dock.indexOf("function speakText"));
   assert(render.indexOf("svg[^\\n]*\\n") < render.indexOf("/\\\\\\$/g"), "svg fences must be lifted before math");
   assert(render.includes("SOCRSVG"), "svg placeholders must be restored after rendering");
@@ -270,7 +348,14 @@ assert.strictEqual(
 // The panel has to tell the model which page the passage is on and in what
 // shape to mark it; the model does not volunteer page numbers on its own.
 assert(dock.includes('"/api/reading-context?profileId="'), "panel must resolve the current page");
-assert(dock.includes("range.taughtPage || range.startPage"), "page must come from the reading window");
+// The progress page beats the window start when a quote cannot be located, so the
+// fallback follows where the lesson actually is.
+assert(dock.includes("function progressPage"), "fallback page must follow teaching progress");
+assert(dock.includes("fallbackNote"), "a fallback page must say it is not the quote's own page");
+// A taught page left over from an old exercise marker (134) can sit before the
+// loaded window (139-147); only a page inside the window is fresh progress.
+assert(dock.includes("taught >= start && taught <= (end || start)"), "stale taught page must fall back to the window");
+assert(dock.includes("staleNote"), "a stale progress page must say so");
 assert(dock.includes("[p."), "page hint must state the expected shape");
 
 // A textarea only holds plain text, so `$I_6$` / tables / ```svg written by

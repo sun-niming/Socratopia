@@ -92,19 +92,22 @@ function parseRect(raw) {
 // A drawn diagram must survive being served as <img src>: no scripts, a viewBox so
 // it scales, and a small size so the whole thing stays inline.
 function validateSvgSource(source) {
-  var svg = String(source || "").trim();
-  if (!svg) return { invalid: "empty" };
-  // The guide tells the model to put `<!-- title: … -->` on the first line, so the
-  // root is rarely the very first bytes. Leading comments and the XML declaration
-  // are stripped before the root check (and kept in the value), otherwise every
-  // correctly-authored fence was rejected as "not an <svg> root".
-  var head = svg.replace(/^(?:<\?xml[^>]*\?>\s*|<!--[\s\S]*?-->\s*)+/i, "");
-  if (!/^<svg[\s>]/i.test(head)) return { invalid: "not an <svg> root" };
-  if (!/<\/svg>\s*$/i.test(svg)) return { invalid: "unclosed <svg>" };
+  var raw = String(source || "").trim();
+  if (!raw) return { invalid: "empty" };
+  var start = raw.search(/<svg[\s>]/i);
+  if (start < 0) return { invalid: "not an <svg> root" };
+  // A data-URI <img> (and the live renderer) holds the SVG document and nothing else:
+  // both prose and the `<!-- title: … -->` comment the guide asks for make the payload
+  // decode to naturalWidth 0, so cut to the root and put only the adjacent title back.
+  var lead = /(?:(?:<\?xml[^>]*\?>\s*|<!--[\s\S]*?-->\s*)+)$/i.exec(raw.slice(0, start));
+  var prefix = lead ? lead[0] : "";
+  var close = raw.lastIndexOf("</svg>");
+  if (close < start) return { invalid: "unclosed <svg>" };
+  var svg = prefix + raw.slice(start, close + 6);
   if (!/\sviewBox\s*=/.test(svg)) return { invalid: "no viewBox" };
   if (Buffer.byteLength(svg, "utf8") > MAX_SVG_BYTES) return { invalid: "larger than 96 KB" };
   if (/<script[\s>]/i.test(svg)) return { invalid: "contains <script>" };
-  // A data-URI <img> (and the live renderer) needs the namespace; models omit it.
+  // The namespace is required; models omit it.
   if (svg.indexOf("xmlns") < 0) {
     svg = svg.replace(/<svg/i, '<svg xmlns="http://www.w3.org/2000/svg"');
   }

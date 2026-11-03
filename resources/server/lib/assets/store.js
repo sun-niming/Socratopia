@@ -193,15 +193,26 @@ function validatePng(pngBuffer) {
 
 function validateSvg(svgSource) {
   if (typeof svgSource !== "string" || !svgSource.trim()) throw codedError("asset_svg_missing", "Missing SVG source");
-  var bytes = Buffer.byteLength(svgSource, "utf8");
+  var source = svgSource.trim();
+  if (!/<svg[\s>]/i.test(source)) throw codedError("asset_svg_invalid", "SVG source has no <svg> root");
+  // Keep the title comment (the guide asks for one) but drop anything after `</svg>`:
+  // the file is served as <img src>, which holds the SVG document and nothing else.
+  var prefix = "";
+  var lead = /^(?:(?:<\?xml[^>]*\?>\s*|<!--[\s\S]*?-->\s*)+)/i.exec(source);
+  if (lead) {
+    prefix = lead[1];
+    source = source.slice(prefix.length);
+  }
+  var close = source.lastIndexOf("</svg>");
+  if (close >= 0) source = prefix + source.slice(0, close + 6);
+  var bytes = Buffer.byteLength(source, "utf8");
   if (bytes > MAX_SVG_BYTES) throw codedError("asset_svg_too_large", "SVG exceeds 512 KB", 413);
-  if (!/<svg[\s>]/i.test(svgSource)) throw codedError("asset_svg_invalid", "SVG source has no <svg> root");
   // Served as <img src> (and rasterized by sharp): without the namespace the browser
   // decodes it to a 0×0 broken image. The model is never told to write one.
-  if (svgSource.indexOf("xmlns") < 0) {
-    return svgSource.replace(/<svg/i, '<svg xmlns="http://www.w3.org/2000/svg"');
+  if (source.indexOf("xmlns") < 0) {
+    return source.replace(/<svg/i, '<svg xmlns="http://www.w3.org/2000/svg"');
   }
-  return svgSource;
+  return source;
 }
 
 function optionalId(value, fallback) {

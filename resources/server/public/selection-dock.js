@@ -36,12 +36,20 @@
       page: "第 {n} 页",
       noBook: "当前世界还没有激活的教材",
       loadFailed: "页图加载失败",
+      viewText: "文字",
+      viewImage: "页图",
+      notFound: "第 {n} 页没有提取到文字",
+      locating: "按选区定位页码…",
+      fallbackNote: "这句没能在正文里定位到（可能是扫描页），先跳到教学进度这一页。",
+      staleNote: "这句没能在正文里定位到，教学进度也停在这一页之前，先跳到当前阅读窗口的起点。",
       noText: "这段没有可朗读的文字",
       quote: "原文",
       insertExplain: "解释这段内容：",
       insertCompanion: "关于这段内容：",
+      noFollowUp: "（直接讲清即可：三到五句，不要复述引文，也不要在结尾再抛一个问题。）",
       prev: "上一页",
       next: "下一页",
+      jumpTo: "跳到指定页（回车跳转，Esc 取消）",
       panelExplain: "解释这段",
       panelCompanion: "问伙伴",
       panelQuote: "引用",
@@ -58,7 +66,9 @@
       failed: "出错了",
       answerFailed: "没有取到回答",
       emptyAnswer: "（空回答）",
-      closePanel: "关闭"
+      closePanel: "关闭",
+      floatPane: "浮动 / 停靠",
+      dockPane: "停靠到右侧"
     },
     "zh-TW": {
       explain: "解釋",
@@ -71,12 +81,20 @@
       page: "第 {n} 頁",
       noBook: "目前世界還沒有啟用的教材",
       loadFailed: "頁圖載入失敗",
+      viewText: "文字",
+      viewImage: "頁圖",
+      notFound: "第 {n} 頁沒有擷取到文字",
+      locating: "按選取範圍定位頁碼…",
+      fallbackNote: "這句未能在正文裡定位（可能是掃描頁），先跳到教學進度這一頁。",
+      staleNote: "這句未能在正文裡定位，教學進度也停在這一頁之前，先跳到目前閱讀視窗的起點。",
       noText: "這段沒有可朗讀的文字",
       quote: "原文",
       insertExplain: "解釋這段內容：",
       insertCompanion: "關於這段內容：",
+      noFollowUp: "（直接講清即可：三到五句，不要複述引文，也不要在結尾再拋一個問題。）",
       prev: "上一頁",
       next: "下一頁",
+      jumpTo: "跳到指定頁（Enter 跳轉，Esc 取消）",
       panelExplain: "解釋這段",
       panelCompanion: "問夥伴",
       panelQuote: "引用",
@@ -93,7 +111,9 @@
       failed: "出錯了",
       answerFailed: "沒有取到回答",
       emptyAnswer: "（空回答）",
-      closePanel: "關閉"
+      closePanel: "關閉",
+      floatPane: "浮動 / 停靠",
+      dockPane: "停靠到右側"
     },
     en: {
       explain: "Explain",
@@ -106,12 +126,20 @@
       page: "Page {n}",
       noBook: "This world has no active textbook",
       loadFailed: "Could not load the page",
+      viewText: "Text",
+      viewImage: "Page image",
+      notFound: "No text extracted from page {n}",
+      locating: "Locating the page from the selection…",
+      fallbackNote: "This passage could not be located in the text layer (a scanned page?), so the page the lesson has reached is shown.",
+      staleNote: "This passage could not be located and the lesson progress stops before it, so the start of the current reading window is shown.",
       noText: "Nothing to read in this selection",
       quote: "Quoted text",
       insertExplain: "Explain this passage:",
       insertCompanion: "About this passage:",
+      noFollowUp: "(Just explain it plainly: 3-5 sentences, do not restate the quote, and do not end on another question.)",
       prev: "Previous page",
       next: "Next page",
+      jumpTo: "Jump to page (Enter to go, Esc to cancel)",
       panelExplain: "Explain this",
       panelCompanion: "Ask a companion",
       panelQuote: "Quote",
@@ -128,7 +156,9 @@
       failed: "Something went wrong",
       answerFailed: "No answer came back",
       emptyAnswer: "(empty answer)",
-      closePanel: "Close"
+      closePanel: "Close",
+      floatPane: "Float / dock",
+      dockPane: "Dock to the right"
     }
   };
 
@@ -508,6 +538,7 @@
   var dialogUnmount = null;
   var loadToken = 0;
   var fetchTimer = null;
+  var textToken = 0;
   // Request URLs whose object URLs this dialog still holds. Kept (not revoked) while
   // paging so the warmed neighbours decode instantly on ‹/›, and all released on
   // close. Releasing on every swap used to hand back revoked URLs from the shared
@@ -541,22 +572,216 @@
     keptPages = [];
   }
 
-  // ---- 右侧分栏：解释 / 问伙伴 / 原文共用 -------------------------------------
+  // ---- 右侧容器：解释 / 问伙伴 / 原文共用 -------------------------------------
   //
-  // 采用编辑器那种“左右分栏”而不是浮层：主聊天列让出右侧的空间，中间是可拖的
-  // 分隔条。右侧是一块带页签的容器，关掉全部页签就把主列还回原处；宽度记进
-  // localStorage。
-  var SPLIT_KEY = "socratopia.split.width";
+  // 学习区是一块自己摆的容器（编辑器 / LeetCode 那种分屏）：默认停靠右侧，抓标题条
+  // 能拖到左边或右边，也可以干脆浮在页面任意处；四条边和四角都能拉。停靠时还多一条
+  // 中间分隔条。位置、尺寸、停靠方向都记进 localStorage，下次照旧。
+  var LAYOUT_KEY = "socratopia.split.layout";
+  var DOCK_SNAP = 0.16;
+  var MIN_W = 320;
+  var MIN_H = 220;
+  var GRIP_BOX = {
+    n: "left:7px;right:7px;top:0;height:7px",
+    s: "left:7px;right:7px;bottom:0;height:7px",
+    e: "top:7px;bottom:7px;right:0;width:7px",
+    w: "top:7px;bottom:7px;left:0;width:7px",
+    ne: "top:0;right:0;width:13px;height:13px",
+    nw: "top:0;left:0;width:13px;height:13px",
+    se: "bottom:0;right:0;width:13px;height:13px",
+    sw: "bottom:0;left:0;width:13px;height:13px"
+  };
+  var GRIP_CURSOR = {
+    n: "ns-resize",
+    s: "ns-resize",
+    e: "ew-resize",
+    w: "ew-resize",
+    ne: "nesw-resize",
+    sw: "nesw-resize",
+    nw: "nwse-resize",
+    se: "nwse-resize"
+  };
   var splitWrap = null;
   var splitPane = null;
   var splitSeq = 0;
   var floaterObserver = null;
+  var layout = readLayout();
 
-  function splitWidth(limit) {
-    var stored = Number(window.localStorage.getItem(SPLIT_KEY));
-    var max = Math.max(320, Math.min(limit || window.innerWidth * 0.7, window.innerWidth - 380));
-    var width = Number.isFinite(stored) && stored > 0 ? stored : Math.min(560, window.innerWidth * 0.44);
-    return Math.round(Math.max(300, Math.min(width, max)));
+  function readLayout() {
+    var fallback = { mode: "right", x: 0, y: 0, w: 0, h: 0 };
+    var parsed = null;
+    try {
+      parsed = JSON.parse(window.localStorage.getItem(LAYOUT_KEY) || "null");
+    } catch (_) {
+      return fallback;
+    }
+    if (!parsed || typeof parsed !== "object") return fallback;
+    return {
+      mode: parsed.mode === "left" || parsed.mode === "float" ? parsed.mode : "right",
+      x: Number(parsed.x) || 0,
+      y: Number(parsed.y) || 0,
+      w: Number(parsed.w) || 0,
+      h: Number(parsed.h) || 0
+    };
+  }
+
+  function rememberLayout() {
+    try {
+      window.localStorage.setItem(LAYOUT_KEY, JSON.stringify(layout));
+    } catch (_) {}
+  }
+
+  function dockWidth() {
+    var max = Math.max(MIN_W, window.innerWidth - 380);
+    var width = layout.w > 0 ? layout.w : Math.min(560, window.innerWidth * 0.44);
+    return Math.round(Math.max(MIN_W, Math.min(width, max)));
+  }
+
+  function floatRect() {
+    var w = Math.round(Math.max(MIN_W, Math.min(layout.w || 520, window.innerWidth - 24)));
+    var h = Math.round(Math.max(MIN_H, Math.min(layout.h || 440, window.innerHeight - 24)));
+    return {
+      w: w,
+      h: h,
+      x: Math.round(Math.max(0, Math.min(layout.x, window.innerWidth - w))),
+      y: Math.round(Math.max(0, Math.min(layout.y, window.innerHeight - h)))
+    };
+  }
+
+  // 拖动过程中不做夹取，免得贴着屏幕边就被弹回来；松手时再交给 applyLayout 收边。
+  function paintRaw() {
+    var divider = splitWrap.querySelector("[data-socratopia-split-divider]");
+    if (divider) divider.style.display = "none";
+    splitPane.style.position = "fixed";
+    splitPane.style.order = "";
+    if (divider) divider.style.order = "";
+    splitPane.style.left = Math.round(layout.x) + "px";
+    splitPane.style.top = Math.round(layout.y) + "px";
+    splitPane.style.width = Math.round(layout.w) + "px";
+    splitPane.style.height = Math.round(layout.h) + "px";
+    splitPane.style.border = "1px solid var(--border,rgba(255,255,255,.16))";
+    splitPane.style.borderRadius = "12px";
+    splitPane.style.boxShadow = "0 24px 64px rgba(0,0,0,.48)";
+  }
+
+  function applyLayout() {
+    if (!splitWrap || !splitPane) return;
+    var divider = splitWrap.querySelector("[data-socratopia-split-divider]");
+    var app = splitWrap.__socratopiaApp;
+    splitPane.style.position = "";
+    splitPane.style.left = "";
+    splitPane.style.top = "";
+    splitPane.style.height = "";
+    splitPane.style.order = "";
+    splitPane.style.border = "0";
+    splitPane.style.borderRadius = "0";
+    splitPane.style.boxShadow = "none";
+    if (divider) divider.style.display = "";
+    if (divider) divider.style.order = "";
+    if (app) {
+      app.style.flex = "1 1 auto";
+      app.style.minWidth = "0";
+      app.style.height = "100%";
+    }
+    if (layout.mode === "float") {
+      var rect = floatRect();
+      layout.x = rect.x;
+      layout.y = rect.y;
+      layout.w = rect.w;
+      layout.h = rect.h;
+      paintRaw();
+      offsetFloaters(null);
+      return;
+    }
+    splitPane.style.width = dockWidth() + "px";
+    if (layout.mode === "left") {
+      // pane 排到最左、分隔条紧随其后、主列垫底：靠 order 而不是挪 DOM
+      splitPane.style.order = "-2";
+      if (divider) divider.style.order = "-1";
+      splitPane.style.borderRight = "1px solid var(--border,rgba(255,255,255,.12))";
+    } else {
+      splitPane.style.borderLeft = "1px solid var(--border,rgba(255,255,255,.12))";
+    }
+    offsetFloaters(layout.mode === "right" ? splitPane.offsetWidth : null);
+  }
+
+  // 一次拖拽 / 拉伸的公共骨架：按下记起点，移动改 layout，松手吸附并落盘。
+  function beginGesture(kind, dir, event) {
+    if (!splitPane || event.button !== 0) return;
+    if (kind === "move" && event.target.closest && (event.target.closest("[data-socratopia-split-tab-close]") || event.target.closest("[data-socratopia-split-float]"))) return;
+    // 页签是可点的按钮，按住时不要让它抢走拖拽
+    event.preventDefault();
+    var rect = splitPane.getBoundingClientRect();
+    var box = { x: event.clientX, y: event.clientY, l: rect.left, t: rect.top, w: rect.width, h: rect.height };
+    var draft = { x: rect.left, y: rect.top, w: rect.width, h: rect.height };
+    // 停靠态左右拉边等价于改停靠宽度，不必先转成浮层
+    var stay = kind === "resize" && layout.mode !== "float" && (dir === "e" || dir === "w");
+
+    function paint(moveEvent) {
+      var dx = moveEvent.clientX - box.x;
+      var dy = moveEvent.clientY - box.y;
+      if (kind === "move") {
+        draft.x = box.l + dx;
+        draft.y = box.t + dy;
+        layout.mode = "float";
+      } else {
+        draft.w = box.w;
+        draft.h = box.h;
+        if (dir.indexOf("e") >= 0) draft.w = box.w + dx;
+        if (dir.indexOf("w") >= 0) {
+          draft.w = box.w - dx;
+          draft.x = box.l + dx;
+        }
+        if (dir.indexOf("s") >= 0) draft.h = box.h + dy;
+        if (dir.indexOf("n") >= 0) {
+          draft.h = box.h - dy;
+          draft.y = box.t + dy;
+        }
+        if (draft.w < MIN_W) {
+          if (dir.indexOf("w") >= 0) draft.x = box.l + box.w - MIN_W;
+          draft.w = MIN_W;
+        }
+        if (draft.h < MIN_H) {
+          if (dir.indexOf("n") >= 0) draft.y = box.t + box.h - MIN_H;
+          draft.h = MIN_H;
+        }
+        if (stay) {
+          layout.w = Math.round(draft.w);
+          splitPane.style.width = layout.w + "px";
+          offsetFloaters(layout.mode === "right" ? layout.w : null);
+          return;
+        }
+        layout.mode = "float";
+      }
+      layout.x = draft.x;
+      layout.y = draft.y;
+      layout.w = draft.w;
+      layout.h = draft.h;
+      paintRaw();
+    }
+
+    function stop(upEvent) {
+      document.removeEventListener("mousemove", paint, true);
+      document.removeEventListener("mouseup", stop, true);
+      document.removeEventListener("selectstart", block, true);
+      // 拖到左右两侧的窄条里就吸附停靠，其余位置留成浮层。判据用松手时的指针位置，
+      // 不用面板中心：面板一宽，中心离边就远，用户手已经贴边了却不吸附。
+      if (kind === "move") {
+        var edge = window.innerWidth * DOCK_SNAP;
+        var at = upEvent && typeof upEvent.clientX === "number" ? upEvent.clientX : draft.x + draft.w / 2;
+        if (at < edge) layout.mode = "left";
+        else if (at > window.innerWidth - edge) layout.mode = "right";
+      }
+      applyLayout();
+      rememberLayout();
+    }
+
+    var block = function (ev) {
+      ev.preventDefault();
+    };
+    document.addEventListener("mousemove", paint, true);
+    document.addEventListener("mouseup", stop, true);
+    document.addEventListener("selectstart", block, true);
   }
 
   function ensureSplit() {
@@ -576,6 +801,7 @@
     splitWrap = document.createElement("div");
     splitWrap.setAttribute("data-socratopia-split", "1");
     splitWrap.style.cssText = "display:flex;height:100vh;width:100%;overflow:hidden";
+    splitWrap.__socratopiaApp = app;
 
     var divider = document.createElement("div");
     divider.setAttribute("data-socratopia-split-divider", "1");
@@ -588,16 +814,20 @@
     splitPane = document.createElement("div");
     splitPane.setAttribute("data-socratopia-split-pane", "1");
     splitPane.style.cssText =
-      "flex:0 0 auto;display:flex;flex-direction:column;min-width:0;overflow:hidden;" +
+      "position:relative;flex:0 0 auto;display:flex;flex-direction:column;min-width:0;overflow:hidden;" +
       "background:var(--surface-raised,#161618);" +
       "border-left:1px solid var(--border,rgba(255,255,255,.12))";
 
     var tabs = document.createElement("div");
     tabs.setAttribute("data-socratopia-split-tabs", "1");
     tabs.setAttribute("role", "tablist");
+    // 标题条兼作拖动手柄
     tabs.style.cssText =
-      "flex:0 0 auto;display:flex;align-items:stretch;gap:2px;overflow-x:auto;" +
+      "flex:0 0 auto;display:flex;align-items:stretch;gap:2px;overflow-x:auto;cursor:grab;" +
       "background:var(--surface-sunken,#0f0f11);border-bottom:1px solid var(--border,rgba(255,255,255,.12))";
+    tabs.addEventListener("mousedown", function (event) {
+      beginGesture("move", "", event);
+    });
 
     var body = document.createElement("div");
     body.setAttribute("data-socratopia-split-body", "1");
@@ -606,58 +836,66 @@
     splitPane.appendChild(tabs);
     splitPane.appendChild(body);
 
+    // 四边 + 四角的拉伸把手
+    Object.keys(GRIP_BOX).forEach(function (dir) {
+      var grip = document.createElement("div");
+      grip.setAttribute("data-socratopia-split-grip", dir);
+      grip.style.cssText = "position:absolute;z-index:3;" + GRIP_BOX[dir] + ";cursor:" + GRIP_CURSOR[dir];
+      grip.addEventListener("mousedown", function (event) {
+        beginGesture("resize", dir, event);
+      });
+      splitPane.appendChild(grip);
+    });
+
     host.insertBefore(splitWrap, app);
     splitWrap.appendChild(app);
     splitWrap.appendChild(divider);
     splitWrap.appendChild(splitPane);
 
-    app.style.flex = "1 1 auto";
-    app.style.minWidth = "0";
-    app.style.height = "100%";
-    splitPane.style.width = splitWidth() + "px";
-
-    // 分隔条：按住左右拖即可改宽度
-    var sizing = null;
     divider.addEventListener("mousedown", function (event) {
-      if (event.button !== 0) return;
-      event.preventDefault();
-      sizing = { startX: event.clientX, width: splitPane.offsetWidth };
-      var paint = function (moveEvent) {
-        var next = sizing.width - (moveEvent.clientX - sizing.startX);
-        var max = Math.max(300, window.innerWidth - 380);
-        splitPane.style.width = Math.round(Math.max(300, Math.min(next, max))) + "px";
-        offsetFloaters(splitPane.offsetWidth);
-      };
-      var stop = function () {
-        sizing = null;
-        document.removeEventListener("mousemove", paint, true);
-        document.removeEventListener("mouseup", stop, true);
-        document.removeEventListener("selectstart", block, true);
-        try {
-          window.localStorage.setItem(SPLIT_KEY, String(splitPane.offsetWidth));
-        } catch (_) {}
-        offsetFloaters(splitPane.offsetWidth);
-      };
-      var block = function (ev) {
-        ev.preventDefault();
-      };
-      document.addEventListener("mousemove", paint, true);
-      document.addEventListener("mouseup", stop, true);
-      document.addEventListener("selectstart", block, true);
+      beginGesture("resize", layout.mode === "left" ? "e" : "w", event);
     });
+
+    var floatBtn = document.createElement("button");
+    floatBtn.type = "button";
+    floatBtn.setAttribute("data-socratopia-split-float", "1");
+    floatBtn.textContent = layout.mode === "float" ? "⇥" : "⤢";
+    floatBtn.style.cssText =
+      "flex:0 0 auto;align-self:center;margin:0 6px;border:1px solid var(--border,rgba(255,255,255,.18));" +
+      "border-radius:6px;background:transparent;color:inherit;font-size:12px;line-height:1;" +
+      "padding:4px 6px;cursor:pointer;opacity:.85";
+    floatBtn.title = layout.mode === "float" ? t("dockPane") : t("floatPane");
+    floatBtn.addEventListener("click", function () {
+      if (layout.mode === "float") {
+        layout.mode = "right";
+      } else {
+        var rect = splitPane.getBoundingClientRect();
+        layout.mode = "float";
+        layout.x = Math.max(12, rect.left - 80);
+        layout.y = Math.max(12, rect.top + 48);
+        // 停靠宽度往往偏窄，浮起来给一个能读的宽度，别把面板挤成一条
+        layout.w = Math.min(Math.max(rect.width, 560), window.innerWidth - 40);
+        layout.h = Math.max(MIN_H, Math.min(rect.height, window.innerHeight - 80));
+      }
+      floatBtn.textContent = layout.mode === "float" ? "⇥" : "⤢";
+      floatBtn.title = layout.mode === "float" ? t("dockPane") : t("floatPane");
+      applyLayout();
+      rememberLayout();
+    });
+    // 浮动按钮钉在最前面：页签一多就横向滚动，放末尾会被推出视野
+    tabs.appendChild(floatBtn);
+
+    applyLayout();
 
     window.addEventListener("resize", function () {
       if (!splitPane || !splitPane.isConnected) return;
-      splitPane.style.width = splitWidth(splitPane.offsetWidth) + "px";
-      offsetFloaters(splitPane.offsetWidth);
+      applyLayout();
     });
-
-    offsetFloaters(splitPane.offsetWidth);
 
     // 那两个按钮也可能是分栏之后才挂上的（换世界时才出现引图按钮），补一次
     if (!floaterObserver && window.MutationObserver) {
       floaterObserver = new MutationObserver(function () {
-        if (splitPane && splitPane.isConnected) offsetFloaters(splitPane.offsetWidth);
+        if (splitPane && splitPane.isConnected) offsetFloaters(layout.mode === "right" ? splitPane.offsetWidth : null);
       });
       floaterObserver.observe(document.body, { childList: true });
     }
@@ -667,7 +905,7 @@
 
   function teardownSplit() {
     if (!splitWrap) return;
-    var app = splitWrap.children[0];
+    var app = splitWrap.__socratopiaApp;
     if (app) {
       app.style.flex = "";
       app.style.minWidth = "";
@@ -794,9 +1032,11 @@
     releaseBlob();
   }
 
-  function openSourceDialog(initialPage) {
+  function openSourceDialog(initialPage, opts) {
     var selection = dockSelection;
     var quoted = selection ? selection.text : "";
+    var fromFallback = !!(opts && opts.fallback);
+    var fromStale = !!(opts && opts.stale);
     var scope = lastScope;
     if (!scope || !scope.textbookId) {
       resolveScope().then(function (resolved) {
@@ -805,7 +1045,7 @@
           return;
         }
         lastScope = resolved;
-        openSourceDialog(initialPage);
+        openSourceDialog(initialPage, opts);
       });
       return;
     }
@@ -860,14 +1100,80 @@
       "flex:1;min-height:200px;display:flex;align-items:center;justify-content:center;overflow:auto;" +
       "background:var(--surface-sunken,#0f0f11);border-radius:10px";
 
+    // 文字视图：页码由选区在 PDF 文本层里定位得出，直接给文字，不必等页图，
+    // 也不必靠页码猜。服务端按原页的版式切了块（标题 / 段落 / 命中段），这里照排。
+    var textView = document.createElement("div");
+    textView.setAttribute("data-socratopia-source-text", "1");
+    textView.setAttribute("data-socratopia-source-blocks", "1");
+    textView.style.cssText =
+      "display:none;align-self:flex-start;width:100%;box-sizing:border-box;padding:14px 18px 22px;" +
+      "font-size:13.5px;line-height:1.9;color:var(--foreground,#f4f4f5)";
+    stage.appendChild(textView);
+
+    function fillText(blocks, flat) {
+      textView.textContent = "";
+      var list = Array.isArray(blocks) ? blocks : [];
+      if (!list.length) {
+        textView.style.whiteSpace = "pre-wrap";
+        textView.textContent = flat || "";
+        return null;
+      }
+      textView.style.whiteSpace = "normal";
+      var hitNode = null;
+      list.forEach(function (block, index) {
+        var isHeading = block.type === "heading";
+        var node = document.createElement(isHeading ? "h3" : "p");
+        node.setAttribute("data-socratopia-source-block", isHeading ? "heading" : "paragraph");
+        if (block.hit) node.setAttribute("data-socratopia-source-hit", "1");
+        node.textContent = block.text;
+        node.style.cssText = isHeading
+          ? "margin:" + (index ? "16px" : "0") + " 0 8px;font-size:14.5px;font-weight:600;line-height:1.6;" +
+            "padding-left:8px;border-left:3px solid var(--accent-solid,#3a6df0)"
+          : "margin:0 0 10px;text-indent:0";
+        if (block.hit) {
+          node.style.background = "color-mix(in srgb, var(--accent-solid,#3a6df0) 16%, transparent)";
+          node.style.borderRadius = "4px";
+          node.style.padding = "2px 6px";
+          node.style.margin = "0 -6px 10px";
+          if (!hitNode) hitNode = node;
+        }
+        textView.appendChild(node);
+      });
+      return hitNode;
+    }
+
     var image = document.createElement("img");
     image.setAttribute("data-socratopia-source-image", "1");
     image.alt = quoted ? quoted.slice(0, 80) : t("title");
     image.style.cssText = "max-width:100%;height:auto;display:block";
     stage.appendChild(image);
 
+    var sourceNote = document.createElement("div");
+    sourceNote.setAttribute("data-socratopia-source-note", "1");
+    sourceNote.style.cssText =
+      "display:none;font-size:12px;line-height:1.6;color:var(--text-muted,#a1a1aa);padding-left:8px";
+
+    var view = "image";
+    function setView(next) {
+      view = next === "text" ? "text" : "image";
+      textView.style.display = view === "text" ? "block" : "none";
+      image.style.display = view === "text" ? "none" : "block";
+      stage.style.alignItems = view === "text" ? "flex-start" : "center";
+      textToggle.style.borderColor =
+        view === "text" ? "var(--accent-solid,#3a6df0)" : "var(--border,rgba(255,255,255,.18))";
+      imageToggle.style.borderColor =
+        view === "image" ? "var(--accent-solid,#3a6df0)" : "var(--border,rgba(255,255,255,.18))";
+    }
+
     var foot = document.createElement("div");
-    foot.style.cssText = "display:flex;align-items:center;gap:8px;justify-content:center;font-size:13px;padding-left:16px";
+    foot.style.cssText =
+      "display:flex;flex-direction:column;gap:6px;font-size:13px;padding-left:16px;align-items:stretch";
+    var navRow = document.createElement("div");
+    navRow.style.cssText = "display:flex;align-items:center;gap:8px;justify-content:center";
+    foot.appendChild(navRow);
+    var toolRow = document.createElement("div");
+    toolRow.style.cssText = "display:flex;align-items:center;gap:8px;justify-content:center";
+    foot.appendChild(toolRow);
 
     var prev = document.createElement("button");
     prev.type = "button";
@@ -877,9 +1183,62 @@
     prev.style.cssText = "border:1px solid var(--border,rgba(255,255,255,.18));background:transparent;color:inherit;" +
       "border-radius:9999px;width:28px;height:28px;cursor:pointer;line-height:1";
 
-    var counter = document.createElement("span");
+    // 页码本身是个输入框：`1 / 80` 里的「1」可以直接改，回车或失焦就跳过去。
+    // 光靠 ‹ › 走二十页要点二十下，语义定位又不可靠时这是唯一的快路。
+    var counter = document.createElement("input");
+    counter.type = "text";
+    counter.inputMode = "numeric";
     counter.setAttribute("data-socratopia-source-counter", "1");
-    counter.style.cssText = "min-width:64px;text-align:center;color:var(--text-muted,#a1a1aa)";
+    counter.setAttribute("aria-label", t("jumpTo"));
+    counter.style.cssText =
+      "width:44px;text-align:right;padding:3px 4px;font:inherit;font-size:13px;" +
+      "border:1px solid var(--border,rgba(255,255,255,.18));border-radius:5px;background:transparent;color:inherit";
+    // 静止时也不藏边框：看起来是能改的，人才会去点它。
+    counter.addEventListener("focus", function () {
+      counter.style.borderColor = "var(--accent-solid,#3a6df0)";
+    });
+    counter.addEventListener("blur", function () {
+      counter.style.borderColor = "var(--border,rgba(255,255,255,.18))";
+    });
+    var totalLabel = document.createElement("span");
+    totalLabel.setAttribute("data-socratopia-source-total", "1");
+    totalLabel.style.cssText = "min-width:34px;color:var(--text-muted,#a1a1aa)";
+
+    function paintCounter() {
+      counter.value = String(page);
+      totalLabel.textContent = total ? " / " + total : "";
+      counter.style.width = (String(page).length + 2) * 8 + "px";
+    }
+
+    // 输入越界就夹进 [1, total]；没变就什么都不做，免得白取一次页图。
+    function jumpToTyped() {
+      var typed = parseInt(String(counter.value).replace(/\D/g, ""), 10);
+      if (!Number.isInteger(typed) || typed < 1 || (total && typed > total)) {
+        paintCounter();
+        return;
+      }
+      if (typed === page) {
+        paintCounter();
+        return;
+      }
+      load(typed);
+    }
+    counter.addEventListener("keydown", function (event) {
+      if (event.key === "Enter") {
+        event.preventDefault();
+        jumpToTyped();
+        counter.blur();
+      } else if (event.key === "Escape") {
+        // Esc 在这里只撤销输入；不拦住的话会冒到 document 把整个抽屉关掉
+        event.stopPropagation();
+        paintCounter();
+        counter.blur();
+      }
+    });
+    counter.addEventListener("blur", jumpToTyped);
+    counter.addEventListener("focus", function () {
+      counter.select();
+    });
 
     var next = document.createElement("button");
     next.type = "button";
@@ -887,14 +1246,80 @@
     next.setAttribute("aria-label", t("next"));
     next.textContent = "›";
     next.style.cssText = prev.style.cssText;
-    foot.appendChild(prev);
-    foot.appendChild(counter);
-    foot.appendChild(next);
+
+    var toggleStyle =
+      "border:1px solid var(--border,rgba(255,255,255,.18));background:transparent;color:inherit;" +
+      "border-radius:6px;font-size:12px;line-height:1;padding:5px 8px;cursor:pointer";
+    var textToggle = document.createElement("button");
+    textToggle.type = "button";
+    textToggle.setAttribute("data-socratopia-source-view-text", "1");
+    textToggle.textContent = t("viewText");
+    textToggle.style.cssText = toggleStyle;
+    textToggle.addEventListener("click", function () {
+      setView("text");
+    });
+    var imageToggle = document.createElement("button");
+    imageToggle.type = "button";
+    imageToggle.setAttribute("data-socratopia-source-view-image", "1");
+    imageToggle.textContent = t("viewImage");
+    imageToggle.style.cssText = toggleStyle;
+    imageToggle.addEventListener("click", function () {
+      setView("image");
+    });
+
+    // 页图在前、文字在后：按页翻的时候先看到的是页，不是一屏字。取到的文字
+    // 照样填进文字视图，按「文字」立刻就看得到。
+    toolRow.appendChild(imageToggle);
+    toolRow.appendChild(textToggle);
+    navRow.appendChild(prev);
+    navRow.appendChild(counter);
+    navRow.appendChild(totalLabel);
+    navRow.appendChild(next);
+
+    // 一页一页走二十页要点二十下；给一条能直接填目的页的滑杆，能拖也能键盘
+    // 微调，松手才 load（input 里只跟手，change 才真的取页图）。
+    var slider = document.createElement("input");
+    slider.type = "range";
+    slider.min = "1";
+    slider.max = "1";
+    slider.value = "1";
+    slider.step = "1";
+    slider.setAttribute("data-socratopia-source-slider", "1");
+    slider.setAttribute("aria-label", t("jumpTo"));
+    slider.style.cssText = "width:100%;box-sizing:border-box;accent-color:var(--accent-solid,#3a6df0);cursor:pointer;margin:0";
+    slider.addEventListener("input", function () {
+      counter.value = slider.value;
+    });
+    slider.addEventListener("change", function () {
+      var target = parseInt(slider.value, 10);
+      if (Number.isInteger(target) && target !== page) load(target);
+    });
+
+    function paintSlider() {
+      if (!total) {
+        slider.max = "1";
+        slider.disabled = true;
+        slider.style.opacity = ".4";
+        return;
+      }
+      slider.disabled = false;
+      slider.style.opacity = "1";
+      slider.max = String(total);
+      slider.value = String(Math.min(page, total));
+    }
+    // 滑杆贴着翻页行走：两者都是「去哪儿」，视图开关才是另一类。
+    foot.insertBefore(slider, toolRow);
 
     panel.appendChild(head);
     head.appendChild(title);
     title.appendChild(pageHint);
     panel.appendChild(quote);
+    // 兜底页不是选中的那句所在页，得说清楚，否则看起来又像对错了页
+    if (fromFallback) {
+      sourceNote.textContent = t(fromStale ? "staleNote" : "fallbackNote");
+      sourceNote.style.display = "block";
+    }
+    panel.appendChild(sourceNote);
     panel.appendChild(stage);
     panel.appendChild(foot);
     dialog.appendChild(panel);
@@ -910,9 +1335,13 @@
       page = targetPage;
       pageHint.textContent = " · " + t("page", { n: page });
       if (dialog && dialog.__socratopiaTabLabel) dialog.__socratopiaTabLabel(t("title") + " · " + t("page", { n: page }));
-      counter.textContent = total ? page + " / " + total : String(page);
+      paintCounter();
+      paintSlider();
       prev.disabled = page <= 1;
       next.disabled = total ? page >= total : false;
+      // 每次翻页先回到页图：用户按「下一页」是想看下一页长什么样，不是想接着
+      // 读上一页那段文字。文字照旧在后台取，按「文字」随时切回。
+      setView("image");
 
       if (fetchTimer) clearTimeout(fetchTimer);
       var warmHit = keptPages.indexOf(pageUrl(scope, page, 960)) >= 0;
@@ -920,6 +1349,53 @@
       else fetchTimer = setTimeout(function () {
         fetchPage(page);
       }, 120);
+      fetchText(page);
+    }
+
+    // 文字视图按页取：页码定位与文字是同一份索引，取到就切到文字视图——页图只是
+    // 补充，用户真正要核的是「这句是不是原文」。带上引文，服务端才能标出命中段。
+    function fetchText(targetPage) {
+      var token = ++textToken;
+      if (view === "text") textView.textContent = t("locating");
+      fetch(
+        "/api/textbook?locate=1&profileId=" + encodeURIComponent(scope.profileId) +
+          "&worldId=" + encodeURIComponent(scope.worldId) +
+          "&textbookId=" + encodeURIComponent(scope.textbookId) +
+          "&page=" + targetPage +
+          (quoted ? "&quote=" + encodeURIComponent(quoted.slice(0, 400)) : "")
+      )
+        .then(function (response) {
+          return response.ok ? response.json() : null;
+        })
+        .then(function (data) {
+          if (token !== textToken || page !== targetPage) return;
+          var text = String((data && data.text) || "").trim();
+          if (!text) {
+            textView.textContent = t("notFound", { n: targetPage });
+            if (view === "text") setView("image");
+            return;
+          }
+          fillText(data && data.blocks, text);
+          // 取到文字不切视图：翻页先看到的应该是页，文字留在「文字」键后面
+          setView(view);
+          if (data && Number.isInteger(Number(data.totalPages)) && !total) {
+            total = Number(data.totalPages);
+            paintCounter();
+            paintSlider();
+            next.disabled = page >= total;
+          }
+          // 文字页可能很长，落到命中段上，别让人从页眉找起
+          var hitNode = textView.querySelector("[data-socratopia-source-hit]");
+          if (hitNode) {
+            requestAnimationFrame(function () {
+              if (hitNode.isConnected) hitNode.scrollIntoView({ block: "center" });
+            });
+          }
+        })
+        .catch(function () {
+          if (token !== textToken) return;
+          textView.textContent = t("notFound", { n: targetPage });
+        });
     }
 
     function fetchPage(targetPage) {
@@ -1037,7 +1513,8 @@
             var pages = Number(list[i].numPages);
             if (Number.isInteger(pages) && pages > 0) {
               total = pages;
-              counter.textContent = page + " / " + total;
+              paintCounter();
+              paintSlider();
               next.disabled = page >= total;
             }
             return;
@@ -1060,7 +1537,8 @@
         var value = range && Number(range.totalPages);
         if (!total && Number.isInteger(value) && value > 0) {
           total = value;
-          counter.textContent = page + " / " + total;
+          paintCounter();
+          paintSlider();
           next.disabled = page >= total;
         }
       })
@@ -1082,14 +1560,76 @@
         return response.ok ? response.json() : null;
       })
       .then(function (data) {
-        var range = data && data.readingRange;
-        var page = Number(range && (range.taughtPage || range.startPage));
-        if (Number.isInteger(page) && page > 0) lastPage = page;
+        var found = progressPage(data && data.readingRange);
+        if (found) lastPage = found.page;
         return lastPage;
       })
       .catch(function () {
         return lastPage;
       });
+  }
+
+  // 教学进度页。不能直接信 taughtPage：它可能停在很旧的练习标记上（实测第 134 页，
+  // 而阅读窗口已经推到 139-147），只有落在窗口里才算这条进度还新鲜；落不进就说明
+  // 窗口比它新，退到窗口起点。
+  // 返回 { page, fresh }：fresh 表示这条页码确实是当前教学进度，而不是窗口兜底。
+  function progressPage(range) {
+    if (!range) return null;
+    var taught = Number(range.taughtPage || range.lastTaughtPage);
+    var start = Number(range.startPage);
+    var end = Number(range.endPage);
+    if (Number.isInteger(taught) && taught >= 1 && (!start || (taught >= start && taught <= (end || start)))) {
+      return { page: taught, fresh: true };
+    }
+    return Number.isInteger(start) && start >= 1 ? { page: start, fresh: false } : null;
+  }
+
+  // 教学里“原文”到底是哪一页：模型每轮引用原文都会在同一行紧跟一个页码 chip
+  // `[☰ p.12](socratopia:page#12)`，那才是这一轮真正在讲的那一页。阅读游标只是
+  // “读到哪”，落后于对话。先信 chip，其次才信选区定位，最后才退进度。
+  var CHIP_SELECTOR = 'a[href^="socratopia:page#"]';
+  // 线上的消息气泡带的是 data-msg-id（data-message-id 只出现在部分旧快照里），两个都要认。
+  var MESSAGE_SELECTOR = "[data-msg-id],[data-message-id]";
+
+  function chipPage(node) {
+    var anchor = node && node.closest ? node.closest(CHIP_SELECTOR) : null;
+    var page = anchor ? Number(String(anchor.getAttribute("href")).split("#")[1]) : null;
+    return Number.isInteger(page) && page >= 1 ? page : null;
+  }
+
+  // 选区所在消息里、选区之后的第一个 chip；同一轮里最贴近这句引文的页码。
+  function paragraphChipPage(selection) {
+    var range = selection && selection.range;
+    if (!range) return null;
+    var host = range.commonAncestorContainer;
+    host = host.nodeType === 1 ? host : host.parentNode;
+    var message = host && host.closest ? host.closest(MESSAGE_SELECTOR) : null;
+    if (!message) return chipPage(host);
+    var direct = chipPage(host);
+    if (direct) return direct;
+    var chips = message.querySelectorAll(CHIP_SELECTOR);
+    for (var i = 0; i < chips.length; i++) {
+      // comparePoint 返回 1 表示这个 chip 落在选区之后 —— 就是紧跟这句的那个
+      try {
+        if (range.comparePoint(chips[i], 0) >= 0) return chipPage(chips[i]);
+      } catch (_) {
+        return chipPage(chips[0]);
+      }
+    }
+    return chips.length ? chipPage(chips[chips.length - 1]) : null;
+  }
+
+  // 最新一轮里最后出现的 chip：教学推进到哪儿，原文就跟到哪儿。
+  function latestTaughtChipPage() {
+    var messages = document.querySelectorAll(MESSAGE_SELECTOR);
+    for (var i = messages.length - 1; i >= 0; i--) {
+      var chips = messages[i].querySelectorAll(CHIP_SELECTOR);
+      if (chips.length) {
+        var page = chipPage(chips[chips.length - 1]);
+        if (page) return page;
+      }
+    }
+    return null;
   }
 
   // 页签用：把选区压成一句短标题（去掉换行、限长）
@@ -1166,11 +1706,19 @@
   // 会话气泡里的 ```svg 围栏由 page-*.js 的 pre 覆盖渲染成一张内联图；面板走的是自己的
   // markdown 管线，没有那个覆盖，所以这里复刻一份：SVG 转 data-URI 图，尺寸取自 viewBox。
   function svgFigure(tex) {
-    var source = String(tex).trim();
-    if (source.indexOf("<svg") < 0) return "<pre><code>" + escapeHtml(source) + "</code></pre>";
+    var raw = String(tex).trim();
+    if (raw.indexOf("<svg") < 0) return "<pre><code>" + escapeHtml(raw) + "</code></pre>";
     // 模型几乎从不写 xmlns，而 <img> 里的 data-URI SVG 少了命名空间会解码成长宽 0 的破图
     // （实测缺 xmlns → naturalWidth 0，补上 → 300）。注释/XML 声明要留在最前面，
     // 所以只替换 <svg 这个开标签，不动其它位置。
+    // 另一个坑：模型常在围栏里写成「正文 + 注释 + svg + 下面接着一段正文」，而 data-URI
+    // 里的 SVG 文档**前后都只能有空白**（实测前后多一段文字 → 0；只有空白 → 300）。
+    // 所以先剪出 <svg>…</svg> 本体，只把紧贴根标签的标题注释重新贴回去。
+    var start = raw.search(/<svg[\s>]/i);
+    var lead = /(?:(?:<\?xml[^>]*\?>\s*|<!--[\s\S]*?-->\s*)+)$/i.exec(raw.slice(0, start));
+    var prefix = lead ? lead[0] : "";
+    var close = raw.lastIndexOf("</svg>");
+    var source = close > 0 ? prefix + raw.slice(start, close + 6) : raw;
     if (source.indexOf("xmlns") < 0) {
       source = source.replace(/<svg/i, '<svg xmlns="http://www.w3.org/2000/svg"');
     }
@@ -1646,9 +2194,8 @@
               "\n\n「" + panelState.text + "」" +
               (followUp ? "\n\n" + followUp : "") +
               pageHint() +
-              (panelState.mode === "companion"
-                ? "\n\n（只需回答这段引文相关的问题，三到五句，不要复述引文。）"
-                : "")
+              // 用户明确要求：解释 / 问伙伴都不要再套一层追问，别让问题越滚越多。
+              "\n\n" + t("noFollowUp")
           }
         ],
         character: panelState.mode === "companion" && panelState.chosen ? panelState.chosen.slotId : "npc_a",
@@ -1800,6 +2347,10 @@
       return;
     }
     if (action === "source") {
+      // 用户说的“原文随教学推进”就是这一条：教学每轮讲哪一页，原文就跟哪一页。
+      // 所以顺序是 —— 这句引文所在消息里紧跟它的页码 chip（模型当轮自己标的出处）
+      // → 引文在 PDF 文本层里的定位 → 最近一轮的 chip → 才退阅读进度。
+      // 以前一律用 cursor，cursor 是“读到哪”，永远落后于对话。
       resolveScope()
         .then(function (scope) {
           if (!scope || !scope.textbookId) {
@@ -1807,22 +2358,55 @@
             return;
           }
           lastScope = scope;
-          return fetch(
-            "/api/reading-context?profileId=" + encodeURIComponent(scope.profileId) +
-              "&worldId=" + encodeURIComponent(scope.worldId) +
-              "&textbookId=" + encodeURIComponent(scope.textbookId) +
-              (scope.conversationId ? "&conversationId=" + encodeURIComponent(scope.conversationId) : "")
-          )
-            .then(function (response) {
-              return response.ok ? response.json() : null;
-            })
-            .then(function (data) {
-              var start = data && data.readingRange && Number(data.readingRange.startPage);
-              openSourceDialog(Number.isInteger(start) && start >= 1 ? start : 1);
-            })
-            .catch(function () {
-              openSourceDialog(1);
-            });
+          var chip = paragraphChipPage(selection);
+          if (chip) {
+            openSourceDialog(chip);
+            return;
+          }
+          var quote = String(selection.text || "").trim();
+          var located = quote
+            ? fetch(
+                "/api/textbook?locate=1&profileId=" + encodeURIComponent(scope.profileId) +
+                  "&worldId=" + encodeURIComponent(scope.worldId) +
+                  "&textbookId=" + encodeURIComponent(scope.textbookId) +
+                  "&quote=" + encodeURIComponent(quote.slice(0, 400))
+              )
+                .then(function (response) {
+                  return response.ok ? response.json() : null;
+                })
+                .catch(function () {
+                  return null;
+                })
+            : Promise.resolve(null);
+          return located.then(function (hit) {
+            if (hit && hit.ok && Number.isInteger(Number(hit.page))) {
+              openSourceDialog(Number(hit.page));
+              return;
+            }
+            var taught = latestTaughtChipPage();
+            if (taught) {
+              openSourceDialog(taught);
+              return;
+            }
+            // 都没有（扫描书没有文本层、模型这轮没标页码）只能退回进度：教学已经讲到
+            // 第几页比窗口起点更接近用户真正想核的地方，窗口 startPage 只是最后兜底。
+            return fetch(
+              "/api/reading-context?profileId=" + encodeURIComponent(scope.profileId) +
+                "&worldId=" + encodeURIComponent(scope.worldId) +
+                "&textbookId=" + encodeURIComponent(scope.textbookId) +
+                (scope.conversationId ? "&conversationId=" + encodeURIComponent(scope.conversationId) : "")
+            )
+              .then(function (response) {
+                return response.ok ? response.json() : null;
+              })
+              .then(function (data) {
+                var found = progressPage(data && data.readingRange);
+                openSourceDialog(found ? found.page : 1, { fallback: true, stale: !found || !found.fresh });
+              })
+              .catch(function () {
+                openSourceDialog(1, { fallback: true });
+              });
+          });
         })
         .catch(function () {
           toast(t("noBook"));

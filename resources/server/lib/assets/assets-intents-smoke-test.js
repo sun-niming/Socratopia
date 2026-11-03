@@ -181,15 +181,15 @@ function order(text, scope, extra) {
     var fig = "<svg viewBox=\"0 0 40 20\"><rect width=\"40\" height=\"20\"/></svg>";
     var raw = "<!-- title: 有注释的图 -->\n" + fig;
     assert.strictEqual(intents.validateSvgSource(raw).invalid, undefined, "a leading comment must not reject the root");
-    var bare = fs.readFileSync(
-      (function () {
-        var tmp = path.join(os.tmpdir(), "intents-svg-" + process.pid + ".txt");
-        fs.writeFileSync(tmp, fig);
-        return tmp;
-      })(),
-      "utf8"
-    );
-    assert.ok(intents.validateSvgSource(bare).value.indexOf("xmlns=") > 0, "validate must add xmlns");
+    assert.ok(intents.validateSvgSource(fig).value.indexOf("xmlns=") > 0, "validate must add xmlns");
+    // A data-URI <img> tolerates nothing but the document itself: prose before or after
+    // the root inside the fence has to be cut, and the comment kept in front.
+    var messy = "先看这张图\n" + raw + "\n\n**后面还有一段说明**";
+    var kept = intents.validateSvgSource(messy).value;
+    assert.ok(kept.indexOf("<!-- title:") >= 0, "the title comment must survive");
+    assert.strictEqual(kept.indexOf("先看这张图"), -1, "leading prose must be cut");
+    assert.strictEqual(kept.indexOf("后面还有"), -1, "trailing prose must be cut");
+    assert.ok(/<\/svg>$/.test(kept), "the value must end at the closing tag");
     var out = await order("看：\n\n```svg\n" + raw + "\n```", scope);
     assert.ok(out.indexOf("```svg") < 0, "a titled fence must still materialize");
     var id = /asset:\/\/(ast_[0-9a-f]{16})/.exec(out);
