@@ -41,6 +41,13 @@ tmp/
 outputs/
 adaptive-teaching/
 
+# Personal / unrelated residue that must not ship in the public repo (2026-11-03)
+# ax.jpg: a screenshot of a job posting; pelican-bicycle-animation.html: an unrelated demo page;
+/# profiles/: user-data-shaped leftover (a world asset index) that is not part of the product.
+/ax.jpg
+/pelican-bicycle-animation.html
+/profiles/
+
 # One-off agent/debug scratch files
 _*.js
 __*.txt
