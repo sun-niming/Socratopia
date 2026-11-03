@@ -21,6 +21,7 @@ Socratopia 是一款 Windows 桌面端「苏格拉底式教学」应用（Electr
 | 十月/十一月编码回顾 | [`docs/reviews/2026-10-11-编码回顾.md`](docs/reviews/2026-10-11-编码回顾.md) |
 | 漏洞筛查与点评（14 项） | [`docs/reviews/2026-11-漏洞筛查与点评.md`](docs/reviews/2026-11-漏洞筛查与点评.md) |
 | 仓库整理执行记录 | [`docs/reviews/2026-11-仓库整理执行记录.md`](docs/reviews/2026-11-仓库整理执行记录.md) |
+| 子代理调用排障（harness 侧根因） | [`docs/reviews/2026-11-子代理失败根因.md`](docs/reviews/2026-11-子代理失败根因.md) |
 
 > 全部数字都在对应文档里有取证路径；`09-original-vs-branch-boundary.md` 明确区分了「本体自带」与「本分支新增」，引用时请以它为准。
 
