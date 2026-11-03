@@ -40,7 +40,7 @@
 | 14 | `MATH_SPEECH_CORE_DEVELOPMENT_SPEC.md` | 32,542 B / 2026-09-02 | **untracked** | **有效** | 数学语音开发规格。该模块文档/测试最完整（E-226） |
 | 15 | `MATH_SPEECH_CORE_ACCEPTANCE_SPEC.md` | 27,686 B / 2026-09-02 | **untracked** | **有效** | 对应验收规格 |
 | 16 | `MATH_SPEECH_CORE_COMPLETION_REPORT.md` | 9,196 B / 2026-09-04 | **untracked** | **有效** | 完成报告。**但注意**：该模块前端仅 2 处引用（E-220）→ "完成"指核心完成，非端到端上线 |
-| 17 | `上下文.md` | 8,575 B | TRACKED | **待确认（疑似误放）** | 内容讲的是 `C:\Users\ASUS\webserver` 的 C 语言 HTTP 服务器作业，**与 Socratopia 无关**（E-013/Q-005）。与 Socratopia 同日期（8-31）→ 不排除有意保留作对照 |
+| 17 | `上下文.md` | 8,575 B | TRACKED | **已处置（2026-11-03）** | 内容讲的是 `C:\Users\ASUS\webserver` 的 C 语言 HTTP 服务器作业，**与 Socratopia 无关**（E-013/Q-005）。已从根目录移至 `docs/external/webserver-homework-context.md`，说明见 `docs/external/README.md` |
 
 ### 结论
 - **有效**：`CLAUDE.md`、`方案.md`、`TTS_OPTIMIZATION_CHANGELOG.md`、`AUTO_ADVANCE_*`、`LLM_THINKING_*`、`POST_CLASS_SAVE_*`、`MATH_SPEECH_CORE_*`(3) 共 9 份
@@ -103,7 +103,7 @@
 1. **零风险**（纯新增）：把 `CLAUDE.md`、各 `*_FIX_*`/`*_CHANGELOG.md`、`MATH_SPEECH_CORE_*`、`DEEPSEEK_V4_*`、`PROJECT_MATH_SPEECH_DOSSIER/`、`tools/` 纳入 git（R-02）。
 2. **低风险**：在 `AGENTS.md` 顶部加一行"部分内容已过时，以 `CLAUDE.md` 为准"；修正其中失效路径。
 3. **低风险**：`outputs/OCR_TRANSCRIPTION_PLAN*.md` 9 版 → 建一份 `outputs/OCR_TRANSCRIPTION_PLAN.md` 顶部的"版本导航"，不删旧版。
-4. **中风险（需确认）**：`上下文.md` 移到 `docs/external/` 或加一行说明。
+4. **中风险（需确认）**：~~`上下文.md` 移到 `docs/external/` 或加一行说明~~ —— **2026-11-03 已执行**：移至 `docs/external/webserver-homework-context.md` + `docs/external/README.md` 说明。
 5. **中风险**：`tmp/*.py` 提升到 `tools/`。
 6. **保留不动**：`RENAME.md`（若重新落盘）、`recovered/`。
 
@@ -120,5 +120,5 @@ E-356 `PROJECT_MATH_SPEECH_DOSSIER/` 8 文档 + `06-iteration-log.md`
 
 ## 7. 待确认
 - Q-045：`DEEPSEEK_V4_FLASH_CLASSROOM_*` 三份的先后关系与实际落地比例。
-- Q-046：`上下文.md` 是有意保留的对照材料还是误放。
+- Q-046：`上下文.md` 是有意保留的对照材料还是误放 —— **2026-11-03 判定：误放**，已移至 `docs/external/webserver-homework-context.md`（说明见 `docs/external/README.md`）。
 - Q-047：`tmp/` 下测试与 `resources/server/lib/` 下同名测试的关系（哪份是权威）。

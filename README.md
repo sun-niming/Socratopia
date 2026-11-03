@@ -8,6 +8,7 @@ Socratopia 是一款 Windows 桌面端「苏格拉底式教学」应用（Electr
 
 | 想看的 | 去哪儿 |
 |---|---|
+| **仓库总文档（先看这个）** | [`docs/MASTER.md`](docs/MASTER.md) — 形态、命令卡、功能专题索引、安全边界、文档地图、工作状态 |
 | 项目全貌与时间线 | [`docs/project-reconstruction/00-phase-a-project-map.md`](docs/project-reconstruction/00-phase-a-project-map.md)、[`03-timeline.md`](docs/project-reconstruction/03-timeline.md) |
 | BUG 台账（22 个，含证据与复现） | [`docs/project-reconstruction/04-bug-ledger.md`](docs/project-reconstruction/04-bug-ledger.md) |
 | 技术债与风险清单 | [`docs/project-reconstruction/05-tech-debt-and-risks.md`](docs/project-reconstruction/05-tech-debt-and-risks.md) |
@@ -17,6 +18,9 @@ Socratopia 是一款 Windows 桌面端「苏格拉底式教学」应用（Electr
 | 数学公式朗读引擎 | [`MATH_SPEECH_CORE_COMPLETION_REPORT.md`](MATH_SPEECH_CORE_COMPLETION_REPORT.md) |
 | Agent 评测任务包 | [`agent-task-datasets/`](agent-task-datasets/)（三套；含评分方锚点答案） |
 | 验证基线（356 个冒烟测试怎么跑） | [`docs/project-reconstruction/10-verification-baseline.md`](docs/project-reconstruction/10-verification-baseline.md) |
+| 十月/十一月编码回顾 | [`docs/reviews/2026-10-11-编码回顾.md`](docs/reviews/2026-10-11-编码回顾.md) |
+| 漏洞筛查与点评（14 项） | [`docs/reviews/2026-11-漏洞筛查与点评.md`](docs/reviews/2026-11-漏洞筛查与点评.md) |
+| 仓库整理执行记录 | [`docs/reviews/2026-11-仓库整理执行记录.md`](docs/reviews/2026-11-仓库整理执行记录.md) |
 
 > 全部数字都在对应文档里有取证路径；`09-original-vs-branch-boundary.md` 明确区分了「本体自带」与「本分支新增」，引用时请以它为准。
 
@@ -40,7 +44,7 @@ Socratopia 是一款 Windows 桌面端「苏格拉底式教学」应用（Electr
 | 路径 | 内容 |
 |---|---|
 | `main.js`、`preload.js`、`resources/` | 运行时。`resources/server/lib/` 是手写子系统（教学自适应、练习、知识源、插图资产等） |
-| `docs/` | 产品与研究文档。[`docs/project-reconstruction/`](docs/project-reconstruction/README.md) 是项目全貌入口（项目地图、时间线、BUG 台账、技术债、重构路线） |
+| `docs/` | 产品与研究文档。[`docs/MASTER.md`](docs/MASTER.md) 是总文档入口；[`docs/project-reconstruction/`](docs/project-reconstruction/README.md) 是项目全貌入口（项目地图、时间线、BUG 台账、技术债、重构路线）；[`docs/reviews/`](docs/reviews/) 放月度回顾、漏洞筛查与仓库整理记录 |
 | `agent-task-datasets/` | General Agent 评测任务包（T1 教学档案健康度审计 / T3 时间表述一致性审计 / T4 角色人设相容性审计）+ 评分方锚点答案 |
 | `资料/` | 世界设定取证档案：BWIKI 原文 HTML、抽取文本、索引与 SHA-256 清单（[说明](资料/README.md)） |
 | `角色/` | 32 个角色的设定、人设模板、立绘素材（[说明](角色/README.md)） |
@@ -72,7 +76,9 @@ ASAR 与完整性哈希的坑（EXE 被占用时会静默产出不匹配的一�
 
 ## 配置与密钥
 
-`resources/settings.json`（端点、API key）与 `resources/set.json`（各角色模型）**不入库**，需自备；仓库里只有冒烟测试用的 `mock-key` 样例。历史上没有提交过真实 key。
+`resources/settings.json`（端点、API key）与 `resources/set.json`（各角色模型）**不入库**，需自备；仓库里只有冒烟测试用的 `mock-key` 样例。
+
+2026-11-03 全量取证：`git log --all -- resources/settings.json resources/set.json` 为空，逐对象扫描也没有 key 形状的 blob —— **历史上没有提交过真实 key**。同时本仓库有远端且**已是公开仓库**（`origin = https://github.com/sun-niming/Socratopia.git`），因此磁盘上的东西都视同已发布：个人材料、简历、截图不要留在仓库里。取证细节见 [`docs/reviews/2026-11-仓库整理执行记录.md`](docs/reviews/2026-11-仓库整理执行记录.md) §7。
 
 ## 大文件
 
