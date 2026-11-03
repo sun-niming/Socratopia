@@ -221,7 +221,7 @@ node tools/patch-asar-integrity.js --check           # 只校验
 | 7 | 文档漂移（V-07 三处） | — | ①③已改 CLAUDE.md；②已改 README；①的措辞建议改为「以活探针为准」 | 低 |
 | 8 | 公开仓库的跟踪文件卫生（`ax.jpg`、`pelican-bicycle-animation.html`、`profiles/`、`上下文.md`） | 4 处 | **本轮已取消跟踪/移位**；历史里的 blob 仍在，彻底清除需 `git filter-repo` + 强推（**待你点头**） | 中 |
 | 9 | `outputs/` 用户备份 2.1 GB / 个人材料 / 团队课程唯一副本 | 2.2 GB+ | **待用户确认** | 待定 |
-| 10 | 提交与推送策略：本轮全部改动仍只在本地工作区 | — | 未 commit、未 push | 中 |
+| 10 | 提交与推送策略：本轮改动已整理为 4 个**本地**提交（`76c88eb`/`a317303`/`779d863`/`e1edb39`），**未推送** | — | 远端是公开仓库；十月那批含已知 XSS（V-01）且未验收 ⇒ 建议修完再推 | 中 |
 
 > 验证基线（2026-11-03）：`node tools/run-smoke-matrix.js` ⇒ **149 项 / 147 通过 / 0 失败 / 2 跳过**（跳过的两项是需实机夹具的 `pdf-cmap-real`、`pdf-render-real`）。
 
