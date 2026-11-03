@@ -1772,7 +1772,7 @@
           .use(mods[4])
           .use(mods[5], { allowDangerousHtml: true })
           .use(mods[6], { detect: true })
-          .use(mods[7], { allowDangerousHtml: true });
+          .use(mods[7], { allowDangerousHtml: false });
         markdownPipe = { katex: katex, pipe: pipe };
         return markdownPipe;
       })

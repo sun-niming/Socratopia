@@ -30,7 +30,7 @@
 **一句话**：这是 Socratopia 的**打包产物仓库**，不是可编译的源码树。
 
 - 没有构建流水线会从源码重新生成 bundle；所有改动都是对编译产物（webpack/esbuild 输出）的**外科式补丁**，靠 `node --check` / acorn + 就地冒烟测试验证。
-- 唯一可以当普通源码编辑的：`resources/server/server.js` 与 `resources/server/lib/**`（93 个顶层文件 + 15 个子系统目录）。
+- 唯一可以当普通源码编辑的：`resources/server/server.js` 与 `resources/server/lib/**`（2026-11-03 实测：**82 个顶层文件**＝21 个模块 + 61 支冒烟测试，外加 **14 个子系统目录**）。
 - 根目录 `main.js` / `preload.js` 是 Electron 层的**工作副本**，运行时的真身在 `resources/app.asar` 里。
 - 上游源码仓库是 macOS 的 `socralab-app/v2`；Windows 侧的工作副本在 `E:\huanjing\sogeladi\Socratopia_2.0\Socratopia`（改生代码前先 diff）。
 
@@ -100,7 +100,8 @@ node tools/patch-asar-integrity.js --check           # 只校验
 | 知识源（知识库构建/发布/质量） | 已交付 | `docs/project-reconstruction/02-module-dossiers/knowledge-source-provider.md` | `lib/knowledge/`、`lib/kb-*.js` |
 | 图像资产层 P0（落盘/索引/序列化/接口/截图） | 已交付并被复用 | `IMAGE_ASSET_LAYER_P0_COMPLETION_REPORT.md`、`IMAGE_ASSET_LAYER_P0_ACCEPTANCE_REVIEW.md` | `lib/assets/`（20 文件）、`public/asset-capture.js` |
 | 图像资产层 T13（页渲染/几何裁图/下单契约） | **部分休眠**：几何裁图约 640 行靠 `assets.boxMode="off"` 兜底；仅保留 AI 自绘 SVG | `IMAGE_ASSET_LAYER_T13_COMPLETION_REPORT.md`（§13–§14、§16） | `lib/pdf-page-render.js`、`lib/assets/{locate-figure,figure-box,figure-ink,page-lines}.js` |
-| 选段朗读 + 教学节奏 | **未收口**（2026-10-23 起 12 项工作区改动） | `docs/selection-dock-teaching-pace/DESIGN.md` | `public/selection-dock.js`、`lib/adaptive/teaching-pace.js`、`lib/textbook-text-index.js`（未跟踪） |
+| 选段朗读 + 教学节奏 | **已收口**（2026-11-03 跑通测试并提交；渲染管线已加固） | `docs/selection-dock-teaching-pace/DESIGN.md` | `public/selection-dock.js`、`lib/adaptive/teaching-pace.js`、`lib/textbook-text-index.js` |
+| 渲染与内容安全（XSS 收口 + CSP 下发） | 已交付（2026-11-03） | `docs/reviews/2026-11-漏洞筛查与点评.md` §2.1 | `lib/csp.js`、`lib/markdown-render-safety-smoke-test.js`、`lib/csp-smoke-test.js`、`resources/server/server.js` |
 | OCR 管线（教材页识别、质量判定、批量缓存） | 已交付 | `OCR_DEADLINE_LIVELOCK_AND_STREAM_LEAK_FIX.md` | `lib/ocr/`（16 文件）、`lib/pdf-ocr-coordinator.js` |
 | 自动翻页（阅读窗口推进） | 已交付 | `AUTO_ADVANCE_WINDOW_REPAIR_CHANGELOG.md`、`AUTO_ADVANCE_PAGE_ONLY_STALL_FIX_PLAN.md` | `lib/adaptive/`、`lib/reading/` |
 | 数学公式语义化朗读 | 已交付 | `MATH_SPEECH_CORE_{DEVELOPMENT_SPEC,ACCEPTANCE_SPEC,COMPLETION_REPORT}.md` | `lib/math-speech/`（27 文件） |
@@ -158,7 +159,8 @@ node tools/patch-asar-integrity.js --check           # 只校验
 | 这个仓库公开了吗？ | **公开**。`origin = https://github.com/sun-niming/Socratopia.git`，GitHub API 返回 `"private":false`（创建 2026-10-19，最近推送 2026-10-22） |
 | `resources/rules/*`、用户数据、`app.asar` | 不入库（例外：`rules_zh_classroom_compact.md` 入库） |
 | 能力令牌与账号域 | `lib/route-auth.js` + `lib/local-request-auth.js`：**fail-closed**（缺 verifier ⇒ 503 `auth_unavailable`；缺头 ⇒ 401 `auth_missing`），账号域由 `assertAccountScope` 校验 |
-| 已知安全发现 | 见 [`reviews/2026-11-漏洞筛查与点评.md`](reviews/2026-11-漏洞筛查与点评.md)：**2 条高危**（渲染层 XSS 及其特权提权）、6 条中危、6 条低危/观察项 |
+| 渲染层内容安全 | markdown 渲染管线的 `rehype-stringify` 端已固定为 `allowDangerousHtml:false`（原始 HTML 转义成可见文本，不落 DOM）；`lib/csp.js` 由 `resources/server/server.js` 统一给**所有**响应下发 CSP（`default-src 'self'` + `object-src/frame-ancestors 'none'`）。回归测试：`resources/server/lib/markdown-render-safety-smoke-test.js`、`resources/server/lib/csp-smoke-test.js` |
+| 已知安全发现 | 见 [`reviews/2026-11-漏洞筛查与点评.md`](reviews/2026-11-漏洞筛查与点评.md)：**2 条高危已处理**（V-01 渲染层 XSS 已修；V-02 加了 CSP 兜底，但 preload 原生能力仍需"用户手势"收窄）、6 条中危、6 条低危/观察项 |
 
 > 提醒：`win-unpacked/resources/{settings,set}.json` 需要**手工回填**且含 live key，**整目录复制/打包时注意别带出去**。
 
@@ -212,18 +214,19 @@ node tools/patch-asar-integrity.js --check           # 只校验
 
 | # | 事项 | 体量 | 状态 | 优先级 |
 |---|---|---|---|---|
-| 1 | 选段朗读 + 教学节奏（12 项未提交改动，含未跟踪模块 `lib/textbook-text-index.js`） | +940 −125 | 无验收记录、未提交 | **最高**（收口前先修 XSS） |
-| 2 | 渲染层 XSS 与其特权提权（V-01 / V-02） | — | 已定位，未修 | **最高** |
+| 1 | 选段朗读 + 教学节奏（12 项改动，含新模块 `lib/textbook-text-index.js`） | +940 −125 | **已收口**：跑通冒烟测试后拆成 4 个本地提交 | 已完成 |
+| 2 | 渲染层 XSS 与其特权提权（V-01 / V-02） | — | **V-01 已修**（渲染管线转义 + CSP 下发 + 2 支回归测试 + 活探针复验）；**V-02 部分缓解**（preload 原生能力仍需用户手势收窄） | 高（剩余项） |
 | 3 | 图层 640 行休眠机器的"复活 or 删除"判定 | 640 行 | 未决 | 中 |
-| 4 | 鉴权契约测试漏掉 chat / groupchat（V-05） | — | 已定位 | 中 |
+| 4 | 鉴权契约测试漏掉 chat / groupchat（V-05） | — | 已定位（活探针实测 401 + `route_` traceId）；正式测试仍 SKIP | 中 |
 | 5 | 资产层 SVG 两套校验标准 + 响应头（V-03/V-04） | — | 已定位 | 中 |
-| 6 | 教材冷提取放大面（V-06） | — | 已定位 | 中 |
+| 6 | 教材冷提取放大面（V-06） | — | 已定位（144 页冷提取 2079 ms，缓存上限 6） | 中 |
 | 7 | 文档漂移（V-07 三处） | — | ①③已改 CLAUDE.md；②已改 README；①的措辞建议改为「以活探针为准」 | 低 |
-| 8 | 公开仓库的跟踪文件卫生（`ax.jpg`、`pelican-bicycle-animation.html`、`profiles/`、`上下文.md`） | 4 处 | **本轮已取消跟踪/移位**；历史里的 blob 仍在，彻底清除需 `git filter-repo` + 强推（**待你点头**） | 中 |
-| 9 | `outputs/` 用户备份 2.1 GB / 个人材料 / 团队课程唯一副本 | 2.2 GB+ | **待用户确认** | 待定 |
-| 10 | 提交与推送策略：本轮改动已整理为 4 个**本地**提交（`76c88eb`/`a317303`/`779d863`/`e1edb39`），**未推送** | — | 远端是公开仓库；十月那批含已知 XSS（V-01）且未验收 ⇒ 建议修完再推 | 中 |
+| 8 | 公开仓库的跟踪文件卫生（`ax.jpg`、`pelican-bicycle-animation.html`、`profiles/`、`上下文.md`） | 4 处 | **已取消跟踪/移位**；历史里的 blob 仍在，彻底清除需 `git filter-repo` + 强推（**待你点头**） | 中 |
+| 9 | `outputs/` 用户备份 2.1 GB / 个人材料 / 团队课程唯一副本 | 2.2 GB+ | **待用户确认**（你已答「暂时都不动」） | 待定 |
+| 10 | 提交与推送策略：本轮改动整理为**本地**提交，**未推送** | — | 远端是公开仓库；V-01 已修，但 preload 提权面未收口 ⇒ 建议推送前先决定是否补"用户手势" | 中 |
+| 11 | 安全修复轮（V-01/V-02）：`lib/csp.js`、`lib/csp-smoke-test.js`、`lib/markdown-render-safety-smoke-test.js`、`server.js` 注入、`selection-dock.js:1775`、页面 chunk | +约 300 | **已完成并验证**：矩阵 151/149/0/2，活探针 3/3 响应带 CSP | 已完成 |
 
-> 验证基线（2026-11-03）：`node tools/run-smoke-matrix.js` ⇒ **149 项 / 147 通过 / 0 失败 / 2 跳过**（跳过的两项是需实机夹具的 `pdf-cmap-real`、`pdf-render-real`）。
+> 验证基线（2026-11-03，安全修复后）：`node tools/run-smoke-matrix.js` ⇒ **151 项 / 149 通过 / 0 失败 / 2 跳过**（跳过的两项是需实机夹具的 `pdf-cmap-real`、`pdf-render-real`；较修复前 +2 即本轮新增的两支安全测试）。
 
 ---
 

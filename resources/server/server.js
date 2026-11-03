@@ -1346,6 +1346,21 @@ process.env.__NEXT_PRIVATE_STANDALONE_CONFIG = JSON.stringify(nextConfig)
   };
 })();
 
+// ---------------------------------------------------------------------------
+// Content-Security-Policy.
+//
+// The renderer is an Electron BrowserWindow that loads this server from
+// http://127.0.0.1:<port>; everything it loads is same-origin, so the policy
+// can forbid every remote origin for script, style, image and XHR traffic.
+// That is the second half of the renderer-XSS fix (the first half is
+// rehype-stringify running with allowDangerousHtml=false - see
+// resources/server/lib/markdown-render-safety-smoke-test.js).
+//
+// The policy itself, and why 'unsafe-inline'/'unsafe-eval' still have to stay,
+// live in resources/server/lib/csp.js.
+// ---------------------------------------------------------------------------
+require("./lib/csp.js").installCsp();
+
 require('next')
 const { startServer } = require('next/dist/server/lib/start-server')
 
